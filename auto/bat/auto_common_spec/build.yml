@@ -1,0 +1,59 @@
+#sdk: "C:/DevelopmentTools/rhomobile/rhodes"
+paths:
+  extensions:
+#  - C:/DevelopmentTools/rhomobile/rhodes/lib/extensions
+#  - C:/DevelopmentTools/rhomobile/Motorola-Extensions/extensions
+#  - C:/DevelopmentTools/rhomobile/Motorola-Extensions/lib/commonAPI
+#  - C:/DevelopmentTools/rhomobile/rhoconnect-client/ext
+#  - C:/DevelopmentTools/rhomobile/Motorola-Extensions/build/ci/extensions
+  - C:/DevelopmentTools/rhomobile/Motorola-Extensions/build/ci/extensions
+  - C:/Neon/git/Motorola-Extensions/build/ci/extensions
+  - B:/git/Motorola-Extensions/build/ci/extensions
+#  neon:
+#  - C:/Users/fpc843/workspace/fpc843_rhoelements_dev/NEON
+sdkversion: 3.3.2
+name: auto_common_spec
+app_type: rhoelements
+version: 1.0
+vendor: rhomobile
+build: debug
+debug: 1
+bbver: 4.6
+applog: rholog.txt
+iphone:
+  configuration: Release
+  sdk: iphonesimulator5.0
+  provisionprofile:
+  codesignidentity:
+  entitlements:
+  BundleIdentifier: com.rhomobile.apigeneratorspec
+  BundleURLScheme: apigeneratorspec
+wp:
+  productid: 'b6479381-42a8-0130-78de-3caec51bd50e'
+symbian:
+  uid: '0xe1a1ef92'
+android:
+  version: 2.1
+  extensions: ["json", "barcode", "screenorientation", "Coreapi", "rhoconnect-client", "instrumentation"]
+  capabilities:
+  - native_browser
+wm:
+  #use_shared_runtime: yes
+  #sdk: MC3000c50b (ARMV4I)
+  extensions: ["json", "barcode", "Coreapi", "rhoconnect-client", "instrumentation"]
+#capabilities:
+#- non_motorola_device
+
+
+#BK
+#paths:
+#  extensions:
+#    - C:/rhomobile/Motorola-Extensions/lib/commonAPI
+#    - C:/rhomobile/Motorola-Extensions/neon/R2D1/RhoElementsOneExtension/extensions.
+#    - ../../../extensions
+#  neon:
+#  - C:/rhomobile/Motorola-Extensions/neon
+#sdk: "C:/rhomobile/rhodes"
+# DCC - This path MUST be removed prior to check in
+#  - C:/Neon/git/Motorola-Extensions/lib/commonAPI
+#end DCC
