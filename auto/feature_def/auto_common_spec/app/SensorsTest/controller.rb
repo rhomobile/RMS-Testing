@@ -108,9 +108,9 @@ class SensorsTestController < Rho::RhoController
   end   
   
   def runeCompass
-	Rho::Sensors.watcheCompass(200, url_for(:action => :myruneCompass))
+	Rho::Sensors.watchECompass(200, url_for(:action => :myruneCompass))
 	sleep 10
-	Rho::Sensors.stopeCompass
+	Rho::Sensors.stopECompass
 	if @x != 0
 		result = "true"
 	else
