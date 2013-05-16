@@ -1,0 +1,49 @@
+<script type="text/javascript">
+    (function () {
+        var jasmineEnv = jasmine.getEnv();
+        jasmineEnv.updateInterval = 1000;
+
+        var htmlReporter = new jasmine.HtmlReporter();
+        jasmineEnv.addReporter(htmlReporter);
+
+        jasmineEnv.specFilter = function (spec) {
+            return htmlReporter.specFilter(spec);
+        };
+
+        var currentWindowOnload = window.onload;
+        window.onload = function() {
+          if (currentWindowOnload) {
+            currentWindowOnload();
+          }
+          
+          beforeFileExecute();
+            
+          //Signature Module Call
+          for (var iarray = 0;iarray < signatureSet.length; iarray++ ){
+            startSignatureSet(signatureSet[iarray]);
+          }
+          
+          for (var iarray = 0;iarray < signatureDataUri.length; iarray++ ){
+            startSignatureDataUri(signatureDataUri[iarray]);
+          }
+          
+          for (var iarray = 0;iarray < signatureTransfer.length; iarray++ ){
+            startSignatureTransfer(signatureTransfer[iarray]);
+          }
+          
+          for (var iarray = 0;iarray < signatureVector.length; iarray++ ){
+            startSignatureVector(signatureVector[iarray]);
+          }
+          
+          for (var iarray = 0;iarray < signatureTransferN.length; iarray++ ){
+            startSignatureTransferNegetive(signatureTransferN[iarray]);
+          }
+          execJasmine();
+        };
+
+        function execJasmine() {
+          jasmineEnv.execute();
+        }
+
+    })();
+</script>
