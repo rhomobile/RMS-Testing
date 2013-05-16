@@ -1,0 +1,59 @@
+<script type="text/javascript" src="/public/jquery/jquery-1.6.4.min.js"></script>
+<script type="text/javascript">
+function setFieldValue(returnval) 
+{
+  document.getElementById("myResult").innerHTML=returnval;
+}
+
+function connectionDetect() {
+  var hostText=document.getElementById("hostText").value;
+  var portText=document.getElementById("portText").value;
+  var pollIntervalText=document.getElementById("pollIntervalText").value;
+  var detectionTimeoutText=document.getElementById("detectionTimeoutText").value;
+  $.get('/app/Network/connectionDetect', { hostText:  hostText, portText: portText, pollIntervalText: pollIntervalText, detectionTimeoutText: detectionTimeoutText });
+  return false;
+}
+
+</script>
+
+Network Response : <%=get_res() %> <br/>
+Error : <%=get_error() %> <br/>
+<img src="<%=get_img_res()%>" width="300" />
+
+<ul>
+<div id="myResult">NetworkInfo</div> 
+<li><a href="#" onclick="$.get('/app/Network/wifinetwork');">wifinetwork</a></li>
+<li><a href="#" onclick="$.get('/app/Network/cellnetwork');">cellnetwork</a></li>
+<li><a href="#" onclick="$.get('/app/Network/networkhas');">networkhas</a></li>
+<label for="hostText" class="fieldLabel">host:</label>
+<input type="text" name="hostText" id="hostText" value="192.168.6.18" class="itemValue" <%= placeholder("host:") %> />
+<label for="portText" class="fieldLabel">port:</label>
+<input type="text" name="portText" id="portText" value="80" class="itemValue" <%= placeholder("port:") %> />
+<label for="pollIntervalText" class="fieldLabel">pollInterval:</label>
+<input type="text" name="pollIntervalText" id="pollIntervalText" value="10000" class="itemValue" <%= placeholder("pollInterval:") %> />
+<label for="detectionTimeoutText" class="fieldLabel">detectionTimeout:</label>
+<input type="text" name="detectionTimeoutText" id="detectionTimeoutText" value="1000" class="itemValue" <%= placeholder("detectionTimeoutText:") %> />
+<INPUT type="button" value="connection Detect" name="connection Detect" onClick="connectionDetect();">
+<li><a href="#" onclick="$.get('/app/Network/stopDetecting');">stopDetecting</a></li>
+<li><a href="#" onclick="$.get('/app/Network/statusNotify', { pollInterval: '10000' });">status Notify </a></li>
+<li><a href="#" onclick="$.get('/app/Network/stopNotify');">stopNotify</a></li>
+<li><a href="#" onclick="$.get('/app/Network/cancelEventcall');">cancelEventcall</a></li>
+<li><a href="#" onclick="$.get('/app/Network/wanconnectionDestination', { connectionDestination: 'My ISP' });">connect Wan My ISP </a></li>
+<li><a href="#" onclick="$.get('/app/Network/wanDisconnect');">wanDisconnect</a></li>
+<li><a href="#" onclick="$.get('/app/Network/httpDownload');">httpDownload</a></li>
+<li><a href="#" onclick="$.get('/app/Network/overwirteFalse');">overwirteFalse</a></li>
+<li><a href="#" onclick="$.get('/app/Network/httpUploadFile');">httpUploadFile</a></li>
+<li><a href="#" onclick="$.get('/app/Network/httpPost');">httpPost</a></li>
+<li><a href="#" onclick="$.get('/app/Network/httpGet');">httpGet</a></li>
+<li><a href="#" onclick="$.get('/app/Network/atTypebasi');">atTypebasi</a></li>
+<li><a href="#" onclick="$.get('/app/Network/atTypedig');">atTypedig</a></li>
+<li><a href="#" onclick="$.get('/app/Network/vfFalse');">vfFalse</a></li>
+<li><a href="#" onclick="$.get('/app/Network/vfTrue');">vfTrue</a></li>
+<li><a href="#" onclick="$.get('/app/Network/securewebbrowsegiven');">securewebbrowsegiven</a></li>
+<li><a href="#" onclick="$.get('/app/Network/securewebbrowsenotgiven');">securewebbrowsenotgiven</a></li>
+
+
+</ul>
+  
+  
+  

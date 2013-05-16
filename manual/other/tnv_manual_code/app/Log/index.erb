@@ -1,0 +1,134 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<script type="text/javascript" src="/public/jquery/jquery-1.6.4.min.js"></script>
+<script type="text/javascript">
+function setFieldValue(returnval) 
+
+{
+  document.getElementById("myResult").innerHTML=returnval;
+}
+
+</script>
+</head>
+<body>
+
+<ul>
+<div id="myResult">Log Info</div> 
+<li><a href="#" onclick="$.get('/app/Log/destination401');">Log Destination (401)</a></li>
+<li><a href="#" onclick="$.get('/app/Log/destination402');">Log Destination (402)</a></li>
+<li><a href="#" onclick="$.get('/app/Log/destination403');">Log Destination (403)</a></li>
+<li><a href="#" onclick="$.get('/app/Log/destination404');">Log Destination (404)</a></li>
+<li><a href="#" onclick="$.get('/app/Log/destination405');">Log Destination (405)</a></li>
+<li><a href="#" onclick="$.get('/app/Log/destination406');">Log Destination (406)</a></li>
+
+<li><a href="#" onclick="$.get('/app/Log/destinationURI407');">Log Destination URI (407)</a></li>
+<li><a href="#" onclick="$.get('/app/Log/destinationURI408');">Log Destination URI (408)</a></li>
+<li><a href="#" onclick="$.get('/app/Log/destinationURI409');">Log Destination URI (409)</a></li>
+
+<li><a href="#" onclick="$.get('/app/Log/excludeCategories410');">Log Exclude Categories (410)</a></li>
+<li><a href="#" onclick="$.get('/app/Log/excludeCategories411');">Log Exclude Categories (411)</a></li>
+<li><a href="#" onclick="$.get('/app/Log/excludeCategories412');">Log Exclude Categories (412)</a></li>
+<li><a href="#" onclick="$.get('/app/Log/excludeCategories413');">Log Exclude Categories (413)</a></li>
+
+<li><a href="#" onclick="$.get('/app/Log/excludeFilter414');">Log Exclude Filter (414)</a></li>
+<li><a href="#" onclick="$.get('/app/Log/excludeFilter415');">Log Exclude Filter (415)</a></li>
+<li><a href="#" onclick="$.get('/app/Log/excludeFilter416');">Log Exclude Filter (416)</a></li>
+
+<li><a href="#" onclick="$.get('/app/Log/filePath417');">Log File Path (417)</a></li>
+<li><a href="#" onclick="$.get('/app/Log/filePath418');">Log File Path (418)</a></li>
+<li><a href="#" onclick="$.get('/app/Log/filePath419');">Log File Path (419)</a></li>
+
+<li><a href="#" onclick="$.get('/app/Log/fileSize420');">Log File Size (420)</a></li>
+<li><a href="#" onclick="$.get('/app/Log/fileSize421');">Log File Size (421)</a></li>
+<li><a href="#" onclick="$.get('/app/Log/fileSize422');">Log File Size (422)</a></li>
+<li><a href="#" onclick="$.get('/app/Log/fileSize423');">Log File Size (423)</a></li>
+<li><a href="#" onclick="$.get('/app/Log/fileSize424');">Log File Size (424)</a></li>
+<li><a href="#" onclick="$.get('/app/Log/fileSize425');">Log File Size (425)</a></li>
+
+<li><a href="#" onclick="$.get('/app/Log/includeCategories426');">Log Include Categories (426)</a></li>
+<li><a href="#" onclick="$.get('/app/Log/includeCategories427');">Log Include Categories (427)</a></li>
+<li><a href="#" onclick="$.get('/app/Log/includeCategories428');">Log Include Categories (428)</a></li>
+<li><a href="#" onclick="$.get('/app/Log/includeCategories429');">Log Include Categories (429)</a></li>
+
+<li><a href="#" onclick="$.get('/app/Log/level430');">Log Level (430)</a></li>
+<li><a href="#" onclick="$.get('/app/Log/level431');">Log Level (431)</a></li>
+<li><a href="#" onclick="$.get('/app/Log/level432');">Log Level (432)</a></li>
+<li><a href="#" onclick="$.get('/app/Log/level433');">Log Level (433)</a></li>
+<li><a href="#" onclick="$.get('/app/Log/level434');">Log Level (434)</a></li>
+<li><a href="#" onclick="$.get('/app/Log/level435');">Log Level (435)</a></li>
+<li><a href="#" onclick="$.get('/app/Log/level436');">Log Level (436)</a></li>
+<li><a href="#" onclick="$.get('/app/Log/level437');">Log Level (437)</a></li>
+<li><a href="#" onclick="$.get('/app/Log/level438');">Log Level (438)</a></li>
+
+<li><a href="#" onclick="$.get('/app/Log/memoryPeriod439');">Log Memory Period (439)</a></li>
+<li><a href="#" onclick="$.get('/app/Log/memoryPeriod440');">Log Memory Period (440)</a></li>
+<li><a href="#" onclick="$.get('/app/Log/memoryPeriod441');">Log Memory Period (441)</a></li>
+<li><a href="#" onclick="$.get('/app/Log/memoryPeriod442');">Log Memory Period (442)</a></li>
+<li><a href="#" onclick="$.get('/app/Log/memoryPeriod443');">Log Memory Period (443)</a></li>
+<li><a href="#" onclick="$.get('/app/Log/memoryPeriod444');">Log Memory Period (444)</a></li>
+
+<li><a href="#" onclick="$.get('/app/Log/netTrace445');">Log Net Trace (445)</a></li>
+<li><a href="#" onclick="$.get('/app/Log/netTrace446');">Log Net Trace (446)</a></li>
+<li><a href="#" onclick="$.get('/app/Log/netTrace447');">Log Net Trace (447)</a></li>
+<li><a href="#" onclick="$.get('/app/Log/netTrace448');">Log Net Trace (448)</a></li>
+
+<li><a href="#" onclick="$.get('/app/Log/skipPost449');">Log Skip Post (449)</a></li>
+<li><a href="#" onclick="$.get('/app/Log/skipPost450');">Log Skip Post (450)</a></li>
+<li><a href="#" onclick="$.get('/app/Log/skipPost451');">Log Skip Post (451)</a></li>
+<li><a href="#" onclick="$.get('/app/Log/skipPost452');">Log Skip Post (452)</a></li>
+
+<li><a href="#" onclick="$.get('/app/Log/cleanLogFile453');">Clean Log File (453)</a></li>
+
+<li><a href="#" onclick="$.get('/app/Log/error454');">Log Error (454)</a></li>
+<li><a href="#" onclick="$.get('/app/Log/error455');">Log Error (455)</a></li>
+<li><a href="#" onclick="$.get('/app/Log/error456');">Log Error (456)</a></li>
+<li><a href="#" onclick="$.get('/app/Log/error457');">Log Error (457)</a></li>
+<li><a href="#" onclick="$.get('/app/Log/error458');">Log Error (458)</a></li>
+
+<li><a href="#" onclick="$.get('/app/Log/fatalError459');">Log Fatal Error (459)</a></li>
+<li><a href="#" onclick="$.get('/app/Log/fatalError460');">Log Fatal Error (460)</a></li>
+<li><a href="#" onclick="$.get('/app/Log/fatalError461');">Log Fatal Error (461)</a></li>
+<li><a href="#" onclick="$.get('/app/Log/fatalError462');">Log Fatal Error (462)</a></li>
+<li><a href="#" onclick="$.get('/app/Log/fatalError463');">Log Fatal Error (463)</a></li>
+
+<li><a href="#" onclick="$.get('/app/Log/info464');">Log Info (464)</a></li>
+<li><a href="#" onclick="$.get('/app/Log/info465');">Log Info (465)</a></li>
+<li><a href="#" onclick="$.get('/app/Log/info466');">Log Info (466)</a></li>
+<li><a href="#" onclick="$.get('/app/Log/info467');">Log Info (467)</a></li>
+<li><a href="#" onclick="$.get('/app/Log/info468');">Log Info (468)</a></li>
+
+<li><a href="#" onclick="$.get('/app/Log/readLogFile469');">Read Log File (469)</a></li>
+<li><a href="#" onclick="$.get('/app/Log/readLogFile470');">Read Log File (470)</a></li>
+<li><a href="#" onclick="$.get('/app/Log/readLogFile471');">Read Log File (471)</a></li>
+<li><a href="#" onclick="$.get('/app/Log/readLogFile472');">Read Log File (472)</a></li>
+<li><a href="#" onclick="$.get('/app/Log/readLogFile473');">Read Log File (473)</a></li>
+
+<li><a href="#" onclick="$.get('/app/Log/sendLogFile474');">Send Log File (474)</a></li>
+<li><a href="#" onclick="$.get('/app/Log/sendLogFile475');">Send Log File (475)</a></li>
+<li><a href="#" onclick="$.get('/app/Log/sendLogFile476');">Send Log File (476)</a></li>
+
+<li><a href="#" onclick="$.get('/app/Log/showLog477');">Show Log (477)</a></li>
+
+<li><a href="#" onclick="$.get('/app/Log/trace478');">Log Trace (478)</a></li>
+<li><a href="#" onclick="$.get('/app/Log/trace479');">Log Trace (479)</a></li>
+<li><a href="#" onclick="$.get('/app/Log/trace480');">Log Trace (480)</a></li>
+<li><a href="#" onclick="$.get('/app/Log/trace481');">Log Trace (481)</a></li>
+<li><a href="#" onclick="$.get('/app/Log/trace482');">Log Trace (482)</a></li>
+
+<li><a href="#" onclick="$.get('/app/Log/warning483');">Log Warning (483)</a></li>
+<li><a href="#" onclick="$.get('/app/Log/warning484');">Log Warning (484)</a></li>
+<li><a href="#" onclick="$.get('/app/Log/warning485');">Log Warning (485)</a></li>
+<li><a href="#" onclick="$.get('/app/Log/warning486');">Log Warning (486)</a></li>
+<li><a href="#" onclick="$.get('/app/Log/warning487');">Log Warning (487)</a></li>
+
+
+
+<!--<li><a href="#" onclick="$.get('/app/Log/testError', { message : 'Error is there in barcode module',  category : 'Barcode' });">Bibash</a></li>-->
+
+</ul>
+</body>
+</html>  
+  
+  

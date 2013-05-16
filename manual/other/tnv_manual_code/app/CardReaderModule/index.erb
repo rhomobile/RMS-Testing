@@ -1,0 +1,123 @@
+<script type="text/javascript" src="/public/jquery/jquery-1.6.4.min.js"></script>
+<script type="text/javascript">
+
+function setFieldValue(myencryption,mymode,mycarddata,myrawData,mytrack1,mytrack2,mytrack3,mytrack1Status,mytrack2Status,mytrack3Status,mytrack1Encrypted,mytrack2Encrypted,mytrack3Encrypted,mytrack1EncryptedStatus,mytrack2EncryptedStatus,mytrack3EncryptedStatus,myksn) 
+{
+  //document.getElementById("myResult").innerHTML=mymode;
+  document.getElementById("txtEncData").value=myencryption;
+  document.getElementById("txtMode").value=mymode;
+  document.getElementById("txtCardData").value=mycarddata;  
+  document.getElementById("txtRawData").value=myrawData;
+  document.getElementById("txtTrack1Data").value=mytrack1;
+  document.getElementById("txtTrack2Data").value=mytrack2;
+  document.getElementById("txtTrack3Data").value=mytrack3;
+  document.getElementById("txtTrack1Status").value=mytrack1Status;
+  document.getElementById("txtTrack2Status").value=mytrack2Status;
+  document.getElementById("txtTrack3Status").value=mytrack3Status;
+  document.getElementById("txtTrack1EnceData").value=mytrack1Encrypted;
+  document.getElementById("txtTrack2EnceData").value=mytrack2Encrypted;
+  document.getElementById("txtTrack3EnceData").value=mytrack3Encrypted;
+  document.getElementById("txtTrack1EncStatus").value=mytrack1EncryptedStatus;
+  document.getElementById("txtTrack2EncStatus").value=mytrack2EncryptedStatus;
+  document.getElementById("txtTrack3EncStatus").value=mytrack3EncryptedStatus;
+  document.getElementById("txtTKSNData").value=myksn;
+  //Message.innerHTML="Data:- "+data+"Mode:- "+mode;
+  //Alert.show_popup("Encryption= "+myencryption+"Data= "+mycarddata+"Mode= "+mymode+"RawData= "+myrawData+"Track1= "+mytrack1+"Track2= "+mytrack2+"Track3= "+mytrack3+"Track1Status= "+mytrack1Status+"Track2Status= "+mytrack2Status+"Track3Status= "+mytrack3Status+"Track1Encrypted ="+mytrack1Encrypted+"Track2Encrypted ="+mytrack2Encrypted+"Track3Encrypted ="+mytrack3Encrypted+"Track1EncryptedStatus ="+mytrack1EncryptedStatus+"Track2EncryptedStatus ="+mytrack2EncryptedStatus+"Track3EncryptedStatus ="+mytrack3EncryptedStatus)  
+  //WebView.execute_js('setFieldValue("'+myencryption+","+mycarddata+","+mymode+","+myrawData+","+mytrack1+","+mytrack2+","+mytrack3+","+mytrack1Status+","+mytrack2Status+","+mytrack3Status+","+mytrack1Encrypted+","+mytrack2Encrypted+","+mytrack3Encrypted+","+mytrack1EncryptedStatus+","+mytrack2EncryptedStatus+","+mytrack1EncryptedStatus+'")')
+} 
+
+</script>
+<ul>
+<div id="myResult">card Reader</div> 
+<li><a href="#" onclick="$.get('/app/CardReaderModule/funminimize');">funminimize</a></li>
+<li><a href="#" onclick="$.get('/app/CardReaderModule/enum');">enum</a></li>
+<li><a href="#" onclick="$.get('/app/CardReaderModule/openwithoutEvent');">openwithoutEvent</a></li>
+<li><a href="#" onclick="$.get('/app/CardReaderModule/openwithEnter');">openwithEnter</a></li>
+<li><a href="#" onclick="$.get('/app/CardReaderModule/openwithTab');">openwithTab</a></li>
+<li><a href="#" onclick="$.get('/app/CardReaderModule/openwithEvent');">openwithEvent</a></li>
+<li><a href="#" onclick="$.get('/app/CardReaderModule/openwithEnchead');">openwithEnchead</a></li>
+<li><a href="#" onclick="$.get('/app/CardReaderModule/closemsr');">closemsr</a></li>
+<li><a href="#" onclick="$.get('/app/CardReaderModule/setEnter');">setEnter</a></li>
+<li><a href="#" onclick="$.get('/app/CardReaderModule/setTab');">setTab</a></li>
+<li><a href="#" onclick="$.get('/app/CardReaderModule/setmodulename');">setmodulename</a></li>
+<li><a href="#" onclick="$.get('/app/CardReaderModule/setPinentry');">setPinentry</a></li>
+<li><a href="#" onclick="$.get('/app/CardReaderModule/setPintimeout');">setPintimeout</a></li>
+<li><a href="#" onclick="$.get('/app/CardReaderModule/setpandata');">setpandata</a></li>
+<li><a href="#" onclick="$.get('/app/CardReaderModule/setpropEnter');">setpropEnter</a></li>
+<li><a href="#" onclick="$.get('/app/CardReaderModule/setpropTab');">setpropTab</a></li>
+<li><a href="#" onclick="$.get('/app/CardReaderModule/setpropmodulename');">setpropmodulename</a></li>
+<li><a href="#" onclick="$.get('/app/CardReaderModule/setpropPinentry');">setpropPinentry</a></li>
+<li><a href="#" onclick="$.get('/app/CardReaderModule/setpropPintimeout');">setpropPintimeout</a></li>
+<li><a href="#" onclick="$.get('/app/CardReaderModule/setproppandata');">setproppandata</a></li>
+<li><a href="#" onclick="$.get('/app/CardReaderModule/setcardProperties');">setcardProperties</a></li>
+<li><a href="#" onclick="$.get('/app/CardReaderModule/setdefaultprop');">setdefaultprop</a></li>
+<li><a href="#" onclick="$.get('/app/CardReaderModule/getpropEnter');">getpropEnter</a></li>
+<li><a href="#" onclick="$.get('/app/CardReaderModule/getpropTab');">getpropTab</a></li>
+<li><a href="#" onclick="$.get('/app/CardReaderModule/getpropmodulename');">getpropmodulename</a></li>
+<li><a href="#" onclick="$.get('/app/CardReaderModule/getpropPinentry');">getpropPinentry</a></li>
+<li><a href="#" onclick="$.get('/app/CardReaderModule/getpropPintimeout');">getpropPintimeout</a></li>
+<li><a href="#" onclick="$.get('/app/CardReaderModule/getproppandata');">getproppandata</a></li>
+<li><a href="#" onclick="$.get('/app/CardReaderModule/getdefaultprop');">getdefaultprop</a></li>
+<li><a href="#" onclick="$.get('/app/CardReaderModule/getcardProperties');">getcardProperties</a></li>
+<li><a href="#" onclick="$.get('/app/CardReaderModule/getAllcardProperties');">getAllcardProperties</a></li>
+<li><a href="#" onclick="$.get('/app/CardReaderModule/allPropsclear');">clearallProps</a></li>
+ <table border=1 width=100%>
+    <tr>
+            <td><a href="main"></a></td>
+    </tr>  
+    <tr>
+		<td>Encryption:</td><td><Textarea id="txtEncData" cols="15" rows="1"></Textarea></td>
+	</tr>
+	<tr>
+		<td> Mode:</td><td><Textarea id="txtMode" cols="10" rows="1"></Textarea></td>
+	</tr>
+	<tr> 
+		<td> Card Data:</td><td><Textarea id="txtCardData" cols="50" rows="10"></Textarea></td>
+	</tr>	
+	<tr>
+		<td> RawData:</td><td><Textarea id="txtRawData" cols="60" rows="12"></Textarea></td>
+	</tr>
+	<tr>
+		<td> Track1 Data:</td><td><Textarea id="txtTrack1Data" cols="50" rows="3"></Textarea></td>
+	</tr>
+	<tr>	
+		<td> Track2 Data:</td><td><Textarea id="txtTrack2Data" cols="50" rows="3"></Textarea></td>
+	</tr>	
+	<tr>
+		<td> Track3 Data:</td><td><Textarea id="txtTrack3Data" cols="50" rows="3"></Textarea></td>
+	</tr>
+	<tr>
+		<td> Track1 Status:</td><td><Textarea id="txtTrack1Status" cols="6" rows="1"></Textarea></td>
+	</tr>	
+	<tr>
+		<td> Track2 Status:</td><td><Textarea id="txtTrack2Status" cols="6" rows="1"></Textarea></td>
+	</tr>
+	<tr>
+		<td> Track3 Status:</td><td><Textarea id="txtTrack3Status" cols="6" rows="1"></Textarea></td>
+	</tr>
+	<tr>	
+		<td> Track1 Encdata:</td><td><Textarea id="txtTrack1EnceData" cols="50" rows="3"></Textarea></td>
+	</tr>
+	<tr>	
+		<td> Track2 Encdata:</td><td><Textarea id="txtTrack2EnceData" cols="50" rows="3"></Textarea></td>
+	</tr>
+	<tr>	
+		<td> Track3 Encdata:</td><td><Textarea id="txtTrack3EnceData" cols="50" rows="3"></Textarea></td>
+	</tr>
+	<tr>
+		<td> Track1 EncStatus:</td><td><Textarea id="txtTrack1EncStatus" cols="6" rows="1"></Textarea></td>
+	</tr>
+	<tr>	
+		<td> Track2 EncStatus:</td><td><Textarea id="txtTrack2EncStatus" cols="6" rows="1"></Textarea></td>
+	</tr>
+	<tr>	
+		<td> Track3 EncStatus:</td><td><Textarea id="txtTrack3EncStatus" cols="6" rows="1"></Textarea></td>
+	</tr>	
+	<tr>
+		<td> KSN:</td><td><Textarea id="txtTKSNData" cols="25" rows="1"></Textarea></td>
+	</tr>
+</table>
+</ul>
+
+  
+  
