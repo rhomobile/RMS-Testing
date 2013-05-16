@@ -1,0 +1,44 @@
+<script type="text/javascript">
+function imagerCallBack(imagerType){
+  
+  var type = new Array();
+  arrImagerType = imagerType.split(",");
+
+  for (var j = 0; j < arrImagerType.length; j ++){
+    generateArrayWithImgType(arrImagerType[j]);
+  }
+  beforeFileExecute();
+  //Imager Module Call
+  for (var iarray = 0;iarray < imagerEnum.length; iarray++ ){
+    startImagerEnum(imagerEnum[iarray]);
+  }
+  for (var iarray = 0;iarray < imagerModuleSet.length; iarray++ ){
+    startImagerSet(imagerModuleSet[iarray]);
+  }
+  for (var iarray = 0;iarray < imageDataUri.length; iarray++ ){
+    startImageDataUri(imageDataUri[iarray]);
+  }
+  for (var iarray = 0;iarray < imageTransfer.length; iarray++ ){
+    startImageTransfer(imageTransfer[iarray]);
+  }
+  for (var iarray = 0;iarray < imageTransferN.length; iarray++ ){
+    startImageTransferNegetive(imageTransferN[iarray]);
+  }
+
+  jasmineEnv.execute();
+}
+
+  (function() {
+  $.get('/app/Auto/enumImager');
+  jasmineEnv = jasmine.getEnv();
+  jasmineEnv.updateInterval = 1000;
+  
+  var htmlReporter = new jasmine.HtmlReporter();
+  jasmineEnv.addReporter(htmlReporter);
+  jasmineEnv.specFilter = function(spec) {
+    return htmlReporter.specFilter(spec);
+  };
+
+})();
+
+</script>

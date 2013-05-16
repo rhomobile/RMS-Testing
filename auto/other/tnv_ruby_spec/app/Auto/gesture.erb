@@ -1,0 +1,32 @@
+<script type="text/javascript">
+  (function () {
+      var jasmineEnv = jasmine.getEnv();
+      jasmineEnv.updateInterval = 1000;
+
+      var htmlReporter = new jasmine.HtmlReporter();
+      jasmineEnv.addReporter(htmlReporter);
+
+      jasmineEnv.specFilter = function (spec) {
+          return htmlReporter.specFilter(spec);
+      };
+
+      var currentWindowOnload = window.onload;
+      window.onload = function() {
+        if (currentWindowOnload) {
+          currentWindowOnload();
+        }
+
+        // Gesture Module Call
+          for (var iarray = 0;iarray < gestureevent.length; iarray++ ){
+            startGestureEvent(gestureevent[iarray]);
+          }
+
+        execJasmine();
+      };
+
+      function execJasmine() {
+        jasmineEnv.execute();
+      }
+
+  })();
+</script>

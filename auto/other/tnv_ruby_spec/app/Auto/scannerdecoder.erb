@@ -1,0 +1,30 @@
+<script type="text/javascript">
+
+  function startJasmineTest(test){
+    var jasmineEnv = jasmine.getEnv();
+    jasmineEnv.updateInterval = 1000;
+    startScannerManualTest(scannerManualParams[test]);
+    jasmineEnv.execute();
+  }
+
+  (function () {
+    setTimeout(startJasmineTest(0),3000)
+  })();
+
+</script>
+<div id='manualdiv'>
+<table>
+<tr>
+<td colspan="3"><div id='expectedRes'>Expected will come here</div></td>
+</tr>
+<tr>
+<td><input id="previous" type="button" onclick="runPreviousTest()" value="<<:Previous" disabled /></td>
+<td><input id="current" type="button" onclick="runSameTestAgain()" value="ReTest" disabled /></td>
+<td><input id="next" type="button" onclick="runNextTest()" value="Next:>>" disabled /></td>
+</tr>
+<tr>
+<td colspan="2"><input id="testid" type="text" placeholder='Enter VT Id' /></td>
+<td colspan="2"><input id="go" type="button" onclick="goToTest()" value="GO" disabled />
+</tr>
+</table>
+</div>

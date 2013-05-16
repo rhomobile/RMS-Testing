@@ -1,0 +1,138 @@
+<div data-role="page">
+<script type="text/javascript">
+function getPropertyValue() {
+
+  var e = document.getElementById("propertyname");
+  var propertyName = e.options[e.selectedIndex].value;  
+
+  $.get('/app/ModelBarcode/getProperty', { property:  propertyName});
+  return false;
+}
+
+function getProperty_async() {
+  var e = document.getElementById("propertyname");
+  var propertyName = e.options[e.selectedIndex].value;  
+  $.get('/app/ModelBarcode/getProperty_async', { property:  propertyName});
+  return false;
+}
+
+
+function setDefaultSCN() {
+  var e = document.getElementById("scntype");
+  var scnType = e.options[e.selectedIndex].value;  
+
+  $.get('/app/ModelBarcode/setDefaultSCN', { scnType:  scnType});
+  return false;
+}
+
+function enableScanner() {
+  var e = document.getElementById("scntype");
+  var scnType = e.options[e.selectedIndex].value;  
+  $.get('/app/ModelBarcode/enableScanner', { scnType:  scnType});
+  return false;
+}
+
+function disableScanner() {
+  var e = document.getElementById("scntype");
+  var scnType = e.options[e.selectedIndex].value;  
+  $.get('/app/ModelBarcode/disableScanner');
+  return false;
+}
+
+
+
+function updatePropertyDiv(data){
+  document.getElementById('propertyresultdiv').innerHTML = '';
+  document.getElementById('propertyresultdiv').innerHTML = data;
+}
+
+function returnGetProperty(data){
+  document.getElementById('propertyresultdiv').innerHTML = '';
+  document.getElementById('propertyresultdiv').innerHTML = data;
+}
+
+</script>
+
+ <div data-role="content">
+    <ul data-role="listview">
+      <li><a href="#" onclick ="$.get('/app/ModelBarcode/enumerateScanners');">Enumerate With Rho</a></li>
+      <li><a href="#" onclick ="$.get('/app/ModelBarcode/enumerateScanners1');">Enumerate Without Rho</a></li>
+      <li><a href="#" onclick ="$.get('/app/ModelBarcode/enumerateScanners2');">Enumerate Async Call</a></li>
+      <li><a href="#" onclick ="$.get('/app/ModelBarcode/enumerateScanners4');">Enumerate Async Call Lambda Args</a></li>
+
+      <li><a href="#" onclick ="$.get('/app/ModelBarcode/enable1');">enable1</a></li>
+      <li><a href="#" onclick ="$.get('/app/ModelBarcode/enable2');">enable2</a></li>
+      <li><a href="#" onclick ="$.get('/app/ModelBarcode/enable3');">enable3</a></li>
+      <li><a href="#" onclick ="$.get('/app/ModelBarcode/enable4');">enable4(Lambda)</a></li>
+      <li><a href="#" onclick ="$.get('/app/ModelBarcode/enable5');">Enable 5</a></li>
+      <li><a href="#" onclick ="$.get('/app/ModelBarcode/enable6');">Enable 6</a></li>
+
+      <li><a href="#" onclick ="$.get('/app/ModelBarcode/displayScanner');">displayScanner</a></li>
+      <li><a href="#" onclick ="$.get('/app/ModelBarcode/displayScanner2');">displayScanner2</a></li>
+      
+      <li><a href="#" onclick ="$.get('/app/ModelBarcode/enableSCN1');">Enable SCN1</a></li>
+      <li><a href="#" onclick ="$.get('/app/ModelBarcode/enableSCN2');">Enable SCN2</a></li>
+      
+       <li><a href="#" onclick ="$.get('/app/ModelBarcode/enable_lambda1');">enable_lambda1</a></li>
+       <li><a href="#" onclick ="$.get('/app/ModelBarcode/enable_lambda2');">enable_lambda2</a></li>
+
+      <li><a href="#" onclick ="$.get('/app/ModelBarcode/setModelBarcodeProperty');">setModelBarcodeProperty</a></li>
+      <li><a href="#" onclick ="$.get('/app/ModelBarcode/setModelBarcodeProperty2');">setModelBarcodeProperty2</a></li>
+
+      <li><a href="#" onclick ="$.get('/app/ModelBarcode/getModelBarcodeProperty');">getModelBarcodeProperty</a></li>
+      <li><a href="#" onclick ="$.get('/app/ModelBarcode/getModelBarcodeProperties');">getModelBarcodeProperties</a></li>
+      <li><a href="#" onclick ="$.get('/app/ModelBarcode/getAllModelBarcodeProperties');">getAllModelBarcodeProperties</a></li>
+      <li><a href="/app/ModelBarcode/enable_sync">Enable ModelBarcode Sync Call</a></li>
+      <li><a href="#" onclick ="$.get('/app/ModelBarcode/setausPostalTrue');">setausPostalTrue</a></li>
+      <li>Enable ModelBarcode</li>
+      <li><a href="#" onclick ="$.get('/app/ModelBarcode/enableModelBarcode');">enableModelBarcode</a></li>
+      <li>GET ALL DECODERS</li>
+      <li><a href="#" onclick ="$.get('/app/ModelBarcode/getAllDecoders');">getAllDecoders</a></li>
+      <li>SET ALL DECODERS TRUE/FALSE</li>
+      <li><a href="#" onclick ="$.get('/app/ModelBarcode/allDecodersTrue');">allDecodersTrue</a></li>
+      <li><a href="#" onclick ="$.get('/app/ModelBarcode/allDecodersFalse');">allDecodersFalse</a></li>
+      <li><a href="#" onclick ="$.get('/app/ModelBarcode/setPropertyAllDecodersTrue');">setPropertyAllDecodersTrue</a></li>
+      <li><a href="#" onclick ="$.get('/app/ModelBarcode/setPropertyAllDecodersFalse');">setPropertyAllDecodersFalse</a></li>
+      <li><a href="#" onclick ="$.get('/app/ModelBarcode/setPropertiesAllDecodersTrue');">setPropertiesAllDecodersTrue</a></li>
+      <li><a href="#" onclick ="$.get('/app/ModelBarcode/setPropertiesAllDecodersFalse');">setPropertiesAllDecodersFalse</a></li>
+      <li>GET CODABAR</li>
+      <li><a href="#" onclick ="$.get('/app/ModelBarcode/getCodabar');">getCodabar</a></li>
+      <li>SET CODABAR TRUE/FALSE</li>
+      <li><a href="#" onclick ="$.get('/app/ModelBarcode/setPropertiesCodabarTrue');">setPropertiesCodabarTrue</a></li>
+      <li><a href="#" onclick ="$.get('/app/ModelBarcode/setPropertiesCodabarFalse');">setPropertiesCodabarFalse</a></li>
+      <li>SubProperty Set</li>
+      <li><a href="#" onclick ="$.get('/app/ModelBarcode/codabarRedundancy');">codabarRedundancy False</a></li>
+      <li><a href="#" onclick ="$.get('/app/ModelBarcode/codabarClsiEditing');">codabarClsiEditing False</a></li>
+      <li><a href="#" onclick ="$.get('/app/ModelBarcode/codabarNotisEditing');">codabarNotisEditing False</a></li>
+      <li><a href="#" onclick ="$.get('/app/ModelBarcode/code11redundancy');">code11redundancy False</a></li>
+      
+      <li><a href="#" onclick ="$.get('/app/ModelBarcode/enable_single_quotes');">enable_single_quotes</a></li>
+      <li><a href="#" onclick ="$.get('/app/ModelBarcode/setPropertyEnable');">setPropertyEnable</a></li>
+      <li><a href="#" onclick ="$.get('/app/ModelBarcode/take_camera_scanner');">take_camera_scanner</a></li>
+            
+      </ul>
+      <div>
+      <select id='propertyname'>
+      <% @ModelBarcode.each do |barcode| %>
+      <option value="<%= barcode.propertyName %>"><%= barcode.propertyName %></option>
+      <% end %>
+      </select>
+      <input type='button' onclick="getPropertyValue()" value="GetProperty Sync">
+      <input type='button' onclick="getProperty_async()" value="GetProperty Async">
+
+      <div id='propertyresultdiv'></div>
+      </div>
+      <div>
+        <select id='scntype'>
+          <option value="SCN1">SCN1</option>
+          <option value="SCN2">SCN2</option>
+          <option value="SCN3">SCN3</option>
+        </select>
+        <input type='button' onclick="setDefaultSCN()" value="SetScanner">
+        <input type='button' onclick="enableScanner()" value="EnableScanner">
+        <input type='button' onclick="disableScanner()" value="Disable">
+
+      </div>
+  </div>
+
+</div>

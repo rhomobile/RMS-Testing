@@ -1,0 +1,27 @@
+<div data-role="page">
+
+	<div data-role="header" data-position="inline">
+    <h1>Systems</h1>
+    <a href="<%= Rho::RhoConfig.start_path %>" class="ui-btn-left" data-icon="home" data-direction="reverse" <%= "data-ajax='false'" if is_bb6 %>>
+      Home
+    </a>
+    <a href="<%= url_for :action => :new %>" class="ui-btn-right" data-icon="plus">
+      New
+    </a>
+	</div>
+
+  <div data-role="content">
+    <ul data-role="listview">
+      <li><a href="#" onclick ="$.get('/app/System/get_registry_sync');">get_registry_sync</a></li>
+      <li><a href="#" onclick ="$.get('/app/System/get_registry_sync1');">get_registry_sync1</a></li>
+      <li><a href="#" onclick ="$.get('/app/System/windowFrameSet1');">windowFrameSet1</a></li>
+      <li><a href="#" onclick ="$.get('/app/System/windowFrameSet2');">windowFrameSet2</a></li>
+      <li><a href="#" onclick ="$.get('/app/System/windowPositionSet1');">windowPositionSet1</a></li>
+      <li><a href="#" onclick ="$.get('/app/System/getProperties1');">getProperties1</a></li>
+      <li><a href="#" onclick ="$.get('/app/System/getPropertiesAsync');">getPropertiesAsync</a></li>
+      <li><a href="#" onclick ="$.get('/app/System/getPropertiesLambda');">getPropertiesLambda</a></li>
+      <li><a href="#" onclick ="$.get('/app/System/getPropertiesAsync2');">getPropertiesAsync2</a></li>
+    </ul>
+  </div>
+
+</div>

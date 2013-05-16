@@ -1,0 +1,359 @@
+<div>
+
+<script type="text/javascript">
+var updateDiv = function (resultDiv,data){
+  resultDiv = document.getElementById(resultDiv)
+  resultDiv.innerHTML = "";
+  resultDiv.innerHTML = data;
+}
+
+var displayAlert = function (one,two){
+  alert(one+" "+two);
+}
+
+var displayAlertone = function (){
+  alert("Nothing Has Passed in Argument");
+}
+
+function show_cookie() {
+    alert(document.cookie);
+}
+
+</script>
+
+<div data-role="header" data-position="inline">
+  <h1>WebView</h1>
+  <a href="#" onclick ="$.get('/app/ModelWebview/set_no_bar');" class="ui-btn-left" data-icon="star">
+    No Tab
+  </a>
+  <a href="#" onclick ="$.get('/app/ModelWebview/set_tabbar');" class="ui-btn-right" data-icon="star">
+    Set Tab
+  </a>
+</div>
+
+<div>
+    <fieldset>
+      <legend>Rho::WebView.acceptLanguage</legend>
+      <ul>
+      <li>set acceptlanguage as english</li>
+      <li><a href="javascript:void(0)" onclick ="$.get('/app/ModelWebview/setAcceptLanguage', {value:'en'});">VT281-001</a>
+      <li>set acceptlanguage as french</li>  
+      <li><a href="javascript:void(0)" onclick ="$.get('/app/ModelWebview/setAcceptLanguage', {value:'fr'});">VT281-002</a></li>
+      <li>set acceptlanguage as Japanese</li>
+      <li><a href="javascript:void(0)" onclick ="$.get('/app/ModelWebview/setAcceptLanguage', {value:'ja'});">VT281-003</a></li>
+      <li><a href="javascript:void(0)" onclick ="$.get('/app/ModelWebview/getAcceptLanguage');">getAcceptLanguage</a></li>
+      <li>Visit to Google To Check Language</li>
+      <li><a href="http://www.google.com">Google</a></li>
+      <li><a href="http://192.168.6.27/rhodes/readrequestheader.php">Read Request Header</a></li>
+      <li><div id="acceptLanguage"><%= Rho::WebView.acceptLanguage%></div></li>
+
+      </ul>
+    </fieldset>
+    <fieldset>
+      <legend>Rho::WebView.activeTab</legend>
+      <ul>
+      <li>Get Active Tab</li>
+      <li><a href="javascript:void(0)" onclick ="$.get('/app/ModelWebview/getActiveTab');">VT281-001</a></li>
+      <li><div id="activeTab"><%= Rho::WebView.activeTab%></div></li>
+      </ul>
+    </fieldset>
+    <fieldset>
+      <legend>Rho::WebView.cacheSize</legend>
+      <ul>
+      <li>Get Cache Size</li>
+      <li><a href="javascript:void(0)" onclick ="$.get('/app/ModelWebview/getCacheSize');">VT281-006/VT281-007</a></li>
+      <li><div id="cacheSize"><%= Rho::WebView.cacheSize%></div></li>
+      </ul>
+    </fieldset>
+    <fieldset>
+      <legend>Rho::WebView.enableCache</legend>
+      <ul>
+      <li>set enableCache as true</li>
+      <li><a href="javascript:void(0)" onclick ="$.get('/app/ModelWebview/setEnableCache', {value:'true'});">VT281-008</a>
+      <li>set enableCache as false</li>
+      <li><a href="javascript:void(0)" onclick ="$.get('/app/ModelWebview/setEnableCache', {value:'false'});">VT281-009</a>
+      <li>Get enableCache Value</li>
+      <li><a href="javascript:void(0)" onclick ="$.get('/app/ModelWebview/getEnableCache');">Get Enable Cache</a></li>
+      <li><div id="enableCache"><%= Rho::WebView.enableCache%></div></li>
+      </ul>
+    </fieldset>
+    
+    <fieldset>
+      <legend>Rho::WebView.enablePageLoadingIndication</legend>
+      <ul>
+      <li>set enablePageLoadingIndication as true</li>
+      <li><a href="javascript:void(0)" onclick ="$.get('/app/ModelWebview/setEnablePageLoadingIndication', {value:'true'});">VT281-011/VT281-012</a>
+      <li>set enablePageLoadingIndication as false</li>
+      <li><a href="javascript:void(0)" onclick ="$.get('/app/ModelWebview/setEnablePageLoadingIndication', {value:'false'});">VT281-013</a>
+      <li>Get enableCache Value</li>
+      <li><a href="javascript:void(0)" onclick ="$.get('/app/ModelWebview/getEnablePageLoadingIndication');">Get Value</a></li>
+      <li><div id="enablePageLoadingIndication"><%= Rho::WebView.enablePageLoadingIndication%></div></li>
+      </ul>
+    </fieldset>
+    
+    <fieldset>
+      <legend>Rho::WebView.enableWebPlugins</legend>
+      <ul>
+      <li>set enableWebPlugins as true</li>
+      <li><a href="javascript:void(0)" onclick ="$.get('/app/ModelWebview/setEnableWebPlugins', {value:'true'});">VT281-011/VT281-012</a>
+      <li>set enableWebPlugins as false</li>
+      <li><a href="javascript:void(0)" onclick ="$.get('/app/ModelWebview/setEnableWebPlugins', {value:'false'});">VT281-013</a>
+      <li>Get enableWebPlugins Value</li>
+      <li><a href="javascript:void(0)" onclick ="$.get('/app/ModelWebview/getEnableWebPlugins');">Get Value</a></li>
+      <li><div id="enableWebPlugins"><%= Rho::WebView.enableWebPlugins%></div></li>
+      </ul>
+    </fieldset>
+    
+    <fieldset>
+      <legend>Rho::WebView.enableWebPlugins</legend>
+      <ul>
+      <li>set enableWebPlugins as true</li>
+      <li><a href="javascript:void(0)" onclick ="$.get('/app/ModelWebview/setEnableWebPlugins', {value:'true'});">VT281-011/VT281-012</a>
+      <li>set enableWebPlugins as false</li>
+      <li><a href="javascript:void(0)" onclick ="$.get('/app/ModelWebview/setEnableWebPlugins', {value:'false'});">VT281-013</a>
+      <li>Get enableWebPlugins Value</li>
+      <li><a href="javascript:void(0)" onclick ="$.get('/app/ModelWebview/getEnableWebPlugins');">Get Value</a></li>
+      <li><div id="enableWebPlugins"><%= Rho::WebView.enableWebPlugins%></div></li>
+      </ul>
+    </fieldset>
+    
+    <fieldset>
+      <legend>Rho::WebView.enableZoom</legend>
+      <ul>
+      <li>set enableZoom as true</li>
+      <li><a href="javascript:void(0)" onclick ="$.get('/app/ModelWebview/setEnableZoom', {value:'true'});">VT281-011/VT281-012</a>
+      <li>set enableZoom as false</li>
+      <li><a href="javascript:void(0)" onclick ="$.get('/app/ModelWebview/setEnableZoom', {value:'false'});">VT281-013</a>
+      <li>Get enableWebPlugins Value</li>
+      <li><a href="javascript:void(0)" onclick ="$.get('/app/ModelWebview/getEnableZoom');">Get Value</a></li>
+      <li><div id="enableZoom"><%= Rho::WebView.enableZoom%></div></li>
+      </ul>
+    </fieldset>
+      
+    
+      <fieldset>
+        <legend>Rho::WebView.fontFamily</legend>
+        <ul>
+        <li>Get Font Family</li>
+        <li><a href="javascript:void(0)" onclick ="$.get('/app/ModelWebview/getFontFamily');">VT281-021/VT281-021</a></li>
+        <li><div id="fontFamily"><%= Rho::WebView.fontFamily%></div></li>
+        </ul>
+      </fieldset>
+      
+      <fieldset>
+        <legend>Rho::WebView.framework</legend>
+        <ul>
+        <li>get webviewFramework</li>
+        <li><a href="javascript:void(0)" onclick ="$.get('/app/ModelWebview/getFramework');">VT281-021</a></li>
+        <li><div id="framework"><%= Rho::WebView.framework%></div></li>
+        </ul>
+      </fieldset>
+      
+      <fieldset>
+        <legend>Rho::WebView.fullScreen</legend>
+        <ul>
+        <li>set fullScreen as true</li>
+        <li><a href="javascript:void(0)" onclick ="$.get('/app/ModelWebview/setFullScreen', {value:'true'});">VT281-022/VT281-025</a>
+        <li>set fullScreen as false</li>
+        <li><a href="javascript:void(0)" onclick ="$.get('/app/ModelWebview/setFullScreen', {value:'false'});">VT281-023</a>
+        <li>Get fullScreen Value</li>
+        <li><a href="javascript:void(0)" onclick ="$.get('/app/ModelWebview/getFullScreen');">Get Value</a></li>
+        <li>Toggle Fullscreen</li>
+        <li><a href="javascript:void(0)" onclick ="$.get('/app/ModelWebview/setFullScreen', {value:'false'});">VT281-023</a>
+        <li><div id="fullScreen"><%= Rho::WebView.fullScreen%></div></li>
+        </ul>
+      </fieldset>
+      
+      <fieldset>
+        <legend>Rho::WebView.scrollTechnique</legend>
+        <ul>
+        <li>get scrollTechnique</li>
+        <li><a href="javascript:void(0)" onclick ="$.get('/app/ModelWebview/getScrollTechnique');">VT281-026</a></li>
+        <li><div id="scrollTechnique"><%= Rho::WebView.scrollTechnique%></div></li>
+        </ul>
+      </fieldset>
+      
+      <fieldset>
+        <legend>Rho::WebView.userAgent</legend>
+        <ul>
+        <li>get userAgent</li>
+        <li><a href="javascript:void(0)" onclick ="$.get('/app/ModelWebview/getUserAgent');">VT281-029</a></li>
+        <li><div id="userAgent"><%= Rho::WebView.userAgent%></div></li>
+        </ul>
+      </fieldset>
+      
+      <fieldset>
+        <legend>Rho::WebView.viewportEnabled</legend>
+        <ul>
+        <li>get viewportEnabled</li>
+        <li><a href="javascript:void(0)" onclick ="$.get('/app/ModelWebview/getViewportEnabled');">VT281-030</a></li>
+        <li><div id="viewportEnabled"><%= Rho::WebView.viewportEnabled%></div></li>
+        </ul>
+      </fieldset>
+      
+      <fieldset>
+        <legend>Rho::WebView.viewportWidth</legend>
+        <ul>
+        <li>get viewportWidth</li>
+        <li><a href="javascript:void(0)" onclick ="$.get('/app/ModelWebview/getViewportWidth');">VT281-032</a></li>
+        <li><div id="viewportWidth"><%= Rho::WebView.viewportWidth%></div></li>
+        </ul>
+      </fieldset>
+    
+      
+      <fieldset>
+        <legend>Rho::WebView.zoomPage</legend>
+        <ul>
+        <li>set zoomPage as 0.5</li>
+        <li><a href="javascript:void(0)" onclick ="$.get('/app/ModelWebview/setZoomPage', {value:'0.5'});">VT281-033</a></li>
+        <li>set zoomPage as 1.5</li>
+        <li><a href="javascript:void(0)" onclick ="$.get('/app/ModelWebview/setZoomPage', {value:'1.5'});">VT281-034</a></li>
+        <li>set zoomPage as 1.0</li>
+        <li><a href="javascript:void(0)" onclick ="$.get('/app/ModelWebview/setZoomPage', {value:'1.0'});">VT281-035</a></li>
+        <li>set zoomPage as -1</li>
+        <li><a href="javascript:void(0)" onclick ="$.get('/app/ModelWebview/setZoomPage', {value:'-1'});">VT281-036</a></li>
+        <li>Get zoomPage Value</li>
+        <li><a href="javascript:void(0)" onclick ="$.get('/app/ModelWebview/getZoomPage');">Get Value</a></li>
+        <li><div id="zoomPage"><%= Rho::WebView.zoomPage%></div></li>
+        </ul>
+      </fieldset>
+      
+      <fieldset>
+        <legend>Rho::WebView.textZoomLevel</legend>
+        <ul>
+        <li>set textZoomLevel as 0</li>
+        <li><a href="javascript:void(0)" onclick ="$.get('/app/ModelWebview/setTextZoomLevel', {value:'0'});">VT281-037</a></li>
+        <li>set textZoomLevel as 4</li>
+        <li><a href="javascript:void(0)" onclick ="$.get('/app/ModelWebview/setTextZoomLevel', {value:'4'});">VT281-038</a></li>
+        <li>set textZoomLevel as 2</li>
+        <li><a href="javascript:void(0)" onclick ="$.get('/app/ModelWebview/setTextZoomLevel', {value:'2'});">VT281-039</a></li>
+        <li>set textZoomLevel as -1</li>
+        <li><a href="javascript:void(0)" onclick ="$.get('/app/ModelWebview/setTextZoomLevel', {value:'-1'});">VT281-040</a></li>
+        <li>Get zoomPage Value</li>
+        <li><a href="javascript:void(0)" onclick ="$.get('/app/ModelWebview/getTextZoomLevel');">Get Value</a></li>
+        <li><div id="textZoomLevel"><%= Rho::WebView.textZoomLevel%></div></li>
+        </ul>
+      </fieldset>
+
+      
+      <fieldset>
+        <legend>Rho::WebView.navigationTimeout</legend>
+        <ul>
+        <li>navigationTimeout as 10000</li>
+        <li><a href="javascript:void(0)" onclick ="$.get('/app/ModelWebview/setNavigationTimeout', {value:'10000'});">VT281-037</a></li>
+        <li>set navigationTimeout to -5000</li>
+        <li><a href="javascript:void(0)" onclick ="$.get('/app/ModelWebview/setNavigationTimeout', {value:'-5000'});">VT281-038</a></li>
+        <li>set navigationTimeout to 50000</li>
+        <li><a href="javascript:void(0)" onclick ="$.get('/app/ModelWebview/setNavigationTimeout', {value:'50000'});">VT281-039</a></li>
+        <li>Get navigationTimeout Value</li>
+        <li><a href="javascript:void(0)" onclick ="$.get('/app/ModelWebview/getNavigationTimeout');">Get Value</a></li>
+        <li><div id="navigationTimeout"><%= Rho::WebView.navigationTimeout%></div></li>
+        </ul>
+      </fieldset>
+      
+      <fieldset>
+        <legend>Rho::WebView.currentLocation</legend>
+        <ul>
+        <li>Call currentLocation with no tabindex</li>
+        <li><a href="javascript:void(0)" onclick ="$.get('/app/ModelWebview/getCurrentLocation', {value:''});">VT281-037</a></li>
+        <li>Call currentLocation with tabindex as 4</li>
+        <li><a href="javascript:void(0)" onclick ="$.get('/app/ModelWebview/getCurrentLocation', {value:'4'});">VT281-038</a></li>
+        <li>Call currentLocation with tabindex as -1</li>
+        <li><a href="javascript:void(0)" onclick ="$.get('/app/ModelWebview/getCurrentLocation', {value:'-1'});">VT281-039</a></li>
+        <li><div id="currentLocation"><%= Rho::WebView.currentLocation%></div></li>
+        </ul>
+      </fieldset>
+
+      <fieldset>
+        <legend>Rho::WebView.currentURL</legend>
+        <ul>
+        <li>Call currentURL with no tabindex</li>
+        <li><a href="javascript:void(0)" onclick ="$.get('/app/ModelWebview/getCurrentLocation', {value:''});">VT281-037</a></li>
+        <li>Call currentURL with tabindex as 1</li>
+        <li><a href="javascript:void(0)" onclick ="$.get('/app/ModelWebview/getCurrentLocation', {value:'1'});">VT281-038</a></li>
+        <li>Call currentURL with tabindex as -1</li>
+        <li><a href="javascript:void(0)" onclick ="$.get('/app/ModelWebview/getCurrentLocation', {value:'-1'});">VT281-039</a></li>
+        <li><a href="javascript:void(0)" onclick ="$.get('/app/ModelWebview/test_div');">test_div</a></li>
+        <li><div id="currentURL"><%= Rho::WebView.currentURL%></div></li>
+        </ul>
+      </fieldset>
+      
+      <fieldset>
+        <legend>Rho::WebView.executeJavascript</legend>
+        <li><a href="javascript:void(0)" onclick ="$.get('/app/ModelWebview/goto_executejs');">Execute Javascript</a></li>
+      </fieldset>
+      
+      <fieldset>
+        <legend>Rho::WebView.navigate</legend>
+        <ul>
+        <li>Call navigate with no tabindex</li>
+        <li><a href="javascript:void(0)" onclick ="$.get('/app/ModelWebview/navigate_tab');">VT281-040</a></li>
+        <li>Call navigate to online page with tabindex as 1</li>
+        <li><a href="javascript:void(0)" onclick ="$.get('/app/ModelWebview/navigate_online_tab1');">VT281-040</a></li>
+        <li>Call navigate with secure page and  tabindex as 4</li>
+        <li><a href="javascript:void(0)" onclick ="$.get('/app/ModelWebview/navigate_online_tab4_secure');">VT281-040</a></li>
+        <li>Call navigate to local page and  tabindex as 1</li>
+        <li><a href="javascript:void(0)" onclick ="$.get('/app/ModelWebview/navigate_localpage');">VT281-040</a></li>
+        <li>Call navigate with tabindex as -1</li>
+        <li><a href="javascript:void(0)" onclick ="$.get('/app/ModelWebview/navigate_localpage_indexminus');">VT281-040</a></li>
+        <li>Call navigate with url_for and action (url_for(:action => :show))</li>
+        <li><a href="javascript:void(0)" onclick ="$.get('/app/ModelWebview/navagate_action');">VT281-040</a></li>
+        </ul>
+      </fieldset>
+      
+      <fieldset>
+        <legend>Rho::WebView.navigateBack</legend>
+        <ul>
+        <li>Call navigateBack with no tabindex</li>
+        <li><a href="javascript:void(0)" onclick ="$.get('/app/ModelWebview/navigate_back');">VT281-040</a></li>
+        <li>Call navigateBack to online page with tabindex as 1</li>
+        <li><a href="javascript:void(0)" onclick ="$.get('/app/ModelWebview/navigate_back_one');">VT281-040</a></li>
+        <li>Call navigateBack with tabindex as -1</li>
+        <li><a href="javascript:void(0)" onclick ="$.get('/app/ModelWebview/navigate_back_zero');">VT281-040</a></li>
+        <li>Call navigateBack with tabindex as 0</li>
+        <li><a href="javascript:void(0)" onclick ="$.get('/app/ModelWebview/navigate_back_minus');">VT281-040</a></li>
+        </ul>
+      </fieldset>
+      
+      <fieldset>
+        <legend>Rho::WebView.refresh</legend>
+        <ul>
+        <li><input type='text'></li>
+        <li>Call refresh with no tabindex</li>
+        <li><a href="javascript:void(0)" onclick ="$.get('/app/ModelWebview/refresh_page');">VT281-040</a></li>
+        <li>Call refresh with tabindex as 1</li>
+        <li><a href="javascript:void(0)" onclick ="$.get('/app/ModelWebview/refresh_page_one');">VT281-040</a></li>
+        <li>Call refresh with tabindex as -1</li>
+        <li><a href="javascript:void(0)" onclick ="$.get('/app/ModelWebview/refresh_page_minus');">VT281-040</a></li>
+        <li>Call refresh with tabindex as 0</li>
+        <li><a href="javascript:void(0)" onclick ="$.get('/app/ModelWebview/refresh_page_zero');">VT281-040</a></li>
+        </ul>
+      </fieldset>
+      
+      <fieldset>
+        <legend>Rho::WebView.save</legend>
+        <ul>
+        <li>Call save with No tabindex</li>
+        <li><a href="javascript:void(0)" onclick ="$.get('/app/ModelWebview/screencapture');">VT281-040</a></li>
+        <li>Call save with index as 1</li>
+        <li><a href="javascript:void(0)" onclick ="$.get('/app/ModelWebview/screencapture_one');">VT281-040</a></li>
+        <li>Call save with index as 4</li>
+        <li><a href="javascript:void(0)" onclick ="$.get('/app/ModelWebview/screencapture_four');">VT281-040</a></li>
+        <li>Call save with no string and path</li>
+        <li><a href="javascript:void(0)" onclick ="$.get('/app/ModelWebview/screencapture_negative');">VT281-040</a></li>
+        </ul>
+      </fieldset>
+      
+      <fieldset>
+        <legend>Rho::WebView.setCookie</legend>
+        <ul>
+        <li>Call setCookie by passing single key  and value</li>
+        <li><a href="javascript:void(0)" onclick ="$.get('/app/ModelWebview/set_cookie_single');">VT281-040</a></li>
+        <li>Call setCookie by passing multiple keys and respective values</li>
+        <li><a href="javascript:void(0)" onclick ="$.get('/app/ModelWebview/set_cookie_multiple');">VT281-040</a></li>
+        <li>Disply Cookie</li>
+        <li><a href="javascript:void(0)" onclick ="$.get('/app/ModelWebview/show_cookie');">VT281-040</a></li>
+        </ul>
+      </fieldset>
+  </div>
+</div>
