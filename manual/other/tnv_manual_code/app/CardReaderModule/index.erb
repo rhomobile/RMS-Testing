@@ -1,6 +1,12 @@
 <script type="text/javascript" src="/public/jquery/jquery-1.6.4.min.js"></script>
 <script type="text/javascript">
 
+function setValue(mymode,mycarddata) 
+{
+  document.getElementById("txtMode").value=mymode;
+  document.getElementById("txtCardData").value=mycarddata;  
+}  
+  
 function setFieldValue(myencryption,mymode,mycarddata,myrawData,mytrack1,mytrack2,mytrack3,mytrack1Status,mytrack2Status,mytrack3Status,mytrack1Encrypted,mytrack2Encrypted,mytrack3Encrypted,mytrack1EncryptedStatus,mytrack2EncryptedStatus,mytrack3EncryptedStatus,myksn) 
 {
   //document.getElementById("myResult").innerHTML=mymode;
@@ -29,93 +35,146 @@ function setFieldValue(myencryption,mymode,mycarddata,myrawData,mytrack1,mytrack
 </script>
 <ul>
 <div id="myResult">card Reader</div> 
-<li><a href="#" onclick="$.get('/app/CardReaderModule/funminimize');">funminimize</a></li>
-<li><a href="#" onclick="$.get('/app/CardReaderModule/enum');">enum</a></li>
-<li><a href="#" onclick="$.get('/app/CardReaderModule/openwithoutEvent');">openwithoutEvent</a></li>
-<li><a href="#" onclick="$.get('/app/CardReaderModule/openwithEnter');">openwithEnter</a></li>
-<li><a href="#" onclick="$.get('/app/CardReaderModule/openwithTab');">openwithTab</a></li>
-<li><a href="#" onclick="$.get('/app/CardReaderModule/openwithEvent');">openwithEvent</a></li>
-<li><a href="#" onclick="$.get('/app/CardReaderModule/openwithEnchead');">openwithEnchead</a></li>
-<li><a href="#" onclick="$.get('/app/CardReaderModule/closemsr');">closemsr</a></li>
-<li><a href="#" onclick="$.get('/app/CardReaderModule/setEnter');">setEnter</a></li>
-<li><a href="#" onclick="$.get('/app/CardReaderModule/setTab');">setTab</a></li>
-<li><a href="#" onclick="$.get('/app/CardReaderModule/setmodulename');">setmodulename</a></li>
-<li><a href="#" onclick="$.get('/app/CardReaderModule/setPinentry');">setPinentry</a></li>
-<li><a href="#" onclick="$.get('/app/CardReaderModule/setPintimeout');">setPintimeout</a></li>
-<li><a href="#" onclick="$.get('/app/CardReaderModule/setpandata');">setpandata</a></li>
-<li><a href="#" onclick="$.get('/app/CardReaderModule/setpropEnter');">setpropEnter</a></li>
-<li><a href="#" onclick="$.get('/app/CardReaderModule/setpropTab');">setpropTab</a></li>
-<li><a href="#" onclick="$.get('/app/CardReaderModule/setpropmodulename');">setpropmodulename</a></li>
-<li><a href="#" onclick="$.get('/app/CardReaderModule/setpropPinentry');">setpropPinentry</a></li>
-<li><a href="#" onclick="$.get('/app/CardReaderModule/setpropPintimeout');">setpropPintimeout</a></li>
-<li><a href="#" onclick="$.get('/app/CardReaderModule/setproppandata');">setproppandata</a></li>
-<li><a href="#" onclick="$.get('/app/CardReaderModule/setcardProperties');">setcardProperties</a></li>
-<li><a href="#" onclick="$.get('/app/CardReaderModule/setdefaultprop');">setdefaultprop</a></li>
-<li><a href="#" onclick="$.get('/app/CardReaderModule/getpropEnter');">getpropEnter</a></li>
-<li><a href="#" onclick="$.get('/app/CardReaderModule/getpropTab');">getpropTab</a></li>
-<li><a href="#" onclick="$.get('/app/CardReaderModule/getpropmodulename');">getpropmodulename</a></li>
-<li><a href="#" onclick="$.get('/app/CardReaderModule/getpropPinentry');">getpropPinentry</a></li>
-<li><a href="#" onclick="$.get('/app/CardReaderModule/getpropPintimeout');">getpropPintimeout</a></li>
-<li><a href="#" onclick="$.get('/app/CardReaderModule/getproppandata');">getproppandata</a></li>
-<li><a href="#" onclick="$.get('/app/CardReaderModule/getdefaultprop');">getdefaultprop</a></li>
-<li><a href="#" onclick="$.get('/app/CardReaderModule/getcardProperties');">getcardProperties</a></li>
-<li><a href="#" onclick="$.get('/app/CardReaderModule/getAllcardProperties');">getAllcardProperties</a></li>
-<li><a href="#" onclick="$.get('/app/CardReaderModule/allPropsclear');">clearallProps</a></li>
+<li><a href="#" onclick="$.get('/app/CardReaderModule/funminimize');">Minimize</a></li>
+<li><a href="#" onclick="$.get('/app/CardReaderModule/enum');">Enumerate</a></li>
+<li><a href="#" onclick="$.get('/app/CardReaderModule/getAllcardProperties');">GetAllProp</a>
+<a href="#" onclick="$.get('/app/CardReaderModule/allPropsclear');">ClearallProps</a></li>
+<li><a href="#" onclick="$.get('/app/CardReaderModule/setdefaultprop');">Setdefault</a>
+<a href="#" onclick="$.get('/app/CardReaderModule/getdefaultprop');">Getdefault</a></li>
+<li><a href="#" onclick="$.get('/app/CardReaderModule/openwithoutEvent');">Open</a>
+<a href="#" onclick="$.get('/app/CardReaderModule/openwithEvent');">OpenEvent</a>
+<a href="#" onclick="$.get('/app/CardReaderModule/openwithEnchead');">AndroidEC</a></li>
+<li><a href="#" onclick="$.get('/app/CardReaderModule/closemsr');">Closemsr</a></li>
+Set properties directly
+<li><a href="#" onclick="$.get('/app/CardReaderModule/setEntertrue');">EnterTrue</a>
+<a href="#" onclick="$.get('/app/CardReaderModule/setEnterfalse');">EFalse</a>
+<a href="#" onclick="$.get('/app/CardReaderModule/setEnterinvalid');">Invalid</a>
+<a href="#" onclick="$.get('/app/CardReaderModule/setEnterempty');">Empty</a></li>
+<li><a href="#" onclick="$.get('/app/CardReaderModule/setTabtrue');">TabTrue</a>
+<a href="#" onclick="$.get('/app/CardReaderModule/setTabfalse');">TFalse</a>
+<a href="#" onclick="$.get('/app/CardReaderModule/setTabinvalid');">Invalid</a>
+<a href="#" onclick="$.get('/app/CardReaderModule/setTabempty');">Empty</a></li>
+<li><a href="#" onclick="$.get('/app/CardReaderModule/setmoduledcr7000');">Setdcr7000</a>
+<a href="#" onclick="$.get('/app/CardReaderModule/setmodulemsr9000');">Set9000</a>
+<a href="#" onclick="$.get('/app/CardReaderModule/setmodulemsr9001');">Set9001</a>
+<a href="#" onclick="$.get('/app/CardReaderModule/setmodulemsr9500');">Set9500</a>
+<a href="#" onclick="$.get('/app/CardReaderModule/setmodulemsr7000');">Set7000</a>
+<a href="#" onclick="$.get('/app/CardReaderModule/setmodulemsr55');">Set55</a>
+<a href="#" onclick="$.get('/app/CardReaderModule/setmodulemsr3000');">Set3000</a>
+<a href="#" onclick="$.get('/app/CardReaderModule/setmodulemsrcameo');">Setcameo</a>
+<a href="#" onclick="$.get('/app/CardReaderModule/setmoduleinvalid');">Invalid</a>
+<a href="#" onclick="$.get('/app/CardReaderModule/setmoduleEmpty');">Empty</a></li>
+<li><a href="#" onclick="$.get('/app/CardReaderModule/setpinentrytrue');">PinTrue</a>
+<a href="#" onclick="$.get('/app/CardReaderModule/setpinentryfasle');">PFalse</a>
+<a href="#" onclick="$.get('/app/CardReaderModule/setpininvalid');">Invalid</a>
+<a href="#" onclick="$.get('/app/CardReaderModule/setpinempty');">Empty</a></li>
+<li><a href="#" onclick="$.get('/app/CardReaderModule/setpandata');">Setpan</a>
+<a href="#" onclick="$.get('/app/CardReaderModule/setpaninvalid');">Invalid</a>
+<a href="#" onclick="$.get('/app/CardReaderModule/setpaninvalid1');">Invalid1</a>
+<a href="#" onclick="$.get('/app/CardReaderModule/setpanempty');">Empty</a></li>
+<li><a href="#" onclick="$.get('/app/CardReaderModule/setPintimeout');">PTimeout</a>
+<a href="#" onclick="$.get('/app/CardReaderModule/setPintimeoutzero');">Zero</a>
+<a href="#" onclick="$.get('/app/CardReaderModule/setPintimeoutinvalid');">Invalid</a>
+<a href="#" onclick="$.get('/app/CardReaderModule/setPintimeoutempty');">Empty</a></li>
+Set propety using setProperty
+<li><a href="#" onclick="$.get('/app/CardReaderModule/setpropEntertrue');">EnterTrue</a>
+<a href="#" onclick="$.get('/app/CardReaderModule/setpropEnterfalse');">EFalse</a>
+<a href="#" onclick="$.get('/app/CardReaderModule/setpropEnterinvalid');">Invalid</a>
+<a href="#" onclick="$.get('/app/CardReaderModule/setpropEnterempty');">Empty</a></li>
+<li><a href="#" onclick="$.get('/app/CardReaderModule/setpropTabtrue');">TabTrue</a>
+<a href="#" onclick="$.get('/app/CardReaderModule/setpropTabfalse');">TFalse</a>
+<a href="#" onclick="$.get('/app/CardReaderModule/setpropTabinvalid');">Invalid</a>
+<a href="#" onclick="$.get('/app/CardReaderModule/setpropTabempty');">Empty</a></li>
+<li><a href="#" onclick="$.get('/app/CardReaderModule/setpropmoduledcr7000');">Setdcr7000</a>
+<a href="#" onclick="$.get('/app/CardReaderModule/setpropmodulemsr9000');">Set9000</a>
+<a href="#" onclick="$.get('/app/CardReaderModule/setpropmodulemsr9001');">Set9001</a>
+<a href="#" onclick="$.get('/app/CardReaderModule/setpropmodulemsr9500');">Set9500</a>
+<a href="#" onclick="$.get('/app/CardReaderModule/setpropmodulemsr7000');">Set7000</a>
+<a href="#" onclick="$.get('/app/CardReaderModule/setpropmodulemsr55');">Set55</a>
+<a href="#" onclick="$.get('/app/CardReaderModule/setpropmodulemsr3000');">Set3000</a>
+<a href="#" onclick="$.get('/app/CardReaderModule/setpropmodulemsrcameo');">Setcameo</a>
+<a href="#" onclick="$.get('/app/CardReaderModule/setpropmoduleinvalid');">Invalid</a>
+<a href="#" onclick="$.get('/app/CardReaderModule/setpropmoduleEmpty');">Empty</a></li>
+<li><a href="#" onclick="$.get('/app/CardReaderModule/setproppinentrytrue');">PinTrue</a>
+<a href="#" onclick="$.get('/app/CardReaderModule/setproppinentryfasle');">PFalse</a>
+<a href="#" onclick="$.get('/app/CardReaderModule/setproppininvalid');">Invalid</a>
+<a href="#" onclick="$.get('/app/CardReaderModule/setproppinempty');">Empty</a></li>
+<li><a href="#" onclick="$.get('/app/CardReaderModule/setproppandata');">Setpan</a>
+<a href="#" onclick="$.get('/app/CardReaderModule/setproppaninvalid');">Invalid</a>
+<a href="#" onclick="$.get('/app/CardReaderModule/setproppaninvalid1');">Invalid1</a>
+<a href="#" onclick="$.get('/app/CardReaderModule/setpanempty');">Empty</a></li>
+<li><a href="#" onclick="$.get('/app/CardReaderModule/setpropPintimeout');">PTimeout</a>
+<a href="#" onclick="$.get('/app/CardReaderModule/setpropPintimeoutzero');">Zero</a>
+<a href="#" onclick="$.get('/app/CardReaderModule/setpropPintimeoutinvalid');">Invalid</a>
+<a href="#" onclick="$.get('/app/CardReaderModule/setpropPintimeoutempty');">Empty</a></li>
+Set propety using setProperties
+<li><a href="#" onclick="$.get('/app/CardReaderModule/setcardProperties');">Wmprop</a>
+<a href="#" onclick="$.get('/app/CardReaderModule/setcardandroidProperties');">Androidprop</a></li>
+Get propety using getProperty
+<li><a href="#" onclick="$.get('/app/CardReaderModule/getpropEnter');">Enter</a>
+<a href="#" onclick="$.get('/app/CardReaderModule/getpropTab');">Tab</a>
+<a href="#" onclick="$.get('/app/CardReaderModule/getpropmodulename');">Getmodule</a>
+<a href="#" onclick="$.get('/app/CardReaderModule/getpropPinentry');">Pinentry</a>
+<a href="#" onclick="$.get('/app/CardReaderModule/getpropPintimeout');">Pintimeout</a>
+<a href="#" onclick="$.get('/app/CardReaderModule/getproppandata');">Pandata</a></li>
+Get propety using getProperties
+<li><a href="#" onclick="$.get('/app/CardReaderModule/getcardProperties');">GetcardProperties</a></li>
+<li><a href="#" onclick="$.get('/app/CardReaderModule/dcrtest');">Dcrtest</a></li>
  <table border=1 width=100%>
     <tr>
             <td><a href="main"></a></td>
     </tr>  
     <tr>
-		<td>Encryption:</td><td><Textarea id="txtEncData" cols="15" rows="1"></Textarea></td>
-	</tr>
-	<tr>
-		<td> Mode:</td><td><Textarea id="txtMode" cols="10" rows="1"></Textarea></td>
-	</tr>
-	<tr> 
-		<td> Card Data:</td><td><Textarea id="txtCardData" cols="50" rows="10"></Textarea></td>
-	</tr>	
-	<tr>
-		<td> RawData:</td><td><Textarea id="txtRawData" cols="60" rows="12"></Textarea></td>
-	</tr>
-	<tr>
-		<td> Track1 Data:</td><td><Textarea id="txtTrack1Data" cols="50" rows="3"></Textarea></td>
-	</tr>
-	<tr>	
-		<td> Track2 Data:</td><td><Textarea id="txtTrack2Data" cols="50" rows="3"></Textarea></td>
-	</tr>	
-	<tr>
-		<td> Track3 Data:</td><td><Textarea id="txtTrack3Data" cols="50" rows="3"></Textarea></td>
-	</tr>
-	<tr>
-		<td> Track1 Status:</td><td><Textarea id="txtTrack1Status" cols="6" rows="1"></Textarea></td>
-	</tr>	
-	<tr>
-		<td> Track2 Status:</td><td><Textarea id="txtTrack2Status" cols="6" rows="1"></Textarea></td>
-	</tr>
-	<tr>
-		<td> Track3 Status:</td><td><Textarea id="txtTrack3Status" cols="6" rows="1"></Textarea></td>
-	</tr>
-	<tr>	
-		<td> Track1 Encdata:</td><td><Textarea id="txtTrack1EnceData" cols="50" rows="3"></Textarea></td>
-	</tr>
-	<tr>	
-		<td> Track2 Encdata:</td><td><Textarea id="txtTrack2EnceData" cols="50" rows="3"></Textarea></td>
-	</tr>
-	<tr>	
-		<td> Track3 Encdata:</td><td><Textarea id="txtTrack3EnceData" cols="50" rows="3"></Textarea></td>
-	</tr>
-	<tr>
-		<td> Track1 EncStatus:</td><td><Textarea id="txtTrack1EncStatus" cols="6" rows="1"></Textarea></td>
-	</tr>
-	<tr>	
-		<td> Track2 EncStatus:</td><td><Textarea id="txtTrack2EncStatus" cols="6" rows="1"></Textarea></td>
-	</tr>
-	<tr>	
-		<td> Track3 EncStatus:</td><td><Textarea id="txtTrack3EncStatus" cols="6" rows="1"></Textarea></td>
-	</tr>	
-	<tr>
-		<td> KSN:</td><td><Textarea id="txtTKSNData" cols="25" rows="1"></Textarea></td>
-	</tr>
+    <td>Encryption:</td><td><Textarea id="txtEncData" cols="15" rows="1"></Textarea></td>
+  </tr>
+  <tr>
+    <td> Mode:</td><td><Textarea id="txtMode" cols="10" rows="1"></Textarea></td>
+  </tr>
+  <tr> 
+    <td> Card Data:</td><td><Textarea id="txtCardData" cols="50" rows="10"></Textarea></td>
+  </tr> 
+  <tr>
+    <td> RawData:</td><td><Textarea id="txtRawData" cols="60" rows="12"></Textarea></td>
+  </tr>
+  <tr>
+    <td> Track1 Data:</td><td><Textarea id="txtTrack1Data" cols="50" rows="3"></Textarea></td>
+  </tr>
+  <tr>  
+    <td> Track2 Data:</td><td><Textarea id="txtTrack2Data" cols="50" rows="3"></Textarea></td>
+  </tr> 
+  <tr>
+    <td> Track3 Data:</td><td><Textarea id="txtTrack3Data" cols="50" rows="3"></Textarea></td>
+  </tr>
+  <tr>
+    <td> Track1 Status:</td><td><Textarea id="txtTrack1Status" cols="6" rows="1"></Textarea></td>
+  </tr> 
+  <tr>
+    <td> Track2 Status:</td><td><Textarea id="txtTrack2Status" cols="6" rows="1"></Textarea></td>
+  </tr>
+  <tr>
+    <td> Track3 Status:</td><td><Textarea id="txtTrack3Status" cols="6" rows="1"></Textarea></td>
+  </tr>
+  <tr>  
+    <td> Track1 Encdata:</td><td><Textarea id="txtTrack1EnceData" cols="50" rows="3"></Textarea></td>
+  </tr>
+  <tr>  
+    <td> Track2 Encdata:</td><td><Textarea id="txtTrack2EnceData" cols="50" rows="3"></Textarea></td>
+  </tr>
+  <tr>  
+    <td> Track3 Encdata:</td><td><Textarea id="txtTrack3EnceData" cols="50" rows="3"></Textarea></td>
+  </tr>
+  <tr>
+    <td> Track1 EncStatus:</td><td><Textarea id="txtTrack1EncStatus" cols="6" rows="1"></Textarea></td>
+  </tr>
+  <tr>  
+    <td> Track2 EncStatus:</td><td><Textarea id="txtTrack2EncStatus" cols="6" rows="1"></Textarea></td>
+  </tr>
+  <tr>  
+    <td> Track3 EncStatus:</td><td><Textarea id="txtTrack3EncStatus" cols="6" rows="1"></Textarea></td>
+  </tr> 
+  <tr>
+    <td> KSN:</td><td><Textarea id="txtTKSNData" cols="25" rows="1"></Textarea></td>
+  </tr>
 </table>
 </ul>
 
