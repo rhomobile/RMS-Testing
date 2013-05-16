@@ -1,25 +1,7 @@
 describe("CardReaderTestSuite", function() {
 	describe("Testing Card Reader Module in Ruby via AJAX.  ", function() {
-	
-		beforeEach(function() {
-			//Set card reader properties
-			//setProperties();
-		});
 		
-	
-		afterEach(function() 
-		{			
-		});		
-		
-		//  Global Properties
-		var pinTimeout = "5000";
-		var pinEntry = "TRUE";
-		var autoTab = "TRUE";
-		var autoEnter = "TRUE";
-		var moduleName = "DCR7000";
-		var panData = "4292435445672345";
-		
-		//var deviceOS = Rho.System.platform;
+		var deviceOS = Rho.System.platform;
 		
 		it("AT55551, Set and get the card reader properties", function() {			
 			//Rho.CardReader.autoTab = true;
@@ -32,10 +14,14 @@ describe("CardReaderTestSuite", function() {
 		
 		it("AT55552, Clear and get all the card reader properties", function() {					
 			var result = getAllCardReader();
-			//if (deviceOS == "ANDROID")
-				//expect(result).toBe("timeout:-  entry:-  panData:-  tab:- FALSE enter:- FALSE module:- ");			
-			//else if (deviceOS == "WINDOWS")
+			if (deviceOS == "ANDROID")
+			{
+				expect(result).toBe("timeout:-  entry:-  panData:-  tab:- FALSE enter:- FALSE module:- ");
+			}
+			else if (deviceOS == "WINDOWS")
+			{
 				expect(result).toBe("timeout:- 30000 entry:- FALSE panData:-  tab:- TRUE enter:- TRUE module:- ");
+			}
 		});
 		
 		it("AT55553, opens the card reader", function() {			
