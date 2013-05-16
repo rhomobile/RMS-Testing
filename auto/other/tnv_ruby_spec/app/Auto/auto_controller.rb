@@ -1,6 +1,7 @@
 require 'rho/rhocontroller'
 require 'helpers/browser_helper'
-require 'helpers/automate_helper'
+require 'helpers/api_helper'
+#require 'helpers/automate_helper'
 
 require 'json'
 
@@ -9,8 +10,11 @@ class AutoController < Rho::RhoController
   @layout = 'Auto/layout'
   
   def index
-    modulename = @params['module']
-    render :action => modulename
+    $mode = ''
+    $mode = @params['mode']
+    erb = @params['erb']
+    $module = @params['module']
+    render :action => erb
   end
   
   #Imager Module Code : Enmurate and Create Test for each Imager Type
@@ -69,7 +73,6 @@ def setMethod
     #callback = "enumCallbackCommon"
 
   if type == 'async'
-
       begin
         #eval autoobject +"."+ automethod +" url_for(:action => :"+callback+")"
         puts autoobject +"."+ automethod +"("+callback+")"
@@ -592,7 +595,7 @@ end
   ## Common API Implementation
   def commonReset
     #Barcode Code
-    Barcode.disable
+    Rho::Barcode.disable
   end
   
   
@@ -631,14 +634,20 @@ end
 #  end
   
     def enumCallbackCommon(options = {})
-
+      puts "Option Value #{options}"
       calltype = "Sync Call"
-
+      puts "Variable #{options.is_a?(Hash)}"
       if(options.empty?)
         calltype = "Async Call"
-        puts "Async Call. Data Inside Body Of Params"
+        puts "Async Call. Data Inside Params[result]"
         puts "#{@params}"
-        options = @params['body']
+        options = @params['result']
+      elsif options.is_a?(Hash)
+        if (options.has_key?("result"))
+          calltype = "Lambda Call"
+          options = options['result']
+          puts "Lambda Enum #{options}"
+        end
       end
 
       #Debugging Purposes
@@ -674,8 +683,9 @@ end
     end
     
     def returnGetProperty(options = {})
-
-      if(options.nil?)
+      puts "options Is #{options}"
+      puts "Params Is #{@params}"
+      if(options.nil? or options.empty?)
         calltype = "Async Call"
         puts "Async Call. Data Inside Body Of Params"
         puts "#{@params}"
@@ -699,6 +709,23 @@ end
     
     def drawPoints
       Automate.drawline 500,100,500,500
+    end
+    
+    def scanDecodeCallback(options = {})
+    
+      if(options.empty?)
+        calltype = "Async Call"
+        puts "Async Call. Data Inside Body Of Params"
+        puts "#{@params}"
+        options = @params
+      end
+    
+      puts "Scanned Data #{options}"
+      
+      scanners = ''
+      scanners = options['data']
+      puts scanners
+      WebView.execute_js("scanDecodeCallback('#{scanners}')")
     end
 
 end

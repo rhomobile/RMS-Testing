@@ -1,5 +1,5 @@
 # startup page for your application
-start_path = '/app/Auto?module=autocall'
+start_path = '/app/Auto?erb=autocall&mode=ATS'
 
 # path to the options page (in this case handled by javascript)
 options_path = '/app/Settings'
