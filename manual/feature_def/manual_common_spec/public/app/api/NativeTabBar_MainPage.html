@@ -13,6 +13,10 @@
             Rho.NativeTabbar.switchTab(nTab);
         }
 
+        function tabbarPageRemove( nTab ) {
+            Rho.NativeTabbar.removeTab(nTab);
+        }
+
         function goHome( ) {
             Rho.NativeTabbar.switchTab(0);
         }
@@ -28,6 +32,7 @@
 
 <a href="#" onclick="tabbarSwitch(1);">Switch to Page 1</a><br/>
 <a href="#" onclick="tabbarSwitch(2);">Switch to Page 2</a><br/>
+<a href="#" onclick="tabbarPageRemove(2);">Remove Page 2</a><br/>
 <a href="#" onclick="goHome();">Home</a><br/>
 
 </body>
