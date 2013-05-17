@@ -13,361 +13,489 @@ class LogController < Rho::RhoController
     #Rho::Log.error(networkProps, logPropses)
  # end
   
-  def destination401
+  def destination300
+    Rho::Log.destination = ['file'] 
+  end
+  
+  def destination301
+    Rho::Log.destination = ['stdio'] 
+  end
+    
+  def destination302
+    Rho::Log.destination = ['uri'] 
+  end
+  
+  def destination303
     Rho::Log.destination = ['file','stdio','uri'] 
   end
   
-  def destination402
+  def destination304
+    Rho::Log.destination = ['stdio','file','uri'] 
+  end
+  
+  def destination305
+    Rho::Log.destination = ['stdio','uri','file'] 
+  end
+  
+  def destination306
+    Rho::Log.destination = ['uri','file','stdio'] 
+  end
+  
+  def destination307
+    Rho::Log.destination = ['uri','stdio','file'] 
+  end
+  
+  def destination308
       Rho::Log.destination = ['file','stdio'] 
   end
   
-  def destination403
+  def destination309
         Rho::Log.destination = ['file','uri'] 
   end
     
-  def destination404
+  def destination310
         Rho::Log.destination = ['stdio','uri'] 
   end
     
-  def destination405
+  def destination311
         Rho::Log.destination = [] 
   end
-    
-  def destination406
+   
+  def destination312
         Rho::Log.destination = ['aaaa'] 
   end
-      
-  def destinationURI407
+  
+  def destinationURI313
     Rho::Log.destinationURI = '';
   end
   
-  def destinationURI408
+  def destinationURI314
+    Rho::Log.destinationURI = '';
+  end
+  
+  def destinationURI315
+    Rho::Log.destinationURI = '';
+  end
+  
+  def destinationURI316
+    Rho::Log.destinationURI = '';
+  end
+  
+  def destinationURI317
+    Rho::Log.destinationURI = '';
+  end
+  
+  def destinationURI318
       Rho::Log.destinationURI = '';
   end
-    
-  def destinationURI409
+  
+  def destinationURI319
       Rho::Log.destinationURI = 'aaaa';
   end
-    
-  def excludeCategories410
-    Rho::Log.excludeCategories = 'signatureCapture'
+  
+  def destinationURI320
+      Rho::Log.destinationURI = '';
   end
   
-  def excludeCategories411
+  #For Windows Devices
+  def excludeCategories321
+    Rho::Log.excludeCategories = 'SignatureCapture::CSignatureModule::MetaProc'
+  end
+   
+  #For IOS or Android 
+  #def excludeCategories321
+   #   Rho::Log.excludeCategories = 'Rhodes'
+  #end 
+  
+  def excludeCategories322
       Rho::Log.excludeCategories = 'imager,signatureCapture,fileTransfer'
   end
-    
-  def excludeCategories412
+  
+  def excludeCategories323
       Rho::Log.excludeCategories = ''
   end
-    
-  def excludeCategories413
+  
+  def excludeCategories324
       Rho::Log.excludeCategories = 'aaaa'
+  end  
+
+  def excludeFilter325
+      Rho::Log.excludeFilter = 'username,password'
   end
   
-  
-  def excludeFilter414
-        Rho::Log.excludeFilter = 'UserName,Password'
+  def excludeFilter326
+      Rho::Log.excludeFilter = ''
+  end
+      
+  def excludeFilter327
+      Rho::Log.excludeFilter = 'aaaa'
   end
   
-  def excludeFilter415
-        Rho::Log.excludeFilter = ''
-  end
-    
-  def excludeFilter416
-        Rho::Log.excludeFilter = 'aaaa'
+  def filePath328
+      Rho::Log.filePath = '/public/bibashlog.txt'
+  end 
+  
+  #Absolute Path
+  def filePath329
+      Rho::Log.filePath = ''
   end
   
-  def filePath417
-        Rho::Log.filePath = '/public/bibashlog.txt'
-  end
-    
-  def filePath418
-        Rho::Log.filePath = ''
-  end
-    
-  def filePath419
-        Rho::Log.filePath = 'aaaa'
+  #Relative Path  
+  def filePath330
+      Rho::Log.filePath = ''
   end
   
-  def fileSize420
-    Rho::Log.fileSize = 30
+  def filePath331
+      Rho::Log.filePath = ''
   end
   
-  def fileSize421
+  def filePath332
+      Rho::Log.filePath = 'aaaa'
+  end 
+  
+  def fileSize333
+      Rho::Log.fileSize = 30
+  end
+  
+  def fileSize334
       Rho::Log.fileSize = 100000
   end
-  
-  def fileSize422
+    
+  def fileSize335
       Rho::Log.fileSize = 0
   end
-  
-  def fileSize423
+    
+  def fileSize336
       Rho::Log.fileSize = -100
   end
-  
-  def fileSize424
+    
+  def fileSize337
       Rho::Log.fileSize = ''
   end
-  
-  def fileSize425
+    
+  def fileSize338
       Rho::Log.fileSize = aaaa
   end
   
-  def includeCategories426
-      Rho::Log.includeCategories = 'signatureCapture'
-  end
-    
-  def includeCategories427
-       Rho::Log.includeCategories = 'imager,signatureCapture,fileTransfer'
-  end
-      
-  def includeCategories428
-       Rho::Log.includeCategories = ''
-  end
-      
-  def includeCategories429
-       Rho::Log.includeCategories = 'aaaa'
+  #For Windows devices
+  def includeCategories339
+      Rho::Log.includeCategories = 'SignatureCapture::CSignatureModule::MetaProc'
   end
   
-  def level430
+  #For IOS or Android
+  #def includeCategories339
+      #Rho::Log.includeCategories = 'Rhodes'
+  #end
+    
+  def includeCategories340
+      Rho::Log.includeCategories = '*'
+  end
+  
+  def includeCategories341
+      Rho::Log.includeCategories = 'imager,signatureCapture,fileTransfer'
+  end
+  
+  #For Windows devices
+  def includeCategories342
+      Rho::Log.includeCategories = 'SignatureCapture::CSignatureModule::MetaProc,aaaa'
+  end
+  
+  #For IOS or Android
+  #def includeCategories342
+     #Rho::Log.includeCategories = 'Rhodes,aaaa'
+  #end
+  
+  def includeCategories343
+     Rho::Log.includeCategories = ''
+  end
+        
+  def includeCategories344
+     Rho::Log.includeCategories = 'aaaa'
+  end  
+  
+  def includeCategories345
+     Rho::Log.includeCategories = ''
+  end     
+  
+  def level346
        Rho::Log.level = 4
   end
   
-  def level431
+  def level347
        Rho::Log.level = 3
   end
     
-  def level432
+  def level348
        Rho::Log.level = 2
   end
     
-  def level433
+  def level349
        Rho::Log.level = 1
   end
     
-  def level434
+  def level350
        Rho::Log.level = 0
   end
     
-  def level435
+  def level351
        Rho::Log.level = 100
   end
     
-  def level436
+  def level352
        Rho::Log.level = -1
   end
     
-  def level437
+  def level353
        Rho::Log.level = ''
   end
     
-  def level438
+  def level354
        Rho::Log.level = aaaa
-  end
+  end 
   
-  def memoryPeriod439
+  def memoryPeriod355
        Rho::Log.memoryPeriod = 5000
   end
   
-  def memoryPeriod440
+  def memoryPeriod356
        Rho::Log.memoryPeriod = 10000
   end
     
-  def memoryPeriod441
+  def memoryPeriod357
        Rho::Log.memoryPeriod = 0
   end
     
-  def memoryPeriod442
+  def memoryPeriod358
        Rho::Log.memoryPeriod = -10
   end
     
-  def memoryPeriod443
+  def memoryPeriod359
        Rho::Log.memoryPeriod = ''
   end
     
-  def memoryPeriod444
+  def memoryPeriod360
        Rho::Log.memoryPeriod = aaaa
   end
   
-  def netTrace445
-       Rho::Log.netTrace = true
+  def netTrace361
+      Rho::Log.netTrace = true
+ end
+     
+   def netTrace362
+      Rho::Log.netTrace = false
+   end
+   
+  def netTrace363
+      Rho::Log.netTrace = 1
   end
     
-  def netTrace446
-       Rho::Log.netTrace = false
+  def netTrace364
+       Rho::Log.netTrace = 0
   end
       
-  def netTrace447
+  def netTrace365
        Rho::Log.netTrace = ''
   end
       
-  def netTrace448
+  def netTrace366
        Rho::Log.netTrace = aaaa
   end
   
-  def skipPost449
+  def skipPost367
        Rho::Log.skipPost = true
   end
     
-  def skipPost450
+  def skipPost368
        Rho::Log.skipPost = false
   end
+  
+  def skipPost369
+       Rho::Log.skipPost = 1
+  end
+     
+  def skipPost370
+       Rho::Log.skipPost = 0
+  end
       
-  def skipPost451
+  def skipPost371
        Rho::Log.skipPost = ''
   end
       
-  def skipPost452
+  def skipPost372
        Rho::Log.skipPost = aaaa
   end
   
-  def cleanLogFile453
+  def cleanLogFile373
        Rho::Log.cleanLogFile
   end
   
-  def error454
+  def cleanLogFile374
+       Rho::Log.cleanLogFile(aaaa)
+  end 
+    
+  def error375
        Rho::Log.error('Error is found in File Transfer module','fileTransfer')
   end
   
-  def error455
+  def error376
        Rho::Log.error('Error is found in File Transfer module')
   end
     
-  def error456
+  def error377
        Rho::Log.error('fileTransfer')
   end
     
-  def error457
+  def error378
        Rho::Log.error()
   end
     
-  def error458
+  def error379
        Rho::Log.error('Error is found in File Transfer module','aaaa')
   end
   
-  def fatalError459
+  def fatalError380
        Rho::Log.fatalError('Fatal Error is found in File Transfer module','fileTransfer')
   end
   
-  def fatalError460
+  def fatalError381
        Rho::Log.fatalError('Fatal Error is found in File Transfer module')
   end
     
-  def fatalError461
+  def fatalError382
        Rho::Log.fatalError('fileTransfer')
   end
     
-  def fatalError462
+  def fatalError383
        Rho::Log.fatalError()
   end
     
-  def fatalError463
+  def fatalError384
        Rho::Log.fatalError('Fatal Error is found in File Transfer module','aaaa')
   end
   
-  def info464
+  def info385
        Rho::Log.info('Information regarding File Transfer module','fileTransfer')
   end
   
-  def info465
+  def info386
+       Rho::Log.level = 3
+       Rho::Log.info('Information regarding File Transfer module','fileTransfer')
+  end
+  
+  def info387
        Rho::Log.info('Information regarding File Transfer module')
   end
     
-  def info466
+  def info388
        Rho::Log.info('fileTransfer')
   end
     
-  def info467
+  def info389
        Rho::Log.info()
   end
     
-  def info468
+  def info390
        Rho::Log.info('Information regarding File Transfer module','aaaa')
   end
   
-  def readLogFile469
-    logFileContent = Rho::Log.readLogFile 16384
+  def readLogFile391
+    logFileContent = Rho::Log.readLogFile 1000
     Rho::WebView.execute_js("setFieldValue('#{logFileContent}')")
-
   end
   
-  def readLogFile470
+  def readLogFile392
+    logFileContent = Rho::Log.readLogFile 100.50
+    Rho::WebView.execute_js("setFieldValue('#{logFileContent}')")
+  end
+  
+  def readLogFile393
     logFileContent = Rho::Log.readLogFile 0
-        Rho::WebView.execute_js("setFieldValue('#{logFileContent}')")
+    Rho::WebView.execute_js("setFieldValue('#{logFileContent}')")
   end
     
-  def readLogFile471
+  def readLogFile394
     logFileContent = Rho::Log.readLogFile -100
-        Rho::WebView.execute_js("setFieldValue('#{logFileContent}')")
+    Rho::WebView.execute_js("setFieldValue('#{logFileContent}')")
   end
     
-  def readLogFile472
+  def readLogFile395
     logFileContent = Rho::Log.readLogFile
-        Rho::WebView.execute_js("setFieldValue('#{logFileContent}')")
+    Rho::WebView.execute_js("setFieldValue('#{logFileContent}')")
   end
     
-  def readLogFile473
+  def readLogFile396
     logFileContent = Rho::Log.readLogFile aaaa
-        Rho::WebView.execute_js("setFieldValue('#{logFileContent}')")
+    Rho::WebView.execute_js("setFieldValue('#{logFileContent}')")
   end
   
-  def sendLogFile474
-       Rho::Log.sendLogFile()
+  def sendLogFile397
+     Rho::Log.sendLogFile()
+  end
+    
+  def sendLogFile398
+     Rho::Log.sendLogFile()
   end
   
-  def sendLogFile475
-       Rho::Log.sendLogFile()
-  end
-    
-  def sendLogFile476
-       Rho::Log.sendLogFile()
+  def sendLogFile399
+    Rho::Log.sendLogFile()
   end
   
-  def showLog477
-       Rho::Log.showLog()
+  def sendLogFile400
+    Rho::Log.sendLogFile()
+  end
+    
+  def sendLogFile401
+    Rho::Log.sendLogFile()
   end
   
-  def trace478
-       Rho::Log.trace('Trace messages regarding File Transfer module','fileTransfer')
+  def sendLogFile402
+    Rho::Log.sendLogFile()
   end
   
-  def trace479
-       Rho::Log.trace('Trace messages regarding File Transfer module')
-  end
-    
-  def trace480
-       Rho::Log.trace('fileTransfer')
-  end
-    
-  def trace481
-       Rho::Log.trace()
-  end
-    
-  def trace482
-       Rho::Log.trace('Trace messages regarding File Transfer module','aaaa')
+  def showLog403
+    Rho::Log.showLog()
   end
   
-  def warning483
-       Rho::Log.warning('Warning messages regarding File Transfer module','fileTransfer')
+  def trace404
+    Rho::Log.trace('Trace messages regarding File Transfer module','fileTransfer')
   end
   
-  def warning484
-       Rho::Log.warning('Warning messages regarding File Transfer module')
+  def trace405
+    Rho::Log.trace('Trace messages regarding File Transfer module')
   end
     
-  def warning485
-       Rho::Log.warning('fileTransfer')
+  def trace406
+    Rho::Log.trace('fileTransfer')
   end
     
-  def warning486
-       Rho::Log.warning()
+  def trace407
+    Rho::Log.trace()
   end
     
-  def warning487
-       Rho::Log.warning('Warning messages regarding File Transfer module','aaaa')
+  def trace408
+    Rho::Log.trace('Trace messages regarding File Transfer module','aaaa')
   end
-      
+  
+  def warning409
+    Rho::Log.warning('Warning messages regarding File Transfer module','fileTransfer')
+  end
+  
+  def warning410
+    Rho::Log.warning('Warning messages regarding File Transfer module')
+  end
+    
+  def warning411
+    Rho::Log.warning('fileTransfer')
+  end
+    
+  def warning412
+    Rho::Log.warning()
+  end
+    
+  def warning413
+    Rho::Log.warning('Warning messages regarding File Transfer module','aaaa')
+  end
+   
   def testError
      
     Rho::Log.error("hi","Barcode")
