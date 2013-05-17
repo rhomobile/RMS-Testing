@@ -1,0 +1,17 @@
+<script language="JavaScript">
+        
+if (location.search =='?settings=true') {
+  window.location ='/app/Settings';
+}
+
+</script>
+
+<% 
+    webview = System::get_property('webview_framework')
+    is_webkit = (!webview.nil? and webview.start_with?('WEBKIT'))
+%>
+    
+Common API tests:
+<ul id="home" selected="true" title="Common API tests">
+
+</ul>

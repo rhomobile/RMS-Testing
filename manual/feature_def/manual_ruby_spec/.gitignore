@@ -1,0 +1,11 @@
+bin
+rholog.txt
+RhoLog.txt
+sim-public
+Thumbs.db
+rhosimulator/*
+.idea/
+.DS_Store
+rholog-*
+*.ncb
+extensions/*/ext/*/platform/*/build/
