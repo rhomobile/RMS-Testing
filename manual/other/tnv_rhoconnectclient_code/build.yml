@@ -1,0 +1,29 @@
+app_type: "rhoelements"
+name: "RhoconnectClientAPITest"
+version: 1.0
+vendor: "rhomobile"
+build: "debug"
+bbver: 6.0
+applog: "rholog.txt"
+iphone:
+  configuration: "Release"
+  sdk: "iphonesimulator6.0"
+  provisionprofile: 
+  codesignidentity: 
+  entitlements: 
+  BundleIdentifier: "com.rhomobile.newtest"
+  BundleURLScheme: "newtest"
+wp:
+  productid: "afa8e690-9076-0130-e87f-58946b66d410"
+symbian:
+  uid: "0xe21a9fe1"
+wm:
+  sdk: "Windows Mobile 6.5.3 Professional DTK (ARMV4I)"
+#sdk: "MC3000c50b (ARMV4I)"
+android:
+  version: "2.3.4"
+  capabilities: 
+extensions:
+  - json
+  - rhoconnect-client
+capabilities: 
