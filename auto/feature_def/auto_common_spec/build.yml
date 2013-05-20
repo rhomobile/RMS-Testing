@@ -1,28 +1,9 @@
-#sdk: "C:/DevelopmentTools/rhomobile/rhodes"
-
-sdk: ../../../../rhodes
-
-paths:
-  extensions:
-
 # Please use relative pathes
 
+#sdk: "../../../../rhodes"
+paths:
+  extensions:
   - ../../../../Motorola-Extensions/build/ci/extensions
-  - ../../../../Motorola-Extensions/lib/commonAPI
-  - ../../../../rhoconnect-client/ext/
-
-
-#  - C:/DevelopmentTools/rhomobile/rhodes/lib/extensions
-#  - C:/DevelopmentTools/rhomobile/Motorola-Extensions/extensions
-#  - C:/DevelopmentTools/rhomobile/Motorola-Extensions/lib/commonAPI
-#  - C:/DevelopmentTools/rhomobile/rhoconnect-client/ext
-#  - C:/DevelopmentTools/rhomobile/Motorola-Extensions/build/ci/extensions
-  - C:/DevelopmentTools/rhomobile/Motorola-Extensions/build/ci/extensions
-  - C:/Neon/git/Motorola-Extensions/build/ci/extensions
-  - B:/git/Motorola-Extensions/build/ci/extensions
-
-#  neon:
-#  - C:/Users/fpc843/workspace/fpc843_rhoelements_dev/NEON
 
 sdkversion: 3.3.2
 name: auto_common_spec
@@ -54,7 +35,7 @@ android:
 wm:
   #use_shared_runtime: yes
   #sdk: MC3000c50b (ARMV4I)
-  extensions: ["barcode", "Coreapi", "instrumentation"]
+  extensions: ["barcode", "instrumentation"]
 #capabilities:
 #- non_motorola_device
 
@@ -73,4 +54,4 @@ wm:
 #end DCC
 
 
-extensions: ["json", "genPropBag", 'rhoconnect-client']
+extensions: ["genPropBag"]

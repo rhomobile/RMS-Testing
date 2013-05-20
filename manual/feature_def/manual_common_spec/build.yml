@@ -14,8 +14,8 @@ iphone:
   provisionprofile:
   codesignidentity:
   entitlements:
-  BundleIdentifier: com.rhomobile.js-sas
-  BundleURLScheme: js-sas
+  BundleIdentifier: manual_common_spec
+  BundleURLScheme: manual_common_spec
 wp:
   productid: 'fa586990-6e21-0130-bf9e-3c075409010c'
 symbian:
