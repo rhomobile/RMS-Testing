@@ -187,7 +187,7 @@ setGetSystem[setGetSystem.length] = [["VT281-069","call deleteFolder"],
 ]
 
 getSystem[getSystem.length] = [["VT278-070","call getAllProperties()"],
-["System","getAllProperties","method","returnGetProperty","sync"]
+["System","getAllProperties","method","|returnGetProperty","sync"]
 ]
 
 getSystem[getSystem.length] = [["VT278-070","call getAllProperties()"],
@@ -581,4 +581,3 @@ setGetSystem[setGetSystem.length] = [["VT278-200","call setRegistry with setting
 setGetSystem[setGetSystem.length] = [["VT278-201","call setRegistry with persisten value as inalid ","false"],
 ["System","setRegistrySetting","method","{hive:'HKLM', type:'Binary', key:'Software', setting:'Rhoelement', value:'111111', persistent:'boo'}|returnGetProperty","sync"],
 ]
-
