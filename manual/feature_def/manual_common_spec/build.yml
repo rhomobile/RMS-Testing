@@ -23,6 +23,7 @@ symbian:
   uid: '0xeeceaf9f'
 android:
   version: 4.0.3
+  extensions: ["signature", "barcode"]
 
 paths:
   extensions:

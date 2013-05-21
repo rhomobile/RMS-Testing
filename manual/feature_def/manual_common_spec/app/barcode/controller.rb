@@ -1,6 +1,6 @@
 require 'rho/rhocontroller'
 
-class BarcodeRecognizerMotoController < Rho::RhoController
+class BarcodeController < Rho::RhoController
   @layout = :simplelayout
   
   def index
@@ -101,7 +101,7 @@ class BarcodeRecognizerMotoController < Rho::RhoController
       #$barcodes += [barcode] if status == 'ok'
       
       #WebView.refresh
-      WebView.execute_js("addBarcode('#{barcode}')")
+      WebView.executeJavascript("addBarcode('#{barcode}')")
       #TODO: call execute_js here to update list of the barcodes, Refresh is call navigate which is disable the scanner
   end
   
