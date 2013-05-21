@@ -34,7 +34,8 @@ class BarcodeController < Rho::RhoController
   end
 
   def take
-      #Barcode.stop
+      Barcode.disable
+	  #Barcode.stop
       scanner = @params['scanner']
       puts "take - using scanner: #{scanner}"
       #Barcode.take_barcode(url_for(:action => :take_callback), {:deviceName => scanner})
