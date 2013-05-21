@@ -4,3 +4,4 @@
 */*/*/*/*/*/*/generated/
 rhosimulator/
 .idea
+auto/feature_def/auto_common_spec/extensions/*/ext/platform/iphone/build/
