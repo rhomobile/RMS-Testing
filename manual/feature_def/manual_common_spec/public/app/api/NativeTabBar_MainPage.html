@@ -9,30 +9,79 @@
 
     <script type="text/javascript">
 
+        function tabbarCreate() 
+        {
+        
+            if (!Rho.NativeTabbar.isCreated())
+            {
+        
+                //Rho.NativeTabbar.create( [ {'label':'tab1', 'action':'/public/app/index.html', 'reload':true}, {'label':'tab2', 'action':'javascript:tabbarCallback2();'} ], {'hiddenTabs': true, 'createOnDemand' : true});
+                
+                Rho.NativeTabbar.create( [ 
+                    //{'label':'MainPage', 'action':'/app/HomeScreen/homeScreen', 'useCurrentViewForTab':true},
+                    {'label':'MainPage', 'action':'/public/app/api/NativeTabBar_MainPage.html', 'useCurrentViewForTab':true},
+                    {'label':'Page1', 'action':'/public/app/api/NativeTabBar_Page1.html'}, 
+                    {'label':'Page2', 'action':'/public/app/api/NativeTabBar_Page2.html', 'perishable':'true'} ], 
+                  {'hiddenTabs': true, 'createOnDemand' : true}, tabbarEventHandler );
+            }
+                          
+            Rho.Application.nativeMenu = [
+                { 'Home': 'javascript:goHome()'} , {'Exit': 'javascript:onExit0()' }, {'Quit': 'javascript:onQuit0()' }, {'My Test': 'javascript:page0Test()' }
+            ];
+
+            
+            Rho.NativeTabbar.switchTab(0);              
+        }
+
         function tabbarSwitch( nTab ) {
             Rho.NativeTabbar.switchTab(nTab);
         }
-
-        function tabbarPageRemove( nTab ) {
-            Rho.NativeTabbar.removeTab(nTab);
-        }
-
         function goHome( ) {
             Rho.NativeTabbar.switchTab(0);
         }
         
-        function onExit(){
+        function tabbarRemove() {
+        }
+
+        function tabbarCallback() {
+            Rho.Log.info("tabbarCallback", "JSTEST");
+        }
+        function tabbarCallback2() {
+            Rho.Log.info("tabbarCallback2", "JSTEST");
+        }
+
+        function tabbarEventHandler(params){
+        
+            Rho.Log.info("Event: " + params['tabEvent'], "JSTEST");
+            Rho.Log.info("NewIndex: " + params['newTabIndex'], "JSTEST");
+            Rho.Log.info("oldTabIndex: " + params['oldTabIndex'], "JSTEST");
+        }
+
+        function onExit0(){
             Rho.Application.minimize();
         }
+        function onQuit0(){
+           Rho.Application.quit();
+        }
+        
+        function page0Test(){
+            Rho.Log.info("page0Test", "JSTEST");
+        }
+
     </script>
 
+    <script type="text/javascript"> 
+      $(document).ready(function(){ 
+            tabbarCreate();            
+       }); 
+    </script>   
+
 </head>
-<body>
+<body">
 <h1>Main Page</h1>
 
-<a href="#" onclick="tabbarSwitch(1);">Switch to Page 1</a><br/>
-<a href="#" onclick="tabbarSwitch(2);">Switch to Page 2</a><br/>
-<a href="#" onclick="tabbarPageRemove(2);">Remove Page 2</a><br/>
+<a href="#" onclick="tabbarSwitch(1);">Switch to Tab 0</a><br/>
+<a href="#" onclick="tabbarSwitch(2);">Switch to Tab 1</a><br/>
 <a href="#" onclick="goHome();">Home</a><br/>
 
 </body>
