@@ -80,7 +80,7 @@ describe("Indicators", function() {
 				waitsFor(function()
 					{
 						return document.getElementById('indicatorOutput').innerHTML != "blank";
-					}, "Allowing 5 seconds for the second signal status to be received", 5000);		
+					}, "Allowing 5 seconds for the second signal status to be received", 5100);		
 				runs(function()
 				{
 					//  Now change the periodicity of the Timer notification to 2 seconds
@@ -181,10 +181,10 @@ describe("Indicators", function() {
 				return;
 			var batteryStatus = getIndicatorStatus('/app/IndicatorsTest/battery_status_sync', 'ignored', 'ignored', 'batteryLifePercent');
 			expect(batteryStatus).toBeGreaterThanZero();
-			var ipAddress = getIndicatorStatus('/app/IndicatorsTest/battery_status_sync', 'ignored', 'ignored', 'acLineStatus');
-			expect(ipAddress).toBe('true');
-			var macAddress = getIndicatorStatus('/app/IndicatorsTest/battery_status_sync', 'ignored', 'ignored', 'batteryLifeKnown');
-			expect(macAddress).toBe('true');
+			var acLineStatus = getIndicatorStatus('/app/IndicatorsTest/battery_status_sync', 'ignored', 'ignored', 'acLineStatus');
+			expect(acLineStatus).toBe('true');
+			var batteryLifeKnown = getIndicatorStatus('/app/IndicatorsTest/battery_status_sync', 'ignored', 'ignored', 'batteryLifeKnown');
+			expect(batteryLifeKnown).toBe('true');
 		});
 
 

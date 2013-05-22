@@ -93,7 +93,7 @@ class IndicatorsTestController < Rho::RhoController
 	batteryValue = Rho::Battery.batteryStatus({})
 	puts "next is Battery Value"
 	puts batteryValue
-	returnValue = batteryValue[@params['theReturnVal']]
+	returnValue = batteryValue[@params['theReturnVal']].to_s
 	puts "Return value is: " + returnValue
 	render :json => returnValue
 	return returnValue
