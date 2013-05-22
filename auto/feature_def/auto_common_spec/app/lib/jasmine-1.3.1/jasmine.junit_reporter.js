@@ -74,8 +74,9 @@
 
                 if (result.type == 'expect' && result.passed && !result.passed()) {
                     failures += 1;
-                    failure += '<failure type="' + result.type + '" message="' + trim(escapeInvalidXmlChars(result.message)) + '">';
-                    failure += escapeInvalidXmlChars(result.trace.stack || result.message);
+                    //# characters are deleted because they cause issues with Android Web Browser.
+                    failure += '<failure type="' + result.type + '" message="' + trim(escapeInvalidXmlChars(result.message)).replace('#', '') + '">';
+                    failure += escapeInvalidXmlChars(result.trace.stack || result.message).replace('#', '');
                     failure += "</failure>";
                 }
             }
@@ -170,7 +171,8 @@
   			{	// code for IE6, IE5
   				xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
   			}
-  			xmlhttp.open("GET",'http://localhost:8888/savetestresult.do?filename=' + filename + '&junitreport=' + text, false);
+  			var requestString = 'http://localhost:8888/savetestresult.do?filename=' + filename + '&junitreport=' + text;
+  			xmlhttp.open("GET", requestString, false);
 			xmlhttp.send();
         },
 
