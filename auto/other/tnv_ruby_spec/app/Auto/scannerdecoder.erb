@@ -18,13 +18,13 @@
 <td colspan="3"><div id='expectedRes'>Expected will come here</div></td>
 </tr>
 <tr>
-<td><input id="previous" type="button" onclick="runPreviousTest()" value="<<:Previous" disabled /></td>
-<td><input id="current" type="button" onclick="runSameTestAgain()" value="ReTest" disabled /></td>
-<td><input id="next" type="button" onclick="runNextTest()" value="Next:>>" disabled /></td>
+<td><input id="previous" type="button" onclick="runPreviousTest()" value="<<:Previous"/></td>
+<td><input id="current" type="button" onclick="runSameTestAgain()" value="ReTest"/></td>
+<td><input id="next" type="button" onclick="runNextTest()" value="Next:>>"/></td>
 </tr>
 <tr>
 <td colspan="2"><input id="testid" type="text" placeholder='Enter VT Id' /></td>
-<td colspan="2"><input id="go" type="button" onclick="goToTest()" value="GO" disabled />
+<td colspan="2"><input id="go" type="button" onclick="gotoSDVTID(document.getElementById('testid'))" value="GO" />
 </tr>
 </table>
 </div>

@@ -1,8 +1,6 @@
 paths:
-  extensions:
-    - D:\GIT\Motorola-Extensions\build\ci\extensions\
 app_type: "rhoelements"
-name: "automatic"
+name: "automatic_CE"
 capabilities:
   - gps
   - pim
@@ -61,8 +59,8 @@ wm:
     - openssl.so
     - openssl
     - ezcrypto
-    - instrumentation
-  sdk: "Windows Mobile 6.5.3 Professional DTK (ARMV4I)"
+  #sdk: "Windows Mobile 6.5.3 Professional DTK (ARMV4I)"
+  sdk: "MC3000c50b (ARMV4I)"
 win32:
   extensions:
     - digest
@@ -92,7 +90,6 @@ android:
     - audiocapture
     - json
     - mspec
-    - instrumentation
   capabilities:
     - network_state
     - sdcard
