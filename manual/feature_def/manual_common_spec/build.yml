@@ -1,5 +1,5 @@
 #sdk: "c:/projects/rhodes"
-#app_type: rhoelements
+app_type: rhoelements
 sdk:   ../../../../rhodes
 sdkversion: 3.5.0
 name: manual_common_spec
@@ -24,6 +24,8 @@ symbian:
 android:
   version: 4.0.3
   extensions: ["signature", "barcode"]
+wm:
+  extensions: ["barcode"]
 
 paths:
   extensions:
