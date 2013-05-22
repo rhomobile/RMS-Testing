@@ -1,8 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>JS SAS</title>
+    <title>Manual specs</title>
     <meta name="viewport" content="initial-scale=1.0, width=device-width"/>
+    <script type="text/javascript" src="/public/jquery/jquery-1.6.4.js"></script>
+    <script type="text/javascript" src="/public/jquery/jquery.json-2.3.js"></script>
+    <script type="text/javascript" src="/public/api/rhoapi-modules.js"></script>
+    <script type="text/javascript" src="/public/js/helpers.js"></script>
 </head>
 <body>
 <h1>JS SAS</h1>
@@ -14,8 +18,17 @@
     <li><a href="api/webview.html">WebView</a></li>
     <li><a href="api/js-api-crash.html">js-api-crash</a></li>
     <li><a href="api/signature.html">signature</a></li>
-    <li><a href="api/NativeTabBar_WM.html">WM/CE NativeTabBar</a></li>
-    
+    <li><a href="api/NativeTabBar_MainPage.html">WM/CE NativeTabBar</a></li>
+</ul>
+
+<div>[RUBY SAS]</div>
+<ul id="ruby">
+    <script type="text/javascript">
+        if (!isWindowsPhone8Platform()) {
+            $("#ruby").append('<li><a href="/app/Barcode">Barcode</a></li>');
+        }
+    </script>
+
 </ul>
 
 </body>
