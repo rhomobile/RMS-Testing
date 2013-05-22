@@ -9,9 +9,15 @@ class SystemController < Rho::RhoController
     #puts "#{Rho::WebView.nativeMenu}"	
     $sleeping = true unless $sleeping
 
-    System.set_screen_rotation_notification( url_for(:action => :screen_rotation_callback), "")
+    System.setScreenRotationNotification( url_for(:action => :screen_rotation_callback), "")
 	
     render :back => '/app'  	
+  end
+
+  def disable_sleep
+    $sleeping = !$sleeping
+    System.screenSleeping = $sleeping
+    render :action => :index
   end
 
   def screen_rotation_callback
@@ -19,19 +25,14 @@ class SystemController < Rho::RhoController
     WebView::refresh
   end
 
-  def disable_sleep
-    $sleeping = !$sleeping
-    System.set_sleeping($sleeping)
-    render :action => :index
-  end
 
   def enable_fullscreen
-    WebView.full_screen_mode(1)
+    WebView.fullScreen = true
     render :action => :index
   end
 
   def disable_fullscreen
-    WebView.full_screen_mode(0)
+    WebView.fullScreen = false
     render :action => :index
   end
   
@@ -39,13 +40,9 @@ class SystemController < Rho::RhoController
     System.exit
   end
 
-  def read_log
-    @log_text = Rho::RhoConfig.read_log(20000)
-    render :action => :show_log
-  end
-    
+
   def call_js
-    WebView.execute_js("test();")
+    WebView.executeJavascript("test();")
     #render :action => :call_js_result
     redirect :action => :call_js_result
   end  
@@ -55,29 +52,29 @@ class SystemController < Rho::RhoController
   end
 
   def set_cookie
-    WebView.set_cookie("http://127.0.0.1", "test_key_1=test_value_1")
-    WebView.set_cookie("http://127.0.0.1", "test_key_2=test_value_2")
+    WebView.setCookie("http://127.0.0.1", "test_key_1=test_value_1")
+    WebView.setCookie("http://127.0.0.1", "test_key_2=test_value_2")
     redirect :action => :show_cookie
   end
 
   def show_cookie
-    WebView.execute_js("show_cookie();")
+    WebView.executeJavascript("show_cookie();")
     redirect :action => :index
   end
 
   def start_music_app
-    System.run_app('com.android.music', nil)
+    System.runApplication('com.android.music', nil)
     redirect :action => :index
   end
 
   def get_start_test_app_ID
-    if System::get_property('platform') == 'ANDROID'
+    if System.platform == 'ANDROID'
         return 'com.rhomobile.store'
-    elsif System::get_property('platform') == 'APPLE'
+    elsif System.platform == 'APPLE'
         return 'store'
-    elsif System::get_property('platform') == 'Blackberry'
+    elsif System.platform == 'Blackberry'
         return 'store'
-    elsif System::get_property('platform') == 'WINDOWS_DESKTOP'
+    elsif System.platform == 'WINDOWS_DESKTOP'
         return 'rhomobile/store/store.exe'
     else
         return 'rhomobile store/store.exe'
@@ -87,17 +84,13 @@ class SystemController < Rho::RhoController
 
   def install_test_app
     url = 'http://localhost:42877/store-setup.exe'
-    System.app_install url
-    redirect :action => :index
-  end
-  
-  def start_test_app
-    System.run_app(get_start_test_app_ID, "security_token=123")    
+    System.applicationInstall url
     redirect :action => :index
   end
 
+
   def is_test_app_installed
-    installed = System.app_installed?(get_start_test_app_ID())
+    installed = System.isApplicationInstalled(get_start_test_app_ID())
     Alert.show_popup(installed ? "installed" : "not installed")
     redirect :action => :index
   end
@@ -108,13 +101,13 @@ class SystemController < Rho::RhoController
   end
 
   def is_music_app_installed
-    installed = System.app_installed?('com.android.music')
+    installed = System.isApplicationInstalled('com.android.music')
     Alert.show_popup(installed ? "installed" : "not installed")
     redirect :action => :index
   end
 
   def uninstall_music_app
-    System.app_uninstall('com.android.music')
+    System.applicationUninstall('com.android.music')
     redirect :action => :index
   end
 
@@ -124,14 +117,14 @@ class SystemController < Rho::RhoController
   end
 
   def is_skype_app_installed
-    installed = System.app_installed?('skype')
+    installed = System.isApplicationInstalled('skype')
     Alert.show_popup(installed ? "installed" : "not installed")
     redirect :action => :index
   end
 
   def install_apk
     url = 'https://rhohub-prod-ota.s3.amazonaws.com/129b1fd5930d4d40b906addd08d61058/simpleapp-rhodes_signed.apk'
-    System.app_install url
+    System.applicationInstall url
     redirect :action => :index
   end
 
@@ -166,12 +159,12 @@ class SystemController < Rho::RhoController
   end
 
   def set_badge_5
-      System.set_application_icon_badge(5)
+      System.applicationIconBadge = 5
       render :action => :index
   end
 
   def set_badge_0
-      System.set_application_icon_badge(0)
+      System.applicationIconBadge = 0
       render :action => :index
   end
 

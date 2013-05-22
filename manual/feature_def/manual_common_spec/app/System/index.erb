@@ -56,92 +56,70 @@
 	</h1>
 </div>
 <br/>
-is_moto_device : <%= System.get_property('is_motorola_device').to_s %><br/>
-platform : <%=System.get_property('platform') %> <br/>
-device : <%=System.get_property('device_name') %> <br/>
-webview_framework : <%=System.get_property('webview_framework') %> <br/>
-app_version : <%=Rho::RhoConfig.app_version %> <br/>
-has_network : <%=System.get_property('has_network') %> <br/>
-has_wifi_network : <%=System.get_property('has_wifi_network') %> <br/>
-has_cell_network : <%=System.get_property('has_cell_network') %> <br/>
-locale : <%=System.get_property('locale') %> <br/>
-country: <%=System.get_property('country') %> <br/>
-screen_width : <%=System.get_property('screen_width') %> <br/>
-screen_height : <%=System.get_property('screen_height') %> <br/>
-real_screen_width : <%=System.get_property('real_screen_width') %> <br/>
-real_screen_height : <%=System.get_property('real_screen_height') %> <br/>
-screen_orientation : <%=System.get_property('screen_orientation') %> <br/>
-<%= link_to 'enable full screen', url_for(:action => :enable_fullscreen) %> <br/>
-<%= link_to 'disable full screen', url_for(:action => :disable_fullscreen) %> <br/>
-ppi_x : <%=System.get_property('ppi_x') %> <br/>
-ppi_y : <%=System.get_property('ppi_y') %> <br/>
-has_camera : <%=System.get_property('has_camera') %> <br/>
-phone_number : <%=System.get_property('phone_number') %> <br/>
-<% if System::get_property('platform') == 'ANDROID' %>
-device owner name : <%=System.get_property('device_owner_name') %> <br/>
-device owner email : <%=System.get_property('device_owner_email') %> <br/>
-<% end %>  
-device_id : <%=System.get_property('device_id') %> <br/>
-phone_id : <%=System.get_property('phone_id') %> <br/>
-full_browser : <%=System.get_property('full_browser') %> <br/>
-device_name : <%=System.get_property('device_name') %> <br/>
-os_version : <%=System.get_property('os_version') %> <br/>
-rhodes_port : <%=System.get_property('rhodes_port') %> <br/>
-is_emulator : <%=System.get_property('is_emulator') %> <br/>
-has_calendar : <%=System.get_property('has_calendar') %> <br/>
-get_start_params : <%=System.get_start_params() %> <br/>
-has_touchscreen : <%=System.get_property('has_touchscreen') %> <br/>
-is_motorola_device : <%=System.get_property('is_motorola_device') %> <br/>
-
-<% if System::get_property('platform') == 'APPLE' %>
-<%= link_to 'set application icon badge to [5]', url_for(:action => :set_badge_5) %> <br/>
-<%= link_to 'remove application icon badge', url_for(:action => :set_badge_0) %> <br/>
-<% end %>      
-
-<% if $sleeping %>    
-    <%= link_to 'Disable sleep', url_for(:action => :disable_sleep) %> <br/>
-<%else%>
-    <%= link_to 'Enable sleep', url_for(:action => :disable_sleep) %> <br/>    
-<%end%>    
-<%= link_to 'Exit application', url_for(:action => :app_exit) %> <br/>
-
-<br/>WebView class:<br/>
-<a href="#" onclick="test();">JS Popup</a><br/>
-<a href="#" onclick="test_ajax();">AJAX Popup</a><br/>
-<a href="#" onclick="test_prompt();">JS Prompt</a><br/>
-<a href="http://www.htmliseasy.com/keeper/mystash/secretstuff.html">Autentification</a><br/>
-current_location : <%=WebView.current_location() %> <br/>
-<%=link_to "execute_js", :action => :call_js%><br/>
-<%=link_to "set_cookie", :action => :set_cookie%> - <%=link_to "show cookies", :action => :show_cookie%><br/>
-<br/>
-<%= link_to 'Read log', url_for(:action => :read_log) %> <br/>
-<%= link_to 'Install test app', url_for(:action => :install_test_app) %> <br/>
-<%= link_to 'Start Test app', url_for(:action => :start_test_app) %> <br/>
-<%= link_to 'Is Test app installed?', url_for(:action => :is_test_app_installed) %> <br/>
-<%= link_to 'Uninstall Test application', url_for(:action => :uninstall_test_app) %> <br/>
-
-<br/>
-<% if System::get_property('platform') == 'ANDROID' %>
-<%= link_to 'Install simple app', url_for(:action => :install_apk) %> <br/>
-<%= link_to 'Start Music app', url_for(:action => :start_music_app) %> <br/>
-<%= link_to 'Is Music app installed?', url_for(:action => :is_music_app_installed) %> <br/>
-<%= link_to 'Uninstall Music application', url_for(:action => :uninstall_music_app) %> <br/>
-<% if !defined?( RHODES_EMULATOR )  %>
-hosts:
 <ul>
-<% open('/etc/hosts') do |file| 
-  file.each_line() do |line| %>
-    <li><%=line%></li>
-  <% end
-end %>
-<% end %>      
+  <li>platform : <%=System.platform %> </li>
+  <li>hasCamera : <%=System.hasCamera %> </li>
+  <li>screenWidth : <%=System.screenWidth %> </li>
+  <li>screenHeight : <%=System.screenHeight %> </li>
+  <li>realScreenWidth : <%=System.realScreenWidth %> </li>
+  <li>realScreenHeight : <%=System.realScreenHeight %> </li>
+  <li>screenOrientation : <%=System.screenOrientation %> </li>
+  <li>ppiX : <%=System.ppiX %> </li>
+  <li>ppiY : <%=System.ppiY %> </li>
+
+  <% if System.platform == 'ANDROID' %>
+      <li>deviceOwnerName : <%=System.deviceOwnerName %> </li>
+      <li>deviceOwnerEmail : <%=System.deviceOwnerEmail %> </li>
+  <% end %>
+
+  <li>devicePushId : <%=System.devicePushId %> </li>
+  <li>phoneId : <%=System.phoneId %> </li>
+  <li>deviceName : <%=System.deviceName %> </li>
+  <li>osVersion : <%=System.osVersion %> </li>
+
+  <li>locale : <%=System.locale %> </li>
+
+  <li>country: <%=System.country %> </li>
+  <li>isEmulator : <%=System.isEmulator %> </li>
+  <li>isRhoSimulator : <%=System.isRhoSimulator %> </li>
+  <li>hasCalendar : <%=System.hasCalendar %> </li>
+  <li>isMotorolaDevice : <%= System.isMotorolaDevice %></li>
+
+  <li>oemInfo : <%=System.getProperty('oemInfo') %> </li>
+  <li>uuid : <%=System.getProperty('uuid') %> </li>
+
+  <% if System.platform == 'APPLE' %>
+      <%= link_to 'set application icon badge to [5]', url_for(:action => :set_badge_5) %> <br/>
+      <%= link_to 'remove application icon badge', url_for(:action => :set_badge_0) %> <br/>
+  <% end %>
+
+  <li>httpProxyURI : <%=System.httpProxyURI %> </li>
+
+  <% if System.platform == 'WINDOWS' %>
+      <li>lockWindowSize : <%=System.lockWindowSize %> </li>
+      <li>keyboardState : <%=System.keyboardState %> </li>
+  <% end %>
+
+  <li>localServerPort : <%=System.localServerPort %> </li>
+  <li>freeServerPort : <%=System.freeServerPort %> </li>
+
+  <% if System.platform == 'APPLE' || System.platform == 'Android' %>
+      <li>screenAutoRotate : <%=System.screenAutoRotate %> </li>
+  <% end %>
+
+  <li>hasTouchscreen : <%=System.hasTouchscreen %> </li>
+
+  <li>webviewFramework : <%=System.webviewFramework %> </li>
+
+  <% if $sleeping %>
+      <li><%= link_to 'Disable sleep', url_for(:action => :disable_sleep) %> </li>
+  <%else%>
+      <li><%= link_to 'Enable sleep', url_for(:action => :disable_sleep) %> </li>
+  <%end%>
+
+  <li><%= link_to 'Install test app', url_for(:action => :install_test_app) %> </li>
+  <li><%= link_to 'Is Test app installed?', url_for(:action => :is_test_app_installed) %> </li>
+  <li><%= link_to 'Uninstall Test application', url_for(:action => :uninstall_test_app) %> </li>
+  <li>getStartParams : <%=System.getStartParams() %> </li>
+  <li><%= link_to 'Exit application', url_for(:action => :app_exit) %> </li>
 </ul>
-<% end %>          
-<% if System::get_property('platform') == 'APPLE' %>
-<%= link_to 'Is Skype app installed?', url_for(:action => :is_skype_app_installed) %> <br/>
-<%= link_to 'Start Skype app', url_for(:action => :start_skype_app) %> <br/>
-<br/>
-<%= link_to 'Make own file in application root folder', url_for(:action => :make_own_file) %> <br/>
-<%= link_to 'Check own file in application root folder', url_for(:action => :show_own_file) %> <br/>
-<% end %>      
-<br/>
