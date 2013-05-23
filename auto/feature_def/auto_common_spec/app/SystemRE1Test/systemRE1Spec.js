@@ -24,6 +24,11 @@ describe("System", function() {
             expect(actual["osVersion"]).isNotEmptyString();
         });
 
+        it("Test get  properties ", function () {
+            Rho.System.setProperties({applicationIconBadge: "5"});
+            expect(Rho.System.applicationIconBadge).toEqual(5);
+        });
+
 
 	    it("Test platform property", function () {
 	        expect(Rho.System.platform).isNotEmptyString();
