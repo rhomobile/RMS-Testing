@@ -1,4 +1,5 @@
 describe("<ORM module specs>", function() {
+    var db = null;
 
     var cleanVars = function(object) {
         var vars = object.vars();
@@ -14,8 +15,13 @@ describe("<ORM module specs>", function() {
     };
 
     beforeEach(function(){
-        Rho.ORM.clear();
+        db = new Rho.Database.SQLite3(Rho.Application.databaseFilePath('local'), 'local');
     });
+
+    afterEach(function(){
+        db.close();
+        db = null;
+    })
 
 
     // Rho.ORM.clear: function() {
