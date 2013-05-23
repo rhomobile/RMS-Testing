@@ -2,7 +2,29 @@ describe("System", function() {
 	describe("<System Module Specs>", function () {
 
 	    /* System property specs */
-	
+
+        it("Test get property ", function () {
+            expect(Rho.System.getProperty("platform")).toEqual(Rho.System.platform);
+        });
+
+        it("Test set property", function () {
+            expect(Rho.System.setProperty("applicationIconBadge", "5"));
+            expect(Rho.System.getProperty("applicationIconBadge")).toEqual("5");
+        });
+
+        it("Test get properties ", function () {
+            var actual = Rho.System.getProperties(["platform", "osVersion"]);
+            expect(actual["platform"]).isNotEmptyString();
+            expect(actual["osVersion"]).isNotEmptyString();
+        });
+
+        it("Test get all properties ", function () {
+            var actual = Rho.System.getAllProperties();
+            expect(actual["platform"]).isNotEmptyString();
+            expect(actual["osVersion"]).isNotEmptyString();
+        });
+
+
 	    it("Test platform property", function () {
 	        expect(Rho.System.platform).isNotEmptyString();
 	    });
@@ -63,7 +85,6 @@ describe("System", function() {
         it("Test isRhoSimulator property", function () {
             expect(Rho.System.isRhoSimulator).isBoolean;
         });
-
 
         it("Test hasCalendar property", function () {
 	        expect(Rho.System.hasCalendar).isBoolean();
