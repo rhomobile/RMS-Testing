@@ -1,11 +1,8 @@
 # Please use relative pathes
 
-sdk: "../../../../rhodes"
 paths:
   extensions:
   - ../../../../Motorola-Extensions/build/ci/extensions
-  - ../../../../Motorola-Extensions/lib/commonAPI
-  - ../../../../rhoconnect-client/ext
 
 sdkversion: 3.3.2
 name: auto_common_spec
