@@ -28,8 +28,6 @@
       jasmineEnv.addReporter(htmlReporter);
       jasmineEnv.addReporter(new jasmine.JUnitXmlReporter('.\\', true, true));
 
-      jasmineEnv.addReporter(htmlReporter);
-
       jasmineEnv.specFilter = function(spec) {
         return htmlReporter.specFilter(spec);
       };
