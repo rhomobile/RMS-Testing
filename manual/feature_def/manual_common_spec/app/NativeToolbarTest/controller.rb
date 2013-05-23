@@ -4,7 +4,7 @@ require 'rho/rhotoolbar'
 class NativeToolbarTestController < Rho::RhoController
 
   def index
-    render :back => '/app'
+    render :back => '/public/app/index.html'
   end
 
   def save_location
@@ -58,12 +58,12 @@ def set_toolbar
   end
 
   def show_main_page
-    WebView.navigate '/app'
+    WebView.navigate '/public/app/index.html'
   end
 
   def callback
     puts "+++--- callback"
-    WebView.navigate '/app'
+    WebView.navigate '/public/app/index.html'
   end
 
   def nop
