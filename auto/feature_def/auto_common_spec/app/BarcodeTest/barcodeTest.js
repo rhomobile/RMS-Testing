@@ -376,7 +376,7 @@ testCases = [
 		propertyRW		: 	"RW",
 		scannerTypes	:	"",
 		excludedDevices	:	"",
-		excludedOS		:	"",
+		excludedOS		:	"Android",
 		values			:	["0", "2000", "4000"]
 	},
 	{
@@ -394,7 +394,7 @@ testCases = [
 		propertyRW		: 	"RW",
 		scannerTypes	:	"",
 		excludedDevices	:	"",
-		excludedOS		:	"",
+		excludedOS		:	"Android",
 		values			:	["\\myInvalidFile.wav", "", "\\myInvalidDirectory\\myInvalidFile.wav"]
 	},
 	{
@@ -1577,9 +1577,7 @@ testCases = [
 		excludedOS		:	"",
 		values			:	["true", "false"]
 	},
-]
-
-
+];
 
 function setBarcodeProperty(propertyName, propertyValue)
 {

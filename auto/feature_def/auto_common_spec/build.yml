@@ -1,9 +1,11 @@
 # Please use relative pathes
 
-#sdk: "../../../../rhodes"
+sdk: "../../../../rhodes"
 paths:
   extensions:
   - ../../../../Motorola-Extensions/build/ci/extensions
+  - ../../../../Motorola-Extensions/lib/commonAPI
+  - ../../../../rhoconnect-client/ext
 
 sdkversion: 3.3.2
 name: auto_common_spec
@@ -22,36 +24,21 @@ iphone:
   entitlements:
   BundleIdentifier: com.rhomobile.apigeneratorspec
   BundleURLScheme: apigeneratorspec
-  extensions: ["barcode",  "genCallbackTests"]
+  extensions: ["barcode",  "genCallbackTests", "rhoconnect-client"]
 wp:
   productid: 'b6479381-42a8-0130-78de-3caec51bd50e'
 symbian:
   uid: '0xe1a1ef92'
 android:
   version: 2.1
-  extensions: ["barcode", "screenorientation", "Coreapi", "instrumentation"]
+  extensions: ["barcode", "screenorientation", "Coreapi", "instrumentation", "rhoconnect-client"]
   capabilities:
   - native_browser
 wm:
   #use_shared_runtime: yes
   #sdk: MC3000c50b (ARMV4I)
-  extensions: ["barcode", "instrumentation"]
+  extensions: ["barcode", "instrumentation", "rhoconnect-client"]
 #capabilities:
 #- non_motorola_device
-
-
-#BK
-#paths:
-#  extensions:
-#    - C:/rhomobile/Motorola-Extensions/lib/commonAPI
-#    - C:/rhomobile/Motorola-Extensions/neon/R2D1/RhoElementsOneExtension/extensions.
-#    - ../../../extensions
-#  neon:
-#  - C:/rhomobile/Motorola-Extensions/neon
-#sdk: "C:/rhomobile/rhodes"
-# DCC - This path MUST be removed prior to check in
-#  - C:/Neon/git/Motorola-Extensions/lib/commonAPI
-#end DCC
-
 
 extensions: ["genPropBag"]

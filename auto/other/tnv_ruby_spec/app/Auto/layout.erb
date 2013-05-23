@@ -76,32 +76,34 @@
 		<script src="/public/spec/scannerManualSpec.js" type="text/javascript"></script>
 	<% else %>
 		<!-- include Params files here...-->
-		<script src="http://192.168.6.27/jasmine/native/params/systemParams.js" type="text/javascript"></script>
+		<script src="/public/params/systemParams.js" type="text/javascript"></script>
 		<% if $module == 'decodersetproperty' %>
-		<script src="http://192.168.6.27/jasmine/native/params/scannerManualParams.js" type="text/javascript"></script>
+		<script src="/public/params/scannerManualParams.js" type="text/javascript"></script>
 		<% elsif $module == 'decodersetproperties' %>
-		<script src="http://192.168.6.27/jasmine/native/params/decodersetPropertiesParams.js" type="text/javascript"></script>
+		<script src="/public/params/decodersetPropertiesParams.js" type="text/javascript"></script>
 		<% elsif $module == 'decoderdirect' %>
-		<script src="http://192.168.6.27/jasmine/native/params/decoderDirectParams.js" type="text/javascript"></script>
+		<script src="/public/params/decoderDirectParams.js" type="text/javascript"></script>
 		<% elsif $module == 'decoderenable' %>
-		<script src="http://192.168.6.27/jasmine/native/params/decoderEnableParams.js" type="text/javascript"></script>
+		<script src="/public/params/decoderEnableParams.js" type="text/javascript"></script>
 		<%end%>
 
 		<% if $module == 'scannersetproperty' %>
-		<script src="http://192.168.6.27/jasmine/native/params/scannerParams.js" type="text/javascript"></script>
+		<script src="/public/params/scannerParams.js" type="text/javascript"></script>
 		<% elsif $module == 'scannersetproperties' %>
-		<script src="http://192.168.6.27/jasmine/native/params/scannerParamsSetProperties.js" type="text/javascript"></script>
+		<script src="/public/params/scannerParamsSetProperties.js" type="text/javascript"></script>
 		<% elsif $module == 'scannerdirect' %>
-		<script src="http://192.168.6.27/jasmine/native/params/scannerParamsDirectly.js" type="text/javascript"></script>
+		<script src="/public/params/scannerParamsDirectly.js" type="text/javascript"></script>
 		<% elsif $module == 'scannerenable' %>
-		<script src="http://192.168.6.27/jasmine/native/params/scannerParamsSetEnable.js" type="text/javascript"></script>
+		<script src="/public/params/scannerParamsSetEnable.js" type="text/javascript"></script>
+		<% elsif $module == 'database' %>
+    <script src="/public/params/databaseParams.js" type="text/javascript"></script>
 		<%end%>
-<script src="http://192.168.6.27/jasmine/native/params/databaseParams.js" type="text/javascript"></script>
+
 		<!-- include spec files here...-->
-		<script src="http://192.168.6.27/jasmine/native/spec/commonSpec.js" type="text/javascript"></script>
-		<script src="http://192.168.6.27/jasmine/native/spec/scannerManualSpec.js" type="text/javascript"></script>
-		<script src="http://192.168.6.27/jasmine/native/spec/systemSpec.js" type="text/javascript"></script>
-		<script src="http://192.168.6.27/jasmine/native/spec/databaseSpec.js" type="text/javascript"></script>
+		<script src="/public/spec/commonSpec.js" type="text/javascript"></script>
+		<script src="/public/spec/scannerManualSpec.js" type="text/javascript"></script>
+		<script src="/public/spec/systemSpec.js" type="text/javascript"></script>
+		<script src="/public/spec/databaseSpec.js" type="text/javascript"></script>
 
 	<%end%>
 

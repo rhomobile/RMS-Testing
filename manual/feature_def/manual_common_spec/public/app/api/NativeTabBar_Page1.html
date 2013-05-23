@@ -9,6 +9,13 @@
 
     <script type="text/javascript">
 
+        function createMenu()
+        {
+            Rho.Application.nativeMenu = [
+                { 'Home': 'javascript:goHome()'} , {'Exit': 'javascript:onExit()' }, {'Quit': 'javascript:onQuit()' }, {'My Test': 'javascript:page1Test()' }
+            ];
+        }
+        
         function tabbarSwitch( nTab ) {
             Rho.NativeTabbar.switchTab(nTab);
         }
@@ -20,8 +27,21 @@
         function onExit(){
             Rho.Application.minimize();
         }
-
+        function onQuit(){
+           Rho.Application.quit();
+        }
+        
+        function page1Test(){
+            Rho.Log.info("page1Test", "JSTEST");
+        }
+        
     </script>
+
+    <script type="text/javascript"> 
+      $(document).ready(function(){ 
+            createMenu();            
+       }); 
+    </script>   
 
 </head>
 <body>
