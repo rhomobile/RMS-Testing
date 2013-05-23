@@ -1,13 +1,12 @@
 describe("System", function() {
-	describe("System Module Specs>", function () {
+	describe("<System Module Specs>", function () {
 
 	    /* System property specs */
 	
 	    it("Test platform property", function () {
 	        expect(Rho.System.platform).isNotEmptyString();
 	    });
-	
-	
+
 	    it("Test hasCamera property", function () {
 	        expect(typeof Rho.System.hasCamera).toEqual('boolean');
 	    });
@@ -30,6 +29,7 @@ describe("System", function() {
 	
 	    it("Test screen orientation property", function () {
 	        expect(Rho.System.screenOrientation).isNotEmptyString();
+            expect(["portrait", "landscape"].indexOf(Rho.System.screenOrientation)).toBeGreaterThan(-1)
 	    });
 	
 	    it("Test ppiX property", function () {
@@ -56,11 +56,16 @@ describe("System", function() {
 	        expect(Rho.System.country).isNotEmptyString();
 	    });
 	
-	    it("Test isSimulator property", function () {
+	    it("Test isEmulator property", function () {
 	        expect(Rho.System.isEmulator).isBoolean;
 	    });
-	
-	    it("Test hasCalendar property", function () {
+
+        it("Test isRhoSimulator property", function () {
+            expect(Rho.System.isRhoSimulator).isBoolean;
+        });
+
+
+        it("Test hasCalendar property", function () {
 	        expect(Rho.System.hasCalendar).isBoolean();
 	    });
 	
@@ -76,15 +81,11 @@ describe("System", function() {
 	        expect(Rho.System.freeServerPort).isNumberGreaterThenZero();
 	    });
 	
-	    it("Test screenAutoRotate property", function () {
-	        expect(Rho.System.screenAutoRotate).toEqual(true);
-	    });
-	
 	    it("Test hasTouchscreen property", function () {
 	        expect(Rho.System.hasTouchscreen).toEqual(true);
 	    });
 	
-	    it("Test securityTokenNotPased property", function () {
+	    xit("Test securityTokenNotPased property", function () {
 	        expect(Rho.System.securityTokenNotPassed).isBoolean();
 	    });
 	
@@ -171,12 +172,20 @@ describe("System", function() {
 	        });
 	
 	        it("Test screenAutoRotate property", function () {
-	            Rho.System.screenSleeping = true;
-	            expect(Rho.System.screenSleeping).toEqual(true);
+	            Rho.System.screenAutoRotate = true;
+	            expect(Rho.System.screenAutoRotate).toEqual(true);
 	
-	            Rho.System.screenSleeping = false;
-	            expect(Rho.System.screenSleeping).toEqual(false);
+	            Rho.System.screenAutoRotate = false;
+	            expect(Rho.System.screenAutoRotate).toEqual(false);
 	        });
+
+            it("Test screenSleeping property", function () {
+                Rho.System.screenSleeping = true;
+                expect(Rho.System.screenSleeping).toEqual(true);
+
+                Rho.System.screenSleeping = false;
+                expect(Rho.System.screenSleeping).toEqual(false);
+            });
 	    }
 	
 	    if (isWindowsMobileOrAndroidPlatform()) {

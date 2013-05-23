@@ -1,9 +1,11 @@
 # Please use relative pathes
 
-#sdk: "../../../../rhodes"
+sdk: "../../../../rhodes"
 paths:
   extensions:
   - ../../../../Motorola-Extensions/build/ci/extensions
+  - ../../../../Motorola-Extensions/lib/commonAPI
+  - ../../../../rhoconnect-client/ext
 
 sdkversion: 3.3.2
 name: auto_common_spec
@@ -22,7 +24,7 @@ iphone:
   entitlements:
   BundleIdentifier: com.rhomobile.apigeneratorspec
   BundleURLScheme: apigeneratorspec
-  extensions: ["barcode",  "genCallbackTests"]
+  extensions: ["barcode",  "genCallbackTests", "rhoconnect-client"]
 wp:
   productid: 'b6479381-42a8-0130-78de-3caec51bd50e'
 symbian:
