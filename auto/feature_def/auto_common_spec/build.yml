@@ -21,7 +21,7 @@ iphone:
   entitlements:
   BundleIdentifier: com.rhomobile.apigeneratorspec
   BundleURLScheme: apigeneratorspec
-  extensions: ["barcode",  "genCallbackTests", "rhoconnect-client"]
+  extensions: ["barcode",  "genCallbackTests", "rhoconnect-client", "appEvents", "indicators"]
 wp:
   productid: 'b6479381-42a8-0130-78de-3caec51bd50e'
 symbian:

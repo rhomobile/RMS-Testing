@@ -12,7 +12,7 @@ describe("Indicators", function() {
 		
 	
 		afterEach(function() {
-			getIndicatorStatus('/app/IndicatorsTest/deregister_signal_callback', 'ignored', 'ignored', 'ignored');
+			getIndicatorStatus('/app/IndicatorsTest/deregister_battery_callback', 'ignored', 'ignored', 'ignored');
 		});
 
 		var deviceType = getDeviceType();
