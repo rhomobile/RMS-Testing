@@ -732,6 +732,31 @@ end
       WebView.execute_js("returnGetProperty('#{data}')")
     end
     
+    def returnGetPropertyCallback(options = {})
+      puts "options Is #{options}"
+      puts "Params Is #{@params}"
+      if(options.nil? or options.empty?)
+        calltype = "Async Call"
+        puts "Async Call. Data Inside Body Of Params"
+        puts "#{@params}"
+        options = @params
+      end
+      
+      puts "Get Data #{options}"
+      data = ''
+      if options.kind_of?(Hash)
+        options.each do |thing|
+          data = data.to_s() + "<br>" + thing.map{|k,v| "#{k}=#{v}"}.join('<br>') 
+        end
+      else
+        data = options
+      end
+      puts data
+      
+      puts "Out Put #{data}"
+      WebView.execute_js("returnGetPropertyCallback('#{data}')")
+    end
+    
     def drawPoints
       Automate.drawline 500,100,500,500
     end
