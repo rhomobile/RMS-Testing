@@ -12,15 +12,24 @@ class SensorsTestController < Rho::RhoController
   
   def myrunAccelerometer       
    puts "myrunAccelerometer params: #{@params}"
-   @x = @params['x']
-   @y = @params['y']             
-   @z = @params['z']             
+   @x = @params['accelerometer_x']
+   @y = @params['accelerometer_y']             
+   @z = @params['accelerometer_z']             
   end   
   
   def runAccelerometer
-	Rho::Sensors.watchAccelerometer(200, url_for(:action => :myrunAccelerometer))
+	@accelerometer_sensor = Rho::Sensor.makeSensorByType(Rho::Sensor::SENSOR_TYPE_ACCELEROMETER)
+    if @accelerometer_sensor != nil
+        @accelerometer_sensor.minimumGap = 500
+        @accelerometer_sensor.start(url_for(:action => :myrunAccelerometer))
+    else
+       puts "Warning: This device does not have Accelerometer sensor !"
+    end 
+	
 	sleep 10
-	Rho::Sensors.stopAccelerometer
+	if @accelerometer_sensor != nil
+        @accelerometer_sensor.stop
+    end 
 	if @x != 0 && @y != 0 && @z != 0
 		result = "true"
 	else
@@ -36,15 +45,24 @@ class SensorsTestController < Rho::RhoController
   
   def myrunTiltAngle       
    puts "myrunTiltAngle params: #{@params}"
-   @x = @params['x']
-   @y = @params['y']             
-   @z = @params['z']             
+   @x = @params['tiltangle_x']
+   @y = @params['tiltangle_y']             
+   @z = @params['tiltangle_z']             
   end   
   
   def runTiltAngle
-	Rho::Sensors.watchTiltAngle(200, url_for(:action => :myrunTiltAngle))
+	@tiltangle_sensor = Rho::Sensor.makeSensorByType(Rho::Sensor::SENSOR_TYPE_TILT_ANGLE)
+    if @tiltangle_sensor != nil
+        @tiltangle_sensor.minimumGap = 500
+        @tiltangle_sensor.start(url_for(:action => :myrunTiltAngle))
+    else
+       puts "Warning: This device does not have Tilt Angle sensor !"
+    end 
+	
 	sleep 10
-	Rho::Sensors.stopTiltAngle
+	if @tiltangle_sensor != nil
+        @tiltangle_sensor.stop
+    end 
 	if @x != 0 && @y != 0 && @z != 0
 		result = "true"
 	else
@@ -60,13 +78,22 @@ class SensorsTestController < Rho::RhoController
   
   def myrunDeviceOrientation       
    puts "myrunDeviceOrientation params: #{@params}"
-   @x = @params['value']             
+   @x = @params['deviceorientation_value']             
   end   
   
   def runDeviceOrientation
-	Rho::Sensors.watchDeviceOrientation(200, url_for(:action => :myrunDeviceOrientation))
+	@deviceOrientation_sensor = Rho::Sensor.makeSensorByType(Rho::Sensor::SENSOR_TYPE_DEVICE_ORIENTATION)
+    if @deviceOrientation_sensor != nil
+        @deviceOrientation_sensor.minimumGap = 500
+        @deviceOrientation_sensor.start(url_for(:action => :myrunDeviceOrientation))
+    else
+       puts "Warning: This device does not have Device Orientation sensor !"
+    end 
+	
 	sleep 10
-	Rho::Sensors.stopDeviceOrientation
+	if @deviceOrientation_sensor != nil
+        @deviceOrientation_sensor.stop
+    end
 	if @x != 0 
 		result = "true"
 	else
@@ -82,13 +109,22 @@ class SensorsTestController < Rho::RhoController
   
  def myrunMotion       
    puts "myrunMotion params: #{@params}"
-   x = @params['value']             
+   x = @params['motion_value']             
   end   
   
   def runMotion
-	Rho::Sensors.watchMotion(200, url_for(:action => :myrunMotion))
+	@motion_sensor = Rho::Sensor.makeSensorByType(Rho::Sensor::SENSOR_TYPE_MOTION)
+    if @motion_sensor != nil
+        @motion_sensor.minimumGap = 500
+        @motion_sensor.start(url_for(:action => :myrunMotion))
+    else
+       puts "Warning: This device does not have Motion sensor !"
+    end 
+	
 	sleep 10
-	Rho::Sensors.stopMotion
+	if @motion_sensor != nil
+        @motion_sensor.stop
+    end
 	if @x != 0 
 		result = "true"
 	else
@@ -104,13 +140,22 @@ class SensorsTestController < Rho::RhoController
   
   def myruneCompass       
    puts "myruneCompass params: #{@params}"
-   @x = @params['value']              
+   @x = @params['ecompass_value']              
   end   
   
   def runeCompass
-	Rho::Sensors.watchECompass(200, url_for(:action => :myruneCompass))
+	@ecompass_sensor = Rho::Sensor.makeSensorByType(Rho::Sensor::SENSOR_TYPE_ECOMPASS)
+    if @ecompass_sensor != nil
+        @ecompass_sensor.minimumGap = 500
+        @ecompass_sensor.start(url_for(:action => :myruneCompass))
+    else
+       puts "Warning: This device does not have eCompass sensor !"
+    end 
+	
 	sleep 10
-	Rho::Sensors.stopECompass
+	if @ecompass_sensor != nil
+        @ecompass_sensor.stop
+    end
 	if @x != 0
 		result = "true"
 	else
@@ -126,15 +171,24 @@ class SensorsTestController < Rho::RhoController
   
   def myrunMagnetometer       
    puts "myrunMagnetometer params: #{@params}"
-   @x = @params['x']
-   @y = @params['y']             
-   @z = @params['z']             
+   @x = @params['magnetometer_x']
+   @y = @params['magnetometer_y']             
+   @z = @params['magnetometer_z']             
   end   
   
   def runMagnetometer
-	Rho::Sensors.watchMagnetometer(200, url_for(:action => :myrunMagnetometer))
+	@magnetometer_sensor = Rho::Sensor.makeSensorByType(Rho::Sensor::SENSOR_TYPE_MAGNETOMETER)
+    if @magnetometer_sensor != nil
+        @magnetometer_sensor.minimumGap = 500
+        @magnetometer_sensor.start(url_for(:action => :myrunMagnetometer))
+    else
+       puts "Warning: This device does not have magnetometer sensor !"
+    end 
+	
 	sleep 10
-	Rho::Sensors.stopMagnetometer
+	if @magnetometer_sensor != nil
+        @magnetometer_sensor.stop
+    end
     if @x != 0 && @y != 0 && @z != 0
 		result = "true"
 	else
@@ -150,15 +204,24 @@ class SensorsTestController < Rho::RhoController
   
   def myrunGyroscope       
    puts "myrunGyroscope params: #{@params}"
-   @x = @params['x']
-   @y = @params['y']             
-   @z = @params['z']             
+   @x = @params['gyroscope_x']
+   @y = @params['gyroscope_y']             
+   @z = @params['gyroscope_z']             
   end   
   
   def runGyroscope
-	Rho::Sensors.watchGyroscope(200, url_for(:action => :myrunGyroscope))
+	@gyroscope_sensor = Rho::Sensor.makeSensorByType(Rho::Sensor::SENSOR_TYPE_GYROSCOPE)
+    if @gyroscope_sensor != nil
+        @gyroscope_sensor.minimumGap = 500
+        @gyroscope_sensor.start(url_for(:action => :myrunGyroscope))
+    else
+       puts "Warning: This device does not have gyroscope sensor !"
+    end 
+	
 	sleep 10
-	Rho::Sensors.stopGyroscope
+	if @gyroscope_sensor != nil
+        @gyroscope_sensor.stop
+    end
     if @x != 0 && @y != 0 && @z != 0
 		result = "true"
 	else
@@ -174,13 +237,22 @@ class SensorsTestController < Rho::RhoController
   
   def myrunAmbientLight       
    puts "myrunAmbientLight params: #{@params}"
-  @x = @params['value']             
+  @x = @params['ambientlight_value']             
   end   
   
   def runAmbientLight
-	Rho::Sensors.watchAmbientLight(200, url_for(:action => :myrunAmbientLight))
+	@ambientlight_sensor = Rho::Sensor.makeSensorByType(Rho::Sensor::SENSOR_TYPE_AMBIENT_LIGHT)
+    if @ambientlight_sensor != nil
+        @ambientlight_sensor.minimumGap = 500
+        @ambientlight_sensor.start(url_for(:action => :myrunAmbientLight))
+    else
+       puts "Warning: This device does not have ambient light sensor !"
+    end 
+	
 	sleep 10
-	Rho::Sensors.stopAmbientLight
+	if @ambientlight_sensor != nil
+        @ambientlight_sensor.stop
+    end
 	if @x != 0 
 		result = "true"
 	else
@@ -196,13 +268,22 @@ class SensorsTestController < Rho::RhoController
   
   def myrunProximity       
    puts "myrunProximity params: #{@params}"
-   @x = @params['value']              
+   @x = @params['proximity_value']              
   end   
   
   def runProximity
-	Rho::Sensors.watchProximity(200, url_for(:action => :myrunProximity))
+	@proximity_sensor = Rho::Sensor.makeSensorByType(Rho::Sensor::SENSOR_TYPE_PROXIMITY)
+    if @proximity_sensor != nil
+        @proximity_sensor.minimumGap = 500
+        @proximity_sensor.start(url_for(:action => :myrunProximity))
+    else
+       puts "Warning: This device does not have proximity sensor !"
+    end 
+	
 	sleep 10
-	Rho::Sensors.stopProximity
+	if @proximity_sensor != nil
+        @proximity_sensor.stop
+    end
 	if @x != 0 
 		result = "true"
 	else
@@ -218,13 +299,22 @@ class SensorsTestController < Rho::RhoController
   
   def myrunProximityLongRange       
    puts "myrunProximityLongRange params: #{@params}"
-   @x = @params['value']   
+   @x = @params['proximitylongrange_value']   
   end   
   
   def runProximityLongRange
-	Rho::Sensors.watchProximityLongRange(200, url_for(:action => :myrunProximityLongRange))
+	@proximitylongrange_sensor = Rho::Sensor.makeSensorByType(Rho::Sensor::SENSOR_TYPE_PROXIMITY_LONG_RANGE)
+    if @proximitylongrange_sensor != nil
+        @proximitylongrange_sensor.minimumGap = 500
+        @proximitylongrange_sensor.start(url_for(:action => :myrunProximityLongRange))
+    else
+       puts "Warning: This device does not have proximity long range sensor !"
+    end 
+	
 	sleep 10
-	Rho::Sensors.stopProximityLongRange
+	if @proximitylongrange_sensor != nil
+        @proximitylongrange_sensor.stop
+    end
 	if @x != 0 
 		result = "true"
 	else
@@ -240,13 +330,22 @@ class SensorsTestController < Rho::RhoController
   
   def myrunPressure       
    puts "myrunPressure params: #{@params}"
-   @x = @params['value']       
+   @x = @params['pressure_value']       
   end   
   
   def runPressure
-	Rho::Sensors.watchPressure(200, url_for(:action => :myrunPressure))
+	@pressure_sensor = Rho::Sensor.makeSensorByType(Rho::Sensor::SENSOR_TYPE_PRESSURE)
+    if @pressure_sensor != nil
+        @pressure_sensor.minimumGap = 500
+        @pressure_sensor.start(url_for(:action => :myrunPressure))
+    else
+       puts "Warning: This device does not have pressure sensor !"
+    end 
+	
 	sleep 10
-	Rho::Sensors.stopPressure
+	if @pressure_sensor != nil
+        @pressure_sensor.stop
+    end
 	if @x != 0 
 		result = "true"
 	else
@@ -262,13 +361,22 @@ class SensorsTestController < Rho::RhoController
   
   def myrunTemperature       
    puts "myrunTemperature params: #{@params}"
-   @x = @params['value']        
+   @x = @params['temperature_value']        
   end   
   
   def runTemperature
-	Rho::Sensors.watchTemperature(200, url_for(:action => :myrunTemperature))
+	@temperature_sensor = Rho::Sensor.makeSensorByType(Rho::Sensor::SENSOR_TYPE_TEMPERATURE)
+    if @temperature_sensor != nil
+        @temperature_sensor.minimumGap = 500
+        @temperature_sensor.start(url_for(:action => :myrunTemperature))
+    else
+       puts "Warning: This device does not have temperature sensor !"
+    end 
+	
 	sleep 10
-	Rho::Sensors.stopTemperature
+	if @temperature_sensor != nil
+        @temperature_sensor.stop
+    end
 	if @x != 0
 		result = "true"
 	else
@@ -284,13 +392,22 @@ class SensorsTestController < Rho::RhoController
   
   def myrunHumidity       
    puts "myrunHumidity params: #{@params}"
-   @x = @params['value']       
+   @x = @params['humidity_value']       
   end   
   
   def runHumidity
-	Rho::Sensors.watchHumidity(200, url_for(:action => :myrunHumidity))
+	@humidity_sensor = Rho::Sensor.makeSensorByType(Rho::Sensor::SENSOR_TYPE_HUMIDITY)
+    if @humidity_sensor != nil
+        @humidity_sensor.minimumGap = 500
+        @humidity_sensor.start(url_for(:action => :myrunHumidity))
+    else
+       puts "Warning: This device does not have humidity sensor !"
+    end 
+	
 	sleep 10
-	Rho::Sensors.stopHumidity
+	if @humidity_sensor != nil
+        @humidity_sensor.stop
+    end
 	if @x != 0 
 		result = "true"
 	else
@@ -306,15 +423,24 @@ class SensorsTestController < Rho::RhoController
   
   def myrunGravity       
    puts "myrunGravity params: #{@params}"
-   @x = @params['x']
-   @y = @params['y']             
-   @z = @params['z']             
+   @x = @params['gravity_x']
+   @y = @params['gravity_y']             
+   @z = @params['gravity_z']             
   end   
   
   def runGravity
-	Rho::Sensors.watchGravity(200, url_for(:action => :myrunGravity))
+	@gravity_sensor = Rho::Sensor.makeSensorByType(Rho::Sensor::SENSOR_TYPE_GRAVITY)
+    if @gravity_sensor != nil
+        @gravity_sensor.minimumGap = 500
+        @gravity_sensor.start(url_for(:action => :myrunGravity))
+    else
+       puts "Warning: This device does not have gravity sensor !"
+    end 
+	
 	sleep 10
-	Rho::Sensors.stopGravity
+	if @gravity_sensor != nil
+        @gravity_sensor.stop
+    end
     if @x != 0 && @y != 0 && @z != 0
 		result = "true"
 	else
@@ -330,15 +456,24 @@ class SensorsTestController < Rho::RhoController
   
   def myrunLinearAcceleration       
    puts "myrunLinearAcceleration params: #{@params}"
-    @x = @params['x']
-    @y = @params['y']             
-    @z = @params['z']            
+    @x = @params['linearacceleration_x']
+    @y = @params['linearacceleration_y']             
+    @z = @params['linearacceleration_z']            
   end   
   
   def runLinearAcceleration
-	Rho::Sensors.watchLinearAcceleration(200, url_for(:action => :myrunLinearAcceleration))
+	@linearacceleration_sensor = Rho::Sensor.makeSensorByType(Rho::Sensor::SENSOR_TYPE_LINEAR_ACCELERATION)
+    if @linearacceleration_sensor != nil
+        @linearacceleration_sensor.minimumGap = 500
+        @linearacceleration_sensor.start(url_for(:action => :myrunLinearAcceleration))
+    else
+       puts "Warning: This device does not have linear acceleration sensor !"
+    end 
+	
 	sleep 10
-	Rho::Sensors.stopLinearAcceleration
+	if @linearacceleration_sensor != nil
+        @linearacceleration_sensor.stop
+    end
     if @x != 0 && @y != 0 && @z != 0
 		result = "true"
 	else
@@ -354,15 +489,24 @@ class SensorsTestController < Rho::RhoController
   
   def myrunRotation       
    puts "myrunRotation params: #{@params}"
-    @x = @params['x']
-    @y = @params['y']             
-    @z = @params['z']             
+    @x = @params['rotation_x']
+    @y = @params['rotation_y']             
+    @z = @params['rotation_z']             
   end   
   
   def runRotation
-	Rho::Sensors.watchRotation(200, url_for(:action => :myrunRotation))
+	@rotation_sensor = Rho::Sensor.makeSensorByType(Rho::Sensor::SENSOR_TYPE_ROTATION)
+    if @rotation_sensor != nil
+        @rotation_sensor.minimumGap = 500
+        @rotation_sensor.start(url_for(:action => :myrunRotation))
+    else
+       puts "Warning: This device does not have rotation sensor !"
+    end 
+	
 	sleep 10
-	Rho::Sensors.stopRotation
+	if @rotation_sensor != nil
+        @rotation_sensor.stop
+    end
     if @x != 0 && @y != 0 && @z != 0
 		result = "true"
 	else
@@ -378,15 +522,24 @@ class SensorsTestController < Rho::RhoController
   
   def myrunOrientation       
    puts "myrunOrientation params: #{@params}"
-    @x = @params['x']
-    @y = @params['y']             
-    @z = @params['z']             
+    @x = @params['orientation_x']
+    @y = @params['orientation_y']             
+    @z = @params['orientation_z']             
   end   
   
   def runOrientation
-	Rho::Sensors.watchOrientation(200, url_for(:action => :myrunOrientation))
+	@orientation_sensor = Rho::Sensor.makeSensorByType(Rho::Sensor::SENSOR_TYPE_ORIENTATION)
+    if @orientation_sensor != nil
+        @orientation_sensor.minimumGap = 500
+        @orientation_sensor.start(url_for(:action => :myrunOrientation))
+    else
+       puts "Warning: This device does not have orientation sensor !"
+    end 
+	
 	sleep 10
-	Rho::Sensors.stopOrientation
+	if @orientation_sensor != nil
+        @orientation_sensor.stop
+    end
 	if @x != 0 && @y != 0 && @z != 0
 		result = "true"
 	else

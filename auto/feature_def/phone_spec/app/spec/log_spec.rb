@@ -105,6 +105,9 @@ describe 'Log' do
 
   # log tests
   it 'should clean log' do
+    Rho::Log.level = Rho::Log::LEVEL_TRACE
+    Rho::Log.trace('test message','APP')
+
     Rho::Log.cleanLogFile
     log = Rho::Log.readLogFile(1024*1024*16)
     log.should == nil
