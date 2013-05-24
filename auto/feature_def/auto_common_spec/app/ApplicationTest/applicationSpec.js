@@ -19,7 +19,7 @@ appEventsTest.eventCallback = function(event,eventData)
 
 appEventsTest.setCallback = function ()
 {
-	appEventsTest.ajax('/app/AppEventsTest/set_callback');
+	appEventsTest.ajax('/app/ApplicationTest/set_callback');
 };
 
 describe("<application module specs>", function () {
