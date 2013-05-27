@@ -18,9 +18,11 @@
           beforeFileExecute();
           
           // Database Module Call
-          for (var iarray = 0;iarray < databaseModule.length; iarray++ ){
-            startDatabaseCall(databaseModule[iarray]);
-          }
+          describe("Database Test Starts Here", function() {
+            for (var iarray = 0;iarray < databaseModule.length; iarray++ ){
+              startDatabaseCall(databaseModule[iarray]);
+            }
+          });
 
           execJasmine();
         };

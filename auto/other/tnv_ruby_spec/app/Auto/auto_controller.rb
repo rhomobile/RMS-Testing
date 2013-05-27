@@ -141,13 +141,15 @@ def setMethod
      if(autoobject != 'self') #If self is there no need to make it capital.
       autoobject = autoobject.slice(0,1).capitalize + autoobject.slice(1..-1)
      end
+    answer = nil
     if(callback.empty?)
-     puts autoobject +"."+ automethod
-     eval autoobject +"."+ automethod
+      puts autoobject +"."+ automethod
+      answer = eval autoobject +"."+ automethod
     else
       puts autoobject +"."+ automethod + "("+callback+")"
       eval autoobject +"."+ automethod +"("+callback+")"
     end
+    render :string => answer.to_s
   end
 
 
@@ -805,7 +807,7 @@ end
    db =Rho::Database.new(Rho::Application.databaseFilePath('local'), "local");
    puts "#{db.to_s}"
    data = db
-   WebView.execute_js("resultDatabase('#{data}')")
+   data
  end
  
 # Test case2 - executeSql with no Args
@@ -819,7 +821,7 @@ def executeNoArgs
   data = db.isTableExist(tableName)
   
   puts "#{data}"
-  WebView.execute_js("resultDatabase('#{data}')")
+  data
 end
 
 def excuteBatchNoArgs
@@ -846,7 +848,7 @@ def excuteBatchNoArgs
     data = 'false'
   end
 
-  WebView.execute_js("resultDatabase('#{data}')")
+  data
 
 end
 
@@ -885,7 +887,7 @@ end
      data = 'false'
    end
 
-   WebView.execute_js("resultDatabase('#{data}')")
+   data
  end
  
 #Test case 5- To exclude tables from deletion and checkExcluded tables
@@ -922,7 +924,7 @@ end
      data = 'false'
    end
 
-   WebView.execute_js("resultDatabase('#{data}')")
+   data
    
  end
  
@@ -960,7 +962,7 @@ end
      data = 'false'
    end
 
-   WebView.execute_js("resultDatabase('#{data}')")
+   data
    
  end
  
@@ -1008,7 +1010,7 @@ end
       data = 'false'
     end
 
-    WebView.execute_js("resultDatabase('#{data}')")
+    data
   end
   
   
@@ -1029,7 +1031,7 @@ end
       data = 'false'
     end
  
-    WebView.execute_js("resultDatabase('#{data}')")
+    data
 
   end
  
@@ -1052,7 +1054,7 @@ end
      data = ex.message
    end
    
-   WebView.execute_js('resultDatabase("'+data+'")')
+   data
    
  end
  
@@ -1073,7 +1075,7 @@ end
       data = ex.message
     end
 
-    WebView.execute_js('resultDatabase("'+data+'")')
+    data
 
 end
  
@@ -1092,7 +1094,7 @@ def closeOpen
 
   data = value[0]['x']
   
- WebView.execute_js("resultDatabase('#{data}')")
+ data
 
 end
 
@@ -1108,7 +1110,7 @@ def commitTxn
   value = db.executeSql("SELECT y FROM t20 WHERE x=10")
   data = value[0]['y']
  
-  WebView.execute_js("resultDatabase('#{data}')")
+  data
 end
 
 #Test case12- To Demonstrate rollbackTransaction
@@ -1127,7 +1129,7 @@ def rollbackTxn
     data = ex.message
   end
   
- WebView.execute_js('resultDatabase("'+data+'")')
+ data
 
 end
  
@@ -1146,7 +1148,7 @@ def comRollTxn
  
   data = value[0]['y']
   
-  WebView.execute_js("resultDatabase('#{data}')")
+  data
 
 end
 
@@ -1172,7 +1174,7 @@ def dropNull
     data = 'false'
   end
 
-  WebView.execute_js("resultDatabase('#{data}')")
+  data
 
 end
 
@@ -1192,7 +1194,7 @@ def destroyTwice
     data = 'false'
   end
   
-  WebView.execute_js("resultDatabase('#{data}')")
+  data
 end
     
     
@@ -1206,7 +1208,7 @@ def nullTable
     data = 'false'
   end
   
-  WebView.execute_js("resultDatabase('#{data}')")
+  data
 
 end
   
@@ -1227,7 +1229,7 @@ def rollTxn
     data = 'false'
   end
   
-  WebView.execute_js("resultDatabase('#{data}')")
+  data
 end   
 
 # invalid execute statement passed with executeSQL 
@@ -1240,7 +1242,7 @@ def invalidSql
      data = ex.message
    end
    
-  WebView.execute_js("resultDatabase('#{data}')")
+  data
 end
 
 # initiate DB at invalid file path 
@@ -1253,7 +1255,7 @@ def fooDB
      data = ex.message
    end
    
-  WebView.execute_js("resultDatabase('#{data}')")
+  data
 
 end
 
@@ -1274,7 +1276,7 @@ def invalidBSql
      data = ex.message
    end
 
-  WebView.execute_js("resultDatabase('#{data}')")
+  data
   
 end
 
@@ -1288,7 +1290,7 @@ def nullSql
      data = ex.message
    end
    
-  WebView.execute_js("resultDatabase('#{data}')")
+  data
   
 end 
 
@@ -1302,7 +1304,7 @@ def nullBSql
      data = ex.message
    end
    
-  WebView.execute_js("resultDatabase('#{data}')")
+  data
 
 end 
 
@@ -1319,7 +1321,7 @@ def nullCommit
     data = 'false'
   end
   
-  WebView.execute_js("resultDatabase('#{data}')")
+  data
 end
 
 # Db object with invalid Partition 
@@ -1330,7 +1332,7 @@ def invalidPartition
    rescue => ex
      data = ex.message
    end
-  WebView.execute_js("resultDatabase('#{data}')")
+  data
 end
 
 #To demonstrate two DB objects pointing to two different paths with same db partition 
@@ -1353,7 +1355,7 @@ def multiDBsame
   
   data = value[0]['y']+','+value1[0]['y']
   puts data
-  WebView.execute_js("resultDatabase('#{data}')")
+  data
   
 end
 
@@ -1377,7 +1379,7 @@ def multiDBdifferent
   
   data = value[0]['y']+','+value1[0]['y']
   puts data
-  WebView.execute_js("resultDatabase('#{data}')")
+  data
 end
 
 
@@ -1396,7 +1398,7 @@ def multiDBobjects
 
   data = value[0]['y']
 
-  WebView.execute_js("resultDatabase('#{data}')")
+  data
 
 end
 
@@ -1421,7 +1423,7 @@ def multiDBobjects2
      data = ex.message
    end
 
-   WebView.execute_js('resultDatabase("'+data+'")')
+   data
 end
 
 #To demonstrate two DB objects pointing to two different  paths with different db partition -Close one db object .
@@ -1451,7 +1453,7 @@ def closeIrrDb
      data = ex.message
    end
    puts data
-   WebView.execute_js('resultDatabase("'+data+'")') 
+   data
 end 
 
 #Invalid db path and invalid db partition 
@@ -1463,7 +1465,7 @@ def invalid
      data = ex.message
    end
 
-  WebView.execute_js('resultDatabase("'+data+'")')
+  data
 
 end
 
@@ -1479,7 +1481,7 @@ def invalid1
      data = ex.message
    end
 
-  WebView.execute_js('resultDatabase("'+data+'")')
+  data
 end
 
 
@@ -1501,7 +1503,7 @@ def dbApp
     data = 'false'
   end
   
-  WebView.execute_js("resultDatabase('#{data}')")
+  data
 
  end
 
@@ -1520,7 +1522,7 @@ def dbUser
     data = 'false'
   end
   
-  WebView.execute_js("resultDatabase('#{data}')")
+  data
  end
 
  
@@ -1558,7 +1560,7 @@ def destroyTablesNull
      data = 'false'
    end
 
-   WebView.execute_js("resultDatabase('#{data}')")
+   data
  end
  
 
@@ -1587,7 +1589,7 @@ def destroyTablesInvalid
      data = ex.message
    end
 
-   WebView.execute_js('resultDatabase("'+data+'")')
+   data
 
  end 
 
@@ -1616,7 +1618,7 @@ def destroyTablesInvalid1
     data = 'Table Does Not Exist'
   end
   
-  WebView.execute_js("resultDatabase('#{data}')")
+  data
  
 end
 
@@ -1629,7 +1631,7 @@ def tableExistInvalid
     data = 'false'
   end
 
-  WebView.execute_js('resultDatabase("'+data+'")')
+  data
 
 end
 
@@ -1659,7 +1661,7 @@ def rollDestroyTable
     data = 'false'
   end
   
-  WebView.execute_js("resultDatabase('#{data}')")
+  data
 
 end
 
@@ -1679,7 +1681,7 @@ def columnAdd
   
   data = value[0]['Manager']
 
-  WebView.execute_js('resultDatabase("'+data+'")') 
+  data
   
 end
 
@@ -1692,7 +1694,7 @@ def databaseNull
      data = ex.message
    end
 
-   WebView.execute_js('resultDatabase("'+data+'")')
+   data
 
 end
 
@@ -1707,7 +1709,7 @@ def databaseLong
      data = ex.message
    end
 
-  WebView.execute_js('resultDatabase("'+data+'")')
+  data
 
 end
 
@@ -1721,7 +1723,7 @@ def databaseNullPath
      data = ex.message
    end
    
-  WebView.execute_js('resultDatabase("'+data+'")')
+  data
 
 end
 
@@ -1745,7 +1747,7 @@ def RowDelete
     data = 'RECORD DOESNT EXISTS'
   end
 
-  WebView.execute_js('resultDatabase("'+data+'")')
+  data
 
 end
 
