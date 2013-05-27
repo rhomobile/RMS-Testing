@@ -909,10 +909,7 @@ end
    puts "#{db1.isTableExist(tableName7)}"
    puts "#{db1.isTableExist(tableName8)}"
      
-     a=Array.new
-     a<<tableName6<<tableName7
-     
-    db1.destroyTables({"include" =>"" , "exclude" =>a})
+    db1.destroyTables({:include => [], :exclude => [tableName6, tableName7]})
      puts "#{db1.isTableExist(tableName5)}"
      puts "#{db1.isTableExist(tableName6)}"
      puts "#{db1.isTableExist(tableName7)}"
