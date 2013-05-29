@@ -50,7 +50,10 @@ var fillDetailsDiv = function(arr){
 	displayflag = false;
 }
 
-var setParams = function(arr){
+var setParams = function(arr, sync){
+    if (typeof sync === 'undefined') {
+        sync = false;
+    }
 
 	if(arr['0'] != "" || arr['1'] !=""){
 		paramvalue = arr['2'];
@@ -99,7 +102,15 @@ var setParams = function(arr){
 		{
 			try{
 				//eval(objectname)[paramormethodname]();
-		    	$.get('/app/Auto/setMethod', { object:objectname , method:paramormethodname, type:callType ,callback:callBack});
+                if (sync) {
+                    return $.ajax('/app/Auto/setMethod', {
+                        data: {object: objectname , method: paramormethodname, type: callType, callback: callBack},
+                        cache: false,
+                        async: false
+                    }).responseText;
+                } else {
+                    $.get('/app/Auto/setMethod', { object:objectname , method:paramormethodname, type:callType ,callback:callBack});
+                }
 			}
 			catch(err){
 				alert(err.message);

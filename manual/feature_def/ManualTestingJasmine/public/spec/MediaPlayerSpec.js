@@ -109,7 +109,7 @@ describe("MediaPlayer", function() {
 		// This test relies on the device having an audio file
 		it("should be able to play an audio file", function() {
 			runs(function() {
-				Rho.Mediaplayer.start("/mnt/sdcard/Kalimba.mp3");
+				Rho.Mediaplayer.start("/mnt/sdcard/test.mp3");
 				audioFilePlayed();
 			});
 
@@ -122,6 +122,12 @@ describe("MediaPlayer", function() {
 			{
 				var testPassed = confirm("Did you hear a song being played?");
 				expect(testPassed).toEqual(true);
+
+				if(testPassed == false)
+				{
+					document.getElementById("audioMsg").innerHTML = "<p>Do you have the audio file installed in the location /mnt/sdcard/test.mp3</p>";
+				}
+
 				// Stop the audio file
 				Rho.Mediaplayer.stop();
 			});
@@ -130,7 +136,7 @@ describe("MediaPlayer", function() {
 		it("should be able to play a video", function() {
 			runs(function()
 			{
-				Rho.Mediaplayer.startvideo("/mnt/sdcard/s.mp4");
+				Rho.Mediaplayer.startvideo("/mnt/sdcard/test.mp4");
 				videoFilePlayed();
 			});
 
@@ -143,6 +149,11 @@ describe("MediaPlayer", function() {
 			{
 				var testPassed = confirm("Did you see a video on the screen?");
 				expect(testPassed).toEqual(true);
+
+				if (testPassed == false)
+				{
+					document.getElementById("videoMsg").innerHTML = "<p>Do you have the video file installed in the location /mnt/sdcard/test.mp4</p>";	
+				}
 				// Stop the video player.
 				Rho.Mediaplayer.stopvideo();
 			});
