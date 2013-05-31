@@ -1,5 +1,7 @@
 # Please use relative pathes
 
+#sdk:   ../../../../rhodes
+
 paths:
   extensions:
   - ../../../../Motorola-Extensions/build/ci/extensions
