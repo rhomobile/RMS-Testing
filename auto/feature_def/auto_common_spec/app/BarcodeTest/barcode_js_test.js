@@ -407,18 +407,18 @@ var bar_setget_scanner_property = [
 	expectedResult	:	"false"
 },
 {
-	testName		:	"VT282-3059 | call setproperty with dbpMode :true | true",
+	testName		:	"VT282-3059 | call setproperty with dbpMode :normal | normal",
 	propertyName	:	"dbpMode",
 	scannerTypes	:	"Laser",
-	propertyValue	:	"true",
-	expectedResult	:	"true"
+	propertyValue	:	"normal",
+	expectedResult	:	"normal"
 },
 {
-	testName		:	"VT282-3060 | call setproperty with dbpMode :false | false",
+	testName		:	"VT282-3060 | call setproperty with dbpMode :composite | composite",
 	propertyName	:	"dbpMode",
 	scannerTypes	:	"Laser",
-	propertyValue	:	"false",
-	expectedResult	:	"false"
+	propertyValue	:	"composite",
+	expectedResult	:	"composite"
 },
 {
 	testName		:	"VT282-3061 | call setproperty with timedAimDuration :4000 | 4000",
@@ -428,11 +428,11 @@ var bar_setget_scanner_property = [
 	expectedResult	:	"2000"
 },
 {
-	testName		:	"VT282-3062 | call setproperty with timedAimDuration :0 | 0",
+	testName		:	"VT282-3062 | call setproperty with timedAimDuration :1000 | 1000",
 	propertyName	:	"timedAimDuration",
 	scannerTypes	:	"All",
-	propertyValue	:	"0",
-	expectedResult	:	"0"
+	propertyValue	:	"1000",
+	expectedResult	:	"1000"
 },
 {
 	testName		:	"VT282-3063 | call setproperty with aimType :trigger | trigger",
@@ -575,18 +575,18 @@ var bar_setget_scanner_property = [
 	expectedResult	:	"65535"
 },
 {
-	testName		:	"VT282-3083 | call setproperty with  decodeSound :localpath | file://application/alarm.wav",
+	testName		:	"VT282-3083 | call setproperty with  decodeSound :localpath | application/alarm.wav",
 	propertyName	:	"decodeSound",
 	scannerTypes	:	"All",
 	propertyValue	:	"file://application/alarm.wav",
-	expectedResult	:	"file://application/alarm.wav"
+	expectedResult	:	"application/alarm.wav"
 },
 {
-	testName		:	"VT282-3084 | call setproperty with  invalidDecodeSound :localpath | file://application/alarm5.wav",
+	testName		:	"VT282-3084 | call setproperty with  invalidDecodeSound :localpath | application/alarm5.wav",
 	propertyName	:	"invalidDecodeSound",
 	scannerTypes	:	"All",
 	propertyValue	:	"file://application/alarm5.wav",
-	expectedResult	:	"file://application/alarm5.wav"
+	expectedResult	:	"application/alarm5.wav"
 },
 {
 	testName		:	"VT282-3085 | call setproperty with  decodeVolume :5 | 5",
@@ -824,106 +824,106 @@ var bar_setget_decoder_property = [
 	expectedResult	:	"false"
 },
 {
-	testName		:	"VT282-4021 | call setproperty with code128 :True  | true",
-	propertyName	:	"code128",
+	testName		:	"VT282-4021 | call setproperty with code11 :True  | true",
+	propertyName	:	"code11",
 	scannerTypes	:	"",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
 {
-	testName		:	"VT282-4022 | call setproperty with code128 :false  | false",
-	propertyName	:	"code128",
+	testName		:	"VT282-4022 | call setproperty with code11 :false  | false",
+	propertyName	:	"code11",
 	scannerTypes	:	"",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
 {
-	testName		:	"VT282-4023 | call setproperty with code128checkDigitCount:0  | 0",
-	propertyName	:	"code128checkDigitCount",
+	testName		:	"VT282-4023 | call setproperty with code11checkDigitCount:none  | none",
+	propertyName	:	"code11checkDigitCount",
+	scannerTypes	:	"",
+	propertyValue	:	"none",
+	expectedResult	:	"none"
+},
+{
+	testName		:	"VT282-4024 | call setproperty with code11checkDigitCount:one | one",
+	propertyName	:	"code11checkDigitCount",
+	scannerTypes	:	"",
+	propertyValue	:	"one",
+	expectedResult	:	"one"
+},
+{
+	testName		:	"VT282-4025 | call setproperty with code11checkDigitCount:two | two",
+	propertyName	:	"code11checkDigitCount",
+	scannerTypes	:	"",
+	propertyValue	:	"two",
+	expectedResult	:	"two"
+},
+{
+	testName		:	"VT282-4026 | call setproperty with code11maxLength:0  | 0",
+	propertyName	:	"code11maxLength",
 	scannerTypes	:	"",
 	propertyValue	:	"0",
 	expectedResult	:	"0"
 },
 {
-	testName		:	"VT282-4024 | call setproperty with code128checkDigitCount:1 | 1",
-	propertyName	:	"code128checkDigitCount",
-	scannerTypes	:	"",
-	propertyValue	:	"1",
-	expectedResult	:	"1"
-},
-{
-	testName		:	"VT282-4025 | call setproperty with code128checkDigitCount:2 | 2",
-	propertyName	:	"code128checkDigitCount",
-	scannerTypes	:	"",
-	propertyValue	:	"2",
-	expectedResult	:	"2"
-},
-{
-	testName		:	"VT282-4026 | call setproperty with code128maxLength:0  | 0",
-	propertyName	:	"code128maxLength",
-	scannerTypes	:	"",
-	propertyValue	:	"0",
-	expectedResult	:	"0"
-},
-{
-	testName		:	"VT282-4027 | call setproperty with code128maxLength:10 | 10",
-	propertyName	:	"code128maxLength",
+	testName		:	"VT282-4027 | call setproperty with code11maxLength:10 | 10",
+	propertyName	:	"code11maxLength",
 	scannerTypes	:	"",
 	propertyValue	:	"10",
 	expectedResult	:	"10"
 },
 {
-	testName		:	"VT282-4028 | call setproperty with code128maxLength:55 | 55",
-	propertyName	:	"code128maxLength",
+	testName		:	"VT282-4028 | call setproperty with code11maxLength:55 | 55",
+	propertyName	:	"code11maxLength",
 	scannerTypes	:	"",
 	propertyValue	:	"55",
 	expectedResult	:	"55"
 },
 {
-	testName		:	"VT282-4029 | call setproperty with code128minLength:0  | 0",
-	propertyName	:	"code128minLength",
+	testName		:	"VT282-4029 | call setproperty with code11minLength:0  | 0",
+	propertyName	:	"code11minLength",
 	scannerTypes	:	"",
 	propertyValue	:	"0",
 	expectedResult	:	"0"
 },
 {
-	testName		:	"VT282-4030 | call setproperty with code128minLength:10 | 10",
-	propertyName	:	"code128minLength",
+	testName		:	"VT282-4030 | call setproperty with code11minLength:10 | 10",
+	propertyName	:	"code11minLength",
 	scannerTypes	:	"",
 	propertyValue	:	"10",
 	expectedResult	:	"10"
 },
 {
-	testName		:	"VT282-4031 | call setproperty with code128minLength:55 | 55",
-	propertyName	:	"code128minLength",
+	testName		:	"VT282-4031 | call setproperty with code11minLength:55 | 55",
+	propertyName	:	"code11minLength",
 	scannerTypes	:	"",
 	propertyValue	:	"55",
 	expectedResult	:	"55"
 },
 {
-	testName		:	"VT282-4032 | call setproperty with code128redundancy:True  | true",
-	propertyName	:	"code128redundancy",
+	testName		:	"VT282-4032 | call setproperty with code11redundancy:True  | true",
+	propertyName	:	"code11redundancy",
 	scannerTypes	:	"",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
 {
-	testName		:	"VT282-4033 | call setproperty with code128redundancy:false  | false",
-	propertyName	:	"code128redundancy",
+	testName		:	"VT282-4033 | call setproperty with code11redundancy:false  | false",
+	propertyName	:	"code11redundancy",
 	scannerTypes	:	"",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
 {
-	testName		:	"VT282-4034 | call setproperty with code128reportCheckDigit:True  | true",
-	propertyName	:	"code128reportCheckDigit",
+	testName		:	"VT282-4034 | call setproperty with code11reportCheckDigit:True  | true",
+	propertyName	:	"code11reportCheckDigit",
 	scannerTypes	:	"",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
 {
-	testName		:	"VT282-4035 | call setproperty with code128reportCheckDigit:false  | false",
-	propertyName	:	"code128reportCheckDigit",
+	testName		:	"VT282-4035 | call setproperty with code11reportCheckDigit:false  | false",
+	propertyName	:	"code11reportCheckDigit",
 	scannerTypes	:	"",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
@@ -2427,18 +2427,18 @@ var bar_setget_decoder_property = [
 	expectedResult	:	"false"
 },
 {
-	testName		:	"VT282-4249 | call setproperty with upcEanRetryCount  :true  | true",
+	testName		:	"VT282-4249 | call setproperty with upcEanRetryCount  :2  | 2",
 	propertyName	:	"upcEanRetryCount",
 	scannerTypes	:	"",
-	propertyValue	:	"true",
-	expectedResult	:	"true"
+	propertyValue	:	"2",
+	expectedResult	:	"2"
 },
 {
-	testName		:	"VT282-4250 | call setproperty with upcEanRetryCount  :false  | false",
+	testName		:	"VT282-4250 | call setproperty with upcEanRetryCount  :20  | 20",
 	propertyName	:	"upcEanRetryCount",
 	scannerTypes	:	"",
-	propertyValue	:	"false",
-	expectedResult	:	"false"
+	propertyValue	:	"20",
+	expectedResult	:	"20"
 },
 {
 	testName		:	"VT282-4251 | call setproperty with upcEanSecurityLevel:0  | 0",
@@ -2645,14 +2645,14 @@ var bar_setget_decoder_property = [
 },
 {
 	testName		:	"VT282-4280 | call setproperty with upce0reportCheckDigit   :true  | true",
-	propertyName	:	"upce0reportCheckDigit ",
+	propertyName	:	"upce0reportCheckDigit",
 	scannerTypes	:	"",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
 {
 	testName		:	"VT282-4281 | call setproperty with upce0reportCheckDigit   :false  | false",
-	propertyName	:	"upce0reportCheckDigit ",
+	propertyName	:	"upce0reportCheckDigit",
 	scannerTypes	:	"",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
@@ -2831,5 +2831,12 @@ var bar_setget_decoder_property = [
 	scannerTypes	:	"",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
+},
+{
+	testName		:	"VT282-4308 | call setproperty with upcEanRetryCount  :10  | 10",
+	propertyName	:	"upcEanRetryCount",
+	scannerTypes	:	"",
+	propertyValue	:	"10",
+	expectedResult	:	"10"
 }
 ];
