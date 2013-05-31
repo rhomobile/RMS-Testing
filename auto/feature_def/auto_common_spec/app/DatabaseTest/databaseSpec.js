@@ -18,9 +18,9 @@ describe('<database module spes>', function() {
 
         db.startTransaction();
         db.executeSql('INSERT INTO t (x, y, z) VALUES (?, ?, ?);', [10, 'ten', 'TEN']);
-        expect(db.executeSql('SELECT * FROM t;')).toEqual([{x: 10, y: 'ten', z: 'TEN'}]);
+        expect(db.executeSql('SELECT * FROM t;')).toEqual([{x: '10', y: 'ten', z: 'TEN'}]);
         db.commitTransaction();
-        expect(db.executeSql('SELECT * FROM t;')).toEqual([{x: 10, y: 'ten', z: 'TEN'}]);
+        expect(db.executeSql('SELECT * FROM t;')).toEqual([{x: '10', y: 'ten', z: 'TEN'}]);
     });
 
     // Database.prototype.startTransaction = function()
@@ -30,7 +30,7 @@ describe('<database module spes>', function() {
 
         db.startTransaction();
         db.executeSql('INSERT INTO t (x, y, z) VALUES (?, ?, ?);', [10, 'ten', 'TEN']);
-        expect(db.executeSql('SELECT * FROM t;')).toEqual([{x: 10, y: 'ten', z: 'TEN'}]);
+        expect(db.executeSql('SELECT * FROM t;')).toEqual([{x: '10', y: 'ten', z: 'TEN'}]);
         db.rollbackTransaction();
         expect(db.executeSql('SELECT * FROM t;')).toEqual([]);
     });
@@ -42,7 +42,7 @@ describe('<database module spes>', function() {
         db.executeBatchSql('DROP TABLE IF EXISTS t; CREATE TABLE t(x INTEGER, y TEXT, z VARCHAR(10));');
         db.executeSql('INSERT INTO t (x, y, z) VALUES (?, ?, ?);', [10, 'ten', 'TEN']);
         db.unlockDb();
-        expect(db.executeSql('SELECT * FROM t;')).toEqual([{x: 10, y: 'ten', z: 'TEN'}]);
+        expect(db.executeSql('SELECT * FROM t;')).toEqual([{x: '10', y: 'ten', z: 'TEN'}]);
     });
 
     // Database.prototype.isUiWaitForDb = function()
@@ -56,7 +56,7 @@ describe('<database module spes>', function() {
         db.executeSql('CREATE TABLE t(x INTEGER, y TEXT, z VARCHAR(10));');
         db.executeSql('INSERT INTO t (x, y, z) VALUES (?, ?, ?);', [10, 'ten', 'TEN']);
         db.executeSql('INSERT INTO t (x, y, z) VALUES (?, ?, ?);', [11, 'eleven', 'ELEVEN']);
-        expect(db.executeSql('SELECT * FROM t ORDER BY x DESC;')).toEqual([{x: 11, y: 'eleven', z: 'ELEVEN'}, {x: 10, y: 'ten', z: 'TEN'}]);
+        expect(db.executeSql('SELECT * FROM t ORDER BY x DESC;')).toEqual([{x: '11', y: 'eleven', z: 'ELEVEN'}, {x: '10', y: 'ten', z: 'TEN'}]);
     });
 
     // Database.prototype.executeBatchSql = function(/* const rho::String& */ sqlStmt, /* const rho::Vector<rho::String>& */ args)
@@ -64,7 +64,7 @@ describe('<database module spes>', function() {
         db.executeBatchSql('DROP TABLE IF EXISTS t; CREATE TABLE t(x INTEGER, y TEXT, z VARCHAR(10));');
         db.executeSql('INSERT INTO t (x, y, z) VALUES (?, ?, ?);', [10, 'ten', 'TEN']);
         db.executeSql('INSERT INTO t (x, y, z) VALUES (?, ?, ?);', [11, 'eleven', 'ELEVEN']);
-        expect(db.executeSql('SELECT * FROM t ORDER BY x DESC;')).toEqual([{x: 11, y: 'eleven', z: 'ELEVEN'}, {x: 10, y: 'ten', z: 'TEN'}]);
+        expect(db.executeSql('SELECT * FROM t ORDER BY x DESC;')).toEqual([{x: '11', y: 'eleven', z: 'ELEVEN'}, {x: '10', y: 'ten', z: 'TEN'}]);
     });
 
     // Database.prototype.destroyTable = function(/* const rho::String& */ tableName)
