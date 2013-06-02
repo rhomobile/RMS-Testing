@@ -131,4 +131,15 @@ describe('<database module spes>', function() {
     xit('sets "don\'t backup attribute"', function() {
         db.setDoNotBackupAttribute(true);
     });
+
+    describe('edge cases', function() {
+        it('open database twice and close once', function() {
+            var db2 = new Rho.Database(Rho.Application.databaseFilePath('local'), 'local');
+            db2.close();
+
+            db.executeSql('CREATE TABLE t(x INTEGER, y TEXT, z VARCHAR(10));');
+            db.executeSql('INSERT INTO t (x, y, z) VALUES (?, ?, ?);', [10, 'ten', 'TEN']);
+            expect(db.executeSql('SELECT * FROM t;')).toEqual([{x: '10', y: 'ten', z: 'TEN'}]);
+        });
+    });
 });
