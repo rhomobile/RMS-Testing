@@ -23,14 +23,14 @@
                     {'label':'Page1', 'action':'/public/app/api/NativeTabBar_Page1.html'}, 
                     {'label':'Page2', 'action':'/public/app/api/NativeTabBar_Page2.html', 'perishable':'true'} ], 
                   {'hiddenTabs': true, 'createOnDemand' : true}, tabbarEventHandler );
+                  
+                Rho.NativeTabbar.switchTab(0);
             }
                           
             Rho.Application.nativeMenu = [
                 { 'Home': 'javascript:goHome()'} , {'Exit': 'javascript:onExit0()' }, {'Quit': 'javascript:onQuit0()' }, {'My Test': 'javascript:page0Test()' }
             ];
-
             
-            Rho.NativeTabbar.switchTab(0);              
         }
 
         function tabbarSwitch( nTab ) {
