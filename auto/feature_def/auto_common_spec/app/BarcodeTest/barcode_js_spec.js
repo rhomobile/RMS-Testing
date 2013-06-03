@@ -127,7 +127,7 @@ describe("Scanner SET-GET Starts", function() {
 
 					var data = Rho.Barcode.getProperties(objGetProperty);
 
-					displayResult(strGetProperty,$.toJSON(data));
+					//displayResult(strGetProperty,$.toJSON(data));
 					data = data[bar_setget_scanner_property[k]['propertyName']];
 					expect(data).toEqual(bar_setget_scanner_property[k]['expectedResult']);
 				});
@@ -248,7 +248,7 @@ describe("Scanner SET-GET Starts", function() {
 
 					var data = Rho.Barcode.getProperties(objGetProperty);
 
-					displayResult(strGetProperty,$.toJSON(data));
+					//displayResult(strGetProperty,$.toJSON(data));
 					data = data[bar_setget_scanner_property[k]['propertyName']];
 					expect(data).toEqual(bar_setget_scanner_property[k]['expectedResult']);
 				});
