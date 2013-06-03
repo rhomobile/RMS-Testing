@@ -38,7 +38,7 @@ describe("<log module specs>", function () {
     
     
     
-    // Set log destination to file only
+ // Set log destination to file only
     it("VT290-300 : Log destination to file only", function() {
       	 runs(function(){
       		Rho.Log.destination = ["file"];
@@ -53,132 +53,151 @@ describe("<log module specs>", function () {
     
     // Set log destination to stdio only
     it("VT290-301 : Log destination to stdio only", function() {
-         runs(function(){
-          	Rho.Log.destination = ["stdio"];
-          	expect(Rho.Log.destination).toEqual(["stdio"]);
-         });
+      	 runs(function(){
+      		Rho.Log.destination = ["stdio"];
+      		Rho.Log.includeCategories = "*"
+      		var info = "Log message with application public folder displayed below on standard output: ";
+      		Rho.Log.info(info, "VT290-301");	      		
+      		var myvar = Rho.Application.publicFolder;
+      		Rho.Log.info("Application public folder : " +myvar, "VT290-300")
+      		expect(Rho.Log.destination).toEqual(["stdio"]);	      		
+      	 });
+   });
+    
+   // Set log destination to uri only
+    it("VT290-302 : Log destination to URI only", function() {
+      	 runs(function(){
+      		Rho.Log.destination = ["uri"];
+      		Rho.Log.includeCategories = "*"
+      		var info = "Log message with application public foldernot displayed in log text file: ";
+      		Rho.Log.info(info, "VT290-302");	      		
+      		var myvar = Rho.Application.publicFolder;
+      		Rho.Log.info("Application public folder : " +myvar, "VT290-302")
+      		expect(Rho.Log.destination).toEqual(["uri"]);	      		
+      	 });
+   });
+    
+   // Set log destination to file, stdio, uri 
+    it("VT290-303 : Log destination to file, stdio, uri", function() {
+      	 runs(function(){
+      		Rho.Log.destination = ["file","stdio","uri"];
+      		Rho.Log.includeCategories = "*"
+      		var info = "Log message with application public folder in all file, stdio and uri: ";
+      		Rho.Log.info(info, "VT290-303");	      		
+      		var myvar = Rho.Application.publicFolder;
+      		Rho.Log.info("Application public folder : " +myvar, "VT290-303")
+      		expect(Rho.Log.destination).toEqual(["file","stdio","uri"]);	      		
+      	 });
+   });
+    
+   // Set log destination to stdio,file,uri 
+    it("VT290-304 : Log destination to stdio,file, uri", function() {
+      	 runs(function(){
+      		Rho.Log.destination = ["stdio","file","uri"];
+      		Rho.Log.includeCategories = "*"
+      		var info = "Log message with application public folder in all file, stdio and uri: ";
+      		Rho.Log.info(info, "VT290-304");	      		
+      		var myvar = Rho.Application.publicFolder;
+      		Rho.Log.info("Application public folder : " +myvar, "VT290-304")
+      		expect(Rho.Log.destination).toEqual(["file","stdio","uri"]);	      		
+      	 });
+   });
+    
+   	// Set log destination to stdio,uri, file
+    it("VT290-305 : Log destination to stdio, uri , file", function() {
+      	 runs(function(){
+      		Rho.Log.destination = ["stdio","uri","file"];
+      		Rho.Log.includeCategories = "*"
+      		var info = "Log message with application public folder in all file, stdio and uri: ";
+      		Rho.Log.info(info, "VT290-305");	      		
+      		var myvar = Rho.Application.publicFolder;
+      		Rho.Log.info("Application public folder : " +myvar, "VT290-305")
+      		expect(Rho.Log.destination).toEqual(["file","stdio","uri"]);	      		
+      	 });
+   });
+    
+   // Set log destination to uri, file,stdio
+    it("VT290-306 : Log destination to uri, file,stdio", function() {
+      	 runs(function(){
+      		Rho.Log.destination = ["uri","file","stdio"];
+      		Rho.Log.includeCategories = "*"
+      		var info = "Log message with application public folder in all file, stdio and uri: ";
+      		Rho.Log.info(info, "VT290-306");	      		
+      		var myvar = Rho.Application.publicFolder;
+      		Rho.Log.info("Application public folder : " +myvar, "VT290-306")
+      		expect(Rho.Log.destination).toEqual(["file","stdio","uri"]);	      		
+      	 });
+   });
+    
+   // Set log destination to uri, stdio,file
+    it("VT290-307 : Log destination to uri, stdio,file", function() {
+      	 runs(function(){
+      		Rho.Log.destination = ["uri","stdio","file"];
+      		Rho.Log.includeCategories = "*"
+      		var info = "Log message with application public folder in all file, stdio and uri: ";
+      		Rho.Log.info(info, "VT290-307");	      		
+      		var myvar = Rho.Application.publicFolder;
+      		Rho.Log.info("Application public folder : " +myvar, "VT290-307")
+      		expect(Rho.Log.destination).toEqual(["file","stdio","uri"]);	      		
+      	 });
     });
     
-    // Set log destination to uri only
-    it("VT290-302 : Log destination to uri only", function() {
-        runs(function(){
-         	Rho.Log.destination = ["uri"];
-         	expect(Rho.Log.destination).toEqual(["uri"]);
-        });
-    });
+   	// Set log destination to file, stdio
+    it("VT290-308 : Log destination to file, stdio", function() {
+      	 runs(function(){
+      		Rho.Log.destination = ["file","stdio"];
+      		Rho.Log.includeCategories = "*"
+      		var info = "Log message with application public folder in all fil and stdio: ";
+      		Rho.Log.info(info, "VT290-308");	      		
+      		var myvar = Rho.Application.publicFolder;
+      		Rho.Log.info("Application public folder : " +myvar, "VT290-308")
+      		expect(Rho.Log.destination).toEqual(["file","stdio"]);	      		
+      	 });
+   });
     
-    // Set log destination to file,stdio and uri
-    it("VT290-303 : Log destination to file,stdio and uri", function() {
-        runs(function(){
-        	Rho.Log.destination = ["file","stdio","uri"];
-        	//var destinationValue = ["file","stdio","uri"];
-         	//Rho.Log.destination = [destinationValue];
-         	expect(Rho.Log.destination).toEqual(["file","stdio","uri"]);
-        });
-    });
+   // Set log destination to file, uri
+    it("VT290-309 : Log destination to file, uri", function() {
+      	 runs(function(){
+      		Rho.Log.destination = ["file","uri"];
+      		Rho.Log.includeCategories = "*"
+      		var info = "Log message with application public folder in all file and uri: ";
+      		Rho.Log.info(info, "VT290-309");	      		
+      		var myvar = Rho.Application.publicFolder;
+      		Rho.Log.info("Application public folder : " +myvar, "VT290-309")
+      		expect(Rho.Log.destination).toEqual(["file","uri"]);	      		
+      	 });
+   });
     
-    // Set log destination to stdio, file and uri
-    it("VT290-304 : Log destination to stdio, file and uri", function() {
-        runs(function(){
-        	Rho.Log.destination = ["stdio","file","uri"];
-        	//var destinationValue = ["stdio","file","uri"];
-         	//Rho.Log.destination = [destinationValue];
-         	expect(Rho.Log.destination).toEqual(["file","stdio","uri"]);
-        });
-    });
+  
+    // Set log destination to stdio, uri
+    it("VT290-310 : Log destination to stdio, uri", function() {
+      	 runs(function(){
+      		Rho.Log.destination = ["stdio","uri"];
+      		Rho.Log.includeCategories = "*"
+      		var info = "Log message with application public folder in stdio and uri: ";
+      		Rho.Log.info(info, "VT290-310");	      		
+      		var myvar = Rho.Application.publicFolder;
+      		Rho.Log.info("Application public folder : " +myvar, "VT290-310")
+      		expect(Rho.Log.destination).toEqual(["stdio","uri"]);	      		
+      	 });
+   });
     
-    // Set log destination to stdio, uri and file
-    it("VT290-305 : Log destination to stdio, uri and file", function() {
-        runs(function(){
-        	Rho.Log.destination = ["stdio","uri","file"];
-        	//var destinationValue = ["stdio","uri","file"];
-         	//Rho.Log.destination = [destinationValue];
-         	expect(Rho.Log.destination).toEqual(["file","stdio","uri"]);
-        });
-    });
-    
-    // Set log destination to uri, file and stdio
-    it("VT290-306 : Log destination to uri, file and stdio", function() {
-        runs(function(){
-        	Rho.Log.destination = ["uri","file","stdio"];
-        //var destinationValue = ["uri","file","stdio"];
-         	//Rho.Log.destination = [destinationValue];
-         	expect(Rho.Log.destination).toEqual(["file","stdio","uri"]);
-        });
-    });
-    
-    // Set log destination to uri, stdio and file
-    it("VT290-307 : Log destination to uri, stdio and file", function() {
-        runs(function(){
-        	Rho.Log.destination = ["uri","stdio","file"];
-        	//var destinationValue = ["uri","stdio","file"];
-         //	Rho.Log.destination = [destinationValue];
-         	expect(Rho.Log.destination).toEqual(["file","stdio","uri"]);
-        });
-    });
-    
-    // Set log destination to file and stdio
-    it("VT290-308 : Log destination to file and stdio", function() {
-        runs(function(){
-        	Rho.Log.destination = ["file","stdio"];
-        	//var destinationValue = ["file","stdio"];
-         	//Rho.Log.destination = [destinationValue];
-         	expect(Rho.Log.destination).toEqual(["file","stdio"]);
-        });
-    });
-    
-    // Set log destination to file and uri
-    it("VT290-309 : Log destination to file and uri", function() {
-        runs(function(){
-        	Rho.Log.destination = ["file","uri"];
-        	//var destinationValue = ["file","stdio"];
-         	//Rho.Log.destination = [destinationValue];
-         	expect(Rho.Log.destination).toEqual(["file","uri"]);
-        });
-    });
-    
-    // Set log destination to stdio and uri
-    it("VT290-310 : Log destination to stdio and uri", function() {
-        runs(function(){
-        	Rho.Log.destination = ["stdio","uri"];
-        	//var destinationValue = ["file","stdio"];
-         	//Rho.Log.destination = [destinationValue];
-         	expect(Rho.Log.destination).toEqual(["stdio","uri"]);
-        });
-    });
-    
-    // Set log destination to empty
-    it("VT290-311 : Log destination to empty", function() {
-        runs(function(){
-        	Rho.Log.destination = [];
-        	//var destinationValue = ["file","stdio"];
-         	//Rho.Log.destination = [destinationValue];
-         	expect(Rho.Log.destination).toEqual([]);
-        });
-    });
-    
-    // Set log destination to invalid
-    it("VT290-312 : Log destination to invalid", function() {
-        runs(function(){
-        	Rho.Log.destination = ["folder"];
-        	//var destinationValue = ["file","stdio"];
-         	//Rho.Log.destination = [destinationValue];
-         	expect(Rho.Log.destination).toEqual([]);
-        });
-    });
-    
+   	 
     // Set log destinationURI to valid destination
     it("VT290-313 : Set Log destinationURI to valid destination", function() {
         runs(function(){
         	Rho.Log.destinationURI = "http://localhost";
+        	var info = "Log destination set. No need verification in log: ";
+      		Rho.Log.info(info, "VT290-313");	
         	expect(Rho.Log.destinationURI).toEqual("http://localhost");
         });
     });
-    
     // Set Log destinationURI to valid destination with host address having IP address.
     it("VT290-314 : Set Log destinationURI to valid destination with host address having IP address.", function() {
         runs(function(){
         	Rho.Log.destinationURI = "http://127.0.0.1";
+        	var info = "Log destination set. No need verification in log: ";
+      		Rho.Log.info(info, "VT290-314");	
         	expect(Rho.Log.destinationURI).toEqual("http://127.0.0.1");
         });
     });
@@ -187,6 +206,8 @@ describe("<log module specs>", function () {
     it("VT290-315 : Set Log destinationURI to valid destination with host address having DNS Name as address.", function() {
         runs(function(){
         	Rho.Log.destinationURI = "http://rhologs.heroku.com";
+        	var info = "Log destination set. No need verification in log: ";
+      		Rho.Log.info(info, "VT290-315");	
         	expect(Rho.Log.destinationURI).toEqual("http://rhologs.heroku.com");
         });
     });
@@ -195,6 +216,8 @@ describe("<log module specs>", function () {
     it("VT290-316 : Set Log destinationURI to valid destination with port number", function() {
         runs(function(){
         	Rho.Log.destinationURI = "http://rhologs.heroku.com:80";
+        	var info = "Log destination set. No need verification in log: ";
+      		Rho.Log.info(info, "VT290-316");	
         	expect(Rho.Log.destinationURI).toEqual("http://rhologs.heroku.com:80");
         });
     });
@@ -203,26 +226,13 @@ describe("<log module specs>", function () {
     it("VT290-317 : Set Log destinationURI to valid secure destination", function() {
         runs(function(){
         	Rho.Log.destinationURI = "http://rhologs.heroku.com:443";
+        	var info = "Log destination set. No need verification in log: ";
+      		Rho.Log.info(info, "VT290-317");	
         	expect(Rho.Log.destinationURI).toEqual("http://rhologs.heroku.com:443");
         });
     });
     
-    // Set Log destinationURI to empty destination
-    it("VT290-318 : Set Log destinationURI to empty destination", function() {
-        runs(function(){
-        	Rho.Log.destinationURI = "";
-        	expect(Rho.Log.destinationURI).toEqual(originalLogSettings.destinationURI);
-        });
-    });
-    
-    // Set Log destinationURI to invalid destination
-    it("VT290-319 : Set Log destinationURI to invalid destination", function() {
-        runs(function(){
-        	Rho.Log.destinationURI = "http://invaliduri";
-        	expect(Rho.Log.destinationURI).toEqual("http://invaliduri");
-        });
-    });
-    
+     
     // Set Log excludeCategories one module
     it("VT290-321 : Set Log excludeCategories : Application", function() {
         runs(function(){
@@ -252,39 +262,6 @@ describe("<log module specs>", function () {
         });
     });
      
-    // Set Log excludeCategories to empty
-    it("VT290-323 : Set Log excludeCategories to empty", function() {
-        runs(function(){
-        	Rho.Log.excludeCategories = " ";
-            expect(Rho.Log.excludeCategories).toEqual(' ');
-            var info = "Log Messages related to <system, database, WebView> should be displayed : VT290-323";
-      		Rho.Log.info(info, "VT290-323");	      		
-      		var db = new Rho.Database(Rho.Application.databaseFilePath('local'), 'local');
-      		//db.close();
-      		var version_info = Rho.System.osVersion;
-      		//alert(version_info);
-      		Rho.WebView.fullScreen = true;            
-            Rho.WebView.fullScreen = false;
-      		Rho.Log.info("Log Messages related to <system, database, WebView> should be displayed in above","VT290-323");
-        });
-    });
-    
-    // Set Log excludeCategories invalid module
-    it("VT290-324 : Set Log excludeCategories : invalid", function() {
-        runs(function(){
-        	Rho.Log.excludeCategories = "invalid";
-            expect(Rho.Log.excludeCategories).toEqual("invalid");
-            var info = "Log Messages related to <system, database, WebView> should be displayed : VT290-324";
-      		Rho.Log.info(info, "VT290-324");	      		
-      		var db = new Rho.Database(Rho.Application.databaseFilePath('local'), 'local');
-      		//db.close();
-      		var version_info = Rho.System.osVersion;
-      		//alert(version_info);
-      		Rho.WebView.fullScreen = true;            
-            Rho.WebView.fullScreen = false;
-      		Rho.Log.info("Log Messages related to <system, database, WebView> should be displayed in above","VT290-324");
-        });
-    });
     
     // Set Log excludefilter 
     it("VT290-325 : Set Log excludefilter : username, password", function() {
@@ -294,24 +271,7 @@ describe("<log module specs>", function () {
         });
     });
     
-    // Set Log excludefilter  to empty
-    it("VT290-326 : Set Log excludefilter to empty", function() {
-        runs(function(){
-        	Rho.Log.excludeFilter = " ";
-            expect(Rho.Log.excludeFilter).toEqual(" ");
-        });
-    });
-    
-    // Set Log excludefilter  to invalid
-    it("VT290-327 : Set Log excludefilter to invalid", function() {
-        runs(function(){
-        	Rho.Log.excludeFilter = "aaa, bbb";
-            expect(Rho.Log.excludeFilter).toEqual("aaa,bbb");
-        });
-    });
-    
-    
-    
+      
     // Set log filesize to 100000 KB
     it("VT290-334 : Set Log filsize | 102400000", function() {
         runs(function(){
@@ -328,31 +288,7 @@ describe("<log module specs>", function () {
         });
     });
     
-    // Set log filesize to negative
-    it("VT290-336 : Set Log filsize | 0", function() {
-        runs(function(){
-        	Rho.Log.fileSize = -102400
-            expect(Rho.Log.fileSize).toEqual(5242880);
-        });
-    });
-    
-    // Set log filesize to empty
-    it("VT290-337 : Set Log filsize | 0", function() {
-        runs(function(){
-        	Rho.Log.fileSize = 
-            expect(Rho.Log.fileSize).toEqual(0);
-        });
-    });
-    
-    // Set log filesize to invalid value
-    it("VT290-338 : Set Log filsize | 0", function() {
-        runs(function(){
-        	Rho.Log.fileSize = "invalid"
-            expect(Rho.Log.fileSize).toContain("integer");
-        });
-    });
-    
-    // Set Log includeCategories one module
+       // Set Log includeCategories one module
     it("VT290-339 : Set Log includeCategories | database", function() {
         runs(function(){
         	Rho.Log.includeCategories = "database";
@@ -412,49 +348,7 @@ describe("<log module specs>", function () {
 
     });
     
-    // Set Log includeCategories valid and Invalid
-    it("VT290-342 : Set Log includeCategories to valid and invalid modules | database, WebView", function() {
-        runs(function(){
-        	Rho.Log.includeCategories = "aaa, database, WebView";
-        	var info = "Log Messages related to <webview, database> should be displayed : VT290-342";
-      		Rho.Log.info(info, "VT290-342");	      		
-      		var db = new Rho.Database(Rho.Application.databaseFilePath('local'), 'local');
-      		//db.close();
-      		var version_info = Rho.System.osVersion;
-      		//alert(version_info);
-      		Rho.WebView.fullScreen = true;            
-            Rho.WebView.fullScreen = false;
-      		Rho.Log.info("Log Messages related to <webview, database> should be displayed in above","VT290-342");
-            expect(Rho.Log.includeCategories).toEqual("aaa, database, WebView");
-        });
-    });
-     
-    // Set Log includeCategories to empty
-    it("VT290-343 : Set Log includeCategories to empty | ' '", function() {
-        runs(function(){
-        	Rho.Log.includeCategories = " ";
-        	var info = "Log Messages related to <database> should be displayed : VT290-343";
-      		Rho.Log.info(info, "VT290-343");	      		
-      		var db = new Rho.Database(Rho.Application.databaseFilePath('local'), 'local');
-      		//db.close();
-      		Rho.Log.info("Log Messages related to <database> should be displayed in above","VT290-343");
-            expect(Rho.Log.includeCategories).toEqual(' ');
-        });
-    });
-    
-    // Set Log includeCategories invalid module
-    it("VT290-344 : Set Log includeCategories | invalid", function() {
-        runs(function(){
-        	Rho.Log.includeCategories = "invalid";
-        	var info = "Log Messages related to <database> should be displayed : VT290-344";
-      		Rho.Log.info(info, "VT290-344");	      		
-      		var db = new Rho.Database(Rho.Application.databaseFilePath('local'), 'local');
-      		//db.close();
-      		Rho.Log.info("Log Messages related to <database> should be displayed in above","VT290-344");
-            expect(Rho.Log.includeCategories).toEqual("invalid");
-        });
-    });
-    
+      
     // Set Log include and exclude Categories
     it("VT290-345 : Set Log include and excludeCategories | application and WebView logs displayed", function() {
         runs(function(){
@@ -569,50 +463,12 @@ describe("<log module specs>", function () {
         });
     });
     
-    // Set Log Level to 100
-    it("VT290-351 : Set Log Level to 100 | 0", function() {
-        runs(function(){
-        	originalLevel = Rho.Log.level;
-        	//puts "#{originalLevel}"
-        	Rho.Log.level = 100;
-        	logLevel = Rho.Log.level; 
-            expect(logLevel).toEqual(originalLevel);
-        });
-    });
-    
-    // Set Log Level to negative value
-    it("VT290-352 : Set Log Level to -2 | 0", function() {
-        runs(function(){
-        	originalLevel = Rho.Log.level;
-        	Rho.Log.level = -2;
-        	logLevel = Rho.Log.level; 
-            expect(logLevel).toEqual(originalLevel);
-        });
-    });
-    
-    // Set Log Level to empty
-    it("VT290-353 : Set Log Level to empty | 0", function() {
-        runs(function(){
-        	originalLevel = Rho.Log.level;
-        	Rho.Log.level =
-        	logLevel = Rho.Log.level; 
-            expect(logLevel).toEqual(originalLevel);
-        });
-    });
-    
-    // Set Log Level to invalid i.e string
-    it("VT290-354 : Set Log Level to string | 0", function() {
-        runs(function(){
-        	originalLevel = Rho.Log.level;
-        	Rho.Log.level = "invalid";
-        	logLevel = Rho.Log.level; 
-            expect(logLevel).toEqual(originalLevel);
-        });
-    });
-    
-    // Set Log Memory period to 5 seconds
+        // Set Log Memory period to 5 seconds
     it("VT290-355 : Set Log Memory period to 5 secs | 5000", function() {
         runs(function(){
+        	Rho.Log.level=0;
+        	var info = "Info : Memory log should display in 5 secs interval | 0";
+      		Rho.Log.info(info, "VT290-355");
         	expectedValue = 5000;
         	Rho.Log.memoryPeriod = 5000;
         	memPeriod = Rho.Log.memoryPeriod; 
@@ -620,66 +476,22 @@ describe("<log module specs>", function () {
         });
     });
     
-    // Set Log Memory period to 5 seconds
-    it("VT290-355 : Set Log Memory period to 5 secs | 5000", function() {
-        runs(function(){
-        	expectedValue = 5000;
-        	Rho.Log.memoryPeriod = 5000;
-        	memPeriod = Rho.Log.memoryPeriod; 
-            expect(memPeriod).toEqual(expectedValue);
-        });
-    });
-    
+     
     // Set Log Memory period to 10 seconds
     it("VT290-356 : Set Log Memory period to 10 secs | 10000", function() {
         runs(function(){
+        	Rho.Log.level=0;
+        	var info = "Info : Memory log should display in 10 secs interval | 0";
+      		Rho.Log.info(info, "VT290-356");
         	expectedValue = 10000;
         	Rho.Log.memoryPeriod = 10000;
         	memPeriod = Rho.Log.memoryPeriod; 
             expect(memPeriod).toEqual(expectedValue);
-        });
-    });
-    
-    // Set Log Memory period to 0 seconds
-    it("VT290-357 : Set Log Memory period to 0 secs | 0", function() {
-        runs(function(){
-        	expectedValue = 0;
-        	Rho.Log.memoryPeriod = 0;
-        	memPeriod = Rho.Log.memoryPeriod; 
-            expect(memPeriod).toEqual(expectedValue);
-        });
-    });
-    
-    // Set Log Memory period to negative seconds
-    it("VT290-358 : Set Log Memory period to negative secs | 0", function() {
-        runs(function(){
-        	expectedValue = 0;
-        	Rho.Log.memoryPeriod = -5000;
-        	memPeriod = Rho.Log.memoryPeriod; 
-            expect(memPeriod).toEqual(expectedValue);
-        });
-    });
-    
- // Set Log Memory period to empty
-    it("VT290-359 : Set Log Memory period to empty | 0", function() {
-        runs(function(){
-        	expectedValue = 0;
-        	Rho.Log.memoryPeriod = 
-        	memPeriod = Rho.Log.memoryPeriod; 
-            expect(memPeriod).toEqual(expectedValue);
+            Rho.Log.memoryPeriod = 0;
         });
     });
     
     
-    // Set Log Memory period to invalid
-    it("VT290-360 : Set Log Memory period to invalid | 0", function() {
-        runs(function(){
-        	expectedValue = 0;
-        	Rho.Log.memoryPeriod = "invalid";
-        	memPeriod = Rho.Log.memoryPeriod; 
-            expect(memPeriod).toEqual(expectedValue);
-        });
-    });
     
     
     /* Set Log includeCategories one module
@@ -693,72 +505,50 @@ describe("<log module specs>", function () {
     });
     */
     
-    // Set Netrace to true
+ // Set Netrace to true
     it("VT290-361 : Set netrace to true | true", function() {
         runs(function(){
+        	Rho.Log.level = 0;
+        	var info = "Info : http trace displayed in the log ";
+      		Rho.Log.info(info, "VT290-361")
+        	Rho.Log.showLog();
         	expectedValue = true;
         	Rho.Log.netTrace=true;
+        	var cell_network = Rho.Network.hasCellNetwork();
+        	var db = new Rho.Database(Rho.Application.databaseFilePath('local'), 'local');
         	netTraceValue = Rho.Log.netTrace; 
             expect(netTraceValue).toEqual(expectedValue);
         });
     });
     
-    // Set Netrace to false
+ // Set Netrace to false
     it("VT290-362 : Set netrace to false | false", function() {
         runs(function(){
+        	Rho.Log.level = 0;
+        	var info = "Info : http trace not displayed in the log ";
+      		Rho.Log.info(info, "VT290-362")
+        	Rho.Log.showLog();
         	expectedValue = false;
         	Rho.Log.netTrace=false;
+        	var cell_network = Rho.Network.hasCellNetwork()
+        	var db = new Rho.Database(Rho.Application.databaseFilePath('local'), 'local');
         	netTraceValue = Rho.Log.netTrace; 
             expect(netTraceValue).toEqual(expectedValue);
         });
     });
     
-    // Set Netrace to 1
-    it("VT290-363 : Set netrace to 1 | true", function() {
-        runs(function(){
-        	expectedValue = true;
-        	Rho.Log.netTrace=1;
-        	netTraceValue = Rho.Log.netTrace; 
-            expect(netTraceValue).toEqual(expectedValue);
-        });
-    });
-    
-    // Set Netrace to 0
-    it("VT290-364 : Set netrace to 0 | false", function() {
-        runs(function(){
-        	expectedValue = false;
-        	Rho.Log.netTrace=0;
-        	netTraceValue = Rho.Log.netTrace; 
-            expect(netTraceValue).toEqual(expectedValue);
-        });
-    });
-    
-    // Set Netrace to empty
-    it("VT290-365 : Set netrace to empty | true", function() {
-        runs(function(){
-        	expectedValue = true;
-        	Rho.Log.netTrace=
-        	netTraceValue = Rho.Log.netTrace; 
-            expect(netTraceValue).toEqual(expectedValue);
-        });
-    });
-    
-    // Set Netrace to invalid
-    it("VT290-366 : Set netrace to invalid | true", function() {
-        runs(function(){
-        	expectedValue = true;
-        	Rho.Log.netTrace="invalid";
-        	netTraceValue = Rho.Log.netTrace; 
-            expect(netTraceValue).toEqual(expectedValue);
-        });
-    });
-    
+         
  // Set skipPost to true
     it("VT290-367 : Set skipPost to true | true", function() {
         runs(function(){
+        	Rho.Log.level = 0;
+        	var info = "Info : skip post set to true. http body information should not displayed in below log for network related functions";
+      		Rho.Log.info(info, "VT290-367");
         	expectedValue = true;
         	Rho.Log.skipPost=true;
         	skipPostValue = Rho.Log.skipPost; 
+        	var cell_network = Rho.Network.hasCellNetwork();
+        	// write network code here
             expect(skipPostValue).toEqual(expectedValue);
         });
     });
@@ -766,57 +556,28 @@ describe("<log module specs>", function () {
     // Set skipPost to false
     it("VT290-368 : Set skipPost to false | false", function() {
         runs(function(){
+        	Rho.Log.level = 0;
+        	var info = "Info : skip post set to false. http body information should be displayed in below log for network related functions";
+      		Rho.Log.info(info, "VT290-368");
         	expectedValue = false;
         	Rho.Log.skipPost=false;
         	skipPostValue = Rho.Log.skipPost; 
+        	var cell_network = Rho.Network.hasCellNetwork();
+        	// write network code here
             expect(skipPostValue).toEqual(expectedValue);
         });
     });
     
-    // Set skipPost to 1
-    it("VT290-369 : Set skipPost to 1 | true", function() {
-        runs(function(){
-        	expectedValue = true;
-        	Rho.Log.skipPost=1;
-        	skipPostValue = Rho.Log.skipPost; 
-            expect(skipPostValue).toEqual(expectedValue);
-        });
-    });
-    
-    // Set skipPost to 0
-    it("VT290-370 : Set skipPost to 0 | false", function() {
-        runs(function(){
-        	expectedValue = false;
-        	Rho.Log.skipPost=0;
-        	skipPostValue = Rho.Log.skipPost; 
-            expect(skipPostValue).toEqual(expectedValue);
-        });
-    });
-    
-    // Set skipPost to empty
-    it("VT290-371 : Set skipPost to empty | true", function() {
-        runs(function(){
-        	expectedValue = true;
-        	Rho.Log.netTrace=
-        	skipPostValue = Rho.Log.skipPost; 
-            expect(skipPostValue).toEqual(expectedValue);
-        });
-    });
-    
-    // Set skipPost to invalid
-    it("VT290-372 : Set skipPost to invalid | true", function() {
-        runs(function(){
-        	expectedValue = true;
-        	Rho.Log.skipPost="invalid";
-        	skipPostValue = Rho.Log.skipPost; 
-            expect(skipPostValue).toEqual(expectedValue);
-        });
-    });
-    
+       
+    /*
+     * moved to manual testing
+     
     // call clean log file
     it("VT290-373 : Call cleanlogfile | ", function() {
         runs(function(){
-        	
+        	Rho.Log.level = 0;
+        	var info = "Info : Log gets cleared ";
+      		Rho.Log.info(info, "VT290-373");
         	// perform some operations
         	var myvar = Rho.Application.publicFolder;
         	var path = myvar+ "/VT290_374.txt";
@@ -835,22 +596,25 @@ describe("<log module specs>", function () {
         	    // Display the contents of the file.
         	    write(str);
         	}
-        	*/
+        	
         	
         	expect(str).toEqual(null);
         });
     });
     
+    
  // call clean log file with parameter
     it("VT290-374 : Call cleanlogfile | ", function() {
         runs(function(){
-        	
+        	Rho.Log.level = 0;
+            var info = "Info : Log not cleared. No information displayed ";
+            Rho.Log.info(info, "VT290-373");
         	// perform some operations
         	var myvar = Rho.Application.publicFolder;
         	var path = myvar+ "/VT290_374.txt";
         	Rho.Log.filePath =  path;
         	var actualPath = Rho.Log.filePath;
-        	Rho.Log.CleanLogFile
+        	Rho.Log.CleanLogFile(parameter);
 			// check for no log present in above text
 			var str = null;
         	/*
@@ -864,46 +628,34 @@ describe("<log module specs>", function () {
         	    // Display the contents of the file.
         	    write(str);
         	}
-        	*/
+        	
         	
         	expect(path).toEqual("Text");
         });
     });
-    
+    */
     
     // Call error() method with "message" and "categories"
     it("VT290-375 : Call error() method with message and categories | ", function() {
         runs(function(){
-        	
+        	Rho.Log.level = 0;
+        	var info = "Info : Application Error message displayed in the log ";
+      		Rho.Log.info(info, "VT290-375");
         	 Rho.Log.error("VT290-375 : Application Error Message", "Application");
         	 // some code on Application to display error
         	 //Rho.Application.setLocale(20);
         });
     });
     
-    // Call error() method with "message" 
-    it("VT290-376 : Call error() method with message only | ", function() {
-        runs(function(){
-        	 Rho.Log.error("VT290-376 :Application Error Message");
-        	 // some code on Application to display error
-        	 //Rho.Application.setLocale(20);
-        });
-    });
-    
-    // Call error() method without parameter
-    it("VT290-378 : Call error() method with message only | ", function() {
-        runs(function(){
-        	 Rho.Log.error();
-        	 // some code on Application to display error
-        	 //Rho.Application.setLocale(20);
-        });
-    });
+   
    
     // Call error() method with wrong category
     it("VT290-379 : Call error() method with message and wrong category | ", function() {
         runs(function(){
-        	Rho.Log.CleanLogFile();
-        	 Rho.Log.error("VT290-379 :Application Error Message", "invalid");
+        	Rho.Log.level = 0;
+        	var info = "Info : Application Error message displayed in the log with invalid catagory name ";
+      		Rho.Log.info(info, "VT290-379");
+        	Rho.Log.error("VT290-379 :Application Error Message", "invalid");
         	 // some code on Application to display error
         	 //Rho.Application.setLocale(20);
         });
@@ -912,283 +664,115 @@ describe("<log module specs>", function () {
     // Call info() method with "message" and "categories"
     it("VT290-385 : Call info() method with message and categories | ", function() {
         runs(function(){
-        	
-        	 Rho.Log.info("VT290-385 : Application Info Message", "Application");
-        	 // some code on Application to display error
-        	 //Rho.Application.setLocale(20);
-        });
-    });
-    
-    // Call info() method with "message" and "categories"
-    it("VT290-386 : Call info() method with message and categories | ", function() {
-        runs(function(){
-        	 Rho.Log.level = 0;
-        	 Rho.Log.info("VT290-386 :Application Info Message", "Application");
-        	 // some code on Application to display error
-        	 //Rho.Application.setLocale(20);
-        });
-    });
-    
-    // Call info() method with "message" 
-    it("VT290-387 : Call info() method with message only | ", function() {
-        runs(function(){
-        	 Rho.Log.info("VT290-387 :Application info Message");
-        	 // some code on Application to display error
-        	 //Rho.Application.setLocale(20);
-        });
-    });
-    
-    // Call error() method without parameter
-    it("VT290-389 : Call info() method with message only | ", function() {
-        runs(function(){
-        	 Rho.Log.info();
-        	 // some code on Application to display error
-        	 //Rho.Application.setLocale(20);
-        });
-    });
-   
-    // Call info() method with wrong category
-    it("VT290-390 : Call info() method with message and wrong category | ", function() {
-        runs(function(){
         	Rho.Log.level = 0;
-        	 Rho.Log.info("VT290-390 : Testing info", "TEST");
+        	var info = "Info : Info message displayed in the log with message and catagory name ";
+      		Rho.Log.info(info, "VT290-385");
+        	Rho.Log.info("VT290-385 : Application Info Message", "Application");
         	 // some code on Application to display error
         	 //Rho.Application.setLocale(20);
         });
     });
     
- // Call readlog() with valid parameter
+        
+ // Call readlog() with valid parameter (Integer) 100
     it("VT290-391 : Call readLogFile() method with valid parameter. | ", function() {
         runs(function(){
         	//var myvar = Rho.Application.publicFolder;
         	//var path = myvar+ "/VT290_390.txt";
         	//Rho.Log.filePath =  path;
-        	var actualPath = Rho.Log.filePath;
-        	Rho.Log.info(read, "TEST"); 
+        	Rho.Log.leval = 0;
+        	var info = "Read : Read Log from Log file";
+        	Rho.Log.info(info, "VT290-391");
+	        //var actualPath = Rho.Log.filePath;
+	        //Rho.Log.info(read, "TEST"); 
         	//Rho.Application.setLocale('en');
-        	var read = Rho.Log.readLogFile(10000);
-        	alert(read);
+        	var read = Rho.Log.readLogFile(100);
+        	//alert(read);
         	Rho.Log.info(read, "VT290-391");
         	
         });
     });
     
-    // Call readlog() with valid parameter 10000.5
-    it("VT290-392 : Call readLogFile() method with valid parameter 10000.5 | ", function() {
-        runs(function(){
-        	//var myvar = Rho.Application.publicFolder;
-        	//var path = myvar+ "/VT290_390.txt";
-        	//Rho.Log.filePath =  path;
-        	var actualPath = Rho.Log.filePath;
-        	Rho.Log.info(read, "TEST"); 
-        	//Rho.Application.setLocale('en');
-        	var read = Rho.Log.readLogFile(10000.5);
-        	Rho.Log.info(read, "VT290-392");
-        	
-        });
-    });
-    
-    // Call readlog() with valid parameter 0
-    it("VT290-393 : Call readLogFile() method with valid parameter 0 | ", function() {
-        runs(function(){
-        	//var myvar = Rho.Application.publicFolder;
-        	//var path = myvar+ "/VT290_390.txt";
-        	//Rho.Log.filePath =  path;
-        	var actualPath = Rho.Log.filePath;
-        	Rho.Log.info(read, "TEST"); 
-        	//Rho.Application.setLocale('en');
-        	var read = Rho.Log.readLogFile(0);
-        	Rho.Log.info(read, "VT290-393");
-        	
-        });
-    });
-    
-    
-    // Call readlog() with negative
-    it("VT290-394 : Call readLogFile() method with negative | ", function() {
-        runs(function(){
-        	//var myvar = Rho.Application.publicFolder;
-        	//var path = myvar+ "/VT290_390.txt";
-        	//Rho.Log.filePath =  path;
-        	var actualPath = Rho.Log.filePath;
-        	Rho.Log.info(read, "TEST"); 
-        	//Rho.Application.setLocale('en');
-        	var read = Rho.Log.readLogFile(-10000);
-        	Rho.Log.info(read, "VT290-394");
-        	
-        });
-    });
-    
-    // Call readlog() with empty parameter
-    it("VT290-395 : Call readLogFile() method without valid parameter 0 | ", function() {
-        runs(function(){
-        	//var myvar = Rho.Application.publicFolder;
-        	//var path = myvar+ "/VT290_390.txt";
-        	//Rho.Log.filePath =  path;
-        	var actualPath = Rho.Log.filePath;
-        	Rho.Log.info("VT290-395: Next log message will be empty", "VT290-395"); 
-        	//Rho.Application.setLocale('en');
-        	var read = Rho.Log.readLogFile();
-        	Rho.Log.info(read, "VT290-395");
-        	
-        });
-    });	
-
-    // Call readlog() with invalid
-    it("VT290-396 : Call readLogFile() method without valid parameter 0 | ", function() {
-        runs(function(){
-        	//var myvar = Rho.Application.publicFolder;
-        	//var path = myvar+ "/VT290_390.txt";
-        	//Rho.Log.filePath =  path;
-        	var actualPath = Rho.Log.filePath;
-        	Rho.Log.info(read, "TEST"); 
-        	//Rho.Application.setLocale('en');
-        	var read = Rho.Log.readLogFile("invalid");
-        	Rho.Log.info(read, "VT290-396");
-        	
-        });
-    });	
-    
+       
     // Call sendLog() 
     it("VT290-397 : send log file with valid path| log exists", function() {
         runs(function(){
-        	Rho.Log.destinationURI = "http://rhologs.heroku.com";
+        	Rho.Log.info("PLease goto http://192.168.6.18/NEON/ReceivedFiles/Upload.aspx and check for log file availability. Log file should be present", "VT290-397");
+        	Rho.Log.destinationURI = "http://192.168.6.18/NEON/ReceivedFiles/Upload.aspx";
         	Rho.Log.sendLogFile();
-        	Rho.Log.info("PLease goto http://rhologs.heroku.com and check for log file availability. Log file should be present", "VT290-397");
+        	Rho.Log.info("PLease goto http://rhologs.heroku.com/ and check for log file availability. Log file should be present", "VT290-397");
         	
         });
     });	
     
- // Call sendLog() with callback
+    // Call sendLog() with callback
     it("VT290-398 : send log file with valid path| log exists", function() {
         runs(function(){
-        	Rho.Log.destinationURI = "http://rhologs.heroku.com";
-        	Rho.Log.sendLogFile(sendcallback);
-        	Rho.Log.info("PLease goto http://rhologs.heroku.com and check for log file availability. Log file should be present", "VT290-398");
-        	
+        	Rho.Log.destinationURI = "http://192.168.6.18/NEON/ReceivedFiles/Upload.aspx";
+        	Rho.Log.sendLogFile(sendcallback());
+        	Rho.Log.info("PLease goto http://192.168.6.18/NEON/ReceivedFiles/Upload.aspx and check for log file availability. Log file should be present", "VT290-398");   	
+        	       	
         });
-    });	
+        
+    });
     
-    // Call sendLog() with empty path
-    it("VT290-401 : send log file with empty path | log file not exists", function() {
-        runs(function(){
-        	Rho.Log.destinationURI = " ";
-        	Rho.Log.sendLogFile();
-        	Rho.Log.info("PLease goto http://rhologs.heroku.com and check for log file availability. Log file should not present", "VT290-401");
-        	
-        });
-    });	
+   function sendcallback() {
+	   
+		Rho.Log.info("Info: Callback called", "VT290-398");
+	};
     
-    // Call sendLog() with invalid
-    it("VT290-402 : send log file with empty path | log file not exists and no crash occured", function() {
-        runs(function(){
-        	Rho.Log.destinationURI = " ";
-        	Rho.Log.sendLogFile();
-        	Rho.Log.info("VT290-402 :PLease goto http://rhologs.heroku.com and check for log file availability. Log file should not present", "VT290-402");
-        	
-        });
-    });	
    
-    // Call showLog()
-    it("VT290-403 : showLog | 1", function() {
-        runs(function(){
-        	//var myvar = Rho.Application.publicFolder;
-        	//var path = myvar+ "/VT290_390.txt";
-        	//Rho.Log.filePath =  path;
-           	Rho.Log.showLog();
-        	Rho.Log.info("log view displayed", "VT290-403");
-        	
-        });
-    });	
     
+    //Call sendLog() with ananyomous callback
+    it("VT290-400 : send log file with valid path| log exists", function() {
+        runs(function(){
+        	var displayflag = false;
+        	Rho.Log.destinationURI = "http://192.168.6.18/NEON/ReceivedFiles/Upload.aspx";
+        	Rho.Log.sendLogFile(function() {
+        		Rho.Log.info("Info: ananymous Callback called", "VT290-400");
+        	});
+        	Rho.Log.info("PLease goto http://192.168.6.18/NEON/ReceivedFiles/Upload.aspx and check for log file availability. Log file should be present", "VT290-400");        	
+        });
+       
+    });
+    
+    
+     
     // Call trace() method with "message" and "categories"
     it("VT290-404 : Call trace() method with message and categories | 1", function() {
         runs(function(){
         	Rho.Log.level = 0;
-        	 Rho.Log.trace("VT290-404 :Trace messages regarding File Transfer module","Application");
-        	 // some code on Application to display error
-        	 //Rho.Application.setLocale(20);
+        	var info = "Trace : Trace message displayed in the log with message and categories";
+        	Rho.Log.info(info, "VT290-404");
+        	Rho.Log.trace("VT290-404 :Application trace Message","Application");
+        	// some code on Application to display error
+        	//Rho.Application.setLocale(20);
         });
     });
     
-    // Call trace() method with "message" only
-    it("VT290-405 : Call trace() method with message only | Error", function() {
-        runs(function(){
-        	Rho.Log.level = 0;
-        	 Rho.Log.trace("VT290-405 :Trace messages regarding File Transfer module");
-        	 // some code on Application to display error
-        	 //Rho.Application.setLocale(20);
-        });
-    });
-    
-    // Call trace() method without parameter
-    it("VT290-407 : Call trace() method without parameter | Error", function() {
-        runs(function(){
-        	var error = null;
-        	var actual = "Wrong number of arguments: 0 instead of 2"
-        	Rho.Log.level = 0;              	 
-        	Rho.Log.trace();
-        	 // some code on Application to display error
-        	 //Rho.Application.setLocale(20);
-        	 expect(error).toEqual(actual);
-        	 
-        });
-    });
-    
-    // Call trace() method with message and invalid category
-    it("VT290-408 : Call trace() method with message and invalid category | Error", function() {
-        runs(function(){
-        	var error = null;
-        	var actual = "Wrong number of arguments: 0 instead of 2"
-        	Rho.Log.level = 0;              	 
-        	Rho.Log.trace("VT290-408 :Trace messages regarding File Transfer module","Invalid");
-        	 // some code on Application to display error
-        	 //Rho.Application.setLocale(20);
-        	 //expect(error).toEqual(actual);        	 
-        });
-    });
-    
+       
  // Call warning() method with "message" and "categories"
     it("VT290-409 : Call warning() method with message and categories | 1", function() {
         runs(function(){
         	Rho.Log.level = 0;
-        	 Rho.Log.warning("VT290-409 :warning messages regarding File Transfer module","Application");
+        	var info = "Warning : Warning message displayed in the log with message and category";
+        	Rho.Log.info(info, "VT290-409");
+        	Rho.Log.warning("VT290-409 :Application warning Message","Application");
         	 // some code on Application to display error
         	 //Rho.Application.setLocale(20);
         });
     });
     
-    // Call warning() method with "message" only
-    it("VT290-410 : Call warning() method with message only | Error", function() {
-        runs(function(){
-        	Rho.Log.level = 0;
-        	 Rho.Log.trace("VT290-410 :warning messages regarding File Transfer module");
-        	 // some code on Application to display error
-        	 //Rho.Application.setLocale(20);
-        });
-    });
-    
-    // Call warning() method without parameter
-    it("VT290-412 : Call warning() method without parameter | Error", function() {
-        runs(function(){
-        	var error = null;
-        	var actual = "Wrong number of arguments: 0 instead of 2"
-        	Rho.Log.level = 0;              	 
-        	Rho.Log.trace();
-        	 // some code on Application to display error
-        	 //Rho.Application.setLocale(20);
-        	 expect(error).toEqual(actual);
-        	 
-        });
-    });
-    
-    // Call warning() method with message and invalid category
+      
+    // Call warning() method with message and invalid category aaaa
     it("VT290-413 : Call warning() method with message and invalid category | Error", function() {
         runs(function(){
-        	var error = null;
-        	var actual = "Wrong number of arguments: 0 instead of 2"
-        	Rho.Log.level = 0;              	 
-        	Rho.Log.trace("VT290-413 :warning messages regarding File Transfer module","Invalid");
+	        var error = null;
+	        var actual = "Wrong number of arguments: 0 instead of 2"
+        	Rho.Log.level = 0;     
+        	var info = "Warning : Warning message displayed in the log with message and invalid category";
+        	Rho.Log.info(info, "VT290-413");
+        	Rho.Log.trace("VT290-413 :Application warning message","aaaa");
         	
         	 // some code on Application to display error
         	 //Rho.Application.setLocale(20);
@@ -1196,7 +780,7 @@ describe("<log module specs>", function () {
         });
     });
     
- // Set log filepath
+    // Set log filepath
     it("VT290-328 : Set Log filepath |", function() {
         runs(function(){
         	var defaultPath = Rho.Application.publicFolder;
