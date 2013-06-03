@@ -423,7 +423,6 @@ describe("Scanner property SET-GET setting Directly", function() {
 						var data = Rho.Barcode.getProperty(bar_setget_decoder_property[k]['propertyName']);
 					}
 					catch(err){
-						alert(err.message);
 						var data = err.message;
 					}
 

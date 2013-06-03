@@ -1,681 +1,778 @@
 var bar_setget_scanner_property = [
 
 {
-	testName		:	"VT282-3001 | call setproperty with rastermode:None  | None",
+	testName		:	"VT282-3001 | Set rastermode:None  | None",
 	propertyName	:	"rasterMode",
 	scannerTypes	:	"Laser",
+	OSTypes			:	"Windows",
 	propertyValue	:	"none",
 	expectedResult	:	"none"
 },
 {
-	testName		:	"VT282-3002 | call setproperty with rastermode:openAlways | openAlways",
+	testName		:	"VT282-3002 | Set rastermode:openAlways | openAlways",
 	propertyName	:	"rasterMode",
 	scannerTypes	:	"Laser",
+	OSTypes			:	"Windows",
 	propertyValue	:	"openAlways",
 	expectedResult	:	"openAlways"
 },
 {
-	testName		:	"VT282-3003 | call setproperty with rastermode:smart  | smart",
+	testName		:	"VT282-3003 | Set rastermode:smart  | smart",
 	propertyName	:	"rasterMode",
 	scannerTypes	:	"Laser",
+	OSTypes			:	"Windows",
 	propertyValue	:	"smart",
 	expectedResult	:	"smart"
 },
 {
-	testName		:	"VT282-3004 | call setproperty with rastermode:cyclone | openAlways",
+	testName		:	"VT282-3004 | Set rastermode:cyclone | openAlways",
 	propertyName	:	"rasterMode",
 	scannerTypes	:	"Laser",
+	OSTypes			:	"Windows",
 	propertyValue	:	"cyclone",
 	expectedResult	:	"cyclone"
 },
 {
-	testName		:	"VT282-3005 | call setproperty with rasterHeight:50 | 50",
+	testName		:	"VT282-3005 | Set rasterHeight:50 | 50",
 	propertyName	:	"rasterHeight",
 	scannerTypes	:	"Laser",
+	OSTypes			:	"Windows",
 	propertyValue	:	"50",
 	expectedResult	:	"50"
 },
 {
-	testName		:	"VT282-3006 | call setproperty with rasterHeight:0 | 0",
+	testName		:	"VT282-3006 | Set rasterHeight:0 | 0",
 	propertyName	:	"rasterHeight",
 	scannerTypes	:	"Laser",
+	OSTypes			:	"Windows",
 	propertyValue	:	"0",
 	expectedResult	:	"0"
 },
 {
-	testName		:	"VT282-3007 | call setproperty with rasterHeight:100 | 100",
+	testName		:	"VT282-3007 | Set rasterHeight:100 | 100",
 	propertyName	:	"rasterHeight",
 	scannerTypes	:	"Laser",
+	OSTypes			:	"Windows",
 	propertyValue	:	"100",
 	expectedResult	:	"100"
 },
 {
-	testName		:	"VT282-3008 | call setproperty with aimMode:none | none",
+	testName		:	"VT282-3008 | Set aimMode:none | none",
 	propertyName	:	"aimMode",
 	scannerTypes	:	"Imager",
+	OSTypes			:	"Windows",
 	propertyValue	:	"none",
 	expectedResult	:	"none"
 },
 {
-	testName		:	"VT282-3009 | call setproperty with aimMode:dot | dot",
+	testName		:	"VT282-3009 | Set aimMode:dot | dot",
 	propertyName	:	"aimMode",
 	scannerTypes	:	"Laser",
+	OSTypes			:	"Windows",
 	propertyValue	:	"dot",
 	expectedResult	:	"dot"
 },
 {
-	testName		:	"VT282-3010 | call setproperty with aimMode:slab | slab",
+	testName		:	"VT282-3010 | Set aimMode:slab | slab",
 	propertyName	:	"aimMode",
 	scannerTypes	:	"Laser",
+	OSTypes			:	"Windows",
 	propertyValue	:	"slab",
 	expectedResult	:	"slab"
 },
 {
-	testName		:	"VT282-3011 | call setproperty with aimMode:reticle | reticle",
+	testName		:	"VT282-3011 | Set aimMode:reticle | reticle",
 	propertyName	:	"aimMode",
 	scannerTypes	:	"Imager",
+	OSTypes			:	"Windows",
 	propertyValue	:	"reticle",
 	expectedResult	:	"reticle"
 },
 {
-	testName		:	"VT282-3012 | call setproperty with dpmMode:true | true",
+	testName		:	"VT282-3012 | Set dpmMode:true | true",
 	propertyName	:	"dpmMode",
 	scannerTypes	:	"Imager",
+	OSTypes			:	"Windows",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
 {
-	testName		:	"VT282-3013 | call setproperty with dpmMode:false | false",
+	testName		:	"VT282-3013 | Set dpmMode:false | false",
 	propertyName	:	"dpmMode",
 	scannerTypes	:	"Imager",
+	OSTypes			:	"Windows",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
 {
-	testName		:	"VT282-3014 | call setproperty with focusMode:fixed | fixed",
+	testName		:	"VT282-3014 | Set focusMode:fixed | fixed",
 	propertyName	:	"focusMode",
 	scannerTypes	:	"Imager",
+	OSTypes			:	"Windows",
 	propertyValue	:	"fixed",
 	expectedResult	:	"fixed"
 },
 {
-	testName		:	"VT282-3015 | call setproperty with focusMode:auto | auto",
+	testName		:	"VT282-3015 | Set focusMode:auto | auto",
 	propertyName	:	"focusMode",
 	scannerTypes	:	"Imager",
+	OSTypes			:	"Windows",
 	propertyValue	:	"auto",
 	expectedResult	:	"auto"
 },
 {
-	testName		:	"VT282-3016 | call setproperty with illuminationMode:auto | auto",
+	testName		:	"VT282-3016 | Set illuminationMode:auto | auto",
 	propertyName	:	"illuminationMode",
 	scannerTypes	:	"Imager",
+	OSTypes			:	"All",
 	propertyValue	:	"auto",
 	expectedResult	:	"auto"
 },
 {
-	testName		:	"VT282-3017 | call setproperty with illuminationMode:alwaysOn | alwaysOn",
+	testName		:	"VT282-3017 | Set illuminationMode:alwaysOn | alwaysOn",
 	propertyName	:	"illuminationMode",
 	scannerTypes	:	"Imager",
+	OSTypes			:	"All",
 	propertyValue	:	"alwaysOn",
 	expectedResult	:	"alwaysOn"
 },
 {
-	testName		:	"VT282-3018 | call setproperty with illuminationMode:alwaysOff | alwaysOff",
+	testName		:	"VT282-3018 | Set illuminationMode:alwaysOff | alwaysOff",
 	propertyName	:	"illuminationMode",
 	scannerTypes	:	"Imager",
+	OSTypes			:	"All",
 	propertyValue	:	"alwaysOff",
 	expectedResult	:	"alwaysOff"
 },
 {
-	testName		:	"VT282-3019 | call setproperty with inverse1dMode:enabled| enabled",
+	testName		:	"VT282-3019 | Set inverse1dMode:enabled| enabled",
 	propertyName	:	"inverse1dMode",
 	scannerTypes	:	"Imager",
+	OSTypes			:	"All",
 	propertyValue	:	"enabled",
 	expectedResult	:	"enabled"
 },
 {
-	testName		:	"VT282-3020 | call setproperty with inverse1dMode:disabled | disabled",
+	testName		:	"VT282-3020 | Set inverse1dMode:disabled | disabled",
 	propertyName	:	"inverse1dMode",
 	scannerTypes	:	"Imager",
+	OSTypes			:	"All",
 	propertyValue	:	"disabled",
 	expectedResult	:	"disabled"
 },
 {
-	testName		:	"VT282-3021 | call setproperty with inverse1dMode:auto | auto",
+	testName		:	"VT282-3021 | Set inverse1dMode:auto | auto",
 	propertyName	:	"inverse1dMode",
 	scannerTypes	:	"Imager",
+	OSTypes			:	"All",
 	propertyValue	:	"auto",
 	expectedResult	:	"auto"
 },
 {
-	testName		:	"VT282-3022 | call setproperty with linearSecurityLevel:redundancyAndLength | redundancyAndLength",
+	testName		:	"VT282-3022 | Set linearSecurityLevel:redundancyAndLength | redundancyAndLength",
 	propertyName	:	"linearSecurityLevel",
 	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"redundancyAndLength",
 	expectedResult	:	"redundancyAndLength"
 },
 {
-	testName		:	"VT282-3023 | call setproperty with linearSecurityLevel:shortOrCodabar | shortOrCodabar",
+	testName		:	"VT282-3023 | Set linearSecurityLevel:shortOrCodabar | shortOrCodabar",
 	propertyName	:	"linearSecurityLevel",
 	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"shortOrCodabar",
 	expectedResult	:	"shortOrCodabar"
 },
 {
-	testName		:	"VT282-3024 | call setproperty with linearSecurityLevel:longAndShort | longAndShort",
+	testName		:	"VT282-3024 | Set linearSecurityLevel:longAndShort | longAndShort",
 	propertyName	:	"linearSecurityLevel",
 	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"longAndShort",
 	expectedResult	:	"longAndShort"
 },
 {
-	testName		:	"VT282-3025 | call setproperty with linearSecurityLevel:allTwice | allTwice",
+	testName		:	"VT282-3025 | Set linearSecurityLevel:allTwice | allTwice",
 	propertyName	:	"linearSecurityLevel",
 	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"allTwice",
 	expectedResult	:	"allTwice"
 },
 {
-	testName		:	"VT282-3026 | call setproperty with linearSecurityLevel:allThrice | allThrice",
+	testName		:	"VT282-3026 | Set linearSecurityLevel:allThrice | allThrice",
 	propertyName	:	"linearSecurityLevel",
 	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"allThrice",
 	expectedResult	:	"allThrice"
 },
 {
-	testName		:	"VT282-3027 | call setproperty with picklistMode:disabled | disabled",
+	testName		:	"VT282-3027 | Set picklistMode:disabled | disabled",
 	propertyName	:	"picklistMode",
 	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"disabled",
 	expectedResult	:	"disabled"
 },
 {
-	testName		:	"VT282-3028 | call setproperty with picklistMode:hardwareReticle | hardwareReticle",
+	testName		:	"VT282-3028 | Set picklistMode:hardwareReticle | hardwareReticle",
 	propertyName	:	"picklistMode",
 	scannerTypes	:	"All",
+	OSTypes			:	"Windows",
 	propertyValue	:	"hardwareReticle",
 	expectedResult	:	"hardwareReticle"
 },
 {
-	testName		:	"VT282-3029 | call setproperty with picklistMode:softwareReticle | softwareReticle",
+	testName		:	"VT282-3029 | Set picklistMode:softwareReticle | softwareReticle",
 	propertyName	:	"picklistMode",
 	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"softwareReticle",
 	expectedResult	:	"softwareReticle"
 },
 {
-	testName		:	"VT282-3030 | call setproperty with poorQuality1dMode:true | true",
+	testName		:	"VT282-3030 | Set poorQuality1dMode:true | true",
 	propertyName	:	"poorQuality1dMode",
 	scannerTypes	:	"Imager",
+	OSTypes			:	"Windows",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
 {
-	testName		:	"VT282-3031 | call setproperty with poorQuality1dMode:false | false",
+	testName		:	"VT282-3031 | Set poorQuality1dMode:false | false",
 	propertyName	:	"poorQuality1dMode",
 	scannerTypes	:	"Imager",
+	OSTypes			:	"Windows",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
 {
-	testName		:	"VT282-3032 | call setproperty with poorQuality1dMode:false | false",
+	testName		:	"VT282-3032 | Set poorQuality1dMode:false | false",
 	propertyName	:	"poorQuality1dMode",
 	scannerTypes	:	"Imager",
+	OSTypes			:	"Windows",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
 {
-	testName		:	"VT282-3033 | call setproperty with viewfinderMode:enabled | enabled",
+	testName		:	"VT282-3033 | Set viewfinderMode:enabled | enabled",
 	propertyName	:	"viewfinderMode",
 	scannerTypes	:	"Imager",
+	OSTypes			:	"All",
 	propertyValue	:	"enabled",
 	expectedResult	:	"enabled"
 },
 {
-	testName		:	"VT282-3034 | call setproperty with viewfinderMode:disabled | disabled",
+	testName		:	"VT282-3034 | Set viewfinderMode:disabled | disabled",
 	propertyName	:	"viewfinderMode",
 	scannerTypes	:	"Imager",
+	OSTypes			:	"Windows",
 	propertyValue	:	"disabled",
 	expectedResult	:	"disabled"
 },
 {
-	testName		:	"VT282-3035 | call setproperty with viewfinderMode:staticReticle | staticReticle",
+	testName		:	"VT282-3035 | Set viewfinderMode:staticReticle | staticReticle",
 	propertyName	:	"viewfinderMode",
 	scannerTypes	:	"Imager",
+	OSTypes			:	"All",
 	propertyValue	:	"staticReticle",
 	expectedResult	:	"staticReticle"
 },
 {
-	testName		:	"VT282-3036 | call setproperty with viewfinderMode:staticReticle | dynamicReticle",
+	testName		:	"VT282-3036 | Set viewfinderMode:staticReticle | dynamicReticle",
 	propertyName	:	"viewfinderMode",
 	scannerTypes	:	"Imager",
+	OSTypes			:	"Windows",
 	propertyValue	:	"dynamicReticle",
 	expectedResult	:	"dynamicReticle"
 },
 {
-	testName		:	"VT282-3037 | call setproperty with viewfinderFeedback:enabled | enabled",
+	testName		:	"VT282-3037 | Set viewfinderFeedback:enabled | enabled",
 	propertyName	:	"viewfinderFeedback",
 	scannerTypes	:	"Imager",
+	OSTypes			:	"Windows",
 	propertyValue	:	"enabled",
 	expectedResult	:	"enabled"
 },
 {
-	testName		:	"VT282-3038 | call setproperty with viewfinderFeedback:disabled | disabled",
+	testName		:	"VT282-3038 | Set viewfinderFeedback:disabled | disabled",
 	propertyName	:	"viewfinderFeedback",
 	scannerTypes	:	"Imager",
+	OSTypes			:	"Windows",
 	propertyValue	:	"disabled",
 	expectedResult	:	"disabled"
 },
 {
-	testName		:	"VT282-3039 | call setproperty with viewfinderFeedback:reticle | reticle",
+	testName		:	"VT282-3039 | Set viewfinderFeedback:reticle | reticle",
 	propertyName	:	"viewfinderFeedback",
 	scannerTypes	:	"Imager",
+	OSTypes			:	"Windows",
 	propertyValue	:	"reticle",
 	expectedResult	:	"reticle"
 },
 {
-	testName		:	"VT282-3040 | call setproperty with viewfinderHeight:200 | 200",
+	testName		:	"VT282-3040 | Set viewfinderHeight:200 | 200",
 	propertyName	:	"viewfinderHeight",
 	scannerTypes	:	"Imager",
+	OSTypes			:	"Windows",
 	propertyValue	:	"200",
 	expectedResult	:	"200"
 },
 {
-	testName		:	"VT282-3041 | call setproperty with viewfinderWidth:250 | 250",
+	testName		:	"VT282-3041 | Set viewfinderWidth:250 | 250",
 	propertyName	:	"viewfinderHeight",
 	scannerTypes	:	"Imager",
+	OSTypes			:	"Windows",
 	propertyValue	:	"250",
 	expectedResult	:	"250"
 },
 {
-	testName		:	"VT282-3042 | call setproperty with viewfinderX :150 | 150",
+	testName		:	"VT282-3042 | Set viewfinderX :150 | 150",
 	propertyName	:	"viewfinderHeight",
 	scannerTypes	:	"Imager",
+	OSTypes			:	"Windows",
 	propertyValue	:	"150",
 	expectedResult	:	"150"
 },
 {
-	testName		:	"VT282-3043 | call setproperty with viewfinderY :100 | 100",
+	testName		:	"VT282-3043 | Set viewfinderY :100 | 100",
 	propertyName	:	"viewfinderHeight",
 	scannerTypes	:	"Imager",
+	OSTypes			:	"Windows",
 	propertyValue	:	"100",
 	expectedResult	:	"100"
 },
 {
-	testName		:	"VT282-3044 | call setproperty with viewfinderFeedbackTime :4000 | 4000",
+	testName		:	"VT282-3044 | Set viewfinderFeedbackTime :4000 | 4000",
 	propertyName	:	"viewfinderFeedbackTime",
 	scannerTypes	:	"Imager",
+	OSTypes			:	"Windows",
 	propertyValue	:	"4000",
 	expectedResult	:	"4000"
 },
 {
-	testName		:	"VT282-3045 | call setproperty with viewfinderFeedbackTime :7000 | 7000",
+	testName		:	"VT282-3045 | Set viewfinderFeedbackTime :7000 | 7000",
 	propertyName	:	"viewfinderFeedbackTime",
 	scannerTypes	:	"Imager",
+	OSTypes			:	"Windows",
 	propertyValue	:	"7000",
 	expectedResult	:	"7000"
 },
 {
-	testName		:	"VT282-3046 | call setproperty with scanTimeout :10000 | 10000",
+	testName		:	"VT282-3046 | Set scanTimeout :10000 | 10000",
 	propertyName	:	"scanTimeout",
 	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"10000",
 	expectedResult	:	"10000"
 },
 {
-	testName		:	"VT282-3047 | call setproperty with scanTimeout :3000 | 3000",
+	testName		:	"VT282-3047 | Set scanTimeout :3000 | 3000",
 	propertyName	:	"scanTimeout",
 	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"3000",
 	expectedResult	:	"3000"
 },
 {
-	testName		:	"VT282-3048 | call setproperty with scanTimeout :0 | 0",
+	testName		:	"VT282-3048 | Set scanTimeout :0 | 0",
 	propertyName	:	"scanTimeout",
 	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"0",
 	expectedResult	:	"0"
 },
 {
-	testName		:	"VT282-3049 | call setproperty with bidirectionalRedundancy :true | true",
+	testName		:	"VT282-3049 | Set bidirectionalRedundancy :true | true",
 	propertyName	:	"bidirectionalRedundancy",
 	scannerTypes	:	"Laser",
+	OSTypes			:	"Windows",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
 {
-	testName		:	"VT282-3050 | call setproperty with bidirectionalRedundancy :false | false",
+	testName		:	"VT282-3050 | Set bidirectionalRedundancy :false | false",
 	propertyName	:	"bidirectionalRedundancy",
 	scannerTypes	:	"Laser",
+	OSTypes			:	"Windows",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
 {
-	testName		:	"VT282-3051 | call setproperty with klasseEins :true | true",
+	testName		:	"VT282-3051 | Set klasseEins :true | true",
 	propertyName	:	"klasseEins",
 	scannerTypes	:	"Laser",
+	OSTypes			:	"Windows",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
 {
-	testName		:	"VT282-3052 | call setproperty with klasseEins :false | false",
+	testName		:	"VT282-3052 | Set klasseEins :false | false",
 	propertyName	:	"klasseEins",
 	scannerTypes	:	"Laser",
+	OSTypes			:	"Windows",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
 {
-	testName		:	"VT282-3053 | call setproperty with sameSymbolTimeout :5000 | 5000",
+	testName		:	"VT282-3053 | Set sameSymbolTimeout :5000 | 5000",
 	propertyName	:	"sameSymbolTimeout",
 	scannerTypes	:	"All",
+	OSTypes			:	"Windows",
 	propertyValue	:	"5000",
 	expectedResult	:	"5000"
 },
 {
-	testName		:	"VT282-3054 | call setproperty with sameSymbolTimeout :0 | 0",
+	testName		:	"VT282-3054 | Set sameSymbolTimeout :0 | 0",
 	propertyName	:	"sameSymbolTimeout",
 	scannerTypes	:	"All",
+	OSTypes			:	"Windows",
 	propertyValue	:	"0",
 	expectedResult	:	"0"
 },
 {
-	testName		:	"VT282-3055 | call setproperty with differentSymbolTimeout :2000 | 2000",
+	testName		:	"VT282-3055 | Set differentSymbolTimeout :2000 | 2000",
 	propertyName	:	"differentSymbolTimeout",
 	scannerTypes	:	"All",
+	OSTypes			:	"Windows",
 	propertyValue	:	"2000",
 	expectedResult	:	"2000"
 },
 {
-	testName		:	"VT282-3056 | call setproperty with differentSymbolTimeout :0 | 0",
+	testName		:	"VT282-3056 | Set differentSymbolTimeout :0 | 0",
 	propertyName	:	"differentSymbolTimeout",
 	scannerTypes	:	"All",
+	OSTypes			:	"Windows",
 	propertyValue	:	"0",
 	expectedResult	:	"0"
 },
 {
-	testName		:	"VT282-3057 | call setproperty with adaptiveScanning :true | true",
+	testName		:	"VT282-3057 | Set adaptiveScanning :true | true",
 	propertyName	:	"adaptiveScanning",
 	scannerTypes	:	"Laser",
+	OSTypes			:	"Windows",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
 {
-	testName		:	"VT282-3058 | call setproperty with adaptiveScanning :false | false",
+	testName		:	"VT282-3058 | Set adaptiveScanning :false | false",
 	propertyName	:	"adaptiveScanning",
 	scannerTypes	:	"Laser",
+	OSTypes			:	"Windows",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
 {
-	testName		:	"VT282-3059 | call setproperty with dbpMode :normal | normal",
+	testName		:	"VT282-3059 | Set dbpMode :normal | normal",
 	propertyName	:	"dbpMode",
 	scannerTypes	:	"Laser",
+	OSTypes			:	"Windows",
 	propertyValue	:	"normal",
 	expectedResult	:	"normal"
 },
 {
-	testName		:	"VT282-3060 | call setproperty with dbpMode :composite | composite",
+	testName		:	"VT282-3060 | Set dbpMode :composite | composite",
 	propertyName	:	"dbpMode",
 	scannerTypes	:	"Laser",
+	OSTypes			:	"Windows",
 	propertyValue	:	"composite",
 	expectedResult	:	"composite"
 },
 {
-	testName		:	"VT282-3061 | call setproperty with timedAimDuration :4000 | 4000",
+	testName		:	"VT282-3061 | Set timedAimDuration :4000 | 4000",
 	propertyName	:	"timedAimDuration",
 	scannerTypes	:	"All",
+	OSTypes			:	"Windows",
 	propertyValue	:	"2000",
 	expectedResult	:	"2000"
 },
 {
-	testName		:	"VT282-3062 | call setproperty with timedAimDuration :1000 | 1000",
+	testName		:	"VT282-3062 | Set timedAimDuration :1000 | 1000",
 	propertyName	:	"timedAimDuration",
 	scannerTypes	:	"All",
+	OSTypes			:	"Windows",
 	propertyValue	:	"1000",
 	expectedResult	:	"1000"
 },
 {
-	testName		:	"VT282-3063 | call setproperty with aimType :trigger | trigger",
+	testName		:	"VT282-3063 | Set aimType :trigger | trigger",
 	propertyName	:	"aimType",
 	scannerTypes	:	"All",
+	OSTypes			:	"Windows",
 	propertyValue	:	"trigger",
 	expectedResult	:	"trigger"
 },
 {
-	testName		:	"VT282-3064 | call setproperty with aimType :timedHold | timedHold",
+	testName		:	"VT282-3064 | Set aimType :timedHold | timedHold",
 	propertyName	:	"aimType",
 	scannerTypes	:	"All",
+	OSTypes			:	"Windows",
 	propertyValue	:	"timedHold",
 	expectedResult	:	"timedHold"
 },
 {
-	testName		:	"VT282-3065 | call setproperty with aimType :timedRelease | timedRelease",
+	testName		:	"VT282-3065 | Set aimType :timedRelease | timedRelease",
 	propertyName	:	"aimType",
 	scannerTypes	:	"All",
+	OSTypes			:	"Windows",
 	propertyValue	:	"timedRelease",
 	expectedResult	:	"timedRelease"
 },
 {
-	testName		:	"VT282-3066 | call setproperty with aimType :presentation | presentation",
+	testName		:	"VT282-3066 | Set aimType :presentation | presentation",
 	propertyName	:	"aimType",
 	scannerTypes	:	"All",
+	OSTypes			:	"Windows",
 	propertyValue	:	"presentation",
 	expectedResult	:	"presentation"
 },
 {
-	testName		:	"VT282-3067 | call setproperty with aimType :pressAndRelease | pressAndRelease",
+	testName		:	"VT282-3067 | Set aimType :pressAndRelease | pressAndRelease",
 	propertyName	:	"aimType",
 	scannerTypes	:	"All",
+	OSTypes			:	"Windows",
 	propertyValue	:	"pressAndRelease",
 	expectedResult	:	"pressAndRelease"
 },
 {
-	testName		:	"VT282-3068 | call setproperty with aimType :continuousRead | continuousRead",
+	testName		:	"VT282-3068 | Set aimType :continuousRead | continuousRead",
 	propertyName	:	"aimType",
 	scannerTypes	:	"All",
+	OSTypes			:	"Windows",
 	propertyValue	:	"continuousRead",
 	expectedResult	:	"continuousRead"
 },
 {
-	testName		:	"VT282-3069 | call setproperty with beamWidth :normal | normal",
+	testName		:	"VT282-3069 | Set beamWidth :normal | normal",
 	propertyName	:	"beamWidth",
 	scannerTypes	:	"Laser",
+	OSTypes			:	"Windows",
 	propertyValue	:	"normal",
 	expectedResult	:	"normal"
 },
 {
-	testName		:	"VT282-3070 | call setproperty with beamWidth :wide | wide",
+	testName		:	"VT282-3070 | Set beamWidth :wide | wide",
 	propertyName	:	"beamWidth",
 	scannerTypes	:	"Laser",
+	OSTypes			:	"Windows",
 	propertyValue	:	"wide",
 	expectedResult	:	"wide"
 },
 {
-	testName		:	"VT282-3071 | call setproperty with beamWidth :narrow | narrow",
+	testName		:	"VT282-3071 | Set beamWidth :narrow | narrow",
 	propertyName	:	"beamWidth",
 	scannerTypes	:	"Laser",
+	OSTypes			:	"Windows",
 	propertyValue	:	"narrow",
 	expectedResult	:	"narrow"
 },
 {
-	testName		:	"VT282-3072 | call setproperty with barcodeDataFormat :binary | binary",
+	testName		:	"VT282-3072 | Set barcodeDataFormat :binary | binary",
 	propertyName	:	"barcodeDataFormat",
 	scannerTypes	:	"Imager",
+	OSTypes			:	"Windows",
 	propertyValue	:	"binary",
 	expectedResult	:	"binary"
 },
 {
-	testName		:	"VT282-3073 | call setproperty with barcodeDataFormat :text | text",
+	testName		:	"VT282-3073 | Set barcodeDataFormat :text | text",
 	propertyName	:	"barcodeDataFormat",
 	scannerTypes	:	"Imager",
+	OSTypes			:	"Windows",
 	propertyValue	:	"text",
 	expectedResult	:	"text"
 },
 {
-	testName		:	"VT282-3074 | call setproperty with dataBufferSize :50000 | 50000",
+	testName		:	"VT282-3074 | Set dataBufferSize :50000 | 50000",
 	propertyName	:	"dataBufferSize",
 	scannerTypes	:	"Imager",
+	OSTypes			:	"Windows",
 	propertyValue	:	"50000",
 	expectedResult	:	"50000"
 },
 {
-	testName		:	"VT282-3075 | call setproperty with dataBufferSize :20000 | 20000",
+	testName		:	"VT282-3075 | Set dataBufferSize :20000 | 20000",
 	propertyName	:	"dataBufferSize",
 	scannerTypes	:	"Imager",
+	OSTypes			:	"Windows",
 	propertyValue	:	"20000",
 	expectedResult	:	"20000"
 },
 {
-	testName		:	"VT282-3076 | call setproperty with dataBufferSize :0 | 0",
+	testName		:	"VT282-3076 | Set dataBufferSize :0 | 0",
 	propertyName	:	"dataBufferSize",
 	scannerTypes	:	"Imager",
+	OSTypes			:	"Windows",
 	propertyValue	:	"0",
 	expectedResult	:	"0"
 },
 {
-	testName		:	"VT282-3077 | call setproperty with decodeDuration :1000 | 1000",
+	testName		:	"VT282-3077 | Set decodeDuration :1000 | 1000",
 	propertyName	:	"decodeDuration",
 	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"1000",
 	expectedResult	:	"1000"
 },
 {
-	testName		:	"VT282-3078 | call setproperty with decodeDuration :5000 | 5000",
+	testName		:	"VT282-3078 | Set decodeDuration :5000 | 5000",
 	propertyName	:	"decodeDuration",
 	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"5000",
 	expectedResult	:	"5000"
 },
 {
-	testName		:	"VT282-3079 | call setproperty with decodeFrequency :0 | 0",
+	testName		:	"VT282-3079 | Set decodeFrequency :0 | 0",
 	propertyName	:	"decodeFrequency",
 	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"0",
 	expectedResult	:	"0"
 },
 {
-	testName		:	"VT282-3080 | call setproperty with decodeFrequency :65535 | 65535",
+	testName		:	"VT282-3080 | Set decodeFrequency :65535 | 65535",
 	propertyName	:	"decodeFrequency",
 	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"65535",
 	expectedResult	:	"65535"
 },
 {
-	testName		:	"VT282-3081 | call setproperty with invalidDecodeFrequency :0 | 0",
+	testName		:	"VT282-3081 | Set invalidDecodeFrequency :0 | 0",
 	propertyName	:	"invalidDecodeFrequency",
 	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"0",
 	expectedResult	:	"0"
 },
 {
-	testName		:	"VT282-3082 | call setproperty with invalidDecodeFrequency :65535 | 65535",
+	testName		:	"VT282-3082 | Set invalidDecodeFrequency :65535 | 65535",
 	propertyName	:	"invalidDecodeFrequency",
 	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"65535",
 	expectedResult	:	"65535"
 },
 {
-	testName		:	"VT282-3083 | call setproperty with  decodeSound :localpath | application/alarm.wav",
+	testName		:	"VT282-3083 | Set  decodeSound :localpath | application/alarm.wav",
 	propertyName	:	"decodeSound",
 	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"file://application/alarm.wav",
 	expectedResult	:	"application/alarm.wav"
 },
 {
-	testName		:	"VT282-3084 | call setproperty with  invalidDecodeSound :localpath | application/alarm5.wav",
+	testName		:	"VT282-3084 | Set  invalidDecodeSound :localpath | application/alarm5.wav",
 	propertyName	:	"invalidDecodeSound",
 	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"file://application/alarm5.wav",
 	expectedResult	:	"application/alarm5.wav"
 },
 {
-	testName		:	"VT282-3085 | call setproperty with  decodeVolume :5 | 5",
+	testName		:	"VT282-3085 | Set  decodeVolume :5 | 5",
 	propertyName	:	"decodeVolume",
 	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"5",
 	expectedResult	:	"5"
 },
 {
-	testName		:	"VT282-3086 | call setproperty with  decodeVolume :1 | 1",
+	testName		:	"VT282-3086 | Set  decodeVolume :1 | 1",
 	propertyName	:	"decodeVolume",
 	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"1",
 	expectedResult	:	"1"
 },
 {
-	testName		:	"VT282-3087 | call setproperty with  decodeVolume :0 | 0",
+	testName		:	"VT282-3087 | Set  decodeVolume :0 | 0",
 	propertyName	:	"decodeVolume",
 	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"0",
 	expectedResult	:	"0"
 },
 {
-	testName		:	"VT282-3088 | call setproperty with  disableScannerDuringNavigate :true | true",
+	testName		:	"VT282-3088 | Set  disableScannerDuringNavigate :true | true",
 	propertyName	:	"disableScannerDuringNavigate",
 	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
 {
-	testName		:	"VT282-3089 | call setproperty with  disableScannerDuringNavigate :false | false",
+	testName		:	"VT282-3089 | Set  disableScannerDuringNavigate :false | false",
 	propertyName	:	"disableScannerDuringNavigate",
 	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
 {
-	testName		:	"VT282-3090 | call setproperty with  lowBatteryScan :true | true",
+	testName		:	"VT282-3090 | Set  lowBatteryScan :true | true",
 	propertyName	:	"lowBatteryScan",
 	scannerTypes	:	"All",
+	OSTypes			:	"Windows",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
 {
-	testName		:	"VT282-3091 | call setproperty with  lowBatteryScan :false | false",
+	testName		:	"VT282-3091 | Set  lowBatteryScan :false | false",
 	propertyName	:	"lowBatteryScan",
 	scannerTypes	:	"All",
+	OSTypes			:	"Windows",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
 {
-	testName		:	"VT282-3092 | call setproperty with  autoEnter :true | true",
+	testName		:	"VT282-3092 | Set  autoEnter :true | true",
 	propertyName	:	"autoEnter",
 	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
 {
-	testName		:	"VT282-3093 | call setproperty with  autoEnter :false| false",
+	testName		:	"VT282-3093 | Set  autoEnter :false| false",
 	propertyName	:	"autoEnter",
 	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
 {
-	testName		:	"VT282-3094 | call setproperty with  autoTab :true | true",
+	testName		:	"VT282-3094 | Set  autoTab :true | true",
 	propertyName	:	"autoTab",
 	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
 {
-	testName		:	"VT282-3095 | call setproperty with  autoTab :false| false",
+	testName		:	"VT282-3095 | Set  autoTab :false| false",
 	propertyName	:	"autoTab",
 	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
 {
-	testName		:	"VT282-3096 | call setproperty with  hapticFeedback :true | true",
+	testName		:	"VT282-3096 | Set  hapticFeedback :true | true",
 	propertyName	:	"hapticFeedback",
 	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
 {
-	testName		:	"VT282-3097 | call setproperty with  hapticFeedback :false| false",
+	testName		:	"VT282-3097 | Set  hapticFeedback :false| false",
 	propertyName	:	"hapticFeedback",
 	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 }
@@ -684,2159 +781,2472 @@ var bar_setget_scanner_property = [
 var bar_setget_decoder_property = [
 
 {
-	testName		:	"VT282-4001 | call setproperty with allDecoders:True  | true",
+	testName		:	"VT282-4001 | Set allDecoders:True  | true",
 	propertyName	:	"allDecoders",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
 {
-	testName		:	"VT282-4002 | call setproperty with allDecoders:false  | false",
+	testName		:	"VT282-4002 | Set allDecoders:false  | false",
 	propertyName	:	"allDecoders",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
 {
-	testName		:	"VT282-4003 | call setproperty with ausPostal:True  | true",
+	testName		:	"VT282-4003 | Set ausPostal:True  | true",
 	propertyName	:	"ausPostal",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
 {
-	testName		:	"VT282-4004 | call setproperty with ausPostal:false  | false",
+	testName		:	"VT282-4004 | Set ausPostal:false  | false",
 	propertyName	:	"ausPostal",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
 {
-	testName		:	"VT282-4005 | call setproperty with canPostal:True  | true",
+	testName		:	"VT282-4005 | Set canPostal:True  | true",
 	propertyName	:	"canPostal",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
 {
-	testName		:	"VT282-4006 | call setproperty with canPostal:false  | false",
+	testName		:	"VT282-4006 | Set canPostal:false  | false",
 	propertyName	:	"canPostal",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
 {
-	testName		:	"VT282-4007 | call setproperty with codabar:True  | true",
+	testName		:	"VT282-4007 | Set codabar:True  | true",
 	propertyName	:	"codabar",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
 {
-	testName		:	"VT282-4008 | call setproperty with codabar:false  | false",
+	testName		:	"VT282-4008 | Set codabar:false  | false",
 	propertyName	:	"codabar",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
 {
-	testName		:	"VT282-4009 | call setproperty with codabarClsiEditing:True  | true",
+	testName		:	"VT282-4009 | Set codabarClsiEditing:True  | true",
 	propertyName	:	"codabarClsiEditing",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
 {
-	testName		:	"VT282-4010 | call setproperty with codabarClsiEditing:false  | false",
+	testName		:	"VT282-4010 | Set codabarClsiEditing:false  | false",
 	propertyName	:	"codabarClsiEditing",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
 {
-	testName		:	"VT282-4011 | call setproperty with codabarMaxLength:0  | 0",
+	testName		:	"VT282-4011 | Set codabarMaxLength:0  | 0",
 	propertyName	:	"codabarMaxLength",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"0",
 	expectedResult	:	"0"
 },
 {
-	testName		:	"VT282-4012 | call setproperty with codabarMaxLength:10 | 10",
+	testName		:	"VT282-4012 | Set codabarMaxLength:10 | 10",
 	propertyName	:	"codabarMaxLength",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"10",
 	expectedResult	:	"10"
 },
 {
-	testName		:	"VT282-4013 | call setproperty with codabarMaxLength:55 | 55",
+	testName		:	"VT282-4013 | Set codabarMaxLength:55 | 55",
 	propertyName	:	"codabarMaxLength",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"55",
 	expectedResult	:	"55"
 },
 {
-	testName		:	"VT282-4014 | call setproperty with codabarMinLength:0  | 0",
+	testName		:	"VT282-4014 | Set codabarMinLength:0  | 0",
 	propertyName	:	"codabarMinLength",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"0",
 	expectedResult	:	"0"
 },
 {
-	testName		:	"VT282-4015 | call setproperty with codabarMinLength:10 | 10",
+	testName		:	"VT282-4015 | Set codabarMinLength:10 | 10",
 	propertyName	:	"codabarMinLength",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"10",
 	expectedResult	:	"10"
 },
 {
-	testName		:	"VT282-4016 | call setproperty with codabarMinLength:55 | 55",
+	testName		:	"VT282-4016 | Set codabarMinLength:55 | 55",
 	propertyName	:	"codabarMinLength",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"55",
 	expectedResult	:	"55"
 },
 {
-	testName		:	"VT282-4017 | call setproperty with codabarNotisEditing:True  | true",
+	testName		:	"VT282-4017 | Set codabarNotisEditing:True  | true",
 	propertyName	:	"codabarNotisEditing",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
 {
-	testName		:	"VT282-4018 | call setproperty with codabarNotisEditing:false  | false",
+	testName		:	"VT282-4018 | Set codabarNotisEditing:false  | false",
 	propertyName	:	"codabarNotisEditing",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
 {
-	testName		:	"VT282-4019 | call setproperty with codabarRedundancy:True  | true",
+	testName		:	"VT282-4019 | Set codabarRedundancy:True  | true",
 	propertyName	:	"codabarRedundancy",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
 {
-	testName		:	"VT282-4020 | call setproperty with codabarRedundancy:false  | false",
+	testName		:	"VT282-4020 | Set codabarRedundancy:false  | false",
 	propertyName	:	"codabarRedundancy",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
 {
-	testName		:	"VT282-4021 | call setproperty with code11 :True  | true",
+	testName		:	"VT282-4021 | Set code11 :True  | true",
 	propertyName	:	"code11",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
 {
-	testName		:	"VT282-4022 | call setproperty with code11 :false  | false",
+	testName		:	"VT282-4022 | Set code11 :false  | false",
 	propertyName	:	"code11",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
 {
-	testName		:	"VT282-4023 | call setproperty with code11checkDigitCount:none  | none",
+	testName		:	"VT282-4023 | Set code11checkDigitCount:none  | none",
 	propertyName	:	"code11checkDigitCount",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"none",
 	expectedResult	:	"none"
 },
 {
-	testName		:	"VT282-4024 | call setproperty with code11checkDigitCount:one | one",
+	testName		:	"VT282-4024 | Set code11checkDigitCount:one | one",
 	propertyName	:	"code11checkDigitCount",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"one",
 	expectedResult	:	"one"
 },
 {
-	testName		:	"VT282-4025 | call setproperty with code11checkDigitCount:two | two",
+	testName		:	"VT282-4025 | Set code11checkDigitCount:two | two",
 	propertyName	:	"code11checkDigitCount",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"two",
 	expectedResult	:	"two"
 },
 {
-	testName		:	"VT282-4026 | call setproperty with code11maxLength:0  | 0",
+	testName		:	"VT282-4026 | Set code11maxLength:0  | 0",
 	propertyName	:	"code11maxLength",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"0",
 	expectedResult	:	"0"
 },
 {
-	testName		:	"VT282-4027 | call setproperty with code11maxLength:10 | 10",
+	testName		:	"VT282-4027 | Set code11maxLength:10 | 10",
 	propertyName	:	"code11maxLength",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"10",
 	expectedResult	:	"10"
 },
 {
-	testName		:	"VT282-4028 | call setproperty with code11maxLength:55 | 55",
+	testName		:	"VT282-4028 | Set code11maxLength:55 | 55",
 	propertyName	:	"code11maxLength",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"55",
 	expectedResult	:	"55"
 },
 {
-	testName		:	"VT282-4029 | call setproperty with code11minLength:0  | 0",
+	testName		:	"VT282-4029 | Set code11minLength:0  | 0",
 	propertyName	:	"code11minLength",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"0",
 	expectedResult	:	"0"
 },
 {
-	testName		:	"VT282-4030 | call setproperty with code11minLength:10 | 10",
+	testName		:	"VT282-4030 | Set code11minLength:10 | 10",
 	propertyName	:	"code11minLength",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"10",
 	expectedResult	:	"10"
 },
 {
-	testName		:	"VT282-4031 | call setproperty with code11minLength:55 | 55",
+	testName		:	"VT282-4031 | Set code11minLength:55 | 55",
 	propertyName	:	"code11minLength",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"55",
 	expectedResult	:	"55"
 },
 {
-	testName		:	"VT282-4032 | call setproperty with code11redundancy:True  | true",
+	testName		:	"VT282-4032 | Set code11redundancy:True  | true",
 	propertyName	:	"code11redundancy",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
 {
-	testName		:	"VT282-4033 | call setproperty with code11redundancy:false  | false",
+	testName		:	"VT282-4033 | Set code11redundancy:false  | false",
 	propertyName	:	"code11redundancy",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
 {
-	testName		:	"VT282-4034 | call setproperty with code11reportCheckDigit:True  | true",
+	testName		:	"VT282-4034 | Set code11reportCheckDigit:True  | true",
 	propertyName	:	"code11reportCheckDigit",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
 {
-	testName		:	"VT282-4035 | call setproperty with code11reportCheckDigit:false  | false",
+	testName		:	"VT282-4035 | Set code11reportCheckDigit:false  | false",
 	propertyName	:	"code11reportCheckDigit",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
 {
-	testName		:	"VT282-4036 | call setproperty with code128 :True  | true",
+	testName		:	"VT282-4036 | Set code128 :True  | true",
 	propertyName	:	"code128",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
 {
-	testName		:	"VT282-4037 | call setproperty with code128 :false  | false",
+	testName		:	"VT282-4037 | Set code128 :false  | false",
 	propertyName	:	"code128",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
 {
-	testName		:	"VT282-4038 | call setproperty with code128checkIsBtTable:True  | true",
+	testName		:	"VT282-4038 | Set code128checkIsBtTable:True  | true",
 	propertyName	:	"code128checkIsBtTable",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
 {
-	testName		:	"VT282-4039 | call setproperty with code128checkIsBtTable:false  | false",
+	testName		:	"VT282-4039 | Set code128checkIsBtTable:false  | false",
 	propertyName	:	"code128checkIsBtTable",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
 {
-	testName		:	"VT282-4040 | call setproperty with code128ean128:True  | true",
+	testName		:	"VT282-4040 | Set code128ean128:True  | true",
 	propertyName	:	"code128ean128",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
 {
-	testName		:	"VT282-4041 | call setproperty with code128ean128:false  | false",
+	testName		:	"VT282-4041 | Set code128ean128:false  | false",
 	propertyName	:	"code128ean128",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
 {
-	testName		:	"VT282-4042 | call setproperty with code128isbt128:True  | true",
+	testName		:	"VT282-4042 | Set code128isbt128:True  | true",
 	propertyName	:	"code128isbt128",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
 {
-	testName		:	"VT282-4043 | call setproperty with code128isbt128:false  | false",
+	testName		:	"VT282-4043 | Set code128isbt128:false  | false",
 	propertyName	:	"code128isbt128",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
 {
-	testName		:	"VT282-4044 | call setproperty with code128isbt128ConcatMode:never  | never",
+	testName		:	"VT282-4044 | Set code128isbt128ConcatMode:never  | never",
 	propertyName	:	"code128isbt128ConcatMode",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"never",
 	expectedResult	:	"never"
 },
 {
-	testName		:	"VT282-4045 | call setproperty with code128isbt128ConcatMode:always | always",
+	testName		:	"VT282-4045 | Set code128isbt128ConcatMode:always | always",
 	propertyName	:	"code128isbt128ConcatMode",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"always",
 	expectedResult	:	"always"
 },
 {
-	testName		:	"VT282-4046 | call setproperty with code128isbt128ConcatMode:auto | auto",
+	testName		:	"VT282-4046 | Set code128isbt128ConcatMode:auto | auto",
 	propertyName	:	"code128isbt128ConcatMode",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"auto",
 	expectedResult	:	"auto"
 },
 {
-	testName		:	"VT282-4047| call setproperty with code128maxLength:0  | 0",
+	testName		:	"VT282-4047| Set code128maxLength:0  | 0",
 	propertyName	:	"code128maxLength",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"0",
 	expectedResult	:	"0"
 },
 {
-	testName		:	"VT282-4048 | call setproperty with code128maxLength:10 | 10",
+	testName		:	"VT282-4048 | Set code128maxLength:10 | 10",
 	propertyName	:	"code128maxLength",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"10",
 	expectedResult	:	"10"
 },
 {
-	testName		:	"VT282-4049 | call setproperty with code128maxLength:55 | 55",
+	testName		:	"VT282-4049 | Set code128maxLength:55 | 55",
 	propertyName	:	"code128maxLength",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"55",
 	expectedResult	:	"55"
 },
 {
-	testName		:	"VT282-4050 | call setproperty with code128minLength:0  | 0",
+	testName		:	"VT282-4050 | Set code128minLength:0  | 0",
 	propertyName	:	"code128minLength",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"0",
 	expectedResult	:	"0"
 },
 {
-	testName		:	"VT282-4051 | call setproperty with code128minLength:10 | 10",
+	testName		:	"VT282-4051 | Set code128minLength:10 | 10",
 	propertyName	:	"code128minLength",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"10",
 	expectedResult	:	"10"
 },
 {
-	testName		:	"VT282-4052 | call setproperty with code128minLength:55 | 55",
+	testName		:	"VT282-4052 | Set code128minLength:55 | 55",
 	propertyName	:	"code128minLength",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"55",
 	expectedResult	:	"55"
 },
 {
-	testName		:	"VT282-4053 | call setproperty with code128other128:True  | true",
+	testName		:	"VT282-4053 | Set code128other128:True  | true",
 	propertyName	:	"code128other128",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
 {
-	testName		:	"VT282-4054 | call setproperty with code128other128:false  | false",
+	testName		:	"VT282-4054 | Set code128other128:false  | false",
 	propertyName	:	"code128other128",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
 {
-	testName		:	"VT282-4055 | call setproperty with code128redundancy:True  | true",
+	testName		:	"VT282-4055 | Set code128redundancy:True  | true",
 	propertyName	:	"code128redundancy",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
 {
-	testName		:	"VT282-4056 | call setproperty with code128redundancy:false  | false",
+	testName		:	"VT282-4056 | Set code128redundancy:false  | false",
 	propertyName	:	"code128redundancy",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
 {
-	testName		:	"VT282-4057 | call setproperty with code128securityLevel:0  | 0",
+	testName		:	"VT282-4057 | Set code128securityLevel:0  | 0",
 	propertyName	:	"code128securityLevel",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"0",
 	expectedResult	:	"0"
 },
 {
-	testName		:	"VT282-4058 | call setproperty with code128securityLevel:1  | 1",
+	testName		:	"VT282-4058 | Set code128securityLevel:1  | 1",
 	propertyName	:	"code128securityLevel",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"1",
 	expectedResult	:	"1"
 },
 {
-	testName		:	"VT282-4059 | call setproperty with code128securityLevel:2  | 2",
+	testName		:	"VT282-4059 | Set code128securityLevel:2  | 2",
 	propertyName	:	"code128securityLevel",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"2",
 	expectedResult	:	"2"
 },
 {
-	testName		:	"VT282-4060 | call setproperty with code128securityLevel:3  | 3",
+	testName		:	"VT282-4060 | Set code128securityLevel:3  | 3",
 	propertyName	:	"code128securityLevel",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"3",
 	expectedResult	:	"3"
 },
 {
-	testName		:	"VT282-4061 | call setproperty with code39 :True  | true",
+	testName		:	"VT282-4061 | Set code39 :True  | true",
 	propertyName	:	"code39",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
 {
-	testName		:	"VT282-4062| call setproperty with code39 :false  | false",
+	testName		:	"VT282-4062| Set code39 :false  | false",
 	propertyName	:	"code39",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
 {
-	testName		:	"VT282-4063 | call setproperty with code39code32Prefix :True  | true",
+	testName		:	"VT282-4063 | Set code39code32Prefix :True  | true",
 	propertyName	:	"code39code32Prefix",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
 {
-	testName		:	"VT282-4064 | call setproperty with code39code32Prefix :false  | false",
+	testName		:	"VT282-4064 | Set code39code32Prefix :false  | false",
 	propertyName	:	"code39code32Prefix",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
 {
-	testName		:	"VT282-4065 | call setproperty with code39convertToCode32 :True  | true",
+	testName		:	"VT282-4065 | Set code39convertToCode32 :True  | true",
 	propertyName	:	"code39convertToCode32",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
 {
-	testName		:	"VT282-4066 | call setproperty with code39convertToCode32 :false  | false",
+	testName		:	"VT282-4066 | Set code39convertToCode32 :false  | false",
 	propertyName	:	"code39convertToCode32",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
 {
-	testName		:	"VT282-4067 | call setproperty with code39fullAscii :True  | true",
+	testName		:	"VT282-4067 | Set code39fullAscii :True  | true",
 	propertyName	:	"code39fullAscii",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
 {
-	testName		:	"VT282-4068 | call setproperty with code39fullAscii :false  | false",
+	testName		:	"VT282-4068 | Set code39fullAscii :false  | false",
 	propertyName	:	"code39fullAscii",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
 {
-	testName		:	"VT282-4069| call setproperty with code39maxLength:0  | 0",
+	testName		:	"VT282-4069| Set code39maxLength:0  | 0",
 	propertyName	:	"code39maxLength",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"0",
 	expectedResult	:	"0"
 },
 {
-	testName		:	"VT282-4070 | call setproperty with code39maxLength:10 | 10",
+	testName		:	"VT282-4070 | Set code39maxLength:10 | 10",
 	propertyName	:	"code39maxLength",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"10",
 	expectedResult	:	"10"
 },
 {
-	testName		:	"VT282-4071 | call setproperty with code39maxLength:55 | 55",
+	testName		:	"VT282-4071 | Set code39maxLength:55 | 55",
 	propertyName	:	"code39maxLength",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"55",
 	expectedResult	:	"55"
 },
 {
-	testName		:	"VT282-4072 | call setproperty with code39minLength:0  | 0",
+	testName		:	"VT282-4072 | Set code39minLength:0  | 0",
 	propertyName	:	"code39minLength",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"0",
 	expectedResult	:	"0"
 },
 {
-	testName		:	"VT282-4073 | call setproperty with code39minLength:10 | 10",
+	testName		:	"VT282-4073 | Set code39minLength:10 | 10",
 	propertyName	:	"code39minLength",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"10",
 	expectedResult	:	"10"
 },
 {
-	testName		:	"VT282-4074 | call setproperty with code39minLength:55 | 55",
+	testName		:	"VT282-4074 | Set code39minLength:55 | 55",
 	propertyName	:	"code39minLength",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"55",
 	expectedResult	:	"55"
 },
 {
-	testName		:	"VT282-4075 | call setproperty with code39redundancy :True  | true",
+	testName		:	"VT282-4075 | Set code39redundancy :True  | true",
 	propertyName	:	"code39redundancy",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
 {
-	testName		:	"VT282-4076 | call setproperty with code39redundancy :false  | false",
+	testName		:	"VT282-4076 | Set code39redundancy :false  | false",
 	propertyName	:	"code39redundancy",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
 {
-	testName		:	"VT282-4076 | call setproperty with code39reportCheckDigit :True  | true",
+	testName		:	"VT282-4076 | Set code39reportCheckDigit :True  | true",
 	propertyName	:	"code39reportCheckDigit",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
 {
-	testName		:	"VT282-4077 | call setproperty with code39reportCheckDigit :false  | false",
+	testName		:	"VT282-4077 | Set code39reportCheckDigit :false  | false",
 	propertyName	:	"code39reportCheckDigit",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
 {
-	testName		:	"VT282-4078 | call setproperty with code39securityLevel:0  | 0",
+	testName		:	"VT282-4078 | Set code39securityLevel:0  | 0",
 	propertyName	:	"code39securityLevel",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"0",
 	expectedResult	:	"0"
 },
 {
-	testName		:	"VT282-4079 | call setproperty with code39securityLevel:1  | 1",
+	testName		:	"VT282-4079 | Set code39securityLevel:1  | 1",
 	propertyName	:	"code39securityLevel",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"1",
 	expectedResult	:	"1"
 },
 {
-	testName		:	"VT282-4080 | call setproperty with code39securityLevel:2  | 2",
+	testName		:	"VT282-4080 | Set code39securityLevel:2  | 2",
 	propertyName	:	"code39securityLevel",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"2",
 	expectedResult	:	"2"
 },
 {
-	testName		:	"VT282-4081 | call setproperty with code39securityLevel:3  | 3",
+	testName		:	"VT282-4081 | Set code39securityLevel:3  | 3",
 	propertyName	:	"code39securityLevel",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"3",
 	expectedResult	:	"3"
 },
 {
-	testName		:	"VT282-4082 | call setproperty with code39verifyCheckDigit :True  | true",
+	testName		:	"VT282-4082 | Set code39verifyCheckDigit :True  | true",
 	propertyName	:	"code39verifyCheckDigit",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
 {
-	testName		:	"VT282-4083 | call setproperty with code39verifyCheckDigit :false  | false",
+	testName		:	"VT282-4083 | Set code39verifyCheckDigit :false  | false",
 	propertyName	:	"code39verifyCheckDigit",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
 {
-	testName		:	"VT282-4084 | call setproperty with code93 :True  | true",
+	testName		:	"VT282-4084 | Set code93 :True  | true",
 	propertyName	:	"code93",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
 {
-	testName		:	"VT282-4085 | call setproperty with code93 :false  | false",
+	testName		:	"VT282-4085 | Set code93 :false  | false",
 	propertyName	:	"code93",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
 {
-	testName		:	"VT282-4086 | call setproperty with code93maxLength:0  | 0",
+	testName		:	"VT282-4086 | Set code93maxLength:0  | 0",
 	propertyName	:	"code93maxLength",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"0",
 	expectedResult	:	"0"
 },
 {
-	testName		:	"VT282-4087 | call setproperty with code93maxLength:10 | 10",
+	testName		:	"VT282-4087 | Set code93maxLength:10 | 10",
 	propertyName	:	"code93maxLength",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"10",
 	expectedResult	:	"10"
 },
 {
-	testName		:	"VT282-4088 | call setproperty with code93maxLength:55 | 55",
+	testName		:	"VT282-4088 | Set code93maxLength:55 | 55",
 	propertyName	:	"code93maxLength",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"55",
 	expectedResult	:	"55"
 },
 {
-	testName		:	"VT282-4089 | call setproperty with code93minLength:0  | 0",
+	testName		:	"VT282-4089 | Set code93minLength:0  | 0",
 	propertyName	:	"code93minLength",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"0",
 	expectedResult	:	"0"
 },
 {
-	testName		:	"VT282-4090 | call setproperty with code93minLength:10 | 10",
+	testName		:	"VT282-4090 | Set code93minLength:10 | 10",
 	propertyName	:	"code93minLength",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"10",
 	expectedResult	:	"10"
 },
 {
-	testName		:	"VT282-4091 | call setproperty with code93minLength:55 | 55",
+	testName		:	"VT282-4091 | Set code93minLength:55 | 55",
 	propertyName	:	"code93minLength",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"55",
 	expectedResult	:	"55"
 },
 {
-	testName		:	"VT282-4092 | call setproperty with code93redundancy :True  | true",
+	testName		:	"VT282-4092 | Set code93redundancy :True  | true",
 	propertyName	:	"code93redundancy",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
 {
-	testName		:	"VT282-4093 | call setproperty with code93redundancy :false  | false",
+	testName		:	"VT282-4093 | Set code93redundancy :false  | false",
 	propertyName	:	"code93redundancy",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
 {
-	testName		:	"VT282-4094 | call setproperty with compositeAb  :True  | true",
+	testName		:	"VT282-4094 | Set compositeAb  :True  | true",
 	propertyName	:	"compositeAb",
-	scannerTypes	:	"",
+	scannerTypes	:	"Imager",
+	OSTypes			:	"All",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
 {
-	testName		:	"VT282-4095 | call setproperty with compositeAb  :false  | false",
+	testName		:	"VT282-4095 | Set compositeAb  :false  | false",
 	propertyName	:	"compositeAb",
-	scannerTypes	:	"",
+	scannerTypes	:	"Imager",
+	OSTypes			:	"All",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
 {
-	testName		:	"VT282-4096 | call setproperty with compositeAbUccLinkMode:never  | never",
+	testName		:	"VT282-4096 | Set compositeAbUccLinkMode:never  | never",
 	propertyName	:	"compositeAbUccLinkMode",
-	scannerTypes	:	"",
+	scannerTypes	:	"Imager",
+	OSTypes			:	"All",
 	propertyValue	:	"never",
 	expectedResult	:	"never"
 },
 {
-	testName		:	"VT282-4097 | call setproperty with compositeAbUccLinkMode:always | always",
+	testName		:	"VT282-4097 | Set compositeAbUccLinkMode:always | always",
 	propertyName	:	"compositeAbUccLinkMode",
-	scannerTypes	:	"",
+	scannerTypes	:	"Imager",
+	OSTypes			:	"All",
 	propertyValue	:	"always",
 	expectedResult	:	"always"
 },
 {
-	testName		:	"VT282-4098 | call setproperty with compositeAbUccLinkMode:auto | auto",
+	testName		:	"VT282-4098 | Set compositeAbUccLinkMode:auto | auto",
 	propertyName	:	"compositeAbUccLinkMode",
-	scannerTypes	:	"",
+	scannerTypes	:	"Imager",
+	OSTypes			:	"All",
 	propertyValue	:	"auto",
 	expectedResult	:	"auto"
 },
 {
-	testName		:	"VT282-4099 | call setproperty with compositeAbUseUpcPreambleCheckDigitRules  :True  | true",
+	testName		:	"VT282-4099 | Set compositeAbUseUpcPreambleCheckDigitRules  :True  | true",
 	propertyName	:	"compositeAbUseUpcPreambleCheckDigitRules",
-	scannerTypes	:	"",
+	scannerTypes	:	"Imager",
+	OSTypes			:	"Windows",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
 {
-	testName		:	"VT282-4100 | call setproperty with compositeAbUseUpcPreambleCheckDigitRules  :false  | false",
+	testName		:	"VT282-4100 | Set compositeAbUseUpcPreambleCheckDigitRules  :false  | false",
 	propertyName	:	"compositeAbUseUpcPreambleCheckDigitRules",
-	scannerTypes	:	"",
+	scannerTypes	:	"Imager",
+	OSTypes			:	"Windows",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
 {
-	testName		:	"VT282-4101 | call setproperty with compositeC  :True  | true",
+	testName		:	"VT282-4101 | Set compositeC  :True  | true",
 	propertyName	:	"compositeC",
-	scannerTypes	:	"",
+	scannerTypes	:	"Imager",
+	OSTypes			:	"All",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
 {
-	testName		:	"VT282-4102 | call setproperty with compositeC  :false  | false",
+	testName		:	"VT282-4102 | Set compositeC  :false  | false",
 	propertyName	:	"compositeC",
-	scannerTypes	:	"",
+	scannerTypes	:	"Imager",
+	OSTypes			:	"All",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
 {
-	testName		:	"VT282-4103 | call setproperty with d2of5  :True  | true",
+	testName		:	"VT282-4103 | Set d2of5  :True  | true",
 	propertyName	:	"d2of5",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
 {
-	testName		:	"VT282-4104 | call setproperty with d2of5  :false  | false",
+	testName		:	"VT282-4104 | Set d2of5  :false  | false",
 	propertyName	:	"d2of5",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
 {
-	testName		:	"VT282-4105 | call setproperty with d2of5maxLength:0  | 0",
+	testName		:	"VT282-4105 | Set d2of5maxLength:0  | 0",
 	propertyName	:	"d2of5maxLength",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"0",
 	expectedResult	:	"0"
 },
 {
-	testName		:	"VT282-4106| call setproperty with d2of5maxLength:10 | 10",
+	testName		:	"VT282-4106| Set d2of5maxLength:10 | 10",
 	propertyName	:	"d2of5maxLength",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"10",
 	expectedResult	:	"10"
 },
 {
-	testName		:	"VT282-4107 | call setproperty with d2of5maxLength:55 | 55",
+	testName		:	"VT282-4107 | Set d2of5maxLength:55 | 55",
 	propertyName	:	"d2of5maxLength",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"55",
 	expectedResult	:	"55"
 },
 {
-	testName		:	"VT282-4108 | call setproperty with d2of5minLength:0  | 0",
+	testName		:	"VT282-4108 | Set d2of5minLength:0  | 0",
 	propertyName	:	"d2of5minLength",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"0",
 	expectedResult	:	"0"
 },
 {
-	testName		:	"VT282-4109 | call setproperty with d2of5minLength:10 | 10",
+	testName		:	"VT282-4109 | Set d2of5minLength:10 | 10",
 	propertyName	:	"d2of5minLength",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"10",
 	expectedResult	:	"10"
 },
 {
-	testName		:	"VT282-4110 | call setproperty with d2of5minLength:55 | 55",
+	testName		:	"VT282-4110 | Set d2of5minLength:55 | 55",
 	propertyName	:	"d2of5minLength",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"55",
 	expectedResult	:	"55"
 },
 {
-	testName		:	"VT282-4111 | call setproperty with d2of5redundancy  :True  | true",
+	testName		:	"VT282-4111 | Set d2of5redundancy  :True  | true",
 	propertyName	:	"d2of5redundancy",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
 {
-	testName		:	"VT282-4112 | call setproperty with d2of5redundancy  :false  | false",
+	testName		:	"VT282-4112 | Set d2of5redundancy  :false  | false",
 	propertyName	:	"d2of5redundancy",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
 {
-	testName		:	"VT282-4113 | call setproperty with datamatrix  :True  | true",
+	testName		:	"VT282-4113 | Set datamatrix  :True  | true",
 	propertyName	:	"datamatrix",
-	scannerTypes	:	"",
+	scannerTypes	:	"Imager",
+	OSTypes			:	"All",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
 {
-	testName		:	"VT282-4114 | call setproperty with datamatrix  :false  | false",
+	testName		:	"VT282-4114 | Set datamatrix  :false  | false",
 	propertyName	:	"datamatrix",
-	scannerTypes	:	"",
+	scannerTypes	:	"Imager",
+	OSTypes			:	"All",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
 {
-	testName		:	"VT282-4115 | call setproperty with dutchPostal  :True  | true",
+	testName		:	"VT282-4115 | Set dutchPostal  :True  | true",
 	propertyName	:	"dutchPostal",
-	scannerTypes	:	"",
+	scannerTypes	:	"Imager",
+	OSTypes			:	"All",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
 {
-	testName		:	"VT282-4116 | call setproperty with dutchPostal  :false  | false",
+	testName		:	"VT282-4116 | Set dutchPostal  :false  | false",
 	propertyName	:	"dutchPostal",
-	scannerTypes	:	"",
+	scannerTypes	:	"Imager",
+	OSTypes			:	"All",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
 {
-	testName		:	"VT282-4117 | call setproperty with ean13  :True  | true",
+	testName		:	"VT282-4117 | Set ean13  :True  | true",
 	propertyName	:	"ean13",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
 {
-	testName		:	"VT282-4118 | call setproperty with ean13  :false  | false",
+	testName		:	"VT282-4118 | Set ean13  :false  | false",
 	propertyName	:	"ean13",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
 {
-	testName		:	"VT282-4119 | call setproperty with ean8  :True  | true",
+	testName		:	"VT282-4119 | Set ean8  :True  | true",
 	propertyName	:	"ean8",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
 {
-	testName		:	"VT282-4120 | call setproperty with ean8  :false  | false",
+	testName		:	"VT282-4120 | Set ean8  :false  | false",
 	propertyName	:	"ean8",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
 {
-	testName		:	"VT282-4121 | call setproperty with ean8convertToEan13  :True  | true",
+	testName		:	"VT282-4121 | Set ean8convertToEan13  :True  | true",
 	propertyName	:	"ean8convertToEan13",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"Windows",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
 {
-	testName		:	"VT282-4122 | call setproperty with ean8convertToEan13  :false  | false",
+	testName		:	"VT282-4122 | Set ean8convertToEan13  :false  | false",
 	propertyName	:	"ean8convertToEan13",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"Windows",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
 {
-	testName		:	"VT282-4123 | call setproperty with gs1dataBar  :True  | true",
+	testName		:	"VT282-4123 | Set gs1dataBar  :True  | true",
 	propertyName	:	"gs1dataBar",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
 {
-	testName		:	"VT282-4124 | call setproperty with gs1dataBar  :false  | false",
+	testName		:	"VT282-4124 | Set gs1dataBar  :false  | false",
 	propertyName	:	"gs1dataBar",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
 {
-	testName		:	"VT282-4125 | call setproperty with gs1dataBarExpanded  :True  | true",
+	testName		:	"VT282-4125 | Set gs1dataBarExpanded  :True  | true",
 	propertyName	:	"gs1dataBarExpanded",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
 {
-	testName		:	"VT282-4126 | call setproperty with gs1dataBarExpanded  :false  | false",
+	testName		:	"VT282-4126 | Set gs1dataBarExpanded  :false  | false",
 	propertyName	:	"gs1dataBarExpanded",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
 {
-	testName		:	"VT282-4127 | call setproperty with gs1dataBarLimited  :True  | true",
+	testName		:	"VT282-4127 | Set gs1dataBarLimited  :True  | true",
 	propertyName	:	"gs1dataBarLimited",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
 {
-	testName		:	"VT282-4128 | call setproperty with gs1dataBarLimited  :false  | false",
+	testName		:	"VT282-4128 | Set gs1dataBarLimited  :false  | false",
 	propertyName	:	"gs1dataBarLimited",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
 {
-	testName		:	"VT282-4129 | call setproperty with i2of5  :True  | true",
+	testName		:	"VT282-4129 | Set i2of5  :True  | true",
 	propertyName	:	"i2of5",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
 {
-	testName		:	"VT282-4130 | call setproperty with i2of5  :false  | false",
+	testName		:	"VT282-4130 | Set i2of5  :false  | false",
 	propertyName	:	"i2of5",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
 {
-	testName		:	"VT282-4131 | call setproperty with i2of5convertToEan13  :True  | true",
+	testName		:	"VT282-4131 | Set i2of5convertToEan13  :True  | true",
 	propertyName	:	"i2of5convertToEan13",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
 {
-	testName		:	"VT282-4132 | call setproperty with i2of5convertToEan13  :false  | false",
+	testName		:	"VT282-4132 | Set i2of5convertToEan13  :false  | false",
 	propertyName	:	"i2of5convertToEan13",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
 {
-	testName		:	"VT282-4133 | call setproperty with i2of5maxLength:0  | 0",
+	testName		:	"VT282-4133 | Set i2of5maxLength:0  | 0",
 	propertyName	:	"i2of5maxLength",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"0",
 	expectedResult	:	"0"
 },
 {
-	testName		:	"VT282-4134 | call setproperty with i2of5maxLength:10 | 10",
+	testName		:	"VT282-4134 | Set i2of5maxLength:10 | 10",
 	propertyName	:	"i2of5maxLength",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"10",
 	expectedResult	:	"10"
 },
 {
-	testName		:	"VT282-4135 | call setproperty with i2of5maxLength:55 | 55",
+	testName		:	"VT282-4135 | Set i2of5maxLength:55 | 55",
 	propertyName	:	"i2of5maxLength",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"55",
 	expectedResult	:	"55"
 },
 {
-	testName		:	"VT282-4136 | call setproperty with i2of5minLength:0  | 0",
+	testName		:	"VT282-4136 | Set i2of5minLength:0  | 0",
 	propertyName	:	"i2of5minLength",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"0",
 	expectedResult	:	"0"
 },
 {
-	testName		:	"VT282-4137 | call setproperty with i2of5minLength:10 | 10",
+	testName		:	"VT282-4137 | Set i2of5minLength:10 | 10",
 	propertyName	:	"i2of5minLength",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"10",
 	expectedResult	:	"10"
 },
 {
-	testName		:	"VT282-4138 | call setproperty with i2of5minLength:55 | 55",
+	testName		:	"VT282-4138 | Set i2of5minLength:55 | 55",
 	propertyName	:	"i2of5minLength",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"55",
 	expectedResult	:	"55"
 },
 {
-	testName		:	"VT282-4139 | call setproperty with i2of5redundancy  :True  | true",
+	testName		:	"VT282-4139 | Set i2of5redundancy  :True  | true",
 	propertyName	:	"i2of5redundancy",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
 {
-	testName		:	"VT282-4140 | call setproperty with i2of5redundancy  :false  | false",
+	testName		:	"VT282-4140 | Set i2of5redundancy  :false  | false",
 	propertyName	:	"i2of5redundancy",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
 {
-	testName		:	"VT282-4141 | call setproperty with i2of5reportCheckDigit  :True  | true",
+	testName		:	"VT282-4141 | Set i2of5reportCheckDigit  :True  | true",
 	propertyName	:	"i2of5reportCheckDigit",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
 {
-	testName		:	"VT282-4142 | call setproperty with i2of5reportCheckDigit  :false  | false",
+	testName		:	"VT282-4142 | Set i2of5reportCheckDigit  :false  | false",
 	propertyName	:	"i2of5reportCheckDigit",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
 {
-	testName		:	"VT282-4143 | call setproperty with i2of5verifyCheckDigit:none  | none",
+	testName		:	"VT282-4143 | Set i2of5verifyCheckDigit:none  | none",
 	propertyName	:	"i2of5verifyCheckDigit",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"none",
 	expectedResult	:	"none"
 },
 {
-	testName		:	"VT282-4144 | call setproperty with i2of5verifyCheckDigit:uss | uss",
+	testName		:	"VT282-4144 | Set i2of5verifyCheckDigit:uss | uss",
 	propertyName	:	"i2of5verifyCheckDigit",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"uss",
 	expectedResult	:	"uss"
 },
 {
-	testName		:	"VT282-4145 | call setproperty with i2of5verifyCheckDigit:opcc | opcc",
+	testName		:	"VT282-4145 | Set i2of5verifyCheckDigit:opcc | opcc",
 	propertyName	:	"i2of5verifyCheckDigit",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"opcc",
 	expectedResult	:	"opcc"
 },
 {
-	testName		:	"VT282-4146 | call setproperty with japPostal  :True  | true",
+	testName		:	"VT282-4146 | Set japPostal  :True  | true",
 	propertyName	:	"japPostal",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
 {
-	testName		:	"VT282-4147 | call setproperty with japPostal  :false  | false",
+	testName		:	"VT282-4147 | Set japPostal  :false  | false",
 	propertyName	:	"japPostal",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
 {
-	testName		:	"VT282-4148 | call setproperty with korean3of5  :True  | true",
+	testName		:	"VT282-4148 | Set korean3of5  :True  | true",
 	propertyName	:	"korean3of5",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
 {
-	testName		:	"VT282-4149 | call setproperty with korean3of5  :false  | false",
+	testName		:	"VT282-4149 | Set korean3of5  :false  | false",
 	propertyName	:	"korean3of5",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
 {
-	testName		:	"VT282-4150 | call setproperty with korean3of5maxLength:0  | 0",
+	testName		:	"VT282-4150 | Set korean3of5maxLength:0  | 0",
 	propertyName	:	"korean3of5maxLength",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"Windows",
 	propertyValue	:	"0",
 	expectedResult	:	"0"
 },
 {
-	testName		:	"VT282-4151 | call setproperty with korean3of5maxLength:10 | 10",
+	testName		:	"VT282-4151 | Set korean3of5maxLength:10 | 10",
 	propertyName	:	"korean3of5maxLength",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"Windows",
 	propertyValue	:	"10",
 	expectedResult	:	"10"
 },
 {
-	testName		:	"VT282-4152 | call setproperty with korean3of5maxLength:55 | 55",
+	testName		:	"VT282-4152 | Set korean3of5maxLength:55 | 55",
 	propertyName	:	"korean3of5maxLength",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"Windows",
 	propertyValue	:	"55",
 	expectedResult	:	"55"
 },
 {
-	testName		:	"VT282-4153 | call setproperty with korean3of5minLength:0  | 0",
+	testName		:	"VT282-4153 | Set korean3of5minLength:0  | 0",
 	propertyName	:	"korean3of5minLength",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"Windows",
 	propertyValue	:	"0",
 	expectedResult	:	"0"
 },
 {
-	testName		:	"VT282-4154 | call setproperty with korean3of5minLength:10 | 10",
+	testName		:	"VT282-4154 | Set korean3of5minLength:10 | 10",
 	propertyName	:	"korean3of5minLength",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"Windows",
 	propertyValue	:	"10",
 	expectedResult	:	"10"
 },
 {
-	testName		:	"VT282-4155 | call setproperty with korean3of5minLength:55 | 55",
+	testName		:	"VT282-4155 | Set korean3of5minLength:55 | 55",
 	propertyName	:	"korean3of5minLength",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"Windows",
 	propertyValue	:	"55",
 	expectedResult	:	"55"
 },
 {
-	testName		:	"VT282-4156 | call setproperty with korean3of5redundancy  :True  | true",
+	testName		:	"VT282-4156 | Set korean3of5redundancy  :True  | true",
 	propertyName	:	"korean3of5redundancy",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"Windows",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
 {
-	testName		:	"VT282-4157 | call setproperty with korean3of5redundancy  :false  | false",
+	testName		:	"VT282-4157 | Set korean3of5redundancy  :false  | false",
 	propertyName	:	"korean3of5redundancy",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"Windows",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
 {
-	testName		:	"VT282-4158 | call setproperty with macroMicroPdf  :True  | true",
+	testName		:	"VT282-4158 | Set macroMicroPdf  :True  | true",
 	propertyName	:	"macroMicroPdf",
 	scannerTypes	:	"Imager",
+	OSTypes			:	"Windows",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
 {
-	testName		:	"VT282-4159 | call setproperty with macroMicroPdf  :false  | false",
+	testName		:	"VT282-4159 | Set macroMicroPdf  :false  | false",
 	propertyName	:	"macroMicroPdf",
 	scannerTypes	:	"Imager",
+	OSTypes			:	"Windows",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
 {
-	testName		:	"VT282-4160 | call setproperty with macroMicroPdfBufferLabels  :True  | true",
+	testName		:	"VT282-4160 | Set macroMicroPdfBufferLabels  :True  | true",
 	propertyName	:	"macroMicroPdfBufferLabels",
 	scannerTypes	:	"Imager",
+	OSTypes			:	"Windows",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
 {
-	testName		:	"VT282-4161 | call setproperty with macroMicroPdfBufferLabels  :false  | false",
+	testName		:	"VT282-4161 | Set macroMicroPdfBufferLabels  :false  | false",
 	propertyName	:	"macroMicroPdfBufferLabels",
 	scannerTypes	:	"Imager",
+	OSTypes			:	"Windows",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
 {
-	testName		:	"VT282-4162 | call setproperty with macroMicroPdfBufferLabels  :True  | true",
+	testName		:	"VT282-4162 | Set macroMicroPdfBufferLabels  :True  | true",
 	propertyName	:	"macroMicroPdfBufferLabels",
 	scannerTypes	:	"Imager",
+	OSTypes			:	"Windows",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
 {
-	testName		:	"VT282-4163 | call setproperty with macroMicroPdfBufferLabels  :false  | false",
+	testName		:	"VT282-4163 | Set macroMicroPdfBufferLabels  :false  | false",
 	propertyName	:	"macroMicroPdfBufferLabels",
 	scannerTypes	:	"Imager",
+	OSTypes			:	"Windows",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
 {
-	testName		:	"VT282-4164 | call setproperty with macroMicroPdfConvertToMicroPdf  :True  | true",
+	testName		:	"VT282-4164 | Set macroMicroPdfConvertToMicroPdf  :True  | true",
 	propertyName	:	"macroMicroPdfConvertToMicroPdf",
 	scannerTypes	:	"Imager",
+	OSTypes			:	"Windows",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
 {
-	testName		:	"VT282-4165 | call setproperty with macroMicroPdfConvertToMicroPdf  :false  | false",
+	testName		:	"VT282-4165 | Set macroMicroPdfConvertToMicroPdf  :false  | false",
 	propertyName	:	"macroMicroPdfConvertToMicroPdf",
 	scannerTypes	:	"Imager",
+	OSTypes			:	"Windows",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
 {
-	testName		:	"VT282-4166 | call setproperty with macroMicroPdfExclusive  :True  | true",
+	testName		:	"VT282-4166 | Set macroMicroPdfExclusive  :True  | true",
 	propertyName	:	"macroMicroPdfExclusive",
 	scannerTypes	:	"Imager",
+	OSTypes			:	"Windows",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
 {
-	testName		:	"VT282-4167 | call setproperty with macroMicroPdfExclusive  :false  | false",
+	testName		:	"VT282-4167 | Set macroMicroPdfExclusive  :false  | false",
 	propertyName	:	"macroMicroPdfExclusive",
 	scannerTypes	:	"Imager",
+	OSTypes			:	"Windows",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
 {
-	testName		:	"VT282-4168 | call setproperty with macroMicroPdfReportAppendInfo  :True  | true",
+	testName		:	"VT282-4168 | Set macroMicroPdfReportAppendInfo  :True  | true",
 	propertyName	:	"macroMicroPdfReportAppendInfo",
 	scannerTypes	:	"Imager",
+	OSTypes			:	"Windows",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
 {
-	testName		:	"VT282-4169 | call setproperty with macroMicroPdfReportAppendInfo  :false  | false",
+	testName		:	"VT282-4169 | Set macroMicroPdfReportAppendInfo  :false  | false",
 	propertyName	:	"macroMicroPdfReportAppendInfo",
 	scannerTypes	:	"Imager",
+	OSTypes			:	"Windows",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
 {
-	testName		:	"VT282-4170 | call setproperty with macroPdf  :True  | true",
+	testName		:	"VT282-4170 | Set macroPdf  :True  | true",
 	propertyName	:	"macroPdf",
 	scannerTypes	:	"Imager",
+	OSTypes			:	"Windows",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
 {
-	testName		:	"VT282-4171 | call setproperty with macroPdf  :false  | false",
+	testName		:	"VT282-4171 | Set macroPdf  :false  | false",
 	propertyName	:	"macroPdf",
 	scannerTypes	:	"Imager",
+	OSTypes			:	"Windows",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
 {
-	testName		:	"VT282-4172 | call setproperty with macroPdfBufferLabels  :True  | true",
+	testName		:	"VT282-4172 | Set macroPdfBufferLabels  :True  | true",
 	propertyName	:	"macroPdfBufferLabels",
 	scannerTypes	:	"Imager",
+	OSTypes			:	"Windows",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
 {
-	testName		:	"VT282-4173 | call setproperty with macroPdfBufferLabels  :false  | false",
+	testName		:	"VT282-4173 | Set macroPdfBufferLabels  :false  | false",
 	propertyName	:	"macroPdfBufferLabels",
 	scannerTypes	:	"Imager",
+	OSTypes			:	"Windows",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
 {
-	testName		:	"VT282-4174 | call setproperty with macroPdfConvertToPdf417  :True  | true",
+	testName		:	"VT282-4174 | Set macroPdfConvertToPdf417  :True  | true",
 	propertyName	:	"macroPdfConvertToPdf417",
 	scannerTypes	:	"Imager",
+	OSTypes			:	"Windows",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
 {
-	testName		:	"VT282-4175 | call setproperty with macroPdfConvertToPdf417  :false  | false",
+	testName		:	"VT282-4175 | Set macroPdfConvertToPdf417  :false  | false",
 	propertyName	:	"macroPdfConvertToPdf417",
 	scannerTypes	:	"Imager",
+	OSTypes			:	"Windows",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
 {
-	testName		:	"VT282-4176 | call setproperty with macroPdfExclusive  :True  | true",
+	testName		:	"VT282-4176 | Set macroPdfExclusive  :True  | true",
 	propertyName	:	"macroPdfExclusive",
 	scannerTypes	:	"Imager",
+	OSTypes			:	"Windows",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
 {
-	testName		:	"VT282-4177 | call setproperty with macroPdfExclusive  :false  | false",
+	testName		:	"VT282-4177 | Set macroPdfExclusive  :false  | false",
 	propertyName	:	"macroPdfExclusive",
 	scannerTypes	:	"Imager",
+	OSTypes			:	"Windows",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
 {
-	testName		:	"VT282-4178 | call setproperty with msi  :True  | true",
-	propertyName	:	"msi",
-	scannerTypes	:	"",
+	testName		:	"VT282-4178 | Set matrix2of5  :True  | true",
+	propertyName	:	"matrix2of5",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
 {
-	testName		:	"VT282-4179 | call setproperty with msi :false  | false",
-	propertyName	:	"msi",
-	scannerTypes	:	"",
+	testName		:	"VT282-4179 | Set matrix2of5 :false  | false",
+	propertyName	:	"matrix2of5",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
 {
-	testName		:	"VT282-4180 | call setproperty with msimaxLength:0  | 0",
-	propertyName	:	"msimaxLength",
-	scannerTypes	:	"",
+	testName		:	"VT282-4180 | Set matrix2of5maxLength:0  | 0",
+	propertyName	:	"matrix2of5maxLength",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"0",
 	expectedResult	:	"0"
 },
 {
-	testName		:	"VT282-4181 | call setproperty with matrix2of5maxLength:10 | 10",
+	testName		:	"VT282-4181 | Set matrix2of5maxLength:10 | 10",
 	propertyName	:	"matrix2of5maxLength",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"10",
 	expectedResult	:	"10"
 },
 {
-	testName		:	"VT282-4182 | call setproperty with matrix2of5maxLength:55 | 55",
+	testName		:	"VT282-4182 | Set matrix2of5maxLength:55 | 55",
 	propertyName	:	"matrix2of5maxLength",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"55",
 	expectedResult	:	"55"
 },
 {
-	testName		:	"VT282-4183 | call setproperty with matrix2of5minLength:0  | 0",
+	testName		:	"VT282-4183 | Set matrix2of5minLength:0  | 0",
 	propertyName	:	"matrix2of5minLength",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"0",
 	expectedResult	:	"0"
 },
 {
-	testName		:	"VT282-4184 | call setproperty with matrix2of5minLength:10 | 10",
+	testName		:	"VT282-4184 | Set matrix2of5minLength:10 | 10",
 	propertyName	:	"matrix2of5minLength",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"10",
 	expectedResult	:	"10"
 },
 {
-	testName		:	"VT282-4185 | call setproperty with matrix2of5minLength:55 | 55",
+	testName		:	"VT282-4185 | Set matrix2of5minLength:55 | 55",
 	propertyName	:	"matrix2of5minLength",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"55",
 	expectedResult	:	"55"
 },
 {
-	testName		:	"VT282-4186 | call setproperty with matrix2of5reportCheckDigit  :True  | true",
+	testName		:	"VT282-4186 | Set matrix2of5reportCheckDigit  :True  | true",
 	propertyName	:	"matrix2of5reportCheckDigit",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
 {
-	testName		:	"VT282-4187 | call setproperty with matrix2of5reportCheckDigit :false  | false",
+	testName		:	"VT282-4187 | Set matrix2of5reportCheckDigit :false  | false",
 	propertyName	:	"matrix2of5reportCheckDigit",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
 {
-	testName		:	"VT282-4188 | call setproperty with matrix2of5verifyCheckDigit   :True  | true",
+	testName		:	"VT282-4188 | Set matrix2of5verifyCheckDigit   :True  | true",
 	propertyName	:	"matrix2of5verifyCheckDigit",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
 {
-	testName		:	"VT282-4189 | call setproperty with matrix2of5verifyCheckDigit  :false  | false",
+	testName		:	"VT282-4189 | Set matrix2of5verifyCheckDigit  :false  | false",
 	propertyName	:	"matrix2of5verifyCheckDigit",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
 {
-	testName		:	"VT282-4190 | call setproperty with maxiCode   :True  | true",
+	testName		:	"VT282-4190 | Set maxiCode   :True  | true",
 	propertyName	:	"maxiCode",
-	scannerTypes	:	"",
+	scannerTypes	:	"Imager",
+	OSTypes			:	"All",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
 {
-	testName		:	"VT282-4191 | call setproperty with maxiCode  :false  | false",
+	testName		:	"VT282-4191 | Set maxiCode  :false  | false",
 	propertyName	:	"maxiCode",
-	scannerTypes	:	"",
+	scannerTypes	:	"Imager",
+	OSTypes			:	"All",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
 {
-	testName		:	"VT282-4192 | call setproperty with microPdf   :True  | true",
+	testName		:	"VT282-4192 | Set microPdf   :True  | true",
 	propertyName	:	"microPdf",
-	scannerTypes	:	"",
+	scannerTypes	:	"Imager",
+	OSTypes			:	"All",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
 {
-	testName		:	"VT282-4193 | call setproperty with microPdf  :false  | false",
+	testName		:	"VT282-4193 | Set microPdf  :false  | false",
 	propertyName	:	"microPdf",
-	scannerTypes	:	"",
+	scannerTypes	:	"Imager",
+	OSTypes			:	"All",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
 {
-	testName		:	"VT282-4194 | call setproperty with microQr   :True  | true",
+	testName		:	"VT282-4194 | Set microQr   :True  | true",
 	propertyName	:	"microQr",
-	scannerTypes	:	"",
+	scannerTypes	:	"Imager",
+	OSTypes			:	"All",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
 {
-	testName		:	"VT282-4195 | call setproperty with microQr  :false  | false",
+	testName		:	"VT282-4195 | Set microQr  :false  | false",
 	propertyName	:	"microQr",
-	scannerTypes	:	"",
+	scannerTypes	:	"Imager",
+	OSTypes			:	"All",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
 {
-	testName		:	"VT282-4196 | call setproperty with msi   :True  | true",
+	testName		:	"VT282-4196 | Set msi   :True  | true",
 	propertyName	:	"msi",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
 {
-	testName		:	"VT282-4197 | call setproperty with msi  :false  | false",
+	testName		:	"VT282-4197 | Set msi  :false  | false",
 	propertyName	:	"msi",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
 {
-	testName		:	"VT282-4198 | call setproperty with msiCheckDigitScheme :mod11  | mod11",
+	testName		:	"VT282-4198 | Set msiCheckDigitScheme :mod11  | mod11",
 	propertyName	:	"msiCheckDigitScheme",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"mod11",
 	expectedResult	:	"mod11"
 },
 {
-	testName		:	"VT282-4199 | call setproperty with msiCheckDigitScheme :mod10  | mod10",
+	testName		:	"VT282-4199 | Set msiCheckDigitScheme :mod10  | mod10",
 	propertyName	:	"msiCheckDigitScheme",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"mod10",
 	expectedResult	:	"mod10"
 },
 {
-	testName		:	"VT282-4200 | call setproperty with msiCheckDigits :one  | one",
+	testName		:	"VT282-4200 | Set msiCheckDigits :one  | one",
 	propertyName	:	"msiCheckDigits",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"one",
 	expectedResult	:	"one"
 },
 {
-	testName		:	"VT282-4201 | call setproperty with msiCheckDigits :two  | two",
+	testName		:	"VT282-4201 | Set msiCheckDigits :two  | two",
 	propertyName	:	"msiCheckDigits",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"two",
 	expectedResult	:	"two"
 },
 {
-	testName		:	"VT282-4202 | call setproperty with msimaxLength:0  | 0",
+	testName		:	"VT282-4202 | Set msimaxLength:0  | 0",
 	propertyName	:	"msimaxLength",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"0",
 	expectedResult	:	"0"
 },
 {
-	testName		:	"VT282-4203 | call setproperty with msimaxLength:10 | 10",
+	testName		:	"VT282-4203 | Set msimaxLength:10 | 10",
 	propertyName	:	"msimaxLength",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"10",
 	expectedResult	:	"10"
 },
 {
-	testName		:	"VT282-4204 | call setproperty with msimaxLength:55 | 55",
+	testName		:	"VT282-4204 | Set msimaxLength:55 | 55",
 	propertyName	:	"msimaxLength",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"55",
 	expectedResult	:	"55"
 },
 {
-	testName		:	"VT282-4205 | call setproperty with msiminLength:0  | 0",
+	testName		:	"VT282-4205 | Set msiminLength:0  | 0",
 	propertyName	:	"msiminLength",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"0",
 	expectedResult	:	"0"
 },
 {
-	testName		:	"VT282-4206 | call setproperty with msiminLength:10 | 10",
+	testName		:	"VT282-4206 | Set msiminLength:10 | 10",
 	propertyName	:	"msiminLength",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"10",
 	expectedResult	:	"10"
 },
 {
-	testName		:	"VT282-4207 | call setproperty with msiminLength:55 | 55",
+	testName		:	"VT282-4207 | Set msiminLength:55 | 55",
 	propertyName	:	"msiminLength",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"55",
 	expectedResult	:	"55"
 },
 {
-	testName		:	"VT282-4208 | call setproperty with msiRedundancy :True  | true",
+	testName		:	"VT282-4208 | Set msiRedundancy :True  | true",
 	propertyName	:	"msiRedundancy",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
 {
-	testName		:	"VT282-4209 | call setproperty with msiRedundancy :false  | false",
+	testName		:	"VT282-4209 | Set msiRedundancy :false  | false",
 	propertyName	:	"msiRedundancy",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
 {
-	testName		:	"VT282-4210 | call setproperty with msiReportCheckDigit :True  | true",
+	testName		:	"VT282-4210 | Set msiReportCheckDigit :True  | true",
 	propertyName	:	"msiReportCheckDigit",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
 {
-	testName		:	"VT282-4211 | call setproperty with msiReportCheckDigit :false  | false",
+	testName		:	"VT282-4211 | Set msiReportCheckDigit :false  | false",
 	propertyName	:	"msiReportCheckDigit",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
 {
-	testName		:	"VT282-4212 | call setproperty with pdf417 :True  | true",
+	testName		:	"VT282-4212 | Set pdf417 :True  | true",
 	propertyName	:	"pdf417",
-	scannerTypes	:	"",
+	scannerTypes	:	"Imager",
+	OSTypes			:	"All",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
 {
-	testName		:	"VT282-4213 | call setproperty with pdf417 :false  | false",
+	testName		:	"VT282-4213 | Set pdf417 :false  | false",
 	propertyName	:	"pdf417",
-	scannerTypes	:	"",
+	scannerTypes	:	"Imager",
+	OSTypes			:	"All",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
 {
-	testName		:	"VT282-4214 | call setproperty with qrCode :True  | true",
+	testName		:	"VT282-4214 | Set qrCode :True  | true",
 	propertyName	:	"qrCode",
-	scannerTypes	:	"",
+	scannerTypes	:	"Imager",
+	OSTypes			:	"All",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
 {
-	testName		:	"VT282-4215 | call setproperty with qrCode :false  | false",
+	testName		:	"VT282-4215 | Set qrCode :false  | false",
 	propertyName	:	"qrCode",
-	scannerTypes	:	"",
+	scannerTypes	:	"Imager",
+	OSTypes			:	"All",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
 {
-	testName		:	"VT282-4216 | call setproperty with signature :True  | true",
+	testName		:	"VT282-4216 | Set signature :True  | true",
 	propertyName	:	"signature",
-	scannerTypes	:	"",
+	scannerTypes	:	"Imager",
+	OSTypes			:	"Windows",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
 {
-	testName		:	"VT282-4217 | call setproperty with signature :false  | false",
+	testName		:	"VT282-4217 | Set signature :false  | false",
 	propertyName	:	"signature",
-	scannerTypes	:	"",
+	scannerTypes	:	"Imager",
+	OSTypes			:	"Windows",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
 {
-	testName		:	"VT282-4218 | call setproperty with signatureImageHeight :20  | 20",
+	testName		:	"VT282-4218 | Set signatureImageHeight :20  | 20",
 	propertyName	:	"signatureImageHeight",
-	scannerTypes	:	"",
+	scannerTypes	:	"Imager",
+	OSTypes			:	"Windows",
 	propertyValue	:	"20",
 	expectedResult	:	"20"
 },
 {
-	testName		:	"VT282-4219 | call setproperty with signatureImageHeight :200  | 200",
+	testName		:	"VT282-4219 | Set signatureImageHeight :200  | 200",
 	propertyName	:	"signatureImageHeight",
-	scannerTypes	:	"",
+	scannerTypes	:	"Imager",
+	OSTypes			:	"Windows",
 	propertyValue	:	"200",
 	expectedResult	:	"200"
 },
 {
-	testName		:	"VT282-4220 | call setproperty with signatureImageHeight :400  | 400",
+	testName		:	"VT282-4220 | Set signatureImageHeight :400  | 400",
 	propertyName	:	"signatureImageHeight",
-	scannerTypes	:	"",
+	scannerTypes	:	"Imager",
+	OSTypes			:	"Windows",
 	propertyValue	:	"400",
 	expectedResult	:	"400"
 },
 {
-	testName		:	"VT282-4221 | call setproperty with signatureImageWidth :20  | 20",
+	testName		:	"VT282-4221 | Set signatureImageWidth :20  | 20",
 	propertyName	:	"signatureImageWidth",
-	scannerTypes	:	"",
+	scannerTypes	:	"Imager",
+	OSTypes			:	"Windows",
 	propertyValue	:	"20",
 	expectedResult	:	"20"
 },
 {
-	testName		:	"VT282-4222 | call setproperty with signatureImageWidth :250  | 250",
+	testName		:	"VT282-4222 | Set signatureImageWidth :250  | 250",
 	propertyName	:	"signatureImageWidth",
-	scannerTypes	:	"",
+	scannerTypes	:	"Imager",
+	OSTypes			:	"Windows",
 	propertyValue	:	"250",
 	expectedResult	:	"250"
 },
 {
-	testName		:	"VT282-4223 | call setproperty with signatureImageWidth :350  | 350",
+	testName		:	"VT282-4223 | Set signatureImageWidth :350  | 350",
 	propertyName	:	"signatureImageWidth",
-	scannerTypes	:	"",
+	scannerTypes	:	"Imager",
+	OSTypes			:	"Windows",
 	propertyValue	:	"350",
 	expectedResult	:	"350"
 },
 {
-	testName		:	"VT282-4224 | call setproperty with signatureImageQuality :1  | 1",
+	testName		:	"VT282-4224 | Set signatureImageQuality :1  | 1",
 	propertyName	:	"signatureImageQuality",
-	scannerTypes	:	"",
+	scannerTypes	:	"Imager",
+	OSTypes			:	"Windows",
 	propertyValue	:	"1",
 	expectedResult	:	"1"
 },
 {
-	testName		:	"VT282-4225 | call setproperty with signatureImageQuality :50  | 50",
+	testName		:	"VT282-4225 | Set signatureImageQuality :50  | 50",
 	propertyName	:	"signatureImageQuality",
-	scannerTypes	:	"",
+	scannerTypes	:	"Imager",
+	OSTypes			:	"Windows",
 	propertyValue	:	"50",
 	expectedResult	:	"50"
 },
 {
-	testName		:	"VT282-4226 | call setproperty with signatureImageQuality :100  | 100",
+	testName		:	"VT282-4226 | Set signatureImageQuality :100  | 100",
 	propertyName	:	"signatureImageQuality",
-	scannerTypes	:	"",
+	scannerTypes	:	"Imager",
+	OSTypes			:	"Windows",
 	propertyValue	:	"100",
 	expectedResult	:	"100"
 },
 {
-	testName		:	"VT282-4227 | call setproperty with tlc39 :True  | true",
+	testName		:	"VT282-4227 | Set tlc39 :True  | true",
 	propertyName	:	"tlc39",
-	scannerTypes	:	"",
+	scannerTypes	:	"Imager",
+	OSTypes			:	"All",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
 {
-	testName		:	"VT282-4228 | call setproperty with tlc39 :false  | false",
+	testName		:	"VT282-4228 | Set tlc39 :false  | false",
 	propertyName	:	"tlc39",
-	scannerTypes	:	"",
+	scannerTypes	:	"Imager",
+	OSTypes			:	"All",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
 {
-	testName		:	"VT282-4229 | call setproperty with trioptic39 :True  | true",
+	testName		:	"VT282-4229 | Set trioptic39 :True  | true",
 	propertyName	:	"trioptic39",
-	scannerTypes	:	"",
+	scannerTypes	:	"Imager",
+	OSTypes			:	"All",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
 {
-	testName		:	"VT282-4230 | call setproperty with trioptic39 :false  | false",
+	testName		:	"VT282-4230 | Set trioptic39 :false  | false",
 	propertyName	:	"trioptic39",
-	scannerTypes	:	"",
+	scannerTypes	:	"Imager",
+	OSTypes			:	"All",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
 {
-	testName		:	"VT282-4231 | call setproperty with trioptic39Redundancy :True  | true",
+	testName		:	"VT282-4231 | Set trioptic39Redundancy :True  | true",
 	propertyName	:	"trioptic39Redundancy",
-	scannerTypes	:	"",
+	scannerTypes	:	"Imager",
+	OSTypes			:	"All",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
 {
-	testName		:	"VT282-4232 | call setproperty with trioptic39Redundancy :false  | false",
+	testName		:	"VT282-4232 | Set trioptic39Redundancy :false  | false",
 	propertyName	:	"trioptic39Redundancy",
-	scannerTypes	:	"",
+	scannerTypes	:	"Imager",
+	OSTypes			:	"All",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
 {
-	testName		:	"VT282-4233 | call setproperty with ukPostal :True  | true",
+	testName		:	"VT282-4233 | Set ukPostal :True  | true",
 	propertyName	:	"ukPostal",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
 {
-	testName		:	"VT282-4234 | call setproperty with ukPostal :false  | false",
+	testName		:	"VT282-4234 | Set ukPostal :false  | false",
 	propertyName	:	"ukPostal",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
 {
-	testName		:	"VT282-4235 | call setproperty with ukPostalReportCheckDigit :True  | true",
+	testName		:	"VT282-4235 | Set ukPostalReportCheckDigit :True  | true",
 	propertyName	:	"ukPostalReportCheckDigit",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
 {
-	testName		:	"VT282-4236 | call setproperty with ukPostalReportCheckDigit :false  | false",
+	testName		:	"VT282-4236 | Set ukPostalReportCheckDigit :false  | false",
 	propertyName	:	"ukPostalReportCheckDigit",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
 {
-	testName		:	"VT282-4237 | call setproperty with upcEanBookland  :True  | true",
+	testName		:	"VT282-4237 | Set upcEanBookland  :True  | true",
 	propertyName	:	"upcEanBookland",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
 {
-	testName		:	"VT282-4238 | call setproperty with upcEanBookland  :false  | false",
+	testName		:	"VT282-4238 | Set upcEanBookland  :false  | false",
 	propertyName	:	"upcEanBookland",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
 {
-	testName		:	"VT282-4239 | call setproperty with upcEanBooklandFormat  :isbn10  | isbn10",
+	testName		:	"VT282-4239 | Set upcEanBooklandFormat  :isbn10  | isbn10",
 	propertyName	:	"upcEanBooklandFormat",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"isbn10",
 	expectedResult	:	"isbn10"
 },
 {
-	testName		:	"VT282-4240 | call setproperty with upcEanBooklandFormat  :isbn13  | isbn13",
+	testName		:	"VT282-4240 | Set upcEanBooklandFormat  :isbn13  | isbn13",
 	propertyName	:	"upcEanBooklandFormat",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"isbn13",
 	expectedResult	:	"isbn13"
 },
 {
-	testName		:	"VT282-4241 | call setproperty with upcEanConvertGs1dataBarToUpcEan  :true  | true",
+	testName		:	"VT282-4241 | Set upcEanConvertGs1dataBarToUpcEan  :true  | true",
 	propertyName	:	"upcEanConvertGs1dataBarToUpcEan",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
 {
-	testName		:	"VT282-4242 | call setproperty with upcEanConvertGs1dataBarToUpcEan  :false  | false",
+	testName		:	"VT282-4242 | Set upcEanConvertGs1dataBarToUpcEan  :false  | false",
 	propertyName	:	"upcEanConvertGs1dataBarToUpcEan",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
 {
-	testName		:	"VT282-4243 | call setproperty with upcEanCoupon  :true  | true",
+	testName		:	"VT282-4243 | Set upcEanCoupon  :true  | true",
 	propertyName	:	"upcEanCoupon",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
 {
-	testName		:	"VT282-4244 | call setproperty with upcEanCoupon  :false  | false",
+	testName		:	"VT282-4244 | Set upcEanCoupon  :false  | false",
 	propertyName	:	"upcEanCoupon",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
 {
-	testName		:	"VT282-4245 | call setproperty with upcEanLinearDecode  :true  | true",
+	testName		:	"VT282-4245 | Set upcEanLinearDecode  :true  | true",
 	propertyName	:	"upcEanLinearDecode",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
 {
-	testName		:	"VT282-4246 | call setproperty with upcEanLinearDecode  :false  | false",
+	testName		:	"VT282-4246 | Set upcEanLinearDecode  :false  | false",
 	propertyName	:	"upcEanLinearDecode",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
 {
-	testName		:	"VT282-4247 | call setproperty with upcEanRandomWeightCheckDigit  :true  | true",
+	testName		:	"VT282-4247 | Set upcEanRandomWeightCheckDigit  :true  | true",
 	propertyName	:	"upcEanRandomWeightCheckDigit",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
 {
-	testName		:	"VT282-4248 | call setproperty with upcEanRandomWeightCheckDigit  :false  | false",
+	testName		:	"VT282-4248 | Set upcEanRandomWeightCheckDigit  :false  | false",
 	propertyName	:	"upcEanRandomWeightCheckDigit",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
 {
-	testName		:	"VT282-4249 | call setproperty with upcEanRetryCount  :2  | 2",
+	testName		:	"VT282-4249 | Set upcEanRetryCount  :2  | 2",
 	propertyName	:	"upcEanRetryCount",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"2",
 	expectedResult	:	"2"
 },
 {
-	testName		:	"VT282-4250 | call setproperty with upcEanRetryCount  :20  | 20",
+	testName		:	"VT282-4250 | Set upcEanRetryCount  :20  | 20",
 	propertyName	:	"upcEanRetryCount",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"20",
 	expectedResult	:	"20"
 },
 {
-	testName		:	"VT282-4251 | call setproperty with upcEanSecurityLevel:0  | 0",
+	testName		:	"VT282-4251 | Set upcEanSecurityLevel:0  | 0",
 	propertyName	:	"upcEanSecurityLevel",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"0",
 	expectedResult	:	"0"
 },
 {
-	testName		:	"VT282-4252 | call setproperty with upcEanSecurityLevel:1  | 1",
+	testName		:	"VT282-4252 | Set upcEanSecurityLevel:1  | 1",
 	propertyName	:	"upcEanSecurityLevel",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"1",
 	expectedResult	:	"1"
 },
 {
-	testName		:	"VT282-4253 | call setproperty with upcEanSecurityLevel:2  | 2",
+	testName		:	"VT282-4253 | Set upcEanSecurityLevel:2  | 2",
 	propertyName	:	"upcEanSecurityLevel",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"2",
 	expectedResult	:	"2"
 },
 {
-	testName		:	"VT282-4254 | call setproperty with upcEanSecurityLevel:3  | 3",
+	testName		:	"VT282-4254 | Set upcEanSecurityLevel:3  | 3",
 	propertyName	:	"upcEanSecurityLevel",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"3",
 	expectedResult	:	"3"
 },
 {
-	testName		:	"VT282-4255 | call setproperty with upcEanSupplemental2  :true  | true",
+	testName		:	"VT282-4255 | Set upcEanSupplemental2  :true  | true",
 	propertyName	:	"upcEanSupplemental2",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
 {
-	testName		:	"VT282-4256 | call setproperty with upcEanSupplemental2  :false  | false",
+	testName		:	"VT282-4256 | Set upcEanSupplemental2  :false  | false",
 	propertyName	:	"upcEanSupplemental2",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
 {
-	testName		:	"VT282-4257 | call setproperty with upcEanSupplemental5  :true  | true",
+	testName		:	"VT282-4257 | Set upcEanSupplemental5  :true  | true",
 	propertyName	:	"upcEanSupplemental5",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
 {
-	testName		:	"VT282-4258 | call setproperty with upcEanSupplemental5  :false  | false",
+	testName		:	"VT282-4258 | Set upcEanSupplemental5  :false  | false",
 	propertyName	:	"upcEanSupplemental5",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
 {
-	testName		:	"VT282-4259 | call setproperty with upcEanSupplementalMode:none  | none",
+	testName		:	"VT282-4259 | Set upcEanSupplementalMode:none  | none",
 	propertyName	:	"upcEanSupplementalMode",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"none",
 	expectedResult	:	"none"
 },
 {
-	testName		:	"VT282-4260 | call setproperty with upcEanSupplementalMode:auto  | auto",
+	testName		:	"VT282-4260 | Set upcEanSupplementalMode:auto  | auto",
 	propertyName	:	"upcEanSupplementalMode",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"auto",
 	expectedResult	:	"auto"
 },
 {
-	testName		:	"VT282-4261 | call setproperty with upcEanSupplementalMode:always  | always",
+	testName		:	"VT282-4261 | Set upcEanSupplementalMode:always  | always",
 	propertyName	:	"upcEanSupplementalMode",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"always",
 	expectedResult	:	"always"
 },
 {
-	testName		:	"VT282-4262 | call setproperty with upcEanSupplementalMode:smart  | smart",
+	testName		:	"VT282-4262 | Set upcEanSupplementalMode:smart  | smart",
 	propertyName	:	"upcEanSupplementalMode",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"smart",
 	expectedResult	:	"smart"
 },
 {
-	testName		:	"VT282-4263 | call setproperty with upcEanSupplementalMode:378or379  | 378or379",
+	testName		:	"VT282-4263 | Set upcEanSupplementalMode:378or379  | 378or379",
 	propertyName	:	"upcEanSupplementalMode",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"378or379",
 	expectedResult	:	"378or379"
 },
 {
-	testName		:	"VT282-4264 | call setproperty with upcEanSupplementalMode:978or979  | 978or979",
+	testName		:	"VT282-4264 | Set upcEanSupplementalMode:978or979  | 978or979",
 	propertyName	:	"upcEanSupplementalMode",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"978or979",
 	expectedResult	:	"978or979"
 },
 {
-	testName		:	"VT282-4265 | call setproperty with upcEanSupplementalMode:414or419or434or439  | 414or419or434or439",
+	testName		:	"VT282-4265 | Set upcEanSupplementalMode:414or419or434or439  | 414or419or434or439",
 	propertyName	:	"upcEanSupplementalMode",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"414or419or434or439",
 	expectedResult	:	"414or419or434or439"
 },
 {
-	testName		:	"VT282-4266 | call setproperty with upca  :true  | true",
+	testName		:	"VT282-4266 | Set upca  :true  | true",
 	propertyName	:	"upca",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
 {
-	testName		:	"VT282-4267 | call setproperty with upca  :false  | false",
+	testName		:	"VT282-4267 | Set upca  :false  | false",
 	propertyName	:	"upca",
-	scannerTypes	:	"",
+	OSTypes			:	"All",
+	scannerTypes	:	"All",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
 {
-	testName		:	"VT282-4268 | call setproperty with upcaPreamble  :none  | none",
+	testName		:	"VT282-4268 | Set upcaPreamble  :none  | none",
 	propertyName	:	"upcaPreamble",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"none",
 	expectedResult	:	"none"
 },
 {
-	testName		:	"VT282-4269 | call setproperty with upcaPreamble  :systemChar  | systemChar",
+	testName		:	"VT282-4269 | Set upcaPreamble  :systemChar  | systemChar",
 	propertyName	:	"upcaPreamble",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"systemChar",
 	expectedResult	:	"systemChar"
 },
 {
-	testName		:	"VT282-4270 | call setproperty with upcaPreamble  :countryAndSystemChars  | countryAndSystemChars",
+	testName		:	"VT282-4270 | Set upcaPreamble  :countryAndSystemChars  | countryAndSystemChars",
 	propertyName	:	"upcaPreamble",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"countryAndSystemChars",
 	expectedResult	:	"countryAndSystemChars"
 },
 {
-	testName		:	"VT282-4271 | call setproperty with upcaReportCheckDigit  :true  | true",
+	testName		:	"VT282-4271 | Set upcaReportCheckDigit  :true  | true",
 	propertyName	:	"upcaReportCheckDigit",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
 {
-	testName		:	"VT282-4272 | call setproperty with upcaReportCheckDigit  :false  | false",
+	testName		:	"VT282-4272 | Set upcaReportCheckDigit  :false  | false",
 	propertyName	:	"upcaReportCheckDigit",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
 {
-	testName		:	"VT282-4273 | call setproperty with upce0  :true  | true",
+	testName		:	"VT282-4273 | Set upce0  :true  | true",
 	propertyName	:	"upce0",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
 {
-	testName		:	"VT282-4274 | call setproperty with upce0  :false  | false",
+	testName		:	"VT282-4274 | Set upce0  :false  | false",
 	propertyName	:	"upce0",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
 {
-	testName		:	"VT282-4275 | call setproperty with upce0convertToUpca  :true  | true",
+	testName		:	"VT282-4275 | Set upce0convertToUpca  :true  | true",
 	propertyName	:	"upce0convertToUpca",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
 {
-	testName		:	"VT282-4276 | call setproperty with upce0convertToUpca  :false  | false",
+	testName		:	"VT282-4276 | Set upce0convertToUpca  :false  | false",
 	propertyName	:	"upce0convertToUpca",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
 {
-	testName		:	"VT282-4277 | call setproperty with upce0Preamble  :none  | none",
+	testName		:	"VT282-4277 | Set upce0Preamble  :none  | none",
 	propertyName	:	"upce0Preamble",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"none",
 	expectedResult	:	"none"
 },
 {
-	testName		:	"VT282-4278 | call setproperty with upce0Preamble  :systemChar  | systemChar",
+	testName		:	"VT282-4278 | Set upce0Preamble  :systemChar  | systemChar",
 	propertyName	:	"upce0Preamble",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"systemChar",
 	expectedResult	:	"systemChar"
 },
 {
-	testName		:	"VT282-4279 | call setproperty with upce0Preamble  :countryAndSystemChars  | countryAndSystemChars",
+	testName		:	"VT282-4279 | Set upce0Preamble  :countryAndSystemChars  | countryAndSystemChars",
 	propertyName	:	"upce0Preamble",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"countryAndSystemChars",
 	expectedResult	:	"countryAndSystemChars"
 },
 {
-	testName		:	"VT282-4280 | call setproperty with upce0reportCheckDigit   :true  | true",
+	testName		:	"VT282-4280 | Set upce0reportCheckDigit   :true  | true",
 	propertyName	:	"upce0reportCheckDigit",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
 {
-	testName		:	"VT282-4281 | call setproperty with upce0reportCheckDigit   :false  | false",
+	testName		:	"VT282-4281 | Set upce0reportCheckDigit   :false  | false",
 	propertyName	:	"upce0reportCheckDigit",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
 {
-	testName		:	"VT282-4282 | call setproperty with upce1  :true  | true",
+	testName		:	"VT282-4282 | Set upce1  :true  | true",
 	propertyName	:	"upce1",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
 {
-	testName		:	"VT282-4283 | call setproperty with upce1  :false  | false",
+	testName		:	"VT282-4283 | Set upce1  :false  | false",
 	propertyName	:	"upce1",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
 {
-	testName		:	"VT282-4284 | call setproperty with upce1convertToUpca  :true  | true",
+	testName		:	"VT282-4284 | Set upce1convertToUpca  :true  | true",
 	propertyName	:	"upce1convertToUpca",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
 {
-	testName		:	"VT282-4285 | call setproperty with upce1convertToUpca  :false  | false",
+	testName		:	"VT282-4285 | Set upce1convertToUpca  :false  | false",
 	propertyName	:	"upce1convertToUpca",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
 {
-	testName		:	"VT282-4286 | call setproperty with upce1Preamble:none  | none",
+	testName		:	"VT282-4286 | Set upce1Preamble:none  | none",
 	propertyName	:	"upce1Preamble",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"none",
 	expectedResult	:	"none"
 },
 {
-	testName		:	"VT282-4287 | call setproperty with upce1Preamble:systemChar  | systemChar",
+	testName		:	"VT282-4287 | Set upce1Preamble:systemChar  | systemChar",
 	propertyName	:	"upce1Preamble",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"systemChar",
 	expectedResult	:	"systemChar"
 },
 {
-	testName		:	"VT282-4288 | call setproperty with upce1Preamble :countryAndSystemChars  | countryAndSystemChars",
+	testName		:	"VT282-4288 | Set upce1Preamble :countryAndSystemChars  | countryAndSystemChars",
 	propertyName	:	"upce1Preamble",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"countryAndSystemChars",
 	expectedResult	:	"countryAndSystemChars"
 },
 {
-	testName		:	"VT282-4290 | call setproperty with upce1reportCheckDigit:true  | true",
+	testName		:	"VT282-4290 | Set upce1reportCheckDigit:true  | true",
 	propertyName	:	"upce1reportCheckDigit",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
 {
-	testName		:	"VT282-4291 | call setproperty with upce1reportCheckDigit :false  | false",
+	testName		:	"VT282-4291 | Set upce1reportCheckDigit :false  | false",
 	propertyName	:	"upce1reportCheckDigit",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
 {
-	testName		:	"VT282-4292 | call setproperty with us4state :true  | true",
+	testName		:	"VT282-4292 | Set us4state :true  | true",
 	propertyName	:	"us4state",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
 {
-	testName		:	"VT282-4293 | call setproperty with us4state :false  | false",
+	testName		:	"VT282-4293 | Set us4state :false  | false",
 	propertyName	:	"us4state",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
 {
-	testName		:	"VT282-4294 | call setproperty with us4stateFics :true  | true",
+	testName		:	"VT282-4294 | Set us4stateFics :true  | true",
 	propertyName	:	"us4stateFics",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
 {
-	testName		:	"VT282-4295 | call setproperty with us4stateFics :false  | false",
+	testName		:	"VT282-4295 | Set us4stateFics :false  | false",
 	propertyName	:	"us4stateFics",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
 {
-	testName		:	"VT282-4296 | call setproperty with usPlanet :true  | true",
+	testName		:	"VT282-4296 | Set usPlanet :true  | true",
 	propertyName	:	"usPlanet",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
 {
-	testName		:	"VT282-4297 | call setproperty with usPlanet :false  | false",
+	testName		:	"VT282-4297 | Set usPlanet :false  | false",
 	propertyName	:	"usPlanet",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
 {
-	testName		:	"VT282-4298 | call setproperty with usPlanetReportCheckDigit :true  | true",
+	testName		:	"VT282-4298 | Set usPlanetReportCheckDigit :true  | true",
 	propertyName	:	"usPlanetReportCheckDigit",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
 {
-	testName		:	"VT282-4299 | call setproperty with usPlanetReportCheckDigit :false  | false",
+	testName		:	"VT282-4299 | Set usPlanetReportCheckDigit :false  | false",
 	propertyName	:	"usPlanetReportCheckDigit",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
 {
-	testName		:	"VT282-4300 | call setproperty with usPostNet :true  | true",
+	testName		:	"VT282-4300 | Set usPostNet :true  | true",
 	propertyName	:	"usPostNet",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
 {
-	testName		:	"VT282-4301 | call setproperty with usPostNet :false  | false",
+	testName		:	"VT282-4301 | Set usPostNet :false  | false",
 	propertyName	:	"usPostNet",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
 {
-	testName		:	"VT282-4302 | call setproperty with usPostNetReportCheckDigit :true  | true",
+	testName		:	"VT282-4302 | Set usPostNetReportCheckDigit :true  | true",
 	propertyName	:	"usPostNetReportCheckDigit",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
 {
-	testName		:	"VT282-4303 | call setproperty with usPostNetReportCheckDigit :false  | false",
+	testName		:	"VT282-4303 | Set usPostNetReportCheckDigit :false  | false",
 	propertyName	:	"usPostNetReportCheckDigit",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
 {
-	testName		:	"VT282-4304 | call setproperty with webcode :true  | true",
+	testName		:	"VT282-4304 | Set webcode :true  | true",
 	propertyName	:	"webcode",
-	scannerTypes	:	"",
+	scannerTypes	:	"Imager",
+	OSTypes			:	"All",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
 {
-	testName		:	"VT282-4305 | call setproperty with webcode :false  | false",
+	testName		:	"VT282-4305 | Set webcode :false  | false",
 	propertyName	:	"webcode",
-	scannerTypes	:	"",
+	scannerTypes	:	"Imager",
+	OSTypes			:	"All",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
 {
-	testName		:	"VT282-4306 | call setproperty with webcodeDecodeGtSubtype :true  | true",
+	testName		:	"VT282-4306 | Set webcodeDecodeGtSubtype :true  | true",
 	propertyName	:	"webcodeDecodeGtSubtype",
-	scannerTypes	:	"",
+	scannerTypes	:	"Imager",
+	OSTypes			:	"All",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
 {
-	testName		:	"VT282-4307 | call setproperty with webcodeDecodeGtSubtype :false  | false",
+	testName		:	"VT282-4307 | Set webcodeDecodeGtSubtype :false  | false",
 	propertyName	:	"webcodeDecodeGtSubtype",
-	scannerTypes	:	"",
+	scannerTypes	:	"Imager",
+	OSTypes			:	"All",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
 {
-	testName		:	"VT282-4308 | call setproperty with upcEanRetryCount  :10  | 10",
+	testName		:	"VT282-4308 | Set upcEanRetryCount  :10  | 10",
 	propertyName	:	"upcEanRetryCount",
-	scannerTypes	:	"",
+	scannerTypes	:	"All",
+	OSTypes			:	"All",
 	propertyValue	:	"10",
 	expectedResult	:	"10"
 }
 ];
+
+var scanCallback = function (data){
+
+};
+
