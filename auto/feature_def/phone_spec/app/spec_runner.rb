@@ -23,7 +23,11 @@ class SpecRunner < MSpecScript
     config[:files] << "spec/json_spec"
     config[:files] << "spec/xml_spec"
     config[:files] << "spec/rhofile_spec"
+    config[:files] << "spec/file_commonapi_spec"
+
+    config[:files] << "spec/network_spec"
     config[:files] << "spec/asynchttp_spec"
+
     config[:files] << "spec/date_spec"
     config[:files] << "spec/bsearch_spec"
 
@@ -60,7 +64,6 @@ end
 if !defined?( RHO_ME )
     config[:files] << "spec/database_spec" unless System.get_property('platform') == 'WINDOWS' && System.get_property('is_emulator')
 end
-
   end
 
   def run

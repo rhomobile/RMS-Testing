@@ -123,11 +123,63 @@ describe("<generator API specs>", function() {
                 expect(objs[1].boolProp).toEqual(true);
             });
         });
+    });
+
+    describe("Test getProperties, getAllProperties", function () {
+        it("Should return all properties", function () {
+            Rho.GenPropBag.floatProp= 3.14156;
+            Rho.GenPropBag.intProp = 999;
+            Rho.GenPropBag.boolProp = true;
+            Rho.GenPropBag.stringProp = "some string";
+
+            var allProperties = Rho.GenPropBag.getAllProperties();
+
+            expect(Object.keys(allProperties).length).toEqual(5); // getAllProperties return ID also
+            expect(allProperties["floatProp"]).toEqual("3.14156");
+            expect(allProperties["intProp"]).toEqual("999");
+            expect(allProperties["boolProp"]).toEqual("true");
+            expect(allProperties["stringProp"]).toEqual("some string");
+        });
+
+        it("Should return two properties", function () {
+            Rho.GenPropBag.floatProp= 3.14156;
+            Rho.GenPropBag.intProp= 3;
+
+            var properties = Rho.GenPropBag.getProperties(["intProp", "floatProp"]);
+
+            expect(Object.keys(properties).length).toEqual(2);
+            expect(properties["floatProp"]).toEqual("3.14156");
+            expect(properties["intProp"]).toEqual("3");
+        });
+
+        it("Should return two properties if request for two esxists and one absent property", function () {
+            Rho.GenPropBag.floatProp= 3.14156;
+            Rho.GenPropBag.intProp= 3;
+
+            var properties = Rho.GenPropBag.getProperties(["intProp", "floatProp", "absentProperty"]);
+
+            expect(Object.keys(properties).length).toEqual(2);
+            expect(properties["floatProp"]).toEqual("3.14156");
+            expect(properties["intProp"]).toEqual("3");
+        });
+
+        it("Should return null if property has valid name, but it is absent", function () {
+            var properties = Rho.GenPropBag.getProperties(["absentProperty"]);
+
+            expect(Object.keys(properties).length).toEqual(0);
+        });
+
+        it("Should return null if property has invalid name and it is absent", function () {
+            var properties = Rho.GenPropBag.getProperties(["absent property"]);
+
+            expect(Object.keys(properties).length).toEqual(0);
+        });
+
 
     });
 
     xit("Test testMethod1", function() {
-        var objs = Rho.GenPropBag.testMethod1();
+        var objs = Rho.GenProRhopBag.testMethod1();
 
         Rho.Log.info(objs.toString(), "test" );
 

@@ -1,5 +1,6 @@
 var checkSource = "";
-var deviceID = generic.UUID + "_RUBY";
+//var deviceID = generic.UUID + "_RUBY";
+var deviceID = "TEST" + "_RUBY";
 var moduleName = "";
 
 //Name Parameter Getter and Setter
@@ -15,7 +16,21 @@ var Name = function (val){
 	};
 }
 
+//Property Name Getter and Setter
+var PropertyName = function (val){
+	var value = val;
+
+	this.getValue = function(){
+		return value;
+	};
+   
+	this.setValue = function(val){
+		value = val;
+	};
+}
+
 var objName = new Name();
+var objPropertyName = new PropertyName();
 
 var fillDetailsDiv = function(arr){
 
@@ -35,7 +50,10 @@ var fillDetailsDiv = function(arr){
 	displayflag = false;
 }
 
-var setParams = function(arr){
+var setParams = function(arr, sync){
+    if (typeof sync === 'undefined') {
+        sync = false;
+    }
 
 	if(arr['0'] != "" || arr['1'] !=""){
 		paramvalue = arr['2'];
@@ -73,12 +91,26 @@ var setParams = function(arr){
 		if(paramormethodname == "name"){
 			objName.setValue(paramvalue);
 		}
-
+		
+		//Collect the name of property for which we are retriving value
+		if(paramormethodname == "getProperty" || paramormethodname == "getProperties"){
+			var propertyNameArray = callBack.split("|");
+			objPropertyName.setValue(propertyNameArray[0]);
+		}
+		
 		if(paramvalue=="method")
 		{
 			try{
 				//eval(objectname)[paramormethodname]();
-		    	$.get('/app/Auto/setMethod', { object:objectname , method:paramormethodname, type:callType ,callback:callBack});
+                if (sync) {
+                    return $.ajax('/app/Auto/setMethod', {
+                        data: {object: objectname , method: paramormethodname, type: callType, callback: callBack},
+                        cache: false,
+                        async: false
+                    }).responseText;
+                } else {
+                    $.get('/app/Auto/setMethod', { object:objectname , method:paramormethodname, type:callType ,callback:callBack});
+                }
 			}
 			catch(err){
 				alert(err.message);
@@ -220,8 +252,65 @@ var extraInfoOnTop = function (testcaseId,testcaseDesc){
 
 }
 
-function returnGetProperty(data){
+/*function returnGetProperty(data){
 	eventOutput = "";
 	eventOutput = data ;
 	eventFired  = true ;
+}*/
+
+
+// Scanner Common API Barcode Codes
+
+var runNextTest = function(){
+	//disableButtons();
+	$('ul').empty();
+	testno = testno + 1;
+	try{
+    setTimeout(startJasmineTest(testno),3000);
+	}
+	catch(e){
+	alert(e.message);
+	}
+}
+
+var runSameTestAgain = function(){
+	//disableButtons();
+	$('ul').empty();
+	try{
+    setTimeout(startJasmineTest(testno),3000);
+	}
+	catch(e){
+	alert(e.message);
+	}
+}
+
+var runPreviousTest = function(){
+	//disableButtons();
+	$('ul').empty();
+	testno = testno - 1;
+	try{
+    setTimeout(startJasmineTest(testno),3000);
+	}
+	catch(e){
+	alert(e.message);
+	}
+}
+
+/* var disableButtons = function (){
+	document.getElementById('next').disabled = true;
+	document.getElementById('previous').disabled = true;
+	document.getElementById('current').disabled = true;
+	document.getElementById('go').disabled = true;
+}
+
+var enableButtons = function (){
+	document.getElementById('next').disabled = false;
+	document.getElementById('previous').disabled = false;
+	document.getElementById('current').disabled = false;
+	document.getElementById('go').disabled = false;
+} */
+
+var fillExpected = function(data){
+	document.getElementById('expectedRes').innerHTML = ''
+	document.getElementById('expectedRes').innerHTML = data;
 }

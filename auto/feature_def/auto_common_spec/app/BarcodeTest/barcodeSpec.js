@@ -18,6 +18,7 @@ describe("Barcode", function() {
 		var currentK = -1;
 		
 		var numberOfScanners = getScannerNumber();
+		if(deviceOS.toLowerCase().indexOf('android') >= 0 && numberOfScanners > 1) numberOfScanners = 1;
 		var scannerTypeUnderTest = "Laser";
 				  
 		for (var k=0; k<numberOfScanners; k++)
@@ -89,7 +90,9 @@ describe("Barcode", function() {
 						}
 					}
 				}
-			} 
+			} 			
+
 		}
+
 	});
 });

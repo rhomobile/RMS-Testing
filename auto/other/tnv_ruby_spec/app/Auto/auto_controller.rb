@@ -8,6 +8,8 @@ require 'json'
 class AutoController < Rho::RhoController
   include BrowserHelper
   @layout = 'Auto/layout'
+  #@layout = 'Auto/layoutTNV'
+  
   
   def index
     $mode = ''
@@ -139,13 +141,15 @@ def setMethod
      if(autoobject != 'self') #If self is there no need to make it capital.
       autoobject = autoobject.slice(0,1).capitalize + autoobject.slice(1..-1)
      end
+    answer = nil
     if(callback.empty?)
-     puts autoobject +"."+ automethod
-     eval autoobject +"."+ automethod
+      puts autoobject +"."+ automethod
+      answer = eval autoobject +"."+ automethod
     else
       puts autoobject +"."+ automethod + "("+callback+")"
       eval autoobject +"."+ automethod +"("+callback+")"
     end
+    render :string => answer.to_s
   end
 
 
@@ -165,24 +169,43 @@ end
   
         if autoparam.index("url(")
           #Alert.show_popup autoobject +"."+ automethod+'= "'+autoparam+'"'
-          eval autoobject +"."+ automethod+'= "'+autoparam+'"'
+         begin
+            eval autoobject +"."+ automethod+'= "'+autoparam+'"'
+         rescue => ex
+           puts "Exception Thrown: #{ex.message}" 
+         end
         else
          autoparam = autoparam.split("(").first
          #Alert.show_popup autoobject +"."+ automethod+"=url_for(:action => :"+autoparam+")"
-         eval autoobject +"."+ automethod+"=url_for(:action => :"+autoparam+")"
+         begin
+            eval autoobject +"."+ automethod+"=url_for(:action => :"+autoparam+")"
+         rescue => ex
+           puts "Exception Thrown: #{ex.message}" 
+         end
         end
       else
         if autoparam
 
           if autoparam == 'true' or autoparam == 'false' or /^[\d]+(\.[\d]+){0,1}$/ === autoparam
-            Alert.show_popup autoparam
-            eval autoobject +"."+ automethod+"="+autoparam
+            begin
+              eval autoobject +"."+ automethod+"="+autoparam
+            rescue => ex
+              puts "Exception Thrown: #{ex.message}" 
+            end
           else
           #Alert.show_popup autoobject +"."+ automethod+"= '"+autoparam+"'"
-          eval autoobject +"."+ automethod+"= '"+autoparam+"'"
+            begin
+              eval autoobject +"."+ automethod+"= '"+autoparam+"'"
+            rescue => ex
+              puts "Exception Thrown: #{ex.message}" 
+            end
           end
         else
-        eval autoobject +"."+ automethod+"=''"
+          begin
+            eval autoobject +"."+ automethod+"=''"
+          rescue => ex
+            puts "Exception Thrown: #{ex.message}" 
+          end
         end
       end
     end
@@ -711,6 +734,31 @@ end
       WebView.execute_js("returnGetProperty('#{data}')")
     end
     
+    def returnGetPropertyCallback(options = {})
+      puts "options Is #{options}"
+      puts "Params Is #{@params}"
+      if(options.nil? or options.empty?)
+        calltype = "Async Call"
+        puts "Async Call. Data Inside Body Of Params"
+        puts "#{@params}"
+        options = @params
+      end
+      
+      puts "Get Data #{options}"
+      data = ''
+      if options.kind_of?(Hash)
+        options.each do |thing|
+          data = data.to_s() + "<br>" + thing.map{|k,v| "#{k}=#{v}"}.join('<br>') 
+        end
+      else
+        data = options
+      end
+      puts data
+      
+      puts "Out Put #{data}"
+      WebView.execute_js("returnGetPropertyCallback('#{data}')")
+    end
+    
     def drawPoints
       Automate.drawline 500,100,500,500
     end
@@ -759,7 +807,7 @@ end
    db =Rho::Database.new(Rho::Application.databaseFilePath('local'), "local");
    puts "#{db.to_s}"
    data = db
-   WebView.execute_js("resultDatabase('#{data}')")
+   data
  end
  
 # Test case2 - executeSql with no Args
@@ -773,7 +821,7 @@ def executeNoArgs
   data = db.isTableExist(tableName)
   
   puts "#{data}"
-  WebView.execute_js("resultDatabase('#{data}')")
+  data
 end
 
 def excuteBatchNoArgs
@@ -800,7 +848,7 @@ def excuteBatchNoArgs
     data = 'false'
   end
 
-  WebView.execute_js("resultDatabase('#{data}')")
+  data
 
 end
 
@@ -839,7 +887,7 @@ end
      data = 'false'
    end
 
-   WebView.execute_js("resultDatabase('#{data}')")
+   data
  end
  
 #Test case 5- To exclude tables from deletion and checkExcluded tables
@@ -861,10 +909,7 @@ end
    puts "#{db1.isTableExist(tableName7)}"
    puts "#{db1.isTableExist(tableName8)}"
      
-     a=Array.new
-     a<<tableName6<<tableName7
-     
-    db1.destroyTables({"include" =>"" , "exclude" =>a})
+    db1.destroyTables({:include => [], :exclude => [tableName6, tableName7]})
      puts "#{db1.isTableExist(tableName5)}"
      puts "#{db1.isTableExist(tableName6)}"
      puts "#{db1.isTableExist(tableName7)}"
@@ -876,7 +921,7 @@ end
      data = 'false'
    end
 
-   WebView.execute_js("resultDatabase('#{data}')")
+   data
    
  end
  
@@ -914,7 +959,7 @@ end
      data = 'false'
    end
 
-   WebView.execute_js("resultDatabase('#{data}')")
+   data
    
  end
  
@@ -962,7 +1007,7 @@ end
       data = 'false'
     end
 
-    WebView.execute_js("resultDatabase('#{data}')")
+    data
   end
   
   
@@ -983,7 +1028,7 @@ end
       data = 'false'
     end
  
-    WebView.execute_js("resultDatabase('#{data}')")
+    data
 
   end
  
@@ -1003,507 +1048,704 @@ end
      db.executeSql("CREATE TABLE willnevercreated(x INTEGER, y TEXT)")
      puts "#{db.isTableExist(willnevercreated)}"
    rescue => ex
+     data = ex.message
+   end
+   
+   data
+   
+ end
+ 
+ 
+ #Test case9- Close Database and try reading from DB-try handling exeception
+ def closeRead
+  db=Rho::Database.new(Rho::Application.databaseFilePath('local'), "local");
+  
+   db.executeBatchSql("DROP TABLE IF EXISTS t15;CREATE TABLE t15(x INTEGER, y TEXT)")
+   db.executeSql("INSERT INTO t15(x,y) VALUES(?,?)",[10,'ten'])
+   puts "#{ db.executeSql("SELECT y FROM t15 WHERE x=10")}"
+   db.close()
+
+    begin
+      value = db.executeSql("SELECT x FROM t15 WHERE y='ten'")
+      puts "#{value}"
+    rescue => ex
+      data = ex.message
+    end
+
+    data
+
+end
+ 
+# Test case10- Open the closed Database and read from it 
+def closeOpen
+ db=Rho::Database.new(Rho::Application.databaseFilePath('local'), "local");
+   
+  db.executeBatchSql("DROP TABLE IF EXISTS t15;CREATE TABLE t15(x INTEGER, y TEXT)")
+  db.executeSql("INSERT INTO t15(x,y) VALUES(?,?)",[10,'ten'])
+  puts "#{ db.executeSql("SELECT y FROM t15 WHERE x=10")}"
+  
+  db.close()
+  
+  db=Rho::Database.new(Rho::Application.databaseFilePath('local'), "local");
+  value = db.executeSql("SELECT x FROM t15 WHERE y='ten'")
+
+  data = value[0]['x']
+  
+ data
+
+end
+
+#Test case11-To Demonstrate Commit Transaction 
+def commitTxn
+  db=Rho::Database.new(Rho::Application.databaseFilePath('local'), "local");
+
+  db.startTransaction()
+  db.executeBatchSql("DROP TABLE IF EXISTS t20;CREATE TABLE t20(x INTEGER, y TEXT)") 
+  db.executeSql("INSERT INTO t20(x,y) VALUES(?,?)",[10,'ten'])
+  db.commitTransaction()
+
+  value = db.executeSql("SELECT y FROM t20 WHERE x=10")
+  data = value[0]['y']
+ 
+  data
+end
+
+#Test case12- To Demonstrate rollbackTransaction
+def rollbackTxn
+ db=Rho::Database.new(Rho::Application.databaseFilePath('local'), "local");
+
+ db.startTransaction()
+ db.executeBatchSql("DROP TABLE IF EXISTS t21;CREATE TABLE t21(x INTEGER, y TEXT)") 
+ db.executeSql("INSERT INTO t21(x,y) VALUES(?,?)",[10,'fifteen'])
+ db.rollbackTransaction()
+
+ begin
+    value = db.executeSql("SELECT y FROM t21  WHERE x=10")
+    puts "#{value}"
+  rescue => ex
+    data = ex.message
+  end
+  
+ data
+
+end
+ 
+  
+#Test case 13- To Demonstrate RollbackTransaction after calling CommitTranscation
+  
+def comRollTxn
+ db=Rho::Database.new(Rho::Application.databaseFilePath('local'), "local");
+ db.startTransaction()
+ db.executeBatchSql("DROP TABLE IF EXISTS t22;CREATE TABLE t22(x INTEGER, y TEXT)") 
+ db.executeSql("INSERT INTO t22(x,y) VALUES(?,?)",[10,'fifteen'])
+ db.commitTransaction()
+ db.rollbackTransaction()
+
+ value = db.executeSql("SELECT y FROM t22 WHERE x=10")
+ 
+  data = value[0]['y']
+  
+  data
+
+end
+
+# Destroy table with null Value
+def dropNull
+  db=Rho::Database.new(Rho::Application.databaseFilePath('local'), "local");
+
+  tableName = Library.getRandomName
+  puts "Table Name #{tableName}"
+  
+  db.executeSql("CREATE TABLE #{tableName}(x INTEGER, y TEXT)")
+
+  begin
+    db.destroyTable("")
+   rescue => ex
+     Alert.show_popup ex.message
+     data = ex.message
+   end
+
+  if db.isTableExist(tableName)
+    data = 'true'
+  else
+    data = 'false'
+  end
+
+  data
+
+end
+
+def destroyTwice
+  db=Rho::Database.new(Rho::Application.databaseFilePath('local'), "local");
+ 
+  tableName = Library.getRandomName
+  puts "Table Name #{tableName}"
+
+  db.executeBatchSql("CREATE TABLE #{tableName}(x INTEGER, y TEXT)")
+  db.isTableExist(tableName)
+  db.destroyTable(tableName)
+
+  if db.isTableExist(tableName)
+    data = 'true'
+  else
+    data = 'false'
+  end
+  
+  data
+end
+    
+    
+ # isTable exist with null value
+def nullTable
+  db=Rho::Database.new(Rho::Application.databaseFilePath('local'), "local"); 
+  
+  if db.isTableExist('')
+    data = 'true'
+  else
+    data = 'false'
+  end
+  
+  data
+
+end
+  
+# Call rollbackTransaction without StartTransaction 
+def rollTxn
+  db=Rho::Database.new(Rho::Application.databaseFilePath('local'), "local");
+  
+  tableName = Library.getRandomName
+  puts "Table Name #{tableName}"
+  
+  db.executeBatchSql("DROP TABLE IF EXISTS #{tableName};CREATE TABLE #{tableName}(x INTEGER, y TEXT)")
+  puts "#{db.isTableExist(tableName)}"
+  db.rollbackTransaction()
+  
+  if db.isTableExist(tableName)
+    data = 'true'
+  else
+    data = 'false'
+  end
+  
+  data
+end   
+
+# invalid execute statement passed with executeSQL 
+def invalidSql
+  db=Rho::Database.new(Rho::Application.databaseFilePath('local'), "local"); 
+  
+  begin
+    db.executeBatchSql("DROP TABLE IF EXISTS fab;CREATE taasf  fab(x INTEGER, y TEXT)")
+   rescue => ex
+     data = ex.message
+   end
+   
+  data
+end
+
+# initiate DB at invalid file path 
+def fooDB
+
+  begin
+    db=Rho::Database.new("/fooo/fooo/fooo", "local");
+   rescue => ex
      Alert.show_popup ex.message
      data = ex.message
    end
    
-   WebView.execute_js('resultDatabase("'+data+'")')
+  data
+
+end
+
+# executeBatchSql method with one invalid statement-Drop , both the tables should get created 
+
+def invalidBSql
+  db=Rho::Database.new(Rho::Application.databaseFilePath('local'), "local"); 
+
+  tableName1 = Library.getRandomName
+  puts "Table Name #{tableName1}"
+
+  tableName2 = Library.getRandomName
+  puts "Table Name #{tableName2}"
+
+  begin
+     db.executeBatchSql("CREATE TABLE #{tableName1}(x INTEGER, y TEXT);DROP EXISTS t25;CREATE TABLE #{tableName2}(x INTEGER, y TEXT)")
+   rescue => ex
+     data = ex.message
+   end
+
+  data
+  
+end
+
+# ExecuteSql with null statement 
+def nullSql
+  db=Rho::Database.new(Rho::Application.databaseFilePath('local'), "local"); 
+
+  begin
+    db.executeSql("")
+   rescue => ex
+     data = ex.message
+   end
    
+  data
+  
+end 
+
+# ExecuteBatchSql with null statement 
+def nullBSql
+  db=Rho::Database.new(Rho::Application.databaseFilePath('local'), "local"); 
+
+  begin
+    db.executeBatchSql("")
+   rescue => ex
+     data = ex.message
+   end
+   
+  data
+
+end 
+
+# Call commmitTransaction without startTransaction
+
+def nullCommit
+  db=Rho::Database.new(Rho::Application.databaseFilePath('dev'), "dev"); 
+  db.executeBatchSql("DROP TABLE IF EXISTS bob;CREATE TABLE bob(x INTEGER, y TEXT)") 
+  db.commitTransaction()
+
+  if db.isTableExist("bob")
+    data = 'true'
+  else
+    data = 'false'
+  end
+  
+  data
+end
+
+# Db object with invalid Partition 
+def invalidPartition
+
+  begin
+    db=Rho::Database.new(Rho::Application.databaseFilePath('local'));
+   rescue => ex
+     data = ex.message
+   end
+  data
+end
+
+#To demonstrate two DB objects pointing to two different paths with same db partition 
+def multiDBsame
+
+  tableName = Library.getRandomName
+  puts "Table Name #{tableName}"
+
+  db=Rho::Database.new(Rho::Application.databaseFilePath('testDB'), "testDB")
+  db.executeBatchSql("CREATE TABLE #{tableName}(x INTEGER, y TEXT)")
+  db.executeSql("INSERT INTO #{tableName} VALUES(?,?)",[10,'fifteen'])
+  value = db.executeSql("SELECT y FROM #{tableName} WHERE x=10")
+
+  puts getmodelpath = Rho::RhoApplication::get_model_path('app', 'Settings')
+
+  db1=Rho::Database.new(File.join(getmodelpath, "testDB"), "testDB")
+  db1.executeBatchSql("CREATE TABLE #{tableName}(x INTEGER, y TEXT)")
+  db1.executeSql("INSERT INTO #{tableName}(x,y) VALUES(?,?)",[10,'fifty'])
+  value1 = db1.executeSql("SELECT y FROM #{tableName} WHERE x=10")
+  
+  data = value[0]['y']+','+value1[0]['y']
+  puts data
+  data
+  
+end
+
+#To demonstrate two DB objects pointing to two different  paths with different db partition 
+def multiDBdifferent
+
+  tableName = Library.getRandomName
+  puts "Table Name #{tableName}"
+
+  db=Rho::Database.new(Rho::Application.databaseFilePath('testDB1'), "testDB1")
+  db.executeBatchSql("CREATE TABLE #{tableName}(x INTEGER, y TEXT)")
+  db.executeSql("INSERT INTO #{tableName} VALUES(?,?)",[10,'fifteen'])
+  value = db.executeSql("SELECT y FROM #{tableName} WHERE x=10")
+
+  puts getmodelpath = Rho::RhoApplication::get_model_path('app', 'Settings')
+
+  db1=Rho::Database.new(File.join(getmodelpath, "testDB2"), "testDB2");
+  db1.executeBatchSql("CREATE TABLE #{tableName}(x INTEGER, y TEXT)")
+  db1.executeSql("INSERT INTO #{tableName}(x,y) VALUES(?,?)",[10,'fifty'])
+  value1 = db1.executeSql("SELECT y FROM #{tableName} WHERE x=10")
+  
+  data = value[0]['y']+','+value1[0]['y']
+  puts data
+  data
+end
+
+
+# To demonstrate two DB objects pointing to same path diffrent db partition 
+def multiDBobjects
+
+  tableName = Library.getRandomName
+  puts "Table Name #{tableName}"
+
+  db = Rho::Database.new(Rho::Application.databaseFilePath('local'), "part1");
+  db2 = Rho::Database.new(Rho::Application.databaseFilePath('local'), "part2");
+
+  db.executeBatchSql("CREATE TABLE #{tableName}(x INTEGER, y TEXT)")
+  db2.executeSql("INSERT INTO #{tableName}(x,y) VALUES(?,?)",[10,'fifty'])
+  value = db.executeSql("SELECT y FROM #{tableName} WHERE x=10")
+
+  data = value[0]['y']
+
+  data
+
+end
+
+
+#To demonstarte two db objects  pointing to same path and same db partition-closing one db object 
+def multiDBobjects2
+  tableName = Library.getRandomName
+  puts "Table Name #{tableName}"
+
+  db=Rho::Database.new(Rho::Application.databaseFilePath('testDB'), "testDB")
+  db1=Rho::Database.new(Rho::Application.databaseFilePath('testDB'), "testDB")
+
+  db.executeBatchSql("CREATE TABLE #{tableName}(x INTEGER, y TEXT)")
+  db.executeSql("INSERT INTO #{tableName} VALUES(?,?)",[10,'fifteen'])
+  db.close
+
+  begin
+    value1 = db1.executeSql("SELECT y FROM #{tableName} WHERE x=10")
+    data = value1[0]['y']
+    puts data
+   rescue => ex
+     data = ex.message
+   end
+
+   data
+end
+
+#To demonstrate two DB objects pointing to two different  paths with different db partition -Close one db object .
+
+def closeIrrDb
+
+  tableName = Library.getRandomName
+  puts "Table Name #{tableName}"
+
+  puts getmodelpath = Rho::RhoApplication::get_model_path('app', 'Settings')
+
+  db=Rho::Database.new(Rho::Application.databaseFilePath('testDB1'), "testDB1")
+  db1=Rho::Database.new(File.join(getmodelpath, "testDB2"), "testDB2")
+
+  db.executeBatchSql("CREATE TABLE #{tableName}(x INTEGER, y TEXT)")
+  db.executeSql("INSERT INTO #{tableName} VALUES(?,?)",[10,'fifteen'])
+  value = db.executeSql("SELECT y FROM #{tableName} WHERE x=10")
+  db.close()
+  
+  begin
+    db1.executeBatchSql("CREATE TABLE #{tableName}(x INTEGER, y TEXT)")
+    db1.executeSql("INSERT INTO #{tableName}(x,y) VALUES(?,?)",[10,'fifty'])
+    value1 = db1.executeSql("SELECT y FROM #{tableName} WHERE x=10")
+  
+    data = value[0]['y']+','+value1[0]['y']
+   rescue => ex
+     data = ex.message
+   end
+   puts data
+   data
+end 
+
+#Invalid db path and invalid db partition 
+def invalid
+  data = ''
+  begin
+    db=Rho::Database.new("/fooo/fooo/fooo", "@$$%%@#");
+   rescue => ex
+     data = ex.message
+   end
+
+  data
+
+end
+
+#valid db path and invalid db partition 
+def invalid1
+
+  data = ''
+  begin
+    getmodelpath = Rho::RhoApplication::get_model_path('app', 'Settings')
+    db=Rho::Database.new(File.join(getmodelpath, "test"), "@#%^&*#")
+    data = db.to_s
+   rescue => ex
+     data = ex.message
+   end
+
+  data
+end
+
+
+
+#user defined database "app"
+
+def dbApp
+ 
+  tableName = Library.getRandomName
+  puts "Table Name #{tableName}"
+  
+  db =Rho::Database.new(Rho::Application.databaseFilePath('app'), "app");
+ 
+ db.executeBatchSql("CREATE TABLE #{tableName}(x INTEGER, y TEXT)") 
+ 
+  if db.isTableExist(tableName)
+    data = 'true'
+  else
+    data = 'false'
+  end
+  
+  data
+
+ end
+
+#user defined database "user "
+def dbUser
+  tableName = Library.getRandomName
+  puts "Table Name #{tableName}"
+  
+  db =Rho::Database.new(Rho::Application.databaseFilePath('user'), "user");
+ 
+ db.executeBatchSql("CREATE TABLE #{tableName}(x INTEGER, y TEXT)") 
+ 
+  if db.isTableExist(tableName)
+    data = 'true'
+  else
+    data = 'false'
+  end
+  
+  data
+ end
+
+ 
+ 
+#DestroyTables with null value 
+def destroyTablesNull
+
+  db1=Rho::Database.new(Rho::Application.databaseFilePath('local'), "local");
+  
+   tableName5 = Library.getRandomName
+   puts "Table Name #{tableName5}"
+   tableName6 = Library.getRandomName
+   puts "Table Name #{tableName6}"
+   tableName7 = Library.getRandomName
+   puts "Table Name #{tableName7}"
+   tableName8 = Library.getRandomName
+   puts "Table Name #{tableName8}"
+  
+  db1.executeBatchSql("CREATE TABLE #{tableName5}(x INTEGER, y TEXT);CREATE TABLE #{tableName6}(x INTEGER, y TEXT);CREATE TABLE #{tableName7}(x INTEGER, y TEXT);CREATE TABLE #{tableName8}(x INTEGER, y TEXT)")
+   puts "#{db1.isTableExist(tableName5)}"
+   puts "#{db1.isTableExist(tableName6)}"
+   puts "#{db1.isTableExist(tableName7)}"
+   puts "#{db1.isTableExist(tableName8)}"
+
+  db1.destroyTables({"include" =>"", "exclude" =>""})
+    
+   puts "#{db1.isTableExist(tableName5)}"
+   puts "#{db1.isTableExist(tableName6)}"
+   puts "#{db1.isTableExist(tableName7)}"
+   puts "#{db1.isTableExist(tableName8)}"
+   
+   if db1.isTableExist(tableName5) || db1.isTableExist(tableName6) || db1.isTableExist(tableName7) || db1.isTableExist(tableName8)
+     data = 'true'
+   else
+     data = 'false'
+   end
+
+   data
  end
  
-# 
-# #Test case9- Close Database and try reading from DB-try handling exeception
-# def closeRead
-#  db=Rho::Database.new(Rho::Application.databaseFilePath('local'), "local");
-#  
-#   db.executeBatchSql("DROP TABLE IF EXISTS t15;CREATE TABLE t15(x INTEGER, y TEXT)")
-#   db.executeSql("INSERT INTO t15(x,y) VALUES(?,?)",[10,'ten'])
-#   puts "#{ db.executeSql("SELECT y FROM t15 WHERE x=10")}"
-#   db.close()
-#   
-#    begin
-#      value = db.executeSql("SELECT x FROM t15 WHERE y='ten'")
-#      puts "#{value}"
-#    rescue => ex
-#      Alert.show_popup ex.message
-#      data = ex.message
-#    end
-#    
-#    WebView.execute_js("resultDatabase('#{data}')")
-#
-#end
-# 
-## Test case10- Open the closed Database and read from it 
-#def closeOpen
-# db=Rho::Database.new(Rho::Application.databaseFilePath('local'), "local");
-#   
-#  db.executeBatchSql("DROP TABLE IF EXISTS t15;CREATE TABLE t15(x INTEGER, y TEXT)")
-#  db.executeSql("INSERT INTO t15(x,y) VALUES(?,?)",[10,'ten'])
-#  puts "#{ db.executeSql("SELECT y FROM t15 WHERE x=10")}"
-#  
-#  db.close()
-#  
-#  db=Rho::Database.new(Rho::Application.databaseFilePath('local'), "local");
-#  value = db.executeSql("SELECT x FROM t15 WHERE y='ten'")
-#  puts "#{value}"
-#  
-#  WebView.execute_js("resultDatabase('#{data}')")
-#
-#end
-#
-##Test case11-To Demonstrate Commit Transaction 
-#
-#def commitTxn
-#  db=Rho::Database.new(Rho::Application.databaseFilePath('local'), "local");
-#
-#  db.startTransaction()
-#  db.executeBatchSql("DROP TABLE IF EXISTS t20;CREATE TABLE t20(x INTEGER, y TEXT)") 
-#  db.executeSql("INSERT INTO t20(x,y) VALUES(?,?)",[10,'ten'])
-#  db.commitTransaction()
-#
-#  puts "#{ db.executeSql("SELECT y FROM t20 WHERE x=10")}"
-#Rho::WebView.execute_js("setFieldValue('Value returned from table','#{ db.executeSql("SELECT y FROM t20 WHERE x=10")}')") 
-##Rho::WebView.executeJavascript("updateDiv('acceptLanguage','#{data}')")
-#redirect :action => :index
-#end
-#
-##Test case12- To Demonstrate rollbackTransaction
-#def rollbackTxn
-# db=Rho::Database.new(Rho::Application.databaseFilePath('local'), "local");
-# puts "#{db.to_s}"
-# db.startTransaction()
-# db.executeBatchSql("DROP TABLE IF EXISTS t20;CREATE TABLE t20(x INTEGER, y TEXT)") 
-# db.executeSql("INSERT INTO t20(x,y) VALUES(?,?)",[10,'fifteen'])
-# puts "#{ db.executeSql("SELECT y FROM t20 WHERE x=10")}"
-# db.rollbackTransaction()
-# puts "#{ db.executeSql("SELECT y FROM t20  WHERE x=10")}"
-#redirect :action => :index
-#end
-# 
-#def test
-#  db=Rho::Database.new(Rho::Application.databaseFilePath('local'), "local");
-#   puts "#{db.to_s}"
-#  puts "#{db.isTableExist("t16")}"
-#  db.executeSql("DROP TABLE IF EXISTS t16")
-#  puts "#{db.isTableExist("t16")}"
-#  redirect :action => :index
-#  end  
-#  
-##Test case 13- To Demonstrate RollbackTransaction after calling CommitTranscation
-#  
-#def comRollTxn
-# db=Rho::Database.new(Rho::Application.databaseFilePath('local'), "local");
-# puts "#{db.to_s}"
-# db.startTransaction()
-# db.executeBatchSql("DROP TABLE IF EXISTS t20;CREATE TABLE t20(x INTEGER, y TEXT)") 
-# db.executeSql("INSERT INTO t20(x,y) VALUES(?,?)",[10,'fifteen'])
-# db.commitTransaction()
-#puts "#{ db.executeSql("SELECT y FROM t20 WHERE x=10")}"
-##db.executeBatchSql("DROP TABLE IF EXISTS t20;CREATE TABLE t21(x INTEGER, y TEXT)")
-##puts "#{ db.isTableExist("t21")}"
-#db.rollbackTransaction()
-#puts "#{ db.executeSql("SELECT y FROM t20 WHERE x=10")}"   
-#redirect :action => :index
-#end
-#
-#
-##To demonstrate two DB objects pointing to two different  paths with different db partition 
-#def multiDBdifferent 
-#  getmodelpath = Rho::RhoApplication::get_model_path('app', 'System')
-#  db=Rho::Database.new(File.join(getmodelpath, "test"), "local");
-#  puts "#{db.to_s}"  
-#  db.executeBatchSql("DROP TABLE IF EXISTS t22;CREATE TABLE t22(x INTEGER, y TEXT)")
-#  puts "#{ db.isTableExist("t22")}"
-#  db1=Rho::Database.new(Rho::Application.databaseFilePath('local'), "zinga");
-#  puts "#{db1.to_s}"  
-#  db1.executeBatchSql("DROP TABLE IF EXISTS t22;CREATE TABLE t22(x INTEGER, y TEXT)")
-#  puts "#{ db1.isTableExist("t22")}"
-#  db.executeSql("INSERT INTO t22(x,y) VALUES(?,?)",[10,'fifteen'])
-#  db1.executeSql("INSERT INTO t22(x,y) VALUES(?,?)",[10,'fifty'])
-#  puts "#{ db.executeSql("SELECT y FROM t22 WHERE x=10")}"   
-#  puts "#{ db1.executeSql("SELECT y FROM t22 WHERE x=10")}"   
-#  redirect :action => :index
-#end
-#
-##To demonstrate two DB objects pointing to two different paths with same db partition 
-#def multiDBsame
-#  getmodelpath = Rho::RhoApplication::get_model_path('app', 'System')
-#  db=Rho::Database.new(File.join(getmodelpath, "test"), "local");
-#  puts "#{db.to_s}"  
-#  db.executeBatchSql("DROP TABLE IF EXISTS t22;CREATE TABLE t22(x INTEGER, y TEXT)")
-#  puts "#{ db.isTableExist("t22")}"
-#  db1=Rho::Database.new(Rho::Application.databaseFilePath('local'), "local");
-#  puts "#{db1.to_s}"  
-#  db1.executeBatchSql("DROP TABLE IF EXISTS t22;CREATE TABLE t22(x INTEGER, y TEXT)")
-#  puts "#{ db1.isTableExist("t22")}"
-#  db.executeSql("INSERT INTO t22(x,y) VALUES(?,?)",[10,'fifteen'])
-#  db1.executeSql("INSERT INTO t22(x,y) VALUES(?,?)",[10,'fifty'])
-#  puts "#{ db.executeSql("SELECT y FROM t22 WHERE x=10")}"   
-#  puts "#{ db1.executeSql("SELECT y FROM t22 WHERE x=10")}"   
-#  redirect :action => :index
-#end
-#
-## To demonstrate two DB objects pointing to same path diffrent db partition 
-#def multiDBobjects
-#   db=Rho::Database.new(Rho::Application.databaseFilePath('local'), "local");
-#   puts "#{db.to_s}"  
-#   db2=Rho::Database.new(Rho::Application.databaseFilePath('local'), "zinga");
-#   puts "#{db2.to_s}"  
-#   db.executeBatchSql("DROP TABLE IF EXISTS t23;CREATE TABLE t23(x INTEGER, y TEXT)")
-#   puts "#{ db.isTableExist("t23")}"
-#   db2.executeSql("INSERT INTO t23(x,y) VALUES(?,?)",[10,'fifty'])
-#   puts "#{ db.executeSql("SELECT y FROM t23 WHERE x=10")}" 
-# redirect :action => :index 
-#end   
-#  
-##To demonstarte two db objects  pointing to same path and same db partition-closing one db object 
-#def multiDBobjects2
-#  getmodelpath = Rho::RhoApplication::get_model_path('app', 'System')
-#    db=Rho::Database.new(File.join(getmodelpath, "test"), "local");
-#    puts "#{db.to_s}"  
-#    db.executeBatchSql("DROP TABLE IF EXISTS t22;CREATE TABLE t22(x INTEGER, y TEXT)")
-#    puts "#{ db.isTableExist("t22")}"
-#    db1=Rho::Database.new(Rho::Application.databaseFilePath('local'), "local");
-#    puts "#{db1.to_s}"  
-#    db1.executeBatchSql("DROP TABLE IF EXISTS t22;CREATE TABLE t22(x INTEGER, y TEXT)")
-#    puts "#{ db1.isTableExist("t22")}"
-#    db.executeSql("INSERT INTO t22(x,y) VALUES(?,?)",[10,'fifteen'])
-#    db.close()
-#    db1.executeSql("INSERT INTO t22(x,y) VALUES(?,?)",[10,'fifty'])
-#   # puts "#{ db.executeSql("SELECT y FROM t22 WHERE x=10")}"   
-#    puts "#{ db1.executeSql("SELECT y FROM t22 WHERE x=10")}"   
-#  redirect :action => :index
-#end  
-#  
-##To demonstrate executeBatchSQL with args   
-#def batchArgs
-#   db=Rho::Database.new(Rho::Application.databaseFilePath('local'), "local");
-#    puts "#{db.to_s}"  
-#    db.executeBatchSql("DROP TABLE IF EXISTS t27;CREATE TABLE t27(x INTEGER, y TEXT);INSERT INTO t27(x,y) VALUES(?,?)", [10,'fifteen'])
-#    puts "#{ db.isTableExist("t27")}"
-# # puts "#{ db.executeSql("INSERT INTO t26(x,y) VALUES(?,?)",[10,'fifty'])}"
-#   puts "#{ db.executeSql("SELECT y FROM t27 WHERE x=10")}"
-#   redirect :action => :index
-#end
-#
-## Destroy table with null Value
-#def dropNull
-#  db=Rho::Database.new(Rho::Application.databaseFilePath('local'), "local");
-#     puts "#{db.to_s}"  
-#   db.destroyTable("") 
-#  redirect :action => :index  
-#end
-#
-#def destroyTwice 
-#     db=Rho::Database.new(Rho::Application.databaseFilePath('local'), "local"); 
-#     db.executeBatchSql("DROP TABLE IF EXISTS tab;CREATE TABLE tab(x INTEGER, y TEXT)")
-#     puts "#{db.isTableExist("tab")}"
-#     db.destroyTable("tab")
-#     puts "#{db.isTableExist("tab")}"
-#     db.destroyTable("tab")
-#     redirect :action => :index
-#    end
-#    
-#    
-# # isTable exist with null value
-#def nullTable
-#  db=Rho::Database.new(Rho::Application.databaseFilePath('local'), "local"); 
-#  puts "#{db.to_s}"  
-#  puts "#{db.isTableExist("")}"
-#  redirect :action => :index
-#end 
-#  
-## Call rollbackTransaction without StartTransaction 
-#def rollTxn
-#  db=Rho::Database.new(Rho::Application.databaseFilePath('local'), "local"); 
-#  db.executeBatchSql("DROP TABLE IF EXISTS fab;CREATE TABLE fab(x INTEGER, y TEXT)")
-#   puts "#{db.isTableExist("fab")}"
-#   db.rollbackTransaction()
-#  puts "#{db.isTableExist("fab")}"
-#  redirect :action => :index
-#end   
-#
-## invalid execute statement passed with executeSQL 
-#def invalidSql
-#  db=Rho::Database.new(Rho::Application.databaseFilePath('local'), "local"); 
-#  puts "#{db.to_s}"
-#  db.executeBatchSql("DROP TABLE IF EXISTS fab;CREATE taasf  fab(x INTEGER, y TEXT)")
-#   puts "#{db.isTableExist("fab")}"   
-#  redirect :action => :index
-#end  
-#
-## initiate DB at invalid file path 
-#def fooDB
-# db=Rho::Database.new("/fooo/fooo/fooo", "local");
-# puts "#{db.to_s}"
-#  redirect :action => :index
-#end
-#
-## executeBatchSql method with one invalid statement-Drop , both the tables should get created 
-#
-#def invalidBSql
-#db=Rho::Database.new(Rho::Application.databaseFilePath('local'), "local"); 
-#  puts "#{db.to_s}"
-#db.executeBatchSql("CREATE TABLE t29(x INTEGER, y TEXT);DROP EXISTS t25;CREATE TABLE t30(x INTEGER, y TEXT)")
-#  puts "#{db.isTableExist("t29")}"
-#  puts "#{db.isTableExist("t30")}"
-#db.executeSql("DROP TABLE IF EXISTS t29")
-# db.executeSql("DROP TABLE IF EXISTS t30")
-#  redirect :action => :index
-#end
-#
-## ExecuteSql with null statement 
-#def nullSql
-#  db=Rho::Database.new(Rho::Application.databaseFilePath('local'), "local"); 
-#   puts "#{db.to_s}"
-#   db.executeSql("") 
-#  redirect :action => :index
-#end 
-#
-## ExecuteBatchSql with null statement 
-#def nullBSql
-#  db=Rho::Database.new(Rho::Application.databaseFilePath('local'), "local"); 
-#  puts "#{db.to_s}"
-#  db.executeBatchSql("") 
-#  redirect :action => :index
-#end 
-#
-## Call commmitTransaction without startTransaction
-#
-#def nullCommit
-#  db=Rho::Database.new(Rho::Application.databaseFilePath('local'), "local"); 
-#  puts "#{db.to_s}"
-#  db.executeBatchSql("DROP TABLE IF EXISTS bob;CREATE TABLE bob(x INTEGER, y TEXT)") 
-#  db.commitTransaction()
-#  puts "#{db.isTableExist("bob")}"
-#  redirect :action => :index
-#end 
-#
-## Db object with invalid Partition 
-#def invalidPartition
-#  db=Rho::Database.new(Rho::Application.databaseFilePath('local')); 
-#   puts "#{db.to_s}"
-#  redirect :action => :index
-#end  
-#
-##To demonstrate two DB objects pointing to two different  paths with different db partition -Close one db object .
-#
-#def closeIrrDb
-#  getmodelpath = Rho::RhoApplication::get_model_path('app', 'System')
-#  db=Rho::Database.new(File.join(getmodelpath, "Deva"), "local");
-#  puts "#{db.to_s}"  
-#  db.executeBatchSql("DROP TABLE IF EXISTS t22;CREATE TABLE t22(x INTEGER, y TEXT )")
-#  puts "#{ db.isTableExist("t22")}"
-#  db1=Rho::Database.new(Rho::Application.databaseFilePath('local'), "zinga");
-#  puts "#{db1.to_s}"  
-#  db1.executeBatchSql("DROP TABLE IF EXISTS t23;CREATE TABLE t23(x INTEGER, y TEXT)")
-#  puts "#{ db1.isTableExist("t23")}"
-#  db.executeSql("INSERT INTO t22(x,y) VALUES(?,?)",[10,'fifteen'])
-#  db1.executeSql("INSERT INTO t23(x,y) VALUES(?,?)",[10,'fifty'])
-#  db.close()
-#Rho::WebView.execute_js("setFieldValue('#{ db1.executeSql("SELECT y FROM t23 WHERE x=10")}')") 
-#  puts "#{ db1.executeSql("SELECT y FROM t23 WHERE x=10")}"   
-#  puts "#{ db.executeSql("SELECT y FROM t22 WHERE x=10")}"   
-#  redirect :action => :index    
-#end  
-#
-#def lockDB
-#  getmodelpath = Rho::RhoApplication::get_model_path('app', 'System')
-#  db=Rho::Database.new(File.join(getmodelpath, "test"), "local");
-#  puts "#{db.to_s}"  
-#  db.executeBatchSql("DROP TABLE IF EXISTS t22;CREATE TABLE t22(x INTEGER, y TEXT)")
-#   puts "#{ db.isTableExist("t22")}"
-#   db.lockDb()
-#end
-#  
-#def write
-#  getmodelpath = Rho::RhoApplication::get_model_path('app', 'System')
-#  db=Rho::Database.new(File.join(getmodelpath, "test"), "local");
-#  puts "#{db.to_s}"  
-#  db.executeSql("INSERT INTO t22(x,y) VALUES(?,?)",[10,'fifteen'])
-#puts "#{ db.executeSql("SELECT y FROM t22 WHERE x=10")}" 
-#end
-#
-##Invalid db path and invalid db partition 
-#def invalid
-# db=Rho::Database.new("/fooo/fooo/fooo", "@$$%%@#");
-# puts "#{db}"
-# Rho::WebView.execute_js("setFieldValue('#{db}')") 
-# redirect :action => :index
-#end
-#
-##valid db path and invalid db partition 
-#def invalid1
-# getmodelpath = Rho::RhoApplication::get_model_path('app', 'System')
-# db=Rho::Database.new(File.join(getmodelpath, "test"), "@#%^&*#");
-# puts "#{db}"
-# Rho::WebView.execute_js("setFieldValue('#{db}')") 
-# redirect :action => :index
-#end
-#
-##user defined database "app"
-#
-#def dbApp
-# db =Rho::Database.new(Rho::Application.databaseFilePath('app'), "app");
-# Rho::WebView.execute_js("setFieldValue('#{db.to_s}')")
-# db.executeBatchSql("DROP TABLE IF EXISTS app;CREATE TABLE app(x INTEGER, y TEXT)") 
-# val=db.isTableExist("app")
-# Rho::WebView.execute_js("setFieldValue('Table created?')")  
-# Rho::WebView.execute_js("setFieldValue('#{ val }')")  
-# redirect :action => :index
-# end
-#
-##user defined database "user "
-#def dbUser
-# db =Rho::Database.new(Rho::Application.databaseFilePath('user'), "user");
-# Rho::WebView.execute_js("setFieldValue('#{db.to_s}')")
-# db.executeBatchSql("DROP TABLE IF EXISTS user;CREATE TABLE user(x INTEGER, y TEXT)") 
-# val=db.isTableExist("user")
-# Rho::WebView.execute_js("setFieldValue('Table created')")  
-# Rho::WebView.execute_js("setFieldValue('#{ val }')")  
-# redirect :action => :index
-# end
-# 
-##
-#def destroyTablesNull
-#  db1=Rho::Database.new(Rho::Application.databaseFilePath('local'), "local");
-#  db1.executeBatchSql("CREATE TABLE t5(x INTEGER, y TEXT);CREATE TABLE t6(x INTEGER, y TEXT);CREATE TABLE t7(x INTEGER, y TEXT);CREATE TABLE t8(x INTEGER, y TEXT)")
-#  #val1= db1.isTableExist("t5")
-#  #val2= db1.isTableExist("t6")
-#  #val3= db1.isTableExist("t7")
-#  #val4= db1.isTableExist("t8")
-#  
-#  db1.destroyTables({"include" =>"", "exclude" =>""})
-#  val1= db1.isTableExist("t5")
-#  val2= db1.isTableExist("t6")
-#  val3= db1.isTableExist("t7")
-#  val4= db1.isTableExist("t8")
-#  puts "#{val1}"
-# if  (val1==false && val2 ==false && val3==false && val4==false)
-#   Rho::WebView.execute_js("setFieldValue('Tables deleted')")  
-# else
-#   Rho::WebView.execute_js("setFieldValue('Tables not deleted')")
-# end
-#   redirect :action => :index
-# end
-#
-#def destroyTablesInvalid
-# db1=Rho::Database.new(Rho::Application.databaseFilePath('local'), "local");
-# a=Array.new
-# a<<"a"<<"b"
-# b=Array.new
-# b<<"c"<<"d"
-# db1.destroyTables({:include => a, :exclude => b})
-# redirect :action => :index
-# end 
-#
-#def destroyTablesInvalid1
-#  db1=Rho::Database.new(Rho::Application.databaseFilePath('local'), "local");
-#   db1.executeBatchSql("CREATE TABLE t9(x INTEGER, y TEXT);CREATE TABLE t10(x INTEGER, y TEXT);CREATE TABLE t11(x INTEGER, y TEXT);CREATE TABLE t12(x INTEGER, y TEXT)")
-#   a=Array.new
-#   a<<"a"<<"t10"
-#   b=Array.new
-#   b<<"b"<<"t12"
-#  db1.destroyTables({:include => a, :exclude => b})
-#  val1= db1.isTableExist("t9")
-#  val2= db1.isTableExist("t10")
-#  val3= db1.isTableExist("t11")
-#  val4= db1.isTableExist("t12")
-#  if  (val1==true && val2 ==false && val3==true && val4==true)
-#   Rho::WebView.execute_js("setFieldValue('valid tables are deleted ')")  
-#  else
-#   Rho::WebView.execute_js("setFieldValue('Valid Tables not deleted')")
-#  end
-# redirect :action => :index
-#  end   
-#  
-#  
-#def tableExistInvalid
-#  db1=Rho::Database.new(Rho::Application.databaseFilePath('local'), "local");
-#  Rho::WebView.execute_js("setFieldValue('#{db1.isTableExist("!@^&%$$%")}')")
-#  
-#end
-#
-#def noCommit
-#  getmodelpath = Rho::RhoApplication::get_model_path('app', 'System')
-#  db=Rho::Database.new(File.join(getmodelpath, "test"), "deva");
-#  db.startTransaction()
-#  db.executeBatchSql("DROP TABLE IF EXISTS comp; CREATE TABLE comp(x INTEGER, y TEXT)")  
-#  Rho::WebView.execute_js("setFieldValue('#{db.isTableExist("comp")}')")
-#end
-#
-#def checkNoCommit 
-#  getmodelpath = Rho::RhoApplication::get_model_path('app', 'System')
-#  db=Rho::Database.new(File.join(getmodelpath, "test"), "deva");
-#  Rho::WebView.execute_js("setFieldValue('#{db.isTableExist("comp")}')")
-#end
-#
-#def rollDestroyTable
-#  getmodelpath = Rho::RhoApplication::get_model_path('app', 'System')
-#  db=Rho::Database.new(File.join(getmodelpath, "test"), "deva");
-#  db.startTransaction()
-#  db.executeBatchSql("DROP TABLE IF EXISTS t20;CREATE TABLE t20(x INTEGER, y TEXT)") 
-#  db.executeSql("INSERT INTO t20(x,y) VALUES(?,?)",[10,'fifteen'])
-#  db.commitTransaction()
-#  db.startTransaction()
-#  db.executeSql("DROP TABLE t20")
-#  db.rollbackTransaction()
-# Rho::WebView.execute_js("setFieldValue('#{ db.executeSql("SELECT y FROM t20  WHERE x=10")}')")
-#redirect :action => :index
-#end
-#
-#def columnAdd
-#  db=Rho::Database.new(Rho::Application.databaseFilePath('local'), "local");
-#  puts "#{db}"
-#   db.executeBatchSql("DROP TABLE IF EXISTS Company;CREATE TABLE Company(Id INTEGER NOT NULL PRIMARY KEY, EMPLOYEE TEXT, DESIGNATION VARCHAR)") 
-#   db.executeBatchSql("INSERT INTO Company(Id,EMPLOYEE,Designation) VALUES (1,'deva','SystemEngineer');INSERT INTO Company(Id,EMPLOYEE,Designation) VALUES (2,'deva','SystemEngineer');INSERT INTO Company(Id,EMPLOYEE,Designation) VALUES (3,'bhaktha','SystemEngineer')")
-#   db.executeSql("ALTER TABLE Company ADD COLUMN Manager")
-#  Rho::WebView.execute_js("setFieldValue('#{ db.executeSql("SELECT Manager FROM company")}')" )
-#   #db.executeBatchSql("INSERT ")
-#end
-#
-#
-#def databaseNull
-#  db=Rho::Database.new()
-#  puts "#{db}"
-#end
-#
-#def databaseNullPath
-#  db=Rho::Database.new("","Reddy")
-# Rho::WebView.execute_js("setFieldValue('#{db}')" )
-#end
-#
-#def databaseLong 
-#  getmodelpath = Rho::RhoApplication::get_model_path('app', 'System')
-#  db=Rho::Database.new(File.join(getmodelpath, "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuv"), "deva");
-#  Rho::WebView.execute_js("setFieldValue('#{db}')" )
-#end
-#
-#def NoCommitDrop
-#  getmodelpath = Rho::RhoApplication::get_model_path('app', 'System')
-#  db=Rho::Database.new(File.join(getmodelpath, "test"), "deva");
-#  db.startTransaction()
-#  db.executeBatchSql("DROP TABLE IF EXISTS Employee; CREATE TABLE Employee(x INTEGER, y TEXT)")  
-# db.commitTrnsaction()
-#db.destroyTable("Employee")
-# Rho::WebView.execute_js("setFieldValue('#{db.isTableExist("Employee")}')")
-# end
-#
-#
-#def checkNoCommitDrop 
-#  getmodelpath = Rho::RhoApplication::get_model_path('app', 'System')
-#  db=Rho::Database.new(File.join(getmodelpath, "test"), "deva");
-#  Rho::WebView.execute_js("setFieldValue('#{db.isTableExist("Employee")}')")
-#end
-#
-#def RowDelete
-#  db=Rho::Database.new(Rho::Application.databaseFilePath('local'), "local");
-#  puts "#{db}"
-#  db.executeBatchSql("DROP TABLE IF EXISTS Company;CREATE TABLE Company(Id INTEGER NOT NULL PRIMARY KEY, EMPLOYEE TEXT, DESIGNATION VARCHAR)") 
-#  db.executeBatchSql("INSERT INTO Company(Id,EMPLOYEE,Designation) VALUES (1,'deva','SystemEngineer');INSERT INTO Company(Id,EMPLOYEE,Designation) VALUES (2,'deva','SystemEngineer');INSERT INTO Company(Id,EMPLOYEE,Designation) VALUES (3,'bhaktha','SystemEngineer')")
-#  db.executeSql("DELETE FROM Company WHERE ID=?",[1])
-#  Rho::WebView.execute_js("setFieldValue('#{ db.executeSql("SELECT * FROM company Where Id=2")}')" )
-#  #db.executeBatchSql("INSERT ")/ll
-#end
-#
+
+def destroyTablesInvalid
+
+  tableName = Library.getRandomName
+  puts "Table Name #{tableName}"
+
+  db1=Rho::Database.new(Rho::Application.databaseFilePath('local'), "local");
+  a=Array.new
+  a<<"not_exist1"<<"not_exist2"
+  b=Array.new
+  b<<"not_exist3"<<"not_exist4"
+
+  data = ''
+  begin
+    db1.destroyTables({:include => a, :exclude => b})
+
+    db1.executeBatchSql("CREATE TABLE #{tableName}(x INTEGER, y TEXT)")
+    if db1.isTableExist(tableName)
+      data = 'true'
+    else
+      data = 'false'
+    end
+   rescue => ex
+     data = ex.message
+   end
+
+   data
+
+ end 
+
+def destroyTablesInvalid1
+  
+  tableName5 = Library.getRandomName
+  puts "Table Name #{tableName5}"
+  tableName6 = Library.getRandomName
+  puts "Table Name #{tableName6}"
+  
+   db1=Rho::Database.new(Rho::Application.databaseFilePath('local'), "local");
+   
+   db1.executeBatchSql("CREATE TABLE #{tableName5}(x INTEGER, y TEXT);CREATE TABLE #{tableName6}(x INTEGER, y TEXT)")
+   a=Array.new
+   a<<"a"<<tableName5
+   b=Array.new
+   b<<"b"<<tableName6
+  db1.destroyTables({:include => a, :exclude => b})
+
+  val1= db1.isTableExist(tableName5)
+  val2= db1.isTableExist(tableName6)
+
+  if (val1 or val2)
+    data = 'Table Exist'
+  else
+    data = 'Table Does Not Exist'
+  end
+  
+  data
+ 
+end
+
+def tableExistInvalid
+  db1=Rho::Database.new(Rho::Application.databaseFilePath('local'), "local")
+
+  if db1.isTableExist("!@^&%$$%")
+    data = 'true'
+  else
+    data = 'false'
+  end
+
+  data
+
+end
+
+
+def rollDestroyTable
+  
+  getmodelpath = Rho::RhoApplication::get_model_path('app', 'Settings')
+  db=Rho::Database.new(File.join(getmodelpath, "test"), "test")
+  
+  db.startTransaction()
+
+  tableName = Library.getRandomName
+  puts "Table Name #{tableName}"
+
+  db.executeBatchSql("CREATE TABLE #{tableName}(x INTEGER, y TEXT)")
+  db.executeSql("INSERT INTO #{tableName}(x,y) VALUES(?,?)",[10,'fifteen'])
+  db.commitTransaction()
+
+  db.startTransaction()
+  db.executeSql("INSERT INTO #{tableName}(x,y) VALUES(?,?)",[11,'six'])
+  db.executeSql("DROP TABLE #{tableName}")
+  db.rollbackTransaction()
+  
+  if db.isTableExist(tableName)
+    data = 'true'
+  else
+    data = 'false'
+  end
+  
+  data
+
+end
+
+def columnAdd
+  db=Rho::Database.new(Rho::Application.databaseFilePath('local'), "local");
+  
+  tableName = Library.getRandomName
+  puts "Table Name #{tableName}"
+  
+  db.executeBatchSql("CREATE TABLE #{tableName}(Id INTEGER NOT NULL PRIMARY KEY, EMPLOYEE TEXT, DESIGNATION VARCHAR)") 
+  db.executeBatchSql("INSERT INTO #{tableName}(Id,EMPLOYEE,Designation) VALUES (1,'deva','SystemEngineer');INSERT INTO #{tableName}(Id,EMPLOYEE,Designation) VALUES (2,'abc','SystemEngineer');INSERT INTO #{tableName}(Id,EMPLOYEE,Designation) VALUES (3,'bhaktha','SystemEngineer')")
+  db.executeSql("ALTER TABLE #{tableName} ADD COLUMN Manager")
+  
+  db.executeSql("UPDATE #{tableName} SET Manager='Kumar Sunil'")
+  
+  value = db.executeSql("SELECT Manager FROM #{tableName} WHERE Id=1")
+  
+  data = value[0]['Manager']
+
+  data
+  
+end
+
+def databaseNull
+
+  begin
+    db=Rho::Database.new()
+    data = db.to_s
+   rescue => ex
+     data = ex.message
+   end
+
+   data
+
+end
+
+def databaseLong
+
+  getmodelpath = Rho::RhoApplication::get_model_path('app', 'Settings')
+
+  begin
+    db=Rho::Database.new(File.join(getmodelpath, "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuv"), "deva");
+    data = db.to_s
+   rescue => ex
+     data = ex.message
+   end
+
+  data
+
+end
+
+
+def databaseNullPath
+
+  begin
+    db=Rho::Database.new("","Reddy")
+    data = db.to_s
+   rescue => ex
+     data = ex.message
+   end
+   
+  data
+
+end
+
+def RowDelete
+
+  db=Rho::Database.new(Rho::Application.databaseFilePath('local'), "local");
+
+  tableName = Library.getRandomName
+  puts "Table Name #{tableName}"
+  value = nil
+  db.executeBatchSql("CREATE TABLE #{tableName}(Id INTEGER NOT NULL PRIMARY KEY, EMPLOYEE TEXT, DESIGNATION VARCHAR)") 
+  db.executeBatchSql("INSERT INTO #{tableName}(Id,EMPLOYEE,Designation) VALUES (1,'deva','SystemEngineer');INSERT INTO #{tableName}(Id,EMPLOYEE,Designation) VALUES (2,'deva','SystemEngineer');INSERT INTO #{tableName}(Id,EMPLOYEE,Designation) VALUES (3,'bhaktha','SystemEngineer')")
+  db.executeSql("DELETE FROM #{tableName} WHERE ID=?",[1])
+
+  value = db.executeSql("SELECT * FROM #{tableName} Where Id=1")
+
+  puts value.to_s
+  if value.any?
+    data = value[0]['EMPLOYEE']
+  else
+    data = 'RECORD DOESNT EXISTS'
+  end
+
+  data
+
+end
+
 end

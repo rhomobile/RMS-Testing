@@ -1,5 +1,3 @@
-#sdk: "C:/DevelopmentTools/rhomobile/rhodes"
-
 sdk: ../../../../rhodes
 
 paths:
@@ -41,7 +39,7 @@ iphone:
   entitlements:
   BundleIdentifier: com.rhomobile.apigeneratorspec
   BundleURLScheme: apigeneratorspec
-  extensions: ["barcode",  "genCallbackTests"]
+  extensions: ["barcode",  "genCallbackTests", "rhoconnect-client", "appEvents"]
 wp:
   productid: 'b6479381-42a8-0130-78de-3caec51bd50e'
 symbian:
