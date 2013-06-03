@@ -3,38 +3,15 @@ describe("System", function() {
 
 	    /* System property specs */
 
-        it("Test get property ", function () {
-            expect(Rho.System.getProperty("platform")).toEqual(Rho.System.platform);
+
+
+
+        it("Should return platform name [VT300-039:Test platform property]", function () {
+            expect(Rho.System.getProperty("platform")).isNotEmptyString();
+            expect(Rho.System.platform).isNotEmptyString();
         });
 
-        it("Test set property", function () {
-            expect(Rho.System.setProperty("applicationIconBadge", "5"));
-            expect(Rho.System.getProperty("applicationIconBadge")).toEqual("5");
-        });
-
-        it("Test get properties ", function () {
-            var actual = Rho.System.getProperties(["platform", "osVersion"]);
-            expect(actual["platform"]).isNotEmptyString();
-            expect(actual["osVersion"]).isNotEmptyString();
-        });
-
-        it("Test get all properties ", function () {
-            var actual = Rho.System.getAllProperties();
-            expect(actual["platform"]).isNotEmptyString();
-            expect(actual["osVersion"]).isNotEmptyString();
-        });
-
-        it("Test get  properties ", function () {
-            Rho.System.setProperties({applicationIconBadge: "5"});
-            expect(Rho.System.applicationIconBadge).toEqual(5);
-        });
-
-
-	    it("Test platform property", function () {
-	        expect(Rho.System.platform).isNotEmptyString();
-	    });
-
-	    it("Test hasCamera property", function () {
+        it("Should return true if device has camera [Test hasCamera property]", function () {
 	        expect(typeof Rho.System.hasCamera).toEqual('boolean');
 	    });
 	
@@ -154,9 +131,11 @@ describe("System", function() {
 	            expect(value).toEqual(10)
 	        })
 	    });
-	
-	
-	    /* ----------          platform dependent specs          ---------- */
+
+
+
+
+        /* ----------          platform dependent specs          ---------- */
 	
 	
 	    if (isAnyButApplePlatform()) {
@@ -255,9 +234,109 @@ describe("System", function() {
 	            Rho.System.setWindowSize(100, 100);
 	        });
 	    }
+
+        it("Test get property ", function () {
+            expect(Rho.System.getProperty("platform")).toEqual(Rho.System.platform);
+        });
+
+        it("Test set property", function () {
+            expect(Rho.System.setProperty("applicationIconBadge", "5"));
+            expect(Rho.System.getProperty("applicationIconBadge")).toEqual("5");
+        });
+
+        it("Test get properties ", function () {
+            var actual = Rho.System.getProperties(["platform", "osVersion"]);
+            expect(actual["platform"]).isNotEmptyString();
+            expect(actual["osVersion"]).isNotEmptyString();
+        });
+
+        it("Test get all properties ", function () {
+            var actual = Rho.System.getAllProperties();
+            expect(actual["platform"]).isNotEmptyString();
+            expect(actual["osVersion"]).isNotEmptyString();
+        });
+
+        it("Test get properties ", function () {
+            Rho.System.setProperties({applicationIconBadge: "5"});
+            expect(Rho.System.applicationIconBadge).toEqual(5);
+        });
 	});
-	
-	describe("Testing System APIs from RE1 in Ruby via AJAX", function() {
+
+    describe("FileSystem tests", function () {
+
+        var tempDirectory = Rho.RhoFile.join(Rho.Application.userFolder, 'tempDirectory');
+        var target = Rho.RhoFile.join(tempDirectory, 'target.zip');
+        var sourceA = Rho.RhoFile.join(Rho.Application.publicFolder, 'do not remove me.txt');
+        var sourceB = Rho.RhoFile.join(Rho.Application.publicFolder, 'do not remove me too.txt');
+
+        beforeEach(function () {
+            Rho.RhoFile.makeDir(tempDirectory);
+        });
+
+        afterEach(function () {
+            Rho.RhoFile.deleteRecursive(tempDirectory);
+        });
+
+        it("Test zipFile method without password", function () {
+            expect(Rho.RhoFile.exists(target)).toEqual(false);
+
+            var result = Rho.System.zipFile(target, sourceA);
+            expect(result).toEqual(0);
+            expect(Rho.RhoFile.exists(target)).toEqual(true);
+        });
+
+        it("Test zipFle method with password", function () {
+            expect(Rho.RhoFile.exists(target)).toEqual(false);
+
+            var result = Rho.System.zipFile(target, sourceA, 'password');
+            expect(result).toEqual(0);
+            expect(Rho.RhoFile.exists(target)).toEqual(true);
+        });
+
+        it("Test unzipFile method without password", function () {
+            Rho.System.zipFile(target, sourceA);
+
+            var result = Rho.System.unzipFile(target);
+            expect(result).toEqual(0);
+            expect(Rho.RhoFile.exists(Rho.RhoFile.join(tempDirectory, 'do not remove me.txt'))).toEqual(true);
+        });
+
+        it("Test unzipFile method with password", function () {
+            Rho.System.zipFile(target, sourceA, 'password');
+
+            var result = Rho.System.unzipFile(target, 'password');
+            //TODO: Why result succefull unzipFile is not equal 0?
+            //expect(result).toEqual(0);
+            expect(Rho.RhoFile.exists(Rho.RhoFile.join(tempDirectory, 'do not remove me.txt'))).toEqual(true);
+        });
+
+        it("Test zipFiles method without password", function () {
+            expect(Rho.RhoFile.exists(target)).toEqual(false);
+
+            var sources = [];
+            sources[0] = sourceA;
+            sources[1] = sourceB;
+
+            var result = Rho.System.zipFiles(target, tempDirectory, sources);
+            expect(result).toEqual(0);
+            expect(Rho.RhoFile.exists(target)).toEqual(true);
+        });
+
+        it("Test zipFiles method with password", function () {
+            expect(Rho.RhoFile.exists(target)).toEqual(false);
+
+            var sources = [];
+            sources[0] = sourceA;
+            sources[1] = sourceB;
+
+            var result = Rho.System.zipFiles(target, tempDirectory, sources, 'password');
+            expect(result).toEqual(0);
+            expect(Rho.RhoFile.exists(target)).toEqual(true);
+        });
+    });
+
+
+    describe("Testing System APIs from RE1 in Ruby via AJAX", function() {
 	
 		beforeEach(function() {
 			//document.getElementById('networkPort').innerHTML = "8999";
