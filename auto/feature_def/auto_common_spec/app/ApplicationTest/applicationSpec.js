@@ -9,17 +9,18 @@ appEventsTest.ajax = function(url)
 	return ajax.responseText;
 };
 
-appEventsTest.eventCallback = function(event,eventData)
-{
-	appEventsTest.lastEvent = event;
-    appEventsTest.lastEventData = eventData;
-	appEventsTest.eventList.push(event);
-	appEventsTest.callbackFired = true;
-};
-
 appEventsTest.setCallback = function ()
 {
-	appEventsTest.ajax('/app/ApplicationTest/set_callback');
+    Rho.Application.setApplicationNotify( function(params)
+    {
+        event = params.applicationEvent;
+        eventData = params.eventData;
+        
+        appEventsTest.lastEvent = event;
+        appEventsTest.lastEventData = eventData;
+        appEventsTest.eventList.push(event);
+        appEventsTest.callbackFired = true;
+    });
 };
 
 describe("<application module specs>", function () {
@@ -129,7 +130,6 @@ describe("<application module specs>", function () {
 
 });
 
-/*
 
 describe('<application module events specs>', function() {
     if (isApplePlatform()) {
@@ -244,5 +244,3 @@ describe('<application module events specs>', function() {
         });
     }
 });
-
-*/
