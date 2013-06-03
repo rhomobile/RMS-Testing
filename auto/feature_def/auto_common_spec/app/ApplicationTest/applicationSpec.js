@@ -129,6 +129,8 @@ describe("<application module specs>", function () {
 
 });
 
+/*
+
 describe('<application module events specs>', function() {
     if (isApplePlatform()) {
         beforeEach(function() {
@@ -242,3 +244,5 @@ describe('<application module events specs>', function() {
         });
     }
 });
+
+*/
