@@ -119,6 +119,21 @@
     <li id="Rho_System_getStartParams">getStartParams : <span class="result"></span></li>
     <script type="text/javascript">$("#Rho_System_getStartParams span.result").text(Rho.System.getStartParams());</script>
 
+    <li id="Rho_System_getAllProperties">getAllProperties : <span class="result"></span></li>
+    <script type="text/javascript">
+        Rho.Log.info("p1","props");
+        data = $.toJSON(Rho.System.getAllProperties());
+        Rho.Log.info(data,"props");
+        $("#Rho_System_getAllProperties span.result").text(data);</script>
+
+    <li id="Rho_System_getNonexistingProperties">getNonexistingProperties : <span class="result"></span></li>
+    <script type="text/javascript">
+        Rho.Log.info("p2","props");
+        data = $.toJSON(Rho.System.getProperties(["some_quite_unlikely_to_exist_property"]));
+        Rho.Log.info("p3","props");
+        Rho.Log.info(data,"nprops");
+        $("#Rho_System_getNonexistingProperties span.result").text(data);</script>
+
     <li id="Rho_System_exit">
         <button name="Rho_System_exit">exit()</button>
         : <span class="result"></span></li>
