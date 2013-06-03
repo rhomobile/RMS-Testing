@@ -108,6 +108,19 @@ describe('<database SQLite3 module specs>', function () {
         db.execute('DROP TABLE IF EXISTS t; CREATE TABLE t(x INTEGER, y TEXT, z VARCHAR(10));', true);
         db.execute('INSERT INTO t (x, y, z) VALUES (?, ?, ?);', false, [10, 'ten', 'TEN']);
         db.execute('INSERT INTO t (x, y, z) VALUES (?, ?, ?);', false, [11, 'eleven', 'ELEVEN']);
-        expect(db.execute('SELECT * FROM t ORDER BY x DESC;')).toEqual([{x: 11, y: 'eleven', z: 'ELEVEN'}, {x: 10, y: 'ten', z: 'TEN'}]);
+        expect(db.execute('SELECT * FROM t ORDER BY x DESC;')).toEqual([{x: '11', y: 'eleven', z: 'ELEVEN'}, {x: '10', y: 'ten', z: 'TEN'}]);
+    });
+
+    describe('SQLite3', function () {
+        it('restores dropped table on rollback and drops it on commit', function() {
+            db.execute('DROP TABLE IF EXISTS t; CREATE TABLE t(x INTEGER);', true);
+            expect(db.isTableExist('t')).toBe(true);
+
+            db.execute('BEGIN; DROP TABLE t; ROLLBACK;', true);
+            expect(db.isTableExist('t')).toBe(true);
+
+            db.execute('BEGIN; DROP TABLE t; COMMIT;', true);
+            expect(db.isTableExist('t')).toBe(false);
+        });
     });
 });

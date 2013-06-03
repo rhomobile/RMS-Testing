@@ -1,6 +1,5 @@
 describe('<database module spes>', function(){
 
-    var data;
     var db;
 
     var makeTableNames = function(nTables) {
@@ -40,12 +39,12 @@ describe('<database module spes>', function(){
 
     beforeEach(function() {
         db = undefined;
-        data = '';
     });
 
     afterEach(function() {
         if (typeof db !== 'undefined') {
             db.close();
+            db = undefined;
         }
     });
 
@@ -301,7 +300,6 @@ describe('<database module spes>', function(){
         db.executeSql('DROP TABLE "' + tableName + '"');
         expect(db.isTableExist(tableName)).toBe(false);
         db.rollbackTransaction();
-
         expect(db.isTableExist(tableName)).toBe(true);
     });
 
@@ -391,7 +389,7 @@ describe('<database module spes>', function(){
         }
     });
 
-    it("VT287-32|two db objects for the same db file and closing one instance of it  | ", function() {
+    xit("VT287-32|two db objects for the same db file and closing one instance of it  | ", function() {
         db = new Rho.Database(Rho.Application.databaseFilePath('local'), 'local');
         var db2 = new Rho.Database(Rho.Application.databaseFilePath('local'), 'local');
 
@@ -402,7 +400,11 @@ describe('<database module spes>', function(){
             db.executeSql('INSERT INTO "' + tableName + '" VALUES (?, ?)', [10, 'fifteen']);
             db.close();
 
-            expect(db2.executeSql('SELECT y FROM "' + tableName + '" WHERE x = 10')).toEqual([{y: 'fifteen'}]);
+            try {
+                db2.executeSql('SELECT y FROM "' + tableName + '" WHERE x = 10');
+                expect(0).toBe(1);
+            } catch (e) {
+            }
         } finally {
             db2.close();
         }
