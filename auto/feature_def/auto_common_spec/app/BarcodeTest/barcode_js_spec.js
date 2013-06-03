@@ -18,12 +18,12 @@ describe("Scanner SET-GET Starts", function() {
 					Rho.Barcode.enable();
 					setTimeout(function() {
 						displayflag = true;
-		 			}, 5000);
+		 			}, 10000);
 				});
 
 				waitsFor(function() {
 					return displayflag;
-				}, "Waiting for enable", 6000);
+				}, "Waiting for enable", 11000);
 					
 				runs(function() {
 
@@ -56,12 +56,12 @@ describe("Scanner SET-GET Starts", function() {
 					Rho.Barcode.enable();
 					setTimeout(function() {
 						displayflag = true;
-		 			}, 5000);
+		 			}, 10000);
 				});
 
 				waitsFor(function() {
 					return displayflag;
-				}, "Waiting for enable", 6000);
+				}, "Waiting for enable", 11000);
 					
 				runs(function() {
 
@@ -94,12 +94,12 @@ describe("Scanner SET-GET Starts", function() {
 					Rho.Barcode.enable();
 					setTimeout(function() {
 						displayflag = true;
-		 			}, 5000);
+		 			}, 10000);
 				});
 
 				waitsFor(function() {
 					return displayflag;
-				}, "Waiting for enable", 6000);
+				}, "Waiting for enable", 11000);
 					
 				runs(function() {
 
@@ -155,12 +155,12 @@ describe("Scanner SET-GET Starts", function() {
 					Rho.Barcode.enable();
 					setTimeout(function() {
 						displayflag = true;
-		 			}, 5000);
+		 			}, 10000);
 				});
 
 				waitsFor(function() {
 					return displayflag;
-				}, "Waiting for enable", 6000);
+				}, "Waiting for enable", 11000);
 					
 				runs(function() {
 
@@ -234,12 +234,12 @@ describe("Scanner SET-GET Starts", function() {
 
 					setTimeout(function() {
 						displayflag = true;
-		 			}, 5000);
+		 			}, 10000);
 				});
 
 				waitsFor(function() {
 					return displayflag;
-				}, "Waiting for enable", 6000);
+				}, "Waiting for enable", 11000);
 					
 				runs(function() {
 
@@ -293,12 +293,12 @@ describe("Scanner SET-GET Starts", function() {
 					Rho.Barcode.enable(objProperty, scanCallback);
 					setTimeout(function() {
 						displayflag = true;
-		 			}, 5000);
+		 			}, 10000);
 				});
 
 				waitsFor(function() {
 					return displayflag;
-				}, "Waiting for enable", 6000);
+				}, "Waiting for enable", 11000);
 					
 				runs(function() {
 
@@ -336,12 +336,12 @@ describe("Scanner property SET-GET setting Directly", function() {
 					Rho.Barcode.enable();
 					setTimeout(function() {
 						displayflag = true;
-		 			}, 5000);
+		 			}, 10000);
 				});
 
 				waitsFor(function() {
 					return displayflag;
-				}, "Waiting for enable", 6000);
+				}, "Waiting for enable", 11000);
 					
 				runs(function() {
 
@@ -395,12 +395,12 @@ describe("Scanner property SET-GET setting Directly", function() {
 					Rho.Barcode.enable();
 					setTimeout(function() {
 						displayflag = true;
-		 			}, 5000);
+		 			}, 10000);
 				});
 
 				waitsFor(function() {
 					return displayflag;
-				}, "Waiting for enable", 6000);
+				}, "Waiting for enable", 11000);
 					
 				runs(function() {
 
