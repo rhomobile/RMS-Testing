@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 <head>
     <script type="text/javascript" charset="utf-8" src="/public/jquery/jquery-1.6.4.min.js"></script>
@@ -14,16 +15,15 @@
     <script type="text/javascript" src="helpers/specHelpers.js"></script>
 
     <!-- include source files here... -->
-    <!--<script type="text/javascript" src="SystemRE1Test/systemRE1Test.js"></script>
-    <script type="text/javascript" src="SystemRE1Test/system_js_test.js"></script>
-    <script type="text/javascript" src="IndicatorsTest/indicatorsTest.js"></script>
-    <script type="text/javascript" src="CardReaderTest/CardReaderTest.js"></script>-->
     <script type="text/javascript" src="NetworkTest/network_ruby_test.js"></script>
-    <!--<script type="text/javascript" src="ScreenOrientationTest/ScreenOrientationTest.js"></script>
-    <script type="text/javascript" src="VideoCaptureTest/VideoCaptureTest.js"></script>
-    <script type="text/javascript" src="BarcodeTest/barcodeTest.js"></script>
-    <script type="text/javascript" src="BarcodeTest/barcode_js_test.js"></script>
-    <script type="text/javascript" src="SensorsTest/SensorsTest.js"></script> -->
+    <!--<script type="text/javascript" src="SystemRE1Test/system_js_test.js"></script>
+    <script type="text/javascript" src="IndicatorsTest/indicatorsTest.js"></script>
+    <script type="text/javascript" src="CardReaderTest/CardReaderTest.js"></script>
+    <script type="text/javascript" src="ScreenOrientationTest/ScreenOrientationTest.js"></script>
+	<script type="text/javascript" src="VideoCaptureTest/VideoCaptureTest.js"></script>
+	<script type="text/javascript" src="BarcodeTest/barcodeTest.js"></script>
+	<script type="text/javascript" src="BarcodeTest/barcode_js_test.js"></script>
+	<script type="text/javascript" src="SensorsTest/SensorsTest.js"></script> -->
     
     <!-- include spec files here... -->
     <!--<script type="text/javascript" src="SystemRE1Test/systemRE1Spec.js"></script>
@@ -43,13 +43,11 @@
     <script type="text/javascript" src="LogTest/log_js_spec.js"></script>
     <script type="text/javascript" src="WebViewTest/webview_js_spec.js"></script>
     <!--<script type="text/javascript" src="GeneratorTest/generatorSpec.js"></script>
-    <script type="text/javascript" src="OrmTest/ormSpec.js"></script>
-    <script type="text/javascript" src="RhoapiTest/rhoapiSpec.js"></script>-->
-    
-    
+	<script type="text/javascript" src="OrmTest/ormSpec.js"></script>
+	<script type="text/javascript" src="RhoapiTest/rhoapiSpec.js"></script>-->
+   
     <!-- include rhoapi-modules.js... -->
     <script type="text/javascript" charset="utf-8" src="/public/api/rhoapi-modules.js"></script>
-
 	
     <title>RhoElements Common API Tests</title>
     <style>
@@ -98,20 +96,20 @@
 
 <div id="output" style="display:none"></div>
 
-<!--  Required for Barcode Tests -->
+<!-- Required for Barcode Tests -->
 <div id="retProp" style="display:none"></div>
 <div id="scannerReady" style="display:none"></div>
 
-<!--  Required for Signal and Battery Tests -->
+<!-- Required for Signal and Battery Tests -->
 <div id="indicatorOutput" style="display:none">Hello</div>
 <div id="indicatorOutput2" style="display:none">Hello</div>
-<!--  Required for Network -->
+<!-- Required for Network -->
 <div id="connectionStatus"></div>
 <div id="networkPort" style="display:none"></div>
 <div id="socketReady" style="display:none"></div>
 </p>
 
-<!--  Required for Displaying Current Execution Process and Displaying Output on Device -->
+<!-- Required for Displaying Current Execution Process and Displaying Output on Device -->
 <div id="detailsdiv"></div>
 <div id="test">
 <ul id="myList">
