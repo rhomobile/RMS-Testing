@@ -506,7 +506,7 @@ describe("<log module specs>", function () {
     */
     
  // Set Netrace to true
-    it("VT290-361 : Set netrace to true | true", function() {
+    xit("VT290-361 : Set netrace to true | true", function() {
         runs(function(){
         	Rho.Log.level = 0;
         	var info = "Info : http trace displayed in the log ";
@@ -522,7 +522,7 @@ describe("<log module specs>", function () {
     });
     
  // Set Netrace to false
-    it("VT290-362 : Set netrace to false | false", function() {
+    xit("VT290-362 : Set netrace to false | false", function() {
         runs(function(){
         	Rho.Log.level = 0;
         	var info = "Info : http trace not displayed in the log ";
