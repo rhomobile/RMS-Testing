@@ -59,7 +59,7 @@ describe("<log module specs>", function () {
       		var info = "Log message with application public folder displayed below on standard output: ";
       		Rho.Log.info(info, "VT290-301");	      		
       		var myvar = Rho.Application.publicFolder;
-      		Rho.Log.info("Application public folder : " +myvar, "VT290-300")
+      		Rho.Log.info("Application public folder : " +myvar, "VT290-301")
       		expect(Rho.Log.destination).toEqual(["stdio"]);	      		
       	 });
    });
@@ -266,6 +266,8 @@ describe("<log module specs>", function () {
     // Set Log excludefilter 
     it("VT290-325 : Set Log excludefilter : username, password", function() {
         runs(function(){
+        	var info = "Exclude filter set to username and password : VT290-325";
+      		Rho.Log.info(info, "VT290-325");	
         	Rho.Log.excludeFilter = "username,password";
             expect(Rho.Log.excludeFilter).toEqual("username,password");
         });
@@ -275,6 +277,8 @@ describe("<log module specs>", function () {
     // Set log filesize to 100000 KB
     it("VT290-334 : Set Log filsize | 102400000", function() {
         runs(function(){
+        	var info = "File Size set to 1MB : VT290-334. no verification required in log";
+      		Rho.Log.info(info, "VT290-334");
         	Rho.Log.fileSize = 102400000
             expect(Rho.Log.fileSize).toEqual(102400000);
         });
@@ -283,6 +287,8 @@ describe("<log module specs>", function () {
     // Set log filesize to 0 KB
     it("VT290-335 : Set Log filsize | 0", function() {
         runs(function(){
+        	var info = "File Size set to 0 : VT290-334. no verification required in log";
+      		Rho.Log.info(info, "VT290-334");
         	Rho.Log.fileSize = 0
             expect(Rho.Log.fileSize).toEqual(0);
         });
@@ -291,17 +297,21 @@ describe("<log module specs>", function () {
        // Set Log includeCategories one module
     it("VT290-339 : Set Log includeCategories | database", function() {
         runs(function(){
-        	Rho.Log.includeCategories = "database";
-        	var info = "Log Messages related to <database> should be displayed : VT290-339";
-      		Rho.Log.info(info, "VT290-339");	      		
-      		var db = new Rho.Database(Rho.Application.databaseFilePath('local'), 'local');
+			var info = "Log Messages related to <database> should be displayed and Hello Network displayed : VT290-339";
+        	Rho.Log.info(info, "VT290-339");
+			Rho.Log.info(Rho.Application.databaseFilePath('local'), "VT290-339");
+			
+			var db = new Rho.Database();
+			Rho.Log.includeCategories = "database";
+        	Rho.Log.info("Hello Data Base", "database");
+			Rho.Log.info("Hello Network", "Network");
       		//db.close();
       		var version_info = Rho.System.osVersion;
       		//alert(version_info);
       		Rho.WebView.fullScreen = true;            
             Rho.WebView.fullScreen = false;
       		Rho.Log.info("Log Messages related to <database> should be displayed in above","VT290-339");
-            expect(Rho.Log.includeCategories).toEqual("database");
+            //expect(Rho.Log.includeCategories).toEqual("database");
             
         });
     });
@@ -313,9 +323,7 @@ describe("<log module specs>", function () {
         	var info = "Log Messages related to <system, webview, database> should be displayed : VT290-340";
       		Rho.Log.info(info, "VT290-340");	      		
       		var db = new Rho.Database(Rho.Application.databaseFilePath('local'), 'local');
-      		//db.close();
       		var version_info = Rho.System.osVersion;
-      		//alert(version_info);
       		Rho.WebView.fullScreen = true;            
             Rho.WebView.fullScreen = false;
       		Rho.Log.info("Log Messages related to <system, webview, database> should be displayed in above","VT290-340");
@@ -326,25 +334,16 @@ describe("<log module specs>", function () {
     // Set Log includeCategories multiple modules
     it("VT290-341 : Set Log includeCategories to multiple modules | database, WebView", function() {
         runs(function(){
-        	Rho.Log.includeCategories = "database, WebView, System";
         	var info = "Log Messages related to <system, webview, database> should be displayed : VT290-341";
       		Rho.Log.info(info, "VT290-341");
-          setTimeout(function() {
-			          displayflag = true;
-			   }, 15000);
+        	Rho.Log.includeCategories = "database, WebView, System";
       		var db = new Rho.Database(Rho.Application.databaseFilePath('local'), 'local');
-      		//db.close();
       		var version_info = Rho.System.osVersion;
-      		//alert(version_info);
       		Rho.WebView.fullScreen = true;            
             Rho.WebView.fullScreen = false;
       		Rho.Log.info("Log Messages related to <system, webview, database> should be displayed in above","VT290-341");
             expect(Rho.Log.includeCategories).toEqual("database, WebView, System");
         });
-        
-        waitsFor(function() {
-			   return displayflag;
-			}, "wait", 16000);
 
     });
     
@@ -352,14 +351,12 @@ describe("<log module specs>", function () {
     // Set Log include and exclude Categories
     it("VT290-345 : Set Log include and excludeCategories | application and WebView logs displayed", function() {
         runs(function(){
-        	Rho.Log.excludeCategories = "database, network";
-        	Rho.Log.includeCategories = "application, WebView";
         	var info = "Log Messages related to <webview, Application> should be displayed and database not displayed: VT290-345";
-      		Rho.Log.info(info, "VT290-345");	      		
+      		Rho.Log.info(info, "VT290-345");
+        	Rho.Log.excludeCategories = "database, network";
+        	Rho.Log.includeCategories = "application, WebView";	      		
       		var db = new Rho.Database(Rho.Application.databaseFilePath('local'), 'local');
-      		//db.close();
       		var version_info = Rho.System.osVersion;
-      		//alert(version_info);
       		Rho.WebView.fullScreen = true;            
             Rho.WebView.fullScreen = false;
       		Rho.Log.info("Log Messages related to <webview, Application> should be displayed and database not displayed in above","VT290-342");
@@ -371,10 +368,11 @@ describe("<log module specs>", function () {
     // Set Log Level to 4
     it("VT290-346 : Set Log Level to 4 | 4", function() {
         runs(function(){
-        	Rho.Log.level = 4;
-        	logLevel = Rho.Log.level;
+        	Rho.Log.excludeCategories = "*";
         	var info = "No logs displayed : VT290-346";
-      		Rho.Log.info(info, "VT290-346");	      		
+      		Rho.Log.info(info, "VT290-346");
+        	Rho.Log.level = 4;
+        	logLevel = Rho.Log.level;	      		
       		var db = new Rho.Database(Rho.Application.databaseFilePath('local'), 'local');
       		//db.close();
       		Rho.Log.info("No logs displayed in above","VT290-346");
@@ -433,7 +431,6 @@ describe("<log module specs>", function () {
         	var info = "Info : only error log related to database displayed : VT290-349";
       		Rho.Log.info(info, "VT290-349");	      		
       		var db = new Rho.Database(Rho.Application.databaseFilePath('local'), 'local');
-      		//db.close();
       		Rho.Log.trace("trace : Application Error Message", "VT290-349");
       		Rho.Log.error("Error : Application Error Message", "VT290-349");
       		Rho.Log.warning("Warning : Application warning Message", "VT290-349");      		
@@ -454,7 +451,6 @@ describe("<log module specs>", function () {
         	var info = "Info : only error log related to database displayed : VT290-350";
       		Rho.Log.info(info, "VT290-350");	      		
       		var db = new Rho.Database(Rho.Application.databaseFilePath('local'), 'local');
-      		//db.close();
       		Rho.Log.trace("trace : Application Error Message", "VT290-350");
       		Rho.Log.error("Error : Application Error Message", "VT290-350");
       		Rho.Log.warning("Warning : Application warning Message", "VT290-350");      		
@@ -490,20 +486,7 @@ describe("<log module specs>", function () {
             Rho.Log.memoryPeriod = 0;
         });
     });
-    
-    
-    
-    
-    /* Set Log includeCategories one module
-    it("VT290-361 : Set Log includeCategories | database", function() {
-        runs(function(){
-        	Rho.Log.includeCategories = "System";
-        	myvar = Rho.System.getProperty('country');
-        	displayResult(myvar);
-            expect(Rho.Log.includeCategories).toEqual("System");
-        });
-    });
-    */
+
     
  // Set Netrace to true
     it("VT290-361 : Set netrace to true | true", function() {
@@ -568,73 +551,6 @@ describe("<log module specs>", function () {
         });
     });
     
-       
-    /*
-     * moved to manual testing
-     
-    // call clean log file
-    it("VT290-373 : Call cleanlogfile | ", function() {
-        runs(function(){
-        	Rho.Log.level = 0;
-        	var info = "Info : Log gets cleared ";
-      		Rho.Log.info(info, "VT290-373");
-        	// perform some operations
-        	var myvar = Rho.Application.publicFolder;
-        	var path = myvar+ "/VT290_374.txt";
-        	Rho.Log.filePath =  path;
-        	Rho.Log.CleanLogFile
-			// check for no log present in above text
-			var str = null;
-        	/*
-			fh = fopen('/public/VT290_373.txt', 0);    
-        	if(fh!=-1) // Check if the file has been successfully opened.
-        	{
-        	    length = flength(fh); // Get the length of the file.
-        	    str = fread(fh, length); // Read in the entire file.
-        	    fclose(fh); // Close the file.
-
-        	    // Display the contents of the file.
-        	    write(str);
-        	}
-        	
-        	
-        	expect(str).toEqual(null);
-        });
-    });
-    
-    
- // call clean log file with parameter
-    it("VT290-374 : Call cleanlogfile | ", function() {
-        runs(function(){
-        	Rho.Log.level = 0;
-            var info = "Info : Log not cleared. No information displayed ";
-            Rho.Log.info(info, "VT290-373");
-        	// perform some operations
-        	var myvar = Rho.Application.publicFolder;
-        	var path = myvar+ "/VT290_374.txt";
-        	Rho.Log.filePath =  path;
-        	var actualPath = Rho.Log.filePath;
-        	Rho.Log.CleanLogFile(parameter);
-			// check for no log present in above text
-			var str = null;
-        	/*
-			fh = fopen('/public/VT290_373.txt', 0);    
-        	if(fh!=-1) // Check if the file has been successfully opened.
-        	{
-        	    length = flength(fh); // Get the length of the file.
-        	    str = fread(fh, length); // Read in the entire file.
-        	    fclose(fh); // Close the file.
-
-        	    // Display the contents of the file.
-        	    write(str);
-        	}
-        	
-        	
-        	expect(path).toEqual("Text");
-        });
-    });
-    */
-    
     // Call error() method with "message" and "categories"
     it("VT290-375 : Call error() method with message and categories | ", function() {
         runs(function(){
@@ -681,14 +597,15 @@ describe("<log module specs>", function () {
         	//var path = myvar+ "/VT290_390.txt";
         	//Rho.Log.filePath =  path;
         	Rho.Log.leval = 0;
-        	var info = "Read : Read Log from Log file";
+        	var info = "Read : Read Log from Log file => 100 symbols printed below";
         	Rho.Log.info(info, "VT290-391");
 	        //var actualPath = Rho.Log.filePath;
 	        //Rho.Log.info(read, "TEST"); 
         	//Rho.Application.setLocale('en');
         	var read = Rho.Log.readLogFile(100);
-        	//alert(read);
-        	Rho.Log.info(read, "VT290-391");
+        	Rho.Log.info("Start of read " +read+ "End of read log", "VT290-391");
+        	
+        	
         	
         });
     });
@@ -745,8 +662,6 @@ describe("<log module specs>", function () {
         	var info = "Trace : Trace message displayed in the log with message and categories";
         	Rho.Log.info(info, "VT290-404");
         	Rho.Log.trace("VT290-404 :Application trace Message","Application");
-        	// some code on Application to display error
-        	//Rho.Application.setLocale(20);
         });
     });
     
@@ -758,8 +673,6 @@ describe("<log module specs>", function () {
         	var info = "Warning : Warning message displayed in the log with message and category";
         	Rho.Log.info(info, "VT290-409");
         	Rho.Log.warning("VT290-409 :Application warning Message","Application");
-        	 // some code on Application to display error
-        	 //Rho.Application.setLocale(20);
         });
     });
     
@@ -772,19 +685,17 @@ describe("<log module specs>", function () {
         	Rho.Log.level = 0;     
         	var info = "Warning : Warning message displayed in the log with message and invalid category";
         	Rho.Log.info(info, "VT290-413");
-        	Rho.Log.trace("VT290-413 :Application warning message","aaaa");
-        	
-        	 // some code on Application to display error
-        	 //Rho.Application.setLocale(20);
-        	 //expect(error).toEqual(actual);        	 
+        	Rho.Log.trace("VT290-413 :Application warning message","aaaa");       	 
         });
     });
     
     // Set log filepath
     it("VT290-328 : Set Log filepath |", function() {
         runs(function(){
-        	var defaultPath = Rho.Application.publicFolder;
-        	var path = defaultPath+ "bibashlog.txt";
+        	var info = "Log file path changed to file://\Program Files\Log.txt ";
+        	Rho.Log.info(info, "VT290-328");
+        	var defaultPath = "file://\Program Files\Log.txt";
+        	var path = defaultPath;
         	Rho.Log.filePath = path;        	
             expect(Rho.Log.filePath).toEqual(path);
             
@@ -794,9 +705,11 @@ describe("<log module specs>", function () {
     // Set log filepath to absolute
     it("VT290-329 : Set Log filepath |", function() {
         runs(function(){
-        	var defaultPath = Rho.Application.publicFolder;
-        	var path = defaultPath+ "bibashlog.txt";
-        	Rho.Log.filePath = path
+        	var info = "Log file path changed to file://\Program Files\Log.txt ";
+        	Rho.Log.info(info, "VT290-328");
+        	var defaultPath = "file://\Program Files\Log.txt";
+        	var path = defaultPath;
+        	Rho.Log.filePath = path;
             expect(Rho.Log.filePath).toEqual(path);
            // var db = new Rho.Database(Rho.Application.databaseFilePath('local'), 'local');
             
@@ -808,6 +721,8 @@ describe("<log module specs>", function () {
     // Set log filesize 30KB
     it("VT290-333 : Set Log filsize | 30720", function() {
         runs(function(){
+        	var info = "Log file size changed to 30720 bytes ";
+        	Rho.Log.info(info, "VT290-328");
         	Rho.Log.fileSize = 30720
             expect(Rho.Log.fileSize).toEqual(30720);
         });
