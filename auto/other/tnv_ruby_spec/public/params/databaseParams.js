@@ -108,9 +108,11 @@ databaseModule[databaseModule.length] = [["VT282-298","To demonstrate two DB obj
 ["self","multiDBdifferent","method"]
 ]
 
+/* edge case test
 databaseModule[databaseModule.length] = [["VT282-298","To demonstrate two DB objects pointing to same path different db partition","fifty"],
 ["self","multiDBobjects","method"]
 ]
+*/
 
 databaseModule[databaseModule.length] = [["VT282-298","To demonstarte two DB objects  pointing to same path and same db partition-closing one db object","could not prepare statement: 21; Message: out of memory"],
 ["self","multiDBobjects2","method"]
