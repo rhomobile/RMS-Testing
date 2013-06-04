@@ -63,8 +63,8 @@ describe 'Log' do
     #level
     Rho::Log.level.should_not be_nil
 
-    Rho::Log.level = 5
-    Rho::Log.level.should == 5
+    Rho::Log.level = 4
+    Rho::Log.level.should == 4
     Rho::Log.level = 0
     Rho::Log.level.should == 0
 

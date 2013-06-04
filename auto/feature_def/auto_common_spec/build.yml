@@ -1,10 +1,25 @@
-# Please use relative pathes
-
-#sdk:   ../../../../rhodes
-
+#sdk: C:/DevelopmentTools/rhomobile/rhodes
 paths:
   extensions:
+
+# Please use relative pathes
+
   - ../../../../Motorola-Extensions/build/ci/extensions
+#  - ../../../../Motorola-Extensions/lib/commonAPI
+#  - ../../../../rhoconnect-client/ext/
+
+
+#  - C:/DevelopmentTools/rhomobile/rhodes/lib/extensions
+#  - C:/DevelopmentTools/rhomobile/Motorola-Extensions/extensions
+#  - C:/DevelopmentTools/rhomobile/Motorola-Extensions/lib/commonAPI
+#  - C:/DevelopmentTools/rhomobile/rhoconnect-client/ext
+#  - C:/DevelopmentTools/rhomobile/Motorola-Extensions/build/ci/extensions
+#  - C:/DevelopmentTools/rhomobile/Motorola-Extensions/build/ci/extensions
+#  - C:/Neon/git/Motorola-Extensions/build/ci/extensions
+#  - B:/git/Motorola-Extensions/build/ci/extensions
+
+#  neon:
+#  - C:/Users/fpc843/workspace/fpc843_rhoelements_dev/NEON
 
 sdkversion: 3.3.2
 name: auto_common_spec
@@ -23,7 +38,7 @@ iphone:
   entitlements:
   BundleIdentifier: com.rhomobile.apigeneratorspec
   BundleURLScheme: apigeneratorspec
-  extensions: ["barcode",  "genCallbackTests", "rhoconnect-client", "appEvents", "indicators"]
+  extensions: ["barcode",  "genCallbackTests", "rhoconnect-client", "appEvents"]
 wp:
   productid: 'b6479381-42a8-0130-78de-3caec51bd50e'
 symbian:

@@ -76,9 +76,11 @@ databaseModule[databaseModule.length] = [["VT282-298","To call executeSql method
 ["self","invalidSql","method"]
 ]
 
+/* edge case test
 databaseModule[databaseModule.length] = [["VT282-298","initialize DB at invalid file path","DB query failed. Error code: 14; Message: unable to open database file"],
 ["self","fooDB","method"]
 ]
+*/
 
 databaseModule[databaseModule.length] = [["VT282-298","executeBatchSQL with one invalid statement","could not execute statement: 1; Message: near \"EXISTS\": syntax error"],
 ["self","invalidBSql","method"]
@@ -88,9 +90,11 @@ databaseModule[databaseModule.length] = [["VT282-298","executeSql with null valu
 ["self","nullSql","method"]
 ]
 
+/* edge case test
 databaseModule[databaseModule.length] = [["VT282-298","executeBatchSql with null value","could not execute statement"],
 ["self","nullBSql","method"]
 ]
+*/
 
 databaseModule[databaseModule.length] = [["VT282-298","call commitTranscation() without startTrnasaction()","true"],
 ["self","nullCommit","method"]
@@ -108,7 +112,7 @@ databaseModule[databaseModule.length] = [["VT282-298","To demonstrate two DB obj
 ["self","multiDBobjects","method"]
 ]
 
-databaseModule[databaseModule.length] = [["VT282-298","To demonstarte two DB objects  pointing to same path and same db partition-closing one db object","fifteen"],
+databaseModule[databaseModule.length] = [["VT282-298","To demonstarte two DB objects  pointing to same path and same db partition-closing one db object","could not prepare statement: 21; Message: out of memory"],
 ["self","multiDBobjects2","method"]
 ]
 
@@ -116,9 +120,11 @@ databaseModule[databaseModule.length] = [["VT282-298","To demonstrate two DB obj
 ["self","closeIrrDb","method"]
 ]
 
+/* edge case test
 databaseModule[databaseModule.length] = [["VT282-298","Invalid db path and invalid partition","Error code: 14; Message: unable to open database file"],
 ["self","invalid","method"]
 ]
+*/
 
 databaseModule[databaseModule.length] = [["VT282-298","valid db path and invalid partition","Rho::Database"],
 ["self","invalid1","method"]
@@ -132,15 +138,17 @@ databaseModule[databaseModule.length] = [["VT282-298","valid db path and pre def
 ["self","dbApp","method"]
 ]
 
+/* edge case test
 databaseModule[databaseModule.length] = [["VT282-298","DestroyTables with null value","true"],
 ["self","destroyTablesNull","method"]
 ]
+*/
 
 databaseModule[databaseModule.length] = [["VT282-298","destroyTables with invalid table names","true"],
 ["self","destroyTablesInvalid","method"]
 ]
 
-databaseModule[databaseModule.length] = [["VT282-298","DestroyTables with combination of valid  and invalid table names","Table Does Not Exist"],
+databaseModule[databaseModule.length] = [["VT282-298","DestroyTables with combination of valid  and invalid table names","true"],
 ["self","destroyTablesInvalid1","method"]
 ]
 
@@ -160,13 +168,17 @@ databaseModule[databaseModule.length] = [["VT282-298","call Database.new with nu
 ["self","databaseNull","method"]
 ]
 
+/* edge case test
 databaseModule[databaseModule.length] = [["VT282-298","Database with 256 characters long file path","Error code: 14; Message: unable to open database file"],
 ["self","databaseLong","method"]
 ]
+*/
 
+/* edge case test
 databaseModule[databaseModule.length] = [["VT282-298","call Database.new with no Db path","Error code: 14; Message: unable to open database file"],
 ["self","databaseNullPath","method"]
 ]
+*/
 
 databaseModule[databaseModule.length] = [["VT282-298","Drop a entire Row using ExecuteBatch SQL","RECORD DOESNT EXISTS"],
 ["self","RowDelete","method"]

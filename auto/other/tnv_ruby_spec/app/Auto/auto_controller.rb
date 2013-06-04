@@ -1609,13 +1609,7 @@ def destroyTablesInvalid1
   val1= db1.isTableExist(tableName5)
   val2= db1.isTableExist(tableName6)
 
-  if (val1 or val2)
-    data = 'Table Exist'
-  else
-    data = 'Table Does Not Exist'
-  end
-  
-  data
+  !val1 and val2
  
 end
 

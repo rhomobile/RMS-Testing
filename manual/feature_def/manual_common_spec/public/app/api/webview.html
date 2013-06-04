@@ -1,15 +1,48 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Rho:WebView</title>
+    <title>Rho.WebView</title>
     <meta name="viewport" content="initial-scale=1.0, width=device-width"/>
     <script src="/public/jquery/jquery-1.6.4.min.js" type="text/javascript"></script>
     <script src="/public/jquery/jquery.json-2.3.min.js" type="text/javascript"></script>
     <script type="text/javascript" charset="utf-8" src="/public/api/rhoapi-modules.js"></script>
+    <script type="text/javascript" src="/public/js/webview.js"></script>
+    <script type="text/javascript" src="/public/js/helpers.js"></script>
 
+	<script type="text/javascript" src="/public/jquery/jquery-1.6.4.js"></script>
+    <script type="text/javascript" src="/public/jquery/jquery.json-2.3.js"></script>
+    
+    
 </head>
 <body>
+
+<!--<div data-role="header" data-position="inline">
+  <h1>WebView</h1>
+  <a href="javascript:void(0)" onclick ="set_no_bar()" class="ui-btn-left" data-icon="star">
+    No Tab
+  </a>
+  <a href="javascript:void(0)" onclick ="set_tabbar()" class="ui-btn-right" data-icon="star">
+    Set Tab
+  </a>
+</div>-->
+
+
+<div>Using RUBY set Tabbar</div>
+<ul id="ruby">
+	<script type="text/javascript">
+		if (!isWindowsPhone8Platform()) {
+            $("#ruby").append('<li><a href="/app/NativeTabbarTest/set_tabbar_forjs">NativeTabbar</a></li>');
+        }
+        
+        if (!isWindowsPhone8Platform()) {
+            $("#ruby").append('<li><a href="/app/NativeTabbarTest/set_no_bar_forjs">set_no_NativeTabbar</a></li>');
+        }
+        
+</script>
+</ul>
+
 <h1>Rho.WebView</h1>
+
 
 <ul>
     <li id="typeof_Rho_WebView">Rho.WebView defined : <span class="result"></span></li>
@@ -25,6 +58,503 @@
     <script type="text/javascript">$("#Rho_WebView_nativeMenu span.result").text($.toJSON(Rho.WebView.nativeMenu));</script>
 
 </ul>
+
+
+<fieldset>
+	<legend>Rho.WebView.acceptLanguage</legend>
+	<ul> AcceptLanguage :
+	    <li><a href="javascript:void(0)" onclick ="setacceptLanguage('en')">VT301-001</a></li>
+	    <li><a href="javascript:void(0)" onclick ="setacceptLanguage('fr')">VT301-002</a></li>
+	    <li><a href="javascript:void(0)" onclick ="setacceptLanguage('ja')">VT301-003</a></li>
+	    <li id="Rho_WebView_getacceptLanguage">
+	    	<a href="javascript:void(0)" onclick ="getacceptLanguagetest()">getAcceptLanguage :  </a> <span class="result"> </span>
+	    </li>
+	    <li>Visit to Google To Check Language</li>
+	    <li><a href="http://www.google.com">Google</a></li>
+	    <li><a href="http://192.168.6.27/rhodes/readrequestheader.php">Read Request Header</a></li>
+	    <li>
+			<div id="acceptLanguage"><span class="defaultset"> </span>
+				<script type="text/javascript"> 
+					$("#acceptLanguage span.defaultset").text(Rho.WebView.acceptLanguage);
+				</script>
+			</div>
+		</li>
+	</ul>
+</fieldset>
+
+<fieldset>
+    <legend>Rho.WebView.activeTab</legend>
+	<ul> ActiveTab :
+		<li id="Rho_WebView_activeTab">
+			<a href="javascript:void(0)" onclick ="getActiveTab();">VT301-004 / VT301-005 :  </a> <span class="result"> </span>
+		</li>
+		<li>
+			<div id="activeTab"><span class="defaultset"> </span>
+				<script type="text/javascript"> 
+					$("#activeTab span.defaultset").text(Rho.WebView.activeTab);
+				</script>
+			</div>
+		</li> 
+	</ul>
+</fieldset>
+
+<fieldset>
+	<legend>Rho.WebView.cacheSize</legend>
+  	<ul>
+  		<li>Get Cache Size</li>
+  		<li id="Rho_WebView_CacheSize">
+  			<a href="javascript:void(0)" onclick ="getCacheSize();">VT301-006 / VT301-007 :  </a> <span class="result"> </span>
+  		</li>
+  		<li>
+			<div id="cacheSize"><span class="defaultset"> </span>
+				<script type="text/javascript"> 
+					$("#cacheSize span.defaultset").text(Rho.WebView.cacheSize);
+				</script>
+			</div>
+		</li> 
+  	</ul>
+</fieldset>
+
+<fieldset>
+	<legend>Rho.WebView.enableCache</legend>
+  	<ul>
+	  	<li>set enableCache as true</li>
+	  	<li><a href="javascript:void(0)" onclick =setEnableCache('true');">VT301-008</a></li>
+	  	<li>set enableCache as false</li>
+	  	<li><a href="javascript:void(0)" onclick ="setEnableCache('false');">VT301-009</a></li>
+	  	<li>Get enableCache Value</li>
+	  	<li id="Rho_WebView_getEnableCache">
+	  		<a href="javascript:void(0)" onclick ="getEnableCache()">Get Enable Cache</a><span class="result"> </span>
+	  	</li>
+	  	<li>
+			<div id="enableCache"><span class="defaultset"> </span>
+				<script type="text/javascript"> 
+					$("#enableCache span.defaultset").text(Rho.WebView.enableCache);
+				</script>
+			</div>
+		</li> 
+	</ul>
+</fieldset>
+
+<fieldset>
+      <legend>Rho.WebView.enablePageLoadingIndication</legend>
+      <ul>
+	      <li>set enablePageLoadingIndication as true</li>
+	      <li><a href="javascript:void(0)" onclick ="setEnablePageLoadingIndication('true');">VT301-011/VT301-012</a>
+	      <li>set enablePageLoadingIndication as false</li>
+	      <li><a href="javascript:void(0)" onclick ="setEnablePageLoadingIndication('false');">VT301-013</a>
+	      <li>Get enableCache Value</li>
+	      <li id="Rho_WebView_getEnablePageLoadingIndication">
+	      	<a href="javascript:void(0)" onclick ="getEnablePageLoadingIndication();">Get Value : </a> <span class="result"> </span>
+	      </li>
+	      <li>
+			<div id="enablePageLoadingIndication"><span class="defaultset"> </span>
+				<script type="text/javascript"> 
+					$("#enablePageLoadingIndication span.defaultset").text(Rho.WebView.enablePageLoadingIndication);
+				</script>
+			</div>
+		</li> 
+      </ul>
+</fieldset>
+
+<fieldset>
+      <legend>Rho.WebView.enableWebPlugins</legend>
+      <ul>
+	      <li>set enableWebPlugins as true</li>
+	      <li><a href="javascript:void(0)" onclick ="setEnableWebPlugins('true');">VT301-015</a>
+	      <li>set enableWebPlugins as false</li>
+	      <li><a href="javascript:void(0)" onclick ="setEnableWebPlugins('false');">VT301-016</a>
+	      <li>Get enableWebPlugins Value</li>
+	      <li id="Rho_WebView_getEnableWebPlugins">
+	      	<a href="javascript:void(0)" onclick ="getEnableWebPlugins();">Get Value : </a> <span class="result"> </span>
+	      </li>
+	      <li>
+			<div id="enableWebPlugins"><span class="defaultset"> </span>
+				<script type="text/javascript"> 
+					$("#enableWebPlugins span.defaultset").text(Rho.WebView.enableWebPlugins);
+				</script>
+			</div>
+		</li> 
+      </ul>
+</fieldset>
+
+<fieldset>
+	<legend>Rho.WebView.enableZoom</legend>
+  	<ul>
+  	<li>set enableZoom as true</li>
+  	<li><a href="javascript:void(0)" onclick ="setEnableZoom('true');">VT301-018</a>
+  	<li>set enableZoom as false</li>
+	<li><a href="javascript:void(0)" onclick ="setEnableZoom('false');">VT301-019</a>
+	<li>Get enableWebPlugins Value</li>
+	<li id="Rho_WebView_getEnableZoom">
+		<a href="javascript:void(0)" onclick ="getEnableZoom();">Get Value : </a><span class="result"> </span>
+	</li>
+	<li>
+			<div id="enableZoom"><span class="defaultset"> </span>
+				<script type="text/javascript"> 
+					$("#enableZoom span.defaultset").text(Rho.WebView.enableZoom);
+				</script>
+			</div>
+		</li> 
+  </ul>
+</fieldset>
+
+<fieldset>
+	<legend>Rho.WebView.fontFamily</legend>
+	<ul>
+		<li>Get Font Family</li>
+		<li id="Rho_WebView_getFontFamily">
+			<a href="javascript:void(0)" onclick ="getFontFamily();">VT301-021/VT301-022: </a> <span class="result"> </span>
+		</li>
+		<li>
+			<div id="fontFamily"><span class="defaultset"> </span>
+				<script type="text/javascript"> 
+					$("#fontFamily span.defaultset").text(Rho.WebView.fontFamily);
+				</script>
+			</div>
+		</li>
+	</ul>
+</fieldset>
+
+<fieldset>
+	<legend>Rho.WebView.framework</legend>
+	<ul>
+		<li>get webviewFramework</li>
+		<li id="Rho_WebView_getFramework">
+			<a href="javascript:void(0)" onclick ="getFramework();">VT301-023 : </a><span class="result"> </span>
+		</li>
+		
+		<li>
+			<div id="framework"><span class="defaultset"> </span>
+				<script type="text/javascript"> 
+					$("#framework span.defaultset").text(Rho.WebView.framework);
+				</script>
+			</div>
+		</li>
+		
+		
+    
+	</ul>
+</fieldset>
+
+<fieldset>
+	<legend>Rho.WebView.fullScreen</legend>
+	<ul>
+		<li>set fullScreen as true</li>
+		<li><a href="javascript:void(0)" onclick ="setFullScreen('true');">VT301-024/VT301-027</a>
+		<li>set fullScreen as false</li>
+		<li><a href="javascript:void(0)" onclick ="setFullScreen('false');">VT301-025</a>
+		<li>Get fullScreen Value</li>
+		<li id="Rho_WebView_getFullScreen">
+			<a href="javascript:void(0)" onclick ="getFullScreen();">Get Value : </a><span class="result"> </span>
+		</li>
+		<li>Toggle Fullscreen</li>
+		<!--<li><a href="javascript:void(0)" onclick ="setFullScreen('false');">VT301-025</a>-->
+		<li>
+			<div id="fullScreen"><span class="defaultset"> </span>
+				<script type="text/javascript"> 
+					$("#fullScreen span.defaultset").text(Rho.WebView.fullScreen);
+				</script>
+			</div>
+		</li>
+	</ul>
+</fieldset>
+
+<fieldset>
+	<legend>Rho.WebView.scrollTechnique</legend>
+	<ul>
+		<li>get scrollTechnique</li>
+		<li id="Rho_WebView_getScrollTechnique">
+			<a href="javascript:void(0)" onclick ="getScrollTechnique();">VT301-028/VT301-029/VT301-030 : </a><span class="result"> </span>
+		</li>
+		<li>
+			<div id="scrollTechnique"><span class="defaultset"> </span>
+				<script type="text/javascript"> 
+					$("#scrollTechnique span.defaultset").text(Rho.WebView.scrollTechnique);
+				</script>
+			</div>
+		</li>
+	</ul>
+</fieldset>
+      
+<fieldset>
+	<legend>Rho.WebView.userAgent</legend>
+	<ul>
+		<li>get userAgent</li>
+		<li id="Rho_WebView_getUserAgent">
+			<a href="javascript:void(0)" onclick ="getUserAgent();">VT301-031/VT301-032 : </a><span class="result"> </span>
+		</li>
+		<li>
+			<div id="userAgent"><span class="defaultset"> </span>
+				<script type="text/javascript"> 
+					$("#userAgent span.defaultset").text(Rho.WebView.userAgent);
+				</script>
+			</div>
+		</li>
+	</ul>
+</fieldset>
+      
+<fieldset>
+	<legend>Rho.WebView.viewportEnabled</legend>
+	<ul>
+		<li>get viewportEnabled</li>
+		<li id="Rho_WebView_getViewportEnabled">
+			<a href="javascript:void(0)" onclick ="getViewportEnabled();">VT301-033/VT301-034 : </a><span class="result"> </span>
+		</li>
+		<li>
+			<div id="viewportEnabled"><span class="defaultset"> </span>
+				<script type="text/javascript"> 
+					$("#viewportEnabled span.defaultset").text(Rho.WebView.viewportEnabled);
+				</script>
+			</div>
+		</li>
+	</ul>
+</fieldset>
+
+
+<fieldset>
+	<legend>Rho.WebView.viewportWidth</legend>
+	<ul>
+		<li>get viewportWidth</li>
+		<li id="Rho_WebView_getViewportWidth">
+			<a href="javascript:void(0)" onclick ="getViewportWidth();">VT301-035/VT301-036 : </a><span class="result"> </span>
+		</li>
+		<li>
+			<div id="viewportWidth"><span class="defaultset"> </span>
+				<script type="text/javascript"> 
+					$("#viewportWidth span.defaultset").text(Rho.WebView.viewportWidth);
+				</script>
+			</div>
+		</li>
+	</ul>
+</fieldset>
+
+
+<fieldset>
+	<legend>Rho.WebView.zoomPage</legend>
+	<ul>
+		<li>set zoomPage as 0.5</li>
+		<li><a href="javascript:void(0)" onclick ="setZoomPage('0.5');">VT301-037</a></li>
+		<li>set zoomPage as 1.5</li>
+		<li><a href="javascript:void(0)" onclick ="setZoomPage('1.5');">VT301-038</a></li>
+		<li>set zoomPage as 1.0</li>
+		<li><a href="javascript:void(0)" onclick ="setZoomPage('1.0');">VT301-039</a></li>
+		<li>set zoomPage as -1</li>
+		<li><a href="javascript:void(0)" onclick ="setZoomPage('-1');">VT301-040</a></li>
+		<li>Get zoomPage Value</li>
+		<li id="Rho_WebView_getZoomPage">
+			<a href="javascript:void(0)" onclick ="getZoomPage();">Get Value : </a><span class="result"> </span>
+		</li>
+		<li>
+			<div id="zoomPage"><span class="defaultset"> </span>
+				<script type="text/javascript"> 
+					$("#zoomPage span.defaultset").text(Rho.WebView.zoomPage);
+				</script>
+			</div>
+		</li>
+	</ul>
+</fieldset>
+
+
+<fieldset>
+	<legend>Rho.WebView.textZoomLevel</legend>
+	<ul>
+		<li>set textZoomLevel as 0</li>
+		<li><a href="javascript:void(0)" onclick ="setTextZoomLevel('0');">VT301-041</a></li>
+		<li>set textZoomLevel as 4</li>
+		<li><a href="javascript:void(0)" onclick ="setTextZoomLevel('4');">VT301-042</a></li>
+		<li>set textZoomLevel as 2</li>
+		<li><a href="javascript:void(0)" onclick ="setTextZoomLevel('2');">VT301-043</a></li>
+		<li>set textZoomLevel as -1</li>
+		<li><a href="javascript:void(0)" onclick ="setTextZoomLevel('-1');">VT301-044</a></li>
+		<li>Get zoomPage Value</li>
+		<li id="Rho_WebView_textZoomLevel">
+			<a href="javascript:void(0)" onclick ="getTextZoomLevel();">Get Value : </a><span class="result"> </span>
+		</li>
+		<li>
+			<div id="textZoomLevel"><span class="defaultset"> </span>
+				<script type="text/javascript"> 
+					$("#textZoomLevel span.defaultset").text(Rho.WebView.textZoomLevel);
+				</script>
+			</div>
+		</li>
+	</ul>
+</fieldset>
+
+<fieldset>
+	<legend>Rho.WebView.navigationTimeout</legend>
+	<ul>
+		<li>navigationTimeout as 10000</li>
+		<li><a href="javascript:void(0)" onclick =setNavigationTimeout('10000');">VT301-045/VT301-046/VT301-047</a></li>
+		<li>set navigationTimeout to 45000</li>
+		<li><a href="javascript:void(0)" onclick ="setNavigationTimeout('45000');">VT301-048/VT301-049</a></li>
+		<li>set navigationTimeout to -5000</li>
+		<li><a href="javascript:void(0)" onclick ="setNavigationTimeout('-5000');">VT301-051</a></li>
+		<li>set navigationTimeout to 50000</li>
+		<li><a href="javascript:void(0)" onclick ="setNavigationTimeout('50000');">VT301-052</a></li>
+		<li>Get navigationTimeout Value</li>
+		<li id="Rho_WebView_getNavigationTimeout">
+			<a href="javascript:void(0)" onclick ="getNavigationTimeout();">Get Value : </a><span class="result"> </span>
+		</li>
+		<li>
+			<div id="navigationTimeout"><span class="defaultset"> </span>
+				<script type="text/javascript"> 
+					$("#navigationTimeout span.defaultset").text(Rho.WebView.navigationTimeout);
+				</script>
+			</div>
+		</li>
+	</ul>
+</fieldset>
+
+<fieldset>
+	<legend>Rho.WebView.currentLocation</legend>
+	<ul>
+		<li>Call currentLocation with no tabindex</li>
+		<li id="Rho_WebView_getCurrentLocation"> Result : <span class="result"> </span></li>
+		<li><a href="javascript:void(0)" onclick ="getCurrentLocation('');">VT301-053</a></li>
+		<li>Call currentLocation with tabindex as 4</li>
+		<li><a href="javascript:void(0)" onclick ="getCurrentLocation('4');">VT301-054</a></li>
+		<li>Call currentLocation with tabindex as -1</li>
+		<li><a href="javascript:void(0)" onclick ="getCurrentLocation('-1');">VT301-055</a></li>
+		<li>
+			<div id="currentLocation"><span class="defaultset"> </span>
+				<script type="text/javascript"> 
+					$("#currentLocation span.defaultset").text(Rho.WebView.currentLocation);
+				</script>
+			</div>
+		</li>
+	</ul>
+</fieldset>
+
+<fieldset>
+	<legend>Rho.WebView.currentURL</legend>
+	<ul>
+		<li>Call currentURL with no tabindex</li>
+		<li id="Rho_WebView_getCurrentURL"> Result : <span class="result"> </span></li>
+		<li><a href="javascript:void(0)" onclick ="getCurrentURL('');">VT301-056</a></li>
+		<li>Call currentURL with tabindex as 1</li>
+		<li><a href="javascript:void(0)" onclick ="getCurrentURL('1');">VT301-057</a></li>
+		<li>Call currentURL with tabindex as -1</li>
+		<li><a href="javascript:void(0)" onclick ="getCurrentURL('-1');">VT301-058</a></li>
+		<!--<li><a href="javascript:void(0)" onclick ="test_div();">test_div</a></li>-->
+		<li>
+			<div id="currentURL"><span class="defaultset"> </span>
+				<script type="text/javascript"> 
+					$("#currentURL span.defaultset").text(Rho.WebView.currentURL);
+				</script>
+			</div>
+		</li>
+	</ul>
+</fieldset>
+
+ 
+<fieldset>
+	<legend>Rho.WebView.executeJavascript</legend>
+	<ul>
+		
+		<li>Call executeJavascript with no tabindex and function having 2 params</li>
+		<li><a href="javascript:void(0)" onclick ="executeJS_zero();">VT301-059</a></li>
+		<li>Call executeJavascript with tabindex as 1</li>
+		<li><a href="javascript:void(0)" onclick ="executeJS_one();">VT301-060</a></li>
+		<li>Call executeJavascript with tabindex as -1</li>
+		<li><a href="javascript:void(0)" onclick ="executeJS_minusone();">VT301-061</a></li>
+		<li>Call executeJavascript with function having no params</li>
+		<li><a href="javascript:void(0)" onclick ="goto_executejs();">Execute Javascript</a></li>
+		<li><a href="javascript:void(0)" onclick ="$.get('/app/ModelWebview/executejs_ajax');">VT281-039</a></li>
+ 		
+ 		<li>Call Jquery Mobile Popup</li>
+  		<li><a href="javascript:void(0)" onclick ="executejs_jqmobile();">executejs_jqmobile</a></li>
+  		<li>Call Jquery Mobile Listview</li>
+  		<li><a href="javascript:void(0)" onclick ="executejs_listview();">executejs_listview</a></li>
+  		<li><div id="executeJavascript"></div></li>
+  	</ul>
+  	<div data-role="popup" id="popupBasic">
+     <p>This is a completely basic popup, no options set.</p>
+  	</div>
+  	<div data-role="popup" id="popupMenu" data-theme="d">
+    	<ul data-role="listview" data-inset="true" style="min-width:210px;" data-theme="d">
+        	<li data-role="divider" data-theme="e">Choose an action</li>
+        	<li><a href="#">View details</a></li>
+        	<li><a href="#">Edit</a></li>
+        	<li><a href="#">Disable</a></li>
+        	<li><a href="#">Delete</a></li>
+		</ul>
+	</div>
+</fieldset>
+      
+<fieldset>
+	<legend>Rho.WebView.navigate</legend>
+	<ul>
+		<li>Call navigate with no tabindex</li>
+		<li><a href="javascript:void(0)" onclick ="navigate_tab();">VT301-063</a></li>
+		<li>Call navigate to online page with tabindex as 1</li>
+		<li><a href="javascript:void(0)" onclick ="navigate_online_tab1();">VT301-064</a></li>
+		<li>Call navigate with secure page and  tabindex as 4</li>
+		<li><a href="javascript:void(0)" onclick ="navigate_online_tab4_secure();">VT301-065</a></li>
+		<li>Call navigate to local page and  tabindex as 1</li>
+		<li><a href="javascript:void(0)" onclick ="navigate_localpage();">VT301-066</a></li>
+		<li>Call navigate with tabindex as -1</li>
+		<li><a href="javascript:void(0)" onclick ="navigate_localpage_indexminus();">VT301-067</a></li>
+		<!--<li>Call navigate with url_for and action (url_for(:action => :show))</li>-->
+		<li><a href="javascript:void(0)" onclick ="navagate_action();">VT301-063</a></li>
+	</ul>
+</fieldset>
+
+<fieldset>
+	<legend>Rho.WebView.navigateBack</legend>
+	<ul>
+		<li>Call navigateBack with no tabindex</li>
+		<li><a href="javascript:void(0)" onclick ="navigate_back();">VT301-068</a></li>
+		<li>Call navigateBack to online page with tabindex as 1</li>
+		<li><a href="javascript:void(0)" onclick ="navigate_back_one();">VT301-069</a></li>
+		<li>Call navigateBack with tabindex as -1</li>
+		<li><a href="javascript:void(0)" onclick ="navigate_back_zero();">VT301-070</a></li>
+		<li>Call navigateBack with tabindex as 0</li>
+		<li><a href="javascript:void(0)" onclick ="navigate_back_minus();">VT301-071</a></li>
+	</ul>
+</fieldset>
+
+<fieldset>
+	<legend>Rho.WebView.refresh</legend>
+	<ul>
+		<li><input type='text'></li>
+		<li>Call refresh with no tabindex</li>
+		<li><a href="javascript:void(0)" onclick ="refresh_page();">VT301-072</a></li>
+		<li>Call refresh with tabindex as 1</li>
+		<li><a href="javascript:void(0)" onclick ="refresh_page_one();">VT301-073</a></li>
+		<li>Call refresh with tabindex as -1</li>
+		<li><a href="javascript:void(0)" onclick ="refresh_page_minus();">VT301-074</a></li>
+		<li>Call refresh with tabindex as 0</li>
+		<li><a href="javascript:void(0)" onclick ="refresh_page_zero();">VT301-075</a></li>
+	</ul>
+</fieldset>
+
+<fieldset>
+<legend>Rho.WebView.save</legend>
+	<ul>
+		<li>Call save with No tabindex</li>
+		<li><a href="javascript:void(0)" onclick ="screencapture();">VT301-076</a></li>
+		<li>Call save with index as 1</li>
+		<li><a href="javascript:void(0)" onclick ="screencapture_one();">VT301-077</a></li>
+		<li>Call save with index as 4</li>
+		<li><a href="javascript:void(0)" onclick ="screencapture_four();">VT301-078</a></li>
+		<li>Call save with no string and path</li>
+		<li><a href="javascript:void(0)" onclick ="screencapture_negative();">VT301-079</a></li>
+	</ul>
+</fieldset>
+
+<fieldset>
+	<legend>Rho.WebView.setCookie</legend>
+	<ul>
+		<li>Call setCookie by passing single key  and value</li>
+		<li><a href="javascript:void(0)" onclick ="set_cookie_single();">VT301-080</a></li>
+		<li>Call setCookie by passing multiple keys and respective values</li>
+		<li><a href="javascript:void(0)" onclick ="set_cookie_multiple();">VT301-081</a></li>
+		<li>Disply Cookie</li>
+		<li><a href="javascript:void(0)" onclick ="show_cookie_all();">Show all cookie</a></li>
+	</ul>
+</fieldset>
+
 
 </body>
 </html>
