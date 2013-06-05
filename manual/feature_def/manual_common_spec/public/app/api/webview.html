@@ -22,13 +22,13 @@
         };
         $(document).ready(function(){
             if (!isWindowsMobilePlatform()){
-                //$(".wm_specific_tests").hide();
+                $(".wm").hide();
             };
             if (isWindowsMobilePlatform()){
-                $("#Non_WM_Specific_Tests").hide();
+                $(".nonwm").hide();
             };
             if (!isAndroidPlatform()){
-                $("#Android_Specific_Tests").hide();
+                $(".android").hide();
             };
         });
     </script>
