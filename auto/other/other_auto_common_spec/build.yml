@@ -8,7 +8,7 @@ paths:
 #    - ../../../../Motorola-Extensions/extensions
 #  neon: "C:/rhomobile/Motorola-Extensions/neon"
 sdkversion: "3.3.2"
-name: "AutoCommonSpecOther"
+name: "other_auto_common_spec"
 app_type: "rhoelements"
 #app_type: rhodes
 version: 1.0
