@@ -1,108 +1,77 @@
-describe("Scanner SET-GET Starts", function() {
-	
-	describe("Scanner property SET-GET Using setProperty", function() {
-		var k = -1;
-		var displayflag = false;
 
+var scannerTest = function (objScanner){
+
+	var enumObject = objScanner;
+	var	enableflag = false;
+	var	disableflag = false;
+	var scnname = enumObject.getProperty('friendlyName');
+	var scntype = enumObject.getProperty('ID');
+	
+	//Rho.Log.info($.toJSON(scanObject), "PATRO Begin");
+describe("Scanner Test", function() {
+	describe("Enable Scanner "+ scntype + scnname, function() {
+		
 		beforeEach(function() {
-			Rho.Barcode.disable();
-			displayflag = false;
-			k++;
+			enableflag = false;
 		});
+		
+		it("Enable "+ scntype + scnname, function() {
+			
+			runs(function() {
+				//Rho.Log.info($.toJSON(scanObject), "PATRO Enable");
+				enumObject.enable();
+				setTimeout(function() {
+				enableflag = true;
+				}, 5000);
+			});
+			
+			waitsFor(function() {
+				return enableflag;
+			}, "Waiting for enable", 6000);
+		
+		});
+	});	
+	
+	
+	describe("Scanner property SET-GET Using setProperty "+ scntype + scnname, function() {
+		var k = 0;
 
 		for (var i=0;i<bar_setget_scanner_property.length;i++){
 										
 			it(bar_setget_scanner_property[i]['testName'], function() {
-		
-				runs(function() {
-					Rho.Barcode.enable();
-					setTimeout(function() {
-						displayflag = true;
-		 			}, 10000);
-				});
 
-				waitsFor(function() {
-					return displayflag;
-				}, "Waiting for enable", 11000);
-					
-				runs(function() {
-
-					Rho.Barcode.setProperty(bar_setget_scanner_property[k]['propertyName'],bar_setget_scanner_property[k]['propertyValue']);
-					var data = Rho.Barcode.getProperty(bar_setget_scanner_property[k]['propertyName']);
-
+				    enumObject.setProperty(bar_setget_scanner_property[k]['propertyName'],bar_setget_scanner_property[k]['propertyValue']);
+					var data = enumObject.getProperty(bar_setget_scanner_property[k]['propertyName']);
 					expect(data).toEqual(bar_setget_scanner_property[k]['expectedResult']);
-				});
-
+					k++;
 			});
 			
 		}
 	});
 	
-	describe("Decoder property SET-GET Using setProperty", function() {
-		var k = -1;
-		var displayflag = false;
-
-		beforeEach(function() {
-			Rho.Barcode.disable();
-			displayflag = false;
-			k++;
-		});
+	describe("Decoder property SET-GET Using setProperty "+ scntype + scnname, function() {
+		var k = 0;
 
 		for (var i=0;i<bar_setget_decoder_property.length;i++){
 										
 			it(bar_setget_decoder_property[i]['testName'], function() {
-		
-				runs(function() {
-					Rho.Barcode.enable();
-					setTimeout(function() {
-						displayflag = true;
-		 			}, 10000);
-				});
 
-				waitsFor(function() {
-					return displayflag;
-				}, "Waiting for enable", 11000);
-					
-				runs(function() {
-
-					Rho.Barcode.setProperty(bar_setget_decoder_property[k]['propertyName'],bar_setget_decoder_property[k]['propertyValue']);
-					var data = Rho.Barcode.getProperty(bar_setget_decoder_property[k]['propertyName']);
-
+				    enumObject.setProperty(bar_setget_decoder_property[k]['propertyName'],bar_setget_decoder_property[k]['propertyValue']);
+					var data = enumObject.getProperty(bar_setget_decoder_property[k]['propertyName']);
 					expect(data).toEqual(bar_setget_decoder_property[k]['expectedResult']);
-				});
-
+					k++;
 			});
 			
 		}
 	});
 
-	describe("Scanner property SET-GET Using setProperties", function() {
-		var k = -1;
-		var displayflag = false;
-
-		beforeEach(function() {
-			Rho.Barcode.disable();
-			displayflag = false;
-			k++;
-		});
+	describe("Scanner property SET-GET Using setProperties "+ scntype + scnname, function() {
+		var k = 0;
 
 		for (var i=0;i<bar_setget_scanner_property.length;i++){
 										
 			it(bar_setget_scanner_property[i]['testName'], function() {
-		
-				runs(function() {
-					Rho.Barcode.enable();
-					setTimeout(function() {
-						displayflag = true;
-		 			}, 10000);
-				});
-
-				waitsFor(function() {
-					return displayflag;
-				}, "Waiting for enable", 11000);
-					
-				runs(function() {
-
+						
 					var propertyName = bar_setget_scanner_property[k]['propertyName'];
 					var propertyValue = bar_setget_scanner_property[k]['propertyValue'];
 
@@ -120,50 +89,29 @@ describe("Scanner SET-GET Starts", function() {
 
 					var objProperty = jQuery.parseJSON(strProperty);
 				
-					Rho.Barcode.setProperties(objProperty);
+					enumObject.setProperties(objProperty);
 
 					var strGetProperty = '["'+bar_setget_scanner_property[k]['propertyName']+'"]';
 					var objGetProperty = jQuery.parseJSON(strGetProperty);
 
-					var data = Rho.Barcode.getProperties(objGetProperty);
+					var data = enumObject.getProperties(objGetProperty);
 
 					//displayResult(strGetProperty,$.toJSON(data));
 					data = data[bar_setget_scanner_property[k]['propertyName']];
 					expect(data).toEqual(bar_setget_scanner_property[k]['expectedResult']);
-				});
-
+					k++;
 			});
 			
 		}
 	});
 
-	describe("Decoder property SET-GET Using setProperties", function() {
-		var k = -1;
-		var displayflag = false;
-
-		beforeEach(function() {
-			Rho.Barcode.disable();
-			displayflag = false;
-			k++;
-		});
+	describe("Decoder property SET-GET Using setProperties "+ scntype + scnname, function() {
+		var k = 0;
 
 		for (var i=0;i<bar_setget_decoder_property.length;i++){
 										
 			it(bar_setget_decoder_property[i]['testName'], function() {
-		
-				runs(function() {
-					Rho.Barcode.enable();
-					setTimeout(function() {
-						displayflag = true;
-		 			}, 10000);
-				});
-
-				waitsFor(function() {
-					return displayflag;
-				}, "Waiting for enable", 11000);
-					
-				runs(function() {
-
+							
 					var propertyName = bar_setget_decoder_property[k]['propertyName'];
 					var propertyValue = bar_setget_decoder_property[k]['propertyValue'];
 
@@ -181,30 +129,137 @@ describe("Scanner SET-GET Starts", function() {
 
 					var objProperty = jQuery.parseJSON(strProperty);
 				
-					Rho.Barcode.setProperties(objProperty);
+					enumObject.setProperties(objProperty);
 
 					var strGetProperty = '["'+bar_setget_decoder_property[k]['propertyName']+'"]';
 					var objGetProperty = jQuery.parseJSON(strGetProperty);
 
-					var data = Rho.Barcode.getProperties(objGetProperty);
+					var data = enumObject.getProperties(objGetProperty);
 
 					data = data[bar_setget_decoder_property[k]['propertyName']];
 					expect(data).toEqual(bar_setget_decoder_property[k]['expectedResult']);
-				});
+					k++;
+			});
+			
+		}
+	});
+
+
+	
+	describe("Scanner property SET-GET setting Directly", function() {
+		var k = 0;
+		//var objectname = "enumObject";
+
+		for (var i=0;i<bar_setget_scanner_property.length;i++){
+										
+			it(bar_setget_scanner_property[i]['testName'], function() {
+						
+				var propertyName = bar_setget_scanner_property[k]['propertyName'];
+				var propertyValue = bar_setget_scanner_property[k]['propertyValue'];
+
+				try{
+					if (propertyValue == 'true')
+						eval(enumObject)[propertyName] = true;
+					else if (propertyValue == 'false')
+						eval(enumObject)[propertyName] = false;
+					else if (!isNaN(propertyValue)){
+						propertyValue = parseInt(propertyValue);
+						eval(enumObject)[propertyName] = propertyValue;	
+					}
+					else{
+						eval(enumObject)[propertyName] = propertyValue;
+					}
+
+					var data = enumObject.getProperty(bar_setget_scanner_property[k]['propertyName']);
+				}
+				catch(err){
+
+					var data = err.message;
+				}
+
+				expect(data).toEqual(bar_setget_scanner_property[k]['expectedResult']);
+				k++;
 
 			});
 			
 		}
 	});
 
-	describe("Scanner property SET-GET Using Enable", function() {
-		var k = -1;
-		var displayflag = false;
+	describe("Decoder property SET-GET setting Directly", function() {
+		var k = 0;
+		//var objectname = "enumObject";
+
+		for (var i=0;i<bar_setget_decoder_property.length;i++){
+										
+			it(bar_setget_decoder_property[i]['testName'], function() {
+						
+				var propertyName = bar_setget_decoder_property[k]['propertyName'];
+				var propertyValue = bar_setget_decoder_property[k]['propertyValue'];
+
+				try{
+					if (propertyValue == 'true')
+						eval(enumObject)[propertyName] = true;
+					else if (propertyValue == 'false')
+						eval(enumObject)[propertyName] = false;
+					else if (!isNaN(propertyValue)){
+						propertyValue = parseInt(propertyValue);
+						eval(enumObject)[propertyName] = propertyValue;	
+					}
+					else{
+						eval(enumObject)[propertyName] = propertyValue;
+					}
+
+					var data = enumObject.getProperty(bar_setget_decoder_property[k]['propertyName']);
+				}
+				catch(err){
+					var data = err.message;
+				}
+
+				var data = enumObject.getProperty(bar_setget_decoder_property[k]['propertyName']);
+
+				expect(data).toEqual(bar_setget_decoder_property[k]['expectedResult']);
+				k++;
+			});
+			
+		}
+	});
+
+	describe("Disable Enabled Scanner", function() {
 
 		beforeEach(function() {
-			Rho.Barcode.disable();
-			displayflag = false;
+			disableflag = false;
+		});
+
+		it("Disable "+ scntype + scnname, function() {
+			
+			runs(function() {
+				//Rho.Log.info($.toJSON(scanObject), "PATRO Disable");
+				enumObject.disable();
+				setTimeout(function() {
+				disableflag = true;
+				}, 10000);
+
+			});
+
+			waitsFor(function() {
+				return disableflag;
+			}, "Waiting for enable", 11000);
+		
+		});
+	});
+
+
+	describe("Scanner property SET-GET Using Enable", function() {
+		var k = -1;
+		var flag = false;
+
+		beforeEach(function() {
+			flag = false;
 			k++;
+		});
+
+		afterEach(function() {
+			enumObject.disable();
 		});
 
 		for (var i=0;i<bar_setget_scanner_property.length;i++){
@@ -230,23 +285,23 @@ describe("Scanner SET-GET Starts", function() {
 
 					var objProperty = jQuery.parseJSON(strProperty);
 
-					Rho.Barcode.enable(objProperty, scanCallback);
+					enumObject.enable(objProperty, scanCallback);
 
 					setTimeout(function() {
-						displayflag = true;
-		 			}, 10000);
+						flag = true;
+		 			}, 8000);
 				});
 
 				waitsFor(function() {
-					return displayflag;
-				}, "Waiting for enable", 11000);
+					return flag;
+				}, "Waiting for enable", 9000);
 					
 				runs(function() {
 
 					var strGetProperty = '["'+bar_setget_scanner_property[k]['propertyName']+'"]';
 					var objGetProperty = jQuery.parseJSON(strGetProperty);
 
-					var data = Rho.Barcode.getProperties(objGetProperty);
+					var data = enumObject.getProperties(objGetProperty);
 
 					//displayResult(strGetProperty,$.toJSON(data));
 					data = data[bar_setget_scanner_property[k]['propertyName']];
@@ -260,12 +315,15 @@ describe("Scanner SET-GET Starts", function() {
 
 	describe("Decoder property SET-GET Using Enable", function() {
 		var k = -1;
-		var displayflag = false;
+		var flag = false;
 
 		beforeEach(function() {
-			Rho.Barcode.disable();
-			displayflag = false;
+			flag = false;
 			k++;
+		});
+
+		afterEach(function() {
+			enumObject.disable();
 		});
 
 		for (var i=0;i<bar_setget_decoder_property.length;i++){
@@ -290,22 +348,22 @@ describe("Scanner SET-GET Starts", function() {
 					}
 
 					var objProperty = jQuery.parseJSON(strProperty);
-					Rho.Barcode.enable(objProperty, scanCallback);
+					enumObject.enable(objProperty, scanCallback);
 					setTimeout(function() {
-						displayflag = true;
-		 			}, 10000);
+						flag = true;
+		 			}, 5000);
 				});
 
 				waitsFor(function() {
-					return displayflag;
-				}, "Waiting for enable", 11000);
+					return flag;
+				}, "Waiting for enable", 6000);
 					
 				runs(function() {
 
 					var strGetProperty = '["'+bar_setget_decoder_property[k]['propertyName']+'"]';
 					var objGetProperty = jQuery.parseJSON(strGetProperty);
 
-					var data = Rho.Barcode.getProperties(objGetProperty);
+					var data = enumObject.getProperties(objGetProperty);
 
 					data = data[bar_setget_decoder_property[k]['propertyName']];
 					expect(data).toEqual(bar_setget_decoder_property[k]['expectedResult']);
@@ -316,124 +374,6 @@ describe("Scanner SET-GET Starts", function() {
 		}
 	});
 
-
-describe("Scanner property SET-GET setting Directly", function() {
-		var k = -1;
-		var displayflag = false;
-		var objectname = "Rho.Barcode";
-
-		beforeEach(function() {
-			Rho.Barcode.disable();
-			displayflag = false;
-			k++;
-		});
-
-		for (var i=0;i<bar_setget_scanner_property.length;i++){
-										
-			it(bar_setget_scanner_property[i]['testName'], function() {
-		
-				runs(function() {
-					Rho.Barcode.enable();
-					setTimeout(function() {
-						displayflag = true;
-		 			}, 10000);
-				});
-
-				waitsFor(function() {
-					return displayflag;
-				}, "Waiting for enable", 11000);
-					
-				runs(function() {
-
-					var propertyName = bar_setget_scanner_property[k]['propertyName'];
-					var propertyValue = bar_setget_scanner_property[k]['propertyValue'];
-
-					try{
-						if (propertyValue == 'true')
-							eval(objectname)[propertyName] = true;
-						else if (propertyValue == 'false')
-							eval(objectname)[propertyName] = false;
-						else if (!isNaN(propertyValue)){
-							propertyValue = parseInt(propertyValue);
-							eval(objectname)[propertyName] = propertyValue;	
-						}
-						else{
-							eval(objectname)[propertyName] = propertyValue;
-						}
-
-						var data = Rho.Barcode.getProperty(bar_setget_scanner_property[k]['propertyName']);
-					}
-					catch(err){
-						alert(err.message);
-						var data = err.message;
-					}
-
-					expect(data).toEqual(bar_setget_scanner_property[k]['expectedResult']);
-				});
-
-			});
-			
-		}
-	});
-
-	describe("Decoder property SET-GET setting Directly", function() {
-		var k = -1;
-		var displayflag = false;
-		var objectname = "Rho.Barcode";
-
-		beforeEach(function() {
-			Rho.Barcode.disable();
-			displayflag = false;
-			k++;
-		});
-
-		for (var i=0;i<bar_setget_decoder_property.length;i++){
-										
-			it(bar_setget_decoder_property[i]['testName'], function() {
-		
-				runs(function() {
-					Rho.Barcode.enable();
-					setTimeout(function() {
-						displayflag = true;
-		 			}, 10000);
-				});
-
-				waitsFor(function() {
-					return displayflag;
-				}, "Waiting for enable", 11000);
-					
-				runs(function() {
-
-					var propertyName = bar_setget_decoder_property[k]['propertyName'];
-					var propertyValue = bar_setget_decoder_property[k]['propertyValue'];
-
-					try{
-						if (propertyValue == 'true')
-							eval(objectname)[propertyName] = true;
-						else if (propertyValue == 'false')
-							eval(objectname)[propertyName] = false;
-						else if (!isNaN(propertyValue)){
-							propertyValue = parseInt(propertyValue);
-							eval(objectname)[propertyName] = propertyValue;	
-						}
-						else{
-							eval(objectname)[propertyName] = propertyValue;
-						}
-
-						var data = Rho.Barcode.getProperty(bar_setget_decoder_property[k]['propertyName']);
-					}
-					catch(err){
-						var data = err.message;
-					}
-
-					var data = Rho.Barcode.getProperty(bar_setget_decoder_property[k]['propertyName']);
-
-					expect(data).toEqual(bar_setget_decoder_property[k]['expectedResult']);
-				});
-
-			});
-			
-		}
-	});
-
 });	
+
+}
