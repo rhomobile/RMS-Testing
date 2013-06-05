@@ -2,7 +2,7 @@
 function startServer(host, port)
 {
 	jQuery.ajax({
-         url:    '/app/NetworkConnectionTest/startNetworkServer',
+         url:    '/app/NetworkTest/startNetworkServer',
 		 data: 	{remoteHost:host,remotePort:port},
          async:   true	
 	});
@@ -11,7 +11,7 @@ function startServer(host, port)
 function stopServer(host, port, sock)
 {
 	jQuery.ajax({
-         url:    '/app/NetworkConnectionTest/stopNetworkServer',
+         url:    '/app/NetworkTest/stopNetworkServer',
 		 data: 	{remoteHost:host,remotePort:port,remoteSocket:sock},
          async:   true	
 	});
@@ -27,7 +27,7 @@ function detectConnection(host, port, timeout)
 {
 	var szTimeout = '' + timeout;
 	jQuery.ajax({
-         url:    '/app/NetworkConnectionTest/detectConnection',
+         url:    '/app/NetworkTest/detectConnection',
 		 data: 	{remoteHost:host,remotePort:port,pollTimeout:szTimeout},
          async:   true	
 	});
@@ -36,7 +36,7 @@ function detectConnection(host, port, timeout)
 function stopDetectingConnection()
 {
 	jQuery.ajax({
-         url:    '/app/NetworkConnectionTest/stopDetectingConnection',
+         url:    '/app/NetworkTest/stopDetectingConnection',
 		 data: 	{},
          async:   true	
 	});

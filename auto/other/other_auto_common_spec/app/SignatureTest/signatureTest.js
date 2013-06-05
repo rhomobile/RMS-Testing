@@ -31,9 +31,9 @@ signatureTest.MOUSE_UP = 2;
 
 signatureTest.loadEvent = function()
 {
-	signatureTest.screenWidth = Rho.system.screenWidth;
-	signatureTest.screenHeight = Rho.system.screenHeight;
-	signatureTest.platform = Rho.system.platform;
+	signatureTest.screenWidth = Rho.System.screenWidth;
+	signatureTest.screenHeight = Rho.System.screenHeight;
+	signatureTest.platform = Rho.System.platform;
 	//TODO reset when rotated
 };
 window.addEventListener('DOMContentLoaded',signatureTest.loadEvent);
@@ -711,9 +711,9 @@ describe('Signature', function() {
 						penWidth: 1,
 						border: false,
 						outputFormat: 'dataUri'
-					}, signatureTest.imageCompareCallback);
+					});
 				signatureTest.drawBox();
-				Rho.Signature.capture();
+				Rho.Signature.capture(signatureTest.imageCompareCallback);
 			});
 			
 			waitsFor(function ()
@@ -740,9 +740,9 @@ describe('Signature', function() {
 						penWidth: 1,
 						border: false,
 						outputFormat: 'dataUri'
-					}, signatureTest.imageCompareCallback);
+					});
 				signatureTest.drawBox();
-				Rho.Signature.capture();
+				Rho.Signature.capture(signatureTest.imageCompareCallback);
 			});
 			
 			waitsFor(function ()
@@ -771,8 +771,8 @@ describe('Signature', function() {
 						fileName: 'hello',
 						outputFormat: 'iMaGe',
 						compressionFormat: 'bmp'
-					}, signatureTest.imageCompareCallback);
-				Rho.Signature.capture();
+					});
+				Rho.Signature.capture(signatureTest.imageCompareCallback);
 			});
 			
 			waitsFor(function ()
@@ -801,8 +801,8 @@ describe('Signature', function() {
 					border: false,
 					outputFormat: 'image',
 					compressionFormat: 'bMp'
-				}, signatureTest.imageCompareCallback);
-				Rho.Signature.capture();
+				});
+				Rho.Signature.capture(signatureTest.imageCompareCallback);
 			});
 			
 			waitsFor(function ()
@@ -831,8 +831,8 @@ describe('Signature', function() {
 					border: false,
 					outputFormat: 'image',
 					compressionFormat: 'PnG'
-				}, signatureTest.imageCompareCallback);
-				Rho.Signature.capture();
+				});
+				Rho.Signature.capture(signatureTest.imageCompareCallback);
 			});
 			
 			waitsFor(function ()
@@ -860,8 +860,8 @@ describe('Signature', function() {
 					penWidth: 1,
 					border: false,
 					outputFormat: 'DATaUrI'
-				}, signatureTest.imageCompareCallback);
-				Rho.Signature.capture();
+				});
+				Rho.Signature.capture(signatureTest.imageCompareCallback);
 			});
 			
 			waitsFor(function ()

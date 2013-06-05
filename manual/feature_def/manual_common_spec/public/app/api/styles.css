@@ -1,0 +1,11 @@
+body {font-family:  Tahoma, Helvetica, Arial, sans-serif}
+dd {font-size: smaller; font-style: italic; margin-bottom: 10px}
+dt span.result {color: white; background-color: #808080}
+
+.method_tests {border: 1px solid grey; margin-bottom: 10px; padding-bottom: 10px}
+.method_name {background-color: silver; font-weight: bold; padding: 5px}
+.method_desc {font-style: italic; font-size: smaller; padding: 5px}
+.test_scenario {margin-bottom: 10px; border-bottom: 1px solid}
+.test_scenario_controls {}
+.test_scenario_desc {}
+.test_scenario_number {margin-left: 10px; margin-right: 10px}
