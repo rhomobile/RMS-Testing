@@ -6,20 +6,9 @@ port = 81
 $local_server = WEBrick::HTTPServer.new :Port => port
 
 $local_server.mount_proc '/download' do |req,res|
-=begin
-  if req.request_method == 'HEAD' then
-  elsif req.request_method == 'GET' then
-  end
-        
-  res['Last-Modified'] = 'test'
-  range = req['Range']
-
-  res.status = 200
-  res.chunked = true
-  res.body = "1234567890"
-  res.content_length = body.length
-=end
   res.body = "Downloaded content"
+  res.status = 200
+  res.content_length = res.body.length
 end
 
 $local_server.mount_proc '/upload' do |req,res|
@@ -38,7 +27,7 @@ end
 
 host = localip
 
-puts "Starting local server on #{host}:{#port}"
+puts "Starting local server on #{host}:#{port}"
 
 
 f = open('app/NetworkTest/server_url.js','w')
