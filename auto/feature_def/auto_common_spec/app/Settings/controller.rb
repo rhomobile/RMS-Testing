@@ -8,7 +8,7 @@ class SettingsController < Rho::RhoController
   
   def quitApp
     sleep(2)
-    System.exit
+    Rho::System.exit
   end
   
   def index

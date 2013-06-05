@@ -84,3 +84,7 @@ disable_screen_rotation = 0
 jqtouch_mode=1
 
 splash_screen='zoom'
+
+# properties for spec testing
+intProp = 42
+stringProp = 'abc' 

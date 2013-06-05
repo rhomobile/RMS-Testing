@@ -23,8 +23,8 @@ class SpecRunner < MSpecScript
     config[:files] << "spec/json_spec"
     config[:files] << "spec/xml_spec"
     config[:files] << "spec/rhofile_spec"
+    config[:files] << "spec/file_commonapi_spec"
 
-    #config[:files] << "spec/file_commonapi_spec"
     config[:files] << "spec/network_spec"
     config[:files] << "spec/asynchttp_spec"
 

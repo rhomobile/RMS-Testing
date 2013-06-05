@@ -1,12 +1,12 @@
 # Please use relative pathes
-sdk: "../../../../rhodes"
+#sdk: "../../../../rhodes"
 paths:
   extensions:
     - ../../../../Motorola-Extensions/build/ci/extensions
-    - ../../../../Motorola-Extensions/lib/commonAPI
-    - ../../../../Motorola-Extensions/neon/R2D1/RhoElementsOneExtension/extensions
-    - ../../../../Motorola-Extensions/extensions
-  neon: "C:/rhomobile/Motorola-Extensions/neon"
+#    - ../../../../Motorola-Extensions/lib/commonAPI
+#    - ../../../../Motorola-Extensions/neon/R2D1/RhoElementsOneExtension/extensions
+#    - ../../../../Motorola-Extensions/extensions
+#  neon: "C:/rhomobile/Motorola-Extensions/neon"
 sdkversion: "3.3.2"
 name: "AutoCommonSpecOther"
 app_type: "rhoelements"
@@ -33,6 +33,4 @@ android:
   version: 2.1
   capabilities:
     - native_browser
-capabilities:
-  - motoroladev
 extensions: ["signature", "instrumentation", "coreapi"]

@@ -28,8 +28,6 @@
       jasmineEnv.addReporter(htmlReporter);
       jasmineEnv.addReporter(new jasmine.JUnitXmlReporter('.\\', true, true));
 
-      jasmineEnv.addReporter(htmlReporter);
-
       jasmineEnv.specFilter = function(spec) {
         return htmlReporter.specFilter(spec);
       };
@@ -84,6 +82,8 @@
   <section>
     <h1>Media Player Tests</h1>
     <div id="ringtones"></div>
+    <div id="audioMsg"></div>
+    <div id="videoMsg"></div>
   </section>
 </body>
 </html>
