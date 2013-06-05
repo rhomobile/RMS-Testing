@@ -109,7 +109,19 @@ describe("MediaPlayer", function() {
 		// This test relies on the device having an audio file
 		it("should be able to play an audio file", function() {
 			runs(function() {
-				Rho.Mediaplayer.start("/mnt/sdcard/test.mp3");
+				var platform = Rho.System.platform;
+				var audiolocation = "";
+
+				if (platform == "WINDOWS")
+				{
+					audiolocation = "\\thermo.wav";
+				}
+				else if (platform == "ANDROID")
+				{
+					audiolocation = "/mnt/sdcard/test.mp3";
+				}
+
+				Rho.Mediaplayer.start(audiolocation);
 				audioFilePlayed();
 			});
 
@@ -136,7 +148,19 @@ describe("MediaPlayer", function() {
 		it("should be able to play a video", function() {
 			runs(function()
 			{
-				Rho.Mediaplayer.startvideo("/mnt/sdcard/test.mp4");
+				var platform = Rho.System.platform;
+				var videolocation = "";
+
+				if (platform == "WINDOWS")
+				{
+					videolocation = "\\test.mp4";
+				}
+				else if (platform == "ANDROID")
+				{
+					videolocation = "/mnt/sdcard/test.mp4";
+				}
+
+				Rho.Mediaplayer.startvideo(videolocation);
 				videoFilePlayed();
 			});
 

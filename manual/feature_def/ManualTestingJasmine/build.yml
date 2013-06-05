@@ -29,9 +29,17 @@ app_type: "rhoelements"
 #app_type: "rhodes"
 capabilities:
 sdk: "C:/GitHub/rhodes"
+# Windows Version
 paths:
   extensions:
-    - C:\GitHub\Motorola-Extensions\extensions
+    - C:\GitHub\Motorola-Extensions\build\ci\extensions
     - C:\GitHub\Motorola-Extensions\lib\commonAPI
-    - C:\GitHub\Motorola-Extensions\neon\R2D1\RhoElementsOneExtension\extensions
-  neon: C:\GitHub\Motorola-Extensions\neon
+#  #neon: C:\GitHub\Motorola-Extensions\neon
+# Android Version
+#paths:
+#  extensions:
+#    - C:\GitHub\Motorola-Extensions\build\ci\extensions
+#    - C:\GitHub\Motorola-Extensions\extensions
+#    - C:\GitHub\Motorola-Extensions\lib\commonAPI
+#    - C:\GitHub\Motorola-Extensions\neon\R2D1\RhoElementsOneExtension\extensions
+#  neon: C:\GitHub\Motorola-Extensions\neon
