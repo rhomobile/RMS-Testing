@@ -2,7 +2,7 @@
 function startServer(host, port)
 {
 	jQuery.ajax({
-         url:    '/app/NetworkConnectionTest/startNetworkServer',
+         url:    '/app/NetworkTest/startNetworkServer',
 		 data: 	{remoteHost:host,remotePort:port},
          async:   true	
 	});
