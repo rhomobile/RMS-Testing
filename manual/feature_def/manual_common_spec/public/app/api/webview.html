@@ -22,7 +22,7 @@
         };
         $(document).ready(function(){
             if (!isWindowsMobilePlatform()){
-                $("#WM_Specific_Tests").hide();
+                //$(".wm_specific_tests").hide();
             };
             if (isWindowsMobilePlatform()){
                 $("#Non_WM_Specific_Tests").hide();
@@ -56,171 +56,705 @@
 
 
 <!-- All platforms tests -->
+<div id="activeTab_test" class="method_tests">
+    <div class="method_name">WebView.activeTab</div>
+    <div class="method_desc">An active tab index.</div>
 
-<dl>
-    <dt id="framework_test">Rho.WebView.framework: <span class="result"></span></dt>
-    <script type="text/javascript">setDomElementText("framework_test", Rho.WebView.framework);</script>
-    <dd>
-        [VT301-023]<br/>
-        Browser framework identity string.
-    </dd>
-
-    <dt id="activeTab_test">Rho.WebView.activeTab: <span class="result"></span></dt>
-    <script type="text/javascript">setDomElementText("activeTab_test", Rho.WebView.activeTab);</script>
-    <dd>
-        [VT301-004 / VT301-005]</br>
-        An active tab index.
-    </dd>
-
-    <dt id="fullScreen_test">Rho.WebView.fullScreen: <span class="result"></span>
-        <script type="text/javascript">setDomElementText("fullScreen_test", Rho.WebView.fullScreen);</script>
-    <div>
-        <button onClick='Rho.WebView.fullScreen = true; setDomElementText("fullScreen_test", Rho.WebView.fullScreen);'>Set to true</button>
-        <br/>
-        <button onClick='Rho.WebView.fullScreen = false; setDomElementText("fullScreen_test", Rho.WebView.fullScreen);'>Set to false</button>
-    </div>
-    </dt>
-    <dd>
-        [VT301-024/VT301-027/VT301-025]<br/>
-        Use full screen mode.
-    </dd>
-
-    <dt id="enableCache_test">Rho.WebView.enableCache: <span class="result"></span>
-        <script type="text/javascript">setDomElementText("enableCache_test", Rho.WebView.enableCache);</script>
-    <div>
-        <button onClick='Rho.WebView.enableCache = true; setDomElementText("enableCache_test", Rho.WebView.enableCache);'>Set to true</button><br/>
-        <button onClick='Rho.WebView.enableCache = false; setDomElementText("enableCache_test", Rho.WebView.enableCache);'>Set to false</button>
-    </div>
-    </dt>
-    <dd>
-        [VT301-008/VT301-009]<br/>
-        Enable/disable Browser cache. Not yet implemented.
-    </dd>
-
-    <dt id="currentLocation_test">Rho.WebView.currentLocation(): <span class="result"></span>
-        <script type="text/javascript">setDomElementText("currentLocation_test", Rho.WebView.currentLocation());</script>
-    <div>
-        <button onClick='setDomElementText("currentLocation_test", Rho.WebView.currentLocation())'>Show currentLocation()</button><br/>
-        <button onClick='Rho.WebView.navigate("http://www.google.com", 1); setDomElementText("currentLocation_test", Rho.WebView.currentLocation(1));'>Navigate(google, tab 2), show currentLocation(tab 2)</button><br/>
-        <button onClick='setDomElementText("currentLocation_test", Rho.WebView.currentLocation(-1));'>Show currentLocation(-1)</button>
-    </div>
-    </dt>
-    <dd>
-        [VT301-053/VT301-054/VT301-055]<br/>
-        Returns the url (location) of the current page; the last URL loaded to WebView.
-    </dd>
-
-    <dt id="navigate_test">Rho.WebView.navigate(): <span class="result"></span>
-        <script type="text/javascript">setDomElementText("navigate_test", Rho.WebView.currentLocation());</script>
-    <div>
-        <button onClick='Rho.WebView.navigate("http://www.google.com", 1); setDomElementText("navigate_test", Rho.WebView.currentLocation(1));'>Navigate(google, tab 2), show currentLocation(tab 2)</button><br/>
-        <button onClick='Rho.WebView.navigate("http://www.google.com");'>Navigate(google)</button><br/>
-        <button onClick='Rho.WebView.navigate("http://www.google.com", -1);'>Navigate(google, -1)</button>
-
-    </div>
-    </dt>
-    <dd>
-        [VT301-063/VT301-064/VT301-067]<br/>
-        Force WebView to navigate to a URL.
-    </dd>
-
-    <dt id="navigateBack_test">Rho.WebView.navigateBack(): <span class="result"></span>
-        <script type="text/javascript">setDomElementText("navigateBack_test", Rho.WebView.currentLocation());</script>
-    <div>
-        <button onClick='Rho.WebView.navigate("http://www.google.com", 1); setDomElementText("navigateBack_test", Rho.WebView.currentLocation(1));'>Navigate(google, tab 2), show currentLocation(tab 2)</button><br/>
-        <button onClick='Rho.WebView.navigateBack(1); setDomElementText("navigateBack_test", Rho.WebView.currentLocation(1));'>NavigateBack(tab 2), show currentLocation(tab 2)</button><br/>
-
-        <button onClick='Rho.WebView.navigate("http://www.google.com"); setDomElementText("navigateBack_test", Rho.WebView.currentLocation());'>Navigate(google)</button><br/>
-        <button onClick='Rho.WebView.navigateBack(); setDomElementText("navigateBack_test", Rho.WebView.currentLocation());'>NavigateBack()</button><br/>
-
-        <button onClick='Rho.WebView.navigate("http://www.google.com", -1); setDomElementText("navigateBack_test", Rho.WebView.currentLocation(-1));'>Navigate(google, -1)</button><br/>
-        <button onClick='Rho.WebView.navigateBack(-1); setDomElementText("navigateBack_test", Rho.WebView.currentLocation(-1));'>NavigateBack(-1)</button>
-    </div>
-    </dt>
-    <dd>
-        [VT301-063/VT301-064/VT301-067]<br/>
-        Force WebView to navigate to the previous page using Browser back.
-    </dd>
-
-    <dt id="all_test8">Rho.WebView.refresh(): <span class="result"></span>
-    <div>
-        <button onClick="Rho.WebView.refresh();">Refresh()</button>
-        <br/>
-        <button onClick="Rho.WebView.refresh(1);">Refresh(1)</button>
-        <br/>
-        <button onClick="Rho.WebView.refresh(-1);">Refresh(-1)</button>
-        <br/>
-        <button onClick="Rho.WebView.refresh(0);">Refresh(0)</button>
-    </div>
-
-    </dt>
-    <dd>
-        [VT301-072/VT301-073/VT301-074/VT301-075]<br/>
-        Force WebView to refresh the current page.
-    </dd>
-
-
-</dl>
-
-
-<!-- Test Android specific methods -->
-
-<div id="Android_Specific_Tests">
-    <h4>Android specific methods</h4>
-    <dl>
-        <dt id="enableZoom_test">Rho.WebView.enableZoom: <span class="result"></span>
-            <script type="text/javascript">setDomElementText("enableZoom_test", Rho.WebView.enableZoom);</script>
-        <div>
-            <button onClick='Rho.WebView.enableZoom = true; setDomElementText("enableZoom_test", Rho.WebView.enableZoom);'>Set to true</button>
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <button onClick='setDomElementText("activeTab_test", Rho.WebView.activeTab);'> get activeTab</button>
             <br/>
-            <button onClick='Rho.WebView.enableZoom = false; setDomElementText("enableZoom_test", Rho.WebView.enableZoom);'>Set to false</button>
+            <span class="result"></span>
         </div>
-        </dt>
-        <dd>
-            [VT301-018/VT301-019]<br/>
-            Enable WebView zoom.
-        </dd>
+        <div class="test_scenario_desc">
+            <span class="test_scenario_number">VT301-004 / VT301-005</span>
+            <span> Get activeTab value</span>
+        </div>
+    </div>
+</div>
 
-        <dt id="enableWebPlugins_test">Rho.WebView.enableWebPlugins: <span class="result"></span>
-            <script type="text/javascript">setDomElementText("enableWebPlugins_test", Rho.WebView.enableWebPlugins);</script>
-        <div>
-            <button onClick='Rho.WebView.enableWebPlugins = true; setDomElementText("enableWebPlugins_test", Rho.WebView.enableWebPlugins);'>Set to true</button>
+<div id="cacheSize_test" class="method_tests wm">
+    <div class="method_name">WebView.cacheSize</div>
+    <div class="method_desc">Browser cache size, in whole MBs. Defines in config.xml: Navigation\\Cache.</div>
+
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <button onClick='setDomElementText("cacheSize_test", Rho.WebView.cacheSize);'> get cacheSize</button>
             <br/>
-            <button onClick='Rho.WebView.enableWebPlugins = false; setDomElementText("enableWebPlugins_test", Rho.WebView.enableWebPlugins);'>Set to false</button>
+            <span class="result"></span>
         </div>
-        </dt>
-        <dd>
-            [VT301-015/VT301-016]<br/>
-            Set enabling web plugins
-        </dd>
-
-        <dt id="save_test">Rho.WebView.save(): <span class="result"></span>
-            <script type="text/javascript">
-                function refreshSaveResult(filename) {
-                    var filenamePath =  Rho.RhoFile.join(Rho.Application.userFolder, filename);
-                    var text = filename + ' exists = ' + $.toJSON(Rho.RhoFile.exists(filenamePath));
-                    setDomElementText("save_test", text);
-            }</script>
-        <div>
-            <button onClick="Rho.WebView.save(Rho.RhoFile.join(Rho.Application.userFolder, '1.jpeg')); refreshSaveResult('1.jpeg')">Save("1.jpeg")</button><br/>
-            <button onClick="Rho.WebView.save(Rho.RhoFile.join(Rho.Application.userFolder, '2.jpeg'), 1); refreshSaveResult('2.jpeg')">Save("2.jpeg", 1)</button><br/>
-            <button onClick="Rho.WebView.save(Rho.RhoFile.join(Rho.Application.userFolder, '3.jpeg'), -1); refreshSaveResult('3.jpeg')">Save("3.jpeg", -1)</button><br/>
-            <button onClick="Rho.WebView.save(Rho.RhoFile.join(Rho.Application.userFolder, '4.jpeg'), 0); refreshSaveResult('4.jpeg')">Save("4.jpeg", 0)</button>
+        <div class="test_scenario_desc">
+            <span class="test_scenario_number">VT301-006 / VT301-007</span>
+            <span> Get cacheSize value</span>
         </div>
+    </div>
+</div>
 
-        </dt>
-        <dd>
-            [VT301-076/VT301-077/VT301-078/VT301-079]<br/>
-            Save current page to file system.
-        </dd>
-    </dl>
+<div id="enablePageLoadingIndication_test" class="method_tests wm">
+    <div class="method_name">WebView.enablePageLoadingIndication</div>
+    <div class="method_desc">Show page loading navigation. Defines in config.xml: GUI\HourglassEnabled</div>
+
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <button onClick='setDomElementText("enablePageLoadingIndication_test", Rho.WebView.enablePageLoadingIndication);'> get enablePageLoadingIndication</button>
+            <br/>
+            <span class="result"></span>
+        </div>
+        <div class="test_scenario_desc">
+            <span class="test_scenario_number">VT301-011 / VT301-013</span>
+            <span> Get enablePageLoadingIndication value</span>
+        </div>
+    </div>
+</div>
+
+<div id="enableWebPlugins_test" class="method_tests android">
+    <div class="method_name">WebView.enableWebPlugins</div>
+    <div class="method_desc">Set enabling/disabling web plugins</div>
+
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <button onClick='setDomElementText("enableWebPlugins_test", Rho.WebView.enableWebPlugins);'> get enableWebPlugins</button>
+            <br/>
+            <span class="result"></span>
+        </div>
+        <div class="test_scenario_desc">
+            <span class="test_scenario_number"></span>
+            <span> Get enableWebPlugins value</span>
+        </div>
+    </div>
+
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <button onClick='Rho.WebView.enableWebPlugins = true;'>enableWebPlugins = true</button>
+        </div>
+        <div class="test_scenario_desc">
+            <span class="test_scenario_number">VT301-015</span>
+            <span> Press to set enableWebPlugins to true</span>
+        </div>
+        <div style="clear: both"></div>
+    </div>
+
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <button onClick='Rho.WebView.enableWebPlugins = false;'>enableWebPlugins = false</button>
+        </div>
+        <div class="test_scenario_desc">
+            <span class="test_scenario_number">VT301-016</span>
+            <span> Press to set enableWebPlugins to false</span>
+        </div>
+        <div style="clear: both"></div>
+    </div>
+</div>
+
+<div id="enableZoom_test" class="method_tests android">
+    <div class="method_name">WebView.enableZoom</div>
+    <div class="method_desc">Enable/disable WebView zoom.</div>
+
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <button onClick='setDomElementText("enableZoom_test", Rho.WebView.enableZoom);'> get enableZoom</button>
+            <br/>
+            <span class="result"></span>
+        </div>
+        <div class="test_scenario_desc">
+            <span class="test_scenario_number"></span>
+            <span> Get enableZoom value</span>
+        </div>
+    </div>
+
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <button onClick='Rho.WebView.enableZoom = true;'>enableZoom = true</button>
+        </div>
+        <div class="test_scenario_desc">
+            <span class="test_scenario_number">VT301-018</span>
+            <span> Press to set enableZoom to true</span>
+        </div>
+        <div style="clear: both"></div>
+    </div>
+
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <button onClick='Rho.WebView.enableZoom = false;'>enableZoom = false</button>
+        </div>
+        <div class="test_scenario_desc">
+            <span class="test_scenario_number">VT301-019</span>
+            <span> Press to set enableZoom to false</span>
+        </div>
+        <div style="clear: both"></div>
+    </div>
+</div>
+
+<div id="fontFamily_test" class="method_tests wm">
+    <div class="method_name">WebView.fontFamily</div>
+    <div class="method_desc">Specifies the default font to use when rendering text in web pages. Defines in config.xml: HTMLStyles\\FontFamily.</div>
+
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <button onClick='setDomElementText("fontFamily_test", Rho.WebView.fontFamily);'> get fontFamily</button>
+            <br/>
+            <span class="result"></span>
+        </div>
+        <div class="test_scenario_desc">
+            <span class="test_scenario_number">VT301-021 / VT301-022</span>
+            <span> Get fontFamily value</span>
+        </div>
+    </div>
+</div>
+
+<div id="framework_test" class="method_tests">
+    <div class="method_name">WebView.framework</div>
+    <div class="method_desc">Browser framework identity string.</div>
+
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <button onClick='setDomElementText("framework_test", Rho.WebView.framework);'> get framework</button>
+            <br/>
+            <span class="result"></span>
+        </div>
+        <div class="test_scenario_desc">
+            <span class="test_scenario_number">VT301-023</span>
+            <span> Get framework value</span>
+        </div>
+    </div>
+</div>
+
+<div id="fullScreen_test" class="method_tests">
+    <div class="method_name">WebView.fullScreen</div>
+    <div class="method_desc">Use full screen mode.</div>
+
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <button onClick='setDomElementText("fullScreen_test", Rho.WebView.fullScreen);'> get fullScreen</button>
+            <br/>
+            <span class="result"></span>
+        </div>
+        <div class="test_scenario_desc">
+            <span class="test_scenario_number"></span>
+            <span> Get fullScreen value</span>
+        </div>
+    </div>
+
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <button onClick='Rho.WebView.fullScreen = true;'>fullScreen = true</button>
+        </div>
+        <div class="test_scenario_desc">
+            <span class="test_scenario_number">VT301-024</span>
+            <span> Press to set fullScreen to true</span>
+        </div>
+        <div style="clear: both"></div>
+    </div>
+
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <button onClick='Rho.WebView.fullScreen = false;'>fullScreen = false</button>
+        </div>
+        <div class="test_scenario_desc">
+            <span class="test_scenario_number">VT301-025</span>
+            <span> Press to set fullScreen to false</span>
+        </div>
+        <div style="clear: both"></div>
+    </div>
+</div>
+
+<div id="scrollTechnique_test" class="method_tests wm">
+    <div class="method_name">WebView.scrollTechnique</div>
+    <div class="method_desc">Specifies the technique used to scroll about the page. Defines in config.xml: Scrolling\ScrollTechnique.</div>
+
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <button onClick='setDomElementText("scrollTechnique_test", Rho.WebView.scrollTechnique);'> get scrollTechnique</button>
+            <br/>
+            <span class="result"></span>
+        </div>
+        <div class="test_scenario_desc">
+            <span class="test_scenario_number">VT301-028 / VT301-029 / VT301-030</span>
+            <span> Get scrollTechnique value</span>
+        </div>
+    </div>
+</div>
+
+<div id="userAgent_test" class="method_tests wm">
+    <div class="method_name">WebView.userAgent</div>
+    <div class="method_desc"> When visiting a web server the WebKit browser will report its self as the specified user agent. Defines in config.xml: Navigation\\UserAgent.</div>
+
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <button onClick='setDomElementText("userAgent_test", Rho.WebView.userAgent);'> get userAgent</button>
+            <br/>
+            <span class="result"></span>
+        </div>
+        <div class="test_scenario_desc">
+            <span class="test_scenario_number">VT301-031 / VT301-032</span>
+            <span> Get userAgent value</span>
+        </div>
+    </div>
+</div>
+
+<div id="viewportEnabled_test" class="method_tests wm">
+    <div class="method_name">WebView.viewportEnabled</div>
+    <div class="method_desc"> Whether to enable or disable viewport meta tag processing. Defines in config.xml: Navigation\\ViewportEnabled.</div>
+
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <button onClick='setDomElementText("viewportEnabled_test", Rho.WebView.viewportEnabled);'> get viewportEnabled</button>
+            <br/>
+            <span class="result"></span>
+        </div>
+        <div class="test_scenario_desc">
+            <span class="test_scenario_number">VT301-031 / VT301-032</span>
+            <span> Get viewportEnabled value</span>
+        </div>
+    </div>
+</div>
+
+<div id="viewportWidth_test" class="method_tests wm">
+    <div class="method_name">WebView.viewportWidth</div>
+    <div class="method_desc">Default viewport width to use for pages that do not have a viewport meta tag (uses 1:1 scaling if not specified). Defines in config.xml: Navigation\ViewportWidth.</div>
+
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <button onClick='setDomElementText("viewportWidth_test", Rho.WebView.viewportWidth);'> get viewportWidth</button>
+            <br/>
+            <span class="result"></span>
+        </div>
+        <div class="test_scenario_desc">
+            <span class="test_scenario_number">VT301-031 / VT301-032</span>
+            <span> Get viewportWidth value</span>
+        </div>
+    </div>
+</div>
+
+<div id="zoomPage_test" class="method_tests wm">
+    <div class="method_name">WebView.zoomPage</div>
+    <div class="method_desc">Sets the zoom factor of the page. Factor 1.0 is no zoom, values less than 1.0 are zoomed out and values greater than 1.0 are zoomed in</div>
+
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <button onClick='setDomElementText("zoomPage_test", Rho.WebView.zoomPage);'> get zoomPage</button>
+            <br/>
+            <span class="result"></span>
+        </div>
+        <div class="test_scenario_desc">
+            <span class="test_scenario_number"></span>
+            <span> Get zoomPage value</span>
+        </div>
+    </div>
+
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <button onClick='Rho.WebView.zoomPage = 0.5;'>zoomPage = 0.5</button>
+        </div>
+        <div class="test_scenario_desc">
+            <span class="test_scenario_number">VT301-037</span>
+            <span> Press to set zoomPage to 0.5</span>
+        </div>
+        <div style="clear: both"></div>
+    </div>
+
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <button onClick='Rho.WebView.zoomPage = 1.5;'>zoomPage = 1.5</button>
+        </div>
+        <div class="test_scenario_desc">
+            <span class="test_scenario_number">VT301-038</span>
+            <span> Press to set zoomPage to 1.5</span>
+        </div>
+        <div style="clear: both"></div>
+    </div>
+
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <button onClick='Rho.WebView.zoomPage = 1.0;'>zoomPage = 1.0</button>
+        </div>
+        <div class="test_scenario_desc">
+            <span class="test_scenario_number">VT301-039</span>
+            <span> Press to set zoomPage to 1.0</span>
+        </div>
+        <div style="clear: both"></div>
+    </div>
+
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <button onClick='Rho.WebView.zoomPage = -1.0;'>zoomPage = -1.0</button>
+        </div>
+        <div class="test_scenario_desc">
+            <span class="test_scenario_number">VT301-040</span>
+            <span> Press to set zoomPage to -1.0</span>
+        </div>
+        <div style="clear: both"></div>
+    </div>
+
 
 </div>
 
+<div id="textZoomLevel_test" class="method_tests wm">
+    <div class="method_name">WebView.textZoomLevel</div>
+    <div class="method_desc">Sets the font size to be displayed on the page, set to 0 for the smallest font and 4 for the largest font.</div>
 
-<!-- Test any platform but WM  methods -->
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <button onClick='setDomElementText("textZoomLevel_test", Rho.WebView.textZoomLevel);'> get textZoomLevel</button>
+            <br/>
+            <span class="result"></span>
+        </div>
+        <div class="test_scenario_desc">
+            <span class="test_scenario_number"></span>
+            <span> Get textZoomLevel value</span>
+        </div>
+    </div>
 
-<div id="Non_WM_Specific_Tests">
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <button onClick='Rho.WebView.textZoomLevel = 0;'>textZoomLevel = 0</button>
+        </div>
+        <div class="test_scenario_desc">
+            <span class="test_scenario_number">VT301-041</span>
+            <span> Press to set textZoomLevel to 0</span>
+        </div>
+        <div style="clear: both"></div>
+    </div>
+
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <button onClick='Rho.WebView.textZoomLevel = 4;'>textZoomLevel = 4</button>
+        </div>
+        <div class="test_scenario_desc">
+            <span class="test_scenario_number">VT301-042</span>
+            <span> Press to set textZoomLevel to 4</span>
+        </div>
+        <div style="clear: both"></div>
+    </div>
+
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <button onClick='Rho.WebView.textZoomLevel = 2;'>textZoomLevel = 2</button>
+        </div>
+        <div class="test_scenario_desc">
+            <span class="test_scenario_number">VT301-043</span>
+            <span> Press to set textZoomLevel to 2</span>
+        </div>
+        <div style="clear: both"></div>
+    </div>
+
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <button onClick='Rho.WebView.textZoomLevel = -1;'>textZoomLevel = -1</button>
+        </div>
+        <div class="test_scenario_desc">
+            <span class="test_scenario_number">VT301-044</span>
+            <span> Press to set textZoomLevel to -1</span>
+        </div>
+        <div style="clear: both"></div>
+    </div>
+
+
+</div>
+
+<div id="navigationTimeout_test" class="method_tests wm">
+    <div class="method_name">WebView.navigationTimeout</div>
+    <div class="method_desc"> Number of milliseconds before the browser times out and navigates to the page specified in the badlink setting. Defines in config.xml: Navigation\NavTimeout.</div>
+
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <button onClick='setDomElementText("navigationTimeout_test", Rho.WebView.navigationTimeout);'> get navigationTimeout</button>
+            <br/>
+            <span class="result"></span>
+        </div>
+        <div class="test_scenario_desc">
+            <span class="test_scenario_number"></span>
+            <span> Get navigationTimeout value</span>
+        </div>
+    </div>
+
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <button onClick='Rho.WebView.navigate("http://www.google.com", 1);'>navigate(google, 1))</button>
+            <br/>
+            <span class="result"></span>
+        </div>
+        <div class="test_scenario_desc">
+            <span class="test_scenario_number"></span>
+            <span> navigate tab index 1 to google</span>
+        </div>
+    </div>
+
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <button onClick='Rho.WebView.navigate("http://www.citibank.com", 1);'>navigate(citibank, 1))</button>
+            <br/>
+            <span class="result"></span>
+        </div>
+        <div class="test_scenario_desc">
+            <span class="test_scenario_number"></span>
+            <span> navigate tab index 1 to citibank</span>
+        </div>
+    </div>
+
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <button onClick='Rho.WebView.navigationTimeout = 10000;'>navigationTimeout = 10000</button>
+        </div>
+        <div class="test_scenario_desc">
+            <span class="test_scenario_number">VT301-045 / VT301-046 / VT301-047</span>
+            <span> Press to set navigationTimeout to 10000 ms</span>
+        </div>
+        <div style="clear: both"></div>
+    </div>
+
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <button onClick='Rho.WebView.navigationTimeout = 5000;'>navigationTimeout = 5000</button>
+        </div>
+        <div class="test_scenario_desc">
+            <span class="test_scenario_number">VT301-048</span>
+            <span> Press to set navigationTimeout to 5000 ms</span>
+        </div>
+        <div style="clear: both"></div>
+    </div>
+
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <button onClick='Rho.WebView.navigationTimeout = 45000;'>navigationTimeout = 45000</button>
+        </div>
+        <div class="test_scenario_desc">
+            <span class="test_scenario_number">VT301-049</span>
+            <span> Press to set navigationTimeout to 45000 ms</span>
+        </div>
+        <div style="clear: both"></div>
+    </div>
+</div>
+
+<div id="currentLocation_test" class="method_tests">
+    <div class="method_name">WebView.currentLocation()</div>
+    <div class="method_desc">Returns the url (location) of the current page; the last URL loaded to WebView.</div>
+    <div><span class="result"></span></div>
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <button onClick='setDomElementText("currentLocation_test", Rho.WebView.currentLocation());'>currentLocation()</button>
+        </div>
+        <div class="test_scenario_desc">
+            <span class="test_scenario_number">VT301-53</span>
+            <span> Get currentLocation without args</span>
+        </div>
+    </div>
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <button onClick='setDomElementText("currentLocation_test", Rho.WebView.currentLocation(4));'>currentLocation(4)</button>
+        </div>
+        <div class="test_scenario_desc">
+            <span class="test_scenario_number">VT301-54</span>
+            <span> Get currentLocation for tab index 4</span>
+        </div>
+    </div>
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <button onClick='setDomElementText("currentLocation_test", Rho.WebView.currentLocation(-1));'>currentLocation(-1)</button>
+        </div>
+        <div class="test_scenario_desc">
+            <span class="test_scenario_number">VT301-55</span>
+            <span> Get currentLocation for tab index -1</span>
+        </div>
+    </div>
+</div>
+
+<div id="navigate_test" class="method_tests">
+    <div class="method_name">WebView.navigate()</div>
+    <div class="method_desc">Force WebView to navigate to a URL.</div>
+
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <button onClick='Rho.WebView.navigate("http://www.google.com");'>navigate(google)</button>
+        </div>
+        <div class="test_scenario_desc">
+            <span class="test_scenario_number">VT301-063</span>
+            <span> Navigate current tab to google</span>
+        </div>
+    </div>
+
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <button onClick='Rho.WebView.navigate("http://www.google.com", 1);'>navigate(google, 1)</button>
+        </div>
+        <div class="test_scenario_desc">
+            <span class="test_scenario_number">VT301-064</span>
+            <span> Navigate tab index 1 to google</span>
+        </div>
+    </div>
+
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <button onClick='Rho.WebView.navigate("http://www.gmail.com", 4);'>navigate(gmail, 4)</button>
+        </div>
+        <div class="test_scenario_desc">
+            <span class="test_scenario_number">VT301-065</span>
+            <span> Navigate tab index 4 to gmail (secure page)</span>
+        </div>
+    </div>
+
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <button onClick='Rho.WebView.navigate("http://www.google.com", -1);'>navigate(google, -1)</button>
+        </div>
+        <div class="test_scenario_desc">
+            <span class="test_scenario_number">VT301-067</span>
+            <span> Navigate tab index -1 to google</span>
+        </div>
+    </div>
+</div>
+
+<div id="navigateBack_test" class="method_tests">
+    <div class="method_name">WebView.navigateBack()</div>
+    <div class="method_desc">Force WebView to navigate to the previous page using Browser back.</div>
+
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <button onClick='Rho.WebView.navigate("http://www.google.com", 1);'>navigate(google, 1)</button>
+        </div>
+        <div class="test_scenario_desc">
+            <span class="test_scenario_number"></span>
+            <span> Navigate tab index 1 to google</span>
+        </div>
+    </div>
+
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <button onClick='Rho.WebView.navigateBack();'>navigateBack()</button>
+        </div>
+        <div class="test_scenario_desc">
+            <span class="test_scenario_number">VT301-068</span>
+            <span> Navigate back current tab</span>
+        </div>
+    </div>
+
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <button onClick='Rho.WebView.navigateBack(1);'>navigateBack(1)</button>
+        </div>
+        <div class="test_scenario_desc">
+            <span class="test_scenario_number">VT301-069</span>
+            <span> Navigate back tab index 1</span>
+        </div>
+    </div>
+
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <button onClick='Rho.WebView.navigateBack(-1);'>navigateBack(-1)</button>
+        </div>
+        <div class="test_scenario_desc">
+            <span class="test_scenario_number">VT301-070</span>
+            <span> Navigate back tab index -1</span>
+        </div>
+    </div>
+
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <button onClick='Rho.WebView.navigateBack(0);'>navigateBack(0)</button>
+        </div>
+        <div class="test_scenario_desc">
+            <span class="test_scenario_number">VT301-071</span>
+            <span> Navigate back tab index 0</span>
+        </div>
+    </div>
+
+</div>
+
+<div id="refresh_test" class="method_tests">
+    <div class="method_name">WebView.refresh()</div>
+    <div class="method_desc">Force WebView to refresh the current page.</div>
+
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <button onClick='Rho.WebView.refresh();'>refresh()</button>
+        </div>
+        <div class="test_scenario_desc">
+            <span class="test_scenario_number">VT301-072</span>
+            <span>Call refresh() without args</span>
+        </div>
+    </div>
+
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <button onClick='Rho.WebView.refresh(1);'>refresh(1)</button>
+        </div>
+        <div class="test_scenario_desc">
+            <span class="test_scenario_number">VT301-073</span>
+            <span>Call refresh() for tab index 1</span>
+        </div>
+    </div>
+
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <button onClick='Rho.WebView.refresh(-1);'>refresh(-1)</button>
+        </div>
+        <div class="test_scenario_desc">
+            <span class="test_scenario_number">VT301-074</span>
+            <span>Call refresh() for tab index -1</span>
+        </div>
+    </div>
+
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <button onClick='Rho.WebView.refresh(0);'>refresh(0)</button>
+        </div>
+        <div class="test_scenario_desc">
+            <span class="test_scenario_number">VT301-075</span>
+            <span>Call refresh() for tab index 0</span>
+        </div>
+    </div>
+
+</div>
+
+<div id="save_test" class="method_tests android">
+    <div class="method_name">WebView.save()</div>
+    <div class="method_desc">Save current page to file system.</div>
+
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <button onClick='setDomElementText("save_test", "screenshot exists = " + Rho.RhoFile.exists(Rho.RhoFile.join(Rho.Application.userFolder, "screenshot.jpeg")));'>Check screenshot file</button>
+            <span class="result"></span>
+        </div>
+        <div class="test_scenario_desc">
+            <span class="test_scenario_number"></span>
+            <span>Check existing file with screenshot</span>
+        </div>
+    </div>
+
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <button onClick='Rho.WebView.save("jpeg", Rho.RhoFile.join(Rho.Application.userFolder, "screenshot.jpeg"));'>save(jpeg, path)</button>
+        </div>
+        <div class="test_scenario_desc">
+            <span class="test_scenario_number">VT301-076</span>
+            <span>Call save() with all args but tab index</span>
+        </div>
+    </div>
+
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <button onClick='Rho.WebView.save("jpeg", Rho.RhoFile.join(Rho.Application.userFolder, "screenshot.jpeg"), 1);'>save(jpeg, path, 1)</button>
+        </div>
+        <div class="test_scenario_desc">
+            <span class="test_scenario_number">VT301-077</span>
+            <span>Call save() for tab index 1</span>
+        </div>
+    </div>
+
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <button onClick='Rho.WebView.save("jpeg", Rho.RhoFile.join(Rho.Application.userFolder, "screenshot.jpeg"), 4);'>save(jpeg, path, 4)</button>
+        </div>
+        <div class="test_scenario_desc">
+            <span class="test_scenario_number">VT301-078</span>
+            <span>Call save() for tab index 4</span>
+        </div>
+    </div>
+</div>
+
+<!--
+
+ <div id="Non_WM_Specific_Tests">
     <h4>Non WM specific methods</h4>
     <dl>
         <dt id="setCookie_test">Rho.WebView.setCookie: <span class="result"></span>
@@ -241,131 +775,49 @@
 
 </div>
 
+ -->
 
-<!-- Test WindowsMobile specific methods -->
+<div id="setCookie_test" class="method_tests nonwm">
+    <div class="method_name">WebView.setCookie()</div>
+    <div class="method_desc"> When WebView loads the specified url (either by selecting link or from calling WebView.navigate), it will add this cookie to the HTTP request.</div>
 
-<div id="WM_Specific_Tests">
-    <h4>WM specific methods</h4>
-    <dl>
-        <dt id="scrollTechnique_test">Rho.WebView.scrollTechnique: <span class="result"></span></dt>
-        <script type="text/javascript">setDomElementText(scrollTechnique_test, Rho.WebView.scrollTechnique);</script>
-        <dd>
-            [VT301-028/VT301-029/VT301-030]<br/>
-            Specifies the technique used to scroll about the page. Defines in config.xml: Scrolling\ScrollTechnique.
-        </dd>
-
-        <dt id="fontFamily_test">Rho.WebView.fontFamily: <span class="result"></span></dt>
-        <script type="text/javascript">setDomElementText("fontFamily_test", Rho.WebView.fontFamily);</script>
-        <dd>
-            [VT301-021/VT301-022]<br/>
-            Specifies the default font to use when rendering text in web pages. Defines in config.xml:
-            HTMLStyles\FontFamily.
-        </dd>
-
-        <dt id="userAgent_test">Rho.WebView.userAgent: <span class="result"></span></dt>
-        <script type="text/javascript">setDomElementText("userAgent_test", Rho.WebView.userAgent);</script>
-        <dd>
-            [VT301-031/VT301-032]<br/>
-            When visiting a web server the WebKit browser will report its self as the specified user agent. Defines in
-            config.xml: Navigation\UserAgent.
-        </dd>
-
-        <dt id="viewportEnabled_test">Rho.WebView.viewportEnabled: <span class="result"></span></dt>
-        <script type="text/javascript">setDomElementText("viewportEnabled_test", Rho.WebView.viewportEnabled);</script>
-        <dd>
-            [VT301-033/VT301-034]<br/>
-            Whether to enable or disable viewport meta tag processing. Defines in config.xml:
-            Navigation\ViewportEnabled.
-        </dd>
-
-        <dt id="viewportWidth_test">Rho.WebView.viewportWidth: <span class="result"></span></dt>
-        <script type="text/javascript">setDomElementText("viewportWidth_test", Rho.WebView.viewportWidth);</script>
-        <dd>
-            [VT301-035/VT301-036]<br/>
-            Default viewport width to use for pages that do not have a viewport meta tag (uses 1:1 scaling if not
-            specified). Defines in config.xml: Navigation\ViewportWidth.
-        </dd>
-
-        <dt id="cacheSize_test">Rho.WebView.cacheSize: <span class="result"></span></dt>
-        <script type="text/javascript">setDomElementText("cacheSize_test", Rho.WebView.cacheSize);</script>
-        <dd>
-            [VT301-006 / VT301-007]<br/>
-            Browser cache size, in whole MBs. Defines in config.xml: Navigation\Cache.
-        </dd>
-
-        <dt id="navigationTimeout_test">Rho.WebView.navigationTimeout: <span class="result"></span>
-            <script type="text/javascript">setDomElementText("navigationTimeout_test", Rho.WebView.navigationTimeout);</script>
-        <div>
-            <button onClick='Rho.WebView.navigationTimeout = 5000; Rho.WebView.navigate("http://www.google.com", 1); setDomElementText("navigationTimeout_test", Rho.WebView.navigationTimeout);'>Set to 5 sec and navigate tab 2 to google</button><br/>
-            <button onClick='Rho.WebView.navigationTimeout = 0; Rho.WebView.navigate("http://www.motorola.com", 1); setDomElementText("navigationTimeout_test", Rho.WebView.navigationTimeout);'>Set to 0 sec and navigate tab 2 to motorola</button>
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <button onClick='setDomElementText("setCookie_test", document.cookie);'>Show document cookie</button>
+            <span class="result"></span>
         </div>
-        </dt>
-        <dd>
-            [VT301-045/VT301-050]<br/>
-            Number of milliseconds before the browser times out and navigates to the page specified in the badlink setting. Defines in config.xml: Navigation\NavTimeout.
-        </dd>
-
-        <dt id="enablePageLoadingIndication_test">Rho.WebView.enablePageLoadingIndication: <span class="result"></span>
-            <script type="text/javascript">setDomElementText("enablePageLoadingIndication_test", Rho.WebView.enablePageLoadingIndication);</script>
-        <div>
-            <button onClick='Rho.WebView.enablePageLoadingIndication = true; setDomElementText("enablePageLoadingIndication_test", Rho.WebView.enablePageLoadingIndication);'>Set to true</button><br/>
-            <button onClick='Rho.WebView.enablePageLoadingIndication = false; setDomElementText("enablePageLoadingIndication_test", Rho.WebView.enablePageLoadingIndication);'>Set to false</button>
+        <div class="test_scenario_desc">
+            <span class="test_scenario_number"></span>
+            <span>Show document cookie</span>
         </div>
-        </dt>
-        <dd>
-            [VT301-011/VT301-013]<br/>
-            Show page loading navigation. Defines in config.xml: GUI\HourglassEnabled
-        </dd>
+    </div>
 
-        <dt id="acceptLanguage_test">Rho.WebView.acceptLanguage: <span class="result"></span>
-            <script type="text/javascript">setDomElementText("acceptLanguage_test", Rho.WebView.acceptLanguage);</script>
-        <div>
-            <button onClick='Rho.WebView.acceptLanguage = "en"; Rho.WebView.navigate("http://www.google.com", 1); setDomElementText("acceptLanguage_test", Rho.WebView.acceptLanguage);'>Set to 'en' and navigate tab 2 to google</button><br/>
-            <button onClick='Rho.WebView.acceptLanguage = "fr"; Rho.WebView.navigate("http://www.google.com", 1); setDomElementText("acceptLanguage_test", Rho.WebView.acceptLanguage);'>Set to 'fr' and navigate tab 2 to google</button><br/>
-            <button onClick='Rho.WebView.acceptLanguage = "ja"; Rho.WebView.navigate("http://www.google.com", 1); setDomElementText("acceptLanguage_test", Rho.WebView.acceptLanguage);'>Set to 'ja' and navigate tab 2 to google</button>
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <button onClick='Rho.WebView.setCookie("http://127.0.0.1", "key_1=DevaStoredCookie1");'>Set single cookie</button>
         </div>
-        </dt>
-        <dd>
-            [VT301-001/VT301-002/VT301-003]<br/>
-            Configurable HTTP headers. Not yet implemented.
-        </dd>
-
-        <dt id="zoomPage_test">Rho.WebView.zoomPage: <span class="result"></span>
-            <script type="text/javascript">setDomElementText("zoomPage_test", Rho.WebView.zoomPage);</script>
-        <div>
-            <button onClick='Rho.WebView.zoomPage = 0.5; setDomElementText("zoomPage_test", Rho.WebView.zoomPage);'>Set to 0.5</button><br/>
-            <button onClick='Rho.WebView.zoomPage = 1.5; setDomElementText("zoomPage_test", Rho.WebView.zoomPage);'>Set to 1.5</button><br/>
-            <button onClick='Rho.WebView.zoomPage = 1.0; setDomElementText("zoomPage_test", Rho.WebView.zoomPage);'>Set to 1.0</button><br/>
-            <button onClick='Rho.WebView.zoomPage = -1.0; setDomElementText("zoomPage_test", Rho.WebView.zoomPage);'>Set to -1.0</button>
+        <div class="test_scenario_desc">
+            <span class="test_scenario_number">VT301-080</span>
+            <span>Set single cookie</span>
         </div>
-        </dt>
-        <dd>
-            [VT301-037/VT301-038/VT301-039/VT301-040]<br/>
-            Sets the zoom factor of the page. Factor 1.0 is no zoom, values less than 1.0 are zoomed out and values
-            greater than 1.0 are zoomed in.
-        </dd>
+    </div>
 
-        <dt id="textZoomLevel_test">Rho.WebView.textZoomLevel: <span class="result"></span>
-            <script type="text/javascript">setDomElementText("textZoomLevel", Rho.WebView.textZoomLevel);</script>
-        <div>
-            <button onClick='Rho.WebView.textZoomLevel = 0; setDomElementText("textZoomLevel", Rho.WebView.textZoomLevel);'>Set to 0</button>
-            <br/>
-            <button onClick='Rho.WebView.textZoomLevel = 4; setDomElementText("textZoomLevel", Rho.WebView.textZoomLevel);'>Set to 4</button>
-            <br/>
-            <button onClick='Rho.WebView.textZoomLevel = 2; setDomElementText("textZoomLevel", Rho.WebView.textZoomLevel);'>Set to 2</button>
-            <br/>
-            <button onClick='Rho.WebView.textZoomLevel = -1; setDomElementText("textZoomLevel", Rho.WebView.textZoomLevel);'>Set to -1</button>
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <button onClick='Rho.WebView.setCookie("http://127.0.0.1", "key_2=DevaStoredCookie2;key_3=bhaktabhakta");'>Set multiple cookie</button>
         </div>
-        </dt>
-        <dd>
-            [VT301-041/VT301-042/VT301-043/VT301-044]<br/>
-            Sets the font size to be displayed on the page, set to 0 for the smallest font and 4 for the largest font.
-        </dd>
+        <div class="test_scenario_desc">
+            <span class="test_scenario_number">VT301-081</span>
+            <span>Set multiple cookie</span>
+        </div>
+    </div>
 
-
-    </dl>
 
 </div>
+
+<!-- Test any platform but WM  methods -->
+
+
 
 <!--
 
