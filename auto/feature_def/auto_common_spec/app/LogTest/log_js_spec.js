@@ -135,3 +135,4 @@ describe("<log module specs>", function () {
             expect(Rho.Log.fileSize).toEqual(0);
         });
     });
+});
