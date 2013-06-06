@@ -131,14 +131,19 @@ class NativeTabbarTestController < Rho::RhoController
 
   def set_tabbar_forjs
     tabbar = [
-      {:label => 'Tab1', :action => '/public/app/api/webview.html',:reload => true},
+      {:label => 'Tab1', :action => '/public/app/api/webview.html',:reload => false },
       {:label => 'Tab2', :action => '/public/app/api/webview.html',:reload => false},
       {:label => 'Tab3', :action => '/public/app/api/webview.html',:reload => true},
       {:label => 'Tab4', :action => '/public/app/api/webview.html',:reload => true},
       {:label => 'Tab5', :action => '/public/app/api/webview.html',:reload => false}
+      
+      
     ]
-    Rho::NativeTabbar.create(tabbar)
-    
+    Rho::NativeTabbar.create(tabbar, {:createOnInit => true} )
+  end
+  
+  def switch_tab
+    Rho::NativeTabbar.switchTab(@params['tab_index'].to_i())
   end
   
   def set_no_bar_forjs

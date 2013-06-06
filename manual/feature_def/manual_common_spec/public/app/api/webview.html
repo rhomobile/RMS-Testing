@@ -20,16 +20,38 @@
             var element = "#" + id + " span.result";
             $(element).text($.toJSON(string));
         };
+        
+        function tabbarSwitch( nTab ) {
+            Rho.NativeTabbar.switchTab(nTab);
+        }
+        
         $(document).ready(function(){
-            if (!isWindowsMobilePlatform()){
-                $(".wm").hide();
+            // hide all tests
+            $(".method_tests").hide();
+
+            // below show testcase if applicable to current platform
+            if (isAndroidPlatform()){
+                $(".android").show();
             };
+
+            if (isApplePlatform()){
+                $(".ios").show();
+            };
+
+            if (isWindowsDesktopPlatform()){
+                $(".win32").show();
+            };
+
             if (isWindowsMobilePlatform()){
-                $(".nonwm").hide();
+                $(".wm").show();
             };
-            if (!isAndroidPlatform()){
-                $(".android").hide();
+
+            if (isWindowsPhone8Platform()){
+                $(".wp8").show();
             };
+
+            //First click for getting default value
+            $(".getValue").click();
         });
     </script>
 
@@ -49,6 +71,13 @@
             $("#ruby").append('<li><a href="/app/NativeTabbarTest/set_no_bar_forjs">set_no_NativeTabbar</a></li>');
         }
 
+        if ( Rho.System.platform == 'WINDOWS' )
+        {
+        
+            Rho.Application.nativeMenu = [
+                { 'Tab0': 'javascript:tabbarSwitch(0)'}, { 'Tab1': 'javascript:tabbarSwitch(1)'}, {'Tab2': 'javascript:tabbarSwitch(2)'}, {'Tab3': 'javascript:tabbarSwitch(3)'}, {'Tab4': 'javascript:tabbarSwitch(4)'}, {'Exit': 'exit' }
+            ];        
+        }   
     </script>
 </ul>
 
@@ -56,13 +85,13 @@
 
 
 <!-- All platforms tests -->
-<div id="activeTab_test" class="method_tests">
+<div id="activeTab_test" class="method_tests android ios win32 wm wp8">
     <div class="method_name">WebView.activeTab</div>
     <div class="method_desc">An active tab index.</div>
 
     <div class="test_scenario">
         <div class="test_scenario_controls">
-            <button onClick='setDomElementText("activeTab_test", Rho.WebView.activeTab);'> get activeTab</button>
+            <button class="getValue" onClick='setDomElementText("activeTab_test", Rho.WebView.activeTab);'> get activeTab</button>
             <br/>
             <span class="result"></span>
         </div>
@@ -79,7 +108,7 @@
 
     <div class="test_scenario">
         <div class="test_scenario_controls">
-            <button onClick='setDomElementText("cacheSize_test", Rho.WebView.cacheSize);'> get cacheSize</button>
+            <button class="getValue" onClick='setDomElementText("cacheSize_test", Rho.WebView.cacheSize);'> get cacheSize</button>
             <br/>
             <span class="result"></span>
         </div>
@@ -90,13 +119,13 @@
     </div>
 </div>
 
-<div id="enablePageLoadingIndication_test" class="method_tests wm">
+<div id="enablePageLoadingIndication_test" class="method_tests android wm">
     <div class="method_name">WebView.enablePageLoadingIndication</div>
     <div class="method_desc">Show page loading navigation. Defines in config.xml: GUI\HourglassEnabled</div>
 
     <div class="test_scenario">
         <div class="test_scenario_controls">
-            <button onClick='setDomElementText("enablePageLoadingIndication_test", Rho.WebView.enablePageLoadingIndication);'> get enablePageLoadingIndication</button>
+            <button class="getValue" onClick='setDomElementText("enablePageLoadingIndication_test", Rho.WebView.enablePageLoadingIndication);'> get enablePageLoadingIndication</button>
             <br/>
             <span class="result"></span>
         </div>
@@ -113,7 +142,7 @@
 
     <div class="test_scenario">
         <div class="test_scenario_controls">
-            <button onClick='setDomElementText("enableWebPlugins_test", Rho.WebView.enableWebPlugins);'> get enableWebPlugins</button>
+            <button class="getValue" onClick='setDomElementText("enableWebPlugins_test", Rho.WebView.enableWebPlugins);'> get enableWebPlugins</button>
             <br/>
             <span class="result"></span>
         </div>
@@ -152,7 +181,7 @@
 
     <div class="test_scenario">
         <div class="test_scenario_controls">
-            <button onClick='setDomElementText("enableZoom_test", Rho.WebView.enableZoom);'> get enableZoom</button>
+            <button class="getValue" onClick='setDomElementText("enableZoom_test", Rho.WebView.enableZoom);'> get enableZoom</button>
             <br/>
             <span class="result"></span>
         </div>
@@ -191,7 +220,7 @@
 
     <div class="test_scenario">
         <div class="test_scenario_controls">
-            <button onClick='setDomElementText("fontFamily_test", Rho.WebView.fontFamily);'> get fontFamily</button>
+            <button class="getValue" onClick='setDomElementText("fontFamily_test", Rho.WebView.fontFamily);'> get fontFamily</button>
             <br/>
             <span class="result"></span>
         </div>
@@ -202,13 +231,12 @@
     </div>
 </div>
 
-<div id="framework_test" class="method_tests">
+<div id="framework_test" class="method_tests android ios win32 wm wp8">
     <div class="method_name">WebView.framework</div>
     <div class="method_desc">Browser framework identity string.</div>
-
-    <div class="test_scenario">
+   <div class="test_scenario">
         <div class="test_scenario_controls">
-            <button onClick='setDomElementText("framework_test", Rho.WebView.framework);'> get framework</button>
+            <button class="getValue" onClick='setDomElementText("framework_test", Rho.WebView.framework);'> get framework</button>
             <br/>
             <span class="result"></span>
         </div>
@@ -219,13 +247,12 @@
     </div>
 </div>
 
-<div id="fullScreen_test" class="method_tests">
+<div id="fullScreen_test" class="method_tests android ios win32 wm wp8">
     <div class="method_name">WebView.fullScreen</div>
     <div class="method_desc">Use full screen mode.</div>
-
     <div class="test_scenario">
         <div class="test_scenario_controls">
-            <button onClick='setDomElementText("fullScreen_test", Rho.WebView.fullScreen);'> get fullScreen</button>
+            <button class="getValue" onClick='setDomElementText("fullScreen_test", Rho.WebView.fullScreen);'> get fullScreen</button>
             <br/>
             <span class="result"></span>
         </div>
@@ -234,7 +261,6 @@
             <span> Get fullScreen value</span>
         </div>
     </div>
-
     <div class="test_scenario">
         <div class="test_scenario_controls">
             <button onClick='Rho.WebView.fullScreen = true;'>fullScreen = true</button>
@@ -245,7 +271,6 @@
         </div>
         <div style="clear: both"></div>
     </div>
-
     <div class="test_scenario">
         <div class="test_scenario_controls">
             <button onClick='Rho.WebView.fullScreen = false;'>fullScreen = false</button>
@@ -264,7 +289,7 @@
 
     <div class="test_scenario">
         <div class="test_scenario_controls">
-            <button onClick='setDomElementText("scrollTechnique_test", Rho.WebView.scrollTechnique);'> get scrollTechnique</button>
+            <button class="getValue" onClick='setDomElementText("scrollTechnique_test", Rho.WebView.scrollTechnique);'> get scrollTechnique</button>
             <br/>
             <span class="result"></span>
         </div>
@@ -281,7 +306,7 @@
 
     <div class="test_scenario">
         <div class="test_scenario_controls">
-            <button onClick='setDomElementText("userAgent_test", Rho.WebView.userAgent);'> get userAgent</button>
+            <button class="getValue" onClick='setDomElementText("userAgent_test", Rho.WebView.userAgent);'> get userAgent</button>
             <br/>
             <span class="result"></span>
         </div>
@@ -298,8 +323,7 @@
 
     <div class="test_scenario">
         <div class="test_scenario_controls">
-            <button onClick='setDomElementText("viewportEnabled_test", Rho.WebView.viewportEnabled);'> get viewportEnabled</button>
-            <br/>
+            <button class="getValue" onClick='setDomElementText("viewportEnabled_test", Rho.WebView.viewportEnabled);'> get viewportEnabled</button>
             <span class="result"></span>
         </div>
         <div class="test_scenario_desc">
@@ -315,7 +339,7 @@
 
     <div class="test_scenario">
         <div class="test_scenario_controls">
-            <button onClick='setDomElementText("viewportWidth_test", Rho.WebView.viewportWidth);'> get viewportWidth</button>
+            <button class="getValue" onClick='setDomElementText("viewportWidth_test", Rho.WebView.viewportWidth);'> get viewportWidth</button>
             <br/>
             <span class="result"></span>
         </div>
@@ -332,7 +356,7 @@
 
     <div class="test_scenario">
         <div class="test_scenario_controls">
-            <button onClick='setDomElementText("zoomPage_test", Rho.WebView.zoomPage);'> get zoomPage</button>
+            <button class="getValue" onClick='setDomElementText("zoomPage_test", Rho.WebView.zoomPage);'> get zoomPage</button>
             <br/>
             <span class="result"></span>
         </div>
@@ -341,7 +365,6 @@
             <span> Get zoomPage value</span>
         </div>
     </div>
-
     <div class="test_scenario">
         <div class="test_scenario_controls">
             <button onClick='Rho.WebView.zoomPage = 0.5;'>zoomPage = 0.5</button>
@@ -352,7 +375,6 @@
         </div>
         <div style="clear: both"></div>
     </div>
-
     <div class="test_scenario">
         <div class="test_scenario_controls">
             <button onClick='Rho.WebView.zoomPage = 1.5;'>zoomPage = 1.5</button>
@@ -363,7 +385,6 @@
         </div>
         <div style="clear: both"></div>
     </div>
-
     <div class="test_scenario">
         <div class="test_scenario_controls">
             <button onClick='Rho.WebView.zoomPage = 1.0;'>zoomPage = 1.0</button>
@@ -374,7 +395,6 @@
         </div>
         <div style="clear: both"></div>
     </div>
-
     <div class="test_scenario">
         <div class="test_scenario_controls">
             <button onClick='Rho.WebView.zoomPage = -1.0;'>zoomPage = -1.0</button>
@@ -395,8 +415,7 @@
 
     <div class="test_scenario">
         <div class="test_scenario_controls">
-            <button onClick='setDomElementText("textZoomLevel_test", Rho.WebView.textZoomLevel);'> get textZoomLevel</button>
-            <br/>
+            <button class="getValue" onClick='setDomElementText("textZoomLevel_test", Rho.WebView.textZoomLevel);'> get textZoomLevel</button>
             <span class="result"></span>
         </div>
         <div class="test_scenario_desc">
@@ -404,7 +423,6 @@
             <span> Get textZoomLevel value</span>
         </div>
     </div>
-
     <div class="test_scenario">
         <div class="test_scenario_controls">
             <button onClick='Rho.WebView.textZoomLevel = 0;'>textZoomLevel = 0</button>
@@ -415,7 +433,6 @@
         </div>
         <div style="clear: both"></div>
     </div>
-
     <div class="test_scenario">
         <div class="test_scenario_controls">
             <button onClick='Rho.WebView.textZoomLevel = 4;'>textZoomLevel = 4</button>
@@ -426,7 +443,6 @@
         </div>
         <div style="clear: both"></div>
     </div>
-
     <div class="test_scenario">
         <div class="test_scenario_controls">
             <button onClick='Rho.WebView.textZoomLevel = 2;'>textZoomLevel = 2</button>
@@ -437,7 +453,6 @@
         </div>
         <div style="clear: both"></div>
     </div>
-
     <div class="test_scenario">
         <div class="test_scenario_controls">
             <button onClick='Rho.WebView.textZoomLevel = -1;'>textZoomLevel = -1</button>
@@ -458,7 +473,7 @@
 
     <div class="test_scenario">
         <div class="test_scenario_controls">
-            <button onClick='setDomElementText("navigationTimeout_test", Rho.WebView.navigationTimeout);'> get navigationTimeout</button>
+            <button class="getValue" onClick='setDomElementText("navigationTimeout_test", Rho.WebView.navigationTimeout);'> get navigationTimeout</button>
             <br/>
             <span class="result"></span>
         </div>
@@ -467,7 +482,6 @@
             <span> Get navigationTimeout value</span>
         </div>
     </div>
-
     <div class="test_scenario">
         <div class="test_scenario_controls">
             <button onClick='Rho.WebView.navigate("http://www.google.com", 1);'>navigate(google, 1))</button>
@@ -479,7 +493,6 @@
             <span> navigate tab index 1 to google</span>
         </div>
     </div>
-
     <div class="test_scenario">
         <div class="test_scenario_controls">
             <button onClick='Rho.WebView.navigate("http://www.citibank.com", 1);'>navigate(citibank, 1))</button>
@@ -491,7 +504,6 @@
             <span> navigate tab index 1 to citibank</span>
         </div>
     </div>
-
     <div class="test_scenario">
         <div class="test_scenario_controls">
             <button onClick='Rho.WebView.navigationTimeout = 10000;'>navigationTimeout = 10000</button>
@@ -502,7 +514,6 @@
         </div>
         <div style="clear: both"></div>
     </div>
-
     <div class="test_scenario">
         <div class="test_scenario_controls">
             <button onClick='Rho.WebView.navigationTimeout = 5000;'>navigationTimeout = 5000</button>
@@ -513,7 +524,6 @@
         </div>
         <div style="clear: both"></div>
     </div>
-
     <div class="test_scenario">
         <div class="test_scenario_controls">
             <button onClick='Rho.WebView.navigationTimeout = 45000;'>navigationTimeout = 45000</button>
@@ -526,13 +536,13 @@
     </div>
 </div>
 
-<div id="currentLocation_test" class="method_tests">
+<div id="currentLocation_test" class="method_tests android ios win32 wm wp8">
     <div class="method_name">WebView.currentLocation()</div>
-    <div class="method_desc">Returns the url (location) of the current page; the last URL loaded to WebView.</div>
+    <div class="method_desc">Returns the url (location) of the current page; the last URL loaded to WebView from controller action.</div>
     <div><span class="result"></span></div>
     <div class="test_scenario">
         <div class="test_scenario_controls">
-            <button onClick='setDomElementText("currentLocation_test", Rho.WebView.currentLocation());'>currentLocation()</button>
+            <button  class="getValue" onClick='setDomElementText("currentLocation_test", Rho.WebView.currentLocation());'>currentLocation()</button>
         </div>
         <div class="test_scenario_desc">
             <span class="test_scenario_number">VT301-53</span>
@@ -559,7 +569,7 @@
     </div>
 </div>
 
-<div id="navigate_test" class="method_tests">
+<div id="navigate_test" class="method_tests android ios win32 wm wp8">
     <div class="method_name">WebView.navigate()</div>
     <div class="method_desc">Force WebView to navigate to a URL.</div>
 
@@ -604,7 +614,7 @@
     </div>
 </div>
 
-<div id="navigateBack_test" class="method_tests">
+<div id="navigateBack_test" class="method_tests android ios win32 wm wp8">
     <div class="method_name">WebView.navigateBack()</div>
     <div class="method_desc">Force WebView to navigate to the previous page using Browser back.</div>
 
@@ -660,7 +670,7 @@
 
 </div>
 
-<div id="refresh_test" class="method_tests">
+<div id="refresh_test" class="method_tests android ios win32 wm wp8">
     <div class="method_name">WebView.refresh()</div>
     <div class="method_desc">Force WebView to refresh the current page.</div>
 
@@ -777,7 +787,7 @@
 
  -->
 
-<div id="setCookie_test" class="method_tests nonwm">
+<div id="setCookie_test" class="method_tests android ios win32 wp8">
     <div class="method_name">WebView.setCookie()</div>
     <div class="method_desc"> When WebView loads the specified url (either by selecting link or from calling WebView.navigate), it will add this cookie to the HTTP request.</div>
 

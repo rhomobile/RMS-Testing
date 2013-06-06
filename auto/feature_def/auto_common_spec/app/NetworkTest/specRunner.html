@@ -33,11 +33,11 @@
 	</style>
 
 	<!-- include Helper files here... -->
-	<script type="text/javascript" src="barcode_js_test.js" ></script>
+	<script type="text/javascript" src="server_url.js" ></script>
     <script type="text/javascript" src="../helpers/specHelpers.js"></script>
 
 	<!-- include spec files here... -->
-	<script type="text/javascript" src="barcode_js_spec.js"></script>
+	<script type="text/javascript" src="network_js_spec.js"></script>
 
 	<script type="text/javascript">
 
@@ -60,12 +60,6 @@
           if (currentWindowOnload) {
             currentWindowOnload();
           }
-
-        var enumData = Rho.Barcode.enumerate();
-        for (var j = 0;j<enumData.length;j++){
-            //Rho.Log.info($.toJSON(enumData), "PATRO Enum");
-            scannerTest(enumData[j]);
-        }
 
           execJasmine();
         };
