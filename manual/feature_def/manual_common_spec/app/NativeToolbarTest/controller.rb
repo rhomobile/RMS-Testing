@@ -57,6 +57,17 @@ def set_toolbar
     render :action => :index
   end
 
+  def set_minimize_sip
+    toolbar = [
+      {:action => :minimize },
+      {:action => :sip }
+    ]
+    Rho::NativeToolbar.create(toolbar)
+    
+    $tabbar_active = false
+    render :action => :index    
+  end
+  
   def show_main_page
     WebView.navigate '/public/app/index.html'
   end

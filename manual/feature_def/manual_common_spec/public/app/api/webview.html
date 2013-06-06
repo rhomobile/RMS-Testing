@@ -20,6 +20,11 @@
             var element = "#" + id + " span.result";
             $(element).text($.toJSON(string));
         };
+        
+        function tabbarSwitch( nTab ) {
+            Rho.NativeTabbar.switchTab(nTab);
+        }
+        
         $(document).ready(function(){
             if (!isWindowsMobilePlatform()){
                 $(".wm").hide();
@@ -49,6 +54,13 @@
             $("#ruby").append('<li><a href="/app/NativeTabbarTest/set_no_bar_forjs">set_no_NativeTabbar</a></li>');
         }
 
+        if ( Rho.System.platform == 'WINDOWS' )
+        {
+        
+            Rho.Application.nativeMenu = [
+                { 'Tab0': 'javascript:tabbarSwitch(0)'}, { 'Tab1': 'javascript:tabbarSwitch(1)'}, {'Tab2': 'javascript:tabbarSwitch(2)'}, {'Tab3': 'javascript:tabbarSwitch(3)'}, {'Tab4': 'javascript:tabbarSwitch(4)'}, {'Exit': 'exit' }
+            ];        
+        }   
     </script>
 </ul>
 
