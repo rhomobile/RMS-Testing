@@ -15,14 +15,14 @@
             if (!Rho.NativeTabbar.isCreated())
             {
         
-                //Rho.NativeTabbar.create( [ {'label':'tab1', 'action':'/public/app/index.html', 'reload':true}, {'label':'tab2', 'action':'javascript:tabbarCallback2();'} ], {'hiddenTabs': true, 'createOnDemand' : true});
+                //Rho.NativeTabbar.create( [ {'label':'tab1', 'action':'/public/app/index.html', 'reload':true}, {'label':'tab2', 'action':'javascript:tabbarCallback2();'} ], {'hiddenTabs': true, 'createOnInit' : false});
                 
                 Rho.NativeTabbar.create( [ 
                     //{'label':'MainPage', 'action':'/app/HomeScreen/homeScreen', 'useCurrentViewForTab':true},
                     {'label':'MainPage', 'action':'/public/app/api/NativeTabBar_MainPage.html', 'useCurrentViewForTab':true},
                     {'label':'Page1', 'action':'/public/app/api/NativeTabBar_Page1.html'}, 
                     {'label':'Page2', 'action':'/public/app/api/NativeTabBar_Page2.html', 'perishable':'true'} ], 
-                  {'hiddenTabs': true, 'createOnDemand' : true}, tabbarEventHandler );
+                  {'hiddenTabs': true, 'createOnInit' : false}, tabbarEventHandler );
                   
                 Rho.NativeTabbar.switchTab(0);
             }
