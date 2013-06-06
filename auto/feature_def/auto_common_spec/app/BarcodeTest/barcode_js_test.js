@@ -170,8 +170,8 @@ var bar_setget_scanner_property = [
 {
 	testName		:	"VT282-3022 | Set linearSecurityLevel:redundancyAndLength | redundancyAndLength",
 	propertyName	:	"linearSecurityLevel",
-	scannerTypes	:	"All",
-	OSTypes			:	"All",
+	scannerTypes	:	"Laser",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"redundancyAndLength",
 	expectedResult	:	"redundancyAndLength"
 },
@@ -2662,7 +2662,7 @@ var bar_setget_decoder_property = [
 	testName		:	"VT282-4235 | Set ukPostalReportCheckDigit :True  | true",
 	propertyName	:	"ukPostalReportCheckDigit",
 	scannerTypes	:	"All",
-	OSTypes			:	"All",
+	OSTypes			:	"ANDROID",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
@@ -2691,20 +2691,20 @@ var bar_setget_decoder_property = [
 	expectedResult	:	"false"
 },
 {
-	testName		:	"VT282-4239 | Set upcEanBooklandFormat  :isbn10  | isbn10",
+	testName		:	"VT282-4239 | Set upcEanBooklandFormat  :Isbn10  | Isbn10",
 	propertyName	:	"upcEanBooklandFormat",
 	scannerTypes	:	"All",
 	OSTypes			:	"All",
-	propertyValue	:	"isbn10",
-	expectedResult	:	"isbn10"
+	propertyValue	:	"Isbn10",
+	expectedResult	:	"Isbn10"
 },
 {
-	testName		:	"VT282-4240 | Set upcEanBooklandFormat  :isbn13  | isbn13",
+	testName		:	"VT282-4240 | Set upcEanBooklandFormat  :Isbn13  | Isbn13",
 	propertyName	:	"upcEanBooklandFormat",
 	scannerTypes	:	"All",
 	OSTypes			:	"All",
-	propertyValue	:	"isbn13",
-	expectedResult	:	"isbn13"
+	propertyValue	:	"Isbn13",
+	expectedResult	:	"Isbn13"
 },
 {
 	testName		:	"VT282-4241 | Set upcEanConvertGs1dataBarToUpcEan  :true  | true",
@@ -3158,7 +3158,7 @@ var bar_setget_decoder_property = [
 	testName		:	"VT282-4298 | Set usPlanetReportCheckDigit :true  | true",
 	propertyName	:	"usPlanetReportCheckDigit",
 	scannerTypes	:	"All",
-	OSTypes			:	"All",
+	OSTypes			:	"ANDROID",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
