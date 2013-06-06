@@ -1,10 +1,9 @@
 var bar_setget_scanner_property = [
-
 {
 	testName		:	"VT282-3001 | Set rastermode:None  | None",
 	propertyName	:	"rasterMode",
 	scannerTypes	:	"Laser",
-	OSTypes			:	"Windows",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"none",
 	expectedResult	:	"none"
 },
@@ -12,7 +11,7 @@ var bar_setget_scanner_property = [
 	testName		:	"VT282-3002 | Set rastermode:openAlways | openAlways",
 	propertyName	:	"rasterMode",
 	scannerTypes	:	"Laser",
-	OSTypes			:	"Windows",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"openAlways",
 	expectedResult	:	"openAlways"
 },
@@ -20,7 +19,7 @@ var bar_setget_scanner_property = [
 	testName		:	"VT282-3003 | Set rastermode:smart  | smart",
 	propertyName	:	"rasterMode",
 	scannerTypes	:	"Laser",
-	OSTypes			:	"Windows",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"smart",
 	expectedResult	:	"smart"
 },
@@ -28,7 +27,7 @@ var bar_setget_scanner_property = [
 	testName		:	"VT282-3004 | Set rastermode:cyclone | openAlways",
 	propertyName	:	"rasterMode",
 	scannerTypes	:	"Laser",
-	OSTypes			:	"Windows",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"cyclone",
 	expectedResult	:	"cyclone"
 },
@@ -36,7 +35,7 @@ var bar_setget_scanner_property = [
 	testName		:	"VT282-3005 | Set rasterHeight:50 | 50",
 	propertyName	:	"rasterHeight",
 	scannerTypes	:	"Laser",
-	OSTypes			:	"Windows",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"50",
 	expectedResult	:	"50"
 },
@@ -44,7 +43,7 @@ var bar_setget_scanner_property = [
 	testName		:	"VT282-3006 | Set rasterHeight:0 | 0",
 	propertyName	:	"rasterHeight",
 	scannerTypes	:	"Laser",
-	OSTypes			:	"Windows",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"0",
 	expectedResult	:	"0"
 },
@@ -52,7 +51,7 @@ var bar_setget_scanner_property = [
 	testName		:	"VT282-3007 | Set rasterHeight:100 | 100",
 	propertyName	:	"rasterHeight",
 	scannerTypes	:	"Laser",
-	OSTypes			:	"Windows",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"100",
 	expectedResult	:	"100"
 },
@@ -60,7 +59,7 @@ var bar_setget_scanner_property = [
 	testName		:	"VT282-3008 | Set aimMode:none | none",
 	propertyName	:	"aimMode",
 	scannerTypes	:	"Imager",
-	OSTypes			:	"Windows",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"none",
 	expectedResult	:	"none"
 },
@@ -68,7 +67,7 @@ var bar_setget_scanner_property = [
 	testName		:	"VT282-3009 | Set aimMode:dot | dot",
 	propertyName	:	"aimMode",
 	scannerTypes	:	"Laser",
-	OSTypes			:	"Windows",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"dot",
 	expectedResult	:	"dot"
 },
@@ -76,7 +75,7 @@ var bar_setget_scanner_property = [
 	testName		:	"VT282-3010 | Set aimMode:slab | slab",
 	propertyName	:	"aimMode",
 	scannerTypes	:	"Laser",
-	OSTypes			:	"Windows",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"slab",
 	expectedResult	:	"slab"
 },
@@ -84,7 +83,7 @@ var bar_setget_scanner_property = [
 	testName		:	"VT282-3011 | Set aimMode:reticle | reticle",
 	propertyName	:	"aimMode",
 	scannerTypes	:	"Imager",
-	OSTypes			:	"Windows",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"reticle",
 	expectedResult	:	"reticle"
 },
@@ -92,7 +91,7 @@ var bar_setget_scanner_property = [
 	testName		:	"VT282-3012 | Set dpmMode:true | true",
 	propertyName	:	"dpmMode",
 	scannerTypes	:	"Imager",
-	OSTypes			:	"Windows",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
@@ -100,7 +99,7 @@ var bar_setget_scanner_property = [
 	testName		:	"VT282-3013 | Set dpmMode:false | false",
 	propertyName	:	"dpmMode",
 	scannerTypes	:	"Imager",
-	OSTypes			:	"Windows",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
@@ -108,7 +107,7 @@ var bar_setget_scanner_property = [
 	testName		:	"VT282-3014 | Set focusMode:fixed | fixed",
 	propertyName	:	"focusMode",
 	scannerTypes	:	"Imager",
-	OSTypes			:	"Windows",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"fixed",
 	expectedResult	:	"fixed"
 },
@@ -116,7 +115,7 @@ var bar_setget_scanner_property = [
 	testName		:	"VT282-3015 | Set focusMode:auto | auto",
 	propertyName	:	"focusMode",
 	scannerTypes	:	"Imager",
-	OSTypes			:	"Windows",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"auto",
 	expectedResult	:	"auto"
 },
@@ -220,7 +219,7 @@ var bar_setget_scanner_property = [
 	testName		:	"VT282-3028 | Set picklistMode:hardwareReticle | hardwareReticle",
 	propertyName	:	"picklistMode",
 	scannerTypes	:	"All",
-	OSTypes			:	"Windows",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"hardwareReticle",
 	expectedResult	:	"hardwareReticle"
 },
@@ -236,7 +235,7 @@ var bar_setget_scanner_property = [
 	testName		:	"VT282-3030 | Set poorQuality1dMode:true | true",
 	propertyName	:	"poorQuality1dMode",
 	scannerTypes	:	"Imager",
-	OSTypes			:	"Windows",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
@@ -244,7 +243,7 @@ var bar_setget_scanner_property = [
 	testName		:	"VT282-3031 | Set poorQuality1dMode:false | false",
 	propertyName	:	"poorQuality1dMode",
 	scannerTypes	:	"Imager",
-	OSTypes			:	"Windows",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
@@ -252,7 +251,7 @@ var bar_setget_scanner_property = [
 	testName		:	"VT282-3032 | Set poorQuality1dMode:false | false",
 	propertyName	:	"poorQuality1dMode",
 	scannerTypes	:	"Imager",
-	OSTypes			:	"Windows",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
@@ -268,7 +267,7 @@ var bar_setget_scanner_property = [
 	testName		:	"VT282-3034 | Set viewfinderMode:disabled | disabled",
 	propertyName	:	"viewfinderMode",
 	scannerTypes	:	"Imager",
-	OSTypes			:	"Windows",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"disabled",
 	expectedResult	:	"disabled"
 },
@@ -284,7 +283,7 @@ var bar_setget_scanner_property = [
 	testName		:	"VT282-3036 | Set viewfinderMode:staticReticle | dynamicReticle",
 	propertyName	:	"viewfinderMode",
 	scannerTypes	:	"Imager",
-	OSTypes			:	"Windows",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"dynamicReticle",
 	expectedResult	:	"dynamicReticle"
 },
@@ -292,7 +291,7 @@ var bar_setget_scanner_property = [
 	testName		:	"VT282-3037 | Set viewfinderFeedback:enabled | enabled",
 	propertyName	:	"viewfinderFeedback",
 	scannerTypes	:	"Imager",
-	OSTypes			:	"Windows",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"enabled",
 	expectedResult	:	"enabled"
 },
@@ -300,7 +299,7 @@ var bar_setget_scanner_property = [
 	testName		:	"VT282-3038 | Set viewfinderFeedback:disabled | disabled",
 	propertyName	:	"viewfinderFeedback",
 	scannerTypes	:	"Imager",
-	OSTypes			:	"Windows",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"disabled",
 	expectedResult	:	"disabled"
 },
@@ -308,7 +307,7 @@ var bar_setget_scanner_property = [
 	testName		:	"VT282-3039 | Set viewfinderFeedback:reticle | reticle",
 	propertyName	:	"viewfinderFeedback",
 	scannerTypes	:	"Imager",
-	OSTypes			:	"Windows",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"reticle",
 	expectedResult	:	"reticle"
 },
@@ -316,7 +315,7 @@ var bar_setget_scanner_property = [
 	testName		:	"VT282-3040 | Set viewfinderHeight:200 | 200",
 	propertyName	:	"viewfinderHeight",
 	scannerTypes	:	"Imager",
-	OSTypes			:	"Windows",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"200",
 	expectedResult	:	"200"
 },
@@ -324,7 +323,7 @@ var bar_setget_scanner_property = [
 	testName		:	"VT282-3041 | Set viewfinderWidth:250 | 250",
 	propertyName	:	"viewfinderHeight",
 	scannerTypes	:	"Imager",
-	OSTypes			:	"Windows",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"250",
 	expectedResult	:	"250"
 },
@@ -332,7 +331,7 @@ var bar_setget_scanner_property = [
 	testName		:	"VT282-3042 | Set viewfinderX :150 | 150",
 	propertyName	:	"viewfinderHeight",
 	scannerTypes	:	"Imager",
-	OSTypes			:	"Windows",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"150",
 	expectedResult	:	"150"
 },
@@ -340,7 +339,7 @@ var bar_setget_scanner_property = [
 	testName		:	"VT282-3043 | Set viewfinderY :100 | 100",
 	propertyName	:	"viewfinderHeight",
 	scannerTypes	:	"Imager",
-	OSTypes			:	"Windows",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"100",
 	expectedResult	:	"100"
 },
@@ -348,7 +347,7 @@ var bar_setget_scanner_property = [
 	testName		:	"VT282-3044 | Set viewfinderFeedbackTime :4000 | 4000",
 	propertyName	:	"viewfinderFeedbackTime",
 	scannerTypes	:	"Imager",
-	OSTypes			:	"Windows",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"4000",
 	expectedResult	:	"4000"
 },
@@ -356,7 +355,7 @@ var bar_setget_scanner_property = [
 	testName		:	"VT282-3045 | Set viewfinderFeedbackTime :7000 | 7000",
 	propertyName	:	"viewfinderFeedbackTime",
 	scannerTypes	:	"Imager",
-	OSTypes			:	"Windows",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"7000",
 	expectedResult	:	"7000"
 },
@@ -388,7 +387,7 @@ var bar_setget_scanner_property = [
 	testName		:	"VT282-3049 | Set bidirectionalRedundancy :true | true",
 	propertyName	:	"bidirectionalRedundancy",
 	scannerTypes	:	"Laser",
-	OSTypes			:	"Windows",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
@@ -396,7 +395,7 @@ var bar_setget_scanner_property = [
 	testName		:	"VT282-3050 | Set bidirectionalRedundancy :false | false",
 	propertyName	:	"bidirectionalRedundancy",
 	scannerTypes	:	"Laser",
-	OSTypes			:	"Windows",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
@@ -404,7 +403,7 @@ var bar_setget_scanner_property = [
 	testName		:	"VT282-3051 | Set klasseEins :true | true",
 	propertyName	:	"klasseEins",
 	scannerTypes	:	"Laser",
-	OSTypes			:	"Windows",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
@@ -412,7 +411,7 @@ var bar_setget_scanner_property = [
 	testName		:	"VT282-3052 | Set klasseEins :false | false",
 	propertyName	:	"klasseEins",
 	scannerTypes	:	"Laser",
-	OSTypes			:	"Windows",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
@@ -420,7 +419,7 @@ var bar_setget_scanner_property = [
 	testName		:	"VT282-3053 | Set sameSymbolTimeout :5000 | 5000",
 	propertyName	:	"sameSymbolTimeout",
 	scannerTypes	:	"All",
-	OSTypes			:	"Windows",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"5000",
 	expectedResult	:	"5000"
 },
@@ -428,7 +427,7 @@ var bar_setget_scanner_property = [
 	testName		:	"VT282-3054 | Set sameSymbolTimeout :0 | 0",
 	propertyName	:	"sameSymbolTimeout",
 	scannerTypes	:	"All",
-	OSTypes			:	"Windows",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"0",
 	expectedResult	:	"0"
 },
@@ -436,7 +435,7 @@ var bar_setget_scanner_property = [
 	testName		:	"VT282-3055 | Set differentSymbolTimeout :2000 | 2000",
 	propertyName	:	"differentSymbolTimeout",
 	scannerTypes	:	"All",
-	OSTypes			:	"Windows",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"2000",
 	expectedResult	:	"2000"
 },
@@ -444,7 +443,7 @@ var bar_setget_scanner_property = [
 	testName		:	"VT282-3056 | Set differentSymbolTimeout :0 | 0",
 	propertyName	:	"differentSymbolTimeout",
 	scannerTypes	:	"All",
-	OSTypes			:	"Windows",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"0",
 	expectedResult	:	"0"
 },
@@ -452,7 +451,7 @@ var bar_setget_scanner_property = [
 	testName		:	"VT282-3057 | Set adaptiveScanning :true | true",
 	propertyName	:	"adaptiveScanning",
 	scannerTypes	:	"Laser",
-	OSTypes			:	"Windows",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
@@ -460,7 +459,7 @@ var bar_setget_scanner_property = [
 	testName		:	"VT282-3058 | Set adaptiveScanning :false | false",
 	propertyName	:	"adaptiveScanning",
 	scannerTypes	:	"Laser",
-	OSTypes			:	"Windows",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
@@ -468,7 +467,7 @@ var bar_setget_scanner_property = [
 	testName		:	"VT282-3059 | Set dbpMode :normal | normal",
 	propertyName	:	"dbpMode",
 	scannerTypes	:	"Laser",
-	OSTypes			:	"Windows",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"normal",
 	expectedResult	:	"normal"
 },
@@ -476,7 +475,7 @@ var bar_setget_scanner_property = [
 	testName		:	"VT282-3060 | Set dbpMode :composite | composite",
 	propertyName	:	"dbpMode",
 	scannerTypes	:	"Laser",
-	OSTypes			:	"Windows",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"composite",
 	expectedResult	:	"composite"
 },
@@ -484,7 +483,7 @@ var bar_setget_scanner_property = [
 	testName		:	"VT282-3061 | Set timedAimDuration :4000 | 4000",
 	propertyName	:	"timedAimDuration",
 	scannerTypes	:	"All",
-	OSTypes			:	"Windows",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"2000",
 	expectedResult	:	"2000"
 },
@@ -492,7 +491,7 @@ var bar_setget_scanner_property = [
 	testName		:	"VT282-3062 | Set timedAimDuration :1000 | 1000",
 	propertyName	:	"timedAimDuration",
 	scannerTypes	:	"All",
-	OSTypes			:	"Windows",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"1000",
 	expectedResult	:	"1000"
 },
@@ -500,7 +499,7 @@ var bar_setget_scanner_property = [
 	testName		:	"VT282-3063 | Set aimType :trigger | trigger",
 	propertyName	:	"aimType",
 	scannerTypes	:	"All",
-	OSTypes			:	"Windows",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"trigger",
 	expectedResult	:	"trigger"
 },
@@ -508,7 +507,7 @@ var bar_setget_scanner_property = [
 	testName		:	"VT282-3064 | Set aimType :timedHold | timedHold",
 	propertyName	:	"aimType",
 	scannerTypes	:	"All",
-	OSTypes			:	"Windows",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"timedHold",
 	expectedResult	:	"timedHold"
 },
@@ -516,7 +515,7 @@ var bar_setget_scanner_property = [
 	testName		:	"VT282-3065 | Set aimType :timedRelease | timedRelease",
 	propertyName	:	"aimType",
 	scannerTypes	:	"All",
-	OSTypes			:	"Windows",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"timedRelease",
 	expectedResult	:	"timedRelease"
 },
@@ -524,7 +523,7 @@ var bar_setget_scanner_property = [
 	testName		:	"VT282-3066 | Set aimType :presentation | presentation",
 	propertyName	:	"aimType",
 	scannerTypes	:	"All",
-	OSTypes			:	"Windows",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"presentation",
 	expectedResult	:	"presentation"
 },
@@ -532,7 +531,7 @@ var bar_setget_scanner_property = [
 	testName		:	"VT282-3067 | Set aimType :pressAndRelease | pressAndRelease",
 	propertyName	:	"aimType",
 	scannerTypes	:	"All",
-	OSTypes			:	"Windows",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"pressAndRelease",
 	expectedResult	:	"pressAndRelease"
 },
@@ -540,7 +539,7 @@ var bar_setget_scanner_property = [
 	testName		:	"VT282-3068 | Set aimType :continuousRead | continuousRead",
 	propertyName	:	"aimType",
 	scannerTypes	:	"All",
-	OSTypes			:	"Windows",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"continuousRead",
 	expectedResult	:	"continuousRead"
 },
@@ -548,7 +547,7 @@ var bar_setget_scanner_property = [
 	testName		:	"VT282-3069 | Set beamWidth :normal | normal",
 	propertyName	:	"beamWidth",
 	scannerTypes	:	"Laser",
-	OSTypes			:	"Windows",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"normal",
 	expectedResult	:	"normal"
 },
@@ -556,7 +555,7 @@ var bar_setget_scanner_property = [
 	testName		:	"VT282-3070 | Set beamWidth :wide | wide",
 	propertyName	:	"beamWidth",
 	scannerTypes	:	"Laser",
-	OSTypes			:	"Windows",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"wide",
 	expectedResult	:	"wide"
 },
@@ -564,7 +563,7 @@ var bar_setget_scanner_property = [
 	testName		:	"VT282-3071 | Set beamWidth :narrow | narrow",
 	propertyName	:	"beamWidth",
 	scannerTypes	:	"Laser",
-	OSTypes			:	"Windows",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"narrow",
 	expectedResult	:	"narrow"
 },
@@ -572,7 +571,7 @@ var bar_setget_scanner_property = [
 	testName		:	"VT282-3072 | Set barcodeDataFormat :binary | binary",
 	propertyName	:	"barcodeDataFormat",
 	scannerTypes	:	"Imager",
-	OSTypes			:	"Windows",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"binary",
 	expectedResult	:	"binary"
 },
@@ -580,7 +579,7 @@ var bar_setget_scanner_property = [
 	testName		:	"VT282-3073 | Set barcodeDataFormat :text | text",
 	propertyName	:	"barcodeDataFormat",
 	scannerTypes	:	"Imager",
-	OSTypes			:	"Windows",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"text",
 	expectedResult	:	"text"
 },
@@ -588,7 +587,7 @@ var bar_setget_scanner_property = [
 	testName		:	"VT282-3074 | Set dataBufferSize :50000 | 50000",
 	propertyName	:	"dataBufferSize",
 	scannerTypes	:	"Imager",
-	OSTypes			:	"Windows",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"50000",
 	expectedResult	:	"50000"
 },
@@ -596,7 +595,7 @@ var bar_setget_scanner_property = [
 	testName		:	"VT282-3075 | Set dataBufferSize :20000 | 20000",
 	propertyName	:	"dataBufferSize",
 	scannerTypes	:	"Imager",
-	OSTypes			:	"Windows",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"20000",
 	expectedResult	:	"20000"
 },
@@ -604,7 +603,7 @@ var bar_setget_scanner_property = [
 	testName		:	"VT282-3076 | Set dataBufferSize :0 | 0",
 	propertyName	:	"dataBufferSize",
 	scannerTypes	:	"Imager",
-	OSTypes			:	"Windows",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"0",
 	expectedResult	:	"0"
 },
@@ -716,7 +715,7 @@ var bar_setget_scanner_property = [
 	testName		:	"VT282-3090 | Set  lowBatteryScan :true | true",
 	propertyName	:	"lowBatteryScan",
 	scannerTypes	:	"All",
-	OSTypes			:	"Windows",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
@@ -724,7 +723,7 @@ var bar_setget_scanner_property = [
 	testName		:	"VT282-3091 | Set  lowBatteryScan :false | false",
 	propertyName	:	"lowBatteryScan",
 	scannerTypes	:	"All",
-	OSTypes			:	"Windows",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
@@ -779,7 +778,6 @@ var bar_setget_scanner_property = [
 ];
 
 var bar_setget_decoder_property = [
-
 {
 	testName		:	"VT282-4001 | Set allDecoders:True  | true",
 	propertyName	:	"allDecoders",
@@ -1576,7 +1574,7 @@ var bar_setget_decoder_property = [
 	testName		:	"VT282-4099 | Set compositeAbUseUpcPreambleCheckDigitRules  :True  | true",
 	propertyName	:	"compositeAbUseUpcPreambleCheckDigitRules",
 	scannerTypes	:	"Imager",
-	OSTypes			:	"Windows",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
@@ -1584,7 +1582,7 @@ var bar_setget_decoder_property = [
 	testName		:	"VT282-4100 | Set compositeAbUseUpcPreambleCheckDigitRules  :false  | false",
 	propertyName	:	"compositeAbUseUpcPreambleCheckDigitRules",
 	scannerTypes	:	"Imager",
-	OSTypes			:	"Windows",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
@@ -1752,7 +1750,7 @@ var bar_setget_decoder_property = [
 	testName		:	"VT282-4121 | Set ean8convertToEan13  :True  | true",
 	propertyName	:	"ean8convertToEan13",
 	scannerTypes	:	"All",
-	OSTypes			:	"Windows",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
@@ -1760,7 +1758,7 @@ var bar_setget_decoder_property = [
 	testName		:	"VT282-4122 | Set ean8convertToEan13  :false  | false",
 	propertyName	:	"ean8convertToEan13",
 	scannerTypes	:	"All",
-	OSTypes			:	"Windows",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
@@ -1984,7 +1982,7 @@ var bar_setget_decoder_property = [
 	testName		:	"VT282-4150 | Set korean3of5maxLength:0  | 0",
 	propertyName	:	"korean3of5maxLength",
 	scannerTypes	:	"All",
-	OSTypes			:	"Windows",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"0",
 	expectedResult	:	"0"
 },
@@ -1992,7 +1990,7 @@ var bar_setget_decoder_property = [
 	testName		:	"VT282-4151 | Set korean3of5maxLength:10 | 10",
 	propertyName	:	"korean3of5maxLength",
 	scannerTypes	:	"All",
-	OSTypes			:	"Windows",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"10",
 	expectedResult	:	"10"
 },
@@ -2000,7 +1998,7 @@ var bar_setget_decoder_property = [
 	testName		:	"VT282-4152 | Set korean3of5maxLength:55 | 55",
 	propertyName	:	"korean3of5maxLength",
 	scannerTypes	:	"All",
-	OSTypes			:	"Windows",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"55",
 	expectedResult	:	"55"
 },
@@ -2008,7 +2006,7 @@ var bar_setget_decoder_property = [
 	testName		:	"VT282-4153 | Set korean3of5minLength:0  | 0",
 	propertyName	:	"korean3of5minLength",
 	scannerTypes	:	"All",
-	OSTypes			:	"Windows",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"0",
 	expectedResult	:	"0"
 },
@@ -2016,7 +2014,7 @@ var bar_setget_decoder_property = [
 	testName		:	"VT282-4154 | Set korean3of5minLength:10 | 10",
 	propertyName	:	"korean3of5minLength",
 	scannerTypes	:	"All",
-	OSTypes			:	"Windows",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"10",
 	expectedResult	:	"10"
 },
@@ -2024,7 +2022,7 @@ var bar_setget_decoder_property = [
 	testName		:	"VT282-4155 | Set korean3of5minLength:55 | 55",
 	propertyName	:	"korean3of5minLength",
 	scannerTypes	:	"All",
-	OSTypes			:	"Windows",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"55",
 	expectedResult	:	"55"
 },
@@ -2032,7 +2030,7 @@ var bar_setget_decoder_property = [
 	testName		:	"VT282-4156 | Set korean3of5redundancy  :True  | true",
 	propertyName	:	"korean3of5redundancy",
 	scannerTypes	:	"All",
-	OSTypes			:	"Windows",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
@@ -2040,7 +2038,7 @@ var bar_setget_decoder_property = [
 	testName		:	"VT282-4157 | Set korean3of5redundancy  :false  | false",
 	propertyName	:	"korean3of5redundancy",
 	scannerTypes	:	"All",
-	OSTypes			:	"Windows",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
@@ -2048,7 +2046,7 @@ var bar_setget_decoder_property = [
 	testName		:	"VT282-4158 | Set macroMicroPdf  :True  | true",
 	propertyName	:	"macroMicroPdf",
 	scannerTypes	:	"Imager",
-	OSTypes			:	"Windows",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
@@ -2056,7 +2054,7 @@ var bar_setget_decoder_property = [
 	testName		:	"VT282-4159 | Set macroMicroPdf  :false  | false",
 	propertyName	:	"macroMicroPdf",
 	scannerTypes	:	"Imager",
-	OSTypes			:	"Windows",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
@@ -2064,7 +2062,7 @@ var bar_setget_decoder_property = [
 	testName		:	"VT282-4160 | Set macroMicroPdfBufferLabels  :True  | true",
 	propertyName	:	"macroMicroPdfBufferLabels",
 	scannerTypes	:	"Imager",
-	OSTypes			:	"Windows",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
@@ -2072,7 +2070,7 @@ var bar_setget_decoder_property = [
 	testName		:	"VT282-4161 | Set macroMicroPdfBufferLabels  :false  | false",
 	propertyName	:	"macroMicroPdfBufferLabels",
 	scannerTypes	:	"Imager",
-	OSTypes			:	"Windows",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
@@ -2080,7 +2078,7 @@ var bar_setget_decoder_property = [
 	testName		:	"VT282-4162 | Set macroMicroPdfBufferLabels  :True  | true",
 	propertyName	:	"macroMicroPdfBufferLabels",
 	scannerTypes	:	"Imager",
-	OSTypes			:	"Windows",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
@@ -2088,7 +2086,7 @@ var bar_setget_decoder_property = [
 	testName		:	"VT282-4163 | Set macroMicroPdfBufferLabels  :false  | false",
 	propertyName	:	"macroMicroPdfBufferLabels",
 	scannerTypes	:	"Imager",
-	OSTypes			:	"Windows",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
@@ -2096,7 +2094,7 @@ var bar_setget_decoder_property = [
 	testName		:	"VT282-4164 | Set macroMicroPdfConvertToMicroPdf  :True  | true",
 	propertyName	:	"macroMicroPdfConvertToMicroPdf",
 	scannerTypes	:	"Imager",
-	OSTypes			:	"Windows",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
@@ -2104,7 +2102,7 @@ var bar_setget_decoder_property = [
 	testName		:	"VT282-4165 | Set macroMicroPdfConvertToMicroPdf  :false  | false",
 	propertyName	:	"macroMicroPdfConvertToMicroPdf",
 	scannerTypes	:	"Imager",
-	OSTypes			:	"Windows",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
@@ -2112,7 +2110,7 @@ var bar_setget_decoder_property = [
 	testName		:	"VT282-4166 | Set macroMicroPdfExclusive  :True  | true",
 	propertyName	:	"macroMicroPdfExclusive",
 	scannerTypes	:	"Imager",
-	OSTypes			:	"Windows",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
@@ -2120,7 +2118,7 @@ var bar_setget_decoder_property = [
 	testName		:	"VT282-4167 | Set macroMicroPdfExclusive  :false  | false",
 	propertyName	:	"macroMicroPdfExclusive",
 	scannerTypes	:	"Imager",
-	OSTypes			:	"Windows",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
@@ -2128,7 +2126,7 @@ var bar_setget_decoder_property = [
 	testName		:	"VT282-4168 | Set macroMicroPdfReportAppendInfo  :True  | true",
 	propertyName	:	"macroMicroPdfReportAppendInfo",
 	scannerTypes	:	"Imager",
-	OSTypes			:	"Windows",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
@@ -2136,7 +2134,7 @@ var bar_setget_decoder_property = [
 	testName		:	"VT282-4169 | Set macroMicroPdfReportAppendInfo  :false  | false",
 	propertyName	:	"macroMicroPdfReportAppendInfo",
 	scannerTypes	:	"Imager",
-	OSTypes			:	"Windows",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
@@ -2144,7 +2142,7 @@ var bar_setget_decoder_property = [
 	testName		:	"VT282-4170 | Set macroPdf  :True  | true",
 	propertyName	:	"macroPdf",
 	scannerTypes	:	"Imager",
-	OSTypes			:	"Windows",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
@@ -2152,7 +2150,7 @@ var bar_setget_decoder_property = [
 	testName		:	"VT282-4171 | Set macroPdf  :false  | false",
 	propertyName	:	"macroPdf",
 	scannerTypes	:	"Imager",
-	OSTypes			:	"Windows",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
@@ -2160,7 +2158,7 @@ var bar_setget_decoder_property = [
 	testName		:	"VT282-4172 | Set macroPdfBufferLabels  :True  | true",
 	propertyName	:	"macroPdfBufferLabels",
 	scannerTypes	:	"Imager",
-	OSTypes			:	"Windows",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
@@ -2168,7 +2166,7 @@ var bar_setget_decoder_property = [
 	testName		:	"VT282-4173 | Set macroPdfBufferLabels  :false  | false",
 	propertyName	:	"macroPdfBufferLabels",
 	scannerTypes	:	"Imager",
-	OSTypes			:	"Windows",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
@@ -2176,7 +2174,7 @@ var bar_setget_decoder_property = [
 	testName		:	"VT282-4174 | Set macroPdfConvertToPdf417  :True  | true",
 	propertyName	:	"macroPdfConvertToPdf417",
 	scannerTypes	:	"Imager",
-	OSTypes			:	"Windows",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
@@ -2184,7 +2182,7 @@ var bar_setget_decoder_property = [
 	testName		:	"VT282-4175 | Set macroPdfConvertToPdf417  :false  | false",
 	propertyName	:	"macroPdfConvertToPdf417",
 	scannerTypes	:	"Imager",
-	OSTypes			:	"Windows",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
@@ -2192,7 +2190,7 @@ var bar_setget_decoder_property = [
 	testName		:	"VT282-4176 | Set macroPdfExclusive  :True  | true",
 	propertyName	:	"macroPdfExclusive",
 	scannerTypes	:	"Imager",
-	OSTypes			:	"Windows",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
@@ -2200,7 +2198,7 @@ var bar_setget_decoder_property = [
 	testName		:	"VT282-4177 | Set macroPdfExclusive  :false  | false",
 	propertyName	:	"macroPdfExclusive",
 	scannerTypes	:	"Imager",
-	OSTypes			:	"Windows",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
@@ -2512,7 +2510,7 @@ var bar_setget_decoder_property = [
 	testName		:	"VT282-4216 | Set signature :True  | true",
 	propertyName	:	"signature",
 	scannerTypes	:	"Imager",
-	OSTypes			:	"Windows",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
@@ -2520,7 +2518,7 @@ var bar_setget_decoder_property = [
 	testName		:	"VT282-4217 | Set signature :false  | false",
 	propertyName	:	"signature",
 	scannerTypes	:	"Imager",
-	OSTypes			:	"Windows",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
@@ -2528,7 +2526,7 @@ var bar_setget_decoder_property = [
 	testName		:	"VT282-4218 | Set signatureImageHeight :20  | 20",
 	propertyName	:	"signatureImageHeight",
 	scannerTypes	:	"Imager",
-	OSTypes			:	"Windows",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"20",
 	expectedResult	:	"20"
 },
@@ -2536,7 +2534,7 @@ var bar_setget_decoder_property = [
 	testName		:	"VT282-4219 | Set signatureImageHeight :200  | 200",
 	propertyName	:	"signatureImageHeight",
 	scannerTypes	:	"Imager",
-	OSTypes			:	"Windows",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"200",
 	expectedResult	:	"200"
 },
@@ -2544,7 +2542,7 @@ var bar_setget_decoder_property = [
 	testName		:	"VT282-4220 | Set signatureImageHeight :400  | 400",
 	propertyName	:	"signatureImageHeight",
 	scannerTypes	:	"Imager",
-	OSTypes			:	"Windows",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"400",
 	expectedResult	:	"400"
 },
@@ -2552,7 +2550,7 @@ var bar_setget_decoder_property = [
 	testName		:	"VT282-4221 | Set signatureImageWidth :20  | 20",
 	propertyName	:	"signatureImageWidth",
 	scannerTypes	:	"Imager",
-	OSTypes			:	"Windows",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"20",
 	expectedResult	:	"20"
 },
@@ -2560,7 +2558,7 @@ var bar_setget_decoder_property = [
 	testName		:	"VT282-4222 | Set signatureImageWidth :250  | 250",
 	propertyName	:	"signatureImageWidth",
 	scannerTypes	:	"Imager",
-	OSTypes			:	"Windows",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"250",
 	expectedResult	:	"250"
 },
@@ -2568,7 +2566,7 @@ var bar_setget_decoder_property = [
 	testName		:	"VT282-4223 | Set signatureImageWidth :350  | 350",
 	propertyName	:	"signatureImageWidth",
 	scannerTypes	:	"Imager",
-	OSTypes			:	"Windows",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"350",
 	expectedResult	:	"350"
 },
@@ -2576,7 +2574,7 @@ var bar_setget_decoder_property = [
 	testName		:	"VT282-4224 | Set signatureImageQuality :1  | 1",
 	propertyName	:	"signatureImageQuality",
 	scannerTypes	:	"Imager",
-	OSTypes			:	"Windows",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"1",
 	expectedResult	:	"1"
 },
@@ -2584,7 +2582,7 @@ var bar_setget_decoder_property = [
 	testName		:	"VT282-4225 | Set signatureImageQuality :50  | 50",
 	propertyName	:	"signatureImageQuality",
 	scannerTypes	:	"Imager",
-	OSTypes			:	"Windows",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"50",
 	expectedResult	:	"50"
 },
@@ -2592,7 +2590,7 @@ var bar_setget_decoder_property = [
 	testName		:	"VT282-4226 | Set signatureImageQuality :100  | 100",
 	propertyName	:	"signatureImageQuality",
 	scannerTypes	:	"Imager",
-	OSTypes			:	"Windows",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"100",
 	expectedResult	:	"100"
 },
@@ -3249,4 +3247,26 @@ var bar_setget_decoder_property = [
 var scanCallback = function (data){
 
 };
+
+function scannertype(type, scnnam)
+{	
+	if(type == "All")
+	{ 
+		return true;
+	}
+		
+	else if (scnnam.indexOf(type) != -1)
+	{
+		return true;
+	}
+	else if ((scnnam.indexOf("Camera") != -1) && type == "Imager")
+	{
+		return true;		
+	}
+	else
+	{
+		return false;
+	}	
+}
+
 
