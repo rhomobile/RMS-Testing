@@ -119,10 +119,14 @@ function callopenUrl(openurlValue)
 	Rho.System.openUrl(openurlValue);
 }
 
-function callreplaceCurrentBundle()
+function callreplaceCurrentBundleWindows()
 {
-	//Need to add path and hash
-	Rho.System.replaceCurrentBundle("http://192.168.6.27/filestoinstall/", {});
+	Rho.System.replaceCurrentBundle("http://'+server2+'/SystemJS.cab", {do_not_restart_app:false, not_thread_mode:true});
+}
+
+function callreplaceCurrentBundleAndroid()
+{
+	Rho.System.replaceCurrentBundle("http://'+server2+'/SystemJS.apk", {do_not_restart_app:false, not_thread_mode:true});
 }
 
 function CallsetDoNotBackupAttribute(pathValue, doNotBackupValue)
