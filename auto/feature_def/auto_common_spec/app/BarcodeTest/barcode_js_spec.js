@@ -35,7 +35,7 @@ describe("Scanner Test", function() {
 				});
 			});
 
-			describe("Scanner property Using set/getProperty "+ scntype +": "+ scnname, function() {
+			describe("Barcode property using set/getProperty for "+ scntype +": "+ scnname, function() {
 
 				for (var i=0;i<arrScanner.length;i++){
 
@@ -52,7 +52,7 @@ describe("Scanner Test", function() {
 				}
 			});
 
-			describe("Scanner property Using set/getProperties "+ scntype +": "+ scnname, function() {
+			describe("Barcode property Using set/getProperties for "+ scntype +": "+ scnname, function() {
 
 				for (var i=0;i<arrScanner.length;i++){
 
@@ -92,7 +92,7 @@ describe("Scanner Test", function() {
 				}
 			});
 
-			describe("Scanner property setting Directly "+ scntype +": "+ scnname, function() {
+			describe("Barcode property setting Directly for "+ scntype +": "+ scnname, function() {
 
 				for (var i=0;i<arrScanner.length;i++){
 
@@ -129,7 +129,7 @@ describe("Scanner Test", function() {
 				}
 			});
 
-			describe("Scanner property set Using Enable "+ scntype +": "+ scnname, function() {
+			describe("Barcode property set using enable() for "+ scntype +": "+ scnname, function() {
 
 				var flag = false;
 
