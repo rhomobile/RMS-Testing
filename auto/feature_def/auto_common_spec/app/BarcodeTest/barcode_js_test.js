@@ -763,7 +763,7 @@ var arr_scanner_property = [
 	testName		:	"VT282-3096 | Set  hapticFeedback :true | true",
 	propertyName	:	"hapticFeedback",
 	scannerTypes	:	"All",
-	OSTypes			:	"All",
+	OSTypes			:	"ANDROID",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
@@ -771,7 +771,7 @@ var arr_scanner_property = [
 	testName		:	"VT282-3097 | Set  hapticFeedback :false| false",
 	propertyName	:	"hapticFeedback",
 	scannerTypes	:	"All",
-	OSTypes			:	"All",
+	OSTypes			:	"ANDROID",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
@@ -2229,7 +2229,7 @@ var arr_scanner_property = [
 	scannerTypes	:	"All",
 	OSTypes			:	"All",
 	propertyValue	:	"01",
-	expectedResult	:	"01"
+	expectedResult	:	"1"
 },
 {
 	testName		:	"VT282-4182 | Set matrix2of5maxLength:55 | 55",
@@ -2253,7 +2253,7 @@ var arr_scanner_property = [
 	scannerTypes	:	"All",
 	OSTypes			:	"All",
 	propertyValue	:	"09",
-	expectedResult	:	"09"
+	expectedResult	:	"9"
 },
 {
 	testName		:	"VT282-4185 | Set matrix2of5minLength:55 | 55",
@@ -2392,48 +2392,48 @@ var arr_scanner_property = [
 	expectedResult	:	"two"
 },
 {
-	testName		:	"VT282-4202 | Set msimaxLength:0  | 0",
-	propertyName	:	"msimaxLength",
+	testName		:	"VT282-4202 | Set msiMaxLength:0  | 0",
+	propertyName	:	"msiMaxLength",
 	scannerTypes	:	"All",
 	OSTypes			:	"All",
 	propertyValue	:	"0",
 	expectedResult	:	"0"
 },
 {
-	testName		:	"VT282-4203 | Set msimaxLength:7 | 7",
-	propertyName	:	"msimaxLength",
+	testName		:	"VT282-4203 | Set msiMaxLength:7 | 7",
+	propertyName	:	"msiMaxLength",
 	scannerTypes	:	"All",
 	OSTypes			:	"All",
 	propertyValue	:	"7",
 	expectedResult	:	"7"
 },
 {
-	testName		:	"VT282-4204 | Set msimaxLength:55 | 55",
-	propertyName	:	"msimaxLength",
+	testName		:	"VT282-4204 | Set msiMaxLength:55 | 55",
+	propertyName	:	"msiMaxLength",
 	scannerTypes	:	"All",
 	OSTypes			:	"All",
 	propertyValue	:	"55",
 	expectedResult	:	"55"
 },
 {
-	testName		:	"VT282-4205 | Set msiminLength:0  | 0",
-	propertyName	:	"msiminLength",
+	testName		:	"VT282-4205 | Set msiMinLength:0  | 0",
+	propertyName	:	"msiMinLength",
 	scannerTypes	:	"All",
 	OSTypes			:	"All",
 	propertyValue	:	"0",
 	expectedResult	:	"0"
 },
 {
-	testName		:	"VT282-4206 | Set msiminLength:8 | 8",
-	propertyName	:	"msiminLength",
+	testName		:	"VT282-4206 | Set msiMinLength:8 | 8",
+	propertyName	:	"msiMinLength",
 	scannerTypes	:	"All",
 	OSTypes			:	"All",
 	propertyValue	:	"8",
 	expectedResult	:	"8"
 },
 {
-	testName		:	"VT282-4207 | Set msiminLength:55 | 55",
-	propertyName	:	"msiminLength",
+	testName		:	"VT282-4207 | Set msiMinLength:55 | 55",
+	propertyName	:	"msiMinLength",
 	scannerTypes	:	"All",
 	OSTypes			:	"All",
 	propertyValue	:	"55",
@@ -2568,12 +2568,12 @@ var arr_scanner_property = [
 	expectedResult	:	"350"
 },
 {
-	testName		:	"VT282-4224 | Set signatureImageQuality :1  | 1",
+	testName		:	"VT282-4224 | Set signatureImageQuality :10  | 10",
 	propertyName	:	"signatureImageQuality",
 	scannerTypes	:	"Imager",
 	OSTypes			:	"WINDOWS",
-	propertyValue	:	"1",
-	expectedResult	:	"1"
+	propertyValue	:	"10",
+	expectedResult	:	"10"
 },
 {
 	testName		:	"VT282-4225 | Set signatureImageQuality :50  | 50",
@@ -2992,24 +2992,24 @@ var arr_scanner_property = [
 	expectedResult	:	"false"
 },
 {
-	testName		:	"VT282-4277 | Set upce0Preamble  :none  | none",
-	propertyName	:	"upce0Preamble",
+	testName		:	"VT282-4277 | Set upce0preamble  :none  | none",
+	propertyName	:	"upce0preamble",
 	scannerTypes	:	"All",
 	OSTypes			:	"All",
 	propertyValue	:	"none",
 	expectedResult	:	"none"
 },
 {
-	testName		:	"VT282-4278 | Set upce0Preamble  :systemChar  | systemChar",
-	propertyName	:	"upce0Preamble",
+	testName		:	"VT282-4278 | Set upce0preamble  :systemChar  | systemChar",
+	propertyName	:	"upce0preamble",
 	scannerTypes	:	"All",
 	OSTypes			:	"All",
 	propertyValue	:	"systemChar",
 	expectedResult	:	"systemChar"
 },
 {
-	testName		:	"VT282-4279 | Set upce0Preamble  :countryAndSystemChars  | countryAndSystemChars",
-	propertyName	:	"upce0Preamble",
+	testName		:	"VT282-4279 | Set upce0preamble  :countryAndSystemChars  | countryAndSystemChars",
+	propertyName	:	"upce0preamble",
 	scannerTypes	:	"All",
 	OSTypes			:	"All",
 	propertyValue	:	"countryAndSystemChars",
@@ -3064,24 +3064,24 @@ var arr_scanner_property = [
 	expectedResult	:	"false"
 },
 {
-	testName		:	"VT282-4286 | Set upce1Preamble:none  | none",
-	propertyName	:	"upce1Preamble",
+	testName		:	"VT282-4286 | Set upce1preamble:none  | none",
+	propertyName	:	"upce1preamble",
 	scannerTypes	:	"All",
 	OSTypes			:	"All",
 	propertyValue	:	"none",
 	expectedResult	:	"none"
 },
 {
-	testName		:	"VT282-4287 | Set upce1Preamble:systemChar  | systemChar",
-	propertyName	:	"upce1Preamble",
+	testName		:	"VT282-4287 | Set upce1preamble:systemChar  | systemChar",
+	propertyName	:	"upce1preamble",
 	scannerTypes	:	"All",
 	OSTypes			:	"All",
 	propertyValue	:	"systemChar",
 	expectedResult	:	"systemChar"
 },
 {
-	testName		:	"VT282-4288 | Set upce1Preamble :countryAndSystemChars  | countryAndSystemChars",
-	propertyName	:	"upce1Preamble",
+	testName		:	"VT282-4288 | Set upce1preamble :countryAndSystemChars  | countryAndSystemChars",
+	propertyName	:	"upce1preamble",
 	scannerTypes	:	"All",
 	OSTypes			:	"All",
 	propertyValue	:	"countryAndSystemChars",
@@ -3187,7 +3187,7 @@ var arr_scanner_property = [
 	testName		:	"VT282-4302 | Set usPostNetReportCheckDigit :true  | true",
 	propertyName	:	"usPostNetReportCheckDigit",
 	scannerTypes	:	"All",
-	OSTypes			:	"All",
+	OSTypes			:	"ANDROID",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
@@ -3195,7 +3195,7 @@ var arr_scanner_property = [
 	testName		:	"VT282-4303 | Set usPostNetReportCheckDigit :false  | false",
 	propertyName	:	"usPostNetReportCheckDigit",
 	scannerTypes	:	"All",
-	OSTypes			:	"All",
+	OSTypes			:	"ANDROID",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
