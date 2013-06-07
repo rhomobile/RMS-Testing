@@ -4,11 +4,21 @@
     <script src="/public/jquery/jquery-1.6.4.min.js" type="text/javascript"></script>
     <script src="/public/jquery/jquery.json-2.3.min.js" type="text/javascript"></script>
     <script type="text/javascript" charset="utf-8" src="/public/api/rhoapi-modules.js"></script>
+    <script type="text/javascript" charset="utf-8" src="/public/js/server_url.js"></script>
+
     <script type="text/javascript">
 var selected_Module="";
-
+        
 function getmodulename()
 {
+    var srvHost = SERVER_HOST;
+    var srvPort = SERVER_PORT;
+    var srvHttpUrl = "http://" + srvHost + ":" + srvPort.toString();
+    var srvHttpTestMethodsUrl = srvHttpUrl + "/test_methods";
+    var srvHttpDownloadImageUrl = srvHttpUrl + "/download_image";
+    var srvHttpDownloadImageUrlAuth = srvHttpUrl + "/download_image_auth";
+    var srvHttpUploadTextFileUrl = srvHttpUrl + "/upload_text_file";
+
 
 //var index = document.controlForm.myChoice.selectedIndex;
 //selected_Module = document.controlForm.myChoice.options[index].value;
@@ -95,8 +105,8 @@ myDiv.innerHTML="Please press the cancel button on the page to cancel the callba
 if(selected_Module=="VT293-0014")
 {
       detectconnectionProps = {
-        host: "192.168.6.18",
-        port: 80
+        host: srvHost,
+        port: srvPort
       };
   Rho.Network.detectConnection(detectconnectionProps, detect_connection_notify_callback);
 }
@@ -104,8 +114,8 @@ if(selected_Module=="VT293-0015")
 {
 myDiv.innerHTML ="This test will fail because callback is mandatory for detectConnection method"
      detectconnectionProps = {
-        host: "192.168.6.18",
-        port: 80
+        host: srvHost,
+        port: srvPort
       };
   myvar = Rho.Network.detectConnection(detectconnectionProps);
   myDiv.innerHTML="Detect Connection :"+myvar["connectionInformation"];
@@ -113,8 +123,8 @@ myDiv.innerHTML ="This test will fail because callback is mandatory for detectCo
 if(selected_Module=="VT293-0016")
 {
       detectconnectionProps = {
-        host: "192.168.6.18",
-        port: 80
+        host: srvHost,
+        port: srvPort
       };
   Rho.Network.detectConnection(detectconnectionProps, function(params){
 if(params["connectionInformation"] == "Disconnected")
@@ -126,8 +136,8 @@ else
 if(selected_Module=="VT293-0017")
 {
       detectconnectionProps = {
-        host: "192.168.6.18",
-        port: 80
+        host: srvHost,
+        port: srvPort
       };
   Rho.Network.detectConnection(detectconnectionProps, detect_connection_notify_callback);
 }
@@ -190,8 +200,8 @@ if(selected_Module=="VT293-0024")
 {
 myDiv.innerHTML="Please press the stop_detecting_connection button on the page to stop detecting network";
       detectconnectionProps = {
-        host: "192.168.6.18",
-        port: 80,
+        host: srvHost,
+        port: srvPort,
 		pollInterval: 6000,
 		detectionTimeout: 5000
       };
@@ -313,7 +323,7 @@ if(selected_Module=="VT293-0042")
 if(selected_Module=="VT293-0043")
 {
     postProps = {
-        url: "https://192.168.6.27/rhodes/AsyncHttp/asyncpost.php",
+        url: srvHttpTestMethodsUrl,
 		body: "data1=test&data2=test2",
 		verifyPeerCertificate: false
 	 };
@@ -322,7 +332,7 @@ if(selected_Module=="VT293-0043")
 if(selected_Module=="VT293-0044")
 {
     postProps = {
-        url: "https://192.168.6.27/rhodes/AsyncHttp/asyncpost.php",
+        url: srvHttpTestMethodsUrl,
 		body: "data1=test&data2=test2",
 		verifyPeerCertificate: false
 	 };
@@ -332,7 +342,7 @@ if(selected_Module=="VT293-0044")
 if(selected_Module=="VT293-0045")
 {
     postProps = {
-        url: "https://192.168.6.27/rhodes/AsyncHttp/asyncpost.php",
+        url: srvHttpTestMethodsUrl,
 		body: "data1=test&data2=test2",
 		verifyPeerCertificate: false
 	 };
@@ -346,14 +356,14 @@ if(selected_Module=="VT293-0045")
 if(selected_Module=="VT293-0046")
 {
     getProps = {
-        url: "http://192.168.6.27/rhodes/AsyncHttp/asyncget.php?data1=test&data2=test2"
+        url: srvHttpTestMethodsUrl,
       };
    Rho.Network.get(getProps, get_callback);
 }
 if(selected_Module=="VT293-0047")
 {
     getProps = {
-        url: "http://192.168.6.27/rhodes/AsyncHttp/asyncget.php?data1=test&data2=test2"
+        url: srvHttpTestMethodsUrl,
       };
    myvar = Rho.Network.get(getProps);
    myDiv.innerHTML="Body: "+myvar["body"]
@@ -361,7 +371,7 @@ if(selected_Module=="VT293-0047")
 if(selected_Module=="VT293-0048")
 {
     getProps = {
-        url: "http://192.168.6.27/rhodes/AsyncHttp/asyncget.php?data1=test&data2=test2"
+        url: srvHttpTestMethodsUrl,
       };
    Rho.Network.get(getProps, function(params){
 // get callback		
@@ -373,7 +383,7 @@ if(selected_Module=="VT293-0048")
 if(selected_Module=="VT293-0049")
 {
       downloadfileProps = {
-        url: "http://192.168.6.27/rhodes/AsyncHttp/screen.jpg",
+        url: srvHttpDownloadImageUrl,
         filename: Rho.Application.publicFolder+"/images/network.jpg"
       };
  Rho.Network.downloadFile(downloadfileProps, download_file_callback);
@@ -381,7 +391,7 @@ if(selected_Module=="VT293-0049")
 if(selected_Module=="VT293-0050")
 {
       downloadfileProps = {
-        url: "http://192.168.6.27/rhodes/AsyncHttp/screen.jpg",
+        url: srvHttpDownloadImageUrl,
         filename: Rho.Application.publicFolder+"/images/network.jpg"
       };
  Rho.Network.downloadFile(downloadfileProps, download_file_callback);
@@ -389,7 +399,7 @@ if(selected_Module=="VT293-0050")
 if(selected_Module=="VT293-0051")
 {
       downloadfileProps = {
-        url: "http://192.168.6.27/rhodes/AsyncHttp/screen.jpg",
+        url: srvHttpDownloadImageUrl,
         filename: Rho.Application.publicFolder+"/images/network.jpg",
         overwriteFile: true
       };
@@ -398,7 +408,7 @@ if(selected_Module=="VT293-0051")
 if(selected_Module=="VT293-0052")
 {
       downloadfileProps = {
-        url: "http://192.168.6.27/rhodes/AsyncHttp/screen.jpg",
+        url: srvHttpDownloadImageUrl,
         filename: Rho.Application.publicFolder+"/images/network/network.jpg",
         overwriteFile: true
       };
@@ -407,7 +417,7 @@ if(selected_Module=="VT293-0052")
 if(selected_Module=="VT293-0053")
 {
       downloadfileProps = {
-        url: "http://192.168.6.27/rhodes/AsyncHttp/screen.jpg",
+        url: srvHttpDownloadImageUrl,
         filename: Rho.Application.publicFolder+"/images/network/network.jpg",
         overwriteFile: true,
 		createFolders: false
@@ -417,7 +427,7 @@ if(selected_Module=="VT293-0053")
 if(selected_Module=="VT293-0054")
 {
       downloadfileProps = {
-        url: "http://192.168.6.27/rhodes/AsyncHttp/screen.jpg",
+        url: srvHttpDownloadImageUrl,
         filename: Rho.Application.publicFolder+"/images/network/network.jpg",
         overwriteFile: true,
 		createFolders: true
@@ -427,7 +437,7 @@ if(selected_Module=="VT293-0054")
 if(selected_Module=="VT293-0055")
 {
       downloadfileProps = {
-        url: "http://192.168.6.27/rhodes/AsyncHttp/screen.jpg",
+        url: srvHttpDownloadImageUrl,
         filename: Rho.Application.publicFolder+"/images/network/network.jpg",
         overwriteFile: true,
 		createFolders: true
@@ -451,7 +461,7 @@ if(selected_Module=="VT293-0055")
 if(selected_Module=="VT293-0056")
 {
       downloadfileProps = {
-        url: "http://192.168.6.27/rhodes/AsyncHttp/screen.jpg",
+        url: srvHttpDownloadImageUrl,
         filename: Rho.Application.publicFolder+"/images/network/network.jpg",
         overwriteFile: invalid,
 		createFolders: true
@@ -461,7 +471,7 @@ if(selected_Module=="VT293-0056")
 if(selected_Module=="VT293-0057")
 {
       downloadfileProps = {
-        url: "http://192.168.6.27/rhodes/AsyncHttp/screen.jpg",
+        url: srvHttpDownloadImageUrl,
         filename: Rho.Application.publicFolder+"/images/network/network.jpg",
         overwriteFile: "",
 		createFolders: true
@@ -471,7 +481,7 @@ if(selected_Module=="VT293-0057")
 if(selected_Module=="VT293-0058")
 {
       downloadfileProps = {
-        url: "http://192.168.6.27/rhodes/AsyncHttp/screen.jpg",
+        url: srvHttpDownloadImageUrl,
         filename: Rho.Application.publicFolder+"/images/network/network.jpg",
         overwriteFile: true,
 		createFolders: invalid
@@ -481,7 +491,7 @@ if(selected_Module=="VT293-0058")
 if(selected_Module=="VT293-0059")
 {
       downloadfileProps = {
-        url: "http://192.168.6.27/rhodes/AsyncHttp/screen.jpg",
+        url: srvHttpDownloadImageUrl,
         filename: Rho.Application.publicFolder+"/images/network/network.jpg",
         overwriteFile: true,
 		createFolders: ""
@@ -491,7 +501,7 @@ if(selected_Module=="VT293-0059")
 if(selected_Module=="VT293-0060")
 {
       downloadfileProps = {
-        url: "http://192.168.6.27/rhodes/secure/screen.jpg",
+        url: srvHttpDownloadImageUrlAuth,
 		authType: "basic",
 		authUser: "admin",
 		authPassword: "admin",
@@ -504,7 +514,7 @@ if(selected_Module=="VT293-0060")
 if(selected_Module=="VT293-0061")
 {
       downloadfileProps = {
-        url: "http://192.168.6.27/rhod/screen.jpg",
+        url: srvHttpDownloadImageUrlAuth,
 		authType: "basic",
 		authUser: "admin",
 		authPassword: "admin",
@@ -530,7 +540,7 @@ if(selected_Module=="VT293-0062")
 if(selected_Module=="VT293-0063")
 {
       downloadfileProps = {
-        url: "http://192.168.6.27/rhodes/secure/screen.jpg",
+        url: srvHttpDownloadImageUrlAuth,
 		authType: "basic",
 		authUser: "admin",
 		authPassword: "admin",
@@ -543,7 +553,7 @@ if(selected_Module=="VT293-0063")
 if(selected_Module=="VT293-0064")
 {
       downloadfileProps = {
-        url: "http://192.168.6.27/rhodes/secure/screen.jpg",
+        url: srvHttpDownloadImageUrlAuth,
 		authType: "basic",
 		authUser: "admin",
 		authPassword: "admin",
@@ -556,7 +566,7 @@ if(selected_Module=="VT293-0064")
 if(selected_Module=="VT293-0065")
 {
       downloadfileProps = {
-        url: "http://192.168.6.27/rhodes/secure/screen.jpg",
+        url: srvHttpDownloadImageUrlAuth,
 		authType: "invalid",
 		authUser: "admin",
 		authPassword: "admin",
@@ -569,7 +579,7 @@ if(selected_Module=="VT293-0065")
 if(selected_Module=="VT293-0066")
 {
       downloadfileProps = {
-        url: "http://192.168.6.27/rhodes/secure/screen.jpg",
+        url: srvHttpDownloadImageUrlAuth,
 		authType: "",
 		authUser: "admin",
 		authPassword: "admin",
@@ -582,7 +592,7 @@ if(selected_Module=="VT293-0066")
 if(selected_Module=="VT293-0067")
 {
       downloadfileProps = {
-        url: "http://192.168.6.27/rhodes/secure/screen.jpg",
+        url: srvHttpDownloadImageUrlAuth,
 		authType: "basic",
 		authUser: "invalid",
 		authPassword: "admin",
@@ -595,7 +605,7 @@ if(selected_Module=="VT293-0067")
 if(selected_Module=="VT293-0068")
 {
       downloadfileProps = {
-        url: "http://192.168.6.27/rhodes/secure/screen.jpg",
+        url: srvHttpDownloadImageUrlAuth,
 		authType: "basic",
 		authUser: "",
 		authPassword: "admin",
@@ -608,7 +618,7 @@ if(selected_Module=="VT293-0068")
 if(selected_Module=="VT293-0069")
 {
       downloadfileProps = {
-        url: "http://192.168.6.27/rhodes/secure/screen.jpg",
+        url: srvHttpDownloadImageUrlAuth,
 		authType: "basic",
 		authUser: "admin",
 		authPassword: "invalid",
@@ -621,7 +631,7 @@ if(selected_Module=="VT293-0069")
 if(selected_Module=="VT293-0070")
 {
       downloadfileProps = {
-        url: "http://192.168.6.27/rhodes/secure/screen.jpg",
+        url: srvHttpDownloadImageUrlAuth,
 		authType: "basic",
 		authUser: "admin",
 		authPassword: "",
@@ -634,7 +644,7 @@ if(selected_Module=="VT293-0070")
 if(selected_Module=="VT293-0071")
 {
     uploadfileProps = {
-          url: "http://rhologs.herokuapp.com/client_log?client_id=&device_pin=&log_name=uptest",
+          url: srvHttpUploadTextFileUrl,
           filename: Rho.Application.publicFolder+"/images/myfile.txt",
           body: "uploading file",
           fileContentType: "image/png"
@@ -645,7 +655,7 @@ if(selected_Module=="VT293-0071")
 if(selected_Module=="VT293-0072")
 {
     uploadfileProps = {
-          url: "http://rhologs.herokuapp.com/client_log?client_id=&device_pin=&log_name=uptest",
+          url: srvHttpUploadTextFileUrl,
           filename: Rho.Application.publicFolder+"/images/myfile.txt",
           body: "uploading file",
           fileContentType: "image/png"
@@ -659,7 +669,7 @@ myDiv.innerHTML="Result :-<br>status : "+myvar["status"]+"<br>"+
 if(selected_Module=="VT293-0073")
 {
     uploadfileProps = {
-          url: "http://192.168.6.18/NEON/ReceivedFiles/Upload.aspx",
+          url: srvHttpUploadTextFileUrl,
           filename: Rho.Application.publicFolder+"/images/myfile.txt",
           body: "uploading file",
           fileContentType: "image/png"
@@ -667,7 +677,7 @@ if(selected_Module=="VT293-0073")
 
     Rho.Network.uploadFile(uploadfileProps, function(params){
   if (params["status"] == "ok") {
-	myDiv.innerHTML="Upload Succeeded, path is /public/images/myfile.txt";		
+	myDiv.innerHTML="Upload Succeeded, path is /public/images/myfile.txt";
 	myDiv.innerHTML="<br>status :"+params["status"]+"<br>"+
 					"http_error :"+params["http_error"]+"<br>"+
 					"fileExists :"+params["fileExists"];
@@ -684,7 +694,7 @@ if(selected_Module=="VT293-0073")
 if(selected_Module=="VT293-0074")
 {
     uploadfileProps = {
-          url: "http://192.168.6.18/NEON/secure/Upload.aspx",
+          url: srvHttpUploadTextFileUrlAuth,
 		  authType: "basic",
 		  authUser: "admin",
 		  authPassword: "Motorola@123",
@@ -697,7 +707,7 @@ if(selected_Module=="VT293-0074")
 if(selected_Module=="VT293-0075")
 {
        uploadfileProps = {
-		  url: "http://192.168.6.18/NEON/invalid/Upload.aspx",
+          url: srvHttpUploadTextFileUrlAuth,
 		  authType: "basic",
 		  authUser: "admin",
 		  authPassword: "Motorola@123",
@@ -724,7 +734,7 @@ if(selected_Module=="VT293-0076")
 if(selected_Module=="VT293-0077")
 {
     uploadfileProps = {
-          url: "http://192.168.6.18/NEON/secure/Upload.aspx",
+          url: srvHttpUploadTextFileUrlAuth,
 		  authType: "basic",
 		  authUser: "admin",
 		  authPassword: "Motorola@123",
@@ -738,7 +748,7 @@ if(selected_Module=="VT293-0077")
 if(selected_Module=="VT293-0078")
 {
     uploadfileProps = {
-          url: "http://192.168.6.18/NEON/secure/Upload.aspx",
+          url: srvHttpUploadTextFileUrlAuth,
 		  authType: "basic",
 		  authUser: "admin",
 		  authPassword: "Motorola@123",
@@ -751,7 +761,7 @@ if(selected_Module=="VT293-0078")
 if(selected_Module=="VT293-0079")
 {
     uploadfileProps = {
-          url: "http://192.168.6.18/NEON/secure/Upload.aspx",
+          url: srvHttpUploadTextFileUrlAuth,
 		  authType: "invalid",
 		  authUser: "admin",
 		  authPassword: "Motorola@123",
@@ -764,7 +774,7 @@ if(selected_Module=="VT293-0079")
 if(selected_Module=="VT293-0080")
 {
     uploadfileProps = {
-          url: "http://192.168.6.18/NEON/secure/Upload.aspx",
+          url: srvHttpUploadTextFileUrlAuth,
 		  authType: "",
 		  authUser: "admin",
 		  authPassword: "Motorola@123",
@@ -777,7 +787,7 @@ if(selected_Module=="VT293-0080")
 if(selected_Module=="VT293-0081")
 {
     uploadfileProps = {
-          url: "http://192.168.6.18/NEON/secure/Upload.aspx",
+          url: srvHttpUploadTextFileUrlAuth,
 		  authType: "basic",
 		  authUser: "invalid",
 		  authPassword: "Motorola@123",
@@ -790,7 +800,7 @@ if(selected_Module=="VT293-0081")
 if(selected_Module=="VT293-0082")
 {
     uploadfileProps = {
-          url: "http://192.168.6.18/NEON/secure/Upload.aspx",
+          url: srvHttpUploadTextFileUrlAuth,
 		  authType: "basic",
 		  authUser: "",
 		  authPassword: "Motorola@123",
@@ -803,8 +813,8 @@ if(selected_Module=="VT293-0082")
 if(selected_Module=="VT293-0083")
 {
     uploadfileProps = {
-          url: "http://192.168.6.18/NEON/secure/Upload.aspx",
-		  authType: "basic",
+          url: srvHttpUploadTextFileUrlAuth,
+          authType: "basic",
 		  authUser: "admin",
 		  authPassword: "invalid",
           filename: Rho.Application.publicFolder+"/images/backButton.png",
@@ -816,7 +826,7 @@ if(selected_Module=="VT293-0083")
 if(selected_Module=="VT293-0084")
 {
     uploadfileProps = {
-          url: "http://192.168.6.18/NEON/secure/Upload.aspx",
+          url: srvHttpUploadTextFileUrlAuth,
 		  authType: "basic",
 		  authUser: "admin",
 		  authPassword: "",
@@ -829,7 +839,7 @@ if(selected_Module=="VT293-0084")
 if(selected_Module=="VT293-0085")
 {
       downloadfileProps = {
-        url: "http://192.168.6.27/rhodes/AsyncHttp/screen.jpg",
+        url: srvHttpDownloadImageUrl,
         overwriteFile: true,
 		createFolders: true,
         filename: Rho.Application.publicFolder+"/images/network.jpg"

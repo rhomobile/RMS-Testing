@@ -1,4 +1,4 @@
-var bar_setget_scanner_property = [
+var arr_scanner_property = [
 {
 	testName		:	"VT282-3001 | Set rastermode:None  | None",
 	propertyName	:	"rasterMode",
@@ -763,7 +763,7 @@ var bar_setget_scanner_property = [
 	testName		:	"VT282-3096 | Set  hapticFeedback :true | true",
 	propertyName	:	"hapticFeedback",
 	scannerTypes	:	"All",
-	OSTypes			:	"All",
+	OSTypes			:	"ANDROID",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
@@ -771,13 +771,10 @@ var bar_setget_scanner_property = [
 	testName		:	"VT282-3097 | Set  hapticFeedback :false| false",
 	propertyName	:	"hapticFeedback",
 	scannerTypes	:	"All",
-	OSTypes			:	"All",
+	OSTypes			:	"ANDROID",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
-}
-];
-
-var bar_setget_decoder_property = [
+},
 {
 	testName		:	"VT282-4001 | Set allDecoders:True  | true",
 	propertyName	:	"allDecoders",
@@ -891,12 +888,12 @@ var bar_setget_decoder_property = [
 	expectedResult	:	"0"
 },
 {
-	testName		:	"VT282-4015 | Set codabarMinLength:10 | 10",
+	testName		:	"VT282-4015 | Set codabarMinLength:20 | 20",
 	propertyName	:	"codabarMinLength",
 	scannerTypes	:	"All",
 	OSTypes			:	"All",
-	propertyValue	:	"10",
-	expectedResult	:	"10"
+	propertyValue	:	"20",
+	expectedResult	:	"20"
 },
 {
 	testName		:	"VT282-4016 | Set codabarMinLength:55 | 55",
@@ -987,12 +984,12 @@ var bar_setget_decoder_property = [
 	expectedResult	:	"0"
 },
 {
-	testName		:	"VT282-4027 | Set code11maxLength:10 | 10",
+	testName		:	"VT282-4027 | Set code11maxLength:30 | 30",
 	propertyName	:	"code11maxLength",
 	scannerTypes	:	"All",
 	OSTypes			:	"All",
-	propertyValue	:	"10",
-	expectedResult	:	"10"
+	propertyValue	:	"30",
+	expectedResult	:	"30"
 },
 {
 	testName		:	"VT282-4028 | Set code11maxLength:55 | 55",
@@ -1011,12 +1008,12 @@ var bar_setget_decoder_property = [
 	expectedResult	:	"0"
 },
 {
-	testName		:	"VT282-4030 | Set code11minLength:10 | 10",
+	testName		:	"VT282-4030 | Set code11minLength:40 | 40",
 	propertyName	:	"code11minLength",
 	scannerTypes	:	"All",
 	OSTypes			:	"All",
-	propertyValue	:	"10",
-	expectedResult	:	"10"
+	propertyValue	:	"40",
+	expectedResult	:	"40"
 },
 {
 	testName		:	"VT282-4031 | Set code11minLength:55 | 55",
@@ -1155,12 +1152,12 @@ var bar_setget_decoder_property = [
 	expectedResult	:	"0"
 },
 {
-	testName		:	"VT282-4048 | Set code128maxLength:10 | 10",
+	testName		:	"VT282-4048 | Set code128maxLength:15 | 15",
 	propertyName	:	"code128maxLength",
 	scannerTypes	:	"All",
 	OSTypes			:	"All",
-	propertyValue	:	"10",
-	expectedResult	:	"10"
+	propertyValue	:	"15",
+	expectedResult	:	"15"
 },
 {
 	testName		:	"VT282-4049 | Set code128maxLength:55 | 55",
@@ -1179,12 +1176,12 @@ var bar_setget_decoder_property = [
 	expectedResult	:	"0"
 },
 {
-	testName		:	"VT282-4051 | Set code128minLength:10 | 10",
+	testName		:	"VT282-4051 | Set code128minLength:25 | 25",
 	propertyName	:	"code128minLength",
 	scannerTypes	:	"All",
 	OSTypes			:	"All",
-	propertyValue	:	"10",
-	expectedResult	:	"10"
+	propertyValue	:	"25",
+	expectedResult	:	"25"
 },
 {
 	testName		:	"VT282-4052 | Set code128minLength:55 | 55",
@@ -1331,12 +1328,12 @@ var bar_setget_decoder_property = [
 	expectedResult	:	"0"
 },
 {
-	testName		:	"VT282-4070 | Set code39maxLength:10 | 10",
+	testName		:	"VT282-4070 | Set code39maxLength:35 | 35",
 	propertyName	:	"code39maxLength",
 	scannerTypes	:	"All",
 	OSTypes			:	"All",
-	propertyValue	:	"10",
-	expectedResult	:	"10"
+	propertyValue	:	"35",
+	expectedResult	:	"35"
 },
 {
 	testName		:	"VT282-4071 | Set code39maxLength:55 | 55",
@@ -1355,12 +1352,12 @@ var bar_setget_decoder_property = [
 	expectedResult	:	"0"
 },
 {
-	testName		:	"VT282-4073 | Set code39minLength:10 | 10",
+	testName		:	"VT282-4073 | Set code39minLength:45 | 45",
 	propertyName	:	"code39minLength",
 	scannerTypes	:	"All",
 	OSTypes			:	"All",
-	propertyValue	:	"10",
-	expectedResult	:	"10"
+	propertyValue	:	"45",
+	expectedResult	:	"45"
 },
 {
 	testName		:	"VT282-4074 | Set code39minLength:55 | 55",
@@ -1475,12 +1472,12 @@ var bar_setget_decoder_property = [
 	expectedResult	:	"0"
 },
 {
-	testName		:	"VT282-4087 | Set code93maxLength:10 | 10",
+	testName		:	"VT282-4087 | Set code93maxLength:11 | 11",
 	propertyName	:	"code93maxLength",
 	scannerTypes	:	"All",
 	OSTypes			:	"All",
-	propertyValue	:	"10",
-	expectedResult	:	"10"
+	propertyValue	:	"11",
+	expectedResult	:	"11"
 },
 {
 	testName		:	"VT282-4088 | Set code93maxLength:55 | 55",
@@ -1499,12 +1496,12 @@ var bar_setget_decoder_property = [
 	expectedResult	:	"0"
 },
 {
-	testName		:	"VT282-4090 | Set code93minLength:10 | 10",
+	testName		:	"VT282-4090 | Set code93minLength:12 | 12",
 	propertyName	:	"code93minLength",
 	scannerTypes	:	"All",
 	OSTypes			:	"All",
-	propertyValue	:	"10",
-	expectedResult	:	"10"
+	propertyValue	:	"12",
+	expectedResult	:	"12"
 },
 {
 	testName		:	"VT282-4091 | Set code93minLength:55 | 55",
@@ -1627,12 +1624,12 @@ var bar_setget_decoder_property = [
 	expectedResult	:	"0"
 },
 {
-	testName		:	"VT282-4106| Set d2of5maxLength:10 | 10",
+	testName		:	"VT282-4106| Set d2of5maxLength:13 | 13",
 	propertyName	:	"d2of5maxLength",
 	scannerTypes	:	"All",
 	OSTypes			:	"All",
-	propertyValue	:	"10",
-	expectedResult	:	"10"
+	propertyValue	:	"13",
+	expectedResult	:	"13"
 },
 {
 	testName		:	"VT282-4107 | Set d2of5maxLength:55 | 55",
@@ -1651,12 +1648,12 @@ var bar_setget_decoder_property = [
 	expectedResult	:	"0"
 },
 {
-	testName		:	"VT282-4109 | Set d2of5minLength:10 | 10",
+	testName		:	"VT282-4109 | Set d2of5minLength:14 | 14",
 	propertyName	:	"d2of5minLength",
 	scannerTypes	:	"All",
 	OSTypes			:	"All",
-	propertyValue	:	"10",
-	expectedResult	:	"10"
+	propertyValue	:	"14",
+	expectedResult	:	"14"
 },
 {
 	testName		:	"VT282-4110 | Set d2of5minLength:55 | 55",
@@ -1851,12 +1848,12 @@ var bar_setget_decoder_property = [
 	expectedResult	:	"0"
 },
 {
-	testName		:	"VT282-4134 | Set i2of5maxLength:10 | 10",
+	testName		:	"VT282-4134 | Set i2of5maxLength:22 | 22",
 	propertyName	:	"i2of5maxLength",
 	scannerTypes	:	"All",
 	OSTypes			:	"All",
-	propertyValue	:	"10",
-	expectedResult	:	"10"
+	propertyValue	:	"22",
+	expectedResult	:	"22"
 },
 {
 	testName		:	"VT282-4135 | Set i2of5maxLength:55 | 55",
@@ -1875,12 +1872,12 @@ var bar_setget_decoder_property = [
 	expectedResult	:	"0"
 },
 {
-	testName		:	"VT282-4137 | Set i2of5minLength:10 | 10",
+	testName		:	"VT282-4137 | Set i2of5minLength:33 | 33",
 	propertyName	:	"i2of5minLength",
 	scannerTypes	:	"All",
 	OSTypes			:	"All",
-	propertyValue	:	"10",
-	expectedResult	:	"10"
+	propertyValue	:	"33",
+	expectedResult	:	"33"
 },
 {
 	testName		:	"VT282-4138 | Set i2of5minLength:55 | 55",
@@ -1987,12 +1984,12 @@ var bar_setget_decoder_property = [
 	expectedResult	:	"0"
 },
 {
-	testName		:	"VT282-4151 | Set korean3of5maxLength:10 | 10",
+	testName		:	"VT282-4151 | Set korean3of5maxLength:44 | 44",
 	propertyName	:	"korean3of5maxLength",
 	scannerTypes	:	"All",
 	OSTypes			:	"WINDOWS",
-	propertyValue	:	"10",
-	expectedResult	:	"10"
+	propertyValue	:	"44",
+	expectedResult	:	"44"
 },
 {
 	testName		:	"VT282-4152 | Set korean3of5maxLength:55 | 55",
@@ -2011,12 +2008,12 @@ var bar_setget_decoder_property = [
 	expectedResult	:	"0"
 },
 {
-	testName		:	"VT282-4154 | Set korean3of5minLength:10 | 10",
+	testName		:	"VT282-4154 | Set korean3of5minLength:43 | 43",
 	propertyName	:	"korean3of5minLength",
 	scannerTypes	:	"All",
 	OSTypes			:	"WINDOWS",
-	propertyValue	:	"10",
-	expectedResult	:	"10"
+	propertyValue	:	"43",
+	expectedResult	:	"43"
 },
 {
 	testName		:	"VT282-4155 | Set korean3of5minLength:55 | 55",
@@ -2227,12 +2224,12 @@ var bar_setget_decoder_property = [
 	expectedResult	:	"0"
 },
 {
-	testName		:	"VT282-4181 | Set matrix2of5maxLength:10 | 10",
+	testName		:	"VT282-4181 | Set matrix2of5maxLength:01 | 01",
 	propertyName	:	"matrix2of5maxLength",
 	scannerTypes	:	"All",
 	OSTypes			:	"All",
-	propertyValue	:	"10",
-	expectedResult	:	"10"
+	propertyValue	:	"01",
+	expectedResult	:	"1"
 },
 {
 	testName		:	"VT282-4182 | Set matrix2of5maxLength:55 | 55",
@@ -2251,12 +2248,12 @@ var bar_setget_decoder_property = [
 	expectedResult	:	"0"
 },
 {
-	testName		:	"VT282-4184 | Set matrix2of5minLength:10 | 10",
+	testName		:	"VT282-4184 | Set matrix2of5minLength:09 | 09",
 	propertyName	:	"matrix2of5minLength",
 	scannerTypes	:	"All",
 	OSTypes			:	"All",
-	propertyValue	:	"10",
-	expectedResult	:	"10"
+	propertyValue	:	"09",
+	expectedResult	:	"9"
 },
 {
 	testName		:	"VT282-4185 | Set matrix2of5minLength:55 | 55",
@@ -2395,48 +2392,48 @@ var bar_setget_decoder_property = [
 	expectedResult	:	"two"
 },
 {
-	testName		:	"VT282-4202 | Set msimaxLength:0  | 0",
-	propertyName	:	"msimaxLength",
+	testName		:	"VT282-4202 | Set msiMaxLength:0  | 0",
+	propertyName	:	"msiMaxLength",
 	scannerTypes	:	"All",
 	OSTypes			:	"All",
 	propertyValue	:	"0",
 	expectedResult	:	"0"
 },
 {
-	testName		:	"VT282-4203 | Set msimaxLength:10 | 10",
-	propertyName	:	"msimaxLength",
+	testName		:	"VT282-4203 | Set msiMaxLength:7 | 7",
+	propertyName	:	"msiMaxLength",
 	scannerTypes	:	"All",
 	OSTypes			:	"All",
-	propertyValue	:	"10",
-	expectedResult	:	"10"
+	propertyValue	:	"7",
+	expectedResult	:	"7"
 },
 {
-	testName		:	"VT282-4204 | Set msimaxLength:55 | 55",
-	propertyName	:	"msimaxLength",
+	testName		:	"VT282-4204 | Set msiMaxLength:55 | 55",
+	propertyName	:	"msiMaxLength",
 	scannerTypes	:	"All",
 	OSTypes			:	"All",
 	propertyValue	:	"55",
 	expectedResult	:	"55"
 },
 {
-	testName		:	"VT282-4205 | Set msiminLength:0  | 0",
-	propertyName	:	"msiminLength",
+	testName		:	"VT282-4205 | Set msiMinLength:0  | 0",
+	propertyName	:	"msiMinLength",
 	scannerTypes	:	"All",
 	OSTypes			:	"All",
 	propertyValue	:	"0",
 	expectedResult	:	"0"
 },
 {
-	testName		:	"VT282-4206 | Set msiminLength:10 | 10",
-	propertyName	:	"msiminLength",
+	testName		:	"VT282-4206 | Set msiMinLength:8 | 8",
+	propertyName	:	"msiMinLength",
 	scannerTypes	:	"All",
 	OSTypes			:	"All",
-	propertyValue	:	"10",
-	expectedResult	:	"10"
+	propertyValue	:	"8",
+	expectedResult	:	"8"
 },
 {
-	testName		:	"VT282-4207 | Set msiminLength:55 | 55",
-	propertyName	:	"msiminLength",
+	testName		:	"VT282-4207 | Set msiMinLength:55 | 55",
+	propertyName	:	"msiMinLength",
 	scannerTypes	:	"All",
 	OSTypes			:	"All",
 	propertyValue	:	"55",
@@ -2571,12 +2568,12 @@ var bar_setget_decoder_property = [
 	expectedResult	:	"350"
 },
 {
-	testName		:	"VT282-4224 | Set signatureImageQuality :1  | 1",
+	testName		:	"VT282-4224 | Set signatureImageQuality :10  | 10",
 	propertyName	:	"signatureImageQuality",
 	scannerTypes	:	"Imager",
 	OSTypes			:	"WINDOWS",
-	propertyValue	:	"1",
-	expectedResult	:	"1"
+	propertyValue	:	"10",
+	expectedResult	:	"10"
 },
 {
 	testName		:	"VT282-4225 | Set signatureImageQuality :50  | 50",
@@ -2670,7 +2667,7 @@ var bar_setget_decoder_property = [
 	testName		:	"VT282-4236 | Set ukPostalReportCheckDigit :false  | false",
 	propertyName	:	"ukPostalReportCheckDigit",
 	scannerTypes	:	"All",
-	OSTypes			:	"All",
+	OSTypes			:	"ANDROID",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
@@ -2995,24 +2992,24 @@ var bar_setget_decoder_property = [
 	expectedResult	:	"false"
 },
 {
-	testName		:	"VT282-4277 | Set upce0Preamble  :none  | none",
-	propertyName	:	"upce0Preamble",
+	testName		:	"VT282-4277 | Set upce0preamble  :none  | none",
+	propertyName	:	"upce0preamble",
 	scannerTypes	:	"All",
 	OSTypes			:	"All",
 	propertyValue	:	"none",
 	expectedResult	:	"none"
 },
 {
-	testName		:	"VT282-4278 | Set upce0Preamble  :systemChar  | systemChar",
-	propertyName	:	"upce0Preamble",
+	testName		:	"VT282-4278 | Set upce0preamble  :systemChar  | systemChar",
+	propertyName	:	"upce0preamble",
 	scannerTypes	:	"All",
 	OSTypes			:	"All",
 	propertyValue	:	"systemChar",
 	expectedResult	:	"systemChar"
 },
 {
-	testName		:	"VT282-4279 | Set upce0Preamble  :countryAndSystemChars  | countryAndSystemChars",
-	propertyName	:	"upce0Preamble",
+	testName		:	"VT282-4279 | Set upce0preamble  :countryAndSystemChars  | countryAndSystemChars",
+	propertyName	:	"upce0preamble",
 	scannerTypes	:	"All",
 	OSTypes			:	"All",
 	propertyValue	:	"countryAndSystemChars",
@@ -3067,24 +3064,24 @@ var bar_setget_decoder_property = [
 	expectedResult	:	"false"
 },
 {
-	testName		:	"VT282-4286 | Set upce1Preamble:none  | none",
-	propertyName	:	"upce1Preamble",
+	testName		:	"VT282-4286 | Set upce1preamble:none  | none",
+	propertyName	:	"upce1preamble",
 	scannerTypes	:	"All",
 	OSTypes			:	"All",
 	propertyValue	:	"none",
 	expectedResult	:	"none"
 },
 {
-	testName		:	"VT282-4287 | Set upce1Preamble:systemChar  | systemChar",
-	propertyName	:	"upce1Preamble",
+	testName		:	"VT282-4287 | Set upce1preamble:systemChar  | systemChar",
+	propertyName	:	"upce1preamble",
 	scannerTypes	:	"All",
 	OSTypes			:	"All",
 	propertyValue	:	"systemChar",
 	expectedResult	:	"systemChar"
 },
 {
-	testName		:	"VT282-4288 | Set upce1Preamble :countryAndSystemChars  | countryAndSystemChars",
-	propertyName	:	"upce1Preamble",
+	testName		:	"VT282-4288 | Set upce1preamble :countryAndSystemChars  | countryAndSystemChars",
+	propertyName	:	"upce1preamble",
 	scannerTypes	:	"All",
 	OSTypes			:	"All",
 	propertyValue	:	"countryAndSystemChars",
@@ -3166,7 +3163,7 @@ var bar_setget_decoder_property = [
 	testName		:	"VT282-4299 | Set usPlanetReportCheckDigit :false  | false",
 	propertyName	:	"usPlanetReportCheckDigit",
 	scannerTypes	:	"All",
-	OSTypes			:	"All",
+	OSTypes			:	"ANDROID",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
@@ -3190,7 +3187,7 @@ var bar_setget_decoder_property = [
 	testName		:	"VT282-4302 | Set usPostNetReportCheckDigit :true  | true",
 	propertyName	:	"usPostNetReportCheckDigit",
 	scannerTypes	:	"All",
-	OSTypes			:	"All",
+	OSTypes			:	"ANDROID",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
@@ -3198,7 +3195,7 @@ var bar_setget_decoder_property = [
 	testName		:	"VT282-4303 | Set usPostNetReportCheckDigit :false  | false",
 	propertyName	:	"usPostNetReportCheckDigit",
 	scannerTypes	:	"All",
-	OSTypes			:	"All",
+	OSTypes			:	"ANDROID",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
@@ -3248,25 +3245,33 @@ var scanCallback = function (data){
 
 };
 
-function scannertype(type, scnnam)
-{	
-	if(type == "All")
-	{ 
-		return true;
+var getApplicableProperties = function (objScnType){
+	
+	var deviceScannerType = objScnType.getProperty('friendlyName');
+	var finalSCNObj = [];
+
+	for (var i = 0; i < arr_scanner_property.length ; i++){
+
+		if((arr_scanner_property[i]['OSTypes'] == 'All') || (arr_scanner_property[i]['OSTypes'] == Rho.System.platform)){
+			var scnType = arr_scanner_property[i]['scannerTypes']
+
+			if(scnType == "All")
+			{ 
+				finalSCNObj.push(arr_scanner_property[i]);
+			}
+			else if (deviceScannerType.indexOf(scnType) != -1)
+			{
+				finalSCNObj.push(arr_scanner_property[i]);
+			}
+			else if ((deviceScannerType.indexOf("Camera") != -1) && scnType == "Imager")
+			{
+				finalSCNObj.push(arr_scanner_property[i]);
+			}
+		}
 	}
-		
-	else if (scnnam.indexOf(type) != -1)
-	{
-		return true;
-	}
-	else if ((scnnam.indexOf("Camera") != -1) && type == "Imager")
-	{
-		return true;		
-	}
-	else
-	{
-		return false;
-	}	
+
+	return finalSCNObj;
 }
+
 
 
