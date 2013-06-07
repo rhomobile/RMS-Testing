@@ -25,17 +25,18 @@ describe("Scanner Test", function() {
 						enumObject.enable();
 						setTimeout(function() {
 						enableflag = true;
-						}, 5000);
+						}, 10000);
 					});
 					
 					waitsFor(function() {
 						return enableflag;
-					}, "Waiting for enable", 6000);
+					}, "Waiting for enable", 11000);
 				
 				});
 			});
 
-			describe("Scanner property Using set/getProperty "+ scntype +": "+ scnname, function() {
+
+			describe("Barcode property using set/getProperty for "+ scntype +": "+ scnname, function() {
 
 				for (var i=0;i<arrScanner.length;i++){
 
@@ -52,7 +53,7 @@ describe("Scanner Test", function() {
 				}
 			});
 
-			describe("Scanner property Using set/getProperties "+ scntype +": "+ scnname, function() {
+			describe("Barcode property Using set/getProperties for "+ scntype +": "+ scnname, function() {
 
 				for (var i=0;i<arrScanner.length;i++){
 
@@ -92,7 +93,7 @@ describe("Scanner Test", function() {
 				}
 			});
 
-			describe("Scanner property setting Directly "+ scntype +": "+ scnname, function() {
+			describe("Barcode property setting Directly for "+ scntype +": "+ scnname, function() {
 
 				for (var i=0;i<arrScanner.length;i++){
 
@@ -129,7 +130,31 @@ describe("Scanner Test", function() {
 				}
 			});
 
-			describe("Scanner property set Using Enable "+ scntype +": "+ scnname, function() {
+			describe("Disable Scanner "+ scntype +": "+ scnname, function() {
+
+				beforeEach(function() {
+					disableflag = false;
+				});
+
+				it("Disable "+ scntype + scnname, function() {
+					
+					runs(function() {
+						//Rho.Log.info($.toJSON(scanObject), "PATRO Disable");
+						enumObject.disable();
+						setTimeout(function() {
+						disableflag = true;
+						}, 10000);
+
+					});
+
+					waitsFor(function() {
+						return disableflag;
+					}, "Waiting for enable", 11000);
+				
+				});
+			});
+
+			describe("Barcode property set using enable() for "+ scntype +": "+ scnname, function() {
 
 				var flag = false;
 
@@ -192,30 +217,6 @@ describe("Scanner Test", function() {
 					})(i);
 
 				}
-			});
-
-			describe("Disable Scanner "+ scntype +": "+ scnname, function() {
-
-				beforeEach(function() {
-					disableflag = false;
-				});
-
-				it("Disable "+ scntype + scnname, function() {
-					
-					runs(function() {
-						//Rho.Log.info($.toJSON(scanObject), "PATRO Disable");
-						enumObject.disable();
-						setTimeout(function() {
-						disableflag = true;
-						}, 10000);
-
-					});
-
-					waitsFor(function() {
-						return disableflag;
-					}, "Waiting for enable", 11000);
-				
-				});
 			});
 
 		})(enumData[j],arrSCN);
