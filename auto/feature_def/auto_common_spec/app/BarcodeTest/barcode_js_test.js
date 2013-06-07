@@ -888,12 +888,12 @@ var arr_scanner_property = [
 	expectedResult	:	"0"
 },
 {
-	testName		:	"VT282-4015 | Set codabarMinLength:10 | 10",
+	testName		:	"VT282-4015 | Set codabarMinLength:20 | 20",
 	propertyName	:	"codabarMinLength",
 	scannerTypes	:	"All",
 	OSTypes			:	"All",
-	propertyValue	:	"10",
-	expectedResult	:	"10"
+	propertyValue	:	"20",
+	expectedResult	:	"20"
 },
 {
 	testName		:	"VT282-4016 | Set codabarMinLength:55 | 55",
@@ -984,12 +984,12 @@ var arr_scanner_property = [
 	expectedResult	:	"0"
 },
 {
-	testName		:	"VT282-4027 | Set code11maxLength:10 | 10",
+	testName		:	"VT282-4027 | Set code11maxLength:30 | 30",
 	propertyName	:	"code11maxLength",
 	scannerTypes	:	"All",
 	OSTypes			:	"All",
-	propertyValue	:	"10",
-	expectedResult	:	"10"
+	propertyValue	:	"30",
+	expectedResult	:	"30"
 },
 {
 	testName		:	"VT282-4028 | Set code11maxLength:55 | 55",
@@ -1008,12 +1008,12 @@ var arr_scanner_property = [
 	expectedResult	:	"0"
 },
 {
-	testName		:	"VT282-4030 | Set code11minLength:10 | 10",
+	testName		:	"VT282-4030 | Set code11minLength:40 | 40",
 	propertyName	:	"code11minLength",
 	scannerTypes	:	"All",
 	OSTypes			:	"All",
-	propertyValue	:	"10",
-	expectedResult	:	"10"
+	propertyValue	:	"40",
+	expectedResult	:	"40"
 },
 {
 	testName		:	"VT282-4031 | Set code11minLength:55 | 55",
@@ -1152,12 +1152,12 @@ var arr_scanner_property = [
 	expectedResult	:	"0"
 },
 {
-	testName		:	"VT282-4048 | Set code128maxLength:10 | 10",
+	testName		:	"VT282-4048 | Set code128maxLength:15 | 15",
 	propertyName	:	"code128maxLength",
 	scannerTypes	:	"All",
 	OSTypes			:	"All",
-	propertyValue	:	"10",
-	expectedResult	:	"10"
+	propertyValue	:	"15",
+	expectedResult	:	"15"
 },
 {
 	testName		:	"VT282-4049 | Set code128maxLength:55 | 55",
@@ -1176,12 +1176,12 @@ var arr_scanner_property = [
 	expectedResult	:	"0"
 },
 {
-	testName		:	"VT282-4051 | Set code128minLength:10 | 10",
+	testName		:	"VT282-4051 | Set code128minLength:25 | 25",
 	propertyName	:	"code128minLength",
 	scannerTypes	:	"All",
 	OSTypes			:	"All",
-	propertyValue	:	"10",
-	expectedResult	:	"10"
+	propertyValue	:	"25",
+	expectedResult	:	"25"
 },
 {
 	testName		:	"VT282-4052 | Set code128minLength:55 | 55",
@@ -1328,12 +1328,12 @@ var arr_scanner_property = [
 	expectedResult	:	"0"
 },
 {
-	testName		:	"VT282-4070 | Set code39maxLength:10 | 10",
+	testName		:	"VT282-4070 | Set code39maxLength:35 | 35",
 	propertyName	:	"code39maxLength",
 	scannerTypes	:	"All",
 	OSTypes			:	"All",
-	propertyValue	:	"10",
-	expectedResult	:	"10"
+	propertyValue	:	"35",
+	expectedResult	:	"35"
 },
 {
 	testName		:	"VT282-4071 | Set code39maxLength:55 | 55",
@@ -1352,12 +1352,12 @@ var arr_scanner_property = [
 	expectedResult	:	"0"
 },
 {
-	testName		:	"VT282-4073 | Set code39minLength:10 | 10",
+	testName		:	"VT282-4073 | Set code39minLength:45 | 45",
 	propertyName	:	"code39minLength",
 	scannerTypes	:	"All",
 	OSTypes			:	"All",
-	propertyValue	:	"10",
-	expectedResult	:	"10"
+	propertyValue	:	"45",
+	expectedResult	:	"45"
 },
 {
 	testName		:	"VT282-4074 | Set code39minLength:55 | 55",
@@ -1472,12 +1472,12 @@ var arr_scanner_property = [
 	expectedResult	:	"0"
 },
 {
-	testName		:	"VT282-4087 | Set code93maxLength:10 | 10",
+	testName		:	"VT282-4087 | Set code93maxLength:11 | 11",
 	propertyName	:	"code93maxLength",
 	scannerTypes	:	"All",
 	OSTypes			:	"All",
-	propertyValue	:	"10",
-	expectedResult	:	"10"
+	propertyValue	:	"11",
+	expectedResult	:	"11"
 },
 {
 	testName		:	"VT282-4088 | Set code93maxLength:55 | 55",
@@ -1496,12 +1496,12 @@ var arr_scanner_property = [
 	expectedResult	:	"0"
 },
 {
-	testName		:	"VT282-4090 | Set code93minLength:10 | 10",
+	testName		:	"VT282-4090 | Set code93minLength:12 | 12",
 	propertyName	:	"code93minLength",
 	scannerTypes	:	"All",
 	OSTypes			:	"All",
-	propertyValue	:	"10",
-	expectedResult	:	"10"
+	propertyValue	:	"12",
+	expectedResult	:	"12"
 },
 {
 	testName		:	"VT282-4091 | Set code93minLength:55 | 55",
@@ -1624,12 +1624,12 @@ var arr_scanner_property = [
 	expectedResult	:	"0"
 },
 {
-	testName		:	"VT282-4106| Set d2of5maxLength:10 | 10",
+	testName		:	"VT282-4106| Set d2of5maxLength:13 | 13",
 	propertyName	:	"d2of5maxLength",
 	scannerTypes	:	"All",
 	OSTypes			:	"All",
-	propertyValue	:	"10",
-	expectedResult	:	"10"
+	propertyValue	:	"13",
+	expectedResult	:	"13"
 },
 {
 	testName		:	"VT282-4107 | Set d2of5maxLength:55 | 55",
@@ -1648,12 +1648,12 @@ var arr_scanner_property = [
 	expectedResult	:	"0"
 },
 {
-	testName		:	"VT282-4109 | Set d2of5minLength:10 | 10",
+	testName		:	"VT282-4109 | Set d2of5minLength:14 | 14",
 	propertyName	:	"d2of5minLength",
 	scannerTypes	:	"All",
 	OSTypes			:	"All",
-	propertyValue	:	"10",
-	expectedResult	:	"10"
+	propertyValue	:	"14",
+	expectedResult	:	"14"
 },
 {
 	testName		:	"VT282-4110 | Set d2of5minLength:55 | 55",
@@ -1848,12 +1848,12 @@ var arr_scanner_property = [
 	expectedResult	:	"0"
 },
 {
-	testName		:	"VT282-4134 | Set i2of5maxLength:10 | 10",
+	testName		:	"VT282-4134 | Set i2of5maxLength:22 | 22",
 	propertyName	:	"i2of5maxLength",
 	scannerTypes	:	"All",
 	OSTypes			:	"All",
-	propertyValue	:	"10",
-	expectedResult	:	"10"
+	propertyValue	:	"22",
+	expectedResult	:	"22"
 },
 {
 	testName		:	"VT282-4135 | Set i2of5maxLength:55 | 55",
@@ -1872,12 +1872,12 @@ var arr_scanner_property = [
 	expectedResult	:	"0"
 },
 {
-	testName		:	"VT282-4137 | Set i2of5minLength:10 | 10",
+	testName		:	"VT282-4137 | Set i2of5minLength:33 | 33",
 	propertyName	:	"i2of5minLength",
 	scannerTypes	:	"All",
 	OSTypes			:	"All",
-	propertyValue	:	"10",
-	expectedResult	:	"10"
+	propertyValue	:	"33",
+	expectedResult	:	"33"
 },
 {
 	testName		:	"VT282-4138 | Set i2of5minLength:55 | 55",
@@ -1984,12 +1984,12 @@ var arr_scanner_property = [
 	expectedResult	:	"0"
 },
 {
-	testName		:	"VT282-4151 | Set korean3of5maxLength:10 | 10",
+	testName		:	"VT282-4151 | Set korean3of5maxLength:44 | 44",
 	propertyName	:	"korean3of5maxLength",
 	scannerTypes	:	"All",
 	OSTypes			:	"WINDOWS",
-	propertyValue	:	"10",
-	expectedResult	:	"10"
+	propertyValue	:	"44",
+	expectedResult	:	"44"
 },
 {
 	testName		:	"VT282-4152 | Set korean3of5maxLength:55 | 55",
@@ -2008,12 +2008,12 @@ var arr_scanner_property = [
 	expectedResult	:	"0"
 },
 {
-	testName		:	"VT282-4154 | Set korean3of5minLength:10 | 10",
+	testName		:	"VT282-4154 | Set korean3of5minLength:43 | 43",
 	propertyName	:	"korean3of5minLength",
 	scannerTypes	:	"All",
 	OSTypes			:	"WINDOWS",
-	propertyValue	:	"10",
-	expectedResult	:	"10"
+	propertyValue	:	"43",
+	expectedResult	:	"43"
 },
 {
 	testName		:	"VT282-4155 | Set korean3of5minLength:55 | 55",
@@ -2224,12 +2224,12 @@ var arr_scanner_property = [
 	expectedResult	:	"0"
 },
 {
-	testName		:	"VT282-4181 | Set matrix2of5maxLength:10 | 10",
+	testName		:	"VT282-4181 | Set matrix2of5maxLength:01 | 01",
 	propertyName	:	"matrix2of5maxLength",
 	scannerTypes	:	"All",
 	OSTypes			:	"All",
-	propertyValue	:	"10",
-	expectedResult	:	"10"
+	propertyValue	:	"01",
+	expectedResult	:	"01"
 },
 {
 	testName		:	"VT282-4182 | Set matrix2of5maxLength:55 | 55",
@@ -2248,12 +2248,12 @@ var arr_scanner_property = [
 	expectedResult	:	"0"
 },
 {
-	testName		:	"VT282-4184 | Set matrix2of5minLength:10 | 10",
+	testName		:	"VT282-4184 | Set matrix2of5minLength:09 | 09",
 	propertyName	:	"matrix2of5minLength",
 	scannerTypes	:	"All",
 	OSTypes			:	"All",
-	propertyValue	:	"10",
-	expectedResult	:	"10"
+	propertyValue	:	"09",
+	expectedResult	:	"09"
 },
 {
 	testName		:	"VT282-4185 | Set matrix2of5minLength:55 | 55",
@@ -2400,12 +2400,12 @@ var arr_scanner_property = [
 	expectedResult	:	"0"
 },
 {
-	testName		:	"VT282-4203 | Set msimaxLength:10 | 10",
+	testName		:	"VT282-4203 | Set msimaxLength:7 | 7",
 	propertyName	:	"msimaxLength",
 	scannerTypes	:	"All",
 	OSTypes			:	"All",
-	propertyValue	:	"10",
-	expectedResult	:	"10"
+	propertyValue	:	"7",
+	expectedResult	:	"7"
 },
 {
 	testName		:	"VT282-4204 | Set msimaxLength:55 | 55",
@@ -2424,12 +2424,12 @@ var arr_scanner_property = [
 	expectedResult	:	"0"
 },
 {
-	testName		:	"VT282-4206 | Set msiminLength:10 | 10",
+	testName		:	"VT282-4206 | Set msiminLength:8 | 8",
 	propertyName	:	"msiminLength",
 	scannerTypes	:	"All",
 	OSTypes			:	"All",
-	propertyValue	:	"10",
-	expectedResult	:	"10"
+	propertyValue	:	"8",
+	expectedResult	:	"8"
 },
 {
 	testName		:	"VT282-4207 | Set msiminLength:55 | 55",
