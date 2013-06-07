@@ -1,4 +1,4 @@
-var bar_setget_scanner_property = [
+var arr_scanner_property = [
 {
 	testName		:	"VT282-3001 | Set rastermode:None  | None",
 	propertyName	:	"rasterMode",
@@ -774,10 +774,7 @@ var bar_setget_scanner_property = [
 	OSTypes			:	"All",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
-}
-];
-
-var bar_setget_decoder_property = [
+},
 {
 	testName		:	"VT282-4001 | Set allDecoders:True  | true",
 	propertyName	:	"allDecoders",
@@ -2670,7 +2667,7 @@ var bar_setget_decoder_property = [
 	testName		:	"VT282-4236 | Set ukPostalReportCheckDigit :false  | false",
 	propertyName	:	"ukPostalReportCheckDigit",
 	scannerTypes	:	"All",
-	OSTypes			:	"All",
+	OSTypes			:	"ANDROID",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
@@ -3166,7 +3163,7 @@ var bar_setget_decoder_property = [
 	testName		:	"VT282-4299 | Set usPlanetReportCheckDigit :false  | false",
 	propertyName	:	"usPlanetReportCheckDigit",
 	scannerTypes	:	"All",
-	OSTypes			:	"All",
+	OSTypes			:	"ANDROID",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
@@ -3248,25 +3245,33 @@ var scanCallback = function (data){
 
 };
 
-function scannertype(type, scnnam)
-{	
-	if(type == "All")
-	{ 
-		return true;
+var getApplicableProperties = function (objScnType){
+	
+	var deviceScannerType = objScnType.getProperty('friendlyName');
+	var finalSCNObj = [];
+
+	for (var i = 0; i < arr_scanner_property.length ; i++){
+
+		if((arr_scanner_property[i]['OSTypes'] == 'All') || (arr_scanner_property[i]['OSTypes'] == Rho.System.platform)){
+			var scnType = arr_scanner_property[i]['scannerTypes']
+
+			if(scnType == "All")
+			{ 
+				finalSCNObj.push(arr_scanner_property[i]);
+			}
+			else if (deviceScannerType.indexOf(scnType) != -1)
+			{
+				finalSCNObj.push(arr_scanner_property[i]);
+			}
+			else if ((deviceScannerType.indexOf("Camera") != -1) && scnType == "Imager")
+			{
+				finalSCNObj.push(arr_scanner_property[i]);
+			}
+		}
 	}
-		
-	else if (scnnam.indexOf(type) != -1)
-	{
-		return true;
-	}
-	else if ((scnnam.indexOf("Camera") != -1) && type == "Imager")
-	{
-		return true;		
-	}
-	else
-	{
-		return false;
-	}	
+
+	return finalSCNObj;
 }
+
 
 
