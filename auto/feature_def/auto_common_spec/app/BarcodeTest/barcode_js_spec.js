@@ -25,15 +25,16 @@ describe("Scanner Test", function() {
 						enumObject.enable();
 						setTimeout(function() {
 						enableflag = true;
-						}, 5000);
+						}, 10000);
 					});
 					
 					waitsFor(function() {
 						return enableflag;
-					}, "Waiting for enable", 6000);
+					}, "Waiting for enable", 11000);
 				
 				});
 			});
+
 
 			describe("Barcode property using set/getProperty for "+ scntype +": "+ scnname, function() {
 
