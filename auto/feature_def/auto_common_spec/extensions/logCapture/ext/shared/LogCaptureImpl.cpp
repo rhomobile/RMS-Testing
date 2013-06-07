@@ -90,8 +90,7 @@ namespace rho {
                     String tok = rho::String_trim(oTokenizer.nextToken());
                     if (tok.length() == 0)
                         continue;
-                    
-                    //m_arExcludeAttribs.addElement( "\"" + tok + "\"=>\"" );
+
                     mExcludeCategories.addElement( tok );
                 } 
             }
@@ -112,11 +111,6 @@ namespace rho {
         virtual void start(rho::apiGenerator::CMethodResult& oResult)
         {
             LOGCONF().addAuxSink(this);
-        }
-        virtual void start( int maxSize, rho::apiGenerator::CMethodResult& oResult)
-        {
-            mMaxLines = maxSize;
-            
         }
         
         virtual void stop(rho::apiGenerator::CMethodResult& oResult)

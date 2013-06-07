@@ -1,8 +1,7 @@
 entry: Init_LogCapture_extension
 javaentry: com.logcapture.LogCapture
 libraries: ["LogCapture"]
-android:
-  source_list: ext/platform/android/ext_java.files
+
 wp8:
   csharp_impl: yes
   root_namespace: rho
