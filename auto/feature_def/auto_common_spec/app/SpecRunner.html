@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html>
 <head>
     <script type="text/javascript" charset="utf-8" src="/public/jquery/jquery-1.6.4.min.js"></script>
@@ -15,46 +14,40 @@
     <script type="text/javascript" src="helpers/specHelpers.js"></script>
 
     <!-- include source files here... -->
-    <script type="text/javascript" src="NetworkTest/network_ruby_test.js"></script>
-    <!--<script type="text/javascript" src="SystemRE1Test/system_js_test.js"></script>
+    <script type="text/javascript" charset="utf-8" src="/public/api/rhoapi-modules.js"></script>
+    <!--script type="text/javascript" src="SystemRE1Test/systemRE1Test.js"></script>
     <script type="text/javascript" src="IndicatorsTest/indicatorsTest.js"></script>
     <script type="text/javascript" src="CardReaderTest/CardReaderTest.js"></script>
+    <script type="text/javascript" src="NetworkConnectionTest/networkConnectionTest.js"></script>
     <script type="text/javascript" src="ScreenOrientationTest/ScreenOrientationTest.js"></script>
-	<script type="text/javascript" src="VideoCaptureTest/VideoCaptureTest.js"></script>
-	<script type="text/javascript" src="BarcodeTest/barcodeTest.js"></script>
-	<script type="text/javascript" src="BarcodeTest/barcode_js_test.js"></script>
-	<script type="text/javascript" src="SensorsTest/SensorsTest.js"></script> -->
-    
+    <script type="text/javascript" src="VideoCaptureTest/VideoCaptureTest.js"></script>
+    <script type="text/javascript" src="BarcodeTest/barcodeTest.js"></script>
+    <script type="text/javascript" src="SensorsTest/SensorsTest.js"></script-->
+
     <!-- include spec files here... -->
-    <!--<script type="text/javascript" src="SystemRE1Test/systemRE1Spec.js"></script>
-    <script type="text/javascript" src="SystemRE1Test/system_js_spec.js"></script>
+    <!--script type="text/javascript" src="SystemRE1Test/systemRE1Spec.js"></script>
     <script type="text/javascript" src="SignatureTest/signatureTest.js"></script>
     <script type="text/javascript" src="IndicatorsTest/indicatorsSpec.js"></script>
-    <script type="text/javascript" src="CardReaderTest/CardReaderSpec.js"></script>-->
-    <script type="text/javascript" src="NetworkTest/network_ruby_spec.js"></script>
-    <!--<script type="text/javascript" src="VideoCaptureTest/VideoCaptureSpec.js"></script>
+    <script type="text/javascript" src="CardReaderTest/CardReaderSpec.js"></script>
+    <script type="text/javascript" src="NetworkConnectionTest/networkConnectionSpec.js"></script>
+    <script type="text/javascript" src="VideoCaptureTest/VideoCaptureSpec.js"></script>
     <script type="text/javascript" src="ScreenOrientationTest/ScreenOrientationSpec.js"></script>
     <script type="text/javascript" src="BarcodeTest/barcodeSpec.js"></script>
-    <script type="text/javascript" src="BarcodeTest/barcode_js_spec.js"></script>
-    <script type="text/javascript" src="SensorsTest/SensorsSpec.js"></script>
-    <script type="text/javascript" src="ApplicationTest/application_js_spec.js"></script>
-    <script type="text/javascript" src="CallbackTest/callback_js_spec.js"></script>-->
-    <script type="text/javascript" src="DatabaseTest/database_js_spec.js"></script>
-    <script type="text/javascript" src="LogTest/log_js_spec.js"></script>
-    <script type="text/javascript" src="WebViewTest/webview_js_spec.js"></script>
-    <!--<script type="text/javascript" src="GeneratorTest/generator_js_spec.js"></script>
-	<script type="text/javascript" src="OrmTest/orm_js_spec.js"></script>
-	<script type="text/javascript" src="RhoapiTest/rhoapi_js_spec.js"></script>-->
-    <!--
-    <script type="text/javascript" src="NetworkTest/server_url.js"></script>
-    <script type="text/javascript" src="NetworkTest/network_js_spec.js"></script>
-    -->
+    <script type="text/javascript" src="SensorsTest/SensorsSpec.js"></script-->
 
- 
-    <!-- include rhoapi-modules.js... -->
-    <script type="text/javascript" charset="utf-8" src="/public/api/rhoapi-modules.js"></script>
-	
-    <title>RhoElements Common API Tests</title>
+    <!-- Below moved from rhodes/spes/js_spec -->
+    <!--script type="text/javascript" src="ApplicationTest/applicationSpec.js"></script>
+    <script type="text/javascript" src="CallbackTest/callbackSpec.js"></script>
+    <script type="text/javascript" src="DatabaseTest/databaseSpec.js"></script>
+    <script type="text/javascript" src="DatabaseTest/databaseSQLite3Spec.js"></script>
+    <!--script type="text/javascript" src="GeneratorTest/generatorSpec.js"></script>
+    <script type="text/javascript" src="LogTest/LogSpec.js"></script-->
+    <script type="text/javascript" src="OrmTest/ormSpec.js"></script>
+    <!--script type="text/javascript" src="RhoapiTest/rhoapiSpec.js"></script>
+    <script type="text/javascript" src="WebViewTest/WebViewSpec.js"></script-->
+
+
+    <title>Engineering Test Page</title>
     <style>
         a {
             text-decoration: none
@@ -95,33 +88,23 @@
 <body>
 <br>
 
-<h1>RhoElements Common API Tests</h1>
+<h1>JS Engineering Tests</h1>
 
 <p>
 
 <div id="output" style="display:none"></div>
 
-<!-- Required for Barcode Tests -->
+<!--  Required for Barcode Tests -->
 <div id="retProp" style="display:none"></div>
 <div id="scannerReady" style="display:none"></div>
 
-<!-- Required for Signal and Battery Tests -->
+<!--  Required for Signal and Battery Tests -->
 <div id="indicatorOutput" style="display:none">Hello</div>
 <div id="indicatorOutput2" style="display:none">Hello</div>
-<!-- Required for Network -->
+<!--  Required for Network -->
 <div id="connectionStatus"></div>
 <div id="networkPort" style="display:none"></div>
 <div id="socketReady" style="display:none"></div>
 </p>
-
-<!-- Required for Displaying Current Execution Process and Displaying Output on Device -->
-<div id="detailsdiv"></div>
-<div id="test">
-<ul id="myList">
-</ul>
-<ul id="myList2">
-</ul>
-</div>
-
 </body>
 </html>

@@ -23,7 +23,17 @@ describe("<ORM module specs>", function() {
         db = null;
     });
 
-
+    it('should create model',function(){
+        var Product = function(model){
+            modelName("Product");
+            enable("sync");
+            property("name","string");
+            property("brand","string");
+        };
+        Rho.ORM.addModel(p);
+        source = Opal.Rho._scope.RhoConfig.$sources().map["Product"];
+        console.log("source is:" + source);
+    }
     //Rho.ORM.clear: function() {
     //Rho.ORM.addModel: function(modelClass) {
     //Rho.ORM.getModel: function(modelClass) {

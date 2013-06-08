@@ -181,7 +181,7 @@ var Rho = Rho || (function ($) {
         }
 
         var cmdText = $.toJSON(cmd);
-        console.log(cmdText);
+        //console.log(cmdText);
 
         var result = null;
         var deferred = new $.Deferred(function (dfr) {
