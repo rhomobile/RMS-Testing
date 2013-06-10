@@ -60,17 +60,20 @@
 <body>
 
 
-<div>Using RUBY set Tabbar</div>
-<ul id="ruby">
+
     <script type="text/javascript">
-        if (!isWindowsPhone8Platform()) {
-            $("#ruby").append('<li><a href="/app/NativeTabbarTest/set_tabbar_forjs">NativeTabbar</a></li>');
-        }
+    	function Createtabbarnew(tabelements, tabbarproperties)
+        {
+        	Rho.NativeTabbar.create(tabelements,tabbarproperties);
 
-        if (!isWindowsPhone8Platform()) {
-            $("#ruby").append('<li><a href="/app/NativeTabbarTest/set_no_bar_forjs">set_no_NativeTabbar</a></li>');
         }
+   
 
+    	function removetabbar()
+        {
+        	Rho.NativeTabbar.remove();
+        }
+        
         if ( Rho.System.platform == 'WINDOWS' )
         {
         
@@ -79,7 +82,7 @@
             ];        
         }   
     </script>
-</ul>
+
 
 <h1>Rho.WebView</h1>
 
@@ -93,6 +96,18 @@
         <div class="test_scenario_controls">
             <button class="getValue" onClick='setDomElementText("activeTab_test", Rho.WebView.activeTab);'> get activeTab</button>
             <br/>
+	          <a href="javascript:void(0)" onclick="Createtabbarnew(
+					[{'label':'Native Tabbar', 'action':'/app/WebviewTest/webview.html', 'icon':'/public/images/bar/gears.png'},
+					{'label':'Main page', 'action':'/app/WebviewTest/webview.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true},
+					{'label':'Page1', 'action':'/app/WebviewTest/webview.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true},
+					{'label':'Page2', 'action':'/app/WebviewTest/webview.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true},
+					{'label':'Page3', 'action':'/app/WebviewTest/webview.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true},
+					{'label':'Page4', 'action':'/app/WebviewTest/webview.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true}
+					], 
+					{'verticalOrientation':false, 'hiddenTabs': false, 'createOnDemand' : false, 'placeTabsBottom':false}
+					);">
+					 NativeTabbar.create </a><br />
+				<a href="javascript:void(0)" onclick="removetabbar();">Remove the Tabbar </a><br/>
             <span class="result"></span>
         </div>
         <div class="test_scenario_desc">
