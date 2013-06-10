@@ -111,11 +111,11 @@
             <br/>
 	          <a href="javascript:void(0)" onclick="Createtabbarnew(
 					[{'label':'Native Tabbar', 'action':'/app/WebviewTest/webview.html', 'icon':'/public/images/bar/gears.png'},
-					{'label':'Main page', 'action':'/app/WebviewTest/webview.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true},
+					{'label':'Main page', 'action':'/app/WebviewTest/webview.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':false},
 					{'label':'Page1', 'action':'/app/WebviewTest/webview.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true},
 					{'label':'Page2', 'action':'/app/WebviewTest/webview.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true},
-					{'label':'Page3', 'action':'/app/WebviewTest/webview.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true},
-					{'label':'Page4', 'action':'/app/WebviewTest/webview.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true}
+					{'label':'Page3', 'action':'/app/WebviewTest/webview.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':false},
+					{'label':'Page4', 'action':'/app/WebviewTest/webview.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':false}
 					], 
 					{'verticalOrientation':false, 'hiddenTabs': false, 'createOnDemand' : false, 'placeTabsBottom':false}
 					);">
@@ -166,6 +166,7 @@
 
 <div id="enableWebPlugins_test" class="method_tests android">
     <div class="method_name">WebView.enableWebPlugins</div>
+    <div class="method_desc">Set enabling/disabling web plugins</div>
 
     <video id="video1"
            src="/public/media/nfc.mp4"
@@ -175,8 +176,6 @@
             >
         This browser doesn't support HTML5 video!
     </video>
-
-    <div class="method_desc">Set enabling/disabling web plugins</div>
 
     <div class="test_scenario">
         <div class="test_scenario_controls">
