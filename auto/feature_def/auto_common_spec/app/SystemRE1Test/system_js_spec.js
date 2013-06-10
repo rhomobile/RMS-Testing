@@ -1,10 +1,10 @@
 describe("System Module JS Test Starts Here", function() {
+
 	describe("System Module-Setting Directly Test Starts Here", function() {
 
 		it("VT300-003 | call getProperty with  applicationIconBadge as 1 | 1", function() {
 			Rho.System.applicationIconBadge = 1;
 		    expect(Rho.System.applicationIconBadge).toEqual(1);
-			alert(htmlReporter.focusedSpecName());
 		});
 
 		it("VT300-004 | call getProperty with  applicationIconBadge as 0 | 0", function() {
@@ -56,64 +56,36 @@ describe("System Module JS Test Starts Here", function() {
 
 		it("VT300-046 | set screenAutoRotate as false, call getProperty with screenAutoRotate | false", function() {
 
-				Rho.System.screenAutoRotate = false;
-		    	var data =  Rho.System.getProperty('screenAutoRotate');
-				expect(data).toEqual('false');
+			Rho.System.screenAutoRotate = false;
+	    	var data =  Rho.System.getProperty('screenAutoRotate');
+			expect(data).toEqual('false');
 		});
 
 		it("VT300-047 | set screenAutoRotate as true, call getProperty with screenAutoRotate | true", function() {
 
-				Rho.System.screenAutoRotate = true;
-		    	var data =  Rho.System.getProperty('screenAutoRotate');
-				expect(data).toEqual('true');
+			Rho.System.screenAutoRotate = true;
+	    	var data =  Rho.System.getProperty('screenAutoRotate');
+			expect(data).toEqual('true');
 
 		});
 		
 		
 		it("VT300-054 | set screenSleeping as true, call getProperty with screenSleeping | true", function() {
 
-				Rho.System.screenSleeping = true;
-		    	var data =  Rho.System.getProperty('screenSleeping');
-				expect(data).toEqual('true');
+			Rho.System.screenSleeping = true;
+	    	var data =  Rho.System.getProperty('screenSleeping');
+			expect(data).toEqual('true');
 
 		});
 		
 		it("VT300-055 | set screenSleeping as false, call getProperty with screenSleeping | false", function() {
 
-				Rho.System.screenSleeping = false;
-		    	var data =  Rho.System.getProperty('screenSleeping');
-				expect(data).toEqual('false');
+			Rho.System.screenSleeping = false;
+	    	var data =  Rho.System.getProperty('screenSleeping');
+			expect(data).toEqual('false');
 
 		});
 		
-		it("VT300-070 | call getAllProperties() | ", function() {
-
-		    	var data =  Rho.System.getAllProperties();
-				displayResult("VT300-070 | call getAllProperties() | ",$.toJSON(data));
-
-		});
-		
-		it("VT300-077 | call isApplicationInstalled() with application name which is there in device | ", function() {
-			
-				var data = Rho.System.isApplicationInstalled('rhomobile nativejasmine');
-				displayResult("VT300-077 | call isApplicationInstalled() with application name which is there in device | ",data);
-			
-		});
-		
-		it("VT300-077 | call isApplicationInstalled() with application name which is there in device | ", function() {
-			
-				var data = Rho.System.isApplicationInstalled('com.rhomobile.nativejasmine');
-				displayResult("VT300-077 | call isApplicationInstalled() with application name which is there in device | ",data);
-			
-		});
-		
-		it("VT300-078 | call isApplicationInstalled() with application name which is not there in device | ", function() {
-			
-				var data = Rho.System.isApplicationInstalled('RhoElements3');
-				displayResult("VT300-078 | call isApplicationInstalled() with application name which is not there in device | ",data);
-			
-		});
-
 		it("VT300-068 | call clearAllProperties() | false,true,false", function() {
 			Rho.System.screenSleeping = false;
 			Rho.System.screenAutoRotate = false;
@@ -216,38 +188,22 @@ describe("System Module JS Test Starts Here", function() {
 
 	});
 
-	describe("System Module- getProperty Test Starts Here", function() {
-		var m = 0;
-
-		for (var i=0;i<sys_get_property.length;i++){
-
-		it(sys_get_property[i]['testName'], function() {
-
-			var data = Rho.System.getProperty(sys_get_property[m]['propertyName']);
-			displayResult(sys_get_property[m]['testName'],data);
-			m++;
-	   		
-		});
-		
-		}
-	});
-
-
 	describe("System Module- setProperty/getProperty Test Starts Here", function() {
-		var k =0;
 
 		for (var i=0;i<sys_setget_property.length;i++){
-		
-		it(sys_setget_property[i]['testName'], function() {
-		
-			Rho.System.setProperty(sys_setget_property[k]['propertyName'],sys_setget_property[k]['propertyValue'])
-			var data = Rho.System.getProperty(sys_setget_property[k]['propertyName']);
-			displayResult(sys_setget_property[k]['testName'],data);
-			expect(data).toEqual(sys_setget_property[k]['expectedResult']);
-			k++;
-						
-		});
-		
+
+			(function(idx){
+
+				it(sys_setget_property[i]['testName'], function() {
+				
+					Rho.System.setProperty(sys_setget_property[idx]['propertyName'],sys_setget_property[idx]['propertyValue'])
+					var data = Rho.System.getProperty(sys_setget_property[idx]['propertyName']);
+					expect(data).toEqual(sys_setget_property[idx]['expectedResult']);
+								
+				});
+
+			})(i);
+
 		}
 
 		it("VT300-123 | call clearAllProperties() after seeting the properties with setproperty | false,true,false", function() {
@@ -266,89 +222,42 @@ describe("System Module JS Test Starts Here", function() {
 
 	});
 
-	describe("System Module- getProperties Test Starts Here", function() {
-		var m = 0;
-
-		for (var i=0;i<sys_get_properties.length;i++){
-
-		it(sys_get_properties[i]['testName'], function() {
-
-			var data = Rho.System.getProperties(sys_get_properties[m]['propertyName']);
-			displayResult(sys_get_properties[m]['testName'],$.toJSON(data));
-			m++;
-		});
-		
-		}
-
-		it("VT300-126 | call getproperties with callback as anonymous function | ", function() {
-			var data = '';
-			var flag = false;
-
-			runs(function(){
-			
-				Rho.System.getProperties(['country','deviceName','devicePushId','freeServerPort'],function(objData){
-					data = $.toJSON(objData);
-					}
-				);
-
-				// 1 Sec Wait
-				setTimeout(function() {
-        			flag = true;
-     			}, 1000);
-			});
-
-			waitsFor(function() {
-    			return flag;
-    		}, "1 sec wait", 2000);
-
-    		runs(function(){
-				displayResult("VT300-126 | call getproperties with callback as anonymous function | ",data);
-			});
-		});
-
-		it("VT300-127 | call getproperties with callback as async defined function | ", function() {
-			var data = '';
-			var flag = false;
-			var sysAsyncCallback = function (objData){data = $.toJSON(objData);}
-
-			runs(function(){
-			
-				Rho.System.getProperties(['country','deviceName','devicePushId','freeServerPort'],sysAsyncCallback);
-
-				// 1 Sec Wait
-				setTimeout(function() {
-        			flag = true;
-     			}, 1000);
-			});
-
-			waitsFor(function() {
-    			return flag;
-    		}, "1 sec wait", 2000);
-
-    		runs(function(){
-				displayResult("VT300-127 | call getproperties with callback as anonymous function | ",data);
-			});
-		});
-
-	});
-
 	describe("System Module- setProperties/getProperties Test Starts Here", function() {
-		var k =0;
 
 		for (var i=0;i<sys_setget_properties.length;i++){
-		
-		it(sys_setget_properties[i]['testName'], function() {
-		
-			var obj = jQuery.parseJSON(sys_setget_properties[k]['setPropertyName']);
-			Rho.System.setProperties(obj);
-			var data = Rho.System.getProperties(sys_setget_property[k]['getPropertyName']);
-			displayResult(sys_setget_properties[k]['testName'],$.toJSON(data));
-			expect(data).toEqual(sys_setget_properties[k]['expectedResult']);
-			k++;
-		});
-		
-		}
+			(function(idx){
+				it(sys_setget_properties[idx]['testName'], function() {
 
+					var propertyName = sys_setget_properties[idx]['propertyName'];
+					var propertyValue = sys_setget_properties[idx]['propertyValue'];
+
+					if (propertyValue == 'true')
+						var strProperty = '{"'+propertyName+'" :'+true+'}';
+					else if (propertyValue == 'false')
+						var strProperty = '{"'+propertyName+'" :'+false+'}';
+					else if (!isNaN(propertyValue)){
+						propertyValue = parseInt(propertyValue);
+						var strProperty = '{"'+propertyName+'" :'+propertyValue+'}';
+					}
+					else{
+						var strProperty = '{"'+propertyName+'" : "'+propertyValue+'"}'
+					}
+
+					var objProperty = jQuery.parseJSON(strProperty);
+
+					Rho.System.setProperties(objProperty);
+
+
+					var strGetProperty = '["'+sys_setget_properties[idx]['propertyName']+'"]';
+					var objGetProperty = jQuery.parseJSON(strGetProperty);
+
+					var data = Rho.System.getProperties(objGetProperty);
+					data = data[sys_setget_properties[idx]['propertyName']];
+					expect(data).toEqual(sys_setget_properties[idx]['expectedResult']);
+
+				});
+			})(i);
+		}
 	});
 
 });

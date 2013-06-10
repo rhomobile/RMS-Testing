@@ -9,3 +9,4 @@ dt span.result {color: white; background-color: #808080}
 .test_scenario_controls {}
 .test_scenario_desc {}
 .test_scenario_number {margin-left: 10px; margin-right: 10px}
+.result {color: darkgreen}
