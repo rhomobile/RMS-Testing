@@ -80,11 +80,11 @@ end
 $local_server.mount_proc '/test_methods' do |req,res|
     if req.request_method == "GET" then
         res.status = 200
-        res.body = "initial request is: #{req.inspect}"
+        res.body = "initial GET request is: #{req.query['data1']} and #{req.query['data2']}"
         res.content_length = res.body.length
     elsif req.request_method == "POST" then
         res.status = 200
-        res.body = "initial request is: #{req.inspect}"
+        res.body = "initial POST request is: #{req.query['data1']} and #{req.query['data2']}"
         res.content_length = res.body.length
     else
         res.body = "Unsupported server method: #{req.request_method}"
@@ -98,11 +98,11 @@ end
 $secure_server.mount_proc '/test_methods' do |req,res|
     if req.request_method == "GET" then
         res.status = 200
-        res.body = "initial request is: #{req.inspect}"
+        res.body = "initial GET request is: #{req.query['data1']} and #{req.query['data2']}"
         res.content_length = res.body.length
         elsif req.request_method == "POST" then
         res.status = 200
-        res.body = "initial request is: #{req.inspect}"
+        res.body = "initial POST request is: #{req.query['data1']} and #{req.query['data2']}"
         res.content_length = res.body.length
         else
         res.body = "Unsupported server method: #{req.request_method}"
