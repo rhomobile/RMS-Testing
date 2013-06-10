@@ -67,7 +67,7 @@ describe("Notification", function() {
 			{
 				var ledName = enumObject.name;
 
-				describe("Illuminating LED: "+ ledName, function() {
+				describe("Controlling LED: "+ ledName, function() {
 
 					beforeEach(function() {
 						document.getElementById("actResult").innerHTML = "init";
