@@ -18,6 +18,11 @@ function getmodulename()
     var srvHttpDownloadImageUrl = srvHttpUrl + "/download_image";
     var srvHttpDownloadImageUrlAuth = srvHttpUrl + "/download_image_auth";
     var srvHttpUploadTextFileUrl = srvHttpUrl + "/upload_text_file";
+    
+    var srvSecureHost = SERVER_HOST;
+    var srvSecurePort = SECURE_PORT;
+    var srvSecureUrl = "https://" + srvSecureHost + ":" + srvSecurePort.toString();
+    var srvSecureTestMethodsUrl = srvSecureUrl + "/test_methods";
 
 
 //var index = document.controlForm.myChoice.selectedIndex;
@@ -296,7 +301,7 @@ if(selected_Module=="VT293-0039")
 if(selected_Module=="VT293-0040")
 {
     certificateProps = {
-        url: "https://192.168.6.27/rhodes/AsyncHttp/asyncpost.php",
+        url: srvSecureTestMethodsUrl,
 		body: "data1=test&data2=test2"
 	 };
    Rho.Network.post(certificateProps, post_callback);
@@ -304,7 +309,7 @@ if(selected_Module=="VT293-0040")
 if(selected_Module=="VT293-0041")
 {
     certificateProps = {
-        url: "https://192.168.6.27/rhodes/AsyncHttp/asyncpost.php",
+        url: srvSecureTestMethodsUrl,
 		body: "data1=test&data2=test2",
 		verifyPeerCertificate: true
 	 };
@@ -313,7 +318,7 @@ if(selected_Module=="VT293-0041")
 if(selected_Module=="VT293-0042")
 {
     certificateProps = {
-        url: "https://192.168.6.27/rhodes/AsyncHttp/asyncpost.php",
+        url: srvSecureTestMethodsUrl,
 		body: "data1=test&data2=test2",
 		verifyPeerCertificate: false
 	 };
