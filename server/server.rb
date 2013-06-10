@@ -37,6 +37,10 @@ $local_server.mount_proc '/download' do |req,res|
   res.content_length = res.body.length
 end
 
+$local_server.mount_proc '/upload' do |req,res|
+    upload_body = req.body
+end
+
 $local_server.mount_proc '/download_image' do |req,res|
     res.body = File.open( File.join( File.dirname(__FILE__),"test.jpg" ), "rb" )
     res["content-type"]="image/jpeg"
@@ -107,16 +111,20 @@ $secure_server.mount_proc '/test_methods' do |req,res|
     end
 end
 
+to_generate = [
+    '../manual/feature_def/manual_common_spec/public/js/server_url.js',
+    '../auto/feature_def/auto_common_spec/public/js/server_url.js'
+]
 
-
-f = open('../public/js/server_url.js','w')
-f.puts("SERVER_HOST='#{host}';")
-f.puts("SERVER_PORT=#{port};");
-f.puts("SECURE_HOST='#{host}';")
-f.puts("SECURE_PORT=#{securePort};");
-
-f.close()
-
+to_generate.each do |path|
+    f = open(path,'w')
+    f.puts("SERVER_HOST='#{host}';")
+    f.puts("SERVER_PORT=#{port};");
+    f.puts("SECURE_HOST='#{host}';")
+    f.puts("SECURE_PORT=#{securePort};");
+    
+    f.close()
+end
 
 trap 'INT' do
     $local_server.shutdown
