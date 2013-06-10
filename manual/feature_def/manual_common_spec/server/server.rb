@@ -1,10 +1,35 @@
 require 'webrick'
+require 'webrick/https'
 require 'socket'
+require 'openssl'
 require 'net/http'
 
+def localip
+    orig, Socket.do_not_reverse_lookup = Socket.do_not_reverse_lookup, true  # turn off reverse DNS resolution temporarily
+    UDPSocket.open do |s|
+        s.connect '174.142.8.58', 1
+        s.addr.last
+    end
+    ensure
+    Socket.do_not_reverse_lookup = orig
+end
+
+host = localip
 port = 81
+securePort = 82
+
+cert = OpenSSL::X509::Certificate.new File.read 'fd_testing.cert'
+pkey = OpenSSL::PKey::RSA.new File.read 'fd_testing.key'
+
+puts "SSL creds: #{cert.inspect}, #{pkey.inspect}"
 
 $local_server = WEBrick::HTTPServer.new :Port => port
+$secure_server = WEBrick::HTTPServer.new(:Port => securePort,
+                                 :SSLEnable => true,
+                                 :SSLCertificate => cert,
+                                 :SSLPrivateKey => pkey,
+                                 :SSLVerifyClient => OpenSSL::SSL::VERIFY_NONE
+                                 )
 
 $local_server.mount_proc '/download' do |req,res|
   res.body = "Downloaded content"
@@ -20,8 +45,6 @@ end
 
 $local_server.mount_proc '/download_image_auth' do |req,res|
     WEBrick::HTTPAuth.basic_auth(req, res, "My Realm") {|user, pass|
-        # block should return true if
-        # authentication token is valid
         user == 'admin' && pass == 'admin'
     }
     
@@ -39,8 +62,6 @@ end
 
 $local_server.mount_proc '/upload_text_file_auth' do |req,res|
     WEBrick::HTTPAuth.basic_auth(req, res, "My Realm") {|user, pass|
-        # block should return true if
-        # authentication token is valid
         user == 'admin' && pass == 'Motorola@123'
     }
 
@@ -68,24 +89,49 @@ $local_server.mount_proc '/test_methods' do |req,res|
     end
 end
 
-def localip
-    orig, Socket.do_not_reverse_lookup = Socket.do_not_reverse_lookup, true  # turn off reverse DNS resolution temporarily
-    UDPSocket.open do |s|
-        s.connect '174.142.8.58', 1
-        s.addr.last
+
+#Secure server mount points
+$secure_server.mount_proc '/test_methods' do |req,res|
+    if req.request_method == "GET" then
+        res.status = 200
+        res.body = "initial request is: #{req.inspect}"
+        res.content_length = res.body.length
+        elsif req.request_method == "POST" then
+        res.status = 200
+        res.body = "initial request is: #{req.inspect}"
+        res.content_length = res.body.length
+        else
+        res.body = "Unsupported server method: #{req.request_method}"
+        res.status = 503
+        res.content_length = res.body.length
     end
-ensure
-    Socket.do_not_reverse_lookup = orig
 end
 
-host = localip
-
-puts "Starting local server on #{host}:#{port}"
 
 
-f = open('public/js/server_url.js','w')
+f = open('../public/js/server_url.js','w')
 f.puts("SERVER_HOST='#{host}';")
 f.puts("SERVER_PORT=#{port};");
+f.puts("SECURE_HOST='#{host}';")
+f.puts("SECURE_PORT=#{securePort};");
+
 f.close()
 
-$local_server.start
+
+trap 'INT' do
+    $local_server.shutdown
+    $secure_server.shutdown
+end
+
+t1 = Thread.new do
+    puts "Starting local server on #{host}:#{port}"
+    $local_server.start
+end
+
+t2 = Thread.new do
+    puts "Starting secure server on #{host}:#{securePort}"
+    $secure_server.start
+end
+
+t1.join
+t2.join
