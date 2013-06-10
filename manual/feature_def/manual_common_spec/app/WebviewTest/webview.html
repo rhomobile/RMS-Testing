@@ -16,6 +16,20 @@
 
 
     <script type="text/javascript">
+
+        function doAction(val) {
+            var url = "/app/WebviewTest/" + val
+            if (window.XMLHttpRequest) {
+                var xhr = new window.XMLHttpRequest();
+                xhr.open("GET", url, true);
+                xhr.send(null);
+            } else {
+                var xmlHttpReq = new ActiveXObject("Msxml2.XMLHTTP");
+                xmlHttpReq.open("GET", url, true);
+                xmlHttpReq.send();
+            }
+        }
+
         function setDomElementText(id, string){
             var element = "#" + id + " span.result";
             $(element).text($.toJSON(string));
@@ -354,7 +368,6 @@
     <div class="test_scenario">
         <div class="test_scenario_controls">
             <button class="getValue" onClick='setDomElementText("viewportWidth_test", Rho.WebView.viewportWidth);'> get viewportWidth</button>
-            <br/>
             <span class="result"></span>
         </div>
         <div class="test_scenario_desc">
@@ -362,29 +375,6 @@
             <span> Get viewportWidth value</span>
         </div>
     </div>
-</div>
-
-
-<div id="executeJavascript_test" class="method_tests android ios win32 wm wp8">
-    <div class="method_name">WebView.executeJavascript</div>
-
-    <script type="text/javascript">
-        function doAction(val) {
-            var url = "/app/WebviewTest/" + val
-            if (window.XMLHttpRequest) {
-                var xhr = new window.XMLHttpRequest();
-                xhr.open("GET", url, true);
-                xhr.send(null);
-            } else {
-                var xmlHttpReq = new ActiveXObject("Msxml2.XMLHTTP");
-                xmlHttpReq.open("GET", url, true);
-                xmlHttpReq.send();
-            }
-        }
-    </script>
-    <div><span class="result"></span></div>
-    <button onClick="doAction('executeJavascriptOnCurrentTab')">ExecuteJavascript on current tab</button>
-    <button onClick="doAction('executeJavascriptOnTab1')">ExecuteJavascript on tab 1</button>
 </div>
 
 <div id="zoomPage_test" class="method_tests wm">
@@ -602,6 +592,57 @@
         <div class="test_scenario_desc">
             <span class="test_scenario_number">VT301-55</span>
             <span> Get currentLocation for tab index -1</span>
+        </div>
+    </div>
+</div>
+
+<div id="currentURL_test" class="method_tests android ios win32 wm wp8">
+    <div class="method_name">WebView.currentURL</div>
+    <div><span class="result"></span></div>
+
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <button onClick="doAction('currentUrlOfCurrentTab')">Current URL of current tab</button>
+        </div>
+        <div class="test_scenario_desc">
+            <span class="test_scenario_number">VT301-056</span>
+            <span> Press button for show current URL of current tab</span>
+        </div>
+    </div>
+
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <button onClick="Rho.Webview.navigate('http://www.google.com', 1)">Navigate(google, 1)</button>
+            <button onClick="doAction('currentUrlOfTab1')">Current URL of tab with index 1</button>
+        </div>
+        <div class="test_scenario_desc">
+            <span class="test_scenario_number">VT301-057</span>
+            <span> Press button for show current URL of tab with index 1</span>
+        </div>
+    </div>
+</div>
+
+<div id="executeJavascript_test" class="method_tests android ios win32 wm wp8">
+    <div class="method_name">WebView.executeJavascript</div>
+    <div><span class="result"></span></div>
+
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <button onClick="doAction('executeJavascriptOnCurrentTab')">ExecuteJavascript on current tab</button>
+        </div>
+        <div class="test_scenario_desc">
+            <span class="test_scenario_number">VT301-062</span>
+            <span> Press button for call executeJavascript from Ruby controller. It should insert text on current tab</span>
+        </div>
+    </div>
+
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <button onClick="doAction('executeJavascriptOnTab1')">ExecuteJavascript on tab 1</button>
+        </div>
+        <div class="test_scenario_desc">
+            <span class="test_scenario_number">VT301-060</span>
+            <span> Press button for call executeJavascript from Ruby controller. It should insert text on tab with index 1</span>
         </div>
     </div>
 </div>

@@ -15,4 +15,20 @@ class WebviewTestController < Rho::RhoController
 
   end
 
+  def currentUrlOfCurrentTab
+    url = Rho::WebView.currentURL()
+    Rho::WebView.executeJavascript("setDomElementText('currentURL_test', '" + url +  "')", 1)
+
+  end
+
+  def currentUrlOfTab1
+    url = Rho::WebView.currentURL(1)
+    Rho::WebView.executeJavascript("setDomElementText('currentURL_test', '" + url +  "')", 1)
+
+  end
+
+
+
+
+
 end
