@@ -6,16 +6,30 @@
 
     <link type="text/css" rel="stylesheet" href="/public/css/manual_styles.css">
 
-    <script src="/public/jquery/jquery-1.6.4.min.js" type="text/javascript"></script>
-    <script src="/public/jquery/jquery.json-2.3.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="/public/jquery/jquery-1.6.4.js"></script>
+    <script type="text/javascript" src="/public/jquery/jquery.json-2.3.js"></script>
+
     <script type="text/javascript" charset="utf-8" src="/public/api/rhoapi-modules.js"></script>
     <script type="text/javascript" src="webview.js"></script>
     <script type="text/javascript" src="/public/js/helpers.js"></script>
 
-    <script type="text/javascript" src="/public/jquery/jquery-1.6.4.js"></script>
-    <script type="text/javascript" src="/public/jquery/jquery.json-2.3.js"></script>
+
 
     <script type="text/javascript">
+
+        function doAction(val) {
+            var url = "/app/WebviewTest/" + val
+            if (window.XMLHttpRequest) {
+                var xhr = new window.XMLHttpRequest();
+                xhr.open("GET", url, true);
+                xhr.send(null);
+            } else {
+                var xmlHttpReq = new ActiveXObject("Msxml2.XMLHTTP");
+                xmlHttpReq.open("GET", url, true);
+                xmlHttpReq.send();
+            }
+        }
+
         function setDomElementText(id, string){
             var element = "#" + id + " span.result";
             $(element).text($.toJSON(string));
@@ -60,31 +74,33 @@
 <body>
 
 
-<div>Using RUBY set Tabbar</div>
-<ul id="ruby">
-    <script type="text/javascript">
-        if (!isWindowsPhone8Platform()) {
-            $("#ruby").append('<li><a href="/app/NativeTabbarTest/set_tabbar_forjs">NativeTabbar</a></li>');
-        }
+<script type="text/javascript">
+    function Createtabbarnew(tabelements, tabbarproperties) {
+        Rho.NativeTabbar.create(tabelements, tabbarproperties);
 
-        if (!isWindowsPhone8Platform()) {
-            $("#ruby").append('<li><a href="/app/NativeTabbarTest/set_no_bar_forjs">set_no_NativeTabbar</a></li>');
-        }
+    }
 
-        if ( Rho.System.platform == 'WINDOWS' )
-        {
-        
-            Rho.Application.nativeMenu = [
-                { 'Tab0': 'javascript:tabbarSwitch(0)'}, { 'Tab1': 'javascript:tabbarSwitch(1)'}, {'Tab2': 'javascript:tabbarSwitch(2)'}, {'Tab3': 'javascript:tabbarSwitch(3)'}, {'Tab4': 'javascript:tabbarSwitch(4)'}, {'Exit': 'exit' }
-            ];        
-        }   
-    </script>
-</ul>
+
+    function removetabbar() {
+        Rho.NativeTabbar.remove();
+    }
+
+    if (Rho.System.platform == 'WINDOWS') {
+
+        Rho.Application.nativeMenu = [
+            { 'Tab0': 'javascript:tabbarSwitch(0)'},
+            { 'Tab1': 'javascript:tabbarSwitch(1)'},
+            {'Tab2': 'javascript:tabbarSwitch(2)'},
+            {'Tab3': 'javascript:tabbarSwitch(3)'},
+            {'Tab4': 'javascript:tabbarSwitch(4)'},
+            {'Exit': 'exit' }
+        ];
+    }
+</script>
+
 
 <h1>Rho.WebView</h1>
 
-
-<!-- All platforms tests -->
 <div id="activeTab_test" class="method_tests android ios win32 wm wp8">
     <div class="method_name">WebView.activeTab</div>
     <div class="method_desc">An active tab index.</div>
@@ -93,6 +109,18 @@
         <div class="test_scenario_controls">
             <button class="getValue" onClick='setDomElementText("activeTab_test", Rho.WebView.activeTab);'> get activeTab</button>
             <br/>
+	          <a href="javascript:void(0)" onclick="Createtabbarnew(
+					[{'label':'Native Tabbar', 'action':'/app/WebviewTest/webview.html', 'icon':'/public/images/bar/gears.png'},
+					{'label':'Main page', 'action':'/app/WebviewTest/webview.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':false},
+					{'label':'Page1', 'action':'/app/WebviewTest/webview.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true},
+					{'label':'Page2', 'action':'/app/WebviewTest/webview.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true},
+					{'label':'Page3', 'action':'/app/WebviewTest/webview.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':false},
+					{'label':'Page4', 'action':'/app/WebviewTest/webview.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':false}
+					], 
+					{'verticalOrientation':false, 'hiddenTabs': false, 'createOnDemand' : false, 'placeTabsBottom':false}
+					);">
+					 NativeTabbar.create </a><br />
+				<a href="javascript:void(0)" onclick="removetabbar();">Remove the Tabbar </a><br/>
             <span class="result"></span>
         </div>
         <div class="test_scenario_desc">
@@ -139,6 +167,15 @@
 <div id="enableWebPlugins_test" class="method_tests android">
     <div class="method_name">WebView.enableWebPlugins</div>
     <div class="method_desc">Set enabling/disabling web plugins</div>
+
+    <video id="video1"
+           src="/public/media/nfc.mp4"
+           controls="controls"
+           width="320"
+           height="240"
+            >
+        This browser doesn't support HTML5 video!
+    </video>
 
     <div class="test_scenario">
         <div class="test_scenario_controls">
@@ -340,7 +377,6 @@
     <div class="test_scenario">
         <div class="test_scenario_controls">
             <button class="getValue" onClick='setDomElementText("viewportWidth_test", Rho.WebView.viewportWidth);'> get viewportWidth</button>
-            <br/>
             <span class="result"></span>
         </div>
         <div class="test_scenario_desc">
@@ -569,6 +605,57 @@
     </div>
 </div>
 
+<div id="currentURL_test" class="method_tests android ios win32 wm wp8">
+    <div class="method_name">WebView.currentURL</div>
+    <div><span class="result"></span></div>
+
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <button onClick="doAction('currentUrlOfCurrentTab')">Current URL of current tab</button>
+        </div>
+        <div class="test_scenario_desc">
+            <span class="test_scenario_number">VT301-056</span>
+            <span> Press button for show current URL of current tab</span>
+        </div>
+    </div>
+
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <button onClick="Rho.Webview.navigate('http://www.google.com', 1)">Navigate(google, 1)</button>
+            <button onClick="doAction('currentUrlOfTab1')">Current URL of tab with index 1</button>
+        </div>
+        <div class="test_scenario_desc">
+            <span class="test_scenario_number">VT301-057</span>
+            <span> Press button for show current URL of tab with index 1</span>
+        </div>
+    </div>
+</div>
+
+<div id="executeJavascript_test" class="method_tests android ios win32 wm wp8">
+    <div class="method_name">WebView.executeJavascript</div>
+    <div><span class="result"></span></div>
+
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <button onClick="doAction('executeJavascriptOnCurrentTab')">ExecuteJavascript on current tab</button>
+        </div>
+        <div class="test_scenario_desc">
+            <span class="test_scenario_number">VT301-062</span>
+            <span> Press button for call executeJavascript from Ruby controller. It should insert text on current tab</span>
+        </div>
+    </div>
+
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <button onClick="doAction('executeJavascriptOnTab1')">ExecuteJavascript on tab 1</button>
+        </div>
+        <div class="test_scenario_desc">
+            <span class="test_scenario_number">VT301-060</span>
+            <span> Press button for call executeJavascript from Ruby controller. It should insert text on tab with index 1</span>
+        </div>
+    </div>
+</div>
+
 <div id="navigate_test" class="method_tests android ios win32 wm wp8">
     <div class="method_name">WebView.navigate()</div>
     <div class="method_desc">Force WebView to navigate to a URL.</div>
@@ -673,6 +760,17 @@
 <div id="refresh_test" class="method_tests android ios win32 wm wp8">
     <div class="method_name">WebView.refresh()</div>
     <div class="method_desc">Force WebView to refresh the current page.</div>
+    <div><span class="result"></span></div>
+
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <button onClick='setDomElementText("refresh_test", "This text was inserted by JS");'>Press for inserting text</button>
+        </div>
+        <div class="test_scenario_desc">
+            <span class="test_scenario_number"></span>
+            <span>Press button for inserting text by JS. This text should disappear after refreshing</span>
+        </div>
+    </div>
 
     <div class="test_scenario">
         <div class="test_scenario_controls">
@@ -762,31 +860,6 @@
     </div>
 </div>
 
-<!--
-
- <div id="Non_WM_Specific_Tests">
-    <h4>Non WM specific methods</h4>
-    <dl>
-        <dt id="setCookie_test">Rho.WebView.setCookie: <span class="result"></span>
-            <script type="text/javascript">setDomElementText("setCookie_test", document.cookie);</script>
-        <div></div>
-        <button onClick='Rho.WebView.setCookie("http://127.0.0.1", "key_1=DevaStoredCookie1");'>Set single cookie</button><br/>
-        <button onClick='Rho.WebView.setCookie("http://127.0.0.1", "key_2=DevaStoredCookie2;key_3=bhaktabhakta");'>Set multiple cookie</button><br/>
-        <button onClick='setDomElementText("setCookie_test", document.cookie);'>Show document cookie</button>
-    </dl>
-</div>
-</dt>
-<dd>
-    [VT301-080/VT301-081]<br/>
-    When WebView loads the specified url (either by selecting link or from calling WebView.navigate), it will
-    add this cookie to the HTTP request.
-</dd>
-</dl>
-
-</div>
-
- -->
-
 <div id="setCookie_test" class="method_tests android ios win32 wp8">
     <div class="method_name">WebView.setCookie()</div>
     <div class="method_desc"> When WebView loads the specified url (either by selecting link or from calling WebView.navigate), it will add this cookie to the HTTP request.</div>
@@ -824,10 +897,6 @@
 
 
 </div>
-
-<!-- Test any platform but WM  methods -->
-
-
 
 <!--
 

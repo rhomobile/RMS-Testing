@@ -1,16 +1,16 @@
 function callNavbarcreate()
 {
-	Rho.Navbar.create({ 'left':{'action':'/public/app/index.html','label':'Back'},'title':'Navbar Test'})
+	Rho.Navbar.create({ 'left':{'action':'/app/index.html','label':'Back'},'title':'Navbar Test'})
 }
 
 function callNavbarcreateright()
 {
-	Rho.Navbar.create({ 'left':{'action':'/public/app/index.html', 'label':'Back'}, 'right':{'action':'/public/app/api/system.html', 'label':'System'},'title':'Navbar Test'})
+	Rho.Navbar.create({ 'left':{'action':'/app/index.html', 'label':'Back'}, 'right':{'action':'/app/System/system.html', 'label':'System'},'title':'Navbar Test'})
 }
 
 function callNavbarcreatewithoutleft()
 {
-	Rho.Navbar.create({ 'right':{'action':'/public/app/api/system.html', 'label':'System'},'title':'Navbar Test'})
+	Rho.Navbar.create({ 'right':{'action':'/app/System/system.html', 'label':'System'},'title':'Navbar Test'})
 }
 
 function callNavbarremove()
@@ -20,12 +20,12 @@ function callNavbarremove()
 
 function callNavbarcreatewithouttitle()
 {
-	Rho.Navbar.create({ 'left':{'action':'/public/app/index.html', 'label':'Back'},'title':''})
+	Rho.Navbar.create({ 'left':{'action':'/app/index.html', 'label':'Back'},'title':''})
 }
 
 function callNavbarcreatewithoutlabel()
 {
-	Rho.Navbar.create({ 'left':{'action':'/public/app/index.html','label':''},'title':'Navbar Test'})
+	Rho.Navbar.create({ 'left':{'action':'/app/index.html','label':''},'title':'Navbar Test'})
 }
 
 function callNavbarcreateinvalidaction()

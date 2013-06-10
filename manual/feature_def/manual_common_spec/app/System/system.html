@@ -9,6 +9,7 @@
     <script type="text/javascript" src="system.js"></script>
     <link type="text/css" rel="stylesheet" href="/public/css/manual_styles.css">
     <script type="text/javascript">
+    //This needs to be changed according to the Environment
 	var server1 = '192.168.6.18/Received';
 	var server2 = '192.168.6.27/filestoinstall';
 	var ftpusername = 'admin';
@@ -415,7 +416,7 @@
 	</div>
 	<div class="test_scenario">
 		<div class="test_scenario_controls">
-			<a href="javascript:void(0)" onclick ="callapplicationInstall('/public/testfiles/InstallTestapp.cab');">call application Install 	with local url</a>
+			<a href="javascript:void(0)" onclick ="callapplicationInstall('/app/public/testfiles/InstallTestapp.cab');">call application Install 	with local url</a>
 		</div>
 		<span class="test_scenario_number">VT300-065 <br /></span>
 	</div>
@@ -436,7 +437,7 @@
 	</div>
 	<div class="test_scenario">
 		<div class="test_scenario_controls">
-			<a href="javascript:void(0)" onclick ="callapplicationInstall('/public/testfiles/InstallTestapp_signed.apk');">call applicationInstall 	with local url</a>
+			<a href="javascript:void(0)" onclick ="callapplicationInstall('/app/public/testfiles/InstallTestapp_signed.apk');">call applicationInstall 	with local url</a>
 		</div>
 		<span class="test_scenario_number">VT300-065 <br /></span>
 	</div>	
@@ -456,7 +457,7 @@
 	</div>
 	<div class="test_scenario">
 		<div class="test_scenario_controls">
-			<a href="javascript:void(0)" onclick ="callapplicationInstall('/public/testfiles/InstallTestapp.cab');">call application Install 	with local url</a>
+			<a href="javascript:void(0)" onclick ="callapplicationInstall('/app/public/testfiles/InstallTestapp.cab');">call application Install 	with local url</a>
 		</div>
 		<span class="test_scenario_number">VT300-065 <br /></span>
 	</div>
@@ -490,7 +491,7 @@
 	<div class="method_desc">Delete Folder : Deletes the folder /public/testfiles/testfoldertodelete</div>
 	<div class="test_scenario">
 		<div class="test_scenario_controls">
-		<a href="javascript:void(0)" onclick ="calldeleteFolder('/public/testfiles/testfoldertodelete');">Call deleteFolder</a>
+		<a href="javascript:void(0)" onclick ="calldeleteFolder('/app/public/testfiles/testfoldertodelete');">Call deleteFolder</a>
 	</div>
 	<span class="test_scenario_number">VT300-069 <br /></span>
 	</div>
@@ -556,22 +557,22 @@
 
 <div class="method_tests">
 	<div class="method_name">Rho.System.setDoNotBackupAttribute</div>
-	<div class="method_desc">Set do not backup attribute for file ('/public/testfiles/donotbackup.txt') </div>
+	<div class="method_desc">Set do not backup attribute for file ('/app/public/testfiles/donotbackup.txt') </div>
 	<div class="test_scenario">
 		<div class="test_scenario_controls">
-			<a href="javascript:void(0)" onclick ="CallsetDoNotBackupAttribute('/public/testfiles/donotbackup.txt', true);">Call setDoNotBackupAttribute with doNotBackup as true</a>
+			<a href="javascript:void(0)" onclick ="CallsetDoNotBackupAttribute('/app/public/testfiles/donotbackup.txt', true);">Call setDoNotBackupAttribute with doNotBackup as true</a>
 		</div>
 		<span class="test_scenario_number"> <br />VT300-081</span>
 	</div>
 	<div class="test_scenario">
 		<div class="test_scenario_controls">
-			<a href="javascript:void(0)" onclick ="CallsetDoNotBackupAttribute('/public/testfiles/donotbackup.txt', false);">Call setDoNotBackupAttribute with doNotBackup as false</a>
+			<a href="javascript:void(0)" onclick ="CallsetDoNotBackupAttribute('/app/public/testfiles/donotbackup.txt', false);">Call setDoNotBackupAttribute with doNotBackup as false</a>
 		</div>
 		<span class="test_scenario_number"> <br />VT300-082</span>
 	</div>
 	<div class="test_scenario">
 		<div class="test_scenario_controls">
-			<a href="javascript:void(0)" onclick ="CallsetDoNotBackupAttribute('/public/testfiles/loading.png', true);">Call setDoNotBackupAttribute with path to image file</a>
+			<a href="javascript:void(0)" onclick ="CallsetDoNotBackupAttribute('/app/public/testfiles/loading.png', true);">Call setDoNotBackupAttribute with path to image file</a>
 		</div>
 		<span class="test_scenario_number"> <br />VT300-083</span>
 	</div>
@@ -633,45 +634,45 @@
 	<div class="method_desc"> Zip and Unzip File : Zip location is /public/testfiles/</div>
 	<div class="test_scenario">
 		<div class="test_scenario_controls">
-		<a href="javascript:void(0)" onclick ="Rho.System.unzipFile('/public/testfiles/zipfile.zip');">Call unzipFile() without password 'zipfile.zip'</a>
+		<a href="javascript:void(0)" onclick ="Rho.System.unzipFile('/app/public/testfiles/zipfile.zip');">Call unzipFile() without password 'zipfile.zip'</a>
 		</div>
 		<span class="test_scenario_number">VT300-093<br /></span>
 	</div>	
 	<div class="test_scenario">
 		<div class="test_scenario_controls">		
-		<a href="javascript:void(0)" onclick ="Rho.System.zipFile('/public/testfiles/zipfile.zip', '/public/testfiles/sample.txt');">Call Zip File without password 'sample.txt will be zip to zipfile.zip'</a>
+		<a href="javascript:void(0)" onclick ="Rho.System.zipFile('/app/public/testfiles/zipfile.zip', '/app/public/testfiles/sample.txt');">Call Zip File without password 'sample.txt will be zip to zipfile.zip'</a>
 		</div>
 		
 	</div>
 	<div class="test_scenario">
 		<div class="test_scenario_controls">		
-		<a href="javascript:void(0)" onclick ="Rho.System.unzipFile('/public/testfiles/zipfilepass.zip');"> Call unzipFile() without password which requires password 'zipfilepass.zip'</a>
+		<a href="javascript:void(0)" onclick ="Rho.System.unzipFile('/app/public/testfiles/zipfilepass.zip');"> Call unzipFile() without password which requires password 'zipfilepass.zip'</a>
 		</div>
 		<span class="test_scenario_number">VT300-094<br /></span>
 	</div>
 	<div class="test_scenario">
 		<div class="test_scenario_controls">		
-		<a href="javascript:void(0)" onclick ="Rho.System.zipFile('/public/testfiles/zipfilepass.zip', '/public/testfiles/sample.txt','rhomobile');"> Zip file with password 'sample.txt will be zip to zipfilepass.zip'</a>
+		<a href="javascript:void(0)" onclick ="Rho.System.zipFile('/app/public/testfiles/zipfilepass.zip', '/app/public/testfiles/sample.txt','rhomobile');"> Zip file with password 'sample.txt will be zip to zipfilepass.zip'</a>
 		</div>
 		<span class="test_scenario_number">VT300-100 <br /></span>
 	</div>
 	<div class="test_scenario">
 		<div class="test_scenario_controls">		
-		<a href="javascript:void(0)" onclick ="Rho.System.unzipFile('/public/testfiles/zipfilepass.zip','rhomobile');"> Call unzipFile() with password</a>
+		<a href="javascript:void(0)" onclick ="Rho.System.unzipFile('/app/public/testfiles/zipfilepass.zip','rhomobile');"> Call unzipFile() with password</a>
 		</div>
 		<span class="test_scenario_number">VT300-095 <br /></span>
 	</div>
 	
 	<div class="test_scenario">
 		<div class="test_scenario_controls">		
-		<a href="javascript:void(0)" onclick ="Rho.System.unzipFile('/public/testfiles/zipfilesmultiplepass.zip','rhomobile');"> call unzipFile() after calling zipfiles() 'file unzipped zipfilesmultiplepass.zip'</a>
+		<a href="javascript:void(0)" onclick ="Rho.System.unzipFile('/app/public/testfiles/zipfilesmultiplepass.zip','rhomobile');"> call unzipFile() after calling zipfiles() 'file unzipped zipfilesmultiplepass.zip'</a>
 		</div>
 		<span class="test_scenario_number">VT300-096 <br /></span>
 	</div>
 	
 	<div class="test_scenario">
 		<div class="test_scenario_controls">		
-		<a href="javascript:void(0)" onclick ="Rho.System.zipFiles('/public/testfiles/zipfilesmultiplepass.zip', '/public/testfiles/',['sample.txt', 'sample1.txt','sample2.txt'],'rhomobile');"> call zipFiles() with password (zip files) files will be zipped 'sample.txt', 'sample1.txt','sample2.txt' to zipfilesmultiplepass.zip</a>
+		<a href="javascript:void(0)" onclick ="Rho.System.zipFiles('/app/public/testfiles/zipfilesmultiplepass.zip', '/app/public/testfiles/',['sample.txt', 'sample1.txt','sample2.txt'],'rhomobile');"> call zipFiles() with password (zip files) files will be zipped 'sample.txt', 'sample1.txt','sample2.txt' to zipfilesmultiplepass.zip</a>
 		</div>
 		<span class="test_scenario_number">VT300-103 <br /></span>
 	</div>		

@@ -1,8 +1,8 @@
 # startup page for your application
-start_path = '/app/index.html'
+start_path = '/public/index.html'
 
 # path to the options page (in this case handled by javascript)
-options_path = '/public/app/settings.html'
+options_path = '/public/settings.html'
 
 # location of bundle url (i.e. from rhohub.com); used by desktop win32 simulator
 rhobundle_zip_url = ''
@@ -14,7 +14,6 @@ rhobundle_zip_pwd = nil
 # log level
 # 0-trace, 1-info(app level), 3-warnings, 4-errors
 # for production set to 3
-#LogFilePath = '/mnt/sdcard/RETestApp.log'
 MinSeverity  = 1 
 
 # enable copy log messages to standard output, useful for debugging
@@ -40,14 +39,14 @@ MaxLogFileSize=0
 logserver = 'http://rhologs.heroku.com' 
 
 # log file prefix - contain human-readable text
-logname='js-sas'
+logname='SimpleApp'
 
 # Keep track of the last visited page
 KeepTrackOfLastVisitedPage = 0 
 LastVisitedPage = ''
 
-# sync server url, typically this will look like 'http://<hostname>:<port>/application'
-# for example: 'http://localhost:9292/application'
+# sync server url, typically this will look like 'http://<hostname>:<port>'
+# for example: 'http://localhost:9292'
 syncserver = ''
 
 # geo location inactivity timeout (in seconds)

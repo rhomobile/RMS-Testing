@@ -16,13 +16,13 @@
             if (!Rho.NativeTabbar.isCreated())
             {
         
-                //Rho.NativeTabbar.create( [ {'label':'tab1', 'action':'/public/app/index.html', 'reload':true}, {'label':'tab2', 'action':'javascript:tabbarCallback2();'} ], {'hiddenTabs': true, 'createOnDemand' : true});
+                //Rho.NativeTabbar.create( [ {'label':'tab1', 'action':'/app/index.html', 'reload':true}, {'label':'tab2', 'action':'javascript:tabbarCallback2();'} ], {'hiddenTabs': true, 'createOnDemand' : true});
                 
                 Rho.NativeTabbar.create( [ 
                     //{'label':'MainPage', 'action':'/app/HomeScreen/homeScreen', 'useCurrentViewForTab':true},
-                    {'label':'MainPage', 'action':'NativeTabBar_MainPage.html', 'useCurrentViewForTab':true},
-                    {'label':'Page1', 'action':'NativeTabBar_Page1.html'}, 
-                    {'label':'Page2', 'action':'NativeTabBar_Page2.html', 'perishable':'true'} ], 
+                    {'label':'MainPage', 'action':'/app/NativeTabbarTest/NativeTabBar_MainPage.html', 'useCurrentViewForTab':true},
+                    {'label':'Page1', 'action':'/app/NativeTabbarTest/NativeTabBar_Page1.html'}, 
+                    {'label':'Page2', 'action':'/app/NativeTabbarTest/NativeTabBar_Page2.html', 'perishable':'true'} ], 
                   {'hiddenTabs': true, 'createOnDemand' : true}, tabbarEventHandler );
                   
                 Rho.NativeTabbar.switchTab(0);
@@ -36,13 +36,13 @@
         
         function tabbarCreateTnv() 
         {
-                //Rho.NativeTabbar.create( [ {'label':'tab1', 'action':'/public/app/index.html', 'reload':true}, {'label':'tab2', 'action':'javascript:tabbarCallback2();'} ], {'hiddenTabs': true, 'createOnDemand' : true});
+                //Rho.NativeTabbar.create( [ {'label':'tab1', 'action':'/app/index.html', 'reload':true}, {'label':'tab2', 'action':'javascript:tabbarCallback2();'} ], {'hiddenTabs': true, 'createOnDemand' : true});
                 
                 Rho.NativeTabbar.create( [ 
                     //{'label':'MainPage', 'action':'/app/HomeScreen/homeScreen', 'useCurrentViewForTab':true},
-                    {'label':'MainPage', 'action':'NativeTabBar_MainPage.html', 'useCurrentViewForTab':true},
-                    {'label':'Page1', 'action':'NativeTabBar_Page1.html'}, 
-                    {'label':'Page2', 'action':'NativeTabBar_Page2.html', 'perishable':'true'} ], 
+                    {'label':'MainPage', 'action':'/app/NativeTabbarTest/NativeTabBar_MainPage.html', 'useCurrentViewForTab':true},
+                    {'label':'Page1', 'action':'/app/NativeTabbarTest/NativeTabBar_Page1.html'}, 
+                    {'label':'Page2', 'action':'/app/NativeTabbarTest/NativeTabBar_Page2.html', 'perishable':'true'} ], 
                   	{'hiddenTabs': true, 'createOnDemand' : true}, tabbarEventHandler );
                   
                 Rho.NativeTabbar.switchTab(0);
@@ -64,9 +64,9 @@
         {
         
 			tabbar = [
-      			{'label' : 'Tab', 'action' : 'NativeTabBar_MainPage.html', 'icon' : '/public/images/bar/gears.png',    'reload' : true, 'backgroundColor' : 0x7F7F7F},
-      			{'label' : 'Main',  'action' : '/public/app/index.html', 'icon' : '/public/images/bar/colored_btn.png', 'reload' : true},
-      			{'label' : 'Main 2', 'action' : '/public/app/index.html', 'icon' : '/public/images/bar/home_btn.png', 'reload' : true}
+      			{'label' : 'Tab', 'action' : '/app/NativeTabbarTest/NativeTabBar_MainPage.html', 'icon' : '/public/images/bar/gears.png',    'reload' : true, 'backgroundColor' : 0x7F7F7F},
+      			{'label' : 'Main',  'action' : '/app/index.html', 'icon' : '/public/images/bar/colored_btn.png', 'reload' : true},
+      			{'label' : 'Main 2', 'action' : '/app/index.html', 'icon' : '/public/images/bar/home_btn.png', 'reload' : true}
     			]
     		Rho.NativeTabbar.create(tabbar, {'placeTabsBottom':true})
     		Rho.NativeTabbar.setTabBadge(1, '12')
@@ -75,8 +75,8 @@
         function Createtabbarwithcallback()
         {
         	Rho.NativeTabbar.create( [ 
-                {'label':'Native Tabbar', 'action':'NativeTabBar_MainPage.html', 'icon':'/public/images/bar/gears.png'},
-				{'label':'Main page', 'action':'/public/app/index.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true}
+                {'label':'Native Tabbar', 'action':'/app/NativeTabbarTest/NativeTabBar_MainPage.html', 'icon':'/public/images/bar/gears.png'},
+				{'label':'Main page', 'action':'/app/index.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true}
 				], 
                 {'hiddenTabs': false, 'createOnDemand' : false}, tabbarEventHandler );
         }
@@ -243,7 +243,7 @@
 		<div class="test_scenario_controls">
 			<div id="Rho_NativeTabbar_currentTabIndex">
 				<a href="javascript:void(0)" onclick="Createtabbarnew(
-					{'label':'MainPage', 'action':'/public/app/index.html', 'icon':'/public/images/thumb.png'}], 
+					{'label':'MainPage', 'action':'/app/index.html', 'icon':'/public/images/thumb.png'}], 
 					{'verticalOrientation':false, 'hiddenTabs': false, 'createOnDemand' : false, 'placeTabsBottom':false}
 					);">
 			Call Remove the Current Tab bar then and replace with NativeTabbar.create </a><br/><br/>
@@ -256,8 +256,8 @@
 		<div class="test_scenario_controls">
 			<div id="Rho_NativeTabbar_currentTabIndex">
 				<a href="javascript:void(0)" onclick="Createtabbarnew(
-					[{'label':'MainPage', 'action':'/public/app/index.html', 'icon':'/public/images/thumb.png', 'reload':true},
-					{'label':'page1', 'action':'NativeTabBar_MainPage.html', 'icon':'/public/images/toggle.png', 'reload':true}], 
+					[{'label':'MainPage', 'action':'/app/index.html', 'icon':'/public/images/thumb.png', 'reload':true},
+					{'label':'page1', 'action':'/app/NativeTabbarTest/NativeTabBar_MainPage.html', 'icon':'/public/images/toggle.png', 'reload':true}], 
 					{'verticalOrientation':false, 'hiddenTabs': false, 'createOnDemand' : false, 'placeTabsBottom':false}
 					);">
 			Call Remove the Current Tab bar and then replace with NativeTabbar.create </a><br/><br/>
@@ -305,8 +305,8 @@
 		<div class="test_scenario_controls">
 			<div id="Rho_NativeTabbar_currentTabIndex">
 				<a href="javascript:void(0)" onclick="Createtabbarnew(
-					[{'label':'Native Tabbar', 'action':'NativeTabBar_MainPage.html', 'icon':'/public/images/bar/gears.png', 'use_current_view_for_tab':true},
-					{'label':'Main page', 'action':'/public/app/index.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true}], 
+					[{'label':'Native Tabbar', 'action':'/app/NativeTabbarTest/NativeTabBar_MainPage.html', 'icon':'/public/images/bar/gears.png', 'use_current_view_for_tab':true},
+					{'label':'Main page', 'action':'/app/index.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true}], 
 					{'verticalOrientation':false, 'hiddenTabs': false, 'createOnDemand' : false, 'placeTabsBottom':false}
 					);">
 					Call Remove current tab  and then Create   </a><br/><br/>
@@ -320,8 +320,8 @@
 		<div class="test_scenario_controls">
 			<div id="Rho_NativeTabbar_currentTabIndex">
 				<a href="javascript:void(0)" onclick="Createtabbarnew(
-					[{'label':'Native Tabbar', 'action':'NativeTabBar_MainPage.html', 'icon':'/public/images/bar/gears.png', 'use_current_view_for_tab':true},
-					{'label':'Main page', 'action':'/public/app/index.html', 'icon':'/public/images/bar/colored_btn.png', 'use_current_view_for_tab':true}], 
+					[{'label':'Native Tabbar', 'action':'/app/NativeTabbarTest/NativeTabBar_MainPage.html', 'icon':'/public/images/bar/gears.png', 'use_current_view_for_tab':true},
+					{'label':'Main page', 'action':'/app/index.html', 'icon':'/public/images/bar/colored_btn.png', 'use_current_view_for_tab':true}], 
 					{'verticalOrientation':false, 'hiddenTabs': false, 'createOnDemand' : false, 'placeTabsBottom':false}
 					);">
 					Call remove current tab  and then create   </a><br/><br/>
@@ -335,8 +335,8 @@
 		<div class="test_scenario_controls">
 			<div id="Rho_NativeTabbar_currentTabIndex">
 				<a href="javascript:void(0)" onclick="Createtabbarnew(
-					[{'label':'Native Tabbar', 'action':'NativeTabBar_MainPage.html', 'icon':'/public/images/bar/gears.png', 'selectedColor':0xFFFF00},
-					{'label':'Main page', 'action':'/public/app/index.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true}], 
+					[{'label':'Native Tabbar', 'action':'/app/NativeTabbarTest/NativeTabBar_MainPage.html', 'icon':'/public/images/bar/gears.png', 'selectedColor':0xFFFF00},
+					{'label':'Main page', 'action':'/app/index.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true}], 
 					{'verticalOrientation':false, 'hiddenTabs': false, 'createOnDemand' : false, 'placeTabsBottom':false}
 					);">
 					Change the selected color   </a><br/><br/>
@@ -350,8 +350,8 @@
 		<div class="test_scenario_controls">
 			<div id="Rho_NativeTabbar_currentTabIndex">
 				<a href="javascript:void(0)" onclick="Createtabbarnew(
-					[{'label':'Native Tabbar', 'action':'NativeTabBar_MainPage.html', 'icon':'/public/images/bar/gears.png', 'selectedColor':0xFFFF00},
-					{'label':'Main page', 'action':'/public/app/index.html', 'icon':'/public/images/bar/colored_btn.png', 'selectedColor':0xFFFF00, 'reload':true}], 
+					[{'label':'Native Tabbar', 'action':'/app/NativeTabbarTest/NativeTabBar_MainPage.html', 'icon':'/public/images/bar/gears.png', 'selectedColor':0xFFFF00},
+					{'label':'Main page', 'action':'/app/index.html', 'icon':'/public/images/bar/colored_btn.png', 'selectedColor':0xFFFF00, 'reload':true}], 
 					{'verticalOrientation':false, 'hiddenTabs': false, 'createOnDemand' : false, 'placeTabsBottom':false}
 					);">
 					Change the selected color  </a><br/><br/>
@@ -365,8 +365,8 @@
 		<div class="test_scenario_controls">
 			<div id="Rho_NativeTabbar_currentTabIndex">
 				<a href="javascript:void(0)" onclick="Createtabbarnew(
-					[{'label':'Native Tabbar', 'action':'NativeTabBar_MainPage.html', 'icon':'/public/images/bar/gears.png' },
-					{'label':'Main page', 'action':'/public/app/index.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true, 'disabled':true}], 
+					[{'label':'Native Tabbar', 'action':'/app/NativeTabbarTest/NativeTabBar_MainPage.html', 'icon':'/public/images/bar/gears.png' },
+					{'label':'Main page', 'action':'/app/index.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true, 'disabled':true}], 
 					{'verticalOrientation':false, 'hiddenTabs': false, 'createOnDemand' : false, 'placeTabsBottom':false}
 					);">
 					Disable Main Page tab   </a><br/><br/>
@@ -380,8 +380,8 @@
 		<div class="test_scenario_controls">
 			<div id="Rho_NativeTabbar_currentTabIndex">
 				<a href="javascript:void(0)" onclick="Createtabbarnew(
-					[{'label':'Native Tabbar', 'action':'NativeTabBar_MainPage.html', 'icon':'/public/images/bar/gears.png' },
-					{'label':'Main page', 'action':'/public/app/index.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true}], 
+					[{'label':'Native Tabbar', 'action':'/app/NativeTabbarTest/NativeTabBar_MainPage.html', 'icon':'/public/images/bar/gears.png' },
+					{'label':'Main page', 'action':'/app/index.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true}], 
 					{'verticalOrientation':true, 'hiddenTabs': false, 'createOnDemand' : false, 'placeTabsBottom':false}
 					);">
 					Creates a vertical tabbar </a><br/><br/>
@@ -395,8 +395,8 @@
 		<div class="test_scenario_controls">
 			<div id="Rho_NativeTabbar_currentTabIndex">
 				<a href="javascript:void(0)" onclick="Createtabbarnew(
-					[{'label':'Native Tabbar', 'action':'NativeTabBar_MainPage.html', 'icon':'/public/images/bar/gears.png'},
-					{'label':'Main page', 'action':'/public/app/index.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true}], 
+					[{'label':'Native Tabbar', 'action':'/app/NativeTabbarTest/NativeTabBar_MainPage.html', 'icon':'/public/images/bar/gears.png'},
+					{'label':'Main page', 'action':'/app/index.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true}], 
 					{'verticalOrientation':false, 'backgroundColor':0x0000FF, 'hiddenTabs': false, 'createOnDemand' : false, 'placeTabsBottom':false}
 					);">
 					Tabbar with background</a><br/><br/>
@@ -410,8 +410,8 @@
 		<div class="test_scenario_controls">
 			<div id="Rho_NativeTabbar_currentTabIndex">
 				<a href="javascript:void(0)" onclick="Createtabbarnew(
-					[{'action':'NativeTabBar_MainPage.html', 'icon':'/public/images/bar/gears.png'},
-					{'label':'Main page', 'action':'/public/app/index.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true}], 
+					[{'action':'/app/NativeTabbarTest/NativeTabBar_MainPage.html', 'icon':'/public/images/bar/gears.png'},
+					{'label':'Main page', 'action':'/app/index.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true}], 
 					{'verticalOrientation':false, 'hiddenTabs': true, 'createOnDemand' : false, 'placeTabsBottom':false}
 					);">
 					Tabbar with one hiddenTabs</a><br/><br/>
@@ -425,8 +425,8 @@
 		<div class="test_scenario_controls">
 			<div id="Rho_NativeTabbar_currentTabIndex">
 				<a href="javascript:void(0)" onclick="Createtabbarnew(
-					[{'label':'Native Tabbar', 'action':'NativeTabBar_MainPage.html', 'icon':'/public/images/bar/gears.png'},
-					{'label':'Main page', 'action':'/public/app/index.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true}], 
+					[{'label':'Native Tabbar', 'action':'/app/NativeTabbarTest/NativeTabBar_MainPage.html', 'icon':'/public/images/bar/gears.png'},
+					{'label':'Main page', 'action':'/app/index.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true}], 
 					{'verticalOrientation':false, 'hiddenTabs': true, 'createOnDemand' : false, 'placeTabsBottom':false}
 					);">
 					Tabbar with 2 hiddenTabs  </a><br/><br/>
@@ -479,23 +479,23 @@
 		<div class="test_scenario_controls">
 			<div id="Rho_NativeTabbar_currentTabIndex">
 				<a href="javascript:void(0)" onclick="Createtabbarnew(
-					[{'label':'Native Tabbar', 'action':'NativeTabBar_MainPage.html', 'icon':'/public/images/bar/gears.png'},
-					{'label':'Main page', 'action':'/public/app/index.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true},
-					{'label':'Page1', 'action':'/public/app/index.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true},
-					{'label':'Page2', 'action':'NativeTabBar_MainPage.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true},
-					{'label':'Page3', 'action':'/public/app/index.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true},
-					{'label':'Page4', 'action':'/public/app/index.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true},
-					{'label':'Page5', 'action':'NativeTabBar_MainPage.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true},
-					{'label':'Page6', 'action':'/public/app/index.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true},
-					{'label':'Page7', 'action':'NativeTabBar_MainPage.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true},
-					{'label':'Page8', 'action':'/public/app/index.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true},
-					{'label':'Page9', 'action':'/public/app/index.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true},
-					{'label':'Page10', 'action':'NativeTabBar_MainPage.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true},
-					{'label':'Page11', 'action':'/public/app/index.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true},
-					{'label':'Page12', 'action':'NativeTabBar_MainPage.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true},
-					{'label':'Page13', 'action':'/public/app/index.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true},
-					{'label':'Page14', 'action':'/public/app/index.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true},
-					{'label':'Page15', 'action':'NativeTabBar_MainPage.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true}
+					[{'label':'Native Tabbar', 'action':'/app/NativeTabbarTest/NativeTabBar_MainPage.html', 'icon':'/public/images/bar/gears.png'},
+					{'label':'Main page', 'action':'/app/index.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true},
+					{'label':'Page1', 'action':'/app/index.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true},
+					{'label':'Page2', 'action':'/app/NativeTabbarTest/NativeTabBar_MainPage.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true},
+					{'label':'Page3', 'action':'/app/index.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true},
+					{'label':'Page4', 'action':'/app/index.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true},
+					{'label':'Page5', 'action':'/app/NativeTabbarTest/NativeTabBar_MainPage.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true},
+					{'label':'Page6', 'action':'/app/index.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true},
+					{'label':'Page7', 'action':'/app/NativeTabbarTest/NativeTabBar_MainPage.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true},
+					{'label':'Page8', 'action':'/app/index.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true},
+					{'label':'Page9', 'action':'/app/index.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true},
+					{'label':'Page10', 'action':'/app/NativeTabbarTest/NativeTabBar_MainPage.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true},
+					{'label':'Page11', 'action':'/app/index.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true},
+					{'label':'Page12', 'action':'/app/NativeTabbarTest/NativeTabBar_MainPage.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true},
+					{'label':'Page13', 'action':'/app/index.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true},
+					{'label':'Page14', 'action':'/app/index.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true},
+					{'label':'Page15', 'action':'/app/NativeTabbarTest/NativeTabBar_MainPage.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true}
 					], 
 					{'verticalOrientation':false, 'hiddenTabs': false, 'createOnDemand' : false, 'placeTabsBottom':false}
 					);">
@@ -510,10 +510,10 @@
 		<div class="test_scenario_controls">
 			<div id="Rho_NativeTabbar_currentTabIndex">
 				<a href="javascript:void(0)" onclick="Createtabbarnew(
-					[{'label':'Native Tabbar', 'action':'NativeTabBar_MainPage.html', 'icon':'/public/images/bar/gears.png'},
-					{'label':'Long label Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola', 'action':'/public/app/index.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true},
-					{'label':'Long label Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola', 'action':'/public/app/index.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true},
-					{'label':'Page2', 'action':'NativeTabBar_MainPage.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true}
+					[{'label':'Native Tabbar', 'action':'/app/NativeTabbarTest/NativeTabBar_MainPage.html', 'icon':'/public/images/bar/gears.png'},
+					{'label':'Long label Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola', 'action':'/app/index.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true},
+					{'label':'Long label Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola', 'action':'/app/index.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true},
+					{'label':'Page2', 'action':'/app/NativeTabbarTest/NativeTabBar_MainPage.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true}
 					], 
 					{'verticalOrientation':false, 'hiddenTabs': false, 'createOnDemand' : false, 'placeTabsBottom':false}
 					);">
