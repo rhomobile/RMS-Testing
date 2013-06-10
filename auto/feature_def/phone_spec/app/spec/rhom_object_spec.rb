@@ -112,7 +112,7 @@ class Test_Helper
             else
                 copy_file( src_path, Rho::RhoFSConnector::get_blob_folder() )
             end    
-        end    
+        end
     end
 
     def after_each
