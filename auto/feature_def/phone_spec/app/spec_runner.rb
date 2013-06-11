@@ -1,9 +1,11 @@
-require 'rhospec'
+require 'mspec'
 
 class SpecRunner < MSpecScript
   def initialize
+    super
     config[:files] = []
-
+    # turn on exception backtrace
+    MSpec.backtrace = true
     config[:files] << "spec/string/end_with_spec"
     config[:files] << "spec/string/start_with_spec"
     config[:files] << "spec/string/replace_spec"
@@ -67,10 +69,12 @@ end
   end
 
   def run
-    MSpec.register_files config[:files]
-
+	results_path = File.join(Rho::RhoApplication.get_base_app_path(), 'phone_spec_results.xml' )
+	MSpec.register_files config[:files]
+	@@formatter = JUnitFormatter.new(results_path)
+    @@formatter.register
     MSpec.process
     MSpec.exit_code
+	System.exit
   end
-
 end
