@@ -626,6 +626,8 @@ describe("Log JS API", function () {
 				var info = "Error, warning, info and trace message displayed : VT290-350";
 				Rho.Log.info(info, "VT290-350");
 				
+				var savedCat = Rho.Log.includeCategories
+				Rho.Log.includeCategories = "APP";
 				Rho.Log.level = 0;
 				LogLevel = Rho.Log.level;
 				expect(LogLevel).toEqual(0);
@@ -636,9 +638,11 @@ describe("Log JS API", function () {
 				Rho.Log.error("_pass_", "APP");
 
 				expect( checkLogString(Rho.LogCapture.read(),0,4) ).toEqual( true );
+				
+				Rho.Log.includeCategories = savedCat;
 			});
 		});
-
+/*
 		// Set Log Level to 100
 		it("VT290-351 : Set Log Level to 100 | 100", function() {
 			runs(function(){
@@ -678,7 +682,7 @@ describe("Log JS API", function () {
 				expect( checkLogString(Rho.LogCapture.read(),0,4) ).toEqual( true );
 			});
 		});
-		/*
+		
 
 			// Set Log Memory period to 5 seconds
 		it("VT290-355 : Set Log Memory period to 5 secs | 5000", function() {
