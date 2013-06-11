@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Rho.Application</title>
+    <meta name="viewport" content="initial-scale=1.0, width=device-width"/>
+    <script src="/public/jquery/jquery-1.6.4.min.js" type="text/javascript"></script>
+    <script src="/public/jquery/jquery.json-2.3.min.js" type="text/javascript"></script>
+    <script type="text/javascript" charset="utf-8" src="/public/api/rhoapi-modules.js"></script>
+    <script type="text/javascript" src="/app/NativeToolbarTest/Toolbar.js"></script>
+    <script type="text/javascript" src="/public/js/helpers.js"></script>
+	<script type="text/javascript" src="/public/jquery/jquery-1.6.4.js"></script>
+    <script type="text/javascript" src="/public/jquery/jquery.json-2.3.js"></script>
+	
+	
+</head>
+<body>
+
+<h1>Rho.NativeToolbar</h1>
+
+<fieldset>
+	<legend>Rho.NativeToolbar</legend>
+	<ul> Create NativeToolbar:
+	   <li><a href="javascript:void(0)" onclick ="toolCreate();">Create Toolbar</a></li>
+	   <li><a href="javascript:void(0)" onclick ="toolIconLabelMask();">Create Toolbar with Icon and label</a></li>
+	   <li><a href="javascript:void(0)" onclick ="toolColored();">Create Toolbar with Colored Icon for "back"</a></li>
+	   <li><a href="javascript:void(0)" onclick ="toolRemove();">Remove the created toolbar"</a></li>
+	   <li><a href="javascript:void(0)" onclick ="toolNoLabelIcon();">No icon and Label for Home button"</a></li>
+	   <li><a href="javascript:void(0)" onclick ="toolNoAction();">No Action defined for home button"</a></li>
+	   <li><a href="javascript:void(0)" onclick ="toolNoAction();">Invalid Action defined for home button"</a></li>
+	   <li><a href="javascript:void(0)" onclick ="toolLoadIndex();">Load Application test</a></li>
+	   <li><a href="javascript:void(0)" onclick ="toolManyOptions();">Toolbar to create 22 actions</a></li>
+	   <li><a href="javascript:void(0)" onclick ="toolAnime();">Animated icons for toolbar on WM </a></li>
+	   <li><a href="javascript:void(0)" onclick ="toolAnimeOther();">Animated icons for toolbar on Android and Iphone </a></li>
+	   <li><a href="javascript:void(0)" onclick ="toolInvalidView();">Toolbar with Invalid ViewHeight </a></li>
+	   <li><a href="javascript:void(0)" onclick ="toolInvalidBkg();">Toolbar with Invalid Background colour </a></li>
+	   <li><a href="javascript:void(0)" onclick ="toolInvalidMAsk();">Toolbar with Invalid Mask colour </a></li>
+	   <li><a href="javascript:void(0)" onclick ="toolJavascript();">Toolbar with Javascript method for Quit button</a></li>
+	   <li><a href="javascript:void(0)" onclick ="toolCallback();">Toolbar with callback for Loading the page</a></li>
+	   <li><a href="javascript:void(0)" onclick ="toolSwitch1();">Run switch button Toolbar Test</a></li>
+	   <li><a href="javascript:void(0)" onclick ="toolViewHeight();">View Height with a Large value</a></li>
+	</ul>
+</fieldset>	
+
+</body>
+</html>
