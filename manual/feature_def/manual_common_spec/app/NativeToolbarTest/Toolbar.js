@@ -19,7 +19,7 @@ function toolIconLabelMask()
 function toolColored()
 {   
 	var toolElements = new Array();
-	toolElements=[{label: 'Home',action: 'Home',icon:'/public/images/bar/colored_btn.png'},{label:'Exit',action: 'exit',icon:'/public/images/bar/refresh_btn.wm.png'},{label:'back',action:'back',icon:'/public/images/bar/back_btn.png',coloredIcon:'True'}];
+	toolElements=[{label: 'Home',action: 'Home',icon:'/public/images/bar/colored_btn.png'},{label:'Exit',action: 'exit',icon:'/public/images/bar/refresh_btn.wm.png'},{label:'back',action:'back',icon:'/public/images/bar/back_btn_colored.png',coloredIcon:true}];
 	var toolProperties ={backgroundColor :0xFF0000,maskColor :0xFF0000,viewHeight:100};   
 	Rho.NativeToolbar.create(toolElements,toolProperties);	  
 }
@@ -31,7 +31,7 @@ function toolRemove(){
 function toolNoLabelIcon()
 {   
 	var toolElements = new Array();
-	toolElements=[{action: 'Home'},{label:'Exit',action: 'exit',icon:'/public/images/bar/refresh_btn.wm.png'},{label:'back',action:'back',icon:'/public/images/bar/back_btn.png',coloredIcon:'True'},{action: 'fullscreen'}];
+	toolElements=[{action: 'Home'},{label:'Exit',action: 'exit',icon:'/public/images/bar/refresh_btn.wm.png'},{label:'back',action:'back',icon:'/public/images/bar/back_btn_colored.png',coloredIcon:true},{action: 'fullscreen'}];
 	var toolProperties ={backgroundColor :0xFF0000,maskColor :0xFF0000,viewHeight:100};   
 	Rho.NativeToolbar.create(toolElements,toolProperties);	  
 }
