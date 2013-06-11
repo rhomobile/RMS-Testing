@@ -643,7 +643,7 @@ var arr_scanner_property = [
 	testName		:	"VT282-3081 | Set invalidDecodeFrequency :0 | 0",
 	propertyName	:	"invalidDecodeFrequency",
 	scannerTypes	:	"All",
-	OSTypes			:	"All",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"0",
 	expectedResult	:	"0"
 },
@@ -651,7 +651,7 @@ var arr_scanner_property = [
 	testName		:	"VT282-3082 | Set invalidDecodeFrequency :65535 | 65535",
 	propertyName	:	"invalidDecodeFrequency",
 	scannerTypes	:	"All",
-	OSTypes			:	"All",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"65535",
 	expectedResult	:	"65535"
 },
@@ -667,7 +667,7 @@ var arr_scanner_property = [
 	testName		:	"VT282-3084 | Set  invalidDecodeSound :localpath | application/alarm5.wav",
 	propertyName	:	"invalidDecodeSound",
 	scannerTypes	:	"All",
-	OSTypes			:	"All",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"file://application/alarm5.wav",
 	expectedResult	:	"application/alarm5.wav"
 },
@@ -699,7 +699,7 @@ var arr_scanner_property = [
 	testName		:	"VT282-3088 | Set  disableScannerDuringNavigate :true | true",
 	propertyName	:	"disableScannerDuringNavigate",
 	scannerTypes	:	"All",
-	OSTypes			:	"All",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
@@ -707,7 +707,7 @@ var arr_scanner_property = [
 	testName		:	"VT282-3089 | Set  disableScannerDuringNavigate :false | false",
 	propertyName	:	"disableScannerDuringNavigate",
 	scannerTypes	:	"All",
-	OSTypes			:	"All",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
@@ -2691,7 +2691,7 @@ var arr_scanner_property = [
 	testName		:	"VT282-4239 | Set upcEanBooklandFormat  :Isbn10  | Isbn10",
 	propertyName	:	"upcEanBooklandFormat",
 	scannerTypes	:	"All",
-	OSTypes			:	"All",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"Isbn10",
 	expectedResult	:	"Isbn10"
 },
@@ -2699,7 +2699,7 @@ var arr_scanner_property = [
 	testName		:	"VT282-4240 | Set upcEanBooklandFormat  :Isbn13  | Isbn13",
 	propertyName	:	"upcEanBooklandFormat",
 	scannerTypes	:	"All",
-	OSTypes			:	"All",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"Isbn13",
 	expectedResult	:	"Isbn13"
 },
@@ -2739,7 +2739,7 @@ var arr_scanner_property = [
 	testName		:	"VT282-4245 | Set upcEanLinearDecode  :true  | true",
 	propertyName	:	"upcEanLinearDecode",
 	scannerTypes	:	"All",
-	OSTypes			:	"All",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
@@ -2747,7 +2747,7 @@ var arr_scanner_property = [
 	testName		:	"VT282-4246 | Set upcEanLinearDecode  :false  | false",
 	propertyName	:	"upcEanLinearDecode",
 	scannerTypes	:	"All",
-	OSTypes			:	"All",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
@@ -2755,7 +2755,7 @@ var arr_scanner_property = [
 	testName		:	"VT282-4247 | Set upcEanRandomWeightCheckDigit  :true  | true",
 	propertyName	:	"upcEanRandomWeightCheckDigit",
 	scannerTypes	:	"All",
-	OSTypes			:	"All",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
@@ -2763,7 +2763,7 @@ var arr_scanner_property = [
 	testName		:	"VT282-4248 | Set upcEanRandomWeightCheckDigit  :false  | false",
 	propertyName	:	"upcEanRandomWeightCheckDigit",
 	scannerTypes	:	"All",
-	OSTypes			:	"All",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
@@ -3151,7 +3151,7 @@ var arr_scanner_property = [
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
-{
+/*{//NOT SUPPORTED ON GINGERBREAD.
 	testName		:	"VT282-4298 | Set usPlanetReportCheckDigit :true  | true",
 	propertyName	:	"usPlanetReportCheckDigit",
 	scannerTypes	:	"All",
@@ -3166,7 +3166,7 @@ var arr_scanner_property = [
 	OSTypes			:	"ANDROID",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
-},
+},*/
 {
 	testName		:	"VT282-4300 | Set usPostNet :true  | true",
 	propertyName	:	"usPostNet",
@@ -3182,7 +3182,7 @@ var arr_scanner_property = [
 	OSTypes			:	"All",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
-},
+},/* //NOT SUPPORTED ON GINGERBREAD.
 {
 	testName		:	"VT282-4302 | Set usPostNetReportCheckDigit :true  | true",
 	propertyName	:	"usPostNetReportCheckDigit",
@@ -3198,7 +3198,7 @@ var arr_scanner_property = [
 	OSTypes			:	"ANDROID",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
-},
+},*/
 {
 	testName		:	"VT282-4304 | Set webcode :true  | true",
 	propertyName	:	"webcode",

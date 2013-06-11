@@ -9,14 +9,19 @@ describe('Network JS API', function() {
     var srvHost = SERVER_HOST;
     var srvPort = SERVER_PORT;
     var srvURL = "http://"+SERVER_HOST+":"+SERVER_PORT.toString();
-         
+
+    var srvHttpTestMethodsUrl = srvURL + "/test_methods";
+    var srvHttpDownloadImageUrl = srvURL + "/download_image";
+    var srvHttpDownloadImageUrlAuth = srvURL + "/download_image_auth";
+    var srvHttpUploadTextFileUrl = srvURL + "/upload_text_file";
+    var srvHttpUploadTextFileUrlAuth = srvURL + "/upload_text_file_auth";
+
     var callbackCount = 0;
          
     var connectionInfo = "";
     var failureMsg = "";
          
     var detectConnectionCallback = function(args) {
-        dispCurrentProcess($.toJSON(args));
         callbackCount += 1;
         connectionInfo = args.connectionInformation;
         failureMsg = args.failureMessage;
@@ -83,7 +88,7 @@ describe('Network JS API', function() {
         };
 
         var data = Rho.Network.detectConnection(detectconnectionProps);
-        expect($.toJSON(data)).toEqual("null");
+        expect(JSON.stringify(data)).toEqual("null");
 
     });
 
@@ -258,6 +263,202 @@ describe('Network JS API', function() {
 
     });
 
+
+    it('VT293-0085 | download file from http with sync', function() {
+
+            downloadfileProps = {
+                url: srvHttpDownloadImageUrl,
+                overwriteFile: true,
+                createFolders: true,
+                filename: Rho.Application.publicFolder+"/images/network.jpg"
+            };
+
+            Rho.Network.downloadFile(downloadfileProps);
+            myvar =  Rho.Network.downloadFile(downloadfileProps); 
+            expect(myvar["status"]).toEqual('ok');
+            //TODO: Need to add Code for File exist.
+    });
+
+    it('VT293-0060 | download file with authentication properties with callback event', function() {
+       var flag = false;
+       var callbackCalled = false;
+       var status = '';
+
+       var download_file_callback = function (args){
+            status = args['status'];
+            callbackCalled = true;
+       }
+
+       runs( function() {
+
+            downloadfileProps = {
+                url: srvHttpDownloadImageUrlAuth,
+                authType: "basic",
+                authUser: "admin",
+                authPassword: "admin",
+                filename: Rho.Application.publicFolder+"/images/network/network1.jpg",
+                overwriteFile: true,
+                createFolders: true
+            };
+
+            Rho.Network.downloadFile(downloadfileProps, download_file_callback);
+
+        } );
+
+        waitsFor( function() {
+                return callbackCalled;
+            },
+            "Callback never called",
+            5100
+        );
+
+        runs(function() {
+            expect(status).toEqual('ok');
+            //TODO: Need to add Code for File exist.
+        });
+    });
+
+    it('VT293-0043 | post with valide url', function() {
+       var flag = false;
+       var callbackCalled = false;
+       var data = '';
+
+       var post_callback = function (args){
+            data = args['body'];
+            callbackCalled = true;
+       }
+
+       runs( function() {
+
+            postProps = {
+                url: srvHttpTestMethodsUrl,
+                body: "data1=test&data2=test2"
+            };
+
+            Rho.Network.post(postProps, post_callback);
+        });
+
+        waitsFor( function() {
+                return callbackCalled;
+            },
+            "Callback never called",
+            5100
+        );
+
+        runs(function() {
+            expect(data).toEqual('initial POST request is: test and test2');
+            //TODO: Need to add Code for File exist.
+        });
+    });
+
+    it('VT293-0044 | post with sync', function() {
+
+        postProps = {
+            url: srvHttpTestMethodsUrl,
+            body: "data1=test&data2=test2"
+        };
+
+        var data = Rho.Network.post(postProps);
+        expect(data['body']).toEqual('initial POST request is: test and test2');
+
+    });
+
+    it('VT293-0045 | post with anonymous call back event', function() {
+       var data = '';
+       var callbackCalled = false;
+       runs( function() {
+
+            postProps = {
+                url: srvHttpTestMethodsUrl,
+                body: "data1=test&data2=test2"
+            };
+
+            Rho.Network.post(postProps, function(args){callbackCalled=true;data = args['body'];});
+        });
+
+        waitsFor( function() {
+                return callbackCalled;
+            },
+            "Callback never called",
+            5100
+        );
+
+        runs(function() {
+            expect(data).toEqual('initial POST request is: test and test2');
+            //TODO: Need to add Code for File exist.
+        });
+    });
+
+
+    it('VT293-0046 | get with callback', function() {
+       var flag = false;
+       var callbackCalled = false;
+       var data = '';
+
+       var get_callback = function (args){
+            data = args['body'];
+            callbackCalled = true;
+       }
+
+       runs( function() {
+
+            getProps = {
+                url: srvHttpTestMethodsUrl+"?data1=test&data2=test2",
+            };
+
+            Rho.Network.get(getProps, get_callback);
+        });
+
+        waitsFor( function() {
+                return callbackCalled;
+            },
+            "Callback never called",
+            5100
+        );
+
+        runs(function() {
+            expect(data).toEqual('initial GET request is: test and test2');
+            //TODO: Need to add Code for File exist.
+        });
+    });
+
+    it('VT293-0047 | get with sync event', function() {
+
+        getProps = {
+            url: srvHttpTestMethodsUrl+"?data1=test&data2=test2",
+        };
+
+        var data = Rho.Network.get(getProps);
+        expect(data['body']).toEqual('initial GET request is: test and test2');
+
+    });
+
+    it('VT293-0048 | get with anonymous call back event', function() {
+       var data = '';
+       var callbackCalled = false;
+       runs( function() {
+
+            getProps = {
+                url: srvHttpTestMethodsUrl+"?data1=test&data2=test2",
+            };
+
+            Rho.Network.get(getProps, function(args){callbackCalled=true;data = args['body'];});
+        });
+
+        waitsFor( function() {
+                return callbackCalled;
+            },
+            "Callback never called",
+            5100
+        );
+
+        runs(function() {
+            expect(data).toEqual('initial GET request is: test and test2');
+            //TODO: Need to add Code for File exist.
+        });
+    });
+
+
     it('VT293-0046 | get with valid url', function() {
        var fullURL = srvURL + "/download";
        var content = "";
@@ -290,4 +491,266 @@ describe('Network JS API', function() {
         });
     });
 
+    it('VT293-0049 | download file from http with callback event', function() {
+       var flag = false;
+       var callbackCalled = false;
+       var status = '';
+
+       var download_file_callback = function (args){
+            status = args['status'];
+            callbackCalled = true;
+       }
+
+       runs( function() {
+
+            downloadfileProps = {
+                url: srvHttpDownloadImageUrl,
+                filename: Rho.Application.publicFolder+"/images/network_0049.jpg"
+            };
+
+            Rho.Network.downloadFile(downloadfileProps, download_file_callback);
+
+        } );
+
+        waitsFor( function() {
+                return callbackCalled;
+            },
+            "Callback never called",
+            5100
+        );
+
+        runs(function() {
+            expect(status).toEqual('ok');
+            //TODO: Need to add Code for File exist.
+        });
+    });
+
+    it('VT293-0050 | download file with overwrite default and callback event', function() {
+       var flag = false;
+       var callbackCalled = false;
+       var status = '';
+
+       var download_file_callback = function (args){
+            status = args['status'];
+            callbackCalled = true;
+       }
+
+       runs( function() {
+
+            downloadfileProps = {
+                url: srvHttpDownloadImageUrl,
+                filename: Rho.Application.publicFolder+"/images/network_0049.jpg"
+            };
+
+            Rho.Network.downloadFile(downloadfileProps, download_file_callback);
+
+        } );
+
+        waitsFor( function() {
+                return callbackCalled;
+            },
+            "Callback never called",
+            5100
+        );
+
+        runs(function() {
+            expect(status).toEqual('ok');
+            //TODO: Need to add Code for File exist.
+        });
+    });
+
+    it('VT293-0051 | download file with overwrite true and callback event', function() {
+       var flag = false;
+       var callbackCalled = false;
+       var status = '';
+
+       var download_file_callback = function (args){
+            status = args['status'];
+            callbackCalled = true;
+       }
+
+       runs( function() {
+
+            downloadfileProps = {
+                url: srvHttpDownloadImageUrl,
+                filename: Rho.Application.publicFolder+"/images/network_0049.jpg",
+                overwriteFile: true
+            };
+
+            Rho.Network.downloadFile(downloadfileProps, download_file_callback);
+
+        } );
+
+        waitsFor( function() {
+                return callbackCalled;
+            },
+            "Callback never called",
+            5100
+        );
+
+        runs(function() {
+            expect(status).toEqual('ok');
+            //TODO: Need to add Code for File exist.
+        });
+    });
+
+    it('VT293-0052 | download file with overwrite true and createfolder default value and callback', function() {
+       var flag = false;
+       var callbackCalled = false;
+       var status = '';
+
+       var download_file_callback = function (args){
+            status = args['status'];
+            callbackCalled = true;
+       }
+
+       runs( function() {
+
+            downloadfileProps = {
+                url: srvHttpDownloadImageUrl,
+                filename: Rho.Application.publicFolder+"/images/network_0049.jpg",
+                overwriteFile: true
+            };
+
+            Rho.Network.downloadFile(downloadfileProps, download_file_callback);
+
+        } );
+
+        waitsFor( function() {
+                return callbackCalled;
+            },
+            "Callback never called",
+            5100
+        );
+
+        runs(function() {
+            expect(status).toEqual('ok');
+            //TODO: Need to add Code for File exist.
+        });
+    });
+
+    it('VT293-0071 | uploadFile to http with callback event', function() {
+       var flag = false;
+       var callbackCalled = false;
+       var data = '';
+       var status = '';
+
+       var upload_file_callback = function (args){
+        status = args['status'];
+        data = args['body'];
+        callbackCalled = true;
+       }
+
+       runs( function() {
+
+            var uploadfileProps = {
+              url: srvHttpUploadTextFileUrl,
+              filename: Rho.Application.publicFolder+"/images/myfile.txt",
+              body: "uploading file",
+              fileContentType: "text/plain"
+            };
+
+            var args = Rho.Network.uploadFile(uploadfileProps,upload_file_callback);
+            });
+
+        waitsFor( function() {
+                return callbackCalled;
+            },
+            "Callback never called",
+            5100
+        );
+
+        runs(function() {
+            expect(status).toEqual('ok');
+            expect(data).toEqual('Hello All');
+        });
+    });
+
+    it('VT293-0072 | uploadFile with synch callback event', function() {
+
+        var uploadfileProps = {
+          url: srvHttpUploadTextFileUrl,
+          filename: Rho.Application.publicFolder+"/images/myfile.txt",
+          body: "uploading file",
+          fileContentType: "text/plain"
+        };
+
+        var args = Rho.Network.uploadFile(uploadfileProps); 
+
+        expect(args['status']).toEqual('ok');
+        expect(args['body']).toEqual('Hello All');
+    });
+
+    it('VT293-0073 | uploadFile with anonymus event', function() {
+       var data = '';
+       var callbackCalled = false;
+       var status = ''
+
+       runs( function() {
+
+        var uploadfileProps = {
+          url: srvHttpUploadTextFileUrl,
+          filename: Rho.Application.publicFolder+"/images/myfile.txt",
+          body: "uploading file",
+          fileContentType: "text/plain"
+        };
+
+        Rho.Network.uploadFile(uploadfileProps, function(args){
+            status = args['status'];
+            data = args['body'];
+            callbackCalled = true;
+        }); 
+        });
+
+        waitsFor( function() {
+                return callbackCalled;
+            },
+            "Callback never called",
+            5100
+        );
+
+        runs(function() {
+            expect(status).toEqual('ok');
+            expect(data).toEqual('Hello All');
+        });
+    });
+
+    it('VT293-0074 | uploadFile with autherisation properties', function() {
+       var data = '';
+       var callbackCalled = false;
+       var status = ''
+       var upload_file_callback = function (args){
+        status = args['status'];
+        data = args['body'];
+        callbackCalled = true;
+       }
+       runs( function() {
+
+        var uploadfileProps = {
+          url: srvHttpUploadTextFileUrlAuth,
+          authType: "basic",
+          authUser: "admin",
+          authPassword: "Motorola@123",
+          filename: Rho.Application.publicFolder+"/images/myfile.txt",
+          body: "uploading file",
+          fileContentType: "image/png"
+        };
+
+            Rho.Network.uploadFile(uploadfileProps, upload_file_callback); 
+        });
+
+        waitsFor( function() {
+                return callbackCalled;
+            },
+            "Callback never called",
+            5100
+        );
+
+        runs(function() {
+            expect(status).toEqual('ok');
+            expect(data).toEqual('Hello All');
+        });
+    });
+
 });
+

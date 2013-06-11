@@ -1,8 +1,8 @@
 # startup page for your application
-start_path = 'file://%APP_PATH%/public/index.html'
+start_path = '/public/index.html'
 
 # path to the options page (in this case handled by javascript)
-options_path = 'public/settings.html'
+options_path = '/public/settings.html'
 
 # location of bundle url (i.e. from rhohub.com); used by desktop win32 simulator
 rhobundle_zip_url = ''
