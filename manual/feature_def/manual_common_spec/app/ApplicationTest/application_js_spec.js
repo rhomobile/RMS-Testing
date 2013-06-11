@@ -54,6 +54,13 @@ describe("Application Module Test Starts Here", function() {
         var data = Rho.Application.startURI;
         displayResult("|Get start URI By calling Application.startURI ",data);
     });
+    
+    it ("|Set and Get start URI By calling Application.startURI ", function() {
+        Rho.Application.startURI='http://www.google.com';
+         var data = Rho.Application.startURI;
+        displayResult("|Get start URI By calling Application.startURI ",data);
+    });
+  
   
     it ("|get Userfolder path from default location", function() {
         var data = Rho.Application.userFolder;
