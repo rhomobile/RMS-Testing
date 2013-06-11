@@ -1,4 +1,4 @@
-#sdk: C:/DevelopmentTools/rhomobile/rhodes
+#sdk: C:/projects/rhodes
 paths:
   extensions:
 
@@ -38,21 +38,21 @@ iphone:
   entitlements:
   BundleIdentifier: com.rhomobile.apigeneratorspec
   BundleURLScheme: apigeneratorspec
-  extensions: ["barcode",  "genCallbackTests", "rhoconnect-client", "appEvents", "logCapture"]
+  extensions: ["barcode",  "genCallbackTests", "appEvents"]
 wp:
   productid: b6479381-42a8-0130-78de-3caec51bd50e
 symbian:
   uid: '0xe1a1ef92'
 android:
   version: 2.1
-  extensions: ["barcode", "screenorientation", "Coreapi", "instrumentation", "rhoconnect-client", "logCapture", "logCapture"]
+  extensions: ["barcode", "screenorientation", "instrumentation"]
   capabilities:
   - native_browser
 wm:
   #use_shared_runtime: yes
   #sdk: MC3000c50b (ARMV4I)
-  extensions: ["barcode", "instrumentation", "rhoconnect-client", "logCapture"]
+  extensions: ["barcode", "instrumentation"]
 #capabilities:
 #- non_motorola_device
 
-extensions: ["genPropBag"]
+extensions: ["genPropBag", "logCapture"]

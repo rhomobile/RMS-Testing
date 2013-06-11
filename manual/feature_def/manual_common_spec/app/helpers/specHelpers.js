@@ -58,6 +58,7 @@ var writeIntoLog = function (desc, data){
 
 //Display Results on Device
 var displayResult = function (desc, data){
+	$('ul').empty();
 	var node=document.createElement("LI");
 	var textnode =document.createTextNode(desc);
 	node.appendChild(textnode);

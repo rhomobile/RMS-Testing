@@ -243,13 +243,13 @@ describe("System Module JS Test Starts Here", function() {
 						var strProperty = '{"'+propertyName+'" : "'+propertyValue+'"}'
 					}
 
-					var objProperty = jQuery.parseJSON(strProperty);
+					var objProperty = JSON.parse(strProperty);
 
 					Rho.System.setProperties(objProperty);
 
 
 					var strGetProperty = '["'+sys_setget_properties[idx]['propertyName']+'"]';
-					var objGetProperty = jQuery.parseJSON(strGetProperty);
+					var objGetProperty = JSON.parse(strGetProperty);
 
 					var data = Rho.System.getProperties(objGetProperty);
 					data = data[sys_setget_properties[idx]['propertyName']];
