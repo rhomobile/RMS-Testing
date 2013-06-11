@@ -1,18 +1,22 @@
 describe("System Module JS Test Starts Here", function() {
 
 	describe("System Module-Setting Directly Test Starts Here", function() {
-
+		
+		if(isApplePlatform()){
+		
 		it("VT300-003 | call getProperty with  applicationIconBadge as 1 | 1", function() {
 			Rho.System.applicationIconBadge = 1;
 		    expect(Rho.System.applicationIconBadge).toEqual(1);
 		});
-
+		
 		it("VT300-004 | call getProperty with  applicationIconBadge as 0 | 0", function() {
 			
 			Rho.System.applicationIconBadge = 0;
 		    expect(Rho.System.applicationIconBadge).toEqual(0);
 			
 		});
+
+		}
 
 		it("VT300-022 | call getProperty with httpProxyURI | 'http://wwwgate0.mot.com:1080'", function() {
 
@@ -22,21 +26,7 @@ describe("System Module JS Test Starts Here", function() {
 
 		});
 	
-		it("VT300-027 | set localServerPort | 8081", function() {
-			
-			Rho.System.localServerPort = 8081;
-		    var data =  Rho.System.getProperty('localServerPort');
-			expect(data).toEqual(8081);
-			
-		});
-		
-		it("VT300-029 | call getProperty with locale | en", function() {
-			
-			Rho.System.locale = 'en';
-		    var data =  Rho.System.getProperty('locale');
-			expect(data).toEqual(en);
-			
-		});
+		if(isWindowsDesktopPlatform()){
 		
 		it("VT300-033 | set lockWindowSize as True, call getProperty with lockWindowSize | true", function() {
 			
@@ -53,7 +43,11 @@ describe("System Module JS Test Starts Here", function() {
 			expect(data).toEqual('false');
 			
 		});
+		
+		}
 
+		if(isAndroidOrApplePlatform()){
+		
 		it("VT300-046 | set screenAutoRotate as false, call getProperty with screenAutoRotate | false", function() {
 
 			Rho.System.screenAutoRotate = false;
@@ -68,7 +62,6 @@ describe("System Module JS Test Starts Here", function() {
 			expect(data).toEqual('true');
 
 		});
-		
 		
 		it("VT300-054 | set screenSleeping as true, call getProperty with screenSleeping | true", function() {
 
@@ -85,6 +78,8 @@ describe("System Module JS Test Starts Here", function() {
 			expect(data).toEqual('false');
 
 		});
+
+		}
 		
 		it("VT300-068 | call clearAllProperties() | false,true,false", function() {
 			Rho.System.screenSleeping = false;
@@ -95,14 +90,16 @@ describe("System Module JS Test Starts Here", function() {
 
 			var objData = Rho.System.getProperties(['screenSleeping','screenAutoRotate','lockWindowSize'])
 
-			var result = objData['screenSleeping'] +','+ objData['screenAutoRotate'] +','+ objData['lockWindowSize']
-			
-			expect(result).toEqual('false,true,false');
+			expect(objData['screenSleeping']).toEqual('false');
+			expect(objData['screenAutoRotate']).toEqual('true');
+			expect(objData['lockWindowSize']).toEqual('false');
 		});
 
+		if(isWindowsMobileOrWindowsDesktopPlatform()){
+		
 		it("VT278-187 | call getRegistrySetting with hive as HKLM type as MULTISZ subkey as Software setting as Rhoelements value as hello world , call setRegistrySetting with hive, subkey and setting | hello world", function() {
 
-			Rho.System.setRegistrySetting({hive:'HKLM', type:'MULTISZ', key:'Software', setting:'RhoElementsTest', value:'hello world', persistent:'true'});
+			Rho.System.setRegistrySetting({hive:'HKLM', type:'MULTISZ', key:'Software', setting:'RhoElementsTest', value:'hello world', persistent: true});
 			var data = Rho.System.getRegistrySetting({hive:'HKLM', key:'Software', setting:'RhoElementsTest'});
 			expect(data).toEqual('hello world');
 
@@ -110,7 +107,7 @@ describe("System Module JS Test Starts Here", function() {
 
 		it("VT278-189 | call setRegistrySetting with hive, subkey and setting and check the ret value | 10101010", function() {
 
-			Rho.System.setRegistrySetting({hive:'HKLM', type:'Binary', key:'Software', setting:'Rho', value:'10101010', persistent:'false'});
+			Rho.System.setRegistrySetting({hive:'HKLM', type:'Binary', key:'Software', setting:'Rho', value:'10101010', persistent: false});
 			var data = Rho.System.getRegistrySetting({hive:'HKLM', type:'Binary', key:'Software', setting:'Rho'});
 			expect(data).toEqual(10101010);
 
@@ -118,7 +115,7 @@ describe("System Module JS Test Starts Here", function() {
 
 		it("VT278-190 | call setRegistrySetting with invalid key and check the ret value | 1010101", function() {
 
-			Rho.System.setRegistrySetting({hive:'HKLM', type:'Binary', key:'Honey', setting:'RhoElementsTest', value:'1010101', persistent:'false'});
+			Rho.System.setRegistrySetting({hive:'HKLM', type:'Binary', key:'Honey', setting:'RhoElementsTest', value:'1010101', persistent: false});
 			var data = Rho.System.getRegistrySetting({hive:'HKLM', type:'Binary', key:'Honey', setting:'RhoElementsTest'});
 			expect(data).toEqual(1010101);
 
@@ -126,22 +123,22 @@ describe("System Module JS Test Starts Here", function() {
 
 		it("VT278-191 | call deleteRegistrySetting  with Persistence  check the return value | Test123", function() {
 
-			Rho.System.setRegistrySetting({hive:'HKCU', type:'String', key:'Software', setting:'RhoElementsTest', value:'Test123', persistent:'true'});
+			Rho.System.setRegistrySetting({hive:'HKCU', type:'String', key:'Software', setting:'RhoElementsTest', value:'Test123', persistent: true});
 			var data = Rho.System.getRegistrySetting({hive:'HKCU', type:'String', key:'Software', setting:'RhoElementsTest'});
-			expect(data).toEqual('Test123');
+			expect(data).toEqual(true);
 
 		});
 
-		it("VT278-192 | call setRegistrySetting with invalid key and check the ret value | false", function() {
+		it("VT278-192 | call deleteRegistrySetting with settings not exist  | false", function() {
 
-			var data = Rho.System.deleteRegistrySetting({hive:'HKLM',key:'Softy', setting:'RhoElementsTest',persistent:'true'});
-			expect(data).toEqual('true');
+			var data = Rho.System.deleteRegistrySetting({hive:'HKLM',key:'Softy', setting:'RhoElementsTest',persistent: true});
+			expect(data).toEqual(false);
 
 		});
 
 		it("VT278-193 | set and getRegistry setting with HKU and persistence as True and type MultiSZ | hello world", function() {
 
-			Rho.System.deleteRegistrySetting({hive:'HKU', type:'MultiSZ', key:'Software', setting:'RhoElementsTest', value:'hello world', persistent:'true'});
+			Rho.System.deleteRegistrySetting({hive:'HKU', type:'MultiSZ', key:'Software', setting:'RhoElementsTest', value:'hello world', persistent: true});
 			var data = Rho.System.getRegistrySetting({hive:'HKU', key:'Software', setting:'RhoElementsTest'});
 			expect(data).toEqual('hello world');
 
@@ -149,7 +146,7 @@ describe("System Module JS Test Starts Here", function() {
 
 		it("VT278-194 | set and getRegistry setting with HKCU and persistence as False and Type as String | Test123", function() {
 
-			Rho.System.setRegistrySetting({hive:'HKCU', type:'String', key:'Software', setting:'Motorola', value:'Test123', persistent:'false'});
+			Rho.System.setRegistrySetting({hive:'HKCU', type:'String', key:'Software', setting:'Motorola', value:'Test123', persistent: false});
 			var data = Rho.System.getRegistrySetting({hive:'HKCU', key:'Software', setting:'Motorola'});
 			expect(data).toEqual('Test123');
 
@@ -157,7 +154,7 @@ describe("System Module JS Test Starts Here", function() {
 
 		it("VT278-195 | set and getRegistry setting with HKCR and persistence as False and Type as DWORD | 12345", function() {
 
-			Rho.System.setRegistrySetting({hive:'HKCR', type:'DWORD', key:'Software', setting:'Symbol', value:'12345', persistent:'false'});
+			Rho.System.setRegistrySetting({hive:'HKCR', type:'DWORD', key:'Software', setting:'Symbol', value:'12345', persistent: false});
 			var data = Rho.System.getRegistrySetting({hive:'HKCR', key:'Software', setting:'Symbol'});
 			expect(data).toEqual('12345');
 
@@ -165,7 +162,7 @@ describe("System Module JS Test Starts Here", function() {
 
 		it("VT278-196 | set and getRegistry setting with HKLM and persistence True and Type as Binary | 111111", function() {
 
-			Rho.System.setRegistrySetting({hive:'HKLM', type:'Binary', key:'Software', setting:'RhoTnV', value:'111111', persistent:'true'});
+			Rho.System.setRegistrySetting({hive:'HKLM', type:'Binary', key:'Software', setting:'RhoTnV', value:'111111', persistent: true});
 			var data = Rho.System.getRegistrySetting({hive:'HKLM', key:'Software', setting:'RhoTnV'});
 			expect(data).toEqual('111111');
 
@@ -173,7 +170,7 @@ describe("System Module JS Test Starts Here", function() {
 
 		it("VT278-197 | set and getRegistry setting with HKLM and persistence False and Type as Binary and key as multilevel path | 111111", function() {
 
-			Rho.System.setRegistrySetting({hive:'HKLM', type:'Binary', key:'Software\Symbol\Audio', setting:'Rhoelement', value:'111111', persistent:'false'});
+			Rho.System.setRegistrySetting({hive:'HKLM', type:'Binary', key:'Software\Symbol\Audio', setting:'Rhoelement', value:'111111', persistent: false});
 			var data = Rho.System.getRegistrySetting({hive:'HKLM', key:'Software\Symbol\Audio', setting:'Rhoelement'});
 			expect(data).toEqual('111111');
 
@@ -186,6 +183,8 @@ describe("System Module JS Test Starts Here", function() {
 
 		});
 
+		}
+
 	});
 
 	describe("System Module- setProperty/getProperty Test Starts Here", function() {
@@ -194,13 +193,15 @@ describe("System Module JS Test Starts Here", function() {
 
 			(function(idx){
 
-				it(sys_setget_property[i]['testName'], function() {
-				
-					Rho.System.setProperty(sys_setget_property[idx]['propertyName'],sys_setget_property[idx]['propertyValue'])
-					var data = Rho.System.getProperty(sys_setget_property[idx]['propertyName']);
-					expect(data).toEqual(sys_setget_property[idx]['expectedResult']);
-								
-				});
+				if(testApplicable(sys_setget_property[idx]['osType'])){
+					it(sys_setget_property[i]['testName'], function() {
+					
+						Rho.System.setProperty(sys_setget_property[idx]['propertyName'],sys_setget_property[idx]['propertyValue'])
+						var data = Rho.System.getProperty(sys_setget_property[idx]['propertyName']);
+						expect(data).toEqual(sys_setget_property[idx]['expectedResult']);
+									
+					});
+				}
 
 			})(i);
 
@@ -226,36 +227,39 @@ describe("System Module JS Test Starts Here", function() {
 
 		for (var i=0;i<sys_setget_properties.length;i++){
 			(function(idx){
-				it(sys_setget_properties[idx]['testName'], function() {
 
-					var propertyName = sys_setget_properties[idx]['propertyName'];
-					var propertyValue = sys_setget_properties[idx]['propertyValue'];
+				if(testApplicable(sys_setget_properties[idx]['osType'])){
+					it(sys_setget_properties[idx]['testName'], function() {
 
-					if (propertyValue == 'true')
-						var strProperty = '{"'+propertyName+'" :'+true+'}';
-					else if (propertyValue == 'false')
-						var strProperty = '{"'+propertyName+'" :'+false+'}';
-					else if (!isNaN(propertyValue)){
-						propertyValue = parseInt(propertyValue);
-						var strProperty = '{"'+propertyName+'" :'+propertyValue+'}';
-					}
-					else{
-						var strProperty = '{"'+propertyName+'" : "'+propertyValue+'"}'
-					}
+						var propertyName = sys_setget_properties[idx]['propertyName'];
+						var propertyValue = sys_setget_properties[idx]['propertyValue'];
 
-					var objProperty = JSON.parse(strProperty);
+						if (propertyValue == 'true')
+							var strProperty = '{"'+propertyName+'" :'+true+'}';
+						else if (propertyValue == 'false')
+							var strProperty = '{"'+propertyName+'" :'+false+'}';
+						else if (!isNaN(propertyValue)){
+							propertyValue = parseInt(propertyValue);
+							var strProperty = '{"'+propertyName+'" :'+propertyValue+'}';
+						}
+						else{
+							var strProperty = '{"'+propertyName+'" : "'+propertyValue+'"}'
+						}
 
-					Rho.System.setProperties(objProperty);
+						var objProperty = jQuery.parseJSON(strProperty);
+
+						Rho.System.setProperties(objProperty);
 
 
-					var strGetProperty = '["'+sys_setget_properties[idx]['propertyName']+'"]';
-					var objGetProperty = JSON.parse(strGetProperty);
+						var strGetProperty = '["'+sys_setget_properties[idx]['propertyName']+'"]';
+						var objGetProperty = jQuery.parseJSON(strGetProperty);
 
-					var data = Rho.System.getProperties(objGetProperty);
-					data = data[sys_setget_properties[idx]['propertyName']];
-					expect(data).toEqual(sys_setget_properties[idx]['expectedResult']);
+						var data = Rho.System.getProperties(objGetProperty);
+						data = data[sys_setget_properties[idx]['propertyName']];
+						expect(data).toEqual(sys_setget_properties[idx]['expectedResult']);
 
-				});
+					});
+				}
 			})(i);
 		}
 	});
