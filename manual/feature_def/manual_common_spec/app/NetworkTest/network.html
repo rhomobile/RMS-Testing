@@ -456,11 +456,11 @@ if(selected_Module=="VT293-0052")
       };
  Rho.Network.downloadFile(downloadfileProps, function(params){
       if (params["status"] == "ok") {
-	    myDiv.innerHTML="Download Succeeded, path is /public/images/nadaf.jpg";		
+	    myDiv.innerHTML="Download Succeeded, path is /public/images/download.jpg";		
 		myDiv.innerHTML="<br>status :"+params["status"]+"<br>"+
 						"http_error :"+params["http_error"]+"<br>"+
 						"fileExists :"+params["fileExists"];
-        //alert("Download Succeeded, path is /public/images/nadaf.jpg");
+        //alert("Download Succeeded, path is /public/images/download.jpg");
       } else {
 	    myDiv.innerHTML="Download Failed";
 		myDiv.innerHTML="<br>status :"+params["status"]+"<br>"+
@@ -693,7 +693,7 @@ if(selected_Module=="VT293-0070")
 	myDiv.innerHTML="<br>status :"+params["status"]+"<br>"+
 					"http_error :"+params["http_error"]+"<br>"+
 					"fileExists :"+params["fileExists"];
-	//alert("Upload Succeeded, path is /public/images/nadaf.jpg");
+	//alert("Upload Succeeded, path is /public/images/upload.jpg");
   } else {
 	myDiv.innerHTML="Upload Failed";
 	myDiv.innerHTML="<br>status :"+params["status"]+"<br>"+
@@ -907,11 +907,11 @@ myDiv.innerHTML="phoneSignalStrength :"+params["phoneSignalStrength"]+"<br>"+
 }
 function download_file_callback(params){
       if (params["status"] == "ok") {
-	    myDiv.innerHTML="Download Succeeded, path is /public/images/nadaf.jpg";		
+	    myDiv.innerHTML="Download Succeeded, path is /public/images/download.jpg";		
 	myDiv.innerHTML="<br>status: "+params["status"]+"<br>"+
 						"http_error: "+params["http_error"]+"<br>"+
 						"fileExists: "+params["fileExists"];
-        //alert("Download Succeeded, path is /public/images/nadaf.jpg");
+        //alert("Download Succeeded, path is /public/images/download.jpg");
       } else {
 	    myDiv.innerHTML="Download Failed";
 		myDiv.innerHTML="<br>status: "+params["status"]+"<br>"+
@@ -922,11 +922,11 @@ function download_file_callback(params){
     }
 function upload_file_callback(params){
   if (params["status"] == "ok") {
-	myDiv.innerHTML="Upload Succeeded, path is /public/images/nadaf.jpg";		
+	myDiv.innerHTML="Upload Succeeded, path is /public/images/upload.jpg";		
 	myDiv.innerHTML="<br>status :"+params["status"]+"<br>"+
 					"http_error :"+params["http_error"]+"<br>"+
 					"fileExists :"+params["fileExists"];
-	//alert("Upload Succeeded, path is /public/images/nadaf.jpg");
+	//alert("Upload Succeeded, path is /public/images/upload.jpg");
   } else {
 	myDiv.innerHTML="Upload Failed";
 	myDiv.innerHTML="<br>status :"+params["status"]+"<br>"+
