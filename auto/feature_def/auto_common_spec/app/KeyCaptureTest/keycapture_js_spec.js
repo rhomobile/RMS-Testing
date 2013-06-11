@@ -6,11 +6,22 @@ describe("HardwareKeysTestSuite", function() {
 	
 		beforeEach(function() {
 			hardwareKeysTest.callbackFired = false;
-			hardwareKeysTest.callbackFiredResult = '';
+			hardwareKeysTest.callbackFiredResult = null;
 		});
 	
 		afterEach(function() 
 		{
+			hardwareKeysTest.resetCaptureKeyCallback('all');
+			hardwareKeysTest.resetCaptureKeyCallback('0x04');
+			hardwareKeysTest.resetCaptureKeyCallback('0x08');
+			hardwareKeysTest.resetCaptureKeyCallback('0x0D');
+			hardwareKeysTest.resetCaptureKeyCallback('0x18');
+			hardwareKeysTest.resetCaptureKeyCallback('0x19');
+			hardwareKeysTest.resetCaptureKeyCallback('0x52');
+			hardwareKeysTest.resetCaptureKeyCallback('0x54');
+			hardwareKeysTest.resetCaptureKeyCallback('' + hardwareKeysTest.LETTER_A_CODE);
+			hardwareKeysTest.clearRemap('0x08');
+			hardwareKeysTest.resetTrigger();
 		});	
 	
 		///////////////////////////////////////////////////////////////////////
@@ -60,10 +71,6 @@ describe("HardwareKeysTestSuite", function() {
 			waitsFor(function() {
             	return hardwareKeysTest.callbackFiredResult == 13;
         	}, "ERROR: Failed to capture ENTER key", 3000);
-			runs(function()
-			{
-				hardwareKeysTest.resetCaptureKeyCallback('0x0D');
-			}, 'expect the callback not to fire');
 		});
 		
 		it("2.2.should ignore any other key than ENTER", function() {
@@ -79,7 +86,6 @@ describe("HardwareKeysTestSuite", function() {
 			runs(function()
 			{
 				expect(hardwareKeysTest.callbackFired).toBe(false);
-				hardwareKeysTest.resetCaptureKeyCallback('0x0D');
 			}, 'expect the callback not to fire');
 		});
 		
@@ -91,11 +97,6 @@ describe("HardwareKeysTestSuite", function() {
 			waitsFor(function() {
             	return hardwareKeysTest.callbackFiredResult == 8;
         	}, "ERROR: Failed to capture any key", 3000);
-			runs(function()
-			{
-				//After
-				hardwareKeysTest.resetCaptureKeyCallback('all');
-			}, 'clearing keyEvents');
 		});
 		
 		it("2.4.should capture any key using an uppercase ALL", function() {
@@ -106,11 +107,6 @@ describe("HardwareKeysTestSuite", function() {
 			waitsFor(function() {
             	return hardwareKeysTest.callbackFiredResult == 8;
         	}, "ERROR: Failed to capture any key", 3000);
-			runs(function()
-			{
-				//After
-				hardwareKeysTest.resetCaptureKeyCallback('ALL');
-			}, 'clearing keyEvents');
 		});
 		
 		it("2.5.should not capture any key after resetting 'all' keyValue keyCapture", function() {
@@ -146,50 +142,40 @@ describe("HardwareKeysTestSuite", function() {
 				expect(hardwareKeysTest.callbackFired).toBe(false);
 			}, 'expect the callback not to fire');	
 		});
-
-		it("2.7.should consume ENTER key", function() {
-			runs(function() {
-				hardwareKeysTest.captureKey(false,'0x0D');			// ENTER
-				hardwareKeysTest.simulateKeyPress(13);				// ENTER
-			}, "set capture key to ENTER, with no propogation, & simulate ENTER key press...");		
-			waitsFor(function() {
-            	return document.getElementById('output').innerHTML == "";
-        	}, "ERROR: ENTER key has been propagated", 3000);
-			runs(function()
-			{
-				//After
-				hardwareKeysTest.resetCaptureKeyCallback('0x0D');
-			}, 'expect the callback to fire with the enterKey');
-		});
 		
-		it("2.8.should capture multiple keys", function()
+		it("2.7.should capture multiple keys", function()
 		{
 			runs(function()
 			{
-				hardwareKeysTest.captureKey(false,'0x0D');	
-				hardwareKeysTest.captureKey(false,'0x08');
-				hardwareKeysTest.simulateKeyPress(0x0D);
-				hardwareKeysTest.simulateKeyPress(0x08);
+				setTimeout(function()
+				{
+					hardwareKeysTest.captureKey(false,'0x0D');	
+					hardwareKeysTest.captureKey(false,'0x08');
+					hardwareKeysTest.simulateKeyPress(13);
+					hardwareKeysTest.simulateKeyPress(8);
+				},500);
 			},'set capture key for ENTER and TAB and simulate key events');
 			waitsFor(function() {
-				return typeof hardwareKeysTest.callbackFiredResult == 'object' && hardwareKeysTest.callbackFiredResult.length == 2;//Up and down event
-        	}, "ERROR: Trigger NOT received", 3000);
+				if(hardwareKeysTest.callbackFiredResult == null) {return false;}
+				if((typeof hardwareKeysTest.callbackFiredResult) != 'object') {return false;}
+				if(hardwareKeysTest.callbackFiredResult.length != 2) {return false;}
+				else{return true;}
+        	}, "ERROR: MultipleKeys NOT received", 3000);
 			runs(function()
 			{
+				console.log(hardwareKeysTest.callbackFiredResult[0] + ' = 13')
+				console.log(hardwareKeysTest.callbackFiredResult[1] + ' = 8')
 				expect(hardwareKeysTest.callbackFiredResult[0]).toEqual(0x0D);
 				expect(hardwareKeysTest.callbackFiredResult[1]).toEqual(0x08);
-				//After
-				hardwareKeysTest.resetCaptureKeyCallback('0x0D');
-				hardwareKeysTest.resetCaptureKeyCallback('0x08');
 			}, 'expect both callbacks to fire with each keyValues');
 		});
 		
-		it("2.9.should not capture a key after it has been reset", function() {
+		it("2.8.should not capture a key after it has been reset", function() {
 			runs(function() {
 				hardwareKeysTest.captureKey(true,'0x08');				// Any Key
 				hardwareKeysTest.resetCaptureKeyCallback('0x08');
-				hardwareKeysTest.simulateKeyPress(8);				// TAB
-				setTimeout(function(){hardwareKeysTest.callbackFiredResult = 'timedout'},1000);// TAB
+				setTimeout(function(){hardwareKeysTest.simulateKeyPress(8);},100);				// TAB
+				setTimeout(function(){hardwareKeysTest.callbackFiredResult = 'timedout'},1100);// TAB
 			}, "set capture key to TAB, then reset then press TAB");		
 			waitsFor(function()
 			{
@@ -201,7 +187,7 @@ describe("HardwareKeysTestSuite", function() {
 			}, 'expect the callback not to fire');	
 		});
 		
-		it("2.10.should only fire 'all' callback if both 'all' and a key has been registered", function() {
+		it("2.9.should only fire 'all' callback if both 'all' and a key has been registered", function() {
 			runs(function() {
 				hardwareKeysTest.captureKey(true,'ALL');
 				hardwareKeysTest.captureKey(true,'0x08');	
@@ -215,14 +201,12 @@ describe("HardwareKeysTestSuite", function() {
 			runs(function()
 			{
 				expect(hardwareKeysTest.callbackFired).toBe(true);
-				expect(typeof hardwareKeysTest.callbackFiredResult).toEqual('string');
-				hardwareKeysTest.resetCaptureKeyCallback('ALL');
-				hardwareKeysTest.resetCaptureKeyCallback('0x08');
+				expect(typeof hardwareKeysTest.callbackFiredResult).toEqual('number');
 				hardwareKeysTest.callbackFiredTimeout = null;
 			}, 'expect the callback to fire only once');	
 		});
 			
-		it("2.11.should fire 'all' callback if a key specific callback is registered after the all callback is registered (all persistence)", function() {
+		it("2.10.should fire 'all' callback if a key specific callback is registered after the all callback is registered (all persistence)", function() {
 			runs(function() {
 				hardwareKeysTest.captureKey(true,'ALL');
 				hardwareKeysTest.captureKey(true,'0x0D');	
@@ -237,23 +221,21 @@ describe("HardwareKeysTestSuite", function() {
 			{
 				expect(hardwareKeysTest.callbackFired).toBe(true);
 				expect(hardwareKeysTest.callbackFiredResult).toEqual(8);
-				hardwareKeysTest.resetCaptureKeyCallback('ALL');
-				hardwareKeysTest.resetCaptureKeyCallback('0x0D');
 				hardwareKeysTest.callbackFiredTimeout = null;
 			}, 'expect the callback to fire only once');	
 		});
 			
-		it("2.12.should not obstruct the key event from reaching the page when dispatch is set to true", function()
+		it("2.11.should not obstruct the key event from reaching the page when dispatch is set to true", function()
 		{
 			runs(function()
 			{
-				hardwareKeysTest.captureKey(true,'0x41');
+				hardwareKeysTest.captureKey(true,'' + hardwareKeysTest.LETTER_A_CODE);
 				hardwareKeysTest.textBox = document.createElement('input');
 				hardwareKeysTest.textBox.type = 'text';
 				hardwareKeysTest.textBox.id = 'keyCaptureTestTextBox';
 				document.body.appendChild(hardwareKeysTest.textBox);
 				hardwareKeysTest.textBox.focus();
-				hardwareKeysTest.simulateKeyPress(0x41);
+				hardwareKeysTest.simulateKeyPress(hardwareKeysTest.LETTER_A_CODE);
 				setTimeout(function(){hardwareKeysTest.callbackFiredTimeout = 'timedout'},1000);// TAB
 			}, 'Create a text box, add it to the page and focus it. Setup the 0x41 key capture with dispatch and fire 0x41 key');
 			waitsFor(function()
@@ -263,15 +245,14 @@ describe("HardwareKeysTestSuite", function() {
 			runs(function()
 			{
 				expect(hardwareKeysTest.callbackFired).toBe(true);
-				expect(hardwareKeysTest.callbackFiredResult).toBe(0x41);
-				expect(hardwareKeysTest.textBox.value).toEqual('A');
+				expect(hardwareKeysTest.callbackFiredResult).toBe(hardwareKeysTest.LETTER_A_CODE);
+				expect(hardwareKeysTest.textBox.value).toEqual('a');
 				document.body.removeChild(hardwareKeysTest.textBox);
-				hardwareKeysTest.resetCaptureKeyCallback('0x41');
 				hardwareKeysTest.callbackFiredTimeout = null;
 			},'expect the key to be input into the input box and the callback to fire');
 		});
 		
-		it("2.13.should obstruct the key event from reaching the page when dispatch is set to false", function()
+		it("2.12.should obstruct the key event from reaching the page when dispatch is set to false", function()
 		{
 			runs(function()
 			{
@@ -294,12 +275,11 @@ describe("HardwareKeysTestSuite", function() {
 				expect(hardwareKeysTest.callbackFiredResult).toBe(0x41);
 				expect(hardwareKeysTest.textBox.value).toEqual('');
 				document.body.removeChild(hardwareKeysTest.textBox);
-				hardwareKeysTest.resetCaptureKeyCallback('0x41');
 				hardwareKeysTest.callbackFiredTimeout = null;
 			},'expect the key not to be input into the input box and the callback to fire');
 		});
 		
-		it("2.14.should capture ENTER key when specified with DECIMAL", function() {
+		it("2.13.should capture ENTER key when specified with DECIMAL", function() {
 			runs(function() {
 				hardwareKeysTest.captureKey(true,'13');			// ENTER
 				hardwareKeysTest.simulateKeyPress(13);				// ENTER
@@ -307,20 +287,16 @@ describe("HardwareKeysTestSuite", function() {
 			waitsFor(function() {
             	return hardwareKeysTest.callbackFiredResult == 13;
         	}, "ERROR: Failed to capture ENTER key", 3000);
-			runs(function()
-			{
-				hardwareKeysTest.resetCaptureKeyCallback('0x0D');
-			}, 'expect the callback not to fire');
 		});
 		
 		
 		if(hardwareKeysTest.isAndroid())
 		{
-			it("2.15.should capture P1 (volume down) key", function()
+			it("2.14.should capture P1 (volume down) key", function()
 			{
 				runs(function()
 				{
-					hardwareKeysTest.captureKey(true, '0x19');
+					hardwareKeysTest.captureKey(false, '0x19');
 					hardwareKeysTest.simulateKeyPress(0x19);
 				}, 'set capture P1 key and fire P1 key event');
 				
@@ -328,18 +304,13 @@ describe("HardwareKeysTestSuite", function() {
 				{
 					return hardwareKeysTest.callbackFiredResult == 0x19;
 				}, 'ERROR: couldnt catch P1 event',3000);
-				
-				runs(function()
-				{
-					hardwareKeysTest.resetCaptureKeyCallback('0x19');
-				}, 'resetting callbacks');
 			});
 			
-			it("2.16.should capture P2 (volume up) key", function()
+			it("2.15.should capture P2 (volume up) key", function()
 			{
 				runs(function()
 				{
-					hardwareKeysTest.captureKey(true, '0x18');
+					hardwareKeysTest.captureKey(false, '0x18');
 					hardwareKeysTest.simulateKeyPress(0x18);
 				}, 'set capture P2 key and fire P2 key event');
 				
@@ -347,18 +318,13 @@ describe("HardwareKeysTestSuite", function() {
 				{
 					return hardwareKeysTest.callbackFiredResult == 0x18;
 				}, 'ERROR: couldnt catch P2 event',3000);
-				
-				runs(function()
-				{
-					hardwareKeysTest.resetCaptureKeyCallback('0x18');
-				}, 'resetting callbacks');
 			});
 
-			it("2.17.should capture P3 (search) key", function()
+			it("2.16.should capture P3 (search) key", function()
 			{
 				runs(function()
 				{
-					hardwareKeysTest.captureKey(true, '0x54');
+					hardwareKeysTest.captureKey(false, '0x54');
 					hardwareKeysTest.simulateKeyPress(0x54);
 				}, 'set capture P3 key and fire P3 key event');
 				
@@ -366,18 +332,13 @@ describe("HardwareKeysTestSuite", function() {
 				{
 					return hardwareKeysTest.callbackFiredResult == 0x54;
 				}, 'ERROR: couldnt catch P3 event',3000);
-				
-				runs(function()
-				{
-					hardwareKeysTest.resetCaptureKeyCallback('0x54');
-				}, 'resetting callbacks');
 			});
 			
-			it("2.18.should capture back key", function()
+			it("2.17.should capture back key", function()
 			{
 				runs(function()
 				{
-					hardwareKeysTest.captureKey(true, '0x04');
+					hardwareKeysTest.captureKey(false, '0x04');
 					hardwareKeysTest.simulateKeyPress(0x04);
 				}, 'set capture back key and fire back key event');
 				
@@ -385,18 +346,13 @@ describe("HardwareKeysTestSuite", function() {
 				{
 					return hardwareKeysTest.callbackFiredResult == 0x04;
 				}, 'ERROR: couldnt catch back event',3000);
-				
-				runs(function()
-				{
-					hardwareKeysTest.resetCaptureKeyCallback('0x04');
-				}, 'resetting callbacks');
 			});
 			
-			it("2.19.should capture menu key", function()
+			it("2.18.should capture menu key", function()
 			{
 				runs(function()
 				{
-					hardwareKeysTest.captureKey(true, '0x52');
+					hardwareKeysTest.captureKey(false, '0x52');
 					hardwareKeysTest.simulateKeyPress(0x52);
 				}, 'set capture menu key and fire menu key event');
 				
@@ -404,11 +360,6 @@ describe("HardwareKeysTestSuite", function() {
 				{
 					return hardwareKeysTest.callbackFiredResult == 0x52;
 				}, 'ERROR: couldnt catch menu event',3000);
-				
-				runs(function()
-				{
-					hardwareKeysTest.resetCaptureKeyCallback('0x52');
-				}, 'resetting callbacks');
 			});
 		}
 		
@@ -425,15 +376,13 @@ describe("HardwareKeysTestSuite", function() {
 			waitsFor(function() {
 				return hardwareKeysTest.callbackFiredResult == 13;
         	}, "ERROR: ENTER key has not been remapped", 3000);
-			runs(function() {
-				hardwareKeysTest.clearRemap('0x08');
-			}, "clearing remapping");
 		});
 		
 		it("3.2.should clear a remap using null value", function() {
 			runs(function() {
 				hardwareKeysTest.remapKey('0x08', '0x0D'); 			// TAB->ENTER
 				Rho.KeyCapture.remapKey('0x08', null);
+				hardwareKeysTest.captureKey(false, '0x0D');
 				hardwareKeysTest.simulateKeyPress(8);				// TAB
 				setTimeout(function(){hardwareKeysTest.callbackFiredResult = 'timedout'},1000);// TAB
 			}, "remap TAB to ENTER, then reset and simulate TAB key press...");		
@@ -451,6 +400,7 @@ describe("HardwareKeysTestSuite", function() {
 			runs(function() {
 				hardwareKeysTest.remapKey('0x08', '0x0D'); 			// TAB->ENTER
 				Rho.KeyCapture.remapKey('0x08', '');
+				hardwareKeysTest.captureKey(false, '0x0D');
 				hardwareKeysTest.simulateKeyPress(8);				// TAB
 				setTimeout(function(){hardwareKeysTest.callbackFiredResult = 'timedout'},1000);// TAB
 			}, "remap TAB to ENTER, then reset and simulate TAB key press...");		
@@ -463,7 +413,7 @@ describe("HardwareKeysTestSuite", function() {
 				expect(hardwareKeysTest.callbackFired).toBe(false);
 			}, 'expect the callback not to fire');	
 		});
-		
+
 		///////////////////////////////////////////////////////////////////////
 		// 4. Trigger
 		///////////////////////////////////////////////////////////////////////
@@ -474,13 +424,15 @@ describe("HardwareKeysTestSuite", function() {
 				hardwareKeysTest.simulateKeyPress(hardwareKeysTest.TRIGGER);				// TRIGGER
 			}, "enable Trigger and simulate trigger press...");		
 			waitsFor(function() {
-				return typeof hardwareKeysTest.callbackFiredResult == 'object' && hardwareKeysTest.callbackFiredResult.length == 2;//Up and down event
+				if(hardwareKeysTest.callbackFiredResult == null){return false;}
+				if((typeof hardwareKeysTest.callbackFiredResult) != 'object'){return false;}
+				if(hardwareKeysTest.callbackFiredResult.length != 2){return false;}
+				else{return true;}
         	}, "ERROR: Trigger NOT received", 3000);
 			runs(function()
 			{
 				expect(hardwareKeysTest.callbackFiredResult[0]).toEqual(hardwareKeysTest.TRIGGER);
 				expect(hardwareKeysTest.callbackFiredResult[1]).toEqual(0);
-				hardwareKeysTest.resetTrigger();
 			},'expect both trigger down and trigger up events are fired');
 		});
 		
@@ -497,7 +449,6 @@ describe("HardwareKeysTestSuite", function() {
 			runs(function()
 			{
 				expect(hardwareKeysTest.callbackFired).toBe(false);
-				hardwareKeysTest.resetTrigger();
 			}, 'expect the callback not to fire');
 		});
 		

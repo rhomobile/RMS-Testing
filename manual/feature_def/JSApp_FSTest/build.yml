@@ -1,4 +1,4 @@
-sdk: "C:/projects/rhodes"
+sdk:   ../../../../rhodes
 sdkversion: 4.0.0
 name: JSApp_FSTest
 javascript_application: true

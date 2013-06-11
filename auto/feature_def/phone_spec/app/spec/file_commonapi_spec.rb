@@ -48,12 +48,12 @@ describe "FileCommonAPI" do
         return "exist" if Rho::RhoFile.exists(f)
 	   
         dd = 0    
-if !defined?(RHO_WP7)     
+   
         # if no, get number of files in saving location. call delete action if equals 14
         files = Rho::RhoFile.listDir(dir_name)
-        #puts "files: #{files}"
+        puts "files: #{files}"
 	    dd = files.size - 2 #skip . and ..
-end        
+        
 	    if  dd == 2
 	        return "limit"
 	    else
@@ -80,10 +80,9 @@ end
         
         res = create_file_in_cache(dir_name, "cache_test", "1")
         res.should ==  "exist" 
-if !defined?(RHO_WP7)         
+         
         res = create_file_in_cache(dir_name, "cache_test", "3")
-        res.should ==  "limit" 
-end        
+        res.should ==  "limit"        
         
     end
 
@@ -94,8 +93,7 @@ end
         Rho::RhoFile.exists(nil).should == false
         Rho::RhoFile.exists("").should == false
     end
-    
-   if !defined?(RHO_WP7)   
+       
     it "should readnonexistfile" do
         file_name = Rho::RhoFSConnector::get_app_path('app') + 'lang/lang_345'
         Rho::RhoFile.exists(file_name).should ==  false
@@ -105,7 +103,6 @@ end
         if System.get_property('platform') != 'WINDOWS' && System.get_property('platform') != 'WINDOWS_DESKTOP'
             Rho::RhoFile.read(file_name).should == ""
         end    
-    end
     end
 
     def clear

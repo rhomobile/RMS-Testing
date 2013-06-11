@@ -58,6 +58,7 @@ var writeIntoLog = function (desc, data){
 
 //Display Results on Device
 var displayResult = function (desc, data){
+	$('ul').empty();
 	var node=document.createElement("LI");
 	var textnode =document.createTextNode(desc);
 	node.appendChild(textnode);
@@ -103,5 +104,7 @@ function add(type) {
  
 }
 
-
-
+var testApplicable = function (arrOSTypes){
+    var platform = Rho.System.platform;
+    return (jQuery.inArray(platform, arrOSTypes) == -1) ? false : true ;
+}
