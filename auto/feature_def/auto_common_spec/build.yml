@@ -1,4 +1,5 @@
 #sdk: C:/DevelopmentTools/rhomobile/rhodes
+sdk: ../../../../rhodes
 paths:
   extensions:
 

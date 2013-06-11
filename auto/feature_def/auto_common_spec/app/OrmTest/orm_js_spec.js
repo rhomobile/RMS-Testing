@@ -40,7 +40,7 @@ describe("<ORM module specs>", function() {
         expect(source.name).toEqual('Product');
     });
 
-    it('add model, get model, clear all models', function() {
+    it('should add model, get model, clear all models', function() {
         expect(Rho.ORM.getModel('Model')).toBeUndefined();
 
         var Product = function(model){
@@ -59,28 +59,32 @@ describe("<ORM module specs>", function() {
         expect(Rho.ORM.getModel('Product')).toBeUndefined();
     });
 
-    // it('add fixed schema model with table', function() {
-    //     // relays on beforeEach
-    //     expect(Rho.ORM.getModel('Model')).toBeUndefined();
+    it('should add fixed schema model with table', function() {
+        expect(Rho.ORM.getModel('Model')).toBeUndefined();
 
-    //     var Product = function(model){
-    //         model.modelName("Product");
-    //         model.enable("sync");
-    //         model.property("name","string");
-    //         model.property("price","integer");
-    //         model.enable("fixedSchema");
-    //         model.set("partition","local");
-    //     };
+        var Product = function(model){
+            model.modelName("Product");
+            model.enable("sync");
+            model.property("name","string");
+            model.property("price","integer");
+            model.enable("fixedSchema");
+            model.set("partition","local");
+        };
 
-    //     var Model = Rho.ORM.addModel(Product);
-    //     sources = Rho.ORMHelper.getAllSources();
-    //     expect(Model).toBeDefined();
-    //     expect(Rho.ORM.getModel('Product')).toBe(Model);
-    //     Model.create({'name':'test'})
-    //     res = db.execute("SELECT * FROM Product");
-    //     //expect(res).toBE([]);
-    //     //db.execute("DROP TABLE Product");
-    // });
+        var Model = Rho.ORM.addModel(Product);
+        sources = Rho.ORMHelper.getAllSources();
+        expect(Model).toBeDefined();
+        expect(Rho.ORM.getModel('Product')).toBe(Model);
+
+        res = db.execute("SELECT * FROM Product");
+        console.log("res is: " + JSON.stringify(res));
+        expect(res).toEqual([]);
+        db.execute("DROP TABLE Product");
+    });
+
+    it("should add index",function(){
+
+    });
 
 //     it('makes empty object', function() {
 //         var empty = Rho.ORM.addModel('Model').make();
