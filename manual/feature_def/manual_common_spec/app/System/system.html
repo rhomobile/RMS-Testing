@@ -19,9 +19,6 @@
 <body>
 <h1>Rho.System</h1>
 <ul>
-    <li id="typeof_Rho_System">Rho.System defined : <span class="result"></span></li>
-    <script type="text/javascript">$("#typeof_Rho_System span.result").text('function' == typeof Rho.System);</script>
-
     <li id="Rho_System_platform">platform : <span class="result"></span></li>
     <script type="text/javascript">$("#Rho_System_platform span.result").text(Rho.System.platform);</script>
 
@@ -48,9 +45,6 @@
 
     <li id="Rho_System_ppiY">ppiY : <span class="result"></span></li>
     <script type="text/javascript">$("#Rho_System_ppiY span.result").text(Rho.System.ppiY);</script>
-
-    <li id="Rho_System_phoneNumber">phoneNumber : <span class="result"></span></li>
-    <script type="text/javascript">$("#Rho_System_phoneNumber span.result").text(Rho.System.phoneNumber);</script>
 
     <li id="Rho_System_deviceOwnerEmail">deviceOwnerEmail : <span class="result"></span></li>
     <script type="text/javascript">$("#Rho_System_deviceOwnerEmail span.result").text(Rho.System.deviceOwnerEmail);</script>
@@ -121,9 +115,6 @@
     <li id="Rho_System_screenSleeping">screenSleeping : <span class="result"></span></li>
     <script type="text/javascript">$("#Rho_System_screenSleeping span.result").text(Rho.System.screenSleeping);</script>
 
-    <li id="Rho_System_hasSqlite">hasSqlite : <span class="result"></span></li>
-    <script type="text/javascript">$("#Rho_System_hasSqlite span.result").text(Rho.System.hasSqlite);</script>
-
     <li id="Rho_System_getStartParams">getStartParams : <span class="result"></span></li>
     <script type="text/javascript">$("#Rho_System_getStartParams span.result").text(Rho.System.getStartParams());</script>
 
@@ -141,15 +132,6 @@
         Rho.Log.info("p3","props");
         Rho.Log.info(data,"nprops");
         $("#Rho_System_getNonexistingProperties span.result").text(data);</script>
-
-    <li id="Rho_System_exit">
-        <button name="Rho_System_exit">exit()</button>
-        : <span class="result"></span></li>
-    <script type="text/javascript">
-        $("#Rho_System_exit button").live('click', function () {
-            $("#Rho_System_exit span.result").text(Rho.System.exit());
-        });
-    </script>
 
     <li id="Rho_System_callback">
         <button name="Rho_System_callback">Callback test</button>
@@ -196,9 +178,6 @@
 		</div>
 	</div>
 </div>
-
-
-
 
 <div class="method_tests">
 	<div class="method_name">Rho.System.httpProxyURI</div>
@@ -485,7 +464,6 @@
 	</div>
 </div>
 
-
 <div class="method_tests">
 	<div class="method_name">Rho.System.deleteFolder</div>
 	<div class="method_desc">Delete Folder : Deletes the folder /public/testfiles/testfoldertodelete</div>
@@ -525,7 +503,6 @@
 	</div>
 </div>
 
-
 <div class="method_tests">
 	<div class="method_name">Rho.System.openUrl</div>
 	<div class="method_desc">OpenUrl :Open the application associated with the URL.</div>
@@ -553,7 +530,6 @@
 		<span class="test_scenario_number">VT300-080<br /></span>
 	</div>
 </div>
-
 
 <div class="method_tests">
 	<div class="method_name">Rho.System.setDoNotBackupAttribute</div>
