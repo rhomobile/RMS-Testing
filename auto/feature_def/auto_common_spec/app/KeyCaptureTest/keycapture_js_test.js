@@ -1,21 +1,31 @@
 var hardwareKeysTest = {};
 
 hardwareKeysTest.deviceOS = Rho.System.platform;
-hardwareKeysTest.callbackFired = true;
+console.log('DeviceOs: ' + hardwareKeysTest.deviceOS);
+hardwareKeysTest.callbackFired = false;
 hardwareKeysTest.TRIGGER = 100;
-if(hardwareKeysTest.isAndroid())
-{
-	hardwareKeysTest.TRIGGER = 103;			
-}
+hardwareKeysTest.LETTER_A_CODE = 0x43;
 
-hadwareKeysTest.isAndroid = function()
+hardwareKeysTest.isAndroid = function()
 {
 	if(hardwareKeysTest.deviceOS.toLowerCase().indexOf('android') == -1)
 	{
+		console.log('It isnt android');
 		return false;
 	}
+	console.log('It is android');
 	return true;
 };
+
+hardwareKeysTest.loadEvent = function()
+{
+	if(hardwareKeysTest.isAndroid())
+	{
+		hardwareKeysTest.TRIGGER = 103;
+		hardwareKeysTest.LETTER_A_CODE = 29;//TODO
+	}
+};
+window.addEventListener('DOMContentLoaded', hardwareKeysTest.loadEvent);
 
 hardwareKeysTest.simulateKeyPress = function(keyValue)
 {
@@ -27,12 +37,13 @@ hardwareKeysTest.simulateKeyPress = function(keyValue)
 ///////////////////////////////////////////////////////////////////////////
 hardwareKeysTest.captureKeyCallback = function(keyValueHash) 
 {
+	console.log('KeyCallback: ' + keyValueHash.keyValue);
 	hardwareKeysTest.callbackFired = true;
-	if(hardwareKeysTest.callbackFiredResult == '')
+	if(hardwareKeysTest.callbackFiredResult == null)
 	{
 		hardwareKeysTest.callbackFiredResult = keyValueHash["keyValue"];
 	}
-	else if(typeof hardwareKeysTest.callbackFiredResult == 'string')
+	else if(typeof hardwareKeysTest.callbackFiredResult == 'string' || typeof hardwareKeysTest.callbackFiredResult == 'number')
 	{
 		hardwareKeysTest.callbackFiredResult = [hardwareKeysTest.callbackFiredResult, keyValueHash["keyValue"]];
 	}
@@ -40,11 +51,12 @@ hardwareKeysTest.captureKeyCallback = function(keyValueHash)
 	{
 		hardwareKeysTest.callbackFiredResult.push(keyValueHash["keyValue"]);
 	}
+	console.log('TriggerCallback-: ' + hardwareKeysTest.callbackFiredResult);
 };
 
 hardwareKeysTest.captureKey = function(bDispatch,key)
 {
-	Rho.KeyCapture.captureKey(bDispatch,key,captureKeyCallback);
+	Rho.KeyCapture.captureKey(bDispatch,key,hardwareKeysTest.captureKeyCallback);
 };
 
 hardwareKeysTest.resetCaptureKeyCallback = function(key)
@@ -70,24 +82,26 @@ hardwareKeysTest.clearRemap = function(keyFrom)
 ///////////////////////////////////////////////////////////////////////////
 hardwareKeysTest.triggerCallback = function(triggerFlagHash) 
 {
+	console.log('TriggerCallback+: ' + triggerFlagHash.triggerFlag);
 	hardwareKeysTest.callbackFired = true;
-	if(hardwareKeysTest.callbackFiredResult == '')
+	if(hardwareKeysTest.callbackFiredResult == null)
 	{
-		hardwareKeysTest.callbackFiredResult = keyValueHash["triggerFlag"];
+		hardwareKeysTest.callbackFiredResult = triggerFlagHash["triggerFlag"];
 	}
-	else if(typeof hardwareKeysTest.callbackFiredResult == 'string')
+	else if(typeof hardwareKeysTest.callbackFiredResult == 'string' || typeof hardwareKeysTest.callbackFiredResult == 'number' )
 	{
-		hardwareKeysTest.callbackFiredResult = [hardwareKeysTest.callbackFiredResult, keyValueHash["triggerFlag"]];
+		hardwareKeysTest.callbackFiredResult = [hardwareKeysTest.callbackFiredResult, triggerFlagHash["triggerFlag"]];
 	}
 	else
 	{
-		hardwareKeysTest.callbackFiredResult.push(keyValueHash["triggerFlag"]);
+		hardwareKeysTest.callbackFiredResult.push(triggerFlagHash["triggerFlag"]);
 	}
+	console.log('TriggerCallback-: ' + hardwareKeysTest.callbackFiredResult);
 };
 
 hardwareKeysTest.setTrigger = function()
 {
-	Rho.KeyCapture.captureTrigger(triggerCallback);
+	Rho.KeyCapture.captureTrigger(hardwareKeysTest.triggerCallback);
 };
 
 hardwareKeysTest.resetTrigger = function()

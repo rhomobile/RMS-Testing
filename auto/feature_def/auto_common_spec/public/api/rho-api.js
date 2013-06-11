@@ -109,7 +109,7 @@ var Rho = Rho || (function ($) {
             cmd['args'][params.callbackIndex] = prepareCallback(params.args[params.callbackIndex]);
         }
 
-        var cmdText = $.toJSON(cmd);
+        var cmdText = JSON.stringify(cmd);
 
         var result = null;
         var deferred =  new $.Deferred(function(dfr) {
@@ -129,7 +129,7 @@ var Rho = Rho || (function ($) {
             }).fail(function (xhr, status, message) {
                 var errObj = null;
                 try {
-                    errObj = $.evalJSON(xhr.responseText);
+                    errObj = JSON.parse(xhr.responseText);
                     if (errObj && "object" == typeof errObj && "string" == typeof errObj.error) {
                         message = errObj.error;
                     }

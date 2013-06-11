@@ -21,7 +21,7 @@ describe("Scanner Test", function() {
 				it("Enable "+ scntype + scnname, function() {
 					
 					runs(function() {
-						//Rho.Log.info($.toJSON(scanObject), "PATRO Enable");
+						//Rho.Log.info(JSON.stringify(scanObject), "PATRO Enable");
 						enumObject.enable();
 						setTimeout(function() {
 						enableflag = true;
@@ -75,12 +75,12 @@ describe("Scanner Test", function() {
 								var strProperty = '{"'+propertyName+'" : "'+propertyValue+'"}'
 							}
 
-							var objProperty = jQuery.parseJSON(strProperty);
+							var objProperty = JSON.parse(strProperty);
 						
 							enumObject.setProperties(objProperty);
 
 							var strGetProperty = '["'+arrScanner[idx]['propertyName']+'"]';
-							var objGetProperty = jQuery.parseJSON(strGetProperty);
+							var objGetProperty = JSON.parse(strGetProperty);
 
 							var data = enumObject.getProperties(objGetProperty);
 
@@ -139,7 +139,7 @@ describe("Scanner Test", function() {
 				it("Disable "+ scntype + scnname, function() {
 					
 					runs(function() {
-						//Rho.Log.info($.toJSON(scanObject), "PATRO Disable");
+						//Rho.Log.info(JSON.stringify(scanObject), "PATRO Disable");
 						enumObject.disable();
 						setTimeout(function() {
 						disableflag = true;
@@ -189,7 +189,7 @@ describe("Scanner Test", function() {
 									var strProperty = '{"'+propertyName+'" : "'+propertyValue+'"}'
 								}
 
-								var objProperty = jQuery.parseJSON(strProperty);
+								var objProperty = JSON.parse(strProperty);
 
 								enumObject.enable(objProperty, scanCallback);
 
@@ -205,7 +205,7 @@ describe("Scanner Test", function() {
 							runs(function() {
 
 								var strGetProperty = '["'+arrScanner[idx]['propertyName']+'"]';
-								var objGetProperty = jQuery.parseJSON(strGetProperty);
+								var objGetProperty = JSON.parse(strGetProperty);
 
 								var data = enumObject.getProperties(objGetProperty);
 
