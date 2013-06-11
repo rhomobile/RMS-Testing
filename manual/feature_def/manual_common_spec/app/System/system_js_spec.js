@@ -1,5 +1,7 @@
 describe("System Module JS Test Starts Here", function() {
+
 	describe("System Module-Setting Directly Test Starts Here", function() {
+		
 		it("VT300-070 | call getAllProperties() | ", function() {
 	
 	    	var data =  Rho.System.getAllProperties();
@@ -8,12 +10,17 @@ describe("System Module JS Test Starts Here", function() {
 			expect(testPassed).toEqual(true);
 		});
 		
+		if(isAnyWindowsFamilyPlatform()){
+		
 		it("VT300-077 | call isApplicationInstalled() with application name which is there in device | ", function() {
 			var data = Rho.System.isApplicationInstalled('rhomobile nativejasmine');
 			displayResult("VT300-077 | call isApplicationInstalled() with application name which is there in device | ",data);
 			var testPassed = confirm("Do you see Correct Output?");
 			expect(testPassed).toEqual(true);
 		});
+		
+		}
+		else if(isAndroidPlatform()){
 	
 		it("VT300-077 | call isApplicationInstalled() with application name which is there in device | ", function() {
 			var data = Rho.System.isApplicationInstalled('com.rhomobile.nativejasmine');
@@ -21,7 +28,8 @@ describe("System Module JS Test Starts Here", function() {
 			var testPassed = confirm("Do you see Correct Output?");
 			expect(testPassed).toEqual(true);
 		});
-		
+
+		}
 
 		it("VT300-078 | call isApplicationInstalled() with application name which is not there in device | ", function() {
 			var data = Rho.System.isApplicationInstalled('RhoElements3');
@@ -29,6 +37,7 @@ describe("System Module JS Test Starts Here", function() {
 			var testPassed = confirm("Do you see Correct Output?");
 			expect(testPassed).toEqual(true);
 		});
+	
 	});
 	
 
@@ -38,6 +47,7 @@ describe("System Module JS Test Starts Here", function() {
 	describe("System Module- getProperty Test Starts Here", function() {
 		for (var i=0;i<sys_get_property.length;i++){
 			(function(idx){
+				if(testApplicable(sys_get_property[idx]['osType'])){
 				it(sys_get_property[idx]['testName'], function() {
 
 					var data = Rho.System.getProperty(sys_get_property[idx]['propertyName']);
@@ -47,6 +57,7 @@ describe("System Module JS Test Starts Here", function() {
 					expect(testPassed).toEqual(true);
 					
 				});
+				}
 			})(i);
 		}
 	});
@@ -63,6 +74,7 @@ describe("System Module JS Test Starts Here", function() {
 
 		for (var i=0;i<sys_get_properties.length;i++){
 			(function(idx){
+				if(testApplicable(sys_get_properties[idx]['osType'])){
 				it(sys_get_properties[idx]['testName'], function() {
 				
 					var propertyName = sys_get_properties[idx]['propertyName'];
@@ -76,6 +88,7 @@ describe("System Module JS Test Starts Here", function() {
 					var testPassed = confirm("Do you see Correct Output?");
 					expect(testPassed).toEqual(true);
 				});
+				}
 			})(i);
 		}
 

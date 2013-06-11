@@ -28,50 +28,64 @@ function getmodulename()
 //var index = document.controlForm.myChoice.selectedIndex;
 //selected_Module = document.controlForm.myChoice.options[index].value;
 selected_Module = document.controlForm.myChoice.value;
-myDiv.innerHTML=""+selected_Module;
+//myDiv.innerHTML=""+selected_Module;
 
 
 if(selected_Module=="VT293-0001")
 {
+myNet.innerHTML = "Expected Result :-<br><br>StartStatusNotify with pollinterval of 6 seconds";
    //Request the system to check every 6 seconds and call us back if there is a change in network connectivity
    Rho.Network.startStatusNotify(6000, status_notify_callback);
 }
 if(selected_Module=="VT293-0002")
 {
+  myNet.innerHTML = "Expected Result :-<br><br>StartStatusNotify without pollinterval";
+  Rho.Network.stopStatusNotify();
 	Rho.Network.startStatusNotify(status_notify_callback);
 }
 if(selected_Module=="VT293-0003")
 {
+myNet.innerHTML = "Expected Result :-<br><br>StartStatusNotify with synch";
 myDiv.innerHTML ="This test will fail because callback is mandatory for startStatusNotify method"
+Rho.Network.stopStatusNotify();
  myvar = Rho.Network.startStatusNotify();
  myDiv.innerHTML="Network Status :"+myvar["current_status"];
 }
 if(selected_Module=="VT293-0004")
 {
+myNet.innerHTML = "Expected Result :-<br><br>startStatusNotify with anonymous callback";
+Rho.Network.stopStatusNotify();
 Rho.Network.startStatusNotify(6000, function(params){
       myDiv.innerHTML="Network status changed from"+params["prev_status"]+" to "+params["current_status"];
    });
 }
 if(selected_Module=="VT293-0005")
 {
+myNet.innerHTML = "Expected Result :-<br><br>StopStatus notifications";
 myDiv.innerHTML="Please press the stop_status_notify button on the page to stop status notify";
 Rho.Network.startStatusNotify(6000, status_notify_callback);
 }
-if(selected_Module=="VT293-0006")
+/*if(selected_Module=="VT293-0006")
 {
+myNet.innerHTML = "Expected Result :-<br><br>Without calling startStatusNotify method call stopStatusNotify";
 Rho.Network.stopStatusNotify();
-}
+}*/
 if(selected_Module=="VT293-0007")
 {
+myNet.innerHTML = "Expected Result :-<br><br>Check the Connection destinations should be returned in the log file";
 Rho.Network.connectWan("My ISP", connect_wan_notify_callback);
 }
 if(selected_Module=="VT293-0008")
 {
+myNet.innerHTML = "Expected Result :-<br><br>connectWan with simcard :- wanStatusEvent should fire with all associated parameters and valid values";
+Rho.Network.disconnectWan();
 Rho.Network.connectWan("My ISP", connect_wan_notify_callback);
 }
 if(selected_Module=="VT293-0009")
 {
+myNet.innerHTML = "Expected Result :-<br><br>connectWan with synch";
 myDiv.innerHTML ="This test will fail because callback is mandatory for connectWan method"
+Rho.Network.disconnectWan();
 myvar = Rho.Network.connectWan("My ISP");
 myDiv.innerHTML="phoneSignalStrength :"+myvar["phoneSignalStrength"]+"<br>"+
 				"networkOperator :"+myvar["networkOperator"]+"<br>"+
@@ -81,6 +95,8 @@ myDiv.innerHTML="phoneSignalStrength :"+myvar["phoneSignalStrength"]+"<br>"+
 }
 if(selected_Module=="VT293-0010")
 {
+myNet.innerHTML = "Expected Result :-<br><br>connectWan with anonymous callback";
+Rho.Network.disconnectWan();
 Rho.Network.connectWan("My ISP", function(params){
 //connect wan callback
 myDiv.innerHTML="phoneSignalStrength :"+params["phoneSignalStrength"]+"<br>"+
@@ -92,11 +108,13 @@ myDiv.innerHTML="phoneSignalStrength :"+params["phoneSignalStrength"]+"<br>"+
 }
 if(selected_Module=="VT293-0011")
 {
+myNet.innerHTML = "Expected Result :-<br><br>disconnectWan with simcard:- Disconnects the current WAN connection";
 myDiv.innerHTML="Please press the disconnect_wan button on the page to disconnect wan";
 Rho.Network.connectWan("My ISP", connect_wan_notify_callback);
 }
-if(selected_Module=="VT293-0012")
+/*if(selected_Module=="VT293-0012")
 {
+myNet.innerHTML = "Expected Result :-<br><br>disconnectWan without simcard:- Disconnects the current WAN connection";
 Rho.Network.connectWan("My ISP", connect_wan_notify_callback);
 }
 if(selected_Module=="VT293-0013")
@@ -137,34 +155,19 @@ if(params["connectionInformation"] == "Disconnected")
 else
 	myDiv.innerHTML="Connected";
  });
-}
+}*/
 if(selected_Module=="VT293-0017")
 {
+  myNet.innerHTML = "Expected Result :-<br><br>detectConnection with wlan profile disbled";
+  myDiv.innerHTML = "Please press the Stop_Detecting button on the page to stop network detection before moving to next test";
       detectconnectionProps = {
         host: srvHost,
         port: srvPort
       };
   Rho.Network.detectConnection(detectconnectionProps, detect_connection_notify_callback);
 }
+/*
 if(selected_Module=="VT293-0018")
-{
-      detectconnectionProps = {
-        host: "http://www.google.com",
-        port: 80,
-		pollInterval: 6000
-      };
-  Rho.Network.detectConnection(detectconnectionProps, detect_connection_notify_callback);
-}
-if(selected_Module=="VT293-0019")
-{
-      detectconnectionProps = {
-        host: "http://www.google.com",
-        port: 80,
-		pollInterval: 6000
-      };
-  Rho.Network.detectConnection(detectconnectionProps, detect_connection_notify_callback);
-}
-if(selected_Module=="VT293-0020")
 {
       detectconnectionProps = {
         host: "http://www.google.com",
@@ -173,7 +176,7 @@ if(selected_Module=="VT293-0020")
       };
   Rho.Network.detectConnection(detectconnectionProps, detect_connection_notify_callback);
 }
-if(selected_Module=="VT293-0021")
+if(selected_Module=="VT293-0019")
 {
       detectconnectionProps = {
         host: "http://www.google.com",
@@ -182,16 +185,16 @@ if(selected_Module=="VT293-0021")
       };
   Rho.Network.detectConnection(detectconnectionProps, detect_connection_notify_callback);
 }
-if(selected_Module=="VT293-0022")
+if(selected_Module=="VT293-0020")
 {
       detectconnectionProps = {
-        host: "http://www.google.com",
+        host: "http://www.ggle.com",
         port: 80,
 		detectionTimeout: 1000
       };
   Rho.Network.detectConnection(detectconnectionProps, detect_connection_notify_callback);
 }
-if(selected_Module=="VT293-0023")
+if(selected_Module=="VT293-0021")
 {
       detectconnectionProps = {
         host: "http://www.google.com",
@@ -201,7 +204,7 @@ if(selected_Module=="VT293-0023")
       };
   Rho.Network.detectConnection(detectconnectionProps, detect_connection_notify_callback);
 }
-if(selected_Module=="VT293-0024")
+if(selected_Module=="VT293-0022")
 {
 myDiv.innerHTML="Please press the stop_detecting_connection button on the page to stop detecting network";
       detectconnectionProps = {
@@ -211,94 +214,98 @@ myDiv.innerHTML="Please press the stop_detecting_connection button on the page t
 		detectionTimeout: 5000
       };
   Rho.Network.detectConnection(detectconnectionProps, detect_connection_notify_callback);
+}*/
+if(selected_Module=="VT293-0023")
+{
+myNet.innerHTML = "Expected Result :-<br><br>hasCellNetwork with simcard";
+var cell_network = Rho.Network.hasCellNetwork()
+myDiv.innerHTML=""+cell_network;
+
+}
+if(selected_Module=="VT293-0024")
+{
+myNet.innerHTML = "Expected Result :-<br><br>hasCellNetwork without connecting cell netowork";
+var cell_network = Rho.Network.hasCellNetwork()
+myDiv.innerHTML=""+cell_network;
 }
 if(selected_Module=="VT293-0025")
 {
-myDiv.innerHTML="Please press the stop_detecting_connection button on the page to stop detecting network";
-  detectconnectionProps = {
-        host: "http://www.google.com",
-        port: 80,
-		pollInterval: 6000,
-		detectionTimeout: 5000
-      };
-  Rho.Network.detectConnection(detectconnectionProps, detect_connection_notify_callback);
+myNet.innerHTML = "Expected Result :-<br><br>hasCellNetwork with device connected to wifi netowork";
+var cell_network = Rho.Network.hasCellNetwork()
+myDiv.innerHTML=""+cell_network;
 }
 if(selected_Module=="VT293-0026")
 {
-var cell_network = Rho.Network.hasCellNetwork()
-myDiv.innerHTML=""+cell_network;
+myNet.innerHTML = "Expected Result :-<br><br>hasNetwork with simcard";
+var network = Rho.Network.hasNetwork()
+myDiv.innerHTML=""+network;
 }
 if(selected_Module=="VT293-0027")
 {
-var cell_network = Rho.Network.hasCellNetwork()
-myDiv.innerHTML=""+cell_network;
+myNet.innerHTML = "Expected Result :-<br><br>Call hasNetwork with device connected wifi network";
+var network = Rho.Network.hasNetwork()
+myDiv.innerHTML=""+network;
 }
 if(selected_Module=="VT293-0028")
 {
-var cell_network = Rho.Network.hasCellNetwork()
-myDiv.innerHTML=""+cell_network;
+myNet.innerHTML = "Expected Result :-<br><br>hasNetwork with wifi network and cell netowork";
+var network = Rho.Network.hasNetwork()
+myDiv.innerHTML=""+network;
 }
 if(selected_Module=="VT293-0029")
 {
+myNet.innerHTML = "Expected Result :-<br><br>hasNetwork without any  wifi network or cell netowork";
 var network = Rho.Network.hasNetwork()
 myDiv.innerHTML=""+network;
 }
 if(selected_Module=="VT293-0030")
 {
-var network = Rho.Network.hasNetwork()
-myDiv.innerHTML=""+network;
+myNet.innerHTML = "Expected Result :-<br><br>Call hasWifiNetwork with device connected to wifi network";
+var wifi_network = Rho.Network.hasWifiNetwork()
+myDiv.innerHTML=""+wifi_network;
 }
 if(selected_Module=="VT293-0031")
 {
-var network = Rho.Network.hasNetwork()
-myDiv.innerHTML=""+network;
+myNet.innerHTML = "Expected Result :-<br><br>call hasWifiNetwork with device connected to cellnetwork";
+var wifi_network = Rho.Network.hasWifiNetwork()
+myDiv.innerHTML=""+wifi_network;
 }
 if(selected_Module=="VT293-0032")
 {
+myNet.innerHTML = "Expected Result :-<br><br>Disable all avilable network on the device call hasNetwork";
 var network = Rho.Network.hasNetwork()
 myDiv.innerHTML=""+network;
 }
 if(selected_Module=="VT293-0033")
 {
+myNet.innerHTML = "Expected Result :-<br><br>Disable all avilable network on the device call hasWifiNetwork";
 var wifi_network = Rho.Network.hasWifiNetwork()
 myDiv.innerHTML=""+wifi_network;
 }
 if(selected_Module=="VT293-0034")
 {
-var wifi_network = Rho.Network.hasWifiNetwork()
-myDiv.innerHTML=""+wifi_network;
-}
-if(selected_Module=="VT293-00335")
-{
-var network = Rho.Network.hasNetwork()
-myDiv.innerHTML=""+network;
-}
-if(selected_Module=="VT293-0036")
-{
-var wifi_network = Rho.Network.hasWifiNetwork()
-myDiv.innerHTML=""+wifi_network;
-}
-if(selected_Module=="VT293-0037")
-{
+myNet.innerHTML = "Expected Result :-<br><br>Disable all avilable network on the device call hasCellNetowrk";
 var cell_network = Rho.Network.hasCellNetwork()
 myDiv.innerHTML=""+cell_network;
 }
-if(selected_Module=="VT293-0038")
+if(selected_Module=="VT293-0035")
 {
+  myNet.innerHTML = "Expected Result :-<br><br>default responseTimeout :Take the device where its getting less signal strength";
     responsetimeoutProps = {
         url: "http://www.apache.org/licenses/LICENSE-2.0"
       };
    Rho.Network.get(responsetimeoutProps, get_callback);
 }
-if(selected_Module=="VT293-0039")
+if(selected_Module=="VT293-0036")
 {
+    myNet.innerHTML = "Expected Result :-<br><br>responseTimeout with 10 seconds :Take the device where its getting less signal strength";
     responsetimeoutProps = {
         url: "http://www.apache.org/licenses/LICENSE-2.0",
 		responseTimeout: 10
       };
    Rho.Network.get(responsetimeoutProps, get_callback);
 }
-if(selected_Module=="VT293-0040")
+/*if(selected_Module=="VT293-0037")
 {
     certificateProps = {
         url: srvSecureTestMethodsUrl,
@@ -306,7 +313,7 @@ if(selected_Module=="VT293-0040")
 	 };
    Rho.Network.post(certificateProps, post_callback);
 }
-if(selected_Module=="VT293-0041")
+if(selected_Module=="VT293-0038")
 {
     certificateProps = {
         url: srvSecureTestMethodsUrl,
@@ -315,7 +322,7 @@ if(selected_Module=="VT293-0041")
 	 };
    Rho.Network.post(certificateProps, post_callback);
 }
-if(selected_Module=="VT293-0042")
+if(selected_Module=="VT293-0039")
 {
     certificateProps = {
         url: srvSecureTestMethodsUrl,
@@ -325,7 +332,7 @@ if(selected_Module=="VT293-0042")
    Rho.Network.post(certificateProps, post_callback);
 }
 
-if(selected_Module=="VT293-0043")
+if(selected_Module=="VT293-0040")
 {
     postProps = {
         url: srvHttpTestMethodsUrl,
@@ -334,7 +341,7 @@ if(selected_Module=="VT293-0043")
 	 };
    Rho.Network.post(postProps, post_callback);
 }
-if(selected_Module=="VT293-0044")
+if(selected_Module=="VT293-0041")
 {
     postProps = {
         url: srvHttpTestMethodsUrl,
@@ -344,7 +351,7 @@ if(selected_Module=="VT293-0044")
    myvar = Rho.Network.post(postProps);
    myDiv.innerHTML="Body: "+myvar["body"]
 }
-if(selected_Module=="VT293-0045")
+if(selected_Module=="VT293-0042")
 {
     postProps = {
         url: srvHttpTestMethodsUrl,
@@ -358,14 +365,14 @@ if(selected_Module=="VT293-0045")
 		myDiv.innerHTML="<br>Get Result"+params["body"];
 });
 }
-if(selected_Module=="VT293-0046")
+if(selected_Module=="VT293-0043")
 {
     getProps = {
         url: srvHttpTestMethodsUrl,
       };
    Rho.Network.get(getProps, get_callback);
 }
-if(selected_Module=="VT293-0047")
+if(selected_Module=="VT293-0044")
 {
     getProps = {
         url: srvHttpTestMethodsUrl,
@@ -373,7 +380,7 @@ if(selected_Module=="VT293-0047")
    myvar = Rho.Network.get(getProps);
    myDiv.innerHTML="Body: "+myvar["body"]
 }
-if(selected_Module=="VT293-0048")
+if(selected_Module=="VT293-0045")
 {
     getProps = {
         url: srvHttpTestMethodsUrl,
@@ -385,7 +392,7 @@ if(selected_Module=="VT293-0048")
 		myDiv.innerHTML="<br>Get Result :"+params["body"];
 });
 }
-if(selected_Module=="VT293-0049")
+if(selected_Module=="VT293-0046")
 {
       downloadfileProps = {
         url: srvHttpDownloadImageUrl,
@@ -393,7 +400,7 @@ if(selected_Module=="VT293-0049")
       };
  Rho.Network.downloadFile(downloadfileProps, download_file_callback);
 }
-if(selected_Module=="VT293-0050")
+if(selected_Module=="VT293-0047")
 {
       downloadfileProps = {
         url: srvHttpDownloadImageUrl,
@@ -401,7 +408,7 @@ if(selected_Module=="VT293-0050")
       };
  Rho.Network.downloadFile(downloadfileProps, download_file_callback);
 }
-if(selected_Module=="VT293-0051")
+if(selected_Module=="VT293-0048")
 {
       downloadfileProps = {
         url: srvHttpDownloadImageUrl,
@@ -410,7 +417,7 @@ if(selected_Module=="VT293-0051")
       };
  Rho.Network.downloadFile(downloadfileProps, download_file_callback);
 }
-if(selected_Module=="VT293-0052")
+if(selected_Module=="VT293-0049")
 {
       downloadfileProps = {
         url: srvHttpDownloadImageUrl,
@@ -419,7 +426,7 @@ if(selected_Module=="VT293-0052")
       };
  Rho.Network.downloadFile(downloadfileProps, download_file_callback);
 }
-if(selected_Module=="VT293-0053")
+if(selected_Module=="VT293-0050")
 {
       downloadfileProps = {
         url: srvHttpDownloadImageUrl,
@@ -429,12 +436,56 @@ if(selected_Module=="VT293-0053")
       };
  Rho.Network.downloadFile(downloadfileProps, download_file_callback);
 }
-if(selected_Module=="VT293-0054")
+if(selected_Module=="VT293-0051")
 {
       downloadfileProps = {
         url: srvHttpDownloadImageUrl,
         filename: Rho.Application.publicFolder+"/images/network/network.jpg",
         overwriteFile: true,
+		createFolders: true
+      };
+ Rho.Network.downloadFile(downloadfileProps, download_file_callback);
+}
+if(selected_Module=="VT293-0052")
+{
+      downloadfileProps = {
+        url: srvHttpDownloadImageUrl,
+        filename: Rho.Application.publicFolder+"/images/network/network.jpg",
+        overwriteFile: true,
+		createFolders: true
+      };
+ Rho.Network.downloadFile(downloadfileProps, function(params){
+      if (params["status"] == "ok") {
+	    myDiv.innerHTML="Download Succeeded, path is /public/images/download.jpg";		
+		myDiv.innerHTML="<br>status :"+params["status"]+"<br>"+
+						"http_error :"+params["http_error"]+"<br>"+
+						"fileExists :"+params["fileExists"];
+        //alert("Download Succeeded, path is /public/images/download.jpg");
+      } else {
+	    myDiv.innerHTML="Download Failed";
+		myDiv.innerHTML="<br>status :"+params["status"]+"<br>"+
+						"http_error :"+params["http_error"]+"<br>"+
+						"fileExists :"+params["fileExists"];
+        //alert("Download Failed");
+      }
+});
+}
+if(selected_Module=="VT293-0053")
+{
+      downloadfileProps = {
+        url: srvHttpDownloadImageUrl,
+        filename: Rho.Application.publicFolder+"/images/network/network.jpg",
+        overwriteFile: invalid,
+		createFolders: true
+      };
+ Rho.Network.downloadFile(downloadfileProps, download_file_callback);
+}
+if(selected_Module=="VT293-0054")
+{
+      downloadfileProps = {
+        url: srvHttpDownloadImageUrl,
+        filename: Rho.Application.publicFolder+"/images/network/network.jpg",
+        overwriteFile: "",
 		createFolders: true
       };
  Rho.Network.downloadFile(downloadfileProps, download_file_callback);
@@ -445,55 +496,11 @@ if(selected_Module=="VT293-0055")
         url: srvHttpDownloadImageUrl,
         filename: Rho.Application.publicFolder+"/images/network/network.jpg",
         overwriteFile: true,
-		createFolders: true
-      };
- Rho.Network.downloadFile(downloadfileProps, function(params){
-      if (params["status"] == "ok") {
-	    myDiv.innerHTML="Download Succeeded, path is /public/images/nadaf.jpg";		
-		myDiv.innerHTML="<br>status :"+params["status"]+"<br>"+
-						"http_error :"+params["http_error"]+"<br>"+
-						"fileExists :"+params["fileExists"];
-        //alert("Download Succeeded, path is /public/images/nadaf.jpg");
-      } else {
-	    myDiv.innerHTML="Download Failed";
-		myDiv.innerHTML="<br>status :"+params["status"]+"<br>"+
-						"http_error :"+params["http_error"]+"<br>"+
-						"fileExists :"+params["fileExists"];
-        //alert("Download Failed");
-      }
-});
-}
-if(selected_Module=="VT293-0056")
-{
-      downloadfileProps = {
-        url: srvHttpDownloadImageUrl,
-        filename: Rho.Application.publicFolder+"/images/network/network.jpg",
-        overwriteFile: invalid,
-		createFolders: true
-      };
- Rho.Network.downloadFile(downloadfileProps, download_file_callback);
-}
-if(selected_Module=="VT293-0057")
-{
-      downloadfileProps = {
-        url: srvHttpDownloadImageUrl,
-        filename: Rho.Application.publicFolder+"/images/network/network.jpg",
-        overwriteFile: "",
-		createFolders: true
-      };
- Rho.Network.downloadFile(downloadfileProps, download_file_callback);
-}
-if(selected_Module=="VT293-0058")
-{
-      downloadfileProps = {
-        url: srvHttpDownloadImageUrl,
-        filename: Rho.Application.publicFolder+"/images/network/network.jpg",
-        overwriteFile: true,
 		createFolders: invalid
       };
  Rho.Network.downloadFile(downloadfileProps, download_file_callback);
 }
-if(selected_Module=="VT293-0059")
+if(selected_Module=="VT293-0056")
 {
       downloadfileProps = {
         url: srvHttpDownloadImageUrl,
@@ -503,7 +510,7 @@ if(selected_Module=="VT293-0059")
       };
  Rho.Network.downloadFile(downloadfileProps, download_file_callback);
 }
-if(selected_Module=="VT293-0060")
+if(selected_Module=="VT293-0057")
 {
       downloadfileProps = {
         url: srvHttpDownloadImageUrlAuth,
@@ -516,7 +523,7 @@ if(selected_Module=="VT293-0060")
       };
  Rho.Network.downloadFile(downloadfileProps, download_file_callback);
 }
-if(selected_Module=="VT293-0061")
+if(selected_Module=="VT293-0058")
 {
       downloadfileProps = {
         url: srvHttpDownloadImageUrlAuth,
@@ -529,7 +536,7 @@ if(selected_Module=="VT293-0061")
       };
  Rho.Network.downloadFile(downloadfileProps, download_file_callback);
 }
-if(selected_Module=="VT293-0062")
+if(selected_Module=="VT293-0059")
 {
       downloadfileProps = {
         url: "",
@@ -542,7 +549,7 @@ if(selected_Module=="VT293-0062")
       };
  Rho.Network.downloadFile(downloadfileProps, download_file_callback);
 }
-if(selected_Module=="VT293-0063")
+if(selected_Module=="VT293-0060")
 {
       downloadfileProps = {
         url: srvHttpDownloadImageUrlAuth,
@@ -555,7 +562,7 @@ if(selected_Module=="VT293-0063")
       };
  Rho.Network.downloadFile(downloadfileProps, download_file_callback);
 }
-if(selected_Module=="VT293-0064")
+if(selected_Module=="VT293-0061")
 {
       downloadfileProps = {
         url: srvHttpDownloadImageUrlAuth,
@@ -568,7 +575,7 @@ if(selected_Module=="VT293-0064")
       };
  Rho.Network.downloadFile(downloadfileProps, download_file_callback);
 }
-if(selected_Module=="VT293-0065")
+if(selected_Module=="VT293-0062")
 {
       downloadfileProps = {
         url: srvHttpDownloadImageUrlAuth,
@@ -581,7 +588,7 @@ if(selected_Module=="VT293-0065")
       };
  Rho.Network.downloadFile(downloadfileProps, download_file_callback);
 }
-if(selected_Module=="VT293-0066")
+if(selected_Module=="VT293-0063")
 {
       downloadfileProps = {
         url: srvHttpDownloadImageUrlAuth,
@@ -594,7 +601,7 @@ if(selected_Module=="VT293-0066")
       };
  Rho.Network.downloadFile(downloadfileProps, download_file_callback);
 }
-if(selected_Module=="VT293-0067")
+if(selected_Module=="VT293-0064")
 {
       downloadfileProps = {
         url: srvHttpDownloadImageUrlAuth,
@@ -607,7 +614,7 @@ if(selected_Module=="VT293-0067")
       };
  Rho.Network.downloadFile(downloadfileProps, download_file_callback);
 }
-if(selected_Module=="VT293-0068")
+if(selected_Module=="VT293-0065")
 {
       downloadfileProps = {
         url: srvHttpDownloadImageUrlAuth,
@@ -620,7 +627,7 @@ if(selected_Module=="VT293-0068")
       };
  Rho.Network.downloadFile(downloadfileProps, download_file_callback);
 }
-if(selected_Module=="VT293-0069")
+if(selected_Module=="VT293-0066")
 {
       downloadfileProps = {
         url: srvHttpDownloadImageUrlAuth,
@@ -633,7 +640,7 @@ if(selected_Module=="VT293-0069")
       };
  Rho.Network.downloadFile(downloadfileProps, download_file_callback);
 }
-if(selected_Module=="VT293-0070")
+if(selected_Module=="VT293-0067")
 {
       downloadfileProps = {
         url: srvHttpDownloadImageUrlAuth,
@@ -646,7 +653,7 @@ if(selected_Module=="VT293-0070")
       };
  Rho.Network.downloadFile(downloadfileProps, download_file_callback);
 }      
-if(selected_Module=="VT293-0071")
+if(selected_Module=="VT293-0068")
 {
     uploadfileProps = {
           url: srvHttpUploadTextFileUrl,
@@ -657,7 +664,7 @@ if(selected_Module=="VT293-0071")
 
         Rho.Network.uploadFile(uploadfileProps, upload_file_callback); 
 }
-if(selected_Module=="VT293-0072")
+if(selected_Module=="VT293-0069")
 {
     uploadfileProps = {
           url: srvHttpUploadTextFileUrl,
@@ -671,7 +678,7 @@ myDiv.innerHTML="Result :-<br>status : "+myvar["status"]+"<br>"+
 						"http_error :"+myvar["http_error"]+"<br>"+
 					    "fileExists :"+myvar["fileExists"];
 }
-if(selected_Module=="VT293-0073")
+if(selected_Module=="VT293-0070")
 {
     uploadfileProps = {
           url: srvHttpUploadTextFileUrl,
@@ -686,7 +693,7 @@ if(selected_Module=="VT293-0073")
 	myDiv.innerHTML="<br>status :"+params["status"]+"<br>"+
 					"http_error :"+params["http_error"]+"<br>"+
 					"fileExists :"+params["fileExists"];
-	//alert("Upload Succeeded, path is /public/images/nadaf.jpg");
+	//alert("Upload Succeeded, path is /public/images/upload.jpg");
   } else {
 	myDiv.innerHTML="Upload Failed";
 	myDiv.innerHTML="<br>status :"+params["status"]+"<br>"+
@@ -696,7 +703,7 @@ if(selected_Module=="VT293-0073")
   }
 }); 
 }
-if(selected_Module=="VT293-0074")
+if(selected_Module=="VT293-0071")
 {
     uploadfileProps = {
           url: srvHttpUploadTextFileUrlAuth,
@@ -709,7 +716,7 @@ if(selected_Module=="VT293-0074")
         };
         Rho.Network.uploadFile(uploadfileProps, upload_file_callback); 
 }
-if(selected_Module=="VT293-0075")
+if(selected_Module=="VT293-0072")
 {
        uploadfileProps = {
           url: srvHttpUploadTextFileUrlAuth,
@@ -723,7 +730,7 @@ if(selected_Module=="VT293-0075")
         Rho.Network.uploadFile(uploadfileProps, upload_file_callback); 
 }
 
-if(selected_Module=="VT293-0076")
+if(selected_Module=="VT293-0073")
 {
 		uploadfileProps = {
           url: "",
@@ -736,7 +743,7 @@ if(selected_Module=="VT293-0076")
         };
         Rho.Network.uploadFile(uploadfileProps, upload_file_callback); 
 }
-if(selected_Module=="VT293-0077")
+if(selected_Module=="VT293-0074")
 {
     uploadfileProps = {
           url: srvHttpUploadTextFileUrlAuth,
@@ -750,7 +757,7 @@ if(selected_Module=="VT293-0077")
 
         Rho.Network.uploadFile(uploadfileProps, upload_file_callback); 
 }
-if(selected_Module=="VT293-0078")
+if(selected_Module=="VT293-0075")
 {
     uploadfileProps = {
           url: srvHttpUploadTextFileUrlAuth,
@@ -763,7 +770,7 @@ if(selected_Module=="VT293-0078")
         };
         Rho.Network.uploadFile(uploadfileProps, upload_file_callback); 
 }
-if(selected_Module=="VT293-0079")
+if(selected_Module=="VT293-0076")
 {
     uploadfileProps = {
           url: srvHttpUploadTextFileUrlAuth,
@@ -776,7 +783,7 @@ if(selected_Module=="VT293-0079")
         };
         Rho.Network.uploadFile(uploadfileProps, upload_file_callback); 
 }
-if(selected_Module=="VT293-0080")
+if(selected_Module=="VT293-0077")
 {
     uploadfileProps = {
           url: srvHttpUploadTextFileUrlAuth,
@@ -789,7 +796,7 @@ if(selected_Module=="VT293-0080")
         };
         Rho.Network.uploadFile(uploadfileProps, upload_file_callback); 
 }
-if(selected_Module=="VT293-0081")
+if(selected_Module=="VT293-0078")
 {
     uploadfileProps = {
           url: srvHttpUploadTextFileUrlAuth,
@@ -802,7 +809,7 @@ if(selected_Module=="VT293-0081")
         };
         Rho.Network.uploadFile(uploadfileProps, upload_file_callback); 
 }
-if(selected_Module=="VT293-0082")
+if(selected_Module=="VT293-0079")
 {
     uploadfileProps = {
           url: srvHttpUploadTextFileUrlAuth,
@@ -815,7 +822,7 @@ if(selected_Module=="VT293-0082")
         };
         Rho.Network.uploadFile(uploadfileProps, upload_file_callback); 
 }
-if(selected_Module=="VT293-0083")
+if(selected_Module=="VT293-0080")
 {
     uploadfileProps = {
           url: srvHttpUploadTextFileUrlAuth,
@@ -828,7 +835,7 @@ if(selected_Module=="VT293-0083")
         };
         Rho.Network.uploadFile(uploadfileProps, upload_file_callback); 
 }
-if(selected_Module=="VT293-0084")
+if(selected_Module=="VT293-0081")
 {
     uploadfileProps = {
           url: srvHttpUploadTextFileUrlAuth,
@@ -841,7 +848,7 @@ if(selected_Module=="VT293-0084")
         };
         Rho.Network.uploadFile(uploadfileProps, upload_file_callback); 
 }
-if(selected_Module=="VT293-0085")
+if(selected_Module=="VT293-0082")
 {
       downloadfileProps = {
         url: srvHttpDownloadImageUrl,
@@ -854,7 +861,7 @@ myvar =  Rho.Network.downloadFile(downloadfileProps);
 myDiv.innerHTML="Result :-<br>status : "+myvar["status"]+"<br>"+
 						"http_error :"+myvar["http_error"]+"<br>"+
 					    "fileExists :"+myvar["fileExists"];
-}
+}*/
 
 } 
 
@@ -867,12 +874,13 @@ function disconnect_wan_status_notify() {
 // Stop wan status notifications
 Rho.Network.disconnectWan();
 }
-
+/*
 function cancel_notify_callback() {
 // cancel method
 Rho.Network.cancel(get_callback);
 myDiv.innerHTML="Request canceled";
 }
+*/
  function stop_detecting_connection() {
    Rho.Network.stopDetectingConnection(detect_connection_notify_callback);
    myDiv.innerHTML="Network Detection stopped";
@@ -899,11 +907,11 @@ myDiv.innerHTML="phoneSignalStrength :"+params["phoneSignalStrength"]+"<br>"+
 }
 function download_file_callback(params){
       if (params["status"] == "ok") {
-	    myDiv.innerHTML="Download Succeeded, path is /public/images/nadaf.jpg";		
+	    myDiv.innerHTML="Download Succeeded, path is /public/images/download.jpg";		
 	myDiv.innerHTML="<br>status: "+params["status"]+"<br>"+
 						"http_error: "+params["http_error"]+"<br>"+
 						"fileExists: "+params["fileExists"];
-        //alert("Download Succeeded, path is /public/images/nadaf.jpg");
+        //alert("Download Succeeded, path is /public/images/download.jpg");
       } else {
 	    myDiv.innerHTML="Download Failed";
 		myDiv.innerHTML="<br>status: "+params["status"]+"<br>"+
@@ -914,11 +922,11 @@ function download_file_callback(params){
     }
 function upload_file_callback(params){
   if (params["status"] == "ok") {
-	myDiv.innerHTML="Upload Succeeded, path is /public/images/nadaf.jpg";		
+	myDiv.innerHTML="Upload Succeeded, path is /public/images/upload.jpg";		
 	myDiv.innerHTML="<br>status :"+params["status"]+"<br>"+
 					"http_error :"+params["http_error"]+"<br>"+
 					"fileExists :"+params["fileExists"];
-	//alert("Upload Succeeded, path is /public/images/nadaf.jpg");
+	//alert("Upload Succeeded, path is /public/images/upload.jpg");
   } else {
 	myDiv.innerHTML="Upload Failed";
 	myDiv.innerHTML="<br>status :"+params["status"]+"<br>"+
@@ -946,10 +954,12 @@ else
 </head>
 <body>
 <br /><br />
-<div id="myDiv">Network API Test</div>
+<div id="myNet">Exptected Result :</div>
+<br><br><br>
+<div id="myDiv">Actual Result :</div>
 <form name="controlForm" id="controlForm" action="" >
 <!--<input id="Back" type="button" value="Back" onclick="location.href='ControlAppearance.html'">-->
-<br /><br /><br /><br /><br />Select Test To Run &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<br /><br /><br /><br /><br />Select Test To Run &nbsp;&nbsp;
 <select name="myChoice" id="myChoice">
 <OPTION value="Select option" >VT-ID</OPTION>
 <OPTION value="VT293-0001">VT293-0001</OPTION> 
@@ -957,26 +967,26 @@ else
 <OPTION value="VT293-0003">VT293-0003</OPTION> 
 <OPTION value="VT293-0004">VT293-0004</OPTION> 
 <OPTION value="VT293-0005">VT293-0005</OPTION> 
-<OPTION value="VT293-0006">VT293-0006</OPTION> 
+<!--<OPTION value="VT293-0006">VT293-0006</OPTION> -->
 <OPTION value="VT293-0007">VT293-0007</OPTION>
 <OPTION value="VT293-0008">VT293-0008</OPTION> 
 <OPTION value="VT293-0009">VT293-0009</OPTION> 
 <OPTION value="VT293-0010">VT293-0010</OPTION> 
 <OPTION value="VT293-0011">VT293-0011</OPTION> 
-<OPTION value="VT293-0012">VT293-0012</OPTION> 
+<!--<OPTION value="VT293-0012">VT293-0012</OPTION> 
 <OPTION value="VT293-0013">VT293-0013</OPTION> 
 <OPTION value="VT293-0014">VT293-0014</OPTION> 
 <OPTION value="VT293-0015">VT293-0015</OPTION> 
-<OPTION value="VT293-0016">VT293-0016</OPTION> 
-<OPTION value="VT293-0017">VT293-0017</OPTION> 
-<OPTION value="VT293-0018">VT293-0018</OPTION> 
+<OPTION value="VT293-0016">VT293-0016</OPTION>-->  
+<OPTION value="VT293-0017">VT293-0017</OPTION>
+<!--<OPTION value="VT293-0018">VT293-0018</OPTION> 
 <OPTION value="VT293-0019">VT293-0019</OPTION> 
 <OPTION value="VT293-0020">VT293-0020</OPTION> 
 <OPTION value="VT293-0021">VT293-0021</OPTION>
-<OPTION value="VT293-0022">VT293-0022</OPTION> 
+<OPTION value="VT293-0022">VT293-0022</OPTION>--> 
 <OPTION value="VT293-0023">VT293-0023</OPTION> 
 <OPTION value="VT293-0024">VT293-0024</OPTION> 
-<OPTION value="VT293-0025">VT293-0025</OPTION> 
+<OPTION value="VT293-0025">VT293-0025</OPTION>
 <OPTION value="VT293-0026">VT293-0026</OPTION> 
 <OPTION value="VT293-0027">VT293-0027</OPTION> 
 <OPTION value="VT293-0028">VT293-0028</OPTION> 
@@ -988,7 +998,7 @@ else
 <OPTION value="VT293-0034">VT293-0034</OPTION> 
 <OPTION value="VT293-0035">VT293-0035</OPTION>
 <OPTION value="VT293-0036">VT293-0036</OPTION> 
-<OPTION value="VT293-0037">VT293-0037</OPTION> 
+<!--<OPTION value="VT293-0037">VT293-0037</OPTION> 
 <OPTION value="VT293-0038">VT293-0038</OPTION> 
 <OPTION value="VT293-0039">VT293-0039</OPTION> 
 <OPTION value="VT293-0040">VT293-0040</OPTION> 
@@ -1033,17 +1043,13 @@ else
 <OPTION value="VT293-0079">VT293-0079</OPTION> 
 <OPTION value="VT293-0080">VT293-0080</OPTION> 
 <OPTION value="VT293-0081">VT293-0081</OPTION> 
-<OPTION value="VT293-0082">VT293-0082</OPTION> 
-<OPTION value="VT293-0083">VT293-0083</OPTION> 
-<OPTION value="VT293-0084">VT293-0084</OPTION> 
-<OPTION value="VT293-0085">VT293-0085</OPTION> 
+<OPTION value="VT293-0082">VT293-0082</OPTION>-->
 </select>
 <P><input type="button" onclick="getmodulename();" value="Run This Test"/></P>
-<br />
-<P><input type="button" onclick="stop_status_notify();" value="stop_status_notify"/>
-<input type="button" onclick="disconnect_wan_status_notify();" value="disconnect_wan"/></P>
-<P><input type="button" onclick="cancel_notify_callback();" value="cancel"/>
-<input type="button" onclick="stop_detecting_connection();" value="stop_detecting_connection"/></P>
+<P><input type="button" onclick="stop_status_notify();" value="Stop_Status_Notify"/>
+<input type="button" onclick="disconnect_wan_status_notify();" value="Disconnect_Wan"/></P>
+<!--<P><input type="button" onclick="cancel_notify_callback();" value="cancel"/>-->
+<P><input type="button" onclick="stop_detecting_connection();" value="Stop_Detecting"/></P>
 </form>
 </body>
 </html>
