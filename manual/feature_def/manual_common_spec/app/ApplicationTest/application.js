@@ -39,6 +39,11 @@ function badNotExist ()
 Rho.Application.badLinkURI ='idontExist';
 }
 
+function startOriginal()
+{
+    Rho.Application.startURI= '/app/index.html';
+}
+
 function startLocal()
 {
    Rho.Application.startURI= '/app/loading.html';
