@@ -23,6 +23,22 @@ function minQuit(){
     Rho.Application.quit();
 }
 
+function badWeb()
+{
+Rho.Application.badLinkURI ='http://google.com';
+}
+
+function badnull()
+{
+Rho.Application.badLinkURI ='';
+}
+
+
+function badNotExist ()
+{
+Rho.Application.badLinkURI ='idontExist';
+}
+
 function startLocal()
 {
    Rho.Application.startURI= '/app/loading.html';
@@ -177,7 +193,7 @@ Rho.Application.getRhoPlatformVersion(myCallback);
 }
 
 function myCallback(params){
-alert('params');
+data=params;
 $("#Rho_Application_version_Async span.result").text($.toJSON(data));
 }
 
@@ -227,4 +243,14 @@ var data = Rho.Application.securityTokenNotPassed;
 $("#Rho_Application_security span.result").text($.toJSON(data));	
 }	
 	
+function applicationNotify(){
+ //Rho.AppEvents.simulateEvent(Rho.AppEvents.APP_EVENT_DEACTIVATED);
+Rho.Application.setApplicationNotify(notifyCallback);
+}
+
+function notifyCallback(params){
+data=params;
+Rho.Log.info(data,'app');
+$("#Rho_Application_Notify span.result").text($.toJSON(data));
+}	
 	
