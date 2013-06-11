@@ -88,7 +88,7 @@ describe('Network JS API', function() {
         };
 
         var data = Rho.Network.detectConnection(detectconnectionProps);
-        expect($.toJSON(data)).toEqual("null");
+        expect(JSON.stringify(data)).toEqual("null");
 
     });
 

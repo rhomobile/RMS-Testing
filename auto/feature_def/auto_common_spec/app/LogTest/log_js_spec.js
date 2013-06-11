@@ -356,7 +356,7 @@ describe("Log JS API", function () {
 					info : "_pass_"
 				}
 
-				Rho.Log.info( $.toJSON(object), "test")
+				Rho.Log.info( JSON.stringify(object), "test")
 
 				expect( checkLogString(Rho.LogCapture.read(),0,2) ).toEqual( true );
 			});
@@ -376,7 +376,7 @@ describe("Log JS API", function () {
 					info : "_pass_"
 				}
 
-				Rho.Log.info( $.toJSON(object), "test")
+				Rho.Log.info( JSON.stringify(object), "test")
 
 				expect( checkLogString(Rho.LogCapture.read(),0,4) ).toEqual( true );
 			});
@@ -396,7 +396,7 @@ describe("Log JS API", function () {
 					info : "_pass_"
 				}
 
-				Rho.Log.info( $.toJSON(object), "test")
+				Rho.Log.info( JSON.stringify(object), "test")
 
 				expect( checkLogString(Rho.LogCapture.read(),0,4) ).toEqual( true );
 			});
