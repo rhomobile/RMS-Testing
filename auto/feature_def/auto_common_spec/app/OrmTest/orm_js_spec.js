@@ -60,7 +60,7 @@ describe("<ORM module specs>", function() {
     });
 
     it('should add fixed schema model with table', function() {
-        expect(Rho.ORM.getModel('Model')).toBeUndefined();
+        expect(Rho.ORM.getModel('Product')).toBeUndefined();
 
         var Product = function(model){
             model.modelName("Product");
@@ -77,27 +77,171 @@ describe("<ORM module specs>", function() {
         expect(Rho.ORM.getModel('Product')).toBe(Model);
 
         res = db.execute("SELECT * FROM Product");
-        console.log("res is: " + JSON.stringify(res));
+        //console.log("res is: " + JSON.stringify(res));
         expect(res).toEqual([]);
+        Rho.ORM.clear();
         db.execute("DROP TABLE Product");
     });
 
     it("should add index",function(){
+        expect(Rho.ORM.getModel('Product')).toBeUndefined();
 
+        var Product = function(model){
+            model.modelName("Product");
+            model.property("name","string");
+            model.property("price","float");
+            model.enable("fixedSchema");
+            model.addIndex("p1",["name"]);
+            model.set("partition","local");
+        };
+
+        var Model = Rho.ORM.addModel(Product);
+        Model.create({"name":"test"});
+        sources = Rho.ORMHelper.getAllSources();
+        expect(Model).toBeDefined();
+        expect(Rho.ORM.getModel('Product')).toBe(Model);
+
+        res = db.execute("SELECT * FROM Product INDEXED BY p1 Where name = 'test' ");
+        //console.log("res is: " + JSON.stringify(res));
+        expect(res[0].name).toEqual('test');
+        Rho.ORM.clear();
+        db.execute("DROP TABLE Product");
     });
 
-//     it('makes empty object', function() {
-//         var empty = Rho.ORM.addModel('Model').make();
-//         expect(cleanVars(empty)).toEqual({});
-//         var vars = empty.vars();
-//         var keySet = {};
-//         for (var key in vars) {
-//             if (vars.hasOwnProperty(key)) {
-//                 keySet[key] = 0;
-//             }
-//         }
-//         expect(keySet).toEqual({'object': 0, 'source_id': 0});
-//     });
+    it("should add unique index",function(){
+        expect(Rho.ORM.getModel('Product')).toBeUndefined();
+
+        var Product = function(model){
+            model.modelName("Product");
+            model.property("name","string");
+            model.property("price","float");
+            model.enable("fixedSchema");
+            model.addUniqueIndex("u1",["name"]);
+            model.set("partition","local");
+        };
+
+        var Model = Rho.ORM.addModel(Product);
+        Model.create({"name":"test"});
+        sources = Rho.ORMHelper.getAllSources();
+        expect(Model).toBeDefined();
+        expect(Rho.ORM.getModel('Product')).toBe(Model);
+
+        res = db.execute("SELECT * FROM Product INDEXED BY u1 Where name = 'test' ");
+        console.log("res is: " + JSON.stringify(res));
+        expect(res[0].name).toEqual('test');
+        Rho.ORM.clear();
+        db.execute("DROP TABLE Product");
+    });
+
+    it("should add belongs_to relationship",function(){
+        expect(Rho.ORM.getModel('Product')).toBeUndefined();
+
+        var Product = function(model){
+            model.modelName("Product");
+            model.property("name","string");
+            model.property("price","float");
+            model.enable("fixedSchema");
+            model.addUniqueIndex("u1",["name"]);
+            model.set("partition","local");
+        };
+        var Item = function(model){
+            model.modelName("Item");
+            model.property("name","string");
+            model.property("code");
+            model.enable("fixedSchema");
+            model.enable('sync');
+            model.set("partition","local");
+            model.belongs_to("Product");
+        };
+        var Model = Rho.ORM.addModel(Product);
+        var Model2 = Rho.ORM.addModel(Item);
+
+        sources = Rho.ORMHelper.getAllSources();
+        expect(sources.Product.str_associations).toEqual("Item");
+        expect(sources.Item.belongs_to[0]).toEqual("Product");
+        Rho.ORM.clear();
+        db.execute("DROP TABLE Product");
+    });
+
+    it("should add belongs_to relationship in any load order",function(){
+        expect(Rho.ORM.getModel('Product')).toBeUndefined();
+        var sources = Rho.ORMHelper.getAllSources();
+        expect(sources.Product).toBeUndefined();
+        expect(sources.Item).toBeUndefined();
+
+        var Product = function(model){
+            model.modelName("Product");
+            model.property("name","string");
+            model.property("price","float");
+            model.enable("fixedSchema");
+            model.addUniqueIndex("u1",["name"]);
+            model.set("partition","local");
+        };
+        var Item = function(model){
+            model.modelName("Item");
+            model.property("name","string");
+            model.property("code");
+            model.enable("fixedSchema");
+            model.enable('sync');
+            model.set("partition","local");
+            model.belongs_to("Product");
+        };
+        var Model2 = Rho.ORM.addModel(Item);
+        var Model = Rho.ORM.addModel(Product);
+
+
+        sources = Rho.ORMHelper.getAllSources();
+        expect(sources.Product.str_associations).toEqual("Item");
+        expect(sources.Item.belongs_to[0]).toEqual("Product");
+        Rho.ORM.clear();
+        db.execute("DROP TABLE Product");
+    });
+
+    it("should add belongs_to relationship in any load order",function(){
+        expect(Rho.ORM.getModel('Product')).toBeUndefined();
+        var sources = Rho.ORMHelper.getAllSources();
+        expect(sources.Product).toBeUndefined();
+        expect(sources.Item).toBeUndefined();
+        expect(sources.Item2).toBeUndefined();
+
+        var Product = function(model){
+            model.modelName("Product");
+            model.property("name","string");
+            model.property("price","float");
+            model.enable("fixedSchema");
+            model.addUniqueIndex("u1",["name"]);
+            model.set("partition","local");
+        };
+        var Item = function(model){
+            model.modelName("Item");
+            model.property("name","string");
+            model.property("code");
+            model.enable("fixedSchema");
+            model.enable('sync');
+            model.set("partition","local");
+            model.belongs_to("Product");
+        };
+        var Item2 = function(model){
+            model.modelName("Item2");
+            model.property("name","string");
+            model.property("code");
+            model.enable("fixedSchema");
+            model.enable('sync');
+            model.set("partition","local");
+            model.belongs_to("Product");
+        };
+        var Model2 = Rho.ORM.addModel(Item);
+        var Model3 = Rho.ORM.addModel(Item2);
+        var Model = Rho.ORM.addModel(Product);
+
+
+        sources = Rho.ORMHelper.getAllSources();
+        expect(sources.Product.str_associations).toEqual("Item,Item2");
+        expect(sources.Item.belongs_to[0]).toEqual("Product");
+        expect(sources.Item2.belongs_to[0]).toEqual("Product");
+        Rho.ORM.clear();
+        db.execute("DROP TABLE Product");
+    });
 
 //     it('makes object', function() {
 //         expect(cleanVars(Rho.ORM.addModel('Model').make({'key': 'value'}))).toEqual({'key': 'value'});
