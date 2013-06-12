@@ -3286,7 +3286,7 @@ var enumCallback = function (enumobj){
 	}
 	else 
 	{
-		retrun false;
+		return false;
 	}
 		
 };
