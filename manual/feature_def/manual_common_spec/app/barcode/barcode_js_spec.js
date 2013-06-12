@@ -3,6 +3,15 @@ describe("Barcode Test", function() {
 	var enableFlag = false;
 	var decodeFlag = false;
 	//var enumData = '';
+	var decodedata ='';
+	var callbackfired = false;
+
+	var callbackBarcode = function (data){
+			decodedata = data;
+			displayResult("Data:- ",JSON.stringify(decodedata));
+			callbackfired = true;			
+		}
+
 	enumData = Rho.Barcode.enumerate();
 
    for (var j = 0;j<enumData.length;j++){
@@ -12,6 +21,8 @@ describe("Barcode Test", function() {
 	beforeEach(function() {
 		enableFlag = false;
 		decodeFlag = false;
+		decodedata ='';
+		callbackfired = false;
 		/* ... Set up your object ... */
 	});
 
@@ -21,15 +32,9 @@ describe("Barcode Test", function() {
 	});
 
 	it("VT282-1762 | Enable with callback as function |", function() {
-		
-		var callbackBarcode = function (data){
-			alert();
-			dispCurrentProcess($.toJSON(data));
-		}
 
 		runs(function()
 		{
-			enumData = Rho.Barcode.enumerate();
 			objSCN.enable({},callbackBarcode);
 			setTimeout(function() {
 				enableFlag = true;
@@ -44,16 +49,15 @@ describe("Barcode Test", function() {
 
 		runs(function()
 		{
-			setTimeout(function() {
-				decodeFlag = true;
-			}, 15000);
+
 		});
 
 		waitsFor(function()
 		{
 			dispCurrentProcess("Scan any Barcode <br/> Check The Behavior");
-			return decodeFlag;
+			return callbackfired;
 		}, '15sec Wait to Scan the Barcode', 16000);
+
 
 		runs(function()
 		{
@@ -67,7 +71,6 @@ describe("Barcode Test", function() {
 		
 		runs(function()
 		{
-			var enumData = Rho.Barcode.enumerate();
 			objSCN.enable();
 			setTimeout(function() {
 				enableFlag = true;
@@ -103,14 +106,9 @@ describe("Barcode Test", function() {
 
 	it("VT282-1764 | Enable with alldecoders enabled and callback as function URL |", function() {
 		
-		var callbackBarcode = function (data){
-			alert();
-			dispCurrentProcess($.toJSON(data));
-		}
 
 		runs(function()
 		{
-			var enumData = Rho.Barcode.enumerate();
 			objSCN.enable({'allDecoders':'true'},callbackBarcode);
 			setTimeout(function() {
 				enableFlag = true;
@@ -146,14 +144,9 @@ describe("Barcode Test", function() {
 
 	it("VT282-1765 | Enable with picklist software reticle, scantimeout 7000 and callback as function |", function() {
 		
-		var callbackBarcode = function (data){
-			alert();
-			dispCurrentProcess($.toJSON(data));
-		}
 
 		runs(function()
 		{
-			var enumData = Rho.Barcode.enumerate();
 			objSCN.enable({'scanTimeout':7000,'picklistMode':'softwareReticle'},callbackBarcode);
 			setTimeout(function() {
 				enableFlag = true;
@@ -193,7 +186,6 @@ describe("Barcode Test", function() {
 		
 		runs(function()
 		{
-			var enumData = Rho.Barcode.enumerate();
 			objSCN.enable({'allDecoders':'false','code128':'true'});
 			setTimeout(function() {
 				enableFlag = true;
@@ -233,8 +225,7 @@ describe("Barcode Test", function() {
 		
 		runs(function()
 		{
-			var enumData = Rho.Barcode.enumerate();
-			objSCN.enable({},function(data){dispCurrentProcess($.toJSON(data));});
+			objSCN.enable({},function(data){callbackBarcode;});
 			setTimeout(function() {
 				enableFlag = true;
 			}, 8000);
@@ -272,8 +263,7 @@ describe("Barcode Test", function() {
 		
 		runs(function()
 		{
-			var enumData = Rho.Barcode.enumerate();
-			objSCN.enable({'scanTimeout':7000,'picklistMode':'softwareReticle'},function(data){dispCurrentProcess($.toJSON(data));});
+			objSCN.enable({'scanTimeout':7000,'picklistMode':'softwareReticle'},function(data){displayResult("Data:- ",JSON.stringify(decodedata));});
 			setTimeout(function() {
 				enableFlag = true;
 			}, 8000);
@@ -308,13 +298,11 @@ describe("Barcode Test", function() {
 	it("VT282-1771 | set picklist software reticle, scantimeout 7000 after calling enable |", function() {
 
 		var callbackBarcode = function (data){
-		alert();
 		dispCurrentProcess($.toJSON(data));
 		}
 		
 		runs(function()
 		{
-			var enumData = Rho.Barcode.enumerate();
 			objSCN.enable({},callbackBarcode);
 			setTimeout(function() {
 				enableFlag = true;
@@ -351,15 +339,9 @@ describe("Barcode Test", function() {
 	});
 
 	it("VT282-1773 | set alldecoders false, code128 as true after enable |", function() {
-
-		var callbackBarcode = function (data){
-		alert();
-		dispCurrentProcess($.toJSON(data));
-		}
 		
 		runs(function()
 		{
-			var enumData = Rho.Barcode.enumerate();
 			objSCN.enable({},callbackBarcode);
 			setTimeout(function() {
 				enableFlag = true;
@@ -398,14 +380,9 @@ describe("Barcode Test", function() {
 
 	it("VT282-1778 | call setDefault with SCN1 and take |", function() {
 
-		var callbacktake = function (data){
-		alert();
-		dispCurrentProcess($.toJSON(data));
-		}
-		
+
 		runs(function()
 		{
-			var enumData = Rho.Barcode.enumerate();
 			Rho.Barcode.setDefault(objSCN);
 			Rho.Barcode.take({},callbacktake);
 			setTimeout(function() {
@@ -441,15 +418,9 @@ describe("Barcode Test", function() {
 	});
 
 	it("VT282-1781 | call setDefault with SCN1 and enable |", function() {
-
-		var callbackBarcode = function (data){
-		alert();
-		dispCurrentProcess($.toJSON(data));
-		}
 		
 		runs(function()
 		{
-			var enumData = Rho.Barcode.enumerate();
 			Rho.Barcode.setDefault(objSCN);
 			Rho.Barcode.enable({},callbackBarcode);
 			setTimeout(function() {
@@ -488,15 +459,9 @@ describe("Barcode Test", function() {
 
 
 	it("VT282-1784 | Start and stop scanner for laser/Imager scanner |", function() {
-
-		var callbackBarcode = function (data){
-		alert();
-		dispCurrentProcess($.toJSON(data));
-		}
 		
 		runs(function()
 		{
-			var enumData = Rho.Barcode.enumerate();
 			objSCN.enable({},callbackBarcode);
 			setTimeout(function() {
 				enableFlag = true;
@@ -534,15 +499,9 @@ describe("Barcode Test", function() {
 	});
 
 	it("VT282-1790 | take with callback as function |", function() {
-
-		var callbacktake = function (data){
-		alert();
-		dispCurrentProcess($.toJSON(data));
-		}
 		
 		runs(function()
 		{
-			var enumData = Rho.Barcode.enumerate();
 			objSCN.take({},callbacktake);
 			setTimeout(function() {
 				enableFlag = true;
@@ -577,14 +536,9 @@ describe("Barcode Test", function() {
 
 	it("VT282-1792 | take with alldecoders enabled and callback |", function() {
 
-		var callbacktake = function (data){
-		alert();
-		dispCurrentProcess($.toJSON(data));
-		}
-		
+	
 		runs(function()
 		{
-			var enumData = Rho.Barcode.enumerate();
 			objSCN.take({'allDecoders':'true'},callbacktake);
 			setTimeout(function() {
 				enableFlag = true;
@@ -620,14 +574,9 @@ describe("Barcode Test", function() {
 
 	it("VT282-1793 | take with picklist software reticle, scantimeout 7000 and callback |", function() {
 
-		var callbacktake = function (data){
-		alert();
-		dispCurrentProcess($.toJSON(data));
-		}
 		
 		runs(function()
 		{
-			var enumData = Rho.Barcode.enumerate();
 			objSCN.take({'scanTimeout':7000,'picklistMode':'softwareReticle'},callbacktake);
 			setTimeout(function() {
 				enableFlag = true;
@@ -663,14 +612,9 @@ describe("Barcode Test", function() {
 
 	it("VT282-1794 | Take with alldecoders disabled, code128 as enabled with callback as function URL |", function() {
 
-		var callbacktake = function (data){
-		alert();
-		dispCurrentProcess($.toJSON(data));
-		}
 		
 		runs(function()
 		{
-			var enumData = Rho.Barcode.enumerate();
 			objSCN.take({'allDecoders':'false','code128':'true'},callbacktake);
 			setTimeout(function() {
 				enableFlag = true;
@@ -708,7 +652,6 @@ describe("Barcode Test", function() {
 		
 		runs(function()
 		{
-			var enumData = Rho.Barcode.enumerate();
 			objSCN.take({},function(data){dispCurrentProcess($.toJSON(data));});
 			setTimeout(function() {
 				enableFlag = true;
@@ -744,13 +687,9 @@ describe("Barcode Test", function() {
 
 	it("VT282-1800 | All Decoders true with setproperty and nocallback |", function() {
 		
-		var callbackBarcode = function (data){
-		dispCurrentProcess($.toJSON(data));
-		}
 
 		runs(function()
 		{
-			var enumData = Rho.Barcode.enumerate();
 			objSCN.enable({},callbackBarcode);
 			setTimeout(function() {
 				enableFlag = true;
@@ -785,14 +724,9 @@ describe("Barcode Test", function() {
 	});
 
 	it("VT282-1801 | All Decoders false with setproperty and nocallback |", function() {
-		
-		var callbackBarcode = function (data){
-		dispCurrentProcess($.toJSON(data));
-		}
 
 		runs(function()
 		{
-			var enumData = Rho.Barcode.enumerate();
 			objSCN.enable({},callbackBarcode);
 			setTimeout(function() {
 				enableFlag = true;
@@ -832,7 +766,6 @@ describe("Barcode Test", function() {
 
 		runs(function()
 		{
-			var enumData = Rho.Barcode.enumerate();
 			objSCN.enable();
 			setTimeout(function() {
 				enableFlag = true;
@@ -870,7 +803,6 @@ describe("Barcode Test", function() {
 		
 		runs(function()
 		{
-			var enumData = Rho.Barcode.enumerate();
 			objSCN.enable();
 			setTimeout(function() {
 				enableFlag = true;
@@ -907,10 +839,8 @@ describe("Barcode Test", function() {
 
 	it("VT282-1816 | autotab true with setproperty |", function() {
 		
-
 		runs(function()
 		{
-			var enumData = Rho.Barcode.enumerate();
 			objSCN.enable();
 			setTimeout(function() {
 				enableFlag = true;
@@ -949,7 +879,6 @@ describe("Barcode Test", function() {
 
 		runs(function()
 		{
-			var enumData = Rho.Barcode.enumerate();
 			objSCN.enable();
 			setTimeout(function() {
 				enableFlag = true;
@@ -988,7 +917,6 @@ describe("Barcode Test", function() {
 
 		runs(function()
 		{
-			var enumData = Rho.Barcode.enumerate();
 			objSCN.enable({"autoenter":"true"});
 			setTimeout(function() {
 				enableFlag = true;
@@ -1024,14 +952,9 @@ describe("Barcode Test", function() {
 
 	it("VT282-1964 | set decodeDuration to 5000 |", function() {
 		
-		var callbackBarcode = function (data){
-			alert();
-			dispCurrentProcess($.toJSON(data));
-		}
 
 		runs(function()
 		{
-			var enumData = Rho.Barcode.enumerate();
 			objSCN.enable({},callbackBarcode);
 			setTimeout(function() {
 				enableFlag = true;
@@ -1067,14 +990,9 @@ describe("Barcode Test", function() {
 
 	it("VT282-1968 | set decodeFrequency to 65535 |", function() {
 		
-		var callbackBarcode = function (data){
-			alert();
-			dispCurrentProcess($.toJSON(data));
-		}
 
 		runs(function()
 		{
-			var enumData = Rho.Barcode.enumerate();
 			objSCN.enable({},callbackBarcode);
 			setTimeout(function() {
 				enableFlag = true;
@@ -1110,15 +1028,10 @@ describe("Barcode Test", function() {
 
 
 	it("VT282-1969 | set decodeFrequency to 0 |", function() {
-		
-		var callbackBarcode = function (data){
-			alert();
-			dispCurrentProcess($.toJSON(data));
-		}
+	
 
 		runs(function()
 		{
-			var enumData = Rho.Barcode.enumerate();
 			objSCN.enable({},callbackBarcode);
 			setTimeout(function() {
 				enableFlag = true;
@@ -1154,14 +1067,9 @@ describe("Barcode Test", function() {
 
 	it("VT282-1971 | set invalidDecodeFrequency to 65535 |", function() {
 		
-		var callbackBarcode = function (data){
-			alert();
-			dispCurrentProcess($.toJSON(data));
-		}
 
 		runs(function()
 		{
-			var enumData = Rho.Barcode.enumerate();
 			objSCN.enable({},callbackBarcode);
 			setTimeout(function() {
 				enableFlag = true;
@@ -1198,14 +1106,9 @@ describe("Barcode Test", function() {
 
 	it("VT282-1972 | set invalidDecodeFrequency to 0 |", function() {
 		
-		var callbackBarcode = function (data){
-			alert();
-			dispCurrentProcess($.toJSON(data));
-		}
 
 		runs(function()
 		{
-			var enumData = Rho.Barcode.enumerate();
 			objSCN.enable({},callbackBarcode);
 			setTimeout(function() {
 				enableFlag = true;
@@ -1241,14 +1144,9 @@ describe("Barcode Test", function() {
 
 	it("VT282-1974 | set decodeSound to local wave file path |", function() {
 		
-		var callbackBarcode = function (data){
-			alert();
-			dispCurrentProcess($.toJSON(data));
-		}
 
 		runs(function()
 		{
-			var enumData = Rho.Barcode.enumerate();
 			objSCN.enable({},callbackBarcode);
 			setTimeout(function() {
 				enableFlag = true;
@@ -1284,14 +1182,9 @@ describe("Barcode Test", function() {
 
 	it("VT282-1978 | set decodeVolume to 5 |", function() {
 		
-		var callbackBarcode = function (data){
-			alert();
-			dispCurrentProcess($.toJSON(data));
-		}
 
 		runs(function()
 		{
-			var enumData = Rho.Barcode.enumerate();
 			objSCN.enable({},callbackBarcode);
 			setTimeout(function() {
 				enableFlag = true;
@@ -1327,14 +1220,9 @@ describe("Barcode Test", function() {
 
 	it("VT282-1979 | set decodeVolume to 0 |", function() {
 		
-		var callbackBarcode = function (data){
-			alert();
-			dispCurrentProcess($.toJSON(data));
-		}
 
 		runs(function()
 		{
-			var enumData = Rho.Barcode.enumerate();
 			objSCN.enable({},callbackBarcode);
 			setTimeout(function() {
 				enableFlag = true;
@@ -1371,14 +1259,8 @@ describe("Barcode Test", function() {
 
 	it("VT282-2010 | set hapticFeedback as true |", function() {
 		
-		var callbackBarcode = function (data){
-			alert();
-			dispCurrentProcess($.toJSON(data));
-		}
-
 		runs(function()
 		{
-			var enumData = Rho.Barcode.enumerate();
 			objSCN.enable({},callbackBarcode);
 			setTimeout(function() {
 				enableFlag = true;
@@ -1414,14 +1296,9 @@ describe("Barcode Test", function() {
 
 	it("VT282-2011 | set hapticFeedback as false |", function() {
 		
-		var callbackBarcode = function (data){
-			alert();
-			dispCurrentProcess($.toJSON(data));
-		}
 
 		runs(function()
 		{
-			var enumData = Rho.Barcode.enumerate();
 			objSCN.enable({},callbackBarcode);
 			setTimeout(function() {
 				enableFlag = true;
@@ -1457,14 +1334,8 @@ describe("Barcode Test", function() {
 
 	it("VT282-1986 | set lowBatteryScan as true |", function() {
 		
-		var callbackBarcode = function (data){
-			alert();
-			dispCurrentProcess($.toJSON(data));
-		}
-
 		runs(function()
 		{
-			var enumData = Rho.Barcode.enumerate();
 			objSCN.enable({},callbackBarcode);
 			setTimeout(function() {
 				enableFlag = true;
@@ -1499,15 +1370,9 @@ describe("Barcode Test", function() {
 	});
 
 	it("VT282-1987 | set lowBatteryScan as false |", function() {
-		
-		var callbackBarcode = function (data){
-			alert();
-			dispCurrentProcess($.toJSON(data));
-		}
 
 		runs(function()
 		{
-			var enumData = Rho.Barcode.enumerate();
 			objSCN.enable({},callbackBarcode);
 			setTimeout(function() {
 				enableFlag = true;
@@ -1543,10 +1408,6 @@ describe("Barcode Test", function() {
 
 	it("VT282-1994 | call getAllProperties() with async callback |", function() {
 		
-		var callbackBarcode = function (data){
-			alert();
-			dispCurrentProcess($.toJSON(data));
-		}
 		var callbackallproperties =  function (data){
 			alert();
 			dispCurrentProcess($.toJSON(data));
@@ -1554,7 +1415,6 @@ describe("Barcode Test", function() {
 
 		runs(function()
 		{
-			var enumData = Rho.Barcode.enumerate();
 			objSCN.enable();
 			setTimeout(function() {
 				enableFlag = true;
@@ -1590,10 +1450,6 @@ describe("Barcode Test", function() {
 
 	it("VT282-1994 | call getAllProperties() after set using Barcode.Propertyname for reader param |", function() {
 		
-		var callbackBarcode = function (data){
-			alert();
-			dispCurrentProcess($.toJSON(data));
-		}
 		var callbackallproperties =  function (data){
 			alert();
 			dispCurrentProcess($.toJSON(data));
@@ -1601,7 +1457,6 @@ describe("Barcode Test", function() {
 
 		runs(function()
 		{
-			var enumData = Rho.Barcode.enumerate();
 			objSCN.enable();
 			setTimeout(function() {
 				enableFlag = true;
