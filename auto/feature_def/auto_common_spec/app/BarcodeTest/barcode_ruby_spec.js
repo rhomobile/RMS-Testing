@@ -1,4 +1,4 @@
-describe("Barcode", function() {
+describe("Barcode Ruby API Test", function() {
 	describe("Testing Property Retrieval in Ruby via AJAX", function() {
 	
 		beforeEach(function() {

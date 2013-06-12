@@ -1,4 +1,4 @@
-describe("Scanner Test", function() {
+describe("Barcode JS API Test", function() {
 	var	enableflag = false;
 	var	disableflag = false;
     var enumData = Rho.Barcode.enumerate();
