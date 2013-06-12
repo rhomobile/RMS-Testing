@@ -270,7 +270,7 @@ describe("Barcode Test", function() {
 		
 		runs(function()
 		{
-			objSCN.enable({'scanTimeout':7000,'picklistMode':'softwareReticle'},function(data){displayResult("Data:- ",JSON.stringify(decodedata));});
+			objSCN.enable({'scanTimeout':7000,'picklistMode':'softwareReticle'},function(data){displayResult("Data:- ",JSON.stringify(data));});
 			setTimeout(function() {
 				enableFlag = true;
 			}, 8000);
@@ -1407,8 +1407,8 @@ describe("Barcode Test", function() {
 	it("VT282-1994 | call getAllProperties() with async callback |"+ scnid, function() {
 		
 		var callbackallproperties =  function (data){
-			alert();
-			dispCurrentProcess($.toJSON(data));
+			var getAllPropertiesdata = data;
+			displayResult("take Data:- ",JSON.stringify(getAllPropertiesdata));
 		}
 
 		runs(function()
@@ -1446,11 +1446,11 @@ describe("Barcode Test", function() {
 
 	});
 
-	it("VT282-1994 | call getAllProperties() after set using Barcode.Propertyname for reader param |"+ scnid, function() {
+	it("VT282-1995 | call getAllProperties() after set reader param |"+ scnid, function() {
 		
 		var callbackallproperties =  function (data){
-			alert();
-			dispCurrentProcess($.toJSON(data));
+			var getAllPropertiesdata = data;
+			displayResult("take Data:- ",JSON.stringify(getAllPropertiesdata));
 		}
 
 		runs(function()
@@ -1478,7 +1478,140 @@ describe("Barcode Test", function() {
 
 		waitsFor(function()
 		{
-			dispCurrentProcess("check for the retruned hash of getAllProperties <br/> check for behvaiour");
+			dispCurrentProcess("check for the retruned hash of getAllProperties <br/> picklistMode and scantimeout should have set value ");
+			return decodeFlag;
+		}, '15sec Wait to Scan the Barcode', 16000);
+
+		runs(function()
+		{
+			var testPassed = confirm("Do you see Correct Behavior?");
+			expect(testPassed).toEqual(true);
+		});
+
+	});
+
+	it("VT282-1996 | call getAllProperties() after set decoder param |"+ scnid, function() {
+		
+		var callbackallproperties =  function (data){
+			var getAllPropertiesdata = data;
+			displayResult("take Data:- ",JSON.stringify(getAllPropertiesdata));
+		}
+
+		runs(function()
+		{
+			objSCN.enable();
+			setTimeout(function() {
+				enableFlag = true;
+			}, 8000);
+		});
+		waitsFor(function()
+		{
+			dispCurrentProcess("Enabling Scanner");
+			return enableFlag;
+		}, '8sec Wait to enable the Scanner', 9000);
+
+		runs(function()
+		{		
+			objSCN.alldecoders = "true";
+			objSCN.code93 = "true";
+			objSCN.getAllProperties(callbackallproperties);
+			setTimeout(function() {
+				decodeFlag = true;
+			}, 15000);
+		});
+
+		waitsFor(function()
+		{
+			dispCurrentProcess("check for the retruned hash of getAllProperties <br/> alldecoders and code93 should have set value and others default");
+			return decodeFlag;
+		}, '15sec Wait to Scan the Barcode', 16000);
+
+		runs(function()
+		{
+			var testPassed = confirm("Do you see Correct Behavior?");
+			expect(testPassed).toEqual(true);
+		});
+
+	});
+
+	it("VT282-1998 | call getAllProperties() without callback(Sync Access) |"+ scnid, function() {
+		
+		var callbackallproperties =  function (data){
+			var getAllPropertiesdata = data;
+			displayResult("take Data:- ",JSON.stringify(getAllPropertiesdata));
+		}
+
+		runs(function()
+		{
+			objSCN.enable();
+			setTimeout(function() {
+				enableFlag = true;
+			}, 8000);
+		});
+		waitsFor(function()
+		{
+			dispCurrentProcess("Enabling Scanner");
+			return enableFlag;
+		}, '8sec Wait to enable the Scanner', 9000);
+
+		runs(function()
+		{		
+			objSCN.alldecoders = "true";
+			objSCN.code93 = "true";
+			var data = objSCN.getAllProperties();
+			callbackallproperties(data);
+			setTimeout(function() {
+				decodeFlag = true;
+			}, 15000);
+		});
+
+		waitsFor(function()
+		{
+			dispCurrentProcess("check for the retruned hash of getAllProperties <br/> all properties should retrun default values");
+			return decodeFlag;
+		}, '15sec Wait to Scan the Barcode', 16000);
+
+		runs(function()
+		{
+			var testPassed = confirm("Do you see Correct Behavior?");
+			expect(testPassed).toEqual(true);
+		});
+
+	});
+
+	it("VT282-1999 | call getAllProperties() with anonymous callback |"+ scnid, function() {
+		
+		var callbackallproperties =  function (data){
+			var getAllPropertiesdata = data;
+			displayResult("take Data:- ",JSON.stringify(getAllPropertiesdata));
+		}
+
+		runs(function()
+		{
+			objSCN.enable();
+			setTimeout(function() {
+				enableFlag = true;
+			}, 8000);
+		});
+		waitsFor(function()
+		{
+			dispCurrentProcess("Enabling Scanner");
+			return enableFlag;
+		}, '8sec Wait to enable the Scanner', 9000);
+
+		runs(function()
+		{		
+			objSCN.alldecoders = "true";
+			objSCN.code93 = "true";
+			objSCN.getAllProperties(function(data){displayResult("Data:- ",JSON.stringify(data));});
+			setTimeout(function() {
+				decodeFlag = true;
+			}, 15000);
+		});
+
+		waitsFor(function()
+		{
+			dispCurrentProcess("check for the retruned hash of getAllProperties <br/> all properties should retrun default values");
 			return decodeFlag;
 		}, '15sec Wait to Scan the Barcode', 16000);
 
