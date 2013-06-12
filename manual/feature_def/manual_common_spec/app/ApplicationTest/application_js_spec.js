@@ -19,7 +19,7 @@ describe("Application Module Test Starts Here", function() {
         var data = Rho.Application.configPath;
         displayResult("|get Config path",data);
     });
-     
+/* Ruby only    
     it ("|get defaultNative menu", function() {
         var data = Rho.Application.defaultNativeMenu;
         displayResult("|get defaultNative menu",data);
@@ -29,7 +29,7 @@ describe("Application Module Test Starts Here", function() {
       var data = Rho.Application.locale;
         displayResult("|get default Application Locale",data);
     });
-     
+*/     
     it ("|get Application name", function() {
         var data = Rho.Application.name;
         displayResult("|get Application name",data);
@@ -137,12 +137,12 @@ describe("Application Module Test Starts Here", function() {
         var data = Rho.Application.modelFolderPath('idontExist');
         displayResult("|Model folder path model name that doesn't exist",data);
     });
-     
+/* Ruby only     
     it ("|get default Country code", function() {
         var data = Rho.Application.country;
         displayResult("|get default Country code",data);
     });
-     
+*/     
     it ("|get default database blob Folder", function() {
         var data = Rho.Application.databaseBlobFolder;
         displayResult("|get default database blob Folder",data);

@@ -58,9 +58,10 @@ $local_server.mount_proc '/download_image_auth' do |req,res|
 end
 
 $local_server.mount_proc '/upload_text_file' do |req,res|
-    filedata = req.query["filename"]
+    puts "Upload request: #{req.inspect}"
+    #    filedata = req.query["filename"]
     res.status = 200
-    res.body = "initial request is: #{req.inspect}\nFile data is:\n#{filedata}"
+    res.body = req.body#"initial request is: #{req.inspect}\nFile data is:\n#{filedata}"
     res.content_length = res.body.length
 end
 

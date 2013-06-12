@@ -3274,4 +3274,20 @@ var getApplicableProperties = function (objScnType){
 }
 
 
+var enumCallback = function (enumobj){
+	var enumobjlength = enumobj.length
+	if (enumobjlength == 2)
+	{
+		return true;
+	}
+	else if (enumobjlength == 1)
+	{
+		return true;
+	}
+	else 
+	{
+		return false;
+	}
+		
+};
 

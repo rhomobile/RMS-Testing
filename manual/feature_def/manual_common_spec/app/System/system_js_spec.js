@@ -2,6 +2,14 @@ describe("System Module JS Test Starts Here", function() {
 
 	describe("System Module-Setting Directly Test Starts Here", function() {
 		
+		it("VT300-029 | call getProperty with locale | ", function() {
+	    
+			var data = Rho.System.getProperty('locale');
+	      	displayResult("VT300-029 | call getProperty with locale | ",$.toJSON(data));
+	        var testPassed = confirm("Do you see Correct Output?");
+			expect(testPassed).toEqual(true);
+		});
+		
 		it("VT300-070 | call getAllProperties() | ", function() {
 	
 	    	var data =  Rho.System.getAllProperties();
