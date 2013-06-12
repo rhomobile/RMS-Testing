@@ -3275,7 +3275,7 @@ var getApplicableProperties = function (objScnType){
 
 
 var enumCallback = function (enumobj){
-	var enumobjlength = enumobj.length
+	var enumobjlength = enumobj.length;
 	if (enumobjlength == 2)
 	{
 		return true;
