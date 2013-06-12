@@ -15,8 +15,8 @@
     <script type="text/javascript" src="helpers/specHelpers.js"></script>
 
     <!-- include source files here... -->
-    <script type="text/javascript" src="BarcodeTest/barcode_ruby_test.js"></script>
-	<script type="text/javascript" src="BarcodeTest/barcode_js_test.js"></script>
+    <!--<script type="text/javascript" src="BarcodeTest/barcode_ruby_test.js"></script>
+	<script type="text/javascript" src="BarcodeTest/barcode_js_test.js"></script>-->
     <script type="text/javascript" src="NetworkTest/network_ruby_test.js"></script>
     <script type="text/javascript" src="SystemRE1Test/system_js_test.js"></script>
     <!--
@@ -28,8 +28,8 @@
     
     <!-- include spec files here... -->
     <script type="text/javascript" src="ApplicationTest/application_js_spec.js"></script>
-    <script type="text/javascript" src="BarcodeTest/barcode_ruby_spec.js"></script>
-    <script type="text/javascript" src="BarcodeTest/barcode_js_spec.js"></script>
+    <!--<script type="text/javascript" src="BarcodeTest/barcode_ruby_spec.js"></script>
+    <script type="text/javascript" src="BarcodeTest/barcode_js_spec.js"></script>-->
     <script type="text/javascript" src="WebViewTest/webview_js_spec.js"></script>
     <script type="text/javascript" src="SystemRE1Test/systemRE1Spec.js"></script>
     <script type="text/javascript" src="SystemRE1Test/system_js_spec.js"></script>
@@ -60,9 +60,8 @@
         }
     </style>
 
-
     <script type="text/javascript">
-        (function () {
+    	(function () {
             var jasmineEnv = jasmine.getEnv();
             jasmineEnv.updateInterval = 1000;
 
@@ -84,11 +83,16 @@
             };
 
             function execJasmine() {
+            	var oldCallback = jasmineEnv.currentRunner().finishCallback;
+				jasmineEnv.currentRunner().finishCallback = function () {
+					oldCallback.apply(this, arguments);
+					window.location.href = '/app/SpecRunnerBarcode.html';
+				};
                 jasmineEnv.execute();
             }
         })();
-
-
+		
+		//Navigate to the BarcodeTest page
     </script>
 </head>
 <body>

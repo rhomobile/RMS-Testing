@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+   	<link type="image/png" rel="shortcut icon" href="/public/jasmine/jasmine_favicon.png">
+    <link type="text/css" rel="stylesheet" href="/public/jasmine/jasmine.css">
+    <script type="text/javascript" charset="utf-8" src="/public/jquery/jquery-2.0.2-rho-custom.min.js"></script>
+	<script type="text/javascript" charset="utf-8" src="/public/api/rhoapi-modules.js"></script>
+
+    <script type="text/javascript" src="/public/jasmine/jasmine.js"></script>
+    <script type="text/javascript" src="/public/jasmine/jasmine-html.js"></script>
+    <script type="text/javascript" src="/public/jasmine/jasmine.junit_reporter.js"></script>
+
+
+    <script type="text/javascript" src="helpers/jasmine-extensions.js"></script>
+    <script type="text/javascript" src="helpers/specHelpers.js"></script>
+    <!-- include source files here... -->
+    <script type="text/javascript" src="BarcodeTest/barcode_ruby_test.js"></script>
+	<script type="text/javascript" src="BarcodeTest/barcode_js_test.js"></script>
+   	<script type="text/javascript" src="BarcodeTest/barcode_ruby_spec.js"></script>
+    <script type="text/javascript" src="BarcodeTest/barcode_js_spec.js"></script>
+    
+    <title>RhoElements Barcode API Tests</title>
+    <style>
+        a {
+            text-decoration: none
+        }
+    </style>
+
+
+    <script type="text/javascript">
+    	function quit()
+    	{
+    		var xmlhttp;
+			if (window.XMLHttpRequest)
+  			{// code for IE7+, Firefox, Chrome, Opera, Safari
+  				xmlhttp=new XMLHttpRequest();
+  			}
+			else
+  			{// code for IE6, IE5
+  				xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  			}
+  			xmlhttp.open("GET","/app/Settings/quitApp", false);
+			xmlhttp.send();
+    	}
+    	
+        (function () {
+            var jasmineEnv = jasmine.getEnv();
+            jasmineEnv.updateInterval = 1000;
+
+            var htmlReporter = new jasmine.HtmlReporter();
+            var junitReporter = new jasmine.JUnitXmlReporter();
+            junitReporter.useDotNotation = false
+            jasmineEnv.addReporter(htmlReporter);
+            jasmineEnv.addReporter(new jasmine.JUnitXmlReporter('.\\', true, true));
+            jasmineEnv.specFilter = function (spec) {
+                return htmlReporter.specFilter(spec);
+            };
+
+            var currentWindowOnload = window.onload;
+            window.onload = function () {
+                if (currentWindowOnload) {
+                    currentWindowOnload();
+                }
+                execJasmine();
+            };
+
+            function execJasmine() {
+            	var oldCallback = jasmineEnv.currentRunner().finishCallback;
+				jasmineEnv.currentRunner().finishCallback = function () {
+					oldCallback.apply(this, arguments);
+					quit();
+				};
+                jasmineEnv.execute();
+            }
+        })();
+
+
+    </script>
+</head>
+<body>
+<br>
+
+<h1>RhoElements Barcode API Tests</h1>
+
+<p>
+
+<div id="output" style="display:none"></div>
+
+<!-- Required for Barcode Tests -->
+<div id="retProp" style="display:none"></div>
+<div id="scannerReady" style="display:none"></div>
+
+<!-- Required for Signal and Battery Tests -->
+<div id="indicatorOutput" style="display:none">Hello</div>
+<div id="indicatorOutput2" style="display:none">Hello</div>
+<!-- Required for Network -->
+<div id="connectionStatus"></div>
+<div id="networkPort" style="display:none"></div>
+<div id="socketReady" style="display:none"></div>
+</p>
+
+<!-- Required for Displaying Current Execution Process and Displaying Output on Device -->
+<div id="detailsdiv"></div>
+<div id="test">
+<ul id="myList">
+</ul>
+<ul id="myList2">
+</ul>
+</div>
+
+</body>
+</html>

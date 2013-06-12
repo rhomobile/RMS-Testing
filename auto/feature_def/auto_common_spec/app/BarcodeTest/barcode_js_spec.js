@@ -1,4 +1,4 @@
-describe("Scanner Test", function() {
+describe("Barcode JS API Test", function() {
 	var	enableflag = false;
 	var	disableflag = false;
     var enumData = Rho.Barcode.enumerate();
@@ -223,4 +223,44 @@ describe("Scanner Test", function() {
 
     }
 
+});
+
+
+describe("Enumerate Scanner ", function() {
+			
+	it("Enumerate Scanner callback as function", function() {
+				
+		runs(function() {
+			Rho.Barcode.enumerate(enumCallback);
+			expect(enumCallback).toEqual(true);
+		});
+	 });
+
+	it("Enumerate Scanner with anonymous function as callback", function() {
+			
+		runs(function() {
+			Rho.Barcode.enumerate(function(obj){
+				enumCallback(obj);
+			});
+			expect(enumCallback).toEqual(true);
+		});
+ 	});
+
+	it("Enumerate Scanners without callback (Synchronous Access)", function() {
+			
+		runs(function() {
+			var enumobj = Rho.Barcode.enumerate();
+			expect(enumCallback(enumobj)).toEqual(true);
+		});
+ 	});
+ 	
+ 	/*
+	it("Enumerate Scanner with callback as action URL", function() {
+	
+		runs(function() {
+			Rho.Barcode.enumerate(/app/BarcodeTest/getScannerNumber);
+			expect(enumCallback).toEqual(true);
+		});
+	});
+	*/
 });

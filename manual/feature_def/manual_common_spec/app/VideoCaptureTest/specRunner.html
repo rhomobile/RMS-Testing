@@ -5,10 +5,12 @@
 	<META HTTP-Equiv="MinimizeButton" content="visibility:Visible;top:30 " >
 	<META HTTP-Equiv="quitbutton" Content="visibility:visible">
 	<META HTTP-Equiv="ReloadButton" Content="visibility:visible">
+	
+    <script type="text/javascript" charset="utf-8" src="/public/jquery/jquery-1.6.4.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="/public/jquery/jquery.json-2.3.min.js"></script>
+
     <link type="image/png" rel="shortcut icon" href="/public/jasmine/jasmine_favicon.png">
     <link type="text/css" rel="stylesheet" href="/public/jasmine/jasmine.css">
-	
-    <script type="text/javascript" charset="utf-8" src="/public/jquery/jquery-2.0.2-rho-custom.min.js"></script>
     <script type="text/javascript" src="/public/jasmine/jasmine.js"></script>
     <script type="text/javascript" src="/public/jasmine/jasmine-html.js"></script>
     <script type="text/javascript" src="/public/jasmine/jasmine.junit_reporter.js"></script>
@@ -16,26 +18,25 @@
 
 	<style>
 	#detailsdiv {
-    background: url("img/grid2.gif") repeat scroll 0 0 transparent;
+    background: url("/public/images/grid2.gif") repeat scroll 0 0 transparent;
     border: 1px solid #DCDCDC;
     color: #8B0000;
     display: block;
     font-weight: bold;
-    left: 170px;
+    left: 80px;
     padding: 10px;
     position: fixed;
     text-align: center;
-    top: 200px;
-    width: 530px;
+    top: 100px;
+    width: 180px;
 	}
 	</style>
 
 	<!-- include Helper files here... -->
-	<script type="text/javascript" src="barcode_js_test.js" ></script>
     <script type="text/javascript" src="../helpers/specHelpers.js"></script>
 
 	<!-- include spec files here... -->
-	<script type="text/javascript" src="barcode_js_spec.js"></script>
+	<script type="text/javascript" src="videocapture_js_spec.js"></script>
 
 	<script type="text/javascript">
 
@@ -80,6 +81,7 @@
 <ul id="myList2">
 </ul>
 </div>
-<br/><br/><br/><br/>
+<br/><br/>
+<span id="fooBar">&nbsp;</span>
 </body>
 </html>

@@ -34,9 +34,10 @@
 	    <li><a href="javascript:void(0)" onclick ="startWeb();">set StartUri to a web page </a></li>
 	    <li><a href="javascript:void(0)" onclick ="startNull();">set StartUri to Null </a></li>
 		<li><a href="javascript:void(0)" onclick ="startInvalid();">set StartUri to a web page that doesnt exist</a></li>
+		<li><a href="javascript:void(0)" onclick ="startOriginal();">set StartUri to original value</a></li>
 	</ul>
 </fieldset>
-
+<!-- Ruby only. TODO: make ajax call to ruby controller
 <fieldset>
 	<legend>Rho.Application.setLocale</legend>
 	<ul>set the Start Page and Click on Home button
@@ -62,9 +63,10 @@
 		<li><a href="javascript:void(0)" onclick ="setHebrew();">set Locale to Hebrew</a></li>
 	</ul>
 </fieldset>
+-->
 
 <fieldset>
-	<legend>Rho.Application.Title</legend>
+	<legend>Rho.Application.Title: WM only</legend>
 	<ul>set the Title
 	    <li><a href="javascript:void(0)" onclick ="setTitle();">set Title to the Window </a></li>
 	   <li id="Rho_Application_title">
@@ -84,9 +86,9 @@
 		<li><a href="javascript:void(0)" onclick ="menuReservedItem();">call Load to navigate to a reserved page</a></li>
 	</ul>
 </fieldset>
-
+<!-- removed. New property Application.rhoPlatformVersion will be implemented in RMS 4.1
 <fieldset>
-	<legend>Rho.Application.RhoPlatformVersion</legend>
+	<legend>Rho.Application.RhoPlatformVersion: WM and Android</legend>
 	<ul>RhoPlatformVersion
 	<li id="Rho_Application_version_Async">
 	  <a href="javascript:void(0)" onclick ="platfromAsync1();">Platform version through async</a><span class="result"> </span></li>
@@ -96,9 +98,10 @@
 	  <a href="javascript:void(0)" onclick ="platfromAsync1();">Platform version through anonymous</a><span class="result"> </span></li>
 	</ul>
 </fieldset>
+-->
 
 <fieldset>
-	<legend>Rho.Application.RhoPlatformVersion</legend>
+	<legend>Rho.Application.invalidSecurityTokenStartPath</legend>
 	<ul>Invalid Security Token
 	
 	<li > <a href="javascript:void(0)" onclick ="invalidSecurityLocal();">Set Invalid security token path to Local File</a></li>
@@ -112,7 +115,7 @@
 </fieldset>
 
 <fieldset>
-	<legend>Rho.Application.RhoPlatformVersion</legend>
+	<legend>Rho.Application.securityTokenNotPassed</legend>
 	<ul>RhoPlatformVersion
 	<li id="Rho_Application_security">
 	  <a href="javascript:void(0)" onclick ="securityTokenResult();">getSecurityToken</a><span class="result"></span></li>
@@ -120,21 +123,23 @@
 </fieldset>
 
 <fieldset>
-	<legend>Rho.Application.RhoPlatformVersion</legend>
+	<legend>Rho.Application.setApplicationNotify</legend>
 	<ul>setApplicationNotify
 	<li id="Rho_Application_Notify">
 	  <a href="javascript:void(0)" onclick ="applicationNotify();">setApplicationNotify</a><span class="result"></span></li>
 	</ul>
 </fieldset>
 
+<!-- readonly property. TODO: add get property call
 <fieldset>
-	<legend>Rho.Application.BadlinkUri</legend>
+	<legend>Rho.Application.badLinkURI: WM Only</legend>
 	<ul>set the Badlink and create a Navigation Time out 
 	    <li><a href="javascript:void(0)" onclick ="badWeb();">set BadlinkUri to webPage Google</a></li>
 	    <li><a href="javascript:void(0)" onclick ="badnull();">set BadlinkUri to Null</a></li>
 	    <li><a href="javascript:void(0)" onclick ="badNotExist();">set BadlinkUri to page that Doesnt exist </a></li>
 	</ul>
 </fieldset>
+-->
 
 </body>
 </html>
