@@ -6,10 +6,15 @@ describe("Barcode Test", function() {
 	var decodedata ='';
 	var callbackfired = false;
 
-	var callbackBarcode = function (data){
+	var callbackenable = function (data){
 			decodedata = data;
 			displayResult("Data:- ",JSON.stringify(decodedata));
 			callbackfired = true;			
+		}
+
+	var callbacktake = function (data){
+			takedata = data;
+			displayResult("take Data:- ",JSON.stringify(takedata));
 		}
 
 	enumData = Rho.Barcode.enumerate();
@@ -17,6 +22,8 @@ describe("Barcode Test", function() {
    for (var j = 0;j<enumData.length;j++){
 
    (function(objSCN){ 
+
+   	var scnid = enumObject.getProperty('ID');
 
 	beforeEach(function() {
 		enableFlag = false;
@@ -31,11 +38,11 @@ describe("Barcode Test", function() {
 		objSCN.disable();
 	});
 
-	it("VT282-1762 | Enable with callback as function |", function() {
+	it("VT282-1762 | Enable with callback as function |" + scnid, function() {
 
 		runs(function()
 		{
-			objSCN.enable({},callbackBarcode);
+			objSCN.enable({},callbackenable);
 			setTimeout(function() {
 				enableFlag = true;
 			}, 8000);
@@ -54,7 +61,7 @@ describe("Barcode Test", function() {
 
 		waitsFor(function()
 		{
-			dispCurrentProcess("Scan any Barcode <br/> Check The Behavior");
+			dispCurrentProcess("Scan any Barcode <br/> check for the retruned hash ");
 			return callbackfired;
 		}, '15sec Wait to Scan the Barcode', 16000);
 
@@ -67,7 +74,7 @@ describe("Barcode Test", function() {
 
 	});
 
-	it("VT282-1763 | Enable without callback and without any param (Synchronous Access) |", function() {
+	it("VT282-1763 | Enable without callback and without any param (Synchronous Access) |"+ scnid, function() {
 		
 		runs(function()
 		{
@@ -92,7 +99,7 @@ describe("Barcode Test", function() {
 
 		waitsFor(function()
 		{
-			dispCurrentProcess("Scan any Barcode <br/> Check the Behavior");
+			dispCurrentProcess("Scan any Barcode after tapping inside text box <br/> decoded data should come inside textbox");
 			return decodeFlag;
 		}, '15sec Wait to Scan the Barcode', 16000);
 
@@ -109,7 +116,7 @@ describe("Barcode Test", function() {
 
 		runs(function()
 		{
-			objSCN.enable({'allDecoders':'true'},callbackBarcode);
+			objSCN.enable({'allDecoders':'true'},callbackenable);
 			setTimeout(function() {
 				enableFlag = true;
 			}, 8000);
@@ -125,14 +132,14 @@ describe("Barcode Test", function() {
 		{
 			setTimeout(function() {
 				decodeFlag = true;
-			}, 15000);
+			}, 20000);
 		});
 
 		waitsFor(function()
 		{
-			dispCurrentProcess("Scan code93 barcodes <br/> Check The Behavior");
+			dispCurrentProcess("Scan code93 barcodes, Scan MSI barcode <br/> code93 and MSI should be decoded");
 			return decodeFlag;
-		}, '15sec Wait to Scan the Barcode', 16000);
+		}, '20sec Wait to Scan the Barcode', 21000);
 
 		runs(function()
 		{
@@ -142,12 +149,12 @@ describe("Barcode Test", function() {
 
 	});
 
-	it("VT282-1765 | Enable with picklist software reticle, scantimeout 7000 and callback as function |", function() {
+	it("VT282-1765 | Enable with picklist software reticle, scantimeout 7000 and callback as function |"+ scnid, function() {
 		
 
 		runs(function()
 		{
-			objSCN.enable({'scanTimeout':7000,'picklistMode':'softwareReticle'},callbackBarcode);
+			objSCN.enable({'scanTimeout':7000,'picklistMode':'softwareReticle'},callbackenable);
 			setTimeout(function() {
 				enableFlag = true;
 			}, 8000);
@@ -165,14 +172,14 @@ describe("Barcode Test", function() {
 			//Rho.Barcode.picklistMode = "softwareReticle";
 			setTimeout(function() {
 				decodeFlag = true;
-			}, 15000);
+			}, 20000);
 		});
 
 		waitsFor(function()
 		{
-			dispCurrentProcess("functionlity of scanTimeout as 7000 and picklistMode as reticle <br/> Check The Behavior");
+			dispCurrentProcess("don't scan and check scanTimeout as 7000 and check picklistMode as reticle <br/> check for exepcted behaviour");
 			return decodeFlag;
-		}, '15sec Wait to Scan the Barcode', 16000);
+		}, '20sec Wait to Scan the Barcode', 21000);
 
 		runs(function()
 		{
@@ -182,7 +189,7 @@ describe("Barcode Test", function() {
 
 	});
 
-	it("VT282-1766 | Enable with alldecoders disabled, code128 as enabled without callback |", function() {
+	it("VT282-1766 | Enable with alldecoders disabled, code128 as enabled without callback |"+ scnid, function() {
 		
 		runs(function()
 		{
@@ -209,7 +216,7 @@ describe("Barcode Test", function() {
 
 		waitsFor(function()
 		{
-			dispCurrentProcess("Scan other barcode then scan code128 barcode <br/> only code128 barcode will decode");
+			dispCurrentProcess("Scan other barcode then scan code128 barcode after putting focus inside textbox<br/> only code128 barcode should decode");
 			return decodeFlag;
 		}, '15sec Wait to Scan the Barcode', 16000);
 
@@ -225,7 +232,7 @@ describe("Barcode Test", function() {
 		
 		runs(function()
 		{
-			objSCN.enable({},function(data){callbackBarcode;});
+			objSCN.enable({},function(data){callbackenable;});
 			setTimeout(function() {
 				enableFlag = true;
 			}, 8000);
@@ -246,7 +253,7 @@ describe("Barcode Test", function() {
 
 		waitsFor(function()
 		{
-			dispCurrentProcess("Scan any Barcode <br/> Check the Behavior");
+			dispCurrentProcess("Scan any Barcode <br/> check for the retruned array after decode");
 			return decodeFlag;
 		}, '15sec Wait to Scan the Barcode', 16000);
 
@@ -259,7 +266,7 @@ describe("Barcode Test", function() {
 	});
 
 
-	it("VT282-1770 | Enable with picklist software reticle, scantimeout 7000 and callback as anonymous function |", function() {
+	it("VT282-1770 | Enable with picklist software reticle, scantimeout 7000 and callback as anonymous function |"+ scnid, function() {
 		
 		runs(function()
 		{
@@ -279,14 +286,14 @@ describe("Barcode Test", function() {
 		{		
 			setTimeout(function() {
 				decodeFlag = true;
-			}, 15000);
+			}, 20000);
 		});
 
 		waitsFor(function()
 		{
-			dispCurrentProcess("check functionality of scanTimeout as 7000 and picklistMode reticle <br/> Check the Behavior");
+			dispCurrentProcess("check functionality of scanTimeout as 7000 and picklistMode reticle <br/> check for the retruned array after decode");
 			return decodeFlag;
-		}, '15sec Wait to Scan the Barcode', 16000);
+		}, '20sec Wait to Scan the Barcode', 21000);
 
 		runs(function()
 		{
@@ -296,14 +303,10 @@ describe("Barcode Test", function() {
 	});
 
 	it("VT282-1771 | set picklist software reticle, scantimeout 7000 after calling enable |", function() {
-
-		var callbackBarcode = function (data){
-		dispCurrentProcess($.toJSON(data));
-		}
 		
 		runs(function()
 		{
-			objSCN.enable({},callbackBarcode);
+			objSCN.enable({},callbackenable);
 			setTimeout(function() {
 				enableFlag = true;
 			}, 8000);
@@ -326,7 +329,7 @@ describe("Barcode Test", function() {
 
 		waitsFor(function()
 		{
-			dispCurrentProcess("check functionality of scanTimeout aas 7000 and picklistMode reticle <br/> Check the Behavior");
+			dispCurrentProcess("check functionality of scanTimeout as 7000 and picklistMode reticle <br/> Check the Behavior");
 			return decodeFlag;
 		}, '15sec Wait to Scan the Barcode', 16000);
 
@@ -338,11 +341,11 @@ describe("Barcode Test", function() {
 
 	});
 
-	it("VT282-1773 | set alldecoders false, code128 as true after enable |", function() {
+	it("VT282-1773 | set alldecoders false, code128 as true after enable |"+ scnid, function() {
 		
 		runs(function()
 		{
-			objSCN.enable({},callbackBarcode);
+			objSCN.enable({},callbackenable);
 			setTimeout(function() {
 				enableFlag = true;
 			}, 8000);
@@ -360,14 +363,14 @@ describe("Barcode Test", function() {
 			objSCN.code128 = true;
 			setTimeout(function() {
 				decodeFlag = true;
-			}, 15000);
+			}, 20000);
 		});
 
 		waitsFor(function()
 		{
-			dispCurrentProcess("scan code128 barcode <br/> only code128 will decode");
+			dispCurrentProcess("Scan other barcodes and then scan code128 barcode <br/> only code128 will decode");
 			return decodeFlag;
-		}, '15sec Wait to Scan the Barcode', 16000);
+		}, '20sec Wait to Scan the Barcode', 21000);
 
 		runs(function()
 		{
@@ -378,8 +381,7 @@ describe("Barcode Test", function() {
 	});
 
 
-	it("VT282-1778 | call setDefault with SCN1 and take |", function() {
-
+	it("VT282-1778 | call setDefault with SCN and take |"+ scnid, function() {
 
 		runs(function()
 		{
@@ -405,7 +407,7 @@ describe("Barcode Test", function() {
 
 		waitsFor(function()
 		{
-			dispCurrentProcess("scan any barcode <br/> check for Behavior");
+			dispCurrentProcess("scan any barcode <br/> check for retruned value of take with"+ scnid);
 			return decodeFlag;
 		}, '15sec Wait to Scan the Barcode', 16000);
 
@@ -417,12 +419,12 @@ describe("Barcode Test", function() {
 
 	});
 
-	it("VT282-1781 | call setDefault with SCN1 and enable |", function() {
+	it("VT282-1781 | call setDefault and enable |"+ scnid, function() {
 		
 		runs(function()
 		{
 			Rho.Barcode.setDefault(objSCN);
-			Rho.Barcode.enable({},callbackBarcode);
+			Rho.Barcode.enable({},callbackenable);
 			setTimeout(function() {
 				enableFlag = true;
 			}, 8000);
@@ -444,7 +446,7 @@ describe("Barcode Test", function() {
 
 		waitsFor(function()
 		{
-			dispCurrentProcess("scan any barcode <br/> check for Behavior");
+			dispCurrentProcess("scan any barcode <br/> check for reteun value with"+ scnid);
 			return decodeFlag;
 		}, '15sec Wait to Scan the Barcode', 16000);
 
@@ -458,11 +460,11 @@ describe("Barcode Test", function() {
 	});
 
 
-	it("VT282-1784 | Start and stop scanner for laser/Imager scanner |", function() {
+	it("VT282-1784 | Start and stop scanner for scanner |"+ scnid, function() {
 		
 		runs(function()
 		{
-			objSCN.enable({},callbackBarcode);
+			objSCN.enable({},callbackenable);
 			setTimeout(function() {
 				enableFlag = true;
 			}, 8000);
@@ -485,7 +487,7 @@ describe("Barcode Test", function() {
 
 		waitsFor(function()
 		{
-			dispCurrentProcess("check for start and stop of scanner <br/> check for Behavior");
+			dispCurrentProcess("check for start and stop of scanner <br/> check for Behavior with"+ scnid);
 			return decodeFlag;
 		}, '15sec Wait to Scan the Barcode', 9000);
 
@@ -498,7 +500,7 @@ describe("Barcode Test", function() {
 
 	});
 
-	it("VT282-1790 | take with callback as function |", function() {
+	it("VT282-1790 | take with callback as function |"+ scnid, function() {
 		
 		runs(function()
 		{
@@ -523,7 +525,7 @@ describe("Barcode Test", function() {
 
 		waitsFor(function()
 		{
-			dispCurrentProcess("scan any barcode <br/> check for Behavior");
+			dispCurrentProcess("scan any barcode <br/> check for retrurn value with take");
 			return decodeFlag;
 		}, '15sec Wait to Scan the Barcode', 16000);
 
@@ -534,7 +536,7 @@ describe("Barcode Test", function() {
 		});
 	});
 
-	it("VT282-1792 | take with alldecoders enabled and callback |", function() {
+	it("VT282-1792 | take with alldecoders enabled and callback |"+ scnid, function() {
 
 	
 		runs(function()
@@ -555,14 +557,14 @@ describe("Barcode Test", function() {
 		{		
 			setTimeout(function() {
 				decodeFlag = true;
-			}, 15000);
+			}, 20000);
 		});
 
 		waitsFor(function()
 		{
-			dispCurrentProcess("scan code93 barcode <br/> only code128 will decode <br/> check for Behavior");
+			dispCurrentProcess("scan code93 and MSI barcode <br/> both Barcode should get decoded with take");
 			return decodeFlag;
-		}, '15sec Wait to Scan the Barcode', 16000);
+		}, '15sec Wait to Scan the Barcode', 21000);
 
 		runs(function()
 		{
@@ -572,7 +574,7 @@ describe("Barcode Test", function() {
 
 	});
 
-	it("VT282-1793 | take with picklist software reticle, scantimeout 7000 and callback |", function() {
+	it("VT282-1793 | take with picklist software reticle, scantimeout 7000 and callback |"+ scnid, function() {
 
 		
 		runs(function()
@@ -593,14 +595,14 @@ describe("Barcode Test", function() {
 		{		
 			setTimeout(function() {
 				decodeFlag = true;
-			}, 15000);
+			}, 20000);
 		});
 
 		waitsFor(function()
 		{
-			dispCurrentProcess("check for scantimeout as 7000 and picklistMode as reticle <br/> check for Behavior");
+			dispCurrentProcess("check for scantimeout as 7000 and picklistMode as reticle <br/> check for Behavior with take");
 			return decodeFlag;
-		}, '15sec Wait to Scan the Barcode', 16000);
+		}, '20sec Wait to Scan the Barcode', 21000);
 
 		runs(function()
 		{
@@ -610,7 +612,7 @@ describe("Barcode Test", function() {
 
 	});
 
-	it("VT282-1794 | Take with alldecoders disabled, code128 as enabled with callback as function URL |", function() {
+	it("VT282-1794 | Take with alldecoders disabled, code128 as enabled with callback as function URL |"+ scnid, function() {
 
 		
 		runs(function()
@@ -636,7 +638,7 @@ describe("Barcode Test", function() {
 
 		waitsFor(function()
 		{
-			dispCurrentProcess("scan other barcode and scan code128 barcode <br/> only code128 will decode");
+			dispCurrentProcess("scan other barcode and scan code128 barcode <br/> only code128 will decode with take");
 			return decodeFlag;
 		}, '15sec Wait to Scan the Barcode', 16000);
 
@@ -648,11 +650,11 @@ describe("Barcode Test", function() {
 
 	});
 
-	it("VT282-1797 | Take with callback as anonymous function |", function() {
+	it("VT282-1797 | Take with callback as anonymous function |"+ scnid, function() {
 		
 		runs(function()
 		{
-			objSCN.take({},function(data){dispCurrentProcess($.toJSON(data));});
+			objSCN.take({},function(data){displayResult("take Data:- ",JSON.stringify(data));});
 			setTimeout(function() {
 				enableFlag = true;
 			}, 8000);
@@ -673,7 +675,7 @@ describe("Barcode Test", function() {
 
 		waitsFor(function()
 		{
-			dispCurrentProcess("Scan any Barcode <br/> Check the Behavior");
+			dispCurrentProcess("Scan any Barcode <br/> Check for the retruned array of take");
 			return decodeFlag;
 		}, '15sec Wait to Scan the Barcode', 16000);
 
@@ -685,12 +687,11 @@ describe("Barcode Test", function() {
 
 	});
 
-	it("VT282-1800 | All Decoders true with setproperty and nocallback |", function() {
+	it("VT282-1800 | All Decoders true with setproperty and nocallback |"+ scnid, function() {
 		
-
 		runs(function()
 		{
-			objSCN.enable({},callbackBarcode);
+			objSCN.enable({},callbackenable);
 			setTimeout(function() {
 				enableFlag = true;
 			}, 8000);
@@ -723,11 +724,11 @@ describe("Barcode Test", function() {
 
 	});
 
-	it("VT282-1801 | All Decoders false with setproperty and nocallback |", function() {
+	it("VT282-1801 | All Decoders false with setproperty and nocallback |"+ scnid, function() {
 
 		runs(function()
 		{
-			objSCN.enable({},callbackBarcode);
+			objSCN.enable({},callbackenable);
 			setTimeout(function() {
 				enableFlag = true;
 			}, 8000);
@@ -761,9 +762,8 @@ describe("Barcode Test", function() {
 	});
 
 
-	it("VT282-1814 | autotenter true with setproperty |", function() {
+	it("VT282-1814 | autotenter true with setproperty |"+ scnid, function() {
 		
-
 		runs(function()
 		{
 			objSCN.enable();
@@ -787,7 +787,7 @@ describe("Barcode Test", function() {
 
 		waitsFor(function()
 		{
-			dispCurrentProcess("check for autoenter true <br/> check for behvaiour");
+			dispCurrentProcess("put the focus inside textbox and check for autoenter true <br/> check for behvaiour");
 			return decodeFlag;
 		}, '15sec Wait to Scan the Barcode', 16000);
 
@@ -799,7 +799,7 @@ describe("Barcode Test", function() {
 
 	});
 
-	it("VT282-1815 | autoenter false with setproperty |", function() {
+	it("VT282-1815 | autoenter false with setproperty |"+ scnid, function() {
 		
 		runs(function()
 		{
@@ -824,7 +824,7 @@ describe("Barcode Test", function() {
 
 		waitsFor(function()
 		{
-			dispCurrentProcess("check for autoenter false <br/> check for behvaiour");
+			dispCurrentProcess("put the focus inside textbox and check for autoenter false <br/> check for behvaiour");
 			return decodeFlag;
 		}, '15sec Wait to Scan the Barcode', 16000);
 
@@ -837,7 +837,7 @@ describe("Barcode Test", function() {
 	});
 
 
-	it("VT282-1816 | autotab true with setproperty |", function() {
+	it("VT282-1816 | autotab true with setproperty |"+ scnid, function() {
 		
 		runs(function()
 		{
@@ -862,7 +862,7 @@ describe("Barcode Test", function() {
 
 		waitsFor(function()
 		{
-			dispCurrentProcess("check for autotab true <br/> check for behvaiour");
+			dispCurrentProcess("put the focus inside textbox and check for autotab true <br/> check for behvaiour");
 			return decodeFlag;
 		}, '15sec Wait to Scan the Barcode', 16000);
 
@@ -874,7 +874,7 @@ describe("Barcode Test", function() {
 
 	});
 
-	it("VT282-1817 | autotab false with setproperty |", function() {
+	it("VT282-1817 | autotab false with setproperty |"+ scnid, function() {
 		
 
 		runs(function()
@@ -900,7 +900,7 @@ describe("Barcode Test", function() {
 
 		waitsFor(function()
 		{
-			dispCurrentProcess("check for autotab false <br/> check for behvaiour");
+			dispCurrentProcess("put the focus inside textbox and check for autotab false <br/> check for behvaiour");
 			return decodeFlag;
 		}, '15sec Wait to Scan the Barcode', 16000);
 
@@ -912,9 +912,8 @@ describe("Barcode Test", function() {
 
 	});
 
-	it("VT282-1826 | Enable with autoenter and no callback |", function() {
+	it("VT282-1826 | Enable with autoenter and no callback |"+ scnid, function() {
 		
-
 		runs(function()
 		{
 			objSCN.enable({"autoenter":"true"});
@@ -938,7 +937,7 @@ describe("Barcode Test", function() {
 
 		waitsFor(function()
 		{
-			dispCurrentProcess("check for autoenter true <br/> check for behvaiour");
+			dispCurrentProcess("put the focus inside textbox and check for autoenter true <br/> check for behvaiour");
 			return decodeFlag;
 		}, '15sec Wait to Scan the Barcode', 16000);
 
@@ -950,12 +949,11 @@ describe("Barcode Test", function() {
 
 	});
 
-	it("VT282-1964 | set decodeDuration to 5000 |", function() {
+	it("VT282-1964 | set decodeDuration to 5000 |"+ scnid, function() {
 		
-
 		runs(function()
 		{
-			objSCN.enable({},callbackBarcode);
+			objSCN.enable({},callbackenable);
 			setTimeout(function() {
 				enableFlag = true;
 			}, 8000);
@@ -988,12 +986,12 @@ describe("Barcode Test", function() {
 
 	});
 
-	it("VT282-1968 | set decodeFrequency to 65535 |", function() {
+	it("VT282-1968 | set decodeFrequency to 65535 |"+ scnid, function() {
 		
 
 		runs(function()
 		{
-			objSCN.enable({},callbackBarcode);
+			objSCN.enable({},callbackenable);
 			setTimeout(function() {
 				enableFlag = true;
 			}, 8000);
@@ -1027,12 +1025,12 @@ describe("Barcode Test", function() {
 	});
 
 
-	it("VT282-1969 | set decodeFrequency to 0 |", function() {
+	it("VT282-1969 | set decodeFrequency to 0 |"+ scnid, function() {
 	
 
 		runs(function()
 		{
-			objSCN.enable({},callbackBarcode);
+			objSCN.enable({},callbackenable);
 			setTimeout(function() {
 				enableFlag = true;
 			}, 8000);
@@ -1065,12 +1063,12 @@ describe("Barcode Test", function() {
 
 	});
 
-	it("VT282-1971 | set invalidDecodeFrequency to 65535 |", function() {
+	it("VT282-1971 | set invalidDecodeFrequency to 65535 |"+ scnid, function() {
 		
 
 		runs(function()
 		{
-			objSCN.enable({},callbackBarcode);
+			objSCN.enable({},callbackenable);
 			setTimeout(function() {
 				enableFlag = true;
 			}, 8000);
@@ -1091,7 +1089,7 @@ describe("Barcode Test", function() {
 
 		waitsFor(function()
 		{
-			dispCurrentProcess("check decode frequency as 65535<br/> check for behvaiour");
+			dispCurrentProcess("check decode invalid frequency as 65535<br/> check for behvaiour");
 			return decodeFlag;
 		}, '15sec Wait to Scan the Barcode', 16000);
 
@@ -1104,12 +1102,12 @@ describe("Barcode Test", function() {
 	});
 
 
-	it("VT282-1972 | set invalidDecodeFrequency to 0 |", function() {
+	it("VT282-1972 | set invalidDecodeFrequency to 0 |"+ scnid, function() {
 		
 
 		runs(function()
 		{
-			objSCN.enable({},callbackBarcode);
+			objSCN.enable({},callbackenable);
 			setTimeout(function() {
 				enableFlag = true;
 			}, 8000);
@@ -1142,12 +1140,12 @@ describe("Barcode Test", function() {
 
 	});
 
-	it("VT282-1974 | set decodeSound to local wave file path |", function() {
+	it("VT282-1974 | set decodeSound to local wave file path |"+ scnid, function() {
 		
 
 		runs(function()
 		{
-			objSCN.enable({},callbackBarcode);
+			objSCN.enable({},callbackenable);
 			setTimeout(function() {
 				enableFlag = true;
 			}, 8000);
@@ -1180,12 +1178,12 @@ describe("Barcode Test", function() {
 
 	});
 
-	it("VT282-1978 | set decodeVolume to 5 |", function() {
+	it("VT282-1978 | set decodeVolume to 5 |"+ scnid, function() {
 		
 
 		runs(function()
 		{
-			objSCN.enable({},callbackBarcode);
+			objSCN.enable({},callbackenable);
 			setTimeout(function() {
 				enableFlag = true;
 			}, 8000);
@@ -1218,12 +1216,12 @@ describe("Barcode Test", function() {
 
 	});
 
-	it("VT282-1979 | set decodeVolume to 0 |", function() {
+	it("VT282-1979 | set decodeVolume to 0 |"+ scnid, function() {
 		
 
 		runs(function()
 		{
-			objSCN.enable({},callbackBarcode);
+			objSCN.enable({},callbackenable);
 			setTimeout(function() {
 				enableFlag = true;
 			}, 8000);
@@ -1257,11 +1255,11 @@ describe("Barcode Test", function() {
 	});
 
 
-	it("VT282-2010 | set hapticFeedback as true |", function() {
+	it("VT282-2010 | set hapticFeedback as true |"+ scnid, function() {
 		
 		runs(function()
 		{
-			objSCN.enable({},callbackBarcode);
+			objSCN.enable({},callbackenable);
 			setTimeout(function() {
 				enableFlag = true;
 			}, 8000);
@@ -1294,12 +1292,12 @@ describe("Barcode Test", function() {
 
 	});
 
-	it("VT282-2011 | set hapticFeedback as false |", function() {
+	it("VT282-2011 | set hapticFeedback as false |"+ scnid, function() {
 		
 
 		runs(function()
 		{
-			objSCN.enable({},callbackBarcode);
+			objSCN.enable({},callbackenable);
 			setTimeout(function() {
 				enableFlag = true;
 			}, 8000);
@@ -1332,11 +1330,11 @@ describe("Barcode Test", function() {
 
 	});
 
-	it("VT282-1986 | set lowBatteryScan as true |", function() {
+	it("VT282-1986 | set lowBatteryScan as true |"+ scnid, function() {
 		
 		runs(function()
 		{
-			objSCN.enable({},callbackBarcode);
+			objSCN.enable({},callbackenable);
 			setTimeout(function() {
 				enableFlag = true;
 			}, 8000);
@@ -1369,11 +1367,11 @@ describe("Barcode Test", function() {
 
 	});
 
-	it("VT282-1987 | set lowBatteryScan as false |", function() {
+	it("VT282-1987 | set lowBatteryScan as false |"+ scnid, function() {
 
 		runs(function()
 		{
-			objSCN.enable({},callbackBarcode);
+			objSCN.enable({},callbackenable);
 			setTimeout(function() {
 				enableFlag = true;
 			}, 8000);
@@ -1406,7 +1404,7 @@ describe("Barcode Test", function() {
 
 	});
 
-	it("VT282-1994 | call getAllProperties() with async callback |", function() {
+	it("VT282-1994 | call getAllProperties() with async callback |"+ scnid, function() {
 		
 		var callbackallproperties =  function (data){
 			alert();
@@ -1448,7 +1446,7 @@ describe("Barcode Test", function() {
 
 	});
 
-	it("VT282-1994 | call getAllProperties() after set using Barcode.Propertyname for reader param |", function() {
+	it("VT282-1994 | call getAllProperties() after set using Barcode.Propertyname for reader param |"+ scnid, function() {
 		
 		var callbackallproperties =  function (data){
 			alert();
