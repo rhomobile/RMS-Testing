@@ -19,31 +19,30 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\shared\generated\logcapture_api_init.cpp">
+    <ClCompile Include="..\..\shared\generated\genpropbag_api_init.cpp">
       <Filter>shared\generated</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\shared\generated\logcapture_js_api.cpp">
+    <ClCompile Include="..\..\shared\generated\genpropbag_js_api.cpp">
       <Filter>shared\generated</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\shared\generated\logcapture_ruby_api.c">
+    <ClCompile Include="..\..\shared\generated\genpropbag_ruby_api.c">
       <Filter>shared\generated</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\shared\generated\cpp\logcapture_js_wrap.cpp">
+    <ClCompile Include="..\..\shared\generated\cpp\genpropbag_js_wrap.cpp">
       <Filter>shared\generated\cpp</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\shared\generated\cpp\logcapture_ruby_wrap.cpp">
+    <ClCompile Include="..\..\shared\generated\cpp\genpropbag_ruby_wrap.cpp">
       <Filter>shared\generated\cpp</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\shared\generated\cpp\logCaptureBase.cpp">
+    <ClCompile Include="..\..\shared\generated\cpp\genpropbagBase.cpp">
       <Filter>shared\generated\cpp</Filter>
     </ClCompile>
-    <ClInclude Include="..\..\shared\generated\cpp\IlogCapture.h">
+    <ClInclude Include="..\..\shared\generated\cpp\Igenpropbag.h">
       <Filter>shared\generated\cpp</Filter>
     </ClInclude>
-    <ClCompile Include="..\..\shared\LogCaptureImpl.cpp" />
+    <ClCompile Include="..\..\shared\GenPropBag_impl.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\shared\generated\cpp\IlogCaptureBase.h" />
-    <ClInclude Include="..\..\logCapture.xml" />
+    <ClInclude Include="..\..\genpropbag.xml" />
   </ItemGroup>
 </Project>
