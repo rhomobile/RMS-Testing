@@ -23,7 +23,7 @@ describe("Barcode Test", function() {
 
    (function(objSCN){ 
 
-   	var scnid = enumObject.getProperty('ID');
+   	var scnid = objSCN.getProperty('ID');
 
 	beforeEach(function() {
 		enableFlag = false;

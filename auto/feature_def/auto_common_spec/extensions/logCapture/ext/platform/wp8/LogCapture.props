@@ -3,7 +3,7 @@
   <ImportGroup Label="PropertySheets">
   </ImportGroup>
   <PropertyGroup Label="UserMacros">
-    <_RHO_ROOT>c:/projects/rhodes</_RHO_ROOT>
+    <_RHO_ROOT>c:/work/win8/commonapi/rhodes</_RHO_ROOT>
     <_TEMP_FILES_DIR>$(RHO_ROOT)\platform\wp8\bin\$(Platform)\extensions\$(ProjectName)</_TEMP_FILES_DIR>
   </PropertyGroup>
   <ItemDefinitionGroup />

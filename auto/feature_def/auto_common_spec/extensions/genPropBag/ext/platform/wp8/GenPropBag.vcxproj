@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -19,11 +19,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{d5343f80-b0eb-0130-785e-406c8f3c4bb4}</ProjectGuid>
-    <RootNamespace>rhoruntime</RootNamespace>
+    <ProjectGuid>{d5343df0-b0eb-0130-785e-406c8f3c4bb4}</ProjectGuid>
+    <RootNamespace>genPropBag</RootNamespace>
     <DefaultLanguage>en-US</DefaultLanguage>
     <MinimumVisualStudioVersion>11.0</MinimumVisualStudioVersion>
-    <WinMDAssembly>true</WinMDAssembly>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -53,16 +52,16 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="logCaptureLib.props" />
+    <Import Project=".\genpropbag.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
-    <Import Project="logCaptureLib.props" />
+    <Import Project=".\genpropbag.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="logCaptureLib.props" />
+    <Import Project=".\genpropbag.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
-    <Import Project="logCaptureLib.props" />
+    <Import Project=".\genpropbag.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
@@ -70,109 +69,92 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>$(RHO_ROOT)\Platform\wp8\Bin\$(Platform)\rhoruntime\$(Configuration)\</OutDir>
-    <IntDir>$(TEMP_FILES_DIR)\</IntDir>
+    <IntDir>$(TEMP_FILES_DIR)\$(ProjectName)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>$(RHO_ROOT)\Platform\wp8\Bin\$(Platform)\rhoruntime\$(Configuration)\</OutDir>
-    <IntDir>$(TEMP_FILES_DIR)\</IntDir>
+    <IntDir>$(TEMP_FILES_DIR)\$(ProjectName)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
     <OutDir>$(RHO_ROOT)\Platform\wp8\Bin\$(Platform)\rhoruntime\$(Configuration)\</OutDir>
-    <IntDir>$(TEMP_FILES_DIR)\</IntDir>
+    <IntDir>$(TEMP_FILES_DIR)\$(ProjectName)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
     <OutDir>$(RHO_ROOT)\Platform\wp8\Bin\$(Platform)\rhoruntime\$(Configuration)\</OutDir>
-    <IntDir>$(TEMP_FILES_DIR)\</IntDir>
+    <IntDir>$(TEMP_FILES_DIR)\$(ProjectName)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <PreprocessorDefinitions>_LIB;_WP8_LIB;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_LIB;_WP8_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <AdditionalUsingDirectories>$(WindowsSDK_MetadataPath);$(AdditionalUsingDirectories)</AdditionalUsingDirectories>
-      <CompileAsWinRT>true</CompileAsWinRT>
       <AdditionalIncludeDirectories>$(RHO_ROOT)\platform\shared\ruby\wp8;$(RHO_ROOT)\platform\shared\ruby\include;$(RHO_ROOT)\platform\shared;$(RHO_ROOT)\platform\shared\common</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
-      <IgnoreSpecificDefaultLibraries>ole32.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
-      <GenerateWindowsMetadata>true</GenerateWindowsMetadata>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <PreprocessorDefinitions>_LIB;_WP8_LIB;NDEBUG;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_LIB;_WP8_LIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <AdditionalUsingDirectories>$(WindowsSDK_MetadataPath);$(AdditionalUsingDirectories)</AdditionalUsingDirectories>
-      <CompileAsWinRT>true</CompileAsWinRT>
       <AdditionalIncludeDirectories>$(RHO_ROOT)\platform\shared\ruby\wp8;$(RHO_ROOT)\platform\shared\ruby\include;$(RHO_ROOT)\platform\shared;$(RHO_ROOT)\platform\shared\common</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
-      <IgnoreSpecificDefaultLibraries>ole32.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
-      <GenerateWindowsMetadata>true</GenerateWindowsMetadata>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
     <ClCompile>
-      <PreprocessorDefinitions>_LIB;_WP8_LIB;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_LIB;_WP8_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <AdditionalUsingDirectories>$(WindowsSDK_MetadataPath);$(AdditionalUsingDirectories)</AdditionalUsingDirectories>
-      <CompileAsWinRT>true</CompileAsWinRT>
       <AdditionalIncludeDirectories>$(RHO_ROOT)\platform\shared\ruby\wp8;$(RHO_ROOT)\platform\shared\ruby\include;$(RHO_ROOT)\platform\shared;$(RHO_ROOT)\platform\shared\common</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
-      <IgnoreSpecificDefaultLibraries>ole32.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
-      <GenerateWindowsMetadata>true</GenerateWindowsMetadata>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
     <ClCompile>
-      <PreprocessorDefinitions>_LIB;_WP8_LIB;NDEBUG;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_LIB;_WP8_LIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <AdditionalUsingDirectories>$(WindowsSDK_MetadataPath);$(AdditionalUsingDirectories)</AdditionalUsingDirectories>
-      <CompileAsWinRT>true</CompileAsWinRT>
       <AdditionalIncludeDirectories>$(RHO_ROOT)\platform\shared\ruby\wp8;$(RHO_ROOT)\platform\shared\ruby\include;$(RHO_ROOT)\platform\shared;$(RHO_ROOT)\platform\shared\common</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
-      <IgnoreSpecificDefaultLibraries>ole32.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
-      <GenerateWindowsMetadata>true</GenerateWindowsMetadata>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <Reference Include="Windows">
+      <IsWinMDFile>true</IsWinMDFile>
+    </Reference>
     <Reference Include="platform.winmd">
       <IsWinMDFile>true</IsWinMDFile>
       <Private>false</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\shared\generated\logcapture_api_init.cpp" />
-    <ClCompile Include="..\..\shared\generated\logcapture_js_api.cpp" />
-    <ClCompile Include="..\..\shared\generated\logcapture_ruby_api.c">
-      <CompileAsWinRT Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">false</CompileAsWinRT>
-      <CompileAsWinRT Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">false</CompileAsWinRT>
-      <CompileAsWinRT Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsWinRT>
-      <CompileAsWinRT Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</CompileAsWinRT>
-    </ClCompile>
-    <ClCompile Include="generated\lib\logCapture_impl.cpp" />
-    <ClCompile Include="..\..\shared\generated\cpp\logCaptureBase.cpp" />
-    <ClCompile Include="..\..\shared\generated\cpp\logcapture_js_wrap.cpp" />
-    <ClCompile Include="..\..\shared\generated\cpp\logcapture_ruby_wrap.cpp" />
-    <ClCompile Include="generated\lib\logCaptureRuntime.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\..\shared\generated\cpp\IlogCapture.h" />
-    <ClInclude Include="generated\lib\logCaptureRuntime.h" />
+    <ClCompile Include="..\..\shared\generated\genpropbag_api_init.cpp" />
+    <ClCompile Include="..\..\shared\generated\genpropbag_js_api.cpp" />
+    <ClCompile Include="..\..\shared\generated\genpropbag_ruby_api.c" />
+    <ClCompile Include="..\..\shared\GenPropBag_impl.cpp" />
+    <ClInclude Include="..\..\genpropbag.xml" />
+    <ClCompile Include="..\..\shared\generated\cpp\genpropbagBase.cpp" />
+    <ClCompile Include="..\..\shared\generated\cpp\genpropbag_js_wrap.cpp" />
+    <ClCompile Include="..\..\shared\generated\cpp\genpropbag_ruby_wrap.cpp" />
+    <ClInclude Include="..\..\shared\generated\cpp\Igenpropbag.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsPhone\v$(TargetPlatformVersion)\Microsoft.Cpp.WindowsPhone.$(TargetPlatformVersion).targets" />

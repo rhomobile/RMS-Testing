@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -149,15 +149,13 @@
     <ClCompile Include="..\..\shared\generated\logcapture_api_init.cpp" />
     <ClCompile Include="..\..\shared\generated\logcapture_js_api.cpp" />
     <ClCompile Include="..\..\shared\generated\logcapture_ruby_api.c" />
+    <ClCompile Include="..\..\shared\LogCaptureImpl.cpp" />
     <ClInclude Include="..\..\logCapture.xml" />
     <ClCompile Include="..\..\shared\generated\cpp\logCaptureBase.cpp" />
     <ClCompile Include="..\..\shared\generated\cpp\logcapture_js_wrap.cpp" />
     <ClCompile Include="..\..\shared\generated\cpp\logcapture_ruby_wrap.cpp" />
     <ClInclude Include="..\..\shared\generated\cpp\IlogCapture.h" />
     <ClInclude Include="..\..\shared\generated\cpp\IlogCaptureBase.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="src\logCapture_impl.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsPhone\v$(TargetPlatformVersion)\Microsoft.Cpp.WindowsPhone.$(TargetPlatformVersion).targets" />
