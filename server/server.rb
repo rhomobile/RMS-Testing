@@ -91,6 +91,18 @@ $local_server.mount_proc '/test_methods' do |req,res|
     end
 end
 
+lastLogData = ""
+
+$local_server.mount_proc '/client_log' do |req,res|
+    lastLogData = req.query["blob"]
+    res.status = 200
+end
+
+$local_server.mount_proc '/get_last_log' do |req,res|
+    res.body = lastLogData
+    res.status = 200
+end
+
 
 #Secure server mount points
 $secure_server.mount_proc '/test_methods' do |req,res|
