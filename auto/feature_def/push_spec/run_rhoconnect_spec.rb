@@ -75,7 +75,6 @@ def run_apps(platform)
 	# Rake::Task["config:android:emulator"].invoke
 	# AndroidTools.run_emulator( :wipe => true )
 
-	# FIXME:
 	TEST_PKGS.each do |pkg|
 		out = `adb shell pm list packages #{pkg}`
 		unless out.empty?
@@ -86,16 +85,32 @@ def run_apps(platform)
 
 	push_service_apk = File.join($rhoelements_root,'libs','rhoconnect-push-service','rhoconnect-push-service.apk')
 	puts "Install rhoconnect push service ..."
-#	AndroidTools.load_app_and_run("-e", push_service_apk, "")
-	system("adb install #{push_service_apk}")
+	#	AndroidTools.load_app_and_run("-e", push_service_apk, "")
+	system("adb install -r #{push_service_apk}")
 
 	puts 'Building and starting rhodes application ...'
 	FileUtils.chdir File.join($spec_path, 'rhoconnect_push_client')
 
+	# Patch rhodes 'build.yml' file: setup sdk and extentions properties
+	# TODO: remove comments!
+	File.open('./build.yml', 'w') do |bf|
+	  File.open('./build.yml.example', 'r') do |f|
+	    f.each do |line|
+	      if line =~ /sdk: Path-to-Rhodes/
+	          bf.puts "# sdk: \"#{$rho_root}\"\n"
+	      elsif line =~ /Path-to-Motorola-Extensions/
+	          bf.puts "#  extensions: \"#{$rhoelements_root}/extensions\"\n"
+	      else
+	          bf.puts line
+	      end
+	    end
+	  end
+	end
+
+	# Running on emulator ...
 	# system("rake run:#{$platform}").should == true
 	# Running on phone ...
 	system("rake run:#{$platform}:device").should == true
-
 
 	puts "Running push specs ..."
 	puts
