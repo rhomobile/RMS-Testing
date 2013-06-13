@@ -111,7 +111,7 @@ describe("Notification", function() {
 							setInstruction("able to flash LED: "+ ledName + " (on: 1sec, off: 1sec, cycles: 1)");
 							setExpected("Is the " + ledName + " flashing as per the instruction?");
 							strProperty = '{"onDuration":1000,"offDuration":1000,"numberOfCycles":1}';
-							var objProperties = jQuery.parseJSON(strProperty);
+							var objProperties = JSON.parse(strProperty);
 							enumObject.flash(objProperties);
 							
 							waitsFor(function() {
@@ -129,7 +129,7 @@ describe("Notification", function() {
 							setInstruction("able to flash LED: "+ ledName + " (on: 2sec, off: 2sec, cycles: 1)");
 							setExpected("Is the " + ledName + " flashing as per the instruction?");
 							strProperty = '{"onDuration":2000,"offDuration":2000,"numberOfCycles":1}';
-							var objProperties = jQuery.parseJSON(strProperty);
+							var objProperties = JSON.parse(strProperty);
 							enumObject.flash(objProperties);
 							waitsFor(function() {
 								return document.getElementById("actResult").innerHTML != "init";
@@ -146,7 +146,7 @@ describe("Notification", function() {
 							setInstruction("able to flash LED: "+ ledName + " (on: 1sec, off: 1sec, cycles: 3)");
 							setExpected("Is the " + ledName + " flashing as per the instruction?");
 							strProperty = '{"onDuration":1000,"offDuration":1000,"numberOfCycles":3}';
-							var objProperties = jQuery.parseJSON(strProperty);
+							var objProperties = JSON.parse(strProperty);
 							enumObject.flash(objProperties);
 
 							waitsFor(function() {
@@ -164,7 +164,7 @@ describe("Notification", function() {
 							setInstruction("is able to flash LED: "+ ledName + " (on: 4sec, off: 2sec, cycles: 2)");
 							setExpected("Is the " + ledName + " flashing as per the instruction?");
 							strProperty = '{"onDuration":4000,"offDuration":2000,"numberOfCycles":2}';
-							var objProperties = jQuery.parseJSON(strProperty);
+							var objProperties = JSON.parse(strProperty);
 							enumObject.flash(objProperties);
 
 							waitsFor(function() {

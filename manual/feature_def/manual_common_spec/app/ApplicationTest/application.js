@@ -155,7 +155,7 @@ function setTitle(){
 function getTitle() 
 { 
 	var data = Rho.Application.title;
-	$("#Rho_Application_title span.result").text($.toJSON(data));
+	$("#Rho_Application_title span.result").text(JSON.stringify(data));
 }
 
 function setTitleNull(){
@@ -199,25 +199,25 @@ Rho.Application.getRhoPlatformVersion(myCallback);
 
 function myCallback(params){
 data=params;
-$("#Rho_Application_version_Async span.result").text($.toJSON(data));
+$("#Rho_Application_version_Async span.result").text(JSON.stringify(data));
 }
 
 function platformSync(){
 data= Application.getRhoPlatformVersion(myCallback());
-$("#Rho_Application_version_Sync span.result").text($.toJSON(data));
+$("#Rho_Application_version_Sync span.result").text(JSON.stringify(data));
 } 
  
 function platfromAnonymous(){
 Rho.Application.getRhoPlatformVersion(function (params){
 data=params;
-$("#Rho_Application_version_Anon span.result").text($.toJSON(data));
+$("#Rho_Application_version_Anon span.result").text(JSON.stringify(data));
 });
 }
 
 function platfromAnonymous(){
 Rho.Application.getRhoPlatformVersion(function (params){
 data=params;
-$("#Rho_Application_version_Anon span.result").text($.toJSON(data));
+$("#Rho_Application_version_Anon span.result").text(JSON.stringify(data));
 });
 }
 
@@ -228,7 +228,7 @@ Rho.Application.invalidSecurityTokenStartPath='/app/loading.html';
 function invalidSecurityGoogle(){
 Rho.Application.invalidSecurityTokenStartPath='http://www.google.com';	
 var data = Rho.Application.invalidSecurityTokenStartPath;
-$("#Rho_Application_securityToken span.result").text($.toJSON(data));
+$("#Rho_Application_securityToken span.result").text(JSON.stringify(data));
 }
 
 function invalidSecurityNull(){
@@ -245,7 +245,7 @@ Rho.Application.invalidSecurityTokenStartPath='/public/app/index.html';
 
 function securityTokenResult(){
 var data = Rho.Application.securityTokenNotPassed;
-$("#Rho_Application_security span.result").text($.toJSON(data));	
+$("#Rho_Application_security span.result").text(JSON.stringify(data));	
 }	
 	
 function applicationNotify(){
@@ -256,6 +256,6 @@ Rho.Application.setApplicationNotify(notifyCallback);
 function notifyCallback(params){
 data=params;
 Rho.Log.info(data,'app');
-$("#Rho_Application_Notify span.result").text($.toJSON(data));
+$("#Rho_Application_Notify span.result").text(JSON.stringify(data));
 }	
 	

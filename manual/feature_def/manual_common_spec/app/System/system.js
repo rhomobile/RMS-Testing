@@ -6,7 +6,7 @@ function setapplicationIconBadge(iconbadgeValue)
 function getapplicationIconBadge()
 {
 	data = Rho.System.getProperty('applicationIconBadge');
-	$("#Rho_System_getapplicationIconBadge span.result").text($.toJSON(data));
+	$("#Rho_System_getapplicationIconBadge span.result").text(JSON.stringify(data));
 }
 
 function sethttpProxyURI()
@@ -17,13 +17,13 @@ function sethttpProxyURI()
 function gethttpProxyURI()
 {
 	data = Rho.System.getProperty('httpProxyURI');
-	$("#Rho_System_httpProxyURI span.result").text($.toJSON(data));
+	$("#Rho_System_httpProxyURI span.result").text(JSON.stringify(data));
 }
 
 function getisEmulator()
 {
 	data = Rho.System.getProperty('isEmulator');
-	$("#Rho_System_isEmulator span.result").text($.toJSON(data));
+	$("#Rho_System_isEmulator span.result").text(JSON.stringify(data));
 }
 
 function setlockWindowSize(lockwindowsizeValue)
@@ -34,7 +34,7 @@ function setlockWindowSize(lockwindowsizeValue)
 function getlockWindowSize()
 {
 	data = Rho.System.getProperty('lockWindowSize');
-	$("#Rho_System_lockWindowSize span.result").text($.toJSON(data));
+	$("#Rho_System_lockWindowSize span.result").text(JSON.stringify(data));
 }
 
 function setscreenAutoRotate(autorotateValue)
@@ -45,13 +45,13 @@ function setscreenAutoRotate(autorotateValue)
 function getscreenAutoRotate()
 {
 	data = Rho.System.getProperty('screenAutoRotate');
-	$("#Rho_System_screenAutoRotate span.result").text($.toJSON(data));
+	$("#Rho_System_screenAutoRotate span.result").text(JSON.stringify(data));
 }
 
 function getscreenOrientation()
 {
 	data = Rho.System.getProperty('screenOrientation');
-	$("#Rho_System_screenOrientation span.result").text($.toJSON(data));
+	$("#Rho_System_screenOrientation span.result").text(JSON.stringify(data));
 }
 
 function setscreenSleeping(screensleepingValue)
@@ -62,7 +62,7 @@ function setscreenSleeping(screensleepingValue)
 function getscreenSleeping()
 {
 	data = Rho.System.getProperty('screenSleeping');
-	$("#Rho_System_screenSleeping span.result").text($.toJSON(data));
+	$("#Rho_System_screenSleeping span.result").text(JSON.stringify(data));
 }
 
 function setkeyboardState(keyboardstatValue)
@@ -73,7 +73,7 @@ function setkeyboardState(keyboardstatValue)
 function getkeyboardState()
 {
 	data = Rho.System.getProperty('keyboardState');
-	$("#Rho_System_keyboardState span.result").text($.toJSON(data));
+	$("#Rho_System_keyboardState span.result").text(JSON.stringify(data));
 }
 
 function callapplicationInstall(applicationUrl)
@@ -142,7 +142,7 @@ function callsetProperty(propertyName, propertyValue)
 function callgetProperty(propertyName)
 {
 	data = Rho.System.getProperty(propertyName);
-	$("#Rho_System_setproperty span.result").text($.toJSON(data));
+	$("#Rho_System_setproperty span.result").text(JSON.stringify(data));
 }
 
 function callsetProperties(propertyName, propertyValue)
@@ -153,7 +153,7 @@ function callsetProperties(propertyName, propertyValue)
 function callgetProperties(propertyName)
 {
 	data = Rho.System.getProperties([propertyName]);
-	$("#Rho_System_getProperties span.result").text($.toJSON(data));
+	$("#Rho_System_getProperties span.result").text(JSON.stringify(data));
 }
 
 

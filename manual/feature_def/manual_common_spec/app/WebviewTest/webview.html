@@ -32,7 +32,7 @@
 
         function setDomElementText(id, string){
             var element = "#" + id + " span.result";
-            $(element).text($.toJSON(string));
+            $(element).text(JSON.stringify(string));
         };
         
         function tabbarSwitch( nTab ) {

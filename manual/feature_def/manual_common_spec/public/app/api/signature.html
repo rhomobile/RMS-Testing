@@ -66,7 +66,7 @@
                                     "bgColor" : 0x00ff00 
                                 }, 
                                 function (value) {
-                                    $("#TakeFullScreen span.result").text('callback done with ' + $.toJSON(value));
+                                    $("#TakeFullScreen span.result").text('callback done with ' + JSON.stringify(value));
                                 }
                                 );
                             }
