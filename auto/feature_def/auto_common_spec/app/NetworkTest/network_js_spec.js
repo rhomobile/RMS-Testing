@@ -280,7 +280,7 @@ describe('Network JS API', function() {
                 return callbackCalled;
             },
             "Callback never called",
-            5100
+            20000
         );
 
         runs(function() {
@@ -311,7 +311,7 @@ describe('Network JS API', function() {
                 return callbackCalled;
             },
             "Callback never called",
-            5100
+            20000
         );
 
         runs(function() {
@@ -342,7 +342,7 @@ describe('Network JS API', function() {
                 return callbackCalled;
             },
             "Callback never called",
-            5100
+            20000
         );
 
         runs(function() {
