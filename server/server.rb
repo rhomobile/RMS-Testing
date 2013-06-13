@@ -15,8 +15,8 @@ def localip
 end
 
 host = localip
-port = 81
-securePort = 82
+port = 8081
+securePort = 8082
 
 cert = OpenSSL::X509::Certificate.new File.read 'fd_testing.cert'
 pkey = OpenSSL::PKey::RSA.new File.read 'fd_testing.key'
