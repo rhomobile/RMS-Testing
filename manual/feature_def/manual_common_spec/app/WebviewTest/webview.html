@@ -149,7 +149,7 @@
 
 <div id="enablePageLoadingIndication_test" class="method_tests android wm">
     <div class="method_name">WebView.enablePageLoadingIndication</div>
-    <div class="method_desc">Show page loading navigation. Defines in config.xml: GUI\HourglassEnabled</div>
+    <div class="method_desc">Show page loading indication. On Windows Mobile/CE this property can be set only in config.xml: GUI\\HourglassEnabled. At Android  use 'disable_loading_indication' parameter in rhoconfig.txt to configure this value.</div>
 
     <div class="test_scenario">
         <div class="test_scenario_controls">
@@ -166,7 +166,7 @@
 
 <div id="enableWebPlugins_test" class="method_tests android">
     <div class="method_name">WebView.enableWebPlugins</div>
-    <div class="method_desc">Set enabling/disabling web plugins</div>
+    <div class="method_desc">Enable/disable web plugins. Use 'enable_web_plugins' parameter in rhoconfig.txt to configure this value.</div>
 
     <video id="video1"
            src="/public/media/nfc.mp4"
@@ -188,33 +188,11 @@
             <span> Get enableWebPlugins value</span>
         </div>
     </div>
-
-    <div class="test_scenario">
-        <div class="test_scenario_controls">
-            <button onClick='Rho.WebView.enableWebPlugins = true;'>enableWebPlugins = true</button>
-        </div>
-        <div class="test_scenario_desc">
-            <span class="test_scenario_number">VT301-015</span>
-            <span> Press to set enableWebPlugins to true</span>
-        </div>
-        <div style="clear: both"></div>
-    </div>
-
-    <div class="test_scenario">
-        <div class="test_scenario_controls">
-            <button onClick='Rho.WebView.enableWebPlugins = false;'>enableWebPlugins = false</button>
-        </div>
-        <div class="test_scenario_desc">
-            <span class="test_scenario_number">VT301-016</span>
-            <span> Press to set enableWebPlugins to false</span>
-        </div>
-        <div style="clear: both"></div>
-    </div>
 </div>
 
 <div id="enableZoom_test" class="method_tests android">
     <div class="method_name">WebView.enableZoom</div>
-    <div class="method_desc">Enable/disable WebView zoom.</div>
+    <div class="method_desc">Enable WebView zoom. Use 'enable_screen_zoom' parameter in rhoconfig.txt to configure this value.</div>
 
     <div class="test_scenario">
         <div class="test_scenario_controls">
@@ -226,28 +204,6 @@
             <span class="test_scenario_number"></span>
             <span> Get enableZoom value</span>
         </div>
-    </div>
-
-    <div class="test_scenario">
-        <div class="test_scenario_controls">
-            <button onClick='Rho.WebView.enableZoom = true;'>enableZoom = true</button>
-        </div>
-        <div class="test_scenario_desc">
-            <span class="test_scenario_number">VT301-018</span>
-            <span> Press to set enableZoom to true</span>
-        </div>
-        <div style="clear: both"></div>
-    </div>
-
-    <div class="test_scenario">
-        <div class="test_scenario_controls">
-            <button onClick='Rho.WebView.enableZoom = false;'>enableZoom = false</button>
-        </div>
-        <div class="test_scenario_desc">
-            <span class="test_scenario_number">VT301-019</span>
-            <span> Press to set enableZoom to false</span>
-        </div>
-        <div style="clear: both"></div>
     </div>
 </div>
 

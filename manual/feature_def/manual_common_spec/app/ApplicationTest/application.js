@@ -227,8 +227,6 @@ Rho.Application.invalidSecurityTokenStartPath='/app/loading.html';
 
 function invalidSecurityGoogle(){
 Rho.Application.invalidSecurityTokenStartPath='http://www.google.com';	
-var data = Rho.Application.invalidSecurityTokenStartPath;
-$("#Rho_Application_securityToken span.result").text(JSON.stringify(data));
 }
 
 function invalidSecurityNull(){
@@ -241,6 +239,11 @@ Rho.Application.invalidSecurityTokenStartPath='idontexistatall';
 
 function invalidSecurityStartPage(){
 Rho.Application.invalidSecurityTokenStartPath='/public/app/index.html';	
+}
+
+function getInvalidSecurityTokenStartPath(){
+var data = Rho.Application.invalidSecurityTokenStartPath;
+$("#Rho_Application_securityToken span.result").text(JSON.stringify(data));
 }
 
 function securityTokenResult(){

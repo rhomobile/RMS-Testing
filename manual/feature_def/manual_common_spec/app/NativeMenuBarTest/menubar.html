@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Rho.Application</title>
+    <meta name="viewport" content="initial-scale=1.0, width=device-width"/>
+    <script src="/public/jquery/jquery-1.6.4.min.js" type="text/javascript"></script>
+    <script src="/public/jquery/jquery.json-2.3.min.js" type="text/javascript"></script>
+    <script type="text/javascript" charset="utf-8" src="/public/api/rhoapi-modules.js"></script>
+    <script type="text/javascript" src="/app/NativeMenuBarTest/menubar.js"></script>
+    <script type="text/javascript" src="/public/js/helpers.js"></script>
+	<script type="text/javascript" src="/public/jquery/jquery-1.6.4.js"></script>
+    <script type="text/javascript" src="/public/jquery/jquery.json-2.3.js"></script>
+	
+	
+</head>
+<body>
+
+<h1>Rho.NativeMenuBar</h1>
+
+<fieldset>
+	<legend>Rho.NativeMenubar.MAinMenu</legend>
+	<ul> Set the Native Menu bar and check whether all the actions are working, by clicking on the Label 
+	   <li><a href="javascript:void(0)" onclick ="menuTest();">Test Main menu with all actions</a></li>
+	   <li><a href="javascript:void(0)" onclick ="menuNullNames();">Test Main menu with Null Labels </a></li>
+	   <li><a href="javascript:void(0)" onclick ="menuNullActions();">Test Main menu with Null Actions for few labels</a></li>
+	   <li><a href="javascript:void(0)" onclick ="menuDisabled();">Test Main menu with disabled set to true for Log and Refresh</a></li>
+	   <li><a href="javascript:void(0)" onclick ="menuJavascriptCall();">Test Man menu with javascript method for Exit button "</a></li>
+	   	</ul>
+</fieldset>	
+<fieldset>
+	<legend>Main Button and MAinMenu </legend>
+	<ul> Check that only MAin button is created when it has action and mainMenu is created when its not assigned any action 
+	    <li><a href="javascript:void(0)" onclick ="menuAction();">Main button with action </a></li>
+	   <li><a href="javascript:void(0)" onclick ="menuNoAction();">MAin button Without ACtion </a></li>
+	  </ul>
+</fieldset>	
+<fieldset>
+	<legend>Extra Button and extraMenu </legend>
+	<ul> Check that only extrabutton is created when it has action and extraMenu is created when its not assigned any action ,applicable on WM only , click on left menu button after calling the method 
+	   <li><a href="javascript:void(0)" onclick ="extramenuTest();">Test extra menu with all actions</a></li>
+	   <li><a href="javascript:void(0)" onclick ="extramenuDisabled();">Test extra  menu with disabled set to true for Log and Refresh</a></li>
+	   <li><a href="javascript:void(0)" onclick ="extraMenuNoAction();">extra  button Without ACtion</a></li>
+	   <li><a href="javascript:void(0)" onclick ="extraMenuAction();">extra button with action </a></li>
+	  
+	</ul>
+</fieldset>	
+
+</body>
+</html>

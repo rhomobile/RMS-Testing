@@ -18,7 +18,7 @@ describe("System Module JS Test Starts Here", function() {
 
 		}
 
-		it("VT300-022 | call getProperty with httpProxyURI | 'http://wwwgate0.mot.com:1080'", function() {
+		it("VT300-022 | call getProperty with httpProxyURI (RhoSimpulator support it only on Windows)| 'http://wwwgate0.mot.com:1080'", function() {
 
 			Rho.System.httpProxyURI = 'http://wwwgate0.mot.com:1080';
 	    	var data =  Rho.System.getProperty('httpProxyURI');
@@ -28,7 +28,7 @@ describe("System Module JS Test Starts Here", function() {
 	
 		if(isWindowsDesktopPlatform()){
 		
-		it("VT300-033 | set lockWindowSize as True, call getProperty with lockWindowSize | true", function() {
+		it("VT300-033 | set lockWindowSize as True, call getProperty with lockWindowSize (RhoSimpulator support it only on Windows)| true", function() {
 			
 			Rho.System.lockWindowSize = true;
 		    var data =  Rho.System.getProperty('lockWindowSize');
@@ -36,7 +36,7 @@ describe("System Module JS Test Starts Here", function() {
 			
 		});
 
-		it("VT300-034 | set lockWindowSize as false, call getProperty with lockWindowSize | false", function() {
+		it("VT300-034 | set lockWindowSize as false, call getProperty with lockWindowSize (RhoSimpulator support it only on Windows)| false", function() {
 			
 			Rho.System.lockWindowSize = false;
 		    var data =  Rho.System.getProperty('lockWindowSize');
@@ -109,7 +109,7 @@ describe("System Module JS Test Starts Here", function() {
 
 			Rho.System.setRegistrySetting({hive:'HKLM', type:'Binary', key:'Software', setting:'Rho', value:'10101010', persistent: false});
 			var data = Rho.System.getRegistrySetting({hive:'HKLM', type:'Binary', key:'Software', setting:'Rho'});
-			expect(data).toEqual(10101010);
+			expect(data).toEqual("10101010");
 
 		});
 
@@ -117,17 +117,16 @@ describe("System Module JS Test Starts Here", function() {
 
 			Rho.System.setRegistrySetting({hive:'HKLM', type:'Binary', key:'Honey', setting:'RhoElementsTest', value:'1010101', persistent: false});
 			var data = Rho.System.getRegistrySetting({hive:'HKLM', type:'Binary', key:'Honey', setting:'RhoElementsTest'});
-			expect(data).toEqual(1010101);
+			expect(data).toEqual("1010101");
 
 		});
 
-		it("VT278-191 | call deleteRegistrySetting  with Persistence  check the return value | Test123", function() {
+            it("VT278-191 | call deleteRegistrySetting  with Persistence  check the return value | Test123", function () {
 
-			Rho.System.setRegistrySetting({hive:'HKCU', type:'String', key:'Software', setting:'RhoElementsTest', value:'Test123', persistent: true});
-			var data = Rho.System.getRegistrySetting({hive:'HKCU', type:'String', key:'Software', setting:'RhoElementsTest'});
-			expect(data).toEqual(true);
-
-		});
+                Rho.System.setRegistrySetting({hive: 'HKCU', type: 'String', key: 'Software', setting: 'RhoElementsTest', value: 'Test123', persistent: true});
+                var actual = Rho.System.deleteRegistrySetting({hive: 'HKCU', key: 'Software', setting: 'RhoElementsTest'});
+                expect(actual).toEqual(true);
+            });
 
 		it("VT278-192 | call deleteRegistrySetting with settings not exist  | false", function() {
 
@@ -136,15 +135,15 @@ describe("System Module JS Test Starts Here", function() {
 
 		});
 
-		it("VT278-193 | set and getRegistry setting with HKU and persistence as True and type MultiSZ | hello world", function() {
+            it("VT278-193 | set and getRegistry setting with HKU and persistence as True and type MultiSZ | hello world", function () {
 
-			Rho.System.deleteRegistrySetting({hive:'HKU', type:'MultiSZ', key:'Software', setting:'RhoElementsTest', value:'hello world', persistent: true});
-			var data = Rho.System.getRegistrySetting({hive:'HKU', key:'Software', setting:'RhoElementsTest'});
-			expect(data).toEqual('hello world');
+                Rho.System.setRegistrySetting({hive: 'HKU', type: 'MultiSZ', key: 'Software', setting: 'RhoElementsTest', value: "StringA\\nStringB\\nStringC", persistent: true});
+                var data = Rho.System.getRegistrySetting({hive: 'HKU', key: 'Software', setting: 'RhoElementsTest'});
+                expect(data).toEqual("StringA\\nStringB\\nStringC");
 
-		});
+            });
 
-		it("VT278-194 | set and getRegistry setting with HKCU and persistence as False and Type as String | Test123", function() {
+            it("VT278-194 | set and getRegistry setting with HKCU and persistence as False and Type as String | Test123", function() {
 
 			Rho.System.setRegistrySetting({hive:'HKCU', type:'String', key:'Software', setting:'Motorola', value:'Test123', persistent: false});
 			var data = Rho.System.getRegistrySetting({hive:'HKCU', key:'Software', setting:'Motorola'});

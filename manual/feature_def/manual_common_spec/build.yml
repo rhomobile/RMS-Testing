@@ -1,5 +1,5 @@
 app_type: rhoelements
-sdk:   ../../../../rhodes
+#sdk:   ../../../../rhodes
 sdkversion: 3.5.0
 name: manual_common_spec
 version: 1.0
@@ -21,7 +21,7 @@ wp:
 symbian:
   uid: '0xeeceaf9f'
 android:
-  version: 4.0.3
+  version: 4.2.2
   extensions: ["signature", "barcode"]
 wm:
   extensions: ["barcode"]
