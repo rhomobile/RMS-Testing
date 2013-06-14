@@ -24,7 +24,15 @@ unless $rho_root
 	$rho_root = `get-rhodes-info --rhodes-path`.chomp
 end
 
-puts "$rho_root is #{$rho_root}"
+puts "rhodes location: #{$rho_root}"
+puts "rhoconnect location:  #{$rhoconnect_root}"
+puts "rhoelements location: #{$rhoelements_root}"
+
+out = `adb devices`
+device_list = out.split("\n")[1]
+raise 'No attached android devices found' unless device_list
+$deviceId = device_list.split("\t")[0]
+puts "Attached device: #{$deviceId}"
 
 $spec_path = FileUtils.pwd
 $platform = 'android'
@@ -79,7 +87,7 @@ describe 'Rhoconnect push spec' do
     # FIXME:
     TEST_PKGS.each do |pkg|
       puts "Uninstalling package #{pkg} ..."
-      system "adb uninstall #{pkg}"
+      system "adb -s #{$deviceId} uninstall #{pkg}"
     end
     # puts "Uninstalling package com.rhomobile.rho_push_client ..."
     # system "adb uninstall com.rhomobile.rho_push_client"
@@ -110,7 +118,7 @@ describe 'Rhoconnect push spec' do
     $device_id.should_not == ''
   end
 
-  it 'should proceed push message at foreground' do
+  it 'should proceed push message at foregro"und' do
     sleep 5
     puts 'Sending push message...'
 

@@ -76,23 +76,24 @@ def run_apps(platform)
 	# AndroidTools.run_emulator( :wipe => true )
 
 	TEST_PKGS.each do |pkg|
-		out = `adb shell pm list packages #{pkg}`
+		out = `adb -s #{$deviceId} shell pm list packages #{pkg}`
 		unless out.empty?
-			puts "Uninstalling existing package #{pkg} ..."
-    	system "adb uninstall #{pkg}"
+			puts "Device #{$deviceId}: uninstalling package #{pkg} ..."
+    	system "adb  -s #{$deviceId} uninstall #{pkg}"
   	end
 	end
 
 	push_service_apk = File.join($rhoelements_root,'libs','rhoconnect-push-service','rhoconnect-push-service.apk')
 	puts "Install rhoconnect push service ..."
 	#	AndroidTools.load_app_and_run("-e", push_service_apk, "")
-	system("adb install -r #{push_service_apk}")
+	system("adb -s #{$deviceId} install -r #{push_service_apk}").should == true
 
 	puts 'Building and starting rhodes application ...'
 	FileUtils.chdir File.join($spec_path, 'rhoconnect_push_client')
-
 	# Patch rhodes 'build.yml' file: setup sdk and extentions properties
+	#
 	# TODO: remove comments!
+	#
 	File.open('./build.yml', 'w') do |bf|
 	  File.open('./build.yml.example', 'r') do |f|
 	    f.each do |line|
@@ -110,7 +111,26 @@ def run_apps(platform)
 	# Running on emulator ...
 	# system("rake run:#{$platform}").should == true
 	# Running on phone ...
-	system("rake run:#{$platform}:device").should == true
+	# system("rake run:#{$platform}:device").should == true
+
+	# Build app ...
+	# rake clean:android
+	# rake device:android:debug
+	puts "\nBuild rhodes app ..."
+	puts "rake device:#{$platform}:debug"
+	system("rake device:#{$platform}:debug").should == true
+
+	# Install on device
+	# adb -s 34010534 install -r /Users/alexb/workspace/RMS-Testing/auto/feature_def/push_spec/rhoconnect_push_client/bin/target/android/Rho_Push_Client-debug.apk
+	puts "\nInstall rhodes app on device ..."
+	puts "adb -s #{$deviceId} install -r #{Dir.pwd}/bin/target/android/Rho_Push_Client-debug.apk"
+	system("adb -s #{$deviceId} install -r #{Dir.pwd}/bin/target/android/Rho_Push_Client-debug.apk").should == true
+
+	# Starting it on device ...
+	# adb -s 34010534 shell am start -a android.intent.action.MAIN -n com.rhomobile.rho_push_client/com.rhomobile.rhodes.RhodesActivity
+	puts "\nStarting rhodes app on device ..."
+	puts "adb -s #{$deviceId} shell am start -a android.intent.action.MAIN -n com.rhomobile.rho_push_client/com.rhomobile.rhodes.RhodesActivity"
+	system("adb -s #{$deviceId} shell am start -a android.intent.action.MAIN -n com.rhomobile.rho_push_client/com.rhomobile.rhodes.RhodesActivity").should == true
 
 	puts "Running push specs ..."
 	puts
