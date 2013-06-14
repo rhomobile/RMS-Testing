@@ -41,11 +41,6 @@
 		osType			: 	["WINDOWS","ANDROID","APPLE","WP8","WINDOWS_DESKTOP"]
 	},
 	{
-		testName		:	"VT300-017 | call getProperty with hasSqlite | ",
-		propertyName	:	"hasSqlite",
-		osType			: 	["WINDOWS","ANDROID","APPLE","WP8","WINDOWS_DESKTOP"]
-	},
-	{
 		testName		:	"VT300-018 | call getProperty with hasTouchscreen | ",
 		propertyName	:	"hasTouchscreen",
 		osType			: 	["WINDOWS","ANDROID","APPLE","WP8","WINDOWS_DESKTOP"]
@@ -83,13 +78,6 @@
 		propertyName	:	"phoneId",
 		osType			: 	["WINDOWS","ANDROID","APPLE","WP8","WINDOWS_DESKTOP"]
 	},
-	
-	{
-		testName		:	"VT300-038 | call getProperty with phoneNumber | ",
-		propertyName	:	"phoneNumber",
-		osType			: 	["WINDOWS","ANDROID","APPLE","WP8","WINDOWS_DESKTOP"]
-	},
-	
 	{
 		testName		:	"VT300-039 | call getProperty with platform | ",
 		propertyName	:	"platform",

@@ -55,7 +55,7 @@ describe("System Module JS Test Starts Here", function() {
 	describe("System Module- getProperty Test Starts Here", function() {
 		for (var i=0;i<sys_get_property.length;i++){
 			(function(idx){
-				if(testApplicable(sys_get_property[idx]['osType'])){
+				if(isTestApplicable(sys_get_property[idx]['osType'])){
 				it(sys_get_property[idx]['testName'], function() {
 
 					var data = Rho.System.getProperty(sys_get_property[idx]['propertyName']);
@@ -82,7 +82,7 @@ describe("System Module JS Test Starts Here", function() {
 
 		for (var i=0;i<sys_get_properties.length;i++){
 			(function(idx){
-				if(testApplicable(sys_get_properties[idx]['osType'])){
+				if(isTestApplicable(sys_get_properties[idx]['osType'])){
 				it(sys_get_properties[idx]['testName'], function() {
 				
 					var propertyName = sys_get_properties[idx]['propertyName'];
