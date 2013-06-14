@@ -18,6 +18,8 @@ describe('Network JS API', function() {
     var srvHttpUploadTextFileUrlAuth = srvURL + "/upload_text_file_auth";
 
     var srvHttpsTestMethodsUrl = httpsSrvURL + "/test_methods";
+         
+    var waitTimeout = 20000;
     
     var callbackCount = 0;
          
@@ -170,7 +172,7 @@ describe('Network JS API', function() {
                 return callbackCount==1;
             },
             "Callback never called",
-            5100
+            waitTimeout
         );
             
         runs(function() {
@@ -280,7 +282,7 @@ describe('Network JS API', function() {
                 return callbackCalled;
             },
             "Callback never called",
-            20000
+            waitTimeout
         );
 
         runs(function() {
@@ -311,7 +313,7 @@ describe('Network JS API', function() {
                 return callbackCalled;
             },
             "Callback never called",
-            20000
+            waitTimeout
         );
 
         runs(function() {
@@ -342,7 +344,7 @@ describe('Network JS API', function() {
                 return callbackCalled;
             },
             "Callback never called",
-            20000
+            waitTimeout
         );
 
         runs(function() {
@@ -375,7 +377,7 @@ describe('Network JS API', function() {
                 return callbackCalled;
             },
             "Callback never called",
-            5100
+            waitTimeout
         );
 
         runs(function() {
@@ -414,7 +416,7 @@ describe('Network JS API', function() {
                 return callbackCalled;
             },
             "Callback never called",
-            5100
+            waitTimeout
         );
 
         runs(function() {
@@ -447,7 +449,7 @@ describe('Network JS API', function() {
                 return callbackCalled;
             },
             "Callback never called",
-            5100
+            waitTimeout
         );
 
         runs(function() {
@@ -515,7 +517,7 @@ describe('Network JS API', function() {
                 return callbackCalled;
             },
             "Callback never called",
-            5100
+            waitTimeout
         );
 
         runs(function() {
@@ -556,7 +558,7 @@ describe('Network JS API', function() {
                 return callbackCalled;
             },
             "Callback never called",
-            5100
+            waitTimeout
         );
 
         runs(function() {
@@ -597,7 +599,7 @@ describe('Network JS API', function() {
                 return callbackCalled;
             },
             "Callback never called",
-            5100
+            waitTimeout
         );
 
         runs(function() {
@@ -633,7 +635,7 @@ describe('Network JS API', function() {
                 return callbackCalled;
             },
             "Callback never called",
-            5100
+            waitTimeout
         );
 
         runs(function() {
@@ -668,7 +670,7 @@ describe('Network JS API', function() {
                 return callbackCalled;
             },
             "Callback never called",
-            5100
+            waitTimeout
         );
 
         runs(function() {
@@ -704,7 +706,7 @@ describe('Network JS API', function() {
                 return callbackCalled;
             },
             "Callback never called",
-            5100
+            waitTimeout
         );
 
         runs(function() {
@@ -741,7 +743,7 @@ describe('Network JS API', function() {
                 return callbackCalled;
             },
             "Callback never called",
-            5100
+            waitTimeout
         );
 
         runs(function() {
@@ -776,7 +778,7 @@ describe('Network JS API', function() {
                 return callbackCalled;
             },
             "Callback never called",
-            5100
+            waitTimeout
         );
 
         runs(function() {
@@ -815,7 +817,7 @@ describe('Network JS API', function() {
                 return callbackCalled;
             },
             "Callback never called",
-            5100
+            waitTimeout
         );
 
         runs(function() {
@@ -853,7 +855,7 @@ describe('Network JS API', function() {
                 return callbackCalled;
             },
             "Callback never called",
-            5100
+            waitTimeout
         );
 
         runs(function() {
@@ -905,7 +907,7 @@ describe('Network JS API', function() {
                 return callbackCalled;
             },
             "Callback never called",
-            5100
+            waitTimeout
         );
 
         runs(function() {
@@ -944,7 +946,7 @@ describe('Network JS API', function() {
                 return callbackCalled;
             },
             "Callback never called",
-            5100
+            waitTimeout
         );
 
         runs(function() {
