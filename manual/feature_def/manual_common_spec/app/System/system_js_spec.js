@@ -5,7 +5,7 @@ describe("System Module JS Test Starts Here", function() {
 		it("VT300-029 | call getProperty with locale | ", function() {
 	    
 			var data = Rho.System.getProperty('locale');
-	      	displayResult("VT300-029 | call getProperty with locale | ",$.toJSON(data));
+	      	displayResult("VT300-029 | call getProperty with locale | ",data);
 	        var testPassed = confirm("Do you see Correct Output?");
 			expect(testPassed).toEqual(true);
 		});
