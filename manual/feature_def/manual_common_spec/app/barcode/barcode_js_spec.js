@@ -116,7 +116,7 @@ describe("Barcode Test", function() {
 
 		runs(function()
 		{
-			objSCN.enable({'allDecoders':'true'},callbackenable);
+			objSCN.enable({'allDecoders':true},callbackenable);
 			setTimeout(function() {
 				enableFlag = true;
 			}, 8000);
@@ -320,7 +320,7 @@ describe("Barcode Test", function() {
 
 		runs(function()
 		{		
-			Rho.Barcode.scanTimeout = "7000";
+			Rho.Barcode.scanTimeout = 7000;
 			Rho.Barcode.picklistMode = "softwareReticle";
 			setTimeout(function() {
 				decodeFlag = true;
@@ -478,7 +478,7 @@ describe("Barcode Test", function() {
 
 		runs(function()
 		{		
-			Rho.Barcode.scantimeout = '12000';
+			Rho.Barcode.scantimeout = 12000;
 			Rho.Barcode.start();
 			setTimeout(function() {
 				decodeFlag = true;
@@ -966,7 +966,7 @@ describe("Barcode Test", function() {
 
 		runs(function()
 		{		
-			Rho.Barcode.decodeDuration = '5000';
+			Rho.Barcode.decodeDuration = 5000;
 			setTimeout(function() {
 				decodeFlag = true;
 			}, 15000);
@@ -1004,7 +1004,7 @@ describe("Barcode Test", function() {
 
 		runs(function()
 		{		
-			Rho.Barcode.decodeFrequency  = '65535';
+			Rho.Barcode.decodeFrequency  = 65535;
 			setTimeout(function() {
 				decodeFlag = true;
 			}, 15000);
@@ -1043,7 +1043,7 @@ describe("Barcode Test", function() {
 
 		runs(function()
 		{		
-			Rho.Barcode.decodeFrequency  = '0';
+			Rho.Barcode.decodeFrequency  = 0;
 			setTimeout(function() {
 				decodeFlag = true;
 			}, 15000);
@@ -1081,7 +1081,7 @@ describe("Barcode Test", function() {
 
 		runs(function()
 		{		
-			Rho.Barcode.invalidDecodeFrequency = '65535';
+			Rho.Barcode.invalidDecodeFrequency = 65535;
 			setTimeout(function() {
 				decodeFlag = true;
 			}, 15000);
@@ -1120,7 +1120,7 @@ describe("Barcode Test", function() {
 
 		runs(function()
 		{		
-			Rho.Barcode.invalidDecodeFrequency  = '0';
+			Rho.Barcode.invalidDecodeFrequency  = 0;
 			setTimeout(function() {
 				decodeFlag = true;
 			}, 15000);
@@ -1196,7 +1196,7 @@ describe("Barcode Test", function() {
 
 		runs(function()
 		{		
-			Rho.Barcode.decodeVolume = '5';
+			Rho.Barcode.decodeVolume = 5;
 			setTimeout(function() {
 				decodeFlag = true;
 			}, 15000);
@@ -1234,7 +1234,7 @@ describe("Barcode Test", function() {
 
 		runs(function()
 		{		
-			Rho.Barcode.decodeVolume = '0';
+			Rho.Barcode.decodeVolume = 0;
 			setTimeout(function() {
 				decodeFlag = true;
 			}, 15000);
@@ -1272,7 +1272,7 @@ describe("Barcode Test", function() {
 
 		runs(function()
 		{		
-			Rho.Barcode.hapticFeedback = 'true';
+			Rho.Barcode.hapticFeedback = true;
 			setTimeout(function() {
 				decodeFlag = true;
 			}, 15000);
@@ -1310,7 +1310,7 @@ describe("Barcode Test", function() {
 
 		runs(function()
 		{		
-			Rho.Barcode.hapticFeedback = 'false';
+			Rho.Barcode.hapticFeedback = false;
 			setTimeout(function() {
 				decodeFlag = true;
 			}, 15000);
@@ -1347,7 +1347,7 @@ describe("Barcode Test", function() {
 
 		runs(function()
 		{		
-			Rho.Barcode.lowBatteryScan='true';
+			Rho.Barcode.lowBatteryScan= true;
 			setTimeout(function() {
 				decodeFlag = true;
 			}, 15000);
@@ -1384,7 +1384,7 @@ describe("Barcode Test", function() {
 
 		runs(function()
 		{		
-			Rho.Barcode.lowBatteryScan='false';
+			Rho.Barcode.lowBatteryScan=false;
 			setTimeout(function() {
 				decodeFlag = true;
 			}, 15000);
