@@ -14,6 +14,7 @@
     <script type="text/javascript" src="/public/js/helpers.js"></script>
 	
     <script type="text/javascript">
+
 	$(document).ready(function(){
 	// hide all tests
 	$(".method_tests").hide();
@@ -49,7 +50,7 @@
     </script>
 </head>
 <body>
-<h1>Rho.System</h1>
+<h3>Rho.System</h3>
 
 <div class="method_tests ios">
 	<div class="method_name">Rho.System.applicationIconBadge</div>
@@ -83,9 +84,9 @@
 	</div>
 </div>
 
-<div class="method_tests android ios win32 wm wp8">
+<div class="method_tests win32 wm">
 	<div class="method_name">Rho.System.httpProxyURI</div>
-	<div class="method_desc">HTTP Proxy URI : Proxy should set successfully to http://wwwgate0.mot.com:1080</div>
+	<div class="method_desc">HTTP Proxy URI : Proxy should set successfully to http://wwwgate0.mot.com:1080. (Rhosimulator supports it only for windows platform)</div>
 	<div class="test_scenario">
 		<div class="test_scenario_controls">
 			<a href="javascript:void(0)" onclick ="sethttpProxyURI();">Set httpProxyURI </a><br />
@@ -127,7 +128,7 @@
 
 <div class="method_tests win32">
 	<div class="method_name">Rho.System.lockWindowSize</div>
-	<div class="method_desc"> Lock Window Size: Lock/unlock the window size(Windows desktop only)</div>
+	<div class="method_desc"> Lock Window Size: Lock/unlock the window size(Windows desktop). Rhosimulator supports it only for windows platform.</div>
 	<div class="test_scenario">
 		<div class="test_scenario_controls">
 			<a href="javascript:void(0)" onclick ="setlockWindowSize(true);">Set lockWindowSize as true</a>
@@ -283,6 +284,8 @@
 	</div>
 </div>
 
+<!-- Install** methods family will implemented as another feature  -->
+<!--
 <div class="method_tests android ios win32 wm wp8">
 	<div class="method_name">Rho.System.applicationInstall</div>
 	<div class="method_desc">Application Install </div>
@@ -433,27 +436,7 @@
 		<span class="test_scenario_number">VT300-066 <br /></span>
 </div>
 
-<div class="method_tests android ios win32 wm wp8">
-	<div class="method_name">Rho.System.bringToFront</div>
-	<div class="method_desc">Bring application window to the top of the screen</div>
-	<div class="test_scenario">
-		<div class="test_scenario_controls">
-			<a href="javascript:void(0)" onclick ="callbringToFront();">Call bringToFront()</a>
-		</div>
-		<span class="test_scenario_number">VT300-067 <br /></span>
-	</div>
-</div>
-
-<div class="method_tests android ios win32 wm wp8">
-	<div class="method_name">Rho.System.deleteFolder</div>
-	<div class="method_desc">Delete Folder : Deletes the folder /public/testfiles/testfoldertodelete</div>
-	<div class="test_scenario">
-		<div class="test_scenario_controls">
-		<a href="javascript:void(0)" onclick ="calldeleteFolder('/app/public/testfiles/testfoldertodelete');">Call deleteFolder</a>
-	</div>
-	<span class="test_scenario_number">VT300-069 <br /></span>
-	</div>
-</div>
+-->
 
 <div class="method_tests android ios win32 wm wp8">
 	<div class="method_name">Rho.System.getStartParams</div>
@@ -466,6 +449,8 @@
 	</div>
 </div>
 
+<!-- Install** methods family will implemented as another feature  -->
+<!--
 <div class="method_tests android ios win32 wm wp8">
 	<div class="method_name">Rho.System.isApplicationInstalled</div>
 	<div class="method_desc">Is Application Installed </div>
@@ -521,6 +506,8 @@
 	</div>
 </div>
 
+-->
+
 <div class="method_tests android ios win32 wm wp8">
 	<div class="method_name">Rho.System.openUrl</div>
 	<div class="method_desc">OpenUrl :Open the application associated with the URL.</div>
@@ -549,7 +536,7 @@
 	</div>
 </div>
 
-<div class="method_tests android ios win32 wm wp8">
+<div class="method_tests ios">
 	<div class="method_name">Rho.System.setDoNotBackupAttribute</div>
 	<div class="method_desc">Set do not backup attribute for file ('/app/public/testfiles/donotbackup.txt') </div>
 	<div class="test_scenario">
@@ -623,7 +610,9 @@
 	</div>
 </div>
 
-<div class="method_tests android ios win32 wm wp8">
+
+<!-- Use **zip** methods family tests in auto tests systemRE1Spec.js -->
+<!-- <div class="method_tests android ios win32 wm wp8">
 	<div class="method_name">Rho.System.unzipFile and Rho.System.zipFile</div>
 	<div class="method_desc"> Zip and Unzip File : Zip location is /public/testfiles/</div>
 	<div class="test_scenario">
@@ -671,6 +660,8 @@
 		<span class="test_scenario_number">VT300-103 <br /></span>
 	</div>		
 </div>
+
+-->
 
 <div class="method_tests android ios win32 wm wp8">
 	<div class="method_name">Rho.System.setproperty</div>

@@ -5,7 +5,7 @@ describe("System Module JS Test Starts Here", function() {
 		it("VT300-029 | call getProperty with locale | ", function() {
 	    
 			var data = Rho.System.getProperty('locale');
-	      	displayResult("VT300-029 | call getProperty with locale | ",$.toJSON(data));
+	      	displayResult("VT300-029 | call getProperty with locale | ",data);
 	        var testPassed = confirm("Do you see Correct Output?");
 			expect(testPassed).toEqual(true);
 		});
@@ -13,7 +13,7 @@ describe("System Module JS Test Starts Here", function() {
 		it("VT300-070 | call getAllProperties() | ", function() {
 	
 	    	var data =  Rho.System.getAllProperties();
-			displayResult("VT300-070 | call getAllProperties() | ",$.toJSON(data));
+			displayResult("VT300-070 | call getAllProperties() | ",JSON.stringify(data));
 			var testPassed = confirm("Do you see Correct Output?");
 			expect(testPassed).toEqual(true);
 		});
@@ -74,7 +74,7 @@ describe("System Module JS Test Starts Here", function() {
 	
 		it("VT300-125 | call getproperties with country,deviceName, devicePushId, freeServerPort and sync callback | ", function() {
 			var data = Rho.System.getProperties(['country','deviceName','devicePushId','freeServerPort']);
-			displayResult("VT300-125 | call getproperties with country,deviceName, devicePushId, freeServerPort and sync callback | ",$.toJSON(data));
+			displayResult("VT300-125 | call getproperties with country,deviceName, devicePushId, freeServerPort and sync callback | ",JSON.stringify(data));
 			
 			var testPassed = confirm("Do you see Correct Output?");
 			expect(testPassed).toEqual(true);
@@ -91,7 +91,7 @@ describe("System Module JS Test Starts Here", function() {
 					var data = Rho.System.getProperties(objGetProperty);
 					
 					data = data[sys_get_properties[idx]['propertyName']];
-					displayResult(sys_get_properties[idx]['testName'],$.toJSON(data));
+					displayResult(sys_get_properties[idx]['testName'],JSON.stringify(data));
 					
 					var testPassed = confirm("Do you see Correct Output?");
 					expect(testPassed).toEqual(true);
@@ -107,7 +107,7 @@ describe("System Module JS Test Starts Here", function() {
 			runs(function(){
 			
 				Rho.System.getProperties(['country','deviceName','devicePushId','freeServerPort'],function(objData){
-					data = $.toJSON(objData);
+					data = JSON.stringify(objData);
 					}
 				);
 
@@ -131,7 +131,7 @@ describe("System Module JS Test Starts Here", function() {
 		it("VT300-127 | call getproperties with callback as async defined function | ", function() {
 			var data = '';
 			var flag = false;
-			var sysAsyncCallback = function (objData){data = $.toJSON(objData);}
+			var sysAsyncCallback = function (objData){data = JSON.stringify(objData);}
 
 			runs(function(){
 			

@@ -9,10 +9,10 @@ describe("Key State Test", function() {
 		/* ... Tear it down ... */
 	});
 
-	it("VT281-0850 | Keystate showStates without any property |", function() {
+	it("VT281-0850 | KeyState showStates without any property |", function() {
 		runs(function()
 		{
-			Rho.Keystate.showStates();
+			Rho.KeyState.showStates();
 			setTimeout(function() {
 				displayflag = true;
 			}, 10000);
@@ -31,11 +31,11 @@ describe("Key State Test", function() {
 		});
 	});
 
-	it("VT281-0851 | Keystate showStates with right to 50 |", function() {
+	it("VT281-0851 | KeyState showStates with right to 50 |", function() {
 		runs(function()
 		{
 
-			Rho.Keystate.showStates([{"right":50}]);
+			Rho.KeyState.showStates([{"right":50}]);
 			setTimeout(function() {
 				displayflag = true;
 			}, 10000);
@@ -54,11 +54,11 @@ describe("Key State Test", function() {
 		});
 	});
 
-	it("VT281-0854 | Keystate showStates with left to 70 |", function() {
+	it("VT281-0854 | KeyState showStates with left to 70 |", function() {
 		runs(function()
 		{
 
-			Rho.Keystate.showStates({"left":70})
+			Rho.KeyState.showStates({"left":70})
 			setTimeout(function() {
 				displayflag = true;
 			}, 10000);
@@ -77,11 +77,11 @@ describe("Key State Test", function() {
 		});
 	});
 
-	it("VT281-0857 | Keystate showStates with width to 100 |", function() {
+	it("VT281-0857 | KeyState showStates with width to 100 |", function() {
 		runs(function()
 		{
 
-			Rho.Keystate.showStates({"width":100})
+			Rho.KeyState.showStates({"width":100})
 			setTimeout(function() {
 				displayflag = true;
 			}, 10000);
@@ -100,11 +100,11 @@ describe("Key State Test", function() {
 		});
 	});
 
-	it("VT281-0860 | Keystate showStates with height to 100 |", function() {
+	it("VT281-0860 | KeyState showStates with height to 100 |", function() {
 		runs(function()
 		{
 
-			Rho.Keystate.showStates({"height":150})
+			Rho.KeyState.showStates({"height":150})
 			setTimeout(function() {
 				displayflag = true;
 			}, 10000);
@@ -123,11 +123,11 @@ describe("Key State Test", function() {
 		});
 	});
 
-	it("VT281-0863 | Keystate showStates with all properties |", function() {
+	it("VT281-0863 | KeyState showStates with all properties |", function() {
 		runs(function()
 		{
 
-			Rho.Keystate.showStates({'right':100,'left':150,'height':200,'width':250})
+			Rho.KeyState.showStates({'right':100,'left':150,'height':200,'width':250})
 			setTimeout(function() {
 				displayflag = true;
 			}, 10000);
@@ -150,8 +150,8 @@ describe("Key State Test", function() {
 		runs(function()
 		{
 
-			Rho.Keystate.showStates({'right':100,'left':150,'height':200,'width':250});
-			Rho.Keystate.hideStates();
+			Rho.KeyState.showStates({'right':100,'left':150,'height':200,'width':250});
+			Rho.KeyState.hideStates();
 			setTimeout(function() {
 				displayflag = true;
 			}, 10000);
@@ -184,7 +184,7 @@ describe("Key State Test", function() {
 		runs(function()
 		{
 
-			Rho.Keystate.showStates();
+			Rho.KeyState.showStates();
 			setTimeout(function() {
 				displayflag = true;
 			}, 10000);
@@ -210,7 +210,7 @@ describe("Key State Test", function() {
 		runs(function()
 		{
 
-			Rho.Keystate.showStates();
+			Rho.KeyState.showStates();
 			add('text');
 			text.focus();
 			setTimeout(function() {
@@ -235,7 +235,7 @@ describe("Key State Test", function() {
 		runs(function()
 		{
 
-			Rho.Keystate.showStates();
+			Rho.KeyState.showStates();
 			setTimeout(function() {
 				displayflag = true;
 			}, 10000);
@@ -258,7 +258,7 @@ describe("Key State Test", function() {
 		runs(function()
 		{
 
-			Rho.Keystate.showStates();
+			Rho.KeyState.showStates();
 			setTimeout(function() {
 				displayflag = true;
 			}, 10000);
@@ -281,7 +281,7 @@ describe("Key State Test", function() {
 		runs(function()
 		{
 
-			Rho.Keystate.showStates();
+			Rho.KeyState.showStates();
 			setTimeout(function() {
 				displayflag = true;
 			}, 10000);
