@@ -27,7 +27,6 @@ app_type: rhoelements
 version: 1.0
 vendor: rhomobile
 build: debug
-debug: 1
 bbver: 4.6
 applog: rholog.txt
 iphone:
@@ -44,7 +43,7 @@ wp:
 symbian:
   uid: '0xe1a1ef92'
 android:
-  version: 2.1
+  version: 4.2.2
   extensions: ["barcode", "screenorientation", "instrumentation"]
   capabilities:
   - native_browser
