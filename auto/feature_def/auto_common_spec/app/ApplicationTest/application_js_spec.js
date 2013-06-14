@@ -111,7 +111,7 @@ describe("Application JS API", function () {
 	    //TODO: implement spec for getRhoPlatformVersion with callback
 	
 	
-	    if(isWindowsMobileOrAndroidPlatform()){
+	    if(isWindowsMobilePlatform()){
 	        it("Bad link URI to navigate in browser", function () {
 	            Rho.Application.badLinkURI = 'badLink.html';
 	            expect(Rho.Application.badLinkURI).toEqual('badLink.html');
