@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>Rho.WebView</title>
-    <meta name="viewport" content="initial-scale=1.0, width=device-width"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.1, maximum-scale=10.0, user-scalable=yes"/>
 
     <link type="text/css" rel="stylesheet" href="/public/css/manual_styles.css">
 
@@ -32,7 +32,7 @@
 
         function setDomElementText(id, string){
             var element = "#" + id + " span.result";
-            $(element).text($.toJSON(string));
+            $(element).text(JSON.stringify(string));
         };
         
         function tabbarSwitch( nTab ) {
@@ -621,7 +621,7 @@
 
     <div class="test_scenario">
         <div class="test_scenario_controls">
-            <button onClick="Rho.Webview.navigate('http://www.google.com', 1)">Navigate(google, 1)</button>
+            <button onClick="Rho.WebView.navigate('http://www.google.com', 1)">Navigate(google, 1)</button>
             <button onClick="doAction('currentUrlOfTab1')">Current URL of tab with index 1</button>
         </div>
         <div class="test_scenario_desc">

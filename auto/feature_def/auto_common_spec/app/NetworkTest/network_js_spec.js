@@ -122,7 +122,8 @@ describe('Network JS API', function() {
             Rho.Network.stopDetectingConnection(null);
         });
     });
-    /*
+
+         /*
     it('VT293-0019 | detectConnection with exteranl profile disabled with pollinterval', function() {
        var flag = false;
         runs( function() {
@@ -174,7 +175,7 @@ describe('Network JS API', function() {
             
         runs(function() {
             expect(callbackCount).toEqual(1);
-            expect(failureMsg).toEqual("Attempted to resolve hostname to connect to but did not succeed, return value (8), last error (0)");
+            expect(failureMsg).toMatch("Attempted to resolve hostname to connect to but did not succeed");
         });
 
     });
@@ -279,7 +280,7 @@ describe('Network JS API', function() {
                 return callbackCalled;
             },
             "Callback never called",
-            5100
+            20000
         );
 
         runs(function() {
@@ -310,7 +311,7 @@ describe('Network JS API', function() {
                 return callbackCalled;
             },
             "Callback never called",
-            5100
+            20000
         );
 
         runs(function() {
@@ -341,7 +342,7 @@ describe('Network JS API', function() {
                 return callbackCalled;
             },
             "Callback never called",
-            5100
+            20000
         );
 
         runs(function() {
@@ -540,6 +541,7 @@ describe('Network JS API', function() {
                 Rho.RhoFile.deleteFile(fname);
             }
 
+            expect(Rho.RhoFile.exists(fname)).toEqual(false);
 
             downloadfileProps = {
                 url: srvHttpDownloadImageUrl,
@@ -579,6 +581,8 @@ describe('Network JS API', function() {
             if ( Rho.RhoFile.exists(fname) ) {
                 Rho.RhoFile.deleteFile(fname);
             }
+            
+            expect(Rho.RhoFile.exists(fname)).toEqual(false);
 
             downloadfileProps = {
                 url: srvHttpDownloadImageUrl,
@@ -825,6 +829,7 @@ describe('Network JS API', function() {
        var callbackCalled = false;
        var data = '';
        var status = '';
+       var fname = Rho.Application.publicFolder+"/images/myfile.txt";
 
        var upload_file_callback = function (args){
         status = args['status'];
@@ -836,7 +841,7 @@ describe('Network JS API', function() {
 
             var uploadfileProps = {
               url: srvHttpUploadTextFileUrl,
-              filename: Rho.Application.publicFolder+"/images/myfile.txt",
+              filename: fname,
               body: "uploading file",
               fileContentType: "text/plain"
             };
@@ -853,15 +858,17 @@ describe('Network JS API', function() {
 
         runs(function() {
             expect(status).toEqual('ok');
-            expect(data).toEqual('Hello All');
+            expect(data).toEqual(Rho.RhoFile.read(fname));
         });
     });
 
     it('VT293-0069 | uploadFile with synch callback event', function() {
+       
+       var fname = Rho.Application.publicFolder+"/images/myfile.txt";
 
         var uploadfileProps = {
           url: srvHttpUploadTextFileUrl,
-          filename: Rho.Application.publicFolder+"/images/myfile.txt",
+          filename: fname,
           body: "uploading file",
           fileContentType: "text/plain"
         };
@@ -869,19 +876,20 @@ describe('Network JS API', function() {
         var args = Rho.Network.uploadFile(uploadfileProps); 
 
         expect(args['status']).toEqual('ok');
-        expect(args['body']).toEqual('Hello All');
+        expect(args['body']).toEqual(Rho.RhoFile.read(fname));
     });
 
     it('VT293-0070 | uploadFile with anonymus event', function() {
        var data = '';
        var callbackCalled = false;
        var status = ''
+       var fname = Rho.Application.publicFolder+"/images/myfile.txt";
 
        runs( function() {
 
         var uploadfileProps = {
           url: srvHttpUploadTextFileUrl,
-          filename: Rho.Application.publicFolder+"/images/myfile.txt",
+          filename: fname,
           body: "uploading file",
           fileContentType: "text/plain"
         };
@@ -902,7 +910,7 @@ describe('Network JS API', function() {
 
         runs(function() {
             expect(status).toEqual('ok');
-            expect(data).toEqual('Hello All');
+            expect(data).toEqual(Rho.RhoFile.read(fname));
         });
     });
 
@@ -915,6 +923,8 @@ describe('Network JS API', function() {
         data = args['body'];
         callbackCalled = true;
        }
+       var fname = Rho.Application.publicFolder+"/images/myfile.txt";
+
        runs( function() {
 
         var uploadfileProps = {
@@ -922,7 +932,7 @@ describe('Network JS API', function() {
           authType: "basic",
           authUser: "admin",
           authPassword: "Motorola@123",
-          filename: Rho.Application.publicFolder+"/images/myfile.txt",
+          filename: fname,
           body: "uploading file",
           fileContentType: "image/png"
         };
@@ -939,7 +949,7 @@ describe('Network JS API', function() {
 
         runs(function() {
             expect(status).toEqual('ok');
-            expect(data).toEqual('Hello All');
+            expect(data).toEqual(Rho.RhoFile.read(fname));
         });
     });
 

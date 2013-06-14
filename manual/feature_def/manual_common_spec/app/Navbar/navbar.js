@@ -36,5 +36,5 @@ function callNavbarcreateinvalidaction()
 function callNavbarstarted()
 {
 	data = Rho.Navbar.started();
-	$("#Rho_Navbar_started span.result").text($.toJSON(data));
+	$("#Rho_Navbar_started span.result").text(JSON.stringify(data));
 }

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -20,7 +20,7 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{d5343df0-b0eb-0130-785e-406c8f3c4bb4}</ProjectGuid>
-    <RootNamespace>logCapture</RootNamespace>
+    <RootNamespace>genPropBag</RootNamespace>
     <DefaultLanguage>en-US</DefaultLanguage>
     <MinimumVisualStudioVersion>11.0</MinimumVisualStudioVersion>
   </PropertyGroup>
@@ -52,16 +52,16 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project=".\logCapture.props" />
+    <Import Project=".\genpropbag.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
-    <Import Project=".\logCapture.props" />
+    <Import Project=".\genpropbag.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project=".\logCapture.props" />
+    <Import Project=".\genpropbag.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
-    <Import Project=".\logCapture.props" />
+    <Import Project=".\genpropbag.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
@@ -146,18 +146,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\shared\generated\logcapture_api_init.cpp" />
-    <ClCompile Include="..\..\shared\generated\logcapture_js_api.cpp" />
-    <ClCompile Include="..\..\shared\generated\logcapture_ruby_api.c" />
-    <ClInclude Include="..\..\logCapture.xml" />
-    <ClCompile Include="..\..\shared\generated\cpp\logCaptureBase.cpp" />
-    <ClCompile Include="..\..\shared\generated\cpp\logcapture_js_wrap.cpp" />
-    <ClCompile Include="..\..\shared\generated\cpp\logcapture_ruby_wrap.cpp" />
-    <ClInclude Include="..\..\shared\generated\cpp\IlogCapture.h" />
-    <ClInclude Include="..\..\shared\generated\cpp\IlogCaptureBase.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="src\logCapture_impl.cpp" />
+    <ClCompile Include="..\..\shared\generated\genpropbag_api_init.cpp" />
+    <ClCompile Include="..\..\shared\generated\genpropbag_js_api.cpp" />
+    <ClCompile Include="..\..\shared\generated\genpropbag_ruby_api.c" />
+    <ClCompile Include="..\..\shared\GenPropBag_impl.cpp" />
+    <ClInclude Include="..\..\genpropbag.xml" />
+    <ClCompile Include="..\..\shared\generated\cpp\genpropbagBase.cpp" />
+    <ClCompile Include="..\..\shared\generated\cpp\genpropbag_js_wrap.cpp" />
+    <ClCompile Include="..\..\shared\generated\cpp\genpropbag_ruby_wrap.cpp" />
+    <ClInclude Include="..\..\shared\generated\cpp\Igenpropbag.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsPhone\v$(TargetPlatformVersion)\Microsoft.Cpp.WindowsPhone.$(TargetPlatformVersion).targets" />

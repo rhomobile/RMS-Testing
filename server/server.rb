@@ -58,10 +58,8 @@ $local_server.mount_proc '/download_image_auth' do |req,res|
 end
 
 $local_server.mount_proc '/upload_text_file' do |req,res|
-    puts "Upload request: #{req.inspect}"
-    #    filedata = req.query["filename"]
     res.status = 200
-    res.body = req.body#"initial request is: #{req.inspect}\nFile data is:\n#{filedata}"
+    res.body = req.query["blob"]
     res.content_length = res.body.length
 end
 
@@ -70,9 +68,8 @@ $local_server.mount_proc '/upload_text_file_auth' do |req,res|
         user == 'admin' && pass == 'Motorola@123'
     }
 
-    filedata = req.query["filename"]
     res.status = 200
-    res.body = "initial request is: #{req.inspect}\nFile data is:\n#{filedata}"
+    res.body = req.query["blob"]
     res.content_length = res.body.length
 end
 
@@ -92,6 +89,18 @@ $local_server.mount_proc '/test_methods' do |req,res|
         res.status = 503
         res.content_length = res.body.length
     end
+end
+
+lastLogData = ""
+
+$local_server.mount_proc '/client_log' do |req,res|
+    lastLogData = req.query["blob"]
+    res.status = 200
+end
+
+$local_server.mount_proc '/get_last_log' do |req,res|
+    res.body = lastLogData
+    res.status = 200
 end
 
 
