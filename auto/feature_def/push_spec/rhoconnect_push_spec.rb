@@ -33,6 +33,7 @@ device_list = out.split("\n")[1]
 raise 'No attached android devices found' unless device_list
 $deviceId = device_list.split("\t")[0]
 puts "Attached device: #{$deviceId}"
+puts
 
 $spec_path = FileUtils.pwd
 $platform = 'android'

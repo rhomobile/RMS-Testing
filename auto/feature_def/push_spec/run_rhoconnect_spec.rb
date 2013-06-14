@@ -13,7 +13,6 @@ def cleanup_apps
 	if File.directory?($tmp_path) and File.stat($tmp_path).nlink != 2
 		puts "Cleanup #{File.expand_path($tmp_path)} directory ..."
 		FileUtils.rm_r File.expand_path($tmp_path)
-		puts
 	end
 end
 
@@ -50,7 +49,7 @@ def run_apps(platform)
 
 	stop_apps
 
-	puts "generate app"
+	puts "Generating rhoconnect app ..."
 	res = RhoconnectHelper.generate_app($tmp_path, test_appname)
 	puts "bundle install"
 	Kernel.system("bundle", "install", :chdir => $server_path)
@@ -65,37 +64,18 @@ def run_apps(platform)
 		f.puts "PUSH_SERVER_HOST = '#{RhoconnectHelper.push_host}'"
 		f.puts "PUSH_SERVER_PORT = #{RhoconnectHelper.push_port}"
 	end
+
+	# Patch rhodes 'rhoconfig.txt' file
 	cfgfile = File.join($app_path, 'rhoconfig.txt')
 	cfg = File.read(cfgfile)
 	cfg.gsub!(/(rhoconnect_push_server.*)/, "rhoconnect_push_server = 'http://#{RhoconnectHelper.push_host}:#{RhoconnectHelper.push_port}'")
 	File.open(cfgfile, 'w') {|f| f.write cfg}
-
-	# TODO:
-	# puts "Configure android ..."
-	# Rake::Task["config:android:emulator"].invoke
-	# AndroidTools.run_emulator( :wipe => true )
-
-	TEST_PKGS.each do |pkg|
-		out = `adb -s #{$deviceId} shell pm list packages #{pkg}`
-		unless out.empty?
-			puts "Device #{$deviceId}: uninstalling package #{pkg} ..."
-    	system "adb  -s #{$deviceId} uninstall #{pkg}"
-  	end
-	end
-
-	push_service_apk = File.join($rhoelements_root,'libs','rhoconnect-push-service','rhoconnect-push-service.apk')
-	puts "Install rhoconnect push service ..."
-	#	AndroidTools.load_app_and_run("-e", push_service_apk, "")
-	system("adb -s #{$deviceId} install -r #{push_service_apk}").should == true
-
-	puts 'Building and starting rhodes application ...'
-	FileUtils.chdir File.join($spec_path, 'rhoconnect_push_client')
 	# Patch rhodes 'build.yml' file: setup sdk and extentions properties
+	# TODO: remove comments!!!
 	#
-	# TODO: remove comments!
-	#
-	File.open('./build.yml', 'w') do |bf|
-	  File.open('./build.yml.example', 'r') do |f|
+	push_client_path = File.join($spec_path, 'rhoconnect_push_client')
+	File.open(File.join(push_client_path, "build.yml"), 'w') do |bf|
+	  File.open(File.join(push_client_path, "build.yml.example"), 'r') do |f|
 	    f.each do |line|
 	      if line =~ /sdk: Path-to-Rhodes/
 	          bf.puts "# sdk: \"#{$rho_root}\"\n"
@@ -108,29 +88,53 @@ def run_apps(platform)
 	  end
 	end
 
-	# Running on emulator ...
-	# system("rake run:#{$platform}").should == true
-	# Running on phone ...
-	# system("rake run:#{$platform}:device").should == true
 
-	# Build app ...
-	# rake clean:android
-	# rake device:android:debug
-	puts "\nBuild rhodes app ..."
-	puts "rake device:#{$platform}:debug"
-	system("rake device:#{$platform}:debug").should == true
+	if $platform == 'android'
+		# puts "Configure android ..."
+		# Rake::Task["config:android:emulator"].invoke
+		# AndroidTools.run_emulator( :wipe => true )
 
-	# Install on device
-	# adb -s 34010534 install -r /Users/alexb/workspace/RMS-Testing/auto/feature_def/push_spec/rhoconnect_push_client/bin/target/android/Rho_Push_Client-debug.apk
-	puts "\nInstall rhodes app on device ..."
-	puts "adb -s #{$deviceId} install -r #{Dir.pwd}/bin/target/android/Rho_Push_Client-debug.apk"
-	system("adb -s #{$deviceId} install -r #{Dir.pwd}/bin/target/android/Rho_Push_Client-debug.apk").should == true
+		TEST_PKGS.each do |pkg|
+			out = `adb -s #{$deviceId} shell pm list packages #{pkg}`
+			unless out.empty?
+				puts "Device #{$deviceId}: uninstalling package #{pkg} ..."
+	    	system "adb  -s #{$deviceId} uninstall #{pkg}"
+	  	end
+		end
 
-	# Starting it on device ...
-	# adb -s 34010534 shell am start -a android.intent.action.MAIN -n com.rhomobile.rho_push_client/com.rhomobile.rhodes.RhodesActivity
-	puts "\nStarting rhodes app on device ..."
-	puts "adb -s #{$deviceId} shell am start -a android.intent.action.MAIN -n com.rhomobile.rho_push_client/com.rhomobile.rhodes.RhodesActivity"
-	system("adb -s #{$deviceId} shell am start -a android.intent.action.MAIN -n com.rhomobile.rho_push_client/com.rhomobile.rhodes.RhodesActivity").should == true
+		push_service_apk = File.join($rhoelements_root,'libs','rhoconnect-push-service','rhoconnect-push-service.apk')
+		puts "Install rhoconnect push service ..."
+		#	AndroidTools.load_app_and_run("-e", push_service_apk, "")
+		system("adb -s #{$deviceId} install -r #{push_service_apk}").should == true
+
+		FileUtils.chdir File.join($spec_path, 'rhoconnect_push_client')
+		# Running on emulator ...
+		# system("rake run:#{$platform}").should == true
+		# Running on phone ...
+		# system("rake run:#{$platform}:device").should == true
+
+		# rake clean:android
+		# rake device:android:debug
+		puts "\nBuilding rhodes app ..."
+		puts "rake device:#{$platform}:debug"
+		system("rake device:#{$platform}:debug").should == true
+
+		# adb -s 34010534 install -r /Users/alexb/workspace/RMS-Testing/auto/feature_def/push_spec/rhoconnect_push_client/bin/target/android/Rho_Push_Client-debug.apk
+		puts "\nInstalling rhodes app on device ..."
+		puts "adb -s #{$deviceId} install -r #{Dir.pwd}/bin/target/android/Rho_Push_Client-debug.apk"
+		system("adb -s #{$deviceId} install -r #{Dir.pwd}/bin/target/android/Rho_Push_Client-debug.apk").should == true
+
+		# adb -s 34010534 shell am start -a android.intent.action.MAIN -n com.rhomobile.rho_push_client/com.rhomobile.rhodes.RhodesActivity
+		puts "\nStarting rhodes app on device ..."
+		puts "adb -s #{$deviceId} shell am start -a android.intent.action.MAIN -n com.rhomobile.rho_push_client/com.rhomobile.rhodes.RhodesActivity"
+		system("adb -s #{$deviceId} shell am start -a android.intent.action.MAIN -n com.rhomobile.rho_push_client/com.rhomobile.rhodes.RhodesActivity").should == true
+
+	else
+		#
+		# TODO: windows mobile
+		#
+	end
+
 
 	puts "Running push specs ..."
 	puts
