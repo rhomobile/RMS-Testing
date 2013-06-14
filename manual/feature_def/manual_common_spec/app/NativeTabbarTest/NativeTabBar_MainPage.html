@@ -129,7 +129,7 @@
          function callcurrentTabIndex()
         {
         	data = Rho.NativeTabbar.currentTabIndex();
-        	$("#Rho_NativeTabbar_currentTabIndex span.result").text(JSON.stringify(data));
+        	$("#Rho_NativeTabbar_currentTabIndex span.result").text($.toJSON(data));
         }
         
 
@@ -522,7 +522,38 @@
 		</div>
 		<span class="test_scenario_number">VT350-026<br /></span>
 	</div>
-	
+	<div class="test_scenario">
+		<div class="test_scenario_controls">
+			<div id="Rho_NativeTabbar_currentTabIndex">
+				<a href="javascript:void(0)" onclick="Createtabbarnew(
+					[{'label':'log', 'action':'log','backgroundColor' : 0x7F7F7F},
+					{'label':'options', 'action':'options'},
+					{'label':'refresh', 'action':'refresh','backgroundColor' : 0x7F7F7F},
+					{'label':'sync', 'action':'sync','backgroundColor' : 0x7F7F7F},
+					{'label':'separator', 'action':'separator'}], 
+					{'verticalOrientation':false, 'hiddenTabs': false, 'createOnDemand' : true, 'placeTabsBottom':false}
+					);">
+					Create Tabbar with background color for the tab</a><br/><br/>
+			</div>
+		</div>
+		<span class="test_scenario_number">VT350-023<br /></span>
+	</div>
+	<div class="test_scenario">
+		<div class="test_scenario_controls">
+			<div id="Rho_NativeTabbar_currentTabIndex">
+				<a href="javascript:void(0)" onclick="Createtabbarnew(
+					[{'label':'log', 'action':'log','perishable' : true},
+					{'label':'options', 'action':'options'},
+					{'label':'refresh', 'action':'refresh','perishable' : true},
+					{'label':'sync', 'action':'sync'},
+					{'label':'separator', 'action':'separator'}], 
+					{'verticalOrientation':false, 'hiddenTabs': false, 'createOnDemand' : true, 'placeTabsBottom':false}
+					);">
+					Create Tabbar with perishable as true for the twotab</a><br/><br/>
+			</div>
+		</div>
+		<span class="test_scenario_number">VT350-023<br /></span>
+	</div>
 </div>	
 	
 <div class="method_tests">
@@ -544,7 +575,14 @@
 		</div>
 		
 	</div>	
+	<div class="test_scenario">
+		<div class="test_scenario_controls">	
+			<a href="javascript:void(0)" onclick="tabbarSwitch(2);">Switch to Tab 2</a><br/>
+		</div>
+		
+	</div>
 </div>		
+
 
 	
 
