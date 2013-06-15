@@ -227,4 +227,72 @@ describe("System module JS test starts here", function () {
         }
     });
 
+    describe("FileSystem tests", function () {
+
+        var tempDirectory = Rho.RhoFile.join(Rho.Application.userFolder, 'tempDirectory');
+        var target = Rho.RhoFile.join(tempDirectory, 'target.zip');
+        var sourceA = Rho.RhoFile.join(Rho.Application.publicFolder, 'do not remove me.txt');
+        var sourceB = Rho.RhoFile.join(Rho.Application.publicFolder, 'do not remove me too.txt');
+
+        beforeEach(function () {
+            Rho.RhoFile.makeDir(tempDirectory);
+        });
+
+        afterEach(function () {
+            Rho.RhoFile.deleteRecursive(tempDirectory);
+        });
+
+        it(" | should zip file without password", function () {
+            expect(Rho.RhoFile.exists(target)).toEqual(false);
+
+            Rho.System.zipFile(target, sourceA);
+            expect(Rho.RhoFile.exists(target)).toEqual(true);
+        });
+
+        it(" | it should zip file with password", function () {
+            expect(Rho.RhoFile.exists(target)).toEqual(false);
+
+            Rho.System.zipFile(target, sourceA, 'password');
+            expect(Rho.RhoFile.exists(target)).toEqual(true);
+        });
+
+        it("| it should unzip file without password", function () {
+            Rho.System.zipFile(target, sourceA);
+
+            Rho.System.unzipFile(target);
+            expect(Rho.RhoFile.exists(Rho.RhoFile.join(tempDirectory, 'do not remove me.txt'))).toEqual(true);
+        });
+
+        it("| it should unzip file with password", function () {
+            Rho.System.zipFile(target, sourceA, 'password');
+
+            Rho.System.unzipFile(target, 'password');
+            expect(Rho.RhoFile.exists(Rho.RhoFile.join(tempDirectory, 'do not remove me.txt'))).toEqual(true);
+        });
+
+        it("Test zipFiles method without password", function () {
+            expect(Rho.RhoFile.exists(target)).toEqual(false);
+
+            var sources = [];
+            sources[0] = sourceA;
+            sources[1] = sourceB;
+
+            Rho.System.zipFiles(target, tempDirectory, sources);
+            expect(Rho.RhoFile.exists(target)).toEqual(true);
+        });
+
+        it("Test zipFiles method with password", function () {
+            expect(Rho.RhoFile.exists(target)).toEqual(false);
+
+            var sources = [];
+            sources[0] = sourceA;
+            sources[1] = sourceB;
+
+            var result = Rho.System.zipFiles(target, tempDirectory, sources, 'password');
+            expect(result).toEqual(0);
+            expect(Rho.RhoFile.exists(target)).toEqual(true);
+        });
+    });
+
+
 });
