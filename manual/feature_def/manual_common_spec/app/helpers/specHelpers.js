@@ -104,7 +104,7 @@ function add(type) {
  
 }
 
-var testApplicable = function (arrOSTypes){
+function isTestApplicable (arrOSTypes){
     var platform = Rho.System.platform;
     return (jQuery.inArray(platform, arrOSTypes) == -1) ? false : true ;
 }

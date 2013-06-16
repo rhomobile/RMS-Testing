@@ -58,6 +58,7 @@ var writeIntoLog = function (desc, data){
 
 //Display Results on Device
 var displayResult = function (desc, data){
+	$('#myList').empty();
 	var node=document.createElement("LI");
 	var textnode =document.createTextNode(desc);
 	node.appendChild(textnode);
@@ -83,7 +84,27 @@ function getRandomName()
     return text;
 }
 
-var isTestApplicable = function (anArray){
+//Add Html Element Dynamically
+function add(type) {
+ 
+    //Create an input type dynamically.
+    var element = document.createElement("input");
+ 
+    //Assign different attributes to the element.
+    element.setAttribute("type", type);
+    element.setAttribute("value", type);
+    element.setAttribute("name", type);
+    element.setAttribute("id", type);
+ 
+ 
+    var foo = document.getElementById("fooBar");
+ 
+    //Append the element in page (in span).
+    foo.appendChild(element);
+ 
+}
+
+function isTestApplicable (arrOSTypes){
     var platform = Rho.System.platform;
-    return (anArray.indexOf(platform) == -1) ? false : true ;
+    return (jQuery.inArray(platform, arrOSTypes) == -1) ? false : true ;
 }
