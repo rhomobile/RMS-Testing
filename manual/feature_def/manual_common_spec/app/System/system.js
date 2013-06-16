@@ -148,7 +148,9 @@ function callgetProperty(propertyName)
 
 function callsetProperties(propertyName, propertyValue)
 {
-	Rho.System.setProperties({ propertyName:propertyValue });
+    var properties = {};
+    properties[propertyName] = propertyValue;
+	Rho.System.setProperties(properties);
 }
 
 function callgetProperties(propertyName)
