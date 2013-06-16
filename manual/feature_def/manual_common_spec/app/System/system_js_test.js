@@ -79,11 +79,6 @@
 		osType			: 	["WINDOWS","ANDROID","APPLE","WP8","WINDOWS_DESKTOP"]
 	},
 	{
-		testName		:	"VT300-039 | call getProperty with platform | ",
-		propertyName	:	"platform",
-		osType			: 	["WINDOWS","ANDROID","APPLE","WP8","WINDOWS_DESKTOP"]
-	},
-	{
 		testName		:	"VT300-040 | call getProperty with ppiX | ",
 		propertyName	:	"ppiX",
 		osType			: 	["WINDOWS","ANDROID","APPLE","WP8","WINDOWS_DESKTOP"]

@@ -9,7 +9,7 @@ describe("System Module JS Test Starts Here", function() {
 	        var testPassed = confirm("Do you see Correct Output?");
 			expect(testPassed).toEqual(true);
 		});
-		
+
 		it("VT300-070 | call getAllProperties() | ", function() {
 	
 	    	var data =  Rho.System.getAllProperties();
@@ -49,8 +49,8 @@ describe("System Module JS Test Starts Here", function() {
 	});
 	
 
-		
-		
+
+
 
 	describe("System Module- getProperty Test Starts Here", function() {
 		for (var i=0;i<sys_get_property.length;i++){

@@ -1,5 +1,12 @@
 describe("System module JS test starts here", function () {
 
+
+    it("It should return free server port", function(){
+        expect(Rho.System.freeServerPort).toBeBetween(1024, 65536);
+        }
+    );
+
+
     describe("System module - setting directly test starts here", function () {
 
         if (isApplePlatform()) {
@@ -44,6 +51,11 @@ describe("System module JS test starts here", function () {
 
         }
 
+        it("VT300-039 | should return platform | ", function() {
+            var possiblePlatforms = ["ANDROID", "APPLE", "WINDOWS", "WINDOWS_DESKTOP", "WP8"];
+            expect(possiblePlatforms).toContain(Rho.System.platform);
+        });
+
         if (isAndroidOrApplePlatform()) {
 
             it("VT300-046 | set screenAutoRotate as false, call getProperty with screenAutoRotate | false", function () {
@@ -78,6 +90,24 @@ describe("System module JS test starts here", function () {
             });
         }
 
+
+        (function () {
+            var allProperties = Rho.System.getAllProperties();
+            delete allProperties.freeServerPort;
+            delete allProperties.free_Server_Port;
+
+            for (var propertyName in allProperties) {
+                if (allProperties.hasOwnProperty(propertyName)) {
+                    var testName = "VT300-070 | Value of " + propertyName + " must be equal at getAllProperties and getProperty";
+                    it(testName, function () {
+                        expect(Rho.System.getProperty(propertyName)).toEqual(allProperties[propertyName]);
+                    })
+                }
+            }
+
+        })();
+
+
         if (isWindowsMobileOrWindowsDesktopPlatform()) {
 
             it("VT278-187 | call getRegistrySetting with hive as HKLM type as MULTISZ subkey as Software setting as Rhoelements value as hello world , call setRegistrySetting with hive, subkey and setting | hello world", function () {
@@ -96,13 +126,6 @@ describe("System module JS test starts here", function () {
 
             });
 
-            it("VT278-190 | call setRegistrySetting with invalid key and check the ret value | 1010101", function () {
-
-                Rho.System.setRegistrySetting({hive: 'HKLM', type: 'Binary', key: 'Honey', setting: 'RhoElementsTest', value: '1010101', persistent: false});
-                var data = Rho.System.getRegistrySetting({hive: 'HKLM', type: 'Binary', key: 'Honey', setting: 'RhoElementsTest'});
-                expect(data).toEqual("1010101");
-
-            });
 
             it("VT278-191 | call deleteRegistrySetting  with Persistence  check the return value | Test123", function () {
 
