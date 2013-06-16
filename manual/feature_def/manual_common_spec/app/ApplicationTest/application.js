@@ -168,7 +168,7 @@ function menuCallback(){
 
 function menuTest() {
 Rho.Application.nativeMenu = [
-{ 'Home': 'refresh'},{'seperator': 'home'},{'Options': 'exit'},{'Log': 'sync'},{'Exit': 'exit'},{'Refresh': 'options'}, {'Callback': menuCallback}
+{ 'Home': 'Home'},{'separator': ''},{'Options': 'options'},{'Log': 'log'},{'Exit': 'exit'},{'Refresh': 'refresh'}, {'Callback': menuCallback}
  ];
 }
 
