@@ -108,7 +108,7 @@ describe("System module JS test starts here", function () {
         })();
 
 
-        if (isWindowsMobileOrWindowsDesktopPlatform()) {
+        if (isWindowsMobilePlatform()) {
 
             it("VT278-187 | call getRegistrySetting with hive as HKLM type as MULTISZ subkey as Software setting as Rhoelements value as hello world , call setRegistrySetting with hive, subkey and setting | hello world", function () {
 
