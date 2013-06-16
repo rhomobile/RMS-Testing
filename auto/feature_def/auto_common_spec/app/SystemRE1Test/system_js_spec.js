@@ -276,7 +276,12 @@ describe("System module JS test starts here", function () {
             Rho.System.zipFile(target, sourceA, 'password');
 
             Rho.System.unzipFile(target);
-            expect(Rho.RhoFile.exists(Rho.RhoFile.join(tempDirectory, 'do not remove me.txt'))).toEqual(false);
+            
+            expect(Rho.RhoFile.exists(Rho.RhoFile.join(tempDirectory, 'do not remove me.txt'))).toEqual(true);
+            
+            file = new Rho.RhoFile( Rho.RhoFile.join(tempDirectory, 'do not remove me.txt'), Rho.RhoFile.OPEN_FOR_READ );
+            expect( file.size() ).toEqual(0);
+            file.close();            
         });
 
 
