@@ -33,7 +33,8 @@ function setlockWindowSize(lockwindowsizeValue)
 
 function getlockWindowSize()
 {
-	data = Rho.System.getProperty('lockWindowSize');
+	//data = Rho.System.getProperty('lockWindowSize');
+	data = Rho.System.lockWindowSize;
 	$("#Rho_System_lockWindowSize span.result").text(JSON.stringify(data));
 }
 

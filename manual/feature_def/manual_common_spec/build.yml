@@ -31,4 +31,6 @@ paths:
   - ../../../../Motorola-Extensions/build/ci/extensions
 #  - ../../../../Motorola-Extensions/lib/commonAPI
 
+#security_token: "123"
+
 
