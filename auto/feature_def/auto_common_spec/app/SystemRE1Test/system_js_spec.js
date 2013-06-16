@@ -278,10 +278,7 @@ describe("System module JS test starts here", function () {
             Rho.System.unzipFile(target);
             
             expect(Rho.RhoFile.exists(Rho.RhoFile.join(tempDirectory, 'do not remove me.txt'))).toEqual(true);
-            
-            file = new Rho.RhoFile( Rho.RhoFile.join(tempDirectory, 'do not remove me.txt'), Rho.RhoFile.OPEN_FOR_READ );
-            expect( file.size() ).toEqual(0);
-            file.close();            
+            expect( Rho.RhoFile.getFileSize(Rho.RhoFile.join(tempDirectory, 'do not remove me.txt')) ).toEqual(0);
         });
 
 
@@ -298,11 +295,14 @@ describe("System module JS test starts here", function () {
             var sources = [];
             sources[0] = sourceA;
             sources[1] = sourceB;
-            Rho.System.zipFiles(target, tempDirectory, sources, 'password');
+            Rho.System.zipFiles(target, Rho.RhoFile.dirname(sources[0]), sources, 'password');
 
             Rho.System.unzipFile(target, 'password');
             expect(Rho.RhoFile.exists(Rho.RhoFile.join(tempDirectory, 'do not remove me.txt'))).toEqual(true);
+            expect( Rho.RhoFile.getFileSize(Rho.RhoFile.join(tempDirectory, 'do not remove me.txt')) ).toBeGreaterThan(0);
+
             expect(Rho.RhoFile.exists(Rho.RhoFile.join(tempDirectory, 'do not remove me too.txt'))).toEqual(true);
+            expect( Rho.RhoFile.getFileSize(Rho.RhoFile.join(tempDirectory, 'do not remove me too.txt')) ).toBeGreaterThan(0);
         });
 
         it("VT300-100 | it should zip file with password", function () {
@@ -322,6 +322,7 @@ describe("System module JS test starts here", function () {
             var result = Rho.System.zipFiles(target, tempDirectory, sources, 'password');
             expect(Rho.RhoFile.exists(target)).toEqual(true);
         });
+        
     });
 
 
