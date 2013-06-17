@@ -38,6 +38,7 @@
 
 	<!-- include spec files here... -->
 	<script type="text/javascript" src="barcode_js_spec.js"></script>
+    <script type="text/javascript" src="barcode_js_test.js"></script>
 
 	<script type="text/javascript">
 
@@ -79,15 +80,16 @@
   <textarea rows="2" cols="10" tabindex="2">
   </textarea>
 </div>
-<div id="detailsdiv"></div>
-<br/><br/>
-<div id="test">
-<ul id="myList">
-</ul>
-<ul id="myList2">
-</ul>
-</div>
-<br/><br/><br/><br/>
-<span id="fooBar">&nbsp;</span>
+    <h1>Barcode Manual FD Tests</h1>
+    <P>
+    <b>Test Running: </b><div id="instruction"></div>
+    <P>
+    <b>Expected Result: </b><div id="expResult"></div>
+    <P>
+    <b>Decoded Data: </b><div id="clbkData"></div>
+    <P>    
+    <input type="button" value="Test Passed" onclick="testPassed()" />
+    <input type="button" value="Test Failed" onclick="testFailed()" />
+    <div id="actResult" style="display:none">init</div>
 </body>
 </html>
