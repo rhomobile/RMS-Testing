@@ -1,10 +1,37 @@
 <!DOCTYPE html>
 <html>
 <head>
+
+
+
     <script type="text/javascript" charset="utf-8" src="/public/api/rhoapi-modules.js"></script>
     <script type="text/javascript" charset="utf-8" src="/public/js/server_url.js"></script>
 
+    <script type="text/javascript" src="/public/jquery/jquery-1.6.4.js"></script>
+
+
     <script type="text/javascript">
+
+        $(document).ready(function () {
+            var currentPlatform = Rho.System.platform;
+            //Disable tests not suitable for current platform
+            $("option[platform]").each(function (idx, element) {
+                var testPlatforms = $(element).attr("platform").split(",");
+                for (var i = 0; i < testPlatforms.length; i++) {
+                    testPlatforms[i] = (testPlatforms[i]).trim()
+                }
+                if (testPlatforms.indexOf(currentPlatform) == -1) {
+                    $(element).attr("disabled", "disabled");
+                }
+            })
+        })
+    </script>
+
+    <script type="text/javascript">
+
+
+
+
 var selected_Module="";
         
         function describe() {
@@ -475,31 +502,33 @@ function detect_connection_notify_callback(params) {
 Select Test To Run &nbsp;&nbsp;
 <select name="myChoice" id="myChoice" onchange="describe()" onselect="describe()">
 <OPTION value="Select option" >VT-ID</OPTION>
-<OPTION value="VT293-0001">VT293-0001</OPTION> 
-<OPTION value="VT293-0002">VT293-0002</OPTION> 
+<OPTION value="VT293-0001">VT293-0001</OPTION>
+<OPTION value="VT293-0002">VT293-0002</OPTION>
 <!-- <OPTION value="VT293-0003">VT293-0003</OPTION> -->
-<OPTION value="VT293-0004">VT293-0004</OPTION> 
-<OPTION value="VT293-0005">VT293-0005</OPTION> 
-<OPTION value="VT293-0007">VT293-0007</OPTION>
-<OPTION value="VT293-0008">VT293-0008</OPTION> 
-<OPTION value="VT293-0009">VT293-0009</OPTION> 
-<OPTION value="VT293-0010">VT293-0010</OPTION> 
-<OPTION value="VT293-0011">VT293-0011</OPTION> 
+<OPTION value="VT293-0004">VT293-0004</OPTION>
+<OPTION value="VT293-0005">VT293-0005</OPTION>
+<OPTION platform = "WM" value="VT293-0007">VT293-0007</OPTION>
+<OPTION platform = "WM" value="VT293-0008">VT293-0008</OPTION>
+<OPTION platform = "WM" value="VT293-0009">VT293-0009</OPTION>
+<OPTION platform = "WM" value="VT293-0010">VT293-0010</OPTION>
+<OPTION platform = "WM" value="VT293-0011">VT293-0011</OPTION>
 <OPTION value="VT293-0017">VT293-0017</OPTION>
-<OPTION value="VT293-0023">VT293-0023</OPTION> 
-<OPTION value="VT293-0024">VT293-0024</OPTION> 
+<OPTION value="VT293-0023">VT293-0023</OPTION>
+<OPTION value="VT293-0024">VT293-0024</OPTION>
 <OPTION value="VT293-0025">VT293-0025</OPTION>
-<OPTION value="VT293-0026">VT293-0026</OPTION> 
-<OPTION value="VT293-0027">VT293-0027</OPTION> 
-<OPTION value="VT293-0028">VT293-0028</OPTION> 
-<OPTION value="VT293-0029">VT293-0029</OPTION> 
-<OPTION value="VT293-0030">VT293-0030</OPTION> 
-<OPTION value="VT293-0031">VT293-0031</OPTION> 
-<OPTION value="VT293-0032">VT293-0032</OPTION> 
-<OPTION value="VT293-0033">VT293-0033</OPTION> 
-<OPTION value="VT293-0034">VT293-0034</OPTION> 
-<OPTION value="VT293-0035">VT293-0035</OPTION>
-<OPTION value="VT293-0036">VT293-0036</OPTION> 
+<OPTION value="VT293-0026">VT293-0026</OPTION>
+<OPTION value="VT293-0027">VT293-0027</OPTION>
+<OPTION value="VT293-0028">VT293-0028</OPTION>
+<OPTION value="VT293-0029">VT293-0029</OPTION>
+<OPTION value="VT293-0030">VT293-0030</OPTION>
+<OPTION value="VT293-0031">VT293-0031</OPTION>
+<OPTION value="VT293-0032">VT293-0032</OPTION>
+<OPTION value="VT293-0033">VT293-0033</OPTION>
+<OPTION value="VT293-0034">VT293-0034</OPTION>
+    <!--
+<OPTION platform = "" value="VT293-0035">VT293-0035</OPTION>
+<OPTION platform = "" value="VT293-0036">VT293-0036</OPTION>
+     -->
 </select>
     
 <P><input type="button" onclick="getmodulename();" value="Run This Test"/></P>
@@ -513,7 +542,7 @@ Select Test To Run &nbsp;&nbsp;
     <div id="desc"></div>
     <h3>Expected result:</h3>
     <div id="expected"></div>
-    <h3>Actual result:</h4>
+    <h3>Actual result:</h3>
     <div id="actual"></div>
     <h4>Status:</h4>
     <div id="info"></div>

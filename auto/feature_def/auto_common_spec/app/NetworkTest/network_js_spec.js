@@ -530,7 +530,7 @@ describe('Network JS API', function() {
        var flag = false;
        var callbackCalled = false;
        var status = '';
-       var fname = Rho.Application.publicFolder+"/images/network_0049.jpg";
+       var fname = Rho.RhoFile.join(Rho.Application.userFolder,"/images/network_0049.jpg");
 
        var download_file_callback = function (args){
             status = args['status'];
@@ -571,7 +571,7 @@ describe('Network JS API', function() {
        var flag = false;
        var callbackCalled = false;
        var status = '';
-       var fname = Rho.Application.publicFolder+"/images/network_0049.jpg";
+       var fname = Rho.RhoFile.join(Rho.Application.userFolder,"/images/network_0049.jpg");
 
        var download_file_callback = function (args){
             status = args['status'];
@@ -623,7 +623,7 @@ describe('Network JS API', function() {
 
             downloadfileProps = {
                 url: srvHttpDownloadImageUrl,
-                filename: Rho.Application.publicFolder+"/images/network_0049.jpg",
+                filename: Rho.RhoFile.join(Rho.Application.userFolder,"/images/network_0049.jpg"),
                 overwriteFile: true
             };
 
@@ -658,7 +658,7 @@ describe('Network JS API', function() {
 
             downloadfileProps = {
                 url: srvHttpDownloadImageUrl,
-                filename: Rho.Application.publicFolder+"/images/network_0049.jpg",
+                filename: Rho.RhoFile.join(Rho.Application.userFolder,"/images/network_0049.jpg"),
                 overwriteFile: true
             };
 
@@ -693,7 +693,7 @@ describe('Network JS API', function() {
 
             downloadfileProps = {
                 url: srvHttpDownloadImageUrl,
-                filename: Rho.Application.publicFolder+"/images/newNetwork/network_0053.jpg",
+                filename: Rho.RhoFile.join(Rho.Application.userFolder,"/images/newNetwork/network_0053.jpg"),
                 overwriteFile: true,
                 createFolders: false
             };
@@ -730,7 +730,7 @@ describe('Network JS API', function() {
 
             downloadfileProps = {
                 url: srvHttpDownloadImageUrl,
-                filename: Rho.Application.publicFolder+"/images/newNetwork54/network_0054.jpg",
+                filename: Rho.RhoFile.join(Rho.Application.userFolder,"/images/newNetwork54/network_0054.jpg"),
                 overwriteFile: true,
                 createFolders: true
             };
@@ -762,7 +762,7 @@ describe('Network JS API', function() {
 
             downloadfileProps = {
                 url: srvHttpDownloadImageUrl,
-                filename: Rho.Application.publicFolder+"/images/newNetwork54/network_0055.jpg",
+                filename: Rho.RhoFile.join(Rho.Application.userFolder,"/images/newNetwork54/network_0055.jpg"),
                 overwriteFile: true,
                 createFolders: true
             };
@@ -804,7 +804,7 @@ describe('Network JS API', function() {
                 authType: "basic",
                 authUser: "admin",
                 authPassword: "admin",
-                filename: Rho.Application.publicFolder+"/images/network/network1.jpg",
+                filename: Rho.RhoFile.join(Rho.Application.userFolder,"/images/network/network1.jpg"),
                 overwriteFile: true,
                 createFolders: true
             };
@@ -831,7 +831,7 @@ describe('Network JS API', function() {
        var callbackCalled = false;
        var data = '';
        var status = '';
-       var fname = Rho.Application.publicFolder+"/images/myfile.txt";
+       var fname = Rho.RhoFile.join(Rho.Application.publicFolder,"/images/myfile.txt");
 
        var upload_file_callback = function (args){
         status = args['status'];
@@ -866,7 +866,7 @@ describe('Network JS API', function() {
 
     it('VT293-0069 | uploadFile with synch callback event', function() {
        
-       var fname = Rho.Application.publicFolder+"/images/myfile.txt";
+       var fname = Rho.RhoFile.join(Rho.Application.publicFolder,"/images/myfile.txt");
 
         var uploadfileProps = {
           url: srvHttpUploadTextFileUrl,
@@ -885,7 +885,7 @@ describe('Network JS API', function() {
        var data = '';
        var callbackCalled = false;
        var status = ''
-       var fname = Rho.Application.publicFolder+"/images/myfile.txt";
+       var fname = Rho.RhoFile.join(Rho.Application.publicFolder,"/images/myfile.txt");
 
        runs( function() {
 
@@ -925,7 +925,7 @@ describe('Network JS API', function() {
         data = args['body'];
         callbackCalled = true;
        }
-       var fname = Rho.Application.publicFolder+"/images/myfile.txt";
+       var fname = Rho.RhoFile.join(Rho.Application.publicFolder,"/images/myfile.txt");
 
        runs( function() {
 
@@ -961,7 +961,7 @@ describe('Network JS API', function() {
             url: srvHttpDownloadImageUrl,
             overwriteFile: true,
             createFolders: true,
-            filename: Rho.Application.publicFolder+"/images/network.jpg"
+            filename: Rho.RhoFile.join(Rho.Application.userFolder,"/images/network.jpg")
         };
 
         Rho.Network.downloadFile(downloadfileProps);

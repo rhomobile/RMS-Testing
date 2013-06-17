@@ -110,14 +110,14 @@
             <button class="getValue" onClick='setDomElementText("activeTab_test", Rho.WebView.activeTab);'> get activeTab</button>
             <br/>
 	          <a href="javascript:void(0)" onclick="Createtabbarnew(
-					[{'label':'Native Tabbar', 'action':'/app/WebviewTest/webview.html', 'icon':'/public/images/bar/gears.png'},
+					[{'label':'Native Tabbar', 'action':'/app/WebviewTest/webview.html', 'icon':'/public/images/bar/gears.png', 'useCurrentViewForTab':true},
 					{'label':'Main page', 'action':'/app/WebviewTest/webview.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':false},
 					{'label':'Page1', 'action':'/app/WebviewTest/webview.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true},
 					{'label':'Page2', 'action':'/app/WebviewTest/webview.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true},
 					{'label':'Page3', 'action':'/app/WebviewTest/webview.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':false},
 					{'label':'Page4', 'action':'/app/WebviewTest/webview.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':false}
 					], 
-					{'verticalOrientation':false, 'hiddenTabs': false, 'createOnDemand' : false, 'placeTabsBottom':false}
+					{'verticalOrientation':false, 'hiddenTabs': false, 'createOnInit' : true, 'placeTabsBottom':false}
 					);">
 					 NativeTabbar.create </a><br />
 				<a href="javascript:void(0)" onclick="removetabbar();">Remove the Tabbar </a><br/>
@@ -164,6 +164,8 @@
     </div>
 </div>
 
+<!--
+
 <div id="enableWebPlugins_test" class="method_tests android">
     <div class="method_name">WebView.enableWebPlugins</div>
     <div class="method_desc">Enable/disable web plugins. Use 'enable_web_plugins' parameter in rhoconfig.txt to configure this value.</div>
@@ -189,6 +191,8 @@
         </div>
     </div>
 </div>
+
+-->
 
 <div id="enableZoom_test" class="method_tests android">
     <div class="method_name">WebView.enableZoom</div>
@@ -528,9 +532,10 @@
     </div>
 </div>
 
+<!--
 <div id="currentLocation_test" class="method_tests android ios win32 wm wp8">
     <div class="method_name">WebView.currentLocation()</div>
-    <div class="method_desc">Returns the url (location) of the current page; the last URL loaded to WebView from controller action.</div>
+    <div class="method_desc">Returns the url (location) of a page; the last URL loaded to WebView from controller action.</div>
     <div><span class="result"></span></div>
     <div class="test_scenario">
         <div class="test_scenario_controls">
@@ -538,16 +543,17 @@
         </div>
         <div class="test_scenario_desc">
             <span class="test_scenario_number">VT301-53</span>
-            <span> Get currentLocation without args</span>
+            <span> Get currentLocation of current page</span>
         </div>
     </div>
     <div class="test_scenario">
         <div class="test_scenario_controls">
+            <button onClick='Rho.WebView.navigate("http://www.gmail.com", 4);'>Navigate tab 4 to gmail</button>
             <button onClick='setDomElementText("currentLocation_test", Rho.WebView.currentLocation(4));'>currentLocation(4)</button>
         </div>
         <div class="test_scenario_desc">
             <span class="test_scenario_number">VT301-54</span>
-            <span> Get currentLocation for tab index 4</span>
+            <span>Navigate tab 4 to gmail and get it currentLocation</span>
         </div>
     </div>
     <div class="test_scenario">
@@ -560,8 +566,9 @@
         </div>
     </div>
 </div>
+-->
 
-<div id="currentURL_test" class="method_tests android ios win32 wm wp8">
+<div id="currentURL_test" class="method_tests android ios">
     <div class="method_name">WebView.currentURL</div>
     <div><span class="result"></span></div>
 

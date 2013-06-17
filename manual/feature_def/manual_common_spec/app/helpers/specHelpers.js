@@ -104,7 +104,15 @@ function add(type) {
  
 }
 
-var testApplicable = function (arrOSTypes){
+function isTestApplicable (anArray){
     var platform = Rho.System.platform;
-    return (jQuery.inArray(platform, arrOSTypes) == -1) ? false : true ;
+    return (anArray.indexOf(platform) == -1) ? false : true ;
+}
+
+//Common Method to Make a Test Pass/Fail for Semi Automatic App.
+//Methods is used in System, CardReader
+
+var captureResult = function(status){
+    testResult = status;
+    captured = true;
 }

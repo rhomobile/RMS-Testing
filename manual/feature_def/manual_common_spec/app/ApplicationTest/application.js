@@ -162,10 +162,13 @@ function setTitleNull(){
  Rho.Application.title ='';
 }
 
+function menuCallback(){
+    Rho.Log.info("menuCallback", "LOG_TEST");
+}
 
 function menuTest() {
 Rho.Application.nativeMenu = [
-{ 'Home': 'refresh'},{'seperator': 'home'},{'Options': 'exit'},{'Log': 'sync'},{'Refresh': 'options'},{'Refresh': 'options'}
+{ 'Home': 'Home'},{'separator': ''},{'Options': 'options'},{'Log': 'log'},{'Exit': 'exit'},{'Refresh': 'refresh'}, {'Callback': menuCallback}
  ];
 }
 
@@ -257,8 +260,9 @@ Rho.Application.setApplicationNotify(notifyCallback);
 }
 
 function notifyCallback(params){
-data=params;
-Rho.Log.info(data,'app');
-$("#Rho_Application_Notify span.result").text(JSON.stringify(data));
+//data=params;
+Rho.Log.info(params.applicationEvent,'APP_CALLBACK');
+
+$("#Rho_Application_Notify span.result").text(params.applicationEvent);
 }	
 	

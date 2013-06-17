@@ -155,11 +155,13 @@
 	<legend>Rho.Application.Native Menu</legend>
 	<ul>Redefine the NativMenu
 	    <li><a href="javascript:void(0)" onclick ="menuTest();">set Native menu to different actions</a></li>
+<!-- Negative cases. Should be tested in other_specs	    
 	    <li><a href="javascript:void(0)" onclick ="menuNullNames();">Dont provide Title to two buttons</a></li>
 	    <li><a href="javascript:void(0)" onclick ="menuNullActions();">Set no action to two buttons</a></li>
 		<li><a href="javascript:void(0)" onclick ="menuInvalidActions();">Set Invalid Actions to two buttons </a></li>
 		<li><a href="javascript:void(0)" onclick ="menuInvalidNames();">setInvalid names to two options</a></li>
-		<li><a href="javascript:void(0)" onclick ="menuReservedItem();">call Load to navigate to a reserved page</a></li>
+		-->
+		<li><a href="javascript:void(0)" onclick ="menuReservedItem();">Add menu with action pointed to html page. Select Load a page menu item</a></li>
 	</ul>
 </fieldset>
 <!-- removed. New property Application.rhoPlatformVersion will be implemented in RMS 4.1
@@ -178,13 +180,15 @@
 
 <fieldset>
 	<legend>Rho.Application.invalidSecurityTokenStartPath</legend>
-	<ul>Invalid Security Token
-	
+	<ul>Invalid Security Token: set in rhoconfig.txt : invalid_security_token_start_path; Set in build.yml: security_token. Rebuild application and start.
+<!-- ReadOnly property	
 	<li > <a href="javascript:void(0)" onclick ="invalidSecurityLocal();">Set Invalid security token path to Local File</a></li>
 	<li > <a href="javascript:void(0)" onclick ="invalidSecurityGoogle();">Set Invalid security token path to  Google</a></li>
 	<li> <a href="javascript:void(0)" onclick ="invalidSecurityNull();">Set Invalid security token path to Null</a></li>
 	<li> <a href="javascript:void(0)" onclick ="invalidSecurityInvalid();">Set Invalid security token path to Invalid</a></li>
 	<li> <a href="javascript:void(0)" onclick ="invalidSecurityStartPage();">Set Invalid security token path to startpage</a></li>
+	-->
+	
 	<li id="Rho_Application_securityToken">
 	  <a href="javascript:void(0)" onclick ="getInvalidSecurityTokenStartPath();">getSecurityTokenPath</a><span class="result"></span></li>
 	</ul>
@@ -192,9 +196,9 @@
 
 <fieldset>
 	<legend>Rho.Application.securityTokenNotPassed</legend>
-	<ul>RhoPlatformVersion
+	<ul>Should return false. If security token is not correct when navigated to invalidSecurityTokenStartPath if exists, or exit the application
 	<li id="Rho_Application_security">
-	  <a href="javascript:void(0)" onclick ="securityTokenResult();">getSecurityToken</a><span class="result"></span></li>
+	  <a href="javascript:void(0)" onclick ="securityTokenResult();">getSecurityTokenNotPassed</a><span class="result"></span></li>
 	</ul>
 </fieldset>
 

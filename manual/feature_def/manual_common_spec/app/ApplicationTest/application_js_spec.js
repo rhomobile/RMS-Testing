@@ -72,17 +72,20 @@ describe("Application Module Test Starts Here", function() {
         displayResult("|get version form Config file",data);
     });
     
-    it ("|Set badlink uri and call to get badlink uri", function() {
-        Rho.Application.badLinkURI='http://www.google.com';
-        var data = Rho.Application.badLinkURI;
-        displayResult("|Set badlink uri and call to get badlink uri",data);
-    });
-      
-    it ("|set badlink uri to null and get the badlink uri value", function() {
-        Rho.Application.badLinkURI='';
-        var data = Rho.Application.badLinkURI;
-        displayResult("|set badlink uri to null and get the badlink uri value",data);
-    });
+    if (isWindowsMobilePlatform()) {
+    
+        it ("|Set badlink uri and call to get badlink uri", function() {
+            Rho.Application.badLinkURI='http://www.google.com';
+            var data = Rho.Application.badLinkURI;
+            displayResult("|Set badlink uri and call to get badlink uri",data);
+        });
+          
+        it ("|set badlink uri to null and get the badlink uri value", function() {
+            Rho.Application.badLinkURI='';
+            var data = Rho.Application.badLinkURI;
+            displayResult("|set badlink uri to null and get the badlink uri value",data);
+        });
+    }
   
     it ("|Set setting page settingsPageURI:/app/NoSettings ", function() {
         Rho.Application.settingsPageURI='/app/NoSettings';

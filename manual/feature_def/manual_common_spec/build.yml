@@ -1,5 +1,5 @@
 app_type: rhoelements
-#sdk:   ../../../../rhodes
+sdk:   ../../../../rhodes
 sdkversion: 3.5.0
 name: manual_common_spec
 version: 1.0
@@ -30,5 +30,7 @@ paths:
   extensions:
   - ../../../../Motorola-Extensions/build/ci/extensions
 #  - ../../../../Motorola-Extensions/lib/commonAPI
+
+#security_token: "123"
 
 
