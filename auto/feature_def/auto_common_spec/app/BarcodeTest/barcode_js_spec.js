@@ -188,7 +188,7 @@ describe("Barcode JS API Test", function() {
 						it("VT282-2006 | call getDefault and enable |" + scntype, function() {
 
 							    enumObject.clearAllProperties();
-							    Rho.Barcode.setDefault(enumObject);
+							    Rho.Barcode.default = enumObject;
 							    var defaultobj = Rho.Barcode.getDefault(enumObject);							  
 								expect(scntype).toEqual(defaultobj.getProperty('ID'));	
 						});

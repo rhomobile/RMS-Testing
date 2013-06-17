@@ -306,7 +306,7 @@ describe("Barcode Test", function() {
 			setObjective("VT282-1778 | call setDefault and take");
 			setInstruction("Take method wait for scanner beam or viewfinder to come automatically without pressing hadrware trigger " + scnid + " Scan code 128 barcode");
 			setExpected("code128 barcode should decode and retrun value should be decoded data and status");
-			Rho.Barcode.setDefault(objSCN);
+			Rho.Barcode.default = objSCN;
 			Rho.Barcode.take({},callbackenable);
 			setTimeout(function() {
 				enableFlag = true;
@@ -338,7 +338,7 @@ describe("Barcode Test", function() {
 			setObjective("VT282-1781 | call setDefault and enable");
 			setInstruction("press hadrware trigger to start" + scnid);
 			setExpected("code128 barcode should decode and retrun value should be decoded data and status");
-			Rho.Barcode.setDefault(objSCN);
+			Rho.Barcode.default = objSCN;
 			Rho.Barcode.enable({},callbackenable);
 			setTimeout(function() {
 				enableFlag = true;
