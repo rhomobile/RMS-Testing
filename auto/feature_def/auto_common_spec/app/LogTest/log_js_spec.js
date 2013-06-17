@@ -260,6 +260,7 @@ describe("Log JS API", function () {
 			});
 		});
 		// Set Log destinationURI to valid destination with host address having IP address.
+		/* TODO: implement server for log and add expectations
 		it("VT290-314 : Set Log destinationURI to valid destination with host address having IP address.", function() {
 			runs(function(){
 				var info = "Log destination set. No need verification in log: ";
@@ -271,7 +272,7 @@ describe("Log JS API", function () {
 				Rho.Log.info("test_message", "VT290-314");
 			});
 		});
-
+        */
 		// Set Log destinationURI to valid destination with host address having IP address.
 		it("VT290-315 : Set Log destinationURI to valid destination with host address having DNS Name as address.", function() {
 			runs(function(){
