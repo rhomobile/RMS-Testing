@@ -33,7 +33,7 @@ describe("Barcode Test", function() {
 		{
 			setObjective("VT282-1762 |Enable with callback as function|");
 			setInstruction("Scan Barcode code128 with " + scnid);
-			setExpected("Is retruned decoded hash displayed correctly with all data(callback as function)?");
+			setExpected("Is retruned decoded hash displayed correctly with all data?");
 			objSCN.enable({},callbackenable);
 			setTimeout(function() {
 				enableFlag = true;
@@ -123,7 +123,7 @@ describe("Barcode Test", function() {
 			setObjective("VT282-1765 | Enable with picklist software reticle, scantimeout 3000 and callback as function ");
 			setInstruction("don't scan and check scanTimeout as 3000 and check picklistMode as reticle " + scnid);
 			setExpected("Baeam or viewfinder will stop automatically after 3 second? \n only the barcode in the center of the image is decoded for picklistMode as reticle ");
-			objSCN.enable({'scanTimeout':3000,'picklistMode':'softwareReticle'},callbackenable);
+			objSCN.enable({'scanTimeout':'3000','picklistMode':'softwareReticle'},callbackenable);
 			setTimeout(function() {
 				enableFlag = true;
 			}, 1000);
@@ -213,7 +213,7 @@ describe("Barcode Test", function() {
 			setObjective("VT282-1770 | Enable with picklist software reticle, scantimeout 3000 and callback as anonymous function |");
 			setInstruction("check functionality of scanTimeout as 3000 and picklistMode reticle with " + scnid);
 			setExpected("Baeam or viewfinder will stop automatically after 3 second? only the barcode in the center of the image is decoded for picklistMode as reticle ");
-			objSCN.enable({'scanTimeout':3000,'picklistMode':'softwareReticle'},function(data){enablecallbackdata(JSON.stringify(data));});
+			objSCN.enable({'scanTimeout':7000,'picklistMode':'softwareReticle'},function(data){enablecallbackdata(JSON.stringify(data));});
 			setTimeout(function() {
 				enableFlag = true;
 			}, 1000);
@@ -304,7 +304,7 @@ describe("Barcode Test", function() {
 		runs(function()
 		{
 			setObjective("VT282-1778 | call setDefault and take");
-			setInstruction("Take method wait for scanner beam or viewfinder to come automatically without pressing hadrware trigger " + scnid + "Scan code 128 barcode");
+			setInstruction("Take method wait for scanner beam or viewfinder to come automatically without pressing hadrware trigger " + scnid + " Scan code 128 barcode");
 			setExpected("code128 barcode should decode and retrun value should be decoded data and status");
 			Rho.Barcode.setDefault(objSCN);
 			Rho.Barcode.take({},callbackenable);
@@ -403,7 +403,7 @@ describe("Barcode Test", function() {
 			}, "Timed out waiting for tester to respond", 300000);
 			runs(function() {
 			expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-			//objSCN.disable();
+			objSCN.disable();
 			});
 		});
 	});
@@ -963,37 +963,6 @@ describe("Barcode Test", function() {
 
 	}
 
-	it("VT282-1974 | set decodeSound to local wave file path |"+ scnid, function() {
-		
-		runs(function()
-		{
-			setObjective("VT282-1974 | set decodeSound to local wave file path|");
-			setInstruction("Scan code128 barcode with" + scnid + "check for the wave file to play(wave file should at application folder)");
-			setExpected("wave file should play after barcode is decoded");
-			objSCN.enable({},callbackenable);
-			setTimeout(function() {
-				enableFlag = true;
-			}, 1000);
-		});
-		waitsFor(function()
-		{
-			dispCurrentProcess("Enabling Scanner");
-			return enableFlag;
-		}, '2sec wait to enable the Scanner', 2000);
-
-		runs(function()
-		{		
-			objSCN.decodeSound = 'file://Application/alarm5.wav';
-			waitsFor(function() {
-			return document.getElementById("actResult").innerHTML != "init";
-			}, "Timed out waiting for tester to respond", 300000);
-			runs(function() {
-			expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-			//objSCN.disable();
-			});
-		});
-	});
-
 	it("VT282-1978 | set decodeVolume to 5 |"+ scnid, function() {
 		
 		runs(function()
@@ -1044,6 +1013,37 @@ describe("Barcode Test", function() {
 		runs(function()
 		{		
 			objSCN.decodeVolume = 0;
+			waitsFor(function() {
+			return document.getElementById("actResult").innerHTML != "init";
+			}, "Timed out waiting for tester to respond", 300000);
+			runs(function() {
+			expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+			//objSCN.disable();
+			});
+		});
+	});
+
+	it("VT282-1974 | set decodeSound to local wave file path |"+ scnid, function() {
+		
+		runs(function()
+		{
+			setObjective("VT282-1974 | set decodeSound to local wave file path|");
+			setInstruction("Scan code128 barcode with" + scnid + "check for the wave file to play(wave file should at application folder)");
+			setExpected("wave file should play after barcode is decoded");
+			objSCN.enable({},callbackenable);
+			setTimeout(function() {
+				enableFlag = true;
+			}, 1000);
+		});
+		waitsFor(function()
+		{
+			dispCurrentProcess("Enabling Scanner");
+			return enableFlag;
+		}, '2sec wait to enable the Scanner', 2000);
+
+		runs(function()
+		{		
+			objSCN.decodeSound = 'file://Application/alarm5.wav';
 			waitsFor(function() {
 			return document.getElementById("actResult").innerHTML != "init";
 			}, "Timed out waiting for tester to respond", 300000);
