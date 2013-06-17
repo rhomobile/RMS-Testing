@@ -92,22 +92,22 @@
         expect(after).toBe(before + 1);
     });
 
-    // it('saves object to database', function() {
-    //     var modelDef = function(model){
-    //         model.modelName('Product'),
-    //         model.property("key");
-    //     };
-    //     var Model = Rho.ORM.addModel(modelDef);
-    //     Model.deleteAll(null);
+    it('saves object to database', function() {
+        var modelDef = function(model){
+            model.modelName('Product'),
+            model.property("key");
+        };
+        var Model = Rho.ORM.addModel(modelDef);
+        Model.deleteAll({});
 
-    //     var object = Model.create({'key': 'value'});
+        var object = Model.create({'key': 'value'});
 
-    //     expect(Model.find(object.object()).vars()).toEqual(object.vars());
-    //     object.set('key', 'another value').set('new key', 'new value');
-    //     expect(Model.find(object.object()).vars()).not.toEqual(object.vars());
-    //     object.save();
-    //     expect(Model.find(object.object()).vars()).toEqual(object.vars());
-    // });
+        expect(Model.find(object.object()).vars()).toEqual(object.vars());
+        object.set('key', 'another value').set('new key', 'new value');
+        expect(Model.find(object.object()).vars()).not.toEqual(object.vars());
+        object.save();
+        expect(Model.find(object.object()).vars()).toEqual(object.vars());
+    });
 
 //     it('updates object attributes in database', function() {
 //         var Model = Rho.ORM.addModel('Model');
