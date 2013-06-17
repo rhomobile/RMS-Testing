@@ -1,19 +1,19 @@
 function toolCreate() {
     var toolElements = new Array();
     toolElements = [
+        {label: 'back', action: 'back'},
         {label: 'Home', action: 'Home'},
         {label: 'Exit', action: 'exit'},
         {label: 'close', action: 'close'},
         {label: 'Options', action: 'options'},
         {label: 'refresh', action: 'refresh'},
-        {label: 'back', action: 'back'},
         {label: 'log', action: 'log'},
         {label: 'Fullscreen', action: 'fullscreen'},
         {label: 'sync', action: 'sync'},
         {label: 'minimize', action: 'minimize'},
         {label: 'SIP', action: 'SIP'}
     ];
-    var toolProperties = {backgroundColor: 0xFF00, maskColor: '', viewHeight: 100};
+    var toolProperties = {maskColor: '', viewHeight: 100};
     Rho.NativeToolbar.create(toolElements, toolProperties);
 }
 
@@ -21,12 +21,13 @@ function toolCreate() {
 function toolIconLabelMask() {
     var toolElements = new Array();
     toolElements = [
+        {label: 'back', action: 'back'},
         {label: 'Home', action: 'Home', icon: '/public/images/bar/colored_btn.png'},
         {action: "separator"},
         {label: 'Exit', action: 'exit', icon: '/public/images/bar/refresh_btn.wm.png'},
         {label: 'refresh', action: 'refresh', icon: '/public/images/bar/forward_btn.png'}
     ];
-    var toolProperties = {backgroundColor: '', maskColor: 0xFF00, viewHeight: 100};
+    var toolProperties = {backgroundColor: 0x00004F, maskColor: 0xFF00, viewHeight: 100};
     Rho.NativeToolbar.create(toolElements, toolProperties);
 }
 
@@ -34,11 +35,12 @@ function toolIconLabelMask() {
 function toolColored() {
     var toolElements = new Array();
     toolElements = [
+        {label: 'back', action: 'back', icon: '/public/images/bar/back_btn_colored.png', coloredIcon: true},
+        {action: "separator"},
         {label: 'Home', action: 'Home', icon: '/public/images/bar/colored_btn.png'},
-        {label: 'Exit', action: 'exit', icon: '/public/images/bar/refresh_btn.wm.png'},
-        {label: 'back', action: 'back', icon: '/public/images/bar/back_btn_colored.png', coloredIcon: true}
+        {label: 'Exit', action: 'exit', icon: '/public/images/bar/refresh_btn.wm.png'}
     ];
-    var toolProperties = {backgroundColor: 0xFF0000, maskColor: 0xFF0000, viewHeight: 100};
+    var toolProperties = {backgroundColor: 0x002F00, maskColor: 0xFF0000, viewHeight: 100};
     Rho.NativeToolbar.create(toolElements, toolProperties);
 }
 

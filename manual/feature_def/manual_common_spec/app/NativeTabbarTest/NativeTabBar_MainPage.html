@@ -4,7 +4,6 @@
     <title>Main Page</title>
     <meta name="viewport" content="initial-scale=1.0, width=device-width"/>
     <script src="/public/jquery/jquery-1.6.4.min.js" type="text/javascript"></script>
-    <script src="/public/jquery/jquery.json-2.3.min.js" type="text/javascript"></script>
 	<link type="text/css" rel="stylesheet" href="/public/css/manual_styles.css">
     <script type="text/javascript" charset="utf-8" src="/public/api/rhoapi-modules.js"></script>
 
@@ -41,6 +40,7 @@
                 Rho.NativeTabbar.create( [ 
                     //{'label':'MainPage', 'action':'/app/HomeScreen/homeScreen', 'useCurrentViewForTab':true},
                     {'label':'MainPage', 'action':'/app/NativeTabbarTest/NativeTabBar_MainPage.html', 'useCurrentViewForTab':true},
+                    {'label':'Main Reload', 'action':'/app/NativeTabbarTest/NativeTabBar_MainPage.html', 'reload':true},
                     {'label':'Page1', 'action':'/app/NativeTabbarTest/NativeTabBar_Page1.html'}, 
                     {'label':'Page2', 'action':'/app/NativeTabbarTest/NativeTabBar_Page2.html', 'perishable':'true'} ], 
                   	{'hiddenTabs': true, 'createOnInit' : true}, tabbarEventHandler );
@@ -92,6 +92,7 @@
         }
         
         function tabbarRemove() {
+        	Rho.NativeTabbar.remove();
         }
 
         function tabbarCallback() {
@@ -103,10 +104,18 @@
 
         function tabbarEventHandler(params){
             Rho.Log.info("tabbarEventHandler"                   , "JSTEST");
-            Rho.Log.info("tab_index  : " + params['tab_index'  ], "JSTEST");
-            Rho.Log.info("newTabIndex: " + params['newTabIndex'], "JSTEST");
-            Rho.Log.info("oldTabIndex: " + params['oldTabIndex'], "JSTEST");
-            Rho.Log.info("tabEvent   : " + params['tabEvent'   ], "JSTEST");
+            if (params['tab_index'] != null) {
+	            Rho.Log.info("tab_index  : " + params['tab_index'  ], "JSTEST");
+	        }
+            if (params['newTabIndex'] != null) {
+            	Rho.Log.info("newTabIndex: " + params['newTabIndex'], "JSTEST");
+        	}
+            if (params['oldTabIndex'] != null) {
+	            Rho.Log.info("oldTabIndex: " + params['oldTabIndex'], "JSTEST");
+	        }
+            if (params['tabEvent'] != null) {
+    	        Rho.Log.info("tabEvent   : " + params['tabEvent'   ], "JSTEST");
+    	    }
         }
 
         function onExit0(){
@@ -155,7 +164,7 @@
 
 <div class="method_tests">
 	<div class="method_name">Rho.NativeTabbar.create and Rho.NativeTabbar.switchTab</div>
-	<div class="method_desc"> It should remove the current tab bar and replaces it with the new  3 tabs</div>
+	<div class="method_desc"> It should remove the current tab bar and replaces it with the new  4 tabs</div>
 	<div class="test_scenario">
 		<div class="test_scenario_controls">
 			<div id="Rho_NativeTabbar_Switch">Current active tab: <span class="defaultset"> </span><br />
@@ -163,7 +172,7 @@
 					$("#Rho_NativeTabbar_Switch span.defaultset").text(Rho.WebView.activeTab);
 				</script>
 			</div>
-			<a href="javascript:void(0)" onclick="tabbarCreateTnv();"> Create 3 tabs using NativeTabbar.create</a><br/>
+			<a href="javascript:void(0)" onclick="tabbarCreateTnv();"> Create 4 tabs using NativeTabbar.create</a><br/>
 		</div>
 	</div>				
 	<div class="test_scenario">
@@ -200,17 +209,20 @@
 
 	<div class="test_scenario">
 		<div class="test_scenario_controls">	
-			<a href="javascript:void(0)" onclick="callsetiPhonebadge(-1, '12');">setTabBadge with index as -1 and Iphone badge '12'</a><br/>
+			<a href="javascript:void(0)" onclick="callsetiPhonebadge(3, '55');">setTabBadge with index as 3 and Iphone badge '55'</a><br/>
 		</div>
 		<span class="test_scenario_number">VT350-005 <br /></span>
 	</div>
-	
+
+<!-- this is edge test not feature definition
 	<div class="test_scenario">
 		<div class="test_scenario_controls">	
 			<a href="javascript:void(0)" onclick="callsetiPhonebadge(-2, '12');">setTabBadge with invalid tab index value like -2  </a><br/>
 		</div>
 		<span class="test_scenario_number">VT350-006 <br /></span>
 	</div>
+-->
+
 </div>		
 
 <div class="method_tests">
@@ -246,10 +258,10 @@
 	<div class="test_scenario">
 		<div class="test_scenario_controls">
 				<a href="javascript:void(0)" onclick="Createtabbarnew(
-					[{'label':'MainPage', 'action':'/app/index.html', 'icon':'/public/images/thumb.png'}], 
+					[{'label':'MainPage', 'action':'/app/index.html', 'icon':'/public/images/thumb.png', 'reload':true}], 
 					{'verticalOrientation':false, 'hiddenTabs': false, 'createOnInit' : false, 'placeTabsBottom':false}
 					);">
-			Call Remove the Current Tab bar then and replace with NativeTabbar.create </a><br/><br/>
+			Call Remove the Current Tabbar then and replace with new single tab </a><br/><br/>
 		</div>
 		<span class="test_scenario_number">VT350-010<br /></span>
 	</div>
@@ -261,10 +273,11 @@
 					{'label':'page1', 'action':'/app/NativeTabbarTest/NativeTabBar_MainPage.html', 'icon':'/public/images/toggle.png', 'reload':true}], 
 					{'verticalOrientation':false, 'hiddenTabs': false, 'createOnInit' : false, 'placeTabsBottom':false}
 					);">
-			Call Remove the Current Tab bar and then replace with NativeTabbar.create </a><br/><br/>
+			Call Remove the Current Tab bar and then replace with new two tabs </a><br/><br/>
 		</div>
 		<span class="test_scenario_number">VT350-011<br /></span>
 	</div>
+<!-- Tabbar not supported predefined actions for action	
 	<div class="method_desc">Tabbar with different Actions back, close, forward, fullscreen, home  </div>
 	<div class="test_scenario">
 		<div class="test_scenario_controls">
@@ -296,24 +309,27 @@
 		</div>
 		<span class="test_scenario_number">VT350-013<br /></span>
 	</div>	
-	<div class="method_desc">use _curerent_view _for _tab as true </div>
+-->
+
+	<div class="method_desc">use useCurrentViewForTab as true </div>
 	<div class="test_scenario">
 		<div class="test_scenario_controls">
 				<a href="javascript:void(0)" onclick="Createtabbarnew(
-					[{'label':'Native Tabbar', 'action':'/app/NativeTabbarTest/NativeTabBar_MainPage.html', 'icon':'/public/images/bar/gears.png', 'use_current_view_for_tab':true},
+					[{'label':'Native Tabbar', 'action':'/app/NativeTabbarTest/NativeTabBar_MainPage.html', 'icon':'/public/images/bar/gears.png', 'useCurrentViewForTab':true},
 					{'label':'Main page', 'action':'/app/index.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true}], 
 					{'verticalOrientation':false, 'hiddenTabs': false, 'createOnInit' : false, 'placeTabsBottom':false}
 					);">
-					Call Remove current tab  and then Create   </a><br/><br/>
+					Create Tabbar from single page view with useCurrentViewForTab - no blinking during switch to Tabbar </a><br/><br/>
 		</div>
 		<span class="test_scenario_number">VT350-014<br /></span>
 	</div>
 	
+<!-- non feature definition test	
 	<div class="method_desc">use _curerent_view _for _tab as true for both tabs </div>
 	<div class="test_scenario">
 		<div class="test_scenario_controls">
 				<a href="javascript:void(0)" onclick="Createtabbarnew(
-					[{'label':'Native Tabbar', 'action':'/app/NativeTabbarTest/NativeTabBar_MainPage.html', 'icon':'/public/images/bar/gears.png', 'use_current_view_for_tab':true},
+					[{'label':'Native Tabbar', 'action':'/app/NativeTabbarTest/NativeTabBar_MainPage.html', 'icon':'/public/images/bar/gears.png', 'useCurrentViewForTab':true},
 					{'label':'Main page', 'action':'/app/index.html', 'icon':'/public/images/bar/colored_btn.png', 'use_current_view_for_tab':true}], 
 					{'verticalOrientation':false, 'hiddenTabs': false, 'createOnInit' : false, 'placeTabsBottom':false}
 					);">
@@ -321,16 +337,17 @@
 		</div>
 		<span class="test_scenario_number">VT350-015<br /></span>
 	</div>		
+-->	
 
 	<div class="method_desc">Change the selected color 0xFFFF00 of the tab only for one tab  </div>
 	<div class="test_scenario">
 		<div class="test_scenario_controls">
 				<a href="javascript:void(0)" onclick="Createtabbarnew(
-					[{'label':'Native Tabbar', 'action':'/app/NativeTabbarTest/NativeTabBar_MainPage.html', 'icon':'/public/images/bar/gears.png', 'selectedColor':0xFFFF00},
+					[{'label':'Native Tabbar', 'action':'/app/NativeTabbarTest/NativeTabBar_MainPage.html', 'icon':'/public/images/bar/gears.png', 'selectedColor':0xFFFF00, 'reload':true},
 					{'label':'Main page', 'action':'/app/index.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true}], 
 					{'verticalOrientation':false, 'hiddenTabs': false, 'createOnInit' : false, 'placeTabsBottom':false}
 					);">
-					Change the selected color   </a><br/><br/>
+					Create Tabbar with changed the selected color for first tab to Yellow  </a><br/><br/>
 		</div>
 		<span class="test_scenario_number">VT350-016<br /></span>
 	</div>	
@@ -343,7 +360,7 @@
 					{'label':'Main page', 'action':'/app/index.html', 'icon':'/public/images/bar/colored_btn.png', 'selectedColor':0xFFFF00, 'reload':true}], 
 					{'verticalOrientation':false, 'hiddenTabs': false, 'createOnInit' : false, 'placeTabsBottom':false}
 					);">
-					Change the selected color  </a><br/><br/>
+					Create Tabbar with changed the selected color for two tabs to Yellow </a><br/><br/>
 		</div>
 		<span class="test_scenario_number">VT350-017<br /></span>
 	</div>	
@@ -356,7 +373,7 @@
 					{'label':'Main page', 'action':'/app/index.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true, 'disabled':true}], 
 					{'verticalOrientation':false, 'hiddenTabs': false, 'createOnInit' : false, 'placeTabsBottom':false}
 					);">
-					Disable Main Page tab   </a><br/><br/>
+					Create Tabbar with disabled second tab   </a><br/><br/>
 		</div>
 		<span class="test_scenario_number">VT350-018<br /></span>
 	</div>
@@ -365,15 +382,14 @@
 	<div class="test_scenario">
 		<div class="test_scenario_controls">
 				<a href="javascript:void(0)" onclick="Createtabbarnew(
-					[{'label':'Native Tabbar', 'action':'/app/NativeTabbarTest/NativeTabBar_MainPage.html', 'icon':'/public/images/bar/gears.png' },
+					[{'label':'Native Tabbar', 'action':'/app/NativeTabbarTest/NativeTabBar_MainPage.html', 'icon':'/public/images/bar/gears.png', 'reload':true },
 					{'label':'Main page', 'action':'/app/index.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true}], 
 					{'verticalOrientation':true, 'hiddenTabs': false, 'createOnInit' : false, 'placeTabsBottom':false}
 					);">
-					Creates a vertical tabbar </a><br/><br/>
+					Creates a vertical tabbar (only iPad) </a><br/><br/>
 		</div>
 		<span class="test_scenario_number">VT350-019<br /></span>
 	</div>
-	
 	<div class="method_desc">Tabbar with background color  0x0000FF </div>
 	<div class="test_scenario">
 		<div class="test_scenario_controls">
@@ -382,20 +398,20 @@
 					{'label':'Main page', 'action':'/app/index.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true}], 
 					{'verticalOrientation':false, 'backgroundColor':0x0000FF, 'hiddenTabs': false, 'createOnInit' : false, 'placeTabsBottom':false}
 					);">
-					Tabbar with background</a><br/><br/>
+					Tabbar with background blue</a><br/><br/>
 		</div>
 		<span class="test_scenario_number">VT350-019<br /></span>
 	</div>
-	
 	<div class="method_desc">Tabbar with hiddenTabs as True with the label only on second tab </div>
 	<div class="test_scenario">
 		<div class="test_scenario_controls">
 				<a href="javascript:void(0)" onclick="Createtabbarnew(
 					[{'action':'/app/NativeTabbarTest/NativeTabBar_MainPage.html', 'icon':'/public/images/bar/gears.png'},
+					{'action':'/app/NativeTabbarTest/NativeTabBar_MainPage.html', 'icon':'/public/images/bar/gears.png'},
 					{'label':'Main page', 'action':'/app/index.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true}], 
 					{'verticalOrientation':false, 'hiddenTabs': true, 'createOnInit' : false, 'placeTabsBottom':false}
 					);">
-					Tabbar with one hiddenTabs</a><br/><br/>
+					Tabbar with one hiddenTabs (from 3 tabs) (only WM)</a><br/><br/>
 		</div>
 		<span class="test_scenario_number">VT350-020<br /></span>
 	</div>
@@ -404,11 +420,12 @@
 	<div class="test_scenario">
 		<div class="test_scenario_controls">
 				<a href="javascript:void(0)" onclick="Createtabbarnew(
-					[{'label':'Native Tabbar', 'action':'/app/NativeTabbarTest/NativeTabBar_MainPage.html', 'icon':'/public/images/bar/gears.png'},
+					[{'action':'/app/NativeTabbarTest/NativeTabBar_MainPage.html', 'icon':'/public/images/bar/gears.png'},
+					{'label':'Native Tabbar', 'action':'/app/NativeTabbarTest/NativeTabBar_MainPage.html', 'icon':'/public/images/bar/gears.png'},
 					{'label':'Main page', 'action':'/app/index.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true}], 
 					{'verticalOrientation':false, 'hiddenTabs': true, 'createOnInit' : false, 'placeTabsBottom':false}
 					);">
-					Tabbar with 2 hiddenTabs  </a><br/><br/>
+					Tabbar with 2 hiddenTabs (from 3 tabs) (only WM) </a><br/><br/>
 		</div>
 		<span class="test_scenario_number">VT350-021<br /></span>
 	</div>
@@ -416,7 +433,7 @@
 	<div class="method_desc">Create Tabbar with callback  </div>
 	<div class="test_scenario">
 		<div class="test_scenario_controls">
-				<a href="javascript:void(0)" onclick="Createtabbarwithcallback();">Create Tabbar with callback  </a><br/><br/>
+				<a href="javascript:void(0)" onclick="Createtabbarwithcallback();">Create Tabbar with callback (see log for output)  </a><br/><br/>
 		</div>
 		<span class="test_scenario_number">VT350-022<br /></span>
 	</div>
@@ -432,7 +449,7 @@
 					{'label':'separator', 'action':'separator'}], 
 					{'verticalOrientation':false, 'hiddenTabs': false, 'createOnInit' : true, 'placeTabsBottom':false}
 					);">
-					Create Tabbar </a><br/><br/>
+					Create Tabbar with createOnInit as True (only WM)</a><br/><br/>
 		</div>
 		<span class="test_scenario_number">VT350-023<br /></span>
 	</div>
@@ -441,7 +458,7 @@
 	<div class="test_scenario">
 		<div class="test_scenario_controls">
 				<a href="javascript:void(0)" onclick="set_tabbar_bottom()">
-				TabBar placed bottom  </a><br/><br/>
+				TabBar placed bottom (only Android) </a><br/><br/>
 		</div>
 		<span class="test_scenario_number">VT350-024<br /></span>
 	</div>
@@ -470,11 +487,12 @@
 					], 
 					{'verticalOrientation':false, 'hiddenTabs': false, 'createOnInit' : false, 'placeTabsBottom':false}
 					);">
-					Add 15 Tabs </a><br/><br/>
+					Create Tabbar with 15 tabs</a><br/><br/>
 		</div>
 		<span class="test_scenario_number">VT350-025<br /></span>
 	</div>
 	
+<!-- we do not have functionality for trim labels - developer should make it by self.	
 		<div class="method_desc">Create Tab with Long label   </div>
 	<div class="test_scenario">
 		<div class="test_scenario_controls">
@@ -486,10 +504,12 @@
 					], 
 					{'verticalOrientation':false, 'hiddenTabs': false, 'createOnInit' : false, 'placeTabsBottom':false}
 					);">
-					Create Tab with Long label </a><br/><br/>
+					Create Tab with Long labels </a><br/><br/>
 		</div>
 		<span class="test_scenario_number">VT350-026<br /></span>
 	</div>
+-->	
+<!-- background color int tab can be tested on slow devices only - this property for reduce blinking during switch to tabbar. Non actual on fast devices
 	<div class="test_scenario">
 		<div class="test_scenario_controls">
 				<a href="javascript:void(0)" onclick="Createtabbarnew(
@@ -504,6 +524,7 @@
 		</div>
 		<span class="test_scenario_number">VT350-023<br /></span>
 	</div>
+-->
 	<div class="test_scenario">
 		<div class="test_scenario_controls">
 				<a href="javascript:void(0)" onclick="Createtabbarnew(
@@ -514,7 +535,7 @@
 					{'label':'separator', 'action':'separator'}], 
 					{'verticalOrientation':false, 'hiddenTabs': false, 'createOnInit' : true, 'placeTabsBottom':false}
 					);">
-					Create Tabbar with perishable as true for the twotab</a><br/><br/>
+					Create Tabbar with perishable as true for the twotab (only WM)</a><br/><br/>
 		</div>
 		<span class="test_scenario_number">VT350-023<br /></span>
 	</div>
@@ -525,13 +546,13 @@
 	<div class="method_desc">Removes the Tab by index </div>
 	<div class="test_scenario">
 		<div class="test_scenario_controls">
-				<a href="javascript:void(0)" onclick="Rho.NativeTabbar.removeTab(0);">Removes the Tab by index 0 </a><br/>
+				<a href="javascript:void(0)" onclick="Rho.NativeTabbar.removeTab(0);">Removes the Tab by index 0 (only WM) </a><br/>
 		</div>
 		<span class="test_scenario_number">VT350-026 <br /></span>
 	</div>	
 	<div class="test_scenario">
 		<div class="test_scenario_controls">
-				<a href="javascript:void(0)" onclick="Rho.NativeTabbar.removeTab(1);">Removes the Tab by index 1 </a><br/>
+				<a href="javascript:void(0)" onclick="Rho.NativeTabbar.removeTab(1);">Removes the Tab by index 1 (only WM)</a><br/>
 		</div>
 		
 	</div>	
