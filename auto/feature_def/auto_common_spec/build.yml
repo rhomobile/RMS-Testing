@@ -1,4 +1,4 @@
-#sdk: C:/projects/rhodes
+sdk: ../../../../rhodes
 paths:
   extensions:
 
