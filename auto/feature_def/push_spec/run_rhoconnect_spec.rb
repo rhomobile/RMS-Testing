@@ -119,6 +119,10 @@ def run_apps(platform)
 		puts "rake device:#{$platform}:debug"
 		system("rake device:#{$platform}:debug").should == true
 
+		$logcat_pid = Kernel.spawn("adb -s #{$deviceId} logcat",
+			:out => File.open(File.join($spec_path, 'rhoconnect_push_client', 'rholog.txt'), "w"))
+		puts "Starting logcat process with pid: #{$logcat_pid}"
+
 		# adb -s 34010534 install -r /Users/alexb/workspace/RMS-Testing/auto/feature_def/push_spec/rhoconnect_push_client/bin/target/android/Rho_Push_Client-debug.apk
 		puts "\nInstalling rhodes app on device ..."
 		puts "adb -s #{$deviceId} install -r #{Dir.pwd}/bin/target/android/Rho_Push_Client-debug.apk"

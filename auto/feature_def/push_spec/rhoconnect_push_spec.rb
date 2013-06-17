@@ -62,8 +62,8 @@ describe 'Rhoconnect push spec' do
 
     $server.mount_proc('/', nil) do |req, res|
       query = req.query
-      puts "Request headers: #{req.header.inspect}"
-      puts "Request query: #{query.inspect}"
+      # puts "Request headers: #{req.header.inspect}"
+      # puts "Request query: #{query.inspect}"
 
       res.status = 200
       $mutex.synchronize do
@@ -75,7 +75,7 @@ describe 'Rhoconnect push spec' do
     run_apps($platform)
 
     @api_token = RhoconnectHelper.api_post('system/login', { :login => 'rhoadmin', :password => '' })
-    puts "API token: #{@api_token}"
+    # puts "API token: #{@api_token}"
   end
 
 
@@ -90,6 +90,7 @@ describe 'Rhoconnect push spec' do
       puts "Uninstalling package #{pkg} ..."
       system "adb -s #{$deviceId} uninstall #{pkg}"
     end
+    system "kill -9 #{$logcat_pid}" if $logcat_pid
     # puts "Uninstalling package com.rhomobile.rho_push_client ..."
     # system "adb uninstall com.rhomobile.rho_push_client"
     # puts "Uninstalling package com.motsolutions.cto.services.ans ..."
