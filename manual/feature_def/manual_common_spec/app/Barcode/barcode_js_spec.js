@@ -24,7 +24,7 @@ describe("Barcode Test", function() {
 	});
 
 	afterEach(function() {
-		//objSCN.disable();
+		objSCN.clearAllProperties();
 	});
 
 	it("VT282-1762 | Enable with callback as function |" + scnid, function() {
