@@ -1,4 +1,4 @@
-sdk: ../../../../rhodes
+#sdk: ../../../../rhodes
 paths:
   extensions:
 
