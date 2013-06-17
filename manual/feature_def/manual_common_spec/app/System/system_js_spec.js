@@ -1,70 +1,117 @@
+var captured = false;
+var testResult = '';
 describe("System Module JS Test Starts Here", function() {
+	beforeEach(function(){
+		captured = false;
+		testResult = '';
+	});
 
 	describe("System Module-Setting Directly Test Starts Here", function() {
-		
 		it("VT300-029 | call getProperty with locale | ", function() {
+			runs(function(){
+				var data = Rho.System.getProperty('locale');
+	      		displayResult("VT300-029 | call getProperty with locale | ",data);
+			});
+
+			waitsFor(function(){
+				return captured;
+			},"Waiting For Result",30000);
 	    
-			var data = Rho.System.getProperty('locale');
-	      	displayResult("VT300-029 | call getProperty with locale | ",data);
-	        var testPassed = confirm("Do you see Correct Output?");
-			expect(testPassed).toEqual(true);
+			runs(function(){
+				expect(testResult).toEqual(true);	
+			});
+			
 		});
 
 		it("VT300-070 | call getAllProperties() | ", function() {
-	
-	    	var data =  Rho.System.getAllProperties();
-			displayResult("VT300-070 | call getAllProperties() | ",JSON.stringify(data));
-			var testPassed = confirm("Do you see Correct Output?");
-			expect(testPassed).toEqual(true);
+			runs(function(){
+				var data =  Rho.System.getAllProperties();
+				displayResult("VT300-070 | call getAllProperties() | ",JSON.stringify(data));
+			});
+
+			waitsFor(function(){
+				return captured;
+			},"Waiting For Result",30000);
+	    
+			runs(function(){
+				expect(testResult).toEqual(true);	
+			});
 		});
 		
 		if(isAnyWindowsFamilyPlatform()){
 		
-		it("VT300-077 | call isApplicationInstalled() with application name which is there in device | ", function() {
-			var data = Rho.System.isApplicationInstalled('rhomobile nativejasmine');
-			displayResult("VT300-077 | call isApplicationInstalled() with application name which is there in device | ",data);
-			var testPassed = confirm("Do you see Correct Output?");
-			expect(testPassed).toEqual(true);
-		});
+			it("VT300-077 | call isApplicationInstalled() with application name which is there in device | ", function() {
+				runs(function(){
+					var data = Rho.System.isApplicationInstalled('rhomobile nativejasmine');
+					displayResult("VT300-077 | call isApplicationInstalled() with application name which is there in device | ",data);
+				});
+
+				waitsFor(function(){
+					return captured;
+				},"Waiting For Result",30000);
+		    
+				runs(function(){
+					expect(testResult).toEqual(true);	
+				});
+			});
 		
 		}
 		else if(isAndroidPlatform()){
 	
-		it("VT300-077 | call isApplicationInstalled() with application name which is there in device | ", function() {
-			var data = Rho.System.isApplicationInstalled('com.rhomobile.nativejasmine');
-			displayResult("VT300-077 | call isApplicationInstalled() with application name which is there in device | ",data);
-			var testPassed = confirm("Do you see Correct Output?");
-			expect(testPassed).toEqual(true);
-		});
+			it("VT300-077 | call isApplicationInstalled() with application name which is there in device | ", function() {
+				runs(function(){
+					var data = Rho.System.isApplicationInstalled('com.rhomobile.nativejasmine');
+					displayResult("VT300-077 | call isApplicationInstalled() with application name which is there in device | ",data);
+				});
+
+				waitsFor(function(){
+					return captured;
+				},"Waiting For Result",30000);
+		    
+				runs(function(){
+					expect(testResult).toEqual(true);	
+				});
+			});
 
 		}
 
 		it("VT300-078 | call isApplicationInstalled() with application name which is not there in device | ", function() {
-			var data = Rho.System.isApplicationInstalled('RhoElements3');
-			displayResult("VT300-078 | call isApplicationInstalled() with application name which is not there in device | ",data);
-			var testPassed = confirm("Do you see Correct Output?");
-			expect(testPassed).toEqual(true);
-		});
+			runs(function(){
+				var data = Rho.System.isApplicationInstalled('RhoElements3');
+				displayResult("VT300-078 | call isApplicationInstalled() with application name which is not there in device | ",data);
+			});
+
+			waitsFor(function(){
+				return captured;
+			},"Waiting For Result",30000);
+	    
+			runs(function(){
+				expect(testResult).toEqual(true);	
+			});
 	
+		});
 	});
 	
-
-
-
 
 	describe("System Module- getProperty Test Starts Here", function() {
 		for (var i=0;i<sys_get_property.length;i++){
 			(function(idx){
 				if(isTestApplicable(sys_get_property[idx]['osType'])){
-				it(sys_get_property[idx]['testName'], function() {
+					it(sys_get_property[idx]['testName'], function() {
+						runs(function(){
+							var data = Rho.System.getProperty(sys_get_property[idx]['propertyName']);
+							displayResult(sys_get_property[idx]['testName'],data);
 
-					var data = Rho.System.getProperty(sys_get_property[idx]['propertyName']);
-					displayResult(sys_get_property[idx]['testName'],data);
-
-					var testPassed = confirm("Do you see Correct Output?");
-					expect(testPassed).toEqual(true);
-					
-				});
+						});
+						waitsFor(function(){
+							return captured;
+						},"Waiting For Result",30000);
+				    
+						runs(function(){
+							expect(testResult).toEqual(true);	
+						});
+						
+					});
 				}
 			})(i);
 		}
@@ -73,29 +120,44 @@ describe("System Module JS Test Starts Here", function() {
 	describe("System Module- getProperties Test Starts Here", function() {
 	
 		it("VT300-125 | call getproperties with country,deviceName, devicePushId, freeServerPort and sync callback | ", function() {
-			var data = Rho.System.getProperties(['country','deviceName','devicePushId','freeServerPort']);
-			displayResult("VT300-125 | call getproperties with country,deviceName, devicePushId, freeServerPort and sync callback | ",JSON.stringify(data));
+			runs(function(){
+				var data = Rho.System.getProperties(['country','deviceName','devicePushId','freeServerPort']);
+				displayResult("VT300-125 | call getproperties with country,deviceName, devicePushId, freeServerPort and sync callback | ",JSON.stringify(data));
 			
-			var testPassed = confirm("Do you see Correct Output?");
-			expect(testPassed).toEqual(true);
+			});
+
+			waitsFor(function(){
+				return captured;
+			},"Waiting For Result",30000);
+	    
+			runs(function(){
+				expect(testResult).toEqual(true);	
+			});
 		});
 
 		for (var i=0;i<sys_get_properties.length;i++){
 			(function(idx){
 				if(isTestApplicable(sys_get_properties[idx]['osType'])){
-				it(sys_get_properties[idx]['testName'], function() {
-				
-					var propertyName = sys_get_properties[idx]['propertyName'];
-					var strGetProperty = '["'+sys_get_properties[idx]['propertyName']+'"]';
-					var objGetProperty = JSON.parse(strGetProperty);
-					var data = Rho.System.getProperties(objGetProperty);
-					
-					data = data[sys_get_properties[idx]['propertyName']];
-					displayResult(sys_get_properties[idx]['testName'],JSON.stringify(data));
-					
-					var testPassed = confirm("Do you see Correct Output?");
-					expect(testPassed).toEqual(true);
-				});
+					it(sys_get_properties[idx]['testName'], function() {
+						runs(function(){
+							var propertyName = sys_get_properties[idx]['propertyName'];
+							var strGetProperty = '["'+sys_get_properties[idx]['propertyName']+'"]';
+							var objGetProperty = JSON.parse(strGetProperty);
+							var data = Rho.System.getProperties(objGetProperty);
+							
+							data = data[sys_get_properties[idx]['propertyName']];
+							displayResult(sys_get_properties[idx]['testName'],JSON.stringify(data));
+						
+						});
+
+						waitsFor(function(){
+							return captured;
+						},"Waiting For Result",30000);
+				    
+						runs(function(){
+							expect(testResult).toEqual(true);	
+						});
+					});
 				}
 			})(i);
 		}
@@ -121,11 +183,19 @@ describe("System Module JS Test Starts Here", function() {
     			return flag;
     		}, "1 sec wait", 2000);
 
+			
     		runs(function(){
 				displayResult("VT300-126 | call getproperties with callback as anonymous function | ",data);
-				var testPassed = confirm("Do you see Correct Output?");
-				expect(testPassed).toEqual(true);
+						});
+
+			waitsFor(function(){
+				return captured;
+			},"Waiting For Result",30000);
+	    
+			runs(function(){
+				expect(testResult).toEqual(true);	
 			});
+			
 		});
 
 		it("VT300-127 | call getproperties with callback as async defined function | ", function() {
@@ -149,11 +219,14 @@ describe("System Module JS Test Starts Here", function() {
 
     		runs(function(){
 				displayResult("VT300-127 | call getproperties with callback as anonymous function | ",data);
-				var testPassed = confirm("Do you see Correct Output?");
-				expect(testPassed).toEqual(true);
+				waitsFor(function(){
+				return captured;
+				},"Waiting For Result",30000);
+	    
+				runs(function(){
+					expect(testResult).toEqual(true);	
+				});
 			});
 		});
-
 	});
-
 });

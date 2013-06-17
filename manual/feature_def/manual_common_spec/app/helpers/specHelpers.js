@@ -108,3 +108,11 @@ function isTestApplicable (anArray){
     var platform = Rho.System.platform;
     return (anArray.indexOf(platform) == -1) ? false : true ;
 }
+
+//Common Method to Make a Test Pass/Fail for Semi Automatic App.
+//Methods is used in System, CardReader
+
+var captureResult = function(status){
+    testResult = status;
+    captured = true;
+}
