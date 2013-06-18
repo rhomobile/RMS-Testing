@@ -42,15 +42,15 @@ var selected_Module="";
             
             if(selected_Module=="VT293-0001")
             {
-                setDescription("Network status notifications should be returned as connected when wlan profile is enabled and disconnected when wlan profile disabled and network status should be poll after every 6 seconds");
+                setDescription("Network status notifications should be returned as connected when wlan profile is enabled and disconnected when wlan profile disabled and network status should be poll after every 6 seconds. Poll interval does not supported on WM/CE. Notification send when Wifi or Cell network appear/disappear, to check internet connectivity use detectConnection.");
                 setExpected("Connected if have network, Disconnected otherwise. Update each 6 seconds.");
             }
             
             
             if(selected_Module=="VT293-0002")
             {
-                setDescription("network status notifications should be returned as connected when wlan profile is enabled and disconnected when wlan profile disabled");
-                setExpected("Connected if have network, Disconnected otherwise.");
+                setDescription("Network status notifications should be returned as connected when wlan profile is enabled and disconnected when wlan profile disabled and network status should be poll after every 6 seconds. Poll interval does not supported on WM/CE. Notification send when Wifi or Cell network appear/disappear, to check internet connectivity use detectConnection.");
+                setExpected("Connected if have network, Disconnected otherwise. Update each 20 seconds (default).");
             }
             
             
@@ -245,20 +245,22 @@ if(selected_Module=="VT293-0001") {
 }
     
 if(selected_Module=="VT293-0002") {
-	Rho.Network.startStatusNotify(status_notify_callback);
+	Rho.Network.startStatusNotify(null, status_notify_callback);
 }
-/*
+/*   Negative case move to other_spec
 if(selected_Module=="VT293-0003") {
  myvar = Rho.Network.startStatusNotify();
  setActual(myvar["current_status"]);
  setStatus("Network Status :"+myvar["current_status"]);
 }*/
-    
+
+/* Duplicate. Test different callbacks in generator test   
 if(selected_Module=="VT293-0004") {
     Rho.Network.startStatusNotify(6, function(params){
         status_notify_callback(params);
    });
 }
+*/
     
 if(selected_Module=="VT293-0005") {
     Rho.Network.stopStatusNotify();
@@ -507,11 +509,11 @@ Select Test To Run &nbsp;&nbsp;
 <!-- <OPTION value="VT293-0003">VT293-0003</OPTION> -->
 <OPTION value="VT293-0004">VT293-0004</OPTION>
 <OPTION value="VT293-0005">VT293-0005</OPTION>
-<OPTION platform = "WM" value="VT293-0007">VT293-0007</OPTION>
-<OPTION platform = "WM" value="VT293-0008">VT293-0008</OPTION>
-<OPTION platform = "WM" value="VT293-0009">VT293-0009</OPTION>
-<OPTION platform = "WM" value="VT293-0010">VT293-0010</OPTION>
-<OPTION platform = "WM" value="VT293-0011">VT293-0011</OPTION>
+<OPTION platform = "WINDOWS" value="VT293-0007">VT293-0007</OPTION>
+<OPTION platform = "WINDOWS" value="VT293-0008">VT293-0008</OPTION>
+<OPTION platform = "WINDOWS" value="VT293-0009">VT293-0009</OPTION>
+<OPTION platform = "WINDOWS" value="VT293-0010">VT293-0010</OPTION>
+<OPTION platform = "WINDOWS" value="VT293-0011">VT293-0011</OPTION>
 <OPTION value="VT293-0017">VT293-0017</OPTION>
 <OPTION value="VT293-0023">VT293-0023</OPTION>
 <OPTION value="VT293-0024">VT293-0024</OPTION>

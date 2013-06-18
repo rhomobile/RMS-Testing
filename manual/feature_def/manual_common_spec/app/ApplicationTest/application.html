@@ -65,53 +65,9 @@
 	<legend>Rho.Application.startUri</legend>
 	<ul>set the Start Page and Click on Home button
 	    <li><a href="javascript:void(0)" onclick ="startLocal();">set StartUri to a local page</a></li>
-	    <li><a href="javascript:void(0)" onclick ="startWeb();">set StartUri to a web page </a></li>
-	    <li><a href="javascript:void(0)" onclick ="startNull();">set StartUri to Null </a></li>
-		<li><a href="javascript:void(0)" onclick ="startInvalid();">set StartUri to a web page that doesnt exist</a></li>
 		<li><a href="javascript:void(0)" onclick ="startOriginal();">set StartUri to original value</a></li>
 	</ul>
 </fieldset>
-<!-- Ruby only. TODO: make ajax call to ruby controller
-<fieldset>
-	<legend>Rho.Application.setLocale</legend>
-	<ul>set the Start Page and Click on Home button
-	<li>UTF-8 encoded string: <br/><%= "Utf8 String".force_encoding( Encoding.UTF_8) %></li>
-	<li>Greeting text from app\lang\lang_* : <br/><%= Localization.Views['greeting'] %></li>
-     <li>Some Myth About Testing: <br/><%= Localization.Views['abttest'] %></li>
-	    <li><a href="javascript:void(0)" onclick ="setArabic();">set Locale to Arabic</a></li>
-	    <li><a href="javascript:void(0)" onclick ="setRussian();">set Locale to Russian</a></li>
-	    <li><a href="javascript:void(0)" onclick ="setGerman();">set Locale to German</a></li>
-		<li><a href="javascript:void(0)" onclick ="setCatalan();">set Locale to Catalan</a></li>
-		<li><a href="javascript:void(0)" onclick ="setFrench();">set Locale to French</a></li>
-	    <li><a href="javascript:void(0)" onclick ="setSpanish();">set Locale to Spanish</a></li>
-	    <li><a href="javascript:void(0)" onclick ="setItalian();">set Locale to Italian</a></li>
-		<li><a href="javascript:void(0)" onclick ="setKorean();">set Locale to Korean</a></li>
-		<li><a href="javascript:void(0)" onclick ="setChinese();">set Locale to Chinese</a></li>
-	    <li><a href="javascript:void(0)" onclick ="setjapanese();">set Locale to Japanese</a></li>
-	    <li><a href="javascript:void(0)" onclick ="setCzech();">set Locale to Czech</a></li>
-		<li><a href="javascript:void(0)" onclick ="setDannish();">set Locale to Dannish</a></li>
-		<li><a href="javascript:void(0)" onclick ="setFinnish();">set Locale to Finnish</a></li>
-	    <li><a href="javascript:void(0)" onclick ="setSerbian();">set Locale to Serbian</a></li>
-	    <li><a href="javascript:void(0)" onclick ="setDutch();">set Locale to Dutch</a></li>
-		<li><a href="javascript:void(0)" onclick ="setPoruguese();">set Locale to Portuguese</a></li>
-		<li><a href="javascript:void(0)" onclick ="setHebrew();">set Locale to Hebrew</a></li>
-	</ul>
-</fieldset>
--->
-
-
-<!--
-<fieldset>
-	<legend>Rho.Application.Title: WM only</legend>
-	<ul>set the Title
-	    <li><a href="javascript:void(0)" onclick ="setTitle();">set Title to the Window </a></li>
-	   <li id="Rho_Application_title">
-	   <a href="javascript:void(0)" onclick ="getTitle();">get the Title</a><span class="result"> </span></li>
-	<li><a href="javascript:void(0)" onclick ="setTitleNull();">set Title to null </a></li>		
-	</ul>
-</fieldset>
-
--->
 
 
 <div id="title_test" class="method_tests wm">
@@ -132,7 +88,7 @@
 
     <div class="test_scenario">
         <div class="test_scenario_controls">
-            <button onClick='Rho.Application.title="My Title";'>title("My Title")</button>
+            <button onClick='Rho.Application.title="My Title";Rho.WebView.refresh();'>title("My Title")</button>
         </div>
         <div class="test_scenario_desc">
             <span class="test_scenario_number">VT***-**</span>
@@ -142,7 +98,7 @@
 
     <div class="test_scenario">
         <div class="test_scenario_controls">
-            <button onClick='Rho.Application.title="";'>title("")</button>
+            <button onClick='Rho.Application.title="";Rho.WebView.refresh();'>title("")</button>
         </div>
         <div class="test_scenario_desc">
             <span class="test_scenario_number">VT***-**</span>
@@ -155,40 +111,14 @@
 	<legend>Rho.Application.Native Menu</legend>
 	<ul>Redefine the NativMenu
 	    <li><a href="javascript:void(0)" onclick ="menuTest();">set Native menu to different actions</a></li>
-<!-- Negative cases. Should be tested in other_specs	    
-	    <li><a href="javascript:void(0)" onclick ="menuNullNames();">Dont provide Title to two buttons</a></li>
-	    <li><a href="javascript:void(0)" onclick ="menuNullActions();">Set no action to two buttons</a></li>
-		<li><a href="javascript:void(0)" onclick ="menuInvalidActions();">Set Invalid Actions to two buttons </a></li>
-		<li><a href="javascript:void(0)" onclick ="menuInvalidNames();">setInvalid names to two options</a></li>
-		-->
+        <li><a href="javascript:void(0)" onclick ="menuDefaultTest();">set Default Native menu</a></li>
 		<li><a href="javascript:void(0)" onclick ="menuReservedItem();">Add menu with action pointed to html page. Select Load a page menu item</a></li>
+		<li><a href="javascript:void(0)" onclick ="menuJavascriptCall();">Javascript method call for Exit </a></li>
 	</ul>
 </fieldset>
-<!-- removed. New property Application.rhoPlatformVersion will be implemented in RMS 4.1
-<fieldset>
-	<legend>Rho.Application.RhoPlatformVersion: WM and Android</legend>
-	<ul>RhoPlatformVersion
-	<li id="Rho_Application_version_Async">
-	  <a href="javascript:void(0)" onclick ="platfromAsync1();">Platform version through async</a><span class="result"> </span></li>
-	 <li id="Rho_Application_version_Sync">
-	  <a href="javascript:void(0)" onclick ="platfromAsync1();">Platform version through sync</a><span class="result"> </span></li>
-	  <li id="Rho_Application_version_Anon">
-	  <a href="javascript:void(0)" onclick ="platfromAsync1();">Platform version through anonymous</a><span class="result"> </span></li>
-	</ul>
-</fieldset>
--->
-
 <fieldset>
 	<legend>Rho.Application.invalidSecurityTokenStartPath</legend>
 	<ul>Invalid Security Token: set in rhoconfig.txt : invalid_security_token_start_path; Set in build.yml: security_token. Rebuild application and start.
-<!-- ReadOnly property	
-	<li > <a href="javascript:void(0)" onclick ="invalidSecurityLocal();">Set Invalid security token path to Local File</a></li>
-	<li > <a href="javascript:void(0)" onclick ="invalidSecurityGoogle();">Set Invalid security token path to  Google</a></li>
-	<li> <a href="javascript:void(0)" onclick ="invalidSecurityNull();">Set Invalid security token path to Null</a></li>
-	<li> <a href="javascript:void(0)" onclick ="invalidSecurityInvalid();">Set Invalid security token path to Invalid</a></li>
-	<li> <a href="javascript:void(0)" onclick ="invalidSecurityStartPage();">Set Invalid security token path to startpage</a></li>
-	-->
-	
 	<li id="Rho_Application_securityToken">
 	  <a href="javascript:void(0)" onclick ="getInvalidSecurityTokenStartPath();">getSecurityTokenPath</a><span class="result"></span></li>
 	</ul>
@@ -209,17 +139,6 @@
 	  <a href="javascript:void(0)" onclick ="applicationNotify();">setApplicationNotify</a><span class="result"></span></li>
 	</ul>
 </fieldset>
-
-<!-- readonly property. TODO: add get property call
-<fieldset>
-	<legend>Rho.Application.badLinkURI: WM Only</legend>
-	<ul>set the Badlink and create a Navigation Time out 
-	    <li><a href="javascript:void(0)" onclick ="badWeb();">set BadlinkUri to webPage Google</a></li>
-	    <li><a href="javascript:void(0)" onclick ="badnull();">set BadlinkUri to Null</a></li>
-	    <li><a href="javascript:void(0)" onclick ="badNotExist();">set BadlinkUri to page that Doesnt exist </a></li>
-	</ul>
-</fieldset>
--->
 
 </body>
 </html>

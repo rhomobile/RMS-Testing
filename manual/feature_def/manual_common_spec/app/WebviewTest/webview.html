@@ -88,12 +88,12 @@
     if (Rho.System.platform == 'WINDOWS') {
 
         Rho.Application.nativeMenu = [
-            { 'Tab0': 'javascript:tabbarSwitch(0)'},
-            { 'Tab1': 'javascript:tabbarSwitch(1)'},
-            {'Tab2': 'javascript:tabbarSwitch(2)'},
-            {'Tab3': 'javascript:tabbarSwitch(3)'},
-            {'Tab4': 'javascript:tabbarSwitch(4)'},
-            {'Exit': 'exit' }
+            { 'label':'Tab0', 'action': 'javascript:tabbarSwitch(0)'},
+            { 'label':'Tab1', 'action': 'javascript:tabbarSwitch(1)'},
+            { 'label':'Tab2', 'action': 'javascript:tabbarSwitch(2)'},
+            { 'label':'Tab3', 'action': 'javascript:tabbarSwitch(3)'},
+            { 'label':'Tab4', 'action': 'javascript:tabbarSwitch(4)'},
+            { 'label':'Exit', 'action': 'exit' }
         ];
     }
 </script>
@@ -164,7 +164,7 @@
     </div>
 </div>
 
-<!--
+<!-- This test crash the device. Has to be fixed.
 
 <div id="enableWebPlugins_test" class="method_tests android">
     <div class="method_name">WebView.enableWebPlugins</div>
