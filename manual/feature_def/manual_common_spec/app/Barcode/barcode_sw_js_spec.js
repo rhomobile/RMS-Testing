@@ -43,7 +43,7 @@ describe("Barcode Test", function() {
 
 		runs(function()
 		{
-			Rho.Barcode.default = objSCN;
+			Rho.Barcode.setDefaultID( objSCN.getId() );
 			Rho.Barcode.take({},callbacktake);
 			setTimeout(function() {
 				enableFlag = true;
