@@ -70,19 +70,17 @@ def run_apps(platform)
 	cfg = File.read(cfgfile)
 	cfg.gsub!(/(rhoconnect_push_server.*)/, "rhoconnect_push_server = 'http://#{RhoconnectHelper.push_host}:#{RhoconnectHelper.push_port}'")
 	File.open(cfgfile, 'w') {|f| f.write cfg}
-	# Patch rhodes 'build.yml' file: setup sdk and extentions properties
-	# TODO: remove comments in sdk and extensions sections !!!
-	#
+	# Patching rhodes 'build.yml' file (setup sdk and extentions properties)
 	push_client_path = File.join($spec_path, 'rhoconnect_push_client')
 	File.open(File.join(push_client_path, "build.yml"), 'w') do |bf|
 	  File.open(File.join(push_client_path, "build.yml.example"), 'r') do |f|
 	    f.each do |line|
 	      if line =~ /sdk: Path-to-Rhodes/
 	      	  # FIXME: using installed rhodes gem (beta.21)
-	          bf.puts "sdk: \"#{$rho_root}\"\n"
+	          bf.puts "#sdk: \"#{$rho_root}\"\n"
 	      elsif line =~ /Path-to-Motorola-Extensions/
 	      	  # FIXME: using installed rhodes gem (beta.21)
-	          bf.puts "  extensions: \"#{$rhoelements_root}/extensions\"\n"
+	          bf.puts "#  extensions: \"#{$rhoelements_root}/extensions\"\n"
 	      else
 	          bf.puts line
 	      end
@@ -102,8 +100,7 @@ def run_apps(platform)
 			end
 
 			FileUtils.chdir File.join($spec_path, 'rhoconnect_push_client')
-			# rake clean:android
-			# rake device:android:debug
+			# system("rake clean:android")
 			puts "\nBuilding rhodes app ..."
 			puts "rake device:#{$platform}:debug"
 			system("rake device:#{$platform}:debug").should == true
@@ -130,11 +127,17 @@ def run_apps(platform)
 			puts "Configure android emulator ..."
 			Rake::Task["config:android:emulator"].invoke
 			AndroidTools.run_emulator( :wipe => true )
+			TEST_PKGS.each do |pkg|
+				out = `adb -e shell pm list packages #{pkg}`
+				unless out.empty?
+					puts "Uninstalling package #{pkg} ..."
+		    	system "adb -e uninstall #{pkg}"
+		  	end
+			end
 
 			puts "Install rhoconnect push service"
 			push_service_apk = File.join($rhoelements_root,'libs','rhoconnect-push-service','rhoconnect-push-service.apk')
 			AndroidTools.load_app_and_run("-e", push_service_apk, "")
-
 			puts 'Building and starting rhodes application ...'
 			FileUtils.chdir File.join($spec_path, 'rhoconnect_push_client')
 			system("rake run:#{$platform}").should == true

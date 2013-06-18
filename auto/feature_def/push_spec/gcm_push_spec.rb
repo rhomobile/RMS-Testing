@@ -71,9 +71,9 @@ describe 'GCM push spec' do
 
   it 'should register' do
 
-    puts 'Waiting message with GCM registaration...'
+    puts 'Waiting message with GCM registration...'
     $mutex.synchronize do
-      res = $signal.wait($mutex, 60)
+      res = $signal.wait($mutex, 30)
       $requests.count.should == 1
 
       $device_id = $requests.first.query['device_id']
@@ -96,7 +96,7 @@ describe 'GCM push spec' do
 
     puts 'Waiting message with push content...'
     $mutex.synchronize do
-      $signal.wait($mutex, 60)
+      $signal.wait($mutex, 30)
 
       $requests.count.should == 1
 
@@ -117,7 +117,7 @@ describe 'GCM push spec' do
 
     puts 'Waiting message with push content...'
     $mutex.synchronize do
-      $signal.wait($mutex, 60) # timeout => 30 secs
+      $signal.wait($mutex, 30) # timeout => 30 secs
 
       $requests.count.should == 1
 
@@ -144,7 +144,7 @@ describe 'GCM push spec' do
 
     puts 'Waiting message with push content...'
     $mutex.synchronize do
-      $signal.wait($mutex, 60)
+      $signal.wait($mutex, 30)
 
       $requests.count.should == 1
 
@@ -179,7 +179,7 @@ describe 'GCM push spec' do
 
       5.times do |i|
         break if $requests.count == 5
-        $signal.wait($mutex, 60)
+        $signal.wait($mutex, 30)
         puts "Message count: #{$requests.count}"
       end
 
@@ -209,7 +209,7 @@ describe 'GCM push spec' do
 
     puts 'Waiting message with push content...'
     $mutex.synchronize do
-      $signal.wait($mutex, 60)
+      $signal.wait($mutex, 30)
 
       $requests.count.should == 1
 

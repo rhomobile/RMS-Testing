@@ -12,7 +12,6 @@ class SettingsController < Rho::RhoController
 
   def index
     @msg = @params['msg']
-
     puts "Logged in: #{SyncEngine.logged_in}"
 =begin
       if SyncEngine.logged_in
@@ -21,17 +20,16 @@ class SettingsController < Rho::RhoController
           sleep 5
       end
 =end
-	SyncEngine.set_syncserver("http://#{SYNC_SERVER_HOST}:#{SYNC_SERVER_PORT}")
-	RhoConf.set_property_by_name('rhoconnect_push_server',"http://#{PUSH_SERVER_HOST}:#{PUSH_SERVER_PORT}")
-	puts "push server is #{RhoConf.get_property_by_name('rhoconnect_push_server')}"
+    SyncEngine.set_syncserver("http://#{SYNC_SERVER_HOST}:#{SYNC_SERVER_PORT}")
+    RhoConf.set_property_by_name('rhoconnect_push_server',"http://#{PUSH_SERVER_HOST}:#{PUSH_SERVER_PORT}")
+    puts "push server is #{RhoConf.get_property_by_name('rhoconnect_push_server')}"
 
-      #    System.set_push_notification('/app/Settings/push_callback', '')
-	SyncEngine.login('pushclient', 'pushclient', '/app/Settings/login_callback' )
+    # System.set_push_notification('/app/Settings/push_callback', '')
+	  SyncEngine.login('pushclient', 'pushclient', '/app/Settings/login_callback' )
   end
 
   def login_callback
     errCode = @params['error_code'].to_i
-
     puts "login callback, error code: #{errCode}"
 
     if errCode != 0
@@ -58,8 +56,7 @@ class SettingsController < Rho::RhoController
     port = SPEC_LOCAL_SERVER_PORT
 
     if(Rho::RhoConfig.exist?('push_pin') && Rho::RhoConfig.push_pin != '')
-	  puts "RhoConfig: #{Rho::RhoConfig}"
-
+      puts "RhoConfig: #{Rho::RhoConfig}"
       puts "Sending device_id: #{Rho::RhoConfig.push_pin}"
       Rho::AsyncHttp.get :url => "http://#{host}:#{port}?device_id=#{Rho::RhoConfig.push_pin}"
     else

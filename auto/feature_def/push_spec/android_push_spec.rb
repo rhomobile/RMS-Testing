@@ -145,21 +145,21 @@ describe 'Android push spec' do
     sleep 3
   end
 
-  # it 'should proceed push message with exit comand' do
-  #   puts 'Sending push message with exit command...'
+  it 'should proceed push message with exit comand' do
+    puts 'Sending push message with exit command...'
 
-  #   message = 'exit'
-  #   params = { :user_id=>['pushclient'], :message=>message }
-  #   RhoconnectHelper.api_post('users/ping',params,@api_token)
+    message = 'exit'
+    params = { :user_id=>['pushclient'], :message=>message }
+    RhoconnectHelper.api_post('users/ping',params,@api_token)
 
-  #   puts 'Waiting message with push content...'
-  #   expect_request('alert').should == message
+    puts 'Waiting message with push content...'
+    expect_request('alert').should == message
 
-  #   sleep 5
+    sleep 5
 
-  #   output = Jake.run2('adb', ['-e', 'shell', 'ps'], {:hide_output=>true})
-  #   (output =~ /rho_push_client/).should be_nil
-  # end
+    output = Jake.run2('adb', ['-e', 'shell', 'ps'], {:hide_output=>true})
+    (output =~ /rho_push_client/).should be_nil
+  end
 
   # it 'should process push message' do
   #   puts 'Sending push message with greeting ...'
