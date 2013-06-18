@@ -88,5 +88,5 @@ splash_screen='zoom'
 use_bb_full_browser=6
 
 syncserver = 'http://192.168.1.128:9292'
-rhoconnect_push_server = 'http://192.168.1.128:8675'
+rhoconnect_push_server = 'http://192.168.127.139:8675'
 rhoconnect_push_appname = 'someappname'

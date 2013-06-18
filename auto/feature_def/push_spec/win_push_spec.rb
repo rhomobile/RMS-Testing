@@ -5,54 +5,46 @@ require 'yaml'
 require 'psych' if RUBY_VERSION.to_s > "1.9.0"
 
 puts 'RUBY VERSION: ' + RUBY_VERSION.to_s
-TEST_PKGS = %w[com.rhomobile.rho_push_client com.motsolutions.cto.services.ans]
+#TEST_PKGS = %w[com.rhomobile.rho_push_client com.motsolutions.cto.services.ans]
 
 cfgfilename = File.join(File.dirname(__FILE__),'config.yml')
 
 $rho_root = nil
 if File.file?(cfgfilename)
-	config = YAML::load_file(cfgfilename)
-	$rho_root = config["rhodes"]
-	$rhoconnect_root = config["rhoconnect"]
-	$rho_root = File.expand_path($rho_root) if $rho_root
-	$rhoconnect_root = File.expand_path($rhoconnect_root) if $rhoconnect_root
-	$rhoelements_root = config["rhoelements"]
-	$rhoelements_root = File.expand_path($rhoelements_root) if $rhoelements_root
+  config = YAML::load_file(cfgfilename)
+  $rho_root = config["rhodes"]
+  $rhoconnect_root = config["rhoconnect"]
+  $rho_root = File.expand_path($rho_root) if $rho_root
+  $rhoconnect_root = File.expand_path($rhoconnect_root) if $rhoconnect_root
+  $rhoelements_root = config["rhoelements"]
+  $rhoelements_root = File.expand_path($rhoelements_root) if $rhoelements_root
 end
 
 unless $rho_root
-	$rho_root = `get-rhodes-info --rhodes-path`.chomp
+  $rho_root = `get-rhodes-info --rhodes-path`.chomp
 end
 
 puts "rhodes location: #{$rho_root}"
 puts "rhoconnect location:  #{$rhoconnect_root}"
 puts "rhoelements location: #{$rhoelements_root}"
 
-out = `adb devices`
-device_list = out.split("\n")[1]
-raise 'No attached android devices found' unless device_list
-$deviceId = device_list.split("\t")[0]
-puts "Attached device: #{$deviceId}"
-puts
-
 $spec_path = FileUtils.pwd
-$platform = 'android'
+$platform = 'windows'
 $device_id = nil
 $server = nil
 $requests = []
 $signal = ConditionVariable.new
 $mutex = Mutex.new
-# Assume redis up and running. Do not touch it!
-$rhoconnect_use_redis = false # true will start/stop it
+$rhoconnect_use_redis = true # true will start/stop it
 
 require File.join($rho_root,'lib','build','jake.rb')
 require File.join($rho_root,'platform','android','build','android_tools.rb')
 require_relative './rhoconnect_helper.rb'
 require './run_rhoconnect_spec'
 
-describe 'Rhoconnect push spec' do
+describe 'Windows Mobile push spec' do
   before(:all) do
-	  #TODO: check that Rhoelements gem is installed
+    #TODO: check that Rhoelements gem is installed
     puts "Starting local server"
     $server, addr, port = Jake.run_local_server
     File.open(File.join($spec_path, 'rhoconnect_push_client', 'app', 'local_server.rb'), 'w') do |f|
@@ -75,7 +67,7 @@ describe 'Rhoconnect push spec' do
     run_apps($platform)
 
     @api_token = RhoconnectHelper.api_post('system/login', { :login => 'rhoadmin', :password => '' })
-    # puts "API token: #{@api_token}"
+    puts "API token: #{@api_token}"
   end
 
 
@@ -86,11 +78,11 @@ describe 'Rhoconnect push spec' do
     # `adb emu kill`
 
     # FIXME:
-    TEST_PKGS.each do |pkg|
-      puts "Uninstalling package #{pkg} ..."
-      system "adb -s #{$deviceId} uninstall #{pkg}"
-    end
-    system "kill -9 #{$logcat_pid}" if $logcat_pid
+    # TEST_PKGS.each do |pkg|
+    #   puts "Uninstalling package #{pkg} ..."
+    #   system "adb -s #{$deviceId} uninstall #{pkg}"
+    # end
+    # system "kill -9 #{$logcat_pid}" if $logcat_pid
     # puts "Uninstalling package com.rhomobile.rho_push_client ..."
     # system "adb uninstall com.rhomobile.rho_push_client"
     # puts "Uninstalling package com.motsolutions.cto.services.ans ..."
@@ -100,38 +92,41 @@ describe 'Rhoconnect push spec' do
   def expect_request(name)
     val = nil
     $mutex.synchronize do
-		  $signal.wait($mutex, 60) # wait timeout 60 secs.
-		  $requests.count.should == 1
-		  val = $requests.first.query[name]
-		  $requests.clear
+      $signal.wait($mutex, 60) # wait timeout 60 secs.
+      $requests.count.should == 1
+      val = $requests.first.query[name]
+      $requests.clear
     end
     val
   end
 
   it 'should login' do
-    puts 'Waiting message with login errCode'
-    expect_request('error').should == "0"
+    # puts 'Waiting message with login errCode'
+    #pending
+    # expect_request('error').should == "0"
   end
 
   it 'should register' do
     puts 'Waiting message with Rhoconnect registaration...'
-    $device_id = expect_request('device_id')
-    $device_id.should_not be_nil
-    $device_id.should_not == ''
+    #pending
+    # $device_id = expect_request('device_id')
+    # $device_id.should_not be_nil
+    # $device_id.should_not == ''
   end
 
   it 'should proceed push message at foregro"und' do
-    sleep 5
-    puts 'Sending push message...'
+    #pending
+    # sleep 5
+    # puts 'Sending push message...'
 
-    message = 'magic1'
-    params = { :user_id=>['pushclient'], :message=>message }
-    RhoconnectHelper.api_post('users/ping',params,@api_token)
+    # message = 'magic1'
+    # params = { :user_id=>['pushclient'], :message=>message }
+    # RhoconnectHelper.api_post('users/ping',params,@api_token)
 
-    puts 'Waiting message with push content...'
-    expect_request('alert').should == message
+    # puts 'Waiting message with push content...'
+    # expect_request('alert').should == message
 
-    sleep 3
+    # sleep 3
   end
 
   # it 'should proceed push message with exit comand' do

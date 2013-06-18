@@ -43,9 +43,9 @@ def run_apps(platform)
 
 	RhoconnectHelper.set_rc_push_out File.open( File.join($app_path, "rhoconnect_push.log" ), "w")
 	RhoconnectHelper.set_rc_out(File.open( File.join($app_path, "rhoconnect.log" ), "w"), File.open( File.join($app_path, "rhoconnect_err.log" ), "w"))
-	# RhoconnectHelper.set_redis_out File.open( File.join($app_path, "redis.log" ), "w")
-	RhoconnectHelper.set_enable_resque(false)
+	RhoconnectHelper.set_redis_out File.open( File.join($app_path, "redis.log" ), "w") if $rhoconnect_use_redis
 	RhoconnectHelper.set_enable_redis($rhoconnect_use_redis)
+	RhoconnectHelper.set_enable_resque(false)
 
 	stop_apps
 
@@ -136,6 +136,10 @@ def run_apps(platform)
 	else
 		#
 		# TODO: windows mobile
+		puts
+		puts "Specs for Windows Mobile/CE Devices should be here ..."
+		puts
+
 		#
 	end
 
