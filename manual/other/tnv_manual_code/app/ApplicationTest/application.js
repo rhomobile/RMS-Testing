@@ -14,24 +14,24 @@ function startOriginal()
 
 function menuNullNames() {
 	Rho.Application.nativeMenu = [
-	{'Options': 'Options'},{'Exit': 'exit'},{'': 'Log'},{'': 'Refresh'},{ 'Home': 'Home'}
+	{'label':'Options', 'action': 'Options'},{'label':'Exit', 'action': 'exit'},{'label':'', 'action': 'Log'},{'label':'', 'action': 'Refresh'},{ 'label':'Home', 'action': 'Home'}
 	 ];
 	}
 
 function menuNullActions() {
 Rho.Application.nativeMenu = [
-{'Options': 'Options'},{'Exit': 'exit'},{'Log': ''},{'Refresh': ''},{ 'Home': 'Home'}
+{'label':'Options', 'action': 'Options'},{'label':'Exit', 'action': 'exit'},{'label':'Log', 'action': ''},{'label':'Refresh', 'action': ''},{ 'label':'Home', 'action': 'Home'}
  ];
 }
 
 function menuInvalidNames() {
 Rho.Application.nativeMenu = [
-{'Options': 'Options'},{'Keeewww###$%34': 'exit'},{'Log': 'Log'},{'Deva5466_45': 'Refresh'},{ 'Home': 'Home'}
+{'label':'Options', 'action': 'Options'},{'label':'Keeewww###$%34', 'action': 'exit'},{'label':'Log', 'action': 'Log'},{'label':'Deva5466_45', 'action': 'Refresh'},{ 'label':'Home', 'action': 'Home'}
  ];
 }
 
 function menuInvalidActions() {
 	Rho.Application.nativeMenu = [
-	{'Options': 'Options'},{'Exit': 'Dontknow '},{'Log': 'Log'},{'Refresh': 'Buhahaha'},{ 'Home': 'Home'}
+	{'label':'Options', 'action': 'Options'},{'label':'Exit', 'action': 'Dontknow '},{'label':'Log', 'action': 'Log'},{'label':'Refresh', 'action': 'Buhahaha'},{ 'label':'Home', 'action': 'Home'}
 	 ];
 	}

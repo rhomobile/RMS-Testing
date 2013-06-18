@@ -68,20 +68,23 @@ function menuCallback(){
 
 function menuTest() {
 Rho.Application.nativeMenu = [
-{ 'Home': 'Home'},{'separator': 'separator'},{'Options': 'options'},{'Log': 'log'},{'Exit': 'exit'},{'Refresh': 'refresh'}, {'Callback': menuCallback}
+{ 'label':'Home', 'action': 'Home'},{'label':'separator', 'action': 'separator'},{'label':'Options', 'action': 'options'},{'label':'Log', 'action': 'log'},{'label':'Exit', 'action': 'exit'},{'label':'Refresh', 'action': 'refresh'}, {'label':'Callback', 'action': menuCallback}
  ];
 }
 
+function menuDefaultTest() {
+    Rho.Application.nativeMenu = Rho.Application.defaultNativeMenu
+}
  
 function menuReservedItem() {
 Rho.Application.nativeMenu = [
-{'Options': 'Options'},{'Exit': 'exit'},{'Log': 'Log'},{'Refresh': 'Refresh'},{ 'Home': 'Home'},{'Load a page': '/app/loading.html'}
+{'label':'Options', 'action': 'Options'},{'label':'Exit', 'action': 'exit'},{'label':'Log', 'action': 'Log'},{'label':'Refresh', 'action': 'Refresh'},{ 'label':'Home', 'action': 'Home'},{'label':'Load a page', 'action': '/app/loading.html'}
  ];
 } 
 
 function menuJavascriptCall() {
 Rho.Application.nativeMenu = [
-{'Log': 'Log'},{'fullscreen': 'fullscreen'},{'Exit':'javascript:onQuit()'},{'separator': 'separator '},{'Refresh': 'Refresh'},{ 'Home': 'Home'},{'Load a page': '/app/loading.html'}
+{'label':'Log', 'action': 'Log'},{'label':'fullscreen', 'action': 'fullscreen'},{'label':'Exit', 'action':'javascript:onQuit()'},{'label':'separator', 'action': 'separator '},{'label':'Refresh', 'action': 'Refresh'},{ 'label':'Home', 'action': 'Home'},{'label':'Load a page', 'action': '/app/loading.html'}
 ];
 } 
 function onQuit()

@@ -88,7 +88,7 @@
 
     <div class="test_scenario">
         <div class="test_scenario_controls">
-            <button onClick='Rho.Application.title="My Title";'>title("My Title")</button>
+            <button onClick='Rho.Application.title="My Title";Rho.WebView.refresh();'>title("My Title")</button>
         </div>
         <div class="test_scenario_desc">
             <span class="test_scenario_number">VT***-**</span>
@@ -98,7 +98,7 @@
 
     <div class="test_scenario">
         <div class="test_scenario_controls">
-            <button onClick='Rho.Application.title="";'>title("")</button>
+            <button onClick='Rho.Application.title="";Rho.WebView.refresh();'>title("")</button>
         </div>
         <div class="test_scenario_desc">
             <span class="test_scenario_number">VT***-**</span>
@@ -111,8 +111,9 @@
 	<legend>Rho.Application.Native Menu</legend>
 	<ul>Redefine the NativMenu
 	    <li><a href="javascript:void(0)" onclick ="menuTest();">set Native menu to different actions</a></li>
+        <li><a href="javascript:void(0)" onclick ="menuDefaultTest();">set Default Native menu</a></li>
 		<li><a href="javascript:void(0)" onclick ="menuReservedItem();">Add menu with action pointed to html page. Select Load a page menu item</a></li>
-		<li><a href="javascript:void(0)" onclick ="menuJavascriptCall();">Javascript method call for Exit/a></li>
+		<li><a href="javascript:void(0)" onclick ="menuJavascriptCall();">Javascript method call for Exit </a></li>
 	</ul>
 </fieldset>
 <fieldset>
