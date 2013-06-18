@@ -1,4 +1,4 @@
-describe("Barcode Test", function() {
+describe("Barcode Manual Test", function() {
 	
 	var enableFlag = false;
 	var decodeFlag = false;
@@ -14,6 +14,7 @@ describe("Barcode Test", function() {
    (function(objSCN){ 
 
    	var scnid = objSCN.getProperty('ID');
+   	var scntype = objSCN.getProperty('scannerType');
 
 	beforeEach(function() {
 		enableFlag = false;
@@ -27,7 +28,7 @@ describe("Barcode Test", function() {
 		//objSCN.clearAllProperties();
 	});
 
-	it("VT282-1762 | Enable with callback as function |" + scnid, function() {
+	it("VT282-1762 | Enable with callback as function |" + scnid + scntype, function() {
 
 		runs(function()
 		{
@@ -56,7 +57,7 @@ describe("Barcode Test", function() {
 		});
 	});
 
-	it("VT282-1763 | Enable without callback and without any param (Synchronous Access) |"+ scnid, function() {
+	it("VT282-1763 | Enable without callback and without any param (Synchronous Access) |"+ scnid + scntype, function() {
 		
 		runs(function()
 		{
@@ -86,7 +87,7 @@ describe("Barcode Test", function() {
 
 	});
 
-	it("VT282-1764 | Enable with alldecoders enabled and callback as function URL |", function() {
+	it("VT282-1764 | Enable with alldecoders enabled and callback as function URL |"+ scnid + scntype, function() {
 		
 		runs(function()
 		{
@@ -115,7 +116,7 @@ describe("Barcode Test", function() {
 		});
 	});
 
-	it("VT282-1765 | Enable with picklist software reticle, scantimeout 3000 and callback as function |"+ scnid, function() {
+	it("VT282-1765 | Enable with picklist software reticle, scantimeout 3000 and callback as function |"+ scnid + scntype, function() {
 		
 
 		runs(function()
@@ -146,7 +147,7 @@ describe("Barcode Test", function() {
 
 	});
 
-	it("VT282-1766 | Enable with alldecoders disabled, code128 as enabled without callback |"+ scnid, function() {
+	it("VT282-1766 | Enable with alldecoders disabled, code128 as enabled without callback |"+ scnid + scntype, function() {
 		
 		runs(function()
 		{
@@ -306,7 +307,7 @@ describe("Barcode Test", function() {
 			setObjective("VT282-1778 | call setDefault and take");
 			setInstruction("Take method wait for scanner beam or viewfinder to come automatically without pressing hadrware trigger " + scnid + " Scan code 128 barcode");
 			setExpected("code128 barcode should decode and retrun value should be decoded data and status");
-			Rho.Barcode.setDefaultID( objSCN.getId() );
+			Rho.Barcode.setDefault(objSCN);
 			Rho.Barcode.take({},callbackenable);
 			setTimeout(function() {
 				enableFlag = true;
@@ -338,7 +339,7 @@ describe("Barcode Test", function() {
 			setObjective("VT282-1781 | call setDefault and enable");
 			setInstruction("press hadrware trigger to start" + scnid);
 			setExpected("code128 barcode should decode and retrun value should be decoded data and status");
-			Rho.Barcode.setDefaultID( objSCN.getId() );
+			Rho.Barcode.setDefault(objSCN);
 			Rho.Barcode.enable({},callbackenable);
 			setTimeout(function() {
 				enableFlag = true;
@@ -608,7 +609,7 @@ describe("Barcode Test", function() {
 
 		runs(function()
 		{		
-			objSCN.setproperty('allDecoders','true');
+			objSCN.setProperty('allDecoders','true');
 			waitsFor(function() {
 			return document.getElementById("actResult").innerHTML != "init";
 			}, "Timed out waiting for tester to respond", 300000);
@@ -639,7 +640,7 @@ describe("Barcode Test", function() {
 
 		runs(function()
 		{		
-			objSCN.setproperty("allDecoders","false");
+			objSCN.setProperty("allDecoders","false");
 			waitsFor(function() {
 			return document.getElementById("actResult").innerHTML != "init";
 			}, "Timed out waiting for tester to respond", 300000);
@@ -670,7 +671,7 @@ describe("Barcode Test", function() {
 
 		runs(function()
 		{		
-			objSCN.setproperty("autoenter","true");
+			objSCN.setProperty("autoenter","true");
 			waitsFor(function() {
 			return document.getElementById("actResult").innerHTML != "init";
 			}, "Timed out waiting for tester to respond", 300000);
@@ -700,7 +701,7 @@ describe("Barcode Test", function() {
 
 		runs(function()
 		{		
-			objSCN.setproperty("autoenter","false");
+			objSCN.setProperty("autoenter","false");
 			waitsFor(function() {
 			return document.getElementById("actResult").innerHTML != "init";
 			}, "Timed out waiting for tester to respond", 300000);
@@ -731,7 +732,7 @@ describe("Barcode Test", function() {
 
 		runs(function()
 		{		
-			objSCN.setproperty('autotab',true);
+			objSCN.setProperty('autotab',true);
 			waitsFor(function() {
 			return document.getElementById("actResult").innerHTML != "init";
 			}, "Timed out waiting for tester to respond", 300000);
@@ -762,7 +763,7 @@ describe("Barcode Test", function() {
 
 		runs(function()
 		{		
-			objSCN.setproperty('autotab',false);
+			objSCN.setProperty('autotab',false);
 			waitsFor(function() {
 			return document.getElementById("actResult").innerHTML != "init";
 			}, "Timed out waiting for tester to respond", 300000);
