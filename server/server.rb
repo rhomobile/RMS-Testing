@@ -91,6 +91,32 @@ $local_server.mount_proc '/test_methods' do |req,res|
     end
 end
 
+$local_server.mount_proc '/download_app' do |req,res|
+    device = req.query()["device"]
+    device = device.downcase if device
+    
+    filenames = {
+        'android' => 'TestApp_signed.apk',
+        'wm' => 'TestAppWM6.5.cab',
+        'ios' => 'auto_common_spec.ipa',
+        'ce' => 'TestAppCE.cab',
+        'win32' => 'everywan.exe',
+        'wp8' => 'everywan.exe'
+    }
+    
+    filename = filenames[device]
+    
+    if filename then
+        res.body = File.open( File.join( File.dirname(__FILE__),filename ), "rb" )
+        res["content-type"]="application/octet-stream"
+
+        res.status = 200
+    else
+        res.status = 404
+    end
+    
+end
+
 lastLogData = ""
 
 $local_server.mount_proc '/client_log' do |req,res|
