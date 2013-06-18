@@ -28,11 +28,23 @@ puts "rhodes location: #{$rho_root}"
 puts "rhoconnect location:  #{$rhoconnect_root}"
 puts "rhoelements location: #{$rhoelements_root}"
 
-out = `adb devices`
-device_list = out.split("\n")[1]
-raise 'No attached android devices found' unless device_list
-$deviceId = device_list.split("\t")[0]
-puts "Attached device: #{$deviceId}"
+$deviceId = ARGV[1]
+$deviceOpts = '-e'
+if $deviceId
+  $deviceOpts = "-s #{$deviceId}"
+  puts "Using device: #{$deviceId}"
+else
+  out = `adb devices`
+  device_list = out.split("\n")[1]
+  # raise 'No attached android devices found' unless device_list
+  if device_list
+    $deviceId = device_list.split("\t")[0]
+    $deviceOpts = "-s #{$deviceId}"
+    puts "Found attached device: #{$deviceId}"
+  else
+    puts "Using android emulator"
+  end
+end
 puts
 
 $spec_path = FileUtils.pwd
@@ -64,7 +76,6 @@ describe 'Android push spec' do
       query = req.query
       # puts "Request headers: #{req.header.inspect}"
       # puts "Request query: #{query.inspect}"
-
       res.status = 200
       $mutex.synchronize do
         $requests << req
@@ -82,15 +93,15 @@ describe 'Android push spec' do
   after(:all) do
     stop_apps
     cleanup_apps
-    # FIXME:
-    # `adb emu kill`
 
-    # FIXME:
     TEST_PKGS.each do |pkg|
       puts "Uninstalling package #{pkg} ..."
-      system "adb -s #{$deviceId} uninstall #{pkg}"
+      system "adb #{$deviceOpts} uninstall #{pkg}"
     end
+
+    `adb emu kill` if $deviceOpts == '-e' # running emulator
     system "kill -9 #{$logcat_pid}" if $logcat_pid
+
     # puts "Uninstalling package com.rhomobile.rho_push_client ..."
     # system "adb uninstall com.rhomobile.rho_push_client"
     # puts "Uninstalling package com.motsolutions.cto.services.ans ..."
@@ -100,7 +111,7 @@ describe 'Android push spec' do
   def expect_request(name)
     val = nil
     $mutex.synchronize do
-		  $signal.wait($mutex, 60) # wait timeout 60 secs.
+		  $signal.wait($mutex, 30) # wait timeout 30 secs.
 		  $requests.count.should == 1
 		  val = $requests.first.query[name]
 		  $requests.clear
@@ -120,7 +131,7 @@ describe 'Android push spec' do
     $device_id.should_not == ''
   end
 
-  it 'should proceed push message at foregro"und' do
+  it 'should proceed push message at foreground' do
     sleep 5
     puts 'Sending push message...'
 
@@ -182,7 +193,7 @@ describe 'Android push spec' do
   #   5.times do |i|
   #     $mutex.synchronize do
   #       break if $requests.count == 5
-  #       $signal.wait($mutex, 60)
+  #       $signal.wait($mutex, 30)
   #     end
   #     puts "Message count: #{$requests.count}"
   #   end
@@ -214,7 +225,7 @@ describe 'Android push spec' do
 
   #   puts 'Waiting message with push content...'
   #   $mutex.synchronize do
-  #     $signal.wait($mutex, 60)
+  #     $signal.wait($mutex, 30)
   #     $requests.count.should == 1
   #     alert = $requests.first.query['alert']
   #     alert.should_not be_nil
