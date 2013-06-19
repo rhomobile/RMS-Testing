@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="/public/jquery/jquery-1.6.4.min.js" type="text/javascript"></script>
+    <script src="/public/jquery/jquery.json-2.3.min.js" type="text/javascript"></script>
+    <script type="text/javascript" charset="utf-8" src="/public/api/rhoapi-modules.js"></script>
+    <script type="text/javascript" charset="utf-8" src="/public/js/server_url.js"></script>
+
+    <script type="text/javascript">
+var selected_Module="";
+        
+function getmodulename()
+{
+    var srvHost = SERVER_HOST;
+    var srvPort = SERVER_PORT;
+    var srvHttpUrl = "http://" + srvHost + ":" + srvPort.toString();
+    var srvHttpTestMethodsUrl = srvHttpUrl + "/test_methods";
+    var srvHttpDownloadImageUrl = srvHttpUrl + "/download_image";
+    var srvHttpDownloadImageUrlAuth = srvHttpUrl + "/download_image_auth";
+    var srvHttpUploadTextFileUrl = srvHttpUrl + "/upload_text_file";
+    var srvHttpUploadTextFileUrlAuth = srvHttpUrl + "/upload_text_file_auth";
+    
+    var srvSecureHost = SERVER_HOST;
+    var srvSecurePort = SECURE_PORT;
+    var srvSecureUrl = "https://" + srvSecureHost + ":" + srvSecurePort.toString();
+    var srvSecureTestMethodsUrl = srvSecureUrl + "/test_methods";
+
+
+//var index = document.controlForm.myChoice.selectedIndex;
+//selected_Module = document.controlForm.myChoice.options[index].value;
+selected_Module = document.controlForm.myChoice.value;
+//myDiv.innerHTML=""+selected_Module;
+
+if(selected_Module=="VT293-0003") {
+  myNet.innerHTML = "Expected Result :-<br><br>startStatusNotify with synch<br>this will fail because of callback is mandatory for startStatusNotify method";
+ myvar = Rho.Network.startStatusNotify();
+ myDiv.innerHTML = "Network Status :"+myvar["current_status"];
+}
+
+if(selected_Module=="VT293-0006")
+{
+myNet.innerHTML = "Expected Result :-<br><br>Without calling startStatusNotify method call stopStatusNotify";
+Rho.Network.stopStatusNotify();
+}
+if(selected_Module=="VT293-0012")
+{
+myNet.innerHTML = "Expected Result :-<br><br>disconnectWan without simcard:- Disconnects the current WAN connection";
+Rho.Network.connectWan("My ISP", connect_wan_notify_callback);
+}
+if(selected_Module=="VT293-0018")
+{
+myNet.innerHTML = "Expected Result :-<br><br>detectConnection with exteranl profile enabled with pollinterval less then 5 seconds";
+      detectconnectionProps = {
+        host: "http://www.google.com",
+        port: 80,
+		pollInterval: 3000
+      };
+  Rho.Network.detectConnection(detectconnectionProps, detect_connection_notify_callback);
+}
+if(selected_Module=="VT293-0019")
+{
+myNet.innerHTML = "Expected Result :-<br><br>detectConnection with exteranl profile enabled with pollinterval to negative value";
+      detectconnectionProps = {
+        host: "http://www.google.com",
+        port: 80,
+		pollInterval: -6000
+      };
+  Rho.Network.detectConnection(detectconnectionProps, detect_connection_notify_callback);
+}
+if(selected_Module=="VT293-0053")
+{
+myNet.innerHTML = "Expected Result :-<br><br>download file with overwrite invalid value  and createfolder true value with callback event";
+      downloadfileProps = {
+        url: srvHttpDownloadImageUrl,
+        filename: Rho.Application.publicFolder+"/images/network/network.jpg",
+        overwriteFile: "invalid",
+		createFolders: true
+      };
+ Rho.Network.downloadFile(downloadfileProps, download_file_callback);
+}
+if(selected_Module=="VT293-0054")
+{
+myNet.innerHTML = "Expected Result :-<br><br>download file with overwrite empty value  and createfolder true value with callback event";
+      downloadfileProps = {
+        url: srvHttpDownloadImageUrl,
+        filename: Rho.Application.publicFolder+"/images/network/network.jpg",
+        overwriteFile: "",
+		createFolders: true
+      };
+ Rho.Network.downloadFile(downloadfileProps, download_file_callback);
+}
+if(selected_Module=="VT293-0055")
+{
+myNet.innerHTML = "Expected Result :-<br><br>download file with overwrite true value  and createfolder invalid value with callback event";
+      downloadfileProps = {
+        url: srvHttpDownloadImageUrl,
+        filename: Rho.Application.publicFolder+"/images/network/network.jpg",
+        overwriteFile: true,
+		createFolders: "invalid"
+      };
+ Rho.Network.downloadFile(downloadfileProps, download_file_callback);
+}
+if(selected_Module=="VT293-0056")
+{
+myNet.innerHTML = "Expected Result :-<br><br>download file with overwrite true value  and createfolder empty value with callback event";
+      downloadfileProps = {
+        url: srvHttpDownloadImageUrl,
+        filename: Rho.Application.publicFolder+"/images/network/network.jpg",
+        overwriteFile: true,
+		createFolders: ""
+      };
+ Rho.Network.downloadFile(downloadfileProps, download_file_callback);
+}
+if(selected_Module=="VT293-0058")
+{
+myNet.innerHTML = "Expected Result :-<br><br>download file with invalid url";
+      downloadfileProps = {
+        url: srvHttpDownloadImageUrlAuth,
+		authType: "basic",
+		authUser: "admin",
+		authPassword: "admin",
+        filename: Rho.Application.publicFolder+"/images/network/network.jpg",
+        overwriteFile: true,
+		createFolders: true
+      };
+ Rho.Network.downloadFile(downloadfileProps, download_file_callback);
+}
+if(selected_Module=="VT293-0059")
+{
+myNet.innerHTML = "Expected Result :-<br><br>download file with empty url";
+      downloadfileProps = {
+        url: "",
+		authType: "basic",
+		authUser: "admin",
+		authPassword: "admin",
+        filename: Rho.Application.publicFolder+"/images/network/network.jpg",
+        overwriteFile: true,
+		createFolders: true
+      };
+ Rho.Network.downloadFile(downloadfileProps, download_file_callback);
+}
+if(selected_Module=="VT293-0060")
+{
+myNet.innerHTML = "Expected Result :-<br><br>download file with invalid filename";     
+	 downloadfileProps = {
+        url: srvHttpDownloadImageUrlAuth,
+		authType: "basic",
+		authUser: "admin",
+		authPassword: "admin",
+        filename: Rho.Application.invalid+"/images/network/network.jpg",
+        overwriteFile: true,
+		createFolders: true
+      };
+ Rho.Network.downloadFile(downloadfileProps, download_file_callback);
+}
+if(selected_Module=="VT293-0061")
+{
+myNet.innerHTML = "Expected Result :-<br><br>download file with empty filename";
+      downloadfileProps = {
+        url: srvHttpDownloadImageUrlAuth,
+		authType: "basic",
+		authUser: "admin",
+		authPassword: "admin",
+        filename: "",
+        overwriteFile: true,
+		createFolders: true
+      };
+ Rho.Network.downloadFile(downloadfileProps, download_file_callback);
+}
+if(selected_Module=="VT293-0062")
+{
+myNet.innerHTML = "Expected Result :-<br><br>download file with authentication properties with invalid authType";
+      downloadfileProps = {
+        url: srvHttpDownloadImageUrlAuth,
+		authType: "invalid",
+		authUser: "admin",
+		authPassword: "admin",
+        filename: Rho.Application.publicFolder+"/images/network/network.jpg",
+        overwriteFile: true,
+		createFolders: true
+      };
+ Rho.Network.downloadFile(downloadfileProps, download_file_callback);
+}
+if(selected_Module=="VT293-0063")
+{
+myNet.innerHTML = "Expected Result :-<br><br>download file with authentication properties with empty authType";
+      downloadfileProps = {
+        url: srvHttpDownloadImageUrlAuth,
+		authType: "",
+		authUser: "admin",
+		authPassword: "admin",
+        filename: Rho.Application.publicFolder+"/images/network/network.jpg",
+        overwriteFile: true,
+		createFolders: true
+      };
+ Rho.Network.downloadFile(downloadfileProps, download_file_callback);
+}
+if(selected_Module=="VT293-0064")
+{
+myNet.innerHTML = "Expected Result :-<br><br>download file with authentication properties with invalid username";
+      downloadfileProps = {
+        url: srvHttpDownloadImageUrlAuth,
+		authType: "basic",
+		authUser: "invalid",
+		authPassword: "admin",
+        filename: Rho.Application.publicFolder+"/images/network/network.jpg",
+        overwriteFile: true,
+		createFolders: true
+      };
+ Rho.Network.downloadFile(downloadfileProps, download_file_callback);
+}
+if(selected_Module=="VT293-0065")
+{
+myNet.innerHTML = "Expected Result :-<br><br>download file with authentication properties with empty username";
+      downloadfileProps = {
+        url: srvHttpDownloadImageUrlAuth,
+		authType: "basic",
+		authUser: "",
+		authPassword: "admin",
+        filename: Rho.Application.publicFolder+"/images/network/network.jpg",
+        overwriteFile: true,
+		createFolders: true
+      };
+ Rho.Network.downloadFile(downloadfileProps, download_file_callback);
+}
+if(selected_Module=="VT293-0066")
+{
+myNet.innerHTML = "Expected Result :-<br><br>download file with authentication properties with invalid userPassword";
+      downloadfileProps = {
+        url: srvHttpDownloadImageUrlAuth,
+		authType: "basic",
+		authUser: "admin",
+		authPassword: "invalid",
+        filename: Rho.Application.publicFolder+"/images/network/network.jpg",
+        overwriteFile: true,
+		createFolders: true
+      };
+ Rho.Network.downloadFile(downloadfileProps, download_file_callback);
+}
+if(selected_Module=="VT293-0067")
+{
+myNet.innerHTML = "Expected Result :-<br><br>download file with authentication properties with empty authPassword";
+      downloadfileProps = {
+        url: srvHttpDownloadImageUrlAuth,
+		authType: "basic",
+		authUser: "admin",
+		authPassword: "",
+        filename: Rho.Application.publicFolder+"/images/network/network.jpg",
+        overwriteFile: true,
+		createFolders: true
+      };
+ Rho.Network.downloadFile(downloadfileProps, download_file_callback);
+}      
+if(selected_Module=="VT293-0072")
+{
+myNet.innerHTML = "Expected Result :-<br><br>uploadFile with invalid url";
+       uploadfileProps = {
+          url: srvHttpUploadTextFileUrlAuth,
+		  authType: "basic",
+		  authUser: "admin",
+		  authPassword: "Motorola@123",
+          filename: Rho.Application.publicFolder+"/images/backButton.png",
+          body: "uploading file",
+          fileContentType: "image/png"
+        };
+        Rho.Network.uploadFile(uploadfileProps, upload_file_callback); 
+}
+
+if(selected_Module=="VT293-0073")
+{
+myNet.innerHTML = "Expected Result :-<br><br>uploadFile with emntpy url";
+		uploadfileProps = {
+          url: "",
+		  authType: "basic",
+		  authUser: "admin",
+		  authPassword: "Motorola@123",
+          filename: Rho.Application.publicFolder+"/images/backButton.png",
+          body: "uploading file",
+          fileContentType: "image/png"
+        };
+        Rho.Network.uploadFile(uploadfileProps, upload_file_callback); 
+}
+if(selected_Module=="VT293-0074")
+{
+myNet.innerHTML = "Expected Result :-<br><br>uploadFile with invalid filename";
+    uploadfileProps = {
+          url: srvHttpUploadTextFileUrlAuth,
+		  authType: "basic",
+		  authUser: "admin",
+		  authPassword: "Motorola@123",
+          filename: Rho.Application.invalid+"/images/backButton.png",
+          body: "uploading file",
+          fileContentType: "image/png"
+        };
+
+        Rho.Network.uploadFile(uploadfileProps, upload_file_callback); 
+}
+if(selected_Module=="VT293-0075")
+{
+myNet.innerHTML = "Expected Result :-<br><br>uploadFile with empty filename";
+    uploadfileProps = {
+          url: srvHttpUploadTextFileUrlAuth,
+		  authType: "basic",
+		  authUser: "admin",
+		  authPassword: "Motorola@123",
+          filename: "",
+          body: "uploading file",
+          fileContentType: "image/png"
+        };
+        Rho.Network.uploadFile(uploadfileProps, upload_file_callback); 
+}
+if(selected_Module=="VT293-0076")
+{
+myNet.innerHTML = "Expected Result :-<br><br>uploadFile with invalid authType";
+    uploadfileProps = {
+          url: srvHttpUploadTextFileUrlAuth,
+		  authType: "invalid",
+		  authUser: "admin",
+		  authPassword: "Motorola@123",
+          filename: Rho.Application.publicFolder+"/images/backButton.png",
+          body: "uploading file",
+          fileContentType: "image/png"
+        };
+        Rho.Network.uploadFile(uploadfileProps, upload_file_callback); 
+}
+if(selected_Module=="VT293-0077")
+{
+myNet.innerHTML = "Expected Result :-<br><br>uploadFile with empty authType";
+    uploadfileProps = {
+          url: srvHttpUploadTextFileUrlAuth,
+		  authType: "",
+		  authUser: "admin",
+		  authPassword: "Motorola@123",
+          filename: Rho.Application.publicFolder+"/images/backButton.png",
+          body: "uploading file",
+          fileContentType: "image/png"
+        };
+        Rho.Network.uploadFile(uploadfileProps, upload_file_callback); 
+}
+if(selected_Module=="VT293-0078")
+{
+myNet.innerHTML = "Expected Result :-<br><br>uploadFile with invalid authUser";
+    uploadfileProps = {
+          url: srvHttpUploadTextFileUrlAuth,
+		  authType: "basic",
+		  authUser: "invalid",
+		  authPassword: "Motorola@123",
+          filename: Rho.Application.publicFolder+"/images/backButton.png",
+          body: "uploading file",
+          fileContentType: "image/png"
+        };
+        Rho.Network.uploadFile(uploadfileProps, upload_file_callback); 
+}
+if(selected_Module=="VT293-0079")
+{
+myNet.innerHTML = "Expected Result :-<br><br>uploadFile with empty authUser";
+    uploadfileProps = {
+          url: srvHttpUploadTextFileUrlAuth,
+		  authType: "basic",
+		  authUser: "",
+		  authPassword: "Motorola@123",
+          filename: Rho.Application.publicFolder+"/images/backButton.png",
+          body: "uploading file",
+          fileContentType: "image/png"
+        };
+        Rho.Network.uploadFile(uploadfileProps, upload_file_callback); 
+}
+if(selected_Module=="VT293-0080")
+{
+myNet.innerHTML = "Expected Result :-<br><br>uploadFile with invalid authPassword";
+    uploadfileProps = {
+          url: srvHttpUploadTextFileUrlAuth,
+          authType: "basic",
+		  authUser: "admin",
+		  authPassword: "invalid",
+          filename: Rho.Application.publicFolder+"/images/backButton.png",
+          body: "uploading file",
+          fileContentType: "image/png"
+        };
+        Rho.Network.uploadFile(uploadfileProps, upload_file_callback); 
+}
+if(selected_Module=="VT293-0081")
+ {
+ myNet.innerHTML = "Expected Result :-<br><br>uploadFile with invalid authPassword";
+    uploadfileProps = {
+          url: srvHttpUploadTextFileUrlAuth,
+		  authType: "basic",
+		  authUser: "admin",
+		  authPassword: "",
+          filename: Rho.Application.publicFolder+"/images/backButton.png",
+          body: "uploading file",
+          fileContentType: "image/png"
+        };
+        Rho.Network.uploadFile(uploadfileProps, upload_file_callback); 
+ }
+} 
+
+function stop_status_notify() {
+  // Stop network status notifications
+  Rho.Network.stopStatusNotify();
+}
+
+function disconnect_wan_status_notify() {
+// Stop wan status notifications
+Rho.Network.disconnectWan();
+}
+
+function cancel_notify_callback() {
+// cancel method
+Rho.Network.cancel(get_callback);
+myDiv.innerHTML="Request canceled";
+}
+
+ function stop_detecting_connection() {
+   Rho.Network.stopDetectingConnection(detect_connection_notify_callback);
+   myDiv.innerHTML="Network Detection stopped";
+}	
+function get_callback(params) {
+// get callback		
+		myDiv.innerHTML="status :"+params["status"]+"<br>"+
+						"http_error :"+params["http_error"];
+		myDiv.innerHTML="<br>Get Result :"+params["body"];
+}
+function post_callback(params) {
+// post callback		
+		myDiv.innerHTML="status :"+params["status"]+"<br>"+
+						"http_error :"+params["http_error"];
+		myDiv.innerHTML="<br>Get Result :"+params["body"];
+}
+function connect_wan_notify_callback(params) {
+//connect wan callback
+myDiv.innerHTML="phoneSignalStrength :"+params["phoneSignalStrength"]+"<br>"+
+				"networkOperator :"+params["networkOperator"]+"<br>"+
+				"connectionTypeAvailable :"+params["connectionTypeAvailable"]+"<br>"+
+				"connectionTypeConnected :"+params["connectionTypeConnected"]+"<br>"+
+				"connectionManagerMessage :"+params["connectionManagerMessage"];
+}
+function download_file_callback(params){
+      if (params["status"] == "ok") {
+	    myDiv.innerHTML="Download Succeeded, path is /public/images/download.jpg";		
+	myDiv.innerHTML="<br>status: "+params["status"]+"<br>"+
+						"http_error: "+params["http_error"]+"<br>"+
+						"fileExists: "+params["fileExists"];
+        //alert("Download Succeeded, path is /public/images/download.jpg");
+      } else {
+	    myDiv.innerHTML="Download Failed";
+		myDiv.innerHTML="<br>status: "+params["status"]+"<br>"+
+						"http_error: "+params["http_error"]+"<br>"+
+						"fileExists: "+params["fileExists"];
+        //alert("Download Failed");
+      }
+    }
+function upload_file_callback(params){
+  if (params["status"] == "ok") {
+	myDiv.innerHTML="Upload Succeeded, path is /public/images/upload.jpg";		
+	myDiv.innerHTML="<br>status :"+params["status"]+"<br>"+
+					"http_error :"+params["http_error"]+"<br>"+
+					"fileExists :"+params["fileExists"];
+	//alert("Upload Succeeded, path is /public/images/upload.jpg");
+  } else {
+	myDiv.innerHTML="Upload Failed";
+	myDiv.innerHTML="<br>status :"+params["status"]+"<br>"+
+					"http_error :"+params["http_error"]+"<br>"+
+					"fileExists :"+params["fileExists"];
+	//alert("Upload Failed");
+  }
+}
+function status_notify_callback(params) {
+      myDiv.innerHTML="Network status changed from"+params["prev_status"]+" to "+params["current_status"];
+      //alert("Network status changed from "+params["prev_status"]+" to "+params["current_status"]);	 
+    }
+	
+function detect_connection_notify_callback(params) {
+if(params["connectionInformation"] == "Disconnected")
+	myDiv.innerHTML=""+params["failureMessage"];
+else
+	myDiv.innerHTML="Connected";
+ }
+
+ 
+	
+</script>
+
+</head>
+<body>
+<br /><br />
+<div id="myNet">Exptected Result :</div>
+<br><br><br>
+<div id="myDiv">Actual Result :</div>
+<form name="controlForm" id="controlForm" action="" >
+<!--<input id="Back" type="button" value="Back" onclick="location.href='ControlAppearance.html'">-->
+<br /><br /><br /><br /><br />Select Test To Run &nbsp;&nbsp;
+<select name="myChoice" id="myChoice">
+<OPTION value="Select option" >VT-ID</OPTION>
+<OPTION value="VT293-0006">VT293-0003</OPTION>
+<OPTION value="VT293-0006">VT293-0006</OPTION>
+<OPTION value="VT293-0012">VT293-0012</OPTION> 
+<OPTION value="VT293-0018">VT293-0018</OPTION> 
+<OPTION value="VT293-0019">VT293-0019</OPTION> 
+<OPTION value="VT293-0053">VT293-0053</OPTION> 
+<OPTION value="VT293-0054">VT293-0054</OPTION> 
+<OPTION value="VT293-0055">VT293-0055</OPTION> 
+<OPTION value="VT293-0056">VT293-0056</OPTION> 
+<OPTION value="VT293-0058">VT293-0058</OPTION> 
+<OPTION value="VT293-0059">VT293-0059</OPTION> 
+<OPTION value="VT293-0060">VT293-0060</OPTION> 
+<OPTION value="VT293-0061">VT293-0061</OPTION> 
+<OPTION value="VT293-0062">VT293-0062</OPTION> 
+<OPTION value="VT293-0063">VT293-0063</OPTION>
+<OPTION value="VT293-0064">VT293-0064</OPTION> 
+<OPTION value="VT293-0065">VT293-0065</OPTION> 
+<OPTION value="VT293-0066">VT293-0066</OPTION> 
+<OPTION value="VT293-0067">VT293-0067</OPTION> 
+<OPTION value="VT293-0072">VT293-0072</OPTION> 
+<OPTION value="VT293-0073">VT293-0073</OPTION> 
+<OPTION value="VT293-0074">VT293-0074</OPTION> 
+<OPTION value="VT293-0075">VT293-0075</OPTION> 
+<OPTION value="VT293-0076">VT293-0076</OPTION> 
+<OPTION value="VT293-0077">VT293-0077</OPTION>
+<OPTION value="VT293-0078">VT293-0078</OPTION> 
+<OPTION value="VT293-0079">VT293-0079</OPTION> 
+<OPTION value="VT293-0080">VT293-0080</OPTION> 
+<OPTION value="VT293-0081">VT293-0081</OPTION> 
+</select>
+<P><input type="button" onclick="getmodulename();" value="Run This Test"/></P>
+<P><input type="button" onclick="stop_status_notify();" value="Stop_Status_Notify"/>
+<input type="button" onclick="disconnect_wan_status_notify();" value="Disconnect_Wan"/></P>
+<!--<P><input type="button" onclick="cancel_notify_callback();" value="cancel"/>-->
+<P><input type="button" onclick="stop_detecting_connection();" value="Stop_Detecting"/></P>
+</form>
+</body>
+</html>

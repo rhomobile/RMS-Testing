@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="/public/jquery/jquery-1.6.4.min.js" type="text/javascript"></script>
+  <script src="/public/jquery/jquery.json-2.3.min.js" type="text/javascript"></script>
+  <script type="text/javascript">
+var selected_Module="";
+        
+function getmodulename()
+{
+//var index = document.controlForm.myChoice.selectedIndex;
+//selected_Module = document.controlForm.myChoice.options[index].value;
+selected_Module = document.controlForm.myChoice.value;
+//myDiv.innerHTML=""+selected_Module;
+
+
+if(selected_Module=="VT281-0852")
+{
+myNet.innerHTML = "Expected Result :-<br><br>Keystate showStates with right to -20";
+      stateProps = {
+        right: -20
+      };
+	  Rho.KeyState.showStates(stateProps);
+}
+if(selected_Module=="VT281-0853")
+{
+myNet.innerHTML ="Expected Result :-<br><br>Keystate showStates with right to invalid";
+      stateProps = {
+        right: "20a"
+      };
+	  Rho.KeyState.showStates(stateProps);
+}
+if(selected_Module=="VT281-0855")
+{
+myNet.innerHTML = "Expected Result :-<br><br>Keystate showStates with top to -30";
+      stateProps = {
+        top: -30
+      };
+	  Rho.KeyState.showStates(stateProps);
+}
+if(selected_Module=="VT281-0856")
+{
+  alert("hello");
+myNet.innerHTML = "Expected Result :-<br><br>Keystate showStates with top to invalid";
+      stateProps = {
+        top: "30a"
+      };
+	  Rho.KeyState.showStates(stateProps);
+}
+if(selected_Module=="VT281-0858")
+{
+myNet.innerHTML = "Expected Result :-<br><br>Keystate showStates with width to -40";
+      stateProps = {
+        width: -40
+      };
+	  Rho.KeyState.showStates(stateProps);
+}
+if(selected_Module=="VT281-0859")
+{
+myNet.innerHTML ="Expected Result :-<br><br>Keystate showStates with width to invalid";
+      stateProps = {
+        width: "40a"
+      };
+	  Rho.KeyState.showStates(stateProps);
+}
+if(selected_Module=="VT281-0861")
+{
+myNet.innerHTML = "Expected Result :-<br><br>Keystate showStates with height to -50";
+      stateProps = {
+        height: -50
+      };
+	  Rho.KeyState.showStates(stateProps);
+}
+if(selected_Module=="VT281-0862")
+{
+myNet.innerHTML="Expected Result :-<br><br>Keystate showStates with height to invalid";
+      stateProps = {
+        height: "50a"
+      };
+	  Rho.KeyState.showStates(stateProps);
+}
+if(selected_Module=="VT281-0865")
+{
+myNet.innerHTML = "Expected Result :-<br><br>KeyState hideStates without calling showStates";
+	  Rho.KeyState.hideStates();
+}
+
+} 
+ 
+	
+</script>
+
+</head>
+<body>
+<br /><br />
+<div id="myNet">Exptected Result :</div>
+<br><br><br>
+<div id="myDiv">Actual Result :</div>
+<form name="controlForm" id="controlForm" action="" >
+<!--<input id="Back" type="button" value="Back" onclick="location.href='ControlAppearance.html'">-->
+<br /><br /><br /><br /><br />Select Test To Run &nbsp;&nbsp;
+<select name="myChoice" id="myChoice">
+<OPTION value="Select option" >VT-ID</OPTION>
+<OPTION value="VT281-0852">VT281-0852</OPTION>
+<OPTION value="VT281-0853">VT281-0853</OPTION> 
+<OPTION value="VT281-0855">VT281-0855</OPTION> 
+<OPTION value="VT281-0856">VT281-0856</OPTION> 
+<OPTION value="VT281-0858">VT281-0858</OPTION> 
+<OPTION value="VT281-0859">VT281-0859</OPTION> 
+<OPTION value="VT281-0861">VT281-0861</OPTION> 
+<OPTION value="VT281-0862">VT281-0862</OPTION> 
+<OPTION value="VT281-0865">VT281-0865</OPTION> 
+</select>
+<P><input type="button" onclick="getmodulename();" value="Run This Test"/></P>
+</form>
+</body>
+</html>

@@ -1,8 +1,13 @@
+var testResult = '';
+var captured = false;
+
 describe("Key State Test", function() {
 	var displayflag = false;
 	beforeEach(function() {
 		/* ... Set up your object ... */
 		displayflag = false;
+		testResult = '';
+		captured = false;
 	});
 
 	afterEach(function() {
@@ -21,13 +26,12 @@ describe("Key State Test", function() {
 		waitsFor(function()
 		{
 			dispCurrentProcess("Press Shift, Alt, Control, Function, Caps, Num lock and Orange key");
-			return displayflag;
-		}, 'The KeyState indicator should display', 11000);
+			return captured;
+		}, 'The KeyState indicator should display', 30000);
 
 		runs(function()
 		{
-			var testPassed = confirm("Do you see KeyState indicator?");
-			expect(testPassed).toEqual(true);
+			expect(testResult).toEqual(true);
 		});
 	});
 
@@ -44,13 +48,12 @@ describe("Key State Test", function() {
 		waitsFor(function()
 		{
 			dispCurrentProcess("Press Shift, Alt, Control, Function, Caps, Num lock and Orange key");
-			return displayflag;
-		}, 'The KeyState indicator should display', 11000);
+			return captured;
+		}, 'The KeyState indicator should display', 30000);
 
 		runs(function()
 		{
-			var testPassed = confirm("Do you see KeyState indicator at right 50 ?");
-			expect(testPassed).toEqual(true);
+			expect(testResult).toEqual(true);
 		});
 	});
 
@@ -67,13 +70,12 @@ describe("Key State Test", function() {
 		waitsFor(function()
 		{
 			dispCurrentProcess("Press Shift, Alt, Control, Function, Caps, Num lock and Orange key");
-			return displayflag;
-		}, 'The KeyState indicator should display', 11000);
+			return captured;
+		}, 'The KeyState indicator should display', 30000);
 
 		runs(function()
 		{
-			var testPassed = confirm("Do you see KeyState indicator at top 70 ?");
-			expect(testPassed).toEqual(true);
+			expect(testResult).toEqual(true);
 		});
 	});
 
@@ -90,13 +92,12 @@ describe("Key State Test", function() {
 		waitsFor(function()
 		{
 			dispCurrentProcess("Press Shift, Alt, Control, Function, Caps, Num lock and Orange key");
-			return displayflag;
-		}, 'The KeyState indicator should display', 11000);
+			return captured;
+		}, 'The KeyState indicator should display', 30000);
 
 		runs(function()
 		{
-			var testPassed = confirm("Do you see KeyState indicator width 100 ?");
-			expect(testPassed).toEqual(true);
+			expect(testResult).toEqual(true);
 		});
 	});
 
@@ -113,13 +114,12 @@ describe("Key State Test", function() {
 		waitsFor(function()
 		{
 			dispCurrentProcess("Press Shift, Alt, Control, Function, Caps, Num lock and Orange key");
-			return displayflag;
-		}, 'The KeyState indicator should display', 11000);
+			return captured;
+		}, 'The KeyState indicator should display', 30000);
 
 		runs(function()
 		{
-			var testPassed = confirm("Do you see KeyState indicator width 100 ?");
-			expect(testPassed).toEqual(true);
+			expect(testResult).toEqual(true);
 		});
 	});
 
@@ -136,13 +136,12 @@ describe("Key State Test", function() {
 		waitsFor(function()
 		{
 			dispCurrentProcess("right:100,top:150,Height:200,width:250 </br> Press Shift, Alt, Control, Function, Caps, Num lock and Orange key");
-			return displayflag;
-		}, 'The KeyState indicator should display', 11000);
+			return captured;
+		}, 'The KeyState indicator should display', 30000);
 
 		runs(function()
 		{
-			var testPassed = confirm("Do you see KeyState indicator at </br> right:100,top:150 with Height:200,width:250 ?");
-			expect(testPassed).toEqual(true);
+			expect(testResult).toEqual(true);
 		});
 	});
 
@@ -160,13 +159,12 @@ describe("Key State Test", function() {
 		waitsFor(function()
 		{
 			dispCurrentProcess("right:100,top:150,Height:200,width:250 </br> Press Shift, Alt, Control, Function, Caps, Num lock and Orange key");
-			return displayflag;
-		}, 'The KeyState indicator should display', 11000);
+			return captured;
+		}, 'The KeyState indicator should display', 30000);
 
 		runs(function()
 		{
-			var testPassed = confirm("KeyState indicator should be hidden and should not be shown on page. <br/> Have you seen this behavior ?");
-			expect(testPassed).toEqual(true);
+			expect(testResult).toEqual(true);
 		});
 	});
 
@@ -193,13 +191,12 @@ describe("Key State Test", function() {
 		waitsFor(function()
 		{
 			dispCurrentProcess("Press "+test_key['keyName']+ " key");
-			return displayflag;
-		}, 'The KeyState indicator should display', 11000);
+			return captured;
+		}, 'The KeyState indicator should display', 30000);
 
 		runs(function()
 		{
-			var testPassed = confirm("Do you see KeyState indicator for <br/>"+test_key['keyName']+" Key ?");
-			expect(testPassed).toEqual(true);
+			expect(testResult).toEqual(true);
 		});
 
 		});
@@ -221,13 +218,12 @@ describe("Key State Test", function() {
 		waitsFor(function()
 		{
 			dispCurrentProcess("Press Orange Key once. <br/> Press another key from the keyboard");
-			return displayflag;
-		}, 'The KeyState indicator should display', 11000);
+			return captured;
+		}, 'The KeyState indicator should display', 30000);
 
 		runs(function()
 		{
-			var testPassed = confirm("The data should be seen in the input box. <br/> Are you able to see ?");
-			expect(testPassed).toEqual(true);
+			expect(testResult).toEqual(true);
 		});
 	});
 
@@ -244,13 +240,12 @@ describe("Key State Test", function() {
 		waitsFor(function()
 		{
 			dispCurrentProcess("Press Orange Key Twice. <br/> Press another key from the keyboard");
-			return displayflag;
-		}, 'The KeyState indicator should display', 11000);
+			return captured;
+		}, 'The KeyState indicator should display', 30000);
 
 		runs(function()
 		{
-			var testPassed = confirm("The data should be seen in the input box. <br/> Are you able to see ?");
-			expect(testPassed).toEqual(true);
+			expect(testResult).toEqual(true);
 		});
 	});
 
@@ -267,13 +262,12 @@ describe("Key State Test", function() {
 		waitsFor(function()
 		{
 			dispCurrentProcess("Press Blue Key once. <br/> Press another key from the keyboard");
-			return displayflag;
-		}, 'The KeyState indicator should display', 11000);
+			return captured;
+		}, 'The KeyState indicator should display', 30000);
 
 		runs(function()
 		{
-			var testPassed = confirm("The data should be seen in the input box. <br/> Are you able to see ?");
-			expect(testPassed).toEqual(true);
+			expect(testResult).toEqual(true);
 		});
 	});
 
@@ -290,13 +284,12 @@ describe("Key State Test", function() {
 		waitsFor(function()
 		{
 			dispCurrentProcess("Press Blue Key Twice. <br/> Press another key from the keyboard");
-			return displayflag;
-		}, 'The KeyState indicator should display', 11000);
+			return captured;
+		}, 'The KeyState indicator should display', 30000);
 
 		runs(function()
 		{
-			var testPassed = confirm("The data should be seen in the input box. <br/> Are you able to see ?");
-			expect(testPassed).toEqual(true);
+			expect(testResult).toEqual(true);
 		});
 	});
 
