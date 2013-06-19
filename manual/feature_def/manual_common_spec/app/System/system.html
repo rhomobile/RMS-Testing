@@ -8,7 +8,8 @@
 
     <script type="text/javascript" src="/public/jquery/jquery-1.6.4.js"></script>
     <script type="text/javascript" src="/public/jquery/jquery.json-2.3.js"></script>
-
+	<script type="text/javascript" charset="utf-8" src="/public/js/server_url.js"></script>
+	 
     <script type="text/javascript" charset="utf-8" src="/public/api/rhoapi-modules.js"></script>
     <script type="text/javascript" src="system.js"></script>
     <script type="text/javascript" src="/public/js/helpers.js"></script>
@@ -41,11 +42,10 @@
 });  
 
   //This needs to be changed according to the Environment
-	var server1 = '192.168.6.18/Received';
-	var server2 = '192.168.6.27/filestoinstall';
-	var ftpusername = 'admin';
-	var ftppassword = 'admin'; 
-	
+    var srvSecureHost = SERVER_HOST;
+    var srvSecurePort = SECURE_PORT;
+    var srvSecureUrl = "https://" + srvSecureHost + ":" + srvSecurePort.toString();
+   
 
     </script>
 </head>
@@ -285,115 +285,136 @@
 </div>
 
 <!-- Install** methods family will implemented as another feature  -->
-<!--
+
 <div class="method_tests android ios win32 wm wp8">
 	<div class="method_name">Rho.System.applicationInstall</div>
 	<div class="method_desc">Application Install </div>
 	<div class="method_tests wm" ><b>Application Install for Windows WM:</b>
-		<div class="test_scenario">
+<!--		<div class="test_scenario">
 			<div class="test_scenario_controls">
 				<a href="javascript:void(0)" onclick ="callapplicationInstall('ftp://'+ftpusername+':'+ftppassword+'@'+server1+'/InstallTestapp.cab');">Call applicationInstall with FTP url</a>
 			</div>
 			<span class="test_scenario_number">VT300-063 <br /></span>
-		</div>
+		</div>-->
 		<div class="test_scenario">
 			<div class="test_scenario_controls">
-				<a href="javascript:void(0)" onclick ="callapplicationInstall('http://'+server2+'/InstallTestapp.cab');">call application Install with HTTP url</a>
+				<a href="javascript:void(0)" onclick ="callapplicationInstall(srvSecureUrl+'/download_app?device=wm');">call application Install with HTTP url</a>
 			</div>
 			<span class="test_scenario_number">VT300-064 <br /></span>
 		</div>
-		<div class="test_scenario">
+<!--		<div class="test_scenario">
 			<div class="test_scenario_controls">
 				<a href="javascript:void(0)" onclick ="callapplicationInstall('/app/public/testfiles/InstallTestapp.cab');">call application Install 	with local url</a>
 			</div>
 			<span class="test_scenario_number">VT300-065 <br /></span>
-		</div>
+		</div>-->
 	</div>
 	
 	
 	<div class="method_tests android"><b>Application Install for Android:</b>
-		<div class="test_scenario">
+<!--		<div class="test_scenario">
 			<div class="test_scenario_controls">
 				<a href="javascript:void(0)" onclick ="callapplicationInstall('ftp://'+username+':'+password+'@'+server1+'/InstallTestapp_signed.apk');">Call application Install with FTP url</a>
 			</div>
 			<span class="test_scenario_number">VT300-063 <br /></span>
-		</div>
+		</div>-->
 		<div class="test_scenario">
 			<div class="test_scenario_controls">
-				<a href="javascript:void(0)" onclick ="callapplicationInstall('http://'+server2+'/InstallTestapp_signed.apk');">call application Install with HTTP url</a>
+				<a href="javascript:void(0)" onclick ="callapplicationInstall(srvSecureUrl+'/download_app?device=android');">call application Install with HTTP url</a>
 			</div>
 			<span class="test_scenario_number">VT300-064 <br /></span>
 		</div>
-		<div class="test_scenario">
+<!--		<div class="test_scenario">
 			<div class="test_scenario_controls">
 				<a href="javascript:void(0)" onclick ="callapplicationInstall('/app/public/testfiles/InstallTestapp_signed.apk');">call applicationInstall 	with local url</a>
 			</div>
 			<span class="test_scenario_number">VT300-065 <br /></span>
-		</div>
+		</div>-->
 	</div>
 	
 	<div class="method_tests wm"><b>Application Install for Windows CE:</b>
-		<div class="test_scenario">
+<!--		<div class="test_scenario">
 			<div class="test_scenario_controls">
 				<a href="javascript:void(0)" onclick ="callapplicationInstall('ftp://'+username+':'+password+'@'+server1+'/InstallTestapp.cab');">Call applicationInstall with FTP url</a>
 			</div>
 			<span class="test_scenario_number">VT300-063 <br /></span>
-		</div>
+		</div>-->
 		<div class="test_scenario">
 			<div class="test_scenario_controls">
-				<a href="javascript:void(0)" onclick ="callapplicationInstall('http://'+server2+'/InstallTestapp.cab');">call application Install with HTTP url</a>
+				<a href="javascript:void(0)" onclick ="callapplicationInstall(srvSecureUrl+'/download_app?device=ce');">call application Install with HTTP url</a>
 			</div>
 			<span class="test_scenario_number">VT300-064 <br /></span>
 		</div>
-		<div class="test_scenario">
+<!--		<div class="test_scenario">
 			<div class="test_scenario_controls">
 				<a href="javascript:void(0)" onclick ="callapplicationInstall('/app/public/testfiles/InstallTestapp.cab');">call application Install 	with local url</a>
 			</div>
 			<span class="test_scenario_number">VT300-065 <br /></span>
-		</div>
+		</div>-->
 	</div>
 	
 	
 	<div class="method_tests ios"><b>Application Install for Windows IOS:</b>
-		<div class="test_scenario">
+<!--		<div class="test_scenario">
 			<div class="test_scenario_controls">
 				<a href="javascript:void(0)" onclick ="callapplicationInstall('ftp://'+username+':'+password+'@'+server1+'/InstallTestapp.ipa');">Call applicationInstall with FTP url</a>
 			</div>
 			<span class="test_scenario_number">VT300-063 <br /></span>
-		</div>
+		</div>-->
 		<div class="test_scenario">
 			<div class="test_scenario_controls">
-				<a href="javascript:void(0)" onclick ="callapplicationInstall('http://'+server2+'/InstallTestapp.ipa');">call application Install with HTTP url</a>
+				<a href="javascript:void(0)" onclick ="callapplicationInstall(srvSecureUrl+'/download_app?device=ios');">call application Install with HTTP url</a>
 			</div>
 			<span class="test_scenario_number">VT300-064 <br /></span>
 		</div>
-		<div class="test_scenario">
+<!--		<div class="test_scenario">
 			<div class="test_scenario_controls">
 				<a href="javascript:void(0)" onclick ="callapplicationInstall('/app/public/testfiles/InstallTestapp.ipa');">call application Install 	with local url</a>
 			</div>
 			<span class="test_scenario_number">VT300-065 <br /></span>
-		</div>
+		</div>-->
 	</div>
 	
 	<div class="method_tests win32"><b>Application Install for Windows Win32:</b>
-		<div class="test_scenario">
+<!--		<div class="test_scenario">
 			<div class="test_scenario_controls">
 				<a href="javascript:void(0)" onclick ="callapplicationInstall('ftp://'+username+':'+password+'@'+server1+'/InstallTestapp.exe');">Call applicationInstall with FTP url</a>
 			</div>
 			<span class="test_scenario_number">VT300-063 <br /></span>
-		</div>
+		</div>-->
 		<div class="test_scenario">
 			<div class="test_scenario_controls">
-				<a href="javascript:void(0)" onclick ="callapplicationInstall('http://'+server2+'/InstallTestapp.exe');">call application Install with HTTP url</a>
+				<a href="javascript:void(0)" onclick ="callapplicationInstall(srvSecureUrl+'/download_app?device=ios');">call application Install with HTTP url</a>
 			</div>
 			<span class="test_scenario_number">VT300-064 <br /></span>
 		</div>
-		<div class="test_scenario">
+<!--		<div class="test_scenario">
 			<div class="test_scenario_controls">
 				<a href="javascript:void(0)" onclick ="callapplicationInstall('/app/public/testfiles/InstallTestapp.exe');">call application Install 	with local url</a>
 			</div>
 			<span class="test_scenario_number">VT300-065 <br /></span>
+		</div>-->
+	</div>
+	
+		<div class="method_tests wp8"><b>Application Install for Windows wp8:</b>
+<!--		<div class="test_scenario">
+			<div class="test_scenario_controls">
+				<a href="javascript:void(0)" onclick ="callapplicationInstall('ftp://'+username+':'+password+'@'+server1+'/InstallTestapp.exe');">Call applicationInstall with FTP url</a>
+			</div>
+			<span class="test_scenario_number">VT300-063 <br /></span>
+		</div>-->
+		<div class="test_scenario">
+			<div class="test_scenario_controls">
+				<a href="javascript:void(0)" onclick ="callapplicationInstall(srvSecureUrl+'/download_app?device=wp8');">call application Install with HTTP url</a>
+			</div>
+			<span class="test_scenario_number">VT300-064 <br /></span>
 		</div>
+<!--		<div class="test_scenario">
+			<div class="test_scenario_controls">
+				<a href="javascript:void(0)" onclick ="callapplicationInstall('/app/public/testfiles/InstallTestapp.exe');">call application Install 	with local url</a>
+			</div>
+			<span class="test_scenario_number">VT300-065 <br /></span>
+		</div>-->
 	</div>
 </div>
 
@@ -404,7 +425,7 @@
 	<div class="method_tests wm">
 		<div class="test_scenario">
 			<div class="test_scenario_controls">
-				<a href="javascript:void(0)" onclick ="callapplicationUninstall('InstallTestapp');"> call applicationUninstall with application name 'InstallTestapp'</a>
+				<a href="javascript:void(0)" onclick ="callapplicationUninstall('TestApp');"> call applicationUninstall with application name 'TestApp'</a>
 			</div>
 		</div>
 	</div>
@@ -412,15 +433,15 @@
 	<div class="method_tests win32">
 		<div class="test_scenario">
 			<div class="test_scenario_controls">
-				<a href="javascript:void(0)" onclick ="callapplicationUninstall('InstallTestapp');"> call applicationUninstall with application name 'InstallTestapp'</a>
+				<a href="javascript:void(0)" onclick ="callapplicationUninstall('TestApp');"> call applicationUninstall with application name 'TestApp'</a>
 			</div>
 		</div>
 	</div>
 	
-	<div class="method_tests win32">
+	<div class="method_tests android">
 		<div class="test_scenario">
 			<div class="test_scenario_controls">
-				<a href="javascript:void(0)" onclick ="callapplicationUninstall('com.android.InstallTestapp');"> call applicationUninstall with application name 'InstallTestapp'</a>
+				<a href="javascript:void(0)" onclick ="callapplicationUninstall('com.rhomobile.testapp');"> call applicationUninstall with application name 'com.rhomobile.testapp'</a>
 			</div>
 		</div>
 	</div>
@@ -428,7 +449,7 @@
 	<div class="method_tests wp8">
 		<div class="test_scenario">
 			<div class="test_scenario_controls">
-				<a href="javascript:void(0)" onclick ="callapplicationUninstall('InstallTestapp');"> call applicationUninstall with application name 'InstallTestapp'</a>
+				<a href="javascript:void(0)" onclick ="callapplicationUninstall('TestApp');"> call applicationUninstall with application name 'TestApp'</a>
 			</div>
 		</div>
 	</div>
@@ -436,7 +457,7 @@
 		<span class="test_scenario_number">VT300-066 <br /></span>
 </div>
 
--->
+
 
 <div class="method_tests android ios win32 wm wp8">
 	<div class="method_name">Rho.System.getStartParams</div>
@@ -450,14 +471,14 @@
 </div>
 
 <!-- Install** methods family will implemented as another feature  -->
-<!--
+
 <div class="method_tests android ios win32 wm wp8">
 	<div class="method_name">Rho.System.isApplicationInstalled</div>
 	<div class="method_desc">Is Application Installed </div>
 	<div class="method_tests wm">WM <br />
 		<div class="test_scenario">
 			<div class="test_scenario_controls">
-				<a href="javascript:void(0)" onclick ="callisApplicationInstalled('InstallTestapp');">Call isApplicationInstalled() with correct app name 'InstallTestapp'</a>
+				<a href="javascript:void(0)" onclick ="callisApplicationInstalled('TestApp');">Call isApplicationInstalled() with correct app name 'TestApp'</a>
 			</div>
 			<span class="test_scenario_number">VT300-077 <br /></span>
 		</div>
@@ -465,7 +486,7 @@
 	<div class="method_tests Android"> Android <br />
 		<div class="test_scenario">
 			<div class="test_scenario_controls">
-				<a href="javascript:void(0)" onclick ="callisApplicationInstalled('com.android.InstallTestapp');">Call isApplicationInstalled() with correct app name 'InstallTestapp'</a>
+				<a href="javascript:void(0)" onclick ="callisApplicationInstalled('com.rhomobile.testapp');">Call isApplicationInstalled() with correct app name 'InstallTestapp'</a>
 			</div>
 			<span class="test_scenario_number">VT300-077 <br /></span>
 		</div>
@@ -474,7 +495,7 @@
 	<div class="method_tests ios"> IOS <br />
 		<div class="test_scenario">
 			<div class="test_scenario_controls">
-				<a href="javascript:void(0)" onclick ="callisApplicationInstalled('InstallTestapp');">Call isApplicationInstalled() with correct app name 'InstallTestapp'</a>
+				<a href="javascript:void(0)" onclick ="callisApplicationInstalled('auto_common_spec');">Call isApplicationInstalled() with correct app name 'auto_common_spec'</a>
 			</div>
 			<span class="test_scenario_number">VT300-077 <br /></span>
 		</div>
@@ -483,7 +504,7 @@
 	<div class="method_tests wp8"> WP8 <br />
 		<div class="test_scenario">
 			<div class="test_scenario_controls">
-				<a href="javascript:void(0)" onclick ="callisApplicationInstalled('InstallTestapp');">Call isApplicationInstalled() with correct app name 'InstallTestapp'</a>
+				<a href="javascript:void(0)" onclick ="callisApplicationInstalled('TestApp');">Call isApplicationInstalled() with correct app name 'InstallTestapp'</a>
 			</div>
 			<span class="test_scenario_number">VT300-077 <br /></span>
 		</div>
@@ -492,7 +513,7 @@
 	<div class="method_tests win32"> Win32 <br />
 		<div class="test_scenario">
 			<div class="test_scenario_controls">
-				<a href="javascript:void(0)" onclick ="callisApplicationInstalled('InstallTestapp');">Call isApplicationInstalled() with correct app name 'InstallTestapp'</a>
+				<a href="javascript:void(0)" onclick ="callisApplicationInstalled('TestApp');">Call isApplicationInstalled() with correct app name 'InstallTestapp'</a>
 			</div>
 			<span class="test_scenario_number">VT300-077 <br /></span>
 		</div>
@@ -506,7 +527,7 @@
 	</div>
 </div>
 
--->
+
 
 <div class="method_tests android ios win32 wm wp8">
 	<div class="method_name">Rho.System.openUrl</div>
