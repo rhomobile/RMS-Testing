@@ -497,6 +497,93 @@ describe("<ORM Db Reset specs>", function() {
       db = null;
     });
 
+   it("should reset client info databaseFullReset tables of all partitions",function(){
+      expect(Rho.ORM.getModel('Product')).toBeUndefined();
+      var sources = Rho.ORMHelper.getAllSources();
+      expect(sources.Product).toBeUndefined();
+      var db_user = new Rho.Database.SQLite3(Rho.Application.databaseFilePath('user'), 'user');
+      var db_local = new Rho.Database.SQLite3(Rho.Application.databaseFilePath('local'), 'local');
+
+      var Product_user_fixed = function(model){
+          model.modelName("Product");
+          model.property("name","string");
+          model.property("price","float");
+          model.set("partition","user");
+          model.enable("sync");
+          model.enable("fixedSchema");
+      };
+
+      var Item_user_pb = function(model){
+          model.modelName("Item");
+          model.property("name","string");
+          model.property("price","float");
+          model.set("partition","user");
+          model.enable("sync");
+      };
+
+      var Product_local_fixed = function(model){
+          model.modelName("Product_local");
+          model.property("name","string");
+          model.property("price","float");
+          model.set("partition","local");
+          model.enable("sync");
+          model.enable("fixedSchema");
+      };
+
+      var Item_local_pb = function(model){
+          model.modelName("Item_local");
+          model.property("name","string");
+          model.property("price","float");
+          model.set("partition","local");
+          model.enable("sync");
+      };
+
+      var P_user_fixed = Rho.ORM.addModel(Product_user_fixed);
+      var I_user_pb = Rho.ORM.addModel(Item_user_pb);
+
+      var P_local_fixed = Rho.ORM.addModel(Product_local_fixed);
+      var I_local_pb = Rho.ORM.addModel(Item_local_pb);
+
+      P_user_fixed.create({'name':'user_fixed','price':2.0});
+      I_user_pb.create({'name':'user_pb','price':2.0});
+
+      P_local_fixed.create({'name':'local_fixed','price':2.0});
+      I_local_pb.create({'name':'local_pb','price':2.0});
+
+
+      var user_f = db_user.execute("Select * from Product");
+      expect(user_f[0].name).toEqual("user_fixed");
+      var user_p = db_user.execute("Select * from OBJECT_VALUES");
+      expect(user_p[0].value).toEqual("user_pb");
+
+      var local_f = db_local.execute("Select * from Product_local");
+      expect(local_f[0].name).toEqual("local_fixed");
+      var local_p = db_local.execute("Select * from OBJECT_VALUES");
+      expect(local_p[0].value).toEqual("local_pb");
+
+      Rho.ORM.databaseFullReset(false,true);
+
+      user_f = db_user.execute("Select * from Product");
+      expect(user_f).toEqual([]);
+      user_p = db_user.execute("Select * from OBJECT_VALUES");
+      expect(user_p).toEqual([]);
+      expect(db_user.isTableExist("Product")).toBe(true);
+
+      local_f = db_local.execute("Select * from Product_local");
+      expect(local_f).toEqual([]);
+      local_p = db_local.execute("Select * from OBJECT_VALUES");
+      expect(local_p).toEqual([]);
+      expect(db_local.isTableExist("Product_local")).toBe(true);
+      db_user.execute("DELETE FROM SOURCES");
+      db_local.execute("DELETE FROM SOURCES");
+      db_user.execute("DELETE FROM OBJECT_VALUES");
+      db_local.execute("DELETE FROM OBJECT_VALUES");
+      Rho.ORM.clear();
+      
+      db_user = null;
+      db_local = null;
+    });
+
     it("should reset object_values and not sources table if set databaseFullResetEx",function(){
       expect(Rho.ORM.getModel('Product')).toBeUndefined();
       var sources = Rho.ORMHelper.getAllSources();
