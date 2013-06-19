@@ -214,6 +214,18 @@ var selected_Module="";
                 setExpected("ResponseTimeout should occure after 10 seconds because of less signal strength");
             }
             
+            if(selected_Module=="ClientAuth")
+            {
+                setDescription("Calls get() method on secure server with enabled client auth. Server certificate must be installed on device!");
+                setExpected("ok");
+            }
+            
+            if(selected_Module=="ClientAuthNoCert")
+            {
+                setDescription("Calls get() method on secure server with enabled client auth without providing client key. Server certificate must be installed on device!");
+                setExpected("error");
+            }
+
         }
         
 function getmodulename()
@@ -230,6 +242,8 @@ function getmodulename()
     var srvSecurePort = SECURE_PORT;
     var srvSecureUrl = "https://" + srvSecureHost + ":" + srvSecurePort.toString();
     var srvSecureTestMethodsUrl = srvSecureUrl + "/test_methods";
+    
+    var srvSecureTestMethodsUrlWithClientAuth = "https://" + SECURE_HOST_CA + ":" + SECURE_PORT_CA.toString() + "/test_methods";
 
 
     selected_Module = myChoice.value;
@@ -396,6 +410,46 @@ if(selected_Module=="VT293-0036")
       };
    Rho.Network.get(responsetimeoutProps, get_callback);
 }
+    
+    if(selected_Module=="ClientAuth")
+    {
+        getProps = {
+            url : srvSecureTestMethodsUrlWithClientAuth,
+            clientSSLCertificate : Rho.RhoFile.join( Rho.Application.publicFolder, "testfiles/client.p12" ),
+//            clientSSLCertificate : '/mnt/sdcard/client.p12',
+            clientSSLCertificatePassword : "123456",
+            verifyPeerCertificate : true
+        }
+        
+        Rho.Network.get( getProps, function(params) {
+                setActual(params['status']);
+                setStatus(
+                    "status :"+params["status"]+"<br>"+
+                    "http_error :"+params["http_error"] + "<br" +
+                    "body :" + params["body"]
+                );
+            }
+        );
+    }
+    
+    if(selected_Module=="ClientAuthNoCert")
+    {
+        getProps = {
+            url : srvSecureTestMethodsUrlWithClientAuth,
+            verifyPeerCertificate : true
+        }
+        
+        Rho.Network.get( getProps, function(params) {
+                        setActual(params['status']);
+                        setStatus(
+                                  "status :"+params["status"]+"<br>"+
+                                  "http_error :"+params["http_error"] + "<br" +
+                                  "body :" + params["body"]
+                                  );
+                        }
+                        );
+    }
+
 
 
 }
@@ -527,6 +581,10 @@ Select Test To Run &nbsp;&nbsp;
 <OPTION value="VT293-0032">VT293-0032</OPTION>
 <OPTION value="VT293-0033">VT293-0033</OPTION>
 <OPTION value="VT293-0034">VT293-0034</OPTION>
+<OPTION platform="ANDROID" value="ClientAuth">ClientAuth</OPTION>
+<!-- <OPTION platform="ANDROID" value="ClientAuthNoCert">ClientAuthNoCert</OPTION> -->
+
+    
     <!--
 <OPTION platform = "" value="VT293-0035">VT293-0035</OPTION>
 <OPTION platform = "" value="VT293-0036">VT293-0036</OPTION>
