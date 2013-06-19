@@ -2688,20 +2688,20 @@ var arr_scanner_property = [
 	expectedResult	:	"false"
 },
 {
-	testName		:	"VT282-4239 | Set upcEanBooklandFormat  :Isbn10  | Isbn10",
+	testName		:	"VT282-4239 | Set upcEanBooklandFormat  :isbn10  | isbn10",
 	propertyName	:	"upcEanBooklandFormat",
 	scannerTypes	:	"All",
 	OSTypes			:	"WINDOWS",
-	propertyValue	:	"Isbn10",
-	expectedResult	:	"Isbn10"
+	propertyValue	:	"isbn10",
+	expectedResult	:	"isbn10"
 },
 {
-	testName		:	"VT282-4240 | Set upcEanBooklandFormat  :Isbn13  | Isbn13",
+	testName		:	"VT282-4240 | Set upcEanBooklandFormat  :isbn13  | isbn13",
 	propertyName	:	"upcEanBooklandFormat",
 	scannerTypes	:	"All",
 	OSTypes			:	"WINDOWS",
-	propertyValue	:	"Isbn13",
-	expectedResult	:	"Isbn13"
+	propertyValue	:	"isbn13",
+	expectedResult	:	"isbn10"
 },
 {
 	testName		:	"VT282-4241 | Set upcEanConvertGs1dataBarToUpcEan  :true  | true",

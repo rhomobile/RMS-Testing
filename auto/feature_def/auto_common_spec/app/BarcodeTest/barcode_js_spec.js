@@ -1,7 +1,17 @@
 describe("Barcode JS API Test", function() {
 	var	enableflag = false;
 	var	disableflag = false;
+	var getpropertiesdata ='';
+	var getpropertydata ='';
     var enumData = Rho.Barcode.enumerate();
+
+    var callbackgetproperties = function (data){
+		getpropertiesdata = JSON.stringify(data);
+	}
+
+	var callbackgetproperty = function (data){
+		getpropertydata = data;
+	}
 
     for (var j = 0;j<enumData.length;j++){
 
@@ -131,66 +141,82 @@ describe("Barcode JS API Test", function() {
 				}
 			});
 
+
 			describe("getProperty and get properties with all combination for "+ scntype +": "+ scnname, function() {
 
-						var getpropertiesdata1 ='';
-						var getpropertiesdata ='';
-						var getpropertydata ='';
-						var getpropertydata1 ='';
+				beforeEach(function() {
+					getpropertiesdata ='';
+					getpropertydata ='';
+				});
 
-						var callbackgetproperties = function (data){
-							getpropertiesdata = JSON.stringify(data);
-						}
+						it("VT282-2001 | call getProperties() with sync callback and hash |" + scntype, function() {
 
-						var callbackgetproperty = function (data){
-							getpropertydata = data;
-						}
-
-						it("VT282-2001 | call getProperties() with callback as action URL and hash |" + scntype, function() {
-
-							    enumObject.clearAllProperties();
-							    enumObject.setProperties({'allDecoders':false,'picklistMode':'softwareReticle','code93':true});
+							    //enumObject.clearAllProperties();
+							    enumObject.setProperties({'allDecoders':'false','picklistMode':'softwareReticle','code93':'true'});
 								enumObject.getProperties(['allDecoders','picklistMode','code93'],callbackgetproperties);
+								expect(getpropertiesdata).toContain('true');
+								expect(getpropertiesdata).toContain('false');
+								expect(getpropertiesdata).toContain('softwareReticle');	
+						});
+
+
+						it("VT282-2002 | call getProperties() with anonymous callback and hash |" + scntype, function() {
+
+							    //enumObject.clearAllProperties();							    
+							    enumObject.setProperties({'allDecoders':'false','picklistMode':'softwareReticle','code93':'true'});
+								enumObject.getProperties(['allDecoders','picklistMode','code93'],function(data){getpropertiesdata = JSON.stringify(data);});
+								expect(getpropertiesdata).toContain('true');
+								expect(getpropertiesdata).toContain('false');
+								expect(getpropertiesdata).toContain('softwareReticle');								
+						});
+
+						it("VT282-2000 | call getProperties() without callback |" + scntype, function() {
+
+							    //enumObject.clearAllProperties();
+							    enumObject.setProperties({'allDecoders':'false','picklistMode':'softwareReticle','code93':'true'});
+								var data = enumObject.getProperties(['allDecoders','picklistMode','code93']);
+								getpropertiesdata = JSON.stringify(data);
 								expect(getpropertiesdata).toContain('true');
 								expect(getpropertiesdata).toContain('false');
 								expect(getpropertiesdata).toContain('softwareReticle');								
 						});
 
 
-						it("VT282-2002 | call getProperties() with anonymous callback and hash |" + scntype, function() {
-
-							    enumObject.clearAllProperties();							    
-							    enumObject.setProperties({'allDecoders':false,'picklistMode':'softwareReticle','code93':true});
-								enumObject.getProperties(['allDecoders','picklistMode','code93'],function(data){getpropertiesdata1 = JSON.stringify(data);});
-								expect(getpropertiesdata1).toContain('true');
-								expect(getpropertiesdata1).toContain('false');
-								expect(getpropertiesdata1).toContain('softwareReticle');								
-						});
-
-
 						it("VT282-2004 | call getProperty() with sync callback and property |" + scntype, function() {
 
-							    enumObject.clearAllProperties();							    
-							    enumObject.setProperty(allDecoders,true);
-								enumObject.getProperty(allDecoders,callbackgetproperty);
+							    //enumObject.clearAllProperties();							    
+							    enumObject.setProperty('allDecoders','true');
+								enumObject.getProperty("allDecoders",callbackgetproperty);
 								expect(getpropertydata).toEqual('true');								
 						});
 
 						it("VT282-2005 | call getProperty() with anonymous callback and property |" + scntype, function() {
 
-							    enumObject.clearAllProperties();							    
-							    enumObject.setProperty(picklistMode,softwareReticle);
-								enumObject.getProperty(picklistMode,function(data){getpropertydata1 = data;});
-								expect(getpropertydata1).toEqual('true');							
+							    //enumObject.clearAllProperties();							    
+							    enumObject.setProperty('picklistMode','softwareReticle');
+								enumObject.getProperty('picklistMode',function(data){getpropertydata = data;});
+								expect(getpropertydata).toEqual('true');							
 						});
 
 
-						it("VT282-2006 | call getDefault and enable |" + scntype, function() {
+						it("VT282-2003 | call getProperty() without callback |" + scntype, function() {
 
-							    enumObject.clearAllProperties();
-							    Rho.Barcode.setDefaultID( enumObject.getId() );
-							    var defaultobj = Rho.Barcode.getDefault(enumObject);							  
-								expect(scntype).toEqual(defaultobj.getProperty('ID'));	
+							    //enumObject.clearAllProperties();							    
+							    enumObject.setProperty('allDecoders','true');
+								//enumObject.getProperty("allDecoders",callbackgetproperty);
+								var data = enumObject.getProperty("allDecoders");
+								getpropertydata = data;
+								expect(getpropertydata).toEqual('true');								
+						});
+
+						it("VT282-2006 | call getDefault |" + scntype, function() {
+
+							    //enumObject.clearAllProperties();
+							    //Rho.Barcode.setDefaultID( enumObject.getId() );
+							    Rho.Barcode.setDefault(enumObject);
+							    var defaultobj = Rho.Barcode.getDefault();
+							    alert(defaultobj);						  
+								expect(scntype).toEqual(defaultobj.getProperty('ID'));
 						});
 
 			});
@@ -316,8 +342,8 @@ describe("Enumerate Scanner ", function() {
 	it("Enumerate Scanners without callback (Synchronous Access)", function() {
 			
 		runs(function() {
-			var enumobj = Rho.Barcode.enumerate();
-			expect(enumCallback(enumobj)).toEqual(true);
+			var obj = Rho.Barcode.enumerate();
+			expect(enumCallback(obj)).toEqual(true);
 		});
  	});
  	
