@@ -45,7 +45,11 @@
     var srvSecureHost = SERVER_HOST;
     var srvSecurePort = SECURE_PORT;
     var srvSecureUrl = "https://" + srvSecureHost + ":" + srvSecurePort.toString();
-   
+	var Path_file_downloded = '';
+	FTPServer = "192.168.6.18/Received"
+	ftpusername = 'admin'
+	ftppassword = 'admin'
+	var FTPUrl = "ftp://"+ftpusername+":"+ftppassword+"@"+FTPServer
 
     </script>
 </head>
@@ -290,131 +294,137 @@
 	<div class="method_name">Rho.System.applicationInstall</div>
 	<div class="method_desc">Application Install </div>
 	<div class="method_tests wm" ><b>Application Install for Windows WM:</b>
-<!--		<div class="test_scenario">
+		<div class="test_scenario">
 			<div class="test_scenario_controls">
-				<a href="javascript:void(0)" onclick ="callapplicationInstall('ftp://'+ftpusername+':'+ftppassword+'@'+server1+'/InstallTestapp.cab');">Call applicationInstall with FTP url</a>
+				<a href="javascript:void(0)" onclick ="callapplicationInstall(FTPUrl+'/TestAppWM6.5.cab');">Call applicationInstall with FTP url</a>
 			</div>
 			<span class="test_scenario_number">VT300-063 <br /></span>
-		</div>-->
+		</div>
 		<div class="test_scenario">
 			<div class="test_scenario_controls">
 				<a href="javascript:void(0)" onclick ="callapplicationInstall(srvSecureUrl+'/download_app?device=wm');">call application Install with HTTP url</a>
 			</div>
 			<span class="test_scenario_number">VT300-064 <br /></span>
 		</div>
-<!--		<div class="test_scenario">
+		<div class="test_scenario">
 			<div class="test_scenario_controls">
-				<a href="javascript:void(0)" onclick ="callapplicationInstall('/app/public/testfiles/InstallTestapp.cab');">call application Install 	with local url</a>
+				<a href="javascript:void(0)" onclick ="Path_file_downloded = download_filetolocal(srvSecureUrl+'/download_app?device=wm', 'TestAppWM6.5.cab');">Download to local</a> <br />
+				<a href="javascript:void(0)" onclick ="callapplicationInstall(Path_file_downloded);">call Downloaded application Install with local url</a>
 			</div>
 			<span class="test_scenario_number">VT300-065 <br /></span>
-		</div>-->
+		</div>
 	</div>
 	
 	
 	<div class="method_tests android"><b>Application Install for Android:</b>
-<!--		<div class="test_scenario">
+		<div class="test_scenario">
 			<div class="test_scenario_controls">
-				<a href="javascript:void(0)" onclick ="callapplicationInstall('ftp://'+username+':'+password+'@'+server1+'/InstallTestapp_signed.apk');">Call application Install with FTP url</a>
+				<a href="javascript:void(0)" onclick ="callapplicationInstall(FTPUrl+'/TestApp_signed.apk');">Call applicationInstall with FTP url</a>
 			</div>
 			<span class="test_scenario_number">VT300-063 <br /></span>
-		</div>-->
+		</div>
 		<div class="test_scenario">
 			<div class="test_scenario_controls">
 				<a href="javascript:void(0)" onclick ="callapplicationInstall(srvSecureUrl+'/download_app?device=android');">call application Install with HTTP url</a>
 			</div>
 			<span class="test_scenario_number">VT300-064 <br /></span>
 		</div>
-<!--		<div class="test_scenario">
+		<div class="test_scenario">
 			<div class="test_scenario_controls">
-				<a href="javascript:void(0)" onclick ="callapplicationInstall('/app/public/testfiles/InstallTestapp_signed.apk');">call applicationInstall 	with local url</a>
+				<a href="javascript:void(0)" onclick ="Path_file_downloded = download_filetolocal(srvSecureUrl+'/download_app?device=android', 'TestApp_signed.apk');">Download to local</a> <br />
+				<a href="javascript:void(0)" onclick ="callapplicationInstall(Path_file_downloded);">call Downloaded application Install with local url</a>
 			</div>
 			<span class="test_scenario_number">VT300-065 <br /></span>
-		</div>-->
+		</div>
 	</div>
 	
 	<div class="method_tests wm"><b>Application Install for Windows CE:</b>
-<!--		<div class="test_scenario">
+		<div class="test_scenario">
 			<div class="test_scenario_controls">
-				<a href="javascript:void(0)" onclick ="callapplicationInstall('ftp://'+username+':'+password+'@'+server1+'/InstallTestapp.cab');">Call applicationInstall with FTP url</a>
+				<a href="javascript:void(0)" onclick ="callapplicationInstall(FTPUrl+'/TestAppCE.cab');">Call applicationInstall with FTP url</a>
 			</div>
 			<span class="test_scenario_number">VT300-063 <br /></span>
-		</div>-->
+		</div>
 		<div class="test_scenario">
 			<div class="test_scenario_controls">
 				<a href="javascript:void(0)" onclick ="callapplicationInstall(srvSecureUrl+'/download_app?device=ce');">call application Install with HTTP url</a>
 			</div>
 			<span class="test_scenario_number">VT300-064 <br /></span>
 		</div>
-<!--		<div class="test_scenario">
+		<div class="test_scenario">
 			<div class="test_scenario_controls">
-				<a href="javascript:void(0)" onclick ="callapplicationInstall('/app/public/testfiles/InstallTestapp.cab');">call application Install 	with local url</a>
+				<a href="javascript:void(0)" onclick ="Path_file_downloded = download_filetolocal(srvSecureUrl+'/download_app?device=ce', 'TestAppCE.cab');">Download to local</a> <br />
+				<a href="javascript:void(0)" onclick ="callapplicationInstall(Path_file_downloded);">call Downloaded application Install with local url</a>
 			</div>
 			<span class="test_scenario_number">VT300-065 <br /></span>
-		</div>-->
+		</div>
 	</div>
 	
 	
 	<div class="method_tests ios"><b>Application Install for Windows IOS:</b>
-<!--		<div class="test_scenario">
+		<div class="test_scenario">
 			<div class="test_scenario_controls">
-				<a href="javascript:void(0)" onclick ="callapplicationInstall('ftp://'+username+':'+password+'@'+server1+'/InstallTestapp.ipa');">Call applicationInstall with FTP url</a>
+				<a href="javascript:void(0)" onclick ="callapplicationInstall(FTPUrl+'/auto_common_spec.ipa);">Call applicationInstall with FTP url</a>
 			</div>
 			<span class="test_scenario_number">VT300-063 <br /></span>
-		</div>-->
+		</div>
 		<div class="test_scenario">
 			<div class="test_scenario_controls">
 				<a href="javascript:void(0)" onclick ="callapplicationInstall(srvSecureUrl+'/download_app?device=ios');">call application Install with HTTP url</a>
 			</div>
 			<span class="test_scenario_number">VT300-064 <br /></span>
 		</div>
-<!--		<div class="test_scenario">
+		<div class="test_scenario">
 			<div class="test_scenario_controls">
-				<a href="javascript:void(0)" onclick ="callapplicationInstall('/app/public/testfiles/InstallTestapp.ipa');">call application Install 	with local url</a>
+				<a href="javascript:void(0)" onclick ="Path_file_downloded = download_filetolocal(srvSecureUrl+'/download_app?device=ios', 'auto_common_spec.ipa');">Download to local</a> <br />
+				<a href="javascript:void(0)" onclick ="callapplicationInstall(Path_file_downloded);">call Downloaded application Install with local url</a>
 			</div>
 			<span class="test_scenario_number">VT300-065 <br /></span>
-		</div>-->
+		</div>
 	</div>
 	
 	<div class="method_tests win32"><b>Application Install for Windows Win32:</b>
-<!--		<div class="test_scenario">
-			<div class="test_scenario_controls">
-				<a href="javascript:void(0)" onclick ="callapplicationInstall('ftp://'+username+':'+password+'@'+server1+'/InstallTestapp.exe');">Call applicationInstall with FTP url</a>
-			</div>
-			<span class="test_scenario_number">VT300-063 <br /></span>
-		</div>-->
 		<div class="test_scenario">
 			<div class="test_scenario_controls">
-				<a href="javascript:void(0)" onclick ="callapplicationInstall(srvSecureUrl+'/download_app?device=ios');">call application Install with HTTP url</a>
+				<a href="javascript:void(0)" onclick ="callapplicationInstall(FTPUrl+'/everywan.exe);">Call applicationInstall with FTP url</a>
+			</div>
+			<span class="test_scenario_number">VT300-063 <br /></span>
+		</div>
+		<div class="test_scenario">
+			<div class="test_scenario_controls">
+				<a href="javascript:void(0)" onclick ="callapplicationInstall(srvSecureUrl+'/download_app?device=win32');">call application Install with HTTP url</a>
 			</div>
 			<span class="test_scenario_number">VT300-064 <br /></span>
 		</div>
-<!--		<div class="test_scenario">
+		<div class="test_scenario">
 			<div class="test_scenario_controls">
-				<a href="javascript:void(0)" onclick ="callapplicationInstall('/app/public/testfiles/InstallTestapp.exe');">call application Install 	with local url</a>
+				<a href="javascript:void(0)" onclick ="Path_file_downloded = download_filetolocal(srvSecureUrl+'/download_app?device=win32', 'everywan.exe');">Download to local</a> <br />
+				<a href="javascript:void(0)" onclick ="callapplicationInstall(Path_file_downloded);">call Downloaded application Install with local url</a>
 			</div>
 			<span class="test_scenario_number">VT300-065 <br /></span>
-		</div>-->
+		</div>
 	</div>
 	
 		<div class="method_tests wp8"><b>Application Install for Windows wp8:</b>
-<!--		<div class="test_scenario">
+		<div class="test_scenario">
 			<div class="test_scenario_controls">
-				<a href="javascript:void(0)" onclick ="callapplicationInstall('ftp://'+username+':'+password+'@'+server1+'/InstallTestapp.exe');">Call applicationInstall with FTP url</a>
+				<a href="javascript:void(0)" onclick ="callapplicationInstall(FTPUrl+'/everywan.exe);">Call applicationInstall with FTP url</a>
 			</div>
 			<span class="test_scenario_number">VT300-063 <br /></span>
-		</div>-->
+		</div>
 		<div class="test_scenario">
 			<div class="test_scenario_controls">
 				<a href="javascript:void(0)" onclick ="callapplicationInstall(srvSecureUrl+'/download_app?device=wp8');">call application Install with HTTP url</a>
 			</div>
 			<span class="test_scenario_number">VT300-064 <br /></span>
 		</div>
-<!--		<div class="test_scenario">
+		<div class="test_scenario">
 			<div class="test_scenario_controls">
-				<a href="javascript:void(0)" onclick ="callapplicationInstall('/app/public/testfiles/InstallTestapp.exe');">call application Install 	with local url</a>
+				<a href="javascript:void(0)" onclick ="Path_file_downloded = download_filetolocal(srvSecureUrl+'/download_app?device=wp8', 'everywan.exe');">Download to local</a> <br />
+				<a href="javascript:void(0)" onclick ="callapplicationInstall(Path_file_downloded);">call Downloaded application Install with local url</a>
 			</div>
 			<span class="test_scenario_number">VT300-065 <br /></span>
-		</div>-->
+		</div>
 	</div>
 </div>
 
@@ -425,7 +435,15 @@
 	<div class="method_tests wm">
 		<div class="test_scenario">
 			<div class="test_scenario_controls">
-				<a href="javascript:void(0)" onclick ="callapplicationUninstall('TestApp');"> call applicationUninstall with application name 'TestApp'</a>
+				<a href="javascript:void(0)" onclick ="callapplicationUninstall('TestAppWM6.5');"> call applicationUninstall with application name 'TestAppWM6.5'</a>
+			</div>
+		</div>
+	</div>
+	
+	<div class="method_tests wm">CE <br />
+		<div class="test_scenario">
+			<div class="test_scenario_controls">
+				<a href="javascript:void(0)" onclick ="callapplicationUninstall('TestAppCE');"> call applicationUninstall with application name 'TestAppCE'</a>
 			</div>
 		</div>
 	</div>
@@ -433,7 +451,7 @@
 	<div class="method_tests win32">
 		<div class="test_scenario">
 			<div class="test_scenario_controls">
-				<a href="javascript:void(0)" onclick ="callapplicationUninstall('TestApp');"> call applicationUninstall with application name 'TestApp'</a>
+				<a href="javascript:void(0)" onclick ="callapplicationUninstall('everywan');"> call applicationUninstall with application name 'everywan'</a>
 			</div>
 		</div>
 	</div>
@@ -449,7 +467,7 @@
 	<div class="method_tests wp8">
 		<div class="test_scenario">
 			<div class="test_scenario_controls">
-				<a href="javascript:void(0)" onclick ="callapplicationUninstall('TestApp');"> call applicationUninstall with application name 'TestApp'</a>
+				<a href="javascript:void(0)" onclick ="callapplicationUninstall('everywan');"> call applicationUninstall with application name 'everywan'</a>
 			</div>
 		</div>
 	</div>
@@ -478,7 +496,16 @@
 	<div class="method_tests wm">WM <br />
 		<div class="test_scenario">
 			<div class="test_scenario_controls">
-				<a href="javascript:void(0)" onclick ="callisApplicationInstalled('TestApp');">Call isApplicationInstalled() with correct app name 'TestApp'</a>
+				<a href="javascript:void(0)" onclick ="callisApplicationInstalled('TestAppWM6.5');">Call isApplicationInstalled() with correct app name 'TestAppWM6.5'</a>
+			</div>
+			<span class="test_scenario_number">VT300-077 <br /></span>
+		</div>
+	</div>
+	
+	<div class="method_tests wm">CE <br />
+		<div class="test_scenario">
+			<div class="test_scenario_controls">
+				<a href="javascript:void(0)" onclick ="callisApplicationInstalled('TestAppCE');">Call isApplicationInstalled() with correct app name 'TestAppCE'</a>
 			</div>
 			<span class="test_scenario_number">VT300-077 <br /></span>
 		</div>
@@ -504,7 +531,7 @@
 	<div class="method_tests wp8"> WP8 <br />
 		<div class="test_scenario">
 			<div class="test_scenario_controls">
-				<a href="javascript:void(0)" onclick ="callisApplicationInstalled('TestApp');">Call isApplicationInstalled() with correct app name 'InstallTestapp'</a>
+				<a href="javascript:void(0)" onclick ="callisApplicationInstalled('everywan');">Call isApplicationInstalled() with correct app name 'everywan'</a>
 			</div>
 			<span class="test_scenario_number">VT300-077 <br /></span>
 		</div>
@@ -513,7 +540,7 @@
 	<div class="method_tests win32"> Win32 <br />
 		<div class="test_scenario">
 			<div class="test_scenario_controls">
-				<a href="javascript:void(0)" onclick ="callisApplicationInstalled('TestApp');">Call isApplicationInstalled() with correct app name 'InstallTestapp'</a>
+				<a href="javascript:void(0)" onclick ="callisApplicationInstalled('everywan');">Call isApplicationInstalled() with correct app name 'everywan'</a>
 			</div>
 			<span class="test_scenario_number">VT300-077 <br /></span>
 		</div>

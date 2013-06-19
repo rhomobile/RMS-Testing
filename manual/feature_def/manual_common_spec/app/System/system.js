@@ -159,7 +159,18 @@ function callgetProperties(propertyName)
 	$("#Rho_System_getProperties span.result").text(JSON.stringify(data));
 }
 
-
+function download_filetolocal(srvHttpDownloadImageUrl, filetoinstall)
+{
+	var file = filetoinstall;
+	var fname = Rho.RhoFile.join(Rho.Application.userFolder, file);
+	downloadfileProps = {
+                url: srvHttpDownloadImageUrl,
+                filename: fname
+            };
+	
+    Rho.Network.downloadFile(downloadfileProps);
+	return fname;
+}
 
 
 
