@@ -214,11 +214,19 @@ describe("Barcode JS API Test", function() {
 							    //enumObject.clearAllProperties();
 							    //Rho.Barcode.setDefaultID( enumObject.getId() );
 							    Rho.Barcode.setDefault(enumObject);
-							    var defaultobj = Rho.Barcode.getDefault();
-							    alert(defaultobj);						  
+							    var defaultobj = Rho.Barcode.getDefault();						  
 								expect(scntype).toEqual(defaultobj.getProperty('ID'));
 						});
 
+						it("VT282-2006A | call Default |" + scntype, function() {
+
+							    //enumObject.clearAllProperties();
+							    //Rho.Barcode.setDefaultID( enumObject.getId() );
+							    Rho.Barcode.default = enumObject;
+							    var defaultobj = Rho.Barcode.default;
+							    alert(defaultobj);
+								expect(scntype).toEqual(defaultobj.getProperty('ID'));
+						});
 			});
 
 			describe("Disable Scanner "+ scntype +": "+ scnname, function() {
