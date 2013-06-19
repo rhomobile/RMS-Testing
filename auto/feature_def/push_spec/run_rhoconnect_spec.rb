@@ -148,7 +148,6 @@ def run_apps(platform)
 		puts
 		puts "Specs for Windows Mobile/CE Devices should be here ..."
 		puts
-
 		#
 	end
 
