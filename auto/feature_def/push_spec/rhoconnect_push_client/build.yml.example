@@ -1,4 +1,4 @@
-sdk: Path-to-Rhodes
+sdk: '../../../../../rhodes'
 sdkversion: 4.0.0
 name: Rho_Push_Client
 version: 1.02

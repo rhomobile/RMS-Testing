@@ -19,17 +19,17 @@
 
 	<style>
 	#detailsdiv {
-    background: url("/public/images/grid2.gif") repeat scroll 0 0 transparent;
+    background: url("img/grid2.gif") repeat scroll 0 0 transparent;
     border: 1px solid #DCDCDC;
     color: #8B0000;
     display: block;
     font-weight: bold;
-    left: 80px;
+    left: 170px;
     padding: 10px;
     position: fixed;
     text-align: center;
-    top: 100px;
-    width: 180px;
+    top: 200px;
+    width: 530px;
 	}
 	</style>
 
@@ -37,7 +37,7 @@
     <script type="text/javascript" src="../helpers/specHelpers.js"></script>
 
 	<!-- include spec files here... -->
-	<script type="text/javascript" src="notificatiion_js_spec.js"></script>
+	<script type="text/javascript" src="file_js_spec.js"></script>
 
 	<script type="text/javascript">
 
@@ -73,14 +73,15 @@
 
 </head>
 <body>
- <h1>Notification Manual FD Tests</h1>
-	<P>
-	<b>Test Running: </b><div id="instruction"></div>
-	<P>
-	<b>Expected Result: </b><div id="expectedresult"></div>
-	<P>
-	<input type="button" value="Test Passed" onclick="captureResult(true)" />
-	<input type="button" value="Test Failed" onclick="captureResult(false)"/>
-	<div id="actResult" style="display:none">init</div>
+<br/><br/>
+<div id="detailsdiv"></div>
+<br/><br/>
+<div id="test">
+<ul id="myList">
+</ul>
+<ul id="myList2">
+</ul>
+</div>
+<br/><br/><br/><br/>
 </body>
 </html>

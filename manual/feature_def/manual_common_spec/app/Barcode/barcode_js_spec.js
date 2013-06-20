@@ -1,5 +1,13 @@
 describe("Barcode Manual Test", function() {
 	
+	var ENABLE8K = 8000;
+	var ENABLE1K = 1000;
+	
+	if(Rho.System.platform == 'ANDROID')
+	{
+		ENABLE8K = 0; ENABLE1K = 0;
+	}
+	
 	var enableFlag = false;
 	var decodeFlag = false;
 
@@ -38,7 +46,7 @@ describe("Barcode Manual Test", function() {
 			objSCN.enable({},callbackenable);
 			setTimeout(function() {
 				enableFlag = true;
-			}, 8000);
+			}, ENABLE8K);
 		});
 
 		waitsFor(function()
@@ -67,7 +75,7 @@ describe("Barcode Manual Test", function() {
 			objSCN.enable();
 			setTimeout(function() {
 				enableFlag = true;
-			}, 1000);
+			}, ENABLE1K);
 		});
 
 		waitsFor(function()
@@ -97,7 +105,7 @@ describe("Barcode Manual Test", function() {
 			objSCN.enable({'allDecoders':'true'},callbackenable);
 			setTimeout(function() {
 				enableFlag = true;
-			}, 1000);
+			}, ENABLE1K);
 		});
 
 		waitsFor(function()
@@ -127,7 +135,7 @@ describe("Barcode Manual Test", function() {
 			objSCN.enable({'scanTimeout':'3000','picklistMode':'softwareReticle'},callbackenable);
 			setTimeout(function() {
 				enableFlag = true;
-			}, 1000);
+			}, ENABLE1K);
 		});
 
 		waitsFor(function()
@@ -157,7 +165,7 @@ describe("Barcode Manual Test", function() {
 			objSCN.enable({'allDecoders':false,'code128':true});
 			setTimeout(function() {
 				enableFlag = true;
-			}, 1000);
+			}, ENABLE1K);
 		});
 
 		waitsFor(function()
@@ -186,17 +194,17 @@ describe("Barcode Manual Test", function() {
 			objSCN.enable({},function(data){callbackenable(data);});
 			setTimeout(function() {
 				enableFlag = true;
-			}, 1000);
+			}, ENABLE1K);
 		});
 
 		waitsFor(function()
 		{
-			objSCN.allDecoders = true;
 			return enableFlag;
 		}, '2sec Wait to enable the Scanner', 2000);
 
 		runs(function()
 		{	
+			objSCN.allDecoders = true;
 			waitsFor(function() {
 			return document.getElementById("actResult").innerHTML != "init";
 			}, "Timed out waiting for tester to respond", 300000);
@@ -214,10 +222,11 @@ describe("Barcode Manual Test", function() {
 			setObjective("VT282-1770 | Enable with picklist software reticle, scantimeout 3000 and callback as anonymous function |");
 			setInstruction("check functionality of scanTimeout as 3000 and picklistMode reticle with " + scnid);
 			setExpected("Baeam or viewfinder will stop automatically after 3 second? only the barcode in the center of the image is decoded for picklistMode as reticle ");
-			objSCN.enable({'scanTimeout':7000,'picklistMode':'softwareReticle'},function(data){enablecallbackdata(JSON.stringify(data));});
+			//objSCN.enable({'scanTimeout':7000,'picklistMode':'softwareReticle'},function(data){enablecallbackdata(JSON.stringify(data));});
+			objSCN.enable({'scanTimeout':3000,'picklistMode':'softwareReticle'},function(data){enablecallbackdata(JSON.stringify(data));});
 			setTimeout(function() {
 				enableFlag = true;
-			}, 1000);
+			}, ENABLE1K);
 		});
 
 		waitsFor(function()
@@ -246,7 +255,7 @@ describe("Barcode Manual Test", function() {
 			objSCN.enable({},callbackenable);
 			setTimeout(function() {
 				enableFlag = true;
-			}, 1000);
+			}, ENABLE1K);
 		});
 
 		waitsFor(function()
@@ -277,7 +286,7 @@ describe("Barcode Manual Test", function() {
 			objSCN.enable({},callbackenable);
 			setTimeout(function() {
 				enableFlag = true;
-			}, 1000);
+			}, ENABLE1K);
 		});
 
 		waitsFor(function()
@@ -311,17 +320,17 @@ describe("Barcode Manual Test", function() {
 			Rho.Barcode.take({},callbackenable);
 			setTimeout(function() {
 				enableFlag = true;
-			}, 8000);
+			}, ENABLE8K);
 		});
 
 		waitsFor(function()
 		{
-			objSCN.allDecoders = true;
 			return enableFlag;
 		}, '2sec wait to enable the Scanner', 9000);
 
 		runs(function()
 		{		
+			objSCN.allDecoders = true;
 			waitsFor(function() {
 			return document.getElementById("actResult").innerHTML != "init";
 			}, "Timed out waiting for tester to respond", 300000);
@@ -343,7 +352,7 @@ describe("Barcode Manual Test", function() {
 			Rho.Barcode.enable({},callbackenable);
 			setTimeout(function() {
 				enableFlag = true;
-			}, 8000);
+			}, ENABLE8K);
 		});
 
 		waitsFor(function()
@@ -374,7 +383,7 @@ describe("Barcode Manual Test", function() {
 			objSCN.enable({},callbackenable);
 			setTimeout(function() {
 				enableFlag = true;
-			}, 8000);
+			}, ENABLE8K);
 		});
 
 		waitsFor(function()
@@ -479,7 +488,7 @@ describe("Barcode Manual Test", function() {
 			objSCN.take({'allDecoders':true,'scanTimeout':10000},callbackenable);
 			setTimeout(function() {
 				enableFlag = true;
-			}, 1000);
+			}, ENABLE1K);
 		});
 
 		waitsFor(function()
@@ -509,7 +518,7 @@ describe("Barcode Manual Test", function() {
 			objSCN.take({'scanTimeout':10000,'picklistMode':'softwareReticle'},callbackenable);
 			setTimeout(function() {
 				enableFlag = true;
-			}, 1000);
+			}, ENABLE1K);
 		});
 
 		waitsFor(function()
@@ -539,7 +548,7 @@ describe("Barcode Manual Test", function() {
 			objSCN.take({'allDecoders':false,'code128':true,'scanTimeout':10000},callbackenable);
 			setTimeout(function() {
 				enableFlag = true;
-			}, 1000);
+			}, ENABLE1K);
 		});
 
 		waitsFor(function()
@@ -570,11 +579,11 @@ describe("Barcode Manual Test", function() {
 			setTimeout(function() {
 				enableFlag = true;
 			}, 4000);
+			objSCN.allDecoders = true;
 		});
 
 		waitsFor(function()
 		{
-			objSCN.allDecoders = true;
 			return enableFlag;
 		}, '2sec wait to enable the Scanner', 5000);
 
@@ -600,7 +609,7 @@ describe("Barcode Manual Test", function() {
 			objSCN.enable({},callbackenable);
 			setTimeout(function() {
 				enableFlag = true;
-			}, 8000);
+			}, ENABLE8K);
 		});
 		waitsFor(function()
 		{
@@ -630,11 +639,11 @@ describe("Barcode Manual Test", function() {
 			objSCN.enable({},callbackenable);
 			setTimeout(function() {
 				enableFlag = true;
-			}, 1000);
+			}, ENABLE1K);
+			dispCurrentProcess("Enabling Scanner");
 		});
 		waitsFor(function()
 		{
-			dispCurrentProcess("Enabling Scanner");
 			return enableFlag;
 		}, '2sec wait to enable the Scanner', 2000);
 
@@ -646,6 +655,7 @@ describe("Barcode Manual Test", function() {
 			}, "Timed out waiting for tester to respond", 300000);
 			runs(function() {
 			expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+			objSCN.setProperty("allDecoders","true");
 			//objSCN.disable();
 			});
 		});
@@ -662,7 +672,7 @@ describe("Barcode Manual Test", function() {
 			objSCN.enable();
 			setTimeout(function() {
 				enableFlag = true;
-			}, 1000);
+			}, ENABLE1K);
 		});
 		waitsFor(function()
 		{
@@ -692,7 +702,7 @@ describe("Barcode Manual Test", function() {
 			objSCN.enable();
 			setTimeout(function() {
 				enableFlag = true;
-			}, 1000);
+			}, ENABLE1K);
 		});
 		waitsFor(function()
 		{
@@ -723,7 +733,7 @@ describe("Barcode Manual Test", function() {
 			objSCN.enable();
 			setTimeout(function() {
 				enableFlag = true;
-			}, 1000);
+			}, ENABLE1K);
 		});
 		waitsFor(function()
 		{
@@ -754,7 +764,7 @@ describe("Barcode Manual Test", function() {
 			objSCN.enable();
 			setTimeout(function() {
 				enableFlag = true;
-			}, 8000);
+			}, ENABLE8K);
 		});
 		waitsFor(function()
 		{
@@ -784,7 +794,7 @@ describe("Barcode Manual Test", function() {
 			objSCN.enable({"autoenter":true});
 			setTimeout(function() {
 				enableFlag = true;
-			}, 1000);
+			}, ENABLE1K);
 		});
 		waitsFor(function()
 		{
@@ -813,11 +823,11 @@ describe("Barcode Manual Test", function() {
 			objSCN.enable({},callbackenable);
 			setTimeout(function() {
 				enableFlag = true;
-			}, 1000);
+			}, ENABLE1K);
+			dispCurrentProcess("Enabling Scanner");
 		});
 		waitsFor(function()
 		{
-			dispCurrentProcess("Enabling Scanner");
 			return enableFlag;
 		}, '2sec wait to enable the Scanner', 2000);
 
@@ -845,7 +855,7 @@ describe("Barcode Manual Test", function() {
 			objSCN.enable({},callbackenable);
 			setTimeout(function() {
 				enableFlag = true;
-			}, 1000);
+			}, ENABLE1K);
 		});
 		waitsFor(function()
 		{
@@ -876,7 +886,7 @@ describe("Barcode Manual Test", function() {
 			objSCN.enable({},callbackenable);
 			setTimeout(function() {
 				enableFlag = true;
-			}, 1000);
+			}, ENABLE1K);
 		});
 		waitsFor(function()
 		{
@@ -908,11 +918,11 @@ describe("Barcode Manual Test", function() {
 				objSCN.enable({},callbackenable);
 				setTimeout(function() {
 					enableFlag = true;
-				}, 1000);
+				}, ENABLE1K);
+				dispCurrentProcess("Enabling Scanner");
 			});
 			waitsFor(function()
 			{
-				dispCurrentProcess("Enabling Scanner");
 				return enableFlag;
 			}, '2sec wait to enable the Scanner', 2000);
 
@@ -941,11 +951,11 @@ describe("Barcode Manual Test", function() {
 				objSCN.enable({},callbackenable);
 				setTimeout(function() {
 					enableFlag = true;
-				}, 8000);
+				}, ENABLE8K);
+				dispCurrentProcess("Enabling Scanner");
 			});
 			waitsFor(function()
 			{
-				dispCurrentProcess("Enabling Scanner");
 				return enableFlag;
 			}, '2sec wait to enable the Scanner', 9000);
 
@@ -974,7 +984,7 @@ describe("Barcode Manual Test", function() {
 			objSCN.enable({},callbackenable);
 			setTimeout(function() {
 				enableFlag = true;
-			}, 1000);
+			}, ENABLE1K);
 		});
 		waitsFor(function()
 		{
@@ -1004,7 +1014,7 @@ describe("Barcode Manual Test", function() {
 			objSCN.enable({},callbackenable);
 			setTimeout(function() {
 				enableFlag = true;
-			}, 1000);
+			}, ENABLE1K);
 		});
 		waitsFor(function()
 		{
@@ -1034,11 +1044,11 @@ describe("Barcode Manual Test", function() {
 			objSCN.enable({},callbackenable);
 			setTimeout(function() {
 				enableFlag = true;
-			}, 1000);
+			}, ENABLE1K);
+			dispCurrentProcess("Enabling Scanner");
 		});
 		waitsFor(function()
 		{
-			dispCurrentProcess("Enabling Scanner");
 			return enableFlag;
 		}, '2sec wait to enable the Scanner', 2000);
 
@@ -1067,7 +1077,7 @@ describe("Barcode Manual Test", function() {
 				objSCN.enable({},callbackenable);
 				setTimeout(function() {
 					enableFlag = true;
-				}, 1000);
+				}, ENABLE1K);
 			});
 			waitsFor(function()
 			{
@@ -1097,7 +1107,7 @@ describe("Barcode Manual Test", function() {
 				objSCN.enable({},callbackenable);
 				setTimeout(function() {
 					enableFlag = true;
-				}, 1000);
+				}, ENABLE1K);
 			});
 			waitsFor(function()
 			{
@@ -1130,11 +1140,11 @@ describe("Barcode Manual Test", function() {
 				objSCN.enable({},callbackenable);
 				setTimeout(function() {
 					enableFlag = true;
-				}, 1000);
+				}, ENABLE1K);
+				dispCurrentProcess("Enabling Scanner");
 			});
 			waitsFor(function()
 			{
-				dispCurrentProcess("Enabling Scanner");
 				return enableFlag;
 			}, '2sec wait to enable the Scanner', 2000);
 
@@ -1161,7 +1171,7 @@ describe("Barcode Manual Test", function() {
 				objSCN.enable({},callbackenable);
 				setTimeout(function() {
 					enableFlag = true;
-				}, 1000);
+				}, ENABLE1K);
 			});
 			waitsFor(function()
 			{
@@ -1193,7 +1203,7 @@ describe("Barcode Manual Test", function() {
 			objSCN.enable();
 			setTimeout(function() {
 				enableFlag = true;
-			}, 8000);
+			}, ENABLE8K);
 		});
 		waitsFor(function()
 		{
@@ -1223,11 +1233,11 @@ describe("Barcode Manual Test", function() {
 			objSCN.enable();
 			setTimeout(function() {
 				enableFlag = true;
-			}, 1000);
+			}, ENABLE1K);
+			dispCurrentProcess("Enabling Scanner");
 		});
 		waitsFor(function()
 		{
-			dispCurrentProcess("Enabling Scanner");
 			return enableFlag;
 		}, '2sec wait to enable the Scanner', 2000);
 
@@ -1256,7 +1266,7 @@ describe("Barcode Manual Test", function() {
 			objSCN.enable();
 			setTimeout(function() {
 				enableFlag = true;
-			}, 1000);
+			}, ENABLE1K);
 		});
 		waitsFor(function()
 		{
@@ -1288,7 +1298,7 @@ describe("Barcode Manual Test", function() {
 			objSCN.enable();
 			setTimeout(function() {
 				enableFlag = true;
-			}, 8000);
+			}, ENABLE8K);
 		});
 		waitsFor(function()
 		{
@@ -1319,7 +1329,7 @@ describe("Barcode Manual Test", function() {
 			objSCN.enable();
 			setTimeout(function() {
 				enableFlag = true;
-			}, 1000);
+			}, ENABLE1K);
 		});
 		waitsFor(function()
 		{
@@ -1351,7 +1361,7 @@ describe("Barcode Manual Test", function() {
 			objSCN.enable();
 			setTimeout(function() {
 				enableFlag = true;
-			}, 1000);
+			}, ENABLE1K);
 		});
 		waitsFor(function()
 		{
@@ -1383,7 +1393,7 @@ describe("Barcode Manual Test", function() {
 			objSCN.enable();
 			setTimeout(function() {
 				enableFlag = true;
-			}, 8000);
+			}, ENABLE8K);
 		});
 		waitsFor(function()
 		{

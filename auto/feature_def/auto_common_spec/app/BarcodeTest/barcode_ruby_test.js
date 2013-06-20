@@ -844,7 +844,7 @@ testCases = [
 		propertyRW		: 	"RW",
 		scannerTypes	:	"",
 		excludedDevices	:	"",
-		excludedOS		:	"",
+		excludedOS		:	"Android",
 		values			:	["true", "false"]
 	},
 	{
@@ -1289,7 +1289,7 @@ testCases = [
 		excludedOS		:	"",
 		values			:	["true", "false"]
 	},
-	{
+/*	{ //Not supported in GingerBread
 		testName		:	"Testing setting and retrieving the usPlanetReportCheckDigit Property",
 		propertyName	:	"usPlanetReportCheckDigit",
 		propertyRW		: 	"RW",
@@ -1297,7 +1297,7 @@ testCases = [
 		excludedDevices	:	"",
 		excludedOS		:	"windows",
 		values			:	["true", "false"]
-	},
+	},*/
 	{
 		testName		:	"Testing setting and retrieving the usPostNet Property",
 		propertyName	:	"usPostNet",
@@ -1307,7 +1307,7 @@ testCases = [
 		excludedOS		:	"",
 		values			:	["true", "false"]
 	},
-	{
+/*	{ //Not supported in GingerBread
 		testName		:	"Testing setting and retrieving the usPostNetReportCheckDigit Property",
 		propertyName	:	"usPostNetReportCheckDigit",
 		propertyRW		: 	"RW",
@@ -1315,7 +1315,7 @@ testCases = [
 		excludedDevices	:	"",
 		excludedOS		:	"windows",
 		values			:	["true", "false"]
-	},
+	},*/
 	{
 		testName		:	"Testing setting and retrieving the qrCode Property",
 		propertyName	:	"qrCode",
@@ -1376,7 +1376,7 @@ testCases = [
 		propertyRW		: 	"RW",
 		scannerTypes	:	"",
 		excludedDevices	:	"",
-		excludedOS		:	"",
+		excludedOS		:	"Android",
 		values			:	["Isbn10", "Isbn13"]
 	},
 	{
@@ -1403,7 +1403,7 @@ testCases = [
 		propertyRW		: 	"RW",
 		scannerTypes	:	"",
 		excludedDevices	:	"",
-		excludedOS		:	"",
+		excludedOS		:	"Android",
 		values			:	["true", "false"]
 	},
 	{
@@ -1412,7 +1412,7 @@ testCases = [
 		propertyRW		: 	"RW",
 		scannerTypes	:	"",
 		excludedDevices	:	"",
-		excludedOS		:	"",
+		excludedOS		:	"Android",
 		values			:	["true", "false"]
 	},
 	{

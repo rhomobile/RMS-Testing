@@ -110,12 +110,12 @@ module RhoconnectHelper
 	end
 
 	def self.start_redis
-        @@redis_pid = Kernel.spawn("redis-server", :out => @@redis_out )
+		@@redis_pid = Kernel.spawn("redis-server", :out => @@redis_out )
 	end
 
 	def self.stop_redis
-        Process.kill('INT', @@redis_pid) if @@redis_pid
-        @@redis_pid = nil
+		Process.kill('INT', @@redis_pid) if @@redis_pid
+ 		@@redis_pid = nil
 	end
 
 	def self.start_resque
@@ -131,7 +131,7 @@ module RhoconnectHelper
 		headers = {}
 		headers[:content_type] = :json
 		headers['X-RhoConnect-API-TOKEN'] = api_token if api_token
-		puts "POST request to Rhoconnect: params: #{params}, headers: #{headers}"
+		# puts "POST request to Rhoconnect: params: #{params}, headers: #{headers}"
 		RestClient.post("#{@@host}:#{@@port}/rc/v1/#{request}",params.to_json, headers)
 	end
 
@@ -139,7 +139,7 @@ module RhoconnectHelper
 		headers = {}
 		headers[:content_type] = :json
 		headers['X-RhoConnect-API-TOKEN'] = api_token if api_token
-		puts "GET request to Rhoconnect: params: #{params}, headers: #{headers}"
+		# puts "GET request to Rhoconnect: params: #{params}, headers: #{headers}"
 		RestClient.get("#{@@host}:#{@@port}/rc/v1/#{request}",params.to_json, headers)
 	end
 

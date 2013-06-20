@@ -33,6 +33,16 @@ describe("Log JS API", function () {
 		// js handing code does some debug traces in log, we should filter them outs 
 		Rho.LogCapture.excludeCategories = "\"__rhoClass\", \"__rhoCallback\"";
 
+		var srvHost = SERVER_HOST;
+		var srvPort = SERVER_PORT;
+		var srvURL = "http://"+SERVER_HOST+":"+SERVER_PORT.toString();
+		var httpsSrvURL = "https://"+SECURE_HOST+":"+SECURE_PORT.toString();
+
+		var srvHttpLogPostUrl = srvURL + "/client_log";
+		var srvHttpLogGetUrl = srvURL + "/get_last_log";
+
+		var waitTimeout = 10000;
+
 		// this function will execute before each of test case execution i.e it function
 		beforeEach(function () {
 			originalLogSettings = {};
@@ -69,6 +79,182 @@ describe("Log JS API", function () {
 
 			Rho.LogCapture.stop();
 		});
+
+		// Call readlog() with valid parameter (Integer) 100
+		it("VT290-391 : Call readLogFile() method with valid parameter. | ", function() {
+			runs(function(){
+				Rho.Log.leval = 0;
+				Rho.Log.cleanLogFile();
+
+				var some_random_text = "ho1PtDX5x4D8liJzSZfhMVh7Sk7U3NsRRniDD4uQe2lBTPSW2o455zykgW9CRyQl2g8oCH2tecpEnT8wK3EpHwLipJGu2OvJPiwQ3Cz0vHOYLgE5ElESn5jhK83ukz37T2f7TzDDTyKAzrR0mQaIqOI2WKbPsTkoLZuIc4bjgSraxQH1LBcbfAa0bxn42IvIaAUeBte";
+				
+				for(var i = 0; i < 20; i++)
+				{
+					Rho.Log.info(some_random_text, "VT290-391");
+				}
+
+				var read = Rho.Log.readLogFile(4000);
+
+				expect(read.length).toEqual(4000);
+
+				expect(read.count(some_random_text) > 0).toEqual(true);
+			});
+		});
+		
+		// Call sendLog()
+		it("VT290-397 : send log file with valid path, no callback| log exists", function() {
+			var flag = false;
+			var callbackCalled = false;
+			var status = '';
+			var data = '';
+			var fname = Rho.RhoFile.join(Rho.Application.userFolder,"/get_log.txt");
+
+
+			runs(function(){
+				Rho.Log.cleanLogFile();
+				Rho.Log.destinationURI = srvHttpLogPostUrl;
+				Rho.Log.info("TEST MESSAGE!", "VT290-397");
+				Rho.Log.sendLogFile();
+			    
+			    if ( Rho.RhoFile.exists(fname) ) {
+			        Rho.RhoFile.deleteFile(fname);
+			    }
+
+			    expect(Rho.RhoFile.exists(fname)).toEqual(false);
+
+			    getProps = {
+			        url: srvHttpLogGetUrl
+			    };
+
+			    Rho.Network.get(getProps, function(args){callbackCalled=true;data = args['body'];status = args['status'];});
+			} );
+
+			waitsFor( function() {
+			        return callbackCalled;
+			    },
+			    "Callback never called",
+			    waitTimeout
+			);
+
+			runs(function() {
+			    expect(status).toEqual('ok');
+
+			    expect(data.count("TEST MESSAGE!") > 0).toEqual(true);
+			});
+		});
+
+
+		// Call sendLog() with callback
+		it("VT290-398 : send log file with valid path, function callback| log exists", function() {
+			var flag = false;
+			var callbackCalled = false;
+			var status = '';
+			var data = '';
+			var fname = Rho.RhoFile.join(Rho.Application.userFolder,"/get_log.txt");
+
+			function sendcallback() {
+				callbackCalled = true;
+			};
+
+			runs(function(){
+				Rho.Log.cleanLogFile();
+
+				Rho.Log.destinationURI = srvHttpLogPostUrl;
+				Rho.Log.info("TEST MESSAGE!", "VT290-398");
+				Rho.Log.sendLogFile(sendcallback);
+
+				if ( Rho.RhoFile.exists(fname) ) {
+			        Rho.RhoFile.deleteFile(fname);
+			    }
+
+			    expect(Rho.RhoFile.exists(fname)).toEqual(false);
+			});
+
+			waitsFor( function() {
+			        return callbackCalled;
+			    },
+			    "Callback never called",
+			    waitTimeout
+			);
+
+			runs(function(){
+				callbackCalled = false;
+
+			    getProps = {
+			        url: srvHttpLogGetUrl
+			    };
+
+			    Rho.Network.get(getProps, function(args){callbackCalled=true;data = args['body'];status = args['status'];});
+			} );
+
+			waitsFor( function() {
+			        return callbackCalled;
+			    },
+			    "Callback never called",
+			    waitTimeout
+			);
+
+			runs(function() {
+			    expect(status).toEqual('ok');
+
+			    expect(data.count("TEST MESSAGE!") > 0).toEqual(true);
+			});
+		});
+
+		//Call sendLog() with ananyomous callback
+		it("VT290-400 : send log file with valid path, anonyomous function callback| log exists", function() {
+			var flag = false;
+			var callbackCalled = false;
+			var status = '';
+			var data = '';
+			var fname = Rho.RhoFile.join(Rho.Application.userFolder,"/get_log.txt");
+
+			runs(function(){
+				Rho.Log.cleanLogFile();
+
+				Rho.Log.destinationURI = srvHttpLogPostUrl;
+				Rho.Log.info("TEST MESSAGE!", "VT290-400");
+				Rho.Log.sendLogFile(function() {callbackCalled = true;});
+
+				if ( Rho.RhoFile.exists(fname) ) {
+			        Rho.RhoFile.deleteFile(fname);
+			    }
+
+			    expect(Rho.RhoFile.exists(fname)).toEqual(false);
+			});
+
+			waitsFor( function() {
+			        return callbackCalled;
+			    },
+			    "Callback never called",
+			    waitTimeout
+			);
+
+			runs(function(){
+				callbackCalled = false;
+
+			    getProps = {
+			        url: srvHttpLogGetUrl
+			    };
+
+			    Rho.Network.get(getProps, function(args){callbackCalled=true;data = args['body'];status = args['status'];});
+			} );
+
+			waitsFor( function() {
+			        return callbackCalled;
+			    },
+			    "Callback never called",
+			    waitTimeout
+			);
+
+			runs(function() {
+			    expect(status).toEqual('ok');
+
+			    expect(data.count("TEST MESSAGE!") > 0).toEqual(true);
+			});
+
+		});
+
 
 	 	// Set log destination to file only
 		it("VT290-300 : Log destination to file only", function() {
@@ -260,19 +446,22 @@ describe("Log JS API", function () {
 			});
 		});
 		// Set Log destinationURI to valid destination with host address having IP address.
-		/* TODO: implement server for log and add expectations
+		// TODO: implement server for log and add expectations
 		it("VT290-314 : Set Log destinationURI to valid destination with host address having IP address.", function() {
 			runs(function(){
 				var info = "Log destination set. No need verification in log: ";
 				Rho.Log.info(info, "VT290-314");
 
-				Rho.Log.destinationURI = "http://127.0.0.1";
-				expect(Rho.Log.destinationURI).toEqual("http://127.0.0.1");
+				server = "http://"+SERVER_HOST;
+				Rho.Log.destinationURI = server;
+				expect(Rho.Log.destinationURI).toEqual(server);
+
+				Rho.Log.destination = ["stdio","file","uri"];
 
 				Rho.Log.info("test_message", "VT290-314");
 			});
 		});
-        */
+
 		// Set Log destinationURI to valid destination with host address having IP address.
 		it("VT290-315 : Set Log destinationURI to valid destination with host address having DNS Name as address.", function() {
 			runs(function(){
@@ -688,9 +877,10 @@ describe("Log JS API", function () {
 				expect( checkLogString(Rho.LogCapture.read(),0,4) ).toEqual( true );
 			});
 		});
-		
+		*/
 
-			// Set Log Memory period to 5 seconds
+		
+		// Set Log Memory period to 5 seconds
 		it("VT290-355 : Set Log Memory period to 5 secs | 5000", function() {
 			runs(function(){
 				Rho.Log.level=0;
@@ -700,6 +890,37 @@ describe("Log JS API", function () {
 				Rho.Log.memoryPeriod = 5000;
 				memPeriod = Rho.Log.memoryPeriod;
 				expect(memPeriod).toEqual(expectedValue);
+			});
+
+			waits(4900);
+
+			runs(function(){
+				expect(Rho.LogCapture.read().count("MEMORY")).toEqual(0);
+			});
+
+			waits(200);
+
+			runs(function(){
+				Rho.Log.memoryPeriod = 0;
+
+				expect(Rho.LogCapture.read().count("MEMORY")).toEqual(1);
+
+				Rho.LogCapture.clear();
+			});
+
+			runs(function(){
+				Rho.Log.level=0;
+				Rho.Log.memoryPeriod = 5000;
+			});
+
+			waits(10100);
+
+			runs(function(){
+				Rho.Log.memoryPeriod = 0;
+
+				expect(Rho.LogCapture.read().count("MEMORY")).toEqual(2);
+
+				Rho.LogCapture.clear();
 			});
 		});
 
@@ -714,11 +935,20 @@ describe("Log JS API", function () {
 				Rho.Log.memoryPeriod = 10000;
 				memPeriod = Rho.Log.memoryPeriod;
 				expect(memPeriod).toEqual(expectedValue);
+			});
+
+			waits(10100);
+
+			runs(function(){
 				Rho.Log.memoryPeriod = 0;
+
+				expect(Rho.LogCapture.read().count("MEMORY")).toEqual(1);
+
+				Rho.LogCapture.clear();
 			});
 		});
 
-
+		/*
 	 // Set Netrace to true
 		xit("VT290-361 : Set netrace to true | true", function() {
 			runs(function(){
@@ -796,8 +1026,6 @@ describe("Log JS API", function () {
 			});
 		});
 
-
-
 		// Call error() method with wrong category
 		it("VT290-379 : Call error() method with message and wrong category | ", function() {
 			runs(function(){
@@ -821,68 +1049,6 @@ describe("Log JS API", function () {
 				 //Rho.Application.setLocale(20);
 			});
 		});
-
-
-	 // Call readlog() with valid parameter (Integer) 100
-		it("VT290-391 : Call readLogFile() method with valid parameter. | ", function() {
-			runs(function(){
-				//var myvar = Rho.Application.publicFolder;
-				//var path = myvar+ "/VT290_390.txt";
-				//Rho.Log.filePath =  path;
-				Rho.Log.leval = 0;
-				var info = "Read : Read Log from Log file => 100 symbols printed below";
-				Rho.Log.info(info, "VT290-391");
-				//var actualPath = Rho.Log.filePath;
-				//Rho.Log.info(read, "TEST");
-				//Rho.Application.setLocale('en');
-				var read = Rho.Log.readLogFile(100);
-				Rho.Log.info("Start of read " +read+ "End of read log", "VT290-391");
-			});
-		});
-
-
-		// Call sendLog()
-		it("VT290-397 : send log file with valid path| log exists", function() {
-			runs(function(){
-				Rho.Log.info("PLease goto http://192.168.6.18/NEON/ReceivedFiles/Upload.aspx and check for log file availability. Log file should be present", "VT290-397");
-				Rho.Log.destinationURI = "http://192.168.6.18/NEON/ReceivedFiles/Upload.aspx";
-				Rho.Log.sendLogFile();
-				Rho.Log.info("PLease goto http://rhologs.heroku.com/ and check for log file availability. Log file should be present", "VT290-397");
-
-			});
-		});
-
-		// Call sendLog() with callback
-		it("VT290-398 : send log file with valid path| log exists", function() {
-			runs(function(){
-				Rho.Log.destinationURI = "http://192.168.6.18/NEON/ReceivedFiles/Upload.aspx";
-				Rho.Log.sendLogFile(sendcallback());
-				Rho.Log.info("PLease goto http://192.168.6.18/NEON/ReceivedFiles/Upload.aspx and check for log file availability. Log file should be present", "VT290-398");
-
-			});
-
-		});
-
-		function sendcallback() {
-
-			Rho.Log.info("Info: Callback called", "VT290-398");
-		};
-
-
-
-		//Call sendLog() with ananyomous callback
-		it("VT290-400 : send log file with valid path| log exists", function() {
-			runs(function(){
-				var displayflag = false;
-				Rho.Log.destinationURI = "http://192.168.6.18/NEON/ReceivedFiles/Upload.aspx";
-				Rho.Log.sendLogFile(function() {
-					Rho.Log.info("Info: ananymous Callback called", "VT290-400");
-				});
-				Rho.Log.info("PLease goto http://192.168.6.18/NEON/ReceivedFiles/Upload.aspx and check for log file availability. Log file should be present", "VT290-400");
-			});
-
-		});
-
 
 
 		// Call trace() method with "message" and "categories"

@@ -30,8 +30,8 @@ $server     = nil
 $requests   = []
 $signal     = ConditionVariable.new
 $mutex      = Mutex.new
-$gcm_api_key = 'AIzaSyBfBxYzYbpGWQctSKwE_fQCgO-C6YqfemI'
-# $gcm_api_key = 'AIzaSyANZO6psbeXLHvU88InbDnR6Zd_vZMWUZ8'
+$gcm_api_key = 'AIzaSyANZO6psbeXLHvU88InbDnR6Zd_vZMWUZ8'
+# $gcm_api_key = 'AIzaSyBfBxYzYbpGWQctSKwE_fQCgO-C6YqfemI'
 
 describe 'GCM push spec' do
   before(:all) do
@@ -60,13 +60,10 @@ describe 'GCM push spec' do
         end
     end
 
-    #FileUtils.chdir File.join($spec_path, 'gcm_push_client')
-    #system("rake clean:#{$platform}")
-
     puts 'Building and starting application...'
     FileUtils.chdir File.join($spec_path, 'gcm_push_client')
+    #system("rake clean:#{$platform}")
     system("rake run:#{$platform}").should == true
-
   end
 
   it 'should register' do

@@ -59,8 +59,9 @@ $rhoconnect_use_redis = false # true will start/stop it
 
 require File.join($rho_root,'lib','build','jake.rb')
 require File.join($rho_root,'platform','android','build','android_tools.rb')
+
 require_relative './rhoconnect_helper.rb'
-require './run_rhoconnect_spec'
+require_relative './run_rhoconnect_spec'
 
 describe 'Android push spec' do
   before(:all) do
@@ -120,61 +121,56 @@ describe 'Android push spec' do
   end
 
   it 'should login' do
-    puts 'Waiting message with login errCode'
+    # puts 'Waiting message with login errCode'
     expect_request('error').should == "0"
   end
 
   it 'should register' do
-    puts 'Waiting message with Rhoconnect registaration...'
+    # puts 'Waiting message with Rhoconnect registaration...'
     $device_id = expect_request('device_id')
     $device_id.should_not be_nil
     $device_id.should_not == ''
   end
 
   it 'should proceed push message at foreground' do
+    # puts 'Sending push message...'
     sleep 5
-    puts 'Sending push message...'
-
     message = 'magic1'
     params = { :user_id=>['pushclient'], :message=>message }
-    RhoconnectHelper.api_post('users/ping',params,@api_token)
+    RhoconnectHelper.api_post('users/ping', params, @api_token)
 
-    puts 'Waiting message with push content...'
+    # puts 'Waiting message with push content...'
     expect_request('alert').should == message
-
     sleep 3
   end
 
   it 'should proceed push message with exit comand' do
-    puts 'Sending push message with exit command...'
-
+    # puts 'Sending push message with exit command...'
     message = 'exit'
     params = { :user_id=>['pushclient'], :message=>message }
     RhoconnectHelper.api_post('users/ping',params,@api_token)
 
-    puts 'Waiting message with push content...'
+    # puts 'Waiting message with push content...'
     expect_request('alert').should == message
-
     sleep 5
-
-    output = Jake.run2('adb', ['-e', 'shell', 'ps'], {:hide_output=>true})
+    args =  $deviceId ?  ['-s', $deviceId, 'shell', 'ps'] : ['-e', 'shell', 'ps']
+    output = Jake.run2('adb', args, {:hide_output => true})
     (output =~ /rho_push_client/).should be_nil
   end
 
-  # it 'should process push message' do
-  #   puts 'Sending push message with greeting ...'
-  #   message = 'Hello'
-  #   params = { :user_id=>['pushclient'], :message => message}
-  #   RhoconnectHelper.api_post('users/ping',params,@api_token)
+  it 'should process push message' do
+    # puts 'Sending push message with greeting ...'
+    message = 'Hello'
+    params = { :user_id=>['pushclient'], :message => message}
+    RhoconnectHelper.api_post('users/ping',params,@api_token)
 
-  #   puts 'Waiting ping message with push content ...'
-  #   expect_request('alert').should == message
-
-  #   sleep 5
-
-  #   output = Jake.run2('adb', ['-e', 'shell', 'ps'], {:hide_output => true})
-  #  (output =~ /rho_push_client/).should_not be_nil
-  # end
+    # puts 'Waiting ping message with push content ...'
+    expect_request('alert').should == message
+    sleep 5
+    args =  $deviceId ?  ['-s', $deviceId, 'shell', 'ps'] : ['-e', 'shell', 'ps']
+    output = Jake.run2('adb', args, {:hide_output => true})
+    (output =~ /rho_push_client/).should_not be_nil
+  end
 
   # it 'should process sequence of push messages' do
   #   puts 'Sending 5 push messages...'

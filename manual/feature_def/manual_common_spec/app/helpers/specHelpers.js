@@ -74,6 +74,14 @@ var dispCurrentProcess = function (data){
 	document.getElementById('detailsdiv').innerHTML = data;
 }
 
+var dispExpectedResult= function (data){
+	document.getElementById('expectedresult').innerHTML = data;
+}
+
+var dispTestCaseRunning = function (data){
+	document.getElementById('instruction').innerHTML = data;
+}
+
 // Get Random Name {Used in Database to get Random table name for each test}
 function getRandomName()
 {
