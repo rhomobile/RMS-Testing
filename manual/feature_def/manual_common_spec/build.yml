@@ -21,9 +21,9 @@ symbian:
   uid: '0xeeceaf9f'
 android:
   version: 4.2.2
-  extensions: ["signature", "barcode"]
+  extensions: ["signature", "barcode", "mediaplayer"]
 wm:
-  extensions: ["barcode"]
+  extensions: ["barcode", "mediaplayer"]
 
 paths:
   extensions:
