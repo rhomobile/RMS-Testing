@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Rho:Webview</title>
+    <meta name="viewport" content="initial-scale=1.0, width=device-width"/>
+
+    <link type="text/css" rel="stylesheet" href="/public/css/manual_styles.css">
+
+    <script type="text/javascript" src="/public/jquery/jquery-1.6.4.js"></script>
+    <script type="text/javascript" src="/public/jquery/jquery.json-2.3.js"></script>
+
+    <script type="text/javascript" charset="utf-8" src="/public/api/rhoapi-modules.js"></script>
+    <script type="text/javascript" src="/public/js/helpers.js"></script>
+	
+    <script type="text/javascript">
+
+/*	$(document).ready(function(){
+	// hide all tests
+	$(".method_tests").hide();
+
+	// below show testcase if applicable to current platform
+	if (isApplePlatform()){
+		$(".ios").show();
+	};
+
+	if (isWindowsDesktopPlatform()){
+		$(".win32").show();
+	};
+
+	if (isAndroidPlatform()){
+	$(".android").show();
+	};
+
+	
+	if (isWindowsMobilePlatform()){
+		$(".wm").show();
+	};
+
+	if (isWindowsPhone8Platform()){
+		$(".wp8").show();
+	};
+
+	//First click for getting default value
+	$(".getValue").click();
+});  
+*/
+ 
+    </script>
+    <script type="text/javascript">
+
+    function createTabbar() {
+        var tabs = [
+            {'label': 'Tab 0', 'action': '/app/ModelWebview/webview.html', 'icon': '/public/images/bar/colored_btn.png', 'reload': true},
+            {'label': 'Tab 1', 'action': '/app/ModelWebview/webview.html', 'icon': '/public/images/bar/colored_btn.png', 'reload': true},
+            {'label': 'Tab 2', 'action': '/app/ModelWebview/webview.html', 'icon': '/public/images/bar/colored_btn.png', 'reload': true},
+            {'label': 'Tab 3', 'action': '/app/ModelWebview/webview.html', 'icon': '/public/images/bar/colored_btn.png', 'reload': true},
+            {'label': 'Tab 4', 'action': '/app/ModelWebview/webview.html', 'icon': '/public/images/bar/colored_btn.png', 'reload': true}                                    
+        ];
+        var properties = {'verticalOrientation': false, 'hiddenTabs': false, 'createOnInit': true, 'placeTabsBottom': false};
+        Rho.NativeTabbar.create(tabs, properties);
+    }
+
+    function removeTabbar() {
+        Rho.NativeTabbar.remove();
+    }
+    </script>
+
+</head>
+<body>
+<h3>Rho.Webview</h3>
+
+
+<div id = "enableWebPlugins_result"class="method_tests android">
+	<div class="method_name">Rho.System.enableWebPlugins</div>
+	<div class="method_desc">Don't set enableWebPlugins</div>
+	<div class="test_scenario">
+		<div class="test_scenario_controls">
+			<a href="javascript:void(0)" onclick ="Rho.System.enableWebPlugins">call enableWebPlugins  </a>
+			<span class="result"></span>
+		</div>
+		<span class="test_scenario_number">VT301-017 <br /></span>
+	</div>
+	<div class="test_scenario">
+		<div class="test_scenario_controls">
+			<div id="enableWebPlugins">Default : <span class="defaultset"> </span>
+				<script type="text/javascript"> 
+					$("#enableWebPlugins span.defaultset").text(Rho.System.enableWebPlugins);
+				</script>
+			</div>
+		</div>
+	</div>	
+</div>
+
+<div id = "enableZoom_result"class="method_tests android">
+	<div class="method_name">Rho.System.enableZoom</div>
+	<div class="method_desc">Don't set enableZoom</div>
+	<div class="test_scenario">
+		<div class="test_scenario_controls">
+			<a href="javascript:void(0)" onclick ="Rho.System.enableZoom">call enableZoom  </a>
+			<span class="result"></span>
+		</div>
+		<span class="test_scenario_number">VT301-020 <br /></span>
+	</div>
+	<div class="test_scenario">
+		<div class="test_scenario_controls">
+			<div id="enableZoom">Default : <span class="defaultset"> </span>
+				<script type="text/javascript"> 
+					$("#enableZoom span.defaultset").text(Rho.System.enableZoom);
+				</script>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id = "fullScreen_result"class="method_tests android ios win32 wm wp8">
+	<div class="method_name">Rho.System.fullScreen</div>
+	<div class="method_desc">Don't set fullScreen</div>
+	<div class="test_scenario">
+		<div class="test_scenario_controls">
+			<a href="javascript:void(0)" onclick ="Rho.System.fullScreen">call fullScreen  </a>
+			<span class="result"></span>
+		</div>
+		<span class="test_scenario_number">VT301-026 <br /></span>
+	</div>
+	<div class="test_scenario">
+		<div class="test_scenario_controls">
+			<div id="fullScreen">Default : <span class="defaultset"> </span>
+				<script type="text/javascript"> 
+					$("#fullScreen span.defaultset").text(Rho.System.fullScreen);
+				</script>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id = "zoomPage_result"class="method_tests wm">
+	<div class="method_name">Rho.System.zoomPage</div>
+	<div class="method_desc">set zoomPage as -1</div>
+	<div class="test_scenario">
+		<div class="test_scenario_controls">
+			<a href="javascript:void(0)" onclick ="Rho.System.zoomPage = -1">call zoomPage  </a>
+			<span class="result"></span>
+		</div>
+		<span class="test_scenario_number">VT301-040 <br /></span>
+	</div>
+	<div class="test_scenario">
+		<div class="test_scenario_controls">
+			<div id="zoomPage">Default : <span class="defaultset"> </span>
+				<script type="text/javascript"> 
+					$("#zoomPage span.defaultset").text(Rho.System.zoomPage);
+				</script>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id = "textZoomLevel_result"class="method_tests wm">
+	<div class="method_name">Rho.System.textZoomLevel</div>
+	<div class="method_desc">set textZoomLevel as -1</div>
+	<div class="test_scenario">
+		<div class="test_scenario_controls">
+			<a href="javascript:void(0)" onclick ="Rho.System.textZoomLevel = -1;">call textZoomLevel  </a>
+			<span class="result"></span>
+		</div>
+		<span class="test_scenario_number">VT301-044 <br /></span>
+	</div>
+	<div class="test_scenario">
+		<div class="test_scenario_controls">
+			<div id="textZoomLevel">Default : <span class="defaultset"> </span>
+				<script type="text/javascript"> 
+					$("#textZoomLevel span.defaultset").text(Rho.System.textZoomLevel);
+				</script>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id = "navigationTimeout_result"class="method_tests wm">
+	<div class="method_name">Rho.System.navigationTimeout</div>
+	<div class="method_desc">Don't set navigationTimeout</div>
+	<div class="test_scenario">
+		<div class="test_scenario_controls">
+			<a href="javascript:void(0)" onclick ="Rho.System.navigationTimeout;">call navigationTimeout  </a>
+			<span class="result"></span>
+		</div>
+		<span class="test_scenario_number">VT301-050 <br /></span>
+	</div>
+	<div class="test_scenario">
+		<div class="test_scenario_controls">
+			<div id="navigationTimeout">Default : <span class="defaultset"> </span>
+				<script type="text/javascript"> 
+					$("#navigationTimeout span.defaultset").text(Rho.System.navigationTimeout);
+				</script>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id = "navigationTimeout5_result"class="method_tests wm">
+	<div class="method_name">Rho.System.navigationTimeout</div>
+	<div class="method_desc">set navigationTimeout to -5000</div>
+	<div class="test_scenario">
+		<div class="test_scenario_controls">
+			<a href="javascript:void(0)" onclick ="Rho.System.navigationTimeout = -5000;">call navigationTimeout -50000 </a>
+			<span class="result"></span>
+		</div>
+		<span class="test_scenario_number">VT301-051 <br /></span>
+	</div>
+	<div class="test_scenario">
+		<div class="test_scenario_controls">
+			<a href="javascript:void(0)" onclick ="Rho.System.navigationTimeout = 5000;">call navigationTimeout 50000 </a>
+			<span class="result"></span>
+		</div>
+		<span class="test_scenario_number">VT301-052 <br /></span>
+	</div>
+
+</div>
+
+<div id = "currentLocation_result"class="method_tests android ios win32 wm wp8">
+	<div class="method_name">Rho.System.currentLocation</div>
+	<div class="method_desc">Call webview.currentLocation with  tabindex as 1</div>
+	<div class="test_scenario">
+		<div class="test_scenario_controls">
+			<a href="javascript:void(0)" onclick ="createTabbar()">call createTabbar  </a><br />
+			<a href="javascript:void(0)" onclick ="removeTabbar()">call removeTabbar  </a><br />
+			<a href="javascript:void(0)" onclick ="Rho.System.currentLocation(1);">call currentLocation  </a>
+			<span class="result"></span>
+		</div>
+		<span class="test_scenario_number">VT301-055 <br /></span>
+	</div>
+	<div class="test_scenario">
+		<div class="test_scenario_controls">
+			<div id="currentLocation">Default : <span class="defaultset"> </span>
+				<script type="text/javascript"> 
+					$("#currentLocation span.defaultset").text(Rho.System.currentLocation);
+				</script>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id = "navigate_result"class="method_tests android ios win32 wm wp8">
+	<div class="method_name">Rho.System.navigate</div>
+	<div class="method_desc">Call navigate with tabindex as -1</div>
+	<div class="test_scenario">
+		<div class="test_scenario_controls">
+			<a href="javascript:void(0)" onclick ="Rho.System.navigate("http://www.google.com", -1);">call navigate  </a>
+			<span class="result"></span>
+		</div>
+		<span class="test_scenario_number">VT301-067 <br /></span>
+	</div>
+
+</div>
+
+<div id = "navigateBack_result"class="method_tests android ios win32 wm wp8">
+	<div class="method_name">Rho.System.navigateBack</div>
+	<div class="method_desc">Call navigateBack with tabindex as -1</div>
+	<div class="test_scenario">
+		<div class="test_scenario_controls">
+			<a href="javascript:void(0)" onclick ="Rho.System.navigateBack(-1);">call navigateBack  </a>
+			<span class="result"></span>
+		</div>
+		<span class="test_scenario_number">VT301-070 <br /></span>
+	</div>
+
+</div>
+
+<div id = "refresh_result"class="method_tests android ios win32 wm wp8">
+	<div class="method_name">Rho.System.refresh</div>
+	<div class="method_desc">Call refresh with tabindex as -1</div>
+	<div class="test_scenario">
+		<div class="test_scenario_controls">
+			<a href="javascript:void(0)" onclick ="Rho.System.refresh(-1);">call refresh  </a>
+			<span class="result"></span>
+		</div>
+		<span class="test_scenario_number">VT301-074 <br /></span>
+	</div>
+
+</div>
+
+<div id = "save_result"class="method_tests android">
+	<div class="method_name">Rho.System.save</div>
+	<div class="method_desc">Call save with no string and path</div>
+	<div class="test_scenario">
+		<div class="test_scenario_controls">
+			<a href="javascript:void(0)" onclick ="Rho.System.save("", "", 0);">call save  </a>
+			<span class="result"></span>
+		</div>
+		<span class="test_scenario_number">VT301-079 <br /></span>
+	</div>
+
+</div>
+
+<div id = "PassNull_result"class="method_tests  android ios win32 wm wp8">
+	<div class="method_name">Rho.System</div>
+	<div class="method_desc">Pass Null Value to API</div>
+	<div class="test_scenario">
+		<div class="test_scenario_controls">
+			<a href="javascript:void(0)" onclick ="Rho.System.activeTab(null);">Call get activeTab with null  </a>
+		</div>
+		<span class="test_scenario_number">VT301-082 <br /></span>
+	</div>
+	<div class="test_scenario">
+		<div class="test_scenario_controls">
+			<a href="javascript:void(0)" onclick ="Rho.System.cacheSize(null);">Call get cacheSize with null  </a>
+		</div>
+		<span class="test_scenario_number">VT301-083 <br /></span>
+	</div>
+	<div class="test_scenario">
+		<div class="test_scenario_controls">
+			<a href="javascript:void(0)" onclick ="Rho.System.enablePageLoadingIndication(null);">Call get enablePageLoadingIndication with null  </a>
+		</div>
+		<span class="test_scenario_number">VT301-084 <br /></span>
+	</div>
+	<div class="test_scenario">
+		<div class="test_scenario_controls">
+			<a href="javascript:void(0)" onclick ="Rho.System.enableWebPlugins(null);">Call get enableWebPlugins with null  </a>
+		</div>
+		<span class="test_scenario_number">VT301-085 <br /></span>
+	</div>
+	<div class="test_scenario">
+		<div class="test_scenario_controls">
+			<a href="javascript:void(0)" onclick ="Rho.System.enableZoom(null);">Call get enableZoom with null  </a>
+		</div>
+		<span class="test_scenario_number">VT301-086 <br /></span>
+	</div>
+	<div class="test_scenario">
+		<div class="test_scenario_controls">
+			<a href="javascript:void(0)" onclick ="Rho.System.fontFamily(null);">Call get fontFamily with null  </a>
+		</div>
+		<span class="test_scenario_number">VT301-087 <br /></span>
+	</div>
+	<div class="test_scenario">
+		<div class="test_scenario_controls">
+			<a href="javascript:void(0)" onclick ="Rho.System.framework(null);">Call get framework with null  </a>
+		</div>
+		<span class="test_scenario_number">VT301-088 <br /></span>
+	</div>
+
+	<div class="test_scenario">
+		<div class="test_scenario_controls">
+			<a href="javascript:void(0)" onclick ="Rho.System.fullScreen = null;">Call Set fullScreen with null  </a>
+		</div>
+		<span class="test_scenario_number">VT301-089 <br /></span>
+	</div>
+
+	<div class="test_scenario">
+		<div class="test_scenario_controls">
+			<a href="javascript:void(0)" onclick ="Rho.System.scrollTechnique(null);">Call scrollTechnique with null  </a>
+		</div>
+		<span class="test_scenario_number">VT301-090 <br /></span>
+	</div>
+
+	<div class="test_scenario">
+		<div class="test_scenario_controls">
+			<a href="javascript:void(0)" onclick ="Rho.System.userAgent(null);">Call userAgent with null  </a>
+		</div>
+		<span class="test_scenario_number">VT301-091 <br /></span>
+	</div>
+
+	<div class="test_scenario">
+		<div class="test_scenario_controls">
+			<a href="javascript:void(0)" onclick ="Rho.System.viewportEnabled(null);">Call viewportEnabled with null  </a>
+		</div>
+		<span class="test_scenario_number">VT301-092 <br /></span>
+	</div>
+
+	<div class="test_scenario">
+		<div class="test_scenario_controls">
+			<a href="javascript:void(0)" onclick ="Rho.System.viewportWidth(null);">Call viewportWidth with null  </a>
+		</div>
+		<span class="test_scenario_number">VT301-093 <br /></span>
+	</div>
+
+	<div class="test_scenario">
+		<div class="test_scenario_controls">
+			<a href="javascript:void(0)" onclick ="Rho.System.zoomPage= null;">Call zoomPage with null  </a>
+		</div>
+		<span class="test_scenario_number">VT301-094 <br /></span>
+	</div>
+
+	<div class="test_scenario">
+		<div class="test_scenario_controls">
+			<a href="javascript:void(0)" onclick ="Rho.System.zoomPage= -1.000002;">Call zoomPage with  -1.000002  </a>
+		</div>
+		<span class="test_scenario_number">VT301-095 <br /></span>
+	</div>
+
+	<div class="test_scenario">
+		<div class="test_scenario_controls">
+			<a href="javascript:void(0)" onclick ="Rho.System.textZoomLevel= 10000;">Call textZoomLevel with  10000  </a>
+		</div>
+		<span class="test_scenario_number">VT301-096 <br /></span>
+	</div>
+
+	<div class="test_scenario">
+		<div class="test_scenario_controls">
+			<a href="javascript:void(0)" onclick ="Rho.System.textZoomLevel= null;">Call textZoomLevel with  null </a>
+		</div>
+		<span class="test_scenario_number">VT301-097 <br /></span>
+	</div>
+
+	<div class="test_scenario">
+		<div class="test_scenario_controls">
+			<a href="javascript:void(0)" onclick ="Rho.System.navigationTimeout= null;">Call navigationTimeout with  null </a>
+		</div>
+		<span class="test_scenario_number">VT301-098 <br /></span>
+	</div>
+
+	<div class="test_scenario">
+		<div class="test_scenario_controls">
+			<a href="javascript:void(0)" onclick ="Rho.System.navigate(null);">Call navigate with  null </a>
+		</div>
+		<span class="test_scenario_number">VT301-099 <br /></span>
+	</div>
+
+	<div class="test_scenario">
+		<div class="test_scenario_controls">
+			<a href="javascript:void(0)" onclick ="Rho.System.refresh(null);">Call refresh with  null </a>
+		</div>
+		<span class="test_scenario_number">VT301-100 <br /></span>
+	</div>
+
+	<div class="test_scenario">
+		<div class="test_scenario_controls">
+			<a href="javascript:void(0)" onclick ="Rho.System.save(null);">Call save with  null </a>
+		</div>
+		<span class="test_scenario_number">VT301-101 <br /></span>
+	</div>
+
+
+</div>
+
+</body>
+</html>
