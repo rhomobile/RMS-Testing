@@ -75,14 +75,31 @@
 
 
 <script type="text/javascript">
-    function Createtabbarnew(tabelements, tabbarproperties) {
+    function CreateTabbarOld(tabelements, tabbarproperties) {
         Rho.NativeTabbar.create(tabelements, tabbarproperties);
 
     }
 
+    function createTabbar() {
+        var tabs = [
+            {'label': 'Tab 0', 'action': '/app/WebviewTest/webview.html', 'icon': '/public/images/bar/colored_btn.png', 'reload': true},
+            {'label': 'Tab 1', 'action': '/app/WebviewTest/webview.html', 'icon': '/public/images/bar/colored_btn.png', 'reload': true}
+        ];
+        var properties = {'verticalOrientation': false, 'hiddenTabs': false, 'createOnInit': true, 'placeTabsBottom': false};
+        Rho.NativeTabbar.create(tabs, properties);
+    }
 
-    function removetabbar() {
+
+    function removeTabbar() {
         Rho.NativeTabbar.remove();
+    }
+
+    function validateTestResult(testID, expected, actual){
+        var result = "Expected: " + JSON.stringify(expected) + " actual: " + JSON.stringify(actual);
+        var cssClass = (expected == actual) ? "passed" : "failed";
+        var element = "#" + testID + " .test_case_result";
+        $(element).addClass(cssClass);
+        $(element).append(result);
     }
 
     if (Rho.System.platform == 'WINDOWS') {
@@ -99,7 +116,58 @@
 </script>
 
 
-<h1>Rho.WebView</h1>
+<h3>Rho.WebView</h3>
+
+<div class="container" data-platforms="android, ios, win32, wm, wp8">
+    <div class="method_name">Rho.WebView.activeTab</div>
+    <div class="method_description">Method should return index of webview active tab</div>
+
+    <div id="VT300-004" class="container">
+        <div class="test_case_number">VT300-004</div>
+        <div class="test_case_requirements">
+            Created tabbar. Press
+            <button onClick='createTabbar()'>Create tabbar</button>
+            if needed.
+        </div>
+        <div class="test_case_procedure">
+            <ol>
+                <li>
+                    <button onClick='Rho.NativeTabbar.switchTab(1)'>Switch to tab 1</button>
+                </li>
+                <li>
+                    <button onClick='validateTestResult("VT300-004", 1, Rho.WebView.activeTab)'>Get active tab</button>
+                </li>
+                <li>It should return 1</li>
+            </ol>
+            <div class="test_case_result"></div>
+        </div>
+    </div>
+
+    <div id="VT300-005" class="container">
+        <div class="test_case_number">VT300-005</div>
+        <div class="test_case_requirements">
+            Created tabbar. Press
+            <button onClick='createTabbar()'>Create tabbar</button>
+            if needed.
+        </div>
+        <div class="test_case_procedure">
+            <ol>
+                <li>
+                    <button onClick='Rho.NativeTabbar.switchTab(0)'>Switch to tab 0</button>
+                </li>
+                <li>
+                    <button onClick='validateTestResult("VT300-005", 0, Rho.WebView.activeTab)'>get active
+                        tab
+                    </button>
+                </li>
+                <li>It should return 0</li>
+            </ol>
+            <div class="test_case_result"></div>
+        </div>
+    </div>
+
+</div>
+
 
 <div id="activeTab_test" class="method_tests android ios win32 wm wp8">
     <div class="method_name">WebView.activeTab</div>
@@ -109,7 +177,7 @@
         <div class="test_scenario_controls">
             <button class="getValue" onClick='setDomElementText("activeTab_test", Rho.WebView.activeTab);'> get activeTab</button>
             <br/>
-	          <a href="javascript:void(0)" onclick="Createtabbarnew(
+	          <a href="javascript:void(0)" onclick="createTabbar(
 					[{'label':'Native Tabbar', 'action':'/app/WebviewTest/webview.html', 'icon':'/public/images/bar/gears.png', 'useCurrentViewForTab':true},
 					{'label':'Main page', 'action':'/app/WebviewTest/webview.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':false},
 					{'label':'Page1', 'action':'/app/WebviewTest/webview.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true},
@@ -120,7 +188,7 @@
 					{'verticalOrientation':false, 'hiddenTabs': false, 'createOnInit' : true, 'placeTabsBottom':false}
 					);">
 					 NativeTabbar.create </a><br />
-				<a href="javascript:void(0)" onclick="removetabbar();">Remove the Tabbar </a><br/>
+				<a href="javascript:void(0)" onclick="removeTabbar();">Remove the Tabbar </a><br/>
             <span class="result"></span>
         </div>
         <div class="test_scenario_desc">
@@ -129,6 +197,7 @@
         </div>
     </div>
 </div>
+
 
 <div id="cacheSize_test" class="method_tests wm">
     <div class="method_name">WebView.cacheSize</div>
