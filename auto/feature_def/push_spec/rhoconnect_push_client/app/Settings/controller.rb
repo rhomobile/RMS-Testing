@@ -12,10 +12,7 @@ class SettingsController < Rho::RhoController
 
   def index
     @msg = @params['msg']
-    # puts "Logged in: #{SyncEngine.logged_in}"
 
-    SyncEngine.set_syncserver("http://#{SYNC_SERVER_HOST}:#{SYNC_SERVER_PORT}")
-    RhoConf.set_property_by_name('Push.rhoconnect.pushServer',"http://#{PUSH_SERVER_HOST}:#{PUSH_SERVER_PORT}")
     puts "push server is #{RhoConf.get_property_by_name('Push.rhoconnect.pushServer')}"
 
     SyncEngine.login('pushclient', 'pushclient', '/app/Settings/login_callback' )
