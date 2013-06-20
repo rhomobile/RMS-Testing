@@ -251,26 +251,12 @@ describe("<ORM module specs>", function() {
         var sources = Rho.ORMHelper.getAllSources();
         expect(sources.Product).toBeUndefined();
 
-        db = new Rho.Database.SQLite3(Rho.Application.databaseFilePath('user'), 'user');
+        var db = Rho.ORMHelper.dbConnection("user");
         expect(Rho.ORM.haveLocalChanges()).toEqual(false);
 
-        db.execute("INSERT INTO CHANGED_VALUES (object) VALUES('meobj')");
+        db.$execute_sql("INSERT INTO CHANGED_VALUES (object) VALUES('meobj')");
 
         expect(Rho.ORM.haveLocalChanges()).toEqual(true);
-    });
-
-    it("should delete all records with databaseFullReset",function(){
-        expect(Rho.ORM.getModel('Product')).toBeUndefined();
-        var sources = Rho.ORMHelper.getAllSources();
-        expect(sources.Product).toBeUndefined();
-        expect(sources.Item).toBeUndefined();
-        expect(sources.Item2).toBeUndefined();
-    });
-
-    it("should delete all records and session info databaseFullResetAndLogout",function(){
-        expect(Rho.ORM.getModel('Product')).toBeUndefined();
-        var sources = Rho.ORMHelper.getAllSources();
-        expect(sources.Product).toBeUndefined();
     });
 });
 
@@ -628,7 +614,6 @@ describe("<ORM Db Reset specs>", function() {
           model.modelName("Product");
           model.property("name","string");
           model.property("price","float");
-          model.set("partition","user");
           model.enable("sync");
           model.set("partition","local");
       };
@@ -646,6 +631,10 @@ describe("<ORM Db Reset specs>", function() {
       client_info = db.execute("select * from client_info");
       expect(objects).toEqual([]);
       expect(client_info).toEqual([]);
+      db.execute("DELETE FROM SOURCES");
+      db.execute("DELETE FROM OBJECT_VALUES");
+      Rho.ORM.clear();
+      //db.close();
+      db = null;
     });
-
 });
