@@ -39,7 +39,7 @@ describe("Key State Test", function() {
 		runs(function()
 		{
 
-			Rho.KeyState.showStates([{"right":50}]);
+			Rho.KeyState.showStates({"right":50})
 			setTimeout(function() {
 				displayflag = true;
 			}, 10000);
