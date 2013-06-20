@@ -286,7 +286,7 @@ describe("Barcode JS API Test", function() {
 
 								setTimeout(function() {
 									flag = true;
-					 			}, 8000);
+					 			}, ENABLE_TIMEOUT_VALUE);
 							});
 
 							waitsFor(function() {
@@ -352,7 +352,7 @@ describe("Barcode JS API Test", function() {
 
 								setTimeout(function() {
 									flag = true;
-					 			}, 8000);
+					 			}, ENABLE_TIMEOUT_VALUE);
 							});
 
 							waitsFor(function() {

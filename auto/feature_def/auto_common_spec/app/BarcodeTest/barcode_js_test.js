@@ -2701,7 +2701,7 @@ var arr_scanner_property = [
 	scannerTypes	:	"All",
 	OSTypes			:	"WINDOWS",
 	propertyValue	:	"isbn13",
-	expectedResult	:	"isbn10"
+	expectedResult	:	"isbn13"
 },
 {
 	testName		:	"VT282-4241 | Set upcEanConvertGs1dataBarToUpcEan  :true  | true",
@@ -3273,3 +3273,4 @@ var getApplicableProperties = function (objScnType){
 	return finalSCNObj;
 }
 
+var ENABLE_TIMEOUT_VALUE = (Rho.System.platform == "ANDROID" ? 10 : 8000);
