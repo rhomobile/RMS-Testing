@@ -60,8 +60,8 @@ $rhoconnect_use_redis = false # true will start/stop it
 require File.join($rho_root,'lib','build','jake.rb')
 require File.join($rho_root,'platform','android','build','android_tools.rb')
 
-require_relative './rhoconnect_helper.rb'
-require_relative './run_rhoconnect_spec'
+require_relative './rhoconnect_helper'
+require_relative './spec_helper'
 
 describe 'Android push spec' do
   before(:all) do
