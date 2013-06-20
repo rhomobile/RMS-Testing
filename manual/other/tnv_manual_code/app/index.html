@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Manual specs</title>
+    <meta name="viewport" content="initial-scale=1.0, width=device-width"/>
+    <script type="text/javascript" src="/public/jquery/jquery-1.6.4.js"></script>
+    <script type="text/javascript" src="/public/jquery/jquery.json-2.3.js"></script>
+    <script type="text/javascript" src="/public/api/rhoapi-modules.js"></script>
+    <script type="text/javascript" src="/public/js/helpers.js"></script>
+    
+</head>
+<body>
+<h3>Manual specs</h3>
+<ul>
+    
+    <li><a href="/app/ApplicationTest/application.html">Application Test</a></li>
+
+    
+</ul>
+
+<div>[RUBY SAS]</div>
+<ul id="ruby">
+    <script type="text/javascript">
+        if (!isWindowsPhone8Platform()) {
+            $("#ruby").append('<li><a href="/app/Barcode">Barcode</a></li>');
+        }
+        if (!isWindowsPhone8Platform()) {
+            $("#ruby").append('<li><a href="/app/Image">Camera</a></li>');
+        }
+        $("#ruby").append('<li><a href="/app/NativeToolbarTest">NativeToolbar</a></li>');
+        $("#ruby").append('<li><a href="/app/NativeTabbarTest">NativeTabbar</a></li>');
+        if (!isWindowsPhone8Platform()) {
+            $("#ruby").append('<li><a href="/app/Navbar">Navigation Bar (iOS)</a></li>');
+        }
+
+        if (!isWindowsPhone8Platform()) {
+            $("#ruby").append('<li><a href="/app/AsyncDownloadFile">Network Download File</a></li>');
+        }
+        if (!isWindowsPhone8Platform()) {
+            $("#ruby").append('<li><a href="/app/AsyncHttpsTest">Network https get</a></li>');
+        }
+        if (!isWindowsPhone8Platform()) {
+            $("#ruby").append('<li><a href="/app/AsyncHttpTest">Network http get</a></li>');
+        }
+        if (!isWindowsPhone8Platform()) {
+            $("#ruby").append('<li><a href="/app/AsyncUploadFile">Network upload file</a></li>');
+        }
+        if (!isWindowsPhone8Platform()) {
+            $("#ruby").append('<li><a href="/app/DetectConnection">Network detect connection</a></li>');
+        }
+        if (!isWindowsPhone8Platform()) {
+            $("#ruby").append('<li><a href="/app/NetworkStatus">Network status notification</a></li>');
+        }
+
+
+    </script>
+
+    <li><a href="/app/System">System</a></li>
+</ul>
+
+</body>
+</html>
+

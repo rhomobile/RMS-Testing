@@ -6,10 +6,13 @@ describe("Log JS API", function () {
 			return (this.length - this.replace(new RegExp(s1,"g"), '').length) / s1.length;
 		}
 
+		var fail_str = "_log_fail_";
+		var pass_str = "_log_pass_";
+
 		function checkLogString(string, numFails, numPases)
 		{
-			var fails = string.count("_fail_");
-			var passes = string.count("_pass_");
+			var fails = string.count(fail_str);
+			var passes = string.count(pass_str);
 
 			var result = fails == numFails && passes == numPases;
 
@@ -27,6 +30,9 @@ describe("Log JS API", function () {
 
 		var originalLogSettings = {};
 
+		// js handing code does some debug traces in log, we should filter them outs 
+		Rho.LogCapture.excludeCategories = "\"__rhoClass\", \"__rhoCallback\"";
+
 		// this function will execute before each of test case execution i.e it function
 		beforeEach(function () {
 			originalLogSettings = {};
@@ -43,9 +49,8 @@ describe("Log JS API", function () {
 			originalLogSettings.destinationURI = Rho.Log.destinationURI;
 			displayflag = false;
 
-			Rho.LogCapture.clear();
-			Rho.LogCapture.excludeCategories = "js_helper, RhoWebChromeClient, RhoExtManagerImpl";
-        	Rho.LogCapture.start();
+			Rho.LogCapture.start();
+			Rho.LogCapture.clear();  	
 		});
 
 	 	// this function will execute after each of test case execution i.e it function
@@ -255,6 +260,7 @@ describe("Log JS API", function () {
 			});
 		});
 		// Set Log destinationURI to valid destination with host address having IP address.
+		/* TODO: implement server for log and add expectations
 		it("VT290-314 : Set Log destinationURI to valid destination with host address having IP address.", function() {
 			runs(function(){
 				var info = "Log destination set. No need verification in log: ";
@@ -266,7 +272,7 @@ describe("Log JS API", function () {
 				Rho.Log.info("test_message", "VT290-314");
 			});
 		});
-
+        */
 		// Set Log destinationURI to valid destination with host address having IP address.
 		it("VT290-315 : Set Log destinationURI to valid destination with host address having DNS Name as address.", function() {
 			runs(function(){
@@ -316,8 +322,8 @@ describe("Log JS API", function () {
 				Rho.Log.excludeCategories = "Application";
 				expect(Rho.Log.excludeCategories).toEqual("Application");
 
-				Rho.Log.info("_fail_", "Application");
-				Rho.Log.info("_pass_", "Database");
+				Rho.Log.info(fail_str, "Application");
+				Rho.Log.info(pass_str, "Database");
 
 				expect( checkLogString(Rho.LogCapture.read(),0,1) ).toEqual( true );
 			});
@@ -332,10 +338,10 @@ describe("Log JS API", function () {
 				Rho.Log.excludeCategories = "system, database, WebView";
 				expect(Rho.Log.excludeCategories).toEqual("system, database, WebView");
 
-				Rho.Log.info("_fail_", "system");
-				Rho.Log.info("_fail_", "database");
-				Rho.Log.info("_fail_", "WebView");
-				Rho.Log.info("_pass_", "network");
+				Rho.Log.info(fail_str, "system");
+				Rho.Log.info(fail_str, "database");
+				Rho.Log.info(fail_str, "WebView");
+				Rho.Log.info(pass_str, "network");
 
 				expect( checkLogString(Rho.LogCapture.read(),0,1) ).toEqual( true );
 			});
@@ -350,10 +356,10 @@ describe("Log JS API", function () {
 				Rho.Log.excludeFilter = "username,password";
 
 				object = {
-					username : "_fail_",
-					password : "_fail_",
-					data : "_pass_",
-					info : "_pass_"
+					username : fail_str,
+					password : fail_str,
+					data : pass_str,
+					info : pass_str
 				}
 
 				Rho.Log.info( JSON.stringify(object), "test")
@@ -370,10 +376,10 @@ describe("Log JS API", function () {
 				Rho.Log.excludeFilter = "";
 
 				object = {
-					username : "_pass_",
-					password : "_pass_",
-					data : "_pass_",
-					info : "_pass_"
+					username : pass_str,
+					password : pass_str,
+					data : pass_str,
+					info : pass_str
 				}
 
 				Rho.Log.info( JSON.stringify(object), "test")
@@ -390,10 +396,10 @@ describe("Log JS API", function () {
 				Rho.Log.excludeFilter = "aaaa";
 
 				object = {
-					username : "_pass_",
-					password : "_pass_",
-					data : "_pass_",
-					info : "_pass_"
+					username : pass_str,
+					password : pass_str,
+					data : pass_str,
+					info : pass_str
 				}
 
 				Rho.Log.info( JSON.stringify(object), "test")
@@ -436,10 +442,10 @@ describe("Log JS API", function () {
 				Rho.Log.includeCategories = "database";
 				expect(Rho.Log.includeCategories).toEqual("database");
 
-				Rho.Log.info("_fail_", "system");
-				Rho.Log.info("_pass_", "database");
-				Rho.Log.info("_fail_", "WebView");
-				Rho.Log.info("_fail_", "network");
+				Rho.Log.info(fail_str, "system");
+				Rho.Log.info(pass_str, "database");
+				Rho.Log.info(fail_str, "WebView");
+				Rho.Log.info(fail_str, "network");
 
 				expect( checkLogString(Rho.LogCapture.read(),0,1) ).toEqual( true );
 
@@ -457,10 +463,10 @@ describe("Log JS API", function () {
 				Rho.Log.info(info, "VT290-340");
 
 				
-				Rho.Log.info("_pass_", "system");
-				Rho.Log.info("_pass_", "database");
-				Rho.Log.info("_pass_", "WebView");
-				Rho.Log.info("_pass_", "network");
+				Rho.Log.info(pass_str, "system");
+				Rho.Log.info(pass_str, "database");
+				Rho.Log.info(pass_str, "WebView");
+				Rho.Log.info(pass_str, "network");
 
 				expect( checkLogString(Rho.LogCapture.read(),0,4) ).toEqual( true );
 
@@ -475,10 +481,10 @@ describe("Log JS API", function () {
 				Rho.Log.info(info, "VT290-341");
 				Rho.Log.includeCategories = "database, webview, system";
 				
-				Rho.Log.info("_pass_", "system");
-				Rho.Log.info("_pass_", "database");
-				Rho.Log.info("_pass_", "webview");
-				Rho.Log.info("_fail_", "network");
+				Rho.Log.info(pass_str, "system");
+				Rho.Log.info(pass_str, "database");
+				Rho.Log.info(pass_str, "webview");
+				Rho.Log.info(fail_str, "network");
 
 				expect( checkLogString(Rho.LogCapture.read(),0,3) ).toEqual( true );
 			});
@@ -492,10 +498,10 @@ describe("Log JS API", function () {
 				Rho.Log.info(info, "VT290-342");
 				Rho.Log.includeCategories = "database, webview, system, aaa";
 				
-				Rho.Log.info("_pass_", "system");
-				Rho.Log.info("_pass_", "database");
-				Rho.Log.info("_pass_", "webview");
-				Rho.Log.info("_fail_", "network");
+				Rho.Log.info(pass_str, "system");
+				Rho.Log.info(pass_str, "database");
+				Rho.Log.info(pass_str, "webview");
+				Rho.Log.info(fail_str, "network");
 
 				expect( checkLogString(Rho.LogCapture.read(),0,3) ).toEqual( true );
 
@@ -509,10 +515,10 @@ describe("Log JS API", function () {
 				Rho.Log.info(info, "VT290-342");
 				Rho.Log.includeCategories = "";
 				
-				Rho.Log.info("_fail_", "system");
-				Rho.Log.info("_fail_", "database");
-				Rho.Log.info("_fail_", "webview");
-				Rho.Log.info("_fail_", "network");
+				Rho.Log.info(fail_str, "system");
+				Rho.Log.info(fail_str, "database");
+				Rho.Log.info(fail_str, "webview");
+				Rho.Log.info(fail_str, "network");
 
 				expect( checkLogString(Rho.LogCapture.read(),0,0) ).toEqual( true );
 
@@ -531,11 +537,11 @@ describe("Log JS API", function () {
 				expect(Rho.Log.excludeCategories).toEqual("database, network");
 				expect(Rho.Log.includeCategories).toEqual("application, WebView");
 
-				Rho.Log.info("_pass_", "application");
-				Rho.Log.info("_fail_", "database");
-				Rho.Log.info("_pass_", "WebView");
-				Rho.Log.info("_fail_", "network");
-				Rho.Log.info("_fail_", "system");
+				Rho.Log.info(pass_str, "application");
+				Rho.Log.info(fail_str, "database");
+				Rho.Log.info(pass_str, "WebView");
+				Rho.Log.info(fail_str, "network");
+				Rho.Log.info(fail_str, "system");
 
 				expect( checkLogString(Rho.LogCapture.read(),0,2) ).toEqual( true );
 
@@ -552,10 +558,10 @@ describe("Log JS API", function () {
 				LogLevel = Rho.Log.level;
 				expect(LogLevel).toEqual(4);
 
-				Rho.Log.trace("_fail_", "APP");
-				Rho.Log.info("_fail_", "APP");
-				Rho.Log.warning("_fail_", "APP");
-				Rho.Log.error("_fail_", "APP");
+				Rho.Log.trace(fail_str, "APP");
+				Rho.Log.info(fail_str, "APP");
+				Rho.Log.warning(fail_str, "APP");
+				Rho.Log.error(fail_str, "APP");
 
 				expect( checkLogString(Rho.LogCapture.read(),0,0) ).toEqual( true );
 
@@ -573,10 +579,10 @@ describe("Log JS API", function () {
 				LogLevel = Rho.Log.level;
 				expect(LogLevel).toEqual(3);
 
-				Rho.Log.trace("_fail_", "APP");
-				Rho.Log.info("_fail_", "APP");
-				Rho.Log.warning("_fail_", "APP");
-				Rho.Log.error("_pass_", "APP");
+				Rho.Log.trace(fail_str, "APP");
+				Rho.Log.info(fail_str, "APP");
+				Rho.Log.warning(fail_str, "APP");
+				Rho.Log.error(pass_str, "APP");
 
 				expect( checkLogString(Rho.LogCapture.read(),0,1) ).toEqual( true );
 			});
@@ -592,10 +598,10 @@ describe("Log JS API", function () {
 				LogLevel = Rho.Log.level;
 				expect(LogLevel).toEqual(2);
 
-				Rho.Log.trace("_fail_", "APP");
-				Rho.Log.info("_fail_", "APP");
-				Rho.Log.warning("_pass_", "APP");
-				Rho.Log.error("_pass_", "APP");
+				Rho.Log.trace(fail_str, "APP");
+				Rho.Log.info(fail_str, "APP");
+				Rho.Log.warning(pass_str, "APP");
+				Rho.Log.error(pass_str, "APP");
 
 				expect( checkLogString(Rho.LogCapture.read(),0,2) ).toEqual( true );
 			});
@@ -611,10 +617,10 @@ describe("Log JS API", function () {
 				LogLevel = Rho.Log.level;
 				expect(LogLevel).toEqual(1);
 
-				Rho.Log.trace("_fail_", "APP");
-				Rho.Log.info("_pass_", "APP");
-				Rho.Log.warning("_pass_", "APP");
-				Rho.Log.error("_pass_", "APP");
+				Rho.Log.trace(fail_str, "APP");
+				Rho.Log.info(pass_str, "APP");
+				Rho.Log.warning(pass_str, "APP");
+				Rho.Log.error(pass_str, "APP");
 
 				expect( checkLogString(Rho.LogCapture.read(),0,3) ).toEqual( true );
 			});
@@ -632,10 +638,10 @@ describe("Log JS API", function () {
 				LogLevel = Rho.Log.level;
 				expect(LogLevel).toEqual(0);
 
-				Rho.Log.trace("_pass_", "APP");
-				Rho.Log.info("_pass_", "APP");
-				Rho.Log.warning("_pass_", "APP");
-				Rho.Log.error("_pass_", "APP");
+				Rho.Log.trace(pass_str, "APP");
+				Rho.Log.info(pass_str, "APP");
+				Rho.Log.warning(pass_str, "APP");
+				Rho.Log.error(pass_str, "APP");
 
 				expect( checkLogString(Rho.LogCapture.read(),0,4) ).toEqual( true );
 				
@@ -654,10 +660,10 @@ describe("Log JS API", function () {
 				LogLevel = Rho.Log.level;
 				expect(LogLevel).toEqual(0);
 
-				Rho.Log.trace("_pass_", "APP");
-				Rho.Log.info("_pass_", "APP");
-				Rho.Log.warning("_pass_", "APP");
-				Rho.Log.error("_pass_", "APP");
+				Rho.Log.trace(pass_str, "APP");
+				Rho.Log.info(pass_str, "APP");
+				Rho.Log.warning(pass_str, "APP");
+				Rho.Log.error(pass_str, "APP");
 
 				expect( checkLogString(Rho.LogCapture.read(),0,4) ).toEqual( true );
 			});
@@ -674,10 +680,10 @@ describe("Log JS API", function () {
 				LogLevel = Rho.Log.level;
 				expect(LogLevel).toEqual(0);
 
-				Rho.Log.trace("_pass_", "APP");
-				Rho.Log.info("_pass_", "APP");
-				Rho.Log.warning("_pass_", "APP");
-				Rho.Log.error("_pass_", "APP");
+				Rho.Log.trace(pass_str, "APP");
+				Rho.Log.info(pass_str, "APP");
+				Rho.Log.warning(pass_str, "APP");
+				Rho.Log.error(pass_str, "APP");
 
 				expect( checkLogString(Rho.LogCapture.read(),0,4) ).toEqual( true );
 			});

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Rho.Videocapture</title>
+    <meta name="viewport" content="initial-scale=1.0, width=device-width"/>
+    <script src="/public/jquery/jquery-1.6.4.min.js" type="text/javascript"></script>
+    <script src="/public/jquery/jquery.json-2.3.min.js" type="text/javascript"></script>
+    <script type="text/javascript" charset="utf-8" src="/public/api/rhoapi-modules.js"></script>
+    <script type="text/javascript" charset="utf-8" src="/public/api/rhoapi-modules.js"></script>
+    <link type="text/css" rel="stylesheet" href="/public/css/manual_styles.css">
+    
+    <script type="text/javascript">
+    function startVideoCaptureWithoutCallback()
+    {
+		alert("1")
+    	Rho.Videocapture.start();
+    }
+
+    function startVideoCaptureWithCallback()
+    {
+		alert("2")
+    	Rho.Videocapture.start(mysaveevent);
+    }
+
+    function mysaveevent(params)
+    {
+    	
+    	data = "Result is "+params['transferResult']+"Name is "+params['fileName']+"Size is "+params['size'];
+    	$("#Rho_startVideoCaptureWithCallback span.result").text($.toJSON(data));
+    					
+    }
+    </script>
+</head>
+<body>
+
+<div class="method_tests">
+	<div class="method_name">Rho.Videocapture.start</div>
+	<div class="method_desc">Start videoCapture: Dont set any duration, <br />Expected: video and should stop after defaultt duration of 5 seconds  (Only Applicable to camera device)</div>
+	<div class="test_scenario">
+		<div class="test_scenario_controls">		
+			<a href="javascript:void(0)" onclick ="startVideoCaptureWithoutCallback();">Start video Without Callback</a><br />
+		</div>
+		<span class="test_scenario_number">VT281-0677 <br /></span>
+	</div>
+</div>
+
+<div class="method_tests">
+	<div class="method_name">Rho.Videocapture.start</div>
+	<div class="method_desc">Start videoCapture: Dont set any duration, <br />Expected: video should get captured forr defaultt duration of 5 seconds  and callback should get fire withh transferResult, filename and size of the file</div>
+	<div class="test_scenario">
+		<div class="test_scenario_controls">
+			<div id="Rho_startVideoCaptureWithCallback">Result : <span class="result"> </span> </div>
+			<a href="javascript:void(0)" onclick ="startVideoCaptureWithCallback();">Start video With Callback</a><br />
+		</div>
+		<span class="test_scenario_number">VT281-0678 <br /></span>
+	</div>
+</div>
+
+</body>
+</html>

@@ -23,20 +23,9 @@ function minQuit(){
     Rho.Application.quit();
 }
 
-function badWeb()
+function startOriginal()
 {
-Rho.Application.badLinkURI ='http://google.com';
-}
-
-function badnull()
-{
-Rho.Application.badLinkURI ='';
-}
-
-
-function badNotExist ()
-{
-Rho.Application.badLinkURI ='idontExist';
+    Rho.Application.startURI= '/app/index.html';
 }
 
 function startLocal()
@@ -59,90 +48,6 @@ function startInvalid()
   Rho.Application.startURI= '/app/idontExist.html';
 }  
 
-function setArabic()
-{
- Rho.Application.setLocale('ar');
-}
-
-function setRussian()
-{
- Rho.Application.setLocale('ru');
-}
-
-function setGerman()
-{
- Rho.Application.setLocale('de','us');
-}
-  
-function setCatalan()
-{
- Rho.Application.setLocale('ca');
-}
-  
-function setFrench()
-{
- Rho.Application.setLocale('fr');
-}
-
-function setSpanish()
-{
- Rho.Application.setLocale('es','asd');
-}
-      
- function setItalian()
-{
- Rho.Application.setLocale('it');
-}
-
-function setKorean()
-{
- Rho.Application.setLocale('ko');
-}
-
- function setChinese()
-{
- Rho.Application.setLocale('zh');
-}
-
-function setjapanese()
-{
- Rho.Application.setLocale('ja');
-}
-
-function setCzech()
-{
- Rho.Application.setLocale('cs');
-}     
-     
-function setDannish()
-{
- Rho.Application.setLocale('da');
-}       
- 
-function setFinnish()
-{
- Rho.Application.setLocale('fi');
-}
-
-function setSerbian()
-{
- Rho.Application.setLocale('sr');
-}
-
- function setDutch()
-{
- Rho.Application.setLocale('ni');
-}
-function setPoruguese()
-{
- Rho.Application.setLocale('pt');
-}      
-   
-function setHebrew()
-{
- Rho.Application.setLocale('he');
-}
-
 function setTitle(){
  Rho.Application.title ='MyTitle';
 }
@@ -150,97 +55,52 @@ function setTitle(){
 function getTitle() 
 { 
 	var data = Rho.Application.title;
-	$("#Rho_Application_title span.result").text($.toJSON(data));
+	$("#Rho_Application_title span.result").text(JSON.stringify(data));
 }
 
 function setTitleNull(){
  Rho.Application.title ='';
 }
 
+function menuCallback(){
+    Rho.Log.info("menuCallback", "LOG_TEST");
+}
 
 function menuTest() {
 Rho.Application.nativeMenu = [
-{ 'Home': 'refresh'},{'seperator': 'home'},{'Options': 'exit'},{'Log': 'sync'},{'Refresh': 'options'},{'Refresh': 'options'}
+{ 'label':'Home', 'action': 'Home'},{'label':'separator', 'action': 'separator'},{'label':'Options', 'action': 'options'},{'label':'Log', 'action': 'log'},{'label':'Exit', 'action': 'exit'},{'label':'Refresh', 'action': 'refresh'}, {'label':'Callback', 'action': menuCallback}
  ];
 }
 
-function menuNullNames() {
-Rho.Application.nativeMenu = [
-{'Options': 'Options'},{'Exit': 'exit'},{'': 'Log'},{'': 'Refresh'},{ 'Home': 'Home'}
- ];
-}
-
-function menuNullActions() {
-Rho.Application.nativeMenu = [
-{'Options': 'Options'},{'Exit': 'exit'},{'Log': ''},{'Refresh': ''},{ 'Home': 'Home'}
- ];
-}
-
-function menuInvalidNames() {
-Rho.Application.nativeMenu = [
-{'Options': 'Options'},{'Keeewww###$%34': 'exit'},{'Log': 'Log'},{'Deva5466_45': 'Refresh'},{ 'Home': 'Home'}
- ];
+function menuDefaultTest() {
+    Rho.Application.nativeMenu = Rho.Application.defaultNativeMenu
 }
  
 function menuReservedItem() {
 Rho.Application.nativeMenu = [
-{'Options': 'Options'},{'Exit': 'exit'},{'Log': 'Log'},{'Refresh': 'Refresh'},{ 'Home': 'Home'},{'Load a page': '/app/loading.html'}
+{'label':'Options', 'action': 'Options'},{'label':'Exit', 'action': 'exit'},{'label':'Log', 'action': 'Log'},{'label':'Refresh', 'action': 'Refresh'},{ 'label':'Home', 'action': 'Home'},{'label':'Load a page', 'action': '/app/loading.html'}
  ];
 } 
 
-function platfromAsync1(){
-Rho.Application.getRhoPlatformVersion(myCallback);
-}
-
-function myCallback(params){
-data=params;
-$("#Rho_Application_version_Async span.result").text($.toJSON(data));
-}
-
-function platformSync(){
-data= Application.getRhoPlatformVersion(myCallback());
-$("#Rho_Application_version_Sync span.result").text($.toJSON(data));
+function menuJavascriptCall() {
+Rho.Application.nativeMenu = [
+{'label':'Log', 'action': 'Log'},{'label':'fullscreen', 'action': 'fullscreen'},{'label':'Exit', 'action':'javascript:onQuit()'},{'label':'separator', 'action': 'separator '},{'label':'Refresh', 'action': 'Refresh'},{ 'label':'Home', 'action': 'Home'},{'label':'Load a page', 'action': '/app/loading.html'}
+];
 } 
- 
-function platfromAnonymous(){
-Rho.Application.getRhoPlatformVersion(function (params){
-data=params;
-$("#Rho_Application_version_Anon span.result").text($.toJSON(data));
-});
+function onQuit()
+{
+Rho.Application.quit();
 }
 
-function platfromAnonymous(){
-Rho.Application.getRhoPlatformVersion(function (params){
-data=params;
-$("#Rho_Application_version_Anon span.result").text($.toJSON(data));
-});
-}
 
-function invalidSecurityLocal(){
-Rho.Application.invalidSecurityTokenStartPath='/app/loading.html';	
-}
-
-function invalidSecurityGoogle(){
-Rho.Application.invalidSecurityTokenStartPath='http://www.google.com';	
+function getInvalidSecurityTokenStartPath(){
 var data = Rho.Application.invalidSecurityTokenStartPath;
-$("#Rho_Application_securityToken span.result").text($.toJSON(data));
-}
-
-function invalidSecurityNull(){
-Rho.Application.invalidSecurityTokenStartPath='';	
-}
-
-function invalidSecurityInvalid(){
-Rho.Application.invalidSecurityTokenStartPath='idontexistatall';	
-}
-
-function invalidSecurityStartPage(){
-Rho.Application.invalidSecurityTokenStartPath='/public/app/index.html';	
+$("#Rho_Application_securityToken span.result").text(JSON.stringify(data));
 }
 
 function securityTokenResult(){
 var data = Rho.Application.securityTokenNotPassed;
-$("#Rho_Application_security span.result").text($.toJSON(data));	
+$("#Rho_Application_security span.result").text(JSON.stringify(data));	
 }	
 	
 function applicationNotify(){
@@ -249,8 +109,9 @@ Rho.Application.setApplicationNotify(notifyCallback);
 }
 
 function notifyCallback(params){
-data=params;
-Rho.Log.info(data,'app');
-$("#Rho_Application_Notify span.result").text($.toJSON(data));
+//data=params;
+Rho.Log.info(params.applicationEvent,'APP_CALLBACK');
+
+$("#Rho_Application_Notify span.result").text(params.applicationEvent);
 }	
 	

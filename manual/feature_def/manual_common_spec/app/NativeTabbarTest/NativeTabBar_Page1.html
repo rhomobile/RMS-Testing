@@ -4,7 +4,6 @@
     <title>Page1</title>
     <meta name="viewport" content="initial-scale=1.0, width=device-width"/>
     <script src="/public/jquery/jquery-1.6.4.min.js" type="text/javascript"></script>
-    <script src="/public/jquery/jquery.json-2.3.min.js" type="text/javascript"></script>
     <script type="text/javascript" charset="utf-8" src="/public/api/rhoapi-modules.js"></script>
 
     <script type="text/javascript">
@@ -12,7 +11,7 @@
         function createMenu()
         {
             Rho.Application.nativeMenu = [
-                { 'Home': 'javascript:goHome()'} , {'Exit': 'javascript:onExit()' }, {'Quit': 'javascript:onQuit()' }, {'My Test': 'javascript:page1Test()' }
+                { 'label':'Home', 'action': 'javascript:goHome()'} , {'label':'Exit', 'action': 'javascript:onExit()' }, {'label':'Quit', 'action': 'javascript:onQuit()' }, {'label':'My Test', 'action': 'javascript:page1Test()' }
             ];
         }
         
@@ -47,8 +46,8 @@
 <body>
 <h1>Page1</h1>
 
+<a href="#" onclick="goHome();">Switch to Home Page 0</a><br/>
 <a href="#" onclick="tabbarSwitch(2);">Switch to Page 2</a><br/>
-<a href="#" onclick="goHome();">Home</a><br/>
 
 </body>
 </html>

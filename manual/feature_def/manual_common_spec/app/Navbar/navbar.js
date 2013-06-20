@@ -33,8 +33,14 @@ function callNavbarcreateinvalidaction()
 	Rho.Navbar.create({ 'left':{'action':'asd##', 'label':'Back'},'title':'Navbar Test'})
 }
 
+function callNavbarcreatenoaction()
+{
+	Rho.Navbar.create({ 'left':{'action':'','label':'Back'},'title':'Navbar Test'})
+}
+
+
 function callNavbarstarted()
 {
 	data = Rho.Navbar.started();
-	$("#Rho_Navbar_started span.result").text($.toJSON(data));
+	$("#Rho_Navbar_started span.result").text(JSON.stringify(data));
 }

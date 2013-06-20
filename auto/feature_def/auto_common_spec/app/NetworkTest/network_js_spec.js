@@ -18,6 +18,8 @@ describe('Network JS API', function() {
     var srvHttpUploadTextFileUrlAuth = srvURL + "/upload_text_file_auth";
 
     var srvHttpsTestMethodsUrl = httpsSrvURL + "/test_methods";
+         
+    var waitTimeout = 20000;
     
     var callbackCount = 0;
          
@@ -123,6 +125,7 @@ describe('Network JS API', function() {
         });
     });
 
+         /*
     it('VT293-0019 | detectConnection with exteranl profile disabled with pollinterval', function() {
        var flag = false;
         runs( function() {
@@ -149,9 +152,9 @@ describe('Network JS API', function() {
             expect(connectionInfo).toEqual("Connected");
         });
 
-    });
+    });*/
 
-    it('VT293-0022 | detectConnection with dtectionTimeout', function() {
+    it('VT293-0020 | detectConnection with dtectionTimeout', function() {
        var flag = false;
         runs( function() {
 
@@ -169,17 +172,17 @@ describe('Network JS API', function() {
                 return callbackCount==1;
             },
             "Callback never called",
-            5100
+            waitTimeout
         );
             
         runs(function() {
             expect(callbackCount).toEqual(1);
-            expect(failureMsg).toEqual("Attempted to resolve hostname to connect to but did not succeed, return value (8), last error (0)");
+            expect(failureMsg).toMatch("Attempted to resolve hostname to connect to but did not succeed");
         });
 
     });
 
-    it('VT293-0023 | detectConnection with pollinterval and dtectionTimeout', function() {
+    it('VT293-0021 | detectConnection with pollinterval and dtectionTimeout', function() {
        var flag = false;
         runs( function() {
 
@@ -211,14 +214,10 @@ describe('Network JS API', function() {
             expect(connectionInfo).toEqual("Connected");
         });
 
-    });
-       
+    }); 
          
-         
-         
-         
-         
-    it('VT293-0024 | stopDetectingConnection with wlan profile enabled', function() {
+            
+    it('VT293-0022 | stopDetectingConnection with wlan profile enabled', function() {
        var flag = false;
        runs( function() {
 
@@ -261,7 +260,7 @@ describe('Network JS API', function() {
     });
           
 
-    it('VT293-0040 | verifyPeerCertificate with default value', function() {
+    it('VT293-0037 | verifyPeerCertificate with default value', function() {
        var status = '';
        var callbackCalled = false;
 
@@ -283,7 +282,7 @@ describe('Network JS API', function() {
                 return callbackCalled;
             },
             "Callback never called",
-            5100
+            waitTimeout
         );
 
         runs(function() {
@@ -291,7 +290,7 @@ describe('Network JS API', function() {
         });
     });
 
-    it('VT293-0041 | verifyPeerCertificate with value true', function() {
+    it('VT293-0038 | verifyPeerCertificate with value true', function() {
        var status = '';
        var callbackCalled = false;
 
@@ -314,7 +313,7 @@ describe('Network JS API', function() {
                 return callbackCalled;
             },
             "Callback never called",
-            5100
+            waitTimeout
         );
 
         runs(function() {
@@ -322,7 +321,7 @@ describe('Network JS API', function() {
         });
     });
 
-    it('VT293-0042 | verifyPeerCertificate with false', function() {
+    it('VT293-0039 | verifyPeerCertificate with false', function() {
        var data = '';
        var callbackCalled = false;
 
@@ -345,7 +344,7 @@ describe('Network JS API', function() {
                 return callbackCalled;
             },
             "Callback never called",
-            5100
+            waitTimeout
         );
 
         runs(function() {
@@ -354,7 +353,7 @@ describe('Network JS API', function() {
     });
 
          
-    it('VT293-0043 | post with valide url', function() {
+    it('VT293-0040 | post with valide url', function() {
        var flag = false;
        var callbackCalled = false;
        var data = '';
@@ -378,7 +377,7 @@ describe('Network JS API', function() {
                 return callbackCalled;
             },
             "Callback never called",
-            5100
+            waitTimeout
         );
 
         runs(function() {
@@ -387,7 +386,7 @@ describe('Network JS API', function() {
         });
     });
 
-    it('VT293-0044 | post with sync', function() {
+    it('VT293-0041 | post with sync', function() {
 
         postProps = {
             url: srvHttpTestMethodsUrl,
@@ -400,7 +399,7 @@ describe('Network JS API', function() {
     });
 
          
-    it('VT293-0045 | post with anonymous call back event', function() {
+    it('VT293-0042 | post with anonymous call back event', function() {
        var data = '';
        var callbackCalled = false;
        runs( function() {
@@ -417,7 +416,7 @@ describe('Network JS API', function() {
                 return callbackCalled;
             },
             "Callback never called",
-            5100
+            waitTimeout
         );
 
         runs(function() {
@@ -427,7 +426,7 @@ describe('Network JS API', function() {
     });
 
 
-    it('VT293-0046 | get with callback', function() {
+    it('VT293-0043 | get with callback', function() {
        var flag = false;
        var callbackCalled = false;
        var data = '';
@@ -450,7 +449,7 @@ describe('Network JS API', function() {
                 return callbackCalled;
             },
             "Callback never called",
-            5100
+            waitTimeout
         );
 
         runs(function() {
@@ -459,7 +458,7 @@ describe('Network JS API', function() {
         });
     });
 
-    it('VT293-0046 | get with valid url', function() {
+    /*it('VT293-0044 | get with valid url', function() {
        var fullURL = srvURL + "/download";
        var content = "";
        var errCode = -1;
@@ -489,9 +488,9 @@ describe('Network JS API', function() {
             expect(content).toEqual("Downloaded content");
             expect(errCode).toEqual('200');
         });
-    });
+    });*/
 
-    it('VT293-0047 | get with sync event', function() {
+    it('VT293-0044 | get with sync event', function() {
 
         getProps = {
             url: srvHttpTestMethodsUrl+"?data1=test&data2=test2",
@@ -502,7 +501,7 @@ describe('Network JS API', function() {
 
     });
 
-    it('VT293-0048 | get with anonymous call back event', function() {
+    it('VT293-0045 | get with anonymous call back event', function() {
        var data = '';
        var callbackCalled = false;
        runs( function() {
@@ -518,7 +517,7 @@ describe('Network JS API', function() {
                 return callbackCalled;
             },
             "Callback never called",
-            5100
+            waitTimeout
         );
 
         runs(function() {
@@ -527,11 +526,11 @@ describe('Network JS API', function() {
         });
     }); 
          
-    it('VT293-0049 | download file from http with callback event', function() {
+    it('VT293-0046 | download file from http with callback event', function() {
        var flag = false;
        var callbackCalled = false;
        var status = '';
-       var fname = Rho.Application.publicFolder+"/images/network_0049.jpg";
+       var fname = Rho.RhoFile.join(Rho.Application.userFolder,"/images/network_0049.jpg");
 
        var download_file_callback = function (args){
             status = args['status'];
@@ -544,6 +543,7 @@ describe('Network JS API', function() {
                 Rho.RhoFile.deleteFile(fname);
             }
 
+            expect(Rho.RhoFile.exists(fname)).toEqual(false);
 
             downloadfileProps = {
                 url: srvHttpDownloadImageUrl,
@@ -558,7 +558,7 @@ describe('Network JS API', function() {
                 return callbackCalled;
             },
             "Callback never called",
-            5100
+            waitTimeout
         );
 
         runs(function() {
@@ -567,11 +567,11 @@ describe('Network JS API', function() {
         });
     });
 
-    it('VT293-0050 | download file with overwrite default and callback event', function() {
+    it('VT293-0047 | download file with overwrite default and callback event', function() {
        var flag = false;
        var callbackCalled = false;
        var status = '';
-       var fname = Rho.Application.publicFolder+"/images/network_0049.jpg";
+       var fname = Rho.RhoFile.join(Rho.Application.userFolder,"/images/network_0049.jpg");
 
        var download_file_callback = function (args){
             status = args['status'];
@@ -583,6 +583,8 @@ describe('Network JS API', function() {
             if ( Rho.RhoFile.exists(fname) ) {
                 Rho.RhoFile.deleteFile(fname);
             }
+            
+            expect(Rho.RhoFile.exists(fname)).toEqual(false);
 
             downloadfileProps = {
                 url: srvHttpDownloadImageUrl,
@@ -597,7 +599,7 @@ describe('Network JS API', function() {
                 return callbackCalled;
             },
             "Callback never called",
-            5100
+            waitTimeout
         );
 
         runs(function() {
@@ -607,7 +609,7 @@ describe('Network JS API', function() {
     });
           
 
-    it('VT293-0051 | download file with overwrite true and callback event', function() {
+    it('VT293-0048 | download file with overwrite true and callback event', function() {
        var flag = false;
        var callbackCalled = false;
        var status = '';
@@ -621,7 +623,7 @@ describe('Network JS API', function() {
 
             downloadfileProps = {
                 url: srvHttpDownloadImageUrl,
-                filename: Rho.Application.publicFolder+"/images/network_0049.jpg",
+                filename: Rho.RhoFile.join(Rho.Application.userFolder,"/images/network_0049.jpg"),
                 overwriteFile: true
             };
 
@@ -633,7 +635,7 @@ describe('Network JS API', function() {
                 return callbackCalled;
             },
             "Callback never called",
-            5100
+            waitTimeout
         );
 
         runs(function() {
@@ -642,7 +644,7 @@ describe('Network JS API', function() {
         });
     });
 
-    it('VT293-0052 | download file with overwrite true and createfolder default value and callback', function() {
+    it('VT293-0049 | download file with overwrite true and createfolder default value and callback', function() {
        var flag = false;
        var callbackCalled = false;
        var status = '';
@@ -656,7 +658,7 @@ describe('Network JS API', function() {
 
             downloadfileProps = {
                 url: srvHttpDownloadImageUrl,
-                filename: Rho.Application.publicFolder+"/images/network_0049.jpg",
+                filename: Rho.RhoFile.join(Rho.Application.userFolder,"/images/network_0049.jpg"),
                 overwriteFile: true
             };
 
@@ -668,7 +670,7 @@ describe('Network JS API', function() {
                 return callbackCalled;
             },
             "Callback never called",
-            5100
+            waitTimeout
         );
 
         runs(function() {
@@ -677,7 +679,7 @@ describe('Network JS API', function() {
         });
     });
 
-     it('VT293-0053 | download file with overwrite true and createfolder fasle value with callback', function() {
+     it('VT293-0050 | download file with overwrite true and createfolder fasle value with callback', function() {
        var flag = false;
        var callbackCalled = false;
        var status = '';
@@ -691,7 +693,7 @@ describe('Network JS API', function() {
 
             downloadfileProps = {
                 url: srvHttpDownloadImageUrl,
-                filename: Rho.Application.publicFolder+"/images/newNetwork/network_0053.jpg",
+                filename: Rho.RhoFile.join(Rho.Application.userFolder,"/images/newNetwork/network_0053.jpg"),
                 overwriteFile: true,
                 createFolders: false
             };
@@ -704,7 +706,7 @@ describe('Network JS API', function() {
                 return callbackCalled;
             },
             "Callback never called",
-            5100
+            waitTimeout
         );
 
         runs(function() {
@@ -714,7 +716,7 @@ describe('Network JS API', function() {
     });
 
 
-     it('VT293-0054 | download file with overwrite true and createfolder true value with callback', function() {
+     it('VT293-0051 | download file with overwrite true and createfolder true value with callback', function() {
        var flag = false;
        var callbackCalled = false;
        var status = '';
@@ -728,7 +730,7 @@ describe('Network JS API', function() {
 
             downloadfileProps = {
                 url: srvHttpDownloadImageUrl,
-                filename: Rho.Application.publicFolder+"/images/newNetwork54/network_0054.jpg",
+                filename: Rho.RhoFile.join(Rho.Application.userFolder,"/images/newNetwork54/network_0054.jpg"),
                 overwriteFile: true,
                 createFolders: true
             };
@@ -741,7 +743,7 @@ describe('Network JS API', function() {
                 return callbackCalled;
             },
             "Callback never called",
-            5100
+            waitTimeout
         );
 
         runs(function() {
@@ -751,7 +753,7 @@ describe('Network JS API', function() {
     });
 
 
-     it('VT293-0055 | download file with anonymus event', function() {
+     it('VT293-0052 | download file with anonymus event', function() {
        var flag = false;
        var callbackCalled = false;
        var status = '';
@@ -760,7 +762,7 @@ describe('Network JS API', function() {
 
             downloadfileProps = {
                 url: srvHttpDownloadImageUrl,
-                filename: Rho.Application.publicFolder+"/images/newNetwork54/network_0055.jpg",
+                filename: Rho.RhoFile.join(Rho.Application.userFolder,"/images/newNetwork54/network_0055.jpg"),
                 overwriteFile: true,
                 createFolders: true
             };
@@ -776,7 +778,7 @@ describe('Network JS API', function() {
                 return callbackCalled;
             },
             "Callback never called",
-            5100
+            waitTimeout
         );
 
         runs(function() {
@@ -785,7 +787,7 @@ describe('Network JS API', function() {
         });
     });
          
-    it('VT293-0060 | download file with authentication properties with callback event', function() {
+    it('VT293-0057 | download file with authentication properties with callback event', function() {
        var flag = false;
        var callbackCalled = false;
        var status = '';
@@ -802,7 +804,7 @@ describe('Network JS API', function() {
                 authType: "basic",
                 authUser: "admin",
                 authPassword: "admin",
-                filename: Rho.Application.publicFolder+"/images/network/network1.jpg",
+                filename: Rho.RhoFile.join(Rho.Application.userFolder,"/images/network/network1.jpg"),
                 overwriteFile: true,
                 createFolders: true
             };
@@ -815,7 +817,7 @@ describe('Network JS API', function() {
                 return callbackCalled;
             },
             "Callback never called",
-            5100
+            waitTimeout
         );
 
         runs(function() {
@@ -824,11 +826,12 @@ describe('Network JS API', function() {
         });
     });
 
-    it('VT293-0071 | uploadFile to http with callback event', function() {
+    it('VT293-0068 | uploadFile to http with callback event', function() {
        var flag = false;
        var callbackCalled = false;
        var data = '';
        var status = '';
+       var fname = Rho.RhoFile.join(Rho.Application.publicFolder,"/images/myfile.txt");
 
        var upload_file_callback = function (args){
         status = args['status'];
@@ -840,7 +843,7 @@ describe('Network JS API', function() {
 
             var uploadfileProps = {
               url: srvHttpUploadTextFileUrl,
-              filename: Rho.Application.publicFolder+"/images/myfile.txt",
+              filename: fname,
               body: "uploading file",
               fileContentType: "text/plain"
             };
@@ -852,20 +855,22 @@ describe('Network JS API', function() {
                 return callbackCalled;
             },
             "Callback never called",
-            5100
+            waitTimeout
         );
 
         runs(function() {
             expect(status).toEqual('ok');
-            expect(data).toEqual('Hello All');
+            expect(data).toEqual(Rho.RhoFile.read(fname));
         });
     });
 
-    it('VT293-0072 | uploadFile with synch callback event', function() {
+    it('VT293-0069 | uploadFile with synch callback event', function() {
+       
+       var fname = Rho.RhoFile.join(Rho.Application.publicFolder,"/images/myfile.txt");
 
         var uploadfileProps = {
           url: srvHttpUploadTextFileUrl,
-          filename: Rho.Application.publicFolder+"/images/myfile.txt",
+          filename: fname,
           body: "uploading file",
           fileContentType: "text/plain"
         };
@@ -873,19 +878,20 @@ describe('Network JS API', function() {
         var args = Rho.Network.uploadFile(uploadfileProps); 
 
         expect(args['status']).toEqual('ok');
-        expect(args['body']).toEqual('Hello All');
+        expect(args['body']).toEqual(Rho.RhoFile.read(fname));
     });
 
-    it('VT293-0073 | uploadFile with anonymus event', function() {
+    it('VT293-0070 | uploadFile with anonymus event', function() {
        var data = '';
        var callbackCalled = false;
        var status = ''
+       var fname = Rho.RhoFile.join(Rho.Application.publicFolder,"/images/myfile.txt");
 
        runs( function() {
 
         var uploadfileProps = {
           url: srvHttpUploadTextFileUrl,
-          filename: Rho.Application.publicFolder+"/images/myfile.txt",
+          filename: fname,
           body: "uploading file",
           fileContentType: "text/plain"
         };
@@ -901,16 +907,16 @@ describe('Network JS API', function() {
                 return callbackCalled;
             },
             "Callback never called",
-            5100
+            waitTimeout
         );
 
         runs(function() {
             expect(status).toEqual('ok');
-            expect(data).toEqual('Hello All');
+            expect(data).toEqual(Rho.RhoFile.read(fname));
         });
     });
 
-    it('VT293-0074 | uploadFile with autherisation properties', function() {
+    it('VT293-0071 | uploadFile with autherisation properties', function() {
        var data = '';
        var callbackCalled = false;
        var status = ''
@@ -919,6 +925,8 @@ describe('Network JS API', function() {
         data = args['body'];
         callbackCalled = true;
        }
+       var fname = Rho.RhoFile.join(Rho.Application.publicFolder,"/images/myfile.txt");
+
        runs( function() {
 
         var uploadfileProps = {
@@ -926,7 +934,7 @@ describe('Network JS API', function() {
           authType: "basic",
           authUser: "admin",
           authPassword: "Motorola@123",
-          filename: Rho.Application.publicFolder+"/images/myfile.txt",
+          filename: fname,
           body: "uploading file",
           fileContentType: "image/png"
         };
@@ -938,22 +946,22 @@ describe('Network JS API', function() {
                 return callbackCalled;
             },
             "Callback never called",
-            5100
+            waitTimeout
         );
 
         runs(function() {
             expect(status).toEqual('ok');
-            expect(data).toEqual('Hello All');
+            expect(data).toEqual(Rho.RhoFile.read(fname));
         });
     });
 
-    it('VT293-0085 | download file from http with sync', function() {
+    it('VT293-0082 | download file from http with sync', function() {
 
         downloadfileProps = {
             url: srvHttpDownloadImageUrl,
             overwriteFile: true,
             createFolders: true,
-            filename: Rho.Application.publicFolder+"/images/network.jpg"
+            filename: Rho.RhoFile.join(Rho.Application.userFolder,"/images/network.jpg")
         };
 
         Rho.Network.downloadFile(downloadfileProps);

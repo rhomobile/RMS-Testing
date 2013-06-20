@@ -18,18 +18,6 @@ describe("WebView JS API", function () {
         expect(Rho.WebView.fullScreen).toEqual(false);
     });
 
-    it("Test default value of enableCache property", function () {
-        expect(Rho.WebView.enableCache).toEqual(true);
-    });
-
-    it("Test enableCache property", function () {
-        Rho.WebView.enableCache = false;
-        expect(Rho.WebView.enableCache).toEqual(false);
-
-        Rho.WebView.enableCache = true;
-        expect(Rho.WebView.enableCache).toEqual(true);
-    });
-
     it("Test activeTab property", function () {
         expect(Rho.WebView.activeTab).toEqual(0);
     });
@@ -67,41 +55,57 @@ describe("WebView JS API", function () {
 
 
     if (isAndroidPlatform()) {
+        it("Test default value of enableCache property", function () {
+            expect(Rho.WebView.enableCache).toEqual(true);
+        });
+
+        // Read only property - comment out (aat103)
+        //it("Test enableCache property", function () {
+        //    Rho.WebView.enableCache = false;
+        //    expect(Rho.WebView.enableCache).toEqual(false);
+
+        //    Rho.WebView.enableCache = true;
+        //    expect(Rho.WebView.enableCache).toEqual(true);
+        //});
+
         it("Test default value of enableZoom property", function () {
             expect(Rho.WebView.enableZoom).toEqual(true);
         });
 
-        it("Test enableZoom property", function () {
-            Rho.webView.enableZoom = false;
-            expect(Rho.WebView.enableZoom).toEqual(false);
+        // Read only property - comment out (aat103)
+        //it("Test enableZoom property", function () {
+        //    Rho.webView.enableZoom = false;
+        //    expect(Rho.WebView.enableZoom).toEqual(false);
 
-            Rho.webView.enableZoom = true;
-            expect(Rho.WebView.enableZoom).toEqual(true);
-        });
+        //    Rho.webView.enableZoom = true;
+        //    expect(Rho.WebView.enableZoom).toEqual(true);
+        //});
 
         it("Test default value of enablePageLoadingIndication property", function () {
             expect(Rho.WebView.enablePageLoadingIndication).toEqual(true);
         });
 
-        it("Test enablePageLoadingIndication property", function () {
-            Rho.WebView.enablePageLoadingIndication = false;
-            expect(Rho.WebView.enablePageLoadingIndication).toEqual(false);
+        // Read only property - comment out (aat103)
+        //it("Test enablePageLoadingIndication property", function () {
+        //    Rho.WebView.enablePageLoadingIndication = false;
+        //    expect(Rho.WebView.enablePageLoadingIndication).toEqual(false);
 
-            Rho.WebView.enablePageLoadingIndication = true;
-            expect(Rho.WebView.enablePageLoadingIndication).toEqual(true);
-        });
+        //    Rho.WebView.enablePageLoadingIndication = true;
+        //    expect(Rho.WebView.enablePageLoadingIndication).toEqual(true);
+        //});
 
         it("Test default value of enableWebPlugins property", function () {
             expect(Rho.WebView.enableWebPlugins).toEqual(true);
         });
 
-        it("Test enableWebPlugins property", function () {
-            Rho.WebView.enableWebPlugins = false;
-            expect(Rho.WebView.enableWebPlugins).toEqual(false);
+        // Read only property - comment out (aat103)
+        //it("Test enableWebPlugins property", function () {
+        //    Rho.WebView.enableWebPlugins = false;
+        //    expect(Rho.WebView.enableWebPlugins).toEqual(false);
 
-            Rho.WebView.enableWebPlugins = true;
-            expect(Rho.WebView.enableWebPlugins).toEqual(true);
-        });
+        //    Rho.WebView.enableWebPlugins = true;
+        //    expect(Rho.WebView.enableWebPlugins).toEqual(true);
+        //});
 
         //TODO: add check on existing saved file
         it("Test save method", function () {

@@ -210,6 +210,7 @@ describe('Database JS API', function() {
 	            description = e.description;
 	        }
 	        expect(description).toEqual('could not execute statement: 21; Message: not an error');
+	                                    
 	    });
 	
 	    xit("VT287-15 | To demonstrate executeSql by passing null value | ", function() {
@@ -468,6 +469,42 @@ describe('Database JS API', function() {
 	        db.destroyTable('');
 	        expect(db.isTableExist(tableName)).toBe(true);
 	    });
+	    
+	    it("VT287-38 | CAll rollback Transaction without start Transaction  |'true' ", function() {
+	        db = new Rho.Database(Rho.Application.databaseFilePath('local'), 'local');
+	
+	        var tableName = getRandomName();
+	        db.executeSql('CREATE TABLE "' + tableName + '" (x INTEGER, y TEXT)');
+	       db.rollbackTransaction();
+	        expect(db.isTableExist(tableName)).toBe(true);
+	    });
+	    
+	    it("VT287-38 | Call rollback Transaction without start Transaction  |'true' ", function() {
+	        db = new Rho.Database(Rho.Application.databaseFilePath('local'), 'local');
+	
+	        var tableName = getRandomName();
+	        db.executeSql('CREATE TABLE "' + tableName + '" (x INTEGER, y TEXT)');
+	       db.rollbackTransaction();
+	        expect(db.isTableExist(tableName)).toBe(true);
+	    });
+	    /* TODO: move to other tests since this is negative cases
+	    it("VT287-39 | executeSql with one invalid stamenet  |'could not prepare statement: 1;Message:near taasf:syntax error' ", function() {
+	        db = new Rho.Database(Rho.Application.databaseFilePath('local'), 'local');
+	        var description;
+	        var tableName = getRandomName();
+	       
+	       description= db.executeSql('CREATE taasf  fab(x INTEGER, y TEXT)');
+	       expect(description).toBe('could not prepare statement: 1; Message: near "taasf": syntax error');
+	    });
+	    
+	    it("VT287-41 | executeBatchSql with one invalid stamenet  |'' ", function() {
+	        db = new Rho.Database(Rho.Application.databaseFilePath('local'), 'local');
+	        var description;
+	        var tableName = getRandomName();
+	       description= db.executeBatchSql('DROP TABLE IF EXISTS fab;CREATE taasf fab(x INTEGER, y TEXT)');       
+	       displayResult("VT287-39 | executeSql with one invalid stamenet  |'' ", description);
+	    });
+	    */
 	});
 	
 	describe('Dev set', function() {
@@ -600,7 +637,7 @@ describe('Database JS API', function() {
 	    });
 	
 	    // Database.prototype.setDoNotBackupAttribute = function(/* bool */ setFlag)
-	    xit('sets "don\'t backup attribute"', function() {
+	    it('sets "don\'t backup attribute"', function() {
 	        db.setDoNotBackupAttribute(true);
 	    });
 	

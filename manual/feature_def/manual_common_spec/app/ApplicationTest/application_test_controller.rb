@@ -7,6 +7,7 @@ class ApplicationTestController < Rho::RhoController
   # GET /ApplicationTest
   def index
     @applicationtests = ApplicationTest.find(:all)
+    @menu = {'Test'=>:exit}
     render :back => '/app'
   end
 

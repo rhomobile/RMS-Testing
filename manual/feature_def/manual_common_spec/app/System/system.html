@@ -8,12 +8,14 @@
 
     <script type="text/javascript" src="/public/jquery/jquery-1.6.4.js"></script>
     <script type="text/javascript" src="/public/jquery/jquery.json-2.3.js"></script>
-
+	<script type="text/javascript" charset="utf-8" src="/public/js/server_url.js"></script>
+	 
     <script type="text/javascript" charset="utf-8" src="/public/api/rhoapi-modules.js"></script>
     <script type="text/javascript" src="system.js"></script>
     <script type="text/javascript" src="/public/js/helpers.js"></script>
 	
     <script type="text/javascript">
+
 	$(document).ready(function(){
 	// hide all tests
 	$(".method_tests").hide();
@@ -26,7 +28,11 @@
 	if (isWindowsDesktopPlatform()){
 		$(".win32").show();
 	};
-
+	
+	if (isAndroidPlatform()){
+	$(".android").show();
+	};
+	
 	if (isWindowsMobilePlatform()){
 		$(".wm").show();
 	};
@@ -40,16 +46,15 @@
 });  
 
   //This needs to be changed according to the Environment
-	var server1 = '192.168.6.18/Received';
-	var server2 = '192.168.6.27/filestoinstall';
-	var ftpusername = 'admin';
-	var ftppassword = 'admin'; 
-	
+    var Path_file_downloded = '';
+	var srvHost = SERVER_HOST;
+    var srvPort = SERVER_PORT;
+	var srvHttpUrl = "http://" + srvHost + ":" + srvPort.toString();
 
     </script>
 </head>
 <body>
-<h1>Rho.System</h1>
+<h3>Rho.System</h3>
 
 <div class="method_tests ios">
 	<div class="method_name">Rho.System.applicationIconBadge</div>
@@ -83,9 +88,9 @@
 	</div>
 </div>
 
-<div class="method_tests android ios win32 wm wp8">
+<div class="method_tests win32 wm">
 	<div class="method_name">Rho.System.httpProxyURI</div>
-	<div class="method_desc">HTTP Proxy URI : Proxy should set successfully to http://wwwgate0.mot.com:1080</div>
+	<div class="method_desc">HTTP Proxy URI : Proxy should set successfully to http://wwwgate0.mot.com:1080. (Rhosimulator supports it only for windows platform)</div>
 	<div class="test_scenario">
 		<div class="test_scenario_controls">
 			<a href="javascript:void(0)" onclick ="sethttpProxyURI();">Set httpProxyURI </a><br />
@@ -127,7 +132,7 @@
 
 <div class="method_tests win32">
 	<div class="method_name">Rho.System.lockWindowSize</div>
-	<div class="method_desc"> Lock Window Size: Lock/unlock the window size(Windows desktop only)</div>
+	<div class="method_desc"> Lock Window Size: Lock/unlock the window size(Windows desktop). Rhosimulator supports it only for windows platform.</div>
 	<div class="test_scenario">
 		<div class="test_scenario_controls">
 			<a href="javascript:void(0)" onclick ="setlockWindowSize(true);">Set lockWindowSize as true</a>
@@ -283,25 +288,22 @@
 	</div>
 </div>
 
+<!-- Install** methods family will implemented as another feature  -->
+
 <div class="method_tests android ios win32 wm wp8">
 	<div class="method_name">Rho.System.applicationInstall</div>
 	<div class="method_desc">Application Install </div>
 	<div class="method_tests wm" ><b>Application Install for Windows WM:</b>
 		<div class="test_scenario">
 			<div class="test_scenario_controls">
-				<a href="javascript:void(0)" onclick ="callapplicationInstall('ftp://'+ftpusername+':'+ftppassword+'@'+server1+'/InstallTestapp.cab');">Call applicationInstall with FTP url</a>
-			</div>
-			<span class="test_scenario_number">VT300-063 <br /></span>
-		</div>
-		<div class="test_scenario">
-			<div class="test_scenario_controls">
-				<a href="javascript:void(0)" onclick ="callapplicationInstall('http://'+server2+'/InstallTestapp.cab');">call application Install with HTTP url</a>
+				<a href="javascript:void(0)" onclick ="callapplicationInstall(srvHttpUrl+'/download_app?device=wm');">call application Install with HTTP url</a>
 			</div>
 			<span class="test_scenario_number">VT300-064 <br /></span>
 		</div>
 		<div class="test_scenario">
 			<div class="test_scenario_controls">
-				<a href="javascript:void(0)" onclick ="callapplicationInstall('/app/public/testfiles/InstallTestapp.cab');">call application Install 	with local url</a>
+				<a href="javascript:void(0)" onclick ="Path_file_downloded = download_filetolocal(srvHttpUrl+'/download_app?device=wm', 'TestAppWM6.5.cab');">Download to local</a> <br />
+				<a href="javascript:void(0)" onclick ="callapplicationInstall(Path_file_downloded);">call Downloaded application Install with local url</a>
 			</div>
 			<span class="test_scenario_number">VT300-065 <br /></span>
 		</div>
@@ -311,19 +313,14 @@
 	<div class="method_tests android"><b>Application Install for Android:</b>
 		<div class="test_scenario">
 			<div class="test_scenario_controls">
-				<a href="javascript:void(0)" onclick ="callapplicationInstall('ftp://'+username+':'+password+'@'+server1+'/InstallTestapp_signed.apk');">Call application Install with FTP url</a>
-			</div>
-			<span class="test_scenario_number">VT300-063 <br /></span>
-		</div>
-		<div class="test_scenario">
-			<div class="test_scenario_controls">
-				<a href="javascript:void(0)" onclick ="callapplicationInstall('http://'+server2+'/InstallTestapp_signed.apk');">call application Install with HTTP url</a>
+				<a href="javascript:void(0)" onclick ="callapplicationInstall(srvHttpUrl+'/download_app?device=android');">call application Install with HTTP url</a>
 			</div>
 			<span class="test_scenario_number">VT300-064 <br /></span>
 		</div>
 		<div class="test_scenario">
 			<div class="test_scenario_controls">
-				<a href="javascript:void(0)" onclick ="callapplicationInstall('/app/public/testfiles/InstallTestapp_signed.apk');">call applicationInstall 	with local url</a>
+				<a href="javascript:void(0)" onclick ="Path_file_downloded = download_filetolocal(srvHttpUrl+'/download_app?device=android', 'TestApp_signed.apk');">Download to local</a> <br />
+				<a href="javascript:void(0)" onclick ="callapplicationInstall(Path_file_downloded);">call Downloaded application Install with local url</a>
 			</div>
 			<span class="test_scenario_number">VT300-065 <br /></span>
 		</div>
@@ -332,19 +329,14 @@
 	<div class="method_tests wm"><b>Application Install for Windows CE:</b>
 		<div class="test_scenario">
 			<div class="test_scenario_controls">
-				<a href="javascript:void(0)" onclick ="callapplicationInstall('ftp://'+username+':'+password+'@'+server1+'/InstallTestapp.cab');">Call applicationInstall with FTP url</a>
-			</div>
-			<span class="test_scenario_number">VT300-063 <br /></span>
-		</div>
-		<div class="test_scenario">
-			<div class="test_scenario_controls">
-				<a href="javascript:void(0)" onclick ="callapplicationInstall('http://'+server2+'/InstallTestapp.cab');">call application Install with HTTP url</a>
+				<a href="javascript:void(0)" onclick ="callapplicationInstall(srvHttpUrl+'/download_app?device=ce');">call application Install with HTTP url</a>
 			</div>
 			<span class="test_scenario_number">VT300-064 <br /></span>
 		</div>
 		<div class="test_scenario">
 			<div class="test_scenario_controls">
-				<a href="javascript:void(0)" onclick ="callapplicationInstall('/app/public/testfiles/InstallTestapp.cab');">call application Install 	with local url</a>
+				<a href="javascript:void(0)" onclick ="Path_file_downloded = download_filetolocal(srvHttpUrl+'/download_app?device=ce', 'TestAppCE.cab');">Download to local</a> <br />
+				<a href="javascript:void(0)" onclick ="callapplicationInstall(Path_file_downloded);">call Downloaded application Install with local url</a>
 			</div>
 			<span class="test_scenario_number">VT300-065 <br /></span>
 		</div>
@@ -354,19 +346,14 @@
 	<div class="method_tests ios"><b>Application Install for Windows IOS:</b>
 		<div class="test_scenario">
 			<div class="test_scenario_controls">
-				<a href="javascript:void(0)" onclick ="callapplicationInstall('ftp://'+username+':'+password+'@'+server1+'/InstallTestapp.ipa');">Call applicationInstall with FTP url</a>
-			</div>
-			<span class="test_scenario_number">VT300-063 <br /></span>
-		</div>
-		<div class="test_scenario">
-			<div class="test_scenario_controls">
-				<a href="javascript:void(0)" onclick ="callapplicationInstall('http://'+server2+'/InstallTestapp.ipa');">call application Install with HTTP url</a>
+				<a href="javascript:void(0)" onclick ="callapplicationInstall(srvHttpUrl+'/download_app?device=ios');">call application Install with HTTP url</a>
 			</div>
 			<span class="test_scenario_number">VT300-064 <br /></span>
 		</div>
 		<div class="test_scenario">
 			<div class="test_scenario_controls">
-				<a href="javascript:void(0)" onclick ="callapplicationInstall('/app/public/testfiles/InstallTestapp.ipa');">call application Install 	with local url</a>
+				<a href="javascript:void(0)" onclick ="Path_file_downloded = download_filetolocal(srvHttpUrl+'/download_app?device=ios', 'auto_common_spec.ipa');">Download to local</a> <br />
+				<a href="javascript:void(0)" onclick ="callapplicationInstall(Path_file_downloded);">call Downloaded application Install with local url</a>
 			</div>
 			<span class="test_scenario_number">VT300-065 <br /></span>
 		</div>
@@ -375,19 +362,30 @@
 	<div class="method_tests win32"><b>Application Install for Windows Win32:</b>
 		<div class="test_scenario">
 			<div class="test_scenario_controls">
-				<a href="javascript:void(0)" onclick ="callapplicationInstall('ftp://'+username+':'+password+'@'+server1+'/InstallTestapp.exe');">Call applicationInstall with FTP url</a>
-			</div>
-			<span class="test_scenario_number">VT300-063 <br /></span>
-		</div>
-		<div class="test_scenario">
-			<div class="test_scenario_controls">
-				<a href="javascript:void(0)" onclick ="callapplicationInstall('http://'+server2+'/InstallTestapp.exe');">call application Install with HTTP url</a>
+				<a href="javascript:void(0)" onclick ="callapplicationInstall(srvHttpUrl+'/download_app?device=win32');">call application Install with HTTP url</a>
 			</div>
 			<span class="test_scenario_number">VT300-064 <br /></span>
 		</div>
 		<div class="test_scenario">
 			<div class="test_scenario_controls">
-				<a href="javascript:void(0)" onclick ="callapplicationInstall('/app/public/testfiles/InstallTestapp.exe');">call application Install 	with local url</a>
+				<a href="javascript:void(0)" onclick ="Path_file_downloded = download_filetolocal(srvHttpUrl+'/download_app?device=win32', 'everywan.exe');">Download to local</a> <br />
+				<a href="javascript:void(0)" onclick ="callapplicationInstall(Path_file_downloded);">call Downloaded application Install with local url</a>
+			</div>
+			<span class="test_scenario_number">VT300-065 <br /></span>
+		</div>
+	</div>
+	
+		<div class="method_tests wp8"><b>Application Install for Windows wp8:</b>
+		<div class="test_scenario">
+			<div class="test_scenario_controls">
+				<a href="javascript:void(0)" onclick ="callapplicationInstall(srvHttpUrl+'/download_app?device=wp8');">call application Install with HTTP url</a>
+			</div>
+			<span class="test_scenario_number">VT300-064 <br /></span>
+		</div>
+		<div class="test_scenario">
+			<div class="test_scenario_controls">
+				<a href="javascript:void(0)" onclick ="Path_file_downloded = download_filetolocal(srvHttpUrl+'/download_app?device=wp8', 'everywan.exe');">Download to local</a> <br />
+				<a href="javascript:void(0)" onclick ="callapplicationInstall(Path_file_downloded);">call Downloaded application Install with local url</a>
 			</div>
 			<span class="test_scenario_number">VT300-065 <br /></span>
 		</div>
@@ -401,7 +399,15 @@
 	<div class="method_tests wm">
 		<div class="test_scenario">
 			<div class="test_scenario_controls">
-				<a href="javascript:void(0)" onclick ="callapplicationUninstall('InstallTestapp');"> call applicationUninstall with application name 'InstallTestapp'</a>
+				<a href="javascript:void(0)" onclick ="callapplicationUninstall('TestAppWM6.5');"> call applicationUninstall with application name 'TestAppWM6.5'</a>
+			</div>
+		</div>
+	</div>
+	
+	<div class="method_tests wm">CE <br />
+		<div class="test_scenario">
+			<div class="test_scenario_controls">
+				<a href="javascript:void(0)" onclick ="callapplicationUninstall('TestAppCE');"> call applicationUninstall with application name 'TestAppCE'</a>
 			</div>
 		</div>
 	</div>
@@ -409,15 +415,15 @@
 	<div class="method_tests win32">
 		<div class="test_scenario">
 			<div class="test_scenario_controls">
-				<a href="javascript:void(0)" onclick ="callapplicationUninstall('InstallTestapp');"> call applicationUninstall with application name 'InstallTestapp'</a>
+				<a href="javascript:void(0)" onclick ="callapplicationUninstall('everywan');"> call applicationUninstall with application name 'everywan'</a>
 			</div>
 		</div>
 	</div>
 	
-	<div class="method_tests win32">
+	<div class="method_tests android">
 		<div class="test_scenario">
 			<div class="test_scenario_controls">
-				<a href="javascript:void(0)" onclick ="callapplicationUninstall('com.android.InstallTestapp');"> call applicationUninstall with application name 'InstallTestapp'</a>
+				<a href="javascript:void(0)" onclick ="callapplicationUninstall('com.rhomobile.testapp');"> call applicationUninstall with application name 'com.rhomobile.testapp'</a>
 			</div>
 		</div>
 	</div>
@@ -425,7 +431,7 @@
 	<div class="method_tests wp8">
 		<div class="test_scenario">
 			<div class="test_scenario_controls">
-				<a href="javascript:void(0)" onclick ="callapplicationUninstall('InstallTestapp');"> call applicationUninstall with application name 'InstallTestapp'</a>
+				<a href="javascript:void(0)" onclick ="callapplicationUninstall('everywan');"> call applicationUninstall with application name 'everywan'</a>
 			</div>
 		</div>
 	</div>
@@ -433,27 +439,7 @@
 		<span class="test_scenario_number">VT300-066 <br /></span>
 </div>
 
-<div class="method_tests android ios win32 wm wp8">
-	<div class="method_name">Rho.System.bringToFront</div>
-	<div class="method_desc">Bring application window to the top of the screen</div>
-	<div class="test_scenario">
-		<div class="test_scenario_controls">
-			<a href="javascript:void(0)" onclick ="callbringToFront();">Call bringToFront()</a>
-		</div>
-		<span class="test_scenario_number">VT300-067 <br /></span>
-	</div>
-</div>
 
-<div class="method_tests android ios win32 wm wp8">
-	<div class="method_name">Rho.System.deleteFolder</div>
-	<div class="method_desc">Delete Folder : Deletes the folder /public/testfiles/testfoldertodelete</div>
-	<div class="test_scenario">
-		<div class="test_scenario_controls">
-		<a href="javascript:void(0)" onclick ="calldeleteFolder('/app/public/testfiles/testfoldertodelete');">Call deleteFolder</a>
-	</div>
-	<span class="test_scenario_number">VT300-069 <br /></span>
-	</div>
-</div>
 
 <div class="method_tests android ios win32 wm wp8">
 	<div class="method_name">Rho.System.getStartParams</div>
@@ -466,13 +452,24 @@
 	</div>
 </div>
 
+<!-- Install** methods family will implemented as another feature  -->
+
 <div class="method_tests android ios win32 wm wp8">
 	<div class="method_name">Rho.System.isApplicationInstalled</div>
 	<div class="method_desc">Is Application Installed </div>
 	<div class="method_tests wm">WM <br />
 		<div class="test_scenario">
 			<div class="test_scenario_controls">
-				<a href="javascript:void(0)" onclick ="callisApplicationInstalled('InstallTestapp');">Call isApplicationInstalled() with correct app name 'InstallTestapp'</a>
+				<a href="javascript:void(0)" onclick ="callisApplicationInstalled('TestAppWM6.5');">Call isApplicationInstalled() with correct app name 'TestAppWM6.5'</a>
+			</div>
+			<span class="test_scenario_number">VT300-077 <br /></span>
+		</div>
+	</div>
+	
+	<div class="method_tests wm">CE <br />
+		<div class="test_scenario">
+			<div class="test_scenario_controls">
+				<a href="javascript:void(0)" onclick ="callisApplicationInstalled('TestAppCE');">Call isApplicationInstalled() with correct app name 'TestAppCE'</a>
 			</div>
 			<span class="test_scenario_number">VT300-077 <br /></span>
 		</div>
@@ -480,7 +477,7 @@
 	<div class="method_tests Android"> Android <br />
 		<div class="test_scenario">
 			<div class="test_scenario_controls">
-				<a href="javascript:void(0)" onclick ="callisApplicationInstalled('com.android.InstallTestapp');">Call isApplicationInstalled() with correct app name 'InstallTestapp'</a>
+				<a href="javascript:void(0)" onclick ="callisApplicationInstalled('com.rhomobile.testapp');">Call isApplicationInstalled() with correct app name 'InstallTestapp'</a>
 			</div>
 			<span class="test_scenario_number">VT300-077 <br /></span>
 		</div>
@@ -489,7 +486,7 @@
 	<div class="method_tests ios"> IOS <br />
 		<div class="test_scenario">
 			<div class="test_scenario_controls">
-				<a href="javascript:void(0)" onclick ="callisApplicationInstalled('InstallTestapp');">Call isApplicationInstalled() with correct app name 'InstallTestapp'</a>
+				<a href="javascript:void(0)" onclick ="callisApplicationInstalled('auto_common_spec');">Call isApplicationInstalled() with correct app name 'auto_common_spec'</a>
 			</div>
 			<span class="test_scenario_number">VT300-077 <br /></span>
 		</div>
@@ -498,7 +495,7 @@
 	<div class="method_tests wp8"> WP8 <br />
 		<div class="test_scenario">
 			<div class="test_scenario_controls">
-				<a href="javascript:void(0)" onclick ="callisApplicationInstalled('InstallTestapp');">Call isApplicationInstalled() with correct app name 'InstallTestapp'</a>
+				<a href="javascript:void(0)" onclick ="callisApplicationInstalled('everywan');">Call isApplicationInstalled() with correct app name 'everywan'</a>
 			</div>
 			<span class="test_scenario_number">VT300-077 <br /></span>
 		</div>
@@ -507,7 +504,7 @@
 	<div class="method_tests win32"> Win32 <br />
 		<div class="test_scenario">
 			<div class="test_scenario_controls">
-				<a href="javascript:void(0)" onclick ="callisApplicationInstalled('InstallTestapp');">Call isApplicationInstalled() with correct app name 'InstallTestapp'</a>
+				<a href="javascript:void(0)" onclick ="callisApplicationInstalled('everywan');">Call isApplicationInstalled() with correct app name 'everywan'</a>
 			</div>
 			<span class="test_scenario_number">VT300-077 <br /></span>
 		</div>
@@ -520,6 +517,8 @@
 		<span class="test_scenario_number">VT300-078 <br /></span>
 	</div>
 </div>
+
+
 
 <div class="method_tests android ios win32 wm wp8">
 	<div class="method_name">Rho.System.openUrl</div>
@@ -549,7 +548,7 @@
 	</div>
 </div>
 
-<div class="method_tests android ios win32 wm wp8">
+<div class="method_tests ios">
 	<div class="method_name">Rho.System.setDoNotBackupAttribute</div>
 	<div class="method_desc">Set do not backup attribute for file ('/app/public/testfiles/donotbackup.txt') </div>
 	<div class="test_scenario">
@@ -623,7 +622,9 @@
 	</div>
 </div>
 
-<div class="method_tests android ios win32 wm wp8">
+
+<!-- Use **zip** methods family tests in auto tests systemRE1Spec.js -->
+<!-- <div class="method_tests android ios win32 wm wp8">
 	<div class="method_name">Rho.System.unzipFile and Rho.System.zipFile</div>
 	<div class="method_desc"> Zip and Unzip File : Zip location is /public/testfiles/</div>
 	<div class="test_scenario">
@@ -672,6 +673,8 @@
 	</div>		
 </div>
 
+-->
+
 <div class="method_tests android ios win32 wm wp8">
 	<div class="method_name">Rho.System.setproperty</div>
 	<div class="method_desc">Set Property </div>
@@ -685,14 +688,14 @@
 		<div class="test_scenario">
 			<div class="test_scenario_controls">
 				<div class="method_desc">IOS only </div>	    
-				<a href="javascript:void(0)" onclick ="callsetProperty('applicationIconBadge',1);">Call setproperty with applicationIconBadge as 1</a>
+				<a href="javascript:void(0)" onclick ="callsetProperty('applicationIconBadge','1');">Call setproperty with applicationIconBadge as 1</a>
 			</div>
 			<span class="test_scenario_number">VT300-104  <br /></span>
 		</div>
 		<div class="test_scenario">
 			<div class="test_scenario_controls">
 				<div class="method_desc">IOS only </div>
-				<a href="javascript:void(0)" onclick ="callsetProperty('applicationIconBadge',0);"> Call set property with applicationIconBadge as 0</a>
+				<a href="javascript:void(0)" onclick ="callsetProperty('applicationIconBadge','0');"> Call set property with applicationIconBadge as 0</a>
 			</div>
 			<span class="test_scenario_number">VT300-105<br /></span>
 		</div>
@@ -708,14 +711,14 @@
 		<div class="test_scenario">
 			<div class="test_scenario_controls">	
 				<div class="method_desc">Windows desktop </div>	
-				<a href="javascript:void(0)" onclick ="callsetProperty('lockWindowSize',true);"> Call setproperty with lockWindowSize as true</a>
+				<a href="javascript:void(0)" onclick ="callsetProperty('lockWindowSize','true');"> Call setproperty with lockWindowSize as true</a>
 			</div>
 			<span class="test_scenario_number">VT300-109/VT300-111 <br /></span>
 		</div>
 		<div class="test_scenario">
 			<div class="test_scenario_controls">
 				<div class="method_desc">Windows desktop </div>
-				<a href="javascript:void(0)" onclick ="callsetProperty('lockWindowSize',false);"> Call set property with lockWindowSize as false</a>
+				<a href="javascript:void(0)" onclick ="callsetProperty('lockWindowSize','false');"> Call set property with lockWindowSize as false</a>
 			</div>
 			<span class="test_scenario_number">VT300-110/VT300-112 <br /></span>
 		</div>
@@ -731,13 +734,13 @@
 	<div class="method_tests android ios">
 		<div class="test_scenario">
 			<div class="test_scenario_controls">
-				<a href="javascript:void(0)" onclick ="callsetProperty('screenAutoRotate',true);">Call set property with screenAutoRotate as true</a>
+				<a href="javascript:void(0)" onclick ="callsetProperty('screenAutoRotate','true');">Call set property with screenAutoRotate as true</a>
 			</div>
 			<span class="test_scenario_number">VT300-113 <br /></span>
 		</div>		
 		<div class="test_scenario">
 			<div class="test_scenario_controls">
-				<a href="javascript:void(0)" onclick ="callsetProperty('screenAutoRotate',false);">Call set property with screenAutoRotate as false</a>
+				<a href="javascript:void(0)" onclick ="callsetProperty('screenAutoRotate','false');">Call set property with screenAutoRotate as false</a>
 			</div>
 			<span class="test_scenario_number">VT300-114 <br /></span>
 		</div>
@@ -749,14 +752,14 @@
 		<div class="test_scenario">
 			<div class="test_scenario_controls">
 				<div class="method_desc">(IOS and Android) </div>
-				<a href="javascript:void(0)" onclick ="callsetProperty('screenSleeping',true);"> Call set property with screenSleeping as true</a>
+				<a href="javascript:void(0)" onclick ="callsetProperty('screenSleeping','true');"> Call set property with screenSleeping as true</a>
 			</div>
 			<span class="test_scenario_number">VT300-117 <br /></span>
 		</div>
 		<div class="test_scenario">
 			<div class="test_scenario_controls">
 				<div class="method_desc">(IOS and Android) </div>
-				<a href="javascript:void(0)" onclick ="callsetProperty('screenSleeping',false);">Call set property with screenSleeping as false</a>
+				<a href="javascript:void(0)" onclick ="callsetProperty('screenSleeping','false');">Call set property with screenSleeping as false</a>
 			</div>
 			<span class="test_scenario_number">VT300-118 <br /></span>
 		</div>		
@@ -808,14 +811,14 @@
 		<div class="test_scenario">
 			<div class="test_scenario_controls">
 				<div class="method_desc">Windows desktop </div>		
-				<a href="javascript:void(0)" onclick ="callsetProperties('lockWindowSize',true);">call set/getproperties with lockWindowSize as true</a>
+				<a href="javascript:void(0)" onclick ="callsetProperties('lockWindowSize','true');">call set/getproperties with lockWindowSize as true</a>
 			</div>
 			<span class="test_scenario_number">VT300-159 <br /></span>
 		</div>		
 		<div class="test_scenario">
 			<div class="test_scenario_controls">	
 				<div class="method_desc">Windows desktop </div>		
-				<a href="javascript:void(0)" onclick ="callsetProperties('lockWindowSize',false);">call set/getproperties with lockWindowSize as false</a>
+				<a href="javascript:void(0)" onclick ="callsetProperties('lockWindowSize','false');">call set/getproperties with lockWindowSize as false</a>
 			</div>
 			<span class="test_scenario_number">VT300-160 <br /></span>
 		</div>		
@@ -828,14 +831,14 @@
 	<div class="method_tests android ios">
 		<div class="test_scenario">
 			<div class="test_scenario_controls">		
-				<a href="javascript:void(0)" onclick ="callsetProperties('screenAutoRotate',true);">call set/getproperties with screenAutoRotate as true</a>
+				<a href="javascript:void(0)" onclick ="callsetProperties('screenAutoRotate','true');">call set/getproperties with screenAutoRotate as true</a>
 			
 			</div>
 			<span class="test_scenario_number">VT300-170 <br /></span>
 		</div>		
 		<div class="test_scenario">
 			<div class="test_scenario_controls">		
-			<a href="javascript:void(0)" onclick ="callsetProperties('screenAutoRotate',false);">call set/getproperties with screenAutoRotate as false</a>
+			<a href="javascript:void(0)" onclick ="callsetProperties('screenAutoRotate','false');">call set/getproperties with screenAutoRotate as false</a>
 			</div>
 			<span class="test_scenario_number">VT300-171 <br /></span>
 		</div>
@@ -855,14 +858,14 @@
 		<div class="test_scenario">
 			<div class="test_scenario_controls">		
 				<div class="method_desc">Android and IOS only </div>
-				<a href="javascript:void(0)" onclick ="callsetProperties('screenSleeping',true);">call set/getproperties with screenSleeping as true</a>
+				<a href="javascript:void(0)" onclick ="callsetProperties('screenSleeping','true');">call set/getproperties with screenSleeping as true</a>
 			</div>
 			<span class="test_scenario_number">VT300-176 <br /></span>
 		</div>
 		<div class="test_scenario">
 			<div class="test_scenario_controls">	
 				<div class="method_desc">Android and IOS only </div>	
-				<a href="javascript:void(0)" onclick ="callsetProperties('screenSleeping',false);">call set/getproperties with screenSleeping as false</a>
+				<a href="javascript:void(0)" onclick ="callsetProperties('screenSleeping','false');">call set/getproperties with screenSleeping as false</a>
 			</div>
 			<span class="test_scenario_number">VT300-177 <br /></span>
 		</div>		

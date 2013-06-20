@@ -139,7 +139,7 @@
             JUnitXmlReporter.finished_at = (new Date()).getTime();
 			//Now quit the app
 			//application.quit();
-			var xmlhttp;
+			/*var xmlhttp;
 			if (window.XMLHttpRequest)
   			{// code for IE7+, Firefox, Chrome, Opera, Safari
   				xmlhttp=new XMLHttpRequest();
@@ -149,7 +149,7 @@
   				xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
   			}
   			xmlhttp.open("GET","/app/Settings/quitApp", false);
-			xmlhttp.send();
+			xmlhttp.send();*/
         },
 
         getNestedOutput: function(suite) {

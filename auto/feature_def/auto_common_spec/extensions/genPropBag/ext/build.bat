@@ -20,3 +20,10 @@ rake --trace
 
 )
 
+if "%RHO_PLATFORM%" == "wp8" (
+
+cd platform\wp8
+rake --trace
+
+)
+
