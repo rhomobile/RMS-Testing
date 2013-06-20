@@ -284,72 +284,73 @@ describe("Barcode JS API Test", function() {
 				});
 			});
 
-/*
-			describe("Barcode property set using enable() for "+ scntype +": "+ scnname, function() {
+			if(Rho.System.platform == "ANDROID")
+			{
+				describe("Barcode property set using enable() for "+ scntype +": "+ scnname, function() {
 
-				var flag = false;
+					var flag = false;
 
-				beforeEach(function() {
-					flag = false;
-				});
+					beforeEach(function() {
+						flag = false;
+					});
 
-				afterEach(function() {
-					enumObject.disable();
-				});
+					afterEach(function() {
+						enumObject.disable();
+					});
 
-				for (var i=0;i<arrScanner.length;i++){
+					for (var i=0;i<arrScanner.length;i++){
 
-					(function(idx){
+						(function(idx){
 
-						it(arrScanner[idx]['testName'], function() {
+							it(arrScanner[idx]['testName'], function() {
 
-							runs(function() {
+								runs(function() {
 
-								var propertyName = arrScanner[idx]['propertyName'];
-								var propertyValue = arrScanner[idx]['propertyValue'];
+									var propertyName = arrScanner[idx]['propertyName'];
+									var propertyValue = arrScanner[idx]['propertyValue'];
 
-								if (propertyValue == 'true')
-									var strProperty = '{"'+propertyName+'" :'+true+'}';
-								else if (propertyValue == 'false')
-									var strProperty = '{"'+propertyName+'" :'+false+'}';
-								else if (!isNaN(propertyValue)){
-									propertyValue = parseInt(propertyValue);
-									var strProperty = '{"'+propertyName+'" :'+propertyValue+'}';
-								}
-								else{
-									var strProperty = '{"'+propertyName+'" : "'+propertyValue+'"}'
-								}
+									if (propertyValue == 'true')
+										var strProperty = '{"'+propertyName+'" :'+true+'}';
+									else if (propertyValue == 'false')
+										var strProperty = '{"'+propertyName+'" :'+false+'}';
+									else if (!isNaN(propertyValue)){
+										propertyValue = parseInt(propertyValue);
+										var strProperty = '{"'+propertyName+'" :'+propertyValue+'}';
+									}
+									else{
+										var strProperty = '{"'+propertyName+'" : "'+propertyValue+'"}'
+									}
 
-								var objProperty = JSON.parse(strProperty);
+									var objProperty = JSON.parse(strProperty);
 
-								enumObject.enable(objProperty, scanCallback);
+									enumObject.enable(objProperty, scanCallback);
 
-								setTimeout(function() {
-									flag = true;
-					 			}, 8000);
+									setTimeout(function() {
+										flag = true;
+									}, ENABLE_TIMEOUT_VALUE);
+								});
+
+								waitsFor(function() {
+									return flag;
+								}, "Waiting for enable", 9000);
+									
+								runs(function() {
+
+									var strGetProperty = '["'+arrScanner[idx]['propertyName']+'"]';
+									var objGetProperty = JSON.parse(strGetProperty);
+
+									var data = enumObject.getProperties(objGetProperty);
+
+									data = data[arrScanner[idx]['propertyName']];
+									expect(data).toEqual(arrScanner[idx]['expectedResult']);
+								});
+
 							});
+						})(i);
 
-							waitsFor(function() {
-								return flag;
-							}, "Waiting for enable", 9000);
-								
-							runs(function() {
-
-								var strGetProperty = '["'+arrScanner[idx]['propertyName']+'"]';
-								var objGetProperty = JSON.parse(strGetProperty);
-
-								var data = enumObject.getProperties(objGetProperty);
-
-								data = data[arrScanner[idx]['propertyName']];
-								expect(data).toEqual(arrScanner[idx]['expectedResult']);
-							});
-
-						});
-					})(i);
-
-				}
-			});
-*/
+					}
+				});
+			}
 
 		})(enumData[j],arrSCN);
 
