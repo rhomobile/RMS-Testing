@@ -49,13 +49,13 @@
     <script type="text/javascript">
     	function getPropertyall(propertyName)
     	{
-    		data = getProperty(propertyName)
+    		var data = Rho.System.getProperty(propertyName)
     		$("#getPropertyresult span.result").text(JSON.stringify(data));
     	}
 
     	function getPropertiesall(propertyName)
     	{
-    		data = getProperties([propertyName])
+    		var data = Rho.System.getProperties([propertyName])
     		$("#getPropertiesresult span.result").text(JSON.stringify(data));
     	}
     </script>
@@ -139,28 +139,28 @@
 	<div id="getPropertiesresult">Result:  <span class="result"> </span></div>
 	<div class="test_scenario">
 		<div class="test_scenario_controls">
-			<a href="javascript:void(0)" onclick ="getPropertiesyall('hasCellNetwork')">Call getproperties with hasCellNetwork</a>
+			<a href="javascript:void(0)" onclick ="getPropertiesall('hasCellNetwork')">Call getproperties with hasCellNetwork</a>
 		</div>
 		<span class="test_scenario_number">VT300-142 / VT300-143  <br /></span>
 	</div>
 
 	<div class="test_scenario">
 	<div class="test_scenario_controls">
-			<a href="javascript:void(0)" onclick ="getpropertiesall('hasNetwork')">Call getproperties with hasNetwork</a>
+			<a href="javascript:void(0)" onclick ="getPropertiesall('hasNetwork')">Call getproperties with hasNetwork</a>
 		</div>
 		<span class="test_scenario_number">VT300-144 / VT300-145 <br /></span>
 	</div>
 
 	<div class="test_scenario">
 	<div class="test_scenario_controls">
-			<a href="javascript:void(0)" onclick ="getpropertiesall('hasWifiNetwork')">Call getproperties with hasWifiNetwork</a>
+			<a href="javascript:void(0)" onclick ="getPropertiesall('hasWifiNetwork')">Call getproperties with hasWifiNetwork</a>
 		</div>
 		<span class="test_scenario_number">VT300-148 / VT300-149 <br /></span>
 	</div>
 
 	<div class="test_scenario">
 	<div class="test_scenario_controls">
-			<a href="javascript:void(0)" onclick ="getpropertiesall('locale')">Call getproperties with locale</a>
+			<a href="javascript:void(0)" onclick ="getPropertiesall('locale')">Call getproperties with locale</a>
 		</div>
 		<span class="test_scenario_number">VT300-158 <br /></span>
 	</div>
