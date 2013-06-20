@@ -69,7 +69,9 @@ def run_apps(platform)
 	cfgfile = File.join($app_path, 'rhoconfig.txt')
 	cfg = File.read(cfgfile)
 	cfg.gsub!(/(rhoconnect_push_server.*)/, "rhoconnect_push_server = 'http://#{RhoconnectHelper.push_host}:#{RhoconnectHelper.push_port}'")
-	File.open(cfgfile, 'w') {|f| f.write cfg}
+	cfg.gsub!(/(Push.rhoconnect.pushServer.*)/, "Push.rhoconnect.pushServer = 'http://#{RhoconnectHelper.push_host}:#{RhoconnectHelper.push_port}'")
+	File.open(cfgfile, 'w') { |f| f.write cfg }
+
 	# Patching rhodes 'build.yml' file (setup sdk and extentions properties)
 	push_client_path = File.join($spec_path, 'rhoconnect_push_client')
 	File.open(File.join(push_client_path, "build.yml"), 'w') do |bf|
