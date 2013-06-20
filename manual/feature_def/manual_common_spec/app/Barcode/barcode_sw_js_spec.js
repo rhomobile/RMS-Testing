@@ -392,8 +392,75 @@ describe("Barcode Test", function() {
 		});
 	});
 
+	it("VT282-2006 | call setDefault and getDefault |" + scntype, function() {
+
+		    Rho.Barcode.setDefault(enumObject);
+		    var defaultobj = Rho.Barcode.getDefault();						  
+			expect(scnid).toEqual(defaultobj.getProperty('ID'));
+	});
+
+	it("VT282-2006A | set and get using Default |" + scntype, function() {
+
+		   // Rho.Barcode.default = enumObject;
+		   // var defaultobj = Rho.Barcode.default;
+			expect(scnid).toEqual(defaultobj.getProperty('ID'));
+	});
+
 })(enumData[j]);
 
 }
 
 });	
+
+
+describe("Enumerate Scanner ", function() {
+	var enumObjCount = false;
+
+	var enumCallback = function (enumobj){
+
+		enumobj.length>0 ? enumObjCount=true : enumObjCount=false
+
+	};
+
+	beforeEach(function() {
+		enumObjCount = false;
+	});
+
+	it("Enumerate Scanner callback as function", function() {
+				
+		runs(function() {
+			Rho.Barcode.enumerate(enumCallback);
+		});
+		waitsFor(function(){
+			return enumObjCount;
+		});
+		runs(function(){
+			expect(enumObjCount).toEqual(true);
+		});
+	});
+
+	it("Enumerate Scanner with anonymous function as callback", function() {
+			
+		runs(function() {
+			Rho.Barcode.enumerate(function(obj){
+				enumCallback(obj);
+			});
+		});
+		waitsFor(function(){
+			return enumObjCount;
+		});
+		runs(function(){
+			expect(enumObjCount).toEqual(true);
+		});
+ 	});
+
+	it("Enumerate Scanners without callback (Synchronous Access)", function() {
+			
+		runs(function() {
+			var obj = Rho.Barcode.enumerate();
+			callBackfired = enumCallback(obj);
+			expect(enumObjCount).toEqual(true);
+		});
+ 	});
+ 	
+});
