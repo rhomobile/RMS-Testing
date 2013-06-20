@@ -123,9 +123,10 @@ var arr_scanner_property = [
 	testName		:	"VT282-3016 | Set illuminationMode:auto | auto",
 	propertyName	:	"illuminationMode",
 	scannerTypes	:	"Imager",
-	OSTypes			:	"All",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"auto",
-	expectedResult	:	"auto"
+	expectedResult	:	"auto",
+	notOnAndroidImager: true
 },
 {
 	testName		:	"VT282-3017 | Set illuminationMode:alwaysOn | alwaysOn",
@@ -133,7 +134,8 @@ var arr_scanner_property = [
 	scannerTypes	:	"Imager",
 	OSTypes			:	"All",
 	propertyValue	:	"alwaysOn",
-	expectedResult	:	"alwaysOn"
+	expectedResult	:	"alwaysOn",
+	notOnAndroidImager: true
 },
 {
 	testName		:	"VT282-3018 | Set illuminationMode:alwaysOff | alwaysOff",
@@ -141,7 +143,8 @@ var arr_scanner_property = [
 	scannerTypes	:	"Imager",
 	OSTypes			:	"All",
 	propertyValue	:	"alwaysOff",
-	expectedResult	:	"alwaysOff"
+	expectedResult	:	"alwaysOff",
+	notOnAndroidImager: true
 },
 {
 	testName		:	"VT282-3019 | Set inverse1dMode:enabled| enabled",
@@ -229,7 +232,8 @@ var arr_scanner_property = [
 	scannerTypes	:	"All",
 	OSTypes			:	"All",
 	propertyValue	:	"softwareReticle",
-	expectedResult	:	"softwareReticle"
+	expectedResult	:	"softwareReticle",
+	notOnAndroidImager: true
 },
 {
 	testName		:	"VT282-3030 | Set poorQuality1dMode:true | true",
@@ -261,7 +265,8 @@ var arr_scanner_property = [
 	scannerTypes	:	"Imager",
 	OSTypes			:	"All",
 	propertyValue	:	"enabled",
-	expectedResult	:	"enabled"
+	expectedResult	:	"enabled",
+	notOnAndroidImager: true
 },
 {
 	testName		:	"VT282-3034 | Set viewfinderMode:disabled | disabled",
@@ -269,7 +274,8 @@ var arr_scanner_property = [
 	scannerTypes	:	"Imager",
 	OSTypes			:	"WINDOWS",
 	propertyValue	:	"disabled",
-	expectedResult	:	"disabled"
+	expectedResult	:	"disabled",
+	notOnAndroidImager: true
 },
 {
 	testName		:	"VT282-3035 | Set viewfinderMode:staticReticle | staticReticle",
@@ -277,7 +283,8 @@ var arr_scanner_property = [
 	scannerTypes	:	"Imager",
 	OSTypes			:	"All",
 	propertyValue	:	"staticReticle",
-	expectedResult	:	"staticReticle"
+	expectedResult	:	"staticReticle",
+	notOnAndroidImager: true
 },
 {
 	testName		:	"VT282-3036 | Set viewfinderMode:staticReticle | dynamicReticle",
@@ -285,7 +292,8 @@ var arr_scanner_property = [
 	scannerTypes	:	"Imager",
 	OSTypes			:	"WINDOWS",
 	propertyValue	:	"dynamicReticle",
-	expectedResult	:	"dynamicReticle"
+	expectedResult	:	"dynamicReticle",
+	notOnAndroidImager: true
 },
 {
 	testName		:	"VT282-3037 | Set viewfinderFeedback:enabled | enabled",
@@ -2627,7 +2635,7 @@ var arr_scanner_property = [
 	testName		:	"VT282-4231 | Set trioptic39Redundancy :True  | true",
 	propertyName	:	"trioptic39Redundancy",
 	scannerTypes	:	"Imager",
-	OSTypes			:	"All",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
 },
@@ -2635,7 +2643,7 @@ var arr_scanner_property = [
 	testName		:	"VT282-4232 | Set trioptic39Redundancy :false  | false",
 	propertyName	:	"trioptic39Redundancy",
 	scannerTypes	:	"Imager",
-	OSTypes			:	"All",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
@@ -3247,6 +3255,7 @@ var scanCallback = function (data){
 
 var getApplicableProperties = function (objScnType){
 	
+	var isAndroid = (Rho.System.platform == "ANDROID");
 	var deviceScannerType = objScnType.getProperty('friendlyName');
 	var finalSCNObj = [];
 
@@ -3258,6 +3267,10 @@ var getApplicableProperties = function (objScnType){
 			if(scnType == "All")
 			{ 
 				finalSCNObj.push(arr_scanner_property[i]);
+			}
+			else if (deviceScannerType == "2D Imager" && isAndroid && arr_scanner_property[i]['notOnAndroidImager'] === true)//If it is the Android hardware Imager
+			{
+				//Dont add
 			}
 			else if (deviceScannerType.indexOf(scnType) != -1)
 			{

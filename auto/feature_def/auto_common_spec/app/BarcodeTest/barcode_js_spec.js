@@ -6,6 +6,7 @@ describe("Barcode JS API Test", function() {
     var enumData = Rho.Barcode.enumerate();
     var callbackstatus = false;
 
+
     var callbackgetproperties = function (data){
 		getpropertiesdata = JSON.stringify(data);
 		callbackstatus = true;
@@ -24,6 +25,15 @@ describe("Barcode JS API Test", function() {
 
 			var scnname = enumObject.getProperty('friendlyName');
 			var scntype = enumObject.getProperty('ID');
+		    var RETICLE_TYPE = 'softwareReticle';
+			if(Rho.System.platform == "ANDROID" && scnname == "2D Imager")
+			{
+				RETICLE_TYPE = 'hardwareReticle';
+			}
+			else
+			{
+				RETICLE_TYPE = 'softwareReticle';
+			}
 
 			describe("Enable Scanner "+ scntype +": "+ scnname, function() {
 
@@ -156,7 +166,7 @@ describe("Barcode JS API Test", function() {
 						it("VT282-2001 | call getProperties() with sync callback and hash |" + scntype, function() {
 
 							runs(function() {
-							    enumObject.setProperties({'allDecoders':'false','picklistMode':'softwareReticle','code93':'true'});
+							    enumObject.setProperties({'allDecoders':'false','picklistMode':RETICLE_TYPE,'code93':'true'});
 								enumObject.getProperties(['allDecoders','picklistMode','code93'],callbackgetproperties);
 							});
 
@@ -167,7 +177,7 @@ describe("Barcode JS API Test", function() {
 							runs(function() {							
 								expect(getpropertiesdata).toContain('true');
 								expect(getpropertiesdata).toContain('false');
-								expect(getpropertiesdata).toContain('softwareReticle');	
+								expect(getpropertiesdata).toContain(RETICLE_TYPE);	
 							});
 						});
 
@@ -175,7 +185,7 @@ describe("Barcode JS API Test", function() {
 						it("VT282-2002 | call getProperties() with anonymous callback and hash |" + scntype, function() {
 
 							runs(function() {    
-							    enumObject.setProperties({'allDecoders':'false','picklistMode':'softwareReticle','code93':'true'});
+							    enumObject.setProperties({'allDecoders':'false','picklistMode':RETICLE_TYPE,'code93':'true'});
 								enumObject.getProperties(['allDecoders','picklistMode','code93'],function(data){getpropertiesdata = JSON.stringify(data);callbackstatus = true;});
 							});
 
@@ -186,19 +196,19 @@ describe("Barcode JS API Test", function() {
 							runs(function() {								
 								expect(getpropertiesdata).toContain('true');
 								expect(getpropertiesdata).toContain('false');
-								expect(getpropertiesdata).toContain('softwareReticle');	
+								expect(getpropertiesdata).toContain(RETICLE_TYPE);	
 							});							
 						});
 
 						it("VT282-2000 | call getProperties() without callback |" + scntype, function() {
 
 							    //enumObject.clearAllProperties();
-							    enumObject.setProperties({'allDecoders':'false','picklistMode':'softwareReticle','code93':'true'});
+							    enumObject.setProperties({'allDecoders':'false','picklistMode':RETICLE_TYPE,'code93':'true'});
 								var data = enumObject.getProperties(['allDecoders','picklistMode','code93']);
 								getpropertiesdata = JSON.stringify(data);
 								expect(getpropertiesdata).toContain('true');
 								expect(getpropertiesdata).toContain('false');
-								expect(getpropertiesdata).toContain('softwareReticle');								
+								expect(getpropertiesdata).toContain(RETICLE_TYPE);								
 						});
 
 
@@ -221,7 +231,7 @@ describe("Barcode JS API Test", function() {
 						it("VT282-2005 | call getProperty() with anonymous callback and property |" + scntype, function() {
 
 							runs(function() {
-							    enumObject.setProperty('picklistMode','softwareReticle');
+							    enumObject.setProperty('picklistMode',RETICLE_TYPE);
 								enumObject.getProperty('picklistMode',function(data){getpropertydata = data;callbackstatus = true;});
 							});
 
@@ -230,7 +240,7 @@ describe("Barcode JS API Test", function() {
 							});	
 							
 							runs(function() {	
-								expect(getpropertydata).toEqual('softwareReticle');
+								expect(getpropertydata).toEqual(RETICLE_TYPE);
 							});								
 						});
 
@@ -411,3 +421,5 @@ describe("Enumerate Scanner ", function() {
  	});
  	
 });
+
+
