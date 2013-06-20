@@ -3273,23 +3273,5 @@ var getApplicableProperties = function (objScnType){
 	return finalSCNObj;
 }
 
-/*
-var enumcount;
 
-var enumCallback = function (enumobj){
-	var enumobjlength = enumobj.length;
-	if (enumobjlength == 2)
-	{
-		enumcount = true;
-	}
-	else if (enumobjlength == 1)
-	{
-		enumcount = true;
-	}
-	else 
-	{
-		enumcount = false;
-	}
-		
-};
-*/
+var ENABLE_TIMEOUT_VALUE = (Rho.System.platform == "ANDROID" ? 10 : 8000);
