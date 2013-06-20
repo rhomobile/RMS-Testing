@@ -15,11 +15,11 @@ class SettingsController < Rho::RhoController
     # puts "Logged in: #{SyncEngine.logged_in}"
 
     SyncEngine.set_syncserver("http://#{SYNC_SERVER_HOST}:#{SYNC_SERVER_PORT}")
-    RhoConf.set_property_by_name('rhoconnect_push_server',"http://#{PUSH_SERVER_HOST}:#{PUSH_SERVER_PORT}")
-    puts "push server is #{RhoConf.get_property_by_name('rhoconnect_push_server')}"
+    RhoConf.set_property_by_name('Push.rhoconnect.pushServer',"http://#{PUSH_SERVER_HOST}:#{PUSH_SERVER_PORT}")
+    puts "push server is #{RhoConf.get_property_by_name('Push.rhoconnect.pushServer')}"
 
-    # System.set_push_notification('/app/Settings/push_callback', '')
-	  SyncEngine.login('pushclient', 'pushclient', '/app/Settings/login_callback' )
+    SyncEngine.login('pushclient', 'pushclient', '/app/Settings/login_callback' )
+    Rho::Push.getDeviceId url_for(:action => 'registration_callback')
   end
 
   def login_callback
@@ -38,24 +38,18 @@ class SettingsController < Rho::RhoController
     host = SPEC_LOCAL_SERVER_HOST
     port = SPEC_LOCAL_SERVER_PORT
     Rho::AsyncHttp.get :url => "http://#{host}:#{port}?error=#{errCode}"
-
     puts "sent error code to the spec server"
-    check_registration
+
   end
 
-  def check_registration
-    puts "Check push registration"
+  def registration_callback
+    puts "Push registration callback"
 
     host = SPEC_LOCAL_SERVER_HOST
     port = SPEC_LOCAL_SERVER_PORT
 
-    if(Rho::RhoConfig.exist?('push_pin') && Rho::RhoConfig.push_pin != '')
-      puts "RhoConfig: #{Rho::RhoConfig}"
-      puts "Sending device_id: #{Rho::RhoConfig.push_pin}"
-      Rho::AsyncHttp.get :url => "http://#{host}:#{port}?device_id=#{Rho::RhoConfig.push_pin}"
-    else
-      Rho::Timer.start(5000, url_for(:action=>'check_registration'), '')
-    end
+    puts "Sending deviceId: #{@params['result']}"
+    Rho::AsyncHttp.get :url => "http://#{host}:#{port}?device_id=#{@params['result']}"
   end
 
   def push_callback
