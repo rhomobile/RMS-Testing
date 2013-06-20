@@ -8,7 +8,6 @@ gcm_push_client/app/local_server.rb
 rhoconnect_push_client/bin
 rhoconnect_push_client/*.log
 rhoconnect_push_client/rholog.txt
-rhoconnect_push_client/build.yml
 rhoconnect_push_client/app/local_server.rb
 rhoconnect_push_client/app/push_server.rb
 rhoconnect_push_client/app/sync_server.rb

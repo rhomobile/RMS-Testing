@@ -1,4 +1,4 @@
-sdk: '../../../../../rhodes'
+# sdk: '../../../../../rhodes'
 sdkversion: 4.0.0
 name: Rho_Push_Client
 version: 1.02
@@ -23,6 +23,6 @@ android:
   # version: 4.2.2
 
 paths:
-  extensions: Path-to-Motorola-Extensions
+#  extensions: "/Users/alexb/workspace/Motorola-Extensions/extensions"
 
 extensions: ["json", "rhoconnect-client", "rhoconnect-push"]

@@ -12,14 +12,8 @@ class SettingsController < Rho::RhoController
 
   def index
     @msg = @params['msg']
-    puts "Logged in: #{SyncEngine.logged_in}"
-=begin
-      if SyncEngine.logged_in
-          puts "logging out"
-          SyncEngine.logout
-          sleep 5
-      end
-=end
+    # puts "Logged in: #{SyncEngine.logged_in}"
+
     SyncEngine.set_syncserver("http://#{SYNC_SERVER_HOST}:#{SYNC_SERVER_PORT}")
     RhoConf.set_property_by_name('rhoconnect_push_server',"http://#{PUSH_SERVER_HOST}:#{PUSH_SERVER_PORT}")
     puts "push server is #{RhoConf.get_property_by_name('rhoconnect_push_server')}"

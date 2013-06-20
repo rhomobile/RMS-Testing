@@ -75,9 +75,9 @@ def run_apps(platform)
 	File.open(File.join(push_client_path, "build.yml"), 'w') do |bf|
 	  File.open(File.join(push_client_path, "build.yml.example"), 'r') do |f|
 	    f.each do |line|
-	      if line =~ /sdk: Path-to-Rhodes/
+	      if line =~ /^sdk: '..\/..\/..\/..\/..\/rhodes'$/
 	      	  # FIXME: using installed rhodes gem (beta.21)
-	          bf.puts "#sdk: \"#{$rho_root}\"\n"
+	          bf.puts "# #{line}"
 	      elsif line =~ /Path-to-Motorola-Extensions/
 	      	  # FIXME: using installed rhodes gem (beta.21)
 	          bf.puts "#  extensions: \"#{$rhoelements_root}/extensions\"\n"
@@ -100,7 +100,7 @@ def run_apps(platform)
 			end
 
 			FileUtils.chdir File.join($spec_path, 'rhoconnect_push_client')
-			# system("rake clean:android")
+			# system("rake clean:android") # FIXME:
 			puts "\nBuilding rhodes app ..."
 			puts "rake device:#{$platform}:debug"
 			system("rake device:#{$platform}:debug").should == true
@@ -140,6 +140,7 @@ def run_apps(platform)
 			AndroidTools.load_app_and_run("-e", push_service_apk, "")
 			puts 'Building and starting rhodes application ...'
 			FileUtils.chdir File.join($spec_path, 'rhoconnect_push_client')
+			system("rake clean:android") # FIXME:
 			system("rake run:#{$platform}").should == true
 		end
 	else

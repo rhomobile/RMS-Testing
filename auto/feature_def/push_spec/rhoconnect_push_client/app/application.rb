@@ -13,8 +13,10 @@ class AppApplication < Rho::RhoApplication
     # SyncEngine::set_objectnotify_url("/app/Settings/sync_notify")
     SyncEngine.set_notification(-1, '/app/Settings/sync_notify', '')
     System.set_push_notification('/app/Settings/push_callback', '')
+    # TODO:
+    # Rho::Push.startNotifications '/app/Settings/push_callback'
   end
-  
+
   def on_ui_created
     super
   end
