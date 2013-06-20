@@ -370,7 +370,7 @@ describe("Barcode Test", function() {
 			setObjective("VT282-2008A | call getProperty() with ID with anonymous callback|");
 			setInstruction("check for retrurned value" + scnid);
 			setExpected("It should return the Scanner ID");
-			objSCN.getProperty(['ID'],function(data){enablecallbackdata(JSON.stringify(data));});
+			objSCN.getProperty('ID',function(data){enablecallbackdata(JSON.stringify(data));});
 			setTimeout(function() {
 				enableFlag = true;
 			}, 4000);
@@ -392,14 +392,14 @@ describe("Barcode Test", function() {
 		});
 	});
 
-	it("VT282-2006 | call setDefault and getDefault |" + scntype, function() {
+	it("VT282-2006 | call setDefault and getDefault |" + scnid, function() {
 
 		    Rho.Barcode.setDefault(enumObject);
 		    var defaultobj = Rho.Barcode.getDefault();						  
 			expect(scnid).toEqual(defaultobj.getProperty('ID'));
 	});
 
-	it("VT282-2006A | set and get using Default |" + scntype, function() {
+	it("VT282-2006A | set and get using Default |" + scnid, function() {
 
 		   // Rho.Barcode.default = enumObject;
 		   // var defaultobj = Rho.Barcode.default;
