@@ -2,7 +2,7 @@ var arr_scanner_property = [
 {
 	testName		:	"VT282-3001 | Set rastermode:None  | None",
 	propertyName	:	"rasterMode",
-	scannerTypes	:	"Laser",
+	scannerTypes	:	"1D Scanner",
 	OSTypes			:	"WINDOWS",
 	propertyValue	:	"none",
 	expectedResult	:	"none"
@@ -10,7 +10,7 @@ var arr_scanner_property = [
 {
 	testName		:	"VT282-3002 | Set rastermode:openAlways | openAlways",
 	propertyName	:	"rasterMode",
-	scannerTypes	:	"Laser",
+	scannerTypes	:	"1D Scanner",
 	OSTypes			:	"WINDOWS",
 	propertyValue	:	"openAlways",
 	expectedResult	:	"openAlways"
@@ -18,7 +18,7 @@ var arr_scanner_property = [
 {
 	testName		:	"VT282-3003 | Set rastermode:smart  | smart",
 	propertyName	:	"rasterMode",
-	scannerTypes	:	"Laser",
+	scannerTypes	:	"1D Scanner",
 	OSTypes			:	"WINDOWS",
 	propertyValue	:	"smart",
 	expectedResult	:	"smart"
@@ -26,7 +26,7 @@ var arr_scanner_property = [
 {
 	testName		:	"VT282-3004 | Set rastermode:cyclone | openAlways",
 	propertyName	:	"rasterMode",
-	scannerTypes	:	"Laser",
+	scannerTypes	:	"1D Scanner",
 	OSTypes			:	"WINDOWS",
 	propertyValue	:	"cyclone",
 	expectedResult	:	"cyclone"
@@ -34,7 +34,7 @@ var arr_scanner_property = [
 {
 	testName		:	"VT282-3005 | Set rasterHeight:50 | 50",
 	propertyName	:	"rasterHeight",
-	scannerTypes	:	"Laser",
+	scannerTypes	:	"1D Scanner",
 	OSTypes			:	"WINDOWS",
 	propertyValue	:	"50",
 	expectedResult	:	"50"
@@ -42,7 +42,7 @@ var arr_scanner_property = [
 {
 	testName		:	"VT282-3006 | Set rasterHeight:0 | 0",
 	propertyName	:	"rasterHeight",
-	scannerTypes	:	"Laser",
+	scannerTypes	:	"1D Scanner",
 	OSTypes			:	"WINDOWS",
 	propertyValue	:	"0",
 	expectedResult	:	"0"
@@ -50,7 +50,7 @@ var arr_scanner_property = [
 {
 	testName		:	"VT282-3007 | Set rasterHeight:100 | 100",
 	propertyName	:	"rasterHeight",
-	scannerTypes	:	"Laser",
+	scannerTypes	:	"1D Scanner",
 	OSTypes			:	"WINDOWS",
 	propertyValue	:	"100",
 	expectedResult	:	"100"
@@ -66,7 +66,7 @@ var arr_scanner_property = [
 {
 	testName		:	"VT282-3009 | Set aimMode:dot | dot",
 	propertyName	:	"aimMode",
-	scannerTypes	:	"Laser",
+	scannerTypes	:	"1D Scanner",
 	OSTypes			:	"WINDOWS",
 	propertyValue	:	"dot",
 	expectedResult	:	"dot"
@@ -74,7 +74,7 @@ var arr_scanner_property = [
 {
 	testName		:	"VT282-3010 | Set aimMode:slab | slab",
 	propertyName	:	"aimMode",
-	scannerTypes	:	"Laser",
+	scannerTypes	:	"1D Scanner",
 	OSTypes			:	"WINDOWS",
 	propertyValue	:	"slab",
 	expectedResult	:	"slab"
@@ -173,7 +173,7 @@ var arr_scanner_property = [
 {
 	testName		:	"VT282-3022 | Set linearSecurityLevel:redundancyAndLength | redundancyAndLength",
 	propertyName	:	"linearSecurityLevel",
-	scannerTypes	:	"Laser",
+	scannerTypes	:	"1D Scanner",
 	OSTypes			:	"WINDOWS",
 	propertyValue	:	"redundancyAndLength",
 	expectedResult	:	"redundancyAndLength"
@@ -213,7 +213,7 @@ var arr_scanner_property = [
 {
 	testName		:	"VT282-3027 | Set picklistMode:disabled | disabled",
 	propertyName	:	"picklistMode",
-	scannerTypes	:	"All",
+	scannerTypes	:	"Imager",
 	OSTypes			:	"All",
 	propertyValue	:	"disabled",
 	expectedResult	:	"disabled"
@@ -221,7 +221,7 @@ var arr_scanner_property = [
 {
 	testName		:	"VT282-3028 | Set picklistMode:hardwareReticle | hardwareReticle",
 	propertyName	:	"picklistMode",
-	scannerTypes	:	"All",
+	scannerTypes	:	"Imager",
 	OSTypes			:	"WINDOWS",
 	propertyValue	:	"hardwareReticle",
 	expectedResult	:	"hardwareReticle"
@@ -229,7 +229,7 @@ var arr_scanner_property = [
 {
 	testName		:	"VT282-3029 | Set picklistMode:softwareReticle | softwareReticle",
 	propertyName	:	"picklistMode",
-	scannerTypes	:	"All",
+	scannerTypes	:	"Imager",
 	OSTypes			:	"All",
 	propertyValue	:	"softwareReticle",
 	expectedResult	:	"softwareReticle",
@@ -394,7 +394,7 @@ var arr_scanner_property = [
 {
 	testName		:	"VT282-3049 | Set bidirectionalRedundancy :true | true",
 	propertyName	:	"bidirectionalRedundancy",
-	scannerTypes	:	"Laser",
+	scannerTypes	:	"1D Scanner",
 	OSTypes			:	"WINDOWS",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
@@ -402,7 +402,7 @@ var arr_scanner_property = [
 {
 	testName		:	"VT282-3050 | Set bidirectionalRedundancy :false | false",
 	propertyName	:	"bidirectionalRedundancy",
-	scannerTypes	:	"Laser",
+	scannerTypes	:	"1D Scanner",
 	OSTypes			:	"WINDOWS",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
@@ -410,7 +410,7 @@ var arr_scanner_property = [
 {
 	testName		:	"VT282-3051 | Set klasseEins :true | true",
 	propertyName	:	"klasseEins",
-	scannerTypes	:	"Laser",
+	scannerTypes	:	"1D Scanner",
 	OSTypes			:	"WINDOWS",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
@@ -418,7 +418,7 @@ var arr_scanner_property = [
 {
 	testName		:	"VT282-3052 | Set klasseEins :false | false",
 	propertyName	:	"klasseEins",
-	scannerTypes	:	"Laser",
+	scannerTypes	:	"1D Scanner",
 	OSTypes			:	"WINDOWS",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
@@ -458,7 +458,7 @@ var arr_scanner_property = [
 {
 	testName		:	"VT282-3057 | Set adaptiveScanning :true | true",
 	propertyName	:	"adaptiveScanning",
-	scannerTypes	:	"Laser",
+	scannerTypes	:	"1D Scanner",
 	OSTypes			:	"WINDOWS",
 	propertyValue	:	"true",
 	expectedResult	:	"true"
@@ -466,7 +466,7 @@ var arr_scanner_property = [
 {
 	testName		:	"VT282-3058 | Set adaptiveScanning :false | false",
 	propertyName	:	"adaptiveScanning",
-	scannerTypes	:	"Laser",
+	scannerTypes	:	"1D Scanner",
 	OSTypes			:	"WINDOWS",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
@@ -474,7 +474,7 @@ var arr_scanner_property = [
 {
 	testName		:	"VT282-3059 | Set dbpMode :normal | normal",
 	propertyName	:	"dbpMode",
-	scannerTypes	:	"Laser",
+	scannerTypes	:	"1D Scanner",
 	OSTypes			:	"WINDOWS",
 	propertyValue	:	"normal",
 	expectedResult	:	"normal"
@@ -482,7 +482,7 @@ var arr_scanner_property = [
 {
 	testName		:	"VT282-3060 | Set dbpMode :composite | composite",
 	propertyName	:	"dbpMode",
-	scannerTypes	:	"Laser",
+	scannerTypes	:	"1D Scanner",
 	OSTypes			:	"WINDOWS",
 	propertyValue	:	"composite",
 	expectedResult	:	"composite"
@@ -554,7 +554,7 @@ var arr_scanner_property = [
 {
 	testName		:	"VT282-3069 | Set beamWidth :normal | normal",
 	propertyName	:	"beamWidth",
-	scannerTypes	:	"Laser",
+	scannerTypes	:	"1D Scanner",
 	OSTypes			:	"WINDOWS",
 	propertyValue	:	"normal",
 	expectedResult	:	"normal"
@@ -562,7 +562,7 @@ var arr_scanner_property = [
 {
 	testName		:	"VT282-3070 | Set beamWidth :wide | wide",
 	propertyName	:	"beamWidth",
-	scannerTypes	:	"Laser",
+	scannerTypes	:	"1D Scanner",
 	OSTypes			:	"WINDOWS",
 	propertyValue	:	"wide",
 	expectedResult	:	"wide"
@@ -570,7 +570,7 @@ var arr_scanner_property = [
 {
 	testName		:	"VT282-3071 | Set beamWidth :narrow | narrow",
 	propertyName	:	"beamWidth",
-	scannerTypes	:	"Laser",
+	scannerTypes	:	"1D Scanner",
 	OSTypes			:	"WINDOWS",
 	propertyValue	:	"narrow",
 	expectedResult	:	"narrow"
@@ -3272,11 +3272,15 @@ var getApplicableProperties = function (objScnType){
 			{
 				//Dont add
 			}
-			else if (deviceScannerType.indexOf(scnType) != -1)
+			else if (deviceScannerType.indexOf(scnType) != -1) //for Imager and Laser
 			{
 				finalSCNObj.push(arr_scanner_property[i]);
 			}
-			else if ((deviceScannerType.indexOf("Camera") != -1) && scnType == "Imager")
+			else if ((deviceScannerType.indexOf("Camera") != -1) && scnType == "Imager") //for camera Scanner
+			{
+				finalSCNObj.push(arr_scanner_property[i]);
+			}
+			else if ((deviceScannerType.indexOf("Pico") != -1) && scnType == "Imager") //for Pico Imaging Scanner
 			{
 				finalSCNObj.push(arr_scanner_property[i]);
 			}
