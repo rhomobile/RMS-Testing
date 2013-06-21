@@ -298,7 +298,7 @@ describe("Notification Manual FD  Tests", function () {
         runs(function () {
             dispTestCaseRunning(" Device will vibrate if applicable ");
             dispExpectedResult("Device should vibrate for default time  ");
-            Rho.Notification.vibrate();
+            Rho.Notification.vibrate(null);
         });
 
         waitsFor(function () {
@@ -362,18 +362,18 @@ describe("Notification Manual FD  Tests", function () {
             expect(testResult).toEqual(true);
         });
     });
+	 });
 
-    describe("Controlling LED: " + ledName, function () {
-
-        beforeEach(function () {
-            document.getElementById("actResult").innerHTML = "init";
-        });
         var enumData = Rho.Notification.Led.enumerate();
         if (enumData != null) {
             for (var j = 0; j < enumData.length; j++) {
                 (function (enumObject, arrScanner) {
                     var ledName = enumObject.name;
+                    describe("Controlling LED: " + ledName, function () {
 
+                        beforeEach(function () {
+                            document.getElementById("actResult").innerHTML = "init";
+                        });
                     it("is able to illuminate LED: " + ledName, function () {
 
                         runs(function () {
@@ -472,11 +472,10 @@ describe("Notification Manual FD  Tests", function () {
                             expect(testResult).toEqual(true);
                         });
                     });
-                })
+                });
 
 
             }
-
         }
-    })
-})
+        
+    }
