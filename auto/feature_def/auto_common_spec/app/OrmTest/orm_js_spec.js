@@ -15,15 +15,14 @@ describe("<ORM module specs>", function() {
     };
 
     beforeEach(function(){
-      db = new Rho.Database.SQLite3(Rho.Application.databaseFilePath('local'), 'local');
+      db = Rho.ORMHelper.dbConnection("local");
     });
 
     afterEach(function(){
-      db.execute("DELETE FROM SOURCES");
-      db.execute("DELETE FROM OBJECT_VALUES");
+      db.$execute_sql("DELETE FROM SOURCES");
+      db.$execute_sql("DELETE FROM OBJECT_VALUES");
+      db.$execute_sql("DELETE FROM CHANGED_VALUES");
       Rho.ORM.clear();
-      db.close();
-      db = null;
     });
 
     it('should create model',function(){
@@ -69,14 +68,15 @@ describe("<ORM module specs>", function() {
         };
 
         var Model = Rho.ORM.addModel(Product);
-        sources = Rho.ORMHelper.getAllSources();
+        var sources = Rho.ORMHelper.getAllSources();
         expect(Model).toBeDefined();
+        expect(sources['Product']).toBeDefined();
         expect(Rho.ORM.getModel('Product')).toBe(Model);
 
-        res = db.execute("SELECT * FROM Product");
-        //console.log("res is: " + JSON.stringify(res));
+        res = db.$execute_sql("SELECT * FROM Product");
+        
         expect(res).toEqual([]);
-        db.execute("DROP TABLE Product");
+        db.$execute_sql("DROP TABLE Product");
     });
 
     it("should add index",function(){
@@ -97,10 +97,9 @@ describe("<ORM module specs>", function() {
         expect(Model).toBeDefined();
         expect(Rho.ORM.getModel('Product')).toBe(Model);
 
-        res = db.execute("SELECT * FROM Product INDEXED BY p1 Where name = 'test' ");
-        //console.log("res is: " + JSON.stringify(res));
-        expect(res[0].name).toEqual('test');
-        db.execute("DROP TABLE Product");
+        res = db.$execute_sql("SELECT * FROM Product INDEXED BY p1 Where name = 'test' ");
+        expect(res[0].map.name).toEqual('test');
+        db.$execute_sql("DROP TABLE Product");
     });
 
     it("should add unique index",function(){
@@ -121,10 +120,10 @@ describe("<ORM module specs>", function() {
         expect(Model).toBeDefined();
         expect(Rho.ORM.getModel('Product')).toBe(Model);
 
-        res = db.execute("SELECT * FROM Product INDEXED BY u1 Where name = 'test' ");
+        res = db.$execute_sql("SELECT * FROM Product INDEXED BY u1 Where name = 'test' ");
         console.log("res is: " + JSON.stringify(res));
-        expect(res[0].name).toEqual('test');
-        db.execute("DROP TABLE Product");
+        expect(res[0].map.name).toEqual('test');
+        db.$execute_sql("DROP TABLE Product");
     });
 
     it("should add belongs_to relationship",function(){
@@ -153,7 +152,7 @@ describe("<ORM module specs>", function() {
         sources = Rho.ORMHelper.getAllSources();
         expect(sources.Product.str_associations).toEqual("Item");
         expect(sources.Item.belongs_to[0]).toEqual("Product");
-        db.execute("DROP TABLE Product");
+        db.$execute_sql("DROP TABLE Product");
     });
 
     it("should add belongs_to relationship in any load order",function(){
@@ -186,7 +185,7 @@ describe("<ORM module specs>", function() {
         sources = Rho.ORMHelper.getAllSources();
         expect(sources.Product.str_associations).toEqual("Item");
         expect(sources.Item.belongs_to[0]).toEqual("Product");
-        db.execute("DROP TABLE Product");
+        db.$execute_sql("DROP TABLE Product");
     });
 
     it("should add multiple belongs_to relationship in any load order",function(){
@@ -231,42 +230,45 @@ describe("<ORM module specs>", function() {
         expect(sources.Product.str_associations).toEqual("Item,Item2");
         expect(sources.Item.belongs_to[0]).toEqual("Product");
         expect(sources.Item2.belongs_to[0]).toEqual("Product");
-        db.execute("DROP TABLE Product");
+        db.$execute_sql("DROP TABLE Product");
     });
 
     it("should return client id",function(){
-        db = new Rho.Database.SQLite3(Rho.Application.databaseFilePath('user'), 'user');
+        var db2 = Rho.ORMHelper.dbConnection("user");
         var client_id;
         client_id = Rho.ORM.getClientId();
         expect(client_id).toEqual([]);
 
-        db.execute("INSERT INTO CLIENT_INFO (client_id) VALUES(7)");
+        db2.$execute_sql("INSERT INTO CLIENT_INFO (client_id) VALUES(7)");
 
         client_id = Rho.ORM.getClientId();
         expect(client_id).toEqual("7");
     });
-
-    it("should return true if a model objects have local changes for sync haveLocalChanges",function(){
-        expect(Rho.ORM.getModel('Product')).toBeUndefined();
-        var sources = Rho.ORMHelper.getAllSources();
-        expect(sources.Product).toBeUndefined();
-
-        var db = Rho.ORMHelper.dbConnection("user");
-        expect(Rho.ORM.haveLocalChanges()).toEqual(false);
-
-        db.$execute_sql("INSERT INTO CHANGED_VALUES (object) VALUES('meobj')");
-
-        expect(Rho.ORM.haveLocalChanges()).toEqual(true);
-    });
-});
+ });
 
 describe("<ORM Db Reset specs>", function() {
+
+  it("should return true if a model objects have local changes for sync haveLocalChanges",function(){
+      expect(Rho.ORM.getModel('Product')).toBeUndefined();
+      var sources = Rho.ORMHelper.getAllSources();
+      expect(sources.Product).toBeUndefined();
+
+      var db = Rho.ORMHelper.dbConnection("user");
+      expect(Rho.ORM.haveLocalChanges()).toEqual(false);
+
+      db.$execute_sql("INSERT INTO CHANGED_VALUES (object) VALUES('meobj')");
+
+      expect(Rho.ORM.haveLocalChanges()).toEqual(true);
+      db.$execute_sql("DELETE FROM SOURCES");
+      db.$execute_sql("DELETE FROM OBJECT_VALUES");
+      Rho.ORM.clear();
+    });
 
   it("should delete all records only from selected models fixedschema databaseFullResetEx",function(){
       expect(Rho.ORM.getModel('Product')).toBeUndefined();
       var sources = Rho.ORMHelper.getAllSources();
       expect(sources.Product).toBeUndefined();
-      db = new Rho.Database.SQLite3(Rho.Application.databaseFilePath('user'), 'user');
+      var db = Rho.ORMHelper.dbConnection("user");
 
       var Product = function(model){
           model.modelName("Product");
@@ -280,26 +282,24 @@ describe("<ORM Db Reset specs>", function() {
       var Model1 = Rho.ORM.addModel(Product);
 
       var p = Model1.create({'name':'test','price':2.0});
-      var db_product = db.execute("Select * from Product");
-      expect(db_product[0].name).toEqual("test");
+      var db_product = db.$execute_sql("Select * from Product");
+      expect(db_product[0].map.name).toEqual("test");
 
       var ary = {"models":['Product']};
 
       Rho.ORM.databaseFullResetEx(ary,false,false);
-      db_product = db.execute("Select * from Product");
+      db_product = db.$execute_sql("Select * from Product");
       expect(db_product).toEqual([]);
-       db.execute("DELETE FROM SOURCES");
-      db.execute("DELETE FROM OBJECT_VALUES");
+      db.$execute_sql("DELETE FROM SOURCES");
+      db.$execute_sql("DELETE FROM OBJECT_VALUES");
       Rho.ORM.clear();
-      //db.close();
-      db = null;
     });
 
     it("should delete all records only from selected models propertyBag databaseFullResetEx",function(){
       expect(Rho.ORM.getModel('Product')).toBeUndefined();
       var sources = Rho.ORMHelper.getAllSources();
       expect(sources.Product).toBeUndefined();
-      var db = new Rho.Database.SQLite3(Rho.Application.databaseFilePath('user'), 'user');
+      var db = Rho.ORMHelper.dbConnection("user");
 
       var Product = function(model){
           model.modelName("Product");
@@ -311,27 +311,25 @@ describe("<ORM Db Reset specs>", function() {
       var Model1 = Rho.ORM.addModel(Product);
 
       var p = Model1.create({'name':'test','price':2.0});
-      var db_product = db.execute("Select * from OBJECT_VALUES");
-      expect(db_product[0].value).toEqual("test");
-      expect(db_product[1].value).toEqual("2");
+      var db_product = db.$execute_sql("Select * from OBJECT_VALUES");
+      expect(db_product[0].map.value).toEqual("test");
+      expect(db_product[1].map.value).toEqual("2");
 
       var ary = {"models":['Product']};
 
       Rho.ORM.databaseFullResetEx(ary,false,false);
-      db_product = db.execute("Select * from OBJECT_VALUES");
+      db_product = db.$execute_sql("Select * from OBJECT_VALUES");
       expect(db_product).toEqual([]);
-      db.execute("DELETE FROM SOURCES");
-      db.execute("DELETE FROM OBJECT_VALUES");
+      db.$execute_sql("DELETE FROM SOURCES");
+      db.$execute_sql("DELETE FROM OBJECT_VALUES");
       Rho.ORM.clear();
-      //db.close();
-      db = null;
     });
 
     it("should do nothing if localdb and localdb flag set to false",function(){
       expect(Rho.ORM.getModel('Product')).toBeUndefined();
       var sources = Rho.ORMHelper.getAllSources();
       expect(sources.Product).toBeUndefined();
-      var db = new Rho.Database.SQLite3(Rho.Application.databaseFilePath('local'), 'local');
+      var db = Rho.ORMHelper.dbConnection("local");
 
       var Product = function(model){
           model.modelName("Product");
@@ -343,29 +341,27 @@ describe("<ORM Db Reset specs>", function() {
       var Model1 = Rho.ORM.addModel(Product);
 
       var p = Model1.create({'name':'test','price':2.0});
-      var db_product = db.execute("Select * from OBJECT_VALUES");
-      expect(db_product[0].value).toEqual("test");
-      expect(db_product[1].value).toEqual("2");
+      var db_product = db.$execute_sql("Select * from OBJECT_VALUES");
+      expect(db_product[0].map.value).toEqual("test");
+      expect(db_product[1].map.value).toEqual("2");
 
       var ary = {"models":['Product']};
       Rho.ORM.databaseFullResetEx(ary,false,false);
 
-      db_product = db.execute("Select * from OBJECT_VALUES");
-      expect(db_product[0].value).toEqual("test");
-      expect(db_product[1].value).toEqual("2");
-      db.execute("DELETE FROM SOURCES");
-      db.execute("DELETE FROM OBJECT_VALUES");
+      db_product = db.$execute_sql("Select * from OBJECT_VALUES");
+      expect(db_product[0].map.value).toEqual("test");
+      expect(db_product[1].map.value).toEqual("2");
+      db.$execute_sql("DELETE FROM SOURCES");
+      db.$execute_sql("DELETE FROM OBJECT_VALUES");
       Rho.ORM.clear();
-      //db.close();
-      db = null;
     });
 
     it("should reset client_info table if set databaseFullResetEx",function(){
       expect(Rho.ORM.getModel('Product')).toBeUndefined();
       var sources = Rho.ORMHelper.getAllSources();
       expect(sources.Product).toBeUndefined();
-      var db = new Rho.Database.SQLite3(Rho.Application.databaseFilePath('user'), 'user');
-      db.execute("INSERT INTO CLIENT_INFO (client_id) VALUES(7)");
+      var db = Rho.ORMHelper.dbConnection("user");
+      db.$execute_sql("INSERT INTO CLIENT_INFO (client_id) VALUES(7)");
       var Product = function(model){
           model.modelName("Product");
           model.property("name","string");
@@ -376,51 +372,47 @@ describe("<ORM Db Reset specs>", function() {
       var Model1 = Rho.ORM.addModel(Product);
 
       var p = Model1.create({'name':'test','price':2.0});
-      var db_product = db.execute("Select * from OBJECT_VALUES");
+      var db_product = db.$execute_sql("Select * from OBJECT_VALUES");
       var db_product2 = Rho.ORM.getClientId();
       expect(db_product2).toEqual("7");
-      expect(db_product[0].value).toEqual("test");
-      expect(db_product[1].value).toEqual("2");
+      expect(db_product[0].map.value).toEqual("test");
+      expect(db_product[1].map.value).toEqual("2");
 
       var ary = {"models":['Product']};
 
       Rho.ORM.databaseFullResetEx(ary,true,false);
-      db_product = db.execute("Select * from OBJECT_VALUES");
-      db_product2 = db.execute("Select * from client_info");
+      db_product = db.$execute_sql("Select * from OBJECT_VALUES");
+      db_product2 = db.$execute_sql("Select * from client_info");
       expect(db_product2).toEqual([]);
-      db.execute("DELETE FROM SOURCES");
-      db.execute("DELETE FROM OBJECT_VALUES");
+      db.$execute_sql("DELETE FROM SOURCES");
+      db.$execute_sql("DELETE FROM OBJECT_VALUES");
       Rho.ORM.clear();
-      //db.close();
-      db = null;
     });
 
     it("should reset client info databaseFullReset tables",function(){
       expect(Rho.ORM.getModel('Product')).toBeUndefined();
       var sources = Rho.ORMHelper.getAllSources();
       expect(sources.Product).toBeUndefined();
-      var db = new Rho.Database.SQLite3(Rho.Application.databaseFilePath('user'), 'user');
-      db.execute("INSERT INTO CLIENT_INFO (client_id) VALUES(7)");
+      var db = Rho.ORMHelper.dbConnection("user");
+      db.$execute_sql("INSERT INTO CLIENT_INFO (client_id) VALUES(7)");
 
-      var client_id = db.execute("Select * from client_info");
-      expect(client_id[0].client_id).toEqual("7");
+      var client_id = db.$execute_sql("Select * from client_info");
+      expect(client_id[0].map.client_id).toEqual("7");
 
       Rho.ORM.databaseFullReset(true,false);
-      client_id = db.execute("Select * from client_info");
+      client_id = db.$execute_sql("Select * from client_info");
       expect(client_id).toEqual([]);
 
-      db.execute("DELETE FROM SOURCES");
-      db.execute("DELETE FROM OBJECT_VALUES");
+      db.$execute_sql("DELETE FROM SOURCES");
+      db.$execute_sql("DELETE FROM OBJECT_VALUES");
       Rho.ORM.clear();
-      //db.close();
-      db = null;
     });
 
     it("should reset client info databaseFullReset tables with undefined params",function(){
       expect(Rho.ORM.getModel('Product')).toBeUndefined();
       var sources = Rho.ORMHelper.getAllSources();
       expect(sources.Product).toBeUndefined();
-      var db = new Rho.Database.SQLite3(Rho.Application.databaseFilePath('user'), 'user');
+      var db = Rho.ORMHelper.dbConnection("user");
 
       var Product = function(model){
           model.modelName("Product");
@@ -433,27 +425,25 @@ describe("<ORM Db Reset specs>", function() {
       var Model1 = Rho.ORM.addModel(Product);
 
       var p = Model1.create({'name':'test','price':2.0});
-      var db_product = db.execute("Select * from OBJECT_VALUES");
-      expect(db_product[0].value).toEqual("test");
+      var db_product = db.$execute_sql("Select * from OBJECT_VALUES");
+      expect(db_product[0].map.value).toEqual("test");
 
       var ary = {"models":['Product']};
       Rho.ORM.databaseFullReset(undefined,undefined);
 
-      db_product = db.execute("Select * from OBJECT_VALUES");
+      db_product = db.$execute_sql("Select * from OBJECT_VALUES");
       expect(db_product).toEqual([]);
 
-      db.execute("DELETE FROM SOURCES");
-      db.execute("DELETE FROM OBJECT_VALUES");
+      db.$execute_sql("DELETE FROM SOURCES");
+      db.$execute_sql("DELETE FROM OBJECT_VALUES");
       Rho.ORM.clear();
-      db.close();
-      db = null;
     });
 
    it("should reset client info databaseFullReset tables with no params",function(){
       expect(Rho.ORM.getModel('Product')).toBeUndefined();
       var sources = Rho.ORMHelper.getAllSources();
       expect(sources.Product).toBeUndefined();
-      var db = new Rho.Database.SQLite3(Rho.Application.databaseFilePath('user'), 'user');
+      var db = Rho.ORMHelper.dbConnection("user");
 
       var Product = function(model){
           model.modelName("Product");
@@ -467,28 +457,26 @@ describe("<ORM Db Reset specs>", function() {
       var Model1 = Rho.ORM.addModel(Product);
 
       var p = Model1.create({'name':'test','price':2.0});
-      var db_product = db.execute("Select * from Product");
-      expect(db_product[0].name).toEqual("test");
+      var db_product = db.$execute_sql("Select * from Product");
+      expect(db_product[0].map.name).toEqual("test");
 
       var ary = {"models":['Product']};
       Rho.ORM.databaseFullReset();
 
-      db_product = db.execute("Select * from Product");
+      db_product = db.$execute_sql("Select * from Product");
       expect(db_product).toEqual([]);
 
-      db.execute("DELETE FROM SOURCES");
-      db.execute("DELETE FROM OBJECT_VALUES");
+      db.$execute_sql("DELETE FROM SOURCES");
+      db.$execute_sql("DELETE FROM OBJECT_VALUES");
       Rho.ORM.clear();
-      db.close();
-      db = null;
     });
 
    it("should reset client info databaseFullReset tables of all partitions",function(){
       expect(Rho.ORM.getModel('Product')).toBeUndefined();
       var sources = Rho.ORMHelper.getAllSources();
       expect(sources.Product).toBeUndefined();
-      var db_user = new Rho.Database.SQLite3(Rho.Application.databaseFilePath('user'), 'user');
-      var db_local = new Rho.Database.SQLite3(Rho.Application.databaseFilePath('local'), 'local');
+      var db_user = Rho.ORMHelper.dbConnection("user");
+      var db_local = Rho.ORMHelper.dbConnection("local");
 
       var Product_user_fixed = function(model){
           model.modelName("Product");
@@ -537,44 +525,41 @@ describe("<ORM Db Reset specs>", function() {
       I_local_pb.create({'name':'local_pb','price':2.0});
 
 
-      var user_f = db_user.execute("Select * from Product");
-      expect(user_f[0].name).toEqual("user_fixed");
-      var user_p = db_user.execute("Select * from OBJECT_VALUES");
-      expect(user_p[0].value).toEqual("user_pb");
+      var user_f = db_user.$execute_sql("Select * from Product");
+      expect(user_f[0].map.name).toEqual("user_fixed");
+      var user_p = db_user.$execute_sql("Select * from OBJECT_VALUES");
+      expect(user_p[0].map.value).toEqual("user_pb");
 
-      var local_f = db_local.execute("Select * from Product_local");
-      expect(local_f[0].name).toEqual("local_fixed");
-      var local_p = db_local.execute("Select * from OBJECT_VALUES");
-      expect(local_p[0].value).toEqual("local_pb");
+      var local_f = db_local.$execute_sql("Select * from Product_local");
+      expect(local_f[0].map.name).toEqual("local_fixed");
+      var local_p = db_local.$execute_sql("Select * from OBJECT_VALUES");
+      expect(local_p[0].map.value).toEqual("local_pb");
 
       Rho.ORM.databaseFullReset(false,true);
 
-      user_f = db_user.execute("Select * from Product");
+      user_f = db_user.$execute_sql("Select * from Product");
       expect(user_f).toEqual([]);
-      user_p = db_user.execute("Select * from OBJECT_VALUES");
+      user_p = db_user.$execute_sql("Select * from OBJECT_VALUES");
       expect(user_p).toEqual([]);
-      expect(db_user.isTableExist("Product")).toBe(true);
+      expect(db_user.$is_table_exist("Product")).toBe(true);
 
-      local_f = db_local.execute("Select * from Product_local");
+      local_f = db_local.$execute_sql("Select * from Product_local");
       expect(local_f).toEqual([]);
-      local_p = db_local.execute("Select * from OBJECT_VALUES");
+      local_p = db_local.$execute_sql("Select * from OBJECT_VALUES");
       expect(local_p).toEqual([]);
-      expect(db_local.isTableExist("Product_local")).toBe(true);
-      db_user.execute("DELETE FROM SOURCES");
-      db_local.execute("DELETE FROM SOURCES");
-      db_user.execute("DELETE FROM OBJECT_VALUES");
-      db_local.execute("DELETE FROM OBJECT_VALUES");
+      expect(db_local.$is_table_exist("Product_local")).toBe(true);
+      db_user.$execute_sql("DELETE FROM SOURCES");
+      db_local.$execute_sql("DELETE FROM SOURCES");
+      db_user.$execute_sql("DELETE FROM OBJECT_VALUES");
+      db_local.$execute_sql("DELETE FROM OBJECT_VALUES");
       Rho.ORM.clear();
-      
-      db_user = null;
-      db_local = null;
     });
 
     it("should reset object_values and not sources table if set databaseFullResetEx",function(){
       expect(Rho.ORM.getModel('Product')).toBeUndefined();
       var sources = Rho.ORMHelper.getAllSources();
       expect(sources.Product).toBeUndefined();
-      var db = new Rho.Database.SQLite3(Rho.Application.databaseFilePath('user'), 'user');
+      var db = Rho.ORMHelper.dbConnection("user");
 
       var Product = function(model){
           model.modelName("Product");
@@ -587,28 +572,26 @@ describe("<ORM Db Reset specs>", function() {
       var Model1 = Rho.ORM.addModel(Product);
 
       var p = Model1.create({'name':'test','price':2.0});
-      var sources_db = db.execute("select * from sources");
-      var objects    = db.execute("select * from object_values");
+      var sources_db = db.$execute_sql("select * from sources");
+      var objects    = db.$execute_sql("select * from object_values");
 
-      expect(sources_db[0].name).toEqual("Product");
-      expect(objects[0].value).toEqual("test");
+      expect(sources_db[0].map.name).toEqual("Product");
+      expect(objects[0].map.value).toEqual("test");
 
       Rho.ORM.databaseFullResetAndLogout();
 
-      sources_db = db.execute("Select * from sources");
-      objects    = db.execute("select * from object_values");
-      expect(sources_db[0].name).toEqual("Product");
+      sources_db = db.$execute_sql("Select * from sources");
+      objects    = db.$execute_sql("select * from object_values");
+      expect(sources_db[0].map.name).toEqual("Product");
       expect(objects).toEqual([]);
-      db.execute("DELETE FROM SOURCES");
-      db.execute("DELETE FROM OBJECT_VALUES");
+      db.$execute_sql("DELETE FROM SOURCES");
+      db.$execute_sql("DELETE FROM OBJECT_VALUES");
       Rho.ORM.clear();
-      //db.close();
-      db = null;
     });
 
     it("should reset client and local db if databaseFullclientResetAndLogout",function(){
-      var db = new Rho.Database.SQLite3(Rho.Application.databaseFilePath('local'), 'local');
-      db.execute("INSERT INTO CLIENT_INFO (client_id) VALUES(7)");
+      var db = Rho.ORMHelper.dbConnection("local");
+      db.$execute_sql("INSERT INTO CLIENT_INFO (client_id) VALUES(7)");
 
       var Product = function(model){
           model.modelName("Product");
@@ -621,20 +604,18 @@ describe("<ORM Db Reset specs>", function() {
       var Model1 = Rho.ORM.addModel(Product);
 
       var p = Model1.create({'name':'test','price':2.0});
-      var objects = db.execute("select * from OBJECT_VALUES");
-      var client_info = db.execute("select * from client_info");
-      expect(objects[0].value).toEqual("test");
-      expect(client_info[0].client_id).toEqual("7");
+      var objects = db.$execute_sql("select * from OBJECT_VALUES");
+      var client_info = db.$execute_sql("select * from client_info");
+      expect(objects[0].map.value).toEqual("test");
+      expect(client_info[0].map.client_id).toEqual("7");
       Rho.ORM.databaseFullclientResetAndLogout();
 
-      objects = db.execute("select * from OBJECT_VALUES");
-      client_info = db.execute("select * from client_info");
+      objects = db.$execute_sql("select * from OBJECT_VALUES");
+      client_info = db.$execute_sql("select * from client_info");
       expect(objects).toEqual([]);
       expect(client_info).toEqual([]);
-      db.execute("DELETE FROM SOURCES");
-      db.execute("DELETE FROM OBJECT_VALUES");
+      db.$execute_sql("DELETE FROM SOURCES");
+      db.$execute_sql("DELETE FROM OBJECT_VALUES");
       Rho.ORM.clear();
-      //db.close();
-      db = null;
     });
 });
