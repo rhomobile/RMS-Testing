@@ -26,7 +26,7 @@ describe("Notification Manual FD  Tests", function () {
     it("VT281-0850 |showStatus with only Message |", function () {
 
         runs(function () {
-            dispTestCaseRunning("wait and wait for the status message to pop up");
+            dispTestCaseRunning("wait for the status message to pop up");
             dispExpectedResult("see if the status message is shown with title , message and hide button label click on hide button to see if the popup is closed ");
             Rho.Notification.showStatus('MyAlert', 'This is status message', 'click to hide');
 
@@ -35,6 +35,26 @@ describe("Notification Manual FD  Tests", function () {
 
         waitsFor(function () {
             dispExpectedResult("see if the status message is shown with title , message and hide button label click on hide button to see if the popup is closed ");
+            return captured;
+        }, 'The status should have been popped up by now', 30000);
+
+        runs(function () {
+            expect(testResult).toEqual(true);
+        });
+    });
+    
+    it("VT281-0850 |showStatus with all null parameters |", function () {
+
+        runs(function () {
+            dispTestCaseRunning("check if the status is shown or check of rodd behavior in the app ");
+            dispExpectedResult("should not be any odd behavior if ststaus is not popped up  ");
+            Rho.Notification.showStatus('', '', '');
+
+        });
+
+
+        waitsFor(function () {
+           
             return captured;
         }, 'The status should have been popped up by now', 30000);
 
@@ -130,6 +150,25 @@ describe("Notification Manual FD  Tests", function () {
             expect(testResult).toEqual(true);
         });
     });
+    
+    it("VT281-0854 |showPopup with all null parameters and only button |", function () {
+
+        runs(function () {
+            dispTestCaseRunning(" wait for the status message to pop up else check for odd behavior in the app  ");
+            dispExpectedResult("no odd behavior should be seen if there is no popup")
+            var propertyMap = {message: '', buttons:['No'], title: '', icon: ''};
+            Rho.Notification.showPopup(propertyMap);
+        });
+
+        waitsFor(function () {
+            return captured;
+        }, 'The message  should have been popped up by now', 30000);
+
+        runs(function () {
+            expect(testResult).toEqual(true);
+        });
+    });
+
 
     it("VT281-0855 |showPopup with Message and title , icon and buttons, with callback for buttton |", function () {
 
@@ -201,7 +240,24 @@ describe("Notification Manual FD  Tests", function () {
             expect(testResult).toEqual(true);
         });
     });
+    it("VT281-0857 |Beep with null duration null frequency and only volume|", function () {
 
+        runs(function () {
+            dispTestCaseRunning("see if beeper starts and no odd behaviour in device occurs   ");
+            dispExpectedResult(" No odd behaviour should be seen if beeper is not sounded ");
+            var propertyMap = {frequency: null, volume: 3, duration: null};
+            Rho.Notification.beep(propertyMap);
+
+        });
+
+        waitsFor(function () {
+            return captured;
+        }, 'Beep sound should have ended by now', 30000);
+
+        runs(function () {
+            expect(testResult).toEqual(true);
+        });
+    });
     it("VT281-0858 |Beep for 10 secs and with volume one  with 2000 hz|", function () {
 
         runs(function () {
@@ -238,6 +294,24 @@ describe("Notification Manual FD  Tests", function () {
             expect(testResult).toEqual(true);
         });
     });
+    
+    it("VT281-0859|Play File method with no file path|", function () {
+
+        runs(function () {
+            dispTestCaseRunning(" Observe for any odd behavior in the application  ");
+            dispExpectedResult("Pass if there is no abnormal behavior  ");
+            Rho.Notification.playFile('', '.mp3');
+        });
+
+        waitsFor(function () {
+            return captured;
+        }, 'Mp3 file should have been played by now ', 45000);
+
+        runs(function () {
+            expect(testResult).toEqual(true);
+        });
+    });
+
 
     it("VT281-0860|Play File - Mp3 file without media type|", function () {
 
