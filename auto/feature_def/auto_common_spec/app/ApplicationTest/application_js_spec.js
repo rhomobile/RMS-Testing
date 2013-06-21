@@ -111,7 +111,7 @@ describe("Application JS API", function () {
 	    //TODO: implement spec for getRhoPlatformVersion with callback
 	
 	
-	    if(isWindowsMobileOrAndroidPlatform()){
+	    if(isWindowsMobilePlatform()){
 	        it("Bad link URI to navigate in browser", function () {
 	            Rho.Application.badLinkURI = 'badLink.html';
 	            expect(Rho.Application.badLinkURI).toEqual('badLink.html');
@@ -121,7 +121,7 @@ describe("Application JS API", function () {
 	    if (['WINDOWS_DESKTOP', 'WINDOWS'].indexOf(Rho.System.platform) != -1) {
 	
 	        it("Test title property", function () {
-	            expect(Rho.Application.title()).isNotEmptyString();
+	            expect(Rho.Application.title).isNotEmptyString();
 	
 	            Rho.Application.title = 'Title';
 	            expect(Rho.Application.title).toEqual('Title');

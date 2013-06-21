@@ -1,5 +1,6 @@
 # startup page for your application
 start_path = '/app/index.html'
+invalid_security_token_start_path = '/app/index.html'
 
 # path to the options page (in this case handled by javascript)
 options_path = '/public/app/settings.html'
@@ -15,7 +16,7 @@ rhobundle_zip_pwd = nil
 # 0-trace, 1-info(app level), 3-warnings, 4-errors
 # for production set to 3
 #LogFilePath = '/mnt/sdcard/RETestApp.log'
-MinSeverity  = 1 
+MinSeverity  = 0 
 
 # enable copy log messages to standard output, useful for debugging
 LogToOutput = 1
@@ -87,3 +88,5 @@ jqtouch_mode=1
 splash_screen='zoom'
 
 use_bb_full_browser=6
+
+#invalid_security_token_start_path = "/app/secTokenPage.html"

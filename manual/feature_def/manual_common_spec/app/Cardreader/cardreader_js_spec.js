@@ -56,7 +56,7 @@ describe("Card Reader Test", function() {
 
 		var callbackCardReader = function (data){
 			alert();
-			dispCurrentProcess($.toJSON(data));
+			dispCurrentProcess(JSON.stringify(data));
 		}
 
 		runs(function()
@@ -100,7 +100,7 @@ describe("Card Reader Test", function() {
 
 		runs(function()
 		{
-			Rho.CardReader.open({},function(data){dispCurrentProcess($.toJSON(data));});
+			Rho.CardReader.open({},function(data){dispCurrentProcess(JSON.stringify(data));});
 			setTimeout(function() {
 				openFlag = true;
 			}, 5000);

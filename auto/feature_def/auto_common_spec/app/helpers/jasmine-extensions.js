@@ -9,3 +9,7 @@ jasmine.Matchers.prototype.isNumberGreaterThenZero = function(){
 jasmine.Matchers.prototype.isBoolean  = function(){
     return (typeof this.actual)  == 'boolean';
 }
+
+jasmine.Matchers.prototype.toBeBetween = function(start, stop ) {
+    return start < this.actual && this.actual < stop;
+};

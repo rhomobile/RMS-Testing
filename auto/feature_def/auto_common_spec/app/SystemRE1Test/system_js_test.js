@@ -5,7 +5,7 @@
 		propertyName	:	"httpProxyURI",
 		propertyValue	:	"http://wwwgate0.mot.com:1080",
 		expectedResult	:	"http://wwwgate0.mot.com:1080",
-		osType			: 	["WINDOWS","ANDROID","APPLE","WP8","WINDOWS_DESKTOP"]
+		osType			: 	["WINDOWS", "WP8", "WINDOWS_DESKTOP"]
 	},
 	{
 		testName		:	"VT300-115 | set screenAutoRotate as true , call getProperty with screenAutoRotate | true",
@@ -56,11 +56,11 @@ var sys_setget_properties = [
 		osType			: 	["APPLE"]
 	},
 	{
-		testName		:	"VT300-150 | call setproperties with httpProxyURI, call call getproperties with httpProxyURI | Bibash",
+		testName		:	"VT300-150 | call setproperties with httpProxyURI, call  getproperties with httpProxyURI | Bibash",
 		propertyName	:	'httpProxyURI',
 		propertyValue 	:	"Bibash",
 		expectedResult	:	"Bibash",
-		osType			: 	["WINDOWS","ANDROID","APPLE","WP8","WINDOWS_DESKTOP"]
+		osType			: 	["WINDOWS", "WP8", "WINDOWS_DESKTOP"]
 	},
 	{
 		testName		:	"VT300-178 | call setproperties with screenSleeping as true, call getproperties with screenSleeping | true",

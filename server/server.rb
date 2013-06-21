@@ -15,13 +15,13 @@ def localip
 end
 
 host = localip
-port = 81
-securePort = 82
+port = 8081
+securePort = 8082
+securePortWithClientAuth = 8083
 
-cert = OpenSSL::X509::Certificate.new File.read 'fd_testing.cert'
-pkey = OpenSSL::PKey::RSA.new File.read 'fd_testing.key'
 
-puts "SSL creds: #{cert.inspect}, #{pkey.inspect}"
+cert = OpenSSL::X509::Certificate.new File.read 'ca.crt'
+pkey = OpenSSL::PKey::RSA.new File.read 'ca.key'
 
 $local_server = WEBrick::HTTPServer.new :Port => port
 $secure_server = WEBrick::HTTPServer.new(:Port => securePort,
@@ -30,6 +30,18 @@ $secure_server = WEBrick::HTTPServer.new(:Port => securePort,
                                  :SSLPrivateKey => pkey,
                                  :SSLVerifyClient => OpenSSL::SSL::VERIFY_NONE
                                  )
+
+cert2 = OpenSSL::X509::Certificate.new File.read 'fd_testing.cert'
+pkey2 = OpenSSL::PKey::RSA.new File.read 'fd_testing.key'
+
+$secure_server_with_client_auth = WEBrick::HTTPServer.new(:Port => securePortWithClientAuth,
+                                         :SSLEnable => true,
+                                         :SSLCertificate => cert2,
+                                         :SSLPrivateKey => pkey2,
+                                         :SSLVerifyClient => OpenSSL::SSL::VERIFY_PEER,
+                                         :SSLCACertificateFile => File.join( File.dirname(__FILE__), 'client.crt' )
+                                         )
+
 
 $local_server.mount_proc '/download' do |req,res|
   res.body = "Downloaded content"
@@ -58,10 +70,8 @@ $local_server.mount_proc '/download_image_auth' do |req,res|
 end
 
 $local_server.mount_proc '/upload_text_file' do |req,res|
-    puts "Upload request: #{req.inspect}"
-    #    filedata = req.query["filename"]
     res.status = 200
-    res.body = req.body#"initial request is: #{req.inspect}\nFile data is:\n#{filedata}"
+    res.body = req.query["blob"]
     res.content_length = res.body.length
 end
 
@@ -70,9 +80,8 @@ $local_server.mount_proc '/upload_text_file_auth' do |req,res|
         user == 'admin' && pass == 'Motorola@123'
     }
 
-    filedata = req.query["filename"]
     res.status = 200
-    res.body = "initial request is: #{req.inspect}\nFile data is:\n#{filedata}"
+    res.body = req.query["blob"]
     res.content_length = res.body.length
 end
 
@@ -94,9 +103,69 @@ $local_server.mount_proc '/test_methods' do |req,res|
     end
 end
 
+$local_server.mount_proc '/download_app' do |req,res|
+    device = req.query()["device"]
+    device = device.downcase if device
+    
+    filenames = {
+        'android' => 'TestApp_signed.apk',
+        'wm' => 'TestAppWM6.5.cab',
+        'ios' => 'auto_common_spec.ipa',
+        'ce' => 'TestAppCE.cab',
+        'win32' => 'everywan.exe',
+        'wp8' => 'everywan.exe'
+    }
+    
+    filename = filenames[device]
+    
+    if filename then
+        res.body = File.open( File.join( File.dirname(__FILE__),filename ), "rb" )
+        res["content-type"]="application/octet-stream"
+
+        res.status = 200
+    else
+        res.status = 404
+    end
+    
+end
+
+lastLogData = ""
+
+$local_server.mount_proc '/client_log' do |req,res|
+    lastLogData = req.query["blob"]
+    res.status = 200
+end
+
+$local_server.mount_proc '/get_last_log' do |req,res|
+    res.body = lastLogData
+    res.status = 200
+end
+
 
 #Secure server mount points
 $secure_server.mount_proc '/test_methods' do |req,res|
+    if req.request_method == "GET" then
+        res.status = 200
+        res.body = "initial GET request is: #{req.query['data1']} and #{req.query['data2']}"
+        res.content_length = res.body.length
+        elsif req.request_method == "POST" then
+        res.status = 200
+        res.body = "initial POST request is: #{req.query['data1']} and #{req.query['data2']}"
+        res.content_length = res.body.length
+        else
+        res.body = "Unsupported server method: #{req.request_method}"
+        res.status = 503
+        res.content_length = res.body.length
+    end
+end
+
+$secure_server_with_client_auth.mount_proc '/test_methods' do |req,res|
+    
+    client_cert = req.client_cert
+    
+    puts "SSL Client certificate:\n======================\n#{client_cert}\n==========================="    
+    
+    
     if req.request_method == "GET" then
         res.status = 200
         res.body = "initial GET request is: #{req.query['data1']} and #{req.query['data2']}"
@@ -123,6 +192,8 @@ to_generate.each do |path|
     f.puts("SERVER_PORT=#{port};");
     f.puts("SECURE_HOST='#{host}';")
     f.puts("SECURE_PORT=#{securePort};");
+    f.puts("SECURE_HOST_CA='#{host}';");
+    f.puts("SECURE_PORT_CA=#{securePortWithClientAuth};");
     
     f.close()
 end
@@ -130,6 +201,7 @@ end
 trap 'INT' do
     $local_server.shutdown
     $secure_server.shutdown
+    $secure_server_with_client_auth.shutdown
 end
 
 t1 = Thread.new do
@@ -142,5 +214,12 @@ t2 = Thread.new do
     $secure_server.start
 end
 
+t3 = Thread.new do
+    puts "Starting secure server with client auth on #{host}:#{securePortWithClientAuth}"
+    $secure_server_with_client_auth.start
+end
+
+
 t1.join
 t2.join
+t3.join

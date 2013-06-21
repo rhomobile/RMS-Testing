@@ -1,13 +1,232 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <script src="/public/jquery/jquery-1.6.4.min.js" type="text/javascript"></script>
-    <script src="/public/jquery/jquery.json-2.3.min.js" type="text/javascript"></script>
+
+
+
     <script type="text/javascript" charset="utf-8" src="/public/api/rhoapi-modules.js"></script>
     <script type="text/javascript" charset="utf-8" src="/public/js/server_url.js"></script>
 
+    <script type="text/javascript" src="/public/jquery/jquery-1.6.4.js"></script>
+
+
     <script type="text/javascript">
+
+        $(document).ready(function () {
+            var currentPlatform = Rho.System.platform;
+            //Disable tests not suitable for current platform
+            $("option[platform]").each(function (idx, element) {
+                var testPlatforms = $(element).attr("platform").split(",");
+                for (var i = 0; i < testPlatforms.length; i++) {
+                    testPlatforms[i] = (testPlatforms[i]).trim()
+                }
+                if (testPlatforms.indexOf(currentPlatform) == -1) {
+                    $(element).attr("disabled", "disabled");
+                }
+            })
+        })
+    </script>
+
+    <script type="text/javascript">
+
+
+
+
 var selected_Module="";
+        
+        function describe() {
+            
+            selected_Module = myChoice.value;
+            
+            clearAll();
+            
+            if(selected_Module=="VT293-0001")
+            {
+                setDescription("Network status notifications should be returned as connected when wlan profile is enabled and disconnected when wlan profile disabled and network status should be poll after every 6 seconds. Poll interval does not supported on WM/CE. Notification send when Wifi or Cell network appear/disappear, to check internet connectivity use detectConnection.");
+                setExpected("Connected if have network, Disconnected otherwise. Update each 6 seconds.");
+            }
+            
+            
+            if(selected_Module=="VT293-0002")
+            {
+                setDescription("Network status notifications should be returned as connected when wlan profile is enabled and disconnected when wlan profile disabled and network status should be poll after every 6 seconds. Poll interval does not supported on WM/CE. Notification send when Wifi or Cell network appear/disappear, to check internet connectivity use detectConnection.");
+                setExpected("Connected if have network, Disconnected otherwise. Update each 20 seconds (default).");
+            }
+            
+            
+            if(selected_Module=="VT293-0003")
+            {
+                setDescription("this will fail because of callback is mandatory for startStatusNotify method");
+                setExpected("Failure");
+            }
+            
+            
+            if(selected_Module=="VT293-0004")
+            {
+                setDescription("network status notifications should be returned as connected when wlan profile is enabled and disconnected when wlan profile disabled and network status should be poll after every 6 seconds");
+                setExpected("Connected if have network, Disconnected otherwise. Update each 6 seconds.");
+            }
+            
+            
+            if(selected_Module=="VT293-0005")
+            {
+                setDescription("It should Stop network status notifications ");
+                setExpected("No network status notifications should be observed in the status field.");
+            }
+            
+            
+            if(selected_Module=="VT293-0007")
+            {
+                setDescription("WM ONLY. Precondition: Connects RhoElements through a Wide Area Network. The connection destination must be first configured through the Connection Manager and the destination name provided to this method");
+                setExpected("check the log file list of available connection destinations should returned in log file");
+            }
+            
+            
+            if(selected_Module=="VT293-0008")
+            {
+                setDescription("WM ONLY. Precondition: Connects RhoElements through a Wide Area Network. The connection destination must be first configured through the Connection Manager and the destination name provided to this method");
+                setExpected("wanStatusEvent should fire and should populate the all associated parameters with valid values.");
+            }
+            
+            
+            if(selected_Module=="VT293-0009")
+            {
+                setDescription("WM ONLY. Precondition: Connects RhoElements through a Wide Area Network. The connection destination must be first configured through the Connection Manager and the destination name provided to this method");
+                setExpected("this will fail because of callback is mandatory for connectWan method");
+            }
+            
+            
+            if(selected_Module=="VT293-0010")
+            {
+                setDescription("WM ONLY. Precondition: Connects RhoElements through a Wide Area Network. The connection destination must be first configured through the Connection Manager and the destination name provided to this method");
+                setExpected("wanStatusEvent should fire and should populate the all associated parameters with valid values.");
+            }
+            
+            
+            if(selected_Module=="VT293-0011")
+            {
+                setDescription("WM ONLY. Precondition: Connects RhoElements through a Wide Area Network. The connection destination must be first configured through the Connection Manager and the destination name provided to this method");
+                setExpected("Disconnects the current WAN connection");
+            }
+            
+            
+            if(selected_Module=="VT293-0017")
+            {
+                setDescription("Disconnect device from all network connections. connectionInformation should retuned as disconnected to the specified host and port and failure message should be returned");
+                setExpected("Connection status should be 'Disconnected' and error message should be provided");
+            }
+            
+            
+            if(selected_Module=="VT293-0023")
+            {
+                setDescription("Connect device to the cell network. it should return boolean value 'true'.");
+                setExpected("true");
+            }
+            
+            
+            if(selected_Module=="VT293-0024")
+            {
+                setDescription("Disconnect device from the any network. It should return 'false'");
+                setExpected("false");
+            }
+            
+            
+            if(selected_Module=="VT293-0025")
+            {
+                setDescription("Connect device to wifi network. It shoult return 'false'");
+                setExpected("false");
+            }
+            
+            
+            if(selected_Module=="VT293-0026")
+            {
+                setDescription("Connect device to only cell network. It should return 'true'");
+                setExpected("true");
+            }
+            
+            
+            if(selected_Module=="VT293-0027")
+            {
+                setDescription("Connect device to wifi network. It shoult return 'true'");
+                setExpected("true");
+            }
+            
+            
+            if(selected_Module=="VT293-0028")
+            {
+                setDescription("Connect device to wifi network. It shoult return 'true'");
+                setExpected("true");
+            }
+            
+            
+            if(selected_Module=="VT293-0029")
+            {
+                setDescription("Disconnect device from the any network. It should return 'false'");
+                setExpected("false");
+            }
+            
+            
+            if(selected_Module=="VT293-0030")
+            {
+                setDescription("Connect device to wifi network. It should return 'true'");
+                setExpected("true");
+            }
+            
+            
+            if(selected_Module=="VT293-0031")
+            {
+                setDescription("Connect device to only cell network. It should return 'false'");
+                setExpected("false");
+            }
+            
+            
+            if(selected_Module=="VT293-0032")
+            {
+                setDescription("calls hasNetwork() method");
+                setExpected("true if connected to any cell or wifi network, false otherwise");
+            }
+            
+            
+            if(selected_Module=="VT293-0033")
+            {
+                setDescription("calls hasWifiNetwork() method");
+                setExpected("true if wifi is connected, false otherwise");
+            }
+            
+            
+            if(selected_Module=="VT293-0034")
+            {
+                setDescription("calls hasCellNetwork() method");
+                setExpected("true if cell network is connected, false otherwise.");
+            }
+            
+            
+            if(selected_Module=="VT293-0035")
+            {
+                setDescription("Calls get() method with bad connection. Take the device where it's getting less signal strength");
+                setExpected("ResponseTimeout should occure after difault time of 30 seconds because of less signal strength");
+            }
+            
+            
+            if(selected_Module=="VT293-0036")
+            {
+                setDescription("Calls get() method with bad connection and 10 seconds timeout. Take the device where it's getting less signal strength");
+                setExpected("ResponseTimeout should occure after 10 seconds because of less signal strength");
+            }
+            
+            if(selected_Module=="ClientAuth")
+            {
+                setDescription("Calls get() method on secure server with enabled client auth. Server certificate must be installed on device!");
+                setExpected("ok");
+            }
+            
+            if(selected_Module=="ClientAuthNoCert")
+            {
+                setDescription("Calls get() method on secure server with enabled client auth without providing client key. Server certificate must be installed on device!");
+                setExpected("error");
+            }
+
+        }
         
 function getmodulename()
 {
@@ -23,1033 +242,371 @@ function getmodulename()
     var srvSecurePort = SECURE_PORT;
     var srvSecureUrl = "https://" + srvSecureHost + ":" + srvSecurePort.toString();
     var srvSecureTestMethodsUrl = srvSecureUrl + "/test_methods";
+    
+    var srvSecureTestMethodsUrlWithClientAuth = "https://" + SECURE_HOST_CA + ":" + SECURE_PORT_CA.toString() + "/test_methods";
 
 
-//var index = document.controlForm.myChoice.selectedIndex;
-//selected_Module = document.controlForm.myChoice.options[index].value;
-selected_Module = document.controlForm.myChoice.value;
-//myDiv.innerHTML=""+selected_Module;
+    selected_Module = myChoice.value;
+    
+    //Rho.Network.stopStatusNotify();
+    
+    setActual("");
+    setStatus("");
+    
 
-
-if(selected_Module=="VT293-0001")
-{
-myNet.innerHTML = "Expected Result :-<br><br>StartStatusNotify with pollinterval of 6 seconds";
-   //Request the system to check every 6 seconds and call us back if there is a change in network connectivity
-   Rho.Network.startStatusNotify(6000, status_notify_callback);
+if(selected_Module=="VT293-0001") {
+    Rho.Network.startStatusNotify(6, status_notify_callback);
 }
-if(selected_Module=="VT293-0002")
-{
-  myNet.innerHTML = "Expected Result :-<br><br>StartStatusNotify without pollinterval";
-  Rho.Network.stopStatusNotify();
-	Rho.Network.startStatusNotify(status_notify_callback);
+    
+if(selected_Module=="VT293-0002") {
+	Rho.Network.startStatusNotify(null, status_notify_callback);
 }
-if(selected_Module=="VT293-0003")
-{
-myNet.innerHTML = "Expected Result :-<br><br>StartStatusNotify with synch";
-myDiv.innerHTML ="This test will fail because callback is mandatory for startStatusNotify method"
-Rho.Network.stopStatusNotify();
+/*   Negative case move to other_spec
+if(selected_Module=="VT293-0003") {
  myvar = Rho.Network.startStatusNotify();
- myDiv.innerHTML="Network Status :"+myvar["current_status"];
-}
-if(selected_Module=="VT293-0004")
-{
-myNet.innerHTML = "Expected Result :-<br><br>startStatusNotify with anonymous callback";
-Rho.Network.stopStatusNotify();
-Rho.Network.startStatusNotify(6000, function(params){
-      myDiv.innerHTML="Network status changed from"+params["prev_status"]+" to "+params["current_status"];
+ setActual(myvar["current_status"]);
+ setStatus("Network Status :"+myvar["current_status"]);
+}*/
+
+/* Duplicate. Test different callbacks in generator test   
+if(selected_Module=="VT293-0004") {
+    Rho.Network.startStatusNotify(6, function(params){
+        status_notify_callback(params);
    });
 }
-if(selected_Module=="VT293-0005")
-{
-myNet.innerHTML = "Expected Result :-<br><br>StopStatus notifications";
-myDiv.innerHTML="Please press the stop_status_notify button on the page to stop status notify";
-Rho.Network.startStatusNotify(6000, status_notify_callback);
+*/
+    
+if(selected_Module=="VT293-0005") {
+    Rho.Network.stopStatusNotify();
 }
-/*if(selected_Module=="VT293-0006")
-{
-myNet.innerHTML = "Expected Result :-<br><br>Without calling startStatusNotify method call stopStatusNotify";
-Rho.Network.stopStatusNotify();
-}*/
-if(selected_Module=="VT293-0007")
-{
-myNet.innerHTML = "Expected Result :-<br><br>Check the Connection destinations should be returned in the log file";
-Rho.Network.connectWan("My ISP", connect_wan_notify_callback);
+
+if(selected_Module=="VT293-0007") {
+    Rho.Network.connectWan("My ISP", connect_wan_notify_callback);
 }
-if(selected_Module=="VT293-0008")
-{
-myNet.innerHTML = "Expected Result :-<br><br>connectWan with simcard :- wanStatusEvent should fire with all associated parameters and valid values";
-Rho.Network.disconnectWan();
-Rho.Network.connectWan("My ISP", connect_wan_notify_callback);
+    
+if(selected_Module=="VT293-0008") {
+    Rho.Network.disconnectWan();
+    Rho.Network.connectWan("My ISP", connect_wan_notify_callback);
 }
-if(selected_Module=="VT293-0009")
-{
-myNet.innerHTML = "Expected Result :-<br><br>connectWan with synch";
-myDiv.innerHTML ="This test will fail because callback is mandatory for connectWan method"
+    
+if(selected_Module=="VT293-0009") {
 Rho.Network.disconnectWan();
 myvar = Rho.Network.connectWan("My ISP");
-myDiv.innerHTML="phoneSignalStrength :"+myvar["phoneSignalStrength"]+"<br>"+
+setStatus("phoneSignalStrength :"+myvar["phoneSignalStrength"]+"<br>"+
 				"networkOperator :"+myvar["networkOperator"]+"<br>"+
 				"connectionTypeAvailable :"+myvar["connectionTypeAvailable"]+"<br>"+
 				"connectionTypeConnected :"+myvar["connectionTypeConnected"]+"<br>"+
-				"connectionManagerMessage :"+myvar["connectionManagerMessage"];
+				"connectionManagerMessage :"+myvar["connectionManagerMessage"]);
 }
-if(selected_Module=="VT293-0010")
-{
-myNet.innerHTML = "Expected Result :-<br><br>connectWan with anonymous callback";
+    
+if(selected_Module=="VT293-0010") {
 Rho.Network.disconnectWan();
 Rho.Network.connectWan("My ISP", function(params){
-//connect wan callback
-myDiv.innerHTML="phoneSignalStrength :"+params["phoneSignalStrength"]+"<br>"+
-				"networkOperator :"+params["networkOperator"]+"<br>"+
-				"connectionTypeAvailable :"+params["connectionTypeAvailable"]+"<br>"+
-				"connectionTypeConnected :"+params["connectionTypeConnected"]+"<br>"+
-				"connectionManagerMessage :"+params["connectionManagerMessage"];
-});
-}
-if(selected_Module=="VT293-0011")
-{
-myNet.innerHTML = "Expected Result :-<br><br>disconnectWan with simcard:- Disconnects the current WAN connection";
-myDiv.innerHTML="Please press the disconnect_wan button on the page to disconnect wan";
-Rho.Network.connectWan("My ISP", connect_wan_notify_callback);
-}
-/*if(selected_Module=="VT293-0012")
-{
-myNet.innerHTML = "Expected Result :-<br><br>disconnectWan without simcard:- Disconnects the current WAN connection";
-Rho.Network.connectWan("My ISP", connect_wan_notify_callback);
-}
-if(selected_Module=="VT293-0013")
-{
-myDiv.innerHTML="Please press the cancel button on the page to cancel the callback";
-    getProps = {
-        url: "http://www.apache.org/licenses/LICENSE-2.0"
-      };
-   Rho.Network.get(getProps, get_callback);
-}
-if(selected_Module=="VT293-0014")
-{
-      detectconnectionProps = {
-        host: srvHost,
-        port: srvPort
-      };
-  Rho.Network.detectConnection(detectconnectionProps, detect_connection_notify_callback);
-}
-if(selected_Module=="VT293-0015")
-{
-myDiv.innerHTML ="This test will fail because callback is mandatory for detectConnection method"
-     detectconnectionProps = {
-        host: srvHost,
-        port: srvPort
-      };
-  myvar = Rho.Network.detectConnection(detectconnectionProps);
-  myDiv.innerHTML="Detect Connection :"+myvar["connectionInformation"];
-}
-if(selected_Module=="VT293-0016")
-{
-      detectconnectionProps = {
-        host: srvHost,
-        port: srvPort
-      };
-  Rho.Network.detectConnection(detectconnectionProps, function(params){
-if(params["connectionInformation"] == "Disconnected")
-	myDiv.innerHTML=""+params["failureMessage"];
-else
-	myDiv.innerHTML="Connected";
- });
-}*/
-if(selected_Module=="VT293-0017")
-{
-  myNet.innerHTML = "Expected Result :-<br><br>detectConnection with wlan profile disbled";
-  myDiv.innerHTML = "Please press the Stop_Detecting button on the page to stop network detection before moving to next test";
-      detectconnectionProps = {
-        host: srvHost,
-        port: srvPort
-      };
-  Rho.Network.detectConnection(detectconnectionProps, detect_connection_notify_callback);
-}
-/*
-if(selected_Module=="VT293-0018")
-{
-      detectconnectionProps = {
-        host: "http://www.google.com",
-        port: 80,
-		pollInterval: 3000
-      };
-  Rho.Network.detectConnection(detectconnectionProps, detect_connection_notify_callback);
-}
-if(selected_Module=="VT293-0019")
-{
-      detectconnectionProps = {
-        host: "http://www.google.com",
-        port: 80,
-		pollInterval: -6000
-      };
-  Rho.Network.detectConnection(detectconnectionProps, detect_connection_notify_callback);
-}
-if(selected_Module=="VT293-0020")
-{
-      detectconnectionProps = {
-        host: "http://www.ggle.com",
-        port: 80,
-		detectionTimeout: 1000
-      };
-  Rho.Network.detectConnection(detectconnectionProps, detect_connection_notify_callback);
-}
-if(selected_Module=="VT293-0021")
-{
-      detectconnectionProps = {
-        host: "http://www.google.com",
-        port: 80,
-		pollInterval: 6000,
-		detectionTimeout: 5000
-      };
-  Rho.Network.detectConnection(detectconnectionProps, detect_connection_notify_callback);
-}
-if(selected_Module=="VT293-0022")
-{
-myDiv.innerHTML="Please press the stop_detecting_connection button on the page to stop detecting network";
-      detectconnectionProps = {
-        host: srvHost,
-        port: srvPort,
-		pollInterval: 6000,
-		detectionTimeout: 5000
-      };
-  Rho.Network.detectConnection(detectconnectionProps, detect_connection_notify_callback);
-}*/
-if(selected_Module=="VT293-0023")
-{
-myNet.innerHTML = "Expected Result :-<br><br>hasCellNetwork with simcard";
-var cell_network = Rho.Network.hasCellNetwork()
-myDiv.innerHTML=""+cell_network;
 
+                       setStatus("phoneSignalStrength :"+params["phoneSignalStrength"]+"<br>"+
+                                 "networkOperator :"+params["networkOperator"]+"<br>"+
+                                 "connectionTypeAvailable :"+params["connectionTypeAvailable"]+"<br>"+
+                                 "connectionTypeConnected :"+params["connectionTypeConnected"]+"<br>"+
+                                 "connectionManagerMessage :"+params["connectionManagerMessage"]);
+                       });
 }
-if(selected_Module=="VT293-0024")
-{
-myNet.innerHTML = "Expected Result :-<br><br>hasCellNetwork without connecting cell netowork";
-var cell_network = Rho.Network.hasCellNetwork()
-myDiv.innerHTML=""+cell_network;
+    
+if(selected_Module=="VT293-0011") {
+    Rho.Network.connectWan("My ISP", connect_wan_notify_callback);
 }
-if(selected_Module=="VT293-0025")
-{
-myNet.innerHTML = "Expected Result :-<br><br>hasCellNetwork with device connected to wifi netowork";
-var cell_network = Rho.Network.hasCellNetwork()
-myDiv.innerHTML=""+cell_network;
+
+if(selected_Module=="VT293-0017") {
+      detectconnectionProps = {
+        host: "http://google.com",
+        port: 80
+      };
+  Rho.Network.detectConnection(detectconnectionProps, detect_connection_notify_callback);
 }
-if(selected_Module=="VT293-0026")
-{
-myNet.innerHTML = "Expected Result :-<br><br>hasNetwork with simcard";
-var network = Rho.Network.hasNetwork()
-myDiv.innerHTML=""+network;
+
+    
+if(selected_Module=="VT293-0023") {
+    var cell_network = Rho.Network.hasCellNetwork()
+    setActual(cell_network);
 }
-if(selected_Module=="VT293-0027")
-{
-myNet.innerHTML = "Expected Result :-<br><br>Call hasNetwork with device connected wifi network";
-var network = Rho.Network.hasNetwork()
-myDiv.innerHTML=""+network;
+    
+    
+if(selected_Module=="VT293-0024") {
+    var cell_network = Rho.Network.hasCellNetwork()
+    setActual(cell_network);
 }
-if(selected_Module=="VT293-0028")
-{
-myNet.innerHTML = "Expected Result :-<br><br>hasNetwork with wifi network and cell netowork";
-var network = Rho.Network.hasNetwork()
-myDiv.innerHTML=""+network;
+    
+if(selected_Module=="VT293-0025") {
+    var cell_network = Rho.Network.hasCellNetwork()
+    setActual(cell_network);
 }
-if(selected_Module=="VT293-0029")
-{
-myNet.innerHTML = "Expected Result :-<br><br>hasNetwork without any  wifi network or cell netowork";
-var network = Rho.Network.hasNetwork()
-myDiv.innerHTML=""+network;
+    
+    
+if(selected_Module=="VT293-0026") {
+    var network = Rho.Network.hasNetwork()
+    setActual(network);
 }
-if(selected_Module=="VT293-0030")
-{
-myNet.innerHTML = "Expected Result :-<br><br>Call hasWifiNetwork with device connected to wifi network";
-var wifi_network = Rho.Network.hasWifiNetwork()
-myDiv.innerHTML=""+wifi_network;
+    
+    
+if(selected_Module=="VT293-0027") {
+    var network = Rho.Network.hasNetwork()
+    setActual(network);
 }
-if(selected_Module=="VT293-0031")
-{
-myNet.innerHTML = "Expected Result :-<br><br>call hasWifiNetwork with device connected to cellnetwork";
-var wifi_network = Rho.Network.hasWifiNetwork()
-myDiv.innerHTML=""+wifi_network;
+    
+    
+if(selected_Module=="VT293-0028") {
+    var network = Rho.Network.hasNetwork()
+    setActual(network);
 }
-if(selected_Module=="VT293-0032")
-{
-myNet.innerHTML = "Expected Result :-<br><br>Disable all avilable network on the device call hasNetwork";
-var network = Rho.Network.hasNetwork()
-myDiv.innerHTML=""+network;
+    
+    
+if(selected_Module=="VT293-0029") {
+    var network = Rho.Network.hasNetwork()
+    setActual(network);
 }
-if(selected_Module=="VT293-0033")
-{
-myNet.innerHTML = "Expected Result :-<br><br>Disable all avilable network on the device call hasWifiNetwork";
-var wifi_network = Rho.Network.hasWifiNetwork()
-myDiv.innerHTML=""+wifi_network;
+    
+    
+if(selected_Module=="VT293-0030") {
+    var wifi_network = Rho.Network.hasWifiNetwork()
+    setActual(wifi_network);
 }
-if(selected_Module=="VT293-0034")
-{
-myNet.innerHTML = "Expected Result :-<br><br>Disable all avilable network on the device call hasCellNetowrk";
-var cell_network = Rho.Network.hasCellNetwork()
-myDiv.innerHTML=""+cell_network;
+    
+    
+if(selected_Module=="VT293-0031") {
+    var wifi_network = Rho.Network.hasWifiNetwork()
+    setActual(wifi_network);
 }
-if(selected_Module=="VT293-0035")
-{
-  myNet.innerHTML = "Expected Result :-<br><br>default responseTimeout :Take the device where its getting less signal strength";
+    
+if(selected_Module=="VT293-0032") {
+    var network = Rho.Network.hasNetwork()
+    setActual(network);
+}
+    
+    
+if(selected_Module=="VT293-0033") {
+    var wifi_network = Rho.Network.hasWifiNetwork()
+    setActual(wifi_network);
+}
+    
+    
+if(selected_Module=="VT293-0034") {
+    var cell_network = Rho.Network.hasCellNetwork()
+    setActual(cell_network);
+}
+    
+    
+if(selected_Module=="VT293-0035") {
     responsetimeoutProps = {
         url: "http://www.apache.org/licenses/LICENSE-2.0"
       };
    Rho.Network.get(responsetimeoutProps, get_callback);
 }
+    
+    
 if(selected_Module=="VT293-0036")
 {
-    myNet.innerHTML = "Expected Result :-<br><br>responseTimeout with 10 seconds :Take the device where its getting less signal strength";
     responsetimeoutProps = {
         url: "http://www.apache.org/licenses/LICENSE-2.0",
 		responseTimeout: 10
       };
    Rho.Network.get(responsetimeoutProps, get_callback);
 }
-/*if(selected_Module=="VT293-0037")
-{
-    certificateProps = {
-        url: srvSecureTestMethodsUrl,
-		body: "data1=test&data2=test2"
-	 };
-   Rho.Network.post(certificateProps, post_callback);
-}
-if(selected_Module=="VT293-0038")
-{
-    certificateProps = {
-        url: srvSecureTestMethodsUrl,
-		body: "data1=test&data2=test2",
-		verifyPeerCertificate: true
-	 };
-   Rho.Network.post(certificateProps, post_callback);
-}
-if(selected_Module=="VT293-0039")
-{
-    certificateProps = {
-        url: srvSecureTestMethodsUrl,
-		body: "data1=test&data2=test2",
-		verifyPeerCertificate: false
-	 };
-   Rho.Network.post(certificateProps, post_callback);
-}
+    
+    if(selected_Module=="ClientAuth")
+    {
+        getProps = {
+            url : srvSecureTestMethodsUrlWithClientAuth,
+            clientSSLCertificate : Rho.RhoFile.join( Rho.Application.publicFolder, "testfiles/client.p12" ),
+//            clientSSLCertificate : '/mnt/sdcard/client.p12',
+            clientSSLCertificatePassword : "123456",
+            verifyPeerCertificate : true
+        }
+        
+        Rho.Network.get( getProps, function(params) {
+                setActual(params['status']);
+                setStatus(
+                    "status :"+params["status"]+"<br>"+
+                    "http_error :"+params["http_error"] + "<br" +
+                    "body :" + params["body"]
+                );
+            }
+        );
+    }
+    
+    if(selected_Module=="ClientAuthNoCert")
+    {
+        getProps = {
+            url : srvSecureTestMethodsUrlWithClientAuth,
+            verifyPeerCertificate : true
+        }
+        
+        Rho.Network.get( getProps, function(params) {
+                        setActual(params['status']);
+                        setStatus(
+                                  "status :"+params["status"]+"<br>"+
+                                  "http_error :"+params["http_error"] + "<br" +
+                                  "body :" + params["body"]
+                                  );
+                        }
+                        );
+    }
 
-if(selected_Module=="VT293-0040")
-{
-    postProps = {
-        url: srvHttpTestMethodsUrl,
-		body: "data1=test&data2=test2",
-		verifyPeerCertificate: false
-	 };
-   Rho.Network.post(postProps, post_callback);
-}
-if(selected_Module=="VT293-0041")
-{
-    postProps = {
-        url: srvHttpTestMethodsUrl,
-		body: "data1=test&data2=test2",
-		verifyPeerCertificate: false
-	 };
-   myvar = Rho.Network.post(postProps);
-   myDiv.innerHTML="Body: "+myvar["body"]
-}
-if(selected_Module=="VT293-0042")
-{
-    postProps = {
-        url: srvHttpTestMethodsUrl,
-		body: "data1=test&data2=test2",
-		verifyPeerCertificate: false
-	 };
-   Rho.Network.post(postProps, function(params){
-// post callback		
-		myDiv.innerHTML="status"+params["status"]+"<br>"+
-						"http_error"+params["http_error"];
-		myDiv.innerHTML="<br>Get Result"+params["body"];
-});
-}
-if(selected_Module=="VT293-0043")
-{
-    getProps = {
-        url: srvHttpTestMethodsUrl,
-      };
-   Rho.Network.get(getProps, get_callback);
-}
-if(selected_Module=="VT293-0044")
-{
-    getProps = {
-        url: srvHttpTestMethodsUrl,
-      };
-   myvar = Rho.Network.get(getProps);
-   myDiv.innerHTML="Body: "+myvar["body"]
-}
-if(selected_Module=="VT293-0045")
-{
-    getProps = {
-        url: srvHttpTestMethodsUrl,
-      };
-   Rho.Network.get(getProps, function(params){
-// get callback		
-		myDiv.innerHTML="status :"+params["status"]+"<br>"+
-						"http_error :"+params["http_error"];
-		myDiv.innerHTML="<br>Get Result :"+params["body"];
-});
-}
-if(selected_Module=="VT293-0046")
-{
-      downloadfileProps = {
-        url: srvHttpDownloadImageUrl,
-        filename: Rho.Application.publicFolder+"/images/network.jpg"
-      };
- Rho.Network.downloadFile(downloadfileProps, download_file_callback);
-}
-if(selected_Module=="VT293-0047")
-{
-      downloadfileProps = {
-        url: srvHttpDownloadImageUrl,
-        filename: Rho.Application.publicFolder+"/images/network.jpg"
-      };
- Rho.Network.downloadFile(downloadfileProps, download_file_callback);
-}
-if(selected_Module=="VT293-0048")
-{
-      downloadfileProps = {
-        url: srvHttpDownloadImageUrl,
-        filename: Rho.Application.publicFolder+"/images/network.jpg",
-        overwriteFile: true
-      };
- Rho.Network.downloadFile(downloadfileProps, download_file_callback);
-}
-if(selected_Module=="VT293-0049")
-{
-      downloadfileProps = {
-        url: srvHttpDownloadImageUrl,
-        filename: Rho.Application.publicFolder+"/images/network/network.jpg",
-        overwriteFile: true
-      };
- Rho.Network.downloadFile(downloadfileProps, download_file_callback);
-}
-if(selected_Module=="VT293-0050")
-{
-      downloadfileProps = {
-        url: srvHttpDownloadImageUrl,
-        filename: Rho.Application.publicFolder+"/images/network/network.jpg",
-        overwriteFile: true,
-		createFolders: false
-      };
- Rho.Network.downloadFile(downloadfileProps, download_file_callback);
-}
-if(selected_Module=="VT293-0051")
-{
-      downloadfileProps = {
-        url: srvHttpDownloadImageUrl,
-        filename: Rho.Application.publicFolder+"/images/network/network.jpg",
-        overwriteFile: true,
-		createFolders: true
-      };
- Rho.Network.downloadFile(downloadfileProps, download_file_callback);
-}
-if(selected_Module=="VT293-0052")
-{
-      downloadfileProps = {
-        url: srvHttpDownloadImageUrl,
-        filename: Rho.Application.publicFolder+"/images/network/network.jpg",
-        overwriteFile: true,
-		createFolders: true
-      };
- Rho.Network.downloadFile(downloadfileProps, function(params){
-      if (params["status"] == "ok") {
-	    myDiv.innerHTML="Download Succeeded, path is /public/images/download.jpg";		
-		myDiv.innerHTML="<br>status :"+params["status"]+"<br>"+
-						"http_error :"+params["http_error"]+"<br>"+
-						"fileExists :"+params["fileExists"];
-        //alert("Download Succeeded, path is /public/images/download.jpg");
-      } else {
-	    myDiv.innerHTML="Download Failed";
-		myDiv.innerHTML="<br>status :"+params["status"]+"<br>"+
-						"http_error :"+params["http_error"]+"<br>"+
-						"fileExists :"+params["fileExists"];
-        //alert("Download Failed");
-      }
-});
-}
-if(selected_Module=="VT293-0053")
-{
-      downloadfileProps = {
-        url: srvHttpDownloadImageUrl,
-        filename: Rho.Application.publicFolder+"/images/network/network.jpg",
-        overwriteFile: invalid,
-		createFolders: true
-      };
- Rho.Network.downloadFile(downloadfileProps, download_file_callback);
-}
-if(selected_Module=="VT293-0054")
-{
-      downloadfileProps = {
-        url: srvHttpDownloadImageUrl,
-        filename: Rho.Application.publicFolder+"/images/network/network.jpg",
-        overwriteFile: "",
-		createFolders: true
-      };
- Rho.Network.downloadFile(downloadfileProps, download_file_callback);
-}
-if(selected_Module=="VT293-0055")
-{
-      downloadfileProps = {
-        url: srvHttpDownloadImageUrl,
-        filename: Rho.Application.publicFolder+"/images/network/network.jpg",
-        overwriteFile: true,
-		createFolders: invalid
-      };
- Rho.Network.downloadFile(downloadfileProps, download_file_callback);
-}
-if(selected_Module=="VT293-0056")
-{
-      downloadfileProps = {
-        url: srvHttpDownloadImageUrl,
-        filename: Rho.Application.publicFolder+"/images/network/network.jpg",
-        overwriteFile: true,
-		createFolders: ""
-      };
- Rho.Network.downloadFile(downloadfileProps, download_file_callback);
-}
-if(selected_Module=="VT293-0057")
-{
-      downloadfileProps = {
-        url: srvHttpDownloadImageUrlAuth,
-		authType: "basic",
-		authUser: "admin",
-		authPassword: "admin",
-        filename: Rho.Application.publicFolder+"/images/network/network.jpg",
-        overwriteFile: true,
-		createFolders: true
-      };
- Rho.Network.downloadFile(downloadfileProps, download_file_callback);
-}
-if(selected_Module=="VT293-0058")
-{
-      downloadfileProps = {
-        url: srvHttpDownloadImageUrlAuth,
-		authType: "basic",
-		authUser: "admin",
-		authPassword: "admin",
-        filename: Rho.Application.publicFolder+"/images/network/network.jpg",
-        overwriteFile: true,
-		createFolders: true
-      };
- Rho.Network.downloadFile(downloadfileProps, download_file_callback);
-}
-if(selected_Module=="VT293-0059")
-{
-      downloadfileProps = {
-        url: "",
-		authType: "basic",
-		authUser: "admin",
-		authPassword: "admin",
-        filename: Rho.Application.publicFolder+"/images/network/network.jpg",
-        overwriteFile: true,
-		createFolders: true
-      };
- Rho.Network.downloadFile(downloadfileProps, download_file_callback);
-}
-if(selected_Module=="VT293-0060")
-{
-      downloadfileProps = {
-        url: srvHttpDownloadImageUrlAuth,
-		authType: "basic",
-		authUser: "admin",
-		authPassword: "admin",
-        filename: Rho.Application.invalid+"/images/network/network.jpg",
-        overwriteFile: true,
-		createFolders: true
-      };
- Rho.Network.downloadFile(downloadfileProps, download_file_callback);
-}
-if(selected_Module=="VT293-0061")
-{
-      downloadfileProps = {
-        url: srvHttpDownloadImageUrlAuth,
-		authType: "basic",
-		authUser: "admin",
-		authPassword: "admin",
-        filename: "",
-        overwriteFile: true,
-		createFolders: true
-      };
- Rho.Network.downloadFile(downloadfileProps, download_file_callback);
-}
-if(selected_Module=="VT293-0062")
-{
-      downloadfileProps = {
-        url: srvHttpDownloadImageUrlAuth,
-		authType: "invalid",
-		authUser: "admin",
-		authPassword: "admin",
-        filename: Rho.Application.publicFolder+"/images/network/network.jpg",
-        overwriteFile: true,
-		createFolders: true
-      };
- Rho.Network.downloadFile(downloadfileProps, download_file_callback);
-}
-if(selected_Module=="VT293-0063")
-{
-      downloadfileProps = {
-        url: srvHttpDownloadImageUrlAuth,
-		authType: "",
-		authUser: "admin",
-		authPassword: "admin",
-        filename: Rho.Application.publicFolder+"/images/network/network.jpg",
-        overwriteFile: true,
-		createFolders: true
-      };
- Rho.Network.downloadFile(downloadfileProps, download_file_callback);
-}
-if(selected_Module=="VT293-0064")
-{
-      downloadfileProps = {
-        url: srvHttpDownloadImageUrlAuth,
-		authType: "basic",
-		authUser: "invalid",
-		authPassword: "admin",
-        filename: Rho.Application.publicFolder+"/images/network/network.jpg",
-        overwriteFile: true,
-		createFolders: true
-      };
- Rho.Network.downloadFile(downloadfileProps, download_file_callback);
-}
-if(selected_Module=="VT293-0065")
-{
-      downloadfileProps = {
-        url: srvHttpDownloadImageUrlAuth,
-		authType: "basic",
-		authUser: "",
-		authPassword: "admin",
-        filename: Rho.Application.publicFolder+"/images/network/network.jpg",
-        overwriteFile: true,
-		createFolders: true
-      };
- Rho.Network.downloadFile(downloadfileProps, download_file_callback);
-}
-if(selected_Module=="VT293-0066")
-{
-      downloadfileProps = {
-        url: srvHttpDownloadImageUrlAuth,
-		authType: "basic",
-		authUser: "admin",
-		authPassword: "invalid",
-        filename: Rho.Application.publicFolder+"/images/network/network.jpg",
-        overwriteFile: true,
-		createFolders: true
-      };
- Rho.Network.downloadFile(downloadfileProps, download_file_callback);
-}
-if(selected_Module=="VT293-0067")
-{
-      downloadfileProps = {
-        url: srvHttpDownloadImageUrlAuth,
-		authType: "basic",
-		authUser: "admin",
-		authPassword: "",
-        filename: Rho.Application.publicFolder+"/images/network/network.jpg",
-        overwriteFile: true,
-		createFolders: true
-      };
- Rho.Network.downloadFile(downloadfileProps, download_file_callback);
-}      
-if(selected_Module=="VT293-0068")
-{
-    uploadfileProps = {
-          url: srvHttpUploadTextFileUrl,
-          filename: Rho.Application.publicFolder+"/images/myfile.txt",
-          body: "uploading file",
-          fileContentType: "image/png"
-        };
 
-        Rho.Network.uploadFile(uploadfileProps, upload_file_callback); 
-}
-if(selected_Module=="VT293-0069")
-{
-    uploadfileProps = {
-          url: srvHttpUploadTextFileUrl,
-          filename: Rho.Application.publicFolder+"/images/myfile.txt",
-          body: "uploading file",
-          fileContentType: "image/png"
-        };
 
-     myvar =  Rho.Network.uploadFile(uploadfileProps); 
-myDiv.innerHTML="Result :-<br>status : "+myvar["status"]+"<br>"+
-						"http_error :"+myvar["http_error"]+"<br>"+
-					    "fileExists :"+myvar["fileExists"];
 }
-if(selected_Module=="VT293-0070")
-{
-    uploadfileProps = {
-          url: srvHttpUploadTextFileUrl,
-          filename: Rho.Application.publicFolder+"/images/myfile.txt",
-          body: "uploading file",
-          fileContentType: "image/png"
-        };
-
-    Rho.Network.uploadFile(uploadfileProps, function(params){
-  if (params["status"] == "ok") {
-	myDiv.innerHTML="Upload Succeeded, path is /public/images/myfile.txt";
-	myDiv.innerHTML="<br>status :"+params["status"]+"<br>"+
-					"http_error :"+params["http_error"]+"<br>"+
-					"fileExists :"+params["fileExists"];
-	//alert("Upload Succeeded, path is /public/images/upload.jpg");
-  } else {
-	myDiv.innerHTML="Upload Failed";
-	myDiv.innerHTML="<br>status :"+params["status"]+"<br>"+
-					"http_error :"+params["http_error"]+"<br>"+
-					"fileExists :"+params["fileExists"];
-	//alert("Upload Failed");
-  }
-}); 
-}
-if(selected_Module=="VT293-0071")
-{
-    uploadfileProps = {
-          url: srvHttpUploadTextFileUrlAuth,
-		  authType: "basic",
-		  authUser: "admin",
-		  authPassword: "Motorola@123",
-          filename: Rho.Application.publicFolder+"/images/myfile.txt",
-          body: "uploading file",
-          fileContentType: "image/png"
-        };
-        Rho.Network.uploadFile(uploadfileProps, upload_file_callback); 
-}
-if(selected_Module=="VT293-0072")
-{
-       uploadfileProps = {
-          url: srvHttpUploadTextFileUrlAuth,
-		  authType: "basic",
-		  authUser: "admin",
-		  authPassword: "Motorola@123",
-          filename: Rho.Application.publicFolder+"/images/backButton.png",
-          body: "uploading file",
-          fileContentType: "image/png"
-        };
-        Rho.Network.uploadFile(uploadfileProps, upload_file_callback); 
-}
-
-if(selected_Module=="VT293-0073")
-{
-		uploadfileProps = {
-          url: "",
-		  authType: "basic",
-		  authUser: "admin",
-		  authPassword: "Motorola@123",
-          filename: Rho.Application.publicFolder+"/images/backButton.png",
-          body: "uploading file",
-          fileContentType: "image/png"
-        };
-        Rho.Network.uploadFile(uploadfileProps, upload_file_callback); 
-}
-if(selected_Module=="VT293-0074")
-{
-    uploadfileProps = {
-          url: srvHttpUploadTextFileUrlAuth,
-		  authType: "basic",
-		  authUser: "admin",
-		  authPassword: "Motorola@123",
-          filename: Rho.Application.invalid+"/images/backButton.png",
-          body: "uploading file",
-          fileContentType: "image/png"
-        };
-
-        Rho.Network.uploadFile(uploadfileProps, upload_file_callback); 
-}
-if(selected_Module=="VT293-0075")
-{
-    uploadfileProps = {
-          url: srvHttpUploadTextFileUrlAuth,
-		  authType: "basic",
-		  authUser: "admin",
-		  authPassword: "Motorola@123",
-          filename: "",
-          body: "uploading file",
-          fileContentType: "image/png"
-        };
-        Rho.Network.uploadFile(uploadfileProps, upload_file_callback); 
-}
-if(selected_Module=="VT293-0076")
-{
-    uploadfileProps = {
-          url: srvHttpUploadTextFileUrlAuth,
-		  authType: "invalid",
-		  authUser: "admin",
-		  authPassword: "Motorola@123",
-          filename: Rho.Application.publicFolder+"/images/backButton.png",
-          body: "uploading file",
-          fileContentType: "image/png"
-        };
-        Rho.Network.uploadFile(uploadfileProps, upload_file_callback); 
-}
-if(selected_Module=="VT293-0077")
-{
-    uploadfileProps = {
-          url: srvHttpUploadTextFileUrlAuth,
-		  authType: "",
-		  authUser: "admin",
-		  authPassword: "Motorola@123",
-          filename: Rho.Application.publicFolder+"/images/backButton.png",
-          body: "uploading file",
-          fileContentType: "image/png"
-        };
-        Rho.Network.uploadFile(uploadfileProps, upload_file_callback); 
-}
-if(selected_Module=="VT293-0078")
-{
-    uploadfileProps = {
-          url: srvHttpUploadTextFileUrlAuth,
-		  authType: "basic",
-		  authUser: "invalid",
-		  authPassword: "Motorola@123",
-          filename: Rho.Application.publicFolder+"/images/backButton.png",
-          body: "uploading file",
-          fileContentType: "image/png"
-        };
-        Rho.Network.uploadFile(uploadfileProps, upload_file_callback); 
-}
-if(selected_Module=="VT293-0079")
-{
-    uploadfileProps = {
-          url: srvHttpUploadTextFileUrlAuth,
-		  authType: "basic",
-		  authUser: "",
-		  authPassword: "Motorola@123",
-          filename: Rho.Application.publicFolder+"/images/backButton.png",
-          body: "uploading file",
-          fileContentType: "image/png"
-        };
-        Rho.Network.uploadFile(uploadfileProps, upload_file_callback); 
-}
-if(selected_Module=="VT293-0080")
-{
-    uploadfileProps = {
-          url: srvHttpUploadTextFileUrlAuth,
-          authType: "basic",
-		  authUser: "admin",
-		  authPassword: "invalid",
-          filename: Rho.Application.publicFolder+"/images/backButton.png",
-          body: "uploading file",
-          fileContentType: "image/png"
-        };
-        Rho.Network.uploadFile(uploadfileProps, upload_file_callback); 
-}
-if(selected_Module=="VT293-0081")
-{
-    uploadfileProps = {
-          url: srvHttpUploadTextFileUrlAuth,
-		  authType: "basic",
-		  authUser: "admin",
-		  authPassword: "",
-          filename: Rho.Application.publicFolder+"/images/backButton.png",
-          body: "uploading file",
-          fileContentType: "image/png"
-        };
-        Rho.Network.uploadFile(uploadfileProps, upload_file_callback); 
-}
-if(selected_Module=="VT293-0082")
-{
-      downloadfileProps = {
-        url: srvHttpDownloadImageUrl,
-        overwriteFile: true,
-		createFolders: true,
-        filename: Rho.Application.publicFolder+"/images/network.jpg"
-      };
- Rho.Network.downloadFile(downloadfileProps);
-myvar =  Rho.Network.downloadFile(downloadfileProps); 
-myDiv.innerHTML="Result :-<br>status : "+myvar["status"]+"<br>"+
-						"http_error :"+myvar["http_error"]+"<br>"+
-					    "fileExists :"+myvar["fileExists"];
-}*/
-
-} 
+        
+        function get_callback(params) {
+            setStatus("status :"+params["status"]+"<br>"+
+            "http_error :"+params["http_error"]);
+            setActual(params["body"]);
+        }
 
 function stop_status_notify() {
   // Stop network status notifications
   Rho.Network.stopStatusNotify();
+  setStatus("Status notification stopped");
 }
 
 function disconnect_wan_status_notify() {
 // Stop wan status notifications
 Rho.Network.disconnectWan();
 }
-/*
-function cancel_notify_callback() {
-// cancel method
-Rho.Network.cancel(get_callback);
-myDiv.innerHTML="Request canceled";
-}
-*/
- function stop_detecting_connection() {
+
+function stop_detecting_connection() {
    Rho.Network.stopDetectingConnection(detect_connection_notify_callback);
-   myDiv.innerHTML="Network Detection stopped";
+   setStatus("Network Detection stopped");
 }	
-function get_callback(params) {
-// get callback		
-		myDiv.innerHTML="status :"+params["status"]+"<br>"+
-						"http_error :"+params["http_error"];
-		myDiv.innerHTML="<br>Get Result :"+params["body"];
-}
-function post_callback(params) {
-// post callback		
-		myDiv.innerHTML="status :"+params["status"]+"<br>"+
-						"http_error :"+params["http_error"];
-		myDiv.innerHTML="<br>Get Result :"+params["body"];
-}
+
 function connect_wan_notify_callback(params) {
 //connect wan callback
-myDiv.innerHTML="phoneSignalStrength :"+params["phoneSignalStrength"]+"<br>"+
+setStatus("phoneSignalStrength :"+params["phoneSignalStrength"]+"<br>"+
 				"networkOperator :"+params["networkOperator"]+"<br>"+
 				"connectionTypeAvailable :"+params["connectionTypeAvailable"]+"<br>"+
 				"connectionTypeConnected :"+params["connectionTypeConnected"]+"<br>"+
-				"connectionManagerMessage :"+params["connectionManagerMessage"];
+				"connectionManagerMessage :"+params["connectionManagerMessage"]);
+    
+    
 }
-function download_file_callback(params){
-      if (params["status"] == "ok") {
-	    myDiv.innerHTML="Download Succeeded, path is /public/images/download.jpg";		
-	myDiv.innerHTML="<br>status: "+params["status"]+"<br>"+
-						"http_error: "+params["http_error"]+"<br>"+
-						"fileExists: "+params["fileExists"];
-        //alert("Download Succeeded, path is /public/images/download.jpg");
-      } else {
-	    myDiv.innerHTML="Download Failed";
-		myDiv.innerHTML="<br>status: "+params["status"]+"<br>"+
-						"http_error: "+params["http_error"]+"<br>"+
-						"fileExists: "+params["fileExists"];
-        //alert("Download Failed");
-      }
-    }
-function upload_file_callback(params){
-  if (params["status"] == "ok") {
-	myDiv.innerHTML="Upload Succeeded, path is /public/images/upload.jpg";		
-	myDiv.innerHTML="<br>status :"+params["status"]+"<br>"+
-					"http_error :"+params["http_error"]+"<br>"+
-					"fileExists :"+params["fileExists"];
-	//alert("Upload Succeeded, path is /public/images/upload.jpg");
-  } else {
-	myDiv.innerHTML="Upload Failed";
-	myDiv.innerHTML="<br>status :"+params["status"]+"<br>"+
-					"http_error :"+params["http_error"]+"<br>"+
-					"fileExists :"+params["fileExists"];
-	//alert("Upload Failed");
-  }
-}
+
 function status_notify_callback(params) {
-      myDiv.innerHTML="Network status changed from"+params["prev_status"]+" to "+params["current_status"];
-      //alert("Network status changed from "+params["prev_status"]+" to "+params["current_status"]);	 
-    }
+    setActual(params["current_status"]);
+    setStatus("Network status changed from"+params["prev_status"]+" to "+params["current_status"]);
+}
 	
 function detect_connection_notify_callback(params) {
-if(params["connectionInformation"] == "Disconnected")
-	myDiv.innerHTML=""+params["failureMessage"];
-else
-	myDiv.innerHTML="Connected";
+    setActual(params["connectionInformation"]);
+    
+    if(params["connectionInformation"] == "Disconnected")
+        setStatus(params["failureMessage"]);
+    else
+        setStatus("Connected");
  }
 
+        
+        function setDescription(dsc) {
+            desc.innerHTML = dsc;
+        }
+        
+        function setExpected(expctd) {
+            expected.innerHTML = expctd;
+        }
+        
+        function setActual(actl) {
+            actual.innerHTML = actl;
+        }
+        
+        function setStatus(stts) {
+
+            var currentdate = new Date();
+            var datetime = "";
+            
+            if ( stts != "" ) {
+                datetime = currentdate.getDate() + "/"
+                + (currentdate.getMonth()+1)  + "/"
+                + currentdate.getFullYear() + " @ "
+                + currentdate.getHours() + ":"
+                + currentdate.getMinutes() + ":"
+                + currentdate.getSeconds();
+            }
+            
+            info.innerHTML = datetime + " : " + stts;
+        }
+        
+        function clearAll() {
+            setDescription("");
+            setExpected("");
+            setActual("");
+            setStatus("");
+        }
  
 	
 </script>
 
 </head>
 <body>
-<br /><br />
+
+
+    
+    
+<!--
 <div id="myNet">Exptected Result :</div>
 <br><br><br>
 <div id="myDiv">Actual Result :</div>
+ -->
 <form name="controlForm" id="controlForm" action="" >
-<!--<input id="Back" type="button" value="Back" onclick="location.href='ControlAppearance.html'">-->
-<br /><br /><br /><br /><br />Select Test To Run &nbsp;&nbsp;
-<select name="myChoice" id="myChoice">
+
+    
+Select Test To Run &nbsp;&nbsp;
+<select name="myChoice" id="myChoice" onchange="describe()" onselect="describe()">
 <OPTION value="Select option" >VT-ID</OPTION>
-<OPTION value="VT293-0001">VT293-0001</OPTION> 
-<OPTION value="VT293-0002">VT293-0002</OPTION> 
-<OPTION value="VT293-0003">VT293-0003</OPTION> 
-<OPTION value="VT293-0004">VT293-0004</OPTION> 
-<OPTION value="VT293-0005">VT293-0005</OPTION> 
-<!--<OPTION value="VT293-0006">VT293-0006</OPTION> -->
-<OPTION value="VT293-0007">VT293-0007</OPTION>
-<OPTION value="VT293-0008">VT293-0008</OPTION> 
-<OPTION value="VT293-0009">VT293-0009</OPTION> 
-<OPTION value="VT293-0010">VT293-0010</OPTION> 
-<OPTION value="VT293-0011">VT293-0011</OPTION> 
-<!--<OPTION value="VT293-0012">VT293-0012</OPTION> 
-<OPTION value="VT293-0013">VT293-0013</OPTION> 
-<OPTION value="VT293-0014">VT293-0014</OPTION> 
-<OPTION value="VT293-0015">VT293-0015</OPTION> 
-<OPTION value="VT293-0016">VT293-0016</OPTION>-->  
+<OPTION value="VT293-0001">VT293-0001</OPTION>
+<OPTION value="VT293-0002">VT293-0002</OPTION>
+<!-- <OPTION value="VT293-0003">VT293-0003</OPTION> -->
+<OPTION value="VT293-0004">VT293-0004</OPTION>
+<OPTION value="VT293-0005">VT293-0005</OPTION>
+<OPTION platform = "WINDOWS" value="VT293-0007">VT293-0007</OPTION>
+<OPTION platform = "WINDOWS" value="VT293-0008">VT293-0008</OPTION>
+<OPTION platform = "WINDOWS" value="VT293-0009">VT293-0009</OPTION>
+<OPTION platform = "WINDOWS" value="VT293-0010">VT293-0010</OPTION>
+<OPTION platform = "WINDOWS" value="VT293-0011">VT293-0011</OPTION>
 <OPTION value="VT293-0017">VT293-0017</OPTION>
-<!--<OPTION value="VT293-0018">VT293-0018</OPTION> 
-<OPTION value="VT293-0019">VT293-0019</OPTION> 
-<OPTION value="VT293-0020">VT293-0020</OPTION> 
-<OPTION value="VT293-0021">VT293-0021</OPTION>
-<OPTION value="VT293-0022">VT293-0022</OPTION>--> 
-<OPTION value="VT293-0023">VT293-0023</OPTION> 
-<OPTION value="VT293-0024">VT293-0024</OPTION> 
+<OPTION value="VT293-0023">VT293-0023</OPTION>
+<OPTION value="VT293-0024">VT293-0024</OPTION>
 <OPTION value="VT293-0025">VT293-0025</OPTION>
-<OPTION value="VT293-0026">VT293-0026</OPTION> 
-<OPTION value="VT293-0027">VT293-0027</OPTION> 
-<OPTION value="VT293-0028">VT293-0028</OPTION> 
-<OPTION value="VT293-0029">VT293-0029</OPTION> 
-<OPTION value="VT293-0030">VT293-0030</OPTION> 
-<OPTION value="VT293-0031">VT293-0031</OPTION> 
-<OPTION value="VT293-0032">VT293-0032</OPTION> 
-<OPTION value="VT293-0033">VT293-0033</OPTION> 
-<OPTION value="VT293-0034">VT293-0034</OPTION> 
-<OPTION value="VT293-0035">VT293-0035</OPTION>
-<OPTION value="VT293-0036">VT293-0036</OPTION> 
-<!--<OPTION value="VT293-0037">VT293-0037</OPTION> 
-<OPTION value="VT293-0038">VT293-0038</OPTION> 
-<OPTION value="VT293-0039">VT293-0039</OPTION> 
-<OPTION value="VT293-0040">VT293-0040</OPTION> 
-<OPTION value="VT293-0041">VT293-0041</OPTION> 
-<OPTION value="VT293-0042">VT293-0042</OPTION> 
-<OPTION value="VT293-0043">VT293-0043</OPTION> 
-<OPTION value="VT293-0044">VT293-0044</OPTION> 
-<OPTION value="VT293-0045">VT293-0045</OPTION> 
-<OPTION value="VT293-0046">VT293-0046</OPTION> 
-<OPTION value="VT293-0047">VT293-0047</OPTION> 
-<OPTION value="VT293-0048">VT293-0048</OPTION> 
-<OPTION value="VT293-0049">VT293-0049</OPTION>
-<OPTION value="VT293-0050">VT293-0050</OPTION> 
-<OPTION value="VT293-0051">VT293-0051</OPTION> 
-<OPTION value="VT293-0052">VT293-0052</OPTION> 
-<OPTION value="VT293-0053">VT293-0053</OPTION> 
-<OPTION value="VT293-0054">VT293-0054</OPTION> 
-<OPTION value="VT293-0055">VT293-0055</OPTION> 
-<OPTION value="VT293-0056">VT293-0056</OPTION> 
-<OPTION value="VT293-0057">VT293-0057</OPTION> 
-<OPTION value="VT293-0058">VT293-0058</OPTION> 
-<OPTION value="VT293-0059">VT293-0059</OPTION> 
-<OPTION value="VT293-0060">VT293-0060</OPTION> 
-<OPTION value="VT293-0061">VT293-0061</OPTION> 
-<OPTION value="VT293-0062">VT293-0062</OPTION> 
-<OPTION value="VT293-0063">VT293-0063</OPTION>
-<OPTION value="VT293-0064">VT293-0064</OPTION> 
-<OPTION value="VT293-0065">VT293-0065</OPTION> 
-<OPTION value="VT293-0066">VT293-0066</OPTION> 
-<OPTION value="VT293-0067">VT293-0067</OPTION> 
-<OPTION value="VT293-0068">VT293-0068</OPTION> 
-<OPTION value="VT293-0069">VT293-0069</OPTION> 
-<OPTION value="VT293-0070">VT293-0070</OPTION> 
-<OPTION value="VT293-0071">VT293-0071</OPTION> 
-<OPTION value="VT293-0072">VT293-0072</OPTION> 
-<OPTION value="VT293-0073">VT293-0073</OPTION> 
-<OPTION value="VT293-0074">VT293-0074</OPTION> 
-<OPTION value="VT293-0075">VT293-0075</OPTION> 
-<OPTION value="VT293-0076">VT293-0076</OPTION> 
-<OPTION value="VT293-0077">VT293-0077</OPTION>
-<OPTION value="VT293-0078">VT293-0078</OPTION> 
-<OPTION value="VT293-0079">VT293-0079</OPTION> 
-<OPTION value="VT293-0080">VT293-0080</OPTION> 
-<OPTION value="VT293-0081">VT293-0081</OPTION> 
-<OPTION value="VT293-0082">VT293-0082</OPTION>-->
+<OPTION value="VT293-0026">VT293-0026</OPTION>
+<OPTION value="VT293-0027">VT293-0027</OPTION>
+<OPTION value="VT293-0028">VT293-0028</OPTION>
+<OPTION value="VT293-0029">VT293-0029</OPTION>
+<OPTION value="VT293-0030">VT293-0030</OPTION>
+<OPTION value="VT293-0031">VT293-0031</OPTION>
+<OPTION value="VT293-0032">VT293-0032</OPTION>
+<OPTION value="VT293-0033">VT293-0033</OPTION>
+<OPTION value="VT293-0034">VT293-0034</OPTION>
+<OPTION platform="ANDROID" value="ClientAuth">ClientAuth</OPTION>
+<!-- <OPTION platform="ANDROID" value="ClientAuthNoCert">ClientAuthNoCert</OPTION> -->
+
+    
+    <!--
+<OPTION platform = "" value="VT293-0035">VT293-0035</OPTION>
+<OPTION platform = "" value="VT293-0036">VT293-0036</OPTION>
+     -->
 </select>
+    
 <P><input type="button" onclick="getmodulename();" value="Run This Test"/></P>
 <P><input type="button" onclick="stop_status_notify();" value="Stop_Status_Notify"/>
 <input type="button" onclick="disconnect_wan_status_notify();" value="Disconnect_Wan"/></P>
 <!--<P><input type="button" onclick="cancel_notify_callback();" value="cancel"/>-->
 <P><input type="button" onclick="stop_detecting_connection();" value="Stop_Detecting"/></P>
+    
+    <br>
+    <h3>Test description:</h3>
+    <div id="desc"></div>
+    <h3>Expected result:</h3>
+    <div id="expected"></div>
+    <h3>Actual result:</h3>
+    <div id="actual"></div>
+    <h4>Status:</h4>
+    <div id="info"></div>
+    
 </form>
 </body>
 </html>

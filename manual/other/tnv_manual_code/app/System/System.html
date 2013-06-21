@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Rho:System</title>
+    <meta name="viewport" content="initial-scale=1.0, width=device-width"/>
+
+    <link type="text/css" rel="stylesheet" href="/public/css/manual_styles.css">
+
+    <script type="text/javascript" src="/public/jquery/jquery-1.6.4.js"></script>
+    <script type="text/javascript" src="/public/jquery/jquery.json-2.3.js"></script>
+
+    <script type="text/javascript" charset="utf-8" src="/public/api/rhoapi-modules.js"></script>
+    <script type="text/javascript" src="/public/js/helpers.js"></script>
+	
+    <script type="text/javascript">
+
+/*	$(document).ready(function(){
+	// hide all tests
+	$(".method_tests").hide();
+
+	// below show testcase if applicable to current platform
+	if (isApplePlatform()){
+		$(".ios").show();
+	};
+
+	if (isWindowsDesktopPlatform()){
+		$(".win32").show();
+	};
+
+	if (isAndroidPlatform()){
+	$(".android").show();
+	};
+
+	
+	if (isWindowsMobilePlatform()){
+		$(".wm").show();
+	};
+
+	if (isWindowsPhone8Platform()){
+		$(".wp8").show();
+	};
+
+	//First click for getting default value
+	$(".getValue").click();
+});  */
+
+ 
+    </script>
+    <script type="text/javascript">
+    	function getPropertyall(propertyName)
+    	{
+    		var data = Rho.System.getProperty(propertyName)
+    		$("#getPropertyresult span.result").text(JSON.stringify(data));
+    	}
+
+    	function getPropertiesall(propertyName)
+    	{
+    		var data = Rho.System.getProperties([propertyName])
+    		$("#getPropertiesresult span.result").text(JSON.stringify(data));
+    	}
+    </script>
+
+</head>
+<body>
+<h3>Rho.System</h3>
+
+
+<div class="method_tests android ios win32 wm wp8">
+	<div class="method_name">Rho.System.getProperty</div>
+	<div class="method_desc">getProperty All</div>
+	<div id="getPropertyresult">Result:  <span class="result"> </span></div>
+	<div class="test_scenario">
+		<div class="test_scenario_controls">
+			<a href="javascript:void(0)" onclick ="getPropertyall('hasCellNetwork')">Call getProperty with hasCellNetwork</a>
+		</div>
+		<span class="test_scenario_number">VT300-013 / VT300-014  <br /></span>
+	</div>
+
+	<div class="test_scenario">
+	<div class="test_scenario_controls">
+			<a href="javascript:void(0)" onclick ="getPropertyall('hasNetwork')">Call getProperty with hasNetwork</a>
+		</div>
+		<span class="test_scenario_number">VT300-015 / VT300-016 <br /></span>
+	</div>
+
+	<div class="test_scenario">
+	<div class="test_scenario_controls">
+			<a href="javascript:void(0)" onclick ="getPropertyall('hasWifiNetwork')">Call getProperty with hasWifiNetwork</a>
+		</div>
+		<span class="test_scenario_number">VT300-019 / VT300-020 <br /></span>
+	</div>
+
+	<div class="test_scenario">
+	<div class="test_scenario_controls">
+			<a href="javascript:void(0)" onclick ="getPropertyall('locale')">Call getProperty with locale</a>
+		</div>
+		<span class="test_scenario_number">VT300-030 <br /></span>
+	</div>
+
+</div>
+
+<div class="method_tests win32">
+	<div class="method_name">Rho.System.setWindowFrame</div>
+	<div class="method_desc">Call setWindowFrame() with X -50, Y -50, width -500 and height -500</div>
+	<div class="test_scenario">
+		<div class="test_scenario_controls">
+			<a href="javascript:void(0)" onclick ="Rho.System.setWindowFrame(-50,-50,-500,-500)">call setWindowFrame </a>
+		</div>
+		<span class="test_scenario_number">VT300-086 <br /></span>
+	</div>
+</div>
+
+<div class="method_tests win32">
+	<div class="method_name">Rho.System.setWindowPosition</div>
+	<div class="method_desc">Call setWindowPosition() with X -50, Y -50, width -500 and height -500</div>
+	<div class="test_scenario">
+		<div class="test_scenario_controls">
+			<a href="javascript:void(0)" onclick ="Rho.System.setWindowPosition(-50,-50,-500,-500)">call setWindowPosition</a>
+		</div>
+		<span class="test_scenario_number">VT300-089 <br /></span>
+	</div>
+</div>
+
+<div class="method_tests win32">
+	<div class="method_name">Rho.System.setWindowSize</div>
+	<div class="method_desc">Call setWindowSize() with width -500 and height 0</div>
+	<div class="test_scenario">
+		<div class="test_scenario_controls">
+			<a href="javascript:void(0)" onclick ="Rho.System.setWindowSize(-500, 0)">call setWindowSize</a>
+		</div>
+		<span class="test_scenario_number">VT300-092 <br /></span>
+	</div>
+</div>
+
+
+<div class="method_tests android ios win32 wm wp8">
+	<div class="method_name">Rho.System.getproperties</div>
+	<div class="method_desc">getproperties All</div>
+	<div id="getPropertiesresult">Result:  <span class="result"> </span></div>
+	<div class="test_scenario">
+		<div class="test_scenario_controls">
+			<a href="javascript:void(0)" onclick ="getPropertiesall('hasCellNetwork')">Call getproperties with hasCellNetwork</a>
+		</div>
+		<span class="test_scenario_number">VT300-142 / VT300-143  <br /></span>
+	</div>
+
+	<div class="test_scenario">
+	<div class="test_scenario_controls">
+			<a href="javascript:void(0)" onclick ="getPropertiesall('hasNetwork')">Call getproperties with hasNetwork</a>
+		</div>
+		<span class="test_scenario_number">VT300-144 / VT300-145 <br /></span>
+	</div>
+
+	<div class="test_scenario">
+	<div class="test_scenario_controls">
+			<a href="javascript:void(0)" onclick ="getPropertiesall('hasWifiNetwork')">Call getproperties with hasWifiNetwork</a>
+		</div>
+		<span class="test_scenario_number">VT300-148 / VT300-149 <br /></span>
+	</div>
+
+	<div class="test_scenario">
+	<div class="test_scenario_controls">
+			<a href="javascript:void(0)" onclick ="getPropertiesall('locale')">Call getproperties with locale</a>
+		</div>
+		<span class="test_scenario_number">VT300-158 <br /></span>
+	</div>
+
+</div>
+</body>
+</html>

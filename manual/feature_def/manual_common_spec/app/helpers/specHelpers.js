@@ -58,7 +58,7 @@ var writeIntoLog = function (desc, data){
 
 //Display Results on Device
 var displayResult = function (desc, data){
-	$('ul').empty();
+	$('#myList').empty();
 	var node=document.createElement("LI");
 	var textnode =document.createTextNode(desc);
 	node.appendChild(textnode);
@@ -72,6 +72,14 @@ var displayResult = function (desc, data){
 
 var dispCurrentProcess = function (data){
 	document.getElementById('detailsdiv').innerHTML = data;
+}
+
+var dispExpectedResult= function (data){
+	document.getElementById('expectedresult').innerHTML = data;
+}
+
+var dispTestCaseRunning = function (data){
+	document.getElementById('instruction').innerHTML = data;
 }
 
 // Get Random Name {Used in Database to get Random table name for each test}
@@ -104,7 +112,15 @@ function add(type) {
  
 }
 
-var testApplicable = function (arrOSTypes){
+function isTestApplicable (anArray){
     var platform = Rho.System.platform;
-    return (jQuery.inArray(platform, arrOSTypes) == -1) ? false : true ;
+    return (anArray.indexOf(platform) == -1) ? false : true ;
+}
+
+//Common Method to Make a Test Pass/Fail for Semi Automatic App.
+//Methods is used in System, CardReader
+
+var captureResult = function(status){
+    testResult = status;
+    captured = true;
 }

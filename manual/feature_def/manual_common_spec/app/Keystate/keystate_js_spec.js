@@ -1,18 +1,23 @@
+var testResult = '';
+var captured = false;
+
 describe("Key State Test", function() {
 	var displayflag = false;
 	beforeEach(function() {
 		/* ... Set up your object ... */
 		displayflag = false;
+		testResult = '';
+		captured = false;
 	});
 
 	afterEach(function() {
 		/* ... Tear it down ... */
 	});
 
-	it("VT281-0850 | Keystate showStates without any property |", function() {
+	it("VT281-0850 | KeyState showStates without any property |", function() {
 		runs(function()
 		{
-			Rho.Keystate.showStates();
+			Rho.KeyState.showStates();
 			setTimeout(function() {
 				displayflag = true;
 			}, 10000);
@@ -21,21 +26,20 @@ describe("Key State Test", function() {
 		waitsFor(function()
 		{
 			dispCurrentProcess("Press Shift, Alt, Control, Function, Caps, Num lock and Orange key");
-			return displayflag;
-		}, 'The KeyState indicator should display', 11000);
+			return captured;
+		}, 'The KeyState indicator should display', 30000);
 
 		runs(function()
 		{
-			var testPassed = confirm("Do you see KeyState indicator?");
-			expect(testPassed).toEqual(true);
+			expect(testResult).toEqual(true);
 		});
 	});
 
-	it("VT281-0851 | Keystate showStates with right to 50 |", function() {
+	it("VT281-0851 | KeyState showStates with right to 50 |", function() {
 		runs(function()
 		{
 
-			Rho.Keystate.showStates([{"right":50}]);
+			Rho.KeyState.showStates({"right":50})
 			setTimeout(function() {
 				displayflag = true;
 			}, 10000);
@@ -44,21 +48,20 @@ describe("Key State Test", function() {
 		waitsFor(function()
 		{
 			dispCurrentProcess("Press Shift, Alt, Control, Function, Caps, Num lock and Orange key");
-			return displayflag;
-		}, 'The KeyState indicator should display', 11000);
+			return captured;
+		}, 'The KeyState indicator should display', 30000);
 
 		runs(function()
 		{
-			var testPassed = confirm("Do you see KeyState indicator at right 50 ?");
-			expect(testPassed).toEqual(true);
+			expect(testResult).toEqual(true);
 		});
 	});
 
-	it("VT281-0854 | Keystate showStates with left to 70 |", function() {
+	it("VT281-0854 | KeyState showStates with top to 70 |", function() {
 		runs(function()
 		{
 
-			Rho.Keystate.showStates({"left":70})
+			Rho.KeyState.showStates({"top":70})
 			setTimeout(function() {
 				displayflag = true;
 			}, 10000);
@@ -67,21 +70,20 @@ describe("Key State Test", function() {
 		waitsFor(function()
 		{
 			dispCurrentProcess("Press Shift, Alt, Control, Function, Caps, Num lock and Orange key");
-			return displayflag;
-		}, 'The KeyState indicator should display', 11000);
+			return captured;
+		}, 'The KeyState indicator should display', 30000);
 
 		runs(function()
 		{
-			var testPassed = confirm("Do you see KeyState indicator at left 70 ?");
-			expect(testPassed).toEqual(true);
+			expect(testResult).toEqual(true);
 		});
 	});
 
-	it("VT281-0857 | Keystate showStates with width to 100 |", function() {
+	it("VT281-0857 | KeyState showStates with width to 100 |", function() {
 		runs(function()
 		{
 
-			Rho.Keystate.showStates({"width":100})
+			Rho.KeyState.showStates({"width":100})
 			setTimeout(function() {
 				displayflag = true;
 			}, 10000);
@@ -90,21 +92,20 @@ describe("Key State Test", function() {
 		waitsFor(function()
 		{
 			dispCurrentProcess("Press Shift, Alt, Control, Function, Caps, Num lock and Orange key");
-			return displayflag;
-		}, 'The KeyState indicator should display', 11000);
+			return captured;
+		}, 'The KeyState indicator should display', 30000);
 
 		runs(function()
 		{
-			var testPassed = confirm("Do you see KeyState indicator width 100 ?");
-			expect(testPassed).toEqual(true);
+			expect(testResult).toEqual(true);
 		});
 	});
 
-	it("VT281-0860 | Keystate showStates with height to 100 |", function() {
+	it("VT281-0860 | KeyState showStates with height to 100 |", function() {
 		runs(function()
 		{
 
-			Rho.Keystate.showStates({"height":150})
+			Rho.KeyState.showStates({"height":150})
 			setTimeout(function() {
 				displayflag = true;
 			}, 10000);
@@ -113,21 +114,20 @@ describe("Key State Test", function() {
 		waitsFor(function()
 		{
 			dispCurrentProcess("Press Shift, Alt, Control, Function, Caps, Num lock and Orange key");
-			return displayflag;
-		}, 'The KeyState indicator should display', 11000);
+			return captured;
+		}, 'The KeyState indicator should display', 30000);
 
 		runs(function()
 		{
-			var testPassed = confirm("Do you see KeyState indicator width 100 ?");
-			expect(testPassed).toEqual(true);
+			expect(testResult).toEqual(true);
 		});
 	});
 
-	it("VT281-0863 | Keystate showStates with all properties |", function() {
+	it("VT281-0863 | KeyState showStates with all properties |", function() {
 		runs(function()
 		{
 
-			Rho.Keystate.showStates({'right':100,'left':150,'height':200,'width':250})
+			Rho.KeyState.showStates({'right':100,'top':150,'height':200,'width':250})
 			setTimeout(function() {
 				displayflag = true;
 			}, 10000);
@@ -135,14 +135,13 @@ describe("Key State Test", function() {
 
 		waitsFor(function()
 		{
-			dispCurrentProcess("right:100,left:150,Height:200,width:250 </br> Press Shift, Alt, Control, Function, Caps, Num lock and Orange key");
-			return displayflag;
-		}, 'The KeyState indicator should display', 11000);
+			dispCurrentProcess("right:100,top:150,Height:200,width:250 </br> Press Shift, Alt, Control, Function, Caps, Num lock and Orange key");
+			return captured;
+		}, 'The KeyState indicator should display', 30000);
 
 		runs(function()
 		{
-			var testPassed = confirm("Do you see KeyState indicator at </br> right:100,left:150 with Height:200,width:250 ?");
-			expect(testPassed).toEqual(true);
+			expect(testResult).toEqual(true);
 		});
 	});
 
@@ -150,8 +149,8 @@ describe("Key State Test", function() {
 		runs(function()
 		{
 
-			Rho.Keystate.showStates({'right':100,'left':150,'height':200,'width':250});
-			Rho.Keystate.hideStates();
+			Rho.KeyState.showStates({'right':100,'top':150,'height':200,'width':250});
+			Rho.KeyState.hideStates();
 			setTimeout(function() {
 				displayflag = true;
 			}, 10000);
@@ -159,14 +158,13 @@ describe("Key State Test", function() {
 
 		waitsFor(function()
 		{
-			dispCurrentProcess("right:100,left:150,Height:200,width:250 </br> Press Shift, Alt, Control, Function, Caps, Num lock and Orange key");
-			return displayflag;
-		}, 'The KeyState indicator should display', 11000);
+			dispCurrentProcess("right:100,top:150,Height:200,width:250 </br> Press Shift, Alt, Control, Function, Caps, Num lock and Orange key");
+			return captured;
+		}, 'The KeyState indicator should display', 30000);
 
 		runs(function()
 		{
-			var testPassed = confirm("KeyState indicator should be hidden and should not be shown on page. <br/> Have you seen this behavior ?");
-			expect(testPassed).toEqual(true);
+			expect(testResult).toEqual(true);
 		});
 	});
 
@@ -184,7 +182,7 @@ describe("Key State Test", function() {
 		runs(function()
 		{
 
-			Rho.Keystate.showStates();
+			Rho.KeyState.showStates();
 			setTimeout(function() {
 				displayflag = true;
 			}, 10000);
@@ -193,13 +191,12 @@ describe("Key State Test", function() {
 		waitsFor(function()
 		{
 			dispCurrentProcess("Press "+test_key['keyName']+ " key");
-			return displayflag;
-		}, 'The KeyState indicator should display', 11000);
+			return captured;
+		}, 'The KeyState indicator should display', 30000);
 
 		runs(function()
 		{
-			var testPassed = confirm("Do you see KeyState indicator for <br/>"+test_key['keyName']+" Key ?");
-			expect(testPassed).toEqual(true);
+			expect(testResult).toEqual(true);
 		});
 
 		});
@@ -210,7 +207,7 @@ describe("Key State Test", function() {
 		runs(function()
 		{
 
-			Rho.Keystate.showStates();
+			Rho.KeyState.showStates();
 			add('text');
 			text.focus();
 			setTimeout(function() {
@@ -221,13 +218,12 @@ describe("Key State Test", function() {
 		waitsFor(function()
 		{
 			dispCurrentProcess("Press Orange Key once. <br/> Press another key from the keyboard");
-			return displayflag;
-		}, 'The KeyState indicator should display', 11000);
+			return captured;
+		}, 'The KeyState indicator should display', 30000);
 
 		runs(function()
 		{
-			var testPassed = confirm("The data should be seen in the input box. <br/> Are you able to see ?");
-			expect(testPassed).toEqual(true);
+			expect(testResult).toEqual(true);
 		});
 	});
 
@@ -235,7 +231,7 @@ describe("Key State Test", function() {
 		runs(function()
 		{
 
-			Rho.Keystate.showStates();
+			Rho.KeyState.showStates();
 			setTimeout(function() {
 				displayflag = true;
 			}, 10000);
@@ -244,13 +240,12 @@ describe("Key State Test", function() {
 		waitsFor(function()
 		{
 			dispCurrentProcess("Press Orange Key Twice. <br/> Press another key from the keyboard");
-			return displayflag;
-		}, 'The KeyState indicator should display', 11000);
+			return captured;
+		}, 'The KeyState indicator should display', 30000);
 
 		runs(function()
 		{
-			var testPassed = confirm("The data should be seen in the input box. <br/> Are you able to see ?");
-			expect(testPassed).toEqual(true);
+			expect(testResult).toEqual(true);
 		});
 	});
 
@@ -258,7 +253,7 @@ describe("Key State Test", function() {
 		runs(function()
 		{
 
-			Rho.Keystate.showStates();
+			Rho.KeyState.showStates();
 			setTimeout(function() {
 				displayflag = true;
 			}, 10000);
@@ -267,13 +262,12 @@ describe("Key State Test", function() {
 		waitsFor(function()
 		{
 			dispCurrentProcess("Press Blue Key once. <br/> Press another key from the keyboard");
-			return displayflag;
-		}, 'The KeyState indicator should display', 11000);
+			return captured;
+		}, 'The KeyState indicator should display', 30000);
 
 		runs(function()
 		{
-			var testPassed = confirm("The data should be seen in the input box. <br/> Are you able to see ?");
-			expect(testPassed).toEqual(true);
+			expect(testResult).toEqual(true);
 		});
 	});
 
@@ -281,7 +275,7 @@ describe("Key State Test", function() {
 		runs(function()
 		{
 
-			Rho.Keystate.showStates();
+			Rho.KeyState.showStates();
 			setTimeout(function() {
 				displayflag = true;
 			}, 10000);
@@ -290,13 +284,12 @@ describe("Key State Test", function() {
 		waitsFor(function()
 		{
 			dispCurrentProcess("Press Blue Key Twice. <br/> Press another key from the keyboard");
-			return displayflag;
-		}, 'The KeyState indicator should display', 11000);
+			return captured;
+		}, 'The KeyState indicator should display', 30000);
 
 		runs(function()
 		{
-			var testPassed = confirm("The data should be seen in the input box. <br/> Are you able to see ?");
-			expect(testPassed).toEqual(true);
+			expect(testResult).toEqual(true);
 		});
 	});
 
