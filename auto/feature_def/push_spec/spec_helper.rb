@@ -79,10 +79,10 @@ def run_apps(platform)
 	    f.each do |line|
 	      if line =~ /^sdk: '..\/..\/..\/..\/..\/rhodes'$/
 	      	  # FIXME: using installed rhodes gem (beta.21)
-	          bf.puts "# #{line}"
+	          bf.puts "#{line}"
 	      elsif line =~ /Path-to-Motorola-Extensions/
 	      	  # FIXME: using installed rhodes gem (beta.21)
-	          bf.puts "#  extensions: \"#{$rhoelements_root}/extensions\"\n"
+	          bf.puts "  extensions: \"#{$rhoelements_root}/extensions\"\n"
 	      else
 	          bf.puts line
 	      end
