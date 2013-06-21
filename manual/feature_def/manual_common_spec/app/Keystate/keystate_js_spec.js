@@ -15,8 +15,10 @@ describe("Key State Test", function() {
 	});
 
 	it("VT281-0850 | KeyState showStates without any property |", function() {
+		
 		runs(function()
 		{
+			dispCurrentProcess("VT281-0850 |KeyState showStates without any property<br>Press Shift, Alt, Control, Function, Caps, Num lock and Orange key");
 			Rho.KeyState.showStates();
 			setTimeout(function() {
 				displayflag = true;
@@ -24,8 +26,7 @@ describe("Key State Test", function() {
 		});
 
 		waitsFor(function()
-		{
-			dispCurrentProcess("Press Shift, Alt, Control, Function, Caps, Num lock and Orange key");
+		{			
 			return captured;
 		}, 'The KeyState indicator should display', 30000);
 
@@ -36,9 +37,10 @@ describe("Key State Test", function() {
 	});
 
 	it("VT281-0851 | KeyState showStates with right to 50 |", function() {
+
 		runs(function()
 		{
-
+		dispCurrentProcess("VT281-0851 | KeyState showStates with right to 50<br>Press Shift, Alt, Control, Function, Caps, Num lock and Orange key");
 			Rho.KeyState.showStates({"right":50})
 			setTimeout(function() {
 				displayflag = true;
@@ -47,7 +49,6 @@ describe("Key State Test", function() {
 
 		waitsFor(function()
 		{
-			dispCurrentProcess("Press Shift, Alt, Control, Function, Caps, Num lock and Orange key");
 			return captured;
 		}, 'The KeyState indicator should display', 30000);
 
@@ -60,7 +61,7 @@ describe("Key State Test", function() {
 	it("VT281-0854 | KeyState showStates with top to 70 |", function() {
 		runs(function()
 		{
-
+            dispCurrentProcess("VT281-0854 | KeyState showStates with top to 70<br>Press Shift, Alt, Control, Function, Caps, Num lock and Orange key");
 			Rho.KeyState.showStates({"top":70})
 			setTimeout(function() {
 				displayflag = true;
@@ -69,7 +70,6 @@ describe("Key State Test", function() {
 
 		waitsFor(function()
 		{
-			dispCurrentProcess("Press Shift, Alt, Control, Function, Caps, Num lock and Orange key");
 			return captured;
 		}, 'The KeyState indicator should display', 30000);
 
@@ -82,7 +82,7 @@ describe("Key State Test", function() {
 	it("VT281-0857 | KeyState showStates with width to 100 |", function() {
 		runs(function()
 		{
-
+            dispCurrentProcess("VT281-0857 | KeyState showStates with width to 100<br>Press Shift, Alt, Control, Function, Caps, Num lock and Orange key");
 			Rho.KeyState.showStates({"width":100})
 			setTimeout(function() {
 				displayflag = true;
@@ -91,7 +91,6 @@ describe("Key State Test", function() {
 
 		waitsFor(function()
 		{
-			dispCurrentProcess("Press Shift, Alt, Control, Function, Caps, Num lock and Orange key");
 			return captured;
 		}, 'The KeyState indicator should display', 30000);
 
@@ -104,7 +103,7 @@ describe("Key State Test", function() {
 	it("VT281-0860 | KeyState showStates with height to 100 |", function() {
 		runs(function()
 		{
-
+            dispCurrentProcess("VT281-0860 | KeyState showStates with height to 100<br>Press Shift, Alt, Control, Function, Caps, Num lock and Orange key");
 			Rho.KeyState.showStates({"height":150})
 			setTimeout(function() {
 				displayflag = true;
@@ -113,7 +112,6 @@ describe("Key State Test", function() {
 
 		waitsFor(function()
 		{
-			dispCurrentProcess("Press Shift, Alt, Control, Function, Caps, Num lock and Orange key");
 			return captured;
 		}, 'The KeyState indicator should display', 30000);
 
@@ -126,7 +124,7 @@ describe("Key State Test", function() {
 	it("VT281-0863 | KeyState showStates with all properties |", function() {
 		runs(function()
 		{
-
+            dispCurrentProcess("VT281-0863 | KeyState showStates with all properties<br>right:100,top:150,<br>Height:200,width:250 Press Shift, Alt, Control, <br>Function, Caps, Num lock and Orange key");
 			Rho.KeyState.showStates({'right':100,'top':150,'height':200,'width':250})
 			setTimeout(function() {
 				displayflag = true;
@@ -135,7 +133,6 @@ describe("Key State Test", function() {
 
 		waitsFor(function()
 		{
-			dispCurrentProcess("right:100,top:150,Height:200,width:250 </br> Press Shift, Alt, Control, Function, Caps, Num lock and Orange key");
 			return captured;
 		}, 'The KeyState indicator should display', 30000);
 
@@ -148,7 +145,7 @@ describe("Key State Test", function() {
 	it("VT281-0864 | KeyState hideStates |", function() {
 		runs(function()
 		{
-
+            dispCurrentProcess("VT281-0864 | KeyState hideStates<br>right:100,top:150,<br>Height:200,width:250 </br> Press Shift, Alt, Control, Function, Caps, Num lock and Orange key");
 			Rho.KeyState.showStates({'right':100,'top':150,'height':200,'width':250});
 			Rho.KeyState.hideStates();
 			setTimeout(function() {
@@ -158,7 +155,6 @@ describe("Key State Test", function() {
 
 		waitsFor(function()
 		{
-			dispCurrentProcess("right:100,top:150,Height:200,width:250 </br> Press Shift, Alt, Control, Function, Caps, Num lock and Orange key");
 			return captured;
 		}, 'The KeyState indicator should display', 30000);
 
@@ -206,7 +202,7 @@ describe("Key State Test", function() {
 	it("VT281-0872 | KeyState functionality Test with Orange key once |", function() {
 		runs(function()
 		{
-
+            dispCurrentProcess("VT281-0872 | KeyState functionality Test with Orange key once<br>Press Orange Key once. <br/> Press another key from the keyboard");
 			Rho.KeyState.showStates();
 			add('text');
 			text.focus();
@@ -217,7 +213,6 @@ describe("Key State Test", function() {
 
 		waitsFor(function()
 		{
-			dispCurrentProcess("Press Orange Key once. <br/> Press another key from the keyboard");
 			return captured;
 		}, 'The KeyState indicator should display', 30000);
 
@@ -230,7 +225,7 @@ describe("Key State Test", function() {
 	it("VT281-0873 | KeyState functionality Test with Orange key Twice |", function() {
 		runs(function()
 		{
-
+            dispCurrentProcess("VT281-0873 | KeyState functionality Test with Orange key Twice<br>Press Orange Key Twice. <br/> Press another key from the keyboard");
 			Rho.KeyState.showStates();
 			setTimeout(function() {
 				displayflag = true;
@@ -239,7 +234,6 @@ describe("Key State Test", function() {
 
 		waitsFor(function()
 		{
-			dispCurrentProcess("Press Orange Key Twice. <br/> Press another key from the keyboard");
 			return captured;
 		}, 'The KeyState indicator should display', 30000);
 
@@ -252,7 +246,7 @@ describe("Key State Test", function() {
 	it("VT281-0874 | KeyState functionality Test with Blue key once |", function() {
 		runs(function()
 		{
-
+			dispCurrentProcess("VT281-0874 | KeyState functionality Test with Blue key once<br>Press Blue Key once. <br/> Press another key from the keyboard");
 			Rho.KeyState.showStates();
 			setTimeout(function() {
 				displayflag = true;
@@ -261,8 +255,7 @@ describe("Key State Test", function() {
 
 		waitsFor(function()
 		{
-			dispCurrentProcess("Press Blue Key once. <br/> Press another key from the keyboard");
-			return captured;
+     		return captured;
 		}, 'The KeyState indicator should display', 30000);
 
 		runs(function()
@@ -274,7 +267,7 @@ describe("Key State Test", function() {
 	it("VT281-0875 | KeyState functionality Test with Blue key Twice |", function() {
 		runs(function()
 		{
-
+			dispCurrentProcess("VT281-0875 | KeyState functionality Test with Blue key Twice<br>Press Blue Key Twice. <br/> Press another key from the keyboard");
 			Rho.KeyState.showStates();
 			setTimeout(function() {
 				displayflag = true;
@@ -283,7 +276,6 @@ describe("Key State Test", function() {
 
 		waitsFor(function()
 		{
-			dispCurrentProcess("Press Blue Key Twice. <br/> Press another key from the keyboard");
 			return captured;
 		}, 'The KeyState indicator should display', 30000);
 

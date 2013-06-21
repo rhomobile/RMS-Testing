@@ -24,7 +24,11 @@ describe("Barcode JS API Test", function() {
 		(function(enumObject,arrScanner){
 
 			var scnname = enumObject.getProperty('friendlyName');
-			var scntype = enumObject.getProperty('ID');
+			var scnid = enumObject.getProperty('ID');
+			//var scntype = enumObject.getProperty('scannerType');
+			var scntype = enumObject.scannerType;
+			//alert("scntype" + scntype + "scnname" + scnname);
+
 		    var RETICLE_TYPE = 'softwareReticle';
 			if(Rho.System.platform == "ANDROID" && scnname == "2D Imager")
 			{
@@ -35,13 +39,13 @@ describe("Barcode JS API Test", function() {
 				RETICLE_TYPE = 'softwareReticle';
 			}
 
-			describe("Enable Scanner "+ scntype +": "+ scnname, function() {
+			describe("Enable Scanner "+ scnid +": "+ scnname + scntype, function() {
 
 				beforeEach(function() {
 					enableflag = false;
 				});
 				
-				it("Enable "+ scntype + scnname, function() {
+				it("Enable "+ scnid + scnname, function() {
 					
 					runs(function() {
 						//Rho.Log.info(JSON.stringify(scanObject), "PATRO Enable");
@@ -59,7 +63,7 @@ describe("Barcode JS API Test", function() {
 			});
 
 
-			describe("Barcode property using set/getProperty for "+ scntype +": "+ scnname, function() {
+			describe("Barcode property using set/getProperty for "+ scnid +": "+ scnname, function() {
 
 				for (var i=0;i<arrScanner.length;i++){
 
@@ -77,7 +81,7 @@ describe("Barcode JS API Test", function() {
 			});
 
 
-			describe("Barcode property Using set/getProperties for "+ scntype +": "+ scnname, function() {
+			describe("Barcode property Using set/getProperties for "+ scnid +": "+ scnname, function() {
 
 				for (var i=0;i<arrScanner.length;i++){
 
@@ -117,7 +121,7 @@ describe("Barcode JS API Test", function() {
 				}
 			});
 
-			describe("Barcode property setting Directly for "+ scntype +": "+ scnname, function() {
+			describe("Barcode property setting Directly for "+ scnid +": "+ scnname, function() {
 
 				for (var i=0;i<arrScanner.length;i++){
 
@@ -155,7 +159,7 @@ describe("Barcode JS API Test", function() {
 			});
 
 
-			describe("getProperty and get properties with all combination for "+ scntype +": "+ scnname, function() {
+			describe("getProperty and get properties with all combination for "+ scnid +": "+ scnname, function() {
 
 				beforeEach(function() {
 					getpropertiesdata ='';
@@ -163,7 +167,7 @@ describe("Barcode JS API Test", function() {
 					callbackstatus = false;
 				});
 
-						it("VT282-2001 | call getProperties() with sync callback and hash |" + scntype, function() {
+						it("VT282-2001 | call getProperties() with sync callback and hash |" + scnid, function() {
 
 							runs(function() {
 							    enumObject.setProperties({'allDecoders':'false','picklistMode':RETICLE_TYPE,'code93':'true'});
@@ -182,7 +186,7 @@ describe("Barcode JS API Test", function() {
 						});
 
 
-						it("VT282-2002 | call getProperties() with anonymous callback and hash |" + scntype, function() {
+						it("VT282-2002 | call getProperties() with anonymous callback and hash |" + scnid, function() {
 
 							runs(function() {    
 							    enumObject.setProperties({'allDecoders':'false','picklistMode':RETICLE_TYPE,'code93':'true'});
@@ -200,7 +204,7 @@ describe("Barcode JS API Test", function() {
 							});							
 						});
 
-						it("VT282-2000 | call getProperties() without callback |" + scntype, function() {
+						it("VT282-2000 | call getProperties() without callback |" + scnid, function() {
 
 							    //enumObject.clearAllProperties();
 							    enumObject.setProperties({'allDecoders':'false','picklistMode':RETICLE_TYPE,'code93':'true'});
@@ -212,7 +216,7 @@ describe("Barcode JS API Test", function() {
 						});
 
 
-						it("VT282-2004 | call getProperty() with sync callback and property |" + scntype, function() {
+						it("VT282-2004 | call getProperty() with sync callback and property |" + scnid, function() {
 
 							runs(function() {  									    
 							    enumObject.setProperty('allDecoders','true');
@@ -228,7 +232,7 @@ describe("Barcode JS API Test", function() {
 							});										
 						});
 
-						it("VT282-2005 | call getProperty() with anonymous callback and property |" + scntype, function() {
+						it("VT282-2005 | call getProperty() with anonymous callback and property |" + scnid, function() {
 
 							runs(function() {
 							    enumObject.setProperty('picklistMode',RETICLE_TYPE);
@@ -245,7 +249,7 @@ describe("Barcode JS API Test", function() {
 						});
 
 
-						it("VT282-2003 | call getProperty() without callback |" + scntype, function() {
+						it("VT282-2003 | call getProperty() without callback |" + scnid, function() {
 			    
 							    enumObject.setProperty('allDecoders','true');
 								var data = enumObject.getProperty("allDecoders");
@@ -253,30 +257,30 @@ describe("Barcode JS API Test", function() {
 								expect(getpropertydata).toEqual('true');								
 						});
 
-						it("VT282-2006 | call getDefault |" + scntype, function() {
+						it("VT282-2006 | call getDefault |" + scnid, function() {
 
 							    Rho.Barcode.setDefault(enumObject);
 							    var defaultobj = Rho.Barcode.getDefault();						  
-								expect(scntype).toEqual(defaultobj.getProperty('ID'));
+								expect(scnid).toEqual(defaultobj.getProperty('ID'));
 						});
 
-						it("VT282-2006A | call Default |" + scntype, function() {
+						it("VT282-2006A | call Default |" + scnid, function() {
 
 							    //enumObject.clearAllProperties();
 							    //Rho.Barcode.setDefaultID( enumObject.getId() );
 							   // Rho.Barcode.default = enumObject;
 							   // var defaultobj = Rho.Barcode.default;
-								expect(scntype).toEqual(defaultobj.getProperty('ID'));
+								expect(scnid).toEqual(defaultobj.getProperty('ID'));
 						});
 			});
 
-			describe("Disable Scanner "+ scntype +": "+ scnname, function() {
+			describe("Disable Scanner "+ scnid +": "+ scnname + scntype, function() {
 
 				beforeEach(function() {
 					disableflag = false;
 				});
 
-				it("Disable "+ scntype + scnname, function() {
+				it("Disable "+ scnid + scnname, function() {
 					
 					runs(function() {
 						//Rho.Log.info(JSON.stringify(scanObject), "PATRO Disable");
@@ -296,7 +300,7 @@ describe("Barcode JS API Test", function() {
 
 			if(Rho.System.platform == "ANDROID")
 			{
-				describe("Barcode property set using enable() for "+ scntype +": "+ scnname, function() {
+				describe("Barcode property set using enable() for "+ scnid +": "+ scnname, function() {
 
 					var flag = false;
 
