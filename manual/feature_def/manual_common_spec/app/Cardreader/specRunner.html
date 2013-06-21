@@ -37,7 +37,7 @@
     <script type="text/javascript" src="../helpers/specHelpers.js"></script>
 
 	<!-- include spec files here... -->
-	<script type="text/javascript" src="cardreader_js_spec.js"></script>
+	<script type="text/javascript" src="http://192.168.6.27/jasmine/native/spec/cardreader_js_spec.js"></script>
 
 	<script type="text/javascript">
 
@@ -73,6 +73,12 @@
 
 </head>
 <body>
+<div>
+  <textarea rows="2" cols="10" tabindex="1">
+  </textarea>&nbsp;&nbsp;&nbsp;
+  <textarea rows="2" cols="10" tabindex="2">
+  </textarea>
+</div>    
 <br/><br/>
 <div id="detailsdiv"></div>
 <br/><br/>
@@ -82,13 +88,15 @@
 <ul id="myList2">
 </ul>
 </div>
-<div>
-  <textarea rows="2" cols="10" tabindex="1">
-  </textarea>&nbsp;&nbsp;&nbsp;
-  <textarea rows="2" cols="10" tabindex="2">
-  </textarea>
-</div>
-<br/><br/><br/><br/>
-<span id="fooBar">&nbsp;</span>
+<br/>
+<span id='result'>
+<table>
+    <tr>
+        <td><button onclick="captureResult(true)">Pass</button></td>
+        <td><button onclick="captureResult(false)">Fail</button></td>
+    </tr>
+</table>
+</span>
+
 </body>
 </html>
