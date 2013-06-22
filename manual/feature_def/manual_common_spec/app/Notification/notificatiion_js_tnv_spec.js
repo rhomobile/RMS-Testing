@@ -105,14 +105,14 @@ describe("Notification Manual FD  Tests", function () {
         });
     });
 
-    it("VT281-0853 |showPopup with Message and title and icon  as well |", function () {
+    it("VT281-0853 |showPopup with Message and title and predefined icon  as well |", function () {
 
         runs(function () {
-            dispTestCaseRunning(" wait for the status message to pop up along with title and icon ");
-            dispExpectedResult("see if the pop up is showing the message ,title and also thenicon ");
+            dispTestCaseRunning(" wait for the status message to pop up along with title and question icon ");
+            dispExpectedResult("see if the pop up is showing the message ,title and also then question icon ");
             var propertyMap = {message: 'This is a popup with Icon', buttons: [
                 {id: 'yes', title: 'yes'}
-            ], title: 'MyTitle', icon: '/app/Notification/icon.png'};
+            ], title: 'MyTitle', icon: 'question'};
             Rho.Notification.showPopup(propertyMap);
         });
 
@@ -128,10 +128,33 @@ describe("Notification Manual FD  Tests", function () {
     });
 
 
+    it("VT281-0853 |showPopup with Message, title, predefined icon  and ok cancel buttons |", function () {
+
+        runs(function () {
+            dispTestCaseRunning(" wait for the status message to pop up along with title, info icon and ok cancel buttons");
+            dispExpectedResult("see if the pop up is showing the message ,title, info icon and ok cancel buttons ");
+            var propertyMap = {message: 'This is a popup with Icon', buttons: [
+                {id: 'ok', title: 'ok'},
+                {id: 'cancel', title: 'cancel'}
+            ], title: 'MyTitle', icon: 'info'};
+            Rho.Notification.showPopup(propertyMap);
+        });
+
+
+        waitsFor(function () {
+            dispExpectedResult("see if the pop up is showing the Message, title, predefined icon  and ok cancel buttons ");
+            return captured;
+        }, 'The message  should have been popped up by now', 30000);
+
+        runs(function () {
+            expect(testResult).toEqual(true);
+        });
+    });
+    
     it("VT281-0854 |showPopup with Message and title , icon and buttons  as well |", function () {
 
         runs(function () {
-            dispTestCaseRunning(" wait for the status message to pop up along with title,icon and three buttons ");
+            dispTestCaseRunning(" wait for the status message to pop up along with title,icon(iOS, Android) and three buttons ");
             dispExpectedResult(" see if the pop up is showing the message, title, icon and three buttons")
             var propertyMap = {message: 'This is a pop up with buttons', buttons: [
                 {id: 'yes', title: 'yes'},
@@ -193,6 +216,33 @@ describe("Notification Manual FD  Tests", function () {
         });
     });
 
+if ( Rho.System.platform == "WINDOWS_DESKTOP" || Rho.System.platform == "WINDOWS" || Rho.System.isRhoSimulator )
+{
+    it("VT281-0856 |showStatus up and then hide Status|", function () {
+
+        runs(function () {
+            dispTestCaseRunning(" wait for the pop up and then after 10 sec hide pop up is called  ");
+            dispExpectedResult(" see if the pop up is showing the message, then it hides automatically after 10sec");
+
+        });
+        runs(function () {
+            
+            Rho.Notification.showStatus('MyAlert', 'This is status message', 'click to hide');
+            setTimeout(function () {
+                Rho.Notification.hidePopup();
+            }, 1000);
+        });
+        waitsFor(function () {
+            dispExpectedResult("see if the pop up is showing the message, then it hides automatically after 10sec");
+            return captured;
+        }, 'The message  should have been popped up and hidden by now', 30000);
+
+        runs(function () {
+            expect(testResult).toEqual(true);
+        });
+    });
+}else
+{
     it("VT281-0856 |showPopup up and then hide Pop up|", function () {
 
         runs(function () {
@@ -207,6 +257,7 @@ describe("Notification Manual FD  Tests", function () {
                 'Cancel'
             ], title: 'MyTitle', icon: '/app/Notification/icon.png'};
             Rho.Notification.showPopup(propertyMap);
+            
             setTimeout(function () {
                 Rho.Notification.hidePopup();
             }, 1000);
@@ -220,7 +271,12 @@ describe("Notification Manual FD  Tests", function () {
             expect(testResult).toEqual(true);
         });
     });
-
+}
+    
+if ( Rho.System.platform == "WINDOWS_DESKTOP" || Rho.System.isRhoSimulator )
+{
+}else
+{
     it("VT281-0857 |Beep for 5 secs and with volume 3 with 1000 hz|", function () {
 
         runs(function () {
@@ -282,7 +338,7 @@ describe("Notification Manual FD  Tests", function () {
         runs(function () {
             dispTestCaseRunning(" MP3 file will be played  ");
             dispExpectedResult("MP3 file should be played ");
-            Rho.Notification.playFile('/app/Notification/media1.mp3', '.mp3');
+            Rho.Notification.playFile( Rho.RhoFile.join( Rho.Application.modelFolderPath('Notification'), 'media1.mp3'), '.mp3');
         });
 
         waitsFor(function () {
@@ -318,7 +374,7 @@ describe("Notification Manual FD  Tests", function () {
         runs(function () {
             dispTestCaseRunning(" MP3 file will be played  ");
             dispExpectedResult("MP3 file should be played ");
-            Rho.Notification.playFile('/app/Notification/media1.mp3', '');
+            Rho.Notification.playFile(Rho.RhoFile.join( Rho.Application.modelFolderPath('Notification'), 'media1.mp3'), '');
         });
 
         waitsFor(function () {
@@ -336,7 +392,7 @@ describe("Notification Manual FD  Tests", function () {
         runs(function () {
             dispTestCaseRunning(" MP3 file will be played  ");
             dispExpectedResult("MP3 file should be played ");
-            Rho.Notification.playFile('/app/Notification/media2.wav', '.wav');
+            Rho.Notification.playFile(Rho.RhoFile.join( Rho.Application.modelFolderPath('Notification'), 'media2.wav'), '.wav');
         });
 
         waitsFor(function () {
@@ -436,6 +492,7 @@ describe("Notification Manual FD  Tests", function () {
             expect(testResult).toEqual(true);
         });
     });
+}    
 });
 
 var enumData = Rho.Notification.Led.enumerate();
