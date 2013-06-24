@@ -1,6 +1,4 @@
-describe("<ORM module specs>", function() {
-    var db = null;
-
+   var db = null;
     var cleanVars = function(object) {
         var vars = object.vars();
         var cleanVars = {};
@@ -14,29 +12,37 @@ describe("<ORM module specs>", function() {
         return cleanVars;
     };
 
-    beforeEach(function(){
-      db = Rho.ORMHelper.dbConnection("local");
-    });
 
-    afterEach(function(){
-      db.$execute_sql("DELETE FROM SOURCES");
-      db.$execute_sql("DELETE FROM OBJECT_VALUES");
-      db.$execute_sql("DELETE FROM CHANGED_VALUES");
-      Rho.ORM.clear();
+
+  function reset(){
+    db = Rho.ORMHelper.dbConnection("local");
+    var partitions = Rho.ORMHelper.getDbPartitions();
+    $.each(partitions, function(index, db2) {
+      db2.$execute_sql("DELETE FROM SOURCES");
+      db2.$execute_sql("DELETE FROM OBJECT_VALUES");
+      db2.$execute_sql("DELETE FROM CHANGED_VALUES");
+    });
+    Rho.ORM.clear();
+  }
+
+describe("<ORM module specs>", function() {
+
+    beforeEach(function(){
+      reset();
     });
 
     it('should create model',function(){
-        var Product = function(model){
-            model.modelName("Product");
-            model.enable("sync");
-            model.property("name","string");
-            model.property("brand","string");
-            model.set("partition","local");
-        };
-        p = Rho.ORM.addModel(Product);
-        source = Opal.Rho._scope.RhoConfig.$sources().map["Product"];
-        expect(source.sync_type).toEqual('incremental');
-        expect(source.name).toEqual('Product');
+      var Product = function(model){
+          model.modelName("Product");
+          model.enable("sync");
+          model.property("name","string");
+          model.property("brand","string");
+          model.set("partition","local");
+      };
+      p = Rho.ORM.addModel(Product);
+      source = Opal.Rho._scope.RhoConfig.$sources().map["Product"];
+      expect(source.sync_type).toEqual('incremental');
+      expect(source.name).toEqual('Product');
     });
 
     it('should add model, get model, clear all models', function() {
@@ -73,8 +79,7 @@ describe("<ORM module specs>", function() {
         expect(sources['Product']).toBeDefined();
         expect(Rho.ORM.getModel('Product')).toBe(Model);
 
-        res = db.$execute_sql("SELECT * FROM Product");
-        
+        res = db.$execute_sql("SELECT * FROM Product",[]);
         expect(res).toEqual([]);
         db.$execute_sql("DROP TABLE Product");
     });
@@ -247,6 +252,10 @@ describe("<ORM module specs>", function() {
  });
 
 describe("<ORM Db Reset specs>", function() {
+
+  beforeEach(function(){
+    reset();
+  });
 
   it("should return true if a model objects have local changes for sync haveLocalChanges",function(){
       expect(Rho.ORM.getModel('Product')).toBeUndefined();
