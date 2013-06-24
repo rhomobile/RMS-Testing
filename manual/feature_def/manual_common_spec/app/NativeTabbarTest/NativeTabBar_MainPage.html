@@ -563,10 +563,58 @@
 	</div>
 </div>		
 
-
+    <div class="method_desc">Tabbar with hiddenTabs as True with labels defined for both tabs </div>
+	<div class="test_scenario">
+		<div class="test_scenario_controls">
+				<a href="javascript:void(0)" onclick="Createtabbarnew(
+					[{'action':'/app/NativeTabbarTest/NativeTabBar_MainPage.html', 'icon':'/public/images/bar/gears.png'},
+					{'label':'Native Tabbar', 'action':'/app/NativeTabbarTest/NativeTabBar_MainPage.html', 'icon':'/public/images/bar/gears.png'},
+					{'label':'Main page', 'action':'/app/index.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true},
+					{'label':'log', 'action':'log','backgroundColor' : 0x7F7F7F,'createOnInit':true },
+					{'label':'home', 'action':'home','backgroundColor' : 0x7F7F7F,'createOnInit':true },
+					{'label':'options', 'action':'options'},
+					{'label':'refresh', 'action':'refresh','backgroundColor' : 0x7F7F7F}], 
+					{'verticalOrientation':false, 'hiddenTabs': false, 'createOnInit' : false, 'placeTabsBottom':false}
+					);">
+					Tabbar with create onInit true for Log and Home buttons </a><br/><br/>
+		</div>
+		<span class="test_scenario_number">VT350-021<br /></span>
+	</div>
 	
-
-
+<div class="method_desc">Tabbar with hiddenTabs as True with labels defined for both tabs </div>
+	<div class="test_scenario">
+		<div class="test_scenario_controls">
+				<a href="javascript:void(0)" onclick="Createtabbarnew(
+					[{'action':'/app/NativeTabbarTest/NativeTabBar_MainPage.html', 'icon':'/public/images/bar/gears.png'},
+					{'label':'Native Tabbar', 'action':'/app/NativeTabbarTest/NativeTabBar_MainPage.html', 'icon':'/public/images/bar/gears.png'},
+					{'label':'Main page', 'action':'/app/index.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true},
+					{'label':'log', 'action':'log','backgroundColor' : 0x7F7F7F,'createOnInit':true },
+					{'label':'home', 'action':'home','backgroundColor' : 0x7F7F7F,'createOnInit':false },
+					{'label':'options', 'action':'options'},
+					{'label':'refresh', 'action':'refresh','backgroundColor' : 0x7F7F7F}], 
+					{'verticalOrientation':false, 'hiddenTabs': false, 'createOnInit' : false, 'placeTabsBottom':false}
+					);">
+					Tabbar with create onInit true for Log and false for Home  </a><br/><br/>
+		</div>
+		<span class="test_scenario_number">VT350-021<br /></span>
+	</div>
+<div class="method_desc">Tabbar with hiddenTabs as True with labels defined for both tabs </div>
+	<div class="test_scenario">
+		<div class="test_scenario_controls">
+				<a href="javascript:void(0)" onclick="Createtabbarnew(
+					[{'action':'/app/NativeTabbarTest/NativeTabBar_MainPage.html', 'icon':'/public/images/bar/gears.png'},
+					{'label':'Native Tabbar', 'action':'/app/NativeTabbarTest/NativeTabBar_MainPage.html', 'icon':'/public/images/bar/gears.png'},
+					{'label':'Main page', 'action':'/app/index.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true},
+					{'label':'log', 'action':'log','backgroundColor' : 0x7F7F7F},
+					{'label':'home', 'action':'home','backgroundColor' : 0.45454},
+					{'label':'options', 'action':'options'},
+					{'label':'refresh', 'action':'refresh','backgroundColor' : 0.56353}], 
+					{'verticalOrientation':false, 'hiddenTabs': false, 'createOnInit' : false, 'placeTabsBottom':false}
+					);">
+					Tabbar with invalid background color for one of the tabs  </a><br/><br/>
+		</div>
+		<span class="test_scenario_number">VT350-021<br /></span>
+	</div>
 
 </body>
 </html>

@@ -161,7 +161,7 @@ describe("Notification Manual FD Tests", function () {
                 {id: 'yes', title: 'yes'},
                 'No',
                 'Cancel'
-            ], title: 'MyTitle', icon: '/app/Notification/icon.png'};
+            ], title: 'MyTitle', icon: Rho.RhoFile.join(Rho.Application.modelFolderPath('Notification'), 'icon.png')};
             Rho.Notification.showPopup(propertyMap);
         });
 
@@ -230,7 +230,7 @@ describe("Notification Manual FD Tests", function () {
                 Rho.Notification.showStatus('MyAlert', 'This is status message', 'click to hide');
                 setTimeout(function () {
                     Rho.Notification.hidePopup();
-                }, 1000);
+                }, 10000);
             });
             waitsFor(function () {
                 dispExpectedResult("see if the pop up is showing the message, then it hides automatically after 10sec");
@@ -259,7 +259,7 @@ describe("Notification Manual FD Tests", function () {
 
                 setTimeout(function () {
                     Rho.Notification.hidePopup();
-                }, 1000);
+                }, 10000);
             });
             waitsFor(function () {
                 dispExpectedResult("see if the pop up is showing the message, then it hides automatically after 10sec");
@@ -311,17 +311,17 @@ describe("Notification Manual FD Tests", function () {
                 expect(testResult).toEqual(true);
             });
         });
-        it("VT281-0858 |Beep for 10 secs and with volume one  with 2000 hz|", function () {
+    it("VT281-0858 |Beep for 2 secs and with volume one  with 2000 hz|", function () {
 
             runs(function () {
                 dispTestCaseRunning(" Beeper will be started if its applicable for the Device  ");
-                dispExpectedResult(" Beeper should sound for 10 secs and with volume 1 and frequency 10000, please observe the change in the volume from previous case  ");
+         	dispExpectedResult(" Beeper should sound for 2 secs and with volume 1 and frequency 10000, please observe the change in the volume from previous case  ");
                 var propertyMap = {frequency: 10000, volume: 1, duration: 2000};
                 Rho.Notification.beep(propertyMap);
             });
 
             waitsFor(function () {
-                dispExpectedResult("Beeper should sound for 10 secs and with volume 1 and frequency 2000  ");
+        	dispExpectedResult("Beeper should sound for 2 secs and with volume 1 and frequency 2000  ");
                 return captured;
             }, 'Beep sound should have ended by now', 30000);
 
@@ -455,7 +455,39 @@ describe("Notification Manual FD Tests", function () {
                 expect(testResult).toEqual(true);
             });
         });
-
+	if(Rho.System.platform == "ANDROID")
+	{
+	    it("VT281-0861|Vibrate with duration 15 sec|", function () {
+	        runs(function () {
+	            dispTestCaseRunning(" Device will vibrate if applicable ");
+	            dispExpectedResult("Device should vibrate for 15 seconds ");
+	            Rho.Notification.vibrate(15000);
+	        });
+	        waitsFor(function () {
+	            dispExpectedResult("Device should vibrate for 15 seconds");
+	            return captured;
+	        }, 'Tester should ve responded by now ', 30000);
+	        runs(function () {
+	            expect(testResult).toEqual(true);
+	        });
+	    });
+	    it("VT281-0861|Vibrate with duration 17 sec|", function () {
+	        runs(function () {
+	            dispTestCaseRunning(" Device will vibrate if applicable ");
+	            dispExpectedResult("Device should vibrate for ONLY 15 seconds even though it is 17 sec as 15 is the max value it can take");
+	            Rho.Notification.vibrate(17000);
+	        });
+	        waitsFor(function () {
+	            dispExpectedResult("Device should vibrate for ONLY 15 seconds even though it is 17 sec as 15 is the max value it can take")
+	            return captured;
+	        }, 'Tester should ve responded by now ', 30000);
+	        runs(function () {
+	            expect(testResult).toEqual(true);
+	        });
+	    });
+	}
+	else
+	{
         it("VT281-0861|Vibrate with duration 25 sec|", function () {
 
             runs(function () {
@@ -489,6 +521,7 @@ describe("Notification Manual FD Tests", function () {
                 expect(testResult).toEqual(true);
             });
         });
+	}
     }
 });
 

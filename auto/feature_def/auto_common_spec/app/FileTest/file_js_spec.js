@@ -140,18 +140,21 @@ describe("FILE JS API", function () {
 		
 		Rho.RhoFile.makeDir(dirToDelete)
 		expect(Rho.RhoFile.isDir(dirToDelete)).toEqual(true)		
-		expect(Rho.RhoFile.deleteDir(dirToDelete)).toEqual(0);
+		expect(Rho.RhoFile.deleteDir(dirToDelete)).toEqual(-1);
 	});	
 	
-	// Delete directory without contents
-	it("VT295-015 : Delete directory without contents | false",function(){
+	// Delete directory with contents
+	it("VT295-015 : Delete directory with contents | false",function(){
+		
 		
 		Rho.RhoFile.makeDir(dirToDelete)
 		expect(Rho.RhoFile.isDir(dirToDelete)).toEqual(true)
 		var file = Rho.RhoFile.join(dirToDelete, "delete.txt")
-		var fOpen = new Rho.RhoFile(file,1);
+		var fOpen = new Rho.RhoFile(file,Rho.RhoFile.OPEN_FOR_APPEND);
+		fOpen.close()
 		expect(Rho.RhoFile.exists(file)).toEqual(true)
 		expect(Rho.RhoFile.deleteDir(dirToDelete)).toEqual(-1);
+		
 	});	
 	
 	// Delete directory with invalid path
@@ -217,8 +220,11 @@ describe("FILE JS API", function () {
 	// Delete recursive with leave root true
 	it("VT295-025 : Delete recursive with leave root true | true",function(){
 		
+		
+		Rho.RhoFile.makeDir(dirToDelete);
 		var file = Rho.RhoFile.join(dirToDelete, "delete.txt")
-		var fOpen = new Rho.RhoFile(file,1);
+		var fOpen = new Rho.RhoFile(file,Rho.RhoFile.OPEN_FOR_APPEND);
+		fOpen.close()
 		Rho.RhoFile.makeDir(dirinDelete)
 		expect(Rho.RhoFile.isDir(dirinDelete)).toEqual(true)
 		expect(Rho.RhoFile.exists(file)).toEqual(true)
@@ -231,6 +237,7 @@ describe("FILE JS API", function () {
 	// Delete recursive with leave root false
 	it("VT295-026 : Delete recursive with leave root false | true",function(){
 		
+		Rho.RhoFile.makeDir(dirToDelete);
 		var file = Rho.RhoFile.join(dirToDelete, "delete.txt")
 		var fOpen = new Rho.RhoFile(file,1);
 		Rho.RhoFile.makeDir(dirinDelete)
@@ -245,6 +252,7 @@ describe("FILE JS API", function () {
 	// Delete recursive without leave root
 	it("VT295-027 : Delete recursive without leave root  | true",function(){
 		
+		Rho.RhoFile.makeDir(dirToDelete);
 		var file = Rho.RhoFile.join(dirToDelete, "delete.txt")
 		var fOpen = new Rho.RhoFile(file,1);
 		Rho.RhoFile.makeDir(dirinDelete)
@@ -852,7 +860,7 @@ describe("FILE JS API", function () {
 		fWrite.close()
 		var expectedString = "This is the RMS4.0 File Testing.Thank you."
 		var content = fRead.readAll()
-		expect(content).toEqual(expected)
+		expect(content).toEqual(expectedString)
 		//Rho.Log.info(written + ":" + content, "VT290-094");
 		
 		fRead.close()
