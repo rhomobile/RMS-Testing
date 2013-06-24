@@ -40,6 +40,7 @@ describe("Log JS API", function () {
 
 		var srvHttpLogPostUrl = srvURL + "/client_log";
 		var srvHttpLogGetUrl = srvURL + "/get_last_log";
+		var srvHttpLogTestMsg = srvURL + "/download";
 
 		var waitTimeout = 10000;
 
@@ -47,6 +48,7 @@ describe("Log JS API", function () {
 		beforeEach(function () {
 			originalLogSettings = {};
 			originalLogSettings.logLevel = Rho.Log.level;
+			Rho.Log.level = 4;
 			originalLogSettings.destination = Rho.Log.destination;
 			originalLogSettings.includeCategories = Rho.Log.includeCategories;
 			originalLogSettings.excludeCategories = Rho.Log.excludeCategories;
@@ -57,15 +59,17 @@ describe("Log JS API", function () {
 			originalLogSettings.skipPost = Rho.Log.skipPost;
 			originalLogSettings.excludeFilter = Rho.Log.excludeFilter;
 			originalLogSettings.destinationURI = Rho.Log.destinationURI;
+
 			displayflag = false;
+			Rho.Log.level = 0;
 
 			Rho.LogCapture.start();
-			Rho.LogCapture.clear();  	
+			Rho.LogCapture.clear(); 
 		});
 
-	 	// this function will execute after each of test case execution i.e it function
+		// this function will execute after each of test case execution i.e it function
 		afterEach(function () {
-			Rho.Log.logLevel = originalLogSettings.level;
+			Rho.Log.level = 4;
 			Rho.Log.destination = originalLogSettings.destination;
 			Rho.Log.includeCategories = originalLogSettings.includeCategories;
 			Rho.Log.excludeCategories = originalLogSettings.excludeCategories;
@@ -76,6 +80,7 @@ describe("Log JS API", function () {
 			Rho.Log.skipPost = originalLogSettings.skipPost;
 			Rho.Log.excludeFilter = originalLogSettings.excludeFilter;
 			Rho.Log.destinationURI = originalLogSettings.destinationURI;
+			Rho.Log.logLevel = originalLogSettings.level;
 
 			Rho.LogCapture.stop();
 		});
@@ -83,7 +88,7 @@ describe("Log JS API", function () {
 		// Call readlog() with valid parameter (Integer) 100
 		it("VT290-391 : Call readLogFile() method with valid parameter. | ", function() {
 			runs(function(){
-				Rho.Log.leval = 0;
+				Rho.Log.level = 0;
 				Rho.Log.cleanLogFile();
 
 				var some_random_text = "ho1PtDX5x4D8liJzSZfhMVh7Sk7U3NsRRniDD4uQe2lBTPSW2o455zykgW9CRyQl2g8oCH2tecpEnT8wK3EpHwLipJGu2OvJPiwQ3Cz0vHOYLgE5ElESn5jhK83ukz37T2f7TzDDTyKAzrR0mQaIqOI2WKbPsTkoLZuIc4bjgSraxQH1LBcbfAa0bxn42IvIaAUeBte";
@@ -107,39 +112,31 @@ describe("Log JS API", function () {
 			var callbackCalled = false;
 			var status = '';
 			var data = '';
-			var fname = Rho.RhoFile.join(Rho.Application.userFolder,"/get_log.txt");
-
-
+			
 			runs(function(){
 				Rho.Log.cleanLogFile();
 				Rho.Log.destinationURI = srvHttpLogPostUrl;
 				Rho.Log.info("TEST MESSAGE!", "VT290-397");
 				Rho.Log.sendLogFile();
-			    
-			    if ( Rho.RhoFile.exists(fname) ) {
-			        Rho.RhoFile.deleteFile(fname);
-			    }
 
-			    expect(Rho.RhoFile.exists(fname)).toEqual(false);
+				getProps = {
+					url: srvHttpLogGetUrl
+				};
 
-			    getProps = {
-			        url: srvHttpLogGetUrl
-			    };
-
-			    Rho.Network.get(getProps, function(args){callbackCalled=true;data = args['body'];status = args['status'];});
+				Rho.Network.get(getProps, function(args){callbackCalled=true;data = args['body'];status = args['status'];});
 			} );
 
 			waitsFor( function() {
-			        return callbackCalled;
-			    },
-			    "Callback never called",
-			    waitTimeout
+					return callbackCalled;
+				},
+				"Callback never called",
+				waitTimeout
 			);
 
 			runs(function() {
-			    expect(status).toEqual('ok');
+				expect(status).toEqual('ok');
 
-			    expect(data.count("TEST MESSAGE!") > 0).toEqual(true);
+				expect(data.count("TEST MESSAGE!") > 0).toEqual(true);
 			});
 		});
 
@@ -150,7 +147,6 @@ describe("Log JS API", function () {
 			var callbackCalled = false;
 			var status = '';
 			var data = '';
-			var fname = Rho.RhoFile.join(Rho.Application.userFolder,"/get_log.txt");
 
 			function sendcallback() {
 				callbackCalled = true;
@@ -162,42 +158,36 @@ describe("Log JS API", function () {
 				Rho.Log.destinationURI = srvHttpLogPostUrl;
 				Rho.Log.info("TEST MESSAGE!", "VT290-398");
 				Rho.Log.sendLogFile(sendcallback);
-
-				if ( Rho.RhoFile.exists(fname) ) {
-			        Rho.RhoFile.deleteFile(fname);
-			    }
-
-			    expect(Rho.RhoFile.exists(fname)).toEqual(false);
 			});
 
 			waitsFor( function() {
-			        return callbackCalled;
-			    },
-			    "Callback never called",
-			    waitTimeout
+					return callbackCalled;
+				},
+				"Callback never called",
+				waitTimeout
 			);
 
 			runs(function(){
 				callbackCalled = false;
 
-			    getProps = {
-			        url: srvHttpLogGetUrl
-			    };
+				getProps = {
+					url: srvHttpLogGetUrl
+				};
 
-			    Rho.Network.get(getProps, function(args){callbackCalled=true;data = args['body'];status = args['status'];});
+				Rho.Network.get(getProps, function(args){callbackCalled=true;data = args['body'];status = args['status'];});
 			} );
 
 			waitsFor( function() {
-			        return callbackCalled;
-			    },
-			    "Callback never called",
-			    waitTimeout
+					return callbackCalled;
+				},
+				"Callback never called",
+				waitTimeout
 			);
 
 			runs(function() {
-			    expect(status).toEqual('ok');
+				expect(status).toEqual('ok');
 
-			    expect(data.count("TEST MESSAGE!") > 0).toEqual(true);
+				expect(data.count("TEST MESSAGE!") > 0).toEqual(true);
 			});
 		});
 
@@ -207,7 +197,6 @@ describe("Log JS API", function () {
 			var callbackCalled = false;
 			var status = '';
 			var data = '';
-			var fname = Rho.RhoFile.join(Rho.Application.userFolder,"/get_log.txt");
 
 			runs(function(){
 				Rho.Log.cleanLogFile();
@@ -215,48 +204,42 @@ describe("Log JS API", function () {
 				Rho.Log.destinationURI = srvHttpLogPostUrl;
 				Rho.Log.info("TEST MESSAGE!", "VT290-400");
 				Rho.Log.sendLogFile(function() {callbackCalled = true;});
-
-				if ( Rho.RhoFile.exists(fname) ) {
-			        Rho.RhoFile.deleteFile(fname);
-			    }
-
-			    expect(Rho.RhoFile.exists(fname)).toEqual(false);
 			});
 
 			waitsFor( function() {
-			        return callbackCalled;
-			    },
-			    "Callback never called",
-			    waitTimeout
+					return callbackCalled;
+				},
+				"Callback never called",
+				waitTimeout
 			);
 
 			runs(function(){
 				callbackCalled = false;
 
-			    getProps = {
-			        url: srvHttpLogGetUrl
-			    };
+				getProps = {
+					url: srvHttpLogGetUrl
+				};
 
-			    Rho.Network.get(getProps, function(args){callbackCalled=true;data = args['body'];status = args['status'];});
+				Rho.Network.get(getProps, function(args){callbackCalled=true;data = args['body'];status = args['status'];});
 			} );
 
 			waitsFor( function() {
-			        return callbackCalled;
-			    },
-			    "Callback never called",
-			    waitTimeout
+					return callbackCalled;
+				},
+				"Callback never called",
+				waitTimeout
 			);
 
 			runs(function() {
-			    expect(status).toEqual('ok');
+				expect(status).toEqual('ok');
 
-			    expect(data.count("TEST MESSAGE!") > 0).toEqual(true);
+				expect(data.count("TEST MESSAGE!") > 0).toEqual(true);
 			});
 
 		});
 
 
-	 	// Set log destination to file only
+		// Set log destination to file only
 		it("VT290-300 : Log destination to file only", function() {
 			 runs(function(){
 				var info = "Log message with application public folder displayed below : ";
@@ -288,6 +271,7 @@ describe("Log JS API", function () {
 				var info = "Log message with application public foldernot displayed in log text file: ";
 				Rho.Log.info(info, "VT290-302");
 
+				Rho.Log.destinationURI = srvHttpLogPostUrl;
 				Rho.Log.destination = ["uri"];
 				expect(Rho.Log.destination).toEqual(["uri"]);
 
@@ -301,6 +285,7 @@ describe("Log JS API", function () {
 				var info = "Log message with application public folder in all file, stdio and uri: ";
 				Rho.Log.info(info, "VT290-303");
 
+				Rho.Log.destinationURI = srvHttpLogPostUrl;
 				Rho.Log.destination = ["file","stdio","uri"];
 				expect(Rho.Log.destination).toEqual(["file","stdio","uri"]);
 
@@ -314,6 +299,7 @@ describe("Log JS API", function () {
 				var info = "Log message with application public folder in all file, stdio and uri: ";
 				Rho.Log.info(info, "VT290-304");
 
+				Rho.Log.destinationURI = srvHttpLogPostUrl;
 				Rho.Log.destination = ["stdio","file","uri"];
 				expect(Rho.Log.destination).toEqual(["file","stdio","uri"]);
 
@@ -327,6 +313,7 @@ describe("Log JS API", function () {
 				var info = "Log message with application public folder in all file, stdio and uri: ";
 				Rho.Log.info(info, "VT290-305");
 
+				Rho.Log.destinationURI = srvHttpLogPostUrl;
 				Rho.Log.destination = ["stdio","uri","file"];
 				expect(Rho.Log.destination).toEqual(["file","stdio","uri"]);
 
@@ -340,6 +327,7 @@ describe("Log JS API", function () {
 				var info = "Log message with application public folder in all file, stdio and uri: ";
 				Rho.Log.info(info, "VT290-306");
 
+				Rho.Log.destinationURI = srvHttpLogPostUrl;
 				Rho.Log.destination = ["uri","file","stdio"];
 				expect(Rho.Log.destination).toEqual(["file","stdio","uri"]);
 
@@ -353,6 +341,7 @@ describe("Log JS API", function () {
 				var info = "Log message with application public folder in all file, stdio and uri: ";
 				Rho.Log.info(info, "VT290-307");
 
+				Rho.Log.destinationURI = srvHttpLogPostUrl;
 				Rho.Log.destination = ["uri","stdio","file"];
 				expect(Rho.Log.destination).toEqual(["file","stdio","uri"]);
 
@@ -379,6 +368,7 @@ describe("Log JS API", function () {
 				var info = "Log message with application public folder in all file and uri: ";
 				Rho.Log.info(info, "VT290-309");
 
+				Rho.Log.destinationURI = srvHttpLogPostUrl;
 				Rho.Log.destination = ["file","uri"];
 				expect(Rho.Log.destination).toEqual(["file","uri"]);
 
@@ -393,6 +383,7 @@ describe("Log JS API", function () {
 				var info = "Log message with application public folder in stdio and uri: ";
 				Rho.Log.info(info, "VT290-310");
 
+				Rho.Log.destinationURI = srvHttpLogPostUrl;
 				Rho.Log.destination = ["stdio","uri"];
 				expect(Rho.Log.destination).toEqual(["stdio","uri"]);
 
@@ -439,8 +430,8 @@ describe("Log JS API", function () {
 				var info = "Log destination set. No need verification in log: ";
 				Rho.Log.info(info, "VT290-313");
 
-				Rho.Log.destinationURI = "http://localhost";
-				expect(Rho.Log.destinationURI).toEqual("http://localhost");
+				Rho.Log.destinationURI = srvHttpLogPostUrl;
+				expect(Rho.Log.destinationURI).toEqual(srvHttpLogPostUrl);
 
 				Rho.Log.info("test_message", "VT290-313");
 			});
@@ -598,7 +589,6 @@ describe("Log JS API", function () {
 		});
 
 
-
 		// Set Log filesize to 100000 KB
 		it("VT290-334 : Set Log filsize | 102400000", function() {
 			runs(function(){
@@ -617,6 +607,7 @@ describe("Log JS API", function () {
 				Rho.Log.info(info, "VT290-334");
 
 				Rho.Log.fileSize = 0
+				Rho.Log.info(info, "Some info");
 				expect(Rho.Log.fileSize).toEqual(0);
 			});
 		});
@@ -883,22 +874,39 @@ describe("Log JS API", function () {
 		// Set Log Memory period to 5 seconds
 		it("VT290-355 : Set Log Memory period to 5 secs | 5000", function() {
 			runs(function(){
-				Rho.Log.level=0;
-				var info = "Info : Memory log should display in 5 secs interval | 0";
-				Rho.Log.info(info, "VT290-355");
-				expectedValue = 5000;
-				Rho.Log.memoryPeriod = 5000;
+				Rho.Log.level = 0;
+				Rho.LogCapture.clear();
+
+				Rho.Log.memoryPeriod = 1000;
+				expectedValue = 1000;
 				memPeriod = Rho.Log.memoryPeriod;
 				expect(memPeriod).toEqual(expectedValue);
+
+				var info = "Info : Memory log should display in 5 secs interval | 0";
+				Rho.Log.info(info, "VT290-355");
 			});
 
-			waits(4900);
+			waits(1500);
+
+			runs(function(){
+				expect(Rho.LogCapture.read().count("MEMORY")).toEqual(1);
+
+				Rho.Log.memoryPeriod = 0;
+
+				Rho.LogCapture.clear();
+
+				Rho.Log.level = 0;
+				//Rho.Log.memoryPeriod = 5000;
+			});
+
+			/*
+			waits(4800);
 
 			runs(function(){
 				expect(Rho.LogCapture.read().count("MEMORY")).toEqual(0);
 			});
 
-			waits(200);
+			waits(600);
 
 			runs(function(){
 				Rho.Log.memoryPeriod = 0;
@@ -907,21 +915,7 @@ describe("Log JS API", function () {
 
 				Rho.LogCapture.clear();
 			});
-
-			runs(function(){
-				Rho.Log.level=0;
-				Rho.Log.memoryPeriod = 5000;
-			});
-
-			waits(10100);
-
-			runs(function(){
-				Rho.Log.memoryPeriod = 0;
-
-				expect(Rho.LogCapture.read().count("MEMORY")).toEqual(2);
-
-				Rho.LogCapture.clear();
-			});
+*/
 		});
 
 
@@ -935,54 +929,118 @@ describe("Log JS API", function () {
 				Rho.Log.memoryPeriod = 10000;
 				memPeriod = Rho.Log.memoryPeriod;
 				expect(memPeriod).toEqual(expectedValue);
-			});
 
-			waits(10100);
+				waits(10200);
+
+				runs(function(){
+					Rho.Log.memoryPeriod = 0;
+
+					expect(Rho.LogCapture.read().count("MEMORY")).toEqual(1);
+
+					Rho.LogCapture.clear();
+				});
+			});
+		});
+
+		
+		// Set Netrace to true
+		it("VT290-361 : Set netrace to true | true", function() {
+			var flag = false;
+			var callbackCalled = false;
+			var status = '';
+			var data = '';
 
 			runs(function(){
-				Rho.Log.memoryPeriod = 0;
+				var info = "Set netrace to true | true";
+				Rho.Log.info(info, "VT290-361");
 
-				expect(Rho.LogCapture.read().count("MEMORY")).toEqual(1);
+				expectedValue = true;
+				Rho.Log.netTrace = expectedValue;
 
-				Rho.LogCapture.clear();
+				netTraceValue = Rho.Log.netTrace;
+				expect(netTraceValue).toEqual(expectedValue);
+
+				getProps = {
+					url: srvHttpLogTestMsg
+				};
+
+				Rho.Network.get(getProps, function(args){callbackCalled=true;data = args['body'];status = args['status'];});
+			} );
+
+			waitsFor( function() {
+					return callbackCalled;
+				},
+				"Callback never called",
+				waitTimeout
+			);
+
+			runs(function() {
+				expect(status).toEqual('ok');
+
+				expect(data.count("Downloaded content") > 0).toEqual(true);
+
+				var log = Rho.LogCapture.read();
+
+				expect( log.count("== Info") > 2 ).toEqual(true);
+				expect( log.count("About to connect") > 0 ).toEqual(true);
+				expect( log.count("Connected to") > 0 ).toEqual(true);
+				expect( log.count("=> Send headers") > 0 ).toEqual(true);
+				expect( log.count("<= Recv headers") > 2 ).toEqual(true);
+				expect( log.count("<= Recv data") > 0 ).toEqual(true);
+				expect( log.count("RESPONSE-----") > 0 ).toEqual(true);
+			});
+		});
+
+
+		// Set Netrace to true
+		it("VT290-362 : Set netrace to false | false", function() {
+			var flag = false;
+			var callbackCalled = false;
+			var status = '';
+			var data = '';
+
+			runs(function(){
+				var info = "Set netrace to false | false";
+				Rho.Log.info(info, "VT290-362");
+
+				expectedValue = false;
+				Rho.Log.netTrace = expectedValue;
+
+				netTraceValue = Rho.Log.netTrace;
+				expect(netTraceValue).toEqual(expectedValue);
+
+				getProps = {
+					url: srvHttpLogTestMsg
+				};
+
+				Rho.Network.get(getProps, function(args){callbackCalled=true;data = args['body'];status = args['status'];});
+			} );
+
+			waitsFor( function() {
+					return callbackCalled;
+				},
+				"Callback never called",
+				waitTimeout
+			);
+
+			runs(function() {
+				expect(status).toEqual('ok');
+
+				expect(data.count("Downloaded content") > 0).toEqual(true);
+
+				var log = Rho.LogCapture.read();
+
+				expect( log.count("== Info") == 0 ).toEqual(true);
+				expect( log.count("About to connect") == 0 ).toEqual(true);
+				expect( log.count("Connected to") == 0 ).toEqual(true);
+				expect( log.count("=> Send headers") == 0 ).toEqual(true);
+				expect( log.count("<= Recv headers") == 0 ).toEqual(true);
+				expect( log.count("<= Recv data") == 0 ).toEqual(true);
 			});
 		});
 
 		/*
-	 // Set Netrace to true
-		xit("VT290-361 : Set netrace to true | true", function() {
-			runs(function(){
-				Rho.Log.level = 0;
-				var info = "Info : http trace displayed in the log ";
-				Rho.Log.info(info, "VT290-361")
-				Rho.Log.showLog();
-				expectedValue = true;
-				Rho.Log.netTrace=true;
-				var cell_network = Rho.Network.hasCellNetwork();
-				var db = new Rho.Database(Rho.Application.databaseFilePath('local'), 'local');
-				netTraceValue = Rho.Log.netTrace;
-				expect(netTraceValue).toEqual(expectedValue);
-			});
-		});
-
-	 // Set Netrace to false
-		xit("VT290-362 : Set netrace to false | false", function() {
-			runs(function(){
-				Rho.Log.level = 0;
-				var info = "Info : http trace not displayed in the log ";
-				Rho.Log.info(info, "VT290-362")
-				Rho.Log.showLog();
-				expectedValue = false;
-				Rho.Log.netTrace=false;
-				var cell_network = Rho.Network.hasCellNetwork()
-				var db = new Rho.Database(Rho.Application.databaseFilePath('local'), 'local');
-				netTraceValue = Rho.Log.netTrace;
-				expect(netTraceValue).toEqual(expectedValue);
-			});
-		});
-
-
-	 // Set skipPost to true
+		// Set skipPost to true
 		it("VT290-367 : Set skipPost to true | true", function() {
 			runs(function(){
 				Rho.Log.level = 0;
