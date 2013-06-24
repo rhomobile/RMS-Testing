@@ -144,23 +144,3 @@ function extraMenuNoAction()
 
   Rho.NativeMenubar.extraButton = { label: 'Home',action:'',disabled:false};
 } 
-
-function extraMenuQuit()
-{
-	Rho.NativeMenubar.extraButton = { label: 'Home',action:'Exit',disabled:false};
-}
-
-function extraMenuDisabled()
-{
-	Rho.NativeMenubar.extraButton = { label: 'Home',action:'Exit',disabled:true};
-}
-
-function menuButtonLog()
-{
-	Rho.NativeMenubar.mainButton = { label: 'Log',action:'Log',disabled:false};
-}
-
-function mainButtonDisabled()
-{
-	Rho.NativeMenubar.mainButton = { label: 'Log',action:'Log',disabled:true};
-}
