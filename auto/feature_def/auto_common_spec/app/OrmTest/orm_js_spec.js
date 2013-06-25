@@ -31,7 +31,7 @@ describe("<ORM module specs>", function() {
       reset();
     });
 
-    it('should create model',function(){
+    it('VT302-0004 | should create model',function(){
       var Product = function(model){
           model.modelName("Product");
           model.enable("sync");
@@ -45,7 +45,7 @@ describe("<ORM module specs>", function() {
       expect(source.name).toEqual('Product');
     });
 
-    it('should add model, get model, clear all models', function() {
+    it('VT302-0037 | should add model, get model, clear all models', function() {
         expect(Rho.ORM.getModel('Product')).toBeUndefined();
 
         var Product = function(model){
@@ -61,7 +61,7 @@ describe("<ORM module specs>", function() {
         expect(Rho.ORM.getModel('Product')).toBe(Model);
     });
 
-    it('should add fixed schema model with table', function() {
+    it('VT302-0008 | should add fixed schema model with table', function() {
         expect(Rho.ORM.getModel('Product')).toBeUndefined();
 
         var Product = function(model){
@@ -84,7 +84,7 @@ describe("<ORM module specs>", function() {
         db.$execute_sql("DROP TABLE Product");
     });
 
-    it("should add index",function(){
+    it("VT302-0019 | should add index",function(){
         expect(Rho.ORM.getModel('Product')).toBeUndefined();
 
         var Product = function(model){
@@ -107,7 +107,7 @@ describe("<ORM module specs>", function() {
         db.$execute_sql("DROP TABLE Product");
     });
 
-    it("should add unique index",function(){
+    it("VT302-0022 | should add unique index",function(){
         expect(Rho.ORM.getModel('Product')).toBeUndefined();
 
         var Product = function(model){
@@ -131,7 +131,7 @@ describe("<ORM module specs>", function() {
         db.$execute_sql("DROP TABLE Product");
     });
 
-    it("should add belongs_to relationship",function(){
+    it("VT302-0025 | should add belongs_to relationship",function(){
         expect(Rho.ORM.getModel('Product')).toBeUndefined();
 
         var Product = function(model){
@@ -160,7 +160,7 @@ describe("<ORM module specs>", function() {
         db.$execute_sql("DROP TABLE Product");
     });
 
-    it("should add belongs_to relationship in any load order",function(){
+    it("VT302-0026 | should add belongs_to relationship in any load order",function(){
         expect(Rho.ORM.getModel('Product')).toBeUndefined();
         var sources = Rho.ORMHelper.getAllSources();
         expect(sources.Product).toBeUndefined();
@@ -193,7 +193,7 @@ describe("<ORM module specs>", function() {
         db.$execute_sql("DROP TABLE Product");
     });
 
-    it("should add multiple belongs_to relationship in any load order",function(){
+    it("VT302-0027 | should add multiple belongs_to relationship in any load order",function(){
         expect(Rho.ORM.getModel('Product')).toBeUndefined();
         var sources = Rho.ORMHelper.getAllSources();
         expect(sources.Product).toBeUndefined();
@@ -257,7 +257,7 @@ describe("<ORM Db Reset specs>", function() {
     reset();
   });
 
-  it("should return true if a model objects have local changes for sync haveLocalChanges",function(){
+  it("VT302-0068 | should return true if a model objects have local changes for sync haveLocalChanges",function(){
       expect(Rho.ORM.getModel('Product')).toBeUndefined();
       var sources = Rho.ORMHelper.getAllSources();
       expect(sources.Product).toBeUndefined();
@@ -273,7 +273,7 @@ describe("<ORM Db Reset specs>", function() {
       Rho.ORM.clear();
     });
 
-  it("should delete all records only from selected models fixedschema databaseFullResetEx",function(){
+  it("VT302-0053 | should delete all records only from selected models fixedschema databaseFullResetEx",function(){
       expect(Rho.ORM.getModel('Product')).toBeUndefined();
       var sources = Rho.ORMHelper.getAllSources();
       expect(sources.Product).toBeUndefined();
@@ -304,7 +304,7 @@ describe("<ORM Db Reset specs>", function() {
       Rho.ORM.clear();
     });
 
-    it("should delete all records only from selected models propertyBag databaseFullResetEx",function(){
+    it("VT302-0054 | should delete all records only from selected models propertyBag databaseFullResetEx",function(){
       expect(Rho.ORM.getModel('Product')).toBeUndefined();
       var sources = Rho.ORMHelper.getAllSources();
       expect(sources.Product).toBeUndefined();
@@ -334,7 +334,7 @@ describe("<ORM Db Reset specs>", function() {
       Rho.ORM.clear();
     });
 
-    it("should do nothing if localdb and localdb flag set to false",function(){
+    it("VT302-0060 | should do nothing if localdb and localdb flag set to false",function(){
       expect(Rho.ORM.getModel('Product')).toBeUndefined();
       var sources = Rho.ORMHelper.getAllSources();
       expect(sources.Product).toBeUndefined();
@@ -365,7 +365,7 @@ describe("<ORM Db Reset specs>", function() {
       Rho.ORM.clear();
     });
 
-    it("should reset client_info table if set databaseFullResetEx",function(){
+    it("VT302-0056 | should reset client_info table if set databaseFullResetEx",function(){
       expect(Rho.ORM.getModel('Product')).toBeUndefined();
       var sources = Rho.ORMHelper.getAllSources();
       expect(sources.Product).toBeUndefined();
@@ -398,7 +398,7 @@ describe("<ORM Db Reset specs>", function() {
       Rho.ORM.clear();
     });
 
-    it("should reset client info databaseFullReset tables",function(){
+    it("VT302-0046 | should reset client info databaseFullReset tables",function(){
       expect(Rho.ORM.getModel('Product')).toBeUndefined();
       var sources = Rho.ORMHelper.getAllSources();
       expect(sources.Product).toBeUndefined();
@@ -417,7 +417,7 @@ describe("<ORM Db Reset specs>", function() {
       Rho.ORM.clear();
     });
 
-    it("should reset client info databaseFullReset tables with undefined params",function(){
+    it("VT302-0047 | should reset client info databaseFullReset tables with undefined params",function(){
       expect(Rho.ORM.getModel('Product')).toBeUndefined();
       var sources = Rho.ORMHelper.getAllSources();
       expect(sources.Product).toBeUndefined();
@@ -448,7 +448,7 @@ describe("<ORM Db Reset specs>", function() {
       Rho.ORM.clear();
     });
 
-   it("should reset client info databaseFullReset tables with no params",function(){
+   it("VT302-0048 | should reset client info databaseFullReset tables with no params",function(){
       expect(Rho.ORM.getModel('Product')).toBeUndefined();
       var sources = Rho.ORMHelper.getAllSources();
       expect(sources.Product).toBeUndefined();
@@ -480,7 +480,7 @@ describe("<ORM Db Reset specs>", function() {
       Rho.ORM.clear();
     });
 
-   it("should reset client info databaseFullReset tables of all partitions",function(){
+   it("VT302-0043 | should reset client info databaseFullReset tables of all partitions",function(){
       expect(Rho.ORM.getModel('Product')).toBeUndefined();
       var sources = Rho.ORMHelper.getAllSources();
       expect(sources.Product).toBeUndefined();
@@ -564,7 +564,7 @@ describe("<ORM Db Reset specs>", function() {
       Rho.ORM.clear();
     });
 
-    it("should reset object_values and not sources table if set databaseFullResetEx",function(){
+    it("VT302-0050 | should reset object_values and not sources table if set databaseFullResetAndLogout",function(){
       expect(Rho.ORM.getModel('Product')).toBeUndefined();
       var sources = Rho.ORMHelper.getAllSources();
       expect(sources.Product).toBeUndefined();
@@ -598,7 +598,7 @@ describe("<ORM Db Reset specs>", function() {
       Rho.ORM.clear();
     });
 
-    it("should reset client and local db if databaseFullclientResetAndLogout",function(){
+    it("VT302-0062 | should reset client and local db if databaseFullclientResetAndLogout",function(){
       var db = Rho.ORMHelper.dbConnection("local");
       db.$execute_sql("INSERT INTO CLIENT_INFO (client_id) VALUES(7)");
 
