@@ -1,4 +1,4 @@
-Object.prototype.equals = function(b) {
+Object.equals = function(b) {
 	var act = this;
 	for(item in act) {  
 		if(typeof b[item] == 'undefined') {
