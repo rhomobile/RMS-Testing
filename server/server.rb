@@ -120,7 +120,17 @@ $local_server.mount_proc '/download_app' do |req,res|
     
     if filename then
         res.body = File.open( File.join( File.dirname(__FILE__),filename ), "rb" )
-        res["content-type"]="application/octet-stream"
+
+        extensions = {
+            '.cab' => 'application/vnd.ms-cab-compressed',
+            '.apk' => 'application/vnd.android.package-archive',
+            '.exe' => 'application/x-msdownload'
+        }
+
+        contentType = extensions[File.extname(filename)]
+        res['content-type'] = contentType
+
+        #res["content-type"]="application/octet-stream"
 
         res.status = 200
     else
