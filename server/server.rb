@@ -23,8 +23,9 @@ securePortWithClientAuth = 8083
 cert = OpenSSL::X509::Certificate.new File.read 'ca.crt'
 pkey = OpenSSL::PKey::RSA.new File.read 'ca.key'
 
-$local_server = WEBrick::HTTPServer.new :Port => port
+$local_server = WEBrick::HTTPServer.new :Port => port, :DocumentRoot => "Documents"
 $secure_server = WEBrick::HTTPServer.new(:Port => securePort,
+								 :DocumentRoot => "Documents",
                                  :SSLEnable => true,
                                  :SSLCertificate => cert,
                                  :SSLPrivateKey => pkey,
@@ -128,9 +129,12 @@ $local_server.mount_proc '/download_app' do |req,res|
         }
 
         contentType = extensions[File.extname(filename)]
+        
+        if !contentType then
+            contentType = "application/octet-stream"
+        end
+        
         res['content-type'] = contentType
-
-        #res["content-type"]="application/octet-stream"
 
         res.status = 200
     else

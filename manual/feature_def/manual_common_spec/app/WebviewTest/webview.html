@@ -177,7 +177,7 @@
         <div class="test_scenario_controls">
             <button class="getValue" onClick='setDomElementText("activeTab_test", Rho.WebView.activeTab);'> get activeTab</button>
             <br/>
-	          <a href="javascript:void(0)" onclick="createTabbar(
+	          <a href="javascript:void(0)" onclick="CreateTabbarOld(
 					[{'label':'Native Tabbar', 'action':'/app/WebviewTest/webview.html', 'icon':'/public/images/bar/gears.png', 'useCurrentViewForTab':true},
 					{'label':'Main page', 'action':'/app/WebviewTest/webview.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':false},
 					{'label':'Page1', 'action':'/app/WebviewTest/webview.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true},
@@ -898,7 +898,7 @@
 
     <div class="test_scenario">
         <div class="test_scenario_controls">
-            <button onClick='setDomElementText("setCookie_test", document.cookie);'>Show document cookie</button>
+            <button onClick='setDomElementText("setCookie_test", document.cookie);'>Show document cookie  (not WP8)</button>
             <span class="result"></span>
         </div>
         <div class="test_scenario_desc">
@@ -909,7 +909,7 @@
 
     <div class="test_scenario">
         <div class="test_scenario_controls">
-            <button onClick='Rho.WebView.setCookie("http://127.0.0.1", "key_1=DevaStoredCookie1");'>Set single cookie</button>
+            <button onClick='Rho.WebView.setCookie("http://127.0.0.1", "key_1=DevaStoredCookie1");'>Set single cookie (not WP8)</button>
         </div>
         <div class="test_scenario_desc">
             <span class="test_scenario_number">VT301-080</span>
@@ -919,7 +919,7 @@
 
     <div class="test_scenario">
         <div class="test_scenario_controls">
-            <button onClick='Rho.WebView.setCookie("http://127.0.0.1", "key_2=DevaStoredCookie2;key_3=bhaktabhakta");'>Set multiple cookie</button>
+            <button onClick='Rho.WebView.setCookie("http://127.0.0.1", "key_2=DevaStoredCookie2;key_3=bhaktabhakta");'>Set multiple cookie (not WP8)</button>
         </div>
         <div class="test_scenario_desc">
             <span class="test_scenario_number">VT301-081</span>
