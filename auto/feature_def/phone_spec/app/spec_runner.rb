@@ -69,12 +69,12 @@ end
   end
 
   def run
-	results_path = File.join(Rho::RhoApplication.get_base_app_path(), 'phone_spec_results.xml' )
-	MSpec.register_files config[:files]
-	@@formatter = JUnitFormatter.new(results_path)
+    results_path = File.join(Rho::RhoApplication.get_base_app_path(), 'phone_spec_results.xml' )
+    MSpec.register_files config[:files]
+    @@formatter = JUnitFormatter.new(results_path)
     @@formatter.register
     MSpec.process
     MSpec.exit_code
-	System.exit
+    System.exit
   end
 end

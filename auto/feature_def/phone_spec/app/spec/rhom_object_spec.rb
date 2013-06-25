@@ -112,7 +112,7 @@ class Test_Helper
             else
                 copy_file( src_path, Rho::RhoFSConnector::get_blob_folder() )
             end    
-        end    
+        end
     end
 
     def after_each
@@ -330,7 +330,7 @@ end
 	
   end
 
-  it "should create a record with comma" do
+  it "should create a record with apostrophe" do
     vars = {"name"=>"some new record", "industry"=>"elec'tronics"}
     @account1 = getAccount.create(vars)
     @account2 = getAccount.find(@account1.object)

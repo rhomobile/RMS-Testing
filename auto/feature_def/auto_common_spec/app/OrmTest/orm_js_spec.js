@@ -1,5 +1,4 @@
-describe("<ORM module specs>", function() {
-
+   var db = null;
     var cleanVars = function(object) {
         var vars = object.vars();
         var cleanVars = {};
@@ -13,716 +12,619 @@ describe("<ORM module specs>", function() {
         return cleanVars;
     };
 
+
+
+  function reset(){
+    db = Rho.ORMHelper.dbConnection("local");
+    var partitions = Rho.ORMHelper.getDbPartitions();
+    $.each(partitions, function(index, db2) {
+      db2.$execute_sql("DELETE FROM SOURCES");
+      db2.$execute_sql("DELETE FROM OBJECT_VALUES");
+      db2.$execute_sql("DELETE FROM CHANGED_VALUES");
+    });
+    Rho.ORM.clear();
+  }
+
+describe("<ORM module specs>", function() {
+
     beforeEach(function(){
-        Rho.ORM.clear();
+      reset();
     });
 
+    it('should create model',function(){
+      var Product = function(model){
+          model.modelName("Product");
+          model.enable("sync");
+          model.property("name","string");
+          model.property("brand","string");
+          model.set("partition","local");
+      };
+      p = Rho.ORM.addModel(Product);
+      source = Opal.Rho._scope.RhoConfig.$sources().map["Product"];
+      expect(source.sync_type).toEqual('incremental');
+      expect(source.name).toEqual('Product');
+    });
 
-    // Rho.ORM.clear: function() {
-    // Rho.ORM.addModel: function(modelClass) {
-    // Rho.ORM.getModel: function(modelClass) {
-    it('add model, get model, clear all models', function() {
-        // relays on beforeEach
-        expect(Rho.ORM.getModel('Model')).toBeUndefined();
+    it('should add model, get model, clear all models', function() {
+        expect(Rho.ORM.getModel('Product')).toBeUndefined();
 
-        var Model = Rho.ORM.addModel('Model');
+        var Product = function(model){
+            model.modelName("Product");
+            model.enable("sync");
+            model.property("name","string");
+            model.property("brand","string");
+            model.set("partition","local");
+        };
+
+        var Model = Rho.ORM.addModel(Product);
         expect(Model).toBeDefined();
-        expect(Rho.ORM.getModel('Model')).toBe(Model);
-
-        Rho.ORM.clear();
-        expect(Rho.ORM.getModel('Model')).toBeUndefined();
+        expect(Rho.ORM.getModel('Product')).toBe(Model);
     });
 
-    it('makes empty object', function() {
-        var empty = Rho.ORM.addModel('Model').make();
-        expect(cleanVars(empty)).toEqual({});
-        var vars = empty.vars();
-        var keySet = {};
-        for (var key in vars) {
-            if (vars.hasOwnProperty(key)) {
-                keySet[key] = 0;
-            }
-        }
-        expect(keySet).toEqual({'object': 0, 'source_id': 0});
+    it('should add fixed schema model with table', function() {
+        expect(Rho.ORM.getModel('Product')).toBeUndefined();
+
+        var Product = function(model){
+            model.modelName("Product");
+            model.enable("sync");
+            model.property("name","string");
+            model.property("price","integer");
+            model.enable("fixedSchema");
+            model.set("partition","local");
+        };
+
+        var Model = Rho.ORM.addModel(Product);
+        var sources = Rho.ORMHelper.getAllSources();
+        expect(Model).toBeDefined();
+        expect(sources['Product']).toBeDefined();
+        expect(Rho.ORM.getModel('Product')).toBe(Model);
+
+        res = db.$execute_sql("SELECT * FROM Product",[]);
+        expect(res).toEqual([]);
+        db.$execute_sql("DROP TABLE Product");
     });
 
-    it('makes object', function() {
-        expect(cleanVars(Rho.ORM.addModel('Model').make({'key': 'value'}))).toEqual({'key': 'value'});
+    it("should add index",function(){
+        expect(Rho.ORM.getModel('Product')).toBeUndefined();
+
+        var Product = function(model){
+            model.modelName("Product");
+            model.property("name","string");
+            model.property("price","float");
+            model.enable("fixedSchema");
+            model.addIndex("p1",["name"]);
+            model.set("partition","local");
+        };
+
+        var Model = Rho.ORM.addModel(Product);
+        Model.create({"name":"test"});
+        sources = Rho.ORMHelper.getAllSources();
+        expect(Model).toBeDefined();
+        expect(Rho.ORM.getModel('Product')).toBe(Model);
+
+        res = db.$execute_sql("SELECT * FROM Product INDEXED BY p1 Where name = 'test' ");
+        expect(res[0].map.name).toEqual('test');
+        db.$execute_sql("DROP TABLE Product");
     });
 
-    it('creates empty object', function() {
-        expect(cleanVars(Rho.ORM.addModel('Model').create())).toEqual({});
+    it("should add unique index",function(){
+        expect(Rho.ORM.getModel('Product')).toBeUndefined();
+
+        var Product = function(model){
+            model.modelName("Product");
+            model.property("name","string");
+            model.property("price","float");
+            model.enable("fixedSchema");
+            model.addUniqueIndex("u1",["name"]);
+            model.set("partition","local");
+        };
+
+        var Model = Rho.ORM.addModel(Product);
+        Model.create({"name":"test"});
+        sources = Rho.ORMHelper.getAllSources();
+        expect(Model).toBeDefined();
+        expect(Rho.ORM.getModel('Product')).toBe(Model);
+
+        res = db.$execute_sql("SELECT * FROM Product INDEXED BY u1 Where name = 'test' ");
+        console.log("res is: " + JSON.stringify(res));
+        expect(res[0].map.name).toEqual('test');
+        db.$execute_sql("DROP TABLE Product");
     });
 
-    it('creates object', function() {
-        expect(cleanVars(Rho.ORM.addModel('Model').create({'key': 'value'}))).toEqual({'key': 'value'});
+    it("should add belongs_to relationship",function(){
+        expect(Rho.ORM.getModel('Product')).toBeUndefined();
+
+        var Product = function(model){
+            model.modelName("Product");
+            model.property("name","string");
+            model.property("price","float");
+            model.enable("fixedSchema");
+            model.addUniqueIndex("u1",["name"]);
+            model.set("partition","local");
+        };
+        var Item = function(model){
+            model.modelName("Item");
+            model.property("name","string");
+            model.property("code");
+            model.enable("fixedSchema");
+            model.enable('sync');
+            model.set("partition","local");
+            model.belongs_to("Product");
+        };
+        var Model = Rho.ORM.addModel(Product);
+        var Model2 = Rho.ORM.addModel(Item);
+
+        sources = Rho.ORMHelper.getAllSources();
+        expect(sources.Product.str_associations).toEqual("Item");
+        expect(sources.Item.belongs_to[0]).toEqual("Product");
+        db.$execute_sql("DROP TABLE Product");
     });
 
-    describe("<model's object>", function() {
-        var Model = undefined;
-        var object = undefined;
+    it("should add belongs_to relationship in any load order",function(){
+        expect(Rho.ORM.getModel('Product')).toBeUndefined();
+        var sources = Rho.ORMHelper.getAllSources();
+        expect(sources.Product).toBeUndefined();
+        expect(sources.Item).toBeUndefined();
 
-        beforeEach(function(){
-            Model = Rho.ORM.addModel('Model');
-            object = Model.make({'key': 'value'});
-        });
+        var Product = function(model){
+            model.modelName("Product");
+            model.property("name","string");
+            model.property("price","float");
+            model.enable("fixedSchema");
+            model.addUniqueIndex("u1",["name"]);
+            model.set("partition","local");
+        };
+        var Item = function(model){
+            model.modelName("Item");
+            model.property("name","string");
+            model.property("code");
+            model.enable("fixedSchema");
+            model.enable('sync');
+            model.set("partition","local");
+            model.belongs_to("Product");
+        };
+        var Model2 = Rho.ORM.addModel(Item);
+        var Model = Rho.ORM.addModel(Product);
 
-        it('returns vars', function() {
-            expect(cleanVars(object)).toEqual({'key': 'value'});
-        });
 
-        it('retrieves object id', function() {
-            expect(object.object()).toBe(object.get('object'));
-        });
-
-        it('gets existing property', function() {
-            expect(object.get('key')).toBe('value');
-        });
-
-        it('gets absent property', function() {
-            expect(object.get('absent key')).toBeUndefined();
-        });
-
-        it('sets property', function() {
-            object.set('key', 'another value');
-            expect(cleanVars(object)).toEqual({'key': 'another value'});
-        });
-
-        it('sets new property', function() {
-            object.set('new key', 'new value');
-            expect(cleanVars(object)).toEqual({'key': 'value', 'new key': 'new value'});
-        });
-
-        it('supports set chaining', function() {
-            object.set('key', 'another value').set('new key', 'new value');
-            expect(cleanVars(object)).toEqual({'key': 'another value', 'new key': 'new value'});
-        });
-
-        it('sets property', function() {
-            object.set('key', 'another value');
-            expect(cleanVars(object)).toEqual({'key': 'another value'});
-        });
-
-        it('sets property with empty name', function() {
-            object.set('', 'another value');
-            expect(cleanVars(object)).toEqual({'key': 'value', '': 'another value'});
-        });
-
-        it('has properties', function() {
-            expect(object.has('key')).toBe(true);
-            expect(object.has('absent key')).toBe(false);
-        });
+        sources = Rho.ORMHelper.getAllSources();
+        expect(sources.Product.str_associations).toEqual("Item");
+        expect(sources.Item.belongs_to[0]).toEqual("Product");
+        db.$execute_sql("DROP TABLE Product");
     });
 
-    it('creates object in database', function() {
-        var Model = Rho.ORM.addModel('Model');
-        var before = Model.count();
-        Model.create({'key': 'value'});
-        var after = Model.count();
-        expect(after).toBe(before + 1);
+    it("should add multiple belongs_to relationship in any load order",function(){
+        expect(Rho.ORM.getModel('Product')).toBeUndefined();
+        var sources = Rho.ORMHelper.getAllSources();
+        expect(sources.Product).toBeUndefined();
+        expect(sources.Item).toBeUndefined();
+        expect(sources.Item2).toBeUndefined();
+
+        var Product = function(model){
+            model.modelName("Product");
+            model.property("name","string");
+            model.property("price","float");
+            model.enable("fixedSchema");
+            model.addUniqueIndex("u1",["name"]);
+            model.set("partition","local");
+        };
+        var Item = function(model){
+            model.modelName("Item");
+            model.property("name","string");
+            model.property("code");
+            model.enable("fixedSchema");
+            model.enable('sync');
+            model.set("partition","local");
+            model.belongs_to("Product");
+        };
+        var Item2 = function(model){
+            model.modelName("Item2");
+            model.property("name","string");
+            model.property("code");
+            model.enable("fixedSchema");
+            model.enable('sync');
+            model.set("partition","local");
+            model.belongs_to("Product");
+        };
+        var Model2 = Rho.ORM.addModel(Item);
+        var Model3 = Rho.ORM.addModel(Item2);
+        var Model = Rho.ORM.addModel(Product);
+
+
+        sources = Rho.ORMHelper.getAllSources();
+        expect(sources.Product.str_associations).toEqual("Item,Item2");
+        expect(sources.Item.belongs_to[0]).toEqual("Product");
+        expect(sources.Item2.belongs_to[0]).toEqual("Product");
+        db.$execute_sql("DROP TABLE Product");
     });
 
-    it('saves object to database', function() {
-        var Model = Rho.ORM.addModel('Model');
-        Model.deleteAll();
+    it("should return client id",function(){
+        var db2 = Rho.ORMHelper.dbConnection("user");
+        var client_id;
+        client_id = Rho.ORM.getClientId();
+        expect(client_id).toEqual([]);
 
-        var object = Model.create({'key': 'value'});
+        db2.$execute_sql("INSERT INTO CLIENT_INFO (client_id) VALUES(7)");
 
-        expect(Model.find(object.object()).vars()).toEqual(object.vars());
-        object.set('key', 'another value').set('new key', 'new value');
-        expect(Model.find(object.object()).vars()).not.toEqual(object.vars());
-        object.save();
-        expect(Model.find(object.object()).vars()).toEqual(object.vars());
+        client_id = Rho.ORM.getClientId();
+        expect(client_id).toEqual("7");
+    });
+ });
+
+describe("<ORM Db Reset specs>", function() {
+
+  beforeEach(function(){
+    reset();
+  });
+
+  it("should return true if a model objects have local changes for sync haveLocalChanges",function(){
+      expect(Rho.ORM.getModel('Product')).toBeUndefined();
+      var sources = Rho.ORMHelper.getAllSources();
+      expect(sources.Product).toBeUndefined();
+
+      var db = Rho.ORMHelper.dbConnection("user");
+      expect(Rho.ORM.haveLocalChanges()).toEqual(false);
+
+      db.$execute_sql("INSERT INTO CHANGED_VALUES (object) VALUES('meobj')");
+
+      expect(Rho.ORM.haveLocalChanges()).toEqual(true);
+      db.$execute_sql("DELETE FROM SOURCES");
+      db.$execute_sql("DELETE FROM OBJECT_VALUES");
+      Rho.ORM.clear();
     });
 
-    it('updates object attributes in database', function() {
-        var Model = Rho.ORM.addModel('Model');
-        Model.deleteAll();
+  it("should delete all records only from selected models fixedschema databaseFullResetEx",function(){
+      expect(Rho.ORM.getModel('Product')).toBeUndefined();
+      var sources = Rho.ORMHelper.getAllSources();
+      expect(sources.Product).toBeUndefined();
+      var db = Rho.ORMHelper.dbConnection("user");
 
-        var object = Model.create({'key': 'value', 'original key': 'original value'});
+      var Product = function(model){
+          model.modelName("Product");
+          model.property("name","string");
+          model.property("price","float");
+          model.enable("fixedSchema");
+          model.addUniqueIndex("u1",["name"]);
+          model.set("partition","user");
+      };
 
-        expect(Model.find(object.object()).vars()).toEqual(object.vars());
-        object.updateAttributes({'key': 'another value', 'new key': 'new value'});
-        expect(Model.find(object.object()).vars()).toEqual(object.vars());
-        expect(cleanVars(object)).toEqual({'key': 'another value', 'new key': 'new value', 'original key': 'original value'});
+      var Model1 = Rho.ORM.addModel(Product);
+
+      var p = Model1.create({'name':'test','price':2.0});
+      var db_product = db.$execute_sql("Select * from Product");
+      expect(db_product[0].map.name).toEqual("test");
+
+      var ary = {"models":['Product']};
+
+      Rho.ORM.databaseFullResetEx(ary,false,false);
+      db_product = db.$execute_sql("Select * from Product");
+      expect(db_product).toEqual([]);
+      db.$execute_sql("DELETE FROM SOURCES");
+      db.$execute_sql("DELETE FROM OBJECT_VALUES");
+      Rho.ORM.clear();
     });
 
-    it('destroys object in database', function() {
-        var Model = Rho.ORM.addModel('Model');
+    it("should delete all records only from selected models propertyBag databaseFullResetEx",function(){
+      expect(Rho.ORM.getModel('Product')).toBeUndefined();
+      var sources = Rho.ORMHelper.getAllSources();
+      expect(sources.Product).toBeUndefined();
+      var db = Rho.ORMHelper.dbConnection("user");
 
-        Model.deleteAll();
+      var Product = function(model){
+          model.modelName("Product");
+          model.property("name","string");
+          model.property("price","float");
+          model.set("partition","user");
+      };
 
-        var object1 = Model.create({'key1': 'value1'});
-        var object2 = Model.create({'key2': 'value2'});
+      var Model1 = Rho.ORM.addModel(Product);
 
-        expect(Model.count()).toBe(2);
+      var p = Model1.create({'name':'test','price':2.0});
+      var db_product = db.$execute_sql("Select * from OBJECT_VALUES");
+      expect(db_product[0].map.value).toEqual("test");
+      expect(db_product[1].map.value).toEqual("2");
 
-        object1.destroy();
+      var ary = {"models":['Product']};
 
-        var found = Model.find('all');
-        expect(found.length).toBe(1);
-        expect(found[0].vars()).toEqual(object2.vars());
+      Rho.ORM.databaseFullResetEx(ary,false,false);
+      db_product = db.$execute_sql("Select * from OBJECT_VALUES");
+      expect(db_product).toEqual([]);
+      db.$execute_sql("DELETE FROM SOURCES");
+      db.$execute_sql("DELETE FROM OBJECT_VALUES");
+      Rho.ORM.clear();
     });
 
-    it('does not create empty object in database', function() {
-        var Model = Rho.ORM.addModel('Model');
-        var before = Model.count();
-        Model.create();
-        expect(Model.count()).toBe(before);
+    it("should do nothing if localdb and localdb flag set to false",function(){
+      expect(Rho.ORM.getModel('Product')).toBeUndefined();
+      var sources = Rho.ORMHelper.getAllSources();
+      expect(sources.Product).toBeUndefined();
+      var db = Rho.ORMHelper.dbConnection("local");
+
+      var Product = function(model){
+          model.modelName("Product");
+          model.property("name","string");
+          model.property("price","float");
+          model.set("partition","local");
+      };
+
+      var Model1 = Rho.ORM.addModel(Product);
+
+      var p = Model1.create({'name':'test','price':2.0});
+      var db_product = db.$execute_sql("Select * from OBJECT_VALUES");
+      expect(db_product[0].map.value).toEqual("test");
+      expect(db_product[1].map.value).toEqual("2");
+
+      var ary = {"models":['Product']};
+      Rho.ORM.databaseFullResetEx(ary,false,false);
+
+      db_product = db.$execute_sql("Select * from OBJECT_VALUES");
+      expect(db_product[0].map.value).toEqual("test");
+      expect(db_product[1].map.value).toEqual("2");
+      db.$execute_sql("DELETE FROM SOURCES");
+      db.$execute_sql("DELETE FROM OBJECT_VALUES");
+      Rho.ORM.clear();
     });
 
-    it('does not create object with the only empty property in database', function() {
-        var Model = Rho.ORM.addModel('Model');
-        var before = Model.count();
-        Model.create({'': 'value'});
-        expect(Model.count()).toBe(before);
+    it("should reset client_info table if set databaseFullResetEx",function(){
+      expect(Rho.ORM.getModel('Product')).toBeUndefined();
+      var sources = Rho.ORMHelper.getAllSources();
+      expect(sources.Product).toBeUndefined();
+      var db = Rho.ORMHelper.dbConnection("user");
+      db.$execute_sql("INSERT INTO CLIENT_INFO (client_id) VALUES(7)");
+      var Product = function(model){
+          model.modelName("Product");
+          model.property("name","string");
+          model.property("price","float");
+          model.set("partition","user");
+      };
+
+      var Model1 = Rho.ORM.addModel(Product);
+
+      var p = Model1.create({'name':'test','price':2.0});
+      var db_product = db.$execute_sql("Select * from OBJECT_VALUES");
+      var db_product2 = Rho.ORM.getClientId();
+      expect(db_product2).toEqual("7");
+      expect(db_product[0].map.value).toEqual("test");
+      expect(db_product[1].map.value).toEqual("2");
+
+      var ary = {"models":['Product']};
+
+      Rho.ORM.databaseFullResetEx(ary,true,false);
+      db_product = db.$execute_sql("Select * from OBJECT_VALUES");
+      db_product2 = db.$execute_sql("Select * from client_info");
+      expect(db_product2).toEqual([]);
+      db.$execute_sql("DELETE FROM SOURCES");
+      db.$execute_sql("DELETE FROM OBJECT_VALUES");
+      Rho.ORM.clear();
     });
 
-    it('deletes all objects in database', function() {
-        var Model = Rho.ORM.addModel('Model');
-        Model.create({'key': 'value'});
-        expect(Model.count()).toBeGreaterThan(0);
-        Model.deleteAll();
-        expect(Model.count()).toBe(0);
+    it("should reset client info databaseFullReset tables",function(){
+      expect(Rho.ORM.getModel('Product')).toBeUndefined();
+      var sources = Rho.ORMHelper.getAllSources();
+      expect(sources.Product).toBeUndefined();
+      var db = Rho.ORMHelper.dbConnection("user");
+      db.$execute_sql("INSERT INTO CLIENT_INFO (client_id) VALUES(7)");
+
+      var client_id = db.$execute_sql("Select * from client_info");
+      expect(client_id[0].map.client_id).toEqual("7");
+
+      Rho.ORM.databaseFullReset(true,false);
+      client_id = db.$execute_sql("Select * from client_info");
+      expect(client_id).toEqual([]);
+
+      db.$execute_sql("DELETE FROM SOURCES");
+      db.$execute_sql("DELETE FROM OBJECT_VALUES");
+      Rho.ORM.clear();
     });
 
-    it('deletes all objects of specific model in database', function() {
-        var Model1 = Rho.ORM.addModel('Model1');
-        var Model2 = Rho.ORM.addModel('Model2');
+    it("should reset client info databaseFullReset tables with undefined params",function(){
+      expect(Rho.ORM.getModel('Product')).toBeUndefined();
+      var sources = Rho.ORMHelper.getAllSources();
+      expect(sources.Product).toBeUndefined();
+      var db = Rho.ORMHelper.dbConnection("user");
 
-        Model1.create({'key': 'value'});
-        Model2.create({'key': 'value'});
+      var Product = function(model){
+          model.modelName("Product");
+          model.property("name","string");
+          model.property("price","float");
+          model.set("partition","user");
+          model.enable("sync");
+      };
 
-        expect(Model1.count()).toBeGreaterThan(0);
-        expect(Model2.count()).toBeGreaterThan(0);
+      var Model1 = Rho.ORM.addModel(Product);
 
-        var before1 = Model1.count();
-        Model2.deleteAll();
-        var after1 = Model1.count();
+      var p = Model1.create({'name':'test','price':2.0});
+      var db_product = db.$execute_sql("Select * from OBJECT_VALUES");
+      expect(db_product[0].map.value).toEqual("test");
 
-        expect(after1).toBe(before1);
-        expect(Model2.count()).toBe(0);
+      var ary = {"models":['Product']};
+      Rho.ORM.databaseFullReset(undefined,undefined);
+
+      db_product = db.$execute_sql("Select * from OBJECT_VALUES");
+      expect(db_product).toEqual([]);
+
+      db.$execute_sql("DELETE FROM SOURCES");
+      db.$execute_sql("DELETE FROM OBJECT_VALUES");
+      Rho.ORM.clear();
     });
 
-    it('reads object from database', function() {
-        var Model = Rho.ORM.addModel('Model');
-        Model.deleteAll();
-        Model.create({'key': 'value'});
-        var found = Model.find('all');
-        expect(found.length).toBe(1);
-        expect(cleanVars(found[0])).toEqual({'key': 'value'});
+   it("should reset client info databaseFullReset tables with no params",function(){
+      expect(Rho.ORM.getModel('Product')).toBeUndefined();
+      var sources = Rho.ORMHelper.getAllSources();
+      expect(sources.Product).toBeUndefined();
+      var db = Rho.ORMHelper.dbConnection("user");
+
+      var Product = function(model){
+          model.modelName("Product");
+          model.property("name","string");
+          model.property("price","float");
+          model.set("partition","user");
+          model.enable("sync");
+          model.enable("fixedSchema");
+      };
+
+      var Model1 = Rho.ORM.addModel(Product);
+
+      var p = Model1.create({'name':'test','price':2.0});
+      var db_product = db.$execute_sql("Select * from Product");
+      expect(db_product[0].map.name).toEqual("test");
+
+      var ary = {"models":['Product']};
+      Rho.ORM.databaseFullReset();
+
+      db_product = db.$execute_sql("Select * from Product");
+      expect(db_product).toEqual([]);
+
+      db.$execute_sql("DELETE FROM SOURCES");
+      db.$execute_sql("DELETE FROM OBJECT_VALUES");
+      Rho.ORM.clear();
     });
 
-    it('does not write empty property to database', function() {
-        var Model = Rho.ORM.addModel('Model');
-        Model.deleteAll();
-        Model.create({'key': 'value', '': 'empty'});
-        var found = Model.find('all');
-        expect(found.length).toBe(1);
-        expect(cleanVars(found[0])).toEqual({'key': 'value'});
+   it("should reset client info databaseFullReset tables of all partitions",function(){
+      expect(Rho.ORM.getModel('Product')).toBeUndefined();
+      var sources = Rho.ORMHelper.getAllSources();
+      expect(sources.Product).toBeUndefined();
+      var db_user = Rho.ORMHelper.dbConnection("user");
+      var db_local = Rho.ORMHelper.dbConnection("local");
+
+      var Product_user_fixed = function(model){
+          model.modelName("Product");
+          model.property("name","string");
+          model.property("price","float");
+          model.set("partition","user");
+          model.enable("sync");
+          model.enable("fixedSchema");
+      };
+
+      var Item_user_pb = function(model){
+          model.modelName("Item");
+          model.property("name","string");
+          model.property("price","float");
+          model.set("partition","user");
+          model.enable("sync");
+      };
+
+      var Product_local_fixed = function(model){
+          model.modelName("Product_local");
+          model.property("name","string");
+          model.property("price","float");
+          model.set("partition","local");
+          model.enable("sync");
+          model.enable("fixedSchema");
+      };
+
+      var Item_local_pb = function(model){
+          model.modelName("Item_local");
+          model.property("name","string");
+          model.property("price","float");
+          model.set("partition","local");
+          model.enable("sync");
+      };
+
+      var P_user_fixed = Rho.ORM.addModel(Product_user_fixed);
+      var I_user_pb = Rho.ORM.addModel(Item_user_pb);
+
+      var P_local_fixed = Rho.ORM.addModel(Product_local_fixed);
+      var I_local_pb = Rho.ORM.addModel(Item_local_pb);
+
+      P_user_fixed.create({'name':'user_fixed','price':2.0});
+      I_user_pb.create({'name':'user_pb','price':2.0});
+
+      P_local_fixed.create({'name':'local_fixed','price':2.0});
+      I_local_pb.create({'name':'local_pb','price':2.0});
+
+
+      var user_f = db_user.$execute_sql("Select * from Product");
+      expect(user_f[0].map.name).toEqual("user_fixed");
+      var user_p = db_user.$execute_sql("Select * from OBJECT_VALUES");
+      expect(user_p[0].map.value).toEqual("user_pb");
+
+      var local_f = db_local.$execute_sql("Select * from Product_local");
+      expect(local_f[0].map.name).toEqual("local_fixed");
+      var local_p = db_local.$execute_sql("Select * from OBJECT_VALUES");
+      expect(local_p[0].map.value).toEqual("local_pb");
+
+      Rho.ORM.databaseFullReset(false,true);
+
+      user_f = db_user.$execute_sql("Select * from Product");
+      expect(user_f).toEqual([]);
+      user_p = db_user.$execute_sql("Select * from OBJECT_VALUES");
+      expect(user_p).toEqual([]);
+      expect(db_user.$is_table_exist("Product")).toBe(true);
+
+      local_f = db_local.$execute_sql("Select * from Product_local");
+      expect(local_f).toEqual([]);
+      local_p = db_local.$execute_sql("Select * from OBJECT_VALUES");
+      expect(local_p).toEqual([]);
+      expect(db_local.$is_table_exist("Product_local")).toBe(true);
+      db_user.$execute_sql("DELETE FROM SOURCES");
+      db_local.$execute_sql("DELETE FROM SOURCES");
+      db_user.$execute_sql("DELETE FROM OBJECT_VALUES");
+      db_local.$execute_sql("DELETE FROM OBJECT_VALUES");
+      Rho.ORM.clear();
     });
 
-    it('counts objects in database', function() {
-        var Model1 = Rho.ORM.addModel('Model1');
-        var Model2 = Rho.ORM.addModel('Model2');
+    it("should reset object_values and not sources table if set databaseFullResetEx",function(){
+      expect(Rho.ORM.getModel('Product')).toBeUndefined();
+      var sources = Rho.ORMHelper.getAllSources();
+      expect(sources.Product).toBeUndefined();
+      var db = Rho.ORMHelper.dbConnection("user");
 
-        var before1 = Model1.count();
+      var Product = function(model){
+          model.modelName("Product");
+          model.property("name","string");
+          model.property("price","float");
+          model.set("partition","user");
+          model.enable("sync");
+      };
 
-        Model1.create({'key': 'value'});
-        Model1.create({'key': 'value'});
-        Model2.create({'key': 'value'});
+      var Model1 = Rho.ORM.addModel(Product);
 
-        var after1 = Model1.count();
+      var p = Model1.create({'name':'test','price':2.0});
+      var sources_db = db.$execute_sql("select * from sources");
+      var objects    = db.$execute_sql("select * from object_values");
 
-        expect(after1).toBe(before1 + 2);
+      expect(sources_db[0].map.name).toEqual("Product");
+      expect(objects[0].map.value).toEqual("test");
+
+      Rho.ORM.databaseFullResetAndLogout();
+
+      sources_db = db.$execute_sql("Select * from sources");
+      objects    = db.$execute_sql("select * from object_values");
+      expect(sources_db[0].map.name).toEqual("Product");
+      expect(objects).toEqual([]);
+      db.$execute_sql("DELETE FROM SOURCES");
+      db.$execute_sql("DELETE FROM OBJECT_VALUES");
+      Rho.ORM.clear();
     });
 
-    it('counts objects in database using find', function() {
-        var Model1 = Rho.ORM.addModel('Model1');
-        var Model2 = Rho.ORM.addModel('Model2');
+    it("should reset client and local db if databaseFullclientResetAndLogout",function(){
+      var db = Rho.ORMHelper.dbConnection("local");
+      db.$execute_sql("INSERT INTO CLIENT_INFO (client_id) VALUES(7)");
 
-        var before1 = Model1.find('count');
+      var Product = function(model){
+          model.modelName("Product");
+          model.property("name","string");
+          model.property("price","float");
+          model.enable("sync");
+          model.set("partition","local");
+      };
 
-        Model1.create({'key': 'value'});
-        Model1.create({'key': 'value'});
-        Model2.create({'key': 'value'});
+      var Model1 = Rho.ORM.addModel(Product);
 
-        var after1 = Model1.find('count');
+      var p = Model1.create({'name':'test','price':2.0});
+      var objects = db.$execute_sql("select * from OBJECT_VALUES");
+      var client_info = db.$execute_sql("select * from client_info");
+      expect(objects[0].map.value).toEqual("test");
+      expect(client_info[0].map.client_id).toEqual("7");
+      Rho.ORM.databaseFullclientResetAndLogout();
 
-        expect(after1).toBe(before1 + 2);
+      objects = db.$execute_sql("select * from OBJECT_VALUES");
+      client_info = db.$execute_sql("select * from client_info");
+      expect(objects).toEqual([]);
+      expect(client_info).toEqual([]);
+      db.$execute_sql("DELETE FROM SOURCES");
+      db.$execute_sql("DELETE FROM OBJECT_VALUES");
+      Rho.ORM.clear();
     });
-
-    it('counts objects in database using find with condition', function() {
-        var Model1 = Rho.ORM.addModel('Model1');
-        var Model2 = Rho.ORM.addModel('Model2');
-
-        var before1 = Model1.find('count', {conditions: {'key': 'value to find'}});
-
-        Model1.create({'key': 'value'});
-        Model1.create({'key': 'value to find'});
-        Model1.create({'key': 'value to find'});
-        Model1.create({'another key': 'value to find'});
-        Model2.create({'key': 'value to find'});
-
-        var after1 = Model1.find('count', {conditions: {'key': 'value to find'}});
-
-        expect(after1).toBe(before1 + 2);
-    });
-/*
-if !defined?(RHO_WP7)
-  it "should raise RecordNotFound error if nil given as find argument" do
-
-    bExc = false
-    begin
-      getAccount.find(nil)
-    rescue Exception => e
-	    puts "Exception : #{e}"
-        bExc = e.is_a?(::Rhom::RecordNotFound)
-    end
-    bExc.should == true
-
-  end
-end
-*/
-    it('finds all objects in database', function() {
-        var Model1 = Rho.ORM.addModel('Model1');
-        var Model2 = Rho.ORM.addModel('Model2');
-
-        Model1.deleteAll();
-
-        Model1.create({'key1': 'value1'});
-        Model2.create({'key2': 'value2'});
-        Model1.create({'key3': 'value3'});
-
-        var found = Model1.find('all');
-
-        expect(found.length).toBe(2);
-        var i = (found[0].has('key1')) ? 0 : 1;
-        expect(cleanVars(found[i    ])).toEqual({'key1': 'value1'});
-        expect(cleanVars(found[1 - i])).toEqual({'key3': 'value3'});
-    });
-
-    it('finds all objects with one condition', function() {
-        var Model = Rho.ORM.addModel('Model');
-
-        Model.deleteAll();
-
-        Model.create({'key': 'value1'});
-        var objects = [Model.create({'key': 'value2'}), Model.create({'key': 'value2'})];
-
-        var found = Model.find('all', {conditions: {'key': 'value2'}});
-
-        expect(found.length).toBe(2);
-        var i = (found[0].object() === objects[0].object()) ? 0 : 1;
-        expect(found[i    ].vars()).toEqual(objects[0].vars());
-        expect(found[1 - i].vars()).toEqual(objects[1].vars());
-    });
-
-    it('finds all objects with conditions', function() {
-        var Model = Rho.ORM.addModel('Model');
-
-        Model.deleteAll();
-
-        Model.create({'key1': 'value2'});
-        Model.create({'key2': 'value3'});
-        var objects = [
-            Model.create({'key1': 'value2', 'key2': 'value3'}),
-            Model.create({'key1': 'value2', 'key2': 'value3'})
-        ];
-        Model.create({'key1': 'value2', 'key2': 'value2'});
-        Model.create({'key1': 'value3', 'key2': 'value3'});
-
-        var found = Model.find('all', {conditions: {'key1': 'value2', 'key2': 'value3'}});
-
-        expect(found.length).toBe(2);
-        var i = (found[0].object() === objects[0].object()) ? 0 : 1;
-        expect(found[i    ].vars()).toEqual(objects[0].vars());
-        expect(found[1 - i].vars()).toEqual(objects[1].vars());
-    });
-
-    it('finds specific object', function() {
-        var Model = Rho.ORM.addModel('Model');
-
-        var original = Model.create({'key1': 'value1'});
-        Model.create({'key2': 'value2'});
-
-        expect(Model.find(original.object()).vars()).toEqual(original.vars());
-    });
-
-    it('finds first object in database', function() {
-        var Model = Rho.ORM.addModel('Model');
-
-        Model.deleteAll();
-
-        var originals = [Model.create({'key1': 'value1'}), Model.create({'key3': 'value3'})];
-
-        var found = Model.find('first');
-
-        expect(found.vars()).toEqual(originals[(found.has('key1')) ? 0 : 1].vars());
-    });
-
-/*
-  it "should find with conditions" do
-    @accts = getAccount.find(:all, :conditions => {'industry' => 'Technology'}, :order => 'name', :orderdir => "desc")
-    @accts.length.should == 2
-    @accts[0].name.should == "Mobio India"
-    @accts[0].industry.should == "Technology"
-    @accts[1].name.should == "Aeroprise"
-    @accts[1].industry.should == "Technology"
-  end
-
-  it "should find with advanced OR conditions" do
-    query = '%IND%'
-    @accts = getAccount.find( :all,
-       :conditions => {
-        {:func=>'UPPER', :name=>'name', :op=>'LIKE'} => query,
-        {:func=>'UPPER', :name=>'industry', :op=>'LIKE'} => query},
-        :op => 'OR', :select => ['name','industry'])
-
-    @accts.length.should == 1
-    @accts[0].name.should == "Mobio India"
-    @accts[0].industry.should == "Technology"
-  end
-
-  it "should find with advanced OR conditions with order" do
-    query = '%IND%'
-    @accts = getAccount.find( :all,
-       :conditions => {
-        {:func=>'UPPER', :name=>'name', :op=>'LIKE'} => query,
-        {:func=>'UPPER', :name=>'industry', :op=>'LIKE'} => query},
-        :op => 'OR', :select => ['name','industry'],
-        :order=>'name', :orderdir=>'DESC' )
-
-    @accts.length.should == 1
-    @accts[0].name.should == "Mobio India"
-    @accts[0].industry.should == "Technology"
-  end
-
-  it "should NOT find with advanced OR conditions" do
-    query = '%IND33%'
-    @accts = getAccount.find( :all,
-       :conditions => {
-        {:func=>'UPPER', :name=>'name', :op=>'LIKE'} => query,
-        {:func=>'UPPER', :name=>'industry', :op=>'LIKE'} => query},
-        :op => 'OR', :select => ['name','industry'])
-
-    @accts.length.should == 0
-  end
-
-  it "should find with advanced AND conditions" do
-    query = '%IND%'
-    query2 = '%chnolo%' #LIKE is case insensitive by default
-    @accts = getAccount.find( :all,
-       :conditions => {
-        {:func=>'UPPER', :name=>'name', :op=>'LIKE'} => query,
-        {:func=>'UPPER', :name=>'industry', :op=>'LIKE'} => query2
-       },
-       :op => 'AND',
-       :select => ['name','industry'])
-
-    @accts.length.should == 1
-    @accts[0].name.should == "Mobio India"
-    @accts[0].industry.should == "Technology"
-  end
-
-  it "should find with advanced AND conditions with order" do
-    query = '%IND%'
-    query2 = '%chnolo%' #LIKE is case insensitive by default
-    @accts = getAccount.find( :all,
-       :conditions => {
-        {:func=>'UPPER', :name=>'name', :op=>'LIKE'} => query,
-        {:func=>'UPPER', :name=>'industry', :op=>'LIKE'} => query2
-       },
-       :op => 'AND',
-       :select => ['name','industry'],
-       :order=>'name', :orderdir=>'DESC')
-
-    @accts.length.should == 1
-    @accts[0].name.should == "Mobio India"
-    @accts[0].industry.should == "Technology"
-  end
-
-  it "should NOT find with advanced AND conditions" do
-    query = '%IND123%'
-    query2 = '%chnolo%'     #LIKE is case insensitive by default
-    @accts = getAccount.find( :all,
-       :conditions => {
-        {:func=>'UPPER', :name=>'name', :op=>'LIKE'} => query,
-        {:func=>'UPPER', :name=>'industry', :op=>'LIKE'} => query2},
-        :op => 'AND', :select => ['name','industry'])
-
-    @accts.length.should == 0
-  end
-
-  it "should count with advanced AND conditions" do
-    query = '%IND%'
-    query2 = '%chnolo%'     #LIKE is case insensitive by default
-    nCount = getAccount.find( :count,
-       :conditions => {
-        {:func=>'UPPER', :name=>'name', :op=>'LIKE'} => query,
-        {:func=>'UPPER', :name=>'industry', :op=>'LIKE'} => query2},
-        :op => 'AND' )
-
-    nCount.should == 1
-  end
-
-  it "should count 0 with advanced AND conditions" do
-    query = '%IND123%'
-    query2 = '%chnolo%'     #LIKE is case insensitive by default
-    nCount = getAccount.find( :count,
-       :conditions => {
-        {:func=>'UPPER', :name=>'name', :op=>'LIKE'} => query,
-        {:func=>'UPPER', :name=>'industry', :op=>'LIKE'} => query2},
-        :op => 'AND')
-
-    nCount.should == 0
-  end
-
-  it "should find with advanced AND conditions and non-string value" do
-    res = getAccount.find( :all,
-       :conditions => {
-        {:func=>'length', :name=>'name', :op=>'>'} => 0
-       },
-       :op => 'AND')
-
-    res.should_not be_nil
-    res.length.should  == 2
-  end
-
-  it "should search with LIKE" do
-    query2 = '%CHNolo%'     #LIKE is case insensitive by default
-    nCount = getAccount.find( :count,
-       :conditions => {
-        {:name=>'industry', :op=>'LIKE'} => query2}
-    )
-
-    nCount.should_not == 0
-  end
-
-  it "should search with 3 LIKE" do
-    getAccount.create({:SurveyID=>"Survey1", :CallID => 'Call1', :SurveyResultID => 'SurveyResult1'})
-    getAccount.create({:SurveyID=>"Survey2", :CallID => 'Call2', :SurveyResultID => 'SurveyResult2'})
-    getAccount.create({:SurveyID=>"Survey3", :CallID => 'Call3', :SurveyResultID => 'SurveyResult3'})
-
-    shift_callreport = true
-    prevresult = getAccount.find(:first, :conditions =>
-            {{:func => 'LOWER', :name => 'SurveyID', :op => 'LIKE'} => 'survey%',
-            {:func => 'LOWER', :name => 'CallID', :op => 'LIKE'} => 'call%',
-            {:func => 'LOWER', :name => 'SurveyResultID', :op => 'LIKE'} => 'surveyresult%'},
-            :op => 'AND') if shift_callreport
-
-    prevresult.should_not be_nil
-  end
-
-  it "should search with IN array" do
-    items = getAccount.find( :all,
-       :conditions => {
-        {:name=>'industry', :op=>'IN'} => ["Technology", "Technology2"] }
-    )
-
-    items.length.should == 2
-
-    items = getAccount.find( :all,
-       :conditions => {
-        {:name=>'industry', :op=>'IN'} => ["Technology2"] }
-    )
-
-    items.length.should == 0
-
-  end
-
-  it "should search with IN string" do
-    items = getAccount.find( :all,
-       :conditions => {
-        {:name=>'industry', :op=>'IN'} => "\"Technology\", \"Technology2\"" }
-    )
-
-    items.length.should == 2
-
-    items = getAccount.find( :all,
-       :conditions => {
-        {:name=>'industry', :op=>'IN'} => "\"Technology2\"" }
-    )
-
-    items.length.should == 0
-
-  end
-
-  it "should search with NOT IN array" do
-    items = getAccount.find( :all,
-       :conditions => {
-        {:name=>'industry', :op=>'NOT IN'} => ["Technology1", "Technology2"] }
-    )
-
-    items.length.should == 2
-
-    items = getAccount.find( :all,
-       :conditions => {
-        {:name=>'industry', :op=>'NOT IN'} => ["Technology"] }
-    )
-
-    items.length.should == 0
-
-  end
-
-  it "should search with NOT IN string" do
-    items = getAccount.find( :all,
-       :conditions => {
-        {:name=>'industry', :op=>'NOT IN'} => "\"Technology1\", \"Technology2\"" }
-    )
-
-    items.length.should == 2
-
-    items = getAccount.find( :all,
-       :conditions => {
-        {:name=>'industry', :op=>'NOT IN'} => "\"Technology\"" }
-    )
-
-    items.length.should == 0
-
-  end
-
-  it "should find with group of advanced conditions" do
-    query = '%IND%'
-    cond1 = {
-       :conditions => {
-            {:name=>'name', :op=>'LIKE'} => query,
-            {:name=>'industry', :op=>'LIKE'} => query},
-       :op => 'OR'
-    }
-    cond2 = {
-        :conditions => {
-            {:name=>'description', :op=>'LIKE'} => 'Hello%'}
-    }
-
-    @accts = getAccount.find( :all,
-       :conditions => [cond1, cond2],
-       :op => 'AND',
-       :select => ['name','industry','description'])
-
-    @accts.length.should == 1
-    @accts[0].name.should == "Mobio India"
-    @accts[0].industry.should == "Technology"
-  end
-
-  it "should not find with group of advanced conditions" do
-    query = '%IND%'
-    cond1 = {
-       :conditions => {
-            {:func=>'UPPER', :name=>'name', :op=>'LIKE'} => query,
-            {:func=>'UPPER', :name=>'industry', :op=>'LIKE'} => query},
-       :op => 'OR'
-    }
-    cond2 = {
-        :conditions => {
-            {:name=>'description', :op=>'LIKE'} => 'Hellogg%'}
-    }
-
-    @accts = getAccount.find( :all,
-       :conditions => [cond1, cond2],
-       :op => 'AND',
-       :select => ['name','industry'])
-
-    @accts.length.should == 0
-  end
-
-  it "should find first with conditions" do
-    @mobio_ind_acct = getAccount.find(:first, :conditions => {'name' => 'Mobio India'})
-    @mobio_ind_acct.name.should == "Mobio India"
-    @mobio_ind_acct.industry.should == "Technology"
-  end
-
-  it "should order by column" do
-    @accts = getAccount.find(:all, :order => 'name')
-
-    @accts.first.name.should == "Aeroprise"
-    @accts.first.industry.should == "Technology"
-    @accts[1].name.should == "Mobio India"
-    @accts[1].industry.should == "Technology"
-  end
-
-  it "should desc order by column" do
-    @accts = getAccount.find(:all, :order => 'name', :orderdir => 'DESC')
-
-    @accts.first.name.should == "Mobio India"
-    @accts.first.industry.should == "Technology"
-    @accts[1].name.should == "Aeroprise"
-    @accts[1].industry.should == "Technology"
-  end
-
-  it "should order by block" do
-    @accts = getAccount.find(:all, :order => 'name') do |x,y|
-        y <=> x
-    end
-
-    @accts[0].name.should == "Mobio India"
-    @accts[0].industry.should == "Technology"
-    @accts[1].name.should == "Aeroprise"
-    @accts[1].industry.should == "Technology"
-
-    @accts = getAccount.find(:all, :order => 'name', :orderdir => 'DESC') do |x,y|
-        y <=> x
-    end
-
-    @accts[0].name.should == "Aeroprise"
-    @accts[0].industry.should == "Technology"
-    @accts[1].name.should == "Mobio India"
-    @accts[1].industry.should == "Technology"
-
-    puts "block without order parameter"
-    @accts = getAccount.find(:all) do |item1,item2|
-        item2.name <=> item1.name
-    end
-
-    @accts[0].name.should == "Mobio India"
-    @accts[0].industry.should == "Technology"
-    @accts[1].name.should == "Aeroprise"
-    @accts[1].industry.should == "Technology"
-
-  end
-
-  it "should order by multiple columns" do
-    getAccount.create(:name=>'ZMobile', :industry => 'IT', :modified_by_name => 'user')
-    getAccount.create(:name=>'Aeroprise', :industry => 'Accounting', :modified_by_name => 'admin')
-
-    @accts = getAccount.find(:all, :order => ['name', 'industry'], :orderdir => ['ASC', 'DESC'])
-
-    @accts.length().should == 4
-    @accts[0].name.should == "Aeroprise"
-    @accts[0].industry.should == "Technology"
-    @accts[1].name.should == "Aeroprise"
-    @accts[1].industry.should == "Accounting"
-    @accts[2].name.should == "Mobio India"
-    @accts[2].industry.should == "Technology"
-    @accts[3].name.should == "ZMobile"
-    @accts[3].industry.should == "IT"
-
-    puts "multiple order with condition"
-    @accts = getAccount.find(:all, :conditions => {:modified_by_name => 'admin'},
-        :order => ['name', 'industry'], :orderdir => ['ASC', 'DESC'])
-
-    @accts.length().should == 3
-    @accts[0].name.should == "Aeroprise"
-    @accts[0].industry.should == "Technology"
-    @accts[1].name.should == "Aeroprise"
-    @accts[1].industry.should == "Accounting"
-    @accts[2].name.should == "Mobio India"
-    @accts[2].industry.should == "Technology"
-
-  end
-
-*/
-
-    it("syncs", function() {
-        var Model = Rho.ORM.addModel('Model');
-        if (typeof Rho !== 'undefined' && typeof Rho.RhoConnectClient !== 'undefined') {
-            var count = 0;
-            Model.sync(function() {++count;});
-            waitsFor(function() {return count > 0;}, 'callback', 10000);
-            runs(function() {expect(count).toBe(101);});
-        } else {
-            Model.sync();
-        }
-    });
-
 });
