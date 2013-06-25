@@ -1,9 +1,6 @@
 require 'fileutils'
 require 'rake'
 
-load File.join($rho_root,'Rakefile')
-load File.join($rho_root,'platform','android','build','android.rake')
-
 def stop_apps
 	RhoconnectHelper.stop_rhoconnect_stack
 end
@@ -16,7 +13,10 @@ def cleanup_apps
 	end
 end
 
-def run_apps(platform)
+def run_apps(platform, build_required)
+	load File.join($rho_root,'Rakefile')
+	load File.join($rho_root,'platform','android','build','android.rake')
+
 	appname = "rhoconnect_push_client"
 	test_appname = "testapp"
 
@@ -37,13 +37,14 @@ def run_apps(platform)
 	FileUtils.mkdir_p File.expand_path($tmp_path)
 	$server_path = File.expand_path(File.join($tmp_path,'testapp'))
 
-
 	RhoconnectHelper.set_rhoconnect_bin "#{$rhoconnect_root}/bin/rhoconnect"
 	puts "rhoconnect_bin: #{RhoconnectHelper.rhoconnect_bin}"
 
 	RhoconnectHelper.set_rc_push_out File.open( File.join($app_path, "rhoconnect_push.log" ), "w")
 	RhoconnectHelper.set_rc_out(File.open( File.join($app_path, "rhoconnect.log" ), "w"), File.open( File.join($app_path, "rhoconnect_err.log" ), "w"))
 	RhoconnectHelper.set_redis_out File.open( File.join($app_path, "redis.log" ), "w") if $rhoconnect_use_redis
+	rhodes_log = File.join($spec_path, 'rhoconnect_push_client', 'rholog.txt')
+	File.unlink(rhodes_log) if File.exists?(rhodes_log)
 	RhoconnectHelper.set_enable_redis($rhoconnect_use_redis)
 	RhoconnectHelper.set_enable_resque(false)
 
@@ -102,10 +103,11 @@ def run_apps(platform)
 			end
 
 			FileUtils.chdir File.join($spec_path, 'rhoconnect_push_client')
-			# system("rake clean:android") # FIXME:
-			puts "\nBuilding rhodes app ..."
-			puts "rake device:#{$platform}:debug"
-			system("rake device:#{$platform}:debug").should == true
+			if build_required
+				puts "\nBuilding rhodes app ..."
+				puts "rake device:#{$platform}:debug"
+				system("rake device:#{$platform}:debug").should == true
+			end
 
 			puts "Install rhoconnect push service ..."
 			push_service_apk = File.join($rhoelements_root,'libs','rhoconnect-push-service','rhoconnect-push-service.apk')
@@ -126,6 +128,7 @@ def run_apps(platform)
 				:out => File.open(File.join($spec_path, 'rhoconnect_push_client', 'rholog.txt'), "w"))
 			puts "Starting logcat process with pid: #{$logcat_pid}"
 		else
+			# Using emulator
 			puts "Configure android emulator ..."
 			Rake::Task["config:android:emulator"].invoke
 			AndroidTools.run_emulator( :wipe => true )
@@ -140,9 +143,9 @@ def run_apps(platform)
 			puts "Install rhoconnect push service"
 			push_service_apk = File.join($rhoelements_root,'libs','rhoconnect-push-service','rhoconnect-push-service.apk')
 			AndroidTools.load_app_and_run("-e", push_service_apk, "")
+
 			puts 'Building and starting rhodes application ...'
 			FileUtils.chdir File.join($spec_path, 'rhoconnect_push_client')
-			system("rake clean:android") # FIXME:
 			system("rake run:#{$platform}").should == true
 		end
 	else
@@ -153,7 +156,6 @@ def run_apps(platform)
 		puts
 		#
 	end
-
 	puts "Running push specs ..."
 	puts
 rescue Exception => e
