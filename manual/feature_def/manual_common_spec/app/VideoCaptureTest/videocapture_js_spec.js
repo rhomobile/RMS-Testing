@@ -13,6 +13,10 @@ describe("Video Capture Test", function() {
 		alert(data);
 		callbackCount += 1;
 	}
+	
+	var enumerate_callback = function(params) {
+	
+	}
 	it("VT281-0677 | Start videoCapture with default duration|", function() {
 		runs(function()
 		{
@@ -384,11 +388,11 @@ describe("Video Capture Test", function() {
 			Rho.Videocapture.saveToGallery = true;
 			if (isAndroidPlatform())
 			{
-				Rho.Videocapture.saveToGallery = "/mnt/sdcard/Rhovideocatpure"
+				Rho.Videocapture.filename = "/mnt/sdcard/Rhovideocatpure"
 			}
 			if (isWindowsMobilePlatform())
 			{
-				Rho.Videocapture.saveToGallery = "\Application\Rhovideocatpure"
+				Rho.Videocapture.filename = "\Application\Rhovideocatpure"
 			}
 			Rho.Videocapture.start();
 			
@@ -405,6 +409,367 @@ describe("Video Capture Test", function() {
 		});	
 	});	
 
+/*	it("VT281-0696 | set saveToGallery invalid value videoCapture|", function() {
+		runs(function()
+		{
+			Rho.Videocapture.saveToGallery = abcd;
+			Rho.Videocapture.start();
+			
+		});
+
+		waitsFor(function(){
+			return captured;
+		},"Waiting For Result",120000);	
+
+
+		runs(function()
+		{
+			expect(testResult).toEqual(true);
+		});	
+	});	
+
+	it("VT281-0697 | set saveToGallery empty value videoCapture|", function() {
+		runs(function()
+		{
+			Rho.Videocapture.saveToGallery = null;
+			Rho.Videocapture.start();
+			
+		});
+
+		waitsFor(function(){
+			return captured;
+		},"Waiting For Result",120000);	
+
+
+		runs(function()
+		{
+			expect(testResult).toEqual(true);
+		});	
+	});		
+	*/
+
+	it("VT281-0698 | set filename videoCapture|", function() {
+		runs(function()
+		{
+			if (isAndroidPlatform())
+			{
+				Rho.Videocapture.filename = "/Rhovideocatpure"
+			}
+			if (isWindowsMobilePlatform())
+			{
+				Rho.Videocapture.filename = "\Rhovideocatpure"
+			}
+			Rho.Videocapture.start();
+			
+		});
+
+		waitsFor(function(){
+			return captured;
+		},"Waiting For Result",120000);	
+
+
+		runs(function()
+		{
+			expect(testResult).toEqual(true);
+		});	
+	});	
+
+	it("VT281-0699 | set filename using set Property method videoCapture|", function() {
+		runs(function()
+		{
+			if (isAndroidPlatform())
+			{
+				Rho.Videocapture.setProperty('filename','/Temp/Rhovideocatpure')
+			}
+			if (isWindowsMobilePlatform())
+			{
+				Rho.Videocapture.setProperty('filename','\Temp\Rhovideocatpure')
+			}
+			Rho.Videocapture.start();
+			
+		});
+
+		waitsFor(function(){
+			return captured;
+		},"Waiting For Result",120000);	
+
+
+		runs(function()
+		{
+			expect(testResult).toEqual(true);
+		});	
+	});	
 	
+	it("VT281-0700 | set filename using set Properties method videoCapture|", function() {
+		runs(function()
+		{
+			if (isAndroidPlatform())
+			{
+				Rho.Videocapture.setProperties({'filename' :'/Temp/Rhovideocatpure'})
+			}
+			if (isWindowsMobilePlatform())
+			{
+				Rho.Videocapture.setProperties({'filename' :'\Temp\Rhovideocatpure'})
+			}
+			Rho.Videocapture.start();
+			
+		});
+
+		waitsFor(function(){
+			return captured;
+		},"Waiting For Result",120000);	
+
+
+		runs(function()
+		{
+			expect(testResult).toEqual(true);
+		});	
+	});	
+	
+	it("VT281-0701 | set filename to M123$_abc videoCapture|", function() {
+		runs(function()
+		{
+			if (isAndroidPlatform())
+			{
+				Rho.Videocapture.filename = "/Temp/M123$_abc"
+			}
+			if (isWindowsMobilePlatform())
+			{
+				Rho.Videocapture.filename = "\Temp\M123$_abc"
+			}
+			Rho.Videocapture.start();
+			
+		});
+
+		waitsFor(function(){
+			return captured;
+		},"Waiting For Result",120000);	
+
+
+		runs(function()
+		{
+			expect(testResult).toEqual(true);
+		});	
+	});		
+	
+	/*it("VT281-0702 | set filename to invalid path videoCapture|", function() {
+		runs(function()
+		{
+			if (isAndroidPlatform())
+			{
+				Rho.Videocapture.filename = "\invalid/Rhovideocatpure"
+			}
+			if (isWindowsMobilePlatform())
+			{
+				Rho.Videocapture.filename = "\invalid/Rhovideocatpure"
+			}
+			Rho.Videocapture.start();
+			
+		});
+
+		waitsFor(function(){
+			return captured;
+		},"Waiting For Result",120000);	
+
+
+		runs(function()
+		{
+			expect(testResult).toEqual(true);
+		});	
+	});	
+
+	it("VT281-0703 | set filename to empty path videoCapture|", function() {
+		runs(function()
+		{
+			if (isAndroidPlatform())
+			{
+				Rho.Videocapture.filename = ""
+			}
+			if (isWindowsMobilePlatform())
+			{
+				Rho.Videocapture.filename = ""
+			}
+			Rho.Videocapture.start();
+			
+		});
+
+		waitsFor(function(){
+			return captured;
+		},"Waiting For Result",120000);	
+
+
+		runs(function()
+		{
+			expect(testResult).toEqual(true);
+		});	
+	});	*/	
+
+	it("VT281-0704 | cancel after recoreded video saves|", function() {
+		runs(function()
+		{
+			if (isAndroidPlatform())
+			{
+				runs(function()
+				{
+					Rho.Videocapture.filename = "/Temp/Rhovideocatpure"
+					Rho.Videocapture.duration = 10000
+					Rho.Videocapture.start(videocapturestart_callback);
+				});
+			}
+			if (isWindowsMobilePlatform())
+			{
+				runs(function()
+				{			
+					Rho.Videocapture.filename = "\Temp\Rhovideocatpure"
+					Rho.Videocapture.duration = 10000
+					Rho.Videocapture.start(videocapturestart_callback);
+				});
+				waitsFor(function(){
+				
+				},"Waiting For Result",5000);
+				
+				runs(function()
+				{	
+					Rho.Videocapture.cancel();
+				});
+			}
+			
+		});
+
+		waitsFor(function(){
+			return captured;
+		},"Waiting For Result",120000);	
+
+
+		runs(function()
+		{
+			expect(testResult).toEqual(true);
+		});	
+	});
+	
+	it("VT281-0704 | cancel after calling stop|", function() {
+		runs(function()
+		{
+			if (isAndroidPlatform())
+			{
+				runs(function()
+				{
+					Rho.Videocapture.filename = "/Temp/Rhovideocatpure"
+					Rho.Videocapture.duration = 10000
+					Rho.Videocapture.start(videocapturestart_callback);
+				});
+			}
+			if (isWindowsMobilePlatform())
+			{
+				runs(function()
+				{			
+					Rho.Videocapture.filename = "\Temp\Rhovideocatpure"
+					Rho.Videocapture.duration = 10000
+					Rho.Videocapture.start(videocapturestart_callback);
+				});
+				waitsFor(function(){
+				
+				},"Waiting For Result",5000);
+				
+				runs(function()
+				{	
+					Rho.Videocapture.stop();
+					Rho.Videocapture.cancel();
+					
+				});
+			}	
+			
+		});
+
+		waitsFor(function(){
+			return captured;
+		},"Waiting For Result",120000);	
+
+
+		runs(function()
+		{
+			expect(testResult).toEqual(true);
+		});	
+	});	
+	
+	it("VT281-0706 | Call enumerate method with call back videocapture|", function() {
+		runs(function()
+		{
+			enumData = Rho.Videocapture.enumerate(enumerate_callback);
+			for (var j = 0;j<enumData.length;j++){
+				displayResult("Enum | ",enumData[j]);
+				waits(10000);
+			}
+			
+		});
+
+		waitsFor(function(){
+			return captured;
+		},"Waiting For Result",120000);	
+
+
+		runs(function()
+		{
+			expect(testResult).toEqual(true);
+		});	
+	});		
+
+	it("VT281-0707 | Call enumerate method without call back videocapture|", function() {
+		runs(function()
+		{
+			enumData = Rho.Videocapture.enumerate();
+			for (var j = 0;j<enumData.length;j++){
+				displayResult("Enum | ",enumData[j]);
+				waits(10000);
+			}
+			
+		});
+
+		waitsFor(function(){
+			return captured;
+		},"Waiting For Result",120000);	
+
+
+		runs(function()
+		{
+			expect(testResult).toEqual(true);
+		});	
+	});		
+
+	it("VT281-0708 | Call setDefault method videocapture|", function() {
+		runs(function()
+		{
+			Rho.Videocapture.setDefault(cam1);
+			Rho.Videocapture.start();
+		});
+
+		waitsFor(function(){
+			return captured;
+		},"Waiting For Result",120000);	
+
+
+		runs(function()
+		{
+			expect(testResult).toEqual(true);
+		});	
+	});	
+	
+	it("VT281-0708 | Call getDefault method videocapture|", function() {
+		runs(function()
+		{
+			data = Rho.Videocapture.getDefault();
+			displayResult("VT281-0708 | Call getDefault method videocapture",data);
+		});
+
+		waitsFor(function(){
+			return captured;
+		},"Waiting For Result",120000);	
+
+
+		runs(function()
+		{
+			expect(testResult).toEqual(true);
+		});	
+	});	
 	
 });

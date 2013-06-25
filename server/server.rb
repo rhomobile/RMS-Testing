@@ -23,8 +23,9 @@ securePortWithClientAuth = 8083
 cert = OpenSSL::X509::Certificate.new File.read 'ca.crt'
 pkey = OpenSSL::PKey::RSA.new File.read 'ca.key'
 
-$local_server = WEBrick::HTTPServer.new :Port => port
+$local_server = WEBrick::HTTPServer.new :Port => port, :DocumentRoot => "Documents"
 $secure_server = WEBrick::HTTPServer.new(:Port => securePort,
+								 :DocumentRoot => "Documents",
                                  :SSLEnable => true,
                                  :SSLCertificate => cert,
                                  :SSLPrivateKey => pkey,
@@ -120,7 +121,20 @@ $local_server.mount_proc '/download_app' do |req,res|
     
     if filename then
         res.body = File.open( File.join( File.dirname(__FILE__),filename ), "rb" )
-        res["content-type"]="application/octet-stream"
+
+        extensions = {
+            '.cab' => 'application/vnd.ms-cab-compressed',
+            '.apk' => 'application/vnd.android.package-archive',
+            '.exe' => 'application/x-msdownload'
+        }
+
+        contentType = extensions[File.extname(filename)]
+        
+        if !contentType then
+            contentType = "application/octet-stream"
+        end
+        
+        res['content-type'] = contentType
 
         res.status = 200
     else
