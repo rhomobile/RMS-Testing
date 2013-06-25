@@ -128,9 +128,12 @@ $local_server.mount_proc '/download_app' do |req,res|
         }
 
         contentType = extensions[File.extname(filename)]
+        
+        if !contentType then
+            contentType = "application/octet-stream"
+        end
+        
         res['content-type'] = contentType
-
-        #res["content-type"]="application/octet-stream"
 
         res.status = 200
     else
