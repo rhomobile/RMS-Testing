@@ -206,19 +206,12 @@ function onQuit() {
     Rho.Application.quit();
 }
 
-function toolSwitch1() {
+function toolSeparatorWidth(width) {
     var toolElements = new Array();
     toolElements = [
         {action: '/app/NativeToolbarTest/Page1.html', icon: '/public/images/bar/switch/btn_1.png'},
-        {action: 'separator', width: 200},
-        {action: '/app/NativeToolbarTest/Page2.html', icon: '/public/images/bar/switch/btn_2.png'},
-        {action: 'separator', width: 400},
-        {action: '/app/NativeToolbarTest/Page3.html', icon: '/public/images/bar/switch/btn_3.png'},
-        {action: 'separator', width: 100},
-        {action: '/app/NativeToolbarTest/Page4.html', icon: '/public/images/bar/switch/btn_4.png'},
-        {action: 'separator', width: 50},
-        {action: '/app/NativeToolbarTest/Page5.html', icon: '/public/images/bar/switch/btn_5.png'},
-        {action: 'separator', width: -20}
+        {action: 'separator', width: width},
+        {action: '/app/NativeToolbarTest/Page2.html', icon: '/public/images/bar/switch/btn_2.png'}
     ];
 
     var toolProperties = {backgroundColor: 0xFF0000, maskColor: 0xFF0000, viewHeight: 100};
