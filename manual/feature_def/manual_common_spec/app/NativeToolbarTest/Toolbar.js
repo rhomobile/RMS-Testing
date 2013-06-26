@@ -222,18 +222,6 @@ function toolJavascript() {
 
 }
 
-function toolViewHeight() {
-    var toolElements = new Array();
-    toolElements = [
-        {label: 'Home', action: 'home', icon: '/public/images/bar/colored_btn.png'},
-        {label: 'exit', action: 'javascript:onQuit()', icon: '/public/images/bar/refresh_btn.png'},
-        {label: 'refresh', action: 'refresh', icon: '/public/images/bar/forward_btn.png'},
-        {label: 'Load a HTML page ', action: 'app/ApplicationTest/application.html'}
-    ];
-    var toolProperties = {backgroundColor: 0xFF0000, maskColor: 0xFF0000, viewHeight: 700};
-    Rho.NativeToolbar.create(toolElements, toolProperties);
-}
-
 function onQuit() {
     Rho.Application.quit();
 }
@@ -249,6 +237,16 @@ function toolSeparatorWidth(width) {
     var toolProperties = {backgroundColor: 0xFF0000, maskColor: 0xFF0000, viewHeight: 100};
     Rho.NativeToolbar.create(toolElements, toolProperties);
     Rho.WebView.navigate("/app/NativeToolbarTest/page1.html");
+}
 
+function toolViewHeight(height) {
+    Rho.NativeToolbar.create(
+        [
+            {label: 'button1', action: '/app/NativeToolbarTest/Page1.html'},
+            {label: 'button2', action: '/app/NativeToolbarTest/Page2.html'}
+        ], {
+            viewHeight: height
+        }
+    );
 }
 
