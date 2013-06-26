@@ -104,7 +104,6 @@ describe("Barcode JS API Test", function() {
 							}
 
 							var objProperty = JSON.parse(strProperty);
-						
 							enumObject.setProperties(objProperty);
 
 							var strGetProperty = '["'+arrScanner[idx]['propertyName']+'"]';
@@ -256,22 +255,24 @@ describe("Barcode JS API Test", function() {
 								getpropertydata = data;
 								expect(getpropertydata).toEqual('true');								
 						});
+						
+						//  DCC - Removing this test as it is testing for ID property (unsupported)
+//						it("VT282-2006 | call getDefault |" + scnid, function() {
+//								alert(enumObject);
+//							    Rho.Barcode.setDefault(enumObject);
+//							    var defaultobj = Rho.Barcode.getDefault();						  
+//								expect(scnid).toEqual(defaultobj.getProperty('ID'));
+//						});
 
-						it("VT282-2006 | call getDefault |" + scnid, function() {
+						//  DCC - Removing this test as it is testing for ID property (unsupported)
+//						it("VT282-2006A | call Default |" + scnid, function() {
 
-							    Rho.Barcode.setDefault(enumObject);
-							    var defaultobj = Rho.Barcode.getDefault();						  
-								expect(scnid).toEqual(defaultobj.getProperty('ID'));
-						});
-
-						it("VT282-2006A | call Default |" + scnid, function() {
-
-							    //enumObject.clearAllProperties();
-							    //Rho.Barcode.setDefaultID( enumObject.getId() );
-							   // Rho.Barcode.default = enumObject;
-							   // var defaultobj = Rho.Barcode.default;
-								expect(scnid).toEqual(defaultobj.getProperty('ID'));
-						});
+//							    //enumObject.clearAllProperties();
+//							    //Rho.Barcode.setDefaultID( enumObject.getId() );
+//							   // Rho.Barcode.default = enumObject;
+//							   // var defaultobj = Rho.Barcode.default;
+//								expect(scnid).toEqual(defaultobj.getProperty('ID'));
+//						});
 			});
 
 			describe("Disable Scanner "+ scnid +": "+ scnname + scntype, function() {
