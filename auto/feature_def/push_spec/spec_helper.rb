@@ -73,24 +73,6 @@ def run_apps(platform)
 	cfg.gsub!(/(Push.rhoconnect.pushServer.*)/, "Push.rhoconnect.pushServer = 'http://#{RhoconnectHelper.push_host}:#{RhoconnectHelper.push_port}'")
 	File.open(cfgfile, 'w') { |f| f.write cfg }
 
-	# Patching rhodes 'build.yml' file (setup sdk and extentions properties)
-	push_client_path = File.join($spec_path, 'rhoconnect_push_client')
-	File.open(File.join(push_client_path, "build.yml"), 'w') do |bf|
-	  File.open(File.join(push_client_path, "build.yml.example"), 'r') do |f|
-	    f.each do |line|
-	      if line =~ /^sdk: '..\/..\/..\/..\/..\/rhodes'$/
-	      	  # FIXME: using installed rhodes gem (beta.21)
-	          bf.puts "#{line}"
-	      elsif line =~ /Path-to-Motorola-Extensions/
-	      	  # FIXME: using installed rhodes gem (beta.21)
-	          bf.puts "  extensions: \"#{$rhoelements_root}/extensions\"\n"
-	      else
-	          bf.puts line
-	      end
-	    end
-	  end
-	end
-
 	if $platform == 'android'
 		if $deviceId
 			# Using attached device

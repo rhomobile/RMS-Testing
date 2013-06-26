@@ -16,6 +16,11 @@ pushd ../../../../Motorola-Extensions
 git pull origin master
 popd
 
+# path to rhoconnect-client
+pushd ../../../../rhoconnect-client
+git pull origin master
+popd
+
 pushd rhoconnect_push_client
 echo -e "\nClean android rhodes app ..."
 rake clean:android
