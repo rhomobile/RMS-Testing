@@ -16,9 +16,10 @@ def localip
 end
 
 def modify_iOS_Application_plist_file(serverUrl, serverPort)
-  plist_file = 'HelloWorld.plist'
+  plist_file = 'Documents/HelloWorld.plist'
+  ipa_url = 'http://' + serverUrl + ':' + serverPort.to_s() + '/HelloWorld.ipa'
   doc =  REXML::Document.new(File.new(plist_file))
-  REXML::XPath.match(doc, '//string')[1].text = 'http://' + serverUrl + ':' + serverPort.to_s() + '/download_app?device=ios&file=ipa'
+  REXML::XPath.match(doc, '//string')[1].text = ipa_url
   File.open(plist_file, 'w') do |data| data << doc end
 end
 
@@ -126,25 +127,13 @@ $local_server.mount_proc '/download_app' do |req,res|
     
     filename = filenames[device]
 
-    if device == 'ios' then
-      file_type =  req.query()['file']
-      if file_type == 'plist' then
-        filename = 'HelloWorld.plist'
-      else
-        filename = 'HelloWorld.ipa'
-      end
-
-    end
-    
     if filename then
         res.body = File.open( File.join( File.dirname(__FILE__),filename ), "rb" )
 
         extensions = {
             '.cab' => 'application/vnd.ms-cab-compressed',
             '.apk' => 'application/vnd.android.package-archive',
-            '.exe' => 'application/x-msdownload',
-            '.plist' => 'text/xml',
-            '.ipa' => 'application/octet-stream'
+            '.exe' => 'application/x-msdownload'
         }
 
         contentType = extensions[File.extname(filename)]

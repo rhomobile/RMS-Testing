@@ -310,7 +310,7 @@
 
 <div class="method_tests android ios win32 wm wp8">
     <div class="method_name">Rho.System.applicationInstall</div>
-    <div class="method_desc">Application install</div>
+    <div class="method_desc">Application install<b><i>You must have  running webbrick server  before  starting  test application</i></b></div>
     <div class="method_tests wm"><b>Application install for Windows WM:</b>
 
         <div class="test_scenario">
@@ -389,7 +389,7 @@
         <div class="test_scenario">
             <div class="test_scenario_controls">
                 <a href="javascript:void(0)"
-                   onclick="Rho.System.applicationInstall('itms-services://?action=download-manifest&url=' + httpServerUrl+'/download_app?device=ios&file=plist');">Install app from HTTP url</a>
+                   onclick="Rho.System.applicationInstall('itms-services://?action=download-manifest&url=' + httpServerUrl + '/HelloWorld.plist');">Install app from HTTP url</a>
             </div>
             <span class="test_scenario_number">VT300-064 <br/></span>
         </div>
