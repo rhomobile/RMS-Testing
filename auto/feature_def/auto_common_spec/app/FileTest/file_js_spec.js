@@ -912,16 +912,16 @@ describe("FILE JS API", function () {
 		
 		data = 'mydata';
 		
-		var fileForRead = new Rho.RhoFile(fileMode5,Rho.RhoFile.OPEN_FOR_READ);
 		var fileForWrite = new Rho.RhoFile(fileMode5,Rho.RhoFile.OPEN_FOR_WRITE);
 
 		fileForWrite.write(data);
-		fileForWrite.close();
-		var actual = fileForRead.readAll()
+		fileForWrite.flush();
+			
+		var actual = fileForWrite.readAll()
 		Rho.Log.info(actual, "VT290-097");
 		expect(actual).toEqual(data);
 
-		fileForRead.close();
+		fileForWrite.close();
 		
 	});
 	
