@@ -69,6 +69,7 @@ def run_apps(platform)
 	# Patch rhodes 'rhoconfig.txt' file
 	cfgfile = File.join($app_path, 'rhoconfig.txt')
 	cfg = File.read(cfgfile)
+	cfg.gsub!(/(syncserver.*)/, "syncserver = 'http://#{RhoconnectHelper.host}:#{RhoconnectHelper.port}'")
 	cfg.gsub!(/(rhoconnect_push_server.*)/, "rhoconnect_push_server = 'http://#{RhoconnectHelper.push_host}:#{RhoconnectHelper.push_port}'")
 	cfg.gsub!(/(Push.rhoconnect.pushServer.*)/, "Push.rhoconnect.pushServer = 'http://#{RhoconnectHelper.push_host}:#{RhoconnectHelper.push_port}'")
 	File.open(cfgfile, 'w') { |f| f.write cfg }
