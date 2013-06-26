@@ -274,62 +274,65 @@ describe("Notification Manual FD Tests", function () {
 
     if (Rho.System.platform == "WINDOWS_DESKTOP" || Rho.System.isRhoSimulator) {
     } else {
-        it("VT281-0857 |Beep for 5 secs and with volume 3 with 1000 hz|", function () {
+    
+        if (Rho.System.platform == "WINDOWS" || Rho.System.platform == "ANDROID") {
+            it("VT281-0857 |Beep for 5 secs and with volume 3 with 1000 hz|", function () {
 
-            runs(function () {
-                dispTestCaseRunning(" Beeper will be started if its applicable for the Device  ");
-                dispExpectedResult(" Beeper should sound for 5 secs and with volume 3 and frequency 1000  ");
-                var propertyMap = {frequency: 1000, volume: 3, duration: 5000};
-                Rho.Notification.beep(propertyMap);
+                runs(function () {
+                    dispTestCaseRunning(" Beeper will be started if its applicable for the Device  ");
+                    dispExpectedResult(" Beeper should sound for 5 secs and with volume 3 and frequency 1000  ");
+                    var propertyMap = {frequency: 1000, volume: 3, duration: 5000};
+                    Rho.Notification.beep(propertyMap);
 
+                });
+
+                waitsFor(function () {
+                    dispExpectedResult("Beeper should sound for 5 secs and with volume 3 and frequency 1000  ");
+                    return captured;
+                }, 'Beep sound should have ended by now', 30000);
+
+                runs(function () {
+                    expect(testResult).toEqual(true);
+                });
             });
+            it("VT281-0857 |Beep with null duration null frequency and only volume|", function () {
 
-            waitsFor(function () {
-                dispExpectedResult("Beeper should sound for 5 secs and with volume 3 and frequency 1000  ");
-                return captured;
-            }, 'Beep sound should have ended by now', 30000);
+                runs(function () {
+                    dispTestCaseRunning("see if beeper starts and no odd behaviour in device occurs   ");
+                    dispExpectedResult(" No odd behaviour should be seen if beeper is not sounded ");
+                    var propertyMap = {frequency: null, volume: 3, duration: null};
+                    Rho.Notification.beep(propertyMap);
 
-            runs(function () {
-                expect(testResult).toEqual(true);
+                });
+
+                waitsFor(function () {
+                    return captured;
+                }, 'Beep sound should have ended by now', 30000);
+
+                runs(function () {
+                    expect(testResult).toEqual(true);
+                });
             });
-        });
-        it("VT281-0857 |Beep with null duration null frequency and only volume|", function () {
+            it("VT281-0858 |Beep for 2 secs and with volume one  with 2000 hz|", function () {
 
-            runs(function () {
-                dispTestCaseRunning("see if beeper starts and no odd behaviour in device occurs   ");
-                dispExpectedResult(" No odd behaviour should be seen if beeper is not sounded ");
-                var propertyMap = {frequency: null, volume: 3, duration: null};
-                Rho.Notification.beep(propertyMap);
+                runs(function () {
+                    dispTestCaseRunning(" Beeper will be started if its applicable for the Device  ");
+         	    dispExpectedResult(" Beeper should sound for 2 secs and with volume 1 and frequency 10000, please observe the change in the volume from previous case  ");
+                    var propertyMap = {frequency: 10000, volume: 1, duration: 2000};
+                    Rho.Notification.beep(propertyMap);
+                });
 
+                waitsFor(function () {
+        	    dispExpectedResult("Beeper should sound for 2 secs and with volume 1 and frequency 2000  ");
+                    return captured;
+                }, 'Beep sound should have ended by now', 30000);
+
+                runs(function () {
+                    expect(testResult).toEqual(true);
+                });
             });
-
-            waitsFor(function () {
-                return captured;
-            }, 'Beep sound should have ended by now', 30000);
-
-            runs(function () {
-                expect(testResult).toEqual(true);
-            });
-        });
-    it("VT281-0858 |Beep for 2 secs and with volume one  with 2000 hz|", function () {
-
-            runs(function () {
-                dispTestCaseRunning(" Beeper will be started if its applicable for the Device  ");
-         	dispExpectedResult(" Beeper should sound for 2 secs and with volume 1 and frequency 10000, please observe the change in the volume from previous case  ");
-                var propertyMap = {frequency: 10000, volume: 1, duration: 2000};
-                Rho.Notification.beep(propertyMap);
-            });
-
-            waitsFor(function () {
-        	dispExpectedResult("Beeper should sound for 2 secs and with volume 1 and frequency 2000  ");
-                return captured;
-            }, 'Beep sound should have ended by now', 30000);
-
-            runs(function () {
-                expect(testResult).toEqual(true);
-            });
-        });
-
+        }
+        
         it("VT281-0859|Play File - Mp3 file with media type|", function () {
 
             runs(function () {
@@ -526,118 +529,116 @@ describe("Notification Manual FD Tests", function () {
 });
 
 var enumData = Rho.Notification.Led.enumerate();
-if (enumData != null) {
-    for (var j = 0; j < enumData.length; j++) {
-        (function (enumObject, arrScanner) {
-            var ledName = enumObject.name;
-            describe("Controlling LED: " + ledName, function () {
 
-                beforeEach(function () {
-                    document.getElementById("actResult").innerHTML = "init";
-                });
-                it("is able to illuminate LED: " + ledName, function () {
+for (var j = 0; j < enumData.length; j++) {
+    var enumObject = enumData[j];
+    var ledName = enumObject.name;
 
-                    runs(function () {
-                        dispTestCaseRunning("Able to illuminate LED " + ledName);
-                        dispExpectedResult("Is the " + ledName + " illuminated?");
-                        enumObject.illuminate();
-                    });
-                    waitsFor(function () {
-                        return captured;
-                    }, "Timed out waiting for tester to respond", 30000);
-                    runs(function () {
-                        expect(testResult).toEqual(true);
-                    });
+    describe("Controlling LED: " + ledName, function () {
 
-                });
+        beforeEach(function () {
+            document.getElementById("actResult").innerHTML = "init";
+        });
 
-                it("is able to extinguish LED: " + ledName, function () {
+        it("is able to illuminate LED: " + ledName, function () {
 
-                    runs(function () {
-                        dispTestCaseRunning("Able to extinguish LED " + ledName);
-                        dispExpectedResult("Is the " + ledName + " extinguished?");
-                        enumObject.extinguish();
-                    });
-                    waitsFor(function () {
-                        return captured;
-                    }, "Timed out waiting for tester to respond", 30000);
-                    runs(function () {
-                        expect(testResult).toEqual(true);
-                    });
-                });
-
-
-                it("is able to flash LED: " + ledName + " (on: 5sec, off: 5sec, cycles: 3)", function () {
-
-                    runs(function () {
-                        dispTestCaseRunning("able to flash LED: " + ledName + " (on: 5sec, off: 5sec, cycles: 3)");
-                        dispExpectedResult("Is the " + ledName + " flashing as per the instruction?");
-                        var strProperty = {onDuration: 5000, offDuration: 5000, numberOfCycles: 3};
-                        enumObject.flash(strProperty);
-                    });
-                    waitsFor(function () {
-                        return captured;
-                    }, "Timed out waiting for tester to respond", 30000);
-                    runs(function () {
-                        expect(testResult).toEqual(true);
-
-                    });
-                });
-
-                it("is able to flash LED: " + ledName + " (on: 3sec, off: 1sec, cycles: 3)", function () {
-
-                    runs(function () {
-                        dispTestCaseRunning("able to flash LED: " + ledName + " (on: 3sec, off: 1sec, cycles: 3)");
-                        dispExpectedResult("Is the " + ledName + " flashing as per the instruction?");
-                        var strProperty = {onDuration: 3000, offDuration: 1000, numberOfCycles: 3};
-                        enumObject.flash(strProperty);
-                    });
-                    waitsFor(function () {
-                        return captured;
-                    }, "Timed out waiting for tester to respond", 30000);
-                    runs(function () {
-                        expect(testResult).toEqual(true);
-
-                    });
-                });
-
-                it("is able to flash LED: " + ledName + " (on: 5sec, off: 5sec, cycles: 0)", function () {
-
-                    runs(function () {
-                        dispTestCaseRunning("able to flash LED: " + ledName + " (on: 5sec, off: 5sec, cycles: null)");
-                        dispExpectedResult("Is the " + ledName + " flashing as per the instruction?");
-                        var strProperty = {onDuration: 5000, offDuration: 5000, numberOfCycles: 0};
-                        enumObject.flash(strProperty);
-                    });
-                    waitsFor(function () {
-                        return captured;
-                    }, "Timed out waiting for tester to respond", 30000);
-                    runs(function () {
-                        expect(testResult).toEqual(true);
-                    });
-                });
-
-
-                it("is able to flash LED: " + ledName + " (on: sec, off: 2sec, cycles: 2)", function () {
-
-                    runs(function () {
-                        dispTestCaseRunning("able to flash LED: " + ledName + " (on: null, off: null, cycles: 3)");
-                        dispExpectedResult("Is the " + ledName + " flashing as per the instruction?");
-                        var strProperty = {onDuration: null, offDuration: null, numberOfCycles: 3};
-                        enumObject.flash(strProperty);
-                    });
-                    waitsFor(function () {
-                        return captured;
-                    }, "Timed out waiting for tester to respond", 30000);
-                    runs(function () {
-                        expect(testResult).toEqual(true);
-                    });
-                });
+            runs(function () {
+                dispTestCaseRunning("Able to illuminate LED " + ledName);
+                dispExpectedResult("Is the " + ledName + " illuminated?");
+                enumObject.illuminate();
+            });
+            waitsFor(function () {
+                return captured;
+            }, "Timed out waiting for tester to respond", 30000);
+            runs(function () {
+                expect(testResult).toEqual(true);
             });
 
+        });
 
-        })
-    }
+        it("is able to extinguish LED: " + ledName, function () {
+
+            runs(function () {
+                dispTestCaseRunning("Able to extinguish LED " + ledName);
+                dispExpectedResult("Is the " + ledName + " extinguished?");
+                enumObject.extinguish();
+            });
+            waitsFor(function () {
+                return captured;
+            }, "Timed out waiting for tester to respond", 30000);
+            runs(function () {
+                expect(testResult).toEqual(true);
+            });
+        });
+
+        it("is able to flash LED: " + ledName + " (on: 5sec, off: 5sec, cycles: 3)", function () {
+
+            runs(function () {
+                dispTestCaseRunning("able to flash LED: " + ledName + " (on: 5sec, off: 5sec, cycles: 3)");
+                dispExpectedResult("Is the " + ledName + " flashing as per the instruction?");
+                var strProperty = {onDuration: 5000, offDuration: 5000, numberOfCycles: 3};
+                enumObject.flash(strProperty);
+            });
+            waitsFor(function () {
+                return captured;
+            }, "Timed out waiting for tester to respond", 30000);
+            runs(function () {
+                expect(testResult).toEqual(true);
+
+            });
+        });
+
+        it("is able to flash LED: " + ledName + " (on: 3sec, off: 1sec, cycles: 3)", function () {
+
+            runs(function () {
+                dispTestCaseRunning("able to flash LED: " + ledName + " (on: 3sec, off: 1sec, cycles: 3)");
+                dispExpectedResult("Is the " + ledName + " flashing as per the instruction?");
+                var strProperty = {onDuration: 3000, offDuration: 1000, numberOfCycles: 3};
+                enumObject.flash(strProperty);
+            });
+            waitsFor(function () {
+                return captured;
+            }, "Timed out waiting for tester to respond", 30000);
+            runs(function () {
+                expect(testResult).toEqual(true);
+
+            });
+        });
+
+        it("is able to flash LED: " + ledName + " (on: 5sec, off: 5sec, cycles: 0)", function () {
+
+            runs(function () {
+                dispTestCaseRunning("able to flash LED: " + ledName + " (on: 5sec, off: 5sec, cycles: null)");
+                dispExpectedResult("Is the " + ledName + " flashing as per the instruction?");
+                var strProperty = {onDuration: 5000, offDuration: 5000, numberOfCycles: 0};
+                enumObject.flash(strProperty);
+            });
+            waitsFor(function () {
+                return captured;
+            }, "Timed out waiting for tester to respond", 30000);
+            runs(function () {
+                expect(testResult).toEqual(true);
+            });
+        });
+
+
+        it("is able to flash LED: " + ledName + " (on: sec, off: 2sec, cycles: 2)", function () {
+
+            runs(function () {
+                dispTestCaseRunning("able to flash LED: " + ledName + " (on: null, off: null, cycles: 3)");
+                dispExpectedResult("Is the " + ledName + " flashing as per the instruction?");
+                var strProperty = {onDuration: null, offDuration: null, numberOfCycles: 3};
+                enumObject.flash(strProperty);
+            });
+            waitsFor(function () {
+                return captured;
+            }, "Timed out waiting for tester to respond", 30000);
+            runs(function () {
+                expect(testResult).toEqual(true);
+            });
+        });
+    });
+
 
 }
 

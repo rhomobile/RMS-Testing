@@ -1,4 +1,4 @@
-describe("Screen Orientation Test", function() {
+describe("ScreenOrientation JS API Test", function() {
 
 	var displayflag = false;
 	var orientationType = '';

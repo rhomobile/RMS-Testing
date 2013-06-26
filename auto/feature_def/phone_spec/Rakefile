@@ -5,9 +5,27 @@ unless File.exists? "build.yml"
   exit 1
 end
 
+class PhoneSpecDecorator
+  def before_spec
+    @server, addr, port = Jake.run_local_server
+    File.open(File.join($app_path, 'app', 'local_server.rb'), 'w') do |f|
+      f.puts "SPEC_LOCAL_SERVER_HOST = '#{addr}'"
+      f.puts "SPEC_LOCAL_SERVER_PORT = #{port}"
+    end
+    if File.exists?(File.join($app_path, 'server.rb'))
+      $local_server = @server
+      require File.join($app_path, 'server.rb')
+    end
+  end
+
+  def after_spec
+    @server.shutdown
+  end
+end
 
 $app_config = YAML::load_file("build.yml")
 $app_path = File.expand_path(File.dirname(__FILE__))
+$app_spec_decorator = PhoneSpecDecorator.new
 
 if ENV["RHO_HOME"].nil?
   if $app_config["sdk"] 
