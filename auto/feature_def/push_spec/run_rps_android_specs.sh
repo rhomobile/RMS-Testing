@@ -24,5 +24,8 @@ rake clean:android
 # if (($?)) ; then echo "Cannot build rhodes app"; exit 1; fi
 popd
 
+adb start-server
+if (($?)) ; then echo "Android adb server failed to start"; exit 1; fi
+
 mspec android_push_spec.rb
 if (($?)) ; then echo "Rhoconnect push specs for android are failed"; exit 1; fi
