@@ -24,7 +24,8 @@ android:
 #  version: 4.0
 
 paths:
-  extensions: ../../../../../Motorola-Extensions/extensions
-  extensions: ../../../../../rhoconnect-client/ext
+  extensions:
+    - "../../../../../Motorola-Extensions/extensions"
+    - "../../../../../rhoconnect-client/ext"
 
 extensions: ["json", "rhoconnect-client", "rhoconnect-push"]
