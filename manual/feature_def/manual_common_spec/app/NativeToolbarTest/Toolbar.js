@@ -153,12 +153,12 @@ function toolTestActions5() {
     Rho.NativeToolbar.create(toolElements, toolProperties);
 }
 
-function toolAnime() {
+function toolAnimeWM() {
     var toolElements = new Array();
     toolElements = [
-        {label: 'Home', action: 'Home', icon: '/app/NativeToolbarTest/man_48.jpg'},
-        {label: 'refresh', action: 'refresh', icon: '/app/NativeToolbarTest/twocats_wm.jpg'},
-        {label: 'refresh', action: 'refresh', icon: '/app/NativeToolbarTest/phones_485.png'}
+        {label: 'Home', action: 'Home', icon: '/app/NativeToolbarTest/man.png'},
+        {label: 'refresh', action: 'refresh', icon: '/app/NativeToolbarTest/twocats.png'},
+        {label: 'Close', action: 'Exit', icon: '/app/NativeToolbarTest/phones.png'}
     ];
     var toolProperties = {backgroundColor: 0xFF00, maskColor: '', viewHeight: 100};
     Rho.NativeToolbar.create(toolElements, toolProperties);
@@ -169,7 +169,7 @@ function toolAnimeOther() {
     toolElements = [
         {label: 'Home', action: 'Home', icon: '/app/NativeToolbarTest/cake_30.png'},
         {label: 'refresh', action: 'refresh', icon: '/public/images/bar/refresh_btn.png'},
-        {label: 'refresh', action: 'refresh', icon: '/app/NativeToolbarTest/cat_30.png'}
+        {label: 'Close', action: 'Exit', icon: '/app/NativeToolbarTest/cat_30.png'}
     ];
     var toolProperties = {backgroundColor: 0xFF00, maskColor: '', viewHeight: 100};
     Rho.NativeToolbar.create(toolElements, toolProperties);
