@@ -104,7 +104,7 @@ function toolTestActions1() {
     Rho.NativeToolbar.create(toolElements, toolProperties);
 }
 
-function toolTestActions2( {
+function toolTestActions2() {
     var toolElements = new Array();
     toolElements = [
         {label: 'back', action: 'back'},
@@ -153,7 +153,7 @@ function toolTestActions5() {
     Rho.NativeToolbar.create(toolElements, toolProperties);
 }
 
-function toolAnimeWM() {
+function toolIconWM() {
     var toolElements = new Array();
     toolElements = [
         {label: 'Home', action: 'Home', icon: '/app/NativeToolbarTest/man.png'},
@@ -164,7 +164,7 @@ function toolAnimeWM() {
     Rho.NativeToolbar.create(toolElements, toolProperties);
 }
 
-function toolAnimeOther() {
+function toolIconOther() {
     var toolElements = new Array();
     toolElements = [
         {label: 'Home', action: 'Home', icon: '/app/NativeToolbarTest/cake_30.png'},
