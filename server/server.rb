@@ -3,6 +3,7 @@ require 'webrick/https'
 require 'socket'
 require 'openssl'
 require 'net/http'
+require 'rexml/document'
 
 def localip
     orig, Socket.do_not_reverse_lookup = Socket.do_not_reverse_lookup, true  # turn off reverse DNS resolution temporarily
@@ -12,6 +13,13 @@ def localip
     end
     ensure
     Socket.do_not_reverse_lookup = orig
+end
+
+def modify_iOS_Application_plist_file(serverUrl, serverPort)
+  plist_file = 'HelloWorld.plist'
+  doc =  REXML::Document.new(File.new(plist_file))
+  REXML::XPath.match(doc, '//string')[1].text = 'http://' + serverUrl + ':' + serverPort.to_s() + '/download_app?device=ios&file=ipa'
+  File.open(plist_file, 'w') do |data| data << doc end
 end
 
 host = localip
@@ -111,13 +119,22 @@ $local_server.mount_proc '/download_app' do |req,res|
     filenames = {
         'android' => 'TestApp_signed.apk',
         'wm' => 'TestAppWM6.5.cab',
-        'ios' => 'auto_common_spec.ipa',
         'ce' => 'TestAppCE.cab',
         'win32' => 'everywan.exe',
         'wp8' => 'everywan.exe'
     }
     
     filename = filenames[device]
+
+    if device == 'ios' then
+      file_type =  req.query()['file']
+      if file_type == 'plist' then
+        filename = 'HelloWorld.plist'
+      else
+        filename = 'HelloWorld.ipa'
+      end
+
+    end
     
     if filename then
         res.body = File.open( File.join( File.dirname(__FILE__),filename ), "rb" )
@@ -125,7 +142,9 @@ $local_server.mount_proc '/download_app' do |req,res|
         extensions = {
             '.cab' => 'application/vnd.ms-cab-compressed',
             '.apk' => 'application/vnd.android.package-archive',
-            '.exe' => 'application/x-msdownload'
+            '.exe' => 'application/x-msdownload',
+            '.plist' => 'text/xml',
+            '.ipa' => 'application/octet-stream'
         }
 
         contentType = extensions[File.extname(filename)]
@@ -211,6 +230,8 @@ to_generate.each do |path|
     
     f.close()
 end
+
+modify_iOS_Application_plist_file(host, port)
 
 trap 'INT' do
     $local_server.shutdown

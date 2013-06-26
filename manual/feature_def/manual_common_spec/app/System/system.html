@@ -389,24 +389,13 @@
         <div class="test_scenario">
             <div class="test_scenario_controls">
                 <a href="javascript:void(0)"
-                   onclick="Rho.System.applicationInstall(httpServerUrl+'/download_app?device=ios');">Install app from HTTP url</a>
+                   onclick="Rho.System.applicationInstall('itms-services://?action=download-manifest&url=' + httpServerUrl+'/download_app?device=ios&file=plist');">Install app from HTTP url</a>
             </div>
             <span class="test_scenario_number">VT300-064 <br/></span>
         </div>
-        <div class="test_scenario">
-            <div class="test_scenario_controls">
-                <a href="javascript:void(0)"
-                   onclick="downloadedFilePath = downloadFile(httpServerUrl+'/download_app?device=ios', 'auto_common_spec.ipa');">Download
-                    to local</a> <br/>
-                <a href="javascript:void(0)" onclick="Rho.System.applicationInstall(downloadedFilePath);">call
-                    Downloaded
-                    application Install with local url</a>
-            </div>
-            <span class="test_scenario_number">VT300-065 <br/></span>
-        </div>
     </div>
 
-    <div class="method_tests win32"><b>Application Install for Windows Win32:</b>
+   <!-- <div class="method_tests win32"><b>Application Install for Windows Win32:</b>
 
         <div class="test_scenario">
             <div class="test_scenario_controls">
@@ -416,9 +405,9 @@
             <span class="test_scenario_number">VT300-064 <br/></span>
         </div>
 
-        <!--Needless to test the installation of the application on the local file system-->
 
-<!--        <div class="test_scenario">
+
+<       <div class="test_scenario">
             <div class="test_scenario_controls">
                 <a href="javascript:void(0)"
                    onclick="downloadedFilePath = downloadFile(httpServerUrl+'/download_app?device=win32', 'everywan.exe');">Download
@@ -428,10 +417,10 @@
                     application Install with local url</a>
             </div>
             <span class="test_scenario_number">VT300-065 <br/></span>
-        </div>-->
-    </div>
+        </div>
+    </div>-->
 
-    <div class="method_tests wp8"><b>Application Install for Windows wp8:</b>
+  <!--  <div class="method_tests wp8"><b>Application Install for Windows wp8:</b>
 
         <div class="test_scenario">
             <div class="test_scenario_controls">
@@ -451,7 +440,7 @@
             </div>
             <span class="test_scenario_number">VT300-065 <br/></span>
         </div>
-    </div>
+    </div>-->
 </div>
 
 <div class="method_tests android win32 wm wp8">
@@ -495,14 +484,14 @@
         </div>
     </div>
 
-    <div class="method_tests wp8">
+   <!-- <div class="method_tests wp8">
         <div class="test_scenario">
             <div class="test_scenario_controls">
                 <a href="javascript:void(0)" onclick="callapplicationUninstall('everywan');"> call applicationUninstall
                     with application name 'everywan'</a>
             </div>
         </div>
-    </div>
+    </div>-->
 
     <span class="test_scenario_number">VT300-066 <br/></span>
 </div>
@@ -566,7 +555,7 @@
             <span class="test_scenario_number">VT300-077 <br/></span>
         </div>
     </div>
-
+<!--
     <div class="method_tests wp8"> WP8 <br/>
 
         <div class="test_scenario">
@@ -576,7 +565,8 @@
             </div>
             <span class="test_scenario_number">VT300-077 <br/></span>
         </div>
-    </div>
+    </div>-->
+<!--
 
     <div class="method_tests win32"> Win32 <br/>
 
@@ -588,14 +578,15 @@
             <span class="test_scenario_number">VT300-077 <br/></span>
         </div>
     </div>
-
+-->
+<!--
     <div class="test_scenario">
         <div class="test_scenario_controls">
             <a href="javascript:void(0)" onclick="callisApplicationInstalled('Wrongappname');">Call
                 isApplicationInstalled() with wrong app name 'Wrongappname'</a>
         </div>
         <span class="test_scenario_number">VT300-078 <br/></span>
-    </div>
+    </div>-->
 </div>
 
 
