@@ -13,7 +13,7 @@ def cleanup_apps
 	end
 end
 
-def run_apps(platform, build_required)
+def run_apps(platform)
 	load File.join($rho_root,'Rakefile')
 	load File.join($rho_root,'platform','android','build','android.rake')
 
@@ -103,10 +103,11 @@ def run_apps(platform, build_required)
 			end
 
 			FileUtils.chdir File.join($spec_path, 'rhoconnect_push_client')
-			if build_required
+			if $build_required
 				puts "\nBuilding rhodes app ..."
 				puts "rake device:#{$platform}:debug"
 				system("rake device:#{$platform}:debug").should == true
+				$build_required = false
 			end
 
 			puts "Install rhoconnect push service ..."

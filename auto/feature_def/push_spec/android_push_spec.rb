@@ -30,6 +30,7 @@ $signal = ConditionVariable.new
 $mutex = Mutex.new
 # Assume redis up and running. Do not touch it!
 $rhoconnect_use_redis = false # true will start/stop it
+$build_required = true
 
 require File.join($rho_root,'lib','build','jake.rb')
 require File.join($rho_root,'platform','android','build','android_tools.rb')
@@ -43,7 +44,6 @@ device_list = out.split("\n")
 device_list.shift # skip "List of devices attached "
 # raise 'No attached android devices found' unless device_list
 device_list << '' if device_list.empty?
-build_required = true
 device_list.each do |dev|
   if dev == ''
     puts "Running push specs on android emulator"
@@ -76,7 +76,7 @@ device_list.each do |dev|
           $signal.signal
         end
       end
-      run_apps($platform, build_required)
+      run_apps($platform)
       @api_token = RhoconnectHelper.api_post('system/login', { :login => 'rhoadmin', :password => '' })
       # puts "API token: #{@api_token}"
     end
@@ -204,7 +204,6 @@ device_list.each do |dev|
     # TODO:
     # logout/login back
 
-    build_required = false
   end
 
 end

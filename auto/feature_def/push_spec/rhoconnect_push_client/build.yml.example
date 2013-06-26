@@ -20,7 +20,8 @@ symbian:
   uid: '0xe77b6fc3'
 android:
 #  version: 2.3.3
-  version: 4.2.2
+#  version: 4.2.2
+  version: 4.0
 
 paths:
   extensions: Path-to-Motorola-Extensions
