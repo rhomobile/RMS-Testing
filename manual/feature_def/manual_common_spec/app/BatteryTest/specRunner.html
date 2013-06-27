@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>VideoCapture JS Test</title>
+	<title>System JS Test</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
 	<META HTTP-Equiv="MinimizeButton" content="visibility:Visible;top:30 " >
 	<META HTTP-Equiv="quitbutton" Content="visibility:visible">
@@ -37,7 +37,7 @@
     <script type="text/javascript" src="../helpers/specHelpers.js"></script>
 
 	<!-- include spec files here... -->
-	<script type="text/javascript" src="videocapture_js_spec.js"></script>
+	<script type="text/javascript" src="battery_js_spec.js"></script>
 
 	<script type="text/javascript">
 
@@ -73,24 +73,22 @@
 
 </head>
 <body>
-<br/><br/>
-<div id="detailsdiv"></div>
-<br/><br/>
-<div id="test">
+ <h1>Battery Manual FD Tests</h1>
+	<P>
+	<b>Test Running: </b><div id="instruction"></div>
+	<P>
+	<b>Expected Result: </b><div id="expectedresult"></div>
+	<P>
+	<div id="test">
 <ul id="myList">
 </ul>
 <ul id="myList2">
 </ul>
 </div>
-<br/><br/>
+<br/>
+	<input type="button" value="Test Passed" onclick="captureResult(true)" />
+	<input type="button" value="Test Failed" onclick="captureResult(false)"/>
+	<div id="actResult" style="display:none">init</div>
 
-<span id='result'>
-<table>
-    <tr>
-        <td><button onclick="captureResult(true)">Pass</button></td>
-        <td><button onclick="captureResult(false)">Fail</button></td>
-    </tr>
-</table>
-    </span>
 </body>
 </html>

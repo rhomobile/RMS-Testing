@@ -91,29 +91,61 @@ function toolLoadIndex() {
     Rho.NativeToolbar.create(toolElements, toolProperties);
 }
 
-function toolManyOptions() {
+function toolTestActions1() {
     var toolElements = new Array();
     toolElements = [
         {label: 'Home', action: 'Home'},
         {label: 'Exit', action: 'exit'},
         {label: 'close', action: 'close'},
         {label: 'Options', action: 'options'},
-        {label: 'refresh', action: 'refresh'},
+        {label: 'refresh', action: 'refresh'}
+    ];
+    var toolProperties = {backgroundColor: 0xFF00, maskColor: '', viewHeight: 100};
+    Rho.NativeToolbar.create(toolElements, toolProperties);
+}
+
+function toolTestActions2() {
+    var toolElements = new Array();
+    toolElements = [
         {label: 'back', action: 'back'},
         {label: 'log', action: 'log'},
         {label: 'Fullscreen', action: 'fullscreen'},
         {label: 'sync', action: 'sync'},
-        {label: 'minimize', action: 'minimize'},
+        {label: 'minimize', action: 'minimize'}
+    ];
+    var toolProperties = {backgroundColor: 0xFF00, maskColor: '', viewHeight: 100};
+    Rho.NativeToolbar.create(toolElements, toolProperties);
+}
+
+function toolTestActions3() {
+    var toolElements = new Array();
+    toolElements = [
         {label: 'SIP', action: 'SIP'},
         {label: 'Home', action: 'Home'},
         {label: 'Exit', action: 'exit'},
         {label: 'close', action: 'close'},
-        {label: 'Options', action: 'options'},
+        {label: 'Options', action: 'options'}
+    ];
+    var toolProperties = {backgroundColor: 0xFF00, maskColor: '', viewHeight: 100};
+    Rho.NativeToolbar.create(toolElements, toolProperties);
+}
+
+function toolTestActions4() {
+    var toolElements = new Array();
+    toolElements = [
         {label: 'refresh', action: 'refresh'},
         {label: 'back', action: 'back'},
         {label: 'log', action: 'log'},
         {label: 'Fullscreen', action: 'fullscreen'},
-        {label: 'sync', action: 'sync'},
+        {label: 'sync', action: 'sync'}
+    ];
+    var toolProperties = {backgroundColor: 0xFF00, maskColor: '', viewHeight: 100};
+    Rho.NativeToolbar.create(toolElements, toolProperties);
+}
+
+function toolTestActions5() {
+    var toolElements = new Array();
+    toolElements = [
         {label: 'minimize', action: 'minimize'},
         {label: 'SIP', action: 'SIP'}
     ];
@@ -121,23 +153,23 @@ function toolManyOptions() {
     Rho.NativeToolbar.create(toolElements, toolProperties);
 }
 
-function toolAnime() {
+function toolIconWM() {
     var toolElements = new Array();
     toolElements = [
-        {label: 'Home', action: 'Home', icon: '/app/NativeToolbarTest/man_48.jpg'},
-        {label: 'refresh', action: 'refresh', icon: '/app/NativeToolbarTest/twocats_wm.jpg'},
-        {label: 'refresh', action: 'refresh', icon: '/app/NativeToolbarTest/phones_485.png'}
+        {label: 'Home', action: 'Home', icon: '/app/NativeToolbarTest/man.png'},
+        {label: 'refresh', action: 'refresh', icon: '/app/NativeToolbarTest/twocats.png'},
+        {label: 'Close', action: 'Exit', icon: '/app/NativeToolbarTest/phones.png'}
     ];
     var toolProperties = {backgroundColor: 0xFF00, maskColor: '', viewHeight: 100};
     Rho.NativeToolbar.create(toolElements, toolProperties);
 }
 
-function toolAnimeOther() {
+function toolIconOther() {
     var toolElements = new Array();
     toolElements = [
         {label: 'Home', action: 'Home', icon: '/app/NativeToolbarTest/cake_30.png'},
         {label: 'refresh', action: 'refresh', icon: '/public/images/bar/refresh_btn.png'},
-        {label: 'refresh', action: 'refresh', icon: '/app/NativeToolbarTest/cat_30.png'}
+        {label: 'Close', action: 'Exit', icon: '/app/NativeToolbarTest/cat_30.png'}
     ];
     var toolProperties = {backgroundColor: 0xFF00, maskColor: '', viewHeight: 100};
     Rho.NativeToolbar.create(toolElements, toolProperties);
@@ -183,47 +215,38 @@ function toolJavascript() {
         {label: 'Home', action: 'home', icon: '/public/images/bar/colored_btn.png'},
         {label: 'exit', action: 'javascript:onQuit()', icon: '/public/images/bar/refresh_btn.png'},
         {label: 'refresh', action: 'refresh', icon: '/public/images/bar/forward_btn.png'},
-        {label: 'Load a HTML page ', action: 'app/ApplicationTest/application.html'}
+        {label: 'Load a HTML page', action: 'app/ApplicationTest/application.html'}
     ];
     var toolProperties = {backgroundColor: 0xFF0000, maskColor: 0xFF0000, viewHeight: 100};
     Rho.NativeToolbar.create(toolElements, toolProperties);
 
-}
-
-function toolViewHeight() {
-    var toolElements = new Array();
-    toolElements = [
-        {label: 'Home', action: 'home', icon: '/public/images/bar/colored_btn.png'},
-        {label: 'exit', action: 'javascript:onQuit()', icon: '/public/images/bar/refresh_btn.png'},
-        {label: 'refresh', action: 'refresh', icon: '/public/images/bar/forward_btn.png'},
-        {label: 'Load a HTML page ', action: 'app/ApplicationTest/application.html'}
-    ];
-    var toolProperties = {backgroundColor: 0xFF0000, maskColor: 0xFF0000, viewHeight: 700};
-    Rho.NativeToolbar.create(toolElements, toolProperties);
 }
 
 function onQuit() {
     Rho.Application.quit();
 }
 
-function toolSwitch1() {
+function toolSeparatorWidth(width) {
     var toolElements = new Array();
     toolElements = [
         {action: '/app/NativeToolbarTest/Page1.html', icon: '/public/images/bar/switch/btn_1.png'},
-        {action: 'separator', width: 200},
-        {action: '/app/NativeToolbarTest/Page2.html', icon: '/public/images/bar/switch/btn_2.png'},
-        {action: 'separator', width: 400},
-        {action: '/app/NativeToolbarTest/Page3.html', icon: '/public/images/bar/switch/btn_3.png'},
-        {action: 'separator', width: 100},
-        {action: '/app/NativeToolbarTest/Page4.html', icon: '/public/images/bar/switch/btn_4.png'},
-        {action: 'separator', width: 50},
-        {action: '/app/NativeToolbarTest/Page5.html', icon: '/public/images/bar/switch/btn_5.png'},
-        {action: 'separator', width: -20}
+        {action: 'separator', width: width},
+        {action: '/app/NativeToolbarTest/Page2.html', icon: '/public/images/bar/switch/btn_2.png'}
     ];
 
     var toolProperties = {backgroundColor: 0xFF0000, maskColor: 0xFF0000, viewHeight: 100};
     Rho.NativeToolbar.create(toolElements, toolProperties);
     Rho.WebView.navigate("/app/NativeToolbarTest/page1.html");
+}
 
+function toolViewHeight(height) {
+    Rho.NativeToolbar.create(
+        [
+            {label: 'button1', action: '/app/NativeToolbarTest/Page1.html'},
+            {label: 'button2', action: '/app/NativeToolbarTest/Page2.html'}
+        ], {
+            viewHeight: height
+        }
+    );
 }
 
