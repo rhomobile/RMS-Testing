@@ -40,7 +40,7 @@ describe("ScreenOrientation JS API Test", function() {
 
 		runs(function()
 		{
-			expect(orientationType).toEqual("rightHanded");
+			expect(orientationType).toEqual("righthanded");
 		});
 
 	});
@@ -60,7 +60,7 @@ describe("ScreenOrientation JS API Test", function() {
 
 		runs(function()
 		{
-			expect(orientationType).toEqual("leftHanded");
+			expect(orientationType).toEqual("lefthanded");
 		});
 	});
 
@@ -79,7 +79,7 @@ describe("ScreenOrientation JS API Test", function() {
 
 		runs(function()
 		{
-			expect(orientationType).toEqual("upsideDown");
+			expect(orientationType).toEqual("upsidedown");
 		});
 	});
 
@@ -119,7 +119,7 @@ describe("ScreenOrientation JS API Test", function() {
 
 		runs(function()
 		{
-			expect(orientationType).toEqual("rightHanded");
+			expect(orientationType).toEqual("righthanded");
 		});
 	});
 
@@ -139,7 +139,7 @@ describe("ScreenOrientation JS API Test", function() {
 
 		runs(function()
 		{
-			expect(callbackFired).toEqual("rightHanded");
+			expect(callbackFired).toEqual("righthanded");
 		});
 	});
 
