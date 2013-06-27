@@ -57,22 +57,6 @@ def run_apps(platform)
 
 	RhoconnectHelper.start_rhoconnect_stack($server_path, true)
 
-	File.open(File.join($app_path, 'app', 'sync_server.rb'), 'w') do |f|
-		f.puts "SYNC_SERVER_HOST = '#{RhoconnectHelper.host}'"
-		f.puts "SYNC_SERVER_PORT = #{RhoconnectHelper.port}"
-	end
-	File.open(File.join($app_path, 'app', 'push_server.rb'), 'w') do |f|
-		f.puts "PUSH_SERVER_HOST = '#{RhoconnectHelper.push_host}'"
-		f.puts "PUSH_SERVER_PORT = #{RhoconnectHelper.push_port}"
-	end
-
-	# Patch rhodes 'rhoconfig.txt' file
-	cfgfile = File.join($app_path, 'rhoconfig.txt')
-	cfg = File.read(cfgfile)
-	cfg.gsub!(/(rhoconnect_push_server.*)/, "rhoconnect_push_server = 'http://#{RhoconnectHelper.push_host}:#{RhoconnectHelper.push_port}'")
-	cfg.gsub!(/(Push.rhoconnect.pushServer.*)/, "Push.rhoconnect.pushServer = 'http://#{RhoconnectHelper.push_host}:#{RhoconnectHelper.push_port}'")
-	File.open(cfgfile, 'w') { |f| f.write cfg }
-
 	if $platform == 'android'
 		if $deviceId
 			# Using attached device
@@ -85,13 +69,6 @@ def run_apps(platform)
 			end
 
 			FileUtils.chdir File.join($spec_path, 'rhoconnect_push_client')
-			if $build_required
-				puts "\nBuilding rhodes app ..."
-				puts "rake device:#{$platform}:debug"
-				system("rake device:#{$platform}:debug").should == true
-				$build_required = false
-			end
-
 			puts "Install rhoconnect push service ..."
 			push_service_apk = File.join($rhoelements_root,'libs','rhoconnect-push-service','rhoconnect-push-service.apk')
 			#	AndroidTools.load_app_and_run("-e", push_service_apk, "")

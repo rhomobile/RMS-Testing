@@ -45,10 +45,6 @@ logname='Push_Client'
 KeepTrackOfLastVisitedPage = 0
 LastVisitedPage = ''
 
-# sync server url, typically this will look like 'http://<hostname>:<port>/application'
-# for example: 'http://localhost:9292/application'
-#syncserver = 'http://rhodes-store-server.herokuapp.com/application'
-
 # geo location inactivity timeout (in seconds)
 #geo_location_inactivity_timeout = 30
 
@@ -88,7 +84,9 @@ splash_screen='zoom'
 use_bb_full_browser=6
 
 # Sync and Push server configurations
-syncserver = 'http://192.168.1.128:9292'
+# Sync server url, typically this will look like 'http://<hostname>:<port>/application'
+# for example: 'http://localhost:9292/application'
+syncserver = 'http://192.168.1.117:9292'
 
 # An old way configure push server
 rhoconnect_push_server = 'http://192.168.1.117:8675'
