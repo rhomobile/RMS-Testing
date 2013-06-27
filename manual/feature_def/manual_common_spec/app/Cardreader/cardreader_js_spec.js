@@ -13,6 +13,7 @@ describe("Card Reader Test", function() {
 		testResult = '';
 		captured = false;
 		closeFlag = false;
+		displayResult("Output: ","");
 	});
 
 	var callbackCardReader = function (args){
@@ -1102,899 +1103,902 @@ describe("Card Reader Test", function() {
 
 	});
 
-	it("VT286-0147 | PinEntry true DCR only|", function() {
-
-		runs(function()
-		{
-			//Rho.CardReader.open({},callbackCardReader);
-			Rho.CardReader.open(callbackCardReader);
-			setTimeout(function() {
-				openFlag = true;
-			}, 11000);
+	if(Rho.System.platform == 'WINDOWS')
+	{
+		it("VT286-0147 | PinEntry true DCR only|", function() {
+	
+			runs(function()
+			{
+				//Rho.CardReader.open({},callbackCardReader);
+				Rho.CardReader.open(callbackCardReader);
+				setTimeout(function() {
+					openFlag = true;
+				}, 11000);
+			});
+	
+			waitsFor(function()
+			{
+				dispCurrentProcess("VT286-0147 | PinEntry true DCR only");
+				return openFlag;
+			}, '5sec Wait to open the CardReader', 12000);
+	
+			runs(function()
+			{
+				Rho.CardReader.PinEntry=true;
+				setTimeout(function() {
+					swipeFlag = true;
+				}, 5000);
+			});
+	
+			waitsFor(function()
+			{
+				return captured;
+			}, '5sec Wait to open the CardReader', 25000);
+	
+			runs(function()
+			{
+				expect(testResult).toEqual(true);
+				Rho.CardReader.close();
+				setTimeout(function() {
+				closeFlag = true;
+				}, 5000);
+			});
+	
+			waitsFor(function()
+			{
+			   return closeFlag;
+			},'5sec Wait to close the CardReader', 6000);
+	
 		});
-
-		waitsFor(function()
-		{
-			dispCurrentProcess("VT286-0147 | PinEntry true DCR only");
-			return openFlag;
-		}, '5sec Wait to open the CardReader', 12000);
-
-		runs(function()
-		{
-			Rho.CardReader.PinEntry=true;
-			setTimeout(function() {
-				swipeFlag = true;
-			}, 5000);
+	
+		it("VT286-0148 | PinEntry false DCR only|", function() {
+	
+	
+			runs(function()
+			{
+				//Rho.CardReader.open({},callbackCardReader);
+				Rho.CardReader.open(callbackCardReader);
+				setTimeout(function() {
+					openFlag = true;
+				}, 11000);
+			});
+	
+			waitsFor(function()
+			{
+				dispCurrentProcess("VT286-0148 | PinEntry false DCR only");
+				return openFlag;
+			}, '5sec Wait to open the CardReader', 12000);
+	
+			runs(function()
+			{
+				Rho.CardReader.PinEntry=false;
+				setTimeout(function() {
+					swipeFlag = true;
+				}, 5000);
+			});
+	
+			waitsFor(function()
+			{
+				return captured;
+			}, '5sec Wait to open the CardReader', 25000);
+	
+			runs(function()
+			{
+				expect(testResult).toEqual(true);
+				Rho.CardReader.close();
+				setTimeout(function() {
+				closeFlag = true;
+				}, 5000);
+			});
+	
+			waitsFor(function()
+			{
+			   return closeFlag;
+			},'5sec Wait to close the CardReader', 6000);
+	
 		});
-
-		waitsFor(function()
-		{
-			return captured;
-		}, '5sec Wait to open the CardReader', 25000);
-
-		runs(function()
-		{
-			expect(testResult).toEqual(true);
-			Rho.CardReader.close();
-			setTimeout(function() {
-			closeFlag = true;
-			}, 5000);
+	
+		xit("VT286-0149 | PinEntry Invalid string DCR only|", function() {
+	
+	
+			runs(function()
+			{
+				//Rho.CardReader.open({},callbackCardReader);
+				Rho.CardReader.open(callbackCardReader);
+				setTimeout(function() {
+					openFlag = true;
+				}, 11000);
+			});
+	
+			waitsFor(function()
+			{
+				dispCurrentProcess("VT286-0149 | PinEntry Invalid string DCR only");
+				return openFlag;
+			}, '5sec Wait to open the CardReader', 12000);
+	
+			runs(function()
+			{
+				Rho.CardReader.PinEntry=aaa;
+				setTimeout(function() {
+					swipeFlag = true;
+				}, 5000);
+			});
+	
+			waitsFor(function()
+			{
+				return captured;
+			}, '5sec Wait to open the CardReader', 25000);
+	
+			runs(function()
+			{
+				expect(testResult).toEqual(true);
+				Rho.CardReader.close();
+				setTimeout(function() {
+				closeFlag = true;
+				}, 5000);
+			});
+	
+			waitsFor(function()
+			{
+			   return closeFlag;
+			},'5sec Wait to close the CardReader', 6000);
+	
 		});
-
-		waitsFor(function()
-		{
-		   return closeFlag;
-		},'5sec Wait to close the CardReader', 6000);
-
-	});
-
-	it("VT286-0148 | PinEntry false DCR only|", function() {
-
-
-		runs(function()
-		{
-			//Rho.CardReader.open({},callbackCardReader);
-			Rho.CardReader.open(callbackCardReader);
-			setTimeout(function() {
-				openFlag = true;
-			}, 11000);
+	
+		xit("VT286-0150 | PinEntry empty string |", function() {
+	
+			runs(function()
+			{
+				//Rho.CardReader.open({},callbackCardReader);
+				Rho.CardReader.open(callbackCardReader);
+				setTimeout(function() {
+					openFlag = true;
+				}, 11000);
+			});
+	
+			waitsFor(function()
+			{
+				dispCurrentProcess("VT286-0150 | PinEntry empty string");
+				return openFlag;
+			}, '5sec Wait to open the CardReader', 12000);
+	
+			runs(function()
+			{
+				Rho.CardReader.PinEntry=' ';
+				setTimeout(function() {
+					swipeFlag = true;
+				}, 5000);
+			});
+	
+			waitsFor(function()
+			{
+				return captured;
+			}, '5sec Wait to open the CardReader', 25000);
+	
+			runs(function()
+			{
+				expect(testResult).toEqual(true);
+				Rho.CardReader.close();
+				setTimeout(function() {
+				closeFlag = true;
+				}, 5000);
+			});
+	
+			waitsFor(function()
+			{
+			   return closeFlag;
+			},'5sec Wait to close the CardReader', 6000);
+	
 		});
-
-		waitsFor(function()
-		{
-			dispCurrentProcess("VT286-0148 | PinEntry false DCR only");
-			return openFlag;
-		}, '5sec Wait to open the CardReader', 12000);
-
-		runs(function()
-		{
-			Rho.CardReader.PinEntry=false;
-			setTimeout(function() {
-				swipeFlag = true;
-			}, 5000);
+	
+		it("VT286-0151 | Pintimeout Default |", function() {
+	
+	
+			runs(function()
+			{
+				//Rho.CardReader.open({},callbackCardReader);
+				Rho.CardReader.open(callbackCardReader);
+				setTimeout(function() {
+					openFlag = true;
+				}, 11000);
+			});
+	
+			waitsFor(function()
+			{
+				dispCurrentProcess("VT286-0151 | Pintimeout Default");
+				return openFlag;
+			}, '5sec Wait to open the CardReader', 12000);
+	
+			runs(function()
+			{
+				Rho.CardReader.PinEntry=true;
+				setTimeout(function() {
+					swipeFlag = true;
+				}, 5000);
+			});
+	
+			waitsFor(function()
+			{
+				return captured;
+			}, '5sec Wait to open the CardReader', 25000);
+	
+			runs(function()
+			{
+				expect(testResult).toEqual(true);
+				Rho.CardReader.close();
+				setTimeout(function() {
+				closeFlag = true;
+				}, 5000);
+			});
+	
+			waitsFor(function()
+			{
+			   return closeFlag;
+			},'5sec Wait to close the CardReader', 6000);
+	
 		});
-
-		waitsFor(function()
-		{
-			return captured;
-		}, '5sec Wait to open the CardReader', 25000);
-
-		runs(function()
-		{
-			expect(testResult).toEqual(true);
-			Rho.CardReader.close();
-			setTimeout(function() {
-			closeFlag = true;
-			}, 5000);
+	
+		it("VT286-0152 | PinEntry false and pintimeout 20 sec |", function() {
+	
+	
+			runs(function()
+			{
+				//Rho.CardReader.open({},callbackCardReader);
+				Rho.CardReader.open(callbackCardReader);
+				setTimeout(function() {
+					openFlag = true;
+				}, 11000);
+			});
+	
+			waitsFor(function()
+			{
+				dispCurrentProcess("VT286-0152 | PinEntry false and pintimeout 20 sec");
+				return openFlag;
+			}, '5sec Wait to open the CardReader', 12000);
+	
+			runs(function()
+			{
+				Rho.CardReader.PinEntry=false;
+				Rho.CardReader.pinTimeout=20000;
+				setTimeout(function() {
+					swipeFlag = true;
+				}, 5000);
+			});
+	
+			waitsFor(function()
+			{
+				return captured;
+			}, '5sec Wait to open the CardReader', 25000);
+	
+			runs(function()
+			{
+				expect(testResult).toEqual(true);
+				Rho.CardReader.close();
+				setTimeout(function() {
+				closeFlag = true;
+				}, 5000);
+			});
+	
+			waitsFor(function()
+			{
+			   return closeFlag;
+			},'5sec Wait to close the CardReader', 6000);
+	
 		});
-
-		waitsFor(function()
-		{
-		   return closeFlag;
-		},'5sec Wait to close the CardReader', 6000);
-
-	});
-
-	xit("VT286-0149 | PinEntry Invalid string DCR only|", function() {
-
-
-		runs(function()
-		{
-			//Rho.CardReader.open({},callbackCardReader);
-			Rho.CardReader.open(callbackCardReader);
-			setTimeout(function() {
-				openFlag = true;
-			}, 11000);
+	
+	    it("VT286-0153 | Do the PinEntry after pintimeout after 30 seconds |", function() {
+	
+			runs(function()
+			{
+				//Rho.CardReader.open({},callbackCardReader);
+				Rho.CardReader.open(callbackCardReader);
+				setTimeout(function() {
+					openFlag = true;
+				}, 11000);
+			});
+	
+			waitsFor(function()
+			{
+				dispCurrentProcess("VT286-0153 | Do the PinEntry after pintimeout after 30 seconds");
+				return openFlag;
+			}, '5sec Wait to open the CardReader', 12000);
+	
+			runs(function()
+			{
+				Rho.CardReader.PinEntry=true;
+				setTimeout(function() {
+					swipeFlag = true;
+				}, 5000);
+			});
+	
+			waitsFor(function()
+			{
+				return captured;
+			}, '5sec Wait to open the CardReader', 25000);
+	
+			runs(function()
+			{
+				expect(testResult).toEqual(true);
+				Rho.CardReader.close();
+				setTimeout(function() {
+				closeFlag = true;
+				}, 5000);
+			});
+	
+			waitsFor(function()
+			{
+			   return closeFlag;
+			},'5sec Wait to close the CardReader', 6000);
+	
+		});	
+	
+		it("VT286-0154 | Pintimeout set to 5000 enter the pin within 15 seconds|", function() {
+	
+			runs(function()
+			{
+				//Rho.CardReader.open({},callbackCardReader);
+				Rho.CardReader.open(callbackCardReader);
+				setTimeout(function() {
+					openFlag = true;
+				}, 11000);
+			});
+	
+			waitsFor(function()
+			{
+				dispCurrentProcess("VT286-0154 | Pintimeout set to 5000 <br/> enter the pin within 15 seconds");
+				return openFlag;
+			}, '5sec Wait to open the CardReader', 12000);
+	
+			runs(function()
+			{
+				Rho.CardReader.PinEntry=true;
+				Rho.CardReader.pinTimeout=5000;
+				setTimeout(function() {
+					swipeFlag = true;
+				}, 5000);
+			});
+	
+			waitsFor(function()
+			{
+				return captured;
+			}, '5sec Wait to open the CardReader', 25000);
+	
+			runs(function()
+			{
+				expect(testResult).toEqual(true);
+				Rho.CardReader.close();
+				setTimeout(function() {
+				closeFlag = true;
+				}, 5000);
+			});
+	
+			waitsFor(function()
+			{
+			   return closeFlag;
+			},'5sec Wait to close the CardReader', 6000);
+	
+		});	
+	
+		it("VT286-0155 | Pintimeout set to 5000 Do not enter the pin within 15 seconds|", function() {
+	
+	
+			runs(function()
+			{
+				//Rho.CardReader.open({},callbackCardReader);
+				Rho.CardReader.open(callbackCardReader);
+				setTimeout(function() {
+					openFlag = true;
+				}, 11000);
+			});
+	
+			waitsFor(function()
+			{
+				dispCurrentProcess("VT286-0155 | Pintimeout set to 5000 <br/> Do not enter the pin within 15 seconds");
+				return openFlag;
+			}, '5sec Wait to open the CardReader', 12000);
+	
+			runs(function()
+			{
+				Rho.CardReader.PinEntry=true;
+				Rho.CardReader.pinTimeout=5000;
+				setTimeout(function() {
+					swipeFlag = true;
+				}, 5000);
+			});
+	
+			waitsFor(function()
+			{
+				return captured;
+			}, '5sec Wait to open the CardReader', 25000);
+	
+			runs(function()
+			{
+				expect(testResult).toEqual(true);
+				Rho.CardReader.close();
+				setTimeout(function() {
+				closeFlag = true;
+				}, 5000);
+			});
+	
+			waitsFor(function()
+			{
+			   return closeFlag;
+			},'5sec Wait to close the CardReader', 6000);
+	
+		});	
+	
+		it("VT286-0156 | Pintimeout set to 65535 <br/> enter the pin within 65 seconds|", function() {
+	
+			runs(function()
+			{
+				//Rho.CardReader.open({},callbackCardReader);
+				Rho.CardReader.open(callbackCardReader);
+				setTimeout(function() {
+					openFlag = true;
+				}, 11000);
+			});
+	
+			waitsFor(function()
+			{
+				dispCurrentProcess("VT286-0156 | Pintimeout set to 65535 enter the pin within 65 seconds");
+				return openFlag;
+			}, '5sec Wait to open the CardReader', 12000);
+	
+			runs(function()
+			{
+				Rho.CardReader.PinEntry=true;
+				Rho.CardReader.pinTimeout=65535;
+				setTimeout(function() {
+					swipeFlag = true;
+				}, 5000);
+			});
+	
+			waitsFor(function()
+			{
+				return captured;
+			}, '5sec Wait to open the CardReader', 25000);
+	
+			runs(function()
+			{
+				expect(testResult).toEqual(true);
+				Rho.CardReader.close();
+				setTimeout(function() {
+				closeFlag = true;
+				}, 5000);
+			});
+	
+			waitsFor(function()
+			{
+			   return closeFlag;
+			},'5sec Wait to close the CardReader', 6000);
+	
+		});	
+	
+		it("VT286-0157 | Pintimeout set to 65535 Do not enter the pin within 65 seconds|", function() {
+	
+			runs(function()
+			{
+				//Rho.CardReader.open({},callbackCardReader);
+				Rho.CardReader.open(callbackCardReader);
+				setTimeout(function() {
+					openFlag = true;
+				}, 11000);
+			});
+	
+			waitsFor(function()
+			{
+				dispCurrentProcess("VT286-0157 | Pintimeout set to 65535 <br/> Do not enter the pin within 65 seconds");
+				return openFlag;
+			}, '5sec Wait to open the CardReader', 12000);
+	
+			runs(function()
+			{
+				Rho.CardReader.PinEntry=true;
+				Rho.CardReader.pinTimeout=65535;
+				setTimeout(function() {
+					swipeFlag = true;
+				}, 5000);
+			});
+	
+			waitsFor(function()
+			{
+				return captured;
+			}, '5sec Wait to open the CardReader', 25000);
+	
+			runs(function()
+			{
+				expect(testResult).toEqual(true);
+				Rho.CardReader.close();
+				setTimeout(function() {
+				closeFlag = true;
+				}, 5000);
+			});
+	
+			waitsFor(function()
+			{
+			   return closeFlag;
+			},'5sec Wait to close the CardReader', 6000);
+	
+		});	
+	
+		it("VT286-0158 | Pintimeout set to 0 |", function() {
+	
+			runs(function()
+			{
+				//Rho.CardReader.open({},callbackCardReader);
+				Rho.CardReader.open(callbackCardReader);
+				setTimeout(function() {
+					openFlag = true;
+				}, 11000);
+			});
+	
+			waitsFor(function()
+			{
+				dispCurrentProcess("VT286-0158 | Pintimeout set to 0");
+				return openFlag;
+			}, '5sec Wait to open the CardReader', 12000);
+	
+			runs(function()
+			{
+				Rho.CardReader.PinEntry=true;
+				Rho.CardReader.pinTimeout=0;
+				setTimeout(function() {
+					swipeFlag = true;
+				}, 5000);
+			});
+	
+			waitsFor(function()
+			{
+				return captured;
+			}, '5sec Wait to open the CardReader', 25000);
+	
+			runs(function()
+			{
+				expect(testResult).toEqual(true);
+				Rho.CardReader.close();
+				setTimeout(function() {
+				closeFlag = true;
+				}, 5000);
+			});
+	
+			waitsFor(function()
+			{
+			   return closeFlag;
+			},'5sec Wait to close the CardReader', 6000);
+	
+		});	
+	
+		xit("VT286-0159 | Pintimeout set to -1 invalid value|", function() {
+	
+			runs(function()
+			{
+				//Rho.CardReader.open({},callbackCardReader);
+				Rho.CardReader.open(callbackCardReader);
+				setTimeout(function() {
+					openFlag = true;
+				}, 11000);
+			});
+	
+			waitsFor(function()
+			{
+				dispCurrentProcess("VT286-0159 | Pintimeout set to -1 invalid value");
+				return openFlag;
+			}, '5sec Wait to open the CardReader', 12000);
+	
+			runs(function()
+			{
+				Rho.CardReader.PinEntry=true;
+				Rho.CardReader.pinTimeout=-1;
+				setTimeout(function() {
+					swipeFlag = true;
+				}, 5000);
+			});
+	
+			waitsFor(function()
+			{
+				return captured;
+			}, '5sec Wait to open the CardReader', 25000);
+	
+			runs(function()
+			{
+				expect(testResult).toEqual(true);
+				Rho.CardReader.close();
+				setTimeout(function() {
+				closeFlag = true;
+				}, 5000);
+			});
+	
+			waitsFor(function()
+			{
+			   return closeFlag;
+			},'5sec Wait to close the CardReader', 6000);
+	
+		});	
+	
+		xit("VT286-0160 | Pintimeout set to invalid string|", function() {
+	
+			runs(function()
+			{
+				//Rho.CardReader.open({},callbackCardReader);
+				Rho.CardReader.open(callbackCardReader);
+				setTimeout(function() {
+					openFlag = true;
+				}, 11000);
+			});
+	
+			waitsFor(function()
+			{
+				dispCurrentProcess("VT286-0160 | Pintimeout set to invalid string");
+				return openFlag;
+			}, '5sec Wait to open the CardReader', 12000);
+	
+			runs(function()
+			{
+				Rho.CardReader.PinEntry=true;
+				Rho.CardReader.pinTimeout='aaaa';
+				setTimeout(function() {
+					swipeFlag = true;
+				}, 5000);
+			});
+	
+			waitsFor(function()
+			{
+				return captured;
+			}, '5sec Wait to open the CardReader', 25000);
+	
+			runs(function()
+			{
+				expect(testResult).toEqual(true);
+				Rho.CardReader.close();
+				setTimeout(function() {
+				closeFlag = true;
+				}, 5000);
+			});
+	
+			waitsFor(function()
+			{
+			   return closeFlag;
+			},'5sec Wait to close the CardReader', 6000);
+	
+		});	
+	
+		xit("VT286-0161 | Pintimeout set to empty value|", function() {
+	        
+	        runs(function()
+			{
+				//Rho.CardReader.open({},callbackCardReader);
+				Rho.CardReader.open(callbackCardReader);
+				setTimeout(function() {
+					openFlag = true;
+				}, 11000);
+			});
+	
+			waitsFor(function()
+			{
+				dispCurrentProcess("VT286-0161 | Pintimeout set to empty value");
+				return openFlag;
+			}, '5sec Wait to open the CardReader', 12000);
+	
+			runs(function()
+			{
+				Rho.CardReader.PinEntry=true;
+				Rho.CardReader.pinTimeout='';
+				setTimeout(function() {
+					swipeFlag = true;
+				}, 5000);
+			});
+	
+			waitsFor(function()
+			{
+				return captured;
+			}, '5sec Wait to open the CardReader', 25000);
+	
+			runs(function()
+			{
+				expect(testResult).toEqual(true);
+				Rho.CardReader.close();
+				setTimeout(function() {
+				closeFlag = true;
+				}, 5000);
+			});
+	
+			waitsFor(function()
+			{
+			   return closeFlag;
+			},'5sec Wait to close the CardReader', 6000);
+	
+		});	
+	
+		it("VT286-0162 | PANData set to 1111222233334444 Do not enter the pin within 65 seconds|", function() {
+			runs(function()
+			{
+				//Rho.CardReader.open({},callbackCardReader);
+				Rho.CardReader.open(callbackCardReader);
+				setTimeout(function() {
+					openFlag = true;
+				}, 11000);
+			});
+	
+			waitsFor(function()
+			{
+				dispCurrentProcess("VT286-0162 | PANData set to 1111222233334444<br/> Do not enter the pin within 65 seconds");
+				return openFlag;
+			}, '5sec Wait to open the CardReader', 12000);
+	
+			runs(function()
+			{
+				Rho.CardReader.PinEntry=true;
+				Rho.CardReader.pinTimeout=12000;
+				Rho.CardReader.panData==1111222233334444; 
+				setTimeout(function() {
+					swipeFlag = true;
+				}, 5000);
+			});
+	
+			waitsFor(function()
+			{
+				return captured;
+			}, '5sec Wait to open the CardReader', 25000);
+	
+			runs(function()
+			{
+				expect(testResult).toEqual(true);
+				Rho.CardReader.close();
+				setTimeout(function() {
+				closeFlag = true;
+				}, 5000);
+			});
+	
+			waitsFor(function()
+			{
+			   return closeFlag;
+			},'5sec Wait to close the CardReader', 6000);
+	
+		});	
+	
+		xit("VT286-0163 | PANData set to 11111111aaaaaaaa |", function() {
+	
+	
+			runs(function()
+			{
+				//Rho.CardReader.open({},callbackCardReader);
+				Rho.CardReader.open(callbackCardReader);
+				setTimeout(function() {
+					openFlag = true;
+				}, 11000);
+			});
+	
+			waitsFor(function()
+			{
+				dispCurrentProcess("VT286-0163 | PANData set to 11111111aaaaaaaa");
+				return openFlag;
+			}, '5sec Wait to open the CardReader', 12000);
+	
+			runs(function()
+			{
+				Rho.CardReader.PinEntry=true;
+				Rho.CardReader.pinTimeout=12000;
+				Rho.CardReader.panData="11111111aaaaaaaa"; 
+				setTimeout(function() {
+					swipeFlag = true;
+				}, 5000);
+			});
+	
+			waitsFor(function()
+			{
+				return captured;
+			}, '5sec Wait to open the CardReader', 25000);
+	
+			runs(function()
+			{
+				expect(testResult).toEqual(true);
+				Rho.CardReader.close();
+				setTimeout(function() {
+				closeFlag = true;
+				}, 5000);
+			});
+	
+			waitsFor(function()
+			{
+			   return closeFlag;
+			},'5sec Wait to close the CardReader', 6000);
+	
+		});	
+	
+		it("VT286-0164 | PANData set to 1 |", function() {
+			runs(function()
+			{
+				//Rho.CardReader.open({},callbackCardReader);
+				Rho.CardReader.open(callbackCardReader);
+				setTimeout(function() {
+					openFlag = true;
+				}, 11000);
+			});
+	
+			waitsFor(function()
+			{
+				dispCurrentProcess("VT286-0164 | PANData set to 1");
+				return openFlag;
+			}, '5sec Wait to open the CardReader', 12000);
+	
+			runs(function()
+			{
+				Rho.CardReader.PinEntry=true;
+				Rho.CardReader.pinTimeout=12000;
+				Rho.CardReader.panData=1; 
+				setTimeout(function() {
+					swipeFlag = true;
+				}, 5000);
+			});
+	
+			waitsFor(function()
+			{
+				return captured;
+			}, '5sec Wait to open the CardReader', 25000);
+	
+			runs(function()
+			{
+				expect(testResult).toEqual(true);
+				Rho.CardReader.close();
+				setTimeout(function() {
+				closeFlag = true;
+				}, 5000);
+			});
+	
+			waitsFor(function()
+			{
+			   return closeFlag;
+			},'5sec Wait to close the CardReader', 6000);
+	
+		});	
+	
+		xit("VT286-0165 | PANData set to empty value |", function() {
+			runs(function()
+			{
+				//Rho.CardReader.open({},callbackCardReader);
+				Rho.CardReader.open(callbackCardReader);
+				setTimeout(function() {
+					openFlag = true;
+				}, 11000);
+			});
+	
+			waitsFor(function()
+			{
+				dispCurrentProcess("VT286-0165 | PANData set to empty value");
+				return openFlag;
+			}, '5sec Wait to open the CardReader', 12000);
+	
+			runs(function()
+			{
+				Rho.CardReader.PinEntry=true;
+				Rho.CardReader.pinTimeout=12000;
+				Rho.CardReader.panData=''; 
+				setTimeout(function() {
+					swipeFlag = true;
+				}, 5000);
+			});
+	
+			waitsFor(function()
+			{
+				return captured;
+			}, '5sec Wait to open the CardReader', 25000);
+	
+			runs(function()
+			{
+				expect(testResult).toEqual(true);
+				Rho.CardReader.close();
+				setTimeout(function() {
+				closeFlag = true;
+				}, 5000);
+			});
+	
+			waitsFor(function()
+			{
+			   return closeFlag;
+			},'5sec Wait to close the CardReader', 6000);
+	
 		});
-
-		waitsFor(function()
-		{
-			dispCurrentProcess("VT286-0149 | PinEntry Invalid string DCR only");
-			return openFlag;
-		}, '5sec Wait to open the CardReader', 12000);
-
-		runs(function()
-		{
-			Rho.CardReader.PinEntry=aaa;
-			setTimeout(function() {
-				swipeFlag = true;
-			}, 5000);
-		});
-
-		waitsFor(function()
-		{
-			return captured;
-		}, '5sec Wait to open the CardReader', 25000);
-
-		runs(function()
-		{
-			expect(testResult).toEqual(true);
-			Rho.CardReader.close();
-			setTimeout(function() {
-			closeFlag = true;
-			}, 5000);
-		});
-
-		waitsFor(function()
-		{
-		   return closeFlag;
-		},'5sec Wait to close the CardReader', 6000);
-
-	});
-
-	xit("VT286-0150 | PinEntry empty string |", function() {
-
-		runs(function()
-		{
-			//Rho.CardReader.open({},callbackCardReader);
-			Rho.CardReader.open(callbackCardReader);
-			setTimeout(function() {
-				openFlag = true;
-			}, 11000);
-		});
-
-		waitsFor(function()
-		{
-			dispCurrentProcess("VT286-0150 | PinEntry empty string");
-			return openFlag;
-		}, '5sec Wait to open the CardReader', 12000);
-
-		runs(function()
-		{
-			Rho.CardReader.PinEntry=' ';
-			setTimeout(function() {
-				swipeFlag = true;
-			}, 5000);
-		});
-
-		waitsFor(function()
-		{
-			return captured;
-		}, '5sec Wait to open the CardReader', 25000);
-
-		runs(function()
-		{
-			expect(testResult).toEqual(true);
-			Rho.CardReader.close();
-			setTimeout(function() {
-			closeFlag = true;
-			}, 5000);
-		});
-
-		waitsFor(function()
-		{
-		   return closeFlag;
-		},'5sec Wait to close the CardReader', 6000);
-
-	});
-
-	it("VT286-0151 | Pintimeout Default |", function() {
-
-
-		runs(function()
-		{
-			//Rho.CardReader.open({},callbackCardReader);
-			Rho.CardReader.open(callbackCardReader);
-			setTimeout(function() {
-				openFlag = true;
-			}, 11000);
-		});
-
-		waitsFor(function()
-		{
-			dispCurrentProcess("VT286-0151 | Pintimeout Default");
-			return openFlag;
-		}, '5sec Wait to open the CardReader', 12000);
-
-		runs(function()
-		{
-			Rho.CardReader.PinEntry=true;
-			setTimeout(function() {
-				swipeFlag = true;
-			}, 5000);
-		});
-
-		waitsFor(function()
-		{
-			return captured;
-		}, '5sec Wait to open the CardReader', 25000);
-
-		runs(function()
-		{
-			expect(testResult).toEqual(true);
-			Rho.CardReader.close();
-			setTimeout(function() {
-			closeFlag = true;
-			}, 5000);
-		});
-
-		waitsFor(function()
-		{
-		   return closeFlag;
-		},'5sec Wait to close the CardReader', 6000);
-
-	});
-
-	it("VT286-0152 | PinEntry false and pintimeout 20 sec |", function() {
-
-
-		runs(function()
-		{
-			//Rho.CardReader.open({},callbackCardReader);
-			Rho.CardReader.open(callbackCardReader);
-			setTimeout(function() {
-				openFlag = true;
-			}, 11000);
-		});
-
-		waitsFor(function()
-		{
-			dispCurrentProcess("VT286-0152 | PinEntry false and pintimeout 20 sec");
-			return openFlag;
-		}, '5sec Wait to open the CardReader', 12000);
-
-		runs(function()
-		{
-			Rho.CardReader.PinEntry=false;
-			Rho.CardReader.pinTimeout=20000;
-			setTimeout(function() {
-				swipeFlag = true;
-			}, 5000);
-		});
-
-		waitsFor(function()
-		{
-			return captured;
-		}, '5sec Wait to open the CardReader', 25000);
-
-		runs(function()
-		{
-			expect(testResult).toEqual(true);
-			Rho.CardReader.close();
-			setTimeout(function() {
-			closeFlag = true;
-			}, 5000);
-		});
-
-		waitsFor(function()
-		{
-		   return closeFlag;
-		},'5sec Wait to close the CardReader', 6000);
-
-	});
-
-    it("VT286-0153 | Do the PinEntry after pintimeout after 30 seconds |", function() {
-
-		runs(function()
-		{
-			//Rho.CardReader.open({},callbackCardReader);
-			Rho.CardReader.open(callbackCardReader);
-			setTimeout(function() {
-				openFlag = true;
-			}, 11000);
-		});
-
-		waitsFor(function()
-		{
-			dispCurrentProcess("VT286-0153 | Do the PinEntry after pintimeout after 30 seconds");
-			return openFlag;
-		}, '5sec Wait to open the CardReader', 12000);
-
-		runs(function()
-		{
-			Rho.CardReader.PinEntry=true;
-			setTimeout(function() {
-				swipeFlag = true;
-			}, 5000);
-		});
-
-		waitsFor(function()
-		{
-			return captured;
-		}, '5sec Wait to open the CardReader', 25000);
-
-		runs(function()
-		{
-			expect(testResult).toEqual(true);
-			Rho.CardReader.close();
-			setTimeout(function() {
-			closeFlag = true;
-			}, 5000);
-		});
-
-		waitsFor(function()
-		{
-		   return closeFlag;
-		},'5sec Wait to close the CardReader', 6000);
-
-	});	
-
-	it("VT286-0154 | Pintimeout set to 5000 enter the pin within 15 seconds|", function() {
-
-		runs(function()
-		{
-			//Rho.CardReader.open({},callbackCardReader);
-			Rho.CardReader.open(callbackCardReader);
-			setTimeout(function() {
-				openFlag = true;
-			}, 11000);
-		});
-
-		waitsFor(function()
-		{
-			dispCurrentProcess("VT286-0154 | Pintimeout set to 5000 <br/> enter the pin within 15 seconds");
-			return openFlag;
-		}, '5sec Wait to open the CardReader', 12000);
-
-		runs(function()
-		{
-			Rho.CardReader.PinEntry=true;
-			Rho.CardReader.pinTimeout=5000;
-			setTimeout(function() {
-				swipeFlag = true;
-			}, 5000);
-		});
-
-		waitsFor(function()
-		{
-			return captured;
-		}, '5sec Wait to open the CardReader', 25000);
-
-		runs(function()
-		{
-			expect(testResult).toEqual(true);
-			Rho.CardReader.close();
-			setTimeout(function() {
-			closeFlag = true;
-			}, 5000);
-		});
-
-		waitsFor(function()
-		{
-		   return closeFlag;
-		},'5sec Wait to close the CardReader', 6000);
-
-	});	
-
-	it("VT286-0155 | Pintimeout set to 5000 Do not enter the pin within 15 seconds|", function() {
-
-
-		runs(function()
-		{
-			//Rho.CardReader.open({},callbackCardReader);
-			Rho.CardReader.open(callbackCardReader);
-			setTimeout(function() {
-				openFlag = true;
-			}, 11000);
-		});
-
-		waitsFor(function()
-		{
-			dispCurrentProcess("VT286-0155 | Pintimeout set to 5000 <br/> Do not enter the pin within 15 seconds");
-			return openFlag;
-		}, '5sec Wait to open the CardReader', 12000);
-
-		runs(function()
-		{
-			Rho.CardReader.PinEntry=true;
-			Rho.CardReader.pinTimeout=5000;
-			setTimeout(function() {
-				swipeFlag = true;
-			}, 5000);
-		});
-
-		waitsFor(function()
-		{
-			return captured;
-		}, '5sec Wait to open the CardReader', 25000);
-
-		runs(function()
-		{
-			expect(testResult).toEqual(true);
-			Rho.CardReader.close();
-			setTimeout(function() {
-			closeFlag = true;
-			}, 5000);
-		});
-
-		waitsFor(function()
-		{
-		   return closeFlag;
-		},'5sec Wait to close the CardReader', 6000);
-
-	});	
-
-	it("VT286-0156 | Pintimeout set to 65535 <br/> enter the pin within 65 seconds|", function() {
-
-		runs(function()
-		{
-			//Rho.CardReader.open({},callbackCardReader);
-			Rho.CardReader.open(callbackCardReader);
-			setTimeout(function() {
-				openFlag = true;
-			}, 11000);
-		});
-
-		waitsFor(function()
-		{
-			dispCurrentProcess("VT286-0156 | Pintimeout set to 65535 enter the pin within 65 seconds");
-			return openFlag;
-		}, '5sec Wait to open the CardReader', 12000);
-
-		runs(function()
-		{
-			Rho.CardReader.PinEntry=true;
-			Rho.CardReader.pinTimeout=65535;
-			setTimeout(function() {
-				swipeFlag = true;
-			}, 5000);
-		});
-
-		waitsFor(function()
-		{
-			return captured;
-		}, '5sec Wait to open the CardReader', 25000);
-
-		runs(function()
-		{
-			expect(testResult).toEqual(true);
-			Rho.CardReader.close();
-			setTimeout(function() {
-			closeFlag = true;
-			}, 5000);
-		});
-
-		waitsFor(function()
-		{
-		   return closeFlag;
-		},'5sec Wait to close the CardReader', 6000);
-
-	});	
-
-	it("VT286-0157 | Pintimeout set to 65535 Do not enter the pin within 65 seconds|", function() {
-
-		runs(function()
-		{
-			//Rho.CardReader.open({},callbackCardReader);
-			Rho.CardReader.open(callbackCardReader);
-			setTimeout(function() {
-				openFlag = true;
-			}, 11000);
-		});
-
-		waitsFor(function()
-		{
-			dispCurrentProcess("VT286-0157 | Pintimeout set to 65535 <br/> Do not enter the pin within 65 seconds");
-			return openFlag;
-		}, '5sec Wait to open the CardReader', 12000);
-
-		runs(function()
-		{
-			Rho.CardReader.PinEntry=true;
-			Rho.CardReader.pinTimeout=65535;
-			setTimeout(function() {
-				swipeFlag = true;
-			}, 5000);
-		});
-
-		waitsFor(function()
-		{
-			return captured;
-		}, '5sec Wait to open the CardReader', 25000);
-
-		runs(function()
-		{
-			expect(testResult).toEqual(true);
-			Rho.CardReader.close();
-			setTimeout(function() {
-			closeFlag = true;
-			}, 5000);
-		});
-
-		waitsFor(function()
-		{
-		   return closeFlag;
-		},'5sec Wait to close the CardReader', 6000);
-
-	});	
-
-	it("VT286-0158 | Pintimeout set to 0 |", function() {
-
-		runs(function()
-		{
-			//Rho.CardReader.open({},callbackCardReader);
-			Rho.CardReader.open(callbackCardReader);
-			setTimeout(function() {
-				openFlag = true;
-			}, 11000);
-		});
-
-		waitsFor(function()
-		{
-			dispCurrentProcess("VT286-0158 | Pintimeout set to 0");
-			return openFlag;
-		}, '5sec Wait to open the CardReader', 12000);
-
-		runs(function()
-		{
-			Rho.CardReader.PinEntry=true;
-			Rho.CardReader.pinTimeout=0;
-			setTimeout(function() {
-				swipeFlag = true;
-			}, 5000);
-		});
-
-		waitsFor(function()
-		{
-			return captured;
-		}, '5sec Wait to open the CardReader', 25000);
-
-		runs(function()
-		{
-			expect(testResult).toEqual(true);
-			Rho.CardReader.close();
-			setTimeout(function() {
-			closeFlag = true;
-			}, 5000);
-		});
-
-		waitsFor(function()
-		{
-		   return closeFlag;
-		},'5sec Wait to close the CardReader', 6000);
-
-	});	
-
-	xit("VT286-0159 | Pintimeout set to -1 invalid value|", function() {
-
-		runs(function()
-		{
-			//Rho.CardReader.open({},callbackCardReader);
-			Rho.CardReader.open(callbackCardReader);
-			setTimeout(function() {
-				openFlag = true;
-			}, 11000);
-		});
-
-		waitsFor(function()
-		{
-			dispCurrentProcess("VT286-0159 | Pintimeout set to -1 invalid value");
-			return openFlag;
-		}, '5sec Wait to open the CardReader', 12000);
-
-		runs(function()
-		{
-			Rho.CardReader.PinEntry=true;
-			Rho.CardReader.pinTimeout=-1;
-			setTimeout(function() {
-				swipeFlag = true;
-			}, 5000);
-		});
-
-		waitsFor(function()
-		{
-			return captured;
-		}, '5sec Wait to open the CardReader', 25000);
-
-		runs(function()
-		{
-			expect(testResult).toEqual(true);
-			Rho.CardReader.close();
-			setTimeout(function() {
-			closeFlag = true;
-			}, 5000);
-		});
-
-		waitsFor(function()
-		{
-		   return closeFlag;
-		},'5sec Wait to close the CardReader', 6000);
-
-	});	
-
-	xit("VT286-0160 | Pintimeout set to invalid string|", function() {
-
-		runs(function()
-		{
-			//Rho.CardReader.open({},callbackCardReader);
-			Rho.CardReader.open(callbackCardReader);
-			setTimeout(function() {
-				openFlag = true;
-			}, 11000);
-		});
-
-		waitsFor(function()
-		{
-			dispCurrentProcess("VT286-0160 | Pintimeout set to invalid string");
-			return openFlag;
-		}, '5sec Wait to open the CardReader', 12000);
-
-		runs(function()
-		{
-			Rho.CardReader.PinEntry=true;
-			Rho.CardReader.pinTimeout='aaaa';
-			setTimeout(function() {
-				swipeFlag = true;
-			}, 5000);
-		});
-
-		waitsFor(function()
-		{
-			return captured;
-		}, '5sec Wait to open the CardReader', 25000);
-
-		runs(function()
-		{
-			expect(testResult).toEqual(true);
-			Rho.CardReader.close();
-			setTimeout(function() {
-			closeFlag = true;
-			}, 5000);
-		});
-
-		waitsFor(function()
-		{
-		   return closeFlag;
-		},'5sec Wait to close the CardReader', 6000);
-
-	});	
-
-	xit("VT286-0161 | Pintimeout set to empty value|", function() {
-        
-        runs(function()
-		{
-			//Rho.CardReader.open({},callbackCardReader);
-			Rho.CardReader.open(callbackCardReader);
-			setTimeout(function() {
-				openFlag = true;
-			}, 11000);
-		});
-
-		waitsFor(function()
-		{
-			dispCurrentProcess("VT286-0161 | Pintimeout set to empty value");
-			return openFlag;
-		}, '5sec Wait to open the CardReader', 12000);
-
-		runs(function()
-		{
-			Rho.CardReader.PinEntry=true;
-			Rho.CardReader.pinTimeout='';
-			setTimeout(function() {
-				swipeFlag = true;
-			}, 5000);
-		});
-
-		waitsFor(function()
-		{
-			return captured;
-		}, '5sec Wait to open the CardReader', 25000);
-
-		runs(function()
-		{
-			expect(testResult).toEqual(true);
-			Rho.CardReader.close();
-			setTimeout(function() {
-			closeFlag = true;
-			}, 5000);
-		});
-
-		waitsFor(function()
-		{
-		   return closeFlag;
-		},'5sec Wait to close the CardReader', 6000);
-
-	});	
-
-	it("VT286-0162 | PANData set to 1111222233334444 Do not enter the pin within 65 seconds|", function() {
-		runs(function()
-		{
-			//Rho.CardReader.open({},callbackCardReader);
-			Rho.CardReader.open(callbackCardReader);
-			setTimeout(function() {
-				openFlag = true;
-			}, 11000);
-		});
-
-		waitsFor(function()
-		{
-			dispCurrentProcess("VT286-0162 | PANData set to 1111222233334444<br/> Do not enter the pin within 65 seconds");
-			return openFlag;
-		}, '5sec Wait to open the CardReader', 12000);
-
-		runs(function()
-		{
-			Rho.CardReader.PinEntry=true;
-			Rho.CardReader.pinTimeout=12000;
-			Rho.CardReader.panData==1111222233334444; 
-			setTimeout(function() {
-				swipeFlag = true;
-			}, 5000);
-		});
-
-		waitsFor(function()
-		{
-			return captured;
-		}, '5sec Wait to open the CardReader', 25000);
-
-		runs(function()
-		{
-			expect(testResult).toEqual(true);
-			Rho.CardReader.close();
-			setTimeout(function() {
-			closeFlag = true;
-			}, 5000);
-		});
-
-		waitsFor(function()
-		{
-		   return closeFlag;
-		},'5sec Wait to close the CardReader', 6000);
-
-	});	
-
-	xit("VT286-0163 | PANData set to 11111111aaaaaaaa |", function() {
-
-
-		runs(function()
-		{
-			//Rho.CardReader.open({},callbackCardReader);
-			Rho.CardReader.open(callbackCardReader);
-			setTimeout(function() {
-				openFlag = true;
-			}, 11000);
-		});
-
-		waitsFor(function()
-		{
-			dispCurrentProcess("VT286-0163 | PANData set to 11111111aaaaaaaa");
-			return openFlag;
-		}, '5sec Wait to open the CardReader', 12000);
-
-		runs(function()
-		{
-			Rho.CardReader.PinEntry=true;
-			Rho.CardReader.pinTimeout=12000;
-			Rho.CardReader.panData="11111111aaaaaaaa"; 
-			setTimeout(function() {
-				swipeFlag = true;
-			}, 5000);
-		});
-
-		waitsFor(function()
-		{
-			return captured;
-		}, '5sec Wait to open the CardReader', 25000);
-
-		runs(function()
-		{
-			expect(testResult).toEqual(true);
-			Rho.CardReader.close();
-			setTimeout(function() {
-			closeFlag = true;
-			}, 5000);
-		});
-
-		waitsFor(function()
-		{
-		   return closeFlag;
-		},'5sec Wait to close the CardReader', 6000);
-
-	});	
-
-	it("VT286-0164 | PANData set to 1 |", function() {
-		runs(function()
-		{
-			//Rho.CardReader.open({},callbackCardReader);
-			Rho.CardReader.open(callbackCardReader);
-			setTimeout(function() {
-				openFlag = true;
-			}, 11000);
-		});
-
-		waitsFor(function()
-		{
-			dispCurrentProcess("VT286-0164 | PANData set to 1");
-			return openFlag;
-		}, '5sec Wait to open the CardReader', 12000);
-
-		runs(function()
-		{
-			Rho.CardReader.PinEntry=true;
-			Rho.CardReader.pinTimeout=12000;
-			Rho.CardReader.panData=1; 
-			setTimeout(function() {
-				swipeFlag = true;
-			}, 5000);
-		});
-
-		waitsFor(function()
-		{
-			return captured;
-		}, '5sec Wait to open the CardReader', 25000);
-
-		runs(function()
-		{
-			expect(testResult).toEqual(true);
-			Rho.CardReader.close();
-			setTimeout(function() {
-			closeFlag = true;
-			}, 5000);
-		});
-
-		waitsFor(function()
-		{
-		   return closeFlag;
-		},'5sec Wait to close the CardReader', 6000);
-
-	});	
-
-	xit("VT286-0165 | PANData set to empty value |", function() {
-		runs(function()
-		{
-			//Rho.CardReader.open({},callbackCardReader);
-			Rho.CardReader.open(callbackCardReader);
-			setTimeout(function() {
-				openFlag = true;
-			}, 11000);
-		});
-
-		waitsFor(function()
-		{
-			dispCurrentProcess("VT286-0165 | PANData set to empty value");
-			return openFlag;
-		}, '5sec Wait to open the CardReader', 12000);
-
-		runs(function()
-		{
-			Rho.CardReader.PinEntry=true;
-			Rho.CardReader.pinTimeout=12000;
-			Rho.CardReader.panData=''; 
-			setTimeout(function() {
-				swipeFlag = true;
-			}, 5000);
-		});
-
-		waitsFor(function()
-		{
-			return captured;
-		}, '5sec Wait to open the CardReader', 25000);
-
-		runs(function()
-		{
-			expect(testResult).toEqual(true);
-			Rho.CardReader.close();
-			setTimeout(function() {
-			closeFlag = true;
-			}, 5000);
-		});
-
-		waitsFor(function()
-		{
-		   return closeFlag;
-		},'5sec Wait to close the CardReader', 6000);
-
-	});	
+	}
 
 	it("VT286-0166 |Test cardreader with swiping different tracks of cards |", function() {
 
@@ -2132,104 +2136,107 @@ describe("Card Reader Test", function() {
 	});
 
 //Walgreen Test only applicable on android device
-	it("VT286-0169 |encryption encrypted |", function() {
-
-		runs(function()
-		{
-			//Rho.CardReader.open({},encrypted_callback);
-			Rho.CardReader.open(encrypted_callback);
-			setTimeout(function() {
-				openFlag = true;
-			}, 11000);
+	if(Rho.System.platform == 'ANDROID')
+	{
+		it("VT286-0169 |encryption encrypted |", function() {
+	
+			runs(function()
+			{
+				//Rho.CardReader.open({},encrypted_callback);
+				Rho.CardReader.open(encrypted_callback);
+				setTimeout(function() {
+					openFlag = true;
+				}, 11000);
+			});
+	
+			waitsFor(function()
+			{
+				dispCurrentProcess("VT286-0169 |encryption encrypted");
+				return openFlag;
+			}, '5sec Wait to open the CardReader', 12000);
+	
+			runs(function()
+			{
+				    setTimeout(function() {
+					swipeFlag = true;
+				}, 5000);
+			});
+	
+			waitsFor(function()
+			{
+				return captured;
+			}, '5sec Wait to open the CardReader', 25000);
+	
+			runs(function()
+			{
+				expect(testResult).toEqual(true);
+				Rho.CardReader.close();
+				setTimeout(function() {
+				closeFlag = true;
+				}, 5000);
+			});
+	
+			waitsFor(function()
+			{
+			   return closeFlag;
+			},'5sec Wait to close the CardReader', 6000);
+	
 		});
-
-		waitsFor(function()
-		{
-			dispCurrentProcess("VT286-0169 |encryption encrypted");
-			return openFlag;
-		}, '5sec Wait to open the CardReader', 12000);
-
-		runs(function()
-		{
-			    setTimeout(function() {
-				swipeFlag = true;
-			}, 5000);
+	
+		xit("VT286-0170 | encryption unencrypted |", function() {
+	
+			waitsFor(function()
+			{
+				dispCurrentProcess("VT286-0170 | encryption unencrypted");
+				return captured;
+			}, '5sec Wait to open the CardReader', 25000);
+	
+			runs(function()
+			{
+				expect(testResult).toEqual(true);
+			});
+	
 		});
-
-		waitsFor(function()
-		{
-			return captured;
-		}, '5sec Wait to open the CardReader', 25000);
-
-		runs(function()
-		{
-			expect(testResult).toEqual(true);
-			Rho.CardReader.close();
-			setTimeout(function() {
-			closeFlag = true;
-			}, 5000);
+	
+	    it("VT286-0171 | encrypted data in financial card |", function() {
+			waitsFor(function()
+			{
+				dispCurrentProcess("VT286-0171 | encrypted data in financial card");
+				return captured;
+			}, '5sec Wait to open the CardReader', 25000);
+	
+			runs(function()
+			{
+				expect(testResult).toEqual(true);
+			});
 		});
-
-		waitsFor(function()
-		{
-		   return closeFlag;
-		},'5sec Wait to close the CardReader', 6000);
-
-	});
-
-	xit("VT286-0170 | encryption unencrypted |", function() {
-
-		waitsFor(function()
-		{
-			dispCurrentProcess("VT286-0170 | encryption unencrypted");
-			return captured;
-		}, '5sec Wait to open the CardReader', 25000);
-
-		runs(function()
-		{
-			expect(testResult).toEqual(true);
+	
+		xit("VT286-0172 | rawdata with non financial card |", function() {
+			waitsFor(function()
+			{
+				dispCurrentProcess("VT286-0172 | rawdata with non financial card");
+				return captured;
+			}, '5sec Wait to open the CardReader', 25000);
+	
+			runs(function()
+			{
+				expect(testResult).toEqual(true);
+			});
 		});
-
-	});
-
-    it("VT286-0171 | encrypted data in financial card |", function() {
-		waitsFor(function()
-		{
-			dispCurrentProcess("VT286-0171 | encrypted data in financial card");
-			return captured;
-		}, '5sec Wait to open the CardReader', 25000);
-
-		runs(function()
-		{
-			expect(testResult).toEqual(true);
+	
+		it("VT286-0173 | rawdata with financial card |", function() {
+			waitsFor(function()
+			{
+				dispCurrentProcess("VT286-0173 | rawdata with financial card");
+				return captured;
+			}, '5sec Wait to open the CardReader', 25000);
+	
+			runs(function()
+			{
+				expect(testResult).toEqual(true);
+			});
 		});
-	});
-
-	xit("VT286-0172 | rawdata with non financial card |", function() {
-		waitsFor(function()
-		{
-			dispCurrentProcess("VT286-0172 | rawdata with non financial card");
-			return captured;
-		}, '5sec Wait to open the CardReader', 25000);
-
-		runs(function()
-		{
-			expect(testResult).toEqual(true);
-		});
-	});
-
-	it("VT286-0173 | rawdata with financial card |", function() {
-		waitsFor(function()
-		{
-			dispCurrentProcess("VT286-0173 | rawdata with financial card");
-			return captured;
-		}, '5sec Wait to open the CardReader', 25000);
-
-		runs(function()
-		{
-			expect(testResult).toEqual(true);
-		});
-	});
+	}
 
 	it("VT286-0174 | track1Status true |", function() {
 		waitsFor(function()
