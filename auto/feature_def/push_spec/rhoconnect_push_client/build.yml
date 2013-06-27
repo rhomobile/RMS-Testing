@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-sdk: '../../../../../rhodes'
-=======
 sdk: ../../../../../rhodes
->>>>>>> a9d355e9af85a95355cf380bc43c0bb002616c23
 sdkversion: 4.0.0
 name: Rho_Push_Client
 version: 1.03
@@ -23,13 +19,6 @@ wp:
 symbian:
   uid: '0xe77b6fc3'
 android:
-<<<<<<< HEAD
-#  version: 2.3.3
-  version: 4.2.2
-
-paths:
-  extensions: "C:/Projects/Motorola-Extensions/extensions"
-=======
   version: 4.2.2
 #  version: 2.3.3
 #  version: 4.0
@@ -38,6 +27,5 @@ paths:
   extensions:
     - "../../../../../Motorola-Extensions/extensions"
     - "../../../../../rhoconnect-client/ext"
->>>>>>> a9d355e9af85a95355cf380bc43c0bb002616c23
 
 extensions: ["json", "rhoconnect-client", "rhoconnect-push"]

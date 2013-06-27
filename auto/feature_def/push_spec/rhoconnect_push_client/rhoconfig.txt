@@ -90,11 +90,11 @@ syncserver = 'http://192.168.1.117:9292'
 
 # An old way configure push server
 <<<<<<< HEAD
-rhoconnect_push_server = 'http://192.168.1.116:8675'
+rhoconnect_push_server = 'http://192.168.1.117:8675'
 rhoconnect_push_appname = 'someappname'
 
 # A new way configure push server
-Push.rhoconnect.pushServer = 'http://192.168.1.116:8675'
+Push.rhoconnect.pushServer = 'http://192.168.1.117:8675'
 =======
 rhoconnect_push_server = 'http://192.168.1.117:8675'
 rhoconnect_push_appname = 'someappname'

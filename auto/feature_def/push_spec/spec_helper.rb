@@ -75,40 +75,41 @@ def run_apps(platform)
 		RhoconnectHelper.push_host = "192.168.1.116"
 		RhoconnectHelper.push_port = "8675"
 	end
-	
-	File.open(File.join($app_path, 'app', 'sync_server.rb'), 'w') do |f|
-		f.puts "SYNC_SERVER_HOST = '#{RhoconnectHelper.host}'"
-		f.puts "SYNC_SERVER_PORT = #{RhoconnectHelper.port}"
-	end
-	File.open(File.join($app_path, 'app', 'push_server.rb'), 'w') do |f|
-		f.puts "PUSH_SERVER_HOST = '#{RhoconnectHelper.push_host}'"
-		f.puts "PUSH_SERVER_PORT = #{RhoconnectHelper.push_port}"
-	end
+
+	# File.open(File.join($app_path, 'app', 'sync_server.rb'), 'w') do |f|
+	# 	f.puts "SYNC_SERVER_HOST = '#{RhoconnectHelper.host}'"
+	# 	f.puts "SYNC_SERVER_PORT = #{RhoconnectHelper.port}"
+	# end
+	# File.open(File.join($app_path, 'app', 'push_server.rb'), 'w') do |f|
+	# 	f.puts "PUSH_SERVER_HOST = '#{RhoconnectHelper.push_host}'"
+	# 	f.puts "PUSH_SERVER_PORT = #{RhoconnectHelper.push_port}"
+	# end
 
 	# Patch rhodes 'rhoconfig.txt' file
-	cfgfile = File.join($app_path, 'rhoconfig.txt')
-	cfg = File.read(cfgfile)
-	cfg.gsub!(/(rhoconnect_push_server.*)/, "rhoconnect_push_server = 'http://#{RhoconnectHelper.push_host}:#{RhoconnectHelper.push_port}'")
-	cfg.gsub!(/(Push.rhoconnect.pushServer.*)/, "Push.rhoconnect.pushServer = 'http://#{RhoconnectHelper.push_host}:#{RhoconnectHelper.push_port}'")
-	File.open(cfgfile, 'w') { |f| f.write cfg }
+	# cfgfile = File.join($app_path, 'rhoconfig.txt')
+	# cfg = File.read(cfgfile)
+	# cfg.gsub!(/(rhoconnect_push_server.*)/, "rhoconnect_push_server = 'http://#{RhoconnectHelper.push_host}:#{RhoconnectHelper.push_port}'")
+	# cfg.gsub!(/(Push.rhoconnect.pushServer.*)/, "Push.rhoconnect.pushServer = 'http://#{RhoconnectHelper.push_host}:#{RhoconnectHelper.push_port}'")
+	# File.open(cfgfile, 'w') { |f| f.write cfg }
 
-	# Patching rhodes 'build.yml' file (setup sdk and extentions properties)
-	push_client_path = File.join($spec_path, 'rhoconnect_push_client')
-	File.open(File.join(push_client_path, "build.yml"), 'w') do |bf|
-	  File.open(File.join(push_client_path, "build.yml.example"), 'r') do |f|
-	    f.each do |line|
-	      if line =~ /^sdk: '..\/..\/..\/..\/..\/rhodes'$/
-	      	  # FIXME: using installed rhodes gem (beta.21)
-	          bf.puts "#{line}"
-	      elsif line =~ /Path-to-Motorola-Extensions/
-	      	  # FIXME: using installed rhodes gem (beta.21)
-	          bf.puts "  extensions: \"#{$rhoelements_root}/extensions\"\n"
-	      else
-	          bf.puts line
-	      end
-	    end
-	  end
-	end
+	# # Patching rhodes 'build.yml' file (setup sdk and extentions properties)
+	# push_client_path = File.join($spec_path, 'rhoconnect_push_client')
+	# File.open(File.join(push_client_path, "build.yml"), 'w') do |bf|
+	#   File.open(File.join(push_client_path, "build.yml.example"), 'r') do |f|
+	#     f.each do |line|
+	#       if line =~ /^sdk: '..\/..\/..\/..\/..\/rhodes'$/
+	#       	  # FIXME: using installed rhodes gem (beta.21)
+	#           bf.puts "#{line}"
+	#       elsif line =~ /Path-to-Motorola-Extensions/
+	#       	  # FIXME: using installed rhodes gem (beta.21)
+	#           bf.puts "  extensions: \"#{$rhoelements_root}/extensions\"\n"
+	#       else
+	#           bf.puts line
+	#       end
+	#     end
+	#   end
+	# end
+
 
 	if $platform == 'android'
 		if $deviceId
@@ -167,7 +168,7 @@ def run_apps(platform)
 		puts
 		puts "Specs for Windows Mobile/CE Devices should be here ..."
 		puts
-		
+
 		puts "1st step : Build the Test App"
 		wm_build_rakefile = convert_to_windows_path_style_str(File.join($rhoelements_root,'build','ci','windows','Rakefile'))
 		rhodes_app_dir = convert_to_windows_path_style_str(File.join($testsuite_root,'auto','feature_def','push_spec','rhoconnect_push_client'))
@@ -175,12 +176,12 @@ def run_apps(platform)
 		puts "CMD is: #{cmd}"
                 system(cmd)
 		puts "Build is finished!!!"
-		
+
 		puts "2nd step : Reboot the device at #{$device_id}"
 		cmd = "call rake -f #{wm_build_rakefile} windows:reboot[#{$device_id}]"
 		puts "CMD is: #{cmd}"
 		system(cmd)
-	
+
 		puts "3rd step : install the push service"
 		aux_lib_push_service_cab = convert_to_windows_path_style_str(File.join($rhoelements_root,'libs','rhoconnect-push-service','NETCFv35.Messages.EN.wm.cab'))
 		cmd = "call rake -f #{wm_build_rakefile} windows:install_cab_to_device[#{$device_id},#{aux_lib_push_service_cab}]"
@@ -190,8 +191,8 @@ def run_apps(platform)
 		cmd = "call rake -f #{wm_build_rakefile} windows:install_cab_to_device[#{$device_id},#{push_service_cab}]"
 		puts "CMD is: #{cmd}"
 		system(cmd)
-		puts "RhoConnect Push Service is installed!!!" 
-		
+		puts "RhoConnect Push Service is installed!!!"
+
 		puts "4th step: install the test application"
 		spec_app_cab = convert_to_windows_path_style_str(File.join($spec_path,'rhoconnect_push_client','bin','target','wm6p','Rho_Push_Client.cab'))
                 cmd = "rake -f #{wm_build_rakefile} windows:install_cab_to_device[#{$device_id},#{spec_app_cab}]"
