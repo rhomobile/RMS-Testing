@@ -91,7 +91,6 @@
         expect(object.has('absent key')).toBe(false);
     });
 
-
     it('creates object in database', function() {
         var modelDef = function(model){
             model.modelName('Product'),
@@ -172,8 +171,25 @@
         expect(Model.count()).toBe(0);
     });
 
+    it('deletes all objects in sync database', function() {
+      var modelDefs3 = function(model){
+        model.modelName("Item");
+        model.property("name","string");
+        model.set("partition","local");
+        model.enable("sync");
+      };
+      var Modelsync = Rho.ORM.addModel(modelDefs3);
+      Modelsync.create({'name': 'tests'});
+      var cv = db.$execute_sql("select * from CHANGED_VALUES");
+      expect(cv[0].map.update_type).toEqual("create");
+
+      var obj = Modelsync.find("first");
+      obj.destroy();
+      cv = db.$execute_sql("select * from CHANGED_VALUES");
+      expect(cv).toEqual([]);
+    });
+
     it('deletes all objects of specific model in database', function() {
-        
         var Model1 = Rho.ORM.addModel(modelDef);
         var Model2 = Rho.ORM.addModel(modelDef2);
 
@@ -356,6 +372,26 @@
     expect(res[0].get("industry")).toEqual("Technology");
     expect(res[1].get("name")).toEqual("Aeroprise");
     expect(res[1].get("industry")).toEqual("Technology");
+  });
+
+  it("should find with select",function() {
+    Model.deleteAll();
+    var res;
+    expect(Model.count()).toEqual(0);
+
+    Model.create({"industry":"Technology","name":"Moto"});
+    Model.create({"industry":"Technology","name":"Aeroprise"});
+    Model.create({"industry":"Accounting","name":"PWC"});
+    expect(Model.count()).toEqual(3);
+    res = Model.find("all",
+                {
+                  conditions: {"industry":"Technology"},
+                  select: ['name']
+                });
+    expect(res[0].get("name")).toEqual("Moto");
+    expect(res[0].get("industry")).toBeUndefined();
+    expect(res[1].get("name")).toEqual("Aeroprise");
+    expect(res[1].get("industry")).toBeUndefined();
   });
 
   // it("should find with advanced OR conditions",function() {
@@ -698,6 +734,7 @@
 });
 
 describe("<model's fixed_schema>", function() {
+  var Model2;
     var modelDef = function(model){
         model.modelName('Product'),
         model.enable("fixedSchema");
@@ -716,6 +753,8 @@ describe("<model's fixed_schema>", function() {
       reset();
       Model = Rho.ORM.addModel(modelDef);
       Model.deleteAll();
+      Model2 = Rho.ORM.addModel(modelDef2);
+      Model2.deleteAll();
     });
 
   it("should verify created fixed schema modal",function(){
@@ -729,8 +768,7 @@ describe("<model's fixed_schema>", function() {
   });
 
   it("should create sync model in db",function(){
-    var TestS = Rho.ORM.addModel(modelDef2);
-    TestS.create({"name":"testname"});
+    Model2.create({"name":"testname"});
     var res = db.$execute_sql("select * from CHANGED_VALUES");
     expect(res[0].map.update_type).toEqual("create");
   });
@@ -803,6 +841,26 @@ describe("<model's fixed_schema>", function() {
     expect(obj2).toEqual([]);
   });
 
+  it("should delete fixedSchema sync model",function(){
+    Model2.create({name:"testfixed"});
+    var obj = Model2.find("first");
+    expect(obj.get("name")).toEqual("testfixed");
+
+    var dblocal = Rho.ORMHelper.dbConnection("local");
+    var dboutput = dblocal.$execute_sql("select * from ProductSync");
+    expect(dboutput[0].map.name).toEqual("testfixed");
+
+    var dbchanged = dblocal.$execute_sql("select * from CHANGED_VALUES");
+    expect(dbchanged[0].map.update_type).toEqual("create");
+    obj.destroy();
+
+    var obj2 = Model.find("first");
+    expect(obj2).toEqual([]);
+
+    dbchanged = dblocal.$execute_sql("select * from CHANGED_VALUES");
+    expect(dbchanged).toEqual([]);
+  });
+
   it("should make object fixedSchema",function(){
     var mobj= Model.make({name:"testmake"});
     var obj = Model.find("all");
@@ -822,6 +880,19 @@ describe("<model's fixed_schema>", function() {
     total = Model.count();
     expect(total).toEqual(0);
   });
+
+  // it("should delete all with conditions fixedSchema",function(){
+  //   Model.create({name:"testfixed1"});
+  //   Model.create({name:"testfixed2"});
+  //   Model.create({name:"testfixed3",brand:4});
+  //   Model.create({name:"testfixed4",brand:2});
+  //   var total = Model.count();
+  //   expect(total).toEqual(4);
+
+  //   Model.deleteAll({name:"testfixed1"});
+  //   total = Model.count();
+  //   expect(total).toEqual(3);
+  // });
 
   it('returns vars', function() {
     object = Model.make({'key': 'value'});
