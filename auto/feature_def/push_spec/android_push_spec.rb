@@ -7,6 +7,7 @@ require 'psych'
 TEST_PKGS = %w[com.rhomobile.rho_push_client com.motsolutions.cto.services.ans]
 
 $rho_root = nil
+$use_own_rhoconnect_stack=true
 cfgfilename = File.join(File.dirname(__FILE__),'config.yml')
 if File.file?(cfgfilename)
 	config = YAML::load_file(cfgfilename)

@@ -10,6 +10,7 @@ puts 'RUBY VERSION: ' + RUBY_VERSION.to_s
 cfgfilename = File.join(File.dirname(__FILE__),'config.yml')
 
 $rho_root = nil
+$use_own_rhoconnect_stack=false
 if File.file?(cfgfilename)
   config = YAML::load_file(cfgfilename)
   $rho_root = config["rhodes"]
