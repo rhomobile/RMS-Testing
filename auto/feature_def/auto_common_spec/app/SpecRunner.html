@@ -52,8 +52,8 @@
 	<script type="text/javascript" src="FileTest/file_js_spec.js"></script>
 	
 	<!-- Barcode -->
-	<script type="text/javascript" src="BarcodeTest/barcode_js_test.js"></script>
-    <script type="text/javascript" src="BarcodeTest/barcode_js_spec.js"></script>
+	<!--<script type="text/javascript" src="BarcodeTest/barcode_js_test.js"></script>
+    <script type="text/javascript" src="BarcodeTest/barcode_js_spec.js"></script> -->
 	
 	
     <!-- include source files here... -->
@@ -113,11 +113,11 @@
             };
 
             function execJasmine() {
-            	/*var oldCallback = jasmineEnv.currentRunner().finishCallback;
+            	var oldCallback = jasmineEnv.currentRunner().finishCallback;
 				jasmineEnv.currentRunner().finishCallback = function () {
 					oldCallback.apply(this, arguments);
 					window.location.href = '/app/SpecRunnerBarcode.html';
-				};*/
+				};
                 jasmineEnv.execute();
             }
         })();
