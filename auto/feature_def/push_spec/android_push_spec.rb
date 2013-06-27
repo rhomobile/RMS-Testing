@@ -109,6 +109,9 @@ device_list.each do |dev|
       stop_apps
       cleanup_apps
 
+      puts "Stopping local server"
+      $server.shutdown
+
       TEST_PKGS.each do |pkg|
         puts "Uninstalling package #{pkg} ..."
         system "adb #{$deviceOpts} uninstall #{pkg}"
@@ -116,11 +119,6 @@ device_list.each do |dev|
 
       `adb emu kill` if $deviceOpts == '-e' # running emulator
       system "kill -9 #{$logcat_pid}" if $logcat_pid
-
-      # puts "Uninstalling package com.rhomobile.rho_push_client ..."
-      # system "adb uninstall com.rhomobile.rho_push_client"
-      # puts "Uninstalling package com.motsolutions.cto.services.ans ..."
-      # system "adb uninstall com.motsolutions.cto.services.ans"
     end
 
     def expect_request(name)

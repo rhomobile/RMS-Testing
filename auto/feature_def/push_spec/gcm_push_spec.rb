@@ -254,9 +254,12 @@ describe 'GCM push spec' do
 #    end
   end
 
-#  after(:all) do
-#    puts "Stopping local server"
-#    $server.shutdown
-#
-#  end
+ after(:all) do
+   puts "Stopping android emulator"
+  `adb emu kill`
+
+   puts "Stopping local server"
+   $server.shutdown
+ end
+
 end
