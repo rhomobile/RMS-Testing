@@ -183,10 +183,13 @@
       var cv = db.$execute_sql("select * from CHANGED_VALUES");
       expect(cv[0].map.update_type).toEqual("create");
 
+      cv=db.$execute_sql("delete from CHANGED_VALUES");
+      expect(cv).toEqual([]);
+
       var obj = Modelsync.find("first");
       obj.destroy();
       cv = db.$execute_sql("select * from CHANGED_VALUES");
-      expect(cv).toEqual([]);
+      expect(cv[0].map.update_type).toEqual("delete");
     });
 
     it('deletes all objects of specific model in database', function() {
@@ -859,6 +862,27 @@ describe("<model's fixed_schema>", function() {
 
     dbchanged = dblocal.$execute_sql("select * from CHANGED_VALUES");
     expect(dbchanged).toEqual([]);
+  });
+
+  it('destroys fixedSchema item after CHANGED_VALUES deleted', function() {
+    Model2.create({name:"testfixed"});
+    var obj = Model2.find("first");
+    expect(obj.get("name")).toEqual("testfixed");
+
+    var dblocal = Rho.ORMHelper.dbConnection("local");
+    var dboutput = dblocal.$execute_sql("select * from ProductSync");
+    expect(dboutput[0].map.name).toEqual("testfixed");
+
+    var dbchanged = dblocal.$execute_sql("select * from CHANGED_VALUES");
+    expect(dbchanged[0].map.update_type).toEqual("create");
+    var cv = db.$execute_sql("delete from CHANGED_VALUES");
+    expect(cv).toEqual([]);
+
+    obj = Model2.find("first");
+    obj.destroy();
+
+    cv = db.$execute_sql("select * from CHANGED_VALUES");
+    expect(cv[0].map.update_type).toEqual("delete");
   });
 
   it("should make object fixedSchema",function(){
