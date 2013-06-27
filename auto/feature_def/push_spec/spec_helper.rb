@@ -5,7 +5,7 @@ load File.join($rho_root,'Rakefile')
 load File.join($rho_root,'platform','android','build','android.rake')
 load File.join($rho_root,'platform','wm','build','wm.rake')
 
-$use_own_rhoconnect_start = false
+$use_own_rhoconnect_start = true
 
 def convert_to_windows_path_style_str(pathStr)
         # RDBServer doesn't work properly with '/' in the CAB file paths
