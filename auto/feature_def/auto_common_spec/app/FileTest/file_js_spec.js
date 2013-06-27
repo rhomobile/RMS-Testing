@@ -1,9 +1,9 @@
-describe("FILE JS API", function () {
+describe("File JS API", function () {
 
 	var userFolder = Rho.Application.userFolder;
 	var publicFolder = Rho.RhoFile.join(Rho.Application.publicFolder)
 	var fileName = "rhoconfig.txt"
-	var path = Rho.RhoFile.join(Rho.Application.userFolder, "rhoconfig.txt")	
+	var path = Rho.RhoFile.join(Rho.Application.appsBundleFolder, "rhoconfig.txt")	
 	var invalidpath = "/programFiles/Test/rholog.txt"
 	var dirName = Rho.RhoFile.join(userFolder,"RMS4")		
 	var destFilePath = publicFolder + fileName
@@ -924,48 +924,4 @@ describe("FILE JS API", function () {
 		fileForWrite.close();
 		
 	});
-	
-	
-	
-	
-	
-		
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-		
-		
-		
-		
-		
-		
-		
-		
-	
-
-
-
-
 });

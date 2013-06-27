@@ -102,11 +102,11 @@ describe("ScreenOrientation JS API Test", function() {
 		});
 	});
 
-	it("VT281-0910 | Set autoRotate as false and call righthad method |", function() {
+	it("VT281-0910 | Set autoRotate as false and call righthand method |", function() {
 
 		runs(function()
 		{
-			dispCurrentProcess("VT281-0910 | Set autoRotate as false and call righthad method");
+			dispCurrentProcess("VT281-0910 | Set autoRotate as false and call righthand method");
 			Rho.ScreenOrientation.setScreenOrientationEvent(screenorientation_callback);
 			Rho.ScreenOrientation.autoRotate = false;
 			Rho.ScreenOrientation.rightHanded();
@@ -134,7 +134,7 @@ describe("ScreenOrientation JS API Test", function() {
 
 		waitsFor(function()
 		{
-			return captured;
+			return callbackFired;
 		}, 'The Screen Orientation should display', 10000);
 
 		runs(function()
