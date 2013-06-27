@@ -1,4 +1,4 @@
-describe("FILE JS API", function () {
+describe("File JS API", function () {
 
 	var userFolder = Rho.Application.userFolder;
 	var publicFolder = Rho.RhoFile.join(Rho.Application.publicFolder)
@@ -924,48 +924,4 @@ describe("FILE JS API", function () {
 		fileForWrite.close();
 		
 	});
-	
-	
-	
-	
-	
-		
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-		
-		
-		
-		
-		
-		
-		
-		
-	
-
-
-
-
 });

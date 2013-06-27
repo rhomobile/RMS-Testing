@@ -1,13 +1,14 @@
-describe("System module JS test starts here", function () {
+describe("System JS API", function () {
+
+	describe("server port", function() {
+		it("should return free server port", function(){
+			expect(Rho.System.freeServerPort).toBeBetween(1024, 65536);
+			}
+		);
+	});
 
 
-    it("It should return free server port", function(){
-        expect(Rho.System.freeServerPort).toBeBetween(1024, 65536);
-        }
-    );
-
-
-    describe("System module - setting directly test starts here", function () {
+    describe("properties directly", function () {
 
         if (isApplePlatform()) {
             it("VT300-003 | should set applicationIconBadge to 1", function () {
@@ -192,7 +193,7 @@ describe("System module JS test starts here", function () {
 
     });
 
-    describe("System module - setProperty / getProperhy tests starts Here", function () {
+    describe("setProperty / getProperty", function () {
 
         for (var i = 0; i < sys_setget_property.length; i++) {
             (function (idx) {
@@ -216,7 +217,7 @@ describe("System module JS test starts here", function () {
         }
     });
 
-    describe("System module - setProperties / getProperties test starts here", function () {
+    describe("setProperties / getProperties", function () {
 
         for (var i = 0; i < sys_setget_properties.length; i++) {
             (function (idx) {
@@ -250,9 +251,7 @@ describe("System module JS test starts here", function () {
         }
     });
 
-    
-
-    describe("FileSystem tests", function () {
+    describe("FileSystem", function () {
 
         var tempDirectory = Rho.RhoFile.join(Rho.Application.userFolder, 'tempDirectory');
         var target = Rho.RhoFile.join(tempDirectory, 'target.zip');
