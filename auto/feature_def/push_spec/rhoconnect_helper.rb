@@ -158,7 +158,6 @@ module RhoconnectHelper
 	end
 
 	def self.start_rhoconnect_stack(dir,reset = false)
-
 		if @@enable_redis
 			puts "run redis"
 			start_redis
@@ -174,13 +173,6 @@ module RhoconnectHelper
 		puts "run rhoconnect"
 		start_server(dir)
 		sleep(10)
-=begin
-		if @@enable_rails
-			puts "run rails"
-			start_rails
-			sleep 10
-		end
-=end
 		if reset
 			puts "reset rhoconnect"
 			reset_server
@@ -201,12 +193,7 @@ module RhoconnectHelper
 
 		puts "stop rhoconnect"
 		stop_server
-=begin
-		if @@enable_rails
-			puts "stop rails"
-			stop_rails
-		end
-=end
+
 		if @@enable_push
 			puts "stop rhoconnect push"
 			stop_rhoconnect_push

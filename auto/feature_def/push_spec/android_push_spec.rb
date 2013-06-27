@@ -37,6 +37,26 @@ require File.join($rho_root,'platform','android','build','android_tools.rb')
 require_relative './rhoconnect_helper'
 require_relative './spec_helper'
 
+puts "-- Starting local server"
+$server, addr, port = Jake.run_local_server
+File.open(File.join($spec_path, 'rhoconnect_push_client', 'app', 'local_server.rb'), 'w') do |f|
+  f.puts "SPEC_LOCAL_SERVER_HOST = '#{addr}'"
+  f.puts "SPEC_LOCAL_SERVER_PORT = #{port}"
+end
+$server.mount_proc('/', nil) do |req, res|
+  query = req.query
+  # puts "Request headers: #{req.header.inspect}"
+  # puts "Request query: #{query.inspect}"
+  puts "Local server:"
+  puts " Headers: #{req.header.inspect}"
+  puts " Query: #{query.inspect}"
+  res.status = 200
+  $mutex.synchronize do
+    $requests << req
+    $signal.signal
+  end
+end
+
 $deviceId = nil
 $deviceOpts = '-e'
 out = `adb devices`
@@ -46,36 +66,15 @@ device_list.shift # skip "List of devices attached "
 device_list << '' if device_list.empty?
 device_list.each do |dev|
   if dev == ''
-    puts "Running push specs on android emulator"
+    puts "-- Running push specs on android emulator"
   else
     $deviceId = dev.split("\t")[0]
     $deviceOpts = "-s #{$deviceId}"
-    puts "Running push specs on device #{$deviceId}"
+    puts "-- Running push specs on device #{$deviceId}"
   end
 
   describe 'Android push spec' do
     before(:all) do
-      #TODO: check that Rhoelements gem is installed
-      puts "Starting local server"
-      $server, addr, port = Jake.run_local_server
-      File.open(File.join($spec_path, 'rhoconnect_push_client', 'app', 'local_server.rb'), 'w') do |f|
-        f.puts "SPEC_LOCAL_SERVER_HOST = '#{addr}'"
-        f.puts "SPEC_LOCAL_SERVER_PORT = #{port}"
-      end
-
-      $server.mount_proc('/', nil) do |req, res|
-        query = req.query
-        # puts "Request headers: #{req.header.inspect}"
-        # puts "Request query: #{query.inspect}"
-        puts "Local server:"
-        puts " Headers: #{req.header.inspect}"
-        puts " Query: #{query.inspect}"
-        res.status = 200
-        $mutex.synchronize do
-          $requests << req
-          $signal.signal
-        end
-      end
       run_apps($platform)
       @api_token = RhoconnectHelper.api_post('system/login', { :login => 'rhoadmin', :password => '' })
       # puts "API token: #{@api_token}"
