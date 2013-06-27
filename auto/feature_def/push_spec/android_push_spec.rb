@@ -30,7 +30,6 @@ $signal = ConditionVariable.new
 $mutex = Mutex.new
 # Assume redis up and running. Do not touch it!
 $rhoconnect_use_redis = false # true will start/stop it
-$build_required = true
 
 require File.join($rho_root,'lib','build','jake.rb')
 require File.join($rho_root,'platform','android','build','android_tools.rb')
@@ -56,6 +55,31 @@ $server.mount_proc('/', nil) do |req, res|
     $signal.signal
   end
 end
+
+#
+appname = "rhoconnect_push_client"
+$app_path = File.expand_path(File.join(File.dirname(__FILE__),appname))
+File.open(File.join($app_path, 'app', 'sync_server.rb'), 'w') do |f|
+  f.puts "SYNC_SERVER_HOST = '#{RhoconnectHelper.host}'"
+  f.puts "SYNC_SERVER_PORT = #{RhoconnectHelper.port}"
+end
+File.open(File.join($app_path, 'app', 'push_server.rb'), 'w') do |f|
+  f.puts "PUSH_SERVER_HOST = '#{RhoconnectHelper.push_host}'"
+  f.puts "PUSH_SERVER_PORT = #{RhoconnectHelper.push_port}"
+end
+# Patch rhodes 'rhoconfig.txt' file
+cfgfile = File.join($app_path, 'rhoconfig.txt')
+cfg = File.read(cfgfile)
+cfg.gsub!(/(syncserver.*)/, "syncserver = 'http://#{RhoconnectHelper.host}:#{RhoconnectHelper.port}'")
+cfg.gsub!(/(rhoconnect_push_server.*)/, "rhoconnect_push_server = 'http://#{RhoconnectHelper.push_host}:#{RhoconnectHelper.push_port}'")
+cfg.gsub!(/(Push.rhoconnect.pushServer.*)/, "Push.rhoconnect.pushServer = 'http://#{RhoconnectHelper.push_host}:#{RhoconnectHelper.push_port}'")
+File.open(cfgfile, 'w') { |f| f.write cfg }
+#
+FileUtils.chdir File.join($spec_path, 'rhoconnect_push_client')
+puts "\nBuilding rhodes app ..."
+puts "rake device:#{$platform}:debug"
+raise "Failed to build rhodes app" unless system("rake device:#{$platform}:debug")
+FileUtils.chdir $spec_path
 
 $deviceId = nil
 $deviceOpts = '-e'
