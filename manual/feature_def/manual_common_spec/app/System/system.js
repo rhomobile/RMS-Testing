@@ -77,17 +77,6 @@ function getkeyboardState()
 	$("#Rho_System_keyboardState span.result").text(JSON.stringify(data));
 }
 
-function callapplicationInstall(applicationUrl)
-{
-	
-	Rho.System.applicationInstall(applicationUrl);
-}
-
-function callapplicationUninstall(applicationName)
-{
-	
-	Rho.System.applicationUninstall(applicationName);
-}
 
 function callbringToFront()
 {
@@ -106,13 +95,12 @@ function callgetStartParams()
 	alert(getStartParamsValue);
 }
 
-function callisApplicationInstalled(appinstalledValue)
-{
-	data = Rho.System.isApplicationInstalled(appinstalledValue)
-	if(data == 1)
-		alert(appinstalledValue+" application is installed in the device");
-	else
-		alert(appinstalledValue+" application is not installed in the device");
+function callisApplicationInstalled(aString) {
+    var isInstalled = Rho.System.isApplicationInstalled(aString)
+    if (isInstalled)
+        alert(aString + " application is installed in the device");
+    else
+        alert(aString + " application is not installed in the device");
 }
 
 function callopenUrl(openurlValue)

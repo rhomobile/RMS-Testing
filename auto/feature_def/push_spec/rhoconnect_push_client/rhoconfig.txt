@@ -89,9 +89,17 @@ use_bb_full_browser=6
 syncserver = 'http://192.168.1.117:9292'
 
 # An old way configure push server
+<<<<<<< HEAD
+rhoconnect_push_server = 'http://192.168.1.116:8675'
+rhoconnect_push_appname = 'someappname'
+
+# A new way configure push server
+Push.rhoconnect.pushServer = 'http://192.168.1.116:8675'
+=======
 rhoconnect_push_server = 'http://192.168.1.117:8675'
 rhoconnect_push_appname = 'someappname'
 
 # A new way configure push server
 Push.rhoconnect.pushServer = 'http://192.168.1.117:8675'
+>>>>>>> a9d355e9af85a95355cf380bc43c0bb002616c23
 Push.rhoconnect.pushAppName = 'someappname'

@@ -450,35 +450,37 @@
     <div class="method_tests wm">
         <div class="test_scenario">
             <div class="test_scenario_controls">
-                <a href="javascript:void(0)" onclick="callapplicationUninstall('TestAppWM6.5');"> call
+                <a href="javascript:void(0)" onclick="Rho.System.applicationUninstall('TestAppWM6.5');"> call
                     applicationUninstall with application name 'TestAppWM6.5'</a>
             </div>
         </div>
     </div>
 
-    <div class="method_tests wm">CE <br/>
+    <!--<div class="method_tests wm">CE <br/>
 
         <div class="test_scenario">
             <div class="test_scenario_controls">
-                <a href="javascript:void(0)" onclick="callapplicationUninstall('TestAppCE');"> call applicationUninstall
+                <a href="javascript:void(0)" onclick="Rho.System.applicationUninstall('TestAppCE');"> call
+                    applicationUninstall
                     with application name 'TestAppCE'</a>
             </div>
         </div>
-    </div>
+    </div>-->
 
-    <div class="method_tests win32">
+    <!--<div class="method_tests win32">
         <div class="test_scenario">
             <div class="test_scenario_controls">
-                <a href="javascript:void(0)" onclick="callapplicationUninstall('everywan');"> call applicationUninstall
+                <a href="javascript:void(0)" onclick="Rho.System.applicationUninstall('everywan');"> call
+                    applicationUninstall
                     with application name 'everywan'</a>
             </div>
         </div>
-    </div>
+    </div>-->
 
     <div class="method_tests android">
         <div class="test_scenario">
             <div class="test_scenario_controls">
-                <a href="javascript:void(0)" onclick="callapplicationUninstall('com.rhomobile.testapp');"> call
+                <a href="javascript:void(0)" onclick="Rho.System.applicationUninstall('com.rhomobile.testapp');"> call
                     applicationUninstall with application name 'com.rhomobile.testapp'</a>
             </div>
         </div>
@@ -534,12 +536,12 @@
             <span class="test_scenario_number">VT300-077 <br/></span>
         </div>
     </div>
-    <div class="method_tests Android"> Android <br/>
+    <div class="method_tests android"> Android <br/>
 
         <div class="test_scenario">
             <div class="test_scenario_controls">
-                <a href="javascript:void(0)" onclick="callisApplicationInstalled('com.rhomobile.testapp');">Call
-                    isApplicationInstalled() with correct app name 'InstallTestapp'</a>
+                <a href="javascript:void(0)" onclick="var appName = 'com.rhomobile.testapp'; var isInstalled = Rho.System.isApplicationInstalled(appName); alert('isApplicationInstalled(' + appName + ') = ' + isInstalled);">Call
+                    isApplicationInstalled() with correct app name 'testtapp'</a>
             </div>
             <span class="test_scenario_number">VT300-077 <br/></span>
         </div>

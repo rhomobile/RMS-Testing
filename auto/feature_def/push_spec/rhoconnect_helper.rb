@@ -46,10 +46,18 @@ module RhoconnectHelper
 		@@port
 	end
 
+	def self.host=(rchost)
+		@@host = rchost
+	end
+
+	def self.port=(rcport)
+		@@port = rcport
+	end
+
 	@@server_pid = nil
 	@@resque_pid = nil
 	@@rhoconnect_push_pid = nil
-  @@redis_pid = nil
+  	@@redis_pid = nil
 
 	@@rc_out = $stdout
 	@@rc_err = $stderr
@@ -76,9 +84,15 @@ module RhoconnectHelper
 	def self.push_host
 		@@push_host
 	end
+	def self.push_host=(rcphost)
+		@@push_host = rcphost
+	end
 
 	def self.push_port
 		@@push_port
+	end
+	def self.push_port=(rcpport)
+		@@push_port = rcpport
 	end
 
 	@@server_path = nil
