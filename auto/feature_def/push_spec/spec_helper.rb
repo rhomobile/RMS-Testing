@@ -76,41 +76,6 @@ def run_apps(platform)
 		RhoconnectHelper.push_port = "8675"
 	end
 
-	# File.open(File.join($app_path, 'app', 'sync_server.rb'), 'w') do |f|
-	# 	f.puts "SYNC_SERVER_HOST = '#{RhoconnectHelper.host}'"
-	# 	f.puts "SYNC_SERVER_PORT = #{RhoconnectHelper.port}"
-	# end
-	# File.open(File.join($app_path, 'app', 'push_server.rb'), 'w') do |f|
-	# 	f.puts "PUSH_SERVER_HOST = '#{RhoconnectHelper.push_host}'"
-	# 	f.puts "PUSH_SERVER_PORT = #{RhoconnectHelper.push_port}"
-	# end
-
-	# Patch rhodes 'rhoconfig.txt' file
-	# cfgfile = File.join($app_path, 'rhoconfig.txt')
-	# cfg = File.read(cfgfile)
-	# cfg.gsub!(/(rhoconnect_push_server.*)/, "rhoconnect_push_server = 'http://#{RhoconnectHelper.push_host}:#{RhoconnectHelper.push_port}'")
-	# cfg.gsub!(/(Push.rhoconnect.pushServer.*)/, "Push.rhoconnect.pushServer = 'http://#{RhoconnectHelper.push_host}:#{RhoconnectHelper.push_port}'")
-	# File.open(cfgfile, 'w') { |f| f.write cfg }
-
-	# # Patching rhodes 'build.yml' file (setup sdk and extentions properties)
-	# push_client_path = File.join($spec_path, 'rhoconnect_push_client')
-	# File.open(File.join(push_client_path, "build.yml"), 'w') do |bf|
-	#   File.open(File.join(push_client_path, "build.yml.example"), 'r') do |f|
-	#     f.each do |line|
-	#       if line =~ /^sdk: '..\/..\/..\/..\/..\/rhodes'$/
-	#       	  # FIXME: using installed rhodes gem (beta.21)
-	#           bf.puts "#{line}"
-	#       elsif line =~ /Path-to-Motorola-Extensions/
-	#       	  # FIXME: using installed rhodes gem (beta.21)
-	#           bf.puts "  extensions: \"#{$rhoelements_root}/extensions\"\n"
-	#       else
-	#           bf.puts line
-	#       end
-	#     end
-	#   end
-	# end
-
-
 	if $platform == 'android'
 		if $deviceId
 			# Using attached device
