@@ -87,14 +87,15 @@ var arr_scanner_property = [
 	propertyValue	:	"reticle",
 	expectedResult	:	"reticle"
 },
-{
-	testName		:	"VT282-3012 | Set dpmMode:true | true",
-	propertyName	:	"dpmMode",
-	scannerTypes	:	"Imager",
-	OSTypes			:	"WINDOWS",
-	propertyValue	:	"true",
-	expectedResult	:	"true"
-},
+//  DCC - Removing DPM Mode test until Test script as it is only supported on a small number of scanner drivers (not all Imager Scanners)
+//{
+//	testName		:	"VT282-3012 | Set dpmMode:true | true",
+//	propertyName	:	"dpmMode",
+//	scannerTypes	:	"Imager",
+//	OSTypes			:	"WINDOWS",
+//	propertyValue	:	"true",
+//	expectedResult	:	"true"
+//},
 {
 	testName		:	"VT282-3013 | Set dpmMode:false | false",
 	propertyName	:	"dpmMode",
@@ -2260,7 +2261,7 @@ var arr_scanner_property = [
 	propertyName	:	"matrix2of5minLength",
 	scannerTypes	:	"All",
 	OSTypes			:	"All",
-	propertyValue	:	"09",
+	propertyValue	:	"9",
 	expectedResult	:	"9"
 },
 {
@@ -3159,22 +3160,23 @@ var arr_scanner_property = [
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
-/*{//NOT SUPPORTED ON GINGERBREAD.
-	testName		:	"VT282-4298 | Set usPlanetReportCheckDigit :true  | true",
-	propertyName	:	"usPlanetReportCheckDigit",
-	scannerTypes	:	"All",
-	OSTypes			:	"ANDROID",
-	propertyValue	:	"true",
-	expectedResult	:	"true"
-},
-{
-	testName		:	"VT282-4299 | Set usPlanetReportCheckDigit :false  | false",
-	propertyName	:	"usPlanetReportCheckDigit",
-	scannerTypes	:	"All",
-	OSTypes			:	"ANDROID",
-	propertyValue	:	"false",
-	expectedResult	:	"false"
-},*/
+//NOT SUPPORTED ON GINGERBREAD.
+//{
+//	testName		:	"VT282-4298 | Set usPlanetReportCheckDigit :true  | true",
+//	propertyName	:	"usPlanetReportCheckDigit",
+//	scannerTypes	:	"All",
+//	OSTypes			:	"ANDROID",
+//	propertyValue	:	"true",
+//	expectedResult	:	"true"
+//},
+//{
+//	testName		:	"VT282-4299 | Set usPlanetReportCheckDigit :false  | false",
+//	propertyName	:	"usPlanetReportCheckDigit",
+//	scannerTypes	:	"All",
+//	OSTypes			:	"ANDROID",
+//	propertyValue	:	"false",
+//	expectedResult	:	"false"
+//},
 {
 	testName		:	"VT282-4300 | Set usPostNet :true  | true",
 	propertyName	:	"usPostNet",
@@ -3190,23 +3192,24 @@ var arr_scanner_property = [
 	OSTypes			:	"All",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
-},/* //NOT SUPPORTED ON GINGERBREAD.
-{
-	testName		:	"VT282-4302 | Set usPostNetReportCheckDigit :true  | true",
-	propertyName	:	"usPostNetReportCheckDigit",
-	scannerTypes	:	"All",
-	OSTypes			:	"ANDROID",
-	propertyValue	:	"true",
-	expectedResult	:	"true"
 },
-{
-	testName		:	"VT282-4303 | Set usPostNetReportCheckDigit :false  | false",
-	propertyName	:	"usPostNetReportCheckDigit",
-	scannerTypes	:	"All",
-	OSTypes			:	"ANDROID",
-	propertyValue	:	"false",
-	expectedResult	:	"false"
-},*/
+//NOT SUPPORTED ON GINGERBREAD.
+//{
+//	testName		:	"VT282-4302 | Set usPostNetReportCheckDigit :true  | true",
+//	propertyName	:	"usPostNetReportCheckDigit",
+//	scannerTypes	:	"All",
+//	OSTypes			:	"ANDROID",
+//	propertyValue	:	"true",
+//	expectedResult	:	"true"
+//},
+//{
+//	testName		:	"VT282-4303 | Set usPostNetReportCheckDigit :false  | false",
+//	propertyName	:	"usPostNetReportCheckDigit",
+//	scannerTypes	:	"All",
+//	OSTypes			:	"ANDROID",
+//	propertyValue	:	"false",
+//	expectedResult	:	"false"
+//},
 {
 	testName		:	"VT282-4304 | Set webcode :true  | true",
 	propertyName	:	"webcode",

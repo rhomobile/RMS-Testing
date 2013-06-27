@@ -18,6 +18,8 @@ if File.file?(cfgfilename)
   $rhoconnect_root = File.expand_path($rhoconnect_root) if $rhoconnect_root
   $rhoelements_root = config["rhoelements"]
   $rhoelements_root = File.expand_path($rhoelements_root) if $rhoelements_root
+  $testsuite_root = config["testsuite_root"]
+  $testsuite_root = File.expand_path($testsuite_root) if $testsuite_root
 end
 
 unless $rho_root
@@ -30,7 +32,7 @@ puts "rhoelements location: #{$rhoelements_root}"
 
 $spec_path = FileUtils.pwd
 $platform = 'windows'
-$device_id = nil
+$device_id = '192.168.1.122'
 $server = nil
 $requests = []
 $signal = ConditionVariable.new
@@ -38,7 +40,6 @@ $mutex = Mutex.new
 $rhoconnect_use_redis = true # true will start/stop it
 
 require File.join($rho_root,'lib','build','jake.rb')
-require File.join($rho_root,'platform','android','build','android_tools.rb')
 require_relative './rhoconnect_helper'
 require_relative './spec_helper'
 
@@ -101,6 +102,7 @@ describe 'Windows Mobile push spec' do
   end
 
   it 'should login' do
+    'pending'.should_not be_nil
     # puts 'Waiting message with login errCode'
     #pending
     # expect_request('error').should == "0"
@@ -108,6 +110,7 @@ describe 'Windows Mobile push spec' do
 
   it 'should register' do
     puts 'Waiting message with Rhoconnect registaration...'
+    'pending'.should_not be_nil
     #pending
     # $device_id = expect_request('device_id')
     # $device_id.should_not be_nil
@@ -115,6 +118,7 @@ describe 'Windows Mobile push spec' do
   end
 
   it 'should proceed push message at foregro"und' do
+    'pending'.should_not be_nil
     #pending
     # sleep 5
     # puts 'Sending push message...'

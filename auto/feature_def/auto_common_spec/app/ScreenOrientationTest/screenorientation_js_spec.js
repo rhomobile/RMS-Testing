@@ -1,4 +1,4 @@
-describe("Screen Orientation Test", function() {
+describe("ScreenOrientation JS API Test", function() {
 
 	var displayflag = false;
 	var orientationType = '';
@@ -40,7 +40,7 @@ describe("Screen Orientation Test", function() {
 
 		runs(function()
 		{
-			expect(orientationType).toEqual("rightHanded");
+			expect(orientationType).toEqual("righthanded");
 		});
 
 	});
@@ -60,7 +60,7 @@ describe("Screen Orientation Test", function() {
 
 		runs(function()
 		{
-			expect(orientationType).toEqual("leftHanded");
+			expect(orientationType).toEqual("lefthanded");
 		});
 	});
 
@@ -79,7 +79,7 @@ describe("Screen Orientation Test", function() {
 
 		runs(function()
 		{
-			expect(orientationType).toEqual("upsideDown");
+			expect(orientationType).toEqual("upsidedown");
 		});
 	});
 
@@ -102,11 +102,11 @@ describe("Screen Orientation Test", function() {
 		});
 	});
 
-	it("VT281-0910 | Set autoRotate as false and call righthad method |", function() {
+	it("VT281-0910 | Set autoRotate as false and call righthand method |", function() {
 
 		runs(function()
 		{
-			dispCurrentProcess("VT281-0910 | Set autoRotate as false and call righthad method");
+			dispCurrentProcess("VT281-0910 | Set autoRotate as false and call righthand method");
 			Rho.ScreenOrientation.setScreenOrientationEvent(screenorientation_callback);
 			Rho.ScreenOrientation.autoRotate = false;
 			Rho.ScreenOrientation.rightHanded();
@@ -119,7 +119,7 @@ describe("Screen Orientation Test", function() {
 
 		runs(function()
 		{
-			expect(orientationType).toEqual("rightHanded");
+			expect(orientationType).toEqual("righthanded");
 		});
 	});
 
@@ -134,12 +134,12 @@ describe("Screen Orientation Test", function() {
 
 		waitsFor(function()
 		{
-			return captured;
+			return callbackFired;
 		}, 'The Screen Orientation should display', 10000);
 
 		runs(function()
 		{
-			expect(callbackFired).toEqual("rightHanded");
+			expect(callbackFired).toEqual("righthanded");
 		});
 	});
 

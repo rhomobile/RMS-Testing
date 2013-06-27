@@ -144,3 +144,29 @@ function extraMenuNoAction()
 
   Rho.NativeMenubar.extraButton = { label: 'Home',action:'',disabled:false};
 } 
+
+function mainButton()
+{
+	Rho.NativeMenubar.mainButton =[{label:'Log',action:'Log',disabled:false}]
+}
+
+function mainButtonDisabled()
+{
+	Rho.NativeMenubar.mainButton =[{label:'Log',action:'Log',disabled:true}]
+}
+
+function extraButton()
+{
+	 Rho.NativeMenubar.extraButton = { label: 'Quit',action:'Quit',disabled:false};
+}
+
+function extraButtonDisabled()
+{
+	 Rho.NativeMenubar.extraButton = { label: 'Quit',action:'Quit',disabled:true};
+}
+
+function nativeDefault()
+{
+	var app=Rho.NativeMenubar.defaultMainMenu;
+	Rho.Log.info(natvieDefaultvalues, 'app');
+}

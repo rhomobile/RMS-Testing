@@ -870,79 +870,80 @@ describe("Log JS API", function () {
 		});
 		*/
 
-		
-		// Set Log Memory period to 5 seconds
-		it("VT290-355 : Set Log Memory period to 5 secs | 5000", function() {
-			runs(function(){
-				Rho.Log.level = 0;
-				Rho.LogCapture.clear();
+		if (Rho.System.platform != "WP8") {
 
-				Rho.Log.memoryPeriod = 1000;
-				expectedValue = 1000;
-				memPeriod = Rho.Log.memoryPeriod;
-				expect(memPeriod).toEqual(expectedValue);
+		    // Set Log Memory period to 5 seconds
+		    it("VT290-355 : Set Log Memory period to 5 secs | 5000", function () {
+		        runs(function () {
+		            Rho.Log.level = 0;
+		            Rho.LogCapture.clear();
 
-				var info = "Info : Memory log should display in 5 secs interval | 0";
-				Rho.Log.info(info, "VT290-355");
-			});
+		            Rho.Log.memoryPeriod = 1000;
+		            expectedValue = 1000;
+		            memPeriod = Rho.Log.memoryPeriod;
+		            expect(memPeriod).toEqual(expectedValue);
 
-			waits(1500);
+		            var info = "Info : Memory log should display in 5 secs interval | 0";
+		            Rho.Log.info(info, "VT290-355");
+		        });
 
-			runs(function(){
-				expect(Rho.LogCapture.read().count("MEMORY")).toEqual(1);
+		        waits(1500);
 
-				Rho.Log.memoryPeriod = 0;
+		        runs(function () {
+		            expect(Rho.LogCapture.read().count("MEMORY")).toEqual(1);
 
-				Rho.LogCapture.clear();
+		            Rho.Log.memoryPeriod = 0;
 
-				Rho.Log.level = 0;
-				//Rho.Log.memoryPeriod = 5000;
-			});
+		            Rho.LogCapture.clear();
 
-			/*
-			waits(4800);
+		            Rho.Log.level = 0;
+		            //Rho.Log.memoryPeriod = 5000;
+		        });
 
-			runs(function(){
-				expect(Rho.LogCapture.read().count("MEMORY")).toEqual(0);
-			});
+		        /*
+                waits(4800);
+    
+                runs(function(){
+                    expect(Rho.LogCapture.read().count("MEMORY")).toEqual(0);
+                });
+    
+                waits(600);
+    
+                runs(function(){
+                    Rho.Log.memoryPeriod = 0;
+    
+                    expect(Rho.LogCapture.read().count("MEMORY")).toEqual(1);
+    
+                    Rho.LogCapture.clear();
+                });
+    */
+		    });
 
-			waits(600);
 
-			runs(function(){
-				Rho.Log.memoryPeriod = 0;
+		    // Set Log Memory period to 10 seconds
+		    it("VT290-356 : Set Log Memory period to 10 secs | 10000", function () {
+		        runs(function () {
+		            Rho.Log.level = 0;
+		            var info = "Info : Memory log should display in 10 secs interval | 0";
+		            Rho.Log.info(info, "VT290-356");
+		            expectedValue = 10000;
+		            Rho.Log.memoryPeriod = 10000;
+		            memPeriod = Rho.Log.memoryPeriod;
+		            expect(memPeriod).toEqual(expectedValue);
 
-				expect(Rho.LogCapture.read().count("MEMORY")).toEqual(1);
+		            waits(10200);
 
-				Rho.LogCapture.clear();
-			});
-*/
-		});
+		            runs(function () {
+		                Rho.Log.memoryPeriod = 0;
 
+		                expect(Rho.LogCapture.read().count("MEMORY")).toEqual(1);
 
-		// Set Log Memory period to 10 seconds
-		it("VT290-356 : Set Log Memory period to 10 secs | 10000", function() {
-			runs(function(){
-				Rho.Log.level=0;
-				var info = "Info : Memory log should display in 10 secs interval | 0";
-				Rho.Log.info(info, "VT290-356");
-				expectedValue = 10000;
-				Rho.Log.memoryPeriod = 10000;
-				memPeriod = Rho.Log.memoryPeriod;
-				expect(memPeriod).toEqual(expectedValue);
+		                Rho.LogCapture.clear();
+		            });
+		        });
+		    });
 
-				waits(10200);
-
-				runs(function(){
-					Rho.Log.memoryPeriod = 0;
-
-					expect(Rho.LogCapture.read().count("MEMORY")).toEqual(1);
-
-					Rho.LogCapture.clear();
-				});
-			});
-		});
-
-		
+		}
 		// Set Netrace to true
 		it("VT290-361 : Set netrace to true | true", function() {
 			var flag = false;

@@ -1,13 +1,14 @@
-describe("System module JS test starts here", function () {
+describe("System JS API", function () {
+
+	describe("server port", function() {
+		it("should return free server port", function(){
+			expect(Rho.System.freeServerPort).toBeBetween(1024, 65536);
+			}
+		);
+	});
 
 
-    it("It should return free server port", function(){
-        expect(Rho.System.freeServerPort).toBeBetween(1024, 65536);
-        }
-    );
-
-
-    describe("System module - setting directly test starts here", function () {
+    describe("properties directly", function () {
 
         if (isApplePlatform()) {
             it("VT300-003 | should set applicationIconBadge to 1", function () {
@@ -192,7 +193,7 @@ describe("System module JS test starts here", function () {
 
     });
 
-    describe("System module - setProperty / getProperhy tests starts Here", function () {
+    describe("setProperty / getProperty", function () {
 
         for (var i = 0; i < sys_setget_property.length; i++) {
             (function (idx) {
@@ -216,7 +217,7 @@ describe("System module JS test starts here", function () {
         }
     });
 
-    describe("System module - setProperties / getProperties test starts here", function () {
+    describe("setProperties / getProperties", function () {
 
         for (var i = 0; i < sys_setget_properties.length; i++) {
             (function (idx) {
@@ -250,9 +251,7 @@ describe("System module JS test starts here", function () {
         }
     });
 
-    
-
-    describe("FileSystem tests", function () {
+    describe("FileSystem", function () {
 
         var tempDirectory = Rho.RhoFile.join(Rho.Application.userFolder, 'tempDirectory');
         var target = Rho.RhoFile.join(tempDirectory, 'target.zip');
@@ -295,7 +294,8 @@ describe("System module JS test starts here", function () {
             Rho.System.zipFile(target, sourceA, 'password');
 
            var result = Rho.System.unzipFile(target);
-           expect(Rho.RhoFile.exists(Rho.RhoFile.join(tempDirectory, 'do not remove me.txt'))).toEqual(false);
+           expect(Rho.RhoFile.exists(Rho.RhoFile.join(tempDirectory, 'do not remove me.txt'))).toEqual(true);
+           expect( Rho.RhoFile.getFileSize(Rho.RhoFile.join(tempDirectory, 'do not remove me.txt')) ).toEqual(0);
         });
 
         it("VT300-095 | Test unzipFile method with password", function () {
@@ -314,11 +314,13 @@ describe("System module JS test starts here", function () {
             sources[0] = sourceA;
             sources[1] = sourceB;
 
-            var result = Rho.System.zipFiles(target, tempDirectory, sources);
+            var result = Rho.System.zipFiles(target, Rho.RhoFile.dirname(sources[0]), sources);
 
             result = Rho.System.unzipFile(target);
             expect(Rho.RhoFile.exists(Rho.RhoFile.join(tempDirectory, 'do not remove me.txt'))).toEqual(true);
+            expect( Rho.RhoFile.getFileSize(Rho.RhoFile.join(tempDirectory, 'do not remove me.txt')) ).toBeGreaterThan(0);
             expect(Rho.RhoFile.exists(Rho.RhoFile.join(tempDirectory, 'do not remove me too.txt'))).toEqual(true);
+            expect( Rho.RhoFile.getFileSize(Rho.RhoFile.join(tempDirectory, 'do not remove me too.txt')) ).toBeGreaterThan(0); 
            
         });
 

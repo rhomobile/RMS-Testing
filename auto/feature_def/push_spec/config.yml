@@ -7,3 +7,5 @@ rhoconnect: "../../../../rhoconnect"
 # path to rhoelements
 rhoelements: "../../../../Motorola-Extensions"
 
+# path to testsuite_root
+testsuite_root: "../../../../RMS-Testing"

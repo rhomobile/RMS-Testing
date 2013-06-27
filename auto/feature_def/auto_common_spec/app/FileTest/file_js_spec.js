@@ -1,9 +1,10 @@
-describe("FILE JS API", function () {
+describe("File JS API", function () {
 
 	var userFolder = Rho.Application.userFolder;
 	var publicFolder = Rho.RhoFile.join(Rho.Application.publicFolder)
 	var fileName = "rhoconfig.txt"
-	var path = Rho.RhoFile.join(Rho.Application.userFolder, "rhoconfig.txt")	
+	var testReadPath = Rho.RhoFile.join(Rho.Application.appsBundleFolder, "rhoconfig.txt")
+	var path = Rho.RhoFile.join(Rho.Application.userFolder, "testFile.txt")	
 	var invalidpath = "/programFiles/Test/rholog.txt"
 	var dirName = Rho.RhoFile.join(userFolder,"RMS4")		
 	var destFilePath = publicFolder + fileName
@@ -25,10 +26,19 @@ describe("FILE JS API", function () {
 	var Text4 = Rho.RhoFile.join(Text1,Text3)
 	var Text5 = Rho.RhoFile.join(Text4,Text2)
 	
-	
 	beforeEach(function () {
-		var flag = false
-			
+		var flag = false;
+
+		// cleanup for each run
+		var dirsToDelete = ["VT295052","/\\:*?<>|","Test!@#"]
+		for (var idx = 0; idx < dirsToDelete.length; ++idx)
+		{
+			var dir = Rho.RhoFile.join(dirName, dirsToDelete[idx]);
+			if (Rho.RhoFile.exists(dir))
+			{
+				Rho.RhoFile.deleteDir(dir);
+			}
+		}
 	});
 
 	// this function will execute after each of test case execution i.e it function
@@ -36,12 +46,26 @@ describe("FILE JS API", function () {
 			
 	});
 
+	
+	it("cleanup",function(){
+		// cleanup before global run
+		var filesToDelete = [fileMode1, fileMode2, fileMode3, fileMode4, fileMode5]
+		for (var idx = 0; idx < filesToDelete.length; ++idx)
+		{
+			var file = filesToDelete[idx];
+			if (Rho.RhoFile.exists(file))
+			{
+				Rho.RhoFile.deleteFile(file);
+			}
+		}
+	});
+
 	// Get basename of file
 	it("VT295-001 : get basename of file | 1", function() {
 		runs(function(){
 
 						
-			var baseName =Rho.RhoFile.basename(path)
+			var baseName =Rho.RhoFile.basename(testReadPath)
 			expect(baseName).toEqual(fileName);
 			Rho.Log.info("Test1", "VT290-001");
 			Rho.Log.info(Rho.Application.userFolder, "VT290-001");
@@ -289,7 +313,7 @@ describe("FILE JS API", function () {
 	// file exists 
 	it("VT295-027 : is File Exists | true ", function() {
 			
-		expect(Rho.RhoFile.exists(path)).toEqual(true)
+		expect(Rho.RhoFile.exists(testReadPath)).toEqual(true)
 			
 	});	
 	
@@ -303,7 +327,7 @@ describe("FILE JS API", function () {
 	// get File Size with valid path
 	it("VT295-030: get file size   | true",function(){
 		
-		var size = Rho.RhoFile.getFileSize(path);
+		var size = Rho.RhoFile.getFileSize(testReadPath);
 		if(size>0)
 			flag = true
 		else
@@ -342,7 +366,7 @@ describe("FILE JS API", function () {
 	// is dir with valid filename
 	it("VT295-034: is directory with valid filename  | false",function(){
 		
-		expect(Rho.RhoFile.isDir(path)).toEqual(false)
+		expect(Rho.RhoFile.isDir(testReadPath)).toEqual(false)
 	});	
 	
 	// isDir with invalid path
@@ -354,7 +378,7 @@ describe("FILE JS API", function () {
 	// is file with valid file path
 	it("VT295-046: isFile with valid filepath  | true",function(){
 		
-		expect(Rho.RhoFile.isFile(path)).toEqual(true)
+		expect(Rho.RhoFile.isFile(testReadPath)).toEqual(true)
 	});
 	
 	// is file with valid directory
@@ -427,11 +451,23 @@ describe("FILE JS API", function () {
 		var dirs = Rho.RhoFile.listDir(dirName);
 		var length = dirs.length;
 		if(dirs.length)
-			flag = true
+			flag = true;
 		else
-			flag = false
-		expect(flag).toEqual(true)
-		expect(dirs).toEqual(['.','..','Hello.txt','TestFile','testing.txt'])
+			flag = false;
+		expect(flag).toEqual(true);
+
+		// some files could be created during previous tests runs
+		// just test that all files listed below are in directory
+		var expected = ['.','..','Hello.txt','TestFile','testing.txt'];
+		var count = 0;
+		for(var j = 0; j < length; j++)
+		{
+			if (expected.indexOf(dirs[j]) > -1)
+			{
+				count++;
+			}
+		}
+		expect(count).toEqual(expected.length);
 		
 	});
 	
@@ -468,7 +504,7 @@ describe("FILE JS API", function () {
 	});
 	
 	// mkdir with invalid characters
-	it("VT295-049: make directory and is directory present| false",function(){
+	it("VT295-049: make directory and special characters | false",function(){
 		
 		var VT295056 = Rho.RhoFile.join(dirName, "/\:*?<>|")
 		Rho.RhoFile.makeDir(VT295056)
@@ -496,7 +532,7 @@ describe("FILE JS API", function () {
 		
 		var VT295059 = "C:/RaghavendraKC/Testing"
 		Rho.RhoFile.makeDirs(VT295059)	
-		expect(Rho.RhoFile.isDir(VT295059)).toEqual(true)
+		expect(Rho.RhoFile.isDir(VT295059)).toEqual(false)
 	});
 	
 	// mkdir with invalid path when top level directories not exists
@@ -573,7 +609,7 @@ describe("FILE JS API", function () {
 		
 		
 		var fOpen = new Rho.RhoFile(fileMode4,Rho.RhoFile.OPEN_FOR_READ_WRITE);
-		expect(Rho.RhoFile.exists(fileMode4)).toEqual(false)
+		expect(Rho.RhoFile.exists(fileMode4)).toEqual(true)
 		fOpen.close();
 		
 	});
@@ -626,7 +662,7 @@ describe("FILE JS API", function () {
 	
 	// Read File with path
 	it("VT295-064 : Read contents with path| true",function(){
-		var data = Rho.RhoFile.read(path)
+		var data = Rho.RhoFile.read(testReadPath)
 		if(data.length)
 			flag = true
 		else
@@ -650,14 +686,14 @@ describe("FILE JS API", function () {
 	it("VT295-066 : Read contents with specified size| true",function(){
 		
 		var fOpen = new Rho.RhoFile(path,Rho.RhoFile.OPEN_FOR_READ);
-		var data = fOpen.read(20)
+		var data = fOpen.read(20);
 		if(data.length)
 			flag = true
 		else
 			flag = false;
 		expect(flag).toEqual(true);
 		Rho.Log.info(data, "VT290-074");
-		fOpen.close()
+		fOpen.close();
 	});
 	
 	
@@ -912,60 +948,16 @@ describe("FILE JS API", function () {
 		
 		data = 'mydata';
 		
-		var fileForRead = new Rho.RhoFile(fileMode5,Rho.RhoFile.OPEN_FOR_READ);
 		var fileForWrite = new Rho.RhoFile(fileMode5,Rho.RhoFile.OPEN_FOR_WRITE);
 
 		fileForWrite.write(data);
-		fileForWrite.close();
-		var actual = fileForRead.readAll()
+		fileForWrite.flush();
+			
+		var actual = fileForWrite.readAll()
 		Rho.Log.info(actual, "VT290-097");
 		expect(actual).toEqual(data);
 
-		fileForRead.close();
+		fileForWrite.close();
 		
 	});
-	
-	
-	
-	
-	
-		
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-		
-		
-		
-		
-		
-		
-		
-		
-	
-
-
-
-
 });

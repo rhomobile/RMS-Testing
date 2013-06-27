@@ -1,5 +1,5 @@
-Object.equals = function(b) {
-	var act = this;
+function Testcompare(a, b) {
+	var act = a;
 	for(item in act) {  
 		if(typeof b[item] == 'undefined') {
 			return false;
@@ -71,44 +71,70 @@ describe("Video Capture module JS test starts here", function () {
 				expect(data).toEqual("high");
 			});	
 		//}
-		//if (isAndroidPlatform() || isApplePlatform() || isWindowsMobilePlatform()) {
-			it("VT281-0654 | Call getProperty method for filename videocapture|", function() {
-				var data = Rho.Videocapture.getProperty("filename");
-				expect(data).toEqual("videocapture");
-			});
-		//}	
+
 		
 		
-		it("VT281-0655 | Call getProperties method for filename,resolution, saveToGallery and duration videocapture|", function() {
-			var data = Rho.Videocapture.getProperties(['filename', 'resolution', 'saveToGallery', 'duration']);
-			var actual = {'filename': 'videocapture', 'resolution': 'high', 'saveToGallery': 'false', 'duration': '5000'};
-			expect(data.equals(actual)).toEqual(true);
-		});	
+
 		
 		it("VT281-0656 | Call setProperties method for filename,resolution, saveToGallery and duration videocapture|", function() {
-			Rho.Videocapture.setProperties({'filename':'/Temp/Rhovideocapture', 'resolution':'low', 'saveToGallery': 'true', 'duration': '10000'});
-			var data = Rho.Videocapture.getProperties(['filename', 'resolution', 'saveToGallery', 'duration']);
-			var actual = {'filename':'/Temp/Rhovideocapture', 'resolution':'low', 'saveToGallery': 'true', 'duration': '10000'};
-			expect(data.equals(actual)).toEqual(true);
+			Rho.Videocapture.setProperties({'filename':'/Temp/Rhovideocapture', 'resolution':'low', 'saveToGallery': true, 'duration': 10000});
+			var data = new Object();
+			data = Rho.Videocapture.getProperties(['filename', 'resolution', 'saveToGallery', 'duration']);
+			var actual = new Object();
+			if(isAndroidPlatform())
+			{
+				actual = {'filename':'/Temp/Rhovideocapture.mp4', 'resolution':'low', 'saveToGallery': true, 'duration': 10000};
+			}
+			if(isApplePlatform() || isWindowsMobilePlatform())
+			{
+				actual = {'filename':'/Temp/Rhovideocapture.mov', 'resolution':'low', 'saveToGallery': true, 'duration': 10000};
+			}
+			var res = Testcompare(data, actual)
+			expect(res).toEqual(true);
 		});	
 
 		it("VT281-0657 | Call getAllProperties method videocapture|", function() {
-			Rho.Videocapture.setProperties({'filename':'/Temp/Rhovideocapture', 'resolution':'low', 'saveToGallery': 'true', 'duration': '10000'});
-			var data = Rho.Videocapture.getAllProperties();
-			var actual = {'filename':'/Temp/Rhovideocapture', 'resolution':'low', 'saveToGallery': 'true', 'duration': '10000'};
-			expect(data.equals(actual)).toEqual(true);
+			Rho.Videocapture.setProperties({'filename':'/Temp/Rhovideocapture', 'resolution':'low', 'saveToGallery': true, 'duration': 10000});
+			var data = new Object();
+			data = Rho.Videocapture.getAllProperties();
+			var actual = new Object();
+			if(isAndroidPlatform())
+			{
+				actual = {'filename':'/Temp/Rhovideocapture.mp4', 'resolution':'low', 'saveToGallery': true, 'duration': 10000};
+			}
+			if(isApplePlatform() || isWindowsMobilePlatform())
+			{
+				actual = {'filename':'/Temp/Rhovideocapture.mov', 'resolution':'low', 'saveToGallery': true, 'duration': 10000};
+			}
+			var res = Testcompare(data, actual)
+			expect(res).toEqual(true);
 		});	
 
-		it("VT281-0658 | Call clearAllProperties method videocapture|", function() {
-			Rho.Videocapture.setProperties({'filename':'/Temp/Rhovideocapture', 'resolution':'low', 'saveToGallery': true, 'duration': '10000'});
-			Rho.Videocapture.clearAllProperties();
-			var data = Rho.Videocapture.getAllProperties();
-			var actual = {'filename': 'videocapture', 'resolution': 'high', 'saveToGallery': 'false', 'duration': '5000'};
-			expect(data.equals(actual)).toEqual(true);
-		});		
+	
 		
-		
-	});
+
+		it("VT281-0712 | Call getAllProperties method with callback videocapture|", function() {
+			Rho.Videocapture.setProperties({'filename':'/Temp/Rhovideocapture', 'resolution':'low', 'saveToGallery': true, 'duration': 10000});
+			var data = new Object();
+			data = Rho.Videocapture.getAllProperties(callbackgetproperties);
+			var actual = new Object();
+			if(isAndroidPlatform())
+			{
+				actual = {'filename':'/Temp/Rhovideocapture.mp4', 'resolution':'low', 'saveToGallery': true, 'duration': 10000};
+			}
+			if(isApplePlatform() || isWindowsMobilePlatform())
+			{
+				actual = {'filename':'/Temp/Rhovideocapture.mov', 'resolution':'low', 'saveToGallery': true, 'duration': 10000};
+			}
+			
+			var res = Testcompare(data, actual)
+			expect(callbackstatus).toEqual(true);
+			expect(res).toEqual(true);
+		});			
+	
+
+
+	});		
 
 	describe("Videocapture module - setProperty / getProperty tests starts Here", function () {
 

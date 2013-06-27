@@ -1,4 +1,4 @@
-describe("Barcode JS API Test", function() {
+describe("Barcode JS API", function() {
 	var	enableflag = false;
 	var	disableflag = false;
 	var getpropertiesdata ='';
@@ -104,7 +104,6 @@ describe("Barcode JS API Test", function() {
 							}
 
 							var objProperty = JSON.parse(strProperty);
-						
 							enumObject.setProperties(objProperty);
 
 							var strGetProperty = '["'+arrScanner[idx]['propertyName']+'"]';
@@ -256,22 +255,24 @@ describe("Barcode JS API Test", function() {
 								getpropertydata = data;
 								expect(getpropertydata).toEqual('true');								
 						});
+						
+						//  DCC - Removing this test as it is testing for ID property (unsupported)
+//						it("VT282-2006 | call getDefault |" + scnid, function() {
+//								alert(enumObject);
+//							    Rho.Barcode.setDefault(enumObject);
+//							    var defaultobj = Rho.Barcode.getDefault();						  
+//								expect(scnid).toEqual(defaultobj.getProperty('ID'));
+//						});
 
-						it("VT282-2006 | call getDefault |" + scnid, function() {
+						//  DCC - Removing this test as it is testing for ID property (unsupported)
+//						it("VT282-2006A | call Default |" + scnid, function() {
 
-							    Rho.Barcode.setDefault(enumObject);
-							    var defaultobj = Rho.Barcode.getDefault();						  
-								expect(scnid).toEqual(defaultobj.getProperty('ID'));
-						});
-
-						it("VT282-2006A | call Default |" + scnid, function() {
-
-							    //enumObject.clearAllProperties();
-							    //Rho.Barcode.setDefaultID( enumObject.getId() );
-							   // Rho.Barcode.default = enumObject;
-							   // var defaultobj = Rho.Barcode.default;
-								expect(scnid).toEqual(defaultobj.getProperty('ID'));
-						});
+//							    //enumObject.clearAllProperties();
+//							    //Rho.Barcode.setDefaultID( enumObject.getId() );
+//							   // Rho.Barcode.default = enumObject;
+//							   // var defaultobj = Rho.Barcode.default;
+//								expect(scnid).toEqual(defaultobj.getProperty('ID'));
+//						});
 			});
 
 			describe("Disable Scanner "+ scnid +": "+ scnname + scntype, function() {
@@ -370,60 +371,55 @@ describe("Barcode JS API Test", function() {
 
     }
 
-});
-
-
-
-describe("Enumerate Scanner ", function() {
-	var enumObjCount = false;
-
-	var enumCallback = function (enumobj){
-
-		enumobj.length>0 ? enumObjCount=true : enumObjCount=false
-
-	};
-
-	beforeEach(function() {
-		enumObjCount = false;
-	});
-
-	it("Enumerate Scanner callback as function", function() {
-				
-		runs(function() {
-			Rho.Barcode.enumerate(enumCallback);
+	describe("Enumerate Scanner ", function() {
+		var enumObjCount = false;
+	
+		var enumCallback = function (enumobj){
+	
+			enumobj.length>0 ? enumObjCount=true : enumObjCount=false
+	
+		};
+	
+		beforeEach(function() {
+			enumObjCount = false;
 		});
-		waitsFor(function(){
-			return enumObjCount;
-		});
-		runs(function(){
-			expect(enumObjCount).toEqual(true);
-		});
-	});
-
-	it("Enumerate Scanner with anonymous function as callback", function() {
-			
-		runs(function() {
-			Rho.Barcode.enumerate(function(obj){
-				enumCallback(obj);
+	
+		it("Enumerate Scanner callback as function", function() {
+					
+			runs(function() {
+				Rho.Barcode.enumerate(enumCallback);
+			});
+			waitsFor(function(){
+				return enumObjCount;
+			});
+			runs(function(){
+				expect(enumObjCount).toEqual(true);
 			});
 		});
-		waitsFor(function(){
-			return enumObjCount;
-		});
-		runs(function(){
-			expect(enumObjCount).toEqual(true);
-		});
- 	});
-
-	it("Enumerate Scanners without callback (Synchronous Access)", function() {
-			
-		runs(function() {
-			var obj = Rho.Barcode.enumerate();
-			callBackfired = enumCallback(obj);
-			expect(enumObjCount).toEqual(true);
-		});
- 	});
- 	
+	
+		it("Enumerate Scanner with anonymous function as callback", function() {
+				
+			runs(function() {
+				Rho.Barcode.enumerate(function(obj){
+					enumCallback(obj);
+				});
+			});
+			waitsFor(function(){
+				return enumObjCount;
+			});
+			runs(function(){
+				expect(enumObjCount).toEqual(true);
+			});
+	 	});
+	
+		it("Enumerate Scanners without callback (Synchronous Access)", function() {
+				
+			runs(function() {
+				var obj = Rho.Barcode.enumerate();
+				callBackfired = enumCallback(obj);
+				expect(enumObjCount).toEqual(true);
+			});
+	 	});
+	 	
+	});
 });
-
-

@@ -63,202 +63,203 @@ describe('Network JS API', function() {
         });
     });
 
-    it('VT293-0014 | detectConnection with wlan profile enabled', function() {
-       
-        runs( function() {
-            detectconnectionProps = {
-                 host: srvHost,
-                 port: srvPort
-            };
-            Rho.Network.detectConnection(detectconnectionProps, detectConnectionCallback);
-        } );
-       
-       waitsFor( function() {
-                return callbackCount==1;
-            },
-            "Callback never called",
-            5100
-        );
-            
-        runs(function() {
-            expect(callbackCount).toEqual(1);
-            expect(connectionInfo).toEqual("Connected");
-        });
-    });
+    if (Rho.System.platform != "WP8") {
+        it('VT293-0014 | detectConnection with wlan profile enabled', function () {
 
-    it('VT293-0015 | detectConnection with sync', function() {
-
-        detectconnectionProps = {
-             host: srvHost,
-             port: srvPort
-        };
-
-        var data = Rho.Network.detectConnection(detectconnectionProps);
-        expect(JSON.stringify(data)).toEqual("null");
-
-    });
-
-    it('VT293-0016 | detectConnection with ananymous callback', function() {
-       
-        runs( function() {
-            detectconnectionProps = {
-                 host: srvHost,
-                 port: srvPort
-            };
-            
-            Rho.Network.detectConnection(detectconnectionProps, function(params){
-                detectConnectionCallback(params);
+            runs(function () {
+                detectconnectionProps = {
+                    host: srvHost,
+                    port: srvPort
+                };
+                Rho.Network.detectConnection(detectconnectionProps, detectConnectionCallback);
             });
-        } );
-       
-       waitsFor( function() {
-                return callbackCount==1;
+
+            waitsFor(function () {
+                return callbackCount == 1;
             },
-            "Callback never called",
-            5100
-        );
-            
-        runs(function() {
-            expect(callbackCount).toEqual(1);
-            expect(connectionInfo).toEqual("Connected");
-            Rho.Network.stopDetectingConnection(null);
-        });
-    });
+                 "Callback never called",
+                 5100
+             );
 
-         /*
-    it('VT293-0019 | detectConnection with exteranl profile disabled with pollinterval', function() {
-       var flag = false;
-        runs( function() {
-
-            detectconnectionProps = {
-                host: 'http://www.google.com',
-                port: 80,
-                pollInterval: 6000
-            };
-            
-            Rho.Network.detectConnection(detectconnectionProps, detectConnectionCallback);
-
-        } );
-       
-       waitsFor( function() {
-                return callbackCount==1;
-            },
-            "Callback never called",
-            6100
-        );
-       
-        runs(function() {
-            expect(callbackCount).toEqual(1);
-            expect(connectionInfo).toEqual("Connected");
+            runs(function () {
+                expect(callbackCount).toEqual(1);
+                expect(connectionInfo).toEqual("Connected");
+            });
         });
 
-    });*/
-
-    it('VT293-0020 | detectConnection with dtectionTimeout', function() {
-       var flag = false;
-        runs( function() {
-
-            detectconnectionProps = {
-                host: 'http://any.unavailable.address',
-                port: 80,
-                detectionTimeout: 1000
-            };
-
-            Rho.Network.detectConnection(detectconnectionProps, detectConnectionCallback);
-
-        } );
-       
-       waitsFor( function() {
-                return callbackCount==1;
-            },
-            "Callback never called",
-            waitTimeout
-        );
-            
-        runs(function() {
-            expect(callbackCount).toEqual(1);
-            expect(failureMsg).toMatch("Attempted to resolve hostname to connect to but did not succeed");
-        });
-
-    });
-
-    it('VT293-0021 | detectConnection with pollinterval and dtectionTimeout', function() {
-       var flag = false;
-        runs( function() {
-
-            detectconnectionProps = {
-                host: srvHost,
-                port: srvPort,
-                pollInterval: 6000,
-                detectionTimeout: 5000
-            };
-
-            Rho.Network.detectConnection(detectconnectionProps, detectConnectionCallback);
-
-//            setTimeout(function() {
-//                flag = true;
-//            }, 12000);
-        } );
-       
-       waitsFor( function() {
-                //return flag;
-                return callbackCount==1;
-            },
-            "Callback never called",
-            13000
-        );
-            
-        runs(function() {
-//           expect(callbackCount).toEqual(2);
-            expect(callbackCount).toEqual(1);
-            expect(connectionInfo).toEqual("Connected");
-        });
-
-    }); 
-         
-            
-    it('VT293-0022 | stopDetectingConnection with wlan profile enabled', function() {
-       var flag = false;
-       runs( function() {
+        it('VT293-0015 | detectConnection with sync', function () {
 
             detectconnectionProps = {
                 host: srvHost,
                 port: srvPort
             };
 
-            Rho.Network.detectConnection(detectconnectionProps, detectConnectionCallback);
+            var data = Rho.Network.detectConnection(detectconnectionProps);
+            expect(JSON.stringify(data)).toEqual("null");
 
-        } );
-
-        waitsFor( function() {
-                return callbackCount==1;
-            },
-            "Callback never called",
-            5100
-        );
-       
-        runs(function() {
-            Rho.Network.stopDetectingConnection(detectConnectionCallback);
-            setTimeout(function() {
-                flag = true;
-            }, 6000);
         });
 
-        waitsFor( function() {
-               return flag;
-            },
-            "Callback never called",
-            7000
-        );
+        it('VT293-0016 | detectConnection with ananymous callback', function () {
 
-        runs(function() {
-            //After 12 sec of wait the count should not get increased to 2 as poll interval got stopped
-            expect(callbackCount).toEqual(1);
-            expect(connectionInfo).toEqual("Connected");
+            runs(function () {
+                detectconnectionProps = {
+                    host: srvHost,
+                    port: srvPort
+                };
+
+                Rho.Network.detectConnection(detectconnectionProps, function (params) {
+                    detectConnectionCallback(params);
+                });
+            });
+
+            waitsFor(function () {
+                return callbackCount == 1;
+            },
+                 "Callback never called",
+                 5100
+             );
+
+            runs(function () {
+                expect(callbackCount).toEqual(1);
+                expect(connectionInfo).toEqual("Connected");
+                Rho.Network.stopDetectingConnection(null);
+            });
         });
 
-    });
-          
+        /*
+   it('VT293-0019 | detectConnection with exteranl profile disabled with pollinterval', function() {
+      var flag = false;
+       runs( function() {
+
+           detectconnectionProps = {
+               host: 'http://www.google.com',
+               port: 80,
+               pollInterval: 6000
+           };
+           
+           Rho.Network.detectConnection(detectconnectionProps, detectConnectionCallback);
+
+       } );
+      
+      waitsFor( function() {
+               return callbackCount==1;
+           },
+           "Callback never called",
+           6100
+       );
+      
+       runs(function() {
+           expect(callbackCount).toEqual(1);
+           expect(connectionInfo).toEqual("Connected");
+       });
+
+   });*/
+
+        it('VT293-0020 | detectConnection with dtectionTimeout', function () {
+            var flag = false;
+            runs(function () {
+
+                detectconnectionProps = {
+                    host: 'http://any.unavailable.address',
+                    port: 80,
+                    detectionTimeout: 1000
+                };
+
+                Rho.Network.detectConnection(detectconnectionProps, detectConnectionCallback);
+
+            });
+
+            waitsFor(function () {
+                return callbackCount == 1;
+            },
+                 "Callback never called",
+                 waitTimeout
+             );
+
+            runs(function () {
+                expect(callbackCount).toEqual(1);
+                expect(failureMsg).toMatch("Attempted to resolve hostname to connect to but did not succeed");
+            });
+
+        });
+
+        it('VT293-0021 | detectConnection with pollinterval and dtectionTimeout', function () {
+            var flag = false;
+            runs(function () {
+
+                detectconnectionProps = {
+                    host: srvHost,
+                    port: srvPort,
+                    pollInterval: 6000,
+                    detectionTimeout: 5000
+                };
+
+                Rho.Network.detectConnection(detectconnectionProps, detectConnectionCallback);
+
+                //            setTimeout(function() {
+                //                flag = true;
+                //            }, 12000);
+            });
+
+            waitsFor(function () {
+                //return flag;
+                return callbackCount == 1;
+            },
+                 "Callback never called",
+                 13000
+             );
+
+            runs(function () {
+                //           expect(callbackCount).toEqual(2);
+                expect(callbackCount).toEqual(1);
+                expect(connectionInfo).toEqual("Connected");
+            });
+
+        });
+
+
+        it('VT293-0022 | stopDetectingConnection with wlan profile enabled', function () {
+            var flag = false;
+            runs(function () {
+
+                detectconnectionProps = {
+                    host: srvHost,
+                    port: srvPort
+                };
+
+                Rho.Network.detectConnection(detectconnectionProps, detectConnectionCallback);
+
+            });
+
+            waitsFor(function () {
+                return callbackCount == 1;
+            },
+                "Callback never called",
+                5100
+            );
+
+            runs(function () {
+                Rho.Network.stopDetectingConnection(detectConnectionCallback);
+                setTimeout(function () {
+                    flag = true;
+                }, 6000);
+            });
+
+            waitsFor(function () {
+                return flag;
+            },
+                "Callback never called",
+                7000
+            );
+
+            runs(function () {
+                //After 12 sec of wait the count should not get increased to 2 as poll interval got stopped
+                expect(callbackCount).toEqual(1);
+                expect(connectionInfo).toEqual("Connected");
+            });
+
+        });
+    }
 
     it('VT293-0037 | verifyPeerCertificate with default value', function() {
        var status = '';
