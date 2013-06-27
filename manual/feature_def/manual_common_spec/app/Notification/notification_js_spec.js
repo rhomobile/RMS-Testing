@@ -24,7 +24,7 @@ describe("Notification Manual FD Tests", function () {
         /* ... Tear it down ... */
     });
 
-    it("VT281-0850 |showStatus with only Message |", function () {
+    it("VT307-018 |showStatus  |", function () {
 
         runs(function () {
             dispTestCaseRunning("wait for the status message to pop up");
@@ -44,7 +44,7 @@ describe("Notification Manual FD Tests", function () {
         });
     });
 
-    it("VT281-0850 |showStatus with all null parameters |", function () {
+    it("VT281-019|showStatus with all null parameters |", function () {
 
         runs(function () {
             dispTestCaseRunning("check if the status is shown or check of rodd behavior in the app ");
@@ -64,7 +64,7 @@ describe("Notification Manual FD Tests", function () {
         });
     });
 
-    it("VT281-0851 |showPopup with only Message |", function () {
+    it("VT307-020 |showPopup with only Message |", function () {
 
         runs(function () {
             dispTestCaseRunning(" wait for the status message to pop up");
@@ -85,7 +85,7 @@ describe("Notification Manual FD Tests", function () {
         });
     });
 
-    it("VT281-0852 |showPopup with Message and title as well |", function () {
+    it("VT307-021 |showPopup with Message and title as well |", function () {
 
         runs(function () {
             dispTestCaseRunning(" wait for the status message to pop up along with title ");
@@ -106,7 +106,7 @@ describe("Notification Manual FD Tests", function () {
         });
     });
 
-    it("VT281-0853 |showPopup with Message and title and predefined icon  as well |", function () {
+    it("VT307-022 |showPopup with Message and title and predefined icon  as well |", function () {
 
         runs(function () {
             dispTestCaseRunning(" wait for the status message to pop up along with title and question icon ");
@@ -129,7 +129,7 @@ describe("Notification Manual FD Tests", function () {
     });
 
 
-    it("VT281-0853 |showPopup with Message, title, predefined icon  and ok cancel buttons |", function () {
+    it("VT307-023 |showPopup with Message, title, predefined icon  and ok cancel buttons |", function () {
 
         runs(function () {
             dispTestCaseRunning(" wait for the status message to pop up along with title, info icon and ok cancel buttons");
@@ -175,7 +175,7 @@ describe("Notification Manual FD Tests", function () {
         });
     });
 
-    it("VT281-0854 |showPopup with all null parameters and only button |", function () {
+    it("VT307-024|showPopup with all null parameters and only button |", function () {
 
         runs(function () {
             dispTestCaseRunning(" wait for the status message to pop up else check for odd behavior in the app  ");
@@ -194,7 +194,7 @@ describe("Notification Manual FD Tests", function () {
     });
 
 
-    it("VT281-0855 |showPopup with Message and title , icon and buttons, with callback for buttton |", function () {
+    it("VT307-023 |showPopup with Message and title , icon and buttons, with callback for buttton |", function () {
 
         runs(function () {
             dispTestCaseRunning(" wait for the status message to pop up click on any button and check the log for callback event fired ");
@@ -218,7 +218,7 @@ describe("Notification Manual FD Tests", function () {
     });
 
     if (Rho.System.platform == "WINDOWS_DESKTOP" || Rho.System.platform == "WINDOWS" || Rho.System.isRhoSimulator) {
-        it("VT281-0856 |showStatus up and then hide Status|", function () {
+        it("VT307-012|showStatus up and then hide Status|", function () {
 
             runs(function () {
                 dispTestCaseRunning(" wait for the pop up and then after 10 sec hide pop up is called  ");
@@ -242,7 +242,7 @@ describe("Notification Manual FD Tests", function () {
             });
         });
     } else {
-        it("VT281-0856 |showPopup up and then hide Pop up|", function () {
+        it("VT307-012 |showPopup up and then hide Pop up|", function () {
 
             runs(function () {
                 dispTestCaseRunning(" wait for the pop up and then after 10 sec hide pop up is called  ");
@@ -274,9 +274,13 @@ describe("Notification Manual FD Tests", function () {
 
     if (Rho.System.platform == "WINDOWS_DESKTOP" || Rho.System.isRhoSimulator) {
     } else {
+<<<<<<< HEAD
+        it("VT307-001 |Beep for 5 secs and with volume 3 with 1000 hz|", function () {
+=======
     
         if (Rho.System.platform == "WINDOWS" || Rho.System.platform == "ANDROID") {
             it("VT281-0857 |Beep for 5 secs and with volume 3 with 1000 hz|", function () {
+>>>>>>> 8d5df768a5fc859cce4962ab2c176e4dcc0dd330
 
                 runs(function () {
                     dispTestCaseRunning(" Beeper will be started if its applicable for the Device  ");
@@ -313,7 +317,12 @@ describe("Notification Manual FD Tests", function () {
                     expect(testResult).toEqual(true);
                 });
             });
+<<<<<<< HEAD
+        });
+    it("VT307-002 |Beep for 2 secs and with volume one  with 2000 hz|", function () {
+=======
             it("VT281-0858 |Beep for 2 secs and with volume one  with 2000 hz|", function () {
+>>>>>>> 8d5df768a5fc859cce4962ab2c176e4dcc0dd330
 
                 runs(function () {
                     dispTestCaseRunning(" Beeper will be started if its applicable for the Device  ");
@@ -331,9 +340,15 @@ describe("Notification Manual FD Tests", function () {
                     expect(testResult).toEqual(true);
                 });
             });
+<<<<<<< HEAD
+        });
+
+        it("VT307-008|Play File - Mp3 file with media type|", function () {
+=======
         }
         
         it("VT281-0859|Play File - Mp3 file with media type|", function () {
+>>>>>>> 8d5df768a5fc859cce4962ab2c176e4dcc0dd330
 
             runs(function () {
                 dispTestCaseRunning(" MP3 file will be played  ");
@@ -369,7 +384,7 @@ describe("Notification Manual FD Tests", function () {
         });
 
 
-        it("VT281-0860|Play File - Mp3 file without media type|", function () {
+        it("VT307-009|Play File - Mp3 file without media type|", function () {
 
             runs(function () {
                 dispTestCaseRunning(" MP3 file will be played  ");
@@ -387,7 +402,7 @@ describe("Notification Manual FD Tests", function () {
             });
         });
 
-        it("VT281-0860|Play File - Wav file with media type|", function () {
+        it("VT307-010|Play File - Wav file with media type|", function () {
 
             runs(function () {
                 dispTestCaseRunning(" MP3 file will be played  ");
@@ -405,7 +420,7 @@ describe("Notification Manual FD Tests", function () {
             });
         });
 
-        it("VT281-0861|Vibrate with duration 0 seconds |", function () {
+        it("VT307-013|Vibrate with duration 0 seconds |", function () {
 
             runs(function () {
                 dispTestCaseRunning(" Device will vibrate if applicable ");
@@ -423,7 +438,7 @@ describe("Notification Manual FD Tests", function () {
             });
         });
 
-        it("VT281-0861|Vibrate with duration null|", function () {
+        it("VT307-014|Vibrate with duration null|", function () {
 
             runs(function () {
                 dispTestCaseRunning(" Device will vibrate if applicable ");
@@ -441,7 +456,7 @@ describe("Notification Manual FD Tests", function () {
             });
         });
 
-        it("VT281-0861|Vibrate with duration 2 sec|", function () {
+        it("VT307-015|Vibrate with duration 2 sec|", function () {
 
             runs(function () {
                 dispTestCaseRunning(" Device will vibrate if applicable ");
@@ -491,7 +506,7 @@ describe("Notification Manual FD Tests", function () {
 	}
 	else
 	{
-        it("VT281-0861|Vibrate with duration 25 sec|", function () {
+        it("VT307-016|Vibrate with duration 25 sec|", function () {
 
             runs(function () {
                 dispTestCaseRunning(" Device will vibrate if applicable ");
@@ -537,10 +552,12 @@ for (var j = 0; j < enumData.length; j++) {
     describe("Controlling LED: " + ledName, function () {
 
         beforeEach(function () {
+        	 testResult = '';
+             captured = false;
             document.getElementById("actResult").innerHTML = "init";
         });
 
-        it("is able to illuminate LED: " + ledName, function () {
+        it("VT307-026|is able to illuminate LED: " + ledName, function () {
 
             runs(function () {
                 dispTestCaseRunning("Able to illuminate LED " + ledName);
@@ -556,7 +573,7 @@ for (var j = 0; j < enumData.length; j++) {
 
         });
 
-        it("is able to extinguish LED: " + ledName, function () {
+        it("VT307-027|is able to extinguish LED: " + ledName, function () {
 
             runs(function () {
                 dispTestCaseRunning("Able to extinguish LED " + ledName);
@@ -571,7 +588,7 @@ for (var j = 0; j < enumData.length; j++) {
             });
         });
 
-        it("is able to flash LED: " + ledName + " (on: 5sec, off: 5sec, cycles: 3)", function () {
+        it("VT307-029|is able to flash LED: " + ledName + " (on: 5sec, off: 5sec, cycles: 3)", function () {
 
             runs(function () {
                 dispTestCaseRunning("able to flash LED: " + ledName + " (on: 5sec, off: 5sec, cycles: 3)");
@@ -588,7 +605,7 @@ for (var j = 0; j < enumData.length; j++) {
             });
         });
 
-        it("is able to flash LED: " + ledName + " (on: 3sec, off: 1sec, cycles: 3)", function () {
+        it("VT307-030|is able to flash LED: " + ledName + " (on: 3sec, off: 1sec, cycles: 3)", function () {
 
             runs(function () {
                 dispTestCaseRunning("able to flash LED: " + ledName + " (on: 3sec, off: 1sec, cycles: 3)");
@@ -605,7 +622,7 @@ for (var j = 0; j < enumData.length; j++) {
             });
         });
 
-        it("is able to flash LED: " + ledName + " (on: 5sec, off: 5sec, cycles: 0)", function () {
+        it("VT307-031|is able to flash LED: " + ledName + " (on: 5sec, off: 5sec, cycles: 0)", function () {
 
             runs(function () {
                 dispTestCaseRunning("able to flash LED: " + ledName + " (on: 5sec, off: 5sec, cycles: null)");
@@ -622,7 +639,7 @@ for (var j = 0; j < enumData.length; j++) {
         });
 
 
-        it("is able to flash LED: " + ledName + " (on: sec, off: 2sec, cycles: 2)", function () {
+        it("VT307-032|is able to flash LED: " + ledName + " (on: sec, off: 2sec, cycles: 2)", function () {
 
             runs(function () {
                 dispTestCaseRunning("able to flash LED: " + ledName + " (on: null, off: null, cycles: 3)");

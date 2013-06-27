@@ -104,7 +104,11 @@ function toolTestActions1() {
     Rho.NativeToolbar.create(toolElements, toolProperties);
 }
 
+<<<<<<< HEAD
+function toolTestActions2(){
+=======
 function toolTestActions2() {
+>>>>>>> 8d5df768a5fc859cce4962ab2c176e4dcc0dd330
     var toolElements = new Array();
     toolElements = [
         {label: 'back', action: 'back'},
