@@ -50,6 +50,7 @@ describe("Card Reader Test", function() {
 		var enumcallback = function (args){
 		displayResult('DefautlInstance:- ',JSON.stringify(args));
         }
+  
 
 	it("VT286-0094 | getDefault method |", function() {
 		runs(function()
@@ -1300,103 +1301,105 @@ describe("Card Reader Test", function() {
 	
 		it("VT286-0166 |Test cardreader with swiping different tracks of cards |", function() {
 
-		runs(function()
-		{
-			dispTestCaseRunning("VT286-0166 - Test cardreader with swiping different tracks of cards");
-            dispExpectedResult("MSR Card data should be returned when card is swiped and Mode should be returned as CR for all the swipes");
-			//Rho.CardReader.open({},callbackCardReader);
-			Rho.CardReader.open(callbackCardReader);
-			setTimeout(function() {
-				openFlag = true;
-			}, 11000);
-		});
+			runs(function()
+			{
+				dispTestCaseRunning("VT286-0166 - Test cardreader with swiping different tracks of cards");
+	            dispExpectedResult("MSR Card data should be returned when card is swiped and Mode should be returned as CR for all the swipes");
+				//Rho.CardReader.open({},callbackCardReader);
+				Rho.CardReader.open(callbackCardReader);
+				setTimeout(function() {
+					openFlag = true;
+				}, 11000);
+			});
 
-		waitsFor(function()
-		{
-			return openFlag;
-		}, '5sec Wait to open the CardReader', 12000);
+			waitsFor(function()
+			{
+				return openFlag;
+			}, '5sec Wait to open the CardReader', 12000);
 
-		runs(function()
-		{
-			setTimeout(function() {
-				swipeFlag = true;
-			}, 5000);
-		});
+			runs(function()
+			{
+				setTimeout(function() {
+					swipeFlag = true;
+				}, 5000);
+			});
 
-		waitsFor(function()
-		{
-			return captured;
-		}, '5sec Wait to open the CardReader', 25000);
+			waitsFor(function()
+			{
+				return captured;
+			}, '5sec Wait to open the CardReader', 25000);
 
-		runs(function()
-		{
-			expect(testResult).toEqual(true);
-			Rho.CardReader.close();
-			setTimeout(function() {
-			closeFlag = true;
-			}, 5000);
-		});
+			runs(function()
+			{
+				expect(testResult).toEqual(true);
+				Rho.CardReader.close();
+				setTimeout(function() {
+				closeFlag = true;
+				}, 5000);
+			});
 
-		waitsFor(function()
-		{
-		   return closeFlag;
-		},'5sec Wait to close the CardReader', 6000);
+			waitsFor(function()
+			{
+			   return closeFlag;
+			},'5sec Wait to close the CardReader', 6000);
 
 	    });	
 
 		it("VT286-0168 |Suspend and Resume device 5 times then swipe the card |", function() {
 
-		runs(function()
-		{
-			dispTestCaseRunning("VT286-0168 - Suspend and Resume device 5 times then swipe the card");
-            dispExpectedResult("MSR should able to read the track data.");
-			//Rho.CardReader.open({},callbackCardReader);
-			Rho.CardReader.open(callbackCardReader);
-			setTimeout(function() {
-				openFlag = true;
-			}, 11000);
-		});
+			runs(function()
+			{
+				dispTestCaseRunning("VT286-0168 - Suspend and Resume device 5 times then swipe the card");
+	            dispExpectedResult("MSR should able to read the track data.");
+				//Rho.CardReader.open({},callbackCardReader);
+				Rho.CardReader.open(callbackCardReader);
+				setTimeout(function() {
+					openFlag = true;
+				}, 11000);
+			});
 
-		waitsFor(function()
-		{
-			return openFlag;
-		}, '5sec Wait to open the CardReader', 12000);
+			waitsFor(function()
+			{
+				return openFlag;
+			}, '5sec Wait to open the CardReader', 12000);
 
-		runs(function()
-		{
-			    setTimeout(function() {
-				swipeFlag = true;
-			}, 5000);
-		});
+			runs(function()
+			{
+				    setTimeout(function() {
+					swipeFlag = true;
+				}, 5000);
+			});
 
-		waitsFor(function()
-		{
-			return captured;
-		}, '5sec Wait to open the CardReader', 25000);
+			waitsFor(function()
+			{
+				return captured;
+			}, '5sec Wait to open the CardReader', 25000);
 
-		runs(function()
-		{
-			expect(testResult).toEqual(true);
-			Rho.CardReader.close();
-			setTimeout(function() {
-			closeFlag = true;
-			}, 5000);
-		});
+			runs(function()
+			{
+				expect(testResult).toEqual(true);
+				Rho.CardReader.close();
+				setTimeout(function() {
+				closeFlag = true;
+				}, 5000);
+			});
 
-		waitsFor(function()
-		{
-		   return closeFlag;
-		},'5sec Wait to close the CardReader', 6000);
+			waitsFor(function()
+			{
+			   return closeFlag;
+			},'5sec Wait to close the CardReader', 6000);
 
-	    });
+		    });
 	}	
 
 	if(Rho.System.platform == 'ANDROID')
 	{
-		it("VT286-0169 |encryption encrypted |", function() {
+		it("VT286-0169 |encryption encrypted with financial card|", function() {
 	
 			runs(function()
 			{
+				dispTestCaseRunning("VT286-0169 |encryption encrypted with financial card");
+	            dispExpectedResult("event should get fire and encryption value should get returned as encrypted Note - encryption filed will always return as ecrypted for encrypted card reader head");
 				//Rho.CardReader.open({},encrypted_callback);
 				Rho.CardReader.open(encrypted_callback);
 				setTimeout(function() {
@@ -1406,7 +1409,6 @@ describe("Card Reader Test", function() {
 	
 			waitsFor(function()
 			{
-				dispCurrentProcess("VT286-0169 |encryption encrypted");
 				return openFlag;
 			}, '5sec Wait to open the CardReader', 12000);
 	
@@ -1425,23 +1427,18 @@ describe("Card Reader Test", function() {
 			runs(function()
 			{
 				expect(testResult).toEqual(true);
-				Rho.CardReader.close();
-				setTimeout(function() {
-				closeFlag = true;
-				}, 5000);
 			});
-	
-			waitsFor(function()
-			{
-			   return closeFlag;
-			},'5sec Wait to close the CardReader', 6000);
 	
 		});
 	
-	    it("VT286-0171 | encrypted data in financial card |", function() {
-			waitsFor(function()
+	    it("VT286-0171 | encrypted data in non financial card |", function() {
+			runs(function()
 			{
-				dispCurrentProcess("VT286-0171 | encrypted data in financial card");
+				dispTestCaseRunning("VT286-0171 | encryption encrypted with non financial card");
+	            dispExpectedResult("event should get fire and encryption value should get returned as encrypted Note - encryption filed will always return as ecrypted for encrypted card reader head");
+			});
+			waitsFor(function()
+			{				
 				return captured;
 			}, '5sec Wait to open the CardReader', 25000);
 	
@@ -1452,9 +1449,13 @@ describe("Card Reader Test", function() {
 		});
 	
 		it("VT286-0173 | rawdata with financial card |", function() {
-			waitsFor(function()
+			runs(function()
 			{
-				dispCurrentProcess("VT286-0173 | rawdata with financial card");
+				dispTestCaseRunning("VT286-0173 | rawdata with financial card");
+	            dispExpectedResult("event should get fire and rawdata from all the tracks should get returned in HEX format");
+			});
+			waitsFor(function()
+			{				
 				return captured;
 			}, '5sec Wait to open the CardReader', 25000);
 	
@@ -1464,11 +1465,15 @@ describe("Card Reader Test", function() {
 			});
 		});
 
-		it("VT286-0174 | track1Status true |", function() {
-			waitsFor(function()
+		it("VT286-0174 | Card with only Track1 financial card |", function() {
+			runs(function()
 			{
-			dispCurrentProcess(" VT286-0174 | track1Status true");
-			return captured;
+			    dispTestCaseRunning("VT286-0174 | swipe the card having only track1 data only finacial card");
+	            dispExpectedResult("event should get fire and return value for track1 track1Encrypted track1Status andtrack1Encrtped status should be shown true  and other status should be false");
+			});
+			waitsFor(function()
+			{				
+			    return captured;
 			}, '5sec Wait to open the CardReader', 25000);
 
 			runs(function()
@@ -1477,205 +1482,14 @@ describe("Card Reader Test", function() {
 			});
 	    });
 
-		it("VT286-0175 | track2Status true |", function() {
-		waitsFor(function()
-		{
-			dispCurrentProcess(" VT286-0175 | track2Status true");
-			return captured;
-		}, '5sec Wait to open the CardReader', 25000);
-
-		runs(function()
-		{
-			expect(testResult).toEqual(true);
-		});
-		});
-
-		it("VT286-0176 | track3Status true |", function() {
-		waitsFor(function()
-		{
-			dispCurrentProcess(" VT286-0176 | track3Status true");
-			return captured;
-		}, '5sec Wait to open the CardReader', 25000);
-
-		runs(function()
-		{
-			expect(testResult).toEqual(true);
-		});
-		});
-
-		it("VT286-0177 | track1EncryptedStatus true |", function() {
-		waitsFor(function()
-		{
-			dispCurrentProcess(" VT286-0177 | track1EncryptedStatus true");
-			return captured;
-		}, '5sec Wait to open the CardReader', 25000);
-
-		runs(function()
-		{
-			expect(testResult).toEqual(true);
-		});
-		});
-
-		it("VT286-0178 | track2EncryptedStatus true |", function() {
-		waitsFor(function()
-		{
-			dispCurrentProcess(" VT286-0178 | track2EncryptedStatus true");
-			return captured;
-		}, '5sec Wait to open the CardReader', 25000);
-
-		runs(function()
-		{
-			expect(testResult).toEqual(true);
-		});
-		});
-
-		it("VT286-0179 | track3EncryptedStatus true |", function() {
-		waitsFor(function()
-		{
-			dispCurrentProcess(" VT286-0179 | track3EncryptedStatus true");
-			return captured;
-		}, '5sec Wait to open the CardReader', 25000);
-
-		runs(function()
-		{
-			expect(testResult).toEqual(true);
-		});
-		});
-
-		it("VT286-0180 | track1Status and track2Status  true |", function() {
-		waitsFor(function()
-		{
-			dispCurrentProcess(" VT286-0180 | track1Status and track2Status  true");
-			return captured;
-		}, '5sec Wait to open the CardReader', 25000);
-
-		runs(function()
-		{
-			expect(testResult).toEqual(true);
-		});
-		});
-
-		it("VT286-0181 | track1Status and track3Status  true |", function() {
-		waitsFor(function()
-		{
-			dispCurrentProcess(" VT286-0181 | track1Status and track3Status  true");
-			return captured;
-		}, '5sec Wait to open the CardReader', 25000);
-
-		runs(function()
-		{
-			expect(testResult).toEqual(true);
-		});
-		});
-
-		it("VT286-0182 | track2Status and track3Status  true |", function() {
-		waitsFor(function()
-		{
-			dispCurrentProcess(" VT286-0182 | track2Status and track3Status  true");
-			return captured;
-		}, '5sec Wait to open the CardReader', 25000);
-
-		runs(function()
-		{
-			expect(testResult).toEqual(true);
-		});
-		});
-
-		it("VT286-0183 | track2Status track2Status and track3Status  true |", function() {
-		waitsFor(function()
-		{
-			dispCurrentProcess(" VT286-0183 | track2Status track2Status and track3Status  true");
-			return captured;
-		}, '5sec Wait to open the CardReader', 25000);
-
-		runs(function()
-		{
-			expect(testResult).toEqual(true);
-		});
-		});
-
-		it("VT286-0184 | track1EncryptedStatus and track2EncryptedStatus  true |", function() {
-		waitsFor(function()
-		{
-			dispCurrentProcess(" VT286-0184 | track1EncryptedStatus and track2EncryptedStatus  true");
-			return captured;
-		}, '5sec Wait to open the CardReader', 25000);
-
-		runs(function()
-		{
-			expect(testResult).toEqual(true);
-		});
-		});
-
-		it("VT286-0185 | track1EncryptedStatus and track3EncryptedStatus  true |", function() {
-		waitsFor(function()
-		{
-			dispCurrentProcess("VT286-0185 | track1EncryptedStatus and track3EncryptedStatus true");
-			return captured;
-		}, '5sec Wait to open the CardReader', 25000);
-
-		runs(function()
-		{
-			expect(testResult).toEqual(true);
-		});
-		});
-
-		it("VT286-0186 | track2EncryptedStatus and track3EncryptedStatus  true |", function() {
-		waitsFor(function()
-		{
-			dispCurrentProcess(" VT286-0186 | track2EncryptedStatus and track3EncryptedStatus true");
-			return captured;
-		}, '5sec Wait to open the CardReader', 25000);
-
-		runs(function()
-		{
-			expect(testResult).toEqual(true);
-		});
-		});
-
-		it("VT286-0187 | track1EncryptedStatus track2EncryptedStatus and track3EncryptedStatus  true |", function() {
-		waitsFor(function()
-		{
-			dispCurrentProcess(" VT286-0187 | track1EncryptedStatus track2EncryptedStatus and track3EncryptedStatus  true");
-			return captured;
-		}, '5sec Wait to open the CardReader', 25000);
-
-		runs(function()
-		{
-			expect(testResult).toEqual(true);
-		});
-		});
-
-		it("VT286-0188 | Card with only Track1 |", function() {
-		waitsFor(function()
-		{
-			dispCurrentProcess(" VT286-0188 | Card with only Track1");
-			return captured;
-		}, '5sec Wait to open the CardReader', 25000);
-
-		runs(function()
-		{
-			expect(testResult).toEqual(true);
-		});
-		});
-
-		it("VT286-0189 | Card with only Track2 |", function() {
-		waitsFor(function()
-		{
-			dispCurrentProcess(" VT286-0189 | Card with only Track2");
-			return captured;
-		}, '5sec Wait to open the CardReader', 25000);
-
-		runs(function()
-		{
-			expect(testResult).toEqual(true);
-		});
-		});
-
-		it("VT286-0190 | Card with only Track3 |", function() {
+		it("VT286-0175 | Card with only Track2 financial card |", function() {
+			runs(function()
+			{
+				dispTestCaseRunning("VT286-0175 | swipe the card having only track2 data only finacial card");
+	            dispExpectedResult("event should get fire and return value for track2 track2Encrypted value track2Status andtrack2Encrtped status should be shown true  and other status should be false");
+			});
 			waitsFor(function()
 			{
-				dispCurrentProcess(" VT286-0190 | Card with only Track3");
 				return captured;
 			}, '5sec Wait to open the CardReader', 25000);
 
@@ -1685,11 +1499,270 @@ describe("Card Reader Test", function() {
 			});
 		});
 
-		it("VT286-0191 | Card with only track1 and Track2 data |", function() {
+		it("VT286-0176 | Card with only Track3 financial card  |", function() {
+			runs(function()
+			{
+				dispTestCaseRunning("VT286-0176 | swipe the card having only track3 data only finacial card");
+	            dispExpectedResult("event should get fire and return value for track3 track3Encrypted value track3Status and track3Encrtped status should be shown true  and other status should be false");
+			});
+			waitsFor(function()
+			{				
+				return captured;
+			}, '5sec Wait to open the CardReader', 25000);
+
+			runs(function()
+			{
+				expect(testResult).toEqual(true);
+			});
+		});
+
+	/*	it("VT286-0177 | track1EncryptedStatus true |", function() {
+			runs(function()
+			{
+				dispTestCaseRunning("VT286-0177 | track1EncryptedStatus true swipe the only financial card having trak1 data");
+	            dispExpectedResult("event should get fire and only track1EncryptedStatus should be shown true  and other status should be false");
+			});
+			waitsFor(function()
+			{				
+				return captured;
+			}, '5sec Wait to open the CardReader', 25000);
+
+			runs(function()
+			{
+				expect(testResult).toEqual(true);
+			});
+		});
+
+		it("VT286-0178 | track2EncryptedStatus true |", function() {
+			runs(function()
+			{
+				dispTestCaseRunning("VT286-0178 | track2EncryptedStatus true swipe the only financial card having trak2 data");
+	            dispExpectedResult("event should get fire and only track2EncryptedStatus should be shown true  and other status should be false");
+			});
 			waitsFor(function()
 			{
-			dispCurrentProcess(" VT286-0191 | Card with only track1 and Track2 data");
-			return captured;
+				return captured;
+			}, '5sec Wait to open the CardReader', 25000);
+
+			runs(function()
+			{
+				expect(testResult).toEqual(true);
+			});
+		});
+
+		it("VT286-0179 | track3EncryptedStatus true |", function() {
+			runs(function()
+			{
+				dispTestCaseRunning("VT286-0179 | track3EncryptedStatus true swipe the only financial card having trak3 data");
+	            dispExpectedResult("event should get fire and only track3EncryptedStatus should be shown true and other status should be false");
+			});
+			waitsFor(function()
+			{
+				return captured;
+			}, '5sec Wait to open the CardReader', 25000);
+
+			runs(function()
+			{
+				expect(testResult).toEqual(true);
+			});
+		});*/
+
+		it("VT286-0180 | Card with only Track1 and Track2 financial card |", function() {
+			runs(function()
+			{
+				dispTestCaseRunning("VT286-0180 | swipe the card having only track1 and track2 data only finacial card");
+	            dispExpectedResult("event should get fire and return value for track1 track2 track1Encrypted track2Encrypted and track1Status track2Status track1Encrtped and track2Encrtped status should be shown true  and other status should be false");
+	         });
+			waitsFor(function()
+			{
+				return captured;
+			}, '5sec Wait to open the CardReader', 25000);
+
+			runs(function()
+			{
+				expect(testResult).toEqual(true);
+			});
+		});
+
+		it("VT286-0181 | Card with only Track1 and Track3 financial card |", function() {
+			runs(function()
+			{
+				dispTestCaseRunning("VT286-0180 | swipe the card having only track1 and track3 data only finacial card");
+	            dispExpectedResult("event should get fire and return value for track1 track3 track1Encrypted track3Encrypted and track1Status track3Status track1Encrtped and track3Encrtped status should be shown true  and other status should be false");
+			});
+			waitsFor(function()
+			{				
+				return captured;
+			}, '5sec Wait to open the CardReader', 25000);
+
+			runs(function()
+			{
+				expect(testResult).toEqual(true);
+			});
+		});
+
+		it("VT286-0182 | Card with only Track2 and Track3 financial card |", function() {
+			runs(function()
+			{
+				dispTestCaseRunning("VT286-0180 | swipe the card having only track1 and track3 data only finacial card");
+	            dispExpectedResult("event should get fire and return value for track2 track3 track2Encrypted track3Encrypted and track2Status track3Status track2Encrtped and track3Encrtped status should be shown true  and other status should be false");
+			});
+			waitsFor(function()
+			{				
+				return captured;
+			}, '5sec Wait to open the CardReader', 25000);
+
+			runs(function()
+			{
+				expect(testResult).toEqual(true);
+			});
+		});
+
+		it("VT286-0183 | Card with all three traks financial card |", function() {
+			runs(function()
+			{
+				dispTestCaseRunning("VT286-0180 | swipe the card having all three track of data only finacial card");
+	            dispExpectedResult("event should get fire and return value for data mode encryption rawData track1 track2 track3 track1Encrypted track2Encrypted track3Encrypted and track1Status track2Status track3Status track1Encrtped track2Encrtped and track3Encrtped status should be shown true value for ksn should be shown");
+			});
+			waitsFor(function()
+			{				
+				return captured;
+			}, '5sec Wait to open the CardReader', 25000);
+
+			runs(function()
+			{
+				expect(testResult).toEqual(true);
+			});
+		});
+
+	/*	it("VT286-0184 | track1EncryptedStatus and track2EncryptedStatus  true |", function() {
+			runs(function()
+			{
+				dispTestCaseRunning("VT286-0184 | track1EncryptedStatus and track2EncryptedStatus true swipe the card having track1 and track2 data");
+	            dispExpectedResult("event should get fire and only track1EncryptedStatus and  track2EncryptedStatus should be shown true and other false");
+			});
+			waitsFor(function()
+			{				
+				return captured;
+			}, '5sec Wait to open the CardReader', 25000);
+
+			runs(function()
+			{
+				expect(testResult).toEqual(true);
+			});
+		});
+
+		it("VT286-0185 | track1EncryptedStatus and track3EncryptedStatus  true |", function() {
+			runs(function()
+			{
+				dispTestCaseRunning("VT286-0185 | track1EncryptedStatus and track3EncryptedStatus true swipe the card having track1 and track3 data");
+	            dispExpectedResult("event should get fire and only track1EncryptedStatus and  track3EncryptedStatus should be shown true and other false");
+			});
+			waitsFor(function()
+			{				
+				return captured;
+			}, '5sec Wait to open the CardReader', 25000);
+
+			runs(function()
+			{
+				expect(testResult).toEqual(true);
+			});
+		});
+
+		it("VT286-0186 | track2EncryptedStatus and track3EncryptedStatus  true |", function() {
+			runs(function()
+			{
+				dispTestCaseRunning("VT286-0186 | track2EncryptedStatus and track3EncryptedStatus true swipe the card having track2 and track3 data");
+	            dispExpectedResult("event should get fire and only track2EncryptedStatus and  track3EncryptedStatus should be shown true and other false");
+			});
+			waitsFor(function()
+			{
+				return captured;
+			}, '5sec Wait to open the CardReader', 25000);
+
+			runs(function()
+			{
+				expect(testResult).toEqual(true);
+			});
+		});
+
+		it("VT286-0187 | track1EncryptedStatus track2EncryptedStatus and track3EncryptedStatus  true |", function() {
+			runs(function()
+			{
+				dispTestCaseRunning("VT286-0187 | track1EncryptedStatus track2EncryptedStatus and track3EncryptedStatus true swipe the card having track1 and track3 data");
+	            dispExpectedResult("event should get fire and only track1EncryptedStatus track2EncryptedStatus and  track3EncryptedStatus should be shown true ");
+			});
+			waitsFor(function()
+			{				
+				return captured;
+			}, '5sec Wait to open the CardReader', 25000);
+
+			runs(function()
+			{
+				expect(testResult).toEqual(true);
+			});
+		});*/
+
+		it("VT286-0188 | Card with only Track1 non finacial card |", function() {
+			runs(function()
+			{
+				dispTestCaseRunning("VT286-0188 | Card with only Track1 with non financial card only");
+	            dispExpectedResult("event should get fire and only track1status should shown true ");
+			});
+			waitsFor(function()
+			{
+				return captured;
+			}, '5sec Wait to open the CardReader', 25000);
+
+			runs(function()
+			{
+				expect(testResult).toEqual(true);
+			});
+		});
+
+		it("VT286-0189 | Card with only Track2 non finacial card  |", function() {
+			runs(function()
+			{
+				dispTestCaseRunning("VT286-0189 | Card with only Track2 with non financial card only");
+	            dispExpectedResult("event should get fire and only track2status should shown true ");
+			});
+			waitsFor(function()
+			{
+				return captured;
+			}, '5sec Wait to open the CardReader', 25000);
+
+			runs(function()
+			{
+				expect(testResult).toEqual(true);
+			});
+		});
+
+		it("VT286-0190 | Card with only Track3 non finacial card  |", function() {
+			runs(function()
+			{
+				dispTestCaseRunning("VT286-0190 | Card with only Track3 with non financial card only");
+	            dispExpectedResult("event should get fire and only track3status should shown true ");
+			});
+			waitsFor(function()
+			{
+				return captured;
+			}, '5sec Wait to open the CardReader', 25000);
+
+			runs(function()
+			{
+				expect(testResult).toEqual(true);
+			});
+		});
+
+		it("VT286-0191 | Card with only track1 and Track2 data non finacial card  |", function() {
+			runs(function()
+			{
+				dispTestCaseRunning("VT286-0191 | Card with only Track1 and track2 with non financial card only");
+	            dispExpectedResult("event should get fire and only track1status and track2status should shown true ");
+			});
+			waitsFor(function()
+			{
+				return captured;
 			}, '5sec Wait to open the CardReader', 25000);
 
 			runs(function()
@@ -1698,49 +1771,65 @@ describe("Card Reader Test", function() {
 			});
 		});
 
-		it("VT286-0192 | Card with only track1 and Track3 data |", function() {
-		waitsFor(function()
-		{
-			dispCurrentProcess(" VT286-0192 | Card with only track1 and Track3 data");
-			return captured;
-		}, '5sec Wait to open the CardReader', 25000);
-
-		runs(function()
-		{
-			expect(testResult).toEqual(true);
-		});
-		});
-
-		it("VT286-0193 | Card with only track2 and Track3 data |", function() {
-		waitsFor(function()
-		{
-			dispCurrentProcess(" VT286-0193 | Card with only track2 and Track3 data");
-			return captured;
-		}, '5sec Wait to open the CardReader', 25000);
-
-		runs(function()
-		{
-			expect(testResult).toEqual(true);
-		});
-		});
-
-		it("VT286-0194 | Card with all three track data |", function() {
-		waitsFor(function()
-		{
-			dispCurrentProcess(" VT286-0194 | Card with all three track data");
-			return captured;
-		}, '5sec Wait to open the CardReader', 25000);
-
-		runs(function()
-		{
-			expect(testResult).toEqual(true);
-		});
-		});
-
-		it("VT286-0195 | Card with only Track1 |", function() {
+		it("VT286-0192 | Card with only track1 and Track3 data non finacial card  |", function() {
+			runs(function()
+			{
+				dispTestCaseRunning("VT286-0192 | Card with only Track1 and track3 with non financial card only");
+	            dispExpectedResult("event should get fire and only track1status and track3status should shown true ");
+			});
 			waitsFor(function()
 			{
-				dispCurrentProcess("VT286-0195 | Card with only Track1");
+				return captured;
+			}, '5sec Wait to open the CardReader', 25000);
+
+			runs(function()
+			{
+				expect(testResult).toEqual(true);
+			});
+		});
+
+		it("VT286-0193 | Card with only track2 and Track3 data non finacial card  |", function() {
+			runs(function()
+			{
+				dispTestCaseRunning("VT286-0193 | Card with only Track2 and track3 with non financial card only");
+	            dispExpectedResult("event should get fire and only track2status and track3status should shown true ");
+			});
+			waitsFor(function()
+			{
+				return captured;
+			}, '5sec Wait to open the CardReader', 25000);
+
+			runs(function()
+			{
+				expect(testResult).toEqual(true);
+			});
+		});
+
+		it("VT286-0194 | Card with all three track data  non finacial card |", function() {
+			runs(function()
+			{
+				dispTestCaseRunning("VT286-0194 | Card with all three tacks with non financial card only");
+	            dispExpectedResult("event should get fire and track1status track2status and track3status should shown true ");
+			});
+			waitsFor(function()
+			{
+				return captured;
+			}, '5sec Wait to open the CardReader', 25000);
+
+			runs(function()
+			{
+				expect(testResult).toEqual(true);
+			});
+		});
+
+	/*	it("VT286-0195 | Card with only Track1 |", function() {
+			runs(function()
+			{
+				dispTestCaseRunning("VT286-0195 | Card with card only");
+	            dispExpectedResult("event should get fire and track1status track2status and track3status should shown true ");
+			});
+			waitsFor(function()
+			{
 				return captured;
 			}, '5sec Wait to open the CardReader', 25000);
 
@@ -1826,12 +1915,16 @@ describe("Card Reader Test", function() {
 			{
 				expect(testResult).toEqual(true);
 			});
-		});
+		});*/
 
 		it("VT286-0202 | ksn number with non financial card |", function() {
+			runs(function()
+			{
+				dispTestCaseRunning("VT286-0202 | swipe non financial card having any track data");
+	            dispExpectedResult("event should get fire and ksn number field should be emtpy");
+			});
 			waitsFor(function()
 			{
-				dispCurrentProcess(" VT286-0202 | ksn number with non financial card");
 				return captured;
 			}, '5sec Wait to open the CardReader', 25000);
 
@@ -1842,12 +1935,15 @@ describe("Card Reader Test", function() {
 		});
 
 		it("VT286-0203 | ksn number with financial card |", function() {
+			runs(function()
+			{
+				dispTestCaseRunning("VT286-0203 | swipe financial card having any track data");
+	            dispExpectedResult("event should get fire and ksn number should be shown in HEX format which should be a part of Raw Data ");
+			});
 			waitsFor(function()
 			{
-				dispCurrentProcess("VT286-0203 | ksn number with financial card");
 				return captured;
 			}, '5sec Wait to open the CardReader', 25000);
-
 			runs(function()
 			{
 				expect(testResult).toEqual(true);
