@@ -15,15 +15,40 @@ describe("Card Reader Test", function() {
 		closeFlag = false;
 	});
 
-	var callbackCardReader = function (data){
-		
-		displayResult('DATA:- ',JSON.stringify(data));
+	var callbackCardReader = function (args){
+		var result = '';
+		result += '<br/>Data:- ' + JSON.stringify(args["data"]);
+		result += '<br/>Mode:- ' + JSON.stringify(args["mode"]);
+	    displayResult("Output: ",result);
+        }
+
+	var encrypted_callback =  function (args){
+	
+		var result = '';
+		result += '<br/>Data:- ' + JSON.stringify(args["data"]);
+		result += '<br/>Mode:- ' + JSON.stringify(args["mode"]);
+		result += '<br/>Encryption:- ' + JSON.stringify(args["encryption"]);
+		result += '<br/>RawData:- ' + JSON.stringify(args["rawData"]);
+		result += '<br/>Track1:- ' + JSON.stringify(args["track1"]);
+		result += '<br/>Track2:- ' + JSON.stringify(args["track2"]);
+		result += '<br/>Track3:- ' + JSON.stringify(args["track3"]);
+		result += '<br/>Track1Status:- ' + JSON.stringify(args["track1Status"]);
+		result += '<br/>Track2Status:- ' + JSON.stringify(args["track2Status"]);
+		result += '<br/>Track3Status:- ' + JSON.stringify(args["track3Status"]);
+		result += '<br/>Track1Encrypted:- ' + JSON.stringify(args["track1Encrypted"]);
+		result += '<br/>Track2Encrypted:- ' + JSON.stringify(args["track2Encrypted"]);
+		result += '<br/>Track3Encrypted:- ' + JSON.stringify(args["track3Encrypted"]);
+		result += '<br/>Track1EncryptedStatus:- ' + JSON.stringify(args["track1EncryptedStatus"]);
+		result += '<br/>Track2EncryptedStatus:- ' + JSON.stringify(args["track2EncryptedStatus"]);
+		result += '<br/>Track3EncryptedStatus:- ' + JSON.stringify(args["track3EncryptedStatus"]);
+		result += '<br/>Ksn:- ' + JSON.stringify(args["ksn"]);
+
+	   displayResult("Output: ",result);
 	}
 
-	var encrypted_callback =  function (data){
-
-	   displayResult('DATA:- ',JSON.stringify(data));
-	}
+		var enumcallback = function (args){
+		displayResult('DefautlInstance:- ',JSON.stringify(args));
+        }
 
 	it("VT286-0094 | getDefault method |", function() {
 		runs(function()
@@ -35,15 +60,14 @@ describe("Card Reader Test", function() {
 		});
 		runs(function()
 		{
-			var myvar = Rho.CardReader.getDefault();
-			displayResult('DATA:- ',JSON.stringify(myvar));
+			displayResult('DATA:- ',JSON.stringify(Rho.CardReader.getDefault()));
 		});
 
 		waitsFor(function()
 		{
 			dispCurrentProcess("VT286-0094 | getDefault method");
 			return captured;
-		}, '5sec Wait to open the CardReader', 30000);
+		}, '5sec Wait to open the CardReader', 25000);
 
 		runs(function()
 		{
@@ -51,41 +75,19 @@ describe("Card Reader Test", function() {
 		});
 
 	});
-
-	it("VT286-0095 | setDefault method |", function() {
+	
+	it("VT286-0096 | enumerate method with callback|", function() {
 		runs(function()
 		{
-			var mynum = Rho.CardReader.enumerate();
-			Rho.CardReader.setDefault(mynum);
-			var myvar = Rho.CardReader.getDefault();
-			displayResult('DATA:- ',JSON.stringify(myvar));
+			Rho.CardReader.enumerate(enumcallback);
+			
 		});
 
 		waitsFor(function()
 		{
-			dispCurrentProcess("VT286-0095 | setDefault method");
+			dispCurrentProcess("VT286-0096 | enumerate method with callback");
 			return captured;
-		}, '5sec Wait to open the CardReader', 30000);
-
-		runs(function()
-		{
-			expect(testResult).toEqual(true);
-		});
-
-	});
-
-	it("VT286-0096 | enumerate method |", function() {
-		runs(function()
-		{
-			var mynum = Rho.CardReader.enumerate();
-			displayResult('DATA:- ',JSON.stringify(mynum));
-		});
-
-		waitsFor(function()
-		{
-			dispCurrentProcess("VT286-0096 | enumerate method");
-			return captured;
-		}, '5sec Wait to open the CardReader', 30000);
+		}, '5sec Wait to open the CardReader', 25000);
 
 		runs(function()
 		{
@@ -102,7 +104,59 @@ describe("Card Reader Test", function() {
 		},'5sec Wait to close the CardReader', 6000);
 
 	});
+/*
+	it("VT286-0095 | setDefault method |", function() {
+		runs(function()
+		{
+		    var mynum = new Array();
+			mynum = Rho.CardReader.enumerate();
+			displayResult('DATA:- ',JSON.stringify(mynum["cardreaderArray"]));
+			//Rho.CardReader.setDefault(mynum);
+		});
 
+		waitsFor(function()
+		{
+			dispCurrentProcess("VT286-0095 | setDefault method");
+			return captured;
+		}, '5sec Wait to open the CardReader', 25000);
+
+		runs(function()
+		{
+			expect(testResult).toEqual(true);
+		});
+
+	});
+	
+	it("VT286-0207 | enumerate method without callback|", function() {
+		runs(function()
+		{
+		    var mynum = new Array();
+			mynum= Rho.CardReader.enumerate();
+			displayResult('DATA:- ',JSON.stringify(mynum[0]));
+		});
+
+		waitsFor(function()
+		{
+			dispCurrentProcess("VT286-0207 | enumerate method without callback");
+			return captured;
+		}, '5sec Wait to open the CardReader', 25000);
+
+		runs(function()
+		{
+			expect(testResult).toEqual(true);
+			Rho.CardReader.close();
+			setTimeout(function() {
+				closeFlag = true;
+			}, 5000);
+		});
+
+		waitsFor(function()
+		{
+		   return closeFlag;
+		},'5sec Wait to close the CardReader', 6000);
+
+	});
+*/
 	it("VT286-0125 | Swipe a Card after clearAllproperties |", function() {
 		runs(function()
 		{
@@ -123,11 +177,10 @@ describe("Card Reader Test", function() {
 			Rho.CardReader.autoEnter=true;
 			Rho.CardReader.clearAllProperties();
 		});
-
 		waitsFor(function()
 		{
 			return captured;
-		}, '5sec Wait to open the CardReader', 30000);
+		}, '5sec Wait to open the CardReader', 25000);
 
 		runs(function()
 		{
@@ -144,12 +197,13 @@ describe("Card Reader Test", function() {
 		},'5sec Wait to close the CardReader', 6000);
 
 	});
-
-	it("VT286-0126 | Swipe a Card after clearAllproperties with readEvent |", function() {
+	
+	xit("VT286-0126 | Swipe a Card after clearAllproperties with readEvent |", function() {
 
 		runs(function()
 		{
-			Rho.CardReader.open({},callbackCardReader);
+			//Rho.CardReader.open({},callbackCardReader);
+			Rho.CardReader.open(callbackCardReader);
 			setTimeout(function() {
 				openFlag = true;
 			}, 11000);
@@ -171,7 +225,7 @@ describe("Card Reader Test", function() {
 		waitsFor(function()
 		{
 			return captured;
-		}, '5sec Wait to open the CardReader', 30000);
+		}, '5sec Wait to open the CardReader', 25000);
 
 		runs(function()
 		{
@@ -193,7 +247,8 @@ describe("Card Reader Test", function() {
 
 		runs(function()
 		{
-			Rho.CardReader.open({},callbackCardReader);
+			//Rho.CardReader.open({},callbackCardReader);
+			Rho.CardReader.open(callbackCardReader);
 			setTimeout(function() {
 				openFlag = true;
 			}, 11000);
@@ -208,7 +263,7 @@ describe("Card Reader Test", function() {
 		waitsFor(function()
 		{
 			return captured;
-		}, '5sec Wait to open the CardReader', 30000);
+		}, '5sec Wait to open the CardReader', 25000);
 
 		runs(function()
 		{
@@ -226,12 +281,11 @@ describe("Card Reader Test", function() {
 
 	});
 
-	it("VT286-0128 | MSR Card data All Tracks with synch callback |", function() {
+	it("VT286-0128 | MSR Card data All Tracks with sync callback |", function() {
 
 		runs(function()
 		{
-			var myvar = Rho.CardReader.open();
-			displayResult('DATA:- ',JSON.stringify(myvar));
+			Rho.CardReader.open();
 			setTimeout(function() {
 				openFlag = true;
 			}, 11000);
@@ -246,7 +300,7 @@ describe("Card Reader Test", function() {
 		waitsFor(function()
 		{
 			return captured;
-		}, '5sec Wait to open the CardReader', 30000);
+		}, '5sec Wait to open the CardReader', 25000);
 
 		runs(function()
 		{
@@ -268,7 +322,8 @@ describe("Card Reader Test", function() {
 
 		runs(function()
 		{
-			Rho.CardReader.open({},function(data){displayResult('DATA :- ',JSON.stringify(data));});
+			//Rho.CardReader.open({},function(data){displayResult('DATA :- ',JSON.stringify(data));});
+			Rho.CardReader.open(function(data){displayResult('DATA :- ',JSON.stringify(data));});
 			setTimeout(function() {
 				openFlag = true;
 			}, 11000);
@@ -284,7 +339,7 @@ describe("Card Reader Test", function() {
 		waitsFor(function()
 		{
 			return captured;
-		}, '5sec Wait to open the CardReader', 30000);
+		}, '5sec Wait to open the CardReader', 25000);
 
 		runs(function()
 		{
@@ -305,7 +360,8 @@ describe("Card Reader Test", function() {
 
 		runs(function()
 		{
-			Rho.CardReader.open({},callbackCardReader);
+			//Rho.CardReader.open({},callbackCardReader);
+			Rho.CardReader.open(callbackCardReader);
 			setTimeout(function() {
 				openFlag = true;
 			}, 11000);
@@ -320,7 +376,7 @@ describe("Card Reader Test", function() {
 		waitsFor(function()
 		{
 			return captured;
-		}, '5sec Wait to open the CardReader', 30000);
+		}, '5sec Wait to open the CardReader', 25000);
 
 		runs(function()
 		{
@@ -342,7 +398,8 @@ describe("Card Reader Test", function() {
 
 		runs(function()
 		{
-			Rho.CardReader.open({},callbackCardReader);
+			//Rho.CardReader.open({},callbackCardReader);
+			Rho.CardReader.open(callbackCardReader);
 			setTimeout(function() {
 				openFlag = true;
 			}, 11000);
@@ -365,7 +422,7 @@ describe("Card Reader Test", function() {
 		waitsFor(function()
 		{
 			return captured;
-		}, '5sec Wait to open the CardReader', 30000);
+		}, '5sec Wait to open the CardReader', 25000);
 
 		runs(function()
 		{
@@ -387,7 +444,8 @@ describe("Card Reader Test", function() {
 
 		runs(function()
 		{
-			Rho.CardReader.open({},callbackCardReader);
+			//Rho.CardReader.open({},callbackCardReader);
+			Rho.CardReader.open(callbackCardReader);
 			setTimeout(function() {
 				openFlag = true;
 			}, 11000);
@@ -410,7 +468,7 @@ describe("Card Reader Test", function() {
 		waitsFor(function()
 		{
 			return captured;
-		}, '5sec Wait to open the CardReader', 30000);
+		}, '5sec Wait to open the CardReader', 25000);
 
 		runs(function()
 		{
@@ -431,7 +489,8 @@ describe("Card Reader Test", function() {
 	xit("VT286-0133 | Empty Modulename |", function() {
 		runs(function()
 		{
-			Rho.CardReader.open({},callbackCardReader);
+			//Rho.CardReader.open({},callbackCardReader);
+			Rho.CardReader.open(callbackCardReader);
 			setTimeout(function() {
 				openFlag = true;
 			}, 11000);
@@ -454,7 +513,7 @@ describe("Card Reader Test", function() {
 		waitsFor(function()
 		{
 			return captured;
-		}, '5sec Wait to open the CardReader', 30000);
+		}, '5sec Wait to open the CardReader', 25000);
 
 		runs(function()
 		{
@@ -476,7 +535,8 @@ describe("Card Reader Test", function() {
 
 		runs(function()
 		{
-			Rho.CardReader.open({},callbackCardReader);
+			//Rho.CardReader.open({},callbackCardReader);
+			Rho.CardReader.open(callbackCardReader);
 			setTimeout(function() {
 				openFlag = true;
 			}, 11000);
@@ -498,7 +558,7 @@ describe("Card Reader Test", function() {
 		waitsFor(function()
 		{
 			return captured;
-		}, '5sec Wait to open the CardReader', 30000);
+		}, '5sec Wait to open the CardReader', 25000);
 
 		runs(function()
 		{
@@ -528,7 +588,7 @@ describe("Card Reader Test", function() {
 		{
 			dispCurrentProcess("VT286-0135 | swiping the card Without opening the MSR");
 			return captured;
-		}, '5sec Wait to open the CardReader', 30000);
+		}, '5sec Wait to open the CardReader', 25000);
 
 		runs(function()
 		{
@@ -549,7 +609,8 @@ describe("Card Reader Test", function() {
 	it("VT286-0136 | MSR Close |", function() {
 		runs(function()
 		{
-			Rho.CardReader.open({},callbackCardReader);
+			//Rho.CardReader.open({},callbackCardReader);
+			Rho.CardReader.open(callbackCardReader);
 			setTimeout(function() {
 				openFlag = true;
 			}, 11000);
@@ -572,7 +633,7 @@ describe("Card Reader Test", function() {
 		waitsFor(function()
 		{
 			return captured;
-		}, '5sec Wait to open the CardReader', 30000);
+		}, '5sec Wait to open the CardReader', 25000);
 
 		runs(function()
 		{
@@ -616,7 +677,7 @@ describe("Card Reader Test", function() {
 		waitsFor(function()
 		{
 			return captured;
-		}, '5sec Wait to open the CardReader', 30000);
+		}, '5sec Wait to open the CardReader', 25000);
 
 		runs(function()
 		{
@@ -661,7 +722,7 @@ describe("Card Reader Test", function() {
 		waitsFor(function()
 		{
 			return captured;
-		}, '5sec Wait to open the CardReader', 30000);
+		}, '5sec Wait to open the CardReader', 25000);
 
 		runs(function()
 		{
@@ -706,7 +767,7 @@ describe("Card Reader Test", function() {
 		waitsFor(function()
 		{
 			return captured;
-		}, '5sec Wait to open the CardReader', 30000);
+		}, '5sec Wait to open the CardReader', 25000);
 
 		runs(function()
 		{
@@ -751,7 +812,7 @@ describe("Card Reader Test", function() {
 		waitsFor(function()
 		{
 			return captured;
-		}, '5sec Wait to open the CardReader', 30000);
+		}, '5sec Wait to open the CardReader', 25000);
 
 		runs(function()
 		{
@@ -797,7 +858,7 @@ describe("Card Reader Test", function() {
 		{
 			dispCurrentProcess("Swipe The Card <br/> Check The Behavior");
 			return captured;
-		}, '5sec Wait to open the CardReader', 30000);
+		}, '5sec Wait to open the CardReader', 25000);
 
 		runs(function()
 		{
@@ -842,7 +903,7 @@ describe("Card Reader Test", function() {
 		waitsFor(function()
 		{
 			return captured;
-		}, '5sec Wait to open the CardReader', 30000);
+		}, '5sec Wait to open the CardReader', 25000);
 
 		runs(function()
 		{
@@ -887,7 +948,7 @@ describe("Card Reader Test", function() {
 		waitsFor(function()
 		{
 			return captured;
-		}, '5sec Wait to open the CardReader', 30000);
+		}, '5sec Wait to open the CardReader', 25000);
 
 		runs(function()
 		{
@@ -932,7 +993,7 @@ describe("Card Reader Test", function() {
 		waitsFor(function()
 		{
 			return captured;
-		}, '5sec Wait to open the CardReader', 30000);
+		}, '5sec Wait to open the CardReader', 25000);
 
 		runs(function()
 		{
@@ -977,7 +1038,7 @@ describe("Card Reader Test", function() {
 		waitsFor(function()
 		{
 			return captured;
-		}, '5sec Wait to open the CardReader', 30000);
+		}, '5sec Wait to open the CardReader', 25000);
 
 		runs(function()
 		{
@@ -1023,7 +1084,7 @@ describe("Card Reader Test", function() {
 		waitsFor(function()
 		{
 			return captured;
-		}, '5sec Wait to open the CardReader', 30000);
+		}, '5sec Wait to open the CardReader', 25000);
 
 		runs(function()
 		{
@@ -1045,7 +1106,8 @@ describe("Card Reader Test", function() {
 
 		runs(function()
 		{
-			Rho.CardReader.open({},callbackCardReader);
+			//Rho.CardReader.open({},callbackCardReader);
+			Rho.CardReader.open(callbackCardReader);
 			setTimeout(function() {
 				openFlag = true;
 			}, 11000);
@@ -1068,7 +1130,7 @@ describe("Card Reader Test", function() {
 		waitsFor(function()
 		{
 			return captured;
-		}, '5sec Wait to open the CardReader', 30000);
+		}, '5sec Wait to open the CardReader', 25000);
 
 		runs(function()
 		{
@@ -1091,7 +1153,8 @@ describe("Card Reader Test", function() {
 
 		runs(function()
 		{
-			Rho.CardReader.open({},callbackCardReader);
+			//Rho.CardReader.open({},callbackCardReader);
+			Rho.CardReader.open(callbackCardReader);
 			setTimeout(function() {
 				openFlag = true;
 			}, 11000);
@@ -1114,7 +1177,7 @@ describe("Card Reader Test", function() {
 		waitsFor(function()
 		{
 			return captured;
-		}, '5sec Wait to open the CardReader', 30000);
+		}, '5sec Wait to open the CardReader', 25000);
 
 		runs(function()
 		{
@@ -1137,7 +1200,8 @@ describe("Card Reader Test", function() {
 
 		runs(function()
 		{
-			Rho.CardReader.open({},callbackCardReader);
+			//Rho.CardReader.open({},callbackCardReader);
+			Rho.CardReader.open(callbackCardReader);
 			setTimeout(function() {
 				openFlag = true;
 			}, 11000);
@@ -1160,7 +1224,7 @@ describe("Card Reader Test", function() {
 		waitsFor(function()
 		{
 			return captured;
-		}, '5sec Wait to open the CardReader', 30000);
+		}, '5sec Wait to open the CardReader', 25000);
 
 		runs(function()
 		{
@@ -1178,11 +1242,12 @@ describe("Card Reader Test", function() {
 
 	});
 
-	it("VT286-0150 | PinEntry empty string |", function() {
+	xit("VT286-0150 | PinEntry empty string |", function() {
 
 		runs(function()
 		{
-			Rho.CardReader.open({},callbackCardReader);
+			//Rho.CardReader.open({},callbackCardReader);
+			Rho.CardReader.open(callbackCardReader);
 			setTimeout(function() {
 				openFlag = true;
 			}, 11000);
@@ -1205,7 +1270,7 @@ describe("Card Reader Test", function() {
 		waitsFor(function()
 		{
 			return captured;
-		}, '5sec Wait to open the CardReader', 30000);
+		}, '5sec Wait to open the CardReader', 25000);
 
 		runs(function()
 		{
@@ -1228,7 +1293,8 @@ describe("Card Reader Test", function() {
 
 		runs(function()
 		{
-			Rho.CardReader.open({},callbackCardReader);
+			//Rho.CardReader.open({},callbackCardReader);
+			Rho.CardReader.open(callbackCardReader);
 			setTimeout(function() {
 				openFlag = true;
 			}, 11000);
@@ -1251,7 +1317,7 @@ describe("Card Reader Test", function() {
 		waitsFor(function()
 		{
 			return captured;
-		}, '5sec Wait to open the CardReader', 30000);
+		}, '5sec Wait to open the CardReader', 25000);
 
 		runs(function()
 		{
@@ -1274,7 +1340,8 @@ describe("Card Reader Test", function() {
 
 		runs(function()
 		{
-			Rho.CardReader.open({},callbackCardReader);
+			//Rho.CardReader.open({},callbackCardReader);
+			Rho.CardReader.open(callbackCardReader);
 			setTimeout(function() {
 				openFlag = true;
 			}, 11000);
@@ -1298,7 +1365,7 @@ describe("Card Reader Test", function() {
 		waitsFor(function()
 		{
 			return captured;
-		}, '5sec Wait to open the CardReader', 30000);
+		}, '5sec Wait to open the CardReader', 25000);
 
 		runs(function()
 		{
@@ -1320,7 +1387,8 @@ describe("Card Reader Test", function() {
 
 		runs(function()
 		{
-			Rho.CardReader.open({},callbackCardReader);
+			//Rho.CardReader.open({},callbackCardReader);
+			Rho.CardReader.open(callbackCardReader);
 			setTimeout(function() {
 				openFlag = true;
 			}, 11000);
@@ -1343,7 +1411,7 @@ describe("Card Reader Test", function() {
 		waitsFor(function()
 		{
 			return captured;
-		}, '5sec Wait to open the CardReader', 30000);
+		}, '5sec Wait to open the CardReader', 25000);
 
 		runs(function()
 		{
@@ -1365,7 +1433,8 @@ describe("Card Reader Test", function() {
 
 		runs(function()
 		{
-			Rho.CardReader.open({},callbackCardReader);
+			//Rho.CardReader.open({},callbackCardReader);
+			Rho.CardReader.open(callbackCardReader);
 			setTimeout(function() {
 				openFlag = true;
 			}, 11000);
@@ -1389,7 +1458,7 @@ describe("Card Reader Test", function() {
 		waitsFor(function()
 		{
 			return captured;
-		}, '5sec Wait to open the CardReader', 30000);
+		}, '5sec Wait to open the CardReader', 25000);
 
 		runs(function()
 		{
@@ -1412,7 +1481,8 @@ describe("Card Reader Test", function() {
 
 		runs(function()
 		{
-			Rho.CardReader.open({},callbackCardReader);
+			//Rho.CardReader.open({},callbackCardReader);
+			Rho.CardReader.open(callbackCardReader);
 			setTimeout(function() {
 				openFlag = true;
 			}, 11000);
@@ -1436,7 +1506,7 @@ describe("Card Reader Test", function() {
 		waitsFor(function()
 		{
 			return captured;
-		}, '5sec Wait to open the CardReader', 30000);
+		}, '5sec Wait to open the CardReader', 25000);
 
 		runs(function()
 		{
@@ -1458,7 +1528,8 @@ describe("Card Reader Test", function() {
 
 		runs(function()
 		{
-			Rho.CardReader.open({},callbackCardReader);
+			//Rho.CardReader.open({},callbackCardReader);
+			Rho.CardReader.open(callbackCardReader);
 			setTimeout(function() {
 				openFlag = true;
 			}, 11000);
@@ -1482,7 +1553,7 @@ describe("Card Reader Test", function() {
 		waitsFor(function()
 		{
 			return captured;
-		}, '5sec Wait to open the CardReader', 30000);
+		}, '5sec Wait to open the CardReader', 25000);
 
 		runs(function()
 		{
@@ -1504,7 +1575,8 @@ describe("Card Reader Test", function() {
 
 		runs(function()
 		{
-			Rho.CardReader.open({},callbackCardReader);
+			//Rho.CardReader.open({},callbackCardReader);
+			Rho.CardReader.open(callbackCardReader);
 			setTimeout(function() {
 				openFlag = true;
 			}, 11000);
@@ -1528,7 +1600,7 @@ describe("Card Reader Test", function() {
 		waitsFor(function()
 		{
 			return captured;
-		}, '5sec Wait to open the CardReader', 30000);
+		}, '5sec Wait to open the CardReader', 25000);
 
 		runs(function()
 		{
@@ -1550,7 +1622,8 @@ describe("Card Reader Test", function() {
 
 		runs(function()
 		{
-			Rho.CardReader.open({},callbackCardReader);
+			//Rho.CardReader.open({},callbackCardReader);
+			Rho.CardReader.open(callbackCardReader);
 			setTimeout(function() {
 				openFlag = true;
 			}, 11000);
@@ -1574,7 +1647,7 @@ describe("Card Reader Test", function() {
 		waitsFor(function()
 		{
 			return captured;
-		}, '5sec Wait to open the CardReader', 30000);
+		}, '5sec Wait to open the CardReader', 25000);
 
 		runs(function()
 		{
@@ -1596,7 +1669,8 @@ describe("Card Reader Test", function() {
 
 		runs(function()
 		{
-			Rho.CardReader.open({},callbackCardReader);
+			//Rho.CardReader.open({},callbackCardReader);
+			Rho.CardReader.open(callbackCardReader);
 			setTimeout(function() {
 				openFlag = true;
 			}, 11000);
@@ -1620,7 +1694,7 @@ describe("Card Reader Test", function() {
 		waitsFor(function()
 		{
 			return captured;
-		}, '5sec Wait to open the CardReader', 30000);
+		}, '5sec Wait to open the CardReader', 25000);
 
 		runs(function()
 		{
@@ -1642,7 +1716,8 @@ describe("Card Reader Test", function() {
 
 		runs(function()
 		{
-			Rho.CardReader.open({},callbackCardReader);
+			//Rho.CardReader.open({},callbackCardReader);
+			Rho.CardReader.open(callbackCardReader);
 			setTimeout(function() {
 				openFlag = true;
 			}, 11000);
@@ -1666,7 +1741,7 @@ describe("Card Reader Test", function() {
 		waitsFor(function()
 		{
 			return captured;
-		}, '5sec Wait to open the CardReader', 30000);
+		}, '5sec Wait to open the CardReader', 25000);
 
 		runs(function()
 		{
@@ -1688,7 +1763,8 @@ describe("Card Reader Test", function() {
         
         runs(function()
 		{
-			Rho.CardReader.open({},callbackCardReader);
+			//Rho.CardReader.open({},callbackCardReader);
+			Rho.CardReader.open(callbackCardReader);
 			setTimeout(function() {
 				openFlag = true;
 			}, 11000);
@@ -1712,7 +1788,7 @@ describe("Card Reader Test", function() {
 		waitsFor(function()
 		{
 			return captured;
-		}, '5sec Wait to open the CardReader', 30000);
+		}, '5sec Wait to open the CardReader', 25000);
 
 		runs(function()
 		{
@@ -1733,7 +1809,8 @@ describe("Card Reader Test", function() {
 	it("VT286-0162 | PANData set to 1111222233334444 Do not enter the pin within 65 seconds|", function() {
 		runs(function()
 		{
-			Rho.CardReader.open({},callbackCardReader);
+			//Rho.CardReader.open({},callbackCardReader);
+			Rho.CardReader.open(callbackCardReader);
 			setTimeout(function() {
 				openFlag = true;
 			}, 11000);
@@ -1748,7 +1825,7 @@ describe("Card Reader Test", function() {
 		runs(function()
 		{
 			Rho.CardReader.PinEntry=true;
-			Rho.CardReader.pinTimeout=30000;
+			Rho.CardReader.pinTimeout=12000;
 			Rho.CardReader.panData==1111222233334444; 
 			setTimeout(function() {
 				swipeFlag = true;
@@ -1758,7 +1835,7 @@ describe("Card Reader Test", function() {
 		waitsFor(function()
 		{
 			return captured;
-		}, '5sec Wait to open the CardReader', 30000);
+		}, '5sec Wait to open the CardReader', 25000);
 
 		runs(function()
 		{
@@ -1781,7 +1858,8 @@ describe("Card Reader Test", function() {
 
 		runs(function()
 		{
-			Rho.CardReader.open({},callbackCardReader);
+			//Rho.CardReader.open({},callbackCardReader);
+			Rho.CardReader.open(callbackCardReader);
 			setTimeout(function() {
 				openFlag = true;
 			}, 11000);
@@ -1796,7 +1874,7 @@ describe("Card Reader Test", function() {
 		runs(function()
 		{
 			Rho.CardReader.PinEntry=true;
-			Rho.CardReader.pinTimeout=30000;
+			Rho.CardReader.pinTimeout=12000;
 			Rho.CardReader.panData="11111111aaaaaaaa"; 
 			setTimeout(function() {
 				swipeFlag = true;
@@ -1806,7 +1884,7 @@ describe("Card Reader Test", function() {
 		waitsFor(function()
 		{
 			return captured;
-		}, '5sec Wait to open the CardReader', 30000);
+		}, '5sec Wait to open the CardReader', 25000);
 
 		runs(function()
 		{
@@ -1827,7 +1905,8 @@ describe("Card Reader Test", function() {
 	it("VT286-0164 | PANData set to 1 |", function() {
 		runs(function()
 		{
-			Rho.CardReader.open({},callbackCardReader);
+			//Rho.CardReader.open({},callbackCardReader);
+			Rho.CardReader.open(callbackCardReader);
 			setTimeout(function() {
 				openFlag = true;
 			}, 11000);
@@ -1842,7 +1921,7 @@ describe("Card Reader Test", function() {
 		runs(function()
 		{
 			Rho.CardReader.PinEntry=true;
-			Rho.CardReader.pinTimeout=30000;
+			Rho.CardReader.pinTimeout=12000;
 			Rho.CardReader.panData=1; 
 			setTimeout(function() {
 				swipeFlag = true;
@@ -1852,7 +1931,7 @@ describe("Card Reader Test", function() {
 		waitsFor(function()
 		{
 			return captured;
-		}, '5sec Wait to open the CardReader', 30000);
+		}, '5sec Wait to open the CardReader', 25000);
 
 		runs(function()
 		{
@@ -1873,7 +1952,8 @@ describe("Card Reader Test", function() {
 	xit("VT286-0165 | PANData set to empty value |", function() {
 		runs(function()
 		{
-			Rho.CardReader.open({},callbackCardReader);
+			//Rho.CardReader.open({},callbackCardReader);
+			Rho.CardReader.open(callbackCardReader);
 			setTimeout(function() {
 				openFlag = true;
 			}, 11000);
@@ -1888,7 +1968,7 @@ describe("Card Reader Test", function() {
 		runs(function()
 		{
 			Rho.CardReader.PinEntry=true;
-			Rho.CardReader.pinTimeout=30000;
+			Rho.CardReader.pinTimeout=12000;
 			Rho.CardReader.panData=''; 
 			setTimeout(function() {
 				swipeFlag = true;
@@ -1898,7 +1978,7 @@ describe("Card Reader Test", function() {
 		waitsFor(function()
 		{
 			return captured;
-		}, '5sec Wait to open the CardReader', 30000);
+		}, '5sec Wait to open the CardReader', 25000);
 
 		runs(function()
 		{
@@ -1920,7 +2000,8 @@ describe("Card Reader Test", function() {
 
 		runs(function()
 		{
-			Rho.CardReader.open({},callbackCardReader);
+			//Rho.CardReader.open({},callbackCardReader);
+			Rho.CardReader.open(callbackCardReader);
 			setTimeout(function() {
 				openFlag = true;
 			}, 11000);
@@ -1942,7 +2023,7 @@ describe("Card Reader Test", function() {
 		waitsFor(function()
 		{
 			return captured;
-		}, '5sec Wait to open the CardReader', 30000);
+		}, '5sec Wait to open the CardReader', 25000);
 
 		runs(function()
 		{
@@ -1964,7 +2045,8 @@ describe("Card Reader Test", function() {
 
 		runs(function()
 		{
-			Rho.CardReader.open({},callbackCardReader);
+			//Rho.CardReader.open({},callbackCardReader);
+			Rho.CardReader.open(callbackCardReader);
 			setTimeout(function() {
 				openFlag = true;
 			}, 11000);
@@ -1986,7 +2068,7 @@ describe("Card Reader Test", function() {
 		waitsFor(function()
 		{
 			return captured;
-		}, '5sec Wait to open the CardReader', 30000);
+		}, '5sec Wait to open the CardReader', 25000);
 
 		runs(function()
 		{
@@ -2008,7 +2090,8 @@ describe("Card Reader Test", function() {
 
 		runs(function()
 		{
-			Rho.CardReader.open({},callbackCardReader);
+			//Rho.CardReader.open({},callbackCardReader);
+			Rho.CardReader.open(callbackCardReader);
 			setTimeout(function() {
 				openFlag = true;
 			}, 11000);
@@ -2030,7 +2113,7 @@ describe("Card Reader Test", function() {
 		waitsFor(function()
 		{
 			return captured;
-		}, '5sec Wait to open the CardReader', 30000);
+		}, '5sec Wait to open the CardReader', 25000);
 
 		runs(function()
 		{
@@ -2053,7 +2136,8 @@ describe("Card Reader Test", function() {
 
 		runs(function()
 		{
-			Rho.CardReader.open({},encrypted_callback);
+			//Rho.CardReader.open({},encrypted_callback);
+			Rho.CardReader.open(encrypted_callback);
 			setTimeout(function() {
 				openFlag = true;
 			}, 11000);
@@ -2075,7 +2159,7 @@ describe("Card Reader Test", function() {
 		waitsFor(function()
 		{
 			return captured;
-		}, '5sec Wait to open the CardReader', 30000);
+		}, '5sec Wait to open the CardReader', 25000);
 
 		runs(function()
 		{
@@ -2099,7 +2183,7 @@ describe("Card Reader Test", function() {
 		{
 			dispCurrentProcess("VT286-0170 | encryption unencrypted");
 			return captured;
-		}, '5sec Wait to open the CardReader', 30000);
+		}, '5sec Wait to open the CardReader', 25000);
 
 		runs(function()
 		{
@@ -2113,7 +2197,7 @@ describe("Card Reader Test", function() {
 		{
 			dispCurrentProcess("VT286-0171 | encrypted data in financial card");
 			return captured;
-		}, '5sec Wait to open the CardReader', 30000);
+		}, '5sec Wait to open the CardReader', 25000);
 
 		runs(function()
 		{
@@ -2126,7 +2210,7 @@ describe("Card Reader Test", function() {
 		{
 			dispCurrentProcess("VT286-0172 | rawdata with non financial card");
 			return captured;
-		}, '5sec Wait to open the CardReader', 30000);
+		}, '5sec Wait to open the CardReader', 25000);
 
 		runs(function()
 		{
@@ -2139,7 +2223,7 @@ describe("Card Reader Test", function() {
 		{
 			dispCurrentProcess("VT286-0173 | rawdata with financial card");
 			return captured;
-		}, '5sec Wait to open the CardReader', 30000);
+		}, '5sec Wait to open the CardReader', 25000);
 
 		runs(function()
 		{
@@ -2152,7 +2236,7 @@ describe("Card Reader Test", function() {
 		{
 			dispCurrentProcess(" VT286-0174 | track1Status true");
 			return captured;
-		}, '5sec Wait to open the CardReader', 30000);
+		}, '5sec Wait to open the CardReader', 25000);
 
 		runs(function()
 		{
@@ -2165,7 +2249,7 @@ describe("Card Reader Test", function() {
 		{
 			dispCurrentProcess(" VT286-0175 | track2Status true");
 			return captured;
-		}, '5sec Wait to open the CardReader', 30000);
+		}, '5sec Wait to open the CardReader', 25000);
 
 		runs(function()
 		{
@@ -2178,7 +2262,7 @@ describe("Card Reader Test", function() {
 		{
 			dispCurrentProcess(" VT286-0176 | track3Status true");
 			return captured;
-		}, '5sec Wait to open the CardReader', 30000);
+		}, '5sec Wait to open the CardReader', 25000);
 
 		runs(function()
 		{
@@ -2191,7 +2275,7 @@ describe("Card Reader Test", function() {
 		{
 			dispCurrentProcess(" VT286-0177 | track1EncryptedStatus true");
 			return captured;
-		}, '5sec Wait to open the CardReader', 30000);
+		}, '5sec Wait to open the CardReader', 25000);
 
 		runs(function()
 		{
@@ -2204,7 +2288,7 @@ describe("Card Reader Test", function() {
 		{
 			dispCurrentProcess(" VT286-0178 | track2EncryptedStatus true");
 			return captured;
-		}, '5sec Wait to open the CardReader', 30000);
+		}, '5sec Wait to open the CardReader', 25000);
 
 		runs(function()
 		{
@@ -2217,7 +2301,7 @@ describe("Card Reader Test", function() {
 		{
 			dispCurrentProcess(" VT286-0179 | track3EncryptedStatus true");
 			return captured;
-		}, '5sec Wait to open the CardReader', 30000);
+		}, '5sec Wait to open the CardReader', 25000);
 
 		runs(function()
 		{
@@ -2230,7 +2314,7 @@ describe("Card Reader Test", function() {
 		{
 			dispCurrentProcess(" VT286-0180 | track1Status and track2Status  true");
 			return captured;
-		}, '5sec Wait to open the CardReader', 30000);
+		}, '5sec Wait to open the CardReader', 25000);
 
 		runs(function()
 		{
@@ -2243,7 +2327,7 @@ describe("Card Reader Test", function() {
 		{
 			dispCurrentProcess(" VT286-0181 | track1Status and track3Status  true");
 			return captured;
-		}, '5sec Wait to open the CardReader', 30000);
+		}, '5sec Wait to open the CardReader', 25000);
 
 		runs(function()
 		{
@@ -2256,7 +2340,7 @@ describe("Card Reader Test", function() {
 		{
 			dispCurrentProcess(" VT286-0182 | track2Status and track3Status  true");
 			return captured;
-		}, '5sec Wait to open the CardReader', 30000);
+		}, '5sec Wait to open the CardReader', 25000);
 
 		runs(function()
 		{
@@ -2269,7 +2353,7 @@ describe("Card Reader Test", function() {
 		{
 			dispCurrentProcess(" VT286-0183 | track2Status track2Status and track3Status  true");
 			return captured;
-		}, '5sec Wait to open the CardReader', 30000);
+		}, '5sec Wait to open the CardReader', 25000);
 
 		runs(function()
 		{
@@ -2282,7 +2366,7 @@ describe("Card Reader Test", function() {
 		{
 			dispCurrentProcess(" VT286-0184 | track1EncryptedStatus and track2EncryptedStatus  true");
 			return captured;
-		}, '5sec Wait to open the CardReader', 30000);
+		}, '5sec Wait to open the CardReader', 25000);
 
 		runs(function()
 		{
@@ -2295,7 +2379,7 @@ describe("Card Reader Test", function() {
 		{
 			dispCurrentProcess("VT286-0185 | track1EncryptedStatus and track3EncryptedStatus true");
 			return captured;
-		}, '5sec Wait to open the CardReader', 30000);
+		}, '5sec Wait to open the CardReader', 25000);
 
 		runs(function()
 		{
@@ -2308,7 +2392,7 @@ describe("Card Reader Test", function() {
 		{
 			dispCurrentProcess(" VT286-0186 | track2EncryptedStatus and track3EncryptedStatus true");
 			return captured;
-		}, '5sec Wait to open the CardReader', 30000);
+		}, '5sec Wait to open the CardReader', 25000);
 
 		runs(function()
 		{
@@ -2321,7 +2405,7 @@ describe("Card Reader Test", function() {
 		{
 			dispCurrentProcess(" VT286-0187 | track1EncryptedStatus track2EncryptedStatus and track3EncryptedStatus  true");
 			return captured;
-		}, '5sec Wait to open the CardReader', 30000);
+		}, '5sec Wait to open the CardReader', 25000);
 
 		runs(function()
 		{
@@ -2334,7 +2418,7 @@ describe("Card Reader Test", function() {
 		{
 			dispCurrentProcess(" VT286-0188 | Card with only Track1");
 			return captured;
-		}, '5sec Wait to open the CardReader', 30000);
+		}, '5sec Wait to open the CardReader', 25000);
 
 		runs(function()
 		{
@@ -2347,7 +2431,7 @@ describe("Card Reader Test", function() {
 		{
 			dispCurrentProcess(" VT286-0189 | Card with only Track2");
 			return captured;
-		}, '5sec Wait to open the CardReader', 30000);
+		}, '5sec Wait to open the CardReader', 25000);
 
 		runs(function()
 		{
@@ -2360,7 +2444,7 @@ describe("Card Reader Test", function() {
 		{
 			dispCurrentProcess(" VT286-0190 | Card with only Track3");
 			return captured;
-		}, '5sec Wait to open the CardReader', 30000);
+		}, '5sec Wait to open the CardReader', 25000);
 
 		runs(function()
 		{
@@ -2373,7 +2457,7 @@ describe("Card Reader Test", function() {
 		{
 			dispCurrentProcess(" VT286-0191 | Card with only track1 and Track2 data");
 			return captured;
-		}, '5sec Wait to open the CardReader', 30000);
+		}, '5sec Wait to open the CardReader', 25000);
 
 		runs(function()
 		{
@@ -2386,7 +2470,7 @@ describe("Card Reader Test", function() {
 		{
 			dispCurrentProcess(" VT286-0192 | Card with only track1 and Track3 data");
 			return captured;
-		}, '5sec Wait to open the CardReader', 30000);
+		}, '5sec Wait to open the CardReader', 25000);
 
 		runs(function()
 		{
@@ -2399,7 +2483,7 @@ describe("Card Reader Test", function() {
 		{
 			dispCurrentProcess(" VT286-0193 | Card with only track2 and Track3 data");
 			return captured;
-		}, '5sec Wait to open the CardReader', 30000);
+		}, '5sec Wait to open the CardReader', 25000);
 
 		runs(function()
 		{
@@ -2412,7 +2496,7 @@ describe("Card Reader Test", function() {
 		{
 			dispCurrentProcess(" VT286-0194 | Card with all three track data");
 			return captured;
-		}, '5sec Wait to open the CardReader', 30000);
+		}, '5sec Wait to open the CardReader', 25000);
 
 		runs(function()
 		{
@@ -2425,7 +2509,7 @@ describe("Card Reader Test", function() {
 		{
 			dispCurrentProcess("VT286-0195 | Card with only Track1");
 			return captured;
-		}, '5sec Wait to open the CardReader', 30000);
+		}, '5sec Wait to open the CardReader', 25000);
 
 		runs(function()
 		{
@@ -2438,7 +2522,7 @@ describe("Card Reader Test", function() {
 		{
 			dispCurrentProcess(" VT286-0196 | Card with only Track2");
 			return captured;
-		}, '5sec Wait to open the CardReader', 30000);
+		}, '5sec Wait to open the CardReader', 25000);
 
 		runs(function()
 		{
@@ -2451,7 +2535,7 @@ describe("Card Reader Test", function() {
 		{
 			dispCurrentProcess(" VT286-0197 | Card with only Track3");
 			return captured;
-		}, '5sec Wait to open the CardReader', 30000);
+		}, '5sec Wait to open the CardReader', 25000);
 
 		runs(function()
 		{
@@ -2464,7 +2548,7 @@ describe("Card Reader Test", function() {
 		{
 			dispCurrentProcess(" VT286-0198 | Card with only track1 and Track2 data");
 			return captured;
-		}, '5sec Wait to open the CardReader', 30000);
+		}, '5sec Wait to open the CardReader', 25000);
 
 		runs(function()
 		{
@@ -2477,7 +2561,7 @@ describe("Card Reader Test", function() {
 		{
 			dispCurrentProcess(" VT286-0199 | Card with only track1 and Track3 data");
 			return captured;
-		}, '5sec Wait to open the CardReader', 30000);
+		}, '5sec Wait to open the CardReader', 25000);
 
 		runs(function()
 		{
@@ -2490,7 +2574,7 @@ describe("Card Reader Test", function() {
 		{
 			dispCurrentProcess(" VT286-0200 | Card with only track2 and Track3 data");
 			return captured;
-		}, '5sec Wait to open the CardReader', 30000);
+		}, '5sec Wait to open the CardReader', 25000);
 
 		runs(function()
 		{
@@ -2503,7 +2587,7 @@ describe("Card Reader Test", function() {
 		{
 			dispCurrentProcess(" VT286-0201 | Card with all three track data");
 			return captured;
-		}, '5sec Wait to open the CardReader', 30000);
+		}, '5sec Wait to open the CardReader', 25000);
 
 		runs(function()
 		{
@@ -2516,7 +2600,7 @@ describe("Card Reader Test", function() {
 		{
 			dispCurrentProcess(" VT286-0202 | ksn number with non financial card");
 			return captured;
-		}, '5sec Wait to open the CardReader', 30000);
+		}, '5sec Wait to open the CardReader', 25000);
 
 		runs(function()
 		{
@@ -2529,7 +2613,7 @@ describe("Card Reader Test", function() {
 		{
 			dispCurrentProcess("VT286-0203 | ksn number with financial card");
 			return captured;
-		}, '5sec Wait to open the CardReader', 30000);
+		}, '5sec Wait to open the CardReader', 25000);
 
 		runs(function()
 		{
@@ -2546,5 +2630,5 @@ describe("Card Reader Test", function() {
 		},'5sec Wait to close the CardReader', 6000);
 	
 	});
-
+	
 });

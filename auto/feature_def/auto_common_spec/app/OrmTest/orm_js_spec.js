@@ -100,7 +100,6 @@ describe("<ORM module specs>", function() {
         Model.create({"name":"test"});
         sources = Rho.ORMHelper.getAllSources();
         expect(Model).toBeDefined();
-        expect(Rho.ORM.getModel('Product')).toBe(Model);
 
         res = db.$execute_sql("SELECT * FROM Product INDEXED BY p1 Where name = 'test' ");
         expect(res[0].map.name).toEqual('test');

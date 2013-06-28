@@ -19,22 +19,24 @@
 
 	<style>
 	#detailsdiv {
-    background: url("/public/images/grid2.gif") repeat scroll 0 0 transparent;
+    background: url("img/grid2.gif") repeat scroll 0 0 transparent;
     border: 1px solid #DCDCDC;
     color: #8B0000;
     display: block;
     font-weight: bold;
-    left: 80px;
+    left: 170px;
     padding: 10px;
     position: fixed;
     text-align: center;
-    top: 100px;
-    width: 180px;
+    top: 200px;
+    width: 530px;
 	}
 	</style>
 
 	<!-- include Helper files here... -->
+	<script type="text/javascript" src="videocapture_js_test.js" ></script>
     <script type="text/javascript" src="../helpers/specHelpers.js"></script>
+    
 
 	<!-- include spec files here... -->
 	<script type="text/javascript" src="videocapture_js_spec.js"></script>
@@ -82,15 +84,6 @@
 <ul id="myList2">
 </ul>
 </div>
-<br/><br/>
-
-<span id='result'>
-<table>
-    <tr>
-        <td><button onclick="captureResult(true)">Pass</button></td>
-        <td><button onclick="captureResult(false)">Fail</button></td>
-    </tr>
-</table>
-    </span>
+<br/><br/><br/><br/>
 </body>
 </html>
