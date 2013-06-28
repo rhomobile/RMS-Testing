@@ -6,22 +6,20 @@ describe("ScreenOrientation JS API Test", function() {
 
     beforeEach(function() {
 		/* ... Set up your object ... */
-		Rho.ScreenOrientation.autoRotate = true;
 		displayflag = false;
 		orientationType = '';
 		callbackFired = false;
 	});
 
 	afterEach(function() {
-		/* ... Tear it down ... */
+		Rho.ScreenOrientation.autoRotate = true;
 	});
 
-	var screenorientation_callback = function (data){
+	var screenorientation_callback = function (data) {
 
 		orientationType = data;
-		displayResult('DATA:- ',JSON.stringify(data));
+		//displayResult('DATA:- ',JSON.stringify(data));
 		callbackFired = true;
-
 	}
 
 	it("VT281-0905 | Test Screen Orientation rightHanded with callback |", function() {
@@ -35,14 +33,8 @@ describe("ScreenOrientation JS API Test", function() {
 
 		waitsFor(function()
 		{
-			return callbackFired;
+			return ( (callbackFired == true) && (orientationType == "rightHanded") )
 		}, 'The Screen Orientation should display', 10000);
-
-		runs(function()
-		{
-			expect(orientationType).toEqual("righthanded");
-		});
-
 	});
 	
 	it("VT281-0906 | Test Screen Orientation leftHanded with callback |", function() {
@@ -55,13 +47,8 @@ describe("ScreenOrientation JS API Test", function() {
 
 		waitsFor(function()
 		{
-			return callbackFired;
+			return ( (callbackFired == true) && (orientationType == "leftHanded") )
 		}, 'The Screen Orientation should display', 10000);
-
-		runs(function()
-		{
-			expect(orientationType).toEqual("lefthanded");
-		});
 	});
 
 	it("VT281-0907 | Test Screen Orientation upsideDown with callback |", function() {
@@ -74,13 +61,8 @@ describe("ScreenOrientation JS API Test", function() {
 
 		waitsFor(function()
 		{
-			return callbackFired;
+			return ( (callbackFired == true) && (orientationType == "upsideDown") )
 		}, 'The Screen Orientation should display', 10000);
-
-		runs(function()
-		{
-			expect(orientationType).toEqual("upsidedown");
-		});
 	});
 
 	it("VT281-0908 | Test Screen Orientation normal with callback |", function() {
@@ -93,13 +75,8 @@ describe("ScreenOrientation JS API Test", function() {
 
 		waitsFor(function()
 		{
-			return callbackFired;
+			return ( (callbackFired == true) && (orientationType == "normal") )
 		}, 'The Screen Orientation should display', 10000);
-
-		runs(function()
-		{
-			expect(orientationType).toEqual("normal");
-		});
 	});
 
 	it("VT281-0910 | Set autoRotate as false and call righthand method |", function() {
@@ -114,16 +91,11 @@ describe("ScreenOrientation JS API Test", function() {
 
 		waitsFor(function()
 		{
-			return callbackFired;
+			return ( (callbackFired == true) && (orientationType == "rightHanded") )
 		}, 'The Screen Orientation should display', 10000);
-
-		runs(function()
-		{
-			expect(orientationType).toEqual("righthanded");
-		});
 	});
 
-	it("VT281-0912| Set autoRotate as true and call right hand method |", function() {
+	it("VT281-0912| Set autoRotate as true and call righthand method |", function() {
 
 		runs(function()
 		{
@@ -134,13 +106,7 @@ describe("ScreenOrientation JS API Test", function() {
 
 		waitsFor(function()
 		{
-			return callbackFired;
+			return ( (callbackFired == true) && (orientationType == "rightHanded") )
 		}, 'The Screen Orientation should display', 10000);
-
-		runs(function()
-		{
-			expect(callbackFired).toEqual("righthanded");
-		});
 	});
-
 });

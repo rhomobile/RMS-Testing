@@ -7,19 +7,15 @@ describe("ScreenOrientation Ruby API Test", function() {
 	afterEach(function() 
 	{	
 		resetCallback();
-		//Rho.ScreenOrientation.setScreenOrientationEvent("");	
-		Rho.ScreenOrientation.autoRotate = true;
+		setScreenOrientation(true);
 	});		
 	
 	it("should enable automatic screen orientation", function() {
-		expect(Rho.ScreenOrientation.autoRotate).toBe(true);			
-		//expect(enable()).toBe(true);			
+		expect(enable()).toBe(true);			
 	});
 	
 	it("should disable automatic screen orientation", function() {			
-		Rho.ScreenOrientation.autoRotate = false;
-		expect(Rho.ScreenOrientation.autoRotate).toBe(false);
-		//expect(disable()).toBe(false);			
+		expect(disable()).toBe(false);			
 	});
 	
 	it("should set current device orientation to upsidedown without callback", function() {			
@@ -52,7 +48,7 @@ describe("ScreenOrientation Ruby API Test", function() {
 		}, "Set the current orientation to upsidedown...this should trigger a callback");
 	
 		waitsFor(function() {
-        	return document.getElementById('output').innerHTML == "upsidedown"
+        	return document.getElementById('output').innerHTML == "upsideDown"
     	}, document.getElementById('output').innerHTML + " is not the expected value upsidedown", 3000);
 	});
 	
@@ -64,7 +60,7 @@ describe("ScreenOrientation Ruby API Test", function() {
 		}, "Set the current orientation to lefthanded...this should trigger a callback");
 	
 		waitsFor(function() {
-        	return document.getElementById('output').innerHTML == "lefthanded"
+        	return document.getElementById('output').innerHTML == "leftHanded"
     	}, document.getElementById('output').innerHTML + " is not the expected value lefthanded", 3000);
 	});
 	
@@ -76,7 +72,7 @@ describe("ScreenOrientation Ruby API Test", function() {
 		}, "Set the current orientation to righthanded...this should trigger a callback");
 	
 		waitsFor(function() {
-        	return document.getElementById('output').innerHTML == "righthanded"
+        	return document.getElementById('output').innerHTML == "rightHanded"
     	}, document.getElementById('output').innerHTML + " is not the expected value righthanded", 3000);
 	});
 	

@@ -7,8 +7,8 @@ function enable()
          url:    '/app/ScreenOrientationTest/enable',
          data:	{enabled:true},
          success: function(result) 	{
-					returnedValue = result;
-                  },		
+			returnedValue = result;
+         },		
          async:   false
 	});
 	return returnedValue;	
@@ -26,6 +26,15 @@ function disable()
          async:   false	
 	});
 	return returnedValue;
+}
+
+function setScreenOrientation(value)
+{
+	jQuery.ajax({
+         url:    '/app/ScreenOrientationTest/set_screen_orientation',
+         data:	{enabled: value},	
+         async:   false	
+	});
 }
 
 function normal()
