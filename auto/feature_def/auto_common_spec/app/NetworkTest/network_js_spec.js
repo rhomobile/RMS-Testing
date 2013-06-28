@@ -19,6 +19,9 @@ describe('Network JS API', function() {
 
     var srvHttpsTestMethodsUrl = httpsSrvURL + "/test_methods";
          
+    var imagesDownloadFolder = Rho.RhoFile.join( Rho.Application.userFolder,"images" );
+    Rho.RhoFile.makeDir(imagesDownloadFolder);
+         
     var waitTimeout = 20000;
     
     var callbackCount = 0;
@@ -531,7 +534,7 @@ describe('Network JS API', function() {
        var flag = false;
        var callbackCalled = false;
        var status = '';
-       var fname = Rho.RhoFile.join(Rho.Application.userFolder,"/images/network_0049.jpg");
+       var fname = Rho.RhoFile.join(imagesDownloadFolder,"network_0049.jpg");
 
        var download_file_callback = function (args){
             status = args['status'];
@@ -572,7 +575,7 @@ describe('Network JS API', function() {
        var flag = false;
        var callbackCalled = false;
        var status = '';
-       var fname = Rho.RhoFile.join(Rho.Application.userFolder,"/images/network_0049.jpg");
+       var fname = Rho.RhoFile.join(imagesDownloadFolder,"network_0049.jpg");
 
        var download_file_callback = function (args){
             status = args['status'];
@@ -624,7 +627,7 @@ describe('Network JS API', function() {
 
             downloadfileProps = {
                 url: srvHttpDownloadImageUrl,
-                filename: Rho.RhoFile.join(Rho.Application.userFolder,"/images/network_0049.jpg"),
+                filename: Rho.RhoFile.join(imagesDownloadFolder,"network_0049.jpg"),
                 overwriteFile: true
             };
 
@@ -659,7 +662,7 @@ describe('Network JS API', function() {
 
             downloadfileProps = {
                 url: srvHttpDownloadImageUrl,
-                filename: Rho.RhoFile.join(Rho.Application.userFolder,"/images/network_0049.jpg"),
+                filename: Rho.RhoFile.join(imagesDownloadFolder,"network_0049.jpg"),
                 overwriteFile: true
             };
 
@@ -694,7 +697,7 @@ describe('Network JS API', function() {
 
             downloadfileProps = {
                 url: srvHttpDownloadImageUrl,
-                filename: Rho.RhoFile.join(Rho.Application.userFolder,"/images/newNetwork/network_0053.jpg"),
+                filename: Rho.RhoFile.join(imagesDownloadFolder,"newNetwork/network_0053.jpg"),
                 overwriteFile: true,
                 createFolders: false
             };
@@ -731,7 +734,7 @@ describe('Network JS API', function() {
 
             downloadfileProps = {
                 url: srvHttpDownloadImageUrl,
-                filename: Rho.RhoFile.join(Rho.Application.userFolder,"/images/newNetwork54/network_0054.jpg"),
+                filename: Rho.RhoFile.join(imagesDownloadFolder,"newNetwork54/network_0054.jpg"),
                 overwriteFile: true,
                 createFolders: true
             };
@@ -763,7 +766,7 @@ describe('Network JS API', function() {
 
             downloadfileProps = {
                 url: srvHttpDownloadImageUrl,
-                filename: Rho.RhoFile.join(Rho.Application.userFolder,"/images/newNetwork54/network_0055.jpg"),
+                filename: Rho.RhoFile.join(imagesDownloadFolder,"newNetwork54/network_0055.jpg"),
                 overwriteFile: true,
                 createFolders: true
             };
@@ -805,7 +808,7 @@ describe('Network JS API', function() {
                 authType: "basic",
                 authUser: "admin",
                 authPassword: "admin",
-                filename: Rho.RhoFile.join(Rho.Application.userFolder,"/images/network/network1.jpg"),
+                filename: Rho.RhoFile.join(imagesDownloadFolder,"network/network1.jpg"),
                 overwriteFile: true,
                 createFolders: true
             };
@@ -962,7 +965,7 @@ describe('Network JS API', function() {
             url: srvHttpDownloadImageUrl,
             overwriteFile: true,
             createFolders: true,
-            filename: Rho.RhoFile.join(Rho.Application.userFolder,"/images/network.jpg")
+            filename: Rho.RhoFile.join(imagesDownloadFolder,"network.jpg")
         };
 
         Rho.Network.downloadFile(downloadfileProps);
@@ -970,4 +973,5 @@ describe('Network JS API', function() {
         expect(myvar["status"]).toEqual('ok');
         //TODO: Need to add Code for File exist.
     });
+         
 });
