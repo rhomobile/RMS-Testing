@@ -91,7 +91,7 @@
         expect(object.has('absent key')).toBe(false);
     });
 
-    it('creates object in database', function() {
+    it('VT302-0200 | creates object in database', function() {
         var modelDef = function(model){
             model.modelName('Product'),
             model.property("key");
@@ -103,7 +103,7 @@
         expect(after).toBe(before + 1);
     });
 
-    it('saves object to database', function() {
+    it('VT302-0234 | saves object to database', function() {
         var modelDef = function(model){
             model.modelName('Product'),
             model.property("key");
@@ -120,7 +120,7 @@
         expect(Model.find(object.object()).vars()).toEqual(object.vars());
     });
 
-    it('updates object attributes in database', function() {
+    it('VT302-0254 | updates object attributes in database', function() {
         //var Model = Rho.ORM.addModel(modelDef);
         Model.deleteAll();
 
@@ -132,7 +132,7 @@
         expect(cleanVars(object)).toEqual({'key': 'another value', 'new key': 'new value', 'original key': 'original value'});
     });
 
-    it('destroys object in database', function() {
+    it('VT302-0210 | destroys object in database', function() {
         //var Model = Rho.ORM.addModel(modelDef);
 
         Model.deleteAll();
@@ -149,29 +149,29 @@
         expect(found[0].vars()).toEqual(object2.vars());
     });
 
-    it('does not create empty object in database', function() {
+    it('VT302-0201 | does not create empty object in database', function() {
         //var Model = Rho.ORM.addModel(modelDef);
         var before = Model.count();
         Model.create();
         expect(Model.count()).toBe(before);
     });
 
-    it('does not create object with the only empty property in database', function() {
+    it('VT302-0256 | does not create object with the only empty property in database', function() {
         //var Model = Rho.ORM.addModel(modelDef);
         var before = Model.count();
         Model.create({'': 'value'});
         expect(Model.count()).toBe(before);
     });
 
-    it('deletes all objects in database', function() {
+    it('VT302-0204 | deletes all objects in database', function() {
         //var Model = Rho.ORM.addModel(modelDef);
         Model.create({'key': 'value'});
         expect(Model.count()).toBeGreaterThan(0);
         Model.deleteAll();
         expect(Model.count()).toBe(0);
     });
-
-    it('deletes all objects in sync database', function() {
+//Bhakta: Changed the Description Because destroy method works on single activerecord object.
+    it('VT302-0211 | delete object in sync database', function() {
       var modelDefs3 = function(model){
         model.modelName("Item");
         model.property("name","string");
@@ -192,7 +192,7 @@
       expect(cv[0].map.update_type).toEqual("delete");
     });
 
-    it('deletes all objects of specific model in database', function() {
+    it('VT302-0257 | deletes all objects of specific model in database', function() {
         var Model1 = Rho.ORM.addModel(modelDef);
         var Model2 = Rho.ORM.addModel(modelDef2);
 
@@ -210,7 +210,7 @@
         expect(Model2.count()).toBe(0);
     });
 
-    it('reads object from database', function() {
+    it('VT302-0217 | reads object from database', function() {
         //var Model = Rho.ORM.addModel(modelDef);
         Model.deleteAll();
         Model.create({'key': 'value'});
@@ -228,7 +228,7 @@
         expect(res).toBe(true);
     });
 
-    it('does not write empty property to database', function() {
+    it('VT302-0258 | does not write empty property to database', function() {
         //var Model = Rho.ORM.addModel(modelDef);
         Model.deleteAll();
         Model.create({'key': 'value', '': 'empty'});
@@ -252,7 +252,7 @@
         expect(after1).toBe(before1 + 2);
     });
 
-    it('counts objects in database using find', function() {
+    it('VT302-0259 | counts objects in database using find', function() {
         var Model1 = Rho.ORM.addModel(modelDef);
         var Model2 = Rho.ORM.addModel(modelDef2);
 
@@ -267,7 +267,7 @@
         expect(after1).toBe(before1 + 2);
     });
 
-    it('counts objects in database using find with condition', function() {
+    it('VT302-0260 | counts objects in database using find with condition', function() {
         var Model1 = Rho.ORM.addModel(modelDef);
         var Model2 = Rho.ORM.addModel(modelDef2);
 
@@ -285,7 +285,7 @@
     });
 
 
-    it('finds all objects in database', function() {
+    it('VT302-0261 | finds all objects in database', function() {
         var Model1 = Rho.ORM.addModel(modelDef);
         var Model2 = Rho.ORM.addModel(modelDef2);
 
@@ -303,7 +303,7 @@
         expect(cleanVars(found[1 - i])).toEqual({'key3': 'value3'});
     });
 
-    it('finds all objects with one condition', function() {
+    it('VT302-0218 | finds all objects with one condition', function() {
         //var Model = Rho.ORM.addModel(modelDef);
 
         Model.deleteAll();
@@ -319,7 +319,7 @@
         expect(found[1 - i].vars()).toEqual(objects[1].vars());
     });
 
-    it('finds all objects with conditions', function() {
+    it('VT302-0262 | finds all objects with conditions', function() {
         //var Model = Rho.ORM.addModel(modelDef);
 
         Model.deleteAll();
@@ -347,14 +347,14 @@
         expect(Model.find(original.object()).vars()).toEqual(original.vars());
     });
 
-    it('should finds first object in database', function() {
+    it('VT302-0227 | should finds first object in database', function() {
         Model.deleteAll();
         var originals = [Model.create({'key1': 'value1'}), Model.create({'key3': 'value3'})];
         var found = Model.find('first');
         expect(found.vars()).toEqual(originals[(found.has('key1')) ? 0 : 1].vars());
     });
 
-
+// Bhakta: This way of calling find is not mentioned in Docs.
   it("should find with conditions",function() {
     Model.deleteAll();
     var res;
@@ -376,7 +376,7 @@
     expect(res[1].get("name")).toEqual("Aeroprise");
     expect(res[1].get("industry")).toEqual("Technology");
   });
-
+// Bhakta: This way of calling find is not mentioned in Docs.
   it("should find with select",function() {
     Model.deleteAll();
     var res;
@@ -663,7 +663,7 @@
     // @accts.length.should == 0
 //  });
 
-  it("should find first",function() {
+  it("VT302-0263 | should find first",function() {
     Model.create({"name":"Mobio"});
     Model.create({"name":"Mobio2"});
     var res = Model.find("first");
@@ -702,7 +702,7 @@
 
 
 
-  it("should update record",function(){
+  it("VT302-0252 | should update record",function(){
     var record = Model.create({"name":"Zoolo","industry":"Tech"});
     record.updateAttributes({"name":"Zoolo2"});
     var res = Model.find("first",{conditions:{"name":"Zoolo2"}});
@@ -715,7 +715,7 @@
     expect(res.get("name")).toEqual("Zoolo");
   });
 
-  it("should delete record",function(){
+  it("VT302-0212 | should delete record",function(){
     Model.deleteAll();
     var record = Model.create({"name":"Zoolo","industry":"Tech"});
     var res = Model.find("first",{conditions:{"name":"Zoolo"}});
@@ -726,7 +726,7 @@
     expect(res).toEqual(0);
   });
 
-  it("should make record",function(){
+  it("VT302-0232 | should make record",function(){
     var record = Model.make({"name":"Zoolo","industry":"Tech"});
     var res = Model.count();
     record.save();
@@ -760,7 +760,7 @@ describe("<model's fixed_schema>", function() {
       Model2.deleteAll();
     });
 
-  it("should verify created fixed schema modal",function(){
+  it("VT302-0263 | should verify created fixed schema modal",function(){
     Model.create({name:"testfixed"});
     var obj = Model.find("first");
     expect(obj.get("name")).toEqual("testfixed");
@@ -770,7 +770,7 @@ describe("<model's fixed_schema>", function() {
     expect(dboutput[0].map.name).toEqual("testfixed");
   });
 
-  it("should create sync model in db",function(){
+  it("VT302-0264 | should create sync model in db",function(){
     Model2.create({"name":"testname"});
     var res = db.$execute_sql("select * from CHANGED_VALUES");
     expect(res[0].map.update_type).toEqual("create");
@@ -800,7 +800,7 @@ describe("<model's fixed_schema>", function() {
                 });
   });
 
-  it("should update fixedSchema",function(){
+  it("VT302-0253 | should update fixedSchema",function(){
     Model.create({name:"testfixed"});
     var obj = Model.find("first");
     expect(obj.get("name")).toEqual("testfixed");
@@ -814,7 +814,7 @@ describe("<model's fixed_schema>", function() {
     expect(obj2.get("name")).toEqual("testfixed2");
   });
 
-  it("should update fixedSchema with multiple fields",function(){
+  it("VT302-0255 | should update fixedSchema with multiple fields",function(){
     Model.create({name:"testfixed",brand:4});
     var obj = Model.find("first");
     expect(obj.get("name")).toEqual("testfixed");
@@ -829,7 +829,7 @@ describe("<model's fixed_schema>", function() {
     expect(obj2.get("brand")).toEqual("2");
   });
 
-  it("should delete fixedSchema",function(){
+  it("VT302-0213 | should delete fixedSchema",function(){
     Model.create({name:"testfixed"});
     var obj = Model.find("first");
     expect(obj.get("name")).toEqual("testfixed");
@@ -844,7 +844,7 @@ describe("<model's fixed_schema>", function() {
     expect(obj2).toEqual([]);
   });
 
-  it("should delete fixedSchema sync model",function(){
+  it("VT302-0214 | should delete fixedSchema sync model",function(){
     Model2.create({name:"testfixed"});
     var obj = Model2.find("first");
     expect(obj.get("name")).toEqual("testfixed");
@@ -864,7 +864,7 @@ describe("<model's fixed_schema>", function() {
     expect(dbchanged).toEqual([]);
   });
 
-  it('destroys fixedSchema item after CHANGED_VALUES deleted', function() {
+  it('VT302-0215 | destroys fixedSchema item after CHANGED_VALUES deleted', function() {
     Model2.create({name:"testfixed"});
     var obj = Model2.find("first");
     expect(obj.get("name")).toEqual("testfixed");
@@ -885,7 +885,7 @@ describe("<model's fixed_schema>", function() {
     expect(cv[0].map.update_type).toEqual("delete");
   });
 
-  it("should make object fixedSchema",function(){
+  it("VT302-0233 | should make object fixedSchema",function(){
     var mobj= Model.make({name:"testmake"});
     var obj = Model.find("all");
     expect(obj).toEqual([]);
