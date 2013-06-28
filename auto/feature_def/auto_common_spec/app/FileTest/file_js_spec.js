@@ -4,12 +4,12 @@ describe("File JS API", function () {
 	var publicFolder = Rho.RhoFile.join(Rho.Application.publicFolder)
 	var fileName = "rhoconfig.txt"
 	var testReadPath = Rho.RhoFile.join(Rho.Application.appsBundleFolder, "rhoconfig.txt")
-	var path = Rho.RhoFile.join(Rho.Application.userFolder, "testFile.txt")	
 	var invalidpath = "/programFiles/Test/rholog.txt"
 	var dirName = Rho.RhoFile.join(userFolder,"RMS4")		
 	var destFilePath = publicFolder + fileName
 	var dirToDelete = Rho.RhoFile.join(userFolder,"TestDelete")
 	var invalidDir = "/programFiles/Test/"
+	var path = Rho.RhoFile.join(Rho.Application.userFolder, "testFile.txt")	
 	var dirinDelete = Rho.RhoFile.join(dirToDelete,"InDelete")
 	var openTestFile = Rho.RhoFile.join(dirName, "testing.txt")
 	var fileMode1 = Rho.RhoFile.join(dirName, "Mode1.txt")
@@ -22,15 +22,23 @@ describe("File JS API", function () {
 	var Text2 = "Thank you."
 	var Text3 = "This is from File Open mode 4\n"
 		
-	var expected = Text1+Text2
+	var expectedText = Text1+Text2
 	var Text4 = Rho.RhoFile.join(Text1,Text3)
 	var Text5 = Rho.RhoFile.join(Text4,Text2)
+
+	String.prototype.overwrite = function (index, string) {
+		var strlen = string.length;
+		if (index >= 0 && strlen > 0)
+			return this.substring(0, index) + string + this.substring(index+strlen, this.length);
+		else
+			return string;
+	};
 	
 	beforeEach(function () {
 		var flag = false;
 
 		// cleanup for each run
-		var dirsToDelete = ["VT295052","/\\:*?<>|","Test!@#"]
+		var dirsToDelete = ["VT295052","/\:*?<>|","Test!@#"]
 		for (var idx = 0; idx < dirsToDelete.length; ++idx)
 		{
 			var dir = Rho.RhoFile.join(dirName, dirsToDelete[idx]);
@@ -47,9 +55,9 @@ describe("File JS API", function () {
 	});
 
 	
-	it("cleanup",function(){
+	it("Before all",function(){
 		// cleanup before global run
-		var filesToDelete = [fileMode1, fileMode2, fileMode3, fileMode4, fileMode5]
+		var filesToDelete = [fileMode1, fileMode2, fileMode3, fileMode4, fileMode5, path]
 		for (var idx = 0; idx < filesToDelete.length; ++idx)
 		{
 			var file = filesToDelete[idx];
@@ -58,6 +66,16 @@ describe("File JS API", function () {
 				Rho.RhoFile.deleteFile(file);
 			}
 		}
+
+		var fWrite = new Rho.RhoFile(path,Rho.RhoFile.OPEN_FOR_READ_WRITE);
+		fWrite.write(Text5)
+		fWrite.close()
+
+		var fOpen = new Rho.RhoFile(path,Rho.RhoFile.OPEN_FOR_READ);
+		var data = fOpen.readAll()
+		expect(!!data && !!data.length && !!data.length > 0).toEqual(true);
+		expect(data).toEqual(Text5)
+		fOpen.close()
 	});
 
 	// Get basename of file
@@ -328,33 +346,21 @@ describe("File JS API", function () {
 	it("VT295-030: get file size   | true",function(){
 		
 		var size = Rho.RhoFile.getFileSize(testReadPath);
-		if(size>0)
-			flag = true
-		else
-			flag = false			
-		expect(flag).toEqual(true)
+		expect(size > 0).toEqual(true)
 	});
 	
 	// get File Size with valid directory path
 	it("VT295-031: get file size with valid directory path   | false",function(){
 		
 		var size = Rho.RhoFile.getFileSize(userFolder);
-		if(size>0)
-			flag = true
-		else
-			flag = false			
-		expect(flag).toEqual(false)
+		expect(size > 0).toEqual(false)
 	});
 	
 	// get File Size with invalid  path
 	it("VT295-032: get file size with invalid  path   | false",function(){
 		
 		var size = Rho.RhoFile.getFileSize(invalidpath);
-		if(size>0)
-			flag = true
-		else
-			flag = false			
-		expect(flag).toEqual(false)
+		expect(size > 0).toEqual(false)
 	});
 	
 	// isDir with valid path
@@ -449,13 +455,9 @@ describe("File JS API", function () {
 		expect(Rho.RhoFile.exists(file)).toEqual(true)
 						
 		var dirs = Rho.RhoFile.listDir(dirName);
-		var length = dirs.length;
-		if(dirs.length)
-			flag = true;
-		else
-			flag = false;
-		expect(flag).toEqual(true);
+		expect(dirs && dirs.length && dirs.length > 0).toEqual(true);
 
+		var length = dirs.length;
 		// some files could be created during previous tests runs
 		// just test that all files listed below are in directory
 		var expected = ['.','..','Hello.txt','TestFile','testing.txt'];
@@ -483,9 +485,9 @@ describe("File JS API", function () {
 	// mkdir with valid
 	it("VT295-046: make directory and is directory present| true",function(){
 		
-		var VT295052 = Rho.RhoFile.join(dirName, "VT295052")
-		Rho.RhoFile.makeDir(VT295052)		
-		expect(Rho.RhoFile.isDir(VT295052)).toEqual(true)
+		var testDirName = Rho.RhoFile.join(dirName, "VT295052")
+		Rho.RhoFile.makeDir(testDirName)		
+		expect(Rho.RhoFile.isDir(testDirName)).toEqual(true)
 	});
 	
 	// mkdir with invalid path when all top level directories not exists
@@ -498,65 +500,65 @@ describe("File JS API", function () {
 	// mkdir with invalid path when some of top level directories not exists
 	it("VT295-048 : make directory with some of toplevel directories not present | false",function(){
 		
-		var VT295053 = Rho.RhoFile.join(dirName, "VT295053/TestingDir")
-		Rho.RhoFile.makeDir(VT295053)		
-		expect(Rho.RhoFile.isDir(VT295053)).toEqual(false)
+		var testDirName = Rho.RhoFile.join(dirName, "VT295053/TestingDir")
+		Rho.RhoFile.makeDir(testDirName)		
+		expect(Rho.RhoFile.isDir(testDirName)).toEqual(false)
 	});
 	
 	// mkdir with invalid characters
 	it("VT295-049: make directory and special characters | false",function(){
 		
-		var VT295056 = Rho.RhoFile.join(dirName, "/\:*?<>|")
-		Rho.RhoFile.makeDir(VT295056)
-		expect(Rho.RhoFile.isDir(VT295056)).toEqual(false)
+		var testDirName = Rho.RhoFile.join(dirName, "/\:*?<>|")
+		Rho.RhoFile.makeDir(testDirName)
+		expect(Rho.RhoFile.isDir(testDirName)).toEqual(false)
 	});
 	
 	// mkdir with special characters
 	it("VT295-050: make directory with special characters| true",function(){
 		
-		var VT295057 = Rho.RhoFile.join(dirName, "Test!@#")
-		Rho.RhoFile.makeDir(VT295057)		
-		expect(Rho.RhoFile.isDir(VT295057)).toEqual(true)
+		var testDirName = Rho.RhoFile.join(dirName, "Test!@#")
+		Rho.RhoFile.makeDir(testDirName)		
+		expect(Rho.RhoFile.isDir(testDirName)).toEqual(true)
 	});
 	
 	// mkdirs with valid
 	it("VT295-051: make directory with mkdirs | true",function(){
 		
-		var VT295058 = Rho.RhoFile.join(dirName, "VT295058")
-		Rho.RhoFile.makeDirs(VT295058)		
-		expect(Rho.RhoFile.isDir(VT295058)).toEqual(true)
+		var testDirName = Rho.RhoFile.join(dirName, "VT295058")
+		Rho.RhoFile.makeDirs(testDirName)		
+		expect(Rho.RhoFile.isDir(testDirName)).toEqual(true)
 	});
 	
 	// mkdirs with invalid path when all top level directories not exists
 	it("VT295-052: makedirs with invalid path | true",function(){
 		
-		var VT295059 = "C:/RaghavendraKC/Testing"
-		Rho.RhoFile.makeDirs(VT295059)	
-		expect(Rho.RhoFile.isDir(VT295059)).toEqual(false)
+		var testDirName = "C:/RaghavendraKC/Testing"
+		Rho.RhoFile.makeDirs(testDirName)	
+		expect(Rho.RhoFile.isDir(testDirName)).toEqual(false)
 	});
 	
 	// mkdir with invalid path when top level directories not exists
 	it("VT295-053 : make directory with toplevel directories not present | true",function(){
 		
-		var VT295060 = Rho.RhoFile.join(dirName, "VT295060/TestingDir")
-		Rho.RhoFile.makeDirs(VT295060)		
-		expect(Rho.RhoFile.isDir(VT295060)).toEqual(true)
+		var testDirName = Rho.RhoFile.join(dirName, "VT295060/TestingDir")
+		Rho.RhoFile.makeDirs(testDirName)		
+		expect(Rho.RhoFile.isDir(testDirName)).toEqual(true)
 	});
 	
-	// mkdir with invalid characters
-	it("VT295-054: make directory and is directory present| false",function(){
+	// mkdirs with valid characters
+	it("VT295-054: make directory and is directory present| true",function(){
 		
-		var VT295062 = Rho.RhoFile.join(dirName, "/\:*?<>|")
-		Rho.RhoFile.makeDirs(VT295062)
-		expect(Rho.RhoFile.isDir(VT295062)).toEqual(false)
+		var testDirName = Rho.RhoFile.join(dirName, "VT295058")
+		Rho.RhoFile.makeDirs(testDirName)
+		expect(Rho.RhoFile.isDir(testDirName)).toEqual(true)
 	});
 	
 	// mkdir with special characters
 	it("VT295-055: make directory with special characters| true",function(){
 		
-		var VT295063 = Rho.RhoFile.join(dirName, "Test!@#$")
-		Rho.RhoFile.makeDirs(VT295063)		
-		expect(Rho.RhoFile.isDir(VT295063)).toEqual(true)
+		var testDirName = Rho.RhoFile.join(dirName, "Test!@#$")
+		Rho.RhoFile.makeDirs(testDirName)		
+		expect(Rho.RhoFile.isDir(testDirName)).toEqual(true)
 	});	
 		
 	
@@ -663,35 +665,22 @@ describe("File JS API", function () {
 	// Read File with path
 	it("VT295-064 : Read contents with path| true",function(){
 		var data = Rho.RhoFile.read(testReadPath)
-		if(data.length)
-			flag = true
-		else
-			flag = false;
-		expect(flag).toEqual(true);
+		expect(data.length != 0).toEqual(true);
 		Rho.Log.info(data, "VT290-072");
 	});
 	
 	// Read File with invalid path
 	it("VT295-065 : Read contents with invalid path| false",function(){
 		var data = Rho.RhoFile.read(invalidpath)
-		if(data.length)
-			flag = false
-		else
-			flag = true;
-		expect(flag).toEqual(true);
+		expect(data.length == 0).toEqual(true);
 		Rho.Log.info(data, "VT290-073");
 	});
 	
 	// Read with specified size 
 	it("VT295-066 : Read contents with specified size| true",function(){
-		
-		var fOpen = new Rho.RhoFile(path,Rho.RhoFile.OPEN_FOR_READ);
+		var fOpen = new Rho.RhoFile(testReadPath,Rho.RhoFile.OPEN_FOR_READ);
 		var data = fOpen.read(20);
-		if(data.length)
-			flag = true
-		else
-			flag = false;
-		expect(flag).toEqual(true);
+		expect(!!data && !!data.length && !!data.length > 0).toEqual(true);
 		Rho.Log.info(data, "VT290-074");
 		fOpen.close();
 	});
@@ -700,14 +689,10 @@ describe("File JS API", function () {
 	// Read with specified size with mentioned position
 	it("VT295-067 : Read contents with specified size with mentioned position| true",function(){
 		
-		var fOpen = new Rho.RhoFile(path,Rho.RhoFile.OPEN_FOR_READ_WRITE);
+		var fOpen = new Rho.RhoFile(testReadPath,Rho.RhoFile.OPEN_FOR_READ_WRITE);
 		fOpen.seek(20)
 		var data = fOpen.read(20)
-		if(data.length)
-			flag = true
-		else
-			flag = false;
-		expect(flag).toEqual(true);
+		expect(!!data && !!data.length && !!data.length > 0).toEqual(true);
 		Rho.Log.info(data, "VT290-075");
 		fOpen.close()
 	});
@@ -718,15 +703,11 @@ describe("File JS API", function () {
 		var fileMode6 = Rho.RhoFile.join(dirName, "Mode6.txt")
 		var fwrite = new Rho.RhoFile(fileMode6,Rho.RhoFile.OPEN_FOR_WRITE);
 		var data1 = fwrite.write(Text1)
-		var expectedString = "This is RMS4.0"
+		var expectedString = Text1
 		fwrite.close()
 		var fOpen = new Rho.RhoFile(fileMode6,Rho.RhoFile.OPEN_FOR_READ);
 		var data = fOpen.read(40)
-		if(data.length)
-			flag = true
-		else
-			flag = false;
-		expect(flag).toEqual(true);
+		expect(!!data && !!data.length && !!data.length > 0).toEqual(true);
 		expect(data).toEqual(expectedString)
 		Rho.Log.info(data, "VT290-074");
 		fOpen.close()
@@ -736,24 +717,16 @@ describe("File JS API", function () {
 	it("VT295-069 : Read with specified size with invalid filename| false",function(){
 		var fOpen = new Rho.RhoFile(invalidpath,Rho.RhoFile.OPEN_FOR_READ);
 		var data = fOpen.read(20)
-		if(data.length)
-			flag = false
-		else
-			flag = true;
-		expect(flag).toEqual(true);	
+		expect(!!data && !!data.length && !!data.length == 0).toEqual(false);	
 		fOpen.close()
 	});
 	
 	
 	// ReadAll with valid file path
 	it("VT295-070 : ReadAll with valid file path| true",function(){
-		var fOpen = new Rho.RhoFile(path,Rho.RhoFile.OPEN_FOR_READ);
+		var fOpen = new Rho.RhoFile(testReadPath,Rho.RhoFile.OPEN_FOR_READ);
 		var data = fOpen.readAll()
-		if(data.length)
-			flag = true
-		else
-			flag = false;
-		expect(flag).toEqual(true);
+		expect(!!data && !!data.length && !!data.length > 0).toEqual(true);
 		Rho.Log.info(data, "VT290-078");
 		fOpen.close()
 	});
@@ -762,11 +735,7 @@ describe("File JS API", function () {
 	it("VT295-071 : ReadAll with invalid file path| false",function(){
 		var fOpen = new Rho.RhoFile(invalidpath,Rho.RhoFile.OPEN_FOR_READ);
 		var data = fOpen.readAll()
-		if(data.length)
-			flag = false
-		else
-			flag = true
-		expect(flag).toEqual(true);
+		expect(data.length == 0).toEqual(true);
 		Rho.Log.info(data, "VT290-079");
 		fOpen.close()
 	});
@@ -858,13 +827,9 @@ describe("File JS API", function () {
 	// file size
 	it("VT295-082 : file size | true",function(){
 		
-		var fOpen = new Rho.RhoFile(path,Rho.RhoFile.OPEN_FOR_READ)
+		var fOpen = new Rho.RhoFile(testReadPath,Rho.RhoFile.OPEN_FOR_READ)
 		var fileSize = fOpen.size()
-		if(fileSize > 2500)
-			flag = true
-		else
-			flag = false
-		expect(flag).toEqual(true)
+		expect(fileSize > 2500).toEqual(true)
 		Rho.Log.info("size:" + fileSize, "VT290-092");
 		fOpen.close()
 		
@@ -872,17 +837,16 @@ describe("File JS API", function () {
 	
 	// file size on empty file
 	it("VT295-083 : file size on empty file | true",function(){
+		if (Rho.RhoFile.exists(fileMode1))
+			Rho.RhoFile.deleteFile(fileMode1)
+		var fCln = new Rho.RhoFile(fileMode1,Rho.RhoFile.OPEN_FOR_WRITE)
+		fCln.close()
 		
 		var fOpen = new Rho.RhoFile(fileMode1,Rho.RhoFile.OPEN_FOR_READ_WRITE)
 		var fileSize = fOpen.size()
-		if(fileSize)
-			flag = true
-		else
-			flag = false
-		expect(flag).toEqual(true)
+		expect(fileSize == 0).toEqual(true)
 		Rho.Log.info("size:" + fileSize, "VT290-093");	
 		fOpen.close()
-		
 	});
 	
 	
@@ -899,7 +863,7 @@ describe("File JS API", function () {
 		fWrite.close()
 		var content = fRead.readAll()
 		expect(content).toEqual(Text1)
-		//Rho.Log.info(written + ":" + content, "VT290-094");
+		Rho.Log.info(written + ":" + content, "VT290-094");
 		
 		fRead.close()
 		
@@ -915,8 +879,8 @@ describe("File JS API", function () {
 		var written = fWrite.write(Text2)
 		fWrite.close()
 		var content = fRead.readAll()
-		expect(content).toEqual(expected)
-		//Rho.Log.info(written + ":" + content, "VT290-094");
+		expect(content).toEqual(expectedText)
+		Rho.Log.info(written + ":" + content, "VT290-094");
 		
 		fRead.close()
 		
@@ -933,10 +897,10 @@ describe("File JS API", function () {
 		data = "the "
 		var written = fWrite.write(data)
 		fWrite.close()
-		var expectedString = "This is the RMS4.0 File Testing.Thank you."
+		var expectedString = expectedText.overwrite(8,data);
 		var content = fRead.readAll()
 		expect(content).toEqual(expectedString)
-		//Rho.Log.info(written + ":" + content, "VT290-094");
+		Rho.Log.info(written + ":" + content, "VT290-094");
 		
 		fRead.close()
 		
@@ -944,7 +908,8 @@ describe("File JS API", function () {
 
 	// Flush
 	it("VT295-029 : flush | true",function(){
-		
+		if (Rho.RhoFile.exists(fileMode5))
+			Rho.RhoFile.deleteFile(fileMode5)
 		
 		data = 'mydata';
 		
