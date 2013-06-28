@@ -192,6 +192,27 @@
       expect(cv[0].map.update_type).toEqual("delete");
     });
 
+    it('VT302-0211 | update object in sync database', function() {
+      var modelDefs3 = function(model){
+        model.modelName("Item");
+        model.property("name","string");
+        model.set("partition","local");
+        model.enable("sync");
+      };
+      var Modelsync = Rho.ORM.addModel(modelDefs3);
+      Modelsync.create({'name': 'tests'});
+      var cv = db.$execute_sql("select * from CHANGED_VALUES");
+      expect(cv[0].map.update_type).toEqual("create");
+
+      cv=db.$execute_sql("delete from CHANGED_VALUES");
+      expect(cv).toEqual([]);
+
+      var obj = Modelsync.find("first");
+      obj.updateAttributes({name:"tests2"});
+      cv = db.$execute_sql("select * from CHANGED_VALUES");
+      expect(cv[0].map.update_type).toEqual("update");
+    });
+
     it('VT302-0257 | deletes all objects of specific model in database', function() {
         var Model1 = Rho.ORM.addModel(modelDef);
         var Model2 = Rho.ORM.addModel(modelDef2);
@@ -889,6 +910,27 @@ describe("<model's fixed_schema>", function() {
 
     cv = db.$execute_sql("select * from CHANGED_VALUES");
     expect(cv[0].map.update_type).toEqual("delete");
+  });
+
+   it('VT302-0215 | destroys fixedSchema item after CHANGED_VALUES updated', function() {
+    Model2.create({name:"testfixed"});
+    var obj = Model2.find("first");
+    expect(obj.get("name")).toEqual("testfixed");
+
+    var dblocal = Rho.ORMHelper.dbConnection("local");
+    var dboutput = dblocal.$execute_sql("select * from ProductSync");
+    expect(dboutput[0].map.name).toEqual("testfixed");
+
+    var dbchanged = dblocal.$execute_sql("select * from CHANGED_VALUES");
+    expect(dbchanged[0].map.update_type).toEqual("create");
+    var cv = dblocal.$execute_sql("delete from CHANGED_VALUES");
+    expect(cv).toEqual([]);
+
+    obj = Model2.find("first");
+    obj.updateAttributes({name:"testfixed2"});
+
+    cv = dblocal.$execute_sql("select * from CHANGED_VALUES");
+    expect(cv[0].map.update_type).toEqual("update");
   });
 
   it("VT302-0233 | should make object fixedSchema",function(){
