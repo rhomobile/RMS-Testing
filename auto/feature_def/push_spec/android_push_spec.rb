@@ -156,6 +156,40 @@ device_list.each do |dev|
       sleep 3
     end
 
+    it 'should process sequence of push messages' do
+      puts 'Sending 5 push messages...'
+
+      alerts = {}
+      5.times do |i|
+        message = "magic#{i}"
+        alerts[message] = true
+        params = { :user_id=>['pushclient'], :message => message}
+        RhoconnectHelper.api_post('users/ping',params,@api_token)
+        sleep 0.5
+      end
+      puts 'Waiting 5 messages with push content...'
+      5.times do |i|
+        $mutex.synchronize do
+          break if $requests.count == 5
+          $signal.wait($mutex, 30)
+        end
+        puts "Message count: #{$requests.count}"
+      end
+      $requests.count.should == 5
+      $mutex.synchronize do
+        puts alerts.inspect
+        5.times do |i|
+          message = $requests[i].query['alert']
+          message.should_not be_nil
+          puts "message: #{message}"
+          alerts[message].should be_true
+          alerts[message] = false
+          #$requests.delete_at 0
+        end
+        $requests.clear
+      end
+    end
+
     it 'should proceed push message with exit comand' do
       # puts 'Sending push message with exit command...'
       message = 'exit'
@@ -170,58 +204,24 @@ device_list.each do |dev|
       (output =~ /rho_push_client/).should be_nil
     end
 
-    it 'should process push message' do
+    it 'should start stopped app and process pending push message' do
+      args =  $deviceId ?  ['-s', $deviceId, 'shell', 'ps'] : ['-e', 'shell', 'ps']
+      output = Jake.run2('adb', args, {:hide_output => true})
+      (output =~ /rho_push_client/).should be_nil
+
       # puts 'Sending push message with greeting ...'
       message = 'Hello'
       params = { :user_id=>['pushclient'], :message => message}
       RhoconnectHelper.api_post('users/ping',params,@api_token)
 
       # puts 'Waiting ping message with push content ...'
+      sleep 10
       expect_request('alert').should == message
-      sleep 5
+
       args =  $deviceId ?  ['-s', $deviceId, 'shell', 'ps'] : ['-e', 'shell', 'ps']
       output = Jake.run2('adb', args, {:hide_output => true})
       (output =~ /rho_push_client/).should_not be_nil
     end
-
-    # it 'should process sequence of push messages' do
-    #   puts 'Sending 5 push messages...'
-
-    #   alerts = {}
-    #   5.times do |i|
-    #     message = "magic#{i}"
-    #     alerts[message] = true
-    #     params = { :user_id=>['pushclient'], :message => message}
-    #     RhoconnectHelper.api_post('users/ping',params,@api_token)
-    #     sleep 0.5
-    #   end
-
-    #   puts 'Waiting 5 messages with push content...'
-
-    #   5.times do |i|
-    #     $mutex.synchronize do
-    #       break if $requests.count == 5
-    #       $signal.wait($mutex, 30)
-    #     end
-    #     puts "Message count: #{$requests.count}"
-    #   end
-
-    #   $requests.count.should == 5
-
-    #   $mutex.synchronize do
-    #     puts alerts.inspect
-    #     5.times do |i|
-    #       message = $requests[i].query['alert']
-    #       message.should_not be_nil
-    #       puts "message: #{message}"
-    #       alerts[message].should be_true
-    #       alerts[message] = false
-    #       #$requests.delete_at 0
-    #     end
-    #     $requests.clear
-    #   end
-    # end
-
 
     # TODO:
     # logout/login back
