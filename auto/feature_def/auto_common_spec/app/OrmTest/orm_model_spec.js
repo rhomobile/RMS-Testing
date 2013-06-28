@@ -738,27 +738,31 @@
 
 describe("<model's fixed_schema>", function() {
   var Model2;
-    var modelDef = function(model){
-        model.modelName('Product'),
-        model.enable("fixedSchema");
-        model.property("name");
-        model.property("brand","integer");
-        model.set("partition","local");
-    };
-    var modelDef2 = function(model){
-        model.modelName("ProductSync");
-        model.enable("fixedSchema");
-        model.enable("sync");
-        model.property("name","string");
-        model.set("partition","local");
-    };
-    beforeEach(function(){
-      reset();
-      Model = Rho.ORM.addModel(modelDef);
-      Model.deleteAll();
-      Model2 = Rho.ORM.addModel(modelDef2);
-      Model2.deleteAll();
-    });
+  var modelDef = function(model){
+      model.modelName('Product'),
+      model.enable("fixedSchema");
+      model.property("name");
+      model.property("brand","integer");
+      model.set("partition","local");
+  };
+  var modelDef2 = function(model){
+      model.modelName("ProductSync");
+      model.enable("fixedSchema");
+      model.enable("sync");
+      model.property("name","string");
+      model.set("partition","local");
+  };
+  beforeEach(function(){
+    reset();
+    if(db.$is_table_exist('Product'))
+      db.$execute_sql("DROP TABLE Product");
+    if(db.$is_table_exist('ProductSync'))
+      db.$execute_sql("DROP TABLE ProductSync");
+    Model = Rho.ORM.addModel(modelDef);
+    Model.deleteAll();
+    Model2 = Rho.ORM.addModel(modelDef2);
+    Model2.deleteAll();
+  });
 
   it("should verify created fixed schema modal",function(){
     Model.create({name:"testfixed"});
@@ -782,12 +786,14 @@ describe("<model's fixed_schema>", function() {
         model.enable("fixedSchema");
         model.enable("sync");
         model.property("name");
+        model.set("partition","local");
         model.property("image","blob");
       };
       var BlobbModel = Rho.ORM.addModel(blobber);
       BlobbModel.create({name:"testblob",image:"randomdatahere"});
       var obj = BlobbModel.find("first");
       expect(obj.get("name")).toEqual('testblob');
+      db.$execute_sql("DROP TABLE Blob");
   });
 
   it("should return orderFunction",function(){

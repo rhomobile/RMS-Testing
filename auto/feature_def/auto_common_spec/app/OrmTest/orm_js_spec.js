@@ -157,6 +157,7 @@ describe("<ORM module specs>", function() {
         expect(sources.Product.str_associations).toEqual("Item");
         expect(sources.Item.belongs_to[0]).toEqual("Product");
         db.$execute_sql("DROP TABLE Product");
+        db.$execute_sql("DROP TABLE Item");
     });
 
     it("should add belongs_to relationship in any load order",function(){
@@ -190,6 +191,7 @@ describe("<ORM module specs>", function() {
         expect(sources.Product.str_associations).toEqual("Item");
         expect(sources.Item.belongs_to[0]).toEqual("Product");
         db.$execute_sql("DROP TABLE Product");
+        db.$execute_sql("DROP TABLE Item");
     });
 
     it("should add multiple belongs_to relationship in any load order",function(){
@@ -235,6 +237,8 @@ describe("<ORM module specs>", function() {
         expect(sources.Item.belongs_to[0]).toEqual("Product");
         expect(sources.Item2.belongs_to[0]).toEqual("Product");
         db.$execute_sql("DROP TABLE Product");
+        db.$execute_sql("DROP TABLE Item");
+        db.$execute_sql("DROP TABLE Item2");
     });
 
     it("should return client id",function(){
@@ -300,6 +304,7 @@ describe("<ORM Db Reset specs>", function() {
       expect(db_product).toEqual([]);
       db.$execute_sql("DELETE FROM SOURCES");
       db.$execute_sql("DELETE FROM OBJECT_VALUES");
+      db.$execute_sql("DROP TABLE Product");
       Rho.ORM.clear();
     });
 
@@ -476,6 +481,7 @@ describe("<ORM Db Reset specs>", function() {
 
       db.$execute_sql("DELETE FROM SOURCES");
       db.$execute_sql("DELETE FROM OBJECT_VALUES");
+      db.$execute_sql("DROP TABLE Product");
       Rho.ORM.clear();
     });
 
@@ -560,6 +566,8 @@ describe("<ORM Db Reset specs>", function() {
       db_local.$execute_sql("DELETE FROM SOURCES");
       db_user.$execute_sql("DELETE FROM OBJECT_VALUES");
       db_local.$execute_sql("DELETE FROM OBJECT_VALUES");
+      db_user.$execute_sql("DROP TABLE Product");
+      db_local.$execute_sql("DROP TABLE Product_local");
       Rho.ORM.clear();
     });
 
