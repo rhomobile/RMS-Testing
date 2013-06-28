@@ -110,12 +110,27 @@ function callopenUrl(openurlValue)
 
 function callreplaceCurrentBundleWindows()
 {
-	Rho.System.replaceCurrentBundle("http://'+server2+'/SystemJS.cab", {do_not_restart_app:false, not_thread_mode:true});
+	Rho.System.replaceCurrentBundle("httpServerUrl+'/download_app?device=wm'", {do_not_restart_app:false, not_thread_mode:true});
 }
 
 function callreplaceCurrentBundleAndroid()
 {
-	Rho.System.replaceCurrentBundle("http://'+server2+'/SystemJS.apk", {do_not_restart_app:false, not_thread_mode:true});
+	Rho.System.replaceCurrentBundle("httpServerUrl+'/download_app?device=android'", {do_not_restart_app:false, not_thread_mode:true});
+}
+
+function callreplaceCurrentBundlewin32()
+{
+	Rho.System.replaceCurrentBundle("httpServerUrl+'/download_app?device=win32'", {do_not_restart_app:false, not_thread_mode:true});
+}
+
+function callreplaceCurrentBundlewp8()
+{
+	Rho.System.replaceCurrentBundle("httpServerUrl+'/download_app?device=wp8'", {do_not_restart_app:false, not_thread_mode:true});
+}
+
+function callreplaceCurrentBundlece()
+{
+	Rho.System.replaceCurrentBundle("httpServerUrl+'/download_app?device=wp8'", {do_not_restart_app:false, not_thread_mode:true});
 }
 
 function CallsetDoNotBackupAttribute(pathValue, doNotBackupValue)
