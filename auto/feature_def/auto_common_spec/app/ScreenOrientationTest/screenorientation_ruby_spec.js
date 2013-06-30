@@ -11,11 +11,11 @@ describe("ScreenOrientation Ruby API Test", function() {
 	});		
 	
 	it("should enable automatic screen orientation", function() {
-		expect(enable()).toBe(true);			
+		expect(enable(true)).toBe(true);			
 	});
 	
 	it("should disable automatic screen orientation", function() {			
-		expect(disable()).toBe(false);			
+		expect(enable(false)).toBe(false);			
 	});
 	
 	it("should set current device orientation to upsidedown without callback", function() {			
@@ -25,7 +25,7 @@ describe("ScreenOrientation Ruby API Test", function() {
 	
 		waitsFor(function() {
         	return document.getElementById('output').innerHTML == "";
-    	}, "Something wrong happened", 3000);		
+    	}, "Something wrong happened", 10000);		
 	});
 	
 	it("should set current device orientation to righthanded without callback", function() {			
@@ -49,7 +49,7 @@ describe("ScreenOrientation Ruby API Test", function() {
 	
 		waitsFor(function() {
         	return document.getElementById('output').innerHTML == "upsideDown"
-    	}, document.getElementById('output').innerHTML + " is not the expected value upsidedown", 3000);
+    	}, document.getElementById('output').innerHTML + " is not the expected value upsidedown", 10000);
 	});
 	
 	it("should set current device orientation to lefthanded and call a callback function", function()
@@ -61,7 +61,7 @@ describe("ScreenOrientation Ruby API Test", function() {
 	
 		waitsFor(function() {
         	return document.getElementById('output').innerHTML == "leftHanded"
-    	}, document.getElementById('output').innerHTML + " is not the expected value lefthanded", 3000);
+    	}, document.getElementById('output').innerHTML + " is not the expected value lefthanded", 10000);
 	});
 	
 	it("should set current device orientation to righthanded and call a callback function", function()
@@ -73,7 +73,7 @@ describe("ScreenOrientation Ruby API Test", function() {
 	
 		waitsFor(function() {
         	return document.getElementById('output').innerHTML == "rightHanded"
-    	}, document.getElementById('output').innerHTML + " is not the expected value righthanded", 3000);
+    	}, document.getElementById('output').innerHTML + " is not the expected value righthanded", 10000);
 	});
 	
 	it("should set current device orientation to normal and call a callback function", function()
@@ -85,7 +85,7 @@ describe("ScreenOrientation Ruby API Test", function() {
 	
 		waitsFor(function() {
         	return document.getElementById('output').innerHTML == "normal"
-    	}, document.getElementById('output').innerHTML + " is not the expected value normal", 3000);
+    	}, document.getElementById('output').innerHTML + " is not the expected value normal", 10000);
 	});
 });
 
