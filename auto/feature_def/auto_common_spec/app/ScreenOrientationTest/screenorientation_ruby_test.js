@@ -2,7 +2,7 @@ var currentOrientation;
 
 function enable(value)
 {
-	var returnedValue = "banana";
+	var returnedValue = "";
 	jQuery.ajax({
          url:    '/app/ScreenOrientationTest/enable',
          data:	{enabled:value},
