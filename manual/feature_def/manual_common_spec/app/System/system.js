@@ -1,7 +1,17 @@
+function setapplicationIconBadge(iconbadgeValue)
+{
+	Rho.System.applicationIconBadge=iconbadgeValue;
+}
+
 function getapplicationIconBadge()
 {
 	data = Rho.System.getProperty('applicationIconBadge');
 	$("#Rho_System_getapplicationIconBadge span.result").text(JSON.stringify(data));
+}
+
+function sethttpProxyURI()
+{
+	Rho.System.httpProxyURI='http://wwwgate0.mot.com:1080';
 }
 
 function gethttpProxyURI()
@@ -16,11 +26,21 @@ function getisEmulator()
 	$("#Rho_System_isEmulator span.result").text(JSON.stringify(data));
 }
 
+function setlockWindowSize(lockwindowsizeValue)
+{
+	Rho.System.lockWindowSize=lockwindowsizeValue;
+}
+
 function getlockWindowSize()
 {
 	//data = Rho.System.getProperty('lockWindowSize');
 	data = Rho.System.lockWindowSize;
 	$("#Rho_System_lockWindowSize span.result").text(JSON.stringify(data));
+}
+
+function setscreenAutoRotate(autorotateValue)
+{
+	Rho.System.screenAutoRotate=autorotateValue;
 }
 
 function getscreenAutoRotate()
@@ -35,10 +55,20 @@ function getscreenOrientation()
 	$("#Rho_System_screenOrientation span.result").text(JSON.stringify(data));
 }
 
+function setscreenSleeping(screensleepingValue)
+{
+	Rho.System.screenSleeping=screensleepingValue;
+}
+
 function getscreenSleeping()
 {
 	data = Rho.System.getProperty('screenSleeping');
 	$("#Rho_System_screenSleeping span.result").text(JSON.stringify(data));
+}
+
+function setkeyboardState(keyboardstatValue)
+{
+	Rho.System.keyboardState=keyboardstatValue;
 }
 
 function getkeyboardState()
@@ -48,6 +78,23 @@ function getkeyboardState()
 }
 
 
+function callbringToFront()
+{
+	Rho.System.bringToFront();
+}
+
+function calldeleteFolder(deletefolderValue)
+{
+	Rho.System.deleteFolder(deletefolderValue);
+}
+
+function callgetStartParams()
+{
+	var getStartParamsValue = new Array();
+	getStartParamsValue = Rho.System.getStartParams();
+	alert(getStartParamsValue);
+}
+
 function callisApplicationInstalled(aString) {
     var isInstalled = Rho.System.isApplicationInstalled(aString)
     if (isInstalled)
@@ -56,29 +103,29 @@ function callisApplicationInstalled(aString) {
         alert(aString + " application is not installed in the device");
 }
 
+function callopenUrl(openurlValue)
+{
+	Rho.System.openUrl(openurlValue);
+}
+
 function callreplaceCurrentBundleWindows()
 {
-	Rho.System.replaceCurrentBundle("httpServerUrl+'/download_app?device=wm'", {do_not_restart_app:false, not_thread_mode:true});
+	Rho.System.replaceCurrentBundle("http://'+server2+'/SystemJS.cab", {do_not_restart_app:false, not_thread_mode:true});
 }
 
 function callreplaceCurrentBundleAndroid()
 {
-	Rho.System.replaceCurrentBundle("httpServerUrl+'/download_app?device=android'", {do_not_restart_app:false, not_thread_mode:true});
+	Rho.System.replaceCurrentBundle("http://'+server2+'/SystemJS.apk", {do_not_restart_app:false, not_thread_mode:true});
 }
 
-function callreplaceCurrentBundlewin32()
+function CallsetDoNotBackupAttribute(pathValue, doNotBackupValue)
 {
-	Rho.System.replaceCurrentBundle("httpServerUrl+'/download_app?device=win32'", {do_not_restart_app:false, not_thread_mode:true});
+	Rho.System.setDoNotBackupAttribute(pathValue, doNotBackupValue);
 }
 
-function callreplaceCurrentBundlewp8()
+function callsetProperty(propertyName, propertyValue)
 {
-	Rho.System.replaceCurrentBundle("httpServerUrl+'/download_app?device=wp8'", {do_not_restart_app:false, not_thread_mode:true});
-}
-
-function callreplaceCurrentBundlece()
-{
-	Rho.System.replaceCurrentBundle("httpServerUrl+'/download_app?device=wp8'", {do_not_restart_app:false, not_thread_mode:true});
+	Rho.System.setProperty(propertyName,propertyValue);
 }
 
 function callgetProperty(propertyName)
@@ -108,7 +155,7 @@ function download_filetolocal(srvHttpDownloadImageUrl, filetoinstall)
                 url: srvHttpDownloadImageUrl,
                 filename: fname
             };
-
+	
     Rho.Network.downloadFile(downloadfileProps);
 	return fname;
 }

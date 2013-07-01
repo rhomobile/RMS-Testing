@@ -64,14 +64,14 @@
     <div class="method_desc">Application Icon Badge : application icon should have badge number (IOS only)</div>
     <div class="test_scenario">
         <div class="test_scenario_controls">
-            <a href="javascript:void(0)" onclick="Rho.System.applicationIconBadge=1;">Set applicationIconBadge as 1</a>
+            <a href="javascript:void(0)" onclick="setapplicationIconBadge(1)">Set applicationIconBadge as 1</a>
         </div>
         <span class="test_scenario_number">VT300-001<br/></span>
     </div>
 
     <div class="test_scenario">
         <div>
-            <a href="javascript:void(0)" onclick="Rho.System.applicationIconBadge=0;">Set applicationIconBadge as 0</a>
+            <a href="javascript:void(0)" onclick="setapplicationIconBadge(0)">Set applicationIconBadge as 0</a>
         </div>
         <span class="test_scenario_number">VT300-002<br/></span>
     </div>
@@ -99,8 +99,7 @@
     </div>
     <div class="test_scenario">
         <div class="test_scenario_controls">
-            <a href="javascript:void(0)" onclick="Rho.System.httpProxyURI='http://wwwgate0.mot.com:1080';">Set
-                httpProxyURI </a><br/>
+            <a href="javascript:void(0)" onclick="sethttpProxyURI();">Set httpProxyURI </a><br/>
             <a href="http://www.google.com">Navigate to Google </a>
         </div>
         <span class="test_scenario_number">VT300-021<br/></span>
@@ -146,13 +145,13 @@
     </div>
     <div class="test_scenario">
         <div class="test_scenario_controls">
-            <a href="javascript:void(0)" onclick="Rho.System.lockWindowSize=true;">Set lockWindowSize as true</a>
+            <a href="javascript:void(0)" onclick="setlockWindowSize(true);">Set lockWindowSize as true</a>
         </div>
         <span class="test_scenario_number">VT300-031<br/></span>
     </div>
     <div class="test_scenario">
         <div class="test_scenario_controls">
-            <a href="javascript:void(0)" onclick="Rho.System.lockWindowSize=false;">Set lockWindowSize as false</a>
+            <a href="javascript:void(0)" onclick="setlockWindowSize(false);">Set lockWindowSize as false</a>
         </div>
         <span class="test_scenario_number">VT300-032<br/></span>
     </div>
@@ -181,13 +180,13 @@
     <div class="method_desc">Screen Auto Rotate :</div>
     <div class="test_scenario">
         <div class="test_scenario_controls">
-            <a href="javascript:void(0)" onclick="Rho.System.screenAutoRotate=true;">Set screenAutoRotate as true</a>
+            <a href="javascript:void(0)" onclick="setscreenAutoRotate(true);">Set screenAutoRotate as true</a>
         </div>
         <span class="test_scenario_number">VT300-044 <br/></span>
     </div>
     <div class="test_scenario">
         <div class="test_scenario_controls">
-            <a href="javascript:void(0)" onclick="Rho.System.screenAutoRotate=false;">Set screenAutoRotate as false</a>
+            <a href="javascript:void(0)" onclick="setscreenAutoRotate(false);">Set screenAutoRotate as false</a>
         </div>
         <span class="test_scenario_number">VT300-045 <br/></span>
     </div>
@@ -229,13 +228,13 @@
     <div class="method_desc">Screen Sleeping :Should screen go to sleep by time out.(IOS and Android)</div>
     <div class="test_scenario">
         <div class="test_scenario_controls">
-            <a href="javascript:void(0)" onclick="Rho.System.screenSleeping=true;">Set screenSleeping as true</a>
+            <a href="javascript:void(0)" onclick="setscreenSleeping(true);">Set screenSleeping as true</a>
         </div>
         <span class="test_scenario_number">VT300-052 <br/></span>
     </div>
     <div class="test_scenario">
         <div class="test_scenario_controls">
-            <a href="javascript:void(0)" onclick="Rho.System.screenSleeping=false;">Set screenSleeping as false</a>
+            <a href="javascript:void(0)" onclick="setscreenSleeping(false);">Set screenSleeping as false</a>
         </div>
         <span class="test_scenario_number">VT300-053 <br/></span>
     </div>
@@ -267,22 +266,21 @@
     <div>Numeric field<input type='number'></div>
     <div class="test_scenario">
         <div class="test_scenario_controls">
-            <a href="javascript:void(0)" onclick="Rho.System.keyboardState='shown';">Set keyboardState as shown</a>
+            <a href="javascript:void(0)" onclick="setkeyboardState('shown');">Set keyboardState as shown</a>
         </div>
         <span class="test_scenario_number">VT300-057 <br/></span>
     </div>
 
     <div class="test_scenario">
         <div class="test_scenario_controls">
-            <a href="javascript:void(0)" onclick="Rho.System.keyboardState='hidden';">set showKeyboard as hidden</a>
+            <a href="javascript:void(0)" onclick="setkeyboardState('hidden');">set showKeyboard as hidden</a>
         </div>
         <span class="test_scenario_number">VT300-058 <br/></span>
     </div>
     <div class="method_tests ios android win32 wp8">
         <div class="test_scenario">
             <div class="test_scenario_controls">
-                <a href="javascript:void(0)" onclick="Rho.System.keyboardState='automatic';">set keyboardState as
-                    automatic
+                <a href="javascript:void(0)" onclick="setkeyboardState('automatic');">set keyboardState as automatic
                     with textbox</a>
             </div>
             <span class="test_scenario_number">VT300-202/VT300-203 <br/></span>
@@ -506,7 +504,7 @@
     <div class="method_desc">Get StartParams :Return the command line parameters.</div>
     <div class="test_scenario">
         <div class="test_scenario_controls">
-            <a href="javascript:void(0)" onclick="alert( Rho.System.getStartParams());">call getStartParams()</a>
+            <a href="javascript:void(0)" onclick="callgetStartParams();">call getStartParams()</a>
         </div>
         <span class="test_scenario_number">VT300-076 <br/></span>
     </div>
@@ -528,7 +526,7 @@
         </div>
     </div>
 
-<!--    <div class="method_tests wm">CE <br/>
+    <div class="method_tests wm">CE <br/>
 
         <div class="test_scenario">
             <div class="test_scenario_controls">
@@ -537,13 +535,13 @@
             </div>
             <span class="test_scenario_number">VT300-077 <br/></span>
         </div>
-    </div>-->
+    </div>
     <div class="method_tests android"> Android <br/>
 
         <div class="test_scenario">
             <div class="test_scenario_controls">
                 <a href="javascript:void(0)" onclick="var appName = 'com.rhomobile.testapp'; var isInstalled = Rho.System.isApplicationInstalled(appName); alert('isApplicationInstalled(' + appName + ') = ' + isInstalled);">Call
-                    isApplicationInstalled() with correct app name 'testapp'</a>
+                    isApplicationInstalled() with correct app name 'testtapp'</a>
             </div>
             <span class="test_scenario_number">VT300-077 <br/></span>
         </div>
@@ -553,8 +551,8 @@
 
         <div class="test_scenario">
             <div class="test_scenario_controls">
-                <a href="javascript:void(0)" onclick="callisApplicationInstalled('com.rhomobile.helloworld');">Call
-                    isApplicationInstalled() with correct app name 'com.rhomobile.helloworld'</a>
+                <a href="javascript:void(0)" onclick="callisApplicationInstalled('auto_common_spec');">Call
+                    isApplicationInstalled() with correct app name 'auto_common_spec'</a>
             </div>
             <span class="test_scenario_number">VT300-077 <br/></span>
         </div>
@@ -599,14 +597,14 @@
     <div class="method_desc">OpenUrl :Open the application associated with the URL.</div>
     <div class="test_scenario">
         <div class="test_scenario_controls">
-            <a href="javascript:void(0)" onclick="Rho.System.openUrl('http://www.google.com');"> call openUrl() with
+            <a href="javascript:void(0)" onclick="callopenUrl('http://www.google.com');"> call openUrl() with
                 http://www.google.com</a>
         </div>
         <span class="test_scenario_number">VT300-079 <br/></span>
     </div>
 </div>
 
-<div class="method_tests android win32 wm wp8">
+<div class="method_tests">
     <div class="method_name">Rho.System.replaceCurrentBundle</div>
     <div class="method_desc">replaceCurrentBundle : SystemJS.cab will be replaced</div>
     <div class="test_scenario">
@@ -619,13 +617,7 @@
     <div class="test_scenario">
         <div class="test_scenario_controls">
             <a href="javascript:void(0)" onclick="callreplaceCurrentBundleAndroid();">call replaceCurrentBundle() for
-                android </a><br />
-			<a href="javascript:void(0)" onclick="callreplaceCurrentBundlewin32();">call replaceCurrentBundle() for
-                win32 </a><br />	
-			<a href="javascript:void(0)" onclick="callreplaceCurrentBundlewp8();">call replaceCurrentBundle() for
-                WP8 </a><br />
-			<a href="javascript:void(0)" onclick="callreplaceCurrentBundlece();">call replaceCurrentBundle() for
-                CE </a><br />					
+                android </a>
         </div>
         <span class="test_scenario_number">VT300-080<br/></span>
     </div>
@@ -637,7 +629,7 @@
     <div class="test_scenario">
         <div class="test_scenario_controls">
             <a href="javascript:void(0)"
-               onclick="Rho.System.setDoNotBackupAttribute('/app/public/testfiles/donotbackup.txt', true);">Call
+               onclick="CallsetDoNotBackupAttribute('/app/public/testfiles/donotbackup.txt', true);">Call
                 setDoNotBackupAttribute with doNotBackup as true</a>
         </div>
         <span class="test_scenario_number"> <br/>VT300-081</span>
@@ -645,7 +637,7 @@
     <div class="test_scenario">
         <div class="test_scenario_controls">
             <a href="javascript:void(0)"
-               onclick="Rho.System.setDoNotBackupAttribute('/app/public/testfiles/donotbackup.txt', false);">Call
+               onclick="CallsetDoNotBackupAttribute('/app/public/testfiles/donotbackup.txt', false);">Call
                 setDoNotBackupAttribute with doNotBackup as false</a>
         </div>
         <span class="test_scenario_number"> <br/>VT300-082</span>
@@ -653,7 +645,7 @@
     <div class="test_scenario">
         <div class="test_scenario_controls">
             <a href="javascript:void(0)"
-               onclick="Rho.System.setDoNotBackupAttribute('/app/public/testfiles/loading.png', true);">Call
+               onclick="CallsetDoNotBackupAttribute('/app/public/testfiles/loading.png', true);">Call
                 setDoNotBackupAttribute with path to image file</a>
         </div>
         <span class="test_scenario_number"> <br/>VT300-083</span>
@@ -728,8 +720,7 @@
         <div class="test_scenario">
             <div class="test_scenario_controls">
                 <div class="method_desc">IOS only</div>
-                <a href="javascript:void(0)" onclick="Rho.System.setProperty('applicationIconBadge','1');">Call
-                    setproperty
+                <a href="javascript:void(0)" onclick="callsetProperty('applicationIconBadge','1');">Call setproperty
                     with applicationIconBadge as 1</a>
             </div>
             <span class="test_scenario_number">VT300-104  <br/></span>
@@ -737,8 +728,7 @@
         <div class="test_scenario">
             <div class="test_scenario_controls">
                 <div class="method_desc">IOS only</div>
-                <a href="javascript:void(0)" onclick="Rho.System.setProperty('applicationIconBadge','0');"> Call set
-                    property
+                <a href="javascript:void(0)" onclick="callsetProperty('applicationIconBadge','0');"> Call set property
                     with applicationIconBadge as 0</a>
             </div>
             <span class="test_scenario_number">VT300-105<br/></span>
@@ -756,8 +746,7 @@
         <div class="test_scenario">
             <div class="test_scenario_controls">
                 <div class="method_desc">Windows desktop</div>
-                <a href="javascript:void(0)" onclick="Rho.System.setProperty('lockWindowSize','true');"> Call
-                    setproperty with
+                <a href="javascript:void(0)" onclick="callsetProperty('lockWindowSize','true');"> Call setproperty with
                     lockWindowSize as true</a>
             </div>
             <span class="test_scenario_number">VT300-109/VT300-111 <br/></span>
@@ -765,8 +754,7 @@
         <div class="test_scenario">
             <div class="test_scenario_controls">
                 <div class="method_desc">Windows desktop</div>
-                <a href="javascript:void(0)" onclick="Rho.System.setProperty('lockWindowSize','false');"> Call set
-                    property
+                <a href="javascript:void(0)" onclick="callsetProperty('lockWindowSize','false');"> Call set property
                     with lockWindowSize as false</a>
             </div>
             <span class="test_scenario_number">VT300-110/VT300-112 <br/></span>
@@ -784,16 +772,14 @@
     <div class="method_tests android ios">
         <div class="test_scenario">
             <div class="test_scenario_controls">
-                <a href="javascript:void(0)" onclick="Rho.System.setProperty('screenAutoRotate','true');">Call set
-                    property
+                <a href="javascript:void(0)" onclick="callsetProperty('screenAutoRotate','true');">Call set property
                     with screenAutoRotate as true</a>
             </div>
             <span class="test_scenario_number">VT300-113 <br/></span>
         </div>
         <div class="test_scenario">
             <div class="test_scenario_controls">
-                <a href="javascript:void(0)" onclick="Rho.System.setProperty('screenAutoRotate','false');">Call set
-                    property
+                <a href="javascript:void(0)" onclick="callsetProperty('screenAutoRotate','false');">Call set property
                     with screenAutoRotate as false</a>
             </div>
             <span class="test_scenario_number">VT300-114 <br/></span>
@@ -807,8 +793,7 @@
         <div class="test_scenario">
             <div class="test_scenario_controls">
                 <div class="method_desc">(IOS and Android)</div>
-                <a href="javascript:void(0)" onclick="Rho.System.setProperty('screenSleeping','true');"> Call set
-                    property with
+                <a href="javascript:void(0)" onclick="callsetProperty('screenSleeping','true');"> Call set property with
                     screenSleeping as true</a>
             </div>
             <span class="test_scenario_number">VT300-117 <br/></span>
@@ -816,8 +801,7 @@
         <div class="test_scenario">
             <div class="test_scenario_controls">
                 <div class="method_desc">(IOS and Android)</div>
-                <a href="javascript:void(0)" onclick="Rho.System.setProperty('screenSleeping','false');">Call set
-                    property with
+                <a href="javascript:void(0)" onclick="callsetProperty('screenSleeping','false');">Call set property with
                     screenSleeping as false</a>
             </div>
             <span class="test_scenario_number">VT300-118 <br/></span>
@@ -833,16 +817,14 @@
     <div class="method_tests wm">
         <div class="test_scenario">
             <div class="test_scenario_controls">
-                <a href="javascript:void(0)" onclick="Rho.System.setProperty('keyboardState','shown');"> Call set
-                    property with
+                <a href="javascript:void(0)" onclick="callsetProperty('keyboardState','shown');"> Call set property with
                     keyboardState as shown</a>
             </div>
             <span class="test_scenario_number">VT300-121 <br/></span>
         </div>
         <div class="test_scenario">
             <div class="test_scenario_controls">
-                <a href="javascript:void(0)" onclick="Rho.System.setProperty('keyboardState','hidden');">Call set
-                    property with
+                <a href="javascript:void(0)" onclick="callsetProperty('keyboardState','hidden');">Call set property with
                     keyboardState as hidden</a>
             </div>
             <span class="test_scenario_number">VT300-122 <br/></span>
@@ -851,8 +833,7 @@
     <div class="test_scenario">
         <div class="test_scenario_controls">
             <div>Text Field<input type='text'></div>
-            <a href="javascript:void(0)" onclick="Rho.System.setProperty('keyboardState','automatic');">Call set
-                property with
+            <a href="javascript:void(0)" onclick="callsetProperty('keyboardState','automatic');">Call set property with
                 keyboardState as automatic</a> (not WP8)
         </div>
         <span class="test_scenario_number">VT300-204 <br/></span>
@@ -920,15 +901,13 @@
             </div>
         </div>
     </div>
-	<div class="method_tests android ios win32 wm wp8">
-		<div class="test_scenario">
-			<div class="test_scenario_controls">
-				<a href="javascript:void(0)" onclick="callgetProperties('screenOrientation');">call getproperties with
-					screenOrientation</a>
-			</div>
-			<span class="test_scenario_number">VT300-174/VT300-175 <br/></span>
-		</div>
-	</div>
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <a href="javascript:void(0)" onclick="callgetProperties('screenOrientation');">call getproperties with
+                screenOrientation</a>
+        </div>
+        <span class="test_scenario_number">VT300-174/VT300-175 <br/></span>
+    </div>
     <div class="method_tests android ios">
         <div class="test_scenario">
             <div class="test_scenario_controls">

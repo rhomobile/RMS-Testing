@@ -273,11 +273,14 @@ describe("Notification Manual FD Tests", function () {
     }
 
     if (Rho.System.platform == "WINDOWS_DESKTOP" || Rho.System.isRhoSimulator) {
-    } else 
-    {
-        if (Rho.System.platform == "WINDOWS" || Rho.System.platform == "ANDROID") 
-        {
-            it("VT307-001 |Beep for 5 secs and with volume 3 with 1000 hz|", function () {
+    } else {
+<<<<<<< HEAD
+        it("VT307-001 |Beep for 5 secs and with volume 3 with 1000 hz|", function () {
+=======
+    
+        if (Rho.System.platform == "WINDOWS" || Rho.System.platform == "ANDROID") {
+            it("VT281-0857 |Beep for 5 secs and with volume 3 with 1000 hz|", function () {
+>>>>>>> 8d5df768a5fc859cce4962ab2c176e4dcc0dd330
 
                 runs(function () {
                     dispTestCaseRunning(" Beeper will be started if its applicable for the Device  ");
@@ -314,7 +317,12 @@ describe("Notification Manual FD Tests", function () {
                     expect(testResult).toEqual(true);
                 });
             });
-            it("VT307-002 |Beep for 2 secs and with volume one  with 2000 hz|", function () {
+<<<<<<< HEAD
+        });
+    it("VT307-002 |Beep for 2 secs and with volume one  with 2000 hz|", function () {
+=======
+            it("VT281-0858 |Beep for 2 secs and with volume one  with 2000 hz|", function () {
+>>>>>>> 8d5df768a5fc859cce4962ab2c176e4dcc0dd330
 
                 runs(function () {
                     dispTestCaseRunning(" Beeper will be started if its applicable for the Device  ");
@@ -332,7 +340,15 @@ describe("Notification Manual FD Tests", function () {
                     expect(testResult).toEqual(true);
                 });
             });
+<<<<<<< HEAD
+        });
+
         it("VT307-008|Play File - Mp3 file with media type|", function () {
+=======
+        }
+        
+        it("VT281-0859|Play File - Mp3 file with media type|", function () {
+>>>>>>> 8d5df768a5fc859cce4962ab2c176e4dcc0dd330
 
             runs(function () {
                 dispTestCaseRunning(" MP3 file will be played  ");
@@ -523,11 +539,10 @@ describe("Notification Manual FD Tests", function () {
                 expect(testResult).toEqual(true);
             });
         });
-	  }
-    }}
+	}
+    }
 });
 
-/* REMOVED from 4.0
 var enumData = Rho.Notification.Led.enumerate();
 
 for (var j = 0; j < enumData.length; j++) {
@@ -643,7 +658,7 @@ for (var j = 0; j < enumData.length; j++) {
 
 
 }
-*/
+
 
 /*
 

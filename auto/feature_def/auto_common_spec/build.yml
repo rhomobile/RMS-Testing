@@ -27,6 +27,7 @@ app_type: rhoelements
 version: 1.0
 vendor: rhomobile
 build: debug
+debug: 1
 bbver: 4.6
 applog: rholog.txt
 iphone:

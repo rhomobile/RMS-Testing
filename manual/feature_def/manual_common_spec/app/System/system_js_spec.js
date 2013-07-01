@@ -38,27 +38,6 @@ describe("System Module JS Test Starts Here", function() {
 			});
 		});
 		
-		it("VT300-068 | call clearAllProperties() | ", function () {
-		runs(function(){
-			Rho.System.screenSleeping = false;
-			Rho.System.screenAutoRotate = false
-			Rho.System.lockWindowSize = false
-			var data1 = Rho.System.getproperties(['screenSleeping', 'screenAutoRotate', lockWindowSize);
-			Rho.System.clearAllProperties()
-			var data2 = Rho.System.getproperties(['screenSleeping', 'screenAutoRotate', lockWindowSize);
-			var data = 'Before clear: 'data1+'After Clearingall properties '+data;
-			displayResult("VT300-068 | call clearAllProperties() | ",JSON.stringify(data));
-		});		
-		waitsFor(function(){
-			return captured;
-		},"Waiting For Result",30000);
-	
-		runs(function(){
-			expect(testResult).toEqual(true);	
-		});
-		});	
-	
-		
 		if(isAnyWindowsFamilyPlatform()){
 		
 			it("VT300-077 | call isApplicationInstalled() with application name which is there in device | ", function() {

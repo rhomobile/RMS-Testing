@@ -25,12 +25,12 @@ var card_get_property = [
 		propertyName	:	"panData",
 		expectedResult	: 	"", 
 	},
-/*	{
+	{
 		testName		:	"VT286-0006/VT286-0014 | moduleName getproperty before setting any value | ",
 		propertyName	:	"moduleName",
 		expectedResult	: 	"", 
 	},
-  {
+/*  {
 		testName		:	"VT286-0007/VT286-0015 | moduleName getproperty with empty property name | ",
 		propertyName	:	"",
 		expectedResult	: 	"", 
@@ -151,7 +151,7 @@ var card_setget_property = [
 		propertyValue	:	"-30000",
 		expectedResult	:	"30000"
 	},*/
-/*	{
+	{
 		testName		:	"VT286-0035/VT286-0063/VT286-0115 |  set moduleName to msr9000 and getproperty after setting | false",
 		propertyName	:	"moduleName",
 		propertyValue	:	"msr9000",
@@ -198,7 +198,7 @@ var card_setget_property = [
 		propertyName	:	"moduleName",
 		propertyValue	:	"msr3000",
 		expectedResult	:	"msr3000"
-	},*/
+	},
 	{
 		testName		:	"VT286-0043/VT286-0071/VT286-0123 |  set panData to 1234567891234567 and getproperty after setting | false",
 		propertyName	:	"panData",

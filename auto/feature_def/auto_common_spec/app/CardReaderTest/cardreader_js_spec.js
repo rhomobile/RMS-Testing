@@ -4,7 +4,7 @@ describe("Cardreader Module JS Test Starts Here", function() {
 		var flag = false;
 
 		it("Rho.CardReader.open", function() {
-
+		
 			runs(function() {
 				Rho.CardReader.open();
 				setTimeout(function() {
@@ -15,9 +15,9 @@ describe("Cardreader Module JS Test Starts Here", function() {
 			waitsFor(function() {
 				return flag;
 			}, "Waiting for enable", 4000);
-
+						
 		});
-
+		
 	});
 
 	describe("Cardreader Module- getProperty Test Starts Here", function() {
@@ -25,11 +25,11 @@ describe("Cardreader Module JS Test Starts Here", function() {
 		for (var i=0;i<card_get_property.length;i++){
 			(function(idx){
 				it(card_get_property[idx]['testName'], function() {
-
+				
 					var data = Rho.CardReader.getProperty(card_get_property[idx]['propertyName']);
 					displayResult(card_get_property[idx]['testName'],data);
 					expect(data).toEqual(card_get_property[idx]['expectedResult']);
-
+								
 				});
 			})(i);
 		}
@@ -58,9 +58,9 @@ describe("Cardreader Module JS Test Starts Here", function() {
 	describe("Cardreader Module- Rho.CardReader.close", function() {
 
 		it("Rho.CardReader.close", function() {
-
+		
 			Rho.CardReader.close();
-
+		
 		});
 
 	});
@@ -69,7 +69,7 @@ describe("Cardreader Module JS Test Starts Here", function() {
 		var flag = false;
 
 		it("Rho.CardReader.open", function() {
-
+		
 			runs(function() {
 				Rho.CardReader.open();
 				setTimeout(function() {
@@ -80,7 +80,7 @@ describe("Cardreader Module JS Test Starts Here", function() {
 			waitsFor(function() {
 				return flag;
 			}, "Waiting for enable", 4000);
-
+						
 		});
 
 		for (var i=0;i<card_setget_property.length;i++){
@@ -88,7 +88,7 @@ describe("Cardreader Module JS Test Starts Here", function() {
 			(function(idx){
 
 				it(card_setget_property[idx]['testName'], function() {
-
+				
 					Rho.CardReader.setProperty(card_setget_property[idx]['propertyName'],card_setget_property[idx]['propertyValue'])
 					var data = Rho.CardReader.getProperty(card_setget_property[idx]['propertyName']);
 					expect(data).toEqual(card_setget_property[idx]['expectedResult']);
@@ -110,7 +110,7 @@ describe("Cardreader Module JS Test Starts Here", function() {
 		var flag = false;
 
 		it("Rho.CardReader.open", function() {
-
+		
 			runs(function() {
 				Rho.CardReader.open();
 				setTimeout(function() {
@@ -121,7 +121,7 @@ describe("Cardreader Module JS Test Starts Here", function() {
 			waitsFor(function() {
 				return flag;
 			}, "Waiting for enable", 4000);
-
+						
 		});
 
 		for (var i=0;i<card_setget_property.length;i++){
@@ -297,14 +297,14 @@ describe("Cardreader Module JS Test Starts Here", function() {
                     Rho.CardReader.pinTimeout = 0;
                     expect(Rho.CardReader.getProperty('pinTimeout')).toEqual(0);
                 });
-                it("VT286-0090 | pinTimeout to negative  value", function() {
+              it("VT286-0090 | pinTimeout to negative  value", function() {
                     Rho.CardReader.pinTimeout = -30000;
                     expect(Rho.CardReader.getProperty('pinTimeout')).toEqual(false);
-                });
+                });*/
                 it("VT286-0091 | moduleName to msr9000", function() {
                     Rho.CardReader.moduleName = "msr9000";
                     expect(Rho.CardReader.getProperty('moduleName')).toEqual('msr9000');
-                });*/
+                });
                 it("VT286-0092 | panData to 1234567891234567", function() {
                     Rho.CardReader.panData = 1234567891234567;
                     expect(Rho.CardReader.getProperty('panData')).toEqual(1234567891234567);

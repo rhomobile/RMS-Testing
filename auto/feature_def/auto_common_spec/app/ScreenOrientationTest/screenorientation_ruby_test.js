@@ -1,31 +1,26 @@
 var currentOrientation;
 
-function enable()
+function enable(value)
 {
 	var returnedValue = "";
 	jQuery.ajax({
          url:    '/app/ScreenOrientationTest/enable',
-         data:	{enabled:true},
+         data:	{enabled:value},
          success: function(result) 	{
-					returnedValue = result;
-                  },		
+			returnedValue = result;
+         },		
          async:   false
 	});
 	return returnedValue;	
 }
 
-function disable()
+function setScreenOrientation(value)
 {
-	var returnedValue = "";
 	jQuery.ajax({
-         url:    '/app/ScreenOrientationTest/disable',
-         data:	{enabled:false},
-         success: function(result) 	{
-					returnedValue = result;
-                  },		
+         url:    '/app/ScreenOrientationTest/set_screen_orientation',
+         data:	{enabled: value},	
          async:   false	
 	});
-	return returnedValue;
 }
 
 function normal()
