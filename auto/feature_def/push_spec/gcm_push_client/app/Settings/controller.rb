@@ -10,18 +10,20 @@ class SettingsController < Rho::RhoController
   def index
     @msg = @params['msg']
 
+    puts "-- gcm_push_client: before Rho::Push.getDeviceId"
     Rho::Push.getDeviceId url_for(:action => 'registration_callback')
+    puts "-- gcm_push_client: after Rho::Push.getDeviceId"
 
     render
   end
 
   def registration_callback
-    puts "Check push registration"
+    puts "-- Check push registration"
 
     host = SPEC_LOCAL_SERVER_HOST
     port = SPEC_LOCAL_SERVER_PORT
 
-    puts "Sending device_id: #{@params['result']}"
+    puts "-- Sending device_id: #{@params['result']}"
     Rho::AsyncHttp.get :url => "http://#{host}:#{port}?device_id=#{@params['result']}"
   end
 
@@ -38,7 +40,7 @@ class SettingsController < Rho::RhoController
       end
     end
 
-    puts "sending response: http://#{host}:#{port}?alert=#{@params['alert']} <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<"
+    puts "-- Sending response: http://#{host}:#{port}?alert=#{@params['alert']} <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<"
 
     Rho::AsyncHttp.get :url => "http://#{host}:#{port}?alert=#{@params['alert']}"
 

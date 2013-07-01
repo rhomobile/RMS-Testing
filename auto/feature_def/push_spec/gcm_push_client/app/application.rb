@@ -14,10 +14,10 @@ class AppApplication < Rho::RhoApplication
 	  #SyncEngine.set_notification(-1, '/app/Settings/sync_notify', '')
     Rho::Push.startNotifications '/app/Settings/push_callback'
   end
-  
+
   def on_ui_created
     super
-    
+
     #SyncEngine.login('gcmclient', 'gcmclient', '/app/Settings/login_callback' )
   end
 end
