@@ -22,10 +22,9 @@
 
             this.log("***Total: " + this.executedSpecs);
             this.log("***Passed: " + this.passedSpecs);
-            this.log("***Failed: " + (this.executedSpecs -  this.passedSpecs));
+            this.log("***Failed: " + (this.executedSpecs - this.passedSpecs));
             this.finished = true;
         },
-
 
         reportRunnerStarting: function (runner) {
             this.started = true;
@@ -33,7 +32,10 @@
             this.executedSpecs = 0;
             this.passedSpecs = 0;
             this.log("I'm started");
+        },
 
+        reportSpecStarting: function (spec) {
+            this.log(spec.suite.description + ' : ' + spec.description + ' started ');
         },
 
         reportSpecResults: function (spec) {
