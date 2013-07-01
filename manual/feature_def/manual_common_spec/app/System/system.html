@@ -318,7 +318,10 @@
         <div class="test_scenario">
             <div class="test_scenario_controls">
                 <a href="javascript:void(0)"
-                   onclick="Rho.System.applicationInstall(httpServerUrl+'/download_app?device=wm');">Install app from HTTP url</a>
+                   onclick="var fname = download_filetolocal(httpServerUrl+'/TestAppWM6.5.cab', 'TestAppWM6.5.cab'); Rho.System.applicationInstall(fname);">WM: Install app from HTTP url</a><br/>
+                <a href="javascript:void(0)"
+                   onclick="var fname = download_filetolocal(httpServerUrl+'/TestAppCE.cab', 'TestAppCE.cab'); Rho.System.applicationInstall(fname);">CE: Install app from HTTP url</a>
+                   
             </div>
             <span class="test_scenario_number">VT300-064 <br/></span>
         </div>
@@ -446,14 +449,28 @@
 </div>
 
 <div class="method_tests android win32 wm wp8">
+    <div class="method_name">Rho.System.runApplication</div>
+    <div class="method_desc"> Run Application </div>
+
+    <div class="method_tests wm">
+        <div class="test_scenario">
+            <div class="test_scenario_controls">
+                <a href="javascript:void(0)" onclick="Rho.System.runApplication('rhomobile testApp/testApp.exe');"> call
+                    runApplication with application name 'rhomobile testApp/testApp.exe'.</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="method_tests android win32 wm wp8">
     <div class="method_name">Rho.System.applicationUninstall</div>
     <div class="method_desc"> Application Uninstall</div>
 
     <div class="method_tests wm">
         <div class="test_scenario">
             <div class="test_scenario_controls">
-                <a href="javascript:void(0)" onclick="Rho.System.applicationUninstall('TestAppWM6.5');"> call
-                    applicationUninstall with application name 'TestAppWM6.5'</a>
+                <a href="javascript:void(0)" onclick="Rho.System.applicationUninstall('rhomobile testApp/testApp.exe');"> call
+                    applicationUninstall with application name 'rhomobile testApp/testApp.exe'. Not supported on Win CE.</a>
             </div>
         </div>
     </div>
@@ -521,7 +538,7 @@
 
         <div class="test_scenario">
             <div class="test_scenario_controls">
-                <a href="javascript:void(0)" onclick="callisApplicationInstalled('TestAppWM6.5');">Call
+                <a href="javascript:void(0)" onclick="callisApplicationInstalled('rhomobile testApp/testApp.exe');">Call
                     isApplicationInstalled() with correct app name 'TestAppWM6.5'</a>
             </div>
             <span class="test_scenario_number">VT300-077 <br/></span>

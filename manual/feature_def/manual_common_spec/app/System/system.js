@@ -106,7 +106,8 @@ function download_filetolocal(srvHttpDownloadImageUrl, filetoinstall)
 	var fname = Rho.RhoFile.join(Rho.Application.userFolder, file);
 	downloadfileProps = {
                 url: srvHttpDownloadImageUrl,
-                filename: fname
+                filename: fname,
+                overwriteFile: true
             };
 
     Rho.Network.downloadFile(downloadfileProps);
