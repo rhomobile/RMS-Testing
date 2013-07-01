@@ -626,144 +626,147 @@ describe("KeyCapture Test", function() {
 
 		}
 
-		it("VT289-039 | call remapKey with enter and numeric key 1 |", function() {
+		if (isWindowsMobileOrAndroidPlatform())
+		{
 
-			runs(function()
-			{
-				setObjective("VT289-039 | call remapKey with enter and numeric key 1");
-				setInstruction("click inside the textbox, Press enter key and press numeric key 1");
-				setExpected("Both key should be displayed as 1");
-				Rho.KeyCapture.remapKey('0x0D','0x31');
+			it("VT289-039 | call remapKey with enter and numeric key 1 |", function() {
+
+				runs(function()
+				{
+					setObjective("VT289-039 | call remapKey with enter and numeric key 1");
+					setInstruction("click inside the textbox, Press enter key and press numeric key 1");
+					setExpected("Both key should be displayed as 1");
+					Rho.KeyCapture.remapKey('0x0D','0x31');
+				});
+
+				runs(function()
+				{		
+					waitsFor(function() {
+					return document.getElementById("actResult").innerHTML != "init";
+					}, "Timed out waiting for tester to respond", 300000);
+					runs(function() {
+					expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+					Rho.KeyCapture.remapKey('0x0D','');
+					});	
+				});
 			});
 
-			runs(function()
-			{		
-				waitsFor(function() {
-				return document.getElementById("actResult").innerHTML != "init";
-				}, "Timed out waiting for tester to respond", 300000);
-				runs(function() {
-				expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-				Rho.KeyCapture.remapKey('0x0D','');
-				});	
-			});
-		});
+			it("VT289-040 | call remapKey with functionkey F1 and numeric key 9 |", function() {
 
-		it("VT289-040 | call remapKey with functionkey F1 and numeric key 9 |", function() {
+				runs(function()
+				{
+					setObjective("VT289-040 | call remapKey with functionkey F1 and numeric key 9");
+					setInstruction("click inside the textbox, Press functionkey F1 and numeric key 9");
+					setExpected("Both key should be displayed as 9");
+					Rho.KeyCapture.remapKey('0x70','0x39');
+				});
 
-			runs(function()
-			{
-				setObjective("VT289-040 | call remapKey with functionkey F1 and numeric key 9");
-				setInstruction("click inside the textbox, Press functionkey F1 and numeric key 9");
-				setExpected("Both key should be displayed as 9");
-				Rho.KeyCapture.remapKey('0x70','0x39');
-			});
-
-			runs(function()
-			{		
-				waitsFor(function() {
-				return document.getElementById("actResult").innerHTML != "init";
-				}, "Timed out waiting for tester to respond", 300000);
-				runs(function() {
-				expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-				Rho.KeyCapture.remapKey('0x70','');
-				});	
-			});
-		});
-
-		it("VT289-041 | call remapKey with numeric key 5 and null |", function() {
-
-			runs(function()
-			{
-				setObjective("VT289-041 | call remapKey with numeric key 5 and null");
-				setInstruction("click inside the textbox, .Press numeric key 5 and 2");
-				setExpected("5 should be displayed after pressing 5 and 2 should be displayed after pressing 2, No Remap");
-				Rho.KeyCapture.remapKey('0x35','0x32');
-				Rho.KeyCapture.remapKey('0x35');
+				runs(function()
+				{		
+					waitsFor(function() {
+					return document.getElementById("actResult").innerHTML != "init";
+					}, "Timed out waiting for tester to respond", 300000);
+					runs(function() {
+					expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+					Rho.KeyCapture.remapKey('0x70','');
+					});	
+				});
 			});
 
-			runs(function()
-			{		
-				waitsFor(function() {
-				return document.getElementById("actResult").innerHTML != "init";
-				}, "Timed out waiting for tester to respond", 300000);
-				runs(function() {
-				expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-				//Rho.KeyCapture.remapKey('0x70','');
-				});	
-			});
-		});
+			it("VT289-041 | call remapKey with numeric key 5 and null |", function() {
 
-		it("VT289-044 | call capturekey after remapKey |", function() {
+				runs(function()
+				{
+					setObjective("VT289-041 | call remapKey with numeric key 5 and null");
+					setInstruction("click inside the textbox, .Press numeric key 5 and 2");
+					setExpected("5 should be displayed after pressing 5 and 2 should be displayed after pressing 2, No Remap");
+					Rho.KeyCapture.remapKey('0x35','0x32');
+					Rho.KeyCapture.remapKey('0x35');
+				});
 
-			runs(function()
-			{
-				setObjective("VT289-044 | call capturekey after remapKey ");
-				setInstruction("click inside the textbox, .Press numeric key a and b");
-				setExpected("Callback should not fire after pressing key a, Both key should be displayed as b after pressing a and b");
-				Rho.KeyCapture.remapKey('0x65','0x66');
-				Rho.KeyCapture.captureKey(true,'0x65',capturekeycallback);
-			});
-
-			runs(function()
-			{		
-				waitsFor(function() {
-				return document.getElementById("actResult").innerHTML != "init";
-				}, "Timed out waiting for tester to respond", 300000);
-				runs(function() {
-				expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-				Rho.KeyCapture.remapKey('0x65');
-				Rho.KeyCapture.captureKey(true,'0x65');
-				});	
-			});
-		});
-
-		it("VT289-045 | call capturekey after remapKey and callback to fire |", function() {
-
-			runs(function()
-			{
-				setObjective("VT289-045 | call capturekey after remapKey and callback to fire");
-				setInstruction("click inside the textbox,Press numeric key y and z");
-				setExpected("Callback should fire after pressing key z and y, Both key should be displayed as y after pressing z and y");
-				Rho.KeyCapture.remapKey('0x91','0x90');
-				Rho.KeyCapture.captureKey(true,'0x90',capturekeycallback);
+				runs(function()
+				{		
+					waitsFor(function() {
+					return document.getElementById("actResult").innerHTML != "init";
+					}, "Timed out waiting for tester to respond", 300000);
+					runs(function() {
+					expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+					//Rho.KeyCapture.remapKey('0x70','');
+					});	
+				});
 			});
 
-			runs(function()
-			{		
-				waitsFor(function() {
-				return document.getElementById("actResult").innerHTML != "init";
-				}, "Timed out waiting for tester to respond", 300000);
-				runs(function() {
-				expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-				Rho.KeyCapture.remapKey('0x65');
-				Rho.KeyCapture.captureKey(true,'0x65');
-				});	
+			it("VT289-044 | call capturekey after remapKey |", function() {
+
+				runs(function()
+				{
+					setObjective("VT289-044 | call capturekey after remapKey ");
+					setInstruction("click inside the textbox, .Press numeric key a and b");
+					setExpected("Callback should not fire after pressing key a, Both key should be displayed as b after pressing a and b");
+					Rho.KeyCapture.remapKey('0x65','0x66');
+					Rho.KeyCapture.captureKey(true,'0x65',capturekeycallback);
+				});
+
+				runs(function()
+				{		
+					waitsFor(function() {
+					return document.getElementById("actResult").innerHTML != "init";
+					}, "Timed out waiting for tester to respond", 300000);
+					runs(function() {
+					expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+					Rho.KeyCapture.remapKey('0x65');
+					Rho.KeyCapture.captureKey(true,'0x65');
+					});	
+				});
 			});
-		});
 
-		it("VT289-046 | call remapKey after capturekey and callback to fire |", function() {
+			it("VT289-045 | call capturekey after remapKey and callback to fire |", function() {
 
-			runs(function()
-			{
-				setObjective("VT289-046 | call remapKey after capturekey and callback to fire");
-				setInstruction("click inside the textbox, Press numeric key y and z");
-				setExpected("Callback should fire after pressing key * and #, Both key should be displayed as # after pressing * and #");
-				Rho.KeyCapture.captureKey(true,'0x78',capturekeycallback);
-				Rho.KeyCapture.remapKey('0x77','0x78');
+				runs(function()
+				{
+					setObjective("VT289-045 | call capturekey after remapKey and callback to fire");
+					setInstruction("click inside the textbox,Press numeric key y and z");
+					setExpected("Callback should fire after pressing key z and y, Both key should be displayed as y after pressing z and y");
+					Rho.KeyCapture.remapKey('0x91','0x90');
+					Rho.KeyCapture.captureKey(true,'0x90',capturekeycallback);
+				});
+
+				runs(function()
+				{		
+					waitsFor(function() {
+					return document.getElementById("actResult").innerHTML != "init";
+					}, "Timed out waiting for tester to respond", 300000);
+					runs(function() {
+					expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+					Rho.KeyCapture.remapKey('0x65');
+					Rho.KeyCapture.captureKey(true,'0x65');
+					});	
+				});
 			});
 
-			runs(function()
-			{		
-				waitsFor(function() {
-				return document.getElementById("actResult").innerHTML != "init";
-				}, "Timed out waiting for tester to respond", 300000);
-				runs(function() {
-				expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-				Rho.KeyCapture.remapKey('0x65');
-				Rho.KeyCapture.captureKey(true,'0x65');
-				});	
-			});
-		});
+			it("VT289-046 | call remapKey after capturekey and callback to fire |", function() {
 
+				runs(function()
+				{
+					setObjective("VT289-046 | call remapKey after capturekey and callback to fire");
+					setInstruction("click inside the textbox, Press numeric key y and z");
+					setExpected("Callback should fire after pressing key * and #, Both key should be displayed as # after pressing * and #");
+					Rho.KeyCapture.captureKey(true,'0x78',capturekeycallback);
+					Rho.KeyCapture.remapKey('0x77','0x78');
+				});
+
+				runs(function()
+				{		
+					waitsFor(function() {
+					return document.getElementById("actResult").innerHTML != "init";
+					}, "Timed out waiting for tester to respond", 300000);
+					runs(function() {
+					expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+					Rho.KeyCapture.remapKey('0x65');
+					Rho.KeyCapture.captureKey(true,'0x65');
+					});	
+				});
+			});
+		}
 	});	
 });	
