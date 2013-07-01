@@ -16,8 +16,8 @@ def localip
 end
 
 def modify_iOS_Application_plist_file(serverUrl, serverPort)
-  plist_file = 'Documents/HelloWorld.plist'
-  ipa_url = 'http://' + serverUrl + ':' + serverPort.to_s() + '/HelloWorld.ipa'
+  plist_file = 'Documents/store.plist'
+  ipa_url = 'http://' + serverUrl + ':' + serverPort.to_s() + '/store.ipa'
   doc =  REXML::Document.new(File.new(plist_file))
   REXML::XPath.match(doc, '//string')[1].text = ipa_url
   File.open(plist_file, 'w') do |data| data << doc end
