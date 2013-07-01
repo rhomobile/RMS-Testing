@@ -14,7 +14,6 @@ class ScreenOrientationTestController < Rho::RhoController
   def enable
     Rho::ScreenOrientation.autoRotate = (@params['enabled'] == 'true')
     response = Rho::ScreenOrientation.autoRotate
-    Rho::WebView.executeJavascript("alert('This is Webview.executejavascript function');")
     render :json => response.to_s
     return response
   end
@@ -52,7 +51,6 @@ class ScreenOrientationTestController < Rho::RhoController
   def screen_orientation_callback
     puts "screen_orientation_callback"
     puts "screen_orientation_callback -- params: #{@params}"
-    WebView.execute_js("document.getElementById('output').innerHTML = '#{@params['result']}'")
     render :back => :index
   end
 end
