@@ -14,7 +14,7 @@
     <script type="text/javascript" src="/public/jasmine/jasmine.js"></script>
     <script type="text/javascript" src="/public/jasmine/jasmine-html.js"></script>
     <script type="text/javascript" src="/public/jasmine/jasmine.junit_reporter.js"></script>
-
+    <script type="text/javascript" src="../helpers/rhologReporter.js"></script>
     <script type="text/javascript" src="/public/api/rhoapi-modules.js"></script>
 
 	<style>
@@ -49,6 +49,7 @@
         var junitReporter = new jasmine.JUnitXmlReporter();
         junitReporter.useDotNotation = false
         jasmineEnv.addReporter(htmlReporter);
+        jasmineEnv.addReporter(new jasmine.RhologReporter());
         jasmineEnv.addReporter(new jasmine.JUnitXmlReporter('.\\', true, true));
 
         jasmineEnv.specFilter = function (spec) {
