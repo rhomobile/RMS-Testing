@@ -1,10 +1,11 @@
 require 'rho/rhocontroller'
 require 'helpers/application_helper'
 require 'helpers/browser_helper'
+#require 'screenorientation'
 
 class ScreenOrientationTestController < Rho::RhoController
-  include BrowserHelper
-  include ApplicationHelper
+ # include BrowserHelper
+ # include ApplicationHelper
   
   #@@test_proc = lambda{|args| puts "lamda: #{args}"}
   def index
@@ -14,8 +15,7 @@ class ScreenOrientationTestController < Rho::RhoController
   def enable
     Rho::ScreenOrientation.autoRotate = (@params['enabled'] == 'true')
     response = Rho::ScreenOrientation.autoRotate
-    render :json => response
-    return response
+    render :string => response.to_s
   end
  
   def normal
