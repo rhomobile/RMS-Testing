@@ -1,5 +1,5 @@
 ---
-sdk: /Users/alexb/workspace/rhodes
+sdk: '../../../../../rhodes'
 sdkversion: 4.0.0
 name: Store-rhodes
 version: 1.05
