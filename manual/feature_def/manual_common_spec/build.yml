@@ -23,7 +23,7 @@ android:
   version: 4.2.2
   extensions: ["signature", "barcode", "mediaplayer"]
 wm:
-  extensions: ["barcode", "mediaplayer"]
+  extensions: ["barcode", "mediaplayer", "indicators"]
 
 paths:
   extensions:
