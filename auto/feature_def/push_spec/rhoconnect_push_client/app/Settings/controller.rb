@@ -55,13 +55,18 @@ class SettingsController < Rho::RhoController
     host = SPEC_LOCAL_SERVER_HOST
     port = SPEC_LOCAL_SERVER_PORT
     exit = nil
+    call_clientreset_and_logout = nil
 
     if @params['alert']
       case @params['alert']
       when 'exit'
         exit = true
         puts 'Exit command received!!!!!'
+      when 'exit_and_logout'
+        exit = true
+        call_clientreset_and_logout = true
       end
+      
     end
 
     url = "http://#{host}:#{port}?alert=#{@params['alert']}&error=#{@params['error']}"
@@ -70,6 +75,11 @@ class SettingsController < Rho::RhoController
     else
 		  puts "sending response: #{url} <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<"
 		  Rho::AsyncHttp.get :url => url
+    end
+
+    if call_clientreset_and_logout
+    	::Rhom::Rhom.database_fullclient_reset_and_logout
+        puts " CALLING FULL CLIENT RESET AND LOGOUT!!!!"
     end
 
     puts "before exit, exit = #{exit}"

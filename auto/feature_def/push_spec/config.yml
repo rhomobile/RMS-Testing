@@ -9,3 +9,12 @@ rhoelements: "../../../../Motorola-Extensions"
 
 # path to testsuite_root
 testsuite_root: "../../../../RMS-Testing"
+
+# ip address of the remote RC app
+rc_stack_address: 192.168.1.116
+rc_stack_port: 9292
+# ip address of the remote RC Push Server
+rc_push_server_address: 192.168.1.116
+rc_push_server_port: 8675
+# address of the mobile device
+device_address: 192.168.1.122
