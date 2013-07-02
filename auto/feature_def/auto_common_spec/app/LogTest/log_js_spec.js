@@ -80,7 +80,7 @@ describe("Log JS API", function () {
 			Rho.Log.skipPost = originalLogSettings.skipPost;
 			Rho.Log.excludeFilter = originalLogSettings.excludeFilter;
 			Rho.Log.destinationURI = originalLogSettings.destinationURI;
-			Rho.Log.level = originalLogSettings.level;
+			Rho.Log.level = originalLogSettings.logLevel;
 
 			Rho.LogCapture.stop();
 		});

@@ -29,8 +29,15 @@ describe("File JS API", function () {
 
 	String.prototype.overwrite = function (index, string) {
 		var strlen = string.length;
+		var curlen = this.length;
 		if (index >= 0 && strlen > 0)
-			return this.substring(0, index) + string + this.substring(index+strlen, this.length);
+			if (index + strlen < curlen)
+				return this.substring(0, index) + string + this.substring(index+strlen, this.length)
+			else
+			if (index <= curlen)
+				return this.substring(0, index) + string;
+			else
+				return this.substring(0, index) + Array(index-curlen+1).join("\0") + string;
 		else
 			return string;
 	};
@@ -222,18 +229,7 @@ describe("File JS API", function () {
 
 	});
 
-	// Delete recursive without parameters
-	it("VT295-025 : Delete recursive without parameters  | false",function(){
-		Rho.RhoFile.makeDir(dirToDelete);
-		var file = Rho.RhoFile.join(dirToDelete, "delete.txt")
-		var fOpen = new Rho.RhoFile(file,Rho.RhoFile.OPEN_FOR_APPEND);
-		fOpen.close();
-		Rho.RhoFile.makeDir(dirinDelete)
 
-		Rho.RhoFile.deleteRecursive()
-		expect(Rho.RhoFile.isDir(dirToDelete)).toEqual(true)
-		expect(Rho.RhoFile.exists(file)).toEqual(true)
-	});
 
 	// Delete directory without contents
 	it("VT295-012 : Delete directory without contents | true",function(){
@@ -783,30 +779,26 @@ describe("File JS API", function () {
 	// seek with value 10
 	it("VT295-078 : seek value 10| true",function(){
 
+		if (Rho.RhoFile.exists(fileMode1))
+			Rho.RhoFile.deleteFile(fileMode1)
+
 		var fOpen = new Rho.RhoFile(fileMode1,Rho.RhoFile.OPEN_FOR_READ_WRITE);
 		expect(Rho.RhoFile.exists(fileMode1)).toEqual(true)
 		var writeValue = fOpen.write(Text1)
 		var writeValue = fOpen.write(Text2)
 		fOpen.seek(10)
 		fOpen.write("Test")
+		fOpen.close()
+
+		var fOpen = new Rho.RhoFile(fileMode1,Rho.RhoFile.OPEN_FOR_READ);
 		var content = fOpen.readAll()
+		fOpen.close()
+		var result = (Text1 + Text2).overwrite(10,"Test");
+		expect(content).toEqual(result)
 		Rho.Log.info(content, "VT290-078");
-		fOpen.close()
 	});
 
-	// seek with value out of size
-	it("VT295-079 : seek value out of size | true",function(){
 
-		var fOpen = new Rho.RhoFile(fileMode1,Rho.RhoFile.OPEN_FOR_READ_WRITE);
-		expect(Rho.RhoFile.exists(fileMode1)).toEqual(true)
-		var writeValue = fOpen.write(Text1)
-		var writeValue = fOpen.write(Text2)
-		fOpen.seek(100)
-		fOpen.write("Test")
-		var content = fOpen.readAll()
-		Rho.Log.info(content, "VT290-090");
-		fOpen.close()
-	});
 
 	// file size
 	it("VT295-082 : file size | true",function(){
@@ -926,6 +918,19 @@ describe("File JS API", function () {
 			fcopy.close();
 		});
 
+		// Delete recursive without parameters
+		it("VT295-025 : Delete recursive without parameters  | false",function(){
+			Rho.RhoFile.makeDir(dirToDelete);
+			var file = Rho.RhoFile.join(dirToDelete, "delete.txt")
+			var fOpen = new Rho.RhoFile(file,Rho.RhoFile.OPEN_FOR_APPEND);
+			fOpen.close();
+			Rho.RhoFile.makeDir(dirinDelete)
+
+			Rho.RhoFile.deleteRecursive()
+			expect(Rho.RhoFile.isDir(dirToDelete)).toEqual(true)
+			expect(Rho.RhoFile.exists(file)).toEqual(true)
+		});
+
 
 		// mkdir with invalid characters
 		it("VT295-049: make directory and special characters | false",function(){
@@ -949,6 +954,28 @@ describe("File JS API", function () {
 			var testDirName = Rho.RhoFile.join(dirName, "Test!@#$")
 			Rho.RhoFile.makeDirs(testDirName)
 			expect(Rho.RhoFile.isDir(testDirName)).toEqual(false)
+		});
+
+		// seek with value out of size
+		it("VT295-079 : seek value out of size | true",function(){
+			if (Rho.RhoFile.exists(fileMode1))
+				Rho.RhoFile.deleteFile(fileMode1)
+
+			var fOpen = new Rho.RhoFile(fileMode1,Rho.RhoFile.OPEN_FOR_READ_WRITE);
+			expect(Rho.RhoFile.exists(fileMode1)).toEqual(true)
+			var writeValue = fOpen.write(Text1)
+			var writeValue = fOpen.write(Text2)
+			fOpen.seek(100)
+			fOpen.write("Test")
+			fOpen.close()
+
+			var fOpen = new Rho.RhoFile(fileMode1,Rho.RhoFile.OPEN_FOR_READ);
+			var content = fOpen.readAll()
+			fOpen.close()
+			Rho.Log.info(content, "VT290-079");
+			var result = (Text1 + Text2).overwrite(100,"Test");
+			expect(content).toEqual(result)
+			Rho.Log.info(result, "VT290-079");
 		});
 	});
 	*/
