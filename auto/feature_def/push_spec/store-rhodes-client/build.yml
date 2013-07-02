@@ -22,7 +22,7 @@ wp:
 symbian:
   uid: '0xeb4aeb04'
 
-capabilites:
+capabilities:
   - push
 
 android:

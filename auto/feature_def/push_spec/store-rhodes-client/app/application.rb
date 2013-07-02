@@ -13,7 +13,6 @@ class AppApplication < Rho::RhoApplication
     # SyncEngine::set_objectnotify_url("/app/Settings/sync_notify")
     SyncEngine.set_notification(-1, "/app/Settings/sync_notify", '')
 
-    # FIXME:
     Rho::Push.startNotifications '/app/Settings/push_callback'
   end
 end
