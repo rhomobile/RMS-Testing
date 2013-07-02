@@ -43,11 +43,11 @@ describe("System Module JS Test Starts Here", function() {
 			Rho.System.screenSleeping = false;
 			Rho.System.screenAutoRotate = false
 			Rho.System.lockWindowSize = false
-			var data1 = Rho.System.getproperties(['screenSleeping', 'screenAutoRotate', lockWindowSize);
+			var dataBeforeClear = Rho.System.getproperties(['screenSleeping', 'screenAutoRotate', lockWindowSize]);
 			Rho.System.clearAllProperties()
-			var data2 = Rho.System.getproperties(['screenSleeping', 'screenAutoRotate', lockWindowSize);
-			var data = 'Before clear: 'data1+'After Clearingall properties '+data;
-			displayResult("VT300-068 | call clearAllProperties() | ",JSON.stringify(data));
+			var dataAfterClear = Rho.System.getproperties(['screenSleeping', 'screenAutoRotate', lockWindowSize]);
+			var data = 'Before clear: ' + dataBeforeClear +'After Clearingall properties ' + dataAfterClear;
+			displayResult("VT300-068 | call clearAllProperties() | ", JSON.stringify(data));
 		});		
 		waitsFor(function(){
 			return captured;
@@ -57,9 +57,11 @@ describe("System Module JS Test Starts Here", function() {
 			expect(testResult).toEqual(true);	
 		});
 		});	
-	
+
+
+     <!-- What the application rhomobile nativejasmine? How user can install or uninstall it? -->
 		
-		if(isAnyWindowsFamilyPlatform()){
+	/*	if(isAnyWindowsFamilyPlatform()){
 		
 			it("VT300-077 | call isApplicationInstalled() with application name which is there in device | ", function() {
 				runs(function(){
@@ -111,7 +113,7 @@ describe("System Module JS Test Starts Here", function() {
 			});
 	
 		});
-	});
+	});*/
 	
 
 	describe("System Module- getProperty Test Starts Here", function() {
