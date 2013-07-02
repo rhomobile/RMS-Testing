@@ -84,8 +84,9 @@ class SettingsController < Rho::RhoController
 
   def push_callback
     puts " *********** INSIDE push_callback **************"
-    puts @params
-    WebView.navigate Rho::RhoConfig.start_path
+    puts "params: #{@params.inspect}"
+    Rho::Notification.showPopup({"message" => @params["message"], "buttons" =>['OK']})
+    # WebView.navigate Rho::RhoConfig.start_path
     # "rho_push"
   end
 
