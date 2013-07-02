@@ -12,19 +12,12 @@ class ScreenOrientationTestController < Rho::RhoController
   end
   
   def enable
-    Rho::ScreenOrientation.autoRotate = @params['enabled']
+    Rho::ScreenOrientation.autoRotate = (@params['enabled'] == 'true')
     response = Rho::ScreenOrientation.autoRotate
     render :json => response
     return response
   end
-  
-  def disable
-    Rho::ScreenOrientation.autoRotate = @params['enabled']
-    response = Rho::ScreenOrientation.autoRotate
-    render :json => response
-    return response
-  end
-  
+ 
   def normal
     Rho::ScreenOrientation.normal
     render :back => :index
