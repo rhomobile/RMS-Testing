@@ -11,7 +11,6 @@ function enable(value)
          },		
          async:   false
 	});
-	alert("returnedValue: " + returnedValue);
 	return returnedValue;	
 }
 
