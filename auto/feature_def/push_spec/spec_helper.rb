@@ -69,11 +69,10 @@ def run_apps(platform)
 
 		RhoconnectHelper.start_rhoconnect_stack($server_path, true)
 	else
-		# TODO: fix this to point to remote RC app
-		RhoconnectHelper.host = "192.168.1.116"
-		RhoconnectHelper.port = "9292"
-		RhoconnectHelper.push_host = "192.168.1.116"
-		RhoconnectHelper.push_port = "8675"
+		RhoconnectHelper.host = $rc_stack_address
+		RhoconnectHelper.port = $rc_stack_port
+		RhoconnectHelper.push_host = $rc_push_server_address
+		RhoconnectHelper.push_port = $rc_push_server_port
 	end
 	
 	appname = "rhoconnect_push_client"
@@ -153,40 +152,44 @@ def run_apps(platform)
 		puts
 
 		puts "1st step : Build the Test App"
+		wm_build_rakefile_dir = convert_to_windows_path_style_str(File.join($rhoelements_root, 'build', 'ci', 'windows'))
 		wm_build_rakefile = convert_to_windows_path_style_str(File.join($rhoelements_root,'build','ci','windows','Rakefile'))
 		rhodes_app_dir = convert_to_windows_path_style_str(File.join($testsuite_root,'auto','feature_def','push_spec','rhoconnect_push_client'))
-		cmd = "rake -f #{wm_build_rakefile} windows:build_native_test_app_wm['#{rhodes_app_dir}']"
+		cmd = "cd #{wm_build_rakefile_dir} && rake -f #{wm_build_rakefile} windows:build_native_test_app_wm['#{rhodes_app_dir}']"
 		puts "CMD is: #{cmd}"
-                #system(cmd)
-		puts "Build is finished!!!"
+                $out_code = system(cmd)
+		puts "Build is finished with #{$out_code} !!!"
 
 		puts "2nd step : Reboot the device at #{$device_id}"
-		cmd = "call rake -f #{wm_build_rakefile} windows:reboot[#{$device_id}]"
+		cmd = "cd #{wm_build_rakefile_dir} && rake -f #{wm_build_rakefile} windows:reboot[#{$device_id}]"
 		puts "CMD is: #{cmd}"
-		#system(cmd)
+		$out_code = system(cmd)
+		puts "Device reboot is finished with #{$out_code}"
 
 		puts "3rd step : install the push service"
 		aux_lib_push_service_cab = convert_to_windows_path_style_str(File.join($rhoelements_root,'libs','rhoconnect-push-service','NETCFv35.Messages.EN.wm.cab'))
-		cmd = "call rake -f #{wm_build_rakefile} windows:install_cab_to_device[#{$device_id},#{aux_lib_push_service_cab}]"
+		cmd = "cd #{wm_build_rakefile_dir} && rake -f #{wm_build_rakefile} windows:install_cab_to_device[#{$device_id},#{aux_lib_push_service_cab}]"
 		puts "CMD is: #{cmd}"
-		#system(cmd)
+		$out_code = system(cmd)
+		puts "Install CAB #{aux_lib_push_service_cab} is finished with #{$out_code}"
 		push_service_cab = convert_to_windows_path_style_str(File.join($rhoelements_root,'libs','rhoconnect-push-service','rhoconnect-push-service.cab'))
-		cmd = "call rake -f #{wm_build_rakefile} windows:install_cab_to_device[#{$device_id},#{push_service_cab}]"
+		cmd = "cd #{wm_build_rakefile_dir} && rake -f #{wm_build_rakefile} windows:install_cab_to_device[#{$device_id},#{push_service_cab}]"
 		puts "CMD is: #{cmd}"
-		#system(cmd)
-		puts "RhoConnect Push Service is installed!!!"
+		$out_code = system(cmd)
+		puts "RhoConnect Push Service is installed with #{$out_code} !!!"
 
 		puts "4th step: install the test application"
 		spec_app_cab = convert_to_windows_path_style_str(File.join($spec_path,'rhoconnect_push_client','bin','target','wm6p','Rho_Push_Client.cab'))
-                cmd = "rake -f #{wm_build_rakefile} windows:install_cab_to_device[#{$device_id},#{spec_app_cab}]"
+                cmd = "cd #{wm_build_rakefile_dir} && rake -f #{wm_build_rakefile} windows:install_cab_to_device[#{$device_id},#{spec_app_cab}]"
 		puts "CMD is: #{cmd}"
-	        #system(cmd)
-                puts  "Test Application is installed!!!"
+	        $out_code = system(cmd)
+                puts  "Test Application is installed with #{$out_code} !!!"
 
                 puts "5th step: Start the test application"
-		cmd = "rake -f #{wm_build_rakefile} windows:start_test_app[#{$device_id},Rho_Push_Client]"
+		cmd = "cd #{wm_build_rakefile_dir} && rake -f #{wm_build_rakefile} windows:start_test_app_bg[#{$device_id},Rho_Push_Client]"
 		puts "CMD is: #{cmd}"
-                #system(cmd)
+                $out_code = system(cmd)
+		puts " Application is started with #{$out_code}"
 	end
 	puts "Running push specs ..."
 	puts

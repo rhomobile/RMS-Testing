@@ -21,6 +21,11 @@ if File.file?(cfgfilename)
   $rhoelements_root = File.expand_path($rhoelements_root) if $rhoelements_root
   $testsuite_root = config["testsuite_root"]
   $testsuite_root = File.expand_path($testsuite_root) if $testsuite_root
+  $rc_stack_address = config["rc_stack_address"]
+  $rc_stack_port = config["rc_stack_port"]
+  $rc_push_server_address = config["rc_push_server_address"]
+  $rc_push_server_port = config["rc_push_server_port"]
+  $device_id = config["device_address"]
 end
 
 unless $rho_root
@@ -33,7 +38,6 @@ puts "rhoelements location: #{$rhoelements_root}"
 
 $spec_path = FileUtils.pwd
 $platform = 'windows'
-$device_id = '192.168.1.122'
 $server = nil
 $requests = []
 $signal = ConditionVariable.new
@@ -62,6 +66,7 @@ describe 'Windows Mobile push spec' do
       res.status = 200
       $mutex.synchronize do
         $requests << req
+	puts "req is #{req}"
         $signal.signal
       end
     end
@@ -78,6 +83,9 @@ describe 'Windows Mobile push spec' do
     cleanup_apps
     # FIXME:
     # `adb emu kill`
+
+    puts "Sending exit and logout message to the app"
+    RhoconnectHelper.api_post('users/ping', { :user_id => ['pushclient'], :message => 'exit_and_logout' }, @api_token)
 
     # FIXME:
     # TEST_PKGS.each do |pkg|
@@ -165,43 +173,44 @@ describe 'Windows Mobile push spec' do
   #  (output =~ /rho_push_client/).should_not be_nil
   #end
 
-  # it 'should process sequence of push messages' do
-  #   puts 'Sending 5 push messages...'
+  it 'should process sequence of push messages' do
+  	puts 'Sending 5 push messages...'
 
-  #   alerts = {}
-  #   5.times do |i|
-  #     message = "magic#{i}"
-  #     alerts[message] = true
-  #     params = { :user_id=>['pushclient'], :message => message}
-  #     RhoconnectHelper.api_post('users/ping',params,@api_token)
-  #     sleep 0.5
-  #   end
+  	alerts = {}
+  	5.times do |i|
+  		message = "magic#{i}"
+  		alerts[message] = true
+  		params = { :user_id=>['pushclient'], :message => message}
+  		RhoconnectHelper.api_post('users/ping',params,@api_token)
+  		sleep 2
+  	end
 
-  #   puts 'Waiting 5 messages with push content...'
+  	puts 'Waiting 5 messages with push content...'
 
-  #   5.times do |i|
-  #     $mutex.synchronize do
-  #       break if $requests.count == 5
-  #       $signal.wait($mutex, 60)
-  #     end
-  #     puts "Message count: #{$requests.count}"
-  #   end
+  	5.times do |i|
+  		$mutex.synchronize do
+  			break if $requests.count == 5
+  			$signal.wait($mutex, 60)
+  		end
+  		puts "Message count: #{$requests.count}"
+  	end
 
-  #   $requests.count.should == 5
-
-  #   $mutex.synchronize do
-  #     puts alerts.inspect
-  #     5.times do |i|
-  #       message = $requests[i].query['alert']
-  #       message.should_not be_nil
-  #       puts "message: #{message}"
-  #       alerts[message].should be_true
-  #       alerts[message] = false
-  #       #$requests.delete_at 0
-  #     end
-  #     $requests.clear
-  #   end
-  # end
+  	$requests.count.should == 5
+  	puts " requests are #{$requests}"
+  	$mutex.synchronize do
+  		puts alerts.inspect
+  		5.times do |i|
+  			message = $requests[i].query['alert']
+			
+  			message.should_not be_nil
+  			puts "message: #{message}"
+  			alerts[message].should be_true
+  			alerts[message] = false
+  			$requests.delete_at 0
+  		end
+  		$requests.clear
+  	end
+  end
 
 
   # TODO:
