@@ -1,0 +1,34 @@
+sdk: "../../rhodes"
+sdkversion: 4.0.0
+name: TestApp
+version: 1.0
+vendor: rhomobile
+build: debug
+bbver: 6.0
+applog: rholog.txt
+iphone:
+  configuration: Release
+  sdk: iphoneos6.1
+  provisionprofile: '0E42FE75-C215-4EBA-9FD4-644A1469ABFB'
+  codesignidentity: 'iPhone Developer: Владимир Мусулайнен'
+  entitlements:
+  BundleIdentifier: com.rhomobile.testapp
+  BundleURLScheme: testapp
+wp:
+  productid: 'e04a6f30-ba35-0130-2d39-0023241f0ea4'
+wm:
+  #sdk: "MC3000c50b (ARMV4I)"
+  sdk: "Windows Mobile 6.5.3 Professional DTK (ARMV4I)"
+#sdk: "Windows Mobile 6 Professional SDK (ARMV4I)"
+symbian:
+  uid: '0xedca4355'
+android:
+  version: 2.1
+
+extensions: ["rhoconnect-client"]
+
+paths:
+  extensions:
+  - ../../Motorola-Extensions/build/ci/extensions
+  - ../../Motorola-Extensions/lib/commonAPI
+  - ../../rhoconnect-client/ext
