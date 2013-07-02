@@ -37,6 +37,7 @@ class SettingsController < Rho::RhoController
         @msg = Rho::RhoError.new(errCode).message
       end
 
+      # Register for push service
       Rho::Push.getDeviceId url_for(:action => 'registration_callback')
 
       WebView.navigate ( url_for :action => :login, :query => {:msg => @msg} )
@@ -85,9 +86,8 @@ class SettingsController < Rho::RhoController
   def push_callback
     puts " *********** INSIDE push_callback **************"
     puts "params: #{@params.inspect}"
-    Rho::Notification.showPopup({"message" => @params["message"], "buttons" =>['OK']})
-    # WebView.navigate Rho::RhoConfig.start_path
-    # "rho_push"
+    # Show 'alert' popup window
+    Rho::Notification.showPopup({'message' => @params['aps']['alert'], 'buttons' =>['OK']})
   end
 
   def sync_notify
@@ -95,7 +95,6 @@ class SettingsController < Rho::RhoController
 
   	# un-comment to show a debug status pop-up
   	#Alert.show_status( "Status", "#{@params['source_name']} : #{status}", Rho::RhoMessages.get_message('hide'))
-
   	if status == "in_progress"
   	  # do nothing
   	elsif status == "complete"
