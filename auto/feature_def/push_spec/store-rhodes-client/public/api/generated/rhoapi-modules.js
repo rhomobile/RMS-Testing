@@ -1,0 +1,4 @@
+// WARNING! THIS FILE IS GENERATED AUTOMATICALLY! DO NOT EDIT IT MANUALLY!
+Rho.loadApiModules([
+    "Rho.RhoConnectClient"
+]);
