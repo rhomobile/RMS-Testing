@@ -1,7 +1,7 @@
 --- 
 name: phone_spec
 bbver: 6.0
-#sdk: "C:/DevelopmentTools/rhomobile/rhodes"
+#sdk: "../../../../rhodes"
 #applog: rholog.txt
 version: 1.0.0
 vendor: rhomobile
@@ -26,7 +26,7 @@ capabilities:
   - calendar
   - gps
    
-extensions: ["mspec", "json", "rhoxml", "rhospec", "crypt", "fileutils"]  
+extensions: ["mspec", "json", "rhoxml", "crypt", "fileutils"]  
 
 wp:
   productid: 'fd55c4d0-51fa-012e-7844-6caec51bd50e'

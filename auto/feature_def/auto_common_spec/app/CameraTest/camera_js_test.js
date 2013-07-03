@@ -302,9 +302,7 @@ var arr_camera_property = [
 	OSTypes			:	"ANDROID",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
-},
-
-
+}
 ];
 
 var camCallback = function (data){

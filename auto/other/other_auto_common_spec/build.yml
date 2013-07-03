@@ -8,8 +8,8 @@ paths:
 #  - C:/DevelopmentTools/rhomobile/Motorola-Extensions/build/ci/extensions/instrumentation/extensions
 #  - C:/Neon/git/Motorola-Extensions/build/ci/extensions/instrumentation/extensions
 # DCC - This path MUST be removed prior to check in
-    - C:/Neon/git/Motorola-Extensions/lib/commonAPI
-    - C:/Neon/git/rhoconnect-client/ext
+#    - C:/Neon/git/Motorola-Extensions/lib/commonAPI
+#    - C:/Neon/git/rhoconnect-client/ext
 #end DCC
 #  - B:/git/Motorola-Extensions/build/ci/extensions/instrumentation/extensions
 #  - C:/Neon/git/Motorola-Extensions/build/ci/extensions/instrumentation/extensions
@@ -75,8 +75,8 @@ wm:
 #    - ezcrypto
 #    - json
     - barcode
-    - Coreapi
-#sdk: "Windows Mobile 6 Professional SDK (ARMV4I)"
+#    - Coreapi
+  #sdk: "Windows Mobile 6 Professional SDK (ARMV4I)"
   sdk: "Windows Mobile 6.5.3 Professional DTK (ARMV4I)"
 #sdk: "MC3000c50b (ARMV4I)"
 win32:

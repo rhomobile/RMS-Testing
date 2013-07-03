@@ -5,6 +5,7 @@ require 'openssl'
 require 'net/http'
 require 'rexml/document'
 
+#puts "argv : #{ARGV}"
 def localip
     orig, Socket.do_not_reverse_lookup = Socket.do_not_reverse_lookup, true  # turn off reverse DNS resolution temporarily
     UDPSocket.open do |s|
@@ -23,7 +24,7 @@ def modify_iOS_Application_plist_file(serverUrl, serverPort)
   File.open(plist_file, 'w') do |data| data << doc end
 end
 
-host = localip
+host = ARGV && ARGV[0] ? ARGV[0] : localip
 port = 8081
 securePort = 8082
 securePortWithClientAuth = 8083
