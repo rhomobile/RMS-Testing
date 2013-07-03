@@ -521,7 +521,7 @@ describe("File JS API", function () {
 	// mkdirs with invalid path when all top level directories not exists
 	it("VT295-052: makedirs with invalid path | true",function(){
 
-		var testDirName = "C:/RaghavendraKC/Testing"
+		var testDirName = "K:/RaghavendraKC/Testing"
 		Rho.RhoFile.makeDirs(testDirName)
 		expect(Rho.RhoFile.isDir(testDirName)).toEqual(false)
 	});
