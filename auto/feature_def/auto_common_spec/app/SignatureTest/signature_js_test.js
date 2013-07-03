@@ -1,5 +1,4 @@
 var arr_sig_property = [
-/*
 {
 	testName		:	"VT299-1001 | Set bgColor :#FF0000| #FF0000",
 	propertyName	:	"bgColor",
@@ -304,7 +303,6 @@ var arr_sig_property = [
 	propertyValue	:	"5",
 	expectedResult	:	"5"
 },
-*/
 {
 	testName		:	"VT299-1039 | Set penWidth :0| 0",
 	propertyName	:	"penWidth",
