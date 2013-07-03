@@ -2,25 +2,16 @@ var currentOrientation;
 
 function enable(value)
 {
-	var returnedValue = "";
+	var returnedValue = false;
 	jQuery.ajax({
          url:    '/app/ScreenOrientationTest/enable',
          data:	{enabled:value},
          success: function(result) 	{
-			returnedValue = result;
+			returnedValue = result == 'true';
          },		
          async:   false
 	});
 	return returnedValue;	
-}
-
-function setScreenOrientation(value)
-{
-	jQuery.ajax({
-         url:    '/app/ScreenOrientationTest/set_screen_orientation',
-         data:	{enabled: value},	
-         async:   false	
-	});
 }
 
 function normal()

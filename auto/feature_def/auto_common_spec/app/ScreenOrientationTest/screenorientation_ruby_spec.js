@@ -6,7 +6,7 @@ describe("ScreenOrientation Ruby API Test", function () {
 
     afterEach(function () {
         resetCallback();
-        setScreenOrientation(true);
+        enable(true);
     });
 
 	it("should enable automatic screen orientation", function() {
@@ -20,7 +20,7 @@ describe("ScreenOrientation Ruby API Test", function () {
     if (isAnyButApplePlatform()) {
 
 
-        it("should set current device orientation to upsidedown without callback", function () {
+        it("should set current device orientation to upsideDown without callback", function () {
             runs(function () {
                 upsideDown();
             }, "Set the current orientation to upside down...");
@@ -30,49 +30,49 @@ describe("ScreenOrientation Ruby API Test", function () {
             }, "Something wrong happened", 10000);
         });
 
-        it("should set current device orientation to righthanded without callback", function () {
+        it("should set current device orientation to rightHanded without callback", function () {
             rightHanded();
         });
 
-        it("should set current device orientation to lefthanded without callback", function () {
+        it("should set current device orientation to leftHanded without callback", function () {
             leftHanded();
         });
 
-        it("should set current device orientation to landscape without callback", function () {
+        it("should set current device orientation to normal without callback", function () {
             normal();
         });
 
-        it("should set current device orientation to upsidedown and call a callback function", function () {
+        it("should set current device orientation to upsideDown and call a callback function", function () {
             runs(function () {
                 setCallback();
                 upsideDown();
-            }, "Set the current orientation to upsidedown...this should trigger a callback");
+            }, "Set the current orientation to upsideDown...this should trigger a callback");
 
             waitsFor(function () {
                 return document.getElementById('output').innerHTML == "upsideDown"
-            }, document.getElementById('output').innerHTML + " is not the expected value upsidedown", 10000);
+            }, document.getElementById('output').innerHTML + " is not the expected value upsideDown", 10000);
         });
 
-        it("should set current device orientation to lefthanded and call a callback function", function () {
+        it("should set current device orientation to leftHanded and call a callback function", function () {
             runs(function () {
                 setCallback();
                 leftHanded();
-            }, "Set the current orientation to lefthanded...this should trigger a callback");
+            }, "Set the current orientation to leftHanded...this should trigger a callback");
 
             waitsFor(function () {
                 return document.getElementById('output').innerHTML == "leftHanded"
-            }, document.getElementById('output').innerHTML + " is not the expected value lefthanded", 10000);
+            }, document.getElementById('output').innerHTML + " is not the expected value leftHanded", 10000);
         });
 
-        it("should set current device orientation to righthanded and call a callback function", function () {
+        it("should set current device orientation to rightHanded and call a callback function", function () {
             runs(function () {
                 setCallback();
                 rightHanded();
-            }, "Set the current orientation to righthanded...this should trigger a callback");
+            }, "Set the current orientation to rightHanded...this should trigger a callback");
 
             waitsFor(function () {
                 return document.getElementById('output').innerHTML == "rightHanded"
-            }, document.getElementById('output').innerHTML + " is not the expected value righthanded", 10000);
+            }, document.getElementById('output').innerHTML + " is not the expected value rightHanded", 10000);
         });
 
         it("should set current device orientation to normal and call a callback function", function () {

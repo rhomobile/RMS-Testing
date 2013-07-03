@@ -1,11 +1,8 @@
 require 'rho/rhocontroller'
 require 'helpers/application_helper'
 require 'helpers/browser_helper'
-#require 'screenorientation'
 
 class ScreenOrientationTestController < Rho::RhoController
- # include BrowserHelper
- # include ApplicationHelper
   
   #@@test_proc = lambda{|args| puts "lamda: #{args}"}
   def index
