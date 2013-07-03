@@ -154,111 +154,108 @@ describe("Camera JS API Test", function() {
 					callbackstatus = false;
 				});
 
-						it("VT282-2001 | call getProperties() with sync callback and hash |" + camtype, function() {
+					it("VT285-2001 | call getProperties() with sync callback and hash |" + camtype, function() {
 
-							runs(function() {
-							    enumObject.setProperties({'compressionFormat':'png','desiredHeight':'640','outputFormat':'dataUri'});
-								enumObject.getProperties(['compressionFormat','desiredHeight','outputFormat'],callbackgetproperties);
-							});
-
-							waitsFor(function(){
-								return callbackstatus;
-							});
-
-							runs(function() {							
-								expect(getpropertiesdata).toContain('png');
-								expect(getpropertiesdata).toContain('640');
-								expect(getpropertiesdata).toContain('dataUri');	
-							});
+						runs(function() {
+						    enumObject.setProperties({'compressionFormat':'png','desiredHeight':'640','outputFormat':'dataUri'});
+							enumObject.getProperties(['compressionFormat','desiredHeight','outputFormat'],callbackgetproperties);
 						});
 
-
-						it("VT282-2002 | call getProperties() with anonymous callback and hash |" + camtype, function() {
-
-							runs(function() {    
-							    enumObject.setProperties({'compressionFormat':'jpg','desiredWidth':'480','outputFormat':'image'});
-								enumObject.getProperties(['compressionFormat','desiredWidth','outputFormat'],function(data){getpropertiesdata = JSON.stringify(data);callbackstatus = true;});
-							});
-
-							waitsFor(function(){
-								return callbackstatus;
-							});	
-
-							runs(function() {								
-								expect(getpropertiesdata).toContain('480');
-								expect(getpropertiesdata).toContain('jpg');
-								expect(getpropertiesdata).toContain('image');	
-							});							
+						waitsFor(function(){
+							return callbackstatus;
 						});
 
-						it("VT282-2000 | call getProperties() without callback |" + camtype, function() {
+						runs(function() {							
+							expect(getpropertiesdata).toContain('png');
+							expect(getpropertiesdata).toContain('640');
+							expect(getpropertiesdata).toContain('dataUri');	
+						});
+					});
 
-							    //enumObject.clearAllProperties();
-							    enumObject.setProperties({'compressionFormat':'png','desiredHeight':'640','outputFormat':'dataUri'});
-								var data = enumObject.getProperties(['compressionFormat','desiredHeight','outputFormat']);
-								getpropertiesdata = JSON.stringify(data);
-								expect(getpropertiesdata).toContain('png');
-								expect(getpropertiesdata).toContain('640');
-								expect(getpropertiesdata).toContain('dataUri');						
+					it("VT285-2002 | call getProperties() with anonymous callback and hash |" + camtype, function() {
+
+						runs(function() {    
+						    enumObject.setProperties({'compressionFormat':'jpg','desiredWidth':'480','outputFormat':'image'});
+							enumObject.getProperties(['compressionFormat','desiredWidth','outputFormat'],function(data){getpropertiesdata = JSON.stringify(data);callbackstatus = true;});
 						});
 
+						waitsFor(function(){
+							return callbackstatus;
+						});	
 
-						it("VT282-2004 | call getProperty() with sync callback and property |" + camtype, function() {
+						runs(function() {								
+							expect(getpropertiesdata).toContain('480');
+							expect(getpropertiesdata).toContain('jpg');
+							expect(getpropertiesdata).toContain('image');	
+						});							
+					});
 
-							runs(function() {  									    
-							    enumObject.setProperty('compressionFormat','jpg');
-								enumObject.getProperty("compressionFormat",callbackgetproperty);
-							});
+					it("VT285-2000 | call getProperties() without callback |" + camtype, function() {
 
-							waitsFor(function(){
-								return callbackstatus;
-							});	
-							
-							runs(function() {	
-								expect(getpropertydata).toEqual('jpg');
-							});										
+						    //enumObject.clearAllProperties();
+						    enumObject.setProperties({'compressionFormat':'png','desiredHeight':'640','outputFormat':'dataUri'});
+							var data = enumObject.getProperties(['compressionFormat','desiredHeight','outputFormat']);
+							getpropertiesdata = JSON.stringify(data);
+							expect(getpropertiesdata).toContain('png');
+							expect(getpropertiesdata).toContain('640');
+							expect(getpropertiesdata).toContain('dataUri');						
+					});
+
+					it("VT285-2004 | call getProperty() with sync callback and property |" + camtype, function() {
+
+						runs(function() {  									    
+						    enumObject.setProperty('compressionFormat','jpg');
+							enumObject.getProperty("compressionFormat",callbackgetproperty);
 						});
 
-						it("VT282-2005 | call getProperty() with anonymous callback and property |" + camtype, function() {
+						waitsFor(function(){
+							return callbackstatus;
+						});	
+						
+						runs(function() {	
+							expect(getpropertydata).toEqual('jpg');
+						});										
+					});
 
-							runs(function() {
-							    enumObject.setProperty('compressionFormat','png');
-								enumObject.getProperty('compressionFormat',function(data){getpropertydata = data;callbackstatus = true;});
-							});
+					it("VT285-2005 | call getProperty() with anonymous callback and property |" + camtype, function() {
 
-							waitsFor(function(){
-								return callbackstatus;
-							});	
-							
-							runs(function() {	
-								expect(getpropertydata).toEqual('png');
-							});								
+						runs(function() {
+						    enumObject.setProperty('compressionFormat','png');
+							enumObject.getProperty('compressionFormat',function(data){getpropertydata = data;callbackstatus = true;});
 						});
 
+						waitsFor(function(){
+							return callbackstatus;
+						});	
+						
+						runs(function() {	
+							expect(getpropertydata).toEqual('png');
+						});								
+					});
 
-						it("VT282-2003 | call getProperty() without callback |" + camtype, function() {
-			    
-							    enumObject.setProperty('compressionFormat','jpg');
-								var data = enumObject.getProperty("compressionFormat");
-								getpropertydata = data;
-								expect(getpropertydata).toEqual('jpg');								
-						});
+					it("VT285-2003 | call getProperty() without callback |" + camtype, function() {
+		    
+						    enumObject.setProperty('compressionFormat','jpg');
+							var data = enumObject.getProperty("compressionFormat");
+							getpropertydata = data;
+							expect(getpropertydata).toEqual('jpg');								
+					});
 
-						it("VT282-2006 | call getDefault |" + camtype, function() {
+					it("VT285-2006 | call getDefault |" + camtype, function() {
 
-							    Rho.Camera.setDefault(enumObject);
-							    var defaultobj = Rho.Camera.getDefault();						  
-								expect(camtype).toEqual(defaultobj.getProperty('ID'));
-						});
+						    Rho.Camera.setDefault(enumObject);
+						    var defaultobj = Rho.Camera.getDefault();						  
+							expect(camtype).toEqual(defaultobj.getProperty('ID'));
+					});
 
-						it("VT282-2006A | call Default |" + camtype, function() {
+					it("VT285-2006A | call Default |" + camtype, function() {
 
-							    //enumObject.clearAllProperties();
-							    //Rho.Camera.setDefaultID( enumObject.getId() );
-							   // Rho.Camera.default = enumObject;
-							   // var defaultobj = Rho.Camera.default;
-								expect(camtype).toEqual(defaultobj.getProperty('ID'));
-						});
+						    //enumObject.clearAllProperties();
+						    //Rho.Camera.setDefaultID( enumObject.getId() );
+						   // Rho.Camera.default = enumObject;
+						   // var defaultobj = Rho.Camera.default;
+							expect(camtype).toEqual(defaultobj.getProperty('ID'));
+					});
 			});
 /*
 			describe("Disable Camera "+ camtype +": "+ camname, function() {

@@ -1,208 +1,377 @@
-var signatureTest = {};
-
-signatureTest.MOUSE_DOWN = 0;
-signatureTest.MOUSE_MOVE = 1;
-signatureTest.MOUSE_UP = 2;
-
-//TODO non sym
-
-signatureTest.loadEvent = function()
+var arr_sig_property = [
+/*
 {
-//	signatureTest.localWebPath = Rho.LocalServer.enable({port:0, path:"/"});
-	signatureTest.packagePath = 'com.rhomobile.auto_common_spec';
-	//signatureTest.dataPath = 'file:///data/data/' + signatureTest.packagePath + '/rho/rho/apps/';
-	signatureTest.dataPath = 'file:///data/data/' + signatureTest.packagePath + '/';
-	//signatureTest.dataPath = 'http://localhost:31416/';
-	signatureTest.imageUrlRoot = 'http://localhost:31416/';
-	signatureTest.empty100sq = document.createElement('img');
-	signatureTest.empty100sqRed = document.createElement('img');
-	signatureTest.box100sq = document.createElement('img');
-	signatureTest.box100sqPen3 = document.createElement('img');
-	signatureTest.box100sqAlpha = document.createElement('img');
-	signatureTest.box100sqAlphaPen = document.createElement('img');
-	signatureTest.box100sqBlue = document.createElement('img');
-	signatureTest.box100sqRedPen = document.createElement('img');
-	signatureTest.box200150 = document.createElement('img');
-	signatureTest.cross100sq = document.createElement('img');
-	signatureTest.rim100sq = document.createElement('img');
-	signatureTest.nonSym100sq = document.createElement('img');
-	
-	signatureTest.empty100sq.src = "/public/app/signatureImg/empty100sq.png";
-	signatureTest.empty100sqRed.src = "/public/app/signatureImg/empty100sqRed.png";
-	signatureTest.box100sq.src = "/public/app/signatureImg/box100sq.png";
-	signatureTest.box100sqPen3.src = "/public/app/signatureImg/box100sqPen3.png";
-	signatureTest.box100sqAlpha.src = "/public/app/signatureImg/box100sqAlpha.png";
-	signatureTest.box100sqAlphaPen.src = "/public/app/signatureImg/box100sqAlphaPen.png";
-	signatureTest.box100sqBlue.src = "/public/app/signatureImg/box100sqBlue.png";
-	signatureTest.box100sqRedPen.src = "/public/app/signatureImg/box100sqRedPen.png";
-	signatureTest.box200150.src = "/public/app/signatureImg/box200150.png";
-	signatureTest.cross100sq.src = "/public/app/signatureImg/cross100sq.png";
-	signatureTest.rim100sq.src = "/public/app/signatureImg/rim100sq.png";
-	signatureTest.nonSym100sq.src = "/public/app/signatureImg/nonSym100sq.png";
-	
-	signatureTest.empty100sq.style.zoom = 0.1;
-	signatureTest.empty100sqRed.style.zoom = 0.1;
-	signatureTest.box100sq.style.zoom = 0.1;
-	signatureTest.box100sqPen3.style.zoom = 0.1;
-	signatureTest.box100sqAlpha.style.zoom = 0.1;
-	signatureTest.box100sqAlphaPen.style.zoom = 0.1;
-	signatureTest.box100sqBlue.style.zoom = 0.1;
-	signatureTest.box100sqRedPen.style.zoom = 0.1;
-	signatureTest.box200150.style.zoom = 0.1;
-	signatureTest.cross100sq.style.zoom = 0.1;
-	signatureTest.rim100sq.style.zoom = 0.1;
-	signatureTest.nonSym100sq.style.zoom = 0.1;
-	
-	document.body.appendChild(signatureTest.box100sqAlphaPen);
-	document.body.appendChild(signatureTest.box100sqAlpha);
-	document.body.appendChild(signatureTest.box100sqPen3);
-	document.body.appendChild(signatureTest.box100sq);
-	document.body.appendChild(signatureTest.empty100sq);
-	document.body.appendChild(signatureTest.empty100sqRed);
-	document.body.appendChild(signatureTest.box100sqBlue);
-	document.body.appendChild(signatureTest.box100sqRedPen);
-	document.body.appendChild(signatureTest.box200150);
-	document.body.appendChild(signatureTest.cross100sq);
-	document.body.appendChild(signatureTest.rim100sq);
-	document.body.appendChild(signatureTest.nonSym100sq);
-	
-	
-	signatureTest.screenWidth = Rho.System.screenWidth;
-	signatureTest.screenHeight = Rho.System.screenHeight;
-	signatureTest.platform = Rho.System.platform;
-	//TODO reset when rotated
+	testName		:	"VT299-1001 | Set bgColor :#FF0000| #FF0000",
+	propertyName	:	"bgColor",
+	sigTypes		:	"All",
+	OSTypes			:	"All",
+	propertyValue	:	"#FF0000",
+	expectedResult	:	"#FF0000"
+},
+{
+	testName		:	"VT299-1002 | Set bgColor :#0000FF| #0000FF",
+	propertyName	:	"bgColor",
+	sigTypes		:	"All",
+	OSTypes			:	"All",
+	propertyValue	:	"#0000FF",
+	expectedResult	:	"#0000FF"
+},
+{
+	testName		:	"VT299-1003 | Set bgColor :#000000| #000000",
+	propertyName	:	"bgColor",
+	sigTypes		:	"All",
+	OSTypes			:	"All",
+	propertyValue	:	"#000000",
+	expectedResult	:	"#000000"
+},
+{
+	testName		:	"VT299-1004 | Set bgColor :#FFFFFF| #FFFFFF",
+	propertyName	:	"bgColor",
+	sigTypes		:	"All",
+	OSTypes			:	"All",
+	propertyValue	:	"#FFFFFF",
+	expectedResult	:	"#FFFFFF"
+},
+{
+	testName		:	"VT299-1005 | Set border :false| false",
+	propertyName	:	"border",
+	sigTypes		:	"show",
+	OSTypes			:	"All",
+	propertyValue	:	"false",
+	expectedResult	:	"false"
+},
+{
+	testName		:	"VT299-1006 | Set border :true| true",
+	propertyName	:	"border",
+	sigTypes		:	"show",
+	OSTypes			:	"All",
+	propertyValue	:	"true",
+	expectedResult	:	"true"
+},
+{
+	testName		:	"VT299-1007 | Set compressionFormat :jpg| jpg",
+	propertyName	:	"compressionFormat",
+	sigTypes		:	"All",
+	OSTypes			:	"All",
+	propertyValue	:	"jpg",
+	expectedResult	:	"jpg"
+},
+{
+	testName		:	"VT299-1008 | Set compressionFormat :png| png",
+	propertyName	:	"compressionFormat",
+	sigTypes		:	"All",
+	OSTypes			:	"All",
+	propertyValue	:	"png",
+	expectedResult	:	"png"
+},
+{
+	testName		:	"VT299-1009 | Set compressionFormat :bmp| bmp",
+	propertyName	:	"compressionFormat",
+	sigTypes		:	"All",
+	OSTypes			:	"WINDOWS APPLE",
+	propertyValue	:	"bmp",
+	expectedResult	:	"bmp"
+},
+{
+	testName		:	"VT299-1010 | Set fileName :Test| Test",
+	propertyName	:	"fileName",
+	sigTypes		:	"All",
+	OSTypes			:	"All",
+	propertyValue	:	"Test",
+	expectedResult	:	"Test"
+},
+{
+	testName		:	"VT299-1012 | Set fileName :Test123| Test123",
+	propertyName	:	"fileName",
+	sigTypes		:	"All",
+	OSTypes			:	"All",
+	propertyValue	:	"Test123",
+	expectedResult	:	"Test123"
+},
+{
+	testName		:	"VT299-1013 | Set fileName :Test_123| Test_123",
+	propertyName	:	"fileName",
+	sigTypes		:	"All",
+	OSTypes			:	"All",
+	propertyValue	:	"Test_123",
+	expectedResult	:	"Test_123"
+},
+{
+	testName		:	"VT299-1014 | Set fileName :123| 123",
+	propertyName	:	"fileName",
+	sigTypes		:	"All",
+	OSTypes			:	"All",
+	propertyValue	:	"123",
+	expectedResult	:	"123"
+},
+{
+	testName		:	"VT299-1015 | Set fileName :signature| signature",
+	propertyName	:	"fileName",
+	sigTypes		:	"All",
+	OSTypes			:	"All",
+	propertyValue	:	"signature",
+	expectedResult	:	"signature"
+},
+{
+	testName		:	"VT299-1016 | Set height :100| 100",
+	propertyName	:	"height",
+	sigTypes		:	"show",
+	OSTypes			:	"All",
+	propertyValue	:	"100",
+	expectedResult	:	"100"
+},
+{
+	testName		:	"VT299-1017 | Set height :500| 500",
+	propertyName	:	"height",
+	sigTypes		:	"show",
+	OSTypes			:	"All",
+	propertyValue	:	"500",
+	expectedResult	:	"500"
+},
+{
+	testName		:	"VT299-1018 | Set height :150| 150",
+	propertyName	:	"height",
+	sigTypes		:	"show",
+	OSTypes			:	"All",
+	propertyValue	:	"150",
+	expectedResult	:	"150"
+},
+{
+	testName		:	"VT299-1019 | Set height :0| 0",
+	propertyName	:	"height",
+	sigTypes		:	"show",
+	OSTypes			:	"All",
+	propertyValue	:	"0",
+	expectedResult	:	"0"
+},
+{
+	testName		:	"VT299-1020 | Set left :90| 90",
+	propertyName	:	"left",
+	sigTypes		:	"show",
+	OSTypes			:	"All",
+	propertyValue	:	"90",
+	expectedResult	:	"90"
+},
+{
+	testName		:	"VT299-1021 | Set left :550| 550",
+	propertyName	:	"left",
+	sigTypes		:	"show",
+	OSTypes			:	"All",
+	propertyValue	:	"550",
+	expectedResult	:	"550"
+},
+{
+	testName		:	"VT299-1022 | Set left :15| 15",
+	propertyName	:	"left",
+	sigTypes		:	"show",
+	OSTypes			:	"All",
+	propertyValue	:	"15",
+	expectedResult	:	"15"
+},
+{
+	testName		:	"VT299-1022 | Set left :0| 0",
+	propertyName	:	"left",
+	sigTypes		:	"show",
+	OSTypes			:	"All",
+	propertyValue	:	"0",
+	expectedResult	:	"0"
+},
+{
+	testName		:	"VT299-1023 | Set top :50| 50",
+	propertyName	:	"top",
+	sigTypes		:	"show",
+	OSTypes			:	"All",
+	propertyValue	:	"50",
+	expectedResult	:	"50"
+},
+{
+	testName		:	"VT299-1024 | Set top :150| 150",
+	propertyName	:	"top",
+	sigTypes		:	"show",
+	OSTypes			:	"All",
+	propertyValue	:	"150",
+	expectedResult	:	"150"
+},
+{
+	testName		:	"VT299-1025 | Set top :60| 60",
+	propertyName	:	"top",
+	sigTypes		:	"show",
+	OSTypes			:	"All",
+	propertyValue	:	"60",
+	expectedResult	:	"60"
+},
+{
+	testName		:	"VT299-1026 | Set top :0| 0",
+	propertyName	:	"top",
+	sigTypes		:	"show",
+	OSTypes			:	"All",
+	propertyValue	:	"0",
+	expectedResult	:	"0"
+},
+{
+	testName		:	"VT299-1027 | Set width :140| 140",
+	propertyName	:	"width",
+	sigTypes		:	"show",
+	OSTypes			:	"All",
+	propertyValue	:	"140",
+	expectedResult	:	"140"
+},
+{
+	testName		:	"VT299-1028 | Set width :450| 450",
+	propertyName	:	"width",
+	sigTypes		:	"show",
+	OSTypes			:	"All",
+	propertyValue	:	"450",
+	expectedResult	:	"450"
+},
+{
+	testName		:	"VT299-1029 | Set width :200| 200",
+	propertyName	:	"width",
+	sigTypes		:	"show",
+	OSTypes			:	"All",
+	propertyValue	:	"200",
+	expectedResult	:	"200"
+},
+{
+	testName		:	"VT299-1030 | Set width :0| 0",
+	propertyName	:	"width",
+	sigTypes		:	"show",
+	OSTypes			:	"All",
+	propertyValue	:	"0",
+	expectedResult	:	"0"
+},
+{
+	testName		:	"VT299-1031 | Set outputFormat :dataUri| dataUri",
+	propertyName	:	"outputFormat",
+	sigTypes		:	"All",
+	OSTypes			:	"All",
+	propertyValue	:	"dataUri",
+	expectedResult	:	"dataUri"
+},
+{
+	testName		:	"VT299-1032 | Set outputFormat :image| image",
+	propertyName	:	"outputFormat",
+	sigTypes		:	"All",
+	OSTypes			:	"All",
+	propertyValue	:	"image",
+	expectedResult	:	"image"
+},
+{
+	testName		:	"VT299-1033 | Set penColor :#FF000000| #FF000000",
+	propertyName	:	"penColor",
+	sigTypes		:	"All",
+	OSTypes			:	"All",
+	propertyValue	:	"#FF000000",
+	expectedResult	:	"#FF000000"
+},
+{
+	testName		:	"VT299-1034 | Set penColor :#FF00FF| #FF00FF",
+	propertyName	:	"penColor",
+	sigTypes		:	"All",
+	OSTypes			:	"All",
+	propertyValue	:	"#FF00FF",
+	expectedResult	:	"#FF00FF"
+},
+{
+	testName		:	"VT299-1035 | Set penColor :#000000| #000000",
+	propertyName	:	"penColor",
+	sigTypes		:	"All",
+	OSTypes			:	"All",
+	propertyValue	:	"#000000",
+	expectedResult	:	"#000000"
+},
+{
+	testName		:	"VT299-1036 | Set penColor :#FFFFFFFF| #FFFFFFFF",
+	propertyName	:	"penColor",
+	sigTypes		:	"All",
+	OSTypes			:	"All",
+	propertyValue	:	"#FFFFFFFF",
+	expectedResult	:	"#FFFFFFFF"
+},
+{
+	testName		:	"VT299-1037 | Set penWidth :1| 1",
+	propertyName	:	"penWidth",
+	sigTypes		:	"All",
+	OSTypes			:	"All",
+	propertyValue	:	"1",
+	expectedResult	:	"1"
+},
+{
+	testName		:	"VT299-1038 | Set penWidth :5| 5",
+	propertyName	:	"penWidth",
+	sigTypes		:	"All",
+	OSTypes			:	"All",
+	propertyValue	:	"5",
+	expectedResult	:	"5"
+},
+*/
+{
+	testName		:	"VT299-1039 | Set penWidth :0| 0",
+	propertyName	:	"penWidth",
+	sigTypes		:	"All",
+	OSTypes			:	"All",
+	propertyValue	:	"0",
+	expectedResult	:	"0"
+},
+{
+	testName		:	"VT299-1040 | Set penWidth :10| 10",
+	propertyName	:	"penWidth",
+	sigTypes		:	"All",
+	OSTypes			:	"All",
+	propertyValue	:	"10",
+	expectedResult	:	"10"
+},
+{
+	testName		:	"VT299-1041 | Set penWidth :2.5| 2.5",
+	propertyName	:	"penWidth",
+	sigTypes		:	"All",
+	OSTypes			:	"All",
+	propertyValue	:	"2.5",
+	expectedResult	:	"2.5"
+}
+
+];
+
+var sigCallback = function (data){
+
 };
-window.addEventListener('DOMContentLoaded',signatureTest.loadEvent);
 
-signatureTest.compareImages = function(image1, image2)
-{
-	if((image1.width != image2.width) || (image1.height != image2.height))
-	{
-		return false;
-	}
+var getApplicablePropertiesShow = function (){
 	
-	var canvas1 = document.createElement('canvas');
-	var canvas2 = document.createElement('canvas');
-	canvas1.width = image1.width;
-	canvas2.width = image2.width;
-	var context1 = canvas1.getContext('2d');
-	var context2 = canvas2.getContext('2d');
-	context1.drawImage(image1, 0,0);
-	context2.drawImage(image2, 0,0);
-	var imgdata1 = context1.getImageData(0, 0, canvas1.width, canvas1.height).data;
-	var imgdata2 = context2.getImageData(0, 0, canvas2.width, canvas1.height).data;
+	var finalSIGObj = [];
 
-	// Loop over each pixel and check they match
-	for (var i = 0; i < imgdata1.length; i++)
-	{
-		if(imgdata1[i] != imgdata2[i])
-		{
-			return false;
+	for (var i = 0; i < arr_sig_property.length ; i++){
+
+		if((arr_sig_property[i]['OSTypes'] == 'All') || (arr_sig_property[i]['OSTypes'].indexOf(Rho.System.platform) != -1)){
+			var sigType = arr_sig_property[i]['sigTypes']
+
+			if((sigType == "All") || (sigType == "show"))
+			{ 
+				finalSIGObj.push(arr_sig_property[i]);
+			}
 		}
 	}
-	return true;
-};
 
-signatureTest.imageCompareCallback = function(result)
-{
-	console.log('MOTODEBUG imageCompareCallback+');
-	console.log('MOTODEBUG imageCompareCallback status: ' + result.status);
-	if(result.status == "ok")
-	{
-		console.log('MOTODEBUG imageCompareCallback ok!');
-		//var newSrc = "file:///data/data/" + signatureTest.packagePath + "/rhodata/public/signature.img";
-		//var result = Rho.File.copy(result.imageUri, newSrc);
-		//Rho.File.deleteFile(result.imageUri);
-//		console.log('MOTODEBUG result.imageUri: ' + result.imageUri);
-//		var newSrc = result.imageUri.replace("file://", signatureTest.localWebPath);
-//		signatureTest.callbackImage.src = newSrc;
-//		console.log('MOTODEBUG newSrc: ' + signatureTest.localWebPath);
-		//signatureTest.callbackImage.src = newSrc;
-		if(result.imageUri.indexOf('data') != 0)
-		{
-			Rho.File.copy(result.imageUri, dataPath + 'rho/rho/apps/');
-			var parts = result.imageUri.split('/');
-			signatureTest.callbackImage.src = signatureTest.imageUrlRoot + parts[parts.length -1];
-			console.log('MOTODEBUG ' + signatureTest.imageUrlRoot + parts[parts.length -1]);
-		}
-		else
-		{
-			Rho.File.copy(result.imageUri, dataPath + 'rho/rho/apps/');
-			signatureTest.callbackImage.src = result.imageUri;
+	return finalSIGObj;
+}
+
+var getApplicablePropertiesFullScreen = function (){
+	
+	var finalSIGObjtake = [];
+
+	for (var i = 0; i < arr_sig_property.length ; i++){
+
+		if((arr_sig_property[i]['OSTypes'] == 'All') || (arr_sig_property[i]['OSTypes'].indexOf(Rho.System.platform) != -1)){
+			var sigType = arr_sig_property[i]['sigTypes']
+
+			if(sigType == "All")
+			{ 
+				finalSIGObjtake.push(arr_sig_property[i]);
+			}
 		}
 	}
-	console.log('MOTODEBUG imageCompareCallback-');
-};
-signatureTest.vectorCallback = function(vectorArray)
-{
-	signatureTest.vectorCallbackData = vectorArray;
-	signatureTest.vectorCallbackFired = true;
-};
-signatureTest.statusCallback = function(result)
-{
-	signatureTest.callbackStatus = result.status;
-	signatureTest.callbackFired = true;
-};
-signatureTest.callbackImageOnload = function()
-{
-	console.log('MOTODEBUG callbackImageOnload');
-	signatureTest.callbackImageLoaded = true;
-};
-signatureTest.deleteFile = function(url)
-{
-	Rho.Instrumentation.delete_file(url);
-};
-signatureTest.doDrawLine = function(x1, y1, x2, y2)
-{
-	Rho.Instrumentation.simulate_touch_event(signatureTest.MOUSE_DOWN, x1, y1);
-	Rho.Instrumentation.simulate_touch_event(signatureTest.MOUSE_MOVE, x2, y2);
-	Rho.Instrumentation.simulate_touch_event(signatureTest.MOUSE_UP, x2, y2);
-};
-signatureTest.doDrawBox = function(top, left, width, height)
-{
-	signatureTest.doDrawLine(left, top, left, top+height);
-	signatureTest.doDrawLine(left, top+height, left + width, top+height);
-	signatureTest.doDrawLine(left+width, top+height, left + width, top);
-	signatureTest.doDrawLine(left + width, top, left, top);
-};
-signatureTest.drawBox = function ()
-{
-	signatureTest.doDrawBox(20, 20, 60, 60);
-};
-signatureTest.drawDefaultBox = function ()
-{
-	signatureTest.doDrawBox(35, 80, 195, 190);
-};
-signatureTest.drawCross = function ()
-{
-	signatureTest.doDrawLine(20,20,80,80);
-	signatureTest.doDrawLine(20,80,80,20);
-};
-signatureTest.drawRim = function ()
-{
-	signatureTest.doDrawBox(0,0,99,99);
-};
-signatureTest.drawNonSym = function()
-{
-	signatureTest.doDrawLine(20,20,20,50);
-};
 
-//signatureTest.simulateNavigation = function(){signatureTest.ajax('/app/SignatureTest/simulate_navigation')};
-signatureTest.emptyCallback = function() {/*Do Nothing*/};
+	return finalSIGObjtake;
+}
 
-//Q. What happens on device rotate?
-
-////INVALID cases
-//Bad compression
-//invalid compression for platform
-//bad output format
-
-//MULTIPLE Cases
-// multiple draw
-// multiple set of all params
-
-////SCREENSHOT cases
-// Check ARGB
-
-//Get param tests
-//border on 0,0
+var ENABLE_TIMEOUT_VALUE = (Rho.System.platform == "ANDROID" ? 1000 : 1000);
