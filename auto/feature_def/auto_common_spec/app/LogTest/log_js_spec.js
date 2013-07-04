@@ -43,7 +43,7 @@ describe("Log JS API", function () {
 		var srvHttpLogTestMsg = srvURL + "/download";
 
 		var waitTimeout = 10000;
-        var clientPlatform = Rho.System.platform;		
+		var clientPlatform = Rho.System.platform;		
 
 		// this function will execute before each of test case execution i.e it function
 		beforeEach(function () {
@@ -92,6 +92,8 @@ describe("Log JS API", function () {
 				Rho.Log.level = 0;
 				Rho.Log.cleanLogFile();
 
+				waits(1000);
+
 				var some_random_text = "ho1PtDX5x4D8liJzSZfhMVh7Sk7U3NsRRniDD4uQe2lBTPSW2o455zykgW9CRyQl2g8oCH2tecpEnT8wK3EpHwLipJGu2OvJPiwQ3Cz0vHOYLgE5ElESn5jhK83ukz37T2f7TzDDTyKAzrR0mQaIqOI2WKbPsTkoLZuIc4bjgSraxQH1LBcbfAa0bxn42IvIaAUeBte";
 				
 				for(var i = 0; i < 20; i++)
@@ -119,7 +121,12 @@ describe("Log JS API", function () {
 				Rho.Log.destinationURI = srvHttpLogPostUrl;
 				Rho.Log.info("TEST MESSAGE!", "VT290-397");
 				Rho.Log.sendLogFile();
-                
+			} );
+
+			// wait while log file is sent
+			waits(3000);
+
+			runs(function(){    
 				getProps = {
 					url: srvHttpLogGetUrl
 				};
@@ -873,176 +880,176 @@ describe("Log JS API", function () {
 
 		if (Rho.System.platform != "WP8") {
 
-		    // Set Log Memory period to 5 seconds
-		    it("VT290-355 : Set Log Memory period to 5 secs | 5000", function () {
-		        runs(function () {
-		            Rho.Log.level = 0;
-		            Rho.LogCapture.clear();
+			// Set Log Memory period to 5 seconds
+			it("VT290-355 : Set Log Memory period to 5 secs | 5000", function () {
+				runs(function () {
+					Rho.Log.level = 0;
+					var info = "Info : Memory log should display in 5 secs interval | 0";
+					Rho.Log.info(info, "VT290-355");
 
-		            Rho.Log.memoryPeriod = 1000;
-		            expectedValue = 1000;
-		            memPeriod = Rho.Log.memoryPeriod;
-		            expect(memPeriod).toEqual(expectedValue);
+					Rho.LogCapture.clear();
 
-		            var info = "Info : Memory log should display in 5 secs interval | 0";
-		            Rho.Log.info(info, "VT290-355");
-		        });
+					Rho.Log.memoryPeriod = 1000;
+					expectedValue = 1000;
+					memPeriod = Rho.Log.memoryPeriod;
+					expect(memPeriod).toEqual(expectedValue);	
+				});
 
-		        waits(1500);
+				waits(1500);
 
-		        runs(function () {
-		            expect(Rho.LogCapture.read().count("MEMORY")).toEqual(1);
+				runs(function () {
+					expect(Rho.LogCapture.read().count("MEMORY")).toEqual(1);
 
-		            Rho.Log.memoryPeriod = 0;
+					Rho.Log.memoryPeriod = 0;
+				});
 
-		            Rho.LogCapture.clear();
+				waits(500);
 
-		            Rho.Log.level = 0;
-		            //Rho.Log.memoryPeriod = 5000;
-		        });
+				runs(function () {
+					Rho.LogCapture.clear();
 
-		        /*
-                waits(4800);
-    
-                runs(function(){
-                    expect(Rho.LogCapture.read().count("MEMORY")).toEqual(0);
-                });
-    
-                waits(600);
-    
-                runs(function(){
-                    Rho.Log.memoryPeriod = 0;
-    
-                    expect(Rho.LogCapture.read().count("MEMORY")).toEqual(1);
-    
-                    Rho.LogCapture.clear();
-                });
-    */
-		    });
+					Rho.Log.memoryPeriod = 5000;
+				});
+
+				
+				waits(4000);
+	
+				runs(function(){
+					expect(Rho.LogCapture.read().count("MEMORY")).toEqual(0);
+				});
+	
+				waits(2000);
+	
+				runs(function(){
+					expect(Rho.LogCapture.read().count("MEMORY")).toEqual(1);
+	
+					Rho.LogCapture.clear();
+				});
+			});
 
 
-		    // Set Log Memory period to 10 seconds
-		    it("VT290-356 : Set Log Memory period to 10 secs | 10000", function () {
-		        runs(function () {
-		            Rho.Log.level = 0;
-		            var info = "Info : Memory log should display in 10 secs interval | 0";
-		            Rho.Log.info(info, "VT290-356");
-		            expectedValue = 10000;
-		            Rho.Log.memoryPeriod = 10000;
-		            memPeriod = Rho.Log.memoryPeriod;
-		            expect(memPeriod).toEqual(expectedValue);
+			// Set Log Memory period to 10 seconds
+			it("VT290-356 : Set Log Memory period to 10 secs | 10000", function () {
+				runs(function () {
+					Rho.Log.level = 0;
+					var info = "Info : Memory log should display in 10 secs interval | 0";
+					Rho.Log.info(info, "VT290-356");
+					expectedValue = 10000;
+					Rho.Log.memoryPeriod = 10000;
+					memPeriod = Rho.Log.memoryPeriod;
+					expect(memPeriod).toEqual(expectedValue);
 
-		            waits(10200);
+					waits(11000);
 
-		            runs(function () {
-		                Rho.Log.memoryPeriod = 0;
+					runs(function () {
+						Rho.Log.memoryPeriod = 0;
 
-		                expect(Rho.LogCapture.read().count("MEMORY")).toEqual(1);
+						expect(Rho.LogCapture.read().count("MEMORY")).toEqual(1);
 
-		                Rho.LogCapture.clear();
-		            });
-		        });
-		    });
+						Rho.LogCapture.clear();
+					});
+				});
+			});
 
 		}
 
-if (clientPlatform == Rho.System.PLATFORM_ANDROID || clientPlatform == Rho.System.PLATFORM_IOS || clientPlatform == Rho.System.PLATFORM_WP8 )
-{		
-		// Set Netrace to true
-		it("VT290-361 : Set netrace to true | true", function() {
-			var flag = false;
-			var callbackCalled = false;
-			var status = '';
-			var data = '';
+		if (clientPlatform == Rho.System.PLATFORM_ANDROID || clientPlatform == Rho.System.PLATFORM_IOS || clientPlatform == Rho.System.PLATFORM_WP8 )
+		{		
+			// Set Netrace to true
+			it("VT290-361 : Set netrace to true | true", function() {
+				var flag = false;
+				var callbackCalled = false;
+				var status = '';
+				var data = '';
 
-			runs(function(){
-				var info = "Set netrace to true | true";
-				Rho.Log.info(info, "VT290-361");
+				runs(function(){
+					var info = "Set netrace to true | true";
+					Rho.Log.info(info, "VT290-361");
 
-				expectedValue = true;
-				Rho.Log.netTrace = expectedValue;
+					expectedValue = true;
+					Rho.Log.netTrace = expectedValue;
 
-				netTraceValue = Rho.Log.netTrace;
-				expect(netTraceValue).toEqual(expectedValue);
+					netTraceValue = Rho.Log.netTrace;
+					expect(netTraceValue).toEqual(expectedValue);
 
-				getProps = {
-					url: srvHttpLogTestMsg
-				};
+					getProps = {
+						url: srvHttpLogTestMsg
+					};
 
-				Rho.Network.get(getProps, function(args){callbackCalled=true;data = args['body'];status = args['status'];});
-			} );
+					Rho.Network.get(getProps, function(args){callbackCalled=true;data = args['body'];status = args['status'];});
+				} );
 
-			waitsFor( function() {
-					return callbackCalled;
-				},
-				"Callback never called",
-				waitTimeout
-			);
+				waitsFor( function() {
+						return callbackCalled;
+					},
+					"Callback never called",
+					waitTimeout
+				);
 
-			runs(function() {
-				expect(status).toEqual('ok');
+				runs(function() {
+					expect(status).toEqual('ok');
 
-				expect(data.count("Downloaded content") > 0).toEqual(true);
+					expect(data.count("Downloaded content") > 0).toEqual(true);
 
-				var log = Rho.LogCapture.read();
+					var log = Rho.LogCapture.read();
 
-				expect( log.count("== Info") > 2 ).toEqual(true);
-				expect( log.count("About to connect") > 0 ).toEqual(true);
-				expect( log.count("Connected to") > 0 ).toEqual(true);
-				expect( log.count("=> Send headers") > 0 ).toEqual(true);
-				expect( log.count("<= Recv headers") > 2 ).toEqual(true);
-				expect( log.count("<= Recv data") > 0 ).toEqual(true);
-				expect( log.count("RESPONSE-----") > 0 ).toEqual(true);
+					expect( log.count("== Info") > 2 ).toEqual(true);
+					expect( log.count("About to connect") > 0 ).toEqual(true);
+					expect( log.count("Connected to") > 0 ).toEqual(true);
+					expect( log.count("=> Send headers") > 0 ).toEqual(true);
+					expect( log.count("<= Recv headers") > 2 ).toEqual(true);
+					expect( log.count("<= Recv data") > 0 ).toEqual(true);
+					expect( log.count("RESPONSE-----") > 0 ).toEqual(true);
+				});
 			});
-		});
 
-		// Set Netrace to true
-		it("VT290-362 : Set netrace to false | false", function() {
-			var flag = false;
-			var callbackCalled = false;
-			var status = '';
-			var data = '';
+			// Set Netrace to true
+			it("VT290-362 : Set netrace to false | false", function() {
+				var flag = false;
+				var callbackCalled = false;
+				var status = '';
+				var data = '';
 
-			runs(function(){
-				var info = "Set netrace to false | false";
-				Rho.Log.info(info, "VT290-362");
+				runs(function(){
+					var info = "Set netrace to false | false";
+					Rho.Log.info(info, "VT290-362");
 
-				expectedValue = false;
-				Rho.Log.netTrace = expectedValue;
+					expectedValue = false;
+					Rho.Log.netTrace = expectedValue;
 
-				netTraceValue = Rho.Log.netTrace;
-				expect(netTraceValue).toEqual(expectedValue);
+					netTraceValue = Rho.Log.netTrace;
+					expect(netTraceValue).toEqual(expectedValue);
 
-				getProps = {
-					url: srvHttpLogTestMsg
-				};
+					getProps = {
+						url: srvHttpLogTestMsg
+					};
 
-				Rho.Network.get(getProps, function(args){callbackCalled=true;data = args['body'];status = args['status'];});
-			} );
+					Rho.Network.get(getProps, function(args){callbackCalled=true;data = args['body'];status = args['status'];});
+				} );
 
-			waitsFor( function() {
-					return callbackCalled;
-				},
-				"Callback never called",
-				waitTimeout
-			);
+				waitsFor( function() {
+						return callbackCalled;
+					},
+					"Callback never called",
+					waitTimeout
+				);
 
-			runs(function() {
-				expect(status).toEqual('ok');
+				runs(function() {
+					expect(status).toEqual('ok');
 
-				expect(data.count("Downloaded content") > 0).toEqual(true);
+					expect(data.count("Downloaded content") > 0).toEqual(true);
 
-				var log = Rho.LogCapture.read();
+					var log = Rho.LogCapture.read();
 
-				expect( log.count("== Info") == 0 ).toEqual(true);
-				expect( log.count("About to connect") == 0 ).toEqual(true);
-				expect( log.count("Connected to") == 0 ).toEqual(true);
-				expect( log.count("=> Send headers") == 0 ).toEqual(true);
-				expect( log.count("<= Recv headers") == 0 ).toEqual(true);
-				expect( log.count("<= Recv data") == 0 ).toEqual(true);
+					expect( log.count("== Info") == 0 ).toEqual(true);
+					expect( log.count("About to connect") == 0 ).toEqual(true);
+					expect( log.count("Connected to") == 0 ).toEqual(true);
+					expect( log.count("=> Send headers") == 0 ).toEqual(true);
+					expect( log.count("<= Recv headers") == 0 ).toEqual(true);
+					expect( log.count("<= Recv data") == 0 ).toEqual(true);
+				});
 			});
-		});
-}
+		}
 		/*
 		// Set skipPost to true
 		it("VT290-367 : Set skipPost to true | true", function() {
