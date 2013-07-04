@@ -43,6 +43,7 @@ describe("Log JS API", function () {
 		var srvHttpLogTestMsg = srvURL + "/download";
 
 		var waitTimeout = 10000;
+        var clientPlatform = Rho.System.platform;		
 
 		// this function will execute before each of test case execution i.e it function
 		beforeEach(function () {
@@ -118,7 +119,7 @@ describe("Log JS API", function () {
 				Rho.Log.destinationURI = srvHttpLogPostUrl;
 				Rho.Log.info("TEST MESSAGE!", "VT290-397");
 				Rho.Log.sendLogFile();
-
+                
 				getProps = {
 					url: srvHttpLogGetUrl
 				};
@@ -944,6 +945,9 @@ describe("Log JS API", function () {
 		    });
 
 		}
+
+if (clientPlatform == Rho.System.PLATFORM_ANDROID || clientPlatform == Rho.System.PLATFORM_IOS || clientPlatform == Rho.System.PLATFORM_WP8 )
+{		
 		// Set Netrace to true
 		it("VT290-361 : Set netrace to true | true", function() {
 			var flag = false;
@@ -992,7 +996,6 @@ describe("Log JS API", function () {
 			});
 		});
 
-
 		// Set Netrace to true
 		it("VT290-362 : Set netrace to false | false", function() {
 			var flag = false;
@@ -1039,7 +1042,7 @@ describe("Log JS API", function () {
 				expect( log.count("<= Recv data") == 0 ).toEqual(true);
 			});
 		});
-
+}
 		/*
 		// Set skipPost to true
 		it("VT290-367 : Set skipPost to true | true", function() {

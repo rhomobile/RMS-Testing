@@ -155,12 +155,15 @@ end
 lastLogData = ""
 
 $local_server.mount_proc '/client_log' do |req,res|
-    lastLogData = req.query["blob"]
+    #puts "req: #{req.body}"
+    lastLogData = req.body
     res.status = 200
 end
 
 $local_server.mount_proc '/get_last_log' do |req,res|
     res.body = lastLogData
+    #puts "res.body: #{res.body}"
+    
     res.status = 200
 end
 
