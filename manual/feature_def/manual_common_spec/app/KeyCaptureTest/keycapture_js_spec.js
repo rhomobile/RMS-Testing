@@ -179,7 +179,7 @@ describe("KeyCapture Test", function() {
 			{
 				setObjective("VT289-017 | call captureKey with dispatch false and true for 2 different key and diff callback function");
 				setInstruction("click inside textbox and Press" +VALUE_11+" ,Press alphabet a or volumedown , Press Symbols # or menukey");
-				setExpected("Callback1 should fire after pressing alphabet a (0x65)/volumedown,Symbol # (0x78)/menukey and " +VALUE_11+"/" +TEST_11" , Callback2 should not fire after pressing " +VALUE_11+"  and " +VALUE_11+"  only should be dispatched inside box, others not");
+				setExpected("Callback1 should fire after pressing all the key , Callback2 should not fire after pressing " +VALUE_11+"  and " +VALUE_11+"  only should be dispatched inside box, others not");
 				Rho.KeyCapture.captureKey(false,'ALL',capturekeycallback);
 				Rho.KeyCapture.captureKey(true,'TEST_11',capturekeycallback2);
 			});
@@ -204,7 +204,7 @@ describe("KeyCapture Test", function() {
 			{
 				setObjective("VT289-018 | call captureKey with keyValue enter and ALL and different callback function");
 				setInstruction("click inside textbox and " +VALUE_18+", Press numeric key 9/volumedown and press alphabet b/menu key");
-				setExpected("Callback2 should fire after pressing alphabet b (0x66),number 9 (0x39) and " +VALUE_18+"/" +TEST_18" , Callback1 should not fire after pressing " +VALUE_18+" and alphabet 'b'/volumedown and number 9/menukey should not be dispatched, " +VALUE_18+" should be dispatched");
+				setExpected("Callback2 should fire after pressing alphabet b (0x66),number 9 (0x39) and " +VALUE_18+"/" +TEST_18" , Callback1 should not fire after pressing " +VALUE_18+" and " +VALUE_18+" should be dispatched, others not");
 				Rho.KeyCapture.captureKey(true,'TEST_18',capturekeycallback);
 				Rho.KeyCapture.captureKey(false,'ALL',capturekeycallback2);
 			});
@@ -280,7 +280,7 @@ describe("KeyCapture Test", function() {
 			{
 				setObjective("VT289-021| call captureKey twice, one with callback and other without callback");
 				setInstruction("click inside textbox and Press " +VALUE_15+", Press numeric key " +VALUE_21+"");
-				setExpected("callback1 should fire after pressing " +VALUE_15+" and no callback should fire after pressing " +VALUE_21+" and both should be dispatched inside the textbox");
+				setExpected("callback1 should fire after pressing " +VALUE_15+" and no callback should fire after pressing " +VALUE_21+" and both key should be dispatched");
 				Rho.KeyCapture.captureKey(true,'TEST_15',capturekeycallback);
 				Rho.KeyCapture.captureKey(true,'TEST_21');
 			});
@@ -328,7 +328,7 @@ describe("KeyCapture Test", function() {
 			{
 				setObjective("VT289-023 | call captureKey to check the keyvalues of all hardware key");
 				setInstruction("click inside textbox and Press all the numeric key one by one i windows, Press all hardwarekey on Iphone and Android ");
-				setExpected("Callback should fire and different keyvalue should return");
+				setExpected("Callback should fire and different keyvalue should return and all key should be dispatched");
 				Rho.KeyCapture.captureKey(true,'ALL',capturekeycallback);
 			});
 
