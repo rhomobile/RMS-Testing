@@ -119,7 +119,6 @@ $local_server.mount_proc '/download_app' do |req,res|
     device = device.downcase if device
     
     filenames = {
-        'android' => 'TestApp_signed.apk',
         'wm' => 'TestAppWM6.5.cab',
         'ce' => 'TestAppCE.cab',
         'win32' => 'everywan.exe',
@@ -133,7 +132,6 @@ $local_server.mount_proc '/download_app' do |req,res|
 
         extensions = {
             '.cab' => 'application/vnd.ms-cab-compressed',
-            '.apk' => 'application/vnd.android.package-archive',
             '.exe' => 'application/x-msdownload'
         }
 
