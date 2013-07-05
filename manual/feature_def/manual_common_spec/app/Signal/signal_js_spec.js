@@ -31,6 +31,8 @@ describe("Signal Manual FD  Tests", function () {
         /* ... Tear it down ... */
     });
 
+if (isAnyButApplePlatform()) {
+
     it("VT298-001 |Signal showIcon color without any property |", function () {
 
         runs(function () {
@@ -251,6 +253,8 @@ describe("Signal Manual FD  Tests", function () {
             expect(testResult).toEqual(true);
         });
     });
+
+}
     
     it("VT298-0020|WlanStatus with default callback |", function () {
 
