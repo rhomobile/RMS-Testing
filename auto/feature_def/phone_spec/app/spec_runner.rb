@@ -6,6 +6,7 @@ class SpecRunner < MSpecScript
     config[:files] = []
     # turn on exception backtrace
     MSpec.backtrace = true
+ 
     config[:files] << "spec/string/end_with_spec"
     config[:files] << "spec/string/start_with_spec"
     config[:files] << "spec/string/replace_spec"
@@ -52,20 +53,21 @@ if System.get_property('platform') != 'WP8'
     config[:files] << "spec/mapview_spec"  unless System.get_property('platform') == 'WINDOWS' || System.get_property('platform') == 'WINDOWS_DESKTOP'
 end
 
-    config[:files] << "spec/bundle_update_spec" if System.get_property('platform') == 'APPLE' || System.get_property('platform') == 'ANDROID' || System.get_property('platform') == 'WINDOWS' || System.get_property('platform') == 'WINDOWS_DESKTOP'
+    config[:files] << "spec/bundle_update_spec" if !System.get_property('is_emulator') && (System.get_property('platform') == 'APPLE' || System.get_property('platform') == 'ANDROID' || System.get_property('platform') == 'WINDOWS' || System.get_property('platform') == 'WINDOWS_DESKTOP')
 
     config[:files] << "spec/nativebar_spec" if System.get_property('platform') != 'Blackberry' && System.get_property('platform') != 'WP8'
     config[:files] << "spec/navbar_spec" if System.get_property('platform') == 'APPLE' || System.get_property('platform') == 'ANDROID'
 
     config[:files] << "spec/xruby_spec" if defined? RHO_ME
 
-if !(System.get_property('platform') == 'Blackberry' && (System::get_property('os_version') =~ /^6\.0/)) && System.get_property('platform') != 'WP8'
-    config[:files] << "spec/uri_spec"
-end
+#if !(System.get_property('platform') == 'Blackberry' && (System::get_property('os_version') =~ /^6\.0/)) && System.get_property('platform') != 'WP8'
+#    config[:files] << "spec/uri_spec"
+#end
 
 if !defined?( RHO_ME )
     config[:files] << "spec/database_spec" unless System.get_property('platform') == 'WINDOWS' && System.get_property('is_emulator')
 end
+
   end
 
   def run
