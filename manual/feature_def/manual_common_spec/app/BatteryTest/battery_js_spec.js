@@ -38,6 +38,8 @@ describe("Battery Manual FD  Tests", function () {
         /* ... Tear it down ... */
     });
 
+if (isAnyButApplePlatform()) {
+
     it("VT284-001 |Call showIcon method without any property |", function () {
 
         runs(function () {
@@ -282,6 +284,7 @@ it("VT284-019|Battery hideIcon after calling showIcon method|", function () {
               expect(testResult).toEqual(true);
           });
       });     
+}
  
 it("VT284-021|Call batteryStatus method with Hash Property trigger to periodic with callback|", function () {
           runs(function () {
@@ -409,6 +412,9 @@ it("VT284-035|Call stopBatteryStatus method to stop the callback|", function () 
           });
       });       
       
+if (isAnyButApplePlatform()) {
+
+
 it("VT284-038|Call smartBatteryStatus method with callback|", function () {
           runs(function () {
               dispTestCaseRunning("smartBatteryStatus with callback");
@@ -497,6 +503,7 @@ it("VT284-043|smartBatteryStatus with callback|", function () {
               expect(testResult).toEqual(true);
           });
       });       
+}
       
 it("VT284-028|Call batteryStatus method with Hash Property trigger to System with callback |", function () {
           runs(function () {
@@ -613,6 +620,9 @@ it("VT284-034|Call batteryStatus method with Hash Property trigger to System wit
           });
       });  
            
+
+if (isAnyButApplePlatform()) {
+
 it("VT284-041|Call smartBatteryStatus method with callback for checking stateofHealth as healthy|", function () {
           runs(function () {
               dispTestCaseRunning("Ensure that battery is charged more than 90% ");
@@ -646,7 +656,7 @@ it("VT284-042|Call smartBatteryStatus method with callback for checking stateofH
           });
       });   
                  
-      
+}
       
       
       

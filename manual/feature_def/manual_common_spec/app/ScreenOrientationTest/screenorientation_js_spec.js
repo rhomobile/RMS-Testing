@@ -30,6 +30,28 @@ describe("Screen Orientation Test", function() {
 
 	}
 
+                      /*  I moved this test to first because on start we do not have defined callback, after test with defined callback we still have defined callback !   So only on begin stage we do not have defined callback ! */
+	it("VT281-0916 | Set autoRotate  without callback rotate the device manualy |", function() {
+
+		runs(function()
+		{
+            dispCurrentProcess("VT281-0916 | Set autoRotate  without callback rotate the device manualy<br>Rotate the device in all direction manually");
+		});
+
+		waitsFor(function()
+		{
+			return captured;
+		}, 'The Screen Orientation should display', 20000);
+
+		runs(function()
+		{
+			expect(testResult).toEqual(true);
+		});
+	});
+
+
+    if (isAnyButApplePlatform()) {
+
 	it("VT281-0901 | Test Screen Orientation rightHanded without callback |", function() {
 		runs(function()
 		{
@@ -113,6 +135,7 @@ describe("Screen Orientation Test", function() {
 			expect(testResult).toEqual(true);
 		});
 	});
+    }
 
 	it("VT281-0909 | autoRotate with default value |", function() {
 
@@ -172,6 +195,8 @@ describe("Screen Orientation Test", function() {
 		});
 	});
 
+    if (isAnyButApplePlatform()) {
+
 	it("VT281-0915 | Set autoRotate as true with ananymous callback |", function() {
 		runs(function()
 		{
@@ -190,24 +215,9 @@ describe("Screen Orientation Test", function() {
 			expect(testResult).toEqual(true);
 		});
 	});
+    }
 
-	it("VT281-0916 | Set autoRotate  without callback rotate the device manualy |", function() {
-
-		runs(function()
-		{
-            dispCurrentProcess("VT281-0916 | Set autoRotate  without callback rotate the device manualy<br>Rotate the device in all direction manually");
-		});
-
-		waitsFor(function()
-		{
-			return captured;
-		}, 'The Screen Orientation should display', 20000);
-
-		runs(function()
-		{
-			expect(testResult).toEqual(true);
-		});
-	});
+    if (isAnyButApplePlatform()) {
 
 	it("VT281-0917 | Set autoRotate ture without callback and call right hand method |", function() {
 		runs(function()
@@ -229,7 +239,7 @@ describe("Screen Orientation Test", function() {
 			expect(testResult).toEqual(true);
 		});
 	});
-
+    }
 	it("VT281-0920 | ScreenOrientation tag persistancy |", function() {
 
 		runs(function()
