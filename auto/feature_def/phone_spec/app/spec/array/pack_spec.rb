@@ -3,7 +3,11 @@
 # This makes it easier to verify that Strings are converted into correct encodings.
 
 #require File.dirname(File.join(__rhoGetCurrentDir(), __FILE__)) + '/../../spec_helper'
-require File.dirname(File.join(__rhoGetCurrentDir(), __FILE__)) + '/fixtures/classes'
+if System.get_property('is_emulator')
+require File.dirname(__FILE__) + '/fixtures/classes.rb'
+else
+require File.dirname(File.join(__rhoGetCurrentDir(), __FILE__)) + '/fixtures/classes.rb'
+end
 
 def binary(str) str.force_encoding(Encoding::ASCII_8BIT) end
 def utf8(str) str.force_encoding(Encoding::UTF_8) end

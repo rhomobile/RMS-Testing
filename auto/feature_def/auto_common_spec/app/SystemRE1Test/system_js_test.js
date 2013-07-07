@@ -8,19 +8,19 @@
 		osType			: 	["WINDOWS", "WP8", "WINDOWS_DESKTOP"]
 	},
 	{
+		testName		:	"VT300-116 | set screenAutoRotate as false , call getProperty with screenAutoRotate | false",
+		propertyName	:	"screenAutoRotate",
+		propertyValue	:	"false",
+		expectedResult	:	"false",
+		osType			: 	["ANDROID","APPLE"]
+	},
+	{
 		testName		:	"VT300-115 | set screenAutoRotate as true , call getProperty with screenAutoRotate | true",
 		propertyName	:	"screenAutoRotate",
 		propertyValue	:	"true",
 		expectedResult	:	"true",
 		osType			: 	["ANDROID","APPLE"]
 
-	},
-	{
-		testName		:	"VT300-116 | set screenAutoRotate as false , call getProperty with screenAutoRotate | false",
-		propertyName	:	"screenAutoRotate",
-		propertyValue	:	"false",
-		expectedResult	:	"false",
-		osType			: 	["ANDROID","APPLE"]
 	},
 	{
 		testName		:	"VT300-119 | set screenSleeping as true , call getProperty with screenSleeping | true",

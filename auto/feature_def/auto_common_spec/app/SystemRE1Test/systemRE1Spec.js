@@ -177,11 +177,13 @@ describe("System", function() {
 	        });
 	
 	        it("Test screenAutoRotate property", function () {
+	            Rho.System.screenAutoRotate = false;
+	            expect(Rho.System.screenAutoRotate).toEqual(false);
+
+                                  /* we must return this property to initial state after this test because the ScreenOrientation test will check after initial state   */
 	            Rho.System.screenAutoRotate = true;
 	            expect(Rho.System.screenAutoRotate).toEqual(true);
 	
-	            Rho.System.screenAutoRotate = false;
-	            expect(Rho.System.screenAutoRotate).toEqual(false);
 	        });
 
             it("Test screenSleeping property", function () {

@@ -119,7 +119,6 @@ $local_server.mount_proc '/download_app' do |req,res|
     device = device.downcase if device
     
     filenames = {
-        'android' => 'TestApp_signed.apk',
         'wm' => 'TestAppWM6.5.cab',
         'ce' => 'TestAppCE.cab',
         'win32' => 'everywan.exe',
@@ -133,7 +132,6 @@ $local_server.mount_proc '/download_app' do |req,res|
 
         extensions = {
             '.cab' => 'application/vnd.ms-cab-compressed',
-            '.apk' => 'application/vnd.android.package-archive',
             '.exe' => 'application/x-msdownload'
         }
 
@@ -155,12 +153,15 @@ end
 lastLogData = ""
 
 $local_server.mount_proc '/client_log' do |req,res|
-    lastLogData = req.query["blob"]
+    #puts "req: #{req.body}"
+    lastLogData = req.body
     res.status = 200
 end
 
 $local_server.mount_proc '/get_last_log' do |req,res|
     res.body = lastLogData
+    #puts "res.body: #{res.body}"
+    
     res.status = 200
 end
 

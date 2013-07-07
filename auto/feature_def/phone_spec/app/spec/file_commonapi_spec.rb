@@ -13,8 +13,7 @@ describe "FileCommonAPI" do
         Rho::RhoFile.exists(file_name).should ==  false
         
         write_data  = "this is rhodes test"
-        f = Rho::RhoFile.new
-        f.open(file_name, Rho::RhoFile::OPEN_FOR_WRITE)
+        f = Rho::RhoFile.new(file_name, Rho::RhoFile::OPEN_FOR_WRITE)
         f.write(write_data)
         f.close
         
@@ -22,8 +21,7 @@ describe "FileCommonAPI" do
         content.should ==  write_data 
 
         write_data1  = "one more test"
-        f = Rho::RhoFile.new
-        f.open(file_name, Rho::RhoFile::OPEN_FOR_WRITE)
+        f = Rho::RhoFile.new(file_name, Rho::RhoFile::OPEN_FOR_WRITE)
         f.write(write_data1)
         f.close
 
@@ -31,8 +29,7 @@ describe "FileCommonAPI" do
         content.should ==  write_data1 
         
         write_data2  = ";add more test"
-        f = Rho::RhoFile.new
-        f.open(file_name, Rho::RhoFile::OPEN_FOR_APPEND)
+        f = Rho::RhoFile.new(file_name, Rho::RhoFile::OPEN_FOR_APPEND)
         f.write(write_data2)
         f.close
         
@@ -59,8 +56,7 @@ describe "FileCommonAPI" do
 	    else
 	        # if less than 2, save record of file in model Save, open a new file, write content to file.
             content = "TEST cache"
-            file = Rho::RhoFile.new
-            file.open("#{f}", Rho::RhoFile::OPEN_FOR_WRITE)
+            file = Rho::RhoFile.new("#{f}", Rho::RhoFile::OPEN_FOR_WRITE)
             file.write(content)
             file.close
             
@@ -89,7 +85,9 @@ describe "FileCommonAPI" do
     it "should isfileexist" do
         Rho::RhoFile.exists(Rho::RhoApplication::get_model_path('app', 'spec')).should == true
         Rho::RhoFile.exists(Rho::RhoApplication::get_blob_folder()).should ==  true
+if !System.get_property('is_emulator')        
         Rho::RhoFile.exists( Rho::RhoFile.join( __rhoGetCurrentDir(), 'rholog.txt')).should ==  true
+end        
         Rho::RhoFile.exists(nil).should == false
         Rho::RhoFile.exists("").should == false
     end

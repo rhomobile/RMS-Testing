@@ -344,8 +344,7 @@
 
         <div class="test_scenario">
             <div class="test_scenario_controls">
-                <a href="javascript:void(0)"
-                   onclick="Rho.System.applicationInstall(httpServerUrl+'/download_app?device=android');">Install app from HTTP url</a>
+                <a href="javascript:void(0)" onclick="Rho.System.applicationInstall(httpServerUrl+'/TestApp_signed.apk');">Install app from HTTP url</a>
             </div>
             <span class="test_scenario_number">VT300-064 <br/></span>
         </div>
@@ -460,6 +459,25 @@
             </div>
         </div>
     </div>
+
+    <div class="method_tests ios">
+        <div class="test_scenario">
+            <div class="test_scenario_controls">
+                <a href="javascript:void(0)" onclick="Rho.System.runApplication('testapp');"> call
+                    runApplication with application name 'testapp'.</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="method_tests android">
+        <div class="test_scenario">
+            <div class="test_scenario_controls">
+                <a href="javascript:void(0)" onclick="Rho.System.runApplication('com.rhomobile.testapp');"> call
+                    runApplication with application name 'testapp'.</a>
+            </div>
+        </div>
+    </div>
+
 </div>
 
 <div class="method_tests android win32 wm wp8">

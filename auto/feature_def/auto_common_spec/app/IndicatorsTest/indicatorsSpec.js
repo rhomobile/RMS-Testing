@@ -27,6 +27,7 @@ describe("Indicators", function() {
 			}
 		}
 
+    if (isAnyButApplePlatform()) {
 		it ("Able to Show and Hide the Signal Icon - TODO: Screenshot Automation", function()
 		{
 			if (!isSupported)
@@ -48,7 +49,7 @@ describe("Indicators", function() {
 			//  todo - Take a Screenshot
 		});
 
-
+   }
 		it ("Able to access Signal status synchronously", function()
 		{
 			if (!isSupported)
@@ -153,6 +154,7 @@ describe("Indicators", function() {
 			}
 		}
 
+    if (isAnyButApplePlatform()) {
 		it ("Able to Show and Hide the Battery Icon - TODO: Screenshot Automation", function()
 		{
 			if (!isSupported)
@@ -174,7 +176,7 @@ describe("Indicators", function() {
 			//  todo - Take a Screenshot
 		});
 
-
+    }
 		it ("Able to access Battery status synchronously", function()
 		{
 			if (!isSupported)
@@ -183,8 +185,10 @@ describe("Indicators", function() {
 			expect(batteryStatus).toBeGreaterThanZero();
 			var acLineStatus = getIndicatorStatus('/app/IndicatorsTest/battery_status_sync', 'ignored', 'ignored', 'acLineStatus');
 			expect(acLineStatus).toBe('true');
-			var batteryLifeKnown = getIndicatorStatus('/app/IndicatorsTest/battery_status_sync', 'ignored', 'ignored', 'batteryLifeKnown');
-			expect(batteryLifeKnown).toBe('true');
+                                                                  if (isAnyButApplePlatform()) {
+			     var batteryLifeKnown = getIndicatorStatus('/app/IndicatorsTest/battery_status_sync', 'ignored', 'ignored', 'batteryLifeKnown');
+			     expect(batteryLifeKnown).toBe('true');
+                                                                  }
 		});
 
 
@@ -262,6 +266,8 @@ describe("Indicators", function() {
 
 		});
 
+    if (isAnyButApplePlatform()) {
+
 		it ("Able to access Smart Battery Information", function()
 		{
 			if (!isSupported)
@@ -277,7 +283,7 @@ describe("Indicators", function() {
 			var batteryReturn = smartBattery('/app/IndicatorsTest/get_smartbattery', 'stateOfHealth');
 			expect(batteryReturn).not.toBe('');
 		});
-
+     }
 	});
 	
 	describe("TODO - Testing the KeyState API in Ruby via AJAX.  ", function() {
@@ -305,6 +311,7 @@ describe("Indicators", function() {
 			}
 		}
 
+    if (isAnyButApplePlatform()) {
 		it ("TODO - Able to Show and Hide the KeyState Icons", function()
 		{
 			if (!isSupported)
@@ -325,6 +332,6 @@ describe("Indicators", function() {
 			//  TODO - Send keyboard shift state to the keyboard through the Instrumentation API
 			//  TODO - Capture a screenshot and upload it for analysis against a known image
 		});
-
+     }
 	});
 });

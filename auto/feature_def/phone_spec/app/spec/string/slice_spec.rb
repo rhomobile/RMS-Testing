@@ -1,5 +1,10 @@
 #require File.dirname(File.join(__rhoGetCurrentDir(), __FILE__)) + '/../../spec_helper'
+if System.get_property('is_emulator')
+require File.dirname(__FILE__) + '/fixtures/classes.rb'
+else
 require File.dirname(File.join(__rhoGetCurrentDir(), __FILE__)) + '/fixtures/classes.rb'
+end
+
 #require File.dirname(File.join(__rhoGetCurrentDir(), __FILE__)) + '/shared/slice.rb'
 =begin
 describe "String#slice" do

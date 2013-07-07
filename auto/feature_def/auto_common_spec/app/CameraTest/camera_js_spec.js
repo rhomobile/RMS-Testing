@@ -24,33 +24,9 @@ describe("Camera JS API Test", function() {
 
 			var camname = enumObject.getProperty('cameraType');
 			var camtype = enumObject.getProperty('ID');
-/*
-
-			describe("Enable Camera "+ camtype +": "+ camname, function() {
-
-				beforeEach(function() {
-					enableflag = false;
-				});
-				
-				it("Enable "+ camtype + camname, function() {
-					
-					runs(function() {
-						//Rho.Log.info(JSON.stringify(scanObject), "PATRO Enable");
-						enumObject.enable();
-						setTimeout(function() {
-						enableflag = true;
-						}, 5000);
-					});
-					
-					waitsFor(function() {
-						return enableflag;
-					}, "Waiting for enable", 6000);
-				
-				});
-			});
 
 
-			describe("Barcode property using set/getProperty for "+ camtype +": "+ camname, function() {
+			describe("Camera property using set/getProperty for "+ camtype +": "+ camname, function() {
 
 				for (var i=0;i<arrCamera.length;i++){
 
@@ -67,8 +43,7 @@ describe("Camera JS API Test", function() {
 				}
 			});
 
-
-			describe("Barcode property Using set/getProperties for "+ camtype +": "+ camname, function() {
+			describe("Camera property Using set/getProperties for "+ camtype +": "+ camname, function() {
 
 				for (var i=0;i<arrCamera.length;i++){
 
@@ -108,7 +83,7 @@ describe("Camera JS API Test", function() {
 				}
 			});
 
-			describe("Barcode property setting Directly for "+ camtype +": "+ camname, function() {
+			describe("Camera property setting Directly for "+ camtype +": "+ camname, function() {
 
 				for (var i=0;i<arrCamera.length;i++){
 
@@ -131,7 +106,8 @@ describe("Camera JS API Test", function() {
 									eval(enumObject)[propertyName] = propertyValue;
 								}
 
-								var data = enumObject.getProperty(arrCamera[idx]['propertyName']);
+								//var data = enumObject.getProperty(arrCamera[idx]['propertyName']);
+								var data = eval(enumObject)[propertyName];
 							}
 							catch(err){
 
@@ -145,7 +121,6 @@ describe("Camera JS API Test", function() {
 				}
 			});
 
-*/
 			describe("getProperty and get properties with all combination for "+ camtype +": "+ camname, function() {
 
 				beforeEach(function() {
@@ -257,32 +232,7 @@ describe("Camera JS API Test", function() {
 							expect(camtype).toEqual(defaultobj.getProperty('ID'));
 					});
 			});
-/*
-			describe("Disable Camera "+ camtype +": "+ camname, function() {
 
-				beforeEach(function() {
-					disableflag = false;
-				});
-
-				it("Disable "+ camtype + camname, function() {
-					
-					runs(function() {
-						//Rho.Log.info(JSON.stringify(scanObject), "PATRO Disable");
-						enumObject.disable();
-						setTimeout(function() {
-						disableflag = true;
-						}, 10000);
-
-					});
-
-					waitsFor(function() {
-						return disableflag;
-					}, "Waiting for enable", 11000);
-				
-				});
-			});
-
-*/
 			describe("Camera property set using takePicture() for "+ camtype +": "+ camname, function() {
 
 				var flag = false;
@@ -347,7 +297,6 @@ describe("Camera JS API Test", function() {
 
 				}
 			});
-
 
 			describe("Camera property set using choosePicture() for "+ camtype +": "+ camname, function() {
 

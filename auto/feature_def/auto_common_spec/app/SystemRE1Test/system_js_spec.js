@@ -222,7 +222,7 @@ describe("System JS API", function () {
         for (var i = 0; i < sys_setget_properties.length; i++) {
             (function (idx) {
 
-                var record = sys_setget_property[i];
+                var record = sys_setget_properties[i];
                 var testName = record['testName'];
                 var suitablePlatforms = record['osType'];
                 var propertyName = record['propertyName'];

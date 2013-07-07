@@ -196,7 +196,8 @@ describe("KeyCapture Test", function() {
 					setObjective("VT289-007 | set homeKeyValue to trigger key");
 					setInstruction("press the trigger key and check for application navigate");
 					setExpected("Application should navigate to Homepage of application after Pressing the trigger key ");
-					Rho.KeyCapture.homeKeyValue = 'todo';
+					Rho.KeyCapture.homeKeyValue = '102';
+					Rho.KeyCapture.homeKeyValue = '103';
 				});
 
 				runs(function()
@@ -293,8 +294,8 @@ describe("KeyCapture Test", function() {
 					setObjective("VT289-034 | call captureTrigger after setting homeKeyValue ");
 					setInstruction("Press triger");
 					setExpected("Application should navigate to Homepage of application after Pressing trigger key, the trigger callback will not fire. ");
-					Rho.KeyCapture.homeKeyValue = 'todo';
-					Rho.KeyCapture.captureKey(true,'todo',triggercallback);
+					Rho.KeyCapture.homeKeyValue = '0x66';
+					Rho.KeyCapture.captureKey(true,'0x66',triggercallback);
 				});
 
 				runs(function()
@@ -305,7 +306,7 @@ describe("KeyCapture Test", function() {
 					runs(function() {
 					expect("pass").toEqual(document.getElementById("actResult").innerHTML);
 					Rho.KeyCapture.homeKeyValue = 'Disabled';
-					Rho.KeyCapture.captureKey(true,'todo');
+					Rho.KeyCapture.captureKey(true,'0x66');
 					});	
 				});
 

@@ -8,15 +8,15 @@ var arr_sig_property = [
 	expectedResult	:	"#FF0000"
 },
 {
-	testName		:	"VT299-1002 | Set bgColor :#0000FF| #0000FF",
+	testName		:	"VT299-1002 | Set bgColor :#0000FFFF| #0000FFFF",
 	propertyName	:	"bgColor",
 	sigTypes		:	"All",
 	OSTypes			:	"All",
-	propertyValue	:	"#0000FF",
-	expectedResult	:	"#0000FF"
+	propertyValue	:	"#0000FFFF",
+	expectedResult	:	"#0000FFFF"
 },
 {
-	testName		:	"VT299-1003 | Set bgColor :#000000| #000000",
+	testName		:	"VT299-1003 | Set bgColor :#00000000| #00000000",
 	propertyName	:	"bgColor",
 	sigTypes		:	"All",
 	OSTypes			:	"All",
