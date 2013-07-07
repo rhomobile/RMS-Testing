@@ -2,10 +2,7 @@ require 'rho'
 require 'rho/rhocontroller'
 require 'rho/rhoerror'
 require 'helpers/browser_helper'
-require 'sync_server'
 require 'local_server'
-require 'push_server'
-
 
 class SettingsController < Rho::RhoController
   include BrowserHelper
@@ -14,9 +11,6 @@ class SettingsController < Rho::RhoController
     @msg = @params['msg']
     puts "-- push server is #{RhoConf.get_property_by_name('Push.rhoconnect.pushServer')}"
     SyncEngine.login('pushclient', 'pushclient', '/app/Settings/login_callback' )
-
-    # # Register for push service
-    # Rho::Push.getDeviceId url_for(:action => 'registration_callback')
   end
 
   def login_callback

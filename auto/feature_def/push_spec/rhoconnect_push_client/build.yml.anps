@@ -1,0 +1,32 @@
+---
+sdk: '../../../../../rhodes'
+sdkversion: 4.0.0
+name: Store-rhodes
+version: 1.05
+vendor: rhomobile
+build: debug
+bbver: 4.6
+applog: rholog.txt
+iphone:
+  # configuration: Release
+  configuration: Debug
+  sdk: iphoneos6.1
+  #sdk: iphonesimulator5.0
+  provisionprofile:
+  codesignidentity: "iPhone Developer"
+  entitlements:
+  BundleIdentifier: com.rhomobile.pushtest
+  BundleURLScheme: store-rhodes
+wp:
+  productid: 1e3cec70-255d-0130-4a1d-482a141043d9
+symbian:
+  uid: '0xeb4aeb04'
+
+capabilities:
+  - push
+
+android:
+  version: 4.2.2
+  emulator: myAndroid422
+
+extensions: ["json", "rhoconnect-client"]

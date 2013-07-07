@@ -66,13 +66,13 @@ describe 'Windows Mobile push spec' do
       res.status = 200
       $mutex.synchronize do
         $requests << req
-	puts "req is #{req}"
+        puts "req is #{req}"
         $signal.signal
       end
     end
 
     run_apps($platform)
-    
+
     @api_token = RhoconnectHelper.api_post('system/login', { :login => 'rhoadmin', :password => '' })
     puts "API token: #{@api_token}"
   end
@@ -201,7 +201,7 @@ describe 'Windows Mobile push spec' do
   		puts alerts.inspect
   		5.times do |i|
   			message = $requests[i].query['alert']
-			
+
   			message.should_not be_nil
   			puts "message: #{message}"
   			alerts[message].should be_true

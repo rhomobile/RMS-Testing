@@ -3,30 +3,32 @@
 
 # path to local rhodes workspace
 pushd ../../../../rhodes
+echo "Pull latest rhodes sources ..."
 git pull origin master
 popd
 
 # path to local rhoconnect workspace
 pushd ../../../../rhoconnect
+echo "Pull latest rhoconnect sources ..."
 git pull origin master
 popd
 
 # path to rhoelements
 pushd ../../../../Motorola-Extensions
+echo "Pull latest Motorola-Extensions sources ..."
 git pull origin master
 popd
 
 # path to rhoconnect-client
 pushd ../../../../rhoconnect-client
+echo "Pull latest rhoconnect-client sources ..."
 git pull origin master
 popd
 
 pushd rhoconnect_push_client
-echo -e "\nClean android rhodes app ..."
-rake clean:android
-# echo -e "\nBuilding rhodes app ..."
-# rake device:android:debug
-# if (($?)) ; then echo "Cannot build rhodes app"; exit 1; fi
+cp build.yml.rps build.yml
+# echo -e "\nClean android rhodes app ..."
+# rake clean:android
 popd
 
 adb start-server
