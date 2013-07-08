@@ -662,7 +662,7 @@ describe("Signature Manual Test", function() {
 					}, 'wait to callback to fire or timeout', 10000);
 
 					runs(function() {
-					Rho.Signature.takeFullScreen({compressionFormat:'bmp',fileName:'12345',outputFormat:'image'},);
+					Rho.Signature.takeFullScreen({compressionFormat:'bmp',fileName:'12345',outputFormat:'image'},callbacktake);
 					setTimeout(function() {
 						timeoutFlag = true;
 					}, ENABLE9K);
