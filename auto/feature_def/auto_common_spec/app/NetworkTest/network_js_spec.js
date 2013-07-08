@@ -33,7 +33,7 @@ describe('Network JS API', function() {
         callbackCount += 1;
         connectionInfo = args.connectionInformation;
         failureMsg = args.failureMessage;
-        Rho.Log.info("net_spec", "detectConnectionCallback, count = " + callbackCount.toString() );
+        Rho.Log.info("detectConnectionCallback, count = " + callbackCount.toString() + "failureMsg: " + failureMsg, "net_spec" );
     }
          
     beforeEach(function() {
@@ -158,7 +158,7 @@ describe('Network JS API', function() {
 
    });*/
 
-        it('VT293-0020 | detectConnection with dtectionTimeout', function () {
+        it('VT293-0020 | detectConnection with detectionTimeout', function () {
             var flag = false;
             runs(function () {
 
