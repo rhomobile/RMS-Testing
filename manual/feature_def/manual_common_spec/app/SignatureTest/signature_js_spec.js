@@ -569,7 +569,7 @@ describe("Signature Manual Test", function() {
 					Rho.Signature.bgColor = '#FF0000';
 					Rho.Signature.penColor = '#0000FF';
 					Rho.Signature.penWidth = 3;
-					Rho.Signature.takeFullScreen({compressionFormat:'jpg',fileName:'TestSig',outputFormat:'image'},callbacktake);
+					Rho.Signature.takeFullScreen({compressionFormat:CONST_JPG,fileName:'TestSig',outputFormat:'image'},callbacktake);
 					setTimeout(function() {
 						timeoutFlag = true;
 					}, ENABLE9K);
@@ -614,7 +614,7 @@ describe("Signature Manual Test", function() {
 					}, 'wait to callback to fire or timeout', 10000);
 
 					runs(function() {
-					Rho.Signature.compressionFormat = 'png';
+					Rho.Signature.compressionFormat = CONST_PNG;
 					Rho.Signature.fileName = 'Sig_123';
 					Rho.Signature.outputFormat = 'image';
 					Rho.Signature.takeFullScreen({},callbacktake);
@@ -662,7 +662,7 @@ describe("Signature Manual Test", function() {
 					}, 'wait to callback to fire or timeout', 10000);
 
 					runs(function() {
-					Rho.Signature.takeFullScreen({compressionFormat:'bmp',fileName:'12345',outputFormat:'image'},);
+					Rho.Signature.takeFullScreen({compressionFormat:'bmp',fileName:'12345',outputFormat:'image'},callbacktake);
 					setTimeout(function() {
 						timeoutFlag = true;
 					}, ENABLE9K);
@@ -710,7 +710,7 @@ describe("Signature Manual Test", function() {
 					Rho.Signature.bgColor = '#FFFFFF';
 					Rho.Signature.penColor = '#000000';
 					Rho.Signature.penWidth = 3;
-					Rho.Signature.takeFullScreen({compressionFormat:'bmp',fileName:'TC18',outputFormat:'dataUri'},callbackUri);
+					Rho.Signature.takeFullScreen({compressionFormat:CONST_JPG,fileName:'TC18',outputFormat:'dataUri'},callbackUri);
 					setTimeout(function() {
 						timeoutFlag = true;
 					}, ENABLE9K);
@@ -755,7 +755,7 @@ describe("Signature Manual Test", function() {
 					}, 'wait to callback to fire or timeout', 10000);
 
 					runs(function() {
-					Rho.Signature.show({bgColor:'#FFFF8C00',penColor:'#00FF00',penWidth:1,compressionFormat:'jpg',fileName:'TC19sig',outputFormat:'image'});
+					Rho.Signature.show({bgColor:'#FFFF8C00',penColor:'#00FF00',penWidth:1,compressionFormat:CONST_JPG,fileName:'TC19sig',outputFormat:'image'});
 					setTimeout(function() {
 						timeoutFlag = true;
 					}, ENABLE5K);
@@ -804,7 +804,7 @@ describe("Signature Manual Test", function() {
 					Rho.Signature.bgColor='#C0C0C0';
 					Rho.Signature.penColor ='#FF800080';
 					Rho.Signature.penWidth = 2;
-					Rho.Signature.show({compressionFormat:'png',fileName:'TC20_Sig',outputFormat:'image'});
+					Rho.Signature.show({compressionFormat:CONST_PNG,fileName:'TC20_Sig',outputFormat:'image'});
 					setTimeout(function() {
 						timeoutFlag = true;
 					}, ENABLE5K);
@@ -1011,7 +1011,7 @@ describe("Signature Manual Test", function() {
 					Rho.Signature.outputFormat = 'image';
 					Rho.Signature.border = false;
 					Rho.Signature.fileName = 'TC24_Sig';
-					Rho.Signature.compressionFormat = 'jpg';
+					Rho.Signature.compressionFormat = CONST_JPG;
 					Rho.Signature.takeFullScreen({},callbacktake);
 
 					setTimeout(function() {
@@ -1068,7 +1068,7 @@ describe("Signature Manual Test", function() {
 					Rho.Signature.outputFormat = 'image';
 					Rho.Signature.border = false;
 					Rho.Signature.fileName = 'TC25_Sig';
-					Rho.Signature.compressionFormat = 'jpg';
+					Rho.Signature.compressionFormat = CONST_JPG;
 					Rho.Signature.show();
 					Rho.Signature.setVectorCallback(callbackVector);
 
@@ -1126,7 +1126,7 @@ describe("Signature Manual Test", function() {
 					Rho.Signature.outputFormat = 'image';
 					Rho.Signature.border = false;
 					Rho.Signature.fileName = 'TC24_Sig';
-					Rho.Signature.compressionFormat = 'jpg';
+					Rho.Signature.compressionFormat = CONST_JPG;
 					Rho.Signature.show();
 					Rho.Signature.setVectorCallback(function(data){vectorcallbackdata(data);});
 
@@ -1180,7 +1180,7 @@ describe("Signature Manual Test", function() {
 					Rho.Signature.outputFormat = 'image';
 					Rho.Signature.border = false;
 					Rho.Signature.fileName = 'TC27_Sig';
-					Rho.Signature.compressionFormat = 'jpg';
+					Rho.Signature.compressionFormat = CONST_JPG;
 					Rho.Signature.setVectorCallback(callbackVector);
 					Rho.Signature.takeFullScreen({},callbacktake);
 
@@ -1234,7 +1234,7 @@ describe("Signature Manual Test", function() {
 					Rho.Signature.outputFormat = 'dataUri';
 					Rho.Signature.border = false;
 					Rho.Signature.fileName = 'TC27_Sig';
-					Rho.Signature.compressionFormat = 'jpg';
+					Rho.Signature.compressionFormat = CONST_JPG;
 					Rho.Signature.show();
 					Rho.Signature.setVectorCallback(callbackVector);
 

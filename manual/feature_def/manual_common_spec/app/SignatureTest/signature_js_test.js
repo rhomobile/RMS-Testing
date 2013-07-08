@@ -39,3 +39,6 @@ function vectorcallbackdata(data)
 {
 	document.getElementById("clbkVector").innerHTML = data.vectorArray;
 }
+
+var CONST_JPG = (Rho.System.platform == "WINDOWS" ? 'bmp' : 'jpg');
+var CONST_PNG = (Rho.System.platform == "WINDOWS" ? 'bmp' : 'png');
