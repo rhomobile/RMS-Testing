@@ -241,12 +241,14 @@ function toolSeparatorWidth(width) {
     toolElements = [
         {action: '/app/NativeToolbarTest/Page1.html', icon: '/public/images/bar/switch/btn_1.png'},
         {action: 'separator', width: width},
-        {action: '/app/NativeToolbarTest/Page2.html', icon: '/public/images/bar/switch/btn_2.png'}
+        {action: '/app/NativeToolbarTest/Page2.html', icon: '/public/images/bar/switch/btn_2.png'},
+        {action: 'separator', width: width},
+        {action: '/app/NativeToolbarTest/Page2.html', icon: '/public/images/bar/switch/btn_3.png'}
     ];
 
     var toolProperties = {backgroundColor: 0xFF0000, maskColor: 0xFF0000, viewHeight: 100};
     Rho.NativeToolbar.create(toolElements, toolProperties);
-    Rho.WebView.navigate("/app/NativeToolbarTest/page1.html");
+    //Rho.WebView.navigate("/app/NativeToolbarTest/page1.html");
 }
 
 function toolViewHeight(height) {
