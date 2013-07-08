@@ -5,6 +5,8 @@ require 'openssl'
 require 'net/http'
 require 'rexml/document'
 
+WEBrick::Config::General[:DoNotReverseLookup] = true
+
 #puts "argv : #{ARGV}"
 def localip
     orig, Socket.do_not_reverse_lookup = Socket.do_not_reverse_lookup, true  # turn off reverse DNS resolution temporarily
