@@ -137,12 +137,33 @@ device_list.each do |dev|
       device_id = expect_request('device_id')
       device_id.should_not be_nil
       device_id.should_not == ''
+
+      res = ''
+      5.times do |i|
+        res = RhoconnectHelper.api_get('users/pushclient/clients', @api_token)
+        break unless res.body.empty?
+        sleep 1
+      end
+      client_id = JSON.parse(res.body)[0]
+      # puts "-- clients: #{client_id}"
+      res.code.should == 200
+      client_id.should_not be_nil
+
+      device_push_type = ''
+      5.times do |i|
+        res = RhoconnectHelper.api_get("clients/#{client_id}", @api_token)
+        body = JSON.parse(res.body)
+        device_push_type = body[2]['value']
+        break  if device_push_type
+        sleep 1
+      end
+      res.code.should == 200
+      device_push_type.should == 'rhoconnect_push'
     end
 
     # 3
     it 'should proceed push message at foreground' do
       # puts 'Sending push message...'
-      sleep 5
       message = 'magic1'
       params = { :user_id=>['pushclient'], :message=>message }
       RhoconnectHelper.api_post('users/ping', params, @api_token)

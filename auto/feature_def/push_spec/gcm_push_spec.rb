@@ -5,8 +5,6 @@ require 'fileutils'
 require 'rake'
 
 TEST_PKGS = %w[com.rhomobile.gcm_push_client]
-$gcm_api_key = 'AIzaSyANZO6psbeXLHvU88InbDnR6Zd_vZMWUZ8'
-# $gcm_api_key = 'AIzaSyBfBxYzYbpGWQctSKwE_fQCgO-C6YqfemI'
 
 cfg_file_name = File.join(File.dirname(__FILE__),'config.yml')
 $rho_root = nil
