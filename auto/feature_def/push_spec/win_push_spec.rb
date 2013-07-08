@@ -66,13 +66,13 @@ describe 'Windows Mobile push spec' do
       res.status = 200
       $mutex.synchronize do
         $requests << req
-	    puts "req is #{req}"
+        puts "req is #{req}"
         $signal.signal
       end
     end
 
     run_apps($platform)
-    
+
     @api_token = RhoconnectHelper.api_post('system/login', { :login => 'rhoadmin', :password => '' })
     puts "API token: #{@api_token}"
   end
@@ -175,6 +175,45 @@ describe 'Windows Mobile push spec' do
 
   #   output = Jake.run2('adb', ['-e', 'shell', 'ps'], {:hide_output => true})
   #  (output =~ /rho_push_client/).should_not be_nil
+  #end
+
+  it 'should process sequence of push messages' do
+  	puts 'Sending 5 push messages...'
+
+  	alerts = {}
+  	5.times do |i|
+  		message = "magic#{i}"
+  		alerts[message] = true
+  		params = { :user_id=>['pushclient'], :message => message}
+  		RhoconnectHelper.api_post('users/ping',params,@api_token)
+  		sleep 2
+  	end
+
+  	puts 'Waiting 5 messages with push content...'
+
+  	5.times do |i|
+  		$mutex.synchronize do
+  			break if $requests.count == 5
+  			$signal.wait($mutex, 60)
+  		end
+  		puts "Message count: #{$requests.count}"
+  	end
+
+  	$requests.count.should == 5
+  	puts " requests are #{$requests}"
+  	$mutex.synchronize do
+  		puts alerts.inspect
+  		5.times do |i|
+  			message = $requests[i].query['alert']
+
+  			message.should_not be_nil
+  			puts "message: #{message}"
+  			alerts[message].should be_true
+  			alerts[message] = false
+  			#$requests.delete_at 0
+  		end
+  		$requests.clear
+  	end
   end
 
   #it 'should process sequence of push messages' do

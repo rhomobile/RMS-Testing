@@ -74,17 +74,17 @@ def run_apps(platform)
 		RhoconnectHelper.push_host = $rc_push_server_address
 		RhoconnectHelper.push_port = $rc_push_server_port
 	end
-	
+
 	appname = "rhoconnect_push_client"
 	$app_path = File.expand_path(File.join(File.dirname(__FILE__),appname))
-	File.open(File.join($app_path, 'app', 'sync_server.rb'), 'w') do |f|
-		f.puts "SYNC_SERVER_HOST = '#{RhoconnectHelper.host}'"
-		f.puts "SYNC_SERVER_PORT = #{RhoconnectHelper.port}"
-	end
-	File.open(File.join($app_path, 'app', 'push_server.rb'), 'w') do |f|
-		f.puts "PUSH_SERVER_HOST = '#{RhoconnectHelper.push_host}'"
-		f.puts "PUSH_SERVER_PORT = #{RhoconnectHelper.push_port}"
-	end
+	# File.open(File.join($app_path, 'app', 'sync_server.rb'), 'w') do |f|
+	# 	f.puts "SYNC_SERVER_HOST = '#{RhoconnectHelper.host}'"
+	# 	f.puts "SYNC_SERVER_PORT = #{RhoconnectHelper.port}"
+	# end
+	# File.open(File.join($app_path, 'app', 'push_server.rb'), 'w') do |f|
+	# 	f.puts "PUSH_SERVER_HOST = '#{RhoconnectHelper.push_host}'"
+	# 	f.puts "PUSH_SERVER_PORT = #{RhoconnectHelper.push_port}"
+	# end
 	# Patch rhodes 'rhoconfig.txt' file
 	cfgfile = File.join($app_path, 'rhoconfig.txt')
 	cfg = File.read(cfgfile)

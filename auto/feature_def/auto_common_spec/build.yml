@@ -37,20 +37,20 @@ iphone:
   entitlements:
   BundleIdentifier: com.rhomobile.apigeneratorspec
   BundleURLScheme: apigeneratorspec
-  extensions: ["barcode",  "genCallbackTests", "appEvents"]
+  extensions: ["barcode",  "genCallbackTests", "appEvents", "indicators"]
 wp:
   productid: 'b6479381-42a8-0130-78de-3caec51bd50e'
 symbian:
   uid: '0xe1a1ef92'
 android:
   version: 4.2.2
-  extensions: ["barcode", "screenorientation", "instrumentation"]
+  extensions: ["barcode", "screenorientation", "instrumentation", "cardreader", "indicators"]
   capabilities:
   - native_browser
 wm:
   #use_shared_runtime: yes
   #sdk: MC3000c50b (ARMV4I)
-  extensions: ["barcode", "screenorientation", "instrumentation"]
+  extensions: ["barcode", "screenorientation", "instrumentation", "cardreader", "indicators"]
 #capabilities:
 #- non_motorola_device
 

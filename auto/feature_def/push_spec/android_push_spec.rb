@@ -5,7 +5,6 @@ require 'yaml'
 require 'psych'
 
 TEST_PKGS = %w[com.rhomobile.rho_push_client com.motsolutions.cto.services.ans]
-
 $rho_root = nil
 $use_own_rhoconnect_stack=true
 cfgfilename = File.join(File.dirname(__FILE__),'config.yml')
@@ -38,7 +37,7 @@ require_relative './rhoconnect_helper'
 require_relative './spec_helper'
 
 puts "-- Starting local server"
-$server, addr, port = Jake.run_local_server
+$server, addr, port = Jake.run_local_server(8081)
 File.open(File.join($spec_path, 'rhoconnect_push_client', 'app', 'local_server.rb'), 'w') do |f|
   f.puts "SPEC_LOCAL_SERVER_HOST = '#{addr}'"
   f.puts "SPEC_LOCAL_SERVER_PORT = #{port}"
@@ -57,17 +56,8 @@ $server.mount_proc('/', nil) do |req, res|
   end
 end
 
-#
 appname = "rhoconnect_push_client"
 $app_path = File.expand_path(File.join(File.dirname(__FILE__),appname))
-File.open(File.join($app_path, 'app', 'sync_server.rb'), 'w') do |f|
-  f.puts "SYNC_SERVER_HOST = '#{RhoconnectHelper.host}'"
-  f.puts "SYNC_SERVER_PORT = #{RhoconnectHelper.port}"
-end
-File.open(File.join($app_path, 'app', 'push_server.rb'), 'w') do |f|
-  f.puts "PUSH_SERVER_HOST = '#{RhoconnectHelper.push_host}'"
-  f.puts "PUSH_SERVER_PORT = #{RhoconnectHelper.push_port}"
-end
 # Patch rhodes 'rhoconfig.txt' file
 cfgfile = File.join($app_path, 'rhoconfig.txt')
 cfg = File.read(cfgfile)
@@ -98,7 +88,7 @@ device_list.each do |dev|
     puts "-- Running push specs on device #{$deviceId}"
   end
 
-  describe 'Android push spec' do
+  describe 'Android rhoconnect push spec' do
     before(:all) do
       run_apps($platform)
       @api_token = RhoconnectHelper.api_post('system/login', { :login => 'rhoadmin', :password => '' })
@@ -106,6 +96,9 @@ device_list.each do |dev|
     end
 
     after(:all) do
+      puts "Sending exit and logout message to the app"
+      RhoconnectHelper.api_post('users/ping', { :user_id => ['pushclient'], :message => 'exit_and_logout' }, @api_token)
+
       stop_apps
       cleanup_apps
 
@@ -132,11 +125,13 @@ device_list.each do |dev|
       val
     end
 
+    # 1
     it 'should login' do
       # puts 'Waiting message with login errCode'
       expect_request('error').should == "0"
     end
 
+    # 2
     it 'should register' do
       # puts 'Waiting message with Rhoconnect registaration...'
       device_id = expect_request('device_id')
@@ -144,6 +139,7 @@ device_list.each do |dev|
       device_id.should_not == ''
     end
 
+    # 3
     it 'should proceed push message at foreground' do
       # puts 'Sending push message...'
       sleep 5
@@ -156,6 +152,7 @@ device_list.each do |dev|
       sleep 3
     end
 
+    # 4
     it 'should process sequence of push messages' do
       puts 'Sending 5 push messages...'
 
@@ -165,7 +162,7 @@ device_list.each do |dev|
         alerts[message] = true
         params = { :user_id=>['pushclient'], :message => message}
         RhoconnectHelper.api_post('users/ping',params,@api_token)
-        sleep 0.5
+        sleep 3
       end
       puts 'Waiting 5 messages with push content...'
       5.times do |i|
@@ -190,6 +187,7 @@ device_list.each do |dev|
       end
     end
 
+    # 5
     it 'should proceed push message with exit comand' do
       # puts 'Sending push message with exit command...'
       message = 'exit'
@@ -204,6 +202,7 @@ device_list.each do |dev|
       (output =~ /rho_push_client/).should be_nil
     end
 
+    # 6
     it 'should start stopped app and process pending push message' do
       args =  $deviceId ?  ['-s', $deviceId, 'shell', 'ps'] : ['-e', 'shell', 'ps']
       output = Jake.run2('adb', args, {:hide_output => true})
@@ -215,7 +214,6 @@ device_list.each do |dev|
       RhoconnectHelper.api_post('users/ping',params,@api_token)
 
       # puts 'Waiting ping message with push content ...'
-      sleep 10
       expect_request('alert').should == message
 
       args =  $deviceId ?  ['-s', $deviceId, 'shell', 'ps'] : ['-e', 'shell', 'ps']
@@ -223,9 +221,25 @@ device_list.each do |dev|
       (output =~ /rho_push_client/).should_not be_nil
     end
 
-    # TODO:
-    # logout/login back
+    # 7
+    it 'should logout and login back and process ping message' do
+      message = 'logout'
+      params = { :user_id=>['pushclient'], :message=>message }
+      RhoconnectHelper.api_post('users/ping',params,@api_token)
+      expect_request('alert').should == message
 
+      system("adb #{$deviceOpts} shell am start -a android.intent.action.MAIN -n com.rhomobile.rho_push_client/com.rhomobile.rhodes.RhodesActivity").should == true
+      expect_request('error').should == "0"
+
+      $device_pin = expect_request('device_id')
+      $device_pin.should_not be_nil
+      $device_pin.should_not == ''
+
+      message = 'welcome'
+      params = { :user_id=>['pushclient'], :message => message}
+      RhoconnectHelper.api_post('users/ping',params,@api_token)
+      expect_request('alert').should == message
+    end
   end
 
 end

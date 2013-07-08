@@ -1295,7 +1295,6 @@ end
     accts.length.should == 0    
  end
       
-if !defined?(RHO_WP7)
   it "should support blob type" do
     
     file_name = File.join(Rho::RhoApplication::get_blob_folder, 'MyText123.txt')
@@ -1309,12 +1308,7 @@ if !defined?(RHO_WP7)
     f.close        
 
     File.exists?(file_name).should == true
-
-    blob_name = file_name[__rhoGetCurrentDir().length(), file_name.length()-__rhoGetCurrentDir().length()]
-      
-    if System::get_property('platform') == 'APPLE'
-        blob_name = file_name[__rhoGetUserDir().length(), file_name.length()-__rhoGetUserDir().length()]
-    end
+    blob_name = Rho::Application.relativeDatabaseBlobFilePath(file_name)
     
     puts "file_name : #{file_name}"
     puts "blob_name : #{blob_name}"
@@ -1331,7 +1325,6 @@ if !defined?(RHO_WP7)
     item2.should be_nil
     File.exists?(file_name).should == false
   end
-end
 
   it "should include only selected column without order" do
     @accts = getAccount.find(:all, :select => ['name'] )
@@ -1682,7 +1675,7 @@ end
     end
         
   end
-          
+
 end
 #=begin
 describe "Rhom#paginate" do

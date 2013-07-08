@@ -211,7 +211,7 @@ describe("Cardreader Module JS Test Starts Here", function() {
 		}
 	});
 
-     describe("Cardreader Module- set/get by seetting directly Test Starts Here", function() {
+     describe("Cardreader Module- set/get by setting directly Test Starts Here", function() {
            var flag = false;
 
                it("Rho.CardReader.open", function() {
@@ -231,11 +231,41 @@ describe("Cardreader Module JS Test Starts Here", function() {
 
                 it("VT286-0073 | Auto enter true", function() {
                     Rho.CardReader.autoEnter = true;
-                    expect(Rho.CardReader.getProperty('autoEnter')).toEqual(true);
+                    expect(Rho.CardReader.getProperty('autoEnter')).toEqual('true');
                 });
                 it("VT286-0074 | Auto enter false", function() {
                     Rho.CardReader.autoEnter = false;
-                    expect(Rho.CardReader.getProperty('autoEnter')).toEqual(false);
+                    expect(Rho.CardReader.getProperty('autoEnter')).toEqual('false');
+                });
+                it("VT286-0078 | Auto Tab true", function() {
+                    Rho.CardReader.autoTab = true;
+                    expect(Rho.CardReader.getProperty('autoTab')).toEqual('true');
+                });
+                it("VT286-0079 | Auto Tab false", function() {
+                    Rho.CardReader.autoTab = false;
+                    expect(Rho.CardReader.getProperty('autoTab')).toEqual('false');
+                });
+                if(isWindowsMobilePlatform() && Rho.CardReader.moduleName == "dcr7000")
+                {
+	                it("VT286-0083 | pinEntry true", function() {
+	                    Rho.CardReader.pinEntry = true;
+	                    expect(Rho.CardReader.getProperty('pinEntry')).toEqual('true');
+	                });
+	                it("VT286-0084 | pinEntry false", function() {
+	                    Rho.CardReader.pinEntry = false;
+	                    expect(Rho.CardReader.getProperty('pinEntry')).toEqual('false');
+	                });
+	                it("VT286-0088 | pinTimeout to valid 60000", function() {
+	                    Rho.CardReader.pinTimeout = 60000;
+	                    expect(Rho.CardReader.getProperty('pinTimeout')).toEqual('60000');
+	                });
+	                it("VT286-0092 | panData to 1234567891234567", function() {
+	                    Rho.CardReader.panData = 1234567891234567;
+	                    expect(Rho.CardReader.getProperty('panData')).toEqual('1234567891234567');
+	                });
+                }
+                it("Rho.CardReader.close", function() {
+                                Rho.CardReader.close();
                 });
              /* it("VT286-0075 | Auto enter to 0", function() {
                     Rho.CardReader.autoEnter = 0;
@@ -248,16 +278,8 @@ describe("Cardreader Module JS Test Starts Here", function() {
                 it("VT286-0077 | Auto enter to invalid", function() {
                     Rho.CardReader.autoEnter = invalid;
                     expect(Rho.CardReader.getProperty('autoEnter')).toEqual(false);
-                });*/
-                it("VT286-0078 | Auto Tab true", function() {
-                    Rho.CardReader.autoTab = true;
-                    expect(Rho.CardReader.getProperty('autoTab')).toEqual(true);
                 });
-                it("VT286-0079 | Auto Tab false", function() {
-                    Rho.CardReader.autoTab = false;
-                    expect(Rho.CardReader.getProperty('autoTab')).toEqual(false);
-                });
-             /* it("VT286-0080 | Auto Tab to 0", function() {
+                it("VT286-0080 | Auto Tab to 0", function() {
                     Rho.CardReader.autoTab = 0;
                     expect(Rho.CardReader.getProperty('autoTab')).toEqual(false);
                 });
@@ -268,16 +290,8 @@ describe("Cardreader Module JS Test Starts Here", function() {
                 it("VT286-0082 | Auto Tab to invalid", function() {
                     Rho.CardReader.autoTab = invalid;
                     expect(Rho.CardReader.getProperty('autoTab')).toEqual(false);
-                });*/
-                it("VT286-0083 | pinEntry true", function() {
-                    Rho.CardReader.pinEntry = true;
-                    expect(Rho.CardReader.getProperty('pinEntry')).toEqual(true);
                 });
-                it("VT286-0084 | pinEntry false", function() {
-                    Rho.CardReader.pinEntry = false;
-                    expect(Rho.CardReader.getProperty('pinEntry')).toEqual(false);
-                });
-             /* it("VT286-0085 | pinEntry to 0", function() {
+                it("VT286-0085 | pinEntry to 0", function() {
                     Rho.CardReader.pinEntry = 0;
                     expect(Rho.CardReader.getProperty('pinEntry')).toEqual(false);
                 });
@@ -288,11 +302,7 @@ describe("Cardreader Module JS Test Starts Here", function() {
                 it("VT286-0087 | pinEntry to invalid", function() {
                     Rho.CardReader.pinEntry = invalid;
                     expect(Rho.CardReader.getProperty('pinEntry')).toEqual(false);
-                });*/
-                it("VT286-0088 | pinTimeout to valide 60000", function() {
-                    Rho.CardReader.pinTimeout = 60000;
-                    expect(Rho.CardReader.getProperty('pinTimeout')).toEqual(60000);
-                });/*
+                });
                 it("VT286-0089 | pinTimeout to 0", function() {
                     Rho.CardReader.pinTimeout = 0;
                     expect(Rho.CardReader.getProperty('pinTimeout')).toEqual(0);
@@ -304,18 +314,11 @@ describe("Cardreader Module JS Test Starts Here", function() {
                 it("VT286-0091 | moduleName to msr9000", function() {
                     Rho.CardReader.moduleName = "msr9000";
                     expect(Rho.CardReader.getProperty('moduleName')).toEqual('msr9000');
-                });*/
-                it("VT286-0092 | panData to 1234567891234567", function() {
-                    Rho.CardReader.panData = 1234567891234567;
-                    expect(Rho.CardReader.getProperty('panData')).toEqual(1234567891234567);
                 });
-             /* it("VT286-0093 | panData to invalid", function() {
+                it("VT286-0093 | panData to invalid", function() {
                     Rho.CardReader.panData = 12345;
                     expect(Rho.CardReader.getProperty('panData')).toEqual(12345);
                 });*/
-                it("Rho.CardReader.close", function() {
-                                Rho.CardReader.close();
-                });
     });
 
 });

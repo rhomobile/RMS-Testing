@@ -7,7 +7,7 @@ class AsyncHttpsTestController < Rho::RhoController
 
     @@get_result = ""
     Rho::Network.get(
-      {:url => 'https://mail.google.com/'},
+      {:url => 'https://mail.google.com/', :verifyPeerCertificate => false},
       url_for(:action => :httpget_callback)
     )
     render :action => :wait

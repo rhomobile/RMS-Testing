@@ -9,7 +9,12 @@ var card_get_property = [
 		testName		:	"VT286-0002/VT286-0010 | autoTab getproperty before setting any value | false",
 		propertyName	:	"autoTab",
 		expectedResult	: 	"false", 
-	},
+	}
+];
+
+if(isWindowsMobilePlatform() && Rho.CardReader.moduleName == "dcr7000")
+{
+	card_get_property.push(
 	{
 		testName		:	"VT286-0003/VT286-0011 | pinEntry getproperty before setting any value | false",
 		propertyName	:	"pinEntry",
@@ -24,8 +29,8 @@ var card_get_property = [
 		testName		:	"VT286-0005/VT286-0013 | panData getproperty before setting any value | ",
 		propertyName	:	"panData",
 		expectedResult	: 	"", 
-	},
-/*	{
+	}/*,
+	{
 		testName		:	"VT286-0006/VT286-0014 | moduleName getproperty before setting any value | ",
 		propertyName	:	"moduleName",
 		expectedResult	: 	"", 
@@ -39,8 +44,8 @@ var card_get_property = [
 		testName		:	"VT286-0008/VT286-0016 | moduleName getproperty with invalid property name | ",
 		propertyName	:	"invalid",
 		expectedResult	: 	"", 
-	}*/
-]
+	}*/);
+}
 
 var card_setget_property = [
 	{
@@ -55,7 +60,47 @@ var card_setget_property = [
 		propertyValue	:	"false",
 		expectedResult	:	"false"
 	},
-/*	{
+	{
+		testName		:	"VT286-0022/VT286-0050/VT286-0102 |  set autoTab to invalid and getproperty after setting | false",
+		propertyName	:	"autoTab",
+		propertyValue	:	"true",
+		expectedResult	:	"true"
+	},
+	{
+		testName		:	"VT286-0023/VT286-0051/VT286-0103 |  set autoTab to invalid and getproperty after setting | false",
+		propertyName	:	"autoTab",
+		propertyValue	:	"false",
+		expectedResult	:	"false"
+	}];
+
+if(isWindowsMobilePlatform() && Rho.CardReader.moduleName == "dcr7000")
+{
+	card_setget_property.push(
+	{
+		testName		:	"VT286-0027/VT286-0055/VT286-0107 |  set pinEntry to invalid and getproperty after setting | false",
+		propertyName	:	"pinEntry",
+		propertyValue	:	"true",
+		expectedResult	:	"true"
+	},
+	{
+		testName		:	"VT286-0028/VT286-0056/VT286-0108 |  set pinEntry to invalid and getproperty after setting | false",
+		propertyName	:	"pinEntry",
+		propertyValue	:	"false",
+		expectedResult	:	"false"
+	},
+	{
+		testName		:	"VT286-0032/VT286-0060/VT286-0112 |  set pinTimeout to invalid and getproperty after setting | false",
+		propertyName	:	"pinTimeout",
+		propertyValue	:	"60000",
+		expectedResult	:	"60000"
+	},
+	{
+		testName		:	"VT286-0043/VT286-0071/VT286-0123 |  set panData to 1234567891234567 and getproperty after setting | false",
+		propertyName	:	"panData",
+		propertyValue	:	"1234567891234567",
+		expectedResult	:	"1234567891234567"
+	}/*,
+	{
 		testName		:	"VT286-0019/VT286-0047/VT286-0099 |  set autoEnter to 0 and getproperty after setting | false",
 		propertyName	:	"autoEnter",
 		propertyValue	:	"0",
@@ -73,18 +118,6 @@ var card_setget_property = [
 		propertyValue	:	"invalid",
 		expectedResult	:	"false"
 	},*/
-	{
-		testName		:	"VT286-0022/VT286-0050/VT286-0102 |  set autoTab to invalid and getproperty after setting | false",
-		propertyName	:	"autoTab",
-		propertyValue	:	"true",
-		expectedResult	:	"true"
-	},
-	{
-		testName		:	"VT286-0023/VT286-0051/VT286-0103 |  set autoTab to invalid and getproperty after setting | false",
-		propertyName	:	"autoTab",
-		propertyValue	:	"false",
-		expectedResult	:	"false"
-	},
 /*	{
 		testName		:	"VT286-0024/VT286-0052/VT286-0104 |  set autoTab to 0 and getproperty after setting | false",
 		propertyName	:	"autoTab",
@@ -103,18 +136,6 @@ var card_setget_property = [
 		propertyValue	:	"invalid",
 		expectedResult	:	"false"
 	},*/
-	{
-		testName		:	"VT286-0027/VT286-0055/VT286-0107 |  set pinEntry to invalid and getproperty after setting | false",
-		propertyName	:	"pinEntry",
-		propertyValue	:	"true",
-		expectedResult	:	"true"
-	},
-	{
-		testName		:	"VT286-0028/VT286-0056/VT286-0108 |  set pinEntry to invalid and getproperty after setting | false",
-		propertyName	:	"pinEntry",
-		propertyValue	:	"false",
-		expectedResult	:	"false"
-	},
 /*	{
 		testName		:	"VT286-0029/VT286-0057/VT286-0109 |  set pinEntry to 0 and getproperty after setting | false",
 		propertyName	:	"pinEntry",
@@ -133,12 +154,7 @@ var card_setget_property = [
 		propertyValue	:	"invalid",
 		expectedResult	:	"false"
 	},*/
-	{
-		testName		:	"VT286-0032/VT286-0060/VT286-0112 |  set pinTimeout to invalid and getproperty after setting | false",
-		propertyName	:	"pinTimeout",
-		propertyValue	:	"60000",
-		expectedResult	:	"60000"
-	},/*
+	/*
 	{
 		testName		:	"VT286-0033/VT286-0061/VT286-0113 |  set pinTimeout to invalid and getproperty after setting | false",
 		propertyName	:	"pinTimeout",
@@ -199,17 +215,10 @@ var card_setget_property = [
 		propertyValue	:	"msr3000",
 		expectedResult	:	"msr3000"
 	},*/
-	{
-		testName		:	"VT286-0043/VT286-0071/VT286-0123 |  set panData to 1234567891234567 and getproperty after setting | false",
-		propertyName	:	"panData",
-		propertyValue	:	"1234567891234567",
-		expectedResult	:	"1234567891234567"
-	},
 /*	{
 		testName		:	"VT286-0044/VT286-0072/VT286-0124 |  set panData to 12345 and getproperty after setting | false",
 		propertyName	:	"panData",
 		propertyValue	:	"12345",
 		expectedResult	:	"12345"
-	}*/
-
-]
+	}*/);
+}
