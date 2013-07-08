@@ -16,17 +16,11 @@ if File.file?(cfg_file_name)
   $rho_root = File.expand_path($rho_root) if $rho_root
   $rhoconnect_root = config["rhoconnect"]
   $rhoconnect_root = File.expand_path($rhoconnect_root) if $rhoconnect_root
-
-  # $rhoelements_root = config["rhoelements"]
-  # $rhoelements_root = File.expand_path($rhoelements_root) if $rhoelements_root
 end
-unless $rho_root
-  $rho_root = `get-rhodes-info --rhodes-path`.chomp
-end
+$rho_root = `get-rhodes-info --rhodes-path`.chomp unless $rho_root
 puts "$rho_root is #{$rho_root}"
 
 require File.join($rho_root, 'lib', 'build', 'jake.rb')
-require_relative './simple_rhogcm'
 require_relative './rhoconnect_helper'
 
 RhoconnectHelper.set_enable_redis(false)
@@ -97,20 +91,24 @@ device_list.each do |dev|
 
   describe 'GCM push spec' do
     before(:all) do
-      # TODO:
+      RhoconnectHelper.stop_rhoconnect_stack
       $tmp_path = File.join(File.dirname(__FILE__),'tmp')
       FileUtils.mkdir_p File.expand_path($tmp_path) unless File.exists?($tmp_path)
       $server_path = File.expand_path(File.join($tmp_path,'testapp'))
       FileUtils.rm_r $server_path if File.exists?($server_path)
+
       RhoconnectHelper.set_rhoconnect_bin "#{$rhoconnect_root}/bin/rhoconnect"
       puts "Generating rhoconnect app ..."
       test_appname = "testapp"
       res = RhoconnectHelper.generate_app($tmp_path, test_appname)
       puts "bundle install"
+      # Copy setting.yml file with :gcm_api_key to 'testapp/settings' directory
+      FileUtils.cp('settings.yml', File.join($server_path, 'settings'))
       Kernel.system("bundle", "install", :chdir => $server_path)
       RhoconnectHelper.set_rc_out(File.open( File.join($app_path, "rhoconnect.log" ), "w"),
           File.open( File.join($app_path, "rhoconnect_err.log" ), "w"))
       RhoconnectHelper.start_rhoconnect_stack($server_path, true)
+      @api_token = RhoconnectHelper.api_post('system/login', { :login => 'rhoadmin', :password => '' })
 
       FileUtils.chdir File.join($spec_path, 'rhoconnect_push_client')
       if $deviceId
@@ -173,7 +171,6 @@ device_list.each do |dev|
       val = nil
       $mutex.synchronize do
         $signal.wait($mutex, 30) # wait timeout 30 secs.
-        # puts "$requests: #{$requests.inspect}" if $requests.count == 2
         $requests.count.should == 1
         val = $requests.first.query[name]
         $requests.clear
@@ -193,15 +190,36 @@ device_list.each do |dev|
       $device_pin = expect_request('device_id')
       $device_pin.should_not be_nil
       $device_pin.should_not == ''
+
+      res = ''
+      5.times do |i|
+        res = RhoconnectHelper.api_get('users/pushclient/clients', @api_token)
+        break unless res.body.empty?
+        sleep 1
+      end
+      client_id = JSON.parse(res.body)[0]
+      # puts "-- clients: #{client_id}"
+      res.code.should == 200
+      client_id.should_not be_nil
+
+      device_push_type = ''
+      5.times do |i|
+        res = RhoconnectHelper.api_get("clients/#{client_id}", @api_token)
+        body = JSON.parse(res.body)
+        device_push_type = body[2]['value']
+        break  if device_push_type
+        sleep 1
+      end
+      res.code.should == 200
+      device_push_type.should == 'gcm'
     end
 
     # 3
     it 'should process push message at foreground' do
       puts 'Sending push message...'
-
       message = 'magic1'
-      params = { 'device_pin'=>$device_pin, 'alert'=>message }
-      RhoPush::Gcm.send_ping_to_device($gcm_api_key, params)
+      params = { 'device_pin' => $device_pin, 'user_id' =>['pushclient'], 'message' => message }
+      RhoconnectHelper.api_post('users/ping', params, @api_token)
 
       puts 'Waiting message with push content...'
       expect_request('alert').should == message
@@ -214,8 +232,8 @@ device_list.each do |dev|
       5.times do |i|
         message = "magic#{i}"
         alerts[message] = true
-        params = { 'device_pin'=>$device_pin, 'alert'=>message}
-        RhoPush::Gcm.send_ping_to_device($gcm_api_key, params)
+        params = { 'device_pin' => $device_pin, 'user_id' =>['pushclient'], 'message' => message }
+        RhoconnectHelper.api_post('users/ping', params, @api_token)
         sleep 1
       end
       puts 'Waiting 5 messages with push content...'
@@ -241,11 +259,9 @@ device_list.each do |dev|
     # 5
     it 'should process push message with exit comand' do
       puts 'Sending push message with exit command...'
-      # message = 'magic2'
-      # params = { 'device_pin'=>$device_pin, 'alert'=>message, 'command'=>'exit' }
       message = 'exit'
-      params = { 'device_pin'=>$device_pin, 'alert'=>message }
-      RhoPush::Gcm.send_ping_to_device($gcm_api_key, params)
+      params = { 'device_pin' => $device_pin, 'user_id' =>['pushclient'], 'message' => message }
+      RhoconnectHelper.api_post('users/ping', params, @api_token)
 
       puts 'Waiting message with push content...'
       expect_request('alert').should == message
@@ -261,8 +277,8 @@ device_list.each do |dev|
       puts 'Sending push message to start app...'
 
       message = 'magic3'
-      params = { 'device_pin'=>$device_pin, 'alert'=>message}
-      RhoPush::Gcm.send_ping_to_device($gcm_api_key, params)
+      params = { 'device_pin' => $device_pin, 'user_id' =>['pushclient'], 'message' => message }
+      RhoconnectHelper.api_post('users/ping', params, @api_token)
 
       puts 'Waiting message with push content...'
       expect_request('alert').should == message
@@ -276,8 +292,8 @@ device_list.each do |dev|
     # 7
     it 'should logout and login back and process ping message' do
       message = 'logout'
-      params = { 'device_pin'=>$device_pin, 'alert'=>message}
-      RhoPush::Gcm.send_ping_to_device($gcm_api_key, params)
+      params = { 'device_pin' => $device_pin, 'user_id' =>['pushclient'], 'message' => message }
+      RhoconnectHelper.api_post('users/ping', params, @api_token)
       expect_request('alert').should == message
 
       system("adb #{$deviceOpts} shell am start -a android.intent.action.MAIN -n com.rhomobile.gcm_push_client/com.rhomobile.rhodes.RhodesActivity").should == true
@@ -288,10 +304,11 @@ device_list.each do |dev|
       $device_pin.should_not == ''
 
       message = 'welcome'
-      params = { 'device_pin'=>$device_pin, 'alert'=>message}
-      RhoPush::Gcm.send_ping_to_device($gcm_api_key, params)
+      params = { 'device_pin' => $device_pin, 'user_id' =>['pushclient'], 'message' => message }
+      RhoconnectHelper.api_post('users/ping', params, @api_token)
       expect_request('alert').should == message
     end
+
   end
 end
 
