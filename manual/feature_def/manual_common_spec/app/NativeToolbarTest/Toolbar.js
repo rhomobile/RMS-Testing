@@ -9,10 +9,20 @@ function toolCreate() {
         {label: 'Options', action: 'options'},
         {label: 'Exit', action: 'exit'}
     ];
-    var toolProperties = {maskColor: '', viewHeight: 100};
+    var toolProperties = {backgroundColor: 0x00804F,maskColor: 0xFF0000, viewHeight: 100};
     Rho.NativeToolbar.create(toolElements, toolProperties);
 }
 
+function toolMask() {
+    var toolElements = new Array();
+    toolElements = [
+        {label: 'back', action: 'back'},
+        {label: 'Home', action: 'Home'},
+        {action: '/app/NativeToolbarTest/Page1.html', label: "[BUTTON]",icon: '/app/NativeToolbarTest/redi.png'}
+    ];
+    var toolProperties = {backgroundColor: 0x00804F,maskColor: 0xFF0000, viewHeight: 100};
+    Rho.NativeToolbar.create(toolElements, toolProperties);
+}
 
 function toolIconLabelMask() {
     var toolElements = new Array();
