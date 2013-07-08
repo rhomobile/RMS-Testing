@@ -20,8 +20,8 @@ var arr_sig_property = [
 	propertyName	:	"bgColor",
 	sigTypes		:	"All",
 	OSTypes			:	"All",
-	propertyValue	:	"#000000",
-	expectedResult	:	"#000000"
+	propertyValue	:	"#00000000",
+	expectedResult	:	"#00000000"
 },
 {
 	testName		:	"VT299-1004 | Set bgColor :#FFFFFF| #FFFFFF",
@@ -51,7 +51,7 @@ var arr_sig_property = [
 	testName		:	"VT299-1007 | Set compressionFormat :jpg| jpg",
 	propertyName	:	"compressionFormat",
 	sigTypes		:	"All",
-	OSTypes			:	"All",
+	OSTypes			:	"ANDROID APPLE",
 	propertyValue	:	"jpg",
 	expectedResult	:	"jpg"
 },
@@ -59,7 +59,7 @@ var arr_sig_property = [
 	testName		:	"VT299-1008 | Set compressionFormat :png| png",
 	propertyName	:	"compressionFormat",
 	sigTypes		:	"All",
-	OSTypes			:	"All",
+	OSTypes			:	"ANDROID APPLE",
 	propertyValue	:	"png",
 	expectedResult	:	"png"
 },
@@ -351,7 +351,7 @@ var getApplicablePropertiesShow = function (){
 	}
 
 	return finalSIGObj;
-}
+};
 
 var getApplicablePropertiesFullScreen = function (){
 	
@@ -370,6 +370,6 @@ var getApplicablePropertiesFullScreen = function (){
 	}
 
 	return finalSIGObjtake;
-}
+};
 
 var ENABLE_TIMEOUT_VALUE = (Rho.System.platform == "ANDROID" ? 1000 : 1000);
