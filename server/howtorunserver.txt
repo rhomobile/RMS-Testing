@@ -1,0 +1,14 @@
+If computer connected to several networks, it has several IP addresses in different networks.
+
+When Webrick server starts it looks for IP address in external network, which may be different from IP address in WIFI network (with connected device)
+
+To fix this issue server.rb now understand IP address as a parameter. For Example:
+ruby server.rb 169.254.2.2
+
+To find out correct IP address run ipconfig command and see what network connection you have.
+When start server with WIFI or Network adapter IP and verify it on Device: run IE, and navigate to:
+http://169.254.2.2:8081/test_methods
+https://169.254.2.2:8082/test_methods
+https://169.254.2.2:8083/test_methods
+
+If they works, build application and run tests.
