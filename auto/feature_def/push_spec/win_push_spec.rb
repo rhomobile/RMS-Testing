@@ -66,7 +66,7 @@ describe 'Windows Mobile push spec' do
       res.status = 200
       $mutex.synchronize do
         $requests << req
-	puts "req is #{req}"
+	    puts "req is #{req}"
         $signal.signal
       end
     end
@@ -85,7 +85,10 @@ describe 'Windows Mobile push spec' do
     # `adb emu kill`
 
     puts "Sending exit and logout message to the app"
-    RhoconnectHelper.api_post('users/ping', { :user_id => ['pushclient'], :message => 'exit_and_logout' }, @api_token)
+    RhoconnectHelper.api_post('users/ping', { :user_id => ['pushclient'], :badge => 'exit_spec', :message => 'exit' }, @api_token)
+    # delete user
+    #RhoconnectHelper.api_delete('users/pushclient', @api_token)
+    #$server.shutdown
 
     # FIXME:
     # TEST_PKGS.each do |pkg|
@@ -132,8 +135,8 @@ describe 'Windows Mobile push spec' do
     sleep 5
     puts 'Sending push message...'
 
-    message = 'magic1'
-    params = { :user_id=>['pushclient'], :message=>message }
+    message = 'sample_magic'
+    params = { :user_id=>['pushclient'], :badge => message, :message=>message }
     RhoconnectHelper.api_post('users/ping',params,@api_token)
 
     puts 'Waiting message with push content...'
@@ -142,100 +145,69 @@ describe 'Windows Mobile push spec' do
     sleep 3
   end
 
-  # it 'should proceed push message with exit comand' do
-  #   puts 'Sending push message with exit command...'
+  it 'should proceed push message with exit comand' do
+    puts 'Sending push message with exit command...'
 
-  #   message = 'exit'
-  #   params = { :user_id=>['pushclient'], :message=>message }
-  #   RhoconnectHelper.api_post('users/ping',params,@api_token)
+    message = 'exit'
+    params = { :user_id=>['pushclient'], :badge => message, :message=>message }
+    RhoconnectHelper.api_post('users/ping',params,@api_token)
 
-  #   puts 'Waiting message with push content...'
-  #   expect_request('alert').should == message
+    puts 'Waiting message with push content...'
+    expect_request('alert').should == message
 
-  #   sleep 5
+    # wait until application exits
+    sleep 10
 
   #   output = Jake.run2('adb', ['-e', 'shell', 'ps'], {:hide_output=>true})
   #   (output =~ /rho_push_client/).should be_nil
-  # end
+  end
 
-  #it 'should process push message' do
-  #	puts 'Sending push message with greeting ...'
-  #	message = 'Hello'
-  #	params = { :user_id=>['pushclient'], :message => message}
-  #	RhoconnectHelper.api_post('users/ping',params,@api_token)
+  it 'should process push message and wake up the app' do
+  	puts 'Sending push message with greeting ...'
+  	message = 'Hello'
+  	params = { :user_id=>['pushclient'], :badge => message, :message => message}
+  	RhoconnectHelper.api_post('users/ping',params,@api_token)
 
-  #	puts 'Waiting ping message with push content ...'
-  #	expect_request('alert').should == message
+  	puts 'Waiting ping message with push content ...'
+  	expect_request('alert').should == message
 
-  #	sleep 5
+  	sleep 5
 
   #   output = Jake.run2('adb', ['-e', 'shell', 'ps'], {:hide_output => true})
   #  (output =~ /rho_push_client/).should_not be_nil
-  #end
-
-  it 'should process sequence of push messages' do
-  	puts 'Sending 5 push messages...'
-
-  	alerts = {}
-  	5.times do |i|
-  		message = "magic#{i}"
-  		alerts[message] = true
-  		params = { :user_id=>['pushclient'], :message => message}
-  		RhoconnectHelper.api_post('users/ping',params,@api_token)
-  		sleep 2
-  	end
-
-  	puts 'Waiting 5 messages with push content...'
-
-  	5.times do |i|
-  		$mutex.synchronize do
-  			break if $requests.count == 5
-  			$signal.wait($mutex, 60)
-  		end
-  		puts "Message count: #{$requests.count}"
-  	end
-
-  	$requests.count.should == 5
-  	puts " requests are #{$requests}"
-  	$mutex.synchronize do
-  		puts alerts.inspect
-  		5.times do |i|
-  			message = $requests[i].query['alert']
-			
-  			message.should_not be_nil
-  			puts "message: #{message}"
-  			alerts[message].should be_true
-  			alerts[message] = false
-  			$requests.delete_at 0
-  		end
-  		$requests.clear
-  	end
   end
 
+  #it 'should process sequence of push messages' do
+  #    puts 'Sending 5 push messages...'
 
-  # TODO:
-  # it 'should start processing sequence of push messaxges' do
-  #   puts 'Sending push message with exit command...'
-
-  #   message = 'exit'
-  #   params = { :user_id=>['pushclient'], :message=>message }
-  #   RhoconnectHelper.api_post('users/ping', params, @api_token)
-
-  #   puts 'Waiting message with push content...'
-  #   $mutex.synchronize do
-  #     $signal.wait($mutex, 60)
-  #     $requests.count.should == 1
-  #     alert = $requests.first.query['alert']
-  #     alert.should_not be_nil
-  #     alert.should == message
-  #     $requests.clear
-  #   end
-
-  #   sleep 5
-  #   output = Jake.run2('adb', ['-e', 'shell', 'ps'], {:hide_output=>true})
-  #   puts output
-
-  #   (output =~ /rho_push_client/).should be_nil
-  # end
-
+  #    alerts = {}
+  #    5.times do |i|
+  #      message = "magic#{i}"
+  #      alerts[message] = true
+  #      params = { :user_id=>['pushclient'], :badge => message, :message => message}
+  #      RhoconnectHelper.api_post('users/ping',params,@api_token)
+  #      sleep 2
+  #    end
+  #    puts 'Waiting 5 messages with push content...'
+  #    5.times do |i|
+  #      $mutex.synchronize do
+  #        break if $requests.count == 5
+  #        $signal.wait($mutex, 30)
+  #      end
+  #      puts "Message count: #{$requests.count}"
+  #    end
+  #    $requests.count.should == 5
+  #    $mutex.synchronize do
+  #      puts alerts.inspect
+  #      5.times do |i|
+  #        message = $requests[i].query['alert']
+  #        message.should_not be_nil
+  #        puts "message: #{message}"
+  #        alerts[message].should be_true
+  #        alerts[message] = false
+          #$requests.delete_at 0
+  #      end
+  #      $requests.clear
+  #    end
+  #end
 end

@@ -149,6 +149,12 @@ module RhoconnectHelper
 		RestClient.get("#{@@host}:#{@@port}/rc/v1/#{request}",params.to_json, headers)
 	end
 
+	def self.api_delete(request,api_token=nil)
+		headers = {}
+		headers['X-RhoConnect-API-TOKEN'] = api_token if api_token
+		RestClient.delete("#{@@host}:#{@@port}/rc/v1/#{request}",headers)
+	end
+
 	def self.reset_server
 		begin
 			platform = platform
