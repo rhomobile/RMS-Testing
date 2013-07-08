@@ -134,8 +134,8 @@ var rsm_set_get_property = [
 	propertyName	:	"rsmBluetoothPinCodeType",
 	scannerTypes	:	"RSM Bluetooth",
 	OSTypes			:	"WINDOWS",
-	propertyValue	:	"UseStored",
-	expectedResult	:	"UseStored"
+	propertyValue	:	"useStored",
+	expectedResult	:	"useStored"
 },
 {
 	testName		:	"VT400-1018 | Set rsmBluetoothPinCodeType:12345| 12345",
@@ -150,8 +150,8 @@ var rsm_set_get_property = [
 	propertyName	:	"rsmBluetoothPinCodeType",
 	scannerTypes	:	"RSM Bluetooth",
 	OSTypes			:	"WINDOWS",
-	propertyValue	:	"PromptUser",
-	expectedResult	:	"PromptUser"
+	propertyValue	:	"promptUser",
+	expectedResult	:	"promptUser"
 },
 {
 	testName		:	"VT400-1020 | Get  rsmBluetoothPinCodeType| 12345",
@@ -206,24 +206,24 @@ var rsm_set_get_property = [
 	propertyName	:	"rsmBluetoothHidAutoReconnect",
 	scannerTypes	:	"RSM Bluetooth",
 	OSTypes			:	"WINDOWS",
-	propertyValue	:	"NeverReconnect",
-	expectedResult	:	"NeverReconnect"
+	propertyValue	:	"neverReconnect",
+	expectedResult	:	"neverReconnect"
 },
 {
 	testName		:	"VT400-1027 | Set rsmBluetoothHidAutoReconnect:ReconnectOnData | ReconnectOnData",
 	propertyName	:	"rsmBluetoothHidAutoReconnect",
 	scannerTypes	:	"RSM Bluetooth",
 	OSTypes			:	"WINDOWS",
-	propertyValue	:	"ReconnectOnData",
-	expectedResult	:	"ReconnectOnData"
+	propertyValue	:	"reconnectOnData",
+	expectedResult	:	"reconnectOnData"
 },
 {
 	testName		:	"VT400-1028 | Set rsmBluetoothHidAutoReconnect:ReconnectImmediately | ReconnectImmediately",
 	propertyName	:	"rsmBluetoothHidAutoReconnect",
 	scannerTypes	:	"RSM Bluetooth",
 	OSTypes			:	"WINDOWS",
-	propertyValue	:	"ReconnectImmediately",
-	expectedResult	:	"ReconnectImmediately"
+	propertyValue	:	"reconnectImmediately",
+	expectedResult	:	"reconnectImmediately"
 },
 {
 	testName		:	"VT400-1029 | Set rsmBluetoothFriendlyName:MyBTScanner | MyBTScanner",
@@ -238,16 +238,16 @@ var rsm_set_get_property = [
 	propertyName	:	"rsmBluetoothInquiryMode",
 	scannerTypes	:	"RSM Bluetooth",
 	OSTypes			:	"WINDOWS",
-	propertyValue	:	"General",
-	expectedResult	:	"General"
+	propertyValue	:	"general",
+	expectedResult	:	"general"
 },
 {
 	testName		:	"VT400-1031 | Set rsmBluetoothInquiryMode:Limited | Limited",
 	propertyName	:	"rsmBluetoothInquiryMode",
 	scannerTypes	:	"RSM Bluetooth",
 	OSTypes			:	"WINDOWS",
-	propertyValue	:	"Limited",
-	expectedResult	:	"Limited"
+	propertyValue	:	"limited",
+	expectedResult	:	"limited"
 },
 {
 	testName		:	"VT400-1032 | Set rsmBluetoothAutoReconnect: none| none",
@@ -358,16 +358,16 @@ var rsm_set_get_property = [
 	propertyName	:	"rsmScanLineWidth",
 	scannerTypes	:	"RSM Bluetooth",
 	OSTypes			:	"WINDOWS",
-	propertyValue	:	"Wide",
-	expectedResult	:	"Wide"
+	propertyValue	:	"wide",
+	expectedResult	:	"wide"
 },
 {
 	testName		:	"VT400-1046 | Set rsmScanLineWidth: Narrow| Narrow",
 	propertyName	:	"rsmScanLineWidth",
 	scannerTypes	:	"RSM Bluetooth",
 	OSTypes			:	"WINDOWS",
-	propertyValue	:	"Narrow",
-	expectedResult	:	"Narrow"
+	propertyValue	:	"narrow",
+	expectedResult	:	"narrow"
 },
 {
 	testName		:	"VT400-1047 | Set rsmGoodScansDelay: 0 | 0",
@@ -502,24 +502,24 @@ var rsm_set_get_property = [
 	propertyName	:	"rsmProximityDistance",
 	scannerTypes	:	"RSM Bluetooth",
 	OSTypes			:	"WINDOWS",
-	propertyValue	:	"Short",
-	expectedResult	:	"Short"
+	propertyValue	:	"short",
+	expectedResult	:	"short"
 },
 {
 	testName		:	"VT400-1064 | Set rsmProximityDistance: Medium| Medium",
 	propertyName	:	"rsmProximityDistance",
 	scannerTypes	:	"RSM Bluetooth",
 	OSTypes			:	"WINDOWS",
-	propertyValue	:	"Medium",
-	expectedResult	:	"Medium"
+	propertyValue	:	"medium",
+	expectedResult	:	"medium"
 },
 {
 	testName		:	"VT400-1065 | Set rsmProximityDistance: Long| Long",
 	propertyName	:	"rsmProximityDistance",
 	scannerTypes	:	"RSM Bluetooth",
 	OSTypes			:	"WINDOWS",
-	propertyValue	:	"Long",
-	expectedResult	:	"Long"
+	propertyValue	:	"long",
+	expectedResult	:	"long"
 },
 {
 	testName		:	"VT400-1066 | Set rsmPagingEnable: true| true",

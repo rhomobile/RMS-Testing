@@ -166,7 +166,7 @@ describe("RSM JS API", function() {
 					it("VT400-2001 | call getProperties() with sync callback and hash |" + scnid, function() {
 
 						runs(function() {
-							enumObject.setProperties({'rsmBluetoothEncryption':'true','rsmBluetoothPinCode':'12345','rsmBluetoothPinCodeType':'UseStored'});
+							enumObject.setProperties({'rsmBluetoothEncryption':'true','rsmBluetoothPinCode':'12345','rsmBluetoothPinCodeType':'useStored'});
 							enumObject.getProperties(['rsmBluetoothEncryption','rsmBluetoothPinCode','rsmBluetoothPinCodeType'],callbackgetproperties);
 						});
 
@@ -177,7 +177,7 @@ describe("RSM JS API", function() {
 						runs(function() {							
 							expect(getpropertiesdata).toContain('true');
 							expect(getpropertiesdata).toContain('12345');
-							expect(getpropertiesdata).toContain('UseStored');	
+							expect(getpropertiesdata).toContain('useStored');	
 						});
 					});
 
@@ -185,7 +185,7 @@ describe("RSM JS API", function() {
 					it("VT400-2002 | call getProperties() with anonymous callback and hash |" + scnid, function() {
 
 						runs(function() {    
-							enumObject.setProperties({'rsmBluetoothEncryption':'true','rsmBluetoothPinCode':'12345','rsmBluetoothPinCodeType':'UseStored'});
+							enumObject.setProperties({'rsmBluetoothEncryption':'true','rsmBluetoothPinCode':'12345','rsmBluetoothPinCodeType':'useStored'});
 							enumObject.getProperties(['rsmBluetoothEncryption','rsmBluetoothPinCode','rsmBluetoothPinCodeType'],function(data){getpropertiesdata = JSON.stringify(data);callbackstatus = true;});
 						});
 
@@ -196,19 +196,19 @@ describe("RSM JS API", function() {
 						runs(function() {								
 							expect(getpropertiesdata).toContain('true');
 							expect(getpropertiesdata).toContain('12345');
-							expect(getpropertiesdata).toContain('UseStored');	
+							expect(getpropertiesdata).toContain('useStored');	
 						});							
 					});
 
 					it("VT400-2000 | call getProperties() without callback |" + scnid, function() {
 
 							//enumObject.clearAllProperties();
-							enumObject.setProperties({'rsmBluetoothEncryption':'true','rsmBluetoothPinCode':'12345','rsmBluetoothPinCodeType':'UseStored'});
+							enumObject.setProperties({'rsmBluetoothEncryption':'true','rsmBluetoothPinCode':'12345','rsmBluetoothPinCodeType':'useStored'});
 							var data = enumObject.getProperties(['rsmBluetoothEncryption','rsmBluetoothPinCode','rsmBluetoothPinCodeType']);
 							getpropertiesdata = JSON.stringify(data);
 							expect(getpropertiesdata).toContain('true');
 							expect(getpropertiesdata).toContain('12345');
-							expect(getpropertiesdata).toContain('UseStored');								
+							expect(getpropertiesdata).toContain('useStored');								
 					});
 
 
