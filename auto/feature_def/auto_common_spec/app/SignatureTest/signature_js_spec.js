@@ -218,7 +218,8 @@ describe("Signature JS API Test", function() {
 						return callbackstatus;
 					});
 
-					runs(function() {							
+					runs(function() {
+						Rho.Signature.hide();							
 						expect(getpropertiesdata).toContain('#FF0000');
 						expect(getpropertiesdata).toContain('true');
 						expect(getpropertiesdata).toContain('2');
@@ -236,7 +237,8 @@ describe("Signature JS API Test", function() {
 						return callbackstatus;
 					});
 
-					runs(function() {							
+					runs(function() {
+						Rho.Signature.hide();							
 						expect(getpropertiesdata).toContain('#FF0000');
 						expect(getpropertiesdata).toContain('image');
 						expect(getpropertiesdata).toContain('1');
@@ -254,7 +256,8 @@ describe("Signature JS API Test", function() {
 						return callbackstatus;
 					});
 
-					runs(function() {							
+					runs(function() {
+						Rho.Signature.hide();							
 						expect(getpropertiesdata).toContain('#FF0000');
 						expect(getpropertiesdata).toContain(false);
 						expect(getpropertiesdata).toContain(1);
@@ -272,12 +275,47 @@ describe("Signature JS API Test", function() {
 						return callbackstatus;
 					});
 
-					runs(function() {							
+					runs(function() {
+						Rho.Signature.hide();
 						expect(getpropertiesdata).toContain('#FF0000');
 						expect(getpropertiesdata).toContain('image');
 						expect(getpropertiesdata).toContain(3);
 					});
 				});
+
+				it("VT299-2010 | call takeFullScreen() to check default values of all property |", function() {
+
+					runs(function() {
+					    Rho.Signature.takeFullScreen({},sigCallback);
+						expect(Rho.Signature.bgColor).toEqual('#FFFFFFFF');
+						expect(Rho.Signature.compressionFormat).toEqual('png');						
+						expect(Rho.Signature.fileName).toEqual('signature');
+						expect(Rho.Signature.outputFormat).toEqual('image');
+						expect(Rho.Signature.penColor).toEqual('#FF000000');
+						expect(Rho.Signature.penWidth).toEqual(3);
+						Rho.Signature.hide();
+					});
+				});
+
+				it("VT299-2011 | call show() to check default values of all property |", function() {
+
+					runs(function() {
+					    Rho.Signature.show(sigCallback);
+						expect(Rho.Signature.bgColor).toEqual('#FFFFFFFF');
+						expect(Rho.Signature.compressionFormat).toEqual('png');						
+						expect(Rho.Signature.fileName).toEqual('signature');
+						expect(Rho.Signature.outputFormat).toEqual('image');
+						expect(Rho.Signature.penColor).toEqual('#FF000000');
+						expect(Rho.Signature.penWidth).toEqual(3);
+						expect(Rho.Signature.border).toEqual(true);
+						expect(Rho.Signature.height).toEqual(150);
+						expect(Rho.Signature.left).toEqual(15);	
+						expect(Rho.Signature.top).toEqual(15);
+						expect(Rho.Signature.width).toEqual(15);
+						Rho.Signature.hide();
+					});
+				});
+
 			});
 
 			describe("Signature property set using show()", function() {
