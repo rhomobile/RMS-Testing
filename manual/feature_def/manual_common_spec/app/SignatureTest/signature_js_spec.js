@@ -44,13 +44,13 @@ describe("Signature Manual Test", function() {
 			//Rho.Signature.clearAllProperties();
 		});
 
-			it("VT299-001 | Call takeFullScreen with callback as function and retruned status OK |", function() {
+			it("VT299-001 | Call takeFullScreen with callback as function and returned status OK |", function() {
 
 				runs(function()
 				{
-					setObjective("VT299-001 |Call takeFullScreen with callback as function and retruned status OK|");
+					setObjective("VT299-001 |Call takeFullScreen with callback as function and returned status OK|");
 					setInstruction("Wait for 10 sec for Fullscreen Signature box to comeup and press capture after drawing any signature on signature area");
-					setExpected("The retruned status should be OK and URI of the captured signature image should be returned");
+					setExpected("The returned status should be OK and URI of the captured signature image should be returned");
 					setTimeout(function() {
 						ReadFlag = true;
 					}, ENABLE9K);
@@ -89,13 +89,13 @@ describe("Signature Manual Test", function() {
 				});
 			});
 
-			it("VT299-002 | Call takeFullScreen with callback as function and retruned status cancel |", function() {
+			it("VT299-002 | Call takeFullScreen with callback as function and returned status cancel |", function() {
 
 				runs(function()
 				{
-					setObjective("VT299-001 |Call takeFullScreen with callback as function and retruned status cancel |");
+					setObjective("VT299-001 |Call takeFullScreen with callback as function and returned status cancel |");
 					setInstruction("Wait for 10 sec for Fullscreen Signature box to comeup and press cancel after drawing any signature on signature area");
-					setExpected("The retruned status should be cancel and no URI of the signature image should be returned");
+					setExpected("The returned status should be cancel and no URI of the signature image should be returned");
 					setTimeout(function() {
 						ReadFlag = true;
 					}, ENABLE9K);
@@ -140,7 +140,7 @@ describe("Signature Manual Test", function() {
 				{
 					setObjective("VT299-003 |Call takeFullScreen with callback as anonymous function|");
 					setInstruction("Wait for 10 sec for Fullscreen Signature box to comeup and press capture after drawing any signature on signature area");
-					setExpected("The retruned status should be OK and URI of the captured signature image should be returned");
+					setExpected("The returned status should be OK and URI of the captured signature image should be returned");
 					setTimeout(function() {
 						ReadFlag = true;
 					}, ENABLE9K);
@@ -269,13 +269,13 @@ describe("Signature Manual Test", function() {
 				});
 			});
 
-			it("VT299-008 | Call capture with callback as function and retruned status OK |", function() {
+			it("VT299-008 | Call capture with callback as function and returned status OK |", function() {
 
 				runs(function()
 				{
-					setObjective("VT299-008 |Call capture with callback as function and retruned status OK|");
+					setObjective("VT299-008 |Call capture with callback as function and returned status OK|");
 					setInstruction("Wait for 10 sec for Signature box(NonFullScreen) to comeup and draw any signature on signature area and wait for");
-					setExpected("The retruned status should be OK and URI of the captured signature image should be returned");
+					setExpected("The returned status should be OK and URI of the captured signature image should be returned");
 					setTimeout(function() {
 						ReadFlag = true;
 					}, ENABLE9K);
@@ -321,7 +321,7 @@ describe("Signature Manual Test", function() {
 				{
 					setObjective("VT299-010 |Call capture with callback as anonymous function|");
 					setInstruction("Wait for 10 sec for Signature box(NonFullScreen) to comeup and draw any signature on signature area and wait for");
-					setExpected("The retruned status should be OK and URI of the captured signature image should be returned");
+					setExpected("The returned status should be OK and URI of the captured signature image should be returned");
 					setTimeout(function() {
 						ReadFlag = true;
 					}, ENABLE9K);
@@ -367,7 +367,7 @@ describe("Signature Manual Test", function() {
 				{
 					setObjective("VT299-011 |Call capture with callback as anonymous function|");
 					setInstruction("Wait for 10 sec for Signature box(NonFullScreen) to comeup and draw any signature on signature area and wait for claer to call");
-					setExpected("The signature area should be clear after clear has been called and a clear signature image will be saved at retruned URI");
+					setExpected("The signature area should be clear after clear has been called and a clear signature image will be saved at returned URI");
 					setTimeout(function() {
 						ReadFlag = true;
 					}, ENABLE9K);
@@ -428,7 +428,7 @@ describe("Signature Manual Test", function() {
 					}, 'wait to callback to fire or timeout', 10000);
 
 					runs(function() {
-					Rho.Signature.takeFullScreen({'bgColor':'#FF0000FF','penColor':'#FF00FF'},callbacktake);
+					Rho.Signature.takeFullScreen({'bgColor':'#FF0000FF','penColor':'#FFFF00'},callbacktake);
 					setTimeout(function() {
 						timeoutFlag = true;
 					}, ENABLE9K);
@@ -707,8 +707,8 @@ describe("Signature Manual Test", function() {
 					}, 'wait to callback to fire or timeout', 10000);
 
 					runs(function() {
-					Rho.Signature.bgColor = '#FFFFFF';
-					Rho.Signature.penColor = '#000000';
+					Rho.Signature.bgColor = '#000000';
+					Rho.Signature.penColor = '#FFFFFF';
 					Rho.Signature.penWidth = 3;
 					Rho.Signature.takeFullScreen({compressionFormat:CONST_JPG,fileName:'TC18',outputFormat:'dataUri'},callbackUri);
 					setTimeout(function() {
@@ -882,7 +882,7 @@ describe("Signature Manual Test", function() {
 				{
 					setObjective("VT299-022 |Call show with left as 10, top as 50, width as 180 and height as 120,  border as false and outputFormat as dataURI|");
 					setInstruction("Wait for 10 sec for Signature box(NonFullScreen) to comeup and wait after drawing, check the image at returned URI");
-					setExpected("The signature area should be nonfullscreen area without border of specified size  left as 10, top as 50, width as 180 and height as 120 with penline width as 4(more thick than prev test), signature should be rendered in page as callback retruns the dataURI");
+					setExpected("The signature area should be nonfullscreen area without border of specified size  left as 10, top as 50, width as 180 and height as 120 with penline width as 4(more thick than prev test), signature should be rendered in page as callback returns the dataURI");
 					setTimeout(function() {
 						ReadFlag = true;
 					}, ENABLE9K);
@@ -931,7 +931,7 @@ describe("Signature Manual Test", function() {
 				{
 					setObjective("VT299-023 |Call show after setting all properties and outputFormat as dataURI|");
 					setInstruction("Wait for 10 sec for Signature box(NonFullScreen) to comeup and wait after drawing, check the image at returned URI");
-					setExpected("The signature area should be nonfullscreen area without border of specified size  left as 15, top as 60, width as 200 and height as 150 with penline width as 5(thickest than prev test), signature should be rendered in page as callback retruns the dataURI");
+					setExpected("The signature area should be nonfullscreen area without border of specified size  left as 15, top as 60, width as 200 and height as 150 with penline width as 5(thickest than prev test), signature should be rendered in page as callback returns the dataURI");
 					setTimeout(function() {
 						ReadFlag = true;
 					}, ENABLE9K);
@@ -987,7 +987,7 @@ describe("Signature Manual Test", function() {
 				{
 					setObjective("VT299-024 |Call takeFullScreen with left,top,width,height and border|");
 					setInstruction("Wait for 10 sec for Signature box(FullScreen) to comeup and press capture after drawing, check the image at returned URI");
-					setExpected("The signature area should be fullscreen area without considering the area co-ordimates and border,signature should save at retruned URI");
+					setExpected("The signature area should be fullscreen area without considering the area co-ordimates and border,signature should save at returned URI");
 					setTimeout(function() {
 						ReadFlag = true;
 					}, ENABLE9K);
