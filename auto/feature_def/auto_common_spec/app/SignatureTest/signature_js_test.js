@@ -67,7 +67,7 @@ var arr_sig_property = [
 	testName		:	"VT299-1009 | Set compressionFormat :bmp| bmp",
 	propertyName	:	"compressionFormat",
 	sigTypes		:	"All",
-	OSTypes			:	"WINDOWS APPLE",
+	OSTypes			:	"All",
 	propertyValue	:	"bmp",
 	expectedResult	:	"bmp"
 },
