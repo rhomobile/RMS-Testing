@@ -150,13 +150,13 @@ device_list.each do |dev|
     end
 
     after(:all) do
-      RhoconnectHelper.stop_rhoconnect_stack
-      FileUtils.rm_r $server_path if File.exists? $server_path
+      # RhoconnectHelper.stop_rhoconnect_stack
+      # FileUtils.rm_r $server_path if File.exists? $server_path
 
-      TEST_PKGS.each do |pkg|
-        puts "Uninstalling package #{pkg} ..."
-        system "adb #{$deviceOpts} uninstall #{pkg}"
-      end
+      # TEST_PKGS.each do |pkg|
+      #   puts "Uninstalling package #{pkg} ..."
+      #   system "adb #{$deviceOpts} uninstall #{pkg}"
+      # end
 
       puts "Stopping local server"
       $server.shutdown
@@ -190,10 +190,10 @@ device_list.each do |dev|
       $device_pin.should_not == ''
 
       res = ''
-      5.times do |i|
+      10.times do |i|
         res = RhoconnectHelper.api_get('users/pushclient/clients', @api_token)
         break unless res.body.empty?
-        sleep 1
+        sleep 3
       end
       client_id = JSON.parse(res.body)[0]
       # puts "-- clients: #{client_id}"
@@ -201,12 +201,12 @@ device_list.each do |dev|
       client_id.should_not be_nil
 
       device_push_type = ''
-      5.times do |i|
+      20.times do |i|
         res = RhoconnectHelper.api_get("clients/#{client_id}", @api_token)
         body = JSON.parse(res.body)
-        device_push_type = body[2]['value']
+        body.each { |h| device_push_type = h['value'] if h['name'] == 'device_push_type' }
         break  if device_push_type
-        sleep 1
+        sleep 3
       end
       res.code.should == 200
       device_push_type.should == 'gcm'
