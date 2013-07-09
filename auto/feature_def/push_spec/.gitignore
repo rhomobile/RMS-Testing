@@ -15,3 +15,5 @@ rhoconnect_push_client/app/sync_server.rb
 store-rhodes-client/bin
 store-rhodes-client/rhosimulator
 store-rhodes-client/rholog.txt
+
+android_push_client/
