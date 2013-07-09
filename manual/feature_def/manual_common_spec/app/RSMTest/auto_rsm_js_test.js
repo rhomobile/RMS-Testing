@@ -138,28 +138,12 @@ var rsm_set_get_property = [
 	expectedResult	:	"useStored"
 },
 {
-	testName		:	"VT400-1018 | Set rsmBluetoothPinCodeType:12345| 12345",
-	propertyName	:	"rsmBluetoothPinCodeType",
-	scannerTypes	:	"RSM Bluetooth",
-	OSTypes			:	"WINDOWS",
-	propertyValue	:	"12345",
-	expectedResult	:	"12345"
-},
-{
 	testName		:	"VT400-1019 | Set  rsmBluetoothPinCodeType:PromptUser| PromptUser",
 	propertyName	:	"rsmBluetoothPinCodeType",
 	scannerTypes	:	"RSM Bluetooth",
 	OSTypes			:	"WINDOWS",
 	propertyValue	:	"promptUser",
 	expectedResult	:	"promptUser"
-},
-{
-	testName		:	"VT400-1020 | Get  rsmBluetoothPinCodeType| 12345",
-	propertyName	:	"rsmBluetoothPinCodeType",
-	scannerTypes	:	"RSM Bluetooth",
-	OSTypes			:	"WINDOWS",
-	propertyValue	:	"Readolnly",
-	expectedResult	:	"12345"
 },
 {
 	testName		:	"VT400-1021 | Set rsmBluetoothReconnectionAttempts: 30| 30",
