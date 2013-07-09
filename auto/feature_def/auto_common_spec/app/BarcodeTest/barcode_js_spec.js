@@ -46,8 +46,17 @@ describe("Barcode JS API", function() {
 				});
 				
 				it("Enable "+ scnid + scnname, function() {
-					
 					runs(function() {
+						setTimeout(function(){
+							enableflag = true;
+						}, 5000)
+					});
+					
+					waitsFor(function() {
+						return enableflag;
+					}, "Waiting for enable", 11000);
+					runs(function() {
+						enableflag = false;
 						//Rho.Log.info(JSON.stringify(scanObject), "PATRO Enable");
 						enumObject.enable();
 						setTimeout(function() {
