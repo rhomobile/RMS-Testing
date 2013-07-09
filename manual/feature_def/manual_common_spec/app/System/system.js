@@ -10,11 +10,6 @@ function gethttpProxyURI()
 	$("#Rho_System_httpProxyURI span.result").text(JSON.stringify(data));
 }
 
-function getisEmulator()
-{
-	data = Rho.System.getProperty('isEmulator');
-	$("#Rho_System_isEmulator span.result").text(JSON.stringify(data));
-}
 
 function getlockWindowSize()
 {
@@ -78,7 +73,12 @@ function callreplaceCurrentBundlewp8()
 
 function callreplaceCurrentBundlece()
 {
-	Rho.System.replaceCurrentBundle("httpServerUrl+'/download_app?device=wp8'", {do_not_restart_app:false, not_thread_mode:true});
+	Rho.System.replaceCurrentBundle("httpServerUrl+'/download_app?device=ce'", {do_not_restart_app:false, not_thread_mode:true});
+}
+
+function callreplaceCurrentBundleios()
+{
+	Rho.System.replaceCurrentBundle("httpServerUrl+'/download_app?device=ios'", {do_not_restart_app:false, not_thread_mode:true});
 }
 
 function callgetProperty(propertyName)

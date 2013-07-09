@@ -1,7 +1,7 @@
 	var sys_setget_property = [
 	
 	{
-		testName		:	"VT300-107 | set httpProxyURI , call getProperty with httpProxyURI | 'http://wwwgate0.mot.com:1080'",
+		testName		:	"VT300-107 / VT300-108 | set httpProxyURI , call getProperty with httpProxyURI | 'http://wwwgate0.mot.com:1080'",
 		propertyName	:	"httpProxyURI",
 		propertyValue	:	"http://wwwgate0.mot.com:1080",
 		expectedResult	:	"http://wwwgate0.mot.com:1080",

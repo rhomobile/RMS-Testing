@@ -41,80 +41,84 @@
 		osType			: 	["WINDOWS","ANDROID","APPLE","WP8","WINDOWS_DESKTOP"]
 	},
 	{
+		testName		:	"VT300-017 | call getProperty with isRhoSimulator | ",
+		propertyName	:	"isRhoSimulator",
+		osType			: 	["WINDOWS","ANDROID","APPLE","WP8","WINDOWS_DESKTOP"]
+	},
+	{
 		testName		:	"VT300-018 | call getProperty with hasTouchscreen | ",
 		propertyName	:	"hasTouchscreen",
 		osType			: 	["WINDOWS","ANDROID","APPLE","WP8","WINDOWS_DESKTOP"]
 	},
 	{
-		testName		:	"VT300-024 | call getProperty with isEmulator | ",
+		testName		:	"VT300-023 | call getProperty with isEmulator | ",
 		propertyName	:	"isEmulator",
 		osType			: 	["WINDOWS","ANDROID","APPLE","WP8","WINDOWS_DESKTOP"]
 	},
 	{
-		testName		:	"VT300-026 | call getProperty with isMotorolaDevice | ",
+		testName		:	"VT300-024 | call getProperty with isMotorolaDevice | ",
 		propertyName	:	"isMotorolaDevice",
 		osType			: 	["WINDOWS","ANDROID","APPLE","WP8","WINDOWS_DESKTOP"]
 	},
-	
 	{
-		testName		:	"VT300-028 | default localServerPort | ",
+		testName		:	"VT300-026 | default localServerPort | ",
 		propertyName	:	"localServerPort",
 		osType			: 	["WINDOWS","ANDROID","APPLE","WP8","WINDOWS_DESKTOP"]
 	},
 	{
-		testName		:	"VT300-035 | call getProperty with oemInfo | ",
+		testName		:	"VT300-033 | call getProperty with oemInfo | ",
 		propertyName	:	"oemInfo",
 		osType			: 	["WINDOWS","ANDROID","MOTOROLA"]
 	},
 	
 	{
-		testName		:	"VT300-036 | call getProperty with osVersion | ",
+		testName		:	"VT300-034 | call getProperty with osVersion | ",
 		propertyName	:	"osVersion",
 		osType			: 	["WINDOWS","ANDROID","APPLE","WP8","WINDOWS_DESKTOP"]
 	},
 	
 	{
-		testName		:	"VT300-037 | call getProperty with phoneId | ",
+		testName		:	"VT300-035 | call getProperty with phoneId | ",
 		propertyName	:	"phoneId",
-		osType			: 	["WINDOWS","ANDROID","APPLE","WP8","WINDOWS_DESKTOP"]
+		osType			: 	["WINDOWS","ANDROID"]
 	},
 	{
-		testName		:	"VT300-040 | call getProperty with ppiX | ",
+		testName		:	"VT300-038 | call getProperty with ppiX | ",
 		propertyName	:	"ppiX",
 		osType			: 	["WINDOWS","ANDROID","APPLE","WP8","WINDOWS_DESKTOP"]
 	},
 	{
-		testName		:	"VT300-041 | call getProperty with ppiY | ",
+		testName		:	"VT300-039 | call getProperty with ppiY | ",
 		propertyName	:	"ppiY",
 		osType			: 	["WINDOWS","ANDROID","APPLE","WP8","WINDOWS_DESKTOP"]
 	},
 	{
-		testName		:	"VT300-042 | call getProperty with realScreenHeight | ",
+		testName		:	"VT300-040 | call getProperty with realScreenHeight | ",
 		propertyName	:	"realScreenHeight",
 		osType			: 	["WINDOWS","ANDROID","APPLE","WP8","WINDOWS_DESKTOP"]
 	},
 	{
-		testName		:	"VT300-043 | call getProperty with realScreenWidth | ",
+		testName		:	"VT300-041 | call getProperty with realScreenWidth | ",
 		propertyName	:	"realScreenWidth",
 		osType			: 	["WINDOWS","ANDROID","APPLE","WP8","WINDOWS_DESKTOP"]
 	},
 	{
-		testName		:	"VT300-048 | call getProperty with screenHeight | ",
+		testName		:	"VT300-046 | call getProperty with screenHeight | ",
 		propertyName	:	"screenHeight",
 		osType			: 	["WINDOWS","ANDROID","APPLE","WP8","WINDOWS_DESKTOP"]
 	},
 	{
-		testName		:	"VT300-049 | call getProperty with screenWidth | ",
+		testName		:	"VT300-047 | call getProperty with screenWidth | ",
 		propertyName	:	"screenWidth",
 		osType			: 	["WINDOWS","ANDROID","APPLE","WP8","WINDOWS_DESKTOP"]
 	},
 	{
-		testName		:	"VT300-061 | call getProperty with uuid | ",
+		testName		:	"VT300-059 | call getProperty with uuid | ",
 		propertyName	:	"uuid",
 		osType			: 	["WINDOWS","ANDROID","MOTOROLA"]
 	},
 	{
-		testName		:	"VT300-062 | call getProperty with webviewFramework | ",
+		testName		:	"VT300-060 | call getProperty with webviewFramework | ",
 		propertyName	:	"webviewFramework",
 		osType			: 	["WINDOWS","ANDROID","APPLE","WP8","WINDOWS_DESKTOP"]
 	}
@@ -173,17 +177,22 @@
 		osType			: 	["WINDOWS","ANDROID","APPLE","WP8","WINDOWS_DESKTOP"]
 	},
 	{
-		testName		:	"VT300-152 | Run the application on device, call getproperties with isEmulator | ",
+		testName		:	"VT300-151 | Run the application on device, call getproperties with isEmulator | ",
 		propertyName	:	"isEmulator",
 		osType			: 	["WINDOWS","ANDROID","APPLE","WP8","WINDOWS_DESKTOP"]
 	},
 	{
-		testName		:	"VT300-154 | call getproperties with isMotorolaDevice | ",
+		testName		:	"VT300-152 | call getproperties with isMotorolaDevice | ",
 		propertyName	:	"isMotorolaDevice",
 		osType			: 	["WINDOWS","ANDROID","APPLE","WP8","WINDOWS_DESKTOP"]
 	},
 	{
-		testName		:	"VT300-157 | call getproperties with locale | ",
+		testName		:	"VT300-153 | getproperties with localServerPort | ",
+		propertyName	:	"localServerPort",
+		osType			: 	["WINDOWS","ANDROID","APPLE","WP8","WINDOWS_DESKTOP"]
+	},
+	{
+		testName		:	"VT300-154 | call getproperties with locale | ",
 		propertyName	:	"locale",
 		osType			: 	["WINDOWS","ANDROID","APPLE","WP8","WINDOWS_DESKTOP"]
 	},
