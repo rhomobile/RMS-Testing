@@ -133,7 +133,7 @@ describe("KeyCapture Test", function() {
 			{
 				setObjective("VT289-015 | call captureKey with dispatch false, keyValue for" +VALUE_15+" and press "+VALUE_12);
 				setInstruction("Click inside Textbox and Press "+VALUE_12);
-				setExpected("Callback should not fire and " +VALUE_12 "should be dispatched inside the textbox");
+				setExpected("Callback should not fire and " +VALUE_12+ "should be dispatched inside the textbox");
 				Rho.KeyCapture.captureKey(false,TEST_15,capturekeycallback);
 			});
 
