@@ -24,33 +24,9 @@ describe("Camera JS API Test", function() {
 
 			var camname = enumObject.getProperty('cameraType');
 			var camtype = enumObject.getProperty('ID');
-/*
-
-			describe("Enable Camera "+ camtype +": "+ camname, function() {
-
-				beforeEach(function() {
-					enableflag = false;
-				});
-				
-				it("Enable "+ camtype + camname, function() {
-					
-					runs(function() {
-						//Rho.Log.info(JSON.stringify(scanObject), "PATRO Enable");
-						enumObject.enable();
-						setTimeout(function() {
-						enableflag = true;
-						}, 5000);
-					});
-					
-					waitsFor(function() {
-						return enableflag;
-					}, "Waiting for enable", 6000);
-				
-				});
-			});
 
 
-			describe("Barcode property using set/getProperty for "+ camtype +": "+ camname, function() {
+			describe("Camera property using set/getProperty for "+ camtype +": "+ camname, function() {
 
 				for (var i=0;i<arrCamera.length;i++){
 
@@ -67,8 +43,7 @@ describe("Camera JS API Test", function() {
 				}
 			});
 
-
-			describe("Barcode property Using set/getProperties for "+ camtype +": "+ camname, function() {
+			describe("Camera property Using set/getProperties for "+ camtype +": "+ camname, function() {
 
 				for (var i=0;i<arrCamera.length;i++){
 
@@ -108,7 +83,7 @@ describe("Camera JS API Test", function() {
 				}
 			});
 
-			describe("Barcode property setting Directly for "+ camtype +": "+ camname, function() {
+			describe("Camera property setting Directly for "+ camtype +": "+ camname, function() {
 
 				for (var i=0;i<arrCamera.length;i++){
 
@@ -131,7 +106,8 @@ describe("Camera JS API Test", function() {
 									eval(enumObject)[propertyName] = propertyValue;
 								}
 
-								var data = enumObject.getProperty(arrCamera[idx]['propertyName']);
+								//var data = enumObject.getProperty(arrCamera[idx]['propertyName']);
+								var data = eval(enumObject)[propertyName];
 							}
 							catch(err){
 
@@ -145,7 +121,6 @@ describe("Camera JS API Test", function() {
 				}
 			});
 
-*/
 			describe("getProperty and get properties with all combination for "+ camtype +": "+ camname, function() {
 
 				beforeEach(function() {
@@ -154,7 +129,7 @@ describe("Camera JS API Test", function() {
 					callbackstatus = false;
 				});
 
-					it("VT285-2001 | call getProperties() with sync callback and hash |" + camtype, function() {
+					it("VT285-089 | call getProperties() with sync callback and hash |" + camtype, function() {
 
 						runs(function() {
 						    enumObject.setProperties({'compressionFormat':'png','desiredHeight':'640','outputFormat':'dataUri'});
@@ -172,7 +147,7 @@ describe("Camera JS API Test", function() {
 						});
 					});
 
-					it("VT285-2002 | call getProperties() with anonymous callback and hash |" + camtype, function() {
+					it("VT285-090 | call getProperties() with anonymous callback and hash |" + camtype, function() {
 
 						runs(function() {    
 						    enumObject.setProperties({'compressionFormat':'jpg','desiredWidth':'480','outputFormat':'image'});
@@ -190,7 +165,7 @@ describe("Camera JS API Test", function() {
 						});							
 					});
 
-					it("VT285-2000 | call getProperties() without callback |" + camtype, function() {
+					it("VT285-091 | call getProperties() without callback |" + camtype, function() {
 
 						    //enumObject.clearAllProperties();
 						    enumObject.setProperties({'compressionFormat':'png','desiredHeight':'640','outputFormat':'dataUri'});
@@ -201,7 +176,7 @@ describe("Camera JS API Test", function() {
 							expect(getpropertiesdata).toContain('dataUri');						
 					});
 
-					it("VT285-2004 | call getProperty() with sync callback and property |" + camtype, function() {
+					it("VT285-092 | call getProperty() with sync callback and property |" + camtype, function() {
 
 						runs(function() {  									    
 						    enumObject.setProperty('compressionFormat','jpg');
@@ -217,7 +192,7 @@ describe("Camera JS API Test", function() {
 						});										
 					});
 
-					it("VT285-2005 | call getProperty() with anonymous callback and property |" + camtype, function() {
+					it("VT285-093 | call getProperty() with anonymous callback and property |" + camtype, function() {
 
 						runs(function() {
 						    enumObject.setProperty('compressionFormat','png');
@@ -233,7 +208,7 @@ describe("Camera JS API Test", function() {
 						});								
 					});
 
-					it("VT285-2003 | call getProperty() without callback |" + camtype, function() {
+					it("VT285-094 | call getProperty() without callback |" + camtype, function() {
 		    
 						    enumObject.setProperty('compressionFormat','jpg');
 							var data = enumObject.getProperty("compressionFormat");
@@ -241,48 +216,134 @@ describe("Camera JS API Test", function() {
 							expect(getpropertydata).toEqual('jpg');								
 					});
 
-					it("VT285-2006 | call getDefault |" + camtype, function() {
+					it("VT285-1000 | call getDefault |" + camtype, function() {
 
 						    Rho.Camera.setDefault(enumObject);
 						    var defaultobj = Rho.Camera.getDefault();						  
 							expect(camtype).toEqual(defaultobj.getProperty('ID'));
 					});
 
-					it("VT285-2006A | call Default |" + camtype, function() {
+					it("VT285-1001 | call Default |" + camtype, function() {
 
-						    //enumObject.clearAllProperties();
-						    //Rho.Camera.setDefaultID( enumObject.getId() );
-						   // Rho.Camera.default = enumObject;
-						   // var defaultobj = Rho.Camera.default;
+						    Rho.Camera.setDefaultID( enumObject.getId() );
+						   	Rho.Camera.default = enumObject;
+						    var defaultobj = Rho.Camera.default;
 							expect(camtype).toEqual(defaultobj.getProperty('ID'));
 					});
-			});
-/*
-			describe("Disable Camera "+ camtype +": "+ camname, function() {
 
-				beforeEach(function() {
-					disableflag = false;
-				});
+					it("VT299-095 | check default values of all writeable property |", function() {
 
-				it("Disable "+ camtype + camname, function() {
-					
-					runs(function() {
-						//Rho.Log.info(JSON.stringify(scanObject), "PATRO Disable");
-						enumObject.disable();
-						setTimeout(function() {
-						disableflag = true;
-						}, 10000);
+						runs(function() {
+						    enumObject.takePicture(camCallback);
 
+						    if (isWindowsMobilePlatform())
+						    {
+							    expect(Rho.Signature.previewHeight).toBeGreaterThan(0);
+								expect(Rho.Signature.previewLeft).toBeGreaterThan(0);
+								expect(Rho.Signature.previewTop).toBeGreaterThan(0);
+								expect(Rho.Signature.previewWidth).toBeGreaterThan(0);
+						    }
+
+						    if (isApplePlatform() || isAndroidPlatform())
+						    {
+							    expect(Rho.Signature.saveToDeviceGallery).toEqual(true);
+							    expect(enumObject.colorModel).toEqual('rgb');
+						    }
+
+						    if (isApplePlatform())
+						    {
+						    	expect(Rho.Signature.enableEditing).toEqual(true);
+						    }
+
+						    if (isAndroidPlatform())
+						    {
+						    	expect(Rho.Signature.flashMode).toEqual('off');
+						    	expect(Rho.Signature.useSystemViewfinder).toEqual(false);
+						    }
+
+							expect(enumObject.compressionFormat).toEqual('jpg');						
+							expect(enumObject.desiredHeight).toBeGreaterThan(0);
+							expect(enumObject.desiredWidth).toBeGreaterThan(0);						
+							expect(Rho.Signature.outputFormat).toEqual('image');
+							
+							Rho.Signature.hide();
+						});
 					});
 
-					waitsFor(function() {
-						return disableflag;
-					}, "Waiting for enable", 11000);
-				
-				});
+					it("VT299-096 | check values of all read only property |", function() {
+
+						runs(function() {
+						    enumObject.takePicture(camCallback);
+						    var type = "back front";
+						    var resolution = enumObject.supportedSizeList
+
+							expect(type).toContain(enumObject.cameraType);						
+							expect(enumObject.maxHeight).toBeGreaterThan(0);
+							expect(enumObject.maxWidth).toBeGreaterThan(0);
+							expect(resolution.width).toBeGreaterThan(0);					
+							expect(resolution.height).toBeGreaterThan(0);
+							
+							Rho.Signature.hide();
+						});
+					});
+
+					it("VT285-1002 | Call getAllProperties with Anonymous callback |" + camtype, function() {
+
+						runs(function() {
+						    enumObject.setProperties({'compressionFormat':'jpg','desiredHeight':'640','outputFormat':'dataUri'});
+							enumObject.getAllProperties(function(data){getpropertydata = data;callbackstatus = true;});
+						});
+
+						waitsFor(function(){
+							return callbackstatus;
+						});	
+						
+						runs(function() {	
+							expect(getpropertydata).toContain('jpg');
+							expect(getpropertydata).toContain(640);
+							expect(getpropertydata).toContain('datauri');
+						});								
+					});
+
+					it("VT285-1003 | Call takePicture with all string in hash|" + camtype, function() {
+
+						runs(function() {
+						    enumObject.takePicture({'compressionFormat':'jpg','desiredHeight':'640','outputFormat':'dataUri'},camCallback);
+							enumObject.getAllProperties(function(data){getpropertydata = data;callbackstatus = true;});
+						});
+
+						waitsFor(function(){
+							return callbackstatus;
+						});	
+						
+						runs(function() {	
+							expect(getpropertydata).toContain('jpg');
+							expect(getpropertydata).toContain('640');
+							expect(getpropertydata).toContain('datauri');
+						});								
+					});
+
+					it("VT285-1004 | Call choosePicture with all string in hash|" + camtype, function() {
+
+						runs(function() {
+						    enumObject.takePicture({'desiredHeight':'480','desiredHeight':'640','outputFormat':'image'},camCallback);
+							enumObject.getAllProperties(function(data){getpropertydata = data;callbackstatus = true;});
+						});
+
+						waitsFor(function(){
+							return callbackstatus;
+						});	
+						
+						runs(function() {	
+							expect(getpropertydata).toContain('480');
+							expect(getpropertydata).toContain('640');
+							expect(getpropertydata).toContain('image');
+						});								
+					});
+
+
 			});
 
-*/
 			describe("Camera property set using takePicture() for "+ camtype +": "+ camname, function() {
 
 				var flag = false;
@@ -333,12 +394,13 @@ describe("Camera JS API Test", function() {
 								
 							runs(function() {
 
-								var strGetProperty = '["'+arrCamera[idx]['propertyName']+'"]';
-								var objGetProperty = JSON.parse(strGetProperty);
+								//var strGetProperty = '["'+arrCamera[idx]['propertyName']+'"]';
+								//var objGetProperty = JSON.parse(strGetProperty);
 
-								var data = enumObject.getProperties(objGetProperty);
+								//var data = enumObject.getProperties(objGetProperty);
 
-								data = data[arrCamera[idx]['propertyName']];
+								//data = data[arrCamera[idx]['propertyName']];
+								var data = eval(enumObject)[arrCamera[idx]['propertyName']];
 								expect(data).toEqual(arrCamera[idx]['expectedResult']);
 							});
 
@@ -347,7 +409,6 @@ describe("Camera JS API Test", function() {
 
 				}
 			});
-
 
 			describe("Camera property set using choosePicture() for "+ camtype +": "+ camname, function() {
 
@@ -399,12 +460,7 @@ describe("Camera JS API Test", function() {
 								
 							runs(function() {
 
-								var strGetProperty = '["'+arrCamera[idx]['propertyName']+'"]';
-								var objGetProperty = JSON.parse(strGetProperty);
-
-								var data = enumObject.getProperties(objGetProperty);
-
-								data = data[arrCamera[idx]['propertyName']];
+								var data = eval(enumObject)[arrCamera[idx]['propertyName']];
 								expect(data).toEqual(arrCamera[idx]['expectedResult']);
 							});
 

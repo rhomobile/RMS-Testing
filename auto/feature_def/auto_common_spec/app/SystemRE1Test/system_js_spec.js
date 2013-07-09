@@ -52,7 +52,7 @@ describe("System JS API", function () {
 
         }
 
-        it("VT300-039 | should return platform | ", function() {
+        it("VT300-037 | should return platform | ", function() {
             var possiblePlatforms = ["ANDROID", "APPLE", "WINDOWS", "WINDOWS_DESKTOP", "WP8"];
             expect(possiblePlatforms).toContain(Rho.System.platform);
         });
@@ -222,7 +222,7 @@ describe("System JS API", function () {
         for (var i = 0; i < sys_setget_properties.length; i++) {
             (function (idx) {
 
-                var record = sys_setget_property[i];
+                var record = sys_setget_properties[i];
                 var testName = record['testName'];
                 var suitablePlatforms = record['osType'];
                 var propertyName = record['propertyName'];
@@ -266,7 +266,7 @@ describe("System JS API", function () {
             Rho.RhoFile.deleteRecursive(tempDirectory);
         });
 
-        it("VT300-100 | Test zipFile method without password", function () {
+        it("VT300-098 | Test zipFile method without password", function () {
             expect(Rho.RhoFile.exists(target)).toEqual(false);
 
             var result = Rho.System.zipFile(target, sourceA);
@@ -274,7 +274,7 @@ describe("System JS API", function () {
             expect(Rho.RhoFile.exists(target)).toEqual(true);
         });
 
-        it("VT300-100 | Test zipFle method with password", function () {
+        it("VT300-097 | Test zipFle method with password", function () {
             expect(Rho.RhoFile.exists(target)).toEqual(false);
 
             var result = Rho.System.zipFile(target, sourceA, 'password');
@@ -324,7 +324,7 @@ describe("System JS API", function () {
            
         });
 
-        it("VT300-103 | Test zipFiles method without password", function () {
+        it("VT300-100 | Test zipFiles method without password", function () {
             expect(Rho.RhoFile.exists(target)).toEqual(false);
 
             var sources = [];
@@ -336,7 +336,7 @@ describe("System JS API", function () {
             expect(Rho.RhoFile.exists(target)).toEqual(true);
         });
 
-        it("VT300-103 | Test zipFiles method with password", function () {
+        it("VT300-099 | Test zipFiles method with password", function () {
             expect(Rho.RhoFile.exists(target)).toEqual(false);
 
             var sources = [];

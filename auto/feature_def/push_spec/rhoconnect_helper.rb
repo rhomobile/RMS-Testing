@@ -141,12 +141,17 @@ module RhoconnectHelper
 		RestClient.post("#{@@host}:#{@@port}/rc/v1/#{request}",params.to_json, headers)
 	end
 
-	def self.api_get(request,params,api_token=nil)
+	def self.api_get(request, api_token)
 		headers = {}
 		headers[:content_type] = :json
+		headers['X-RhoConnect-API-TOKEN'] = api_token
+		RestClient.get("#{@@host}:#{@@port}/rc/v1/#{request}", headers)
+	end
+
+	def self.api_delete(request,api_token=nil)
+		headers = {}
 		headers['X-RhoConnect-API-TOKEN'] = api_token if api_token
-		# puts "GET request to Rhoconnect: params: #{params}, headers: #{headers}"
-		RestClient.get("#{@@host}:#{@@port}/rc/v1/#{request}",params.to_json, headers)
+		RestClient.delete("#{@@host}:#{@@port}/rc/v1/#{request}",headers)
 	end
 
 	def self.reset_server

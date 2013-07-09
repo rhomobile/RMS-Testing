@@ -2,10 +2,7 @@ require 'rho'
 require 'rho/rhocontroller'
 require 'rho/rhoerror'
 require 'helpers/browser_helper'
-require 'sync_server'
 require 'local_server'
-require 'push_server'
-
 
 class SettingsController < Rho::RhoController
   include BrowserHelper
@@ -14,9 +11,6 @@ class SettingsController < Rho::RhoController
     @msg = @params['msg']
     puts "-- push server is #{RhoConf.get_property_by_name('Push.rhoconnect.pushServer')}"
     SyncEngine.login('pushclient', 'pushclient', '/app/Settings/login_callback' )
-
-    # # Register for push service
-    # Rho::Push.getDeviceId url_for(:action => 'registration_callback')
   end
 
   def login_callback
@@ -65,7 +59,8 @@ class SettingsController < Rho::RhoController
         puts '-- push_callback: exit command received!'
       when 'exit_and_logout'
         exit = true
-        call_clientreset_and_logout = true
+        puts '-- push_callback: exit and logout command received!'
+	SyncEngine.logout
       when 'logout'
         # TODO:
         puts '-- push_callback: logout command received!'
@@ -80,8 +75,12 @@ class SettingsController < Rho::RhoController
     if @params['error']
       puts "-- push_callback - skipping response: #{url} <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<"
     else
-		  puts "-- push_callback - sending response: #{url} <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<"
-		  Rho::AsyncHttp.get :url => url
+		begin  
+			puts "-- push_callback - sending response: #{url} <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<"
+			Rho::AsyncHttp.get :url => url
+		rescue Exception => e
+			"Exception has been thrown #{e.inspect}"
+		end
     end
 
     if call_clientreset_and_logout

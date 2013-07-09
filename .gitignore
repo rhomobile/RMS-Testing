@@ -7,3 +7,5 @@ rhosimulator/
 /*/feature_def/*/extensions/*/ext/platform/iphone/build/
 /*/feature_def/*/extensions/*/ext/platform/iphone/impl/readme.txt
 rholog.txt
+rhoapi-modules.js
+server_url.js

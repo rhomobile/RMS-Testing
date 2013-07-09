@@ -4,7 +4,7 @@ describe("Log JS API", function () {
 
 		String.prototype.count=function(s1) { 
 			return (this.length - this.replace(new RegExp(s1,"g"), '').length) / s1.length;
-		}
+		};
 
 		var fail_str = "_log_fail_";
 		var pass_str = "_log_pass_";
@@ -94,16 +94,16 @@ describe("Log JS API", function () {
 
 				waits(1000);
 
-				var some_random_text = "ho1PtDX5x4D8liJzSZfhMVh7Sk7U3NsRRniDD4uQe2lBTPSW2o455zykgW9CRyQl2g8oCH2tecpEnT8wK3EpHwLipJGu2OvJPiwQ3Cz0vHOYLgE5ElESn5jhK83ukz37T2f7TzDDTyKAzrR0mQaIqOI2WKbPsTkoLZuIc4bjgSraxQH1LBcbfAa0bxn42IvIaAUeBte";
+				var some_random_text = "12345679a12345679b12345679c12345679d12345679e12345679f12345679g12345679h12345679i12345679j";
 				
-				for(var i = 0; i < 20; i++)
+				for(var i = 0; i < 5; i++)
 				{
-					Rho.Log.info(some_random_text, "VT290-391");
+					Rho.Log.info(some_random_text, "tst");
 				}
 
-				var read = Rho.Log.readLogFile(4000);
+				var read = Rho.Log.readLogFile(400);
 
-				expect(read.length).toEqual(4000);
+				expect(read.length).toEqual(400);
 
 				expect(read.count(some_random_text) > 0).toEqual(true);
 			});
@@ -548,7 +548,7 @@ describe("Log JS API", function () {
 					password : fail_str,
 					data : pass_str,
 					info : pass_str
-				}
+				};
 
 				Rho.Log.info( JSON.stringify(object), "test")
 
@@ -564,11 +564,11 @@ describe("Log JS API", function () {
 				Rho.Log.excludeFilter = "";
 
 				object = {
-					username : pass_str,
-					password : pass_str,
-					data : pass_str,
-					info : pass_str
-				}
+                    username: pass_str,
+                    password: pass_str,
+                    data: pass_str,
+                    info: pass_str
+                };
 
 				Rho.Log.info( JSON.stringify(object), "test")
 
@@ -584,11 +584,11 @@ describe("Log JS API", function () {
 				Rho.Log.excludeFilter = "aaaa";
 
 				object = {
-					username : pass_str,
-					password : pass_str,
-					data : pass_str,
-					info : pass_str
-				}
+                    username: pass_str,
+                    password: pass_str,
+                    data: pass_str,
+                    info: pass_str
+                };
 
 				Rho.Log.info( JSON.stringify(object), "test")
 
@@ -603,7 +603,7 @@ describe("Log JS API", function () {
 				var info = "File Size set to 1MB : VT290-334. no verification required in Log";
 				Rho.Log.info(info, "VT290-334");
 
-				Rho.Log.fileSize = 102400000
+				Rho.Log.fileSize = 102400000;
 				expect(Rho.Log.fileSize).toEqual(102400000);
 			});
 		});
@@ -614,7 +614,7 @@ describe("Log JS API", function () {
 				var info = "File Size set to 0 : VT290-334. no verification required in Log";
 				Rho.Log.info(info, "VT290-334");
 
-				Rho.Log.fileSize = 0
+				Rho.Log.fileSize = 0;
 				Rho.Log.info(info, "Some info");
 				expect(Rho.Log.fileSize).toEqual(0);
 			});
@@ -820,7 +820,7 @@ describe("Log JS API", function () {
 				var info = "Error, warning, info and trace message displayed : VT290-350";
 				Rho.Log.info(info, "VT290-350");
 				
-				var savedCat = Rho.Log.includeCategories
+				var savedCat = Rho.Log.includeCategories;
 				Rho.Log.includeCategories = "APP";
 				Rho.Log.level = 0;
 				LogLevel = Rho.Log.level;
@@ -954,7 +954,7 @@ describe("Log JS API", function () {
 		}
 
 		if (clientPlatform == Rho.System.PLATFORM_ANDROID || clientPlatform == Rho.System.PLATFORM_IOS || clientPlatform == Rho.System.PLATFORM_WP8 )
-		{		
+		{
 			// Set Netrace to true
 			it("VT290-361 : Set netrace to true | true", function() {
 				var flag = false;
@@ -1145,8 +1145,6 @@ describe("Log JS API", function () {
 		// Call warning() method with message and invalid category aaaa
 		it("VT290-413 : Call warning() method with message and invalid category | Error", function() {
 			runs(function(){
-				var error = null;
-				var actual = "Wrong number of arguments: 0 instead of 2"
 				Rho.Log.level = 0;
 				var info = "Warning : Warning message displayed in the log with message and invalid category";
 				Rho.Log.info(info, "VT290-413");
@@ -1157,12 +1155,11 @@ describe("Log JS API", function () {
 		// Set log filepath
 		it("VT290-328 : Set Log filepath |", function() {
 			runs(function(){
-				var info = "Log file path changed to file://\Program Files\Log.txt ";
+				var info = "Log file path changed to file://\\Program Files\\Log.txt ";
 				Rho.Log.info(info, "VT290-328");
-				var defaultPath = "file://\Program Files\Log.txt";
-				var path = defaultPath;
-				Rho.Log.filePath = path;
-				expect(Rho.Log.filePath).toEqual(path);
+				var defaultPath = "file://\\Program Files\\Log.txt";
+                Rho.Log.filePath = defaultPath;
+				expect(Rho.Log.filePath).toEqual(defaultPath);
 
 			});
 		});
@@ -1170,16 +1167,11 @@ describe("Log JS API", function () {
 		// Set log filepath to absolute
 		it("VT290-329 : Set Log filepath |", function() {
 			runs(function(){
-				var info = "Log file path changed to file://\Program Files\Log.txt ";
+				var info = "Log file path changed to file://\\Program Files\\Log.txt ";
 				Rho.Log.info(info, "VT290-328");
-				var defaultPath = "file://\Program Files\Log.txt";
-				var path = defaultPath;
-				Rho.Log.filePath = path;
-				expect(Rho.Log.filePath).toEqual(path);
-				// var db = new Rho.Database(Rho.Application.databaseFilePath('local'), 'local');
-
-				//openDB();
-				//closeDB();
+				var defaultPath = "file://\\Program Files\\Log.txt";
+                Rho.Log.filePath = defaultPath;
+				expect(Rho.Log.filePath).toEqual(defaultPath);
 			});
 		});
 
@@ -1188,7 +1180,7 @@ describe("Log JS API", function () {
 			runs(function(){
 				var info = "Log file size changed to 30720 bytes ";
 				Rho.Log.info(info, "VT290-328");
-				Rho.Log.fileSize = 30720
+				Rho.Log.fileSize = 30720;
 				expect(Rho.Log.fileSize).toEqual(30720);
 			});
 		});

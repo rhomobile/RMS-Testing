@@ -1,0 +1,31 @@
+sdk: ../../../../../rhodes
+sdkversion: 4.0.0
+name: Rho_Push_Client
+version: 1.03
+vendor: rhomobile
+build: debug
+bbver: 4.6
+applog: rholog.txt
+iphone:
+  configuration: Release
+  sdk: iphonesimulator5.0
+  provisionprofile:
+  codesignidentity:
+  entitlements:
+  BundleIdentifier: com.rhomobile.rhoconnectpushclient
+  BundleURLScheme: rhoconnectpushclient
+wp:
+  productid: '80b879d0-16fc-0130-39e9-3c0754090a18'
+symbian:
+  uid: '0xe77b6fc3'
+android:
+  version: 4.2.2
+#  version: 2.3.3
+#  version: 4.0
+
+paths:
+  extensions:
+    - "../../../../../Motorola-Extensions/extensions"
+    - "../../../../../rhoconnect-client/ext"
+
+extensions: ["json", "rhoconnect-client", "rhoconnect-push"]

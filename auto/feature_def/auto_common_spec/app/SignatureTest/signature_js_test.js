@@ -8,20 +8,20 @@ var arr_sig_property = [
 	expectedResult	:	"#FF0000"
 },
 {
-	testName		:	"VT299-1002 | Set bgColor :#0000FF| #0000FF",
+	testName		:	"VT299-1002 | Set bgColor :#0000FFFF| #0000FFFF",
 	propertyName	:	"bgColor",
 	sigTypes		:	"All",
 	OSTypes			:	"All",
-	propertyValue	:	"#0000FF",
-	expectedResult	:	"#0000FF"
+	propertyValue	:	"#0000FFFF",
+	expectedResult	:	"#0000FFFF"
 },
 {
-	testName		:	"VT299-1003 | Set bgColor :#000000| #000000",
+	testName		:	"VT299-1003 | Set bgColor :#00000000| #00000000",
 	propertyName	:	"bgColor",
 	sigTypes		:	"All",
 	OSTypes			:	"All",
-	propertyValue	:	"#000000",
-	expectedResult	:	"#000000"
+	propertyValue	:	"#00000000",
+	expectedResult	:	"#00000000"
 },
 {
 	testName		:	"VT299-1004 | Set bgColor :#FFFFFF| #FFFFFF",
@@ -51,7 +51,7 @@ var arr_sig_property = [
 	testName		:	"VT299-1007 | Set compressionFormat :jpg| jpg",
 	propertyName	:	"compressionFormat",
 	sigTypes		:	"All",
-	OSTypes			:	"All",
+	OSTypes			:	"ANDROID APPLE",
 	propertyValue	:	"jpg",
 	expectedResult	:	"jpg"
 },
@@ -59,7 +59,7 @@ var arr_sig_property = [
 	testName		:	"VT299-1008 | Set compressionFormat :png| png",
 	propertyName	:	"compressionFormat",
 	sigTypes		:	"All",
-	OSTypes			:	"All",
+	OSTypes			:	"ANDROID APPLE",
 	propertyValue	:	"png",
 	expectedResult	:	"png"
 },
@@ -67,7 +67,7 @@ var arr_sig_property = [
 	testName		:	"VT299-1009 | Set compressionFormat :bmp| bmp",
 	propertyName	:	"compressionFormat",
 	sigTypes		:	"All",
-	OSTypes			:	"WINDOWS APPLE",
+	OSTypes			:	"All",
 	propertyValue	:	"bmp",
 	expectedResult	:	"bmp"
 },
@@ -351,7 +351,7 @@ var getApplicablePropertiesShow = function (){
 	}
 
 	return finalSIGObj;
-}
+};
 
 var getApplicablePropertiesFullScreen = function (){
 	
@@ -370,6 +370,6 @@ var getApplicablePropertiesFullScreen = function (){
 	}
 
 	return finalSIGObjtake;
-}
+};
 
 var ENABLE_TIMEOUT_VALUE = (Rho.System.platform == "ANDROID" ? 1000 : 1000);

@@ -1,11 +1,18 @@
 	var sys_setget_property = [
 	
 	{
-		testName		:	"VT300-107 | set httpProxyURI , call getProperty with httpProxyURI | 'http://wwwgate0.mot.com:1080'",
+		testName		:	"VT300-107 / VT300-108 | set httpProxyURI , call getProperty with httpProxyURI | 'http://wwwgate0.mot.com:1080'",
 		propertyName	:	"httpProxyURI",
 		propertyValue	:	"http://wwwgate0.mot.com:1080",
 		expectedResult	:	"http://wwwgate0.mot.com:1080",
 		osType			: 	["WINDOWS", "WP8", "WINDOWS_DESKTOP"]
+	},
+	{
+		testName		:	"VT300-116 | set screenAutoRotate as false , call getProperty with screenAutoRotate | false",
+		propertyName	:	"screenAutoRotate",
+		propertyValue	:	"false",
+		expectedResult	:	"false",
+		osType			: 	["ANDROID","APPLE"]
 	},
 	{
 		testName		:	"VT300-115 | set screenAutoRotate as true , call getProperty with screenAutoRotate | true",
@@ -14,13 +21,6 @@
 		expectedResult	:	"true",
 		osType			: 	["ANDROID","APPLE"]
 
-	},
-	{
-		testName		:	"VT300-116 | set screenAutoRotate as false , call getProperty with screenAutoRotate | false",
-		propertyName	:	"screenAutoRotate",
-		propertyValue	:	"false",
-		expectedResult	:	"false",
-		osType			: 	["ANDROID","APPLE"]
 	},
 	{
 		testName		:	"VT300-119 | set screenSleeping as true , call getProperty with screenSleeping | true",

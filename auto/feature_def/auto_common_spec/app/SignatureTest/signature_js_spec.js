@@ -18,6 +18,7 @@ describe("Signature JS API Test", function() {
 
 		(function(arrSignatureshow,arrSignaturetake){
 
+/*
 			describe("Signature property using set/getProperty", function() {
 
 				for (var i=0;i<arrSignatureshow.length;i++){
@@ -73,7 +74,7 @@ describe("Signature JS API Test", function() {
 					})(i);
 				}
 			});
-
+*/
 			describe("Signature property setting Directly", function() {
 
 				for (var i=0;i<arrSignatureshow.length;i++){
@@ -97,7 +98,6 @@ describe("Signature JS API Test", function() {
 									eval(Rho.Signature)[propertyName] = propertyValue;
 								}
 
-								//var data = Rho.Signature.getProperty(arrSignatureshow[idx]['propertyName']);
 								var data = eval(Rho.Signature)[arrSignatureshow[idx]['propertyName']];
 							}
 							catch(err){
@@ -119,7 +119,7 @@ describe("Signature JS API Test", function() {
 					getpropertydata ='';
 					callbackstatus = false;
 				});
-
+/*
 				it("VT299-2001 | call getProperties() with sync callback and hash |", function() {
 
 					runs(function() {
@@ -206,22 +206,16 @@ describe("Signature JS API Test", function() {
 						getpropertydata = data;
 						expect(getpropertydata).toEqual(4);
 				});
-
+*/
 				it("VT299-2006 | call show() with all string |", function() {
 
 					runs(function() {
 					    Rho.Signature.show({'bgColor':'#FF0000','border':'true','penWidth':'2'});
-						Rho.Signature.getProperties(['bgColor','border','penWidth'],callbackgetproperties);
-					});
-
-					waitsFor(function(){
-						return callbackstatus;
-					});
-
-					runs(function() {							
-						expect(getpropertiesdata).toContain('#FF0000');
-						expect(getpropertiesdata).toContain('true');
-						expect(getpropertiesdata).toContain('2');
+							
+						expect(Rho.Signature.bgColor).toEqual('#FF0000');
+						expect(Rho.Signature.border).toEqual('true');
+						expect(Rho.Signature.penWidth).toEqual('2');
+						Rho.Signature.hide();
 					});
 				});
 
@@ -229,17 +223,11 @@ describe("Signature JS API Test", function() {
 
 					runs(function() {
 					    Rho.Signature.takeFullScreen({'bgColor':'#FF0000','outputFormat':'image','penWidth':'1'},sigCallback);
-						Rho.Signature.getProperties(['bgColor','outputFormat','penWidth'],callbackgetproperties);
-					});
-
-					waitsFor(function(){
-						return callbackstatus;
-					});
-
-					runs(function() {							
-						expect(getpropertiesdata).toContain('#FF0000');
-						expect(getpropertiesdata).toContain('image');
-						expect(getpropertiesdata).toContain('1');
+							
+						expect(Rho.Signature.bgColor).toEqual('#FF0000');
+						expect(Rho.Signature.border).toEqual('true');
+						expect(Rho.Signature.penWidth).toEqual('1');
+						Rho.Signature.hide();
 					});
 				});
 
@@ -247,17 +235,11 @@ describe("Signature JS API Test", function() {
 
 					runs(function() {
 					    Rho.Signature.show({'bgColor':'#FF0000','border':false,'penWidth':1});
-						Rho.Signature.getProperties(['bgColor','border','penWidth'],callbackgetproperties);
-					});
-
-					waitsFor(function(){
-						return callbackstatus;
-					});
-
-					runs(function() {							
-						expect(getpropertiesdata).toContain('#FF0000');
-						expect(getpropertiesdata).toContain(false);
-						expect(getpropertiesdata).toContain(1);
+							
+						expect(Rho.Signature.bgColor).toEqual('#FF0000');
+						expect(Rho.Signature.border).toEqual(false);
+						expect(getpropertiesdata).toEqual(1);
+						Rho.Signature.hide();
 					});
 				});
 
@@ -265,19 +247,52 @@ describe("Signature JS API Test", function() {
 
 					runs(function() {
 					    Rho.Signature.takeFullScreen({'bgColor':'#FF0000','outputFormat':'image','penWidth':3},sigCallback);
-						Rho.Signature.getProperties(['bgColor','outputFormat','penWidth'],callbackgetproperties);
-					});
 
-					waitsFor(function(){
-						return callbackstatus;
-					});
-
-					runs(function() {							
-						expect(getpropertiesdata).toContain('#FF0000');
-						expect(getpropertiesdata).toContain('image');
-						expect(getpropertiesdata).toContain(3);
+						
+						expect(getpropertiesdata).toEqual('#FF0000');
+						expect(getpropertiesdata).toEqual('image');
+						expect(getpropertiesdata).toEqual(3);
+						Rho.Signature.hide();
 					});
 				});
+
+				it("VT299-2010 | call takeFullScreen() to check default values of all property |", function() {
+
+					runs(function() {
+					    Rho.Signature.takeFullScreen({},sigCallback);
+
+						expect(Rho.Signature.bgColor).toEqual('#FFFFFFFF');
+						expect(Rho.Signature.compressionFormat).toEqual('png');						
+						expect(Rho.Signature.fileName).toEqual('signature');
+						expect(Rho.Signature.outputFormat).toEqual('image');
+						expect(Rho.Signature.penColor).toEqual('#FF000000');
+						expect(Rho.Signature.penWidth).toEqual(3);
+
+						Rho.Signature.hide();
+					});
+				});
+
+				it("VT299-2011 | call show() to check default values of all property |", function() {
+
+					runs(function() {
+					    Rho.Signature.show();
+
+						expect(Rho.Signature.bgColor).toEqual('#FFFFFFFF');
+						expect(Rho.Signature.compressionFormat).toEqual('png');						
+						expect(Rho.Signature.fileName).toEqual('signature');
+						expect(Rho.Signature.outputFormat).toEqual('image');
+						expect(Rho.Signature.penColor).toEqual('#FF000000');
+						expect(Rho.Signature.penWidth).toEqual(3);
+						expect(Rho.Signature.border).toEqual(true);
+						expect(Rho.Signature.height).toEqual(150);
+						expect(Rho.Signature.left).toEqual(15);	
+						expect(Rho.Signature.top).toEqual(15);
+						expect(Rho.Signature.width).toEqual(15);
+						
+						Rho.Signature.hide();
+					});
+				});
+
 			});
 
 			describe("Signature property set using show()", function() {
@@ -330,12 +345,7 @@ describe("Signature JS API Test", function() {
 								
 							runs(function() {
 
-								var strGetProperty = '["'+arrSignatureshow[idx]['propertyName']+'"]';
-								var objGetProperty = JSON.parse(strGetProperty);
-
-								var data = Rho.Signature.getProperties(objGetProperty);
-
-								data = data[arrSignatureshow[idx]['propertyName']];
+								var data = eval(Rho.Signature)[arrSignaturetake[idx]['propertyName']];
 								expect(data).toEqual(arrSignatureshow[idx]['expectedResult']);
 							});
 
@@ -395,12 +405,7 @@ describe("Signature JS API Test", function() {
 								
 							runs(function() {
 
-								var strGetProperty = '["'+arrSignaturetake[idx]['propertyName']+'"]';
-								var objGetProperty = JSON.parse(strGetProperty);
-
-								var data = Rho.Signature.getProperties(objGetProperty);
-
-								data = data[arrSignaturetake[idx]['propertyName']];
+								var data = eval(Rho.Signature)[arrSignaturetake[idx]['propertyName']];
 								expect(data).toEqual(arrSignaturetake[idx]['expectedResult']);
 							});
 

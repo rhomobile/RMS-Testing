@@ -33,7 +33,7 @@ describe('Network JS API', function() {
         callbackCount += 1;
         connectionInfo = args.connectionInformation;
         failureMsg = args.failureMessage;
-        Rho.Log.info("net_spec", "detectConnectionCallback, count = " + callbackCount.toString() );
+        Rho.Log.info("detectConnectionCallback, count = " + callbackCount.toString() + "failureMsg: " + failureMsg, "net_spec" );
     }
          
     beforeEach(function() {
@@ -66,7 +66,6 @@ describe('Network JS API', function() {
         });
     });
 
-    if (Rho.System.platform != "WP8") {
         it('VT293-0014 | detectConnection with wlan profile enabled', function () {
 
             runs(function () {
@@ -158,7 +157,7 @@ describe('Network JS API', function() {
 
    });*/
 
-        it('VT293-0020 | detectConnection with dtectionTimeout', function () {
+        it('VT293-0020 | detectConnection with detectionTimeout', function () {
             var flag = false;
             runs(function () {
 
@@ -262,101 +261,102 @@ describe('Network JS API', function() {
             });
 
         });
-    }
 
-    it('VT293-0037 | verifyPeerCertificate with default value', function() {
-       var status = '';
-       var callbackCalled = false;
+        if (Rho.System.platform != "WP8") {
+            it('VT293-0037 | verifyPeerCertificate with default value', function () {
+                var status = '';
+                var callbackCalled = false;
 
-       var post_callback = function (args){
-            status = args['status'];
-            callbackCalled = true;
-       }
-       runs( function() {
+                var post_callback = function (args) {
+                    status = args['status'];
+                    callbackCalled = true;
+                }
+                runs(function () {
 
-            var httpsPostProps = {
-                url: srvHttpsTestMethodsUrl,
-                body: "data1=test&data2=test2"
-            };
+                    var httpsPostProps = {
+                        url: srvHttpsTestMethodsUrl,
+                        body: "data1=test&data2=test2"
+                    };
 
-            Rho.Network.post(httpsPostProps, post_callback);
-        });
+                    Rho.Network.post(httpsPostProps, post_callback);
+                });
 
-        waitsFor( function() {
-                return callbackCalled;
-            },
-            "Callback never called",
-            waitTimeout
-        );
+                waitsFor(function () {
+                    return callbackCalled;
+                },
+                    "Callback never called",
+                    waitTimeout
+                );
 
-        runs(function() {
-            expect(status).toEqual('error');
-        });
-    });
+                runs(function () {
+                    expect(status).toEqual('error');
+                });
+            });
 
-    it('VT293-0038 | verifyPeerCertificate with value true', function() {
-       var status = '';
-       var callbackCalled = false;
+            it('VT293-0038 | verifyPeerCertificate with value true', function () {
+                var status = '';
+                var callbackCalled = false;
 
-       var post_callback = function (args){
-            status = args['status'];
-            callbackCalled = true;
-       }
-       runs( function() {
+                var post_callback = function (args) {
+                    status = args['status'];
+                    callbackCalled = true;
+                }
+                runs(function () {
 
-            var httpsPostProps = {
-                url: srvHttpsTestMethodsUrl,
-                body: "data1=test&data2=test2",
-                verifyPeerCertificate: true
-            };
+                    var httpsPostProps = {
+                        url: srvHttpsTestMethodsUrl,
+                        body: "data1=test&data2=test2",
+                        verifyPeerCertificate: true
+                    };
 
-            Rho.Network.post(httpsPostProps, post_callback);
-        });
+                    Rho.Network.post(httpsPostProps, post_callback);
+                });
 
-        waitsFor( function() {
-                return callbackCalled;
-            },
-            "Callback never called",
-            waitTimeout
-        );
+                waitsFor(function () {
+                    return callbackCalled;
+                },
+                    "Callback never called",
+                    waitTimeout
+                );
 
-        runs(function() {
-            expect(status).toEqual('error');
-        });
-    });
+                runs(function () {
+                    expect(status).toEqual('error');
+                });
+            });
 
-    it('VT293-0039 | verifyPeerCertificate with false', function() {
-       var data = '';
-       var callbackCalled = false;
+            it('VT293-0039 | verifyPeerCertificate with false', function () {
+                var data = '';
+                var callbackCalled = false;
 
-       var post_callback = function (args){
-            data = args['body'];
-            callbackCalled = true;
-       }
-       runs( function() {
+                var post_callback = function (args) {
+                    data = args['body'];
+                    callbackCalled = true;
+                }
+                runs(function () {
 
-            var httpsPostProps = {
-                url: srvHttpsTestMethodsUrl,
-                body: "data1=test&data2=test2",
-                verifyPeerCertificate: false
-            };
+                    var httpsPostProps = {
+                        url: srvHttpsTestMethodsUrl,
+                        body: "data1=test&data2=test2",
+                        verifyPeerCertificate: false
+                    };
 
-            Rho.Network.post(httpsPostProps, post_callback);
-        });
+                    Rho.Network.post(httpsPostProps, post_callback);
+                });
 
-        waitsFor( function() {
-                return callbackCalled;
-            },
-            "Callback never called",
-            waitTimeout
-        );
+                waitsFor(function () {
+                    return callbackCalled;
+                },
+                    "Callback never called",
+                    waitTimeout
+                );
 
-        runs(function() {
-            expect(data).toEqual('initial POST request is: test and test2');
-        });
-    });
+                runs(function () {
+                    expect(data).toEqual('initial POST request is: test and test2');
+                });
+            });
 
-         
+        }
+
     it('VT293-0040 | post with valide url', function() {
        var flag = false;
        var callbackCalled = false;

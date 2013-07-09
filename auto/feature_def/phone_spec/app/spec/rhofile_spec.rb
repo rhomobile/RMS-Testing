@@ -97,7 +97,10 @@ end
     it "should isfileexist" do
         File.exist?(Rho::RhoApplication::get_model_path('app', 'spec')).should == true if System.get_property('platform') != 'Blackberry'
         File.exist?(Rho::RhoApplication::get_blob_folder()).should ==  true 
+        
+if !System.get_property('is_emulator')
         File.exist?( File.join( __rhoGetCurrentDir(), 'rholog.txt')).should ==  true 
+end
         
         bExc = false
         begin

@@ -309,12 +309,12 @@ describe("Barcode Manual Test", function() {
 					});
 				});
 
-/*
-				it("VT282-1778 | call setDefault with" + scnid + "and take |", function() {
+
+				it("VT282-1778/79 | call setDefault with" + scnid + "and take |", function() {
 
 					runs(function()
 					{
-						setObjective("VT282-1778 | call setDefault and take");
+						setObjective("VT282-1778/79 | call setDefault and take");
 						setInstruction("Take method wait for scanner beam or viewfinder to come automatically without pressing hadrware trigger " + scnid + " Scan code 128 barcode");
 						setExpected("code128 barcode should decode and retrun value should be decoded data and status");
 						Rho.Barcode.setDefault(objSCN);
@@ -342,11 +342,11 @@ describe("Barcode Manual Test", function() {
 					});
 				});
 
-				it("VT282-1781 | call setDefault and enable |"+ scnid, function() {
+				it("VT282-1781/82 | call setDefault and enable |"+ scnid, function() {
 					
 					runs(function()
 					{	
-						setObjective("VT282-1781 | call setDefault and enable");
+						setObjective("VT282-1781/82 | call setDefault and enable");
 						setInstruction("press hadrware trigger to start" + scnid);
 						setExpected("code128 barcode should decode and retrun value should be decoded data and status");
 						Rho.Barcode.setDefault(objSCN);
@@ -372,13 +372,13 @@ describe("Barcode Manual Test", function() {
 						});	
 					});
 				});
-*/
+
 				it("VT282-1784 | Start and stop scanner |"+ scnid, function() {
 					
 					runs(function()
 					{
 						setObjective("VT282-1784 | Start and stop scanner |");
-						setInstruction("VT282-1784 Don't press hardware trigger" + scnid);
+						setInstruction("Don't press hardware trigger" + scnid);
 						setExpected("Scanner beam or viewfinder should comeup automatically and will stop after 8 sec");
 						objSCN.enable({},callbackenable);
 						setTimeout(function() {
@@ -448,11 +448,11 @@ describe("Barcode Manual Test", function() {
 					});
 				});
 
-				it("VT282-1790A | take with callback as function and don't scan|"+ scnid, function() {
+				it("VT282-1791 | take with callback as function and don't scan|"+ scnid, function() {
 					
 					runs(function()
 					{
-						setObjective("VT282-1790A | take with callback as function and don't scan|");
+						setObjective("VT282-1791 | take with callback as function and don't scan|");
 						setInstruction("Don't scan any barcode after scanner starts automatically and wait for scanner to stop" + scnid);
 						setExpected("Decoded data should come as nil and status should be cancel and Beam ore viewfinder will go after 10 sec ");
 						objSCN.take({'scanTimeout':10000},callbackenable);
@@ -845,12 +845,12 @@ describe("Barcode Manual Test", function() {
 					});
 				});
 
-				it("VT282-1968 | set decodeFrequency to 20000 |"+ scnid, function() {
+				it("VT282-1968 | set decodeFrequency to 1500 |"+ scnid, function() {
 					
 
 					runs(function()
 					{
-						setObjective("VT282-1968 | set decodeFrequency to 20000 |");
+						setObjective("VT282-1968 | set decodeFrequency to 1500 |");
 						setInstruction("Scan code128 barcode with" + scnid + "check for the decode sound frequency");
 						setExpected("should able to hear the sound after successful decode");
 						objSCN.enable({},callbackenable);
@@ -906,14 +906,14 @@ describe("Barcode Manual Test", function() {
 						});
 					});
 				});
-
+/*
 				if(isWindowsMobilePlatform()){ 
 
-					it("VT282-1971 | set invalidDecodeFrequency to 20000 |"+ scnid, function() {
+					it("VT282-1971 | set invalidDecodeFrequency to 1500 |"+ scnid, function() {
 						
 						runs(function()
 						{
-							setObjective("VT282-1971 | set invalidDecodeFrequency to 20000 |");
+							setObjective("VT282-1971 | set invalidDecodeFrequency to 1500 |");
 							setInstruction("Scan code128 barcode with" + scnid + "check for the invalid decode sound frequency");
 							setExpected("should able to hear the sound after barcode is scanned but not successfully decoded");
 							objSCN.enable({},callbackenable);
@@ -974,7 +974,7 @@ describe("Barcode Manual Test", function() {
 					});
 
 				}
-
+*/
 				it("VT282-1978 | set decodeVolume to 5 |"+ scnid, function() {
 					
 					runs(function()
@@ -1005,13 +1005,13 @@ describe("Barcode Manual Test", function() {
 					});
 				});
 
-				it("VT282-1979 | set decodeVolume to 0 |"+ scnid, function() {
+				it("VT282-1979 | set decodeVolume to 2 |"+ scnid, function() {
 					
 					runs(function()
 					{
-						setObjective("VT282-1979 | set decodeVolume to 0 |");
+						setObjective("VT282-1979 | set decodeVolume to 2 |");
 						setInstruction("Scan code128 barcode with" + scnid + "check for the decode volume)");
-						setExpected("decode sound should play at level 0 (low) after barcode is decoded");
+						setExpected("decode sound should play at level 2 (low) after barcode is decoded compare to prev test");
 						objSCN.enable({},callbackenable);
 						setTimeout(function() {
 							enableFlag = true;
@@ -1024,7 +1024,7 @@ describe("Barcode Manual Test", function() {
 
 					runs(function()
 					{		
-						objSCN.decodeVolume = 0;
+						objSCN.decodeVolume = 2;
 						waitsFor(function() {
 						return document.getElementById("actResult").innerHTML != "init";
 						}, "Timed out waiting for tester to respond", 300000);
@@ -1384,11 +1384,11 @@ describe("Barcode Manual Test", function() {
 					});
 				});
 
-				it("VT282-2008A | call getSupportedProperties() with async callback |"+ scnid + scntype, function() {
+				it("VT282-2009 | call getSupportedProperties() with async callback |"+ scnid + scntype, function() {
 
 					runs(function()
 					{
-						setObjective("VT282-2008A | call getSupportedProperties() with async callback |");
+						setObjective("VT282-2009 | call getSupportedProperties() with async callback |");
 						setInstruction("check for all the supported propertylist for scanner" + scnid);
 						setExpected("all the supported properties should return in async callback");
 						objSCN.enable();
