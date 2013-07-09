@@ -25,12 +25,14 @@ if File.file?(cfgfilename)
   $rc_stack_port = config["rc_stack_port"]
   $rc_push_server_address = config["rc_push_server_address"]
   $rc_push_server_port = config["rc_push_server_port"]
-  $device_id = config["device_address"]
+  $device_address = config["device_address"]
 end
 
 unless $rho_root
   $rho_root = `get-rhodes-info --rhodes-path`.chomp
 end
+
+$collapse_id = 0
 
 puts "rhodes location: #{$rho_root}"
 puts "rhoconnect location:  #{$rhoconnect_root}"
@@ -84,8 +86,8 @@ describe 'Windows Mobile push spec' do
     # FIXME:
     # `adb emu kill`
 
-    puts "Sending exit and logout message to the app"
-    RhoconnectHelper.api_post('users/ping', { :user_id => ['pushclient'], :badge => 'exit_spec', :message => 'exit' }, @api_token)
+    #puts "Sending exit and logout message to the app"
+    #RhoconnectHelper.api_post('users/ping', { :user_id => ['pushclient'], :badge => 'exit_spec', :message => 'exit' }, @api_token)
     # delete user
     #RhoconnectHelper.api_delete('users/pushclient', @api_token)
     #$server.shutdown
@@ -136,7 +138,8 @@ describe 'Windows Mobile push spec' do
     puts 'Sending push message...'
 
     message = 'sample_magic'
-    params = { :user_id=>['pushclient'], :badge => message, :message=>message }
+    params = { :user_id=>['pushclient'], :badge => $collapse_id.to_s, :message=>message }
+    $collapse_id += 1
     RhoconnectHelper.api_post('users/ping',params,@api_token)
 
     puts 'Waiting message with push content...'
@@ -149,42 +152,39 @@ describe 'Windows Mobile push spec' do
     puts 'Sending push message with exit command...'
 
     message = 'exit'
-    params = { :user_id=>['pushclient'], :badge => message, :message=>message }
+    params = { :user_id=>['pushclient'], :badge => $collapse_id.to_s, :message=>message }
     RhoconnectHelper.api_post('users/ping',params,@api_token)
-
+    $collapse_id += 1
     puts 'Waiting message with push content...'
     expect_request('alert').should == message
 
     # wait until application exits
-    sleep 10
-
-  #   output = Jake.run2('adb', ['-e', 'shell', 'ps'], {:hide_output=>true})
-  #   (output =~ /rho_push_client/).should be_nil
+    sleep 5
   end
 
   it 'should process push message and wake up the app' do
   	puts 'Sending push message with greeting ...'
   	message = 'Hello'
-  	params = { :user_id=>['pushclient'], :badge => message, :message => message}
+  	params = { :user_id=>['pushclient'], :badge => $collapse_id, :message => message}
   	RhoconnectHelper.api_post('users/ping',params,@api_token)
+        $collapse_id += 1
 
   	puts 'Waiting ping message with push content ...'
+	expect_request('error').should == '0'
+	dev_id = expect_request('device_id')
+	dev_id.should == $device_id 
   	expect_request('alert').should == message
-
-  	sleep 5
-
-  #   output = Jake.run2('adb', ['-e', 'shell', 'ps'], {:hide_output => true})
-  #  (output =~ /rho_push_client/).should_not be_nil
-  #end
+  end
 
   it 'should process sequence of push messages' do
   	puts 'Sending 5 push messages...'
-
+  
   	alerts = {}
   	5.times do |i|
   		message = "magic#{i}"
   		alerts[message] = true
-  		params = { :user_id=>['pushclient'], :message => message}
+  		params = { :user_id=>['pushclient'], :badge => $collapse_id, :message => message}
+		$collapse_id += 1
   		RhoconnectHelper.api_post('users/ping',params,@api_token)
   		sleep 2
   	end
@@ -214,6 +214,42 @@ describe 'Windows Mobile push spec' do
   		end
   		$requests.clear
   	end
+  end
+
+  it 'should logout and login back and process ping message' do
+	$mutex.synchronize do
+  		$requests.clear
+	end
+	message = 'logout'
+  	params = { :user_id=>['pushclient'], :badge => $collapse_id, :message=>message }
+	$collapse_id += 1
+  	RhoconnectHelper.api_post('users/ping',params,@api_token)
+  	expect_request('alert').should == message
+
+	sleep 15
+
+	# exit app by rebooting the device
+	puts "Re-booting the device"
+	cmd = "cd #{$wm_build_rakefile_dir} && rake -f #{$wm_build_rakefile} windows:reboot[#{$device_address}]"
+	puts "CMD is : #{cmd}"
+	$out_code = system(cmd)
+
+  	puts "Re-Start the test application"
+        cmd = "cd #{$wm_build_rakefile_dir} && rake -f #{$wm_build_rakefile} windows:start_test_app_bg[#{$device_address},Rho_Push_Client]"
+        puts "CMD is: #{cmd}"
+        $out_code = system(cmd)
+        puts " Application is started with #{$out_code}"
+
+  	expect_request('error').should == "0"
+  	$device_id = expect_request('device_id')
+  	$device_id.should_not be_nil
+  	$device_id.should_not == ''
+
+  	message = 'welcome'
+  	params = { :user_id=>['pushclient'], :badge => $collapse_id, :message => message}
+	$collapse_id += 1
+  	RhoconnectHelper.api_post('users/ping',params,@api_token)
+  	expect_request('alert').should == message
   end
 
   #it 'should process sequence of push messages' do
