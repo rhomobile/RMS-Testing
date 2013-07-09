@@ -7,10 +7,10 @@ describe("System Module JS Test Starts Here", function() {
 	});
 
 	describe("System Module-Setting Directly Test Starts Here", function() {
-		it("VT300-029 | call getProperty with locale | ", function() {
+		it("VT300-027 | call getProperty with locale | ", function() {
 			runs(function(){
 				var data = Rho.System.getProperty('locale');
-	      		displayResult("VT300-029 | call getProperty with locale | ",data);
+	      		displayResult("VT300-027 | call getProperty with locale | ",data);
 			});
 
 			waitsFor(function(){
@@ -142,10 +142,10 @@ describe("System Module JS Test Starts Here", function() {
 
 	describe("System Module- getProperties Test Starts Here", function() {
 	
-		it("VT300-125 | call getproperties with country,deviceName, devicePushId, freeServerPort and sync callback | ", function() {
+		it("VT300-126 | call getproperties with country,deviceName, devicePushId, freeServerPort and sync callback | ", function() {
 			runs(function(){
 				var data = Rho.System.getProperties(['country','deviceName','devicePushId','freeServerPort']);
-				displayResult("VT300-125 | call getproperties with country,deviceName, devicePushId, freeServerPort and sync callback | ",JSON.stringify(data));
+				displayResult("VT300-126 | call getproperties with country,deviceName, devicePushId, freeServerPort and sync callback | ",JSON.stringify(data));
 			
 			});
 
@@ -185,7 +185,7 @@ describe("System Module JS Test Starts Here", function() {
 			})(i);
 		}
 
-		it("VT300-126 | call getproperties with callback as anonymous function | ", function() {
+		it("VT300-127  | call getproperties with callback as anonymous function | ", function() {
 			var data = '';
 			var flag = false;
 
@@ -208,7 +208,7 @@ describe("System Module JS Test Starts Here", function() {
 
 			
     		runs(function(){
-				displayResult("VT300-126 | call getproperties with callback as anonymous function | ",data);
+				displayResult("VT300-127 | call getproperties with callback as anonymous function | ",data);
 						});
 
 			waitsFor(function(){
@@ -221,7 +221,7 @@ describe("System Module JS Test Starts Here", function() {
 			
 		});
 
-		it("VT300-127 | call getproperties with callback as async defined function | ", function() {
+		it("VT300-128 | call getproperties with callback as async defined function | ", function() {
 			var data = '';
 			var flag = false;
 			var sysAsyncCallback = function (objData){data = JSON.stringify(objData);}
@@ -241,7 +241,7 @@ describe("System Module JS Test Starts Here", function() {
     		}, "1 sec wait", 2000);
 
     		runs(function(){
-				displayResult("VT300-127 | call getproperties with callback as anonymous function | ",data);
+				displayResult("VT300-128 | call getproperties with callback as anonymous function | ",data);
 				waitsFor(function(){
 				return captured;
 				},"Waiting For Result",30000);

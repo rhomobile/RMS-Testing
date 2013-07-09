@@ -125,19 +125,7 @@
     </div>
 </div>
 
-<div class="method_tests  android ios win32 wm wp8">
-    <div class="method_name">Rho.System.isEmulator</div>
-    <div class="method_desc"> is Emulator: Return's true as it's running on Emulator</div>
-    <div class="test_scenario">
-        <div class="test_scenario_controls">
-            <div id="Rho_System_isEmulator">
-                <a href="javascript:void(0)" onclick="getisEmulator();">Call getProperty with isEmulator </a> <span
-                    class="result"> </span>
-            </div>
-            <span class="test_scenario_number">VT300-023<br/></span>
-        </div>
-    </div>
-</div>
+
 
 <div class="method_tests win32">
     <div class="method_name">Rho.System.lockWindowSize</div>
@@ -148,13 +136,13 @@
         <div class="test_scenario_controls">
             <a href="javascript:void(0)" onclick="Rho.System.lockWindowSize=true;">Set lockWindowSize as true</a>
         </div>
-        <span class="test_scenario_number">VT300-031<br/></span>
+        <span class="test_scenario_number">VT300-029<br/></span>
     </div>
     <div class="test_scenario">
         <div class="test_scenario_controls">
             <a href="javascript:void(0)" onclick="Rho.System.lockWindowSize=false;">Set lockWindowSize as false</a>
         </div>
-        <span class="test_scenario_number">VT300-032<br/></span>
+        <span class="test_scenario_number">VT300-030<br/></span>
     </div>
     <div class="test_scenario">
         <div class="test_scenario_controls">
@@ -162,7 +150,7 @@
                 <a href="javascript:void(0)" onclick="getlockWindowSize();">Call getProperty with lockWindowSize : </a>
                 <span class="result"> </span>
             </div>
-            <span class="test_scenario_number">VT300-033/VT300-034 <br/></span>
+            <span class="test_scenario_number">VT300-031/VT300-032 <br/></span>
         </div>
     </div>
     <div class="test_scenario">
@@ -183,18 +171,18 @@
         <div class="test_scenario_controls">
             <a href="javascript:void(0)" onclick="Rho.System.screenAutoRotate=true;">Set screenAutoRotate as true</a>
         </div>
-        <span class="test_scenario_number">VT300-044 <br/></span>
+        <span class="test_scenario_number">VT300-042 <br/></span>
     </div>
     <div class="test_scenario">
         <div class="test_scenario_controls">
             <a href="javascript:void(0)" onclick="Rho.System.screenAutoRotate=false;">Set screenAutoRotate as false</a>
         </div>
-        <span class="test_scenario_number">VT300-045 <br/></span>
+        <span class="test_scenario_number">VT300-043 <br/></span>
     </div>
     <div class="test_scenario">
         <div class="test_scenario_controls">
             <div id="Rho_System_screenAutoRotate">
-                <a href="javascript:void(0)" onclick="getscreenAutoRotate();">Get screen AutoRotate : </a> <span
+                <a href="javascript:void(0)" onclick="getscreenAutoRotate();">VT300-044 / VT300-045: Get screen AutoRotate : </a> <span
                     class="result"> </span>
             </div>
         </div>
@@ -219,7 +207,7 @@
                 <a href="javascript:void(0)" onclick="getscreenOrientation();">Call getProperty with screenOrientation
                     : </a> <span class="result"> </span>
             </div>
-            <span class="test_scenario_number">VT300-050/ VT300-051 <br/></span>
+            <span class="test_scenario_number">VT300-048/ VT300-049 <br/></span>
         </div>
     </div>
 </div>
@@ -231,13 +219,13 @@
         <div class="test_scenario_controls">
             <a href="javascript:void(0)" onclick="Rho.System.screenSleeping=true;">Set screenSleeping as true</a>
         </div>
-        <span class="test_scenario_number">VT300-052 <br/></span>
+        <span class="test_scenario_number">VT300-050 / VT300-052<br/></span>
     </div>
     <div class="test_scenario">
         <div class="test_scenario_controls">
             <a href="javascript:void(0)" onclick="Rho.System.screenSleeping=false;">Set screenSleeping as false</a>
         </div>
-        <span class="test_scenario_number">VT300-053 <br/></span>
+        <span class="test_scenario_number">VT300-051 / VT300-053<br/></span>
     </div>
     <div class="test_scenario">
         <div class="test_scenario_controls">
@@ -269,14 +257,14 @@
         <div class="test_scenario_controls">
             <a href="javascript:void(0)" onclick="Rho.System.keyboardState='shown';">Set keyboardState as shown</a>
         </div>
-        <span class="test_scenario_number">VT300-057 <br/></span>
+        <span class="test_scenario_number">VT300-055 <br/></span>
     </div>
 
     <div class="test_scenario">
         <div class="test_scenario_controls">
             <a href="javascript:void(0)" onclick="Rho.System.keyboardState='hidden';">set showKeyboard as hidden</a>
         </div>
-        <span class="test_scenario_number">VT300-058 <br/></span>
+        <span class="test_scenario_number">VT300-056 <br/></span>
     </div>
     <div class="method_tests ios android win32 wp8">
         <div class="test_scenario">
@@ -294,7 +282,7 @@
                 <a href="javascript:void(0)" onclick="getkeyboardState();"> Call getProperty with showKeyboard: </a>
                 <span class="result"> </span>
             </div>
-            <span class="test_scenario_number">VT300-059/VT300-060 <br/></span>
+            <span class="test_scenario_number">VT300-057/VT300-058 <br/></span>
         </div>
     </div>
     <div class="test_scenario">
@@ -323,7 +311,7 @@
                    onclick="var fname = download_filetolocal(httpServerUrl+'/TestAppCE.cab', 'TestAppCE.cab'); Rho.System.applicationInstall(fname);">CE: Install app from HTTP url</a>
                    
             </div>
-            <span class="test_scenario_number">VT300-064 <br/></span>
+            <span class="test_scenario_number">VT300-063 <br/></span>
         </div>
 
         <!--Needless to test the installation of the application on the local file system-->
@@ -346,7 +334,7 @@
             <div class="test_scenario_controls">
                 <a href="javascript:void(0)" onclick="Rho.System.applicationInstall(httpServerUrl+'/TestApp_signed.apk');">Install app from HTTP url</a>
             </div>
-            <span class="test_scenario_number">VT300-064 <br/></span>
+            <span class="test_scenario_number">VT300-063 <br/></span>
         </div>
 
         <!--Needless to test the installation of the application on the local file system-->
@@ -395,7 +383,7 @@
                 <a href="javascript:void(0)"
                    onclick="Rho.System.applicationInstall('itms-services://?action=download-manifest&url=' + httpServerUrl + '/TestApp.plist');">Install app from HTTP url</a>
             </div>
-            <span class="test_scenario_number">VT300-064 <br/></span>
+            <span class="test_scenario_number">VT300-063 <br/></span>
         </div>
     </div>
 
@@ -457,6 +445,7 @@
                 <a href="javascript:void(0)" onclick="Rho.System.runApplication('rhomobile testApp/testApp.exe');"> call
                     runApplication with application name 'rhomobile testApp/testApp.exe'.</a>
             </div>
+			<span class="test_scenario_number">VT300-064 <br/></span>
         </div>
     </div>
 
@@ -466,6 +455,7 @@
                 <a href="javascript:void(0)" onclick="Rho.System.runApplication('testapp');"> call
                     runApplication with application name 'testapp'.</a>
             </div>
+			<span class="test_scenario_number">VT300-064 <br/></span>
         </div>
     </div>
 
@@ -475,6 +465,7 @@
                 <a href="javascript:void(0)" onclick="Rho.System.runApplication('com.rhomobile.testapp');"> call
                     runApplication with application name 'testapp'.</a>
             </div>
+			<span class="test_scenario_number">VT300-064 <br/></span>
         </div>
     </div>
 
@@ -532,7 +523,7 @@
         </div>
     </div>-->
 
-    <span class="test_scenario_number">VT300-066 <br/></span>
+    <span class="test_scenario_number">VT300-065 <br/></span>
 </div>
 
 
@@ -543,7 +534,7 @@
         <div class="test_scenario_controls">
             <a href="javascript:void(0)" onclick="alert( Rho.System.getStartParams());">call getStartParams()</a>
         </div>
-        <span class="test_scenario_number">VT300-076 <br/></span>
+        <span class="test_scenario_number">VT300-071 <br/></span>
     </div>
 </div>
 
@@ -641,7 +632,7 @@
     </div>
 </div>
 
-<div class="method_tests android win32 wm wp8">
+<div class="method_tests android ios win32 wm wp8">
     <div class="method_name">Rho.System.replaceCurrentBundle</div>
     <div class="method_desc">replaceCurrentBundle : SystemJS.cab will be replaced</div>
     <div class="test_scenario">
@@ -660,7 +651,9 @@
 			<a href="javascript:void(0)" onclick="callreplaceCurrentBundlewp8();">call replaceCurrentBundle() for
                 WP8 </a><br />
 			<a href="javascript:void(0)" onclick="callreplaceCurrentBundlece();">call replaceCurrentBundle() for
-                CE </a><br />					
+                CE </a><br />
+			<a href="javascript:void(0)" onclick="callreplaceCurrentBundleios();">call replaceCurrentBundle() for
+                IOS </a><br />		
         </div>
         <span class="test_scenario_number">VT300-080<br/></span>
     </div>
@@ -838,6 +831,7 @@
                 <a href="javascript:void(0)" onclick="callgetProperty('screenAutoRotate');">Get Property
                     screenAutoRotate</a>
             </div>
+			<span class="test_scenario_number">VT300-115 / VT300-116<br/></span>
         </div>
         <div class="test_scenario">
             <div class="test_scenario_controls">
@@ -862,6 +856,7 @@
                 <a href="javascript:void(0)" onclick="callgetProperty('screenSleeping');">Get Property
                     screenSleeping</a>
             </div>
+			<span class="test_scenario_number">VT300-119 / VT300-120 <br/></span>	
         </div>
     </div>
 
@@ -890,7 +885,7 @@
                 property with
                 keyboardState as automatic</a> (not WP8)
         </div>
-        <span class="test_scenario_number">VT300-204 <br/></span>
+        <span class="test_scenario_number">VT300-124 <br/></span>
     </div>
     <div class="test_scenario">
         <div class="test_scenario_controls">
@@ -986,7 +981,7 @@
                 <a href="javascript:void(0)" onclick="callgetProperties('screenSleeping');">Get Properties
                     screenSleeping</a>
             </div>
-
+			<span class="test_scenario_number">VT300-178 / VT300-178 <br/></span>
         </div>
     </div>
 

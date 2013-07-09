@@ -668,9 +668,17 @@ var arr_scanner_property = [
 	testName		:	"VT282-3083 | Set  decodeSound :localpath | application/alarm.wav",
 	propertyName	:	"decodeSound",
 	scannerTypes	:	"All",
-	OSTypes			:	"All",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"file://application/alarm.wav",
 	expectedResult	:	"application/alarm.wav"
+},
+{
+	testName		:	"VT282-3083 | Set  decodeSound :localpath | application/alarm.wav",
+	propertyName	:	"decodeSound",
+	scannerTypes	:	"All",
+	OSTypes			:	"ANDROID",
+	propertyValue	:	"file:///sdcard/alarm.wav",
+	expectedResult	:	"file:///sdcard/alarm.wav"
 },
 {
 	testName		:	"VT282-3084 | Set  invalidDecodeSound :localpath | application/alarm5.wav",

@@ -59,7 +59,8 @@ class SettingsController < Rho::RhoController
         puts '-- push_callback: exit command received!'
       when 'exit_and_logout'
         exit = true
-        call_clientreset_and_logout = true
+        puts '-- push_callback: exit and logout command received!'
+	SyncEngine.logout
       when 'logout'
         # TODO:
         puts '-- push_callback: logout command received!'
@@ -74,8 +75,12 @@ class SettingsController < Rho::RhoController
     if @params['error']
       puts "-- push_callback - skipping response: #{url} <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<"
     else
-		  puts "-- push_callback - sending response: #{url} <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<"
-		  Rho::AsyncHttp.get :url => url
+		begin  
+			puts "-- push_callback - sending response: #{url} <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<"
+			Rho::AsyncHttp.get :url => url
+		rescue Exception => e
+			"Exception has been thrown #{e.inspect}"
+		end
     end
 
     if call_clientreset_and_logout

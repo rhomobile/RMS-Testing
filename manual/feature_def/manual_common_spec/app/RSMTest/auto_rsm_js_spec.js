@@ -13,6 +13,16 @@ describe("RSM JS API", function() {
 		callbackstatus = true;
 		BTstatus = data.status;
 	}
+	
+	var callbackgetproperties = function (data){
+		getpropertiesdata = JSON.stringify(data);
+		callbackstatus = true;
+	}
+
+	var callbackgetproperty = function (data){
+		getpropertydata = data;
+		callbackstatus = true;
+	}
 	var arrSCN = getApplicableProperties(enumData[j]);
 	var arrReadSCN = getApplicableReadOnlyProperties(enumData[j]);
 	
