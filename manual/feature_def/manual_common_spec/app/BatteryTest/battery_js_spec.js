@@ -390,29 +390,33 @@ if(!isAndroidPlatform())
           });
 	});
 }
-      
-it("VT284-035|Call stopBatteryStatus method to stop the callback|", function () {
-	runs(function () {
-		dispTestCaseRunning("stopBatteryStatus with trigger periodic, see that event is not firing after 20 secs");
-		dispExpectedResult("should stop the batteryStatus callback after 20 sec ");
-		Rho.Battery.stopBatteryStatus();
-	});
-	
-	runs(function () {
-		Rho.Battery.batteryStatus({trigger :'periodic'},batteryStatusCallback);
-		setTimeout(function () {
+
+if(!isAndroidPlatform())
+{
+	it("VT284-035|Call stopBatteryStatus method to stop the callback|", function () {
+		runs(function () {
+			dispTestCaseRunning("stopBatteryStatus with trigger periodic, see that event is not firing after 20 secs");
+			dispExpectedResult("should stop the batteryStatus callback after 20 sec ");
 			Rho.Battery.stopBatteryStatus();
-		}, 20000);
+		});
+		
+		runs(function () {
+			Rho.Battery.batteryStatus({trigger :'periodic'},batteryStatusCallback);
+			setTimeout(function () {
+				Rho.Battery.stopBatteryStatus();
+			}, 20000);
+		});
+	
+		waitsFor(function () {
+			return captured;
+		}, 'Tester should have responded by now', 180000);
+	
+		runs(function () {
+			expect(testResult).toEqual(true);
+		});
 	});
+}
 
-	waitsFor(function () {
-		return captured;
-	}, 'Tester should have responded by now', 180000);
-
-	runs(function () {
-		expect(testResult).toEqual(true);
-	});
-});       
 if(!isAndroidPlatform() && isAnyButApplePlatform())
 {
 	it("VT284-038|Call smartBatteryStatus method with callback|", function () {
@@ -519,40 +523,40 @@ it("VT284-028|Call batteryStatus method with Hash Property trigger to System wit
 		expect(testResult).toEqual(true);
 	});
 });  
-                  
-      
-it("VT284-029|Call batteryStatus method with Hash Property trigger to System with callback for WP8|", function () {
-	runs(function () {
-		dispTestCaseRunning("batteryStatus method with Hash Property trigger to System with callback ");
-		dispExpectedResult("batteryStatus be should be shown on the page and batteryStatus should updated every percentage value change in battery");
-		Rho.Battery.batteryStatus({trigger :'system'},batteryStatusCallback);
-	});
-  
-	waitsFor(function () {
-		return captured;
-	}, 'Tester should have responded by now', 18000000);
 
-	runs(function () {
-		expect(testResult).toEqual(true);
-	});
-});             
+//Not FD test
+//it("VT284-029|Call batteryStatus method with Hash Property trigger to System with callback for WP8|", function () {
+//	runs(function () {
+//		dispTestCaseRunning("batteryStatus method with Hash Property trigger to System with callback ");
+//		dispExpectedResult("batteryStatus be should be shown on the page and batteryStatus should updated every percentage value change in battery");
+//		Rho.Battery.batteryStatus({trigger :'system'},batteryStatusCallback);
+//	});
+//  
+//	waitsFor(function () {
+//		return captured;
+//	}, 'Tester should have responded by now', 18000000);
+//
+//	runs(function () {
+//		expect(testResult).toEqual(true);
+//	});
+//});             
       
-         
-it("VT284-030|Call batteryStatus method with Hash Property trigger to System with callback for checking high battery|", function () {
-	runs(function () {
-		dispTestCaseRunning("ensure that device would be reaching high battery level in a while before firing this event");
-		dispExpectedResult("batteryStatus be should be shown on the page and trigger parameter in the callback should show high battery");
-		Rho.Battery.batteryStatus({trigger :'system'},batteryStatusCallback);
-	});
-  
-	waitsFor(function () {
-		return captured;
-	}, 'Tester should have responded by now', 18000000);
-
-	runs(function () {
-		expect(testResult).toEqual(true);
-	});
-});  
+//Not FD test       
+//it("VT284-030|Call batteryStatus method with Hash Property trigger to System with callback for checking high battery|", function () {
+//	runs(function () {
+//		dispTestCaseRunning("ensure that device would be reaching high battery level in a while before firing this event");
+//		dispExpectedResult("batteryStatus be should be shown on the page and trigger parameter in the callback should show high battery");
+//		Rho.Battery.batteryStatus({trigger :'system'},batteryStatusCallback);
+//	});
+//  
+//	waitsFor(function () {
+//		return captured;
+//	}, 'Tester should have responded by now', 18000000);
+//
+//	runs(function () {
+//		expect(testResult).toEqual(true);
+//	});
+//});  
       
 it("VT284-032|Call batteryStatus method with Hash Property trigger to Periodic with callback for checking AClineStatus|", function () {
 	runs(function () {
@@ -586,37 +590,39 @@ it("VT284-033|Call batteryStatus method with Hash Property trigger to Periodic w
 	});
 }); 
             
-it("VT284-033|Call batteryStatus method with Hash Property trigger to System with callback for checking low battery|", function () {
-	runs(function () {
-		dispTestCaseRunning("ensure that device would be reaching low battery level(15%) in a while before firing this event");
-		dispExpectedResult("batteryStatus be should be shown on the page and trigger parameter in the callback should show low battery");
-		Rho.Battery.batteryStatus({trigger :'system'},batteryStatusCallback);
-	});
-
-	waitsFor(function () {
-		return captured;
-	}, 'Tester should have responded by now', 18000000);
-
-	runs(function () {
-		expect(testResult).toEqual(true);
-	});
-});  
-      
-it("VT284-034|Call batteryStatus method with Hash Property trigger to System with callback for checking Critical battery|", function () {
-	runs(function () {
-		dispTestCaseRunning("ensure that device would be reaching Critical  battery level(10%) in a while before firing this event");
-		dispExpectedResult("batteryStatus be should be shown on the page and trigger parameter in the callback should show critical battery");
-		Rho.Battery.batteryStatus({trigger :'system'},batteryStatusCallback);
-	});
-
-	waitsFor(function () {
-		return captured;
-	}, 'Tester should have responded by now', 18000000);
-
-	runs(function () {
-		expect(testResult).toEqual(true);
-	});
-});  
+//Not FD test
+//it("VT284-033|Call batteryStatus method with Hash Property trigger to System with callback for checking low battery|", function () {
+//	runs(function () {
+//		dispTestCaseRunning("ensure that device would be reaching low battery level(15%) in a while before firing this event");
+//		dispExpectedResult("batteryStatus be should be shown on the page and trigger parameter in the callback should show low battery");
+//		Rho.Battery.batteryStatus({trigger :'system'},batteryStatusCallback);
+//	});
+//
+//	waitsFor(function () {
+//		return captured;
+//	}, 'Tester should have responded by now', 18000000);
+//
+//	runs(function () {
+//		expect(testResult).toEqual(true);
+//	});
+//});  
+//      
+//Not FD test
+//it("VT284-034|Call batteryStatus method with Hash Property trigger to System with callback for checking Critical battery|", function () {
+//	runs(function () {
+//		dispTestCaseRunning("ensure that device would be reaching Critical  battery level(10%) in a while before firing this event");
+//		dispExpectedResult("batteryStatus be should be shown on the page and trigger parameter in the callback should show critical battery");
+//		Rho.Battery.batteryStatus({trigger :'system'},batteryStatusCallback);
+//	});
+//
+//	waitsFor(function () {
+//		return captured;
+//	}, 'Tester should have responded by now', 18000000);
+//
+//	runs(function () {
+//		expect(testResult).toEqual(true);
+//	});
+//});  
 
 if(!isAndroidPlatform() && isAnyButApplePlatform())
 {  

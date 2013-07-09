@@ -150,13 +150,13 @@ device_list.each do |dev|
     end
 
     after(:all) do
-      # RhoconnectHelper.stop_rhoconnect_stack
-      # FileUtils.rm_r $server_path if File.exists? $server_path
+      RhoconnectHelper.stop_rhoconnect_stack
+      FileUtils.rm_r $server_path if File.exists? $server_path
 
-      # TEST_PKGS.each do |pkg|
-      #   puts "Uninstalling package #{pkg} ..."
-      #   system "adb #{$deviceOpts} uninstall #{pkg}"
-      # end
+      TEST_PKGS.each do |pkg|
+        puts "Uninstalling package #{pkg} ..."
+        system "adb #{$deviceOpts} uninstall #{pkg}"
+      end
 
       puts "Stopping local server"
       $server.shutdown

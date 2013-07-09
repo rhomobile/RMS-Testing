@@ -204,7 +204,7 @@ describe("KeyCapture Test", function() {
 			{
 				setObjective("VT289-018 | call captureKey with keyValue enter and ALL and different callback function");
 				setInstruction("click inside textbox and " +VALUE_18+", Press numeric key 9/volumedown and press alphabet b/menu key");
-				setExpected("Callback2 should fire after pressing alphabet b (0x66),number 9 (0x39) and " +VALUE_18+"/" +TEST_18" , Callback1 should not fire after pressing " +VALUE_18+" and " +VALUE_18+" should be dispatched, others not");
+				setExpected("Callback2 should fire after pressing alphabet b (0x66),number 9 (0x39) and " +VALUE_18+"/" +TEST_18 + " , Callback1 should not fire after pressing " +VALUE_18+" and " +VALUE_18+" should be dispatched, others not");
 				Rho.KeyCapture.captureKey(true,TEST_18,capturekeycallback);
 				Rho.KeyCapture.captureKey(false,'ALL',capturekeycallback2);
 			});
@@ -616,7 +616,7 @@ describe("KeyCapture Test", function() {
 		//  ReMpa key Tests
 		///////////////////////////////////////////////////////////////////////
 
-		if (isWindowsMobileOrAndroidPlatform())
+		if (isWindowsMobilePlatform())
 		{
 
 			it("VT289-039 | call remapKey with enter and numeric key 1 |", function() {
