@@ -643,21 +643,21 @@ describe("File JS API", function () {
 	});
 
 	// Read File with path
-	xit("VT295-064 : Read contents with path| true",function(){
+	it("VT295-064 : Read contents with path| true",function(){
 		var data = Rho.RhoFile.read(testReadPath)
 		expect(data.length != 0).toEqual(true);
 		Rho.Log.info(data, "VT290-072");
 	});
 
 	// Read File with invalid path
-	xit("VT295-065 : Read contents with invalid path| false",function(){
+	it("VT295-065 : Read contents with invalid path| false",function(){
 		var data = Rho.RhoFile.read(invalidpath)
 		expect(data.length == 0).toEqual(true);
 		Rho.Log.info(data, "VT290-073");
 	});
 
 	// Read with specified size
-	xit("VT295-066 : Read contents with specified size| true",function(){
+	it("VT295-066 : Read contents with specified size| true",function(){
 		var fOpen = new Rho.RhoFile(testReadPath,Rho.RhoFile.OPEN_FOR_READ);
 		var data = fOpen.read(20);
 		expect(!!data && !!data.length && data.length > 0).toEqual(true);
@@ -667,7 +667,7 @@ describe("File JS API", function () {
 
 
 	// Read with specified size with mentioned position
-	xit("VT295-067 : Read contents with specified size with mentioned position| true",function(){
+	it("VT295-067 : Read contents with specified size with mentioned position| true",function(){
 
 		var fOpen = new Rho.RhoFile(testReadPath,Rho.RhoFile.OPEN_FOR_READ_WRITE);
 		fOpen.seek(20)
@@ -678,7 +678,7 @@ describe("File JS API", function () {
 	});
 
 	// Read with specified size more than the file size
-	xit("VT295-068 : Read with specified size more than the file size true",function(){
+	it("VT295-068 : Read with specified size more than the file size true",function(){
 
 		var fileMode6 = Rho.RhoFile.join(dirName, "Mode6.txt")
 		var fwrite = new Rho.RhoFile(fileMode6,Rho.RhoFile.OPEN_FOR_WRITE);
@@ -694,7 +694,7 @@ describe("File JS API", function () {
 	});
 
 	// Read with specified size with invalid filename
-	xit("VT295-069 : Read with specified size with invalid filename| false",function(){
+	it("VT295-069 : Read with specified size with invalid filename| false",function(){
 		var fOpen = new Rho.RhoFile(invalidpath,Rho.RhoFile.OPEN_FOR_READ);
 		var data = fOpen.read(20)
 		expect(!!data && !!data.length && data.length == 0).toEqual(false);
@@ -703,7 +703,7 @@ describe("File JS API", function () {
 
 
 	// ReadAll with valid file path
-	xit("VT295-070 : ReadAll with valid file path| true",function(){
+	it("VT295-070 : ReadAll with valid file path| true",function(){
 		var fOpen = new Rho.RhoFile(testReadPath,Rho.RhoFile.OPEN_FOR_READ);
 		var data = fOpen.readAll()
 		expect(!!data && !!data.length && data.length > 0).toEqual(true);
@@ -712,7 +712,7 @@ describe("File JS API", function () {
 	});
 
 	// ReadAll with invalid file path
-	xit("VT295-071 : ReadAll with invalid file path| false",function(){
+	it("VT295-071 : ReadAll with invalid file path| false",function(){
 		var fOpen = new Rho.RhoFile(invalidpath,Rho.RhoFile.OPEN_FOR_READ);
 		var data = fOpen.readAll()
 		expect(data.length == 0).toEqual(true);
