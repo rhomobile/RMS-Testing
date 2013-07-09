@@ -70,7 +70,7 @@ describe("HardwareKeysTestSuite", function() {
 
 			it("1.8.(VT289-050)set the Home Key to disabled with setProperty", function() {
 				Rho.KeyCapture.setProperty('homeKeyValue','Disabled');
-				Rho.KeyCapture.getProperty("homeKeyValue",function(data){getpropertiesdata = data;}));
+				Rho.KeyCapture.getProperty("homeKeyValue",function(data){getpropertiesdata = data;});
 				expect(getpropertiesdata).toBe('Disabled');		
 			});
 
