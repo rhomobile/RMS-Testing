@@ -12,20 +12,21 @@
         return cleanVars;
     };
 
-
-
-  function reset(){
+describe("<ORM module specs>", function() {
+  var reset = function(){
     db = Rho.ORMHelper.dbConnection("local");
     var partitions = Rho.ORMHelper.getDbPartitions();
+
     $.each(partitions, function(index, db2) {
       db2.$execute_sql("DELETE FROM SOURCES");
       db2.$execute_sql("DELETE FROM OBJECT_VALUES");
       db2.$execute_sql("DELETE FROM CHANGED_VALUES");
+      if(db2.$is_table_exist("Product")){
+        db2.$execute_sql("DROP TABLE Product");
+      }
     });
     Rho.ORM.clear();
-  }
-
-describe("<ORM module specs>", function() {
+  };
 
     beforeEach(function(){
       reset();
@@ -137,6 +138,8 @@ describe("<ORM module specs>", function() {
     });
 
     it('VT302-0011 | Create a Model with property("name","string")',function(){
+      source = Opal.Rho._scope.RhoConfig.$sources().map["Product"];
+      expect(source).toBeUndefined();
       var Product = function(model){
           model.modelName("Product");
           model.property("name","string");
@@ -144,7 +147,7 @@ describe("<ORM module specs>", function() {
       p = Rho.ORM.addModel(Product);
       source = Opal.Rho._scope.RhoConfig.$sources().map["Product"];
       expect(source.property['name'][0]).toEqual('string');
-      expect(source.partition).toEqual('user');
+      expect(source.partition).toEqual('local');
       expect(source.name).toEqual('Product');
     });
 
@@ -156,7 +159,7 @@ describe("<ORM module specs>", function() {
       p = Rho.ORM.addModel(Product);
       source = Opal.Rho._scope.RhoConfig.$sources().map["Product"];
       expect(source.property['id'][0]).toEqual('integer');
-      expect(source.partition).toEqual('user');
+      expect(source.partition).toEqual('local');
       expect(source.name).toEqual('Product');
     });
 
@@ -168,7 +171,7 @@ describe("<ORM module specs>", function() {
       p = Rho.ORM.addModel(Product);
       source = Opal.Rho._scope.RhoConfig.$sources().map["Product"];
       expect(source.property['float_prop'][0]).toEqual('float');
-      expect(source.partition).toEqual('user');
+      expect(source.partition).toEqual('local');
       expect(source.name).toEqual('Product');
     });
 
@@ -180,7 +183,7 @@ describe("<ORM module specs>", function() {
       p = Rho.ORM.addModel(Product);
       source = Opal.Rho._scope.RhoConfig.$sources().map["Product"];
       expect(source.property['date_prop'][0]).toEqual('date');
-      expect(source.partition).toEqual('user');
+      expect(source.partition).toEqual('local');
       expect(source.name).toEqual('Product');
     });
 
@@ -192,7 +195,7 @@ describe("<ORM module specs>", function() {
       p = Rho.ORM.addModel(Product);
       source = Opal.Rho._scope.RhoConfig.$sources().map["Product"];
       expect(source.property['time_prop'][0]).toEqual('time');
-      expect(source.partition).toEqual('user');
+      expect(source.partition).toEqual('local');
       expect(source.name).toEqual('Product');
     });
 
@@ -204,7 +207,7 @@ describe("<ORM module specs>", function() {
       p = Rho.ORM.addModel(Product);
       source = Opal.Rho._scope.RhoConfig.$sources().map["Product"];
       expect(source.property['image_url'][0]).toEqual('blob');
-      expect(source.partition).toEqual('user');
+      expect(source.partition).toEqual('local');
       expect(source.name).toEqual('Product');
     });
 
@@ -216,7 +219,7 @@ describe("<ORM module specs>", function() {
       p = Rho.ORM.addModel(Product);
       source = Opal.Rho._scope.RhoConfig.$sources().map["Product"];
       expect(source.property['mycustomproperty'][0]).toEqual('hello');
-      expect(source.partition).toEqual('user');
+      expect(source.partition).toEqual('local');
       expect(source.name).toEqual('Product');
     });
 
@@ -229,13 +232,12 @@ describe("<ORM module specs>", function() {
       source = Opal.Rho._scope.RhoConfig.$sources().map["Product"];
       expect(source.property['image_url'][0]).toEqual('blob');
       expect(source.property['image_url'][1]).toEqual('overwrite');
-      expect(source.partition).toEqual('user');
+      expect(source.partition).toEqual('local');
       expect(source.name).toEqual('Product');
     });
 
     it("VT302-0019 | should add index",function(){
         expect(Rho.ORM.getModel('Product')).toBeUndefined();
-
         var Product = function(model){
             model.modelName("Product");
             model.property("name","string");
@@ -281,6 +283,9 @@ describe("<ORM module specs>", function() {
 
     it("VT302-0021 | add multiple Index to multiple columns while creating a model",function(){
         expect(Rho.ORM.getModel('Product')).toBeUndefined();
+        if(db.$is_table_exist("Product")){
+          db.$execute_sql("DROP TABLE Product");
+        }
 
         var Product = function(model){
             model.modelName("Product");
@@ -295,13 +300,13 @@ describe("<ORM module specs>", function() {
 
         var Model = Rho.ORM.addModel(Product);
         Model.create({"name":"test","price":87.89,"type":"testing"});
-        Model.create({"name":"debug","price":0.78,"type":"testing"});
+        Model.create({"name":"debug","price":0.78,"type":"testing2"});
         sources = Rho.ORMHelper.getAllSources();
 
         expect(Model).toBeDefined();
 
         res = db.$execute_sql("SELECT * FROM Product INDEXED BY p1 Where name = 'test' ");
-        res2 = db.$execute_sql("SELECT * FROM Product INDEXED BY p2 Where name = 'debug' ");
+        res2 = db.$execute_sql("SELECT * FROM Product INDEXED BY p2 Where type = 'testing2' ");
         expect(res[0].map.name).toEqual('test');
         expect(res2[0].map.name).toEqual('debug');
         db.$execute_sql("DROP TABLE Product");
@@ -496,6 +501,22 @@ describe("<ORM module specs>", function() {
  });
 
 describe("<ORM Db Reset specs>", function() {
+
+  var reset = function(){
+    db = Rho.ORMHelper.dbConnection("local");
+    var partitions = Rho.ORMHelper.getDbPartitions();
+
+    $.each(partitions, function(index, db2) {
+      db2.$execute_sql("DELETE FROM SOURCES");
+      db2.$execute_sql("DELETE FROM OBJECT_VALUES");
+      db2.$execute_sql("DELETE FROM CHANGED_VALUES");
+      if(db2.$is_table_exist("Product")){
+        db2.$execute_sql("DROP TABLE Product");
+      }
+    });
+    Rho.ORM.clear();
+  };
+
 
   beforeEach(function(){
     reset();
