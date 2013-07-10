@@ -213,8 +213,8 @@ describe("Signature JS API Test", function() {
 					    Rho.Signature.show({'bgColor':'#FF0000','border':'true','penWidth':'2'});
 							
 						expect(Rho.Signature.bgColor).toEqual('#FF0000');
-						expect(Rho.Signature.border).toEqual('true');
-						expect(Rho.Signature.penWidth).toEqual('2');
+						expect(Rho.Signature.border).toEqual(true);
+						expect(Rho.Signature.penWidth).toEqual(2);
 						Rho.Signature.hide();
 					});
 				});
@@ -225,8 +225,8 @@ describe("Signature JS API Test", function() {
 					    Rho.Signature.takeFullScreen({'bgColor':'#FF0000','outputFormat':'image','penWidth':'1'},sigCallback);
 							
 						expect(Rho.Signature.bgColor).toEqual('#FF0000');
-						expect(Rho.Signature.border).toEqual('true');
-						expect(Rho.Signature.penWidth).toEqual('1');
+						expect(Rho.Signature.border).toEqual(true);
+						expect(Rho.Signature.penWidth).toEqual(1);
 						Rho.Signature.hide();
 					});
 				});
@@ -238,7 +238,7 @@ describe("Signature JS API Test", function() {
 							
 						expect(Rho.Signature.bgColor).toEqual('#FF0000');
 						expect(Rho.Signature.border).toEqual(false);
-						expect(getpropertiesdata).toEqual(1);
+						expect(Rho.Signature.penWidth).toEqual(1);
 						Rho.Signature.hide();
 					});
 				});
@@ -249,9 +249,9 @@ describe("Signature JS API Test", function() {
 					    Rho.Signature.takeFullScreen({'bgColor':'#FF0000','outputFormat':'image','penWidth':3},sigCallback);
 
 						
-						expect(getpropertiesdata).toEqual('#FF0000');
-						expect(getpropertiesdata).toEqual('image');
-						expect(getpropertiesdata).toEqual(3);
+						expect(Rho.Signature.bgColor).toEqual('#FF0000');
+						expect(Rho.Signature.outputFormat).toEqual('image');
+						expect(Rho.Signature.penWidth).toEqual(3);
 						Rho.Signature.hide();
 					});
 				});
@@ -345,7 +345,7 @@ describe("Signature JS API Test", function() {
 								
 							runs(function() {
 
-								var data = eval(Rho.Signature)[arrSignaturetake[idx]['propertyName']];
+								var data = eval(Rho.Signature)[arrSignatureshow[idx]['propertyName']];
 								expect(data).toEqual(arrSignatureshow[idx]['expectedResult']);
 							});
 
@@ -372,7 +372,17 @@ describe("Signature JS API Test", function() {
 					(function(idx){
 
 						it(arrSignaturetake[idx]['testName'], function() {
-
+							runs(function() {
+								setTimeout(function()
+								{
+									flag = true;
+								}, HIDE_TIMEOUT_VALUE);
+							});
+						
+							waitsFor(function() {
+								return flag;
+							}, "Waiting for hide to complete", 2000);
+							
 							runs(function() {
 
 								var propertyName = arrSignaturetake[idx]['propertyName'];
@@ -394,6 +404,7 @@ describe("Signature JS API Test", function() {
 
 								Rho.Signature.takeFullScreen(objProperty, sigCallback);
 
+								flag = false;
 								setTimeout(function() {
 									flag = true;
 								}, ENABLE_TIMEOUT_VALUE);
@@ -407,7 +418,16 @@ describe("Signature JS API Test", function() {
 
 								var data = eval(Rho.Signature)[arrSignaturetake[idx]['propertyName']];
 								expect(data).toEqual(arrSignaturetake[idx]['expectedResult']);
+								flag = false;
+								setTimeout(function()
+								{
+									flag = true;
+								}, HIDE_TIMEOUT_VALUE);
 							});
+						
+							waitsFor(function() {
+								return flag;
+							}, "Waiting to hide", 2000);
 
 						});
 					})(i);
