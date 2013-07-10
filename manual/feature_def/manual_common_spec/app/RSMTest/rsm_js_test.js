@@ -29,7 +29,7 @@ function enablecallbackdata(data)
 }	
 var rsm_get_property_unknown_return = [
 {
-	testName		:	"VT400-1001 | Get rsmModelNumber | ",
+	testName		:	"VT282-2887 | Get rsmModelNumber | ",
 	propertyName	:	"rsmModelNumber",
 	scannerTypes	:	"RSM Bluetooth",
 	OSTypes			:	"WINDOWS",
@@ -37,7 +37,7 @@ var rsm_get_property_unknown_return = [
 	expectedResult	:	"Unknown"
 },
 {
-	testName		:	"VT400-1002 | Get rsmSerialNumber | ",
+	testName		:	"VT282-2888 | Get rsmSerialNumber | ",
 	propertyName	:	"rsmSerialNumber",
 	scannerTypes	:	"RSM Bluetooth",
 	OSTypes			:	"WINDOWS",
@@ -45,7 +45,7 @@ var rsm_get_property_unknown_return = [
 	expectedResult	:	"Unknown"
 },
 {
-	testName		:	"VT400-1003 | Get rsmDateOfManufacture | ",
+	testName		:	"VT282-2883 | Get rsmDateOfManufacture | ",
 	propertyName	:	"rsmDateOfManufacture",
 	scannerTypes	:	"RSM Bluetooth",
 	OSTypes			:	"WINDOWS",
@@ -53,7 +53,7 @@ var rsm_get_property_unknown_return = [
 	expectedResult	:	"Unknown"
 },
 {
-	testName		:	"VT400-1004 | Get rsmDateOfService | ",
+	testName		:	"VT282-2884 | Get rsmDateOfService | ",
 	propertyName	:	"rsmDateOfService",
 	scannerTypes	:	"RSM Bluetooth",
 	OSTypes			:	"WINDOWS",
@@ -61,7 +61,7 @@ var rsm_get_property_unknown_return = [
 	expectedResult	:	"Unknown"
 },
 {
-	testName		:	"VT400-1005 | Get rsmBluetoothAddress | ",
+	testName		:	"VT282-2882 | Get rsmBluetoothAddress | ",
 	propertyName	:	"rsmBluetoothAddress",
 	scannerTypes	:	"RSM Bluetooth",
 	OSTypes			:	"WINDOWS",
@@ -69,7 +69,7 @@ var rsm_get_property_unknown_return = [
 	expectedResult	:	"Unknown"
 },
 {
-	testName		:	"VT400-1006 | Get rsmFirmwareVersion | ",
+	testName		:	"VT282-2886 | Get rsmFirmwareVersion | ",
 	propertyName	:	"rsmFirmwareVersion",
 	scannerTypes	:	"RSM Bluetooth",
 	OSTypes			:	"WINDOWS",
@@ -77,7 +77,7 @@ var rsm_get_property_unknown_return = [
 	expectedResult	:	"Unknown"
 },
 {
-	testName		:	"VT400-1007 | Get rsmDeviceClass | ",
+	testName		:	"VT282-2885 | Get rsmDeviceClass | ",
 	propertyName	:	"rsmDeviceClass",
 	scannerTypes	:	"RSM Bluetooth",
 	OSTypes			:	"WINDOWS",
@@ -85,7 +85,7 @@ var rsm_get_property_unknown_return = [
 	expectedResult	:	"Unknown"
 },
 {
-	testName		:	"VT400-1008 | Get rsmBatteryStatus | ",
+	testName		:	"VT282-2881 | Get rsmBatteryStatus | ",
 	propertyName	:	"rsmBatteryStatus",
 	scannerTypes	:	"RSM Bluetooth",
 	OSTypes			:	"WINDOWS",
@@ -93,7 +93,7 @@ var rsm_get_property_unknown_return = [
 	expectedResult	:	"Unknown"
 },
 {
-	testName		:	"VT400-1009 | Set rsmBatteryCapacity | ",
+	testName		:	"VT282-2879 | Set rsmBatteryCapacity | ",
 	propertyName	:	"rsmBatteryCapacity",
 	scannerTypes	:	"RSM Bluetooth",
 	OSTypes			:	"WINDOWS",
@@ -101,7 +101,7 @@ var rsm_get_property_unknown_return = [
 	expectedResult	:	"Unknown"
 },
 {
-	testName		:	"VT400-1010 | Get rsmBatteryId | ",
+	testName		:	"VT282-2880 | Get rsmBatteryId | ",
 	propertyName	:	"rsmBatteryId",
 	scannerTypes	:	"RSM Bluetooth",
 	OSTypes			:	"WINDOWS",
