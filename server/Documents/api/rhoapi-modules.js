@@ -1171,7 +1171,7 @@ var Rho = Rho || (function ($) {
 
   rhoUtil.namespace(moduleNS, ORM, true);
 
-})(jQuery, Rho, Rho.util);// Module Rho.ORMHelper
+})(Rho.jQuery, Rho, Rho.util);// Module Rho.ORMHelper
 
 (function ($,rho,rhoUtil) {
   'use strict';
@@ -1458,9 +1458,8 @@ var Rho = Rho || (function ($) {
   };
   rhoUtil.namespace(moduleNS, ORMHelper, true);
 
-})(jQuery, Rho, Rho.util);
+})(Rho.jQuery, Rho, Rho.util);
 // Module Rho.Ruby.RunTime
-
 
 (function ($, rho, rhoUtil) {
     // 'use strict';
@@ -8800,7 +8799,7 @@ var Rho = Rho || (function ($) {
         })();
     })();
 
-})(jQuery, Rho, Rho.util);
+})(Rho.jQuery, Rho, Rho.util);
 // Module Rho.Application
 
 
@@ -9116,155 +9115,6 @@ var Rho = Rho || (function ($) {
 
 
 })(Rho.jQuery, Rho, Rho.util);
-// Module Rho.File
-
-
-(function ($, rho, rhoUtil) {
-    'use strict';
-
-    var moduleNS = 'Rho.File';
-    var apiReq = rhoUtil.apiReqFor(moduleNS);
-    var currentDefaultID = null;
-
-    // === File class definition ===
-
-    function File() {
-        var id = null;
-        this.getId = function () {return id;};
-
-        if (1 == arguments.length && arguments[0][rhoUtil.rhoIdParam()]) {
-            if (moduleNS != arguments[0][rhoUtil.rhoClassParam()]) {
-                throw "Wrong class instantiation!";
-            }
-            id = arguments[0][rhoUtil.rhoIdParam()];
-        } else {
-            id = rhoUtil.nextId();
-            // constructor methods are following:
-            
-                this.open.apply(this, arguments);
-            
-        }
-    };
-
-    File.getId = function() { return currentDefaultID; }
-
-    // === File instance properties ===
-
-    rhoUtil.createPropsProxy(File.prototype, [
-    ], apiReq, function(){ return this.getId(); });
-
-    // === File instance methods ===
-
-    rhoUtil.createMethodsProxy(File.prototype, [
-    
-          // function(/* const rho::String& */ path, /* int */ mode, /* optional function */ oResult)
-          { methodName: 'open', nativeName: 'open', valueCallbackIndex: 2 }
-    
-          // function(/* optional function */ oResult)
-        , { methodName: 'close', nativeName: 'close', valueCallbackIndex: 0 }
-    
-          // function(/* optional function */ oResult)
-        , { methodName: 'isOpened', nativeName: 'isOpened', valueCallbackIndex: 0 }
-    
-          // function(/* optional function */ oResult)
-        , { methodName: 'read', nativeName: 'read', valueCallbackIndex: 0 }
-    
-          // function(/* optional function */ oResult)
-        , { methodName: 'readAll', nativeName: 'readAll', valueCallbackIndex: 0 }
-    
-          // function(/* optional function */ oResult)
-        , { methodName: 'write', nativeName: 'write', valueCallbackIndex: 0 }
-    
-          // function(/* optional function */ oResult)
-        , { methodName: 'flush', nativeName: 'flush', valueCallbackIndex: 0 }
-    
-          // function(/* optional function */ oResult)
-        , { methodName: 'seek', nativeName: 'seek', valueCallbackIndex: 0 }
-    
-          // function(/* optional function */ oResult)
-        , { methodName: 'size', nativeName: 'size', valueCallbackIndex: 0 }
-    
-    ], apiReq, function(){ return this.getId(); });
-
-    // === File constants ===
-
-    
-            File.openForAppend = '1'; 
-    
-            File.openForRead = '2'; 
-    
-            File.openForWrite = '3'; 
-    
-            File.openForReadWrite = '4'; 
-    
-
-
-
-    // === File static properties ===
-
-    rhoUtil.createPropsProxy(File, [
-    ], apiReq);
-
-    // === File static methods ===
-
-    rhoUtil.createMethodsProxy(File, [
-    
-          // function(/* optional function */ oResult)
-          { methodName: 'copy', nativeName: 'copy', valueCallbackIndex: 0 }
-    
-          // function(/* optional function */ oResult)
-        , { methodName: 'rename', nativeName: 'rename', valueCallbackIndex: 0 }
-    
-          // function(/* optional function */ oResult)
-        , { methodName: 'makeDir', nativeName: 'makeDir', valueCallbackIndex: 0 }
-    
-          // function(/* optional function */ oResult)
-        , { methodName: 'exists', nativeName: 'exists', valueCallbackIndex: 0 }
-    
-          // function(/* optional function */ oResult)
-        , { methodName: 'size', nativeName: 'size', valueCallbackIndex: 0 }
-    
-          // function(/* optional function */ oResult)
-        , { methodName: 'isDir', nativeName: 'isDir', valueCallbackIndex: 0 }
-    
-          // function(/* optional function */ oResult)
-        , { methodName: 'isFile', nativeName: 'isFile', valueCallbackIndex: 0 }
-    
-          // function(/* optional function */ oResult)
-        , { methodName: 'deleteFile', nativeName: 'deleteFile', valueCallbackIndex: 0 }
-    
-          // function(/* optional function */ oResult)
-        , { methodName: 'deleteDir', nativeName: 'deleteDir', valueCallbackIndex: 0 }
-    
-          // function(/* optional function */ oResult)
-        , { methodName: 'makeDirs', nativeName: 'makeDirs', valueCallbackIndex: 0 }
-    
-          // function(/* optional function */ oResult)
-        , { methodName: 'deleteRecursive', nativeName: 'deleteRecursive', valueCallbackIndex: 0 }
-    
-          // function(/* optional function */ oResult)
-        , { methodName: 'listDir', nativeName: 'listDir', valueCallbackIndex: 0 }
-    
-          // function(/* optional function */ oResult)
-        , { methodName: 'basename', nativeName: 'basename', valueCallbackIndex: 0 }
-    
-          // function(/* optional function */ oResult)
-        , { methodName: 'dirname', nativeName: 'dirname', valueCallbackIndex: 0 }
-    
-          // function(/* optional function */ oResult)
-        , { methodName: 'join', nativeName: 'join', valueCallbackIndex: 0 }
-    
-          // function(/* optional function */ oResult)
-        , { methodName: 'read', nativeName: 'read', valueCallbackIndex: 0 }
-    
-    ], apiReq);
-
-    // === File default instance support ===
-    
-
-    rhoUtil.namespace(moduleNS, File);
-
-})(jQuery, Rho, Rho.util);
 // Module Rho.Log
 
 
@@ -10032,167 +9882,6 @@ var Rho = Rho || (function ($) {
 
 
 })(Rho.jQuery, Rho, Rho.util);
-// Module Rho.Notification.Led
-
-
-(function ($, rho, rhoUtil) {
-    'use strict';
-
-    var moduleNS = 'Rho.Notification.Led';
-    var apiReq = rhoUtil.apiReqFor(moduleNS);
-    var currentDefaultID = null;
-
-    // === Led class definition ===
-
-    function Led() {
-        var id = null;
-        this.getId = function () {return id;};
-
-        if (1 == arguments.length && arguments[0][rhoUtil.rhoIdParam()]) {
-            if (moduleNS != arguments[0][rhoUtil.rhoClassParam()]) {
-                throw "Wrong class instantiation!";
-            }
-            id = arguments[0][rhoUtil.rhoIdParam()];
-        } else {
-            id = rhoUtil.nextId();
-            // constructor methods are following:
-            
-        }
-    };
-
-    Led.getId = function() { return currentDefaultID; }
-
-    // === Led instance properties ===
-
-    rhoUtil.createPropsProxy(Led.prototype, [
-        { propName: 'name', propAccess: 'r' }
-    ], apiReq, function(){ return this.getId(); });
-
-    // === Led instance methods ===
-
-    rhoUtil.createMethodsProxy(Led.prototype, [
-    
-          // function(/* optional function */ oResult)
-          { methodName: 'illuminate', nativeName: 'illuminate', valueCallbackIndex: 0 }
-    
-          // function(/* optional function */ oResult)
-        , { methodName: 'extinguish', nativeName: 'extinguish', valueCallbackIndex: 0 }
-    
-          // function(/* const rho::Hashtable<rho::String, rho::String>& */ propertyMap, /* optional function */ oResult)
-        , { methodName: 'flash', nativeName: 'flash', valueCallbackIndex: 1 }
-    
-    ], apiReq, function(){ return this.getId(); });
-
-    // === Led constants ===
-
-    
-
-
-    // === Led hash keys ===
-    
-    
-            Led.HK_NUMBER_OF_CYCLES = "numberOfCycles"; 
-
-            Led.HK_OFF_DURATION = "offDuration"; 
-
-            Led.HK_ON_DURATION = "onDuration"; 
-
-
-    // === Led static properties ===
-
-    rhoUtil.createPropsProxy(Led, [
-    ], apiReq);
-
-    // === Led static methods ===
-
-    rhoUtil.createMethodsProxy(Led, [
-    
-          // function(/* optional function */ oResult)
-          { methodName: 'enumerate', nativeName: 'enumerate', persistentCallbackIndex: 0, valueCallbackIndex: 2 }
-    
-    ], apiReq);
-
-    // === Led default instance support ===
-    
-
-    rhoUtil.namespace(moduleNS, Led);
-
-})(Rho.jQuery, Rho, Rho.util);
-// Module Rho.ORM
-
-
-(function ($, rho, rhoUtil) {
-    'use strict';
-
-    var moduleNS = 'Rho.ORM';
-    var apiReq = rhoUtil.apiReqFor(moduleNS);
-    var currentDefaultID = null;
-
-    // === ORM class definition ===
-
-    function ORM() {
-        var id = null;
-        this.getId = function () {return id;};
-
-        if (1 == arguments.length && arguments[0][rhoUtil.rhoIdParam()]) {
-            if (moduleNS != arguments[0][rhoUtil.rhoClassParam()]) {
-                throw "Wrong class instantiation!";
-            }
-            id = arguments[0][rhoUtil.rhoIdParam()];
-        } else {
-            id = rhoUtil.nextId();
-            // constructor methods are following:
-            
-        }
-    };
-
-    ORM.getId = function() { return currentDefaultID; }
-
-    // === ORM instance properties ===
-
-    rhoUtil.createPropsProxy(ORM.prototype, [
-    ], apiReq, function(){ return this.getId(); });
-
-    // === ORM instance methods ===
-
-    rhoUtil.createMethodsProxy(ORM.prototype, [
-    
-    ], apiReq, function(){ return this.getId(); });
-
-    // === ORM constants ===
-
-    
-
-
-    // === ORM hash keys ===
-    
-    
-            ORM.HK_MODELS = "models"; 
-
-            ORM.HK_RESET_CLIENT_INFO = "reset_client_info"; 
-
-            ORM.HK_RESET_LOCAL_MODELS = "reset_local_models"; 
-
-
-    // === ORM static properties ===
-
-    rhoUtil.createPropsProxy(ORM, [
-        { propName: 'clientId', propAccess: 'r' }
-      , { propName: 'haveLocalChanges', propAccess: 'r' }
-    ], apiReq);
-
-    // === ORM static methods ===
-
-    rhoUtil.createMethodsProxy(ORM, [
-    
-    ], apiReq);
-
-    // === ORM default instance support ===
-    
-
-    rhoUtil.namespace(moduleNS, ORM);
-
-})(jQuery, Rho, Rho.util);
 // Module Rho.Push
 
 
@@ -10949,6 +10638,1549 @@ var Rho = Rho || (function ($) {
 
 
 })(Rho.jQuery, Rho, Rho.util);
+// Module Rho.Barcode
+
+
+(function ($, rho, rhoUtil) {
+    'use strict';
+
+    var moduleNS = 'Rho.Barcode';
+    var apiReq = rhoUtil.apiReqFor(moduleNS);
+    var currentDefaultID = null;
+
+    // === Barcode class definition ===
+
+    function Barcode() {
+        var id = null;
+        this.getId = function () {return id;};
+
+        if (1 == arguments.length && arguments[0][rhoUtil.rhoIdParam()]) {
+            if (moduleNS != arguments[0][rhoUtil.rhoClassParam()]) {
+                throw "Wrong class instantiation!";
+            }
+            id = arguments[0][rhoUtil.rhoIdParam()];
+        } else {
+            id = rhoUtil.nextId();
+            // constructor methods are following:
+            
+        }
+    };
+
+    Barcode.getId = function() { return currentDefaultID; }
+
+    // === Barcode instance properties ===
+
+    rhoUtil.createPropsProxy(Barcode.prototype, [
+        { propName: 'autoEnter', propAccess: 'rw' }
+      , { propName: 'autoTab', propAccess: 'rw' }
+      , { propName: 'hapticFeedback', propAccess: 'rw' }
+      , { propName: 'linearSecurityLevel', propAccess: 'rw' }
+      , { propName: 'scanTimeout', propAccess: 'rw' }
+      , { propName: 'rasterMode', propAccess: 'rw' }
+      , { propName: 'rasterHeight', propAccess: 'rw' }
+      , { propName: 'aimType', propAccess: 'rw' }
+      , { propName: 'timedAimDuration', propAccess: 'rw' }
+      , { propName: 'sameSymbolTimeout', propAccess: 'rw' }
+      , { propName: 'differentSymbolTimeout', propAccess: 'rw' }
+      , { propName: 'aimMode', propAccess: 'rw' }
+      , { propName: 'picklistMode', propAccess: 'rw' }
+      , { propName: 'viewfinderMode', propAccess: 'rw' }
+      , { propName: 'viewfinderX', propAccess: 'rw' }
+      , { propName: 'viewfinderY', propAccess: 'rw' }
+      , { propName: 'viewfinderWidth', propAccess: 'rw' }
+      , { propName: 'viewfinderHeight', propAccess: 'rw' }
+      , { propName: 'viewfinderFeedback', propAccess: 'rw' }
+      , { propName: 'viewfinderFeedbackTime', propAccess: 'rw' }
+      , { propName: 'focusMode', propAccess: 'rw' }
+      , { propName: 'illuminationMode', propAccess: 'rw' }
+      , { propName: 'dpmMode', propAccess: 'rw' }
+      , { propName: 'inverse1dMode', propAccess: 'rw' }
+      , { propName: 'poorQuality1dMode', propAccess: 'rw' }
+      , { propName: 'beamWidth', propAccess: 'rw' }
+      , { propName: 'dbpMode', propAccess: 'rw' }
+      , { propName: 'klasseEins', propAccess: 'rw' }
+      , { propName: 'adaptiveScanning', propAccess: 'rw' }
+      , { propName: 'bidirectionalRedundancy', propAccess: 'rw' }
+      , { propName: 'barcodeDataFormat', propAccess: 'rw' }
+      , { propName: 'dataBufferSize', propAccess: 'rw' }
+      , { propName: 'connectionIdleTimeout', propAccess: 'rw' }
+      , { propName: 'disconnectBtOnDisable', propAccess: 'rw' }
+      , { propName: 'displayBtAddressBarcodeOnEnable', propAccess: 'rw' }
+      , { propName: 'enableTimeout', propAccess: 'rw' }
+      , { propName: 'friendlyName', propAccess: 'r' }
+      , { propName: 'lcdMode', propAccess: 'rw' }
+      , { propName: 'lowBatteryScan', propAccess: 'rw' }
+      , { propName: 'disableScannerDuringNavigate', propAccess: 'rw' }
+      , { propName: 'decodeVolume', propAccess: 'rw' }
+      , { propName: 'decodeDuration', propAccess: 'rw' }
+      , { propName: 'decodeFrequency', propAccess: 'rw' }
+      , { propName: 'invalidDecodeFrequency', propAccess: 'rw' }
+      , { propName: 'decodeSound', propAccess: 'rw' }
+      , { propName: 'invalidDecodeSound', propAccess: 'rw' }
+      , { propName: 'scannerType', propAccess: 'r' }
+      , { propName: 'allDecoders', propAccess: 'rw' }
+      , { propName: 'aztec', propAccess: 'rw' }
+      , { propName: 'chinese2of5', propAccess: 'rw' }
+      , { propName: 'codabar', propAccess: 'rw' }
+      , { propName: 'codabarClsiEditing', propAccess: 'rw' }
+      , { propName: 'codabarMaxLength', propAccess: 'rw' }
+      , { propName: 'codabarMinLength', propAccess: 'rw' }
+      , { propName: 'codabarNotisEditing', propAccess: 'rw' }
+      , { propName: 'codabarRedundancy', propAccess: 'rw' }
+      , { propName: 'code11', propAccess: 'rw' }
+      , { propName: 'code11checkDigitCount', propAccess: 'rw' }
+      , { propName: 'code11maxLength', propAccess: 'rw' }
+      , { propName: 'code11minLength', propAccess: 'rw' }
+      , { propName: 'code11redundancy', propAccess: 'rw' }
+      , { propName: 'code11reportCheckDigit', propAccess: 'rw' }
+      , { propName: 'code128', propAccess: 'rw' }
+      , { propName: 'code128checkIsBtTable', propAccess: 'rw' }
+      , { propName: 'code128ean128', propAccess: 'rw' }
+      , { propName: 'code128isbt128', propAccess: 'rw' }
+      , { propName: 'code128isbt128ConcatMode', propAccess: 'rw' }
+      , { propName: 'code128maxLength', propAccess: 'rw' }
+      , { propName: 'code128minLength', propAccess: 'rw' }
+      , { propName: 'code128other128', propAccess: 'rw' }
+      , { propName: 'code128redundancy', propAccess: 'rw' }
+      , { propName: 'code128securityLevel', propAccess: 'rw' }
+      , { propName: 'compositeAb', propAccess: 'rw' }
+      , { propName: 'compositeAbUccLinkMode', propAccess: 'rw' }
+      , { propName: 'compositeAbUseUpcPreambleCheckDigitRules', propAccess: 'rw' }
+      , { propName: 'compositeC', propAccess: 'rw' }
+      , { propName: 'code39', propAccess: 'rw' }
+      , { propName: 'code39code32Prefix', propAccess: 'rw' }
+      , { propName: 'code39convertToCode32', propAccess: 'rw' }
+      , { propName: 'code39fullAscii', propAccess: 'rw' }
+      , { propName: 'code39maxLength', propAccess: 'rw' }
+      , { propName: 'code39minLength', propAccess: 'rw' }
+      , { propName: 'code39redundancy', propAccess: 'rw' }
+      , { propName: 'code39reportCheckDigit', propAccess: 'rw' }
+      , { propName: 'code39securityLevel', propAccess: 'rw' }
+      , { propName: 'code39verifyCheckDigit', propAccess: 'rw' }
+      , { propName: 'code93', propAccess: 'rw' }
+      , { propName: 'code93maxLength', propAccess: 'rw' }
+      , { propName: 'code93minLength', propAccess: 'rw' }
+      , { propName: 'code93redundancy', propAccess: 'rw' }
+      , { propName: 'd2of5', propAccess: 'rw' }
+      , { propName: 'd2of5maxLength', propAccess: 'rw' }
+      , { propName: 'd2of5minLength', propAccess: 'rw' }
+      , { propName: 'd2of5redundancy', propAccess: 'rw' }
+      , { propName: 'datamatrix', propAccess: 'rw' }
+      , { propName: 'ean13', propAccess: 'rw' }
+      , { propName: 'ean8', propAccess: 'rw' }
+      , { propName: 'ean8convertToEan13', propAccess: 'rw' }
+      , { propName: 'i2of5', propAccess: 'rw' }
+      , { propName: 'i2of5convertToEan13', propAccess: 'rw' }
+      , { propName: 'i2of5maxLength', propAccess: 'rw' }
+      , { propName: 'i2of5minLength', propAccess: 'rw' }
+      , { propName: 'i2of5redundancy', propAccess: 'rw' }
+      , { propName: 'i2of5reportCheckDigit', propAccess: 'rw' }
+      , { propName: 'i2of5verifyCheckDigit', propAccess: 'rw' }
+      , { propName: 'korean3of5', propAccess: 'rw' }
+      , { propName: 'korean3of5redundancy', propAccess: 'rw' }
+      , { propName: 'korean3of5maxLength', propAccess: 'rw' }
+      , { propName: 'korean3of5minLength', propAccess: 'rw' }
+      , { propName: 'macroPdf', propAccess: 'rw' }
+      , { propName: 'macroPdfBufferLabels', propAccess: 'rw' }
+      , { propName: 'macroPdfConvertToPdf417', propAccess: 'rw' }
+      , { propName: 'macroPdfExclusive', propAccess: 'rw' }
+      , { propName: 'macroMicroPdf', propAccess: 'rw' }
+      , { propName: 'macroMicroPdfBufferLabels', propAccess: 'rw' }
+      , { propName: 'macroMicroPdfConvertToMicroPdf', propAccess: 'rw' }
+      , { propName: 'macroMicroPdfExclusive', propAccess: 'rw' }
+      , { propName: 'macroMicroPdfReportAppendInfo', propAccess: 'rw' }
+      , { propName: 'matrix2of5', propAccess: 'rw' }
+      , { propName: 'matrix2of5maxLength', propAccess: 'rw' }
+      , { propName: 'matrix2of5minLength', propAccess: 'rw' }
+      , { propName: 'matrix2of5reportCheckDigit', propAccess: 'rw' }
+      , { propName: 'matrix2of5verifyCheckDigit', propAccess: 'rw' }
+      , { propName: 'maxiCode', propAccess: 'rw' }
+      , { propName: 'microPdf', propAccess: 'rw' }
+      , { propName: 'microQr', propAccess: 'rw' }
+      , { propName: 'msi', propAccess: 'rw' }
+      , { propName: 'msiCheckDigits', propAccess: 'rw' }
+      , { propName: 'msiCheckDigitScheme', propAccess: 'rw' }
+      , { propName: 'msiMaxLength', propAccess: 'rw' }
+      , { propName: 'msiMinLength', propAccess: 'rw' }
+      , { propName: 'msiRedundancy', propAccess: 'rw' }
+      , { propName: 'msiReportCheckDigit', propAccess: 'rw' }
+      , { propName: 'pdf417', propAccess: 'rw' }
+      , { propName: 'signature', propAccess: 'rw' }
+      , { propName: 'signatureImageHeight', propAccess: 'rw' }
+      , { propName: 'signatureImageWidth', propAccess: 'rw' }
+      , { propName: 'signatureImageQuality', propAccess: 'rw' }
+      , { propName: 'ausPostal', propAccess: 'rw' }
+      , { propName: 'canPostal', propAccess: 'rw' }
+      , { propName: 'dutchPostal', propAccess: 'rw' }
+      , { propName: 'japPostal', propAccess: 'rw' }
+      , { propName: 'ukPostal', propAccess: 'rw' }
+      , { propName: 'ukPostalReportCheckDigit', propAccess: 'rw' }
+      , { propName: 'us4state', propAccess: 'rw' }
+      , { propName: 'us4stateFics', propAccess: 'rw' }
+      , { propName: 'usPlanet', propAccess: 'rw' }
+      , { propName: 'usPlanetReportCheckDigit', propAccess: 'rw' }
+      , { propName: 'usPostNet', propAccess: 'rw' }
+      , { propName: 'usPostNetReportCheckDigit', propAccess: 'rw' }
+      , { propName: 'qrCode', propAccess: 'rw' }
+      , { propName: 'gs1dataBar', propAccess: 'rw' }
+      , { propName: 'gs1dataBarExpanded', propAccess: 'rw' }
+      , { propName: 'gs1dataBarLimited', propAccess: 'rw' }
+      , { propName: 'tlc39', propAccess: 'rw' }
+      , { propName: 'trioptic39', propAccess: 'rw' }
+      , { propName: 'trioptic39Redundancy', propAccess: 'rw' }
+      , { propName: 'upcEanBookland', propAccess: 'rw' }
+      , { propName: 'upcEanBooklandFormat', propAccess: 'rw' }
+      , { propName: 'upcEanConvertGs1dataBarToUpcEan', propAccess: 'rw' }
+      , { propName: 'upcEanCoupon', propAccess: 'rw' }
+      , { propName: 'upcEanLinearDecode', propAccess: 'rw' }
+      , { propName: 'upcEanRandomWeightCheckDigit', propAccess: 'rw' }
+      , { propName: 'upcEanRetryCount', propAccess: 'rw' }
+      , { propName: 'upcEanSecurityLevel', propAccess: 'rw' }
+      , { propName: 'upcEanSupplemental2', propAccess: 'rw' }
+      , { propName: 'upcEanSupplemental5', propAccess: 'rw' }
+      , { propName: 'upcEanSupplementalMode', propAccess: 'rw' }
+      , { propName: 'upca', propAccess: 'rw' }
+      , { propName: 'upcaPreamble', propAccess: 'rw' }
+      , { propName: 'upcaReportCheckDigit', propAccess: 'rw' }
+      , { propName: 'upce0', propAccess: 'rw' }
+      , { propName: 'upce0convertToUpca', propAccess: 'rw' }
+      , { propName: 'upce0preamble', propAccess: 'rw' }
+      , { propName: 'upce0reportCheckDigit', propAccess: 'rw' }
+      , { propName: 'upce1', propAccess: 'rw' }
+      , { propName: 'upce1convertToUpca', propAccess: 'rw' }
+      , { propName: 'upce1preamble', propAccess: 'rw' }
+      , { propName: 'upce1reportCheckDigit', propAccess: 'rw' }
+      , { propName: 'webcode', propAccess: 'rw' }
+      , { propName: 'webcodeDecodeGtSubtype', propAccess: 'rw' }
+      , { propName: 'rsmModelNumber', propAccess: 'r' }
+      , { propName: 'rsmSerialNumber', propAccess: 'r' }
+      , { propName: 'rsmDateOfManufacture', propAccess: 'r' }
+      , { propName: 'rsmDateOfService', propAccess: 'r' }
+      , { propName: 'rsmBluetoothAddress', propAccess: 'r' }
+      , { propName: 'rsmFirmwareVersion', propAccess: 'r' }
+      , { propName: 'rsmDeviceClass', propAccess: 'r' }
+      , { propName: 'rsmBatteryStatus', propAccess: 'r' }
+      , { propName: 'rsmBatteryCapacity', propAccess: 'r' }
+      , { propName: 'rsmBatteryId', propAccess: 'r' }
+      , { propName: 'rsmBluetoothAuthentication', propAccess: 'rw' }
+      , { propName: 'rsmBluetoothEncryption', propAccess: 'rw' }
+      , { propName: 'rsmBluetoothPinCode', propAccess: 'rw' }
+      , { propName: 'rsmBluetoothPinCodeType', propAccess: 'rw' }
+      , { propName: 'rsmBluetoothReconnectionAttempts', propAccess: 'rw' }
+      , { propName: 'rsmBluetoothBeepOnReconnectAttempt', propAccess: 'rw' }
+      , { propName: 'rsmBluetoothHidAutoReconnect', propAccess: 'rw' }
+      , { propName: 'rsmBluetoothFriendlyName', propAccess: 'rw' }
+      , { propName: 'rsmBluetoothInquiryMode', propAccess: 'rw' }
+      , { propName: 'rsmBluetoothAutoReconnect', propAccess: 'rw' }
+      , { propName: 'rsmForceSavePairingBarcode', propAccess: 'rw' }
+      , { propName: 'rsmLowBatteryIndication', propAccess: 'rw' }
+      , { propName: 'rsmLowBatteryIndicationCycle', propAccess: 'rw' }
+      , { propName: 'rsmScanLineWidth', propAccess: 'rw' }
+      , { propName: 'rsmGoodScansDelay', propAccess: 'rw' }
+      , { propName: 'rsmDecodeFeedback', propAccess: 'rw' }
+      , { propName: 'rsmIgnoreCode128Usps', propAccess: 'rw' }
+      , { propName: 'rsmScanTriggerWakeup', propAccess: 'rw' }
+      , { propName: 'rsmMems', propAccess: 'rw' }
+      , { propName: 'rsmProximityEnable', propAccess: 'rw' }
+      , { propName: 'rsmProximityContinuous', propAccess: 'rw' }
+      , { propName: 'rsmProximityDistance', propAccess: 'rw' }
+      , { propName: 'rsmPagingEnable', propAccess: 'rw' }
+      , { propName: 'rsmPagingBeepSequence', propAccess: 'rw' }
+    ], apiReq, function(){ return this.getId(); });
+
+    // === Barcode instance methods ===
+
+    rhoUtil.createMethodsProxy(Barcode.prototype, [
+    
+          // function(/* const rho::Hashtable<rho::String, rho::String>& */ propertyMap, /* optional function */ oResult)
+          { methodName: 'enable', nativeName: 'enable', persistentCallbackIndex: 1, valueCallbackIndex: 3 }
+    
+          // function(/* optional function */ oResult)
+        , { methodName: 'registerBluetoothStatus', nativeName: 'registerBluetoothStatus', persistentCallbackIndex: 0, valueCallbackIndex: 2 }
+    
+          // function(/* optional function */ oResult)
+        , { methodName: 'start', nativeName: 'start', valueCallbackIndex: 0 }
+    
+          // function(/* optional function */ oResult)
+        , { methodName: 'stop', nativeName: 'stop', valueCallbackIndex: 0 }
+    
+          // function(/* optional function */ oResult)
+        , { methodName: 'disable', nativeName: 'disable', valueCallbackIndex: 0 }
+    
+          // function(/* optional function */ oResult)
+        , { methodName: 'getSupportedProperties', nativeName: 'getSupportedProperties', persistentCallbackIndex: 0, valueCallbackIndex: 2 }
+    
+          // function(/* const rho::Hashtable<rho::String, rho::String>& */ propertyMap, /* optional function */ oResult)
+        , { methodName: 'take', nativeName: 'take', persistentCallbackIndex: 1, valueCallbackIndex: 3 }
+    
+          // function(/* const rho::String& */ command, /* optional function */ oResult)
+        , { methodName: 'commandRemoteScanner', nativeName: 'commandRemoteScanner', valueCallbackIndex: 1 }
+    
+          // function(/* const rho::String& */ propertyName, /* optional function */ oResult)
+        , { methodName: 'getProperty', nativeName: 'getProperty', persistentCallbackIndex: 1, valueCallbackIndex: 3 }
+    
+          // function(/* const rho::Vector<rho::String>& */ arrayofNames, /* optional function */ oResult)
+        , { methodName: 'getProperties', nativeName: 'getProperties', persistentCallbackIndex: 1, valueCallbackIndex: 3 }
+    
+          // function(/* optional function */ oResult)
+        , { methodName: 'getAllProperties', nativeName: 'getAllProperties', persistentCallbackIndex: 0, valueCallbackIndex: 2 }
+    
+          // function(/* const rho::String& */ propertyName, /* const rho::String& */ propertyValue, /* optional function */ oResult)
+        , { methodName: 'setProperty', nativeName: 'setProperty', valueCallbackIndex: 2 }
+    
+          // function(/* const rho::Hashtable<rho::String, rho::String>& */ propertyMap, /* optional function */ oResult)
+        , { methodName: 'setProperties', nativeName: 'setProperties', valueCallbackIndex: 1 }
+    
+    ], apiReq, function(){ return this.getId(); });
+
+    // === Barcode constants ===
+
+    
+            Barcode.REDUNDANCY_AND_LENGTH = 'redundancyAndLength'; 
+    
+            Barcode.SHORT_OR_CODABAR = 'shortOrCodabar'; 
+    
+            Barcode.LONG_AND_SHORT = 'longAndShort'; 
+    
+            Barcode.ALL_TWICE = 'allTwice'; 
+    
+            Barcode.ALL_THRICE = 'allThrice'; 
+    
+            Barcode.RASTER_NONE = 'none'; 
+    
+            Barcode.RASTER_OPEN_ALWAYS = 'openAlways'; 
+    
+            Barcode.RASTER_SMART = 'smart'; 
+    
+            Barcode.RASTER_CYCLONE = 'cyclone'; 
+    
+            Barcode.AIMTYPE_TRIGGER = 'trigger'; 
+    
+            Barcode.AIMTYPE_TIMED_HOLD = 'timedHold'; 
+    
+            Barcode.AIMTYPE_TIMED_RELEASE = 'timedRelease'; 
+    
+            Barcode.AIMTYPE_PRESENTATION = 'presentation'; 
+    
+            Barcode.AIMTYPE_PRESS_AND_RELEASE = 'pressAndRelease'; 
+    
+            Barcode.AIMTYPE_CONTINUOUS_READ = 'continuousRead'; 
+    
+            Barcode.AIMMODE_NONE = 'none'; 
+    
+            Barcode.AIMMODE_DOT = 'dot'; 
+    
+            Barcode.AIMMODE_SLAB = 'slab'; 
+    
+            Barcode.AIMMODE_RETICLE = 'reticle'; 
+    
+            Barcode.PICKLIST_DISABLED = 'disabled'; 
+    
+            Barcode.PICKLIST_HARDWARE_RETICLE = 'hardwareReticle'; 
+    
+            Barcode.PICKLIST_SOFTWARE_RETICLE = 'softwareReticle'; 
+    
+            Barcode.VIEWFINDER_ENABLED = 'enabled'; 
+    
+            Barcode.VIEWFINDER_DISABLED = 'disabled'; 
+    
+            Barcode.VIEWFINDER_STATIC_RETICLE = 'staticReticle'; 
+    
+            Barcode.VIEWFINDER_DYNAMIC_RETICLE = 'dynamicReticle'; 
+    
+            Barcode.VF_FEEDBACK_ENABLED = 'enabled'; 
+    
+            Barcode.VF_FEEDBACK_DISABLED = 'disabled'; 
+    
+            Barcode.VF_FEEDBACK_RETICLE = 'reticle'; 
+    
+            Barcode.FOCUS_FIXED = 'fixed'; 
+    
+            Barcode.FOCUS_AUTO = 'auto'; 
+    
+            Barcode.ILLUMINATION_AUTO = 'auto'; 
+    
+            Barcode.ILLUMINATION_ALWAYS_ON = 'alwaysOn'; 
+    
+            Barcode.ILLUMINATION_ALWAYS_OFF = 'alwaysOff'; 
+    
+            Barcode.INVERSE_ENABLED = 'enabled'; 
+    
+            Barcode.INVERSE_DISABLED = 'disabled'; 
+    
+            Barcode.INVERSE_AUTO = 'auto'; 
+    
+            Barcode.BEAM_NORMAL = 'normal'; 
+    
+            Barcode.BEAM_WIDE = 'wide'; 
+    
+            Barcode.BEAM_NARROW = 'narrow'; 
+    
+            Barcode.DBP_NORMAL = 'normal'; 
+    
+            Barcode.DBP_COMPOSITE = 'composite'; 
+    
+            Barcode.FORMAT_BINARY = 'binary'; 
+    
+            Barcode.FORMAT_TEXT = 'text'; 
+    
+            Barcode.CODE11_CHECKDIGIT_NONE = 'none'; 
+    
+            Barcode.CODE11_CHECKDIGIT_ONE = 'one'; 
+    
+            Barcode.CODE11_CHECKDIGIT_TWO = 'two'; 
+    
+            Barcode.CODE128ISBT_NEVER = 'never'; 
+    
+            Barcode.CODE128ISBT_ALWAYS = 'always'; 
+    
+            Barcode.CODE128ISBT_AUTO = 'auto'; 
+    
+            Barcode.UCC_NEVER = 'never'; 
+    
+            Barcode.UCC_ALWAYS = 'always'; 
+    
+            Barcode.UCC_AUTO = 'auto'; 
+    
+            Barcode.I2OF5_VERIFY_NONE = 'none'; 
+    
+            Barcode.I2OF5_VERIFY_USS = 'uss'; 
+    
+            Barcode.I2OF5_VERIFY_OPCC = 'opcc'; 
+    
+            Barcode.MSI_CHECKDIGITS_ONE = 'one'; 
+    
+            Barcode.MSI_CHECKDIGITS_TWO = 'two'; 
+    
+            Barcode.MSI_CHECKDIGITS_MOD11 = 'mod11'; 
+    
+            Barcode.MSI_CHECKDIGITS_MOD10 = 'mod10'; 
+    
+            Barcode.BOOKLAND_ISBN10 = 'isbn10'; 
+    
+            Barcode.BOOKLAND_ISBN13 = 'isbn13'; 
+    
+            Barcode.UPCEAN_NONE = 'none'; 
+    
+            Barcode.UPCEAN_AUTO = 'auto'; 
+    
+            Barcode.UPCEAN_ALWAYS = 'always'; 
+    
+            Barcode.UPCEAN_SMART = 'smart'; 
+    
+            Barcode.UPCEAN_379 = '378or379'; 
+    
+            Barcode.UPCEAN_979 = '978or979'; 
+    
+            Barcode.UPCEAN_439 = '414or419or434or439'; 
+    
+            Barcode.UPCA_PREAMBLE_NONE = 'none'; 
+    
+            Barcode.UPCA_PREAMBLE_SYSTEMCHAR = 'systemChar'; 
+    
+            Barcode.UPCA_PREAMBLE_COUNTRY = 'countryAndSystemChars'; 
+    
+            Barcode.UPCE0_PREAMBLE_NONE = 'none'; 
+    
+            Barcode.UPCE0_PREAMBLE_SYSTEMCHAR = 'systemChar'; 
+    
+            Barcode.UPCE0_PREAMBLE_COUNTRY = 'countryAndSystemChars'; 
+    
+            Barcode.UPCE1_PREAMBLE_NONE = 'none'; 
+    
+            Barcode.UPCE1_PREAMBLE_SYSTEMCHAR = 'systemChar'; 
+    
+            Barcode.UPCE1_PREAMBLE_COUNTRY = 'countryAndSystemChars'; 
+    
+            Barcode.RSM_AUTORECONNECT_NONE = 'none'; 
+    
+            Barcode.RSM_AUTORECONNECT_ON_POWER = 'onPower'; 
+    
+            Barcode.RSM_AUTORECONNECT_ON_OUT_OF_RANGE = 'onOutOfRange'; 
+    
+            Barcode.RSM_AUTORECONNECT_ON_POWER_OUT_OF_RANGE = 'onPowerOutOfRange'; 
+    
+
+
+    // === Barcode hash keys ===
+    
+    
+            Barcode.HK_BARCODE = "barcode"; 
+
+            Barcode.HK_DATA = "data"; 
+
+            Barcode.HK_DIRECTION = "direction"; 
+
+            Barcode.HK_LENGTH = "length"; 
+
+            Barcode.HK_SOURCE = "source"; 
+
+            Barcode.HK_STATUS = "status"; 
+
+            Barcode.HK_TIME = "time"; 
+
+            Barcode.HK_TYPE = "type"; 
+
+
+    // === Barcode static properties ===
+
+    rhoUtil.createPropsProxy(Barcode, [
+    ], apiReq);
+
+    // === Barcode static methods ===
+
+    rhoUtil.createMethodsProxy(Barcode, [
+    
+          // function(/* optional function */ oResult)
+          { methodName: 'enumerate', nativeName: 'enumerate', persistentCallbackIndex: 0, valueCallbackIndex: 2 }
+    
+    ], apiReq);
+
+    // === Barcode default instance support ===
+    
+
+        rhoUtil.createPropsProxy(Barcode, [
+            { propName: 'default:getDefault:setDefault', propAccess: 'rw', customSet: function(obj) { if(!obj || 'function' != typeof obj.getId){ throw 'Default object should provide getId method!' }; currentDefaultID = obj.getId(); } }
+          , { propName: 'defaultID:getDefaultID:setDefaultID', propAccess: 'rw', customSet: function(id) { currentDefaultID = id; } }
+        ], apiReq);
+
+        Barcode.getId = function() {
+            if (null == currentDefaultID) {
+                currentDefaultID = Barcode.getDefaultID();
+            }
+            return currentDefaultID;
+        }
+
+        // === Barcode default instance properties ===
+
+        rhoUtil.createPropsProxy(Barcode, [
+            { propName: 'autoEnter', propAccess: 'rw' }
+          , { propName: 'autoTab', propAccess: 'rw' }
+          , { propName: 'hapticFeedback', propAccess: 'rw' }
+          , { propName: 'linearSecurityLevel', propAccess: 'rw' }
+          , { propName: 'scanTimeout', propAccess: 'rw' }
+          , { propName: 'rasterMode', propAccess: 'rw' }
+          , { propName: 'rasterHeight', propAccess: 'rw' }
+          , { propName: 'aimType', propAccess: 'rw' }
+          , { propName: 'timedAimDuration', propAccess: 'rw' }
+          , { propName: 'sameSymbolTimeout', propAccess: 'rw' }
+          , { propName: 'differentSymbolTimeout', propAccess: 'rw' }
+          , { propName: 'aimMode', propAccess: 'rw' }
+          , { propName: 'picklistMode', propAccess: 'rw' }
+          , { propName: 'viewfinderMode', propAccess: 'rw' }
+          , { propName: 'viewfinderX', propAccess: 'rw' }
+          , { propName: 'viewfinderY', propAccess: 'rw' }
+          , { propName: 'viewfinderWidth', propAccess: 'rw' }
+          , { propName: 'viewfinderHeight', propAccess: 'rw' }
+          , { propName: 'viewfinderFeedback', propAccess: 'rw' }
+          , { propName: 'viewfinderFeedbackTime', propAccess: 'rw' }
+          , { propName: 'focusMode', propAccess: 'rw' }
+          , { propName: 'illuminationMode', propAccess: 'rw' }
+          , { propName: 'dpmMode', propAccess: 'rw' }
+          , { propName: 'inverse1dMode', propAccess: 'rw' }
+          , { propName: 'poorQuality1dMode', propAccess: 'rw' }
+          , { propName: 'beamWidth', propAccess: 'rw' }
+          , { propName: 'dbpMode', propAccess: 'rw' }
+          , { propName: 'klasseEins', propAccess: 'rw' }
+          , { propName: 'adaptiveScanning', propAccess: 'rw' }
+          , { propName: 'bidirectionalRedundancy', propAccess: 'rw' }
+          , { propName: 'barcodeDataFormat', propAccess: 'rw' }
+          , { propName: 'dataBufferSize', propAccess: 'rw' }
+          , { propName: 'connectionIdleTimeout', propAccess: 'rw' }
+          , { propName: 'disconnectBtOnDisable', propAccess: 'rw' }
+          , { propName: 'displayBtAddressBarcodeOnEnable', propAccess: 'rw' }
+          , { propName: 'enableTimeout', propAccess: 'rw' }
+          , { propName: 'friendlyName', propAccess: 'r' }
+          , { propName: 'lcdMode', propAccess: 'rw' }
+          , { propName: 'lowBatteryScan', propAccess: 'rw' }
+          , { propName: 'disableScannerDuringNavigate', propAccess: 'rw' }
+          , { propName: 'decodeVolume', propAccess: 'rw' }
+          , { propName: 'decodeDuration', propAccess: 'rw' }
+          , { propName: 'decodeFrequency', propAccess: 'rw' }
+          , { propName: 'invalidDecodeFrequency', propAccess: 'rw' }
+          , { propName: 'decodeSound', propAccess: 'rw' }
+          , { propName: 'invalidDecodeSound', propAccess: 'rw' }
+          , { propName: 'scannerType', propAccess: 'r' }
+          , { propName: 'allDecoders', propAccess: 'rw' }
+          , { propName: 'aztec', propAccess: 'rw' }
+          , { propName: 'chinese2of5', propAccess: 'rw' }
+          , { propName: 'codabar', propAccess: 'rw' }
+          , { propName: 'codabarClsiEditing', propAccess: 'rw' }
+          , { propName: 'codabarMaxLength', propAccess: 'rw' }
+          , { propName: 'codabarMinLength', propAccess: 'rw' }
+          , { propName: 'codabarNotisEditing', propAccess: 'rw' }
+          , { propName: 'codabarRedundancy', propAccess: 'rw' }
+          , { propName: 'code11', propAccess: 'rw' }
+          , { propName: 'code11checkDigitCount', propAccess: 'rw' }
+          , { propName: 'code11maxLength', propAccess: 'rw' }
+          , { propName: 'code11minLength', propAccess: 'rw' }
+          , { propName: 'code11redundancy', propAccess: 'rw' }
+          , { propName: 'code11reportCheckDigit', propAccess: 'rw' }
+          , { propName: 'code128', propAccess: 'rw' }
+          , { propName: 'code128checkIsBtTable', propAccess: 'rw' }
+          , { propName: 'code128ean128', propAccess: 'rw' }
+          , { propName: 'code128isbt128', propAccess: 'rw' }
+          , { propName: 'code128isbt128ConcatMode', propAccess: 'rw' }
+          , { propName: 'code128maxLength', propAccess: 'rw' }
+          , { propName: 'code128minLength', propAccess: 'rw' }
+          , { propName: 'code128other128', propAccess: 'rw' }
+          , { propName: 'code128redundancy', propAccess: 'rw' }
+          , { propName: 'code128securityLevel', propAccess: 'rw' }
+          , { propName: 'compositeAb', propAccess: 'rw' }
+          , { propName: 'compositeAbUccLinkMode', propAccess: 'rw' }
+          , { propName: 'compositeAbUseUpcPreambleCheckDigitRules', propAccess: 'rw' }
+          , { propName: 'compositeC', propAccess: 'rw' }
+          , { propName: 'code39', propAccess: 'rw' }
+          , { propName: 'code39code32Prefix', propAccess: 'rw' }
+          , { propName: 'code39convertToCode32', propAccess: 'rw' }
+          , { propName: 'code39fullAscii', propAccess: 'rw' }
+          , { propName: 'code39maxLength', propAccess: 'rw' }
+          , { propName: 'code39minLength', propAccess: 'rw' }
+          , { propName: 'code39redundancy', propAccess: 'rw' }
+          , { propName: 'code39reportCheckDigit', propAccess: 'rw' }
+          , { propName: 'code39securityLevel', propAccess: 'rw' }
+          , { propName: 'code39verifyCheckDigit', propAccess: 'rw' }
+          , { propName: 'code93', propAccess: 'rw' }
+          , { propName: 'code93maxLength', propAccess: 'rw' }
+          , { propName: 'code93minLength', propAccess: 'rw' }
+          , { propName: 'code93redundancy', propAccess: 'rw' }
+          , { propName: 'd2of5', propAccess: 'rw' }
+          , { propName: 'd2of5maxLength', propAccess: 'rw' }
+          , { propName: 'd2of5minLength', propAccess: 'rw' }
+          , { propName: 'd2of5redundancy', propAccess: 'rw' }
+          , { propName: 'datamatrix', propAccess: 'rw' }
+          , { propName: 'ean13', propAccess: 'rw' }
+          , { propName: 'ean8', propAccess: 'rw' }
+          , { propName: 'ean8convertToEan13', propAccess: 'rw' }
+          , { propName: 'i2of5', propAccess: 'rw' }
+          , { propName: 'i2of5convertToEan13', propAccess: 'rw' }
+          , { propName: 'i2of5maxLength', propAccess: 'rw' }
+          , { propName: 'i2of5minLength', propAccess: 'rw' }
+          , { propName: 'i2of5redundancy', propAccess: 'rw' }
+          , { propName: 'i2of5reportCheckDigit', propAccess: 'rw' }
+          , { propName: 'i2of5verifyCheckDigit', propAccess: 'rw' }
+          , { propName: 'korean3of5', propAccess: 'rw' }
+          , { propName: 'korean3of5redundancy', propAccess: 'rw' }
+          , { propName: 'korean3of5maxLength', propAccess: 'rw' }
+          , { propName: 'korean3of5minLength', propAccess: 'rw' }
+          , { propName: 'macroPdf', propAccess: 'rw' }
+          , { propName: 'macroPdfBufferLabels', propAccess: 'rw' }
+          , { propName: 'macroPdfConvertToPdf417', propAccess: 'rw' }
+          , { propName: 'macroPdfExclusive', propAccess: 'rw' }
+          , { propName: 'macroMicroPdf', propAccess: 'rw' }
+          , { propName: 'macroMicroPdfBufferLabels', propAccess: 'rw' }
+          , { propName: 'macroMicroPdfConvertToMicroPdf', propAccess: 'rw' }
+          , { propName: 'macroMicroPdfExclusive', propAccess: 'rw' }
+          , { propName: 'macroMicroPdfReportAppendInfo', propAccess: 'rw' }
+          , { propName: 'matrix2of5', propAccess: 'rw' }
+          , { propName: 'matrix2of5maxLength', propAccess: 'rw' }
+          , { propName: 'matrix2of5minLength', propAccess: 'rw' }
+          , { propName: 'matrix2of5reportCheckDigit', propAccess: 'rw' }
+          , { propName: 'matrix2of5verifyCheckDigit', propAccess: 'rw' }
+          , { propName: 'maxiCode', propAccess: 'rw' }
+          , { propName: 'microPdf', propAccess: 'rw' }
+          , { propName: 'microQr', propAccess: 'rw' }
+          , { propName: 'msi', propAccess: 'rw' }
+          , { propName: 'msiCheckDigits', propAccess: 'rw' }
+          , { propName: 'msiCheckDigitScheme', propAccess: 'rw' }
+          , { propName: 'msiMaxLength', propAccess: 'rw' }
+          , { propName: 'msiMinLength', propAccess: 'rw' }
+          , { propName: 'msiRedundancy', propAccess: 'rw' }
+          , { propName: 'msiReportCheckDigit', propAccess: 'rw' }
+          , { propName: 'pdf417', propAccess: 'rw' }
+          , { propName: 'signature', propAccess: 'rw' }
+          , { propName: 'signatureImageHeight', propAccess: 'rw' }
+          , { propName: 'signatureImageWidth', propAccess: 'rw' }
+          , { propName: 'signatureImageQuality', propAccess: 'rw' }
+          , { propName: 'ausPostal', propAccess: 'rw' }
+          , { propName: 'canPostal', propAccess: 'rw' }
+          , { propName: 'dutchPostal', propAccess: 'rw' }
+          , { propName: 'japPostal', propAccess: 'rw' }
+          , { propName: 'ukPostal', propAccess: 'rw' }
+          , { propName: 'ukPostalReportCheckDigit', propAccess: 'rw' }
+          , { propName: 'us4state', propAccess: 'rw' }
+          , { propName: 'us4stateFics', propAccess: 'rw' }
+          , { propName: 'usPlanet', propAccess: 'rw' }
+          , { propName: 'usPlanetReportCheckDigit', propAccess: 'rw' }
+          , { propName: 'usPostNet', propAccess: 'rw' }
+          , { propName: 'usPostNetReportCheckDigit', propAccess: 'rw' }
+          , { propName: 'qrCode', propAccess: 'rw' }
+          , { propName: 'gs1dataBar', propAccess: 'rw' }
+          , { propName: 'gs1dataBarExpanded', propAccess: 'rw' }
+          , { propName: 'gs1dataBarLimited', propAccess: 'rw' }
+          , { propName: 'tlc39', propAccess: 'rw' }
+          , { propName: 'trioptic39', propAccess: 'rw' }
+          , { propName: 'trioptic39Redundancy', propAccess: 'rw' }
+          , { propName: 'upcEanBookland', propAccess: 'rw' }
+          , { propName: 'upcEanBooklandFormat', propAccess: 'rw' }
+          , { propName: 'upcEanConvertGs1dataBarToUpcEan', propAccess: 'rw' }
+          , { propName: 'upcEanCoupon', propAccess: 'rw' }
+          , { propName: 'upcEanLinearDecode', propAccess: 'rw' }
+          , { propName: 'upcEanRandomWeightCheckDigit', propAccess: 'rw' }
+          , { propName: 'upcEanRetryCount', propAccess: 'rw' }
+          , { propName: 'upcEanSecurityLevel', propAccess: 'rw' }
+          , { propName: 'upcEanSupplemental2', propAccess: 'rw' }
+          , { propName: 'upcEanSupplemental5', propAccess: 'rw' }
+          , { propName: 'upcEanSupplementalMode', propAccess: 'rw' }
+          , { propName: 'upca', propAccess: 'rw' }
+          , { propName: 'upcaPreamble', propAccess: 'rw' }
+          , { propName: 'upcaReportCheckDigit', propAccess: 'rw' }
+          , { propName: 'upce0', propAccess: 'rw' }
+          , { propName: 'upce0convertToUpca', propAccess: 'rw' }
+          , { propName: 'upce0preamble', propAccess: 'rw' }
+          , { propName: 'upce0reportCheckDigit', propAccess: 'rw' }
+          , { propName: 'upce1', propAccess: 'rw' }
+          , { propName: 'upce1convertToUpca', propAccess: 'rw' }
+          , { propName: 'upce1preamble', propAccess: 'rw' }
+          , { propName: 'upce1reportCheckDigit', propAccess: 'rw' }
+          , { propName: 'webcode', propAccess: 'rw' }
+          , { propName: 'webcodeDecodeGtSubtype', propAccess: 'rw' }
+          , { propName: 'rsmModelNumber', propAccess: 'r' }
+          , { propName: 'rsmSerialNumber', propAccess: 'r' }
+          , { propName: 'rsmDateOfManufacture', propAccess: 'r' }
+          , { propName: 'rsmDateOfService', propAccess: 'r' }
+          , { propName: 'rsmBluetoothAddress', propAccess: 'r' }
+          , { propName: 'rsmFirmwareVersion', propAccess: 'r' }
+          , { propName: 'rsmDeviceClass', propAccess: 'r' }
+          , { propName: 'rsmBatteryStatus', propAccess: 'r' }
+          , { propName: 'rsmBatteryCapacity', propAccess: 'r' }
+          , { propName: 'rsmBatteryId', propAccess: 'r' }
+          , { propName: 'rsmBluetoothAuthentication', propAccess: 'rw' }
+          , { propName: 'rsmBluetoothEncryption', propAccess: 'rw' }
+          , { propName: 'rsmBluetoothPinCode', propAccess: 'rw' }
+          , { propName: 'rsmBluetoothPinCodeType', propAccess: 'rw' }
+          , { propName: 'rsmBluetoothReconnectionAttempts', propAccess: 'rw' }
+          , { propName: 'rsmBluetoothBeepOnReconnectAttempt', propAccess: 'rw' }
+          , { propName: 'rsmBluetoothHidAutoReconnect', propAccess: 'rw' }
+          , { propName: 'rsmBluetoothFriendlyName', propAccess: 'rw' }
+          , { propName: 'rsmBluetoothInquiryMode', propAccess: 'rw' }
+          , { propName: 'rsmBluetoothAutoReconnect', propAccess: 'rw' }
+          , { propName: 'rsmForceSavePairingBarcode', propAccess: 'rw' }
+          , { propName: 'rsmLowBatteryIndication', propAccess: 'rw' }
+          , { propName: 'rsmLowBatteryIndicationCycle', propAccess: 'rw' }
+          , { propName: 'rsmScanLineWidth', propAccess: 'rw' }
+          , { propName: 'rsmGoodScansDelay', propAccess: 'rw' }
+          , { propName: 'rsmDecodeFeedback', propAccess: 'rw' }
+          , { propName: 'rsmIgnoreCode128Usps', propAccess: 'rw' }
+          , { propName: 'rsmScanTriggerWakeup', propAccess: 'rw' }
+          , { propName: 'rsmMems', propAccess: 'rw' }
+          , { propName: 'rsmProximityEnable', propAccess: 'rw' }
+          , { propName: 'rsmProximityContinuous', propAccess: 'rw' }
+          , { propName: 'rsmProximityDistance', propAccess: 'rw' }
+          , { propName: 'rsmPagingEnable', propAccess: 'rw' }
+          , { propName: 'rsmPagingBeepSequence', propAccess: 'rw' }
+        ], apiReq, function(){ return this.getId(); });
+
+        // === Barcode default instance methods ===
+
+        rhoUtil.createMethodsProxy(Barcode, [
+        
+              // function(/* const rho::Hashtable<rho::String, rho::String>& */ propertyMap, /* optional function */ oResult)
+              { methodName: 'enable', nativeName: 'enable', persistentCallbackIndex: 1, valueCallbackIndex: 3 }
+        
+              // function(/* optional function */ oResult)
+            , { methodName: 'registerBluetoothStatus', nativeName: 'registerBluetoothStatus', persistentCallbackIndex: 0, valueCallbackIndex: 2 }
+        
+              // function(/* optional function */ oResult)
+            , { methodName: 'start', nativeName: 'start', valueCallbackIndex: 0 }
+        
+              // function(/* optional function */ oResult)
+            , { methodName: 'stop', nativeName: 'stop', valueCallbackIndex: 0 }
+        
+              // function(/* optional function */ oResult)
+            , { methodName: 'disable', nativeName: 'disable', valueCallbackIndex: 0 }
+        
+              // function(/* optional function */ oResult)
+            , { methodName: 'getSupportedProperties', nativeName: 'getSupportedProperties', persistentCallbackIndex: 0, valueCallbackIndex: 2 }
+        
+              // function(/* const rho::Hashtable<rho::String, rho::String>& */ propertyMap, /* optional function */ oResult)
+            , { methodName: 'take', nativeName: 'take', persistentCallbackIndex: 1, valueCallbackIndex: 3 }
+        
+              // function(/* const rho::String& */ command, /* optional function */ oResult)
+            , { methodName: 'commandRemoteScanner', nativeName: 'commandRemoteScanner', valueCallbackIndex: 1 }
+        
+              // function(/* const rho::String& */ propertyName, /* optional function */ oResult)
+            , { methodName: 'getProperty', nativeName: 'getProperty', persistentCallbackIndex: 1, valueCallbackIndex: 3 }
+        
+              // function(/* const rho::Vector<rho::String>& */ arrayofNames, /* optional function */ oResult)
+            , { methodName: 'getProperties', nativeName: 'getProperties', persistentCallbackIndex: 1, valueCallbackIndex: 3 }
+        
+              // function(/* optional function */ oResult)
+            , { methodName: 'getAllProperties', nativeName: 'getAllProperties', persistentCallbackIndex: 0, valueCallbackIndex: 2 }
+        
+              // function(/* const rho::String& */ propertyName, /* const rho::String& */ propertyValue, /* optional function */ oResult)
+            , { methodName: 'setProperty', nativeName: 'setProperty', valueCallbackIndex: 2 }
+        
+              // function(/* const rho::Hashtable<rho::String, rho::String>& */ propertyMap, /* optional function */ oResult)
+            , { methodName: 'setProperties', nativeName: 'setProperties', valueCallbackIndex: 1 }
+        
+        ], apiReq, function(){ return this.getId(); });
+
+    
+
+    rhoUtil.namespace(moduleNS, Barcode);
+
+    
+
+
+
+})(Rho.jQuery, Rho, Rho.util);
+// Module Rho.Battery
+
+
+(function ($, rho, rhoUtil) {
+    'use strict';
+
+    var moduleNS = 'Rho.Battery';
+    var apiReq = rhoUtil.apiReqFor(moduleNS);
+    var currentDefaultID = null;
+
+    // === Battery class definition ===
+
+    function Battery() {
+        var id = null;
+        this.getId = function () {return id;};
+
+        if (1 == arguments.length && arguments[0][rhoUtil.rhoIdParam()]) {
+            if (moduleNS != arguments[0][rhoUtil.rhoClassParam()]) {
+                throw "Wrong class instantiation!";
+            }
+            id = arguments[0][rhoUtil.rhoIdParam()];
+        } else {
+            id = rhoUtil.nextId();
+            // constructor methods are following:
+            
+        }
+    };
+
+    Battery.getId = function() { return currentDefaultID; }
+
+    // === Battery instance properties ===
+
+    rhoUtil.createPropsProxy(Battery.prototype, [
+    ], apiReq, function(){ return this.getId(); });
+
+    // === Battery instance methods ===
+
+    rhoUtil.createMethodsProxy(Battery.prototype, [
+    
+    ], apiReq, function(){ return this.getId(); });
+
+    // === Battery constants ===
+
+    
+            Battery.BATTERY_TRIGGER_PERIODIC = 'periodic'; 
+    
+            Battery.BATTERY_TRIGGER_SYSTEM = 'system'; 
+    
+            Battery.SMART_BATTERY_HEALTHY = 'healthy'; 
+    
+            Battery.SMART_BATTERY_UNHEALTHY = 'unhealthy'; 
+    
+            Battery.SMART_BATTERY_UNKNOWN = 'unknown'; 
+    
+            Battery.BATTERY_LAYOUT_LEFT = 'left'; 
+    
+            Battery.BATTERY_LAYOUT_RIGHT = 'right'; 
+    
+            Battery.BATTERY_LAYOUT_UP = 'up'; 
+    
+            Battery.BATTERY_LAYOUT_DOWN = 'down'; 
+    
+
+
+    // === Battery hash keys ===
+    
+    
+            Battery.HK_AC_LINE_STATUS = "acLineStatus"; 
+
+            Battery.HK_BACKUP_BATTERY_LIFE_KNOWN = "backupBatteryLifeKnown"; 
+
+            Battery.HK_BACKUP_BATTERY_LIFE_PERCENT = "backupBatteryLifePercent"; 
+
+            Battery.HK_BATTERY_CHARGE_CYCLES = "batteryChargeCycles"; 
+
+            Battery.HK_BATTERY_LIFE_KNOWN = "batteryLifeKnown"; 
+
+            Battery.HK_BATTERY_LIFE_PERCENT = "batteryLifePercent"; 
+
+            Battery.HK_COLOR = "color"; 
+
+            Battery.HK_LAYOUT = "layout"; 
+
+            Battery.HK_LEFT = "left"; 
+
+            Battery.HK_MANUFACTURE_DATE = "manufactureDate"; 
+
+            Battery.HK_PART_NUMBER = "partNumber"; 
+
+            Battery.HK_RATED_CAPACITY = "ratedCapacity"; 
+
+            Battery.HK_REFRESH_INTERVAL = "refreshInterval"; 
+
+            Battery.HK_SERIAL_NUMBER = "serialNumber"; 
+
+            Battery.HK_STATE_OF_HEALTH = "stateOfHealth"; 
+
+            Battery.HK_TOP = "top"; 
+
+            Battery.HK_TRIGGER = "trigger"; 
+
+
+    // === Battery static properties ===
+
+    rhoUtil.createPropsProxy(Battery, [
+        { propName: 'refreshInterval', propAccess: 'rw' }
+    ], apiReq);
+
+    // === Battery static methods ===
+
+    rhoUtil.createMethodsProxy(Battery, [
+    
+          // function(/* const rho::Hashtable<rho::String, rho::String>& */ propertyMap, /* optional function */ oResult)
+          { methodName: 'batteryStatus', nativeName: 'batteryStatus', persistentCallbackIndex: 1, valueCallbackIndex: 3 }
+    
+          // function(/* optional function */ oResult)
+        , { methodName: 'stopBatteryStatus', nativeName: 'stopBatteryStatus', valueCallbackIndex: 0 }
+    
+          // function(/* optional function */ oResult)
+        , { methodName: 'smartBatteryStatus', nativeName: 'smartBatteryStatus', persistentCallbackIndex: 0, valueCallbackIndex: 2 }
+    
+          // function(/* const rho::Hashtable<rho::String, rho::String>& */ propertyMap, /* optional function */ oResult)
+        , { methodName: 'showIcon', nativeName: 'showIcon', valueCallbackIndex: 1 }
+    
+          // function(/* optional function */ oResult)
+        , { methodName: 'hideIcon', nativeName: 'hideIcon', valueCallbackIndex: 0 }
+    
+    ], apiReq);
+
+    // === Battery default instance support ===
+    
+
+    rhoUtil.namespace(moduleNS, Battery);
+
+    
+
+
+
+})(Rho.jQuery, Rho, Rho.util);
+// Module Rho.KeyState
+
+
+(function ($, rho, rhoUtil) {
+    'use strict';
+
+    var moduleNS = 'Rho.KeyState';
+    var apiReq = rhoUtil.apiReqFor(moduleNS);
+    var currentDefaultID = null;
+
+    // === KeyState class definition ===
+
+    function KeyState() {
+        var id = null;
+        this.getId = function () {return id;};
+
+        if (1 == arguments.length && arguments[0][rhoUtil.rhoIdParam()]) {
+            if (moduleNS != arguments[0][rhoUtil.rhoClassParam()]) {
+                throw "Wrong class instantiation!";
+            }
+            id = arguments[0][rhoUtil.rhoIdParam()];
+        } else {
+            id = rhoUtil.nextId();
+            // constructor methods are following:
+            
+        }
+    };
+
+    KeyState.getId = function() { return currentDefaultID; }
+
+    // === KeyState instance properties ===
+
+    rhoUtil.createPropsProxy(KeyState.prototype, [
+    ], apiReq, function(){ return this.getId(); });
+
+    // === KeyState instance methods ===
+
+    rhoUtil.createMethodsProxy(KeyState.prototype, [
+    
+    ], apiReq, function(){ return this.getId(); });
+
+    // === KeyState constants ===
+
+    
+
+
+    // === KeyState hash keys ===
+    
+    
+            KeyState.HK_HEIGHT = "height"; 
+
+            KeyState.HK_RIGHT = "right"; 
+
+            KeyState.HK_TOP = "top"; 
+
+            KeyState.HK_WIDTH = "width"; 
+
+
+    // === KeyState static properties ===
+
+    rhoUtil.createPropsProxy(KeyState, [
+    ], apiReq);
+
+    // === KeyState static methods ===
+
+    rhoUtil.createMethodsProxy(KeyState, [
+    
+          // function(/* const rho::Hashtable<rho::String, rho::String>& */ propertyMap, /* optional function */ oResult)
+          { methodName: 'showStates', nativeName: 'showStates', valueCallbackIndex: 1 }
+    
+          // function(/* optional function */ oResult)
+        , { methodName: 'hideStates', nativeName: 'hideStates', valueCallbackIndex: 0 }
+    
+    ], apiReq);
+
+    // === KeyState default instance support ===
+    
+
+    rhoUtil.namespace(moduleNS, KeyState);
+
+    
+
+
+
+})(Rho.jQuery, Rho, Rho.util);
+// Module Rho.SignalIndicators
+
+
+(function ($, rho, rhoUtil) {
+    'use strict';
+
+    var moduleNS = 'Rho.SignalIndicators';
+    var apiReq = rhoUtil.apiReqFor(moduleNS);
+    var currentDefaultID = null;
+
+    // === SignalIndicators class definition ===
+
+    function SignalIndicators() {
+        var id = null;
+        this.getId = function () {return id;};
+
+        if (1 == arguments.length && arguments[0][rhoUtil.rhoIdParam()]) {
+            if (moduleNS != arguments[0][rhoUtil.rhoClassParam()]) {
+                throw "Wrong class instantiation!";
+            }
+            id = arguments[0][rhoUtil.rhoIdParam()];
+        } else {
+            id = rhoUtil.nextId();
+            // constructor methods are following:
+            
+        }
+    };
+
+    SignalIndicators.getId = function() { return currentDefaultID; }
+
+    // === SignalIndicators instance properties ===
+
+    rhoUtil.createPropsProxy(SignalIndicators.prototype, [
+    ], apiReq, function(){ return this.getId(); });
+
+    // === SignalIndicators instance methods ===
+
+    rhoUtil.createMethodsProxy(SignalIndicators.prototype, [
+    
+    ], apiReq, function(){ return this.getId(); });
+
+    // === SignalIndicators constants ===
+
+    
+            SignalIndicators.SIGNAL_LAYOUT_LEFT = 'left'; 
+    
+            SignalIndicators.SIGNAL_LAYOUT_RIGHT = 'right'; 
+    
+            SignalIndicators.SIGNAL_LAYOUT_UP = 'up'; 
+    
+            SignalIndicators.SIGNAL_LAYOUT_DOWN = 'down'; 
+    
+
+
+    // === SignalIndicators hash keys ===
+    
+    
+            SignalIndicators.HK_ADAPTER_NAME = "adapterName"; 
+
+            SignalIndicators.HK_COLOR = "color"; 
+
+            SignalIndicators.HK_DHCP_SERVER = "dhcpServer"; 
+
+            SignalIndicators.HK_DHCP_STATIC = "dhcpStatic"; 
+
+            SignalIndicators.HK_ESSID = "essid"; 
+
+            SignalIndicators.HK_GATEWAY = "gateway"; 
+
+            SignalIndicators.HK_IP_ADDRESS = "ipAddress"; 
+
+            SignalIndicators.HK_LAYOUT = "layout"; 
+
+            SignalIndicators.HK_LEFT = "left"; 
+
+            SignalIndicators.HK_MAC_ADDRESS = "macAddress"; 
+
+            SignalIndicators.HK_RSSI = "rssi"; 
+
+            SignalIndicators.HK_SIGNAL_STRENGTH = "signalStrength"; 
+
+            SignalIndicators.HK_SUBNET_MASK = "subnetMask"; 
+
+            SignalIndicators.HK_TOP = "top"; 
+
+            SignalIndicators.HK_WINS = "wins"; 
+
+
+    // === SignalIndicators static properties ===
+
+    rhoUtil.createPropsProxy(SignalIndicators, [
+        { propName: 'refreshInterval', propAccess: 'rw' }
+    ], apiReq);
+
+    // === SignalIndicators static methods ===
+
+    rhoUtil.createMethodsProxy(SignalIndicators, [
+    
+          // function(/* optional function */ oResult)
+          { methodName: 'wlanStatus', nativeName: 'wlanStatus', persistentCallbackIndex: 0, valueCallbackIndex: 2 }
+    
+          // function(/* optional function */ oResult)
+        , { methodName: 'stopWlanStatus', nativeName: 'stopWlanStatus', valueCallbackIndex: 0 }
+    
+          // function(/* const rho::Hashtable<rho::String, rho::String>& */ propertyMap, /* optional function */ oResult)
+        , { methodName: 'showIcon', nativeName: 'showIcon', valueCallbackIndex: 1 }
+    
+          // function(/* optional function */ oResult)
+        , { methodName: 'hideIcon', nativeName: 'hideIcon', valueCallbackIndex: 0 }
+    
+    ], apiReq);
+
+    // === SignalIndicators default instance support ===
+    
+
+    rhoUtil.namespace(moduleNS, SignalIndicators);
+
+    
+
+
+
+})(Rho.jQuery, Rho, Rho.util);
+// Module Rho.CardReader
+
+
+(function ($, rho, rhoUtil) {
+    'use strict';
+
+    var moduleNS = 'Rho.CardReader';
+    var apiReq = rhoUtil.apiReqFor(moduleNS);
+    var currentDefaultID = null;
+
+    // === CardReader class definition ===
+
+    function CardReader() {
+        var id = null;
+        this.getId = function () {return id;};
+
+        if (1 == arguments.length && arguments[0][rhoUtil.rhoIdParam()]) {
+            if (moduleNS != arguments[0][rhoUtil.rhoClassParam()]) {
+                throw "Wrong class instantiation!";
+            }
+            id = arguments[0][rhoUtil.rhoIdParam()];
+        } else {
+            id = rhoUtil.nextId();
+            // constructor methods are following:
+            
+        }
+    };
+
+    CardReader.getId = function() { return currentDefaultID; }
+
+    // === CardReader instance properties ===
+
+    rhoUtil.createPropsProxy(CardReader.prototype, [
+        { propName: 'pinTimeout', propAccess: 'rw' }
+      , { propName: 'pinEntry', propAccess: 'rw' }
+      , { propName: 'panData', propAccess: 'rw' }
+      , { propName: 'autoTab', propAccess: 'rw' }
+      , { propName: 'autoEnter', propAccess: 'rw' }
+      , { propName: 'moduleName', propAccess: 'rw' }
+    ], apiReq, function(){ return this.getId(); });
+
+    // === CardReader instance methods ===
+
+    rhoUtil.createMethodsProxy(CardReader.prototype, [
+    
+          // function(/* optional function */ oResult)
+          { methodName: 'open', nativeName: 'open', persistentCallbackIndex: 0, valueCallbackIndex: 2 }
+    
+          // function(/* optional function */ oResult)
+        , { methodName: 'close', nativeName: 'close', valueCallbackIndex: 0 }
+    
+          // function(/* const rho::String& */ propertyName, /* optional function */ oResult)
+        , { methodName: 'getProperty', nativeName: 'getProperty', persistentCallbackIndex: 1, valueCallbackIndex: 3 }
+    
+          // function(/* const rho::Vector<rho::String>& */ arrayofNames, /* optional function */ oResult)
+        , { methodName: 'getProperties', nativeName: 'getProperties', persistentCallbackIndex: 1, valueCallbackIndex: 3 }
+    
+          // function(/* optional function */ oResult)
+        , { methodName: 'getAllProperties', nativeName: 'getAllProperties', persistentCallbackIndex: 0, valueCallbackIndex: 2 }
+    
+          // function(/* const rho::String& */ propertyName, /* const rho::String& */ propertyValue, /* optional function */ oResult)
+        , { methodName: 'setProperty', nativeName: 'setProperty', valueCallbackIndex: 2 }
+    
+          // function(/* const rho::Hashtable<rho::String, rho::String>& */ propertyMap, /* optional function */ oResult)
+        , { methodName: 'setProperties', nativeName: 'setProperties', valueCallbackIndex: 1 }
+    
+    ], apiReq, function(){ return this.getId(); });
+
+    // === CardReader constants ===
+
+    
+            CardReader.MSR9000 = 'msr9000'; 
+    
+            CardReader.MSR9001 = 'msr9001'; 
+    
+            CardReader.MSR9500 = 'msr9500'; 
+    
+            CardReader.MSRCAMEO = 'msrcameo'; 
+    
+            CardReader.MSR7000 = 'msr7000'; 
+    
+            CardReader.DCR7000 = 'dcr7000'; 
+    
+            CardReader.MSR55 = 'msr55'; 
+    
+            CardReader.MSR3000 = 'msr3000'; 
+    
+
+
+    // === CardReader hash keys ===
+    
+    
+            CardReader.HK_DATA = "data"; 
+
+            CardReader.HK_ENCRYPTION = "encryption"; 
+
+            CardReader.HK_KSN = "ksn"; 
+
+            CardReader.HK_MODE = "mode"; 
+
+            CardReader.HK_RAW_DATA = "rawData"; 
+
+            CardReader.HK_TRACK1 = "track1"; 
+
+            CardReader.HK_TRACK1_ENCRYPTED = "track1Encrypted"; 
+
+            CardReader.HK_TRACK1_ENCRYPTED_STATUS = "track1EncryptedStatus"; 
+
+            CardReader.HK_TRACK1_STATUS = "track1Status"; 
+
+            CardReader.HK_TRACK2 = "track2"; 
+
+            CardReader.HK_TRACK2_ENCRYPTED = "track2Encrypted"; 
+
+            CardReader.HK_TRACK2_ENCRYPTED_STATUS = "track2EncryptedStatus"; 
+
+            CardReader.HK_TRACK2_STATUS = "track2Status"; 
+
+            CardReader.HK_TRACK3 = "track3"; 
+
+            CardReader.HK_TRACK3_ENCRYPTED = "track3Encrypted"; 
+
+            CardReader.HK_TRACK3_ENCRYPTED_STATUS = "track3EncryptedStatus"; 
+
+            CardReader.HK_TRACK3_STATUS = "track3Status"; 
+
+
+    // === CardReader static properties ===
+
+    rhoUtil.createPropsProxy(CardReader, [
+    ], apiReq);
+
+    // === CardReader static methods ===
+
+    rhoUtil.createMethodsProxy(CardReader, [
+    
+          // function(/* optional function */ oResult)
+          { methodName: 'enumerate', nativeName: 'enumerate', persistentCallbackIndex: 0, valueCallbackIndex: 2 }
+    
+    ], apiReq);
+
+    // === CardReader default instance support ===
+    
+
+        rhoUtil.createPropsProxy(CardReader, [
+            { propName: 'default:getDefault:setDefault', propAccess: 'rw', customSet: function(obj) { if(!obj || 'function' != typeof obj.getId){ throw 'Default object should provide getId method!' }; currentDefaultID = obj.getId(); } }
+          , { propName: 'defaultID:getDefaultID:setDefaultID', propAccess: 'rw', customSet: function(id) { currentDefaultID = id; } }
+        ], apiReq);
+
+        CardReader.getId = function() {
+            if (null == currentDefaultID) {
+                currentDefaultID = CardReader.getDefaultID();
+            }
+            return currentDefaultID;
+        }
+
+        // === CardReader default instance properties ===
+
+        rhoUtil.createPropsProxy(CardReader, [
+            { propName: 'pinTimeout', propAccess: 'rw' }
+          , { propName: 'pinEntry', propAccess: 'rw' }
+          , { propName: 'panData', propAccess: 'rw' }
+          , { propName: 'autoTab', propAccess: 'rw' }
+          , { propName: 'autoEnter', propAccess: 'rw' }
+          , { propName: 'moduleName', propAccess: 'rw' }
+        ], apiReq, function(){ return this.getId(); });
+
+        // === CardReader default instance methods ===
+
+        rhoUtil.createMethodsProxy(CardReader, [
+        
+              // function(/* optional function */ oResult)
+              { methodName: 'open', nativeName: 'open', persistentCallbackIndex: 0, valueCallbackIndex: 2 }
+        
+              // function(/* optional function */ oResult)
+            , { methodName: 'close', nativeName: 'close', valueCallbackIndex: 0 }
+        
+              // function(/* const rho::String& */ propertyName, /* optional function */ oResult)
+            , { methodName: 'getProperty', nativeName: 'getProperty', persistentCallbackIndex: 1, valueCallbackIndex: 3 }
+        
+              // function(/* const rho::Vector<rho::String>& */ arrayofNames, /* optional function */ oResult)
+            , { methodName: 'getProperties', nativeName: 'getProperties', persistentCallbackIndex: 1, valueCallbackIndex: 3 }
+        
+              // function(/* optional function */ oResult)
+            , { methodName: 'getAllProperties', nativeName: 'getAllProperties', persistentCallbackIndex: 0, valueCallbackIndex: 2 }
+        
+              // function(/* const rho::String& */ propertyName, /* const rho::String& */ propertyValue, /* optional function */ oResult)
+            , { methodName: 'setProperty', nativeName: 'setProperty', valueCallbackIndex: 2 }
+        
+              // function(/* const rho::Hashtable<rho::String, rho::String>& */ propertyMap, /* optional function */ oResult)
+            , { methodName: 'setProperties', nativeName: 'setProperties', valueCallbackIndex: 1 }
+        
+        ], apiReq, function(){ return this.getId(); });
+
+    
+
+    rhoUtil.namespace(moduleNS, CardReader);
+
+    
+
+
+
+})(Rho.jQuery, Rho, Rho.util);
+// Module Rho.Signature
+
+
+(function ($, rho, rhoUtil) {
+    'use strict';
+
+    var moduleNS = 'Rho.Signature';
+    var apiReq = rhoUtil.apiReqFor(moduleNS);
+    var currentDefaultID = null;
+
+    // === Signature class definition ===
+
+    function Signature() {
+        var id = null;
+        this.getId = function () {return id;};
+
+        if (1 == arguments.length && arguments[0][rhoUtil.rhoIdParam()]) {
+            if (moduleNS != arguments[0][rhoUtil.rhoClassParam()]) {
+                throw "Wrong class instantiation!";
+            }
+            id = arguments[0][rhoUtil.rhoIdParam()];
+        } else {
+            id = rhoUtil.nextId();
+            // constructor methods are following:
+            
+        }
+    };
+
+    Signature.getId = function() { return currentDefaultID; }
+
+    // === Signature instance properties ===
+
+    rhoUtil.createPropsProxy(Signature.prototype, [
+    ], apiReq, function(){ return this.getId(); });
+
+    // === Signature instance methods ===
+
+    rhoUtil.createMethodsProxy(Signature.prototype, [
+    
+    ], apiReq, function(){ return this.getId(); });
+
+    // === Signature constants ===
+
+    
+            Signature.COMPRESSION_FORMAT_JPG = 'jpg'; 
+    
+            Signature.COMPRESSION_FORMAT_PNG = 'png'; 
+    
+            Signature.COMPRESSION_FORMAT_BMP = 'bmp'; 
+    
+            Signature.OUTPUT_FORMAT_IMAGE = 'image'; 
+    
+            Signature.OUTPUT_FORMAT_DATAURI = 'dataUri'; 
+    
+
+
+    // === Signature hash keys ===
+    
+    
+            Signature.HK_IMAGE_URI = "imageUri"; 
+
+            Signature.HK_SIGNATURE_URI_DEPRECATED = "signature_uri"; 
+
+            Signature.HK_STATUS = "status"; 
+
+            Signature.HK_VECTOR_ARRAY = "vectorArray"; 
+
+
+    // === Signature static properties ===
+
+    rhoUtil.createPropsProxy(Signature, [
+        { propName: 'compressionFormat', propAccess: 'rw' }
+      , { propName: 'outputFormat', propAccess: 'rw' }
+      , { propName: 'fileName', propAccess: 'rw' }
+      , { propName: 'border', propAccess: 'rw' }
+      , { propName: 'penColor', propAccess: 'rw' }
+      , { propName: 'penWidth', propAccess: 'rw' }
+      , { propName: 'bgColor', propAccess: 'rw' }
+      , { propName: 'left', propAccess: 'rw' }
+      , { propName: 'top', propAccess: 'rw' }
+      , { propName: 'width', propAccess: 'rw' }
+      , { propName: 'height', propAccess: 'rw' }
+    ], apiReq);
+
+    // === Signature static methods ===
+
+    rhoUtil.createMethodsProxy(Signature, [
+    
+          // function(/* const rho::Hashtable<rho::String, rho::String>& */ propertyMap, /* optional function */ oResult)
+          { methodName: 'takeFullScreen', nativeName: 'takeFullScreen', persistentCallbackIndex: 1, valueCallbackIndex: 3 }
+    
+          // function(/* const rho::Hashtable<rho::String, rho::String>& */ propertyMap, /* optional function */ oResult)
+        , { methodName: 'show', nativeName: 'show', valueCallbackIndex: 1 }
+    
+          // function(/* optional function */ oResult)
+        , { methodName: 'capture', nativeName: 'capture', persistentCallbackIndex: 0, valueCallbackIndex: 2 }
+    
+          // function(/* optional function */ oResult)
+        , { methodName: 'clear', nativeName: 'clear', valueCallbackIndex: 0 }
+    
+          // function(/* optional function */ oResult)
+        , { methodName: 'hide', nativeName: 'hide', valueCallbackIndex: 0 }
+    
+          // function(/* optional function */ oResult)
+        , { methodName: 'setVectorCallback', nativeName: 'setVectorCallback', persistentCallbackIndex: 0, valueCallbackIndex: 2 }
+    
+    ], apiReq);
+
+    // === Signature default instance support ===
+    
+
+    rhoUtil.namespace(moduleNS, Signature);
+
+    
+
+
+
+})(Rho.jQuery, Rho, Rho.util);
+// Module Rho.KeyCapture
+
+
+(function ($, rho, rhoUtil) {
+    'use strict';
+
+    var moduleNS = 'Rho.KeyCapture';
+    var apiReq = rhoUtil.apiReqFor(moduleNS);
+    var currentDefaultID = null;
+
+    // === KeyCapture class definition ===
+
+    function KeyCapture() {
+        var id = null;
+        this.getId = function () {return id;};
+
+        if (1 == arguments.length && arguments[0][rhoUtil.rhoIdParam()]) {
+            if (moduleNS != arguments[0][rhoUtil.rhoClassParam()]) {
+                throw "Wrong class instantiation!";
+            }
+            id = arguments[0][rhoUtil.rhoIdParam()];
+        } else {
+            id = rhoUtil.nextId();
+            // constructor methods are following:
+            
+        }
+    };
+
+    KeyCapture.getId = function() { return currentDefaultID; }
+
+    // === KeyCapture instance properties ===
+
+    rhoUtil.createPropsProxy(KeyCapture.prototype, [
+    ], apiReq, function(){ return this.getId(); });
+
+    // === KeyCapture instance methods ===
+
+    rhoUtil.createMethodsProxy(KeyCapture.prototype, [
+    
+    ], apiReq, function(){ return this.getId(); });
+
+    // === KeyCapture constants ===
+
+    
+            KeyCapture.IPHONE_VOLUME_UP = '10'; 
+    
+            KeyCapture.IPHONE_VOLUME_DOWN = '11'; 
+    
+
+
+    // === KeyCapture hash keys ===
+    
+    
+            KeyCapture.HK_KEY_VALUE = "keyValue"; 
+
+            KeyCapture.HK_TRIGGER_FLAG = "triggerFlag"; 
+
+
+    // === KeyCapture static properties ===
+
+    rhoUtil.createPropsProxy(KeyCapture, [
+        { propName: 'homeKeyValue', propAccess: 'rw' }
+    ], apiReq);
+
+    // === KeyCapture static methods ===
+
+    rhoUtil.createMethodsProxy(KeyCapture, [
+    
+          // function(/* bool */ dispatch, /* const rho::String& */ keyValue, /* optional function */ oResult)
+          { methodName: 'captureKey', nativeName: 'captureKey', persistentCallbackIndex: 2, valueCallbackIndex: 4 }
+    
+          // function(/* const rho::String& */ keyValue, /* const rho::String& */ remapTo, /* optional function */ oResult)
+        , { methodName: 'remapKey', nativeName: 'remapKey', valueCallbackIndex: 2 }
+    
+          // function(/* optional function */ oResult)
+        , { methodName: 'captureTrigger', nativeName: 'captureTrigger', persistentCallbackIndex: 0, valueCallbackIndex: 2 }
+    
+    ], apiReq);
+
+    // === KeyCapture default instance support ===
+    
+
+    rhoUtil.namespace(moduleNS, KeyCapture);
+
+    
+
+
+
+})(Rho.jQuery, Rho, Rho.util);
 // Module Rho.Application
 
 (function ($, rho, rhoUtil) {
@@ -11063,8 +12295,8 @@ var Rho = Rho || (function ($) {
     };
 
 
-    Database.prototype.executeBatchSql = function(/* const rho::String& */ sqlStmt, /* const rho::Vector<rho::String>& */ args) {
-        return executeSql(this.db, sqlStmt, true, args);
+    Database.prototype.executeBatchSql = function(/* const rho::String& */ sqlStmt) {
+        return executeSql(this.db, sqlStmt, true, []);
     };
 
 
@@ -11102,34 +12334,46 @@ var Rho = Rho || (function ($) {
 
     rhoUtil.namespace(moduleNS, Database, true);
 
-})(jQuery, Rho, Rho.util);
-// Module rhoapi-native.rhosim
+})(Rho.jQuery, Rho, Rho.util);
+// Module rhoapi-native.wm
 
-/* Rho API RhoSimulator native bridge */
+/* Rho API WinMob native bridge */
+
+/*
+    ==============================================================================================================
+
+    To return following object as result:
+        { abc: 123 }
+
+    You need to pass it from native to js this way:
+        WebView.execute_js("__rhoNativeApiResult({result: { abc:123 } })");
+
+    To return error as result:
+        { code: 123, message: 'some error' }
+
+    You need to pass it from native to js this way:
+        WebView.execute_js("__rhoNativeApiResult({error: { code: 123, message: 'some error' } })");
+
+    ==============================================================================================================
+ */
 
 (function ($, rho, rhoPlatform, rhoUtil) {
     'use strict';
 
-    var RHO_API_CALL_TAG = '__rhoNativeApiCall';
-    var RHO_API_TAG = '__rhoNativeApi';
+    var bridge    = new WebkitBridge();
+    var apiResult = undefined;
 
-    var nativeApi = {
+    rhoPlatform.nativeApiCall = function (cmdText, async, resultHandler) {
 
-        apiCall: function (cmdText, async, resultHandler) {
-            //window.alert(cmdText);
+        var apiResult = bridge.framework(cmdText);
 
-            var nativeApiResult = {};
-
-            if (window[RHO_API_TAG] && 'function' == typeof window[RHO_API_TAG]['apiCall']) {
-                nativeApiResult = window[RHO_API_TAG].apiCall(cmdText, async);
-            }
-
-            //window.alert(nativeApiResult);
-            resultHandler(JSON.parse(nativeApiResult));
-        }
+        resultHandler(JSON.parse(apiResult));
     };
 
-    // TODO: uncomment as native handler will be implemented
-    rhoPlatform.nativeApiCall = nativeApi.apiCall;
+    rhoPlatform.nativeApiResult = function(result) {
+        apiResult = result;
+    };
 
-})(jQuery, Rho, Rho.platform, Rho.util);
+    window['__rhoNativeApiResult'] = rhoPlatform.nativeApiResult;
+
+})(Rho.jQuery, Rho, Rho.platform, Rho.util);
