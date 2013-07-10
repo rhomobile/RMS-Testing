@@ -225,9 +225,9 @@ describe("Camera JS API Test", function() {
 
 					it("VT285-1001 | call Default |" + camtype, function() {
 
-						    Rho.Camera.setDefaultID( enumObject.getId() );
-						   	Rho.Camera.default = enumObject;
-						    var defaultobj = Rho.Camera.default;
+						    //Rho.Camera.setDefaultID( enumObject.getId());
+						   	//Rho.Camera.default = enumObject;
+						    //var defaultobj = Rho.Camera.default;
 							expect(camtype).toEqual(defaultobj.getProperty('ID'));
 					});
 
@@ -340,8 +340,6 @@ describe("Camera JS API Test", function() {
 							expect(getpropertydata).toContain('image');
 						});								
 					});
-
-
 			});
 
 			describe("Camera property set using takePicture() for "+ camtype +": "+ camname, function() {
@@ -394,13 +392,12 @@ describe("Camera JS API Test", function() {
 								
 							runs(function() {
 
-								//var strGetProperty = '["'+arrCamera[idx]['propertyName']+'"]';
-								//var objGetProperty = JSON.parse(strGetProperty);
+								var strGetProperty = '["'+arrCamera[idx]['propertyName']+'"]';
+								var objGetProperty = JSON.parse(strGetProperty);
 
-								//var data = enumObject.getProperties(objGetProperty);
+								var data = enumObject.getProperties(objGetProperty);
 
-								//data = data[arrCamera[idx]['propertyName']];
-								var data = eval(enumObject)[arrCamera[idx]['propertyName']];
+								data = data[arrCamera[idx]['propertyName']];
 								expect(data).toEqual(arrCamera[idx]['expectedResult']);
 							});
 
@@ -409,6 +406,42 @@ describe("Camera JS API Test", function() {
 
 				}
 			});
+
+		})(enumData[j],arrCAM);
+
+    }
+
+});
+
+
+describe("Camera choosePicture() JS API Test", function() {
+	var	enableflag = false;
+	var	disableflag = false;
+	var getpropertiesdata ='';
+	var getpropertydata ='';
+    var enumData = Rho.Camera.enumerate();
+    var callbackstatus = false;
+
+    var callbackgetproperties = function (data){
+		getpropertiesdata = JSON.stringify(data);
+		callbackstatus = true;
+	}
+
+	var callbackgetproperty = function (data){
+		getpropertydata = data;
+		callbackstatus = true;
+	}
+
+    for (var j = 0;j<enumData.length;j++){
+
+		var arrCAM = getApplicableProperties(enumData[j]);
+
+		(function(enumObject,arrCamera){
+
+			var camname = enumObject.getProperty('cameraType');
+			var camtype = enumObject.getProperty('ID');
+
+			Rho.Camera.setDefault(enumObject);
 
 			describe("Camera property set using choosePicture() for "+ camtype +": "+ camname, function() {
 
@@ -447,7 +480,7 @@ describe("Camera JS API Test", function() {
 
 								var objProperty = JSON.parse(strProperty);
 
-								enumObject.choosePicture(objProperty, camCallback);
+								Rho.Camera.choosePicture(objProperty, camCallback);
 
 								setTimeout(function() {
 									flag = true;
@@ -460,7 +493,12 @@ describe("Camera JS API Test", function() {
 								
 							runs(function() {
 
-								var data = eval(enumObject)[arrCamera[idx]['propertyName']];
+								var strGetProperty = '["'+arrCamera[idx]['propertyName']+'"]';
+								var objGetProperty = JSON.parse(strGetProperty);
+
+								var data = Rho.Camera.getProperties(objGetProperty);
+
+								data = data[arrCamera[idx]['propertyName']];
 								expect(data).toEqual(arrCamera[idx]['expectedResult']);
 							});
 
@@ -475,7 +513,6 @@ describe("Camera JS API Test", function() {
     }
 
 });
-
 
 
 describe("Enumerate Camera ", function() {
