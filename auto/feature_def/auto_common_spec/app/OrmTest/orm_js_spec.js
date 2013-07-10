@@ -31,6 +31,11 @@ describe("<ORM module specs>", function() {
       reset();
     });
 
+
+    it('VT302-0001 | Check Rho.ORM exist or not | Should return an object',function(){
+      expect(typeof(Rho.ORM)).toEqual('object');
+    });
+
     it('VT302-0004 | should create model',function(){
       var Product = function(model){
           model.modelName("Product");
@@ -45,6 +50,263 @@ describe("<ORM module specs>", function() {
       expect(source.name).toEqual('Product');
     });
 
+    it('VT302-0005 | Call Rho.ORM.addModel, passing model name as numerical string',function(){
+      var Product = function(model){
+          model.modelName("123456");
+          model.enable("sync");
+          model.property("name","string");
+          model.property("brand","string");
+          model.set("partition","local");
+      };
+      p = Rho.ORM.addModel(Product);
+      source = Opal.Rho._scope.RhoConfig.$sources().map["123456"];
+      expect(source.sync_type).toEqual('incremental');
+      expect(source.name).toEqual('123456');
+    });
+
+    it('VT302-0006 | set enable as sync at the time of creating model',function(){
+      var Product = function(model){
+          model.modelName("Product");
+          model.enable("sync");
+          model.property("name","string");
+          model.property("brand","string");
+      };
+      p = Rho.ORM.addModel(Product);
+      source = Opal.Rho._scope.RhoConfig.$sources().map["Product"];
+      expect(source.sync_type).toEqual('incremental');
+      expect(source.name).toEqual('Product');
+    });
+
+    it('VT302-0007 | set enable as propertyBag at the time of creating model',function(){
+      var Product = function(model){
+          model.modelName("Product");
+          model.enable("propertyBag");
+          model.property("name","string");
+          model.property("brand","string");
+          model.set("partition","local");
+      };
+      p = Rho.ORM.addModel(Product);
+      source = Opal.Rho._scope.RhoConfig.$sources().map["Product"];
+      expect(source.sync_type).toEqual('none');
+      expect(source.name).toEqual('Product');
+    });
+
+    it('VT302-0008 | set enable as fixedSchema at the time of creating model',function(){
+      var Product = function(model){
+          model.modelName("Product");
+          model.enable("fixedSchema");
+          model.property("name","string");
+          model.property("brand","string");
+          model.set("partition","local");
+      };
+      p = Rho.ORM.addModel(Product);
+      source = Opal.Rho._scope.RhoConfig.$sources().map["Product"];
+      expect(source.sync_type).toEqual('none');
+      expect(source.name).toEqual('Product');
+    });
+
+    it('VT302-0009 | Set sync and set propertyBag at the time of creating model',function(){
+      var Product = function(model){
+          model.modelName("Product");
+          model.enable("sync");
+          model.enable("propertyBag");
+          model.property("name","string");
+          model.property("brand","string");
+          model.set("partition","local");
+      };
+      p = Rho.ORM.addModel(Product);
+      source = Opal.Rho._scope.RhoConfig.$sources().map["Product"];
+      expect(source.partition).toEqual('local');
+      expect(source.sync_type).toEqual('incremental');
+      expect(source.name).toEqual('Product');
+    });
+
+    it('VT302-0010 | Set sync and set fixedSchema at the time of creating model',function(){
+      var Product = function(model){
+          model.modelName("Product");
+          model.enable("sync");
+          model.enable("fixedSchema");
+          model.property("name","string");
+          model.property("brand","string");
+      };
+      p = Rho.ORM.addModel(Product);
+      source = Opal.Rho._scope.RhoConfig.$sources().map["Product"];
+      expect(source.sync_type).toEqual('incremental');
+      expect(source.partition).toEqual('user');
+      expect(source.name).toEqual('Product');
+    });
+
+    it('VT302-0011 | Create a Model with property("name","string")',function(){
+      var Product = function(model){
+          model.modelName("Product");
+          model.property("name","string");
+      };
+      p = Rho.ORM.addModel(Product);
+      source = Opal.Rho._scope.RhoConfig.$sources().map["Product"];
+      expect(source.property['name'][0]).toEqual('string');
+      expect(source.partition).toEqual('user');
+      expect(source.name).toEqual('Product');
+    });
+
+    it("VT302-0012 | Create a Model with property('int_prop', 'integer')",function(){
+      var Product = function(model){
+          model.modelName("Product");
+          model.property("id","integer");
+      };
+      p = Rho.ORM.addModel(Product);
+      source = Opal.Rho._scope.RhoConfig.$sources().map["Product"];
+      expect(source.property['id'][0]).toEqual('integer');
+      expect(source.partition).toEqual('user');
+      expect(source.name).toEqual('Product');
+    });
+
+    it("VT302-0013 | Create a Model with property ('float_prop', 'float')",function(){
+      var Product = function(model){
+          model.modelName("Product");
+          model.property("float_prop","float");
+      };
+      p = Rho.ORM.addModel(Product);
+      source = Opal.Rho._scope.RhoConfig.$sources().map["Product"];
+      expect(source.property['float_prop'][0]).toEqual('float');
+      expect(source.partition).toEqual('user');
+      expect(source.name).toEqual('Product');
+    });
+
+    it("VT302-0014 | Create a Model with property ('date_prop', 'date')",function(){
+      var Product = function(model){
+          model.modelName("Product");
+          model.property("date_prop","date");
+      };
+      p = Rho.ORM.addModel(Product);
+      source = Opal.Rho._scope.RhoConfig.$sources().map["Product"];
+      expect(source.property['date_prop'][0]).toEqual('date');
+      expect(source.partition).toEqual('user');
+      expect(source.name).toEqual('Product');
+    });
+
+    it("VT302-0015 | Create a Model with property ('time_prop', 'time')",function(){
+      var Product = function(model){
+          model.modelName("Product");
+          model.property("time_prop","time");
+      };
+      p = Rho.ORM.addModel(Product);
+      source = Opal.Rho._scope.RhoConfig.$sources().map["Product"];
+      expect(source.property['time_prop'][0]).toEqual('time');
+      expect(source.partition).toEqual('user');
+      expect(source.name).toEqual('Product');
+    });
+
+    it("VT302-0016 | Create a Model with property ('image_url', 'blob')",function(){
+      var Product = function(model){
+          model.modelName("Product");
+          model.property("image_url","blob");
+      };
+      p = Rho.ORM.addModel(Product);
+      source = Opal.Rho._scope.RhoConfig.$sources().map["Product"];
+      expect(source.property['image_url'][0]).toEqual('blob');
+      expect(source.partition).toEqual('user');
+      expect(source.name).toEqual('Product');
+    });
+
+    it("VT302-0017 | Create a Model with property('mycustomproperty', 'hello')",function(){
+      var Product = function(model){
+          model.modelName("Product");
+          model.property("mycustomproperty","hello");
+      };
+      p = Rho.ORM.addModel(Product);
+      source = Opal.Rho._scope.RhoConfig.$sources().map["Product"];
+      expect(source.property['mycustomproperty'][0]).toEqual('hello');
+      expect(source.partition).toEqual('user');
+      expect(source.name).toEqual('Product');
+    });
+
+    it("VT302-0018 | Create a Model with property('image_url', 'blob', 'overwrite')",function(){
+      var Product = function(model){
+          model.modelName("Product");
+          model.property("image_url","blob","overwrite");
+      };
+      p = Rho.ORM.addModel(Product);
+      source = Opal.Rho._scope.RhoConfig.$sources().map["Product"];
+      expect(source.property['image_url'][0]).toEqual('blob');
+      expect(source.property['image_url'][1]).toEqual('overwrite');
+      expect(source.partition).toEqual('user');
+      expect(source.name).toEqual('Product');
+    });
+
+    it("VT302-0019 | should add index",function(){
+        expect(Rho.ORM.getModel('Product')).toBeUndefined();
+
+        var Product = function(model){
+            model.modelName("Product");
+            model.property("name","string");
+            model.property("price","float");
+            model.enable("fixedSchema");
+            model.addIndex("p1",["name"]);
+            model.set("partition","local");
+        };
+
+        var Model = Rho.ORM.addModel(Product);
+        Model.create({"name":"test"});
+        sources = Rho.ORMHelper.getAllSources();
+
+        expect(Model).toBeDefined();
+
+        res = db.$execute_sql("SELECT * FROM Product INDEXED BY p1 Where name = 'test' ");
+        expect(res[0].map.name).toEqual('test');
+        db.$execute_sql("DROP TABLE Product");
+    });
+
+    it("VT302-0020 | addIndex to multiple columns while creating a model",function(){
+        expect(Rho.ORM.getModel('Product')).toBeUndefined();
+
+        var Product = function(model){
+            model.modelName("Product");
+            model.property("name","string");
+            model.property("price","float");
+            model.enable("fixedSchema");
+            model.addIndex("p1",["name","price"]);
+            model.set("partition","local");
+        };
+
+        var Model = Rho.ORM.addModel(Product);
+        Model.create({"name":"test","price":87.89});
+        sources = Rho.ORMHelper.getAllSources();
+
+        expect(Model).toBeDefined();
+
+        res = db.$execute_sql("SELECT * FROM Product INDEXED BY p1 Where name = 'test' ");
+        expect(res[0].map.name).toEqual('test');
+        db.$execute_sql("DROP TABLE Product");
+    });
+
+    it("VT302-0021 | add multiple Index to multiple columns while creating a model",function(){
+        expect(Rho.ORM.getModel('Product')).toBeUndefined();
+
+        var Product = function(model){
+            model.modelName("Product");
+            model.property("name","string");
+            model.property("price","float");
+            model.property("type","string");
+            model.enable("fixedSchema");
+            model.addIndex("p1",["name","price"]);
+            model.addIndex("p2",["type"]);
+            model.set("partition","local");
+        };
+
+        var Model = Rho.ORM.addModel(Product);
+        Model.create({"name":"test","price":87.89,"type":"testing"});
+        Model.create({"name":"debug","price":0.78,"type":"testing"});
+        sources = Rho.ORMHelper.getAllSources();
+
+        expect(Model).toBeDefined();
+
+        res = db.$execute_sql("SELECT * FROM Product INDEXED BY p1 Where name = 'test' ");
+        res2 = db.$execute_sql("SELECT * FROM Product INDEXED BY p2 Where name = 'debug' ");
+        expect(res[0].map.name).toEqual('test');
+        expect(res2[0].map.name).toEqual('debug');
+        db.$execute_sql("DROP TABLE Product");
+    });
+//Bhakta Added Test Upto This
     it('VT302-0037 | should add model, get model, clear all models', function() {
         expect(Rho.ORM.getModel('Product')).toBeUndefined();
 
@@ -84,27 +346,6 @@ describe("<ORM module specs>", function() {
         db.$execute_sql("DROP TABLE Product");
     });
 
-    it("VT302-0019 | should add index",function(){
-        expect(Rho.ORM.getModel('Product')).toBeUndefined();
-
-        var Product = function(model){
-            model.modelName("Product");
-            model.property("name","string");
-            model.property("price","float");
-            model.enable("fixedSchema");
-            model.addIndex("p1",["name"]);
-            model.set("partition","local");
-        };
-
-        var Model = Rho.ORM.addModel(Product);
-        Model.create({"name":"test"});
-        sources = Rho.ORMHelper.getAllSources();
-        expect(Model).toBeDefined();
-
-        res = db.$execute_sql("SELECT * FROM Product INDEXED BY p1 Where name = 'test' ");
-        expect(res[0].map.name).toEqual('test');
-        db.$execute_sql("DROP TABLE Product");
-    });
 
     it("VT302-0022 | should add unique index",function(){
         expect(Rho.ORM.getModel('Product')).toBeUndefined();
@@ -634,4 +875,5 @@ describe("<ORM Db Reset specs>", function() {
       db.$execute_sql("DELETE FROM OBJECT_VALUES");
       Rho.ORM.clear();
     });
+
 });
