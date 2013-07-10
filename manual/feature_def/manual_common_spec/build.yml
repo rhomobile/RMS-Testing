@@ -9,7 +9,7 @@ applog: rholog.txt
 iphone:
   configuration: Release
   sdk: iphonesimulator6.1
-  extensions: ["signature", "barcode"]
+  extensions: ["sensor", "signature", "barcode"]
   provisionprofile:
   codesignidentity:
   entitlements:
@@ -27,7 +27,7 @@ wm:
 
 paths:
   extensions:
-  - ../../../../Motorola-Extensions/build/ci/extensions
+#  - ../../../../Motorola-Extensions/build/ci/extensions
 #  - ../../../../Motorola-Extensions/lib/commonAPI
 
 #security_token: "123"
