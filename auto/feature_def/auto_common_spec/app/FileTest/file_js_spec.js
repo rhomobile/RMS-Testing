@@ -162,7 +162,7 @@ describe("File JS API", function () {
 	});
 
 
-
+/* Negative test
 	// copy from and to with invalid source path
 	it("VT295-008 : Copy with invalid source path | false",function(){
 
@@ -171,7 +171,7 @@ describe("File JS API", function () {
 		var result = Rho.RhoFile.copy(fromPath,destFileName);
 		expect(result).toEqual(-1);
 	});
-
+*/
 	// copy without parameters
 	it("VT295-011 : Copy without parameters | false",function(){
 
