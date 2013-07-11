@@ -5699,45 +5699,29 @@ describe("Sensor JS API Test", function() {
 	});
 
 	it("VT297-0341 | start to enables the accelerometer sensor data retrieval with anonymous callback |", function() {
-		var result = null;
-		runs(function() {
-    		sensorInstance = Rho.Sensor.makeSensorByType(Rho.Sensor.SENSOR_TYPE_ACCELEROMETER);
-		    if (sensorInstance)
-		    {
-	        	sensorInstance.start(function (args){	
-				eventsRcvd++;
-				
-				result = 'Event ' + eventsRcvd + ' from ' + sensorInstance.type;	
-				result += '<br/>Sensor status ' + sensorInstance.status;
-		        result += '<br/>Sensor read gap ' + sensorInstance.minimumGap;	
-				result += '<br/>Status :- ' + JSON.stringify(args["status"]);
-				result += '<br/>Message :- ' + JSON.stringify(args["message"]);
-				result += '<br/> Coordinates are(' + JSON.stringify(args["accelerometer_x"]);
-				result += ',' + JSON.stringify(args["accelerometer_y"]);
-				result += ',' + JSON.stringify(args["accelerometer_z"]);
-				result += ')'
-			    displayResult("Output: ",result);
-			    callbackFired = true;
-			    result = args;
-			};
-	    });
-		
-		waitsFor(function () {
-        	if (sensorInstance)
-        	{	
-            	return (result != null);
-            }
-            else
-            	return true;
-        }, 'The Accelerometer coordinates should display', 20000);
-
-        runs(function () {
-        	if (sensorInstance)
-            	expect(result["status"]).toMatch("ok");
-            else 
-    		  	expect(sensorInstance).toBeNull();  
-        });
-
+    	sensorInstance = Rho.Sensor.makeSensorByType(Rho.Sensor.SENSOR_TYPE_ACCELEROMETER);
+	    if (sensorInstance)
+	    {
+	        sensorInstance.start(function (args){	
+			eventsRcvd++;
+			var result = '';
+			result = 'Event ' + eventsRcvd + ' from ' + sensorInstance.type;	
+			result += '<br/>Sensor status ' + sensorInstance.status;
+	        result += '<br/>Sensor read gap ' + sensorInstance.minimumGap;	
+			result += '<br/>Status :- ' + JSON.stringify(args["status"]);
+			result += '<br/>Message :- ' + JSON.stringify(args["message"]);
+			result += '<br/> Coordinates are(' + JSON.stringify(args["accelerometer_x"]);
+			result += ',' + JSON.stringify(args["accelerometer_y"]);
+			result += ',' + JSON.stringify(args["accelerometer_z"]);
+			result += ')'
+		    displayResult("Output: ",result);
+		    callbackFired = true;
+			});  
+			
+	        expect(mystate["status"]).toMatch("ok");
+	    }  
+		else
+		expect(sensorInstance).toBeNull();
 
 	});*/
 
