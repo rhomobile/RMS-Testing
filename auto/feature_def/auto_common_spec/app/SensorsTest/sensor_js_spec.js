@@ -21,9 +21,9 @@ describe("Sensor JS API Test", function() {
 
     afterEach(function () {
         /* ... Tear it down ... */
-        getresult = '';
-        getpropresult = '';
-        getallpropresult ='';
+        getresult = null;
+        getpropresult = null;
+        getallpropresult = null;
 
         if (sensorInstance != null)
     	{
@@ -543,7 +543,7 @@ describe("Sensor JS API Test", function() {
 
 	var getproperty_callback =  function (args){	
 		//var result = '<br/>Property Value :- ' + JSON.stringify(args);
-		//getresult = JSON.stringify(args);
+		//getresult = JSON.stringify(args);		
 		getresult = args;
 	    displayResult("Output: ",getresult);
 	}
@@ -4000,7 +4000,8 @@ describe("Sensor JS API Test", function() {
 		});
 
 		waitsFor(function () {
-            return (getresult != null);
+			
+            return (getresult != null);            
         }, 'The Accelerometer coordinates should display', 3000);
 
 		runs(function()
@@ -4048,21 +4049,26 @@ describe("Sensor JS API Test", function() {
 		{
 			sensorInstance = Rho.Sensor.makeSensorByType(Rho.Sensor.SENSOR_TYPE_ACCELEROMETER);
 		    if (sensorInstance)
+		    {		    	
                	sensorInstance.getProperties(['minimumGap'],getproperties_callback);
+            }
 		    else
     			expect(sensorInstance).toBeNull(); // if sensor is not supported on the device should we fail the test?						
 		});
 
 		waitsFor(function () {
-            return (getpropresult != null);
+			if (sensorInstance)
+            	return (getpropresult != null);
+            else
+            	return true;
         }, 'The Accelerometer coordinates should display', 5000);
 
 		runs(function()
 		{
 			if (sensorInstance)
-			expect(getpropresult['minimumGap']).toEqual("200");
+				expect(getpropresult['minimumGap']).toEqual("200");
 		    else
-    		expect(sensorInstance).toBeNull(); // if sensor is not supported on the device should we fail the test?			
+    			expect(sensorInstance).toBeNull(); // if sensor is not supported on the device should we fail the test?			
 		});
 
 	});
@@ -4073,24 +4079,27 @@ describe("Sensor JS API Test", function() {
 			sensorInstance = Rho.Sensor.makeSensorByType(Rho.Sensor.SENSOR_TYPE_ACCELEROMETER);
 		    if (sensorInstance)
             {
-		     	sensorInstance.getProperties(['minimumGap'],function (args){	
-				getpropresult = args;});
-		    } 
-		   else
-    			expect(sensorInstance).toBeNull();
+		     	sensorInstance.getProperties(['minimumGap'],function (args)
+		     	{	
+					getpropresult = args;
+				});
+		    }
 						
 		});
 
 		waitsFor(function () {
-            return (getresult != null);
+			if (sensorInstance)
+            	return (getpropresult != null);
+            else
+            	return true;
         }, 'The Accelerometer coordinates should display', 5000);
 
 		runs(function()
 		{
 			if (sensorInstance)
-			expect(getpropresult['minimumGap']).toEqual("200");
+				expect(getpropresult['minimumGap']).toEqual("200");
 		    else
-    		expect(sensorInstance).toBeNull(); // if sensor is not supported on the device should we fail the test?			
+    			expect(sensorInstance).toBeNull(); // if sensor is not supported on the device should we fail the test?			
 		});
 
 
@@ -4110,15 +4119,19 @@ describe("Sensor JS API Test", function() {
 		});
 
 		waitsFor(function () {
-            return (getresult != null);
+			if (sensorInstance)
+            	return (getresult != null);
+            else
+            	return true;
+
         }, 'The Accelerometer coordinates should display', 5000);
 
 		runs(function()
 		{
 			if (sensorInstance)
-			 expect(getresult).toEqual("300");
+				expect(getresult).toEqual("300");
 			else
-    		 expect(sensorInstance).toBeNull(); // if sensor is not supported on the device should we fail the test?			
+    			expect(sensorInstance).toBeNull(); // if sensor is not supported on the device should we fail the test?			
 		});
 
 	});
@@ -4131,23 +4144,24 @@ describe("Sensor JS API Test", function() {
             {
 		     	sensorInstance.setProperty("minimumGap","500");
 		     	sensorInstance.getProperty("minimumGap",function (args){	
-				getresult = JSON.stringify(args);
+				getresult = args//JSON.stringify(args);
 			    });
-			}		
-			else
-    			expect(sensorInstance).toBeNull();			
+			}
 		});
 
 		waitsFor(function () {
-            return (getresult != null);
+			if (sensorInstance)
+            	return (getresult != null);
+            else
+            	return true;
         }, 'The Accelerometer coordinates should display', 5000);
 
 		runs(function()
 		{
 			if (sensorInstance)
-			 expect(getresult).toEqual("500");
+				expect(getresult).toEqual("500");
 			else
-    		 expect(sensorInstance).toBeNull(); // if sensor is not supported on the device should we fail the test?
+    		 	expect(sensorInstance).toBeNull(); // if sensor is not supported on the device should we fail the test?
 		});
 
 	});
@@ -4163,22 +4177,23 @@ describe("Sensor JS API Test", function() {
         			           };
 		   	 	sensorInstance.setProperties(setProps);
 		     	sensorInstance.getProperties(['minimumGap'],getproperties_callback);
-		    }	
-		    else
-    			expect(sensorInstance).toBeNull();			
+		    }
 		});
 
 		waitsFor(function () {
-            return (getpropresult != null);
+			if (sensorInstance)
+            	return (getpropresult != null);
+            else
+            	return true;
         }, 'The Accelerometer coordinates should display', 5000);
 
 
 		runs(function()
 		{
 			if (sensorInstance)
-			expect(getpropresult['minimumGap']).toEqual("400");
+				expect(getpropresult['minimumGap']).toEqual("400");
 		    else
-    		expect(sensorInstance).toBeNull(); // if sensor is not supported on the device should we fail the test?			
+    			expect(sensorInstance).toBeNull(); // if sensor is not supported on the device should we fail the test?			
 		});
 
 	});
@@ -4194,23 +4209,24 @@ describe("Sensor JS API Test", function() {
         			           };
 		   	 	sensorInstance.setProperties(setProps);
 		     	sensorInstance.getProperties(['minimumGap'],function (args){	
-				getpropresult = args;
+					getpropresult = args;
 			    });
-		    }	
-		    else
-    			expect(sensorInstance).toBeNull();			
+		    }
 		});
 
 		waitsFor(function () {
-            return (getpropresult != null);
+			if (sensorInstance)
+            	return (getpropresult != null);
+            else
+            	return true;
         }, 'The Accelerometer coordinates should display', 5000);
 
 		runs(function()
 		{
 			if (sensorInstance)
-			expect(getpropresult['minimumGap']).toEqual("700");
+				expect(getpropresult['minimumGap']).toEqual("700");
 		    else
-    		expect(sensorInstance).toBeNull(); // if sensor is not supported on the device should we fail the test?			
+    			expect(sensorInstance).toBeNull(); // if sensor is not supported on the device should we fail the test?			
 		});
 
 	});
@@ -4236,10 +4252,9 @@ describe("Sensor JS API Test", function() {
 	   	 	sensorInstance.minimumGap = 900;
 	     	//myvar = sensorInstance.getProperty("minimumGap");
 			expect(sensorInstance.minimumGap).toEqual(900);
-		}
-		
+		}		
 		else
-		expect(sensorInstance).toBeNull(); // if sensor is not supported on the device should we fail the test?	
+			expect(sensorInstance).toBeNull(); // if sensor is not supported on the device should we fail the test?	
 
 	});
 
@@ -4249,13 +4264,14 @@ describe("Sensor JS API Test", function() {
 			if (sensorInstance)
 			{
 				sensorInstance.getAllProperties(getallproperties_callback);
-			}
-			else
-    			expect(sensorInstance).toBeNull();			
+			}			
 		});
 
 		waitsFor(function () {
-            return (getallpropresult != null);
+			if (sensorInstance)
+            	return (getallpropresult != null);
+            else
+            	return true;
         }, 'The Accelerometer coordinates should display', 5000);
 
 		runs(function()
@@ -4275,27 +4291,28 @@ describe("Sensor JS API Test", function() {
 
 	it("VT297-0250 | getAllProperties for accelerometer with synch |", function() {
 	    runs(function () {
-        sensorInstance = Rho.Sensor.makeSensorByType(Rho.Sensor.SENSOR_TYPE_ACCELEROMETER);
+        	sensorInstance = Rho.Sensor.makeSensorByType(Rho.Sensor.SENSOR_TYPE_ACCELEROMETER);
             if (sensorInstance)
             {
                sensorInstance.start();
                myvar = sensorInstance.getAllProperties();               
             }
-            else
-    			expect(sensorInstance).toBeNull();	
         });
 
 		waitsFor(function () {
-            return (getallpropresult != null);
+			if (sensorInstance)
+            	return (getallpropresult != null);
+            else
+            	return true;
         }, 'The Accelerometer coordinates should display', 5000);
 
 
          runs(function () {
          	if (sensorInstance)
          	{	
-			expect(myvar["minimumGap"]).toEqual("200");
-			expect(myvar["status"]).toEqual("started");
-			expect(myvar["type"]).toEqual("Accelerometer");
+				expect(myvar["minimumGap"]).toEqual("200");
+				expect(myvar["status"]).toEqual("started");
+				expect(myvar["type"]).toEqual("Accelerometer");
 			}
 			else
     			expect(sensorInstance).toBeNull();	
@@ -4305,28 +4322,29 @@ describe("Sensor JS API Test", function() {
 
 	it("VT297-0251 | getAllProperties for accelerometer with ananymous |", function() {
 	    runs(function () {
-        sensorInstance = Rho.Sensor.makeSensorByType(Rho.Sensor.SENSOR_TYPE_ACCELEROMETER);
+        	sensorInstance = Rho.Sensor.makeSensorByType(Rho.Sensor.SENSOR_TYPE_ACCELEROMETER);
             if (sensorInstance)
             {
                	sensorInstance.getAllProperties(function (args){	
-				getallpropresult = args;
-			    displayResult("Output: ",getallpropresult);
+					getallpropresult = args;
+				    displayResult("Output: ", getallpropresult);
 				});              
-            }
-            else
-    			expect(sensorInstance).toBeNull();	
+            }            
         });
 
         waitsFor(function () {
-            return (getallpropresult != null);
+        	if (sensorInstance)
+            	return (getallpropresult != null);
+            else
+            	return true;
         }, 'The Accelerometer coordinates should display', 5000);
 
          runs(function () {
          	if (sensorInstance)
             {
-			expect(getallpropresult["minimumGap"]).toEqual("200");
-			expect(getallpropresult["status"]).toEqual("ready");
-			expect(getallpropresult["type"]).toEqual("Accelerometer");
+				expect(getallpropresult["minimumGap"]).toEqual("200");
+				expect(getallpropresult["status"]).toEqual("ready");
+				expect(getallpropresult["type"]).toEqual("Accelerometer");
 		    }
 		    else
     			expect(sensorInstance).toBeNull();	
@@ -4365,16 +4383,14 @@ describe("Sensor JS API Test", function() {
 
 	it("VT297-0253 | makeSensorByType to get Return the new accelerometer sensor object by type with ananymous callback |", function() {
 	    runs(function () {
-	        Rho.Sensor.makeSensorByType(Rho.Sensor.SENSOR_TYPE_ACCELEROMETER,function (args){	
-			sensorType = args;
-		    displayResult("Output: ",sensorType);
-		});
+	        Rho.Sensor.makeSensorByType(Rho.Sensor.SENSOR_TYPE_ACCELEROMETER, function (args) {	
+				sensorType = args;
+			    displayResult("Output: ",sensorType);
+			});
             if (sensorType)
             {
                	sensorType.getProperty("type",getproperty_callback);   
-            }
-            else
-    			expect(sensorType).toBeNull();       
+            } 
             
         });
 
@@ -4409,12 +4425,11 @@ describe("Sensor JS API Test", function() {
 	});
 
 	it("VT297-0255 | makeSensorByType to get Return the new Accelerometer sensor object by type  |", function() {
-            sensorInstance = Rho.Sensor.makeSensorByType(Rho.Sensor.SENSOR_TYPE_ACCELEROMETER);
+        sensorInstance = Rho.Sensor.makeSensorByType(Rho.Sensor.SENSOR_TYPE_ACCELEROMETER);
 		if (sensorInstance)
         {
 			expect(sensorInstance.type).toMatch("Accelerometer");
-        }
-           
+        }           
         else
 	    	expect(sensorInstance).toBeNull();
 
@@ -4422,25 +4437,23 @@ describe("Sensor JS API Test", function() {
 
 	it("VT297-0256 | readData for Accelerometer before start to get read current sensor data |", function() {
 		runs(function () {
-        sensorInstance = Rho.Sensor.makeSensorByType(Rho.Sensor.SENSOR_TYPE_ACCELEROMETER);
-        if (sensorInstance)
-        {
-            setTimeout(accelerometerdata_display, 3000);
-        }
-
-        else
-	    	    expect(sensorInstance).toBeNull();	
-	    });
+	        sensorInstance = Rho.Sensor.makeSensorByType(Rho.Sensor.SENSOR_TYPE_ACCELEROMETER);
+	        if (sensorInstance)
+	        {
+	            setTimeout(accelerometerdata_display, 3000);
+	        }
+        });
 
         waitsFor(function () {
-            return (getstatus != null);
+        	if (sensorInstance)
+            	return (getstatus != null);
+            else
+            	return true;
         }, 'The Accelerometer coordinates should display', 20000);
 
         runs(function () {
         	if(sensorInstance)
-        	{
         	    expect(getstatus).toMatch("error");
-        	}
         	else
 	    	    expect(sensorInstance).toBeNull();	
 	        
@@ -4455,16 +4468,21 @@ describe("Sensor JS API Test", function() {
                 sensorInstance.minimumGap = 5000;                
                 sensorInstance.start(accelerometer_callback);
             }
-            else
-	    	    expect(sensorInstance).toBeNull();	
+            
         });
 
         waitsFor(function () {
-            return (eventsRcvd >=  3);
+        	if (sensorInstance)
+            	return (eventsRcvd >=  3);
+            else
+            	return true;
         }, 'The Accelerometer coordinates should display', 20000);
 
         runs(function () {
-            expect(eventsRcvd).toBeGreaterThan(2);
+        	if (sensorInstance)
+            	expect(eventsRcvd).toBeGreaterThan(2);
+            else
+	    	    expect(sensorInstance).toBeNull();	
         });
 
 	});
@@ -4477,27 +4495,26 @@ describe("Sensor JS API Test", function() {
             {
                 sensorInstance.start();  
                 setTimeout(accelerometerdata_display, 3000);
-            }
-            else
-	    	    expect(sensorInstance).toBeNull();	
+            }            
         });
 
         waitsFor(function () {
-            return (getstatus != null);
+        	if (sensorInstance)
+            	return (getstatus != null);
+            else
+            	return true;
         }, 'The Accelerometer coordinates should display', 20000);
 
         runs(function () {
-        	 if(sensorInstance)
-        	{
+        	if(sensorInstance)        	
                 expect(getstatus).toMatch("ok");
-            }
             else
 	    	    expect(sensorInstance).toBeNull();	
 	        
         }); 
 	});
 
-	it("VT297-0259 | stop to Stop listening to the Accelerometer sensor |", function() {
+	/*it("VT297-0259 | stop to Stop listening to the Accelerometer sensor |", function() {
         runs(function () {
  
                 setTimeout(accelerometerdata_display, 3000);
@@ -4511,7 +4528,7 @@ describe("Sensor JS API Test", function() {
 
 	    	    expect(sensorInstance).toBeNull();	
         });
-	});
+	});*/
 
 	it("VT297-0260 | makeSensorByType to get Return the new DeviceOrientation sensor object by type  |", function() {
             sensorInstance = Rho.Sensor.makeSensorByType(Rho.Sensor.SENSOR_TYPE_DEVICE_ORIENTATION);
@@ -4542,23 +4559,24 @@ describe("Sensor JS API Test", function() {
             if (sensorInstance)
             {
                 setTimeout(tiltangledata_display, 3000);
-            }
-            else
-	    	    expect(sensorInstance).toBeNull();
+            }          
 			
         });
 
         waitsFor(function () {
-            return (getstatus != null);
+        	if (sensorInstance)
+            	return (getstatus != null);
+            else
+            	return true;
         }, 'The Accelerometer coordinates should display', 20000);
 
         runs(function () {
 			if (sensorInstance)
 			{	
-            expect(getstatus).toMatch("error");
+            	expect(getstatus).toMatch("error");
             }
             else
-	    	expect(sensorInstance).toBeNull();
+	    		expect(sensorInstance).toBeNull();
 	        
         }); 
 	});
@@ -4570,17 +4588,21 @@ describe("Sensor JS API Test", function() {
             {
                 sensorInstance.minimumGap = 5000;                
                 sensorInstance.start(tiltangle_callback);
-            }
-            else
-	    	    expect(sensorInstance).toBeNull();
+            }            
         });
 
         waitsFor(function () {
-            return (eventsRcvd >=  3);
+        	if (sensorInstance)
+            	return (eventsRcvd >=  3);
+            else
+            	return true;
         }, 'The Accelerometer coordinates should display', 20000);
 
         runs(function () {
-            expect(eventsRcvd).toBeGreaterThan(2);
+        	if (sensorInstance)
+            	expect(eventsRcvd).toBeGreaterThan(2);
+            else
+	    	    expect(sensorInstance).toBeNull();
         });
 
 	});
@@ -4594,12 +4616,14 @@ describe("Sensor JS API Test", function() {
                 sensorInstance.start();  
                 setTimeout(tiltangledata_display, 3000);
             }
-            else
-	    	    expect(sensorInstance).toBeNull();
+            
         });
 
         waitsFor(function () {
-            return (getstatus != null);
+        	if (sensorInstance)
+            	return (getstatus != null);
+            else
+            	return true;
         }, 'The Accelerometer coordinates should display', 20000);
 
         runs(function () {
@@ -4615,16 +4639,24 @@ describe("Sensor JS API Test", function() {
 
 	it("VT297-0269 | stop to Stop listening to the TiltAngle sensor |", function() {
         runs(function () {
+        	sensorInstance = Rho.Sensor.makeSensorByType(Rho.Sensor.SENSOR_TYPE_TILT_ANGLE);
+        	if (sensorInstance)
                 setTimeout(tiltangledata_display, 3000);
 
         });
 
         waitsFor(function () {
-            return (getstatus != null);
+        	if (sensorInstance)
+            	return (getstatus != null);
+            else
+            	return true;
         }, 'The Accelerometer coordinates should display', 20000);
 
         runs(function () {
-            expect(getstatus).toMatch("error");
+        	if (sensorInstance)
+            	expect(getstatus).toMatch("error");
+            else
+            	expect(sensorInstance).toBeNull();
         });
 	});
 
@@ -4657,14 +4689,15 @@ describe("Sensor JS API Test", function() {
             if (sensorInstance)
             {
                 setTimeout(ecompassdata_display, 3000);
-            }
-            else
-	    		expect(sensorInstance).toBeNull();
+            }            
 	        
         });
 
         waitsFor(function () {
-            return (getstatus != null);
+        	if (sensorInstance)
+            	return (getstatus != null);
+            else
+            	return true;
         }, 'The Accelerometer coordinates should display', 20000);
 
         runs(function () {
@@ -4686,12 +4719,13 @@ describe("Sensor JS API Test", function() {
                 sensorInstance.minimumGap = 5000;                
                 sensorInstance.start(ecompass_callback);
             }
-            else
-	    		expect(sensorInstance).toBeNull();
         });
 
         waitsFor(function () {
-            return (eventsRcvd >=  3);
+        	if (sensorInstance)
+            	return (eventsRcvd >=  3);
+            else
+            	return true;
         }, 'The Accelerometer coordinates should display', 20000);
 
         runs(function () {
@@ -4714,13 +4748,14 @@ describe("Sensor JS API Test", function() {
             {
                 sensorInstance.start();  
                 setTimeout(ecompassdata_display, 3000);
-            }
-            else
-	    		expect(sensorInstance).toBeNull();
+            }            
         });
 
         waitsFor(function () {
-            return (getstatus != null);
+        	if (sensorInstance)
+            	return (getstatus != null);
+            else
+            	return true;
         }, 'The Accelerometer coordinates should display', 20000);
 
         runs(function () {
@@ -4736,15 +4771,23 @@ describe("Sensor JS API Test", function() {
 
 	it("VT297-0279 | stop to Stop listening to the ECompass sensor |", function() {
         runs(function () {
+        	sensorInstance = Rho.Sensor.makeSensorByType(Rho.Sensor.SENSOR_TYPE_ECOMPASS);
+        	if (sensorInstance)
                setTimeout(ecompassdata_display, 3000);
         });
 
         waitsFor(function () {
-            return (getstatus != null);
+        	if (sensorInstance)
+            	return (getstatus != null);
+            else
+            	return true;
         }, 'The Accelerometer coordinates should display', 20000);
 
         runs(function () {
+        	if (sensorInstance)
             	expect(getstatus).toMatch("error");
+            else
+            	expect(sensorInstance).toBeNull();
         });
 	});
 
@@ -4767,13 +4810,14 @@ describe("Sensor JS API Test", function() {
             {
                 setTimeout(magnetometerdata_display, 3000);
             }
-            else
-	         	expect(sensorInstance).toBeNull();
 	         
         });
 
         waitsFor(function () {
-            return (getstatus != null);
+        	if (sensorInstance)
+            	return (getstatus != null);
+            else
+            	return true;
         }, 'The Accelerometer coordinates should display', 20000);
 
         runs(function () {
@@ -4794,17 +4838,21 @@ describe("Sensor JS API Test", function() {
             {
                 sensorInstance.minimumGap = 5000;                
                 sensorInstance.start(magnetometer_callback);
-            }
-            else
-	         	expect(sensorInstance).toBeNull();
+            }            
         });
 
         waitsFor(function () {
-            return (eventsRcvd >=  3);
+        	if (sensorInstance)
+            	return (eventsRcvd >=  3);
+            else
+            	return true;
         }, 'The Accelerometer coordinates should display', 20000);
 
         runs(function () {
-            expect(eventsRcvd).toBeGreaterThan(2);
+        	if (sensorInstance)
+            	expect(eventsRcvd).toBeGreaterThan(2);
+            else
+            	expect(sensorInstance).toBeNull();
         });
 
 	});
@@ -4817,39 +4865,44 @@ describe("Sensor JS API Test", function() {
             {
                 sensorInstance.start();  
                 setTimeout(magnetometerdata_display, 3000);
-            }
-            else
-	         	expect(sensorInstance).toBeNull();
+            }            
         });
 
         waitsFor(function () {
-            return (getstatus != null);
+        	if (sensorInstance)
+            	return (getstatus != null);
+            else
+            	return true;
         }, 'The Accelerometer coordinates should display', 20000);
 
         runs(function () {
-             if (sensorInstance)
-            {
-            	expect(getstatus).toMatch("ok");
-            }
-             else
-	    		expect(sensorInstance).toBeNull();
-	    	
+            if (sensorInstance)
+               	expect(getstatus).toMatch("ok");
+            else
+	    		expect(sensorInstance).toBeNull();	    	
         }); 
 	});
 
 	it("VT297-0284 | stop to Stop listening to the Magnetometer sensor |", function() {
         runs(function () {
-                setTimeout(magnetometerdata_display, 3000);
-
+    		sensorInstance = Rho.Sensor.makeSensorByType(Rho.Sensor.SENSOR_TYPE_MAGNETOMETER);
+    		if (sensorInstance)
+            	setTimeout(magnetometerdata_display, 3000);
         });
 
         waitsFor(function () {
-            return (getstatus != null);
+        	if (sensorInstance)
+            	return (getstatus != null);
+            else
+            	return true;
         }, 'The Accelerometer coordinates should display', 20000);
 
         runs(function () {
 
+        	if (sensorInstance)
             	expect(getstatus).toMatch("error");
+            else
+            	expect(sensorInstance).toBeNull();
 
         });
 	});
@@ -4872,14 +4925,15 @@ describe("Sensor JS API Test", function() {
             if (sensorInstance)
             {
                 setTimeout(gyroscopedata_display, 3000);
-            }
-            else
-	    		expect(sensorInstance).toBeNull();
+            }            
 	    	
         });
 
         waitsFor(function () {
-            return (getstatus != null);
+        	if (sensorInstance)
+            	return (getstatus != null);
+            else
+            	return true;
         }, 'The Accelerometer coordinates should display', 20000);
 
         runs(function () {
@@ -4901,17 +4955,21 @@ describe("Sensor JS API Test", function() {
                 sensorInstance.minimumGap = 5000;                
                 sensorInstance.start(gyroscope_callback);
             }
-           else
-	    		expect(sensorInstance).toBeNull();
 
         });
 
         waitsFor(function () {
-            return (eventsRcvd >=  3);
+        	if (sensorInstance)
+            	return (eventsRcvd >=  3);
+            else
+            	return true;
         }, 'The Accelerometer coordinates should display', 20000);
 
         runs(function () {
-            expect(eventsRcvd).toBeGreaterThan(2);
+        	if (sensorInstance)
+            	expect(eventsRcvd).toBeGreaterThan(2);
+            else
+            	expect(sensorInstance).toBeNull();
         });
 
 	});
@@ -4925,12 +4983,13 @@ describe("Sensor JS API Test", function() {
                 sensorInstance.start();  
                 setTimeout(gyroscopedata_display, 3000);
             }
-            else
-	    		expect(sensorInstance).toBeNull();
         });
 
         waitsFor(function () {
-            return (getstatus != null);
+        	if (sensorInstance)
+            	return (getstatus != null);
+            else
+            	return true;
         }, 'The Accelerometer coordinates should display', 20000);
 
         runs(function () {
@@ -4946,18 +5005,24 @@ describe("Sensor JS API Test", function() {
 
 	it("VT297-0289 | stop to Stop listening to the Gyroscope sensor |", function() {
         runs(function () {
- 
-                setTimeout(gyroscopedata_display, 3000);
+        	sensorInstance = Rho.Sensor.makeSensorByType(Rho.Sensor.SENSOR_TYPE_GYROSCOPE);
+        	if (sensorInstance)				
+	        	setTimeout(gyroscopedata_display, 3000);
 
         });
 
         waitsFor(function () {
-            return (getstatus != null);
-        }, 'The Accelerometer coordinates should display', 20000);
+        	if (sensorInstance)
+            	return (getstatus != null);
+            else
+            	return true;
+        }, 'The Gyroscope coordinates should display', 20000);
 
         runs(function () {
+        	if (sensorInstance)
             	expect(getstatus).toMatch("error");
-  
+            else
+  				expect(sensorInstance).toBeNull();  				
         });
 	});
 
@@ -5022,16 +5087,16 @@ describe("Sensor JS API Test", function() {
             sensorInstance = Rho.Sensor.makeSensorByType(Rho.Sensor.SENSOR_TYPE_TEMPERATURE);
             if (sensorInstance)
             {
-                setTimeout(temperaturedata_display, 3000);
-            
+                setTimeout(temperaturedata_display, 3000);           
             }
-            else 
-    		  	   expect(sensorInstance).toBeNull();  
     		  	
         });
 
         waitsFor(function () {
-            return (getstatus != null);
+        	if (sensorInstance)
+            	return (getstatus != null);
+            else
+            	return true;
         }, 'The Accelerometer coordinates should display', 20000);
 
         runs(function () {
@@ -5053,16 +5118,20 @@ describe("Sensor JS API Test", function() {
                 sensorInstance.minimumGap = 5000;                
                 sensorInstance.start(temperature_callback);
             }
-            else 
-    		  	   expect(sensorInstance).toBeNull();  
         });
 
         waitsFor(function () {
-            return (eventsRcvd >=  3);
+        	if (sensorInstance)
+            	return (eventsRcvd >=  3);
+            else
+            	return true;
         }, 'The Accelerometer coordinates should display', 20000);
 
         runs(function () {
-            expect(eventsRcvd).toBeGreaterThan(2);
+        	if (sensorInstance)
+            	expect(eventsRcvd).toBeGreaterThan(2);
+            else
+            	expect(sensorInstance).toBeNull();  
         });
 
 	});
@@ -5075,49 +5144,58 @@ describe("Sensor JS API Test", function() {
             {
                 sensorInstance.start();  
                 setTimeout(temperaturedata_display, 3000);
-            }
-            else 
-    		  	   expect(sensorInstance).toBeNull();  
+            }  
         });
 
         waitsFor(function () {
-            return (getstatus != null);
+        	if (sensorInstance)
+            	return (getstatus != null);
+            else
+            	return true;
         }, 'The Accelerometer coordinates should display', 20000);
 
         runs(function () {
         	if (sensorInstance)
             {
-            		expect(getstatus).toMatch("ok");
+            	expect(getstatus).toMatch("ok");
             }
             else 
-    		  	   expect(sensorInstance).toBeNull();  
+    		   expect(sensorInstance).toBeNull();  
             
         }); 
 	});
 
 	it("VT297-0314 | stop to Stop listening to the Temperature sensor |", function() {
         runs(function () {
- 
+
+        	sensorInstance = Rho.Sensor.makeSensorByType(Rho.Sensor.SENSOR_TYPE_TEMPERATURE);
+        	if (sensorInstance) 
                 setTimeout(temperaturedata_display, 3000);
         });
 
         waitsFor(function () {
-            return (getstatus != null);
+        	if (sensorInstance)
+            	return (getstatus != null);
+            else
+            	return true;
         }, 'The Accelerometer coordinates should display', 20000);
 
         runs(function () {
-            expect(getstatus).toMatch("error");
+        	if (sensorInstance)
+            	expect(getstatus).toMatch("error");
+            else
+            	expect(sensorInstance).toBeNull();
         });
 	});
 
 	it("VT297-0315 | makeSensorByType to get Return the new Humidity sensor object by type  |", function() {
-			sensorInstance = Rho.Sensor.makeSensorByType(Rho.Sensor.SENSOR_TYPE_HUMIDITY);
-            if (sensorInstance)
-            {
-            	   expect(sensorInstance.type).toMatch("Humidity");
-            }
-            else 
-    		  	   expect(sensorInstance).toBeNull();  
+		sensorInstance = Rho.Sensor.makeSensorByType(Rho.Sensor.SENSOR_TYPE_HUMIDITY);
+        if (sensorInstance)
+        {
+        	   expect(sensorInstance.type).toMatch("Humidity");
+        }
+        else 
+		  	   expect(sensorInstance).toBeNull();  
             
 	});
 
@@ -5129,22 +5207,21 @@ describe("Sensor JS API Test", function() {
             {
                 setTimeout(humiditydata_display, 3000);
             }
-            else 
-    		  	   expect(sensorInstance).toBeNull();  
             
         });
 
         waitsFor(function () {
-            return (getstatus != null);
+        	if (sensorInstance)
+               	return (getstatus != null);
+            else
+            	return true;
         }, 'The Accelerometer coordinates should display', 20000);
 
         runs(function () {
         	if (sensorInstance)
-            {
-            		expect(getstatus).toMatch("error");
-            }
+            	expect(getstatus).toMatch("error");
             else 
-    		  	   expect(sensorInstance).toBeNull();  
+    		  	expect(sensorInstance).toBeNull();  
             
         }); 
 	});
@@ -5156,18 +5233,22 @@ describe("Sensor JS API Test", function() {
             {
                 sensorInstance.minimumGap = 5000;                
                 sensorInstance.start(humidity_callback);
-            }
-            else 
-    		  	   expect(sensorInstance).toBeNull();  
+            }              
 
         });
 
         waitsFor(function () {
-            return (eventsRcvd >=  3);
+        	if (sensorInstance)
+            	return (eventsRcvd >=  3);
+            else
+            	return true;
         }, 'The Accelerometer coordinates should display', 20000);
 
         runs(function () {
-            expect(eventsRcvd).toBeGreaterThan(2);
+        	if (sensorInstance)
+            	expect(eventsRcvd).toBeGreaterThan(2);
+            else
+    		  	   expect(sensorInstance).toBeNull();
         });
 
 	});
@@ -5181,13 +5262,15 @@ describe("Sensor JS API Test", function() {
                 sensorInstance.start();  
                 setTimeout(humiditydata_display, 3000);
             }
-            else 
-    		  	   expect(sensorInstance).toBeNull();  
+              
             
         });
 
         waitsFor(function () {
-            return (getstatus != null);
+        	if (sensorInstance)
+            	return (getstatus != null);
+            else
+            	return true;
         }, 'The Accelerometer coordinates should display', 20000);
 
         runs(function () {
@@ -5203,16 +5286,23 @@ describe("Sensor JS API Test", function() {
 
 	it("VT297-0319 | stop to Stop listening to the Humidity sensor |", function() {
         runs(function () {
- 
-                setTimeout(humiditydata_display, 3000);
+        	sensorInstance = Rho.Sensor.makeSensorByType(Rho.Sensor.SENSOR_TYPE_HUMIDITY);
+        	if (sensorInstance)
+        		setTimeout(humiditydata_display, 3000);
         });
 
         waitsFor(function () {
-            return (getstatus != null);
+        	if (sensorInstance)
+            	return (getstatus != null);
+           	else
+           		return true;
         }, 'The Accelerometer coordinates should display', 20000);
 
         runs(function () {
-            expect(getstatus).toMatch("error");
+        	if (sensorInstance)
+            	expect(getstatus).toMatch("error");
+            else
+            	expect(sensorInstance).toBeNull();
         });
 	});
 
@@ -5245,14 +5335,15 @@ describe("Sensor JS API Test", function() {
             if (sensorInstance)
             {
                 setTimeout(linearAccelerationdata_display, 3000);
-            }
-            else 
-    		  	expect(sensorInstance).toBeNull();  
+            }              
             
         });
 
         waitsFor(function () {
-            return (getstatus != null);
+        	if (sensorInstance)
+            	(getstatus != null)
+            else
+            	return true;
         }, 'The Accelerometer coordinates should display', 20000);
 
         runs(function () {
@@ -5273,18 +5364,22 @@ describe("Sensor JS API Test", function() {
             {
                 sensorInstance.minimumGap = 5000;                
                 sensorInstance.start(linearAcceleration_callback);
-            }
-            else 
-    		  	expect(sensorInstance).toBeNull();  
+            }              
 
         });
 
         waitsFor(function () {
-            return (eventsRcvd >=  3);
+        	if (sensorInstance)
+            	return (eventsRcvd >=  3);
+            else
+            	return true;
         }, 'The Accelerometer coordinates should display', 20000);
 
         runs(function () {
-            expect(eventsRcvd).toBeGreaterThan(2);
+        	if (sensorInstance)
+            	expect(eventsRcvd).toBeGreaterThan(2);
+            else
+            	expect(sensorInstance).toBeNull();
         });
 
 	});
@@ -5303,7 +5398,10 @@ describe("Sensor JS API Test", function() {
         });
 
         waitsFor(function () {
-            return (getstatus != null);
+        	if (sensorInstance)
+            	return (getstatus != null);
+            else
+            	return true;
         }, 'The Accelerometer coordinates should display', 20000);
 
         runs(function () {
@@ -5319,16 +5417,23 @@ describe("Sensor JS API Test", function() {
 
 	it("VT297-0329 | stop to Stop listening to the LinearAcceleration sensor |", function() {
         runs(function () {
- 
-                setTimeout(linearAccelerationdata_display, 3000);
+ 			sensorInstance = Rho.Sensor.makeSensorByType(Rho.Sensor.SENSOR_TYPE_LINEAR_ACCELERATION);
+ 			if (sensorInstance)
+            	setTimeout(linearAccelerationdata_display, 3000);
         });
 
         waitsFor(function () {
-            return (getstatus != null);
+        	if (sensorInstance)
+            	return (getstatus != null);
+            else
+            	return true;
         }, 'The Accelerometer coordinates should display', 20000);
 
         runs(function () {
-            expect(getstatus).toMatch("error");
+        	if (sensorInstance)
+            	expect(getstatus).toMatch("error");
+            else
+            	expect(sensorInstance).toBeNull();  
         });
 	});
 
@@ -5358,7 +5463,10 @@ describe("Sensor JS API Test", function() {
         });
 
         waitsFor(function () {
-            return (getstatus != null);
+        	if (sensorInstance)
+            	return (getstatus != null);
+            else
+            	return true;
         }, 'The Accelerometer coordinates should display', 20000);
 
         runs(function () {
@@ -5385,11 +5493,17 @@ describe("Sensor JS API Test", function() {
         });
 
         waitsFor(function () {
-            return (eventsRcvd >=  3);
+        	if (sensorInstance)
+            	return (eventsRcvd >=  3);
+            else
+            	return true;
         }, 'The Accelerometer coordinates should display', 20000);
 
         runs(function () {
-            expect(eventsRcvd).toBeGreaterThan(2);
+        	if (sensorInstance)
+            	expect(eventsRcvd).toBeGreaterThan(2);
+            else
+           		expect(sensorInstance).toBeNull(); 	
         });
 
 	});
@@ -5408,7 +5522,10 @@ describe("Sensor JS API Test", function() {
         });
 
         waitsFor(function () {
-            return (getstatus != null);
+        	if (sensorInstance)
+            	return (getstatus != null);
+            else
+            	return true;
         }, 'The Accelerometer coordinates should display', 20000);
 
         runs(function () {
@@ -5423,17 +5540,24 @@ describe("Sensor JS API Test", function() {
 	});
 
 	it("VT297-0334 | stop to Stop listening to the Rotation sensor |", function() {
+
         runs(function () {
- 
-                setTimeout(rotationdata_display, 3000);
+    		sensorInstance = Rho.Sensor.makeSensorByType(Rho.Sensor.SENSOR_TYPE_ROTATION); 	
+            setTimeout(rotationdata_display, 3000);
         });
 
         waitsFor(function () {
-            return (getstatus != null);
+        	if (sensorInstance)
+            	return (getstatus != null);
+            else
+            	return true;
         }, 'The Accelerometer coordinates should display', 20000);
 
         runs(function () {
-            expect(getstatus).toMatch("error");
+        	if (sensorInstance)
+            	expect(getstatus).toMatch("error");
+            else
+            	expect(sensorInstance).toBeNull();
         });
 	});
 
@@ -5462,7 +5586,10 @@ describe("Sensor JS API Test", function() {
         });
 
         waitsFor(function () {
-            return (getstatus != null);
+        	if (sensorInstance)
+            	return (getstatus != null);
+            else
+           		return true;
         }, 'The Accelerometer coordinates should display', 20000);
 
         runs(function () {
@@ -5489,11 +5616,17 @@ describe("Sensor JS API Test", function() {
         });
 
         waitsFor(function () {
-            return (eventsRcvd >=  3);
+        	if (sensorInstance)
+            	return (eventsRcvd >=  3);
+            else
+            	return true;
         }, 'The Accelerometer coordinates should display', 20000);
 
         runs(function () {
-            expect(eventsRcvd).toBeGreaterThan(2);
+        	if (sensorInstance)
+            	expect(eventsRcvd).toBeGreaterThan(2);
+            else
+            	expect(sensorInstance).toBeNull();  
         });
 
 	});
@@ -5512,7 +5645,10 @@ describe("Sensor JS API Test", function() {
         });
 
         waitsFor(function () {
-            return (getstatus != null);
+        	if (sensorInstance)
+            	return (getstatus != null);
+            else
+            	return true;
         }, 'The Accelerometer coordinates should display', 20000);
 
         runs(function () {
@@ -5528,20 +5664,30 @@ describe("Sensor JS API Test", function() {
 
 	it("VT297-0339 | stop to Stop listening to the Orientation sensor |", function() {
         runs(function () {
- 
-                setTimeout(orientationdata_display, 3000);
+        	sensorInstance = Rho.Sensor.makeSensorByType(Rho.Sensor.SENSOR_TYPE_ORIENTATION);
+        	if (sensorInstance)
+ 				setTimeout(orientationdata_display, 3000);
         });
 
         waitsFor(function () {
-            return (getstatus != null);
+        	if (sensorInstance)
+        	{	
+            	return (getstatus != null);
+            }
+            else
+            	return true;
         }, 'The Accelerometer coordinates should display', 20000);
 
         runs(function () {
-            expect(getstatus).toMatch("error");
+        	if (sensorInstance)
+            	expect(getstatus).toMatch("error");
+            else 
+    		  	   expect(sensorInstance).toBeNull();  
         });
 	});
 
-	it("VT297-0340 | start to enables the accelerometer sensor data retrieval with synch |", function() {
+	// start doesn't return an object
+	/*it("VT297-0340 | start to enables the accelerometer sensor data retrieval with synch |", function() {
         sensorInstance = Rho.Sensor.makeSensorByType(Rho.Sensor.SENSOR_TYPE_ACCELEROMETER);
         if (sensorInstance)
         {
@@ -5549,7 +5695,7 @@ describe("Sensor JS API Test", function() {
             expect(mystate["status"]).toMatch("ok");
         }  
         else
-    	expect(sensorInstance).toBeNull();  
+    		expect(sensorInstance).toBeNull();  
 	});
 
 	it("VT297-0341 | start to enables the accelerometer sensor data retrieval with anonymous callback |", function() {
@@ -5577,6 +5723,6 @@ describe("Sensor JS API Test", function() {
 		else
 		expect(sensorInstance).toBeNull();
 
-	});
+	});*/
 
 });

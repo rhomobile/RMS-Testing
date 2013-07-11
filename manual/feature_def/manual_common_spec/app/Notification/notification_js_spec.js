@@ -373,7 +373,7 @@ describe("Notification Manual FD Tests", function () {
             runs(function () {
                 dispTestCaseRunning(" MP3 file will be played  ");
                 dispExpectedResult("MP3 file should be played ");
-                Rho.Notification.playFile(Rho.RhoFile.join(Rho.Application.modelFolderPath('Notification'), 'media1.mp3'), '');
+                Rho.Notification.playFile(Rho.RhoFile.join(Rho.Application.modelFolderPath('Notification'), 'media1.mp3'));
             });
 
             waitsFor(function () {
@@ -427,7 +427,7 @@ describe("Notification Manual FD Tests", function () {
             runs(function () {
                 dispTestCaseRunning(" Device will vibrate if applicable ");
                 dispExpectedResult("Device should vibrate for default time  ");
-                Rho.Notification.vibrate(null);
+                Rho.Notification.vibrate();
             });
 
             waitsFor(function () {
@@ -473,14 +473,14 @@ describe("Notification Manual FD Tests", function () {
 	            expect(testResult).toEqual(true);
 	        });
 	    });
-	    it("VT281-0861|Vibrate with duration 17 sec|", function () {
+	    it("VT281-0861|Vibrate with duration 30 sec|", function () {
 	        runs(function () {
 	            dispTestCaseRunning(" Device will vibrate if applicable ");
-	            dispExpectedResult("Device should vibrate for ONLY 15 seconds even though it is 17 sec as 15 is the max value it can take");
-	            Rho.Notification.vibrate(17000);
+	            dispExpectedResult("Device should vibrate for ONLY 15 seconds even though it is 30 sec as 15 is the max value it can take");
+	            Rho.Notification.vibrate(30000);
 	        });
 	        waitsFor(function () {
-	            dispExpectedResult("Device should vibrate for ONLY 15 seconds even though it is 17 sec as 15 is the max value it can take")
+	            dispExpectedResult("Device should vibrate for ONLY 15 seconds even though it is 30 sec as 15 is the max value it can take")
 	            return captured;
 	        }, 'Tester should ve responded by now ', 30000);
 	        runs(function () {
