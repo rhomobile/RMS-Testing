@@ -80,13 +80,13 @@ describe("HardwareKeysTestSuite", function() {
 				getpropertiesdata = data;
 				expect(getpropertiesdata).toBe('116');	// F5	
 			});
-
+/* KeyCapture does not supported PROPERTY_BAG
 			it("1.10.(VT289-052)check for getallproperties", function() {
 				Rho.KeyCapture.homeKeyValue = 'disabled';
 				Rho.KeyCapture.getAllProperties(function(data){getpropertiesdata = JSON.stringify(data);});
 				expect(getpropertiesdata).toContain('disabled');
 			});
-/* KeyCapture does not supported PROPERTY_BAG
+
 			it("1.11.(VT289-053)check for getSupportedProperties", function() {
 				Rho.KeyCapture.homeKeyValue = '0x0D';
 				Rho.KeyCapture.getSupportedProperties(function(data){getpropertiesdata = JSON.stringify(data);});
