@@ -29,4 +29,7 @@ android:
   version: 4.2.2
   emulator: myAndroid422
 
+paths:
+  extensions:
+    - "../../../../../rhoconnect-client/ext"
 extensions: ["json", "rhoconnect-client"]

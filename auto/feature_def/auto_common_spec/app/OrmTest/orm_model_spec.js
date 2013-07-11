@@ -1,17 +1,7 @@
   var Model;
   var object;
   var db = null;
-  function reset(){
-    db = Rho.ORMHelper.dbConnection("local");
-    Rho.ORM.clear();
-    var partitions = Rho.ORMHelper.getDbPartitions();
-    $.each(partitions, function(index, db2) {
-      db2.$execute_sql("DELETE FROM SOURCES");
-      db2.$execute_sql("DELETE FROM OBJECT_VALUES");
-      db2.$execute_sql("DELETE FROM CHANGED_VALUES");
-    });
-  }
-
+ 
   var cleanVars = function(object) {
     var vars = object.vars();
     var cleanVars = {};
@@ -26,6 +16,19 @@
   };
 
   describe("<model's object>", function() {
+
+ function reset(){
+    db = Rho.ORMHelper.dbConnection("local");
+    Rho.ORM.clear();
+    var partitions = Rho.ORMHelper.getDbPartitions();
+    $.each(partitions, function(index, db2) {
+      db2.$execute_sql("DELETE FROM SOURCES");
+      db2.$execute_sql("DELETE FROM OBJECT_VALUES");
+      db2.$execute_sql("DELETE FROM CHANGED_VALUES");
+    });
+  }
+
+
     var modelDef = function(model){
         model.modelName('Product'),
         model.property("key");
@@ -759,6 +762,18 @@
 
 describe("<model's fixed_schema>", function() {
   var Model2;
+
+   function reset(){
+    db = Rho.ORMHelper.dbConnection("local");
+    Rho.ORM.clear();
+    var partitions = Rho.ORMHelper.getDbPartitions();
+    $.each(partitions, function(index, db2) {
+      db2.$execute_sql("DELETE FROM SOURCES");
+      db2.$execute_sql("DELETE FROM OBJECT_VALUES");
+      db2.$execute_sql("DELETE FROM CHANGED_VALUES");
+    });
+  }
+
   var modelDef = function(model){
       model.modelName('Product'),
       model.enable("fixedSchema");

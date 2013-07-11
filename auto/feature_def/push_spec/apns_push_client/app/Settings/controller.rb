@@ -84,10 +84,11 @@ class SettingsController < Rho::RhoController
   end
 
   def push_callback
-    puts " *********** INSIDE push_callback **************"
-    puts "params: #{@params.inspect}"
+    puts " *********** INSIDE push_callback:params **************"
+    puts @params.inspect
+    puts
     # Show 'alert' popup window
-    Rho::Notification.showPopup({'message' => @params['aps']['alert'], 'buttons' =>['OK']})
+    Rho::Notification.showPopup({'message' => @params['alert'], 'buttons' =>['OK']})
   end
 
   def sync_notify
@@ -129,4 +130,18 @@ class SettingsController < Rho::RhoController
       end
 	  end
   end
+
+
+  def stop_notifications
+    puts "---- stop_notifications"
+    Rho::Push.stopNotifications
+    render
+  end
+
+  def start_notifications
+    puts "---- start_notifications"
+    Rho::Push.startNotifications '/app/Settings/push_callback'
+    render
+  end
+
 end

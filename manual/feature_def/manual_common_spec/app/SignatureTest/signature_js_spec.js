@@ -453,7 +453,7 @@ describe("Signature Manual Test", function() {
 				});
 			});
 
-			it("VT299-013 | Call takeFullScreen with bgColor as #FF0000FF (ARGB), penColor as #FF00FF(RGB), penWidth as 1 and callback |", function() {
+			it("VT299-013 | Call takeFullScreen with bgColor as #FFFFFF00 (ARGB), penColor as #FF00FF(RGB), penWidth as 1 and callback |", function() {
 
 				runs(function()
 				{
@@ -642,6 +642,7 @@ describe("Signature Manual Test", function() {
 				});
 			});
 
+    if (isAnyButApplePlatform()) {
 			it("VT299-017 | Call takeFullScreen with compressionFormat as bmp, fileName as 12345 and outputFormat as Image |", function() {
 
 				runs(function()
@@ -686,7 +687,9 @@ describe("Signature Manual Test", function() {
 					});
 				});
 			});
+    }
 
+    if (isAnyButApplePlatform()) {
 			it("VT299-018 | Call takeFullScreen with compressionFormat as jpg, fileName as Test and outputFormat as dataUri |", function() {
 
 				runs(function()
@@ -734,7 +737,7 @@ describe("Signature Manual Test", function() {
 					});
 				});
 			});
-
+    }
 			it("VT299-019 | Call show with bgColor as #FFFF8C00 (ARGB), penColor as #00FF00(RGB), penWidth as 1, and callback |", function() {
 
 				runs(function()
@@ -875,7 +878,7 @@ describe("Signature Manual Test", function() {
 					});
 				});
 			});
-
+    if (isAnyButApplePlatform()) {
 			it("VT299-022 | Call show with left as 10, top as 50, width as 180 and height as 120, border as false and outputFormat as dataURI|", function() {
 
 				runs(function()
@@ -924,6 +927,9 @@ describe("Signature Manual Test", function() {
 					});
 				});
 			});
+   }
+
+    if (isAnyButApplePlatform()) {
 
 			it("VT299-023 | Call show after setting all properties and outputFormat as dataURI|", function() {
 
@@ -980,6 +986,7 @@ describe("Signature Manual Test", function() {
 					});
 				});
 			});
+    }
 
 			it("VT299-024 | Call takeFullScreen with left,top,width,height and border|", function() {
 
@@ -1037,6 +1044,8 @@ describe("Signature Manual Test", function() {
 					});
 				});
 			});
+
+    if (isAnyButApplePlatform()) {
 
 			it("VT299-025 | Call setVectorCallback with function callback|", function() {
 
@@ -1262,6 +1271,7 @@ describe("Signature Manual Test", function() {
 					});
 				});
 			});
+     }
 
 	});	
 });	
