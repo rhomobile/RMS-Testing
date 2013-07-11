@@ -254,7 +254,7 @@ describe("MediaPlayer", function() {
 		it("VTXXX-0004-Play Audio(wav file)", function() {
 			runs(function() {
 				var platform = Rho.System.platform;
-				var audiolocation =Rho.RhoFile.join(audioMediaPath , 'badfeeling.wav);
+				var audiolocation =Rho.RhoFile.join(audioMediaPath , 'badfeeling.wav');
 								
 				Rho.Mediaplayer.start(audiolocation);
 				setTimeout(function() {
