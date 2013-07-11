@@ -356,6 +356,8 @@ describe("MediaPlayer", function() {
 			});
 		});
 
+    if (isAnyButApplePlatform()) {
+
 		it("VTXXX-0007-Play Audio(wma file)", function() {
 			runs(function() {
 				var platform = Rho.System.platform;
@@ -390,7 +392,7 @@ describe("MediaPlayer", function() {
 				expect(testResult).toEqual(true);
 			});
 		});
-
+    }
 		xit("VTXXX-0008-Play Audio(null)", function() {
 			runs(function() {
 								
@@ -454,6 +456,8 @@ describe("MediaPlayer", function() {
 			});
 		});	
 
+    if (isAnyButApplePlatform()) {
+
 		it("VTXXX-00011-Play Audio(valid file local) and Stop", function() {
 			runs(function() {
 				var audiolocation = Rho.RhoFile.join(audioMediaPath , "super_android_tune.mp3");
@@ -487,6 +491,9 @@ describe("MediaPlayer", function() {
 				expect(testResult).toEqual(true);
 			});
 		});	
+    }
+
+    if (isAnyButApplePlatform()) {
 
 		it("VTXXX-00012-Play Audio(valid file remote http) and Stop", function() {
 			runs(function() {
@@ -522,6 +529,9 @@ describe("MediaPlayer", function() {
 				expect(testResult).toEqual(true);
 			});
 		});							
+   }
+
+    if (isAnyButApplePlatform()) {
 
 		it("VTXXX-00013-Play Audio(valid file remote https) and Stop", function() {
 			runs(function() {
@@ -557,7 +567,7 @@ describe("MediaPlayer", function() {
 				expect(testResult).toEqual(true);
 			});
 		});		
-
+    }
 		xit("VTXXX-00014-Play Audio(Call Stop without Start)", function() {
 			runs(function() {
 						
@@ -796,6 +806,8 @@ describe("MediaPlayer", function() {
 			});
 		});
 
+    if (isAnyButApplePlatform()) {
+
 		it("VTXXX-00021-Play Video(wma file)", function() {
 			runs(function() {
 				var platform = Rho.System.platform;
@@ -830,7 +842,7 @@ describe("MediaPlayer", function() {
 				expect(testResult).toEqual(true);
 			});
 		});
-
+    }
 		xit("VTXXX-00022-Play Video(null)", function() {
 			runs(function() {
 								
@@ -894,6 +906,8 @@ describe("MediaPlayer", function() {
 			});
 		});	
 
+    if (isAnyButApplePlatform()) {
+
 		it("VTXXX-00025-Play Video(valid file local) and Stop", function() {
 			runs(function() {
 				var Videolocation = Rho.RhoFile.join(videoMediaPath,"test.mp4");
@@ -927,6 +941,9 @@ describe("MediaPlayer", function() {
 				expect(testResult).toEqual(true);
 			});
 		});	
+}
+
+    if (isAnyButApplePlatform()) {
 
 		it("VTXXX-00026-Play Video(valid file remote http) and Stop", function() {
 			runs(function() {
@@ -962,6 +979,9 @@ describe("MediaPlayer", function() {
 				expect(testResult).toEqual(true);
 			});
 		});							
+}
+
+    if (isAnyButApplePlatform()) {
 
 		it("VTXXX-00027-Play Video(valid file remote https) and Stop", function() {
 			runs(function() {
@@ -997,7 +1017,7 @@ describe("MediaPlayer", function() {
 				expect(testResult).toEqual(true);
 			});
 		});		
-
+   }
 		xit("VTXXX-00028-Play Video(Call Stop without Start)", function() {
 			runs(function() {
 						
@@ -1023,7 +1043,7 @@ describe("MediaPlayer", function() {
 //
 	var platform = Rho.System.platform;
 				
-	if (platform != "WINDOWS")
+	if ((platform != "WINDOWS") && (isAnyButApplePlatform()))
 	{
 		it("VTXXX-00029-should be able to retrieve all ringtones", function() {
 			runs(function()

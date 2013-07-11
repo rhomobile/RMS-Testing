@@ -9,7 +9,7 @@ applog: rholog.txt
 iphone:
   configuration: Release
   sdk: iphonesimulator6.1
-  extensions: ["sensor", "signature", "barcode"]
+  extensions: ["sensor", "signature", "barcode", "mediaplayer"]
   provisionprofile:
   codesignidentity:
   entitlements:
