@@ -14,7 +14,7 @@ describe("Barcode Test", function() {
 
    (function(objSCN){ 
 
-   	var scnid = objSCN.getProperty('ID');
+   	var scnid = objSCN.getProperty('scannerType');
 
 	beforeEach(function() {
 		enableFlag = false;
@@ -396,14 +396,14 @@ describe("Barcode Test", function() {
 
 		    Rho.Barcode.setDefault(enumObject);
 		    var defaultobj = Rho.Barcode.getDefault();						  
-			expect(scnid).toEqual(defaultobj.getProperty('ID'));
+			expect(scnid).toEqual(defaultobj.getProperty('scannerType'));
 	});
 
 	it("VT282-2006A | set and get using Default |" + scnid, function() {
 
 		    Rho.Barcode.default = enumObject;
 		    var defaultobj = Rho.Barcode.default;
-			expect(scnid).toEqual(defaultobj.getProperty('ID'));
+			expect(scnid).toEqual(defaultobj.getProperty('scannerType'));
 	});
 
 })(enumData[j]);
