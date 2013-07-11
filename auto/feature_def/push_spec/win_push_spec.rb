@@ -107,7 +107,7 @@ describe 'Windows Mobile push spec' do
   def expect_request(name)
     val = nil
     $mutex.synchronize do
-      $signal.wait($mutex, 60) # wait timeout 60 secs.
+      $signal.wait($mutex, 100) # wait timeout 60 secs.
       $requests.count.should == 1
       val = $requests.first.query[name]
       $requests.clear
@@ -220,7 +220,7 @@ describe 'Windows Mobile push spec' do
 	$mutex.synchronize do
   		$requests.clear
 	end
-	message = 'logout'
+	message = 'exit_and_logout'
   	params = { :user_id=>['pushclient'], :badge => $collapse_id, :message=>message }
 	$collapse_id += 1
   	RhoconnectHelper.api_post('users/ping',params,@api_token)
@@ -229,10 +229,10 @@ describe 'Windows Mobile push spec' do
 	sleep 15
 
 	# exit app by rebooting the device
-	puts "Re-booting the device"
-	cmd = "cd #{$wm_build_rakefile_dir} && rake -f #{$wm_build_rakefile} windows:reboot[#{$device_address}]"
-	puts "CMD is : #{cmd}"
-	$out_code = system(cmd)
+	#puts "Re-booting the device"
+	#cmd = "cd #{$wm_build_rakefile_dir} && rake -f #{$wm_build_rakefile} windows:reboot[#{$device_address}]"
+	#puts "CMD is : #{cmd}"
+	#$out_code = system(cmd)
 
   	puts "Re-Start the test application"
         cmd = "cd #{$wm_build_rakefile_dir} && rake -f #{$wm_build_rakefile} windows:start_test_app_bg[#{$device_address},Rho_Push_Client]"

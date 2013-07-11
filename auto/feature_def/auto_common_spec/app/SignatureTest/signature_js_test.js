@@ -37,7 +37,7 @@ var arr_sig_property = [
 	sigTypes		:	"show",
 	OSTypes			:	"All",
 	propertyValue	:	"false",
-	expectedResult	:	"false"
+	expectedResult	:	false
 },
 {
 	testName		:	"VT299-1006 | Set border :true| true",
@@ -45,7 +45,7 @@ var arr_sig_property = [
 	sigTypes		:	"show",
 	OSTypes			:	"All",
 	propertyValue	:	"true",
-	expectedResult	:	"true"
+	expectedResult	:	true
 },
 {
 	testName		:	"VT299-1007 | Set compressionFormat :jpg| jpg",
@@ -117,7 +117,7 @@ var arr_sig_property = [
 	sigTypes		:	"show",
 	OSTypes			:	"All",
 	propertyValue	:	"100",
-	expectedResult	:	"100"
+	expectedResult	:	100
 },
 {
 	testName		:	"VT299-1017 | Set height :500| 500",
@@ -125,7 +125,7 @@ var arr_sig_property = [
 	sigTypes		:	"show",
 	OSTypes			:	"All",
 	propertyValue	:	"500",
-	expectedResult	:	"500"
+	expectedResult	:	500
 },
 {
 	testName		:	"VT299-1018 | Set height :150| 150",
@@ -133,23 +133,23 @@ var arr_sig_property = [
 	sigTypes		:	"show",
 	OSTypes			:	"All",
 	propertyValue	:	"150",
-	expectedResult	:	"150"
+	expectedResult	:	150
 },
-{
-	testName		:	"VT299-1019 | Set height :0| 0",
-	propertyName	:	"height",
-	sigTypes		:	"show",
-	OSTypes			:	"All",
-	propertyValue	:	"0",
-	expectedResult	:	"0"
-},
+//{
+//	testName		:	"VT299-1019 | Set height :0| 0",
+//	propertyName	:	"height",
+//	sigTypes		:	"show",
+//	OSTypes			:	"All",
+//	propertyValue	:	"0",
+//	expectedResult	:	0
+//},
 {
 	testName		:	"VT299-1020 | Set left :90| 90",
 	propertyName	:	"left",
 	sigTypes		:	"show",
 	OSTypes			:	"All",
 	propertyValue	:	"90",
-	expectedResult	:	"90"
+	expectedResult	:	90
 },
 {
 	testName		:	"VT299-1021 | Set left :550| 550",
@@ -157,7 +157,7 @@ var arr_sig_property = [
 	sigTypes		:	"show",
 	OSTypes			:	"All",
 	propertyValue	:	"550",
-	expectedResult	:	"550"
+	expectedResult	:	550
 },
 {
 	testName		:	"VT299-1022 | Set left :15| 15",
@@ -165,7 +165,7 @@ var arr_sig_property = [
 	sigTypes		:	"show",
 	OSTypes			:	"All",
 	propertyValue	:	"15",
-	expectedResult	:	"15"
+	expectedResult	:	15
 },
 {
 	testName		:	"VT299-1022 | Set left :0| 0",
@@ -173,7 +173,7 @@ var arr_sig_property = [
 	sigTypes		:	"show",
 	OSTypes			:	"All",
 	propertyValue	:	"0",
-	expectedResult	:	"0"
+	expectedResult	:	0
 },
 {
 	testName		:	"VT299-1023 | Set top :50| 50",
@@ -181,7 +181,7 @@ var arr_sig_property = [
 	sigTypes		:	"show",
 	OSTypes			:	"All",
 	propertyValue	:	"50",
-	expectedResult	:	"50"
+	expectedResult	:	50
 },
 {
 	testName		:	"VT299-1024 | Set top :150| 150",
@@ -189,7 +189,7 @@ var arr_sig_property = [
 	sigTypes		:	"show",
 	OSTypes			:	"All",
 	propertyValue	:	"150",
-	expectedResult	:	"150"
+	expectedResult	:	150
 },
 {
 	testName		:	"VT299-1025 | Set top :60| 60",
@@ -197,7 +197,7 @@ var arr_sig_property = [
 	sigTypes		:	"show",
 	OSTypes			:	"All",
 	propertyValue	:	"60",
-	expectedResult	:	"60"
+	expectedResult	:	60
 },
 {
 	testName		:	"VT299-1026 | Set top :0| 0",
@@ -205,7 +205,7 @@ var arr_sig_property = [
 	sigTypes		:	"show",
 	OSTypes			:	"All",
 	propertyValue	:	"0",
-	expectedResult	:	"0"
+	expectedResult	:	0
 },
 {
 	testName		:	"VT299-1027 | Set width :140| 140",
@@ -213,7 +213,7 @@ var arr_sig_property = [
 	sigTypes		:	"show",
 	OSTypes			:	"All",
 	propertyValue	:	"140",
-	expectedResult	:	"140"
+	expectedResult	:	140
 },
 {
 	testName		:	"VT299-1028 | Set width :450| 450",
@@ -221,7 +221,7 @@ var arr_sig_property = [
 	sigTypes		:	"show",
 	OSTypes			:	"All",
 	propertyValue	:	"450",
-	expectedResult	:	"450"
+	expectedResult	:	450
 },
 {
 	testName		:	"VT299-1029 | Set width :200| 200",
@@ -229,16 +229,16 @@ var arr_sig_property = [
 	sigTypes		:	"show",
 	OSTypes			:	"All",
 	propertyValue	:	"200",
-	expectedResult	:	"200"
+	expectedResult	:	200
 },
-{
-	testName		:	"VT299-1030 | Set width :0| 0",
-	propertyName	:	"width",
-	sigTypes		:	"show",
-	OSTypes			:	"All",
-	propertyValue	:	"0",
-	expectedResult	:	"0"
-},
+//{
+//	testName		:	"VT299-1030 | Set width :0| 0",
+//	propertyName	:	"width",
+//	sigTypes		:	"show",
+//	OSTypes			:	"All",
+//	propertyValue	:	"0",
+//	expectedResult	:	0
+//},
 {
 	testName		:	"VT299-1031 | Set outputFormat :dataUri| dataUri",
 	propertyName	:	"outputFormat",
@@ -293,7 +293,7 @@ var arr_sig_property = [
 	sigTypes		:	"All",
 	OSTypes			:	"All",
 	propertyValue	:	"1",
-	expectedResult	:	"1"
+	expectedResult	:	1
 },
 {
 	testName		:	"VT299-1038 | Set penWidth :5| 5",
@@ -301,32 +301,32 @@ var arr_sig_property = [
 	sigTypes		:	"All",
 	OSTypes			:	"All",
 	propertyValue	:	"5",
-	expectedResult	:	"5"
+	expectedResult	:	5
 },
-{
-	testName		:	"VT299-1039 | Set penWidth :0| 0",
-	propertyName	:	"penWidth",
-	sigTypes		:	"All",
-	OSTypes			:	"All",
-	propertyValue	:	"0",
-	expectedResult	:	"0"
-},
+//{
+//	testName		:	"VT299-1039 | Set penWidth :0| 0",
+//	propertyName	:	"penWidth",
+//	sigTypes		:	"All",
+//	OSTypes			:	"All",
+//	propertyValue	:	"0",
+//	expectedResult	:	0
+//},
 {
 	testName		:	"VT299-1040 | Set penWidth :10| 10",
 	propertyName	:	"penWidth",
 	sigTypes		:	"All",
 	OSTypes			:	"All",
 	propertyValue	:	"10",
-	expectedResult	:	"10"
-},
-{
-	testName		:	"VT299-1041 | Set penWidth :2.5| 2.5",
-	propertyName	:	"penWidth",
-	sigTypes		:	"All",
-	OSTypes			:	"All",
-	propertyValue	:	"2.5",
-	expectedResult	:	"2.5"
-}
+	expectedResult	:	10
+}//,
+//{
+//	testName		:	"VT299-1041 | Set penWidth :2.5| 2.5",
+//	propertyName	:	"penWidth",
+//	sigTypes		:	"All",
+//	OSTypes			:	"All",
+//	propertyValue	:	"2.5",
+//	expectedResult	:	"2.5"
+//}
 
 ];
 
@@ -373,3 +373,4 @@ var getApplicablePropertiesFullScreen = function (){
 };
 
 var ENABLE_TIMEOUT_VALUE = (Rho.System.platform == "ANDROID" ? 1000 : 1000);
+var HIDE_TIMEOUT_VALUE = (Rho.System.platform == "ANDROID" ? 1000 : 1000);

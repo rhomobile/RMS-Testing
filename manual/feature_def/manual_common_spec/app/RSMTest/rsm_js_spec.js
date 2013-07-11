@@ -55,6 +55,30 @@ describe("RSM Manual Test", function() {
 			
 		});		
 	});	
+	
+	var arrReadSCN = getApplicableReadOnlyProperties(enumData[i]);
+	(function(enumObject,arrReadScanner){
+		describe("RSM Read Only property using getProperty for "+ scnid +": "+ scnname, function() {
+
+			for (var i=0;i<arrReadScanner.length;i++){
+			
+				(function(idx){
+					it(arrReadScanner[idx]['testName'], function() {
+							var data = enumObject.getProperty(arrReadScanner[idx]['propertyName']);
+							displayResult(arrReadScanner[idx]['testName'],data);
+							waitsFor(function() {
+							return document.getElementById("actResult").innerHTML != "init";
+							}, "Timed out waiting for tester to respond", 300000);
+							runs(function() {
+							expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+							});
+					});
+
+				})(i);
+			}
+		});	
+	})(enumData[i],arrReadSCN);
+	
 	describe("RSM Test with ", function() {
 		it("VT282-2737 | call commandRemoteScanner with Disconnect |" , function() {
 
@@ -223,7 +247,7 @@ describe("RSM Manual Test", function() {
 			});
 		});
 		
-		it("VT282-2741 | Set rsmBluetoothAuthentication as true" , function() {
+	/*	it("VT282-2741 | Set rsmBluetoothAuthentication as true" , function() {
 
 			runs(function()
 			{
@@ -363,9 +387,9 @@ describe("RSM Manual Test", function() {
 				expect("pass").toEqual(document.getElementById("actResult").innerHTML);
 				});
 			});
-		});	
+		});	*/
 
-
+	
 		it("VT282-2744 | Set rsmBluetoothAutoReconnect as onPower" , function() {
 
 			runs(function()
@@ -403,7 +427,7 @@ describe("RSM Manual Test", function() {
 			});
 		});	
 
-		it("VT282-2745 | Set rsmBluetoothAutoReconnect as onOutOfRange" , function() {
+	/*	it("VT282-2745 | Set rsmBluetoothAutoReconnect as onOutOfRange" , function() {
 
 			runs(function()
 			{
@@ -518,7 +542,7 @@ describe("RSM Manual Test", function() {
 				expect("pass").toEqual(document.getElementById("actResult").innerHTML);
 				});
 			});
-		});	
+		});	*/
 
 		it("VT282-2748 | Set  BluetoothBeepOnReconnectAttempt as true" , function() {
 
@@ -556,7 +580,7 @@ describe("RSM Manual Test", function() {
 			});
 		});	
 		
-		it("VT282-2749 | Set  BluetoothBeepOnReconnectAttempt as false" , function() {
+		/*it("VT282-2749 | Set  BluetoothBeepOnReconnectAttempt as false" , function() {
 
 			runs(function()
 			{
@@ -830,10 +854,10 @@ describe("RSM Manual Test", function() {
 				expect("pass").toEqual(document.getElementById("actResult").innerHTML);
 				});
 			});
-		});	
+		});	*/
 
 		it("VT282-2759 | Set  rsmBluetoothPinCode as 13579" , function() {
-
+			var data = '';
 			runs(function()
 			{
 				setObjective("VT282-2759 | Set  rsmBluetoothPinCode as 13579|");
@@ -845,6 +869,7 @@ describe("RSM Manual Test", function() {
 			runs(function()
 			{
 				enumData[i].rsmBluetoothAuthentication = true;
+				data = enumData[i].getProperty("rsmBluetoothPinCode");
 				enumData[i].rsmBluetoothPinCode = '13579';
 				enumData[i].commandRemoteScanner("unpair");
 				setTimeout(function() {
@@ -879,12 +904,13 @@ describe("RSM Manual Test", function() {
 				return document.getElementById("actResult").innerHTML != "init";
 				}, "Timed out waiting for tester to respond", 300000);
 				runs(function() {
+				enumData[i].rsmBluetoothPinCode = data;
 				expect("pass").toEqual(document.getElementById("actResult").innerHTML);
 				});
 			});
 		});	
 
-		it("VT282-2760 | Set  rsmBluetoothPinCode as hello" , function() {
+		/*it("VT282-2760 | Set  rsmBluetoothPinCode as hello" , function() {
 			runs(function()
 			{
 				setObjective("VT282-2760 | Set  rsmBluetoothPinCode as hello|");
@@ -932,7 +958,7 @@ describe("RSM Manual Test", function() {
 				expect("pass").toEqual(document.getElementById("actResult").innerHTML);
 				});
 			});
-		});	
+		});	*/
 
 		it("VT282-2761 | Set  rsmBluetoothPinCodeType as UseStored" , function() {
 			runs(function()
@@ -1040,7 +1066,7 @@ describe("RSM Manual Test", function() {
 			});
 		});		
 
-		it("VT282-2763 | Set rsmBluetoothReconnectionAttempts as 30 sec with taking RSM out of range" , function() {
+	/*	it("VT282-2763 | Set rsmBluetoothReconnectionAttempts as 30 sec with taking RSM out of range" , function() {
 			runs(function()
 			{
 				setObjective("VT282-2763 | Set rsmBluetoothReconnectionAttempts as 30 sec with taking RSM out of range|");
@@ -1105,7 +1131,7 @@ describe("RSM Manual Test", function() {
 				expect("pass").toEqual(document.getElementById("actResult").innerHTML);
 				});
 			});
-		});	
+		});	*/
 
 		it("VT282-2765 | Set rsmDecodeFeedback as true" , function() {
 			runs(function()
@@ -1160,7 +1186,7 @@ describe("RSM Manual Test", function() {
 			});
 		});			
 
-		it("VT282-2767 | set rsmForceSavePairingBarcode as true" , function() {
+	/*	it("VT282-2767 | set rsmForceSavePairingBarcode as true" , function() {
 			runs(function()
 			{
 				setObjective("VT282-2767 | set rsmForceSavePairingBarcode as true|");
@@ -1218,14 +1244,14 @@ describe("RSM Manual Test", function() {
 				expect("pass").toEqual(document.getElementById("actResult").innerHTML);
 				});
 			});
-		});	
+		});	*/
 
-		it("VT282-2769 | set rsmGoodScansDelay as true" , function() {
+		it("VT282-2769 | set rsmGoodScansDelay as 100" , function() {
 			runs(function()
 			{
-				setObjective("VT282-2769 | set rsmGoodScansDelay as true|");
-				setInstruction("Check for RSM is connected or not with calling enable <br /> set rsmGoodScansDelay as true<br /> scan any barcode<br />call getproperty with rsmGoodScansDelay<br />");
-				setExpected("getproperty should return true and barcode should scan.");
+				setObjective("VT282-2769 | set rsmGoodScansDelay as 100|");
+				setInstruction("Check for RSM is connected or not with calling enable <br /> set rsmGoodScansDelay as 100<br /> scan any barcode<br />call getproperty with rsmGoodScansDelay<br />");
+				setExpected("getproperty should return 100 and barcode should scan.");
 
 			});
 
@@ -1233,9 +1259,9 @@ describe("RSM Manual Test", function() {
 
 			runs(function()
 			{
-				enumData[i].rsmGoodScansDelay = true;
+				enumData[i].rsmGoodScansDelay = 100;
 				var data = enumData[i].getProperty("rsmGoodScansDelay");
-				displayResult("VT282-2769 | set rsmGoodScansDelay as true| ",data);
+				displayResult("VT282-2769 | set rsmGoodScansDelay as 100| ",data);
 				
 			});	
 
@@ -1251,21 +1277,21 @@ describe("RSM Manual Test", function() {
 			});
 		});	
 
-		it("VT282-2770 | set rsmGoodScansDelay as false" , function() {
+	/*	it("VT282-2770 | set rsmGoodScansDelay as 1500" , function() {
 			runs(function()
 			{
-				setObjective("VT282-2769 | set rsmGoodScansDelay as false|");
-				setInstruction("Check for RSM is connected or not with calling enable <br /> set rsmGoodScansDelay as false<br /> scan any barcode<br />call getproperty with rsmGoodScansDelay<br />");
-				setExpected("getproperty should return false and barcode should scan.");
+				setObjective("VT282-2769 | set rsmGoodScansDelay as 1500|");
+				setInstruction("Check for RSM is connected or not with calling enable <br /> set rsmGoodScansDelay as 1500<br /> scan any barcode<br />call getproperty with rsmGoodScansDelay<br />");
+				setExpected("getproperty should return 1500 and barcode should scan.");
 
 			});
 
 
 			runs(function()
 			{
-				enumData[i].rsmGoodScansDelay = false;
+				enumData[i].rsmGoodScansDelay = 1500;
 				var data = enumData[i].getProperty("rsmGoodScansDelay");
-				displayResult("VT282-2770 | set rsmGoodScansDelay as false| ",data);
+				displayResult("VT282-2770 | set rsmGoodScansDelay as 1500| ",data);
 				
 			});	
 
@@ -1390,7 +1416,7 @@ describe("RSM Manual Test", function() {
 				expect("pass").toEqual(document.getElementById("actResult").innerHTML);
 				});
 			});
-		});				
+		});		*/		
 
 		it("VT282-2775 | set rsmLowBatteryIndicationCycle as 15" , function() {
 			runs(function()
@@ -1422,7 +1448,7 @@ describe("RSM Manual Test", function() {
 			});
 		});		
 
-		it("VT282-2776 | set rsmLowBatteryIndicationCycle as 60" , function() {
+	/*	it("VT282-2776 | set rsmLowBatteryIndicationCycle as 60" , function() {
 			runs(function()
 			{
 				setObjective("VT282-2776 | set rsmLowBatteryIndicationCycle as 60|");
@@ -3037,29 +3063,8 @@ describe("RSM Manual Test", function() {
 				expect("pass").toEqual(document.getElementById("actResult").innerHTML);
 				});
 			});
-		});
+		});*/
 		
 	});
-	var arrReadSCN = getApplicableReadOnlyProperties(enumData[i]);
-	(function(enumObject,arrReadScanner){
-		describe("RSM Read Only property using getProperty for "+ scnid +": "+ scnname, function() {
 
-			for (var i=0;i<arrReadScanner.length;i++){
-			
-				(function(idx){
-					it(arrReadScanner[idx]['testName'], function() {
-							var data = enumObject.getProperty(arrReadScanner[idx]['propertyName']);
-							displayResult(arrReadScanner[idx]['testName'],data);
-							waitsFor(function() {
-							return document.getElementById("actResult").innerHTML != "init";
-							}, "Timed out waiting for tester to respond", 300000);
-							runs(function() {
-							expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-							});
-					});
-
-				})(i);
-			}
-		});	
-	})(enumData[i],arrReadSCN);
 });	

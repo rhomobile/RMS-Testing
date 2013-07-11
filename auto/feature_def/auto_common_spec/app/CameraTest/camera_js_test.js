@@ -329,4 +329,4 @@ var getApplicableProperties = function (objCamType){
 	return finalCAMObj;
 }
 
-var ENABLE_TIMEOUT_VALUE = (Rho.System.platform == "ANDROID" ? 10 : 5000);
+var ENABLE_TIMEOUT_VALUE = (Rho.System.platform == "ANDROID" ? 2000 : 2000);

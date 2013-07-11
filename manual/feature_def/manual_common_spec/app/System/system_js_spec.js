@@ -59,7 +59,7 @@ describe("System Module JS Test Starts Here", function() {
 		});	
 
 
-     <!-- What the application rhomobile nativejasmine? How user can install or uninstall it? -->
+    // <!-- What the application rhomobile nativejasmine? How user can install or uninstall it? -->
 		
 	/*	if(isAnyWindowsFamilyPlatform()){
 		
@@ -112,8 +112,8 @@ describe("System Module JS Test Starts Here", function() {
 				expect(testResult).toEqual(true);	
 			});
 	
-		});
-	});*/
+		});*/
+	});
 	
 
 	describe("System Module- getProperty Test Starts Here", function() {
