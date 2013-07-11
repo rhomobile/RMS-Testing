@@ -6,8 +6,8 @@ var captured = false;
 var srvURL = "http://"+SERVER_HOST+":"+SERVER_PORT.toString() + "/";
 var httpsSrvURL = "https://"+SECURE_HOST+":"+SECURE_PORT.toString() + "/";
 
-var audioMediaPath = Rho.Application.modelFolderPath('Mediaplayer') + "\\MediaFiles\\Audio\\"
-var videoMediaPath = Rho.Application.modelFolderPath('Mediaplayer') + "\\MediaFiles\\Video\\"
+var audioMediaPath =Rho.RhoFile.join(Rho.Application.modelFolderPath('Mediaplayer'),"MediaFiles/Audio" );
+var videoMediaPath = Rho.RhoFile.join(Rho.Application.modelFolderPath('Mediaplayer'),"MediaFiles/Video" );
 
 
 function getkeys (obj) {
@@ -85,7 +85,8 @@ describe("MediaPlayer", function() {
 								
 				// if (platform == "WINDOWS")
 				// {
-					audiolocation = audioMediaPath + "badfeeling.wav";
+					audiolocation = Rho.RhoFile.join(audioMediaPath, "badfeeling.wav");
+					
 				//}
 				// else if (platform == "ANDROID")
 				// {
@@ -137,7 +138,7 @@ describe("MediaPlayer", function() {
 			runs(function() {
 				var platform = Rho.System.platform;
 				var audiolocation = "";
-				var srvHttpMediaDownload = srvURL + "hello.mp3";
+				var srvHttpMediaDownload =Rho.RhoFile.join( srvURL , "hello.mp3");
 
 				// if (platform == "WINDOWS")
 				// {
@@ -197,7 +198,7 @@ describe("MediaPlayer", function() {
 			runs(function() {
 				var platform = Rho.System.platform;
 				var audiolocation = "";
-				var srvHttpsMediaDownload = httpsSrvURL + "super_android_tune.mp3";
+				var srvHttpsMediaDownload = Rho.RhoFile.join(httpsSrvURL ,"super_android_tune.mp3");
 
 				// if (platform == "WINDOWS")
 				// {
@@ -253,7 +254,7 @@ describe("MediaPlayer", function() {
 		it("VTXXX-0004-Play Audio(wav file)", function() {
 			runs(function() {
 				var platform = Rho.System.platform;
-				var audiolocation = audioMediaPath + 'badfeeling.wav';
+				var audiolocation =Rho.RhoFile.join(audioMediaPath , 'badfeeling.wav);
 								
 				Rho.Mediaplayer.start(audiolocation);
 				setTimeout(function() {
@@ -288,7 +289,7 @@ describe("MediaPlayer", function() {
 		it("VTXXX-0005-Play Audio(mp3 file)", function() {
 			runs(function() {
 				var platform = Rho.System.platform;
-				var audiolocation = audioMediaPath + 'super_android_tune.mp3';
+				var audiolocation =Rho.RhoFile.join(audioMediaPath,'super_android_tune.mp3');
 								
 				Rho.Mediaplayer.start(audiolocation);
 				setTimeout(function() {
@@ -323,7 +324,7 @@ describe("MediaPlayer", function() {
 		it("VTXXX-0006-Play Audio(mp4 file)", function() {
 			runs(function() {
 				var platform = Rho.System.platform;
-				var audiolocation = audioMediaPath + 'xxxx.mp4';
+				var audiolocation =Rho.RhoFile.join(audioMediaPath , 'xxxx.mp4');
 								
 				Rho.Mediaplayer.start(audiolocation);
 				setTimeout(function() {
@@ -358,7 +359,7 @@ describe("MediaPlayer", function() {
 		it("VTXXX-0007-Play Audio(wma file)", function() {
 			runs(function() {
 				var platform = Rho.System.platform;
-				var audiolocation = audioMediaPath + "xxx.wma";
+				var audiolocation = Rho.RhoFile.join(audioMediaPath ,"xxx.wma");
 								
 				Rho.Mediaplayer.start(audiolocation);
 				setTimeout(function() {
@@ -390,7 +391,7 @@ describe("MediaPlayer", function() {
 			});
 		});
 
-		it("VTXXX-0008-Play Audio(null)", function() {
+		xit("VTXXX-0008-Play Audio(null)", function() {
 			runs(function() {
 								
 				Rho.Mediaplayer.start(null);
@@ -410,7 +411,7 @@ describe("MediaPlayer", function() {
 			});
 		});
 
-		it("VTXXX-0009-Play Audio(invalid Local file)", function() {
+		xit("VTXXX-0009-Play Audio(invalid Local file)", function() {
 			runs(function() {
 				var audiolocation = audioMediaPath + "xxx.wav";
 							
@@ -432,7 +433,7 @@ describe("MediaPlayer", function() {
 		});		
 
 
-		it("VTXXX-00010-Play Audio(invalid remote URL)", function() {
+		xit("VTXXX-00010-Play Audio(invalid remote URL)", function() {
 			runs(function() {
 				var audiolocation = "http://www.myinvalidURL.com/xxx.wav";
 							
@@ -455,7 +456,7 @@ describe("MediaPlayer", function() {
 
 		it("VTXXX-00011-Play Audio(valid file local) and Stop", function() {
 			runs(function() {
-				var audiolocation = audioMediaPath + "super_android_tune.mp3";
+				var audiolocation = Rho.RhoFile.join(audioMediaPath , "super_android_tune.mp3");
 							
 				Rho.Mediaplayer.start(audiolocation);
 				setTimeout(function() {
@@ -490,7 +491,7 @@ describe("MediaPlayer", function() {
 		it("VTXXX-00012-Play Audio(valid file remote http) and Stop", function() {
 			runs(function() {
 				//var audiolocation = "\\Program Files\\manual_common_spec\\rho\\apps\\app\\Mediaplayer\\MediaFiles\\Audio\\super_android_tune.mp3";
-				var srvHttpMediaDownload = srvURL + "hello.mp3";
+				var srvHttpMediaDownload = Rho.RhoFile.join(srvURL ,"hello.mp3");
 
 				Rho.Mediaplayer.start(srvHttpMediaDownload);
 				setTimeout(function() {
@@ -525,7 +526,7 @@ describe("MediaPlayer", function() {
 		it("VTXXX-00013-Play Audio(valid file remote https) and Stop", function() {
 			runs(function() {
 				//var audiolocation = "\\Program Files\\manual_common_spec\\rho\\apps\\app\\Mediaplayer\\MediaFiles\\Audio\\super_android_tune.mp3";
-				var srvHttpsMediaDownload = httpsSrvURL + "super_android_tune.mp3";
+				var srvHttpsMediaDownload = Rho.RhoFile.join(httpsSrvURL ,"super_android_tune.mp3");
 
 				Rho.Mediaplayer.start(srvHttpsMediaDownload);
 				setTimeout(function() {
@@ -557,7 +558,7 @@ describe("MediaPlayer", function() {
 			});
 		});		
 
-		it("VTXXX-00014-Play Audio(Call Stop without Start)", function() {
+		xit("VTXXX-00014-Play Audio(Call Stop without Start)", function() {
 			runs(function() {
 						
 				Rho.Mediaplayer.stop();
@@ -583,7 +584,7 @@ describe("MediaPlayer", function() {
 		it("VTXXX-00015-Play Video(valid file local)", function() {
 			runs(function() {
 				var platform = Rho.System.platform;
-				var Videolocation = videoMediaPath + "AMR-NB.mp4";
+				var Videolocation =Rho.RhoFile.join(videoMediaPath , "AMR-NB.mp4");
 								
 				Rho.Mediaplayer.startvideo(Videolocation);
 				setTimeout(function() {
@@ -619,7 +620,7 @@ describe("MediaPlayer", function() {
 			runs(function() {
 				var platform = Rho.System.platform;
 				var Videolocation = "";
-				var srvHttpMediaDownload = srvURL + "AMR-NB.mp4";
+				var srvHttpMediaDownload = Rho.RhoFile.join(srvURL , "AMR-NB.mp4");
 
 				Rho.Mediaplayer.startvideo(Videolocation);
 
@@ -658,7 +659,7 @@ describe("MediaPlayer", function() {
 			runs(function() {
 				var platform = Rho.System.platform;
 				var Videolocation = "";
-				var srvHttpsMediaDownload = httpsSrvURL + "AMR-NB.mp4";
+				var srvHttpsMediaDownload =Rho.RhoFile.join(httpsSrvURL,"AMR-NB.mp4");
 
 				Rho.Mediaplayer.startvideo(Videolocation);
 				setTimeout(function() {
@@ -693,7 +694,7 @@ describe("MediaPlayer", function() {
 		it("VTXXX-00018-Play Video(3gp file)", function() {
 			runs(function() {
 				var platform = Rho.System.platform;
-				var Videolocation = videoMediaPath + "Car.3gp";
+				var Videolocation = Rho.RhoFile.join(videoMediaPath , "Car.3gp");
 								
 				Rho.Mediaplayer.startvideo(Videolocation);
 				setTimeout(function() {
@@ -728,7 +729,7 @@ describe("MediaPlayer", function() {
 		it("VTXXX-00019-Play Video(mp4 file)", function() {
 			runs(function() {
 				var platform = Rho.System.platform;
-				var Videolocation = videoMediaPath + "test.mp4";
+				var Videolocation = Rho.RhoFile.join(videoMediaPath , "test.mp4");
 								
 				Rho.Mediaplayer.startvideo(Videolocation);
 				setTimeout(function() {
@@ -763,7 +764,7 @@ describe("MediaPlayer", function() {
 		it("VTXXX-00020-Play Video(mp4 file)", function() {
 			runs(function() {
 				var platform = Rho.System.platform;
-				var Videolocation = videoMediaPath + "test.mp4";
+				var Videolocation = Rho.RhoFile.join(videoMediaPath, "test.mp4");
 								
 				Rho.Mediaplayer.startvideo(Videolocation);
 				setTimeout(function() {
@@ -798,7 +799,7 @@ describe("MediaPlayer", function() {
 		it("VTXXX-00021-Play Video(wma file)", function() {
 			runs(function() {
 				var platform = Rho.System.platform;
-				var Videolocation = videoMediaPath + "xxx.wma";
+				var Videolocation = Rho.RhoFile.join(videoMediaPath , "xxx.wma");
 								
 				Rho.Mediaplayer.startvideo(Videolocation);
 				setTimeout(function() {
@@ -830,7 +831,7 @@ describe("MediaPlayer", function() {
 			});
 		});
 
-		it("VTXXX-00022-Play Video(null)", function() {
+		xit("VTXXX-00022-Play Video(null)", function() {
 			runs(function() {
 								
 				Rho.Mediaplayer.startvideo(null);
@@ -850,9 +851,9 @@ describe("MediaPlayer", function() {
 			});
 		});
 
-		it("VTXXX-00023-Play Video(invalid Local file)", function() {
+		xit("VTXXX-00023-Play Video(invalid Local file)", function() {
 			runs(function() {
-				var Videolocation = videoMediaPath + "xxx.wav";
+				var Videolocation =Rho.RhoFile.join( videoMediaPath ,"xxx.wav");
 							
 				Rho.Mediaplayer.startvideo(Videolocation);
 				
@@ -872,7 +873,7 @@ describe("MediaPlayer", function() {
 		});		
 
 
-		it("VTXXX-00024-Play Video(invalid remote URL)", function() {
+		xit("VTXXX-00024-Play Video(invalid remote URL)", function() {
 			runs(function() {
 				var Videolocation = "http://www.myinvalidURL.com/xxx.wav";
 							
@@ -895,7 +896,7 @@ describe("MediaPlayer", function() {
 
 		it("VTXXX-00025-Play Video(valid file local) and Stop", function() {
 			runs(function() {
-				var Videolocation = videoMediaPath + "test.mp4";
+				var Videolocation = Rho.RhoFile.join(videoMediaPath,"test.mp4");
 							
 				Rho.Mediaplayer.startvideo(Videolocation);
 				setTimeout(function() {
@@ -930,7 +931,7 @@ describe("MediaPlayer", function() {
 		it("VTXXX-00026-Play Video(valid file remote http) and Stop", function() {
 			runs(function() {
 				//var Videolocation = "\\Program Files\\manual_common_spec\\rho\\apps\\app\\Mediaplayer\\MediaFiles\\Video\\super_android_tune.mp3";
-				var srvHttpMediaDownload = srvURL + "hello.mp3";
+				var srvHttpMediaDownload =Rho.RhoFile.join( srvURL,"AMR-NB.mp4");
 
 				Rho.Mediaplayer.startvideo(srvHttpMediaDownload);
 				setTimeout(function() {
@@ -965,7 +966,7 @@ describe("MediaPlayer", function() {
 		it("VTXXX-00027-Play Video(valid file remote https) and Stop", function() {
 			runs(function() {
 				//var Videolocation = "\\Program Files\\manual_common_spec\\rho\\apps\\app\\Mediaplayer\\MediaFiles\\Video\\super_android_tune.mp3";
-				var srvHttpsMediaDownload = httpsSrvURL + "super_android_tune.mp3";
+				var srvHttpsMediaDownload = Rho.RhoFile.join(httpsSrvURL ,"AMR-NB.mp4");
 
 				Rho.Mediaplayer.startvideo(srvHttpsMediaDownload);
 				setTimeout(function() {
@@ -997,7 +998,7 @@ describe("MediaPlayer", function() {
 			});
 		});		
 
-		it("VTXXX-00028-Play Video(Call Stop without Start)", function() {
+		xit("VTXXX-00028-Play Video(Call Stop without Start)", function() {
 			runs(function() {
 						
 				Rho.Mediaplayer.stopvideo();
@@ -1067,7 +1068,7 @@ describe("MediaPlayer", function() {
 			});
 		});	
 
-		it("VTXXX-00031-Play Ringtone(null)", function() {
+		xit("VTXXX-00031-Play Ringtone(null)", function() {
 			runs(function()
 			{
 				//var chosen = ringtone_names[Math.floor((Math.random()*ringtone_names.length))];
@@ -1089,7 +1090,7 @@ describe("MediaPlayer", function() {
 			});
 		});	
 
-		it("VTXXX-00032-Play Ringtone(invalid file local)", function() {
+		xit("VTXXX-00032-Play Ringtone(invalid file local)", function() {
 			runs(function()
 			{
 				//var chosen = ringtone_names[Math.floor((Math.random()*ringtone_names.length))];
@@ -1111,7 +1112,7 @@ describe("MediaPlayer", function() {
 			});
 		});
 
-		it("VTXXX-00033-Play Ringtone(valid file local) and Stop", function() {
+		xit("VTXXX-00033-Play Ringtone(valid file local) and Stop", function() {
 			runs(function()
 			{
 				var chosen = ringtone_names[Math.floor((Math.random()*ringtone_names.length))];

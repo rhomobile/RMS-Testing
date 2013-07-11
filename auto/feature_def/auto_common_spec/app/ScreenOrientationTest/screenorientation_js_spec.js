@@ -38,7 +38,7 @@ describe("ScreenOrientation JS API Test", function () {
     if (isAnyButApplePlatform()) {
 
         it("VT281-0905 | Test Screen Orientation rightHanded with callback |", function() {
-	
+
 		runs(function()
 		{
 			dispCurrentProcess("VT281-0905 | Test Screen Orientation rightHanded with callback |");
@@ -79,7 +79,7 @@ describe("ScreenOrientation JS API Test", function () {
 			return ( (callbackFired == true) && (orientationType == "upsideDown") )
 		}, 'The Screen Orientation should display', 10000);
 		});
-		
+
         it("VT281-0908 | Test Screen Orientation normal with callback |", function() {
 		runs(function()
 		{
@@ -110,18 +110,18 @@ describe("ScreenOrientation JS API Test", function () {
 		}, 'The Screen Orientation should display', 10000);
 		});
 
-        it("VT281-0912| Set autoRotate as true and call righthand method |", function() {
+        it("VT281-0912| Set autoRotate as true and call normal method |", function() {
 
 		runs(function()
 		{
-			dispCurrentProcess("VT281-0912| Set autoRotate as true and call right hand method");
+			dispCurrentProcess("VT281-0912| Set autoRotate as true and call normal method");
 			Rho.ScreenOrientation.setScreenOrientationEvent(screenorientation_callback);
-			Rho.ScreenOrientation.rightHanded();
+			Rho.ScreenOrientation.normal();
 		});
 
 		waitsFor(function()
 		{
-			return ( (callbackFired == true) && (orientationType == "rightHanded") )
+			return ( (callbackFired == true) && (orientationType == "normal") )
 		}, 'The Screen Orientation should display', 10000);
 		});
     }

@@ -6,23 +6,23 @@ var captured = false;
 describe("Battery Manual FD  Tests", function () {
   var smartBatteryStatusCallback = function (args){
       var result = '';
-      result += '<br/>serialNumber :- ' + JSON.stringify(args["serialNumber"]);
-      result += '<br/>partNumber :- ' + JSON.stringify(args["partNumber"]);
-      result += '<br/>batteryChargeCycles :- ' + JSON.stringify(args["batteryChargeCycles"]);
-      result += '<br/>ratedCapacity :- ' + JSON.stringify(args["ratedCapacity"]);
-      result += '<br/>manufactureDate :- ' + JSON.stringify(args["manufactureDate"]);
-      result += '<br/>stateOfHealth :- ' + JSON.stringify(args["stateOfHealth"]);
+      result += '<br/>serialNumber: ' + JSON.stringify(args["serialNumber"]);
+      result += '<br/>partNumber: ' + JSON.stringify(args["partNumber"]);
+      result += '<br/>batteryChargeCycles: ' + JSON.stringify(args["batteryChargeCycles"]);
+      result += '<br/>ratedCapacity: ' + JSON.stringify(args["ratedCapacity"]);
+      result += '<br/>manufactureDate: ' + JSON.stringify(args["manufactureDate"]);
+      result += '<br/>stateOfHealth: ' + JSON.stringify(args["stateOfHealth"]);
       displayResult("Output: ",result);
     } 
 
   var batteryStatusCallback = function (args){
         var result = '';
-        result += '<br/>AcLineStatus:- ' + JSON.stringify(args["acLineStatus"]);
-        result += '<br/>BatteryLifePercent:- ' + JSON.stringify(args["batteryLifePercent"]);
-        result += '<br/>BackupBatteryLifePercent:- ' + JSON.stringify(args["backupBatteryLifePercent"]);
-        result += '<br/>Trigger:- ' + JSON.stringify(args["trigger"]);
-        result += '<br/>BatteryLifeKnown:- ' + JSON.stringify(args["batteryLifeKnown"]);
-        result += '<br/>BackupBatteryLifeKnown:- ' + JSON.stringify(args["backupBatteryLifeKnown"]);
+        result += '<br/>AcLineStatus: ' + JSON.stringify(args["acLineStatus"]);
+        result += '<br/>BatteryLifePercent: ' + JSON.stringify(args["batteryLifePercent"]);
+        result += '<br/>BackupBatteryLifePercent: ' + JSON.stringify(args["backupBatteryLifePercent"]);
+        result += '<br/>Trigger: ' + JSON.stringify(args["trigger"]);
+        result += '<br/>BatteryLifeKnown: ' + JSON.stringify(args["batteryLifeKnown"]);
+        result += '<br/>BackupBatteryLifeKnown: ' + JSON.stringify(args["backupBatteryLifeKnown"]);
         displayResult("Output: ",result);
       } 
 
@@ -310,12 +310,12 @@ if(!isAndroidPlatform())
             Rho.Battery.stopBatteryStatus();
 			var batteryStatus= Rho.Battery.batteryStatus({trigger :'periodic'});
 			var result = '';
-			result += '<br/>AcLineStatus:- ' + JSON.stringify(batteryStatus["acLineStatus"]);
-			result += '<br/>BatteryLifePercent:- ' + JSON.stringify(batteryStatus["batteryLifePercent"]);
-			result += '<br/>BackupBatteryLifePercent:- ' + JSON.stringify(batteryStatus["backupBatteryLifePercent"]);
-			result += '<br/>Trigger:- ' + JSON.stringify(batteryStatus["trigger"]);
-			result += '<br/>BatteryLifeKnown:- ' + JSON.stringify(batteryStatus["batteryLifeKnown"]);
-			result += '<br/>BackupBatteryLifeKnown:- ' + JSON.stringify(batteryStatus["backupBatteryLifeKnown"]);
+			result += '<br/>AcLineStatus: ' + JSON.stringify(batteryStatus["acLineStatus"]);
+			result += '<br/>BatteryLifePercent: ' + JSON.stringify(batteryStatus["batteryLifePercent"]);
+			result += '<br/>BackupBatteryLifePercent: ' + JSON.stringify(batteryStatus["backupBatteryLifePercent"]);
+			result += '<br/>Trigger: ' + JSON.stringify(batteryStatus["trigger"]);
+			result += '<br/>BatteryLifeKnown: ' + JSON.stringify(batteryStatus["batteryLifeKnown"]);
+			result += '<br/>BackupBatteryLifeKnown: ' + JSON.stringify(batteryStatus["backupBatteryLifeKnown"]);
 			displayResult("Output: ",result);
 		});
           
@@ -336,12 +336,12 @@ if(!isAndroidPlatform())
 			Rho.Battery.batteryStatus({trigger :'periodic'},function (args)
 			{
 				var result = '';
-				result += '<br/>AcLineStatus:- ' + JSON.stringify(args["acLineStatus"]);
-				result += '<br/>BatteryLifePercent:- ' + JSON.stringify(args["batteryLifePercent"]);
-				result += '<br/>BackupBatteryLifePercent:- ' + JSON.stringify(args["backupBatteryLifePercent"]);
-				result += '<br/>Trigger:- ' + JSON.stringify(args["trigger"]);
-				result += '<br/>BatteryLifeKnown:- ' + JSON.stringify(args["batteryLifeKnown"]);
-				result += '<br/>BackupBatteryLifeKnown:- ' + JSON.stringify(args["backupBatteryLifeKnown"]);
+				result += '<br/>AcLineStatus: ' + JSON.stringify(args["acLineStatus"]);
+				result += '<br/>BatteryLifePercent: ' + JSON.stringify(args["batteryLifePercent"]);
+				result += '<br/>BackupBatteryLifePercent: ' + JSON.stringify(args["backupBatteryLifePercent"]);
+				result += '<br/>Trigger: ' + JSON.stringify(args["trigger"]);
+				result += '<br/>BatteryLifeKnown: ' + JSON.stringify(args["batteryLifeKnown"]);
+				result += '<br/>BackupBatteryLifeKnown: ' + JSON.stringify(args["backupBatteryLifeKnown"]);
 				displayResult("Output: ",result);
 			});
 		});
@@ -441,12 +441,12 @@ if(!isAndroidPlatform() && isAnyButApplePlatform())
 			dispExpectedResult("Smart Battery event should be fired with all the return parameters ");
 			var smartBatteryStatusCallback= Rho.Battery.smartBatteryStatus();
 			var result = '';
-			result += '<br/>serialNumber :- ' + JSON.stringify(smartBatteryStatusCallback["serialNumber"]);
-			result += '<br/>partNumber :- ' + JSON.stringify(smartBatteryStatusCallback["partNumber"]);
-			result += '<br/>batteryChargeCycles :- ' + JSON.stringify(smartBatteryStatusCallback["batteryChargeCycles"]);
-			result += '<br/>ratedCapacity :- ' + JSON.stringify(smartBatteryStatusCallback["ratedCapacity"]);
-			result += '<br/>manufactureDate :- ' + JSON.stringify(smartBatteryStatusCallback["manufactureDate"]);
-			result += '<br/>stateOfHealth :- ' + JSON.stringify(smartBatteryStatusCallback["stateOfHealth"]);
+			result += '<br/>serialNumber: ' + JSON.stringify(smartBatteryStatusCallback["serialNumber"]);
+			result += '<br/>partNumber: ' + JSON.stringify(smartBatteryStatusCallback["partNumber"]);
+			result += '<br/>batteryChargeCycles: ' + JSON.stringify(smartBatteryStatusCallback["batteryChargeCycles"]);
+			result += '<br/>ratedCapacity: ' + JSON.stringify(smartBatteryStatusCallback["ratedCapacity"]);
+			result += '<br/>manufactureDate: ' + JSON.stringify(smartBatteryStatusCallback["manufactureDate"]);
+			result += '<br/>stateOfHealth: ' + JSON.stringify(smartBatteryStatusCallback["stateOfHealth"]);
 			displayResult("Output: ",result);
 		});
 
@@ -466,12 +466,12 @@ if(!isAndroidPlatform() && isAnyButApplePlatform())
 			Rho.Battery.stopBatteryStatus();
 			Rho.Battery.batteryStatus({trigger :'periodic'},function (args){
 				var result = '';
-				result += '<br/>serialNumber :- ' + JSON.stringify(smartBatteryStatusCallback["serialNumber"]);
-				result += '<br/>partNumber :- ' + JSON.stringify(smartBatteryStatusCallback["partNumber"]);
-				result += '<br/>batteryChargeCycles :- ' + JSON.stringify(smartBatteryStatusCallback["batteryChargeCycles"]);
-				result += '<br/>ratedCapacity :- ' + JSON.stringify(smartBatteryStatusCallback["ratedCapacity"]);
-				result += '<br/>manufactureDate :- ' + JSON.stringify(smartBatteryStatusCallback["manufactureDate"]);
-				result += '<br/>stateOfHealth :- ' + JSON.stringify(smartBatteryStatusCallback["stateOfHealth"]);
+				result += '<br/>serialNumber: ' + JSON.stringify(smartBatteryStatusCallback["serialNumber"]);
+				result += '<br/>partNumber: ' + JSON.stringify(smartBatteryStatusCallback["partNumber"]);
+				result += '<br/>batteryChargeCycles: ' + JSON.stringify(smartBatteryStatusCallback["batteryChargeCycles"]);
+				result += '<br/>ratedCapacity: ' + JSON.stringify(smartBatteryStatusCallback["ratedCapacity"]);
+				result += '<br/>manufactureDate: ' + JSON.stringify(smartBatteryStatusCallback["manufactureDate"]);
+				result += '<br/>stateOfHealth: ' + JSON.stringify(smartBatteryStatusCallback["stateOfHealth"]);
 				displayResult("Output: ",result);
 			});
 		});
