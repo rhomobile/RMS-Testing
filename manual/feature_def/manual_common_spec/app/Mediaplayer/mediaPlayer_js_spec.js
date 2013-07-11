@@ -6,8 +6,8 @@ var captured = false;
 var srvURL = "http://"+SERVER_HOST+":"+SERVER_PORT.toString() + "/";
 var httpsSrvURL = "https://"+SECURE_HOST+":"+SECURE_PORT.toString() + "/";
 
-var audioMediaPath = Rho.Application.modelFolderPath('Mediaplayer') + "\\MediaFiles\\Audio\\"
-var videoMediaPath = Rho.Application.modelFolderPath('Mediaplayer') + "\\MediaFiles\\Video\\"
+var audioMediaPath =Rho.RhoFile.join(Rho.Application.modelFolderPath('Mediaplayer'), "\\MediaFiles\\Audio\\");
+var videoMediaPath = Rho.RhoFile.join(Rho.Application.modelFolderPath('Mediaplayer'), "\\MediaFiles\\Video\\");
 
 
 function getkeys (obj) {
@@ -390,7 +390,7 @@ describe("MediaPlayer", function() {
 			});
 		});
 
-		it("VTXXX-0008-Play Audio(null)", function() {
+		xit("VTXXX-0008-Play Audio(null)", function() {
 			runs(function() {
 								
 				Rho.Mediaplayer.start(null);
@@ -410,7 +410,7 @@ describe("MediaPlayer", function() {
 			});
 		});
 
-		it("VTXXX-0009-Play Audio(invalid Local file)", function() {
+		xit("VTXXX-0009-Play Audio(invalid Local file)", function() {
 			runs(function() {
 				var audiolocation = audioMediaPath + "xxx.wav";
 							
@@ -432,7 +432,7 @@ describe("MediaPlayer", function() {
 		});		
 
 
-		it("VTXXX-00010-Play Audio(invalid remote URL)", function() {
+		xit("VTXXX-00010-Play Audio(invalid remote URL)", function() {
 			runs(function() {
 				var audiolocation = "http://www.myinvalidURL.com/xxx.wav";
 							
@@ -557,7 +557,7 @@ describe("MediaPlayer", function() {
 			});
 		});		
 
-		it("VTXXX-00014-Play Audio(Call Stop without Start)", function() {
+		xit("VTXXX-00014-Play Audio(Call Stop without Start)", function() {
 			runs(function() {
 						
 				Rho.Mediaplayer.stop();
@@ -830,7 +830,7 @@ describe("MediaPlayer", function() {
 			});
 		});
 
-		it("VTXXX-00022-Play Video(null)", function() {
+		xit("VTXXX-00022-Play Video(null)", function() {
 			runs(function() {
 								
 				Rho.Mediaplayer.startvideo(null);
@@ -850,7 +850,7 @@ describe("MediaPlayer", function() {
 			});
 		});
 
-		it("VTXXX-00023-Play Video(invalid Local file)", function() {
+		xit("VTXXX-00023-Play Video(invalid Local file)", function() {
 			runs(function() {
 				var Videolocation = videoMediaPath + "xxx.wav";
 							
@@ -872,7 +872,7 @@ describe("MediaPlayer", function() {
 		});		
 
 
-		it("VTXXX-00024-Play Video(invalid remote URL)", function() {
+		xit("VTXXX-00024-Play Video(invalid remote URL)", function() {
 			runs(function() {
 				var Videolocation = "http://www.myinvalidURL.com/xxx.wav";
 							
@@ -930,7 +930,7 @@ describe("MediaPlayer", function() {
 		it("VTXXX-00026-Play Video(valid file remote http) and Stop", function() {
 			runs(function() {
 				//var Videolocation = "\\Program Files\\manual_common_spec\\rho\\apps\\app\\Mediaplayer\\MediaFiles\\Video\\super_android_tune.mp3";
-				var srvHttpMediaDownload = srvURL + "hello.mp3";
+				var srvHttpMediaDownload = srvURL + "AMR-NB.mp4";
 
 				Rho.Mediaplayer.startvideo(srvHttpMediaDownload);
 				setTimeout(function() {
@@ -965,7 +965,7 @@ describe("MediaPlayer", function() {
 		it("VTXXX-00027-Play Video(valid file remote https) and Stop", function() {
 			runs(function() {
 				//var Videolocation = "\\Program Files\\manual_common_spec\\rho\\apps\\app\\Mediaplayer\\MediaFiles\\Video\\super_android_tune.mp3";
-				var srvHttpsMediaDownload = httpsSrvURL + "super_android_tune.mp3";
+				var srvHttpsMediaDownload = httpsSrvURL + "AMR-NB.mp4";
 
 				Rho.Mediaplayer.startvideo(srvHttpsMediaDownload);
 				setTimeout(function() {
@@ -997,7 +997,7 @@ describe("MediaPlayer", function() {
 			});
 		});		
 
-		it("VTXXX-00028-Play Video(Call Stop without Start)", function() {
+		xit("VTXXX-00028-Play Video(Call Stop without Start)", function() {
 			runs(function() {
 						
 				Rho.Mediaplayer.stopvideo();
@@ -1067,7 +1067,7 @@ describe("MediaPlayer", function() {
 			});
 		});	
 
-		it("VTXXX-00031-Play Ringtone(null)", function() {
+		xit("VTXXX-00031-Play Ringtone(null)", function() {
 			runs(function()
 			{
 				//var chosen = ringtone_names[Math.floor((Math.random()*ringtone_names.length))];
@@ -1089,7 +1089,7 @@ describe("MediaPlayer", function() {
 			});
 		});	
 
-		it("VTXXX-00032-Play Ringtone(invalid file local)", function() {
+		xit("VTXXX-00032-Play Ringtone(invalid file local)", function() {
 			runs(function()
 			{
 				//var chosen = ringtone_names[Math.floor((Math.random()*ringtone_names.length))];
@@ -1111,7 +1111,7 @@ describe("MediaPlayer", function() {
 			});
 		});
 
-		it("VTXXX-00033-Play Ringtone(valid file local) and Stop", function() {
+		xit("VTXXX-00033-Play Ringtone(valid file local) and Stop", function() {
 			runs(function()
 			{
 				var chosen = ringtone_names[Math.floor((Math.random()*ringtone_names.length))];
