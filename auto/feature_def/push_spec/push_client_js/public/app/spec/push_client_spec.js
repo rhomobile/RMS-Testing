@@ -19,8 +19,8 @@ describe("Push Module", function(){
 
   beforeEach(function(){
     Rho.RhoConnectClient.syncServer = syncServerUrl;
+    Rho.Push.pushAppName = 'someappname';
     Rho.Push.pushServer = pushServerUrl;
-
   });
 
   it("should register and getDeviceId from push service", function(){
@@ -54,7 +54,9 @@ describe("Push Module", function(){
           }
         });
         Rho.Push.getDeviceId(function(args){
-          sendPushMessage({message: 'push message', user_id: 'testuser'});
+          if(args !== '') {
+            sendPushMessage({message: 'push message', user_id: 'testuser'});
+          }
         });
       });
     });
@@ -114,7 +116,9 @@ describe("Push Module", function(){
           }
         });
         Rho.Push.getDeviceId(function(args){
-          sendPushMessage({message: 'message 1', user_id: 'testuser'});
+          if(args !== '') {
+            sendPushMessage({message: 'message 1', user_id: 'testuser'});
+          }
         });
       });
     });
@@ -153,13 +157,14 @@ describe("Push Module", function(){
       Rho.RhoConnectClient.login('testuser1','testuser1', function(){
         Rho.Push.startNotifications(function(args){
           if(args.alert) {
-            console.log('callback 1 ' + args.alert);
             alert1 = args.alert;
             callback1 = true;
           }
         });
         Rho.Push.getDeviceId(function(args){
-          sendPushMessage({message: 'message 1', user_id: 'testuser1'});
+          if(args !== '') {
+            sendPushMessage({message: 'message 1', user_id: 'testuser1'});
+          }
         });
       });
     });
@@ -174,21 +179,22 @@ describe("Push Module", function(){
         Rho.RhoConnectClient.login('testuser2','testuser2', function(){
           Rho.Push.startNotifications(function(args){
             if(args.alert) {
-              console.log('callback 2 ' + args.alert);
               alert2 = args.alert;
               callback2 = true;
             }
           });
           Rho.Push.getDeviceId(function(args){
-            sendPushMessage({message: 'message 2', user_id: 'testuser2'});
+            if(args !== '') {
+              sendPushMessage({message: 'message 2', user_id: 'testuser2'});
+            }
           });
         });
-      }, 5000);
+      }, 10000);
     });
 
     waitsFor(function() {
       return callback2;
-    }, "wait", 30000);
+    }, "wait", 80000);
 
     runs(function() {
       expect(alert1).toEqual('message 1');
