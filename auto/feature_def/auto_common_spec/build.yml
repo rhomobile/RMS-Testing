@@ -50,7 +50,7 @@ android:
 wm:
   #use_shared_runtime: yes
   #sdk: MC3000c50b (ARMV4I)
-  extensions: ["barcode", "screenorientation", "instrumentation", "cardreader", "indicators"]
+  extensions: ["barcode", "screenorientation", "instrumentation", "cardreader", "indicators", "sensor"]
 #capabilities:
 #- non_motorola_device
 
