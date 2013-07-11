@@ -3,7 +3,7 @@ describe("SensorsTestSuite", function() {
 		
 		var deviceOS = Rho.System.platform;
 		
-		if ((deviceOS == "ANDROID") || (deviceOS == "WINDOWS"))
+		if ((deviceOS == "ANDROID")/* || (deviceOS == "WINDOWS")*/)
 		{
 			it("AT55571, test Accelerometer sensor callback", function() {									
 				var result = runAccelerometer();			
@@ -41,7 +41,7 @@ describe("SensorsTestSuite", function() {
 			});				
 		}
 		
-		if (deviceOS == "WINDOWS")
+		/*if (deviceOS == "WINDOWS")
 		{
 			it("AT55573, test device orientation sensor callback", function() {									
 				var result = runDeviceOrientation();			
@@ -72,7 +72,7 @@ describe("SensorsTestSuite", function() {
 				var result = runHumidity();			
 				expect(result).toBe("true");			
 			});	
-		}
+		}*/
 		
 		if (deviceOS == "ANDROID")
 		{
