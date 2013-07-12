@@ -81,10 +81,16 @@ describe("Push Module", function(){
           }
         });
         Rho.Push.getDeviceId(function(args){
-          for(var i = 0; i < 5; i++) {
-            var msg = 'message ' + i;
-            sendPushMessage({message: msg, user_id: 'testuser'});
-          }
+          var i = 0;
+          var loop = setInterval(function() {
+            if(i === 5) {
+              clearInterval(loop);
+            } else {
+              var msg = 'message ' + i;
+              sendPushMessage({message: msg, user_id: 'testuser'});
+              i++;
+            }
+          }, 1000);
         });
       });
     });
@@ -175,6 +181,7 @@ describe("Push Module", function(){
 
     runs(function() {
       Rho.RhoConnectClient.logout();
+      Rho.Push.deviceId = '';
       setTimeout(function(){
         Rho.RhoConnectClient.login('testuser2','testuser2', function(){
           Rho.Push.startNotifications(function(args){
