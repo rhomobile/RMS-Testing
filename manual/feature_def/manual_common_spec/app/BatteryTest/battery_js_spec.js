@@ -6,23 +6,23 @@ var captured = false;
 describe("Battery Manual FD  Tests", function () {
   var smartBatteryStatusCallback = function (args){
       var result = '';
-      result += '<br/>serialNumber :- ' + JSON.stringify(args["serialNumber"]);
-      result += '<br/>partNumber :- ' + JSON.stringify(args["partNumber"]);
-      result += '<br/>batteryChargeCycles :- ' + JSON.stringify(args["batteryChargeCycles"]);
-      result += '<br/>ratedCapacity :- ' + JSON.stringify(args["ratedCapacity"]);
-      result += '<br/>manufactureDate :- ' + JSON.stringify(args["manufactureDate"]);
-      result += '<br/>stateOfHealth :- ' + JSON.stringify(args["stateOfHealth"]);
+      result += '<br/>serialNumber: ' + JSON.stringify(args["serialNumber"]);
+      result += '<br/>partNumber: ' + JSON.stringify(args["partNumber"]);
+      result += '<br/>batteryChargeCycles: ' + JSON.stringify(args["batteryChargeCycles"]);
+      result += '<br/>ratedCapacity: ' + JSON.stringify(args["ratedCapacity"]);
+      result += '<br/>manufactureDate: ' + JSON.stringify(args["manufactureDate"]);
+      result += '<br/>stateOfHealth: ' + JSON.stringify(args["stateOfHealth"]);
       displayResult("Output: ",result);
     } 
 
   var batteryStatusCallback = function (args){
         var result = '';
-        result += '<br/>AcLineStatus:- ' + JSON.stringify(args["acLineStatus"]);
-        result += '<br/>BatteryLifePercent:- ' + JSON.stringify(args["batteryLifePercent"]);
-        result += '<br/>BackupBatteryLifePercent:- ' + JSON.stringify(args["backupBatteryLifePercent"]);
-        result += '<br/>Trigger:- ' + JSON.stringify(args["trigger"]);
-        result += '<br/>BatteryLifeKnown:- ' + JSON.stringify(args["batteryLifeKnown"]);
-        result += '<br/>BackupBatteryLifeKnown:- ' + JSON.stringify(args["backupBatteryLifeKnown"]);
+        result += '<br/>AcLineStatus: ' + JSON.stringify(args["acLineStatus"]);
+        result += '<br/>BatteryLifePercent: ' + JSON.stringify(args["batteryLifePercent"]);
+        result += '<br/>BackupBatteryLifePercent: ' + JSON.stringify(args["backupBatteryLifePercent"]);
+        result += '<br/>Trigger: ' + JSON.stringify(args["trigger"]);
+        result += '<br/>BatteryLifeKnown: ' + JSON.stringify(args["batteryLifeKnown"]);
+        result += '<br/>BackupBatteryLifeKnown: ' + JSON.stringify(args["backupBatteryLifeKnown"]);
         displayResult("Output: ",result);
       } 
 
@@ -310,12 +310,12 @@ if(!isAndroidPlatform())
             Rho.Battery.stopBatteryStatus();
 			var batteryStatus= Rho.Battery.batteryStatus({trigger :'periodic'});
 			var result = '';
-			result += '<br/>AcLineStatus:- ' + JSON.stringify(batteryStatus["acLineStatus"]);
-			result += '<br/>BatteryLifePercent:- ' + JSON.stringify(batteryStatus["batteryLifePercent"]);
-			result += '<br/>BackupBatteryLifePercent:- ' + JSON.stringify(batteryStatus["backupBatteryLifePercent"]);
-			result += '<br/>Trigger:- ' + JSON.stringify(batteryStatus["trigger"]);
-			result += '<br/>BatteryLifeKnown:- ' + JSON.stringify(batteryStatus["batteryLifeKnown"]);
-			result += '<br/>BackupBatteryLifeKnown:- ' + JSON.stringify(batteryStatus["backupBatteryLifeKnown"]);
+			result += '<br/>AcLineStatus: ' + JSON.stringify(batteryStatus["acLineStatus"]);
+			result += '<br/>BatteryLifePercent: ' + JSON.stringify(batteryStatus["batteryLifePercent"]);
+			result += '<br/>BackupBatteryLifePercent: ' + JSON.stringify(batteryStatus["backupBatteryLifePercent"]);
+			result += '<br/>Trigger: ' + JSON.stringify(batteryStatus["trigger"]);
+			result += '<br/>BatteryLifeKnown: ' + JSON.stringify(batteryStatus["batteryLifeKnown"]);
+			result += '<br/>BackupBatteryLifeKnown: ' + JSON.stringify(batteryStatus["backupBatteryLifeKnown"]);
 			displayResult("Output: ",result);
 		});
           
@@ -336,12 +336,12 @@ if(!isAndroidPlatform())
 			Rho.Battery.batteryStatus({trigger :'periodic'},function (args)
 			{
 				var result = '';
-				result += '<br/>AcLineStatus:- ' + JSON.stringify(args["acLineStatus"]);
-				result += '<br/>BatteryLifePercent:- ' + JSON.stringify(args["batteryLifePercent"]);
-				result += '<br/>BackupBatteryLifePercent:- ' + JSON.stringify(args["backupBatteryLifePercent"]);
-				result += '<br/>Trigger:- ' + JSON.stringify(args["trigger"]);
-				result += '<br/>BatteryLifeKnown:- ' + JSON.stringify(args["batteryLifeKnown"]);
-				result += '<br/>BackupBatteryLifeKnown:- ' + JSON.stringify(args["backupBatteryLifeKnown"]);
+				result += '<br/>AcLineStatus: ' + JSON.stringify(args["acLineStatus"]);
+				result += '<br/>BatteryLifePercent: ' + JSON.stringify(args["batteryLifePercent"]);
+				result += '<br/>BackupBatteryLifePercent: ' + JSON.stringify(args["backupBatteryLifePercent"]);
+				result += '<br/>Trigger: ' + JSON.stringify(args["trigger"]);
+				result += '<br/>BatteryLifeKnown: ' + JSON.stringify(args["batteryLifeKnown"]);
+				result += '<br/>BackupBatteryLifeKnown: ' + JSON.stringify(args["backupBatteryLifeKnown"]);
 				displayResult("Output: ",result);
 			});
 		});
@@ -441,12 +441,12 @@ if(!isAndroidPlatform() && isAnyButApplePlatform())
 			dispExpectedResult("Smart Battery event should be fired with all the return parameters ");
 			var smartBatteryStatusCallback= Rho.Battery.smartBatteryStatus();
 			var result = '';
-			result += '<br/>serialNumber :- ' + JSON.stringify(smartBatteryStatusCallback["serialNumber"]);
-			result += '<br/>partNumber :- ' + JSON.stringify(smartBatteryStatusCallback["partNumber"]);
-			result += '<br/>batteryChargeCycles :- ' + JSON.stringify(smartBatteryStatusCallback["batteryChargeCycles"]);
-			result += '<br/>ratedCapacity :- ' + JSON.stringify(smartBatteryStatusCallback["ratedCapacity"]);
-			result += '<br/>manufactureDate :- ' + JSON.stringify(smartBatteryStatusCallback["manufactureDate"]);
-			result += '<br/>stateOfHealth :- ' + JSON.stringify(smartBatteryStatusCallback["stateOfHealth"]);
+			result += '<br/>serialNumber: ' + JSON.stringify(smartBatteryStatusCallback["serialNumber"]);
+			result += '<br/>partNumber: ' + JSON.stringify(smartBatteryStatusCallback["partNumber"]);
+			result += '<br/>batteryChargeCycles: ' + JSON.stringify(smartBatteryStatusCallback["batteryChargeCycles"]);
+			result += '<br/>ratedCapacity: ' + JSON.stringify(smartBatteryStatusCallback["ratedCapacity"]);
+			result += '<br/>manufactureDate: ' + JSON.stringify(smartBatteryStatusCallback["manufactureDate"]);
+			result += '<br/>stateOfHealth: ' + JSON.stringify(smartBatteryStatusCallback["stateOfHealth"]);
 			displayResult("Output: ",result);
 		});
 
@@ -466,12 +466,12 @@ if(!isAndroidPlatform() && isAnyButApplePlatform())
 			Rho.Battery.stopBatteryStatus();
 			Rho.Battery.batteryStatus({trigger :'periodic'},function (args){
 				var result = '';
-				result += '<br/>serialNumber :- ' + JSON.stringify(smartBatteryStatusCallback["serialNumber"]);
-				result += '<br/>partNumber :- ' + JSON.stringify(smartBatteryStatusCallback["partNumber"]);
-				result += '<br/>batteryChargeCycles :- ' + JSON.stringify(smartBatteryStatusCallback["batteryChargeCycles"]);
-				result += '<br/>ratedCapacity :- ' + JSON.stringify(smartBatteryStatusCallback["ratedCapacity"]);
-				result += '<br/>manufactureDate :- ' + JSON.stringify(smartBatteryStatusCallback["manufactureDate"]);
-				result += '<br/>stateOfHealth :- ' + JSON.stringify(smartBatteryStatusCallback["stateOfHealth"]);
+				result += '<br/>serialNumber: ' + JSON.stringify(smartBatteryStatusCallback["serialNumber"]);
+				result += '<br/>partNumber: ' + JSON.stringify(smartBatteryStatusCallback["partNumber"]);
+				result += '<br/>batteryChargeCycles: ' + JSON.stringify(smartBatteryStatusCallback["batteryChargeCycles"]);
+				result += '<br/>ratedCapacity: ' + JSON.stringify(smartBatteryStatusCallback["ratedCapacity"]);
+				result += '<br/>manufactureDate: ' + JSON.stringify(smartBatteryStatusCallback["manufactureDate"]);
+				result += '<br/>stateOfHealth: ' + JSON.stringify(smartBatteryStatusCallback["stateOfHealth"]);
 				displayResult("Output: ",result);
 			});
 		});
@@ -524,39 +524,38 @@ it("VT284-028|Call batteryStatus method with Hash Property trigger to System wit
 	});
 });  
 
-//Not FD test
-//it("VT284-029|Call batteryStatus method with Hash Property trigger to System with callback for WP8|", function () {
-//	runs(function () {
-//		dispTestCaseRunning("batteryStatus method with Hash Property trigger to System with callback ");
-//		dispExpectedResult("batteryStatus be should be shown on the page and batteryStatus should updated every percentage value change in battery");
-//		Rho.Battery.batteryStatus({trigger :'system'},batteryStatusCallback);
-//	});
-//  
-//	waitsFor(function () {
-//		return captured;
-//	}, 'Tester should have responded by now', 18000000);
-//
-//	runs(function () {
-//		expect(testResult).toEqual(true);
-//	});
-//});             
+it("VT284-029|Call batteryStatus method with Hash Property trigger to System with callback for WP8|", function () {
+	runs(function () {
+		dispTestCaseRunning("batteryStatus method with Hash Property trigger to System with callback ");
+		dispExpectedResult("batteryStatus be should be shown on the page and batteryStatus should updated every percentage value change in battery");
+		Rho.Battery.batteryStatus({trigger :'system'},batteryStatusCallback);
+	});
+  
+	waitsFor(function () {
+		return captured;
+	}, 'Tester should have responded by now', 18000000);
+
+	runs(function () {
+		expect(testResult).toEqual(true);
+	});
+});             
       
-//Not FD test       
-//it("VT284-030|Call batteryStatus method with Hash Property trigger to System with callback for checking high battery|", function () {
-//	runs(function () {
-//		dispTestCaseRunning("ensure that device would be reaching high battery level in a while before firing this event");
-//		dispExpectedResult("batteryStatus be should be shown on the page and trigger parameter in the callback should show high battery");
-//		Rho.Battery.batteryStatus({trigger :'system'},batteryStatusCallback);
-//	});
-//  
-//	waitsFor(function () {
-//		return captured;
-//	}, 'Tester should have responded by now', 18000000);
-//
-//	runs(function () {
-//		expect(testResult).toEqual(true);
-//	});
-//});  
+
+it("VT284-030|Call batteryStatus method with Hash Property trigger to System with callback for checking high battery|", function () {
+	runs(function () {
+		dispTestCaseRunning("ensure that device would be reaching high battery level in a while before firing this event");
+		dispExpectedResult("batteryStatus be should be shown on the page and trigger parameter in the callback should show high battery");
+		Rho.Battery.batteryStatus({trigger :'system'},batteryStatusCallback);
+	});
+  
+	waitsFor(function () {
+		return captured;
+	}, 'Tester should have responded by now', 18000000);
+
+	runs(function () {
+		expect(testResult).toEqual(true);
+	});
+});  
       
 it("VT284-032|Call batteryStatus method with Hash Property trigger to Periodic with callback for checking AClineStatus|", function () {
 	runs(function () {
@@ -590,39 +589,37 @@ it("VT284-033|Call batteryStatus method with Hash Property trigger to Periodic w
 	});
 }); 
             
-//Not FD test
-//it("VT284-033|Call batteryStatus method with Hash Property trigger to System with callback for checking low battery|", function () {
-//	runs(function () {
-//		dispTestCaseRunning("ensure that device would be reaching low battery level(15%) in a while before firing this event");
-//		dispExpectedResult("batteryStatus be should be shown on the page and trigger parameter in the callback should show low battery");
-//		Rho.Battery.batteryStatus({trigger :'system'},batteryStatusCallback);
-//	});
-//
-//	waitsFor(function () {
-//		return captured;
-//	}, 'Tester should have responded by now', 18000000);
-//
-//	runs(function () {
-//		expect(testResult).toEqual(true);
-//	});
-//});  
-//      
-//Not FD test
-//it("VT284-034|Call batteryStatus method with Hash Property trigger to System with callback for checking Critical battery|", function () {
-//	runs(function () {
-//		dispTestCaseRunning("ensure that device would be reaching Critical  battery level(10%) in a while before firing this event");
-//		dispExpectedResult("batteryStatus be should be shown on the page and trigger parameter in the callback should show critical battery");
-//		Rho.Battery.batteryStatus({trigger :'system'},batteryStatusCallback);
-//	});
-//
-//	waitsFor(function () {
-//		return captured;
-//	}, 'Tester should have responded by now', 18000000);
-//
-//	runs(function () {
-//		expect(testResult).toEqual(true);
-//	});
-//});  
+it("VT284-033|Call batteryStatus method with Hash Property trigger to System with callback for checking low battery|", function () {
+	runs(function () {
+		dispTestCaseRunning("ensure that device would be reaching low battery level(15%) in a while before firing this event");
+		dispExpectedResult("batteryStatus be should be shown on the page and trigger parameter in the callback should show low battery");
+		Rho.Battery.batteryStatus({trigger :'system'},batteryStatusCallback);
+	});
+
+	waitsFor(function () {
+		return captured;
+	}, 'Tester should have responded by now', 18000000);
+
+	runs(function () {
+		expect(testResult).toEqual(true);
+	});
+});  
+      
+it("VT284-034|Call batteryStatus method with Hash Property trigger to System with callback for checking Critical battery|", function () {
+	runs(function () {
+		dispTestCaseRunning("ensure that device would be reaching Critical  battery level(10%) in a while before firing this event");
+		dispExpectedResult("batteryStatus be should be shown on the page and trigger parameter in the callback should show critical battery");
+		Rho.Battery.batteryStatus({trigger :'system'},batteryStatusCallback);
+	});
+
+	waitsFor(function () {
+		return captured;
+	}, 'Tester should have responded by now', 18000000);
+
+	runs(function () {
+		expect(testResult).toEqual(true);
+	});
+});  
 
 if(!isAndroidPlatform() && isAnyButApplePlatform())
 {  

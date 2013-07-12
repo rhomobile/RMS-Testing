@@ -61,7 +61,7 @@ describe("HardwareKeysTestSuite", function() {
 				expect(Rho.KeyCapture.homeKeyValue).toBe('116');  	// F5	
 			});
 			//Added By ST//
-
+/* KeyCapture does not supported PROPERTY_BAG
 			it("1.7.(VT289-049)set the Home Key to ENTER with setProperties", function() {
 				Rho.KeyCapture.setProperties({'homeKeyValue':'0x0D'})
 				Rho.KeyCapture.getProperties(['homeKeyValue'],function(data){getpropertiesdata = JSON.stringify(data);});
@@ -73,14 +73,14 @@ describe("HardwareKeysTestSuite", function() {
 				Rho.KeyCapture.getProperty("homeKeyValue",function(data){getpropertiesdata = data;});
 				expect(getpropertiesdata).toBe('Disabled');		
 			});
-
+*/
 			it("1.9.(VT289-051)set the Home Key to enabled with setProperty and without callback", function() {
 				Rho.KeyCapture.homeKeyValue = 'enabled'
 				var data = Rho.KeyCapture.homeKeyValue;
 				getpropertiesdata = data;
 				expect(getpropertiesdata).toBe('116');	// F5	
 			});
-
+/* KeyCapture does not supported PROPERTY_BAG
 			it("1.10.(VT289-052)check for getallproperties", function() {
 				Rho.KeyCapture.homeKeyValue = 'disabled';
 				Rho.KeyCapture.getAllProperties(function(data){getpropertiesdata = JSON.stringify(data);});
@@ -92,6 +92,7 @@ describe("HardwareKeysTestSuite", function() {
 				Rho.KeyCapture.getSupportedProperties(function(data){getpropertiesdata = JSON.stringify(data);});
 				expect(getpropertiesdata).toContain('13');
 			});
+*/			
 		}
 		
 		///////////////////////////////////////////////////////////////////////

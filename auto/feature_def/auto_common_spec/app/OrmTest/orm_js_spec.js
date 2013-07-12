@@ -559,9 +559,9 @@ describe("<ORM Db Reset specs>", function() {
       var db_product = db.$execute_sql("Select * from Product");
       expect(db_product[0].map.name).toEqual("test");
 
-      var ary = {"models":['Product']};
+      var ary = {"models":['Product'],"reset_local_models":false,"reset_client_info":false};
 
-      Rho.ORM.databaseFullResetEx(ary,false,false);
+      Rho.ORM.databaseFullResetEx(ary);
       db_product = db.$execute_sql("Select * from Product");
       expect(db_product).toEqual([]);
       db.$execute_sql("DELETE FROM SOURCES");
@@ -590,9 +590,8 @@ describe("<ORM Db Reset specs>", function() {
       expect(db_product[0].map.value).toEqual("test");
       expect(db_product[1].map.value).toEqual("2");
 
-      var ary = {"models":['Product']};
-
-      Rho.ORM.databaseFullResetEx(ary,false,false);
+      var ary = {"models":['Product'],"reset_local_models":false,"reset_client_info":false};
+      Rho.ORM.databaseFullResetEx(ary);
       db_product = db.$execute_sql("Select * from OBJECT_VALUES");
       expect(db_product).toEqual([]);
       db.$execute_sql("DELETE FROM SOURCES");
@@ -620,8 +619,8 @@ describe("<ORM Db Reset specs>", function() {
       expect(db_product[0].map.value).toEqual("test");
       expect(db_product[1].map.value).toEqual("2");
 
-      var ary = {"models":['Product']};
-      Rho.ORM.databaseFullResetEx(ary,false,false);
+      var ary = {"models":['Product'],"reset_local_models":false,"reset_client_info":false};
+      Rho.ORM.databaseFullResetEx(ary);
 
       db_product = db.$execute_sql("Select * from OBJECT_VALUES");
       expect(db_product[0].map.value).toEqual("test");
@@ -653,9 +652,8 @@ describe("<ORM Db Reset specs>", function() {
       expect(db_product[0].map.value).toEqual("test");
       expect(db_product[1].map.value).toEqual("2");
 
-      var ary = {"models":['Product']};
-
-      Rho.ORM.databaseFullResetEx(ary,true,false);
+      var ary = {"models":['Product'],"reset_local_models":false,"reset_client_info":true};
+      Rho.ORM.databaseFullResetEx(ary);
       db_product = db.$execute_sql("Select * from OBJECT_VALUES");
       db_product2 = db.$execute_sql("Select * from client_info");
       expect(db_product2).toEqual([]);

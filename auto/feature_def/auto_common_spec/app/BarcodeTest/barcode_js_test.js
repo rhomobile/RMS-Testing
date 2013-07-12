@@ -3279,7 +3279,7 @@ var getApplicableProperties = function (objScnType){
 			{ 
 				finalSCNObj.push(arr_scanner_property[i]);
 			}
-			else if (deviceScannerType == "2D Imager" && isAndroid && arr_scanner_property[i]['notOnAndroidImager'] === true)//If it is the Android hardware Imager
+			else if ((deviceScannerType == "2D Imager" || Rho.System.oemInfo == "MC40") && isAndroid && arr_scanner_property[i]['notOnAndroidImager'] === true)//If it is the Android hardware Imager
 			{
 				//Dont add
 			}

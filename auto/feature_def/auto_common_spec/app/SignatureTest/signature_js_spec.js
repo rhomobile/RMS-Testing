@@ -118,6 +118,7 @@ describe("Signature JS API Test", function() {
 					getpropertiesdata ='';
 					getpropertydata ='';
 					callbackstatus = false;
+					flag = false;
 				});
 /*
 				it("VT299-2001 | call getProperties() with sync callback and hash |", function() {
@@ -227,8 +228,28 @@ describe("Signature JS API Test", function() {
 						expect(Rho.Signature.bgColor).toEqual('#FF0000');
 						expect(Rho.Signature.border).toEqual(true);
 						expect(Rho.Signature.penWidth).toEqual(1);
-						Rho.Signature.hide();
+						setTimeout(function()
+						{
+							flag = true;
+						}, HIDE_TIMEOUT_VALUE);
 					});
+					
+					waitsFor(function() {
+						return flag;
+					}, "Waiting to hide", 2000);
+					
+					runs(function() {
+						Rho.Signature.hide();
+						flag = false;
+						setTimeout(function()
+						{
+							flag = true;
+						}, HIDE_TIMEOUT_VALUE);
+					});
+					
+					waitsFor(function() {
+						return flag;
+					}, "Waiting to hide", 2000);
 				});
 
 				it("VT299-2008| call show() with required data types |", function() {
@@ -252,8 +273,28 @@ describe("Signature JS API Test", function() {
 						expect(Rho.Signature.bgColor).toEqual('#FF0000');
 						expect(Rho.Signature.outputFormat).toEqual('image');
 						expect(Rho.Signature.penWidth).toEqual(3);
-						Rho.Signature.hide();
+						setTimeout(function()
+						{
+							flag = true;
+						}, HIDE_TIMEOUT_VALUE);
 					});
+						
+					waitsFor(function() {
+						return flag;
+					}, "Waiting to hide", 2000);
+					
+					runs(function() {
+						Rho.Signature.hide();
+						flag = false;
+						setTimeout(function()
+						{
+							flag = true;
+						}, HIDE_TIMEOUT_VALUE);
+					});
+					
+					waitsFor(function() {
+						return flag;
+					}, "Waiting to hide", 2000);
 				});
 
 				it("VT299-2010 | call takeFullScreen() to check default values of all property |", function() {
@@ -268,8 +309,28 @@ describe("Signature JS API Test", function() {
 						expect(Rho.Signature.penColor).toEqual('#FF000000');
 						expect(Rho.Signature.penWidth).toEqual(3);
 
-						Rho.Signature.hide();
+						setTimeout(function()
+						{
+							flag = true;
+						}, HIDE_TIMEOUT_VALUE);
 					});
+					
+					waitsFor(function() {
+						return flag;
+					}, "Waiting to hide", 2000);
+					
+					runs(function() {
+						Rho.Signature.hide();
+						flag = false;
+						setTimeout(function()
+						{
+							flag = true;
+						}, HIDE_TIMEOUT_VALUE);
+					});
+					
+					waitsFor(function() {
+						return flag;
+					}, "Waiting to hide", 2000);
 				});
 
 				it("VT299-2011 | call show() to check default values of all property |", function() {

@@ -4,7 +4,6 @@ require 'rho/rhocontroller'
 class SettingsController < Rho::RhoController
 
   def ping
-    puts "****** INSIDE PING: #{@params.inspect} *******"
     Rho::Network.post(
       :url => @params['url'],
       :body => { 'user_id' => @params['user_id'], 'message' => @params['message'] }.to_json,

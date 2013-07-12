@@ -9,7 +9,7 @@ applog: rholog.txt
 iphone:
   configuration: Release
   sdk: iphonesimulator6.1
-  extensions: ["sensor", "signature", "barcode"]
+  extensions: ["sensor", "signature", "barcode", "mediaplayer"]
   provisionprofile:
   codesignidentity:
   entitlements:
@@ -21,9 +21,9 @@ symbian:
   uid: '0xeeceaf9f'
 android:
   version: 4.2.2
-  extensions: ["signature", "barcode", "mediaplayer"]
+  extensions: ["signature", "barcode", "mediaplayer", "sensor"]
 wm:
-  extensions: ["barcode", "mediaplayer", "indicators"]
+  extensions: ["barcode", "mediaplayer", "indicators", "sensor"]
 
 paths:
   extensions:

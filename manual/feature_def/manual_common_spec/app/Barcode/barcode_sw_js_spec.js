@@ -14,7 +14,7 @@ describe("Barcode Test", function() {
 
    (function(objSCN){ 
 
-   	var scnid = objSCN.getProperty('ID');
+   	var scnid = objSCN.getProperty('scannerType');
 
 	beforeEach(function() {
 		enableFlag = false;
@@ -125,12 +125,12 @@ describe("Barcode Test", function() {
 	});
 
 
-	it("VT282-1790A | take with callback as function and don't scan|"+ scnid, function() {
+	it("VT282-1790A | take with callback as function and don't scan cancel it|"+ scnid, function() {
 		
 		runs(function()
 		{
-			setObjective("VT282-1790A | take with callback as function and don't scan|");
-			setInstruction("Don't scan any barcode after scanner starts automatically and wait for scanner to stop" + scnid);
+			setObjective("VT282-1790A | take with callback as function and don't scan cancel it|");
+			setInstruction("Don't scan any barcode after scanner starts automatically and cancle it" + scnid);
 			setExpected("Decoded data should come as nil and status should be cancel and Beam ore viewfinder will go after 10 sec ");
 			objSCN.take({},callbacktake);
 			setTimeout(function() {
@@ -304,14 +304,14 @@ describe("Barcode Test", function() {
 	});
 
 
-	it("VT282-2008B | call getProperties() with ID without callback |"+ scnid, function() {
+	it("VT282-2008B | call getProperties() with scannerType without callback |"+ scnid, function() {
 
 		runs(function()
 		{
-			setObjective("VT282-2008A | call getProperties() with ID without callback|");
+			setObjective("VT282-2008A | call getProperties() with scannerType without callback|");
 			setInstruction("check for retrurned value" + scnid);
-			setExpected("It should return the Scanner ID");
-			var data = objSCN.getProperties(['ID']);
+			setExpected("It should return the Scanner scannerType");
+			var data = objSCN.getProperties(['scannerType']);
 			callbacktake(data);
 			setTimeout(function() {
 				enableFlag = true;
@@ -334,14 +334,14 @@ describe("Barcode Test", function() {
 		});
 	});
 
-	it("VT282-2008C | call getProperties() with ID with callback |"+ scnid, function() {
+	it("VT282-2008C | call getProperties() with scannerType with callback |"+ scnid, function() {
 
 		runs(function()
 		{
-			setObjective("VT282-2008A | call getProperties() with ID with callback|");
+			setObjective("VT282-2008A | call getProperties() with scannerType with callback|");
 			setInstruction("check for retrurned value" + scnid);
-			setExpected("It should return the Scanner ID");
-			objSCN.getProperties(['ID'],callbacktake);
+			setExpected("It should return the Scanner scannerType");
+			objSCN.getProperties(['scannerType'],callbacktake);
 			setTimeout(function() {
 				enableFlag = true;
 			}, 4000);
@@ -363,14 +363,14 @@ describe("Barcode Test", function() {
 		});
 	});
 
-	it("VT282-2008D | call getProperty() with ID with anonymous callback |"+ scnid, function() {
+	it("VT282-2008D | call getProperty() with scannerType with anonymous callback |"+ scnid, function() {
 
 		runs(function()
 		{
-			setObjective("VT282-2008A | call getProperty() with ID with anonymous callback|");
+			setObjective("VT282-2008A | call getProperty() with scannerType with anonymous callback|");
 			setInstruction("check for retrurned value" + scnid);
-			setExpected("It should return the Scanner ID");
-			objSCN.getProperty('ID',function(data){enablecallbackdata(JSON.stringify(data));});
+			setExpected("It should return the Scanner scannerType");
+			objSCN.getProperty('scannerType',function(data){enablecallbackdata(JSON.stringify(data));});
 			setTimeout(function() {
 				enableFlag = true;
 			}, 4000);
@@ -396,14 +396,14 @@ describe("Barcode Test", function() {
 
 		    Rho.Barcode.setDefault(enumObject);
 		    var defaultobj = Rho.Barcode.getDefault();						  
-			expect(scnid).toEqual(defaultobj.getProperty('ID'));
+			expect(scnid).toEqual(defaultobj.getProperty('scannerType'));
 	});
 
 	it("VT282-2006A | set and get using Default |" + scnid, function() {
 
-		   // Rho.Barcode.default = enumObject;
-		   // var defaultobj = Rho.Barcode.default;
-			expect(scnid).toEqual(defaultobj.getProperty('ID'));
+		    Rho.Barcode.default = enumObject;
+		    var defaultobj = Rho.Barcode.default;
+			expect(scnid).toEqual(defaultobj.getProperty('scannerType'));
 	});
 
 })(enumData[j]);
