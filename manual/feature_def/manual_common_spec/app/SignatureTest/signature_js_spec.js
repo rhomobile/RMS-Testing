@@ -6,6 +6,12 @@ describe("Signature Manual Test", function () {
     var takecallbackfired1 = false;
     var decodedata = '';
 
+    function delayForTwentySeconds() {
+        setTimeout(function () {
+            readFlag = true;
+        }, 20000);
+    }
+
     function delayForNineSeconds() {
         setTimeout(function () {
             readFlag = true;
