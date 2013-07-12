@@ -165,10 +165,10 @@ device_list.each do |dev|
       system "kill -9 #{$logcat_pid}" if $logcat_pid
     end
 
-    def expect_request(name)
+    def expect_request(name, timeout=30)
       val = nil
       $mutex.synchronize do
-        $signal.wait($mutex, 30) # wait timeout 30 secs.
+        $signal.wait($mutex, timeout) # wait timeout 30 secs.
         $requests.count.should == 1
         val = $requests.first.query[name]
         $requests.clear
@@ -273,13 +273,12 @@ device_list.each do |dev|
     # 6
     it 'should start stopped app and process pending push message' do
       puts 'Sending push message to start app...'
-
-      message = 'magic3'
+      message = 'Hello'
       params = { 'device_pin' => $device_pin, 'user_id' =>['pushclient'], 'message' => message }
       RhoconnectHelper.api_post('users/ping', params, @api_token)
 
       puts 'Waiting message with push content...'
-      expect_request('alert').should == message
+      expect_request('alert', 60).should == message
 
       sleep 5
       args =  $deviceId ?  ['-s', $deviceId, 'shell', 'ps'] : ['-e', 'shell', 'ps']

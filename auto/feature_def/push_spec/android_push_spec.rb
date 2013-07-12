@@ -114,10 +114,10 @@ device_list.each do |dev|
       system "kill -9 #{$logcat_pid}" if $logcat_pid
     end
 
-    def expect_request(name)
+    def expect_request(name, timeout=30)
       val = nil
       $mutex.synchronize do
-        $signal.wait($mutex, 30) # wait timeout 30 secs.
+        $signal.wait($mutex, timeout) # wait timeout 30 secs.
         $requests.count.should == 1
         val = $requests.first.query[name]
         $requests.clear
@@ -236,7 +236,7 @@ device_list.each do |dev|
       RhoconnectHelper.api_post('users/ping',params,@api_token)
 
       # puts 'Waiting ping message with push content ...'
-      expect_request('alert').should == message
+      expect_request('alert', 60).should == message
 
       args =  $deviceId ?  ['-s', $deviceId, 'shell', 'ps'] : ['-e', 'shell', 'ps']
       output = Jake.run2('adb', args, {:hide_output => true})
