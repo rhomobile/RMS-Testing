@@ -1,3 +1,15 @@
+function displayTestDescription(aString){
+    $("#description").text(aString);
+}
+
+function displayTestInstruction(aString){
+    $("#instruction").text(aString);
+}
+
+function displayTestExpectation(aString){
+    $("#expectation").text(aString);
+}
+
 var callbackCalled;
 var ringtone_names = "";
 var global_ringtones = "";
@@ -79,6 +91,10 @@ describe("MediaPlayer", function() {
 
 		// This test relies on the device having an audio file
 		it("VTXXX-0001-Play Audio(valid file local)", function() {
+            displayTestDescription("VTXXX-0001-Play | Audio(valid file local");
+            displayTestInstruction("");
+            displayTestExpectation("You should hear the music");
+
 			runs(function() {
 				var platform = Rho.System.platform;
 				//var audiolocation = "\\Program Files\\manual_common_spec\\rho\\apps\\app\\Mediaplayer\\MediaFiles\\Audio\\";
@@ -135,6 +151,10 @@ describe("MediaPlayer", function() {
 		});
 
 		it("VTXXX-0002-Play Audio(valid file remote http)", function() {
+            displayTestDescription("VTXXX-0002 | Play Audio(valid file remote http");
+            displayTestInstruction("");
+            displayTestExpectation("You should hear the music");
+
 			runs(function() {
 				var platform = Rho.System.platform;
 				var audiolocation = "";
@@ -195,6 +215,10 @@ describe("MediaPlayer", function() {
 		
 
 		it("VTXXX-0003-Play Audio(valid file remote https)", function() {
+            displayTestDescription("VTXXX-0003 | Play Audio(valid file remote https");
+            displayTestInstruction("");
+            displayTestExpectation("You should hear the music");
+
 			runs(function() {
 				var platform = Rho.System.platform;
 				var audiolocation = "";
@@ -252,6 +276,10 @@ describe("MediaPlayer", function() {
 		});
 
 		it("VTXXX-0004-Play Audio(wav file)", function() {
+            displayTestDescription("VTXXX-0004 | Play Audio(wav file)");
+            displayTestInstruction("");
+            displayTestExpectation("You should hear the music");
+
 			runs(function() {
 				var platform = Rho.System.platform;
 				var audiolocation =Rho.RhoFile.join(audioMediaPath , 'badfeeling.wav');
@@ -287,6 +315,9 @@ describe("MediaPlayer", function() {
 		});
 
 		it("VTXXX-0005-Play Audio(mp3 file)", function() {
+            displayTestDescription("VTXXX-0005 | Play Audio(mp3 file)");
+            displayTestInstruction("");
+            displayTestExpectation("You should hear the music");
 			runs(function() {
 				var platform = Rho.System.platform;
 				var audiolocation =Rho.RhoFile.join(audioMediaPath,'super_android_tune.mp3');
@@ -322,7 +353,10 @@ describe("MediaPlayer", function() {
 		});
 
 		it("VTXXX-0006-Play Audio(mp4 file)", function() {
-			runs(function() {
+            displayTestDescription("VTXXX-0006 | Play Audio(mp4 file)");
+            displayTestInstruction("");
+            displayTestExpectation("You should hear the music");
+            runs(function() {
 				var platform = Rho.System.platform;
 				var audiolocation =Rho.RhoFile.join(audioMediaPath , 'xxxx.mp4');
 								
@@ -359,6 +393,9 @@ describe("MediaPlayer", function() {
     if (isAnyButApplePlatform()) {
 
 		it("VTXXX-0007-Play Audio(wma file)", function() {
+            displayTestDescription("VTXXX-0007 | Play Audio(wma file)");
+            displayTestInstruction("");
+            displayTestExpectation("You should hear the music");
 			runs(function() {
 				var platform = Rho.System.platform;
 				var audiolocation = Rho.RhoFile.join(audioMediaPath ,"xxx.wma");
@@ -394,6 +431,9 @@ describe("MediaPlayer", function() {
 		});
     }
 		xit("VTXXX-0008-Play Audio(null)", function() {
+            displayTestDescription("VTXXX-0008 | Play Audio(null)");
+            displayTestInstruction("");
+            displayTestExpectation("You should not hear the music, app should not crashes");
 			runs(function() {
 								
 				Rho.Mediaplayer.start(null);
@@ -414,6 +454,9 @@ describe("MediaPlayer", function() {
 		});
 
 		xit("VTXXX-0009-Play Audio(invalid Local file)", function() {
+            displayTestDescription("VTXXX-0009 | Play Audio(invalid Local file)");
+            displayTestInstruction("");
+            displayTestExpectation("You should not hear the music, app should not crashes");
 			runs(function() {
 				var audiolocation = audioMediaPath + "xxx.wav";
 							
@@ -423,7 +466,7 @@ describe("MediaPlayer", function() {
 
 			waitsFor(function()
 			{
-				dispCurrentProcess("Called Audio start with invalid file. Did it break anthing?");
+				dispCurrentProcess("Called Audio start with invalid file. Did it break anything?");
 				return captured;
 			}, 'Waiting for Pass or Fail.', 10000);
 
@@ -436,6 +479,9 @@ describe("MediaPlayer", function() {
 
 
 		xit("VTXXX-00010-Play Audio(invalid remote URL)", function() {
+            displayTestDescription("VTXXX-00010 | Play Audio(invalid remote URL");
+            displayTestInstruction("");
+            displayTestExpectation("You should not hear the music, app should not crashes");
 			runs(function() {
 				var audiolocation = "http://www.myinvalidURL.com/xxx.wav";
 							
@@ -459,6 +505,9 @@ describe("MediaPlayer", function() {
     if (isAnyButApplePlatform()) {
 
 		it("VTXXX-00011-Play Audio(valid file local) and Stop", function() {
+            displayTestDescription("VTXXX-00011 | Play Audio(valid file local) and Stop");
+            displayTestInstruction("");
+            displayTestExpectation("Playing should stops after 3 seconds");
 			runs(function() {
 				var audiolocation = Rho.RhoFile.join(audioMediaPath , "super_android_tune.mp3");
 							
@@ -496,6 +545,9 @@ describe("MediaPlayer", function() {
     if (isAnyButApplePlatform()) {
 
 		it("VTXXX-00012-Play Audio(valid file remote http) and Stop", function() {
+            displayTestDescription("VTXXX-00012 | Play Audio(valid file remote http) and Stop");
+            displayTestInstruction("");
+            displayTestExpectation("Playing should stops after 3 seconds");
 			runs(function() {
 				//var audiolocation = "\\Program Files\\manual_common_spec\\rho\\apps\\app\\Mediaplayer\\MediaFiles\\Audio\\super_android_tune.mp3";
 				var srvHttpMediaDownload = Rho.RhoFile.join(srvURL ,"hello.mp3");
@@ -534,6 +586,9 @@ describe("MediaPlayer", function() {
     if (isAnyButApplePlatform()) {
 
 		it("VTXXX-00013-Play Audio(valid file remote https) and Stop", function() {
+            displayTestDescription("VTXXX-00013 | Play Audio(valid file remote https) and Stop");
+            displayTestInstruction("");
+            displayTestExpectation("Playing should stops after 3 seconds");
 			runs(function() {
 				//var audiolocation = "\\Program Files\\manual_common_spec\\rho\\apps\\app\\Mediaplayer\\MediaFiles\\Audio\\super_android_tune.mp3";
 				var srvHttpsMediaDownload = Rho.RhoFile.join(httpsSrvURL ,"super_android_tune.mp3");
@@ -569,6 +624,9 @@ describe("MediaPlayer", function() {
 		});		
     }
 		xit("VTXXX-00014-Play Audio(Call Stop without Start)", function() {
+            displayTestDescription("VTXXX-00014 | Play Audio(Call Stop without Start");
+            displayTestInstruction("");
+            displayTestExpectation("App should not craches");
 			runs(function() {
 						
 				Rho.Mediaplayer.stop();
@@ -592,6 +650,9 @@ describe("MediaPlayer", function() {
 //MediaPlayer Video Tests
 //						
 		it("VTXXX-00015-Play Video(valid file local)", function() {
+            displayTestDescription("VTXXX-00015 | Play Video(valid file local)");
+            displayTestInstruction("");
+            displayTestExpectation("You should see video");
 			runs(function() {
 				var platform = Rho.System.platform;
 				var Videolocation =Rho.RhoFile.join(videoMediaPath , "AMR-NB.mp4");
@@ -627,6 +688,9 @@ describe("MediaPlayer", function() {
 		});
 
 		it("VTXXX-00016-Play Video(valid file remote http)", function() {
+            displayTestDescription("VTXXX-00016 | Play Video(valid file remote http)");
+            displayTestInstruction("");
+            displayTestExpectation("You should see video");
 			runs(function() {
 				var platform = Rho.System.platform;
 				var Videolocation = "";
@@ -666,6 +730,9 @@ describe("MediaPlayer", function() {
 		
 
 		it("VTXXX-00017-Play Video(valid file remote https)", function() {
+            displayTestDescription("VTXXX-00017 | Play Video(valid file remote https)");
+            displayTestInstruction("");
+            displayTestExpectation("You should see video");
 			runs(function() {
 				var platform = Rho.System.platform;
 				var Videolocation = "";
@@ -702,6 +769,9 @@ describe("MediaPlayer", function() {
 		});
 
 		it("VTXXX-00018-Play Video(3gp file)", function() {
+            displayTestDescription("VTXXX-00018 | Play Video(3gp file)");
+            displayTestInstruction("");
+            displayTestExpectation("You should see video");
 			runs(function() {
 				var platform = Rho.System.platform;
 				var Videolocation = Rho.RhoFile.join(videoMediaPath , "Car.3gp");
@@ -737,6 +807,9 @@ describe("MediaPlayer", function() {
 		});
 
 		it("VTXXX-00019-Play Video(mp4 file)", function() {
+            displayTestDescription("VTXXX-00019 | Play Video(mp4 file)");
+            displayTestInstruction("");
+            displayTestExpectation("You should see video");
 			runs(function() {
 				var platform = Rho.System.platform;
 				var Videolocation = Rho.RhoFile.join(videoMediaPath , "test.mp4");
@@ -770,7 +843,7 @@ describe("MediaPlayer", function() {
 				expect(testResult).toEqual(true);
 			});
 		});
-
+/*
 		it("VTXXX-00020-Play Video(mp4 file)", function() {
 			runs(function() {
 				var platform = Rho.System.platform;
@@ -804,11 +877,14 @@ describe("MediaPlayer", function() {
 			{
 				expect(testResult).toEqual(true);
 			});
-		});
+		});*/
 
     if (isAnyButApplePlatform()) {
 
 		it("VTXXX-00021-Play Video(wma file)", function() {
+            displayTestDescription("VTXXX-00021 | Play Video(wma file)");
+            displayTestInstruction("");
+            displayTestExpectation("You should see video");
 			runs(function() {
 				var platform = Rho.System.platform;
 				var Videolocation = Rho.RhoFile.join(videoMediaPath , "xxx.wma");
@@ -844,6 +920,9 @@ describe("MediaPlayer", function() {
 		});
     }
 		xit("VTXXX-00022-Play Video(null)", function() {
+            displayTestDescription("VTXXX-00022 | Play Video(null)");
+            displayTestInstruction("");
+            displayTestExpectation("You should not see video, app should not crashes");
 			runs(function() {
 								
 				Rho.Mediaplayer.startvideo(null);
@@ -864,6 +943,9 @@ describe("MediaPlayer", function() {
 		});
 
 		xit("VTXXX-00023-Play Video(invalid Local file)", function() {
+            displayTestDescription("VTXXX-00023 | Play Video(invalid Local file)");
+            displayTestInstruction("");
+            displayTestExpectation("You should not see video, app should not crashes");
 			runs(function() {
 				var Videolocation =Rho.RhoFile.join( videoMediaPath ,"xxx.wav");
 							
@@ -886,6 +968,9 @@ describe("MediaPlayer", function() {
 
 
 		xit("VTXXX-00024-Play Video(invalid remote URL)", function() {
+            displayTestDescription("VTXXX-00024 | Play Video(invalid remote URL)");
+            displayTestInstruction("");
+            displayTestExpectation("You should not see video, app should not crashes");
 			runs(function() {
 				var Videolocation = "http://www.myinvalidURL.com/xxx.wav";
 							
@@ -909,6 +994,9 @@ describe("MediaPlayer", function() {
     if (isAnyButApplePlatform()) {
 
 		it("VTXXX-00025-Play Video(valid file local) and Stop", function() {
+            displayTestDescription("VTXXX-00025-Play Video(valid file local) and Stop");
+            displayTestInstruction("");
+            displayTestExpectation("Playing should stop after 3 seconds");
 			runs(function() {
 				var Videolocation = Rho.RhoFile.join(videoMediaPath,"test.mp4");
 							
@@ -946,6 +1034,9 @@ describe("MediaPlayer", function() {
     if (isAnyButApplePlatform()) {
 
 		it("VTXXX-00026-Play Video(valid file remote http) and Stop", function() {
+            displayTestDescription("VTXXX-00026 | Play Video(valid file remote http) and Stop");
+            displayTestInstruction("");
+            displayTestExpectation("Playing should stop after 3 seconds");
 			runs(function() {
 				//var Videolocation = "\\Program Files\\manual_common_spec\\rho\\apps\\app\\Mediaplayer\\MediaFiles\\Video\\super_android_tune.mp3";
 				var srvHttpMediaDownload =Rho.RhoFile.join( srvURL,"AMR-NB.mp4");
@@ -984,6 +1075,9 @@ describe("MediaPlayer", function() {
     if (isAnyButApplePlatform()) {
 
 		it("VTXXX-00027-Play Video(valid file remote https) and Stop", function() {
+            displayTestDescription("VTXXX-00027 | Play Video(valid file remote https) and Stop");
+            displayTestInstruction("");
+            displayTestExpectation("Playing should stop after 3 seconds")
 			runs(function() {
 				//var Videolocation = "\\Program Files\\manual_common_spec\\rho\\apps\\app\\Mediaplayer\\MediaFiles\\Video\\super_android_tune.mp3";
 				var srvHttpsMediaDownload = Rho.RhoFile.join(httpsSrvURL ,"AMR-NB.mp4");
@@ -1019,6 +1113,9 @@ describe("MediaPlayer", function() {
 		});		
    }
 		xit("VTXXX-00028-Play Video(Call Stop without Start)", function() {
+            displayTestDescription("VTXXX-00028-Play Video(Call Stop without Start)");
+            displayTestInstruction("");
+            displayTestExpectation("App should not crashes")
 			runs(function() {
 						
 				Rho.Mediaplayer.stopvideo();
@@ -1046,6 +1143,9 @@ describe("MediaPlayer", function() {
 	if ((platform != "WINDOWS") && (isAnyButApplePlatform()))
 	{
 		it("VTXXX-00029-should be able to retrieve all ringtones", function() {
+            displayTestDescription("VTXXX-00029 | should be able to retrieve all ringtones");
+            displayTestInstruction("");
+            displayTestExpectation("You should ringtones list") ;
 			runs(function()
 			{
 				Rho.Mediaplayer.getAllRingtones(ringtoneCallback);
@@ -1064,6 +1164,9 @@ describe("MediaPlayer", function() {
 		});
 
 		it("VTXXX-00030-Play Ringtone(valid file)", function() {
+            displayTestDescription("VTXXX-00030 | Play Ringtone(valid file)");
+            displayTestInstruction("");
+            displayTestExpectation("You should hear a ringtone") ;
 			runs(function()
 			{
 				var chosen = ringtone_names[Math.floor((Math.random()*ringtone_names.length))];
@@ -1089,6 +1192,9 @@ describe("MediaPlayer", function() {
 		});	
 
 		xit("VTXXX-00031-Play Ringtone(null)", function() {
+            displayTestDescription("VTXXX-00031 | Play Ringtone(null)");
+            displayTestInstruction("");
+            displayTestExpectation("App should not crashes") ;
 			runs(function()
 			{
 				//var chosen = ringtone_names[Math.floor((Math.random()*ringtone_names.length))];
@@ -1111,6 +1217,9 @@ describe("MediaPlayer", function() {
 		});	
 
 		xit("VTXXX-00032-Play Ringtone(invalid file local)", function() {
+            displayTestDescription("VTXXX-00032 | Play Ringtone(invalid file local)");
+            displayTestInstruction("");
+            displayTestExpectation("App should not crashes") ;
 			runs(function()
 			{
 				//var chosen = ringtone_names[Math.floor((Math.random()*ringtone_names.length))];
@@ -1133,6 +1242,9 @@ describe("MediaPlayer", function() {
 		});
 
 		xit("VTXXX-00033-Play Ringtone(valid file local) and Stop", function() {
+            displayTestDescription("VTXXX-00033 | Play Ringtone(valid file local) and Stop");
+            displayTestInstruction("");
+            displayTestExpectation("Playing ringtone should stop after 3 seconds") ;
 			runs(function()
 			{
 				var chosen = ringtone_names[Math.floor((Math.random()*ringtone_names.length))];
@@ -1170,6 +1282,9 @@ describe("MediaPlayer", function() {
 		
 
 		it("VTXXX-00034-Play ringtone(Call Stop without Start)", function() {
+            displayTestDescription("VTXXX-00034 | Play ringtone(Call Stop without Start)");
+            displayTestInstruction("");
+            displayTestExpectation("App should not crashes") ;
 			runs(function() {
 						
 				Rho.Mediaplayer.stopRingTone();

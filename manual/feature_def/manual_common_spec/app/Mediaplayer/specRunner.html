@@ -22,15 +22,15 @@
   <style>
   #detailsdiv {
     background: url("/public/images/grid2.gif") repeat scroll 0 0 transparent;
-    border: 1px solid #DCDCDC;
+    #border: 1px solid #DCDCDC;
     color: #8B0000;
     display: block;
     font-weight: bold;
-    left: 80px;
+   /* left: 80px;*/
     padding: 10px;
-    position: fixed;
+    /*position: fixed;*/
     text-align: center;
-    top: 100px;
+    /*top: 100px;*/
     width: 180px;
   }
   </style>
@@ -76,24 +76,31 @@
 
 </head>
 <body>
-<br/><br/>
+<h4>Mediaplayer manual tests</h4>
+<div id="description"></div>
+<div id="instruction"></div>
+<div id="expectation"></div>
+
 <div id="detailsdiv"></div>
 <br/><br/>
 <div id="test">
-<ul id="myList">
-</ul>
-<ul id="myList2">
-</ul>
+    <ul id="myList">
+    </ul>
+    <ul id="myList2">
+    </ul>
 </div>
 <br/>
-<span id='result'>
+<div id='result'>
 <table>
     <tr>
         <td><button onclick="captureResult(true)">Pass</button></td>
         <td><button onclick="captureResult(false)">Fail</button></td>
     </tr>
 </table>
-</span>
+</div>
 
 </body>
 </html>
+
+
+
