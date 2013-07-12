@@ -1,25 +1,30 @@
 describe("Signature Manual Test", function () {
-
-    var timeoutFlag = false;
     var readFlag = false;
     var takecallbackfired = false;
     var takecallbackfired1 = false;
     var decodedata = '';
+    
+    var twentySecTimeout;
+    var nineSecTimeout;
+    var fiveSecTimeout;
 
     function delayForTwentySeconds() {
-        setTimeout(function () {
+    	readFlag = false;
+        twentySecTimeout = setTimeout(function () {
             readFlag = true;
         }, 20000);
     }
 
     function delayForNineSeconds() {
-        setTimeout(function () {
+    	readFlag = false;
+    	nineSecTimeout = setTimeout(function () {
             readFlag = true;
         }, 9000);
     }
 
     function delayForFiveSeconds() {
-        setTimeout(function () {
+    	readFlag = false;
+    	fiveSecTimeout = setTimeout(function () {
             readFlag = true;
         }, 5000);
     }
@@ -37,6 +42,7 @@ describe("Signature Manual Test", function () {
     }
 
     var callbackVector = function (data) {
+    	
         //vectorcallbackdata(JSON.stringify(data));
         vectorcallbackdata(data);
         takecallbackfired1 = true;
@@ -45,7 +51,6 @@ describe("Signature Manual Test", function () {
     describe("Signature Test ", function () {
 
         beforeEach(function () {
-            timeoutFlag = false;
             readFlag = false;
             nulldata = '';
             document.getElementById("actResult").innerHTML = "init";
@@ -59,6 +64,22 @@ describe("Signature Manual Test", function () {
 
         afterEach(function () {
             //Rho.Signature.clearAllProperties();
+        	if(twentySecTimeout)
+        	{
+        		window.clearTimeout(twentySecTimeout);
+        		twentySecTimeout = null;
+        	}
+        	if(nineSecTimeout)
+        	{
+        		window.clearTimeout(nineSecTimeout);
+        		nineSecTimeout = null;
+        	}
+        	if(fiveSecTimeout)
+        	{
+        		window.clearTimeout(fiveSecTimeout);
+        		fiveSecTimeout = null;
+        	}
+        	Rho.Signature.clear();
         });
 
         it("VT299-001 | Call takeFullScreen with callback as function and returned status OK |", function () {
@@ -81,7 +102,7 @@ describe("Signature Manual Test", function () {
                 });
 
                 waitsFor(function () {
-                    var stat = timeoutFlag || takecallbackfired;
+                    var stat = readFlag || takecallbackfired;
                     return stat;
                 }, 'wait to callback to fire or timeout', 10000);
             });
@@ -117,7 +138,7 @@ describe("Signature Manual Test", function () {
                 });
 
                 waitsFor(function () {
-                    var stat = timeoutFlag || takecallbackfired;
+                    var stat = readFlag || takecallbackfired;
                     return stat;
                 }, 'wait to callback to fire or timeout', 10000);
             });
@@ -156,7 +177,7 @@ describe("Signature Manual Test", function () {
                 });
 
                 waitsFor(function () {
-                    var stat = timeoutFlag || takecallbackfired;
+                    var stat = readFlag || takecallbackfired;
                     return stat;
                 }, 'wait to callback to fire or timeout', 10000);
             });
@@ -194,7 +215,7 @@ describe("Signature Manual Test", function () {
                 });
 
                 waitsFor(function () {
-                    var stat = timeoutFlag || takecallbackfired;
+                    var stat = readFlag || takecallbackfired;
                     return stat;
                 }, 'wait to callback to fire or timeout', 21000);
             });
@@ -230,7 +251,7 @@ describe("Signature Manual Test", function () {
                 });
 
                 waitsFor(function () {
-                    var stat = timeoutFlag || takecallbackfired;
+                    var stat = readFlag || takecallbackfired;
                     return stat;
                 }, 'wait to callback to fire or timeout', 21000);
             });
@@ -255,31 +276,31 @@ describe("Signature Manual Test", function () {
                 delayForNineSeconds();
             });
 
+            waitsFor(function () {
+                return readFlag;
+            }, 'wait to callback to fire or timeout', 10000);
+
             runs(function () {
-                waitsFor(function () {
-                    return readFlag;
-                }, 'wait to callback to fire or timeout', 10000);
-
-                runs(function () {
-                    Rho.Signature.show();
-                    delayForFiveSeconds();
-                });
-
-                waitsFor(function () {
-                    //var stat = timeoutFlag || takecallbackfired;
-                    return timeoutFlag;
-                }, 'wait to callback to fire or timeout', 10000);
+                Rho.Signature.show(null);
+                delayForFiveSeconds();
             });
+
+            waitsFor(function () {
+                //var stat = readFlag || takecallbackfired;
+                return readFlag;
+            }, 'wait to callback to fire or timeout', 10000);
 
             runs(function () {
                 Rho.Signature.capture(callbacktake);
                 Rho.Signature.hide();
-                waitsFor(function () {
-                    return document.getElementById("actResult").innerHTML != "init";
-                }, "Timed out waiting for tester to respond", 300000);
-                runs(function () {
-                    expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-                });
+            });
+            
+            waitsFor(function () {
+                return document.getElementById("actResult").innerHTML != "init";
+            }, "Timed out waiting for tester to respond", 300000);
+            
+            runs(function () {
+                expect("pass").toEqual(document.getElementById("actResult").innerHTML);
             });
         });
 
@@ -298,13 +319,13 @@ describe("Signature Manual Test", function () {
                 }, 'wait to callback to fire or timeout', 10000);
 
                 runs(function () {
-                    Rho.Signature.show();
+                    Rho.Signature.show(null);
                     delayForFiveSeconds();
                 });
 
                 waitsFor(function () {
-                    //var stat = timeoutFlag || takecallbackfired;
-                    return timeoutFlag;
+                    //var stat = readFlag || takecallbackfired;
+                    return readFlag;
                 }, 'wait to callback to fire or timeout', 10000);
             });
 
@@ -337,13 +358,13 @@ describe("Signature Manual Test", function () {
                 }, 'wait to callback to fire or timeout', 10000);
 
                 runs(function () {
-                    Rho.Signature.show();
+                    Rho.Signature.show(null);
                     delayForFiveSeconds();
                 });
 
                 waitsFor(function () {
-                    //var stat = timeoutFlag || takecallbackfired;
-                    return timeoutFlag;
+                    //var stat = readFlag || takecallbackfired;
+                    return readFlag;
                 }, 'wait to callback to fire or timeout', 10000);
             });
 
@@ -382,7 +403,7 @@ describe("Signature Manual Test", function () {
                 });
 
                 waitsFor(function () {
-                    var stat = timeoutFlag || takecallbackfired;
+                    var stat = readFlag || takecallbackfired;
                     return stat;
                 }, 'wait to callback to fire or timeout', 10000);
             });
@@ -418,7 +439,7 @@ describe("Signature Manual Test", function () {
                 });
 
                 waitsFor(function () {
-                    var stat = timeoutFlag || takecallbackfired;
+                    var stat = readFlag || takecallbackfired;
                     return stat;
                 }, 'wait to callback to fire or timeout', 10000);
             });
@@ -457,7 +478,7 @@ describe("Signature Manual Test", function () {
                 });
 
                 waitsFor(function () {
-                    var stat = timeoutFlag || takecallbackfired;
+                    var stat = readFlag || takecallbackfired;
                     return stat;
                 }, 'wait to callback to fire or timeout', 10000);
             });
@@ -496,7 +517,7 @@ describe("Signature Manual Test", function () {
                 });
 
                 waitsFor(function () {
-                    var stat = timeoutFlag || takecallbackfired;
+                    var stat = readFlag || takecallbackfired;
                     return stat;
                 }, 'wait to callback to fire or timeout', 10000);
             });
@@ -535,7 +556,7 @@ describe("Signature Manual Test", function () {
                 });
 
                 waitsFor(function () {
-                    var stat = timeoutFlag || takecallbackfired;
+                    var stat = readFlag || takecallbackfired;
                     return stat;
                 }, 'wait to callback to fire or timeout', 10000);
             });
@@ -572,7 +593,7 @@ describe("Signature Manual Test", function () {
                     });
 
                     waitsFor(function () {
-                        var stat = timeoutFlag || takecallbackfired;
+                        var stat = readFlag || takecallbackfired;
                         return stat;
                     }, 'wait to callback to fire or timeout', 10000);
                 });
@@ -613,7 +634,7 @@ describe("Signature Manual Test", function () {
                     });
 
                     waitsFor(function () {
-                        var stat = timeoutFlag || takecallbackfired;
+                        var stat = readFlag || takecallbackfired;
                         return stat;
                     }, 'wait to callback to fire or timeout', 10000);
                 });
@@ -649,8 +670,8 @@ describe("Signature Manual Test", function () {
                 });
 
                 waitsFor(function () {
-                    //var stat = timeoutFlag || takecallbackfired;
-                    return timeoutFlag;
+                    //var stat = readFlag || takecallbackfired;
+                    return readFlag;
                 }, 'wait to callback to fire or timeout', 10000);
             });
 
@@ -689,8 +710,8 @@ describe("Signature Manual Test", function () {
                 });
 
                 waitsFor(function () {
-                    //var stat = timeoutFlag || takecallbackfired;
-                    return timeoutFlag;
+                    //var stat = readFlag || takecallbackfired;
+                    return readFlag;
                 }, 'wait to callback to fire or timeout', 10000);
             });
 
@@ -726,8 +747,8 @@ describe("Signature Manual Test", function () {
                 });
 
                 waitsFor(function () {
-                    //var stat = timeoutFlag || takecallbackfired;
-                    return timeoutFlag;
+                    //var stat = readFlag || takecallbackfired;
+                    return readFlag;
                 }, 'wait to callback to fire or timeout', 10000);
             });
 
@@ -752,34 +773,34 @@ describe("Signature Manual Test", function () {
                     delayForNineSeconds();
                 });
 
+                waitsFor(function () {
+                    return readFlag;
+                }, 'wait to callback to fire or timeout', 10000);
+
                 runs(function () {
-                    waitsFor(function () {
-                        return readFlag;
-                    }, 'wait to callback to fire or timeout', 10000);
-
-                    runs(function () {
-                        Rho.Signature.bgColor = '#C0C0C0';
-                        Rho.Signature.penColor = '#FF800080';
-                        Rho.Signature.penWidth = 2;
-                        Rho.Signature.show({left: 10, top: 50, width: 180, height: 120, border: false, outputFormat: 'dataUri'});
-                        delayForFiveSeconds();
-                    });
-
-                    waitsFor(function () {
-                        //var stat = timeoutFlag || takecallbackfired;
-                        return timeoutFlag;
-                    }, 'wait to callback to fire or timeout', 10000);
+                    Rho.Signature.bgColor = '#C0C0C0';
+                    Rho.Signature.penColor = '#FF800080';
+                    Rho.Signature.penWidth = 2;
+                    Rho.Signature.show({left: 10, top: 50, width: 180, height: 120, border: false, outputFormat: 'dataUri'});
+                    delayForFiveSeconds();
                 });
+
+                waitsFor(function () {
+                    //var stat = readFlag || takecallbackfired;
+                    return readFlag;
+                }, 'wait to callback to fire or timeout', 10000);
 
                 runs(function () {
                     Rho.Signature.capture(callbackUri);
                     Rho.Signature.hide();
-                    waitsFor(function () {
-                        return document.getElementById("actResult").innerHTML != "init";
-                    }, "Timed out waiting for tester to respond", 300000);
-                    runs(function () {
-                        expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-                    });
+                });
+                
+                waitsFor(function () {
+                    return document.getElementById("actResult").innerHTML != "init";
+                }, "Timed out waiting for tester to respond", 300000);
+                
+                runs(function () {
+                    expect("pass").toEqual(document.getElementById("actResult").innerHTML);
                 });
             });
         }
@@ -810,14 +831,14 @@ describe("Signature Manual Test", function () {
                         Rho.Signature.width = 200;
                         Rho.Signature.outputFormat = 'dataUri';
                         Rho.Signature.border = true;
-                        Rho.Signature.show();
+                        Rho.Signature.show(null);
 
                         delayForFiveSeconds();
                     });
 
                     waitsFor(function () {
-                        //var stat = timeoutFlag || takecallbackfired;
-                        return timeoutFlag;
+                        //var stat = readFlag || takecallbackfired;
+                        return readFlag;
                     }, 'wait to callback to fire or timeout', 10000);
                 });
 
@@ -866,7 +887,7 @@ describe("Signature Manual Test", function () {
                 });
 
                 waitsFor(function () {
-                    var stat = timeoutFlag || takecallbackfired;
+                    var stat = readFlag || takecallbackfired;
                     return stat;
                 }, 'wait to callback to fire or timeout', 10000);
             });
@@ -910,14 +931,14 @@ describe("Signature Manual Test", function () {
                         Rho.Signature.border = false;
                         Rho.Signature.fileName = 'TC25_Sig';
                         Rho.Signature.compressionFormat = CONST_JPG;
-                        Rho.Signature.show();
                         Rho.Signature.setVectorCallback(callbackVector);
+                        Rho.Signature.show(null);
 
                         delayForFiveSeconds();
                     });
 
                     waitsFor(function () {
-                        var stat = timeoutFlag || takecallbackfired || takecallbackfired1;
+                        var stat = readFlag || takecallbackfired || takecallbackfired1;
                         return stat;
                     }, 'wait to callback to fire or timeout', 6000);
                 });
@@ -959,16 +980,16 @@ describe("Signature Manual Test", function () {
                         Rho.Signature.border = false;
                         Rho.Signature.fileName = 'TC24_Sig';
                         Rho.Signature.compressionFormat = CONST_JPG;
-                        Rho.Signature.show();
                         Rho.Signature.setVectorCallback(function (data) {
                             vectorcallbackdata(data);
                         });
+                        Rho.Signature.show(null);
 
                         delayForFiveSeconds();
                     });
 
                     waitsFor(function () {
-                        var stat = timeoutFlag || takecallbackfired;
+                        var stat = readFlag || takecallbackfired;
                         return stat;
                     }, 'wait to callback to fire or timeout', 6000);
                 });
@@ -1013,7 +1034,7 @@ describe("Signature Manual Test", function () {
                     });
 
                     waitsFor(function () {
-                        var stat = timeoutFlag || takecallbackfired;
+                        var stat = readFlag || takecallbackfired;
                         return stat;
                     }, 'wait to callback to fire or timeout', 6000);
                 });
@@ -1038,43 +1059,45 @@ describe("Signature Manual Test", function () {
                     delayForNineSeconds();
                 });
 
+            	waitsFor(function () {
+                    return readFlag;
+                }, 'wait to callback to fire or timeout', 10000);
+
                 runs(function () {
-                    waitsFor(function () {
-                        return readFlag;
-                    }, 'wait to callback to fire or timeout', 10000);
+                    Rho.Signature.bgColor = '#00FF00';
+                    Rho.Signature.penColor = '#FF800000';
+                    Rho.Signature.penWidth = 5;
+                    Rho.Signature.outputFormat = 'dataUri';
+                    Rho.Signature.border = false;
+                    Rho.Signature.fileName = 'TC27_Sig';
+                    Rho.Signature.compressionFormat = CONST_JPG;
+                    Rho.Signature.setVectorCallback(callbackVector);
+                    Rho.Signature.show(null);
 
-                    runs(function () {
-                        Rho.Signature.bgColor = '#00FF00';
-                        Rho.Signature.penColor = '#FF800000';
-                        Rho.Signature.penWidth = 5;
-                        Rho.Signature.outputFormat = 'dataUri';
-                        Rho.Signature.border = false;
-                        Rho.Signature.fileName = 'TC27_Sig';
-                        Rho.Signature.compressionFormat = CONST_JPG;
-                        Rho.Signature.show();
-                        Rho.Signature.setVectorCallback(callbackVector);
-
-                        delayForFiveSeconds();
-                    });
-
-                    waitsFor(function () {
-                        var stat = timeoutFlag || takecallbackfired;
-                        return stat;
-                    }, 'wait to callback to fire or timeout', 6000);
+                    delayForFiveSeconds();
                 });
 
-                runs(function () {
-                    Rho.capture(callbackUri);
+                waitsFor(function () {
+                    var stat = readFlag || takecallbackfired;
+                    return stat;
+                }, 'wait to callback to fire or timeout', 6000);
+
+                runs(function ()
+                {
+                    Rho.Signature.capture(callbackUri);
                     Rho.Signature.hide();
-                    waitsFor(function () {
-                        return document.getElementById("actResult").innerHTML != "init";
-                    }, "Timed out waiting for tester to respond", 300000);
-                    runs(function () {
-                        expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-                    });
+                });
+                
+                waitsFor(function ()
+                {
+                    return document.getElementById("actResult").innerHTML != "init";
+                }, "Timed out waiting for tester to respond", 300000);
+                
+                runs(function ()
+                {
+                    expect("pass").toEqual(document.getElementById("actResult").innerHTML);
                 });
             });
         }
-
     });
 });	

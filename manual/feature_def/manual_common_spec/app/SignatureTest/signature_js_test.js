@@ -32,7 +32,7 @@ function takecallbackdata(data)
 function URIcallbackdata(data)
 {
 	document.getElementById("clbkStatus").innerHTML = data.status;
-	capturedImage.src = data.imageUri;
+	document.getElementById("capturedImage").src = data.imageUri;
 }
 
 function vectorcallbackdata(data)
