@@ -32,10 +32,12 @@ describe("Battery Manual FD  Tests", function () {
         /* ... Set up your object ... */
         testResult = '';
         captured = false;
+        displayResult("", "");
     });
 
     afterEach(function () {
         /* ... Tear it down ... */
+    	Rho.Battery.stopBatteryStatus();
     });
 
 if (isAnyButApplePlatform())
