@@ -1050,3 +1050,619 @@ describe("<model's fixed_schema>", function() {
 
 //         })
 });
+
+xdescribe("OrmModel(ST) Test Starts Here", function() {
+
+  var db = null;
+  var Model;
+  var fixedModel;
+
+  var reset = function(){
+    db = Rho.ORMHelper.dbConnection("local");
+    var partitions = Rho.ORMHelper.getDbPartitions();
+
+    $.each(partitions, function(index, db2) {
+      db2.$execute_sql("DELETE FROM SOURCES");
+      db2.$execute_sql("DELETE FROM OBJECT_VALUES");
+      db2.$execute_sql("DELETE FROM CHANGED_VALUES");
+      if(db2.$is_table_exist("Product")){
+        db2.$execute_sql("DROP TABLE Product");
+      }
+    });
+    Rho.ORM.clear();
+  };
+
+  var defaultDefModelP = function(model){
+      model.modelName('Product'),
+      model.property("id");
+      model.set("partition","local");
+  };
+
+  var defaultDefModelF = function(model){
+      model.modelName('ProductFixed'),
+      model.enable("fixedSchema");
+      model.property("key");
+      model.property("value","string");
+      model.set("partition","local");
+  };
+
+  var createModel = function (defModel){
+
+    Model = Rho.ORM.addModel(defModel);
+  }
+
+  var createFixedModel = function(defModel){
+    fixedModel = Rho.ORM.addModel(defModel);
+  }
+
+  describe("OrmModel(PropertyBag) Test Starts Here", function() {
+    beforeEach(function(){
+        reset();
+        createModel(defaultDefModelP);
+    });
+
+    afterEach(function(){
+      
+    });
+
+    it('VT302-0202 | Call create passing a empty hash({})',function(){
+      productModel = Rho.ORM.getModel('Product');
+      var before = productModel.count();
+      productModel.create({});
+      var after = productModel.count();
+      expect(after).toBe(before);
+    });
+
+    it('VT302-0209 | Call deleteAll with Model Object passing undefined,undefined in arguments',function(){
+
+        Model.create({name:"testfixed1"});
+        Model.create({name:"testfixed2"});
+        Model.create({name:"testfixed3",brand:4});
+        Model.create({name:"testfixed4",brand:2});
+        var total = Model.count();
+        expect(total).toEqual(4);
+
+        Model.deleteAll(undefined,undefined);
+        total = Model.count();
+        expect(total).toEqual(0);
+
+    });
+
+    it('VT302-0216 | Call find without passing any argument to it',function(){
+
+        for (var i=0;i<=100;i++){
+            var nameValue = "testfixed"+i
+            Model.create({name: nameValue});
+        }
+
+        var obj = Model.find();
+
+        expect(obj).toEqual([]);
+
+    });
+
+    it('VT302-0218 | finds all objects with one condition for e.g Model.find("all", {conditions: {"key": "value2"}})',function(){
+
+        itemTypes = ['Electronics','Softwares','Cameras','Books']
+        
+        var productModel = function (model){
+
+            model.modelName('ProductTest');
+            model.property("id","integer");
+            model.property("name","string");
+            model.property("type","string");
+        }
+
+        createModel(productModel);
+
+        for (var i=0;i<=2;i++){
+            var nameValue = "Item "+i;
+            var itemType = itemTypes[Math.floor(Math.random()*itemTypes.length)];
+            Model.create({id: i, name: nameValue, type: itemType});
+        }
+
+        var obj = Model.find('all',{conditions: {type: 'Cameras'}});
+
+        expect(obj).toEqual();
+
+    });
+
+    it("finds all objects with conditions for e.g Model.find('all', {conditions: {'key1': 'value2', 'key2': 'value3'}}) ",function(){
+
+        itemTypes = ['Electronics','Softwares','Cameras','Books']
+        
+        var productModel = function (model){
+
+            model.modelName('ProductTest');
+            model.property("id","integer");
+            model.property("name","string");
+            model.property("type","string");
+        }
+
+        createModel(productModel);
+
+        for (var i=0;i<=100;i++){
+            var nameValue = "Item "+i;
+            var itemType = itemTypes[Math.floor(Math.random()*itemTypes.length)];
+            Model.create({id: i, name: nameValue, type: itemType});
+        }
+
+        var obj = Model.find('all',{conditions: {type: 'Cameras',type: 'Softwares'}});
+
+        expect(obj).toEqual();
+
+    });
+
+    it("VT302-0219 | Call find with all and with order any column name of string type. For e.g find('all',{conditions:{},order:'name'})",function() {
+        
+        var productModel = function (model){
+
+            model.modelName('ProductTest');
+            model.property("id","integer");
+            model.property("name","string");
+            model.property("type","string");
+        }
+
+        createModel(productModel);
+
+        Model.create({"name":"Mobio"});
+        Model.create({"name":"Zoolo"});
+        Model.create({"name":"Foolo"});
+
+        var res = Model.find("all",{conditions:{},order:"name"});
+        
+        expect(res[0].get("name")).toEqual("Foolo");
+        expect(res[1].get("name")).toEqual("Mobio");
+        expect(res[2].get("name")).toEqual("Zoolo");
+    });
+
+    it("VT302-0264 | Call find with all and with order any column name of integer type. For e.g find('all',{conditions:{},order:'name'})",function() {
+        
+        var productModel = function (model){
+
+            model.modelName('ProductTest');
+            model.property("id","integer");
+            model.property("name","string");
+            model.property("type","string");
+        }
+
+        createModel(productModel);
+
+        Model.create({"id":656});
+        Model.create({"id":2});
+        Model.create({"id":65});
+        var res = Model.find("all",{conditions:{},order:"id"});
+        expect(res[0].get("id")).toEqual(2);
+        expect(res[1].get("id")).toEqual(65);
+        expect(res[2].get("id")).toEqual(656);
+    });
+
+    it("VT302-0222 | Call find with all and order by any column_name and orderdir as empty string",function() {
+        Model.create({"name":"Mobio"});
+        Model.create({"name":"Zoolo"});
+        Model.create({"name":"Foolo"});
+        var res = Model.find("all",{conditions:{},order:"name",orderdir:""});
+        expect(res[2].get("name")).toEqual("Zoolo");
+        expect(res[1].get("name")).toEqual("Mobio");
+        expect(res[0].get("name")).toEqual("Foolo");
+    });
+
+    it("VT302-0223 | Call find with all and order as empty string and orderdir as DESC",function() {
+        Model.create({"name":"Mobio"});
+        Model.create({"name":"Zoolo"});
+        Model.create({"name":"Foolo"});
+        var res = Model.find("all",{conditions:{},order:"",orderdir:"DESC"});
+        expect(res[2].get("name")).toEqual("Zoolo");
+        expect(res[1].get("name")).toEqual("Mobio");
+        expect(res[0].get("name")).toEqual("Foolo");
+    });
+
+    it("VT302-0224 | Call find with all and select two columns",function() {
+        Model.deleteAll();
+        var res;
+        expect(Model.count()).toEqual(0);
+
+        Model.create({"industry":"Technology","name":"Moto","Address":"USA"});
+        Model.create({"industry":"Technology","name":"Aeroprise","Address":"Bangalore"});
+        Model.create({"industry":"Accounting","name":"PWC","Address":"Russia"});
+        expect(Model.count()).toEqual(3);
+        res = Model.find("all",
+                    {
+                      conditions: {"industry":"Technology"},
+                      select: ['name','Address']
+                    });
+        expect(res[0].get("name")).toEqual("Moto");
+        expect(res[0].get("Address")).toEqual("USA");
+        expect(res[0].get("industry")).toBeUndefined();
+        expect(res[1].get("name")).toEqual("Aeroprise");
+        expect(res[1].get("Address")).toEqual("Bangalore");
+        expect(res[1].get("industry")).toBeUndefined();
+    });
+
+    it("VT302-0225 | Call find with all and select two columns",function() {
+        Model.deleteAll();
+        var res;
+        expect(Model.count()).toEqual(0);
+
+        Model.create({"industry":"Technology","name":"Moto","Address":"USA"});
+        Model.create({"industry":"Technology","name":"Aeroprise","Address":"Bangalore"});
+        Model.create({"industry":"Accounting","name":"PWC","Address":"Russia"});
+        expect(Model.count()).toEqual(3);
+        res = Model.find("all",
+                    {
+                      conditions: {"industry":"Technology"},
+                      select: []
+                    });
+        expect(res).toEqual([]);
+    });
+
+    it("VT302-0226 | Call find with all and select empty String",function() {
+        Model.deleteAll();
+        var res;
+        expect(Model.count()).toEqual(0);
+
+        Model.create({"industry":"Technology","name":"Moto","Address":"USA"});
+        Model.create({"industry":"Technology","name":"Aeroprise","Address":"Bangalore"});
+        Model.create({"industry":"Accounting","name":"PWC","Address":"Russia"});
+        expect(Model.count()).toEqual(3);
+        res = Model.find("all",
+                    {
+                      conditions: {},
+                      order: "",
+                      orderdir: "",
+                      select: []
+                    });
+        expect(res.count()).toEqual(3);
+    });
+
+it('VT302-0228 | finds first objects with one condition for e.g Model.find("all", {conditions: {"key": "value2"}})',function(){
+
+        itemTypes = ['Electronics','Softwares','Cameras','Books']
+        
+        var productModel = function (model){
+
+            model.modelName('ProductTest');
+            model.property("id","integer");
+            model.property("name","string");
+            model.property("type","string");
+        }
+
+        createModel(productModel);
+
+        for (var i=0;i<=100;i++){
+            var nameValue = "Item "+i;
+            var itemType = itemTypes[Math.floor(Math.random()*itemTypes.length)];
+            Model.create({id: i, name: nameValue, type: itemType});
+        }
+
+        var obj = Model.find('first',{conditions: {type: 'Cameras'}});
+
+        expect(obj).toEqual();
+
+    });
+
+    it("finds first objects with conditions for e.g Model.find('all', {conditions: {'key1': 'value2', 'key2': 'value3'}}) ",function(){
+
+        itemTypes = ['Electronics','Softwares','Cameras','Books']
+        
+        var productModel = function (model){
+
+            model.modelName('ProductTest');
+            model.property("id","integer");
+            model.property("name","string");
+            model.property("type","string");
+        }
+
+        createModel(productModel);
+
+        for (var i=0;i<=100;i++){
+            var nameValue = "Item "+i;
+            var itemType = itemTypes[Math.floor(Math.random()*itemTypes.length)];
+            Model.create({id: i, name: nameValue, type: itemType});
+        }
+
+        var obj = Model.find('first',{conditions: {type: 'Cameras',type: 'Softwares'}});
+
+        expect(obj).toEqual();
+
+    });
+
+    it("VT302-0229 | Call find with first and with order any column name of string type. For e.g find('all',{conditions:{},order:'name'})",function() {
+        
+        var productModel = function (model){
+
+            model.modelName('ProductTest');
+            model.property("id","integer");
+            model.property("name","string");
+            model.property("type","string");
+        }
+
+        createModel(productModel);
+
+        Model.create({"name":"Mobio"});
+        Model.create({"name":"Zoolo"});
+        Model.create({"name":"Foolo"});
+
+        var res = Model.find("first",{conditions:{},order:"name"});
+        
+        expect(res.count()).toEqual(1);
+        expect(res.get("name")).toEqual("Foolo");
+    });
+
+    it("VT302-0265 | Call find with first and with order any column name of integer type. For e.g find('all',{conditions:{},order:'name'})",function() {
+        
+        var productModel = function (model){
+
+            model.modelName('ProductTest');
+            model.property("id","integer");
+            model.property("name","string");
+            model.property("type","string");
+        }
+
+        createModel(productModel);
+
+        Model.create({"id":656});
+        Model.create({"id":2});
+        Model.create({"id":65});
+        var res = Model.find("first",{conditions:{},order:"id"});
+        expect(res.get("id")).toEqual(2);
+        expect(res.count()).toEqual(1);
+    });
+
+    it("VT302-0266 | Call find with first and order by any column_name and orderdir as empty string",function() {
+        Model.create({"name":"Mobio"});
+        Model.create({"name":"Zoolo"});
+        Model.create({"name":"Foolo"});
+        var res = Model.find("first",{conditions:{},order:"name",orderdir:""});
+
+        expect(res.count()).toEqual(1);
+        expect(res.get("name")).toEqual("Foolo");
+    });
+
+    it("VT302-0267 | Call find with first and order as empty string and orderdir as DESC",function() {
+        Model.create({"name":"Mobio"});
+        Model.create({"name":"Zoolo"});
+        Model.create({"name":"Foolo"});
+        var res = Model.find("first",{conditions:{},order:"",orderdir:"DESC"});
+        
+        expect(res.count()).toEqual(1);
+        expect(res[0].get("name")).toEqual("Foolo");
+    });
+
+    it("VT302-0268 | Call find with first and select two columns",function() {
+        Model.deleteAll();
+        var res;
+        expect(Model.count()).toEqual(0);
+
+        Model.create({"industry":"Technology","name":"Moto","Address":"USA"});
+        Model.create({"industry":"Technology","name":"Aeroprise","Address":"Bangalore"});
+        Model.create({"industry":"Accounting","name":"PWC","Address":"Russia"});
+        expect(Model.count()).toEqual(3);
+        res = Model.find("first",
+                    {
+                      conditions: {"industry":"Technology"},
+                      select: ['name','Address']
+                    });
+
+        expect(res.count()).toEqual(1);
+        expect(res.get("name")).toEqual("Moto");
+        expect(res.get("Address")).toEqual("USA");
+        expect(res.get("industry")).toBeUndefined();
+
+    });
+
+    it("VT302-0269 | Call find with first and select with empty",function() {
+        Model.deleteAll();
+        var res;
+        expect(Model.count()).toEqual(0);
+
+        Model.create({"industry":"Technology","name":"Moto","Address":"USA"});
+        Model.create({"industry":"Technology","name":"Aeroprise","Address":"Bangalore"});
+        Model.create({"industry":"Accounting","name":"PWC","Address":"Russia"});
+        expect(Model.count()).toEqual(3);
+        res = Model.find("first",
+                    {
+                      conditions: {"industry":"Technology"},
+                      select: []
+                    });
+        expect(res).toEqual([]);
+    });
+
+    it("VT302-0270 | Call find with first and other parameter as empty",function() {
+        Model.deleteAll();
+        var res;
+        expect(Model.count()).toEqual(0);
+
+        Model.create({"industry":"Technology","name":"Moto","Address":"USA"});
+        Model.create({"industry":"Technology","name":"Aeroprise","Address":"Bangalore"});
+        Model.create({"industry":"Accounting","name":"PWC","Address":"Russia"});
+        expect(Model.count()).toEqual(3);
+        res = Model.find("first",
+                    {
+                      conditions: {},
+                      order: "",
+                      orderdir: "",
+                      select: []
+                    });
+        expect(res.count()).toEqual(1);
+    });
+
+    it('VT302-0259 | find count ',function(){
+
+        itemTypes = ['Electronics','Softwares','Cameras','Books']
+        
+        var productModel = function (model){
+
+            model.modelName('ProductTest');
+            model.property("id","integer");
+            model.property("name","string");
+            model.property("type","string");
+        }
+
+        createModel(productModel);
+
+        for (var i=0;i<=100;i++){
+            var nameValue = "Item "+i;
+            var itemType = itemTypes[Math.floor(Math.random()*itemTypes.length)];
+            Model.create({id: i, name: nameValue, type: itemType});
+        }
+
+        var obj = Model.find('count');
+
+        expect(obj).toEqual(100);
+
+    });
+
+    it('VT302-0260 | find count objects with one condition for e.g Model.find("count", {conditions: {"key": "value2"}})',function(){
+
+        itemTypes = ['Electronics','Softwares']
+        
+        var productModel = function (model){
+
+            model.modelName('ProductTest');
+            model.property("id","integer");
+            model.property("name","string");
+            model.property("type","string");
+        }
+
+        createModel(productModel);
+
+        for (var i=0;i<=100;i++){
+            var nameValue = "Item "+i;
+            var itemType = itemTypes[Math.floor(Math.random()*itemTypes.length)];
+            Model.create({id: i, name: nameValue, type: itemType});
+        }
+
+        var obj = Model.find('count',{conditions: {"type": "Softwares"}});
+
+        expect(obj).toEqual(50);
+
+    });
+
+    it('VT302-0230 | Call haveLocalChanges after adding some data to synced model',function(){
+
+        var callback = false;
+        var itemTypes = ['Electronics','Softwares'];
+        
+        syncServerUrl = "http://"+SYNC_SERVER_HOST+":"+SYNC_SERVER_PORT;
+        Rho.RhoConnectClient.syncServer = syncServerUrl;
+        
+        var productModel = function (model){
+
+            model.modelName('ProductTest');
+            model.property("id","integer");
+            model.property("name","string");
+            model.property("type","string");
+        }
+
+        createModel(productModel);
+
+        for (var i=0;i<=100;i++){
+            var nameValue = "Item "+i;
+            var itemType = itemTypes[Math.floor(Math.random()*itemTypes.length)];
+            Model.create({id: i, name: nameValue, type: itemType});
+        }
+        
+        Rho.RhoConnectClient.login('testuser','testuser',function(){
+            Rho.RhoConnectClient.setNotification('*', function(args){ 
+                if(args.status == 'complete') {
+                    callback = true;
+                }
+            });
+            Rho.RhoConnectClient.doSync();
+        });
+
+        waitsFor(function() {
+            return callback;
+        }, "waiting for sync", 6000);
+
+        runs(function(){
+
+            for (var i=0;i<=20;i++){
+            var nameValue = "Item "+i;
+            var itemType = itemTypes[Math.floor(Math.random()*itemTypes.length)];
+            Model.create({id: i, name: nameValue, type: itemType});
+            }
+
+            var value = Rho.ORMModel.haveLocalChanges('ProductTest');
+            var value1 = Model.haveLocalChanges();
+
+            expect(value).toEqual(true);
+            expect(value1).toEqual(true);
+        });
+    });
+
+
+    it('VT302-0231 | Call haveLocalChanges just after sync got finished',function(){
+
+        var callback = false;
+        var itemTypes = ['Electronics','Softwares'];
+        
+        syncServerUrl = "http://"+SYNC_SERVER_HOST+":"+SYNC_SERVER_PORT;
+        Rho.RhoConnectClient.syncServer = syncServerUrl;
+        
+        var productModel = function (model){
+
+            model.modelName('ProductTest');
+            model.property("id","integer");
+            model.property("name","string");
+            model.property("type","string");
+        }
+
+        createModel(productModel);
+
+        for (var i=0;i<=100;i++){
+            var nameValue = "Item "+i;
+            var itemType = itemTypes[Math.floor(Math.random()*itemTypes.length)];
+            Model.create({id: i, name: nameValue, type: itemType});
+        }
+        
+        Rho.RhoConnectClient.login('testuser','testuser',function(){
+            Rho.RhoConnectClient.setNotification('*', function(args){ 
+                if(args.status == 'complete') {
+                    callback = true;
+                }
+            });
+            Rho.RhoConnectClient.doSync();
+        });
+
+        waitsFor(function() {
+            return callback;
+        }, "waiting for sync", 6000);
+
+        runs(function(){
+
+            var value = Rho.ORMModel.haveLocalChanges('ProductTest');
+            var value1 = Model.haveLocalChanges();
+
+            expect(value).toEqual(false);
+            expect(value1).toEqual(false);
+        });
+    });
+
+    it("VT302-0235 | should make record",function(){
+        createFixedModel(defaultDefModelF);
+        var record = fixedModel.make({"key":"1","value":"Tested"});
+        var res = fixedModel.count();
+        record.save();
+        res = fixedModel.count();
+        expect(res).toEqual(1);
+    });
+
+    it("VT302-0250 | Call updateAttributes without passing any arguments",function(){
+        var record = Model.create({"name":"Zoolo","industry":"Tech"});
+        record.updateAttributes();
+        var res = Model.find("first",{conditions:{"name":"Zoolo"}});
+        expect(res.get("name")).toEqual("Zoolo");
+    });
+
+    it("VT302-0251 | Call updateAttributes by passing empty array",function(){
+        var record = Model.create({});
+        record.updateAttributes();
+        var res = Model.find("first",{conditions:{"name":"Zoolo"}});
+        expect(res.get("name")).toEqual("Zoolo");
+    });
+    
+  });
+
+});
