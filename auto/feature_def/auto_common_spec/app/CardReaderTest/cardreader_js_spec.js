@@ -55,6 +55,87 @@ describe("Cardreader JS API", function() {
 		}
 	});
 
+	describe("getProperty using instance", function() {
+	var obj=Rho.CardReader.getDefault();
+		for (var i=0;i<card_get_property_instance.length;i++){
+			(function(idx){
+				it(card_get_property_instance[idx]['testName'], function() {
+
+					var data = obj.getProperty(card_get_property_instance[idx]['propertyName']);
+					displayResult(card_get_property_instance[idx]['testName'],data);
+					expect(data).toEqual(card_get_property_instance[idx]['expectedResult']);
+
+				});
+			})(i);
+		}
+	});
+
+	describe("getproperties using instance", function() {
+		var flag = false;
+
+		it("Rho.CardReader.open", function() {
+						
+			runs(function() {
+				Rho.CardReader.open();
+				setTimeout(function() {
+					flag = true;
+				}, 5000);
+			});
+
+			waitsFor(function() {
+			   return flag;
+			}, "Waiting for enable", 6000);
+																						
+		});
+
+		it("VT286-0213 | get Auto enter default value as true", function() {
+			var obj=Rho.CardReader.getDefault();
+			  myvar = obj.getProperties(['autoEnter']);
+			  expect(myvar["autoEnter"]).toEqual("false");
+		});
+
+		it("VT286-0214 | get Auto Tab default value as true", function() {
+			var obj=Rho.CardReader.getDefault();
+			myvar = obj.getProperties(['autoTab']);
+			 expect(myvar["autoTab"]).toEqual("false");
+		});
+
+		if(isWindowsMobilePlatform() && Rho.CardReader.moduleName == "dcr7000")
+		{
+			it("VT286-0215 | get pinentry default value as false", function() {
+				var obj=Rho.CardReader.getDefault();
+				myvar = obj.getProperties(['pinEntry']);
+			 	expect(myvar["pinEntry"]).toEqual("false");
+			});
+
+			it("VT286-0216 | get pintimout default value as 30000", function() {
+				var obj=Rho.CardReader.getDefault();
+				myvar = obj.getProperties(['pinTimeout']);
+			 	expect(myvar["pinTimeout"]).toEqual("30000");
+			});
+			it("VT286-0217 | get patndata default value as empty", function() {
+				var obj=Rho.CardReader.getDefault();
+				myvar = obj.getProperties(['panData']);
+			 	expect(myvar["panData"]).toEqual("");
+			});
+		}
+    });
+
+/*	describe("getProperties using instance", function() {
+	var obj=Rho.CardReader.getDefault();
+		for (var i=0;i<card_get_property_instance.length;i++){
+			(function(idx){
+				it(card_get_property_instance[idx]['testName'], function() {
+
+					var data = obj.getProperties(card_get_property_instance[idx]['propertyName']);
+					displayResult(card_get_property_instance[idx]['testName'],data);
+					expect(data).toEqual(card_get_property_instance[idx]['expectedResult']);
+
+				});
+			})(i);
+		}
+	});*/
+
 	describe("Rho.CardReader.close", function() {
 
 		it("Rho.CardReader.close", function() {
@@ -165,6 +246,106 @@ describe("Cardreader JS API", function() {
 
 	});
 
+	describe("setProperty/getProperty using instance", function() {
+		var flag = false;
+		var obj=Rho.CardReader.getDefault();
+		it("obj.open", function() {
+
+			runs(function() {
+				obj.open();
+				setTimeout(function() {
+					flag = true;
+	 			}, 3000);
+			});
+
+			waitsFor(function() {
+				return flag;
+			}, "Waiting for enable", 4000);
+
+		});
+
+		for (var i=0;i<card_setget_property_instance.length;i++){
+
+			(function(idx){
+
+				it(card_setget_property_instance[idx]['testName'], function() {
+
+					obj.setProperty(card_setget_property_instance[idx]['propertyName'],card_setget_property_instance[idx]['propertyValue'])
+					var data = obj.getProperty(card_setget_property_instance[idx]['propertyName']);
+					expect(data).toEqual(card_setget_property_instance[idx]['expectedResult']);
+
+				});
+
+			})(i);
+
+		}
+
+		it("obj.close", function() {
+			obj.close();
+		});
+	});
+
+	describe("setProperties/getProperties using instance", function() {
+		var flag = false;
+		var obj=Rho.CardReader.getDefault();
+		it("obj.open", function() {
+
+			runs(function() {
+				obj.open();
+				setTimeout(function() {
+					flag = true;
+	 			}, 3000);
+			});
+
+			waitsFor(function() {
+				return flag;
+			}, "Waiting for enable", 4000);
+
+		});
+
+		for (var i=0;i<card_setget_property_instance.length;i++){
+
+			(function(idx){
+
+				it(card_setget_property_instance[idx]['testName'], function() {
+
+					var propertyName = card_setget_property_instance[idx]['propertyName'];
+					var propertyValue = card_setget_property_instance[idx]['propertyValue'];
+
+					if (propertyValue == 'true')
+						var strProperty = '{"'+propertyName+'" :'+true+'}';
+					else if (propertyValue == 'false')
+						var strProperty = '{"'+propertyName+'" :'+false+'}';
+					else if (!isNaN(propertyValue)){
+						propertyValue = parseInt(propertyValue);
+						var strProperty = '{"'+propertyName+'" :'+propertyValue+'}';
+					}
+					else{
+						var strProperty = '{"'+propertyName+'" : "'+propertyValue+'"}'
+					}
+
+					var objProperty = JSON.parse(strProperty);
+
+					obj.setProperties(objProperty);
+
+					var strGetProperty = '["'+propertyName+'"]';
+					var objGetProperty = JSON.parse(strGetProperty);
+
+					var data = obj.getProperties(objGetProperty);
+
+					expect(data[propertyName]).toEqual(card_setget_property_instance[idx]['expectedResult']);
+
+				});
+
+			})(i);
+		}
+
+		it("obj.close", function() {
+			obj.close();
+		});
+
+	});
+
 //	describe("Rho.CardReader.open()/getProperties", function() {
 //
 //		afterEach(function() {
@@ -263,6 +444,7 @@ describe("Cardreader JS API", function() {
 		it("Rho.CardReader.close", function() {
 			Rho.CardReader.close();
 		});
+	});	
 	 /* it("VT286-0075 | Auto enter to 0", function() {
 			Rho.CardReader.autoEnter = 0;
 			expect(Rho.CardReader.getProperty('autoEnter')).toEqual(false);
@@ -315,5 +497,6 @@ describe("Cardreader JS API", function() {
 			Rho.CardReader.panData = 12345;
 			expect(Rho.CardReader.getProperty('panData')).toEqual(12345);
 		});*/
-    });
+
+
 });
