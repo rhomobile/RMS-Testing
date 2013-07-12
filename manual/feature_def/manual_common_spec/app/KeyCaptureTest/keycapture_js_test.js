@@ -49,7 +49,7 @@ if (isAndroidPlatform())
 	TEST_18 = '4';VALUE_18 = "Retrun Key";
 	TEST_21 = '25';VALUE_21 = "Key P1/VolumeUp";
 }
-else if (isWindowsMobilePlatform() && Rho.System.isMotorolaDevice == true)
+else if (isAndroidPlatform() && Rho.System.isMotorolaDevice == true)
 {
 	TEST_15 = '84';VALUE_15 = "Key P3/search key";
 }

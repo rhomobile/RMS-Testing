@@ -87,8 +87,9 @@ describe("KeyCapture Test", function() {
 				setObjective("VT289-013 | call captureKey with dispatch true, keyValue for " +VALUE_13+"  and no callback(Sync)");
 				setInstruction("Click inside Textbox and Press " +VALUE_13);
 				setExpected("Callback should fire with value " +TEST_13+"  and " +VALUE_13+"  should be dispatched inside the textbox");
-				var keyval1 = Rho.KeyCapture.captureKey(true,TEST_13);
-				callbackdata(keyval1);
+				//var keyval1 = Rho.KeyCapture.captureKey(true,TEST_13);
+				Rho.KeyCapture.captureKey(false,TEST_13,capturekeycallback);
+				//callbackdata(keyval1);
 			});
 
 			runs(function()
@@ -393,7 +394,7 @@ describe("KeyCapture Test", function() {
 			});
 
 		});
-
+/*
 		it("VT289-032 | call captureKey with callback and use SIP keys |", function() {
 
 			runs(function()
@@ -416,7 +417,7 @@ describe("KeyCapture Test", function() {
 			});
 
 		});
-
+*/
 		if (isWindowsMobilePlatform())
 		{
 			it("VT289-024 | call captureKey to check the keyvalues of all alphabet key |", function() {
@@ -563,7 +564,7 @@ describe("KeyCapture Test", function() {
 					});	
 				});
 			});
-
+/*
 			it("VT289-037 | call captureTrigger with no callback (Sync Access) |", function() {
 
 				runs(function()
@@ -586,7 +587,7 @@ describe("KeyCapture Test", function() {
 					});	
 				});
 			});
-
+*/
 			it("VT289-038 | call captureTrigger with no callback after calling with callback |", function() {
 
 				runs(function()

@@ -284,16 +284,50 @@ describe("Camera Manual Test", function() {
 					});
 				});
 
-				it("VT285-030 | maxHeight and maxWidth of camera using the retruned object of enumerate|", function() {
+				if(!isWindowsPhone8Platform())
+				{
+					it("VT285-030 | maxHeight and maxWidth of camera using the retruned object of enumerate|", function() {
 
+						runs(function()
+						{
+							setObjective("VT285-030 | maxHeight and maxWidth of camera using the retruned object of enumerate|");
+							setInstruction("take any image and Check for the height and width");
+							setExpected("The retrurned image height/width should be same as the saved image, status should be Ok");
+							var Height = objCAM.maxHeight;
+							var Width = objCAM.maxWidth;
+							objCAM.takePicture({colorModel:'rgb',desiredHeight:Height,desiredWidth:Width,outputFormat:'image'},callbacktake);
+						});
+
+						waitsFor(function()
+						{
+							return callbackststatus;
+						}, '10sec wait for callback to fire', 10000);
+
+						runs(function()
+						{
+							waitsFor(function() {
+							return document.getElementById("actResult").innerHTML != "init";
+							}, "Timed out waiting for tester to respond", 300000);
+							runs(function() {
+							expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+							});
+						});
+					});
+				}
+
+				it("VT285-035 | Call takePicture with captureSound and callback|", function() {
+
+					var path = "";
 					runs(function()
 					{
-						setObjective("VT285-029 | maxHeight and maxWidth of camera using the retruned object of enumerate|");
-						setInstruction("take any image and Check for the height and width");
-						setExpected("The retrurned image height/width should be same as the saved image, status should be Ok");
-						var Height = objCAM.maxHeight;
-						var Width = objCAM.maxWidth;
-						objCAM.takePicture({colorModel:'rgb',desiredHeight:Height,desiredWidth:Width,outputFormat:'image'},callbacktake);
+						setObjective("VT285-035 | Call takePicture with captureSound and callback|");
+						setInstruction("take any image and check for played wave file while capturing image");
+						setExpected("The wave file should be played while capturing the image");
+						if (isWindowsMobileOrAndroidPlatform()){path = 'file://application/alarm.wav';}
+						if (isApplePlatform()) { path = '';}
+						if (isWindowsPhone8Platform() { path ='file://application/alarm.wav';}
+						
+						objCAM.takePicture({captureSound:path,outputFormat:'image'},callbacktake);
 					});
 
 					waitsFor(function()
@@ -340,7 +374,6 @@ describe("Camera Manual Test", function() {
 
 				if (!isWindowsMobileOrAndroidPlatform())
 				{
-
 					it("VT285-038 | Call takePicture with colorModel as rgb, compressionFormat as png and callback|", function() {
 
 						runs(function()
@@ -370,7 +403,6 @@ describe("Camera Manual Test", function() {
 
 				if (isApplePlatform())
 				{
-
 					it("VT285-039 | Call takePicture with enableEditing as true and callback|", function() {
 
 						runs(function()
@@ -422,12 +454,655 @@ describe("Camera Manual Test", function() {
 							});
 						});
 					});
-
-
 				}
 
+				it("VT285-042 | Call takePicture with fileName as path to the device folder with name and callback|", function() {
 
+					runs(function()
+					{
+						var path ='';
+						setObjective("VT285-042 | Call takePicture with fileName as path to the device folder with name and callback|");
+						setInstruction("take any image and Check for captured image to be saved at application folder of device");
+						setExpected("The Image should be saved at specified location with specified name with extension as jpg");
 
+						if (isWindowsMobileOrAndroidPlatform()){path = 'file://application/Image042';}
+						if (isApplePlatform()) { path = '';}
+						if (isWindowsPhone8Platform() { path ='file://application/Image042';}
+						objCAM.compressionFormat = 'jpg';
+						objCAM.colorModel = 'grayscale';
+						objCAM.takePicture({fileName:path,outputFormat:'image'},callbacktakeraw);
+					});
+
+					waitsFor(function()
+					{
+						return callbackststatus;
+					}, '10sec wait for callback to fire', 10000);
+
+					runs(function()
+					{
+						waitsFor(function() {
+						return document.getElementById("actResult").innerHTML != "init";
+						}, "Timed out waiting for tester to respond", 300000);
+						runs(function() {
+						expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+						});
+					});
+				});
+
+				it("VT285-043 | Call takePicture with fileName as path to the device folder without name and callback|", function() {
+
+					runs(function()
+					{
+						var path ='';
+						setObjective("VT285-043 | Call takePicture with fileName as path to the device folder without name and callback|");
+						setInstruction("take any image and Check for captured image to be saved at application folder of device");
+						setExpected("The Image should be saved at specified location with specified name with extension as jpg");
+
+						if (isWindowsMobileOrAndroidPlatform()){path = 'file://application/';}
+						if (isApplePlatform()) { path = '';}
+						if (isWindowsPhone8Platform() { path ='file://application/';}
+						objCAM.compressionFormat = 'jpg';
+						objCAM.colorModel = 'rgb';
+						objCAM.takePicture({fileName:path,outputFormat:'image'},callbacktakeraw);
+					});
+
+					waitsFor(function()
+					{
+						return callbackststatus;
+					}, '10sec wait for callback to fire', 10000);
+
+					runs(function()
+					{
+						waitsFor(function() {
+						return document.getElementById("actResult").innerHTML != "init";
+						}, "Timed out waiting for tester to respond", 300000);
+						runs(function() {
+						expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+						});
+					});
+				});
+
+				it("VT285-044 | Call takePicture with fileName as path to the device folder with name.exetension and callback|", function() {
+
+					runs(function()
+					{
+						var path ='';
+						setObjective("VT285-044 | Call takePicture with fileName as path to the device folder with name.exetension and callback|");
+						setInstruction("take any image and Check for captured image to be saved at application folder of device");
+						setExpected("The Image should be saved at specified location with specified name with extension as jpg");
+
+						if (isWindowsMobileOrAndroidPlatform()){path = 'file://application/Image044.png';}
+						if (isApplePlatform()) { path = '';}
+						if (isWindowsPhone8Platform() { path ='file://application/Image044.png';}
+						objCAM.compressionFormat = 'jpg';
+						objCAM.colorModel = 'rgb';
+						objCAM.takePicture({fileName:path,outputFormat:'image'},callbacktakeraw);
+					});
+
+					waitsFor(function()
+					{
+						return callbackststatus;
+					}, '10sec wait for callback to fire', 10000);
+
+					runs(function()
+					{
+						waitsFor(function() {
+						return document.getElementById("actResult").innerHTML != "init";
+						}, "Timed out waiting for tester to respond", 300000);
+						runs(function() {
+						expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+						});
+					});
+				});
+
+				it("VT285-045 | Call takePicture with fileName as path to the device folder with name, compressionFormat as png|", function() {
+
+					runs(function()
+					{
+						var path ='';
+						setObjective("VT285-045 | Call takePicture with fileName as path to the device folder with name, compressionFormat as png|");
+						setInstruction("take any image and Check for captured image to be saved at application folder of device");
+						setExpected("The Image should be saved at specified location with specified name with extension as png");
+
+						if (isWindowsMobileOrAndroidPlatform()){path = 'file://application/Image045';}
+						if (isApplePlatform()) { path = '';}
+						if (isWindowsPhone8Platform() { path ='file://application/Image045';}
+						objCAM.compressionFormat = 'png';
+						objCAM.colorModel = 'rgb';
+						objCAM.takePicture({fileName:path,outputFormat:'image'},callbacktakeraw);
+					});
+
+					waitsFor(function()
+					{
+						return callbackststatus;
+					}, '10sec wait for callback to fire', 10000);
+
+					runs(function()
+					{
+						waitsFor(function() {
+						return document.getElementById("actResult").innerHTML != "init";
+						}, "Timed out waiting for tester to respond", 300000);
+						runs(function() {
+						expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+						});
+					});
+				});
+
+				if (isWindowsMobileOrAndroidPlatform())
+				{
+					it("VT285-046 | Call takePicture with flashMode as on and callback|", function() {
+
+						runs(function()
+						{
+							setObjective("VT285-046 | Call takePicture with flashMode as on and callback|");
+							setInstruction("take any image and check for flash while taking the picture");
+							setExpected("Falsh should be on while taking picture and will get off automatically after picture has taken");
+							objCAM.flashMode = 'on';
+							objCAM.takePicture({outputFormat:'dataUri'},callbacktakeuri);
+						});
+
+						waitsFor(function()
+						{
+							return callbackststatus;
+						}, '10sec wait for callback to fire', 10000);
+
+						runs(function()
+						{
+							waitsFor(function() {
+							return document.getElementById("actResult").innerHTML != "init";
+							}, "Timed out waiting for tester to respond", 300000);
+							runs(function() {
+							expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+							});
+						});
+					});
+
+					it("VT285-047 | Call takePicture with flashMode as off and callback|", function() {
+
+						runs(function()
+						{
+							setObjective("VT285-046 | Call takePicture with flashMode as off and callback|");
+							setInstruction("take any image and check for flash while taking the picture");
+							setExpected("Falsh should be off while taking picture");
+							objCAM.flashMode = 'on';
+							objCAM.takePicture({flashMode:'off',outputFormat:'image'},callbacktakeraw);
+						});
+
+						waitsFor(function()
+						{
+							return callbackststatus;
+						}, '10sec wait for callback to fire', 10000);
+
+						runs(function()
+						{
+							waitsFor(function() {
+							return document.getElementById("actResult").innerHTML != "init";
+							}, "Timed out waiting for tester to respond", 300000);
+							runs(function() {
+							expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+							});
+						});
+					});
+
+					it("VT285-048 | Call takePicture with flashMode as auto and callback|", function() {
+
+						runs(function()
+						{
+							setObjective("VT285-046 | Call takePicture with flashMode as auto and callback|");
+							setInstruction("take any image in dark or low light and check for flash while taking the picture");
+							setExpected("Falsh should be on while taking picture in low light or dark");
+							objCAM.takePicture({flashMode:'auto',outputFormat:'image'},callbacktakeraw);
+						});
+
+						waitsFor(function()
+						{
+							return callbackststatus;
+						}, '10sec wait for callback to fire', 10000);
+
+						runs(function()
+						{
+							waitsFor(function() {
+							return document.getElementById("actResult").innerHTML != "init";
+							}, "Timed out waiting for tester to respond", 300000);
+							runs(function() {
+							expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+							});
+						});
+					});
+				}
+
+				if (isAndroidPlatform())
+				{
+					it("VT285-050 | Call takePicture with flashMode as redEye and callback|", function() {
+
+						runs(function()
+						{
+							setObjective("VT285-050 | Call takePicture with flashMode as redEye and callback|");
+							setInstruction("take any image and check for flash while taking the picture, check for redeye in saved image");
+							setExpected("Falsh should be on while taking picture and The saved picture should not contain the redeye in it");
+							objCAM.takePicture({flashMode:'redEye',outputFormat:'image'},callbacktakeraw);
+						});
+
+						waitsFor(function()
+						{
+							return callbackststatus;
+						}, '10sec wait for callback to fire', 10000);
+
+						runs(function()
+						{
+							waitsFor(function() {
+							return document.getElementById("actResult").innerHTML != "init";
+							}, "Timed out waiting for tester to respond", 300000);
+							runs(function() {
+							expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+							});
+						});
+					});
+
+					it("VT285-051 | Call takePicture with flashMode as torch and callback|", function() {
+
+						runs(function()
+						{
+							setObjective("VT285-051 | Call takePicture with flashMode as redEye and callback|");
+							setInstruction("check for continoius flash to be on");
+							setExpected("Flash should be on in torch mode");
+							objCAM.takePicture({flashMode:'torch',outputFormat:'image'},callbacktakeraw);
+						});
+
+						waitsFor(function()
+						{
+							return callbackststatus;
+						}, '10sec wait for callback to fire', 10000);
+
+						runs(function()
+						{
+							waitsFor(function() {
+							return document.getElementById("actResult").innerHTML != "init";
+							}, "Timed out waiting for tester to respond", 300000);
+							runs(function() {
+							expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+							});
+						});
+					});				
+				}
+
+				if (isWindowsMobilePlatform())
+				{
+					it("VT285-052 | Call takePicture with previewHeight, previewLeft,previewTop, previewWidth  and callback|", function() {
+
+						runs(function()
+						{
+							setObjective("VT285-052 | Call takePicture with previewHeight as 200, previewLeft 300,previewTop as 300, previewWidth as 200 and callback|");
+							setInstruction("check for the viewfinder position");
+							setExpected("The viewfinder positions should be as per the specified positions and Image should be captured successfully");
+							objCAM.takePicture({previewHeight:200,previewLeft:300,previewTop:300,previewWidth:200,outputFormat:'image'},callbacktakeraw);
+						});
+
+						waitsFor(function()
+						{
+							return callbackststatus;
+						}, '10sec wait for callback to fire', 10000);
+
+						runs(function()
+						{
+							waitsFor(function() {
+							return document.getElementById("actResult").innerHTML != "init";
+							}, "Timed out waiting for tester to respond", 300000);
+							runs(function() {
+							expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+							});
+						});
+					});	
+
+					it("VT285-053/054 | Call takePicture with previewHeight, previewLeft,previewTop, previewWidth  and callback|", function() {
+
+						runs(function()
+						{
+							setObjective("VT285-053/054 | Call takePicture with previewHeight as 100, previewLeft 200,previewTop as 150, previewWidth as 100 and callback|");
+							setInstruction("check for the viewfinder position");
+							setExpected("viewfinder position should change with respect to previous test");
+							objCAM.takePicture({previewHeight:100,previewLeft:200,previewTop:150,previewWidth:100,outputFormat:'dataUri'},callbacktakeuri);
+						});
+
+						waitsFor(function()
+						{
+							return callbackststatus;
+						}, '10sec wait for callback to fire', 10000);
+
+						runs(function()
+						{
+							waitsFor(function() {
+							return document.getElementById("actResult").innerHTML != "init";
+							}, "Timed out waiting for tester to respond", 300000);
+							runs(function() {
+							expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+							});
+						});
+					});				
+				}
+
+				if (isAndroidOrApplePlatform())
+				{
+					it("VT285-058 | Call takePicture with saveToDeviceGallery as true and callback|", function() {
+
+						runs(function()
+						{
+							setObjective("VT285-058 | Call takePicture with saveToDeviceGallery as true and callback|");
+							setInstruction("take any image and check for location of image is saved");
+							setExpected("The Image should get saved at DeviceGallery and imageuri should retrun the path of device gallery");
+							objCAM.takePicture({outputFormat:'image',saveToDeviceGallery:true},callbacktakeraw);
+						});
+
+						waitsFor(function()
+						{
+							return callbackststatus;
+						}, '10sec wait for callback to fire', 10000);
+
+						runs(function()
+						{
+							waitsFor(function() {
+							return document.getElementById("actResult").innerHTML != "init";
+							}, "Timed out waiting for tester to respond", 300000);
+							runs(function() {
+							expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+							});
+						});
+					});
+
+					it("VT285-059 | Call takePicture with saveToDeviceGallery as false and callback|", function() {
+
+						runs(function()
+						{
+							setObjective("VT285-059 | Call takePicture with saveToDeviceGallery as false and callback|");
+							setInstruction("take any image and check for location of image is saved");
+							setExpected("The Image should not get saved at DeviceGallery and imageuri should not retrun the path of device gallery");
+							objCAM.takePicture({outputFormat:'image',saveToDeviceGallery:false},callbacktakeraw);
+						});
+
+						waitsFor(function()
+						{
+							return callbackststatus;
+						}, '10sec wait for callback to fire', 10000);
+
+						runs(function()
+						{
+							waitsFor(function() {
+							return document.getElementById("actResult").innerHTML != "init";
+							}, "Timed out waiting for tester to respond", 300000);
+							runs(function() {
+							expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+							});
+						});
+					});		
+
+					it("VT285-060 | Call takePicture with saveToDeviceGallery as false, fileName and callback|", function() {
+
+						runs(function()
+						{
+							var path ='';
+							setObjective("VT285-060 | Call takePicture with saveToDeviceGallery as false, fileName and callback|");
+							setInstruction("take any image and check for location of image is saved");
+							setExpected("The Image should not get saved at DeviceGallery and imageuri should retrun the path of saved image at application folder");
+
+							if (isWindowsMobileOrAndroidPlatform()){path = 'file://application/Image060';}
+							if (isApplePlatform()) { path = '';}
+							if (isWindowsPhone8Platform() { path ='file://application/Image060';}
+
+							objCAM.takePicture({outputFormat:'image',saveToDeviceGallery:false,fileName:path},callbacktakeraw);
+						});
+
+						waitsFor(function()
+						{
+							return callbackststatus;
+						}, '10sec wait for callback to fire', 10000);
+
+						runs(function()
+						{
+							waitsFor(function() {
+							return document.getElementById("actResult").innerHTML != "init";
+							}, "Timed out waiting for tester to respond", 300000);
+							runs(function() {
+							expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+							});
+						});
+					});	
+
+					it("VT285-061 | Call takePicture with saveToDeviceGallery as true, fileName and callback|", function() {
+
+						runs(function()
+						{
+							var path ='';
+							setObjective("VT285-061 | Call takePicture with saveToDeviceGallery as true, fileName and callback|");
+							setInstruction("take any image and check for location of image is saved");
+							setExpected("The Image should not get saved at DeviceGallery and imageuri should retrun the path of application folder");
+
+							if (isWindowsMobileOrAndroidPlatform()){path = 'file://application/Image060';}
+							if (isApplePlatform()) { path = '';}
+							if (isWindowsPhone8Platform() { path ='file://application/Image060';}
+
+							objCAM.takePicture({outputFormat:'image',saveToDeviceGallery:true,fileName:path},callbacktakeraw);
+						});
+
+						waitsFor(function()
+						{
+							return callbackststatus;
+						}, '10sec wait for callback to fire', 10000);
+
+						runs(function()
+						{
+							waitsFor(function() {
+							return document.getElementById("actResult").innerHTML != "init";
+							}, "Timed out waiting for tester to respond", 300000);
+							runs(function() {
+							expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+							});
+						});
+					});	
+				}
+
+				if (isAndroidPlatform())
+				{
+					it("VT285-063 | supportedSizeList of camera using the retruned object of enumerate|", function() {
+
+						runs(function()
+						{
+							setObjective("VT285-063 | supportedSizeList of camera using the retruned object of enumerate|");
+							setInstruction("check for callback");
+							setExpected("The supported resolution should return");
+							var data = objCAM.supportedSizeList;
+							callbacktakeraw(data);
+						});
+
+						waitsFor(function()
+						{
+							return callbackststatus;
+						}, '10sec wait for callback to fire', 2000);
+
+						runs(function()
+						{
+							waitsFor(function() {
+							return document.getElementById("actResult").innerHTML != "init";
+							}, "Timed out waiting for tester to respond", 300000);
+							runs(function() {
+							expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+							});
+						});
+					});
+
+					it("VT285-064 | Call takePicture with useSystemViewfinder as true and with callback|", function() {
+
+						runs(function()
+						{
+							setObjective("VT285-064 | Call takePicture with useSystemViewfinder as true and with callback|");
+							setInstruction("Check for the open viewfinder and take any image");
+							setExpected("System viewfinder should open to take the image and image should save successfully at device gallery");
+							objCAM.takePicture({outputFormat:'image',useSystemViewfinder:true},callbacktakeraw);
+						});
+
+						waitsFor(function()
+						{
+							return callbackststatus;
+						}, '10sec wait for callback to fire', 10000);
+
+						runs(function()
+						{
+							waitsFor(function() {
+							return document.getElementById("actResult").innerHTML != "init";
+							}, "Timed out waiting for tester to respond", 300000);
+							runs(function() {
+							expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+							});
+						});
+					});
+
+					it("VT285-065 | Call takePicture with useSystemViewfinder as false and with callback|", function() {
+
+						runs(function()
+						{
+							setObjective("VT285-065 | Call takePicture with useSystemViewfinder as false and with callback|");
+							setInstruction("Check for the open viewfinder and take any image");
+							setExpected("Rhodes viewfinder should open to take the image and image should save successfully at device gallery");
+							objCAM.takePicture({outputFormat:'image',useSystemViewfinder:false},callbacktakeraw);
+						});
+
+						waitsFor(function()
+						{
+							return callbackststatus;
+						}, '10sec wait for callback to fire', 10000);
+
+						runs(function()
+						{
+							waitsFor(function() {
+							return document.getElementById("actResult").innerHTML != "init";
+							}, "Timed out waiting for tester to respond", 300000);
+							runs(function() {
+							expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+							});
+						});
+					});
+
+					it("VT285-066 | Call takePicture with useSystemViewfinder as true, outputFormat as Datauri and with callback|", function() {
+
+						runs(function()
+						{
+							setObjective("VT285-066 | Call takePicture with useSystemViewfinder as true, outputFormat as Datauri and with callback|");
+							setInstruction("Check for the open viewfinder and take any image");
+							setExpected("System viewfinder should open to take the image and image should displayed successfully on application");
+							objCAM.takePicture({outputFormat:'dataUri',useSystemViewfinder:true},callbacktakeuri);
+						});
+
+						waitsFor(function()
+						{
+							return callbackststatus;
+						}, '10sec wait for callback to fire', 10000);
+
+						runs(function()
+						{
+							waitsFor(function() {
+							return document.getElementById("actResult").innerHTML != "init";
+							}, "Timed out waiting for tester to respond", 300000);
+							runs(function() {
+							expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+							});
+						});
+					});
+
+					it("VT285-067 | Call takePicture with useSystemViewfinder as true, outputFormat as Datauri and with callback|", function() {
+
+						runs(function()
+						{
+							var path='';
+							setObjective("VT285-067 | Call takePicture with useSystemViewfinder as true, outputFormat as Datauri and with callback|");
+							setInstruction("Check for the open viewfinder and take any image");
+							setExpected("System viewfinder should open to take the image and image should displayed successfully on application");
+
+							if (isWindowsMobileOrAndroidPlatform()){path = 'file://application/Image067';}
+							if (isApplePlatform()) { path = '';}
+							if (isWindowsPhone8Platform() { path ='file://application/Image067';}
+
+							objCAM.takePicture({outputFormat:'dataUri',useSystemViewfinder:true,saveToDeviceGallery:false,fileName:path},callbacktakeuri);
+						});
+
+						waitsFor(function()
+						{
+							return callbackststatus;
+						}, '10sec wait for callback to fire', 10000);
+
+						runs(function()
+						{
+							waitsFor(function() {
+							return document.getElementById("actResult").innerHTML != "init";
+							}, "Timed out waiting for tester to respond", 300000);
+							runs(function() {
+							expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+							});
+						});
+					});
+
+					it("VT285-068/069 | Call takePicture with useSystemViewfinder as true and other properties|", function() {
+
+						runs(function()
+						{
+							setObjective("VT285-068/069 | Call takePicture with useSystemViewfinder as true and other properties|");
+							setInstruction("Check for the open viewfinder and take any image");
+							setExpected("The Image should be of grey color and resolution should be 640 and 480");
+							objCAM.desiredHeight = 480;
+							objCAM.desiredHeight = 640;
+							objCAM.colorModel = 'greyscale';
+							objCAM.takePicture({outputFormat:'image',useSystemViewfinder:true},callbacktaketake);
+						});
+
+						waitsFor(function()
+						{
+							return callbackststatus;
+						}, '10sec wait for callback to fire', 10000);
+
+						runs(function()
+						{
+							waitsFor(function() {
+							return document.getElementById("actResult").innerHTML != "init";
+							}, "Timed out waiting for tester to respond", 300000);
+							runs(function() {
+							expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+							});
+						});
+					});
+
+					it("VT285-070 | Call takePicture with useSystemViewfinder as true, captureSound,flashMode and callback|", function() {
+
+						runs(function()
+						{
+							var path='';
+							setObjective("VT285-070 | Call takePicture with useSystemViewfinder as true, captureSound and callback|");
+							setInstruction("Check for the open viewfinder and take any image");
+							setExpected("it should be system viewfinder and the Image should be of rgb and resolution should be 1280x720 than prev, sound should play and flash should come");
+
+							if (isWindowsMobileOrAndroidPlatform()){path = 'file://application/alarm.wav';}
+							if (isApplePlatform()) { path = '';}
+							if (isWindowsPhone8Platform() { path ='file://application/alarm.wav';}
+
+							objCAM.desiredHeight = 1280;
+							objCAM.desiredHeight = 720;
+							objCAM.colorModel = 'rgb';
+							objCAM.takePicture({outputFormat:'image',useSystemViewfinder:true,flashMode:'on',captureSound:path},callbacktaketake);
+						});
+
+						waitsFor(function()
+						{
+							return callbackststatus;
+						}, '10sec wait for callback to fire', 10000);
+
+						runs(function()
+						{
+							waitsFor(function() {
+							return document.getElementById("actResult").innerHTML != "init";
+							}, "Timed out waiting for tester to respond", 300000);
+							runs(function() {
+							expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+							});
+						});
+					});
+				}
 			});	
 
 		})(enumData[j]);
