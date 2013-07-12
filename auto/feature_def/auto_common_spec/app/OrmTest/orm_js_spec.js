@@ -1229,7 +1229,7 @@ describe("<ORM Db Reset specs>", function() {
       expect(db_product[2].map.value).toEqual("test2");
       expect(db_product[3].map.value).toEqual("4");
 
-      var ary = {"models":['Product'],"reset_local_models":false,"reset_client_info":true};
+      var ary = {"models":['Product'],"reset_local_models":false,"reset_client_info":false};
       Rho.ORM.databaseFullResetEx(ary);
       
       db_product = db.$execute_sql("Select * from OBJECT_VALUES");
@@ -1280,7 +1280,7 @@ describe("<ORM Db Reset specs>", function() {
       expect(db_product[2].map.value).toEqual("test2");
       expect(db_product[3].map.value).toEqual("4");
 
-      var ary = {"models":['Product'],"reset_local_models":false};
+      var ary = {"models":['Product'],"reset_client_info":false};
       Rho.ORM.databaseFullResetEx(ary);
       
       db_product = db.$execute_sql("Select * from OBJECT_VALUES");
@@ -1317,7 +1317,7 @@ describe("<ORM Db Reset specs>", function() {
       expect(db_product[0].map.value).toEqual("test");
       expect(db_product[1].map.value).toEqual("2");
 
-      var ary = {"models":['Product'],"reset_local_models":false,"reset_client_info":true};
+      var ary = {"models":['Product'],"reset_client_info":false,"reset_local_models":true};
       Rho.ORM.databaseFullResetEx(ary);
 
       db_product = db.$execute_sql("Select * from OBJECT_VALUES");
