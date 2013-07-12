@@ -1051,7 +1051,7 @@ describe("<model's fixed_schema>", function() {
 //         })
 });
 
-xdescribe("OrmModel(ST) Test Starts Here", function() {
+describe("OrmModel(ST) Test Starts Here", function() {
 
   var db = null;
   var Model;
@@ -1067,6 +1067,9 @@ xdescribe("OrmModel(ST) Test Starts Here", function() {
       db2.$execute_sql("DELETE FROM CHANGED_VALUES");
       if(db2.$is_table_exist("Product")){
         db2.$execute_sql("DROP TABLE Product");
+      }
+      if(db2.$is_table_exist("ProductFixed")){
+        db2.$execute_sql("DROP TABLE ProductFixed");
       }
     });
     Rho.ORM.clear();
@@ -1087,13 +1090,12 @@ xdescribe("OrmModel(ST) Test Starts Here", function() {
   };
 
   var createModel = function (defModel){
-
     Model = Rho.ORM.addModel(defModel);
-  }
+  };
 
   var createFixedModel = function(defModel){
     fixedModel = Rho.ORM.addModel(defModel);
-  }
+  };
 
   describe("OrmModel(PropertyBag) Test Starts Here", function() {
     beforeEach(function(){
@@ -1129,29 +1131,24 @@ xdescribe("OrmModel(ST) Test Starts Here", function() {
     });
 
     it('VT302-0216 | Call find without passing any argument to it',function(){
-
         for (var i=0;i<=100;i++){
-            var nameValue = "testfixed"+i
+            var nameValue = "testfixed"+i;
             Model.create({name: nameValue});
         }
-
         var obj = Model.find();
-
-        expect(obj).toEqual([]);
-
+        expect(obj.length).toEqual(101);
     });
 
     it('VT302-0218 | finds all objects with one condition for e.g Model.find("all", {conditions: {"key": "value2"}})',function(){
 
-        itemTypes = ['Electronics','Softwares','Cameras','Books']
+        itemTypes = ['Electronics','Softwares','Cameras','Books'];
         
         var productModel = function (model){
-
             model.modelName('ProductTest');
             model.property("id","integer");
             model.property("name","string");
             model.property("type","string");
-        }
+        };
 
         createModel(productModel);
 
@@ -1163,7 +1160,7 @@ xdescribe("OrmModel(ST) Test Starts Here", function() {
 
         var obj = Model.find('all',{conditions: {type: 'Cameras'}});
 
-        expect(obj).toEqual();
+        expect(obj[0].get("type")).toEqual("Cameras");
 
     });
 
@@ -1662,7 +1659,7 @@ it('VT302-0228 | finds first objects with one condition for e.g Model.find("all"
         var res = Model.find("first",{conditions:{"name":"Zoolo"}});
         expect(res.get("name")).toEqual("Zoolo");
     });
-    
+
   });
 
 });
