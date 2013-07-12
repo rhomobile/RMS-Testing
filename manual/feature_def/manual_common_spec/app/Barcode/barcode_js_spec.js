@@ -5,14 +5,16 @@ describe("Barcode Manual Test", function() {
 	var enumData = Rho.Barcode.enumerate();
 	var enableFlag = false;
 	var decodeFlag = false;
+	var isAndroid = false;
 	
 	if(Rho.System.platform == 'ANDROID')
 	{
 		ENABLE8K = 0; ENABLE1K = 0;
+		isAndroid = true;
 	}
 
 	var callbackenable = function (data){
-			enablecallbackdata(JSON.stringify(data));
+			enablecallbackdata(JSON.stringify(data).replace(/[,]/g,'<br />'));
 		}
 
    for (var j = 0;j<enumData.length;j++){
@@ -21,6 +23,7 @@ describe("Barcode Manual Test", function() {
 
 		   	var scnid = objSCN.getProperty('ID');
 		   	var scntype = objSCN.getProperty('scannerType');
+		   	var reticleType = (objSCN.friendlyName == "2D Imager" && isAndroid ? "hardwareReticle" : "softwareReticle");
 
 			beforeEach(function() {
 				enableFlag = false;
@@ -124,15 +127,15 @@ describe("Barcode Manual Test", function() {
 					});
 				});
 
-				it("VT282-1765 | Enable with picklist software reticle, scantimeout 3000 and callback as function |"+ scnid + scntype, function() {
+				it("VT282-1765 | Enable with picklist " + reticleType + ", scanTimeout 3000 and callback as function |"+ scnid + scntype, function() {
 					
 
 					runs(function()
 					{
-						setObjective("VT282-1765 | Enable with picklist software reticle, scantimeout 3000 and callback as function ");
-						setInstruction("don't scan and check scanTimeout as 3000 and check picklistMode as reticle " + scnid);
-						setExpected("Baeam or viewfinder will stop automatically after 3 second? \n only the barcode in the center of the image is decoded for picklistMode as reticle ");
-						objSCN.enable({'scanTimeout':'3000','picklistMode':'softwareReticle'},callbackenable);
+						setObjective("VT282-1765 | Enable with picklist " + reticleType + ", scanTimeout 3000 and callback as function ");
+						setInstruction("don't scan and check scanTimeout as 3000 and check picklistMode as " + reticleType + " with " +  scnid);
+						setExpected("Baeam or viewfinder will stop automatically after 3 second? \n only the barcode in the center of the image is decoded for picklistMode as " + reticleType);
+						objSCN.enable({'scanTimeout':'3000','picklistMode':reticleType},callbackenable);
 						setTimeout(function() {
 							enableFlag = true;
 						}, ENABLE1K);
@@ -215,15 +218,15 @@ describe("Barcode Manual Test", function() {
 				});
 
 
-				it("VT282-1770 | Enable with picklist software reticle, scantimeout 3000 and callback as anonymous function |"+ scnid, function() {
+				it("VT282-1770 | Enable with picklist " + reticleType + ", scanTimeout 3000 and callback as anonymous function |"+ scnid, function() {
 					
 					runs(function()
 					{
-						setObjective("VT282-1770 | Enable with picklist software reticle, scantimeout 3000 and callback as anonymous function |");
-						setInstruction("check functionality of scanTimeout as 3000 and picklistMode reticle with " + scnid);
-						setExpected("Baeam or viewfinder will stop automatically after 3 second? only the barcode in the center of the image is decoded for picklistMode as reticle ");
-						//objSCN.enable({'scanTimeout':7000,'picklistMode':'softwareReticle'},function(data){enablecallbackdata(JSON.stringify(data));});
-						objSCN.enable({'scanTimeout':3000,'picklistMode':'softwareReticle'},function(data){enablecallbackdata(JSON.stringify(data));});
+						setObjective("VT282-1770 | Enable with picklist " + reticleType + ", scanTimeout 3000 and callback as anonymous function |");
+						setInstruction("check functionality of scanTimeout as 3000 and picklistMode " + reticleType + " with " + scnid);
+						setExpected("Baeam or viewfinder will stop automatically after 3 second? only the barcode in the center of the image is decoded for picklistMode as " + reticleType);
+						//objSCN.enable({'scanTimeout':7000,'picklistMode':reticleType},function(data){enablecallbackdata(JSON.stringify(data));});
+						objSCN.enable({'scanTimeout':3000,'picklistMode':reticleType},function(data){enablecallbackdata(JSON.stringify(data));});
 						setTimeout(function() {
 							enableFlag = true;
 						}, ENABLE1K);
@@ -245,13 +248,13 @@ describe("Barcode Manual Test", function() {
 					});
 				});
 
-				it("VT282-1771 | set picklist software reticle, scantimeout 3000 after calling enable |", function() {
+				it("VT282-1771 | set picklist " + reticleType + ", scanTimeout 3000 after calling enable |", function() {
 					
 					runs(function()
 					{
-						setObjective("VT282-1771 | set picklist software reticle, scantimeout 3000 after calling enable |");
-						setInstruction("check functionality of scanTimeout as 3000 and picklistMode reticle with " + scnid);
-						setExpected("Baeam or viewfinder will stop automatically after 3 second? only the barcode in the center of the image is decoded for picklistMode as reticle ");
+						setObjective("VT282-1771 | set picklist " + reticleType + ", scanTimeout 3000 after calling enable |");
+						setInstruction("check functionality of scanTimeout as 3000 and picklistMode " + reticleType + " with " + scnid);
+						setExpected("Baeam or viewfinder will stop automatically after 3 second? only the barcode in the center of the image is decoded for picklistMode as " + reticleType);
 						objSCN.enable({},callbackenable);
 						setTimeout(function() {
 							enableFlag = true;
@@ -266,7 +269,7 @@ describe("Barcode Manual Test", function() {
 					runs(function()
 					{		
 						objSCN.scanTimeout = 3000;
-						objSCN.picklistMode = "softwareReticle";
+						objSCN.picklistMode = reticleType;
 						waitsFor(function() {
 						return document.getElementById("actResult").innerHTML != "init";
 						}, "Timed out waiting for tester to respond", 300000);
@@ -348,7 +351,7 @@ describe("Barcode Manual Test", function() {
 					{	
 						setObjective("VT282-1781/82 | call setDefault and enable");
 						setInstruction("press hadrware trigger to start" + scnid);
-						setExpected("code128 barcode should decode and retrun value should be decoded data and status");
+						setExpected("code128 barcode should decode and retrun value should be displayed correctly with all data");
 						Rho.Barcode.setDefault(objSCN);
 						Rho.Barcode.enable({},callbackenable);
 						setTimeout(function() {
@@ -393,7 +396,7 @@ describe("Barcode Manual Test", function() {
 
 					runs(function()
 					{		
-						objSCN.scantimeout = 10000;
+						objSCN.scanTimeout = 10000;
 						objSCN.start();
 						setTimeout(function() {
 							decodeFlag = true;
@@ -508,14 +511,14 @@ describe("Barcode Manual Test", function() {
 					});
 				});
 
-				it("VT282-1793 | take with picklist software reticle, scantimeout 10000 and callback |"+ scnid, function() {
+				it("VT282-1793 | take with picklist " + reticleType + ", scanTimeout 10000 and callback |"+ scnid, function() {
 					
 					runs(function()
 					{
-						setObjective("VT282-1793 | take with picklist software reticle, scantimeout 10000 and callback |");
-						setInstruction("check for picklist as reticle with" + scnid);
-						setExpected("only the barcode in the center of the image is decoded for picklistMode as reticle ");
-						objSCN.take({'scanTimeout':10000,'picklistMode':'softwareReticle'},callbackenable);
+						setObjective("VT282-1793 | take with picklist " + reticleType + ", scanTimeout 10000 and callback |");
+						setInstruction("check for picklist as " + reticleType + " with " + scnid);
+						setExpected("only the barcode in the center of the image is decoded for picklistMode as " + reticleType);
+						objSCN.take({'scanTimeout':10000,'picklistMode':reticleType},callbackenable);
 						setTimeout(function() {
 							enableFlag = true;
 						}, ENABLE1K);
@@ -825,7 +828,7 @@ describe("Barcode Manual Test", function() {
 						setTimeout(function() {
 							enableFlag = true;
 						}, ENABLE1K);
-						dispCurrentProcess("Enabling Scanner");
+						//dispCurrentProcess("Enabling Scanner");
 					});
 					waitsFor(function()
 					{
@@ -836,7 +839,7 @@ describe("Barcode Manual Test", function() {
 					{		
 						objSCN.decodeDuration = 5000;
 						waitsFor(function() {
-						return document.getElementById("actResult").innerHTML != "init";
+							return document.getElementById("actResult").innerHTML != "init";
 						}, "Timed out waiting for tester to respond", 300000);
 						runs(function() {
 						expect("pass").toEqual(document.getElementById("actResult").innerHTML);
@@ -850,7 +853,7 @@ describe("Barcode Manual Test", function() {
 
 					runs(function()
 					{
-						setObjective("VT282-1968 | set decodeFrequency to 1500 |");
+						setObjective("VT282-1968 | set decodeFrequency to 400 |");
 						setInstruction("Scan code128 barcode with" + scnid + "check for the decode sound frequency");
 						setExpected("should able to hear the sound after successful decode");
 						objSCN.enable({},callbackenable);
@@ -865,7 +868,7 @@ describe("Barcode Manual Test", function() {
 
 					runs(function()
 					{		
-						objSCN.decodeFrequency  = 20000;
+						objSCN.decodeFrequency = 400;
 						waitsFor(function() {
 						return document.getElementById("actResult").innerHTML != "init";
 						}, "Timed out waiting for tester to respond", 300000);
@@ -896,17 +899,17 @@ describe("Barcode Manual Test", function() {
 
 					runs(function()
 					{		
-						objSCN.decodeFrequency  = 0;
+						objSCN.decodeFrequency = 0;
 						waitsFor(function() {
-						return document.getElementById("actResult").innerHTML != "init";
+							return document.getElementById("actResult").innerHTML != "init";
 						}, "Timed out waiting for tester to respond", 300000);
 						runs(function() {
-						expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-						//objSCN.disable();
+							expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+							objSCN.decodeFrequency = 4000;
 						});
 					});
 				});
-/*
+
 				if(isWindowsMobilePlatform()){ 
 
 					it("VT282-1971 | set invalidDecodeFrequency to 1500 |"+ scnid, function() {
@@ -929,7 +932,7 @@ describe("Barcode Manual Test", function() {
 
 						runs(function()
 						{		
-							objSCN.invalidDecodeFrequency = 20000;
+							objSCN.invalidDecodeFrequency = 1500;
 							waitsFor(function() {
 							return document.getElementById("actResult").innerHTML != "init";
 							}, "Timed out waiting for tester to respond", 300000);
@@ -974,7 +977,7 @@ describe("Barcode Manual Test", function() {
 					});
 
 				}
-*/
+
 				it("VT282-1978 | set decodeVolume to 5 |"+ scnid, function() {
 					
 					runs(function()
@@ -1026,11 +1029,11 @@ describe("Barcode Manual Test", function() {
 					{		
 						objSCN.decodeVolume = 2;
 						waitsFor(function() {
-						return document.getElementById("actResult").innerHTML != "init";
+							return document.getElementById("actResult").innerHTML != "init";
 						}, "Timed out waiting for tester to respond", 300000);
 						runs(function() {
 						expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-						//objSCN.disable();
+							objSCN.decodeVolume = 5;
 						});
 					});
 				});
@@ -1040,13 +1043,13 @@ describe("Barcode Manual Test", function() {
 					runs(function()
 					{
 						setObjective("VT282-1974 | set decodeSound to local wave file path|");
-						setInstruction("Scan code128 barcode with" + scnid + "check for the wave file to play(wave file should at application folder)");
+						setInstruction("Scan code128 barcode with" + scnid + "check for the wave file to play(wave file should at application/sdcard folder)");
 						setExpected("wave file should play after barcode is decoded");
 						objSCN.enable({},callbackenable);
 						setTimeout(function() {
 							enableFlag = true;
 						}, ENABLE1K);
-						dispCurrentProcess("Enabling Scanner");
+						//dispCurrentProcess("Enabling Scanner");
 					});
 					waitsFor(function()
 					{
@@ -1055,7 +1058,14 @@ describe("Barcode Manual Test", function() {
 
 					runs(function()
 					{		
-						objSCN.decodeSound = 'file://Application/alarm5.wav';
+						if(isAndroid)
+						{
+							objSCN.decodeSound = 'file:///sdcard/decode.wav';
+						}
+						else
+						{
+							objSCN.decodeSound = 'file://Application/alarm5.wav';
+						}
 						waitsFor(function() {
 						return document.getElementById("actResult").innerHTML != "init";
 						}, "Timed out waiting for tester to respond", 300000);
@@ -1142,7 +1152,7 @@ describe("Barcode Manual Test", function() {
 							setTimeout(function() {
 								enableFlag = true;
 							}, ENABLE1K);
-							dispCurrentProcess("Enabling Scanner");
+							//dispCurrentProcess("Enabling Scanner");
 						});
 						waitsFor(function()
 						{
@@ -1230,12 +1240,12 @@ describe("Barcode Manual Test", function() {
 					{
 						setObjective("VT282-1995 | call getAllProperties() after set reader param |");
 						setInstruction("Don't scan and check for all the supported propertylist for scanner" + scnid);
-						setExpected("all the supported properties with their default value should return in callback, scantimeout should be 7000 and picklistMode as softwarereticle");
+						setExpected("all the supported properties with their default value should return in callback, scanTimeout should be 7000 and picklistMode as " + reticleType);
 						objSCN.enable();
 						setTimeout(function() {
 							enableFlag = true;
 						}, ENABLE1K);
-						dispCurrentProcess("Enabling Scanner");
+						//dispCurrentProcess("Enabling Scanner");
 					});
 					waitsFor(function()
 					{
@@ -1244,9 +1254,9 @@ describe("Barcode Manual Test", function() {
 
 					runs(function()
 					{		
-						objSCN.picklistMode = "softwareReticle";
-						objSCN.scantimeout = 7000;
-						objSCN.getAllProperties(callbackenable);
+						objSCN.picklistMode = reticleType;
+						objSCN.scanTimeout = 7000;
+						objSCN.getAllProperties(callback1995);
 						waitsFor(function() {
 						return document.getElementById("actResult").innerHTML != "init";
 						}, "Timed out waiting for tester to respond", 300000);
@@ -1278,7 +1288,7 @@ describe("Barcode Manual Test", function() {
 					{		
 						objSCN.alldecoders = "true";
 						objSCN.code93 = "true";
-						objSCN.getAllProperties(callbackenable);
+						objSCN.getAllProperties(callback1996);
 						waitsFor(function() {
 						return document.getElementById("actResult").innerHTML != "init";
 						}, "Timed out waiting for tester to respond", 300000);
@@ -1352,18 +1362,21 @@ describe("Barcode Manual Test", function() {
 					});
 				});
 
-				it("VT282-2008 | call getSupportedProperties() with anonymous callback |"+ scnid, function() {
-					
+				it("VT282-2008 | call getSupportedProperties() with anonymous callback |"+ scnid, function()
+				{
 					runs(function()
 					{
 						setObjective("VT282-2008 | call getSupportedProperties() with anonymous callback |");
 						setInstruction("Don't scan and check for the supported propertylist for scanner" + scnid);
 						setExpected("all the supported properties should return with anonymous callback");
 						objSCN.enable();
-						setTimeout(function() {
+						
+						setTimeout(function()
+						{
 							enableFlag = true;
 						}, ENABLE1K);
 					});
+					
 					waitsFor(function()
 					{
 						return enableFlag;
@@ -1374,12 +1387,16 @@ describe("Barcode Manual Test", function() {
 						objSCN.alldecoders = "true";
 						objSCN.code93 = "true";
 						objSCN.getSupportedProperties(function(data){enablecallbackdata(JSON.stringify(data));});
-						waitsFor(function() {
-						return document.getElementById("actResult").innerHTML != "init";
+						
+						waitsFor(function()
+						{
+							return document.getElementById("actResult").innerHTML != "init";
 						}, "Timed out waiting for tester to respond", 300000);
-						runs(function() {
-						expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-						//objSCN.disable();
+						
+						runs(function()
+						{
+							expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+							//objSCN.disable();
 						});
 					});
 				});
@@ -1392,7 +1409,8 @@ describe("Barcode Manual Test", function() {
 						setInstruction("check for all the supported propertylist for scanner" + scnid);
 						setExpected("all the supported properties should return in async callback");
 						objSCN.enable();
-						setTimeout(function() {
+						setTimeout(function()
+						{
 							enableFlag = true;
 						}, ENABLE8K);
 					});
@@ -1404,19 +1422,19 @@ describe("Barcode Manual Test", function() {
 					runs(function()
 					{		
 						objSCN.getSupportedProperties(callbackenable);
-						waitsFor(function() {
-						return document.getElementById("actResult").innerHTML != "init";
+						waitsFor(function()
+						{
+							return document.getElementById("actResult").innerHTML != "init";
 						}, "Timed out waiting for tester to respond", 300000);
-						runs(function() {
-						expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-						objSCN.disable();
+						
+						runs(function()
+						{
+							expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+							objSCN.disable();
 						});
 					});
 				});
-
 			});	
-
 		})(enumData[j]);
-
 	}
 });	
