@@ -56,18 +56,54 @@ var writeIntoLog = function (desc, data){
 		
 }
 
+function leftZeroFill(number, targetLength) {
+    var output = number + '';
+    while (output.length < targetLength) {
+        output = '0' + output;
+    }
+    return output;
+}
+
 //Display Results on Device
 var displayResult = function (desc, data){
-	$('#myList').empty();
-	var node=document.createElement("LI");
-	var textnode =document.createTextNode(desc);
-	node.appendChild(textnode);
-	document.getElementById("myList").appendChild(node);
-	node = document.createElement("LI");
-	var output = "Output:"+ '<br/>' + data;
-	textnode=document.createTextNode(output);
-	node.appendChild(textnode);
-	document.getElementById("myList").appendChild(node);
+    $('#myList').empty();
+    if (desc != "Output: ")
+    {
+        var node=document.createElement("LI");
+        var textnode =document.createTextNode(desc);
+        node.appendChild(textnode);
+        document.getElementById("myList").appendChild(node);
+    }
+    node = document.createElement("LI");
+    textnode = document.createTextNode("Output:");
+    node.appendChild(textnode);
+
+    list = document.createElement("ul");
+    node.appendChild(list);
+
+    lines = data.split(/\r\n|\r|\n|<br>|<br\/>/g);
+
+    var len = lines.length, i;
+
+    for(i = 0; i < len; i++ )
+        lines[i] && lines.push(lines[i]);
+
+    lines.splice(0 , len);
+
+    if (lines.length > 1)
+    {
+        var time = new Date();
+        lines.unshift("Time: " + leftZeroFill(time.getHours(),2) + ":" + leftZeroFill(time.getMinutes(),2) + ":" + leftZeroFill(time.getSeconds(),2) + "." + leftZeroFill(~~(time.getMilliseconds()/10),2));
+    }
+
+    Rho.Log.info(lines.join('\n'),"GOT IT!");
+
+    for(var cnt = 0 ; cnt < lines.length; cnt++ )
+    {
+       list.appendChild(document.createElement("LI")).appendChild(document.createTextNode(lines[cnt]));    
+    }
+    
+    document.getElementById("myList").appendChild(node);
 }
 
 var dispCurrentProcess = function (data){
