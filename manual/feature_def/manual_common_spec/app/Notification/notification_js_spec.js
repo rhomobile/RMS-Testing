@@ -350,23 +350,23 @@ describe("Notification Manual FD Tests", function () {
             });
         });
 
-        it("VT281-0859|Play File method with no file path|", function () {
+        //Commented as negative test case/ need to move to auto_common_spec as well
+        //it("VT281-0859|Play File method with no file path|", function () {
 
-            runs(function () {
-                dispTestCaseRunning(" Observe for any odd behavior in the application  ");
-                dispExpectedResult("Pass if there is no abnormal behavior  ");
-                Rho.Notification.playFile('', '.mp3');
-            });
+        //    runs(function () {
+        //        dispTestCaseRunning(" Observe for any odd behavior in the application  ");
+        //        dispExpectedResult("Pass if there is no abnormal behavior  ");
+        //        Rho.Notification.playFile('', '.mp3');
+        //    });
 
-            waitsFor(function () {
-                return captured;
-            }, 'Mp3 file should have been played by now ', 45000);
+        //    waitsFor(function () {
+        //        return captured;
+        //    }, 'Mp3 file should have been played by now ', 45000);
 
-            runs(function () {
-                expect(testResult).toEqual(true);
-            });
-        });
-
+        //    runs(function () {
+        //        expect(testResult).toEqual(true);
+        //    });
+        //});
 
         it("VT307-009|Play File - Mp3 file without media type|", function () {
 
