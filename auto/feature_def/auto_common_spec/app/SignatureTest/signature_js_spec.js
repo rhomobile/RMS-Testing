@@ -77,8 +77,8 @@ describe("Signature JS API Test", function() {
 						expect(Rho.Signature.border).toEqual(true);
 						expect(Rho.Signature.height).toEqual(150);
 						expect(Rho.Signature.left).toEqual(15);	
-						expect(Rho.Signature.top).toEqual(15);
-						expect(Rho.Signature.width).toEqual(15);
+						expect(Rho.Signature.top).toEqual(60);
+						expect(Rho.Signature.width).toEqual(200);
 						
 						Rho.Signature.hide();
 					});
