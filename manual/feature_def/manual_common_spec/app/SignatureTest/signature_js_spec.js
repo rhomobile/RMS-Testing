@@ -121,7 +121,7 @@ describe("Signature Manual Test", function () {
         it("VT299-002 | Call takeFullScreen with callback as function and returned status cancel |", function () {
 
             runs(function () {
-                setObjective("VT299-001 |Call takeFullScreen with callback as function and returned status cancel |");
+                setObjective("VT299-002 |Call takeFullScreen with callback as function and returned status cancel |");
                 setInstruction("Wait for 10 sec for Fullscreen Signature box to comeup and press cancel after drawing any signature on signature area");
                 setExpected("The returned status should be cancel and no URI of the signature image should be returned");
                 delayForNineSeconds();
@@ -281,7 +281,7 @@ describe("Signature Manual Test", function () {
             }, 'wait to callback to fire or timeout', 10000);
 
             runs(function () {
-                Rho.Signature.show(null);
+                Rho.Signature.show();
                 delayForFiveSeconds();
             });
 
@@ -319,7 +319,7 @@ describe("Signature Manual Test", function () {
                 }, 'wait to callback to fire or timeout', 10000);
 
                 runs(function () {
-                    Rho.Signature.show(null);
+                    Rho.Signature.show();
                     delayForFiveSeconds();
                 });
 
@@ -358,7 +358,7 @@ describe("Signature Manual Test", function () {
                 }, 'wait to callback to fire or timeout', 10000);
 
                 runs(function () {
-                    Rho.Signature.show(null);
+                    Rho.Signature.show();
                     delayForFiveSeconds();
                 });
 
@@ -386,7 +386,7 @@ describe("Signature Manual Test", function () {
         it("VT299-012 | Call takeFullScreen with bgColor as #0000FF(RGB), penColor as #FFFFFF00 and callback |", function () {
 
             runs(function () {
-                setObjective("VT299-012 |Call takeFullScreen with bgColor as #0000FF(RGB), penColor as #FFFFFF00 and callback|");
+                setObjective("VT299-012 |Call takeFullScreen with bgColor as #FFFF0000(RGB), penColor as #FFFFFF00 and callback|");
                 setInstruction("Wait for 10 sec for Signature box(FullScreen) to comeup and press capture after drawing, check the image at returned URI");
                 setExpected("The signature area should be red colored fullscreen and pen color yellow, the same signature should be saved at return URI");
                 delayForNineSeconds();
@@ -398,7 +398,7 @@ describe("Signature Manual Test", function () {
                 }, 'wait to callback to fire or timeout', 10000);
 
                 runs(function () {
-                    Rho.Signature.takeFullScreen({'bgColor': '#FF0000FF', 'penColor': '#FFFF00'}, callbacktake);
+                    Rho.Signature.takeFullScreen({'bgColor': '#FFFF0000', 'penColor': '#FFFFFF00'}, callbacktake);
                     delayForNineSeconds();
                 });
 
@@ -422,9 +422,9 @@ describe("Signature Manual Test", function () {
         it("VT299-013 | Call takeFullScreen with bgColor as #FFFFFF00 (ARGB), penColor as #FF00FF(RGB), penWidth as 1 and callback |", function () {
 
             runs(function () {
-                setObjective("VT299-013 |Call takeFullScreen with bgColor as #FF0000FF (ARGB), penColor as #FF00FF(RGB), penWidth as 1 and callback|");
+                setObjective("VT299-013 |Call takeFullScreen with bgColor as #FF0000FF (ARGB), penColor as #FFFF00FF(RGB), penWidth as 1 and callback|");
                 setInstruction("Wait for 10 sec for Signature box(FullScreen) to comeup and press capture after drawing, check the image at returned URI");
-                setExpected("The signature area should be blue colored fullscreen, pen color pink and thin width penline, the same signature should be saved at return URI");
+                setExpected("The signature area should be blue colored fullscreen, pen color magenta and thin width penline, the same signature should be saved at return URI");
                 delayForNineSeconds();
             });
 
@@ -434,7 +434,7 @@ describe("Signature Manual Test", function () {
                 }, 'wait to callback to fire or timeout', 10000);
 
                 runs(function () {
-                    Rho.Signature.takeFullScreen({'bgColor': '#FFFFFF00', 'penColor': '#FF00FF', 'penWidth': 1}, callbacktake);
+                    Rho.Signature.takeFullScreen({'bgColor': '#FF0000FF', 'penColor': '#FFFF00FF', 'penWidth': 1}, callbacktake);
                     delayForNineSeconds();
                 });
 
@@ -665,7 +665,7 @@ describe("Signature Manual Test", function () {
                 }, 'wait to callback to fire or timeout', 10000);
 
                 runs(function () {
-                    Rho.Signature.show({bgColor: '#FFFF8C00', penColor: '#00FF00', penWidth: 1, compressionFormat: CONST_JPG, fileName: 'TC19sig', outputFormat: 'image'});
+                    Rho.Signature.show({bgColor: '#FFFF8C00', penColor: '#FF00FF00', penWidth: 1, compressionFormat: CONST_JPG, fileName: 'TC19sig', outputFormat: 'image'});
                     delayForFiveSeconds();
                 });
 
@@ -831,7 +831,7 @@ describe("Signature Manual Test", function () {
                         Rho.Signature.width = 200;
                         Rho.Signature.outputFormat = 'dataUri';
                         Rho.Signature.border = true;
-                        Rho.Signature.show(null);
+                        Rho.Signature.show();
 
                         delayForFiveSeconds();
                     });
@@ -932,7 +932,7 @@ describe("Signature Manual Test", function () {
                         Rho.Signature.fileName = 'TC25_Sig';
                         Rho.Signature.compressionFormat = CONST_JPG;
                         Rho.Signature.setVectorCallback(callbackVector);
-                        Rho.Signature.show(null);
+                        Rho.Signature.show();
 
                         delayForFiveSeconds();
                     });
@@ -983,7 +983,7 @@ describe("Signature Manual Test", function () {
                         Rho.Signature.setVectorCallback(function (data) {
                             vectorcallbackdata(data);
                         });
-                        Rho.Signature.show(null);
+                        Rho.Signature.show();
 
                         delayForFiveSeconds();
                     });
@@ -1072,7 +1072,7 @@ describe("Signature Manual Test", function () {
                     Rho.Signature.fileName = 'TC27_Sig';
                     Rho.Signature.compressionFormat = CONST_JPG;
                     Rho.Signature.setVectorCallback(callbackVector);
-                    Rho.Signature.show(null);
+                    Rho.Signature.show();
 
                     delayForFiveSeconds();
                 });
