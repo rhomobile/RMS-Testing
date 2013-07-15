@@ -1503,9 +1503,7 @@ describe("<ORM Db Reset specs>", function() {
         Rho.ORM.clear();
     });
 
-
-    it("VT302-0068 | Call haveLocalChanges without having any model",function(){
-
+    it("VT302-0068b | Call haveLocalChanges without having any model",function(){
       expect(Rho.ORM.haveLocalChanges()).toEqual(false);
     });
 
@@ -1523,6 +1521,7 @@ describe("<ORM Db Reset specs>", function() {
       db.$execute_sql("DELETE FROM SOURCES");
       db.$execute_sql("DELETE FROM OBJECT_VALUES");
       db.$execute_sql("DELETE FROM CHANGED_VALUES");
+      expect(Rho.ORM.haveLocalChanges()).toEqual(false);
       Rho.ORM.clear();
     });
 });
