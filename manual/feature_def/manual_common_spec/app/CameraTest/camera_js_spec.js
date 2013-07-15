@@ -265,7 +265,7 @@ describe("Camera Manual Test", function() {
 						setObjective("VT285-029 | Call choosePicture with property as colorModel,desiredHeight,desiredWidth and callback|");
 						setInstruction("take any image and Check for the color of image, and width/height");
 						setExpected("The displayed image should be in grey mode, retruned image height/width should be same as the displayed image, status should be Ok");
-						objCAM.takePicture({colorModel:'greyscale',desiredHeight:640,desiredWidth:480,outputFormat:'dataUri'},function(data){callbackdatauri(data);callbackststatus = true;};
+						objCAM.takePicture({colorModel:'greyscale',desiredHeight:640,desiredWidth:480,outputFormat:'dataUri'},function(data){callbackdatauri(data);callbackststatus = true;});
 					});
 
 					waitsFor(function()
@@ -325,7 +325,7 @@ describe("Camera Manual Test", function() {
 						setExpected("The wave file should be played while capturing the image");
 						if (isWindowsMobileOrAndroidPlatform()){path = 'file://application/alarm.wav';}
 						if (isApplePlatform()) { path = '';}
-						if (isWindowsPhone8Platform() { path ='file://application/alarm.wav';}
+						if (isWindowsPhone8Platform()) { path ='file://application/alarm.wav';}
 						
 						objCAM.takePicture({captureSound:path,outputFormat:'image'},callbacktake);
 					});
@@ -467,7 +467,7 @@ describe("Camera Manual Test", function() {
 
 						if (isWindowsMobileOrAndroidPlatform()){path = 'file://application/Image042';}
 						if (isApplePlatform()) { path = '';}
-						if (isWindowsPhone8Platform() { path ='file://application/Image042';}
+						if (isWindowsPhone8Platform()) { path ='file://application/Image042';}
 						objCAM.compressionFormat = 'jpg';
 						objCAM.colorModel = 'grayscale';
 						objCAM.takePicture({fileName:path,outputFormat:'image'},callbacktakeraw);
@@ -500,7 +500,7 @@ describe("Camera Manual Test", function() {
 
 						if (isWindowsMobileOrAndroidPlatform()){path = 'file://application/';}
 						if (isApplePlatform()) { path = '';}
-						if (isWindowsPhone8Platform() { path ='file://application/';}
+						if (isWindowsPhone8Platform()) { path ='file://application/';}
 						objCAM.compressionFormat = 'jpg';
 						objCAM.colorModel = 'rgb';
 						objCAM.takePicture({fileName:path,outputFormat:'image'},callbacktakeraw);
@@ -533,7 +533,7 @@ describe("Camera Manual Test", function() {
 
 						if (isWindowsMobileOrAndroidPlatform()){path = 'file://application/Image044.png';}
 						if (isApplePlatform()) { path = '';}
-						if (isWindowsPhone8Platform() { path ='file://application/Image044.png';}
+						if (isWindowsPhone8Platform()) { path ='file://application/Image044.png';}
 						objCAM.compressionFormat = 'jpg';
 						objCAM.colorModel = 'rgb';
 						objCAM.takePicture({fileName:path,outputFormat:'image'},callbacktakeraw);
@@ -566,7 +566,7 @@ describe("Camera Manual Test", function() {
 
 						if (isWindowsMobileOrAndroidPlatform()){path = 'file://application/Image045';}
 						if (isApplePlatform()) { path = '';}
-						if (isWindowsPhone8Platform() { path ='file://application/Image045';}
+						if (isWindowsPhone8Platform()) { path ='file://application/Image045';}
 						objCAM.compressionFormat = 'png';
 						objCAM.colorModel = 'rgb';
 						objCAM.takePicture({fileName:path,outputFormat:'image'},callbacktakeraw);
@@ -846,7 +846,7 @@ describe("Camera Manual Test", function() {
 
 							if (isWindowsMobileOrAndroidPlatform()){path = 'file://application/Image060';}
 							if (isApplePlatform()) { path = '';}
-							if (isWindowsPhone8Platform() { path ='file://application/Image060';}
+							if (isWindowsPhone8Platform()) { path ='file://application/Image060';}
 
 							objCAM.takePicture({outputFormat:'image',saveToDeviceGallery:false,fileName:path},callbacktakeraw);
 						});
@@ -878,7 +878,7 @@ describe("Camera Manual Test", function() {
 
 							if (isWindowsMobileOrAndroidPlatform()){path = 'file://application/Image060';}
 							if (isApplePlatform()) { path = '';}
-							if (isWindowsPhone8Platform() { path ='file://application/Image060';}
+							if (isWindowsPhone8Platform()) { path ='file://application/Image060';}
 
 							objCAM.takePicture({outputFormat:'image',saveToDeviceGallery:true,fileName:path},callbacktakeraw);
 						});
@@ -1018,7 +1018,7 @@ describe("Camera Manual Test", function() {
 
 							if (isWindowsMobileOrAndroidPlatform()){path = 'file://application/Image067';}
 							if (isApplePlatform()) { path = '';}
-							if (isWindowsPhone8Platform() { path ='file://application/Image067';}
+							if (isWindowsPhone8Platform()) { path ='file://application/Image067';}
 
 							objCAM.takePicture({outputFormat:'dataUri',useSystemViewfinder:true,saveToDeviceGallery:false,fileName:path},callbacktakeuri);
 						});
@@ -1079,7 +1079,7 @@ describe("Camera Manual Test", function() {
 
 							if (isWindowsMobileOrAndroidPlatform()){path = 'file://application/alarm.wav';}
 							if (isApplePlatform()) { path = '';}
-							if (isWindowsPhone8Platform() { path ='file://application/alarm.wav';}
+							if (isWindowsPhone8Platform()) { path ='file://application/alarm.wav';}
 
 							objCAM.desiredHeight = 1280;
 							objCAM.desiredHeight = 720;
@@ -1129,6 +1129,7 @@ describe("Camera Test for choosePicture()", function() {
 
 	var callbackchooseraw = function (data){
 			callbackdataraw(JSON.stringify(data));
+			callbackststatus = true;
 	}
 
 	beforeEach(function() {
@@ -1316,7 +1317,7 @@ describe("Camera Test for choosePicture()", function() {
 					setObjective("VT285-008 | Call choosePicture with outputFormat:image and check for all retrun data|");
 					setInstruction("choose the image and Check for the color of image");
 					setExpected("The displayed image should be in grey mode");
-					Rho.Camera.choosePicture({colorModel:'grayscale'},function(data){callbackdatauri(data);callbackststatus = true;};
+					Rho.Camera.choosePicture({colorModel:'grayscale'},function(data){callbackdatauri(data);callbackststatus = true;});
 				});
 
 				waitsFor(function()
@@ -1342,7 +1343,7 @@ describe("Camera Test for choosePicture()", function() {
 					setObjective("VT285-009 | Call choosePicture with property as colorModel,desiredHeight,desiredWidth and callback|");
 					setInstruction("choose the image and Check for the color of image");
 					setExpected("The displayed image should be in rgb mode, retruned image height/width should be same as the displayed image, status should be Ok");
-					Rho.Camera.choosePicture({colorModel:'rgb',desiredHeight:640,desiredWidth:480},function(data){callbackdatauri(data);callbackststatus = true;};
+					Rho.Camera.choosePicture({colorModel:'rgb',desiredHeight:640,desiredWidth:480},function(data){callbackdatauri(data);callbackststatus = true;});
 				});
 
 				waitsFor(function()
@@ -1360,6 +1361,258 @@ describe("Camera Test for choosePicture()", function() {
 					});
 				});
 			});
+
+			it("VT285-071 | Call getCameraByType with Main/back and callback as function|", function() {
+
+				runs(function()
+				{
+					setObjective("VT285-071 | Call getCameraByType with Main/back and callback as function|");
+					setInstruction("check for callback to fire");
+					setExpected("The return values should be main camera object and the main camera should open to take picture");
+					var cam = Rho.Camera.CameraType;
+					Rho.Camera.getCameraByType(cam,callbackchooseraw);
+				});
+
+				waitsFor(function()
+				{
+					return callbackststatus;
+				}, '10sec wait for callback to fire', 10000);
+
+				runs(function()
+				{
+					waitsFor(function() {
+					return document.getElementById("actResult").innerHTML != "init";
+					}, "Timed out waiting for tester to respond", 300000);
+					runs(function() {
+					expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+					});
+				});
+			});
+
+			it("VT285-073 | Call getCameraByType with main/ front and callback as anonymous function|", function() {
+
+				runs(function()
+				{
+					setObjective("VT285-073 | Call getCameraByType with main/ front and callback as anonymous function|");
+					setInstruction("check for callback to fire");
+					setExpected("The return values should be main camera object and the main camera should open to take picture");
+					var cam = Rho.Camera.CameraType;
+					Rho.Camera.getCameraByType(cam,function(data){callbackdataraw(data);callbackststatus = true;});
+				});
+
+				waitsFor(function()
+				{
+					return callbackststatus;
+				}, '10sec wait for callback to fire', 10000);
+
+				runs(function()
+				{
+					waitsFor(function() {
+					return document.getElementById("actResult").innerHTML != "init";
+					}, "Timed out waiting for tester to respond", 300000);
+					runs(function() {
+					expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+					});
+				});
+			});
+
+			it("VT285-074 | Call getCameraByType with main/ front and no callback (Synchronous Access)|", function() {
+
+				runs(function()
+				{
+					setObjective("VT285-074 | Call getCameraByType with main/ front and no callback (Synchronous Access)|");
+					setInstruction("check for callback to fire");
+					setExpected("The return values should be main camera object and the main camera should open to take picture");
+					var cam = Rho.Camera.CameraType;
+					var data = Rho.Camera.getCameraByType(cam);
+					callbackchooseraw(data);
+				});
+
+				waitsFor(function()
+				{
+					return callbackststatus;
+				}, '10sec wait for callback to fire', 10000);
+
+				runs(function()
+				{
+					waitsFor(function() {
+					return document.getElementById("actResult").innerHTML != "init";
+					}, "Timed out waiting for tester to respond", 300000);
+					runs(function() {
+					expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+					});
+				});
+			});
+
+			it("VT285-075| Call setDefault with front/Main camera |" + camid + camtype , function() {
+
+					runs(function()
+					{
+						setObjective("VT285-075 |Call setDefault with front/Main camera|");
+						setInstruction("Take an image " + camid);
+						setExpected("The Front/main camera should start to take picture as it has set to default object");
+						Rho.Camera.takePicture({},callbackchooseraw);
+					});
+
+					waitsFor(function()
+					{
+						return callbackststatus;
+					}, '10sec wait for callback to fire', 10000);
+
+					runs(function()
+					{
+						waitsFor(function() {
+						return document.getElementById("actResult").innerHTML != "init";
+						}, "Timed out waiting for tester to respond", 300000);
+						runs(function() {
+						expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+						});
+					});
+			})
+
+			if (isAndroidOrApplePlatform())
+			{
+				it("VT285-079| Call saveImageToDeviceGallery after takepicture |" + camid + camtype , function() {
+
+						runs(function()
+						{
+							var path= '';
+							setObjective("VT285-079 |Call saveImageToDeviceGallery after takepicture|");
+							setInstruction("Take an image " + camid);
+							setExpected("The Image should be saved at device gallery");
+							Rho.Camera.takePicture({saveToDeviceGallery:false},function(data){path = data.imageUri;callbackststatus = true;});
+							saveImageToDeviceGallery(path);
+						});
+
+						waitsFor(function()
+						{
+							return callbackststatus;
+						}, '10sec wait for callback to fire', 10000);
+
+						runs(function()
+						{
+							waitsFor(function() {
+							return document.getElementById("actResult").innerHTML != "init";
+							}, "Timed out waiting for tester to respond", 300000);
+							runs(function() {
+							expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+							});
+						});
+				})
+
+				it("VT285-080| Call saveImageToDeviceGallery after choosepicture |" + camid + camtype , function() {
+
+						runs(function()
+						{
+							var path= '';
+							setObjective("VT285-080 |Call saveImageToDeviceGallery after choosepicture|");
+							setInstruction("choose an image " + camid);
+							setExpected("The Image should be saved at device gallery");
+							Rho.Camera.choosePicture({saveToDeviceGallery:false},function(data){path = data.imageUri;callbackststatus = true;});
+							saveImageToDeviceGallery(path);
+						});
+
+						waitsFor(function()
+						{
+							return callbackststatus;
+						}, '10sec wait for callback to fire', 10000);
+
+						runs(function()
+						{
+							waitsFor(function() {
+							return document.getElementById("actResult").innerHTML != "init";
+							}, "Timed out waiting for tester to respond", 300000);
+							runs(function() {
+							expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+							});
+						});
+				})
+
+				it("VT285-081| Call saveImageToDeviceGallery with pathToImage |" + camid + camtype , function() {
+
+						runs(function()
+						{
+							var path= '';
+							setObjective("VT285-081 |Call saveImageToDeviceGallery with pathToImage|");
+							setInstruction("choose an image " + camid);
+							setExpected("The Image should be saved at device gallery");
+
+							if (isWindowsMobileOrAndroidPlatform()){path = 'file://application/Image067';}
+							if (isApplePlatform()) { path = '';}
+							if (isWindowsPhone8Platform()) { path ='file://application/Image067';}
+
+							saveImageToDeviceGallery(path);
+						});
+
+						waitsFor(function()
+						{
+							return callbackststatus;
+						}, '10sec wait for callback to fire', 10000);
+
+						runs(function()
+						{
+							waitsFor(function() {
+							return document.getElementById("actResult").innerHTML != "init";
+							}, "Timed out waiting for tester to respond", 300000);
+							runs(function() {
+							expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+							});
+						});
+				})
+			}
+
+			it("VT285-082| Call getAllProperties without any callback |" + camid + camtype , function() {
+
+					runs(function()
+					{
+						setObjective("VT285-082 |Call getAllProperties without any callback|");
+						setInstruction("check all the properties has retruened with deafult value or not " + camid);
+						setExpected("It should return all the properties of camera with it's default value");
+						var data = Rho.Camera.getAllProperties();
+						callbackchooseraw(data);
+					});
+
+					waitsFor(function()
+					{
+						return callbackststatus;
+					}, '10sec wait for callback to fire', 10000);
+
+					runs(function()
+					{
+						waitsFor(function() {
+						return document.getElementById("actResult").innerHTML != "init";
+						}, "Timed out waiting for tester to respond", 300000);
+						runs(function() {
+						expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+						});
+					});
+			})
+
+			it("VT285-083| Call getAllProperties with Anonymous callback |" + camid + camtype , function() {
+
+					runs(function()
+					{
+						setObjective("VT285-083 |Call getAllProperties with Anonymous callback|");
+						setInstruction("check all the properties has retruened with deafult value or not " + camid);
+						setExpected("It should return all the properties of camera with it's default value");
+						Rho.Camera.getSupportedProperties(function(data){callbackdataraw(data);callbackststatus = true;});
+					});
+
+					waitsFor(function()
+					{
+						return callbackststatus;
+					}, '10sec wait for callback to fire', 10000);
+
+					runs(function()
+					{
+						waitsFor(function() {
+						return document.getElementById("actResult").innerHTML != "init";
+						}, "Timed out waiting for tester to respond", 300000);
+						runs(function() {
+						expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+						});
+					});
+			})
 
 		})(enumData[j]);
 
