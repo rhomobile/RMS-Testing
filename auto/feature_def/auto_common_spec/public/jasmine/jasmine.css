@@ -80,3 +80,18 @@ body { background-color: #eeeeee; padding: 0; margin: 5px; overflow-y: scroll; }
 #TrivialReporter.show-passed .passed, #TrivialReporter.show-skipped .skipped { display: block; }
 #TrivialReporter #jasmine_content { position: fixed; right: 100%; }
 #TrivialReporter .runner { border: 1px solid gray; display: block; margin: 5px 0; padding: 2px 0 2px 10px; }
+
+#detailsdiv 
+{
+	background: url("img/grid2.gif") repeat scroll 0 0 transparent;
+	border: 1px solid #DCDCDC;
+	color: #8B0000;
+	display: block;
+	font-weight: bold;
+	left: 170px;
+	padding: 10px;
+	position: fixed;
+	text-align: center;
+	top: 200px;
+	width: 530px;
+}

@@ -2,160 +2,38 @@
 
 <html>
 <head>
-    <link type="image/png" rel="shortcut icon" href="/public/jasmine/jasmine_favicon.png">
-    <link type="text/css" rel="stylesheet" href="/public/jasmine/jasmine.css">
-
-    <script type="text/javascript" charset="utf-8" src="/public/jquery/jquery-1.6.4.min.js"></script>
-	<script type="text/javascript" charset="utf-8" src="/public/api/rhoapi-modules.js"></script>
-
-    <script type="text/javascript" src="/public/jasmine/jasmine.js"></script>
-    <script type="text/javascript" src="/public/jasmine/jasmine-html.js"></script>
-    <script type="text/javascript" src="/public/jasmine/jasmine.junit_reporter.js"></script>
-    <script type="text/javascript" src="helpers/rhologReporter.js"></script>
-
-
-    <script type="text/javascript" src="helpers/jasmine-extensions.js"></script>
-    <script type="text/javascript" src="helpers/specHelpers.js"></script>
-    <script type="text/javascript" src="/public/js/server_url.js" ></script>
-
-
-    <!-- Application auto tests -->
-    
-    <!-- Log auto tests   SHOULD BE FIRST! -->
-    <script type="text/javascript" src="LogTest/log_js_spec.js"></script>
-                                          
-    <!--  NOT READY. Use manual -->
-    <!-- <script type="text/javascript" src="ApplicationTest/application_js_spec.js"></script> -->
-
-    <!-- Barcode -->
-    <!--<script type="text/javascript" src="BarcodeTest/barcode_js_test.js"></script>
-    <script type="text/javascript" src="BarcodeTest/barcode_js_spec.js"></script> -->
-
-    <!-- CardReader -->
-    <script type="text/javascript" src="CardReaderTest/cardreader_js_test.js"></script>
-    <script type="text/javascript" src="CardReaderTest/cardreader_js_spec.js"></script>
-                    
-
-    <!-- Database auto tests -->
-    <script type="text/javascript" src="DatabaseTest/database_js_spec.js"></script>
-                             
-    <!-- File -->
-    <script type="text/javascript" src="FileTest/file_js_spec.js"></script>
-              
-	<!-- Indicators 
-	<script type="text/javascript" src="IndicatorsTest/indicatorsTest.js"></script>
-	<script type="text/javascript" src="IndicatorsTest/indicatorsSpec.js"></script>
-                    -->
-    <!-- KeyCapture -->
-    <script type="text/javascript" src="KeyCaptureTest/keycapture_js_test.js"></script>
-    <script type="text/javascript" src="KeyCaptureTest/keycapture_js_spec.js"></script>
-                    
-    <!-- Network auto tests -->
-    <script type="text/javascript" src="NetworkTest/network_js_spec.js"></script>
-    <!--<script type="text/javascript" src="NetworkTest/network_ruby_spec.js"></script>
-    <script type="text/javascript" src="NetworkTest/network_ruby_test.js"></script>-->
-
-    <!-- ORM Tests -->  
-    <script type="text/javascript" src="OrmTest/orm_js_spec.js"></script>
-    <script type="text/javascript" src="OrmTest/orm_model_spec.js"></script>
-                     
-	<!-- ScreenOrientation tests -->
-	<script type="text/javascript" src="ScreenOrientationTest/screenorientation_js_spec.js"></script>
-	<script type="text/javascript" src="ScreenOrientationTest/screenorientation_ruby_spec.js"></script>
-	<script type="text/javascript" src="ScreenOrientationTest/screenorientation_ruby_test.js"></script>
-                                 
-    <!-- Signature tests -->
-    <script type="text/javascript" src="SignatureTest/signature_js_test.js"></script>
-    <script type="text/javascript" src="SignatureTest/signature_js_spec.js"></script>
-                         
-    <!-- System auto tests -->  
-    <script type="text/javascript" src="SystemRE1Test/system_js_test.js"></script>
-    <script type="text/javascript" src="SystemRE1Test/system_js_spec.js"></script>
-                             
-    <!-- Sensor -->
-    <script type="text/javascript" src="SensorsTest/sensor_js_spec.js"></script>
-    <!--<script type="text/javascript" src="SensorsTest/SensorsSpec.js"></script>
-    <script type="text/javascript" src="SensorsTest/SensorsTest.js"></script>-->
-                
-    <!-- WebView auto tests -->
-    <!--  NOT READY. Use manual -->
-    <!-- <script type="text/javascript" src="WebViewTest/webview_js_spec.js"></script> -->
-
     <title>RhoElements Common API Tests</title>
-    <style>
-        a {
-            text-decoration: none
-        }
-    </style>
-
     <script type="text/javascript">
-    	(function () {
-    	
-    	    Rho.Application.nativeMenu = [ {'label':'Exit', 'action': 'exit'} ];
-    	    
-            var jasmineEnv = jasmine.getEnv();
-            jasmineEnv.updateInterval = 1000;
-
-            var htmlReporter = new jasmine.HtmlReporter();
-            var junitReporter = new jasmine.JUnitXmlReporter();
-
-            junitReporter.useDotNotation = false
-            jasmineEnv.addReporter(htmlReporter);
-            jasmineEnv.addReporter(new jasmine.RhologReporter());
-            jasmineEnv.addReporter(new jasmine.JUnitXmlReporter('.\\', true, true));
-            jasmineEnv.specFilter = function (spec) {
-                return htmlReporter.specFilter(spec);
-            };
-
-            var currentWindowOnload = window.onload;
-            window.onload = function () {
-                if (currentWindowOnload) {
-                    currentWindowOnload();
-                }
-                execJasmine();
-            };
-
-            function execJasmine() {
-            	var oldCallback = jasmineEnv.currentRunner().finishCallback;
-				jasmineEnv.currentRunner().finishCallback = function () {
-					oldCallback.apply(this, arguments);
-					window.location.href = '/app/SpecRunnerBarcode.html';
-				};
-                jasmineEnv.execute();
-            }
-        })();
+		var listOfRunners = [
+			"LogTest/specRunner.html",
+			"CardReaderTest/specRunner.html",
+			"DatabaseTest/specRunner.html",
+			"FileTest/specRunner.html",
+			"KeyCaptureTest/specRunner.html",
+			"NetworkTest/specRunner.html",
+			"OrmTest/specRunner.html",
+			"ScreenOrientationTest/specRunner.html",
+			"SignatureTest/specRunner.html",
+			"SystemRE1Test/specRunner.html",
+			"SensorsTest/specRunner.html",
+			"BarcodeTest/specRunner.html"//,
+			//"ApplicationTest/specRunner.html", //Not ready, use manual
+			//"IndicatorsTest/specRunner.html", //Broken on WMCE
+			//"WebViewTest/specRunner.html", //Not Ready, use manual
+		];
+		
+		function loadEvent()
+		{
+			setTimeout(function()
+			{
+				window.location.href = listOfRunners[0] + '?' + encodeURIComponent(JSON.stringify(listOfRunners.slice(1, listOfRunners.length)));
+			},2000);
+		}
+		window.addEventListener('load', loadEvent);
     </script>
 </head>
 <body>
-<br>
-
-<h1>RhoElements Common API Tests</h1>
-
-<p>
-
-<div id="output" style="display:none"></div>
-
-<!-- Required for Barcode Tests -->
-<div id="retProp" style="display:none"></div>
-<div id="scannerReady" style="display:none"></div>
-
-<!-- Required for Signal and Battery Tests -->
-<div id="indicatorOutput" style="display:none">Hello</div>
-<div id="indicatorOutput2" style="display:none">Hello</div>
-<!-- Required for Network -->
-<div id="connectionStatus"></div>
-<div id="networkPort" style="display:none"></div>
-<div id="socketReady" style="display:none"></div>
-</p>
-
-<!-- Required for Displaying Current Execution Process and Displaying Output on Device -->
-<div id="detailsdiv"></div>
-<div id="test">
-<ul id="myList">
-</ul>
-<ul id="myList2">
-</ul>
-</div>
-
+	<h1>RhoElements Common API Tests</h1>
+	<h2>About to load first test page...</h2>
 </body>
 </html>
