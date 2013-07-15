@@ -95,14 +95,14 @@ var arr_sig_property = [
 	propertyValue	:	"Test_123",
 	expectedResult	:	"Test_123"
 },
-{
+/*{
 	testName		:	"VT299-1014 | Set fileName :123| 123",
 	propertyName	:	"fileName",
 	sigTypes		:	"All",
 	OSTypes			:	"All",
 	propertyValue	:	"123",
 	expectedResult	:	"123"
-},
+},*/
 {
 	testName		:	"VT299-1015 | Set fileName :signature| signature",
 	propertyName	:	"fileName",
