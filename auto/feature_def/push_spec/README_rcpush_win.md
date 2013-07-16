@@ -39,25 +39,17 @@ In order to run RC Push Integration Tests for Windows Mobile platform you will n
 10. Modify `C:\Test\RMS-Testing\auto\feature_def\push_spec\config.yml` with the following settings:
 
 	:::yaml
-	# path to local rhodes workspace
 	rhodes: "../../../../rhodes"
-
-	# path to local rhoconnect workspace
 	rhoconnect: "../../../../rhoconnect"
-
-	# path to rhoelements
 	rhoelements: "../../../../Motorola-Extensions"
-
-	# path to testsuite_root
 	testsuite_root: "../../../../RMS-Testing"
 
-	# ip address of the remote RC app
 	rc_stack_address: <ip_address_of your_mac_machine>
 	rc_stack_port: 9292
-	# ip address of the remote RC Push Server
+	
 	rc_push_server_address: <ip_address_of_your_mac_machine>
 	rc_push_server_port: 8675
-	# address of the mobile device
+	
 	device_address: <ip_address_of_the_windows_mobile_device>
 
 10. Verify that the Windows Firewall is turned off and you can ping your Mac machine and Windows Mobile device from the PC.
