@@ -4,17 +4,25 @@ hardwareKeysTest.deviceOS = Rho.System.platform;
 console.log('DeviceOs: ' + hardwareKeysTest.deviceOS);
 hardwareKeysTest.callbackFired = false;
 hardwareKeysTest.TRIGGER = 100;
-hardwareKeysTest.LETTER_A_CODE = 0x43;
+hardwareKeysTest.LETTER_A_CODE = 0x41;
+hardwareKeysTest.textBox = null;
+hardwareKeysTest.cachedIsAndroid = null;
 
 hardwareKeysTest.isAndroid = function()
 {
-	if(hardwareKeysTest.deviceOS.toLowerCase().indexOf('android') == -1)
+	if(hardwareKeysTest.cachedIsAndroid == null)
 	{
-		console.log('It isnt android');
-		return false;
+		if(hardwareKeysTest.deviceOS.toLowerCase().indexOf('android') == -1)
+		{
+			hardwareKeysTest.cachedIsAndroid = false;
+			console.log('It isnt android');
+			return false;
+		}
+		console.log('It is android');
+		hardwareKeysTest.cachedIsAndroid = true;
+		return true;
 	}
-	console.log('It is android');
-	return true;
+	return hardwareKeysTest.cachedIsAndroid;
 };
 
 hardwareKeysTest.loadEvent = function()
@@ -109,4 +117,19 @@ hardwareKeysTest.resetTrigger = function()
 	Rho.KeyCapture.captureTrigger();
 };
 
+//////////////////////////////////////////////////////////////////////////
+// Text Box Generation
+//////////////////////////////////////////////////////////////////////////
+hardwareKeysTest.removeTextBox = function()
+{
+	document.body.removeChild(hardwareKeysTest.textBox);
+	hardwareKeysTest.textBox = null;
+};
 
+hardwareKeysTest.createTextBox = function()
+{
+	hardwareKeysTest.textBox = document.createElement('input');
+	hardwareKeysTest.textBox.type = 'text';
+	hardwareKeysTest.textBox.id = 'keyCaptureTestTextBox';
+	document.body.appendChild(hardwareKeysTest.textBox);
+};

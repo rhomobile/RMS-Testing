@@ -12,14 +12,8 @@ echo "Pull latest rhoconnect-client sources ..."
 git pull origin master
 popd
 
-# pushd rhoconnect_push_client
-# cp build.yml.gcm build.yml
-# echo -e "\nClean rhodes app ..."
-# rake clean:android
-# popd
-
 # pushd gcm_push_client
-pushd rhoconnect_push_client
+pushd push_client_rb
 cp build.yml.gcm build.yml
 # echo -e "\nClean rhodes app ..."
 # rake clean:android

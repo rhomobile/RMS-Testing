@@ -28,7 +28,7 @@ def run_apps(platform)
 	load File.join($rho_root,'Rakefile')
 	load File.join($rho_root,'platform','android','build','android.rake')
 
-	appname = "rhoconnect_push_client"
+	appname = "push_client_rb"
 	test_appname = "testapp"
 
 	puts "run_spec_app(#{platform},#{appname})"
@@ -55,7 +55,7 @@ def run_apps(platform)
 		RhoconnectHelper.set_rc_push_out File.open( File.join($app_path, "rhoconnect_push.log" ), "w")
 		RhoconnectHelper.set_rc_out(File.open( File.join($app_path, "rhoconnect.log" ), "w"), File.open( File.join($app_path, "rhoconnect_err.log" ), "w"))
 		RhoconnectHelper.set_redis_out File.open( File.join($app_path, "redis.log" ), "w") if $rhoconnect_use_redis
-		rhodes_log = File.join($spec_path, 'rhoconnect_push_client', 'rholog.txt')
+		rhodes_log = File.join($spec_path, appname, 'rholog.txt')
 		File.unlink(rhodes_log) if File.exists?(rhodes_log)
 		RhoconnectHelper.set_enable_redis($rhoconnect_use_redis)
 		RhoconnectHelper.set_enable_resque(false)
@@ -75,7 +75,6 @@ def run_apps(platform)
 		RhoconnectHelper.push_port = $rc_push_server_port
 	end
 
-	appname = "rhoconnect_push_client"
 	$app_path = File.expand_path(File.join(File.dirname(__FILE__),appname))
 	# File.open(File.join($app_path, 'app', 'sync_server.rb'), 'w') do |f|
 	# 	f.puts "SYNC_SERVER_HOST = '#{RhoconnectHelper.host}'"
@@ -104,13 +103,12 @@ def run_apps(platform)
 		  	end
 			end
 
-			FileUtils.chdir File.join($spec_path, 'rhoconnect_push_client')
+			FileUtils.chdir File.join($spec_path, appname)
 			puts "Install rhoconnect push service ..."
 			push_service_apk = File.join($rhoelements_root,'libs','rhoconnect-push-service','rhoconnect-push-service.apk')
 			#	AndroidTools.load_app_and_run("-e", push_service_apk, "")
 			system("adb #{$deviceOpts} install -r #{push_service_apk}").should == true
 
-			# adb -s 34010534 install -r /Users/alexb/workspace/RMS-Testing/auto/feature_def/push_spec/rhoconnect_push_client/bin/target/android/Rho_Push_Client-debug.apk
 			puts "\nInstalling rhodes app on device ..."
 			puts "adb #{$deviceOpts} install -r #{Dir.pwd}/bin/target/android/Rho_Push_Client-debug.apk"
 			system("adb #{$deviceOpts} install -r #{Dir.pwd}/bin/target/android/Rho_Push_Client-debug.apk").should == true
@@ -121,7 +119,7 @@ def run_apps(platform)
 			system("adb #{$deviceOpts} shell am start -a android.intent.action.MAIN -n com.rhomobile.rho_push_client/com.rhomobile.rhodes.RhodesActivity").should == true
 
 			$logcat_pid = Kernel.spawn("adb #{$deviceOpts} logcat",
-				:out => File.open(File.join($spec_path, 'rhoconnect_push_client', 'rholog.txt'), "w"))
+				:out => File.open(File.join($spec_path, appname, 'rholog.txt'), "w"))
 			puts "Starting logcat process with pid: #{$logcat_pid}"
 		else
 			# Using emulator
@@ -141,7 +139,7 @@ def run_apps(platform)
 			AndroidTools.load_app_and_run("-e", push_service_apk, "")
 
 			puts 'Building and starting rhodes application ...'
-			FileUtils.chdir File.join($spec_path, 'rhoconnect_push_client')
+			FileUtils.chdir File.join($spec_path, appname)
 			system("rake run:#{$platform}").should == true
 		end
 	else
@@ -154,7 +152,7 @@ def run_apps(platform)
 		puts "1st step : Build the Test App"
 		$wm_build_rakefile_dir = convert_to_windows_path_style_str(File.join($rhoelements_root, 'build', 'ci', 'windows'))
 		$wm_build_rakefile = convert_to_windows_path_style_str(File.join($rhoelements_root,'build','ci','windows','Rakefile'))
-		rhodes_app_dir = convert_to_windows_path_style_str(File.join($testsuite_root,'auto','feature_def','push_spec','rhoconnect_push_client'))
+		rhodes_app_dir = convert_to_windows_path_style_str(File.join($testsuite_root,'auto','feature_def','push_spec',appname))
 		cmd = "cd #{$wm_build_rakefile_dir} && rake -f #{$wm_build_rakefile} windows:build_native_test_app_wm['#{rhodes_app_dir}']"
 		puts "CMD is: #{cmd}"
                 $out_code = system(cmd)
@@ -179,7 +177,7 @@ def run_apps(platform)
 		puts "RhoConnect Push Service is installed with #{$out_code} !!!"
 
 		puts "4th step: install the test application"
-		spec_app_cab = convert_to_windows_path_style_str(File.join($spec_path,'rhoconnect_push_client','bin','target','wm6p','Rho_Push_Client.cab'))
+		spec_app_cab = convert_to_windows_path_style_str(File.join($spec_path,appname,'bin','target','wm6p','Rho_Push_Client.cab'))
                 cmd = "cd #{$wm_build_rakefile_dir} && rake -f #{$wm_build_rakefile} windows:install_cab_to_device[#{$device_address},#{spec_app_cab}]"
 		puts "CMD is: #{cmd}"
 	        $out_code = system(cmd)

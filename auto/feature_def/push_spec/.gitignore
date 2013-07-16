@@ -1,16 +1,17 @@
 TODO
+README_ANDROID_PUSH_SPECS
 tmp
 gcm_push_client/bin
 gcm_push_client/*.log
 gcm_push_client/rholog.txt
 gcm_push_client/app/local_server.rb
 
-rhoconnect_push_client/bin
-rhoconnect_push_client/*.log
-rhoconnect_push_client/rholog.txt
-rhoconnect_push_client/app/local_server.rb
-rhoconnect_push_client/app/push_server.rb
-rhoconnect_push_client/app/sync_server.rb
+push_client_rb/bin
+push_client_rb/*.log
+push_client_rb/rholog.txt
+push_client_rb/app/local_server.rb
+push_client_rb/app/push_server.rb
+push_client_rb/app/sync_server.rb
 
 store-rhodes-client/bin
 store-rhodes-client/rhosimulator

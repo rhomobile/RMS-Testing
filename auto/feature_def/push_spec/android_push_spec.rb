@@ -37,8 +37,9 @@ require_relative './rhoconnect_helper'
 require_relative './spec_helper'
 
 puts "-- Starting local server"
+appname = "push_client_rb"
 $server, addr, port = Jake.run_local_server(8081)
-File.open(File.join($spec_path, 'rhoconnect_push_client', 'app', 'local_server.rb'), 'w') do |f|
+File.open(File.join($spec_path, appname, 'app', 'local_server.rb'), 'w') do |f|
   f.puts "SPEC_LOCAL_SERVER_HOST = '#{addr}'"
   f.puts "SPEC_LOCAL_SERVER_PORT = #{port}"
 end
@@ -56,7 +57,6 @@ $server.mount_proc('/', nil) do |req, res|
   end
 end
 
-appname = "rhoconnect_push_client"
 $app_path = File.expand_path(File.join(File.dirname(__FILE__),appname))
 # Patch rhodes 'rhoconfig.txt' file
 cfgfile = File.join($app_path, 'rhoconfig.txt')
@@ -66,7 +66,7 @@ cfg.gsub!(/(rhoconnect_push_server.*)/, "rhoconnect_push_server = 'http://#{Rhoc
 cfg.gsub!(/(Push.rhoconnect.pushServer.*)/, "Push.rhoconnect.pushServer = 'http://#{RhoconnectHelper.push_host}:#{RhoconnectHelper.push_port}'")
 File.open(cfgfile, 'w') { |f| f.write cfg }
 #
-FileUtils.chdir File.join($spec_path, 'rhoconnect_push_client')
+FileUtils.chdir File.join($spec_path, appname)
 puts "\nBuilding rhodes app ..."
 puts "rake device:#{$platform}:debug"
 raise "Failed to build rhodes app" unless system("rake device:#{$platform}:debug")

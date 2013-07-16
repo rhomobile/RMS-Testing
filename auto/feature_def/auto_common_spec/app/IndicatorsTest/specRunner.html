@@ -1,6 +1,7 @@
+<!DOCTYPE html>
 <html>
 <head>
-	<title>CardReader JS Test</title>
+	<title>Indicators JS Test</title>
     <link type="image/png" rel="shortcut icon" href="/public/jasmine/jasmine_favicon.png">
     <link type="text/css" rel="stylesheet" href="/public/jasmine/jasmine.css">
     <script type="text/javascript" charset="utf-8" src="/public/jquery/jquery-1.6.4.min.js"></script>
@@ -13,10 +14,13 @@
     <script type="text/javascript" src="../helpers/specHelpers.js"></script>
 	<script type="text/javascript" charset="utf-8" src="/public/api/rhoapi-modules.js"></script>
 
-	<!-- include Source files here... -->
-	<script type="text/javascript" src="cardreader_js_test.js" ></script>
-	<script type="text/javascript" src="cardreader_js_spec.js"></script>
+	<!-- include spec files here... -->
+	<script type="text/javascript" src="indicatorsTest.js"></script>
+	<script type="text/javascript" src="indicatorsSpec.js"></script>
 </head>
 <body>
+	<!-- Required for Signal and Battery Tests -->
+	<div id="indicatorOutput" style="display:none">Hello</div>
+	<div id="indicatorOutput2" style="display:none">Hello</div>
 </body>
 </html>

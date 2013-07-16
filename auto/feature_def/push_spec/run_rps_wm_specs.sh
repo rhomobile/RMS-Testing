@@ -1,7 +1,7 @@
 #!/bin/bash
 # Rhoconnect push specs for windows mobile/CE
 
-pushd rhoconnect_push_client
+pushd push_client_rb
 cp build.yml.rps build.yml
 popd
 

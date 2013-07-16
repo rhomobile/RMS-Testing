@@ -1484,7 +1484,7 @@ describe("<ORM Db Reset specs>", function() {
         var objects_u = db_u.$execute_sql("select * from OBJECT_VALUES");
 
 
-        dispCurrentProcess(JSON.stringify(objects));
+        //dispCurrentProcess(JSON.stringify(objects));
         expect(objects[0].map.value).toEqual("test");
         expect(objects_u[0].map.value).toEqual("test_u");
         
