@@ -39,7 +39,6 @@ In order to run RC Push Integration Tests for Windows Mobile platform you will n
 10. Modify `C:\Test\RMS-Testing\auto\feature_def\push_spec\config.yml` with the following settings:
 
 	:::ruby
-
 	rhodes: "../../../../rhodes"
 	rhoconnect: "../../../../rhoconnect"
 	rhoelements: "../../../../Motorola-Extensions"
