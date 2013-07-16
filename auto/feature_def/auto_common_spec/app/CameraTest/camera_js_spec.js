@@ -129,7 +129,7 @@ describe("Camera JS API Test", function() {
 					callbackstatus = false;
 				});
 
-					it("VT285-089 | call getProperties() with sync callback and hash |" + camtype, function() {
+					it("VT285-084 | call getProperties() with sync callback and hash |" + camtype, function() {
 
 						runs(function() {
 						    enumObject.setProperties({'compressionFormat':'png','desiredHeight':'640','outputFormat':'dataUri'});
@@ -147,7 +147,7 @@ describe("Camera JS API Test", function() {
 						});
 					});
 
-					it("VT285-090 | call getProperties() with anonymous callback and hash |" + camtype, function() {
+					it("VT285-085 | call getProperties() with anonymous callback and hash |" + camtype, function() {
 
 						runs(function() {    
 						    enumObject.setProperties({'compressionFormat':'jpg','desiredWidth':'480','outputFormat':'image'});
@@ -165,7 +165,7 @@ describe("Camera JS API Test", function() {
 						});							
 					});
 
-					it("VT285-091 | call getProperties() without callback |" + camtype, function() {
+					it("VT285-086 | call getProperties() without callback |" + camtype, function() {
 
 						    //enumObject.clearAllProperties();
 						    enumObject.setProperties({'compressionFormat':'png','desiredHeight':'640','outputFormat':'dataUri'});
@@ -176,7 +176,7 @@ describe("Camera JS API Test", function() {
 							expect(getpropertiesdata).toContain('dataUri');						
 					});
 
-					it("VT285-092 | call getProperty() with sync callback and property |" + camtype, function() {
+					it("VT285-087 | call getProperty() with sync callback and property |" + camtype, function() {
 
 						runs(function() {  									    
 						    enumObject.setProperty('compressionFormat','jpg');
@@ -192,7 +192,7 @@ describe("Camera JS API Test", function() {
 						});										
 					});
 
-					it("VT285-093 | call getProperty() with anonymous callback and property |" + camtype, function() {
+					it("VT285-088 | call getProperty() with anonymous callback and property |" + camtype, function() {
 
 						runs(function() {
 						    enumObject.setProperty('compressionFormat','png');
@@ -208,7 +208,7 @@ describe("Camera JS API Test", function() {
 						});								
 					});
 
-					it("VT285-094 | call getProperty() without callback |" + camtype, function() {
+					it("VT285-089 | call getProperty() without callback |" + camtype, function() {
 		    
 						    enumObject.setProperty('compressionFormat','jpg');
 							var data = enumObject.getProperty("compressionFormat");
@@ -216,14 +216,14 @@ describe("Camera JS API Test", function() {
 							expect(getpropertydata).toEqual('jpg');								
 					});
 
-					it("VT285-1000 | call getDefault |" + camtype, function() {
+					it("VT285-077 | call getDefault |" + camtype, function() {
 
 						    Rho.Camera.setDefault(enumObject);
 						    var defaultobj = Rho.Camera.getDefault();						  
 							expect(camtype).toEqual(defaultobj.getProperty('ID'));
 					});
 
-					it("VT285-1001 | call Default |" + camtype, function() {
+					it("VT285-077A | call Default |" + camtype, function() {
 
 						    //Rho.Camera.setDefaultID( enumObject.getId());
 						   	//Rho.Camera.default = enumObject;
@@ -231,7 +231,7 @@ describe("Camera JS API Test", function() {
 							expect(camtype).toEqual(defaultobj.getProperty('ID'));
 					});
 
-					it("VT299-095 | check default values of all writeable property |", function() {
+					it("VT299-090 | check default values of all writeable property |", function() {
 
 						runs(function() {
 						    enumObject.takePicture(camCallback);
@@ -270,7 +270,7 @@ describe("Camera JS API Test", function() {
 						});
 					});
 
-					it("VT299-096 | check values of all read only property |", function() {
+					it("VT299-091 | check values of all read only property |", function() {
 
 						runs(function() {
 						    enumObject.takePicture(camCallback);
@@ -528,7 +528,7 @@ describe("Enumerate Camera ", function() {
 		enumObjCount = false;
 	});
 
-	it("Enumerate Camera callback as function", function() {
+	it("VT285-014: Enumerate Camera callback as function", function() {
 				
 		runs(function() {
 			Rho.Camera.enumerate(enumCallback);
@@ -541,7 +541,7 @@ describe("Enumerate Camera ", function() {
 		});
 	});
 
-	it("Enumerate Camera with anonymous function as callback", function() {
+	it("VT285-016: Enumerate Camera with anonymous function as callback", function() {
 			
 		runs(function() {
 			Rho.Camera.enumerate(function(obj){
@@ -556,7 +556,7 @@ describe("Enumerate Camera ", function() {
 		});
  	});
 
-	it("Enumerate Camera without callback (Synchronous Access)", function() {
+	it("VT285-017: Enumerate Camera without callback (Synchronous Access)", function() {
 			
 		runs(function() {
 			var obj = Rho.Camera.enumerate();

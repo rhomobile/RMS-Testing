@@ -568,46 +568,47 @@ describe("<ORM module specs>", function() {
       expect(source.name).toEqual('Product');
     });
 
-    it('VT302-0034 | Create a model with freezed, true | Should\'nt add new column',function(){
-      var error = '';
-      expect(Rho.ORM.getModel('Product')).toBeUndefined();
+    //Freezing a propertyBag model not supported with current release
+    // it('VT302-0034 | Create a model with freezed, true | Should\'nt add new column',function(){
+    //   var error = '';
+    //   expect(Rho.ORM.getModel('Product')).toBeUndefined();
 
-      var Product = function(model){
-          model.modelName("Product");
-          model.property("name","string");
-          model.property("brand","string");
-          model.set('freezed',true);
-          model.set("partition","local");
-      };
+    //   var Product = function(model){
+    //       model.modelName("Product");
+    //       model.property("name","string");
+    //       model.property("brand","string");
+    //       model.set('freezed',true);
+    //       model.set("partition","local");
+    //   };
 
-      Model = Rho.ORM.addModel(Product);
-      source = Opal.Rho._scope.RhoConfig.$sources().map["Product"];
+    //   Model = Rho.ORM.addModel(Product);
+    //   source = Opal.Rho._scope.RhoConfig.$sources().map["Product"];
 
-      Model.create({"name":"test","brand":"PUMA"});
-      var db2 = Rho.ORMHelper.dbConnection("local");
-      var objects = db2.$execute_sql("select * from OBJECT_VALUES");
+    //   Model.create({"name":"test","brand":"PUMA"});
+    //   var db2 = Rho.ORMHelper.dbConnection("local");
+    //   var objects = db2.$execute_sql("select * from OBJECT_VALUES");
 
-      expect(objects[0].map.value).toEqual('test');
+    //   expect(objects[0].map.value).toEqual('test');
 
-      try{
-      Model.create({"name":"test2","brand":"REBOOK","Price":54.05});
-      var objects = db2.$execute_sql("select * from OBJECT_VALUES");
-      expect(objects[2].map.value).not.toEqual("test2");
-      expect(objects[3].map.value).not.toEqual("REBOOK");
-      //Number is returning as a String.
-      expect(objects[4].map.value).not.toEqual(54.05);
-      }
-      catch(e){
-        error = e.message;
-      }
+    //   try{
+    //   Model.create({"name":"test2","brand":"REBOOK","Price":54.05});
+    //   var objects = db2.$execute_sql("select * from OBJECT_VALUES");
+    //   expect(objects[2].map.value).not.toEqual("test2");
+    //   expect(objects[3].map.value).not.toEqual("REBOOK");
+    //   //Number is returning as a String.
+    //   expect(objects[4].map.value).not.toEqual(54.05);
+    //   }
+    //   catch(e){
+    //     error = e.message;
+    //   }
 
-      source = Opal.Rho._scope.RhoConfig.$sources().map["Product"];
+    //   source = Opal.Rho._scope.RhoConfig.$sources().map["Product"];
 
-      expect(source.freezed).toEqual(true);
-      expect(error).toEqual('Write error message');
-      expect(source.partition).toEqual('local');
-      expect(source.name).toEqual('Product');
-    });
+    //   expect(source.freezed).toEqual(true);
+    //   expect(error).toEqual('Write error message');
+    //   expect(source.partition).toEqual('local');
+    //   expect(source.name).toEqual('Product');
+    // });
 
     it('VT302-0038 | Get a model by its name after it has been added / should add model, get model, clear all models', function() {
         expect(Rho.ORM.getModel('Product')).toBeUndefined();
@@ -1212,6 +1213,7 @@ describe("<ORM Db Reset specs>", function() {
           model.property("name","string");
           model.property("price","float");
           model.set("partition","user");
+          model.enable("sync");
       };
 
       var Model1 = Rho.ORM.addModel(Product);
@@ -1392,7 +1394,6 @@ describe("<ORM Db Reset specs>", function() {
     });
 
     it("VT302-0063 | call databaseLocalReset without having any local model | Should not removed data from synced database",function(){
-        
         var db = Rho.ORMHelper.dbConnection("user");
         db.$execute_sql("INSERT INTO CLIENT_INFO (client_id) VALUES(7)");
 
@@ -1408,22 +1409,20 @@ describe("<ORM Db Reset specs>", function() {
         var Model = Rho.ORM.addModel(Product);
         Model.create({"name":"test"});
 
-        Rho.ORM.databaseLocalReset()
-        
+        Rho.ORM.databaseLocalReset();
+
         sources = Rho.ORMHelper.getAllSources();
-        var db = Rho.ORMHelper.dbConnection("user");
         var res = db.$execute_sql("SELECT * FROM Product Where name = 'test' ");
         var clientId = Rho.ORM.getClientId();
-        
+
         expect(Model).toBeDefined();
         expect(clientId).toEqual("7");
         expect(res[0].map.name).toEqual('test');
-        
+
         db.$execute_sql("DROP TABLE Product");
     });
 
     it("VT302-0065 | call databaseLocalReset with changes in local model | Should removed local model data",function(){
-        
         var client_db = Rho.ORMHelper.dbConnection("user");
         client_db.$execute_sql("INSERT INTO CLIENT_INFO (client_id) VALUES(7)");
 
@@ -1440,8 +1439,8 @@ describe("<ORM Db Reset specs>", function() {
         var objects = db.$execute_sql("select * from OBJECT_VALUES");
         expect(objects[0].map.value).toEqual("test");
 
-        Rho.ORM.databaseLocalReset()
-        
+        Rho.ORM.databaseLocalReset();
+
         objects = db.$execute_sql("select * from OBJECT_VALUES");
         var clientId = Rho.ORM.getClientId();
 
@@ -1504,8 +1503,7 @@ describe("<ORM Db Reset specs>", function() {
         Rho.ORM.clear();
     });
 
-
-    it("VT302-0068 | Call haveLocalChanges without having any model",function(){
+    it("VT302-0068b | Call haveLocalChanges without having any model",function(){
       expect(Rho.ORM.haveLocalChanges()).toEqual(false);
     });
 
@@ -1522,6 +1520,8 @@ describe("<ORM Db Reset specs>", function() {
       expect(Rho.ORM.haveLocalChanges()).toEqual(true);
       db.$execute_sql("DELETE FROM SOURCES");
       db.$execute_sql("DELETE FROM OBJECT_VALUES");
+      db.$execute_sql("DELETE FROM CHANGED_VALUES");
+      expect(Rho.ORM.haveLocalChanges()).toEqual(false);
       Rho.ORM.clear();
     });
 });
