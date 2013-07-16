@@ -39,7 +39,7 @@ In order to run RC Push Integration Tests for Windows Mobile platform you will n
 10. Modify `C:\Test\RMS-Testing\auto\feature_def\push_spec\config.yml` with the following settings:
 
 	:::ruby
-	
+
 	rhodes: "../../../../rhodes"
 	rhoconnect: "../../../../rhoconnect"
 	rhoelements: "../../../../Motorola-Extensions"
@@ -47,38 +47,36 @@ In order to run RC Push Integration Tests for Windows Mobile platform you will n
 
 	rc_stack_address: <ip_address_of your_mac_machine>
 	rc_stack_port: 9292
-	
+
 	rc_push_server_address: <ip_address_of_your_mac_machine>
 	rc_push_server_port: 8675
-	
+
 	device_address: <ip_address_of_the_windows_mobile_device>
 
-10. Verify that the Windows Firewall is turned off and you can ping your Mac machine and Windows Mobile device from the PC.
-11. Install the following gems by running `gem install <gemname>` command:
+11. Verify that the Windows Firewall is turned off and you can ping your Mac machine and Windows Mobile device from the PC.
+12. Install the following gems by running `gem install <gemname>` command:
 
-	- mspec
-	- bundler
-	- uglifier
-	- any other gems that are required to build and run rhodes
+- mspec
+- bundler
+- uglifier
+- any other gems that are required to build and run rhodes
 
 ### Running the specs
 
 Once all pre-requisites are met, you can navigate into `C:/RMS-Testing/auto/feature_def/push_spec` directory and run the following command:
 
-	% mspec win_push_spec.rb
+% mspec win_push_spec.rb
 
 
 This command should perform the following steps:
 
-	* Build the Windows Mobile Test Application
-	* Re-boot the Windows Mobile device
-	* Install `NETCFv35.Messages.EN.wm.cab` package onto device
-	* Install `rhoconnect-push-service.cab` service onto device
-	* Install the Test Application onto device
-	* Start the test application
-	* Run the RC Push Integration Test
-
- 
+* Build the Windows Mobile Test Application
+* Re-boot the Windows Mobile device
+* Install `NETCFv35.Messages.EN.wm.cab` package onto device
+* Install `rhoconnect-push-service.cab` service onto device
+* Install the Test Application onto device
+* Start the test application
+* Run the RC Push Integration Test
 
 
 
