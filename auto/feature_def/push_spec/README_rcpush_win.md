@@ -38,7 +38,7 @@ In order to run RC Push Integration Tests for Windows Mobile platform you will n
 9. Copy the `RDBClient.exe` file into `C:/Test/Motorola-Extensions/build/ci/windows/RDBClient/Release` directory
 10. Modify `C:\Test\RMS-Testing\auto\feature_def\push_spec\config.yml` with the following settings:
 
-	:::ruby
+	```ruby
 	rhodes: "../../../../rhodes"
 	rhoconnect: "../../../../rhoconnect"
 	rhoelements: "../../../../Motorola-Extensions"
@@ -51,6 +51,7 @@ In order to run RC Push Integration Tests for Windows Mobile platform you will n
 	rc_push_server_port: 8675
 
 	device_address: <ip_address_of_the_windows_mobile_device>
+	```
 
 11. Verify that the Windows Firewall is turned off and you can ping your Mac machine and Windows Mobile device from the PC.
 12. Install the following gems by running `gem install <gemname>` command:
