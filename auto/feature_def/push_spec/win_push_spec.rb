@@ -55,7 +55,7 @@ describe 'Windows Mobile push spec' do
     #TODO: check that Rhoelements gem is installed
     puts "Starting local server"
     $server, addr, port = Jake.run_local_server(49254)
-    File.open(File.join($spec_path, 'rhoconnect_push_client', 'app', 'local_server.rb'), 'w') do |f|
+    File.open(File.join($spec_path, 'push_client_rb', 'app', 'local_server.rb'), 'w') do |f|
       f.puts "SPEC_LOCAL_SERVER_HOST = '#{addr}'"
       f.puts "SPEC_LOCAL_SERVER_PORT = #{port}"
     end
@@ -172,13 +172,13 @@ describe 'Windows Mobile push spec' do
   	puts 'Waiting ping message with push content ...'
 	expect_request('error').should == '0'
 	dev_id = expect_request('device_id')
-	dev_id.should == $device_id 
+	dev_id.should == $device_id
   	expect_request('alert').should == message
   end
 
   it 'should process sequence of push messages' do
   	puts 'Sending 5 push messages...'
-  
+
   	alerts = {}
   	5.times do |i|
   		message = "magic#{i}"

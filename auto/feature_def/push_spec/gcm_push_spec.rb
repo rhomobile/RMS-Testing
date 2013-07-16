@@ -34,8 +34,9 @@ $signal     = ConditionVariable.new
 $mutex      = Mutex.new
 
 puts "Starting local server"
+appname = "push_client_rb"
 $server, addr, port = Jake.run_local_server(8081)
-File.open(File.join($spec_path, 'rhoconnect_push_client', 'app', 'local_server.rb'), 'w') do |f|
+File.open(File.join($spec_path, appname, 'app', 'local_server.rb'), 'w') do |f|
   f.puts "SPEC_LOCAL_SERVER_HOST = '#{addr}'"
   f.puts "SPEC_LOCAL_SERVER_PORT = #{port}"
 end
@@ -52,7 +53,7 @@ $server.mount_proc('/', nil) do |req, res|
 end
 
 # Patch rhodes 'rhoconfig.txt' file
-$app_path = File.expand_path(File.join(File.dirname(__FILE__), "rhoconnect_push_client"))
+$app_path = File.expand_path(File.join(File.dirname(__FILE__), appname))
 cfgfile = File.join($app_path, 'rhoconfig.txt')
 cfg = File.read(cfgfile)
 cfg.gsub!(/(syncserver.*)/, "syncserver = 'http://#{RhoconnectHelper.host}:#{RhoconnectHelper.port}'")
@@ -62,7 +63,7 @@ File.open(cfgfile, 'w') { |f| f.write cfg }
 
 puts 'Building and starting application...'
 # FileUtils.chdir File.join($spec_path, 'gcm_push_client')
-FileUtils.chdir File.join($spec_path, 'rhoconnect_push_client')
+FileUtils.chdir File.join($spec_path, appname)
 puts "\nBuilding rhodes app ..."
 puts "rake device:#{$platform}:debug"
 raise "Failed to build rhodes app" unless system("rake device:#{$platform}:debug")
@@ -108,7 +109,7 @@ device_list.each do |dev|
       RhoconnectHelper.start_rhoconnect_stack($server_path, true)
       @api_token = RhoconnectHelper.api_post('system/login', { :login => 'rhoadmin', :password => '' })
 
-      FileUtils.chdir File.join($spec_path, 'rhoconnect_push_client')
+      FileUtils.chdir File.join($spec_path, appname)
       if $deviceId
         TEST_PKGS.each do |pkg|
           out = `adb #{$deviceOpts} shell pm list packages #{pkg}`
@@ -125,7 +126,7 @@ device_list.each do |dev|
         puts "adb #{$deviceOpts} shell am start -a android.intent.action.MAIN -n com.rhomobile.gcm_push_client/com.rhomobile.rhodes.RhodesActivity"
         system("adb #{$deviceOpts} shell am start -a android.intent.action.MAIN -n com.rhomobile.gcm_push_client/com.rhomobile.rhodes.RhodesActivity")
 
-        rhodes_log = File.join($spec_path, 'rhoconnect_push_client', 'rholog.txt')
+        rhodes_log = File.join($spec_path, appname, 'rholog.txt')
         File.unlink(rhodes_log) if File.exists?(rhodes_log)
         $logcat_pid = Kernel.spawn("adb #{$deviceOpts} logcat", :out => File.open(rhodes_log, "w"))
         puts "Starting logcat process with pid: #{$logcat_pid}"
