@@ -144,3 +144,23 @@ function isTestApplicable (anArray){
     var platform = Rho.System.platform;
     return (anArray.indexOf(platform) == -1) ? false : true ;
 }
+
+var specHelpers = {};
+specHelpers.loadEvent = function()
+{
+	var title = document.createElement('h1');
+	title.textContent = document.getElementsByTagName('title')[0].textContent;
+	var div = document.createElement('div');
+	div.id = 'detailsdiv';
+	var ul = document.createElement('ul');
+	ul.id = 'myList';
+	var outputElement = document.createElement('div');
+	outputElement.id = 'output'
+	outputElement.style = 'display:none';
+	
+	document.body.appendChild(title);
+//	document.body.appendChild(div);
+	document.body.appendChild(ul);
+	document.body.appendChild(outputElement);
+}
+window.addEventListener('DOMContentLoaded', specHelpers.loadEvent);
