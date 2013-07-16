@@ -250,20 +250,22 @@
     </div>
 </div>
 
-<!-- This test crash the device. Has to be fixed.
-
 <div id="enableWebPlugins_test" class="method_tests android">
     <div class="method_name">WebView.enableWebPlugins</div>
     <div class="method_desc">Enable/disable web plugins. Use 'enable_web_plugins' parameter in rhoconfig.txt to configure this value.</div>
+    
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <button onClick='Rho.WebView.navigate("http://libraries.mit.edu/amps/services/web/streaming/flashsamples.html", 1);'>View web page with Flash content</button>
+            <br/>
+            <span class="result"></span>
+        </div>
+        <div class="test_scenario_desc">
+            <span class="test_scenario_number"></span>
+            <span> navigate tab index 1 to web page with flash content.</span>
+        </div>
+    </div>
 
-    <video id="video1"
-           src="/public/media/nfc.mp4"
-           controls="controls"
-           width="320"
-           height="240"
-            >
-        This browser doesn't support HTML5 video!
-    </video>
 
     <div class="test_scenario">
         <div class="test_scenario_controls">
@@ -277,8 +279,6 @@
         </div>
     </div>
 </div>
-
--->
 
 <div id="enableZoom_test" class="method_tests android">
     <div class="method_name">WebView.enableZoom</div>
