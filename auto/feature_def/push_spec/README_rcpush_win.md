@@ -38,7 +38,8 @@ In order to run RC Push Integration Tests for Windows Mobile platform you will n
 9. Copy the `RDBClient.exe` file into `C:/Test/Motorola-Extensions/build/ci/windows/RDBClient/Release` directory
 10. Modify `C:\Test\RMS-Testing\auto\feature_def\push_spec\config.yml` with the following settings:
 
-	:::yaml
+	:::ruby
+	
 	rhodes: "../../../../rhodes"
 	rhoconnect: "../../../../rhoconnect"
 	rhoelements: "../../../../Motorola-Extensions"
