@@ -19,9 +19,11 @@ function quit()
 	jasmineEnv.updateInterval = 1000;
 
 	var htmlReporter = new jasmine.HtmlReporter();
+    var rhologReporter = new jasmine.RhologReporter();
 	var junitReporter = new jasmine.JUnitXmlReporter();
 	junitReporter.useDotNotation = false
 	jasmineEnv.addReporter(htmlReporter);
+    jasmineEnv.addReporter(rhologReporter);
 	jasmineEnv.addReporter(new jasmine.JUnitXmlReporter('.\\', true, true));
 	jasmineEnv.specFilter = function (spec) {
 		return htmlReporter.specFilter(spec);

@@ -86,7 +86,7 @@ describe("Log JS API", function () {
 			Rho.LogCapture.stop();
 		});
 
-		// Call readlog() with valid parameter (Integer) 100
+		// Call readlog() with valid parameter (Integer) 1000
 		it("VT290-391 : Call readLogFile() method with valid parameter. | ", function() {
 			runs(function(){
 				Rho.Log.level = 0;
@@ -101,9 +101,9 @@ describe("Log JS API", function () {
 					Rho.Log.info(some_random_text, "tst");
 				}
 
-				var read = Rho.Log.readLogFile(400);
+				var read = Rho.Log.readLogFile(1000);
 
-				expect(read.length).toEqual(400);
+				expect(read.length).toEqual(1000);
 
 				expect(read.count(some_random_text) > 0).toEqual(true);
 			});
@@ -927,7 +927,7 @@ describe("Log JS API", function () {
 				});
 			});
 
-
+/* DUPLICATE of VT290-355
 			// Set Log Memory period to 10 seconds
 			it("VT290-356 : Set Log Memory period to 10 secs | 10000", function () {
 				runs(function () {
@@ -950,7 +950,7 @@ describe("Log JS API", function () {
 					});
 				});
 			});
-
+*/
 		}
 
 		if (clientPlatform == Rho.System.PLATFORM_ANDROID || clientPlatform == Rho.System.PLATFORM_IOS || clientPlatform == Rho.System.PLATFORM_WP8 )

@@ -44,7 +44,7 @@ symbian:
   uid: '0xe1a1ef92'
 android:
   version: 4.2.2
-  extensions: ["barcode", "screenorientation", "instrumentation", "cardreader", "indicators"]
+  extensions: ["barcode", "screenorientation", "instrumentation", "cardreader", "indicators", "sensor"]
   capabilities:
   - native_browser
 wm:
