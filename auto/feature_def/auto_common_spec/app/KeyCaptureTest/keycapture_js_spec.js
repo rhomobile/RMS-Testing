@@ -287,10 +287,10 @@ describe("KeyCapture JS API", function()
 			
 			runs(function()
 			{
-				expect(hardwareKeysTest.callbackFired).toBe(true);
-				expect(typeof hardwareKeysTest.callbackFiredResult).toEqual('number');
 				hardwareKeysTest.resetCaptureKeyCallback('ALL');
 				hardwareKeysTest.resetCaptureKeyCallback(hardwareKeysTest.tabKey.string);
+				expect(hardwareKeysTest.callbackFired).toBe(true);
+				expect(typeof hardwareKeysTest.callbackFiredResult).toEqual('number');
 			}, 'expect the callback to fire only once');	
 		});
 			
@@ -311,10 +311,10 @@ describe("KeyCapture JS API", function()
 
 			runs(function()
 			{
-				expect(hardwareKeysTest.callbackFired).toBe(true);
-				expect(hardwareKeysTest.callbackFiredResult).toEqual(hardwareKeysTest.tabKey.value);
 				hardwareKeysTest.resetCaptureKeyCallback('ALL');
 				hardwareKeysTest.resetCaptureKeyCallback(hardwareKeysTest.enterKey.string);
+				expect(hardwareKeysTest.callbackFired).toBe(true);
+				expect(hardwareKeysTest.callbackFiredResult).toEqual(hardwareKeysTest.tabKey.value);
 			}, 'expect the callback to fire only once');	
 		});
 			
@@ -334,11 +334,12 @@ describe("KeyCapture JS API", function()
 			}, "Callback didnt fire", 3000);
 			runs(function()
 			{
+				hardwareKeysTest.resetCaptureKeyCallback(hardwareKeysTest.aKey.string);
+				textBoxValue = hardwareKeysTest.textBox.value;
+				hardwareKeysTest.removeTextBox();
 				expect(hardwareKeysTest.callbackFired).toBe(true);
 				expect(hardwareKeysTest.callbackFiredResult).toBe(hardwareKeysTest.aKey.value);
-				expect(hardwareKeysTest.textBox.value).toEqual(hardwareKeysTest.aKey.description);
-				hardwareKeysTest.removeTextBox();
-				hardwareKeysTest.resetCaptureKeyCallback(hardwareKeysTest.aKey.string);
+				expect(textBoxValue).toEqual(hardwareKeysTest.aKey.description);
 			},'expect the key to be input into the input box and the callback to fire');
 		});
 		
@@ -360,11 +361,12 @@ describe("KeyCapture JS API", function()
 			
 			runs(function()
 			{
-				expect(hardwareKeysTest.callbackFired).toBe(true);
-				expect(hardwareKeysTest.callbackFiredResult).toBe(hardwareKeysTest.aKey.value);
-				expect(hardwareKeysTest.textBox.value).toEqual('');
+				textBoxValue = hardwareKeysTest.textBox.value;
 				hardwareKeysTest.removeTextBox();
 				hardwareKeysTest.resetCaptureKeyCallback(hardwareKeysTest.aKey.string);
+				expect(hardwareKeysTest.callbackFired).toBe(true);
+				expect(hardwareKeysTest.callbackFiredResult).toBe(hardwareKeysTest.aKey.value);
+				expect(textBoxValue).toEqual('');
 			},'expect the key not to be input into the input box and the callback to fire');
 		});
 		
@@ -484,6 +486,313 @@ describe("KeyCapture JS API", function()
 				});
 			});
 		}
+		
+		///////////////////////////////////////////////////////////////////////
+		// converted manual Tests
+		///////////////////////////////////////////////////////////////////////
+		it("VT289-011 | call captureKey with dispatch true, keyValue for " +hardwareKeysTest.testKey11.description+" and function callback |", function()
+		{
+			runs(function()
+			{
+				//Click inside Textbox and Press numeric key " +hardwareKeysTest.testKey11.description
+				hardwareKeysTest.captureKey(true,hardwareKeysTest.testKey11.string);
+				hardwareKeysTest.createTextBox();
+				hardwareKeysTest.textBox.focus();
+				hardwareKeysTest.simulateKeyPress(hardwareKeysTest.testKey11.value);
+				setTimeout(function(){hardwareKeysTest.callbackFiredTimeout = 'timedout'},1000);// TAB
+			});
+
+			waitsFor(function()
+			{
+				return hardwareKeysTest.callbackFiredTimeout == 'timedout';
+			}, "Callback didnt fire", 3000);
+			
+			runs(function()
+			{
+				hardwareKeysTest.resetCaptureKeyCallback(hardwareKeysTest.testKey11.string);
+				textBoxValue = hardwareKeysTest.textBox.value;
+				hardwareKeysTest.removeTextBox();
+				expect(hardwareKeysTest.callbackFired).toBe(true);
+				expect(hardwareKeysTest.callbackFiredResult).toBe(hardwareKeysTest.testKey11.value);
+				if(!hardwareKeysTest.isAndroid()) expect(textBoxValue).toEqual(hardwareKeysTest.testKey11.description);
+			});
+		});
+		
+		it("VT289-012 | call captureKey with dispatch false, keyValue for " +hardwareKeysTest.testKey11.description+" and function callback |", function()
+		{
+			runs(function()
+			{
+				hardwareKeysTest.captureKey(false,hardwareKeysTest.testKey11.string);
+				hardwareKeysTest.createTextBox();
+				hardwareKeysTest.textBox.focus();
+				hardwareKeysTest.simulateKeyPress(hardwareKeysTest.testKey11.value);
+				setTimeout(function(){hardwareKeysTest.callbackFiredTimeout = 'timedout'},1000);// TAB
+			});
+
+			waitsFor(function()
+			{
+				return hardwareKeysTest.callbackFiredTimeout == 'timedout';
+			}, "Callback didnt fire", 3000);
+			
+			runs(function()
+			{
+				//Callback should fire with value " +hardwareKeysTest.testKey11.string+" and number " +hardwareKeysTest.testKey11.description+" should not be dispatched inside the textbox
+				hardwareKeysTest.resetCaptureKeyCallback(hardwareKeysTest.testKey11.string);
+				textBoxValue = hardwareKeysTest.textBox.value;
+				hardwareKeysTest.removeTextBox();
+				expect(hardwareKeysTest.callbackFired).toBe(true);
+				expect(hardwareKeysTest.callbackFiredResult).toBe(hardwareKeysTest.testKey11.value);
+				if(!hardwareKeysTest.isAndroid()) expect(textBoxValue).toEqual('');
+			});
+		});
+		
+		it("VT289-013 | call captureKey with dispatch true, keyValue for" +hardwareKeysTest.testKey13.description+" and no callback(Sync) |", function()
+		{
+			runs(function()
+			{
+				//Callback should fire with value " +hardwareKeysTest.testKey13.string+"  and " +hardwareKeysTest.testKey13.description+"  should be dispatched inside the textbox
+				hardwareKeysTest.captureKey(true,hardwareKeysTest.testKey13.string);
+				hardwareKeysTest.createTextBox();
+				hardwareKeysTest.textBox.focus();
+				hardwareKeysTest.simulateKeyPress(hardwareKeysTest.testKey13.value);
+				setTimeout(function(){hardwareKeysTest.callbackFiredTimeout = 'timedout'},1000);// TAB
+			});
+
+			waitsFor(function()
+			{
+				return hardwareKeysTest.callbackFiredTimeout == 'timedout';
+			}, "Callback didnt fire", 3000);
+			
+			runs(function()
+			{
+				hardwareKeysTest.resetCaptureKeyCallback(hardwareKeysTest.testKey13.string);
+				expect(hardwareKeysTest.callbackFired).toBe(true);
+				expect(hardwareKeysTest.callbackFiredResult).toBe(hardwareKeysTest.testKey13.value);
+				textBoxValue = hardwareKeysTest.textBox.value;
+				hardwareKeysTest.removeTextBox();
+				if(!hardwareKeysTest.isAndroid()) expect(textBoxValue).toEqual(hardwareKeysTest.testKey13.description);
+			});
+		});
+		
+		it("VT289-014 | call captureKey with dispatch true, keyValue for " +hardwareKeysTest.testKey14.description+" and callback as anonymous function |", function()
+		{
+			runs(function()
+			{
+				//Click inside Textbox and Press " +hardwareKeysTest.testKey14.description
+				Rho.KeyCapture.captureKey(true,hardwareKeysTest.testKey14.string,function(data){hardwareKeysTest.captureKeyCallback(data);});
+
+				hardwareKeysTest.createTextBox();
+				hardwareKeysTest.textBox.focus();
+				hardwareKeysTest.simulateKeyPress(hardwareKeysTest.testKey14.value);
+				setTimeout(function(){hardwareKeysTest.callbackFiredTimeout = 'timedout'},1000);// TAB
+			});
+
+			waitsFor(function()
+			{
+				return hardwareKeysTest.callbackFiredTimeout == 'timedout';
+			}, "Callback didnt fire", 3000);
+			
+			runs(function()
+			{
+				//Callback should fire with value " +hardwareKeysTest.testKey14.string+" check for Callback to fire with value and " +hardwareKeysTest.testKey14.description+" should be dispatched inside the textbox
+				hardwareKeysTest.resetCaptureKeyCallback(hardwareKeysTest.testKey14.string);
+				expect(hardwareKeysTest.callbackFired).toBe(true);
+				expect(hardwareKeysTest.callbackFiredResult).toBe(hardwareKeysTest.testKey14.value);
+				textBoxValue = hardwareKeysTest.textBox.value;
+				hardwareKeysTest.removeTextBox();
+				if(!hardwareKeysTest.isAndroid()) expect(textBoxValue).toEqual(hardwareKeysTest.testKey14.description);
+			});
+		});
+		
+		it("VT289-015 | call captureKey with dispatch false, keyValue for" +hardwareKeysTest.testKey15.description+" and press "+hardwareKeysTest.testKey14.description, function()
+		{
+			runs(function()
+			{
+				//Click inside Textbox and Press "+hardwareKeysTest.testKey14.description
+				hardwareKeysTest.captureKey(true,hardwareKeysTest.testKey15.string);
+				hardwareKeysTest.createTextBox();
+				hardwareKeysTest.textBox.focus();
+				hardwareKeysTest.simulateKeyPress(hardwareKeysTest.testKey14.value);
+				setTimeout(function(){hardwareKeysTest.callbackFiredTimeout = 'timedout'},1000);// TAB
+			});
+
+			waitsFor(function()
+			{
+				return hardwareKeysTest.callbackFiredTimeout == 'timedout';
+			}, "Callback didnt fire", 3000);
+			
+			runs(function()
+			{
+				//Callback should not fire and " +hardwareKeysTest.testKey14.description+ "should be dispatched inside the textbox
+				hardwareKeysTest.resetCaptureKeyCallback(hardwareKeysTest.testKey15.string);
+				expect(hardwareKeysTest.callbackFired).toBe(false);
+				textBoxValue = hardwareKeysTest.textBox.value;
+				hardwareKeysTest.removeTextBox();
+				if(!hardwareKeysTest.isAndroid()) expect(textBoxValue).toEqual(hardwareKeysTest.testKey14.description);
+			});
+		});
+		
+		it("VT289-016 | call captureKey with dispatch True, keyValue ALL and callback |", function()
+		{
+			runs(function()
+			{
+				//Press all type of key (a-z 0-9 symbol, function)
+				hardwareKeysTest.captureKey(true,'ALL');
+				hardwareKeysTest.createTextBox();
+				hardwareKeysTest.textBox.focus();
+				hardwareKeysTest.simulateKeyPress(hardwareKeysTest.aKey.value);
+				hardwareKeysTest.simulateKeyPress(hardwareKeysTest.hashKey.value);
+				hardwareKeysTest.simulateKeyPress(hardwareKeysTest.oneKey.value);
+				hardwareKeysTest.simulateKeyPress(hardwareKeysTest.f1Key.value);
+				setTimeout(function(){hardwareKeysTest.callbackFiredTimeout = 'timedout'},4000);// TAB
+			});
+
+			waitsFor(function()
+			{
+				return hardwareKeysTest.callbackFiredTimeout == 'timedout';
+			}, "Callback didnt fire", 5000);
+			
+			runs(function()
+			{
+				//Callback should fire with retrun key values all pressed keys should be dispatched
+				hardwareKeysTest.resetCaptureKeyCallback('ALL');
+				textBoxValue = hardwareKeysTest.textBox.value;
+				hardwareKeysTest.removeTextBox();
+				
+				expect(hardwareKeysTest.callbackFired).toBe(true);
+				expect(hardwareKeysTest.callbackFiredResult.length).toBe(4);
+				expect(hardwareKeysTest.callbackFiredResult[0]).toEqual(hardwareKeysTest.aKey.value);
+				expect(hardwareKeysTest.callbackFiredResult[1]).toEqual(hardwareKeysTest.hashKey.value);
+				expect(hardwareKeysTest.callbackFiredResult[2]).toEqual(hardwareKeysTest.oneKey.value);
+				expect(hardwareKeysTest.callbackFiredResult[3]).toEqual(hardwareKeysTest.f1Key.value);
+				expect(textBoxValue).toEqual(hardwareKeysTest.aKey.description + hardwareKeysTest.hashKey.description + hardwareKeysTest.oneKey.description);
+			});
+		});
+		
+		it("VT289-021 | call captureKey twice, one with callback and other without callback |", function()
+		{
+			runs(function()
+			{
+				//Press " +hardwareKeysTest.testKey15.description+", Press numeric key " +hardwareKeysTest.testKey21.description+"
+				hardwareKeysTest.captureKey(true,hardwareKeysTest.testKey15.string);
+				Rho.KeyCapture.captureKey(true,hardwareKeysTest.testKey21.string);
+				hardwareKeysTest.createTextBox();
+				hardwareKeysTest.textBox.focus();
+				hardwareKeysTest.simulateKeyPress(hardwareKeysTest.testKey15.value);
+				hardwareKeysTest.simulateKeyPress(hardwareKeysTest.testKey21.value);
+				setTimeout(function(){hardwareKeysTest.callbackFiredTimeout = 'timedout'},1000);// TAB
+			});
+
+			waitsFor(function()
+			{
+				return hardwareKeysTest.callbackFiredTimeout == 'timedout';
+			}, "Callback didnt fire", 3000);
+			
+			runs(function()
+			{
+				//callback1 should fire after pressing " +hardwareKeysTest.testKey15.description+" and no callback should fire after pressing " +hardwareKeysTest.testKey21.description+" and both key should be dispatched
+				hardwareKeysTest.resetCaptureKeyCallback(hardwareKeysTest.testKey15.string);
+				hardwareKeysTest.resetCaptureKeyCallback(hardwareKeysTest.testKey21.string);
+				expect(hardwareKeysTest.callbackFired).toBe(true);
+				expect(hardwareKeysTest.callbackFiredResult).toBe(hardwareKeysTest.testKey15.value);
+				textBoxValue = hardwareKeysTest.textBox.value;
+				hardwareKeysTest.removeTextBox();
+				if(!hardwareKeysTest.isAndroid()) expect(textBoxValue).toEqual(hardwareKeysTest.testKey15.description + hardwareKeysTest.testKey21.description);
+			});	
+		});
+		
+		it("VT289-022 | call captureKey twice, one with callback and other without callback for keyValue ALL |", function()
+		{
+			runs(function()
+			{
+				//Press " +hardwareKeysTest.testKey15.description+", Press numeric key " +hardwareKeysTest.testKey21.description+"
+				hardwareKeysTest.captureKey(true,hardwareKeysTest.testKey15.string);
+				Rho.KeyCapture.captureKey(false,'ALL');
+				hardwareKeysTest.createTextBox();
+				hardwareKeysTest.textBox.focus();
+				hardwareKeysTest.simulateKeyPress(hardwareKeysTest.testKey15.value);
+				setTimeout(function(){hardwareKeysTest.callbackFiredTimeout = 'timedout'},1000);// TAB
+			});
+
+			waitsFor(function()
+			{
+				return hardwareKeysTest.callbackFiredTimeout == 'timedout';
+			}, "Callback didnt fire", 3000);
+			
+			runs(function()
+			{
+				//callback should not fire after pressing any key including key " +hardwareKeysTest.testKey15.description+" and allkeys should not be dispatched inside the textbox
+				hardwareKeysTest.resetCaptureKeyCallback(hardwareKeysTest.testKey15.string);
+				hardwareKeysTest.resetCaptureKeyCallback('ALL');
+				expect(hardwareKeysTest.callbackFired).toBe(false);
+				textBoxValue = hardwareKeysTest.textBox.value;
+				hardwareKeysTest.removeTextBox();
+				if(!hardwareKeysTest.isAndroid()) expect(textBoxValue).toEqual('');
+			});	
+		});
+		
+		it("VT289-030 | call captureKey with no callback |", function()
+		{
+			runs(function()
+			{
+				//Click inside Textbox and Press key 1 and a from Hardware key, Press key 2 and b from soft key
+				Rho.KeyCapture.captureKey(false,'ALL');
+				Rho.KeyCapture.captureKey(true,'ALL');
+				hardwareKeysTest.createTextBox();
+				hardwareKeysTest.textBox.focus();
+				hardwareKeysTest.simulateKeyPress(hardwareKeysTest.aKey.value);
+				hardwareKeysTest.simulateKeyPress(hardwareKeysTest.zKey.value);
+				hardwareKeysTest.simulateKeyPress(hardwareKeysTest.hashKey.value);
+				hardwareKeysTest.simulateKeyPress(hardwareKeysTest.oneKey.value);
+				setTimeout(function(){hardwareKeysTest.callbackFiredTimeout = 'timedout'},3000);// TAB
+			});
+
+			waitsFor(function()
+			{
+				return hardwareKeysTest.callbackFiredTimeout == 'timedout';
+			}, "Callback didnt fire", 5000);
+			
+			runs(function()
+			{
+				//No callback should fire after pressing any hardware and soft  key, all keys should be dispatched inside textbox after pressing any key
+				hardwareKeysTest.resetCaptureKeyCallback('ALL');
+				expect(hardwareKeysTest.callbackFired).toBe(false);
+				textBoxValue = hardwareKeysTest.textBox.value;
+				hardwareKeysTest.removeTextBox();
+				var expectedOut = hardwareKeysTest.aKey.description + hardwareKeysTest.zKey.description + hardwareKeysTest.hashKey.description + hardwareKeysTest.oneKey.description;
+				expect(textBoxValue).toEqual(expectedOut);
+			});
+		});
+		
+		it("VT289-031 | call captureKey with no callback after setting "+ hardwareKeysTest.testKey11.description, function()
+		{
+			runs(function()
+			{
+				
+				//Click inside Textbox and"+ hardwareKeysTest.testKey11.description
+				hardwareKeysTest.captureKey(false,hardwareKeysTest.testKey11.string);
+				Rho.KeyCapture.captureKey(true,hardwareKeysTest.testKey11.string);
+				hardwareKeysTest.createTextBox();
+				hardwareKeysTest.textBox.focus();
+				hardwareKeysTest.simulateKeyPress(hardwareKeysTest.testKey11.value);
+				setTimeout(function(){hardwareKeysTest.callbackFiredTimeout = 'timedout'},1000);// TAB
+			});
+
+			waitsFor(function()
+			{
+				return hardwareKeysTest.callbackFiredTimeout == 'timedout';
+			}, "Callback didnt fire", 3000);
+			
+			runs(function()
+			{
+				//No callback should fire after pressing" +hardwareKeysTest.testKey11.description+" and" +hardwareKeysTest.testKey11.description+" should be dispatched inside text box
+				hardwareKeysTest.resetCaptureKeyCallback(hardwareKeysTest.testKey11.string);
+				expect(hardwareKeysTest.callbackFired).toBe(false);
+				textBoxValue = hardwareKeysTest.textBox.value;
+				hardwareKeysTest.removeTextBox();
+				if(!hardwareKeysTest.isAndroid()) expect(textBoxValue).toEqual(hardwareKeysTest.testKey11.description);
+			});
+		});
 	});
 	
 	describe("Remap", function()
@@ -496,7 +805,7 @@ describe("KeyCapture JS API", function()
 			runs(function()
 			{
 				hardwareKeysTest.remapKey(hardwareKeysTest.tabKey.string, hardwareKeysTest.enterKey.string); 			// TAB->ENTER
-				hardwareKeysTest.captureKey(true,'all');			// Any Key
+				hardwareKeysTest.captureKey(true,'ALL');			// Any Key
 				hardwareKeysTest.simulateKeyPress(hardwareKeysTest.tabKey.value);	// TAB
 			}, "remap TAB to ENTER, & simulate TAB key press...");
 			
@@ -507,7 +816,7 @@ describe("KeyCapture JS API", function()
 			
 			runs(function()
 			{
-				hardwareKeysTest.resetCaptureKeyCallback('all');
+				hardwareKeysTest.resetCaptureKeyCallback('ALL');
 				hardwareKeysTest.clearRemap(hardwareKeysTest.tabKey.string);
 			});
 		});
@@ -658,7 +967,6 @@ describe("KeyCapture JS API", function()
 			{
 				hardwareKeysTest.remapKey(hardwareKeysTest.aKey.string, hardwareKeysTest.bKey.string);
 				hardwareKeysTest.captureKey(true, hardwareKeysTest.aKey.string);
-				Rho.KeyCapture.captureKey(true, hardwareKeysTest.aKey.string);
 				hardwareKeysTest.createTextBox();
 				hardwareKeysTest.textBox.focus();
 				
