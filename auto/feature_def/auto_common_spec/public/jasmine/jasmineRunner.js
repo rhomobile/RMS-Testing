@@ -19,9 +19,11 @@ function quit()
 	jasmineEnv.updateInterval = 1000;
 
 	var htmlReporter = new jasmine.HtmlReporter();
+    var rhologReporter = new jasmine.RhologReporter();
 	var junitReporter = new jasmine.JUnitXmlReporter();
 	junitReporter.useDotNotation = false
 	jasmineEnv.addReporter(htmlReporter);
+    jasmineEnv.addReporter(rhologReporter);
 	jasmineEnv.addReporter(new jasmine.JUnitXmlReporter('.\\', true, true));
 	jasmineEnv.specFilter = function (spec) {
 		return htmlReporter.specFilter(spec);
@@ -54,9 +56,13 @@ function quit()
 				var decodedParams = decodeURIComponent(getParams);
 				var decodedArray = JSON.parse(decodedParams);
 				var nextPageUrl = '../' + decodedArray[0];
-				if(decodedArray.length == 1)
+				if(decodedArray.length == 0)
 				{
-					window.location.href = nextPageUrl;
+					quit();
+				}
+				else if(decodedArray.length == 1)
+				{
+					window.location.href = nextPageUrl + "?" + encodeURIComponent("[]");
 					return;
 				}
 				var newArray = decodedArray.slice(1,decodedArray.length);
@@ -65,9 +71,10 @@ function quit()
 			}
 			else
 			{
-				quit();
+				//Running locally. Ignore
 			}
 		};
 		jasmineEnv.execute();
 	}
+
 })();

@@ -33,400 +33,86 @@ describe("KeyCapture Test", function() {
 		///////////////////////////////////////////////////////////////////////
 		//  captureKey Tests
 		///////////////////////////////////////////////////////////////////////
-
-		it("VT289-011 | call captureKey with dispatch true, keyValue for " +VALUE_11+" and function callback |", function() {
-
-			runs(function()
-			{
-				setObjective("VT289-011 | call captureKey with dispatch true, keyValue for " +VALUE_11+" and function callback");
-				setInstruction("Click inside Textbox and Press numeric key " +VALUE_11);
-				setExpected("Callback should fire with value " +TEST_11+" and number " +VALUE_11+" should be dispatched inside the textbox");
-				Rho.KeyCapture.captureKey(true,TEST_11,capturekeycallback);
-			});
-
-			runs(function()
-			{		
-				waitsFor(function() {
-				return document.getElementById("actResult").innerHTML != "init";
-				}, "Timed out waiting for tester to respond", 300000);
-				runs(function() {
-				expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-				Rho.KeyCapture.captureKey(true,TEST_11);
-				});	
-			});
-
-		});
-
-		it("VT289-012 | call captureKey with dispatch false, keyValue for " +VALUE_11+" and function callback |", function() {
-
-			runs(function()
-			{
-				setObjective("VT289-012 | call captureKey with dispatch false, keyValue for " +VALUE_11+" and function callback");
-				setInstruction("Click inside Textbox and Press numeric key " +VALUE_11);
-				setExpected("Callback should fire with value " +TEST_11+" and number " +VALUE_11+" should not be dispatched inside the textbox");
-				Rho.KeyCapture.captureKey(false,TEST_11,capturekeycallback);
-			});
-
-			runs(function()
-			{		
-				waitsFor(function() {
-				return document.getElementById("actResult").innerHTML != "init";
-				}, "Timed out waiting for tester to respond", 300000);
-				runs(function() {
-				expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-				Rho.KeyCapture.captureKey(true,TEST_11);
-				});	
-			});
-
-		});
-
-		it("VT289-013 | call captureKey with dispatch true, keyValue for" +VALUE_13+" and no callback(Sync) |", function() {
-
-			runs(function()
-			{
-				setObjective("VT289-013 | call captureKey with dispatch true, keyValue for " +VALUE_13+"  and no callback(Sync)");
-				setInstruction("Click inside Textbox and Press " +VALUE_13);
-				setExpected("Callback should fire with value " +TEST_13+"  and " +VALUE_13+"  should be dispatched inside the textbox");
-				//var keyval1 = Rho.KeyCapture.captureKey(true,TEST_13);
-				Rho.KeyCapture.captureKey(false,TEST_13,capturekeycallback);
-				//callbackdata(keyval1);
-			});
-
-			runs(function()
-			{		
-				waitsFor(function() {
-				return document.getElementById("actResult").innerHTML != "init";
-				}, "Timed out waiting for tester to respond", 300000);
-				runs(function() {
-				expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-				Rho.KeyCapture.captureKey(true,TEST_13);
-				});	
-			});
-
-		});
-
-		it("VT289-014 | call captureKey with dispatch true, keyValue for " +VALUE_14+" and callback as Anynomous function |", function() {
-
-			runs(function()
-			{
-				setObjective("VT289-014 | call captureKey with dispatch true, keyValue for " +VALUE_14+" and callback as Anynomous function");
-				setInstruction("Click inside Textbox and Press " +VALUE_14);
-				setExpected("Callback should fire with value " +TEST_14+" check for Callback to fire with value and " +VALUE_14+" should be dispatched inside the textbox");
-				Rho.KeyCapture.captureKey(true,TEST_14,function(data){callbackdata(data.keyValue);});
-			});
-
-			runs(function()
-			{		
-				waitsFor(function() {
-				return document.getElementById("actResult").innerHTML != "init";
-				}, "Timed out waiting for tester to respond", 300000);
-				runs(function() {
-				expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-				Rho.KeyCapture.captureKey(true,TEST_14);
-				});	
-			});
-
-		});
-
-		it("VT289-015 | call captureKey with dispatch false, keyValue for" +VALUE_15+" and press "+VALUE_12, function() {
-
-			runs(function()
-			{
-				setObjective("VT289-015 | call captureKey with dispatch false, keyValue for" +VALUE_15+" and press "+VALUE_12);
-				setInstruction("Click inside Textbox and Press "+VALUE_12);
-				setExpected("Callback should not fire and " +VALUE_12+ "should be dispatched inside the textbox");
-				Rho.KeyCapture.captureKey(false,TEST_15,capturekeycallback);
-			});
-
-			runs(function()
-			{		
-				waitsFor(function() {
-				return document.getElementById("actResult").innerHTML != "init";
-				}, "Timed out waiting for tester to respond", 300000);
-				runs(function() {
-				expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-				Rho.KeyCapture.captureKey(true,TEST_15);
-				});	
-			});
-
-		});
-
-		it("VT289-016 | call captureKey with dispatch True, keyValue ALL and callback |", function() {
-
-			runs(function()
-			{
-				setObjective("VT289-016 | call captureKey with dispatch True, keyValue ALL and callback");
-				setInstruction("click inside textbox and Press all type of key");
-				setExpected("Callback should fire with retrun key values all pressed keys should be dispatched");
-				Rho.KeyCapture.captureKey(true,'ALL',capturekeycallback);
-			});
-
-			runs(function()
-			{		
-				waitsFor(function() {
-				return document.getElementById("actResult").innerHTML != "init";
-				}, "Timed out waiting for tester to respond", 300000);
-				runs(function() {
-				expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-				Rho.KeyCapture.captureKey(true,'ALL');
-				});	
-			});
-
-		});
-
-		it("VT289-017 | call captureKey with dispatch false and true for 2 different key and diff callback function |", function() {
-
-			runs(function()
-			{
-				setObjective("VT289-017 | call captureKey with dispatch false and true for 2 different key and diff callback function");
-				setInstruction("click inside textbox and Press" +VALUE_11+" ,Press alphabet a or volumedown , Press Symbols # or menukey");
-				setExpected("Callback1 should fire after pressing all the key , Callback2 should not fire after pressing " +VALUE_11+"  and " +VALUE_11+"  only should be dispatched inside box, others not");
-				Rho.KeyCapture.captureKey(false,'ALL',capturekeycallback);
-				Rho.KeyCapture.captureKey(true,TEST_11,capturekeycallback2);
-			});
-
-			runs(function()
-			{		
-				waitsFor(function() {
-				return document.getElementById("actResult").innerHTML != "init";
-				}, "Timed out waiting for tester to respond", 300000);
-				runs(function() {
-				expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-				Rho.KeyCapture.captureKey(true,'ALL');
-				Rho.KeyCapture.captureKey(true,TEST_11);
-				});	
-			});
-
-		});
-
-		it("VT289-018 | call captureKey with keyValue enter and ALL and different callback function |", function() {
-
-			runs(function()
-			{
-				setObjective("VT289-018 | call captureKey with keyValue enter and ALL and different callback function");
-				setInstruction("click inside textbox and " +VALUE_18+", Press numeric key 9/volumedown and press alphabet b/menu key");
-				setExpected("Callback2 should fire after pressing alphabet b (0x66),number 9 (0x39) and " +VALUE_18+"/" +TEST_18 + " , Callback1 should not fire after pressing " +VALUE_18+" and " +VALUE_18+" should be dispatched, others not");
-				Rho.KeyCapture.captureKey(true,TEST_18,capturekeycallback);
-				Rho.KeyCapture.captureKey(false,'ALL',capturekeycallback2);
-			});
-
-			runs(function()
-			{		
-				waitsFor(function() {
-				return document.getElementById("actResult").innerHTML != "init";
-				}, "Timed out waiting for tester to respond", 300000);
-				runs(function() {
-				expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-				Rho.KeyCapture.captureKey(true,'ALL');
-				Rho.KeyCapture.captureKey(true,TEST_18);
-				});	
-			});
-
-		});
-
-
-		it("VT289-019 | call captureKey twice with keyvalue ALL and keyValue 1 with different dispatch value |", function() {
-
-			runs(function()
-			{
-				setObjective("VT289-019 | call captureKey twice with keyvalue ALL and keyValue 1 with different dispatch value");
-				setInstruction("click inside textbox and Press alphabet z/volumedownkey, Press numeric key " +VALUE_11);
-				setExpected("Callback1 only should fire after pressing alphabet z/volumedown key, and " +VALUE_11+", Callback2 should not fire after pressing " +VALUE_11+" and z/voulmedown should appear and " +VALUE_11+" should not dispatch");
-				Rho.KeyCapture.captureKey(true,'ALL',function(data){callbackdata(data.keyValue);});
-				Rho.KeyCapture.captureKey(false,TEST_11,function(data){callbackdata2(data.keyValue);});
-			});
-
-			runs(function()
-			{		
-				waitsFor(function() {
-				return document.getElementById("actResult").innerHTML != "init";
-				}, "Timed out waiting for tester to respond", 300000);
-				runs(function() {
-				expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-				Rho.KeyCapture.captureKey(true,'ALL');
-				Rho.KeyCapture.captureKey(true,TEST_11);
-				});	
-			});
-
-		});
-
-		it("VT289-020 | call captureKey with different callback for 2 different keys |", function() {
-
-			runs(function()
-			{
-				setObjective("VT289-020 | call captureKey with different callback for 2 different keys");
-				setInstruction("click inside textbox and Press " +VALUE_11+", Press numeric key " +VALUE_15);
-				setExpected("2 different Callback should fire after pressing " +VALUE_11+" and " +VALUE_15+" and " +VALUE_11+" should be dispatched and " +VALUE_15+" should not");
-				Rho.KeyCapture.captureKey(true,TEST_15,capturekeycallback);
-				Rho.KeyCapture.captureKey(false,TEST_11,capturekeycallback2);
-			});
-
-			runs(function()
-			{		
-				waitsFor(function() {
-				return document.getElementById("actResult").innerHTML != "init";
-				}, "Timed out waiting for tester to respond", 300000);
-				runs(function() {
-				expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-				Rho.KeyCapture.captureKey(true,TEST_15);
-				Rho.KeyCapture.captureKey(true,TEST_11);
-				});	
-			});
-
-		});
-
-		it("VT289-021 | call captureKey twice, one with callback and other without callback |", function() {
-
-			runs(function()
-			{
-				setObjective("VT289-021| call captureKey twice, one with callback and other without callback");
-				setInstruction("click inside textbox and Press " +VALUE_15+", Press numeric key " +VALUE_21+"");
-				setExpected("callback1 should fire after pressing " +VALUE_15+" and no callback should fire after pressing " +VALUE_21+" and both key should be dispatched");
-				Rho.KeyCapture.captureKey(true,TEST_15,capturekeycallback);
-				Rho.KeyCapture.captureKey(true,TEST_21);
-			});
-
-			runs(function()
-			{		
-				waitsFor(function() {
-				return document.getElementById("actResult").innerHTML != "init";
-				}, "Timed out waiting for tester to respond", 300000);
-				runs(function() {
-				expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-				Rho.KeyCapture.captureKey(true,TEST_15);
-				});	
-			});
-
-		});
-
-		it("VT289-022 | call captureKey twice, one with callback and other without callback for keyValue ALL |", function() {
-
-			runs(function()
-			{
-				setObjective("VT289-022 | call captureKey twice, one with callback and other without callback for keyValue ALL");
-				setInstruction("click inside textbox and Press anykey and Press " +VALUE_15);
-				setExpected("callback should not fire after pressing any key including key " +VALUE_15+" and allkeys should not be dispatched inside the textbox");
-				Rho.KeyCapture.captureKey(true,TEST_15,function(data){callbackdata(data.keyValue);});
-				Rho.KeyCapture.captureKey(false,'ALL');
-			});
-
-			runs(function()
-			{		
-				waitsFor(function() {
-				return document.getElementById("actResult").innerHTML != "init";
-				}, "Timed out waiting for tester to respond", 300000);
-				runs(function() {
-				expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-				Rho.KeyCapture.captureKey(true,TEST_15);
-				});	
-			});
-
-		});
-
-		it("VT289-023 | call captureKey to check the keyvalues of all hardware key |", function() {
-
-			runs(function()
-			{
-				setObjective("VT289-023 | call captureKey to check the keyvalues of all hardware key");
-				setInstruction("click inside textbox and Press all the numeric key one by one i windows, Press all hardwarekey on Iphone and Android ");
-				setExpected("Callback should fire and different keyvalue should return and all key should be dispatched");
-				Rho.KeyCapture.captureKey(true,'ALL',capturekeycallback);
-			});
-
-			runs(function()
-			{		
-				waitsFor(function() {
-				return document.getElementById("actResult").innerHTML != "init";
-				}, "Timed out waiting for tester to respond", 300000);
-				runs(function() {
-				expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-				Rho.KeyCapture.captureKey(true,'ALL');
-				});	
-			});
-
-		});
-
-
-		it("VT289-030 | call captureKey with no callback |", function() {
-
-			runs(function()
-			{
-				setObjective("VT289-030 | call captureKey with no callback");
-				setInstruction("Click inside Textbox and Press key 1 and a from Hardware key, Press key 2 and b from soft key");
-				setExpected("No callback should fire after pressing any hardware and soft  key, all keys should be dispatched inside textbox after pressing any key");
-				Rho.KeyCapture.captureKey(false,'ALL');
-				Rho.KeyCapture.captureKey(true,'ALL');
-			});
-
-			runs(function()
-			{		
-				waitsFor(function() {
-				return document.getElementById("actResult").innerHTML != "init";
-				}, "Timed out waiting for tester to respond", 300000);
-				runs(function() {
-				expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-				//Rho.KeyCapture.captureKey(true,'ALL');
-				});	
-			});
-
-		});
-
-		it("VT289-031 | call captureKey with no callback after setting "+ VALUE_11, function() {
-
-			runs(function()
-			{
-				setObjective("VT289-031 | call captureKey with no callback after setting key 1");
-				setInstruction("Click inside Textbox and"+ VALUE_11);
-				setExpected("No callback should fire after pressing" +VALUE_11+" and" +VALUE_11+" should be dispatched inside text box");
-				Rho.KeyCapture.captureKey(false,TEST_11,capturekeycallback);
-				Rho.KeyCapture.captureKey(true,TEST_11);
-			});
-
-			runs(function()
-			{		
-				waitsFor(function() {
-				return document.getElementById("actResult").innerHTML != "init";
-				}, "Timed out waiting for tester to respond", 300000);
-				runs(function() {
-				expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-				//Rho.KeyCapture.captureKey(true,'ALL');
-				});	
-			});
-
-		});
-/*
-		it("VT289-032 | call captureKey with callback and use SIP keys |", function() {
-
-			runs(function()
-			{
-				setObjective("VT289-032 | call captureKey with callback and use SIP keys");
-				setInstruction("Click inside Textbox, show the SIP and Press all numeric key, Alphabet and Symbols through SIP");
-				setExpected("Callback should fire and different keyvalue should come for all the keys and all the keys should dispatched inside textbox also, the value of hardware key and soft key should be same. ");
-				Rho.KeyCapture.captureKey(true,'ALL',capturekeycallback);
-			});
-
-			runs(function()
-			{		
-				waitsFor(function() {
-				return document.getElementById("actResult").innerHTML != "init";
-				}, "Timed out waiting for tester to respond", 300000);
-				runs(function() {
-				expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-				Rho.KeyCapture.captureKey(true,'ALL');
-				});	
-			});
-
-		});
-*/
-		if (isWindowsMobilePlatform())
+		if (isApplePlatform())
 		{
-			it("VT289-024 | call captureKey to check the keyvalues of all alphabet key |", function() {
+			it("VT289-012 | call captureKey  keyValue for " +hardwareKeysTest.testKey11.description+" and function callback |", function() {
 
 				runs(function()
 				{
-					setObjective("VT289-024 | call captureKey to check the keyvalues of all alphabet key");
-					setInstruction("Click inside Textbox and Press all the alphabet key one by one (first all small then caps");
-					setExpected("Callback should fire and different keyvalue should come for all the alphabet keys from a to z and A to Z");
+					setObjective("VT289-012 | call captureKey keyValue for " +hardwareKeysTest.testKey11.description+" and function callback");
+					setInstruction("Press hardware key " +hardwareKeysTest.testKey11.description);
+					setExpected("Callback should fire with value " +hardwareKeysTest.testKey11.string);
+					Rho.KeyCapture.captureKey(false,hardwareKeysTest.testKey11.string,capturekeycallback);
+				});
+
+				runs(function()
+				{		
+					waitsFor(function() {
+					return document.getElementById("actResult").innerHTML != "init";
+					}, "Timed out waiting for tester to respond", 300000);
+					runs(function() {
+					expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+					Rho.KeyCapture.captureKey(true,hardwareKeysTest.testKey11.string);
+					});	
+				});
+
+			});
+
+			it("VT289-013 | call captureKey with keyValue for" +hardwareKeysTest.testKey13.description+" function callback |", function() {
+
+				runs(function()
+				{
+					setObjective("VT289-013 | call captureKey keyValue for " +hardwareKeysTest.testKey13.description+"  function callback");
+					setInstruction("Press hardware key " +hardwareKeysTest.testKey13.description);
+					setExpected("Callback should fire with value " +hardwareKeysTest.testKey13.string);
+					//var keyval1 = Rho.KeyCapture.captureKey(true,hardwareKeysTest.testKey13.string);
+					Rho.KeyCapture.captureKey(false,hardwareKeysTest.testKey13.string,capturekeycallback);
+					//callbackdata(keyval1);
+				});
+
+				runs(function()
+				{		
+					waitsFor(function() {
+					return document.getElementById("actResult").innerHTML != "init";
+					}, "Timed out waiting for tester to respond", 300000);
+					runs(function() {
+					expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+					Rho.KeyCapture.captureKey(true,hardwareKeysTest.testKey13.string);
+					});	
+				});
+
+			});
+
+			it("VT289-014 | call captureKey keyValue for " +hardwareKeysTest.testKey14.description+" and callback as Anynomous function |", function() {
+
+				runs(function()
+				{
+					setObjective("VT289-014 | call captureKey keyValue for " +hardwareKeysTest.testKey14.description+" and callback as Anynomous function");
+					setInstruction("Press hardware key " +hardwareKeysTest.testKey14.description);
+					setExpected("Callback should fire with value " +hardwareKeysTest.testKey14.string+" check for Callback to fire with value "+hardwareKeysTest.testKey14.string);
+					Rho.KeyCapture.captureKey(true,hardwareKeysTest.testKey14.string,function(data){callbackdata(data.keyValue);});
+				});
+
+				runs(function()
+				{		
+					waitsFor(function() {
+					return document.getElementById("actResult").innerHTML != "init";
+					}, "Timed out waiting for tester to respond", 300000);
+					runs(function() {
+					expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+					Rho.KeyCapture.captureKey(true,hardwareKeysTest.testKey14.string);
+					});	
+				});
+
+			});
+
+			it("VT289-016 | call captureKey keyValue ALL and callback |", function() {
+
+				runs(function()
+				{
+					setObjective("VT289-016 | call captureKey keyValue ALL and callback");
+					setInstruction("Press all type of key");
+					setExpected("Callback should fire with retrun key values");
 					Rho.KeyCapture.captureKey(true,'ALL',capturekeycallback);
 				});
 
@@ -437,328 +123,475 @@ describe("KeyCapture Test", function() {
 					}, "Timed out waiting for tester to respond", 300000);
 					runs(function() {
 					expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+					Rho.KeyCapture.captureKey(true,'ALL');
+					});	
+				});
+
+			});
+
+			it("VT289-020 | call captureKey with different callback for 2 different keys |", function() {
+
+				runs(function()
+				{
+					setObjective("VT289-020 | call captureKey with different callback for 2 different keys");
+					setInstruction("Press " +hardwareKeysTest.testKey11.description+", Press numeric key " +hardwareKeysTest.testKey15.description);
+					setExpected("2 different Callback should fire after pressing " +hardwareKeysTest.testKey11.description+" and " +hardwareKeysTest.testKey15.description);
+					Rho.KeyCapture.captureKey(true,hardwareKeysTest.testKey15.string,capturekeycallback);
+					Rho.KeyCapture.captureKey(false,hardwareKeysTest.testKey11.string,capturekeycallback2);
+				});
+
+				runs(function()
+				{		
+					waitsFor(function() {
+					return document.getElementById("actResult").innerHTML != "init";
+					}, "Timed out waiting for tester to respond", 300000);
+					runs(function() {
+					expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+					Rho.KeyCapture.captureKey(true,hardwareKeysTest.testKey15.string);
+					Rho.KeyCapture.captureKey(true,hardwareKeysTest.testKey11.string);
+					});	
+				});
+
+			});
+
+			it("VT289-021 | call captureKey twice, one with callback and other without callback |", function() {
+
+				runs(function()
+				{
+					setObjective("VT289-021| call captureKey twice, one with callback and other without callback");
+					setInstruction("Press " +hardwareKeysTest.testKey15.description+", " +hardwareKeysTest.testKey21.description+"");
+					setExpected("callback1 should fire after pressing " +hardwareKeysTest.testKey15.description+" and no callback should fire after pressing " +hardwareKeysTest.testKey21.description);
+					Rho.KeyCapture.captureKey(true,hardwareKeysTest.testKey15.string,capturekeycallback);
+					Rho.KeyCapture.captureKey(true,hardwareKeysTest.testKey21.string);
+				});
+
+				runs(function()
+				{		
+					waitsFor(function() {
+					return document.getElementById("actResult").innerHTML != "init";
+					}, "Timed out waiting for tester to respond", 300000);
+					runs(function() {
+					expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+					Rho.KeyCapture.captureKey(true,hardwareKeysTest.testKey15.string);
+					});	
+				});
+
+			});
+
+
+			it("VT289-023 | call captureKey to check the keyvalues of all hardware key |", function() {
+
+				runs(function()
+				{
+					setObjective("VT289-023 | call captureKey to check the keyvalues of all hardware key");
+					setInstruction("Press all hardwarekey on Iphone and Android ");
+					setExpected("Callback should fire and different keyvalue should return and all key should be dispatched");
+					Rho.KeyCapture.captureKey(true,'ALL',capturekeycallback);
+				});
+
+				runs(function()
+				{		
+					waitsFor(function() {
+					return document.getElementById("actResult").innerHTML != "init";
+					}, "Timed out waiting for tester to respond", 300000);
+					runs(function() {
+					expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+					Rho.KeyCapture.captureKey(true,'ALL');
+					});	
+				});
+
+			});
+
+
+			it("VT289-030 | call captureKey with no callback |", function() {
+
+				runs(function()
+				{
+					setObjective("VT289-030 | call captureKey with no callback");
+					setInstruction("Press key 2 and b from soft key");
+					setExpected("No callback should fire after pressing any hardware and soft  key");
+					Rho.KeyCapture.captureKey(false,'ALL');
+					Rho.KeyCapture.captureKey(true,'ALL');
+				});
+
+				runs(function()
+				{		
+					waitsFor(function() {
+					return document.getElementById("actResult").innerHTML != "init";
+					}, "Timed out waiting for tester to respond", 300000);
+					runs(function() {
+					expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+					//Rho.KeyCapture.captureKey(true,'ALL');
+					});	
+				});
+
+			});
+
+			it("VT289-031 | call captureKey with no callback after setting "+ hardwareKeysTest.testKey11.description, function() {
+
+				runs(function()
+				{
+					setObjective("VT289-031 | call captureKey with no callback after setting key 1");
+					setInstruction("Textbox and press "+ hardwareKeysTest.testKey11.description);
+					setExpected("No callback should fire after pressing" +hardwareKeysTest.testKey11.description);
+					Rho.KeyCapture.captureKey(false,hardwareKeysTest.testKey11.string,capturekeycallback);
+					Rho.KeyCapture.captureKey(true,hardwareKeysTest.testKey11.string);
+				});
+
+				runs(function()
+				{		
+					waitsFor(function() {
+					return document.getElementById("actResult").innerHTML != "init";
+					}, "Timed out waiting for tester to respond", 300000);
+					runs(function() {
+					expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+					Rho.KeyCapture.captureKey(true,'ALL');
+					});	
+				});
+
+			});
+		}
+		else
+		{
+			it("VT289-017 | call captureKey with dispatch false and true for 2 different key and diff callback function |", function() {
+
+				runs(function()
+				{
+					setObjective("VT289-017 | call captureKey with dispatch false and true for 2 different key and diff callback function");
+					setInstruction("click inside textbox and Press" +hardwareKeysTest.testKey11.description+" ,Press alphabet a or volumedown , Press Symbols # or menukey");
+					setExpected("Callback1 should fire after pressing all the key , Callback2 should not fire after pressing " +hardwareKeysTest.testKey11.description+"  and " +hardwareKeysTest.testKey11.description+"  only should be dispatched inside box, others not");
+					Rho.KeyCapture.captureKey(false,'ALL',capturekeycallback);
+					Rho.KeyCapture.captureKey(true,hardwareKeysTest.testKey11.string,capturekeycallback2);
+				});
+
+				runs(function()
+				{		
+					waitsFor(function() {
+					return document.getElementById("actResult").innerHTML != "init";
+					}, "Timed out waiting for tester to respond", 300000);
+					runs(function() {
+					expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+					Rho.KeyCapture.captureKey(true,'ALL');
+					Rho.KeyCapture.captureKey(true,hardwareKeysTest.testKey11.string);
+					});	
+				});
+
+			});
+
+			it("VT289-018 | call captureKey with keyValue enter and ALL and different callback function |", function() {
+
+				runs(function()
+				{
+					setObjective("VT289-018 | call captureKey with keyValue enter and ALL and different callback function");
+					setInstruction("click inside textbox and " +hardwareKeysTest.testKey18.description+", Press numeric key 9/volumedown and press alphabet b/menu key");
+					setExpected("Callback2 should fire after pressing alphabet b (0x66),number 9 (0x39) and " +hardwareKeysTest.testKey18.description+"/" +hardwareKeysTest.testKey18.string + " , Callback1 should not fire after pressing " +hardwareKeysTest.testKey18.description+" and " +hardwareKeysTest.testKey18.description+" should be dispatched, others not");
+					Rho.KeyCapture.captureKey(true,hardwareKeysTest.testKey18.string,capturekeycallback);
+					Rho.KeyCapture.captureKey(false,'ALL',capturekeycallback2);
+				});
+
+				runs(function()
+				{		
+					waitsFor(function() {
+					return document.getElementById("actResult").innerHTML != "init";
+					}, "Timed out waiting for tester to respond", 300000);
+					runs(function() {
+					expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+					Rho.KeyCapture.captureKey(true,'ALL');
+					Rho.KeyCapture.captureKey(true,hardwareKeysTest.testKey18.string);
+					});	
+				});
+
+			});
+
+			it("VT289-019 | call captureKey twice with keyvalue ALL and keyValue 1 with different dispatch value |", function() {
+
+				runs(function()
+				{
+					setObjective("VT289-019 | call captureKey twice with keyvalue ALL and keyValue 1 with different dispatch value");
+					setInstruction("click inside textbox and Press alphabet z/volumedownkey, Press numeric key " +hardwareKeysTest.testKey11.description);
+					setExpected("Callback1 only should fire after pressing alphabet z/volumedown key, and " +hardwareKeysTest.testKey11.description+", Callback2 should not fire after pressing " +hardwareKeysTest.testKey11.description+" and z/voulmedown should appear and " +hardwareKeysTest.testKey11.description+" should not dispatch");
+					Rho.KeyCapture.captureKey(true,'ALL',function(data){callbackdata(data.keyValue);});
+					Rho.KeyCapture.captureKey(false,hardwareKeysTest.testKey11.string,function(data){callbackdata2(data.keyValue);});
+				});
+
+				runs(function()
+				{		
+					waitsFor(function() {
+					return document.getElementById("actResult").innerHTML != "init";
+					}, "Timed out waiting for tester to respond", 300000);
+					runs(function() {
+					expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+					Rho.KeyCapture.captureKey(true,'ALL');
+					Rho.KeyCapture.captureKey(true,hardwareKeysTest.testKey11.string);
+					});	
+				});
+
+			});
+
+			it("VT289-020 | call captureKey with different callback for 2 different keys |", function() {
+
+				runs(function()
+				{
+					setObjective("VT289-020 | call captureKey with different callback for 2 different keys");
+					setInstruction("click inside textbox and Press " +hardwareKeysTest.testKey11.description+", Press numeric key " +hardwareKeysTest.testKey15.description);
+					setExpected("2 different Callback should fire after pressing " +hardwareKeysTest.testKey11.description+" and " +hardwareKeysTest.testKey15.description+" and " +hardwareKeysTest.testKey11.description+" should be dispatched and " +hardwareKeysTest.testKey15.description+" should not");
+					Rho.KeyCapture.captureKey(true,hardwareKeysTest.testKey15.string,capturekeycallback);
+					Rho.KeyCapture.captureKey(false,hardwareKeysTest.testKey11.string,capturekeycallback2);
+				});
+
+				runs(function()
+				{		
+					waitsFor(function() {
+					return document.getElementById("actResult").innerHTML != "init";
+					}, "Timed out waiting for tester to respond", 300000);
+					runs(function() {
+					expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+					Rho.KeyCapture.captureKey(true,hardwareKeysTest.testKey15.string);
+					Rho.KeyCapture.captureKey(true,hardwareKeysTest.testKey11.string);
+					});	
+				});
+
+			});
+
+			it("VT289-023 | call captureKey to check the keyvalues of all hardware key |", function() {
+
+				runs(function()
+				{
+					setObjective("VT289-023 | call captureKey to check the keyvalues of all hardware key");
+					setInstruction("click inside textbox and Press all the numeric key one by one i windows, Press all hardwarekey on Iphone and Android ");
+					setExpected("Callback should fire and different keyvalue should return and all key should be dispatched");
+					Rho.KeyCapture.captureKey(true,'ALL',capturekeycallback);
+				});
+
+				runs(function()
+				{		
+					waitsFor(function() {
+					return document.getElementById("actResult").innerHTML != "init";
+					}, "Timed out waiting for tester to respond", 300000);
+					runs(function() {
+					expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+					Rho.KeyCapture.captureKey(true,'ALL');
+					});	
+				});
+
+			});
+	/*
+			it("VT289-032 | call captureKey with callback and use SIP keys |", function() {
+
+				runs(function()
+				{
+					setObjective("VT289-032 | call captureKey with callback and use SIP keys");
+					setInstruction("Click inside Textbox, show the SIP and Press all numeric key, Alphabet and Symbols through SIP");
+					setExpected("Callback should fire and different keyvalue should come for all the keys and all the keys should dispatched inside textbox also, the value of hardware key and soft key should be same. ");
+					Rho.KeyCapture.captureKey(true,'ALL',capturekeycallback);
+				});
+
+				runs(function()
+				{		
+					waitsFor(function() {
+					return document.getElementById("actResult").innerHTML != "init";
+					}, "Timed out waiting for tester to respond", 300000);
+					runs(function() {
+					expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+					Rho.KeyCapture.captureKey(true,'ALL');
+					});	
+				});
+
+			});
+	*/
+			if (isWindowsMobilePlatform())
+			{
+				it("VT289-024 | call captureKey to check the keyvalues of all alphabet key |", function() {
+
+					runs(function()
+					{
+						setObjective("VT289-024 | call captureKey to check the keyvalues of all alphabet key");
+						setInstruction("Click inside Textbox and Press all the alphabet key one by one (first all small then caps");
+						setExpected("Callback should fire and different keyvalue should come for all the alphabet keys from a to z and A to Z");
+						Rho.KeyCapture.captureKey(true,'ALL',capturekeycallback);
+					});
+
+					runs(function()
+					{		
+						waitsFor(function() {
+						return document.getElementById("actResult").innerHTML != "init";
+						}, "Timed out waiting for tester to respond", 300000);
+						runs(function() {
+						expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+							Rho.KeyCapture.captureKey(true,'ALL');
+						});	
+					});
+
+				});
+
+				it("VT289-025 | call captureKey to check the keyvalues of all symbol key |", function() {
+
+					runs(function()
+					{
+						setObjective("VT289-025 | call captureKey to check the keyvalues of all symbol key");
+						setInstruction("Click inside Textbox and Press all the symbol key one by one (first all small then caps");
+						setExpected("Callback should fire and different keyvalue should come for all the symbol keys");
+						Rho.KeyCapture.captureKey(true,'ALL',capturekeycallback);
+					});
+
+					runs(function()
+					{		
+						waitsFor(function() {
+						return document.getElementById("actResult").innerHTML != "init";
+						}, "Timed out waiting for tester to respond", 300000);
+						runs(function() {
+						expect("pass").toEqual(document.getElementById("actResult").innerHTML);
 						Rho.KeyCapture.captureKey(true,'ALL');
-					});	
+						});	
+					});
+
 				});
 
-			});
+				it("VT289-026 | call captureKey to check the keyvalues of all Function key |", function() {
 
-			it("VT289-025 | call captureKey to check the keyvalues of all symbol key |", function() {
+					runs(function()
+					{
+						setObjective("VT289-026 | call captureKey to check the keyvalues of all Function key");
+						setInstruction("Click inside Textbox and Press all the Function key one by one");
+						setExpected("Callback should fire and different keyvalue should come for all the Function key");
+						Rho.KeyCapture.captureKey(true,'ALL',capturekeycallback);
+					});
 
-				runs(function()
-				{
-					setObjective("VT289-025 | call captureKey to check the keyvalues of all symbol key");
-					setInstruction("Click inside Textbox and Press all the symbol key one by one (first all small then caps");
-					setExpected("Callback should fire and different keyvalue should come for all the symbol keys");
-					Rho.KeyCapture.captureKey(true,'ALL',capturekeycallback);
+					runs(function()
+					{		
+						waitsFor(function() {
+						return document.getElementById("actResult").innerHTML != "init";
+						}, "Timed out waiting for tester to respond", 300000);
+						runs(function() {
+						expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+						Rho.KeyCapture.captureKey(true,'ALL');
+						});	
+					});
+
 				});
 
-				runs(function()
-				{		
-					waitsFor(function() {
-					return document.getElementById("actResult").innerHTML != "init";
-					}, "Timed out waiting for tester to respond", 300000);
-					runs(function() {
-					expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-					Rho.KeyCapture.captureKey(true,'ALL');
-					});	
+				it("VT289-027 | call captureKey to check the keyvalues of all Application key |", function() {
+
+					runs(function()
+					{
+						setObjective("VT289-027 | call captureKey to check the keyvalues of all Application key");
+						setInstruction("Click inside Textbox and Press all the Application key one by one");
+						setExpected("Callback should fire and different keyvalue should come for all the Application key");
+						Rho.KeyCapture.captureKey(true,'ALL',capturekeycallback);
+					});
+
+					runs(function()
+					{		
+						waitsFor(function() {
+						return document.getElementById("actResult").innerHTML != "init";
+						}, "Timed out waiting for tester to respond", 300000);
+						runs(function() {
+						expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+						Rho.KeyCapture.captureKey(true,'ALL');
+						});	
+					});
+
+				});
+			}
+
+			///////////////////////////////////////////////////////////////////////
+			//  CaptureTrigger Tests
+			///////////////////////////////////////////////////////////////////////
+
+			if (isWindowsMobileOrAndroidPlatform() && Rho.System.isMotorolaDevice == true) 
+			{
+				it("VT289-035 | call captureTrigger with function callback |", function() {
+
+					runs(function()
+					{
+						setObjective("VT289-035 | call captureTrigger with function callback ");
+						setInstruction("Press left trigger and then press right trigger, Main trigger(if available)");
+						setExpected("The callback should fire and triggerflag should be retrurned for both the triggers with callback");
+						Rho.KeyCapture.captureTrigger(triggercallback);
+					});
+
+					runs(function()
+					{		
+						waitsFor(function() {
+						return document.getElementById("actResult").innerHTML != "init";
+						}, "Timed out waiting for tester to respond", 300000);
+						runs(function() {
+						expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+						Rho.KeyCapture.captureTrigger();
+						});	
+					});
+
 				});
 
-			});
+				it("VT289-036 | call captureTrigger with callback as anonymous function |", function() {
 
-			it("VT289-026 | call captureKey to check the keyvalues of all Function key |", function() {
+					runs(function()
+					{
+						setObjective("VT289-036 | call captureTrigger with callback as anonymous function ");
+						setInstruction("Press left trigger and then press right trigger, Main trigger(if available)");
+						setExpected("The callback should fire and triggerflag should be retrurned for both the triggers with callback");
+						Rho.KeyCapture.captureTrigger(function(data){triggercallback(data);});
+					});
 
-				runs(function()
-				{
-					setObjective("VT289-026 | call captureKey to check the keyvalues of all Function key");
-					setInstruction("Click inside Textbox and Press all the Function key one by one");
-					setExpected("Callback should fire and different keyvalue should come for all the Function key");
-					Rho.KeyCapture.captureKey(true,'ALL',capturekeycallback);
+					runs(function()
+					{		
+						waitsFor(function() {
+						return document.getElementById("actResult").innerHTML != "init";
+						}, "Timed out waiting for tester to respond", 300000);
+						runs(function() {
+						expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+						Rho.KeyCapture.captureTrigger();
+						});	
+					});
+				});
+	/*
+				it("VT289-037 | call captureTrigger with no callback (Sync Access) |", function() {
+
+					runs(function()
+					{
+						setObjective("VT289-037 | call captureTrigger with no callback (Sync Access) ");
+						setInstruction("Press left trigger and then press right trigger, Main trigger(if available)");
+						setExpected("The triggerflag should be returned with Sync Access");
+						var trigger1 = Rho.KeyCapture.captureTrigger();
+						callbackdata(trigger);
+					});
+
+					runs(function()
+					{		
+						waitsFor(function() {
+						return document.getElementById("actResult").innerHTML != "init";
+						}, "Timed out waiting for tester to respond", 300000);
+						runs(function() {
+						expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+						Rho.KeyCapture.captureTrigger();
+						});	
+					});
+				});
+	*/
+				it("VT289-038 | call captureTrigger with no callback after calling with callback |", function() {
+
+					runs(function()
+					{
+						setObjective("VT289-038 | call captureTrigger with no callback after calling with callback ");
+						setInstruction("Press left trigger and then press right trigger, Main trigger(if available)");
+						setExpected("The callback should not fire after pressing the triggers");
+						Rho.KeyCapture.captureTrigger(triggercallback);
+						Rho.KeyCapture.captureTrigger();
+					});
+
+					runs(function()
+					{		
+						waitsFor(function() {
+						return document.getElementById("actResult").innerHTML != "init";
+						}, "Timed out waiting for tester to respond", 300000);
+						runs(function() {
+						expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+						//Rho.KeyCapture.captureTrigger();
+						});	
+					});
 				});
 
-				runs(function()
-				{		
-					waitsFor(function() {
-					return document.getElementById("actResult").innerHTML != "init";
-					}, "Timed out waiting for tester to respond", 300000);
-					runs(function() {
-					expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-					Rho.KeyCapture.captureKey(true,'ALL');
-					});	
-				});
-
-			});
-
-
-			it("VT289-027 | call captureKey to check the keyvalues of all Application key |", function() {
-
-				runs(function()
-				{
-					setObjective("VT289-027 | call captureKey to check the keyvalues of all Application key");
-					setInstruction("Click inside Textbox and Press all the Application key one by one");
-					setExpected("Callback should fire and different keyvalue should come for all the Application key");
-					Rho.KeyCapture.captureKey(true,'ALL',capturekeycallback);
-				});
-
-				runs(function()
-				{		
-					waitsFor(function() {
-					return document.getElementById("actResult").innerHTML != "init";
-					}, "Timed out waiting for tester to respond", 300000);
-					runs(function() {
-					expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-					Rho.KeyCapture.captureKey(true,'ALL');
-					});	
-				});
-
-			});
+			}
 		}
-
-		///////////////////////////////////////////////////////////////////////
-		//  CaptureTrigger Tests
-		///////////////////////////////////////////////////////////////////////
-
-		if (isWindowsMobileOrAndroidPlatform() && Rho.System.isMotorolaDevice == true) 
-		{
-			it("VT289-035 | call captureTrigger with function callback |", function() {
-
-				runs(function()
-				{
-					setObjective("VT289-035 | call captureTrigger with function callback ");
-					setInstruction("Press left trigger and then press right trigger, Main trigger(if available)");
-					setExpected("The callback should fire and triggerflag should be retrurned for both the triggers with callback");
-					Rho.KeyCapture.captureTrigger(triggercallback);
-				});
-
-				runs(function()
-				{		
-					waitsFor(function() {
-					return document.getElementById("actResult").innerHTML != "init";
-					}, "Timed out waiting for tester to respond", 300000);
-					runs(function() {
-					expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-					Rho.KeyCapture.captureTrigger();
-					});	
-				});
-
-			});
-
-			it("VT289-036 | call captureTrigger with callback as anonymous function |", function() {
-
-				runs(function()
-				{
-					setObjective("VT289-036 | call captureTrigger with callback as anonymous function ");
-					setInstruction("Press left trigger and then press right trigger, Main trigger(if available)");
-					setExpected("The callback should fire and triggerflag should be retrurned for both the triggers with callback");
-					Rho.KeyCapture.captureTrigger(function(data){callbackdata(data.keyValue);});
-				});
-
-				runs(function()
-				{		
-					waitsFor(function() {
-					return document.getElementById("actResult").innerHTML != "init";
-					}, "Timed out waiting for tester to respond", 300000);
-					runs(function() {
-					expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-					Rho.KeyCapture.captureTrigger();
-					});	
-				});
-			});
-/*
-			it("VT289-037 | call captureTrigger with no callback (Sync Access) |", function() {
-
-				runs(function()
-				{
-					setObjective("VT289-037 | call captureTrigger with no callback (Sync Access) ");
-					setInstruction("Press left trigger and then press right trigger, Main trigger(if available)");
-					setExpected("The triggerflag should be returned with Sync Access");
-					var trigger1 = Rho.KeyCapture.captureTrigger();
-					callbackdata(trigger);
-				});
-
-				runs(function()
-				{		
-					waitsFor(function() {
-					return document.getElementById("actResult").innerHTML != "init";
-					}, "Timed out waiting for tester to respond", 300000);
-					runs(function() {
-					expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-					Rho.KeyCapture.captureTrigger();
-					});	
-				});
-			});
-*/
-			it("VT289-038 | call captureTrigger with no callback after calling with callback |", function() {
-
-				runs(function()
-				{
-					setObjective("VT289-038 | call captureTrigger with no callback after calling with callback ");
-					setInstruction("Press left trigger and then press right trigger, Main trigger(if available)");
-					setExpected("The callback should not fire after pressing the triggers");
-					Rho.KeyCapture.captureTrigger(triggercallback);
-					Rho.KeyCapture.captureTrigger();
-				});
-
-				runs(function()
-				{		
-					waitsFor(function() {
-					return document.getElementById("actResult").innerHTML != "init";
-					}, "Timed out waiting for tester to respond", 300000);
-					runs(function() {
-					expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-					//Rho.KeyCapture.captureTrigger();
-					});	
-				});
-			});
-
-		}
-
-		///////////////////////////////////////////////////////////////////////
-		//  ReMpa key Tests
-		///////////////////////////////////////////////////////////////////////
-
-		if (isWindowsMobilePlatform())
-		{
-
-			it("VT289-039 | call remapKey with enter and numeric key 1 |", function() {
-
-				runs(function()
-				{
-					setObjective("VT289-039 | call remapKey with enter and numeric key 1");
-					setInstruction("click inside the textbox, Press enter key and press numeric key 1");
-					setExpected("Both key should be dispatched as 1");
-					Rho.KeyCapture.remapKey('0x0D','0x31');
-				});
-
-				runs(function()
-				{		
-					waitsFor(function() {
-					return document.getElementById("actResult").innerHTML != "init";
-					}, "Timed out waiting for tester to respond", 300000);
-					runs(function() {
-					expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-					Rho.KeyCapture.remapKey('0x0D','');
-					});	
-				});
-			});
-
-			it("VT289-040 | call remapKey with functionkey F1 and numeric key 9 |", function() {
-
-				runs(function()
-				{
-					setObjective("VT289-040 | call remapKey with functionkey F1 and numeric key 9");
-					setInstruction("click inside the textbox, Press functionkey F1 and numeric key 9");
-					setExpected("Both key should be dispatched as 9");
-					Rho.KeyCapture.remapKey('0x70','0x39');
-				});
-
-				runs(function()
-				{		
-					waitsFor(function() {
-					return document.getElementById("actResult").innerHTML != "init";
-					}, "Timed out waiting for tester to respond", 300000);
-					runs(function() {
-					expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-					Rho.KeyCapture.remapKey('0x70','');
-					});	
-				});
-			});
-
-			it("VT289-041 | call remapKey with numeric key 5 and null |", function() {
-
-				runs(function()
-				{
-					setObjective("VT289-041 | call remapKey with numeric key 5 and null");
-					setInstruction("click inside the textbox, .Press numeric key 5 and 2");
-					setExpected("5 should be dispatched after pressing 5 and 2 should be dispatched after pressing 2, No Remap");
-					Rho.KeyCapture.remapKey('0x35','0x32');
-					Rho.KeyCapture.remapKey('0x35');
-				});
-
-				runs(function()
-				{		
-					waitsFor(function() {
-					return document.getElementById("actResult").innerHTML != "init";
-					}, "Timed out waiting for tester to respond", 300000);
-					runs(function() {
-					expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-					//Rho.KeyCapture.remapKey('0x70','');
-					});	
-				});
-			});
-
-			it("VT289-044 | call capturekey after remapKey |", function() {
-
-				runs(function()
-				{
-					setObjective("VT289-044 | call capturekey after remapKey ");
-					setInstruction("click inside the textbox, .Press numeric key a and b");
-					setExpected("Callback should not fire after pressing key a, Both key should be dispatched as b after pressing a and b");
-					Rho.KeyCapture.remapKey('0x65','0x66');
-					Rho.KeyCapture.captureKey(true,'0x65',capturekeycallback);
-				});
-
-				runs(function()
-				{		
-					waitsFor(function() {
-					return document.getElementById("actResult").innerHTML != "init";
-					}, "Timed out waiting for tester to respond", 300000);
-					runs(function() {
-					expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-					Rho.KeyCapture.remapKey('0x65');
-					Rho.KeyCapture.captureKey(true,'0x65');
-					});	
-				});
-			});
-
-			it("VT289-045 | call capturekey after remapKey and callback to fire |", function() {
-
-				runs(function()
-				{
-					setObjective("VT289-045 | call capturekey after remapKey and callback to fire");
-					setInstruction("click inside the textbox,Press numeric key y and z");
-					setExpected("Callback should fire after pressing key z and y, Both key should be dispatched as y after pressing z and y");
-					Rho.KeyCapture.remapKey('0x91','0x90');
-					Rho.KeyCapture.captureKey(true,'0x90',capturekeycallback);
-				});
-
-				runs(function()
-				{		
-					waitsFor(function() {
-					return document.getElementById("actResult").innerHTML != "init";
-					}, "Timed out waiting for tester to respond", 300000);
-					runs(function() {
-					expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-					Rho.KeyCapture.remapKey('0x65');
-					Rho.KeyCapture.captureKey(true,'0x65');
-					});	
-				});
-			});
-
-			it("VT289-046 | call remapKey after capturekey and callback to fire |", function() {
-
-				runs(function()
-				{
-					setObjective("VT289-046 | call remapKey after capturekey and callback to fire");
-					setInstruction("click inside the textbox, Press numeric key y and z");
-					setExpected("Callback should fire after pressing key * and #, Both key should be dispatched as # after pressing * and #");
-					Rho.KeyCapture.captureKey(true,'0x78',capturekeycallback);
-					Rho.KeyCapture.remapKey('0x77','0x78');
-				});
-
-				runs(function()
-				{		
-					waitsFor(function() {
-					return document.getElementById("actResult").innerHTML != "init";
-					}, "Timed out waiting for tester to respond", 300000);
-					runs(function() {
-					expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-					Rho.KeyCapture.remapKey('0x65');
-					Rho.KeyCapture.captureKey(true,'0x65');
-					});	
-				});
-			});
-		}
-
 	});	
 });	

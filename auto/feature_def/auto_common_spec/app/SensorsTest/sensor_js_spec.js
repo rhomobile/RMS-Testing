@@ -7,6 +7,7 @@
 	var getresult = null;
 	var sensorType = null;
 	var myvar = '';
+	var deviceOS = Rho.System.platform;
 
 describe("Sensor JS API Test", function() {
 	
@@ -572,6 +573,7 @@ describe("Sensor JS API Test", function() {
 
 	it("VT297-0001 | minimumGap getproperty before setting any value with synch for accelerometer |", function() {
 		sensorInstance = Rho.Sensor.makeSensorByType(Rho.Sensor.SENSOR_TYPE_ACCELEROMETER);
+
 	    if (sensorInstance)
         {
 	    	myvar = sensorInstance.getProperty("minimumGap");
@@ -585,6 +587,7 @@ describe("Sensor JS API Test", function() {
 
 	it("VT297-0002 | minimumGap getproperty before setting any value with synch for deviceOrientation |", function() {
 		sensorInstance = Rho.Sensor.makeSensorByType(Rho.Sensor.SENSOR_TYPE_DEVICE_ORIENTATION);
+		
 		if (sensorInstance)
         {
 			myvar = sensorInstance.getProperty("minimumGap");
@@ -1601,7 +1604,7 @@ describe("Sensor JS API Test", function() {
           sensorInstance.start();	
 	      myvar = sensorInstance.getProperty("status");
 	      sensorInstance.stop();
-		  expect(myvar).toEqual("ready");
+		  expect(myvar).toEqual("started"); // when the staus read the scanner was in started state.
 	    }
 	    else
     	expect(sensorInstance).toBeNull(); // if sensor is not supported on the device should we fail the test?
@@ -1787,7 +1790,7 @@ describe("Sensor JS API Test", function() {
 		if (sensorInstance)
         {
 		  myvar = sensorInstance.getProperties(['minimumGap']);
-		  expect(myvar["minimumGap"]).toEqual("200");
+		  expect(myvar.minimumGap).toEqual("200");
 	    }
 	    else
     	expect(sensorInstance).toBeNull(); // if sensor is not supported on the device should we fail the test?
@@ -2435,7 +2438,7 @@ describe("Sensor JS API Test", function() {
 		if (sensorInstance)
         {
 		  myvar = sensorInstance.getProperties(['status']);
-		  expect(myvar["status"]).toEqual("started");
+		  expect(myvar["status"]).toEqual("ready");
 	    }
 	    else
     	expect(sensorInstance).toBeNull(); // if sensor is not supported on the device should we fail the test?
@@ -4290,34 +4293,18 @@ describe("Sensor JS API Test", function() {
 	});
 
 	it("VT297-0250 | getAllProperties for accelerometer with synch |", function() {
-	    runs(function () {
-        	sensorInstance = Rho.Sensor.makeSensorByType(Rho.Sensor.SENSOR_TYPE_ACCELEROMETER);
-            if (sensorInstance)
-            {
-               sensorInstance.start();
-               myvar = sensorInstance.getAllProperties();               
-            }
-        });
 
-		waitsFor(function () {
-			if (sensorInstance)
-            	return (getallpropresult != null);
-            else
-            	return true;
-        }, 'The Accelerometer coordinates should display', 5000);
-
-
-         runs(function () {
-         	if (sensorInstance)
-         	{	
-				expect(myvar["minimumGap"]).toEqual("200");
-				expect(myvar["status"]).toEqual("started");
-				expect(myvar["type"]).toEqual("Accelerometer");
-			}
-			else
-    			expect(sensorInstance).toBeNull();	
-        });
-
+		sensorInstance = Rho.Sensor.makeSensorByType(Rho.Sensor.SENSOR_TYPE_ACCELEROMETER);
+        if (sensorInstance)
+        {
+           sensorInstance.start();
+           myvar = sensorInstance.getAllProperties();
+           expect(myvar["minimumGap"]).toEqual("200");
+           expect(myvar["status"]).toEqual("started");
+           expect(myvar["type"]).toEqual("Accelerometer");
+        }
+	    else
+	    	expect(sensorInstance).toBeNull();
 	});
 
 	it("VT297-0251 | getAllProperties for accelerometer with ananymous |", function() {
@@ -4354,19 +4341,27 @@ describe("Sensor JS API Test", function() {
 
 	it("VT297-0252 | makeSensorByType to get Return the new accelerometer sensor object by type with asynch |", function() {
 	    runs(function () {
-       	 	Rho.Sensor.makeSensorByType(Rho.Sensor.SENSOR_TYPE_ACCELEROMETER,makesensorbytype_callback);
-        	displayResult("Output: ",sensorType);
-            if (sensorType)
-            {
-               	sensorType.getProperty("type",getproperty_callback);          
-            }
-            else
-    			expect(sensorType).toBeNull();	
+       	 	Rho.Sensor.makeSensorByType(Rho.Sensor.SENSOR_TYPE_ACCELEROMETER, makesensorbytype_callback); 	           
 
         });
 
 		waitsFor(function () {
-            return (getresult != null);
+            return (sensorType != null);
+        }, 'No Accelerometer sinstance available', 5000);        
+
+        runs(function() {
+
+        	if (sensorType)
+            {
+               	sensorType.getProperty("type", getproperty_callback);          
+            }
+        });
+
+		waitsFor(function () {
+			if (sensorType)
+            	return (getresult != null);
+            else
+            	return true;
         }, 'The Accelerometer coordinates should display', 5000);
 
          runs(function () {
@@ -4387,18 +4382,29 @@ describe("Sensor JS API Test", function() {
 				sensorType = args;
 			    displayResult("Output: ",sensorType);
 			});
-            if (sensorType)
-            {
-               	sensorType.getProperty("type",getproperty_callback);   
-            } 
             
         });
 
         waitsFor(function () {
-            return (getresult != null);
+            return (sensorType != null);
+        }, 'No Accelerometer sinstance available', 5000);
+
+        runs(function() {
+
+        	if (sensorType)
+            {
+               	sensorType.getProperty("type", getproperty_callback);          
+            }
+        });
+
+        waitsFor(function () {
+            if (sensorType)
+            	return (getresult != null);
+            else
+            	return true;
         }, 'The Accelerometer coordinates should display', 5000);
 
-         runs(function () {
+        runs(function () {
          	if (sensorType)
          	{	
 				expect(getresult).toEqual("Accelerometer");
@@ -4506,8 +4512,13 @@ describe("Sensor JS API Test", function() {
         }, 'The Accelerometer coordinates should display', 20000);
 
         runs(function () {
-        	if(sensorInstance)        	
-                expect(getstatus).toMatch("ok");
+        	if(sensorInstance)
+        	{
+        		if ("ANDROID" == deviceOS)
+        			expect(getstatus).toMatch("error"); // read data on android will always reurn error
+        		else     	        	
+                	expect(getstatus).toMatch("ok");
+            }
             else
 	    	    expect(sensorInstance).toBeNull();	
 	        
@@ -4534,10 +4545,10 @@ describe("Sensor JS API Test", function() {
             sensorInstance = Rho.Sensor.makeSensorByType(Rho.Sensor.SENSOR_TYPE_DEVICE_ORIENTATION);
             if (sensorInstance)
             {
-             expect(sensorInstance.type).toMatch("DeviceOrientation");
+            	expect(sensorInstance.type).toMatch("DeviceOrientation");
             }
             else
-	    	expect(sensorInstance).toBeNull();
+	    		expect(sensorInstance).toBeNull();
 	    	
 	});
 
@@ -4628,11 +4639,14 @@ describe("Sensor JS API Test", function() {
 
         runs(function () {
         	if (sensorInstance)
-            {
-            expect(getstatus).toMatch("ok");
+        	{
+        		if ("ANDROID" == deviceOS)
+        			expect(getstatus).toMatch("error"); // read data on android will always reurn error
+        		else     	        	
+                	expect(getstatus).toMatch("ok");
             }
             else
-	    	expect(sensorInstance).toBeNull();
+	    		expect(sensorInstance).toBeNull();
 	        
         }); 
 	});
@@ -4877,7 +4891,12 @@ describe("Sensor JS API Test", function() {
 
         runs(function () {
             if (sensorInstance)
-               	expect(getstatus).toMatch("ok");
+            {
+        		if ("ANDROID" == deviceOS)
+        			expect(getstatus).toMatch("error"); // read data on android will always reurn error
+        		else     	        	
+                	expect(getstatus).toMatch("ok");
+            }
             else
 	    		expect(sensorInstance).toBeNull();	    	
         }); 
@@ -4994,8 +5013,11 @@ describe("Sensor JS API Test", function() {
 
         runs(function () {
             if (sensorInstance)
-            {
-            	expect(getstatus).toMatch("ok");
+            {            	
+	    		if ("ANDROID" == deviceOS)
+	    			expect(getstatus).toMatch("error"); // read data on android will always reurn error
+	    		else     	        	
+	            	expect(getstatus).toMatch("ok");            
             }
             else
 	    		expect(sensorInstance).toBeNull();
@@ -5157,7 +5179,10 @@ describe("Sensor JS API Test", function() {
         runs(function () {
         	if (sensorInstance)
             {
-            	expect(getstatus).toMatch("ok");
+        		if ("ANDROID" == deviceOS)
+        			expect(getstatus).toMatch("error"); // read data on android will always reurn error
+        		else     	        	
+                	expect(getstatus).toMatch("ok");
             }
             else 
     		   expect(sensorInstance).toBeNull();  
@@ -5407,7 +5432,10 @@ describe("Sensor JS API Test", function() {
         runs(function () {
             if (sensorInstance)
             {
-            		expect(getstatus).toMatch("ok");
+        		if ("ANDROID" == deviceOS)
+        			expect(getstatus).toMatch("error"); // read data on android will always reurn error
+        		else     	        	
+                	expect(getstatus).toMatch("ok");
             }
             else 
     		  	   expect(sensorInstance).toBeNull();  
@@ -5531,7 +5559,10 @@ describe("Sensor JS API Test", function() {
         runs(function () {
             if (sensorInstance)
             {
-            		expect(getstatus).toMatch("ok");
+        		if ("ANDROID" == deviceOS)
+        			expect(getstatus).toMatch("error"); // read data on android will always reurn error
+        		else     	        	
+                	expect(getstatus).toMatch("ok");
             }
             else 
     		  	   expect(sensorInstance).toBeNull();  
@@ -5654,7 +5685,10 @@ describe("Sensor JS API Test", function() {
         runs(function () {
             if (sensorInstance)
             {
-            		expect(getstatus).toMatch("ok");
+        		if ("ANDROID" == deviceOS)
+        			expect(getstatus).toMatch("error"); // read data on android will always reurn error
+        		else     	        	
+                	expect(getstatus).toMatch("ok");
             }
             else 
     		  	   expect(sensorInstance).toBeNull();  
