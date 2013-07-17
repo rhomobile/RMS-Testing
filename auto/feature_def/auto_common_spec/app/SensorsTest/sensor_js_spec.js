@@ -35,22 +35,6 @@ describe("Sensor JS API Test", function() {
         myvar = '';
     });
 
-    /* Returns the class name of the argument or undefined if
-   		it's not a valid JavaScript object.
-	*/
-	function getObjectClass(obj) {
-	    if (obj && obj.constructor && obj.constructor.toString) {
-	        var arr = obj.constructor.toString().match(
-	            /function\s*(\w+)/);
-
-	        if (arr && arr.length == 2) {
-	            return arr[1];
-	        }
-	    }
-
-	    return undefined;
-	}
-
 	var accelerometer_callback =  function (args){	
 		eventsRcvd++;
 		var result = '';
@@ -1804,7 +1788,6 @@ describe("Sensor JS API Test", function() {
 		if (sensorInstance)
         {
 		  myvar = sensorInstance.getProperties(['minimumGap']);
-		  alert("" + JSON.stringify(myvar));
 		  expect(myvar.minimumGap).toEqual("200");
 	    }
 	    else
@@ -4653,6 +4636,7 @@ describe("Sensor JS API Test", function() {
         }, 'The Accelerometer coordinates should display', 20000);
 
         runs(function () {
+        	if (sensorInstance)
         	{
         		if ("ANDROID" == deviceOS)
         			expect(getstatus).toMatch("error"); // read data on android will always reurn error
@@ -5388,10 +5372,7 @@ describe("Sensor JS API Test", function() {
         runs(function () {
         	if (sensorInstance)
             {
-        		if ("ANDROID" == deviceOS)
-        			expect(getstatus).toMatch("error"); // read data on android will always reurn error
-        		else     	        	
-                	expect(getstatus).toMatch("ok");
+            		expect(getstatus).toMatch("error");
             }
             else 
     		  	   expect(sensorInstance).toBeNull();  
