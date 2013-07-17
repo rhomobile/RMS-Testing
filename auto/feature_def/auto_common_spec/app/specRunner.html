@@ -6,15 +6,15 @@
     <script type="text/javascript">
 		var listOfRunners = [
 			"LogTest/specRunner.html",
-			"CardReaderTest/specRunner.html",
-			"DatabaseTest/specRunner.html",
-			"FileTest/specRunner.html",
-			"KeyCaptureTest/specRunner.html",
-			"NetworkTest/specRunner.html",
-			"OrmTest/specRunner.html",
-			"ScreenOrientationTest/specRunner.html",
-			"SignatureTest/specRunner.html",
-			"SystemRE1Test/specRunner.html",
+            "CardReaderTest/specRunner.html",
+            "DatabaseTest/specRunner.html",
+            "FileTest/specRunner.html",
+            "KeyCaptureTest/specRunner.html",
+            "NetworkTest/specRunner.html",
+            "OrmTest/specRunner.html",
+            "ScreenOrientationTest/specRunner.html",
+            "SignatureTest/specRunner.html",
+            "SystemRE1Test/specRunner.html",
 			"SensorsTest/specRunner.html",
 			"BarcodeTest/specRunner.html"//,
 			//"ApplicationTest/specRunner.html", //Not ready, use manual
@@ -26,7 +26,8 @@
 		{
 			setTimeout(function()
 			{
-				window.location.href = listOfRunners[0] + '?' + encodeURIComponent(JSON.stringify(listOfRunners.slice(1, listOfRunners.length)));
+                var url =  listOfRunners[0] + '?' + encodeURIComponent(JSON.stringify(listOfRunners.slice(1, listOfRunners.length)));
+				window.location.href = url;
 			},2000);
 		}
 		window.addEventListener('load', loadEvent);
