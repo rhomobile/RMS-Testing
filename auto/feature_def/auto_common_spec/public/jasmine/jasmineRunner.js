@@ -54,9 +54,13 @@ function quit()
 				var decodedParams = decodeURIComponent(getParams);
 				var decodedArray = JSON.parse(decodedParams);
 				var nextPageUrl = '../' + decodedArray[0];
-				if(decodedArray.length == 1)
+				if(decodedArray.length == 0)
 				{
-					window.location.href = nextPageUrl;
+					quit();
+				}
+				else if(decodedArray.length == 1)
+				{
+					window.location.href = nextPageUrl + "?" + encodeURIComponent("[]");
 					return;
 				}
 				var newArray = decodedArray.slice(1,decodedArray.length);
@@ -65,9 +69,10 @@ function quit()
 			}
 			else
 			{
-				quit();
+				//Running locally. Ignore
 			}
 		};
 		jasmineEnv.execute();
 	}
+
 })();
