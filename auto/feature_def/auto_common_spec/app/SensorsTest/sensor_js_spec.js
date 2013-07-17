@@ -573,6 +573,7 @@ describe("Sensor JS API Test", function() {
 
 	it("VT297-0001 | minimumGap getproperty before setting any value with synch for accelerometer |", function() {
 		sensorInstance = Rho.Sensor.makeSensorByType(Rho.Sensor.SENSOR_TYPE_ACCELEROMETER);
+
 	    if (sensorInstance)
         {
 	    	myvar = sensorInstance.getProperty("minimumGap");
@@ -586,6 +587,7 @@ describe("Sensor JS API Test", function() {
 
 	it("VT297-0002 | minimumGap getproperty before setting any value with synch for deviceOrientation |", function() {
 		sensorInstance = Rho.Sensor.makeSensorByType(Rho.Sensor.SENSOR_TYPE_DEVICE_ORIENTATION);
+		
 		if (sensorInstance)
         {
 			myvar = sensorInstance.getProperty("minimumGap");
