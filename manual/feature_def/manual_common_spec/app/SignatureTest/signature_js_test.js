@@ -27,8 +27,7 @@ function takecallbackdata(data)
 {
 	document.getElementById("clbkStatus").innerHTML = data.status;
 	document.getElementById("clbkURI").innerHTML = data.imageUri;
-   // alert(data.imageUri);
-   // $("#capturedImage").attr('src', data.imageUri);
+    $("#capturedImage").attr('src', data.imageUri);
 }
 
 function URIcallbackdata(data)
