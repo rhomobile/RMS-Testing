@@ -26,6 +26,7 @@ if File.file?(cfgfilename)
   $rc_push_server_address = config["rc_push_server_address"]
   $rc_push_server_port = config["rc_push_server_port"]
   $device_address = config["device_address"]
+  $device_os_platform = config["device_os"]
 end
 
 unless $rho_root

@@ -18,3 +18,5 @@ rc_push_server_address: 192.168.1.116
 rc_push_server_port: 8675
 # address of the mobile device
 device_address: 192.168.1.122
+# device OS platform (wm, ce)
+device_os: wm
