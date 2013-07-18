@@ -41,15 +41,6 @@ cfg.gsub!(/(syncserver.*)/, "syncserver = 'http://#{RhoconnectHelper.host}:#{Rho
 cfg.gsub!(/(Push.rhoconnect.pushServer.*)/, "Push.rhoconnect.pushServer = 'http://#{RhoconnectHelper.push_host}:#{RhoconnectHelper.push_port}'")
 File.open(cfgfile, 'w') { |f| f.write cfg }
 
-# Patching app server.js
-servers = <<_SERVER_JS_
-var PUSH_HOST = "#{RhoconnectHelper.push_host}",
-    PUSH_PORT = #{RhoconnectHelper.push_port},
-    RHOCONNECT_HOST = "#{RhoconnectHelper.host}",
-    RHOCONNECT_PORT = #{RhoconnectHelper.port};
-_SERVER_JS_
-File.open(File.join($app_path, 'public', 'app', 'servers.js'), 'w') { |f| f << servers }
-
 # Patching app sync_server.js
 sync_server = <<_SYNC_SERVER_JS_
 var SYNC_SERVER_HOST = "#{RhoconnectHelper.host}";
@@ -69,7 +60,6 @@ $deviceOpts = '-e'
 out = `adb devices`
 device_list = out.split("\n")
 device_list.shift # skip "List of devices attached "
-# raise 'No attached android devices found' unless device_list
 device_list << '' if device_list.empty?
 device_list.each do |dev|
   puts
@@ -112,7 +102,6 @@ device_list.each do |dev|
         system "adb #{$deviceOpts} uninstall #{pkg}"
       end
     end
-
     puts "Install rhoconnect push service ..."
     push_service_apk = File.join($rhoelements_root,'libs','rhoconnect-push-service','rhoconnect-push-service.apk')
     system("adb #{$deviceOpts} install -r #{push_service_apk}")
@@ -128,11 +117,31 @@ device_list.each do |dev|
     File.unlink(rhodes_log) if File.exists?(rhodes_log)
     $logcat_pid = Kernel.spawn("adb #{$deviceOpts} logcat", :out => File.open(rhodes_log, "w"))
     puts "Starting logcat process with pid: #{$logcat_pid}"
-
   else
+    # Using emulator
+    load File.join($rho_root,'Rakefile')
+    load File.join($rho_root,'platform','android','build','android.rake')
 
+    puts "Configure android emulator ..."
+    Rake::Task["config:android:emulator"].invoke
+    AndroidTools.run_emulator( :wipe => true )
+    TEST_PKGS.each do |pkg|
+      out = `adb -e shell pm list packages #{pkg}`
+      unless out.empty?
+        puts "Uninstalling package #{pkg} ..."
+        system "adb -e uninstall #{pkg}"
+      end
+    end
+    puts "Install rhoconnect push service"
+    push_service_apk = File.join($rhoelements_root,'libs','rhoconnect-push-service','rhoconnect-push-service.apk')
+    AndroidTools.load_app_and_run("-e", push_service_apk, "")
+
+    puts 'Building and starting rhodes application ...'
+    system("rake run:#{$platform}")
   end
   FileUtils.chdir $spec_path
-
 end
+
+# TODO: wait test results on device/emulator and publish them here
+
 
