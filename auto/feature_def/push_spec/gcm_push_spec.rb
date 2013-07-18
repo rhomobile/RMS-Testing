@@ -57,7 +57,6 @@ $app_path = File.expand_path(File.join(File.dirname(__FILE__), appname))
 cfgfile = File.join($app_path, 'rhoconfig.txt')
 cfg = File.read(cfgfile)
 cfg.gsub!(/(syncserver.*)/, "syncserver = 'http://#{RhoconnectHelper.host}:#{RhoconnectHelper.port}'")
-cfg.gsub!(/(rhoconnect_push_server.*)/, "rhoconnect_push_server = 'http://#{RhoconnectHelper.push_host}:#{RhoconnectHelper.push_port}'")
 cfg.gsub!(/(Push.rhoconnect.pushServer.*)/, "Push.rhoconnect.pushServer = 'http://#{RhoconnectHelper.push_host}:#{RhoconnectHelper.push_port}'")
 File.open(cfgfile, 'w') { |f| f.write cfg }
 
@@ -148,6 +147,7 @@ device_list.each do |dev|
         puts 'Building and starting rhodes application ...'
         system("rake run:#{$platform}").should == true
       end
+      FileUtils.chdir $spec_path
     end
 
     after(:all) do

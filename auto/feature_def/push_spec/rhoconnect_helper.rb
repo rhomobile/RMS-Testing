@@ -226,7 +226,11 @@ module RhoconnectHelper
 	end
 
 	def self.stop_rhoconnect_push
-		Process.kill('INT', @@rhoconnect_push_pid) if @@rhoconnect_push_pid
+		if @@rhoconnect_push_pid
+			Process.kill('INT', @@rhoconnect_push_pid)
+		else
+			`killall -2 node 2> /dev/null`
+		end
 		@@rhoconnect_push_pid = nil
 	end
 
