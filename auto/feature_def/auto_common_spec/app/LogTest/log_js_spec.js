@@ -86,10 +86,10 @@ describe("Log JS API", function () {
 			Rho.LogCapture.stop();
 		});
 
-		// Call readlog() with valid parameter (Integer) 100
+		// Call readlog() with valid parameter (Integer) 1000
 		it("VT290-391 : Call readLogFile() method with valid parameter. | ", function() {
 			runs(function(){
-				Rho.Log.level = 0;
+				Rho.Log.level = 1;
 				Rho.Log.cleanLogFile();
 
 				waits(1000);
@@ -101,9 +101,9 @@ describe("Log JS API", function () {
 					Rho.Log.info(some_random_text, "tst");
 				}
 
-				var read = Rho.Log.readLogFile(400);
+				var read = Rho.Log.readLogFile(1000);
 
-				expect(read.length).toEqual(400);
+				expect(read.length).toEqual(1000);
 
 				expect(read.count(some_random_text) > 0).toEqual(true);
 			});
@@ -880,29 +880,29 @@ describe("Log JS API", function () {
 
 		if (Rho.System.platform != "WP8") {
 
-			// Set Log Memory period to 5 seconds
-			it("VT290-355 : Set Log Memory period to 5 secs | 5000", function () {
+			// Set Log Memory period to 2 seconds
+			it("VT290-355 : Set Log Memory period to 2 secs | 2000", function () {
 				runs(function () {
-					Rho.Log.level = 0;
+					Rho.Log.level = 1;
 					var info = "Info : Memory log should display in 5 secs interval | 0";
 					Rho.Log.info(info, "VT290-355");
 
 					Rho.LogCapture.clear();
 
-					Rho.Log.memoryPeriod = 1000;
-					expectedValue = 1000;
+					Rho.Log.memoryPeriod = 2000;
+					expectedValue = 2000;
 					memPeriod = Rho.Log.memoryPeriod;
 					expect(memPeriod).toEqual(expectedValue);	
 				});
 
-				waits(1500);
+				waits(3000);
 
 				runs(function () {
 					expect(Rho.LogCapture.read().count("MEMORY")).toEqual(1);
 
-					Rho.Log.memoryPeriod = 0;
+					//Rho.Log.memoryPeriod = 0;
 				});
-
+/*
 				waits(500);
 
 				runs(function () {
@@ -925,9 +925,10 @@ describe("Log JS API", function () {
 	
 					Rho.LogCapture.clear();
 				});
+*/				
 			});
 
-
+/* DUPLICATE of VT290-355
 			// Set Log Memory period to 10 seconds
 			it("VT290-356 : Set Log Memory period to 10 secs | 10000", function () {
 				runs(function () {
@@ -950,7 +951,7 @@ describe("Log JS API", function () {
 					});
 				});
 			});
-
+*/
 		}
 
 		if (clientPlatform == Rho.System.PLATFORM_ANDROID || clientPlatform == Rho.System.PLATFORM_IOS || clientPlatform == Rho.System.PLATFORM_WP8 )
@@ -1086,7 +1087,7 @@ describe("Log JS API", function () {
 		// Call error() method with "message" and "categories"
 		it("VT290-375 : Call error() method with message and categories | ", function() {
 			runs(function(){
-				Rho.Log.level = 0;
+				Rho.Log.level = 1;
 				var info = "Info : Application Error message displayed in the log ";
 				Rho.Log.info(info, "VT290-375");
 				 Rho.Log.error("VT290-375 : Application Error Message", "Application");
@@ -1098,7 +1099,7 @@ describe("Log JS API", function () {
 		// Call error() method with wrong category
 		it("VT290-379 : Call error() method with message and wrong category | ", function() {
 			runs(function(){
-				Rho.Log.level = 0;
+				Rho.Log.level = 1;
 				var info = "Info : Application Error message displayed in the log with invalid catagory name ";
 				Rho.Log.info(info, "VT290-379");
 				Rho.Log.error("VT290-379 :Application Error Message", "invalid");
@@ -1110,7 +1111,7 @@ describe("Log JS API", function () {
 		// Call info() method with "message" and "categories"
 		it("VT290-385 : Call info() method with message and categories | ", function() {
 			runs(function(){
-				Rho.Log.level = 0;
+				Rho.Log.level = 1;
 				var info = "Info : Info message displayed in the log with message and catagory name ";
 				Rho.Log.info(info, "VT290-385");
 				Rho.Log.info("VT290-385 : Application Info Message", "Application");
@@ -1134,7 +1135,7 @@ describe("Log JS API", function () {
 	 // Call warning() method with "message" and "categories"
 		it("VT290-409 : Call warning() method with message and categories | 1", function() {
 			runs(function(){
-				Rho.Log.level = 0;
+				Rho.Log.level = 1;
 				var info = "Warning : Warning message displayed in the log with message and category";
 				Rho.Log.info(info, "VT290-409");
 				Rho.Log.warning("VT290-409 :Application warning Message","Application");

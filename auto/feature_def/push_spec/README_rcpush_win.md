@@ -51,6 +51,7 @@ In order to run RC Push Integration Tests for Windows Mobile platform you will n
 	rc_push_server_port: 8675
 
 	device_address: <ip_address_of_the_windows_mobile_device>
+	device_os: <specify 'wm' or 'ce'>
 	```
 
 11. Verify that the Windows Firewall is turned off and you can ping your Mac machine and Windows Mobile device from the PC.

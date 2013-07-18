@@ -3,18 +3,20 @@
 <html>
 <head>
     <title>RhoElements Common API Tests</title>
+	<script type="text/javascript" charset="utf-8" src="/public/api/rhoapi-modules.js"></script>
+    
     <script type="text/javascript">
 		var listOfRunners = [
 			"LogTest/specRunner.html",
-			"CardReaderTest/specRunner.html",
-			"DatabaseTest/specRunner.html",
-			"FileTest/specRunner.html",
-			"KeyCaptureTest/specRunner.html",
-			"NetworkTest/specRunner.html",
-			"OrmTest/specRunner.html",
-			"ScreenOrientationTest/specRunner.html",
-			"SignatureTest/specRunner.html",
-			"SystemRE1Test/specRunner.html",
+            "CardReaderTest/specRunner.html",
+            "DatabaseTest/specRunner.html",
+            "FileTest/specRunner.html",
+            "KeyCaptureTest/specRunner.html",
+            "NetworkTest/specRunner.html",
+            "OrmTest/specRunner.html",
+            "ScreenOrientationTest/specRunner.html",
+            //"SignatureTest/specRunner.html", //Not released yet
+            "SystemRE1Test/specRunner.html",
 			"SensorsTest/specRunner.html",
 			"BarcodeTest/specRunner.html"//,
 			//"ApplicationTest/specRunner.html", //Not ready, use manual
@@ -24,9 +26,11 @@
 		
 		function loadEvent()
 		{
+		    Rho.Application.nativeMenu = [ {'label':'Exit', 'action': 'exit'} ];
 			setTimeout(function()
 			{
-				window.location.href = listOfRunners[0] + '?' + encodeURIComponent(JSON.stringify(listOfRunners.slice(1, listOfRunners.length)));
+                var url =  listOfRunners[0] + '?' + encodeURIComponent(JSON.stringify(listOfRunners.slice(1, listOfRunners.length)));
+				window.location.href = url;
 			},2000);
 		}
 		window.addEventListener('load', loadEvent);

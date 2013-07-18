@@ -26,6 +26,7 @@ if File.file?(cfgfilename)
   $rc_push_server_address = config["rc_push_server_address"]
   $rc_push_server_port = config["rc_push_server_port"]
   $device_address = config["device_address"]
+  $device_os_platform = config["device_os"]
 end
 
 unless $rho_root
@@ -83,25 +84,6 @@ describe 'Windows Mobile push spec' do
   after(:all) do
     stop_apps
     cleanup_apps
-    # FIXME:
-    # `adb emu kill`
-
-    #puts "Sending exit and logout message to the app"
-    #RhoconnectHelper.api_post('users/ping', { :user_id => ['pushclient'], :badge => 'exit_spec', :message => 'exit' }, @api_token)
-    # delete user
-    #RhoconnectHelper.api_delete('users/pushclient', @api_token)
-    #$server.shutdown
-
-    # FIXME:
-    # TEST_PKGS.each do |pkg|
-    #   puts "Uninstalling package #{pkg} ..."
-    #   system "adb -s #{$deviceId} uninstall #{pkg}"
-    # end
-    # system "kill -9 #{$logcat_pid}" if $logcat_pid
-    # puts "Uninstalling package com.rhomobile.rho_push_client ..."
-    # system "adb uninstall com.rhomobile.rho_push_client"
-    # puts "Uninstalling package com.motsolutions.cto.services.ans ..."
-    # system "adb uninstall com.motsolutions.cto.services.ans"
   end
 
   def expect_request(name)
@@ -116,16 +98,11 @@ describe 'Windows Mobile push spec' do
   end
 
   it 'should login' do
-    #'pending'.should_not be_nil
-    # puts 'Waiting message with login errCode'
-    #pending
     expect_request('error').should == "0"
   end
 
   it 'should register' do
     puts 'Waiting message with Rhoconnect registaration...'
-    #'pending'.should_not be_nil
-    #pending
     $device_id = expect_request('device_id')
     $device_id.should_not be_nil
     $device_id.should_not == ''

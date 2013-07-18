@@ -153,7 +153,7 @@ def run_apps(platform)
 		$wm_build_rakefile_dir = convert_to_windows_path_style_str(File.join($rhoelements_root, 'build', 'ci', 'windows'))
 		$wm_build_rakefile = convert_to_windows_path_style_str(File.join($rhoelements_root,'build','ci','windows','Rakefile'))
 		rhodes_app_dir = convert_to_windows_path_style_str(File.join($testsuite_root,'auto','feature_def','push_spec',appname))
-		cmd = "cd #{$wm_build_rakefile_dir} && rake -f #{$wm_build_rakefile} windows:build_native_test_app_wm['#{rhodes_app_dir}']"
+		cmd = "cd #{$wm_build_rakefile_dir} && rake -f #{$wm_build_rakefile} windows:build_native_test_app_#{$device_os_platform}['#{rhodes_app_dir}']"
 		puts "CMD is: #{cmd}"
                 $out_code = system(cmd)
 		puts "Build is finished with #{$out_code} !!!"
@@ -165,7 +165,12 @@ def run_apps(platform)
 		puts "Device reboot is finished with #{$out_code}"
 
 		puts "3rd step : install the push service"
-		aux_lib_push_service_cab = convert_to_windows_path_style_str(File.join($rhoelements_root,'libs','rhoconnect-push-service','NETCFv35.Messages.EN.wm.cab'))
+		aux_lib_push_service_cab = nil
+		if $device_os_platform == "wm"
+			aux_lib_push_service_cab = convert_to_windows_path_style_str(File.join($rhoelements_root,'libs','rhoconnect-push-service','NETCFv35.Messages.EN.wm.cab'))
+		elsif $device_os_platform == "ce"
+			aux_lib_push_service_cab = convert_to_windows_path_style_str(File.join($rhoelements_root,'libs','rhoconnect-push-service','NETCFv35.Messages.EN.cab'))
+		end
 		cmd = "cd #{$wm_build_rakefile_dir} && rake -f #{$wm_build_rakefile} windows:install_cab_to_device[#{$device_address},#{aux_lib_push_service_cab}]"
 		puts "CMD is: #{cmd}"
 		$out_code = system(cmd)
