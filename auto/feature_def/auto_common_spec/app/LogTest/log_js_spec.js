@@ -103,7 +103,7 @@ describe("Log JS API", function () {
 
 				var read = Rho.Log.readLogFile(1000);
 
-				expect(read.length).toEqual(1000);
+				expect(read.length).toBeLessThan(1000);
 
 				expect(read.count(some_random_text) > 0).toEqual(true);
 			});
