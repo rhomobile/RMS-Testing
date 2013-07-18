@@ -98,7 +98,7 @@ end
         File.exist?(Rho::RhoApplication::get_model_path('app', 'spec')).should == true if System.get_property('platform') != 'Blackberry'
         File.exist?(Rho::RhoApplication::get_blob_folder()).should ==  true 
         
-if !System.get_property('is_emulator')
+if !Rho::System.isRhoSimulator
         File.exist?( File.join( __rhoGetCurrentDir(), 'rholog.txt')).should ==  true 
 end
         

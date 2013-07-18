@@ -85,7 +85,7 @@ describe "FileCommonAPI" do
     it "should isfileexist" do
         Rho::RhoFile.exists(Rho::RhoApplication::get_model_path('app', 'spec')).should == true
         Rho::RhoFile.exists(Rho::RhoApplication::get_blob_folder()).should ==  true
-if !System.get_property('is_emulator')        
+if !Rho::System.isRhoSimulator
         Rho::RhoFile.exists( Rho::RhoFile.join( __rhoGetCurrentDir(), 'rholog.txt')).should ==  true
 end        
         Rho::RhoFile.exists(nil).should == false

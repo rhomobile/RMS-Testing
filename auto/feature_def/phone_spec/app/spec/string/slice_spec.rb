@@ -1,5 +1,5 @@
 #require File.dirname(File.join(__rhoGetCurrentDir(), __FILE__)) + '/../../spec_helper'
-if System.get_property('is_emulator')
+if Rho::System.isRhoSimulator
 require File.dirname(__FILE__) + '/fixtures/classes.rb'
 else
 require File.dirname(File.join(__rhoGetCurrentDir(), __FILE__)) + '/fixtures/classes.rb'

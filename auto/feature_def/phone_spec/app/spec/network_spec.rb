@@ -147,7 +147,7 @@ describe "Network" do
         content.should == '1234567890'
     end
 =end
-
+=begin
     it "should http upload" do
         
         server = 'http://rhologs.heroku.com'
@@ -163,7 +163,7 @@ describe "Network" do
         res['status'].should == 'ok'
         File.exists?(file_name).should ==  true
     end
-
+=end
     it "should http upload" do
         
         server = 'http://rhologs.heroku.com'
@@ -203,7 +203,7 @@ end
         
         res = Rho::Network.get(
           :url => 'http://www.apache.org/licenses/LICENSE-2.0',
-          :http_command => 'PUT' )
+          :httpVerb => 'PUT' )
         
         #puts "res : #{res}"  
         res['http_error'].should == '405'
@@ -211,7 +211,7 @@ end
         
         res = Rho::Network.post(
           :url => 'http://www.apache.org/licenses/LICENSE-2.0',
-          :http_command => 'PUT' )
+          :httpVerb => 'PUT' )
         
         #puts "res : #{res}"  
         res['http_error'].should == '405'

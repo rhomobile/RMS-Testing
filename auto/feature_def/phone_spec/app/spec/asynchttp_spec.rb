@@ -147,7 +147,7 @@ describe "AsyncHttp" do
         content.should == '1234567890'
     end
 =end
-
+=begin
     it "should http upload" do
         
         server = 'http://rhologs.heroku.com'
@@ -163,7 +163,7 @@ describe "AsyncHttp" do
         res['status'].should == 'ok'
         File.exists?(file_name).should ==  true
     end
-
+=end
     it "should http upload" do
         
         server = 'http://rhologs.heroku.com'
