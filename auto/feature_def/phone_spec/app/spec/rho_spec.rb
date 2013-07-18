@@ -476,7 +476,7 @@ end
     time[1].should == '10'
     time[2].should == "11.123"
     
-    unless System.get_property('is_emulator') && System.get_property('platform') == 'APPLE'
+    unless Rho::System.isEmulator && System.get_property('platform') == 'APPLE'
       var_time= Time.local(day[0],day[1],day[2],time[0],time[1],time[2])
       res = var_time.strftime("%b %d, %y, %I:%M%p")
 

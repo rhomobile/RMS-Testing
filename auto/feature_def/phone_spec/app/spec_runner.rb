@@ -47,13 +47,13 @@ if System.get_property('platform') != 'WP8'
     config[:files] << "spec/contacts_spec" unless System.get_property('platform') == 'WINDOWS_DESKTOP'
 
     # Disable events specs on Android because emulator doesn't contain Calendar provider
-    config[:files] << "spec/events_spec"  unless System.get_property('platform') == 'WINDOWS_DESKTOP' or (System.get_property('platform') == 'ANDROID' and System.get_property('is_emulator'))
+    config[:files] << "spec/events_spec"  unless System.get_property('platform') == 'WINDOWS_DESKTOP' or (System.get_property('platform') == 'ANDROID' and Rho::System.isEmulator )
 
     config[:files] << "spec/barcode_spec" unless System.get_property('platform') == 'WINDOWS' || System.get_property('platform') == 'WINDOWS_DESKTOP'
     config[:files] << "spec/mapview_spec"  unless System.get_property('platform') == 'WINDOWS' || System.get_property('platform') == 'WINDOWS_DESKTOP'
 end
 
-    config[:files] << "spec/bundle_update_spec" if !System.get_property('is_emulator') && (System.get_property('platform') == 'APPLE' || System.get_property('platform') == 'ANDROID' || System.get_property('platform') == 'WINDOWS' || System.get_property('platform') == 'WINDOWS_DESKTOP')
+    config[:files] << "spec/bundle_update_spec" if !Rho::System.isRhoSimulator && (System.get_property('platform') == 'APPLE' || System.get_property('platform') == 'ANDROID' || System.get_property('platform') == 'WINDOWS' || System.get_property('platform') == 'WINDOWS_DESKTOP')
 
     config[:files] << "spec/nativebar_spec" if System.get_property('platform') != 'Blackberry' && System.get_property('platform') != 'WP8'
     config[:files] << "spec/navbar_spec" if System.get_property('platform') == 'APPLE' || System.get_property('platform') == 'ANDROID'
@@ -64,9 +64,9 @@ end
 #    config[:files] << "spec/uri_spec"
 #end
 
-if !defined?( RHO_ME )
-    config[:files] << "spec/database_spec" unless System.get_property('platform') == 'WINDOWS' && System.get_property('is_emulator')
-end
+#if !defined?( RHO_ME )
+    config[:files] << "spec/database_spec" #unless System.get_property('platform') == 'WINDOWS' && System.get_property('is_emulator')
+#end
 
   end
 
