@@ -51,26 +51,27 @@ require File.join($rho_root,'lib','build','jake.rb')
 require_relative './rhoconnect_helper'
 require_relative './spec_helper'
 
+#TODO: check that Rhoelements gem is installed
+puts "Starting local server"
+$server, addr, port = Jake.run_local_server(49254)
+File.open(File.join($spec_path, 'push_client_rb', 'app', 'local_server.rb'), 'w') do |f|
+  f.puts "SPEC_LOCAL_SERVER_HOST = '#{addr}'"
+  f.puts "SPEC_LOCAL_SERVER_PORT = #{port}"
+end
+
+$server.mount_proc('/', nil) do |req, res|
+  query = req.query
+      
+  res.status = 200
+  $mutex.synchronize do
+    $requests << req
+    puts "req is #{req}"
+    $signal.signal
+  end
+end
+
 describe 'Windows Mobile push spec' do
   before(:all) do
-    #TODO: check that Rhoelements gem is installed
-    puts "Starting local server"
-    $server, addr, port = Jake.run_local_server(49254)
-    File.open(File.join($spec_path, 'push_client_rb', 'app', 'local_server.rb'), 'w') do |f|
-      f.puts "SPEC_LOCAL_SERVER_HOST = '#{addr}'"
-      f.puts "SPEC_LOCAL_SERVER_PORT = #{port}"
-    end
-
-    $server.mount_proc('/', nil) do |req, res|
-      query = req.query
-      
-      res.status = 200
-      $mutex.synchronize do
-        $requests << req
-        puts "req is #{req}"
-        $signal.signal
-      end
-    end
 
     run_apps($platform)
 
@@ -206,7 +207,7 @@ describe 'Windows Mobile push spec' do
   		params = { :user_id=>['pushclient'], :badge => $collapse_id, :message => message}
 		  $collapse_id += 1
   		RhoconnectHelper.api_post('users/ping',params,@api_token)
-  		sleep 2
+  		sleep 3
   	end
 
   	puts 'Waiting 5 messages with push content...'
