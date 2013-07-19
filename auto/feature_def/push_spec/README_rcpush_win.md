@@ -29,17 +29,14 @@ In order to run RC Push Integration Tests for Windows Mobile platform you will n
 
 1. Install Microsoft Visual Studio 2008 + all service packs and latest patches
 2. Install all required SDK and tools following [these instructions](http://edgedocs.rhomobile.com/guide/nativesdksetup#setup-for-windows-mobile)
-3. Install and setup GitHub.
-4. Install Ruby and Ruby DevKit from [here](http://rubyinstaller.org/). Make sure that your installation directory doesn't have spaces.
-5. Clone the `rhodes` repo into `C:/Test/rhodes`
-6. Setup Rhodes by running `rhodes-setup.bat` command from the `C:/Test/rhodes/bin` folder to point to correct locations of VCBuild, and CabWiz. See [here](http://edgedocs.rhomobile.com/guide/build_wm#setup)
-7. Clone the `Motorola-Extensions` repo into `C:/Test/Motorola-Extensions`
-8. Clone the `RMS-Testing` repo into `C:/Test/RMS-Testing`
-9. Copy the `RDBClient.exe` file into `C:/Test/Motorola-Extensions/build/ci/windows/RDBClient/Release` directory
-10. Modify `C:\Test\RMS-Testing\auto\feature_def\push_spec\config.yml` with the following settings:
+3. Install latest RhoMobile Suite for Windows.
+4. Clone the `Motorola-Extensions` repo into `C:/Test/Motorola-Extensions` (it will needed to run the test scripts)
+5. Clone the `RMS-Testing` repo into `C:/Test/RMS-Testing`
+6. Copy the `RDBClient.exe` file into `C:/Test/Motorola-Extensions/build/ci/windows/RDBClient/Release` directory
+7. Modify `C:\Test\RMS-Testing\auto\feature_def\push_spec\config.yml` with the following settings:
 
 	```ruby
-	rhodes: "../../../../rhodes"
+	rhodes: "<path to the RMS rhodes gem>"
 	rhoconnect: "../../../../rhoconnect"
 	rhoelements: "../../../../Motorola-Extensions"
 	testsuite_root: "../../../../RMS-Testing"
@@ -54,8 +51,8 @@ In order to run RC Push Integration Tests for Windows Mobile platform you will n
 	device_os: <specify 'wm' or 'ce'>
 	```
 
-11. Verify that the Windows Firewall is turned off and you can ping your Mac machine and Windows Mobile device from the PC.
-12. Install the following gems by running `gem install <gemname>` command:
+8. Verify that the Windows Firewall is turned off and you can ping your Mac machine and Windows Mobile device from the PC.
+9. Install the following gems by running `gem install <gemname>` command:
 
 - mspec
 - bundler

@@ -63,9 +63,7 @@ describe 'Windows Mobile push spec' do
 
     $server.mount_proc('/', nil) do |req, res|
       query = req.query
-      # puts "Request headers: #{req.header.inspect}"
-      # puts "Request query: #{query.inspect}"
-
+      
       res.status = 200
       $mutex.synchronize do
         $requests << req
@@ -82,6 +80,16 @@ describe 'Windows Mobile push spec' do
 
 
   after(:all) do
+    # send exit to the app
+    message = 'exit_and_logout'
+    params = { :user_id=>['pushclient'], :badge => $collapse_id, :message=>message }
+    $collapse_id += 1
+    RhoconnectHelper.api_post('users/ping',params,@api_token)
+    expect_request('alert').should == message
+
+    # reset RhoConnect app
+    RhoconnectHelper.api_post('system/reset',{},@api_token)
+
     stop_apps
     cleanup_apps
   end
@@ -109,8 +117,6 @@ describe 'Windows Mobile push spec' do
   end
 
   it 'should proceed push message at foreground' do
-    #'pending'.should_not be_nil
-    #pending
     sleep 5
     puts 'Sending push message...'
 
@@ -147,10 +153,47 @@ describe 'Windows Mobile push spec' do
         $collapse_id += 1
 
   	puts 'Waiting ping message with push content ...'
-	expect_request('error').should == '0'
-	dev_id = expect_request('device_id')
-	dev_id.should == $device_id
-  	expect_request('alert').should == message
+    3.times do |i|
+      $mutex.synchronize do
+        break if $requests.count == 3
+        $signal.wait($mutex, 100)
+      end
+      puts "Message count: #{$requests.count}"
+    end
+
+    got_login = 0
+    got_device_id = 0
+    got_hello = 0
+    got_error = 0
+    dev_id = nil
+    res_message = nil
+    $mutex.synchronize do
+      $requests.each do |res|
+        error = res.query['error']
+        if error != nil and error != "" and error != '0'
+          got_error += 1
+        end 
+        method = res.query['method']
+        case method
+        when 'login'
+          got_login += 1
+        when 'register'
+          dev_id = res.query['device_id']
+          got_device_id += 1
+        when 'push'
+          res_message = res.query['alert']
+          got_hello += 1
+        end
+      end
+      $requests.clear
+    end
+
+    res_message.should == message
+    got_error.should == 0
+    dev_id.should == $device_id
+    got_login.should == 1
+    got_device_id.should == 1
+    got_hello.should == 1
   end
 
   it 'should process sequence of push messages' do
@@ -161,7 +204,7 @@ describe 'Windows Mobile push spec' do
   		message = "magic#{i}"
   		alerts[message] = true
   		params = { :user_id=>['pushclient'], :badge => $collapse_id, :message => message}
-		$collapse_id += 1
+		  $collapse_id += 1
   		RhoconnectHelper.api_post('users/ping',params,@api_token)
   		sleep 2
   	end
@@ -171,51 +214,44 @@ describe 'Windows Mobile push spec' do
   	5.times do |i|
   		$mutex.synchronize do
   			break if $requests.count == 5
-  			$signal.wait($mutex, 60)
+  			$signal.wait($mutex, 100)
   		end
   		puts "Message count: #{$requests.count}"
   	end
 
-  	$requests.count.should == 5
-  	puts " requests are #{$requests}"
-  	$mutex.synchronize do
-  		puts alerts.inspect
-  		5.times do |i|
-  			message = $requests[i].query['alert']
-
-  			message.should_not be_nil
-  			puts "message: #{message}"
-  			alerts[message].should be_true
-  			alerts[message] = false
-  			#$requests.delete_at 0
-  		end
+  	num_received = 0
+  	received_messages = []
+    $mutex.synchronize do
+      num_received = $requests.count
+      $requests.each do |res|
+  			message = res.query['alert']
+        received_messages << message
+      end
   		$requests.clear
   	end
+
+    num_received.should == 5
+    received_messages.each do |message|
+      message.should_not be_nil
+      alerts[message].should be_true
+      alerts[message] = false
+    end
   end
 
   it 'should logout and login back and process ping message' do
-	$mutex.synchronize do
-  		$requests.clear
-	end
-	message = 'exit_and_logout'
-  	params = { :user_id=>['pushclient'], :badge => $collapse_id, :message=>message }
-	$collapse_id += 1
+    message = 'exit_and_logout'
+    params = { :user_id=>['pushclient'], :badge => $collapse_id, :message=>message }
+    $collapse_id += 1
   	RhoconnectHelper.api_post('users/ping',params,@api_token)
   	expect_request('alert').should == message
 
-	sleep 15
-
-	# exit app by rebooting the device
-	#puts "Re-booting the device"
-	#cmd = "cd #{$wm_build_rakefile_dir} && rake -f #{$wm_build_rakefile} windows:reboot[#{$device_address}]"
-	#puts "CMD is : #{cmd}"
-	#$out_code = system(cmd)
+    sleep 15
 
   	puts "Re-Start the test application"
-        cmd = "cd #{$wm_build_rakefile_dir} && rake -f #{$wm_build_rakefile} windows:start_test_app_bg[#{$device_address},Rho_Push_Client]"
-        puts "CMD is: #{cmd}"
-        $out_code = system(cmd)
-        puts " Application is started with #{$out_code}"
+    cmd = "cd #{$wm_build_rakefile_dir} && rake -f #{$wm_build_rakefile} windows:start_test_app_bg[#{$device_address},Rho_Push_Client]"
+    puts "CMD is: #{cmd}"
+    $out_code = system(cmd)
+    puts " Application is started with #{$out_code}"
 
   	expect_request('error').should == "0"
   	$device_id = expect_request('device_id')
@@ -224,42 +260,8 @@ describe 'Windows Mobile push spec' do
 
   	message = 'welcome'
   	params = { :user_id=>['pushclient'], :badge => $collapse_id, :message => message}
-	$collapse_id += 1
+    $collapse_id += 1
   	RhoconnectHelper.api_post('users/ping',params,@api_token)
   	expect_request('alert').should == message
   end
-
-  #it 'should process sequence of push messages' do
-  #    puts 'Sending 5 push messages...'
-
-  #    alerts = {}
-  #    5.times do |i|
-  #      message = "magic#{i}"
-  #      alerts[message] = true
-  #      params = { :user_id=>['pushclient'], :badge => message, :message => message}
-  #      RhoconnectHelper.api_post('users/ping',params,@api_token)
-  #      sleep 2
-  #    end
-  #    puts 'Waiting 5 messages with push content...'
-  #    5.times do |i|
-  #      $mutex.synchronize do
-  #        break if $requests.count == 5
-  #        $signal.wait($mutex, 30)
-  #      end
-  #      puts "Message count: #{$requests.count}"
-  #    end
-  #    $requests.count.should == 5
-  #    $mutex.synchronize do
-  #      puts alerts.inspect
-  #      5.times do |i|
-  #        message = $requests[i].query['alert']
-  #        message.should_not be_nil
-  #        puts "message: #{message}"
-  #        alerts[message].should be_true
-  #        alerts[message] = false
-          #$requests.delete_at 0
-  #      end
-  #      $requests.clear
-  #    end
-  #end
 end
