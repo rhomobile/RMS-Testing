@@ -5,13 +5,13 @@ class WebviewTestController < Rho::RhoController
 
   def executeJavascriptOnCurrentTab
 
-    Rho::WebView.executeJavascript("setDomElementText('executeJavascript_test', 'This text was inserted by executeJavascript from ruby')")
+    Rho::WebView.executeJavascript("setDomElementText('executeJavascript_ruby_test', 'Current tab - this text was inserted by executeJavascript from ruby')")
 
   end
 
   def executeJavascriptOnTab1
 
-    Rho::WebView.executeJavascript("setDomElementText('executeJavascript_test', 'This text was inserted by executeJavascript from ruby')", 1)
+    Rho::WebView.executeJavascript("setDomElementText('executeJavascript_ruby_test', 'Tab with index 1 - this text was inserted by executeJavascript from ruby')", 1)
 
   end
 
