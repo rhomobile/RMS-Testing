@@ -1,6 +1,6 @@
 # startup page for your application
 start_path = '/app'
-
+enable_screen_zoom = 1
 # path to the options page (in this case handled by javascript)
 options_path = '/app/Settings'
 
