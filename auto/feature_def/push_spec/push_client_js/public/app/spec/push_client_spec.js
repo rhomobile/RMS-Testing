@@ -16,6 +16,10 @@ describe("Push Module", function(){
     Rho.Network.post(postData, function(){});
   };
 
+  var URL  = "http://" + LOCAL_SERVER_HOST + ":" + LOCAL_SERVER_PORT.toString();
+  var getProps = { url: URL + "?status=start" };
+  var data = Rho.Network.get(getProps);
+
   // TODO: Enable this code when specs are stable
   // var reset = false;
   // beforeEach(function() {
@@ -226,4 +230,12 @@ describe("Push Module", function(){
       expect(alert2).toEqual('message 2');
     });
   });
+
+  it("it should be called after all done", function() {
+    this.after(function() {
+      getProps = { url: URL + "?status=done" };
+      data = Rho.Network.get(getProps);
+    });
+  });
+
 });
