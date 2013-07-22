@@ -51,34 +51,48 @@ function callisApplicationInstalled(aString) {
         alert(aString + " application is not installed in the device");
 }
 
-function callreplaceCurrentBundleWindows()
+function rhobundle_getfilename()
 {
-	Rho.System.replaceCurrentBundle("httpServerUrl+'/download_app?device=wm'", {do_not_restart_app:false, not_thread_mode:true});
+    return Rho.RhoFile.join( Rho.Application.bundleFolder, '/RhoBundle/upgrade_bundle.zip');
 }
 
-function callreplaceCurrentBundleAndroid()
+function rhobundle_download(download_url)
 {
-	Rho.System.replaceCurrentBundle("httpServerUrl+'/download_app?device=android'", {do_not_restart_app:false, not_thread_mode:true});
+    var file_name = rhobundle_getfilename();
+    var dir_name = Rho.RhoFile.dirname(file_name);
+    if ( Rho.RhoFile.exists(dir_name) )
+    {
+        Rho.RhoFile.deleteRecursive(dir_name);
+    }
+    
+    if ( !Rho.RhoFile.exists(dir_name) )
+    {
+        Rho.RhoFile.makeDir(dir_name);
+    }
+    
+    var res = Rho.Network.downloadFile( { url : download_url, filename : file_name } );
+             
+    return res['status'] == 'ok';
 }
 
-function callreplaceCurrentBundlewin32()
+function callreplaceCurrentBundle()
 {
-	Rho.System.replaceCurrentBundle("httpServerUrl+'/download_app?device=win32'", {do_not_restart_app:false, not_thread_mode:true});
-}
-
-function callreplaceCurrentBundlewp8()
-{
-	Rho.System.replaceCurrentBundle("httpServerUrl+'/download_app?device=wp8'", {do_not_restart_app:false, not_thread_mode:true});
-}
-
-function callreplaceCurrentBundlece()
-{
-	Rho.System.replaceCurrentBundle("httpServerUrl+'/download_app?device=ce'", {do_not_restart_app:false, not_thread_mode:true});
-}
-
-function callreplaceCurrentBundleios()
-{
-	Rho.System.replaceCurrentBundle("httpServerUrl+'/download_app?device=ios'", {do_not_restart_app:false, not_thread_mode:true});
+    var res = rhobundle_download(httpServerUrl+'/upgrade_bundle.zip');
+    if (!res)
+    {
+        Rho.Log.error("Cannot download bundle.", "SPEC");
+        return;
+    }
+    
+    if ( Rho.System.unzipFile( rhobundle_getfilename()) == 0)
+    {
+    	Rho.System.replaceCurrentBundle( Rho.RhoFile.dirname(rhobundle_getfilename()), {do_not_restart_app:false});
+    }else
+    {
+        Rho.Log.error("Cannot unzip bundle.", "SPEC");
+        return;
+    }
+    	
 }
 
 function callgetProperty(propertyName)
