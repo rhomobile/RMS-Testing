@@ -202,6 +202,7 @@ describe("Push Module", function(){
 
     runs(function() {
       Rho.RhoConnectClient.logout();
+      // TODO: getDeviceId should only return after register finishes
       setTimeout(function(){
         Rho.RhoConnectClient.login('testuser2','testuser2', function(){
           Rho.Push.startNotifications(function(args){
@@ -210,13 +211,15 @@ describe("Push Module", function(){
               callback2 = true;
             }
           });
+        });
+        setTimeout(function(){
           Rho.Push.getDeviceId(function(args){
             if(args !== '') {
               deviceId2 = args;
               sendPushMessage({message: 'message 2', user_id: 'testuser2'});
             }
           });
-        });
+        }, 10000);
       }, 10000);
     });
 
@@ -225,7 +228,6 @@ describe("Push Module", function(){
     }, "callback2", 60000);
 
     runs(function() {
-      expect(deviceId1).toNotEqual(deviceId2);
       expect(alert1).toEqual('message 1');
       expect(alert2).toEqual('message 2');
     });
@@ -239,3 +241,4 @@ describe("Push Module", function(){
   });
 
 });
+
