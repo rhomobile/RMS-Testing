@@ -129,6 +129,7 @@ function toolTestActions2() {
 
 function toolTestActions3() {
     var toolElements = new Array();
+    Rho.System.keyboardState= "automatic";
     toolElements = [
         {label: 'SIP', action: 'SIP'},
         {label: 'Home', action: 'Home'},
