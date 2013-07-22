@@ -182,7 +182,12 @@ def run_apps(platform)
 		puts "RhoConnect Push Service is installed with #{$out_code} !!!"
 
 		puts "4th step: install the test application"
-		spec_app_cab = convert_to_windows_path_style_str(File.join($spec_path,appname,'bin','target','wm6p','Rho_Push_Client.cab'))
+		spec_app_cab = nil
+		if $device_os_platform == "wm"
+			spec_app_cab = convert_to_windows_path_style_str(File.join($spec_path,appname,'bin','target','wm6p','Rho_Push_Client.cab'))
+		else
+			spec_app_cab = convert_to_windows_path_style_str(File.join($spec_path,appname,'bin','target','Rho_Push_Client.cab'))
+		end
                 cmd = "cd #{$wm_build_rakefile_dir} && rake -f #{$wm_build_rakefile} windows:install_cab_to_device[#{$device_address},#{spec_app_cab}]"
 		puts "CMD is: #{cmd}"
 	        $out_code = system(cmd)

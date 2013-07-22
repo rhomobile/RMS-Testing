@@ -45,10 +45,6 @@ logname='push_client_js'
 KeepTrackOfLastVisitedPage = 0
 LastVisitedPage = ''
 
-# sync server url, typically this will look like 'http://<hostname>:<port>'
-# for example: 'http://localhost:9292'
-syncserver = 'http://192.168.1.117:9292'
-
 # geo location inactivity timeout (in seconds)
 #geo_location_inactivity_timeout = 30
 
@@ -87,5 +83,13 @@ splash_screen='zoom'
 
 use_bb_full_browser=6
 
-Push.rhoconnect.pushServer = 'http://192.168.1.117:8675'
+# Sync and Push server configurations
+# Sync server url, typically this will look like 'http://<hostname>:<port>/application'
+# for example: 'http://localhost:9292/application'
+syncserver = 'http://192.168.1.114:9292'
+rhoconnect_push_server = 'http://192.168.1.114:8675'
+rhoconnect_push_appname = 'someappname'
+
+# A new way configure push server
+Push.rhoconnect.pushServer = 'http://192.168.1.114:8675'
 Push.rhoconnect.pushAppName = 'someappname'
