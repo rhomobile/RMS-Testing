@@ -107,7 +107,7 @@ describe("Push Module", function(){
 
     waitsFor(function(){
       return messages.length === 5;
-    }, "wait", 30000);
+    }, "wait", 80000);
 
     runs(function() {
       expect(messages.length).toEqual(5);
@@ -221,7 +221,7 @@ describe("Push Module", function(){
 
     waitsFor(function() {
       return callback2;
-    }, "callback2", 60000);
+    }, "callback2", 100000);
 
     runs(function() {
       expect(alert1).toEqual('message 1');

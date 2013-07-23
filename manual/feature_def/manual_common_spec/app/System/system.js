@@ -1,3 +1,9 @@
+function getCountry()
+{
+	data = Rho.System.getProperty('country');
+	$("#Rho_System_Country span.result").text(JSON.stringify(data));
+}
+
 function getapplicationIconBadge()
 {
 	data = Rho.System.getProperty('applicationIconBadge');
