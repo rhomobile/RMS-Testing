@@ -189,9 +189,11 @@ device_list.each do |dev|
         system "adb -e uninstall #{pkg}"
       end
     end
-    puts "Install rhoconnect push service"
-    push_service_apk = File.join($rhoelements_root,'libs','rhoconnect-push-service','rhoconnect-push-service.apk')
-    AndroidTools.load_app_and_run("-e", push_service_apk, "")
+    if push_type == "rps"
+      puts "Install rhoconnect push service"
+      push_service_apk = File.join($rhoelements_root,'libs','rhoconnect-push-service','rhoconnect-push-service.apk')
+      AndroidTools.load_app_and_run("-e", push_service_apk, "")
+    end
 
     puts 'Building and starting rhodes application ...'
     system("rake run:#{$platform}")
@@ -226,10 +228,13 @@ device_list.each do |dev|
     puts "*** Passed: #{results['passed']}"
     puts "*** Failed: #{results['failed']}"
     puts
+  else
+    puts "No test results are available. Make sure that phone is connected to internet."
+    exit -1
+  end
+  if results['failed'].to_i != 0
+    puts "Jasmine specs are failed."
+    exit -1
   end
 
 end
-
-
-
-
