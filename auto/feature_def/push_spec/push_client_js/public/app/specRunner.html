@@ -12,21 +12,19 @@
     <script type="text/javascript" src="/public/jasmine/jasmine.js"></script>
     <script type="text/javascript" src="/public/jasmine/jasmine-html.js"></script>
     <script type="text/javascript" src="/public/jasmine/jasmine.junit_reporter.js"></script>
-    <script type="text/javascript" src="rhologReporter.js"></script>
-
-
     <script type="text/javascript" src="/public/jasmine/jasmine-extensions.js"></script>
 
     <!-- include spec files here... -->
     <script type="text/javascript" src="servers.js"></script>
     <script type="text/javascript" src="specHelpers.js"></script>
     <script type="text/javascript" src="spec/push_client_spec.js"></script>
-	
+    <script type="text/javascript" src="rhologReporter.js"></script>
+
     <script type="text/javascript">
         (function () {
-        
+
             Rho.Application.nativeMenu = [ {'label':'Exit', 'action': 'exit'} ];
-            
+
             var jasmineEnv = jasmine.getEnv();
             jasmineEnv.updateInterval = 1000;
 
@@ -53,6 +51,7 @@
                 jasmineEnv.execute();
             }
         })();
+
     </script>
     <style>
 	#detailsdiv {

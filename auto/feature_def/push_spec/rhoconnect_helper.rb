@@ -106,7 +106,7 @@ module RhoconnectHelper
 		end
 
 
-		puts "Started rhoconnect server. App path: #{@@server_path}, host: #{@@host}, port: #{@@port}"
+		puts "Rhoconnect server started. App path: #{@@server_path}, host: #{@@host}, port: #{@@port}"
 	end
 
 	def self.stop_server
@@ -176,16 +176,16 @@ module RhoconnectHelper
 		end
 
 		if @@enable_push
-			puts "run rhoconnect push"
+			puts "Starting rhoconnect push server"
 			start_rhoconnect_push
 			sleep 10
 		end
 
-		puts "run rhoconnect"
+		puts "Starting rhoconnect app"
 		start_server(dir)
 		sleep(10)
 		if reset
-			puts "reset rhoconnect"
+			puts "Reset rhoconnect app"
 			reset_server
 		end
 
@@ -202,11 +202,11 @@ module RhoconnectHelper
 			stop_resque
 		end
 
-		puts "stop rhoconnect"
+		puts "Stopping rhoconnect app"
 		stop_server
 
 		if @@enable_push
-			puts "stop rhoconnect push"
+			puts "Stopping rhoconnect push server"
 			stop_rhoconnect_push
 		end
 
@@ -217,8 +217,8 @@ module RhoconnectHelper
 	end
 
 	def self.generate_app(dir,name)
-		puts "generating rhoconnect app: rhoconnect is: #{@@rhoconnect_bin}, app name is #{name}, dir is #{dir}"
-		execute_rhoconnect(dir,"app",name)
+		puts "Generating rhoconnect app: binary: #{@@rhoconnect_bin}, app name: #{name}, dir: #{dir}"
+		execute_rhoconnect(dir,"app", name)
 	end
 
 	def self.start_rhoconnect_push
