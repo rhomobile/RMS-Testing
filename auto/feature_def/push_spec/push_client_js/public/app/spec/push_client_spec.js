@@ -1,27 +1,37 @@
 describe("Push Module", function(){
-
-  var pushServerUrl = 'http://' + PUSH_HOST + ':' + PUSH_PORT,
-      syncServerUrl = 'http://' + RHOCONNECT_HOST + ':' + RHOCONNECT_PORT;
-
+  var rcHeaders = {
+    'X-RhoConnect-API-TOKEN':'my-rhoconnect-token',
+    'Content-Type':'application/json'
+  };
   var sendPushMessage = function(args) {
-    var url = syncServerUrl + '/rc/v1/users/ping';
-    var postData = {
+    var body = JSON.stringify({
       user_id: args.user_id,
-      message: args.message,
-      url: url
-    };
-    $.ajax({
-      type: 'POST',
-      url: '/app/Settings/ping',
-      data: postData          
+      message: args.message
     });
+    var postData = {
+      body: body,
+      headers: rcHeaders,
+      url: Rho.RhoConnectClient.syncServer + '/rc/v1/users/ping'
+    };
+    Rho.Network.post(postData, function(){});
   };
 
-  beforeEach(function(){
-    Rho.RhoConnectClient.syncServer = syncServerUrl;
-    Rho.Push.pushAppName = 'someappname';
-    Rho.Push.pushServer = pushServerUrl;
-  });
+  // TODO: Enable this code when specs are stable
+  // var reset = false;
+  // beforeEach(function() {
+  //   reset = false;
+  //   var resetProps = {
+  //     url: Rho.RhoConnectClient.syncServer + '/rc/v1/system/reset',
+  //     headers: rcHeaders
+  //   };
+  //   runs(function() {
+  //     Rho.Network.post(resetProps, function() { reset = true; });
+  //   });
+
+  //   waitsFor(function() {
+  //     return reset;
+  //   }, "resets", 10000);
+  // });
 
   it("should register and getDeviceId from push service", function(){
     var deviceId = '';
@@ -97,7 +107,7 @@ describe("Push Module", function(){
 
     waitsFor(function(){
       return messages.length === 5;
-    }, "wait", 30000);
+    }, "wait", 80000);
 
     runs(function() {
       expect(messages.length).toEqual(5);
@@ -135,13 +145,15 @@ describe("Push Module", function(){
 
     runs(function() {
       Rho.Push.stopNotifications();
-      Rho.Push.startNotifications(function(args) {
-        if(args.alert) {
-          alert2 = args.alert;
-          callback2 = true;
-        }
-      });
-      sendPushMessage({message: 'message 2', user_id: 'testuser'});
+      setTimeout(function() {
+        Rho.Push.startNotifications(function(args) {
+          if(args.alert) {
+            alert2 = args.alert;
+            callback2 = true;
+          }
+        });
+        sendPushMessage({message: 'message 2', user_id: 'testuser'});
+      }, 10000);
     });
 
     waitsFor(function() {
@@ -158,20 +170,25 @@ describe("Push Module", function(){
     var alert1 = ''
         alert2 = '',
         callback1 = false,
-        callback2 = false;
+        callback2 = false,
+        deviceId1 = '',
+        deviceId2 = '';
     runs(function() {
-      Rho.RhoConnectClient.login('testuser1','testuser1', function(){
-        Rho.Push.startNotifications(function(args){
-          if(args.alert) {
-            alert1 = args.alert;
-            callback1 = true;
-          }
-        });
-        Rho.Push.getDeviceId(function(args){
-          if(args !== '') {
-            sendPushMessage({message: 'message 1', user_id: 'testuser1'});
-          }
-        });
+      Rho.RhoConnectClient.login('testuser','testuser', function(){
+        setTimeout(function(){
+          Rho.Push.startNotifications(function(args){
+            if(args.alert) {
+              alert1 = args.alert;
+              callback1 = true;
+            }
+          });
+          Rho.Push.getDeviceId(function(args){
+            if(args !== '') {
+              deviceId1 = args;
+              sendPushMessage({message: 'message 1', user_id: 'testuser'});
+            }
+          });
+        }, 10000);
       });
     });
 
@@ -181,7 +198,7 @@ describe("Push Module", function(){
 
     runs(function() {
       Rho.RhoConnectClient.logout();
-      Rho.Push.deviceId = '';
+      // TODO: getDeviceId should only return after register finishes
       setTimeout(function(){
         Rho.RhoConnectClient.login('testuser2','testuser2', function(){
           Rho.Push.startNotifications(function(args){
@@ -190,18 +207,21 @@ describe("Push Module", function(){
               callback2 = true;
             }
           });
+        });
+        setTimeout(function(){
           Rho.Push.getDeviceId(function(args){
             if(args !== '') {
+              deviceId2 = args;
               sendPushMessage({message: 'message 2', user_id: 'testuser2'});
             }
           });
-        });
+        }, 10000);
       }, 10000);
     });
 
     waitsFor(function() {
       return callback2;
-    }, "wait", 80000);
+    }, "callback2", 100000);
 
     runs(function() {
       expect(alert1).toEqual('message 1');
@@ -209,3 +229,4 @@ describe("Push Module", function(){
     });
   });
 });
+

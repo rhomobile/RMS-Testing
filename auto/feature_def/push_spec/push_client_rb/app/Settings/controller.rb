@@ -30,7 +30,7 @@ class SettingsController < Rho::RhoController
 
     host = SPEC_LOCAL_SERVER_HOST
     port = SPEC_LOCAL_SERVER_PORT
-    Rho::AsyncHttp.get :url => "http://#{host}:#{port}?error=#{errCode}"
+    Rho::AsyncHttp.get :url => "http://#{host}:#{port}?method=login&error=#{errCode}"
     puts "-- login callback, sent error code to the spec server"
   end
 
@@ -41,7 +41,7 @@ class SettingsController < Rho::RhoController
     port = SPEC_LOCAL_SERVER_PORT
 
     puts "-- registration callback, deviceId: #{@params['result']}"
-    Rho::AsyncHttp.get :url => "http://#{host}:#{port}?device_id=#{@params['result']}"
+    Rho::AsyncHttp.get :url => "http://#{host}:#{port}?method=register&device_id=#{@params['result']}"
   end
 
   def push_callback
@@ -60,7 +60,7 @@ class SettingsController < Rho::RhoController
       when 'exit_and_logout'
         exit = true
         puts '-- push_callback: exit and logout command received!'
-	SyncEngine.logout
+        SyncEngine.logout
       when 'logout'
         # TODO:
         puts '-- push_callback: logout command received!'
@@ -71,7 +71,7 @@ class SettingsController < Rho::RhoController
       end
     end
 
-    url = "http://#{host}:#{port}?alert=#{@params['alert']}&error=#{@params['error']}"
+    url = "http://#{host}:#{port}?method=push&alert=#{@params['alert']}&error=#{@params['error']}"
     if @params['error']
       puts "-- push_callback - skipping response: #{url} <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<"
     else

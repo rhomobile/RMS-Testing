@@ -1,5 +1,6 @@
+---
 sdkversion: 4.0.0
-name: Rho_Push_Client
+name: push_client_js
 version: 1.0
 vendor: rhomobile
 build: debug
@@ -8,9 +9,9 @@ applog: rholog.txt
 iphone:
   configuration: Release
   sdk: iphonesimulator6.1
-  provisionprofile: 
-  codesignidentity: 
-  entitlements: 
+  provisionprofile:
+  codesignidentity:
+  entitlements:
   BundleIdentifier: com.rhomobile.pushclientjs
   BundleURLScheme: pushclientjs
 wp:
@@ -19,8 +20,11 @@ symbian:
   uid: '0xe8a52b1b'
 android:
   version: 4.2.2
-app_type: rhoelements
-
-motorola_license: <put_rhoelements_license_here>
-
-extensions: ["json", "rhoconnect-client", "rhoconnect-push"]
+extensions:
+- rhoconnect-push
+- rhoconnect-client
+paths:
+  extensions:
+  - ../../../../../Motorola-Extensions/extensions
+  - ../../../../../rhoconnect-client/ext
+sdk: ../../../../../rhodes

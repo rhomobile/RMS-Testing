@@ -199,6 +199,18 @@
 </div>
 
 <div class="method_tests android ios win32 wm wp8">
+    <div class="method_name">System.Country</div>
+    <div class="method_desc">Screen Country.</div>
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <div id="Rho_System_Country">
+                <a href="javascript:void(0)" onclick="getCountry();">System.Country: </a> <span class="result"> </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="method_tests android ios win32 wm wp8">
     <div class="method_name">System.screenOrientation</div>
     <div class="method_desc">Screen Orientation : Screen auto rotate.</div>
     <div class="test_scenario">
@@ -634,26 +646,10 @@
 
 <div class="method_tests android ios win32 wm wp8">
     <div class="method_name">Rho.System.replaceCurrentBundle</div>
-    <div class="method_desc">replaceCurrentBundle : SystemJS.cab will be replaced</div>
+    <div class="method_desc">replaceCurrentBundle : application bundle will be replaced with sample app bundle.</div>
     <div class="test_scenario">
         <div class="test_scenario_controls">
-            <a href="javascript:void(0)" onclick="callreplaceCurrentBundleWindows();">call replaceCurrentBundle() for
-                windows</a>
-        </div>
-        <span class="test_scenario_number">VT300-080<br/></span>
-    </div>
-    <div class="test_scenario">
-        <div class="test_scenario_controls">
-            <a href="javascript:void(0)" onclick="callreplaceCurrentBundleAndroid();">call replaceCurrentBundle() for
-                android </a><br />
-			<a href="javascript:void(0)" onclick="callreplaceCurrentBundlewin32();">call replaceCurrentBundle() for
-                win32 </a><br />	
-			<a href="javascript:void(0)" onclick="callreplaceCurrentBundlewp8();">call replaceCurrentBundle() for
-                WP8 </a><br />
-			<a href="javascript:void(0)" onclick="callreplaceCurrentBundlece();">call replaceCurrentBundle() for
-                CE </a><br />
-			<a href="javascript:void(0)" onclick="callreplaceCurrentBundleios();">call replaceCurrentBundle() for
-                IOS </a><br />		
+            <a href="javascript:void(0)" onclick="callreplaceCurrentBundle();">call replaceCurrentBundle</a>
         </div>
         <span class="test_scenario_number">VT300-080<br/></span>
     </div>
