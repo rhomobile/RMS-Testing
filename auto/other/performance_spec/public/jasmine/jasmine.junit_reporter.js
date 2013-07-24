@@ -138,18 +138,7 @@
             // When all done, make it known on JUnitXmlReporter
             JUnitXmlReporter.finished_at = (new Date()).getTime();
 			//Now quit the app
-			//application.quit();
-			var xmlhttp;
-			if (window.XMLHttpRequest)
-  			{// code for IE7+, Firefox, Chrome, Opera, Safari
-  				xmlhttp=new XMLHttpRequest();
-  			}
-			else
-  			{// code for IE6, IE5
-  				xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-  			}
-  			xmlhttp.open("GET","/app/Settings/quitApp", false);
-			//xmlhttp.send();
+			Rho.System.exit();
         },
 
         getNestedOutput: function(suite) {
