@@ -1,16 +1,16 @@
 require 'yaml'
 require 'fileutils'
 
-# push type: Rhoconnect Push Service (rps) | Google Cloud Messaging (gcm)
-push_type = (ARGV[0].nil?) ?  "rps" : ARGV[0]
-unless push_type == 'rps' || push_type == 'gcm'
-  puts "Invalid param: 'rps' or 'gcm' expected"
+# push type: Rhoconnect Push Service (rhoconnect_push) | Google Cloud Messaging (gcm)
+push_type = (ARGV[0].nil?) ?  "rhoconnect_push" : ARGV[0]
+unless push_type == 'rhoconnect_push' || push_type == 'gcm'
+  puts "Invalid param: 'rhoconnect_push' or 'gcm' expected"
   exit
 end
 TEST_PKGS = %w[ com.rhomobile.push_client_js ]
-TEST_PKGS << 'com.motsolutions.cto.services.ans' if push_type == "rps"
+TEST_PKGS << 'com.motsolutions.cto.services.ans' if push_type == "rhoconnect_push"
 
-puts "Running push specs for #{(push_type == "rps") ?  'Rhoconnect Push' : 'Google Cloud Messaging'} Service"
+puts "Running Jasmine Push specs for #{(push_type == "rhoconnect_push") ?  'Rhoconnect Push' : 'Google Cloud Messaging'} Service"
 
 $rho_root = nil
 cfgfilename = File.join(File.dirname(__FILE__),'config.yml')
@@ -48,7 +48,7 @@ cfg.gsub!(/(syncserver.*)/, "syncserver = 'http://#{RhoconnectHelper.host}:#{Rho
 cfg.gsub!(/(Push.rhoconnect.pushServer.*)/, "Push.rhoconnect.pushServer = 'http://#{RhoconnectHelper.push_host}:#{RhoconnectHelper.push_port}'")
 File.open(cfgfile, 'w') { |f| f.write cfg }
 # Select proper build file for rhodes app
-if push_type == "rps"
+if push_type == "rhoconnect_push"
   FileUtils.cp(File.join($app_path, 'build.yml.rps'), File.join($app_path, 'build.yml'))
 else  # "gcm"
   FileUtils.cp(File.join($app_path, 'build.yml.gcm'), File.join($app_path, 'build.yml'))
@@ -142,7 +142,7 @@ device_list.each do |dev|
   # Copy setting.yml file with :gcm_api_key to 'testapp/settings' directory if running tests GCM service
   FileUtils.cp('settings.yml', File.join($server_path, 'settings')) if push_type == "gcm"
 
-  RhoconnectHelper.set_rc_push_out File.open( File.join($app_path, "rhoconnect_push.log" ), "w")
+  RhoconnectHelper.set_rc_push_out File.open( File.join($app_path, "rhoconnect_push.log" ), "w") if push_type == "rhoconnect_push" 
   RhoconnectHelper.set_rc_out(File.open( File.join($app_path, "rhoconnect.log" ), "w"),
       File.open( File.join($app_path, "rhoconnect_err.log" ), "w"))
 
@@ -159,7 +159,7 @@ device_list.each do |dev|
       end
     end
 
-    if push_type == "rps"
+    if push_type == "rhoconnect_push"
       puts "Install rhoconnect push service ..."
       push_service_apk = File.join($rhoelements_root,'libs','rhoconnect-push-service','rhoconnect-push-service.apk')
       system("adb #{$deviceOpts} install -r #{push_service_apk}")
@@ -189,12 +189,12 @@ device_list.each do |dev|
         system "adb -e uninstall #{pkg}"
       end
     end
-    if push_type == "rps"
+    
+    if push_type == "rhoconnect_push"
       puts "Install rhoconnect push service"
       push_service_apk = File.join($rhoelements_root,'libs','rhoconnect-push-service','rhoconnect-push-service.apk')
       AndroidTools.load_app_and_run("-e", push_service_apk, "")
     end
-
     puts 'Building and starting rhodes application ...'
     system("rake run:#{$platform}")
   end

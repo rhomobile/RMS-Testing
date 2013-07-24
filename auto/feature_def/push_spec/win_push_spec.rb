@@ -5,7 +5,6 @@ require 'yaml'
 require 'psych' if RUBY_VERSION.to_s > "1.9.0"
 
 puts 'RUBY VERSION: ' + RUBY_VERSION.to_s
-#TEST_PKGS = %w[com.rhomobile.rho_push_client com.motsolutions.cto.services.ans]
 
 cfgfilename = File.join(File.dirname(__FILE__),'config.yml')
 
@@ -61,7 +60,7 @@ end
 
 $server.mount_proc('/', nil) do |req, res|
   query = req.query
-      
+
   res.status = 200
   $mutex.synchronize do
     $requests << req
@@ -173,7 +172,7 @@ describe 'Windows Mobile push spec' do
         error = res.query['error']
         if error != nil and error != "" and error != '0'
           got_error += 1
-        end 
+        end
         method = res.query['method']
         case method
         when 'login'
@@ -249,7 +248,7 @@ describe 'Windows Mobile push spec' do
     sleep 15
 
   	puts "Re-Start the test application"
-    cmd = "cd #{$wm_build_rakefile_dir} && rake -f #{$wm_build_rakefile} windows:start_test_app_bg[#{$device_address},Rho_Push_Client]"
+    cmd = "cd #{$wm_build_rakefile_dir} && rake -f #{$wm_build_rakefile} windows:start_test_app_bg[#{$device_address},push_client_rb]"
     puts "CMD is: #{cmd}"
     $out_code = system(cmd)
     puts " Application is started with #{$out_code}"

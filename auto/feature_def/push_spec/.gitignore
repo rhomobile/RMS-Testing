@@ -1,10 +1,6 @@
 TODO
 README_ANDROID_PUSH_SPECS
 tmp
-gcm_push_client/bin
-gcm_push_client/*.log
-gcm_push_client/rholog.txt
-gcm_push_client/app/local_server.rb
 
 push_client_rb/bin
 push_client_rb/*.log

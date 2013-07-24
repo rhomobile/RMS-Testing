@@ -1,6 +1,6 @@
 sdk: ../../../../../rhodes
 sdkversion: 4.0.0
-name: Rho_Push_Client
+name: push_client_rb
 version: 1.03
 vendor: rhomobile
 build: debug
