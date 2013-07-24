@@ -59,7 +59,7 @@ function callisApplicationInstalled(aString) {
 
 function rhobundle_getfilename()
 {
-    return Rho.RhoFile.join( Rho.Application.bundleFolder, '/RhoBundle/upgrade_bundle.zip');
+    return Rho.RhoFile.join( Rho.Application.userFolder, '/RhoBundle/upgrade_bundle.zip');
 }
 
 function rhobundle_download(download_url)
@@ -70,14 +70,14 @@ function rhobundle_download(download_url)
     {
         Rho.RhoFile.deleteRecursive(dir_name);
     }
-    
+
     if ( !Rho.RhoFile.exists(dir_name) )
     {
         Rho.RhoFile.makeDir(dir_name);
     }
-    
+
     var res = Rho.Network.downloadFile( { url : download_url, filename : file_name } );
-             
+
     return res['status'] == 'ok';
 }
 
@@ -89,7 +89,7 @@ function callreplaceCurrentBundle()
         Rho.Log.error("Cannot download bundle.", "SPEC");
         return;
     }
-    
+
     if ( Rho.System.unzipFile( rhobundle_getfilename()) == 0)
     {
     	Rho.System.replaceCurrentBundle( Rho.RhoFile.dirname(rhobundle_getfilename()), {do_not_restart_app:false});
@@ -98,7 +98,7 @@ function callreplaceCurrentBundle()
         Rho.Log.error("Cannot unzip bundle.", "SPEC");
         return;
     }
-    	
+
 }
 
 function callgetProperty(propertyName)
