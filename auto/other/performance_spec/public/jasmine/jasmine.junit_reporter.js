@@ -138,7 +138,7 @@
             // When all done, make it known on JUnitXmlReporter
             JUnitXmlReporter.finished_at = (new Date()).getTime();
 			//Now quit the app
-			Rho.System.exit();
+			Rho.Application.quit();
         },
 
         getNestedOutput: function(suite) {
