@@ -1051,38 +1051,96 @@ describe("Log JS API", function () {
 				});
 			});
 		}
-		/*
+
 		// Set skipPost to true
 		it("VT290-367 : Set skipPost to true | true", function() {
+			var flag = false;
+			var callbackCalled = false;
+			var status = '';
+			var data = '';
+			var content = 'Downloaded content';
+
 			runs(function(){
 				Rho.Log.level = 0;
-				var info = "Info : skip post set to true. http body information should not displayed in below log for network related functions";
-				Rho.Log.info(info, "VT290-367");
+
 				expectedValue = true;
-				Rho.Log.skipPost=true;
+				Rho.Log.skipPost = expectedValue;
+
 				skipPostValue = Rho.Log.skipPost;
-				var cell_network = Rho.Network.hasCellNetwork();
-				// write network code here
 				expect(skipPostValue).toEqual(expectedValue);
+
+				getProps = {
+					url: srvHttpLogTestMsg
+				};
+
+				Rho.Network.get(getProps, function(args){callbackCalled=true;data = args['body'];status = args['status'];});
+			} );
+
+			waitsFor( function() {
+					return callbackCalled;
+				},
+				"Callback never called",
+				waitTimeout
+			);
+
+			runs(function() {
+				expect(status).toEqual('ok');
+				expect(data).toEqual(content);
+
+				var log = Rho.LogCapture.read();
+
+				// skippost affects URL, BODY parameters traced, and traces received content
+				expect( log.count("URL =") > 0 ).toEqual(false);
+				expect( log.count("BODY =") > 0 ).toEqual(false);
+				// data is traced when callback is called, exclude that case
+				expect( log.count(data) > 1 ).toEqual(false);
 			});
 		});
 
 		// Set skipPost to false
 		it("VT290-368 : Set skipPost to false | false", function() {
+			var flag = false;
+			var callbackCalled = false;
+			var status = '';
+			var data = '';
+			var content = 'Downloaded content';
+
 			runs(function(){
 				Rho.Log.level = 0;
-				var info = "Info : skip post set to false. http body information should be displayed in below log for network related functions";
-				Rho.Log.info(info, "VT290-368");
+
 				expectedValue = false;
-				Rho.Log.skipPost=false;
+				Rho.Log.skipPost = expectedValue;
+
 				skipPostValue = Rho.Log.skipPost;
-				var cell_network = Rho.Network.hasCellNetwork();
-				// write network code here
 				expect(skipPostValue).toEqual(expectedValue);
+
+				getProps = {
+					url: srvHttpLogTestMsg
+				};
+
+				Rho.Network.get(getProps, function(args){callbackCalled=true;data = args['body'];status = args['status'];});
+			} );
+
+			waitsFor( function() {
+					return callbackCalled;
+				},
+				"Callback never called",
+				waitTimeout
+			);
+
+			runs(function() {
+				expect(status).toEqual('ok');
+				expect(data).toEqual(content);
+
+				var log = Rho.LogCapture.read();
+
+				// skippost affects URL, BODY parameters traced, and traces received content
+				expect( log.count("URL =") > 0 ).toEqual(true);
+				expect( log.count("BODY =") > 0 ).toEqual(true);
+				// data is traced when callback is called, exclude that case
+				expect( log.count(data) > 1 ).toEqual(true);
 			});
 		});
-
-		*/
 
 		// Call error() method with "message" and "categories"
 		it("VT290-375 : Call error() method with message and categories | ", function() {
