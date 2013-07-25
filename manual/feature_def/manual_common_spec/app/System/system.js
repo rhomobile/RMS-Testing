@@ -76,7 +76,7 @@ function rhobundle_download(download_url)
         Rho.RhoFile.makeDir(dir_name);
     }
 
-    var res = Rho.Network.downloadFile( { url : download_url, filename : file_name } );
+    var res = Rho.Network.downloadFile( { url : download_url, filename : file_name,  overwriteFile : true } );
 
     return res['status'] == 'ok';
 }
