@@ -142,7 +142,7 @@ device_list.each do |dev|
   # Copy setting.yml file with :gcm_api_key to 'testapp/settings' directory if running tests GCM service
   FileUtils.cp('settings.yml', File.join($server_path, 'settings')) if push_type == "gcm"
 
-  RhoconnectHelper.set_rc_push_out File.open( File.join($app_path, "rhoconnect_push.log" ), "w") if push_type == "rhoconnect_push" 
+  RhoconnectHelper.set_rc_push_out File.open( File.join($app_path, "rhoconnect_push.log" ), "w") if push_type == "rhoconnect_push"
   RhoconnectHelper.set_rc_out(File.open( File.join($app_path, "rhoconnect.log" ), "w"),
       File.open( File.join($app_path, "rhoconnect_err.log" ), "w"))
 
@@ -189,7 +189,7 @@ device_list.each do |dev|
         system "adb -e uninstall #{pkg}"
       end
     end
-    
+
     if push_type == "rhoconnect_push"
       puts "Install rhoconnect push service"
       push_service_apk = File.join($rhoelements_root,'libs','rhoconnect-push-service','rhoconnect-push-service.apk')
