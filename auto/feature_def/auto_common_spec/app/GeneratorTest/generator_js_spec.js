@@ -127,7 +127,7 @@ describe("<generator API specs>", function() {
 
     describe("Test getProperties, getAllProperties", function () {
         it("Should return all properties", function () {
-            Rho.GenPropBag.floatProp= 3.14156;
+            Rho.GenPropBag.floatProp= 3.141560;
             Rho.GenPropBag.intProp = 999;
             Rho.GenPropBag.boolProp = true;
             Rho.GenPropBag.stringProp = "some string";
@@ -135,44 +135,38 @@ describe("<generator API specs>", function() {
             var allProperties = Rho.GenPropBag.getAllProperties();
 
             expect(Object.keys(allProperties).length).toEqual(5); // getAllProperties return ID also
-            expect(allProperties["floatProp"]).toEqual("3.14156");
+            expect(allProperties["floatProp"]).toEqual("3.141560");
             expect(allProperties["intProp"]).toEqual("999");
             expect(allProperties["boolProp"]).toEqual("true");
             expect(allProperties["stringProp"]).toEqual("some string");
         });
 
         it("Should return two properties", function () {
-            Rho.GenPropBag.floatProp= 3.14156;
+            Rho.GenPropBag.floatProp= 3.141560;
             Rho.GenPropBag.intProp= 3;
 
             var properties = Rho.GenPropBag.getProperties(["intProp", "floatProp"]);
 
             expect(Object.keys(properties).length).toEqual(2);
-            expect(properties["floatProp"]).toEqual("3.14156");
+            expect(properties["floatProp"]).toEqual("3.141560");
             expect(properties["intProp"]).toEqual("3");
         });
 
-        it("Should return two properties if request for two esxists and one absent property", function () {
-            Rho.GenPropBag.floatProp= 3.14156;
+        it("Should return three properties if request for two esxists and one absent property", function () {
+            Rho.GenPropBag.floatProp= 3.141560;
             Rho.GenPropBag.intProp= 3;
 
             var properties = Rho.GenPropBag.getProperties(["intProp", "floatProp", "absentProperty"]);
 
-            expect(Object.keys(properties).length).toEqual(2);
-            expect(properties["floatProp"]).toEqual("3.14156");
+            expect(Object.keys(properties).length).toEqual(3);
+            expect(properties["floatProp"]).toEqual("3.141560");
             expect(properties["intProp"]).toEqual("3");
         });
 
         it("Should return null if property has valid name, but it is absent", function () {
             var properties = Rho.GenPropBag.getProperties(["absentProperty"]);
 
-            expect(Object.keys(properties).length).toEqual(0);
-        });
-
-        it("Should return null if property has invalid name and it is absent", function () {
-            var properties = Rho.GenPropBag.getProperties(["absent property"]);
-
-            expect(Object.keys(properties).length).toEqual(0);
+            expect(Object.keys(properties).length).toEqual(1);
         });
 
 

@@ -59,7 +59,7 @@ function callisApplicationInstalled(aString) {
 
 function rhobundle_getfilename()
 {
-    return Rho.RhoFile.join( Rho.Application.bundleFolder, '/RhoBundle/upgrade_bundle.zip');
+    return Rho.RhoFile.join( Rho.Application.userFolder, '/RhoBundle/upgrade_bundle.zip');
 }
 
 function rhobundle_download(download_url)
@@ -70,26 +70,27 @@ function rhobundle_download(download_url)
     {
         Rho.RhoFile.deleteRecursive(dir_name);
     }
-    
+
     if ( !Rho.RhoFile.exists(dir_name) )
     {
         Rho.RhoFile.makeDir(dir_name);
     }
-    
-    var res = Rho.Network.downloadFile( { url : download_url, filename : file_name } );
-             
+
+    var res = Rho.Network.downloadFile( { url : download_url, filename : file_name,  overwriteFile : true } );
+
     return res['status'] == 'ok';
 }
 
 function callreplaceCurrentBundle()
 {
-    var res = rhobundle_download(httpServerUrl+'/upgrade_bundle.zip');
+    //var res = rhobundle_download(httpServerUrl+'/upgrade_bundle.zip');
+    var res = rhobundle_download('http://manual-common-spec.s3.amazonaws.com/upgrade_bundle.zip');
     if (!res)
     {
         Rho.Log.error("Cannot download bundle.", "SPEC");
         return;
     }
-    
+
     if ( Rho.System.unzipFile( rhobundle_getfilename()) == 0)
     {
     	Rho.System.replaceCurrentBundle( Rho.RhoFile.dirname(rhobundle_getfilename()), {do_not_restart_app:false});
@@ -98,8 +99,31 @@ function callreplaceCurrentBundle()
         Rho.Log.error("Cannot unzip bundle.", "SPEC");
         return;
     }
-    	
+
 }
+
+function callupdateCurrentBundle()
+{
+    //var res = rhobundle_download(httpServerUrl+'/upgrade_bundle_partial.zip');
+    var res = rhobundle_download('http://manual-common-spec.s3.amazonaws.com/upgrade_bundle_partial.zip');
+    if (!res)
+    {
+        Rho.Log.error("Cannot download bundle.", "SPEC");
+        return;
+    }
+
+    if ( Rho.System.unzipFile( rhobundle_getfilename()) == 0)
+    {
+    	Rho.System.replaceCurrentBundle( Rho.RhoFile.dirname(rhobundle_getfilename()), {do_not_restart_app:true});
+    }else
+    {
+        Rho.Log.error("Cannot unzip bundle.", "SPEC");
+        return;
+    }
+
+}
+
+
 
 function callgetProperty(propertyName)
 {

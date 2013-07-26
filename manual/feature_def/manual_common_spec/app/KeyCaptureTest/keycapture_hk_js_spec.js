@@ -34,7 +34,7 @@ describe("KeyCapture Test", function() {
 					setObjective("VT289-001 | set homeKeyValue to enter key");
 					setInstruction("press the Enter key and check for application navigate");
 					setExpected("Application should navigate to Homepage of application after Pressing the Enter Key");
-					Rho.KeyCapture.homeKeyValue = '0x0D';
+					Rho.KeyCapture.homeKeyValue = '13';
 				});
 
 				runs(function()
@@ -127,7 +127,7 @@ describe("KeyCapture Test", function() {
 					setObjective("VT289-004 | set homeKeyValue to alphabet key a");
 					setInstruction("press the alphabet key a and check for application navigat");
 					setExpected("Application should navigate to Homepage of application after Pressing the alphabet key a");
-					Rho.KeyCapture.homeKeyValue = '0x65';
+					Rho.KeyCapture.homeKeyValue = '0x41';
 				});
 
 				runs(function()
@@ -150,7 +150,7 @@ describe("KeyCapture Test", function() {
 					setObjective("VT289-005 | set homeKeyValue to alphabet key C (caps)");
 					setInstruction("press the alphabet key C (caps) and check for application navigat");
 					setExpected("Application should navigate to Homepage of application after Pressing the alphabet key C (caps)");
-					Rho.KeyCapture.homeKeyValue = '0x67';
+					Rho.KeyCapture.homeKeyValue = '0x43';
 				});
 
 				runs(function()
@@ -196,8 +196,8 @@ describe("KeyCapture Test", function() {
 					setObjective("VT289-007 | set homeKeyValue to trigger key");
 					setInstruction("press the trigger key and check for application navigate");
 					setExpected("Application should navigate to Homepage of application after Pressing the trigger key ");
-					Rho.KeyCapture.homeKeyValue = '102';
-					Rho.KeyCapture.homeKeyValue = '103';
+					Rho.KeyCapture.homeKeyValue = '0';
+					Rho.KeyCapture.homeKeyValue = '0x200';
 				});
 
 				runs(function()
@@ -220,7 +220,7 @@ describe("KeyCapture Test", function() {
 				{
 					setObjective("VT289-008 | set homeKeyValue to null");
 					setInstruction("press enter key and check for application navigate");
-					setExpected("Application should navigate to Homepage of application after Pressing the trigger key ");
+					setExpected("Application should navigate to Homepage of application after Pressing the enter key ");
 					Rho.KeyCapture.homeKeyValue = '0x0D';
 					Rho.KeyCapture.homeKeyValue = '';
 				});
@@ -242,7 +242,7 @@ describe("KeyCapture Test", function() {
 
 				runs(function()
 				{
-					setObjective("VT289-008 | set homeKeyValue to 1 and 2");
+					setObjective("VT289-009 | set homeKeyValue to 1 and 2");
 					setInstruction("press 1 and 2 key and check for application navigate");
 					setExpected("Application should navigate to Homepage of application after Pressing the numeric key 1 and 2 ");
 					Rho.KeyCapture.homeKeyValue = '0x31';
