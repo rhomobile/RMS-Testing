@@ -31,7 +31,7 @@ describe("Log JS API", function () {
 		var originalLogSettings = {};
 
 		// js handing code does some debug traces in log, we should filter them outs 
-		Rho.LogCapture.excludeCategories = "\"__rhoClass\", \"__rhoCallback\"";
+		Rho.LogCapture.excludeCategories = "\"__rhoClass\", \"__rhoCallback\", Rho.callbackHandler, rho_cast<jstring, rho_cast<string";
 
 		var srvHost = SERVER_HOST;
 		var srvPort = SERVER_PORT;
@@ -1012,8 +1012,7 @@ describe("Log JS API", function () {
 				var data = '';
 
 				runs(function(){
-					var info = "Set netrace to false | false";
-					Rho.Log.info(info, "VT290-362");
+					Rho.Log.level = 1;
 
 					expectedValue = false;
 					Rho.Log.netTrace = expectedValue;
@@ -1093,7 +1092,7 @@ describe("Log JS API", function () {
 				expect( log.count("URL =") > 0 ).toEqual(false);
 				expect( log.count("BODY =") > 0 ).toEqual(false);
 				// data is traced when callback is called, exclude that case
-				expect( log.count(data) > 1 ).toEqual(false);
+				expect( log.count(data) > 0 ).toEqual(false);
 			});
 		});
 
@@ -1138,7 +1137,7 @@ describe("Log JS API", function () {
 				expect( log.count("URL =") > 0 ).toEqual(true);
 				expect( log.count("BODY =") > 0 ).toEqual(true);
 				// data is traced when callback is called, exclude that case
-				expect( log.count(data) > 1 ).toEqual(true);
+				expect( log.count(data) > 0 ).toEqual(true);
 			});
 		});
 
