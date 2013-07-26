@@ -83,7 +83,8 @@ function rhobundle_download(download_url)
 
 function callreplaceCurrentBundle()
 {
-    var res = rhobundle_download(httpServerUrl+'/upgrade_bundle.zip');
+    //var res = rhobundle_download(httpServerUrl+'/upgrade_bundle.zip');
+    var res = rhobundle_download('http://manual-common-spec.s3.amazonaws.com/upgrade_bundle.zip');
     if (!res)
     {
         Rho.Log.error("Cannot download bundle.", "SPEC");
@@ -100,6 +101,29 @@ function callreplaceCurrentBundle()
     }
 
 }
+
+function callupdateCurrentBundle()
+{
+    //var res = rhobundle_download(httpServerUrl+'/upgrade_bundle_partial.zip');
+    var res = rhobundle_download('http://manual-common-spec.s3.amazonaws.com/upgrade_bundle_partial.zip');
+    if (!res)
+    {
+        Rho.Log.error("Cannot download bundle.", "SPEC");
+        return;
+    }
+
+    if ( Rho.System.unzipFile( rhobundle_getfilename()) == 0)
+    {
+    	Rho.System.replaceCurrentBundle( Rho.RhoFile.dirname(rhobundle_getfilename()), {do_not_restart_app:true});
+    }else
+    {
+        Rho.Log.error("Cannot unzip bundle.", "SPEC");
+        return;
+    }
+
+}
+
+
 
 function callgetProperty(propertyName)
 {
