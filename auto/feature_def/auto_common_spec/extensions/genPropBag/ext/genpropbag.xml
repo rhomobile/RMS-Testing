@@ -10,7 +10,7 @@
 
         <!-- <PROPERTIES usePropertyBag="accessorsViaPropertyBag"> -->
         <!-- <PROPERTIES usePropertyBag="PropertyBagViaAccessors"> -->
-        <PROPERTIES usePropertyBag="accessorsViaPropertyBag" generateAccessors="true">
+        <PROPERTIES usePropertyBag="accessorsViaPropertyBag">
             <PROPERTY name="boolProp" type="BOOLEAN"  />
             <PROPERTY name="intProp" type="INTEGER"  />
             <PROPERTY name="floatProp" type="FLOAT"  />
