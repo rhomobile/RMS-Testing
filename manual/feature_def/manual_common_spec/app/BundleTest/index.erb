@@ -8,7 +8,19 @@
   </div>
 
   <div data-role="content">
-   <br>
+      See System Test: call replaceCurrentBundle with partial update<br>
+      <br>
+      Check before partial update :<br>
+      - open image page - image should be "original"<br>
+      - try to open "added page" - error should be displayed<br>
+      - open "removed page" - page should be opened<br>
+          <br>
+      Check after partial update :<br>
+      - open image page - image should be "updated" (May need to call refresh after 10 sec on Android and iOS)<br>
+      - open "added page" - page should be opened<br>
+      - try to open "removed page" - error should be displayed<br>
+
+      <br>
 <%= link_to '[open page with image]', { :action => :pageimage }%> 
    <br>
 <%= link_to '[open added page]', { :action => :pageadded }%> 
