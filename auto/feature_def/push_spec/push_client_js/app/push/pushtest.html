@@ -12,6 +12,8 @@
     }
 
     function displayResult(res){
+    
+        Rho.Log.info(res.toString(), "test" );
 
         var result = '';
 
@@ -93,6 +95,18 @@
         Rho.Push.getDeviceId(function(args) {
             displayResult(args);
         });
+    }
+
+    function getTypeSync(){
+        currentProcess("Rho.Push.type Called");
+        var deviceid = Rho.Push.type;
+        displayResult(deviceid);
+    }
+
+    function getAppNameSync(){
+        currentProcess("Rho.Push.pushAppName Called");
+        var deviceid = Rho.Push.pushAppName;
+        displayResult(deviceid);
     }
 
     function getPropertiesSync(){
@@ -212,6 +226,10 @@ Password: <input type='test' id='pid' value='testuser'><br/>
 <button onclick ='getDeviceIdSync()'>Device Id Sync</button>&nbsp;&nbsp;
 <button onclick ='getDeviceIdAsync()'>Device Id Async</button>&nbsp;&nbsp;
 <button onclick ='getDeviceIdAnonym()'>Device Id Anonymous</button>&nbsp;&nbsp;
+</div>
+<div id='pushtype'>
+<button onclick ='getTypeSync()'>Push.type Sync</button>&nbsp;&nbsp;
+<button onclick ='getAppNameSync()'>Push.pushAppName Sync</button>&nbsp;&nbsp;
 </div>
 <div id='gps'>
 <button onclick ='getPropertiesSync()'>getProperties Sync</button>&nbsp;&nbsp;
