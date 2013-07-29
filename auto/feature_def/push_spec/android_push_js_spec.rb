@@ -211,12 +211,16 @@ device_list.each do |dev|
   # Shutdown test stack ...
   RhoconnectHelper.stop_rhoconnect_stack
   FileUtils.rm_r $server_path if File.exists? $server_path
-  TEST_PKGS.each do |pkg|
-    puts "Uninstalling package #{pkg} ..."
-    system "adb #{$deviceOpts} uninstall #{pkg}"
-  end
   puts "Stopping local server"
   $server.shutdown
+  
+  # Uninstall rhodes app only if tests pass
+  if results && results['failed'].to_i == 0
+    TEST_PKGS.each do |pkg|
+      puts "Uninstalling package #{pkg} ..."
+      system "adb #{$deviceOpts} uninstall #{pkg}"
+    end
+  end
   `adb emu kill` if $deviceOpts == '-e' # running emulator
   system "kill -9 #{$logcat_pid}" if $logcat_pid
 
@@ -234,7 +238,7 @@ device_list.each do |dev|
   end
   if results['failed'].to_i != 0
     puts "Jasmine specs are failed."
-    exit -1
+    exit -1    
   end
 
 end
