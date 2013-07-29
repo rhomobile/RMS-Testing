@@ -18,7 +18,7 @@
     <script type="text/javascript">
 
         function doAction(val) {
-            var url = "/app/WebviewTest/" + val
+            var url = "/app/WebviewTest/" + val + "?rho_callback=1"
             if (window.XMLHttpRequest) {
                 var xhr = new window.XMLHttpRequest();
                 xhr.open("GET", url, true);
@@ -951,7 +951,7 @@
 
     <div class="test_scenario">
         <div class="test_scenario_controls">
-            <button onClick='Rho.WebView.setCookie("http://127.0.0.1", "key_1=DevaStoredCookie1");'>Set single cookie</button>
+            <button onClick='Rho.WebView.setCookie(document.URL, "key_1=DevaStoredCookie1");'>Set single cookie</button>
         </div>
         <div class="test_scenario_desc">
             <span class="test_scenario_number">VT301-080</span>
@@ -961,7 +961,7 @@
 
     <div class="test_scenario">
         <div class="test_scenario_controls">
-            <button onClick='Rho.WebView.setCookie("http://127.0.0.1", "key_2=DevaStoredCookie2;key_3=bhaktabhakta");'>Set multiple cookie</button>
+            <button onClick='Rho.WebView.setCookie(document.URL, "key_1=NewStoredCookie1;key_2=DevaStoredCookie2;key_3=bhaktabhakta");'>Set multiple cookie</button>
         </div>
         <div class="test_scenario_desc">
             <span class="test_scenario_number">VT301-081</span>

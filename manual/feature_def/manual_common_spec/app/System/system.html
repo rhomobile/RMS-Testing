@@ -308,7 +308,7 @@
     </div>
 </div>
 
-<!-- Install** methods family will implemented as another feature  -->
+
 
 <div class="method_tests android ios win32 wm wp8">
     <div class="method_name">Rho.System.applicationInstall</div>
@@ -326,17 +326,7 @@
             <span class="test_scenario_number">VT300-063 <br/></span>
         </div>
 
-        <!--Needless to test the installation of the application on the local file system-->
 
-        <!--<div class="test_scenario">
-            <div class="test_scenario_controls">
-                <a href="javascript:void(0)"
-                   onclick="downloadedFilePath = downloadFile(httpServerUrl+'/download_app?device=wm', 'TestAppWM6.5.cab');">Download
-                    app</a> <br/>
-                <a href="javascript:void(0)" onclick="Rho.System.applicationInstall(downloadedFilePath);">Install app from file system</a>
-            </div>
-            <span class="test_scenario_number">VT300-065 <br/></span>
-        </div>-->
     </div>
 
 
@@ -348,45 +338,9 @@
             </div>
             <span class="test_scenario_number">VT300-063 <br/></span>
         </div>
-
-        <!--Needless to test the installation of the application on the local file system-->
-
-        <!--<div class="test_scenario">
-            <div class="test_scenario_controls">
-                <a href="javascript:void(0)"
-                   onclick="downloadedFilePath = downloadFile(httpServerUrl+'/download_app?device=android', 'TestApp_signed.apk');">Download
-                    to local</a> <br/>
-                <a href="javascript:void(0)" onclick="Rho.System.applicationInstall(downloadedFilePath);">call
-                    Downloaded
-                    application Install with local url</a>
-            </div>
-            <span class="test_scenario_number">VT300-065 <br/></span>
-        </div>-->
     </div>
 
-    <!--<div class="method_tests wm"><b>Application Install for Windows CE:</b>
 
-        <div class="test_scenario">
-            <div class="test_scenario_controls">
-                <a href="javascript:void(0)"
-                   onclick="Rho.System.applicationInstall(httpServerUrl+'/download_app?device=ce');">call
-                    application Install with HTTP url</a>
-            </div>
-            <span class="test_scenario_number">VT300-064 <br/></span>
-        </div>
-        <div class="test_scenario">
-            <div class="test_scenario_controls">
-                <a href="javascript:void(0)"
-                   onclick="downloadedFilePath = downloadFile(httpServerUrl+'/download_app?device=ce', 'TestAppCE.cab');">Download
-                    to local</a> <br/>
-                <a href="javascript:void(0)" onclick="Rho.System.applicationInstall(downloadedFilePath);">call
-                    Downloaded
-                    application Install with local url</a>
-            </div>
-            <span class="test_scenario_number">VT300-065 <br/></span>
-        </div>
-    </div>
--->
 
     <div class="method_tests ios"><b>Application Install for iOS:</b>
 
@@ -398,63 +352,55 @@
             <span class="test_scenario_number">VT300-063 <br/></span>
         </div>
     </div>
-
-   <!-- <div class="method_tests win32"><b>Application Install for Windows Win32:</b>
-
-        <div class="test_scenario">
-            <div class="test_scenario_controls">
-                <a href="javascript:void(0)"
-                   onclick="Rho.System.applicationInstall(httpServerUrl+'/download_app?device=win32');">Install app from HTTP url</a>
-            </div>
-            <span class="test_scenario_number">VT300-064 <br/></span>
-        </div>
-
-
-
-<       <div class="test_scenario">
-            <div class="test_scenario_controls">
-                <a href="javascript:void(0)"
-                   onclick="downloadedFilePath = downloadFile(httpServerUrl+'/download_app?device=win32', 'everywan.exe');">Download
-                    to local</a> <br/>
-                <a href="javascript:void(0)" onclick="Rho.System.applicationInstall(downloadedFilePath);">call
-                    Downloaded
-                    application Install with local url</a>
-            </div>
-            <span class="test_scenario_number">VT300-065 <br/></span>
-        </div>
-    </div>-->
-
-  <!--  <div class="method_tests wp8"><b>Application Install for Windows wp8:</b>
-
-        <div class="test_scenario">
-            <div class="test_scenario_controls">
-                <a href="javascript:void(0)"
-                   onclick="Rho.System.applicationInstall(httpServerUrl+'/download_app?device=wp8');">Install app from HTTP url</a>
-            </div>
-            <span class="test_scenario_number">VT300-064 <br/></span>
-        </div>
-        <div class="test_scenario">
-            <div class="test_scenario_controls">
-                <a href="javascript:void(0)"
-                   onclick="downloadedFilePath = downloadFile(httpServerUrl+'/download_app?device=wp8', 'everywan.exe');">Download
-                    to local</a> <br/>
-                <a href="javascript:void(0)" onclick="Rho.System.applicationInstall(downloadedFilePath);">call
-                    Downloaded
-                    application Install with local url</a>
-            </div>
-            <span class="test_scenario_number">VT300-065 <br/></span>
-        </div>
-    </div>-->
 </div>
 
-<div class="method_tests android win32 wm wp8">
+<div class="method_tests android ios win32 wm wp8">
+    <div class="method_name">Rho.System.isApplicationInstalled</div>
+    <div class="method_desc">Is Application Installed</div>
+    <div class="method_tests wm">WM <br/>
+
+        <div class="test_scenario">
+            <div class="test_scenario_controls">
+                <a href="javascript:void(0)" onclick="callisApplicationInstalled('rhomobile testApp/testApp.exe');">Call
+                    isApplicationInstalled() with correct app name 'TestAppWM6.5'</a>
+            </div>
+            <span class="test_scenario_number">VT300-077 <br/></span>
+        </div>
+    </div>
+
+
+    <div class="method_tests android"> Android <br/>
+
+        <div class="test_scenario">
+            <div class="test_scenario_controls">
+                <a href="javascript:void(0)" onclick="var appName = 'com.rhomobile.testapp'; var isInstalled = Rho.System.isApplicationInstalled(appName); alert('isApplicationInstalled(' + appName + ') = ' + isInstalled);">Call
+                    isApplicationInstalled() with correct app name 'testapp'</a>
+            </div>
+            <span class="test_scenario_number">VT300-077 <br/></span>
+        </div>
+    </div>
+
+    <div class="method_tests ios"> IOS <br/>
+
+        <div class="test_scenario">
+            <div class="test_scenario_controls">
+                <a href="javascript:void(0)" onclick="callisApplicationInstalled('testapp');">Call
+                    isApplicationInstalled() with correct app name 'testapp'</a>
+            </div>
+            <span class="test_scenario_number">VT300-077 <br/></span>
+        </div>
+    </div>
+
+</div>
+
+<div class="method_tests android win32 wm ios wp8">
     <div class="method_name">Rho.System.runApplication</div>
     <div class="method_desc"> Run Application </div>
 
     <div class="method_tests wm">
         <div class="test_scenario">
             <div class="test_scenario_controls">
-                <a href="javascript:void(0)" onclick="Rho.System.runApplication('rhomobile testApp/testApp.exe');"> call
+                <a href="javascript:void(0)" onclick="Rho.System.runApplication('rhomobile testApp/testApp.exe','ParamsAreSet');"> call
                     runApplication with application name 'rhomobile testApp/testApp.exe'.</a>
             </div>
 			<span class="test_scenario_number">VT300-064 <br/></span>
@@ -464,7 +410,7 @@
     <div class="method_tests ios">
         <div class="test_scenario">
             <div class="test_scenario_controls">
-                <a href="javascript:void(0)" onclick="Rho.System.runApplication('testapp');"> call
+                <a href="javascript:void(0)" onclick="Rho.System.runApplication('testapp','ParamsAreSet');"> call
                     runApplication with application name 'testapp'.</a>
             </div>
 			<span class="test_scenario_number">VT300-064 <br/></span>
@@ -474,7 +420,7 @@
     <div class="method_tests android">
         <div class="test_scenario">
             <div class="test_scenario_controls">
-                <a href="javascript:void(0)" onclick="Rho.System.runApplication('com.rhomobile.testapp');"> call
+                <a href="javascript:void(0)" onclick="Rho.System.runApplication('com.rhomobile.testapp','ParamsAreSet');"> call
                     runApplication with application name 'testapp'.</a>
             </div>
 			<span class="test_scenario_number">VT300-064 <br/></span>
@@ -496,27 +442,6 @@
         </div>
     </div>
 
-    <!--<div class="method_tests wm">CE <br/>
-
-        <div class="test_scenario">
-            <div class="test_scenario_controls">
-                <a href="javascript:void(0)" onclick="Rho.System.applicationUninstall('TestAppCE');"> call
-                    applicationUninstall
-                    with application name 'TestAppCE'</a>
-            </div>
-        </div>
-    </div>-->
-
-    <!--<div class="method_tests win32">
-        <div class="test_scenario">
-            <div class="test_scenario_controls">
-                <a href="javascript:void(0)" onclick="Rho.System.applicationUninstall('everywan');"> call
-                    applicationUninstall
-                    with application name 'everywan'</a>
-            </div>
-        </div>
-    </div>-->
-
     <div class="method_tests android">
         <div class="test_scenario">
             <div class="test_scenario_controls">
@@ -525,15 +450,6 @@
             </div>
         </div>
     </div>
-
-   <!-- <div class="method_tests wp8">
-        <div class="test_scenario">
-            <div class="test_scenario_controls">
-                <a href="javascript:void(0)" onclick="callapplicationUninstall('everywan');"> call applicationUninstall
-                    with application name 'everywan'</a>
-            </div>
-        </div>
-    </div>-->
 
     <span class="test_scenario_number">VT300-065 <br/></span>
 </div>
@@ -548,87 +464,6 @@
         </div>
         <span class="test_scenario_number">VT300-071 <br/></span>
     </div>
-</div>
-
-<!-- Install** methods family will implemented as another feature  -->
-
-<div class="method_tests android ios win32 wm wp8">
-    <div class="method_name">Rho.System.isApplicationInstalled</div>
-    <div class="method_desc">Is Application Installed</div>
-    <div class="method_tests wm">WM <br/>
-
-        <div class="test_scenario">
-            <div class="test_scenario_controls">
-                <a href="javascript:void(0)" onclick="callisApplicationInstalled('rhomobile testApp/testApp.exe');">Call
-                    isApplicationInstalled() with correct app name 'TestAppWM6.5'</a>
-            </div>
-            <span class="test_scenario_number">VT300-077 <br/></span>
-        </div>
-    </div>
-
-<!--    <div class="method_tests wm">CE <br/>
-
-        <div class="test_scenario">
-            <div class="test_scenario_controls">
-                <a href="javascript:void(0)" onclick="callisApplicationInstalled('TestAppCE');">Call
-                    isApplicationInstalled() with correct app name 'TestAppCE'</a>
-            </div>
-            <span class="test_scenario_number">VT300-077 <br/></span>
-        </div>
-    </div>-->
-    <div class="method_tests android"> Android <br/>
-
-        <div class="test_scenario">
-            <div class="test_scenario_controls">
-                <a href="javascript:void(0)" onclick="var appName = 'com.rhomobile.testapp'; var isInstalled = Rho.System.isApplicationInstalled(appName); alert('isApplicationInstalled(' + appName + ') = ' + isInstalled);">Call
-                    isApplicationInstalled() with correct app name 'testapp'</a>
-            </div>
-            <span class="test_scenario_number">VT300-077 <br/></span>
-        </div>
-    </div>
-
-    <div class="method_tests ios"> IOS <br/>
-
-        <div class="test_scenario">
-            <div class="test_scenario_controls">
-                <a href="javascript:void(0)" onclick="callisApplicationInstalled('store');">Call
-                    isApplicationInstalled() with correct app name 'store'</a>
-            </div>
-            <span class="test_scenario_number">VT300-077 <br/></span>
-        </div>
-    </div>
-<!--
-    <div class="method_tests wp8"> WP8 <br/>
-
-        <div class="test_scenario">
-            <div class="test_scenario_controls">
-                <a href="javascript:void(0)" onclick="callisApplicationInstalled('everywan');">Call
-                    isApplicationInstalled() with correct app name 'everywan'</a>
-            </div>
-            <span class="test_scenario_number">VT300-077 <br/></span>
-        </div>
-    </div>-->
-<!--
-
-    <div class="method_tests win32"> Win32 <br/>
-
-        <div class="test_scenario">
-            <div class="test_scenario_controls">
-                <a href="javascript:void(0)" onclick="callisApplicationInstalled('everywan');">Call
-                    isApplicationInstalled() with correct app name 'everywan'</a>
-            </div>
-            <span class="test_scenario_number">VT300-077 <br/></span>
-        </div>
-    </div>
--->
-<!--
-    <div class="test_scenario">
-        <div class="test_scenario_controls">
-            <a href="javascript:void(0)" onclick="callisApplicationInstalled('Wrongappname');">Call
-                isApplicationInstalled() with wrong app name 'Wrongappname'</a>
-        </div>
-        <span class="test_scenario_number">VT300-078 <br/></span>
-    </div>-->
 </div>
 
 
@@ -655,23 +490,17 @@
     </div>
     <div class="test_scenario">
         <div class="test_scenario_controls">
+Check before partial update :<br>
+- open BundleTest page, follow instructions<br>
+            
             <a href="javascript:void(0)" onclick="callupdateCurrentBundle();">call replaceCurrentBundle with partial update</a>
+<br>Check after partial update :<br>
+- open BundleTest page, follow instructions<br>
+            
         </div>
         <span class="test_scenario_number">VT300-080<br/></span>
     </div>
 </div>
-
-<div class="method_tests android ios win32 wm wp8">
-    <div class="method_name">Rho.System.replaceCurrentBundle</div>
-    <div class="method_desc">replaceCurrentBundle : application bundle will be updated with partial_update.</div>
-    <div class="test_scenario">
-        <div class="test_scenario_controls">
-            <a href="javascript:void(0)" onclick="callupdateCurrentBundle();">call replaceCurrentBundle</a>
-        </div>
-        <span class="test_scenario_number">VT300-080<br/></span>
-    </div>
-</div>
-
 
 <div class="method_tests ios">
     <div class="method_name">Rho.System.setDoNotBackupAttribute</div>

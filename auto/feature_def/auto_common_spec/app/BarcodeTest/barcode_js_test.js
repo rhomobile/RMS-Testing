@@ -2245,7 +2245,7 @@ var arr_scanner_property = [
 	propertyName	:	"matrix2of5maxLength",
 	scannerTypes	:	"All",
 	OSTypes			:	"All",
-	propertyValue	:	"01",
+	propertyValue	:	"1",
 	expectedResult	:	"1"
 },
 {

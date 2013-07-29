@@ -12,7 +12,8 @@ iphone:
   provisionprofile:
   codesignidentity:
   entitlements:
-  extensions: ["sensor", "signature", "barcode", "mediaplayer", "mediacapture"]
+  #extensions: ["sensor", "signature", "barcode", "mediaplayer", "mediacapture"]
+  extensions: ["sensor", "barcode", "mediaplayer"]
   BundleIdentifier: manual_common_spec
   BundleURLScheme: manual_common_spec
 wp:
@@ -21,7 +22,8 @@ symbian:
   uid: '0xeeceaf9f'
 android:
   version: 4.2.2
-  extensions: ["signature", "barcode", "mediaplayer", "sensor"]
+  #extensions: ["signature", "barcode", "mediaplayer", "sensor"]
+  extensions: ["barcode", "mediaplayer", "sensor"]
 wm:
   extensions: ["barcode", "mediaplayer", "indicators", "sensor"]
 

@@ -59,7 +59,13 @@ function callisApplicationInstalled(aString) {
 
 function rhobundle_getfilename()
 {
-    return Rho.RhoFile.join( Rho.Application.userFolder, '/RhoBundle/upgrade_bundle.zip');
+    if (Rho.System.platform == Rho.System.PLATFORM_WM_CE || Rho.System.platform == Rho.System.PLATFORM_WP8 || Rho.System.platform == Rho.System.PLATFORM_WINDOWS_DESKTOP)
+    {
+        return Rho.RhoFile.join( Rho.Application.bundleFolder, '/RhoBundle/upgrade_bundle.zip');
+    }else
+    {
+        return Rho.RhoFile.join( Rho.Application.userFolder, '/RhoBundle/upgrade_bundle.zip');
+    }
 }
 
 function rhobundle_download(download_url)
@@ -83,8 +89,8 @@ function rhobundle_download(download_url)
 
 function callreplaceCurrentBundle()
 {
-    //var res = rhobundle_download(httpServerUrl+'/upgrade_bundle.zip');
-    var res = rhobundle_download('http://manual-common-spec.s3.amazonaws.com/upgrade_bundle.zip');
+    var res = rhobundle_download(httpServerUrl+'/upgrade_bundle.zip');
+    //var res = rhobundle_download('http://manual-common-spec.s3.amazonaws.com/upgrade_bundle.zip');
     if (!res)
     {
         Rho.Log.error("Cannot download bundle.", "SPEC");
@@ -104,8 +110,8 @@ function callreplaceCurrentBundle()
 
 function callupdateCurrentBundle()
 {
-    //var res = rhobundle_download(httpServerUrl+'/upgrade_bundle_partial.zip');
-    var res = rhobundle_download('http://manual-common-spec.s3.amazonaws.com/upgrade_bundle_partial.zip');
+    var res = rhobundle_download(httpServerUrl+'/upgrade_bundle_partial.zip');
+    //var res = rhobundle_download('http://manual-common-spec.s3.amazonaws.com/upgrade_bundle_partial.zip');
     if (!res)
     {
         Rho.Log.error("Cannot download bundle.", "SPEC");
