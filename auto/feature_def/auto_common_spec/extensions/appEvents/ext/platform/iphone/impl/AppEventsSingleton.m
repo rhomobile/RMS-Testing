@@ -9,21 +9,21 @@ extern void rho_app_events_simulate_conflict();
 
 @implementation AppEventsSingleton
 
--(void) simulateEvent:(NSString*)applicationEvent {
+-(void) simulateEvent:(NSString*)applicationEvent methodResult:(id<IMethodResult>)methodResult {
     rho_app_events_simulate_event([applicationEvent UTF8String]);
 }
 
--(void) addConflictInt:(NSString*)valueName savedValue:(int)savedValue newValue:(int)newValue {
+-(void) addConflictInt:(NSString*)valueName savedValue:(int)savedValue newValue:(int)newValue methodResult:(id<IMethodResult>)methodResult {
     rho_app_add_conflict_int([valueName UTF8String], savedValue, newValue);
 }
 
--(void) addConflictString:(NSString*)valueName savedValue:(NSString*)savedValue newValue:(NSString*)newValue
+-(void) addConflictString:(NSString*)valueName savedValue:(NSString*)savedValue newValue:(NSString*)newValue methodResult:(id<IMethodResult>)methodResult
 {
     rho_app_add_conflict_str([valueName UTF8String], [savedValue UTF8String], [newValue UTF8String]);
 }
 
 /* Simulate Conflicts event */
--(void) simulateConflicts {
+-(void) simulateConflicts methodResult:(id<IMethodResult>)methodResult {
     rho_app_events_simulate_conflict();
 }
 
