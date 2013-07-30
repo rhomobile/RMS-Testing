@@ -50,6 +50,7 @@ android:
 wm:
   #use_shared_runtime: yes
   #sdk: MC3000c50b (ARMV4I)
+  sdk: "Windows Mobile 6.5.3 Professional DTK (ARMV4I)"
   extensions: ["barcode", "screenorientation", "instrumentation", "cardreader", "indicators", "sensor"]
 #capabilities:
 #- non_motorola_device
