@@ -46,13 +46,8 @@ describe("Push Module", function() {
     });
 
     it("should get userNotifyMode on Android", function() {
-      if(Rho.System.platform === 'ANDROID') {
-        expect(Rho.Push.userNotifyMode).toEqual(notifyMode);
-        expect(Rho.Push.getProperty('userNotifyMode')).toEqual(notifyMode);
-      } else {
-        expect(Rho.Push.userNotifyMode).toEqual('');
-        expect(Rho.Push.getProperty('userNotifyMode')).toEqual('');
-      }
+      expect(Rho.Push.userNotifyMode).toEqual(notifyMode);
+      expect(Rho.Push.getProperty('userNotifyMode')).toEqual(notifyMode);
     });
 
     it("should set userNotifyMode on Android", function() {
