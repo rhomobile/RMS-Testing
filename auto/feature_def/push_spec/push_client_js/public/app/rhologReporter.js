@@ -18,12 +18,16 @@
 
     RhologReporter.prototype = {
         reportRunnerResults: function (runner) {
-
-
             this.log("***Total: " + this.executedSpecs);
             this.log("***Passed: " + this.passedSpecs);
             this.log("***Failed: " + (this.executedSpecs - this.passedSpecs));
             this.finished = true;
+
+            var URL  = "http://" + LOCAL_SERVER_HOST + ":" + LOCAL_SERVER_PORT.toString();
+            var params = "?total=" + this.executedSpecs + "&passed=" + this.passedSpecs + "&failed=" + (this.executedSpecs - this.passedSpecs);
+            var getProps = { url: URL + params };
+            // var getProps = { url: URL + "?status=done" };
+            Rho.Network.get(getProps);
         },
 
         reportRunnerStarting: function (runner) {
@@ -32,6 +36,10 @@
             this.executedSpecs = 0;
             this.passedSpecs = 0;
             this.log("I'm started");
+
+            var URL  = "http://" + LOCAL_SERVER_HOST + ":" + LOCAL_SERVER_PORT.toString();
+            var getProps = { url: URL + "?status=start" };
+            Rho.Network.get(getProps);
         },
 
         reportSpecStarting: function (spec) {

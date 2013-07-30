@@ -18,7 +18,7 @@
     <script type="text/javascript">
 
         function doAction(val) {
-            var url = "/app/WebviewTest/" + val
+            var url = "/app/WebviewTest/" + val + "?rho_callback=1"
             if (window.XMLHttpRequest) {
                 var xhr = new window.XMLHttpRequest();
                 xhr.open("GET", url, true);
@@ -680,8 +680,8 @@
     </div>
 </div>
 
-<div id="executeJavascript_test" class="method_tests android ios win32 wm wp8">
-    <div class="method_name">WebView.executeJavascript</div>
+<div id="executeJavascript_ruby_test" class="method_tests android ios win32 wm wp8">
+    <div class="method_name">WebView.executeJavascript (from ruby)</div>
     <div><span class="result"></span></div>
 
     <div class="test_scenario">
@@ -701,6 +701,31 @@
         <div class="test_scenario_desc">
             <span class="test_scenario_number">VT301-0059 / VT301-060</span>
             <span> Press button for call executeJavascript from Ruby controller. It should insert text on tab with index 1</span>
+        </div>
+    </div>
+</div>
+
+<div id="executeJavascript_js_test" class="method_tests android ios win32 wm wp8">
+    <div class="method_name">WebView.executeJavascript (from js))</div>
+    <div><span class="result"></span></div>
+
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <button onClick="Rho.WebView.executeJavascript('setDomElementText(\'executeJavascript_js_test\', \'Current tab - this text was inserted by executeJavascript from javascript\')')">ExecuteJavascript on current tab</button>
+        </div>
+        <div class="test_scenario_desc">
+            <span class="test_scenario_number">VT301-062-js</span>
+            <span> Press button for call executeJavascript from Javascript. It should insert text on current tab</span>
+        </div>
+    </div>
+
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <button onClick="Rho.WebView.executeJavascript('setDomElementText(\'executeJavascript_js_test\', \'Tab with index 1 - this text was inserted by executeJavascript from javascript\')', 1)">ExecuteJavascript on tab 1</button>
+        </div>
+        <div class="test_scenario_desc">
+            <span class="test_scenario_number">VT301-0059-js / VT301-060-js</span>
+            <span> Press button for call executeJavascript from Javascript. It should insert text on tab with index 1</span>
         </div>
     </div>
 </div>
@@ -926,7 +951,7 @@
 
     <div class="test_scenario">
         <div class="test_scenario_controls">
-            <button onClick='Rho.WebView.setCookie("http://127.0.0.1", "key_1=DevaStoredCookie1");'>Set single cookie</button>
+            <button onClick='Rho.WebView.setCookie(document.URL, "key_1=DevaStoredCookie1");'>Set single cookie</button>
         </div>
         <div class="test_scenario_desc">
             <span class="test_scenario_number">VT301-080</span>
@@ -936,7 +961,7 @@
 
     <div class="test_scenario">
         <div class="test_scenario_controls">
-            <button onClick='Rho.WebView.setCookie("http://127.0.0.1", "key_2=DevaStoredCookie2;key_3=bhaktabhakta");'>Set multiple cookie</button>
+            <button onClick='Rho.WebView.setCookie(document.URL, "key_1=NewStoredCookie1;key_2=DevaStoredCookie2;key_3=bhaktabhakta");'>Set multiple cookie</button>
         </div>
         <div class="test_scenario_desc">
             <span class="test_scenario_number">VT301-081</span>

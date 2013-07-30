@@ -9,8 +9,8 @@ applog: rholog.txt
 iphone:
   configuration: Release
   sdk: iphoneos6.1
-  provisionprofile: '0E42FE75-C215-4EBA-9FD4-644A1469ABFB'
-  codesignidentity: 'iPhone Developer: Владимир Мусулайнен'
+  provisionprofile: ''
+  codesignidentity: ''
   entitlements:
   BundleIdentifier: com.rhomobile.testapp
   BundleURLScheme: testapp
@@ -25,7 +25,7 @@ symbian:
 android:
   version: 2.1
 
-extensions: ["rhoconnect-client"]
+#extensions: ["rhoconnect-client"]
 
 paths:
   extensions:

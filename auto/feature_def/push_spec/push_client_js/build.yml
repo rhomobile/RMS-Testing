@@ -1,6 +1,5 @@
----
 sdkversion: 4.0.0
-name: push_client_js
+name: Rho_Push_Client
 version: 1.0
 vendor: rhomobile
 build: debug
@@ -20,11 +19,8 @@ symbian:
   uid: '0xe8a52b1b'
 android:
   version: 4.2.2
-extensions:
-- rhoconnect-push
-- rhoconnect-client
-paths:
-  extensions:
-  - ../../../../../Motorola-Extensions/extensions
-  - ../../../../../rhoconnect-client/ext
-sdk: ../../../../../rhodes
+app_type: rhoelements
+
+motorola_license: <put_rhoelements_license_here>
+
+extensions: ["json", "rhoconnect-client", "rhoconnect-push"]

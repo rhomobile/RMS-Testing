@@ -7,7 +7,7 @@
 
 
 
--(void) simulateEvent:(NSString*)applicationEvent;
+-(void) simulateEvent:(NSString*)applicationEvent methodResult:(id<IMethodResult>)methodResult;
 
 
 

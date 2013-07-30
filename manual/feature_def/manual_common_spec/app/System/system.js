@@ -1,3 +1,9 @@
+function getCountry()
+{
+	data = Rho.System.getProperty('country');
+	$("#Rho_System_Country span.result").text(JSON.stringify(data));
+}
+
 function getapplicationIconBadge()
 {
 	data = Rho.System.getProperty('applicationIconBadge');
@@ -51,35 +57,79 @@ function callisApplicationInstalled(aString) {
         alert(aString + " application is not installed in the device");
 }
 
-function callreplaceCurrentBundleWindows()
+function rhobundle_getfilename()
 {
-	Rho.System.replaceCurrentBundle("httpServerUrl+'/download_app?device=wm'", {do_not_restart_app:false, not_thread_mode:true});
+    if (Rho.System.platform == Rho.System.PLATFORM_WM_CE || Rho.System.platform == Rho.System.PLATFORM_WP8 || Rho.System.platform == Rho.System.PLATFORM_WINDOWS_DESKTOP)
+    {
+        return Rho.RhoFile.join( Rho.Application.bundleFolder, '/RhoBundle/upgrade_bundle.zip');
+    }else
+    {
+        return Rho.RhoFile.join( Rho.Application.userFolder, '/RhoBundle/upgrade_bundle.zip');
+    }
 }
 
-function callreplaceCurrentBundleAndroid()
+function rhobundle_download(download_url)
 {
-	Rho.System.replaceCurrentBundle("httpServerUrl+'/download_app?device=android'", {do_not_restart_app:false, not_thread_mode:true});
+    var file_name = rhobundle_getfilename();
+    var dir_name = Rho.RhoFile.dirname(file_name);
+    if ( Rho.RhoFile.exists(dir_name) )
+    {
+        Rho.RhoFile.deleteRecursive(dir_name);
+    }
+
+    if ( !Rho.RhoFile.exists(dir_name) )
+    {
+        Rho.RhoFile.makeDir(dir_name);
+    }
+
+    var res = Rho.Network.downloadFile( { url : download_url, filename : file_name,  overwriteFile : true } );
+
+    return res['status'] == 'ok';
 }
 
-function callreplaceCurrentBundlewin32()
+function callreplaceCurrentBundle()
 {
-	Rho.System.replaceCurrentBundle("httpServerUrl+'/download_app?device=win32'", {do_not_restart_app:false, not_thread_mode:true});
+    var res = rhobundle_download(httpServerUrl+'/upgrade_bundle.zip');
+    //var res = rhobundle_download('http://manual-common-spec.s3.amazonaws.com/upgrade_bundle.zip');
+    if (!res)
+    {
+        Rho.Log.error("Cannot download bundle.", "SPEC");
+        return;
+    }
+
+    if ( Rho.System.unzipFile( rhobundle_getfilename()) == 0)
+    {
+    	Rho.System.replaceCurrentBundle( Rho.RhoFile.dirname(rhobundle_getfilename()), {do_not_restart_app:false});
+    }else
+    {
+        Rho.Log.error("Cannot unzip bundle.", "SPEC");
+        return;
+    }
+
 }
 
-function callreplaceCurrentBundlewp8()
+function callupdateCurrentBundle()
 {
-	Rho.System.replaceCurrentBundle("httpServerUrl+'/download_app?device=wp8'", {do_not_restart_app:false, not_thread_mode:true});
+    var res = rhobundle_download(httpServerUrl+'/upgrade_bundle_partial.zip');
+    //var res = rhobundle_download('http://manual-common-spec.s3.amazonaws.com/upgrade_bundle_partial.zip');
+    if (!res)
+    {
+        Rho.Log.error("Cannot download bundle.", "SPEC");
+        return;
+    }
+
+    if ( Rho.System.unzipFile( rhobundle_getfilename()) == 0)
+    {
+    	Rho.System.replaceCurrentBundle( Rho.RhoFile.dirname(rhobundle_getfilename()), {do_not_restart_app:true});
+    }else
+    {
+        Rho.Log.error("Cannot unzip bundle.", "SPEC");
+        return;
+    }
+
 }
 
-function callreplaceCurrentBundlece()
-{
-	Rho.System.replaceCurrentBundle("httpServerUrl+'/download_app?device=ce'", {do_not_restart_app:false, not_thread_mode:true});
-}
 
-function callreplaceCurrentBundleios()
-{
-	Rho.System.replaceCurrentBundle("httpServerUrl+'/download_app?device=ios'", {do_not_restart_app:false, not_thread_mode:true});
-}
 
 function callgetProperty(propertyName)
 {

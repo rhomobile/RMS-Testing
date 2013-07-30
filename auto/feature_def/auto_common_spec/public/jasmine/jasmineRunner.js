@@ -58,7 +58,7 @@ function quit()
 				var nextPageUrl = '../' + decodedArray[0];
 				if(decodedArray.length == 0)
 				{
-					quit();
+					Rho.Application.quit();
 				}
 				else if(decodedArray.length == 1)
 				{

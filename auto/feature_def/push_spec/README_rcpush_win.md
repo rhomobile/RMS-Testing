@@ -33,7 +33,8 @@ In order to run RC Push Integration Tests for Windows Mobile platform you will n
 4. Clone the `Motorola-Extensions` repo into `C:/Test/Motorola-Extensions` (it will needed to run the test scripts)
 5. Clone the `RMS-Testing` repo into `C:/Test/RMS-Testing`
 6. Copy the `RDBClient.exe` file into `C:/Test/Motorola-Extensions/build/ci/windows/RDBClient/Release` directory
-7. Modify `C:\Test\RMS-Testing\auto\feature_def\push_spec\config.yml` with the following settings:
+7. Mofify the `C:\Test\RMS-Testing\auto\feature_def\push_spec\push_client_rb\build.yml` to include your rhoelements license.
+8. Modify `C:\Test\RMS-Testing\auto\feature_def\push_spec\config.yml` with the following settings:
 
 	```ruby
 	rhodes: "<path to the RMS rhodes gem>"
@@ -51,8 +52,8 @@ In order to run RC Push Integration Tests for Windows Mobile platform you will n
 	device_os: <specify 'wm' or 'ce'>
 	```
 
-8. Verify that the Windows Firewall is turned off and you can ping your Mac machine and Windows Mobile device from the PC.
-9. Install the following gems by running `gem install <gemname>` command:
+9. Verify that the Windows Firewall is turned off and you can ping your Mac machine and Windows Mobile device from the PC.
+10. Install the following gems by running `gem install <gemname>` command:
 
 - mspec
 - bundler

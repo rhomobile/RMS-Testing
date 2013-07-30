@@ -110,13 +110,13 @@ def run_apps(platform)
 			system("adb #{$deviceOpts} install -r #{push_service_apk}").should == true
 
 			puts "\nInstalling rhodes app on device ..."
-			puts "adb #{$deviceOpts} install -r #{Dir.pwd}/bin/target/android/Rho_Push_Client-debug.apk"
-			system("adb #{$deviceOpts} install -r #{Dir.pwd}/bin/target/android/Rho_Push_Client-debug.apk").should == true
+			puts "adb #{$deviceOpts} install -r #{Dir.pwd}/bin/target/android/push_client_rb-debug.apk"
+			system("adb #{$deviceOpts} install -r #{Dir.pwd}/bin/target/android/push_client_rb-debug.apk").should == true
 
-			# adb -s 34010534 shell am start -a android.intent.action.MAIN -n com.rhomobile.rho_push_client/com.rhomobile.rhodes.RhodesActivity
+			# adb -s 34010534 shell am start -a android.intent.action.MAIN -n com.rhomobile.push_client_rb/com.rhomobile.rhodes.RhodesActivity
 			puts "\nStarting rhodes app on device ..."
-			puts "adb #{$deviceOpts} shell am start -a android.intent.action.MAIN -n com.rhomobile.rho_push_client/com.rhomobile.rhodes.RhodesActivity"
-			system("adb #{$deviceOpts} shell am start -a android.intent.action.MAIN -n com.rhomobile.rho_push_client/com.rhomobile.rhodes.RhodesActivity").should == true
+			puts "adb #{$deviceOpts} shell am start -a android.intent.action.MAIN -n com.rhomobile.push_client_rb/com.rhomobile.rhodes.RhodesActivity"
+			system("adb #{$deviceOpts} shell am start -a android.intent.action.MAIN -n com.rhomobile.push_client_rb/com.rhomobile.rhodes.RhodesActivity").should == true
 
 			$logcat_pid = Kernel.spawn("adb #{$deviceOpts} logcat",
 				:out => File.open(File.join($spec_path, appname, 'rholog.txt'), "w"))
@@ -182,14 +182,19 @@ def run_apps(platform)
 		puts "RhoConnect Push Service is installed with #{$out_code} !!!"
 
 		puts "4th step: install the test application"
-		spec_app_cab = convert_to_windows_path_style_str(File.join($spec_path,appname,'bin','target','wm6p','Rho_Push_Client.cab'))
+		spec_app_cab = nil
+		if $device_os_platform == "wm"
+			spec_app_cab = convert_to_windows_path_style_str(File.join($spec_path,appname,'bin','target','wm6p','push_client_rb.cab'))
+		else
+			spec_app_cab = convert_to_windows_path_style_str(File.join($spec_path,appname,'bin','target','push_client_rb.cab'))
+		end
                 cmd = "cd #{$wm_build_rakefile_dir} && rake -f #{$wm_build_rakefile} windows:install_cab_to_device[#{$device_address},#{spec_app_cab}]"
 		puts "CMD is: #{cmd}"
 	        $out_code = system(cmd)
                 puts  "Test Application is installed with #{$out_code} !!!"
 
                 puts "5th step: Start the test application"
-		cmd = "cd #{$wm_build_rakefile_dir} && rake -f #{$wm_build_rakefile} windows:start_test_app_bg[#{$device_address},Rho_Push_Client]"
+		cmd = "cd #{$wm_build_rakefile_dir} && rake -f #{$wm_build_rakefile} windows:start_test_app_bg[#{$device_address},push_client_rb]"
 		puts "CMD is: #{cmd}"
                 $out_code = system(cmd)
 		puts " Application is started with #{$out_code}"

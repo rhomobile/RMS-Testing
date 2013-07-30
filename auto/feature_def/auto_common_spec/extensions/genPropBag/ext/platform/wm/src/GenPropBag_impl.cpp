@@ -9,6 +9,7 @@ class CGenPropBagImpl: public CGenPropBagBase
 public:
     CGenPropBagImpl(const rho::String& strID): CGenPropBagBase()
     {
+        m_hashProps["ID"] = strID;
     }
 
 

@@ -53,7 +53,7 @@ describe "Kernel#system" do
   it "is a private method" do
     Kernel.should have_private_instance_method(:system)
   end
-
+=begin
   before :each do
     ENV['TEST_SH_EXPANSION'] = 'foo'
     @shell_var = '$TEST_SH_EXPANSION'
@@ -63,6 +63,7 @@ describe "Kernel#system" do
 
     @helper_script = KernelSpecs.helper_script
   end
+=end      
 =begin
   it "expands shell variables when given a single string argument" do
     result = system("#{RUBY_EXE} #{@helper_script} #{@shell_var} foo")

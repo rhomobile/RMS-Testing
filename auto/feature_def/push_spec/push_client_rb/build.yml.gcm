@@ -1,6 +1,6 @@
 sdk: ../../../../../rhodes
 sdkversion: 4.0.0
-name: gcm_push_client
+name: push_client_rb
 version: 1.0
 vendor: rhomobile
 build: debug
