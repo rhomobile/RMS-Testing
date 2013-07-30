@@ -1524,4 +1524,53 @@ describe("<ORM Db Reset specs>", function() {
       expect(Rho.ORM.haveLocalChanges()).toEqual(false);
       Rho.ORM.clear();
     });
+
+  it("should load source from table if exists",function(){
+    Rho.ORM.clear();
+    Rho.ORM.clearFreeSourceIds();
+    db.$execute_sql("DELETE FROM SOURCES");
+
+    console.log("add model1 Customer*******");
+    var customer = Rho.ORM.addModel(function(model){
+      model.modelName("Customer");
+      model.set("partition","local");
+    });
+    console.log("add model2 Product*******");
+    var product = Rho.ORM.addModel(function(model){
+      model.modelName("Product");
+      model.set("partition","local");
+    });
+
+    var sources = Rho.ORMHelper.getAllSources();
+    var customer_src_id = sources["Customer"].source_id;
+    var product_src_id  = sources["Product"].source_id;
+
+    expect(product_src_id).toEqual(40002);
+    expect(customer_src_id).toEqual(40001);
+    db_product = db.$execute_sql("select source_id from sources where name = 'Product'");
+    expect(db_product.length).toEqual(1);
+    expect(db_product[0].map.source_id).toEqual("40002");
+
+    db_customer = db.$execute_sql("select source_id from sources where name = 'Customer'");
+    expect(db_customer[0].map.source_id).toEqual("40001");
+    expect(db_customer.length).toEqual(1);
+
+    Rho.ORM.clear();
+
+    console.log("add model4 Customer2*******");
+    customer = Rho.ORM.addModel(function(model){
+      model.modelName("Customer");
+      model.set("partition","local");
+    });
+
+    console.log("add model3 Product2*******");
+    product = Rho.ORM.addModel(function(model){
+      model.modelName("Product");
+      model.set("partition","local");
+    });
+
+    sources = Rho.ORMHelper.getAllSources();
+    expect(String(customer_src_id)).toEqual(sources["Customer"].source_id);
+    expect(String(product_src_id)).toEqual(sources["Product"].source_id);
+  });
 });
