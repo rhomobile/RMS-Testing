@@ -1,3 +1,4 @@
+sdk: c:/work/rhodes
 app_type: rhoelements
 sdkversion: 3.5.0
 name: manual_common_spec
@@ -25,6 +26,8 @@ android:
   #extensions: ["signature", "barcode", "mediaplayer", "sensor"]
   extensions: ["barcode", "mediaplayer", "sensor"]
 wm:
+  #sdk: "MC3000c50b (ARMV4I)"
+  sdk: "Windows Mobile 6.5.3 Professional DTK (ARMV4I)"
   extensions: ["barcode", "mediaplayer", "indicators", "sensor"]
 
 paths:
