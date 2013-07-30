@@ -16,8 +16,7 @@ describe("Push Module", function() {
     Rho.Network.post(postData, function(){});
   };
   var isRhoconnectPush = function() {
-    alert("is rc push? " + Rho.Push.type === 'rhoconnect-push');
-    return Rho.Push.type === 'rhoconnect-push';
+    return Rho.Push.type == 'rhoconnect-push';
   };
 
   var typeMatcher = new RegExp(/rhoconnect-push|native-push/),
@@ -89,13 +88,14 @@ describe("Push Module", function() {
       });
     });
 
-    it("should getDefault instance", function() {
+    // TODO: How to setDefault and getDefault instance
+    // without breaking tests that follow?
+    xit("should getDefault instance", function() {
       var defaultObject = Rho.Push.getDefault();
       expect(defaultObject.getProperty('type')).toMatch(typeMatcher);
     });
 
     xit("should setDefault instance", function() {
-      // TODO: How to assign new default instance?
       // var newDefault = 
       // var properties = newDefault.getAllProperties();
       // verifyProperties(properties);
