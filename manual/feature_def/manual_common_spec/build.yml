@@ -14,7 +14,7 @@ iphone:
   codesignidentity:
   entitlements:
   #extensions: ["sensor", "signature", "barcode", "mediaplayer", "mediacapture"]
-  extensions: ["sensor", "barcode", "mediaplayer"]
+  extensions: ["sensor", "barcode", "mediaplayer", "screenorientation"]
   BundleIdentifier: manual_common_spec
   BundleURLScheme: manual_common_spec
 wp:
