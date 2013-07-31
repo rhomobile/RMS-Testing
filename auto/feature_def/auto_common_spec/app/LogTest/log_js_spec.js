@@ -89,7 +89,7 @@ describe("Log JS API", function () {
 		// Call readlog() with valid parameter (Integer) 1000
 		it("VT290-391 : Call readLogFile() method with valid parameter. | ", function() {
 			runs(function(){
-				Rho.Log.level = 1;
+				Rho.Log.level = 2;
 				Rho.Log.cleanLogFile();
 
 				waits(1000);
@@ -98,7 +98,7 @@ describe("Log JS API", function () {
 				
 				for(var i = 0; i < 5; i++)
 				{
-					Rho.Log.info(some_random_text, "tst");
+					Rho.Log.warning(some_random_text, "tst");
 				}
 
 				var read = Rho.Log.readLogFile(1000);
