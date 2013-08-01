@@ -4,7 +4,7 @@ sdkversion: 3.5.0
 name: manual_common_spec
 version: 1.0
 vendor: rhomobile
-build: debug
+build: release
 bbver: 4.6
 applog: rholog.txt
 iphone:

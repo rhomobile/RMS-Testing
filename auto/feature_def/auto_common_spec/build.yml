@@ -26,7 +26,7 @@ name: auto_common_spec
 app_type: rhoelements
 version: 1.0
 vendor: rhomobile
-build: debug
+build: release
 bbver: 4.6
 applog: rholog.txt
 iphone:
