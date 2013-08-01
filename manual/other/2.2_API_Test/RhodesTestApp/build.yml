@@ -1,4 +1,5 @@
 #sdkversion: "3.5.0"
+#sdk: c:/projects/rhodes
 name: "RhodesTestApp"
 #motorola_license_company: "Motorola Test and Validation"
 #motorola_license: "0277106A081D151A000307771A7E1C75"
@@ -28,7 +29,7 @@ wm:
     - openssl.so
     - openssl
     - ezcrypto
-    #- rhoconnect-client    
+    - rhoconnect-client    
 #mapping: yes
   #sdk: "MC3000c50b (ARMV4I)"
   sdk: "Windows Mobile 6.5.3 Professional DTK (ARMV4I)"
@@ -73,3 +74,9 @@ capabilities:
   #- non_motorola_device
   #- native_browser
   #- motorola_browser
+
+#paths:
+#  extensions:
+#  - ../../../../../Motorola-Extensions/build/ci/extensions
+#  - ../../../../../Motorola-Extensions/lib/commonAPI
+#  - ../../../../../rhoconnect-client/ext
