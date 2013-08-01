@@ -1,0 +1,43 @@
+sdkversion: "3.5.0"
+name: "RETestAPP"
+#motorola_license_company: "Motorola Test and Validation"
+#motorola_license: "0277106A081D151A000307771A7E1C75"
+#motorola_license: "`OLrrql(`iVCdNt=PJ1DH=jKVc5O@ixKTtEMTWDVSQO@D2CnbLU@_)K(DvBALrln`WjnL@0n/[FLHhj$KEs.C?x)c(O6dju{2yA(;s;`"
+version: "1.0"
+vendor: "rhomobile"
+build: "debug"
+bbver: "4.6"
+applog: "rholog.txt"
+iphone:
+  configuration: "Release"
+  sdk: "iphonesimulator5.0"
+  provisionprofile: 
+  codesignidentity: 
+  entitlements: 
+  BundleIdentifier: "com.rhomobile.retestapp"
+  BundleURLScheme: "retestapp"
+  emulatortarget: "iphone"
+wp:
+  productid: "dc201bf1-e2e9-012f-10dc-00216a8a58d0"
+wm:
+#sdk: "MC3000c50b (ARMV4I)"
+  sdk: "Windows Mobile 6.5.3 Professional DTK (ARMV4I)"
+#sdk: "Windows Mobile 6 Professional SDK (ARMV4I)"
+#use_shared_runtime: 1
+symbian:
+  uid: "0xe01c7e9f"
+android:
+  capabilities:
+    - network_state
+    - sdcard
+    - calendar
+#- non_motorola_device
+  version: "2.3.3"
+extensions:
+  - json
+  - rhoxml
+  - rhodes_translator
+  #- rhoconnect-client
+app_type: "rhoelements"
+capabilities: 
+#- non_motorola_device

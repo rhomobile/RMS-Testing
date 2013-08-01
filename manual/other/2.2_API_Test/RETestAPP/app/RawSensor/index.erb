@@ -1,0 +1,375 @@
+<html>
+<head>
+<h1>RawSensor</h1>
+<script type="text/javascript">
+
+function funminimize(){
+  $.get('/app/RawSensor/FunMinimize', {});
+   return false;  
+}
+
+
+function callgetSensorData()
+{
+  alert("callgetSensorData");
+  $.get('/app/RawSensor/callgetsensorData', { });
+  return false;   
+}
+
+function registerSensorEvent() 
+{
+  alert("registersensorEvent");
+  document.getElementById("myResult").innerHTML="";
+  var selectsensorEvent=document.getElementById("selectsensorEvent").value;
+  $.get('/app/RawSensor/registersensorEvent', { selectsensorEvent:  selectsensorEvent});
+  return false;
+}
+
+function setallSensor()
+{
+  alert("setallSensor");
+  var selectall=document.getElementById("selectall").value;
+  $.get('/app/RawSensor/setallSensor', { selectall:  selectall});
+   return false;  
+}
+
+function setaccelerometer()
+{
+  var selectaccelerometer=document.getElementById("selectaccelerometer").value;
+  $.get('/app/RawSensor/setaccelerometer', { selectaccelerometer:  selectaccelerometer});
+   return false;  
+}
+
+function setdeviceOrientation()
+{
+  var selectdeviceOrientation=document.getElementById("selectdeviceOrientation").value;
+  $.get('/app/RawSensor/setdeviceOrientation', { selectdeviceOrientation:  selectdeviceOrientation});
+   return false;  
+}
+
+function settiltangle()
+{
+  var selecttiltangle=document.getElementById("selecttiltangle").value;
+  $.get('/app/RawSensor/settiltangle', { selecttiltangle:  selecttiltangle});
+   return false;  
+}
+
+function setmotion()
+{
+  var selectmotion=document.getElementById("selectmotion").value;
+  $.get('/app/RawSensor/setmotion', { selectmotion:  selectmotion});
+   return false;  
+}
+
+function setecompass()
+{
+  var selectecompass=document.getElementById("selectecompass").value;
+  $.get('/app/RawSensor/setecompass', { selectecompass:  selectecompass});
+   return false;  
+}
+
+function setmagnetometer()
+{
+  var selectmagnetometer=document.getElementById("selectmagnetometer").value;
+  $.get('/app/RawSensor/setmagnetometer', { selectmagnetometer:  selectmagnetometer});
+   return false;  
+}
+
+function setgyroscope()
+{
+  var selectgyroscope=document.getElementById("selectgyroscope").value;
+  $.get('/app/RawSensor/setgyroscope', { selectgyroscope:  selectgyroscope});
+   return false;  
+}
+
+function setambientlight()
+{
+  var selectambientlight=document.getElementById("selectambientlight").value;
+  $.get('/app/RawSensor/setambientlight', { selectambientlight:  selectambientlight});
+   return false;  
+}
+
+function setproximity()
+{
+  var selectproximity=document.getElementById("selectproximity").value;
+  $.get('/app/RawSensor/setproximity', { selectproximity:  selectproximity});
+   return false;  
+}
+
+function setproximitylongrange()
+{
+  var selectproximitylongrange=document.getElementById("selectproximitylongrange").value;
+  $.get('/app/RawSensor/setproximitylongrange', { selectproximitylongrange:  selectproximitylongrange});
+   return false;  
+}
+
+function setpressure()
+{
+  var selectpressure=document.getElementById("selectpressure").value;
+  $.get('/app/RawSensor/setpressure', { selectpressure:  selectpressure});
+   return false;  
+}
+
+function settemperature()
+{
+  var selecttemperature=document.getElementById("selecttemperature").value;
+  $.get('/app/RawSensor/settemperature', { selecttemperature:  selecttemperature});
+   return false;  
+}
+
+function sethumidity()
+{
+  var selecthumidity=document.getElementById("selecthumidity").value;
+  $.get('/app/RawSensor/sethumidity', { selecthumidity:  selecthumidity});
+   return false;  
+}
+
+function setgravity()
+{
+  var selectgravity=document.getElementById("selectgravity").value;
+  $.get('/app/RawSensor/setgravity', { selectgravity:  selectgravity});
+   return false;  
+}
+
+function setlinearAcceleration()
+{
+  var selectlinearAcceleration=document.getElementById("selectlinearAcceleration").value;
+  $.get('/app/RawSensor/setlinearAcceleration', { selectlinearAcceleration:  selectlinearAcceleration});
+   return false;  
+}
+
+function setrotation()
+{
+  var selectrotation=document.getElementById("selectrotation").value;
+  $.get('/app/RawSensor/setrotation', { selectrotation:  selectrotation});
+   return false;  
+}
+
+function setorientation()
+{
+  var selectorientation=document.getElementById("selectorientation").value;
+  $.get('/app/RawSensor/setorientation', { selectorientation:  selectorientation});
+   return false;  
+}
+
+
+function setminimumInterval()
+{
+   var txtminimumInterval=document.getElementById("txtminimumInterval").value;
+   $.get('/app/RawSensor/setminimumInterval', { txtminimumInterval:  txtminimumInterval});
+   return false;  
+}
+
+function setFieldValue(returnval) 
+{
+  document.getElementById("myResult").innerHTML=returnval;
+}
+
+</script>
+</head>
+<body>
+<p>RawSensorTest</p>
+<br /><br />
+<div id="myResult">Sensor info</div> 
+<br /><br />
+<form name="myfrm" action="">
+<label for="selectsensorEvent">AttachEvent</label>
+ <select name="selectsensorEvent" id="selectsensorEvent">
+ <option value="JavaScript">JavaScript</option>
+ <option value="DETACHEVENT">DETACHEVENT</option>
+ <option value="EMPTYEVENT">EMPTYEVENT</option>
+ </select>
+<br />
+<INPUT type="button" value="registersensorEvent" name="registersensorEvent" onclick="registerSensorEvent();" /> 
+<hr/>
+<INPUT type="button" value="getSensorData" name="getSensorData" onClick="callgetSensorData();"> 
+<hr/>
+<label for="selectall">SelectAllSensor</label>
+  <select name="selectall" id="selectall">
+  <option value="enabled">enabled</option>
+  <option value="disabled">disabled</option>
+  <option value="TEST">INVALIDSTRING</option>
+  <option value="">EMPTYSTRING</option>
+  </select>  <br />
+ <INPUT type="button" value="SetallSensor" name="SetallSensor" onClick="setallSensor();">  
+<br/>
+<label for="selectaccelerometer">SelectAccelerometer</label>
+  <select name="selectaccelerometer" id="selectaccelerometer">
+  <option value="enabled">enabled</option>
+  <option value="disabled">disabled</option>
+  <option value="TEST">INVALIDSTRING</option>
+  <option value="">EMPTYSTRING</option>
+  </select>  <br />
+ <INPUT type="button" value="Setaccelerometer" name="SetAccelerometer" onClick="setaccelerometer();">
+ 
+<br/>
+<label for="selectdeviceOrientation">SelectDeviceOrientation</label>
+  <select name="selectdeviceOrientation" id="selectdeviceOrientation">
+  <option value="enabled">enabled</option>
+  <option value="disabled">disabled</option>
+  <option value="TEST">INVALIDSTRING</option>
+  <option value="">EMPTYSTRING</option>
+  </select>  <br />
+ <INPUT type="button" value="setdeviceOrientation" name="setDeviceOrientation" onClick="setdeviceOrientation();"> 
+
+<br/>
+<label for="selecttiltangle">selectTiltangle</label>
+  <select name="selecttiltangle" id="selecttiltangle">
+  <option value="enabled">enabled</option>
+  <option value="disabled">disabled</option>
+  <option value="TEST">INVALIDSTRING</option>
+  <option value="">EMPTYSTRING</option>
+  </select>  <br />
+ <INPUT type="button" value="settiltangle" name="setTiltangle" onClick="settiltangle();">  
+ 
+<br/>
+<label for="selectmotion">selectMotion</label>
+  <select name="selectmotion" id="selectmotion">
+  <option value="enabled">enabled</option>
+  <option value="disabled">disabled</option>
+  <option value="TEST">INVALIDSTRING</option>
+  <option value="">EMPTYSTRING</option>
+  </select>  <br />
+ <INPUT type="button" value="setmotion" name="setMotion" onClick="setmotion();"> 
+ 
+<br/>
+<label for="selectecompass">selectEcompass</label>
+  <select name="selectecompass" id="selectecompass">
+  <option value="enabled">enabled</option>
+  <option value="disabled">disabled</option>
+  <option value="TEST">INVALIDSTRING</option>
+  <option value="">EMPTYSTRING</option>
+  </select>  <br />
+ <INPUT type="button" value="setecompass" name="setEcompass" onClick="setecompass();"> 
+ 
+<br/>
+<label for="selectmagnetometer">selectMagnetometer</label>
+  <select name="selectmagnetometer" id="selectmagnetometer">
+  <option value="enabled">enabled</option>
+  <option value="disabled">disabled</option>
+  <option value="TEST">INVALIDSTRING</option>
+  <option value="">EMPTYSTRING</option>
+  </select>  <br />
+ <INPUT type="button" value="setmagnetometer" name="setMagnetometer" onClick="setmagnetometer();">
+ 
+<br/>
+<label for="selectgyroscope">selectGyroscope</label>
+  <select name="selectgyroscope" id="selectgyroscope">
+  <option value="enabled">enabled</option>
+  <option value="disabled">disabled</option>
+  <option value="TEST">INVALIDSTRING</option>
+  <option value="">EMPTYSTRING</option>
+  </select>  <br />
+ <INPUT type="button" value="setgyroscope" name="setGyroscope" onClick="setgyroscope();">
+ 
+<br/>
+<label for="selectambientlight">selectAmbientlight</label>
+  <select name="selectambientlight" id="selectambientlight">
+  <option value="enabled">enabled</option>
+  <option value="disabled">disabled</option>
+  <option value="TEST">INVALIDSTRING</option>
+  <option value="">EMPTYSTRING</option>
+  </select>  <br />
+ <INPUT type="button" value="setambientlight" name="setAmbientlight" onClick="setambientlight();">
+ 
+<br/>
+<label for="selectproximity">selectProximity</label>
+  <select name="selectproximity" id="selectproximity">
+  <option value="enabled">enabled</option>
+  <option value="disabled">disabled</option>
+  <option value="TEST">INVALIDSTRING</option>
+  <option value="">EMPTYSTRING</option>
+  </select>  <br />
+ <INPUT type="button" value="setproximity" name="setProximity" onClick="setproximity();">
+ 
+<br/>
+<label for="selectproximitylongrange">selectProximitylongrange</label>
+  <select name="selectproximitylongrange" id="selectproximitylongrange">
+  <option value="enabled">enabled</option>
+  <option value="disabled">disabled</option>
+  <option value="TEST">INVALIDSTRING</option>
+  <option value="">EMPTYSTRING</option>
+  </select>  <br />
+ <INPUT type="button" value="setproximitylongrange" name="setProximitylongrange" onClick="setproximitylongrange();">
+ 
+<br/>
+<label for="selectpressure">selectPressure</label>
+  <select name="selectpressure" id="selectpressure">
+  <option value="enabled">enabled</option>
+  <option value="disabled">disabled</option>
+  <option value="TEST">INVALIDSTRING</option>
+  <option value="">EMPTYSTRING</option>
+  </select>  <br />
+ <INPUT type="button" value="setpressure" name="setPressure" onClick="setpressure();">
+ 
+<br/>
+<label for="selecttemperature">selectTemperature</label>
+  <select name="selecttemperature" id="selecttemperature">
+  <option value="enabled">enabled</option>
+  <option value="disabled">disabled</option>
+  <option value="TEST">INVALIDSTRING</option>
+  <option value="">EMPTYSTRING</option>
+  </select>  <br />
+ <INPUT type="button" value="settemperature" name="setTemperature" onClick="settemperature();">
+ 
+<br/>
+<label for="selecthumidity">selectHumidity</label>
+  <select name="selecthumidity" id="selecthumidity">
+  <option value="enabled">enabled</option>
+  <option value="disabled">disabled</option>
+  <option value="TEST">INVALIDSTRING</option>
+  <option value="">EMPTYSTRING</option>
+  </select>  <br />
+ <INPUT type="button" value="sethumidity" name="setHumidity" onClick="sethumidity();"> 
+ 
+<br/>
+<label for="selectgravity">selectGravity</label>
+  <select name="selectgravity" id="selectgravity">
+  <option value="enabled">enabled</option>
+  <option value="disabled">disabled</option>
+  <option value="TEST">INVALIDSTRING</option>
+  <option value="">EMPTYSTRING</option>
+  </select>  <br />
+ <INPUT type="button" value="setgravity" name="setGravity" onClick="setgravity();"> 
+ 
+<br/>
+<label for="selectlinearAcceleration">selectLinearAcceleration</label>
+  <select name="selectlinearAcceleration" id="selectlinearAcceleration">
+  <option value="enabled">enabled</option>
+  <option value="disabled">disabled</option>
+  <option value="TEST">INVALIDSTRING</option>
+  <option value="">EMPTYSTRING</option>
+  </select>  <br />
+ <INPUT type="button" value="setlinearAcceleration" name="setLinearAcceleration" onClick="setlinearAcceleration();">  
+ 
+<br/>
+<label for="selectrotation">selectRotation</label>
+  <select name="selectrotation" id="selectrotation">
+  <option value="enabled">enabled</option>
+  <option value="disabled">disabled</option>
+  <option value="TEST">INVALIDSTRING</option>
+  <option value="">EMPTYSTRING</option>
+  </select>  <br />
+ <INPUT type="button" value="setrotation" name="setRotation" onClick="setrotation();">
+ 
+<br/>
+<label for="selectorientation">selectOrientation</label>
+  <select name="selectorientation" id="selectorientation">
+  <option value="enabled">enabled</option>
+  <option value="disabled">disabled</option>
+  <option value="TEST">INVALIDSTRING</option>
+  <option value="">EMPTYSTRING</option>
+  </select>  <br />
+ <INPUT type="button" value="setorientation" name="setOrientation" onClick="setorientation();">
+ <hr/>
+  <label for="txtminimumInterval" class="itemLabel">minimumInterval</label>
+  <input type="text" id="txtminimumInterval" name="txtminimumInterval" class="itemValue"  />  
+  <INPUT type="button" value="setminimumInterval" name="setMinimumInterval" onClick="setminimumInterval();">  
+ <hr />
+    
+    <INPUT type="button" value="minimizeApp" name="minimizeApp" onClick="funminimize();"> 
+    <br/>
+ 
+</form>
+</body>
+</html>

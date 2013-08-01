@@ -1,0 +1,195 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<script type="text/javascript" src="/public/jquery/jquery-1.6.4.min.js"></script>
+<script type="text/javascript">
+
+function funminimize(){
+  $.get('/app/BatteryModule/FunMinimize', {});
+   return false;  
+}
+
+function callgetBatteryStatus()
+{
+  $.get('/app/BatteryModule/callgetBatteryStatus', { });
+  return false;   
+}
+
+function callgetSmartBatteryStatus()
+{
+  $.get('/app/BatteryModule/callgetSmartBatteryStatus', { });
+  return false;   
+}
+
+function selectVisibility()
+{
+  var batVisibility=document.getElementById("batVisibility").value;
+  $.get('/app/BatteryModule/selectVisibility', { batVisibility:  batVisibility});
+  return false;
+}
+
+function applybatteryEvent()
+{
+  document.getElementById("myResult").innerHTML="";
+  var batteryEvent=document.getElementById("batteryEvent").value;
+  $.get('/app/BatteryModule/applybatteryEvent', { batteryEvent:  batteryEvent});
+  return false;
+}
+
+function getsmartbattery()
+{
+  document.getElementById("myResult").innerHTML="";
+  var smartbatteryEvent=document.getElementById("smartbatteryEvent").value;
+  $.get('/app/BatteryModule/getsmartbattery', { smartbatteryEvent:  smartbatteryEvent});
+  return false;
+}
+
+
+
+function setLeftPosition()
+{
+   var leftPosition=document.getElementById("leftPosition").value;
+   $.get('/app/BatteryModule/setLeftPosition', { leftPosition:  leftPosition});
+   return false; 
+  
+}
+
+function setTopPosition()
+{
+   var topPosition=document.getElementById("topPosition").value;
+   $.get('/app/BatteryModule/setTopPosition', { topPosition:  topPosition});
+   return false; 
+  
+}
+
+function setColor()
+{
+   var colorVal=document.getElementById("colorVal").value;
+   $.get('/app/BatteryModule/setColor', { colorVal:  colorVal});
+   return false; 
+  
+}
+
+function setLayout()
+{
+   var layoutList=document.getElementById("layoutList").value;
+   $.get('/app/BatteryModule/setLayout', { layoutList:  layoutList});
+   return false; 
+  
+}
+
+function setsampleInterval()
+{
+   var sampleIntervalVal=document.getElementById("sampleIntervalVal").value;
+   $.get('/app/BatteryModule/setsampleInterval', { sampleIntervalVal:  sampleIntervalVal});
+   return false;   
+}
+
+function selectsetSystemNotifications()
+{
+  var batsetSystemNotifications=document.getElementById("batsetSystemNotifications").value;
+  $.get('/app/BatteryModule/selectsetSystemNotifications', { batsetSystemNotifications:  batsetSystemNotifications});
+  return false;
+}
+
+function setFieldValue(returnval) 
+{
+  document.getElementById("myResult").innerHTML=returnval;
+}
+
+</script>
+</head>
+
+<body>
+<p>BatteryTest</p>
+<br /><br /><br /><br /><br /><br /><br />
+<div id="myResult">Event info</div> 
+<form name="myfrm" action=""> 
+         <label for="batVisibility">Select Visibility</label>
+          <select name="batVisibility" id="batVisibility" onchange="selectVisibility();">
+              <OPTION SELECTED VALUE="">Select</OPTION>
+              <option value="Visible">Visible</option>
+              <option value="Hidden">Hidden</option>
+              <option value="Address">Address</option>
+          </select>
+          
+<br />
+<INPUT type="button" value="getBatteryStatus" name="getBatteryStatus" onClick="callgetBatteryStatus();">
+
+<br />
+<INPUT type="button" value="getSmartBatteryStatus" name="getSmartBatteryStatus" onClick="callgetSmartBatteryStatus();">  
+<hr/>
+  
+         <label for="batteryEvent">batteryEvent:</label>
+          <select name="batteryEvent" id="batteryEvent">
+              <OPTION SELECTED VALUE="">Select</OPTION>
+              <option value="JAVASCRIPT">JAVASCRIPT</option>
+              <option value="JSON">JSON</option>
+              <option value="HTML">HTML</option>
+              <option value="DETACHEVENT">DETACHEVENT</option>
+              <option value="EMPTYEVENT">EMPTYEVENT</option>
+          </select>
+<INPUT type="button" value="ApplyEvent" name="ApplyEvent" onClick="applybatteryEvent();">        
+
+
+         <label for="smartbatteryEvent">smartbatteryEvent:</label>
+          <select name="smartbatteryEvent" id="smartbatteryEvent">
+              <OPTION SELECTED VALUE="">Select</OPTION>
+              <option value="JAVASCRIPT">JAVASCRIPT</option>
+              <option value="JSON">JSON</option>
+              <option value="HTML">HTML</option>
+              <option value="DETACHEVENT">DETACHEVENT</option>
+              <option value="EMPTYEVENT">EMPTYEVENT</option>
+          </select>
+<INPUT type="button" value="SmartBattery" name="SmartBatteryEvent" onClick="getsmartbattery();">      
+ <br />
+  
+  
+  <label for="leftPosition" class="fieldLabel">Left:</label>
+  <input type="text" name="leftPosition" id="leftPosition" value="150" class="itemValue" <%= placeholder("Left:") %> />       
+  <INPUT type="button" value="Left" name="Left" onClick="setLeftPosition();">  
+    <br />
+  
+  <label for="topPosition" class="fieldLabel">Top:</label>
+  <input type="text" name="topPosition" id="topPosition" value="50" class="itemValue" <%= placeholder("Top:") %> />       
+    <INPUT type="button" value="Top" name="Top" onClick="setTopPosition();">  
+
+    <br />
+    <label for="colorVal" class="fieldLabel">Color:</label>
+    <input type="text" name="colorVal" id="colorVal" value="#FF00AA" class="itemValue" <%= placeholder("Color:") %> />       
+    <INPUT type="button" value="Color" name="Color" onClick="setColor();">  
+      <br />
+
+               <label for="layoutList">Layout:</label>
+                <select name="layoutList" id="layoutList">
+                    <OPTION SELECTED VALUE="">Select</OPTION>
+                    <option value="Left">Left</option>
+                    <option value="Up">Up</option>
+                    <option value="Right">Right</option>
+                    <option value="Down">Down</option>
+                    <option value="Invalid">Invalid</option>
+                </select>
+      <INPUT type="button" value="set_Layout" name="set_Layout" onClick="setLayout();">        
+      <hr />
+      
+      
+    <label for="sampleIntervalVal" class="fieldLabel">sampleInterval:</label>
+    <input type="text" name="sampleIntervalVal" id="sampleIntervalVal" value="4000" class="itemValue" <%= placeholder("sampleInterval:") %> />       
+    <INPUT type="button" value="sampleInterval" name="sampleInterval" onClick="setsampleInterval();">  
+    <br />
+    
+      <label for="batsetSystemNotifications">Select setSystemNotifications</label>
+       <select name="batsetSystemNotifications" id="batsetSystemNotifications" onchange="selectsetSystemNotifications();">
+           <OPTION SELECTED VALUE="">Select</OPTION>
+           <option value="Enabled">Enabled</option>
+           <option value="Disabled">Disabled</option>
+           <option value="Invalid">Invalid</option>
+       </select>
+       <br/>
+      <INPUT type="button" value="minimizeApp" name="minimizeApp" onClick="funminimize();"> 
+      <br/>
+
+</form>
+</body>
+</html>
