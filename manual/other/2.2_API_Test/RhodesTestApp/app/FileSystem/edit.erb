@@ -1,0 +1,71 @@
+<div data-role="page">
+
+  <div data-role="header" data-position="inline">
+    <h1>Edit <%= @filesystem.testcaseid %></h1>
+    <a href="<%= url_for :action => :show, :id => @filesystem.object %>" class="ui-btn-left" data-icon="back" data-direction="reverse">
+      Cancel
+    </a>
+    <a href="<%= url_for :action => :delete, :id => @filesystem.object %>" class="ui-btn-right" data-icon="delete" data-direction="reverse">
+      Delete
+    </a>
+  </div>
+
+  <div data-role="content">
+    <form method="POST" action="<%= url_for :action => :update %>">
+      <input type="hidden" name="id" value="<%= @filesystem.object %>"/>
+      
+          <div data-role="fieldcontain">
+            <label for="filesystem[testcaseid]" class="fieldLabel">Testcaseid</label>
+            <input type="text" id="filesystem[testcaseid]" name="filesystem[testcaseid]" value="<%= @filesystem.testcaseid %>" <%= placeholder( "Testcaseid" ) %> />
+          </div>
+      
+          <div data-role="fieldcontain">
+            <label for="filesystem[description]" class="fieldLabel">Description</label>
+            <input type="text" id="filesystem[description]" name="filesystem[description]" value="<%= @filesystem.description %>" <%= placeholder( "Description" ) %> />
+          </div>
+      
+          <div data-role="fieldcontain">
+            <label for="filesystem[res1]" class="fieldLabel">Res1</label>
+            <input type="text" id="filesystem[res1]" name="filesystem[res1]" value="<%= @filesystem.res1 %>" <%= placeholder( "Res1" ) %> />
+          </div>
+      
+          <div data-role="fieldcontain">
+            <label for="filesystem[res2]" class="fieldLabel">Res2</label>
+            <input type="text" id="filesystem[res2]" name="filesystem[res2]" value="<%= @filesystem.res2 %>" <%= placeholder( "Res2" ) %> />
+          </div>
+      
+          <div data-role="fieldcontain">
+            <label for="filesystem[res3]" class="fieldLabel">Res3</label>
+            <input type="text" id="filesystem[res3]" name="filesystem[res3]" value="<%= @filesystem.res3 %>" <%= placeholder( "Res3" ) %> />
+          </div>
+      
+          <div data-role="fieldcontain">
+            <label for="filesystem[res4]" class="fieldLabel">Res4</label>
+            <input type="text" id="filesystem[res4]" name="filesystem[res4]" value="<%= @filesystem.res4 %>" <%= placeholder( "Res4" ) %> />
+          </div>
+      
+          <div data-role="fieldcontain">
+            <label for="filesystem[res5]" class="fieldLabel">Res5</label>
+            <input type="text" id="filesystem[res5]" name="filesystem[res5]" value="<%= @filesystem.res5 %>" <%= placeholder( "Res5" ) %> />
+          </div>
+      
+          <div data-role="fieldcontain">
+            <label for="filesystem[res6]" class="fieldLabel">Res6</label>
+            <input type="text" id="filesystem[res6]" name="filesystem[res6]" value="<%= @filesystem.res6 %>" <%= placeholder( "Res6" ) %> />
+          </div>
+      
+          <div data-role="fieldcontain">
+            <label for="filesystem[res7]" class="fieldLabel">Res7</label>
+            <input type="text" id="filesystem[res7]" name="filesystem[res7]" value="<%= @filesystem.res7 %>" <%= placeholder( "Res7" ) %> />
+          </div>
+      
+          <div data-role="fieldcontain">
+            <label for="filesystem[res8]" class="fieldLabel">Res8</label>
+            <input type="text" id="filesystem[res8]" name="filesystem[res8]" value="<%= @filesystem.res8 %>" <%= placeholder( "Res8" ) %> />
+          </div>
+      
+      <input type="submit" value="Update"/>
+    </form>
+  </div>
+
+</div>

@@ -1,0 +1,40 @@
+<div data-role="page" data-add-back-btn="true">
+
+  <div data-role="header" data-position="inline">
+    <%= link_to "Back", :action => :index %>
+    <h1><%= @barcoderecognize.testid %></h1>
+    <%= link_to "Edit", :action => :edit, :id => @barcoderecognize.object %>
+  </div>
+
+  <div data-role="content">
+    <table>
+      
+      <tr>
+    	<td class="itemLabel">Testid</td>
+        <td class="itemValue"><%= @barcoderecognize.testid%></td>
+      </tr>
+      
+      <tr>
+    	<td class="itemLabel">Name</td>
+        <td class="itemValue"><%= @barcoderecognize.name%></td>
+      </tr>
+      
+      <tr>
+    	<td class="itemLabel">Expected</td>
+        <td class="itemValue"><%= @barcoderecognize.expected%></td>
+      </tr>
+      
+      <tr>
+    	<td class="itemLabel">Output</td>
+        <td class="itemValue"><%= @barcoderecognize.output%></td>
+      </tr>
+      
+      <tr>
+    	<td class="itemLabel">Result</td>
+        <td class="itemValue"><%= @barcoderecognize.result%></td>
+      </tr>
+      
+    </table>
+  </div>
+
+</div>

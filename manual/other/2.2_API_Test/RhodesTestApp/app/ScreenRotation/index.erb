@@ -1,0 +1,30 @@
+<div data-role="page">
+
+	<div data-role="header" data-position="inline">
+    <h1>ScreenRotations</h1>
+    <a href="<%= Rho::RhoConfig.start_path %>" class="ui-btn-left" data-icon="home" data-direction="reverse" <%= "data-ajax='false'" if is_bb6 %>>
+      Home
+    </a>
+    <a href="<%= url_for :action => :new %>" class="ui-btn-right" data-icon="plus">
+      New
+    </a>
+	</div>
+
+  <div data-role="content">
+    <ul data-role="listview">
+      Rotate device to catch callback
+      <br>
+      Current callback state :
+      <br>
+      <b><%=$callback_state%></b>
+      <br>
+      <br>
+      VT229-0065 <%= link_to '[ set Screen Rotation callback]', { :action => :set_callback }%>
+      <br />
+      VT229-0066 <%= link_to '[ set Screen Rotation left]', { :action => :set_callback_left }%><br />
+      VT229-0067 <%= link_to '[ set Screen Rotation right]', { :action => :set_callback_right }%><br />
+      VT229-0068 <%= link_to '[ unset Screen Rotation callback]', { :action => :unset_callback }%><br />
+    </ul>
+  </div>
+
+</div>

@@ -1,0 +1,71 @@
+<div data-role="page">
+
+  <div data-role="header" data-position="inline">
+    <h1>Edit <%= @screenrotation.testcaseid %></h1>
+    <a href="<%= url_for :action => :show, :id => @screenrotation.object %>" class="ui-btn-left" data-icon="back" data-direction="reverse">
+      Cancel
+    </a>
+    <a href="<%= url_for :action => :delete, :id => @screenrotation.object %>" class="ui-btn-right" data-icon="delete" data-direction="reverse">
+      Delete
+    </a>
+  </div>
+
+  <div data-role="content">
+    <form method="POST" action="<%= url_for :action => :update %>">
+      <input type="hidden" name="id" value="<%= @screenrotation.object %>"/>
+      
+          <div data-role="fieldcontain">
+            <label for="screenrotation[testcaseid]" class="fieldLabel">Testcaseid</label>
+            <input type="text" id="screenrotation[testcaseid]" name="screenrotation[testcaseid]" value="<%= @screenrotation.testcaseid %>" <%= placeholder( "Testcaseid" ) %> />
+          </div>
+      
+          <div data-role="fieldcontain">
+            <label for="screenrotation[description]" class="fieldLabel">Description</label>
+            <input type="text" id="screenrotation[description]" name="screenrotation[description]" value="<%= @screenrotation.description %>" <%= placeholder( "Description" ) %> />
+          </div>
+      
+          <div data-role="fieldcontain">
+            <label for="screenrotation[res1]" class="fieldLabel">Res1</label>
+            <input type="text" id="screenrotation[res1]" name="screenrotation[res1]" value="<%= @screenrotation.res1 %>" <%= placeholder( "Res1" ) %> />
+          </div>
+      
+          <div data-role="fieldcontain">
+            <label for="screenrotation[res2]" class="fieldLabel">Res2</label>
+            <input type="text" id="screenrotation[res2]" name="screenrotation[res2]" value="<%= @screenrotation.res2 %>" <%= placeholder( "Res2" ) %> />
+          </div>
+      
+          <div data-role="fieldcontain">
+            <label for="screenrotation[res3]" class="fieldLabel">Res3</label>
+            <input type="text" id="screenrotation[res3]" name="screenrotation[res3]" value="<%= @screenrotation.res3 %>" <%= placeholder( "Res3" ) %> />
+          </div>
+      
+          <div data-role="fieldcontain">
+            <label for="screenrotation[res4]" class="fieldLabel">Res4</label>
+            <input type="text" id="screenrotation[res4]" name="screenrotation[res4]" value="<%= @screenrotation.res4 %>" <%= placeholder( "Res4" ) %> />
+          </div>
+      
+          <div data-role="fieldcontain">
+            <label for="screenrotation[res5]" class="fieldLabel">Res5</label>
+            <input type="text" id="screenrotation[res5]" name="screenrotation[res5]" value="<%= @screenrotation.res5 %>" <%= placeholder( "Res5" ) %> />
+          </div>
+      
+          <div data-role="fieldcontain">
+            <label for="screenrotation[res6]" class="fieldLabel">Res6</label>
+            <input type="text" id="screenrotation[res6]" name="screenrotation[res6]" value="<%= @screenrotation.res6 %>" <%= placeholder( "Res6" ) %> />
+          </div>
+      
+          <div data-role="fieldcontain">
+            <label for="screenrotation[res7]" class="fieldLabel">Res7</label>
+            <input type="text" id="screenrotation[res7]" name="screenrotation[res7]" value="<%= @screenrotation.res7 %>" <%= placeholder( "Res7" ) %> />
+          </div>
+      
+          <div data-role="fieldcontain">
+            <label for="screenrotation[res8]" class="fieldLabel">Res8</label>
+            <input type="text" id="screenrotation[res8]" name="screenrotation[res8]" value="<%= @screenrotation.res8 %>" <%= placeholder( "Res8" ) %> />
+          </div>
+      
+      <input type="submit" value="Update"/>
+    </form>
+  </div>
+
+</div>

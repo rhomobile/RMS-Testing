@@ -1,0 +1,69 @@
+<div data-role="page">
+
+  <div data-role="header" data-position="inline">
+    <%= link_to "Back", :action => :show, :id => @screenrotation.object %>
+    <h1>Edit <%= @screenrotation.testcaseid%></h1>
+    <%= link_to "Delete", :action => :delete, :id => @screenrotation.object %>
+  </div>
+
+  <div data-role="content">
+    <form method="POST" action="<%= url_for :action => :update %>">
+      <input type="hidden" name="id" value="<%= @screenrotation.object %>"/>
+      <table>
+          
+          <tr>
+              <td class="itemLabel">Testcaseid: </td>
+              <td class="itemValue"><input type="text" name="screenrotation[testcaseid]" value="<%= @screenrotation.testcaseid %>"/></td>
+          </tr>
+          
+          <tr>
+              <td class="itemLabel">Description: </td>
+              <td class="itemValue"><input type="text" name="screenrotation[description]" value="<%= @screenrotation.description %>"/></td>
+          </tr>
+          
+          <tr>
+              <td class="itemLabel">Res1: </td>
+              <td class="itemValue"><input type="text" name="screenrotation[res1]" value="<%= @screenrotation.res1 %>"/></td>
+          </tr>
+          
+          <tr>
+              <td class="itemLabel">Res2: </td>
+              <td class="itemValue"><input type="text" name="screenrotation[res2]" value="<%= @screenrotation.res2 %>"/></td>
+          </tr>
+          
+          <tr>
+              <td class="itemLabel">Res3: </td>
+              <td class="itemValue"><input type="text" name="screenrotation[res3]" value="<%= @screenrotation.res3 %>"/></td>
+          </tr>
+          
+          <tr>
+              <td class="itemLabel">Res4: </td>
+              <td class="itemValue"><input type="text" name="screenrotation[res4]" value="<%= @screenrotation.res4 %>"/></td>
+          </tr>
+          
+          <tr>
+              <td class="itemLabel">Res5: </td>
+              <td class="itemValue"><input type="text" name="screenrotation[res5]" value="<%= @screenrotation.res5 %>"/></td>
+          </tr>
+          
+          <tr>
+              <td class="itemLabel">Res6: </td>
+              <td class="itemValue"><input type="text" name="screenrotation[res6]" value="<%= @screenrotation.res6 %>"/></td>
+          </tr>
+          
+          <tr>
+              <td class="itemLabel">Res7: </td>
+              <td class="itemValue"><input type="text" name="screenrotation[res7]" value="<%= @screenrotation.res7 %>"/></td>
+          </tr>
+          
+          <tr>
+              <td class="itemLabel">Res8: </td>
+              <td class="itemValue"><input type="text" name="screenrotation[res8]" value="<%= @screenrotation.res8 %>"/></td>
+          </tr>
+          
+      </table>
+      <input type="submit" value="Update"/>
+    </form>
+  </div>
+
+</div>

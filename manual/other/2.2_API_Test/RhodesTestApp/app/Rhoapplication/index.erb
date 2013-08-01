@@ -1,0 +1,40 @@
+<div data-role="page">
+
+	<div data-role="header" data-position="inline">
+    <h1>Rhoapplications</h1>
+    <a href="<%= Rho::RhoConfig.start_path %>" class="ui-btn-left" data-icon="home" data-direction="reverse" <%= "data-ajax='false'" if is_bb6 %>>
+      Home
+    </a>
+    <a href="<%= url_for :action => :new %>" class="ui-btn-right" data-icon="plus">
+      New
+    </a>
+	</div>
+
+  <div data-role="content">
+    <ul data-role="listview">
+    <li><p>Rho::RhoApplication.get_base_app_path()</p></li>
+    <li><%= Rho::RhoApplication.get_base_app_path()%></li>
+    <li><p>Rho::RhoApplication::get_app_path('app')</p></li>
+    <li><%= Rho::RhoApplication::get_app_path('app')%></li>
+    <li><p>Rho::RhoApplication::get_app_path('bhakta')</p></li>
+    <li><%= Rho::RhoApplication::get_app_path('bhakta')%></li>
+    <li><p>Rho::RhoApplication::get_app_path('')</p></li>
+    <li><%= Rho::RhoApplication::get_app_path('')%></li>
+    <li><p>Rho::RhoApplication::get_model_path('app','Rhoapplication')</p></li>
+    <li><%= Rho::RhoApplication::get_model_path('app','Rhoapplication')%></li>
+    <li><p>Rho::RhoApplication::get_model_path('app','')</p></li>
+    <li><%= Rho::RhoApplication::get_model_path('app','')%></li>
+    <% @images.reverse_each do |x|%>
+      <% if x.image_uri %>
+      <li><p>Rho::RhoApplication::get_blob_path(<%= x.image_uri%>)<p></li>
+      <li><%=Rho::RhoApplication::get_blob_path(x.image_uri)%></li>
+      <% end %>
+    <% end %>
+    <li><p>Rho::RhoApplication::get_blob_path('')<p></li>
+    <li><%=Rho::RhoApplication::get_blob_path('')%></li>
+    <li><p>Rho::RhoApplication::get_blob_folder()<p></li>
+    <li><%=Rho::RhoApplication::get_blob_folder()%></li>
+      
+    </ul>
+  </div>
+</div>

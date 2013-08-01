@@ -1,0 +1,200 @@
+<div data-role="page">
+<script type="text/javascript">
+
+function funminimize(){
+  $.get('/app/Gesture/FunMinimize', {});
+   return false;  
+}
+
+function deletegesture()
+ {
+   $.get('/app/Gesture/deletegesture', 
+     {});
+   return false;
+ }
+  function holdGesture(){
+    
+    var txtType = document.getElementById('txtType').value;
+    var txtHoldID = document.getElementById('txtHoldID').value;
+    var cmdPreset = document.getElementById('cmdPreset').value;
+    var cmdDiagonstics = document.getElementById('cmdDiagonstics').value;
+    var Text1 = document.getElementById('Text1').value;
+    var Text2 = document.getElementById('Text2').value;
+    var Text3 = document.getElementById('Text3').value;
+    var txtdelay = document.getElementById('txtdelay').value;
+    var txtinterval = document.getElementById('txtinterval').value;
+    var txtNumber = document.getElementById('txtNumber').value;
+
+  $.get('/app/Gesture/performHoldGesture', 
+    { formType: txtType,
+      formId: txtHoldID,
+      formPreset: cmdPreset,
+      formDiagnostics: cmdDiagonstics,
+      formCenterX: Text1,
+      formCenterY: Text2,
+      formRadius: Text3,
+      formDelay: txtdelay,
+      formInterval: txtinterval,
+      formTotalNo: txtNumber 
+    });
+  return false;
+}
+
+function setFieldValue(returnval) 
+{
+  document.getElementById("myResult").innerHTML=returnval;
+}
+</script>
+<div>
+<div id="myResult">Event info</div> 
+<form id="frmHoldGestures" >
+<h2>Hold Gesture using Ruby Objects</h2>
+
+<table>
+    <tr>
+        <td><a href="main"></a></td>
+    </tr>
+    
+    <tr>
+    <td>
+    Preset   :- 
+    </td>
+    <td>
+<select name="formPreset" id="cmdPreset">
+<option value="NULL">NULL</option>
+<option value="center">center</option>
+<option value="Test">Invalid String("Test")</option>
+<option value="">Empty String</option>
+</select>
+</td>
+</tr>
+<tr>
+<td>
+Diagonstics:- 
+</td>
+<td>
+<select name="formDiagnostics" id="cmdDiagonstics">
+<option value="TRUE">TRUE</option>
+<option value="FALSE">FALSE</option>
+<option value="TEST">Invalid String("Test")</option>
+<option value="NULL">NULL</option>
+<option value="">Empty String</option>
+</select>
+
+</td>
+</tr>
+
+<tr>
+<td>
+Input ID:- 
+</td>
+<td>
+<input type=text name="formId" id="txtHoldID" value="MyHoldGesture" />
+</td>
+</tr>       
+   
+
+</table>
+
+
+
+<table>
+
+
+<tr>
+<td>
+center-x:-
+</td>
+<td>
+<!--<input type=text name="formCenterX" id="txtcenterx" value="200" />-->
+<input type=text name="formCenterX" id="Text1" value="100" />
+</td>
+</tr>  
+ 
+<tr>
+<td>
+center-y:-
+</td>
+<td>
+<!--<input type=text name="formCenterY" id="txtcentery" value="100" />-->
+<input type=text name="formCenterY" id="Text2" value="150" />
+</td>
+</tr>   
+
+<tr>
+<td>
+radius:-
+</td>
+<td>
+<!--<input type=text name="formRadius" id="txtradius" value="80" />-->
+<input type=text name="formRadius" id="Text3" value="60" />
+</td>
+</tr>  
+
+
+<tr>
+<td>
+Delay:-
+</td>
+<td>
+<input type=text name="formDelay" id="txtdelay" value="2000" />
+</td>
+</tr>  
+
+<tr>
+<td>
+Interval:-
+</td>
+<td>
+<input type=text name="formInterval" id="txtinterval" value="3000" />
+</td>
+</tr>  
+
+
+<tr>
+<td>Type:- 
+</td>
+<td>
+<input type=text name="formType" id="txtType" value="Hold" />
+</td>
+</tr> 
+
+<tr>
+<td>Number Of Gestures:- 
+</td>
+<td>
+<input type=text name="formTotalNo" id="txtNumber" value="1" />
+</td>
+</tr> 
+
+
+<tr>
+<td>
+<input type="button" onclick="setNull();" value="setNull">
+</td>
+</tr>
+
+  
+</table>
+<hr>
+<input type="button" value="Hold Gesture" onclick ="holdGesture()"><br />
+<input type="button" onclick="deletegesture();" value="DeleteGesture">
+
+<br>
+<INPUT type="button" value="minimizeApp" name="minimizeApp" onClick="funminimize();"> 
+<br/>
+
+</form>
+</div>
+<script>
+function setNull()
+{
+frmHoldGestures.formId.value="NULL";
+frmHoldGestures.formCenterX.value="NULL";
+frmHoldGestures.formCenterY.value="NULL";
+frmHoldGestures.formRadius.value="NULL";
+frmHoldGestures.formDelay.value="NULL";
+frmHoldGestures.formInterval.value="NULL";
+}
+</script>
+</div>

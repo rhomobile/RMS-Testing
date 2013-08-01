@@ -1,0 +1,147 @@
+<script>
+function btlog(data)
+{
+var node=document.createElement("LI");
+var textnode=document.createTextNode("Result = " + data);
+node.appendChild(textnode);
+document.getElementById("myList").appendChild(node);
+window.scrollTo(0,document.body.scrollHeight);
+}
+function onConnectCustomClient() {
+  $.get('/app/BtTest/create_bt_client_connect', {device_name: document.getElementById("id_server_name").value});
+  return false;
+}
+</script>
+<div data-role="page">
+
+
+  <div data-role="content">
+  <p>Bluetooth Available : </p>
+  </div>
+	
+  <div data-role="content">
+<ul data-role="listview">
+<li><%= link_to 'is_bt_available', { :action => :is_bt_available }%><br/></li>
+<li><%= link_to 'bt_off', { :action => :bt_off }%><br/></li>
+<li><%= link_to 'set_device_name', { :action => :set_device_name }%><br/></li>
+<li><%= link_to 'get_device_name', { :action => :get_device_name }%><br/></li>
+<li><%= link_to 'get_last_error', { :action => :get_last_error }%></li><br/>
+<li><a href="#" onclick="$.get('<%= url_for :action => :create_bt_session_server %>')">create_bt_session_server</a></li><br/>
+<li><a href="#" onclick="$.get('<%= url_for :action => :create_bt_session_client %>')">create_bt_session_client</a></li><br/>
+<li><a href="#" onclick="$.get('<%= url_for :action => :create_bt_server_wait %>')">create_bt_server_wait</a></li><br/>
+<li><a href="#" onclick="$.get('<%= url_for :action => :stop_bt_connection_process %>')">stop_bt_connection_process</a></li><br/>
+<br/><li>
+<form>
+ Enter Server Name To Connect:<br/>
+ <input id="id_server_name" type="text" name="id_server_name" value="" /><br/>
+ <INPUT type="button" id="id_button4" value="Connect" name="id_button4" onClick="onConnectCustomClient();"><br/>
+ </form>
+   <br/><br/></li>
+<p><b>BLUETOOTH SESSION CODES</b></p>
+<br/>
+<li><a href="#" onclick="$.get('<%= url_for :action => :session_set_callback %>')">session_set_callback</a></li><br/>
+<li><a href="#" onclick="$.get('<%= url_for :action => :session_bt_disconnect %>')">session_bt_disconnect</a></li><br/>
+<li><a href="#" onclick="$.get('<%= url_for :action => :session_get_status %>')">session_get_status</a></li><br/>
+<li><a href="#" onclick="$.get('<%= url_for :action => :example_receive_byte_array %>')">example_receive_byte_array</a></li><br/>
+<li><a href="#" onclick="$.get('<%= url_for :action => :example_send_byte_array %>')">example_send_byte_array</a></li><br/>
+<li><a href="#" onclick="$.get('<%= url_for :action => :session_read_string %>')">session_read_string</a></li><br/>
+<li><a href="#" onclick="$.get('<%= url_for :action => :session_write_string %>')">session_write_string</a></li><br/>
+<li><a href="#" onclick="$.get('<%= url_for :action => :write_100_times %>')">write_100_times</a></li><br/>
+<li><a href="#" onclick="$.get('<%= url_for :action => :write_log_data %>')">write_log_data</a></li><br/>
+</ul>
+ 
+<ul data-role="listview" id="myList">
+
+</ul>
+
+<ul data-role="listview">
+            
+<li>
+ Miliseconds Time 1:<input id="tim1" value ="" />
+</li>
+<li>
+Miliseconds Time 2:<input id="tim2" value ="" />
+</li>
+
+<li>
+   <input id="num" value ="" />
+</li>
+<li>
+<button type="button" onclick="get_count();">Count</button>
+</li>
+<li>
+<button type="button" onclick="get_jscount();">JSCount</button>
+</li>
+</ul>
+
+  </div>
+  
+</div>
+
+<script type="text/javascript">
+function start_time(){
+    document.getElementById('tim1').value = new Date().getTime();
+}
+
+function end_time(){
+    document.getElementById('tim2').value = new Date().getTime(); 
+    tim1 = parseInt(document.getElementById('tim1').value);
+    tim2 = parseInt(document.getElementById('tim2').value);
+  
+     
+     
+}
+    
+function show_num(ws_num ){
+    document.getElementById('num').value = ws_num;
+  
+}
+    
+    function get_count(){
+      document.getElementById('tim1').value = 0;
+      document.getElementById('tim2').value = 0;
+
+      document.getElementById('num').value = 0;
+      
+      
+        if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        }
+        else {// code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+          
+        xmlhttp.open("POST", "/app/BtTest/count_to_2000", true);
+        xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    
+        xmlhttp.send('');
+    
+
+        return false;
+    }
+    
+      function get_jscount()
+            {
+              document.getElementById('tim1').value = 0;
+              document.getElementById('tim2').value = 0;
+              document.getElementById('num').value = 0;
+              start_time();
+              
+              var d = new Date();
+              var time1=d.getMilliseconds();
+              var con = 0;
+                while(con < 2000)
+                  {
+                  con +=1;
+                  show_num(con);
+                  }
+             
+               var a = new Date();
+               var time2=a.getMilliseconds();
+               var time_diff = (time2-time1) * 8640000 / 100;
+               end_time();
+              
+            }
+    
+      
+</script>

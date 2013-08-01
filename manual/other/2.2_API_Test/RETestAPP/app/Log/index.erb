@@ -1,0 +1,368 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<script type="text/javascript" src="/public/jquery/jquery-1.6.4.min.js"></script>
+<script type="text/javascript">
+function setFieldValue(returnval) 
+
+{
+  document.getElementById("myResult").innerHTML=returnval;
+}
+
+</script>
+</head>
+<body>
+
+<div id="myResult">Log Info</div> 
+<ul>
+
+<li>Set Destination to File</li>
+<li><a href="#" onclick="$.get('/app/Log/destination300');">(300)</a></li>
+
+<li>Set Destination to Stdio</li>
+<li><a href="#" onclick="$.get('/app/Log/destination301');">(301)</a></li>
+
+<li>Set Destination to URI</li>
+<li><a href="#" onclick="$.get('/app/Log/destination302');">(302)</a></li>
+
+<li>Set Destination to File, Stdio and URI</li>
+<li><a href="#" onclick="$.get('/app/Log/destination303');">(303)</a></li>
+
+<li>Set Destination to Stdio, File and URI</li>
+<li><a href="#" onclick="$.get('/app/Log/destination304');">(304)</a></li>
+
+<li>Set Destination to Stdio, URI and File</li>
+<li><a href="#" onclick="$.get('/app/Log/destination305');">(305)</a></li>
+
+<li>Set Destination to URI, File and Stdio</li>
+<li><a href="#" onclick="$.get('/app/Log/destination306');">(306)</a></li>
+
+<li>Set Destination to URI, Stdio and File</li>
+<li><a href="#" onclick="$.get('/app/Log/destination307');">(307)</a></li>
+
+<li>Set Destination to File and Stdio</li>
+<li><a href="#" onclick="$.get('/app/Log/destination308');">(308)</a></li>
+
+<li>Set Destination to File and URI</li>
+<li><a href="#" onclick="$.get('/app/Log/destination309');">(309)</a></li>
+
+<li>Set Destination to Stdio and URI</li>
+<li><a href="#" onclick="$.get('/app/Log/destination310');">(310)</a></li>
+
+<li>Set Destination to Empty Value</li>
+<li><a href="#" onclick="$.get('/app/Log/destination311');">(311)</a></li>
+
+<li>Set Destination to Invalid Value</li>
+<li><a href="#" onclick="$.get('/app/Log/destination312');">(312)</a></li>
+
+<li>Set DestinationURI to Valid Value</li>
+<li><a href="#" onclick="$.get('/app/Log/destinationURI313');">(313)</a></li>
+
+<li>Set DestinationURI to Valid Value with host address having IP address</li>
+<li><a href="#" onclick="$.get('/app/Log/destinationURI314');">(314)</a></li>
+
+<li>Set DestinationURI to Valid Value with host address having DNS address</li>
+<li><a href="#" onclick="$.get('/app/Log/destinationURI315');">(315)</a></li>
+
+<li>Set DestinationURI to Valid Value with port number</li>
+<li><a href="#" onclick="$.get('/app/Log/destinationURI316');">(316)</a></li>
+
+<li>Set DestinationURI to Valid secure destination </li>
+<li><a href="#" onclick="$.get('/app/Log/destinationURI317');">(317)</a></li>
+
+<li>Set DestinationURI to Empty Value </li>
+<li><a href="#" onclick="$.get('/app/Log/destinationURI318');">(318)</a></li>
+
+<li>Set DestinationURI to Invalid Value </li>
+<li><a href="#" onclick="$.get('/app/Log/destinationURI319');">(319)</a></li>
+
+<li>Set DestinationURI to Invalid Value (260 characters)</li>
+<li><a href="#" onclick="$.get('/app/Log/destinationURI320');">(320)</a></li>
+
+<li>Set Exclude Categories to Signature</li>
+<li><a href="#" onclick="$.get('/app/Log/excludeCategories321');">(321)</a></li>
+
+<li>Set Exclude Categories to Imager, Signature and FileTransfer</li>
+<li><a href="#" onclick="$.get('/app/Log/excludeCategories322');">(322)</a></li>
+
+<li>Set Exclude Categories to Empty Value</li>
+<li><a href="#" onclick="$.get('/app/Log/excludeCategories323');">(323)</a></li>
+
+<li>Set Exclude Categories to Invalid Value</li>
+<li><a href="#" onclick="$.get('/app/Log/excludeCategories324');">(324)</a></li>
+
+<li>Set Exclude Filter to Username and Password</li>
+<li><a href="#" onclick="$.get('/app/Log/excludeFilter325');">(325)</a></li>
+
+<li>Set Exclude Filter to Empty Value</li>
+<li><a href="#" onclick="$.get('/app/Log/excludeFilter326');">(326)</a></li>
+
+<li>Set Exclude Filter to invalid value</li>
+<li><a href="#" onclick="$.get('/app/Log/excludeFilter327');">(327)</a></li>
+
+<li>Set Log filePath to valid path.</li>
+<li><a href="#" onclick="$.get('/app/Log/filePath328');">(328)</a></li>
+
+<li>Set Log filePath to valid absolute path.</li>
+<li><a href="#" onclick="$.get('/app/Log/filePath329');">(329)</a></li>
+
+<li>Set Log filePath to valid relative path.</li>
+<li><a href="#" onclick="$.get('/app/Log/filePath330');">(330)</a></li>
+
+<li>Set Log filePath to valid Empty path.</li>
+<li><a href="#" onclick="$.get('/app/Log/filePath331');">(331)</a></li>
+
+<li>Set Log filePath to valid Invalid path.</li>
+<li><a href="#" onclick="$.get('/app/Log/filePath332');">(332)</a></li>
+
+<li>Set Log fileSize to valid value.</li>
+<li><a href="#" onclick="$.get('/app/Log/fileSize333');">(333)</a></li>
+
+<li>Set Log fileSize to 100000kb.</li>
+<li><a href="#" onclick="$.get('/app/Log/fileSize334');">(334)</a></li>
+
+<li>Set Log fileSize to 0kb.</li>
+<li><a href="#" onclick="$.get('/app/Log/fileSize335');">(335)</a></li>
+
+<li>Set Log fileSize to negative value.</li>
+<li><a href="#" onclick="$.get('/app/Log/fileSize336');">(336)</a></li>
+
+<li>Set Log fileSize to Empty value.</li>
+<li><a href="#" onclick="$.get('/app/Log/fileSize337');">(337)</a></li>
+
+<li>Set Log fileSize to Invalid value</li>
+<li><a href="#" onclick="$.get('/app/Log/fileSize338');">(338)</a></li>
+
+<li>Set Log includeCategories (Signature)</li>
+<li><a href="#" onclick="$.get('/app/Log/includeCategories339');">(339)</a></li>
+
+<li>Set Log includeCategories to * </li>
+<li><a href="#" onclick="$.get('/app/Log/includeCategories340');">(340)</a></li>
+
+<li>Set Log includeCategories (Imager, Signature and FileTransfer)</li>
+<li><a href="#" onclick="$.get('/app/Log/includeCategories341');">(341)</a></li>
+
+<li>Set Log includeCategories with valid and invalid Categories(Signature, aaaa)</li>
+<li><a href="#" onclick="$.get('/app/Log/includeCategories342');">(342)</a></li>
+
+<li>Set Log includeCategories to Empty value.</li>
+<li><a href="#" onclick="$.get('/app/Log/includeCategories343');">(343)</a></li>
+
+<li>Set Log includeCategories to Invalid value.</li>
+<li><a href="#" onclick="$.get('/app/Log/includeCategories344');">(344)</a></li>
+
+<li>Set Log includeCategories to valid values. And Set Log excludeCategories to some valid values</li>
+<li><a href="#" onclick="$.get('/app/Log/includeCategories345');">(345)</a></li>
+
+<li>Set Logging level to 4.</li>
+<li><a href="#" onclick="$.get('/app/Log/level346');">(346)</a></li>
+
+<li>Set Logging level to 3.</li>
+<li><a href="#" onclick="$.get('/app/Log/level347');">(347)</a></li>
+
+<li>Set Logging level to 2.</li>
+<li><a href="#" onclick="$.get('/app/Log/level348');">(348)</a></li>
+
+<li>Set Logging level to 1.</li>
+<li><a href="#" onclick="$.get('/app/Log/level349');">(349)</a></li>
+
+<li>Set Logging level to 0.</li>
+<li><a href="#" onclick="$.get('/app/Log/level350');">(350)</a></li>
+
+<li>Set Logging level to 100.</li>
+<li><a href="#" onclick="$.get('/app/Log/level351');">(351)</a></li>
+
+<li>Set Logging level to -1.</li>
+<li><a href="#" onclick="$.get('/app/Log/level352');">(352)</a></li>
+
+<li>Set Logging level to Empty value.</li>
+<li><a href="#" onclick="$.get('/app/Log/level353');">(353)</a></li>
+
+<li>Set Logging level to Invalid value.</li>
+<li><a href="#" onclick="$.get('/app/Log/level354');">(354)</a></li>
+
+<li>Set Log memoryPeriod with valid value (5000).</li>
+<li><a href="#" onclick="$.get('/app/Log/memoryPeriod355');">(355)</a></li>
+
+<li>Set Log memoryPeriod with valid value(10000)</li>
+<li><a href="#" onclick="$.get('/app/Log/memoryPeriod356');">(356)</a></li>
+
+<li>Set Log memoryPeriod with 0 second.</li>
+<li><a href="#" onclick="$.get('/app/Log/memoryPeriod357');">(357)</a></li>
+
+<li>Set Log memoryPeriod with negative value.</li>
+<li><a href="#" onclick="$.get('/app/Log/memoryPeriod358');">(358)</a></li>
+
+<li>Set Log memoryPeriod to empty.</li>
+<li><a href="#" onclick="$.get('/app/Log/memoryPeriod359');">(359)</a></li>
+
+<li>Set Log memoryPeriod to invalid value.</li>
+<li><a href="#" onclick="$.get('/app/Log/memoryPeriod360');">(360)</a></li>
+
+<li>Set netTrace to True.</li>
+<li><a href="#" onclick="$.get('/app/Log/netTrace361');">(361)</a></li>
+
+<li>Set netTrace to False.</li>
+<li><a href="#" onclick="$.get('/app/Log/netTrace362');">(362)</a></li>
+
+<li>Set netTrace to 1.</li>
+<li><a href="#" onclick="$.get('/app/Log/netTrace363');">(363)</a></li>
+
+<li>Set netTrace to 0.</li>
+<li><a href="#" onclick="$.get('/app/Log/netTrace364');">(364)</a></li>
+
+<li>Set netTrace to Empty value.</li>
+<li><a href="#" onclick="$.get('/app/Log/netTrace365');">(365)</a></li>
+
+<li>Set netTrace to Invalid value.</li>
+<li><a href="#" onclick="$.get('/app/Log/netTrace366');">(366)</a></li>
+
+<li>Set skipPost to True.</li>
+<li><a href="#" onclick="$.get('/app/Log/skipPost367');">(367)</a></li>
+
+<li>Set skipPost to False.</li>
+<li><a href="#" onclick="$.get('/app/Log/skipPost368');">(368)</a></li>
+
+<li>Set skipPost to 1.</li>
+<li><a href="#" onclick="$.get('/app/Log/skipPost369');">(369)</a></li>
+
+<li>Set skipPost to 0.</li>
+<li><a href="#" onclick="$.get('/app/Log/skipPost370');">(370)</a></li>
+
+<li>Set skipPost to Empty value.</li>
+<li><a href="#" onclick="$.get('/app/Log/skipPost371');">(371)</a></li>
+
+<li>Set skipPost to Invalid value.</li>
+<li><a href="#" onclick="$.get('/app/Log/skipPost372');">(372)</a></li>
+
+<li>Call cleanLogFile() method</li>
+<li><a href="#" onclick="$.get('/app/Log/cleanLogFile373');">(373)</a></li>
+
+<li>Call cleanLogFile() method with parameter</li>
+<li><a href="#" onclick="$.get('/app/Log/cleanLogFile374');">(374)</a></li>
+
+<li>Call error() method with "message" and "categories"</li>
+<li><a href="#" onclick="$.get('/app/Log/error375');">(375)</a></li>
+
+<li>Call error() method with "message" only</li>
+<li><a href="#" onclick="$.get('/app/Log/error376');">(376)</a></li>
+
+<li>Call error() method with "categories" only</li>
+<li><a href="#" onclick="$.get('/app/Log/error377');">(377)</a></li>
+
+<li>Call error() method without any parameters</li>
+<li><a href="#" onclick="$.get('/app/Log/error378');">(378)</a></li>
+
+<li>Call error() method with correct "message" and wrong "Categories"</li>
+<li><a href="#" onclick="$.get('/app/Log/error379');">(379)</a></li>
+
+
+<li>Call fatalError() method with "message" and "categories"</li>
+<li><a href="#" onclick="$.get('/app/Log/fatalError380');">(380)</a></li>
+
+<li>Call fatalError() method with "message" only</li>
+<li><a href="#" onclick="$.get('/app/Log/fatalError381');">(381)</a></li>
+
+<li>Call fatalError() method with "categories" only</li>
+<li><a href="#" onclick="$.get('/app/Log/fatalError382');">(382)</a></li>
+
+<li>Call fatalError() method without any parameters</li>
+<li><a href="#" onclick="$.get('/app/Log/fatalError383');">(383)</a></li>
+
+<li>Call fatalError() method with correct "message" and wrong "Categories"</li>
+<li><a href="#" onclick="$.get('/app/Log/fatalError384');">(384)</a></li>
+
+
+<li>Call info() method with "message" and "categories"</li>
+<li><a href="#" onclick="$.get('/app/Log/info385');">(385)</a></li>
+
+<li>Call info() method with "message" and "categories" after setting level to 3</li>
+<li><a href="#" onclick="$.get('/app/Log/info386');">(386)</a></li>
+
+<li>Call info() method with "message" only</li>
+<li><a href="#" onclick="$.get('/app/Log/info387');">(387)</a></li>
+
+<li>Call info() method with "categories" only</li>
+<li><a href="#" onclick="$.get('/app/Log/info388');">(388)</a></li>
+
+<li>Call info() method without any parameters</li>
+<li><a href="#" onclick="$.get('/app/Log/info389');">(389)</a></li>
+
+<li>Call info() method with correct "message" and wrong "categories".</li>
+<li><a href="#" onclick="$.get('/app/Log/info390');">(390)</a></li>
+
+<li>Call readLogFile() method with valid parameter(Integer)</li>
+<li><a href="#" onclick="$.get('/app/Log/readLogFile391');">(391)</a></li>
+
+<li>Call readLogFile() method with floating value(100.50)</li>
+<li><a href="#" onclick="$.get('/app/Log/readLogFile392');">(392)</a></li>
+
+<li>Call readLogFile() method with 0</li>
+<li><a href="#" onclick="$.get('/app/Log/readLogFile393');">(393)</a></li>
+
+<li>Call readLogFile() method with negative value</li>
+<li><a href="#" onclick="$.get('/app/Log/readLogFile394');">(394)</a></li>
+
+<li>Call readLogFile() method with Empty value</li>
+<li><a href="#" onclick="$.get('/app/Log/readLogFile395');">(395)</a></li>
+
+<li>Call readLogFile() method with Invalid value</li>
+<li><a href="#" onclick="$.get('/app/Log/readLogFile396');">(396)</a></li>
+
+<li>Call sendLogFile() method with Synchronous Access   with valid path</li>
+<li><a href="#" onclick="$.get('/app/Log/sendLogFile397');">(397)</a></li>
+
+<li>Call sendLogFile() method   with valid path and callback as function </li>
+<li><a href="#" onclick="$.get('/app/Log/sendLogFile398');">(398)</a></li>
+
+<li>Call sendLogFile() method  with valid path and callback as Action URL </li>
+<li><a href="#" onclick="$.get('/app/Log/sendLogFile399');">(399)</a></li>
+
+<li>Call sendLogFile() method   with valid path and callback as anonymous function </li>
+<li><a href="#" onclick="$.get('/app/Log/sendLogFile400');">(400)</a></li>
+
+<li>Call sendLogFile() method with Empty path</li>
+<li><a href="#" onclick="$.get('/app/Log/sendLogFile401');">(401)</a></li>
+
+<li>Call sendLogFile() method with Invalid path</li>
+<li><a href="#" onclick="$.get('/app/Log/sendLogFile402');">(402)</a></li>
+
+<li>Call showLog() method</li>
+<li><a href="#" onclick="$.get('/app/Log/showLog403');">(403)</a></li>
+
+<li>Call trace() method with "message" and "categories"</li>
+<li><a href="#" onclick="$.get('/app/Log/trace404');">(404)</a></li>
+
+<li>Call trace() method with "message" only</li>
+<li><a href="#" onclick="$.get('/app/Log/trace405');">(405)</a></li>
+
+<li>Call trace() method with "categories" only</li>
+<li><a href="#" onclick="$.get('/app/Log/trace406');">(406)</a></li>
+
+<li>Call trace() method without any parameters.</li>
+<li><a href="#" onclick="$.get('/app/Log/trace407');">(407)</a></li>
+
+<li>Call trace() method with correct "message" and wrong "Categories"</li>
+<li><a href="#" onclick="$.get('/app/Log/trace408');">(408)</a></li>
+
+<li>Call warning() method with "message" and "categories"</li>
+<li><a href="#" onclick="$.get('/app/Log/warning409');">(409)</a></li>
+
+<li>Call warning() method with "message" only.</li>
+<li><a href="#" onclick="$.get('/app/Log/warning410');">(410)</a></li>
+
+<li>Call warning() method with "categories" only.</li>
+<li><a href="#" onclick="$.get('/app/Log/warning411');">(411)</a></li>
+
+<li>Call warning() method without any parameters.</li>
+<li><a href="#" onclick="$.get('/app/Log/warning412');">(412)</a></li>
+
+<li>Call warning() method with correct "message" and wrong "categories".</li>
+<li><a href="#" onclick="$.get('/app/Log/warning413');">(413)</a></li>
+
+</ul>
+</body>
+</html>  
+  
+  

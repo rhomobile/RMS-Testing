@@ -1,0 +1,62 @@
+<script>
+function addmessage(data)
+{
+var node=document.createElement("LI");
+var textnode=document.createTextNode("Result = " + data);
+node.appendChild(textnode);
+document.getElementById("myList").appendChild(node);
+window.scrollTo(0,document.body.scrollHeight);
+}
+function show_cookie() {
+alert(document.cookie);
+}
+</script>
+<div data-role="page">
+
+	<div data-role="header" data-position="inline">
+    <h1>Webviews</h1>
+    <a href="<%= Rho::RhoConfig.start_path %>" class="ui-btn-left" data-icon="home" data-direction="reverse" <%= "data-ajax='false'" if is_bb6 %>>
+      Home
+    </a>
+    <a href="<%= url_for :action => :new %>" class="ui-btn-right" data-icon="plus">
+      New
+    </a>
+	</div>
+
+  <div data-role="content">
+    <ul data-role="listview">
+    <li><input type="text" /></li>
+    <li>Refresh the Page</li>
+    <li><a href="#" onclick="$.get('<%= url_for :action => :refresh %>')">refresh</a></li><br/>
+    <li>TABBAR:Refresh the 2nd TAB</li>
+    <li><a href="#" onclick="$.get('<%= url_for :action => :refreshsectab %>')">Refresh Tab</a></li><br/>
+    <li>Webview Navigate Google</li>
+    <li><a href="#" onclick="$.get('<%= url_for :action => :navigate %>')">Google</a></li><br/>
+    <li>Webview Navigate Index: Open Google in 2nd Tab</li>
+    <li><a href="#" onclick="$.get('<%= url_for :action => :navigatewithindex %>')">Google Tab</a></li><br/>
+    <li>Webview Navigate Back</li>
+    <li><a href="#" onclick="$.get('<%= url_for :action => :navigateback %>')">Go Back</a></li><br/>
+    <li>WebView.current_location </li>
+    <li><a href="#" onclick="$.get('<%= url_for :action => :getCurrentLocation %>')">Current Location</a></li><br/>
+    <li>WebView.current_location Index : Get the current location of 2nd TAB</li>
+    <li><a href="#" onclick="$.get('<%= url_for :action => :getCurrentLocationWithIndex %>')">2nd TAB Current Location</a></li><br/>
+    <li>WebView.executeJs</li>
+    <li><a href="#" onclick="$.get('<%= url_for :action => :executeJs %>')">executeJs</a></li><br/>
+    <li>WebView.activetab</li>
+    <li><a href="#" onclick="$.get('<%= url_for :action => :activetab %>')">activetab</a></li><br/>
+    <li>Full Screen Enable</li>
+    <li><a href="#" onclick="$.get('<%= url_for :action => :fullscrEnable %>')">Enable</a></li><br/>
+    <li>Full Screen Disable</li>
+    <li><a href="#" onclick="$.get('<%= url_for :action => :fullscrDisable %>')">Disable</a></li><br/>
+    <li>SetCookie Single</li>
+    <li><a href="<%=url_for(:action => :setCookieSingle)%>" >Set Cookie Single</a></li><br/>
+    <li>SetCookie Multiple</li>
+    <li><a href="<%=url_for(:action => :setCookieMultiple)%>" >Set Cookie Multiple</a></li><br/>
+    </ul>
+  
+    <ul data-role="listview" id="myList">
+      
+      </ul>
+  </div>
+
+</div>

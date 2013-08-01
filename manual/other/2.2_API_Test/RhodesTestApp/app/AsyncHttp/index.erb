@@ -1,0 +1,51 @@
+<div class="toolbar">
+  <h1 id="pageTitle">
+    Async Http Test result
+  </h1>
+</div>
+
+AsyncHTTP Response : <%=get_res() %> <br/>
+<img src="<%=get_img_res()%>" width="300" />
+
+<ul>
+<li><p><u><b>Async Http GET</b></u></p></li>
+<li>AsyncHTTP.get</li>
+<li><a href="<%=url_for(:action => :asyncHttpCall1)%>">asyncHttpCall1</a></li>
+<li><p>AsyncHTTP.get with authentication</p></li>
+<li><a href="<%=url_for(:action => :asyncHttpCall2)%>">asyncHttpCall2</a></li>
+<li><p>AsyncHTTP.get with authentication (HTTP Site) with wrong udername and password</p></li>
+<li><a href="<%=url_for(:action => :asyncHttpCall3)%>">asyncHttpCall3</a></li>
+<li><p>AsyncHTTP.get Synchronus call</p></li>
+<li><a href="<%=url_for(:action => :asyncHttpCall4)%>">asyncHttpCall4</a></li>
+<li><p><u><b>Async Http POST</b></u></p></li>
+<li>AsyncHTTP.post</li>
+<li><a href="<%=url_for(:action => :asyncHttpCall5)%>">asyncHttpCall5</a></li>
+<li>AsyncHTTP.post with authentication (HTTP Site) with username and password</li>
+<li><a href="<%=url_for(:action => :asyncHttpCall6)%>">asyncHttpCall6</a></li>
+<li>AsyncHTTP.post with authentication (HTTP Site) with wrong udername and password</li>
+<li><a href="<%=url_for(:action => :asyncHttpCall7)%>">asyncHttpCall7</a></li>
+<li>AsyncHTTP.post Synchronus call</li>
+<li><a href="<%=url_for(:action => :asyncHttpCall8)%>">asyncHttpCall8</a></li>
+<li>AsyncHTTP.download_file</li>
+<li><a href="<%=url_for(:action => :asyncHttpDownload)%>">Download File</a></li>
+<li>AsyncHTTP.download_file with Authentication</li>
+<li><a href="<%=url_for(:action => :asyncHttpDownload1)%>">Download File With Authentication</a></li>
+<li>AsyncHTTP.download_file with Authentication wrong username and password</li>
+<li><a href="<%=url_for(:action => :asyncHttpDownload2)%>">Download File With Authentication</a></li>
+<li>AsyncHTTP.download_file Synchronous</li>
+<li><a href="<%=url_for(:action => :asyncHttpDownload3)%>">Download File Synchronous</a></li>
+<li>AsyncHTTP.upload_file</li>
+<li><a href="<%=url_for(:action => :asyncHttpUploadFile)%>">Upload File</a></li>
+<li>AsyncHTTP.upload_file with Authentication</li>
+<li><a href="<%=url_for(:action => :asyncHttpUploadFile1)%>">Upload File With Authentication</a></li>
+<li>AsyncHTTP.download_file with Authentication wrong username and password</li>
+<li><a href="<%=url_for(:action => :asyncHttpUploadFile2)%>">Upload File With Authentication</a></li>
+<li>AsyncHTTP.download_file Synchronous</li>
+<li><a href="<%=url_for(:action => :asyncHttpUploadFile3)%>">Upload File Synchronous</a></li>
+
+
+
+
+
+
+</ul>

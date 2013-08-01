@@ -1,0 +1,58 @@
+<div data-role="page" data-url="<%= Rho::RhoConfig.start_path %>/">
+
+  <div data-role="header" data-position="inline">
+    <h1>RhodesTestApp</h1>
+    <% if SyncEngine::logged_in > 0 %>
+    <a href="<%= url_for :controller => :Settings, :action => :do_sync %>" class="ui-btn-left" data-icon="refresh">
+      Sync
+    </a>
+    <a href="<%= url_for :controller => :Settings, :action => :logout %>" class="ui-btn-right" data-icon="star">
+	    Logout
+	  </a>
+    <% else %>
+        <a href="<%= url_for :controller => :Settings, :action => :login %>" class="ui-btn-right" data-icon="star">Login</a>
+    <% end %>
+  </div>
+
+  <div data-role="content">
+    <ul data-role="listview">
+      <li><%= Rho::RhoApplication::get_user_path() %></li>
+      <li><a href="Alert">Alert</a></li>
+      <li><a href="AsyncHttp">AsyncHttp</a></li>
+      <li><a href="Barcodetest">Barcode</a></li>
+      <li><a href="BtTest">Bluetooth</a></li>
+      <li><a href="Image">Camera</a></li>
+      <li><a href="Localization">Localization</a></li>
+      <li><a href="SignatureUtil">Signature Test</a></li>
+      <li><a href="SignatureInline">Signature Inline For Android and IOS
+      <li><a href="Timer">Timer Test</a></li>
+      <li><a href="Mapview">Mapview Test</a></li>
+      <li><a href="Rhoapplication">RhoApplication</a></li>
+      <li><a href="Webview">Webview</a></li>
+      <li><a href="NativeTabbarTest">Tabbar</a></li>
+      <li><a href="NativeToolbarTest">Toolbar</a></li>
+      <li><a href="Navbar">Navbar</a></li>
+      <li><a href="Hyperlinks">Hyperlinks</a></li>
+      <li><a href="Media">Media</a></li>
+      <li><a href="Ringtones">Ringtones</a></li>
+      <li><a href="RunExternalapp">RunExternalapp</a></li>
+      <li><a href="ScreenRotation">ScreenRotation</a></li>
+      <li><a href="SystemClass">SystemClass</a></li>
+
+      <li><a href="Geolocation">Geolocation</a></li>
+      <li><a href="BarcodeRecognize">Barcode Recognize</a></li>
+      <li><a href="Calendar">Calendar Test</a></li>
+      <li><a href="Contacts">Contact Test</a></li>
+      <li><a href="TestTest">Test</a></li>
+      
+      
+      
+      
+      
+      
+      
+      
+    </ul>
+  </div>
+
+</div>

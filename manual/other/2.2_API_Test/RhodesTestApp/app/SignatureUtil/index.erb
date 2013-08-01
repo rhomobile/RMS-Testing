@@ -1,0 +1,37 @@
+<div>
+    	<%= link_to '[Take Signature]', { :action => :new }%> <br>
+        <% if System::get_property('platform') == 'WINDOWS'%>               
+            <%= link_to '[Capture Signature]', { :action => :inline_capture }%> <br>
+        <% end %>                 
+    <br/>
+
+</div>
+	
+	
+<div>
+<% @signatures.reverse_each do |x|%>
+  <img src="<%=Rho::RhoApplication::get_blob_path(x.signature_uri)%>" width='300px'></img><a href="<%=url_for(:action => :delete, :id =>x.object)%>">Delete</a><br/>
+<% end %>
+</div>
+
+<div data-role="content">
+  <ul data-role="listview">
+    <li><a href="/app/SignatureUtil/capture_signature">capture_signature</a></li>
+    <li><a href="/app/SignatureUtil/capture_signature_jpg">capture_signature_jpg</a></li>
+    <li><a href="/app/SignatureUtil/capture_signature_png">capture_signature_png</a></li>
+    <li><a href="/app/SignatureUtil/capture_signature_bmp">capture_signature_bmp</a></li>
+    <li><a href="/app/SignatureUtil/capture_signature_pen1">capture_signature_pen1</a></li>
+    <li><a href="/app/SignatureUtil/capture_signature_pen_width">capture_signature_pen_width</a></li>
+    <li><a href="/app/SignatureUtil/capture_signature_bgcolor">capture_signature_bgcolor</a></li>
+    <li><b>Applicable For Windows and CE devies</b></li>
+    <li><a href="/app/SignatureUtil/capture_inline_visible">capture_inline_visible</a></li>
+    <li><a href="/app/SignatureUtil/capture_inline_visible_penwidth">capture_inline_visible_penwidth</a></li>
+    <li><a href="/app/SignatureUtil/capture_inline_jpg">capture_inline_jpg</a></li>
+    <li><a href="/app/SignatureUtil/capture_inline_png">capture_inline_png</a></li>
+    <li><a href="/app/SignatureUtil/capture_inline_bmp">capture_inline_bmp</a></li>
+    <li><a href="/app/SignatureUtil/capture_inline_pencolor">capture_inline_pencolor</a></li>
+    <li><a href="/app/SignatureUtil/capture_inline_penwidth">capture_inline_penwidth</a></li>
+    <li><a href="/app/SignatureUtil/capture_inline_bgcolor">capture_inline_bgcolor</a></li>
+    <li><a href="/app/SignatureUtil/capture_clear">capture_clear</a></li>
+  </ul>
+</div>

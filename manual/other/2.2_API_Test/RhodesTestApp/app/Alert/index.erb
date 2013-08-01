@@ -1,0 +1,46 @@
+<div data-role="page">
+
+	<div data-role="header" data-position="inline">
+    <h1>Alerts</h1>
+    <a href="<%= Rho::RhoConfig.start_path %>" class="ui-btn-left" data-icon="home" data-direction="reverse" <%= "data-ajax='false'" if is_bb6 %>>
+      Home
+    </a>
+    <a href="<%= url_for :action => :new %>" class="ui-btn-right" data-icon="plus">
+      New
+    </a>
+	</div>
+
+  <div data-role="content">
+    <ul data-role="listview">
+      <li><p>show popup with some message</p></li>
+      <li><a href="/app/Alert/show_popup">VT229-0043</a></li>
+      <li><p>show popup  with Title</p></li>
+      <li><a href="/app/Alert/show_popup1">VT229-0044</a></li>
+      <li><p>show popup  with icon</p></li>
+      <li><a href="/app/Alert/show_popup2">VT229-0045</a></li>
+      <li><p>show popup call back event for Yes</p></li>
+      <li><a href="/app/Alert/show_popup46">VT229-0046</a></li>
+      <li><p>hidepopup</p></li>
+      <li><a href="/app/Alert/show_popup3">VT229-0049</a></li>
+      <li><p>vibrate with duration 0</p></li>
+      <li><a href="/app/Alert/vibrate_for_0sec">VT229-0050</a></li>
+      <li><p>vibrate with duration null</p></li>
+      <li><a href="/app/Alert/vibrate">VT229-0051</a></li>
+      <li><p>vibrate with duration 2000</p></li>
+      <li><a href="/app/Alert/vibrate_for_2000sec">VT229-0052</a></li>
+      <li><p>vibrate with duration 25500</p></li>
+      <li><a href="/app/Alert/vibrate_for_25500sec">VT229-0053</a></li>
+      <li><p>vibrate with duration 27000</p></li>
+      <li><a href="/app/Alert/vibrate_for_27000sec">VT229-0054</a></li>
+      <li><p>play .mp3 file passing extension param</p></li>
+      <li><a href="/app/Alert/play_file_mp3_ext">VT229-0055</a></li>
+      <li><p>play .mp3 file without extension</p></li>
+      <li><a href="/app/Alert/play_file_mp3">VT229-0056</a></li>
+      <li><p>play .wav file</p></li>
+      <li><a href="/app/Alert/play_file_wav">VT229-0057</a></li>
+      <li><p>show status</p></li>
+      <li><a href="/app/Alert/show_status">VT229-0059</a></li>
+    </ul>
+  </div>
+
+</div>

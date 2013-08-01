@@ -23,7 +23,7 @@ extern void rho_app_events_simulate_conflict();
 }
 
 /* Simulate Conflicts event */
--(void) simulateConflicts methodResult:(id<IMethodResult>)methodResult {
+-(void) simulateConflicts:(id<IMethodResult>)methodResult {
     rho_app_events_simulate_conflict();
 }
 

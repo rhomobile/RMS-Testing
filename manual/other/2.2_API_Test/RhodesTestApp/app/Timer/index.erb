@@ -1,0 +1,38 @@
+<script>
+function myTimerFill(data)
+{
+var node=document.createElement("LI");
+var textnode=document.createTextNode("Result = " + data);
+node.appendChild(textnode);
+document.getElementById("myList").appendChild(node);
+window.scrollTo(0,document.body.scrollHeight);
+}
+</script>
+<div data-role="page">
+
+	<div data-role="header" data-position="inline">
+    <h1>Timers</h1>
+    <a href="<%= Rho::RhoConfig.start_path %>" class="ui-btn-left" data-icon="home" data-direction="reverse" <%= "data-ajax='false'" if is_bb6 %>>
+      Home
+    </a>
+    <a href="<%= url_for :action => :new %>" class="ui-btn-right" data-icon="plus">
+      New
+    </a>
+	</div>
+
+  <div data-role="content">
+    <ul data-role="listview">
+      <li><a href="#" onclick="$.get('<%= url_for :action => :start_timer %>')">start_timer</a></li>
+      <li><a href="#" onclick="$.get('<%= url_for :action => :start_stop_timer %>')">start_stop_timer</a></li>
+      <li><a href="#" onclick="$.get('<%= url_for :action => :timer_with_data %>')">timer_with_data</a></li>
+      <li><a href="#" onclick="$.get('<%= url_for :action => :timer_duration_0 %>')">timer_duration_0</a></li>
+      <li><a href="#" onclick="$.get('<%= url_for :action => :multiple_timer %>')">multiple_timer</a></li>
+      <li><a href="#" onclick="$.get('<%= url_for :action => :multiple_timer_stop %>')">multiple_timer_stop</a></li>
+    </ul>
+  </div>
+  <div>
+      <ul data-role="listview" id= "myList">
+      </ul>
+  </div>
+
+</div>

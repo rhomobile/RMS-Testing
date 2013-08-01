@@ -1,0 +1,266 @@
+<div data-role="page">
+<script type="text/javascript">
+
+function funminimize(){
+  $.get('/app/Gesture/FunMinimize', {});
+   return false;  
+}
+
+
+ function deletegesture()
+  {
+    $.get('/app/Gesture/deletegesture', 
+      {});
+    return false;
+  }
+  function linearGesture(){
+    
+    var txtType = document.getElementById('txtType').value;
+    var txtLinearID = document.getElementById('txtLinearID').value;
+    var dropdownLinearPreset = document.getElementById('dropdownLinearPreset').value;
+    var dropdownDiagonstics = document.getElementById('dropdownDiagonstics').value;
+    var Text3 = document.getElementById('Text3').value;
+    var Text4 = document.getElementById('Text4').value;
+    var txtskew = document.getElementById('txtskew').value;
+    var txtdeviation = document.getElementById('txtdeviation').value;
+    var txtregionwidth = document.getElementById('txtregionwidth').value;
+    var Text1 = document.getElementById('Text1').value;
+    var Text2 = document.getElementById('Text2').value;
+    var txttolerance = document.getElementById('txttolerance').value;
+    var txtsensitivity = document.getElementById('txtsensitivity').value;
+    var txtNumber = document.getElementById('txtNumber').value;
+
+  $.get('/app/Gesture/performLinearGesture', 
+    { formType: txtType,
+      formId: txtLinearID,
+      formPreset: dropdownLinearPreset,
+      formDiagnostics: dropdownDiagonstics,
+      formEndX: Text3,
+      formEndY: Text4,
+      formSkew: txtskew,
+      formDeviation: txtdeviation,
+      formRegionWidth: txtregionwidth,
+      formStartX: Text1,
+      formStartY: Text2,
+      formTolerance: txttolerance,
+      formSensitivity: txtsensitivity,
+      formTotalNo: txtNumber
+      
+    });
+  return false;
+}
+
+function setFieldValue(returnval) 
+{
+  document.getElementById("myResult").innerHTML=returnval;
+}
+
+</script>
+
+<div>
+<div id="myResult">Event info</div> 
+<form id="frmLinearGestures">
+
+
+<table>
+    <tr>
+        <td><a href="main"></a></td>
+    </tr>
+    
+    <tr>
+    <td>
+    Preset   :- 
+    </td>
+    <td>
+<select name="formPreset" id="dropdownLinearPreset">
+<option value="NULL">NULL</option>
+<option value="left-right">left-right</option>
+<option value="right-left">right-left</option>
+<option value="top-bottom">top-bottom</option>
+<option value="bottom-top">bottom-top</option>
+<option value="Test">Invalid String("Test")</option>
+<option value="">Empty String</option>
+
+</select>
+</td>
+</tr>
+<tr>
+<td>
+Diagonstics:- 
+</td>
+<td>
+<select name="formDiagnostics" id="dropdownDiagonstics">
+<option value="TRUE">TRUE</option>
+<option value="FALSE">FALSE</option>
+<option value="NULL">NULL</option>
+<option value="TEST">Invalid String("TEST")</option>
+<option value="">EMPTY STRING</option>
+</select>
+
+</td>
+</tr>
+
+<tr>
+<td>
+Input ID:- 
+</td>
+<td>
+<input type=text name="formId" id="txtLinearID" value="myLinearGest" />
+</td>
+</tr>     
+<tr>
+<td>
+<select name="formEventType" id="mydropdown1">
+<option value="JavaScript">JavaScript</option>
+<option value="HTML">HTML</option>
+<option value="JSON">JSON</option>
+<option value="DETACHEVENT">DETACHEVENT</option>
+<option value="EMPTYEVENT">EMPTYEVENT</option>
+</select>
+</td>
+</tr>     
+</table>
+
+
+
+
+<table>
+
+
+<tr>
+<td>
+start-x:-
+</td>
+<td>
+<input type=text name="formStartX" id="Text1" value="10" />
+</td>
+</tr>  
+ 
+<tr>
+<td>
+start-y:-
+</td>
+<td>
+<input type=text name="formStartY" id="Text2" value="200" />
+</td>
+</tr>   
+
+<tr>
+<td>
+end-x:-
+</td>
+<td>
+<input type=text name="formEndX" id="Text3" value="150" />
+</td>
+</tr>  
+
+<tr>
+<td>
+end-y:-
+</td>
+<td>
+<input type=text name="formEndY" id="Text4" value="200" />
+</td>
+</tr>  
+
+
+
+<tr>
+<td>
+tolerance:- 
+</td>
+<td>
+<input type=text name="formTolerance" id="txttolerance" value="50" />
+</td>
+</tr>  
+
+
+<tr>
+<td>
+skew:- 
+</td>
+<td>
+<input type=text name="formSkew" id="txtskew" value="15" />
+</td>
+</tr>
+  
+<tr>
+<td>
+deviation:- 
+</td>
+<td>
+<input type=text name="formDeviation" id="txtdeviation" value="10" />
+</td>
+</tr>
+  
+  
+<tr>
+<td>
+region-width:- 
+</td>
+<td>
+<input type=text name="formRegionWidth" id="txtregionwidth" value="20" />
+</td>
+</tr> 
+
+
+<tr>
+<td>
+sensitivity:- 
+</td>
+<td>
+<input type=text name="formSensitivity" id="txtsensitivity" value="80" />
+</td>
+</tr>  
+
+<tr>
+<td>Type:- 
+</td>
+<td>
+<input type=text name="formType" id="txtType" readonly value="Linear" />
+</td>
+</tr> 
+
+
+
+<tr>
+<td>Number Of Gestures:- 
+</td>
+<td>
+<input type=text name="formTotalNo" id="txtNumber" value="1" />
+</td>
+</tr> 
+
+<tr>
+<td>
+<input type="button" onclick="linearGesture()" value="Create Linear Gesture"><br /> &nbsp;
+<input type="button" onclick="setNull();" value="setNull">
+<input type="button" onclick="deletegesture();" value="DeleteGesture">
+</td>
+</tr>
+
+</table>
+<br>
+<INPUT type="button" value="minimizeApp" name="minimizeApp" onClick="funminimize();"> 
+<br/>
+
+
+</form>
+</div>
+<script>
+function setNull()
+{
+frmLinearGestures.txtLinearID.value="NULL";
+frmLinearGestures.formStartX.value="NULL";
+frmLinearGestures.formStartY.value="NULL";
+frmLinearGestures.formEndX.value="NULL";
+frmLinearGestures.formEndY.value="NULL";
+frmLinearGestures.formTolerance.value="NULL";
+frmLinearGestures.formSkew.value="NULL";
+frmLinearGestures.formDeviation.value="NULL";
+frmLinearGestures.formRegionWidth.value="NULL";
+frmLinearGestures.formSensitivity.value="NULL";
+
+}
+</script>
+</div>

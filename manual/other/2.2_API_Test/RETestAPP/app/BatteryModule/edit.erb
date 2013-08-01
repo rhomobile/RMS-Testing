@@ -1,0 +1,26 @@
+<div data-role="page">
+
+  <div data-role="header" data-position="inline">
+    <h1>Edit <%= @batterymodule.BatteryModel %></h1>
+    <a href="<%= url_for :action => :show, :id => @batterymodule.object %>" class="ui-btn-left" data-icon="back" data-direction="reverse">
+      Cancel
+    </a>
+    <a href="<%= url_for :action => :delete, :id => @batterymodule.object %>" class="ui-btn-right" data-icon="delete" data-direction="reverse">
+      Delete
+    </a>
+  </div>
+
+  <div data-role="content">
+    <form method="POST" action="<%= url_for :action => :update %>">
+      <input type="hidden" name="id" value="<%= @batterymodule.object %>"/>
+      
+          <div data-role="fieldcontain">
+            <label for="batterymodule[BatteryModel]" class="fieldLabel">Batterymodel</label>
+            <input type="text" id="batterymodule[BatteryModel]" name="batterymodule[BatteryModel]" value="<%= @batterymodule.BatteryModel %>" <%= placeholder( "Batterymodel" ) %> />
+          </div>
+      
+      <input type="submit" value="Update"/>
+    </form>
+  </div>
+
+</div>

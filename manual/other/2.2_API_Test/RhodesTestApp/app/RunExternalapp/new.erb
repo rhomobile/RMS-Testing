@@ -1,0 +1,70 @@
+<div data-role="page">
+
+  <div data-role="header" data-position="inline">
+    <h1>New <%= @runexternalapp.title %></h1>
+    <a href="<%= url_for :action => :index %>" class="ui-btn-left" data-icon="back" data-direction="reverse">
+      Cancel
+    </a>
+  </div>
+
+  <div data-role="content">
+    <form method="POST" action="<%= url_for :action => :create %>">
+      <input type="hidden" name="id" value="<%= @runexternalapp.object %>"/>
+
+      
+          <div data-role="fieldcontain">
+            <label for="runexternalapp[testcaseid]" class="fieldLabel">Testcaseid</label>
+            <input type="text" id="runexternalapp[testcaseid]" name="runexternalapp[testcaseid]" <%= placeholder("Testcaseid") %> />
+          </div>
+      
+          <div data-role="fieldcontain">
+            <label for="runexternalapp[description]" class="fieldLabel">Description</label>
+            <input type="text" id="runexternalapp[description]" name="runexternalapp[description]" <%= placeholder("Description") %> />
+          </div>
+      
+          <div data-role="fieldcontain">
+            <label for="runexternalapp[res1]" class="fieldLabel">Res1</label>
+            <input type="text" id="runexternalapp[res1]" name="runexternalapp[res1]" <%= placeholder("Res1") %> />
+          </div>
+      
+          <div data-role="fieldcontain">
+            <label for="runexternalapp[res2]" class="fieldLabel">Res2</label>
+            <input type="text" id="runexternalapp[res2]" name="runexternalapp[res2]" <%= placeholder("Res2") %> />
+          </div>
+      
+          <div data-role="fieldcontain">
+            <label for="runexternalapp[res3]" class="fieldLabel">Res3</label>
+            <input type="text" id="runexternalapp[res3]" name="runexternalapp[res3]" <%= placeholder("Res3") %> />
+          </div>
+      
+          <div data-role="fieldcontain">
+            <label for="runexternalapp[res4]" class="fieldLabel">Res4</label>
+            <input type="text" id="runexternalapp[res4]" name="runexternalapp[res4]" <%= placeholder("Res4") %> />
+          </div>
+      
+          <div data-role="fieldcontain">
+            <label for="runexternalapp[res5]" class="fieldLabel">Res5</label>
+            <input type="text" id="runexternalapp[res5]" name="runexternalapp[res5]" <%= placeholder("Res5") %> />
+          </div>
+      
+          <div data-role="fieldcontain">
+            <label for="runexternalapp[res6]" class="fieldLabel">Res6</label>
+            <input type="text" id="runexternalapp[res6]" name="runexternalapp[res6]" <%= placeholder("Res6") %> />
+          </div>
+      
+          <div data-role="fieldcontain">
+            <label for="runexternalapp[res7]" class="fieldLabel">Res7</label>
+            <input type="text" id="runexternalapp[res7]" name="runexternalapp[res7]" <%= placeholder("Res7") %> />
+          </div>
+      
+          <div data-role="fieldcontain">
+            <label for="runexternalapp[res8]" class="fieldLabel">Res8</label>
+            <input type="text" id="runexternalapp[res8]" name="runexternalapp[res8]" <%= placeholder("Res8") %> />
+          </div>
+      
+
+      <input type="submit" value="Create"/>
+    </form>
+  </div>
+
+</div>

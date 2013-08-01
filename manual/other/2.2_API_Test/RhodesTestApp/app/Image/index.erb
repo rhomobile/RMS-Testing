@@ -1,0 +1,52 @@
+<div data-role="page">
+
+	<div data-role="header" data-position="inline">
+    <h1>Images</h1>
+    <a href="<%= Rho::RhoConfig.start_path %>" class="ui-btn-left" data-icon="home" data-direction="reverse" <%= "data-ajax='false'" if is_bb6 %>>
+      Home
+    </a>
+    <a href="<%= url_for :action => :deleteall %>" class="ui-btn-right" data-icon="plus">
+      Delete All
+    </a>
+      <a href="<%=url_for(:action => :delete, :id =>':all')%>">Delete None</a>
+	</div>
+
+  <div data-role="content">
+    <% @images.reverse_each do |x|%>
+          <% if x.image_uri %>
+              <img src="<%=Rho::RhoApplication::get_blob_path(x.image_uri)%>" width='300px'></img><a href="<%=url_for(:action => :delete, :id =>x.object)%>">Delete</a>
+        <% if (System::get_property('platform') == 'APPLE') %>
+          <br/><a href="<%=url_for(:action => :save_to_gallery, :id =>x.object)%>">Save to gallery</a>
+        <% end %>
+        <br/>
+          <% end %>        
+    <% end %>
+    <ul data-role="listview">
+      <li><%= link_to 'get_main_cam_info', { :action => :get_main_cam_info }%><br/></li>
+      <li><%= link_to 'get_front_cam_info', { :action => :get_front_cam_info }%><br/></li>
+      <li><%= link_to 'get_default_cam_info', { :action => :get_default_cam_info }%><br/></li>
+      <li><%= link_to 'choose_pic', { :action => :choose_pic }%><br/></li>
+      <li><%= link_to 'take_pic', { :action => :take_pic }%><br/></li>
+      <li><%= link_to 'on_take_main', { :action => :on_take_main }%><br/></li>
+      <li><%= link_to 'on_take_front', { :action => :on_take_front }%><br/></li>
+      <li><%= link_to 'on_take_default', { :action => :on_take_default }%><br/></li>
+      <li><%= link_to 'on_take_main_color_RGB', { :action => :on_take_main_color_RGB }%><br/></li>
+      <li><%= link_to 'on_take_main_color_grayscale', { :action => :on_take_main_color_grayscale }%><br/></li>
+      <li><%= link_to 'on_take_front_color_RGB', { :action => :on_take_front_color_RGB }%><br/></li>
+      <li><%= link_to 'on_take_front_color_grayscale', { :action => :on_take_front_color_grayscale }%><br/></li>
+      <li><%= link_to 'on_take_edit', { :action => :on_take_edit }%><br/></li>
+      <li><%= link_to 'on_take_width 300', { :action => :on_take_width }%><br/></li>
+      <li><%= link_to 'on_take_height 500', { :action => :on_take_height }%><br/></li>
+      <li><%= link_to 'on_take_width_height 300 * 500', { :action => :on_take_width_height }%><br/></li>
+      <li><%= link_to 'on_take_flash_on', { :action => :on_take_flash_on }%><br/></li>
+      <li><%= link_to 'on_take_flash_off', { :action => :on_take_flash_off }%><br/></li>
+      <li><%= link_to 'on_take_flash_auto', { :action => :on_take_flash_auto }%><br/></li>
+      <li><%= link_to 'on_take_flash_torch', { :action => :on_take_flash_torch }%><br/></li>
+      <li><%= link_to 'on_take_flash_redeye', { :action => :on_take_flash_redeye }%><br/></li>
+      <li><%= link_to 'on_take_format_jpg', { :action => :on_take_format_jpg }%><br/></li>
+      <li><%= link_to 'on_take_format_png', { :action => :on_take_format_png }%><br/></li>
+      <li><%= link_to 'on_take_format_default', { :action => :on_take_format_default }%><br/></li>
+    </ul>
+  </div>
+
+</div>

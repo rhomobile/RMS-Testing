@@ -162,7 +162,7 @@
   			}
   			var requestString = 'http://localhost:8888/savetestresult.do?filename=' + filename + '&junitreport=' + encodeURIComponent(text);
   			xmlhttp.open("GET", requestString, false);
-			//xmlhttp.send();
+			xmlhttp.send();
         },
 
         getFullName: function(suite, isFilename) {

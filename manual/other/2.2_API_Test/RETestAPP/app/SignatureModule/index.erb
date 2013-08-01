@@ -1,0 +1,372 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<script type="text/javascript" src="/public/jquery/jquery-1.6.4.min.js"></script>
+<script type="text/javascript">
+
+function funminimize(){
+  $.get('/app/SignatureModule/FunMinimize', {});
+   return false;  
+}
+
+function mycaptureevent()
+{
+  $.get('/app/SignatureModule/captureevent', { });
+  return false;  
+}
+
+function changeImgsrc()
+{
+  document.getElementById("mycapturedImage").src = $data_return;
+}
+
+function selectVisibility()
+{
+  var sigVisibility=document.getElementById("sigVisibility").value;
+  $.get('/app/SignatureModule/selectVisibility', { sigVisibility:  sigVisibility});
+  return false;
+  
+}
+
+function selectBorder()
+{
+  var sigBorder=document.getElementById("sigBorder").value;
+  $.get('/app/SignatureModule/selectBorder', { sigBorder:  sigBorder});
+  return false;
+  
+}
+
+function clearSignature()
+{
+  $.get('/app/SignatureModule/clearSignature', { });
+  return false; 
+  
+}
+
+function captureLocalSignature()
+{
+  $.get('/app/SignatureModule/captureLocalSignature', { });
+  return false; 
+  
+}
+
+function setLeftPosition()
+{
+   var leftPosition=document.getElementById("leftPosition").value;
+   $.get('/app/SignatureModule/setLeftPosition', { leftPosition:  leftPosition});
+   return false; 
+  
+}
+
+function setTopPosition()
+{
+   var topPosition=document.getElementById("topPosition").value;
+   $.get('/app/SignatureModule/setTopPosition', { topPosition:  topPosition});
+   return false; 
+  
+}
+
+
+function setheight()
+{
+   var viewerHeight=document.getElementById("viewerHeight").value;
+   $.get('/app/SignatureModule/setheight', { viewerHeight:  viewerHeight});
+   return false; 
+  
+}
+
+function setwidth()
+{
+   var viewerWidth=document.getElementById("viewerWidth").value;
+   $.get('/app/SignatureModule/setwidth', { viewerWidth:  viewerWidth});
+   return false; 
+  
+}
+
+function peninkwidth()
+{
+   var inkwidth=document.getElementById("inkwidth").value;
+   $.get('/app/SignatureModule/peninkwidth', { inkwidth:  inkwidth});
+   return false; 
+  
+}
+
+
+function peninkcolor()
+{
+   var inkcolor=document.getElementById("inkcolor").value;
+   $.get('/app/SignatureModule/peninkcolor', { inkcolor:  inkcolor});
+   return false; 
+  
+}
+
+function bgroundcolor()
+{
+   var backgroundColor=document.getElementById("backgroundColor").value;
+   $.get('/app/SignatureModule/bgroundcolor', { backgroundColor:  backgroundColor});
+   return false; 
+  
+}
+
+function setSigLocalName()
+{
+   var textLocalName=document.getElementById("textLocalName").value;
+   $.get('/app/SignatureModule/setSigLocalName', { textLocalName:  textLocalName});
+   return false; 
+  
+}
+
+function doDestination()
+{
+   var DestValue=document.getElementById("selectDestination").value
+     if(DestValue=="HTTP")
+     {
+      document.getElementById("txtDestination").value="http://192.168.6.18/NEON/ReceivedFiles/Upload.aspx";
+      document.getElementById("txtUserName").value="uploadtest";
+      document.getElementById("txtPassword").value="letmein";
+      }
+      else if(DestValue=="QUALIFIEDHTTP")
+      {
+        document.getElementById("txtDestination").value="http://192.168.6.18:80/NEON/ReceivedFiles/Upload.aspx";
+        document.getElementById("txtUserName").value="";
+        document.getElementById("txtPassword").value="";
+      }
+      else if(DestValue=="FTP")
+      {
+        document.getElementById("txtDestination").value="ftp://192.168.6.18/Received/sigInFTP.bmp";
+        document.getElementById("txtUserName").value="ftpadmin";
+        document.getElementById("txtPassword").value="ftpadmin";
+      }
+      else if(DestValue=="QUALIFIEDFTP")
+      {
+        document.getElementById("txtDestination").value="ftp://ftpadmin:ftpadmin@192.168.6.18/siginQFTP.bmp";
+        document.getElementById("txtUserName").value="";
+        document.getElementById("txtPassword").value="";
+      
+      }
+      else if(DestValue=="FILE1")
+      {
+        document.getElementById("txtDestination").value="file://\\Temp\\CapturedSigTemp.bmp";
+        document.getElementById("txtUserName").value="";
+        document.getElementById("txtPassword").value="";
+
+      }
+      else if(DestValue=="FILE2")
+      {
+        document.getElementById("txtDestination").value="file://\\Application\\Airbeam\\CapturedSigeAPPAir.bmp";
+        document.getElementById("txtUserName").value="";
+        document.getElementById("txtPassword").value="";
+
+      }
+      else if(DestValue=="INVALIDFILE")
+      {
+        document.getElementById("txtDestination").value="file://\\And\\data\\sigAndroidData.bmp";
+        document.getElementById("txtUserName").value="";
+        document.getElementById("txtPassword").value="";
+
+      }
+      else if(DestValue=="INVALIDHTTP")
+      {
+        document.getElementById("txtDestination").value="http://tand";
+         document.getElementById("txtUserName").value="uploadtest";
+         document.getElementById("txtPassword").value="letmein";
+      }
+      else if(DestValue=="EMPTYHTTP")
+      {
+        document.getElementById("txtDestination").value="http://";
+         document.getElementById("txtUserName").value="uploadtest";
+        document.getElementById("txtPassword").value="letmein";
+
+      }
+      else if(DestValue=="INVALIDFTP")
+      {
+        document.getElementById("txtDestination").value="ftp://tandv";
+        document.getElementById("txtUserName").value="tandv";
+        document.getElementById("txtPassword").value="H0neymoon";
+
+      }
+      else if(DestValue=="EMPTYFTP")
+      {
+        document.getElementById("txtDestination").value="ftp://";
+        document.getElementById("txtUserName").value="tandv";
+        document.getElementById("txtPassword").value="H0neymoon";
+
+      }
+}
+
+function sigCapture()
+{
+ document.getElementById("myResult").innerHTML="";
+ var txtDestination= document.getElementById("txtDestination").value;
+ var txtUserName= document.getElementById("txtUserName").value; 
+ var txtPassword= document.getElementById("txtPassword").value;
+ var txtName= document.getElementById("txtName").value;
+ for (var i=0; i < document.getElementsByName("mygroup").length; i++)
+      {   
+            if (document.getElementsByName("mygroup")[i].checked)
+            {
+              var mygroup = document.getElementsByName("mygroup")[i].value;
+            }
+      } 
+ //var mygroup= document.myfrm.mygroup.value;
+ //var mygroup= document.getElementsByName("mygroup").value;
+ //alert(txtDestination+txtUserName+txtPassword+txtSound+mygroup);
+ $.get('/app/SignatureModule/sigCapture', { txtDestination: txtDestination, txtUserName: txtUserName, txtPassword: txtPassword, txtName: txtName, mygroup: mygroup });
+ return false; 
+ 
+}
+
+  function setvectorevent()
+  {
+    document.getElementById("myResult").innerHTML=""; 
+    var veceventdropdown=document.getElementById("veceventdropdown").value;
+     $.get('/app/SignatureModule/setvectorevent', { veceventdropdown:  veceventdropdown});
+     return false; 
+    
+  }
+
+function setFieldValue(returnval) 
+{
+  document.getElementById("myResult").innerHTML=returnval;
+}
+
+</script>
+</head>
+
+<body>
+<p>SignatureTest</p>
+<br /><br />
+<div id="myResult">Event info</div> 
+  <br><br>
+    <div id="ImageSaveResult">Image Save Result goes here</div>
+  <img src="<%=$data_return%>" id="mycapturedImage" height= "70px" width = "70px" ></img>
+  <br><br>
+<form name="myfrm" action="">
+
+ <INPUT align="center" type="button" value="AttachCaptureEvent" onclick="mycaptureevent();">
+ <BR>
+<label for="sigVisibility">Select Visibility</label>
+<select name="sigVisibility" id="sigVisibility" onchange="selectVisibility();">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="Visible">Visible</option>
+<option value="Hidden">Hidden</option>
+<option value="Address">Address</option>
+<option value="Null">Null</option>
+</select>
+<br />    
+
+<label for="sigBorder">Select border</label>
+<select name="sigBorder" id="sigBorder" onchange="selectBorder();">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="On">On</option>
+<option value="Off">Off</option>
+<option value="Test">Test</option>
+</select>
+<br />
+<INPUT type="button" value="Clear" name="Clear" onClick="clearSignature();">
+
+<INPUT type="button" value="CaptureLocal" name="CaptureLocal" onClick="captureLocalSignature();">
+<br />    
+                      
+<label for="leftPosition" class="fieldLabel">LeftPosition:</label>
+<input type="text" name="leftPosition" id="leftPosition" value="20" class="itemValue" <%= placeholder("LeftPosition") %> />
+ <INPUT type="button" value="Left" name="Left" onClick="setLeftPosition();">
+<br /> 
+
+ 
+<label for="topPosition" class="fieldLabel">TopPosition:</label>
+ <input type="text" name="topPosition" id="topPosition" value="20" class="itemValue" <%= placeholder("TopPosition:") %> />
+<INPUT type="button" value="Top" name="Top" onClick="setTopPosition();">
+   <br /> 
+ 
+<label for="viewerHeight" class="fieldLabel">HeightPosition:</label>
+ <input type="text" name="viewerHeight" id="viewerHeight" value="200" class="itemValue" <%= placeholder("HeightPosition:") %> />
+ <INPUT type="button" value="Height" name="Height" onClick="setheight();">
+   <br /> 
+                    
+<label for="viewerWidth" class="fieldLabel">WidthPosition:</label>
+ <input type="text" name="viewerWidth" id="viewerWidth" value="200" class="itemValue" <%= placeholder("WidthPosition:") %> />
+ <INPUT type="button" value="Width" name="Width" onClick="setwidth();">
+   <br /> 
+
+<label for="inkwidth" class="fieldLabel">PenWidth:</label>
+<input type="text" name="inkwidth" id="inkwidth" value="3" class="itemValue" <%= placeholder("PenWidth:") %> />
+<INPUT type="button" value="PenInk" name="PenInk" onClick="peninkwidth();">
+  <br />                             
+        
+
+<label for="inkcolor" class="fieldLabel">PenColor:</label>
+<input type="text" name="inkcolor" id="inkcolor" value="#FF0000" class="itemValue" <%= placeholder("PenColor:") %> />
+<INPUT type="button" value="PenColor" name="PenColor" onClick="peninkcolor();">
+  <br /> 
+
+<label for="backgroundColor" class="fieldLabel">BG Color:</label>
+<input type="text" name="backgroundColor" id="backgroundColor" value="#00FFAA" class="itemValue" <%= placeholder("BG Color:") %> />
+<INPUT type="button" value="BGColor" name="BGColor" onClick="bgroundcolor();">
+  <br /> 
+
+<label for="textLocalName" class="fieldLabel">sigLocal:</label>
+<input type="text" name="textLocalName" id="textLocalName" value="myLocalSig" class="itemValue" <%= placeholder("sigLocal:") %> />
+<INPUT type="button" value="setName" name="setName" onClick="setSigLocalName();">
+  <br /> 
+
+  <label for="selectDestination">DestinationType</label>
+    <select name="selectDestination" id="selectDestination" onchange="doDestination();">
+        <OPTION SELECTED VALUE="">Select</OPTION>
+        <OPTION VALUE="">Select Destination type</OPTION>
+        <option value="HTTP">HTTP</option>
+        <option value="QUALIFIEDHTTP">QUALIFIED HTTP</option>
+        <option value="FTP">FTP</option>
+        <option value="QUALIFIEDFTP">QUALIFIED FTP</option>
+        <option value="FILE1">FILE1</option>
+        <option value="FILE2">FILE2</option>
+        <option value="INVALIDFILE">INVALIDFILE</option>
+        <option value="INVALIDHTTP">INVALIDHTTP</option>
+        <option value="EMPTYHTTP">EMPTYHTTP</option>
+        <option value="INVALIDFTP">INVALIDFTP</option>
+        <option value="EMPTYFTP">EMPTYFTP</option>               
+     </select>            
+  <br /> 
+  
+
+<label for="txtDestination">Destination:</label>
+<Textarea id="txtDestination" name="txtDestination" cols="30" rows="4"></Textarea>  
+<br />
+<label for="txtUserName" class="fieldLabel">UserName:</label>
+<input type="text" name="txtUserName" id="txtUserName" value="ftpadmin" class="itemValue" <%= placeholder("UserName:") %> /> 
+ <br />  
+<label for="txtPassword" class="fieldLabel">Password:</label>
+<input type="text" name="txtPassword" id="txtPassword" value="ftpadmin" class="itemValue" <%= placeholder("Password:") %> /> 
+<br /> 
+<label for="txtName" class="fieldLabel">Name:</label>
+<input type="text" name="txtName" id="txtName" value="Sig" class="itemValue" <%= placeholder("Name:") %> />             
+<br />  
+  <label for="mygroup">SelectEvent:</label><br>
+        <input type="radio" name="mygroup" value="Empty" checked="checked">No Event<br />
+        <input type="radio" name="mygroup" value="javascript" /> Attach Event <br />
+        <input type="radio" name="mygroup" value="DETACH"> DETACH Event<br />
+        <input type="radio" name="mygroup" value="HTML">Page Navigate<br />
+
+<INPUT type="button" value="AttachandCapture" name="AttachandCapture" onClick="sigCapture();">  
+<br/><br/><br/><br/>
+  Vector Event:
+  <select name="veceventdropdown" id="veceventdropdown">
+  <option SELECTED VALUE="">Select</OPTION>
+  <option value="JSCRIPT">JSCRIPT</option>
+  <option value="DETACH">DETACH</option>
+  <option value="URL">URL</option>
+  </select>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <input type="button" value="SetVectorEvent" onclick="setvectorevent();">
+  <br /><br />  
+  
+  <INPUT type="button" value="minimizeApp" name="minimizeApp" onClick="funminimize();"> 
+  <br/>
+</form>
+
+<div>
+$data_return="";
+</div>
+</body>
+</html>

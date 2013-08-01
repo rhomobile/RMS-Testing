@@ -1,0 +1,26 @@
+<div data-role="page">
+
+  <div data-role="header" data-position="inline">
+    <h1>Edit <%= @networkmodule.NetworkModel %></h1>
+    <a href="<%= url_for :action => :show, :id => @networkmodule.object %>" class="ui-btn-left" data-icon="back" data-direction="reverse">
+      Cancel
+    </a>
+    <a href="<%= url_for :action => :delete, :id => @networkmodule.object %>" class="ui-btn-right" data-icon="delete" data-direction="reverse">
+      Delete
+    </a>
+  </div>
+
+  <div data-role="content">
+    <form method="POST" action="<%= url_for :action => :update %>">
+      <input type="hidden" name="id" value="<%= @networkmodule.object %>"/>
+      
+          <div data-role="fieldcontain">
+            <label for="networkmodule[NetworkModel]" class="fieldLabel">Networkmodel</label>
+            <input type="text" id="networkmodule[NetworkModel]" name="networkmodule[NetworkModel]" value="<%= @networkmodule.NetworkModel %>" <%= placeholder( "Networkmodel" ) %> />
+          </div>
+      
+      <input type="submit" value="Update"/>
+    </form>
+  </div>
+
+</div>
