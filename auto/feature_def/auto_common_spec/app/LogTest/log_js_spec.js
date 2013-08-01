@@ -85,6 +85,28 @@ describe("Log JS API", function () {
 
 			Rho.LogCapture.stop();
 		});
+		
+		// Clean log file test
+		it("VT290-373 : Clear log file | true", function() {
+			runs(function(){
+				
+				Rho.Log.level = 1;
+				var logPath = Rho.Log.filePath
+				expect(Rho.RhoFile.exists(logPath)).toEqual(true)
+				Rho.Log.info("log path => " +logPath, "VT290-373");
+				var beforeClean = Rho.RhoFile.getFileSize(logPath);	
+				Rho.Log.cleanLogFile();	
+				waits(3000);	
+				var afterClean = Rho.RhoFile.getFileSize(logPath);
+				if(beforeClean>afterClean)
+					flag = true
+				else
+					flag = false
+		
+				expect(flag).toEqual(true)
+				
+			});
+		});
 
 		// Call readlog() with valid parameter (Integer) 1000
 		it("VT290-391 : Call readLogFile() method with valid parameter. | ", function() {
