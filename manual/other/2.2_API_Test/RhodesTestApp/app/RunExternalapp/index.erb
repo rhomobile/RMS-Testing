@@ -1,0 +1,21 @@
+<div data-role="page">
+
+	<div data-role="header" data-position="inline">
+    <h1>RunExternalapps</h1>
+    <a href="<%= Rho::RhoConfig.start_path %>" class="ui-btn-left" data-icon="home" data-direction="reverse" <%= "data-ajax='false'" if is_bb6 %>>
+      Home
+    </a>
+    <a href="<%= url_for :action => :new %>" class="ui-btn-right" data-icon="plus">
+      New
+    </a>
+	</div>
+
+  <div data-role="content">
+    <ul data-role="listview">
+      VT229-0142 <a href="<%= url_for :action => :open_rhodes_pdf_http_url %>">open file doesnot exist http</a><br/>
+      VT229-0143 <a href="<%= url_for :action => :open_rhodes_pdf_ftp_url %>">open file doesnot exist ftp</a><br/>
+      VT229-0144 <a href="http://www.google.com/?rho_open_target=_blank">Open Google in external browser</a>
+    </ul>
+  </div>
+
+</div>

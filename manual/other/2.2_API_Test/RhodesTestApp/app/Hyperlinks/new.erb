@@ -1,0 +1,70 @@
+<div data-role="page">
+
+  <div data-role="header" data-position="inline">
+    <h1>New <%= @hyperlinks.title %></h1>
+    <a href="<%= url_for :action => :index %>" class="ui-btn-left" data-icon="back" data-direction="reverse">
+      Cancel
+    </a>
+  </div>
+
+  <div data-role="content">
+    <form method="POST" action="<%= url_for :action => :create %>">
+      <input type="hidden" name="id" value="<%= @hyperlinks.object %>"/>
+
+      
+          <div data-role="fieldcontain">
+            <label for="hyperlinks[testcaseid]" class="fieldLabel">Testcaseid</label>
+            <input type="text" id="hyperlinks[testcaseid]" name="hyperlinks[testcaseid]" <%= placeholder("Testcaseid") %> />
+          </div>
+      
+          <div data-role="fieldcontain">
+            <label for="hyperlinks[description]" class="fieldLabel">Description</label>
+            <input type="text" id="hyperlinks[description]" name="hyperlinks[description]" <%= placeholder("Description") %> />
+          </div>
+      
+          <div data-role="fieldcontain">
+            <label for="hyperlinks[res1]" class="fieldLabel">Res1</label>
+            <input type="text" id="hyperlinks[res1]" name="hyperlinks[res1]" <%= placeholder("Res1") %> />
+          </div>
+      
+          <div data-role="fieldcontain">
+            <label for="hyperlinks[res2]" class="fieldLabel">Res2</label>
+            <input type="text" id="hyperlinks[res2]" name="hyperlinks[res2]" <%= placeholder("Res2") %> />
+          </div>
+      
+          <div data-role="fieldcontain">
+            <label for="hyperlinks[res3]" class="fieldLabel">Res3</label>
+            <input type="text" id="hyperlinks[res3]" name="hyperlinks[res3]" <%= placeholder("Res3") %> />
+          </div>
+      
+          <div data-role="fieldcontain">
+            <label for="hyperlinks[res4]" class="fieldLabel">Res4</label>
+            <input type="text" id="hyperlinks[res4]" name="hyperlinks[res4]" <%= placeholder("Res4") %> />
+          </div>
+      
+          <div data-role="fieldcontain">
+            <label for="hyperlinks[res5]" class="fieldLabel">Res5</label>
+            <input type="text" id="hyperlinks[res5]" name="hyperlinks[res5]" <%= placeholder("Res5") %> />
+          </div>
+      
+          <div data-role="fieldcontain">
+            <label for="hyperlinks[res6]" class="fieldLabel">Res6</label>
+            <input type="text" id="hyperlinks[res6]" name="hyperlinks[res6]" <%= placeholder("Res6") %> />
+          </div>
+      
+          <div data-role="fieldcontain">
+            <label for="hyperlinks[res7]" class="fieldLabel">Res7</label>
+            <input type="text" id="hyperlinks[res7]" name="hyperlinks[res7]" <%= placeholder("Res7") %> />
+          </div>
+      
+          <div data-role="fieldcontain">
+            <label for="hyperlinks[res8]" class="fieldLabel">Res8</label>
+            <input type="text" id="hyperlinks[res8]" name="hyperlinks[res8]" <%= placeholder("Res8") %> />
+          </div>
+      
+
+      <input type="submit" value="Create"/>
+    </form>
+  </div>
+
+</div>

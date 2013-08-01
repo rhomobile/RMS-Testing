@@ -1,0 +1,71 @@
+<div data-role="page">
+
+  <div data-role="header" data-position="inline">
+    <h1>Edit <%= @generatepdf.testcaseid %></h1>
+    <a href="<%= url_for :action => :show, :id => @generatepdf.object %>" class="ui-btn-left" data-icon="back" data-direction="reverse">
+      Cancel
+    </a>
+    <a href="<%= url_for :action => :delete, :id => @generatepdf.object %>" class="ui-btn-right" data-icon="delete" data-direction="reverse">
+      Delete
+    </a>
+  </div>
+
+  <div data-role="content">
+    <form method="POST" action="<%= url_for :action => :update %>">
+      <input type="hidden" name="id" value="<%= @generatepdf.object %>"/>
+      
+          <div data-role="fieldcontain">
+            <label for="generatepdf[testcaseid]" class="fieldLabel">Testcaseid</label>
+            <input type="text" id="generatepdf[testcaseid]" name="generatepdf[testcaseid]" value="<%= @generatepdf.testcaseid %>" <%= placeholder( "Testcaseid" ) %> />
+          </div>
+      
+          <div data-role="fieldcontain">
+            <label for="generatepdf[description]" class="fieldLabel">Description</label>
+            <input type="text" id="generatepdf[description]" name="generatepdf[description]" value="<%= @generatepdf.description %>" <%= placeholder( "Description" ) %> />
+          </div>
+      
+          <div data-role="fieldcontain">
+            <label for="generatepdf[res1]" class="fieldLabel">Res1</label>
+            <input type="text" id="generatepdf[res1]" name="generatepdf[res1]" value="<%= @generatepdf.res1 %>" <%= placeholder( "Res1" ) %> />
+          </div>
+      
+          <div data-role="fieldcontain">
+            <label for="generatepdf[res2]" class="fieldLabel">Res2</label>
+            <input type="text" id="generatepdf[res2]" name="generatepdf[res2]" value="<%= @generatepdf.res2 %>" <%= placeholder( "Res2" ) %> />
+          </div>
+      
+          <div data-role="fieldcontain">
+            <label for="generatepdf[res3]" class="fieldLabel">Res3</label>
+            <input type="text" id="generatepdf[res3]" name="generatepdf[res3]" value="<%= @generatepdf.res3 %>" <%= placeholder( "Res3" ) %> />
+          </div>
+      
+          <div data-role="fieldcontain">
+            <label for="generatepdf[res4]" class="fieldLabel">Res4</label>
+            <input type="text" id="generatepdf[res4]" name="generatepdf[res4]" value="<%= @generatepdf.res4 %>" <%= placeholder( "Res4" ) %> />
+          </div>
+      
+          <div data-role="fieldcontain">
+            <label for="generatepdf[res5]" class="fieldLabel">Res5</label>
+            <input type="text" id="generatepdf[res5]" name="generatepdf[res5]" value="<%= @generatepdf.res5 %>" <%= placeholder( "Res5" ) %> />
+          </div>
+      
+          <div data-role="fieldcontain">
+            <label for="generatepdf[res6]" class="fieldLabel">Res6</label>
+            <input type="text" id="generatepdf[res6]" name="generatepdf[res6]" value="<%= @generatepdf.res6 %>" <%= placeholder( "Res6" ) %> />
+          </div>
+      
+          <div data-role="fieldcontain">
+            <label for="generatepdf[res7]" class="fieldLabel">Res7</label>
+            <input type="text" id="generatepdf[res7]" name="generatepdf[res7]" value="<%= @generatepdf.res7 %>" <%= placeholder( "Res7" ) %> />
+          </div>
+      
+          <div data-role="fieldcontain">
+            <label for="generatepdf[res8]" class="fieldLabel">Res8</label>
+            <input type="text" id="generatepdf[res8]" name="generatepdf[res8]" value="<%= @generatepdf.res8 %>" <%= placeholder( "Res8" ) %> />
+          </div>
+      
+      <input type="submit" value="Update"/>
+    </form>
+  </div>
+
+</div>

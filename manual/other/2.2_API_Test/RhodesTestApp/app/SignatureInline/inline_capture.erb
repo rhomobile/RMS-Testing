@@ -1,0 +1,169 @@
+<div id="document_for_signature">
+<p>Inline Signature Capture 2</p>
+<br>
+This is simple example document for show how create transparency (or not) signature capture window inside WebView and capture sigtature.
+Also you can see how control that windiw for basic commands.<br>
+<br>
+Signature:   <img src="signature_placeholder.png" id="id_placeholder" width="40%" height="35%" onload="checkSize()"/>
+<br>
+<br>
+<INPUT type="button" id="id_button_back" value="BACK" name="id_button_back" onClick="onBack();">
+<INPUT type="button" id="id_button_clear" value="CLEAR" name="id_button_clear" onClick="onClear();">
+<INPUT type="button" id="id_button_capture" value="CAPTURE" name="id_button_capture" onClick="onCapture();">
+
+<br>
+<ul>
+<li><a href="#" onclick="capture_inline_visible()">capture_inline_visible</a></li>
+<li><a href="#" onclick="capture_inline_visible_penwidth()">capture_inline_visible_penwidth</a></li>
+<li><a href="#" onclick="capture_inline_jpg()">capture_inline_jpg</a></li>
+<li><a href="#" onclick="capture_inline_png()">capture_inline_png</a></li>
+<li><a href="#" onclick="capture_inline_bmp()">capture_inline_bmp</a></li>
+<li><a href="#" onclick="capture_inline_pencolor()">capture_inline_pencolor</a></li>
+<li><a href="#" onclick="capture_inline_penwidth()">capture_inline_penwidth</a></li>
+<li><a href="#" onclick="capture_inline_bgcolor()">capture_inline_bgcolor</a></li>
+</ul>
+</div>
+
+<script type="text/javascript">
+
+
+function pageY(elem) {
+    return elem.offsetParent ? (elem.offsetTop + pageY(elem.offsetParent)) : elem.offsetTop;
+}
+
+function pageX(elem) {
+    return elem.offsetParent ? (elem.offsetLeft + pageX(elem.offsetParent)) : elem.offsetLeft;
+}
+
+function checkSize() {
+    if (!document.getElementById('id_placeholder')) {
+        return;
+    }
+    var pixel_ratio = 1;
+<% if System::get_property('platform') == 'ANDROID'%>               
+    pixel_ratio = window.devicePixelRatio;
+<% end %>                 
+    var _left = Math.round(pageX(document.getElementById('id_placeholder')) * pixel_ratio);
+    var _top = Math.round(pageY(document.getElementById('id_placeholder')) * pixel_ratio);
+    var _width = Math.round(document.getElementById('id_placeholder').width * pixel_ratio);
+    var _height = Math.round(document.getElementById('id_placeholder').height * pixel_ratio);
+    $.get('/app/SignatureInline/set_rect', {left: _left, top: _top, width: _width, height: _height});	
+}
+
+function capture_inline_visible(){
+  var pixel_ratio = 1;
+<% if System::get_property('platform') == 'ANDROID'%>               
+  pixel_ratio = window.devicePixelRatio;
+<% end %>                 
+  var _left = Math.round(pageX(document.getElementById('id_placeholder')) * pixel_ratio);
+  var _top = Math.round(pageY(document.getElementById('id_placeholder')) * pixel_ratio);
+  var _width = Math.round(document.getElementById('id_placeholder').width * pixel_ratio);
+  var _height = Math.round(document.getElementById('id_placeholder').height * pixel_ratio);
+  $.get('/app/SignatureInline/capture_inline_visible', {left: _left, top: _top, width: _width, height: _height});
+}
+
+function capture_inline_visible_penwidth(){
+var pixel_ratio = 1;
+<% if System::get_property('platform') == 'ANDROID'%>               
+pixel_ratio = window.devicePixelRatio;
+<% end %>                 
+var _left = Math.round(pageX(document.getElementById('id_placeholder')) * pixel_ratio);
+var _top = Math.round(pageY(document.getElementById('id_placeholder')) * pixel_ratio);
+var _width = Math.round(document.getElementById('id_placeholder').width * pixel_ratio);
+var _height = Math.round(document.getElementById('id_placeholder').height * pixel_ratio);
+$.get('/app/SignatureInline/capture_inline_visible_penwidth', {left: _left, top: _top, width: _width, height: _height});
+}
+
+function capture_inline_jpg(){
+var pixel_ratio = 1;
+<% if System::get_property('platform') == 'ANDROID'%>               
+pixel_ratio = window.devicePixelRatio;
+<% end %>                 
+var _left = Math.round(pageX(document.getElementById('id_placeholder')) * pixel_ratio);
+var _top = Math.round(pageY(document.getElementById('id_placeholder')) * pixel_ratio);
+var _width = Math.round(document.getElementById('id_placeholder').width * pixel_ratio);
+var _height = Math.round(document.getElementById('id_placeholder').height * pixel_ratio);
+  $.get('/app/SignatureInline/capture_inline_jpg', {left: _left, top: _top, width: _width, height: _height});
+}
+
+function capture_inline_png(){
+var pixel_ratio = 1;
+<% if System::get_property('platform') == 'ANDROID'%>               
+pixel_ratio = window.devicePixelRatio;
+<% end %>                 
+var _left = Math.round(pageX(document.getElementById('id_placeholder')) * pixel_ratio);
+var _top = Math.round(pageY(document.getElementById('id_placeholder')) * pixel_ratio);
+var _width = Math.round(document.getElementById('id_placeholder').width * pixel_ratio);
+var _height = Math.round(document.getElementById('id_placeholder').height * pixel_ratio);
+  $.get('/app/SignatureInline/capture_inline_png', {left: _left, top: _top, width: _width, height: _height});
+}
+
+function capture_inline_bmp(){
+var pixel_ratio = 1;
+<% if System::get_property('platform') == 'ANDROID'%>               
+pixel_ratio = window.devicePixelRatio;
+<% end %>                 
+var _left = Math.round(pageX(document.getElementById('id_placeholder')) * pixel_ratio);
+var _top = Math.round(pageY(document.getElementById('id_placeholder')) * pixel_ratio);
+var _width = Math.round(document.getElementById('id_placeholder').width * pixel_ratio);
+var _height = Math.round(document.getElementById('id_placeholder').height * pixel_ratio);
+  $.get('/app/SignatureInline/capture_inline_bmp', {left: _left, top: _top, width: _width, height: _height});
+}
+
+function capture_inline_pencolor(){
+var pixel_ratio = 1;
+<% if System::get_property('platform') == 'ANDROID'%>               
+pixel_ratio = window.devicePixelRatio;
+<% end %>                 
+var _left = Math.round(pageX(document.getElementById('id_placeholder')) * pixel_ratio);
+var _top = Math.round(pageY(document.getElementById('id_placeholder')) * pixel_ratio);
+var _width = Math.round(document.getElementById('id_placeholder').width * pixel_ratio);
+var _height = Math.round(document.getElementById('id_placeholder').height * pixel_ratio);
+  $.get('/app/SignatureInline/capture_inline_pencolor', {left: _left, top: _top, width: _width, height: _height});
+}
+
+function capture_inline_penwidth(){
+var pixel_ratio = 1;
+
+<% if System::get_property('platform') == 'ANDROID'%>               
+pixel_ratio = window.devicePixelRatio;
+<% end %>                 
+
+var _left = Math.round(pageX(document.getElementById('id_placeholder')) * pixel_ratio);
+var _top = Math.round(pageY(document.getElementById('id_placeholder')) * pixel_ratio);
+var _width = Math.round(document.getElementById('id_placeholder').width * pixel_ratio);
+var _height = Math.round(document.getElementById('id_placeholder').height * pixel_ratio);
+  $.get('/app/SignatureInline/capture_inline_penwidth', {left: _left, top: _top, width: _width, height: _height});
+}
+
+function capture_inline_bgcolor(){
+var pixel_ratio = 1;
+<% if System::get_property('platform') == 'ANDROID'%>               
+pixel_ratio = window.devicePixelRatio;
+<% end %>                 
+var _left = Math.round(pageX(document.getElementById('id_placeholder')) * pixel_ratio);
+var _top = Math.round(pageY(document.getElementById('id_placeholder')) * pixel_ratio);
+var _width = Math.round(document.getElementById('id_placeholder').width * pixel_ratio);
+var _height = Math.round(document.getElementById('id_placeholder').height * pixel_ratio);
+  $.get('/app/SignatureInline/capture_inline_bgcolor', {left: _left, top: _top, width: _width, height: _height});
+}
+
+window.onresize = checkSize;
+
+
+function onBack() {
+  $.get('/app/SignatureInline/do_back', {});
+  return false;
+}
+
+function onClear() {
+  $.get('/app/SignatureInline/do_clear', {});
+  return false;
+}
+
+function onCapture() {
+  $.get('/app/SignatureInline/do_capture', {});
+  return false;
+}
+
+</script>

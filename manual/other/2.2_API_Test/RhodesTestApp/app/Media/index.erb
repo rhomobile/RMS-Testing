@@ -1,0 +1,30 @@
+<div data-role="page">
+
+	<div data-role="header" data-position="inline">
+    <h1>Medium</h1>
+    <a href="<%= Rho::RhoConfig.start_path %>" class="ui-btn-left" data-icon="home" data-direction="reverse" <%= "data-ajax='false'" if is_bb6 %>>
+      Home
+    </a>
+    <a href="<%= url_for :action => :new %>" class="ui-btn-right" data-icon="plus">
+      New
+    </a>
+	</div>
+
+  <div data-role="content">
+    <ul data-role="listview">
+      
+      VT229-0145 <a href='http://192.168.6.27/MediaFiles/Mausam.mp3'>Play online audio</a><br/>
+      VT229-0146 <a href='<%=File.join(Rho::RhoApplication.get_model_path('app', 'Media'), 'MediaFiles/Mausam.mp3')%>' >Play local audio</a><br/>
+      
+      VT229-0147 <a href='http://192.168.6.27/MediaFiles/Shakira.mp4'>Play online video</a><br/>
+      
+      VT229-0148 <a href='<%=File.join(Rho::RhoApplication.get_model_path('app', 'Media'), 'MediaFiles/Shakira.mp4')%>'>Play local video</a><br/>
+      
+      VT229-0149 <a href='ftpadmin:ftpadmin@ftp://192.168.6.18/Received/MediaFiles/Mausam.mp3'>Play ftp audio</a><br/>
+      
+      VT229-0150 <a href='ftpadmin:ftpadmin@ftp://192.168.6.18/Received/MediaFiles/Shakira.mp4'>Play ftp video</a><br/>
+      
+    </ul>
+  </div>
+
+</div>

@@ -1,0 +1,33 @@
+<div>
+	<p>Date/Time Picker</p>
+    <form action="DateTime/save">
+	  <b>Date and Time:</b><br/>
+      <input type="text" name="date0" readonly value="<%= $choosed['0'] %>"></input>
+      <%= link_to "Edit", { :action => "choose", :query => { :flag => '0', :title => 'Flag: 0 Choose Date & Time ' } } %><br/>
+      <b>Date Only:</b><br/>
+      <input type="text" name="date1" readonly value="<%= $choosed['1'] %>"></input>
+      <%= link_to "Edit", { :action => "choose", :query => { :flag => '1', :title => 'Flag: 1 Choose Date' } } %><br/>
+      <b>Time Only:</b><br/>
+      <input type="text" name="date2" readonly value="<%= $choosed['2'] %>"></input>
+      <%= link_to "Edit", { :action => "choose", :query => { :flag => '2', :title => 'Flag: 2 Choose Time' } } %><br/>
+      <input type="submit" value="Save"></input>
+      <br>
+
+      <b>Minimum Date limit:</b><br/>
+      <input type="text" name="datemin" readonly value="<%= $datemin_s %>"></input>
+      <%= link_to "Edit", { :action => "choose_min", :query => { :flag => '1', :title => 'Choose Minimum Date' } } %>
+      <%= link_to "Clear", { :action => "clear_min", :query => {} } %><br/>
+      <b>Maximum Date limit:</b><br/>
+      <input type="text" name="datemax" readonly value="<%= $datemax_s %>"></input>
+      <%= link_to "Edit", { :action => "choose_max", :query => { :flag => '1', :title => 'Choose Maximum Date' } } %><br/>
+      <%= link_to "Clear", { :action => "clear_max", :query => {} } %><br/>
+
+    </form>
+    <br/>
+    <% if not $saved.nil? %>
+      Chosen date/time values:<br/>
+      <% $choosed.each do |k,v| %>
+        <b>Format (<%=k%>): <%= v %></b><br/>
+      <% end %>
+	<% end %>
+</div>

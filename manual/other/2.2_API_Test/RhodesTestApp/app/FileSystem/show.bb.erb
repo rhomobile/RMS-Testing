@@ -1,0 +1,65 @@
+<div data-role="page" data-add-back-btn="true">
+
+  <div data-role="header" data-position="inline">
+    <%= link_to "Back", :action => :index %>
+    <h1><%= @filesystem.testcaseid %></h1>
+    <%= link_to "Edit", :action => :edit, :id => @filesystem.object %>
+  </div>
+
+  <div data-role="content">
+    <table>
+      
+      <tr>
+    	<td class="itemLabel">Testcaseid</td>
+        <td class="itemValue"><%= @filesystem.testcaseid%></td>
+      </tr>
+      
+      <tr>
+    	<td class="itemLabel">Description</td>
+        <td class="itemValue"><%= @filesystem.description%></td>
+      </tr>
+      
+      <tr>
+    	<td class="itemLabel">Res1</td>
+        <td class="itemValue"><%= @filesystem.res1%></td>
+      </tr>
+      
+      <tr>
+    	<td class="itemLabel">Res2</td>
+        <td class="itemValue"><%= @filesystem.res2%></td>
+      </tr>
+      
+      <tr>
+    	<td class="itemLabel">Res3</td>
+        <td class="itemValue"><%= @filesystem.res3%></td>
+      </tr>
+      
+      <tr>
+    	<td class="itemLabel">Res4</td>
+        <td class="itemValue"><%= @filesystem.res4%></td>
+      </tr>
+      
+      <tr>
+    	<td class="itemLabel">Res5</td>
+        <td class="itemValue"><%= @filesystem.res5%></td>
+      </tr>
+      
+      <tr>
+    	<td class="itemLabel">Res6</td>
+        <td class="itemValue"><%= @filesystem.res6%></td>
+      </tr>
+      
+      <tr>
+    	<td class="itemLabel">Res7</td>
+        <td class="itemValue"><%= @filesystem.res7%></td>
+      </tr>
+      
+      <tr>
+    	<td class="itemLabel">Res8</td>
+        <td class="itemValue"><%= @filesystem.res8%></td>
+      </tr>
+      
+    </table>
+  </div>
+
+</div>
