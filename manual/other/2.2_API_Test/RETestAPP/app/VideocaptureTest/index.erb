@@ -1,0 +1,212 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<script type="text/javascript" src="/public/jquery/jquery-1.6.4.min.js"></script>
+<script type="text/javascript">
+    
+function funminimize(){
+  $.get('/app/VideocaptureTest/FunMinimize', {});
+   return false;  
+}
+
+function doStart()
+{
+  $.get('/app/VideocaptureTest/DoStart', { });
+  return false;  
+}
+function doStop()
+{
+  $.get('/app/VideocaptureTest/DoStop', {});
+  return false;
+}
+function doCancel()
+{
+  $.get('/app/VideocaptureTest/DoCancel', {});
+  return false;
+}
+
+function setSigLocalName()
+{
+     var textLocalName=document.getElementById("textLocalName").value;
+     $.get('/app/VideocaptureTest/setSigLocalName', { textLocalName:  textLocalName});
+     return false; 
+}
+
+function setVideoDuration()
+{
+    var intervalTimer = document.getElementById('textDuration').value;
+    $.get('/app/VideocaptureTest/setDuration', { intervalTimer: intervalTimer});
+    return false;
+}
+
+
+function doVideoCapture()
+ {
+   document.getElementById("myResult").innerHTML="";
+   var txtDestination= document.getElementById("txtDestination").value;
+   var txtUserName= document.getElementById("txtUserName").value; 
+   var txtPassword= document.getElementById("txtPassword").value;
+   for (var i=0; i < document.getElementsByName("mygroup").length; i++)
+        {   
+              if (document.getElementsByName("mygroup")[i].checked)
+              {
+                var mygroup = document.getElementsByName("mygroup")[i].value;
+              }
+        }
+   $.get('/app/VideocaptureTest/ApplyVideoCaptureEvent', { txtDestination: txtDestination, txtUserName: txtUserName, txtPassword: txtPassword, mygroup: mygroup });
+    return false;
+ }
+ 
+
+function doDestination()
+{
+   var DestValue=document.getElementById("SelectDestination").value
+     if(DestValue=="HTTP")
+     {
+      document.getElementById("txtDestination").value="http://192.168.6.18/NEON/ReceivedFiles/Upload.aspx";
+      document.getElementById("txtUserName").value="uploadtest";
+      document.getElementById("txtPassword").value="letmein";
+      }
+      else if(DestValue=="QUALIFIEDHTTP")
+      {
+        document.getElementById("txtDestination").value="http://192.168.6.18:80/NEON/ReceivedFiles/Upload.aspx";
+        document.getElementById("txtUserName").value="";
+        document.getElementById("txtPassword").value="";
+      }
+      else if(DestValue=="FTP")
+      {
+        document.getElementById("txtDestination").value="ftp://192.168.6.18/Received/videoInFTP.wav";
+        document.getElementById("txtUserName").value="ftpadmin";
+        document.getElementById("txtPassword").value="ftpadmin";
+      }
+      else if(DestValue=="QUALIFIEDFTP")
+      {
+        document.getElementById("txtDestination").value="ftp://ftpadmin:ftpadmin@192.168.6.18/videoinQFTP.wav";
+        document.getElementById("txtUserName").value="";
+        document.getElementById("txtPassword").value="";
+      
+      }
+      else if(DestValue=="FILE1")
+      {
+        document.getElementById("txtDestination").value="file://\\Temp\\CapturedVideoTemp.wav";
+        document.getElementById("txtUserName").value="";
+        document.getElementById("txtPassword").value="";
+
+      }
+      else if(DestValue=="FILE2")
+      {
+        document.getElementById("txtDestination").value="file://\\Application\\Airbeam\\CapturedVideoAPPAir.wav";
+        document.getElementById("txtUserName").value="";
+        document.getElementById("txtPassword").value="";
+
+      }
+      else if(DestValue=="INVALIDFILE")
+      {
+        document.getElementById("txtDestination").value="file://\\And\\data\\videoAndroidData.wav";
+        document.getElementById("txtUserName").value="";
+        document.getElementById("txtPassword").value="";
+
+      }
+      else if(DestValue=="INVALIDHTTP")
+      {
+        document.getElementById("txtDestination").value="http://tand";
+         document.getElementById("txtUserName").value="uploadtest";
+         document.getElementById("txtPassword").value="letmein";
+      }
+      else if(DestValue=="EMPTYHTTP")
+      {
+        document.getElementById("txtDestination").value="http://";
+         document.getElementById("txtUserName").value="uploadtest";
+        document.getElementById("txtPassword").value="letmein";
+
+      }
+      else if(DestValue=="INVALIDFTP")
+      {
+        document.getElementById("txtDestination").value="ftp://tandv";
+        document.getElementById("txtUserName").value="tandv";
+        document.getElementById("txtPassword").value="H0neymoon";
+
+      }
+      else if(DestValue=="EMPTYFTP")
+      {
+        document.getElementById("txtDestination").value="ftp://";
+        document.getElementById("txtUserName").value="tandv";
+        document.getElementById("txtPassword").value="H0neymoon";
+
+      }
+}
+
+  function setFieldValue(returnval) 
+  {
+    document.getElementById("myResult").innerHTML=returnval;
+  }
+
+</script>
+<body>
+     <BR>
+     <b>Video Capture Test using Ruby Object</b>
+     <div id="myResult">Event info</div> 
+     <form id="frm" action="">
+     <BR><BR>
+     <div id="message">Message</div>
+     <BR><BR>
+     <P><INPUT TYPE="button" VALUE="start" name = "start" ONCLICK="doStart();">
+     <INPUT TYPE="button" VALUE="stop" name  = "stop" ONCLICK="doStop();"></P>
+     <p><input type=button id="cancel" name = "cancel" onclick="doCancel();" value="Cancel">
+     <BR><BR>
+         <label for = "Duration" >Duration:</label>
+         <input type = "text" id="textDuration" name = "textDuration" value = "10000"  class="itemValue" <%= placeholder("Duration:") %>/>
+         <input type="button" onclick="Javascript:setVideoDuration();" value="setDuration">
+         <label for = "Name" >Name:</label>
+         <input type = "text" id="textLocalName" name = "textLocalName" value = "myLocalVideo" class="itemValue" <%= placeholder("Name:") %> />
+         <input type="button" onclick="Javascript:setSigLocalName();" value="setVideoFileName" />
+     <hr>
+     <label for = "DestinationType">Select DestinationType:</label>
+     <select name="SelectDestination" id="SelectDestination" onchange="doDestination();">
+     <OPTION VALUE="">Select Destination type</OPTION>
+     <option value="HTTP">HTTP</option>
+     <option value="QUALIFIEDHTTP">QUALIFIED HTTP</option>
+     <option value="FTP">FTP</option>
+     <option value="QUALIFIEDFTP">QUALIFIED FTP</option>
+     <option value="FILE1">FILE1</option>
+     <option value="FILE2">FILE2</option>
+     <option value="RELATIVEHTTPDOWN">RelativePathDown</option>
+     <option value="RELATIVEHTTPUP">RelativePathUp</option>
+     <option value="RELATIVEHTTPCURRENT">RelativePathCurrent</option>
+     <option value="RELATIVEHTTPDOWN">RelativePathDown</option>
+     <option value="RELATIVEHTTPUP">RelativePathUp</option>
+     <option value="RELATIVEHTTPCURRENT">RelativePathCurrent</option>
+     <option value="INVALIDFILE">INVALIDFILE</option>
+     <option value="INVALIDHTTP">INVALIDHTTP</option>
+     <option value="EMPTYHTTP">EMPTYHTTP</option>
+     <option value="INVALIDFTP">INVALIDFTP</option>
+     <option value="EMPTYFTP">EMPTYFTP</option>
+     </select>
+     <br/>     
+<label for="txtDestination">Destination:</label>
+<Textarea id="txtDestination" name="txtDestination" cols="21" rows="1"></Textarea>
+<br/>
+<label for="txtUserName" class="fieldLabel">UserName:</label>
+<input type = "text" id="txtUserName" name ="txtUserName" value = "" class="itemValue" <%= placeholder("UserName:") %> />
+<br/>
+<label for="txtPassword" class="fieldLabel">Password:</label>
+<input type = "text" id="txtPassword" name = "txtPassword" value = "" class = "itemValue" <%= placeholder("Password:") %> />
+<br/>  
+
+  <label for="mygroup">SelectEvent:</label><br>
+  <input type="radio" name="mygroup" value="javascript" checked="checked"/> javascript  <br />  
+  <input type="radio" name="mygroup" value="HTML">HTML Page <br />
+  <input type="radio" name="mygroup" value="JSON"> JSON event <br />
+  <input type="radio" name="mygroup" value="URLEmpty"> EmptyEvent <br />
+  <input type="radio" name="mygroup" value="DETACH"> DETACH <br />
+
+
+ <INPUT type="button" value="AttachEvent" name="AttachEvent" onClick="doVideoCapture();">  
+<br>
+     <P><INPUT TYPE="button" VALUE="Quit" ONCLICK="Quit();"></P>
+  
+  <INPUT type="button" value="minimizeApp" name="minimizeApp" onClick="funminimize();"> 
+  <br/>
+     </form>
+     </body>
+</html>

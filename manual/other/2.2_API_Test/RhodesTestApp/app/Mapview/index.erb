@@ -1,0 +1,79 @@
+<div data-role="page">
+
+	<div data-role="header" data-position="inline">
+    <h1>Mapviews</h1>
+    <a href="<%= Rho::RhoConfig.start_path %>" class="ui-btn-left" data-icon="home" data-direction="reverse" <%= "data-ajax='false'" if is_bb6 %>>
+      Home
+    </a>
+    <a href="<%= url_for :action => :new %>" class="ui-btn-right" data-icon="plus">
+      New
+    </a>
+	</div>
+
+  <div data-role="content">
+    <ul data-role="listview">
+      <li><p><u><b>Google Map</b></u></p></li>
+      <li><p>map_type standard</p></li>
+      <li><a href="<%=url_for(:action => :create_map_case1)%>">create_map_case1</a></li>
+      <li><p>map_type satellite</p></li>
+      <li><a href="<%=url_for(:action => :create_map_case2)%>">create_map_case2</a></li>
+      <li><p>map_type hybrid</p></li>
+      <li><a href="<%=url_for(:action => :create_map_case3)%>">create_map_case3</a></li>
+      <li><p>zoom_enabled: false scroll_enabled: true</p></li>
+      <li><a href="<%=url_for(:action => :create_map_case4)%>">create_map_case4</a></li>
+      <li><p>zoom_enabled : true scroll_enabled : false</p></li>
+      <li><a href="<%=url_for(:action => :create_map_case5)%>">create_map_case5</a></li>
+      <li><p>shows_user_location : false,set the :annotation,<br/>set the region hash with center and radius</p></li>
+      <li><a href="<%=url_for(:action => :create_map_case6)%>">create_map_case6</a></li>
+      <li><p>set the annoation with customized images</p></li>
+      <li><a href="<%=url_for(:action => :create_map_case7)%>">create_map_case7</a></li>
+      <li><p><u><b>ESRI Map</b></u></p></li>
+      <li><p>map_type standard</p></li>
+      <li><a href="<%=url_for(:action => :create_map_case8)%>">create_map_case8</a></li>
+      <li><p>map_type satellite</p></li>
+      <li><a href="<%=url_for(:action => :create_map_case9)%>">create_map_case9</a></li>
+      <li><p>map_type hybrid</p></li>
+      <li><a href="<%=url_for(:action => :create_map_case10)%>">create_map_case10</a></li>
+      <li><p>zoom_enabled: false scroll_enabled: true</p></li>
+      <li><a href="<%=url_for(:action => :create_map_case11)%>">create_map_case11</a></li>
+      <li><p>zoom_enabled : true scroll_enabled : false</p></li>
+      <li><a href="<%=url_for(:action => :create_map_case12)%>">create_map_case12</a></li>
+      <li><p>shows_user_location : false,set the :annotation,<br/>set the region hash with center and radius</p></li>
+      <li><a href="<%=url_for(:action => :create_map_case13)%>">create_map_case13</a></li>
+      <li><p>set the annoation with customized images</p></li>
+      <li><a href="<%=url_for(:action => :create_map_case14)%>">create_map_case14</a></li>
+      <li><p><u><b>RhoGoogle Map</b></u></p></li>
+       <li><p>map_type standard</p></li>
+       <li><a href="<%=url_for(:action => :create_map_case16)%>">create_map_case16</a></li>
+       <li><p>map_type satellite</p></li>
+       <li><a href="<%=url_for(:action => :create_map_case17)%>">create_map_case17</a></li>
+       <li><p>map_type hybrid</p></li>
+       <li><a href="<%=url_for(:action => :create_map_case18)%>">create_map_case18</a></li>
+       <li><p>zoom_enabled: false scroll_enabled: true</p></li>
+       <li><a href="<%=url_for(:action => :create_map_case19)%>">create_map_case19</a></li>
+       <li><p>zoom_enabled : true scroll_enabled : false</p></li>
+       <li><a href="<%=url_for(:action => :create_map_case20)%>">create_map_case20</a></li>
+       <li><p>shows_user_location : false,set the :annotation,<br/>set the region hash with center and radius</p></li>
+       <li><a href="<%=url_for(:action => :create_map_case21)%>">create_map_case21</a></li>
+       <li><p>set the annoation with customized images</p></li>
+       <li><a href="<%=url_for(:action => :create_map_case22)%>">create_map_case22</a></li>
+       <li><p><u><b>OSM Map</b></u></p></li>
+       <li><p>map_type standard</p></li>
+       <li><a href="<%=url_for(:action => :create_map_case25)%>">create_map_case25</a></li>
+       <li><p>map_type satellite</p></li>
+       <li><a href="<%=url_for(:action => :create_map_case26)%>">create_map_case26</a></li>
+       <li><p>map_type hybrid</p></li>
+       <li><a href="<%=url_for(:action => :create_map_case27)%>">create_map_case27</a></li>
+       <li><p>zoom_enabled: false scroll_enabled: true</p></li>
+       <li><a href="<%=url_for(:action => :create_map_case28)%>">create_map_case28</a></li>
+       <li><p>zoom_enabled : true scroll_enabled : false</p></li>
+       <li><a href="<%=url_for(:action => :create_map_case29)%>">create_map_case29</a></li>
+       <li><p>shows_user_location : false,set the :annotation,<br/>set the region hash with center and radius</p></li>
+       <li><a href="<%=url_for(:action => :create_map_case30)%>">create_map_case30</a></li>
+       <li><p>set the annoation with customized images</p></li>
+       <li><a href="<%=url_for(:action => :create_map_case31)%>">create_map_case31</a></li>
+       
+          </ul>
+  </div>
+
+</div>

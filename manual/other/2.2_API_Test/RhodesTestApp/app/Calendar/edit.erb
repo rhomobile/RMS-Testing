@@ -1,0 +1,109 @@
+<%
+  if @event.nil?
+    title = "New Calendar Rho::RhoEvent"
+    button = "Create"
+  else
+    title = "Edit Calendar Rho::RhoEvent"
+    button = "Update"
+  end
+%>
+<div class="toolbar">
+  <h1 id="pageTitle">
+    <%= title %>
+  </h1>
+</div>
+<form title="<%= title %>"
+   class="panel"
+   id="event_new_form"
+   method="POST"
+   action="<%=url_for(:action => :save)%>">
+  <fieldset>
+    <input type="hidden" name="event[<%= Rho::RhoEvent::ID %>]" value="<%= @event[Rho::RhoEvent::ID] unless @event.nil? %>" />
+    <div class="row">
+      <label>Title: </label>
+      <input type="text" name="event[<%= Rho::RhoEvent::TITLE %>]" value="<%= @event[Rho::RhoEvent::TITLE] unless @event.nil? %>" />
+    </div>
+    <div class="row">
+      <label>Start Date/Time: </label>
+      <input id="start_date" type="text" name="event[<%= Rho::RhoEvent::START_DATE %>]" value="<%= @event[Rho::RhoEvent::START_DATE] unless @event.nil? %>" <%= "readonly" unless System::get_property('platform') == 'Blackberry' ||System::get_property('platform') == 'WINDOWS' %> onClick="popupDateTimeAJPicker('Choose Start Date', 'start_date');" />
+    </div>
+    <div class="row">
+      <label>End Date/Time: </label>
+      <input id="end_date" type="text" name="event[<%= Rho::RhoEvent::END_DATE %>]" value="<%= @event[Rho::RhoEvent::END_DATE] unless @event.nil? %>" <%= "readonly" unless System::get_property('platform') == 'Blackberry' ||System::get_property('platform') == 'WINDOWS' %> onClick="popupDateTimeAJPicker('Choose End Date', 'end_date');" />
+    </div>
+    <div class="row">
+      <label>Location: </label>
+      <input type="text" name="event[<%= Rho::RhoEvent::LOCATION %>]" value="<%= @event[Rho::RhoEvent::LOCATION] unless @event.nil? %>" />
+    </div>
+    <div class="row">
+      <label>Notes: </label>
+      <input type="text" name="event[<%= Rho::RhoEvent::NOTES %>]" value="<%= @event[Rho::RhoEvent::NOTES] unless @event.nil? %>" />
+    </div>
+    <!-- Read only section -->
+    <div class="row">
+      <label>Privacy: </label>
+      <input type="text" name="event[<%= Rho::RhoEvent::PRIVACY %>]" value="<%= @event[Rho::RhoEvent::PRIVACY] unless @event.nil? %>" />
+    </div>
+    <div class="row">
+      <label>Reminder: </label>
+      <input type="text" name="event[<%= Rho::RhoEvent::REMINDER %>]" value="<%= @event[Rho::RhoEvent::REMINDER] unless @event.nil? %>" />
+    </div>
+    <!-- Recurrency -->
+    <div class="row">
+      <input type="checkbox" name="recurrence" <%= "checked='checked'" unless @event.nil? or @event[Rho::RhoEvent::RECURRENCE].nil? %> />
+      <label> Recurrent</label>
+    </div>
+    <div class="row">
+      <label>Frequency: </label>
+      <%
+         is_off = "undefined"
+         is_daily = Rho::RhoEvent::RECURRENCE_FREQUENCY_DAILY
+         is_weekly = Rho::RhoEvent::RECURRENCE_FREQUENCY_WEEKLY
+         is_monthly = Rho::RhoEvent::RECURRENCE_FREQUENCY_MONTHLY
+         is_yearly = Rho::RhoEvent::RECURRENCE_FREQUENCY_YEARLY
+
+         freq = (@event.nil? or @event[Rho::RhoEvent::RECURRENCE].nil?) ? is_off : @event[Rho::RhoEvent::RECURRENCE][Rho::RhoEvent::RECURRENCE_FREQUENCY]
+      %>
+      <select name="frequency">
+        <option value="<%= is_daily %>"   <%= "selected='selected'" if is_daily   == freq %>><%= is_daily %></option>
+        <option value="<%= is_weekly %>"  <%= "selected='selected'" if is_weekly  == freq %>><%= is_weekly %></option>
+        <option value="<%= is_monthly %>" <%= "selected='selected'" if is_monthly == freq %>><%= is_monthly %></option>
+        <option value="<%= is_yearly %>"  <%= "selected='selected'" if is_yearly  == freq %>><%= is_yearly %></option>
+      </select>
+    </div>
+    <div class="row">
+      <label>Interval: </label>
+      <input type="number" name="interval"
+             value="<%= @event[Rho::RhoEvent::RECURRENCE][Rho::RhoEvent::RECURRENCE_INTERVAL] unless @event.nil? or @event[Rho::RhoEvent::RECURRENCE].nil? %>" />
+    </div>
+    <div class="row">
+      <label>Until Date:</label>
+      <input id="recurrence_end" type="text" name="recurrence_end" value="<%= @event[Rho::RhoEvent::RECURRENCE][Rho::RhoEvent::RECURRENCE_END] unless @event.nil? or @event[Rho::RhoEvent::RECURRENCE].nil? %>" <%= "readonly" unless System::get_property('platform') == 'Blackberry' ||System::get_property('platform') == 'WINDOWS' %> onClick="popupDateTimeAJPicker('Choose Recurrence End Date', 'recurrence_end');" />
+    </div>
+    <div class="row">
+      <label>Times:</label>
+      <input type="number" name="recurrence_times"
+             value="<%= @event[Rho::RhoEvent::RECURRENCE][Rho::RhoEvent::RECURRENCE_COUNT] unless @event.nil? or @event[Rho::RhoEvent::RECURRENCE].nil? %>" />
+    </div>
+  </fieldset>
+  <input type="submit" value="<%= button %>"/>
+  <input type="button" value="Cancel" onClick="history.back();" />
+  <% unless @event.nil? %>
+  <div align="center">
+    <a href="<%=url_for(:action => :delete, :id => @event[Rho::RhoEvent::ID])%>"><font color="#990000">Delete</font></a>
+  </div>
+  <% end %>
+</form>
+
+<script type="text/javascript">
+
+function setFieldValue(field, value) {
+  document.getElementById(field).value=value;
+}
+
+function popupDateTimeAJPicker(title, field_key) {
+  $.get('/app/Calendar/date_popup', { title: title, field_key: field_key });
+  return false;
+}
+
+</script>

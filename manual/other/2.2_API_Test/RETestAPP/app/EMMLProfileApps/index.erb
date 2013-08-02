@@ -1,0 +1,116 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<script type="text/javascript" src="/public/jquery/jquery-1.6.4.min.js"></script>
+<script type="text/javascript">
+
+function funminimize(){
+  $.get('/app/EMMLProfileApps/FunMinimize', {});
+   return false;  
+}
+
+function OnBattery(AC, main, backup) 
+{
+//bat.innerHTML = "AC: " + AC + "\<BR>main:" + main + "\<BR>backup: " + backup;
+document.getElementById("bat").innerHTML = "AC: " + AC + "main:" + main + "backup: " + backup;
+return;
+}
+
+function OnSignal(signal, ESSID, MAC, AdapterName, DHCPServer, DHCPStatic, Gateway, IPAddress, RSSI, SubnetMask, Wins) 
+{
+document.getElementById("sig").innerHTML = "Signal: " + signal
+ + "<BR>ESSID:" + ESSID
+ + "<BR>MAC: " + MAC
+ + "<BR>AdapterName: " + AdapterName
+ + "<BR>DHCPServer: " + DHCPServer
+ + "<BR>DHCPStatic: " + DHCPStatic
+ + "<BR>Gateway: " + Gateway
+ + "<BR>IPAddress: " + IPAddress
+ + "<BR>RSSI: " + RSSI
+ + "<BR>SubnetMask: " + SubnetMask
+ + "<BR>Wins: " + Wins
+ return;
+}
+
+
+function importEMMPProfile()
+{
+  document.getElementById("myResult").innerHTML="importEMMPProfile";
+  //var batteryEvent=document.getElementById("batteryEvent").value;
+  $.get('/app/EMMLProfileApps/importEMMPProfile', { });
+  return false;
+}
+
+function importEMMPProfileLocal()
+{
+    document.getElementById("myResult").innerHTML="importEMMPProfileLocal";
+    //var batteryEvent=document.getElementById("batteryEvent").value;
+    $.get('/app/EMMLProfileApps/importEMMPProfileLocal', { });
+    return false;
+}
+
+
+function importProfileinvalid()
+{
+  document.getElementById("myResult").innerHTML="importProfileinvalid";
+  $.get('/app/EMMLProfileApps/importProfileinvalid', { });
+  return false;
+}
+
+function clearProfile()
+{
+  document.getElementById("myResult").innerHTML="clearProfile";
+  $.get('/app/EMMLProfileApps/clearProfile', { });
+  return false;
+}
+
+function doApplyProfile(profile)
+{
+  document.getElementById("myResult").innerHTML="doApplyProfile:"+profile;
+  $.get('/app/EMMLProfileApps/doApplyProfile', {profile : profile });
+  return false;
+  
+}
+
+
+
+function setFieldValue(returnval) 
+{
+  document.getElementById("myResult").innerHTML=returnval;
+}
+
+</script>
+</head>
+
+<body>
+<h4>Named EMML Profile Script</h4>
+<br /><br />
+<div id="myResult">Event info</div><br /><br />
+<div id="bat">Battery readings should appear here</div><br /><br /><br />
+<div id="sig">Signal details should appear here</div><br /><br />
+<P></P>
+<a href="javascript:doApplyProfile('myIndicators.Battery');">Apply ShowBattery Profile</a>
+<br />
+<a href="javascript:doApplyProfile('myIndicators.Signal');">Apply  ShowSignal Profile</a>
+<br />
+<a href="javascript:doApplyProfile('myIndicators.BatteryHide');">Apply Hide Battery Profile</a>
+<br />
+<a href="javascript:doApplyProfile('myIndicators.SignalHide');">Apply Hide Signal Profile</a>
+
+<input type="button" value="Import profile" onclick="importEMMPProfile();" />
+<input type="button" value="Import profile locally" onclick="importEMMPProfileLocal();" />
+<input type="button" value="Import inavlid path profile" onclick="importProfileinvalid();" />
+<input type="button" value="Clear Profile" onclick="clearProfile();" />
+<h4>Browse to another page to check for EMML profile persistance.</h4>
+<h4><a href="Persistant_Indicators_Test.html">Click here to go to another page.</a></h4>
+<hr />
+<a href="EMMLProfilesIndex.html">Back to EMML Profile Index</a>
+<br />
+<br>
+<INPUT type="button" value="minimizeApp" name="minimizeApp" onClick="funminimize();"> 
+<br/>
+
+
+</body>
+</html>

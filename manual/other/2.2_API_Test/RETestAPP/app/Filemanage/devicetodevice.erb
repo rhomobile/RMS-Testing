@@ -1,0 +1,101 @@
+
+<div data-role="page">
+<script type="text/javascript">
+  function postForm(){
+  document.getElementById('result').innerHTML = "functon called";  
+  var sourceForm = document.getElementById('source').value;
+  var destinationForm = document.getElementById('destination').value;
+  var createFolderForm = document.getElementById('Select1').value;
+  var overwriteForm = document.getElementById('Select2').value;
+  $.get('/app/Filemanage/startTransfer', { source: sourceForm, destination:destinationForm, create:createFolderForm,overwrite:overwriteForm});
+  return false;
+}
+
+function funminimize(){
+  $.get('/app/Filemanage/FunMinimize', {});
+   return false;  
+}
+
+function displayResult(value){
+  resultDiv = document.getElementById('result');
+  resultDiv.innerHTML = value
+}
+</script>
+  <div data-role="header" data-position="inline">
+    <h2>Device To Device</h2>
+  <div data-role="content">
+  <span style="color:red;text-align:center;font-weight:bold"><p><%= @message %></p></span>
+  <ul>
+  <li>
+  <a href="javascript:void(0)" onclick="$.get('/app/Filemanage/setFileTransferEvent',{action: 'set'});">Set File Transfer Event</a><br/>
+  <a href="javascript:void(0)" onclick="$.get('/app/Filemanage/setFileTransferEvent',{action: 'det'});">Deattach File Transfer Event</a><br/>
+  </li>
+  </ul>
+   <div id="result">File transfer event</div><br /><br /><br />
+      <form id="d2d" data-ajax="false" >
+        <input type="hidden" name="servertype" value="<%= @type %>" />
+        <table id="transfer">
+        <tr>
+            <td>Device Source</td>
+          <td>
+          <textarea rows="4" cols="20" id = "source" name="source" >file://\Application\FileCollections\myfile1.txt</textarea>
+          <!--<input id = "source" type="text" value="file://\Application\FileCollections\myfile1.txt" name="source"/>-->
+          </td>
+        </tr>
+        
+        <tr>
+            <td>Device Destination</td>
+            <td>
+            <textarea rows="4" cols="20" id = "destination" name="destination" >file://\Application\NewFileCollections\mynewfile.txt</textarea>
+          <!--<input id="destination" type="text" name="destination" value="file://\Application\NewFileCollections\mynewfile.txt" />-->
+          </td>
+        </tr>
+        
+        <tr>
+        <td>User Name</td>
+        <td>
+        <input type="text" id="username" name="username" />
+        </td>
+        </tr>
+        <tr>
+        <td>Password</td>
+        <td>
+        <input type="password" id="password" name="password" />
+        </td>
+        </tr>
+        <tr>
+        <td>Select CreateFolder value</td>
+        <td>
+        <select id="Select1" name="create">
+        <option value="True">True</option>
+        <option value="">EMPTYSTRING</option>
+        <option value="False">False</option>
+        <option value="Test">Test</option>
+        <option value="NULL">NULL</option>
+        </select>
+        </td>
+        </tr>
+        <tr>
+        <td>Select Overwrite value</td>
+        <td><select id="Select2" name="overwrite">
+        <option value="True">True</option>
+        <option value="">EMPTYSTRING</option>
+        <option value="false">false</option>
+        <option value="Test">Test</option>
+        <option value="NULL">NULL</option>
+        </select>
+        </td>
+        </tr>
+        <tr>
+        <td colspan="2" align="center">
+        <input type="button" onclick="postForm()" value="Transfer" />
+        </td>
+        </tr>
+        </table>
+<br>
+<INPUT type="button" value="minimizeApp" name="minimizeApp" onClick="funminimize();"> 
+<br/>
+      </form>
+  </div>
+ 
+</div>

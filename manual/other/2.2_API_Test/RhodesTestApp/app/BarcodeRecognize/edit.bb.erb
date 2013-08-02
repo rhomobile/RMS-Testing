@@ -1,0 +1,44 @@
+<div data-role="page">
+
+  <div data-role="header" data-position="inline">
+    <%= link_to "Back", :action => :show, :id => @barcoderecognize.object %>
+    <h1>Edit <%= @barcoderecognize.testid%></h1>
+    <%= link_to "Delete", :action => :delete, :id => @barcoderecognize.object %>
+  </div>
+
+  <div data-role="content">
+    <form method="POST" action="<%= url_for :action => :update %>">
+      <input type="hidden" name="id" value="<%= @barcoderecognize.object %>"/>
+      <table>
+          
+          <tr>
+              <td class="itemLabel">Testid: </td>
+              <td class="itemValue"><input type="text" name="barcoderecognize[testid]" value="<%= @barcoderecognize.testid %>"/></td>
+          </tr>
+          
+          <tr>
+              <td class="itemLabel">Name: </td>
+              <td class="itemValue"><input type="text" name="barcoderecognize[name]" value="<%= @barcoderecognize.name %>"/></td>
+          </tr>
+          
+          <tr>
+              <td class="itemLabel">Expected: </td>
+              <td class="itemValue"><input type="text" name="barcoderecognize[expected]" value="<%= @barcoderecognize.expected %>"/></td>
+          </tr>
+          
+          <tr>
+              <td class="itemLabel">Output: </td>
+              <td class="itemValue"><input type="text" name="barcoderecognize[output]" value="<%= @barcoderecognize.output %>"/></td>
+          </tr>
+          
+          <tr>
+              <td class="itemLabel">Result: </td>
+              <td class="itemValue"><input type="text" name="barcoderecognize[result]" value="<%= @barcoderecognize.result %>"/></td>
+          </tr>
+          
+      </table>
+      <input type="submit" value="Update"/>
+    </form>
+  </div>
+
+</div>

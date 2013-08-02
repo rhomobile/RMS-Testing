@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<script type="text/javascript" src="/public/jquery/jquery-1.6.4.min.js"></script>
+<script type="text/javascript">
+
+function funminimize(){
+  $.get('/app/PushModule/FunMinimize', {});
+   return false;  
+}
+
+</script>
+</head>
+
+
+<div data-role="page" data-add-back-btn="true">
+
+  <div data-role="header" data-position="inline">
+    <h1>Network</h1>
+  </div>
+<br /><br /><br /><br />
+</hr>
+Push event info will be displayed here..
+<div data-role="content"><%= $pusheventInfo %></div>  
+</hr>
+
+
+<div data-role="content">
+    <form method="POST" action="<%= url_for :action => :applypushEvent %>">
+         <label for="pushEvent">PushEvent:</label>
+          <select name="pushEvent" id="pushEvent">
+              <OPTION SELECTED VALUE="">Select</OPTION>
+              <option value="JAVASCRIPT">JAVASCRIPT</option>
+              <option value="JSON">JSON</option>
+              <option value="HTML">HTML</option>
+              <option value="DETACHEVENT">DETACHEVENT</option>
+              <option value="EMPTYEVENT">EMPTYEVENT</option>
+          </select>
+    <input type="submit" value="ApplyPushEvent">
+    </form>    
+</div>
+
+
+<div data-role="content">
+<form method="POST" action="<%= url_for :action => :setPort %>">
+<label for="portText" class="fieldLabel">Port:</label>
+<input type="text" name="portText" id="portText" value="8080" class="itemValue" <%= placeholder("Port:") %> />       
+<input type="submit" value="set port">
+</form>    
+</div>
+
+<div data-role="content">
+<form method="POST" action="<%= url_for :action => :setPasskey %>">
+<label for="passkeyText" class="fieldLabel">Passkey:</label>
+<input type="text" name="passkeyText" id="passkeyText" value="12345" class="itemValue" <%= placeholder("Passkey:") %> />       
+<input type="submit" value="set Passkey">
+</form>    
+</div>
+
+
+<div data-role="content">
+<form method="POST" action="<%= url_for :action => :setPushPath %>">
+<label for="pathText" class="fieldLabel">Path:</label>
+<input type="text" name="pathText" id="pathText" value="/push" class="itemValue" <%= placeholder("Path:") %> />       
+<input type="submit" value="set Path">
+</form>    
+</div>
+
+<div data-role="content">
+<form method="POST" action="<%= url_for :action => :setResponse %>">
+<label for="responseText" class="fieldLabel">Response:</label>
+<input type="text" name="responseText" id="responseText" value="/Application/Response.html" class="itemValue" <%= placeholder("Response:") %> />       
+<input type="submit" value="set Response">
+</form>    
+</div>
+
+<div data-role="content">
+<form method="POST" action="<%= url_for :action => :startPushServer %>">
+<input type="submit" value="Start">
+</form>    
+</div>
+
+<div data-role="content">
+<form method="POST" action="<%= url_for :action => :stopPushServer %>">
+<input type="submit" value="Stop">
+  <br>
+  <INPUT type="button" value="minimizeApp" name="minimizeApp" onClick="funminimize();"> 
+  <br/>
+</form>    
+</div>
+
+
+</div>  
+</html>

@@ -1,0 +1,25 @@
+<div data-role="page">
+
+  <div data-role="header" data-position="inline">
+    <h1>New <%= @signalmodule.title %></h1>
+    <a href="<%= url_for :action => :index %>" class="ui-btn-left" data-icon="back" data-direction="reverse">
+      Cancel
+    </a>
+  </div>
+
+  <div data-role="content">
+    <form method="POST" action="<%= url_for :action => :create %>">
+      <input type="hidden" name="id" value="<%= @signalmodule.object %>"/>
+
+      
+          <div data-role="fieldcontain">
+            <label for="signalmodule[SignalModel]" class="fieldLabel">Signalmodel</label>
+            <input type="text" id="signalmodule[SignalModel]" name="signalmodule[SignalModel]" <%= placeholder("Signalmodel") %> />
+          </div>
+      
+
+      <input type="submit" value="Create"/>
+    </form>
+  </div>
+
+</div>

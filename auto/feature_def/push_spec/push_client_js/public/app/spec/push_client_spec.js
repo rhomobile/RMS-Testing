@@ -46,13 +46,8 @@ describe("Push Module", function() {
     });
 
     it("should get userNotifyMode on Android", function() {
-      if(Rho.System.platform === 'ANDROID') {
-        expect(Rho.Push.userNotifyMode).toEqual(notifyMode);
-        expect(Rho.Push.getProperty('userNotifyMode')).toEqual(notifyMode);
-      } else {
-        expect(Rho.Push.userNotifyMode).toEqual('');
-        expect(Rho.Push.getProperty('userNotifyMode')).toEqual('');
-      }
+      expect(Rho.Push.userNotifyMode).toEqual(notifyMode);
+      expect(Rho.Push.getProperty('userNotifyMode')).toEqual(notifyMode);
     });
 
     it("should set userNotifyMode on Android", function() {
@@ -88,17 +83,9 @@ describe("Push Module", function() {
       });
     });
 
-    // TODO: How to setDefault and getDefault instance
-    // without breaking tests that follow?
-    xit("should getDefault instance", function() {
+    it("should getDefault instance", function() {
       var defaultObject = Rho.Push.getDefault();
       expect(defaultObject.getProperty('type')).toMatch(typeMatcher);
-    });
-
-    xit("should setDefault instance", function() {
-      // var newDefault = 
-      // var properties = newDefault.getAllProperties();
-      // verifyProperties(properties);
     });
 
     it("should getProperties", function() {

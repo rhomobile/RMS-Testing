@@ -1,0 +1,32 @@
+<script>
+function myFunction(data)
+{
+var node=document.createElement("LI");
+var textnode=document.createTextNode(data);
+node.appendChild(textnode);
+document.getElementById("myList").appendChild(node);
+window.scrollTo(0,document.body.scrollHeight);
+}
+</script>
+<div data-role="page">
+
+	<div data-role="header" data-position="inline">
+    <h1>FileSystems</h1>
+    <a href="<%= Rho::RhoConfig.start_path %>" class="ui-btn-left" data-icon="home" data-direction="reverse" <%= "data-ajax='false'" if is_bb6 %>>
+      Home
+    </a>
+    <a href="<%= url_for :action => :new %>" class="ui-btn-right" data-icon="plus">
+      New
+    </a>
+	</div>
+
+  <div data-role="content">
+    <ul data-role="listview">
+     <li><a href="#" onclick="$.get('<%= url_for :action => :get_file_path %>')">Absolutepath Path Curdir</li>
+    </ul>
+    <br/><br/>
+      <ul data-role="listview" id="myList">
+      </ul>
+  </div>
+
+</div>

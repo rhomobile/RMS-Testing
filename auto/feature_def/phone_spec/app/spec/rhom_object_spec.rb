@@ -983,6 +983,13 @@ end
        :select => ['name','industry'])
   
     @accts.length.should == 0
+
+    @accts2 = getAccount.find( :all, 
+       :conditions => [cond2, cond1], 
+       :op => 'AND', 
+       :select => ['name','industry'])
+  
+    @accts2.length.should == 0
   end
   
   it "should find first with conditions" do

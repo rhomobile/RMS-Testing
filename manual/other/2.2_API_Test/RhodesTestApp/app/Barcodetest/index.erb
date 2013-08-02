@@ -1,0 +1,104 @@
+<script type="text/javascript">
+function barcodelog(data)
+{
+var node=document.createElement("LI");
+var textnode=document.createTextNode("Result = " + data);
+node.appendChild(textnode);
+document.getElementById("myList").appendChild(node);
+window.scrollTo(0,document.body.scrollHeight);
+}
+function enableScanner(data) {
+  $.get('/app/Barcodetest/enableScanner', {type:data});
+  return false;
+}
+function disableScanner(){
+  $.get('/app/Barcodetest/disableScanner');
+  return false;  
+}
+function start(){
+  $.get('/app/Barcodetest/startScanner');
+  return false;
+}
+
+function stop(){
+  $.get('/app/Barcodetest/stopScanner');
+  return false;
+}
+
+</script>
+<div data-role="page">
+
+	<div data-role="header" data-position="inline">
+    <h1>Barcodetests</h1>
+    <a href="<%= Rho::RhoConfig.start_path %>" class="ui-btn-left" data-icon="home" data-direction="reverse" <%= "data-ajax='false'" if is_bb6 %>>
+      Home
+    </a>
+    <a href="<%= url_for :action => :new %>" class="ui-btn-right" data-icon="plus">
+      New
+    </a>
+	</div>
+
+  <div data-role="content">
+      <div>
+        <%= link_to '[Choose Picture]', { :action => :edit }%>
+        <% if System::get_property('has_camera') %>
+            <%= link_to '[Take Picture]', { :action => :new }%>
+        <% if System::get_property('platform') == 'ANDROID' or System::get_property('platform') == 'APPLE' or (System::get_property('platform') == 'WINDOWS' and System.get_property('is_motorola_device')) %>
+              <%= link_to '[Take 0Barcode]', { :action => :take }%>
+        <% end %>      
+          <% end %> 
+              
+          <br/>
+      
+          <% if System::get_property('platform') != 'WINDOWS'  %>
+            <img src="<%=File.join(Rho::RhoApplication::get_model_path('app','Barcodetest'), 'Barcode_UPC_01.png')%>" width='300px'></img><br/><a href="<%=url_for(:action => :scan1)%>">Scan</a><br/>
+            <img src="<%=File.join(Rho::RhoApplication::get_model_path('app','Barcodetest'), 'Barcode_UPC_02.jpg')%>" width='300px'></img><br/><a href="<%=url_for(:action => :scan2)%>">Scan</a><br/>
+      
+            <% if System::get_property('platform') == 'Blackberry' or System::get_property('platform') == 'ANDROID'  or System::get_property('platform') == 'APPLE' %>
+              <img src="<%=File.join(Rho::RhoApplication::get_model_path('app','Barcodetest'), 'Barcode_QR_01.png')%>" width='300px'></img><br/><a href="<%=url_for(:action => :scan3)%>">Scan</a><br/>
+            <% end %>      
+      
+          <% end %> 
+
+      <ul data-role="listview">
+        <li><p>Barcode recognition from the device front camera </p></li>
+        <li><a href="<%=url_for(:action => :take_front_cam)%>">VT229-0329</a></li>
+        <li><p>take_barcode with SCN1</p></li>
+        <li><a href="<%=url_for(:action => :take_device_scn1)%>">VT229-0330</a></li>
+        <li><p>take_barcode with SCN2</p></li>
+        <li><a href="<%=url_for(:action => :take_device_scn2)%>">VT229-0331</a></li>
+        <li><p>Enumerate Scanner</p></li>
+        <li><a href="<%=url_for(:action => :enumerate)%>">VT229-0332</a></li>
+        <li><p>Enable SCN1 scanner</p></li>
+        <li><a href="<%=url_for(:action => :enable_scanner_SCN1)%>">VT229-0333</a></li>
+        <li><p>Enable SCN2 scanner</p></li>
+        <li><a href="<%=url_for(:action => :enable_scanner_SCN2)%>">VT229-0334</a></li>
+        <li><p>Enable first available scanner</p></li>
+        <li><a href="<%=url_for(:action => :enable_scanner_default)%>">VT229-0335</a></li>
+        <li><p>Enable default scanner</p></li>
+        <li><a href="<%=url_for(:action => :enable_scanner_default_2)%>">VT229-0336</a></li>
+        <!--<li><p>Disable Scanner</p></li>
+        <li><a href="<%=url_for(:action => :enable_disable_scanner)%>">VT229-0337</a></li>
+        <li><p>Enable/Start and stop SCN1 scanner</p></li>
+        <li><a href="<%=url_for(:action => :enable_start_stop_1)%>">VT229-0338</a></li>
+        <li><p>Enable/Start and stop SCN2 scanner</p></li>
+        <li><a href="<%=url_for(:action => :enable_start_stop_2)%>">VT229-0339</a></li>
+        <li><p>Disable/Start SCN1 scanner</p></li>
+        <li><a href="<%=url_for(:action => :disable_start_scn1)%>">VT229-0340</a></li>
+        <li><p>Disable/Start SCN2 scanner</p></li>
+        <li><a href="<%=url_for(:action => :disable_start_scn2)%>">VT229-0341</a></li>-->
+        <li><button onclick="enableScanner('SCN1')">Enable SCN1</button></li>
+        <li><button onclick="enableScanner('SCN2')">Enable SCN2</button></li>
+        <li><button onclick="enableScanner('SCN3')">Enable SCN3</button></li>
+        <li><button onclick="enableScanner('SCN4')">Enable SCN4</button></li>
+        <li><button onclick="enableScanner('SCN5')">Enable SCN5</button></li>
+        <li><button onclick="start()">Start</button>&nbsp;<button onclick="stop()">Stop</button></li>
+        <li><button onclick="disableScanner()">Disable</button></li>
+        <li>Other Testcases can be done by using Link VT229-0333 or take_barcode </li>
+      </ul>
+  <ul data-role="listview" id="myList">
+  </ul>
+  </div>
+  </div>
+
+</div>

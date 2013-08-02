@@ -1,0 +1,107 @@
+<div data-role="page">
+
+	<div data-role="header" data-position="inline">
+    <h1>SystemClasses</h1>
+    <a href="<%= Rho::RhoConfig.start_path %>" class="ui-btn-left" data-icon="home" data-direction="reverse" <%= "data-ajax='false'" if is_bb6 %>>
+      Home
+    </a>
+    <a href="<%= url_for :action => :new %>" class="ui-btn-right" data-icon="plus">
+      New
+    </a>
+	</div>
+
+  <div data-role="content">
+    <ul data-role="listview">
+      VT229-0069 platform : <%=System.get_property('platform') %> <br/>
+      VT229-0070 has_camera : <%=System.get_property('has_camera') %> <br/>
+      VT229-0071 screen_width : <%=System.get_property('screen_width') %> <br/>
+      VT229-0072 screen_height : <%=System.get_property('screen_height') %> <br/>
+      VT229-0073 real_screen_width : <%=System.get_property('real_screen_width') %> <br/>
+      VT229-0074 real_screen_height : <%=System.get_property('real_screen_height') %> <br/>
+      VT229-0075 screen_orientation : <%=System.get_property('screen_orientation') %> <br/>
+      VT229-0076 ppi_x : <%=System.get_property('ppi_x') %> <br/>
+      VT229-0077 ppi_y : <%=System.get_property('ppi_y') %> <br/>
+      VT229-0078 has_network : <%=System.get_property('has_network') %> <br/>
+      VT229-0079 has_cell_network : <%=System.get_property('has_cell_network') %> <br/>
+      VT229-0080 has_wifi_network : <%=System.get_property('has_wifi_network') %> <br/>
+      VT229-0081 phone_number : <%=System.get_property('phone_number') %> <br/>
+      <% if System::get_property('platform') == 'ANDROID' %>
+      VT229-0082 device owner email : <%=System.get_property('device_owner_email') %> <br/>
+      VT229-0083 device owner name : <%=System.get_property('device_owner_name') %> <br/>
+      <% end %>
+      VT229-0084 device_id : <%=System.get_property('device_id') %> <br/>
+      VT229-0085 phone_id : <%=System.get_property('phone_id') %> <br/>
+      VT229-0086 full_browser : <%=System.get_property('full_browser') %> <br/>
+      VT229-0087 device_name : <%=System.get_property('device_name') %> <br/>
+      VT229-0088 os_version : <%=System.get_property('os_version') %> <br/>
+      VT229-0089 locale : <%=System.get_property('locale') %> <br/>
+      VT229-0090 country: <%=System.get_property('country') %> <br/>
+      VT229-0091 is_emulator : <%=System.get_property('is_emulator') %> <br/>
+      VT229-0092 has_calendar : <%=System.get_property('has_calendar') %> <br/>
+      VT229-0093 webview_framework : <%=System.get_property('webview_framework') %> <br/>
+      VT229-0094 Platform NULL : <%=System.get_property('') %> <br/>
+      VT229-0098 <%= link_to 'Exit application', url_for(:action => :app_exit) %> <br/>
+      <% if $sleeping %>    
+      VT229-0100 <%= link_to 'Disable sleep', url_for(:action => :disable_sleep) %> <br/>
+      <%else%>
+      VT229-0099 <%= link_to 'Enable sleep', url_for(:action => :disable_sleep) %> <br/>    
+      <%end%>
+      VT229-0101 <a href="<%= url_for :action => :open_external_url %>">Open default browser by System.open_url</a><br/>
+      VT229-0102 <a href="<%= url_for :action => :open_rhodes_pdf_http_url %>">open rhodes pdf http url</a><br/> 
+      VT229-0103 <a href="<%= url_for :action => :open_rhodes_pdf_ftp_url %>">open rhodes pdf ftp url</a><br/> 
+      
+      <% if System::get_property('platform') == 'WINDOWS' %>
+      VT229-0105 <%= link_to 'Install simple app FTP URL', url_for(:action => :install_cab_ftp) %> <br/>
+      VT229-0106 <%= link_to 'Install simple app HTTP URL', url_for(:action => :install_cab_http) %> <br/>
+      VT229-0107 <%= link_to 'Install simple app Local File', url_for(:action => :install_cab_local) %> <br/>\
+      VT229-0104 <%= link_to 'Start Music app', url_for(:action => :start_cab_music_app) %> <br/>
+      <%= link_to 'Is Music app installed?', url_for(:action => :is_music_app_installed) %> <br/>
+      <%= link_to 'Uninstall Music application', url_for(:action => :uninstall_music_app) %> <br/> 
+      <% end %>
+      
+      <% if System::get_property('platform') == 'ANDROID' %>
+      VT229-0108 <%= link_to 'Install simple app FTP URL', url_for(:action => :install_apk_ftp) %> <br/>
+      VT229-0109 <%= link_to 'Install simple app HTTP URL', url_for(:action => :install_apk_http) %> <br/>
+      VT229-0110 <%= link_to 'Install simple app Local File', url_for(:action => :install_apk_local) %> <br/>\
+      VT229-0104 <%= link_to 'Start Installed App', url_for(:action => :start_music_app) %> <br/>
+      <%= link_to 'Is app installed?', url_for(:action => :is_music_app_installed) %> <br/>
+      <%= link_to 'Uninstall Installed application', url_for(:action => :uninstall_music_app) %> <br/>
+      <% if !defined?( RHODES_EMULATOR )  %>
+      hosts:
+      <ul>
+      <% open('/etc/hosts') do |file| 
+        file.each_line() do |line| %>
+          <li><%=line%></li>
+        <% end
+      end %>
+      <% end %>      
+      </ul>
+      <% end %>               
+      <% if System::get_property('platform') == 'APPLE' %>
+      VT229-0111 <%= link_to 'Is Skype app installed?', url_for(:action => :is_skype_app_installed) %> <br/>
+      <%= link_to 'Start Skype app', url_for(:action => :start_skype_app) %> <br/>
+      VT229-0112 <%= link_to 'Skype app uninstall', url_for(:action => :skype_app_uninstall) %> <br/>
+      <% end %> 
+      
+
+      VT229-0113 <%= link_to 'Unzip file', url_for(:action => :unzip_file) %> <br/>
+      <% if System::get_property('platform') == 'APPLE' %>
+      VT229-0116 <%= link_to 'set application icon badge to [5]', url_for(:action => :set_badge_5) %> <br/>
+      VT229-0117 <%= link_to 'remove application icon badge', url_for(:action => :set_badge_0) %> <br/>
+      <% end %>  
+      VT229-0118 <%= link_to 'Change Locale to Spanish', { :action => :change_locale_to_spanish }%><br/>
+      VT229-0119 <%= link_to 'Change Locale to English', { :action => :change_locale_to_english }%><br/>
+      VT229-0114 get_start_params : <%=System.get_start_params() %> <br/>
+      VT229-0113-1 <%= link_to 'zip file', url_for(:action => :zip_file) %> <br/>   
+      VT229-0113-2 <%= link_to 'zip file password', url_for(:action => :zip_file_password) %> <br/>
+      VT229-0113-3 <%= link_to 'zip files', url_for(:action => :zip_files) %> <br/>   
+      VT229-0113-4 <%= link_to 'zip files password', url_for(:action => :zip_files_password) %> <br/>
+      
+      
+      VT229-0113-5 <%= link_to 'Set Proxy', url_for(:action => :set_proxy) %> <br/>
+      VT229-0113-6 <%= link_to 'Unset Proxy', url_for(:action => :unset_proxy) %> <br/>
+       
+    </ul>
+  </div>
+
+</div>

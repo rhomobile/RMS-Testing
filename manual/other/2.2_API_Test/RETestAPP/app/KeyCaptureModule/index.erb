@@ -1,0 +1,153 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<script type="text/javascript" src="/public/jquery/jquery-1.6.4.min.js"></script>
+<script type="text/javascript">
+
+function funminimize(){
+  $.get('/app/KeyCaptureModule/FunMinimize', {});
+   return false;  
+}
+
+function registerkeyevent() 
+{
+  document.getElementById("myResult").innerHTML="";
+  var txtkeyvalue=document.getElementById("txtkeyvalue").value;
+  var selectdispatch=document.getElementById("selectdispatch").value; 
+  $.get('/app/KeyCaptureModule/registerkeyevent', { txtkeyvalue:  txtkeyvalue, selectdispatch: selectdispatch});
+  return false;
+}
+
+function unregisterkeyevent()
+{
+  var txtkeyvalue=document.getElementById("txtkeyvalue").value;
+  var selectdispatch=document.getElementById("selectdispatch").value; 
+  $.get('/app/KeyCaptureModule/unregisterkeyevent', { txtkeyvalue:  txtkeyvalue, selectdispatch: selectdispatch});
+  return false;  
+}
+
+function setemptykeyevent()
+{
+  $.get('/app/KeyCaptureModule/setemptykeyevent', { });
+  return false;  
+}
+
+function setemptykeycapturetag()
+{
+  $.get('/app/KeyCaptureModule/setemptykeycapturetag', { });
+  return false;  
+}
+
+function setkeyremap()
+{
+  var txtremapavalue=document.getElementById("txtremapavalue").value;
+  var txtkeyvalueforrempap=document.getElementById("txtkeyvalueforrempap").value; 
+  $.get('/app/KeyCaptureModule/setkeyremap', { txtremapavalue:  txtremapavalue, txtkeyvalueforrempap: txtkeyvalueforrempap});
+  return false;
+  
+}
+
+function sethomekey()
+{
+  var txthomekeyvalue=document.getElementById("txthomekeyvalue").value;
+  $.get('/app/KeyCaptureModule/sethomekey', { txthomekeyvalue:  txthomekeyvalue });
+  return false;
+  
+}
+
+function setacceleratekey()
+{
+  var txtacckeyvalue=document.getElementById("txtacckeyvalue").value;
+  $.get('/app/KeyCaptureModule/setacceleratekey', { txtacckeyvalue:  txtacckeyvalue });
+  return false;
+  
+}
+
+function registertriggerevent()
+{
+  var selecttriggerevent=document.getElementById("selecttriggerevent").value;
+  $.get('/app/KeyCaptureModule/registertriggerevent', { selecttriggerevent:  selecttriggerevent });
+  return false;
+  
+}
+
+
+
+
+function setFieldValue(returnval) 
+{
+  document.getElementById("myResult").innerHTML=returnval;
+}
+
+</script>
+</head>
+
+<body>
+<p>KeyCaptureTest</p>
+<br /><br /><br /><br /><br /><br />
+<div id="myResult">Key Event info</div> 
+<form name="myfrm" action="">
+  <table border=1 width=100%>
+     
+       <tr>
+          <Textarea id="txtInput" cols="15" rows="2"></Textarea>
+       </tr>
+       <tr>
+          <Textarea id="TexInput2" cols="15" rows="2"></Textarea>
+      </tr>
+      
+       
+  </table>
+  
+ 
+         <label for="txtkeyvalue" class="itemLabel">KeyValue</label>
+         <input type="text" id="txtkeyvalue" name="txtkeyvalue" value="all" class="itemValue"  />
+<br/>
+           <label for="selectdispatch">Select Dispatch Value</label>
+           <select name="selectdispatch" id="selectdispatch">
+           <option value="True">True</option>
+           <option value="False">False</option>
+           <option value="Test">Test</option>
+           <option value="">EmptyString</option>
+           </select>
+           <br/>
+           <INPUT type="button" value="Register" name="Register" onClick="registerkeyevent();">
+
+           <INPUT type="button" value="Unregister" name="Unregister" onClick="unregisterkeyevent();">
+           <INPUT type="button" value="EmptyKeyevent" name="EmptyKeyevent" onClick="setemptykeyevent();">
+         
+           <INPUT type="button" value="Empty KeyCapture" name="Empty KeyCapture" onClick="setemptykeycapturetag();">
+           <br/>
+            <label for="txtkeyvalueforrempap" class="itemLabel">KeyValue</label>
+            <input type="text" id="txtkeyvalueforrempap" name="txtkeyvalueforrempap"  value = "0x31" class="itemValue"  />
+              <br/>
+ <label for="txtremapavalue" class="itemLabel">Remap Value</label>
+ <input type="text" id="txtremapavalue" name="txtremapavalue"  value = "0x32"  class="itemValue"  />
+<br />
+<INPUT type="button" value="Remap" name="Remap" onClick="setkeyremap();">
+<br />
+<label for="txthomekeyvalue" class="itemLabel">KeyValue</label>
+<input type="text" id="txthomekeyvalue" name="txthomekeyvalue" value = "0x0D" class="itemValue"  />
+<INPUT type="button" value="SetHomeKey" name="SetHomeKey" onClick="sethomekey();">
+<br />
+ <label for="txtacckeyvalue" class="itemLabel">KeyValue</label>
+ <input type="text" id="txtacckeyvalue" name="txtacckeyvalue"  value = "none"  class="itemValue"  />
+ <INPUT type="button" value="SetAccelerateKey" name="SetAccelerateKey" onClick="setacceleratekey();">
+<br /> 
+
+<label for="selecttriggerevent">Select event type</label>
+<select name="selecttriggerevent" id="selecttriggerevent">
+                      <option value="JavaScript">JavaScript</option>
+                      <option value="DETACHTRIGGEREVENT">DETACHTRIGGEREVENT</option>
+                      <option value="EMPTYTRIGGEREVENT">EMPTYTRIGGEREVENT</option>
+</select>
+<br /> 
+<INPUT type="button" value="RegisterTriggerEvent" name="RegisterTriggerEvent" onClick="registertriggerevent();">
+   <br /> <br /> <br /> <br /> 
+<br>
+<INPUT type="button" value="minimizeApp" name="minimizeApp" onClick="funminimize();"> 
+<br/>
+</form>
+</body>
+</html>

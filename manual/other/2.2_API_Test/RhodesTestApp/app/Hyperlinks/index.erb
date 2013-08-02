@@ -1,0 +1,26 @@
+<div data-role="page">
+
+	<div data-role="header" data-position="inline">
+    <h1>Hyperlinkses</h1>
+    <a href="<%= Rho::RhoConfig.start_path %>" class="ui-btn-left" data-icon="home" data-direction="reverse" <%= "data-ajax='false'" if is_bb6 %>>
+      Home
+    </a>
+    <a href="<%= url_for :action => :new %>" class="ui-btn-right" data-icon="plus">
+      New
+    </a>
+	</div>
+
+  <div data-role="content">
+    <ul data-role="listview">
+      VT229-0125 : <a href="mailto:test@host.com?subject=testing123">Email to full address</a><br/>
+      VT229-0126 : <a href="mailto:?subject=testing123">Email to empty address</a><br/>
+      VT229-0129 : <a href="rhomailto:test@host.com?cc=geny@mail.ru&bcc=vasy@gmail.com&body=testMessage&subject=sub1">Email to full address using rhomailto</a><br/>
+      VT229-0132 : <a href="tel:1-555-531-3255!8335033#!#!9582#">Make Call using Tel</a><br/>
+      VT229-0133 : <a href="wtai://wp/mc;5195551212" title="Call">Make call using wtai </a><br/>
+      VT229-0134 : <a href="sms:+3581234567">Send SMS</a><br/>
+      VT229-0135 : <a href="http://www.google.com/">Open Google in external browser</a><br/>
+      VT229-0136 : <%=link_to "mailto by controller:test@host.com", :action => :send_mail%><br/>
+    </ul>
+  </div>
+
+</div>

@@ -1,0 +1,70 @@
+<div data-role="page">
+
+  <div data-role="header" data-position="inline">
+    <h1>New <%= @systemclass.title %></h1>
+    <a href="<%= url_for :action => :index %>" class="ui-btn-left" data-icon="back" data-direction="reverse">
+      Cancel
+    </a>
+  </div>
+
+  <div data-role="content">
+    <form method="POST" action="<%= url_for :action => :create %>">
+      <input type="hidden" name="id" value="<%= @systemclass.object %>"/>
+
+      
+          <div data-role="fieldcontain">
+            <label for="systemclass[testcaseid]" class="fieldLabel">Testcaseid</label>
+            <input type="text" id="systemclass[testcaseid]" name="systemclass[testcaseid]" <%= placeholder("Testcaseid") %> />
+          </div>
+      
+          <div data-role="fieldcontain">
+            <label for="systemclass[description]" class="fieldLabel">Description</label>
+            <input type="text" id="systemclass[description]" name="systemclass[description]" <%= placeholder("Description") %> />
+          </div>
+      
+          <div data-role="fieldcontain">
+            <label for="systemclass[res1]" class="fieldLabel">Res1</label>
+            <input type="text" id="systemclass[res1]" name="systemclass[res1]" <%= placeholder("Res1") %> />
+          </div>
+      
+          <div data-role="fieldcontain">
+            <label for="systemclass[res2]" class="fieldLabel">Res2</label>
+            <input type="text" id="systemclass[res2]" name="systemclass[res2]" <%= placeholder("Res2") %> />
+          </div>
+      
+          <div data-role="fieldcontain">
+            <label for="systemclass[res3]" class="fieldLabel">Res3</label>
+            <input type="text" id="systemclass[res3]" name="systemclass[res3]" <%= placeholder("Res3") %> />
+          </div>
+      
+          <div data-role="fieldcontain">
+            <label for="systemclass[res4]" class="fieldLabel">Res4</label>
+            <input type="text" id="systemclass[res4]" name="systemclass[res4]" <%= placeholder("Res4") %> />
+          </div>
+      
+          <div data-role="fieldcontain">
+            <label for="systemclass[res5]" class="fieldLabel">Res5</label>
+            <input type="text" id="systemclass[res5]" name="systemclass[res5]" <%= placeholder("Res5") %> />
+          </div>
+      
+          <div data-role="fieldcontain">
+            <label for="systemclass[res6]" class="fieldLabel">Res6</label>
+            <input type="text" id="systemclass[res6]" name="systemclass[res6]" <%= placeholder("Res6") %> />
+          </div>
+      
+          <div data-role="fieldcontain">
+            <label for="systemclass[res7]" class="fieldLabel">Res7</label>
+            <input type="text" id="systemclass[res7]" name="systemclass[res7]" <%= placeholder("Res7") %> />
+          </div>
+      
+          <div data-role="fieldcontain">
+            <label for="systemclass[res8]" class="fieldLabel">Res8</label>
+            <input type="text" id="systemclass[res8]" name="systemclass[res8]" <%= placeholder("Res8") %> />
+          </div>
+      
+
+      <input type="submit" value="Create"/>
+    </form>
+  </div>
+
+</div>

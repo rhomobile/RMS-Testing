@@ -1,0 +1,83 @@
+<div class="toolbar">
+  <h1 id="pageTitle">Native Tabbar test</h1>
+</div>
+
+<ul id="tabbar" selected="true" title="Native bar test">
+  <li><%= link_to "No bar", :action => :set_no_bar %></li>
+  <li><%= link_to "Tab bar", :action => :set_tabbar %></li>
+  <form>
+  <INPUT type="button" value="Switch to TabBar without reload" name="button1" onClick="switchToTab();"><br>
+  <INPUT type="button" value="Force to reload this Tab" name="button2" onClick="reloadTab();">
+  </form>
+</ul>
+<br>
+<ul id="tabswitch" selected="true" title="iPad SplitView test">
+  <li><%= link_to "Tab bar using iPad Split View", :action => :set_iPad_tabbar %></li>
+  <li>(works only on iPad)</li>
+</ul>
+<br>
+<% if System::get_property('platform') == 'ANDROID' %>  
+<%= link_to "TabBar placed bottom (only on Android)", :action => :set_tabbar_bottom %>
+<% end %>      
+<%= link_to "TabBar with disabled tab", :action => :set_tabbar_new2 %>
+<br>
+<%= link_to "TabBar customized", :action => :set_tabbar_new %>
+<br>
+<%= link_to "TabBar test with more than 5 tabs", :action => :set_tabbar_many_items %>
+<br>
+<%= link_to "TabBar with tab change callback", :action => :tabbar_with_callback %>
+<br>
+<% if $tabbar_active %>
+<ul id="tabswitch" selected="true" title="Program Switch Tab test">
+  <li><%= link_to "Switch to Tab 1", :action => :switch_to_tab_1 %></li>
+  <li><%= link_to "Switch to Tab 2 (using 'callback:' uri)", :action => :switch_to_tab_2 %></li>
+  <br>
+  <form>
+  <INPUT type="button" value="Show current Tab index" name="button3" onClick="ShowCurrentTab();">
+  </form>
+</ul>
+<% end %>
+
+<ul data-role="listview">
+<li><p>Remove the current tabbar and replaces it with this one</p></li>
+<li><%= link_to "createTab", :action => :createTab %></li>
+<li><p>Remove the current tabbar and replaces it with new tab</p></li>
+<li><%= link_to "createTabReload", :action => :createTabReload %></li>
+<li><p>createt tab with different actions</p></li>
+<li><%= link_to "createTabWithAction", :action => :createTabWithAction %></li>
+<li><%= link_to "createTabWithAction2", :action => :createTabWithAction2 %></li>
+<li><p>use_current_view_for_tab for 1st Tab</p></li>
+<li><%= link_to "createTabWithAction3", :action => :createTabWithAction3 %></li>
+<li><p>use_current_view_for_tab for 2nd Tab</p></li>
+<li><%= link_to "createTabWithAction4", :action => :createTabWithAction4 %></li>
+<li><p>Change the selected color of the tab </p></li>
+<li><%= link_to "createTabWithAction5", :action => :createTabWithAction5 %></li>
+<li><%= link_to "createTabWithAction6", :action => :createTabWithAction6 %></li>
+<li><p>Disable the tab</p></li>
+<li><%= link_to "createTabWithdisabled", :action => :createTabWithdisabled %></li>
+<li><p>Callback method for a change tab event.</p></li>
+<li><%= link_to "createTabWithAction7", :action => :createTab %></li>
+<li><p>Background color for tab for  removing blink during switch tabs</p></li>
+<li><%= link_to "createTabWithAction8", :action => :createTab %></li>
+</ul>
+
+
+<script type="text/javascript">
+
+function switchToTab() {
+  $.get('/app/NativeTabbarTest/switch_to_tabs', {});
+  return false;
+}
+
+function reloadTab() {
+  $.get('/app/NativeTabbarTest/reload_tab', {});
+  return false;
+}
+
+function ShowCurrentTab() {
+  $.get('/app/NativeTabbarTest/show_current_tab', {});
+  return false;
+}
+
+</script>
+

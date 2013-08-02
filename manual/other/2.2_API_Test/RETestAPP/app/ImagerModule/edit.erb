@@ -1,0 +1,26 @@
+<div data-role="page">
+
+  <div data-role="header" data-position="inline">
+    <h1>Edit <%= @imagermodule.ImagerName %></h1>
+    <a href="<%= url_for :action => :show, :id => @imagermodule.object %>" class="ui-btn-left" data-icon="back" data-direction="reverse">
+      Cancel
+    </a>
+    <a href="<%= url_for :action => :delete, :id => @imagermodule.object %>" class="ui-btn-right" data-icon="delete" data-direction="reverse">
+      Delete
+    </a>
+  </div>
+
+  <div data-role="content">
+    <form method="POST" action="<%= url_for :action => :update %>">
+      <input type="hidden" name="id" value="<%= @imagermodule.object %>"/>
+      
+          <div data-role="fieldcontain">
+            <label for="imagermodule[ImagerName]" class="fieldLabel">Imagername</label>
+            <input type="text" id="imagermodule[ImagerName]" name="imagermodule[ImagerName]" value="<%= @imagermodule.ImagerName %>" <%= placeholder( "Imagername" ) %> />
+          </div>
+      
+      <input type="submit" value="Update"/>
+    </form>
+  </div>
+
+</div>

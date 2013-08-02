@@ -1,0 +1,49 @@
+<script type="text/javascript">
+<!--
+function updateLocation(lat, lng) {
+     $('span.geoLat').html(lat);
+     $('span.geoLng').html(lng);
+}
+-->
+</script>
+<div data-role="page">
+
+	<div data-role="header" data-position="inline">
+    <h1>Geolocations</h1>
+    <a href="<%= Rho::RhoConfig.start_path %>" class="ui-btn-left" data-icon="home" data-direction="reverse" <%= "data-ajax='false'" if is_bb6 %>>
+      Home
+    </a>
+    <a href="<%= url_for :action => :new %>" class="ui-btn-right" data-icon="plus">
+      New
+    </a>
+	</div>
+<div>
+<p>The Latitude is: <%= $geo_latitude %></p><br/>
+<p>The Latitude is: <%= $geo_longitude %></p>
+<p>The Latitude is: <%= $geo_known_position %></p>
+<p>
+Latitude: <span class="geoLat"><%= GeoLocation.latitude.to_s %></span><br/>
+Longitude: <span class="geoLng"><%= GeoLocation.longitude.to_s %></span>
+</p><br/>
+<p><%= $geo_params%></p><br/>
+<p>Distance calculation test:</p>
+<p> Distance between Washington, D.C. and Moscow, Russia: expected  4856.99 miles, geolocation returns
+<%= GeoLocation.haversine_distance(38.895, -77.036667, 55.755786, 37.617633).to_s %> miles
+</p>
+<p> Distance between Washington, D.C. and New York: expected 204.34 miles, geolocation returns
+<%= GeoLocation.haversine_distance(38.895, -77.036667, 40.716667, -74).to_s %> miles
+</p>   
+</div>
+  <div data-role="content">
+    <ul data-role="listview">
+      <li><a href="<%=url_for(:action => :geo_latitude)%>" >geo_latitude</a></li><br/>
+      <li><a href="<%=url_for(:action => :geo_longitude)%>" >geo_longitude</a></li><br/>
+      <li><a href="<%=url_for(:action => :geo_known_position)%>" >geo_known_position</a></li><br/>
+      <li><a href="<%=url_for(:action => :geo_set_notification)%>" >geo_set_notification</a></li><br/>
+      <li><a href="<%=url_for(:action => :geo_set_notification_WM)%>" >geo_set_notification_WM</a></li><br/>
+      <li><a href="<%=url_for(:action => :geo_set_notification_IOS_Andoird)%>" >geo_set_notification_IOS_Andoird</a></li><br/>
+      <li><a href="/app/Geolocation/geo_turn_off">geo_turn_off</a></li>
+    </ul>
+  </div>
+
+</div>

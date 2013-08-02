@@ -1,0 +1,68 @@
+<script>
+function fillResultDiv(data)
+{
+  document.getElementById('resultdiv').innerHTML = data
+}
+</script>
+<div class="toolbar">
+  <h1 id="pageTitle">
+    Contacts
+  </h1>
+</div>
+
+<%if System::get_property('platform') == 'ANDROID' or System::get_property('platform') == 'APPLE'%>
+<div>Contacts count: <%=@count%><br/>
+Contacts Authorization Status: <b><%=@authorization_status%></b><br/>
+<%if System::get_property('platform') == 'ANDROID'%>
+Apply filter:<br/>
+<%=link_to 'With phones only', { :action => :phones_only }%><br/>
+<%=link_to 'With both phones and emails only', { :action => :phones_emails_only }%><br/>
+<%end%>
+</div>
+<%end%>
+
+<ul id="contacts" title="Contacts">
+<%=link_to "New...", { :action => :new }, "class=\"button right_button\"" %>  
+<%@contact.each do |x|%>
+<%if System::get_property('platform') == 'ANDROID'%>
+<li><%=link_to "#{x[1]['display_name']}: #{x[1]['mobile_number']}", :action => :show, :id => x[1]['id']%></li>
+<%else%>
+<li><%=link_to "#{x[1]['first_name']} #{x[1]['last_name'] }", :action => :show, :id => x[1]['id']%></li>
+<%end%>
+<%end%>
+</ul>
+
+<div>&nbsp;
+<%if System::get_property('platform') == 'ANDROID' or System::get_property('platform') == 'APPLE' %>
+<%if @offset.to_i+10 < @count.to_i %>
+<%=link_to "Next page >>", { :action => :index, :query => {:offset => @offset.to_i+10} }%>
+<%end%>
+<%end%>
+</div>
+
+  <div data-role="content">
+      <ul data-role="listview">
+<li><p>Create new contact</p></li>
+<li><a href="<%=url_for(:action => :create_find)%>">create_find</a></li>
+<li><p>Create new contact</p></li>
+<li><a href="<%=url_for(:action => :find_perpage)%>">find_perpage</a></li>
+<li><a href="<%=url_for(:action => :find_perpage_2)%>">find_perpage_2</a></li>
+<li><a href="<%=url_for(:action => :find_offset)%>">find_offset</a></li>
+<li><a href="<%=url_for(:action => :find_first)%>">find_first</a></li>
+<li><a href="<%=url_for(:action => :max_results)%>">max_results</a></li>
+<li><a href="<%=url_for(:action => :contact_select)%>">contact_select</a></li>
+<li><a href="<%=url_for(:action => :contact_select_all)%>">contact_select_all</a></li>
+<li><a href="<%=url_for(:action => :contact_condition_not_nil)%>">contact_condition_not_nil</a></li>
+<li><a href="<%=url_for(:action => :contact_condition_is_nil)%>">contact_condition_is_nil</a></li>
+<li><a href="<%=url_for(:action => :contact_mix)%>">contact_mix</a></li>
+<li><a href="<%=url_for(:action => :contact_mix_2)%>">contact_mix_2</a></li>
+
+<li><%=link_to 'Create test contacts', { :action => :test_create }%></li>
+<li><%=link_to 'Remove test contacts', { :action => :test_remove }%></li>
+<li><%=link_to 'Remove All contacts', { :action => :con_remove_all }%></li>
+<li><%=link_to 'Create 250 contacts', { :action => :test_create_250 }%></li>
+      </ul>
+  </div>
+<div id='resultdiv'>
+</div>
+

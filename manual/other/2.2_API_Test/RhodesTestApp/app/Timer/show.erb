@@ -1,0 +1,69 @@
+<div data-role="page" data-add-back-btn="false">
+
+  <div data-role="header" data-position="inline">
+    <h1><%= @timer.testcaseid %></h1>
+    <a href="<%= url_for :action => :index %>" class="ui-btn-left" data-icon="arrow-l" data-direction="reverse">
+      Back
+    </a>
+    <a href="<%= url_for :action => :edit, :id => @timer.object %>" class="ui-btn-right" data-icon="star">
+      Edit
+    </a>
+  </div>
+
+  <div data-role="content">
+    <ul data-role="listview">
+      
+          <li>
+            <div class="itemLabel">Testcaseid</div>
+            <div class="itemValue"><%= @timer.testcaseid %></div>
+          </li>
+      
+          <li>
+            <div class="itemLabel">Description</div>
+            <div class="itemValue"><%= @timer.description %></div>
+          </li>
+      
+          <li>
+            <div class="itemLabel">Res1</div>
+            <div class="itemValue"><%= @timer.res1 %></div>
+          </li>
+      
+          <li>
+            <div class="itemLabel">Res2</div>
+            <div class="itemValue"><%= @timer.res2 %></div>
+          </li>
+      
+          <li>
+            <div class="itemLabel">Res3</div>
+            <div class="itemValue"><%= @timer.res3 %></div>
+          </li>
+      
+          <li>
+            <div class="itemLabel">Res4</div>
+            <div class="itemValue"><%= @timer.res4 %></div>
+          </li>
+      
+          <li>
+            <div class="itemLabel">Res5</div>
+            <div class="itemValue"><%= @timer.res5 %></div>
+          </li>
+      
+          <li>
+            <div class="itemLabel">Res6</div>
+            <div class="itemValue"><%= @timer.res6 %></div>
+          </li>
+      
+          <li>
+            <div class="itemLabel">Res7</div>
+            <div class="itemValue"><%= @timer.res7 %></div>
+          </li>
+      
+          <li>
+            <div class="itemLabel">Res8</div>
+            <div class="itemValue"><%= @timer.res8 %></div>
+          </li>
+      
+    </ul>
+  </div>
+
+</div>
