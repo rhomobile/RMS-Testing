@@ -5366,7 +5366,7 @@ describe("Sensor JS API Test", function() {
 
         waitsFor(function () {
         	if (sensorInstance)
-            	(getstatus != null)
+            	return (getstatus != null);
             else
             	return true;
         }, 'The Accelerometer coordinates should display', 20000);
