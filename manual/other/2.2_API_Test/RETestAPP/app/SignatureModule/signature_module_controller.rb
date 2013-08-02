@@ -11,13 +11,13 @@ class SignatureModuleController < Rho::RhoController
    end 
   
   def captureevent
-    Alert.show_popup("event")
+    #Alert.show_popup("event")
     SignatureCapture.signatureCaptureEvent=url_for(:action => :capture_event_cb)
     
   end
   
   def capture_event_cb
-    Alert.show_popup("eventfire")
+    #Alert.show_popup("eventfire")
     puts @params
     $data_return = @params['imageData']
 #   WebView.execute_js('changeImgsrc()')
@@ -122,7 +122,7 @@ class SignatureModuleController < Rho::RhoController
       SignatureCapture.password = uPass
        sigName=@params['txtName'] 
        if sigName==""
-         Alert.show_popup "name param is empty"
+         #Alert.show_popup "name param is empty"
         else
           SignatureCapture.name = sigName
         end 
@@ -151,18 +151,18 @@ class SignatureModuleController < Rho::RhoController
       end
       
        def sig_event_cb
-              Alert.show_popup "inside sig_event_cb callback"
+              #Alert.show_popup "inside sig_event_cb callback"
               sigeventinfo = "signature event info"
               puts "signature event info going on"
               sigeventinfo += "result status is: " + @params['transferResult']   
-              Alert.show_popup sigeventinfo
+              #Alert.show_popup sigeventinfo
               WebView.execute_js('setFieldValue("'+sigeventinfo+'")') 
 #             WebView.refresh
         end
         
         def setvectorevent
           type = @params['veceventdropdown']
-          Alert.show_popup type
+          #Alert.show_popup type
                  if type=="JSCRIPT"
                   SignatureCapture.vectorEvent=url_for(:action => :sigvector_event_cb)
                  elsif type=="DETACH"
@@ -178,16 +178,19 @@ class SignatureModuleController < Rho::RhoController
                   resultHash = @params
                   buf = ""
                   if resultHash
-                    Alert.show_popup "inside resultHash"
+                    #Alert.show_popup "inside resultHash"
                     if resultHash["vectorArray"]
-                      Alert.show_popup "vectorArray has some value"
+                      #Alert.show_popup "vectorArray has some value"
+                      WebView.execute_js('setFieldValue("vectorArray has some value")') 
                       resultHash["vectorArray"].each {|x| buf += x.to_s }
                     else
-                      Alert.show_popup "vectorArray is empty"
+                      #Alert.show_popup "vectorArray is empty"
+                      WebView.execute_js('setFieldValue("vectorArray is empty")') 
                     end
                   else
                     buf = "vector array is empty"
-                    Alert.show_popup "resulthash is empty"
+                    #Alert.show_popup "resulthash is empty"
+                    WebView.execute_js('setFieldValue("resulthash is empty")') 
                   end
                   WebView.execute_js('setFieldValue("'+buf+'")')   
                   puts buf

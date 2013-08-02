@@ -14,11 +14,11 @@ class ImagerModuleController < Rho::RhoController
 
 def captureevent
   Imager.imagerCaptureEvent=url_for(:action => :capture_event_cb)
-  Alert.show_popup("event")
+  #Alert.show_popup("event")
 end
 
 def capture_event_cb
-  Alert.show_popup("eventfire")
+  #Alert.show_popup("eventfire")
   puts @params
   $data_return = @params['imageData']
 #  WebView.execute_js('changeImgsrc("'+data_return+'")')
