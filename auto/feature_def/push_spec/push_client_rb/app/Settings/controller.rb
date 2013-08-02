@@ -28,15 +28,14 @@ class SettingsController < Rho::RhoController
     # # Register for push service
     Rho::Push.getDeviceId url_for(:action => 'registration_callback')
 
+    puts "-- login callback, sent error code to the spec server"
     host = SPEC_LOCAL_SERVER_HOST
     port = SPEC_LOCAL_SERVER_PORT
     Rho::AsyncHttp.get :url => "http://#{host}:#{port}?method=login&error=#{errCode}"
-    puts "-- login callback, sent error code to the spec server"
+
   end
 
   def registration_callback
-    puts "-- registration callback"
-
     host = SPEC_LOCAL_SERVER_HOST
     port = SPEC_LOCAL_SERVER_PORT
 
@@ -45,14 +44,14 @@ class SettingsController < Rho::RhoController
   end
 
   def push_callback
-    puts "-- push_callback: params #{@params.inspect}"
-
     host = SPEC_LOCAL_SERVER_HOST
     port = SPEC_LOCAL_SERVER_PORT
     exit = nil
     call_clientreset_and_logout = nil
 
+    puts "-- push_callback: params #{@params.inspect}"
     if @params['alert']
+      action = @params['alert']
       case @params['alert']
       when 'exit'
         exit = true
@@ -67,7 +66,7 @@ class SettingsController < Rho::RhoController
         SyncEngine.logout
       when 'login'
         puts '-- push_callback: login command received!'
-        SyncEngine.login('pushclient', 'pushclient', '/app/Settings/login_callback' )
+        SyncEngine.login('pushclient', 'pushclient', '/app/Settings/login_callback')
       end
     end
 
@@ -75,12 +74,29 @@ class SettingsController < Rho::RhoController
     if @params['error']
       puts "-- push_callback - skipping response: #{url} <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<"
     else
-		begin  
-			puts "-- push_callback - sending response: #{url} <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<"
-			Rho::AsyncHttp.get :url => url
-		rescue Exception => e
-			"Exception has been thrown #{e.inspect}"
-		end
+		  begin
+		    if action == 'properties' # Read properties and return them
+		      pushAppName = Rho::Push.pushAppName
+          pushServer = Rho::Push.pushServer
+          type = Rho::Push.type
+          userNotifyMode = Rho::Push.userNotifyMode
+          url = "http://#{host}:#{port}?pushAppName=#{pushAppName}&pushServer=#{pushServer}&type=#{type}&userNotifyMode=#{userNotifyMode}"
+  		  elsif action == 'getProperties' # getProperty(name) and return all of them
+		      pushAppName = Rho::Push.getProperty('pushAppName')
+          pushServer = Rho::Push.getProperty('pushServer')
+          type = Rho::Push.getProperty('type')
+          userNotifyMode = Rho::Push.getProperty('userNotifyMode')
+          url = "http://#{host}:#{port}?pushAppName=#{pushAppName}&pushServer=#{pushServer}&type=#{type}&userNotifyMode=#{userNotifyMode}"  		    
+        elsif action == 'userNotifyMode'
+          Rho::Push.userNotifyMode = 'backgroundNotifications'
+          notifyMode = Rho::Push.userNotifyMode
+          url = "http://#{host}:#{port}?userNotifyMode=#{notifyMode}"
+		    end
+			  puts "-- push_callback - sending response: #{url}"
+			  Rho::AsyncHttp.get :url => url
+		  rescue Exception => e
+			  "Exception has been thrown #{e.inspect}"
+		  end
     end
 
     if call_clientreset_and_logout
@@ -88,13 +104,7 @@ class SettingsController < Rho::RhoController
       puts "push_callback: CALLING FULL CLIENT RESET AND LOGOUT!!!!"
     end
 
-    # puts "before exit, exit = #{exit}"
-    if exit then
-      # puts "before exit, exit = #{exit}"
-      System.exit
-      # puts "after exit, exit = #{exit}"
-    end
-    # puts "after exit, exit = #{exit}"
-  end
+    System.exit if exit
 
+  end
 end
