@@ -15,7 +15,6 @@ puts "Running Ruby Push specs for #{(push_type == "rhoconnect_push") ?  'Rhoconn
 
 TEST_PKGS = %w[ com.rhomobile.push_client_rb ]
 TEST_PKGS << 'com.motsolutions.cto.services.ans' if push_type == "rhoconnect_push"
-
 $rho_root = nil
 cfgfilename = File.join(File.dirname(__FILE__),'config.yml')
 if File.file?(cfgfilename)
@@ -114,7 +113,16 @@ FileUtils.chdir $spec_path
 
 $deviceId = nil
 $deviceOpts = '-e'
+
+out = `adb get-state`
+unless out =~ /device/
+  puts "Restart adb server ..."  
+  out = `adb kill-server; adb start-server`
+  puts out
+end
 out = `adb devices`
+puts out
+
 device_list = out.split("\n")
 device_list.shift # skip "List of devices attached "
 device_list << '' if device_list.empty?
@@ -289,7 +297,7 @@ device_list.each do |dev|
       properties['userNotifyMode'].should == "" # expected 'backgroundNotifications'
     end
 
-    it 'should return push properties by property name' do
+    it "should return push properties by property name" do
       message = 'getProperties'
       params = { :user_id=>['pushclient'], :message => message }
       RhoconnectHelper.api_post('users/ping', params, @api_token)
