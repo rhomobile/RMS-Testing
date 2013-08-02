@@ -3224,7 +3224,8 @@ var arr_scanner_property = [
 	scannerTypes	:	"Imager",
 	OSTypes			:	"All",
 	propertyValue	:	"true",
-	expectedResult	:	"true"
+	expectedResult	:	"true",
+	notOnAndroidJB  :   true
 },
 {
 	testName		:	"VT282-4305 | Set webcode :false  | false",
@@ -3232,7 +3233,8 @@ var arr_scanner_property = [
 	scannerTypes	:	"Imager",
 	OSTypes			:	"All",
 	propertyValue	:	"false",
-	expectedResult	:	"false"
+	expectedResult	:	"false",
+	notOnAndroidJB  :   true
 },
 {
 	testName		:	"VT282-4306 | Set webcodeDecodeGtSubtype :true  | true",
@@ -3240,7 +3242,8 @@ var arr_scanner_property = [
 	scannerTypes	:	"Imager",
 	OSTypes			:	"All",
 	propertyValue	:	"true",
-	expectedResult	:	"true"
+	expectedResult	:	"true",
+	notOnAndroidJB  :   true
 },
 {
 	testName		:	"VT282-4307 | Set webcodeDecodeGtSubtype :false  | false",
@@ -3248,7 +3251,8 @@ var arr_scanner_property = [
 	scannerTypes	:	"Imager",
 	OSTypes			:	"All",
 	propertyValue	:	"false",
-	expectedResult	:	"false"
+	expectedResult	:	"false",
+	notOnAndroidJB  :   true
 },
 {
 	testName		:	"VT282-4308 | Set upcEanRetryCount  :10  | 10",
@@ -3266,9 +3270,14 @@ var scanCallback = function (data){
 
 var getApplicableProperties = function (objScnType){
 	
-	var isAndroid = (Rho.System.platform == "ANDROID");
 	var deviceScannerType = objScnType.getProperty('friendlyName');
 	var finalSCNObj = [];
+	
+	//Consumer Android
+	if(isAndroid && Rho.System.deviceName.indexOf('Motorola Solutions') == -1)
+	{
+		return;
+	}
 
 	for (var i = 0; i < arr_scanner_property.length ; i++){
 
@@ -3280,6 +3289,10 @@ var getApplicableProperties = function (objScnType){
 				finalSCNObj.push(arr_scanner_property[i]);
 			}
 			else if ((deviceScannerType == "2D Imager" || Rho.System.oemInfo == "MC40") && isAndroid && arr_scanner_property[i]['notOnAndroidImager'] === true)//If it is the Android hardware Imager
+			{
+				//Dont add
+			}
+			else if (arr_scanner_property[i]['notOnAndroidJB'] === true && isJB)
 			{
 				//Dont add
 			}
@@ -3300,5 +3313,8 @@ var getApplicableProperties = function (objScnType){
 
 	return finalSCNObj;
 }
+
+var isAndroid = (Rho.System.platform == "ANDROID");
+var isJB = (isAndroid && Rho.System.osVersion.indexOf('4.') == 0);
 
 var ENABLE_TIMEOUT_VALUE = (Rho.System.platform == "ANDROID" ? 10 : 8000);
