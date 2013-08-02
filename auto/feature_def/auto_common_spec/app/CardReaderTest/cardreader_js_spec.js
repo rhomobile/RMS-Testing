@@ -6,7 +6,7 @@ describe("Cardreader JS API", function() {
 			it("does nothing", function() {
 				expect(null).toBe(null);
 			});
-		}
+		});
 		return;
 	}
 	
