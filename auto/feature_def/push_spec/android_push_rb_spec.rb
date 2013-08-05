@@ -15,7 +15,6 @@ puts "Running Ruby Push specs for #{(push_type == "rhoconnect_push") ?  'Rhoconn
 
 TEST_PKGS = %w[ com.rhomobile.push_client_rb ]
 TEST_PKGS << 'com.motsolutions.cto.services.ans' if push_type == "rhoconnect_push"
-
 $rho_root = nil
 cfgfilename = File.join(File.dirname(__FILE__),'config.yml')
 if File.file?(cfgfilename)
@@ -42,7 +41,6 @@ RhoconnectHelper.set_enable_redis(false)
 RhoconnectHelper.set_enable_resque(false)
 RhoconnectHelper.set_enable_push(false) if push_type == "gcm"
 
-$device_pin  = nil
 $server     = nil
 $requests   = []
 $signal     = ConditionVariable.new
@@ -89,6 +87,16 @@ def expect_request(name, timeout=30)
   end
   val
 end
+
+def expect_params(timeout=30)
+  params = nil
+  $mutex.synchronize do
+    $signal.wait($mutex, timeout) # wait timeout
+    params = $requests.first.query if $requests.count != 0
+    $requests.clear
+  end
+  params
+end
 ###############################
 
 # Store local server settings
@@ -105,7 +113,16 @@ FileUtils.chdir $spec_path
 
 $deviceId = nil
 $deviceOpts = '-e'
+
+out = `adb get-state`
+unless out =~ /device/
+  puts "Restart adb server ..."  
+  out = `adb kill-server; adb start-server`
+  puts out
+end
 out = `adb devices`
+puts out
+
 device_list = out.split("\n")
 device_list.shift # skip "List of devices attached "
 device_list << '' if device_list.empty?
@@ -159,10 +176,8 @@ device_list.each do |dev|
           system("adb #{$deviceOpts} install -r #{push_service_apk}")
         end
         puts "\nInstalling rhodes app on device ..."
-        # puts "adb #{$deviceOpts} install -r #{Dir.pwd}/bin/target/android/push_client_rb-debug.apk"
         system("adb #{$deviceOpts} install -r #{Dir.pwd}/bin/target/android/push_client_rb-debug.apk")
         puts "\nStarting rhodes app on device ..."
-        # puts "adb #{$deviceOpts} shell am start -a android.intent.action.MAIN -n com.rhomobile.push_client_rb/com.rhomobile.rhodes.RhodesActivity"
         system(
         "adb #{$deviceOpts} shell am start -a android.intent.action.MAIN -n com.rhomobile.push_client_rb/com.rhomobile.rhodes.RhodesActivity",
           :out=>"/dev/null")
@@ -248,8 +263,9 @@ device_list.each do |dev|
         sleep 3
       end
       res.code.should == 200
-      device_push_type.should == push_type
+      device_push_type.should == push_type      
     end
+    
 
     # 3
     it 'should proceed push message at foreground' do
@@ -261,8 +277,54 @@ device_list.each do |dev|
     
       expect_request('alert', 60).should == message
     end
-    
+
     # 4
+    it 'should return push properties' do
+      message = 'properties'
+      params = { :user_id=>['pushclient'], :message => message }
+      RhoconnectHelper.api_post('users/ping', params, @api_token)
+      # Get properties by call like Rho::Push.type ...
+      properties = expect_params
+      if push_type == "rhoconnect_push"
+        properties['pushAppName'].should == 'someappname'
+        properties['pushServer'].should == "http://#{RhoconnectHelper.push_host}:#{RhoconnectHelper.push_port}"
+        properties['type'].should == "rhoconnect-push"
+      else # gcm
+        properties['pushAppName'].should == ''
+        properties['pushServer'].should == ''
+        properties['type'].should == "native-push"
+      end
+      properties['userNotifyMode'].should == "" # expected 'backgroundNotifications'
+    end
+
+    it "should return push properties by property name" do
+      message = 'getProperties'
+      params = { :user_id=>['pushclient'], :message => message }
+      RhoconnectHelper.api_post('users/ping', params, @api_token)
+      # Get properties by call like Rho::Push.getProperty('type') ...
+      properties = expect_params
+      if push_type == "rhoconnect_push"
+        properties['pushAppName'].should == 'someappname'
+        properties['pushServer'].should == "http://#{RhoconnectHelper.push_host}:#{RhoconnectHelper.push_port}"
+        properties['type'].should == "rhoconnect-push"
+      else # gcm
+        properties['pushAppName'].should == ''
+        properties['pushServer'].should == ''
+        properties['type'].should == "native-push"
+      end
+      properties['userNotifyMode'].should == "" # expected 'backgroundNotifications'
+    end
+
+    # 5
+    it "should set userNotifyMode on Android" do
+      message = 'userNotifyMode'
+      params = { :user_id=>['pushclient'], :message => message }
+      RhoconnectHelper.api_post('users/ping', params, @api_token)
+    
+      expect_request('userNotifyMode').should == 'backgroundNotifications'      
+    end
+    
+    # 6
     it 'should process sequence of push messages' do
       # puts 'should process sequence of push messages'
     
@@ -298,7 +360,7 @@ device_list.each do |dev|
       end
     end
     
-    # 5
+    # 7
     it 'should proceed push message with exit comand' do
       # puts 'should proceed push message with exit comand'
     
@@ -314,7 +376,7 @@ device_list.each do |dev|
       (output =~ /push_client_rb/).should be_nil
     end
     
-    # 6
+    # 8
     it 'should start stopped app and process pending push message' do
       # puts 'should start stopped app and process pending push message'
     
@@ -335,7 +397,7 @@ device_list.each do |dev|
       (output =~ /push_client_rb/).should_not be_nil
     end
     
-    # 7
+    # 9
     it 'should logout and login back and process ping message' do
       # puts 'should logout and login back and process ping message'
     
@@ -346,10 +408,10 @@ device_list.each do |dev|
     
       system("adb #{$deviceOpts} shell am start -a android.intent.action.MAIN -n com.rhomobile.push_client_rb/com.rhomobile.rhodes.RhodesActivity", :out=>"/dev/null").should == true
       expect_request('error').should == "0"
-    
-      $device_pin = expect_request('device_id')
-      $device_pin.should_not be_nil
-      $device_pin.should_not == ''
+
+      device_id = expect_request('device_id')
+      device_id.should_not be_nil
+      device_id.should_not == ''
     
       message = 'welcome'
       params = { :user_id=>['pushclient'], :message => message}

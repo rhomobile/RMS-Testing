@@ -1,5 +1,15 @@
 describe("Cardreader JS API", function() {
-
+	
+	if(!(Rho.System.platform == "ANDROID" && Rho.System.deviceName.indexOf('Motorola Solutions') == 0))
+	{
+		describe("Rho.CardReader not available on this device", function() {
+			it("does nothing", function() {
+				expect(null).toBe(null);
+			});
+		});
+		return;
+	}
+	
 	describe("Rho.CardReader.open", function() {
 		var flag = false;
 

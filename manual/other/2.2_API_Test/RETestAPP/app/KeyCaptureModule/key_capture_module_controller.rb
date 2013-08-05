@@ -27,27 +27,33 @@ class KeyCaptureModuleController < Rho::RhoController
       
       
       
-      Alert.show_popup("triggerevent Value= "+eventvalue)
+      #Alert.show_popup("triggerevent Value= "+eventvalue)
+      WebView.execute_js('setFieldValue("'+eventvalue+'")')
       redirect :action => :index
     end
     
     def mytriggerevent
       mytriggerFlag=@params['triggerFlag']
-      Alert.show_popup("triggerFlag = "+mytriggerFlag)
-      WebView.execute_js('setFieldValue("'+mytriggerFlag+'")')   
+      #Alert.show_popup("triggerFlag = "+mytriggerFlag)
+      displayresult = "KeyValue= "+ mytriggerFlag
+      WebView.execute_js('setFieldValue("'+displayresult+'")') 
     end
     
     
     def setacceleratekey
       acckeyvalue = @params['txtacckeyvalue']
       KeyCapture.accelerateKey=acckeyvalue
-      Alert.show_popup("AccelerateKey Value= "+acckeyvalue)
+      #Alert.show_popup("AccelerateKey Value= "+acckeyvalue)
+      displayresult = "accValue= "+ acckeyvalue
+      WebView.execute_js('setFieldValue("'+displayresult+'")') 
       redirect :action => :index
     end
     def sethomekey
       homekeyvalue = @params['txthomekeyvalue']
       KeyCapture.homeKeyValue=homekeyvalue
-      Alert.show_popup("homekeyvalue= "+homekeyvalue)
+      #Alert.show_popup("homekeyvalue= "+homekeyvalue)
+      displayresult = "homeValue= "+ homekeyvalue
+      WebView.execute_js('setFieldValue("'+displayresult+'")') 
       redirect :action => :index
     end
     
@@ -56,19 +62,21 @@ class KeyCaptureModuleController < Rho::RhoController
       remapvalue = @params['txtremapavalue']
       KeyCapture.keyValue=keyvaluetoremap
       KeyCapture.remap=remapvalue
-      Alert.show_popup("Keyvalue= "+keyvaluetoremap+"RemapValue= "+remapvalue)
+      #Alert.show_popup("Keyvalue= "+keyvaluetoremap+"RemapValue= "+remapvalue)
+      displayresult = "Keyvalue=" + keyvaluetoremap+"   RemapValue= "+ remapvalue
+      WebView.execute_js('setFieldValue("'+displayresult+'")') 
       redirect :action => :index
     end
     
     def setemptykeycapturetag
       KeyCapture.setEMML('')
-      Alert.show_popup("Empty KeyCaptureTag")
+      #Alert.show_popup("Empty KeyCaptureTag")
       redirect :action => :index
     end
     
     def setemptykeyevent
       KeyCapture.keyEvent=''
-      Alert.show_popup("Empty keyevent")
+     # Alert.show_popup("Empty keyevent")
       redirect :action => :index
     end
     
@@ -78,7 +86,7 @@ class KeyCaptureModuleController < Rho::RhoController
       KeyCapture.keyValue = mykeyvalue
       KeyCapture.dispatch = mydispatchvalue
       KeyCapture.keyEvent=url_for()
-      Alert.show_popup("unregister")
+      #Alert.show_popup("unregister")
       redirect :action => :index
     end
     
