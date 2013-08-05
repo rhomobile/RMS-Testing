@@ -44,6 +44,7 @@ describe("Log JS API", function () {
 
 		var waitTimeout = 10000;
 		var clientPlatform = Rho.System.platform;		
+		var customLogFile = Rho.Application.userFolder + "/userlog.txt";
 
 		// this function will execute before each of test case execution i.e it function
 		beforeEach(function () {
@@ -85,25 +86,91 @@ describe("Log JS API", function () {
 
 			Rho.LogCapture.stop();
 		});
+
+		// Set log filepath
+		it("VT290-328 : Set Log filepath |", function() {
+			runs(function(){
+				var info = "Log file path changed to file://\\Program Files\\Log.txt ";
+				Rho.Log.info(info, "VT290-328");
+				var defaultPath = "file://\\Program Files\\Log.txt";
+                Rho.Log.filePath = defaultPath;
+				expect(Rho.Log.filePath).toEqual(defaultPath);
+
+			});
+		});
+
+		// Set log filepath to absolute
+		it("VT290-329 : Set Log filepath |", function() {
+			runs(function(){
+				var info = "Log file path changed to file://\\Program Files\\Log.txt ";
+				Rho.Log.info(info, "VT290-328");
+				var defaultPath = "file://\\Program Files\\Log.txt";
+                Rho.Log.filePath = defaultPath;
+				expect(Rho.Log.filePath).toEqual(defaultPath);
+			});
+		});
+
+		// Set log filesize 30KB
+		it("VT290-333 : Set Log filsize | 3000", function() {
+			runs(function(){
+				var info = "Log file size changed to 3000 bytes ";
+				Rho.Log.info(info, "VT290-328");
+
+				var testSize = 3000;
+
+				Rho.Log.level = 2;
+
+				Rho.Log.filePath = customLogFile;
+				Rho.Log.fileSize = testSize;
+				expect(Rho.Log.fileSize).toEqual(testSize);
+				Rho.Log.cleanLogFile();	
+
+				var some_random_text = "12345679a12345679b12345679c12345679d";
+				
+				// write at least 35*100+ bytes;
+				for(var i = 0; i < (testSize / some_random_text.length + 5); i++)
+				{
+					Rho.Log.warning(some_random_text, "tst");
+				}
+
+				Rho.Log.fileSize = originalLogSettings.fileSize;
+				Rho.Log.filePath = originalLogSettings.filePath;
+				Rho.Log.level = 0;
+				
+				expect(Rho.RhoFile.getFileSize(customLogFile)).toBeLessThan(testSize+1);
+				expect(Rho.RhoFile.getFileSize(customLogFile)).toBeGreaterThan(testSize-100);
+			});
+		});
 		
 		// Clean log file test
 		it("VT290-373 : Clear log file | true", function() {
 			runs(function(){
 				
 				Rho.Log.level = 1;
-				var logPath = Rho.Log.filePath
+				var logPath = customLogFile
+				
+				Rho.Log.level = 2;
+				Rho.Log.filePath = customLogFile;
+
+				var some_random_text = "12345679a12345679b12345679c12345679d12345679e12345679f12345679g12345679h12345679i12345679j";
+				
+				for(var i = 0; i < 10; i++)
+				{
+					Rho.Log.warning(some_random_text, "tst");
+				}
 				expect(Rho.RhoFile.exists(logPath)).toEqual(true)
+
 				Rho.Log.info("log path => " +logPath, "VT290-373");
-				var beforeClean = Rho.RhoFile.getFileSize(logPath);	
+				var beforeClean = Rho.RhoFile.getFileSize(logPath);
 				Rho.Log.cleanLogFile();	
-				waits(3000);	
-				var afterClean = Rho.RhoFile.getFileSize(logPath);
-				if(beforeClean>afterClean)
-					flag = true
-				else
-					flag = false
+				waits(1000);	
+				var afterClean = Rho.RhoFile.getFileSize(logPath);	
+
+				Rho.Log.fileSize = originalLogSettings.fileSize;
+				Rho.Log.filePath = originalLogSettings.filePath;
+				Rho.Log.level = 0;
 		
-				expect(flag).toEqual(true)
+				expect(beforeClean).toBeGreaterThan(afterClean)
 				
 			});
 		});
@@ -112,9 +179,9 @@ describe("Log JS API", function () {
 		it("VT290-391 : Call readLogFile() method with valid parameter. | ", function() {
 			runs(function(){
 				Rho.Log.level = 2;
-				Rho.Log.cleanLogFile();
 
-				waits(1000);
+				Rho.Log.filePath = customLogFile;
+				Rho.Log.cleanLogFile();	
 
 				var some_random_text = "12345679a12345679b12345679c12345679d12345679e12345679f12345679g12345679h12345679i12345679j";
 				
@@ -125,8 +192,10 @@ describe("Log JS API", function () {
 
 				var read = Rho.Log.readLogFile(1000);
 
+				Rho.Log.filePath = originalLogSettings.filePath;
+				
+				Rho.Log.level = 0;
 				expect(read.length).toBeLessThan(1000);
-
 				expect(read.count(some_random_text) > 0).toEqual(true);
 			});
 		});
@@ -139,10 +208,17 @@ describe("Log JS API", function () {
 			var data = '';
 			
 			runs(function(){
-				Rho.Log.cleanLogFile();
+				Rho.Log.level = 2;
+
+				Rho.Log.filePath = customLogFile;
+				Rho.Log.cleanLogFile();	
+
 				Rho.Log.destinationURI = srvHttpLogPostUrl;
-				Rho.Log.info("TEST MESSAGE!", "VT290-397");
+				Rho.Log.warning("TEST MESSAGE!", "VT290-397");
 				Rho.Log.sendLogFile();
+
+				Rho.Log.filePath = originalLogSettings.filePath;
+				Rho.Log.level = 0;
 			} );
 
 			// wait while log file is sent
@@ -166,7 +242,7 @@ describe("Log JS API", function () {
 			runs(function() {
 				expect(status).toEqual('ok');
 
-				expect(data.count("TEST MESSAGE!") > 0).toEqual(true);
+				expect(data.count("TEST MESSAGE!")).toBeGreaterThan(0);
 			});
 		});
 
@@ -183,11 +259,17 @@ describe("Log JS API", function () {
 			};
 
 			runs(function(){
-				Rho.Log.cleanLogFile();
+				Rho.Log.level = 2;
+
+				Rho.Log.filePath = customLogFile;
+				Rho.Log.cleanLogFile();	
 
 				Rho.Log.destinationURI = srvHttpLogPostUrl;
-				Rho.Log.info("TEST MESSAGE!", "VT290-398");
+				Rho.Log.warning("TEST MESSAGE!", "VT290-398");
 				Rho.Log.sendLogFile(sendcallback);
+
+				Rho.Log.filePath = originalLogSettings.filePath;
+				Rho.Log.level = 0;
 			});
 
 			waitsFor( function() {
@@ -217,7 +299,7 @@ describe("Log JS API", function () {
 			runs(function() {
 				expect(status).toEqual('ok');
 
-				expect(data.count("TEST MESSAGE!") > 0).toEqual(true);
+				expect(data.count("TEST MESSAGE!")).toBeGreaterThan(0);
 			});
 		});
 
@@ -229,11 +311,17 @@ describe("Log JS API", function () {
 			var data = '';
 
 			runs(function(){
-				Rho.Log.cleanLogFile();
+				Rho.Log.level = 2;
+
+				Rho.Log.filePath = customLogFile;
+				Rho.Log.cleanLogFile();	
 
 				Rho.Log.destinationURI = srvHttpLogPostUrl;
-				Rho.Log.info("TEST MESSAGE!", "VT290-400");
+				Rho.Log.warning("TEST MESSAGE!", "VT290-400");
 				Rho.Log.sendLogFile(function() {callbackCalled = true;});
+								
+				Rho.Log.filePath = originalLogSettings.filePath;
+				Rho.Log.level = 0;
 			});
 
 			waitsFor( function() {
@@ -263,7 +351,7 @@ describe("Log JS API", function () {
 			runs(function() {
 				expect(status).toEqual('ok');
 
-				expect(data.count("TEST MESSAGE!") > 0).toEqual(true);
+				expect(data.count("TEST MESSAGE!")).toBeGreaterThan(0);
 			});
 
 		});
@@ -906,10 +994,8 @@ describe("Log JS API", function () {
 			it("VT290-355 : Set Log Memory period to 2 secs | 2000", function () {
 				runs(function () {
 					Rho.Log.level = 1;
-					var info = "Info : Memory log should display in 5 secs interval | 0";
+					var info = "Info : Memory log should display in 2 secs interval | 0";
 					Rho.Log.info(info, "VT290-355");
-
-					Rho.LogCapture.clear();
 
 					Rho.Log.memoryPeriod = 2000;
 					expectedValue = 2000;
@@ -920,7 +1006,7 @@ describe("Log JS API", function () {
 				waits(3000);
 
 				runs(function () {
-					expect(Rho.LogCapture.read().count("MEMORY")).toEqual(1);
+					expect(Rho.LogCapture.read().count("MEMORY")).toBeGreaterThan(0);
 
 					//Rho.Log.memoryPeriod = 0;
 				});
@@ -1012,17 +1098,17 @@ describe("Log JS API", function () {
 				runs(function() {
 					expect(status).toEqual('ok');
 
-					expect(data.count("Downloaded content") > 0).toEqual(true);
+					expect(data.count("Downloaded content") ).toBeGreaterThan( 0 );
 
 					var log = Rho.LogCapture.read();
 
-					expect( log.count("== Info") > 2 ).toEqual(true);
-					expect( log.count("About to connect") > 0 ).toEqual(true);
-					expect( log.count("Connected to") > 0 ).toEqual(true);
-					expect( log.count("=> Send headers") > 0 ).toEqual(true);
-					expect( log.count("<= Recv headers") > 2 ).toEqual(true);
-					expect( log.count("<= Recv data") > 0 ).toEqual(true);
-					expect( log.count("RESPONSE-----") > 0 ).toEqual(true);
+					expect( log.count("== Info") ).toBeGreaterThan( 2 );
+					expect( log.count("About to connect") ).toBeGreaterThan( 0 );
+					expect( log.count("Connected to") ).toBeGreaterThan( 0 );
+					expect( log.count("=> Send headers") ).toBeGreaterThan( 0 );
+					expect( log.count("<= Recv headers") ).toBeGreaterThan( 2 );
+					expect( log.count("<= Recv data") ).toBeGreaterThan( 0 );
+					expect( log.count("RESPONSE-----") ).toBeGreaterThan( 0 );
 				});
 			});
 
@@ -1059,16 +1145,16 @@ describe("Log JS API", function () {
 				runs(function() {
 					expect(status).toEqual('ok');
 
-					expect(data.count("Downloaded content") > 0).toEqual(true);
+					expect(data.count("Downloaded content")).toBeGreaterThan(0);
 
 					var log = Rho.LogCapture.read();
 
-					expect( log.count("== Info") == 0 ).toEqual(true);
-					expect( log.count("About to connect") == 0 ).toEqual(true);
-					expect( log.count("Connected to") == 0 ).toEqual(true);
-					expect( log.count("=> Send headers") == 0 ).toEqual(true);
-					expect( log.count("<= Recv headers") == 0 ).toEqual(true);
-					expect( log.count("<= Recv data") == 0 ).toEqual(true);
+					expect( log.count("== Info") ).toEqual(0);
+					expect( log.count("About to connect") ).toEqual(0);
+					expect( log.count("Connected to") ).toEqual(0);
+					expect( log.count("=> Send headers") ).toEqual(0);
+					expect( log.count("<= Recv headers") ).toEqual(0);
+					expect( log.count("<= Recv data") ).toEqual(0);
 				});
 			});
 		}
@@ -1111,10 +1197,10 @@ describe("Log JS API", function () {
 				var log = Rho.LogCapture.read();
 
 				// skippost affects URL, BODY parameters traced, and traces received content
-				expect( log.count("URL =") > 0 ).toEqual(false);
-				expect( log.count("BODY =") > 0 ).toEqual(false);
+				expect( log.count("URL =") ).toEqual(0);
+				expect( log.count("BODY =") ).toEqual(0);
 				// data is traced when callback is called, exclude that case
-				expect( log.count(data) > 0 ).toEqual(false);
+				expect( log.count(data) ).toEqual(0);
 			});
 		});
 
@@ -1231,212 +1317,5 @@ describe("Log JS API", function () {
 				Rho.Log.trace("VT290-413 :Application warning message","aaaa");
 			});
 		});
-
-		// Set log filepath
-		it("VT290-328 : Set Log filepath |", function() {
-			runs(function(){
-				var info = "Log file path changed to file://\\Program Files\\Log.txt ";
-				Rho.Log.info(info, "VT290-328");
-				var defaultPath = "file://\\Program Files\\Log.txt";
-                Rho.Log.filePath = defaultPath;
-				expect(Rho.Log.filePath).toEqual(defaultPath);
-
-			});
-		});
-
-		// Set log filepath to absolute
-		it("VT290-329 : Set Log filepath |", function() {
-			runs(function(){
-				var info = "Log file path changed to file://\\Program Files\\Log.txt ";
-				Rho.Log.info(info, "VT290-328");
-				var defaultPath = "file://\\Program Files\\Log.txt";
-                Rho.Log.filePath = defaultPath;
-				expect(Rho.Log.filePath).toEqual(defaultPath);
-			});
-		});
-
-		// Set log filesize 30KB
-		it("VT290-333 : Set Log filsize | 30720", function() {
-			runs(function(){
-				var info = "Log file size changed to 30720 bytes ";
-				Rho.Log.info(info, "VT290-328");
-				Rho.Log.fileSize = 30720;
-				expect(Rho.Log.fileSize).toEqual(30720);
-			});
-		});
 	});
-
-/*
-	describe("Dev set", function () {
-
-	var originalLogSettings = {};
-
-		beforeEach(function () {
-			originalLogSettings = {};
-			originalLogSettings.logLevel = Rho.Log.level;
-			originalLogSettings.destination = Rho.Log.destination;
-			originalLogSettings.includeCategories = Rho.Log.includeCategories;
-			originalLogSettings.excludeCategories = Rho.Log.excludeCategories;
-			originalLogSettings.fileSize = Rho.Log.fileSize;
-			originalLogSettings.filePath = Rho.Log.filePath;
-			originalLogSettings.memoryPeriod = Rho.Log.memoryPeriod;
-			originalLogSettings.netTrace = Rho.Log.netTrace;
-			originalLogSettings.skipPost = Rho.Log.skipPost;
-			originalLogSettings.excludeFilter = Rho.Log.excludeFilter;
-			originalLogSettings.destinationURI = Rho.Log.destinationURI;
-		});
-
-		afterEach(function () {
-			Rho.Log.logLevel = originalLogSettings.level;
-			Rho.Log.destination = originalLogSettings.destination;
-			Rho.Log.includeCategories = originalLogSettings.includeCategories;
-			Rho.Log.excludeCategories = originalLogSettings.excludeCategories;
-			Rho.Log.fileSize = originalLogSettings.fileSize;
-			Rho.Log.filePath = originalLogSettings.filePath;
-			Rho.Log.memoryPeriod = originalLogSettings.memoryPeriod;
-			Rho.Log.netTrace = originalLogSettings.netTrace;
-			Rho.Log.skipPost = originalLogSettings.skipPost;
-			Rho.Log.excludeFilter = originalLogSettings.excludeFilter;
-			Rho.Log.destinationURI = originalLogSettings.destinationURI;
-		});
-
-		it("Tests log level property", function () {
-			Rho.Log.level = 1;
-			expect(Rho.Log.level).toEqual(1);
-		});
-
-		it("Tests destination property", function () {
-			expect(Rho.Log.destination = ["file"]);
-			expect(Rho.Log.destination).toEqual(["file"]);
-		});
-
-		it("Test default value of including categories property", function () {
-			expect(Rho.Log.includeCategories).toEqual("*");
-		});
-
-		it("Test includingCategories property", function () {
-			Rho.Log.includeCategories = "abc, def";
-			expect(Rho.Log.includeCategories).toEqual("abc, def");
-		});
-
-		it("Test excludeCategories property", function () {
-			Rho.Log.excludeCategories = "abc, def";
-			expect(Rho.Log.excludeCategories).toEqual("abc, def");
-		});
-
-		it("Test default value of fileSize property", function () {
-			expect(Rho.Log.fileSize).toEqual(0);
-		});
-
-		it("Test fileSize property", function () {
-			Rho.Log.fileSize = 10000;
-			expect(Rho.Log.fileSize).toEqual(10000);
-		});
-
-		it("Test default value of filePath property", function () {
-			var pathPieces = Rho.Log.filePath.split("/");
-			expect(pathPieces[pathPieces.length - 1]).toEqual("rholog.txt");
-		});
-
-		it("Test filePath property", function () {
-			Rho.Log.filePath = "someFilename.log";
-			expect(Rho.Log.filePath).toEqual("someFilename.log");
-		});
-
-		it("Test default value of memoryPeriod property", function () {
-			expect(Rho.Log.memoryPeriod).toEqual(0);
-		});
-
-		it("Test memoryPeriod property", function () {
-			Rho.Log.memoryPeriod = 1000;
-			expect(Rho.Log.memoryPeriod).toEqual(1000);
-		});
-
-		it("Test default value of skipPost property", function () {
-			expect(Rho.Log.skipPost).toEqual(false);
-		});
-
-		it("Test skipPost property", function () {
-			Rho.Log.skipPost = true;
-			expect(Rho.Log.skipPost).toEqual(true);
-		});
-
-		it("Test default value of excludeFilter property", function () {
-			expect(Rho.Log.excludeFilter).toEqual("");
-		});
-
-		it("Test excludeFilter property", function () {
-			Rho.Log.excludeFilter = "abc";
-			expect(Rho.Log.excludeFilter).toEqual("abc");
-
-			Rho.Log.excludeFilter = "def";
-			expect(Rho.Log.excludeFilter).toEqual("abc,def");
-		});
-
-		it("Test default value of destinationURI property", function () {
-			expect(Rho.Log.destinationURI).toEqual("");
-		});
-
-		it("Test destinationURI property", function () {
-			Rho.Log.destinationURI = "http://localhost";
-			expect(Rho.Log.destinationURI).toEqual("http://localhost");
-		});
-
-		//TODO: test log file contains the string
-		it("Test trace method", function () {
-			Rho.Log.trace("test trace message", "test");
-		});
-
-		//TODO: test log file contains the string
-		it("Test info method", function () {
-			Rho.Log.info("test info message", "test");
-		});
-
-		//TODO: test log file contains the string
-		it("Test warning method", function () {
-			Rho.Log.warning("test warning message", "test");
-		});
-
-		//TODO: test log file contains the string
-		it("Test error method", function () {
-			Rho.Log.error("test error message", "test");
-		});
-
-		//TODO: test log file contains the string
-		//it("Test fatalError method", function () {
-		//	 Rho.Log.fatalError("test fatal error message", "test");
-		//});
-
-		//TODO: add test on receiving file
-		//TODO: add test on callback
-		xit("Test sendLogFile method", function () {
-			Rho.Log.sendLogFile();
-		});
-
-		//TODO: how test it?
-		xit("Test showLog method", function () {
-			Rho.Log.showLog();
-		});
-
-		//TODO: test that log file is empty
-		xit("Test cleanLogFile method", function () {
-			Rho.Log.cleanLogFile();
-		});
-
-		it("Test readLogFile method", function () {
-			expect(Rho.Log.readLogFile(1000).length).toEqual(1000);
-		});
-
-
-		if (isAndroidOrApplePlatform() || isWindowsPhone8Platform()) {
-			it("Test default value of netTrace property", function () {
-				expect(Rho.Log.netTrace).toEqual(false);
-			});
-
-			it("Test netTrace property", function () {
-				Rho.Log.netTrace = true;
-				expect(Rho.Log.netTrace).toEqual(true);
-			});
-		}
-	});*/
 });

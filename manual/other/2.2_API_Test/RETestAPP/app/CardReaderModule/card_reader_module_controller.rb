@@ -14,7 +14,7 @@ class CardReaderModuleController < Rho::RhoController
       autoentervalue = @params['groupautoenter']
       autotabvalue = @params['groupautotab']
         
-      Alert.show_popup("Autoenter value"+autoentervalue+"   Autotab value = "+autotabvalue)
+      #Alert.show_popup("Autoenter value"+autoentervalue+"   Autotab value = "+autotabvalue)
       
       if autoentervalue!="DEFAULT"
          CardReader.autoEnter=autoentervalue
@@ -31,7 +31,7 @@ class CardReaderModuleController < Rho::RhoController
     
     
     def closemsr
-      Alert.show_popup("Before Close")
+      #Alert.show_popup("Before Close")
       CardReader.close
       redirect :action => :index
     end
@@ -43,7 +43,8 @@ class CardReaderModuleController < Rho::RhoController
       if pandatavalue!="DEFAULT"
         CardReader.panData=pandatavalue
       end
-      Alert.show_popup("pandata Value= "+pandatavalue)
+      #Alert.show_popup("pandata Value= "+pandatavalue)
+      WebView.execute_js('setFieldValue("'+pandatavalue+'")')
       redirect :action => :index
     end
     
@@ -63,21 +64,22 @@ class CardReaderModuleController < Rho::RhoController
          
       if selectedeventvalue == "JavaScript"
        CardReader.readEvent = url_for(:action => :myreadevent)
-        Alert.show_popup("Javascript")
+        #Alert.show_popup("Javascript")
       end  
   
           
       
        
-      Alert.show_popup("pinentry Value= "+pinentryvalue+"pintimeout Value= "+pintimeoutvalue+"selectedeventvalue"+selectedeventvalue)
+      #Alert.show_popup("pinentry Value= "+pinentryvalue+"pintimeout Value= "+pintimeoutvalue+"selectedeventvalue"+selectedeventvalue)
+      WebView.execute_js('setFieldValue("'+pinentryvalue+","+pintimeoutvalue+","+selectedeventvalue+'")')
       redirect :action => :index
     end
     
     def myreadevent
-      Alert.show_popup("Inside Event")
+      #Alert.show_popup("Inside Event")
       mydata=@params['data']
       mymode=@params['mode']
-      Alert.show_popup("data Value= "+mydata+"mode Value= "+mymode)  
+      #Alert.show_popup("data Value= "+mydata+"mode Value= "+mymode)  
       WebView.execute_js('setFieldValue("'+mydata+","+mymode+'")')
 #      case mymode
 #      when 'CR'; 
@@ -107,7 +109,7 @@ class CardReaderModuleController < Rho::RhoController
     def setmodulename
       selectedmsrvalue = @params['groupselectedmsr']
       CardReader.moduleName=selectedmsrvalue
-      Alert.show_popup("SelectedMSR Value= "+selectedmsrvalue)
+      #Alert.show_popup("SelectedMSR Value= "+selectedmsrvalue)
       redirect :action => :index
     end
     

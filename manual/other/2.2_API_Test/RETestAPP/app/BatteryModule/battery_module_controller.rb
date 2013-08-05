@@ -11,13 +11,13 @@ class BatteryModuleController < Rho::RhoController
   end
 
   def callgetBatteryStatus
-    Alert.show_popup("getBatteryStatus called")
+    #Alert.show_popup("getBatteryStatus called")
     Battery.getBatteryStatus  
     redirect :action => :index
   end
   
   def callgetSmartBatteryStatus
-    Alert.show_popup("getSmartBatteryStatus called")
+    #Alert.show_popup("getSmartBatteryStatus called")
     Battery.getSmartBatteryStatus  
     redirect :action => :index
   end
@@ -145,7 +145,7 @@ class BatteryModuleController < Rho::RhoController
   def setsampleInterval
     sampleIntervalValue=@params['sampleIntervalVal']
     puts "sampleInterval #{sampleIntervalValue}"
-    Alert.show_popup(sampleIntervalValue)    
+    #Alert.show_popup(sampleIntervalValue)    
     Battery.sampleInterval=sampleIntervalValue
     redirect :action => :index 
   end
@@ -153,7 +153,7 @@ class BatteryModuleController < Rho::RhoController
   def selectsetSystemNotifications
     #Alert.show_popup("setSystemNotifications called")
        selectedsetSystemNotifications = @params['batsetSystemNotifications']
-    Alert.show_popup(selectedsetSystemNotifications)
+    #Alert.show_popup(selectedsetSystemNotifications)
        case selectedsetSystemNotifications
        when 'Enabled'; 
          Battery.setSystemNotifications = 'Enabled' 

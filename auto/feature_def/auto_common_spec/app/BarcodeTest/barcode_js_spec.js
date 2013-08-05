@@ -22,7 +22,12 @@ describe("Barcode JS API", function() {
 		var arrSCN = getApplicableProperties(enumData[j]);
 
 		(function(enumObject,arrScanner){
-
+			
+			if(isAndroid && Rho.System.deviceName.indexOf('Motorola Solutions') == -1)
+			{
+				return;
+			}
+	
 			var scnname = enumObject.getProperty('friendlyName');
 			var scnid = enumObject.getProperty('ID');
 			//var scntype = enumObject.getProperty('scannerType');
