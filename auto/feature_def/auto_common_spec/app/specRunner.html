@@ -3,9 +3,27 @@
     <title>RhoElements Common API Tests</title>
 	<script charset='utf-8' src='/public/api/rhoapi-modules.js' type='text/javascript'/>
     
-    <script id='runnerList' type='text/javascript'>var listOfRunners = ["LogTest/specRunner.html"];</script>
+	<script type="text/javascript" id='runnerList'>
+		var listOfRunners = [
+			"LogTest/specRunner.html",
+			"CardReaderTest/specRunner.html",
+			"DatabaseTest/specRunner.html",
+			"FileTest/specRunner.html",
+			"KeyCaptureTest/specRunner.html",
+			"ScreenOrientationTest/specRunner.html",
+            		"SystemRE1Test/specRunner.html",
+			"SensorsTest/specRunner.html",
+			"BarcodeTest/specRunner.html",
+			"NetworkTest/specRunner.html",
+			"GeneratorTest/specRunner.html",
+			"OrmTest/specRunner.html"//,
+			//"SignatureTest/specRunner.html", //Not released yet
+			//"ApplicationTest/specRunner.html", //Not ready, use manual
+			//"IndicatorsTest/specRunner.html", //Broken on WMCE
+			//"WebViewTest/specRunner.html" //Not Ready, use manual
+		];
 	
-	<script type='text/javascript'>		
+    <script type='text/javascript'>		
 		function loadEvent()
 		{
 		    Rho.Application.nativeMenu = [ {'label':'Exit', 'action': 'exit'} ];
