@@ -54,10 +54,11 @@ cfg.gsub!(/(Push.rhoconnect.pushServer.*)/, "Push.rhoconnect.pushServer = 'http:
 File.open(cfgfile, 'w') { |f| f.write cfg }
 
 # Select proper build file for rhodes app
+build_dir = ENV['JENKINS_HOME'] ? $app_path : File.join($app_path, 'jenkins')
 if push_type == "rhoconnect_push"
-  FileUtils.cp(File.join($app_path, 'build.yml.rps'), File.join($app_path, 'build.yml'))
+  FileUtils.cp(File.join(build_dir, 'build.yml.rps'), File.join($app_path, 'build.yml'))
 else  # "gcm"
-  FileUtils.cp(File.join($app_path, 'build.yml.gcm'), File.join($app_path, 'build.yml'))
+  FileUtils.cp(File.join(build_dir, 'build.yml.gcm'), File.join($app_path, 'build.yml'))
 end
 
 ###############################
