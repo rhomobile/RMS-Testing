@@ -92,8 +92,9 @@ class SettingsController < Rho::RhoController
           notifyMode = Rho::Push.userNotifyMode
           url = "http://#{host}:#{port}?userNotifyMode=#{notifyMode}"
 		    end
-			  puts "-- push_callback - sending response: #{url}"
-			  Rho::AsyncHttp.get :url => url
+			  puts "-- push_callback - get request: #{url}"
+        res = Rho::AsyncHttp.get :url => url
+        puts "-- push_callback - response: #{res} "
 		  rescue Exception => e
 			  "Exception has been thrown #{e.inspect}"
 		  end

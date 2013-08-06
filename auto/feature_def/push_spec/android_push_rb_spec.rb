@@ -283,6 +283,7 @@ device_list.each do |dev|
       message = 'properties'
       params = { :user_id=>['pushclient'], :message => message }
       RhoconnectHelper.api_post('users/ping', params, @api_token)
+      sleep 3
       # Get properties by call like Rho::Push.type ...
       properties = expect_params
       if push_type == "rhoconnect_push"
@@ -301,6 +302,7 @@ device_list.each do |dev|
       message = 'getProperties'
       params = { :user_id=>['pushclient'], :message => message }
       RhoconnectHelper.api_post('users/ping', params, @api_token)
+      sleep 3
       # Get properties by call like Rho::Push.getProperty('type') ...
       properties = expect_params
       if push_type == "rhoconnect_push"
@@ -320,6 +322,7 @@ device_list.each do |dev|
       message = 'userNotifyMode'
       params = { :user_id=>['pushclient'], :message => message }
       RhoconnectHelper.api_post('users/ping', params, @api_token)
+      sleep 3
     
       expect_request('userNotifyMode').should == 'backgroundNotifications'      
     end
