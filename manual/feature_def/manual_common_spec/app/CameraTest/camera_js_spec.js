@@ -1149,7 +1149,7 @@ describe("Camera Test for choosePicture()", function() {
 
 		(function(objCAM){
 
-			Rho.Camera.setDefault(objCAM);
+			Rho.Camera.setDefaultInstance(objCAM);
 
 			it("VT285-001/006/007 | Call choosePicture with callback as function and retruned status OK |", function() {
 

@@ -84,7 +84,7 @@ describe("Push Module", function() {
     });
 
     it("should getDefault instance", function() {
-      var defaultObject = Rho.Push.getDefault();
+      var defaultObject = Rho.Push.getDefaultInstance();
       expect(defaultObject.getProperty('type')).toMatch(typeMatcher);
     });
 

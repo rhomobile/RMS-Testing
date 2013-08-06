@@ -218,16 +218,16 @@ describe("Camera JS API Test", function() {
 
 					it("VT285-077 | call getDefault |" + camtype, function() {
 
-						    Rho.Camera.setDefault(enumObject);
-						    var defaultobj = Rho.Camera.getDefault();						  
+						    Rho.Camera.setDefaultInstance(enumObject);
+						    var defaultobj = Rho.Camera.getDefaultInstance();
 							expect(camtype).toEqual(defaultobj.getProperty('ID'));
 					});
 
 					it("VT285-077A | call Default |" + camtype, function() {
 
 						    //Rho.Camera.setDefaultID( enumObject.getId());
-						   	//Rho.Camera.default = enumObject;
-						    //var defaultobj = Rho.Camera.default;
+						   	//Rho.Camera.defaultInstance = enumObject;
+						    //var defaultobj = Rho.Camera.defaultInstance;
 							expect(camtype).toEqual(defaultobj.getProperty('ID'));
 					});
 
@@ -441,7 +441,7 @@ describe("Camera choosePicture() JS API Test", function() {
 			var camname = enumObject.getProperty('cameraType');
 			var camtype = enumObject.getProperty('ID');
 
-			Rho.Camera.setDefault(enumObject);
+			Rho.Camera.setDefaultInstance(enumObject);
 
 			describe("Camera property set using choosePicture() for "+ camtype +": "+ camname, function() {
 

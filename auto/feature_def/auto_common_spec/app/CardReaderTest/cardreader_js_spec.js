@@ -66,7 +66,7 @@ describe("Cardreader JS API", function() {
 	});
 
 	describe("getProperty using instance", function() {
-	var obj=Rho.CardReader.getDefault();
+	var obj=Rho.CardReader.getDefaultInstance();
 		for (var i=0;i<card_get_property_instance.length;i++){
 			(function(idx){
 				it(card_get_property_instance[idx]['testName'], function() {
@@ -99,13 +99,13 @@ describe("Cardreader JS API", function() {
 		});
 
 		it("VT286-0213 | get Auto enter default value as true", function() {
-			var obj=Rho.CardReader.getDefault();
+			var obj=Rho.CardReader.getDefaultInstance();
 			  myvar = obj.getProperties(['autoEnter']);
 			  expect(myvar["autoEnter"]).toEqual("false");
 		});
 
 		it("VT286-0214 | get Auto Tab default value as true", function() {
-			var obj=Rho.CardReader.getDefault();
+			var obj=Rho.CardReader.getDefaultInstance();
 			myvar = obj.getProperties(['autoTab']);
 			 expect(myvar["autoTab"]).toEqual("false");
 		});
@@ -113,18 +113,18 @@ describe("Cardreader JS API", function() {
 		if(isWindowsMobilePlatform() && Rho.CardReader.moduleName == "dcr7000")
 		{
 			it("VT286-0215 | get pinentry default value as false", function() {
-				var obj=Rho.CardReader.getDefault();
+				var obj=Rho.CardReader.getDefaultInstance();
 				myvar = obj.getProperties(['pinEntry']);
 			 	expect(myvar["pinEntry"]).toEqual("false");
 			});
 
 			it("VT286-0216 | get pintimout default value as 30000", function() {
-				var obj=Rho.CardReader.getDefault();
+				var obj=Rho.CardReader.getDefaultInstance();
 				myvar = obj.getProperties(['pinTimeout']);
 			 	expect(myvar["pinTimeout"]).toEqual("30000");
 			});
 			it("VT286-0217 | get patndata default value as empty", function() {
-				var obj=Rho.CardReader.getDefault();
+				var obj=Rho.CardReader.getDefaultInstance();
 				myvar = obj.getProperties(['panData']);
 			 	expect(myvar["panData"]).toEqual("");
 			});
@@ -132,7 +132,7 @@ describe("Cardreader JS API", function() {
     });
 
 /*	describe("getProperties using instance", function() {
-	var obj=Rho.CardReader.getDefault();
+	var obj=Rho.CardReader.getDefaultInstance();
 		for (var i=0;i<card_get_property_instance.length;i++){
 			(function(idx){
 				it(card_get_property_instance[idx]['testName'], function() {
@@ -258,7 +258,7 @@ describe("Cardreader JS API", function() {
 
 	describe("setProperty/getProperty using instance", function() {
 		var flag = false;
-		var obj=Rho.CardReader.getDefault();
+		var obj=Rho.CardReader.getDefaultInstance();
 		it("obj.open", function() {
 
 			runs(function() {
@@ -297,7 +297,7 @@ describe("Cardreader JS API", function() {
 
 	describe("setProperties/getProperties using instance", function() {
 		var flag = false;
-		var obj=Rho.CardReader.getDefault();
+		var obj=Rho.CardReader.getDefaultInstance();
 		it("obj.open", function() {
 
 			runs(function() {
