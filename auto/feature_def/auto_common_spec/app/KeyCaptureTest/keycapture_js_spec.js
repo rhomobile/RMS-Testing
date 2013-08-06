@@ -10,6 +10,15 @@ describe("KeyCapture JS API", function()
 		hardwareKeysTest.callbackFiredTimeout = null;
 		//getpropertiesdata = '';
 	});
+	
+	describe("Setup", function()
+	{
+		it("0.1.focuses the RhoElements Window", function()
+		{
+			Rho.Instrumentation.simulate_touch_event(0, 5, 41);
+			Rho.Instrumentation.simulate_touch_event(2, 5, 41);
+		});
+	});
 
 	if(!hardwareKeysTest.isAndroid())//Android doesnt do home key it seems
 	{
