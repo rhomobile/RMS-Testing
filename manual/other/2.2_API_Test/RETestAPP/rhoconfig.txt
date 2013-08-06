@@ -28,7 +28,7 @@ LogCategories = *
 ExcludeLogCategories = 
 
 # max log file size in Bytes, set 0 to unlimited size; when limit is reached, log wraps to beginning of file
-MaxLogFileSize=100000
+MaxLogFileSize=0
 #LogMemPeriod=5000
 
 # turn on local http server traces, off by default
