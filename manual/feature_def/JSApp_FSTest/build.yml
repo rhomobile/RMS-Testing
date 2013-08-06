@@ -1,10 +1,10 @@
-sdk:   ../../../../rhodes
+#sdk:   ../../../../rhodes
 sdkversion: 4.0.0
 name: JSApp_FSTest
 javascript_application: true
 version: 1.0
 vendor: rhomobile
-build: debug
+build: release
 bbver: 6.0
 applog: rholog.txt
 iphone:
