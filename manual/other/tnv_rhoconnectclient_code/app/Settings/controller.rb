@@ -393,13 +393,13 @@ class SettingsController < Rho::RhoController
   end
   
   def getDefaultMethod
-    myValue = Rho::RhoConnectClient.getDefaultInstance()
+    myValue = Rho::RhoConnectClient.getDefault()
     puts "#{myValue}"
     Alert.show_popup "#{myValue}"
   end
   
   def setDefaultMethod
-   myValue = Rho::RhoConnectClient.setDefaultInstance()
+   myValue = Rho::RhoConnectClient.setDefault()
    puts "#{myValue}"
    Alert.show_popup "#{myValue}"
  end

@@ -995,7 +995,7 @@ describe("Video Capture Test", function() {
 				var enumData = new array();
 				enumData = Rho.Videocapture.enumerate();
 				var j = enumData.length-1;
-				Rho.Videocapture.setDefaultInstance(enumData[j]);
+				Rho.Videocapture.setDefault(enumData[j]);
 				Rho.Videocapture.start();
 			});
 
@@ -1013,7 +1013,7 @@ describe("Video Capture Test", function() {
 		it("VT281-0708 | Call getDefault method videocapture|", function() {
 			runs(function()
 			{
-				data = Rho.Videocapture.getDefaultInstance();
+				data = Rho.Videocapture.getDefault();
 				displayResult("VT281-0708 | Call getDefault method videocapture",data);
 			});
 

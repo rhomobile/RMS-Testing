@@ -289,7 +289,7 @@ class CardReaderModuleController < Rho::RhoController
   def setdefaultprop
     myvar = Array.new
     myvar = Rho::CardReader.enumerate
-    Rho::CardReader.setDefaultInstance(myvar)
+    Rho::CardReader.setDefault(myvar)
   end
   
   def openwithEvent

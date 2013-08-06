@@ -26,26 +26,26 @@ describe("<generator API specs>", function() {
             });
         });
 
-        describe("from getDefaultInstance()", function() {
+        describe("from getDefault()", function() {
             it("provides bool property", function() {
-                Rho.GenPropBag.getDefaultInstance().boolProp = false;
-                expect(Rho.GenPropBag.getDefaultInstance().boolProp).toEqual(false);
-                Rho.GenPropBag.getDefaultInstance().boolProp = true;
-                expect(Rho.GenPropBag.getDefaultInstance().boolProp).toEqual(true);
+                Rho.GenPropBag.getDefault().boolProp = false;
+                expect(Rho.GenPropBag.getDefault().boolProp).toEqual(false);
+                Rho.GenPropBag.getDefault().boolProp = true;
+                expect(Rho.GenPropBag.getDefault().boolProp).toEqual(true);
             });
     
             it("provides int property", function() {
-                Rho.GenPropBag.getDefaultInstance().intProp = 0;
-                expect(Rho.GenPropBag.getDefaultInstance().intProp).toEqual(0);
-                Rho.GenPropBag.getDefaultInstance().intProp = 15;
-                expect(Rho.GenPropBag.getDefaultInstance().intProp).toEqual(15);
+                Rho.GenPropBag.getDefault().intProp = 0;
+                expect(Rho.GenPropBag.getDefault().intProp).toEqual(0);
+                Rho.GenPropBag.getDefault().intProp = 15;
+                expect(Rho.GenPropBag.getDefault().intProp).toEqual(15);
             });
     
             it("provides float property", function() {
-                Rho.GenPropBag.getDefaultInstance().floatProp = 0.1;
-                expect(Rho.GenPropBag.getDefaultInstance().floatProp).toEqual(0.1);
-                Rho.GenPropBag.getDefaultInstance().floatProp = 1.5;
-                expect(Rho.GenPropBag.getDefaultInstance().floatProp).toEqual(1.5);
+                Rho.GenPropBag.getDefault().floatProp = 0.1;
+                expect(Rho.GenPropBag.getDefault().floatProp).toEqual(0.1);
+                Rho.GenPropBag.getDefault().floatProp = 1.5;
+                expect(Rho.GenPropBag.getDefault().floatProp).toEqual(1.5);
             });
         });
 
@@ -79,15 +79,15 @@ describe("<generator API specs>", function() {
 
         it("provides a correct property value accessed either way", function() {
             Rho.GenPropBag.intProp = 15;
-            expect(Rho.GenPropBag.getDefaultInstance().intProp).toEqual(15);
+            expect(Rho.GenPropBag.getDefault().intProp).toEqual(15);
 
-            Rho.GenPropBag.getDefaultInstance().intProp = 25;
+            Rho.GenPropBag.getDefault().intProp = 25;
             expect(Rho.GenPropBag.intProp).toEqual(25);
 
             Rho.GenPropBag.defaultInstance.intProp = 35;
-            expect(Rho.GenPropBag.getDefaultInstance().intProp).toEqual(35);
+            expect(Rho.GenPropBag.getDefault().intProp).toEqual(35);
 
-            Rho.GenPropBag.getDefaultInstance().intProp = 45;
+            Rho.GenPropBag.getDefault().intProp = 45;
             expect(Rho.GenPropBag.defaultInstance.intProp).toEqual(45);
         });
 

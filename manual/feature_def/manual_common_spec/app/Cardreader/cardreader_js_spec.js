@@ -62,7 +62,7 @@ describe("Card Reader Test", function() {
 		});
 		runs(function()
 		{
-			displayResult('DATA:- ',JSON.stringify(Rho.CardReader.getDefaultInstance()));
+			displayResult('DATA:- ',JSON.stringify(Rho.CardReader.getDefault()));
 		});
 
 		waitsFor(function()
@@ -112,7 +112,7 @@ describe("Card Reader Test", function() {
 		    var mynum = new Array();
 			mynum = Rho.CardReader.enumerate();
 			displayResult('DATA:- ',JSON.stringify(mynum["cardreaderArray"]));
-			//Rho.CardReader.setDefaultInstance(mynum);
+			//Rho.CardReader.setDefault(mynum);
 		});
 
 		waitsFor(function()

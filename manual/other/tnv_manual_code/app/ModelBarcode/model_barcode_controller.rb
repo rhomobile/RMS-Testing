@@ -287,7 +287,7 @@ class ModelBarcodeController < Rho::RhoController
       args['result'].each do |thing|
         id = thing.getProperty('ID').to_s
         if id == scnType
-          Rho::Barcode.setDefaultInstance(thing)
+          Rho::Barcode.setDefault(thing)
         end
       end
     });
@@ -356,7 +356,7 @@ class ModelBarcodeController < Rho::RhoController
       id = thing.getProperty('ID').to_s
       puts "Scanner ID #{id}"
       if id == scnType
-        Rho::Barcode.setDefaultInstance(thing)
+        Rho::Barcode.setDefault(thing)
       end
     end
   end
