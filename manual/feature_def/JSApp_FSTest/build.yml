@@ -1,4 +1,5 @@
 #sdk:   ../../../../rhodes
+app_type: rhoelements
 sdkversion: 4.0.0
 name: JSApp_FSTest
 javascript_application: true
