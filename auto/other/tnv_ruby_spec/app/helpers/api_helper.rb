@@ -7,7 +7,7 @@ module BarcodeApi
       args['result'].each do |thing|
         id = thing.getProperty('ID').to_s
         if id == 'SCN1'
-          Rho::Barcode.setDefault(thing)
+          Rho::Barcode.setDefaultInstance(thing)
         end
       end
     });
@@ -21,7 +21,7 @@ module BarcodeApi
       args['result'].each do |thing|
         id = thing.getProperty('ID').to_s
         if id == 'SCN2'
-          Rho::Barcode.setDefault(thing)
+          Rho::Barcode.setDefaultInstance(thing)
         end
       end
     });
@@ -35,7 +35,7 @@ module BarcodeApi
       args['result'].each do |thing|
         id = thing.getProperty('ID').to_s
         if id == 'SCN3'
-          Rho::Barcode.setDefault(thing)
+          Rho::Barcode.setDefaultInstance(thing)
         end
       end
     });

@@ -273,8 +273,8 @@ describe("Barcode JS API", function() {
 						//  DCC - Removing this test as it is testing for ID property (unsupported)
 //						it("VT282-2006 | call getDefault |" + scnid, function() {
 //								alert(enumObject);
-//							    Rho.Barcode.setDefault(enumObject);
-//							    var defaultobj = Rho.Barcode.getDefault();						  
+//							    Rho.Barcode.setDefaultInstance(enumObject);
+//							    var defaultobj = Rho.Barcode.getDefaultInstance();
 //								expect(scnid).toEqual(defaultobj.getProperty('ID'));
 //						});
 
@@ -283,8 +283,8 @@ describe("Barcode JS API", function() {
 
 //							    //enumObject.clearAllProperties();
 //							    //Rho.Barcode.setDefaultID( enumObject.getId() );
-//							   // Rho.Barcode.default = enumObject;
-//							   // var defaultobj = Rho.Barcode.default;
+//							   // Rho.Barcode.defaultInstance = enumObject;
+//							   // var defaultobj = Rho.Barcode.defaultInstance;
 //								expect(scnid).toEqual(defaultobj.getProperty('ID'));
 //						});
 			});

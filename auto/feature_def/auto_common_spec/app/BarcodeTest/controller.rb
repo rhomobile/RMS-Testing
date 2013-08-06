@@ -98,9 +98,9 @@ class BarcodeTestController < Rho::RhoController
   end
   
   def setDefaultScanner
-	#Rho::Barcode.setDefault("#{@params['specifiedScanner']}")
+	#Rho::Barcode.setDefaultInstance("#{@params['specifiedScanner']}")
 	arBarcodes = Rho::Barcode.enumerate
-	arBarcodes.each {|x| if @params['specifiedScanner'] == x.getProperty('ID') then Rho::Barcode.setDefault(x) end}
+	arBarcodes.each {|x| if @params['specifiedScanner'] == x.getProperty('ID') then Rho::Barcode.setDefaultInstance(x) end}
   end
 
   def callBarcodeMethod
