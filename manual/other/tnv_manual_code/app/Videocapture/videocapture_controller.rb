@@ -206,7 +206,7 @@ class VideocaptureController < Rho::RhoController
   def setdefaultprop
     myvar = Array.new
     myvar = Rho::Videocapture.enumerate
-    Rho::Videocapture.setDefault(myvar)   
+    Rho::Videocapture.setDefault(myvar)
   end
   
   def enum     

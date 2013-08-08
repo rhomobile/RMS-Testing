@@ -219,15 +219,15 @@ describe("Camera JS API Test", function() {
 					it("VT285-077 | call getDefault |" + camtype, function() {
 
 						    Rho.Camera.setDefault(enumObject);
-						    var defaultobj = Rho.Camera.getDefault();						  
+						    var defaultobj = Rho.Camera.getDefault();
 							expect(camtype).toEqual(defaultobj.getProperty('ID'));
 					});
 
 					it("VT285-077A | call Default |" + camtype, function() {
 
 						    //Rho.Camera.setDefaultID( enumObject.getId());
-						   	//Rho.Camera.default = enumObject;
-						    //var defaultobj = Rho.Camera.default;
+						   	//Rho.Camera.setDefault( enumObject );
+						    //var defaultobj = Rho.Camera.getDefault();
 							expect(camtype).toEqual(defaultobj.getProperty('ID'));
 					});
 

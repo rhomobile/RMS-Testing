@@ -6,6 +6,21 @@
     <script type="text/javascript" src="/jquery/jquery-1.6.4.min.js"></script>
     <script type="text/javascript" src="/jquery/jquery.json-2.3.min.js"></script>    
     <script type="text/javascript" src="/api/rhoapi-modules.js"></script>
+    
+    <script type="text/javascript"> 
+       function barcodeTest() {
+            var objs = Rho.Barcode.enumerate();
+            if ( objs != null )
+            {
+                alert( objs.toString() );
+             }else
+             {
+                alert('FAILED!')
+             }
+                
+        }
+    </script>
+    
 </head>
 <body>
 <h1>Javascript Application loaded from filesystem</h1>
@@ -13,6 +28,10 @@
 <a href="http://www.google.com">google</a><br/>
 
 <a href="#" onclick="alert( Rho.System.platform );">Show Platform</a><br/>
+<a href="#" onclick="barcodeTest();">Barcode enumerate</a><br/>
+
+<a href="#" onclick="Rho.WebView.refresh();">Refresh</a><br/>
+<a href="#" onclick="Rho.Application.quit();">Exit</a><br/>
 
 </body>
 </html>

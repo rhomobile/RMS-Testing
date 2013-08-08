@@ -211,7 +211,10 @@ class ModelWebviewController < Rho::RhoController
   
   def getCurrentLocation
     puts "#{@params}"
-    index = @params['value']
+    index = @params['value'].to_i
+    if index == nil
+      index = 0
+    end
     data = Rho::WebView.currentLocation index
     puts "#{data}"
     Rho::WebView.executeJavascript("updateDiv('currentLocation','#{data}')")
@@ -219,7 +222,10 @@ class ModelWebviewController < Rho::RhoController
   
   def getCurrentURL
     puts "#{@params}"
-    index = @params['value']
+    index = @params['value'].to_i
+    if index == nil
+      index = 0
+    end
     data = Rho::WebView.currentURL index
     puts "#{data}"
     Rho::WebView.executeJavascript("updateDiv('currentURL','#{data}')")

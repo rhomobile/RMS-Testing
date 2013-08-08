@@ -267,7 +267,7 @@ describe("RSM JS API", function() {
 //						it("VT282-2006 | call getDefault |" + scnid, function() {
 //								alert(enumObject);
 //							    Rho.Barcode.setDefault(enumObject);
-//							    var defaultobj = Rho.Barcode.getDefault();						  
+//							    var defaultobj = Rho.Barcode.getDefault();
 //								expect(scnid).toEqual(defaultobj.getProperty('ID'));
 //						});
 
@@ -276,8 +276,8 @@ describe("RSM JS API", function() {
 
 //							    //enumObject.clearAllProperties();
 //							    //Rho.Barcode.setDefaultID( enumObject.getId() );
-//							   // Rho.Barcode.default = enumObject;
-//							   // var defaultobj = Rho.Barcode.default;
+//							   // Rho.Barcode.setDefault( enumObject );
+//							   // var defaultobj = Rho.Barcode.getDefault();
 //								expect(scnid).toEqual(defaultobj.getProperty('ID'));
 //						});
 			});	
