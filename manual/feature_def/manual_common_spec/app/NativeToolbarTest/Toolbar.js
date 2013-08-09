@@ -18,7 +18,7 @@ function toolMask() {
     toolElements = [
         {label: 'back', action: 'back'},
         {label: 'Home', action: 'Home'},
-        {action: '/app/NativeToolbarTest/Page1.html', label: "[BUTTON]",icon: '/app/NativeToolbarTest/redi.png'}
+        {action: '/app/NativeToolbarTest/Page1.html', label: "[BUTTON]",icon: '/app/NativeToolbarTest/redi.png', coloredIcon: true}
     ];
     var toolProperties = {backgroundColor: 0x00804F,maskColor: 0xFF0000, viewHeight: 100};
     Rho.NativeToolbar.create(toolElements, toolProperties);
@@ -28,10 +28,10 @@ function toolIconLabelMask() {
     var toolElements = new Array();
     toolElements = [
         {label: 'back', action: 'back'},
-        {label: 'Home', action: 'Home', icon: '/public/images/bar/colored_btn.png'},
+        {label: 'Home', action: 'Home', icon: '/public/images/bar/colored_btn.png', coloredIcon: true},
         {action: "separator"},
-        {label: 'refresh', action: 'refresh', icon: '/public/images/bar/refresh_btn.png'},
-        {label: 'Exit', action: 'exit', icon: '/public/images/bar/forward_btn.png'}
+        {label: 'refresh', action: 'refresh', icon: '/public/images/bar/refresh_btn.png', coloredIcon: true},
+        {label: 'Exit', action: 'exit', icon: '/public/images/bar/forward_btn.png', coloredIcon: true}
     ];
     var toolProperties = {backgroundColor: 0x00804F, maskColor: 0xFF00, viewHeight: 100};
     Rho.NativeToolbar.create(toolElements, toolProperties);
@@ -43,8 +43,8 @@ function toolColored() {
     toolElements = [
         {label: 'back', action: 'back', icon: '/public/images/bar/back_btn_colored.png', coloredIcon: true},
         {action: "separator"},
-        {label: 'Home', action: 'Home', icon: '/public/images/bar/colored_btn.png'},
-        {label: 'Exit', action: 'exit', icon: '/public/images/bar/refresh_btn.png'}
+        {label: 'Home', action: 'Home', icon: '/public/images/bar/colored_btn.png', coloredIcon: true},
+        {label: 'Exit', action: 'exit', icon: '/public/images/bar/refresh_btn.png', coloredIcon: true}
     ];
     var toolProperties = {backgroundColor: 0x002F00, maskColor: 0xFF0000, viewHeight: 100};
     Rho.NativeToolbar.create(toolElements, toolProperties);
@@ -59,7 +59,7 @@ function toolNoLabelIcon() {
     var toolElements = new Array();
     toolElements = [
         {action: 'Home'},
-        {label: 'Exit', action: 'exit', icon: '/public/images/bar/refresh_btn.png'},
+        {label: 'Exit', action: 'exit', icon: '/public/images/bar/refresh_btn.png', coloredIcon: true},
         {label: 'back', action: 'back', icon: '/public/images/bar/back_btn_colored.png', coloredIcon: true},
         {action: 'fullscreen'}
     ];
@@ -70,9 +70,9 @@ function toolNoLabelIcon() {
 function toolNoAction() {
     var toolElements = new Array();
     toolElements = [
-        {label: 'Home', action: '', icon: '/public/images/bar/colored_btn.png'},
-        {label: 'refresh', action: 'refresh', icon: '/public/images/bar/refresh_btn.png'},
-        {label: 'refresh', action: 'refresh', icon: '/public/images/bar/forward_btn.png'}
+        {label: 'Home', action: '', icon: '/public/images/bar/colored_btn.png', coloredIcon: true},
+        {label: 'refresh', action: 'refresh', icon: '/public/images/bar/refresh_btn.png', coloredIcon: true},
+        {label: 'refresh', action: 'refresh', icon: '/public/images/bar/forward_btn.png', coloredIcon: true}
     ];
     var toolProperties = {backgroundColor: 0xFF0000, maskColor: 0xFF0000, viewHeight: 100};
     Rho.NativeToolbar.create(toolElements, toolProperties);
@@ -81,9 +81,9 @@ function toolNoAction() {
 function toolInvalidAction() {
     var toolElements = new Array();
     toolElements = [
-        {label: 'Home', action: 'InvalidAction@#', icon: '/public/images/bar/colored_btn.png'},
-        {label: 'refresh', action: 'refresh', icon: '/public/images/bar/refresh_btn.png'},
-        {label: 'refresh', action: 'refresh', icon: '/public/images/bar/forward_btn.png'}
+        {label: 'Home', action: 'InvalidAction@#', icon: '/public/images/bar/colored_btn.png', coloredIcon: true},
+        {label: 'refresh', action: 'refresh', icon: '/public/images/bar/refresh_btn.png', coloredIcon: true},
+        {label: 'refresh', action: 'refresh', icon: '/public/images/bar/forward_btn.png', coloredIcon: true}
     ];
     var toolProperties = {backgroundColor: 0xFF0000, maskColor: 0xFF0000, viewHeight: 100};
     Rho.NativeToolbar.create(toolElements, toolProperties);
@@ -92,9 +92,9 @@ function toolInvalidAction() {
 function toolLoadIndex() {
     var toolElements = new Array();
     toolElements = [
-        {label: 'Home', action: 'home', icon: '/public/images/bar/colored_btn.png'},
-        {label: 'refresh', action: 'refresh', icon: '/public/images/bar/refresh_btn.png'},
-        {label: 'refresh', action: 'refresh', icon: '/public/images/bar/forward_btn.png'},
+        {label: 'Home', action: 'home', icon: '/public/images/bar/colored_btn.png', coloredIcon: true},
+        {label: 'refresh', action: 'refresh', icon: '/public/images/bar/refresh_btn.png', coloredIcon: true},
+        {label: 'refresh', action: 'refresh', icon: '/public/images/bar/forward_btn.png', coloredIcon: true},
         {label: 'Load Application Test on clicking this button this is also a test to check long Label  ', action: '/public/app/api/application_tnv.html'}
     ];
     var toolProperties = {backgroundColor: 0xFF0000, maskColor: 0xFF0000, viewHeight: 100};
@@ -167,9 +167,9 @@ function toolTestActions5() {
 function toolIconWM() {
     var toolElements = new Array();
     toolElements = [
-        {label: 'Home', action: 'Home', icon: '/app/NativeToolbarTest/man.png'},
-        {label: 'refresh', action: 'refresh', icon: '/app/NativeToolbarTest/twocats.png'},
-        {label: 'Close', action: 'Exit', icon: '/app/NativeToolbarTest/phones.png'}
+        {label: 'Home', action: 'Home', icon: '/app/NativeToolbarTest/man.png', coloredIcon: true},
+        {label: 'refresh', action: 'refresh', icon: '/app/NativeToolbarTest/twocats.png', coloredIcon: true},
+        {label: 'Close', action: 'Exit', icon: '/app/NativeToolbarTest/phones.png', coloredIcon: true}
     ];
     var toolProperties = {backgroundColor: 0xFF00, maskColor: '', viewHeight: 100};
     Rho.NativeToolbar.create(toolElements, toolProperties);
@@ -178,9 +178,9 @@ function toolIconWM() {
 function toolIconOther() {
     var toolElements = new Array();
     toolElements = [
-        {label: 'Home', action: 'Home', icon: '/app/NativeToolbarTest/cake_30.png'},
-        {label: 'refresh', action: 'refresh', icon: '/public/images/bar/refresh_btn.png'},
-        {label: 'Close', action: 'Exit', icon: '/app/NativeToolbarTest/cat_30.png'}
+        {label: 'Home', action: 'Home', icon: '/app/NativeToolbarTest/cake_30.png', coloredIcon: true},
+        {label: 'refresh', action: 'refresh', icon: '/public/images/bar/refresh_btn.png', coloredIcon: true},
+        {label: 'Close', action: 'Exit', icon: '/app/NativeToolbarTest/cat_30.png', coloredIcon: true}
     ];
     var toolProperties = {backgroundColor: 0xFF00, maskColor: '', viewHeight: 100};
     Rho.NativeToolbar.create(toolElements, toolProperties);
@@ -189,9 +189,9 @@ function toolIconOther() {
 function toolInvalidView() {
     var toolElements = new Array();
     toolElements = [
-        {label: 'Home', action: 'Home', icon: '/public/images/bar/colored_btn.png'},
-        {label: 'refresh', action: 'refresh', icon: '/public/images/bar/refresh_btn.png'},
-        {label: 'refresh', action: 'refresh', icon: '/public/images/bar/forward_btn.png'}
+        {label: 'Home', action: 'Home', icon: '/public/images/bar/colored_btn.png', coloredIcon: true},
+        {label: 'refresh', action: 'refresh', icon: '/public/images/bar/refresh_btn.png', coloredIcon: true},
+        {label: 'refresh', action: 'refresh', icon: '/public/images/bar/forward_btn.png', coloredIcon: true}
     ];
     var toolProperties = {backgroundColor: 0xFF0000, maskColor: 0xFF0000, viewHeight: 0.8923};
     Rho.NativeToolbar.create(toolElements, toolProperties);
@@ -200,9 +200,9 @@ function toolInvalidView() {
 function toolInvalidBkg() {
     var toolElements = new Array();
     toolElements = [
-        {label: 'Home', action: 'Home', icon: '/public/images/bar/colored_btn.png'},
-        {label: 'refresh', action: 'refresh', icon: '/public/images/bar/refresh_btn.png'},
-        {label: 'refresh', action: 'refresh', icon: '/public/images/bar/forward_btn.png'}
+        {label: 'Home', action: 'Home', icon: '/public/images/bar/colored_btn.png', coloredIcon: true},
+        {label: 'refresh', action: 'refresh', icon: '/public/images/bar/refresh_btn.png', coloredIcon: true},
+        {label: 'refresh', action: 'refresh', icon: '/public/images/bar/forward_btn.png', coloredIcon: true}
     ];
     var toolProperties = {backgroundColor: 0.3030, maskColor: 0xFF0000, viewHeight: 300};
     Rho.NativeToolbar.create(toolElements, toolProperties);
@@ -212,9 +212,9 @@ function toolInvalidBkg() {
 function toolInvalidMAsk() {
     var toolElements = new Array();
     toolElements = [
-        {label: 'Home', action: 'Home', icon: '/public/images/bar/colored_btn.png'},
-        {label: 'refresh', action: 'refresh', icon: '/public/images/bar/refresh_btn.png'},
-        {label: 'refresh', action: 'refresh', icon: '/public/images/bar/forward_btn.png'}
+        {label: 'Home', action: 'Home', icon: '/public/images/bar/colored_btn.png', coloredIcon: true},
+        {label: 'refresh', action: 'refresh', icon: '/public/images/bar/refresh_btn.png', coloredIcon: true},
+        {label: 'refresh', action: 'refresh', icon: '/public/images/bar/forward_btn.png', coloredIcon: true}
     ];
     var toolProperties = {backgroundColor: 0xFF0000, maskColor: 0.3264, viewHeight: 300};
     Rho.NativeToolbar.create(toolElements, toolProperties);
@@ -223,9 +223,9 @@ function toolInvalidMAsk() {
 function toolJavascript() {
     var toolElements = new Array();
     toolElements = [
-        {label: 'Home', action: 'home', icon: '/public/images/bar/colored_btn.png'},
-        {label: 'exit', action: 'javascript:onQuit()', icon: '/public/images/bar/refresh_btn.png'},
-        {label: 'refresh', action: 'refresh', icon: '/public/images/bar/forward_btn.png'},
+        {label: 'Home', action: 'home', icon: '/public/images/bar/colored_btn.png', coloredIcon: true},
+        {label: 'exit', action: 'javascript:onQuit()', icon: '/public/images/bar/refresh_btn.png', coloredIcon: true},
+        {label: 'refresh', action: 'refresh', icon: '/public/images/bar/forward_btn.png', coloredIcon: true},
         {label: 'Load a HTML page', action: 'app/ApplicationTest/application.html'}
     ];
     var toolProperties = {backgroundColor: 0xFF0000, maskColor: 0xFF0000, viewHeight: 100};
@@ -240,11 +240,11 @@ function onQuit() {
 function toolSeparatorWidth(width) {
     var toolElements = new Array();
     toolElements = [
-        {action: '/app/NativeToolbarTest/Page1.html', icon: '/public/images/bar/switch/btn_1.png'},
+        {action: '/app/NativeToolbarTest/Page1.html', icon: '/public/images/bar/switch/btn_1.png', coloredIcon: true},
         {action: 'separator', width: width},
-        {action: '/app/NativeToolbarTest/Page2.html', icon: '/public/images/bar/switch/btn_2.png'},
+        {action: '/app/NativeToolbarTest/Page2.html', icon: '/public/images/bar/switch/btn_2.png', coloredIcon: true},
         {action: 'separator', width: width},
-        {action: '/app/NativeToolbarTest/Page2.html', icon: '/public/images/bar/switch/btn_3.png'}
+        {action: '/app/NativeToolbarTest/Page2.html', icon: '/public/images/bar/switch/btn_3.png', coloredIcon: true}
     ];
 
     var toolProperties = {backgroundColor: 0xFF0000, maskColor: 0xFF0000, viewHeight: 100};
