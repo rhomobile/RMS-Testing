@@ -222,7 +222,7 @@ describe("Log JS API", function () {
 			} );
 
 			// wait while log file is sent
-			waits(3000);
+			waits(6000);
 
 			runs(function(){    
 				getProps = {
@@ -561,7 +561,7 @@ describe("Log JS API", function () {
 				var info = "Log destination set. No need verification in log: ";
 				Rho.Log.info(info, "VT290-314");
 
-				server = "http://"+SERVER_HOST;
+				server = srvHttpLogPostUrl;
 				Rho.Log.destinationURI = server;
 				expect(Rho.Log.destinationURI).toEqual(server);
 
@@ -861,6 +861,8 @@ describe("Log JS API", function () {
 				Rho.Log.warning(fail_str, "APP");
 				Rho.Log.error(fail_str, "APP");
 
+				Rho.Log.level = 0;
+
 				expect( checkLogString(Rho.LogCapture.read(),0,0) ).toEqual( true );
 
 			});
@@ -882,6 +884,8 @@ describe("Log JS API", function () {
 				Rho.Log.warning(fail_str, "APP");
 				Rho.Log.error(pass_str, "APP");
 
+				Rho.Log.level = 0;
+
 				expect( checkLogString(Rho.LogCapture.read(),0,1) ).toEqual( true );
 			});
 		});
@@ -901,6 +905,8 @@ describe("Log JS API", function () {
 				Rho.Log.warning(pass_str, "APP");
 				Rho.Log.error(pass_str, "APP");
 
+				Rho.Log.level = 0;
+
 				expect( checkLogString(Rho.LogCapture.read(),0,2) ).toEqual( true );
 			});
 		});
@@ -919,6 +925,8 @@ describe("Log JS API", function () {
 				Rho.Log.info(pass_str, "APP");
 				Rho.Log.warning(pass_str, "APP");
 				Rho.Log.error(pass_str, "APP");
+
+				Rho.Log.level = 0;
 
 				expect( checkLogString(Rho.LogCapture.read(),0,3) ).toEqual( true );
 			});
@@ -940,6 +948,8 @@ describe("Log JS API", function () {
 				Rho.Log.info(pass_str, "APP");
 				Rho.Log.warning(pass_str, "APP");
 				Rho.Log.error(pass_str, "APP");
+
+				Rho.Log.level = 0;
 
 				expect( checkLogString(Rho.LogCapture.read(),0,4) ).toEqual( true );
 				
@@ -1003,7 +1013,7 @@ describe("Log JS API", function () {
 					expect(memPeriod).toEqual(expectedValue);	
 				});
 
-				waits(3000);
+				waits(5000);
 
 				runs(function () {
 					expect(Rho.LogCapture.read().count("MEMORY")).toBeGreaterThan(0);
@@ -1143,6 +1153,7 @@ describe("Log JS API", function () {
 				);
 
 				runs(function() {
+					Rho.Log.level = 0;
 					expect(status).toEqual('ok');
 
 					expect(data.count("Downloaded content")).toBeGreaterThan(0);
