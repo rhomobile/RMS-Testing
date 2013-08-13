@@ -1,6 +1,7 @@
 TODO
 README_ANDROID_PUSH_SPECS
 tmp
+*.xml
 
 push_client_rb/bin
 push_client_rb/*.log

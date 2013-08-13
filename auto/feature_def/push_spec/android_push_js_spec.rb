@@ -215,7 +215,7 @@ device_list.each do |dev|
   FileUtils.rm_r $server_path if File.exists? $server_path
   puts "Stopping local server"
   $server.shutdown
-  
+
   # Uninstall rhodes app only if tests pass
   if results && results['failed'].to_i == 0
     TEST_PKGS.each do |pkg|
@@ -240,7 +240,7 @@ device_list.each do |dev|
   end
   if results['failed'].to_i != 0
     puts "Jasmine specs are failed."
-    exit -1    
+    exit -1
   end
 
 end

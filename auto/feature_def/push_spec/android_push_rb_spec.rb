@@ -117,7 +117,7 @@ $deviceOpts = '-e'
 
 out = `adb get-state`
 unless out =~ /device/
-  puts "Restart adb server ..."  
+  puts "Restart adb server ..."
   out = `adb kill-server; adb start-server`
   puts out
 end
@@ -264,18 +264,18 @@ device_list.each do |dev|
         sleep 3
       end
       res.code.should == 200
-      device_push_type.should == push_type      
+      device_push_type.should == push_type
     end
-    
+
 
     # 3
     it 'should proceed push message at foreground' do
       # puts 'should proceed push message at foreground'
-    
+
       message = 'hello_world'
       params = { :user_id=>['pushclient'], :message => message }
       RhoconnectHelper.api_post('users/ping', params, @api_token)
-    
+
       expect_request('alert', 60).should == message
     end
 
@@ -324,16 +324,16 @@ device_list.each do |dev|
       params = { :user_id=>['pushclient'], :message => message }
       RhoconnectHelper.api_post('users/ping', params, @api_token)
       sleep 3
-    
-      expect_request('userNotifyMode').should == 'backgroundNotifications'      
+
+      expect_request('userNotifyMode').should == 'backgroundNotifications'
     end
-    
+
     # 6
     it 'should process sequence of push messages' do
       # puts 'should process sequence of push messages'
-    
+
       COUNT = 3
-      # puts "Sending #{COUNT} push messages ..."    
+      # puts "Sending #{COUNT} push messages ..."
       alerts = {}
       COUNT.times do |i|
         message = "magic#{i}"
@@ -363,15 +363,15 @@ device_list.each do |dev|
         $requests.clear
       end
     end
-    
+
     # 7
     it 'should proceed push message with exit comand' do
       # puts 'should proceed push message with exit comand'
-    
+
       message = 'exit'
       params = { :user_id=>['pushclient'], :message=>message }
       RhoconnectHelper.api_post('users/ping',params,@api_token)
-    
+
       # puts 'Waiting message with push content...'
       expect_request('alert').should == message
       sleep 5
@@ -379,44 +379,44 @@ device_list.each do |dev|
       output = Jake.run2('adb', args, {:hide_output => true})
       (output =~ /push_client_rb/).should be_nil
     end
-    
+
     # 8
     it 'should start stopped app and process pending push message' do
       # puts 'should start stopped app and process pending push message'
-    
+
       args =  $deviceId ?  ['-s', $deviceId, 'shell', 'ps'] : ['-e', 'shell', 'ps']
       output = Jake.run2('adb', args, {:hide_output => true})
       (output =~ /push_client_rb/).should be_nil
-    
+
       # puts 'Sending push message with greeting ...'
       message = 'Hello'
       params = { :user_id=>['pushclient'], :message => message}
       RhoconnectHelper.api_post('users/ping',params,@api_token)
-    
+
       # puts 'Waiting ping message with push content ...'
       expect_request('alert', 60).should == message
-    
+
       args =  $deviceId ?  ['-s', $deviceId, 'shell', 'ps'] : ['-e', 'shell', 'ps']
       output = Jake.run2('adb', args, {:hide_output => true})
       (output =~ /push_client_rb/).should_not be_nil
     end
-    
+
     # 9
     it 'should logout and login back and process ping message' do
       # puts 'should logout and login back and process ping message'
-    
+
       message = 'logout'
       params = { :user_id=>['pushclient'], :message=>message }
       RhoconnectHelper.api_post('users/ping',params,@api_token)
       expect_request('alert').should == message
-    
+
       system("adb #{$deviceOpts} shell am start -a android.intent.action.MAIN -n com.rhomobile.push_client_rb/com.rhomobile.rhodes.RhodesActivity", :out=>"/dev/null").should == true
       expect_request('error').should == "0"
 
       device_id = expect_request('device_id')
       device_id.should_not be_nil
       device_id.should_not == ''
-    
+
       message = 'welcome'
       params = { :user_id=>['pushclient'], :message => message}
       RhoconnectHelper.api_post('users/ping',params,@api_token)
