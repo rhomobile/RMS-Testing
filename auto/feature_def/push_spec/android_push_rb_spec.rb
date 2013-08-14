@@ -269,8 +269,8 @@ device_list.each do |dev|
     end
 
     # 3
-    it 'should proceed push message at foreground' do
-      puts 'should proceed push message at foreground'
+    it 'should process push message at foreground' do
+      puts 'should process push message at foreground'
 
       message = 'hello_world'
       params = { :user_id=>['pushclient'], :message => message }
@@ -366,8 +366,8 @@ device_list.each do |dev|
     end
 
     # 8
-    it 'should proceed push message with exit comand' do
-      puts 'should proceed push message with exit comand'
+    it 'should process push message with exit comand' do
+      puts 'should process push message with exit comand'
 
       message = 'exit'
       params = { :user_id=>['pushclient'], :message=>message }
