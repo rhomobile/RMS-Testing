@@ -75,24 +75,27 @@ class SettingsController < Rho::RhoController
       puts "-- push_callback - skipping response: #{url} <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<"
     else
 		  begin
-		    if action == 'properties' # Read properties and return them
+		    if action == 'properties'
+          # Read properties and return them
 		      pushAppName = Rho::Push.pushAppName
           pushServer = Rho::Push.pushServer
           type = Rho::Push.type
           userNotifyMode = Rho::Push.userNotifyMode
           url = "http://#{host}:#{port}?pushAppName=#{pushAppName}&pushServer=#{pushServer}&type=#{type}&userNotifyMode=#{userNotifyMode}"
-  		  elsif action == 'getProperties' # getProperty(name) and return all of them
-		      pushAppName = Rho::Push.getProperty('pushAppName')
+
+          # getProperty(name) and return all of them
+          pushAppName = Rho::Push.getProperty('pushAppName')
           pushServer = Rho::Push.getProperty('pushServer')
           type = Rho::Push.getProperty('type')
           userNotifyMode = Rho::Push.getProperty('userNotifyMode')
-          url = "http://#{host}:#{port}?pushAppName=#{pushAppName}&pushServer=#{pushServer}&type=#{type}&userNotifyMode=#{userNotifyMode}"  		    
-        elsif action == 'userNotifyMode'
+          url << "&pushAppName1=#{pushAppName}&pushServer1=#{pushServer}&type1=#{type}&userNotifyMode1=#{userNotifyMode}"
+          # set property 'userNotifyMode' and get it
           Rho::Push.userNotifyMode = 'backgroundNotifications'
           notifyMode = Rho::Push.userNotifyMode
-          url = "http://#{host}:#{port}?userNotifyMode=#{notifyMode}"
+          url << "&userNotifyMode2=#{notifyMode}"
 		    end
-			  puts "-- push_callback - get request: #{url}"
+			  puts "-- push_callback - get request to local server"
+        puts "url: #{url}"
         res = Rho::AsyncHttp.get :url => url
         puts "-- push_callback - response: #{res} "
 		  rescue Exception => e

@@ -1,6 +1,6 @@
 # path to local rhodes workspace
-rhodes: "C:/MotorolaRhoMobileSuite4.0.0.beta.43/ruby/lib/ruby/gems/1.9.1/gems/rhodes-4.0.0.beta.43"
-#rhodes: "../../../../rhodes"
+# rhodes: "C:/MotorolaRhoMobileSuite4.0.0.beta.43/ruby/lib/ruby/gems/1.9.1/gems/rhodes-4.0.0.beta.43"
+rhodes: "../../../../rhodes"
 
 # path to local rhoconnect workspace
 rhoconnect: "../../../../rhoconnect"
@@ -21,3 +21,4 @@ rc_push_server_port: 8675
 device_address: 192.168.1.133
 # device OS platform (wm, ce)
 device_os: wm
+

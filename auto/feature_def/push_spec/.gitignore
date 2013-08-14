@@ -2,6 +2,7 @@ TODO
 README_ANDROID_PUSH_SPECS
 tmp
 *.xml
+config.yml
 
 push_client_rb/bin
 push_client_rb/*.log
@@ -16,5 +17,3 @@ store-rhodes-client/rholog.txt
 
 android_push_client/
 push_client_js/*.log
-
-
