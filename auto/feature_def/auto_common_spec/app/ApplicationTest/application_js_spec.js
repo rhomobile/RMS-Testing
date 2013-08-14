@@ -27,53 +27,79 @@ describe("Application JS API", function () {
 	describe("Basic specs", function () {
 		
 	    it("Test appBundleFolder property", function () {
-	        expect(Rho.Application.appBundleFolder).isNotEmptyString();
+	        var result = Rho.Application.appBundleFolder;
+			Rho.Log.info(" Rho.Application.appBundleFolder = " + result, "App");
+ 			expect(result).isNotEmptyString();
 	    });
 	
 	    it("Test appsBundleFolder proeprty", function () {
-	        expect(Rho.Application.appsBundleFolder).isNotEmptyString();
+	        var result = Rho.Application.appsBundleFolder;
+			Rho.Log.info(" Rho.Application.appsBundleFolder = " + result, "App");
+ 			expect(result).isNotEmptyString();
 	    });
 	
 	    it("Test userFolder property", function () {
-	        expect(Rho.Application.userFolder).isNotEmptyString();
+	        var result = Rho.Application.userFolder;
+			Rho.Log.info(" Rho.Application.userFolder = " + result, "App");
+ 			expect(result).isNotEmptyString();
 	    });
 	
 	    xit("Test configPath property", function () {
-	        expect(Rho.Application.configPath).isNotEmptyString();
+	        var result = Rho.Application.configPath;
+			Rho.Log.info(" Rho.Application.configPath = " + result, "App");
+ 			expect(result).isNotEmptyString();
 	    });
 	
 	    it("Test modelsManifestPath property", function () {
-	        expect(Rho.Application.modelsManifestPath).isNotEmptyString(0);
+	        var result = Rho.Application.modelsManifestPath;
+			Rho.Log.info(" Rho.Application.modelsManifestPath = " + result, "App");
+ 			expect(result).isNotEmptyString(0);
 	    });
 	
 	    it("Test databaseBlobFolder property", function () {
-	        expect(Rho.Application.databaseBlobFolder).isNotEmptyString(0);
+	        var result = Rho.Application.databaseBlobFolder;
+			Rho.Log.info(" Rho.Application.databaseBlobFolder = " + result, "App");
+ 			expect(result).isNotEmptyString(0);
 	    });
 	
 	    it("Test publicFolder property", function () {
-	        expect(Rho.Application.publicFolder).isNotEmptyString();
+	        var result = Rho.Application.publicFolder;
+			Rho.Log.info(" Rho.Application.publicFolder = " + result, "App");
+ 			expect(result).isNotEmptyString();
 	    });
 	
 	    it("Test startURI property", function () {
 	        Rho.Application.startURI = 'index.html';
-	        expect(Rho.Application.startURI).toEqual('index.html');
+	        var result = Rho.Application.startURI;
+			Rho.Log.info(" Rho.Application.startURI = " + result, "App");
+ 			expect(result).toEqual('index.html');
 	    });
 	
 	    it("Test settingsPageURI property", function () {
 	        Rho.Application.settingsPageURI = 'settings.html';
-	        expect(Rho.Application.settingsPageURI).toEqual('settings.html');
+	        var result = Rho.Application.settingsPageURI;
+			Rho.Log.info(" Rho.Application.settingsPageURI = " + result, "App");
+ 			expect(result).toEqual('settings.html');
 	    });
 	
 	    it("Test splash property", function () {
-	        expect(Rho.Application.splash).isNotEmptyString();
+	        var result = Rho.Application.splash;
+			Rho.Log.info(" Rho.Application.splash = " + result, "App");
+ 			expect(result).isNotEmptyString();
 	    });
 	
 	    it("Test version property", function () {
-	        expect(Rho.Application.version).isNotEmptyString();
+	        var result = Rho.Application.version;
+			Rho.Log.info(" Rho.Application.version = " + result, "App");
+ 			expect(result).toEqual("1.0");
 	    });
 	
 	    it("Test name property", function () {
-	        expect(Rho.Application.getName()).isNotEmptyString();
+	    	var result = Rho.Application.appName;
+			Rho.Log.info(" Rho.Application.appName = " + result, "App");
+			expect(result).toEqual("auto_common_spec");
+			var result2 = Rho.Application.getAppName();
+	        expect(result2).toEqual("auto_common_spec");
 	    });
 	
 	
