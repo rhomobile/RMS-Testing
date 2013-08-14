@@ -1,0 +1,26 @@
+#sdk: "C:/MotorolaRhoMobileSuite4.0.0.beta.9/ruby/lib/ruby/gems/1.9.1/gems/rhodes-4.0.0.beta.9"
+sdkversion: "4.0.0"
+name: "BlobSync_RhodesApps"
+app_type: "rhoelements"
+version: 1.0
+vendor: "rhomobile"
+build: "debug"
+bbver: 6.0
+applog: "rholog.txt"
+iphone:
+  configuration: "Release"
+  sdk: "iphonesimulator6.0"
+  provisionprofile: 
+  codesignidentity: 
+  entitlements: 
+  BundleIdentifier: "com.rhomobile.blobsyncrhodesapps"
+  BundleURLScheme: "blobsyncrhodesapps"
+wm:
+  sdk: "Windows Mobile 6.5.3 Professional DTK (ARMV4I)"
+#sdk: "MC3000c50b (ARMV4I)"
+android:
+  version: "2.3.4"
+  capabilities:
+extensions:
+  - json
+  - rhoconnect-client

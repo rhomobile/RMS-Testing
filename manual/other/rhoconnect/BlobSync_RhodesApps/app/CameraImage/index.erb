@@ -1,0 +1,67 @@
+<html>
+<script type="text/javascript">
+function setSyncServerUrl()
+{
+  var syncUrl=document.getElementById("syncUrl").value;  
+  $.get('/app/CameraImage/setSyncServerUrl', {syncUrl : syncUrl });
+  return false;  
+}
+
+function showSig()
+{
+  $.get('/app/CameraImage/show_signature',{ }) ;    
+}
+
+function captureSig()
+{
+  $.get('/app/CameraImage/capture_signature',{ }) ; 
+}
+
+function clearSig()
+{
+  $.get('/app/CameraImage/clear_signature',{ }) ;   
+}
+
+function takePhoto()
+{
+  $.get('/app/CameraImage/capture_photo',{ });  
+}
+
+function setFieldValue(returnval) 
+{
+  document.getElementById("myResult").innerHTML=returnval;
+}
+</script>
+<body>
+<br><br>CameraImage Model<br>
+SyncServerURL:<br>
+<input type="text" name="syncUrl" id="syncUrl" col="100" value="http://172.20.10.2:9292/" /> 
+<INPUT type="button" value="SetSyncServerURL" name="SetSyncServer" onClick="setSyncServerUrl();"> <br>   
+<br>
+<% @dbdata.reverse_each do |x|%>
+  <% if x.signature_uri %>
+  <img src="<%=Rho::RhoApplication::get_blob_path(x.signature_uri)%>" width='100px'></img>
+  <a href="<%=url_for(:action => :delete, :id =>x.object)%>">Delete</a><br/>
+  <% break %>
+  <% end %>
+<% end %>
+<br><br><br><br><br><br><br>
+Signature:-<br>
+<input type="button" value="show" onclick="showSig()">
+<input type="button" value="Capture" onclick="captureSig()">
+<input type="button" value="clear" onclick="clearSig()">
+<br>
+Camera:-<br>
+<% @dbdata.reverse_each do |x|%>
+      <% if x.image_uri %>
+          <img src="<%=Rho::RhoApplication::get_blob_path(x.image_uri)%>" width='100px'></img>
+          <a href="<%=url_for(:action => :delete, :id =>x.object)%>">Delete</a><br/>
+          <% break %>
+      <% end %>        
+<% end %>    
+<br><br>
+<input type="button" value="Take CameraPhoto" onclick="takePhoto()"><br>
+
+<a href="<%= url_for :action => :doDBRecordCount %>">Number_DBRecord</a><hr>
+</body>
+</html>
