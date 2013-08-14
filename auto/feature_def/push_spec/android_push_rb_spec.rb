@@ -305,7 +305,7 @@ device_list.each do |dev|
       end
       @properties['userNotifyMode'].should == "" # expected 'backgroundNotifications'
     end
-=begin
+
     # 5
     it "should return push properties by property name" do
       puts "should return push properties by property name"
@@ -424,6 +424,6 @@ device_list.each do |dev|
       RhoconnectHelper.api_post('users/ping',params,@api_token)
       expect_request('alert').should == message
     end
-=end
+
   end
 end
