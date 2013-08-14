@@ -245,13 +245,13 @@ device_list.each do |dev|
       device_id.should_not == ''
 
       res = ''
-      10.times do |i|
+      client_id = nil
+      20.times do |i|
         res = RhoconnectHelper.api_get('users/pushclient/clients', @api_token)
-        break unless res.body.empty?
+        client_id = JSON.parse(res.body)[0]
+        break if client_id
         sleep 3
       end
-      client_id = JSON.parse(res.body)[0]
-      # puts "-- clients: #{client_id}"
       res.code.should == 200
       client_id.should_not be_nil
 
@@ -267,7 +267,6 @@ device_list.each do |dev|
       res.code.should == 200
       device_push_type.should == push_type
     end
-
 
     # 3
     it 'should proceed push message at foreground' do
