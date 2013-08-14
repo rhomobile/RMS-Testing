@@ -216,7 +216,7 @@ describe("Log JS API", function () {
 				Rho.Log.destinationURI = srvHttpLogPostUrl;
 				Rho.Log.warning("TEST MESSAGE!", "VT290-397");
 				Rho.Log.sendLogFile();
-			}
+			})
 
 			waits(2000);
 			
