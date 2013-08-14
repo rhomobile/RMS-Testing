@@ -1,0 +1,183 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head><title>Sync Engine JS API Test</title>
+    <meta name="viewport" content="initial-scale=1.0, width=device-width"/>
+    <script src="/public/js/syncengine.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        function put(msg, container) {
+            document.getElementById(container).innerHTML = msg;
+        }
+        api = window.Rho.syncengine;
+    </script>
+</head>
+<body>
+
+API functions tests:
+<ul>
+    <li>
+        <a href="#" onclick="api.set_threaded_mode(true, function(res){put(res, 'result_set_threaded_mode');}); return false;">
+            set_threaded_mode(true)</a>&nbsp;
+        <span id="result_set_threaded_mode"></span>
+    </li>
+    
+    <li>
+        <a href="#" onclick="api.set_threaded_mode(false, function(res){put(res, 'result_set_threaded_mode_disable');}); return false;">
+            set_threaded_mode(false)</a>&nbsp;
+        <span id="result_set_threaded_mode_disable"></span>
+    </li>
+
+    <li>
+        <a href="#" onclick="api.enable_status_popup(true, function(res){put(res, 'result_enable_status_popup');}); return false;">
+            enable_status_popup(true)</a>&nbsp;
+        <span id="result_enable_status_popup"></span>
+    </li>
+    
+    <li>
+        <a href="#" onclick="api.enable_status_popup(false, function(res){put(res, 'result_disable_status_popup');}); return false;">
+            enable_status_popup(false)</a>&nbsp;
+        <span id="result_disable_status_popup"></span>
+    </li>
+
+    <li>
+        <a href="#" onclick="api.set_ssl_verify_peer(true, function(res){put(res, 'result_set_ssl_verify_peer');}); return false;">
+            set_ssl_verify_peer(true)</a>&nbsp;
+        <span id="result_set_ssl_verify_peer"></span>
+    </li>
+    
+     <li>
+        <a href="#" onclick="api.set_ssl_verify_peer(false, function(res){put(res, 'result_set_ssl_verify_peer_disable');}); return false;">
+            set_ssl_verify_peer(false)</a>&nbsp;
+        <span id="result_set_ssl_verify_peer_disable"></span>
+    </li>
+
+    <li>
+        <a href="#" onclick="api.register_push(function(res){put(res, 'result_register_push');}); return false;">register_push()</a>&nbsp;
+        <span id="result_register_push"></span>
+    </li>
+
+    <li>
+        <a href="#" onclick="api.set_syncserver('http://192.168.0.23:9292/application', function(res){put(res, 'result_set_syncserverHome');}); return false;">
+            set_syncserver('http://192.168.0.23:9292/application')</a>&nbsp;
+        <span id="result_set_syncserverHome"></span>
+    </li>
+    
+     <li>
+        <a href="#" onclick="api.set_syncserver('http://192.168.6.109:9292/application', function(res){put(res, 'result_set_syncserver192');}); return false;">
+            set_syncserver('http://192.168.6.109:9292/application')</a>&nbsp;
+        <span id="result_set_syncserver192"></span>
+    </li>
+    
+     <li>
+        <a href="#" onclick="api.set_syncserver('http://localhost:9292/application', function(res){put(res, 'result_set_syncserver_local');}); return false;">
+            set_syncserver('http://localhost:9292/application')</a>&nbsp;
+        <span id="result_set_syncserver_local"></span>
+    </li>
+    
+   
+    
+    <li>
+        <a href="#" onclick="api.set_pollinterval(60, function(res){put(res, 'result_set_pollinterval');}); return false;">
+            set_pollinterval(60)</a>&nbsp;
+        <span id="result_set_pollinterval"></span>
+    </li>
+    
+     <li>
+        <a href="#" onclick="api.set_pollinterval(0, function(res){put(res, 'result_set_pollinterval_0');}); return false;">
+            set_pollinterval(0)</a>&nbsp;
+        <span id="result_set_pollinterval_0"></span>
+    </li>
+
+    <li>
+        <a href="#" onclick="api.get_pollinterval(function(res){put(res, 'result_get_pollinterval');}); return false;">
+            get_pollinterval()</a>&nbsp;
+        <span id="result_get_pollinterval"></span>
+    </li>
+
+    <li>
+        <a href="#" onclick="api.set_pagesize(100, function(res){put(res, 'result_set_pagesize');}); return false;">
+            set_pagesize(100)</a>&nbsp;
+        <span id="result_set_pagesize"></span>
+    </li>
+    
+     <li>
+        <a href="#" onclick="api.set_pagesize(0, function(res){put(res, 'result_set_pagesize_0');}); return false;">
+            set_pagesize(0)</a>&nbsp;
+        <span id="result_set_pagesize_0"></span>
+    </li>
+
+    <li>
+        <a href="#" onclick="api.get_pagesize(function(res){put(res, 'result_get_pagesize');}); return false;">
+            get_pagesize()</a>&nbsp;
+        <span id="result_get_pagesize"></span>
+    </li>
+
+    <li>
+        <a href="#" onclick="api.login('abc', '123', function(result){alert(result);} ,function(res){put(res, 'result_login');}); return false;">
+            login('abc', '123', '')</a>&nbsp;
+        <span id="result_login"></span>
+    </li>
+
+    <li>
+        <a href="#" onclick="api.logged_in(function(res){put(res, 'result_logged_in');}); return false;">
+            logged_in()</a>&nbsp;
+        <span id="result_logged_in"></span>
+    </li>
+
+    <li>
+        <a href="#" onclick="api.logout(function(res){put(res, 'result_logout');}); return false;">
+            logout()</a>&nbsp;
+        <span id="result_logout"></span>
+    </li>
+
+    <li>
+        <a href="#" onclick="api.dosync(false, '', function(res){put(res, 'result_dosyncFalse');}); return false;">
+            dosync(false)</a>&nbsp;
+        <span id="result_dosyncFalse"></span>
+    </li>
+    
+      <li>
+        <a href="#" onclick="api.dosync(true, '', function(res){put(res, 'result_dosyncTrue');}); return false;">
+            dosync(true)</a>&nbsp;
+        <span id="result_dosyncTrue"></span>
+    </li>
+
+    <li>
+        <a href="#" onclick="api.dosync_source('Product', false, '', function(res){put(res, 'result_dosync_sourcename_popupdisable');}); return false;">
+            dosync_source('source_name_popup_disable')</a>&nbsp;
+        <span id="result_dosync_sourcename_popupdisable"></span>
+    </li>
+    
+     <li>
+        <a href="#" onclick="api.dosync_source('Product', true, '', function(res){put(res, 'result_dosync_sourcename_popupenable');}); return false;">
+            dosync_source('source_name_popup_enable')</a>&nbsp;
+        <span id="result_dosync_sourcename_popupenable"></span>
+    </li>
+    
+     <li>
+        <a href="#" onclick="api.is_syncing(function(res){put(res, 'result_is_syncing');}); return false;">
+            is_syncing()</a>&nbsp;
+        <span id="result_is_syncing"></span>
+    </li>
+
+    <li>
+        <a href="#" onclick="api.stop_sync(function(res){put(res, 'result_stop_sync');}); return false;">
+            stop_sync()</a>&nbsp;
+        <span id="result_stop_sync"></span>
+    </li>
+
+    <li>
+        <a href="#" onclick="api.set_objectnotify(function(result){alert(result);}, function(res){put(res, 'result_set_objectnotify');}); return false;">
+            set_objectnotify('someUrl')</a>&nbsp;
+        <span id="result_set_objectnotify"></span>
+    </li>
+
+    <li>
+        <a href="#" onclick="api.clean_objectnotify(function(res){put(res, 'result_clean_objectnotify');}); return false;">
+            clean_objectnotify()</a>&nbsp;
+        <span id="result_clean_objectnotify"></span>
+    </li>
+</ul>
+
+</body>
+</html>
