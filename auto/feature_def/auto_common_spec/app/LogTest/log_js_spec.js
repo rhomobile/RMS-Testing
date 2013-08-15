@@ -216,9 +216,9 @@ describe("Log JS API", function () {
 				Rho.Log.destinationURI = srvHttpLogPostUrl;
 				Rho.Log.warning("TEST MESSAGE!", "VT290-397");
 				Rho.Log.sendLogFile();
-			})
+			} );
 
-			waits(2000);
+			waits(100);
 			
 			runs(function(){
 				Rho.Log.filePath = originalLogSettings.filePath;
@@ -271,10 +271,14 @@ describe("Log JS API", function () {
 				Rho.Log.destinationURI = srvHttpLogPostUrl;
 				Rho.Log.warning("TEST MESSAGE!", "VT290-398");
 				Rho.Log.sendLogFile(sendcallback);
+			} );
 
+			waits(100);
+			
+			runs(function(){
 				Rho.Log.filePath = originalLogSettings.filePath;
 				Rho.Log.level = 0;
-			});
+			} );
 
 			waitsFor( function() {
 					return callbackCalled;
@@ -323,10 +327,14 @@ describe("Log JS API", function () {
 				Rho.Log.destinationURI = srvHttpLogPostUrl;
 				Rho.Log.warning("TEST MESSAGE!", "VT290-400");
 				Rho.Log.sendLogFile(function() {callbackCalled = true;});
-								
+			} );
+
+			waits(100);
+			
+			runs(function(){
 				Rho.Log.filePath = originalLogSettings.filePath;
 				Rho.Log.level = 0;
-			});
+			} );
 
 			waitsFor( function() {
 					return callbackCalled;
