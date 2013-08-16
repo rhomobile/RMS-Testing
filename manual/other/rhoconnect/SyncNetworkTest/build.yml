@@ -1,0 +1,47 @@
+name: "SyncNetworkTestBeta3"
+capabilities:
+  - gps
+  - pim
+  - camera
+  - vibrate
+  - phone
+  - bluetooth
+  - calendar
+  - motorola_browser
+version: "1.0"
+vendor: "rhomobile"
+bbver: 7.1
+applog: "rholog.txt"
+iphone:
+  configuration: "Release"
+  sdk: "iphonesimulator5.0"
+  provisionprofile: 
+  codesignidentity: 
+  entitlements: 
+  BundleIdentifier: "com.rhomobile.syncnetworktest"
+  BundleURLScheme: "syncnetworktest"
+wm:
+  sdk: "Windows Mobile 6.5.3 Professional DTK (ARMV4I)"
+#sdk: "Windows Mobile 6 Professional SDK (ARMV4I)"
+  #sdk: "MC3000c50b (ARMV4I)"
+wp:
+  productid: "d85f2dd0-e3c8-012f-9248-58946b66d410"
+symbian:
+  uid: "0xe8361dbb"
+android:
+  extensions:
+    - barcode
+    - rainbow
+    - digest
+    - digest-md5
+    - digest-sha1
+  capabilities:
+    - network_state
+    - sdcard
+    - calendar
+  version: "2.3.4"
+  emulator: "Amit"
+extensions:
+  - json
+  - rhoconnect-client
+bb: 
