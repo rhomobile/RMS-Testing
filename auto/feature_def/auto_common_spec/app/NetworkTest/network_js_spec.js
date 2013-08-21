@@ -262,7 +262,6 @@ describe('Network JS API', function() {
 
         });
 
-        if (Rho.System.platform != "WP8") {
             it('VT293-0037 | verifyPeerCertificate with default value', function () {
                 var status = '';
                 var callbackCalled = false;
@@ -324,6 +323,7 @@ describe('Network JS API', function() {
                 });
             });
 
+        if (Rho.System.platform != "WP8") {
             it('VT293-0039 | verifyPeerCertificate with false', function () {
                 var data = '';
                 var callbackCalled = false;
