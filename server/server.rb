@@ -62,6 +62,15 @@ $local_server.mount_proc '/download' do |req,res|
   res.content_length = res.body.length
 end
 
+$local_server.mount_proc '/timeout' do |req,res|
+    sleep(60)
+    
+    res.body = "OK"
+    res.status = 200
+    res.content_length = res.body.length
+end
+
+
 $local_server.mount_proc '/upload' do |req,res|
     upload_body = req.body
 end

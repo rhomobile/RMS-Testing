@@ -107,6 +107,23 @@
     </div>
 </div>
 
+<div id="name_test" >
+    <div class="method_name">Rho.Application.Name</div>
+    <div class="method_desc">Define app name</div>
+
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <button class="getValue" onClick='setDomElementText("name_test", Rho.Application.name );'>get app name</button>
+            <br/>
+            <span class="result"></span>
+        </div>
+        <div class="test_scenario_desc">
+            <span class="test_scenario_number">VT***-**</span>
+            <span> Press button for get current app name</span>
+        </div>
+    </div>
+</div>
+
 <fieldset>
 	<legend>Rho.Application.Native Menu (Not applicable on iOS!)</legend>
 	<ul>Redefine the NativMenu
@@ -136,7 +153,9 @@
 	<legend>Rho.Application.setApplicationNotify</legend>
 	<ul>setApplicationNotify
 	<li id="Rho_Application_Notify">
-	  <a href="javascript:void(0)" onclick ="applicationNotify();">setApplicationNotify</a><span class="result"></span></li>
+	  <a href="javascript:void(0)" onclick ="applicationNotify();">setApplicationNotify</a>
+      <br><span class="result"></span>
+      <br><ul class="list"><li>Test</li></ul></li>
 	</ul>
 </fieldset>
 

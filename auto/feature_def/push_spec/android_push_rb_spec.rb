@@ -6,7 +6,8 @@ require 'mspec'
 
 # push type: Rhoconnect Push Service (rhoconnect_push) | Google Cloud Messaging (gcm)
 # push_type = MSpec.retrieve(:push_type)
-push_type = ((ARGV[1].nil?) ?  "rhoconnect_push" : ARGV[1]) #unless push_type
+# push_type = ((ARGV[1].nil?) ?  "rhoconnect_push" : ARGV[1]) #unless push_type
+push_type = ENV['PUSH_TYPE'] ? ENV['PUSH_TYPE'] : "rhoconnect_push"
 unless push_type == 'rhoconnect_push' || push_type == 'gcm'
   puts "Invalid param: 'rhoconnect_push' or 'gcm' expected"
   exit
@@ -232,25 +233,25 @@ device_list.each do |dev|
 
     # 1
     it 'should login' do
-      # puts 'should login'
+      puts 'should login'
       expect_request('error').should == "0"
     end
 
     # 2
     it 'should register' do
-      # puts 'should register'
+      puts 'should register'
       device_id = expect_request('device_id')
       device_id.should_not be_nil
       device_id.should_not == ''
 
       res = ''
-      10.times do |i|
+      client_id = nil
+      20.times do |i|
         res = RhoconnectHelper.api_get('users/pushclient/clients', @api_token)
-        break unless res.body.empty?
+        client_id = JSON.parse(res.body)[0]
+        break if client_id
         sleep 3
       end
-      client_id = JSON.parse(res.body)[0]
-      # puts "-- clients: #{client_id}"
       res.code.should == 200
       client_id.should_not be_nil
 
@@ -267,10 +268,9 @@ device_list.each do |dev|
       device_push_type.should == push_type
     end
 
-
     # 3
-    it 'should proceed push message at foreground' do
-      # puts 'should proceed push message at foreground'
+    it 'should process push message at foreground' do
+      puts 'should process push message at foreground'
 
       message = 'hello_world'
       params = { :user_id=>['pushclient'], :message => message }
@@ -281,56 +281,57 @@ device_list.each do |dev|
 
     # 4
     it 'should return push properties' do
+      puts 'should return push properties'
+
       message = 'properties'
       params = { :user_id=>['pushclient'], :message => message }
-      RhoconnectHelper.api_post('users/ping', params, @api_token)
-      sleep 3
-      # Get properties by call like Rho::Push.type ...
-      properties = expect_params
-      if push_type == "rhoconnect_push"
-        properties['pushAppName'].should == 'someappname'
-        properties['pushServer'].should == "http://#{RhoconnectHelper.push_host}:#{RhoconnectHelper.push_port}"
-        properties['type'].should == "rhoconnect-push"
-      else # gcm
-        properties['pushAppName'].should == ''
-        properties['pushServer'].should == ''
-        properties['type'].should == "native-push"
-      end
-      properties['userNotifyMode'].should == "" # expected 'backgroundNotifications'
-    end
 
-    it "should return push properties by property name" do
-      message = 'getProperties'
-      params = { :user_id=>['pushclient'], :message => message }
-      RhoconnectHelper.api_post('users/ping', params, @api_token)
-      sleep 3
-      # Get properties by call like Rho::Push.getProperty('type') ...
-      properties = expect_params
-      if push_type == "rhoconnect_push"
-        properties['pushAppName'].should == 'someappname'
-        properties['pushServer'].should == "http://#{RhoconnectHelper.push_host}:#{RhoconnectHelper.push_port}"
-        properties['type'].should == "rhoconnect-push"
-      else # gcm
-        properties['pushAppName'].should == ''
-        properties['pushServer'].should == ''
-        properties['type'].should == "native-push"
+      # Get properties by call like Rho::Push.type ...
+      3.times do
+        RhoconnectHelper.api_post('users/ping', params, @api_token)
+        sleep 3
+        @properties = expect_params
+        break if @properties
       end
-      properties['userNotifyMode'].should == "" # expected 'backgroundNotifications'
+      if push_type == "rhoconnect_push"
+        @properties['pushAppName'].should == 'someappname'
+        @properties['pushServer'].should == "http://#{RhoconnectHelper.push_host}:#{RhoconnectHelper.push_port}"
+        @properties['type'].should == "rhoconnect-push"
+      else # gcm
+        @properties['pushAppName'].should == ''
+        @properties['pushServer'].should == ''
+        @properties['type'].should == "native-push"
+      end
+      @properties['userNotifyMode'].should == "" # expected 'backgroundNotifications'
     end
 
     # 5
-    it "should set userNotifyMode on Android" do
-      message = 'userNotifyMode'
-      params = { :user_id=>['pushclient'], :message => message }
-      RhoconnectHelper.api_post('users/ping', params, @api_token)
-      sleep 3
+    it "should return push properties by property name" do
+      puts "should return push properties by property name"
 
-      expect_request('userNotifyMode').should == 'backgroundNotifications'
+      if push_type == "rhoconnect_push"
+        @properties['pushAppName1'].should == 'someappname'
+        @properties['pushServer1'].should == "http://#{RhoconnectHelper.push_host}:#{RhoconnectHelper.push_port}"
+        @properties['type1'].should == "rhoconnect-push"
+      else # gcm
+        @properties['pushAppName1'].should == ''
+        @properties['pushServer1'].should == ''
+        @properties['type1'].should == "native-push"
+      end
+      @properties['userNotifyMode1'].should == "" # expected 'backgroundNotifications'
     end
 
     # 6
+    it "should set userNotifyMode on Android" do
+      puts "should set userNotifyMode on Android"
+
+      @properties['userNotifyMode2'].should == 'backgroundNotifications'
+    end
+
+
+    # 7
     it 'should process sequence of push messages' do
-      # puts 'should process sequence of push messages'
+      puts 'should process sequence of push messages'
 
       COUNT = 3
       # puts "Sending #{COUNT} push messages ..."
@@ -364,9 +365,9 @@ device_list.each do |dev|
       end
     end
 
-    # 7
-    it 'should proceed push message with exit comand' do
-      # puts 'should proceed push message with exit comand'
+    # 8
+    it 'should process push message with exit comand' do
+      puts 'should process push message with exit comand'
 
       message = 'exit'
       params = { :user_id=>['pushclient'], :message=>message }
@@ -380,9 +381,9 @@ device_list.each do |dev|
       (output =~ /push_client_rb/).should be_nil
     end
 
-    # 8
+    # 9
     it 'should start stopped app and process pending push message' do
-      # puts 'should start stopped app and process pending push message'
+      puts 'should start stopped app and process pending push message'
 
       args =  $deviceId ?  ['-s', $deviceId, 'shell', 'ps'] : ['-e', 'shell', 'ps']
       output = Jake.run2('adb', args, {:hide_output => true})
@@ -401,9 +402,9 @@ device_list.each do |dev|
       (output =~ /push_client_rb/).should_not be_nil
     end
 
-    # 9
+    # 10
     it 'should logout and login back and process ping message' do
-      # puts 'should logout and login back and process ping message'
+      puts 'should logout and login back and process ping message'
 
       message = 'logout'
       params = { :user_id=>['pushclient'], :message=>message }
@@ -422,5 +423,6 @@ device_list.each do |dev|
       RhoconnectHelper.api_post('users/ping',params,@api_token)
       expect_request('alert').should == message
     end
+
   end
 end

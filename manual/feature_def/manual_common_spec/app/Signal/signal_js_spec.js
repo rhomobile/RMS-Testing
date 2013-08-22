@@ -220,7 +220,7 @@ if (isAnyButApplePlatform()) {
 
         runs(function () {
             dispTestCaseRunning("VT298-0017 - Watch the change in the properties  of signal icon");
-            dispExpectedResult("Signalicon should be shown with layout left and blue in conlor horizontal and vertical position at 20 and 40 ");
+            dispExpectedResult("Signalicon should be shown with layout left and red in color horizontal and vertical position at 20 and 40 ");
           Rho.SignalIndicators.showIcon({left: 20,top: 40,layout:'left',color:'#FF0000'});
 
         });
@@ -336,7 +336,8 @@ if (isAnyButApplePlatform()) {
         runs(function () {
             dispTestCaseRunning("VT298-0025 - see whether all the return parameters are retrieved in callback and check whether event is fired for every 8 sec ");
             dispExpectedResult("All the retrun parameters with desired value should be returned and the event should be fired for every 8 sec  ");
-       var  statusCall= Rho.SignalIndicators.wlanStatus(statusCallback);
+       var  statusCall= Rho.SignalIndicators.wlanStatus();
+	      var result = '';
           result += '<br/>signalStrength  :- ' + JSON.stringify(statusCall["signalStrength"]);
           result += '<br/>essid  :- ' + JSON.stringify(statusCall["essid"]);
           result += '<br/>macAddress  :- ' + JSON.stringify(statusCall["macAddress"]);
@@ -390,9 +391,10 @@ if (isAnyButApplePlatform()) {
           runs(function () {
                 expect(testResult).toEqual(true);
           });  
-      });        
+      });      
+if(Rho.System.platform != 'ANDROID')	  
     
-    it("VT298-0028| WlanStatus with 8 sec refresh interval |", function () {
+   { it("VT298-0028| WlanStatus with 8 sec refresh interval |", function () {
 
         runs(function () {
             dispTestCaseRunning("VT298-0028 - see whether all the return parameters are retrieved in callback and check whether event is fired for every 8 sec ");
@@ -409,4 +411,5 @@ if (isAnyButApplePlatform()) {
             expect(testResult).toEqual(true);
         });
     });  
+	}
 });

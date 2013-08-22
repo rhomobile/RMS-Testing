@@ -15,6 +15,7 @@ namespace :run do
     namespace :rb do
       desc "Run Rhoconnect Push Service specs on android device for Ruby rhodes app"
       task :rps do
+        ENV['PUSH_TYPE'] = "rhoconnect_push"
         require_relative 'spec_runner'
         exit 1 if $total.to_i==0
         exit $failed.to_i
@@ -25,15 +26,13 @@ namespace :run do
 
       desc "Run Google Cloud Messaging specs on android device for Ruby rhodes app"
       task :gcm do
-        status = exec("mspec android_push_rb_spec.rb 'gcm'")
-        exit status
+        ENV['PUSH_TYPE'] = "gcm"
+        require_relative 'spec_runner'
+        exit 1 if $total.to_i==0
+        exit $failed.to_i
 
-        # require 'mspec'
-        # MSpec.register_files [ File.join(File.dirname(__FILE__), 'android_push_rb_spec.rb') ]
-        # MSpec.store(:push_type, 'gcm')
-        # MSpec.process
-        # exit_code = MSpec.exit_code
-        # exit exit_code
+        # status = exec("mspec android_push_rb_spec.rb 'gcm'")
+        # exit status
       end
     end
 

@@ -1,0 +1,30 @@
+name: "RhomSyncAPITest"
+version: 1.0
+vendor: "rhomobile"
+build: "debug"
+bbver: 4.6
+applog: "rholog.txt"
+iphone:
+  configuration: "Release"
+  sdk: "iphonesimulator5.0"
+  provisionprofile: 
+  codesignidentity: 
+  entitlements: 
+  BundleIdentifier: "com.rhomobile.rhomsyncapitest"
+  BundleURLScheme: "rhomsyncapitest"
+wp:
+  productid: "b97652b0-275f-0130-9260-58946b66d410"
+symbian:
+  uid: "0xeb656de8"
+wm:
+  sdk: "Windows Mobile 6.5.3 Professional DTK (ARMV4I)"
+#sdk: "MC3000c50b (ARMV4I)"
+android:
+  version: "2.3.3"
+  emulator: "Amit"
+extensions:
+  - json
+  - rhodes_translator
+  - rhoconnect-client
+capabilities:
+  - motorola_browser

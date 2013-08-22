@@ -108,10 +108,24 @@ function applicationNotify(){
 Rho.Application.setApplicationNotify(notifyCallback);
 }
 
-function notifyCallback(params){
-//data=params;
-Rho.Log.info(params.applicationEvent,'APP_CALLBACK');
+function leftZeroFill(number, targetLength) {
+    var output = number + '';
+    while (output.length < targetLength) {
+        output = '0' + output;
+    }
+    return output;
+}
 
-$("#Rho_Application_Notify span.result").text(params.applicationEvent);
+function notifyCallback(params){
+  //data=params;
+  Rho.Log.info(params.applicationEvent,'APP_CALLBACK');
+
+  $("#Rho_Application_Notify span.result").text(params.applicationEvent);
+
+  var time = new Date();
+  var timeStr = leftZeroFill(time.getHours(),2) + ":" + leftZeroFill(time.getMinutes(),2) + ":" + leftZeroFill(time.getSeconds(),2) + "." + leftZeroFill(~~(time.getMilliseconds()/10),2);
+  
+  // create new ul
+  var ul = $("#Rho_Application_Notify ul.list").append("<li><ul>Event: " + params.applicationEvent + "<li>Time: " + timeStr+"</li></ul></li>");
 }	
 	
