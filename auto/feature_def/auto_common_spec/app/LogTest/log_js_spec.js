@@ -1,4 +1,15 @@
 describe("Log JS API", function () {
+	var originalLogLevel = Rho.Log.level;
+	
+	beforeEach(function () {
+		originalLogLevel = Rho.Log.level;
+		Rho.Log.info("Original log level"+ originalLogLevel, "TST");
+	});
+
+	afterEach(function () {
+		Rho.Log.level = originalLogLevel;
+		Rho.Log.info("Log level after all tests: "+ Rho.Log.level, "TST");
+	});
 
 	describe("ST set", function () {
 
