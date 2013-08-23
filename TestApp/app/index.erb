@@ -1,9 +1,17 @@
 <script type="text/javascript">
-function sysGetStartParams()
-{
-	data = Rho.System.getStartParams();
-	$("#sysGetStartParams span.result").text(JSON.stringify(data));
-}
+
+    function doAction(val) {
+        var url = "/app/System/" + val + "?rho_callback=1"
+        if (window.XMLHttpRequest) {
+            var xhr = new window.XMLHttpRequest();
+            xhr.open("GET", url, true);
+            xhr.send(null);
+        } else {
+            var xmlHttpReq = new ActiveXObject("Msxml2.XMLHTTP");
+            xmlHttpReq.open("GET", url, true);
+            xmlHttpReq.send();
+        }
+    }
 </script>
 
 <div data-role="page" data-url="<%= Rho::RhoConfig.start_path %>/">
@@ -24,12 +32,9 @@ function sysGetStartParams()
 	</div>
 
 </div>
-<div class="method_tests">
-	<div class="method_name">Rho.System.getStartParams</div>
-	<div class="method_desc">Retrieve the start params.</div>
-	<div class="test_scenario">
-		<div id="sysGetStartParams">
-			<a href="javascript:void(0)" onclick ="sysGetStartParams()">Get start params :  </a> <span class="result"> </span>
-		</div>
-	</div>
+<div id="ruby_getStartParams">
+  <button onclick ="doAction('getStartParameters')">Ruby: Get start params: </button>
+</div>
+<div id="js_getStartParams">
+	<button onclick ='alert(JSON.stringify(Rho.System.getStartParams()));'>Javascript: Get start params</button>
 </div>
