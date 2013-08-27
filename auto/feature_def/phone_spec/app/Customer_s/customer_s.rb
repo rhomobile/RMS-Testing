@@ -1,5 +1,6 @@
+require 'rhom'
 class Customer_s
-    include Rhom::FixedSchema
+    include ORM::FixedSchema
 
     enable :sync
     set :sync_priority, 1

@@ -1,11 +1,9 @@
 require 'rhom'
-
 class Product
-
-    include Rhom::PropertyBag
+    include ORM::PropertyBag
 
     enable :sync
-    #set :partition, :application
+    #set :partition, :local
     set :sync_priority, 1  #sync engine should reorder sources
     
     belongs_to :quantity, ['Customer']
