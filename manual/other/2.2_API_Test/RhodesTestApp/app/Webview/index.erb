@@ -34,6 +34,10 @@ alert(document.cookie);
     <li><a href="#" onclick="$.get('<%= url_for :action => :navigate %>')">Google</a></li><br/>
     <li>Webview Navigate Index: Open Google in 2nd Tab</li>
     <li><a href="#" onclick="$.get('<%= url_for :action => :navigatewithindex %>')">Google Tab</a></li><br/>
+    <li>Webview Navigate Controller</li>
+    <li><a href="#" onclick="$.get('<%= url_for :action => :navigate_controller %>')">Controller Action</a></li><br/>
+    <li>Webview Navigate Index: Run Controller action in 2nd Tab</li>
+    <li><a href="#" onclick="$.get('<%= url_for :action => :navigate_controller_withindex %>')">Controller Action Within Tab</a></li><br/>
     <li>Webview Navigate Back</li>
     <li><a href="#" onclick="$.get('<%= url_for :action => :navigateback %>')">Go Back</a></li><br/>
     <li>WebView.current_location </li>

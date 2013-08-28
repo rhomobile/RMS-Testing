@@ -62,6 +62,15 @@ $local_server.mount_proc '/download' do |req,res|
   res.content_length = res.body.length
 end
 
+$local_server.mount_proc '/timeout' do |req,res|
+    sleep(60)
+    
+    res.body = "OK"
+    res.status = 200
+    res.content_length = res.body.length
+end
+
+
 $local_server.mount_proc '/upload' do |req,res|
     upload_body = req.body
 end
@@ -167,6 +176,46 @@ $local_server.mount_proc '/get_last_log' do |req,res|
     res.status = 200
 end
 
+$local_server.mount_proc '/post_gzip' do |req,res|
+    puts "GZIP request is: \n[START]\n #{req.inspect}\n[END]"
+    
+    enc = req['Content-Encoding']
+    
+    body = nil
+    
+    if enc =='gzip' then
+        io = StringIO.new(req.body, "r")
+        reader = Zlib::GzipReader.new(io)
+        body = reader.read
+        
+        puts "Body is: #{body.inspect}"
+        
+        if body == "GZipped test body" then
+            res.status = 200
+        else
+            res.status = 500
+        end
+    else
+        res.status = 500
+    end
+end
+
+$local_server.mount_proc '/get_gzip' do |req,res|
+    puts "request is: \n[START]\n #{req.inspect}\n[END]"
+    
+    res['Content-Encoding'] = 'gzip'
+    
+    data = "GZipped test body"
+    
+    io = StringIO.new("","w")
+    gz = Zlib::GzipWriter.new( io )
+    gz.write data
+    gz.close
+    
+    res.body = io.string
+    res.content_length = res.body.length
+    res.status = 200    
+end
 
 #Secure server mount points
 $secure_server.mount_proc '/test_methods' do |req,res|

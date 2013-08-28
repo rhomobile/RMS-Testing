@@ -262,7 +262,6 @@ describe('Network JS API', function() {
 
         });
 
-        if (Rho.System.platform != "WP8") {
             it('VT293-0037 | verifyPeerCertificate with default value', function () {
                 var status = '';
                 var callbackCalled = false;
@@ -324,6 +323,7 @@ describe('Network JS API', function() {
                 });
             });
 
+        if (Rho.System.platform != "WP8") {
             it('VT293-0039 | verifyPeerCertificate with false', function () {
                 var data = '';
                 var callbackCalled = false;
@@ -923,7 +923,7 @@ describe('Network JS API', function() {
     it('VT293-0071 | uploadFile with autherisation properties', function() {
        var data = '';
        var callbackCalled = false;
-       var status = ''
+       var status = '';
        var upload_file_callback = function (args){
         status = args['status'];
         data = args['body'];
@@ -974,4 +974,71 @@ describe('Network JS API', function() {
         //TODO: Need to add Code for File exist.
     });
          
+/*      //**************** TO BE SUPPORTED IN 4.1 ***********************
+ 
+    it('Post GZipped body', function() {
+       var post_props = {
+            url : srvURL + "/post_gzip",
+            contentEncoding : "gzip",              //TODO: support gzip body encoding
+            body : "GZipped test body"
+       };
+       
+       var callbackCalled = false;
+       var status = '';
+       
+       var post_callback = function(args) {
+            status = args['status'];
+            callbackCalled = true;
+       }
+       
+       runs( function() {
+                Rho.Network.post(post_props, post_callback);
+            }
+        );
+       
+       waitsFor( function() {
+                return callbackCalled;
+            },
+            "Callback never called",
+            waitTimeout
+        );
+       
+       runs(function() {
+            expect(status).toEqual('ok');
+        });
+    } );
+       
+    it('Get GZipped body', function() {
+       var get_props = {
+            url : srvURL + "/get_gzip",
+       };
+       
+       var callbackCalled = false;
+       var status = '';
+       var body = '';
+       
+       var get_callback = function(args) {
+            status = args['status'];
+            body = args['body'];
+            callbackCalled = true;
+       }
+       
+       runs( function() {
+                Rho.Network.get(get_props, get_callback);
+            }
+        );
+       
+       waitsFor(function() {
+                return callbackCalled;
+            },
+            "Callback never called",
+            waitTimeout
+        );
+       
+       runs(function() {
+                expect(status).toEqual('ok');
+                expect(body).toEqual('GZipped test body');
+            }
+        );
+    } );*/
 });

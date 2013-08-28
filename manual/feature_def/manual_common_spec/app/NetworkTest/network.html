@@ -225,6 +225,12 @@ var selected_Module="";
                 setDescription("Calls get() method on secure server with enabled client auth without providing client key. Server certificate must be installed on device!");
                 setExpected("error");
             }
+            
+            if(selected_Module=="Timeout")
+            {
+                setDescription("Calls get() on slow response URL. Timeout error should occur in specified time.");
+                setExpected("error");
+            }
 
         }
         
@@ -252,6 +258,12 @@ function getmodulename()
     
     setActual("");
     setStatus("");
+    
+    var to = parseInt( document.getElementsByName('netTimeout')[0].value);
+    if (isNaN(to)) {
+        to = 10;
+    }
+    Rho.Network.responseTimeout = to;
     
 
 if(selected_Module=="VT293-0001") {
@@ -411,6 +423,24 @@ if(selected_Module=="VT293-0036")
    Rho.Network.get(responsetimeoutProps, get_callback);
 }
     
+    if ( selected_Module=="Timeout")
+    {
+        var before = Date.now();
+        
+        setStatus("Waiting for response...");
+        
+        Rho.Network.get( { url : srvHttpUrl+"/timeout" },
+                        function(params) {
+                        
+                            var after = Date.now();
+                        
+                            setActual(params['status']);
+                        
+                            info.innerHTML = "Response time: " + String(after - before) + "ms";
+                            }
+                        );
+    }
+    
     if(selected_Module=="ClientAuth")
     {
         getProps = {
@@ -553,6 +583,9 @@ function detect_connection_notify_callback(params) {
 <div id="myDiv">Actual Result :</div>
  -->
 <form name="controlForm" id="controlForm" action="" >
+    
+    Network timeout (seconds): <input type="text" name="netTimeout" value="">
+    <br>
 
     
 Select Test To Run &nbsp;&nbsp;
@@ -582,7 +615,9 @@ Select Test To Run &nbsp;&nbsp;
 <OPTION value="VT293-0033">VT293-0033</OPTION>
 <OPTION value="VT293-0034">VT293-0034</OPTION>
 <OPTION platform="ANDROID" value="ClientAuth">ClientAuth</OPTION>
-<!-- <OPTION platform="ANDROID" value="ClientAuthNoCert">ClientAuthNoCert</OPTION> -->
+<OPTION value="Timeout">Timeout</OPTION>
+
+    <!-- <OPTION platform="ANDROID" value="ClientAuthNoCert">ClientAuthNoCert</OPTION> -->
 
     
     <!--

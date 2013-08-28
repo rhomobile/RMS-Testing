@@ -9,6 +9,10 @@ class WebviewController < Rho::RhoController
     @webviews = Webview.find(:all)
     render :back => '/app'
   end
+  
+  def navigate_test
+    render :action=>:navigate_test, :back=>:index
+  end
 
   def refresh
     WebView.refresh
@@ -26,6 +30,14 @@ class WebviewController < Rho::RhoController
     WebView.navigate("http://www.google.com",2)
   end
   
+  def navigate_controller
+    WebView.navigate(url_for :action=>'navigate_test')
+  end
+  
+  def navigate_controller_withindex
+    WebView.navigate(url_for(:action=>'navigate_test'), 2)
+  end
+
   def navigateback
     WebView.navigate_back
   end

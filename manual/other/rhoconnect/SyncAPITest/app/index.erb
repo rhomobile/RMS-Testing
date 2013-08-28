@@ -1,0 +1,18 @@
+<div data-role="page" data-url="<%= Rho::RhoConfig.start_path %>/">
+
+  <div data-role="header" data-position="inline">
+    <h1>SyncAPITest</h1>
+      <% if $myString %>
+       <p><%= $myString %></p>
+       <% end %>
+  </div>
+
+  <div data-role="content">
+    <ul data-role="listview">
+      <li><a href="Settings">SyncAPITest</a></li>
+      <li><a href="Product">Product</a></li>
+      <li><a href="Customer">Customer</a></li>
+    </ul>
+  </div>
+
+</div>

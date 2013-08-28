@@ -1,0 +1,290 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<script type="text/javascript" src="/public/jquery/jquery-1.6.4.min.js"></script>
+<script type="text/javascript">
+
+function setSyncServerUrl()
+{
+  var syncUrl=document.getElementById("syncUrl").value;  
+  $.get('/app/Settings/setSyncServerUrl', {syncUrl : syncUrl });
+  return false;  
+}
+
+function checkLogged_in_Property()
+{
+  $.get('/app/Settings/checklogged_in', {});
+  return false;  
+}
+
+function checkUserName()
+{
+  $.get('/app/Settings/checkUserName', {});
+  return false;  
+}
+
+function checkLocalChanges()
+{
+  $.get('/app/Settings/checkLocalChanges', { });
+  return false; 
+}
+
+function callSync3params()
+{
+  var syncParam1=document.getElementById("syncParam1").value;  
+  var syncParam2=document.getElementById("syncParam2").value; 
+  var syncParam3=document.getElementById("syncParam3").value;
+  $.get('/app/Settings/callSync3params', { syncParam1:syncParam1 , syncParam2:syncParam2, syncParam3:syncParam3});
+  return false; 
+}
+
+function callSync2params()
+{
+  var syncParam1=document.getElementById("syncParam1").value;  
+  var syncParam2=document.getElementById("syncParam2").value; 
+  $.get('/app/Settings/callSync2params', { syncParam1:syncParam1 , syncParam2:syncParam2 });
+  return false; 
+}
+
+function callSync1params()
+{
+  var syncParam1=document.getElementById("syncParam1").value;  
+  $.get('/app/Settings/callSync1params', { syncParam1:syncParam1 });
+  return false; 
+}
+
+function do_sync()
+{
+  $.get('/app/Settings/do_sync', { });
+  return false; 
+}
+
+function callSync_emptyparams()
+{
+  $.get('/app/Settings/callSync_emptyparams', { });
+  return false; 
+}
+
+
+function doStopSync()
+{
+  $.get('/app/Settings/doStopSync', { });
+  return false; 
+}
+
+function callSyncBySourceName()
+{
+  $.get('/app/Settings/callSyncBySourceName', { });
+  return false; 
+}
+
+function callSyncBySourceID()
+{
+  $.get('/app/Settings/callSyncBySourceID', { });
+  return false; 
+}
+
+function set_Sync_Callback_All()
+{
+   $.get('/app/Settings/set_Sync_Callback_All', {});
+   return false; 
+  
+}
+
+function set_Sync_Callback_Product()
+{
+  $.get('/app/Settings/set_Sync_Callback_Product', { });
+  return false; 
+}
+
+function set_Sync_Callback_objectNotify()
+{
+  $.get('/app/Settings/set_Sync_Callback_objectNotify', { });
+  return false; 
+}
+
+
+
+function clear_Sync_Callback_Product()
+{
+  $.get('/app/Settings/clear_Sync_Callback_Product', { });
+  return false; 
+}
+
+
+function setPollInterval()
+{
+  var pollVal=document.getElementById("pInterval").value;   
+  $.get('/app/Settings/setPollInterval', {pollVal : pollVal });
+  return false; 
+}
+
+function setPageSize()
+{
+  var pageSizeVal=document.getElementById("pSize").value;   
+  $.get('/app/Settings/setPageSize', {pageSizeVal : pageSizeVal });
+  return false; 
+}
+
+function getPageSize()
+{
+  $.get('/app/Settings/getPageSize', {  });
+  return false; 
+}
+
+function set_status_popup()
+{
+  var statusPopUp=document.getElementById("statusPopUp").value;   
+  $.get('/app/Settings/set_status_popup', { statusPopUp : statusPopUp });
+  return false;  
+}
+
+function set_ssl_verify()
+{
+  var ssl_verifyFlag = document.getElementById("ssl_verifyFlag").value;   
+  $.get('/app/Settings/set_ssl_verify', { ssl_verifyFlag : ssl_verifyFlag });
+  return false;  
+  
+}
+
+function doDBReset()
+{
+  $.get('/app/Settings/doDBReset', { });
+  return false; 
+}
+
+
+
+
+function createRecord()
+{
+  $.get('/app/Settings/createRecord', { });
+  return false;  
+}
+
+function deleteRecord()
+{
+  $.get('/app/Settings/deleteRecord', { });
+  return false;  
+}
+
+function updateRecord()
+{
+  $.get('/app/Settings/updateRecord', { });
+  return false;  
+}
+
+function doSearchTest()
+{
+  $.get('/app/Settings/doSearchTest', { });
+   return false;  
+  
+}
+
+
+
+
+function setFieldValue(returnval) 
+{
+  document.getElementById("myResult").innerHTML=returnval;
+}
+
+</script>
+</head>
+
+<body>
+ <div data-role="page">
+  <div data-role="header" data-position="inline">
+  </div>
+  <div data-role="content">
+    <ul data-role="listview">
+      <li>
+        <div class="itemLabel">
+          <span class="title">Client ID:</span>
+        </div>
+        <div class="itemValue">
+          <span class="clientID"><%= Rhom::Rhom::client_id %></span>
+        </div>
+      </li>
+      <% if @msg %>
+          <li class="error-message"><%= @msg %></li>
+      <% end %>
+      </ul>
+   </div>
+</div>
+<br><br>
+<div id="myResult">results</div> 
+<hr>
+
+<form name="myfrm" action=""> 
+  
+SyncServerURL:<br>
+<input type="text" name="syncUrl" id="syncUrl" col="100" value="http://192.168.0.23:9292/application" /> 
+<INPUT type="button" value="SetSyncServerURL" name="SetSyncServer" onClick="setSyncServerUrl();"> <br>   
+
+<a href="<%= url_for :action => :login %>">Login</a>
+
+<a href="<%= url_for :action => :logout %>">Logout</a><br>
+
+<INPUT type="button" value="logged_in_Property" name="logged_in_Property" onClick="checkLogged_in_Property();">
+<INPUT type="button" value="user_name" name="user_name" onClick="checkUserName();"><br>
+<INPUT type="button" value="Local_Changes_Property" name="localChangesProperty" onClick="checkLocalChanges();">
+<INPUT type="button" value="DBRESET" name="DBRESET" onClick="doDBReset();"> 
+<hr>set_Sync_Callback_objectNotify
+<INPUT type="button" value="Sync_Callback_ALL" name="SyncCallback_ALL" onClick="set_Sync_Callback_All();">  
+<INPUT type="button" value="Sync_Callback_Product" name="SyncCallback_Product" onClick="set_Sync_Callback_Product();">   <br />
+<INPUT type="button" value="Sync_Callback_ObjectNotify" name="SyncCallback_Product" onClick="set_Sync_Callback_objectNotify();">
+<INPUT type="button" value="Clear_Callback_Product" name="Clear_Callback_Product" onClick="clear_Sync_Callback_Product();">
+<hr>
+SyncParam1:<select name="syncParam1" id="syncParam1">
+    <OPTION SELECTED VALUE="">Select</OPTION>
+    <option value="true">TRUE</option>
+    <option value="false">FALSE</option>
+</select>
+<br>
+SyncParam2:<select name="syncParam2" id="syncParam2">
+    <OPTION SELECTED VALUE="">Select</OPTION>
+    <option value="false">empty</option>
+    <option value="true">present</option>
+</select>
+<br>
+SyncParam3:<select name="syncParam3" id="syncParam3">
+    <OPTION SELECTED VALUE="">Select</OPTION>
+    <option value="true">TRUE</option>
+    <option value="false">FALSE</option>
+</select>  <br />
+<INPUT type="button" value="SyncWithNoParams" name="Sync_Old" onClick="do_sync();">
+<INPUT type="button" value="SyncWith1Params" name="Sync_Old" onClick="callSync1params();"><br />
+<INPUT type="button" value="SyncWith2Params" name="Sync_Old" onClick="callSync2params();">
+<INPUT type="button" value="SyncWith3Params" name="Sync_New" onClick="callSync3params();"><br />
+<INPUT type="button" value="SyncWithEmpty" name="Sync_Old" onClick="callSync_emptyparams();"> 
+<INPUT type="button" value="StopSync" name="StopSync" onClick="doStopSync();"> 
+<hr>
+<INPUT type="button" value="Sync_SourceName" name="Sync_SourceName" onClick="callSyncBySourceName();">    
+<INPUT type="button" value="Sync_SourceID" name="Sync_SourceID" onClick="callSyncBySourceID();"> 
+<hr>
+PollInterval:<input type="text" name="pInterval" id="pInterval" value="5" />  
+<INPUT type="button" value="SetPollInterval" name="SetPollInterval" onClick="setPollInterval();">  
+PageSize:<input type="text" name="pSize" id="pSize" value="1000" />
+<INPUT type="button" value="SetPageSize" name="SetPageSize" onClick="setPageSize();"> 
+<INPUT type="button" value="GetPageSize" name="GetPageSize" onClick="getPageSize();"> 
+<hr>
+StatusPopup:<select name="statusPopUp" id="statusPopUp">
+    <OPTION SELECTED VALUE="">Select</OPTION>
+    <option value="true">TRUE</option>
+    <option value="false">FALSE</option>
+    <option value="">empty</option>
+</select>
+<INPUT type="button" value="SetStatusPopup" name="SetStatusPopup" onClick="set_status_popup();"> <br>
+SSL Verification:<select name="ssl_verifyFlag" id="ssl_verifyFlag">
+    <OPTION SELECTED VALUE="">Select</OPTION>
+    <option value="true">TRUE</option>
+    <option value="false">FALSE</option>
+</select>
+<INPUT type="button" value="setSSL" name="setSSL" onClick="set_ssl_verify();"> 
+<INPUT type="button" value="searchtest" name="setSSL" onClick="doSearchTest();"> 
+
+</form>
+</body>
+</html>
