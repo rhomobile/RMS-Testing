@@ -67,10 +67,21 @@ $server, addr, port = Jake.run_local_server(8081)
 $server.mount_proc('/', nil) do |req, res|
   query = req.query
   # puts "Local server:"
-  # puts " Headers: #{req.header.inspect}"
-  # puts " Query: #{query.inspect}"
+  # puts " query_string: #{req.query_string}"
+  # puts " query_string: #{req.query_string.class}"
+  # puts " Body: #{req.body}"
   res.status = 200
   $mutex.synchronize do
+    if req.query_string.include? 'filename='
+      @file_name =  req.query_string.split("=")[1]
+      xml_file = File.expand_path(File.join(File.dirname(__FILE__), @file_name))
+      File.open(xml_file, "w") { |f| f << req.body }
+      puts "Test results are saved in #{@file_name}"
+    elsif req.query_string.include? 'total='
+      @total = query['total']
+      @passed = query['passed']
+      @failed = query['failed']
+    end
     $requests << req
     $signal.signal
   end
@@ -134,12 +145,12 @@ device_list.each do |dev|
   $server_path = File.expand_path(File.join($tmp_path,'testapp'))
   FileUtils.rm_r $server_path if File.exists?($server_path)
 
-  RhoconnectHelper.set_rhoconnect_bin "#{$rhoconnect_root}/bin/rhoconnect"
+  RhoconnectHelper.set_rhoconnect_bin $rhoconnect_root
   puts "Generating rhoconnect app ..."
   test_appname = "testapp"
   res = RhoconnectHelper.generate_app($tmp_path, test_appname)
-  puts "bundle install"
-  Kernel.system("bundle", "install", :chdir => $server_path)
+  # puts "bundle install"
+  # Kernel.system("bundle", "install", :chdir => $server_path)
 
   # Copy setting.yml file with :gcm_api_key to 'testapp/settings' directory if running tests GCM service
   FileUtils.cp('settings.yml', File.join($server_path, 'settings')) if push_type == "gcm"
@@ -208,7 +219,8 @@ device_list.each do |dev|
   res = expect_request('status')
   puts "Jasmine Spec Runner is running on device ..." if res == "start"
 
-  results = report_results(300)
+  results = report_results(30)
+  results = report_results(30)
 
   # Shutdown test stack ...
   RhoconnectHelper.stop_rhoconnect_stack
@@ -217,7 +229,7 @@ device_list.each do |dev|
   $server.shutdown
 
   # Uninstall rhodes app only if tests pass
-  if results && results['failed'].to_i == 0
+  if @failed && @failed.to_i == 0
     TEST_PKGS.each do |pkg|
       puts "Uninstalling package #{pkg} ..."
       system "adb #{$deviceOpts} uninstall #{pkg}"
@@ -227,18 +239,18 @@ device_list.each do |dev|
   system "kill -9 #{$logcat_pid}" if $logcat_pid
 
   # Print report
-  if results
+  if @failed
     puts
     puts "Test Results:"
-    puts "*** Total:  #{results['total']}"
-    puts "*** Passed: #{results['passed']}"
-    puts "*** Failed: #{results['failed']}"
+    puts "*** Total:  #{@total}"
+    puts "*** Passed: #{@passed}"
+    puts "*** Failed: #{@failed}"
     puts
   else
     puts "No test results are available. Make sure that phone is connected to internet."
     exit -1
   end
-  if results['failed'].to_i != 0
+  if @failed.to_i != 0
     puts "Jasmine specs are failed."
     exit -1
   end

@@ -26,7 +26,6 @@
             var URL  = "http://" + LOCAL_SERVER_HOST + ":" + LOCAL_SERVER_PORT.toString();
             var params = "?total=" + this.executedSpecs + "&passed=" + this.passedSpecs + "&failed=" + (this.executedSpecs - this.passedSpecs);
             var getProps = { url: URL + params };
-            // var getProps = { url: URL + "?status=done" };
             Rho.Network.get(getProps);
         },
 

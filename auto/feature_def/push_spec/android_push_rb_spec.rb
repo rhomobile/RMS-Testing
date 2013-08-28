@@ -145,12 +145,12 @@ device_list.each do |dev|
       $server_path = File.expand_path(File.join($tmp_path,'testapp'))
       FileUtils.rm_r $server_path if File.exists?($server_path)
 
-      RhoconnectHelper.set_rhoconnect_bin "#{$rhoconnect_root}/bin/rhoconnect"
+      RhoconnectHelper.set_rhoconnect_bin $rhoconnect_root
       puts "Generating rhoconnect app ..."
       test_appname = "testapp"
       res = RhoconnectHelper.generate_app($tmp_path, test_appname)
-      puts "bundle install"
-      Kernel.system("bundle", "install", :chdir => $server_path)
+      # puts "bundle install"
+      # Kernel.system("bundle", "install", :chdir => $server_path)
 
       # Copy setting.yml file with :gcm_api_key to 'testapp/settings' directory
       FileUtils.cp('settings.yml', File.join($server_path, 'settings')) if push_type == "gcm"

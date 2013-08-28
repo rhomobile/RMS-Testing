@@ -49,7 +49,7 @@ def run_apps(platform)
 		FileUtils.mkdir_p File.expand_path($tmp_path)
 		$server_path = File.expand_path(File.join($tmp_path,'testapp'))
 
-		RhoconnectHelper.set_rhoconnect_bin "#{$rhoconnect_root}/bin/rhoconnect"
+		RhoconnectHelper.set_rhoconnect_bin $rhoconnect_root
 		puts "rhoconnect_bin: #{RhoconnectHelper.rhoconnect_bin}"
 
 		RhoconnectHelper.set_rc_push_out File.open( File.join($app_path, "rhoconnect_push.log" ), "w")
