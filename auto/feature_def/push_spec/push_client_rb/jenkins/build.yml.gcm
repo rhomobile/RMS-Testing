@@ -30,5 +30,5 @@ extensions: ["json", "rhoconnect-client"]
 
 paths:
   extensions:
-  - ../../../../../../../../../../rhoconnect-client/workspace/ext
-sdk: ../../../../../../../../../../rhodes/workspace
+  - /Users/rhomobile/Jenkins/Home/workspace/rhoconnect-client/ext
+sdk: /Users/rhomobile/Jenkins/Home/workspace/rhodes
