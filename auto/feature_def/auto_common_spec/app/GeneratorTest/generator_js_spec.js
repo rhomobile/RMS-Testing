@@ -153,6 +153,7 @@ describe("<generator API specs>", function() {
             runs(function() 
             {
                 expect(objs.length).toEqual(2);
+                expect(typeof objs[1].getId).toEqual('function');
                 expect(objs[1].boolProp).toEqual(true);
                 objs[1].boolProp = false;
                 expect(objs[1].boolProp).toEqual(false);
