@@ -1199,6 +1199,7 @@ describe("Log JS API", function () {
 			var callbackCalled = false;
 			var status = '';
 			var data = '';
+			var result = false;
 			var content = 'Downloaded content';
 
 			runs(function(){
@@ -1210,11 +1211,20 @@ describe("Log JS API", function () {
 				skipPostValue = Rho.Log.skipPost;
 				expect(skipPostValue).toEqual(expectedValue);
 
-				getProps = {
-					url: srvHttpLogTestMsg
-				};
+				Rho.LogCapture.clear();
 
-				Rho.Network.get(getProps, function(args){callbackCalled=true;data = args['body'];status = args['status'];});
+				result = false;
+				$.ajax({
+					type: "post",
+					url: "/system/logger",
+					data: 'level=2&msg=test&cat=TST',
+					success: function(data) {
+						Rho.Log.info(data,"TST"); result = true;
+					},
+				 	dataType: 'json',
+            		headers: {'Accept': 'text/plain'}
+				})
+				.always(function() { callbackCalled = true });
 			} );
 
 			waitsFor( function() {
@@ -1225,17 +1235,55 @@ describe("Log JS API", function () {
 			);
 
 			runs(function() {
-				expect(status).toEqual('ok');
-				expect(data).toEqual(content);
+				expect(result).toEqual(true);
+				callbackCalled = false;
 
 				var log = Rho.LogCapture.read();
 
-				// skippost affects URL, BODY parameters traced, and traces received content
-				expect( log.count("URL =") ).toEqual(0);
-				expect( log.count("BODY =") ).toEqual(0);
-				// data is traced when callback is called, exclude that case
-				expect( log.count(data) ).toEqual(0);
+				expect( log.count("Received request:") ).toEqual(0);
+				expect( log.count("only headers displayed") ).toEqual(0);
+
+				Rho.LogCapture.clear();
 			});
+
+			if (clientPlatform == Rho.System.PLATFORM_ANDROID || clientPlatform == Rho.System.PLATFORM_IOS )
+			{
+				runs(function(){
+					Rho.Log.level = 0;
+
+					expectedValue = true;
+					Rho.Log.skipPost = expectedValue;
+
+					skipPostValue = Rho.Log.skipPost;
+					expect(skipPostValue).toEqual(expectedValue);
+
+					getProps = {
+						url: srvHttpLogTestMsg
+					};
+
+					Rho.Network.get(getProps, function(args){callbackCalled=true;data = args['body'];status = args['status'];});
+				} );
+
+				waitsFor( function() {
+						return callbackCalled;
+					},
+					"Callback never called",
+					waitTimeout
+				);
+
+				runs(function() {
+					expect(status).toEqual('ok');
+					expect(data).toEqual(content);
+
+					var log = Rho.LogCapture.read();
+
+					// skippost affects URL, BODY parameters traced, and traces received content
+					expect( log.count("URL =") ).toEqual(0);
+					expect( log.count("BODY =") ).toEqual(0);
+					// data is traced when callback is called, exclude that case
+					expect( log.count(data) ).toEqual(0);
+				});
+			}
 		});
 
 		// Set skipPost to false
@@ -1244,6 +1292,7 @@ describe("Log JS API", function () {
 			var callbackCalled = false;
 			var status = '';
 			var data = '';
+			var result = false;
 			var content = 'Downloaded content';
 
 			runs(function(){
@@ -1255,11 +1304,21 @@ describe("Log JS API", function () {
 				skipPostValue = Rho.Log.skipPost;
 				expect(skipPostValue).toEqual(expectedValue);
 
-				getProps = {
-					url: srvHttpLogTestMsg
-				};
+				Rho.LogCapture.clear();
 
-				Rho.Network.get(getProps, function(args){callbackCalled=true;data = args['body'];status = args['status'];});
+				result = false;
+				$.ajax({
+					type: "post",
+					url: "/system/logger",
+					data: 'level=2&msg=test&cat=TST',
+					success: function(data) {
+						Rho.Log.info(data,"TST"); result = true;
+					},
+				 	dataType: 'json',
+            		headers: {'Accept': 'text/plain'},
+            		async: true
+				})
+				.always(function() { callbackCalled = true });
 			} );
 
 			waitsFor( function() {
@@ -1270,17 +1329,56 @@ describe("Log JS API", function () {
 			);
 
 			runs(function() {
-				expect(status).toEqual('ok');
-				expect(data).toEqual(content);
+				expect(result).toEqual(true);
+				callbackCalled = false;
 
 				var log = Rho.LogCapture.read();
 
-				// skippost affects URL, BODY parameters traced, and traces received content
-				expect( log.count("URL =") > 0 ).toEqual(true);
-				expect( log.count("BODY =") > 0 ).toEqual(true);
-				// data is traced when callback is called, exclude that case
-				expect( log.count(data) > 0 ).toEqual(true);
+				expect( log.count("Received request:") ).toBeGreaterThan(0);
+				expect( log.count("only headers displayed") ).toBeGreaterThan(0);
+
+				Rho.LogCapture.clear();
 			});
+
+			
+			if (clientPlatform == Rho.System.PLATFORM_ANDROID || clientPlatform == Rho.System.PLATFORM_IOS )
+			{
+				runs(function(){
+					Rho.Log.level = 0;
+
+					expectedValue = false;
+					Rho.Log.skipPost = expectedValue;
+
+					skipPostValue = Rho.Log.skipPost;
+					expect(skipPostValue).toEqual(expectedValue);
+
+					getProps = {
+						url: srvHttpLogTestMsg
+					};
+
+					Rho.Network.get(getProps, function(args){callbackCalled=true;data = args['body'];status = args['status'];});
+				} );
+
+				waitsFor( function() {
+						return callbackCalled;
+					},
+					"Callback never called",
+					waitTimeout
+				);
+
+				runs(function() {
+					expect(status).toEqual('ok');
+					expect(data).toEqual(content);
+
+					var log = Rho.LogCapture.read();
+
+					// skippost affects URL, BODY parameters traced, and traces received content
+					expect( log.count("URL =") ).toBeGreaterThan(0);
+					expect( log.count("BODY =") ).toBeGreaterThan(0);
+					// data is traced when callback is called, exclude that case
+					expect( log.count(data) ).toBeGreaterThan(0);
+				});
+			}
 		});
 
 		// Call error() method with "message" and "categories"
