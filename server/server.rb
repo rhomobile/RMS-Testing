@@ -56,6 +56,13 @@ $secure_server_with_client_auth = WEBrick::HTTPServer.new(:Port => securePortWit
                                          )
 
 
+$local_server.mount_proc '/slow_get' do |req,res|
+  sleep(2)
+  res.body = "OK"
+  res.content_length = res.body.length
+  res.status = 200
+end
+
 $local_server.mount_proc '/download' do |req,res|
   res.body = "Downloaded content"
   res.status = 200

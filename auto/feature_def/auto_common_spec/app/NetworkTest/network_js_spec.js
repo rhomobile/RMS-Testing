@@ -51,19 +51,20 @@ describe('Network JS API', function() {
        var getCallback = function(args) {
             callbackCount += 1;
        }
-
+       
        runs( function() {
             getProps = {
-                url: "http://www.apache.org/licenses/LICENSE-2.0"
+                url:  srvURL + "/slow_get"
             };
             Rho.Network.get(getProps, getCallback);
-            sleep(50);
+            sleep(1000);
             Rho.Network.cancel();
         } );
-
+       
         runs(function() {
             expect(callbackCount).toEqual(0);
         });
+       
     });
 
         it('VT293-0014 | detectConnection with wlan profile enabled', function () {
