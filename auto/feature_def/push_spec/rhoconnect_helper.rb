@@ -30,8 +30,9 @@ module RhoconnectHelper
 	end
 
 	@@rhoconnect_bin = nil
-	def self.set_rhoconnect_bin(bin)
-		@@rhoconnect_bin = bin
+	def self.set_rhoconnect_bin(path)
+		@@rhoconnect_path = path
+		@@rhoconnect_bin = File.join(path, 'bin', 'rhoconnect')
 	end
 
 	def self.rhoconnect_bin
@@ -98,14 +99,11 @@ module RhoconnectHelper
 	@@server_path = nil
 	def self.start_server(dir)
 		@@server_path = dir
-
 		if RUBY_PLATFORM =~ /(win|w)32$/
 			@@server_pid = Kernel.spawn("ruby",@@rhoconnect_bin,"start",:chdir=>@@server_path,:out =>@@rc_out)
 		else
 			@@server_pid = execute_rhoconnect(@@server_path,"startbg")
 		end
-
-
 		puts "Rhoconnect server started. App path: #{@@server_path}, host: #{@@host}, port: #{@@port}"
 	end
 
@@ -216,9 +214,18 @@ module RhoconnectHelper
 		end
 	end
 
-	def self.generate_app(dir,name)
+	def self.generate_app(dir, name, run_bundler = true)
 		puts "Generating rhoconnect app: binary: #{@@rhoconnect_bin}, app name: #{name}, dir: #{dir}"
 		execute_rhoconnect(dir,"app", name)
+
+		# Patch Gemfile: replace gem version by path to source
+		gem_path = "gem 'rhoconnect', :path => '#{@@rhoconnect_path}'"
+		path_gemfile = File.join(dir, name, "Gemfile")
+		lines = File.read(path_gemfile)
+		lines.gsub!(/(gem 'rhoconnect'.*)/, gem_path)
+		File.open(path_gemfile, 'w') { |f| f.write lines }
+
+		Kernel.system('bundle install', :chdir => File.join(dir, name)) if run_bundler
 	end
 
 	def self.start_rhoconnect_push

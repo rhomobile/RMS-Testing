@@ -30,7 +30,7 @@
             .replace(/\"/g, "&quot;")
             .replace(/\'/g, "&apos;");
     }
-	
+
 	/**
      * Generates JUnit XML for the given spec run.
      * Allows the test results to be used in java based CI
@@ -159,7 +159,7 @@
             }
             return output;
         },
-		
+
 		writeFile: function(filename, text)
 		{
 			var xmlhttp;
@@ -171,9 +171,11 @@
   			{	// code for IE6, IE5
   				xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
   			}
-  			var requestString = 'http://localhost:8888/savetestresult.do?filename=' + filename + '&junitreport=' + text;
-  			xmlhttp.open("GET", requestString, false);
-			xmlhttp.send();
+
+            var requestString = "http://" + LOCAL_SERVER_HOST + ":" + LOCAL_SERVER_PORT + "?filename=" + filename;
+            xmlhttp.open("POST", requestString, true);
+            xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xmlhttp.send(text);
         },
 
         getFullName: function(suite, isFilename) {
