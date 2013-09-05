@@ -31,17 +31,12 @@
         },
 
         reportSpecResults: function (spec) {
-            if (!this.reported) {
-                this.reported = true;
-                if (Rho.RhoFile.exists(this.path())) {
-                    Rho.RhoFile.deleteFile(this.path())
-                }
-            }
+
             if (!spec.results().passed()) {
-                this.log(spec.suite.description + ' : ' + spec.description);
+                this.log(spec.suite.description + '\r\n\t' + spec.description);
                 for (var i = 0; i < spec.results().totalCount; i++) {
                     if (!spec.results().getItems()[i].passed()) {
-                        var record = String(i + 1) + "\t" + spec.results().getItems()[i].message;
+                        var record = '\t\t' + String(i + 1) + "\t" + spec.results().getItems()[i].message;
                         this.log(record);
                     }
                 }
