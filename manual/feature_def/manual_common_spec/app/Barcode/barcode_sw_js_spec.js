@@ -394,14 +394,14 @@ describe("Barcode Test", function() {
 
 	it("VT282-2006 | call setDefault and getDefault |" + scnid, function() {
 
-		    Rho.Barcode.setDefault(enumObject);
+		    Rho.Barcode.setDefault(objSCN);
 		    var defaultobj = Rho.Barcode.getDefault();
 			expect(scnid).toEqual(defaultobj.getProperty('scannerType'));
 	});
 
 	it("VT282-2006A | set and get using Default |" + scnid, function() {
 
-		    Rho.Barcode.setDefault( enumObject );
+		    Rho.Barcode.setDefault(objSCN);
 		    var defaultobj = Rho.Barcode.getDefault();
 			expect(scnid).toEqual(defaultobj.getProperty('scannerType'));
 	});
