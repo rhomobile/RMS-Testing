@@ -164,5 +164,31 @@ function download_filetolocal(srvHttpDownloadImageUrl, filetoinstall)
 	return fname;
 }
 
+function createFileWithDoNotBackupAttribute(doBackup)
+{
+    var fPath = Rho.RhoFile.join(Rho.Application.userFolder, "testBackupFile.txt");
 
+    if (Rho.RhoFile.exists(fPath))
+    {
+        Rho.RhoFile.deleteFile(fPath);
+    };
+
+    var fOpen = new Rho.RhoFile(fPath,Rho.RhoFile.OPEN_FOR_APPEND);
+    var writeValue = fOpen.write("Do not backup file is set to " + doBackup);
+    fOpen.close();
+
+    return Rho.System.setDoNotBackupAttribute(fPath, doBackup);
+}
+
+function isBackupFileExists()
+{
+    var fPath = Rho.RhoFile.join(Rho.Application.userFolder, "testBackupFile.txt");
+
+    return Rho.RhoFile.exists(fPath);
+}
+
+function checkBackupFileExists()
+{
+    $("#Rho_System_DoNotBackupAttribute span.result").text(JSON.stringify(isBackupFileExists()));
+}
 

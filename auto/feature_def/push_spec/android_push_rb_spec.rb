@@ -195,7 +195,7 @@ device_list.each do |dev|
 
         puts "Configure android emulator ..."
         Rake::Task["config:android:emulator"].invoke
-        AndroidTools.run_emulator( :wipe => true )
+        AndroidTools.run_emulator(:wipe => true, :hidden => true)
         TEST_PKGS.each do |pkg|
           out = `adb -e shell pm list packages #{pkg}`
           unless out.empty?

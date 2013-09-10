@@ -504,11 +504,11 @@ Check before partial update :<br>
 
 <div class="method_tests ios">
     <div class="method_name">Rho.System.setDoNotBackupAttribute</div>
-    <div class="method_desc">Set do not backup attribute for file ('/app/public/testfiles/donotbackup.txt')</div>
+    <div class="method_desc">Set do not backup attribute for file ('/Documents/apps/testBackupFile.txt')</div>
     <div class="test_scenario">
         <div class="test_scenario_controls">
             <a href="javascript:void(0)"
-               onclick="Rho.System.setDoNotBackupAttribute('/app/public/testfiles/donotbackup.txt', true);">Call
+               onclick="createFileWithDoNotBackupAttribute(true);">Call
                 setDoNotBackupAttribute with doNotBackup as true</a>
         </div>
         <span class="test_scenario_number"> <br/>VT300-081</span>
@@ -516,18 +516,28 @@ Check before partial update :<br>
     <div class="test_scenario">
         <div class="test_scenario_controls">
             <a href="javascript:void(0)"
-               onclick="Rho.System.setDoNotBackupAttribute('/app/public/testfiles/donotbackup.txt', false);">Call
+               onclick="createFileWithDoNotBackupAttribute(false);">Call
                 setDoNotBackupAttribute with doNotBackup as false</a>
         </div>
         <span class="test_scenario_number"> <br/>VT300-082</span>
     </div>
     <div class="test_scenario">
         <div class="test_scenario_controls">
-            <a href="javascript:void(0)"
-               onclick="Rho.System.setDoNotBackupAttribute('/app/public/testfiles/loading.png', true);">Call
-                setDoNotBackupAttribute with path to image file</a>
+            <div id="Rho_System_DoNotBackupAttribute">Does test file exists: <span class="result"> </span></div>
         </div>
-        <span class="test_scenario_number"> <br/>VT300-083</span>
+    </div>
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <a href="javascript:void(0)" onclick="checkBackupFileExists();">Check if test file exists</a>
+        </div>
+    </div>
+
+    <div class="test_scenario">
+        <div id="doNotBackupAttr">isTestFileExising:<span class="defaultset"> </span>
+            <script type="text/javascript">
+                $("#doNotBackupAttr span.defaultset").text(isBackupFileExists());
+            </script>
+        </div>
     </div>
 </div>
 

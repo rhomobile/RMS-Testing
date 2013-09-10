@@ -566,11 +566,6 @@ describe("Sensor JS API Test", function() {
 	    displayResult("Output: ",getallpropresult);
 	}
 
-	var makesensorbytype_callback =  function (args){	
-		sensorType = JSON.stringify(args);
-	    displayResult("Output: ",sensorType);
-	}
-
 	it("VT297-0001 | minimumGap getproperty before setting any value with synch for accelerometer |", function() {
 		sensorInstance = Rho.Sensor.makeSensorByType(Rho.Sensor.SENSOR_TYPE_ACCELEROMETER);
 
@@ -4341,8 +4336,10 @@ describe("Sensor JS API Test", function() {
 
 	it("VT297-0252 | makeSensorByType to get Return the new accelerometer sensor object by type with asynch |", function() {
 	    runs(function () {
-       	 	Rho.Sensor.makeSensorByType(Rho.Sensor.SENSOR_TYPE_ACCELEROMETER, makesensorbytype_callback); 	           
-
+       	 	Rho.Sensor.makeSensorByType(Rho.Sensor.SENSOR_TYPE_ACCELEROMETER, function(args) {
+                sensorType = args;
+                displayResult("Output: ",sensorType);
+            });
         });
 
 		waitsFor(function () {
@@ -4824,7 +4821,7 @@ describe("Sensor JS API Test", function() {
             {
                 setTimeout(magnetometerdata_display, 3000);
             }
-	         
+
         });
 
         waitsFor(function () {
@@ -4841,10 +4838,10 @@ describe("Sensor JS API Test", function() {
             }
              else
 	    		expect(sensorInstance).toBeNull();
-	    	
-        }); 
+
+        });
 	});
-	
+
 	it("VT297-0282 | start to enable the Magnetometer sensor data retrieval with asych callback |", function() {
         runs(function () {
             sensorInstance = Rho.Sensor.makeSensorByType(Rho.Sensor.SENSOR_TYPE_MAGNETOMETER);
