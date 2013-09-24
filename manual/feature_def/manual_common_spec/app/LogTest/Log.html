@@ -22,13 +22,14 @@ if(selected_Module=="VT290-403")
    myDiv.innerHTML=""+info+"VT290-403";
    Rho.Log.info("log view displayed", "VT290-403");
 }
-if(selected_Module=="VT290-373")
+
+if(selected_Module=="VT290-081")
 {
 	
 	Rho.Log.level = 0;
-    var info = "Info : Log gets cleared. Please check log file. Log entry should be cleared ";
-    Rho.Log.info(info, "VT290-373");
-    myDiv.innerHTML=""+info+"VT290-373";
+    var info = "Info : Fatal Error Message displayed ";
+    Rho.Log.fatalError(info, "VT290-081");
+    myDiv.innerHTML=""+info+"VT290-081";
 	Rho.Log.cleanLogFile()
 }
 }
@@ -89,8 +90,8 @@ function set_default() {
 <br /><br /><br /><br /><br />Select Test To Run &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <select name="myChoice" id="myChoice">
 <OPTION value="Select option" >VT-ID</OPTION>
-<OPTION value="VT290-403">VT290-403</OPTION> 
-<OPTION value="VT290-373">VT290-373</OPTION> 
+<OPTION value="VT290-403">VT290-403</OPTION>
+<OPTION value="VT290-081">VT290-081</OPTION> 
 </select>
 <P><input type="button" onclick="getmodulename();" value="Run This Test"/></P>
 <br /><br />
