@@ -975,7 +975,7 @@ describe('Network JS API', function() {
         //TODO: Need to add Code for File exist.
     });
          
-/*      //**************** TO BE SUPPORTED IN 4.1 ***********************
+      //**************** TO BE SUPPORTED IN 4.1 ***********************
  
     it('Post GZipped body', function() {
        var post_props = {
@@ -1041,5 +1041,42 @@ describe('Network JS API', function() {
                 expect(body).toEqual('GZipped test body');
             }
         );
-    } );*/
+    } );
+         
+    it( 'Post binary body', function() {
+       var array = new Uint8Array(256);
+       for ( var i = 0; i < 256; ++i ) { array[i] = 0; }
+       var data = String.fromCharCode.apply(null,array);
+       
+       var callbackCalled = false;
+       var status = '';
+       var body = '';
+       
+       var post_callback = function(args) {
+            status = args['status'];
+            body = args['body'];
+            callbackCalled = true;
+       }
+       
+       runs( function() {
+            Rho.Network.post(
+                { url : srvURL+"/post_binary_auto", body : data },
+                post_callback
+            );
+        }
+       );
+       
+       waitsFor( function() {
+                return callbackCalled;
+            },
+            "Callback never called",
+            waitTimeout
+        );
+       
+       runs(function() {
+            expect(status).toEqual('ok');
+            expect(body).toEqual('256');
+        });
+       }
+    );
 });
