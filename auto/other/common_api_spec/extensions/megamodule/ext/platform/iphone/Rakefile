@@ -56,7 +56,7 @@ namespace "build" do
     rm_rf 'build'
     rm_rf target_lib
 
-    args = ['build', '-target', 'MegaModule', '-configuration', $configuration, '-sdk', $sdk]
+    args = ['build', '-target', 'MegaModule', '-configuration', $configuration, '-sdk', $sdk, '-project', 'Megamodule.xcodeproj']
 
     if simulator
         args << '-arch'

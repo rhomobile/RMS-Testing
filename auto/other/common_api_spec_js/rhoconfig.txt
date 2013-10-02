@@ -1,5 +1,5 @@
 # startup page for your application
-start_path = '/app/SpecRunner'
+start_path = '/app/specRunner.html'
 
 # path to the options page (in this case handled by javascript)
 options_path = '/app/Settings'
@@ -14,7 +14,7 @@ rhobundle_zip_pwd = nil
 # log level
 # 0-trace, 1-info(app level), 3-warnings, 4-errors
 # for production set to 3
-MinSeverity  = 0 
+MinSeverity  = 1
 
 # enable copy log messages to standard output, useful for debugging
 LogToOutput = 1
@@ -26,7 +26,7 @@ LogCategories = *
 ExcludeLogCategories = 
 
 # max log file size in Bytes, set 0 to unlimited size; when limit is reached, log wraps to beginning of file
-MaxLogFileSize=0
+MaxLogFileSize=5000000
 
 # turn on local http server traces, off by default
 #net_trace = 0
@@ -69,7 +69,7 @@ syncserver = ''
 #wm_show_statusbar = 1
 
 # disable screen rotation (enabled by default) - disable possible for ANDROID and iPhone ONLY
-#disable_screen_rotation = 1
+disable_screen_rotation = 0
 
 # disable close app when pressing back on home screen on blackberry
 #bb_disable_closebyback = 0
@@ -84,3 +84,7 @@ syncserver = ''
 jqtouch_mode=1
 
 splash_screen='zoom'
+
+# properties for spec testing
+intProp = 42
+stringProp = 'abc' 
