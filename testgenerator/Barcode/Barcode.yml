@@ -23,3 +23,6 @@ BarcodeTestCase:
         expected: false
       setType: ["direct", "setProperty", "setProperties"]
       id: ["VT550-007","VT550-008","VT550-009"]
+  - category: "enumrate"
+    callbacktype: ["synchronous","asynchronous","anonymous"]
+    id: ["VT550-010"]
