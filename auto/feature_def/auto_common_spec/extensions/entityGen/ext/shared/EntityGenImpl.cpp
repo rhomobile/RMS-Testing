@@ -125,7 +125,7 @@ namespace rho {
             rho::Hashtable<rho::String, rho::String> result;
 
              // INTEGER const binding
-            result["id"] =  ;
+            result["id"] =  "123";
              // STRING  
             result["brand"] =  "";
              // STRING  
@@ -133,11 +133,11 @@ namespace rho {
              // STRING  
             result["model"] =  "";
              // INTEGER  
-            result["generatrion"] =  0;
+            result["generatrion"] =  "0";
              // BOOLEAN  
-            result["available"] =  false;
+            result["available"] =  "false";
              // FLOAT  
-            result["price"] =  0.0;
+            result["price"] =  "0.0";
              
             oResult.set(result);
             
@@ -200,25 +200,25 @@ namespace rho {
 
         virtual void clearCallList(rho::apiGenerator::CMethodResult& oResult) {
             // RAWLOGC_INFO("clearCallList","EntityGen");
-            m_callList.push_back("clearCallList")
+            m_callList.clear();
             
         } 
 
         virtual void getCallList(rho::apiGenerator::CMethodResult& oResult) {
             // RAWLOGC_INFO("getCallList","EntityGen");
-            m_callList.push_back("getCallList")
+            oResult.set(m_callList);
             
         } 
 
         virtual void getInitHash(rho::apiGenerator::CMethodResult& oResult) {
             // RAWLOGC_INFO("getInitHash","EntityGen");
-            m_callList.push_back("getInitHash")
+            m_callList.push_back("getInitHash");
             
         } 
 
         virtual void getUpdateHash(rho::apiGenerator::CMethodResult& oResult) {
             // RAWLOGC_INFO("getUpdateHash","EntityGen");
-            m_callList.push_back("getUpdateHash")
+            m_callList.push_back("getUpdateHash");
             
         } 
 
