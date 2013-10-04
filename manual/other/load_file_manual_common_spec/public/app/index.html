@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Manual specs</title>
+    <meta name="viewport" content="initial-scale=1.0, width=device-width"/>
+    <script type="text/javascript" src="/public/jquery/jquery-1.6.4.min.js"></script>
+    <script type="text/javascript" src="/public/jquery/jquery.json-2.3.min.js"></script>
+    <script type="text/javascript" src="/public/api/rhoapi-modules.js"></script>
+    <script type="text/javascript" src="/public/js/helpers.js"></script>
+</head>
+<body>
+<h1>JS SAS</h1>
+<ul>
+    <li><a href="api/accessors.html">property accessors</a></li>
+    <li><a href="api/system.html">System</a></li>
+    <li><a href="api/application.html">Application</a></li>
+    <li><a href="api/database.html">Database</a></li>
+    <li><a href="api/webview.html">WebView</a></li>
+    <li><a href="api/NativeMenu.html">Native MenuBar</a></li>
+    <li><a href="api/js-api-crash.html">js-api-crash</a></li>
+    <li><a href="api/signature.html">signature</a></li>
+    <li><a href="api/NativeTabBar_MainPage.html">WM/CE NativeTabBar</a></li>
+    <li><a href="api/network.html">Network</a></li>
+    <li><a href="api/Log.html">Log Test</a></li>
+    <li><a href="api/notification.html">Notification Test</a></li>
+</ul>
+
+<div>[RUBY SAS]</div>
+<ul id="ruby">
+    <script type="text/javascript">
+        if (!isWindowsPhone8Platform()) {
+            $("#ruby").append('<li><a href="/app/Barcode">Barcode</a></li>');
+        }
+        if (!isWindowsPhone8Platform()) {
+            $("#ruby").append('<li><a href="/app/Image">Camera</a></li>');
+        }
+        $("#ruby").append('<li><a href="/app/NativeToolbarTest">NativeToolbar</a></li>');
+        $("#ruby").append('<li><a href="/app/NativeTabbarTest">NativeTabbar</a></li>');
+        $("#ruby").append('<li><a href="/app/SensorTest">Sensor</a></li>');
+        if (!isWindowsPhone8Platform()) {
+            $("#ruby").append('<li><a href="/app/Navbar">Navigation Bar (iOS)</a></li>');
+        }
+
+        if (!isWindowsPhone8Platform()) {
+            $("#ruby").append('<li><a href="/app/AsyncDownloadFile">Network Download File</a></li>');
+        }
+        if (!isWindowsPhone8Platform()) {
+            $("#ruby").append('<li><a href="/app/AsyncHttpsTest">Network https get</a></li>');
+        }
+        if (!isWindowsPhone8Platform()) {
+            $("#ruby").append('<li><a href="/app/AsyncHttpTest">Network http get</a></li>');
+        }
+        if (!isWindowsPhone8Platform()) {
+            $("#ruby").append('<li><a href="/app/AsyncUploadFile">Network upload file</a></li>');
+        }
+        if (!isWindowsPhone8Platform()) {
+            $("#ruby").append('<li><a href="/app/DetectConnection">Network detect connection</a></li>');
+        }
+        if (!isWindowsPhone8Platform()) {
+            $("#ruby").append('<li><a href="/app/NetworkStatus">Network status notification</a></li>');
+        }
+
+
+    </script>
+
+    <li><a href="/app/System">System</a></li>
+</ul>
+
+</body>
+</html>
+
