@@ -1,5 +1,5 @@
 # startup page for your application
-start_path = '/app/index.html'
+start_path = 'file://%APP_PATH%/app/index.html'
 invalid_security_token_start_path = '/app/index.html'
 enable_screen_zoom = 1
 # path to the options page (in this case handled by javascript)
