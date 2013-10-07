@@ -54,10 +54,10 @@ function set_default() {
 	
 </script>
 
-<script type="text/javascript" charset="utf-8" src="/public/jquery/jquery-1.6.4.min.js"></script>
-    <script type="text/javascript" charset="utf-8" src="/public/jquery/jquery.json-2.3.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../public/jquery/jquery-1.6.4.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../../public/jquery/jquery.json-2.3.min.js"></script>
 
-	<link rel="stylesheet" type="text/css" href="css/framestyles.css" />
+	<link rel="stylesheet" type="text/css" href="./css/framestyles.css" />
 	<link rel="shortcut icon" type="image/png" href="../lib/jasmine-1.3.1/jasmine_favicon.png">
 	<link rel="stylesheet" type="text/css" href="../lib/jasmine-1.3.1/jasmine.css">
 
@@ -79,7 +79,10 @@ function set_default() {
 
 	<script type="text/javascript" src="../lib/jasmine-1.3.1/jasmine.js"></script>
 	<script type="text/javascript" src="../lib/jasmine-1.3.1/jasmine-html.js"></script>
-	<script type="text/javascript" src="/public/api/rhoapi-modules.js"></script>
+	<script type="text/javascript">
+		window['__rho_nativeBridgeType'] = 'ajax';
+	</script>
+	<script type="text/javascript" src="../../public/api/rhoapi-modules.js"></script>
 	
 </head>
 <body>

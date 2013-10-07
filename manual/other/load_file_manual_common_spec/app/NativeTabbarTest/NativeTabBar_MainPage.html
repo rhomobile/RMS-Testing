@@ -3,9 +3,12 @@
 <head>
     <title>Main Page</title>
     <meta name="viewport" content="initial-scale=1.0, width=device-width"/>
-    <script src="/public/jquery/jquery-1.6.4.min.js" type="text/javascript"></script>
-	<link type="text/css" rel="stylesheet" href="/public/css/manual_styles.css">
-    <script type="text/javascript" charset="utf-8" src="/public/api/rhoapi-modules.js"></script>
+    <script src="../../public/jquery/jquery-1.6.4.min.js" type="text/javascript"></script>
+	<link type="text/css" rel="stylesheet" href="../../public/css/manual_styles.css">
+	<script type="text/javascript">
+		window['__rho_nativeBridgeType'] = 'ajax';
+	</script>
+    <script type="text/javascript" charset="utf-8" src="../../public/api/rhoapi-modules.js"></script>
 
     <script type="text/javascript">
     
@@ -19,13 +22,13 @@
             if (!Rho.NativeTabbar.isCreated())
             {
         
-                //Rho.NativeTabbar.create( [ {'label':'tab1', 'action':'/app/index.html', 'reload':true}, {'label':'tab2', 'action':'javascript:tabbarCallback2();'} ], {'hiddenTabs': true, 'createOnInit' : true});
+                //Rho.NativeTabbar.create( [ {'label':'tab1', 'action':'../../app/index.html', 'reload':true}, {'label':'tab2', 'action':'javascript:tabbarCallback2();'} ], {'hiddenTabs': true, 'createOnInit' : true});
                 
                 Rho.NativeTabbar.create( [ 
-                    //{'label':'MainPage', 'action':'/app/HomeScreen/homeScreen', 'useCurrentViewForTab':true},
-                    {'label':'MainPage', 'action':'/app/NativeTabbarTest/NativeTabBar_MainPage.html', 'useCurrentViewForTab':true},
-                    {'label':'Page1', 'action':'/app/NativeTabbarTest/NativeTabBar_Page1.html'}, 
-                    {'label':'Page2', 'action':'/app/NativeTabbarTest/NativeTabBar_Page2.html', 'perishable':'true'} ], 
+                    //{'label':'MainPage', 'action':'../../app/HomeScreen/homeScreen', 'useCurrentViewForTab':true},
+                    {'label':'MainPage', 'action':'../../app/NativeTabbarTest/NativeTabBar_MainPage.html', 'useCurrentViewForTab':true},
+                    {'label':'Page1', 'action':'../../app/NativeTabbarTest/NativeTabBar_Page1.html'}, 
+                    {'label':'Page2', 'action':'../../app/NativeTabbarTest/NativeTabBar_Page2.html', 'perishable':'true'} ], 
                   {'hiddenTabs': true, 'createOnInit' : true}, tabbarEventHandler );
                   
                 //Rho.NativeTabbar.switchTab(0);
@@ -39,14 +42,14 @@
         
         function tabbarCreateTnv() 
         {
-                //Rho.NativeTabbar.create( [ {'label':'tab1', 'action':'/app/index.html', 'reload':true}, {'label':'tab2', 'action':'javascript:tabbarCallback2();'} ], {'hiddenTabs': true, 'createOnInit' : true});
+                //Rho.NativeTabbar.create( [ {'label':'tab1', 'action':'../../app/index.html', 'reload':true}, {'label':'tab2', 'action':'javascript:tabbarCallback2();'} ], {'hiddenTabs': true, 'createOnInit' : true});
                 
                 Rho.NativeTabbar.create( [ 
-                    //{'label':'MainPage', 'action':'/app/HomeScreen/homeScreen', 'useCurrentViewForTab':true},
-                    {'label':'MainPage', 'action':'/app/NativeTabbarTest/NativeTabBar_MainPage.html', 'useCurrentViewForTab':true},
-                    {'label':'Main Reload', 'action':'/app/NativeTabbarTest/NativeTabBar_MainPage.html', 'reload':true},
-                    {'label':'Page1', 'action':'/app/NativeTabbarTest/NativeTabBar_Page1.html'}, 
-                    {'label':'Page2', 'action':'/app/NativeTabbarTest/NativeTabBar_Page2.html', 'perishable':'false'} ], 
+                    //{'label':'MainPage', 'action':'../../app/HomeScreen/homeScreen', 'useCurrentViewForTab':true},
+                    {'label':'MainPage', 'action':'../../app/NativeTabbarTest/NativeTabBar_MainPage.html', 'useCurrentViewForTab':true},
+                    {'label':'Main Reload', 'action':'../../app/NativeTabbarTest/NativeTabBar_MainPage.html', 'reload':true},
+                    {'label':'Page1', 'action':'../../app/NativeTabbarTest/NativeTabBar_Page1.html'}, 
+                    {'label':'Page2', 'action':'../../app/NativeTabbarTest/NativeTabBar_Page2.html', 'perishable':'false'} ], 
                   	{'hiddenTabs': true, 'createOnInit' : true}, tabbarEventHandler );
                   
                 //Rho.NativeTabbar.switchTab(0);
@@ -67,9 +70,9 @@
         {
         
 			tabbar = [
-      			{'label' : 'Tab', 'action' : '/app/NativeTabbarTest/NativeTabBar_MainPage.html', 'icon' : '/public/images/bar/gears.png', 'reload' : true },
-      			{'label' : 'Main',  'action' : '/app/index.html', 'icon' : '/public/images/bar/colored_btn.png', 'reload' : true},
-      			{'label' : 'Main 2', 'action' : '/app/index.html', 'icon' : '/public/images/bar/home_btn.png', 'reload' : true}
+      			{'label' : 'Tab', 'action' : '../../app/NativeTabbarTest/NativeTabBar_MainPage.html', 'icon' : '../../public/images/bar/gears.png', 'reload' : true },
+      			{'label' : 'Main',  'action' : '../../app/index.html', 'icon' : '../../public/images/bar/colored_btn.png', 'reload' : true},
+      			{'label' : 'Main 2', 'action' : '../../app/index.html', 'icon' : '../../public/images/bar/home_btn.png', 'reload' : true}
     			]
     		Rho.NativeTabbar.create(tabbar, {'placeTabsBottom':true})
     
@@ -78,9 +81,9 @@
         function Createtabbarwithcallback()
         {
             Rho.NativeTabbar.create([ 
-                    {'label':'MainPage', 'action':'/app/NativeTabbarTest/NativeTabBar_MainPage.html', 'useCurrentViewForTab':true},
-                    {'label':'Page1', 'action':'/app/NativeTabbarTest/NativeTabBar_Page1.html'}, 
-                    {'label':'Page2', 'action':'/app/NativeTabbarTest/NativeTabBar_Page2.html', 'perishable':'true'}
+                    {'label':'MainPage', 'action':'../../app/NativeTabbarTest/NativeTabBar_MainPage.html', 'useCurrentViewForTab':true},
+                    {'label':'Page1', 'action':'../../app/NativeTabbarTest/NativeTabBar_Page1.html'}, 
+                    {'label':'Page2', 'action':'../../app/NativeTabbarTest/NativeTabBar_Page2.html', 'perishable':'true'}
                 ], 
                 {'hiddenTabs': true, 'createOnInit' : true},
                 tabbarEventHandler
@@ -265,7 +268,7 @@
 	<div class="test_scenario">
 		<div class="test_scenario_controls">
 				<a href="javascript:void(0)" onclick="Createtabbarnew(
-					[{'label':'MainPage', 'action':'/app/index.html', 'icon':'/public/images/thumb.png', 'reload':true}], 
+					[{'label':'MainPage', 'action':'../../app/index.html', 'icon':'../../public/images/thumb.png', 'reload':true}], 
 					{'verticalOrientation':false, 'hiddenTabs': false, 'createOnInit' : false, 'placeTabsBottom':false}
 					);">
 			Call Remove the Current Tabbar then and replace with new single tab </a><br/><br/>
@@ -276,8 +279,8 @@
 	<div class="test_scenario">
 		<div class="test_scenario_controls">
 				<a href="javascript:void(0)" onclick="Createtabbarnew(
-					[{'label':'MainPage', 'action':'/app/index.html', 'icon':'/public/images/thumb.png', 'reload':true},
-					{'label':'page1', 'action':'/app/NativeTabbarTest/NativeTabBar_MainPage.html', 'icon':'/public/images/toggle.png', 'reload':true}], 
+					[{'label':'MainPage', 'action':'../../app/index.html', 'icon':'../../public/images/thumb.png', 'reload':true},
+					{'label':'page1', 'action':'../../app/NativeTabbarTest/NativeTabBar_MainPage.html', 'icon':'../../public/images/toggle.png', 'reload':true}], 
 					{'verticalOrientation':false, 'hiddenTabs': false, 'createOnInit' : false, 'placeTabsBottom':false}
 					);">
 			Call Remove the Current Tab bar and then replace with new two tabs </a><br/><br/>
@@ -322,8 +325,8 @@
 	<div class="test_scenario">
 		<div class="test_scenario_controls">
 				<a href="javascript:void(0)" onclick="Createtabbarnew(
-					[{'label':'Native Tabbar', 'action':'/app/NativeTabbarTest/NativeTabBar_MainPage.html', 'icon':'/public/images/bar/gears.png', 'useCurrentViewForTab':true},
-					{'label':'Main page', 'action':'/app/index.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true}], 
+					[{'label':'Native Tabbar', 'action':'../../app/NativeTabbarTest/NativeTabBar_MainPage.html', 'icon':'../../public/images/bar/gears.png', 'useCurrentViewForTab':true},
+					{'label':'Main page', 'action':'../../app/index.html', 'icon':'../../public/images/bar/colored_btn.png', 'reload':true}], 
 					{'verticalOrientation':false, 'hiddenTabs': false, 'createOnInit' : false, 'placeTabsBottom':false}
 					);">
 					Create Tabbar from single page view with useCurrentViewForTab - no blinking during switch to Tabbar </a><br/><br/>
@@ -336,8 +339,8 @@
 	<div class="test_scenario">
 		<div class="test_scenario_controls">
 				<a href="javascript:void(0)" onclick="Createtabbarnew(
-					[{'label':'Native Tabbar', 'action':'/app/NativeTabbarTest/NativeTabBar_MainPage.html', 'icon':'/public/images/bar/gears.png', 'useCurrentViewForTab':true},
-					{'label':'Main page', 'action':'/app/index.html', 'icon':'/public/images/bar/colored_btn.png', 'use_current_view_for_tab':true}], 
+					[{'label':'Native Tabbar', 'action':'../../app/NativeTabbarTest/NativeTabBar_MainPage.html', 'icon':'../../public/images/bar/gears.png', 'useCurrentViewForTab':true},
+					{'label':'Main page', 'action':'../../app/index.html', 'icon':'../../public/images/bar/colored_btn.png', 'use_current_view_for_tab':true}], 
 					{'verticalOrientation':false, 'hiddenTabs': false, 'createOnInit' : false, 'placeTabsBottom':false}
 					);">
 					Call remove current tab  and then create   </a><br/><br/>
@@ -350,8 +353,8 @@
 	<div class="test_scenario">
 		<div class="test_scenario_controls">
 				<a href="javascript:void(0)" onclick="Createtabbarnew(
-					[{'label':'Native Tabbar', 'action':'/app/NativeTabbarTest/NativeTabBar_MainPage.html', 'icon':'/public/images/bar/gears.png', 'selectedColor':0xFFFF00, 'reload':true},
-					{'label':'Main page', 'action':'/app/index.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true,'selectedColor':0xFF0000}], 
+					[{'label':'Native Tabbar', 'action':'../../app/NativeTabbarTest/NativeTabBar_MainPage.html', 'icon':'../../public/images/bar/gears.png', 'selectedColor':0xFFFF00, 'reload':true},
+					{'label':'Main page', 'action':'../../app/index.html', 'icon':'../../public/images/bar/colored_btn.png', 'reload':true,'selectedColor':0xFF0000}], 
 					{'verticalOrientation':false, 'hiddenTabs': false, 'createOnInit' : false, 'placeTabsBottom':false}
 					);">
 					Create Tabbar with changed the selected color for first tab to Yellow (not Android and WM/CE)  </a><br/><br/>
@@ -363,8 +366,8 @@
 	<div class="test_scenario">
 		<div class="test_scenario_controls">
 				<a href="javascript:void(0)" onclick="Createtabbarnew(
-					[{'label':'Native Tabbar', 'action':'/app/NativeTabbarTest/NativeTabBar_MainPage.html', 'icon':'/public/images/bar/gears.png', 'selectedColor':0xFFFF00},
-					{'label':'Main page', 'action':'/app/index.html', 'icon':'/public/images/bar/colored_btn.png', 'selectedColor':0xFFFF00, 'reload':true}], 
+					[{'label':'Native Tabbar', 'action':'../../app/NativeTabbarTest/NativeTabBar_MainPage.html', 'icon':'../../public/images/bar/gears.png', 'selectedColor':0xFFFF00},
+					{'label':'Main page', 'action':'../../app/index.html', 'icon':'../../public/images/bar/colored_btn.png', 'selectedColor':0xFFFF00, 'reload':true}], 
 					{'verticalOrientation':false, 'hiddenTabs': false, 'createOnInit' : false, 'placeTabsBottom':false,  'backgroundColor':0x000F4F }
 					);">
 					Create Tabbar with changed the selected color for two tabs to Yellow (not WM/CE)</a><br/><br/>
@@ -376,8 +379,8 @@
 	<div class="test_scenario">
 		<div class="test_scenario_controls">
 				<a href="javascript:void(0)" onclick="Createtabbarnew(
-					[{'label':'Native Tabbar', 'action':'/app/NativeTabbarTest/NativeTabBar_MainPage.html', 'icon':'/public/images/bar/gears.png' },
-					{'label':'Main page', 'action':'/app/index.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true, 'disabled':true}], 
+					[{'label':'Native Tabbar', 'action':'../../app/NativeTabbarTest/NativeTabBar_MainPage.html', 'icon':'../../public/images/bar/gears.png' },
+					{'label':'Main page', 'action':'../../app/index.html', 'icon':'../../public/images/bar/colored_btn.png', 'reload':true, 'disabled':true}], 
 					{'verticalOrientation':false, 'hiddenTabs': false, 'createOnInit' : false, 'placeTabsBottom':false}
 					);">
 					Create Tabbar with disabled second tab (not WM/CE)  </a><br/><br/>
@@ -389,8 +392,8 @@
 	<div class="test_scenario">
 		<div class="test_scenario_controls">
 				<a href="javascript:void(0)" onclick="Createtabbarnew(
-					[{'label':'Native Tabbar', 'action':'/app/NativeTabbarTest/NativeTabBar_MainPage.html', 'icon':'/public/images/bar/gears.png', 'reload':true },
-					{'label':'Main page', 'action':'/app/index.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true}], 
+					[{'label':'Native Tabbar', 'action':'../../app/NativeTabbarTest/NativeTabBar_MainPage.html', 'icon':'../../public/images/bar/gears.png', 'reload':true },
+					{'label':'Main page', 'action':'../../app/index.html', 'icon':'../../public/images/bar/colored_btn.png', 'reload':true}], 
 					{'verticalOrientation':true, 'hiddenTabs': false, 'createOnInit' : false, 'placeTabsBottom':false}
 					);">
 					Creates a vertical tabbar (only iPad) </a><br/><br/>
@@ -401,8 +404,8 @@
 	<div class="test_scenario">
 		<div class="test_scenario_controls">
 				<a href="javascript:void(0)" onclick="Createtabbarnew(
-					[{'label':'Native Tabbar', 'action':'/app/NativeTabbarTest/NativeTabBar_MainPage.html', 'icon':'/public/images/bar/gears.png'},
-					{'label':'Main page', 'action':'/app/index.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true}], 
+					[{'label':'Native Tabbar', 'action':'../../app/NativeTabbarTest/NativeTabBar_MainPage.html', 'icon':'../../public/images/bar/gears.png'},
+					{'label':'Main page', 'action':'../../app/index.html', 'icon':'../../public/images/bar/colored_btn.png', 'reload':true}], 
 					{'verticalOrientation':false, 'backgroundColor':0x0000FF, 'hiddenTabs': false, 'createOnInit' : false, 'placeTabsBottom':false}
 					);">
 					Tabbar with background blue </a><br/><br/>
@@ -413,9 +416,9 @@
 	<div class="test_scenario">
 		<div class="test_scenario_controls">
 				<a href="javascript:void(0)" onclick="Createtabbarnew(
-					[{'action':'/app/NativeTabbarTest/NativeTabBar_MainPage.html', 'icon':'/public/images/bar/gears.png'},
-					{'action':'/app/NativeTabbarTest/NativeTabBar_MainPage.html', 'icon':'/public/images/bar/gears.png'},
-					{'label':'Main page', 'action':'/app/index.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true}], 
+					[{'action':'../../app/NativeTabbarTest/NativeTabBar_MainPage.html', 'icon':'../../public/images/bar/gears.png'},
+					{'action':'../../app/NativeTabbarTest/NativeTabBar_MainPage.html', 'icon':'../../public/images/bar/gears.png'},
+					{'label':'Main page', 'action':'../../app/index.html', 'icon':'../../public/images/bar/colored_btn.png', 'reload':true}], 
 					{'verticalOrientation':false, 'hiddenTabs': true, 'createOnInit' : false, 'placeTabsBottom':false}
 					);">
 					Tabbar with one hiddenTabs (from 3 tabs) (only WM)</a><br/><br/>
@@ -427,9 +430,9 @@
 	<div class="test_scenario">
 		<div class="test_scenario_controls">
 				<a href="javascript:void(0)" onclick="Createtabbarnew(
-					[{'action':'/app/NativeTabbarTest/NativeTabBar_MainPage.html', 'icon':'/public/images/bar/gears.png'},
-					{'label':'Native Tabbar', 'action':'/app/NativeTabbarTest/NativeTabBar_MainPage.html', 'icon':'/public/images/bar/gears.png'},
-					{'label':'Main page', 'action':'/app/index.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true}], 
+					[{'action':'../../app/NativeTabbarTest/NativeTabBar_MainPage.html', 'icon':'../../public/images/bar/gears.png'},
+					{'label':'Native Tabbar', 'action':'../../app/NativeTabbarTest/NativeTabBar_MainPage.html', 'icon':'../../public/images/bar/gears.png'},
+					{'label':'Main page', 'action':'../../app/index.html', 'icon':'../../public/images/bar/colored_btn.png', 'reload':true}], 
 					{'verticalOrientation':false, 'hiddenTabs': true, 'createOnInit' : false, 'placeTabsBottom':false}
 					);">
 					Tabbar with 2 hiddenTabs (from 3 tabs) (only WM) </a><br/><br/>
@@ -449,10 +452,10 @@
 	<div class="test_scenario">
 		<div class="test_scenario_controls">
 				<a href="javascript:void(0)" onclick="Createtabbarnew(
-					[{'label':'MainPage', 'action':'/app/NativeTabbarTest/NativeTabBar_MainPage.html', 'useCurrentViewForTab':false},
-                    {'label':'Page1', 'action':'/app/NativeTabbarTest/NativeTabBar_Page1.html'}, 
+					[{'label':'MainPage', 'action':'../../app/NativeTabbarTest/NativeTabBar_MainPage.html', 'useCurrentViewForTab':false},
+                    {'label':'Page1', 'action':'../../app/NativeTabbarTest/NativeTabBar_Page1.html'}, 
                     {'label':'Minimize', 'action':'fullscreen'} ,
-                    {'label':'Log', 'action':'Log', 'icon':'/public/images/bar/colored_btn.png'}],  
+                    {'label':'Log', 'action':'Log', 'icon':'../../public/images/bar/colored_btn.png'}],  
 					{'verticalOrientation':false, 'hiddenTabs': false, 'createOnInit' : true, 'placeTabsBottom':false}
 					);">
 					Create Tabbar with createOnInit as True (only WM)</a><br/><br/>
@@ -473,23 +476,23 @@
 	<div class="test_scenario">
 		<div class="test_scenario_controls">
 				<a href="javascript:void(0)" onclick="Createtabbarnew(
-					[{'label':'Native Tabbar', 'action':'/app/NativeTabbarTest/NativeTabBar_MainPage.html', 'icon':'/public/images/bar/gears.png'},
-					{'label':'Main page', 'action':'/app/index.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true},
-					{'label':'Page1', 'action':'/app/index.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true},
-					{'label':'Page2', 'action':'/app/NativeTabbarTest/NativeTabBar_MainPage.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true},
-					{'label':'Page3', 'action':'/app/index.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true},
-					{'label':'Page4', 'action':'/app/index.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true},
-					{'label':'Page5', 'action':'/app/NativeTabbarTest/NativeTabBar_MainPage.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true},
-					{'label':'Page6', 'action':'/app/index.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true},
-					{'label':'Page7', 'action':'/app/NativeTabbarTest/NativeTabBar_MainPage.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true},
-					{'label':'Page8', 'action':'/app/index.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true},
-					{'label':'Page9', 'action':'/app/index.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true},
-					{'label':'Page10', 'action':'/app/NativeTabbarTest/NativeTabBar_MainPage.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true},
-					{'label':'Page11', 'action':'/app/index.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true},
-					{'label':'Page12', 'action':'/app/NativeTabbarTest/NativeTabBar_MainPage.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true},
-					{'label':'Page13', 'action':'/app/index.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true},
-					{'label':'Page14', 'action':'/app/index.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true},
-					{'label':'Page15', 'action':'/app/NativeTabbarTest/NativeTabBar_MainPage.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true}
+					[{'label':'Native Tabbar', 'action':'../../app/NativeTabbarTest/NativeTabBar_MainPage.html', 'icon':'../../public/images/bar/gears.png'},
+					{'label':'Main page', 'action':'../../app/index.html', 'icon':'../../public/images/bar/colored_btn.png', 'reload':true},
+					{'label':'Page1', 'action':'../../app/index.html', 'icon':'../../public/images/bar/colored_btn.png', 'reload':true},
+					{'label':'Page2', 'action':'../../app/NativeTabbarTest/NativeTabBar_MainPage.html', 'icon':'../../public/images/bar/colored_btn.png', 'reload':true},
+					{'label':'Page3', 'action':'../../app/index.html', 'icon':'../../public/images/bar/colored_btn.png', 'reload':true},
+					{'label':'Page4', 'action':'../../app/index.html', 'icon':'../../public/images/bar/colored_btn.png', 'reload':true},
+					{'label':'Page5', 'action':'../../app/NativeTabbarTest/NativeTabBar_MainPage.html', 'icon':'../../public/images/bar/colored_btn.png', 'reload':true},
+					{'label':'Page6', 'action':'../../app/index.html', 'icon':'../../public/images/bar/colored_btn.png', 'reload':true},
+					{'label':'Page7', 'action':'../../app/NativeTabbarTest/NativeTabBar_MainPage.html', 'icon':'../../public/images/bar/colored_btn.png', 'reload':true},
+					{'label':'Page8', 'action':'../../app/index.html', 'icon':'../../public/images/bar/colored_btn.png', 'reload':true},
+					{'label':'Page9', 'action':'../../app/index.html', 'icon':'../../public/images/bar/colored_btn.png', 'reload':true},
+					{'label':'Page10', 'action':'../../app/NativeTabbarTest/NativeTabBar_MainPage.html', 'icon':'../../public/images/bar/colored_btn.png', 'reload':true},
+					{'label':'Page11', 'action':'../../app/index.html', 'icon':'../../public/images/bar/colored_btn.png', 'reload':true},
+					{'label':'Page12', 'action':'../../app/NativeTabbarTest/NativeTabBar_MainPage.html', 'icon':'../../public/images/bar/colored_btn.png', 'reload':true},
+					{'label':'Page13', 'action':'../../app/index.html', 'icon':'../../public/images/bar/colored_btn.png', 'reload':true},
+					{'label':'Page14', 'action':'../../app/index.html', 'icon':'../../public/images/bar/colored_btn.png', 'reload':true},
+					{'label':'Page15', 'action':'../../app/NativeTabbarTest/NativeTabBar_MainPage.html', 'icon':'../../public/images/bar/colored_btn.png', 'reload':true}
 					], 
 					{'verticalOrientation':false, 'hiddenTabs': false, 'createOnInit' : false, 'placeTabsBottom':false}
 					);">
@@ -503,10 +506,10 @@
 	<div class="test_scenario">
 		<div class="test_scenario_controls">
 				<a href="javascript:void(0)" onclick="Createtabbarnew(
-					[{'label':'Native Tabbar', 'action':'/app/NativeTabbarTest/NativeTabBar_MainPage.html', 'icon':'/public/images/bar/gears.png'},
-					{'label':'Long label Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola', 'action':'/app/index.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true},
-					{'label':'Long label Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola', 'action':'/app/index.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true},
-					{'label':'Page2', 'action':'/app/NativeTabbarTest/NativeTabBar_MainPage.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true}
+					[{'label':'Native Tabbar', 'action':'../../app/NativeTabbarTest/NativeTabBar_MainPage.html', 'icon':'../../public/images/bar/gears.png'},
+					{'label':'Long label Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola', 'action':'../../app/index.html', 'icon':'../../public/images/bar/colored_btn.png', 'reload':true},
+					{'label':'Long label Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola Motorola', 'action':'../../app/index.html', 'icon':'../../public/images/bar/colored_btn.png', 'reload':true},
+					{'label':'Page2', 'action':'../../app/NativeTabbarTest/NativeTabBar_MainPage.html', 'icon':'../../public/images/bar/colored_btn.png', 'reload':true}
 					], 
 					{'verticalOrientation':false, 'hiddenTabs': false, 'createOnInit' : false, 'placeTabsBottom':false}
 					);">
@@ -519,10 +522,10 @@
 	<div class="test_scenario">
 		<div class="test_scenario_controls">
 				<a href="javascript:void(0)" onclick="Createtabbarnew(
-					[{'label':'MainPage', 'action':'/app/NativeTabbarTest/NativeTabBar_MainPage.html', 'useCurrentViewForTab':true},
-                    {'label':'Page1', 'action':'/app/NativeTabbarTest/NativeTabBar_Page1.html','backgroundColor':0x7F7F7F }, 
-                    {'label':'Page2', 'action':'/app/NativeTabbarTest/NativeTabBar_Page2.html','backgroundColor':0xFF0000} ,
-                    {'label':'Page3', 'action':'/app/index.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':fasle}], 
+					[{'label':'MainPage', 'action':'../../app/NativeTabbarTest/NativeTabBar_MainPage.html', 'useCurrentViewForTab':true},
+                    {'label':'Page1', 'action':'../../app/NativeTabbarTest/NativeTabBar_Page1.html','backgroundColor':0x7F7F7F }, 
+                    {'label':'Page2', 'action':'../../app/NativeTabbarTest/NativeTabBar_Page2.html','backgroundColor':0xFF0000} ,
+                    {'label':'Page3', 'action':'../../app/index.html', 'icon':'../../public/images/bar/colored_btn.png', 'reload':fasle}], 
 					{'verticalOrientation':false, 'hiddenTabs': false, 'createOnInit' : false, 'placeTabsBottom':false}
 					);">
 					Create Tabbar with background color for the tab</a><br/><br/>
@@ -533,27 +536,27 @@
 	<div class="test_scenario">
 		<div class="test_scenario_controls">
 				<a href="javascript:void(0)" onclick="Createtabbarnew(
-					[{'label':'MainPage', 'action':'/app/NativeTabbarTest/NativeTabBar_MainPage.html', 'useCurrentViewForTab':true},
-                    {'label':'Main Reload', 'action':'/app/NativeTabbarTest/NativeTabBar_MainPage.html', 'reload':true},
-                    {'label':'Page3', 'action':'/app/NativeTabbarTest/NativeTabBar_Page1.html','perishable':true}, 
-                    {'label':'Page4', 'action':'/app/NativeTabbarTest/NativeTabBar_Page2.html', 'perishable':true},
-                    {'label':'Page5', 'action':'/app/index.html', 'icon':'/public/images/bar/colored_btn.png','perishable':true},
-                     {'label':'Main page', 'action':'/app/index.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true,'perishable':true},
-					{'label':'Page7', 'action':'/app/index.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true,'perishable':true},
-					{'label':'Page8', 'action':'/app/NativeTabbarTest/NativeTabBar_MainPage.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true,'perishable':true},
-					{'label':'Page9', 'action':'/app/index.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true,'perishable':true},
-					{'label':'Page10', 'action':'/app/index.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true},
-					{'label':'Page11', 'action':'/app/NativeTabbarTest/NativeTabBar_MainPage.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true},
-					{'label':'Page12', 'action':'/app/index.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true},
-					{'label':'Page13', 'action':'/app/NativeTabbarTest/NativeTabBar_MainPage.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true},
-					{'label':'Page14', 'action':'/app/index.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true},
-					{'label':'Page15', 'action':'/app/index.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true},
-					{'label':'Page16', 'action':'/app/NativeTabbarTest/NativeTabBar_MainPage.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true},
-					{'label':'Page17', 'action':'/app/index.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true},
-					{'label':'Page18', 'action':'/app/NativeTabbarTest/NativeTabBar_MainPage.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true},
-					{'label':'Page19', 'action':'/app/index.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true},
-					{'label':'Page20', 'action':'/app/index.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true},
-					{'label':'Page21', 'action':'/app/index.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true}],
+					[{'label':'MainPage', 'action':'../../app/NativeTabbarTest/NativeTabBar_MainPage.html', 'useCurrentViewForTab':true},
+                    {'label':'Main Reload', 'action':'../../app/NativeTabbarTest/NativeTabBar_MainPage.html', 'reload':true},
+                    {'label':'Page3', 'action':'../../app/NativeTabbarTest/NativeTabBar_Page1.html','perishable':true}, 
+                    {'label':'Page4', 'action':'../../app/NativeTabbarTest/NativeTabBar_Page2.html', 'perishable':true},
+                    {'label':'Page5', 'action':'../../app/index.html', 'icon':'../../public/images/bar/colored_btn.png','perishable':true},
+                     {'label':'Main page', 'action':'../../app/index.html', 'icon':'../../public/images/bar/colored_btn.png', 'reload':true,'perishable':true},
+					{'label':'Page7', 'action':'../../app/index.html', 'icon':'../../public/images/bar/colored_btn.png', 'reload':true,'perishable':true},
+					{'label':'Page8', 'action':'../../app/NativeTabbarTest/NativeTabBar_MainPage.html', 'icon':'../../public/images/bar/colored_btn.png', 'reload':true,'perishable':true},
+					{'label':'Page9', 'action':'../../app/index.html', 'icon':'../../public/images/bar/colored_btn.png', 'reload':true,'perishable':true},
+					{'label':'Page10', 'action':'../../app/index.html', 'icon':'../../public/images/bar/colored_btn.png', 'reload':true},
+					{'label':'Page11', 'action':'../../app/NativeTabbarTest/NativeTabBar_MainPage.html', 'icon':'../../public/images/bar/colored_btn.png', 'reload':true},
+					{'label':'Page12', 'action':'../../app/index.html', 'icon':'../../public/images/bar/colored_btn.png', 'reload':true},
+					{'label':'Page13', 'action':'../../app/NativeTabbarTest/NativeTabBar_MainPage.html', 'icon':'../../public/images/bar/colored_btn.png', 'reload':true},
+					{'label':'Page14', 'action':'../../app/index.html', 'icon':'../../public/images/bar/colored_btn.png', 'reload':true},
+					{'label':'Page15', 'action':'../../app/index.html', 'icon':'../../public/images/bar/colored_btn.png', 'reload':true},
+					{'label':'Page16', 'action':'../../app/NativeTabbarTest/NativeTabBar_MainPage.html', 'icon':'../../public/images/bar/colored_btn.png', 'reload':true},
+					{'label':'Page17', 'action':'../../app/index.html', 'icon':'../../public/images/bar/colored_btn.png', 'reload':true},
+					{'label':'Page18', 'action':'../../app/NativeTabbarTest/NativeTabBar_MainPage.html', 'icon':'../../public/images/bar/colored_btn.png', 'reload':true},
+					{'label':'Page19', 'action':'../../app/index.html', 'icon':'../../public/images/bar/colored_btn.png', 'reload':true},
+					{'label':'Page20', 'action':'../../app/index.html', 'icon':'../../public/images/bar/colored_btn.png', 'reload':true},
+					{'label':'Page21', 'action':'../../app/index.html', 'icon':'../../public/images/bar/colored_btn.png', 'reload':true}],
 					{'verticalOrientation':false, 'hiddenTabs': false, 'createOnInit' : true, 'placeTabsBottom':false},tabbarEventHandler);">
 					Create Tabbar with perishable as true for the 7 tabs (only WM)</a><br/><br/>
 		</div>
@@ -588,11 +591,11 @@
 	<div class="test_scenario">
 		<div class="test_scenario_controls">
 				<a href="javascript:void(0)" onclick="Createtabbarnew(
-					[{'label':'MainPage', 'action':'/app/NativeTabbarTest/NativeTabBar_MainPage.html', 'useCurrentViewForTab':true},
-                    {'label':'Main Reload', 'action':'/app/NativeTabbarTest/NativeTabBar_MainPage.html', 'reload':true},
+					[{'label':'MainPage', 'action':'../../app/NativeTabbarTest/NativeTabBar_MainPage.html', 'useCurrentViewForTab':true},
+                    {'label':'Main Reload', 'action':'../../app/NativeTabbarTest/NativeTabBar_MainPage.html', 'reload':true},
                     {'label':'Page1', 'action':'minimize','createOnInit':true}, 
                     {'label':'Page2', 'action':'Log', 'createOnInit':true},
-                    {'label':'Page3', 'action':'/app/index.html', 'icon':'/public/images/bar/colored_btn.png'} ], 
+                    {'label':'Page3', 'action':'../../app/index.html', 'icon':'../../public/images/bar/colored_btn.png'} ], 
 					{'verticalOrientation':false, 'hiddenTabs': false, 'createOnInit' : false, 'placeTabsBottom':false}
 					);">
 					Tabbar with create onInit true for two elements</a><br/><br/>
@@ -604,11 +607,11 @@
 	<div class="test_scenario">
 		<div class="test_scenario_controls">
 				<a href="javascript:void(0)" onclick="Createtabbarnew(
-					[{'label':'MainPage', 'action':'/app/NativeTabbarTest/NativeTabBar_MainPage.html', 'useCurrentViewForTab':true},
-                    {'label':'Main Reload', 'action':'/app/NativeTabbarTest/NativeTabBar_MainPage.html', 'reload':true},
+					[{'label':'MainPage', 'action':'../../app/NativeTabbarTest/NativeTabBar_MainPage.html', 'useCurrentViewForTab':true},
+                    {'label':'Main Reload', 'action':'../../app/NativeTabbarTest/NativeTabBar_MainPage.html', 'reload':true},
                     {'label':'Page1', 'action':'fullscreen','createOnInit':false}, 
                     {'label':'Page2', 'action':'Log', 'createOnInit':true},
-                    {'label':'Page3', 'action':'/app/index.html', 'icon':'/public/images/bar/colored_btn.png','createOnInit':false} ], 
+                    {'label':'Page3', 'action':'../../app/index.html', 'icon':'../../public/images/bar/colored_btn.png','createOnInit':false} ], 
 					{'verticalOrientation':false, 'hiddenTabs': false, 'createOnInit' : false, 'placeTabsBottom':false}
 					);">
 					Tabbar with create onInit true for one and false for the other tab </a><br/><br/>
@@ -619,9 +622,9 @@
 	<div class="test_scenario">
 		<div class="test_scenario_controls">
 				<a href="javascript:void(0)" onclick="Createtabbarnew(
-					[{'action':'/app/NativeTabbarTest/NativeTabBar_MainPage.html', 'icon':'/public/images/bar/gears.png'},
-					{'label':'Native Tabbar', 'action':'/app/NativeTabbarTest/NativeTabBar_MainPage.html', 'icon':'/public/images/bar/gears.png'},
-					{'label':'Main page', 'action':'/app/index.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true},
+					[{'action':'../../app/NativeTabbarTest/NativeTabBar_MainPage.html', 'icon':'../../public/images/bar/gears.png'},
+					{'label':'Native Tabbar', 'action':'../../app/NativeTabbarTest/NativeTabBar_MainPage.html', 'icon':'../../public/images/bar/gears.png'},
+					{'label':'Main page', 'action':'../../app/index.html', 'icon':'../../public/images/bar/colored_btn.png', 'reload':true},
 					{'label':'log', 'action':'log','backgroundColor' : 0x7F7F7F},
 					{'label':'home', 'action':'home','backgroundColor' : 0.45454},
 					{'label':'options', 'action':'options'},
