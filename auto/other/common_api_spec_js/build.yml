@@ -1,4 +1,4 @@
-#sdk: /Users/MOHUS/rhodes
+sdk: ../../../../rhodes
 paths:
   extensions:
   - ../common_api_spec/extensions/
@@ -20,6 +20,7 @@ iphone:
   entitlements:
   BundleIdentifier: com.rhomobile.commonapispecjs
   BundleURLScheme: commonapispecjs
+  extensions: ["entityGen"]
 wp:
   productid: 'b6479381-42a8-0130-78de-3caec51bd50e'
 symbian:

@@ -13,6 +13,33 @@
                     <FIELD name="cconst" type="STRING" const="true"/>
                 </FIELDS>
             </ENTITY> 
+            <ENTITY name="simpleEntity">
+                <FIELDS>
+                    <FIELD name="id" type="INTEGER" const="true" binding="true"/>
+                    <FIELD name="someField" type="STRING"/>
+                </FIELDS>
+                <METHODS>
+                    <METHOD name="justMethod"> 
+                        <RETURN type="STRING"/>
+                    </METHOD>
+                    <METHOD name="someMethod"  access="STATIC" > 
+                        <RETURN type="STRING"/>
+                    </METHOD>
+                    <METHOD name="oneEntity"  access="STATIC" > 
+                        <RETURN type="SELF_INSTANCE"/>
+                    </METHOD>
+                    <METHOD name="arrayOfEntites" access="STATIC" >
+                        <PARAMS>
+                            <PARAM name="num" type="INTEGER">
+                            </PARAM>
+                        </PARAMS>
+                        <RETURN type="ARRAY">
+                            <DESC>Array of simpleEntity objects</DESC>
+                            <PARAM type="SELF_INSTANCE"/>
+                        </RETURN>
+                    </METHOD>
+                </METHODS>
+            </ENTITY> 
             <ENTITY name="datTest">
                 <FIELDS>
                     <FIELD name="fConst" type="STRING" const="true"/>
@@ -83,6 +110,9 @@
         </ENTITIES>
 
         <METHODS access="static">
+            <METHOD name="resetState">
+                <DESC>Reset state to initial (counters / values).</DESC>
+            </METHOD>
             <METHOD name="clearCallList">
                 <DESC>Clear list of calls.</DESC>
             </METHOD>

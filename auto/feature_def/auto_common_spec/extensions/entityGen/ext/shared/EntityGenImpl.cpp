@@ -9,6 +9,7 @@
 #include "common/RhodesApp.h"
 #include "common/RhoConf.h"
 #include "logging/RhoLog.h"
+#include "api_generator/StringifyHelper.h"
 
 namespace rho {
     
@@ -21,27 +22,43 @@ namespace rho {
         rho::Hashtable<rho::String, rho::String> m_initArgs;
         rho::Hashtable<rho::String, rho::String> m_updateArgs;
         rho::Vector<rho::String> m_callList;
+        int counter;
+        int dat_test_counter;
+        int simple_entity_counter;
+        
+        virtual void reset() {
+            m_initArgs.clear();
+            m_updateArgs.clear();
+            m_callList.clear();
+            counter = 0;
+            dat_test_counter = 0;
+            simple_entity_counter = 0;
+        }
+        
     public:
         
-        CEntityGenSingletonImpl(): CEntityGenSingletonBase(){}
+        CEntityGenSingletonImpl(): CEntityGenSingletonBase(){ reset(); }
         
         //methods
 
         /* Enity Emtpy fileds 
         */ 
 
-        virtual void initEmtpyEntity(rho::apiGenerator::CMethodResult& oResult) {
-            // RAWLOGC_INFO("initEmtpyEntity","EntityGen");
-            m_callList.push_back("initEmtpyEntity");
+        virtual void initEmtpy(rho::apiGenerator::CMethodResult& oResult) {
+            RAWLOGC_INFO("initEmtpy","EntityGen");
+            m_callList.push_back("initEmtpy");
+            m_initArgs.clear();
         } 
 
         /* Enity ConstEnt fileds 
           const rho::String cconst;
         */ 
 
-        virtual void initConstEntEntity(rho::apiGenerator::CMethodResult& oResult) {
-            // RAWLOGC_INFO("initConstEntEntity","EntityGen");
-            m_callList.push_back("initConstEntEntity");
+        virtual void initConstEnt(rho::apiGenerator::CMethodResult& oResult) {
+            RAWLOGC_INFO("initConstEnt","EntityGen");
+            m_callList.push_back("initConstEnt");
+            m_initArgs.clear();
+
             
             
             /* Enity ConstEnt fileds initialization */
@@ -54,6 +71,70 @@ namespace rho {
             
         } 
 
+        /* Enity SimpleEntity fileds 
+          const int id;
+          rho::String someField;
+        */ 
+
+        virtual void initSimpleEntity( const rho::String& someField, rho::apiGenerator::CMethodResult& oResult) {
+            RAWLOGC_INFO("initSimpleEntity","EntityGen");
+            m_callList.push_back("initSimpleEntity:"+someField);
+            
+            /* Enity SimpleEntity fileds initialization */
+            rho::Hashtable<rho::String, rho::String> result;
+
+             // INTEGER const binding
+            result["id"] =  convertToStringA(simple_entity_counter++);
+             // STRING  
+            result["someField"] =  "someValue";
+             
+            oResult.set(result);
+            
+        } 
+
+        virtual void updateSimpleEntity( int id,  const rho::Hashtable<rho::String, rho::String>& updates, rho::apiGenerator::CMethodResult& oResult) {
+            RAWLOGC_INFO("updateSimpleEntity","EntityGen");
+            StringifyHash helper; rho::String str; helper.fromHash(updates); helper.toString(str);
+            m_callList.push_back("updateSimpleEntity:"+convertToStringA(id)+"," + str);
+        } 
+
+        virtual void justMethodSimpleEntity( int id, rho::apiGenerator::CMethodResult& oResult) {
+            RAWLOGC_INFO("justMethodSimpleEntity","EntityGen");
+            m_callList.push_back("justMethodSimpleEntity:"+convertToStringA(id));
+            oResult.set("foo"+convertToStringA(id));
+        } 
+
+        virtual void someMethodSimpleEntityStatic(rho::apiGenerator::CMethodResult& oResult) {
+            RAWLOGC_INFO("someMethodSimpleEntityStatic","EntityGen");
+            m_callList.push_back("someMethodSimpleEntityStatic");
+            oResult.set("simple_result");
+            
+        } 
+
+        virtual void oneEntitySimpleEntityStatic(rho::apiGenerator::CMethodResult& oResult) {
+            RAWLOGC_INFO("oneEntitySimpleEntityStatic","EntityGen");
+            rho::Hashtable<rho::String, rho::String> result;
+            result["id"] = convertToStringA(simple_entity_counter++);
+            result["someField"] =  "otherValue";
+            oResult.set(result);
+        } 
+
+        virtual void arrayOfEntitesSimpleEntityStatic( int num, rho::apiGenerator::CMethodResult& oResult) {
+            // RAWLOGC_INFO("arrayOfEntitesSimpleEntityStatic","EntityGen");
+            rho::Vector<rho::Hashtable<rho::String, rho::String> > result;
+            if (num > 0 && num < 100) {
+                for(int i = 0; i < num; i++)
+                {
+                    rho::Hashtable<rho::String, rho::String> s_result;
+                    s_result["id"] = convertToStringA(simple_entity_counter++);
+                    s_result["someField"] =  "yetAnotherValue";
+                    result.push_back(s_result);
+                }
+            }
+            oResult.set(result);
+        }
+
+
         /* Enity DatTest fileds 
           const rho::String fConst;
           const rho::String fConstBinding;
@@ -61,20 +142,20 @@ namespace rho {
           rho::String f;
         */ 
 
-        virtual void initDatTestEntity( const rho::Hashtable<rho::String, rho::String>& init_hash, rho::apiGenerator::CMethodResult& oResult) {
-            // RAWLOGC_INFO("initDatTestEntity","EntityGen");
-            m_callList.push_back("initDatTestEntity");
-            
+        virtual void initDatTest( const rho::Hashtable<rho::String, rho::String>& init_hash, rho::apiGenerator::CMethodResult& oResult) {
+            RAWLOGC_INFO("initDatTest","EntityGen");
+            m_callList.push_back("initEnityDatTest");
+            m_initArgs = init_hash;
             
             /* Enity DatTest fileds initialization */
             rho::Hashtable<rho::String, rho::String> result;
 
              // STRING const 
-            result["fConst"] =  "abc";
+            result["fConst"] = "justConstant";
              // STRING const binding
-            result["fConstBinding"] = "mapping";
+            result["fConstBinding"] = convertToStringA(dat_test_counter++);
              // STRING  binding
-            result["fBinding"] =  "mapping2";
+            result["fBinding"] =  "bindingField2";
              // STRING  
             result["f"] =  "justvalue";
              
@@ -82,27 +163,30 @@ namespace rho {
             
         } 
 
-        virtual void updateDatTestEntity( const rho::Hashtable<rho::String, rho::String>& binding,  const rho::String& f, rho::apiGenerator::CMethodResult& oResult) {
-            // RAWLOGC_INFO("updateDatTestEntity","EntityGen");
-            m_callList.push_back("updateDatTestEntity");
+        virtual void updateDatTest( const rho::Hashtable<rho::String, rho::String>& binding,  const rho::Hashtable<rho::String, rho::String>& updates, rho::apiGenerator::CMethodResult& oResult) {
+            RAWLOGC_INFO("updateDatTest","EntityGen");
+            m_callList.push_back("updateDatTest");
+            m_updateArgs = binding;
             
         } 
 
-        virtual void instanceMethodDatTestEntity( const rho::Hashtable<rho::String, rho::String>& hash, rho::apiGenerator::CMethodResult& oResult) {
-            // RAWLOGC_INFO("instanceMethodDatTestEntity","EntityGen");
-            m_callList.push_back("instanceMethodDatTestEntity");
+        virtual void instanceMethodDatTest( const rho::Hashtable<rho::String, rho::String>& hash, rho::apiGenerator::CMethodResult& oResult) {
+            RAWLOGC_INFO("instanceMethodDatTest","EntityGen");
+            StringifyHash helper; rho::String str; helper.fromHash(hash); helper.toString(str);
+            m_callList.push_back("instanceMethodDatTest:"+str);
             
         } 
 
-        virtual void instanceMethodArgDatTestEntity( const rho::Hashtable<rho::String, rho::String>& hash,  const rho::String& filter, rho::apiGenerator::CMethodResult& oResult) {
-            // RAWLOGC_INFO("instanceMethodArgDatTestEntity","EntityGen");
-            m_callList.push_back("instanceMethodArgDatTestEntity");
+        virtual void instanceMethodArgDatTest( const rho::Hashtable<rho::String, rho::String>& hash,  const rho::String& filter, rho::apiGenerator::CMethodResult& oResult) {
+            RAWLOGC_INFO("instanceMethodArgDatTest","EntityGen");
+            StringifyHash helper; rho::String str; helper.fromHash(hash); helper.toString(str);
+            m_callList.push_back("instanceMethodArgDatTest");
             
         } 
 
-        virtual void staticMethodDatTestEntity( const rho::String& filter, rho::apiGenerator::CMethodResult& oResult) {
-            // RAWLOGC_INFO("staticMethodDatTestEntity","EntityGen");
-            m_callList.push_back("staticMethodDatTestEntity");
+        virtual void staticMethodDatTestStatic( const rho::String& filter, rho::apiGenerator::CMethodResult& oResult) {
+            RAWLOGC_INFO("staticMethodDatTestStatic","EntityGen");
+            m_callList.push_back("staticMethodDatTestStatic");
             
         } 
 
@@ -116,9 +200,9 @@ namespace rho {
           double price;
         */ 
 
-        virtual void initPhoneEntity( const rho::Hashtable<rho::String, rho::String>& init_hash, rho::apiGenerator::CMethodResult& oResult) {
-            // RAWLOGC_INFO("initPhoneEntity","EntityGen");
-            m_callList.push_back("initPhoneEntity");
+        virtual void initPhone( const rho::Hashtable<rho::String, rho::String>& init_hash, rho::apiGenerator::CMethodResult& oResult) {
+            RAWLOGC_INFO("initPhone","EntityGen");
+            m_callList.push_back("initPhone");
             
             
             /* Enity Phone fileds initialization */
@@ -143,21 +227,21 @@ namespace rho {
             
         } 
 
-        virtual void updatePhoneEntity( int id,  const rho::Hashtable<rho::String, rho::String>& updates, rho::apiGenerator::CMethodResult& oResult) {
-            // RAWLOGC_INFO("updatePhoneEntity","EntityGen");
-            m_callList.push_back("updatePhoneEntity");
+        virtual void updatePhone( int id,  const rho::Hashtable<rho::String, rho::String>& updates, rho::apiGenerator::CMethodResult& oResult) {
+            RAWLOGC_INFO("updatePhone","EntityGen");
+            m_callList.push_back("updatePhone");
             
         } 
 
-        virtual void filterPhoneEntity( const rho::String& filter,  const rho::String& order, rho::apiGenerator::CMethodResult& oResult) {
-            // RAWLOGC_INFO("filterPhoneEntity","EntityGen");
-            m_callList.push_back("filterPhoneEntity");
+        virtual void filterPhoneStatic( const rho::String& filter,  const rho::String& order, rho::apiGenerator::CMethodResult& oResult) {
+            RAWLOGC_INFO("filterPhoneStatic","EntityGen");
+            m_callList.push_back("filterPhoneStatic");
             
         } 
 
-        virtual void updatePricePhoneEntity( int id, rho::apiGenerator::CMethodResult& oResult) {
-            // RAWLOGC_INFO("updatePricePhoneEntity","EntityGen");
-            m_callList.push_back("updatePricePhoneEntity");
+        virtual void updatePricePhone( int id, rho::apiGenerator::CMethodResult& oResult) {
+            RAWLOGC_INFO("updatePricePhone","EntityGen");
+            m_callList.push_back("updatePricePhone");
             
         } 
 
@@ -167,9 +251,9 @@ namespace rho {
           rho::String phone;
         */ 
 
-        virtual void initPersonEntity( const rho::Hashtable<rho::String, rho::String>& init_hash, rho::apiGenerator::CMethodResult& oResult) {
-            // RAWLOGC_INFO("initPersonEntity","EntityGen");
-            m_callList.push_back("initPersonEntity");
+        virtual void initPerson( const rho::Hashtable<rho::String, rho::String>& init_hash, rho::apiGenerator::CMethodResult& oResult) {
+            RAWLOGC_INFO("initPerson","EntityGen");
+            m_callList.push_back("initPerson");
             
             
             /* Enity Person fileds initialization */
@@ -186,40 +270,44 @@ namespace rho {
             
         } 
 
-        virtual void updatePersonEntity( const rho::Hashtable<rho::String, rho::String>& updates, rho::apiGenerator::CMethodResult& oResult) {
-            // RAWLOGC_INFO("updatePersonEntity","EntityGen");
-            m_callList.push_back("updatePersonEntity");
+        virtual void updatePerson( const rho::Hashtable<rho::String, rho::String>& updates, rho::apiGenerator::CMethodResult& oResult) {
+            RAWLOGC_INFO("updatePerson","EntityGen");
+            m_callList.push_back("updatePerson");
             
         } 
 
-        virtual void callPersonEntity( const rho::Hashtable<rho::String, rho::String>& hash, rho::apiGenerator::CMethodResult& oResult) {
-            // RAWLOGC_INFO("callPersonEntity","EntityGen");
-            m_callList.push_back("callPersonEntity");
+        virtual void callPerson( const rho::Hashtable<rho::String, rho::String>& hash, rho::apiGenerator::CMethodResult& oResult) {
+            RAWLOGC_INFO("callPerson","EntityGen");
+            m_callList.push_back("callPerson");
             
         } 
+
+        
+        virtual void resetState(rho::apiGenerator::CMethodResult& oResult) {
+            // RAWLOGC_INFO("resetState","EntityGen");
+            reset();
+        }
+
 
         virtual void clearCallList(rho::apiGenerator::CMethodResult& oResult) {
-            // RAWLOGC_INFO("clearCallList","EntityGen");
-            m_callList.clear();
-            
-        } 
+            RAWLOGC_INFO("clearCallList","EntityGen");
+            m_callList.clear();   
+        }
+
 
         virtual void getCallList(rho::apiGenerator::CMethodResult& oResult) {
-            // RAWLOGC_INFO("getCallList","EntityGen");
+            RAWLOGC_INFO("getCallList","EntityGen");
             oResult.set(m_callList);
-            
         } 
 
         virtual void getInitHash(rho::apiGenerator::CMethodResult& oResult) {
-            // RAWLOGC_INFO("getInitHash","EntityGen");
-            m_callList.push_back("getInitHash");
-            
+            RAWLOGC_INFO("getInitHash","EntityGen");
+            oResult.set(m_initArgs);
         } 
 
         virtual void getUpdateHash(rho::apiGenerator::CMethodResult& oResult) {
-            // RAWLOGC_INFO("getUpdateHash","EntityGen");
-            m_callList.push_back("getUpdateHash");
-            
+            RAWLOGC_INFO("getUpdateHash","EntityGen");
+            oResult.set(m_updateArgs);
         } 
 
     };
