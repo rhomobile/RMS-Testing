@@ -4,21 +4,24 @@
     <title>Rho.WebView</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.1, maximum-scale=10.0, user-scalable=yes"/>
 
-    <link type="text/css" rel="stylesheet" href="/public/css/manual_styles.css">
+    <link type="text/css" rel="stylesheet" href="../../public/css/manual_styles.css">
 
-    <script type="text/javascript" src="/public/jquery/jquery-1.6.4.min.js"></script>
-    <script type="text/javascript" src="/public/jquery/jquery.json-2.3.min.js"></script>
+    <script type="text/javascript" src="../../public/jquery/jquery-1.6.4.min.js"></script>
+    <script type="text/javascript" src="../../public/jquery/jquery.json-2.3.min.js"></script>
 
-    <script type="text/javascript" charset="utf-8" src="/public/api/rhoapi-modules.js"></script>
+	<script type="text/javascript">
+		window['__rho_nativeBridgeType'] = 'ajax';
+	</script>
+    <script type="text/javascript" src="../../public/api/rhoapi-modules.js"></script>
     <script type="text/javascript" src="webview.js"></script>
-    <script type="text/javascript" src="/public/js/helpers.js"></script>
+    <script type="text/javascript" src="../../public/js/helpers.js"></script>
 
 
 
     <script type="text/javascript">
 
         function doAction(val) {
-            var url = "/app/WebviewTest/" + val + "?rho_callback=1"
+            var url = "../../app/WebviewTest/" + val + "?rho_callback=1"
             if (window.XMLHttpRequest) {
                 var xhr = new window.XMLHttpRequest();
                 xhr.open("GET", url, true);
@@ -82,11 +85,11 @@
 
     function createTabbar() {
         var tabs = [
-            {'label': 'Tab 0', 'action': '/app/WebviewTest/webview.html', 'icon': '/public/images/bar/colored_btn.png', 'reload': false},
-            {'label': 'Tab 1', 'action': '/app/WebviewTest/webview.html', 'icon': '/public/images/bar/colored_btn.png', 'reload': false},
-            {'label': 'Tab 2', 'action': '/app/WebviewTest/webview.html', 'icon': '/public/images/bar/colored_btn.png', 'reload': false},
-            {'label': 'Tab 3', 'action': '/app/WebviewTest/webview.html', 'icon': '/public/images/bar/colored_btn.png', 'reload': false},
-            {'label': 'Tab 4', 'action': '/app/WebviewTest/webview.html', 'icon': '/public/images/bar/colored_btn.png', 'reload': false}
+            {'label': 'Tab 0', 'action': '../../app/WebviewTest/webview.html', 'icon': '../../public/images/bar/colored_btn.png', 'reload': false},
+            {'label': 'Tab 1', 'action': '../../app/WebviewTest/webview.html', 'icon': '../../public/images/bar/colored_btn.png', 'reload': false},
+            {'label': 'Tab 2', 'action': '../../app/WebviewTest/webview.html', 'icon': '../../public/images/bar/colored_btn.png', 'reload': false},
+            {'label': 'Tab 3', 'action': '../../app/WebviewTest/webview.html', 'icon': '../../public/images/bar/colored_btn.png', 'reload': false},
+            {'label': 'Tab 4', 'action': '../../app/WebviewTest/webview.html', 'icon': '../../public/images/bar/colored_btn.png', 'reload': false}
         ];
         var properties = {'verticalOrientation': false, 'hiddenTabs': false, 'createOnInit': true, 'placeTabsBottom': false};
         Rho.NativeTabbar.create(tabs, properties);
@@ -203,12 +206,12 @@
             <button class="getValue" onClick='setDomElementText("activeTab_test", Rho.WebView.activeTab);'> get activeTab</button>
             <br/>
 	          <a href="javascript:void(0)" onclick="CreateTabbarOld(
-					[{'label':'Native Tabbar', 'action':'/app/WebviewTest/webview.html', 'icon':'/public/images/bar/gears.png', 'useCurrentViewForTab':true},
-					{'label':'Main page', 'action':'/app/WebviewTest/webview.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':false},
-					{'label':'Page1', 'action':'/app/WebviewTest/webview.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true},
-					{'label':'Page2', 'action':'/app/WebviewTest/webview.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true},
-					{'label':'Page3', 'action':'/app/WebviewTest/webview.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':false},
-					{'label':'Page4', 'action':'/app/WebviewTest/webview.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':false}
+					[{'label':'Native Tabbar', 'action':'../../app/WebviewTest/webview.html', 'icon':'../../public/images/bar/gears.png', 'useCurrentViewForTab':true},
+					{'label':'Main page', 'action':'../../app/WebviewTest/webview.html', 'icon':'../../public/images/bar/colored_btn.png', 'reload':false},
+					{'label':'Page1', 'action':'../../app/WebviewTest/webview.html', 'icon':'../../public/images/bar/colored_btn.png', 'reload':true},
+					{'label':'Page2', 'action':'../../app/WebviewTest/webview.html', 'icon':'../../public/images/bar/colored_btn.png', 'reload':true},
+					{'label':'Page3', 'action':'../../app/WebviewTest/webview.html', 'icon':'../../public/images/bar/colored_btn.png', 'reload':false},
+					{'label':'Page4', 'action':'../../app/WebviewTest/webview.html', 'icon':'../../public/images/bar/colored_btn.png', 'reload':false}
 					], 
 					{'verticalOrientation':false, 'hiddenTabs': false, 'createOnInit' : true, 'placeTabsBottom':false}
 					);">
