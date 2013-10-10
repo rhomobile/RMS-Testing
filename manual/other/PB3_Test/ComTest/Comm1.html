@@ -1,0 +1,313 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <META HTTP-Equiv="quitbutton" Content="visibility:visible">
+    <META HTTP-Equiv="SIPbutton" Content="visibility:visible">
+ <script language=javascript>
+
+ Generic = new ActiveXObject("PocketBrowser.Generic");
+
+ function doSelect(SW)
+ {
+    if(SW=="baudrate")
+    {
+        var w =document.commForm.baudrate.value;
+        var val= trimAll(w); 
+        Generic.InvokeMETAFunction("comm","baudrate:"+val);
+    }
+    else if(SW=="databits")
+    {
+        var w =document.commForm.databits.value;
+        var val= trimAll(w); 
+        Generic.InvokeMETAFunction("comm","databits:"+val);
+    }
+    else if(SW=="stopbits")
+    {
+        var w =document.commForm.stopbits.value;
+        var val= trimAll(w); 
+        Generic.InvokeMETAFunction("comm","stopbits:"+val);
+    }
+    else if(SW=="parity")
+    {
+        //alert("1");
+        var w = document.commForm.parity.selectedIndex;
+        //alert(w);  
+        var selected_parity= document.commForm.parity.options[w].value;
+        //alert(selected_parity);
+        var val= trimAll(selected_parity);
+        //alert(val);
+        Generic.InvokeMETAFunction("comm","parity:"+val);
+    }
+    else if(SW=="handshake")
+    {
+         var w = document.commForm.handshake.selectedIndex;
+         var selected_handshake= document.commForm.handshake.options[w].value;
+         var val= trimAll(selected_handshake);
+         Generic.InvokeMETAFunction("comm","handshake:"+val);
+    }
+    else if(SW=="port")
+    {
+        var w =document.commForm.port.value;
+        var val= trimAll(w); 
+        Generic.InvokeMETAFunction("comm","port:"+val);
+    }
+    else if(SW=="chars")
+    {
+        var w =document.commForm.chars.value;
+        var val= trimAll(w); 
+        Generic.InvokeMETAFunction("comm","chars:"+val);
+    }
+    else if(SW=="endchar")
+    {
+        var w =document.commForm.endchar.value;
+        var val = trimAll(w); 
+        Generic.InvokeMETAFunction("comm","endchar:"+val);
+    }
+    else if(SW=="time")
+    {
+        var w =document.commForm.time.value;
+        var val= trimAll(w); 
+        Generic.InvokeMETAFunction("comm","time:"+val);
+    }
+    /*else if(SW=="writebytes")
+    {
+    var w =this.writebytes.value;
+    var val= trimAll(w); 
+    Generic.InvokeMETAFunction("comm","writebytes:"+val);
+    }
+    else if(SW=="writestring")
+    {
+    var w =this.writestring.value;
+    var val= trimAll(w); 
+    Generic.InvokeMETAFunction("comm","writestring:"+val);
+    }
+    else if(SW=="writefile")
+    {
+    var w =this.writefile.value;
+    var val= trimAll(w); 
+    Generic.InvokeMETAFunction("comm","writefile:"+val);
+    }*/
+    else if(SW=="autoenter")
+    {
+         var w = document.commForm.autoenter.selectedIndex;
+         var selected_autoenter= document.commForm.autoenter.options[w].value;
+         var val = trimAll(selected_autoenter);
+         alert(val);
+         Generic.InvokeMETAFunction("comm","autoenter:"+val);
+    }
+    else if(SW=="autotab")
+    {
+         var w = document.commForm.autotab.selectedIndex;
+         var selected_autotab= document.commForm.autotab.options[w].value;
+         var val = trimAll(selected_autotab);
+         alert(val);
+         Generic.InvokeMETAFunction("comm","autotab:"+val);
+    }
+}
+ 
+ function doTest(PW)
+ {
+     if(PW=="1")
+     {
+        alert("Read");
+      Generic.InvokeMETAFunction("comm", "commevent:url('JavaScript:DisplayData('%s');')");
+      //Generic.InvokeMETAFunction("comm", "commevent:");
+        }
+     else if(PW=="3")
+     {
+        alert("Open");
+        Generic.InvokeMETAFunction("comm", "open");
+        }
+     else if(PW=="4")
+     {
+        alert("Close");
+        Generic.InvokeMETAFunction("comm", "close");
+        }
+     else if(PW=="2")
+     {
+        alert("Write");
+        var wbytes =document.commForm.writebytes.value;
+        var wstring =document.commForm.writestring.value;
+        var wfile =document.commForm.writefile.value;
+        var valbytes= trimAll(wbytes); 
+        var valstring= trimAll(wstring);
+        var valfile= trimAll(wfile);
+        
+        if(valbytes!="")
+        Generic.InvokeMETAFunction("comm","writebytes:"+valbytes);
+        if(valstring!="")
+        Generic.InvokeMETAFunction("comm","writestring:"+valstring);
+        if(valfile!="")
+        Generic.InvokeMETAFunction("comm","writefile:"+valfile);
+     }
+ }
+ 
+ 
+ function trimAll(sString) 
+ { 
+   while (sString.substring(0,1) == ' ') 
+    { 
+    sString = sString.substring(1, sString.length); 
+    } 
+   while (sString.substring(sString.length-1, sString.length) == ' ') 
+    { 
+    sString = sString.substring(0,sString.length-1); 
+    } 
+    return sString; 
+ }
+ 
+ function DisplayData(data)
+  {
+	//message.innerHTML="Received data: "+data;
+	alert("Received data: "+data);
+  }
+
+  function detachEvent()
+  {
+  Generic.InvokeMETAFunction("comm", "commevent:");
+  }
+ 
+ </script> 
+    
+ </head>
+<body>
+<DIV align=left style='font-size:8.0pt' id="message">Count Numbers</div></p>
+<form  name="commForm" id="commForm" action="" >
+<h3>Comm Port Test App</h3>
+<table border=1>
+<tr>
+    <td>baudrate:</TD><td><input id="baudrate" type="text" value="9600" onchange="doSelect('baudrate');"/></td>
+</TR>
+<tr>
+    <td>databits:</td><td><input id="databits" type="text" value="8" onchange="doSelect('databits');"/></td>
+</TR>
+<tr>
+    <td>stopbits:</td><td><input id="stopbits" type="text" value="1" onchange="doSelect('stopbits');"/></td>
+</TR>
+<tr>
+    <td>parity:</td>
+    <td>
+        <select id="parity" onChange="doSelect('parity');">
+            <OPTION>Select</OPTION>
+            <OPTION value="even">even</OPTION>               
+            <OPTION value="odd">odd</OPTION>
+            <OPTION value="mark">mark</OPTION>
+            <OPTION value="space">space</OPTION>
+            <OPTION value="no parity">No Parity</OPTION> 
+        </select>
+    </td>
+</TR>
+<tr>    
+    <td>handshake:</td>
+    <td>
+        <select id="handshake" onChange="doSelect('handshake');">
+            <OPTION>Select</OPTION>
+            <OPTION value="hw">hw</OPTION>               
+            <OPTION value="sw">sw</OPTION>
+            <OPTION value="none">none</OPTION>
+        </select>
+    </td>
+</TR>
+<tr>    
+    <td>port:</td><td><input id="port" type="text" value="1" onChange="doSelect('port');"/></td>
+</TR>
+<tr>    
+    <td>chars:</td><td><input id="chars" type="text" value="" onChange="doSelect('chars');"/></td>
+</TR>
+<tr>    
+    <td>endchar:</td><td><input id="endchar" type="text" value="" onChange="doSelect('endchar');"/></td>
+</TR>
+<tr>    
+    <td>time:</td><td><input id="time" type="text" value="" onChange="doSelect('time');"/></td>
+</TR>
+<tr>    
+    <td>autoenter:</td>
+    <td>
+        <select id="autoenter" onchange="doSelect('autoenter');">
+            <OPTION selected>Select</OPTION>
+            <option value="enabled">enabled</option>
+            <option value="disabled">disabled</option>
+        </select>
+    </td>
+</TR>
+<tr>    
+    <td>autotab:</td>
+    <td>
+        <select id="autotab" onchange="doSelect('autotab');">
+            <OPTION selected>Select</OPTION>
+            <option value="enabled">enabled</option>
+            <option value="disabled">disabled</option>
+        </select>
+    </td>
+</TR>
+<tr>    
+    <td>writebytes:</td><td><input id="writebytes" type="text" value="%62 %158 %74 %65 %20 %6d %65 %0a" /></td>
+</TR>
+<tr>    
+    <td>writestring:</td><td><input id="writestring" type="text" value="hello world" /></td>
+</TR>
+<tr>    
+    <td>writefile:</td><td><input id="writefile" type="text" value="\Application\abc.txt" /></td>
+</TR>
+<tr>    
+    <td><input id="Button1" type="button" value="Read" onclick="doTest('1');"/></td>
+    <td><input id="Button2" type="button" value="Write" onclick="doTest('2');"/></td>
+</TR>   
+<tr>    
+    <td><input id="Button1" type="button" value="DetachReadEvent" onclick="detachEvent();"/></td>
+    
+</TR>  
+<tr>    
+    <td><input id="Button3" type="button" value="open" onclick="doTest('3');"/></td>
+    <td><input id="Button4" type="button" value="close" onclick="doTest('4');"/></td>
+</TR> 
+<tr><td><Textarea id="txtInput" cols="10" rows="2"></Textarea></td>
+<td><Textarea id="txtInputt" cols="10" rows="2"></Textarea></td></tr>
+ 
+</table>
+
+<!--
+ baudrate:     <input id="baudrate" type="text" value="9600" onchange="doSelect("baudrate");"/>
+<p>databits:  <input id="databits" type="text" value="8" onchange="doSelect("databits");"/></p>
+<p>stopbits:  <input id="stopbits" type="text" value="1" onchange="doSelect("stopbits");"/></p>
+ parity:      <select id="parity" onChange="doSelect("parity");">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<OPTION value="even">even</OPTION>               
+<OPTION value="odd">odd</OPTION>
+<OPTION value="mark">mark</OPTION>
+<OPTION value="space">space</OPTION>
+<OPTION value="no parity">no parity</OPTION> 
+</select> <p>
+handshake:     <select id="handshake" onChange="doSelect("handshake");">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<OPTION value="hw">hw</OPTION>               
+<OPTION value="sw">sw</OPTION>
+<OPTION value="none">none</OPTION></p>
+</select>
+<p>port:       <input id="port" type="text" value="1" onChange="doSelect("port");"/></p>   
+<p>chars:      <input id="chars" type="text" value="" onChange="doSelect("chars");"/></p>
+<p>endchar:    <input id="endchar" type="text" value="" onChange="doSelect("endchar");"/></p>
+<p>time:       <input id="time" type="text" value="" onChange="doSelect("time");"/></p>
+<p>writebytes: <input id="writebytes" type="text" value="" onChange="doSelect("writebytes");"/></p>
+<p>writestring:<input id="writestring" type="text" value="" onChange="doSelect("writestring");"/></p>
+<p>writefile:  <input id="writefile" type="text" value="" onChange="doSelect("writefile");"/></p>
+<p>autoenter:  <select id="autoenter" onchange="doSelect("autoenter");">
+        <OPTION SELECTED VALUE="">Select</OPTION>
+        <option value="enable">enable</option>
+        <option value="disable">disable</option>
+    </select></p>
+<p>autotab:    <select id="autotab" onchange="doSelect("autotab");">
+        <OPTION SELECTED VALUE="">Select</OPTION>
+        <option value="enable">enable</option>
+        <option value="disable">disable</option>
+    </select>
+</p>
+<p>
+    <input id="Read" type="button" value="Read" onclick="doTest("Read");"/></p>
+<p><input id="open" type="button" value="open" onclick="doTest("open");"/>
+<input id="close" type="button" value="close" onclick="doTest("close");"/></p></p>-->
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+</form>
+</body>
+</html>
+

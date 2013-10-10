@@ -1,0 +1,160 @@
+<html>
+<head>
+    <title>PB 3.0 Circle Gesture Settings</title>
+    <meta name="mobileoptimized" content="0" />
+<META HTTP-Equiv="SIPbutton" Content="visibility:visible">
+
+</head>
+<body>
+<form id="frmCircleGestures" action="GestureProcess_Circle.asp" method="post" >
+<h2>Circle Gesture Settings</h2>
+
+<table>
+    <tr>
+        <td><a href="main"></a></td>
+    </tr>
+    
+    <tr>
+    <td>
+    Preset   :- 
+    </td>
+    <td>
+<select name="cmdPreset" id="cmdPreset">
+<option value="NULL">NULL</option>
+<option value="happy">happy</option>
+<option value="sad">sad</option>
+<option value="Default">Default</option>
+<option value="Test">Test</option></select>
+</td>
+</tr>
+<tr>
+<td>
+Diagonstics:- 
+</td>
+<td>
+<select name="cmdDiagonstics" id="cmdDiagonstics">
+<option value="TRUE">TRUE</option>
+<option value="FALSE">FALSE</option>
+<option value="TEST">TEST</option>
+<option value="NULL">NULL</option>
+</select>
+
+</td>
+</tr>
+
+<tr>
+<td>
+Input ID:- 
+</td>
+<td>
+<input type=text name="txtCircleID" id="txtCircleID" value="MyCircularGesture" />
+</td>
+</tr>       
+    
+<tr>
+<td>
+<select name="mydropdown1" id="mydropdown1">
+<option value="JavaScript">JavaScript</option>
+<option value="HTML">HTML</option>
+</select>
+</td>
+</tr>
+
+</table>
+
+
+
+<table>
+
+
+<tr>
+<td>
+center-x:-
+</td>
+<td>
+<!--<input type=text name="txtcenterx" id="txtcenterx" value="280" />-->
+<input type=text name="txtcenterx" id="Text1" value="150" />
+</td>
+</tr>  
+ 
+<tr>
+<td>
+center-y:-
+</td>
+<td>
+<!--<input type=text name="txtcentery" id="txtcentery" value="280" />-->
+<input type=text name="txtcentery" id="Text2" value="150" />
+</td>
+</tr>   
+
+<tr>
+<td>
+radius:-
+</td>
+<td>
+<!--<input type=text name="txtradius" id="txtradius" value="120" />-->
+<input type=text name="txtradius" id="Text3" value="80" />
+</td>
+</tr>  
+
+
+<tr>
+<td>
+start:-
+</td>
+<td>
+<input type=text name="txtstart" id="txtstart" value="0" />
+</td>
+</tr>  
+
+<tr>
+<td>
+end:-
+</td>
+<td>
+<input type=text name="txtend" id="txtend" value="180" />
+</td>
+</tr>  
+
+
+<tr>
+<td>
+tolerance:- 
+</td>
+<td>
+<input type=text name="txttolerance" id="txttolerance" value="40" />
+</td>
+</tr>  
+
+  
+<tr>
+<td>
+sensitivity:- 
+</td>
+<td>
+<input type=text name="txtsensitivity" id="txtsensitivity" value="80" />
+</td>
+</tr>  
+
+<tr>
+<td>Type:- 
+</td>
+<td>
+<input type=text name="txtType" id="txtType" value="Circle" />
+</td>
+</tr> 
+
+
+
+
+
+  
+</table>
+<hr>
+<input type=submit><br />
+<a href=GestureIndex.html>Gesture Index</a>
+
+
+</form>
+</body>
+</html>

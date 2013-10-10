@@ -1,0 +1,964 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <title>Test Page</title>
+    <META HTTP-Equiv="quitbutton" Content="visibility:visible">
+    <META HTTP-Equiv="ReloadButton" Content="visibility:visible">
+	<META HTTP-Equiv="SipButton" Content="visibility:visible">
+    <META HTTP-Equiv="Scanner" Content="DecodeEvent:url('javascript:doScan('%s', '%s', '%s', '%s', '%s');');Enabled:SCN1;Start">
+    
+    <script language="javascript">
+
+
+        var myParameters = new Array(296); 
+
+        var i=0;
+        for (i=0; i <=296; i++)
+            myParameters[i]=new Array(2)
+            
+        
+        myParameters[0][0] = "allDecoders:Enabled;Enabled:SCN1;Start";
+        myParameters[1][0] = "allDecoders:Disabled;Enabled:SCN1;Start";
+        //auspostal        
+        myParameters[2][0] = "allDecoders:Disabled;auspostal:Enabled;Enabled:SCN1;Start";
+        myParameters[3][0] = "allDecoders:Enabled;auspostal:Disabled;Enabled:SCN1;Start";
+        //canpostal
+        myParameters[4][0] = "allDecoders:Disabled;canpostal:Enabled;Enabled:SCN1;Start";
+        myParameters[5][0] = "allDecoders:Enabled;canpostal:Disabled;Enabled:SCN1;Start";
+        //codabar
+        myParameters[6][0] = "allDecoders:Disabled;Codabar:Enabled;Enabled:SCN1;Start";
+        myParameters[7][0] = "allDecoders:Enabled;Codabar:Disabled;Enabled:SCN1;Start";
+        myParameters[8][0] = "allDecoders:Disabled;Codabar:Enabled;CodabarCLSiEditing:true;Enabled:SCN1;Start";
+        myParameters[9][0] = "allDecoders:Disabled;Codabar:Enabled;CodabarCLSiEditing:false;Enabled:SCN1;Start";
+        myParameters[10][0] = "allDecoders:Disabled;Codabar:Enabled;Codabarmaxlength:0;Codabarminlength:0;Enabled:SCN1;Start";
+        myParameters[11][0] = "allDecoders:Disabled;Codabar:Enabled;Codabarmaxlength:12;Codabarminlength:1;Enabled:SCN1;Start";
+        myParameters[12][0] = "allDecoders:Disabled;Codabar:Enabled;Codabarminlength:0;Enabled:SCN1;Start";
+        myParameters[13][0] = "allDecoders:Disabled;Codabar:Enabled;Codabarminlength:10;Enabled:SCN1;Start";
+        myParameters[14][0] = "allDecoders:Disabled;Codabar:Enabled;Codabarmaxlength:0;Codabarminlength:5;Enabled:SCN1;Start";
+        myParameters[15][0] = "allDecoders:Disabled;Codabar:Enabled;Codabarnotisediting:true;Enabled:SCN1;Start";
+        myParameters[16][0] = "allDecoders:Disabled;Codabar:Enabled;Codabarnotisediting:false;Enabled:SCN1;Start";
+        myParameters[17][0] = "allDecoders:Disabled;Codabar:Enabled;Codabarredundancy:true;Enabled:SCN1;Start";
+        myParameters[18][0] = "allDecoders:Disabled;Codabar:Enabled;Codabarredundancy:false;Enabled:SCN1;Start";
+        //code11
+        myParameters[19][0] = "allDecoders:Disabled;Code11:Enabled;Enabled:SCN1;Start";
+        myParameters[20][0] = "allDecoders:Enabled;Code11:Disabled;Enabled:SCN1;Start";
+        myParameters[21][0] = "allDecoders:Disabled;Code11:Enabled;code11checkDigitCount:none;Enabled:SCN1;Start";
+        myParameters[22][0] = "allDecoders:Disabled;Code11:Enabled;Code11CheckDigitCount:one;Code11ReportCheckDigit:true;Enabled:SCN1;Start";
+        myParameters[23][0] = "allDecoders:Disabled;Code11:Enabled;Code11CheckDigitCount:two;Code11ReportCheckDigit:true;Enabled:SCN1;Start";
+        myParameters[24][0] = "allDecoders:Disabled;Code11:Enabled;Code11Redundancy:true;Enabled:SCN1;Start";
+        myParameters[25][0] = "allDecoders:Disabled;Code11:Enabled;Code11Redundancy:false;Enabled:SCN1;Start";
+        myParameters[26][0] = "allDecoders:Disabled;Code11:Enabled;Code11ReportCheckDigit:true;Enabled:SCN1;Start";
+        myParameters[27][0] = "allDecoders:Disabled;Code11:Enabled;Code11CheckDigitCount:one;Code11ReportCheckDigit:false;Enabled:SCN1;Start";
+        //code128
+        myParameters[28][0] = "allDecoders:Disabled;Code128:Enabled;Enabled:SCN1;Start";
+        myParameters[29][0] = "allDecoders:Enabled;Code128:Disabled;Enabled:SCN1;Start";
+        myParameters[30][0] = "allDecoders:Disabled;Code128:Enabled;code128ean128:true;Enabled:SCN1;Start";
+        myParameters[31][0] = "allDecoders:Disabled;Code128:Enabled;code128ean128:false;Enabled:SCN1;Start";
+        myParameters[32][0] = "allDecoders:Disabled;Code128:Enabled;code128isbt128:true;Enabled:SCN1;Start";
+        myParameters[33][0] = "allDecoders:Disabled;Code128:Enabled;code128isbt128:false;Enabled:SCN1;Start";
+        myParameters[34][0] = "allDecoders:Disabled;Code128:Enabled;Code128maxlength:0;Code128MinLength:0;Enabled:SCN1;Start";
+        myParameters[35][0] = "allDecoders:Disabled;Code128:Enabled;Code128maxlength:20;Code128MinLength:1;Enabled:SCN1;Start";
+        myParameters[36][0] = "allDecoders:Disabled;Code128:Enabled;Code128MinLength:1;Enabled:SCN1;Start";
+        myParameters[37][0] = "allDecoders:Disabled;Code128:Enabled;Code128MinLength:10;Enabled:SCN1;Start";
+        myParameters[38][0] ="allDecoders:Disabled;Code128:Enabled;code128other128:true;Enabled:SCN1;Start";
+        myParameters[39][0] ="allDecoders:Disabled;Code128:Enabled;code128other128:false;Enabled:SCN1;Start";
+        myParameters[40][0] ="allDecoders:Disabled;Code128:Enabled;Code128Redundancy:true;Enabled:SCN1;Start";
+        myParameters[41][0] ="allDecoders:Disabled;Code128:Enabled;Code128Redundancy:false;Enabled:SCN1;Start";
+        myParameters[42][0] = "allDecoders:Enabled;Code128:Enabled;code128isBt128ConcatMode:never;Enabled:SCN1;Start";
+        myParameters[43][0] = "allDecoders:Disabled;Code128:Enabled;code128isBt128ConcatMode:always;Enabled:SCN1;Start";
+        myParameters[44][0] = "allDecoders:Disabled;Code128:Enabled;code128isBt128ConcatMode:auto;Enabled:SCN1;Start";
+        myParameters[45][0] = "allDecoders:Disabled;Code128:Enabled;code128checkIsBtTable:true;code128isBt128ConcatMode:always;Enabled:SCN1;Start";
+        myParameters[46][0] = "allDecoders:Disabled;Code128:Enabled;code128checkIsBtTable:false;code128isBt128ConcatMode:always;Enabled:SCN1;Start";
+        myParameters[47][0] = "allDecoders:Enabled;Code128:Enabled;code128securityLevel:0;Enabled:SCN1;Start";
+        myParameters[48][0] = "allDecoders:Disabled;Code128:Enabled;code128securityLevel:1;Enabled:SCN1;Start";
+        myParameters[49][0] = "allDecoders:Disabled;Code128:Enabled;code128securityLevel:2;Enabled:SCN1;Start";   
+        myParameters[50][0] = "allDecoders:Disabled;Code128:Enabled;code128securityLevel:3;Enabled:SCN1;Start"; 
+        //code39              
+        myParameters[51][0] ="allDecoders:Disabled;Code39:Enabled;Enabled:SCN1;Start";
+        myParameters[52][0] ="allDecoders:Enabled;Code39:Disabled;Enabled:SCN1;Start";
+        myParameters[53][0] ="allDecoders:Disabled;Code39:Enabled;Code39code32prefix:true;Code39ConvertToCode32:true;Enabled:SCN1;Start";
+        myParameters[54][0] ="allDecoders:Disabled;Code39:Enabled;Code39code32prefix:false;Code39ConvertToCode32:true;Enabled:SCN1;Start";
+        myParameters[55][0] ="allDecoders:Disabled;Code39:Enabled;Code39ConvertToCode32:true;Enabled:SCN1;Start";
+        myParameters[56][0] ="allDecoders:Disabled;Code39:Enabled;Code39ConvertToCode32:false;Enabled:SCN1;Start";
+        myParameters[57][0] ="allDecoders:Disabled;Code39:Enabled;Code39fullascii:true;Enabled:SCN1;Start";
+        myParameters[58][0] ="allDecoders:Disabled;Code39:Enabled;Code39fullascii:false;Enabled:SCN1;Start";
+        myParameters[59][0] ="allDecoders:Disabled;Code39:Enabled;Code39maxlength:0;Code39MinLength:0;Enabled:SCN1;Start";
+        myParameters[60][0] ="allDecoders:Disabled;Code39:Enabled;Code39maxlength:14;Code39MinLength:1;Enabled:SCN1;Start";
+        myParameters[61][0] ="allDecoders:Disabled;Code39:Enabled;Code39MinLength:1;Enabled:SCN1;Start";
+        myParameters[62][0] ="allDecoders:Disabled;Code39:Enabled;Code39MinLength:10;Enabled:SCN1;Start";
+        myParameters[63][0] ="allDecoders:Disabled;Code39:Enabled;Code39Redundancy:true;Enabled:SCN1;Start";
+        myParameters[64][0] ="allDecoders:Disabled;Code39:Enabled;Code39Redundancy:false;Enabled:SCN1;Start";
+        myParameters[65][0] ="allDecoders:Disabled;Code39:Enabled;Code39ReportCheckDigit:true;Code39VerifyCheckDigit:true;Enabled:SCN1;Start";
+        myParameters[66][0] ="allDecoders:Disabled;Code39:Enabled;Code39ReportCheckDigit:false;Code39VerifyCheckDigit:true;Enabled:SCN1;Start";
+        myParameters[67][0] ="allDecoders:Disabled;Code39:Enabled;Code39VerifyCheckDigit:true;Enabled:SCN1;Start";
+        myParameters[68][0] ="allDecoders:Disabled;Code39:Enabled;Code39VerifyCheckDigit:false;Enabled:SCN1;Start";
+        myParameters[69][0] = "allDecoders:Enabled;Code39:Enabled;code39securityLevel:0;Enabled:SCN1;Start";
+        myParameters[70][0] = "allDecoders:Disabled;Code39:Enabled;code39securityLevel:1;Enabled:SCN1;Start";
+        myParameters[71][0] = "allDecoders:Disabled;Code39:Enabled;code39securityLevel:2;Enabled:SCN1;Start";   
+        myParameters[72][0] = "allDecoders:Disabled;Code39:Enabled;code39securityLevel:3;Enabled:SCN1;Start";  
+        //code93 
+        myParameters[73][0] ="allDecoders:Disabled;Code93:Enabled;Enabled:SCN1;Start";
+        myParameters[74][0] ="allDecoders:Enabled;Code93:Disabled;Enabled:SCN1;Start";
+        myParameters[75][0] ="allDecoders:Disabled;Code93:Enabled;Code93maxlength:0;Enabled:SCN1;Start";
+        myParameters[76][0] ="allDecoders:Disabled;Code93:Enabled;Code93maxlength:20;Code93MinLength:1;Enabled:SCN1;Start";
+        myParameters[77][0] ="allDecoders:Disabled;Code93:Enabled;Code93MinLength:1;Enabled:SCN1;Start";
+        myParameters[78][0] ="allDecoders:Disabled;Code93:Enabled;Code93MinLength:10;Enabled:SCN1;Start";
+        myParameters[79][0] ="allDecoders:Disabled;Code93:Enabled;Code93Redundancy:true;Enabled:SCN1;Start";
+        myParameters[80][0] ="allDecoders:Disabled;Code93:Enabled;Code93Redundancy:false;Enabled:SCN1;Start";
+        //compositeAb
+        myParameters[81][0] ="allDecoders:Enabled;compositeAb:Enabled;upca:Enabled;Enabled:SCN1;Start";
+        myParameters[82][0] ="allDecoders:Enabled;compositeAb:Disabled;upca:Disabled;Enabled:SCN1;Start";
+        myParameters[83][0] ="allDecoders:Enabled;Compositeab:Enabled;upca:Enabled;compositeAbUseUpcPreambleCheckDigitRules:true;compositeAbUccLinkMode:always;Enabled:SCN1;Start";
+        myParameters[84][0] ="allDecoders:Enabled;Compositeab:Enabled;upca:Enabled;compositeAbUseUpcPreambleCheckDigitRules:false;compositeAbUccLinkMode:always;Enabled:SCN1;Start";
+        myParameters[85][0] ="allDecoders:Enabled;Compositeab:Enabled;upca:Enabled;compositeAbUccLinkMode:always;Enabled:SCN1;Start";
+        myParameters[86][0] ="allDecoders:Enabled;Compositeab:Enabled;upca:Enabled;compositeAbUccLinkMode:auto;Enabled:SCN1;Start";
+        myParameters[87][0] ="allDecoders:Enabled;Compositeab:Enabled;upca:Enabled;compositeAbUccLinkMode:never;Enabled:SCN1;Start";
+        //Compositec
+        myParameters[88][0] ="allDecoders:Enabled;Compositec:Enabled;Code128:Enabled;Enabled:SCN1;Start";
+        myParameters[89][0] ="allDecoders:Enabled;Compositec:Disabled;Enabled:SCN1;Start";
+        //d2of5
+        myParameters[90][0] ="allDecoders:Disabled;d2of5:Enabled;Enabled:SCN1;Start";
+        myParameters[91][0] ="allDecoders:Enabled;d2of5:Disabled;Enabled:SCN1;Start";
+        myParameters[92][0] ="allDecoders:Disabled;d2of5:Enabled;d2of5maxlength:20;d2of5minlength:1;Enabled:SCN1;Start";
+        myParameters[93][0] ="allDecoders:Disabled;d2of5:Enabled;d2of5Redundancy:true;Enabled:SCN1;Start";
+        myParameters[94][0] ="allDecoders:Disabled;d2of5:Enabled;d2of5Redundancy:false;Enabled:SCN1;Start";
+        myParameters[95][0] ="allDecoders:Disabled;d2of5:Enabled;d2of5MinLength:10;d2of5maxlength:40;Enabled:SCN1;Start";
+        //DataMatrix
+        myParameters[96][0] ="allDecoders:Disabled;DataMatrix:Enabled;Enabled:SCN1;Start";
+        myParameters[97][0] ="allDecoders:Enabled;DataMatrix:Disabled;Enabled:SCN1;Start";
+        //DutchPostal
+        myParameters[98][0] ="allDecoders:Disabled;DutchPostal:Enabled;Enabled:SCN1;Start";
+        myParameters[99][0] ="allDecoders:Enabled;DutchPostal:Disabled;Enabled:SCN1;Start";
+        //ean13
+        myParameters[100][0] ="allDecoders:Disabled;ean13:Enabled;Enabled:SCN1;Start";
+        myParameters[101][0] ="allDecoders:Enabled;ean13:Disabled;Enabled:SCN1;Start";
+        //ean8
+        myParameters[102][0] ="allDecoders:Disabled;ean8:Enabled;Enabled:SCN1;Start";
+        myParameters[103][0] ="allDecoders:Enabled;ean8:Disabled;Enabled:SCN1;Start";
+        myParameters[104][0] ="allDecoders:Disabled;ean8:Enabled;ean13:Enabled;ean8ConvertToEAN13:true;Enabled:SCN1;Start";
+        myParameters[105][0] ="allDecoders:Disabled;ean8:Enabled;ean13:Enabled;ean8ConvertToEAN13:false;Enabled:SCN1;Start";
+        //i2of5
+        myParameters[106][0] ="allDecoders:Disabled;i2of5:Enabled;Enabled:SCN1;Start";
+        myParameters[107][0] ="allDecoders:Enabled;i2of5:Disabled;Enabled:SCN1;Start";
+        myParameters[108][0] ="allDecoders:Disabled;i2of5:Enabled;ean13:Enabled;i2of5ConvertToEAN13:true;Enabled:SCN1;Start";
+        myParameters[109][0] ="allDecoders:Disabled;i2of5:Enabled;ean13:Enabled;i2of5ConvertToEAN13:false;Enabled:SCN1;Start";
+        myParameters[110][0] ="allDecoders:Disabled;i2of5:Enabled;i2of5maxlength:0;i2of5MinLength:0;Enabled:SCN1;Start";
+        myParameters[111][0] ="allDecoders:Disabled;i2of5:Enabled;i2of5maxlength:13;i2of5MinLength:1;Enabled:SCN1;Start";
+        myParameters[112][0] ="allDecoders:Disabled;i2of5:Enabled;i2of5MinLength:1;Enabled:SCN1;Start";
+        myParameters[113][0] ="allDecoders:Disabled;i2of5:Enabled;i2of5MinLength:12;i2of5maxlength:20;Enabled:SCN1;Start";
+        myParameters[114][0] ="allDecoders:Disabled;i2of5:Enabled;i2of5Redundancy:true;Enabled:SCN1;Start";
+        myParameters[115][0] ="allDecoders:Disabled;i2of5:Enabled;i2of5Redundancy:false;Enabled:SCN1;Start";
+        myParameters[116][0] ="allDecoders:Disabled;i2of5:Enabled;i2of5ReportCheckDigit:true;i2of5VerifyCheckDigit:OPCC;i2of5MinLength:1;Enabled:SCN1;Start";
+        myParameters[117][0] ="allDecoders:Disabled;i2of5:Enabled;i2of5ReportCheckDigit:false;i2of5VerifyCheckDigit:OPCC;i2of5MinLength:1;Enabled:SCN1;Start";
+        myParameters[118][0] ="allDecoders:Disabled;i2of5:Enabled;i2of5VerifyCheckDigit:none;i2of5ReportCheckDigit:true;i2of5MinLength:0;i2of5maxlength:0;Enabled:SCN1;Start";
+        myParameters[119][0] ="allDecoders:Disabled;i2of5:Enabled;i2of5VerifyCheckDigit:USS;i2of5ReportCheckDigit:true;i2of5MinLength:0;i2of5maxlength:0;Enabled:SCN1;Start";
+        myParameters[120][0] ="allDecoders:Disabled;i2of5:Enabled;i2of5VerifyCheckDigit:USS;i2of5ReportCheckDigit:false;i2of5MinLength:0;i2of5maxlength:0;Enabled:SCN1;Start";
+        //JapPostal
+        myParameters[121][0] ="allDecoders:Disabled;JapPostal:Enabled;Enabled:SCN1;Start";
+        myParameters[122][0] ="allDecoders:Enabled;JapPostal:Disabled;Enabled:SCN1;Start";
+        //MacroMicroPDF
+        myParameters[123][0] ="allDecoders:Disabled;MacroMicroPDF:Enabled;Enabled:SCN1;Start";
+        myParameters[124][0] ="allDecoders:Enabled;MacroMicroPDF:Disabled;Enabled:SCN1;Start";
+        myParameters[125][0] ="allDecoders:Enabled;MacroMicroPDF:Enabled;macroMicroPdfBufferLabels:true;macroMicroPdfReportAppendInfo:false;Enabled:SCN1;Start";
+        myParameters[126][0] ="allDecoders:Enabled;MacroMicroPDF:Enabled;macroMicroPdfBufferLabels:false;Enabled:SCN1;Start";
+        myParameters[127][0] ="allDecoders:Enabled;MacroMicroPDF:Enabled;macroMicroPdfReportAppendInfo:true;Enabled:SCN1;Start";
+        myParameters[128][0] ="allDecoders:Enabled;MacroMicroPDF:Enabled;macroMicroPdfBufferLabels:true;macroMicroPdfExclusive:true;Enabled:SCN1;Start";
+        myParameters[129][0] ="allDecoders:Enabled;MacroMicroPDF:Enabled;macroMicroPdfBufferLabels:true;macroMicroPdfExclusive:false;Enabled:SCN1;Start";
+        myParameters[130][0] ="allDecoders:Enabled;MacroMicroPDF:Enabled;macroMicroPdfBufferLabels:false;macroMicroPdfConvertToMicroPdf:true;Enabled:SCN1;Start";
+        myParameters[131][0] ="allDecoders:Enabled;MacroMicroPDF:Enabled;macroMicroPdfBufferLabels:false;macroMicroPdfConvertToMicroPdf:false;Enabled:SCN1;Start";
+        //MacroPDF
+        myParameters[132][0] ="allDecoders:Disabled;macroPdf:Enabled;Enabled:SCN1;Start";
+        myParameters[133][0] ="allDecoders:Enabled;MacroPDF:Disabled;Enabled:SCN1;Start";
+        myParameters[134][0] ="allDecoders:Enabled;MacroPDF:Enabled;macroPdfBufferLabels:true;Enabled:SCN1;Start";
+        myParameters[135][0] ="allDecoders:Enabled;MacroPDF:Enabled;macroPdfBufferLabels:false;Enabled:SCN1;Start";
+        myParameters[136][0] ="allDecoders:Enabled;MacroPDF:Enabled;macroPdfBufferLabels:true;macroPdfExclusive:true;Enabled:SCN1;Start";
+        myParameters[137][0] ="allDecoders:Enabled;MacroPDF:Enabled;macroPdfBufferLabels:true;macroPdfExclusive:false;Enabled:SCN1;Start";
+        myParameters[138][0] ="allDecoders:Disabled;MacroPDF:Enabled;macroPdfBufferLabels:false;macroPdfConvertToPdf417:true;Enabled:SCN1;Start";
+        myParameters[139][0] ="allDecoders:Disabled;MacroPDF:Enabled;macroPdfBufferLabels:false;macroPdfConvertToPdf417:false;Enabled:SCN1;Start";
+        //MaxiCode
+        myParameters[140][0] ="allDecoders:Disabled;MaxiCode:Enabled;Enabled:SCN1;Start";
+        myParameters[141][0] ="allDecoders:Enabled;MaxiCode:Disabled;Enabled:SCN1;Start";
+        //MicroPDF
+        myParameters[142][0] ="allDecoders:Disabled;MicroPDF:Enabled;Enabled:SCN1;Start";
+        myParameters[143][0] ="allDecoders:Enabled;MicroPDF:Disabled;Enabled:SCN1;Start";
+        //msi
+        myParameters[144][0] ="allDecoders:Disabled;msi:Enabled;Enabled:SCN1;Start";
+        myParameters[145][0] ="allDecoders:Enabled;msi:Disabled;Enabled:SCN1;Start";
+        myParameters[146][0] ="allDecoders:Disabled;msi:Enabled;msicheckdigits:one;msiCheckDigitScheme:mod10;msiReportCheckDigit:true;Enabled:SCN1;Start";
+        myParameters[147][0] ="allDecoders:Disabled;msi:Enabled;msicheckdigits:two;msiCheckDigitScheme:mod11;msiReportCheckDigit:true;Enabled:SCN1;Start";
+        myParameters[148][0] ="allDecoders:Disabled;msi:Enabled;msicheckdigits:one;msiCheckDigitScheme:mod11;msiReportCheckDigit:true;Enabled:SCN1;Start";
+        myParameters[149][0] ="allDecoders:Disabled;msi:Enabled;msicheckdigits:two;msiCheckDigitScheme:mod10;msiReportCheckDigit:true;Enabled:SCN1;Start";
+        myParameters[150][0] ="allDecoders:Disabled;msi:Enabled;msimaxlength:0;msiMinLength:0;Enabled:SCN1;Start";
+        myParameters[151][0] ="allDecoders:Disabled;msi:Enabled;msimaxlength:13;Enabled:SCN1;Start";
+        myParameters[152][0] ="allDecoders:Disabled;msi:Enabled;msiMinLength:1;Enabled:SCN1;Start";
+        myParameters[153][0] ="allDecoders:Disabled;msi:Enabled;msiMinLength:10;Enabled:SCN1;Start";
+        myParameters[154][0] ="allDecoders:Disabled;msi:Enabled;msiRedundancy:true;Enabled:SCN1;Start";
+        myParameters[155][0] ="allDecoders:Disabled;msi:Enabled;msiRedundancy:false;Enabled:SCN1;Start";
+        myParameters[156][0] ="allDecoders:Disabled;msi:Enabled;msiReportCheckDigit:true;Enabled:SCN1;Start";
+        myParameters[157][0] ="allDecoders:Disabled;msi:Enabled;msiReportCheckDigit:false;Enabled:SCN1;Start";
+        //PDF417
+        myParameters[158][0] ="allDecoders:Disabled;PDF417:Enabled;Enabled:SCN1;Start";
+        myParameters[159][0] ="allDecoders:Enabled;PDF417:Disabled;Enabled:SCN1;Start";
+        //Qrcode
+        myParameters[160][0] ="allDecoders:Disabled;Qrcode:Enabled;Enabled:SCN1;Start";
+        myParameters[161][0] ="allDecoders:Enabled;Qrcode:Disabled;Enabled:SCN1;Start";
+        //rss14
+        myParameters[162][0] ="allDecoders:Disabled;rss14:Enabled;Enabled:SCN1;Start";
+        myParameters[163][0] ="allDecoders:Enabled;rss14:Disabled;Enabled:SCN1;Start";
+        //rssexp
+        myParameters[164][0] ="allDecoders:Disabled;rssexp:Enabled;Enabled:SCN1;Start";
+        myParameters[165][0] ="allDecoders:Enabled;rssexp:Disabled;Enabled:SCN1;Start";
+        //rsslim
+        myParameters[166][0] ="allDecoders:Disabled;rsslim:Enabled;Enabled:SCN1;Start";
+        myParameters[167][0] ="allDecoders:Enabled;rsslim:Disabled;Enabled:SCN1;Start";
+        //tlc39
+        myParameters[168][0] ="allDecoders:Disabled;tlc39:Enabled;Code39:Enabled;PDF417:Enabled;MicroPDF:Enabled;Enabled:SCN1;Start";
+        myParameters[169][0] ="allDecoders:Enabled;tlc39:Disabled;Enabled:SCN1;Start";
+        //Trioptic39
+        myParameters[170][0] ="allDecoders:Disabled;Trioptic39:Enabled;Enabled:SCN1;Start";
+        myParameters[171][0] ="allDecoders:Enabled;Trioptic39:Disabled;Enabled:SCN1;Start";
+        myParameters[172][0] ="allDecoders:Disabled;Trioptic39:Enabled;trioptic39Redundancy:true;Enabled:SCN1;Start";
+        myParameters[173][0] ="allDecoders:Disabled;Trioptic39:Enabled;trioptic39Redundancy:false;Enabled:SCN1;Start";
+        //UKPostal
+        myParameters[174][0] ="allDecoders:Disabled;UKPostal:Enabled;Enabled:SCN1;Start";
+        myParameters[175][0] ="allDecoders:Enabled;UKPostal:Disabled;Enabled:SCN1;Start";
+        myParameters[176][0] ="allDecoders:Disabled;UKPostal:Enabled;ukPostalreportCheckDigit:true;Enabled:SCN1;Start";
+        myParameters[177][0] ="allDecoders:Disabled;UKPostal:Enabled;ukPostalreportCheckDigit:false;Enabled:SCN1;Start";
+        //upca-ean
+        myParameters[178][0] ="allDecoders:Disabled;upca:Enabled;ean13:Enabled;upceanbookland:true;Enabled:SCN1;Start";
+        myParameters[179][0] ="allDecoders:Disabled;upca:Enabled;ean13:Enabled;upceanbookland:false;Enabled:SCN1;Start";
+        myParameters[180][0] ="allDecoders:Disabled;upca:Enabled;Code128:Enabled;upceancoupon:true;Enabled:SCN1;Start";
+        myParameters[181][0] ="allDecoders:Disabled;upca:Enabled;Code128:Enabled;upceancoupon:false;Enabled:SCN1;Start";
+        myParameters[182][0] ="allDecoders:Disabled;upca:Enabled;upceanlineardecode:true;Enabled:SCN1;Start";
+        myParameters[183][0] ="allDecoders:Disabled;upca:Enabled;upceanlineardecode:false;Enabled:SCN1;Start";
+        myParameters[184][0] ="allDecoders:Disabled;upca:Enabled;upceanrandomweightcheckdigit:true;Enabled:SCN1;Start";
+        myParameters[185][0] ="allDecoders:Disabled;upca:Enabled;upceanrandomweightcheckdigit:false;Enabled:SCN1;Start";
+        myParameters[186][0] ="allDecoders:Disabled;upca:Enabled;upceansupplementalmode:auto;upceanretrycount:2;Enabled:SCN1;Start";
+        myParameters[187][0] ="allDecoders:Disabled;upca:Enabled;upceansupplementalmode:auto;upceanretrycount:10;Enabled:SCN1;Start";
+        myParameters[188][0] ="allDecoders:Disabled;upca:Enabled;upceansupplementalmode:auto;upceanretrycount:20;Enabled:SCN1;Start";
+        myParameters[189][0] ="allDecoders:Disabled;upca:Enabled;upceansupplementalmode:always;upceansecuritylevel:0;Enabled:SCN1;Start";
+        myParameters[190][0] ="allDecoders:Disabled;upca:Enabled;upceansupplementalmode:always;upceansecuritylevel:1;Enabled:SCN1;Start";
+        myParameters[191][0] ="allDecoders:Disabled;upca:Enabled;upceansupplementalmode:always;upceansecuritylevel:2;Enabled:SCN1;Start";
+        myParameters[192][0] ="allDecoders:Disabled;upca:Enabled;upceansupplementalmode:always;upceansecuritylevel:3;Enabled:SCN1;Start";
+        myParameters[193][0] ="allDecoders:Enabled;upca:Enabled;upceansupplementalmode:always;upceansupplemental2:true;Enabled:SCN1;Start";
+        myParameters[194][0] ="allDecoders:Enabled;upca:Enabled;upceansupplementalmode:always;upceansupplemental2:false;Enabled:SCN1;Start";
+        myParameters[195][0] ="allDecoders:Enabled;upca:Enabled;upceansupplementalmode:always;upceansupplemental5:true;Enabled:SCN1;Start";
+        myParameters[196][0] ="allDecoders:Enabled;upca:Enabled;upceansupplementalmode:always;upceansupplemental5:false;Enabled:SCN1;Start";
+        myParameters[197][0] ="allDecoders:Enabled;upca:Enabled;upceansupplementalmode:none;Enabled:SCN1;Start";
+        myParameters[198][0] ="allDecoders:Enabled;upca:Enabled;upceansupplementalmode:always;Enabled:SCN1;Start";
+        myParameters[199][0] ="allDecoders:Enabled;upca:Enabled;upceansupplementalmode:auto;Enabled:SCN1;Start";
+        myParameters[200][0] ="allDecoders:Enabled;upca:Enabled;upceansupplementalmode:smart;Enabled:SCN1;Start";
+        myParameters[201][0] ="allDecoders:Enabled;upca:Enabled;upceansupplementalmode:978or979;Enabled:SCN1;Start";
+        myParameters[202][0] ="allDecoders:Enabled;upca:Enabled;upceansupplemental2:true;upceansupplementalmode:978or979;Enabled:SCN1;Start";
+        myParameters[203][0] ="allDecoders:Enabled;upca:Enabled;upceansupplemental5:true;upceansupplementalmode:978or979;Enabled:SCN1;Start";
+        myParameters[204][0] ="allDecoders:Enabled;upca:Enabled;upceansupplementalmode:978or979;Enabled:SCN1;Start";
+        myParameters[205][0] ="allDecoders:Enabled;upca:Enabled;upceansupplementalmode:977;Enabled:SCN1;Start";
+        myParameters[206][0] ="allDecoders:Enabled;upca:Enabled;upceansupplemental2:true;upceansupplementalmode:977;Enabled:SCN1;Start";
+        myParameters[207][0] ="allDecoders:Enabled;upca:Enabled;upceansupplemental5:true;upceansupplementalmode:977;Enabled:SCN1;Start";
+        myParameters[208][0] ="allDecoders:Enabled;upca:Enabled;upceansupplementalmode:977;Enabled:SCN1;Start";
+        myParameters[209][0] ="allDecoders:Enabled;upca:Enabled;upceansupplementalmode:414or419or434or439;Enabled:SCN1;Start";
+        myParameters[210][0] ="allDecoders:Enabled;upca:Enabled;upceansupplementalmode:414or419or434or439;Enabled:SCN1;Start";
+        myParameters[211][0] ="allDecoders:Enabled;upca:Enabled;upceansupplementalmode:414or419or434or439;Enabled:SCN1;Start";
+        myParameters[212][0] ="allDecoders:Enabled;upca:Enabled;upceansupplementalmode:414or419or434or439;Enabled:SCN1;Start";
+        myParameters[213][0] ="allDecoders:Enabled;upca:Enabled;upceansupplementalmode:378or379;Enabled:SCN1;Start";
+        myParameters[214][0] ="allDecoders:Enabled;upca:Enabled;upceansupplementalmode:378or379;Enabled:SCN1;Start";
+        myParameters[215][0] ="allDecoders:Enabled;upca:Enabled;upceansupplementalmode:378or379;Enabled:SCN1;Start";
+        myParameters[216][0] ="allDecoders:Enabled;upca:Enabled;upceansupplementalmode:378or379;Enabled:SCN1;Start";
+        myParameters[217][0] ="allDecoders:Enabled;upca:Enabled;upceansupplementalmode:auto;upceanretrycount:15;Enabled:SCN1;Start";
+        myParameters[218][0] ="allDecoders:Enabled;upca:Enabled;upceansupplementalmode:auto;upceanretrycount:21;Enabled:SCN1;Start";
+        myParameters[219][0] ="allDecoders:Enabled;ean13:Enabled;upcEanBooklandFormat:Isbn10;upceanbookland:true;Enabled:SCN1;Start";
+        myParameters[220][0] ="allDecoders:Enabled;ean13:Enabled;upcEanBooklandFormat:Isbn13;upceanbookland:true;Enabled:SCN1;Start";
+        myParameters[221][0] ="allDecoders:Enabled;ean13:Enabled;upcEanConvertRssToUpcEan:true;Enabled:SCN1;Start";
+        myParameters[222][0] ="allDecoders:Enabled;ean13:Enabled;upcEanConvertRssToUpcEan:false;Enabled:SCN1;Start";
+        //upca
+        myParameters[223][0] ="allDecoders:Disabled;upca:Enabled;Enabled:SCN1;Start";
+        myParameters[224][0] ="allDecoders:Enabled;upca:Disabled;Enabled:SCN1;Start";
+        myParameters[225][0] ="allDecoders:Disabled;upca:Enabled;upcapreamble:NONE;upcaReportCheckDigit:true;Enabled:SCN1;Start";
+        myParameters[226][0] ="allDecoders:Disabled;upca:Enabled;upcapreamble:systemChar;upcaReportCheckDigit:true;Enabled:SCN1;Start";
+        myParameters[227][0] ="allDecoders:Disabled;upca:Enabled;upcapreamble:countryAndSystemChars;upcaReportCheckDigit:true;Enabled:SCN1;Start";
+        myParameters[228][0] ="allDecoders:Disabled;upca:Enabled;upcaReportCheckDigit:true;Enabled:SCN1;Start";
+        myParameters[229][0] ="allDecoders:Disabled;upca:Enabled;upcapreamble:systemChar;upcaReportCheckDigit:false;Enabled:SCN1;Start";
+        //upce0
+        myParameters[230][0] ="allDecoders:Disabled;upce0:Enabled;Enabled:SCN1;Start";
+        myParameters[231][0] ="allDecoders:Enabled;upce0:Disabled;Enabled:SCN1;Start";
+        myParameters[232][0] ="allDecoders:Disabled;upce0:Enabled;upce0ConvertToupca:true;Enabled:SCN1;Start";
+        myParameters[233][0] ="allDecoders:Disabled;upce0:Enabled;upce0ConvertToupca:false;Enabled:SCN1;Start";
+        myParameters[234][0] ="allDecoders:Disabled;upce0:Enabled;upce0preamble:NONE;upce0ReportCheckDigit:true;Enabled:SCN1;Start";
+        myParameters[235][0] ="allDecoders:Disabled;upce0:Enabled;upce0preamble:systemChar;upce0ReportCheckDigit:true;Enabled:SCN1;Start";
+        myParameters[236][0] ="allDecoders:Disabled;upce0:Enabled;upce0preamble:countryAndSystemChars;upce0ReportCheckDigit:true;Enabled:SCN1;Start";
+        myParameters[237][0] ="allDecoders:Disabled;upce0:Enabled;upce0ReportCheckDigit:true;Enabled:SCN1;Start";
+        myParameters[238][0] ="allDecoders:Disabled;upce0:Enabled;upce0preamble:countryAndSystemChars;upce0ReportCheckDigit:false;Enabled:SCN1;Start";
+        //upce1
+        myParameters[239][0] ="allDecoders:Disabled;upce1:Enabled;Enabled:SCN1;Start";
+        myParameters[240][0] ="allDecoders:Enabled;upce1:Disabled;Enabled:SCN1;Start";
+        myParameters[241][0] ="allDecoders:Disabled;upce1:Enabled;upce1ConvertToupca:true;Enabled:SCN1;Start";
+        myParameters[242][0] ="allDecoders:Disabled;upce1:Enabled;upce1ConvertToupca:false;Enabled:SCN1;Start";
+        myParameters[243][0] ="allDecoders:Disabled;upce1:Enabled;upce1preamble:NONE;upce1ReportCheckDigit:true;Enabled:SCN1;Start";
+        myParameters[244][0] ="allDecoders:Disabled;upce1:Enabled;upce1preamble:systemChar;upce1ReportCheckDigit:true;Enabled:SCN1;Start";
+        myParameters[245][0] ="allDecoders:Disabled;upce1:Enabled;upce1preamble:countryAndSystemChars;upce1ReportCheckDigit:true;Enabled:SCN1;Start";
+        myParameters[246][0] ="allDecoders:Disabled;upce1:Enabled;upce1ReportCheckDigit:true;Enabled:SCN1;Start";
+        myParameters[247][0] ="allDecoders:Disabled;upce1:Enabled;upce1preamble:countryAndSystemChars;upce1ReportCheckDigit:false;Enabled:SCN1;Start";
+        //usplanet
+        myParameters[248][0] ="allDecoders:Disabled;usplanet:Enabled;Enabled:SCN1;Start";
+        myParameters[249][0] ="allDecoders:Enabled;usplanet:Disabled;Enabled:SCN1;Start";
+        myParameters[250][0] ="allDecoders:Disabled;usplanet:Enabled;usPlanetreportCheckDigit:true;Enabled:SCN1;Start";
+        myParameters[251][0] ="allDecoders:Disabled;usplanet:Enabled;usPlanetreportCheckDigit:false;Enabled:SCN1;Start";
+        //uspostnet
+        myParameters[252][0] ="allDecoders:Disabled;uspostnet:Enabled;Enabled:SCN1;Start";
+        myParameters[253][0] ="allDecoders:Enabled;uspostnet:Disabled;Enabled:SCN1;Start";
+        myParameters[254][0] ="allDecoders:Disabled;uspostnet:Enabled;usPostNetreportCheckDigit:true;Enabled:SCN1;Start";
+        myParameters[255][0] ="allDecoders:Disabled;uspostnet:Enabled;usPostNetreportCheckDigit:false;Enabled:SCN1;Start";
+        //Webcode
+        myParameters[256][0] ="allDecoders:Disabled;Webcode:Enabled;Enabled:SCN1;Start";
+        myParameters[257][0] ="allDecoders:Disabled;Webcode:Enabled;webcodeDecodeGtSubtype:true;Enabled:SCN1;Start";
+        myParameters[258][0] ="allDecoders:Disabled;Webcode:Enabled;webcodeDecodeGtSubtype:false;Enabled:SCN1;Start";
+        myParameters[259][0] ="allDecoders:Enabled;Webcode:Disabled;Enabled:SCN1;Start";
+        //aztec
+        myParameters[260][0] ="allDecoders:Disabled;aztec:Enabled;Enabled:SCN1;Start";
+        myParameters[261][0] ="allDecoders:Enabled;aztec:Disabled;Enabled:SCN1;Start";
+        //chinese2of5
+        myParameters[262][0] ="allDecoders:Disabled;chinese2of5:Enabled;Enabled:SCN1;Start";
+        myParameters[263][0] ="allDecoders:Enabled;chinese2of5:Disabled;Enabled:SCN1;Start";
+        //korean3of5
+        myParameters[264][0] ="allDecoders:Disabled;korean3of5:Enabled;Enabled:SCN1;Start";
+        myParameters[265][0] ="allDecoders:Enabled;korean3of5:Disabled;Enabled:SCN1;Start";
+        myParameters[266][0] ="allDecoders:Disabled;korean3of5:Enabled;korean3of5redundancy:true;Enabled:SCN1;Start";
+        myParameters[267][0] ="allDecoders:Enabled;korean3of5:Enabled;korean3of5redundancy:false;Enabled:SCN1;Start";
+        //microqr
+        myParameters[268][0] ="allDecoders:Disabled;microqr:Enabled;Enabled:SCN1;Start";
+        myParameters[269][0] ="allDecoders:Enabled;microqr:Disabled;Enabled:SCN1;Start";
+        //us4state
+        myParameters[270][0] ="allDecoders:Disabled;us4state:Enabled;Enabled:SCN1;Start";
+        myParameters[271][0] ="allDecoders:Enabled;us4state:Disabled;Enabled:SCN1;Start";
+        myParameters[272][0] ="allDecoders:Disabled;us4stateFics:Enabled;Enabled:SCN1;Start";
+        myParameters[273][0] ="allDecoders:Enabled;us4stateFics:Disabled;Enabled:SCN1;Start";
+        //matrix2of5
+        myParameters[274][0] ="allDecoders:Enabled;matrix2of5:Enabled;matrix2of5maxlength:15;matrix2of5MinLength:1;Enabled:SCN1;Start";
+        myParameters[275][0] ="allDecoders:Enabled;matrix2of5:Disabled;matrix2of5maxlength:15;matrix2of5MinLength:1;Enabled:SCN1;Start";
+        myParameters[276][0] ="allDecoders:Enabled;matrix2of5:Enabled;matrix2of5maxlength:15;matrix2of5MinLength:1;Enabled:SCN1;Start";
+        myParameters[277][0] ="allDecoders:Enabled;matrix2of5:Enabled;matrix2of5maxlength:20;matrix2of5MinLength:1;Enabled:SCN1;Start";
+        myParameters[278][0] ="allDecoders:Enabled;matrix2of5:Enabled;matrix2of5MinLength:10;matrix2of5maxlength:20;Enabled:SCN1;Start";
+        myParameters[279][0] ="allDecoders:Disabled;matrix2of5:Enabled;matrix2of5maxlength:15;matrix2of5MinLength:1;Enabled:SCN1;Start";
+        myParameters[280][0] ="allDecoders:Disabled;matrix2of5:Enabled;matrix2of5VerifyCheckDigit:true;matrix2of5ReportCheckDigit:true;matrix2of5MinLength:0;Enabled:SCN1;Start";
+        myParameters[281][0] ="allDecoders:Disabled;matrix2of5:Enabled;matrix2of5VerifyCheckDigit:true;matrix2of5ReportCheckDigit:false;matrix2of5MinLength:0;Enabled:SCN1;Start";
+        myParameters[282][0] ="allDecoders:Disabled;matrix2of5:Enabled;matrix2of5VerifyCheckDigit:false;matrix2of5ReportCheckDigit:false;matrix2of5MinLength:0;Enabled:SCN1;Start";
+        
+        myParameters[283][0] = "allDecoders:Disabled;Code128:Enabled;Enabled:SCN1;Start";
+		
+				//code11
+		myParameters[284][0] = "allDecoders:Disabled;Code11:Enabled;code11maxLength:20;Enabled:SCN1;Start";
+        myParameters[285][0] = "allDecoders:Disabled;Code11:Enabled;code11maxLength:9;Enabled:SCN1;Start";
+		myParameters[286][0] = "allDecoders:Disabled;Code11:Enabled;Code11MinLength:9;Enabled:SCN1;Start";
+        myParameters[287][0] = "allDecoders:Disabled;Code11:Enabled;Code11MinLength:1;Enabled:SCN1;Start";
+        myParameters[288][0] = "allDecoders:Disabled;Code11:Enabled;Code11MinLength:7;code11maxLength:12;Enabled:SCN1;Start";
+        
+		//GS1dataBar
+        myParameters[289][0] ="allDecoders:Disabled;gs1dataBar:Enabled;Enabled:SCN1;Start";
+        myParameters[290][0] ="allDecoders:Enabled;gs1dataBar:Disabled;Enabled:SCN1;Start";
+        //GS1dataBarexp
+        myParameters[291][0] ="allDecoders:Disabled;gs1dataBarExpanded:Enabled;Enabled:SCN1;Start";
+        myParameters[292][0] ="allDecoders:Enabled;gs1dataBarExpanded:Disabled;Enabled:SCN1;Start";
+        //GS1dataBarlim
+        myParameters[293][0] ="allDecoders:Disabled;gs1dataBarLimited:Enabled;Enabled:SCN1;Start";
+        myParameters[294][0] ="allDecoders:Enabled;gs1dataBarLimited:Disabled;Enabled:SCN1;Start";
+		
+		//upcEanConvertGs1dataBarToUpcEan
+		myParameters[295][0] ="allDecoders:Enabled;ean13:Enabled;upcEanConvertGs1dataBarToUpcEan:true;Enabled:SCN1;Start";
+        myParameters[296][0] ="allDecoders:Enabled;ean13:Enabled;upcEanConvertGs1dataBarToUpcEan:false;Enabled:SCN1;Start";
+        
+		
+        //alldecoders
+        myParameters[0][1]="All Barcode should scan";
+        myParameters[1][1]="Any Barcode should not scan";
+        //auspostal
+        myParameters[2][1]="11,01234567,63 59 52 57";
+        myParameters[3][1]="Auspostal Barcode should not scan";
+        //canpostal
+        myParameters[4][1]="1300112031112322022100200000001030301322131011011113,0,2";
+        myParameters[5][1]="Canpostal Barcode should not scan";
+        //Codabar
+        myParameters[6][1]="A12345678901234567890122B";
+        myParameters[7][1]="Codabar should not scan";
+        myParameters[8][1]="0 1234 56789 0123";
+        myParameters[9][1]="A01234567890123B";
+        myParameters[10][1]="A12345678901234567890122B";
+        myParameters[11][1]="Barcode of length more than 12 should not scan";
+        myParameters[12][1]="A123456-B";
+        myParameters[13][1]="Barcode of length less than 10 should not scan";
+        myParameters[14][1]="Barcode should not scan";
+        myParameters[15][1]="1234567890123:";
+        myParameters[16][1]="A1234567890123:B";
+        myParameters[17][1]="A50105090$B";
+        myParameters[18][1]="A50105090$B";
+        //Code11
+        myParameters[19][1]="50105090";
+        myParameters[20][1]="Code11 Barcode should not scan";
+        myParameters[21][1]="12345678901";
+        myParameters[22][1]="12345678901";
+        myParameters[23][1]="123456789019";
+        myParameters[24][1]="1234567890";
+        myParameters[25][1]="1234567890";
+        myParameters[26][1]="12345678901";
+        myParameters[27][1]="1234567890";
+        //code128
+        myParameters[28][1]="50105090";
+        myParameters[29][1]="code128 Barcode should not scan";
+        myParameters[30][1]="50105090";
+        myParameters[31][1]="EAN128 subtype Barcode should not scan";
+        myParameters[32][1]="=G1517006000014";
+        myParameters[33][1]="isbt128 subtype Barcode should not scan";
+        myParameters[34][1]="1234567890123456789012";
+        myParameters[35][1]="code128 of length more than 20 Barcode should not scan";
+        myParameters[36][1]="12345";
+        myParameters[37][1]="code128 of length less than 10 Barcode should not scan";
+        myParameters[38][1]="1234567890";
+        myParameters[39][1]="other (non EAN or ISBT) 128 subtype Barcode should not scan";
+        myParameters[40][1]="50105090";
+        myParameters[41][1]="50105090";
+        myParameters[42][1]="=W12340312345600";
+        myParameters[43][1]="=W12340312345600=<E1234A00";
+        myParameters[44][1]="=W12340312345600=<E1234A00";
+        myParameters[45][1]="All the Pair barcodes of ISBT table should decode (commonly concatenated pair)";
+        myParameters[46][1]="other pair(not commonly concatenated) also can decode";
+        myParameters[47][1]="CODE 128";
+        myParameters[48][1]="CODE 128";
+        myParameters[49][1]="CODE 128";
+        myParameters[50][1]="CODE 128";
+        //code39                
+        myParameters[51][1]="50105090K";
+        myParameters[52][1]="code39 Barcode should not scan";
+        myParameters[53][1]="A012354650";
+        myParameters[54][1]="012354650";
+        myParameters[55][1]="012354650";
+        myParameters[56][1]="0CT12U";
+        myParameters[57][1]="$ %/";
+        myParameters[58][1]="/D /E/O";
+        myParameters[59][1]="123456789012345H";
+        myParameters[60][1]="code39 Barcode of length greater than 14 should not scan";
+        myParameters[61][1]="123456L";
+        myParameters[62][1]="code39 Barcode of length less than 10 should not scan";
+        myParameters[63][1]="50105090K";
+        myParameters[64][1]="50105090K";
+        myParameters[65][1]="50105090K";
+        myParameters[66][1]="50105090";
+        myParameters[67][1]="50105090";
+        myParameters[68][1]="50105090K";
+        myParameters[69][1]="50105090K";
+        myParameters[70][1]="50105090K";
+        myParameters[71][1]="50105090K";
+        myParameters[72][1]="50105090K";
+        //code93
+        myParameters[73][1]="50105090";
+        myParameters[74][1]="code93 Barcode should not scan";
+        myParameters[75][1]="1234567890123456789012";
+        myParameters[76][1]="Barcode of length grater than 20 should not scan";
+        myParameters[77][1]="12345";
+        myParameters[78][1]="Barcode of length less than 10  should not scan";
+        myParameters[79][1]="50105090";
+        myParameters[80][1]="50105090";
+        //compositeAb
+        myParameters[81][1]="010064141499721012345678914";
+        myParameters[82][1]="compositeAb Barcode should not scan";
+        myParameters[83][1]="10064141499721012345678914";
+        myParameters[84][1]="010064141499721012345678914";
+        myParameters[85][1]="010064141499721012345678914";
+        myParameters[86][1]="100641414997 or 010064141499721012345678914";
+        myParameters[87][1]="100641414997";
+        //compositeC
+        myParameters[88][1]="0191234567890121310100035510ABC123%1D90";
+        myParameters[89][1]="compositeC Barcode should not scan";
+        //d2of5
+        myParameters[90][1]="501050900";
+        myParameters[91][1]="d2of5 Barcode should not scan";
+        myParameters[92][1]="d2of5Barcode of length greater than 20 should not scan";
+        myParameters[93][1]="1234565";
+        myParameters[94][1]="1234565";
+        myParameters[95][1]="d2of5Barcode of length less than 10 should not scan";
+        //DataMatrix
+        myParameters[96][1]="0123456789ABCDEFGHIJKLMNOPQRST";
+        myParameters[97][1]="DataMatrix Barcode should not scan";
+        //DutchPostal
+        myParameters[98][1]="1230AA156XHUIS";
+        myParameters[99][1]="DutchPostal Barcode should not scan";
+        //ean13
+        myParameters[100][1]="9780201546101";
+        myParameters[101][1]="ean13 Barcode should not scan";
+        //ean8
+        myParameters[102][1]="50105090";
+        myParameters[103][1]="ean8 Barcode should not scan";
+        myParameters[104][1]="0000050105090";
+        myParameters[105][1]="50105090";
+        //i2of5
+        myParameters[106][1]="0501050900";
+        myParameters[107][1]="i2of5 Barcode should not scan";
+        myParameters[108][1]="5000328748054";
+        myParameters[109][1]="05000328748054";
+        myParameters[110][1]="0123456789012343";
+        myParameters[111][1]="i2of5 Barcode of length greater than 13 should not scan";
+        myParameters[112][1]="1234567895";
+        myParameters[113][1]="i2of5 Barcode of length less than 12 should not scan";
+        myParameters[114][1]="0501050900";
+        myParameters[115][1]="0501050900";
+        myParameters[116][1]="01234566";
+        myParameters[117][1]="0123456";
+        myParameters[118][1]="50105095";
+        myParameters[119][1]="46421548";
+        myParameters[120][1]="4642154";
+        //JapPostal
+        myParameters[121][1]="1698790135";
+        myParameters[122][1]="JapPostal Barcode should not scan";
+        //MacroMicroPDF
+        myParameters[123][1]="THE GETTYSBURG ADDRESS:%0D%0A%0D%0AFour score and seven years ago our fathers brought forth on this%0D%0Acontinent a new nation, conc";
+        myParameters[124][1]="MacroMicroPDF Barcode should not scan";
+        myParameters[125][1]="barcode data will appear only after decoding complete MacroMicroPDF sequence.";
+        myParameters[126][1]="barcode data will appear after each decode of MacroMicroPDF sequence.";
+        myParameters[127][1]="decode should successful.";
+        myParameters[128][1]="decode should successful after decoding complete MacroMicroPDF sequence.";
+        myParameters[129][1]="decode should successful after decoding complete MacroMicroPDF sequence.";
+        myParameters[130][1]="Decode should successful and source should be of MicroPDF type";
+        myParameters[131][1]="Decode should successful and source should be of MACROMICROPDF type";
+        //MacroPDF
+        myParameters[132][1]="012345,<.>/?kla&*()'~-_=+\ABCDEFghijklmnoPQRSTUVWXYZabcdefGHI";
+        myParameters[133][1]="MacroPDF Barcode should not scan";
+        myParameters[134][1]="barcode data will appear only after decoding complete MacroPDF sequence.";
+        myParameters[135][1]="barcode data will appear after each decode of MacroPDF sequence";
+        myParameters[136][1]="barcode data will appear only after decoding complete MacroPDF sequence.";
+        myParameters[137][1]="barcode data will appear only after decoding complete MacroPDF sequence.";
+        myParameters[138][1]="Decode should successful and source should be of PDF417 type";
+        myParameters[139][1]="Decode should successful and source should be of MACROPDF type";
+        //MaxiCode
+        myParameters[140][1]="431991111%1D420%1D196%1D6759 Port Road GroveportOH";
+        myParameters[141][1]="MaxiCode Barcode should not scan";
+        //MicroPDF
+        myParameters[142][1]="Symbol PocketBrowser";
+        myParameters[143][1]="MicroPDF Barcode should not scan";
+        //msi
+        myParameters[144][1]="50105090";
+        myParameters[145][1]="msi Barcode should not scan";
+        myParameters[146][1]="20205977";
+        myParameters[147][1]="11882276584";
+        myParameters[148][1]="11882276584";
+        myParameters[149][1]="4131216667";
+        myParameters[150][1]="1234567890123456789012";
+        myParameters[151][1]="msi Barcode of length greater than 13 should not scan";
+        myParameters[152][1]="50105090";
+        myParameters[153][1]="msi Barcode of length less than 10 should not scan";
+        myParameters[154][1]="50105090";
+        myParameters[155][1]="50105090";
+        myParameters[156][1]="501050900";
+        myParameters[157][1]="50105090";
+        //PDF417
+        myParameters[158][1]="ABCDEFGHIJK";
+        myParameters[159][1]="PDF417 Barcode should not scan";
+        //Qrcode
+        myParameters[160][1]="0123456789abcdefghijklmnop";
+        myParameters[161][1]="Qrcode Barcode should not scan";
+        //rss14
+        myParameters[162][1]="0120012345678909";
+        myParameters[163][1]="rss14 Barcode should not scan";
+        //rssexp
+        myParameters[164][1]="0198898765432106320201234515991231";
+        myParameters[165][1]="rssexp Barcode should not scan";
+        //rsslim
+        myParameters[166][1]="0115012345678907";
+        myParameters[167][1]="rsslim Barcode should not scan";
+        //tlc39
+        myParameters[168][1]="[)>%1D06%1D6P123456%1DSABCD12345678901234%1D%1D";
+        myParameters[169][1]="tlc39 Barcode should not scan";
+        //Trioptic39
+        myParameters[170][1]="Y10345";
+        myParameters[171][1]="Trioptic39 Barcode should not scan";
+        myParameters[172][1]="Y10345";
+        myParameters[173][1]="Y10345";
+        //UKPostal
+        myParameters[174][1]="N211QT";
+        myParameters[175][1]="UKPostal Barcode should not scan";
+        myParameters[176][1]="N211QTR";
+        myParameters[177][1]="N211QT";
+        //upca-ean
+        myParameters[178][1]="0201608375";
+        myParameters[179][1]="9780201608373";
+        myParameters[180][1]="5446000005538100093619";
+        myParameters[181][1]="544600000553";
+        myParameters[182][1]="037812345678";
+        myParameters[183][1]="037812345678";
+        myParameters[184][1]="037812345678";
+        myParameters[185][1]="037812345678";
+        myParameters[186][1]="09781234567212";
+        myParameters[187][1]="09781234567212";
+        myParameters[188][1]="01234567890512345";
+        myParameters[189][1]="09781234567212";
+        myParameters[190][1]="09781234567212";
+        myParameters[191][1]="01234567890599";
+        myParameters[192][1]="01234567890599";
+        myParameters[193][1]="09781234567212";
+        myParameters[194][1]="Supplemental2 Barcodes should not scan";
+        myParameters[195][1]="09781234567212345";
+        myParameters[196][1]="Supplemental5 Barcode should not scan";
+        myParameters[197][1]="097812345672";
+        myParameters[198][1]="09781234567212";
+        myParameters[199][1]="09781234567212 or 097812345672";
+        myParameters[200][1]="097812345672";
+        myParameters[201][1]="9791234567896";
+        myParameters[202][1]="979123456789612";
+        myParameters[203][1]="979123456789612345";
+        myParameters[204][1]="037812345678";
+        myParameters[205][1]="9771234567898";
+        myParameters[206][1]="977123456789812";
+        myParameters[207][1]="977123456789812345";
+        myParameters[208][1]="4391234567893";
+        myParameters[209][1]="4141234567894";
+        myParameters[210][1]="414123456789412";
+        myParameters[211][1]="414123456789412345";
+        myParameters[212][1]="9781234567897";        
+        myParameters[213][1]="3781234567893";
+        myParameters[214][1]="378123456789312";
+        myParameters[215][1]="378123456789312345";
+        myParameters[216][1]="9771234567898";
+        myParameters[217][1]="09781234567212";
+        myParameters[218][1]="09781234567212";
+        myParameters[219][1]="0201608375";
+        myParameters[220][1]="0911261095";        
+        myParameters[221][1]="Decode should be successful and souce should be of UPC/EAN type.";
+        myParameters[222][1]="Decode should be successful and souce should be of type RSS14";        
+        //upca
+        myParameters[223][1]="100864216736";
+        myParameters[224][1]="upca Barcode should not scan";
+        myParameters[225][1]="00864216736";
+        myParameters[226][1]="100864216736";
+        myParameters[227][1]="0100864216736";
+        myParameters[228][1]="100864216736";
+        myParameters[229][1]="10086421673";
+        //upce0
+        myParameters[230][1]="173559";
+        myParameters[231][1]="upce0 Barcode should not scan";
+        myParameters[232][1]="017355000098";
+        myParameters[233][1]="173559";
+        myParameters[234][1]="1735598";
+        myParameters[235][1]="01735598";
+        myParameters[236][1]="001735598";
+        myParameters[237][1]="1735598";
+        myParameters[238][1]="00173559";
+        //upce1
+        myParameters[239][1]="234567";
+        myParameters[240][1]="upce1 Barcode should not scan";
+        myParameters[241][1]="123456000070";
+        myParameters[242][1]="234567";
+        myParameters[243][1]="2345670";
+        myParameters[244][1]="12345670";
+        myParameters[245][1]="012345670";
+        myParameters[246][1]="2345670";
+        myParameters[247][1]="01234567";
+        //usplanet
+        myParameters[248][1]="041235";
+        myParameters[249][1]="usplanet Barcode should not scan";
+        myParameters[250][1]="";
+        myParameters[251][1]="";       
+        //uspostnet
+        myParameters[252][1]="11784";
+        myParameters[253][1]="uspostnet Barcode should not scan";
+        myParameters[254][1]="";
+        myParameters[255][1]=""; 
+        //Webcode       
+        myParameters[256][1]="1234";
+        myParameters[257][1]="1234";
+        myParameters[258][1]="1234";
+        myParameters[259][1]="Webcode Barcode should not scan";
+        //aztec        
+        myParameters[260][1]="http://elevateprinting.com";
+        myParameters[261][1]="aztec Barcode should not scan";
+        //chinese2of5
+        myParameters[262][1]="45454545454";
+        myParameters[263][1]="chinese2of5 Barcode should not scan";
+        //korean3of5
+        myParameters[264][1]="131000";
+        myParameters[265][1]="korean3of5 Barcode should not scan";
+        myParameters[266][1]="131000";
+        myParameters[267][1]="131000"; 
+        //microqr        
+        myParameters[268][1]="Example";
+        myParameters[269][1]="microqr Barcode should not scan";
+        //us4state
+        myParameters[270][1]="9476543210012345678998690955102";
+        myParameters[271][1]="us4state Barcode should not scan";
+        //us4stateFics
+        myParameters[272][1]="J18CUSA81EN100400401870T";
+        myParameters[273][1]="us4stateFics Barcode should not scan";   
+        //matrix2of5 
+        myParameters[274][1]="09080706055";
+        myParameters[275][1]="Barcode should not scan";    
+        myParameters[276][1]="";
+        myParameters[277][1]="";          
+        myParameters[278][1]="";
+        myParameters[279][1]="";  
+        myParameters[280][1]="";
+        myParameters[281][1]="";
+        myParameters[282][1]="";
+        
+        myParameters[283][1]="";        
+        
+        myParameters[284][1]="Code11 Barcode of length less than 20 should scan";
+        myParameters[285][1]="Code11 Barcode of length greater than 9 should not scan";
+        myParameters[286][1]="code11 Barcode of length less than 9 should not scan";
+        myParameters[287][1]="0501050900";  
+        myParameters[288][1]="0501050900";
+		
+		//GS1dataBar14
+        myParameters[289][1]="0120012345678909";
+        myParameters[290][1]="GS1dataBar14 Barcode should not scan";
+        //GS1dataBarexp
+        myParameters[291][1]="0198898765432106320201234515991231";
+        myParameters[292][1]="GS1dataBarexp Barcode should not scan";
+        //GS1dataBarlim
+        myParameters[293][1]="0115012345678907";
+        myParameters[294][1]="GS1dataBarlim Barcode should not scan";
+		
+		myParameters[295][1]="Decode should be successful and souce should be of UPC/EAN type.";
+        myParameters[296][1]="Decode should be successful and souce should be of type GS1databar14";
+
+		
+        
+        //var myarray=new Array(3)
+        
+
+
+        var Generic = new ActiveXObject("PocketBrowser.Generic");
+        
+//        var objParams = document.getElementById("Div1");
+        
+        var ScanParams = "";
+        var iCount = 0;
+        
+        function quitPB()
+         {
+            //generic.InvokeMETAFunction("Application", "Quit");
+            application.quit();
+         }
+        
+        function doScan(data, source, type, time, length)
+        {
+            //datafield.value=data;
+            //alert("scan sucess");
+            //alert(data);
+            var objParams = document.getElementById("Div3");
+            objParams.innerText = " Source = "+source+"    Data = "+data;
+			//verifyData(data);
+            //passF(data);
+            var objRes = document.getElementById("msg");
+            var expectedData = myParameters[iCount][1];
+            Generic.Log('\r\n*****Actual Scanned Data: '+ data+'*****\r\n', 1);	
+			if(data == expectedData)
+            {
+                objRes.innerHTML = "PASS";
+                Generic.Log('\r\n*****Test Case Result: PASS*****\r\n' ,1);
+                passT();
+            }
+		else
+            {
+                objRes.innerHTML = "FAIL:Move Next To Continue";
+                Generic.Log('\r\n*****Test Case Result: FAIL*****\r\n' ,1);
+            }
+            Generic.Log('\r\n%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\r\n', 1);
+        }
+        
+        function passF(data)
+        {
+            setTimeout(verifyData(data),1000);
+        }
+        
+        function verifyData(data)
+        {
+            var objParams = document.getElementById("msg");
+            var expectedData = myParameters[iCount][1];
+            
+            if(data == expectedData)
+            {
+                objParams.innerHTML = "PASS";
+                passT();
+            }
+            else
+            {
+                objParams.innerHTML = "FAIL:Move Next To Continue";
+            }
+        }
+        
+        
+        function passT()
+        {
+            setTimeout("moveNext()",1000);
+        }
+        
+        function StartTest()
+        {
+        //alert(myParameters[iCount][0]);
+        //alert(myParameters[iCount][1]);
+            //datafield.value="";
+            var objParams = document.getElementById("Div1");
+            objParams.innerHTML = "";
+            
+            var objExpect = document.getElementById("Div2");
+            objExpect.innerHTML = myParameters[iCount][1];
+            Generic.Log('\r\n%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\r\n', 1);
+            Generic.Log('\r\n*****Test Case Count Number: '+ iCount + '*****\r\n',1);
+            Generic.Log('\r\n*****Expected Data: '+ myParameters[iCount][1]+ '*****\r\n' ,1);
+            
+            var objDecoded = document.getElementById("Div3");
+            objDecoded.innerHTML = "";
+            
+            var objResult = document.getElementById("msg");
+            objResult.innerHTML = "";
+            
+            var objTestCase = document.getElementById("TestCase");
+            objTestCase.innerHTML = iCount;
+                        
+            Generic.InvokeMETAFunction('Scanner', 'Disabled');
+            //build scanner zparameters data
+            //ScanParams = "'" + myParameters[iCount] + ";'";
+            ScanParams = "" + myParameters[iCount][0] + "";
+            //alert(ScanParams);
+            objParams.innerHTML = ScanParams;
+            Generic.Log('\r\n*****Parameters Passed: '+ ScanParams + '*****\r\n',1);
+            Generic.InvokeMETAFunction('Scanner', ScanParams);
+        }
+        
+        
+        function moveNext()
+        {
+            iCount++;
+            //datafield.value="";
+            var objParams = document.getElementById("Div1");
+            objParams.innerHTML = "";
+            
+                      
+            var objDecoded = document.getElementById("Div3");
+            objDecoded.innerHTML = "";
+            
+            var objResult = document.getElementById("msg");
+            objResult.innerHTML = "";
+            
+            var objTestCase = document.getElementById("TestCase");
+            objTestCase.innerHTML = iCount;
+            Generic.Log('\r\n%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\r\n', 1);
+            Generic.Log('\r\n*****Test Case Count Number: '+ iCount + '*****\r\n' ,1);
+            
+            var objExpect = document.getElementById("Div2");
+            objExpect.innerHTML = myParameters[iCount][1];
+            Generic.Log('\r\n*****Expected Result: '+ myParameters[iCount][1] + '*****\r\n' ,1);
+            
+            Generic.InvokeMETAFunction('Scanner', 'Disabled');
+            
+            //build scanner parameters data
+            //ScanParams = "'" + myParameters[iCount] + ";'";
+            ScanParams = "" + myParameters[iCount][0] + "";
+            objParams.innerHTML = ScanParams;
+            Generic.Log('\r\n*****Parameters Passed: '+ ScanParams + '*****\r\n',1);
+            Generic.InvokeMETAFunction('Scanner', ScanParams);
+        }
+        
+        function runTC()
+        {
+            iCount = NextTCID.value;
+            var objParams = document.getElementById("Div1");
+            objParams.innerHTML = "";
+            
+                      
+            var objDecoded = document.getElementById("Div3");
+            objDecoded.innerHTML = "";
+            
+            var objResult = document.getElementById("msg");
+            objResult.innerHTML = "";
+            
+            var objTestCase = document.getElementById("TestCase");
+            objTestCase.innerHTML = iCount;
+            Generic.Log('\r\n%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\r\n', 1);
+            Generic.Log('\r\n*****Test Case Count Number: '+ iCount + '*****\r\n' ,1);
+            
+            var objExpect = document.getElementById("Div2");
+            objExpect.innerHTML = myParameters[iCount][1];
+            Generic.Log('\r\n*****Expected Result: '+ myParameters[iCount][1] + '*****\r\n' ,1);
+            
+            Generic.InvokeMETAFunction('Scanner', 'Disabled');
+            
+            //build scanner parameters data
+            //ScanParams = "'" + myParameters[iCount] + ";'";
+            ScanParams = "" + myParameters[iCount][0];
+            objParams.innerHTML = ScanParams;
+            Generic.Log('\r\n*****Parameters Passed: '+ ScanParams + '*****\r\n',1);
+            Generic.InvokeMETAFunction('Scanner', ScanParams);
+        }
+        
+        function movePrev()
+        {
+            iCount--;
+        
+            //datafield.value="";
+            var objParams = document.getElementById("Div1");
+            objParams.innerHTML = "";
+            
+            var objTestCase = document.getElementById("TestCase");
+            objTestCase.innerHTML = iCount;
+            
+            var objExpect = document.getElementById("Div2");
+            objExpect.innerHTML = myParameters[iCount][1];
+            
+            var objDecoded = document.getElementById("Div3");
+            objDecoded.innerHTML = "";
+            
+            var objResult = document.getElementById("msg");
+            objResult.innerHTML = "";
+            
+            Generic.InvokeMETAFunction('Scanner', 'Disabled');
+            
+            //build scanner parameters data
+            //ScanParams = "'" + myParameters[iCount] + ";'";
+            ScanParams = "" + myParameters[iCount][0] + "";
+            objParams.innerHTML = ScanParams;
+            Generic.InvokeMETAFunction('Scanner', ScanParams);
+        }
+        
+        function StartScanner()
+        {
+           Generic.InvokeMETAFunction('Scanner', 'Start');
+        }
+   
+    </script>
+</head>
+<body>
+<br /><br /><br />
+
+<br /><br />
+<table border=1>
+ <tr>
+  <td>Enter TC Number:
+   <input type=text name="NextTCID" id="NextTCID" value="" />
+  </td>
+ </tr>
+ <tr>
+  <td>
+   <input type=button id="subTC" name="subTC" value="Run This TC" onclick="runTC();" />
+  </td>
+ </tr>
+</table>
+TestCase:
+<div id="TestCase"></div>
+Parameters:
+<div id="Div1"></div>
+<br />
+Expected:
+<div id="Div2"></div>
+<br />
+Decoded data:
+<div id="Div3"></div>
+<br />
+Result:
+<div id="msg"></div>
+<div id "scandata"></div>
+<input type=button value="Start Test" onclick="StartTest();" />
+<br /><br />
+<input type=button value="Move To Next Test" onclick="moveNext();" />
+<input type=button value="Move To Previous Test" onclick="movePrev();" />
+<input type=button value="Start Scanner" onclick="StartScanner();" />
+<input type="button" value="Quit" onclick="quitPB();" />
+
+</body>
+</html>

@@ -1,0 +1,54 @@
+.SigCap_EmptyParameters{
+    SignatureCapture-border:;
+    SignatureCapture-width:;
+    SignatureCapture-height:;
+    SignatureCapture-left:;
+    SignatureCapture-top:;
+    SignatureCapture-penWidth:;
+    SignatureCapture-penColor:;
+    SignatureCapture-bgColor:;
+    SignatureCapture-destination:;
+    SignatureCapture-username:;
+    SignatureCapture-password:;
+    SignatureCapture-name:;
+    SignatureCapture-visibility:;
+    SignatureCapture-VectorEvent:url('');
+ }
+ 
+.SigCap_Valid{
+    SignatureCapture-border:Visible;
+    SignatureCapture-width:250;
+    SignatureCapture-height:200;
+    SignatureCapture-left:100;
+    SignatureCapture-top:50;
+    SignatureCapture-visibility:visible;
+    SignatureCapture-VectorEvent:url('Javascript:myvectorevent(%s);');
+ }
+ 
+ .SigCap_Visible{
+    SignatureCapture-visibility:visible;
+ }
+ 
+ .SigCap_Hidden{
+    SignatureCapture-visibility:hidden;
+ }
+ 
+ .SigCap_ShowBorder{
+    SignatureCapture-border:visible;
+ }
+ 
+ .SigCap_HideBorder{
+    SignatureCapture-border:hidden;
+ }
+ 
+  .SigCap_RedBGColor{
+    SignatureCapture-bgcolor:#FF0000;
+ }
+ 
+  .SigCap_GreenBGColor{
+    SignatureCapture-bgcolor:#00C000;
+ }
+ 
+ 
+ 
+ 

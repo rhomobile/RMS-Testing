@@ -1,0 +1,130 @@
+<html>
+<head>
+    <title>Shake Gesture Settings</title>
+<META HTTP-Equiv="SIPbutton" Content="visibility:visible">
+
+</head>
+<body>
+<form id="frmShakeGestures" action="ShakeGesture_JSObjects.asp" method="GET" >
+<h2>Shake Gesture using JSObjects</h2>
+
+<table>
+    <tr>
+        <td><a href="main"></a></td>
+    </tr>
+    
+    <tr>
+    <td>
+    Preset   :- 
+    </td>
+    <td>
+<select name="cmdPreset" id="cmdPreset">
+<option value="NULL">NULL</option>
+<option value="normal">normal</option>
+<option value="Test">Invalid String("Test")</option>
+<option value="">Empty String</option>
+</select>
+</td>
+</tr>
+<tr>
+<td>
+Diagonstics:- 
+</td>
+<td>
+<select name="cmdDiagonstics" id="cmdDiagonstics">
+<option value="TRUE">TRUE</option>
+<option value="FALSE">FALSE</option>
+<option value="TEST">Invalid String("Test")</option>
+<option value="NULL">NULL</option>
+<option value="">Empty String</option>
+</select>
+
+</td>
+</tr>
+
+<tr>
+<td>
+Input ID:- 
+</td>
+<td>
+<input type=text name="txtShakeID" id="txtShakeID" value="MyShakeGesture" />
+</td>
+</tr>       
+<tr>
+<td>
+<select name="mydropdown1" id="mydropdown1">
+<option value="JavaScript">JavaScript</option>
+<option value="HTML">HTML</option>
+<option value="JSON">JSON</option>
+</select>
+</td>
+</tr>    
+
+</table>
+
+
+
+<table>
+
+
+<tr>
+<td>
+Threshold(0to1000):-
+</td>
+<td>
+<input type=text name="txtThreshold" id="Text1" value="500" />
+</td>
+</tr>  
+ 
+<tr>
+<td>
+Quiet(>=0 in ms):-
+</td>
+<td>
+<input type=text name="txtQuiet" id="Text2" value="1000" />
+</td>
+</tr>   
+
+
+<tr>
+<td>Type:- 
+</td>
+<td>
+<input type=text name="txtType" id="txtType" value="Shake" />
+</td>
+</tr> 
+
+<tr>
+<td>Number Of Gestures:- 
+</td>
+<td>
+<input type=text name="txtNumber" id="txtNumber" value="1" />
+</td>
+</tr> 
+
+
+<tr>
+<td>
+<input type="button" onclick="setNull();" value="setNull">
+</td>
+</tr>
+
+  
+</table>
+<hr>
+<input type=submit><br />
+<P><INPUT TYPE="button" VALUE="Back" ONCLICK="location.href='Gesture_Index.html'"></P>
+
+
+</form>
+</body>
+</html>
+
+<script>
+function setNull()
+{
+frmShakeGestures.txtShakeID.value="NULL";
+frmShakeGestures.txtThreshold.value="NULL";
+frmShakeGestures.txtQuiet.value="NULL";
+}
+</script>

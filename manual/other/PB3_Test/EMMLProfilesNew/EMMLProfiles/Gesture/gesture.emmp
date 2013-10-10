@@ -1,0 +1,45 @@
+.Linear{
+    gesture-type:linear;
+    gesture-id:Scan1;
+    gesture-diagnostics:true;
+    gesture-sensitivity:80;
+    gesture-start-x:50;
+    gesture-start-y:50;
+    gesture-end-x:100;
+    gesture-end-y:100;
+    gesture:create;
+    gesture-detected:url('Javascript:onGesture('%s','%s');');
+    
+    
+}
+
+.Circular{
+    gesture-type:Circle;
+    gesture-id:Scan2;
+    gesture-diagnostics:true;
+    gesture-sensitivity:80;
+    gesture-center-x:150;
+    gesture-center-y:150;
+    gesture-radius:150;
+    gesture-start:0;
+    gesture-end-y:180;
+    gesture-tolerance:40;
+    gesture:create;
+    gesture-detected:url('Javascript:onGesture('%s','%s');');
+   
+}
+
+.Hold{
+	gesture-type:Hold;
+    gesture-id:Scan3;
+    gesture-diagnostics:true;
+    gesture-sensitivity:80;
+    gesture-center-x:150;
+    gesture-center-y:150;
+    gesture-radius:25;
+    gesture-delay:2000;
+    gesture-interval:1000;
+    gesture:create;
+    gesture-detected:url('Javascript:onGesture('%s','%s');');
+
+}

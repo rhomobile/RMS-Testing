@@ -1,0 +1,30 @@
+<html>
+
+<script>
+
+   function doQuit()
+   {
+      var objGeneric = new ActiveXObject("PocketBrowser.Generic");
+      objGeneric.InvokeMETAFunction('application', 'quit');
+   }
+   
+   
+   function doApplyProfile(profile)
+   {
+      var objGeneric = new ActiveXObject("PocketBrowser.Generic");
+      objGeneric.InvokeMETAFunction('EMMLProfile', 'Apply:' + profile);
+   }
+</script>
+
+<body>
+
+This page has no EMMP import tag!!!
+
+    <a href="javascript:doApplyProfile('test.showbuttons');">Apply ShowButtons Profile</a>
+    <br>
+    <a href="javascript:doApplyProfile('test.hidebuttons');">Apply HideButtons Profile</a>
+
+<br><br><br>
+    <a href="javascript:doQuit();">Quit PB</a>
+</body>
+</html>

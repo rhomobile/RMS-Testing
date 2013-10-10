@@ -1,0 +1,328 @@
+
+<HTML>
+<HEAD>
+    <TITLE>Image Capture Test</TITLE>
+   <META HTTP-Equiv="ReloadButton" Content="Visibility:Visible">
+
+<meta name="mobileoptimized" content="0" />
+<SCRIPT>
+
+var objGeneric = new ActiveXObject("PocketBrowser.Generic");
+var selected_Imager=""; //For Reading Selected Scanner by list.
+var selectedLamp=""; //Selected Lamp in the list.
+var selectedAim=""; //Selected Aim in the list.
+
+
+function setImagerEnumTimer()
+{
+    setTimeout("onImagerEnable()", 3000);
+}
+
+
+function onImagerEnable()
+{
+	//objGeneric.InvokeMETAFunction("imager","imagerEnumEvent:url('javascript:Enumimagers(%s);')");
+	objGeneric.InvokeMETAFunction("imager",null);
+	objGeneric.InvokeMETAFunction("imager", "Enumerate");
+}
+
+function Enumimagers(imagerArray)
+{
+	var ImagerInfo = "Imagers On Device: " + imagerArray.length + "ID  --  Name:";
+	for (i=0; i < imagerArray.length; i++)
+	{
+	    ImagerInfo = ImagerInfo + imagerArray[i][0] + ' -- ' + imagerArray[i][1] + '<BR>';
+		//ImagerInfo = ImagerInfo + imagerArray[i][0] + ' -- ' + imagerArray[i][1] + '<BR>';
+		//this.document.frm.mydropdown.options.length++;
+	    frm.mydropdown.options[i].text = imagerArray[i][0];
+	    frm.mydropdown.options[i].value = imagerArray[i][0];
+
+	}
+	message.innerHTML =ImagerInfo;
+}
+/*function Enumimagers(imagerArray)
+{
+	var ImagerInfo = "Scanners On Device: " + imagerArray.length + "<BR>ID  --  Name<BR>";
+	for (i=0; i < imagerArray.length; i++)
+	{
+		ImagerInfo = ImagerInfo + imagerArray[i][0] + ' -- ' + imagerArray[i][1] + '<BR>';
+	}
+	alert('enumerate func called');
+	message.innerHTML =ImagerInfo;
+}*/
+
+</SCRIPT>
+
+</HEAD>
+<BODY onLoad="setImagerEnumTimer();">
+
+<script language=javascript>
+var myobjGeneric = new ActiveXObject("PocketBrowser.Generic");
+
+function enablemyImager()
+{
+	myobjGeneric.InvokeMETAFunction('imager','enabled');
+}
+
+function disableImager()
+{
+	myobjGeneric.InvokeMETAFunction('imager', 'disabled');
+}
+
+function captureImager()
+{
+	myobjGeneric.InvokeMETAFunction('imager', 'capture');
+}
+
+function setLeftPosition()
+{
+	var leftpst=frm.leftPosition.value;
+	var temp="Left:"+leftpst;
+	myobjGeneric.InvokeMETAFunction('imager',temp);
+}
+
+function setTopPosition()
+{
+	var toppst=frm.topPosition.value;
+	var temp1="Top:"+toppst;
+	myobjGeneric.InvokeMETAFunction('imager',temp1);
+}
+
+function setheight()
+{
+	var ht=frm.viewerHeight.value;
+	var temp2="Height:"+ht;
+	myobjGeneric.InvokeMETAFunction('imager',temp2);
+}
+
+function setwidth()
+{
+	var wd=frm.viewerWidth.value;
+	var temp3="Width:"+wd;
+	myobjGeneric.InvokeMETAFunction('imager',temp3);
+}
+
+function selectLamp()
+{
+	var sltLamp=frm.imgLamp.selectedIndex;
+	selectedLamp = frm.imgLamp.options[sltLamp].value;
+	switch(selectedLamp)
+	{
+		case 'On':
+
+			myobjGeneric.InvokeMETAFunction('imager', 'lamp:ON');
+			break;
+
+		case 'Off':
+
+			myobjGeneric.InvokeMETAFunction('imager', 'lamp:OFF');
+			break;
+		
+		case 'Test':
+
+			myobjGeneric.InvokeMETAFunction('imager', 'lamp:Test');
+			break;
+	}
+}
+
+function selectAim()
+{
+	var sltAim=frm.imgAim.selectedIndex;
+	selectedAim = frm.imgLamp.options[sltAim].value;
+	switch(selectedAim)
+	{
+		case 'On':
+
+			myobjGeneric.InvokeMETAFunction('imager', 'aim:ON');
+			break;
+
+		case 'Off':
+
+			myobjGeneric.InvokeMETAFunction('imager', 'aim:OFF');
+			break;
+
+		case 'Test':
+
+			myobjGeneric.InvokeMETAFunction('imager', 'lamp:Test');
+			break;
+	}
+}
+function imgcapture()
+{
+	var Destination = frm.txtDestination.value;
+	var dest = "Destination:url("+Destination+")";
+	//alert(dest);
+	myobjGeneric.InvokeMETAFunction('imager', dest);
+
+	var UserName = frm.txtUserName.value;
+	var uname = "username:"+UserName;
+	//alert(uname);
+	myobjGeneric.InvokeMETAFunction('imager', uname);
+
+	
+	var Password = frm.txtPassword.value;
+	var pword = "password:"+Password;
+	//alert(pword);
+	myobjGeneric.InvokeMETAFunction('imager', pword);
+	
+	var Sound = frm.txtSound.value;
+	var wave = "sound:"+Sound;
+	//alert(wave);
+	myobjGeneric.InvokeMETAFunction('imager', wave);
+	
+//	var SelectedValue = frm.sltProtocol.selectedIndex;
+//	var selectProtocol = frm.sltProtocol.options[SelectedValue].value;
+//	var ptl = "Protocol:"+selectProtocol;
+
+//	myobjGeneric.InvokeMETAFunction("imager", "ptl");
+//	alert(ptl);
+alert(Destination+Password+UserName+Sound);
+
+	
+  	for (var i=0; i < frm.group1.length; i++)
+   	{   
+      		if (frm.group1[i].checked)
+      		{
+      			var type = frm.group1[i].value;
+      		}
+   	}	
+	if(type=="javascript")
+	{
+	    alert(type);
+		myobjGeneric.InvokeMETAFunction("imager","imagerevent:url('javascript:myevent('%s');')");
+		//alert("Hi");
+		//myobjGeneric.InvokeMETAFunction("imager","imagerevent:");
+	}
+
+	else if(type=="HTML")
+	{
+        alert(type);
+		myobjGeneric.InvokeMETAFunction("imager","imagerevent:url('http://192.168.6.18/PB3.x/NavigateTest.html');");
+	}
+	
+
+	myobjGeneric.InvokeMETAFunction('imager', 'capture');
+	
+}
+
+function myevent(Response)
+{	
+	alert("response"+Response);
+}
+
+function selectImager()
+{
+    var w = frm.mydropdown.selectedIndex;
+    //alert(w);
+    selected_Imager = frm.mydropdown.options[w].value;
+    selImag.innerHTML = selected_Imager + "index:" + w;
+    //alert(selected_Imager);
+	var temp="enabled:"+selected_Imager;
+	myobjGeneric.InvokeMETAFunction('imager',temp);
+}
+</script>
+
+<form id="frm" action="">
+
+<BR><BR><BR><BR><BR><BR><BR><BR>
+
+<div id="message">Available Imagers...</div>
+<div id="selImag">ststus:</div>
+Select Imager  <select name="mydropdown" id="mydropdown" onChange="selectImager();">
+<option value=""></option>
+<option value=""></option>
+</select>
+<BR><BR>
+
+<input type=button onclick="enablemyImager();" value="Enabled">
+<INPUT type=button value="Disabled" onclick="disableImager();">
+<BR><BR>
+
+<input type=button onclick="captureImager();" value="Capture">
+<BR><BR>
+
+Select Lamp:	<select name="imgLamp" id="imgLamp" onChange="selectLamp();">
+<OPTION VALUE="">Select Lamp</OPTION>
+<option value="On">On</option>
+<option value="Off">Off</option>
+<option value="Test">Test</option>
+</select>
+<BR><BR>
+
+Select Aim:	<select name="imgAim" id="imgAim" onChange="selectAim();">
+<OPTION VALUE="">Select Aim</OPTION>
+<option value="On">On</option>
+<option value="Off">Off</option>
+<option value="Test">Test</option>
+</select>
+<BR><BR>
+
+ <tr>
+      <td>Left:	</td><td><Textarea id="leftPosition" cols="10" rows="1">100</Textarea></td>
+	<INPUT type=button onclick="Javascript:setLeftPosition();" value="Left">
+    </tr>
+<br>	
+ <tr>
+      <td>Top:	</td><td><Textarea id="topPosition" cols="10" rows="1">70</Textarea></td>
+	<INPUT type=button onclick="Javascript:setTopPosition();" value="Top">
+    </tr>
+<br>
+ <tr>
+      <td>Height:	</td><td><Textarea id="viewerHeight" cols="10" rows="1">100</Textarea></td>
+	<INPUT type=button onclick="Javascript:setheight();" value="Height">
+    </tr>
+<br>
+ <tr>
+      <td>Width:	</td><td><Textarea id="viewerWidth" cols="10" rows="1">200</Textarea></td>
+	<INPUT type=button onclick="Javascript:setwidth();" value="Width">
+    </tr>
+
+
+<hr>
+<table>
+<tr>
+	<!--<td>Destination</td><td><Textarea id="txtDestination"cols="21" rows="1">ftp://192.168.6.18</Textarea></td>-->
+	<td>Destination</td><td><Textarea id="txtDestination"cols="21" rows="1">http://192.168.6.18/PB3.X/Image Capture/Upload.aspx</Textarea></td>
+	</tr>
+	<!--http://192.168.6.18/PB3.X/Image Capture/Upload.aspx-->
+	<!--192.168.6.18:21/image.bmp-->
+	<!--ftp://admin:root@192.168.1.1:2500/Folder/file.txt-->
+	<!--ftp://192.168.6.18:21/image.bmp-->
+<tr>
+	<td>UserName</td><td><Textarea id="txtUserName"cols="10" rows="1">ftpadmin</Textarea></td>
+	</tr>
+<tr>
+	<td>Password</td><td><Textarea id="txtPassword"cols="10" rows="1">ftpadmin</Textarea></td>
+	</tr>
+<tr>
+	<td>Sound</td><td><Textarea id="txtSound"cols="21" rows="1">\Windows\alarm5.wav</Textarea></td>
+	</tr>
+	<!---->
+<tr>
+<td>Select Protocol</td>
+<td><select name="sltProtocol" id="sltProtocol">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="http">http</option>
+<option value="ftp">ftp</option>
+<option value="test">test</option>
+</select>
+</td>
+</tr>
+</table>
+
+
+<input type="radio" name="group1" value="javascript">Navigate to javascript function
+<br>
+<input type="radio" name="group1" value="HTML">Navigate to HTML Page
+<br>
+<input type="button" onclick="imgcapture();" value="Capture">
+
+
+<hr>
+<BR>
+<A HREF="./Image Capture.html">Back</A>
+
+
+</form>
+</BODY>
+</HTML>
