@@ -1,0 +1,29 @@
+---
+sdkversion: 4.0.0
+name: ajxapp
+version: '1.0'
+vendor: rhomobile
+build: debug
+bbver: '6.0'
+applog: rholog.txt
+iphone:
+  configuration: Release
+  sdk: iphonesimulator6.0
+  provisionprofile: ''
+  codesignidentity: ''
+  entitlements: ''
+  BundleIdentifier: com.rhomobile.ajxapp
+  BundleURLScheme: ajxapp
+wp:
+  productid: d70c7051-122c-0131-3956-548564a893b0
+symbian:
+  uid: '0xe7ef79c5'
+android:
+  version: 2.3.3
+wm:
+  sdk: "Windows Mobile 6.5.3 Professional DTK (ARMV4I)"
+#sdk: "MC3000c50b (ARMV4I)"
+extensions:
+- rhoconnect-client
+app_type: rhoelements
+capabilities: []
