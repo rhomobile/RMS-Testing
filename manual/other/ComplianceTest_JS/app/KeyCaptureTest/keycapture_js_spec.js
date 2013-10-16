@@ -161,13 +161,13 @@ describe("KeyCapture Test", function() {
 				});
 
 
-				it("VT289-039 | call remapKey after setting homeKeyValue |", function() {
+				it("VT289-039 | call remapKey |", function() {
 
 					runs(function()
 					{
-						setObjective("VT289-039 | call remapKey with" + hardwareKeysTest.testKey18.description + " and "hardwareKeysTest.testKey21.description);
-						setInstruction("click inside the textbox" + Press hardwareKeysTest.testKey18.description + " and " hardwareKeysTest.testKey21.description);
-						setExpected( Press hardwareKeysTest.testKey18.description + "should be displayed after pressing both keys");
+						setObjective("VT289-039 | call remapKey with" + hardwareKeysTest.testKey18.description + " and " + hardwareKeysTest.testKey21.description);
+						setInstruction("click inside the textbox Press " + hardwareKeysTest.testKey18.description + " and " + hardwareKeysTest.testKey21.description);
+						setExpected( hardwareKeysTest.testKey18.description + "should be displayed after pressing both keys");
 						Rho.KeyCapture.remapKey(hardwareKeysTest.testKey18.string,hardwareKeysTest.testKey21.string);
 					});
 
