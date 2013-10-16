@@ -1,4 +1,4 @@
-sdk: /Users/MOHUS/rhodes
+#sdk: /Users/MOHUS/rhodes
 sdkversion: 3.3.2
 name: common_api_spec
 version: 1.0
@@ -15,8 +15,8 @@ iphone:
   provisionprofile:
   codesignidentity:
   entitlements:
-  BundleIdentifier: com.rhomobile.apigeneratorspec
-  BundleURLScheme: apigeneratorspec
+  BundleIdentifier: com.rhomobile.commonapispec
+  BundleURLScheme: commonapispec
 wp:
   productid: 'b6479381-42a8-0130-78de-3caec51bd50e'
 symbian:
@@ -25,4 +25,3 @@ android:
   version: 2.1
 
 extensions: ["json", "rhospec", "megamodule", "simpleonlystaticmodule"]
-#extensions: ["json", "rhospec", "simpleonlystaticmodule"]

@@ -63,6 +63,18 @@ $local_server.mount_proc '/slow_get' do |req,res|
   res.status = 200
 end
 
+$local_server.mount_proc '/binary' do |req,res|
+  puts "Received #{req.body} with length #{req.body.length}"
+  res.body = "Received #{req.body} with length #{req.body.length}"
+  res.status = 200
+end
+
+$local_server.mount_proc '/post_binary_auto' do |req,res|
+    puts "Received #{req.body} with length #{req.body.length}"
+    res.body = "#{req.body.length}"
+    res.status = 200
+end
+
 $local_server.mount_proc '/download' do |req,res|
   res.body = "Downloaded content"
   res.status = 200
@@ -191,15 +203,25 @@ $local_server.mount_proc '/post_gzip' do |req,res|
     body = nil
     
     if enc =='gzip' then
-        io = StringIO.new(req.body, "r")
-        reader = Zlib::GzipReader.new(io)
-        body = reader.read
+        begin
+            
+            f = open('post_gzip_body.dat','w')
+            f.puts(req.body);
+            f.close()            
+            
+            io = StringIO.new(req.body, "r")
+            reader = Zlib::GzipReader.new(io)
+            body = reader.read
         
-        puts "Body is: #{body.inspect}"
+            puts "Body is: #{body.inspect}"
         
-        if body == "GZipped test body" then
-            res.status = 200
-        else
+            if body == "GZipped test body" then
+                res.status = 200
+            else
+                res.status = 500
+            end
+        rescue => e
+            puts "#{e.inspect}"
             res.status = 500
         end
     else

@@ -1,0 +1,19 @@
+require 'fileutils'
+require 'yaml'
+
+namespace :generate do
+	namespace :js do
+		task :barcode do
+			require File.dirname(__FILE__) + "/Barcode/generate_barcode_spec.rb"
+			require File.dirname(__FILE__) + "/generate_spec.rb"
+			generate_js_barcode_spec
+		end
+	end
+	namespace :ruby do
+		task :barcode do
+			require File.dirname(__FILE__) + "/Barcode/generate_barcode_spec.rb"
+			require File.dirname(__FILE__) + "/generate_spec.rb"
+			generate_ruby_barcode_spec
+		end
+	end
+end

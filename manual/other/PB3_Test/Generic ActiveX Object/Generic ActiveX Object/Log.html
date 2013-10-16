@@ -1,0 +1,62 @@
+<html>
+<head>
+
+
+
+</head>
+<body>
+<SCRIPT language="javascript">
+try
+{
+var generic = new ActiveXObject("PocketBrowser.Generic");
+}
+catch(err)
+{
+var GenericPlugin = document.createElement('embed'); 
+GenericPlugin.setAttribute('id',"embed1"); 
+GenericPlugin.setAttribute('type',"application/x-wtg-legacy-generic"); 
+GenericPlugin.setAttribute('hidden',"true"); 
+
+// Attach the plugin embed tags to the body 
+var theBody = document.getElementsByTagName('body')[0]; 
+theBody.appendChild(GenericPlugin); 
+
+}
+	
+function dolog()
+{
+    
+    var rValue3 = generic.Log('This is high priority log my dear3', "3");
+    Div3.innerHTML="PHigh  "+rValue3;
+    var rValue2 = generic.Log('This is medium priority log my dear2', "2");
+    Div2.innerHTML="PMedium  "+rValue2;
+    var rValue1 = generic.Log('This is low priority log my dear1', "1");
+    Div1.innerHTML="Plow  "+rValue1;
+    var rValue0 = generic.Log('This is invalid priority log my dear0', 0);
+    Div4.innerHTML="PInvalid  "+rValue0;
+	
+    
+ }
+
+
+</SCRIPT>
+<BR><BR>
+<p>Generic Log Test</p>
+<BR><BR>
+<div id="Div1">Plow</div>
+<div id="Div2">PMedium</div>
+<div id="Div3">PHigh</div>
+<div id="Div4">PInvalid</div>
+
+<P><INPUT TYPE="button" VALUE="User log entry" ONCLICK="dolog();"></P>
+<br />
+<A href="./Generic ActiveX Object.html">Back</A>
+
+
+</body>
+</html>
+
+
+
+
+

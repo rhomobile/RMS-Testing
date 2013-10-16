@@ -1,0 +1,46 @@
+<html>
+<head>
+<META HTTP-Equiv="quitbutton" Content="show">
+<META HTTP-Equiv="quitbutton" Content="x=10">
+<META HTTP-Equiv="quitbutton" Content="y=10">
+
+
+
+<meta http-equiv="Imager" content="enabled">
+<meta http-equiv="Imager" content="x=30">
+<meta http-equiv="Imager" content="y=150">
+<meta http-equiv="Imager" content="w=160">
+<meta http-equiv="Imager" content="h=100">
+<meta http-equiv="Imager" content="aim=on">
+<meta http-equiv="Imager" content="lamp=on">
+<meta http-equiv="Imager" content="url=192.168.6.18">
+<meta http-equiv="Imager" content="FTP">
+<meta http-equiv="Imager" content="username=ftpadmin">
+<meta http-equiv="Imager" content="password=ftpadmin">
+
+
+
+
+ 
+
+
+
+</head>
+<p>Send the Imager to FTP</p>
+<BR><BR><BR><BR><BR><BR><BR><BR><BR>
+<P><INPUT TYPE="button" VALUE="Back" ONCLICK="location.href='./Image Capture.html'"></P>
+<P><INPUT TYPE="button" VALUE="Capture" ONCLICK="doTest();"></P>
+
+</body>
+</html>
+
+
+<SCRIPT>
+var Generic = new ActiveXObject("SymbolBrowser.Generic");
+	
+function doTest()
+{
+	Generic.InvokeMETAFunction('imager', 'capture');
+}
+</SCRIPT>
+

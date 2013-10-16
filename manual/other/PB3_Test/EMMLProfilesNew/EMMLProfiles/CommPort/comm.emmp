@@ -1,0 +1,9 @@
+.CommPort{
+    comm-port:com1;
+    comm-baudrate:9600;
+    comm-databits:8;
+    comm-stopbits:1;
+    comm-arity:no parity;
+    comm-handshake:none;
+    comm-Open;
+}

@@ -1,0 +1,7 @@
+ext/platform/android/generated/jni/EntityGen.cpp
+ext/platform/android/generated/jni/entitygen_ruby_wrap.cpp
+ext/platform/android/generated/jni/entitygen_js_wrap.cpp
+ext/platform/android/jni/EntityGen_impl.cpp
+ext/shared/generated/entitygen_api_init.cpp
+ext/shared/generated/entitygen_js_api.cpp
+ext/shared/generated/entitygen_ruby_api.c

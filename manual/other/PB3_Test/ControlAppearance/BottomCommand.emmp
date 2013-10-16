@@ -1,0 +1,68 @@
+.QuitButtonDefault{
+quitbutton-visibility:visible;
+}
+
+.BottomHide{
+    BottomCommandArea-visibility:hidden;
+ }
+
+.BottomPositiveDefault{
+    BottomCommandArea-visibility:visible;
+ }
+ 
+ .BottomVisibilityNULL{
+    BottomCommandArea-visibility:;
+ }
+ 
+  .BottomVisibilityINVALID{
+    BottomCommandArea-visibility:ASASASA;
+ }
+ 
+.BottomPositiveColor{
+    BottomCommandArea-height:200;
+    BottomCommandArea-color:#9370db;
+    BottomCommandArea-visibility:visible;
+ }
+ 
+ .BottomPositiveColorNULL{
+    BottomCommandArea-height:200;
+    BottomCommandArea-color:;
+    BottomCommandArea-visibility:visible;
+ }
+ 
+ .BottomPositiveImageHttp{
+    BottomCommandArea-height:200;
+    BottomCommandArea-image:url('http://tandv.wtgdev.net/Resource/BMW.bmp');
+    BottomCommandArea-visibility:visible;
+ }
+ 
+ .BottomPositiveImageFTP{
+    BottomCommandArea-height:200;
+    BottomCommandArea-image:url('ftp://tandv:H0neymoon@tandv.wtgdev.net/Resource/BMW.bmp');
+    BottomCommandArea-visibility:visible;
+ }
+ 
+  .BottomPositiveImageURLNULL{
+    BottomCommandArea-height:200;
+    BottomCommandArea-image:url('');
+    BottomCommandArea-visibility:visible;
+ }
+ 
+ .BottomPositiveImageNULL{
+    BottomCommandArea-height:200;
+    BottomCommandArea-image:;
+    BottomCommandArea-visibility:visible;
+ }
+ 
+ .BottomPositiveHeightNegative{
+    BottomCommandArea-height:-10;
+    BottomCommandArea-color:#9370db;
+    BottomCommandArea-visibility:visible;
+ }
+ 
+ .BottomPositiveHeightNULL{
+    BottomCommandArea-height:;
+    BottomCommandArea-color:#9370db;
+    BottomCommandArea-visibility:visible;
+ }
+ 
