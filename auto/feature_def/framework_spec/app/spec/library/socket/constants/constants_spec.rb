@@ -47,12 +47,16 @@ describe "Socket::Constants" do
 
   end
 
+  if ( System.get_property('platform') != 'ANDROID' )
+
   it "defines multicast options" do
     consts = ["IP_ADD_MEMBERSHIP", "IP_DEFAULT_MULTICAST_LOOP", "IP_DEFAULT_MULTICAST_TTL",
               "IP_MAX_MEMBERSHIPS", "IP_MULTICAST_LOOP", "IP_MULTICAST_TTL"]
     consts.each do |c|
       Socket::Constants.should have_constant(c)
     end
+  end
+
   end
 
   it "defines TCP options" do

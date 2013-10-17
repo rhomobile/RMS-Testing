@@ -20,6 +20,8 @@ describe "Socket#getaddrinfo" do
     BasicSocket.do_not_reverse_lookup = @do_not_reverse_lookup
   end
 
+  if ( System.get_property('platform') != 'ANDROID' )
+
   it "gets the address information" do
     BasicSocket.do_not_reverse_lookup = true
     expected = []
@@ -76,6 +78,8 @@ describe "Socket#getaddrinfo" do
      res.should == expected
    end
 
+
+
    it "accepts empty addresses for IPv4 non-passive sockets" do
     BasicSocket.do_not_reverse_lookup = true
      res = Socket::getaddrinfo(nil, "http",
@@ -87,7 +91,6 @@ describe "Socket#getaddrinfo" do
      expected = [["AF_INET", 80, "127.0.0.1", "127.0.0.1", Socket::AF_INET, Socket::SOCK_STREAM, Socket::IPPROTO_TCP]]
      res.should == expected
    end
-
 
    it "accepts empty addresses for IPv6 passive sockets" do
      BasicSocket.do_not_reverse_lookup = true
@@ -104,6 +107,7 @@ describe "Socket#getaddrinfo" do
      res.each { |a| expected.should include (a) }
    end
 
+
    it "accepts empty addresses for IPv6 non-passive sockets" do
      BasicSocket.do_not_reverse_lookup = true
      res = Socket::getaddrinfo(nil, "http",
@@ -118,5 +122,7 @@ describe "Socket#getaddrinfo" do
      ]
      res.each { |a| expected.should include (a) }
    end
+
+   end # end 'if' for android
 end
 

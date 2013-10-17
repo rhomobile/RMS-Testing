@@ -32,10 +32,12 @@ describe "Socket::BasicSocket#close_write" do
     @server.closed?.should be_true
   end
 
+if ( System.get_property('platform') != 'ANDROID' )
   it "raises IOError on closed socket" do
     @server.close
     lambda { @server.close_write }.should raise_error(IOError)
   end
+end
 
   it "returns nil" do
     @server.close_write.should be_nil

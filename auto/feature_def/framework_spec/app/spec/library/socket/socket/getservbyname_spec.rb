@@ -2,12 +2,14 @@ require File.expand_path('../../../../spec_helper', __FILE__)
 require File.expand_path('../../fixtures/classes', __FILE__)
 
 describe "Socket#getservbyname" do
-  it "returns the port for service 'http'" do
-    Socket.getservbyname('http').should == 8080
-  end
+  if ( System.get_property('platform') != 'ANDROID' )
+    it "returns the port for service 'http'" do
+      Socket.getservbyname('http').should == 80
+    end
 
-  it "returns the port for service 'http' with protocol 'tcp'" do
-    Socket.getservbyname('http', 'tcp').should == 8080
+    it "returns the port for service 'http' with protocol 'tcp'" do
+      Socket.getservbyname('http', 'tcp').should == 80
+    end
   end
 
   it "returns the port for service 'domain' with protocol 'udp'" do

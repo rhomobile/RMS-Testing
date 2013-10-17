@@ -1,3 +1,5 @@
+if ( System.get_property('platform') != 'ANDROID' )
+
 describe :socket_pack_sockaddr_in, :shared => true do
   it "packs and unpacks" do
     sockaddr_in = Socket.pack_sockaddr_in 0, nil
@@ -11,6 +13,8 @@ describe :socket_pack_sockaddr_in, :shared => true do
     sockaddr_in = Socket.pack_sockaddr_in 80, '127.0.0.1'
     Socket.unpack_sockaddr_in(sockaddr_in).should == [80, '127.0.0.1']
   end
+end
+
 end
 
 describe :socket_pack_sockaddr_un, :shared => true do
