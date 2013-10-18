@@ -339,4 +339,5 @@ extern "C" void Init_EntityGen_extension()
 {
     rho::CEntityGenFactory::setInstance( new rho::CEntityGenFactory() );
     rho::Init_EntityGen_API();
+    RHODESAPP().getExtManager().requireRubyFile("RhoEntityGenEntities");
 }
