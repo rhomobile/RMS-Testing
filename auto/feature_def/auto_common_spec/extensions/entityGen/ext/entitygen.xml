@@ -73,7 +73,7 @@
                     <FIELD name="brand" type="STRING" constructorParam = "mandatory"/>
                     <FIELD name="platform" type="STRING" constructorParam = "optional"/>
                     <FIELD name="model" type="STRING" constructorParam = "mandatory"/>
-                    <FIELD name="generatrion" type="INTEGER"/>
+                    <FIELD name="generation" type="INTEGER"/>
                     <FIELD name="available" type="BOOLEAN"/>
                     <FIELD name="price" type="FLOAT"/>
                 </FIELDS>
