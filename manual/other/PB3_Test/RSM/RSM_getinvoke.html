@@ -1,0 +1,125 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<HEAD>
+
+<META HTTP-Equiv="Scanner" Content="Enabled:SCN3">
+
+</HEAD>
+
+
+<BODY>
+<br>
+<br>
+<br>
+<input type="button" onclick="onTest();" value="GetValues" /><br /><br>
+Model Number			 : <span id=Span1></span><br>
+Serial Number			 : <span id=Span2></span><br>
+Date Of Manufacture		 : <span id=Span3></span><br>
+Date Of Service			 : <span id=Span4></span><br>
+Bluetooth Address		 : <span id=Span5></span><br>
+Firmware Version		 : <span id=Span6></span><br>
+Device Class			 : <span id=Span7></span><br>
+Battery Status			 : <span id=Span8></span><br>
+Battery Capacity		 : <span id=Span9></span><br>
+Battery ID			 : <span id=Span10></span><br>
+ScanLine Width			 : <span id=Span11></span><br>
+Decode Feedback			 : <span id=Span12></span><br>
+Bluetooth Authentication	 : <span id=Span13></span><br>
+Bluetooth Encryption		 : <span id=Span14></span><br>
+Bluetooth PINcode		 : <span id=Span15></span><br>
+Bluetooth ReconnectAttempts	 : <span id=Span16></span><br>
+
+Bluetooth HIDAutoReconnect	 : <span id=Span17></span><br>
+Bluetooth FriendlyName		 : <span id=Span18></span><br>
+Bluetooth PINCodeType		 : <span id=Span19></span><br>
+Bluetooth InquiryMode		 : <span id=Span20></span><br>
+Ignore Code128USPS		 : <span id=Span21></span><br>
+Mems				 : <span id=Span22></span><br>
+Proximity Enable		 : <span id=Span23></span><br>
+Proximity Distance		 : <span id=Span24></span><br>
+Paging Enable			 : <span id=Span25></span><br>
+Paging BeepSequence		 : <span id=Span26></span><br>
+LowBattery Indication		 : <span id=Span27></span><br>
+Scan TriggerWakeup		 : <span id=Span28></span><br>
+Bluetooth AutoReconnect		 : <span id=Span29></span><br>
+LowBattery IndicationCycle	 : <span id=Span30></span><br>
+Proximity Continuous		 : <span id=Span31></span><br>
+Good ScansDelay			 : <span id=Span32></span><br>
+Bluetooth BeepOnReconnectAttempt : <span id=Span33></span><br>
+<br>
+<br>
+<br>
+<P><INPUT TYPE="button" VALUE="Back" ONCLICK="Generic.InvokeMETAFunction('scanner', 'disabled');location.href='./RSM.html'"></P>
+
+</BODY>
+
+</html>
+
+<SCRIPT TYPE="TEXT/JAVASCRIPT">
+    var Generic = new ActiveXObject("PocketBrowser.Generic");
+
+    function RSMNav(attributeArray)
+     {
+        //  Receive array of attribute values in the order they were registered and populate SPAN tags.
+       
+        var spanID;
+        var spanElement;
+        for (i = 0; i < attributeArray.length; i++) 
+        {
+            spanID = "Span" + (i + 1);
+            spanElement = document.getElementById(spanID);
+            spanElement.innerText = attributeArray[i];
+        }
+    }
+
+    function onTest() {
+
+        //Invoke some attributes to be returned
+        
+  	Generic.InvokeMETAFunction('RSM', 'ModelNumber');
+	Generic.InvokeMETAFunction('RSM', 'SerialNumber');
+	Generic.InvokeMETAFunction('RSM', 'DateOfManufacture');
+	Generic.InvokeMETAFunction('RSM', 'DateOfService');
+	Generic.InvokeMETAFunction('RSM', 'BluetoothAddress');
+	Generic.InvokeMETAFunction('RSM', 'FirmwareVersion');
+	Generic.InvokeMETAFunction('RSM', 'DeviceClass');
+	Generic.InvokeMETAFunction('RSM', 'BatteryStatus');
+	Generic.InvokeMETAFunction('RSM', 'BatteryCapacity');
+	Generic.InvokeMETAFunction('RSM', 'BatteryID');
+
+        	Generic.InvokeMETAFunction('RSM', 'ScanLineWidth');
+        	Generic.InvokeMETAFunction('RSM', 'DecodeFeedback');
+        	Generic.InvokeMETAFunction('RSM', 'BluetoothAuthentication');
+        	Generic.InvokeMETAFunction('RSM', 'BluetoothEncryption');
+        	Generic.InvokeMETAFunction('RSM', 'BluetoothPINcode');
+        	//Generic.InvokeMETAFunction('RSM', 'BluetoothReconnectAttempts');
+        	Generic.InvokeMETAFunction('RSM', 'BluetoothBeepOnReconnectAttempt');
+        	Generic.InvokeMETAFunction('RSM', 'BluetoothHIDAutoReconnect');
+        	Generic.InvokeMETAFunction('RSM', 'BluetoothFriendlyName');
+        	Generic.InvokeMETAFunction('RSM', 'BluetoothPINCodeType');
+        	Generic.InvokeMETAFunction('RSM', 'BluetoothInquiryMode');
+        	Generic.InvokeMETAFunction('RSM', 'IgnoreCode128USPS');
+        	Generic.InvokeMETAFunction('RSM', 'Mems');
+        	Generic.InvokeMETAFunction('RSM', 'ProximityEnable');
+        	Generic.InvokeMETAFunction('RSM', 'ProximityDistance');
+        	Generic.InvokeMETAFunction('RSM', 'PagingEnable');
+        	Generic.InvokeMETAFunction('RSM', 'PagingBeepSequence');
+        	Generic.InvokeMETAFunction('RSM', 'LowBatteryIndication');
+        	Generic.InvokeMETAFunction('RSM', 'ScanTriggerWakeup');
+        	Generic.InvokeMETAFunction('RSM', 'BluetoothAutoReconnect');
+        	Generic.InvokeMETAFunction('RSM', 'LowBatteryIndicationCycle');
+        	Generic.InvokeMETAFunction('RSM', 'ProximityContinuous');
+        	Generic.InvokeMETAFunction('RSM', 'GoodScansDelay');
+
+Generic.InvokeMETAFunction('RSM', 'BluetoothReconnectAttempts');
+
+ Generic.InvokeMETAFunction("RSM", "Rsmgetevent:url('JavaScript:RSMNav(%s);')");
+//Generic.InvokeMETAFunction("RSM", "Rsmgetevent:url('http://157.235.207.158/pb3.x/index.html')");
+//Generic.InvokeMETAFunction("RSM", "Rsmgetevent:");
+    }
+</SCRIPT>
+
+
+
+
+

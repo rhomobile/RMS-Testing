@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Rho.Application</title>
+    <meta name="viewport" content="initial-scale=1.0, width=device-width"/>
+    <script src="/public/jquery/jquery-1.6.4.min.js" type="text/javascript"></script>
+    <script src="/public/jquery/jquery.json-2.3.min.js" type="text/javascript"></script>
+    <script type="text/javascript" charset="utf-8" src="../../public/api/rhoapi-modules.js"></script>
+    <script type="text/javascript" src="./menubar.js"></script>
+    <script type="text/javascript" src="../../public/js/helpers.js"></script>
+	
+	
+</head>
+<body>
+
+<h1>Rho.NativeMenuBar</h1>
+
+<fieldset>
+	<legend>Rho.NativeMenubar.MAinMenu</legend>
+	<ul> Set the Native Menu bar and check whether all the actions are working, by clicking on the Label 
+	    <li><a href="javascript:void(0)" onclick ="nativeDefault();">VT283-0201-get default menu values </a></li>
+	   <li><a href="javascript:void(0)" onclick ="menuTest();">VT283-0202 Test Main menu with all actions</a></li>
+	   <li><a href="javascript:void(0)" onclick ="menuNullNames();">Test Main menu with Null Labels </a></li>
+	   <li><a href="javascript:void(0)" onclick ="menuNullActions();">Test Main menu with Null Actions for few labels</a></li>
+	   <li><a href="javascript:void(0)" onclick ="menuDisabled();">VT283-0206 Test Main menu with disabled set to true for Log and Refresh</a></li>
+	   <li><a href="javascript:void(0)" onclick ="menuJavascriptCall();">VT283-0206 Test Man menu with javascript method for Exit button "</a></li>
+	   	</ul>
+</fieldset>	
+<fieldset>
+	<legend>Main Button and MAinMenu </legend>
+	<ul> Check that only MAin button is created when it has action and mainMenu is created when its not assigned any action 
+	    <li><a href="javascript:void(0)" onclick ="menuAction();">VT283-0211 Main button with action </a></li>
+	   <li><a href="javascript:void(0)" onclick ="menuNoAction();">VT283-0212 MAin button Without ACtion </a></li>
+	  </ul>
+</fieldset>	
+<fieldset>
+	<legend>Extra Button and extraMenu </legend>
+	<ul> Check that only extrabutton is created when it has action and extraMenu is created when its not assigned any action ,applicable on WM only , click on left menu button after calling the method 
+	   <li><a href="javascript:void(0)" onclick ="extramenuTest();">VT283-0207 Test extra menu with all actions</a></li>
+	   <li><a href="javascript:void(0)" onclick ="extramenuDisabled();">VT283-0208 Test extra  menu with disabled set to true for Log and Refresh</a></li>
+	   <li><a href="javascript:void(0)" onclick ="extraMenuNoAction();">VT283-0210 extra  button Without ACtion</a></li>
+	   <li><a href="javascript:void(0)" onclick ="extraMenuAction();">VT283-0209extra button with action </a></li>
+	  
+	</ul>
+</fieldset>	
+
+<fieldset>
+	<legend>Extra Button and Main button </legend>
+	<ul> Check that only extrabutton is created when it has action and extraMenu is created when its not assigned any action ,applicable on WM only , click on left menu button after calling the method 
+	   <li><a href="javascript:void(0)" onclick ="mainButton();">VT283-0215 Main button alone with action</a></li>
+	   <li><a href="javascript:void(0)" onclick ="mainButtonDisabled();">VT283-0216 Main button with disabled set to true</a></li>
+	   <li><a href="javascript:void(0)" onclick ="extraButton();">VT283-0213 Extra button alone with action</a></li>
+	   <li><a href="javascript:void(0)" onclick ="extraButtonDisabled();">VT283-0214 Extra button with disabled set to true </a></li>
+	  
+	</ul>
+</fieldset>	
+</body>
+</html>

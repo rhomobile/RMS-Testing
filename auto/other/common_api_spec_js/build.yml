@@ -1,0 +1,35 @@
+sdk: ../../../../rhodes
+paths:
+  extensions:
+  - ../common_api_spec/extensions/
+  - ../../feature_def/auto_common_spec/extensions/
+
+sdkversion: 3.3.2
+name: auto_common_spec_js
+#app_type: rhoelements
+version: 1.0
+vendor: rhomobile
+build: debug
+bbver: 4.6
+applog: rholog.txt
+iphone:
+  configuration: Debug
+  sdk: iphonesimulator7.0
+  provisionprofile:
+  codesignidentity:
+  entitlements:
+  BundleIdentifier: com.rhomobile.commonapispecjs
+  BundleURLScheme: commonapispecjs
+  extensions: ["entityGen"]
+wp:
+  productid: 'b6479381-42a8-0130-78de-3caec51bd50e'
+symbian:
+  uid: '0xe1a1ef92'
+android:
+  version: 4.2.2
+  capabilities:
+  - native_browser
+wm:
+  sdk: "Windows Mobile 6.5.3 Professional DTK (ARMV4I)"
+
+extensions: ["json", "genPropBag", "genCallbackTests", "logCapture", "megamodule", "simpleonlystaticmodule"]

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>RequireJS test</title>
+    <script type="text/javascript" src="../../public/api/rhoapi-modules.js"></script>
+</head>
+<body>
+<div id="href"></div>
+<div id="variableState"></div>
+<script type="text/javascript">
+    isScriptLoaded = false;
+    document.getElementById("href").innerHTML = 'href = ' + window.location.href;
+    document.getElementById("variableState").innerHTML = 'isScriptLoaded = ' + isScriptLoaded;
+    function insertScript() {
+        var prefix;
+        //prefix = '../../public/';
+        //prefix = '/public/';
+        //prefix = Rho.Application.appsBundleFolder + '/public/';
+
+        var node = document.createElement('script')
+        node.type = 'text/javascript';
+        node.charset = 'utf-8';
+        node.src =  '../../public/folderB/require.js';
+        node.setAttribute( "data-main", '../../public/folderC/main.js' );
+        document.getElementsByTagName('head')[0].appendChild(node);
+        setTimeout(displayVariableState(), 100);
+    }
+
+    function displayVariableState() {
+        document.getElementById("variableState").innerHTML = 'isScriptLoaded = ' + isScriptLoaded;
+    }
+
+</script>
+
+
+<button onClick='insertScript()'>Insert script element</button>
+</body>
+</html>

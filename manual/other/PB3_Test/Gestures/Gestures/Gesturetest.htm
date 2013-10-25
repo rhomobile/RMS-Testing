@@ -1,0 +1,26 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><TITLE>Gesture test</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=windows-1252">
+<META http-equiv=quitbutton content=visibility:visible>
+<META http-equiv=backbutton content=visibility:visible>
+<META http-equiv=gesture content=type:circle>
+<META http-equiv=gesture content=start:0>
+<META http-equiv=gesture content=end:720>
+<META http-equiv=gesture content=sensitivity:60>
+<META http-equiv=gesture content=diagnostics:true>
+<META http-equiv=gesture-detected content="url('Javascript:alert('%s');')">
+<META http-equiv=gesture content=create>
+<SCRIPT type=text/javascript>
+  function onGesture(a,b)
+  {
+    result.innerHTML = a.toString() + ', ' + b.toString();
+    setTimeout ("result.innerHTML = '';", 2000);
+  }
+  </SCRIPT>
+
+<META content="MSHTML 6.00.2900.5921" name=GENERATOR></HEAD>
+<BODY>
+<H2>Gesture test</H2>
+<DIV id=result>(gesture)</DIV><A 
+href="file:///D:/Profiles/PDTH87/My%20Documents/My%20Received%20Files/page1.htm">Page 
+1</A> </BODY></HTML>

@@ -1,0 +1,33 @@
+.SigCap_EmptyParameters{
+    SignatureCapture-border:;
+    SignatureCapture-width:;
+    SignatureCapture-height:;
+    SignatureCapture-left:;
+    SignatureCapture-top:;
+    SignatureCapture-penWidth:;
+    SignatureCapture-penColor:url('');
+    SignatureCapture-bgColor:;
+    SignatureCapture-destination:;
+    SignatureCapture-username:;
+    SignatureCapture-password:;
+    SignatureCapture-name:;
+    SignatureCapture-visibility:;
+ }
+
+.Signal{
+    signal-Left:;
+    signal-Iconposition:;
+    signal-GraphPosition:;
+    signal-Top:;
+    signal-color:;
+    signal-visibility:visible;
+    signal-signalevent:url('');
+   }
+   
+   .BatteryHide{
+    battery-visibility:hidden;
+ }
+
+.SignalHide{
+    signal-visibility:hidden;
+   }

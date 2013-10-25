@@ -1,0 +1,26 @@
+---
+sdkversion: 4.0.0
+name: ComplianceTest_JS
+version: '1.0'
+vendor: rhomobile
+build: debug
+bbver: '6.0'
+applog: rholog.txt
+iphone:
+  configuration: Release
+  sdk: iphonesimulator6.0
+  provisionprofile: ''
+  codesignidentity: ''
+  entitlements: ''
+  BundleIdentifier: com.rhomobile.compliancetestjs
+  BundleURLScheme: compliancetestjs
+wp:
+  productid: 88e69430-071c-0131-3d46-606720a825c8
+symbian:
+  uid: '0xede7d59e'
+android:
+  version: 2.3.3
+extensions:
+- rhoconnect-client
+app_type: rhoelements
+capabilities: []

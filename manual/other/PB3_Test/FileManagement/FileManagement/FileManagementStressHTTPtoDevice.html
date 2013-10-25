@@ -1,0 +1,78 @@
+﻿<html>
+<head>
+    <title>PB 3.0 File Management Test static EMML 1.1</title>
+   
+<META HTTP-Equiv="FileTransfer" content="TransferEvent:url('Javascript:MyTransferEvent('%s');');Source:url('http://192.168.6.18/pb3.x/FileManagement/ab.txt');Destination:url('file://\Temp\myfolder\4m.txt');CreateFolders:True;OverWrite:True">
+<!--<META HTTP-Equiv="FileTransfer" content="TransferEvent:url('Javascript:MyTransferEvent2('%s');');Source:url('file://\Temp\myfolder\75.txt');Destination:url('ftp://157.235.207.158/75a8.txt');Username:ftpadmin;Password:ftpadmin;CreateFolders:True;OverWrite:True">-->
+
+<script language=javascript>
+
+
+var Generic = new ActiveXObject("PocketBrowser.Generic");
+var StressCount=0;
+var myMsg="";
+
+function MyTransferEvent(Msg)
+{
+	myMsg="";
+	FileDiv.innerHTML="File Transfer Count:- "+StressCount;
+	myMsg = Msg;
+	var m = document.frmFileManagement.mytxt.value;
+	document.frmFileManagement.mytxt.value = m + myMsg + "\n";
+	StressCount++;
+
+}
+
+//function Transfer()
+//{
+////if(StressCount == 0)
+////{
+//    //Generic.InvokeMETAFunction("FileTransfer","Source:url('file://\Temp\myfolder\75.txt');Destination:url('ftp://157.235.207.158/89a8.txt');");
+//    var ret=Generic.InvokeMETAFunction("FileTransfer","Transfer");
+////    setTimeout("Transfer()", 5000);
+////}
+////else
+////{
+////    alert(StressCount);
+//    if(StressCount<10)
+//    {
+//        //alert(myMsg);
+//        var  x = "ftp://157.235.207.158/95a" + StressCount + ".txt";
+//        if(myMsg == "OK: File Received")
+//        {
+//            //alert("if");
+//            var res1 = Generic.InvokeMETAFunction("FileTransfer","Source:url('file://\Temp\myfolder\75.txt');Destination:url('" + x + "');");
+//        }
+//        else
+//        {
+//            //alert("else");
+//            Generic.InvokeMETAFunction("FileTransfer","Source:url('ftp://157.235.207.158/75a8.txt');Destination:url('file://\Temp\myfolder\75.txt');");    
+//        }
+//        setTimeout("Transfer()", 5000);
+//    }
+////}
+//}
+
+
+function Transfer()
+{
+var ret=Generic.InvokeMETAFunction("FileTransfer","Transfer");
+	if(StressCount < 24000)
+	{
+		setTimeout("Transfer()", 5000);
+	}
+}
+
+</script>
+</head>
+
+<body>
+
+<form id="frmFileManagement" action="" onload="SetdeafultSettings();">
+<div id="FileDiv">TransferEvent:-</div>
+<textarea name="mytxt" id="mytxt" rows=15></textarea>
+<input type="button" onclick="Transfer();" value="TransferHTTPtoDevice"/>
+
+</form>
+</body>
+</html>

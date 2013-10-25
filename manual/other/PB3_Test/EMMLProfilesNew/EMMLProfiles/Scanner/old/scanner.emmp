@@ -1,0 +1,49 @@
+.inventoryBarcodes {
+     scanner:disabled;
+     scanner-all_decoders:disabled;
+     scanner-code128redundancy:true;
+     scanner-code128minlength:10;
+     scanner-code128maxlength:16;
+     scanner-code128:enabled;
+     scanner-ean13:enabled;
+     scanner-i2of5:enabled;  
+     scanner:enabled;
+}
+
+.AllBarcodesEnabled {
+     scanner:disabled;
+     scanner-all_decoders:enabled;
+     scanner:enabled;
+}
+
+.AllBarcodesDisabled {
+     scanner-all_decoders:disabled;
+}
+
+.OnlyCode128Enabled{
+     scanner:disabled;
+     scanner-all_decoders:disabled;
+     scanner-code128:enabled;
+}
+
+.OnlyUPCE0Enabled{
+     scanner:disabled;
+     scanner-all_decoders:disabled;
+     scanner-upce0:enabled;
+     scanner-enabled:SCN1;
+}
+
+.OnlyUPCE1Enabled{
+     scanner:disabled;
+     scanner-all_decoders:disabled;
+     scanner-upce1:enabled;
+     scanner:enabled;
+}
+
+.OnlyUPCAEnabled{
+     scanner:disabled;
+     scanner-all_decoders:disabled;
+     scanner-upcea:enabled;
+     scanner:enabled;
+}
+

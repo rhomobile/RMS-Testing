@@ -9,15 +9,16 @@ def generate_js_barcode_spec
 	testCases['BarcodeTestCase'].each do |category|
 
 		$getType = category['getType']
+		write_jasmine_describe
 		case category['category'].to_s
 		when "set", "Set", "SET"
-			write_jasmine_describe
 			generate_set_test(category['Properties'])
-			end_jasmine_describe
+		when "enumrate","ENUMERATE","Enumrate"
+			generate_enum_tests(category['id'],category['callbacktype'])
 		else
 			puts "Didn't get Any Matching Category"
 		end
-
+		end_jasmine_describe
 	end
 end
 
@@ -130,5 +131,15 @@ def add_disable_test
 	f.puts '		'
 	f.puts '		});'
 	f.puts '	});'
+	end
+end
+
+def generate_enum_tests(id,callbackType)
+	File.open($path_to_spec, 'a') do |f|
+		f.puts "describe('#{id} - Enumerate Scanner ', function() {"
+	end
+	add_enum_tests("Rho.Barcode",callbackType);
+	File.open($path_to_spec, 'a') do |f|
+		f.puts '});'
 	end
 end

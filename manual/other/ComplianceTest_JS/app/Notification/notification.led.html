@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <script type="text/javascript" src="../../public/jquery/jquery-1.6.4.min.js"></script>
+    <script type="text/javascript" src="../../public/jquery/jquery.json-2.3.min.js"></script>
+    <script type="text/javascript" src="../../public/api/rhoapi-modules.js"></script>
+
+    <script type="text/javascript">
+        function lightOn(anInteger) {
+            Rho.Notification.Led.enumerate()[anInteger].illuminate();
+        }
+
+        function lightOff(anInteger) {
+            Rho.Notification.Led.enumerate()[anInteger].extinguish();
+        }
+
+        $("document").ready(function () {
+            var leds = Rho.Notification.Led.enumerate();
+            if (leds.length == 0) {
+                $("#leds").append("leds not found");
+            }
+
+            for (var i = 0; i < leds.length; i++) {
+                var buttonOn = "<button onClick='lightOn(" + i + ")'>light on</button>";
+                var buttonOff = "<button onClick='lightOff(" + i + ")'>light off</button>";
+                $("#leds").append("<div><h4>" + leds[i].name + "</h4>" + buttonOn + buttonOff + "</div>");
+            }
+        })
+    </script>
+</head>
+<body>
+<div id="leds"></div>
+
+</body>
+</html>
