@@ -118,49 +118,49 @@ end
 def add_enum_tests(objectName,callbackType)
 		asyncflag = false;
 		File.open($path_to_spec, 'a') do |f|
-		f.puts '	var enumObjCount = false;'
+		f.puts 'var enumObjCount = false;'
 
-		f.puts '	var enumCallback = function (enumobj){'
-		f.puts '	enumobj.length>0 ? enumObjCount=true : enumObjCount=false'
-		f.puts '	};'
+		f.puts 'var enumCallback = function (enumobj){'
+		f.puts 'enumobj.length>0 ? enumObjCount=true : enumObjCount=false'
+		f.puts '};'
 
-		f.puts '	beforeEach(function() {'
-		f.puts '		enumObjCount = false;'
-		f.puts '	});'
+		f.puts 'beforeEach(function() {'
+		f.puts 'enumObjCount = false;'
+		f.puts '});'
 		callbackType.each do |callback|
 			case callback
 			when "synchronous","Synchronous","Sync","SYNC","SYNCHRONOUS"
-				f.puts '	it("Enumerate without callback (Synchronous Access)", function() {'
-				f.puts "			var obj = #{objectName}.enumerate();"
-				f.puts '			callBackfired = enumCallback(obj);'
-				f.puts '			expect(enumObjCount).toEqual(true);'
-				f.puts '	});'
+				f.puts 'it("Enumerate without callback (Synchronous Access)", function() {'
+				f.puts "var obj = #{objectName}.enumerate();"
+				f.puts 'callBackfired = enumCallback(obj);'
+				f.puts 'expect(enumObjCount).toEqual(true);'
+				f.puts '});'
 			when "async","Async", "Asynchronous","ASYNCHRONOUS","function","asynchronous"
-				f.puts '	it("Enumerate callback as function", function() {'
+				f.puts 'it("Enumerate callback as function", function() {'
 
-				f.puts '	runs(function() {'
-				f.puts "		#{objectName}.enumerate(enumCallback);"
-				f.puts '	});'
+				f.puts 'runs(function() {'
+				f.puts "#{objectName}.enumerate(enumCallback);"
+				f.puts '});'
 				asyncflag = true;
 			when "anonymous"
-				f.puts '	it("Enumerate with anonymous function as callback", function() {'
+				f.puts 'it("Enumerate with anonymous function as callback", function() {'
 
-				f.puts '	runs(function() {'
-				f.puts "		#{objectName}.enumerate(function(obj){"
-				f.puts '		enumCallback(obj);'
-				f.puts '		});'
-				f.puts '	});'
+				f.puts 'runs(function() {'
+				f.puts "#{objectName}.enumerate(function(obj){"
+				f.puts 'enumCallback(obj);'
+				f.puts '});'
+				f.puts '});'
 				asyncflag = true;
 			else
 			end
 			if(asyncflag)
-				f.puts '	waitsFor(function(){'
-				f.puts '		return enumObjCount;'
-				f.puts '	});'
-				f.puts '	runs(function(){'
-				f.puts '		expect(enumObjCount).toEqual(true);'
-				f.puts '	});'
-				f.puts '	});'
+				f.puts 'waitsFor(function(){'
+				f.puts 'return enumObjCount;'
+				f.puts '});'
+				f.puts 'runs(function(){'
+				f.puts 'expect(enumObjCount).toEqual(true);'
+				f.puts '});'
+				f.puts '});'
 			end
 		end
 	end

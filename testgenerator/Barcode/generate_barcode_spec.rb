@@ -1,7 +1,8 @@
 require 'fileutils'
 require 'yaml'
 
-$path_to_spec = File.join('Barcode', 'barcode_js_spec.js')
+$file_name = 'barcode_js_spec.js';
+$path_to_spec = File.join('Barcode', $file_name)
 $getType = ''
 
 def generate_js_barcode_spec
@@ -40,11 +41,11 @@ def generate_set_test(properties)
 		f.puts 'describe("Barcode APIs Set Test", function() {'
 		f.puts 'var enumData = Rho.Barcode.enumerate();'
 		f.puts 'for (var j = 0;j<enumData.length;j++){'
-		f.puts '  var arrSCN = getApplicableProperties(enumData[j]);'
-		f.puts '  (function(enumObject){'
-		f.puts "	var scnname = enumObject.getProperty('friendlyName');"
-		f.puts "	var scnid = enumObject.getProperty('ID');"
-		f.puts '    var scntype = enumObject.scannerType;'
+		f.puts 'var arrSCN = getApplicableProperties(enumData[j]);'
+		f.puts '(function(enumObject){'
+		f.puts "var scnname = enumObject.getProperty('friendlyName');"
+		f.puts "var scnid = enumObject.getProperty('ID');"
+		f.puts 'var scntype = enumObject.scannerType;'
 	end
 	add_enable_test
 
@@ -67,7 +68,7 @@ def generate_set_test(properties)
 
 	add_disable_test
     File.open($path_to_spec, 'a') do |f|
-		f.puts '	})(enumData[j]);' #Ending anonymous Method call
+		f.puts '})(enumData[j]);' #Ending anonymous Method call
 		f.puts '}' #Ending the For Loop
 		f.puts '});' #Ending set describe
 
@@ -76,61 +77,59 @@ end
 
 def add_enable_test
 	File.open($path_to_spec, 'a') do |f|
-	f.puts '	describe("Enable Scanner "+ scnid +": "+ scnname + scntype, function() {'
+	f.puts 'describe("Enable Scanner "+ scnid +": "+ scnname + scntype, function() {'
 
-	f.puts '	beforeEach(function() {'
-	f.puts '	enableflag = false;'
-	f.puts '	});'
+	f.puts 'beforeEach(function() {'
+	f.puts 'enableflag = false;'
+	f.puts '});'
 			
-	f.puts '	it("Enable "+ scnid + scnname, function() {'
-	f.puts '			runs(function() {'
-	f.puts '				setTimeout(function(){'
-	f.puts '					enableflag = true;'
-	f.puts '				}, 5000)'
-	f.puts '			});'
+	f.puts 'it("Enable "+ scnid + scnname, function() {'
+	f.puts 'runs(function() {'
+	f.puts 'setTimeout(function(){'
+	f.puts 'enableflag = true;'
+	f.puts '}, 5000)'
+	f.puts '});'
 				
-	f.puts '			waitsFor(function() {'
-	f.puts '				return enableflag;'
-	f.puts '			}, "Waiting for enable", 11000);'
-	f.puts '			runs(function() {'
-	f.puts '				enableflag = false;'
+	f.puts 'waitsFor(function() {'
+	f.puts 'return enableflag;'
+	f.puts '}, "Waiting for enable", 11000);'
+	f.puts 'runs(function() {'
+	f.puts 'enableflag = false;'
 	f.puts ''
-	f.puts '				enumObject.enable();'
-	f.puts '				setTimeout(function() {'
-	f.puts '				enableflag = true;'
-	f.puts '				}, 10000);'
-	f.puts '			});'
+	f.puts 'enumObject.enable();'
+	f.puts 'setTimeout(function() {'
+	f.puts 'enableflag = true;'
+	f.puts '}, 10000);'
+	f.puts '});'
 				
-	f.puts '			waitsFor(function() {'
-	f.puts '				return enableflag;'
-	f.puts '			}, "Waiting for enable", 11000);'
-	f.puts '		'
-	f.puts '		});'
-	f.puts '	});'
+	f.puts 'waitsFor(function() {'
+	f.puts 'return enableflag;'
+	f.puts '}, "Waiting for enable", 11000);'
+	f.puts '});'
+	f.puts '});'
 	end
 end
 def add_disable_test
 	File.open($path_to_spec, 'a') do |f|
-	f.puts '	describe("Disable Scanner "+ scnid +": "+ scnname + scntype, function() {'
+	f.puts 'describe("Disable Scanner "+ scnid +": "+ scnname + scntype, function() {'
 	
-	f.puts '	beforeEach(function() {'
-	f.puts '	disableflag = false;'
-	f.puts '	});'
+	f.puts 'beforeEach(function() {'
+	f.puts 'disableflag = false;'
+	f.puts '});'
 			
-	f.puts '	it("Disable "+ scnid + scnname, function() {'
-	f.puts '			runs(function() {'
-	f.puts '				enumObject.disable();'
-	f.puts '				setTimeout(function() {'
-	f.puts '				disableflag = true;'
-	f.puts '				}, 10000);'
-	f.puts '			});'
+	f.puts 'it("Disable "+ scnid + scnname, function() {'
+	f.puts 'runs(function() {'
+	f.puts 'enumObject.disable();'
+	f.puts 'setTimeout(function() {'
+	f.puts 'disableflag = true;'
+	f.puts '}, 10000);'
+	f.puts '});'
 				
-	f.puts '			waitsFor(function() {'
-	f.puts '				return disableflag;'
-	f.puts '			}, "Waiting for enable", 11000);'
-	f.puts '		'
-	f.puts '		});'
-	f.puts '	});'
+	f.puts 'waitsFor(function() {'
+	f.puts 'return disableflag;'
+	f.puts '}, "Waiting for enable", 11000);'
+	f.puts '});'
+	f.puts '});'
 	end
 end
 
