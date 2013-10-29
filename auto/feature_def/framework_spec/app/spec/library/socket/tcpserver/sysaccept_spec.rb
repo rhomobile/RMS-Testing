@@ -1,2 +1,2 @@
-require File.expand_path('../../../../spec_helper', __FILE__)
+require 'spec/spec_helper'
 require File.expand_path('../../fixtures/classes', __FILE__)

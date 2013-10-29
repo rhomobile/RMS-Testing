@@ -12,7 +12,12 @@ describe :socket_recv_nonblock, :shared => true do
 
     it "raises EAGAIN if there's no data available" do
       @s1.bind(Socket.pack_sockaddr_in(SocketSpecs.port, "127.0.0.1"))
-      lambda { @s1.recv_nonblock(5)}.should raise_error(Errno::EAGAIN)
+      if System::get_property('platform') != 'WINDOWS' && 
+         System.get_property('platform') != 'WINDOWS_DESKTOP'
+        lambda { @s1.recv_nonblock(5)}.should raise_error(Errno::EAGAIN)
+      else
+        lambda { @s1.recv_nonblock(5)}.should raise_error(Errno::EWOULDBLOCK)
+      end
     end
 
     it "receives data after it's ready" do
@@ -27,7 +32,12 @@ describe :socket_recv_nonblock, :shared => true do
       @s2.send("a", 0, @s1.getsockname)
       IO.select([@s1], nil, nil, 2)
       @s1.recv_nonblock(1).should == "a"
-      lambda { @s1.recv_nonblock(5)}.should raise_error(Errno::EAGAIN)
+      if System::get_property('platform') != 'WINDOWS' && 
+         System.get_property('platform') != 'WINDOWS_DESKTOP'      
+         lambda { @s1.recv_nonblock(5)}.should raise_error(Errno::EAGAIN)
+      else
+         lambda { @s1.recv_nonblock(5)}.should raise_error(Errno::EWOULDBLOCK)
+      end
     end
   end
 end

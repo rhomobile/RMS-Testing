@@ -1,5 +1,5 @@
-require File.expand_path('../../../../spec_helper', __FILE__)
-require File.expand_path('../../fixtures/classes', __FILE__)
+require 'spec/spec_helper'
+require 'spec/library/socket/fixtures/classes'
 
 require 'socket'
 
@@ -20,7 +20,9 @@ describe "Socket#getaddrinfo" do
     BasicSocket.do_not_reverse_lookup = @do_not_reverse_lookup
   end
 
-  if ( System.get_property('platform') != 'ANDROID' )
+  if System.get_property('platform') != 'ANDROID' &&
+     System::get_property('platform') != 'WINDOWS' && 
+     System.get_property('platform') != 'WINDOWS_DESKTOP' 
 
   it "gets the address information" do
     BasicSocket.do_not_reverse_lookup = true
@@ -74,7 +76,7 @@ describe "Socket#getaddrinfo" do
                                Socket::IPPROTO_TCP,
                                Socket::AI_PASSIVE)
 
-     expected = [["AF_INET", 80, "0.0.0.0", "0.0.0.0", Socket::AF_INET, Socket::SOCK_STREAM, Socket::IPPROTO_TCP]]
+     expected = [["AF_INET", 80, Socket.gethostname, "0.0.0.0", Socket::AF_INET, Socket::SOCK_STREAM, Socket::IPPROTO_TCP]]
      res.should == expected
    end
 

@@ -1,4 +1,4 @@
-require File.expand_path('../shared/new', __FILE__)
+require 'spec/library/socket/tcpsocket/shared/new'
 
 describe "TCPSocket.open" do
   it_behaves_like :tcpsocket_new, :open

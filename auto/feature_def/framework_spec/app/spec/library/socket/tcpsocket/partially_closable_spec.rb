@@ -1,6 +1,6 @@
-require File.expand_path('../../../../spec_helper', __FILE__)
-require File.expand_path('../../fixtures/classes', __FILE__)
-require File.expand_path('../../shared/partially_closable_sockets', __FILE__)
+require 'spec/spec_helper'
+require 'spec/library/socket/fixtures/classes'
+require 'spec/library/socket/shared/partially_closable_sockets'
 
 describe "TCPSocket partial closability" do
 
