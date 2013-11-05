@@ -1,5 +1,5 @@
-require File.expand_path('../../../../spec_helper', __FILE__)
-require File.expand_path('../../fixtures/classes', __FILE__)
+require 'spec/spec_helper'
+require 'spec/library/socket/fixtures/classes'
 
 describe "BasicSocket#send" do
   before :each do
@@ -37,6 +37,9 @@ describe "BasicSocket#send" do
      data.should == 'hello'
    end
 
+if System::get_property('platform') != 'WINDOWS' && 
+   System.get_property('platform') != 'WINDOWS_DESKTOP' 
+
    it "accepts flags to specify unusual sending behaviour" do
      data = nil
      peek_data = nil
@@ -57,6 +60,7 @@ describe "BasicSocket#send" do
      peek_data.should == "hello"
      data.should == 'hello'
    end
+end
 
   it "accepts a sockaddr as recipient address" do
      data = ""

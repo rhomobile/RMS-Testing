@@ -1,4 +1,6 @@
-if ( System.get_property('platform') != 'ANDROID' )
+if System.get_property('platform') != 'ANDROID' &&
+   System::get_property('platform') != 'WINDOWS' && 
+   System.get_property('platform') != 'WINDOWS_DESKTOP'
 
 describe :socket_pack_sockaddr_in, :shared => true do
   it "packs and unpacks" do
@@ -15,8 +17,6 @@ describe :socket_pack_sockaddr_in, :shared => true do
   end
 end
 
-end
-
 describe :socket_pack_sockaddr_un, :shared => true do
   not_supported_on :jruby, :windows do
     it "packs and unpacks" do
@@ -24,4 +24,6 @@ describe :socket_pack_sockaddr_un, :shared => true do
       Socket.unpack_sockaddr_un(sockaddr_un).should == '/tmp/s'
     end
   end
+end
+
 end

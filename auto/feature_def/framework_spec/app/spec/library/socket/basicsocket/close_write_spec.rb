@@ -1,5 +1,5 @@
-require File.expand_path('../../../../spec_helper', __FILE__)
-require File.expand_path('../../fixtures/classes', __FILE__)
+require 'spec/spec_helper'
+require 'spec/library/socket/fixtures/classes'
 
 describe "Socket::BasicSocket#close_write" do
   before :each do
@@ -32,7 +32,10 @@ describe "Socket::BasicSocket#close_write" do
     @server.closed?.should be_true
   end
 
-if ( System.get_property('platform') != 'ANDROID' )
+if System::get_property('platform') != 'WINDOWS' && 
+   System.get_property('platform') != 'WINDOWS_DESKTOP' && 
+   System.get_property('platform') != 'ANDROID'
+
   it "raises IOError on closed socket" do
     @server.close
     lambda { @server.close_write }.should raise_error(IOError)

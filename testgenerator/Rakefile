@@ -7,6 +7,8 @@ namespace :generate do
 			require File.dirname(__FILE__) + "/Barcode/generate_barcode_spec.rb"
 			require File.dirname(__FILE__) + "/generate_spec.rb"
 			generate_js_barcode_spec
+			cmd = "js-beautify -f ./Barcode/#{$file_name} -o ./Barcode/#{$file_name}"
+			exec cmd
 		end
 	end
 	namespace :ruby do

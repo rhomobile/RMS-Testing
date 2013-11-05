@@ -1,11 +1,14 @@
-require File.expand_path('../../../../spec_helper', __FILE__)
-require File.expand_path('../../fixtures/classes', __FILE__)
-require File.expand_path('../../shared/pack_sockaddr', __FILE__)
+require 'spec/spec_helper'
+require 'spec/library/socket/fixtures/classes'
+require 'spec/library/socket/shared/pack_sockaddr'
 
-if ( System.get_property('platform') != 'ANDROID' )
 
 describe "Socket#pack_sockaddr_in" do
-  it_behaves_like :socket_pack_sockaddr_in, :pack_sockaddr_in
-end
+  if  System.get_property('platform') != 'ANDROID' &&
+      System::get_property('platform') != 'WINDOWS' &&
+      System.get_property('platform') != 'WINDOWS_DESKTOP'
 
+    it_behaves_like :socket_pack_sockaddr_in, :pack_sockaddr_in
+
+  end
 end

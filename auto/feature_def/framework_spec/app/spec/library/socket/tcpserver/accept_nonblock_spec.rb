@@ -1,5 +1,5 @@
-require File.expand_path('../../../../spec_helper', __FILE__)
-require File.expand_path('../../fixtures/classes', __FILE__)
+require 'spec/spec_helper'
+require 'spec/library/socket/fixtures/classes'
 
 describe "Socket::TCPServer.accept_nonblock" do
   before :each do
@@ -9,6 +9,9 @@ describe "Socket::TCPServer.accept_nonblock" do
   after :each do
     @server.close
   end
+
+if System::get_property('platform') != 'WINDOWS' && 
+   System.get_property('platform') != 'WINDOWS_DESKTOP'
 
   it "accepts non blocking connections" do
     @server.listen(5)
@@ -28,4 +31,6 @@ describe "Socket::TCPServer.accept_nonblock" do
     c.close
     s.close
   end
+
+end
 end

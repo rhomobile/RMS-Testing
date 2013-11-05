@@ -1,5 +1,5 @@
-require File.expand_path('../../../../spec_helper', __FILE__)
-require File.expand_path('../../fixtures/classes', __FILE__)
+require 'spec/spec_helper'
+require 'spec/library/socket/fixtures/classes'
 
 ruby_version_is ""..."1.9" do
   describe "BasicSocket.do_not_reverse_lookup" do

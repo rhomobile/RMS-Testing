@@ -1,5 +1,6 @@
-require File.expand_path('../../../../spec_helper', __FILE__)
-require File.expand_path('../../fixtures/classes', __FILE__)
+require 'spec/spec_helper'
+require 'spec/library/socket/fixtures/classes'
+
 include Socket::Constants
 
 describe "Socket::Constants" do
@@ -9,6 +10,9 @@ describe "Socket::Constants" do
       Socket::Constants.should have_constant(c)
     end
   end
+
+if System::get_property('platform') != 'WINDOWS' && 
+   System.get_property('platform') != 'WINDOWS_DESKTOP' 
 
   it "defines protocol families" do
     consts = ["PF_INET6", "PF_INET", "PF_IPX", "PF_UNIX", "PF_UNSPEC"]
@@ -23,6 +27,8 @@ describe "Socket::Constants" do
       Socket::Constants.should have_constant(c)
     end
   end
+
+end
 
   it "defines send/receive options" do
     consts = ["MSG_DONTROUTE", "MSG_OOB", "MSG_PEEK"]
@@ -46,8 +52,10 @@ describe "Socket::Constants" do
     end
 
   end
-
-  if ( System.get_property('platform') != 'ANDROID' )
+ 
+  if System::get_property('platform') != 'WINDOWS' && 
+     System.get_property('platform') != 'WINDOWS_DESKTOP' && 
+     System.get_property('platform') != 'ANDROID'
 
   it "defines multicast options" do
     consts = ["IP_ADD_MEMBERSHIP", "IP_DEFAULT_MULTICAST_LOOP", "IP_DEFAULT_MULTICAST_TTL",
