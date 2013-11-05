@@ -1,13 +1,23 @@
 require 'fileutils'
 require 'yaml'
+require 'rake'
 
 namespace :generate do
 	namespace :js do
 		task :barcode do
+			Rake::Task['generate:xmltoymal:barcode'].execute
 			require File.dirname(__FILE__) + "/Barcode/generate_barcode_spec.rb"
 			require File.dirname(__FILE__) + "/generate_spec.rb"
 			generate_js_barcode_spec
 			cmd = "js-beautify -f ./Barcode/#{$file_name} -o ./Barcode/#{$file_name}"
+			exec cmd
+		end
+
+		task :cardreader do
+			require File.dirname(__FILE__) + "/Cardreader/generate_cardreader_spec.rb"
+			require File.dirname(__FILE__) + "/generate_spec.rb"
+			generate_js_barcode_spec
+			cmd = "js-beautify -f ./Cardreader/#{$file_name} -o ./Cardreader/#{$file_name}"
 			exec cmd
 		end
 	end
@@ -17,5 +27,17 @@ namespace :generate do
 			require File.dirname(__FILE__) + "/generate_spec.rb"
 			generate_ruby_barcode_spec
 		end
+	end
+	
+	namespace :xmltoymal do
+		require File.dirname(__FILE__) + "/xmltoymal.rb"
+		task :file do
+			filexmltoymal
+		end
+		
+		task :barcode do
+			barcodexmltoymal
+		end
+		
 	end
 end
