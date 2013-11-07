@@ -6,6 +6,7 @@ class SpecRunner < MSpecScript
 
      config[:files] << "spec/simpleonlystatic_spec"
      config[:files] << "spec/megamodule_spec"
+     config[:files] << "spec/entitygen_spec"
 
   end
 

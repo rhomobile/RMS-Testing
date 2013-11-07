@@ -30,6 +30,7 @@ host = ARGV && ARGV[0] ? ARGV[0] : localip
 port = 8081
 securePort = 8082
 securePortWithClientAuth = 8083
+webSocketPort = 8084
 
 
 cert = OpenSSL::X509::Certificate.new File.read 'ca.crt'
@@ -298,17 +299,13 @@ to_generate.each do |path|
     f.puts("SECURE_PORT=#{securePort};");
     f.puts("SECURE_HOST_CA='#{host}';");
     f.puts("SECURE_PORT_CA=#{securePortWithClientAuth};");
+    f.puts("WEBSOCKET_HOST='#{host}';");
+    f.puts("WEBSOCKET_PORT=#{webSocketPort};");
     
     f.close()
 end
 
 modify_iOS_Application_plist_file(host, port)
-
-trap 'INT' do
-    $local_server.shutdown
-    $secure_server.shutdown
-    $secure_server_with_client_auth.shutdown
-end
 
 t1 = Thread.new do
     puts "Starting local server on #{host}:#{port}"
@@ -325,7 +322,29 @@ t3 = Thread.new do
     $secure_server_with_client_auth.start
 end
 
+require './ws-server.rb'
+
+
+t4 = Thread.new do
+    puts "Starting Websocket server on #{host}:#{webSocketPort}"
+    startWsServer(host,webSocketPort)
+end
+
+trap 'INT' do
+    puts "Shutting down http server"
+    $local_server.shutdown
+    puts "Shutting down https server"
+    $secure_server.shutdown
+    puts "Shutting down https ca server"
+    $secure_server_with_client_auth.shutdown
+    puts "Shutting down ws server"
+    stopWsServer()
+    puts "shutdown finished"
+end
+
+
 
 t1.join
 t2.join
 t3.join
+#t4.join
