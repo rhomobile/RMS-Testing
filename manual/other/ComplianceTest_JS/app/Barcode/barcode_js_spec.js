@@ -192,6 +192,38 @@ describe("Barcode Manual Test", function() {
 					});
 				});
 
+				it("VT282-1778 | call setDefault with" + scnid + "and take |", function() {
+
+					runs(function()
+					{
+						setObjective("VT282-1778 | call setDefault and take");
+						setInstruction("Take method wait for scanner beam or viewfinder to come automatically without pressing hadrware trigger " + scnid + " Scan code 128 barcode");
+						setExpected("code128 barcode should decode and retrun value should be decoded data and status");
+						Rho.Barcode.setDefault(objSCN);
+						Rho.Barcode.take({},callbackenable);
+						setTimeout(function() {
+							enableFlag = true;
+						}, ENABLE8K);
+					});
+
+					waitsFor(function()
+					{
+						return enableFlag;
+					}, '2sec wait to enable the Scanner', 9000);
+
+					runs(function()
+					{		
+						objSCN.allDecoders = true;
+						waitsFor(function() {
+						return document.getElementById("actResult").innerHTML != "init";
+						}, "Timed out waiting for tester to respond", 300000);
+						runs(function() {
+						expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+						objSCN.disable();
+						});	
+					});
+				});
+
 				it("VT282-1784 | Start and stop scanner |"+ scnid, function() {
 					
 					runs(function()
@@ -392,7 +424,6 @@ describe("Barcode Manual Test", function() {
 						});
 					});
 				});
-
 
 				it("VT282-1974 | set decodeSound to local wave file path |"+ scnid, function() {
 					

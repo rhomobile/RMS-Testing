@@ -50,7 +50,6 @@ describe("KeyCapture Test", function() {
 
 			});
 
-
 			it("VT289-002 | set homeKeyValue to Disabled |", function() {
 
 				runs(function()
