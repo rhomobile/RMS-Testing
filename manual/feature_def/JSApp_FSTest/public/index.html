@@ -26,8 +26,19 @@
 <h1>Javascript Application loaded from filesystem</h1>
 
 <script type="text/javascript"> 
-      $(document).ready(function(){ 
-        Rho.Application.nativeMenu = Rho.Application.defaultNativeMenu
+      $(document).ready(function(){
+        console.log("CONSOLE!");
+        Rho.Log.info("Test", "TEST");	 
+        Rho.Application.nativeMenu = Rho.Application.defaultNativeMenu;
+
+        var toolElements = new Array();
+        toolElements = [
+            {label: 'back', action: 'back'},
+            {action: "separator"},
+            {label: 'Home', action: 'Home'}
+        ];
+        var toolProperties = {backgroundColor: 0xDD4814, iOS7IconColor: 0xFFFFFF};
+        Rho.NativeToolbar.create(toolElements, toolProperties);
       }); 
 </script>
     
