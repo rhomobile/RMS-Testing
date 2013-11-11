@@ -27,11 +27,11 @@ describe("KeyCapture Test", function() {
 		if (isWindowsMobilePlatform())
 		{
 
-			it("VT289-001 | set homeKeyValue to enter key |", function() {
+			it("VT200-0604 | set homeKeyValue to enter key |", function() {
 
 				runs(function()
 				{
-					setObjective("VT289-001 | set homeKeyValue to enter key");
+					setObjective("VT200-0604 | set homeKeyValue to enter key");
 					setInstruction("press the Enter key and check for application navigate");
 					setExpected("Application should navigate to Homepage of application after Pressing the Enter Key");
 					Rho.KeyCapture.homeKeyValue = '13';
@@ -50,11 +50,11 @@ describe("KeyCapture Test", function() {
 
 			});
 
-			it("VT289-002 | set homeKeyValue to Disabled |", function() {
+			it("VT200-0605 | set homeKeyValue to Disabled |", function() {
 
 				runs(function()
 				{
-					setObjective("VT289-002 | set homeKeyValue to Disabled");
+					setObjective("VT200-0605 | set homeKeyValue to Disabled");
 					setInstruction("press the Enter key and check for application navigate");
 					setExpected("Application should not navigate to Homepage of application after Pressing the Enter Key");
 					Rho.KeyCapture.homeKeyValue = '0x0D';
@@ -73,11 +73,11 @@ describe("KeyCapture Test", function() {
 
 			});
 
-			it("VT289-009 | set homeKeyValue to 1 and then 2|", function() {
+			it("VT200-0606 | set homeKeyValue to 1 and then 2|", function() {
 
 				runs(function()
 				{
-					setObjective("VT289-009 | set homeKeyValue to 1 and 2");
+					setObjective("VT200-0606 | set homeKeyValue to 1 and 2");
 					setInstruction("press 1 and 2 key and check for application navigate");
 					setExpected("Application should navigate to Homepage of application after Pressing the numeric key 1 and 2 ");
 					Rho.KeyCapture.homeKeyValue = '0x31';

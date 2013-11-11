@@ -7,11 +7,11 @@ describe("Application Module Test Starts Here", function() {
     });
 
 
-    it("VT281-003 | get BadLink Uri without setting it", function() {
+    it("VT200-0613 | get BadLink Uri without setting it", function() {
 
         runs(function()
         {
-            setObjective("VT281-003 | get BadLink Uri without setting it");
+            setObjective("VT200-0613 | get BadLink Uri without setting it");
             setInstruction("check for displayed output");
             setExpected("Application should return the default badlink uri " );
             var data = Rho.Application.badLinkURI;
@@ -30,11 +30,11 @@ describe("Application Module Test Starts Here", function() {
 
     });
 
-    it("VT281-014 | Security Token Not passed", function() {
+    it("VT200-0614 | Security Token Not passed", function() {
 
         runs(function()
         {
-            setObjective("VT281-014 | Security Token Not passed");
+            setObjective("VT200-0614 | Security Token Not passed");
             setInstruction("check for output");
             setExpected("it should return  false as the security token check  was passed " );
             var data = Rho.Application.securityTokenNotPassed;
@@ -53,11 +53,11 @@ describe("Application Module Test Starts Here", function() {
 
     });
 
-    it("VT281-020 | set StartUri to a web page", function() {
+    it("VT200-0615 | set StartUri to a web page", function() {
 
         runs(function()
         {
-            setObjective("VT281-020 | set StartUri to a web page");
+            setObjective("VT200-0615 | set StartUri to a web page");
             setInstruction("Click on Home button");
             setExpected("application should navigate to the start uri provided after opening " );
             var data = Rho.Application.startURI;
@@ -76,11 +76,11 @@ describe("Application Module Test Starts Here", function() {
 
     });
 
-    it("VT281-025 | Database File path with Local as Partition", function() {
+    it("VT200-0616 | Database File path with Local as Partition", function() {
 
         runs(function()
         {
-            setObjective("VT281-025 | Database File path with Local as Partition");
+            setObjective("VT200-0616 | Database File path with Local as Partition");
             setInstruction("check for output");
             setExpected("should return the location of the database file with partition name local" );
             var beja = Rho.Application.databaseFilePath('local');
