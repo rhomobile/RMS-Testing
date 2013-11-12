@@ -1,15 +1,16 @@
 	var sys_get_property = [
 	
 	{
-		testName		:	"VT300-005 | call getProperty with country | US",
+		testName		:	"VT200-0688 | call getProperty with country | US",
 		propertyName	:	"country",
 		osType			: 	["WINDOWS","ANDROID","APPLE","WP8","WINDOWS_DESKTOP"]
 	},
 	{
-		testName		:	"VT300-006 | call getProperty with deviceName | MC75",
+		testName		:	"VT200-0687 | call getProperty with deviceName | MC75",
 		propertyName	:	"deviceName",
 		osType			: 	["WINDOWS","ANDROID","APPLE","WP8","WINDOWS_DESKTOP"]
-	},
+	}
+	/*
 	{
 		testName		:	"VT300-007 | call getProperty with deviceOwnerEmail | ",
 		propertyName	:	"deviceOwnerEmail",
@@ -122,20 +123,22 @@
 		propertyName	:	"webviewFramework",
 		osType			: 	["WINDOWS","ANDROID","APPLE","WP8","WINDOWS_DESKTOP"]
 	}
+	*/
 	];
 	
 	var sys_get_properties = [
 	
 	{
-		testName		:	"VT300-134 | call getproperties with country | ",
+		testName		:	"VT200-0688 | call getproperties with country | ",
 		propertyName	:	"country",
 		osType			: 	["WINDOWS","ANDROID","APPLE","WP8","WINDOWS_DESKTOP"]
 	},
 	{
-		testName		:	"VT300-135 | call getproperties with deviceName | ",
+		testName		:	"VT200-0689 | call getproperties with deviceName | ",
 		propertyName	:	"deviceName",
 		osType			: 	["WINDOWS","ANDROID","APPLE","WP8","WINDOWS_DESKTOP"]
 	},
+	/*
 	{
 		testName		:	"VT300-136 | call getproperties with deviceOwnerEmail | ",
 		propertyName	:	"deviceOwnerEmail",
@@ -216,11 +219,13 @@
 		propertyName	:	"phoneNumber",
 		osType			: 	["WINDOWS","ANDROID","APPLE","WP8","WINDOWS_DESKTOP"]
 	},
+	*/
 	{
-		testName		:	"VT300-165 | call getproperties with platform | ",
+		testName		:	"VT200-0677 | call getproperties with platform | ",
 		propertyName	:	"platform",
 		osType			: 	["WINDOWS","ANDROID","APPLE","WP8","WINDOWS_DESKTOP"]
-	},
+	}
+	/*
 	{
 		testName		:	"VT300-166 | call getproperties with ppiX | ",
 		propertyName	:	"ppiX",
@@ -261,5 +266,5 @@
 		propertyName	:	"webviewFramework",
 		osType			: 	["WINDOWS","ANDROID","APPLE","WP8","WINDOWS_DESKTOP"]
 	}
-
+*/
 	];
