@@ -1,92 +1,115 @@
 require 'fileutils'
 require 'yaml'
-
-def add_setting_directly_test(testId,objectName,propertyName,values)
-
-    File.open($path_to_spec, 'a') do |f|
-
-		f.puts "describe('#{testId} - Setting #{propertyName} Directly', function() {"
-		values.each do |value|
-			f.puts start_check_device_applicability(value)
-			f.puts "it('Should Set #{propertyName} to #{value['setvalue']} using direct calling method', function() {"
-			f.puts "#{objectName}.#{propertyName}=#{value['setvalue']}"
-			f.puts expect_gettype(objectName,propertyName,value)
-			f.puts "});"
-			f.puts end_check_device_applicability
-		end
-		f.puts "});" # End describe
-	end
-end
-
-def add_setting_setproperty_test(testId,objectName,propertyName,values)
+$count = 0
+def add_setproperty_test(objectName,property)
+	propertyName = property['name']
+	platform = property['PLATFORM']
+	type = property['type']
+	if(type == "STRING")
+		if (property.has_key?("VALUES"))
+    		values = property['VALUES']['VALUE']
+    	else
+    		values = [{"value" => "Dont know what to set"}]
+    	end
+    elsif (type == "BOOLEAN")
+    	values = [{"value"=> true},{"value"=> false}]
+    elsif (type == "INTEGER")
+    	values = [{"value"=> 1},{"value"=> 20},{"value"=> 30}]
+    end
 
     File.open($path_to_spec, 'a') do |f|
-		f.puts "describe('#{testId} - Setting #{propertyName} using setProperty calling method', function() {"
-		values.each do |value|
-			setValue = value['setvalue']
-			f.puts start_check_device_applicability(value)
-			f.puts "it('Should Set #{propertyName} to #{value['setvalue']} using setProperty calling method', function() {"
-			f.puts "#{objectName}.setProperty('#{propertyName}','#{setValue}')"
-			f.puts expect_gettype(objectName,propertyName,value)
-			f.puts "});"
-			f.puts end_check_device_applicability		
-		end
-		f.puts "});" # End describe
-	end
+		f.puts start_check_device_applicability(platform)
+		f.puts "describe('Setting #{propertyName}', function() {"
 
-end
+		values.each do |valuetype|
 
-def add_setting_setproperties_test(testId,objectName,propertyName,values)
-	File.open($path_to_spec, 'a') do |f|
-		f.puts "describe('#{testId} - Setting #{propertyName} using setProperties calling method', function() {"
-		values.each do |value|
-			setValue = value['setvalue']
-			f.puts start_check_device_applicability(value)
-			f.puts "it('Should Set #{propertyName} to #{value['setvalue']} using setProperties calling method', function() {"
-			if setValue.is_a? String
-			f.puts "#{objectName}.setProperties({'#{propertyName}' : '#{setValue}'})"
-			else
-			f.puts "#{objectName}.setProperties({'#{propertyName}' : #{setValue}})"
+			if(valuetype.has_key?("constName"))
+
+				f.puts "it('Should Set #{propertyName} to #{valuetype['constName']} using direct calling method', function() {"
+				f.puts "#{objectName}.#{propertyName}=#{$objectName}.#{valuetype['constName']};"
+				f.puts "expect(#{objectName}.#{propertyName}).toEqual(#{$objectName}.#{valuetype['constName']});"
+				f.puts "});"
+
 			end
-			f.puts expect_gettype(objectName,propertyName,value)
-			f.puts "});"
-			f.puts end_check_device_applicability		
+
+			if(valuetype.has_key?("value"))
+				setValue = valuetype['value']
+
+				# setting property using directly
+				f.puts "it('Should Set #{propertyName} to #{setValue} using direct calling method', function() {"
+				if(type == "BOOLEAN" || type == "INTEGER")
+					f.puts "#{objectName}.#{propertyName}=#{setValue};"
+					f.puts "expect(#{objectName}.#{propertyName}).toEqual(#{setValue});"
+				else
+					f.puts "#{objectName}.#{propertyName}='#{setValue}';"
+					f.puts "expect(#{objectName}.#{propertyName}).toEqual('#{setValue}');"
+				end
+				f.puts "});"
+
+				# setting property using setProperty method
+				f.puts "it('Should Set #{propertyName} to #{setValue} using setProperty calling method', function() {"
+				f.puts "#{objectName}.setProperty('#{propertyName}','#{setValue}');"
+				if(type == "BOOLEAN" || type == "INTEGER")
+					f.puts "expect(#{objectName}.getProperty('#{propertyName}')).toEqual('#{setValue}');"
+				else
+					f.puts "expect(#{objectName}.getProperty('#{propertyName}')).toEqual('#{setValue}');"
+				end
+				f.puts "});"
+
+				# setting property using setProperties method
+				f.puts "it('Should Set #{propertyName} to #{setValue} using setProperties calling method', function() {"
+				if(type == "BOOLEAN" || type == "INTEGER")
+					f.puts "#{objectName}.setProperties({'#{propertyName}' : #{setValue}});"
+ 					f.puts "var data = #{objectName}.getProperties(['#{propertyName}']);"
+                    f.puts "data = data['#{propertyName}'];"
+                    f.puts "expect(data).toEqual('#{setValue}');"
+				else
+					f.puts "#{objectName}.setProperties({'#{propertyName}' : '#{setValue}'});"
+ 					f.puts "var data = #{objectName}.getProperties(['#{propertyName}']);"
+                    f.puts "data = data['#{propertyName}'];"
+                    f.puts "expect(data).toEqual('#{setValue}');"
+				end
+				f.puts "});"
+				
+			end
 		end
 		f.puts "});" # End describe
-	end
-
-end
-
-def expect_gettype_direct
-	
-end
-
-def expect_gettype_setproperty
-	
-end
-
-def expect_gettype_setproperties
-	
-end
-
-def expect_gettype(objectName,propertyName,value)
-
-	case $getType
-	when "direct", "Direct", "DIRECT"
-		"expect(#{objectName}.#{propertyName}).toEqual(#{value['expected']});"
-	when "getProperty","GetProperty","Getproperty","getproperty"
-		"expect(#{objectName}.getProperty('#{propertyName}')).toEqual(#{value['expected']});"
-	else
-		puts "Didn't get Any Matching Category"
+		f.puts end_check_device_applicability
 	end
 end
 
-def start_check_device_applicability(params)
+def add_get_readonlyproperty_test(objectName,property)
+	propertyName = property['name']
+	platform = property['PLATFORM']
+	type = property['type']
+	File.open($path_to_spec, 'a') do |f|
+		f.puts start_check_device_applicability(platform)
+		f.puts "describe('Getting #{propertyName}', function() {"
+		if(type == "BOOLEAN")
+			f.puts "it('Should return #{propertyName} value as BOOLEAN (true or false)', function() {"
+			f.puts "expect(#{objectName}.#{propertyName}).isBoolean();"
+			f.puts "});"
+		elsif (type == "INTEGER")
+			f.puts "it('Should return #{propertyName} value as a Integer', function() {"
+			f.puts "expect(#{objectName}.#{propertyName}).isNumberGreaterThenZero();"
+			f.puts "});"
+		elsif (type == "STRING")
+			f.puts "it('Should return #{propertyName} value as a string', function() {"
+			f.puts "expect(#{objectName}.#{propertyName}).isNotEmptyString();"
+			f.puts "});"
+		end
+		f.puts "});" # End describe
+		f.puts end_check_device_applicability
+	end
+end
+
+def start_check_device_applicability(param)
 
 	$ifflag = false
-	if (params.has_key?("platform"))
+	if (param)
 		conditionstring = []
-		params['platform'].each do |platform|
+		platforms = param.split(', ')
+		platforms.each do |platform|
 
 			case platform
 			when "Android", "android", "ANDROID"

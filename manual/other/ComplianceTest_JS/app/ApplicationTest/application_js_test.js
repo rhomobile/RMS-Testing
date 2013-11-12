@@ -22,3 +22,8 @@ function setExpected(expected)
 {
 	document.getElementById("expResult").innerHTML = expected;
 }
+
+function displaydata(data)
+{
+	document.getElementById("clbkData").innerHTML = data;
+}

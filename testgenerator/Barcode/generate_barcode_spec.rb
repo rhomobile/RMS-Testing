@@ -3,29 +3,40 @@ require 'yaml'
 
 $file_name = 'barcode_js_spec.js';
 $path_to_spec = File.join('Barcode', $file_name)
-$getType = ''
+$getType = 'direct'
+$objectName = '';
 
 def generate_js_barcode_spec
-	testCases = YAML.load_file('Barcode\Barcode.yml')
-	testCases['BarcodeTestCase'].each do |category|
+	apicontent = YAML.load_file('Barcode\Barcode.yml')
 
-		$getType = category['getType']
-		write_jasmine_describe
-		case category['category'].to_s
-		when "set", "Set", "SET"
-			generate_set_test(category['Properties'])
-		when "enumrate","ENUMERATE","Enumrate"
-			generate_enum_tests(category['id'],category['callbacktype'])
-		else
-			puts "Didn't get Any Matching Category"
-		end
-		end_jasmine_describe
-	end
+	#Get the object name
+	$objectName = "#{apicontent['API']['MODULE']['parent']}.#{apicontent['API']['MODULE']['name']}"
+
+	#Get properties to generate set and get test cases
+	properties = apicontent['API']['MODULE']['PROPERTIES']['PROPERTY']
+
+	write_jasmine_describe
+	generate_set_get_test(properties)
+	end_jasmine_describe
+	# testCases['BarcodeTestCase'].each do |category|
+
+	# 	$getType = category['getType']
+
+	# 	case category['category'].to_s
+	# 	when "set", "Set", "SET"
+	# 		generate_set_test(category['Properties'])
+	# 	when "enumrate","ENUMERATE","Enumrate"
+	# 		generate_enum_tests(category['id'],category['callbacktype'])
+	# 	else
+	# 		puts "Didn't get Any Matching Category"
+	# 	end
+		
+	# end
 end
 
 def write_jasmine_describe
     File.open($path_to_spec, 'w') do |f|
-		f.puts 'describe("Barcode JS API", function() {'
+		f.puts "describe('#{$objectName} JS API', function() {"
     end
 end
 
@@ -35,38 +46,32 @@ def end_jasmine_describe
     end
 end
 
-def generate_set_test(properties)
+def generate_set_get_test(properties)
 
     File.open($path_to_spec, 'a') do |f|
-		f.puts 'describe("Barcode APIs Set Test", function() {'
-		f.puts 'var enumData = Rho.Barcode.enumerate();'
+		f.puts "describe('#{$objectName} APIs Set Test', function() {"
+		f.puts "var enumData = #{$objectName}.enumerate();"
 		f.puts 'for (var j = 0;j<enumData.length;j++){'
-		f.puts 'var arrSCN = getApplicableProperties(enumData[j]);'
 		f.puts '(function(enumObject){'
 		f.puts "var scnname = enumObject.getProperty('friendlyName');"
 		f.puts "var scnid = enumObject.getProperty('ID');"
 		f.puts 'var scntype = enumObject.scannerType;'
 	end
+
 	add_enable_test
 
 	properties.each do |property|
-
-		property['setType'].each_with_index do |type, index|
-
-		case type.to_s
-		when "direct", "Direct", "DIRECT"
-			add_setting_directly_test(property['id'][index],"enumObject",property['Property'],property['values'])
-		when "setProperty","SetProperty","Setproperty","setproperty"
-			add_setting_setproperty_test(property['id'][index],"enumObject",property['Property'],property['values'])
-		when "setProperties","setproperties","SetProperties","Setproperties"
-			add_setting_setproperties_test(property['id'][index],"enumObject",property['Property'],property['values'])
+		if (!property.has_key?("readOnly"))
+			#Generate code to set properties by directly, setProperties, setProperty
+			add_setproperty_test("enumObject",property)
 		else
-			puts "Didn't get Any Matching Category"
-		end
+			#Generate code to get properties value
+			add_get_readonlyproperty_test("enumObject",property)
 		end
 	end
 
 	add_disable_test
+
     File.open($path_to_spec, 'a') do |f|
 		f.puts '})(enumData[j]);' #Ending anonymous Method call
 		f.puts '}' #Ending the For Loop

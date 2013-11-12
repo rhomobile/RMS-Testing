@@ -161,7 +161,6 @@ describe("Barcode Test", function() {
 
 	});
 
-
 	it("VT282-1790A | take with callback as function and don't scan cancel it|"+ scnid, function() {
 		
 		runs(function()
@@ -203,7 +202,6 @@ describe("Barcode Test", function() {
 			});
 		});
 	});
-
 
 	it("VT282-1994 | call getAllProperties() with async callback |"+ scnid, function() {
 
@@ -293,7 +291,6 @@ describe("Barcode Test", function() {
 		});
 	});
 
-
 	it("VT282-2008 | call getSupportedProperties() with anonymous callback |"+ scnid, function() {
 		
 		runs(function()
@@ -351,7 +348,6 @@ describe("Barcode Test", function() {
 			});
 		});
 	});
-
 
 	it("VT282-2008B | call getProperties() with scannerType without callback |"+ scnid, function() {
 
