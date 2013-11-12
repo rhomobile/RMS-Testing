@@ -14,10 +14,10 @@ describe("Key State Test", function() {
 		/* ... Tear it down ... */
 	});
 
-	it("VT281-0863 | KeyState showStates with all properties |", function() {
+	it("VT200-0669 | KeyState showStates with all properties |", function() {
 		runs(function()
 		{
-            dispCurrentProcess("VT281-0863 | KeyState showStates with all properties<br>right:100,top:150,<br>Height:200,width:250 Press Shift, Alt, Control, <br>Function, Caps, Num lock and Orange key");
+            dispCurrentProcess("VT200-0669 | KeyState showStates with all properties<br>right:100,top:150,<br>Height:200,width:250 Press Shift, Alt, Control, <br>Function, Caps, Num lock and Orange key");
 			Rho.KeyState.showStates({'right':100,'top':150,'height':200,'width':250})
 			setTimeout(function() {
 				displayflag = true;
@@ -35,10 +35,10 @@ describe("Key State Test", function() {
 		});
 	});
 
-	it("VT281-0864 | KeyState hideStates |", function() {
+	it("VT281-0xxx | KeyState hideStates |", function() {
 		runs(function()
 		{
-            dispCurrentProcess("VT281-0864 | KeyState hideStates<br>right:100,top:150,<br>Height:200,width:250 </br> Press Shift, Alt, Control, Function, Caps, Num lock and Orange key");
+            dispCurrentProcess("VT281-0xxx | KeyState hideStates<br>right:100,top:150,<br>Height:200,width:250 </br> Press Shift, Alt, Control, Function, Caps, Num lock and Orange key");
 			Rho.KeyState.showStates({'right':100,'top':150,'height':200,'width':250});
 			Rho.KeyState.hideStates();
 			setTimeout(function() {
@@ -56,7 +56,7 @@ describe("Key State Test", function() {
 			expect(testResult).toEqual(true);
 		});
 	});
-
+/*
 	var m = 0;
 	var test_key = [{'testCaseId':'VT281-0866','keyName':'SHIFT'},
 					{'testCaseId':'VT281-0867','keyName':'CTRL'},
@@ -92,7 +92,7 @@ describe("Key State Test", function() {
 
 	}
 
-	it("VT281-0872 | KeyState functionality Test with Orange key once |", function() {
+	xit("VT281-0872 | KeyState functionality Test with Orange key once |", function() {
 		runs(function()
 		{
             dispCurrentProcess("VT281-0872 | KeyState functionality Test with Orange key once<br>Press Orange Key once. <br/> Press another key from the keyboard");
@@ -115,7 +115,7 @@ describe("Key State Test", function() {
 		});
 	});
 
-	it("VT281-0875 | KeyState functionality Test with Blue key Twice |", function() {
+	xit("VT281-0875 | KeyState functionality Test with Blue key Twice |", function() {
 		runs(function()
 		{
 			dispCurrentProcess("VT281-0875 | KeyState functionality Test with Blue key Twice<br>Press Blue Key Twice. <br/> Press another key from the keyboard");
@@ -135,5 +135,6 @@ describe("Key State Test", function() {
 			expect(testResult).toEqual(true);
 		});
 	});
+*/
 
 });

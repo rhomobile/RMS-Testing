@@ -25,7 +25,7 @@ describe("ScreenOrientation JS API Test", function () {
 
     if (isAnyButApplePlatform()) {
 
-        it("VT281-0905 | Test Screen Orientation rightHanded with callback |", function() {
+        it("VT200-0670 | Test Screen Orientation rightHanded with callback |", function() {
 
 		runs(function()
 		{
@@ -39,7 +39,7 @@ describe("ScreenOrientation JS API Test", function () {
 			return ( (callbackFired == true) && (orientationType == "rightHanded") )
 		}, 'The Screen Orientation should display', 10000);
 		});
-
+/*
         it("VT281-0906 | Test Screen Orientation leftHanded with callback |", function() {
 		runs(function()
 		{
@@ -67,8 +67,8 @@ describe("ScreenOrientation JS API Test", function () {
 			return ( (callbackFired == true) && (orientationType == "upsideDown") )
 		}, 'The Screen Orientation should display', 10000);
 		});
-
-        it("VT281-0908 | Test Screen Orientation normal with callback |", function() {
+*/
+        it("VT200-0671 | Test Screen Orientation normal with callback |", function() {
 		runs(function()
 		{
 			//dispCurrentProcess("VT281-0908 | Test Screen Orientation normal with callback |");
