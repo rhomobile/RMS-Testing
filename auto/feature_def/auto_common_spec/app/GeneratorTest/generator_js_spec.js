@@ -1,6 +1,95 @@
 
 describe("<generator API specs>", function() {
 
+    describe("Native bridge", function() {
+
+        describe("Normal test case", function() {
+            it("passing boolean", function() {
+                expect(Rho.NativeBridgeTest.testBool(false)).toEqual(false);
+                expect(Rho.NativeBridgeTest.testBool(true)).toEqual(true);
+            });
+
+            it("passing integer", function() {
+                expect(Rho.NativeBridgeTest.testInt(0)).toEqual(0);
+                expect(Rho.NativeBridgeTest.testInt(1)).toEqual(1);
+                expect(Rho.NativeBridgeTest.testInt(-1)).toEqual(-1);
+                expect(Rho.NativeBridgeTest.testInt(2147483647)).toEqual(2147483647);
+                expect(Rho.NativeBridgeTest.testInt(-2147483648)).toEqual(-2147483648);
+            });
+
+            it("passing float", function() {
+                expect(Rho.NativeBridgeTest.testFloat(0.0)).toEqual(0.0);
+                expect(Rho.NativeBridgeTest.testFloat(1.0)).toEqual(1.0);
+                expect(Rho.NativeBridgeTest.testFloat(-1.0)).toEqual(-1.0);
+                expect(Rho.NativeBridgeTest.testFloat(1234567890.0)).toEqual(1234567890.0);
+                expect(Rho.NativeBridgeTest.testFloat(0.123456789)).toEqual(0.123456789);
+            });
+
+            it("passing string", function() {
+                expect(Rho.NativeBridgeTest.testString("")).toEqual("");
+                expect(Rho.NativeBridgeTest.testString("a")).toEqual("a");
+                expect(Rho.NativeBridgeTest.testString('"')).toEqual('"');
+                expect(Rho.NativeBridgeTest.testString('\\')).toEqual('\\');
+                expect(Rho.NativeBridgeTest.testString('/')).toEqual('/');
+                var str = ""; var str2 = "";
+                for(var i=32; i < 128; i++) {
+                    var chr = String.fromCharCode(i);
+                    str += chr;
+                    str2 += chr + chr;
+                }
+                expect(Rho.NativeBridgeTest.testString(str)).toEqual(str);
+                expect(Rho.NativeBridgeTest.testString(str2)).toEqual(str2);
+            });
+        });
+        describe("Edge test case", function() {
+            it("passing integer", function() {
+                expect(Rho.NativeBridgeTest.testInt(2147483647)).toEqual(2147483647);
+                expect(Rho.NativeBridgeTest.testInt(-2147483648)).toEqual(-2147483648);
+                expect(Rho.NativeBridgeTest.testInt(2147483648)).toNotEqual(2147483648);
+                expect(Rho.NativeBridgeTest.testInt(-2147483649)).toNotEqual(-2147483649);
+            });
+
+            it("passing float", function() {
+                expect(Rho.NativeBridgeTest.testFloat(-1.23e-32)).toEqual(-1.23e-32);
+                expect(Rho.NativeBridgeTest.testFloat(1.23e+32)).toEqual(1.23e+32);
+                expect(Rho.NativeBridgeTest.testFloat(-1.2356789e-300)).toEqual(-1.2356789e-300);
+                expect(Rho.NativeBridgeTest.testFloat(1.2356789e+300)).toEqual(1.2356789e+300);
+                expect(Rho.NativeBridgeTest.testFloat(123456789012345.0)).toEqual(123456789012345.0);
+                expect(Rho.NativeBridgeTest.testFloat(0.123456789012345)).toEqual(0.123456789012345);
+
+            });
+
+            it("passing string escapes", function() {
+                var str = ""; var str2 = "";
+                for(var i=0; i < 32; i++) {
+                    var chr = String.fromCharCode(i);
+                    str += chr;
+                    str2 += chr + chr;
+                }
+                expect(Rho.NativeBridgeTest.testString(str)).toEqual(str);
+                expect(Rho.NativeBridgeTest.testString(str2)).toEqual(str2);
+            });
+            it("passing string non escapes", function() {
+                var str = ""; var str2 = "";
+                for(var i=32; i < 256; i++) {
+                    var chr = String.fromCharCode(i);
+                    str += chr;
+                    str2 += chr + chr;
+                }
+                expect(Rho.NativeBridgeTest.testString(str)).toEqual(str);
+                expect(Rho.NativeBridgeTest.testString(str2)).toEqual(str2);
+            });
+            it("passing single/double character combinations", function() {
+                var str = ""; var str2 = "";
+                for(var i=0; i < 256; i++) {
+                    var chr = String.fromCharCode(i);
+                    expect(Rho.NativeBridgeTest.testString(chr)).toEqual(chr);
+                    expect(Rho.NativeBridgeTest.testString(chr+chr)).toEqual(chr+chr);
+                }
+            });
+        });
+    });
+
     describe("Default instance", function() {
 
         describe("as module object", function() {
