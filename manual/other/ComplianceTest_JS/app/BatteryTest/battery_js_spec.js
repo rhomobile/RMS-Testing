@@ -42,10 +42,10 @@ describe("Battery Manual FD Tests", function () {
 
 if (isAnyButApplePlatform())
 { 
-	it("VT284-017|Battery showIcon all property|", function () {
+	it("VT200-0700|Battery showIcon all property|", function () {
   
           runs(function () {
-              dispTestCaseRunning("check for all the hash properties defined ");
+              dispTestCaseRunning("VT200-0700 check for all the hash properties defined ");
               dispExpectedResult("battery icon should be shown with layout left and red in conlor horizontal and vertical position at 20 and 40");
             Rho.Battery.showIcon({left: 20,top: 40,layout:'left',color:'#FF0000'});
           });
@@ -62,9 +62,9 @@ if (isAnyButApplePlatform())
 if(!isAndroidPlatform())
 {
      
-	it("VT284-024|Call batteryStatus method with Hash Property trigger to periodic, refreshInterval to 8000 and callback|", function () {
+	it("VT200-0701|Call batteryStatus method with Hash Property trigger to periodic, refreshInterval to 8000 and callback|", function () {
           runs(function () {
-              dispTestCaseRunning("batteryStatus method with Hash Property trigger to periodic with callback default refresh interval check for every 8 seconds");
+              dispTestCaseRunning("VT200-0701 batteryStatus method with Hash Property trigger to periodic with callback default refresh interval check for every 8 seconds");
               dispExpectedResult("batteryStatus callback should get fire and batteryStatus should updated for every 8 seconds");
             Rho.Battery.stopBatteryStatus();
             Rho.Battery.batteryStatus({trigger :'periodic',refreshInterval :8000},batteryStatusCallback);
@@ -83,9 +83,9 @@ if(!isAndroidPlatform())
 
 if(!isAndroidPlatform() && isAnyButApplePlatform())
 {
-	it("VT284-038|Call smartBatteryStatus method with callback|", function () {
+	it("VT200-0702|Call smartBatteryStatus method with callback|", function () {
 	          runs(function () {
-	              dispTestCaseRunning("smartBatteryStatus with callback");
+	              dispTestCaseRunning("VT200-0702 smartBatteryStatus with callback");
 	              dispExpectedResult("Smart Battery event should be fired with all the return parameters ");
 	            Rho.Battery.smartBatteryStatus(smartBatteryStatusCallback);
 	          });

@@ -147,8 +147,8 @@
         </div>
     </div>
 
-    <div id="VT300-004" class="container">
-        <div class="test_case_number">VT300-004</div>
+    <div id="VT200-0690" class="container">
+        <div class="test_case_number">VT200-0690</div>
         <div class="test_case_requirements">
             Created tabbar. Press
             <button onClick='createTabbar()'>Create tabbar</button>
@@ -160,14 +160,14 @@
                     <button onClick='Rho.NativeTabbar.switchTab(1)'>Switch to tab 1</button>
                 </li>
                 <li>
-                    <button onClick='validateTestResult("VT300-004", 1, Rho.WebView.activeTab)'>Get active tab</button>
+                    <button onClick='validateTestResult("VT200-0690", 1, Rho.WebView.activeTab)'>Get active tab</button>
                 </li>
                 <li>It should return 1</li>
             </ol>
             <div class="test_case_result"></div>
         </div>
     </div>
-
+<!--
     <div id="VT300-005" class="container">
         <div class="test_case_number">VT300-005</div>
         <div class="test_case_requirements">
@@ -190,7 +190,7 @@
             <div class="test_case_result"></div>
         </div>
     </div>
-
+-->
 </div>
 
 
@@ -217,13 +217,13 @@
             <span class="result"></span>
         </div>
         <div class="test_scenario_desc">
-            <span class="test_scenario_number">VT301-004 / VT301-005</span>
+            <span class="test_scenario_number">VT200-0690</span>
             <span> Get activeTab value</span>
         </div>
     </div>
 </div>
 
-
+<!--
 <div id="cacheSize_test" class="method_tests wm">
     <div class="method_name">WebView.cacheSize</div>
     <div class="method_desc">Browser cache size, in whole MBs. Defines in config.xml: Navigation\\Cache.</div>
@@ -240,7 +240,7 @@
         </div>
     </div>
 </div>
-
+-->
 <div id="enableCache_test" class="method_tests android">
     <div class="method_name">WebView.enableCache</div>
     <div class="method_desc">Enable/disable Browser cache. Use 'WebView.enableCache' parameter in rhoconfig.txt to configure this value.</div>
@@ -252,12 +252,13 @@
             <span class="result"></span>
         </div>
         <div class="test_scenario_desc">
-            <span class="test_scenario_number">VT301-008/ VT301-009 / VT301-010 </span>
+            <span class="test_scenario_number">VT200-0691 </span>
             <span> Get enableCache value</span>
         </div>
     </div>
 </div>
 
+<!--
 <div id="enablePageLoadingIndication_test" class="method_tests android wm">
     <div class="method_name">WebView.enablePageLoadingIndication</div>
     <div class="method_desc">Show page loading indication. On Windows Mobile/CE this property can be set only in config.xml: GUI\\HourglassEnabled. At Android  use 'disable_loading_indication' parameter in rhoconfig.txt to configure this value.</div>
@@ -304,7 +305,7 @@
         </div>
     </div>
 </div>
-
+-->
 <div id="enableZoom_test" class="method_tests android">
     <div class="method_name">WebView.enableZoom</div>
     <div class="method_desc">Enable WebView zoom. Use 'enable_screen_zoom' parameter in rhoconfig.txt to configure this value.</div>
@@ -316,12 +317,13 @@
             <span class="result"></span>
         </div>
         <div class="test_scenario_desc">
-            <span class="test_scenario_number">VT301-018 / VT301-019 / VT301-020</span>
+            <span class="test_scenario_number">VT200-0692</span>
             <span> Get enableZoom value</span>
         </div>
     </div>
 </div>
 
+<!--
 <div id="fontFamily_test" class="method_tests wm">
     <div class="method_name">WebView.fontFamily</div>
     <div class="method_desc">Specifies the default font to use when rendering text in web pages. Defines in config.xml: HTMLStyles\\FontFamily.</div>
@@ -354,7 +356,7 @@
         </div>
     </div>
 </div>
-
+-->
 <div id="fullScreen_test" class="method_tests android ios win32 wm wp8">
     <div class="method_name">WebView.fullScreen</div>
     <div class="method_desc">Use full screen mode.</div>
@@ -374,7 +376,7 @@
             <button onClick='Rho.WebView.fullScreen = true;'>fullScreen = true</button>
         </div>
         <div class="test_scenario_desc">
-            <span class="test_scenario_number">VT301-024 / VT301-027</span>
+            <span class="test_scenario_number">VT200-0693</span>
             <span> Press to set fullScreen to true</span>
         </div>
         <div style="clear: both"></div>
@@ -384,13 +386,14 @@
             <button onClick='Rho.WebView.fullScreen = false;'>fullScreen = false</button>
         </div>
         <div class="test_scenario_desc">
-            <span class="test_scenario_number">VT301-025</span>
+            <span class="test_scenario_number">VT200-xxx</span>
             <span> Press to set fullScreen to false</span>
         </div>
         <div style="clear: both"></div>
     </div>
 </div>
 
+<!--
 <div id="scrollTechnique_test" class="method_tests wm">
     <div class="method_name">WebView.scrollTechnique</div>
     <div class="method_desc">Specifies the technique used to scroll about the page. Defines in config.xml: Scrolling\ScrollTechnique.</div>
@@ -456,6 +459,7 @@
         </div>
     </div>
 </div>
+-->
 
 <div id="zoomPage_test" class="method_tests wm">
     <div class="method_name">WebView.zoomPage</div>
@@ -472,6 +476,7 @@
             <span> Get zoomPage value</span>
         </div>
     </div>
+    <!--
     <div class="test_scenario">
         <div class="test_scenario_controls">
             <button onClick='Rho.WebView.zoomPage = 0.5;'>zoomPage = 0.5</button>
@@ -482,16 +487,18 @@
         </div>
         <div style="clear: both"></div>
     </div>
+    -->
     <div class="test_scenario">
         <div class="test_scenario_controls">
             <button onClick='Rho.WebView.zoomPage = 1.5;'>zoomPage = 1.5</button>
         </div>
         <div class="test_scenario_desc">
-            <span class="test_scenario_number">VT301-038</span>
+            <span class="test_scenario_number">VT200-0694</span>
             <span> Press to set zoomPage to 1.5</span>
         </div>
         <div style="clear: both"></div>
     </div>
+    <!--
     <div class="test_scenario">
         <div class="test_scenario_controls">
             <button onClick='Rho.WebView.zoomPage = 1.0;'>zoomPage = 1.0</button>
@@ -512,7 +519,7 @@
         </div>
         <div style="clear: both"></div>
     </div>
-
+    -->
 
 </div>
 
@@ -530,6 +537,7 @@
             <span> Get textZoomLevel value</span>
         </div>
     </div>
+    <!--
     <div class="test_scenario">
         <div class="test_scenario_controls">
             <button onClick='Rho.WebView.textZoomLevel = 0;'>textZoomLevel = 0</button>
@@ -540,16 +548,18 @@
         </div>
         <div style="clear: both"></div>
     </div>
+    -->
     <div class="test_scenario">
         <div class="test_scenario_controls">
             <button onClick='Rho.WebView.textZoomLevel = 4;'>textZoomLevel = 4</button>
         </div>
         <div class="test_scenario_desc">
-            <span class="test_scenario_number">VT301-042</span>
+            <span class="test_scenario_number">VT200-0695</span>
             <span> Press to set textZoomLevel to 4</span>
         </div>
         <div style="clear: both"></div>
     </div>
+    <!--
     <div class="test_scenario">
         <div class="test_scenario_controls">
             <button onClick='Rho.WebView.textZoomLevel = 2;'>textZoomLevel = 2</button>
@@ -570,9 +580,10 @@
         </div>
         <div style="clear: both"></div>
     </div>
-
-
+    -->
 </div>
+
+<!--
 
 <div id="navigationTimeout_test" class="method_tests wm">
     <div class="method_name">WebView.navigationTimeout</div>
@@ -754,11 +765,12 @@
         </div>
     </div>
 </div>
+-->
 
 <div id="navigate_test" class="method_tests android ios win32 wm wp8">
     <div class="method_name">WebView.navigate()</div>
     <div class="method_desc">Force WebView to navigate to a URL.</div>
-
+<!--
     <div class="test_scenario">
         <div class="test_scenario_controls">
             <button onClick='Rho.WebView.navigate("http://www.google.com");'>navigate(google)</button>
@@ -768,17 +780,17 @@
             <span> Navigate current tab to google</span>
         </div>
     </div>
-
+-->
     <div class="test_scenario">
         <div class="test_scenario_controls">
             <button onClick='Rho.WebView.navigate("http://www.google.com", 1);'>navigate(google, 1)</button>
         </div>
         <div class="test_scenario_desc">
-            <span class="test_scenario_number">VT301-064</span>
+            <span class="test_scenario_number">VT200-0696</span>
             <span> Navigate tab index 1 to google</span>
         </div>
     </div>
-
+<!--
     <div class="test_scenario">
         <div class="test_scenario_controls">
             <button onClick='Rho.WebView.navigate("http://www.gmail.com", 4);'>navigate(gmail, 4)</button>
@@ -798,8 +810,10 @@
             <span> Navigate tab index -1 to google</span>
         </div>
     </div>
+-->
 </div>
 
+<!--
 <div id="navigateBack_test" class="method_tests android ios win32 wm wp8">
     <div class="method_name">WebView.navigateBack()</div>
     <div class="method_desc">Force WebView to navigate to the previous page using Browser back.</div>
@@ -855,6 +869,7 @@
     </div>
 
 </div>
+-->
 
 <div id="refresh_test" class="method_tests android ios win32 wm wp8">
     <div class="method_name">WebView.refresh()</div>
@@ -870,7 +885,7 @@
             <span>Press button for inserting text by JS. This text should disappear after refreshing</span>
         </div>
     </div>
-
+<!--
     <div class="test_scenario">
         <div class="test_scenario_controls">
             <button onClick='Rho.WebView.refresh();'>refresh()</button>
@@ -880,17 +895,17 @@
             <span>Call refresh() without args</span>
         </div>
     </div>
-
+-->
     <div class="test_scenario">
         <div class="test_scenario_controls">
             <button onClick='Rho.WebView.refresh(1);'>refresh(1)</button>
         </div>
         <div class="test_scenario_desc">
-            <span class="test_scenario_number">VT301-073</span>
+            <span class="test_scenario_number">VT200-0697</span>
             <span>Call refresh() for tab index 1</span>
         </div>
     </div>
-
+<!--
     <div class="test_scenario">
         <div class="test_scenario_controls">
             <button onClick='Rho.WebView.refresh(-1);'>refresh(-1)</button>
@@ -910,7 +925,7 @@
             <span>Call refresh() for tab index 0</span>
         </div>
     </div>
-
+-->
 </div>
 
 <div id="save_test" class="method_tests android">
@@ -927,7 +942,7 @@
             <span>Check existing file with screenshot</span>
         </div>
     </div>
-
+<!--
     <div class="test_scenario">
         <div class="test_scenario_controls">
             <button onClick='Rho.WebView.save("jpeg", Rho.RhoFile.join(Rho.Application.userFolder, "screenshot.jpeg"));'>save(jpeg, path)</button>
@@ -937,17 +952,17 @@
             <span>Call save() with all args but tab index</span>
         </div>
     </div>
-
+-->
     <div class="test_scenario">
         <div class="test_scenario_controls">
             <button onClick='Rho.WebView.save("jpeg", Rho.RhoFile.join(Rho.Application.userFolder, "screenshot.jpeg"), 1);'>save(jpeg, path, 1)</button>
         </div>
         <div class="test_scenario_desc">
-            <span class="test_scenario_number">VT301-077</span>
+            <span class="test_scenario_number">VT200-0698</span>
             <span>Call save() for tab index 1</span>
         </div>
     </div>
-
+<!--
     <div class="test_scenario">
         <div class="test_scenario_controls">
             <button onClick='Rho.WebView.save("jpeg", Rho.RhoFile.join(Rho.Application.userFolder, "screenshot.jpeg"), 4);'>save(jpeg, path, 4)</button>
@@ -957,6 +972,7 @@
             <span>Call save() for tab index 4</span>
         </div>
     </div>
+-->
 </div>
 
 <div id="setCookie_test" class="method_tests android ios win32">
@@ -979,11 +995,11 @@
             <button onClick='Rho.WebView.setCookie(document.URL, "key_1=DevaStoredCookie1");'>Set single cookie</button>
         </div>
         <div class="test_scenario_desc">
-            <span class="test_scenario_number">VT301-080</span>
+            <span class="test_scenario_number">VT200-0699</span>
             <span>Set single cookie</span>
         </div>
     </div>
-
+<!--
     <div class="test_scenario">
         <div class="test_scenario_controls">
             <button onClick='Rho.WebView.setCookie(document.URL, "key_1=NewStoredCookie1;key_2=DevaStoredCookie2;key_3=bhaktabhakta");'>Set multiple cookie</button>
@@ -993,7 +1009,7 @@
             <span>Set multiple cookie</span>
         </div>
     </div>
-
+-->
 
 </div>
 
