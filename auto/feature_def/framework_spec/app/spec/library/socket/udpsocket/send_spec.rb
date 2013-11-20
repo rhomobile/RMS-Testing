@@ -1,6 +1,9 @@
 require 'spec/spec_helper'
 require 'spec/library/socket/fixtures/classes'
 
+if System::get_property('platform') != 'WINDOWS' && 
+   System.get_property('platform') != 'WINDOWS_DESKTOP'
+
 describe "UDPSocket.send" do
   before :each do
     @ready = false
@@ -55,4 +58,6 @@ describe "UDPSocket.send" do
     @msg[1][1].should be_kind_of(Fixnum)
     @msg[1][3].should == "127.0.0.1"
   end
+end
+
 end
