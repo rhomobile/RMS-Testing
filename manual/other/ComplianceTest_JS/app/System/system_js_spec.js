@@ -7,6 +7,7 @@ describe("System Module JS Test Starts Here", function() {
 	});
 
 	describe("System Module-Setting Directly Test Starts Here", function() {
+/*		
 		it("VT300-027 | call getProperty with locale | ", function() {
 			runs(function(){
 				var data = Rho.System.getProperty('locale');
@@ -22,11 +23,11 @@ describe("System Module JS Test Starts Here", function() {
 			});
 			
 		});
-
-		it("VT300-070 | call getAllProperties() | ", function() {
+*/
+		it("VT200-0682 | call getAllProperties() | ", function() {
 			runs(function(){
 				var data =  Rho.System.getAllProperties();
-				displayResult("VT300-070 | call getAllProperties() | ",JSON.stringify(data));
+				displayResult("VT200-0682 | call getAllProperties() | ",JSON.stringify(data));
 			});
 
 			waitsFor(function(){
@@ -66,10 +67,10 @@ describe("System Module JS Test Starts Here", function() {
 
 	describe("System Module- getProperties Test Starts Here", function() {
 	
-		it("VT300-126 | call getproperties with country,deviceName, devicePushId, freeServerPort and sync callback | ", function() {
+		it("VT200-0689 | call getproperties with country,deviceName, devicePushId, freeServerPort and sync callback | ", function() {
 			runs(function(){
 				var data = Rho.System.getProperties(['country','deviceName','devicePushId','freeServerPort']);
-				displayResult("VT300-126 | call getproperties with country,deviceName, devicePushId, freeServerPort and sync callback | ",JSON.stringify(data));
+				displayResult("VT200-0689 | call getproperties with country,deviceName, devicePushId, freeServerPort and sync callback | ",JSON.stringify(data));
 			
 			});
 
@@ -108,7 +109,7 @@ describe("System Module JS Test Starts Here", function() {
 				}
 			})(i);
 		}
-
+/*
 		it("VT300-127  | call getproperties with callback as anonymous function | ", function() {
 			var data = '';
 			var flag = false;
@@ -144,8 +145,8 @@ describe("System Module JS Test Starts Here", function() {
 			});
 			
 		});
-
-		it("VT300-128 | call getproperties with callback as async defined function | ", function() {
+*/
+		it("VT200-0688 | call getproperties with callback as async defined function | ", function() {
 			var data = '';
 			var flag = false;
 			var sysAsyncCallback = function (objData){data = JSON.stringify(objData);}
@@ -165,7 +166,7 @@ describe("System Module JS Test Starts Here", function() {
     		}, "1 sec wait", 2000);
 
     		runs(function(){
-				displayResult("VT300-128 | call getproperties with callback as anonymous function | ",data);
+				displayResult("VT200-0688 | call getproperties with callback as async defined function | ",data);
 				waitsFor(function(){
 				return captured;
 				},"Waiting For Result",30000);
@@ -175,5 +176,6 @@ describe("System Module JS Test Starts Here", function() {
 				});
 			});
 		});
+		
 	});
 });

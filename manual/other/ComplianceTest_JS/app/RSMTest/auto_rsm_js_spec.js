@@ -61,6 +61,7 @@ describe("RSM JS API", function() {
 		});
 //		if (BTstatus == "BluetoothConnected")
 //		{
+/*
 			describe("RSM property using set/getProperty for "+ scnid +": "+ scnname, function() {
 
 				for (var i=0;i<arrScanner.length;i++){
@@ -75,7 +76,7 @@ describe("RSM JS API", function() {
 					})(i);
 				}
 			});
-			
+*/			
 			describe("RSM Read Only property using getProperty for "+ scnid +": "+ scnname, function() {
 
 				for (var i=0;i<arrReadScanner.length;i++){
@@ -90,7 +91,7 @@ describe("RSM JS API", function() {
 					})(i);
 				}
 			});
-			
+/*			
 			describe("RSM property Using set/getProperties for "+ scnid +": "+ scnname, function() {
 
 				for (var i=0;i<arrScanner.length;i++){
@@ -164,7 +165,7 @@ describe("RSM JS API", function() {
 					})(i);
 				}
 			});
-			
+*/			
 			describe("getProperty and get properties with all combination for "+ scnid +": "+ scnname, function() {
 
 				beforeEach(function() {

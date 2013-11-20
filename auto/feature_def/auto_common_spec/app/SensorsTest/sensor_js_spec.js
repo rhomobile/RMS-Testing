@@ -4334,7 +4334,7 @@ describe("Sensor JS API Test", function() {
 
 	});
 
-	it("VT297-0252 | makeSensorByType to get Return the new accelerometer sensor object by type with asynch |", function() {
+	/*it("VT297-0252 | makeSensorByType to get Return the new accelerometer sensor object by type with asynch |", function() {
 	    runs(function () {
        	 	Rho.Sensor.makeSensorByType(Rho.Sensor.SENSOR_TYPE_ACCELEROMETER, function(args) {
                 sensorType = args;
@@ -4410,7 +4410,7 @@ describe("Sensor JS API Test", function() {
     			expect(sensorType).toBeNull();	
 		});
 
-	});
+	});*/
 
 
 	it("VT297-0254 | setProperty MinimumGap to 0 and call getproperty |", function() {
@@ -5363,7 +5363,7 @@ describe("Sensor JS API Test", function() {
 
         waitsFor(function () {
         	if (sensorInstance)
-            	(getstatus != null)
+            	return (getstatus != null);
             else
             	return true;
         }, 'The Accelerometer coordinates should display', 20000);

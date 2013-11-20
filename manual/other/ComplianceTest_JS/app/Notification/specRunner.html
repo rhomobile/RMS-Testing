@@ -39,6 +39,7 @@
 
 	<!-- include spec files here... -->
 	<script type="text/javascript" src="./notification_js_spec.js"></script>
+    <script type="text/javascript" src="./notification_js_test.js"></script>
 
 	<script type="text/javascript">
 
@@ -76,13 +77,15 @@
 </head>
 <body>
  <h1>Notification Manual FD Tests</h1>
-	<P>
-	<b>Test Running: </b><div id="instruction"></div>
-	<P>
-	<b>Expected Result: </b><div id="expectedresult"></div>
-	<P>
-	<input type="button" value="Test Passed" onclick="captureResult(true)" />
-	<input type="button" value="Test Failed" onclick="captureResult(false)"/>
-	<div id="actResult" style="display:none">init</div>
+    <P>
+    <b>Test Objective: </b><div id="objective"></div>
+    <P>
+    <b>Test Running: </b><div id="instruction"></div>
+    <P>
+    <b>Expected Result: </b><div id="expResult"></div>
+    <P>
+    <input type="button" value="Test Passed" onclick="testPassed()" />
+    <input type="button" value="Test Failed" onclick="testFailed()" />
+    <div id="actResult" style="display:none">init</div>
 </body>
 </html>

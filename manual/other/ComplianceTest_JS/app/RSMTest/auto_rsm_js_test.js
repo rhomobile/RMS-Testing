@@ -1,4 +1,6 @@
 var rsm_get_property_unknown_return = [
+
+/*
 {
 	testName		:	"VT400-1001 | Get rsmModelNumber | ",
 	propertyName	:	"rsmModelNumber",
@@ -71,8 +73,9 @@ var rsm_get_property_unknown_return = [
 	propertyValue	:	"Readonly",
 	expectedResult	:	"Unknown"
 },
+*/
 {
-	testName		:	"VT400-1010 | Get rsmBatteryId | ",
+	testName		:	"VT200-0675 | Get rsmBatteryId | ",
 	propertyName	:	"rsmBatteryId",
 	scannerTypes	:	"RSM Bluetooth",
 	OSTypes			:	"WINDOWS",

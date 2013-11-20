@@ -2,6 +2,8 @@ describe("File JS API", function () {
 
 	var userFolder = Rho.Application.userFolder;
 	var publicFolder = Rho.RhoFile.join(Rho.Application.publicFolder);
+    var temporaryDirectory = Rho.RhoFile.join(Rho.Application.userFolder, "temporaryDirectory");
+
 	var fileName = "rhoconfig.txt";
 	var testReadPath = Rho.RhoFile.join(Rho.Application.appsBundleFolder, "rhoconfig.txt");
 	var invalidpath = "/programFiles/Test/rholog.txt";
@@ -45,12 +47,12 @@ describe("File JS API", function () {
 
 
 	beforeEach(function () {
-		var flag = false;
+        Rho.RhoFile.makeDir(temporaryDirectory);
 	});
 
 	// this function will execute after each of test case execution i.e it function
 	afterEach(function () {
-
+       Rho.RhoFile.deleteRecursive(temporaryDirectory);
 	});
 
 
@@ -88,26 +90,22 @@ describe("File JS API", function () {
 		}
 	});
 
-	// Get basename of file
-	it("VT295-001 : get basename of file | 1", function() {
-		runs(function(){
+    // Get basename of file
+    it("VT295-001 : get basename of file | 1", function () {
+        runs(function () {
+         var baseName = Rho.RhoFile.basename(testReadPath);
+            expect(baseName).toEqual(fileName);
+            Rho.Log.info("Test1", "VT290-001");
+            Rho.Log.info(Rho.Application.userFolder, "VT290-001");
+            Rho.Log.info(Rho.Application.publicFolder, "VT290-001");
+        });
+    });
 
 
-			var baseName =Rho.RhoFile.basename(testReadPath);
-			expect(baseName).toEqual(fileName);
-			Rho.Log.info("Test1", "VT290-001");
-			Rho.Log.info(Rho.Application.userFolder, "VT290-001");
-			Rho.Log.info(Rho.Application.publicFolder, "VT290-001");
-
-		});
-	});
-
-
-	var f = [];
+    var f = [];
 
 	// open file
 	it("Open File", function() {
-
 		f = new Rho.RhoFile(path,Rho.RhoFile.OPEN_FOR_READ);
 		expect(typeof(f)).toEqual('object');
 		expect(f.isOpened()).toEqual(true);
@@ -426,15 +424,61 @@ describe("File JS API", function () {
 
 	});
 
-	// is Open with invalid file descriptor
-	it("VT295-041 : is opened ? | false",function(){
+    it("Raises exception while opening nonexistent file in OPEN_FOR_READ mode", function () {
+        expect(function () {
+            new Rho.RhoFile(invalidpath, Rho.RhoFile.OPEN_FOR_READ);
+        }).toThrow();
+    });
 
-		var fInvalid = new Rho.RhoFile(invalidpath,Rho.RhoFile.OPEN_FOR_READ);
-		expect(fInvalid.isOpened()).toEqual(false);
+    it("Raises exception while opening nonexistent file in OPEN_FOR_READ_WRITE mode", function () {
+        expect(function () {
+            new Rho.RhoFile(invalidpath, Rho.RhoFile.OPEN_FOR_READ_WRITE);
+        }).toThrow();
+    });
 
-		fInvalid.close();
+    it("Raises exception while opening nonexistent file in OPEN_FOR_APPEND mode", function () {
+        if (Rho.RhoFile.exists(openTestFile)) {
+            Rho.RhoFile.deleteFile(openTestFile);
+        }
+        expect(function () {
+            new Rho.RhoFile(openTestFile, Rho.RhoFile.OPEN_FOR_APPEND);
+        }).not.toThrow();
+    });
 
-	});
+    it("Raises exception while opening nonexistent file in OPEN_FOR_WRITE mode", function () {
+        if (Rho.RhoFile.exists(openTestFile)) {
+            Rho.RhoFile.deleteFile(openTestFile);
+        }
+        expect(function () {
+            new Rho.RhoFile(openTestFile, Rho.RhoFile.OPEN_FOR_WRITE);
+        }).not.toThrow();
+    });
+
+
+    it("Doesn't raises exception while loading empty file", function () {
+        var filename = Rho.RhoFile.join(temporaryDirectory, "emptyFile");
+        var file = new Rho.RhoFile(filename, Rho.RhoFile.OPEN_FOR_WRITE);
+        try {
+            file.write("");
+        }
+        finally {
+            file.close();
+        }
+        expect(Rho.RhoFile.read(filename)).toEqual('');
+    });
+
+
+    it("Doesn't raises exception while loading file without double quote", function () {
+        var filename = Rho.RhoFile.join(temporaryDirectory, "emptyFile");
+        var file = new Rho.RhoFile(filename, Rho.RhoFile.OPEN_FOR_WRITE);
+        try {
+            file.write("ab");
+        }
+        finally {
+            file.close();
+        }
+        expect(Rho.RhoFile.read(filename)).toEqual('ab');
+    });
 
 
 	// Join operation
@@ -524,7 +568,7 @@ describe("File JS API", function () {
 		expect(Rho.RhoFile.isDir(testDirName)).toEqual(true);
 	});
 
-	
+
 	// mkdirs with invalid path when all top level directories not exists
 	it("VT295-052: makedirs with invalid path | true",function(){
 
@@ -571,23 +615,13 @@ describe("File JS API", function () {
 	});
 
 
-	//open file with mode 2 on file which does not exists
-	it("VT295-058 : open file with mode 2 on file not exists | true",function(){
-
-
-		var fOpen = new Rho.RhoFile(fileMode2,Rho.RhoFile.OPEN_FOR_READ);
-		expect(Rho.RhoFile.exists(fileMode2)).toEqual(false);
-		fOpen.close();
-
-	});
-
 	// open file with mode 2 on file which exists
 	it("VT295-059 : open file with mode 2 on file exists| true",function(){
 
 		var fOpen = new Rho.RhoFile(fileMode1,Rho.RhoFile.OPEN_FOR_READ);
 		expect(Rho.RhoFile.exists(fileMode1)).toEqual(true);
 		var actual = fOpen.readAll();
-		//Rho.Log.info(actual, "VT290-065");
+		//Rho.Log.info(actual, "VT290-058");
 		fOpen.close();
 
 	});
@@ -656,13 +690,6 @@ describe("File JS API", function () {
 		Rho.Log.info(data, "VT290-072");
 	});
 
-	// Read File with invalid path
-	it("VT295-065 : Read contents with invalid path| false",function(){
-		var data = Rho.RhoFile.read(invalidpath);
-		expect(data.length == 0).toEqual(true);
-		Rho.Log.info(data, "VT290-073");
-	});
-
 	// Read with specified size
 	it("VT295-066 : Read contents with specified size| true",function(){
 		var fOpen = new Rho.RhoFile(testReadPath,Rho.RhoFile.OPEN_FOR_READ);
@@ -700,15 +727,6 @@ describe("File JS API", function () {
 		fOpen.close();
 	});
 
-	// Read with specified size with invalid filename
-	it("VT295-069 : Read with specified size with invalid filename| false",function(){
-		var fOpen = new Rho.RhoFile(invalidpath,Rho.RhoFile.OPEN_FOR_READ);
-		var data = fOpen.read(20);
-		expect(!!data && !!data.length && data.length == 0).toEqual(false);
-		fOpen.close();
-	});
-
-
 	// ReadAll with valid file path
 	it("VT295-070 : ReadAll with valid file path| true",function(){
 		var fOpen = new Rho.RhoFile(testReadPath,Rho.RhoFile.OPEN_FOR_READ);
@@ -717,16 +735,6 @@ describe("File JS API", function () {
 		Rho.Log.info(data, "VT290-078");
 		fOpen.close();
 	});
-
-	// ReadAll with invalid file path
-	it("VT295-071 : ReadAll with invalid file path| false",function(){
-		var fOpen = new Rho.RhoFile(invalidpath,Rho.RhoFile.OPEN_FOR_READ);
-		var data = fOpen.readAll();
-		expect(data.length == 0).toEqual(true);
-		Rho.Log.info(data, "VT290-079");
-		fOpen.close();
-	});
-
 
 	// rename with valid source and destination path
 	it("VT295-072 : rename with valid source and destination path| true",function(){

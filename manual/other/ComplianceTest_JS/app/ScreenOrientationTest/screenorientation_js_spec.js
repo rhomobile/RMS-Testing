@@ -31,11 +31,11 @@ describe("Screen Orientation Test", function() {
 	}
 
                       /*  I moved this test to first because on start we do not have defined callback, after test with defined callback we still have defined callback !   So only on begin stage we do not have defined callback ! */
-	it("VT281-0916 | Set autoRotate  without callback rotate the device manualy |", function() {
+	it("VT200-0672 | Set autoRotate  without callback rotate the device manualy |", function() {
 
 		runs(function()
 		{
-            dispCurrentProcess("VT281-0916 | Set autoRotate  without callback rotate the device manualy<br>Rotate the device in all direction manually");
+            dispCurrentProcess("VT200-0672 | Set autoRotate  without callback rotate the device manualy<br>Rotate the device in all direction manually");
 		});
 
 		waitsFor(function()
@@ -49,7 +49,7 @@ describe("Screen Orientation Test", function() {
 		});
 	});
 
-
+/*
 	it("VT281-0911| Set autoRotate as false and try to rotate the device screen manually in all direction |", function() {
 
 		runs(function()
@@ -69,12 +69,12 @@ describe("Screen Orientation Test", function() {
 			expect(testResult).toEqual(true);
 		});
 	});
-
-	it("VT281-0913| Set autoRotate as true and rotate the device in all direction |", function() {
+*/
+	it("VT281-0xxx| Set autoRotate as true and rotate the device in all direction |", function() {
 
 		runs(function()
 		{
-		    dispCurrentProcess("VT281-0913| Set autoRotate as true and rotate the device in all direction<br>Rotate the device in all direction mannually");
+		    dispCurrentProcess("VT281-0xxx| Set autoRotate as true and rotate the device in all direction<br>Rotate the device in all direction mannually");
 			Rho.ScreenOrientation.setScreenOrientationEvent(screenorientation_callback);
 		});
 

@@ -84,7 +84,7 @@ else if (isWindowsMobilePlatform())
 	hardwareKeysTest.testKey14 	= {string: '0x42', description: "b", 	value:0x42};
 	hardwareKeysTest.testKey15 	= {string: '0x32', description: "2", 	value:0x32};
 	hardwareKeysTest.testKey18 	= {string: '0x0D', description: "Enter",value:0x0D};
-	hardwareKeysTest.testKey21 	= {string: '51',   description: "3", 	value:51};
+	hardwareKeysTest.testKey21 	= {string: '49',   description: "1", 	value:49};
 }
 else if (isApplePlatform())
 {

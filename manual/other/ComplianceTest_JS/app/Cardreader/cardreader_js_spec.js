@@ -50,11 +50,11 @@ describe("Card Reader Test", function() {
 	};
   
 	
-	it("VT286-0128 | MSR Card data All Tracks with sync callback |", function() {
+	it("VT200-0665 | MSR Card data All Tracks with sync callback |", function() {
 
 		runs(function()
 		{
-			dispTestCaseRunning("VT286-0128 - MSR Card data All Tracks with sync callback - before swiping card put the cursor inside the text box");
+			dispTestCaseRunning("VT200-0665 - MSR Card data All Tracks with sync callback - before swiping card put the cursor inside the text box");
 			dispExpectedResult("Please wait 11 seconds for the Card Reader to open");
 			Rho.CardReader.open();
 			setTimeout(function() {
@@ -94,7 +94,52 @@ describe("Card Reader Test", function() {
 
 	});
 
-	it("VT286-0136 | MSR Close |", function() {
+	it("VT200-0666 | MSR Card data All Tracks |", function() {
+
+		runs(function()
+		{
+			dispTestCaseRunning("VT200-0666 - MSR Card data All Tracks");
+            dispExpectedResult("Please wait 11 seconds for the Card Reader to open");
+			//Rho.CardReader.open({},callbackCardReader);
+			Rho.CardReader.open(callbackCardReader);
+			setTimeout(function() {
+				openFlag = true;
+			}, 11000);
+		});
+
+		waitsFor(function()
+		{
+			return openFlag;
+		}, '12sec wait to open the CardReader', 12000);
+		
+		runs(function()
+		{
+			dispExpectedResult("Please swipe a card. Readevent should be fired and Mode should be returned as CR and Data should contain all 3 tracks data");
+		});
+
+		waitsFor(function()
+		{
+			return captured;
+		}, 'user did not respond', 240000);
+
+		runs(function()
+		{
+			expect(testResult).toEqual(true);
+			Rho.CardReader.close();
+			dispExpectedResult("Please wait 5 seconds for the Card Reader to close");
+			setTimeout(function() {
+				closeFlag = true;
+			}, 5000);
+	    });
+
+		waitsFor(function()
+		{
+		   return closeFlag;
+		},'5sec Wait to close the CardReader', 6000);
+
+	});
+
+	xit("VT286-0136 | MSR Close |", function() {
 		runs(function()
 		{
 			dispTestCaseRunning("VT286-0136 - MSR Close");
@@ -138,7 +183,7 @@ describe("Card Reader Test", function() {
 
 	});
 
-    it("VT286-0137 | Checking MSR Open |", function() {
+    xit("VT286-0137 | Checking MSR Open |", function() {
 
 		runs(function()
 		{
@@ -181,11 +226,11 @@ describe("Card Reader Test", function() {
 
 	});	
 	
-	it("VT286-0138 | AutoEnter true |", function() {
+	it("VT286-0xxx | AutoEnter true |", function() {
 
 		runs(function()
 		{
-			dispTestCaseRunning("VT286-0138 - AutoEnter true");
+			dispTestCaseRunning("VT286-0xxx - AutoEnter true");
 			dispExpectedResult("Please wait 11 seconds for the Card Reader to open");
 			Rho.CardReader.open();
 			setTimeout(function() {
@@ -228,11 +273,11 @@ describe("Card Reader Test", function() {
 
 	if(Rho.System.platform == 'WINDOWS')
 	{
-		it("VT286-0147 | pinEntry true DCR only|", function() {
+		it("VT200-0667 | pinEntry true DCR only|", function() {
 	
 			runs(function()
 			{
-				dispTestCaseRunning("VT286-0147 - pinEntry true DCR only and swipe financial card only");
+				dispTestCaseRunning("VT200-0667 - pinEntry true DCR only and swipe financial card only");
 				dispExpectedResult("Please wait 11 seconds for the Card Reader to open");
 				//Rho.CardReader.open({},callbackCardReader);
 				Rho.CardReader.open(callbackCardReader);
@@ -276,11 +321,11 @@ describe("Card Reader Test", function() {
 
 	if(Rho.System.platform == 'ANDROID')
 	{
-		it("VT286-0169 |encryption encrypted with financial card|", function() {
+		it("VT200-0668 |encryption encrypted with financial card|", function() {
 	
 			runs(function()
 			{
-				dispTestCaseRunning("VT286-0169 |encryption encrypted with financial card");
+				dispTestCaseRunning("VT200-0668 |encryption encrypted with financial card");
 				//Rho.CardReader.open({},encrypted_callback);
 				Rho.CardReader.open(encrypted_callback);
 				setTimeout(function() {
