@@ -3,7 +3,7 @@ if System.get_property('platform') != 'ANDROID' &&
    System.get_property('platform') != 'WINDOWS_DESKTOP'
 
 describe :socket_pack_sockaddr_in, :shared => true do
-  it "packs and unpacks" do
+  it "packs and unpacks----VT-078" do
     sockaddr_in = Socket.pack_sockaddr_in 0, nil
     port, addr = Socket.unpack_sockaddr_in(sockaddr_in)
     ["127.0.0.1", "::1"].include?(addr).should == true
@@ -19,7 +19,7 @@ end
 
 describe :socket_pack_sockaddr_un, :shared => true do
   not_supported_on :jruby, :windows do
-    it "packs and unpacks" do
+    it "packs and unpacks----VT-079" do
       sockaddr_un = Socket.pack_sockaddr_un '/tmp/s'
       Socket.unpack_sockaddr_un(sockaddr_un).should == '/tmp/s'
     end

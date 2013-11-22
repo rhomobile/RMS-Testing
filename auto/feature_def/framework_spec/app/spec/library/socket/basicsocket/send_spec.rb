@@ -15,7 +15,7 @@ describe "BasicSocket#send" do
     @socket.close
   end
 
-   it "sends a message to another socket and returns the number of bytes sent" do
+   it "sends a message to another socket and returns the number of bytes sent----VT-037" do
      data = ""
      t = Thread.new do
        client = @server.accept
@@ -40,7 +40,7 @@ describe "BasicSocket#send" do
 if System::get_property('platform') != 'WINDOWS' && 
    System.get_property('platform') != 'WINDOWS_DESKTOP' 
 
-   it "accepts flags to specify unusual sending behaviour" do
+   it "accepts flags to specify unusual sending behaviour----VT-038" do
      data = nil
      peek_data = nil
      t = Thread.new do
@@ -62,7 +62,7 @@ if System::get_property('platform') != 'WINDOWS' &&
    end
 end
 
-  it "accepts a sockaddr as recipient address" do
+  it "accepts a sockaddr as recipient address----VT-039" do
      data = ""
      t = Thread.new do
        client = @server.accept

@@ -11,7 +11,7 @@ describe "BasicSocket#setsockopt" do
     @sock.close unless @sock.closed?
   end
 
-  it "sets the socket linger to 0" do
+  it "sets the socket linger to 0----VT-040" do
     linger = [0, 0].pack("ii")
     @sock.setsockopt(Socket::SOL_SOCKET, Socket::SO_LINGER, linger).should == 0
     n = @sock.getsockopt(Socket::SOL_SOCKET, Socket::SO_LINGER).to_s
@@ -23,7 +23,7 @@ describe "BasicSocket#setsockopt" do
     end
   end
 
-  it "sets the socket linger to some positive value" do
+  it "sets the socket linger to some positive value----VT-041" do
     linger = [64, 64].pack("ii")
     @sock.setsockopt(Socket::SOL_SOCKET, Socket::SO_LINGER, linger).should == 0
     n = @sock.getsockopt(Socket::SOL_SOCKET, Socket::SO_LINGER).to_s
@@ -36,7 +36,7 @@ describe "BasicSocket#setsockopt" do
     end
   end
 
-  it "sets the socket option Socket::SO_OOBINLINE" do
+  it "sets the socket option Socket::SO_OOBINLINE----VT-042" do
     @sock.setsockopt(Socket::SOL_SOCKET, Socket::SO_OOBINLINE, true).should == 0
     n = @sock.getsockopt(Socket::SOL_SOCKET, Socket::SO_OOBINLINE).to_s
     n.should_not == [0].pack("i")
@@ -102,7 +102,7 @@ describe "BasicSocket#setsockopt" do
     n.should_not == [0].pack("i")
   end
 
-  it "sets the socket option Socket::SO_SNDBUF" do
+  it "sets the socket option Socket::SO_SNDBUF----VT-043" do
     @sock.setsockopt(Socket::SOL_SOCKET, Socket::SO_SNDBUF, 4000).should == 0
     sndbuf = @sock.getsockopt(Socket::SOL_SOCKET, Socket::SO_SNDBUF).to_s
     # might not always be possible to set to exact size

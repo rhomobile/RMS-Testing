@@ -13,13 +13,23 @@ describe "Socket::BasicSocket#getpeername" do
     @client.close unless @client.closed?
   end
 
-  it "returns the sockaddr of the other end of the connection" do
+  it "returns the sockaddr of the other end of the connection----VT-022" do
     server_sockaddr = Socket.pack_sockaddr_in(SocketSpecs.port, "127.0.0.1")
     @client.getpeername.should == server_sockaddr
   end
 
   # Catch general exceptions to prevent NotImplementedError
-  it "raises an error if socket's not connected" do
+  it "raises an error if socket's not connected----VT-022" do
     lambda { @server.getpeername }.should raise_error(Exception)
+  end
+
+  it "raises an error if socket's not connected----VT-023" do
+    @server.close
+    lambda { @server.getpeername }.should raise_error(Exception)
+  end
+
+  it "raises an error if socket's not connected----VT-024" do
+    @client.close
+    lambda { @client.getpeername }.should raise_error(Exception)
   end
 end

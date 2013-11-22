@@ -15,7 +15,7 @@ describe "Socket#connect_nonblock" do
   end
 
   platform_is_not :freebsd do
-    it "takes an encoded socket address and starts the connection to it" do
+    it "takes an encoded socket address and starts the connection to it----VT-095" do
       lambda {
         @socket.connect_nonblock(@addr)
       }.should raise_error(Errno::EINPROGRESS)
@@ -23,7 +23,7 @@ describe "Socket#connect_nonblock" do
   end
 
   platform_is :freebsd do
-    it "takes an encoded socket address and starts the connection to it" do
+    it "takes an encoded socket address and starts the connection to it----VT-096" do
       lambda {
         begin
           @socket.connect_nonblock(@addr)
@@ -37,7 +37,7 @@ describe "Socket#connect_nonblock" do
     end
   end
 
-  it "connects the socket to the remote side" do
+  it "connects the socket to the remote side----VT-097" do
     ready = false
     thread = Thread.new do
       server = TCPServer.new(@hostname, SocketSpecs.port)

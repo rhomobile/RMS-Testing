@@ -21,21 +21,21 @@ ruby_version_is ""..."1.9" do
       BasicSocket.do_not_reverse_lookup = @do_not_reverse_lookup
     end
 
-    it "defaults to false" do
+    it "defaults to false----VT-013" do
       BasicSocket.do_not_reverse_lookup.should be_false
     end
 
-    it "causes 'peeraddr' to avoid name lookups" do
+    it "causes 'peeraddr' to avoid name lookups----VT-014" do
       BasicSocket.do_not_reverse_lookup = true
       @socket.peeraddr.should == ["AF_INET", SocketSpecs.port, "127.0.0.1", "127.0.0.1"]
     end
 
-    it "looks for hostnames when set to false" do
+    it "looks for hostnames when set to false----VT-015" do
       BasicSocket.do_not_reverse_lookup = false
       @socket.peeraddr[2].should == SocketSpecs.hostname
     end
 
-    it "looks for numeric addresses when set to true" do
+    it "looks for numeric addresses when set to true----VT-016" do
       BasicSocket.do_not_reverse_lookup = true
       @socket.peeraddr[2].should == "127.0.0.1"
     end
@@ -54,23 +54,23 @@ ruby_version_is "1.9" do
       @socket.close unless @socket.closed?
     end
 
-    it "defaults to true" do
+    it "defaults to true----VT-017" do
       BasicSocket.do_not_reverse_lookup.should be_true
     end
 
-    it "causes 'peeraddr' to avoid name lookups" do
+    it "causes 'peeraddr' to avoid name lookups----VT-018" do
       @socket.do_not_reverse_lookup = true
       BasicSocket.do_not_reverse_lookup = true
       @socket.peeraddr.should == ["AF_INET", SocketSpecs.port, "127.0.0.1", "127.0.0.1"]
     end
 
-    it "looks for hostnames when set to false" do
+    it "looks for hostnames when set to false----VT-019" do
       @socket.do_not_reverse_lookup = false
       BasicSocket.do_not_reverse_lookup = false
       @socket.peeraddr[2].should == SocketSpecs.hostname
     end
 
-    it "looks for numeric addresses when set to true" do
+    it "looks for numeric addresses when set to true----VT-020" do
       @socket.do_not_reverse_lookup = true
       BasicSocket.do_not_reverse_lookup = true
       @socket.peeraddr[2].should == "127.0.0.1"

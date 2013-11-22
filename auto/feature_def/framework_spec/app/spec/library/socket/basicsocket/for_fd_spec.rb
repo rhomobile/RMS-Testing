@@ -30,9 +30,15 @@ describe "BasicSocket#for_fd" do
     end
   end
 
-  it "return a Socket instance wrapped around the descriptor" do
+  it "return a Socket instance wrapped around the descriptor----VT-021" do
     @s2 = TCPServer.for_fd(@server.fileno)
     @s2.should be_kind_of(TCPServer)
     @s2.fileno.should == @server.fileno
+  end
+
+  it "try if socket is closed----VT-022" do
+    @server.close
+    @server.closed?.should be_true
+    lambda { @server.fileno }.should raise_error(IOError)
   end
 end
