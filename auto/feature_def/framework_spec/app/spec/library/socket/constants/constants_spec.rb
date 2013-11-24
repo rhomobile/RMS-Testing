@@ -12,7 +12,8 @@ describe "Socket::Constants" do
   end
 
 if System::get_property('platform') != 'WINDOWS' && 
-   System.get_property('platform') != 'WINDOWS_DESKTOP' 
+   System.get_property('platform') != 'WINDOWS_DESKTOP' && 
+   System.get_property('platform') != 'ANDROID'
 
   it "defines protocol families----VT-071" do
     consts = ["PF_INET6", "PF_INET", "PF_IPX", "PF_UNIX", "PF_UNSPEC"]
@@ -28,8 +29,6 @@ if System::get_property('platform') != 'WINDOWS' &&
     end
   end
 
-end
-
   it "defines send/receive options----VT-073" do
     consts = ["MSG_DONTROUTE", "MSG_OOB", "MSG_PEEK"]
     consts.each do |c|
@@ -43,6 +42,7 @@ end
       Socket::Constants.should have_constant(c)
     end
   end
+end
 
   it "defines socket options----VT-075" do
     consts = ["SO_BROADCAST", "SO_DEBUG", "SO_DONTROUTE", "SO_ERROR", "SO_KEEPALIVE", "SO_LINGER",
