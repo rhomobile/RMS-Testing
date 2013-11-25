@@ -1,10 +1,8 @@
-
-
 describe "Rhom" do
   it "should database_full_reset_ex incorrectly and raise an exception" do
     exc = false
     begin
-      Rhom::Rhom.database_full_reset_ex( :models => ['Product'], :reset_client_info => true )
+      ORM::ORM.databaseFullResetEx( :models => ['Product'], :reset_client_info => true )
     rescue => e
       exc = true
     end
@@ -13,10 +11,10 @@ describe "Rhom" do
   end
 
   it "should database_full_reset_ex support different parameters" do
-    Rhom::Rhom.database_full_reset_ex
-    Rhom::Rhom.database_full_reset_ex( :reset_client_info => true )
-    Rhom::Rhom.database_full_reset_ex( :reset_local_models => true )
-    Rhom::Rhom.database_full_reset_ex( :reset_local_models => true, :reset_client_info => false )
+    ORM::ORM.databaseFullResetEx
+    ORM::ORM.databaseFullResetEx( :reset_client_info => true )
+    ORM::ORM.databaseFullResetEx( :reset_local_models => true )
+    ORM::ORM.databaseFullResetEx( :reset_local_models => true, :reset_client_info => false )
   end
 
   it "should database_full_reset_ex with models" do
@@ -30,7 +28,7 @@ describe "Rhom" do
     res = Customer.find(:count)
     res.should > 0
 
-    Rhom::Rhom.database_full_reset_ex( :models => ['Product', 'Customer'] )
+    ORM::ORM.databaseFullResetEx( :models => ['Product', 'Customer'] )
     Rho::RhoConfig.reset_models.should == 'Product,Customer'
 
     res = Product.find(:all)
@@ -51,7 +49,7 @@ describe "Rhom" do
     res = Customer.find(:count)
     res.should > 0
 
-    Rhom::Rhom.database_full_reset_ex( :models => ['Product'] )
+    ORM::ORM.databaseFullResetEx(:models=>['Product'])
     Rho::RhoConfig.reset_models.should == 'Product'
 
     res = Product.find(:all)
@@ -60,4 +58,48 @@ describe "Rhom" do
     res = Customer.find(:count)
     res.should > 0
   end
+
+  it "should return true if have local changes" do
+    Product_s.create(:name=>"testchange")
+    ORM::ORM.haveLocalChanges().should_not be_nil
+  end
+
+  it "should full reset and logout" do
+    Product_s.create( { :name => 'prod1' } )
+    Customer_s.create( { :city => 'SPB' } )
+
+    res = Product_s.find(:all)
+    res.length.should > 0
+
+    res = Customer_s.find(:count)
+    res.should > 0
+
+    ORM::ORM.databaseFullResetAndLogout()
+
+    res = Product_s.find(:all)
+    res.length.should == 0
+
+    res = Customer_s.find(:all)
+    res.length.should == 0
+  end
+
+  it "should full client reset and logout" do
+    Product_s.create( { :name => 'prod1' } )
+    Customer_s.create( { :city => 'SPB' } )
+
+    res = Product_s.find(:all)
+    res.length.should > 0
+
+    res = Customer_s.find(:count)
+    res.should > 0
+
+    ORM::ORM.databaseFullclientResetAndLogout()
+
+    res = Product_s.find(:all)
+    res.length.should == 0
+
+    res = Customer_s.find(:all)
+    res.length.should == 0
+  end
+
 end

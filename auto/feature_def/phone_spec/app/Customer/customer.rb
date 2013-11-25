@@ -1,5 +1,6 @@
+require 'rhom'
 class Customer
-  include Rhom::PropertyBag
+  include ORM::PropertyBag
 
   enable :sync
 

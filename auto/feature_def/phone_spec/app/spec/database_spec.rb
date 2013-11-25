@@ -26,7 +26,7 @@ describe "Database_test" do
 	before(:all)  do
 		#		SyncEngine.set_threaded_mode(false)
 		
-		::Rhom::Rhom.database_full_reset_and_logout
+		ORM::ORM.database_full_reset_and_logout
 		
 	end
 	
@@ -63,12 +63,12 @@ if  System.get_property('platform') != 'WP8'
 		items = BlobBulkTest.find(:all)
 		items.size.should == 1		
 
-		exportPath = ::Rhom::Rhom.database_export('user')
+		exportPath = ORM::ORM.database_export('user')
 		exportPath.should_not be_nil		
 		File.exists?(exportPath).should == true
 		File.size(exportPath).should_not == 0
 
-		Rhom::Rhom.database_full_reset
+		ORM::ORM.database_full_reset
 
 		items = BlobBulkTest_s.find(:all)
 		puts "BlobBulkTest_s = #{items}"
@@ -78,7 +78,7 @@ if  System.get_property('platform') != 'WP8'
 		puts "BlobBulkTest = #{items}"
 		items.size.should == 0
 
-		::Rhom::Rhom.database_import('user',exportPath).should == true
+		ORM::ORM.database_import('user',exportPath).should == true
 
 		BlobBulkTest_s.find(:all).size.should == 1
 		BlobBulkTest.find(:all).size.should == 1
@@ -88,11 +88,11 @@ if  System.get_property('platform') != 'WP8'
 	end
 
 	it "should reset database Database spec" do
-		::Rhom::Rhom.database_full_reset_and_logout
+		ORM::ORM.database_full_reset_and_logout
 	end
 
 	it "should import database Database spec" do
-		::Rhom::Rhom.database_import('user',File.join(Rho::RhoApplication::get_base_app_path(),'app/Data/valid_import_db.zip')).should == true
+		ORM::ORM.database_import('user',File.join(Rho::RhoApplication::get_base_app_path(),'app/Data/valid_import_db.zip')).should == true
 		
 		items = BlobBulkTest_s.find(:all)
 		items.should_not be_nil
@@ -104,8 +104,6 @@ if  System.get_property('platform') != 'WP8'
 		File.exists?(File.join(Rho::RhoApplication::get_blob_folder(),item.image_uri)).should == true
 	end
 
-	it "should import invalid data and rollback" do
-	end
 end
 
 end

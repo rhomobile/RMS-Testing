@@ -203,7 +203,7 @@ describe "Rhom::RhomObject" do
   end
   
   it "should respond to find_all" do
-    results = getAccount.find_all(:order => 'name', :orderdir => "DESC")
+    results = getAccount.findAll(:order => 'name', :orderdir => "DESC")
     results.length.should == 2
     results[0].name.should == "Mobio India"
     results[0].industry.should == "Technology"
@@ -212,7 +212,7 @@ describe "Rhom::RhomObject" do
   end
 
   it "should compare 2 props" do
-    results = getAccount.find_all(:order => 'name', :orderdir => "DESC")
+    results = getAccount.findAll(:order => 'name', :orderdir => "DESC")
     results.length.should == 2
     
     res = false
@@ -371,7 +371,7 @@ end
     @account2.industry.should == vars['industry']
     
     update_attributes = {"industry"=>"electronics2"}
-    @account2.update_attributes(update_attributes)
+    @account2.updateAttributes(update_attributes)
 
     @account3 = getAccount.find(new_id)    
     @account3.object.should =="#{@account1.object}"
@@ -429,7 +429,7 @@ end
   it "should partially update a record" do
     new_attributes = {"name"=>"Mobio US"}
     @account = getAccount.find("44e804f2-4933-4e20-271c-48fcecd9450d")
-    @account.update_attributes(new_attributes)
+    @account.updateAttributes(new_attributes)
     @new_acct = getAccount.find("44e804f2-4933-4e20-271c-48fcecd9450d")
     @new_acct.name.should == "Mobio US"
     @new_acct.industry.should == "Technology"
@@ -486,7 +486,7 @@ end
     item2.TwoProps.should == '2'
 
     new_attributes  = {'propOne'=>'4', 'TwoProps'=>'3'}
-    item2.update_attributes(new_attributes)
+    item2.updateAttributes(new_attributes)
 
     item3 = getAccount.find(item.object)
     item3.propOne.should == new_attributes['propOne']
@@ -519,7 +519,7 @@ end
   it "should update a record  diff case name" do
     new_attributes = {"name"=>"Mobio US"}
     @account = getAccount.find("44e804f2-4933-4e20-271c-48fcecd9450d")
-    @account.update_attributes(new_attributes)
+    @account.updateAttributes(new_attributes)
     @new_acct = getAccount.find("44e804f2-4933-4e20-271c-48fcecd9450d")
     @new_acct.name.should == "Mobio US"
     @new_acct.industry.should == "Technology"
@@ -536,7 +536,7 @@ end
   
     new_attributes = {"created_by_name"=>"evgeny"}
     @case = getCase.find("41a4e1f1-2c0c-7e51-0495-4900dc4c072c")
-    @case.update_attributes(new_attributes)
+    @case.updateAttributes(new_attributes)
     @new_case = getCase.find("41a4e1f1-2c0c-7e51-0495-4900dc4c072c")
     @new_case.created_by_name.should == "evgeny"
 
@@ -574,7 +574,7 @@ end
                       "object_acct"=>"new object",
                       "acct_object"=>"same object"}
     @account = getAccount.find('44e804f2-4933-4e20-271c-48fcecd9450d')
-    @account.update_attributes(new_attributes)
+    @account.updateAttributes(new_attributes)
   
     @new_acct = getAccount.find('44e804f2-4933-4e20-271c-48fcecd9450d')
   
@@ -592,7 +592,7 @@ end
     else
         new_attributes = {"attrib_type"=>"Partner"}
         @account = getAccount.find('44e804f2-4933-4e20-271c-48fcecd9450d')
-        @account.update_attributes(new_attributes)
+        @account.updateAttributes(new_attributes)
       
         @new_acct = getAccount.find('44e804f2-4933-4e20-271c-48fcecd9450d')
       
@@ -606,7 +606,7 @@ end
   it "should update an attribute that was previously nil" do
     new_attributes = {"new_name"=>"Mobio Europe"}
     @account = getAccount.find('44e804f2-4933-4e20-271c-48fcecd9450d')
-    @account.update_attributes(new_attributes)
+    @account.updateAttributes(new_attributes)
     
     @new_acct = getAccount.find('44e804f2-4933-4e20-271c-48fcecd9450d')
     
@@ -629,7 +629,7 @@ end
   it "should update an attribute to empty string" do
     new_attributes = {"name"=>""}
     @account = getAccount.find('44e804f2-4933-4e20-271c-48fcecd9450d')
-    @account.update_attributes(new_attributes)
+    @account.updateAttributes(new_attributes)
     
     @new_acct = getAccount.find('44e804f2-4933-4e20-271c-48fcecd9450d')
   
@@ -654,7 +654,7 @@ end
     object_id = '44e804f2-4933-4e20-271c-48fcecd9450d'
     new_attributes1 = {"new_name"=>"Mobio Europe"}
     @account = getAccount.find(object_id)
-    @account.update_attributes(new_attributes1)
+    @account.updateAttributes(new_attributes1)
     if $spec_settings[:sync_model]    
         records = getTestDB().select_from_table('changed_values','*', 'update_type' => 'update')
         records.length.should == 1
@@ -668,7 +668,7 @@ end
     
     new_attributes2 = {"new_name"=>"Mobio Asia"}
     @account = getAccount.find(object_id)
-    @account.update_attributes(new_attributes2)
+    @account.updateAttributes(new_attributes2)
     if $spec_settings[:sync_model]    
         records = getTestDB().select_from_table('changed_values','*', 'update_type' => 'update')
         records.length.should == 1
@@ -688,7 +688,7 @@ end
   it "should update record with time field" do
     @acct = getAccount.find('44e804f2-4933-4e20-271c-48fcecd9450d')
   
-    @acct.update_attributes(:last_checked =>Time.now())
+    @acct.updateAttributes(:last_checked =>Time.now())
     @accts = getAccount.find(:all, 
     #:conditions => ["last_checked > ?", (Time.now-(10*60)).to_i])
      :conditions => { {:name=>'last_checked', :op=>'>'}=>(Time.now-(10*60)).to_i() } )
@@ -728,6 +728,18 @@ end
     @accts.length.should == 1
     @accts[0].name.should == "Mobio India"
     @accts[0].industry.should == "Technology"
+  end
+
+  it "should deleteAll objects" do
+    @accts = getAccount.find(:all)
+    @accts.length.should == 2
+    getAccount.deleteAll()
+    @accts = getAccount.find(:all)
+    @accts.length.should == 0
+  end
+
+  it "should get source name" do
+    Account.getSourceName().should == "Account"
   end
 
   it "should find with advanced OR conditions" do
@@ -1450,7 +1462,7 @@ end
   it "should find by sql" do
     if $spec_settings[:schema_model]
     
-        @accts = getAccount.find_by_sql("SELECT * FROM " + getAccount_str() )
+        @accts = getAccount.findBySql("SELECT * FROM " + getAccount_str() )
         @accts.length.should == 2
         
         @accts[0].name.should_not be_nil
@@ -1633,7 +1645,7 @@ if !defined?(RHO_WP7)
     
     if $spec_settings[:schema_model]  
         lambda { 
-            getCase().find_by_sql("INSERT INTO #{getCase_str()}(object,wrong_address) values ('1234', 'my_addr')")
+            getCase().findBySql("INSERT INTO #{getCase_str()}(object,wrong_address) values ('1234', 'my_addr')")
         }.should raise_error(ArgumentError)            
     end
     
@@ -1667,14 +1679,14 @@ end
     res2.description.should == "test2"
     
     obj3 = getCase().new
-    obj3.update_attributes(:description => 'test3')
+    obj3.updateAttributes(:description => 'test3')
     obj3.description.should == "test3"
     res3 = getCase().find(obj3.object)
     res3.should_not be_nil
     res3.description.should == "test3"    
 
     if $spec_settings[:schema_model]  
-        getCase().find_by_sql("INSERT INTO #{getCase_str()}(object,description) values ('1234', 'my_addr')")
+        getCase().findBySql("INSERT INTO #{getCase_str()}(object,description) values ('1234', 'my_addr')")
         res4 = getCase().find('1234')
         res4.should_not be_nil
         res4.description.should == "my_addr"    
