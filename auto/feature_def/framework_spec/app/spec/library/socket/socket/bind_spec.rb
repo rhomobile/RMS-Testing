@@ -79,8 +79,11 @@ describe "Socket#bind on SOCK_STREAM socket" do
     end
   end
 
+=begin
   it "raises Errno::ENETDOWN when the network is down----VT-094" do
     sockaddr1 = Socket.pack_sockaddr_in(80, 'www.google.com');
     lambda { @sock.bind(sockaddr1); }.should raise_error(Errno::ENETDOWN)
   end
+=end
+
 end
