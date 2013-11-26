@@ -3,7 +3,7 @@ require 'spec/library/socket/fixtures/classes'
 require 'socket'
 
 describe "Socket.for_fd given a file descriptor" do
-  it "adopts that descriptor into a new Socket object" do
+  it "adopts that descriptor into a new Socket object----VT-098" do
     begin
       server = TCPServer.new("127.0.0.1", SocketSpecs.port)
       client = TCPSocket.open("127.0.0.1", SocketSpecs.port)

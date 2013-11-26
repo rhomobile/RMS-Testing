@@ -9,13 +9,13 @@ describe "Socket" do
 end
 
 describe "The socket class hierarchy" do
-  it "has an IPSocket in parallel to Socket" do
+  it "has an IPSocket in parallel to Socket----VT-0131" do
     Socket.ancestors.include?(IPSocket).should == false
     IPSocket.ancestors.include?(Socket).should == false
     IPSocket.superclass.should == BasicSocket
   end
 
-  it "has TCPSocket and UDPSocket subclasses of IPSocket" do
+  it "has TCPSocket and UDPSocket subclasses of IPSocket----VT-0132" do
     TCPSocket.superclass.should == IPSocket
     UDPSocket.superclass.should == IPSocket
   end
@@ -24,7 +24,7 @@ describe "The socket class hierarchy" do
      System.get_property('platform') != 'WINDOWS_DESKTOP' 
 
   not_supported_on :jruby, :windows do
-    it "has a UNIXSocket in parallel to Socket" do
+    it "has a UNIXSocket in parallel to Socket----VT-0133" do
       Socket.ancestors.include?(UNIXSocket).should == false
       UNIXSocket.ancestors.include?(Socket).should == false
       UNIXSocket.superclass.should == BasicSocket
@@ -38,7 +38,7 @@ if System::get_property('platform') != 'WINDOWS' &&
 
 not_supported_on :jruby, :windows do
   describe "Server class hierarchy" do
-    it "contains UNIXServer" do
+    it "contains UNIXServer----VT-0134" do
       UNIXServer.superclass.should == UNIXSocket
     end
   end

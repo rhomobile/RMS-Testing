@@ -11,7 +11,7 @@ describe "TCPServer#accept" do
     @server.close unless @server.closed?
   end
 
-  it "accepts a connection and returns a TCPSocket" do
+  it "accepts a connection and returns a TCPSocket----VT-0143" do
     data = nil
     t = Thread.new do
       client = @server.accept
@@ -31,7 +31,7 @@ describe "TCPServer#accept" do
     socket.close
   end
 
-  it "can be interrupted by Thread#kill" do
+  it "can be interrupted by Thread#kill----VT-0144" do
     t = Thread.new { @server.accept }
 
     Thread.pass while t.status and t.status != "sleep"
@@ -48,7 +48,7 @@ describe "TCPServer#accept" do
     a.should < 2000
   end
 
-  it "can be interrupted by Thread#raise" do
+  it "can be interrupted by Thread#raise----VT-0145" do
     t = Thread.new { @server.accept }
 
     Thread.pass while t.status and t.status != "sleep"

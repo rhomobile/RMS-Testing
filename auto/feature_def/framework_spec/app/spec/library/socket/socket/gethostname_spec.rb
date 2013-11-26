@@ -8,7 +8,7 @@ if System.get_property('platform') != 'ANDROID' &&
   describe "Socket.gethostname" do
     # This currently works in Unix and Windows. Feel free to add guards
     # for other platforms.
-    it "returns the host name" do
+    it "returns the host name----VT-0107" do
       Socket.gethostname.should == `hostname`.strip
     end
   end

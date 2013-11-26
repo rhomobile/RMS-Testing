@@ -24,7 +24,7 @@ describe "Socket#getaddrinfo" do
      System::get_property('platform') != 'WINDOWS' && 
      System.get_property('platform') != 'WINDOWS_DESKTOP' 
 
-  it "gets the address information" do
+  it "gets the address information----VT-099" do
     BasicSocket.do_not_reverse_lookup = true
     expected = []
     # The check for AP_INET6's class is needed because ipaddr.rb adds
@@ -69,7 +69,7 @@ describe "Socket#getaddrinfo" do
    # sockets (AI_PASSIVE not set) it should return the loopback
    # address (127.0.0.1 or "::1".
 
-   it "accepts empty addresses for IPv4 passive sockets" do
+   it "accepts empty addresses for IPv4 passive sockets----VT-0100" do
      res = Socket::getaddrinfo(nil, "http",
                                Socket::AF_INET,
                                Socket::SOCK_STREAM,
@@ -82,7 +82,7 @@ describe "Socket#getaddrinfo" do
 
 
 
-   it "accepts empty addresses for IPv4 non-passive sockets" do
+   it "accepts empty addresses for IPv4 non-passive sockets----VT-0101" do
     BasicSocket.do_not_reverse_lookup = true
      res = Socket::getaddrinfo(nil, "http",
                                Socket::AF_INET,
@@ -94,7 +94,7 @@ describe "Socket#getaddrinfo" do
      res.should == expected
    end
 
-   it "accepts empty addresses for IPv6 passive sockets" do
+   it "accepts empty addresses for IPv6 passive sockets----VT-0102" do
      BasicSocket.do_not_reverse_lookup = true
      res = Socket::getaddrinfo(nil, "http",
                                Socket::AF_INET6,
@@ -110,7 +110,7 @@ describe "Socket#getaddrinfo" do
    end
 
 
-   it "accepts empty addresses for IPv6 non-passive sockets" do
+   it "accepts empty addresses for IPv6 non-passive sockets----VT-0103" do
      BasicSocket.do_not_reverse_lookup = true
      res = Socket::getaddrinfo(nil, "http",
                                Socket::AF_INET6,

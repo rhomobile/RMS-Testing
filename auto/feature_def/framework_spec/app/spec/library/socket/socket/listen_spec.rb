@@ -13,7 +13,7 @@ describe "Socket#listen" do
     @socket.close
   end
 
-  it "verifies we can listen for incoming connections" do
+  it "verifies we can listen for incoming connections----VT-0122" do
     sockaddr = Socket.pack_sockaddr_in(SocketSpecs.port, "127.0.0.1")
     @socket.setsockopt(Socket::SOL_SOCKET, Socket::SO_REUSEADDR, true)
     @socket.bind(sockaddr)

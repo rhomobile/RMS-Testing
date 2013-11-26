@@ -22,7 +22,7 @@ describe "UDPSocket.send" do
     Thread.pass while @server_thread.status and !@ready
   end
 
-  it "sends data in ad hoc mode" do
+  it "sends data in ad hoc mode----VT-0192" do
     @socket = UDPSocket.open
     @socket.send("ad hoc", 0, SocketSpecs.hostname,SocketSpecs.port)
     @socket.close
@@ -34,7 +34,7 @@ describe "UDPSocket.send" do
     @msg[1][3].should == "127.0.0.1"
   end
 
-  it "sends data in ad hoc mode (with port given as a String)" do
+  it "sends data in ad hoc mode (with port given as a String)----VT-0193" do
     @socket = UDPSocket.open
     @socket.send("ad hoc", 0, SocketSpecs.hostname,SocketSpecs.str_port)
     @socket.close
@@ -46,7 +46,7 @@ describe "UDPSocket.send" do
     @msg[1][3].should == "127.0.0.1"
   end
 
-  it "sends data in connection mode" do
+  it "sends data in connection mode----VT-0194" do
     @socket = UDPSocket.open
     @socket.connect(SocketSpecs.hostname,SocketSpecs.port)
     @socket.send("connection-based", 0)

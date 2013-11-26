@@ -10,11 +10,11 @@ describe :tcpsocket_new, :shared => true do
     @hostname = SocketSpecs::SpecTCPServer.get.hostname
   end
 
-  it "requires a hostname and a port as arguments" do
+  it "requires a hostname and a port as arguments----VT-0158" do
     lambda { TCPSocket.send(@method) }.should raise_error(ArgumentError)
   end
 
-  it "refuses the connection when there is no server to connect to" do
+  it "refuses the connection when there is no server to connect to----VT-0159" do
     lambda do
       TCPSocket.send(@method, @hostname, SocketSpecs.local_port)
     end.should raise_error(Errno::ECONNREFUSED)
@@ -32,23 +32,23 @@ describe :tcpsocket_new, :shared => true do
       end
     end
 
-    it "connects to a listening server with host and port" do
+    it "connects to a listening server with host and port----VT-0160" do
       @socket = TCPSocket.send(@method, @hostname, SocketSpecs.port)
       @socket.should be_an_instance_of(TCPSocket)
     end
 
-    it "connects to a server when passed local_host argument" do
+    it "connects to a server when passed local_host argument----VT-0161" do
       @socket = TCPSocket.send(@method, @hostname, SocketSpecs.port, @hostname)
       @socket.should be_an_instance_of(TCPSocket)
     end
 
-    it "connects to a server when passed local_host and local_port arguments" do
+    it "connects to a server when passed local_host and local_port arguments----VT-0162" do
       @socket = TCPSocket.send(@method, @hostname, SocketSpecs.port,
                                @hostname, SocketSpecs.local_port)
       @socket.should be_an_instance_of(TCPSocket)
     end
 
-    it "has an address once it has connected to a listening server" do
+    it "has an address once it has connected to a listening server----VT-0163" do
       @socket = TCPSocket.send(@method, @hostname, SocketSpecs.port)
       @socket.should be_an_instance_of(TCPSocket)
 
