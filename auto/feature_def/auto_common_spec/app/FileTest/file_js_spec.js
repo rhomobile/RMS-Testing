@@ -930,20 +930,59 @@ describe("RMS 4.0 File JS API", function () {
 	
 	
 	describe("RMS 4.1 : [SPB] Fix File reading errors in javascript", function () {
-	
+		var description;
 		it("VT288-087 :Raises exception while opening nonexistent file in OPEN_FOR_READ mode", function () {
+		
+			
 	        expect(function () {
 	            new Rho.RhoFile(invalidpath, Rho.RhoFile.OPEN_FOR_READ);
 	        }).toThrow();
+			
+			try {
+				new Rho.RhoFile(invalidpath, Rho.RhoFile.OPEN_FOR_READ);
+			} 
+			catch(e){
+				 description = e;
+				//Rho.Log.info(description, "VT290-328");
+			}
+			
+			var expectString = "Could not open file: '/programFiles/Test/rholog.txt'"
+			expect(description).toBe(expectString);
+			
 	    });
+		
+		/*
+		it("VT288-087 : Test Raises exception while opening nonexistent file in OPEN_FOR_READ mode", function () {
+	        try {
+				new Rho.RhoFile(invalidpath, Rho.RhoFile.OPEN_FOR_READ);
+			} 
+			catch(err){
+				var txt = "exception is => " + err;
+				Rho.Log.info(txt, "VT290-328");
+			}
+			
+	        
+	    });
+		*/
 	
 	    it("VT288-088 :Raises exception while opening nonexistent file in OPEN_FOR_READ_WRITE mode", function () {
 	        expect(function () {
 	            new Rho.RhoFile(invalidpath, Rho.RhoFile.OPEN_FOR_READ_WRITE);
 	        }).toThrow();
+			
+			try {
+				new Rho.RhoFile(invalidpath, Rho.RhoFile.OPEN_FOR_READ_WRITE);
+			} 
+			catch(e){
+				 description = e;
+				//Rho.Log.info(description, "VT290-328");
+			}
+			
+			var expectString = "Could not open file: '/programFiles/Test/rholog.txt'"
+			expect(description).toBe(expectString);
 	    });
 	
-	    it("VT288-089 :Raises exception while opening nonexistent file in OPEN_FOR_APPEND mode", function () {
+	    it("VT288-089 :Don't Raises exception while opening nonexistent file in OPEN_FOR_APPEND mode", function () {
 	        if (Rho.RhoFile.exists(openTestFile)) {
 	            Rho.RhoFile.deleteFile(openTestFile);
 	        }
@@ -952,8 +991,8 @@ describe("RMS 4.0 File JS API", function () {
 	        }).not.toThrow();
 	    });
 	
-	    it("VT288-090 :Raises exception while opening nonexistent file in OPEN_FOR_WRITE mode", function () {
-	        if (Rho.RhoFile.exists(openTestFile)) {
+	    it("VT288-090 :Don't Raises exception while opening non existent file in OPEN_FOR_WRITE mode", function () {
+	        if (Rho.RhoFile.exists(openTestFile)) {	
 	            Rho.RhoFile.deleteFile(openTestFile);
 	        }
 	        expect(function () {
@@ -965,10 +1004,21 @@ describe("RMS 4.0 File JS API", function () {
 	        expect(function () {
 	            Rho.RhoFile.read(invalidpath);
 	        }).toThrow();
+			
+			try {
+				Rho.RhoFile.read(invalidpath);
+			} 
+			catch(e){
+				 description = e;
+				//Rho.Log.info(description, "VT290-328");
+			}
+			
+			var expectString = "Could not read file: '/programFiles/Test/rholog.txt'"
+			expect(description).toBe(expectString);
 	    });
 		
 		
-	    it("VT288-092 :Doesn't raises exception while loading empty file", function () {
+	    it("VT288-092 :Doesn't raises exception while reading empty file", function () {
 	        var filename = Rho.RhoFile.join(temporaryDirectory, "emptyFile");
 	        var file = new Rho.RhoFile(filename, Rho.RhoFile.OPEN_FOR_WRITE);
 	        try {
@@ -979,9 +1029,20 @@ describe("RMS 4.0 File JS API", function () {
 	        }
 	        expect(Rho.RhoFile.read(filename)).toEqual('');
 	    });
+		it("VT288-093 :Doesn't raises exception while reading CR LF", function () {
+	        var filename = Rho.RhoFile.join(temporaryDirectory, "emptyFile");
+	        var file = new Rho.RhoFile(filename, Rho.RhoFile.OPEN_FOR_WRITE);
+	        try {
+	            file.write("\r\n");
+				
+	        }
+	        finally {
+	            file.close();
+	        }
+	        expect(Rho.RhoFile.read(filename)).toEqual('\r\n');
+	    });
 	
-	
-	    it("VT288-093 :Doesn't raises exception while loading file without double quote", function () {
+	    it("VT288-094 :Doesn't raises exception while loading file without double quote", function () {
 	        var filename = Rho.RhoFile.join(temporaryDirectory, "emptyFile");
 	        var file = new Rho.RhoFile(filename, Rho.RhoFile.OPEN_FOR_WRITE);
 	        try {
