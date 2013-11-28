@@ -1,83 +1,91 @@
 describe("DPX", function () {
+    var dpxInstance;
+    beforeEach(function() {
+       dpxInstance = Rho.DPX.open(function(){});
+    });
+
+    afterEach(function() {
+      dpxInstance.close();
+    });
 
     it("Should set debugMode property to true", function () {
-        Rho.DPX.debugMode = true;
-        expect(Rho.DPX.debugMode).toEqual(true);
+        dpxInstance.debugMode = true;
+        expect(dpxInstance.debugMode).toEqual(true);
     });
 
     it("Should set debugMode property to false", function () {
-        Rho.DPX.debugMode = false;
-        expect(Rho.DPX.debugMode).toEqual(false);
+        dpxInstance.debugMode = false;
+        expect(dpxInstance.debugMode).toEqual(false);
     });
 
     it("Should set fedbackAudio property to true", function () {
-        Rho.DPX.fedbackAudio = true;
-        expect(Rho.DPX.fedbackAudio).toEqual(true);
+        dpxInstance.fedbackAudio = true;
+        expect(dpxInstance.fedbackAudio).toEqual(true);
     });
 
     it("Should set fedbackAudio property to false", function () {
-        Rho.DPX.fedbackAudio = false;
-        expect(Rho.DPX.fedbackAudio).toEqual(false);
+        dpxInstance.fedbackAudio = false;
+        expect(dpxInstance.fedbackAudio).toEqual(false);
     });
 
     it("Should set feedbackHaptic property to true", function () {
-        Rho.DPX.feedbackHaptic = true;
-        expect(Rho.DPX.feedbackHaptic).toEqual(true);
+        dpxInstance.feedbackHaptic = true;
+        expect(dpxInstance.feedbackHaptic).toEqual(true);
     });
 
     it("Should set feedbackHaptic property to false", function () {
-        Rho.DPX.feedbackHaptic = false;
-        expect(Rho.DPX.feedbackHaptic).toEqual(false);
+        dpxInstance.feedbackHaptic = false;
+        expect(dpxInstance.feedbackHaptic).toEqual(false);
     });
 
     it("Should set feedbackLed property to true", function () {
-        Rho.DPX.feedbackLed = true;
-        expect(Rho.DPX.feedbackLed).toEqual(true);
+        dpxInstance.feedbackLed = true;
+        expect(dpxInstance.feedbackLed).toEqual(true);
     });
 
     it("Should set feedbackLed property to false", function () {
-        Rho.DPX.feedbackLed = false;
-        expect(Rho.DPX.feedbackLed).toEqual(false);
+        dpxInstance.feedbackLed = false;
+        expect(dpxInstance.feedbackLed).toEqual(false);
     });
 
     it("Should set fileInteractiveMode property to true", function () {
-        Rho.DPX.fileInteractiveMode = true;
-        expect(Rho.DPX.fileInteractiveMode).toEqual(true);
+        dpxInstance.fileInteractiveMode = true;
+        expect(dpxInstance.fileInteractiveMode).toEqual(true);
     });
 
     it("Should set fileInteractiveMode property to false", function () {
-        Rho.DPX.fileInteractiveMode = false;
-        expect(Rho.DPX.fileInteractiveMode).toEqual(false);
+        dpxInstance.fileInteractiveMode = false;
+        expect(dpxInstance.fileInteractiveMode).toEqual(false);
     });
 
     it("Should set uiResultConfirmation property to true", function () {
-        Rho.DPX.uiResultConfirmation = true;
-        expect(Rho.DPX.uiResultConfirmation).toEqual(true);
+        dpxInstance.uiResultConfirmation = true;
+        expect(dpxInstance.uiResultConfirmation).toEqual(true);
     });
 
     it("Should set uiResultConfirmation property to false", function () {
-        Rho.DPX.uiResultConfirmation = false;
-        expect(Rho.DPX.uiResultConfirmation).toEqual(false);
+        dpxInstance.uiResultConfirmation = false;
+        expect(dpxInstance.uiResultConfirmation).toEqual(false);
     });
 
     it("Should set userMode property to true", function () {
-        Rho.DPX.userMode = true;
-        expect(Rho.DPX.userMode).toEqual(true);
+        dpxInstance.userMode = true;
+        expect(dpxInstance.userMode).toEqual(true);
     });
 
     it("Should set userMode property to false", function () {
-        Rho.DPX.userMode = false;
-        expect(Rho.DPX.userMode).toEqual(false);
+        dpxInstance.userMode = false;
+        expect(dpxInstance.userMode).toEqual(false);
     });
 
     it("Should set zoomAmount property to true", function () {
-        Rho.DPX.zoomAmount = true;
-        expect(Rho.DPX.zoomAmount).toEqual(true);
+        dpxInstance.zoomAmount = true;
+        expect(dpxInstance.zoomAmount).toEqual(true);
     });
 
     it("Should set zoomAmount property to false", function () {
-        Rho.DPX.zoomAmount = false;
-        expect(Rho.DPX.zoomAmount).toEqual(false);
+        dpxInstance.zoomAmount = false;
+        expect(dpxInstance.zoomAmount).toEqual(false);
     });
 
     /*describe("testing boolean properties with valid input", function () {
