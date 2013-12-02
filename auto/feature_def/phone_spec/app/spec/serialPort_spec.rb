@@ -1,17 +1,17 @@
-describe 'My behaviour' do
+describe 'Serial port' do
 
   before(:all) do
-    sp = SerialPort.new("/dev/tty.usbserial", "9600".to_i)
+
   end
 
   after(:all) do
-    sp.close
+
   end
 
 
-  it 'should do something' do
-
-    open("/dev/tty", "r+") { |tty|
+  it 'SerialPort.new ' do
+    sp = SerialPort.new(1, "9600".to_i)
+    open("COM1", "r+") { |tty|
       tty.sync = true
       Thread.new {
         while true do
@@ -22,7 +22,7 @@ describe 'My behaviour' do
         sp.write(l.sub("\n", "\r"))
       end
     }
-
+    sp.close
   end
 
 end
