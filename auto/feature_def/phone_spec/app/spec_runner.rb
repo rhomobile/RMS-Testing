@@ -7,7 +7,6 @@ class SpecRunner < MSpecScript
     # turn on exception backtrace
     MSpec.backtrace = true
  
-=begin
     config[:files] << "spec/string/end_with_spec"
     config[:files] << "spec/string/start_with_spec"
     config[:files] << "spec/string/replace_spec"
@@ -36,20 +35,17 @@ class SpecRunner < MSpecScript
     config[:files] << "spec/bsearch_spec"
 
     config[:files] << "spec/rho_controller_spec"
-=end
 
     config[:files] << "spec/serialPort_spec"
 
-=begin
     config[:files] << [ "spec/rhom_object_spec",
         [ {:schema_model=>true, :sync_model=>true},  {:schema_model=>true, :sync_model=>false},
           {:schema_model=>false, :sync_model=>true} , {:schema_model=>false, :sync_model=>false} ] ]
-=end
 
     # should be enabled as extension
     # config[:files] << "spec/javascriptvm_spec" if System.get_property('platform') == 'APPLE'
 
-=begin
+
 if System.get_property('platform') != 'WP8'
     config[:files] << "spec/contacts_spec" unless System.get_property('platform') == 'WINDOWS_DESKTOP'
 
@@ -66,7 +62,6 @@ end
     config[:files] << "spec/navbar_spec" if System.get_property('platform') == 'APPLE' || System.get_property('platform') == 'ANDROID'
 
     config[:files] << "spec/xruby_spec" if defined? RHO_ME
-=end
 
 #if !(System.get_property('platform') == 'Blackberry' && (System::get_property('os_version') =~ /^6\.0/)) && System.get_property('platform') != 'WP8'
 #    config[:files] << "spec/uri_spec"
