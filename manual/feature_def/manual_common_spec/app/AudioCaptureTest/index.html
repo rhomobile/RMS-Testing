@@ -17,7 +17,7 @@
 
     <div class="test_scenario">
         <div class="test_scenario_controls">
-            <button onClick='Rho.AudioCapture.destination = filename();Rho.AudioCapture.start()'>Start capturing</button>
+            <button onClick='filename();Rho.AudioCapture.start({"filename": filename()})'>Start capturing</button>
             <br/>
             <button onClick='Rho.AudioCapture.stop()'>Stop capturing</button>
             <br/>
