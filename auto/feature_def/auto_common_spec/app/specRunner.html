@@ -1,7 +1,8 @@
 <!DOCTYPE html><html>
 <head>
     <title>RhoElements Common API Tests</title>
-	<script charset='utf-8' src='/public/api/rhoapi-modules.js' type='text/javascript'>
+    <script charset='utf-8' src='../public/js/uriHelper.js' type='text/javascript'></script>
+	<script charset='utf-8' src='../public/api/rhoapi-modules.js' type='text/javascript'>
 	//Kindly don't change to one line.
 	</script>
     
@@ -33,7 +34,7 @@
 		    Rho.Application.nativeMenu = [ {'label':'Exit', 'action': 'exit'} ];
 			setTimeout(function()
 			{
-                var url =  listOfRunners[0] + '?' + encodeURIComponent(JSON.stringify(listOfRunners.slice(1, listOfRunners.length)));
+               var url =  listOfRunners[0] + '?' + encodeURIComponent(JSON.stringify(listOfRunners.slice(1, listOfRunners.length)));
 				window.location.href = url;
 			},2000);
 		}

@@ -11,3 +11,4 @@ rhosimulator/
 rholog.txt
 rhoapi-modules.js
 server_url.js
+sim-public*
