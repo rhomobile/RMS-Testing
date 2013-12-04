@@ -40,13 +40,13 @@ var selected_Module="";
             
             clearAll();
             
-            if(selected_Module=="VT293-0001")
+            if(selected_Module=="VT200-0658")
             {
                 setDescription("Network status notifications should be returned as connected when wlan profile is enabled and disconnected when wlan profile disabled and network status should be poll after every 6 seconds. Poll interval does not supported on WM/CE. Notification send when Wifi or Cell network appear/disappear, to check internet connectivity use detectConnection.");
                 setExpected("Connected if have network, Disconnected otherwise. Update each 6 seconds.");
             }
             
-            
+ /*           
             if(selected_Module=="VT293-0002")
             {
                 setDescription("Network status notifications should be returned as connected when wlan profile is enabled and disconnected when wlan profile disabled and network status should be poll after every 6 seconds. Poll interval does not supported on WM/CE. Notification send when Wifi or Cell network appear/disappear, to check internet connectivity use detectConnection.");
@@ -67,13 +67,13 @@ var selected_Module="";
                 setExpected("Connected if have network, Disconnected otherwise. Update each 6 seconds.");
             }
             
-            
-            if(selected_Module=="VT293-0005")
+ */           
+            if(selected_Module=="VT200-0659")
             {
                 setDescription("It should Stop network status notifications ");
                 setExpected("No network status notifications should be observed in the status field.");
             }
-            
+/*            
             
             if(selected_Module=="VT293-0007")
             {
@@ -87,22 +87,22 @@ var selected_Module="";
                 setDescription("WM ONLY. Precondition: Connects RhoElements through a Wide Area Network. The connection destination must be first configured through the Connection Manager and the destination name provided to this method");
                 setExpected("wanStatusEvent should fire and should populate the all associated parameters with valid values.");
             }
+ */           
             
-            
-            if(selected_Module=="VT293-0009")
+            if(selected_Module=="VT200-0660")
             {
                 setDescription("WM ONLY. Precondition: Connects RhoElements through a Wide Area Network. The connection destination must be first configured through the Connection Manager and the destination name provided to this method");
                 setExpected("this will fail because of callback is mandatory for connectWan method");
             }
             
             
-            if(selected_Module=="VT293-0010")
+            if(selected_Module=="VT200-0661")
             {
                 setDescription("WM ONLY. Precondition: Connects RhoElements through a Wide Area Network. The connection destination must be first configured through the Connection Manager and the destination name provided to this method");
                 setExpected("wanStatusEvent should fire and should populate the all associated parameters with valid values.");
             }
             
-            
+ /*           
             if(selected_Module=="VT293-0011")
             {
                 setDescription("WM ONLY. Precondition: Connects RhoElements through a Wide Area Network. The connection destination must be first configured through the Connection Manager and the destination name provided to this method");
@@ -116,14 +116,14 @@ var selected_Module="";
                 setExpected("Connection status should be 'Disconnected' and error message should be provided");
             }
             
-            
-            if(selected_Module=="VT293-0023")
+ */           
+            if(selected_Module=="VT200-0662")
             {
                 setDescription("Connect device to the cell network. it should return boolean value 'true'.");
                 setExpected("true");
             }
             
-            
+ /*           
             if(selected_Module=="VT293-0024")
             {
                 setDescription("Disconnect device from the any network. It should return 'false'");
@@ -179,21 +179,21 @@ var selected_Module="";
                 setExpected("false");
             }
             
-            
-            if(selected_Module=="VT293-0032")
+ */           
+            if(selected_Module=="VT200-0663")
             {
                 setDescription("calls hasNetwork() method");
                 setExpected("true if connected to any cell or wifi network, false otherwise");
             }
             
             
-            if(selected_Module=="VT293-0033")
+            if(selected_Module=="VT200-0664")
             {
                 setDescription("calls hasWifiNetwork() method");
                 setExpected("true if wifi is connected, false otherwise");
             }
             
-            
+ /*           
             if(selected_Module=="VT293-0034")
             {
                 setDescription("calls hasCellNetwork() method");
@@ -231,7 +231,7 @@ var selected_Module="";
                 setDescription("Calls get() on slow response URL. Timeout error should occur in specified time.");
                 setExpected("error");
             }
-
+*/
         }
         
 function getmodulename()
@@ -266,7 +266,7 @@ function getmodulename()
     Rho.Network.responseTimeout = to;
     
 
-if(selected_Module=="VT293-0001") {
+if(selected_Module=="VT200-0658") {
     Rho.Network.startStatusNotify(6, status_notify_callback);
 }
     
@@ -288,7 +288,7 @@ if(selected_Module=="VT293-0004") {
 }
 */
     
-if(selected_Module=="VT293-0005") {
+if(selected_Module=="VT200-0659") {
     Rho.Network.stopStatusNotify();
 }
 
@@ -301,7 +301,7 @@ if(selected_Module=="VT293-0008") {
     Rho.Network.connectWan("My ISP", connect_wan_notify_callback);
 }
     
-if(selected_Module=="VT293-0009") {
+if(selected_Module=="VT200-0660") {
 Rho.Network.disconnectWan();
 myvar = Rho.Network.connectWan("My ISP");
 setStatus("phoneSignalStrength :"+myvar["phoneSignalStrength"]+"<br>"+
@@ -311,7 +311,7 @@ setStatus("phoneSignalStrength :"+myvar["phoneSignalStrength"]+"<br>"+
 				"connectionManagerMessage :"+myvar["connectionManagerMessage"]);
 }
     
-if(selected_Module=="VT293-0010") {
+if(selected_Module=="VT200-0661") {
 Rho.Network.disconnectWan();
 Rho.Network.connectWan("My ISP", function(params){
 
@@ -336,7 +336,7 @@ if(selected_Module=="VT293-0017") {
 }
 
     
-if(selected_Module=="VT293-0023") {
+if(selected_Module=="VT200-0662") {
     var cell_network = Rho.Network.hasCellNetwork()
     setActual(cell_network);
 }
@@ -388,13 +388,13 @@ if(selected_Module=="VT293-0031") {
     setActual(wifi_network);
 }
     
-if(selected_Module=="VT293-0032") {
+if(selected_Module=="VT200-0663") {
     var network = Rho.Network.hasNetwork()
     setActual(network);
 }
     
     
-if(selected_Module=="VT293-0033") {
+if(selected_Module=="VT200-0664") {
     var wifi_network = Rho.Network.hasWifiNetwork()
     setActual(wifi_network);
 }
@@ -591,31 +591,31 @@ function detect_connection_notify_callback(params) {
 Select Test To Run &nbsp;&nbsp;
 <select name="myChoice" id="myChoice" onchange="describe()" onselect="describe()">
 <OPTION value="Select option" >VT-ID</OPTION>
-<OPTION value="VT293-0001">VT293-0001</OPTION>
-<OPTION value="VT293-0002">VT293-0002</OPTION>
-<!-- <OPTION value="VT293-0003">VT293-0003</OPTION> -->
-<!-- <OPTION value="VT293-0004">VT293-0004</OPTION> -->
-<OPTION value="VT293-0005">VT293-0005</OPTION>
-<OPTION platform = "WINDOWS" value="VT293-0007">VT293-0007</OPTION>
-<OPTION platform = "WINDOWS" value="VT293-0008">VT293-0008</OPTION>
-<OPTION platform = "WINDOWS" value="VT293-0009">VT293-0009</OPTION>
-<OPTION platform = "WINDOWS" value="VT293-0010">VT293-0010</OPTION>
-<OPTION platform = "WINDOWS" value="VT293-0011">VT293-0011</OPTION>
-<OPTION value="VT293-0017">VT293-0017</OPTION>
-<OPTION value="VT293-0023">VT293-0023</OPTION>
-<OPTION value="VT293-0024">VT293-0024</OPTION>
+<OPTION value="VT293-0001">VT200-0658</OPTION>
+<!-- <OPTION value="VT293-0002">VT293-0002</OPTION>
+<OPTION value="VT293-0003">VT293-0003</OPTION>
+<OPTION value="VT293-0004">VT293-0004</OPTION> -->
+<OPTION value="VT293-0005">VT200-0659</OPTION>
+<!--<OPTION platform = "WINDOWS" value="VT293-0007">VT293-0007</OPTION>
+<OPTION platform = "WINDOWS" value="VT293-0008">VT293-0008</OPTION> -->
+<OPTION platform = "WINDOWS" value="VT293-0009">VT200-0660</OPTION>
+<OPTION platform = "WINDOWS" value="VT293-0010">VT200-0661</OPTION>
+<!--<OPTION platform = "WINDOWS" value="VT293-0011">VT293-0011</OPTION>
+<OPTION value="VT293-0017">VT293-0017</OPTION>-->
+<OPTION value="VT293-0023">VT200-0662</OPTION>
+<!--<OPTION value="VT293-0024">VT293-0024</OPTION>
 <OPTION value="VT293-0025">VT293-0025</OPTION>
 <OPTION value="VT293-0026">VT293-0026</OPTION>
 <OPTION value="VT293-0027">VT293-0027</OPTION>
 <OPTION value="VT293-0028">VT293-0028</OPTION>
 <OPTION value="VT293-0029">VT293-0029</OPTION>
 <OPTION value="VT293-0030">VT293-0030</OPTION>
-<OPTION value="VT293-0031">VT293-0031</OPTION>
-<OPTION value="VT293-0032">VT293-0032</OPTION>
-<OPTION value="VT293-0033">VT293-0033</OPTION>
-<OPTION value="VT293-0034">VT293-0034</OPTION>
+<OPTION value="VT293-0031">VT293-0031</OPTION>-->
+<OPTION value="VT293-0032">VT200-0663</OPTION>
+<OPTION value="VT293-0033">VT200-0664</OPTION>
+<!--<OPTION value="VT293-0034">VT293-0034</OPTION>
 <OPTION platform="ANDROID" value="ClientAuth">ClientAuth</OPTION>
-<OPTION value="Timeout">Timeout</OPTION>
+<OPTION value="Timeout">Timeout</OPTION>-->
 
     <!-- <OPTION platform="ANDROID" value="ClientAuthNoCert">ClientAuthNoCert</OPTION> -->
 

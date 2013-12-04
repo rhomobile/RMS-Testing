@@ -1,5 +1,5 @@
-require File.expand_path('../../../../spec_helper', __FILE__)
-require File.expand_path('../../fixtures/classes', __FILE__)
+require 'spec/spec_helper'
+require 'spec/library/socket/fixtures/classes'
 
 describe "BasicSocket#send" do
   before :each do
@@ -15,7 +15,7 @@ describe "BasicSocket#send" do
     @socket.close
   end
 
-   it "sends a message to another socket and returns the number of bytes sent" do
+   it "sends a message to another socket and returns the number of bytes sent----VT-037" do
      data = ""
      t = Thread.new do
        client = @server.accept
@@ -37,7 +37,10 @@ describe "BasicSocket#send" do
      data.should == 'hello'
    end
 
-   it "accepts flags to specify unusual sending behaviour" do
+if System::get_property('platform') != 'WINDOWS' && 
+   System.get_property('platform') != 'WINDOWS_DESKTOP' 
+
+   it "accepts flags to specify unusual sending behaviour----VT-038" do
      data = nil
      peek_data = nil
      t = Thread.new do
@@ -57,8 +60,9 @@ describe "BasicSocket#send" do
      peek_data.should == "hello"
      data.should == 'hello'
    end
+end
 
-  it "accepts a sockaddr as recipient address" do
+  it "accepts a sockaddr as recipient address----VT-039" do
      data = ""
      t = Thread.new do
        client = @server.accept

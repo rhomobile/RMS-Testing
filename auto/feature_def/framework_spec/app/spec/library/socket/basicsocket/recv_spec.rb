@@ -1,5 +1,5 @@
-require File.expand_path('../../../../spec_helper', __FILE__)
-require File.expand_path('../../fixtures/classes', __FILE__)
+require 'spec/spec_helper'
+require 'spec/library/socket/fixtures/classes'
 
 describe "BasicSocket#recv" do
 
@@ -13,7 +13,7 @@ describe "BasicSocket#recv" do
     ScratchPad.clear
   end
 
-  it "receives a specified number of bytes of a message from another socket"  do
+  it "receives a specified number of bytes of a message from another socket----VT-034"  do
     t = Thread.new do
       client = @server.accept
       ScratchPad.record client.recv(10)
@@ -31,7 +31,7 @@ describe "BasicSocket#recv" do
     ScratchPad.recorded.should == 'hello'
   end
 
-  it "accepts flags to specify unusual receiving behaviour" do
+  it "accepts flags to specify unusual receiving behaviour----VT-035" do
     t = Thread.new do
       client = @server.accept
 
@@ -53,7 +53,7 @@ describe "BasicSocket#recv" do
     ScratchPad.recorded.should == 'hello'
   end
 
-  it "gets lines delimited with a custom separator"  do
+  it "gets lines delimited with a custom separator----VT-036"  do
     t = Thread.new do
       client = @server.accept
       ScratchPad.record client.gets("\377")

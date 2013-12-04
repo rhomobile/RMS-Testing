@@ -8,6 +8,11 @@ function testFailed()
 	document.getElementById("actResult").innerHTML = "fail";
 }
 
+function setObjective(objective)
+{
+	document.getElementById("objective").innerHTML = objective;
+}
+
 function setInstruction(instruction)
 {
 	document.getElementById("instruction").innerHTML = instruction;

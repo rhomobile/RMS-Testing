@@ -86,8 +86,8 @@ describe("MediaPlayer", function () {
         });
 
         // This test relies on the device having an audio file
-        it("VTXXX-0001-Play Audio(valid file local)", function () {
-            displayTestDescription("VTXXX-0001-Play | Audio(valid file local");
+        it("VT200-0646-Play Audio(valid file local)", function () {
+            displayTestDescription("VT200-0646-Play | Audio(valid file local");
             displayTestInstruction("");
             displayTestExpectation("You should hear the music");
 
@@ -120,7 +120,7 @@ describe("MediaPlayer", function () {
             });
         });
 
-        it("VTXXX-0005-Play Audio(mp3 file)", function () {
+        xit("VTXXX-0005-Play Audio(mp3 file)", function () {
             displayTestDescription("VTXXX-0005 | Play Audio(mp3 file)");
             displayTestInstruction("");
             displayTestExpectation("You should hear the music");
@@ -156,8 +156,8 @@ describe("MediaPlayer", function () {
 
         if (isAnyButApplePlatform()) {
 
-            it("VTXXX-00011-Play Audio(valid file local) and Stop", function () {
-                displayTestDescription("VTXXX-00011 | Play Audio(valid file local) and Stop");
+            it("VT200-0647-Play Audio(valid file local) and Stop", function () {
+                displayTestDescription("VT200-0647 | Play Audio(valid file local) and Stop");
                 displayTestInstruction("");
                 displayTestExpectation("Playing should stops after 3 seconds");
                 runs(function () {
@@ -193,8 +193,8 @@ describe("MediaPlayer", function () {
 //
 //MediaPlayer Video Tests
 //						
-        it("VTXXX-00015-Play Video(valid file local)", function () {
-            displayTestDescription("VTXXX-00015 | Play Video(valid file local)");
+        it("VT200-0648-Play Video(valid file local)", function () {
+            displayTestDescription("VT200-0648 | Play Video(valid file local)");
             displayTestInstruction("");
             displayTestExpectation("You should see video");
             runs(function () {
@@ -227,7 +227,7 @@ describe("MediaPlayer", function () {
             });
         });
 
-        it("VTXXX-00019-Play Video(mp4 file)", function () {
+        xit("VTXXX-00019-Play Video(mp4 file)", function () {
             displayTestDescription("VTXXX-00019 | Play Video(mp4 file)");
             displayTestInstruction("");
             displayTestExpectation("You should see video");
@@ -263,8 +263,8 @@ describe("MediaPlayer", function () {
 
         if (isAnyButApplePlatform()) {
 
-            it("VTXXX-00025-Play Video(valid file local) and Stop", function () {
-                displayTestDescription("VTXXX-00025-Play Video(valid file local) and Stop");
+            it("VT200-0649-Play Video(valid file local) and Stop", function () {
+                displayTestDescription("VT200-0649-Play Video(valid file local) and Stop");
                 displayTestInstruction("");
                 displayTestExpectation("Playing should stop after 3 seconds");
                 runs(function () {
@@ -303,8 +303,8 @@ describe("MediaPlayer", function () {
 
         if ((platform != "WINDOWS") && (isAnyButApplePlatform())) {
 
-            it("VTXXX-00030-Play Ringtone(valid file)", function () {
-                displayTestDescription("VTXXX-00030 | Play Ringtone(valid file)");
+            it("VT200-0650-Play Ringtone(valid file)", function () {
+                displayTestDescription("VT200-0650 | Play Ringtone(valid file)");
                 displayTestInstruction("");
                 displayTestExpectation("You should hear a ringtone");
                 runs(function () {
@@ -328,7 +328,7 @@ describe("MediaPlayer", function () {
                 });
             });
 
-            it("VTXXX-00034-Play ringtone(Call Stop without Start)", function () {
+            xit("VTXXX-00034-Play ringtone(Call Stop without Start)", function () {
                 displayTestDescription("VTXXX-00034 | Play ringtone(Call Stop without Start)");
                 displayTestInstruction("");
                 displayTestExpectation("App should not crashes");

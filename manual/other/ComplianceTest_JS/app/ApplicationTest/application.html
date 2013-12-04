@@ -54,13 +54,14 @@
 <fieldset>
 	<legend>Rho.Application</legend>
 	<ul> Minimize, Restore and Quit:
-	    <li><a href="javascript:void(0)" onclick ="minimize();">Minimize the Application (Mac RhoSimulator, WP8 not support it)</a></li>
-	    <li><a href="javascript:void(0)" onclick ="quit();">Quit the Application</a></li>
-	    <li><a href="javascript:void(0)" onclick ="restore();">VT281-030 Restore the Application (Mac RhoSimulator, WP8 not support it)</a></li>
+	    <li><a href="javascript:void(0)" onclick ="minimize();">VT200-0617 Minimize the Application (Mac RhoSimulator, WP8 not support it)</a></li>
+	    <li><a href="javascript:void(0)" onclick ="restore();">VT200-0618 Restore the Application (Mac RhoSimulator, WP8 not support it)</a></li>
+        <li><a href="javascript:void(0)" onclick ="quit();">VT200-0619 Quit the Application</a></li>
 		<li><a href="javascript:void(0)" onclick ="minQuit();">Minimize and Quit the Application</a></li>
 	</ul>
 </fieldset>
 
+<!--
 <fieldset>
 	<legend>Rho.Application.startUri</legend>
 	<ul>set the Start Page and Click on Home button
@@ -68,12 +69,13 @@
 		<li><a href="javascript:void(0)" onclick ="startOriginal();">set StartUri to original value</a></li>
 	</ul>
 </fieldset>
-
+-->
 
 <div id="title_test" >
     <div class="method_name">Rho.Application.Title</div>
     <div class="method_desc">Define Window caption text. If missed - caption from page used. WM and Windows Desktop Only! Not supported on CE.</div>
 
+<!--
     <div class="test_scenario">
         <div class="test_scenario_controls">
             <button class="getValue" onClick='setDomElementText("title_test", Rho.Application.title );'>get window title</button>
@@ -85,17 +87,17 @@
             <span> Press button for get current window title</span>
         </div>
     </div>
-
+-->
     <div class="test_scenario">
         <div class="test_scenario_controls">
             <button onClick='Rho.Application.title="My Title";'>title("My Title")</button>
         </div>
         <div class="test_scenario_desc">
-            <span class="test_scenario_number">VT***-**</span>
+            <span class="test_scenario_number">VT200-0621</span>
             <span> Press button for set title for window to string ""</span>
         </div>
     </div>
-
+<!--
     <div class="test_scenario">
         <div class="test_scenario_controls">
             <button onClick='Rho.Application.title="";'>title("")</button>
@@ -105,8 +107,10 @@
             <span> Press button for set title for window to empty string</span>
         </div>
     </div>
+-->
 </div>
 
+<!--
 <div id="name_test" >
     <div class="method_name">Rho.Application.Name</div>
     <div class="method_desc">Define app name</div>
@@ -123,16 +127,19 @@
         </div>
     </div>
 </div>
+-->
 
 <fieldset>
 	<legend>Rho.Application.Native Menu (Not applicable on iOS!)</legend>
-	<ul>Redefine the NativMenu
+	<ul>VT200-0622 Redefine the NativMenu
 	    <li><a href="javascript:void(0)" onclick ="menuTest();">set Native menu to different actions</a></li>
         <li><a href="javascript:void(0)" onclick ="menuDefaultTest();">set Default Native menu</a></li>
 		<li><a href="javascript:void(0)" onclick ="menuReservedItem();">Add menu with action pointed to html page. Select Load a page menu item</a></li>
 		<li><a href="javascript:void(0)" onclick ="menuJavascriptCall();">Javascript method call for Exit </a></li>
 	</ul>
 </fieldset>
+
+<!--
 <fieldset>
 	<legend>Rho.Application.invalidSecurityTokenStartPath</legend>
 	<ul>Invalid Security Token: set in rhoconfig.txt : invalid_security_token_start_path; Set in build.yml: security_token. Rebuild application and start.
@@ -158,6 +165,7 @@
       <br><ul class="list"><li>Test</li></ul></li>
 	</ul>
 </fieldset>
+-->
 
 </body>
 </html>

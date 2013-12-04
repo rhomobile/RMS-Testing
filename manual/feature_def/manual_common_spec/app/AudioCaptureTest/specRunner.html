@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>System JS Test</title>
+	<title>VideoCapture JS Test</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
 	<META HTTP-Equiv="MinimizeButton" content="visibility:Visible;top:30 " >
 	<META HTTP-Equiv="quitbutton" Content="visibility:visible">
@@ -38,7 +38,7 @@
     <script type="text/javascript" src="../helpers/specHelpers.js"></script>
 
 	<!-- include spec files here... -->
-	<script type="text/javascript" src="log_js_spec.js"></script>
+	<script type="text/javascript" src="audiocapture_js_spec.js"></script>
 
 	<script type="text/javascript">
 
@@ -47,10 +47,10 @@
         jasmineEnv.updateInterval = 1000;
 
         var htmlReporter = new jasmine.HtmlReporter();
+        jasmineEnv.addReporter(new jasmine.RhologReporter());
         var junitReporter = new jasmine.JUnitXmlReporter();
         junitReporter.useDotNotation = false
         jasmineEnv.addReporter(htmlReporter);
-        jasmineEnv.addReporter(new jasmine.RhologReporter());
         jasmineEnv.addReporter(new jasmine.JUnitXmlReporter('.\\', true, true));
 
         jasmineEnv.specFilter = function (spec) {
@@ -84,7 +84,18 @@
 <ul id="myList2">
 </ul>
 </div>
-<br/><br/><br/><br/>
-<span id="fooBar">&nbsp;</span>
+<br/><br/>
+
+<span id='result'>
+<table>
+    <tr>
+        <td><button onclick="captureResult(true)">Pass</button></td>
+        <td><button onclick="captureResult(false)">Fail</button></td>
+    </tr>
+	<tr>
+        <td><button onclick="playaudio()">Play</button></td>
+    </tr>
+</table>
+    </span>
 </body>
 </html>

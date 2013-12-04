@@ -1,5 +1,5 @@
-require File.expand_path('../../../../spec_helper', __FILE__)
-require File.expand_path('../../fixtures/classes', __FILE__)
+require 'spec/spec_helper'
+require 'spec/library/socket/fixtures/classes'
 
 describe "BasicSocket#for_fd" do
   before :each do
@@ -30,9 +30,19 @@ describe "BasicSocket#for_fd" do
     end
   end
 
-  it "return a Socket instance wrapped around the descriptor" do
+  it "return a Socket instance wrapped around the descriptor----VT-021" do
     @s2 = TCPServer.for_fd(@server.fileno)
     @s2.should be_kind_of(TCPServer)
     @s2.fileno.should == @server.fileno
   end
+
+=begin
+  this test is not passed on android and WM platform
+  it "try if socket is closed----VT-022" do
+    @server.close
+    @server.closed?.should be_true
+    lambda { @server.fileno }.should raise_error(IOError)
+  end
+=end
+
 end

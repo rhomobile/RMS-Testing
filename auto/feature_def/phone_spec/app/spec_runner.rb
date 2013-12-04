@@ -36,12 +36,15 @@ class SpecRunner < MSpecScript
 
     config[:files] << "spec/rho_controller_spec"
 
+    config[:files] << "spec/serialPort_spec"
+
     config[:files] << [ "spec/rhom_object_spec",
         [ {:schema_model=>true, :sync_model=>true},  {:schema_model=>true, :sync_model=>false},
           {:schema_model=>false, :sync_model=>true} , {:schema_model=>false, :sync_model=>false} ] ]
 
     # should be enabled as extension
     # config[:files] << "spec/javascriptvm_spec" if System.get_property('platform') == 'APPLE'
+
 
 if System.get_property('platform') != 'WP8'
     config[:files] << "spec/contacts_spec" unless System.get_property('platform') == 'WINDOWS_DESKTOP'
@@ -65,7 +68,9 @@ end
 #end
 
 #if !defined?( RHO_ME )
+=begin
     config[:files] << "spec/database_spec" #unless System.get_property('platform') == 'WINDOWS' && System.get_property('is_emulator')
+=end
 #end
 
   end

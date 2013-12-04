@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Rho.WebView</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.1, maximum-scale=10.0, user-scalable=yes"/>
+    <link type="text/css" rel="stylesheet" href="/public/css/manual_styles.css">
+    <script type="text/javascript" src="/public/jquery/jquery-1.6.4.min.js"></script>
+    <script type="text/javascript" src="/public/jquery/jquery.json-2.3.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="/public/api/rhoapi-modules.js"></script>
+    <script type="text/javascript" charset="utf-8" src="helpers.js"></script>
+</head>
+<body>
+
+<div id="capturing_test_1" class="method_tests android">
+    <div class="method_name">AudioCapture.start</div>
+    <div class="method_desc">Manually start and stop capturing</div>
+
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <button onClick='filename();Rho.AudioCapture.start({"fileName": filename()})'>Start capturing</button>
+            <br/>
+            <button onClick='Rho.AudioCapture.stop()'>Stop capturing</button>
+            <br/>
+            <button onClick='Rho.Mediaplayer.start(filename())'>Play captured</button>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
