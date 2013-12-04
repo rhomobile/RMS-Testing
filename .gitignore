@@ -11,3 +11,8 @@ rhosimulator/
 rholog.txt
 rhoapi-modules.js
 server_url.js
+TODO
+*.bak
+*.changes
+*.xml
+*.sh
