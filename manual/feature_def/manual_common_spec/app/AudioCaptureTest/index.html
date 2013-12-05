@@ -41,7 +41,7 @@
     </div>
 </div>
 
-<div id="capturing_3gpp" class="method_tests android">
+<div id="cancel_capturing" class="method_tests android">
     <div class="method_name">Rho.Audiocapture.cancel</div>
     <div class="method_desc">Cancel capturing</div>
 
@@ -56,6 +56,28 @@
     </div>
 </div>
 
+
+<div id="edge_case_start_without_parameters" class="method_tests android">
+    <div class="method_name">Rho.Audiocapture.start</div>
+    <div class="method_desc">Start without any parameters should raise exception</div>
+
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <button onClick='try {Rho.AudioCapture.start(); alert("Op-s. Exception did not raise")} catch(err){alert("OK. Exception raised")}'>Call start without parameters</button>
+        </div>
+    </div>
+</div>
+
+<div id="edge_case_start_without_filename" class="method_tests android">
+    <div class="method_name">Rho.Audiocapture.start</div>
+    <div class="method_desc">Start without filename should raise exception</div>
+
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <button onClick='try {Rho.AudioCapture.start({}); alert("Op-s. Exception did not raise")} catch(err){alert("OK. Exception raised")}'>Call start without parameters</button>
+        </div>
+    </div>
+</div>
 
 </body>
 </html>
