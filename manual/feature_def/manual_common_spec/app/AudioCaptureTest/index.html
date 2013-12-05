@@ -11,20 +11,51 @@
 </head>
 <body>
 
-<div id="capturing_test_1" class="method_tests android">
-    <div class="method_name">AudioCapture.start</div>
-    <div class="method_desc">Manually start and stop capturing</div>
+<div id="capturing_mp4" class="method_tests android">
+    <div class="method_name">Rho.Audiocapture.start</div>
+    <div class="method_desc">Capturing mp4</div>
 
     <div class="test_scenario">
         <div class="test_scenario_controls">
-            <button onClick='filename();Rho.AudioCapture.start({"fileName": filename()})'>Start capturing</button>
+            <button onClick='Rho.AudioCapture.start({"fileName": filenameMp4()})'>Start capturing mp4</button>
             <br/>
             <button onClick='Rho.AudioCapture.stop()'>Stop capturing</button>
             <br/>
-            <button onClick='Rho.Mediaplayer.start(filename())'>Play captured</button>
+            <button onClick='Rho.Mediaplayer.start(filenameMp4())'>Play captured</button>
         </div>
     </div>
 </div>
+
+<div id="capturing_3gpp" class="method_tests android">
+    <div class="method_name">Rho.Audiocapture.start</div>
+    <div class="method_desc">Capturing 3gpp</div>
+
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <button onClick='Rho.AudioCapture.start({"fileName": filename3gpp()})'>Start capturing 3gpp</button>
+            <br/>
+            <button onClick='Rho.AudioCapture.stop()'>Stop capturing</button>
+            <br/>
+            <button onClick='Rho.Mediaplayer.start(filename3gpp())'>Play captured</button>
+        </div>
+    </div>
+</div>
+
+<div id="capturing_3gpp" class="method_tests android">
+    <div class="method_name">Rho.Audiocapture.cancel</div>
+    <div class="method_desc">Cancel capturing</div>
+
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <button onClick='Rho.RhoFile.deleteFile(filename3gpp());Rho.AudioCapture.start({"fileName": filename3gpp()})'>Start capturing 3gpp</button>
+            <br/>
+            <button onClick='Rho.AudioCapture.cancel()'>Cancel capturing</button>
+            <br/>
+            <button onClick='alert("files exists = " + Rho.RhoFile.exists(filename3gpp()))'>Check existence of file</button>
+        </div>
+    </div>
+</div>
+
 
 </body>
 </html>
