@@ -142,7 +142,20 @@ class NativeTabbarTestController < Rho::RhoController
       {:label => 'Main page',  :action => '/app',               :icon => '/public/images/bar/home_btn.png', :reload => true},
       {:label => 'Main page 2', :action => 'callback:' + url_for(:action => :show_main_page), :icon => '/public/images/bar/home_btn.png', :reload => true}
     ]
-    Rho::NativeTabbar.create_vertical(tabbar)
+    Rho::NativeTabbar.create(tabbar, {:verticalOrientation => true})
+    $tabbar_active = true
+    Rho::NativeTabbar.switch_tab(0)
+  end
+
+  def set_customizediPad_tabbar
+    save_location
+    tabbar = [
+      {:label => 'Tab', :detailLabel => "first tab", :action => '/app/NativeTabbarTest', :icon => '/public/images/bar/gears.png',    :reload => true, :web_bkg_color => 0x7F7F7F, :selectedColor => 0xFF0000},
+      {:label => 'Main', :detailLabel => "second tab", :action => '/app',               :icon => '/public/images/bar/home_btn.png', :reload => true, :selectedColor => 0xFFFF00},
+      {:label => 'Main Bla-Bla-Bla super long title', :detailLabel => "third tab", :action => 'callback:' + url_for(:action => :show_main_page), :icon => '/public/images/bar/home_btn.png', :reload => true, :selectedColor => 0x00FF00}
+    ]
+    options = {:verticalOrientation => true, :backgroundColor => 0x2F8FFF, :iOS7IconColor => 0xFFFFFF, :detailColor => 0x3F3F3F}
+    Rho::NativeTabbar.create(tabbar, options)
     $tabbar_active = true
     Rho::NativeTabbar.switch_tab(0)
   end

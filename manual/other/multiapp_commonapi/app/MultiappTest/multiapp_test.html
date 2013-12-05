@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Multiapp</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+	<META HTTP-Equiv="MinimizeButton" content="visibility:Visible;top:30 " >
+	<META HTTP-Equiv="quitbutton" Content="visibility:visible">
+	<META HTTP-Equiv="ReloadButton" Content="visibility:visible">
+
+    <link type="text/css" rel="stylesheet" href="/public/css/manual_styles.css">
+
+    <script type="text/javascript" src="/public/jquery/jquery-1.6.4.js"></script>
+    <script type="text/javascript" src="/public/jquery/jquery.json-2.3.js"></script>
+	<script type="text/javascript" charset="utf-8" src="/public/api/rhoapi-modules.js"></script>
+	<script type="text/javascript" charset="utf-8" src="/public/js/server_url.js"></script>
+	<script type="text/javascript" src="/public/js/helpers.js"></script>
+	<script type="text/javascript" src="multiapp_test.js"></script>
+	
+	<script type="text/javascript">
+
+    </script>
+
+
+</head>
+<body>
+
+
+<script type="text/javascript">
+
+</script>
+
+
+<h3>Multiapp</h3>
+<!--<a href="#Barcode">Barcode</a>--> 
+<div data-role="header" data-position="fixed">
+<div class="test_scenario_controls">
+            <button onClick='Rho.WebView.refresh();'>refresh()</button>
+            &nbsp;&nbsp;&nbsp;<button onClick='Rho.Application.minimize();'>minimize</button>
+            &nbsp;&nbsp;&nbsp;<button onClick='Rho.Application.quit();'>quit</button>
+            <div id="myList"></div>
+        </div>
+</div>        
+<b>Decoded Data: Text Field<input type='text'> </b><div id="clbkData" style="word-wrap: break-word;"></div>
+<div class="container" id="Barcode">
+    <div class="method_name"></div>
+    <div class="method_description">Scanner 1 Enable </div>
+
+    <div id="" class="container">
+        <div class="123test_case_requirements">
+
+            <button onClick='enableScanner(0);'>Enable Scanner</button>  
+			&nbsp;&nbsp;&nbsp;<button onClick='disableScanner(0);'>Disable Scanner</button>
+
+    
+
+            &nbsp;&nbsp;&nbsp;<button onClick='softstart(0);'>softstart</button>
+			&nbsp;&nbsp;&nbsp;<button onClick='softstop(0);'>softstop</button>
+        </div>
+    </div>
+    
+</div>
+
+<div class="container">
+    <div class="method_name"></div>
+    <div class="method_description">Scanner 2 Enable</div>
+
+    <div id="" class="container">
+        <div class="123test_case_requirements">
+
+            <button onClick='enableScanner(1);'>Enable Scanner</button>
+			&nbsp;&nbsp;&nbsp;<button onClick='disableScanner(1);'>Disable Scanner</button>
+			&nbsp;&nbsp;&nbsp;<button onClick='softstart(1);'>softstart</button>
+			&nbsp;&nbsp;&nbsp;<button onClick='softstop(1);'>softstop</button>
+        </div>
+        
+    </div>
+    
+</div>
+
+<div class="container">
+    <div class="method_name"></div>
+    <div class="method_description">ScanTimeout with different values</div>
+
+    <div id="" class="container">
+        <div class="123test_case_requirements">
+			<button onClick="setpropertywithval(0, 'scanTimeout', 8000);">scan1 Time-out with 8000</button>
+			&nbsp;&nbsp;&nbsp;<button onClick="setpropertywithval(1, 'scanTimeout', 12000);">scan2 Time-out with 12000</button>
+		</div>
+    </div>
+	
+</div>
+
+
+
+
+
+<div class="container">
+    <div class="method_name"></div>
+    <div class="method_description">picklistMode with values for scanner 1</div>
+
+    <div id="" class="container">
+        <div class="123test_case_requirements">
+			<button onClick="setpropertywithval(0, 'picklistMode', 'softwareReticle');">picklistMode with softwareReticle</button>
+			&nbsp;&nbsp;&nbsp;<button onClick="setpropertywithval(0, 'picklistMode', 'disabled');">picklistMode with disabled</button>
+		</div>
+    </div>
+	
+</div>
+
+<div class="container">
+    <div class="method_name"></div>
+    <div class="method_description">picklistMode with values for scanner 2</div>
+
+    <div id="" class="container">
+        <div class="123test_case_requirements">
+			<button onClick="setpropertywithval(1, 'picklistMode', 'softwareReticle');">picklistMode with softwareReticle</button>
+			&nbsp;&nbsp;&nbsp;<button onClick="setpropertywithval(1, 'picklistMode', 'disabled');">picklistMode with disabled</button>
+		</div>
+    </div>
+	
+</div>
+
+<div class="container">
+    <div class="method_description">RSM connectionIdleTimeout with different values</div>
+
+    <div id="" class="container">
+        <div class="123test_case_requirements">
+			<button onClick="enableRSMScanner();">Enable RSM scanner</button>
+			<button onClick="setRSMpropertywithval('connectionIdleTimeout', 20);">connectionIdleTimeout with 20</button>
+			&nbsp;&nbsp;&nbsp;<button onClick="setRSMpropertywithval('connectionIdleTimeout', 10);">connectionIdleTimeout with 10</button>
+			&nbsp;&nbsp;&nbsp;<button onClick="getpropertywithval('enableRSMScannerID', 'connectionIdleTimeout');">Get connectionIdleTimeout</button>
+			<div id ="enableRSMScannerID" > <span class="result">Result:  </span></div>
+		</div>
+    </div>
+	
+</div>
+<div class="container">
+    <div class="method_name"></div>
+    <div class="method_description">RSM disconnectBtOnDisable with different values</div>
+
+    <div id="" class="container">
+        <div class="123test_case_requirements">
+			<button onClick="setRSMpropertywithval('disconnectBtOnDisable', true);">disconnectBtOnDisable with true</button>
+			&nbsp;&nbsp;&nbsp;<button onClick="setRSMpropertywithval('disconnectBtOnDisable', false);">disconnectBtOnDisable with false</button>
+			&nbsp;&nbsp;&nbsp;<button onClick="getpropertywithval('disconnectBtOnDisableID', 'disconnectBtOnDisable');">Get disconnectBtOnDisable</button>
+			<div id ="disconnectBtOnDisableID" > <span class="result">Result:  </span></div>
+		</div>
+    </div>
+	
+</div>
+
+<div class="container">
+    <div class="method_name"></div>
+    <div class="method_description">RSM displayBtAddressBarcodeOnEnable with different values</div>
+
+    <div id="" class="container">
+        <div class="123test_case_requirements">
+			<button onClick="setRSMpropertywithval('displayBtAddressBarcodeOnEnable', true);">displayBtAddressBarcodeOnEnable with true</button>
+			&nbsp;&nbsp;&nbsp;<button onClick="setRSMpropertywithval('displayBtAddressBarcodeOnEnable', false);">displayBtAddressBarcodeOnEnable with false</button>
+			&nbsp;&nbsp;&nbsp;<button onClick="getpropertywithval('displayBtAddressBarcodeOnEnableID', 'displayBtAddressBarcodeOnEnable');">Get displayBtAddressBarcodeOnEnable</button>
+			<div id ="displayBtAddressBarcodeOnEnableID" > <span class="result">Result:  </span></div>
+		</div>
+    </div>
+	
+</div>
+
+<div class="container">
+    <div class="method_name"></div>
+    <div class="method_description">Alldecoders enable in Scanner 1</div>
+    <div id="" class="container">
+        <div class="123test_case_requirements">
+			<button onClick="enablealldecoders(0, true);">enable all decoders</button>
+			&nbsp;&nbsp;&nbsp;<button onClick="enablealldecoders(0, false);">Disable all decoders</button>
+			&nbsp;&nbsp;&nbsp;<button onClick="getpropertywithval('enablealldecodersID', 'alldecoders');">Get alldecoders</button>
+			<div id ="enablealldecodersID" > <span class="result">Result:  </span></div>
+		</div>
+    </div>
+	
+</div>
+
+<div class="container">
+    <div class="method_name"></div>
+    <div class="method_description">alldecoders enable in Scanner 2</div>
+    <div id="" class="container">
+        <div class="123test_case_requirements">
+			<button onClick="enablealldecoders(1, true);">enable all decoders</button>
+			&nbsp;&nbsp;&nbsp;<button onClick="enablealldecoders(1, false);">Disable all decoders</button>
+			&nbsp;&nbsp;&nbsp;<button onClick="getpropertywithval('enablealldecodersID1', 'alldecoders');">Get alldecoders</button>
+			<div id ="enablealldecodersID1" > <span class="result">Result:  </span></div>
+		</div>
+    </div>
+	
+</div>
+
+<div class="container">
+    <div class="method_name"></div>
+    <div class="method_description">code93 enable in Scanner 1</div>
+    <div id="" class="container">
+        <div class="123test_case_requirements">
+			<button onClick="enablecode93(0, true);">enable code93</button>
+			&nbsp;&nbsp;&nbsp;<button onClick="enablecode93(0, false);">Disable code93</button>
+			&nbsp;&nbsp;&nbsp;<button onClick="getpropertywithval('enablecode93ID', 'code93');">Get code93</button>
+			<div id ="enablecode93ID" > <span class="result">Result:  </span></div>
+		</div>
+    </div>
+	
+</div>
+
+<div class="container">
+    <div class="method_desc">Define config.xml: Navigation\\Cache.</div>
+
+    <div id="cacheSize_test">
+        <div class="test_scenario_controls">
+            <button class="getValue" onClick='setDomElementText("cacheSize_test", Rho.WebView.cacheSize);'> get cacheSize</button>
+            <span class="result"></span>
+        </div>
+
+    </div>
+</div>
+
+
+		
+<div id="currentLocation_test" class="method_tests">
+    <div class="method_name"></div>
+    <div class="method_desc">Returns the url (location) of a page; </div>
+    <div><span class="result"></span></div>
+	<div class="test_case_requirements">
+            Created tabbar. Press
+            <button onClick='createTabbar()'>Create tabbar</button>
+    </div>
+	<button onclick="removeTabbar();">Remove the Tabbar </button>
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <button  class="getValue" onClick='setDomElementText("currentLocation_test", Rho.WebView.currentLocation());'>currentLocation()</button>
+        </div>
+        <div class="test_scenario_desc">
+            <span> Get currentLocation of current page</span>
+        </div>
+    </div>
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <button onClick='Rho.WebView.navigate("http://www.google.com", 2);'>Navigate tab 2 </button>
+			<button onClick='Rho.WebView.navigate("http://www.yahoo.com", 4);'>Navigate tab 4 </button>
+            <button onClick='setDomElementText("currentLocation_test", Rho.WebView.currentLocation(2));'>currentLocation(2)</button>
+			<button onClick='setDomElementText("currentLocation_test", Rho.WebView.currentLocation(4));'>currentLocation(4)</button>
+        </div>
+
+    </div>
+    
+</div>
+
+<div id="currentURL_test" class="method_tests">
+    <div class="method_name"></div>
+    <div><span class="result">Result: </span></div>
+
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <button onClick="doAction('currentUrlOfCurrentTab')">Current URL of current tab</button>
+        </div>
+    </div>
+
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <button onClick="Rho.WebView.navigate('http://www.google.com', 1)">Navigate(google, 1)</button>
+            <button onClick="doAction('currentUrlOfTab1')">Current URL of tab with index 1</button>
+        </div>
+        
+    </div>
+</div>
+
+<div id="refresh_test" class="method_tests">
+    <div class="method_name"></div>
+    <div class="method_desc">Force WebView to refresh the current page.</div>
+    <div><span class="result"></span></div>
+
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <button onClick='setDomElementText("refresh_test", "This text was inserted by JS");'>Press for inserting text</button>
+        </div>
+        <div class="test_scenario_desc">
+            <span class="test_scenario_number"></span>
+            <span>Press button for inserting text by JS. This text should disappear after refreshing</span>
+        </div>
+    </div>
+
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <button onClick='Rho.WebView.refresh();'>refresh()</button>
+        </div>
+        
+    </div>
+
+</div>
+
+<div class="method_tests wm">
+<div class="container">
+    <div class="method_name"></div>
+    <div class="method_desc">Sets the zoom factor of the page. </div>
+
+    <div class="test_scenario">
+        <div class="test_scenario_controls" id="zoomPage_test">
+            <button class="getValue" onClick='setDomElementText("zoomPage_test", Rho.WebView.zoomPage);'> get zoomPage</button>
+			&nbsp;&nbsp;&nbsp;<button onClick='Rho.WebView.zoomPage = 1.5;'>zoomPage = 1.5</button>
+			&nbsp;&nbsp;&nbsp;<button onClick='Rho.WebView.zoomPage = 1.0;'>zoomPage = 1.0</button>
+            <br/>
+            <span class="result"></span>
+        </div>
+        
+    </div>
+
+
+   
+
+</div>
+<div class="container">
+    <div class="method_name"></div>
+    <div class="method_description">set Registry Setting and delete Registry</div>
+    <div id="getregistryid" class="container">
+		<span class="result">Result: </span>
+        <div class="123test_case_requirements">
+			<button onClick="setRegistrySetting();">set Registry</button>
+			&nbsp;&nbsp;&nbsp;<button onClick="deleteRegistrySetting('getregistryid');">delete Registry</button>
+			&nbsp;&nbsp;&nbsp;<button onClick="getRegistrySetting('getregistryid');">get Registry</button>
+		</div>
+    </div>
+	
+</div>
+
+<div class="method_tests">
+	<div>Text Field<input type='text'></div>
+	<div class="test_scenario">
+		<div class="test_scenario_controls">
+			<button onclick="Rho.System.keyboardState='shown';">set keyboardState as shown
+			</button>
+			&nbsp;&nbsp;&nbsp;<button onclick="Rho.System.keyboardState='hidden';">set keyboardState as hidden
+			</button>
+		</div>
+		<div id="Rho_System_keyboardState">
+			<button onclick="getkeyboardState();"> getProperty showKeyboard </button>
+			<span class="result"> </span>
+		</div>
+		
+	</div>
+</div>
+
+<div class="method_tests">
+	<div class="test_scenario">
+		<div class="test_scenario_controls">Android and IOS
+			<button onclick="Rho.System.setProperty('screenAutoRotate','true');">Set screenAutoRotate as true</button>
+		</div>
+	</div>
+	<div class="test_scenario">
+		<div class="test_scenario_controls">
+			<button onclick="Rho.System.setProperty('screenAutoRotate','false');">set screenAutoRotate as false</button>
+		</div>
+	</div>
+	<div class="test_scenario">
+		<div class="test_scenario_controls" id ="Rho_System_setproperty">
+			<button onclick="callgetProperty('screenAutoRotate');">Get Property screenAutoRotate</button>
+			<span class="result"> </span>
+		</div>
+	</div>
+</div>	
+
+<div class="method_tests win32 wm">
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <button onclick="Rho.System.httpProxyURI='http://wwwgate0.mot.com:1080';">Set httpProxyURI </button>
+			&nbsp;&nbsp;&nbsp;<button onclick="gethttpProxyURI();"> Get httpProxyURI : </button> <div id="Rho_System_httpProxyURI"><span class="result"> </span>
+            </div>
+			<br />
+			
+            <a href="http://www.google.com">Navigate to Google </a>
+        </div>
+    </div>
+
+</div>	
+
+<div class="container">
+    <div class="method_name"></div>
+    <div class="method_description">Database</div>
+    <div id="opendatabaseID" class="container">
+		<span class="result"> </span>
+        <div class="123test_case_requirements">
+			<button onClick="opendatabase_createtable(4, 'opendatabaseID');">4 tables</button>
+			&nbsp;&nbsp;&nbsp;<button onClick="opendatabase_createtable(2, 'opendatabaseID');">2 tables</button>
+			&nbsp;&nbsp;&nbsp;<button onClick="destroytables();">Destroy all tables</button>
+		</div>
+    </div>
+</div>
+
+
+<div class="container">
+    <div class="method_name"></div>
+    <div class="method_description">Notifications</div>
+    <div class="container">
+		<span class="result"> </span>
+        <div class="123test_case_requirements">
+			<button onClick="beeperwithvol2();">Beeper with volume 2</button>
+			&nbsp;&nbsp;&nbsp;<button onClick="beeperwithvol4();">Beeper with volume 2</button>
+			&nbsp;&nbsp;&nbsp;<button onClick="playFileaudionotification();">playFile audio</button>
+			
+		</div>
+    </div>
+</div>
+
+
+<div class="container">
+    <div class="method_name"></div>
+    <div class="method_description">Media player</div>
+    <div class="container">
+		<span class="result"> </span>
+        <div class="123test_case_requirements">
+			<button onClick="mediaplayer_audiostart();"> audio start</button>
+			&nbsp;&nbsp;&nbsp;<button onClick="stopaudio();"> stop audio</button>
+			&nbsp;&nbsp;&nbsp;<button onClick="mediaplayer_videostart();">Video start</button>
+			&nbsp;&nbsp;&nbsp;<button onClick="stopthevideo();">stop the video</button>
+			&nbsp;&nbsp;&nbsp;<button onClick="playringtone();">play ringtone</button>
+			&nbsp;&nbsp;&nbsp;<button onClick="stoptheringtone();">stop the ringtone</button>
+		</div>
+    </div>
+</div>
+
+<div class="method_tests">
+	<div class="method_desc">Create NavBar with title NavBar test and left button with the name Back. </div>
+	<div class="test_scenario">
+		<div class="test_scenario_controls">	
+			<button onclick ="callNavbarcreate();">Create NavBar left</button>
+		</div>
+	
+	</div>	
+	
+	<div class="test_scenario">
+		<div class="test_scenario_controls">	
+			<button onclick ="callNavbarcreateright();">Create NavBar right</button>
+			&nbsp;&nbsp;&nbsp;<button onclick ="callNavbarremove();">Remove a navigation bar</button>
+		</div>
+	</div>
+</div>
+
+<div class="container">
+    <div class="method_name"></div>
+	 <div class="test_scenario">
+		<div class="test_scenario_controls">
+			<button onclick ="toolCreate();">Create Toolbar</button>
+			&nbsp;&nbsp;&nbsp;<button onclick ="toolRemove();">Remove the created toolbar"</button>
+		</div>
+
+	</div>	
+</div>	
+
+<div id="currentLocation_test" class="method_tests">
+    <div class="method_name"></div>
+    <div class="method_desc">Returns the url (location) of a page; </div>
+    <div><span class="result"></span></div>
+	<div class="test_case_requirements">
+            Created tabbar. Press
+            <button onClick='createTabbar()'>Create tabbar</button>
+    </div>
+	<button onclick="removeTabbar();">Remove the Tabbar </button>
+	<button onclick="Createtabbarnew(
+					[{'label':'Native Tabbar', 'action':'/app/NativeTabbarTest/NativeTabBar_MainPage.html', 'icon':'/public/images/bar/gears.png' },
+					{'label':'Main page', 'action':'/app/index.html', 'icon':'/public/images/bar/colored_btn.png', 'reload':true, 'disabled':true}], 
+					{'verticalOrientation':false, 'hiddenTabs': false, 'createOnInit' : false, 'placeTabsBottom':false}
+					);">Create Tabbar with disabled second tab (not WM/CE)  </button><br/>
+     
+</div>
+
+<div class="container">
+    <div class="method_name"></div>
+	 <div class="test_scenario">
+		<div class="test_scenario_controls">
+			<button onclick ="startgoogle();">StartUri Google </button>
+			&nbsp;&nbsp;&nbsp;<button onclick ="startyahoo();">StartUri yahoo </button>
+		</div>
+
+	</div>	
+</div>
+	
+<div class="container">
+	<div class="method_name"></div>
+	<div class="test_scenario">
+		<div class="test_scenario_controls" id="title_test">
+			<button class="getValue" onClick='setDomElementText("title_test", Rho.Application.title );'>get window title</button>
+			<br/>
+			<span class="result"></span>
+		</div>
+		
+	</div>
+</div>
+
+<div class="container">
+	<div class="method_name"></div>
+	<div class="test_scenario">
+		<div class="test_scenario_controls">
+			<button onClick='Rho.Application.title="My Title";'>title("My Title")</button>
+		</div>
+
+	</div>
+</div>	
+
+<div class="container">
+    <div class="method_name"></div>
+    <div class="method_description">Card Reader</div>
+    <div id="" class="container">
+        <div class="123test_case_requirements">
+			<button onClick="opencardreader();">opencardreader </button>
+			&nbsp;&nbsp;&nbsp;<button onClick="closecardreader();">closecardreader</button>
+		</div>
+		
+    </div>
+</div>	
+	
+	
+<div class="container">
+    <div class="method_name"></div>
+    <div class="method_description">Keystate</div>
+    <div id="" class="container">
+        <div class="123test_case_requirements">
+			<button onClick="keyshowstates();">Showstates </button>
+			&nbsp;&nbsp;&nbsp;<button onClick="keyshowstates_all();">keyshowstates all</button>
+		</div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="method_name"></div>
+    <div class="method_description">Sensor</div>
+    <div id="" class="container">
+        <div class="123test_case_requirements">
+			<button onClick="sensor_accelerometer();">sensor_accelerometer </button>
+			&nbsp;&nbsp;&nbsp;<button onClick="sensor_magnetometer();">sensor_magnetometer </button>
+			&nbsp;&nbsp;&nbsp;<button onClick="sensor_rotation();">sensor_rotation </button>
+			&nbsp;&nbsp;&nbsp;<button onClick="sensor_start();">sensor_start </button>
+			&nbsp;&nbsp;&nbsp;<button onClick="sensor_stop();">sensor_stop </button>
+			&nbsp;&nbsp;&nbsp;<button onClick="getminimumGap();">Get property minimumGap</button>
+			&nbsp;&nbsp;&nbsp;<button onClick="getstatus();">Get property status</button>
+		</div>
+		
+    </div>
+</div>
+
+<div class="container">
+    <div class="method_name"></div>
+    <div class="method_description">ScreenOrientation</div>
+    <div id="" class="container">
+        <div class="123test_case_requirements">
+			<button onClick="screenlefthanded();">screenlefthanded </button>
+			&nbsp;&nbsp;&nbsp;<button onClick="screenupsideDown();">screenupsideDown</button>
+			&nbsp;&nbsp;&nbsp;<button onClick="screenrightHanded();">screenrightHanded</button>
+			&nbsp;&nbsp;&nbsp;<button onClick="screennormal();">screennormal</button>
+			&nbsp;&nbsp;&nbsp;<button onClick="callsetScreenOrientationEvent();">callsetScreenOrientationEvent</button>
+		</div>
+		
+    </div>
+</div>
+
+<div class="container">
+    <div class="method_name"></div>
+    <div class="method_description">Log</div>
+    <div id="" class="container">
+        <div class="123test_case_requirements">
+			<button onClick="cleanlog();">cleanlog</button>
+			&nbsp;&nbsp;&nbsp;<button onClick="loginfo();">loginfo</button>
+			&nbsp;&nbsp;&nbsp;<button onClick="logtrace();">log trace</button>
+		</div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="method_name"></div>
+    <div class="method_description">Network</div>
+    <div id="" class="container">
+        <div class="123test_case_requirements">
+			<button onClick="downloadfile_callback();">downloadfile_callback</button>
+			&nbsp;&nbsp;&nbsp;<button onClick="downloadfile_nocallback();">downloadfile_nocallback</button>
+			&nbsp;&nbsp;&nbsp;<button onClick="uploadfile_callback();">uploadfile_callback</button>
+			&nbsp;&nbsp;&nbsp;<button onClick="uploadfile_nocallback();">uploadfile_nocallback</button>
+		</div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="container">
+    <div class="method_name"></div>
+    <div class="method_description">Show Battery Icon</div>
+    <div id="" class="container">
+        <div class="123test_case_requirements">
+			<button onClick="showbatteryiconleft(40);">Show Icon left</button>
+			&nbsp;&nbsp;&nbsp;<button onClick="showbatteryiconright(40);">Show Icon right</button>
+			&nbsp;&nbsp;&nbsp;<button onClick="hidebatteryicon();">Hide Icon</button>
+		</div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="method_name"></div>
+    <div class="method_description">smart BatteryStatus and Battery Status</div>
+    <div id="" class="container">
+        <div class="123test_case_requirements">
+			<button onClick="CallsmartBatteryStatus();">Smart BatteryStatus</button>
+			&nbsp;&nbsp;&nbsp;<button onClick="CallbatteryStatus();">Battery Status</button>
+			
+		</div>
+		
+    </div>
+	
+</div>
+
+
+
+<div class="container">
+    <div class="method_name"></div>
+    <div class="method_description">Show Signal Icon</div>
+    <div id="" class="container">
+        <div class="123test_case_requirements">
+			<button onClick="showsignaliconleft(40);">Show Icon left</button>
+			&nbsp;&nbsp;&nbsp;<button onClick="showsignaliconright(40);">Show Icon right</button>
+			&nbsp;&nbsp;&nbsp;<button onClick="hidesignalicon();">Hide Icon</button>
+		</div>
+    </div>
+	
+</div>
+
+
+<div class="container">
+    <div class="method_name"></div>
+    <div class="method_description">Show WLAN Signal Status</div>
+    <div id="" class="container">
+        <div class="123test_case_requirements">
+			<button onClick="wlanStatuswithcallback();">WLAN Status with callback</button>
+			&nbsp;&nbsp;&nbsp;<button onClick="stopWlanStatussignal(40);">Stop WLAN status</button>
+		</div>
+		
+    </div>
+	
+</div>
+
+	<P>
+    <b>Status: </b><div id="clbkStatus"></div>
+    <b>ImageURI: </b><div id="clbkURI"></div>
+    <img src="" id="capturedImage" />
+    <P>
+
+<div class="container">
+    <div class="method_name"></div>
+    <div class="method_description">Signature</div>
+    <div id="" class="container">
+        <div class="123test_case_requirements">
+			<button onClick="takesignature();">takesignature</button>
+			&nbsp;&nbsp;&nbsp;<button onClick="showsignature();">showsignature</button>
+			&nbsp;&nbsp;&nbsp;<button onClick="capturesignature();">capturesignature</button>
+			&nbsp;&nbsp;&nbsp;<button onClick="hidesignature();">hidesignature</button>
+			&nbsp;&nbsp;&nbsp;<button onClick="signatureclear();">signatureclear</button>
+			&nbsp;&nbsp;&nbsp;<button onClick="callsetVectorCallback();">callsetVectorCallback</button>
+			&nbsp;&nbsp;&nbsp;<button onClick="signature_penwidth1();">signature_penwidth1</button>
+			&nbsp;&nbsp;&nbsp;<button onClick="signature_penwidth5();">signature_penwidth5</button>
+		</div>
+    </div>
+	
+</div>
+
+
+
+
+<div class="container">
+    <div class="method_name"></div>
+    <div class="method_description">Key capture</div>
+    <div id="" class="container">
+        <div class="123test_case_requirements">
+        <div>
+		  <textarea rows="2" cols="10" tabindex="1">
+		  </textarea>&nbsp;&nbsp;&nbsp;
+		  <textarea rows="2" cols="10" tabindex="2">
+		  </textarea>
+		</div>
+			<button onClick="capture_homekeyval_0D();">Set homekeyval 0x0D to enter</button>
+			<button onClick="capture_homekeyval_66();">Set homekeyval 0x66 to Homekey</button>
+			&nbsp;&nbsp;&nbsp;<button onClick="disable_homekeyval();">disable_homekeyval</button>
+			&nbsp;&nbsp;&nbsp;<button onClick="callcaptureKey_0D();">call captureKey for 0x0D</button>
+			&nbsp;&nbsp;&nbsp;<button onClick="callcaptureKey_66();">call captureKey for 0x66</button>
+			&nbsp;&nbsp;&nbsp;<button onClick="callcaptureTrigger();">call callcaptureTrigger callback</button>
+			&nbsp;&nbsp;&nbsp;<button onClick="callremapKey_enterto1();">Remap callback enter to 1</button>
+			&nbsp;&nbsp;&nbsp;<button onClick="callremapKey_f1to9();">Remap callback f1 to 9</button>
+			
+		</div>
+		<div id="clbkData" style="word-wrap: break-word;"></div>
+    </div>
+	
+</div>
+
+
+
+
+
+
+</body>
+</html>
+
