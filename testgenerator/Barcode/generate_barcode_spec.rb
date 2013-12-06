@@ -1,10 +1,57 @@
 require 'fileutils'
 require 'yaml'
 
-$file_name = 'barcode_js_spec.js';
+$file_name = 'barcode_js_spec.js'
 $path_to_spec = File.join('Barcode', $file_name)
 $getType = 'direct'
-$objectName = '';
+$objectName = ''
+$propertyValues =  
+{"scanTimeout" => [{"value"=> 0},{"value"=> 5000},{"value"=> 10000},{"value"=> 50000}],
+"rasterHeight" => [{"value"=> 0},{"value"=> 10},{"value"=> 50},{"value"=> 100}], 
+"timedAimDuration" => [{"value"=> 0},{"value"=> 5000},{"value"=> 10000},{"value"=> 50000}],
+"sameSymbolTimeout" => [{"value"=> 0},{"value"=> 5000},{"value"=> 10000},{"value"=> 50000}], 
+"differentSymbolTimeout" => [{"value"=> 0},{"value"=> 5000},{"value"=> 10000},{"value"=> 50000}],
+"viewfinderX" => [{"value"=> 0},{"value"=> 100},{"value"=> 500},{"value"=> 1000}],
+"viewfinderY" => [{"value"=> 0},{"value"=> 100},{"value"=> 500},{"value"=> 1000}], 
+"viewfinderWidth" => [{"value"=> 0},{"value"=> 100},{"value"=> 500},{"value"=> 1000}], 
+"viewfinderHeight" => [{"value"=> 0},{"value"=> 100},{"value"=> 500},{"value"=> 1000}], 
+"viewfinderFeedbackTime"=> [{"value"=> 0},{"value"=> 5000},{"value"=> 10000},{"value"=> 50000}], 
+"dataBufferSize" => [{"value"=> 0},{"value"=> 8},{"value"=> 1024},{"value"=> 2048}],
+"connectionIdleTimeout" => [{"value"=> 0},{"value"=> 5000},{"value"=> 10000},{"value"=> 50000}], 
+"enableTimeout" => [{"value"=> 0},{"value"=> 5000},{"value"=> 10000},{"value"=> 50000}], 
+"decodeVolume" => [{"value"=> 0},{"value"=> 1},{"value"=> 4},{"value"=> 5}], 
+"decodeDuration" => [{"value"=> 0},{"value"=> 5000},{"value"=> 250},{"value"=> 50000}],
+"decodeFrequency" =>[{"value"=> 0},{"value"=> 5000},{"value"=> 10000},{"value"=> 65535}], 
+"invalidDecodeFrequency" => [{"value"=> 0},{"value"=> 5000},{"value"=> 10000},{"value"=> 65535}],
+"codabarMaxLength" => [{"value"=> 0},{"value"=> 10},{"value"=> 24},{"value"=> 55}], 
+"codabarMinLength" => [{"value"=> 0},{"value"=> 10},{"value"=> 24},{"value"=> 55}], 
+"code11maxLength" => [{"value"=> 0},{"value"=> 10},{"value"=> 24},{"value"=> 55}], 
+"code11minLength" => [{"value"=> 0},{"value"=> 10},{"value"=> 24},{"value"=> 55}], 
+"code128maxLength" => [{"value"=> 0},{"value"=> 10},{"value"=> 24},{"value"=> 55}], 
+"code128minLength" => [{"value"=> 0},{"value"=> 10},{"value"=> 24},{"value"=> 55}], 
+"code128securityLevel" => [{"value"=> 0},{"value"=> 1},{"value"=> 2},{"value"=> 3}], 
+"code39maxLength" => [{"value"=> 0},{"value"=> 10},{"value"=> 24},{"value"=> 55}], 
+"code39minLength" => [{"value"=> 0},{"value"=> 10},{"value"=> 24},{"value"=> 55}], 
+"code39securityLevel" => [{"value"=> 0},{"value"=> 1},{"value"=> 2},{"value"=> 3}],
+"code93maxLength" => [{"value"=> 0},{"value"=> 10},{"value"=> 24},{"value"=> 55}], 
+"code93minLength" => [{"value"=> 0},{"value"=> 10},{"value"=> 24},{"value"=> 55}], 
+"d2of5maxLength" => [{"value"=> 0},{"value"=> 10},{"value"=> 24},{"value"=> 55}], 
+"d2of5minLength" => [{"value"=> 0},{"value"=> 10},{"value"=> 24},{"value"=> 55}], 
+"i2of5maxLength" => [{"value"=> 0},{"value"=> 10},{"value"=> 24},{"value"=> 55}], 
+"i2of5minLength" => [{"value"=> 0},{"value"=> 10},{"value"=> 24},{"value"=> 55}],
+"korean3of5maxLength" => [{"value"=> 0},{"value"=> 10},{"value"=> 24},{"value"=> 55}], 
+"korean3of5minLength" => [{"value"=> 0},{"value"=> 10},{"value"=> 24},{"value"=> 55}], 
+"matrix2of5maxLength" => [{"value"=> 0},{"value"=> 10},{"value"=> 24},{"value"=> 55}], 
+"matrix2of5minLength" => [{"value"=> 0},{"value"=> 10},{"value"=> 24},{"value"=> 55}], 
+"msiMaxLength" => [{"value"=> 0},{"value"=> 10},{"value"=> 24},{"value"=> 55}],
+"msiMinLength" => [{"value"=> 0},{"value"=> 10},{"value"=> 24},{"value"=> 55}], 
+"signatureImageHeight" => [{"value"=> 20},{"value"=> 100},{"value"=> 50},{"value"=> 1024}], 
+"signatureImageWidth" => [{"value"=> 20},{"value"=> 100},{"value"=> 50},{"value"=> 1024}], 
+"signatureImageQuality" => [{"value"=> 20},{"value"=> 10},{"value"=> 55},{"value"=> 100}], 
+"upcEanRetryCount" => [{"value"=> 15},{"value"=> 2},{"value"=> 18},{"value"=> 20}],
+"upcEanSecurityLevel" => [{"value"=> 2},{"value"=> 0},{"value"=> 1},{"value"=> 3}],
+"decodeSound" => [{"value" => "file://application/alarm.wav"}], 
+"invalidDecodeSound" => [{"value" => "file://application/alarm.wav"}]}
 
 def generate_js_barcode_spec
 	apicontent = YAML.load_file('Barcode\Barcode.yml')
@@ -14,24 +61,23 @@ def generate_js_barcode_spec
 
 	#Get properties to generate set and get test cases
 	properties = apicontent['API']['MODULE']['PROPERTIES']['PROPERTY']
-
+	methods = apicontent['API']['MODULE']['METHODS']['METHOD']
 	write_jasmine_describe
+	#Check if method have enumerate method then create test for it.
+	methods.each do |method|
+		if(method['name'] == "enumerate")
+			#generate_enum_tests(method)
+			File.open($path_to_spec, 'a') do |f|
+				f.puts "describe('Enumerate Scanner ', function() {"
+			end
+			add_enum_tests
+			File.open($path_to_spec, 'a') do |f|
+				f.puts '});'
+			end
+		end
+	end
 	generate_set_get_test(properties)
 	end_jasmine_describe
-	# testCases['BarcodeTestCase'].each do |category|
-
-	# 	$getType = category['getType']
-
-	# 	case category['category'].to_s
-	# 	when "set", "Set", "SET"
-	# 		generate_set_test(category['Properties'])
-	# 	when "enumrate","ENUMERATE","Enumrate"
-	# 		generate_enum_tests(category['id'],category['callbacktype'])
-	# 	else
-	# 		puts "Didn't get Any Matching Category"
-	# 	end
-		
-	# end
 end
 
 def write_jasmine_describe
@@ -49,34 +95,38 @@ end
 def generate_set_get_test(properties)
 
     File.open($path_to_spec, 'a') do |f|
-		f.puts "describe('#{$objectName} APIs Set Test', function() {"
+    	f.puts "describe('#{$objectName} APIs Set/Get Test', function() {"
 		f.puts "var enumData = #{$objectName}.enumerate();"
 		f.puts 'for (var j = 0;j<enumData.length;j++){'
 		f.puts '(function(enumObject){'
 		f.puts "var scnname = enumObject.getProperty('friendlyName');"
 		f.puts "var scnid = enumObject.getProperty('ID');"
 		f.puts 'var scntype = enumObject.scannerType;'
+		f.puts 'describe("ScnName "+scnname+"ScnId "+scnid+"Scn Type "+scntype,function() {'
 	end
 
 	add_enable_test
 
 	properties.each do |property|
-		if (!property.has_key?("readOnly"))
-			#Generate code to set properties by directly, setProperties, setProperty
-			add_setproperty_test("enumObject",property)
-		else
-			#Generate code to get properties value
-			add_get_readonlyproperty_test("enumObject",property)
+
+		if(property['name'][0..2] != 'rsm')
+			if (!property.has_key?("readOnly"))
+				#Generate code to set properties by directly, setProperties, setProperty
+				add_setproperty_test("enumObject",property)
+			else
+				#Generate code to get properties value
+				add_get_readonlyproperty_test("enumObject",property)
+			end
 		end
 	end
 
 	add_disable_test
 
     File.open($path_to_spec, 'a') do |f|
+    	f.puts '});'
 		f.puts '})(enumData[j]);' #Ending anonymous Method call
 		f.puts '}' #Ending the For Loop
 		f.puts '});' #Ending set describe
-
 	end
 end
 
@@ -135,15 +185,5 @@ def add_disable_test
 	f.puts '}, "Waiting for enable", 11000);'
 	f.puts '});'
 	f.puts '});'
-	end
-end
-
-def generate_enum_tests(id,callbackType)
-	File.open($path_to_spec, 'a') do |f|
-		f.puts "describe('#{id} - Enumerate Scanner ', function() {"
-	end
-	add_enum_tests("Rho.Barcode",callbackType);
-	File.open($path_to_spec, 'a') do |f|
-		f.puts '});'
 	end
 end

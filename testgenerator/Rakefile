@@ -20,6 +20,33 @@ namespace :generate do
 			cmd = "js-beautify -f ./Cardreader/#{$file_name} -o ./Cardreader/#{$file_name}"
 			exec cmd
 		end
+
+		task :signature do
+			Rake::Task['generate:xmltoymal:signature'].execute
+			require File.dirname(__FILE__) + "/Signature/generate_signature_spec.rb"
+			require File.dirname(__FILE__) + "/generate_spec.rb"
+			generate_js_signature_spec
+			cmd = "js-beautify -f ./Signature/#{$file_name} -o ./Signature/#{$file_name}"
+			exec cmd
+		end
+
+		task :camera do
+			Rake::Task['generate:xmltoymal:camera'].execute
+			require File.dirname(__FILE__) + "/Camera/generate_camera_spec.rb"
+			require File.dirname(__FILE__) + "/generate_spec.rb"
+			generate_js_camera_spec
+			cmd = "js-beautify -f ./Camera/#{$file_name} -o ./Camera/#{$file_name}"
+			exec cmd
+		end
+
+		task :audiocapture do
+			Rake::Task['generate:xmltoymal:audiocapture'].execute
+			require File.dirname(__FILE__) + "/AudioCapture/generate_audiocapture_spec.rb"
+			require File.dirname(__FILE__) + "/generate_spec.rb"
+			generate_js_audiocapture_spec
+			cmd = "js-beautify -f ./AudioCapture/#{$file_name} -o ./AudioCapture/#{$file_name}"
+			exec cmd
+		end
 	end
 	namespace :ruby do
 		task :barcode do
@@ -37,6 +64,22 @@ namespace :generate do
 		
 		task :barcode do
 			barcodexmltoymal
+		end
+
+		task :cardreader do
+			cardreaderxmltoymal
+		end
+
+		task :signature do
+			signaturexmltoymal
+		end
+
+		task :camera do
+			cameraxmltoymal
+		end
+
+		task :audiocapture do
+			audiocapturexmltoymal
 		end
 		
 	end
