@@ -17,3 +17,5 @@ TODO
 *.xml
 *.sh
 sim-public*
+*/feature_def/*/project/*/Rhodes/build/
+*/feature_def/*/project/*/build/
