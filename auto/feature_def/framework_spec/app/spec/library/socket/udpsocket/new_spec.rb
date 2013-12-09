@@ -7,7 +7,8 @@ describe "UDPServer.new" do
   end
 
   it "binds to a host and a port----VT-0182" do
-    @server = UDPServer.new('127.0.0.1', SocketSpecs.port)
+    @server = UDPSocket.new
+	@server.bind('127.0.0.1', SocketSpecs.port)
     addr = @server.addr
     addr[0].should == 'AF_INET'
     addr[1].should be_kind_of(Fixnum)
@@ -18,7 +19,8 @@ describe "UDPServer.new" do
   end
 
   it "binds to localhost and a port with either IPv4 or IPv6----VT-0183" do
-    @server = UDPServer.new(SocketSpecs.hostname, SocketSpecs.port)
+	@server = UDPSocket.new
+	@server.bind(SocketSpecs.hostname, SocketSpecs.port)
     addr = @server.addr
     if addr[0] == 'AF_INET'
       addr[1].should == SocketSpecs.port
@@ -32,7 +34,8 @@ describe "UDPServer.new" do
   end
 
   it "binds to INADDR_ANY if the hostname is empty----VT-0184" do
-    @server = UDPServer.new('', SocketSpecs.port)
+	@server = UDPSocket.new
+	@server.bind('', SocketSpecs.port)
     addr = @server.addr
     addr[0].should == 'AF_INET'
     addr[1].should == SocketSpecs.port
@@ -41,7 +44,8 @@ describe "UDPServer.new" do
   end
 
   it "binds to INADDR_ANY if the hostname is empty and the port is a string----VT-0185" do
-    @server = UDPServer.new('', SocketSpecs.port.to_s)
+    @server = UDPSocket.new
+	@server.bind('', SocketSpecs.port.to_s)
     addr = @server.addr
     addr[0].should == 'AF_INET'
     addr[1].should == SocketSpecs.port
@@ -51,11 +55,13 @@ describe "UDPServer.new" do
 
   it "coerces port to string, then determines port from that number or service name----VT-0186" do
     t = Object.new
-    lambda { UDPServer.new(SocketSpecs.hostname, t) }.should raise_error(TypeError)
+	@server = UDPSocket.new
+    lambda { @server.bind(SocketSpecs.hostname, t) }.should raise_error(TypeError)
 
     def t.to_str; SocketSpecs.port.to_s; end
 
-    @server = UDPServer.new(SocketSpecs.hostname, t)
+	@server = UDPSocket.new
+	@server.bind(SocketSpecs.hostname, t)
     addr = @server.addr
     addr[1].should == SocketSpecs.port
 
@@ -64,7 +70,8 @@ describe "UDPServer.new" do
   end
 
   it "raises Errno::EADDRNOTAVAIL when the adress is unknown----VT-0187" do
-    lambda { UDPServer.new("1.2.3.4", 4000) }.should raise_error(Errno::EADDRNOTAVAIL)
+    @server = UDPSocket.new
+    lambda { @server.bind("1.2.3.4", 4000) }.should raise_error(Errno::EADDRNOTAVAIL)
   end
 
   # There is no way to make this fail-proof on all machines, because
@@ -72,16 +79,18 @@ describe "UDPServer.new" do
   # traditionally invalidly named ones.
   quarantine! do
     it "raises a SocketError when the host is unknown----VT-0188" do
+	  @server = UDPSocket.new
       lambda {
-        UDPServer.new("--notavalidname", 4000)
+        @server.bind("--notavalidname", 4000)
       }.should raise_error(SocketError)
     end
   end
 
   it "raises Errno::EADDRINUSE when address is already in use----VT-0189" do
+	@server = UDPSocket.new
     lambda {
-      @server = UDPServer.new('127.0.0.1', SocketSpecs.port)
-      @server = UDPServer.new('127.0.0.1', SocketSpecs.port)
+      @server.bind('127.0.0.1', SocketSpecs.port)
+      @server.bind('127.0.0.1', SocketSpecs.port)
     }.should raise_error(Errno::EADDRINUSE)
   end
 end

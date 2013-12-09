@@ -15,7 +15,7 @@ describe "Socket#gethostbyaddr" do
   end
 
   it "accepts address string and checks if the hostname is same as given----VT-0104" do
-     res = @socket.gethostbyaddr(@addr)
+     res = Socket.gethostbyaddr(@addr)
 
      expected = "127.0.0.1"
      res[0].should == expected

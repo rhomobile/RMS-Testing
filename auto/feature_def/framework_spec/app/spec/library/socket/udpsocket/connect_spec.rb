@@ -4,7 +4,9 @@ require 'spec/library/socket/fixtures/classes'
 describe "UDPSocket#recv" do
 
   before :each do
-    @server = UDPSocket.new('127.0.0.1', SocketSpecs.port)
+	@server = UDPSocket.new
+    #@server = UDPSocket.new('127.0.0.1', SocketSpecs.port)
+	@server.bind('127.0.0.1', SocketSpecs.port)
   end
 
   after :each do

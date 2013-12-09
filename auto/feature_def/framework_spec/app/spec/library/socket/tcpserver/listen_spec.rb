@@ -14,7 +14,7 @@ describe "Socket#listen" do
   end
 
   it "verifies we can listen for incoming connections----VT-0147" do
-    sockaddr = TCPServer.pack_sockaddr_in(SocketSpecs.port, "127.0.0.1")
+    sockaddr = Socket.pack_sockaddr_in(SocketSpecs.port, "127.0.0.1")
     @socket.setsockopt(Socket::SOL_SOCKET, Socket::SO_REUSEADDR, true)
     @socket.bind(sockaddr)
     @socket.listen(5).should == 0

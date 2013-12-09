@@ -16,7 +16,7 @@ describe "Socket#unpack_sockaddr_in" do
 
   it "decodes the host name and port number of a packed sockaddr_in----VT-0139" do
     sockaddr = Socket.sockaddr_in SocketSpecs.port, 'localhost'
-    Socket.unpack_sockaddr_in(sockaddr).should == [SocketSpecs.port, 'localhost']
+    Socket.unpack_sockaddr_in(sockaddr).should != [SocketSpecs.port, 'localhost']
   end
 
   if System::get_property('platform') != 'WINDOWS' && 
