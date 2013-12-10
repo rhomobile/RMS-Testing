@@ -70,7 +70,7 @@ describe("Ajax bridge Test Starts Here", function() {
 				runs(function()
 				{
 					//AS loading from local file system is not working. This step skipped now.
-					//window.location.href = "http://motobhakta.github.io/rhoapp/Ajaxbridge/specRunner.html" (.io pages not opening might be bug)
+					window.location.href = "http://motobhakta.github.io/rhoapp/Ajaxbridge/specRunner.html" //(.io pages not opening might be bug)
 				});
 		});
 	});
