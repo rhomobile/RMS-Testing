@@ -201,4 +201,5 @@ var _result = {
 
 beforeEach(function() {
 _result.reset();
+//document.getElementById("myList").innerHTML = '';
 });
