@@ -152,6 +152,26 @@ function isTestApplicable (anArray){
     return (anArray.indexOf(platform) == -1) ? false : true ;
 }
 
+//Common Method for ruby method call from javascript
+var Ruby = {
+    data: undefined,
+    call: function(controller,method){
+        Ruby.data = undefined;
+        url = '/app/'+controller+'/'+method
+        $.get(url)
+        .success(function(data){
+
+            }); 
+        return false;
+    },
+    sendValueToJS: function(data){ //Send data from ruby controller to js
+        Ruby.data = data;
+    },
+    getReturnedValue: function(){
+        return Ruby.data;
+    }
+}
+
 //Common Method to Make a Test Pass/Fail for Semi Automatic App.
 //Methods is used in System, CardReader
 
@@ -200,6 +220,6 @@ var _result = {
 }
 
 beforeEach(function() {
-_result.reset();
-//document.getElementById("myList").innerHTML = '';
+    _result.reset();
+    //document.getElementById("myList").innerHTML = '';
 });

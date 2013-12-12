@@ -32,6 +32,7 @@
     <li><a href="/app/SensorTest/">Sensor test</a></li>
 	<li><a href="/app/LogTest/">Log test</a></li>
     <li><a href="/app/BundleTest/">Bundle test page</a></li>
+	
 </ul>
 
 <h3>Manual Specs which use Jasmine</h3>
@@ -94,6 +95,9 @@
         }
         if (!isWindowsPhone8Platform()) {
             $("#ruby").append('<li><a href="/app/NetworkStatus">Network status notification</a></li>');
+        }
+		if (!isWindowsPhone8Platform()) {
+            $("#ruby").append('<li><a href="/app/Geolocation">Geolocation Test</a></li>');
         }
 
 
