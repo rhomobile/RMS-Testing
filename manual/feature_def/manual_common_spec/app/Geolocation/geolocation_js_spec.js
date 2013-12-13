@@ -4,6 +4,7 @@ describe("Geolocation RUBY API Test", function() {
 
 	beforeEach(function() {
 		timeout = false;
+		document.getElementById("myList").innerHTML = '';
 	});
 
 	it("should return current latitude of the device",function(){
@@ -109,104 +110,108 @@ describe("Geolocation RUBY API Test", function() {
 		_result.waitForResponse(); //Common Method implemented to wait for tester to make it pass or fail.Code available in specHelper.js
 		
 	});
+	if (["WINDOWS", "ANDROID","APPLE"].indexOf(Rho.System.platform) != -1) {
+		it("should return altitude in meters(meters above sea level)", function(){
+			runs(function()
+			{
+				dispCurrentProcess(jasmine.getEnv().currentSpec.description);
+				Ruby.call('Geolocation','getAltitude');
 
-	it("should return altitude in meters(meters above sea level)", function(){
-		runs(function()
-		{
-			dispCurrentProcess(jasmine.getEnv().currentSpec.description);
-			Ruby.call('Geolocation','getAltitude');
+				setTimeout(function() {
+					timeout = true;
+				}, 2000);
+			});
 
-			setTimeout(function() {
-				timeout = true;
-			}, 2000);
+			waitsFor(function()
+			{
+				if(timeout == true)
+					return true;
+			}, 'Wait for 2 sec ajax call to happen', 3000);
+
+			runs(function(){
+				displayResult("Output: ",Ruby.getReturnedValue()+"<br>");
+			});
+
+			_result.waitForResponse(); //Common Method implemented to wait for tester to make it pass or fail.Code available in specHelper.js
+			
 		});
+	}
+	if (["WINDOWS", "ANDROID","APPLE"].indexOf(Rho.System.platform) != -1) {
+		it("should return the speed if it is available(meters/sec over ground)", function(){
+			runs(function()
+			{
+				dispCurrentProcess(jasmine.getEnv().currentSpec.description);
+				Ruby.call('Geolocation','getSpeed');
 
-		waitsFor(function()
-		{
-			if(timeout == true)
-				return true;
-		}, 'Wait for 2 sec ajax call to happen', 3000);
+				setTimeout(function() {
+					timeout = true;
+				}, 2000);
+			});
 
-		runs(function(){
-			displayResult("Output: ",Ruby.getReturnedValue()+"<br>");
+			waitsFor(function()
+			{
+				if(timeout == true)
+					return true;
+			}, 'Wait for 2 sec ajax call to happen', 3000);
+
+			runs(function(){
+				displayResult("Output: ",Ruby.getReturnedValue()+"<br>");
+			});
+
+			_result.waitForResponse(); //Common Method implemented to wait for tester to make it pass or fail.Code available in specHelper.js
+			
 		});
+	}
+	if (["ANDROID","APPLE"].indexOf(Rho.System.platform) != -1) {
+		it("should returns the estimated accuracy of the fix(Horizontal radius in Meters)", function(){
+			runs(function()
+			{
+				dispCurrentProcess(jasmine.getEnv().currentSpec.description);
+				Ruby.call('Geolocation','getAccuracy');
 
-		_result.waitForResponse(); //Common Method implemented to wait for tester to make it pass or fail.Code available in specHelper.js
-		
-	});
+				setTimeout(function() {
+					timeout = true;
+				}, 2000);
+			});
 
-	it("should return the speed if it is available(meters/sec over ground)", function(){
-		runs(function()
-		{
-			dispCurrentProcess(jasmine.getEnv().currentSpec.description);
-			Ruby.call('Geolocation','getSpeed');
+			waitsFor(function()
+			{
+				if(timeout == true)
+					return true;
+			}, 'Wait for 2 sec ajax call to happen', 3000);
 
-			setTimeout(function() {
-				timeout = true;
-			}, 2000);
+			runs(function(){
+				displayResult("Output: ",Ruby.getReturnedValue()+"<br>");
+			});
+
+			_result.waitForResponse(); //Common Method implemented to wait for tester to make it pass or fail.Code available in specHelper.js
+			
 		});
+	}
+	if (["WINDOWS", "ANDROID"].indexOf(Rho.System.platform) != -1) {
+		it("should returns the number of satellites used to determine the fix", function(){
+			runs(function()
+			{
+				dispCurrentProcess(jasmine.getEnv().currentSpec.description);
+				Ruby.call('Geolocation','getSatellitesCount');
 
-		waitsFor(function()
-		{
-			if(timeout == true)
-				return true;
-		}, 'Wait for 2 sec ajax call to happen', 3000);
+				setTimeout(function() {
+					timeout = true;
+				}, 2000);
+			});
 
-		runs(function(){
-			displayResult("Output: ",Ruby.getReturnedValue()+"<br>");
+			waitsFor(function()
+			{
+				if(timeout == true)
+					return true;
+			}, 'Wait for 2 sec ajax call to happen', 3000);
+
+			runs(function(){
+				displayResult("Output: ",Ruby.getReturnedValue()+"<br>");
+			});
+
+			_result.waitForResponse(); //Common Method implemented to wait for tester to make it pass or fail.Code available in specHelper.js
+			
 		});
-
-		_result.waitForResponse(); //Common Method implemented to wait for tester to make it pass or fail.Code available in specHelper.js
-		
-	});
-
-	it("should returns the estimated accuracy of the fix(Horizontal radius in Meters)", function(){
-		runs(function()
-		{
-			dispCurrentProcess(jasmine.getEnv().currentSpec.description);
-			Ruby.call('Geolocation','getAccuracy');
-
-			setTimeout(function() {
-				timeout = true;
-			}, 2000);
-		});
-
-		waitsFor(function()
-		{
-			if(timeout == true)
-				return true;
-		}, 'Wait for 2 sec ajax call to happen', 3000);
-
-		runs(function(){
-			displayResult("Output: ",Ruby.getReturnedValue()+"<br>");
-		});
-
-		_result.waitForResponse(); //Common Method implemented to wait for tester to make it pass or fail.Code available in specHelper.js
-		
-	});
-
-	it("should returns the number of satellites used to determine the fix", function(){
-		runs(function()
-		{
-			dispCurrentProcess(jasmine.getEnv().currentSpec.description);
-			Ruby.call('Geolocation','getSatellitesCount');
-
-			setTimeout(function() {
-				timeout = true;
-			}, 2000);
-		});
-
-		waitsFor(function()
-		{
-			if(timeout == true)
-				return true;
-		}, 'Wait for 2 sec ajax call to happen', 3000);
-
-		runs(function(){
-			displayResult("Output: ",Ruby.getReturnedValue()+"<br>");
-		});
-
-		_result.waitForResponse(); //Common Method implemented to wait for tester to make it pass or fail.Code available in specHelper.js
-		
-	});
+	}
 });
