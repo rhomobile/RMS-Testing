@@ -112,7 +112,7 @@ class GeolocationController < Rho::RhoController
   def setNotificationEX
     $count = 0
     begin
-      Geolocation.set_notification_ex url_for(:action => :geo_callback_EX), "mytag=55", 3
+      Geolocation.set_notification_ex url_for(:action => :geo_callback_EX), @params, "mytag=55"
     rescue => ex
       puts "Exception Thrown: #{ex.message}"
       jsmethod = "updateSetNotificationEXDiv('" + ex.message + "')"

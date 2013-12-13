@@ -18,7 +18,9 @@
      <li><a href="#" onclick="setNotification();">Set Notification</a></li>
      <li><div id='notification'></div></li>
      <li>Below Method is only applicable for Android</li>
-     <li><a href="#" onclick="setNotificationEX();">Call My Method</a></li>
+     <li><a href="#" onclick="setNotificationEX('minDistance',2);">Set Notification For Distance Change</a></li>
+     <li><a href="#" onclick="setNotificationEX('minTimeout',3);">Set Notification For Minimum Timeout</a></li>
+     <li><a href="#" onclick="setNotificationEX_both();">Set Notification For Both</a></li>
      <li><div id='notificationex'></div></li>
      <li>TurnOFF Geolocation</li>
      <li><a href="#" onclick="geoTurnOff();">Turn OFF</a></li>
@@ -33,8 +35,14 @@ var setNotification = function(){
   Ruby.call('Geolocation','setNotification');
 }
 
-var setNotificationEX = function(){
-  Ruby.call('Geolocation','setNotificationEX');
+var setNotificationEX = function(params,value){
+  var method = "setNotificationEX?"+params+"="+value;
+  Ruby.call('Geolocation',method);
+}
+
+var setNotificationEX_both = function(){
+  var method = "setNotificationEX?minDistance=2&minTimeout=30";
+  Ruby.call('Geolocation',method);
 }
 
 var geoTurnOff = function(){
