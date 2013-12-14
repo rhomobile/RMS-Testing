@@ -11,6 +11,10 @@ describe "Rhom" do
   # databaseClientReset | database_client_reset
   # generateId | ?
 
+  it 'VT302-0001 | Check Rhom::Rhom exist or not | Should return an object' do
+    Rhom::Rhom.should_not be_nil
+  end
+
   # TODO: no legacy examples for database_client_reset
   # mutex error with neworm!
   it "should return the nil client id if client db is reset" do

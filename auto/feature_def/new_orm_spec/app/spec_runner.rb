@@ -14,7 +14,10 @@ class SpecRunner < MSpecScript
 
     config[:files] << "spec/spec_helper"
     config[:files] << "spec/rhom_spec"
-    config[:files] << "spec/rhom_model_spec"
+    config[:files] << [ "spec/rhom_model_spec",
+      [ {:schema_model=>true, :sync_model=>true},  {:schema_model=>true, :sync_model=>false},
+        {:schema_model=>false, :sync_model=>true} , {:schema_model=>false, :sync_model=>false} ]
+    ]
 
   end
 
