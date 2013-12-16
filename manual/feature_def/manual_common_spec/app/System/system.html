@@ -429,7 +429,7 @@
 
 </div>
 
-<div class="method_tests android wm">
+<div class="method_tests android wm ios">
     <div class="method_name">Rho.System.sendMessageToApplication</div>
     <div class="method_desc"> Send Data to Application </div>
 
@@ -452,6 +452,17 @@
         <span class="test_scenario_number">VT300-066 <br/></span>
         </div>
     </div>
+    
+    <div class="method_tests ios">
+        <div class="test_scenario">
+            <div class="test_scenario_controls">
+                <a href="javascript:void(0)" onclick="Rho.System.sendApplicationMessage('testapp', 'param1=hello&param2=123');"> call
+                    sendMessageToApplication with application name 'testapp'.</a>
+            </div>
+        <span class="test_scenario_number">VT300-066 <br/></span>
+        </div>
+    </div>
+
 </div>
 
 <div class="method_tests android win32 wm wp8">
