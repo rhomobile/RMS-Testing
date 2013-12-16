@@ -1,3 +1,4 @@
+
 describe("DPX feature definition tests", function () {
 
     it("Should capture image from file system", function () {
@@ -11,6 +12,7 @@ describe("DPX feature definition tests", function () {
 
         dpxInstance.start();
 
+        // method process() should return true if it's all ok
         expect(dpxInstance.process()).toEqual(true);
 
         dpxInstance.close();
@@ -22,10 +24,11 @@ describe("DPX feature definition tests", function () {
         dpxInstance.documentCallback = function(someObject){
             // todo: Check recognized data here
         };
-        dpxInstance.inputSource = 'camera'; // or dpxInstance.setCameraSource;
+        dpxInstance.inputSource = 'camera'; // or dpxInstance.setCameraSource();
         dpxInstance.template = Rho.RhoFile.join(Rho.Application.AppBundleFolder, 'template.xml');
         dpxInstance.start();
 
+        // method process() should return true if it's all ok
         expect(dpxInstance.process()).toEqual(true);
 
         dpxInstance.close();
