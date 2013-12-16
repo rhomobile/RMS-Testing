@@ -1,11 +1,14 @@
 describe("DPX feature definition tests", function () {
 
     it("Should capture image from file system", function () {
+        var processedForm = nil;
         var dpxInstance = Rho.DPX.init();
-        dpxInstance.documentCallback = function (event) {
+        //Todo: documentCallback is mandatory!
+        dpxInstance.documentCallback = function (eventObject) {
+            //eventObject is is a complex object.
+            // It contains event type, data about used template, capturing time and recognized data
             if (event.type == 'FORM_PROCESSED') {
-                // todo: Check recognized data here
-                // event.processedForm
+                processedForm = event.processedForm;
             }
         };
         dpxInstance.fileName = 'image.jpg';
@@ -14,8 +17,11 @@ describe("DPX feature definition tests", function () {
 
         dpxInstance.start();
 
-        // method process() should return true if it's all ok
-        expect(dpxInstance.process()).toEqual(true);
+        // todo: Should add async support to test
+        dpxInstance.process();
+
+        // todo: Explain how to retrieve data from the processedForm object
+        //expect(processedForm.someData).toEqual(true);
 
         dpxInstance.close();
         dpxInstance.release();
@@ -25,16 +31,19 @@ describe("DPX feature definition tests", function () {
         var dpxInstance = Rho.DPX.init();
         dpxInstance.documentCallback = function (event) {
             if (event.type == 'FORM_PROCESSED') {
-                // todo: Check recognized data here
-                // event.processedForm
+                processedForm = event.processedForm;
             }
         }
         dpxInstance.inputSource = 'camera'; // or dpxInstance.setCameraSource();
         dpxInstance.template = Rho.RhoFile.join(Rho.Application.AppBundleFolder, 'template.xml');
         dpxInstance.start();
 
+        // todo: Should add async support to test
         // method process() should return true if it's all ok
-        expect(dpxInstance.process()).toEqual(true);
+        dpxInstance.process();
+
+        // todo: Explain how to retrieve data from the processedForm object
+        //expect(processedForm.someData).toEqual(true);
 
         dpxInstance.close();
         dpxInstance.release();
@@ -42,12 +51,16 @@ describe("DPX feature definition tests", function () {
 
     it("Should raise suitable exception if template is invalid ", function () {
         var dpxInstance = Rho.DPX.init();
+        dpxInstance.documentCallback = function (event) {
+            if (event.type == 'ERROR') {
+                //todo: check expected exception result;
+            }
+        }
         dpxInstance.inputSource = 'camera'; // or dpxInstance.setCameraSource();
         dpxInstance.template = Rho.RhoFile.join(Rho.Application.AppBundleFolder, 'invalidTemplate.xml');
         dpxInstance.start();
 
-        // method process() should return true if it's all ok
-        expect(dpxInstance.process()).toThrow();
+        dpxInstance.process();
 
         dpxInstance.close();
         dpxInstance.release();
@@ -56,12 +69,16 @@ describe("DPX feature definition tests", function () {
 
     it("Should raise suitable exception if template file is absent ", function () {
         var dpxInstance = Rho.DPX.init();
+        dpxInstance.documentCallback = function (event) {
+            if (event.type == 'ERROR') {
+                //todo: check expected exception result;
+            }
+        }
         dpxInstance.inputSource = 'camera'; // or dpxInstance.setCameraSource();
         dpxInstance.template = Rho.RhoFile.join(Rho.Application.AppBundleFolder, 'absentTemplate.xml');
         dpxInstance.start();
 
-        // method process() should return true if it's all ok
-        expect(dpxInstance.process()).toThrow();
+        dpxInstance.process();
 
         dpxInstance.close();
         dpxInstance.release();
@@ -70,14 +87,18 @@ describe("DPX feature definition tests", function () {
 
     it("Should raise appropriate exception if capturing invalid image from file system", function () {
         var dpxInstance = Rho.DPX.init();
+        dpxInstance.documentCallback = function (event) {
+            if (event.type == 'ERROR') {
+                //todo: check expected exception result;
+            }
+        }
         dpxInstance.fileName = 'invalidImage.jpg';
         dpxInstance.inputSource = 'file'; // or dpxInstance.setFileSource(); dpxInstance.setFileSource(fileName);
         dpxInstance.template = Rho.RhoFile.join(Rho.Application.AppBundleFolder, 'template.xml');
 
         dpxInstance.start();
 
-        // method process() should return true if it's all ok
-        expect(dpxInstance.process()).toThrow();
+        dpxInstance.process();
 
         dpxInstance.close();
         dpxInstance.release();
@@ -86,14 +107,18 @@ describe("DPX feature definition tests", function () {
 
     it("Should raise appropriate exception if captured  image file is absent on disk", function () {
         var dpxInstance = Rho.DPX.init();
+        dpxInstance.documentCallback = function (event) {
+            if (event.type == 'ERROR') {
+                //todo: check expected exception result;
+            }
+        }
         dpxInstance.fileName = 'absentImage.jpg';
         dpxInstance.inputSource = 'file'; // or dpxInstance.setFileSource(); dpxInstance.setFileSource(fileName);
         dpxInstance.template = Rho.RhoFile.join(Rho.Application.AppBundleFolder, 'template.xml');
 
         dpxInstance.start();
 
-        // method process() should return true if it's all ok
-        expect(dpxInstance.process()).toThrow();
+        dpxInstance.process();
 
         dpxInstance.close();
         dpxInstance.release();
