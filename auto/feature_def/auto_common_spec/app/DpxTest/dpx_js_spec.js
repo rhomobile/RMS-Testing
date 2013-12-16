@@ -1,11 +1,37 @@
+describe("DPX Use case tests", function () {
+
+    it("Should capture image from file system", function () {
+        Rho.DPX.fileName = 'image.jpg';
+        Rho.DPX.inputSource = 'file';
+        Rho.DPX.template = Rho.RhoFile.join(Rho.Application.AppBundleFolder, 'template.xml');
+        var dpxInstance = Rho.DPX.init();
+        dpxInstance.start();
+        dpxInstance.process();
+        dpxInstance.close();
+        dpxInstance.release();
+    })
+
+    it("Should capture image from internal camera", function () {
+        Rho.DPX.inputSource = 'camera';
+        Rho.DPX.template = Rho.RhoFile.join(Rho.Application.AppBundleFolder, 'template.xml');
+        var dpxInstance = Rho.DPX.init();
+        dpxInstance.start();
+        dpxInstance.process();
+        dpxInstance.close();
+        dpxInstance.release();
+    })
+})
+
+/*
+
 describe("DPX", function () {
     var dpxInstance;
     beforeEach(function() {
-       dpxInstance = Rho.DPX.open(function(){});
+       //dpxInstance = Rho.DPX.open(function(){});
     });
 
     afterEach(function() {
-      dpxInstance.close();
+      //dpxInstance.close();
     });
 
     it("Should set debugMode property to true", function () {
@@ -87,8 +113,9 @@ describe("DPX", function () {
         dpxInstance.zoomAmount = false;
         expect(dpxInstance.zoomAmount).toEqual(false);
     });
+*/
 
-    /*describe("testing boolean properties with valid input", function () {
+/*    describe("testing boolean properties with valid input", function () {
 
      beforeEach(function () {});
      afterEach(function () {});
@@ -345,5 +372,6 @@ describe("DPX", function () {
      });
 
      });
-     */
+
 });
+  */
