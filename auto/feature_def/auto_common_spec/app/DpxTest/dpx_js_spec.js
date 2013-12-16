@@ -1,24 +1,33 @@
-describe("DPX Use case tests", function () {
+describe("DPX feature definition tests", function () {
 
     it("Should capture image from file system", function () {
-        Rho.DPX.fileName = 'image.jpg';
-        Rho.DPX.inputSource = 'file';
-        Rho.DPX.template = Rho.RhoFile.join(Rho.Application.AppBundleFolder, 'template.xml');
         var dpxInstance = Rho.DPX.init();
+        dpxInstance.documentCallback = function(someObject){
+            // todo: Check recognized data here
+        };
+        dpxInstance.fileName = 'image.jpg';
+        dpxInstance.inputSource = 'file'; // or dpxInstance.setFileSource(); dpxInstance.setFileSource(fileName);
+        dpxInstance.template = Rho.RhoFile.join(Rho.Application.AppBundleFolder, 'template.xml');
+
         dpxInstance.start();
-        dpxInstance.process();
-        // todo: Check recognized data here
+
+        expect(dpxInstance.process()).toEqual(true);
+
         dpxInstance.close();
         dpxInstance.release();
     })
 
     it("Should capture image from internal camera", function () {
-        Rho.DPX.inputSource = 'camera';
-        Rho.DPX.template = Rho.RhoFile.join(Rho.Application.AppBundleFolder, 'template.xml');
         var dpxInstance = Rho.DPX.init();
+        dpxInstance.documentCallback = function(someObject){
+            // todo: Check recognized data here
+        };
+        dpxInstance.inputSource = 'camera'; // or dpxInstance.setCameraSource;
+        dpxInstance.template = Rho.RhoFile.join(Rho.Application.AppBundleFolder, 'template.xml');
         dpxInstance.start();
-        dpxInstance.process();
-        // todo: Check recognized data here
+
+        expect(dpxInstance.process()).toEqual(true);
+
         dpxInstance.close();
         dpxInstance.release();
     })
