@@ -7,6 +7,7 @@ describe("DPX Use case tests", function () {
         var dpxInstance = Rho.DPX.init();
         dpxInstance.start();
         dpxInstance.process();
+        // todo: Check recognized data here
         dpxInstance.close();
         dpxInstance.release();
     })
@@ -17,6 +18,7 @@ describe("DPX Use case tests", function () {
         var dpxInstance = Rho.DPX.init();
         dpxInstance.start();
         dpxInstance.process();
+        // todo: Check recognized data here
         dpxInstance.close();
         dpxInstance.release();
     })
