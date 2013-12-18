@@ -100,9 +100,6 @@ describe("DPX feature definition tests", function () {
 
     });
 
-    it("Starting two dpx engine and capture document from file system", function () {
-
-    });
 })
 
 
