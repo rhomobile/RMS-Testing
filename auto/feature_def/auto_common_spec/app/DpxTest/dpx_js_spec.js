@@ -18,6 +18,7 @@ describe("DPX feature definition tests", function () {
         }, 5000);
 
         runs(function(){
+            //TODO: Need add additional expect
             expect(processedForm.template).toEqual(dpxInstance.template);
         });
 
@@ -43,11 +44,60 @@ describe("DPX feature definition tests", function () {
         }, 5000);
 
         runs(function(){
+            //TODO: Need add additional expect
             expect(processedForm.template).toEqual(dpxInstance.template);
         });
 
         //TODO: Is it valid place for call release method in async tests?
         dpxInstance.close();
+    });
+
+    it("Starting two dpx engine and capture document from file system", function () {
+
+    });
+
+
+    it("Should capture two document from two files simultaneously", function () {
+        var processedFormA;
+        var processedFormB;
+        var dpxInstanceA = Rho.DPX.init();
+        var dpxInstanceB = Rho.DPX.init();
+        dpxInstanceA.inputSource = Rho.DPX.FILE; // or dpxInstance.setFileSource(); dpxInstance.setFileSource(fileName);
+        dpxInstanceA.inputSourceFilename = 'image.jpg';
+        dpxInstanceA.template = Rho.RhoFile.join(Rho.Application.AppBundleFolder, 'template.xml');
+
+        dpxInstanceB.inputSource = Rho.DPX.FILE; // or dpxInstance.setFileSource(); dpxInstance.setFileSource(fileName);
+        dpxInstanceB.inputSourceFilename = 'anotherImage.jpg';
+        dpxInstanceB.template = Rho.RhoFile.join(Rho.Application.AppBundleFolder, 'template.xml');
+
+        dpxInstanceA.captureDocument(function(dpxEvent){
+            if (dpxEvent == Rho.DPX.FORM_DECODED) {
+                processedFormA = dpxEvent.processedForm;
+            }
+        });
+
+        dpxInstanceB.captureDocument(function(dpxEvent){
+            if (dpxEvent == Rho.DPX.FORM_DECODED) {
+                processedFormB = dpxEvent.processedForm;
+            }
+        });
+
+
+        waitsFor(function(){
+            return (processedFormA !== undefined) && (processedFormB !== undefined);
+        }, 5000);
+
+        runs(function(){
+            //TODO: Need add additional expect
+            expect(processedFormA.template).toEqual(dpxInstanceA.template);
+            // ...
+            expect(processedFormB.template).toEqual(dpxInstanceA.template);
+        });
+
+        //TODO: Is it valid place for call release method in async tests?
+        dpxInstanceA.close();
+        dpxInstanceB.close();
+
     });
 
     it("Starting two dpx engine and capture document from file system", function () {
