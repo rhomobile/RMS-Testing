@@ -3,12 +3,37 @@ describe("DPX feature definition tests", function () {
     it("Should capture document from file system", function () {
         var processedForm;
         var dpxInstance = Rho.DPX.init();
-        dpxInstance.fileName = 'image.jpg';
-        dpxInstance.inputSource = 'file'; // or dpxInstance.setFileSource(); dpxInstance.setFileSource(fileName);
+        dpxInstance.inputSource = Rho.DPX.FILE; // or dpxInstance.setFileSource(); dpxInstance.setFileSource(fileName);
+        dpxInstance.inputSourceFilename = 'image.jpg';
         dpxInstance.template = Rho.RhoFile.join(Rho.Application.AppBundleFolder, 'template.xml');
 
         dpxInstance.captureDocument(function(dpxEvent){
-            if (dpxEvent == Rho.DPX.DPX_DECODE) {
+            if (dpxEvent == Rho.DPX.FORM_DECODED) {
+                processedForm = dpxEvent.processedForm;
+            }
+        });
+
+        waitsFor(function(){
+            return processedForm !== undefined;
+        }, 5000);
+
+        runs(function(){
+            expect(processedForm.template).toEqual(dpxInstance.template);
+        });
+
+        //TODO: Is it valid place for call release method in async tests?
+        dpxInstance.close();
+    });
+
+
+    it("Should capture document from camera", function () {
+        var processedForm;
+        var dpxInstance = Rho.DPX.init();
+        dpxInstance.inputSource = Rho.DPX.CAMERA;
+        dpxInstance.template = Rho.RhoFile.join(Rho.Application.AppBundleFolder, 'template.xml');
+
+        dpxInstance.captureDocument(function(dpxEvent){
+            if (dpxEvent == Rho.DPX.FORM_DECODED) {
                 processedForm = dpxEvent.processedForm;
             }
         });
@@ -26,8 +51,8 @@ describe("DPX feature definition tests", function () {
     });
 
     it("Starting two dpx engine and capture document from file system", function () {
-    });
 
+    });
 })
 
 
