@@ -227,6 +227,39 @@ var getBase64FromImageUrl = function(URL) {
 }
 
 var sendJSONStringToTarget = function(){
-    Rho.System.sendApplicationMessage(getAppNameTosendMessage(),true, 'data={"Users":[{"Name":"user999","Value":"test"},{"Name":"test2","Value":"test"}]}');
+    Rho.System.sendApplicationMessage(getAppNameTosendMessage(), 'data={"Users":[{"Name":"user999","Value":"test"},{"Name":"test2","Value":"test"}]}');
+}
+
+var getGPSCoordinates = function(){
+    Rho.System.sendApplicationMessage(getAppNameTosendMessage(),'GPS=true');
+    Rho.System.startApplicationMessageNotifications(function(geodata){
+        if(document.getElementById('geodiv')){
+            document.getElementById('geodiv').innerHTML = "Latitude= "+geodata.latitude+"Longitude= "+geodata.longitude;
+        }
+    });
+}
+
+var scanBarcode = function(){
+    Rho.System.sendApplicationMessage(getAppNameTosendMessage(),'SCAN=true');
+    Rho.System.startApplicationMessageNotifications(function(scandata){
+        if(document.getElementById('scandiv')){
+            document.getElementById('scandiv').innerHTML = "Data= "+scandata;
+        }
+    });
+}
+
+var getNonRhodesApp = function(){
+    var appName = undefined;
+    if(isAndroidPlatform()){
+        appName = "com.android.music"
+    }
+    else if(isApplePlatform()){
+        appName = "Safari"
+    }
+    else if(isWindowsMobilePlatform()){
+        appName = "Internet Exlporer.exe"
+    }
+
+    return appName;
 }
 
