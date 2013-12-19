@@ -5,42 +5,20 @@ require 'json'
 USE_HSQLDB = !System.get_property('has_sqlite')
 USE_COPY_FILES = true
 
-if defined? RHO_ME
+if defined? RHO_ME || defined? RHO_WP7 || System.get_property('platform') == 'WINDOWS'
  USE_COPY_FILES = false
-end
-
-if defined? RHO_WP7
- USE_COPY_FILES = false
-end
-
-if System.get_property('platform') == 'WINDOWS'
-    USE_COPY_FILES = false
 end
 
 puts "USE_COPY_FILES: #{USE_COPY_FILES}"
 
 def getAccount
     return Account_s if $spec_settings[:schema_model]
-
     Account
-end
-
-def getAccount_str
-    return 'Account_s' if $spec_settings[:schema_model]
-
-    'Account'
 end
 
 def getCase
     return Case_s if $spec_settings[:schema_model]
-
     Case
-end
-
-def getCase_str
-    return 'Case_s' if $spec_settings[:schema_model]
-
-    'Case'
 end
 
 def getTestDB
@@ -72,8 +50,8 @@ class Test_Helper
         @save_sync_types = getTestDB().select_from_table('sources','name, sync_type')
         getTestDB().update_into_table('sources',{'sync_type'=>'none'})
 
-        Rho::RhoConfig.sources[getAccount_str()]['sync_type'] = 'incremental' if $spec_settings[:sync_model]
-        Rho::RhoConfig.sources[getCase_str()]['sync_type'] = 'incremental' if $spec_settings[:sync_model]
+        Rho::RhoConfig.sources[getAccount.to_s]['sync_type'] = 'incremental' if $spec_settings[:sync_model]
+        Rho::RhoConfig.sources[getCase.to_s]['sync_type'] = 'incremental' if $spec_settings[:sync_model]
         clean_db_data
 
         @source_map = nil
@@ -112,7 +90,7 @@ class Test_Helper
             clean_db_data
         end
 
-        Rho::RhoConfig.sources()[getCase_str()]['freezed'] = false if !$spec_settings[:schema_model]
+        Rho::RhoConfig.sources()[getCase.to_s]['freezed'] = false if !$spec_settings[:schema_model]
 
     end
 
@@ -127,7 +105,7 @@ class Test_Helper
         getTestDB().update_into_table('sources',{'sync_type'=>src['sync_type']}, {'name'=>src['name']})
       end
 
-      Rho::RhoConfig.sources[getAccount_str()]['sync_type'] = 'none'
+      Rho::RhoConfig.sources[getAccount.to_s]['sync_type'] = 'none'
 
     end
 end
@@ -151,102 +129,69 @@ describe "Rhom::RhomObject" do
     @helper.after_all
   end
 
-  #it "should set source_id attributes" do
-  #  getAccount.get_source_id.should == "23"
-    #getCase.get_source_id.should == "1"
-  #end
-#=begin
   it "should dynamically assign values" do
     account = getAccount.new
+
     account.name = 'hello name'
     account.industry = 'hello industry'
     account.object = '3560c0a0-ef58-2f40-68a5-fffffffffffff'
-    #account.value = 'xyz industries'
+
     account.name.should == 'hello name'
     account.industry.should == 'hello industry'
     account.object.should == '3560c0a0-ef58-2f40-68a5-fffffffffffff'
-    #account.value.should == 'xyz industries'
   end
 
-  it "should retrieve getCase models" do
+  it "should retrieve an object of model`" do
     results = getCase.find(:all)
     results.length.should == 1
-    results[0].case_number.should == "58"
+
+    source_id = Rho::RhoConfig.sources[getCase.to_s]['source_id']
+    object = results[0].object
+    if $spec_settings[:schema_model]
+      res = getTestDB().select_from_table(getCase.to_s, "*")
+      case_number = res[0]["case_number"]
+    else
+      res = getTestDB().select_from_table('object_values',"*", {"source_id"=> source_id, "object" => object, "attrib" => "case_number"})
+      case_number = res[0]["value"]
+    end
+    results[0].case_number.should == case_number
   end
 
-  it "should retrieve getAccount models" do
+  it "should retrieve all objects of model" do
     results = getAccount.find(:all, :order => 'name', :orderdir => "DESC")
     results.length.should == 2
-    results[0].name.should == "Mobio India"
-    results[0].industry.should == "Technology"
-    results[1].name.should == "Aeroprise"
-    results[1].industry.should == "Technology"
+    results[0].name.should >= results[1].name
+    results[0].industry.should == results[1].industry
   end
 
-  it "should respond to find_all" do
+  it "should respond to find_all method and retrieve all objects of model" do
     results = getAccount.find_all(:order => 'name', :orderdir => "DESC")
     results.length.should == 2
-    results[0].name.should == "Mobio India"
-    results[0].industry.should == "Technology"
-    results[1].name.should == "Aeroprise"
-    results[1].industry.should == "Technology"
-  end
-
-  it "should compare 2 props" do
-    results = getAccount.find_all(:order => 'name', :orderdir => "DESC")
-    results.length.should == 2
-
-    res = false
-    if results[0].name == results[1].name
-        res = true
-    else
-        res = false
-    end
-
-    res.should == false
-  end
-
-  it "should have correct number of attributes" do
-    @account = getAccount.find(:all, :order => 'name', :orderdir => "DESC").first
-
-    @account.vars.size.should == 17
-  end
-
-  it "should get count of objects" do
-    getAccount.count.should == 2
-  end
-
-  it "should get count of objects using find" do
-    getAccount.find(:count).should == 2
-  end
-
-  it "should get count of objects using find with condition" do
-    getAccount.find(:count, :conditions => {'name'=>'Aeroprise'}).should == 1
+    results[0].name.should >= results[1].name
+    results[0].industry.should == results[1].industry
   end
 
 if !defined?(RHO_WP7)
-  it "should raise RecordNotFound error if nil given as find argument" do
-
-    bExc = false
+  it "should raise RecordNotFound error if nil given as a find argument" do
     begin
+      bExc = false
       getAccount.find(nil)
     rescue Exception => e
-	    puts "Exception : #{e}"
-        bExc = e.is_a?(::Rhom::RecordNotFound)
+      puts "Exception thrown: #{e}"
+      bExc = e.is_a?(::Rhom::RecordNotFound)
     end
     bExc.should == true
-
   end
 end
 
-  it "should save string with zero" do
+  it "should save string with zeroes" do
     val = "\1\2\3\0\5\8\6\7\34"
-
     item = getAccount.create(:industry => Rho::RhoSupport::binary_encode(val))
     item2 = getAccount.find(item.object)
     Rho::RhoSupport::binary_decode(item2.industry).should == val
   end
 
+=begin
   it "should create multiple records offline" do
     vars = {"name"=>"foobarthree", "industry"=>"entertainment"}
     getAccount.changed?.should == false
@@ -287,46 +232,6 @@ end
         records.length.should == 1
     end
 
-  end
-
-  it "should create records with no attribs in database" do
-    getTestDB().delete_all_from_table('object_values')
-    res = getTestDB().select_from_table('object_values',"*")
-    res.length.should == 0
-    vars = {"name"=>"foobarthree", "industry"=>"entertainment"}
-    account = getAccount.create(vars)
-    acct = getAccount.find(account.object)
-    acct.name.should == 'foobarthree'
-    acct.industry.should == 'entertainment'
-  end
-
-  it "should create a record" do
-    vars = {"name"=>"some new record", "industry"=>"electronics", "annual_revenue" => true}
-    @account1 = getAccount.create(vars)
-    @account2 = getAccount.find(@account1.object)
-    @account2.object.should =="#{@account1.object}"
-    @account2.name.should == vars['name']
-    @account2.industry.should == vars['industry']
-	@account2.annual_revenue.should == vars['annual_revenue'].to_s
-
-  end
-
-  it "should create a record with apostrophe" do
-    vars = {"name"=>"some new record", "industry"=>"elec'tronics"}
-    @account1 = getAccount.create(vars)
-    @account2 = getAccount.find(@account1.object)
-    @account2.object.should =="#{@account1.object}"
-    @account2.name.should == vars['name']
-    @account2.industry.should == vars['industry']
-  end
-
-  it "should create multiple records" do
-    vars = {"name"=>"some new record", "industry"=>"electronics"}
-    @account1 = getAccount.create(vars)
-    @account2 = getAccount.find(@account1.object)
-    @account2.object.should =="#{@account1.object}"
-    @account2.name.should == vars['name']
-    @account2.industry.should == vars['industry']
   end
 
   it "should create multiple records with unique ids" do
@@ -394,17 +299,6 @@ end
         records = getTestDB().select_from_table('changed_values','*', 'update_type' => 'update')
         records.length.should == 0
     end
-  end
-
-  it "should destroy a record" do
-    count = getAccount.count
-    @account = getAccount.find(:first)
-    destroy_id = @account.object
-    @account.destroy
-    @account_nil = getAccount.find(destroy_id)
-    @account_nil.should be_nil
-    new_count = getAccount.count
-    (count - 1).should == new_count
   end
 
   it "should partially update a record" do
@@ -1431,7 +1325,7 @@ end
   it "should find by sql" do
     if $spec_settings[:schema_model]
 
-        @accts = getAccount.find_by_sql("SELECT * FROM " + getAccount_str() )
+        @accts = getAccount.find_by_sql("SELECT * FROM " + getAccount.to_s )
         @accts.length.should == 2
 
         @accts[0].name.should_not be_nil
@@ -1586,12 +1480,12 @@ end
     accts.length.should == 0
 
   end
-#=end
+
 if !defined?(RHO_WP7)
   it "should not add property to freezed model" do
 
     if !$spec_settings[:schema_model]
-        props = Rho::RhoConfig.sources()[getCase_str()]
+        props = Rho::RhoConfig.sources()[getCase.to_s]
         props['freezed'] = true
 
         props['freezed'].should == true
@@ -1614,7 +1508,7 @@ if !defined?(RHO_WP7)
 
     if $spec_settings[:schema_model]
         lambda {
-            getCase().find_by_sql("INSERT INTO #{getCase_str()}(object,wrong_address) values ('1234', 'my_addr')")
+            getCase().find_by_sql("INSERT INTO #{getCase.to_s()}(object,wrong_address) values ('1234', 'my_addr')")
         }.should raise_error(ArgumentError)
     end
 
@@ -1623,7 +1517,7 @@ end
 
   it "should add property to freezed model" do
     if !$spec_settings[:schema_model]
-        props = Rho::RhoConfig.sources()[getCase_str()]
+        props = Rho::RhoConfig.sources()[getCase.to_s]
         props['freezed'] = true
 
         props['freezed'].should == true
@@ -1655,7 +1549,7 @@ end
     res3.description.should == "test3"
 
     if $spec_settings[:schema_model]
-        getCase().find_by_sql("INSERT INTO #{getCase_str()}(object,description) values ('1234', 'my_addr')")
+        getCase().find_by_sql("INSERT INTO #{getCase.to_s}(object,description) values ('1234', 'my_addr')")
         res4 = getCase().find('1234')
         res4.should_not be_nil
         res4.description.should == "my_addr"
@@ -1663,9 +1557,12 @@ end
     end
 
   end
+=end
 
 end
-#=begin
+
+# TODO: Add pagination fixtures (spec/pagination)
+=begin
 describe "Rhom#paginate" do
 
     before(:all) do
@@ -1785,4 +1682,4 @@ end
     end
 end
 
-#=end
+=end

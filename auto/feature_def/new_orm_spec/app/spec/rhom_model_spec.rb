@@ -36,27 +36,46 @@ describe "RhomModel" do
     getProduct.count.should == (count + 1)
   end
 
+  it "should get count of objects using find method" do
+    count = getProduct.count
+    getProduct.create({"name" => "Test","brand" => "Android"})
+    getProduct.find(:count).should == (count + 1)
+  end
+
+  it "should get count of objects" do
+    count = getProduct.count
+    getProduct.create({"name" => "Test","brand" => "Android"})
+    getProduct.count.should == (count + 1)
+  end
+
   it "list of properties supported by instance of object" do
     attrs = {"name" => "Test","brand" => "Android"}
     @product = getProduct.create(attrs)
 
     # TODO:
-    puts "---------- Properties ..."
-    puts @product.loaded
-    puts @product.model_name
-    puts @product.sync_type if $spec_settings[:sync_model]
-    puts @product.partition
-
-    puts @product.source_id
-    puts @product.sync_priority
-    puts @product.fixed_schema
-    puts @product.freezed
+    # puts "---------- Properties ..."
+    # puts @product
+    # puts @product.loaded
+    # puts @product.model_name
+    # puts @product.sync_type if $spec_settings[:sync_model]
+    # puts @product.partition
+    # puts @product.sync_priority
+    # puts @product.fixed_schema
+    # puts @product.freezed
     # puts "----------"
 
-    # @product.source_id.should > 0
     @product.source_id.should == Rho::RhoConfig.sources[getProduct.to_s]['source_id']
     @product.name.should == attrs['name']
     @product.brand.should == attrs['brand']
+    @product.source_id.should_not be_nil
+    @product.object.should_not be_nil
+  end
+
+  it "should return all properties of model" do
+    attrs = {"name" => "Test","brand" => "Android"}
+    @product = getProduct.create(attrs)
+    # includes source_id, object
+    (@product.vars.size-2).should == attrs.size
   end
 
   it 'VT302-0004 | should create model' do
@@ -64,9 +83,9 @@ describe "RhomModel" do
     @product1 = getProduct.create(vars)
     @product2 = getProduct.find(@product1.object)
 
-    # puts @product1.inspect
-    puts "should create model:"
-    puts @product2.inspect
+    # # puts @product1.inspect
+    # puts "should create model:"
+    # puts @product2.inspect
 
     @product2.object.should =="#{@product1.object}"
     @product2.name.should == vars['name']
@@ -79,26 +98,21 @@ describe "RhomModel" do
     @product1.save
     @product2 = getProduct.find(@product1.object)
 
-    # puts @product1.inspect
-    # puts @product2.inspect
+    @product2.object.should =="#{@product1.object}"
+    @product2.name.should == vars['name']
+    @product2.brand.should == vars['brand']
+  end
+
+
+  it "should create a record with apostrophe" do
+    vars = {"name"=>"Galaxy S ' 7", "brand"=>"Android"}
+    @product1 = getProduct.create(vars)
+    @product2 = getProduct.find(@product1.object)
 
     @product2.object.should =="#{@product1.object}"
     @product2.name.should == vars['name']
     @product2.brand.should == vars['brand']
   end
-    # it('VT302-0004 | should create model',function(){
-    #   var Product = function(model){
-    #       model.modelName("Product");
-    #       model.enable("sync");
-    #       model.property("name","string");
-    #       model.property("brand","string");
-    #       model.set("partition","local");
-    #   };
-    #   p = Rho.ORM.addModel(Product);
-    #   source = Opal.Rho._scope.RhoConfig.$sources().map["Product"];
-    #   expect(source.sync_type).toEqual('incremental');
-    #   expect(source.name).toEqual('Product');
-    # });
 
   it 'should update attributes and save them' do
     vars = {"name"=>"Galaxy S", "brand"=>"Android"}
