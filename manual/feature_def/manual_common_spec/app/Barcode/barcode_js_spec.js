@@ -39,6 +39,75 @@ describe("Barcode Manual Test", function() {
 
 			describe("Barcode Test with "+ scnid +": " + scntype , function() {
 
+				//  Able to Disconnect Trigger
+				//  Able to Reconnect Trigger
+				it("is able to disconnect the trigger of an enabled Scanner (WM/CE Only)", function() {
+
+					runs(function()
+					{
+						setObjective("is able to disconnect the trigger of an enabled Scanner (WM/CE Only)");
+						setInstruction("Instruction to user: Please wait 9 seconds");
+						objSCN.enable({},callbackenable);
+						setTimeout(function() {
+							enableFlag = true;
+						}, ENABLE8K);
+					});
+
+					waitsFor(function()
+					{
+						return enableFlag;
+					}, '2sec wait to enable the Scanner', 9000);
+
+					runs(function()
+					{
+						setInstruction("Press Hardware Trigger button");
+						setExpected("Do NOT expect to see a laser beam");
+						objSCN.setProperty("triggerConnected", "false");
+						var connectedState = objSCN.getProperty("triggerConnected");
+						expect(connectedState).toEqual("false");
+						waitsFor(function() {
+						return document.getElementById("actResult").innerHTML != "init";
+						}, "Timed out waiting for tester to respond", 300000);
+						runs(function() {
+						expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+						});
+					});
+				});	
+
+				it("is able to reconnect the disconnected trigger of an enabled Scanner (WM/CE Only)", function() {
+
+					runs(function()
+					{
+						setObjective("is able to reconnect the disconnected trigger of an enabled Scanner (WM/CE Only)");
+						objSCN.enable({},callbackenable);
+						setInstruction("Instruction to user: Please wait 9 seconds");
+						setTimeout(function() {
+							enableFlag = true;
+						}, ENABLE8K);
+					});
+
+					waitsFor(function()
+					{
+						return enableFlag;
+					}, '2sec wait to enable the Scanner', 9000);
+
+					runs(function()
+					{
+						setInstruction("Press Hardware Trigger button");
+						setExpected("Expect to see a laser beam");
+						objSCN.setProperty("triggerConnected", "false");
+						objSCN.setProperty("triggerConnected", "true");
+						var connectedState = objSCN.getProperty("triggerConnected");
+						expect(connectedState).toEqual("true");
+						waitsFor(function() {
+						return document.getElementById("actResult").innerHTML != "init";
+						}, "Timed out waiting for tester to respond", 300000);
+						runs(function() {
+						expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+						});
+					});
+				});		
+
 				it("VT282-1762 | Enable with callback as function |" + scnid + scntype , function() {
 
 					runs(function()
