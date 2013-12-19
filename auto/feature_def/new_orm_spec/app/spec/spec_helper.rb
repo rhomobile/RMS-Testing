@@ -2,18 +2,10 @@ def getProduct
   return Product_s if $spec_settings[:schema_model]
   Product
 end
-def getProduct_str
-  return 'Product_s' if $spec_settings[:schema_model]
-  'Product'
-end
 
 def getCustomer
   return Customer_s if $spec_settings[:schema_model]
   Customer
-end
-def getCustomer_str
-  return 'Customer_s' if $spec_settings[:schema_model]
-  'Customer'
 end
 
 def getTestDB

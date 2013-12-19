@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>7E5EE48C-3EDC-466A-85EC-5BEA05DB3484</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Newormspec</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>8277B858-C58E-4E09-93EB-C43FDFA6E93D</key>
+		<string>ssh://github.com/rhomobile/RMS-Testing.git</string>
+		<key>98F0FA36-E8B7-431F-90F7-CBC4F5D1D397</key>
+		<string>ssh://github.com/rhomobile/rhodes.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>auto/feature_def/new_orm_spec/project/iphone/Newormspec.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>8277B858-C58E-4E09-93EB-C43FDFA6E93D</key>
+		<string>../../../../../../..</string>
+		<key>98F0FA36-E8B7-431F-90F7-CBC4F5D1D397</key>
+		<string>../../../../../../../../rhodes</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>ssh://github.com/rhomobile/RMS-Testing.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>8277B858-C58E-4E09-93EB-C43FDFA6E93D</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>98F0FA36-E8B7-431F-90F7-CBC4F5D1D397</string>
+			<key>IDESourceControlWCCName</key>
+			<string>rhodes</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>8277B858-C58E-4E09-93EB-C43FDFA6E93D</string>
+			<key>IDESourceControlWCCName</key>
+			<string>RMS-Testing</string>
+		</dict>
+	</array>
+</dict>
+</plist>
