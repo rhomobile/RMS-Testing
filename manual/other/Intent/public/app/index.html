@@ -17,7 +17,7 @@
   </div>
 
   <div data-role="content">
-    <p>Welcome!</p>
+    <p>Rho.System.getApplicationMessage</p>
     <button onclick="getAppMessage()">Get Recent Message</button>
     <div id='msgdata'>
     <ul id='myList'></ul>
@@ -25,6 +25,28 @@
   </div>
 
   <div data-role="footer" data-position="fixed">
+    <h1><a href='#pagetwo'>startApplicationMessageNotifications</a></h1>
+  </div>
+</div>
+
+<div data-role="page" id="pagetwo">
+  <div data-role="header" data-position="fixed">
+    <h1><a href='#pageone'>getApplicationMessage</a></h1>
+  </div>
+
+  <div data-role="content">
+    <p>Stop Notification Callback</p>
+    <button onclick="Rho.System.stopApplicationMessageNotifications()">Stop Notification</button>
+    <p>Start Notification Callback</p>
+    <button onclick="startNotification()">Set Notification</button>
+    <div>
+    <ul id='myList2'></ul>
+    </div>
+  </div>
+
+  <div data-role="footer" data-position="fixed">
     <h1>Footer</h1>
   </div>
-</div> 
+</div>
+</body>
+</html>

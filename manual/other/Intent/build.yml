@@ -22,4 +22,4 @@ android:
 extensions:
   - rhoconnect-client
 app_type: "rhoelements"
-capabilities:
+capabilities: 

@@ -15,3 +15,20 @@ var getAppMessage = function (){
 	}
 	document.getElementById("myList").appendChild(node);
 }
+
+var startNotification = function(){
+	Rho.System.startApplicationMessageNotifications(function(message){
+		//Type of data should be JSON in JS and HASH in RUBY.
+		var node=document.createElement("LI");
+		if(message.image){
+		    var img= new Image(100,100);
+		    img.src= "data:image/png;base64, "+message['image'];
+			node.appendChild(img);
+		}
+		else{
+			var textnode =document.createTextNode(message);
+			node.appendChild(textnode);
+		}
+		document.getElementById("myList2").appendChild(node);
+	})
+}
