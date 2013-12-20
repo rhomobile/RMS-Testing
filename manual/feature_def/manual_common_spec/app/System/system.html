@@ -13,6 +13,7 @@
     <script type="text/javascript" charset="utf-8" src="/public/api/rhoapi-modules.js"></script>
     <script type="text/javascript" src="system.js"></script>
     <script type="text/javascript" src="/public/js/helpers.js"></script>
+    <script type="text/javascript" src="/app/helpers/specHelpers.js"></script>
 
     <script type="text/javascript">
 
@@ -425,6 +426,211 @@
                     runApplication with application name 'testapp'.</a>
             </div>
             <span class="test_scenario_number">VT300-064 <br/></span>
+        </div>
+    </div>
+
+</div>
+
+<div class="method_tests android wm ios">
+    <div class="method_name">Rho.System.sendMessageToApplication</div>
+    <div class="method_desc"> Send Data to Application </div>
+
+    <div class="method_tests wm">
+        <div class="test_scenario">
+            <div class="test_scenario_controls">
+                <a href="javascript:void(0)" onclick="Rho.System.sendApplicationMessage('rhomobile testApp/TestApp.exe', 'param1=hello&param2=123');"> call
+                    sendMessageToApplication with application name 'testapp'.</a>
+            </div>
+	<span class="test_scenario_number">VT300-066 <br/></span>
+        </div>
+    </div>
+
+    <div class="method_tests android">
+        <div class="test_scenario">
+            <div class="test_scenario_controls">
+                <a href="javascript:void(0)" onclick="Rho.System.sendApplicationMessage('com.rhomobile.testapp', false, 'param1=hello&param2=123');"> call
+                    sendMessageToApplication with application name 'testapp'.</a>
+            </div>
+        <span class="test_scenario_number">VT300-066 <br/></span>
+        </div>
+    </div>
+    
+    <div class="method_tests ios">
+        <div class="test_scenario">
+            <div class="test_scenario_controls">
+                <a href="javascript:void(0)" onclick="Rho.System.sendApplicationMessage('testapp', 'param1=hello&param2=123');"> call
+                    sendMessageToApplication with application name 'testapp'.</a>
+            </div>
+        <span class="test_scenario_number">VT300-066 <br/></span>
+        </div>
+    </div>
+<!--
+/*
+ * Application Written By Bhakta
+ *
+ */
+-->
+    <div class="method_tests wm android ios">
+        <div class="test_scenario">
+            <p>send application message to target application when <b>target application is already running</b></p>
+            <p>Run the target application before executing test</p>
+            <p>Rho.System.sendApplicationMessage(appName, 'param1=hello&amp;param2=123')</p>
+            <h6>JAVASCRIPT</h6>
+            <div class="test_scenario_controls">
+                <a href="javascript:void(0)" onclick="Rho.System.sendApplicationMessage(getAppNameTosendMessage(), 'param1=hello&param2=3');">Send</a>
+            </div>
+            <h6>RUBY</h6>
+            <div class="test_scenario_controls">
+                <a href="javascript:void(0)" onclick="Ruby.call('System','send_message')">Send</a>
+            </div>
+            <span class="test_scenario_number">VT300-<br/></span>
+        </div>
+    </div>
+
+    <div class="method_tests wm android ios">
+        <div class="test_scenario">
+            <p>send application message to target application when <b>target application is not running</b></p>
+            <p>Start the Target App If not Running</p>
+            <p>Rho.System.sendApplicationMessage(appName, 'param1=hello&amp;param2=123')</p>
+            <h6>JAVASCRIPT</h6>
+            <div class="test_scenario_controls">
+                <a href="javascript:void(0)" onclick="Rho.System.sendApplicationMessage(getAppNameTosendMessage(), 'param1=hello&param2=4');">Send</a>
+            </div>
+            <h6>RUBY</h6>
+            <div class="test_scenario_controls">
+                <a href="javascript:void(0)" onclick="Ruby.call('System','send_message')">Send</a>
+            </div>
+            <span class="test_scenario_number">VT300-<br/></span>
+        </div>
+    </div>
+
+    <div class="method_tests wm android ios">
+        <div class="test_scenario">
+            <p>send normal text to target application</p>
+            <p>Rho.System.sendApplicationMessage(appName,<b>'data=Send an alert to everyone'</b>)</p>
+            <h6>JAVASCRIPT</h6>
+            <div class="test_scenario_controls">
+                <a href="javascript:void(0)" onclick="Rho.System.sendApplicationMessage(getAppNameTosendMessage(), 'data=Send an alert to everyone');">Send</a>
+            </div>
+            <h6>RUBY</h6>
+            <div class="test_scenario_controls">
+                <a href="javascript:void(0)" onclick="Ruby.call('System','send_text')">Send</a>
+            </div>
+            <span class="test_scenario_number">VT300-<br/></span>
+        </div>
+    </div>
+
+    <div class="method_tests wm android ios">
+        <div class="test_scenario">
+            <p>Send image (base64 encoded data) to target application.</p>
+            <img src='/app/System/solarsystem.jpg' alt="solar system" width='200' height= '200'>
+            <p>Rho.System.sendApplicationMessage(appName, <b>'data=imagedata'</b>)</p>
+            <h6>JAVASCRIPT</h6>
+            <div class="test_scenario_controls">
+                <a href="javascript:void(0)" onclick="Rho.System.sendApplicationMessage(getAppNameTosendMessage(), 'image='+getBase64FromImageUrl('solarsystem.jpg'));">Send</a>
+            </div>
+            <h6>RUBY</h6>
+            <div class="test_scenario_controls">
+                <a href="javascript:void(0)" onclick="Ruby.call('System','send_image')">Send</a>
+            </div>
+            <span class="test_scenario_number">VT300-<br/></span>
+        </div>
+    </div>
+
+    <div class="method_tests wm android ios">
+        <div class="test_scenario">
+            <p>Send JSON data to target application</p>
+            <p>Rho.System.sendApplicationMessage(appName, <b>'data=JSON'</b>)</p>
+            <h6>JAVASCRIPT</h6>
+            <div class="test_scenario_controls">
+                <a href="javascript:void(0)" onclick="sendJSONStringToTarget();">Send</a>
+            </div>
+            <h6>RUBY</h6>
+            <div class="test_scenario_controls">
+                <a href="javascript:void(0)" onclick="Ruby.call('System','send_hash')">Send</a>
+            </div>
+            <span class="test_scenario_number">VT300-<br/></span>
+        </div>
+    </div>
+
+    <div class="method_tests wm android ios">
+        <div class="test_scenario">
+            <p>Send null as last params in sendApplicationMessage</p>
+            <p>Rho.System.sendApplicationMessage(appName, <b>''</b>)</p>
+            <h6>JAVASCRIPT</h6>
+            <div class="test_scenario_controls">
+                <a href="javascript:void(0)" onclick="Rho.System.sendApplicationMessage(getAppNameTosendMessage(), '')">Send</a>
+            </div>
+            <h6>RUBY</h6>
+            <div class="test_scenario_controls">
+                <a href="javascript:void(0)" onclick="Ruby.call('System','send_nil')">Send</a>
+            </div>
+            <span class="test_scenario_number">VT300-<br/></span>
+        </div>
+    </div>
+
+    <div class="method_tests wm android ios">
+        <div class="test_scenario">
+            <p>Send a message to target app when app is <b>not available on device</b>.</p>
+            <p>Rho.System.sendApplicationMessage(<b>non_exist_app</b>, 'data=hello')</p>
+            <h6>JAVASCRIPT</h6>
+            <div class="test_scenario_controls">
+                <a href="javascript:void(0)" onclick="Rho.System.sendApplicationMessage('non_exist_app', 'data=hello')">Send</a>
+            </div>
+            <h6>RUBY</h6>
+            <div class="test_scenario_controls">
+                <a href="javascript:void(0)" onclick="Ruby.call('System','send_to_nonexist_app')">Send</a>
+            </div>
+            <span class="test_scenario_number">VT300-<br/></span>
+        </div>
+    </div>
+
+    <div class="method_tests wm android ios">
+        <div class="test_scenario">
+            <p>Call <b>Rho.System.getApplicationMessage</b> when nothing has sent to target application.</p>
+            <h6>JAVASCRIPT</h6>
+            <div class="test_scenario_controls">
+                <a href="javascript:void(0)" onclick="alert(Rho.System.getApplicationMessage)">Send</a>
+            </div>
+            <h6>RUBY</h6>
+            <div class="test_scenario_controls">
+                <a href="javascript:void(0)" onclick="Ruby.call('System','get_app_message')">Send</a>
+            </div>
+            <span class="test_scenario_number">VT300-<br/></span>
+        </div>
+    </div>
+
+    <div class="method_tests wm android ios">
+        <div class="test_scenario">
+            <p>Get GPS Coordinates from Target Application</p>
+            <div class="test_scenario_controls">
+                <a href="javascript:void(0)" onclick="getGPSCoordinates()">Send</a>
+            </div>
+            <div id='geodiv' class='test_case_result'>
+            </div>
+            <span class="test_scenario_number">VT300-<br/></span>
+        </div>
+    </div>
+
+    <div class="method_tests wm android ios">
+        <div class="test_scenario">
+            <p>Scan A Barcode</p>
+            <div class="test_scenario_controls">
+                <a href="javascript:void(0)" onclick="scanBarcode()">Send</a>
+            </div>
+            <div id='scandiv' class='test_case_result'>
+            </div>
+            <span class="test_scenario_number">VT300-<br/></span>
+        </div>
+    </div>
+
+    <div class="method_tests wm android ios">
+        <div class="test_scenario">
+            <p>Scan A Barcode</p>
+            <div class="test_scenario_controls">
+                <a href="javascript:void(0)" onclick="Rho.System.sendApplicationMessage(getNonRhodesApp(), 'data=hello')">Send</a>
+            </div>
+            <span class="test_scenario_number">VT300-<br/></span>
         </div>
     </div>
 
