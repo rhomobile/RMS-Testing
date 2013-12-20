@@ -18,13 +18,19 @@
            
     </div>
 
-    <div data-role="content"> <!-- To test the Set App Notify functionality -->
+    <div data-role="content"> 
        <ul data-role="listview">
-         <li id="Rho_Application_Notify">
-           <a href="<%= url_for :action => :applicationNotifyMethod %>">setApplicationNotify</a>
-           <br><span class="result"></span>
-           <br><ul class="list"><li>Test</li></ul>
-         </li>
+          <li id="Rho_Application_Minimize">
+              <a href="<%= url_for :action => :applicationMinimize %>">Minimize the Application (Mac RhoSimulator, WP8 not support it)</a>
+          </li>
+          <li id="Rho_Application_Quit">
+              <a href="<%= url_for :action => :applicationQuit %>">Quit the Application </a>
+          </li><br>
+          <li id="Rho_Application_Notify"> <!-- To test the Set App Notify functionality -->
+              <a href="<%= url_for :action => :applicationNotifyMethod %>">setApplicationNotify</a>
+              <br><span class="result"></span>
+              <br><ul class="list"><li>Test</li></ul>
+          </li>
        </ul>
     </div>
   
