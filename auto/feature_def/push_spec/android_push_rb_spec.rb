@@ -28,7 +28,7 @@ if File.file?(cfgfilename)
   $rhoelements_root = File.expand_path($rhoelements_root) if $rhoelements_root
 end
 $rho_root = `get-rhodes-info --rhodes-path`.chomp unless $rho_root
-# puts "$rho_root is #{$rho_root}"
+# puts "$rho_root: #{$rho_root}"
 
 require File.join($rho_root, 'lib', 'build', 'jake.rb')
 require_relative './rhoconnect_helper'
@@ -55,6 +55,7 @@ cfg.gsub!(/(Push.rhoconnect.pushServer.*)/, "Push.rhoconnect.pushServer = 'http:
 File.open(cfgfile, 'w') { |f| f.write cfg }
 
 # Select proper build file for rhodes app
+# puts ENV['JENKINS_HOME']
 build_dir = ENV['JENKINS_HOME'] ? File.join($app_path, 'jenkins') : $app_path
 if push_type == "rhoconnect_push"
   FileUtils.cp(File.join(build_dir, 'build.yml.rps'), File.join($app_path, 'build.yml'))
@@ -366,8 +367,8 @@ device_list.each do |dev|
     end
 
     # 8
-    it 'should process push message with exit comand' do
-      puts 'should process push message with exit comand'
+    it 'should process push message with exit command' do
+      puts 'should process push message with exit command'
 
       message = 'exit'
       params = { :user_id=>['pushclient'], :message=>message }

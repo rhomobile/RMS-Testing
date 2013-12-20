@@ -11,4 +11,11 @@ rhosimulator/
 rholog.txt
 rhoapi-modules.js
 server_url.js
+TODO
+*.bak
+*.changes
+*.xml
+*.sh
 sim-public*
+*/feature_def/*/project/*/Rhodes/build/
+*/feature_def/*/project/*/build/

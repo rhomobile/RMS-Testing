@@ -712,6 +712,9 @@ var arr_scanner_property = [
 	propertyValue	:	"0",
 	expectedResult	:	"0"
 },
+
+// disableScannerDuringNavigate has been removed from xml
+/*
 {
 	testName		:	"VT282-3088 | Set  disableScannerDuringNavigate :true | true",
 	propertyName	:	"disableScannerDuringNavigate",
@@ -728,6 +731,7 @@ var arr_scanner_property = [
 	propertyValue	:	"false",
 	expectedResult	:	"false"
 },
+*/
 {
 	testName		:	"VT282-3090 | Set  lowBatteryScan :true | true",
 	propertyName	:	"lowBatteryScan",

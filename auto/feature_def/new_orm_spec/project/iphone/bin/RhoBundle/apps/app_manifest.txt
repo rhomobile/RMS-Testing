@@ -1,0 +1,8 @@
+Account/account
+Account_s/account_s
+Case/case
+Case_s/case_s
+Customer/customer
+Customer_s/customer_s
+Product/product
+Product_s/product_s

@@ -152,6 +152,26 @@ function isTestApplicable (anArray){
     return (anArray.indexOf(platform) == -1) ? false : true ;
 }
 
+//Common Method for ruby method call from javascript
+var Ruby = {
+    data: undefined,
+    call: function(controller,method){
+        Ruby.data = undefined;
+        url = '/app/'+controller+'/'+method
+        $.get(url)
+        .success(function(data){
+
+            }); 
+        return false;
+    },
+    sendValueToJS: function(data){ //Send data from ruby controller to js
+        Ruby.data = data;
+    },
+    getReturnedValue: function(){
+        return Ruby.data;
+    }
+}
+
 //Common Method to Make a Test Pass/Fail for Semi Automatic App.
 //Methods is used in System, CardReader
 
@@ -159,3 +179,47 @@ var captureResult = function(status){
     testResult = status;
     captured = true;
 }
+
+var _result = {
+	status: undefined,
+	time_to_wait: 30000,
+	responded: undefined,
+	passed: function(){
+		_result.status = true;
+		_result.responded = true;
+	},
+	failed: function(){
+		_result.status = false;
+		_result.responded = true;
+	},
+	reset: function(){
+		_result.status = undefined;
+		_result.responded = undefined;
+	},
+	waitForResponse: function(){
+		var timeout = false;
+		var responded = false;
+		runs(function()
+			{
+				setTimeout(function() {
+					timeout = true;
+				}, _result.time_to_wait);
+			});
+
+			waitsFor(function()
+			{
+				if(_result.responded == true)
+					return true;
+			}, 'waiting for user response', _result.time_to_wait+5000);
+
+			runs(function()
+			{
+				expect(true).toEqual(_result.status);
+			});
+	}
+}
+
+beforeEach(function() {
+    _result.reset();
+    //document.getElementById("myList").innerHTML = '';
+});

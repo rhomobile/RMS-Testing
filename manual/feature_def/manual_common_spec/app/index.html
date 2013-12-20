@@ -17,6 +17,7 @@
 <ul>
     <li><a href="/app/System/system.html">System</a><br>
         <b><i>You must have  running webbrick server  before starting tests</i></b></li>
+    <li><a href="/app/AudioCaptureTest/index.html">AudioCapture</a></li>
     <li><a href="/app/WebviewTest/webview.html">WebView</a></li>
     <li><a href="/app/NativeTabbarTest/NativeTabBar_MainPage.html">WM/CE NativeTabBar</a></li>
     <li><a href="/app/NativeToolbarTest/Toolbar.html">NativeToolbar Test</a></li>
@@ -31,10 +32,12 @@
     <li><a href="/app/SensorTest/">Sensor test</a></li>
 	<li><a href="/app/LogTest/">Log test</a></li>
     <li><a href="/app/BundleTest/">Bundle test page</a></li>
+	
 </ul>
 
 <h3>Manual Specs which use Jasmine</h3>
 <ul>
+	<li><a href="/app/Ajaxbridge/specRunner.html">AjaxBridge Test</a></li>
     <li><a href="/app/Cardreader/specRunner.html">CardReader Test</a></li>
     <li><a href="/app/Keystate/specRunner.html">KeyState Test</a></li>
 
@@ -63,6 +66,8 @@
 <div>[RUBY SAS]</div>
 <ul id="ruby">
     <script type="text/javascript">
+
+        $("#ruby").append('<li><a href="/app/ApplicationTest">Application</a></li>');
         if (!isWindowsPhone8Platform()) {
             $("#ruby").append('<li><a href="/app/Barcode">Barcode</a></li>');
         }
@@ -92,6 +97,9 @@
         }
         if (!isWindowsPhone8Platform()) {
             $("#ruby").append('<li><a href="/app/NetworkStatus">Network status notification</a></li>');
+        }
+		if (!isWindowsPhone8Platform()) {
+            $("#ruby").append('<li><a href="/app/Geolocation">Geolocation Test</a></li>');
         }
 
 

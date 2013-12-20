@@ -219,8 +219,7 @@ device_list.each do |dev|
   res = expect_request('status')
   puts "Jasmine Spec Runner is running on device ..." if res == "start"
 
-  results = report_results(30)
-  results = report_results(30)
+  results = report_results(120)
 
   # Shutdown test stack ...
   RhoconnectHelper.stop_rhoconnect_stack
