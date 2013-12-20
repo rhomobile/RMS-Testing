@@ -73,7 +73,7 @@ class IntentController < Rho::RhoController
   
   def message_notify
     if @params.has_key?("GPS")
-      GeoLocation.set_notification (url_for(:action => :geo_callback), "mytag=55", 3)
+      GeoLocation.set_notification url_for(:action => :geo_callback), "mytag=55", 3
     elsif @params.has_key?("SCAN")
       Rho::Barcode.take({}, url_for(:action => :scan_callback))
     end
