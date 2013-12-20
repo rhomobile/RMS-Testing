@@ -93,23 +93,24 @@
     </div>
 </div>
 
-<div class="method_tests win32 wm">
+<div class="method_tests android ios win32 wm">
     <div class="method_name">Rho.System.httpProxyURI</div>
-    <div class="method_desc">HTTP Proxy URI : Proxy should set successfully to http://wwwgate0.mot.com:1080.
+    <div class="method_desc">HTTP Proxy URI : Proxy should set successfully to your proxy server address (Configure it before start this test).
         (Rhosimulator supports it only for windows platform)
     </div>
     <div class="test_scenario">
         <div class="test_scenario_controls">
-            <a href="javascript:void(0)" onclick="Rho.System.httpProxyURI='http://wwwgate0.mot.com:1080';">Set
-                httpProxyURI </a><br/>
-            <a href="http://www.google.com">Navigate to Google </a>
+            <button onclick="Rho.System.httpProxyURI='http://192.168.1.141:9090';">Set httpProxyURI</button><br/>
+            <button onClick="alert((Rho.Network.get({url: 'http://www.google.com'})).body);">Call Rho.Network.get('http://www.google.com')</button><br/>
+            <button onClick="Rho.System.httpProxyURI = '';">Set proxyHttpUri to empty string)</button><br/>
+            <button onClick="Rho.System.httpProxyURI = null;">Set proxyHttpUri to null</button>
         </div>
-        <span class="test_scenario_number">VT300-021<br/></span>
+        <span class="test_scenario_number">VT300-021 | <br/>Press button  for setting Rho.System.httpProxyUri and press button for sending request to http://www.google.com from Rho.Network. Check proxy server log</span>
     </div>
     <div class="test_scenario">
         <div class="test_scenario_controls">
             <div id="Rho_System_httpProxyURI">
-                <a href="javascript:void(0)" onclick="gethttpProxyURI();"> Get httpProxyURI : </a> <span
+                <a href="javascript:void(0)" onclick="httpProxyURI;"> Get httpProxyURI : </a> <span
                     class="result"> </span>
             </div>
             <span class="test_scenario_number">VT300-022<br/></span>
@@ -322,7 +323,7 @@
                    onclick="var fname = download_filetolocal(httpServerUrl+'/TestAppWM6.5.cab', 'TestAppWM6.5.cab'); Rho.System.applicationInstall(fname);">WM: Install app from HTTP url</a><br/>
                 <a href="javascript:void(0)"
                    onclick="var fname = download_filetolocal(httpServerUrl+'/TestAppCE.cab', 'TestAppCE.cab'); Rho.System.applicationInstall(fname);">CE: Install app from HTTP url</a>
-                   
+
             </div>
             <span class="test_scenario_number">VT300-063 <br/></span>
         </div>
@@ -404,7 +405,7 @@
                 <a href="javascript:void(0)" onclick="Rho.System.runApplication('rhomobile testApp/testApp.exe','ParamsAreSet');"> call
                     runApplication with application name 'rhomobile testApp/testApp.exe'.</a>
             </div>
-			<span class="test_scenario_number">VT300-064 <br/></span>
+            <span class="test_scenario_number">VT300-064 <br/></span>
         </div>
     </div>
 
@@ -414,7 +415,7 @@
                 <a href="javascript:void(0)" onclick="Rho.System.runApplication('testapp','ParamsAreSet');"> call
                     runApplication with application name 'testapp'.</a>
             </div>
-			<span class="test_scenario_number">VT300-064 <br/></span>
+            <span class="test_scenario_number">VT300-064 <br/></span>
         </div>
     </div>
 
@@ -424,7 +425,7 @@
                 <a href="javascript:void(0)" onclick="Rho.System.runApplication('com.rhomobile.testapp','ParamsAreSet');"> call
                     runApplication with application name 'testapp'.</a>
             </div>
-			<span class="test_scenario_number">VT300-064 <br/></span>
+            <span class="test_scenario_number">VT300-064 <br/></span>
         </div>
     </div>
 
@@ -696,13 +697,13 @@
     </div>
     <div class="test_scenario">
         <div class="test_scenario_controls">
-Check before partial update :<br>
-- open BundleTest page, follow instructions<br>
-            
+            Check before partial update :<br>
+            - open BundleTest page, follow instructions<br>
+
             <a href="javascript:void(0)" onclick="callupdateCurrentBundle();">call replaceCurrentBundle with partial update</a>
-<br>Check after partial update :<br>
-- open BundleTest page, follow instructions<br>
-            
+            <br>Check after partial update :<br>
+            - open BundleTest page, follow instructions<br>
+
         </div>
         <span class="test_scenario_number">VT300-080<br/></span>
     </div>
@@ -890,7 +891,7 @@ Check before partial update :<br>
                 <a href="javascript:void(0)" onclick="callgetProperty('screenAutoRotate');">Get Property
                     screenAutoRotate</a>
             </div>
-			<span class="test_scenario_number">VT300-115 / VT300-116<br/></span>
+            <span class="test_scenario_number">VT300-115 / VT300-116<br/></span>
         </div>
         <div class="test_scenario">
             <div class="test_scenario_controls">
@@ -915,7 +916,7 @@ Check before partial update :<br>
                 <a href="javascript:void(0)" onclick="callgetProperty('screenSleeping');">Get Property
                     screenSleeping</a>
             </div>
-			<span class="test_scenario_number">VT300-119 / VT300-120 <br/></span>	
+            <span class="test_scenario_number">VT300-119 / VT300-120 <br/></span>
         </div>
     </div>
 
@@ -1009,15 +1010,15 @@ Check before partial update :<br>
             </div>
         </div>
     </div>
-	<div class="method_tests android ios win32 wm wp8">
-		<div class="test_scenario">
-			<div class="test_scenario_controls">
-				<a href="javascript:void(0)" onclick="callgetProperties('screenOrientation');">call getproperties with
-					screenOrientation</a>
-			</div>
-			<span class="test_scenario_number">VT300-174/VT300-175 <br/></span>
-		</div>
-	</div>
+    <div class="method_tests android ios win32 wm wp8">
+        <div class="test_scenario">
+            <div class="test_scenario_controls">
+                <a href="javascript:void(0)" onclick="callgetProperties('screenOrientation');">call getproperties with
+                    screenOrientation</a>
+            </div>
+            <span class="test_scenario_number">VT300-174/VT300-175 <br/></span>
+        </div>
+    </div>
     <div class="method_tests android ios">
         <div class="test_scenario">
             <div class="test_scenario_controls">
@@ -1040,7 +1041,7 @@ Check before partial update :<br>
                 <a href="javascript:void(0)" onclick="callgetProperties('screenSleeping');">Get Properties
                     screenSleeping</a>
             </div>
-			<span class="test_scenario_number">VT300-178 / VT300-178 <br/></span>
+            <span class="test_scenario_number">VT300-178 / VT300-178 <br/></span>
         </div>
     </div>
 

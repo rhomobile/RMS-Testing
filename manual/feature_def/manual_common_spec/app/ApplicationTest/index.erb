@@ -1,27 +1,67 @@
-<div data-role="page">
+<html>
+<head>
+   <title>Application Tests (Ruby)</title> 
+</head>
+<body>
 
-	<div data-role="header" data-position="inline">
-    <h1>ApplicationTests</h1>
-    <a href="<%= Rho::RhoConfig.start_path %>" class="ui-btn-left" data-icon="home" data-direction="reverse" <%= "data-ajax='false'" if is_bb6 %>>
-      Home
-    </a>
-    <a href="<%= url_for :action => :new %>" class="ui-btn-right" data-icon="plus">
-      New
-    </a>
-	</div>
+  <div data-role="page">
 
-  <div data-role="content">
-    <ul data-role="listview">
-      <% @applicationtests.each do |applicationtest| %>
+    <div data-role="header" data-position="inline">
+      <h1>Application Tests</h1>
+      <a href="<%= Rho::RhoConfig.start_path %>" class="ui-btn-left" data-icon="home" data-direction="reverse" <%= "data-ajax='false'" if is_bb6 %>>
+        Home
+      </a> <br/>
       
-          <li>
-            <a href="<%= url_for :action => :show, :id => applicationtest.object %>">
-              <%= applicationtest.a %>
-            </a>
+      <!-- <a href="<%#= url_for :action => :new %>" class="ui-btn-right" data-icon="plus">
+            New 
+           </a> -->
+           
+    </div>
+
+    <div data-role="content"> 
+       <ul data-role="listview">
+          <li id="Rho_Application_Minimize">
+              <a href="<%= url_for :action => :applicationMinimize %>">Minimize the Application (Mac RhoSimulator, WP8 not support it)</a>
           </li>
-      
-      <% end %>
-    </ul>
+          <li id="Rho_Application_Quit">
+              <a href="<%= url_for :action => :applicationQuit %>">Quit the Application </a>
+          </li><br>
+          <li id="Rho_Application_Notify"> <!-- To test the Set App Notify functionality -->
+              <a href="<%= url_for :action => :applicationNotifyMethod %>">setApplicationNotify</a>
+              <br><span class="result"></span>
+              <br><ul class="list"><li>Test</li></ul>
+          </li>
+       </ul>
+    </div>
+  
+<!--   <div data-role="content">
+     <ul data-role="listview">
+       <%# @applicationtests.each do |applicationtest| %>
+            <li>
+              <a href="<%#= url_for :action => :show, :id => applicationtest.object %>">
+                <%#= applicationtest.a %>
+              </a>
+            </li>
+        
+        <%# end %>
+      </ul>
+   </div> -->
+
   </div>
 
-</div>
+<script type="text/javascript" src="/public/jquery/jquery-1.6.4.min.js"></script>
+<script type="text/javascript" src="/public/jquery/jquery.json-2.3.min.js"></script>
+<script type="text/javascript" src="/public/api/rhoapi-modules.js"></script>
+<script type="text/javascript" src="/helpers/specHelpers.js"></script>
+
+<script type="text/javascript">
+ 
+      function applicationNotify(data)
+      {
+        $("#Rho_Application_Notify ul.list").append(data);
+      }
+
+</script>
+
+</body>
+</html>
