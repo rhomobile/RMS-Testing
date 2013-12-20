@@ -42,72 +42,61 @@ def copy_file(src, dst_dir)
 end
 
 class Test_Helper
-    def before_all(tables, folder)
-        @tables = tables
-        @folder = folder
+  def before_all(tables, folder)
+    @tables, @folder = tables, folder
 
-        Rho::RHO.load_all_sources()
-        @save_sync_types = getTestDB().select_from_table('sources','name, sync_type')
-        getTestDB().update_into_table('sources',{'sync_type'=>'none'})
+    Rho::RHO.load_all_sources()
+    @save_sync_types = getTestDB().select_from_table('sources','name, sync_type')
+    getTestDB().update_into_table('sources',{'sync_type'=>'none'})
+    Rho::RhoConfig.sources[getAccount.to_s]['sync_type'] = 'incremental' if $spec_settings[:sync_model]
+    Rho::RhoConfig.sources[getCase.to_s]['sync_type'] = 'incremental' if $spec_settings[:sync_model]
+    clean_db_data
 
-        Rho::RhoConfig.sources[getAccount.to_s]['sync_type'] = 'incremental' if $spec_settings[:sync_model]
-        Rho::RhoConfig.sources[getCase.to_s]['sync_type'] = 'incremental' if $spec_settings[:sync_model]
-        clean_db_data
-
-        @source_map = nil
-        if $spec_settings[:schema_model]
-            @source_map = { 'Account' => 'Account_s', 'Case' => 'Case_s'}
-        end
-
-        if USE_COPY_FILES
-            Rho::RhoUtils.load_offline_data(@tables, @folder, @source_map)
-
-            src_path = Rho::RhoFSConnector::get_db_fullpathname('local')
-            if USE_HSQLDB
-                src_path.sub!(".sqlite", ".data")
-                copy_file( src_path, Rho::RhoFSConnector::get_blob_folder() )
-                src_path.sub!(".data", ".script")
-                copy_file( src_path, Rho::RhoFSConnector::get_blob_folder() )
-            else
-                copy_file( src_path, Rho::RhoFSConnector::get_blob_folder() )
-            end
-        end
-    end
-
-    def after_each
-        if USE_COPY_FILES
-            dst_path = Rho::RhoFSConnector::get_db_fullpathname('local')
-            src_path = File.join( Rho::RhoFSConnector::get_blob_folder(), File.basename(dst_path))
-            if USE_HSQLDB
-                src_path.sub!(".sqlite", ".data")
-                copy_file( src_path, File.dirname(dst_path) )
-                src_path.sub!(".data", ".script")
-                copy_file( src_path, File.dirname(dst_path) )
-            else
-                copy_file( src_path, File.dirname(dst_path) )
-            end
-        else
-            clean_db_data
-        end
-
-        Rho::RhoConfig.sources()[getCase.to_s]['freezed'] = false if !$spec_settings[:schema_model]
-
-    end
-
-    def before_each
-        if !USE_COPY_FILES
-            Rho::RhoUtils.load_offline_data(@tables, @folder, @source_map)
-        end
-    end
-
-    def after_all
-      @save_sync_types.each do |src|
-        getTestDB().update_into_table('sources',{'sync_type'=>src['sync_type']}, {'name'=>src['name']})
+    @source_map = { 'Account' => 'Account_s', 'Case' => 'Case_s'} if $spec_settings[:schema_model]
+    if USE_COPY_FILES
+      Rho::RhoUtils.load_offline_data(@tables, @folder, @source_map)
+      src_path = Rho::RhoFSConnector::get_db_fullpathname('local')
+      if USE_HSQLDB
+        src_path.sub!(".sqlite", ".data")
+        copy_file( src_path, Rho::RhoFSConnector::get_blob_folder() )
+        src_path.sub!(".data", ".script")
+        copy_file( src_path, Rho::RhoFSConnector::get_blob_folder() )
+      else
+        copy_file( src_path, Rho::RhoFSConnector::get_blob_folder() )
       end
-
-      Rho::RhoConfig.sources[getAccount.to_s]['sync_type'] = 'none'
-
     end
+  end
+
+  def after_each
+    if USE_COPY_FILES
+      dst_path = Rho::RhoFSConnector::get_db_fullpathname('local')
+      src_path = File.join( Rho::RhoFSConnector::get_blob_folder(), File.basename(dst_path))
+      if USE_HSQLDB
+        src_path.sub!(".sqlite", ".data")
+        copy_file( src_path, File.dirname(dst_path) )
+        src_path.sub!(".data", ".script")
+        copy_file( src_path, File.dirname(dst_path) )
+      else
+        copy_file( src_path, File.dirname(dst_path) )
+      end
+    else
+      clean_db_data
+    end
+    Rho::RhoConfig.sources()[getCase.to_s]['freezed'] = false if !$spec_settings[:schema_model]
+  end
+
+  def before_each
+    if !USE_COPY_FILES
+      Rho::RhoUtils.load_offline_data(@tables, @folder, @source_map)
+    end
+  end
+
+  def after_all
+    @save_sync_types.each do |src|
+      getTestDB().update_into_table('sources',{'sync_type'=>src['sync_type']}, {'name'=>src['name']})
+    end
+    Rho::RhoConfig.sources[getAccount.to_s]['sync_type'] = 'none'
+  end
 end
 
 describe "Rhom::RhomObject" do
@@ -191,14 +180,15 @@ end
     Rho::RhoSupport::binary_decode(item2.industry).should == val
   end
 
-=begin
+#=begin
   it "should create multiple records offline" do
     vars = {"name"=>"foobarthree", "industry"=>"entertainment"}
     getAccount.changed?.should == false
+
     account = getAccount.create(vars)
     if $spec_settings[:sync_model]
-        getAccount.changed?.should == true
-        account.changed?.should == true
+      getAccount.changed?.should == true
+      account.changed?.should == true
     end
 
     acct = getAccount.find(account.object)
@@ -228,16 +218,15 @@ end
     acct2.name.should == 'soccer'
 
     if $spec_settings[:sync_model]
-        records = getTestDB().select_from_table('changed_values','*', 'update_type' => 'update')
-        records.length.should == 1
+      records = getTestDB().select_from_table('changed_values','*', 'update_type' => 'update')
+      records.length.should == 1
     end
-
   end
 
   it "should create multiple records with unique ids" do
     ids = []
     10.times do |i|
-      vars = {"name"=>"some new record#{rand.to_s}", "industry"=>"electronics#{rand.to_s}"}
+      vars = {"name"=>"some_new_record_#{rand.to_s}", "industry"=>"electronics_#{rand.to_s}"}
       @acct = getAccount.create(vars)
       ids << @acct.object
       @acct = getAccount.find(ids[i])
@@ -247,7 +236,7 @@ end
     ids.uniq.length.should == 10
   end
 
-  it "should create a record, then update" do
+  it "should create a record, then update attributes" do
     vars = {"name"=>"some new record", "industry"=>"electronics"}
     @account1 = getAccount.create(vars)
     new_id = @account1.object
@@ -265,16 +254,16 @@ end
     @account3.industry.should == update_attributes['industry']
 
     if $spec_settings[:sync_model]
-        records = getTestDB().select_from_table('changed_values','*', 'update_type' => 'create')
-        records.length.should == 1
-        records[0]['attrib'].should == 'object'
+      records = getTestDB().select_from_table('changed_values','*', 'update_type' => 'create')
+      records.length.should == 1
+      records[0]['attrib'].should == 'object'
 
-        records = getTestDB().select_from_table('changed_values','*', 'update_type' => 'update')
-        records.length.should == 0
+      records = getTestDB().select_from_table('changed_values','*', 'update_type' => 'update')
+      records.length.should == 0
     end
   end
 
-  it "should create a record, then update 2" do
+  it "should create a record, then update it by saving edited object" do
     vars = {"name"=>"some new record"}
     @account1 = getAccount.create(vars)
     new_id = @account1.object
@@ -292,26 +281,27 @@ end
     @account3.industry.should == update_attributes['industry']
 
     if $spec_settings[:sync_model]
-        records = getTestDB().select_from_table('changed_values','*', 'update_type' => 'create')
-        records.length.should == 1
-        records[0]['attrib'].should == 'object'
+      records = getTestDB().select_from_table('changed_values','*', 'update_type' => 'create')
+      records.length.should == 1
+      records[0]['attrib'].should == 'object'
 
-        records = getTestDB().select_from_table('changed_values','*', 'update_type' => 'update')
-        records.length.should == 0
+      records = getTestDB().select_from_table('changed_values','*', 'update_type' => 'update')
+      records.length.should == 0
     end
   end
 
   it "should partially update a record" do
     new_attributes = {"name"=>"Mobio US"}
-    @account = getAccount.find("44e804f2-4933-4e20-271c-48fcecd9450d")
+    @account  = getAccount.find("44e804f2-4933-4e20-271c-48fcecd9450d")
     @account.update_attributes(new_attributes)
     @new_acct = getAccount.find("44e804f2-4933-4e20-271c-48fcecd9450d")
+
     @new_acct.name.should == "Mobio US"
     @new_acct.industry.should == "Technology"
 
     if $spec_settings[:sync_model]
-        records = getTestDB().select_from_table('changed_values','*', 'update_type' => 'update')
-        records.length.should == 1
+      records = getTestDB().select_from_table('changed_values','*', 'update_type' => 'update')
+      records.length.should == 1
     end
   end
 
@@ -328,8 +318,8 @@ end
     @new_acct.industry.should == "Electronics"
 
     if $spec_settings[:sync_model]
-        records = getTestDB().select_from_table('changed_values','*', 'update_type' => 'update')
-        records.length.should == 2
+      records = getTestDB().select_from_table('changed_values','*', 'update_type' => 'update')
+      records.length.should == 2
     end
   end
 
@@ -343,8 +333,8 @@ end
     @new_acct.industry.should == "Technology"
 
     if $spec_settings[:sync_model]
-        records = getTestDB().select_from_table('changed_values','*', 'update_type' => 'update')
-        records.length.should == 1
+      records = getTestDB().select_from_table('changed_values','*', 'update_type' => 'update')
+      records.length.should == 1
     end
 
   end
@@ -388,7 +378,6 @@ end
     item3 = getAccount.find(item.object)
     item3.propOne.should == item2.propOne
     item3.TwoProps.should == item2.TwoProps
-
   end
 
   it "should update a record  diff case name" do
@@ -400,8 +389,8 @@ end
     @new_acct.industry.should == "Technology"
 
     if $spec_settings[:sync_model]
-        records = getTestDB().select_from_table('changed_values','*', 'update_type' => 'update')
-        records.length.should == 1
+      records = getTestDB().select_from_table('changed_values','*', 'update_type' => 'update')
+      records.length.should == 1
     end
   end
 
@@ -416,18 +405,16 @@ end
     @new_case.created_by_name.should == "evgeny"
 
     if $spec_settings[:sync_model]
-        records = getTestDB().select_from_table('changed_values','*', 'update_type' => 'update')
-        records.length.should == 1
-        records[0]['attrib'].should == 'created_by_name'
+      records = getTestDB().select_from_table('changed_values','*', 'update_type' => 'update')
+      records.length.should == 1
+      records[0]['attrib'].should == 'created_by_name'
     end
-
   end
 
   it "should save a record with full mode" do
     records = getTestDB().select_from_table('changed_values','*', 'update_type' => 'update')
     records.length.should == 0
 
-    #new_attributes = {"created_by_name"=>"evgeny"}
     @case = getCase.find("41a4e1f1-2c0c-7e51-0495-4900dc4c072c")
     @case.created_by_name = "evgeny"
     @case.save
@@ -436,11 +423,10 @@ end
     @new_case.created_by_name.should == "evgeny"
 
     if $spec_settings[:sync_model]
-        records = getTestDB().select_from_table('changed_values','*', 'update_type' => 'update')
-        records.length.should == 1
-        records[0]['attrib'].should == 'created_by_name'
+      records = getTestDB().select_from_table('changed_values','*', 'update_type' => 'update')
+      records.length.should == 1
+      records[0]['attrib'].should == 'created_by_name'
     end
-
   end
 
   it "should set <something>_type_<something> or <something>_object_<something> field for a record" do
@@ -460,23 +446,20 @@ end
     @new_acct.acct_object.should == "same object"
   end
 
+unless $spec_settings[:schema_model]
   it "should _NOT_ set 'attrib_type' field for a record" do
+    new_attributes = {"attrib_type"=>"Partner"}
+    @account = getAccount.find('44e804f2-4933-4e20-271c-48fcecd9450d')
+    @account.update_attributes(new_attributes)
 
-    if $spec_settings[:schema_model]
-        1.should == 1
-    else
-        new_attributes = {"attrib_type"=>"Partner"}
-        @account = getAccount.find('44e804f2-4933-4e20-271c-48fcecd9450d')
-        @account.update_attributes(new_attributes)
+    @new_acct = getAccount.find('44e804f2-4933-4e20-271c-48fcecd9450d')
 
-        @new_acct = getAccount.find('44e804f2-4933-4e20-271c-48fcecd9450d')
-
-        @new_acct.name.should == "Mobio India"
-        @new_acct.instance_variables.each do |var|
-          var.to_s.gsub(/@/,'').match('\btype\b').should be_nil
-        end
+    @new_acct.name.should == "Mobio India"
+    @new_acct.instance_variables.each do |var|
+        var.to_s.gsub(/@/,'').match('\btype\b').should be_nil
     end
   end
+end
 
   it "should update an attribute that was previously nil" do
     new_attributes = {"new_name"=>"Mobio Europe"}
@@ -512,7 +495,6 @@ end
     @new_acct.industry.should == "Technology"
   end
 
-
   it "should save an attribute to empty string" do
     @account = getAccount.find('44e804f2-4933-4e20-271c-48fcecd9450d')
     @acct.name.should_not == ""
@@ -531,8 +513,8 @@ end
     @account = getAccount.find(object_id)
     @account.update_attributes(new_attributes1)
     if $spec_settings[:sync_model]
-        records = getTestDB().select_from_table('changed_values','*', 'update_type' => 'update')
-        records.length.should == 1
+      records = getTestDB().select_from_table('changed_values','*', 'update_type' => 'update')
+      records.length.should == 1
     end
 
     @new_acct = getAccount.find(object_id)
@@ -545,8 +527,8 @@ end
     @account = getAccount.find(object_id)
     @account.update_attributes(new_attributes2)
     if $spec_settings[:sync_model]
-        records = getTestDB().select_from_table('changed_values','*', 'update_type' => 'update')
-        records.length.should == 1
+      records = getTestDB().select_from_table('changed_values','*', 'update_type' => 'update')
+      records.length.should == 1
     end
 
     @new_acct = getAccount.find(object_id)
@@ -555,8 +537,8 @@ end
     @new_acct.name.should == "Mobio India"
     @new_acct.industry.should == "Technology"
     if $spec_settings[:sync_model]
-        records = getTestDB().select_from_table('changed_values','*', 'update_type' => 'update')
-        records.length.should == 1
+      records = getTestDB().select_from_table('changed_values','*', 'update_type' => 'update')
+      records.length.should == 1
     end
   end
 
@@ -565,30 +547,19 @@ end
 
     @acct.update_attributes(:last_checked =>Time.now())
     @accts = getAccount.find(:all,
-    #:conditions => ["last_checked > ?", (Time.now-(10*60)).to_i])
-     :conditions => { {:name=>'last_checked', :op=>'>'}=>(Time.now-(10*60)).to_i() } )
+      :conditions => { {:name=>'last_checked', :op=>'>'}=>(Time.now-(10*60)).to_i() } )
 
     @accts.length.should == 1
     @accts[0].object.should == '44e804f2-4933-4e20-271c-48fcecd9450d'
   end
 
-  it "should retrieve and modify one record" do
-    @acct = getAccount.find('44e804f2-4933-4e20-271c-48fcecd9450d')
-
-    @acct.name.should == "Mobio India"
-    @acct.industry.should == "Technology"
-
-    @acct.name = "Rhomobile US"
-
-    @acct.name.should == "Rhomobile US"
-  end
-
   it "should return an empty value for a non-existent attribute" do
     @acct = getAccount.find('44e804f2-4933-4e20-271c-48fcecd9450d')
-
     @acct.foobar.should be_nil
   end
 
+  #
+  # Find examples
   it "should find with conditions" do
     @accts = getAccount.find(:all, :conditions => {'industry' => 'Technology'}, :order => 'name', :orderdir => "desc")
     @accts.length.should == 2
@@ -621,11 +592,11 @@ end
   it "should find with advanced OR conditions with order" do
     query = '%IND%'
     @accts = getAccount.find( :all,
-       :conditions => {
+      :conditions => {
         {:func=>'UPPER', :name=>'name', :op=>'LIKE'} => query,
         {:func=>'UPPER', :name=>'industry', :op=>'LIKE'} => query},
-        :op => 'OR', :select => ['name','industry'],
-        :order=>'name', :orderdir=>'DESC' )
+         :op => 'OR', :select => ['name','industry'],
+         :order=>'name', :orderdir=>'DESC' )
 
     @accts.length.should == 1
     @accts[0].name.should == "Mobio India"
@@ -635,10 +606,10 @@ end
   it "should NOT find with advanced OR conditions" do
     query = '%IND33%'
     @accts = getAccount.find( :all,
-       :conditions => {
+      :conditions => {
         {:func=>'UPPER', :name=>'name', :op=>'LIKE'} => query,
         {:func=>'UPPER', :name=>'industry', :op=>'LIKE'} => query},
-        :op => 'OR', :select => ['name','industry'])
+         :op => 'OR', :select => ['name','industry'])
 
     @accts.length.should == 0
   end
@@ -753,16 +724,13 @@ end
        :conditions => {
         {:name=>'industry', :op=>'IN'} => ["Technology", "Technology2"] }
     )
-
     items.length.should == 2
 
     items = getAccount.find( :all,
        :conditions => {
         {:name=>'industry', :op=>'IN'} => ["Technology2"] }
     )
-
     items.length.should == 0
-
   end
 
   it "should search with IN string" do
@@ -770,16 +738,13 @@ end
        :conditions => {
         {:name=>'industry', :op=>'IN'} => "\"Technology\", \"Technology2\"" }
     )
-
     items.length.should == 2
 
     items = getAccount.find( :all,
        :conditions => {
         {:name=>'industry', :op=>'IN'} => "\"Technology2\"" }
     )
-
     items.length.should == 0
-
   end
 
   it "should search with NOT IN array" do
@@ -787,16 +752,13 @@ end
        :conditions => {
         {:name=>'industry', :op=>'NOT IN'} => ["Technology1", "Technology2"] }
     )
-
     items.length.should == 2
 
     items = getAccount.find( :all,
        :conditions => {
         {:name=>'industry', :op=>'NOT IN'} => ["Technology"] }
     )
-
     items.length.should == 0
-
   end
 
   it "should search with NOT IN string" do
@@ -804,16 +766,13 @@ end
        :conditions => {
         {:name=>'industry', :op=>'NOT IN'} => "\"Technology1\", \"Technology2\"" }
     )
-
     items.length.should == 2
 
     items = getAccount.find( :all,
        :conditions => {
         {:name=>'industry', :op=>'NOT IN'} => "\"Technology\"" }
     )
-
     items.length.should == 0
-
   end
 
   it "should find with group of advanced conditions" do
@@ -966,7 +925,6 @@ end
     end
 
     getAccount.delete_all
-
     getAccount.count.should == 0
 
     if $spec_settings[:sync_model]
@@ -975,7 +933,6 @@ end
 
         records = getTestDB().select_from_table('changed_values','*', {'source_id' => getAccount().get_source_id(), "update_type"=>'create'} )
         records.length.should == 0
-
     end
   end
 
@@ -1015,8 +972,8 @@ end
     @accts.length.should > 0
 
     if $spec_settings[:sync_model]
-        records = getTestDB().select_from_table('changed_values','*', {'source_id' => getAccount().get_source_id(), "update_type"=>'delete'} )
-        records.length.should == 0
+      records = getTestDB().select_from_table('changed_values','*', {'source_id' => getAccount().get_source_id(), "update_type"=>'delete'} )
+      records.length.should == 0
     end
 
     getAccount.delete_all(:conditions => {'industry' => 'Technology'})
@@ -1029,10 +986,9 @@ end
     @accts.length.should == 0
 
     if $spec_settings[:sync_model]
-        records = getTestDB().select_from_table('changed_values','*', {'source_id' => getAccount().get_source_id(), "update_type"=>'delete'} )
-        records.length.should > 0
+      records = getTestDB().select_from_table('changed_values','*', {'source_id' => getAccount().get_source_id(), "update_type"=>'delete'} )
+      records.length.should > 0
     end
-
   end
 
   it "should delete_all not delete from other sources" do
@@ -1043,20 +999,18 @@ end
     accts.length.should > 0
 
     test_cond = {'name' => 'Aeroprise'}
-
     cases = getCase().find(:all, :conditions => test_cond)
     cases.length.should > 0
 
     if $spec_settings[:sync_model]
-        records = getTestDB().select_from_table('changed_values','*', {'source_id' => getAccount().get_source_id(), "update_type"=>'delete'} )
-        records.length.should == 0
+      records = getTestDB().select_from_table('changed_values','*', {'source_id' => getAccount().get_source_id(), "update_type"=>'delete'} )
+      records.length.should == 0
 
-        records = getTestDB().select_from_table('changed_values','*', {'source_id' => getCase().get_source_id(), "update_type"=>'create'} )
-        records.length.should > 0
+      records = getTestDB().select_from_table('changed_values','*', {'source_id' => getCase().get_source_id(), "update_type"=>'create'} )
+      records.length.should > 0
     end
 
     getAccount.delete_all(:conditions => test_cond)
-
     accts = getAccount.find(:all, :conditions => test_cond)
     accts.length.should == 0
 
@@ -1067,13 +1021,12 @@ end
     accts.length.should > 0
 
     if $spec_settings[:sync_model]
-        records = getTestDB().select_from_table('changed_values','*', {'source_id' => getAccount().get_source_id(), "update_type"=>'delete'} )
-        records.length.should > 0
+      records = getTestDB().select_from_table('changed_values','*', {'source_id' => getAccount().get_source_id(), "update_type"=>'delete'} )
+      records.length.should > 0
 
-        records = getTestDB().select_from_table('changed_values','*', {'source_id' => getCase().get_source_id(), "update_type"=>'create'} )
-        records.length.should > 0
+      records = getTestDB().select_from_table('changed_values','*', {'source_id' => getCase().get_source_id(), "update_type"=>'create'} )
+      records.length.should > 0
     end
-
   end
 
   it "should delete_all with multiple conditions" do
@@ -1085,16 +1038,14 @@ end
     accts.length.should == 1
 
     if $spec_settings[:sync_model]
-        records = getTestDB().select_from_table('changed_values','*', {'source_id' => getAccount().get_source_id(), "update_type"=>'delete'} )
-        records.length.should == 0
+      records = getTestDB().select_from_table('changed_values','*', {'source_id' => getAccount().get_source_id(), "update_type"=>'delete'} )
+      records.length.should == 0
 
-        records = getTestDB().select_from_table('changed_values','*', {'source_id' => getAccount().get_source_id(), "update_type"=>'create'} )
-        records.length.should > 0
-
+      records = getTestDB().select_from_table('changed_values','*', {'source_id' => getAccount().get_source_id(), "update_type"=>'create'} )
+      records.length.should > 0
     end
 
     getAccount.delete_all(:conditions => test_cond)
-
     accts = getAccount.find(:all, :conditions => test_cond)
     accts.length.should == 0
 
@@ -1102,14 +1053,13 @@ end
     accts.length.should == 1
 
     if $spec_settings[:sync_model]
-        records = getTestDB().select_from_table('changed_values','*', {'source_id' => getAccount().get_source_id(), "update_type"=>'delete'} )
-        records.length.should > 0
+      records = getTestDB().select_from_table('changed_values','*', {'source_id' => getAccount().get_source_id(), "update_type"=>'delete'} )
+      records.length.should > 0
 
-        records = getTestDB().select_from_table('changed_values','*', {'source_id' => getAccount().get_source_id(), "update_type"=>'create'} )
-        records.length.should == 1
-        records[0]['attrib'].should == 'object'
+      records = getTestDB().select_from_table('changed_values','*', {'source_id' => getAccount().get_source_id(), "update_type"=>'create'} )
+      records.length.should == 1
+      records[0]['attrib'].should == 'object'
     end
-
   end
 
   it "should delete_all with advanced conditions" do
@@ -1123,12 +1073,11 @@ end
     accts.length.should == 2
 
     if $spec_settings[:sync_model]
-        records = getTestDB().select_from_table('changed_values','*', {'source_id' => getAccount().get_source_id(), "update_type"=>'delete'} )
-        records.length.should == 0
+      records = getTestDB().select_from_table('changed_values','*', {'source_id' => getAccount().get_source_id(), "update_type"=>'delete'} )
+      records.length.should == 0
 
-        records = getTestDB().select_from_table('changed_values','*', {'source_id' => getAccount().get_source_id(), "update_type"=>'create'} )
-        records.length.should > 0
-
+      records = getTestDB().select_from_table('changed_values','*', {'source_id' => getAccount().get_source_id(), "update_type"=>'create'} )
+      records.length.should > 0
     end
 
     getAccount.delete_all(:conditions => test_cond, :op => 'OR')
@@ -1140,14 +1089,12 @@ end
     accts.length.should == 0
 
     if $spec_settings[:sync_model]
-        records = getTestDB().select_from_table('changed_values','*', {'source_id' => getAccount().get_source_id(), "update_type"=>'delete'} )
-        records.length.should > 0
+      records = getTestDB().select_from_table('changed_values','*', {'source_id' => getAccount().get_source_id(), "update_type"=>'delete'} )
+      records.length.should > 0
 
-        records = getTestDB().select_from_table('changed_values','*', {'source_id' => getAccount().get_source_id(), "update_type"=>'create'} )
-        records.length.should == 0
-
+      records = getTestDB().select_from_table('changed_values','*', {'source_id' => getAccount().get_source_id(), "update_type"=>'create'} )
+      records.length.should == 0
     end
-
   end
 
   it "should not find with advanced condition" do
@@ -1178,9 +1125,7 @@ end
  end
 
   it "should support blob type" do
-
     file_name = File.join(Rho::RhoApplication::get_blob_folder, 'MyText123.txt')
-    #puts "file_name : #{file_name}"
     File.delete(file_name) if File.exists?(file_name)
     File.exists?(file_name).should ==  false
 
@@ -1200,9 +1145,6 @@ end
     File.exists?(file_name).should == true
 
     item.destroy
-
-      #sleep 30
-
     item2 = getAccount.find(item.object)
     item2.should be_nil
     File.exists?(file_name).should == false
@@ -1242,14 +1184,14 @@ end
     @accts[0].vars.length.should == 4
   end
 
-    #it "should perform find with select and merged conditions" do
-    #@accts = getAccount.find(:all, :conditions => {'name' => 'Mobio India'}, :select => ['industry'])
-    #@accts.length.should == 1
-    #@accts[0].name.should == "Mobio India"
-    #@accts[0].industry.should == "Technology"
-    #@accts[0].shipping_address_street.should be_nil
-    #@accts[0].vars.length.should == 3
-    #end
+  #it "should perform find with select and merged conditions" do
+  #@accts = getAccount.find(:all, :conditions => {'name' => 'Mobio India'}, :select => ['industry'])
+  #@accts.length.should == 1
+  #@accts[0].name.should == "Mobio India"
+  #@accts[0].industry.should == "Technology"
+  #@accts[0].shipping_address_street.should be_nil
+  #@accts[0].vars.length.should == 3
+  #end
 
   it "should support find with conditions => nil" do
     @accts = getAccount.find(:all, :conditions => {'description' => nil})
@@ -1316,22 +1258,21 @@ end
     @accts.length.should == 2
 
     if ( @accts[1].name == "Aeroprise" )
-        @accts[1].name.should == "Aeroprise"
+      @accts[1].name.should == "Aeroprise"
     else
-        @accts[0].name.should == "Aeroprise"
+      @accts[0].name.should == "Aeroprise"
     end
   end
 
+if $spec_settings[:schema_model]
   it "should find by sql" do
-    if $spec_settings[:schema_model]
+    @accts = getAccount.find_by_sql("SELECT * FROM " + getAccount.to_s )
+    @accts.length.should == 2
 
-        @accts = getAccount.find_by_sql("SELECT * FROM " + getAccount.to_s )
-        @accts.length.should == 2
-
-        @accts[0].name.should_not be_nil
-        @accts[1].name.should_not be_nil
-    end
+    @accts[0].name.should_not be_nil
+    @accts[1].name.should_not be_nil
   end
+end
 
   it "should find by number" do
     getAccount.create('rating'=>1)
@@ -1418,34 +1359,34 @@ end
     @accts[2].rating.to_i.should > size
   end
 
+if $spec_settings[:schema_model]
   it "should find by non-string fields" do
-    if $spec_settings[:schema_model]
-        item = getAccount.create( {:new_name => 'prod1', :float_test => 2.3, :date_test => 123, :time_test => 678} )
-        item.float_test.is_a?(Float).should == true
-        item.date_test.is_a?(Integer).should == true
-        item.time_test.is_a?(Integer).should == true
+    item = getAccount.create( {:new_name => 'prod1', :float_test => 2.3, :date_test => 123, :time_test => 678} )
+    item.float_test.is_a?(Float).should == true
+    item.date_test.is_a?(Integer).should == true
+    item.time_test.is_a?(Integer).should == true
 
-        items = getAccount.find(:all, :conditions => {:float_test => 2.3} )
-        items.should_not be_nil
-        items.length.should == 1
-        item2 = items[0]
+    items = getAccount.find(:all, :conditions => {:float_test => 2.3} )
+    items.should_not be_nil
+    items.length.should == 1
+    item2 = items[0]
 
-        item2.object.should == item.object
-        item2.float_test.is_a?(Float).should == true
-        item2.date_test.is_a?(Integer).should == true
-        item2.time_test.is_a?(Integer).should == true
+    item2.object.should == item.object
+    item2.float_test.is_a?(Float).should == true
+    item2.date_test.is_a?(Integer).should == true
+    item2.time_test.is_a?(Integer).should == true
 
-        items = getAccount.find(:all, :conditions => { {:name=>'float_test', :op=>'<'}=> 53 } )
-        items.should_not be_nil
-        items.length.should == 1
-        item2 = items[0]
+    items = getAccount.find(:all, :conditions => { {:name=>'float_test', :op=>'<'}=> 53 } )
+    items.should_not be_nil
+    items.length.should == 1
+    item2 = items[0]
 
-        item2.object.should == item.object
-        item2.float_test.is_a?(Float).should == true
-        item2.date_test.is_a?(Integer).should == true
-        item2.time_test.is_a?(Integer).should == true
-    end
+    item2.object.should == item.object
+    item2.float_test.is_a?(Float).should == true
+    item2.date_test.is_a?(Integer).should == true
+    item2.time_test.is_a?(Integer).should == true
   end
+end
 
   it "should find by object" do
     accts = getAccount.find(:all,:conditions=>
@@ -1478,12 +1419,10 @@ end
         }
     )
     accts.length.should == 0
-
   end
 
 if !defined?(RHO_WP7)
   it "should not add property to freezed model" do
-
     if !$spec_settings[:schema_model]
         props = Rho::RhoConfig.sources()[getCase.to_s]
         props['freezed'] = true
@@ -1511,18 +1450,14 @@ if !defined?(RHO_WP7)
             getCase().find_by_sql("INSERT INTO #{getCase.to_s()}(object,wrong_address) values ('1234', 'my_addr')")
         }.should raise_error(ArgumentError)
     end
-
   end
 end
 
   it "should add property to freezed model" do
     if !$spec_settings[:schema_model]
-        props = Rho::RhoConfig.sources()[getCase.to_s]
-        props['freezed'] = true
-
-        props['freezed'].should == true
-        #props['property'].should_not be_nil
-        #props['property']['description'].should_not be_nil
+      props = Rho::RhoConfig.sources()[getCase.to_s]
+      props['freezed'] = true
+      props['freezed'].should == true
     end
 
     obj = getCase().new( :description => 'test')
@@ -1549,17 +1484,15 @@ end
     res3.description.should == "test3"
 
     if $spec_settings[:schema_model]
-        getCase().find_by_sql("INSERT INTO #{getCase.to_s}(object,description) values ('1234', 'my_addr')")
-        res4 = getCase().find('1234')
-        res4.should_not be_nil
-        res4.description.should == "my_addr"
-
+      getCase().find_by_sql("INSERT INTO #{getCase.to_s}(object,description) values ('1234', 'my_addr')")
+      res4 = getCase().find('1234')
+      res4.should_not be_nil
+      res4.description.should == "my_addr"
     end
-
   end
-=end
+# =end
+end # "Rhom::RhomObject"
 
-end
 
 # TODO: Add pagination fixtures (spec/pagination)
 =begin
