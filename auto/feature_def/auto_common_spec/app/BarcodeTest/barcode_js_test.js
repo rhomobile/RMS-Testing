@@ -3266,6 +3266,23 @@ var arr_scanner_property = [
 	propertyValue	:	"10",
 	expectedResult	:	"10"
 }
+{
+	testName		:	"VT282-4309 | Set triggerConnected :true  | true",
+	propertyName	:	"triggerConnected",
+	scannerTypes	:	"Imager",
+	OSTypes			:	"WINDOWS",
+	propertyValue	:	"true",
+	expectedResult	:	"true"
+},
+{
+	testName		:	"VT282-4310 | Set triggerConnected  :false  | false",
+	propertyName	:	"triggerConnected",
+	scannerTypes	:	"Imager",
+	OSTypes			:	"WINDOWS",
+	propertyValue	:	"false",
+	expectedResult	:	"false"
+}
+
 ];
 
 var scanCallback = function (data){
