@@ -57,6 +57,15 @@ class ApplicationTestController < Rho::RhoController
     redirect :action => :index  
   end
 
+  def applicationMinimize
+    Rho::Application.minimize()
+    redirect :action => :index
+  end
+
+  def applicationQuit
+        Rho::Application.quit()
+  end
+
   #For 4.1 Set App Notification Method Test  
   def applicationNotifyMethod
     Rho::Application.setApplicationNotify(url_for( :action => :notifyCallback))

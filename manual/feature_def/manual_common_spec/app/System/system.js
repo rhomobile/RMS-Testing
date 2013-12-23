@@ -192,3 +192,74 @@ function checkBackupFileExists()
     $("#Rho_System_DoNotBackupAttribute span.result").text(JSON.stringify(isBackupFileExists()));
 }
 
+var getAppNameTosendMessage = function(){
+    var appName = undefined;
+    if(isAndroidPlatform()){
+        appName = "com.rhomobile.intent"
+    }
+    else if(isApplePlatform()){
+        appName = "Intent"
+    }
+    else if(isWindowsMobilePlatform()){
+        appName = "rhomobile Intent/Intent.exe"
+    }
+
+    return appName;
+}
+
+//This method will give you the base64 encoded data for Images
+var getBase64FromImageUrl = function(URL) {
+    var img = new Image();
+    img.src = URL;
+    img.onload = function () {
+
+        var canvas = document.createElement("canvas");
+        canvas.width =this.width;
+        canvas.height =this.height;
+
+        var ctx = canvas.getContext("2d");
+        ctx.drawImage(this, 0, 0);
+
+        var dataURL = canvas.toDataURL("image/png");
+        dataURL = dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
+        return dataURL;
+    }
+}
+
+var sendJSONStringToTarget = function(){
+    Rho.System.sendApplicationMessage(getAppNameTosendMessage(), 'data={"Users":[{"Name":"user999","Value":"test"},{"Name":"test2","Value":"test"}]}');
+}
+
+var getGPSCoordinates = function(){
+    Rho.System.sendApplicationMessage(getAppNameTosendMessage(),'GPS=true');
+    Rho.System.startApplicationMessageNotifications(function(geodata){
+        if(document.getElementById('geodiv')){
+            document.getElementById('geodiv').innerHTML = "Latitude= "+geodata.latitude+"Longitude= "+geodata.longitude;
+        }
+    });
+}
+
+var scanBarcode = function(){
+    Rho.System.sendApplicationMessage(getAppNameTosendMessage(),'SCAN=true');
+    Rho.System.startApplicationMessageNotifications(function(scandata){
+        if(document.getElementById('scandiv')){
+            document.getElementById('scandiv').innerHTML = "Data= "+scandata;
+        }
+    });
+}
+
+var getNonRhodesApp = function(){
+    var appName = undefined;
+    if(isAndroidPlatform()){
+        appName = "com.android.music"
+    }
+    else if(isApplePlatform()){
+        appName = "Safari"
+    }
+    else if(isWindowsMobilePlatform()){
+        appName = "Internet Exlporer.exe"
+    }
+
+    return appName;
+}
+
