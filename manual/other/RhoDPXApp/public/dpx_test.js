@@ -132,16 +132,29 @@ var dpx_tests = (function() {
 
     var params = {
         'template': 'file:///sdcard/templates/Logistics%20Post.xml',
+
+        'debug': true,
+
         'audioFeedback': false,
-        'inputSource': 'camera', 
+        'hapticFeedback': false,
+        'ledFeedback': false,
+
+        'flashMode': Rho.DPX.FLASH_ON,
+        'inputSource': Rho.DPX.SOURCE_CAMERA, 
         'inputSourceFilename': '/sdcard/templates/1024w_754h_Delivery Attempt Notification.yuv', 
-        // 'fileInteractiveMode': false,
+        'fileInteractiveMode': true, // false does not work
+        'manualResolutionMode': true,
+        'manualResolution': Rho.DPX.RESOLUTION_SMALL,
+        'userMode': Rho.DPX.USER_MODE_SNAPSHOT,
+        'zoomAmount': 100,
         'uiResultConfirmation': false
     };
 
     var create_dpx = function() {
         var dpx = new Rho.DPX();
         each(params, function(k, v) {
+            create_text(k + ': "' + v + '"');
+            create_tag('br');
             dpx.setProperty(k, v);
         });
         return dpx;
