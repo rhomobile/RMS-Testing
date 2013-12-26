@@ -56,4 +56,43 @@ class ApplicationTestController < Rho::RhoController
     @applicationtest.destroy if @applicationtest
     redirect :action => :index  
   end
+
+  def applicationMinimize
+    Rho::Application.minimize()
+    redirect :action => :index
+  end
+
+  def applicationQuit
+        Rho::Application.quit()
+  end
+
+  #For 4.1 Set App Notification Method Test  
+  def applicationNotifyMethod
+    Rho::Application.setApplicationNotify(url_for( :action => :notifyCallback))
+    redirect :action => :index
+  end
+  
+  def notifyCallback
+          Rho::Log.info(@params['applicationEvent'],'APP_CALLBACK')
+
+          time = Time.now
+          hr = time.hour.to_s
+          if hr.length <2
+            hr = 0.to_s + hr
+          end
+          mn = time.min.to_s
+          if mn.length <2
+            mn = 0.to_s + mn
+          end
+          sc = time.sec.to_s
+          if sc.length <2
+            sc = 0.to_s + sc
+          end
+          timestr = hr + ":" + mn + ":" + sc
+
+          @data = "<li><ul>Time: " + timestr + "<li>Event: " + @params['applicationEvent'].to_s + "</li><li>eventData: " + @params['eventData'].to_s + "</li></ul></li>"
+          
+          Rho::WebView.execute_js("applicationNotify(\"#{@data}\");")
+  end
+  
 end

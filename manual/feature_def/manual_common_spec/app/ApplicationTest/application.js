@@ -126,6 +126,6 @@ function notifyCallback(params){
   var timeStr = leftZeroFill(time.getHours(),2) + ":" + leftZeroFill(time.getMinutes(),2) + ":" + leftZeroFill(time.getSeconds(),2) + "." + leftZeroFill(~~(time.getMilliseconds()/10),2);
   
   // create new ul
-  var ul = $("#Rho_Application_Notify ul.list").append("<li><ul>Event: " + params.applicationEvent + "<li>Time: " + timeStr+"</li></ul></li>");
+  var ul = $("#Rho_Application_Notify ul.list").append("<li><ul>Time: " + timeStr + "<li>Event: " + params.applicationEvent +"</li><li>eventData: " + params.eventData +"</li></ul></li>");
 }	
 	

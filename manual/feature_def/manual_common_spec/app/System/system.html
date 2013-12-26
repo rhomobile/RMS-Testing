@@ -13,6 +13,7 @@
     <script type="text/javascript" charset="utf-8" src="/public/api/rhoapi-modules.js"></script>
     <script type="text/javascript" src="system.js"></script>
     <script type="text/javascript" src="/public/js/helpers.js"></script>
+    <script type="text/javascript" src="/app/helpers/specHelpers.js"></script>
 
     <script type="text/javascript">
 
@@ -92,23 +93,24 @@
     </div>
 </div>
 
-<div class="method_tests win32 wm">
+<div class="method_tests android ios win32 wm">
     <div class="method_name">Rho.System.httpProxyURI</div>
-    <div class="method_desc">HTTP Proxy URI : Proxy should set successfully to http://wwwgate0.mot.com:1080.
+    <div class="method_desc">HTTP Proxy URI : Proxy should set successfully to your proxy server address (Configure it before start this test).
         (Rhosimulator supports it only for windows platform)
     </div>
     <div class="test_scenario">
         <div class="test_scenario_controls">
-            <a href="javascript:void(0)" onclick="Rho.System.httpProxyURI='http://wwwgate0.mot.com:1080';">Set
-                httpProxyURI </a><br/>
-            <a href="http://www.google.com">Navigate to Google </a>
+            <button onclick="Rho.System.httpProxyURI='http://192.168.1.141:9090';">Set httpProxyURI</button><br/>
+            <button onClick="alert((Rho.Network.get({url: 'http://www.google.com'})).body);">Call Rho.Network.get('http://www.google.com')</button><br/>
+            <button onClick="Rho.System.httpProxyURI = '';">Set proxyHttpUri to empty string)</button><br/>
+            <button onClick="Rho.System.httpProxyURI = null;">Set proxyHttpUri to null</button>
         </div>
-        <span class="test_scenario_number">VT300-021<br/></span>
+        <span class="test_scenario_number">VT300-021 | <br/>Press button  for setting Rho.System.httpProxyUri and press button for sending request to http://www.google.com from Rho.Network. Check proxy server log</span>
     </div>
     <div class="test_scenario">
         <div class="test_scenario_controls">
             <div id="Rho_System_httpProxyURI">
-                <a href="javascript:void(0)" onclick="gethttpProxyURI();"> Get httpProxyURI : </a> <span
+                <a href="javascript:void(0)" onclick="httpProxyURI;"> Get httpProxyURI : </a> <span
                     class="result"> </span>
             </div>
             <span class="test_scenario_number">VT300-022<br/></span>
@@ -321,7 +323,7 @@
                    onclick="var fname = download_filetolocal(httpServerUrl+'/TestAppWM6.5.cab', 'TestAppWM6.5.cab'); Rho.System.applicationInstall(fname);">WM: Install app from HTTP url</a><br/>
                 <a href="javascript:void(0)"
                    onclick="var fname = download_filetolocal(httpServerUrl+'/TestAppCE.cab', 'TestAppCE.cab'); Rho.System.applicationInstall(fname);">CE: Install app from HTTP url</a>
-                   
+
             </div>
             <span class="test_scenario_number">VT300-063 <br/></span>
         </div>
@@ -403,7 +405,7 @@
                 <a href="javascript:void(0)" onclick="Rho.System.runApplication('rhomobile testApp/testApp.exe','ParamsAreSet');"> call
                     runApplication with application name 'rhomobile testApp/testApp.exe'.</a>
             </div>
-			<span class="test_scenario_number">VT300-064 <br/></span>
+            <span class="test_scenario_number">VT300-064 <br/></span>
         </div>
     </div>
 
@@ -413,7 +415,7 @@
                 <a href="javascript:void(0)" onclick="Rho.System.runApplication('testapp','ParamsAreSet');"> call
                     runApplication with application name 'testapp'.</a>
             </div>
-			<span class="test_scenario_number">VT300-064 <br/></span>
+            <span class="test_scenario_number">VT300-064 <br/></span>
         </div>
     </div>
 
@@ -423,7 +425,227 @@
                 <a href="javascript:void(0)" onclick="Rho.System.runApplication('com.rhomobile.testapp','ParamsAreSet');"> call
                     runApplication with application name 'testapp'.</a>
             </div>
-			<span class="test_scenario_number">VT300-064 <br/></span>
+            <span class="test_scenario_number">VT300-064 <br/></span>
+        </div>
+    </div>
+
+</div>
+
+<div class="method_tests android wm ios">
+    <div class="method_name">Rho.System.sendMessageToApplication</div>
+    <div class="method_desc"> Send Data to Application </div>
+
+    <div class="method_tests wm">
+        <div class="test_scenario">
+            <div class="test_scenario_controls">
+                <a href="javascript:void(0)" onclick="Rho.System.sendApplicationMessage('rhomobile testApp/TestApp.exe', 'param1=hello&param2=123');"> call
+                    sendMessageToApplication with application name 'testapp'.</a>
+            </div>
+	<span class="test_scenario_number">VT300-066 <br/></span>
+        </div>
+    </div>
+
+    <div class="method_tests android">
+        <div class="test_scenario">
+            <div class="test_scenario_controls">
+                <a href="javascript:void(0)" onclick="Rho.System.sendApplicationMessage('com.rhomobile.testapp', false, 'param1=hello&param2=123');"> call
+                    sendMessageToApplication with application name 'testapp'.</a>
+            </div>
+        <span class="test_scenario_number">VT300-066 <br/></span>
+        </div>
+    </div>
+    
+    <div class="method_tests ios">
+        <div class="test_scenario">
+            <div class="test_scenario_controls">
+                <a href="javascript:void(0)" onclick="Rho.System.sendApplicationMessage('testapp', 'param1=hello&param2=123');"> call
+                    sendMessageToApplication with application name 'testapp'.</a>
+            </div>
+        <span class="test_scenario_number">VT300-066 <br/></span>
+        </div>
+    </div>
+<!--
+/*
+ * Application Written By Bhakta
+ *
+ * Application which receive messages is named as target application.
+ * Target App Name : Intent
+ * Target App Location : https://github.com/rhomobile/RMS-Testing/tree/master/manual/other/Intent
+ * Instruction: Before running the test install Intent application on device.
+ *
+ */
+-->
+    <div class="method_tests wm android ios">
+        <div class="test_scenario">
+            <p>send application message to target application when <b>target application is already running</b></p>
+            <p>Run the target application before executing test</p>
+            <p>Rho.System.sendApplicationMessage(appName, 'param1=hello&amp;param2=3')</p>
+            <p class="test_case_expected">The message should be shown on Target App with application name(Click on button getMessage to get the sent message).</p>
+            <h6>JAVASCRIPT</h6>
+            <div class="test_scenario_controls">
+                <a href="javascript:void(0)" onclick="Rho.System.sendApplicationMessage(getAppNameTosendMessage(), 'param1=hello&param2=3');">Send</a>
+            </div>
+            <h6>RUBY</h6>
+            <div class="test_scenario_controls">
+                <a href="javascript:void(0)" onclick="Ruby.call('System','send_message')">Send</a>
+            </div>
+            <span class="test_scenario_number">VT300-<br/></span>
+        </div>
+    </div>
+
+    <div class="method_tests wm android ios">
+        <div class="test_scenario">
+            <p>send application message to target application when <b>target application is not running</b></p>
+            <p>Quit the Target App If Running</p>
+            <p>Rho.System.sendApplicationMessage(appName, 'param1=hello&amp;param2=4')</p>
+            <p class="test_case_expected">The target application should get launched automatically in background(android/wm), for ios app should come to foreground and should receive the message with application name(Click on button getMessage to get the sent message).</p>
+            <h6>JAVASCRIPT</h6>
+            <div class="test_scenario_controls">
+                <a href="javascript:void(0)" onclick="Rho.System.sendApplicationMessage(getAppNameTosendMessage(), 'param1=hello&param2=4');">Send</a>
+            </div>
+            <h6>RUBY</h6>
+            <div class="test_scenario_controls">
+                <a href="javascript:void(0)" onclick="Ruby.call('System','send_message')">Send</a>
+            </div>
+            <span class="test_scenario_number">VT300-<br/></span>
+        </div>
+    </div>
+
+    <div class="method_tests wm android ios">
+        <div class="test_scenario">
+            <p>send normal text to target application</p>
+            <p>Rho.System.sendApplicationMessage(appName,<b>'data=Send an alert to everyone'</b>)</p>
+            <p class="test_case_expected">The message should be shown on Target App with application name(Click on button getMessage to get the sent message).</p>
+            <h6>JAVASCRIPT</h6>
+            <div class="test_scenario_controls">
+                <a href="javascript:void(0)" onclick="Rho.System.sendApplicationMessage(getAppNameTosendMessage(), 'data=Send an alert to everyone');">Send</a>
+            </div>
+            <h6>RUBY</h6>
+            <div class="test_scenario_controls">
+                <a href="javascript:void(0)" onclick="Ruby.call('System','send_text')">Send</a>
+            </div>
+            <span class="test_scenario_number">VT300-<br/></span>
+        </div>
+    </div>
+
+    <div class="method_tests wm android ios">
+        <div class="test_scenario">
+            <p>Send image (base64 encoded data) to target application.</p>
+            <img src='/app/System/solarsystem.jpg' alt="solar system" width='200' height= '200'>
+            <p>Rho.System.sendApplicationMessage(appName, <b>'data=imagedata'</b>)</p>
+            <p class="test_case_expected">Above image should be shown on Target App(Click on button getMessage to get the sent message).</p>
+            <h6>JAVASCRIPT</h6>
+            <div class="test_scenario_controls">
+                <a href="javascript:void(0)" onclick="Rho.System.sendApplicationMessage(getAppNameTosendMessage(), 'image='+getBase64FromImageUrl('solarsystem.jpg'));">Send</a>
+            </div>
+            <h6>RUBY</h6>
+            <div class="test_scenario_controls">
+                <a href="javascript:void(0)" onclick="Ruby.call('System','send_image')">Send</a>
+            </div>
+            <span class="test_scenario_number">VT300-<br/></span>
+        </div>
+    </div>
+
+    <div class="method_tests wm android ios">
+        <div class="test_scenario">
+            <p>Send JSON data to target application</p>
+            <p>Rho.System.sendApplicationMessage(appName, <b>'data=JSON'</b>)</p>
+            <p class="test_case_expected">JSON data should get displayed on target application with sent application name.</p>
+            <h6>JAVASCRIPT</h6>
+            <div class="test_scenario_controls">
+                <a href="javascript:void(0)" onclick="sendJSONStringToTarget();">Send</a>
+            </div>
+            <h6>RUBY</h6>
+            <div class="test_scenario_controls">
+                <a href="javascript:void(0)" onclick="Ruby.call('System','send_hash')">Send</a>
+            </div>
+            <span class="test_scenario_number">VT300-<br/></span>
+        </div>
+    </div>
+
+    <div class="method_tests wm android ios">
+        <div class="test_scenario">
+            <p>Send null as last params in sendApplicationMessage</p>
+            <p>Rho.System.sendApplicationMessage(appName, <b>''</b>)</p>
+            <p class="test_case_expected">message key should have no value in target app or it should return empty string on target app while clicking on getMessage button</p>
+            <h6>JAVASCRIPT</h6>
+            <div class="test_scenario_controls">
+                <a href="javascript:void(0)" onclick="Rho.System.sendApplicationMessage(getAppNameTosendMessage(), '')">Send</a>
+            </div>
+            <h6>RUBY</h6>
+            <div class="test_scenario_controls">
+                <a href="javascript:void(0)" onclick="Ruby.call('System','send_nil')">Send</a>
+            </div>
+            <span class="test_scenario_number">VT300-<br/></span>
+        </div>
+    </div>
+
+    <div class="method_tests wm android ios">
+        <div class="test_scenario">
+            <p>Send a message to target app when app is <b>not available on device</b>.</p>
+            <p>Rho.System.sendApplicationMessage(<b>non_exist_app</b>, 'data=hello')</p>
+            <p class="test_case_expected">The error message(exception) should be thrown when target application is not available so that developer may show alert to download from some where else(may be from app store).</p>
+            <h6>JAVASCRIPT</h6>
+            <div class="test_scenario_controls">
+                <a href="javascript:void(0)" onclick="Rho.System.sendApplicationMessage('non_exist_app', 'data=hello')">Send</a>
+            </div>
+            <h6>RUBY</h6>
+            <div class="test_scenario_controls">
+                <a href="javascript:void(0)" onclick="Ruby.call('System','send_to_nonexist_app')">Send</a>
+            </div>
+            <span class="test_scenario_number">VT300-<br/></span>
+        </div>
+    </div>
+
+    <div class="method_tests wm android ios">
+        <div class="test_scenario">
+            <p>Call <b>Rho.System.getApplicationMessage</b> when nothing has sent to source application.</p>
+            <p class="test_case_expected">It should return null as long as app does not receive any message from any application.</p>
+            <h6>JAVASCRIPT</h6>
+            <div class="test_scenario_controls">
+                <a href="javascript:void(0)" onclick="alert(Rho.System.getApplicationMessage)">Send</a>
+            </div>
+            <h6>RUBY</h6>
+            <div class="test_scenario_controls">
+                <a href="javascript:void(0)" onclick="Ruby.call('System','get_app_message')">Send</a>
+            </div>
+            <span class="test_scenario_number">VT300-<br/></span>
+        </div>
+    </div>
+
+    <div class="method_tests wm android ios">
+        <div class="test_scenario">
+            <p>Get GPS Coordinates from Target Application</p>
+            <p class="test_case_expected">The target application should send GPS coordinates back to the source application. Gps Coordinates should get displayed below. To get GPS corodinate take the device out side and wait for few seconds. If any error thrown, the error should get displayed below.</p>
+            <div class="test_scenario_controls">
+                <a href="javascript:void(0)" onclick="getGPSCoordinates()">Send</a>
+            </div>
+            <div id='geodiv' class='test_case_result'>
+            </div>
+            <span class="test_scenario_number">VT300-<br/></span>
+        </div>
+    </div>
+
+    <div class="method_tests wm android ios">
+        <div class="test_scenario">
+            <p>Scan A Barcode</p>
+            <p class="test_case_expected">Use target app to scan the barcode and returns the scanned data to source app. (The target app should remain at background only on Android and WM)</p>
+            <div class="test_scenario_controls">
+                <a href="javascript:void(0)" onclick="scanBarcode()">Send</a>
+            </div>
+            <div id='scandiv' class='test_case_result'>
+            </div>
+            <span class="test_scenario_number">VT300-<br/></span>
+        </div>
+    </div>
+    <!-- Need to write such test cases for android -->
+    <div class="method_tests wm android ios">
+        <div class="test_scenario">
+            <p>send an Intent to non rhodes app.</p>
+            <div class="test_scenario_controls">
+                <a href="javascript:void(0)" onclick="Rho.System.sendApplicationMessage(getNonRhodesApp(), 'data=hello')">Send</a>
+            </div>
+            <span class="test_scenario_number">VT300-<br/></span>
         </div>
     </div>
 
@@ -490,13 +712,13 @@
     </div>
     <div class="test_scenario">
         <div class="test_scenario_controls">
-Check before partial update :<br>
-- open BundleTest page, follow instructions<br>
-            
+            Check before partial update :<br>
+            - open BundleTest page, follow instructions<br>
+
             <a href="javascript:void(0)" onclick="callupdateCurrentBundle();">call replaceCurrentBundle with partial update</a>
-<br>Check after partial update :<br>
-- open BundleTest page, follow instructions<br>
-            
+            <br>Check after partial update :<br>
+            - open BundleTest page, follow instructions<br>
+
         </div>
         <span class="test_scenario_number">VT300-080<br/></span>
     </div>
@@ -684,7 +906,7 @@ Check before partial update :<br>
                 <a href="javascript:void(0)" onclick="callgetProperty('screenAutoRotate');">Get Property
                     screenAutoRotate</a>
             </div>
-			<span class="test_scenario_number">VT300-115 / VT300-116<br/></span>
+            <span class="test_scenario_number">VT300-115 / VT300-116<br/></span>
         </div>
         <div class="test_scenario">
             <div class="test_scenario_controls">
@@ -709,7 +931,7 @@ Check before partial update :<br>
                 <a href="javascript:void(0)" onclick="callgetProperty('screenSleeping');">Get Property
                     screenSleeping</a>
             </div>
-			<span class="test_scenario_number">VT300-119 / VT300-120 <br/></span>	
+            <span class="test_scenario_number">VT300-119 / VT300-120 <br/></span>
         </div>
     </div>
 
@@ -803,15 +1025,15 @@ Check before partial update :<br>
             </div>
         </div>
     </div>
-	<div class="method_tests android ios win32 wm wp8">
-		<div class="test_scenario">
-			<div class="test_scenario_controls">
-				<a href="javascript:void(0)" onclick="callgetProperties('screenOrientation');">call getproperties with
-					screenOrientation</a>
-			</div>
-			<span class="test_scenario_number">VT300-174/VT300-175 <br/></span>
-		</div>
-	</div>
+    <div class="method_tests android ios win32 wm wp8">
+        <div class="test_scenario">
+            <div class="test_scenario_controls">
+                <a href="javascript:void(0)" onclick="callgetProperties('screenOrientation');">call getproperties with
+                    screenOrientation</a>
+            </div>
+            <span class="test_scenario_number">VT300-174/VT300-175 <br/></span>
+        </div>
+    </div>
     <div class="method_tests android ios">
         <div class="test_scenario">
             <div class="test_scenario_controls">
@@ -834,7 +1056,7 @@ Check before partial update :<br>
                 <a href="javascript:void(0)" onclick="callgetProperties('screenSleeping');">Get Properties
                     screenSleeping</a>
             </div>
-			<span class="test_scenario_number">VT300-178 / VT300-178 <br/></span>
+            <span class="test_scenario_number">VT300-178 / VT300-178 <br/></span>
         </div>
     </div>
 

@@ -168,4 +168,52 @@ class SystemController < Rho::RhoController
       render :action => :index
   end
 
+  def getAppName
+    appName = ''
+    case Rho::System.platform
+    when "APPLE"
+      appName = "Intent"
+    when "WINDOWS"
+      appName = "rhomobile Intent/Intent.exe"
+    when "ANDROID"
+      appName = "com.rhomobile.intent"
+    when "WINDOWS_DESKTOP"
+      appName = "rhomobile Intent/Intent.exe"
+    end
+    appName
+  end
+
+  def send_message
+    Rho::System.sendApplicationMessage getAppName, 'ruby=true&data=how are you'
+  end
+
+  def send_text
+    Rho::System.sendApplicationMessage getAppName, 'ruby=true&param1=how are you&param2=bye bye'
+  end
+
+  def send_image
+    image_data = Base64.encode64(File.read("file_path"))
+    Rho::System.sendApplicationMessage getAppName,'image='+image_data
+  end
+
+  def send_hash
+    Rho::System.sendApplicationMessage getAppName,'data={:Users => [{:Name => "user999",:Value => "test"},{:Name => "test2",:Value =>"test"}]}'
+  end
+
+  def send_nil
+    Rho::System.sendApplicationMessage getAppName,nil
+  end
+
+  def send_to_nonexist_app
+    Rho::System.sendApplicationMessage 'non_exist_app', 'ruby=true&data=how are you'
+  end
+
+  def get_app_message
+      message = Rho::System.getApplicationMessage
+      propertyMap = {:message => message, 
+                     :buttons => [{:id => 'ok', :title => 'Ok'}
+            ]};
+      Rho.Notification.showPopup(propertyMap);
+  end
+
 end

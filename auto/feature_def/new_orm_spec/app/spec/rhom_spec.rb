@@ -58,22 +58,6 @@ describe "Rhom" do
     Rhom::Rhom.have_local_changes.should be_false
   end
 
-
-  # it "should get count of objects" do
-  #   Product.count.should == 0
-  #   Product.create({"name" => "test","brand" => "android"})
-  #   Product.count.should == 1 # error in neworm
-  # end
-
-  # it "list of properties supported by instance of object" do
-  #   @product = Product.create({"name" => "test","brand" => "android"})
-  #   puts "---------- Properties ..."
-  #   puts @product.inspect
-  #   puts @product.partition
-
-  #   "one".should == 'one'
-  # end
-
   # it("VT302-0063 | call databaseLocalReset without having any local model | Should not removed data from synced database",function(){
   #       var db = Rho.ORMHelper.dbConnection("user");
   #       db.$execute_sql("INSERT INTO CLIENT_INFO (client_id) VALUES(7)");
@@ -186,11 +170,12 @@ describe "Rhom" do
     #     Rho.ORM.clear();
     # });
 
+
   # Original Rhom specs
   # - 1
-  it "should database_full_reset_ex incorrectly and raise an exception" do
-    exc = false
+  it "should raise an exception if database_full_reset_ex called incorrectly" do
     begin
+      exc = false
       Rhom::Rhom.database_full_reset_ex( :models => ['Product'], :reset_client_info => true )
     rescue => e
       exc = true
@@ -200,7 +185,7 @@ describe "Rhom" do
   end
 
   # - 2
-  it "should database_full_reset_ex support different parameters" do
+  it "should support different parameters for database_full_reset_ex method" do
     # neworm: undefined method `database_full_reset_ex'
     Rhom::Rhom.database_full_reset_ex
     Rhom::Rhom.database_full_reset_ex( :reset_client_info => true )
@@ -209,49 +194,33 @@ describe "Rhom" do
   end
 
   # - 3
-  it "should database_full_reset_ex with models" do
-
+  it "should  delete all objects for given models" do
     Product.create( { :name => 'prod1' } )
     Customer.create( { :city => 'SPB' } )
 
-    res = Product.find(:all)
-    # neworm: returns 0
-    res.length.should > 0
-
-    res = Customer.find(:count)
-    res.should > 0
+    Product.find(:all).length.should > 0
+    Customer.find(:count).should > 0
 
     Rhom::Rhom.database_full_reset_ex( :models => ['Product', 'Customer'] )
     Rho::RhoConfig.reset_models.should == 'Product,Customer'
 
-    res = Product.find(:all)
-    res.length.should == 0
-
-    res = Customer.find(:count)
-    res.should == 0
+    Product.find(:all).length.should == 0
+    Customer.find(:count).should == 0
   end
 
   # - 4
-  it "should database_full_reset_ex with one model" do
-
+  it "should  delete all objects for a given model" do
     Product.create( { :name => 'prod1' } )
     Customer.create( { :city => 'SPB' } )
 
-    res = Product.find(:all)
-    # neworm: returns 0
-    res.length.should > 0
-
-    res = Customer.find(:count)
-    res.should > 0
+    Product.find(:all).length.should > 0
+    Customer.find(:count).should > 0
 
     Rhom::Rhom.database_full_reset_ex( :models => ['Product'] )
     Rho::RhoConfig.reset_models.should == 'Product'
 
-    res = Product.find(:all)
-    res.length.should == 0
-
-    res = Customer.find(:count)
-    res.should > 0
+    Product.find(:all).length.should == 0
+    Customer.find(:count).should > 0
   end
 
 end
