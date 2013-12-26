@@ -41,72 +41,6 @@ describe("Barcode Manual Test", function() {
 
 				//  Able to Disconnect Trigger
 				//  Able to Reconnect Trigger
-				it("is able to disconnect the trigger of an enabled Scanner (WM/CE Only)", function() {
-
-					runs(function()
-					{
-						setObjective("is able to disconnect the trigger of an enabled Scanner (WM/CE Only)");
-						setInstruction("Instruction to user: Please wait 9 seconds");
-						objSCN.enable({},callbackenable);
-						setTimeout(function() {
-							enableFlag = true;
-						}, ENABLE8K);
-					});
-
-					waitsFor(function()
-					{
-						return enableFlag;
-					}, '2sec wait to enable the Scanner', 9000);
-
-					runs(function()
-					{
-						setInstruction("Press Hardware Trigger button");
-						setExpected("Do NOT expect to see a laser beam");
-						objSCN.setProperty("triggerConnected", "false");
-						var connectedState = objSCN.getProperty("triggerConnected");
-						expect(connectedState).toEqual("false");
-						waitsFor(function() {
-						return document.getElementById("actResult").innerHTML != "init";
-						}, "Timed out waiting for tester to respond", 300000);
-						runs(function() {
-						expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-						});
-					});
-				});	
-
-				it("is able to reconnect the disconnected trigger of an enabled Scanner (WM/CE Only)", function() {
-
-					runs(function()
-					{
-						setObjective("is able to reconnect the disconnected trigger of an enabled Scanner (WM/CE Only)");
-						objSCN.enable({},callbackenable);
-						setInstruction("Instruction to user: Please wait 9 seconds");
-						setTimeout(function() {
-							enableFlag = true;
-						}, ENABLE8K);
-					});
-
-					waitsFor(function()
-					{
-						return enableFlag;
-					}, '2sec wait to enable the Scanner', 9000);
-
-					runs(function()
-					{
-						setInstruction("Press Hardware Trigger button");
-						setExpected("Expect to see a laser beam");
-						objSCN.setProperty("triggerConnected", "false");
-						objSCN.setProperty("triggerConnected", "true");
-						var connectedState = objSCN.getProperty("triggerConnected");
-						expect(connectedState).toEqual("true");
-						waitsFor(function() {
-						return document.getElementById("actResult").innerHTML != "init";
-						}, "Timed out waiting for tester to respond", 300000);
-						runs(function() {
-						expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-						});
-					});
-				});		
 
 				it("VT282-1762 | Enable with callback as function |" + scnid + scntype , function() {
 
@@ -133,6 +67,7 @@ describe("Barcode Manual Test", function() {
 						}, "Timed out waiting for tester to respond", 300000);
 						runs(function() {
 						expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+						objSCN.disable();
 						});
 					});
 				});
@@ -1503,6 +1438,400 @@ describe("Barcode Manual Test", function() {
 						});
 					});
 				});
+
+//Added Test for property "triggerConnected" in 4.1
+				if(isWindowsMobilePlatform()){
+
+					it("disconnect the trigger of an enabled Scanner", function() {
+
+						runs(function()
+						{
+							setObjective("disconnect the trigger after scanner is enabled (WM/CE Only)");
+							setInstruction("Instruction to user: Please wait 9 seconds");
+							objSCN.enable({},callbackenable);
+							setTimeout(function() {
+								enableFlag = true;
+							}, ENABLE8K);
+						});
+
+						waitsFor(function()
+						{
+							return enableFlag;
+						}, '2sec wait to enable the Scanner', 9000);
+
+						runs(function()
+						{
+							setInstruction("Press Hardware Trigger button");
+							setExpected("Scanner beam should not comeup");
+							objSCN.setProperty("triggerConnected", "false");
+							//var connectedState = objSCN.getProperty("triggerConnected");
+							//expect(connectedState).toEqual("false"); // covered in Auto Spec
+							waitsFor(function() {
+							return document.getElementById("actResult").innerHTML != "init";
+							}, "Timed out waiting for tester to respond", 300000);
+							runs(function() {
+							expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+							//objSCN.disable();
+							});
+						});
+					});	
+
+					it("Re-connect the trigger of an enabled Scanner", function() {
+
+						runs(function()
+						{
+							setObjective("Re-connect the trigger of an enabled Scanner");
+							setInstruction("Press Hardware Trigger button");
+							setExpected("Scanner beam should comeup and scan successful");
+							objSCN.setProperty("triggerConnected", "true");
+							setTimeout(function() {
+								enableFlag = true;
+							}, ENABLE1K);
+						});
+
+						waitsFor(function()
+						{
+							return enableFlag;
+						}, '2sec wait to enable the Scanner', 2000);
+
+						runs(function()
+						{
+							//var connectedState = objSCN.getProperty("triggerConnected");
+							//expect(connectedState).toEqual("true"); // Covered in Auto Spec
+
+							waitsFor(function() {
+							return document.getElementById("actResult").innerHTML != "init";
+							}, "Timed out waiting for tester to respond", 300000);
+							runs(function() {
+							expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+							objSCN.setProperty("triggerConnected", "false");
+							alert("hi");
+							objSCN.disable();
+							});
+
+						});
+					});	
+
+					it("re-enable the scanner after disabling the trigger", function() {
+
+						runs(function()
+						{
+							setObjective("re-enable the scanner after disabling the trigger");
+							setInstruction("Press Hardware Trigger button");
+							setExpected("Scanner beam should comeup and scan successful");
+							objSCN.enable({},callbackenable);
+							setTimeout(function() {
+								enableFlag = true;
+							}, ENABLE8K);
+						});
+
+						waitsFor(function()
+						{
+							return enableFlag;
+						}, '8sec wait to enable the Scanner', 9000);
+
+						runs(function()
+						{
+							waitsFor(function() {
+							return document.getElementById("actResult").innerHTML != "init";
+							}, "Timed out waiting for tester to respond", 300000);
+							runs(function() {
+							expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+							objSCN.disable();
+							});
+						});
+					});	
+
+					it("disconnect the trigger when scanner disabled", function() {
+
+						runs(function()
+						{
+							setObjective("disconnect the trigger when scanner disabled");
+							setInstruction("Press Hardware Trigger button");
+							setExpected("Scanner beam should comeup");
+							objSCN.setProperty("triggerConnected", "false");
+							objSCN.enable({},callbackenable);
+							setTimeout(function() {
+								enableFlag = true;
+							}, ENABLE8K);
+						});
+
+						waitsFor(function()
+						{
+							return enableFlag;
+						}, '2sec wait to enable the Scanner', 9000);
+
+						runs(function()
+						{
+							waitsFor(function() {
+							return document.getElementById("actResult").innerHTML != "init";
+							}, "Timed out waiting for tester to respond", 300000);
+							runs(function() {
+							expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+							objSCN.disable();							
+							});
+						});
+					});		
+
+					it("set triggerConnected as true after scanner disable", function() {
+
+						runs(function()
+						{
+							setObjective("set triggerConnected as true after scanner disable");
+							setInstruction("wait for 9 sec and Press Hardware Trigger button");
+							setExpected("Scanner beam should not comeup");
+							objSCN.setProperty("triggerConnected", "true");
+							//objSCN.enable({},callbackenable);
+							setTimeout(function() {
+								enableFlag = true;
+							}, ENABLE8K);
+						});
+
+						waitsFor(function()
+						{
+							return enableFlag;
+						}, '2sec wait to enable the Scanner', 9000);
+
+						runs(function()
+						{
+							waitsFor(function() {
+							return document.getElementById("actResult").innerHTML != "init";
+							}, "Timed out waiting for tester to respond", 300000);
+							runs(function() {
+							expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+							objSCN.disable();
+							});
+						});
+					});		
+
+					it("call start after setting triggerConnected as false", function() {
+
+						runs(function()
+						{
+							setObjective("call start after setting triggerConnected as false");
+							setInstruction("wait for 9 sec and don't Press Hardware Trigger button");
+							setExpected("Scanner beam should comeup automatically");
+							objSCN.enable({},callbackenable);
+							setTimeout(function() {
+								enableFlag = true;
+							}, ENABLE8K);
+						});
+
+						waitsFor(function()
+						{
+							return enableFlag;
+						}, '9sec wait to enable the Scanner', 9000);
+
+						runs(function()
+						{
+							objSCN.setProperty("triggerConnected", "false");
+							objSCN.start();
+							waitsFor(function() {
+							return document.getElementById("actResult").innerHTML != "init";
+							}, "Timed out waiting for tester to respond", 300000);
+							runs(function() {
+							expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+							objSCN.disable();
+							});
+
+						});
+					});		
+
+					it("call captureTrigger after setting triggerConnected as false", function() {
+
+						runs(function()
+						{
+							setObjective("call captureTrigger after setting triggerConnected as false");
+							setInstruction("wait for 9 sec and Press Hardware Trigger button");
+							setExpected("Scanner beam should not comeup and trigger value of should be shown");
+							objSCN.enable({},callbackenable);
+							setTimeout(function() {
+								enableFlag = true;
+							}, ENABLE8K);
+						});
+
+						waitsFor(function()
+						{
+							return enableFlag;
+						}, '9sec wait to enable the Scanner', 9000);
+
+						runs(function()
+						{
+							objSCN.setProperty("triggerConnected", "false");
+							Rho.KeyCapture.captureTrigger(function(data){alert(data.triggerFlag);});
+							waitsFor(function() {
+							return document.getElementById("actResult").innerHTML != "init";
+							}, "Timed out waiting for tester to respond", 300000);
+							runs(function() {
+							expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+							objSCN.disable();
+							Rho.KeyCapture.captureTrigger();							
+							});
+						});
+					});		
+
+					it("scan multiple times after triggerConnected as true", function() {
+
+						runs(function()
+						{
+							setObjective("scan multiple times after triggerConnected as true");
+							setInstruction("wait for 9 sec and Press Hardware Trigger button and scan (repeat this 4-5 times)");
+							setExpected("Scanner beam should comeup and scan everytime successfully");
+							objSCN.enable({},callbackenable);
+							setTimeout(function() {
+								enableFlag = true;
+							}, ENABLE8K);
+						});
+
+						waitsFor(function()
+						{
+							return enableFlag;
+						}, '9sec wait to enable the Scanner', 9000);
+
+						runs(function()
+						{
+							objSCN.setProperty("triggerConnected", "false");
+							objSCN.setProperty("triggerConnected", "true");
+							waitsFor(function() {
+							return document.getElementById("actResult").innerHTML != "init";
+							}, "Timed out waiting for tester to respond", 300000);
+							runs(function() {
+							expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+							objSCN.disable();
+							});
+						});
+					});
+
+					it("call triggerConnected as true after enabling scanner", function() {
+
+						runs(function()
+						{
+							setObjective("call triggerConnected as true after enabling scanner");
+							setInstruction("wait for 9 sec and Press Hardware Trigger button");
+							setExpected("Scanner beam should comeup and scan should be successfully");
+							objSCN.enable({},callbackenable);
+							setTimeout(function() {
+								enableFlag = true;
+							}, ENABLE8K);
+						});
+
+						waitsFor(function()
+						{
+							return enableFlag;
+						}, '9sec wait to enable the Scanner', 9000);
+
+						runs(function()
+						{
+							objSCN.setProperty("triggerConnected", "true");
+							waitsFor(function() {
+							return document.getElementById("actResult").innerHTML != "init";
+							}, "Timed out waiting for tester to respond", 300000);
+							runs(function() {
+							expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+							objSCN.disable();							
+							});
+						});
+					});	
+
+					it("triggerConnected as false with application minimize", function() {
+
+						runs(function()
+						{
+							setObjective("triggerConnected as false with application minimize");
+							setInstruction("wait for 9 sec and Press Hardware Trigger button then minimize the app and restore it after 5 sec and press trigger again");
+							setExpected("Scanner beam should not comeup after restore the application also");
+							objSCN.enable({"triggerConnected":false},callbackenable);
+							setTimeout(function() {
+								enableFlag = true;
+							}, ENABLE8K);
+						});
+
+						waitsFor(function()
+						{
+							return enableFlag;
+						}, '9sec wait to enable the Scanner', 9000);
+
+						runs(function()
+						{
+							//objSCN.setProperty("triggerConnected", "false");
+
+							waitsFor(function() {
+							return document.getElementById("actResult").innerHTML != "init";
+							}, "Timed out waiting for tester to respond", 300000);
+							runs(function() {
+							expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+							objSCN.disable();							
+							});
+
+						});
+					});	
+
+					it("triggerConnected as false with device suspend", function() {
+
+						runs(function()
+						{
+							setObjective("triggerConnected as false with device suspend");
+							setInstruction("wait for 9 sec and Press Hardware Trigger button then suspend the device and resume it after 5 sec and press trigger again");
+							setExpected("Scanner beam should not comeup after restore the application also");
+							objSCN.enable({},callbackenable);
+							setTimeout(function() {
+								enableFlag = true;
+							}, ENABLE8K);
+						});
+
+						waitsFor(function()
+						{
+							return enableFlag;
+						}, '9sec wait to enable the Scanner', 9000);
+
+						runs(function()
+						{
+							objSCN.setProperty("triggerConnected", "false");
+
+							waitsFor(function() {
+							return document.getElementById("actResult").innerHTML != "init";
+							}, "Timed out waiting for tester to respond", 300000);
+							runs(function() {
+							expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+							objSCN.disable();							
+							});
+						});
+					});	
+
+					it("triggerConnected as false with application background to foreground", function() {
+
+						runs(function()
+						{
+							setObjective("triggerConnected as false with application background to foreground");
+							setInstruction("wait for 9 sec and Press Hardware Trigger button then send the app to background and bring back to foreground after 5 sec and press trigger again");
+							setExpected("Scanner beam should not comeup after restore the application also");
+							objSCN.enable({},callbackenable);
+							setTimeout(function() {
+								enableFlag = true;
+							}, ENABLE8K);
+						});
+
+						waitsFor(function()
+						{
+							return enableFlag;
+						}, '9sec wait to enable the Scanner', 9000);
+
+						runs(function()
+						{
+							objSCN.setProperty("triggerConnected", "false");
+
+							waitsFor(function() {
+							return document.getElementById("actResult").innerHTML != "init";
+							}, "Timed out waiting for tester to respond", 300000);
+							runs(function() {
+							expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+							objSCN.disable();							
+							});
+						});
+					});	
+
+				}
+
 			});	
 		})(enumData[j]);
 	}
