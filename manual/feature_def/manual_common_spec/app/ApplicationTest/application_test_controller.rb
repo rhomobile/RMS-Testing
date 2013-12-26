@@ -90,8 +90,8 @@ class ApplicationTestController < Rho::RhoController
           end
           timestr = hr + ":" + mn + ":" + sc
 
-          @data = "<li><ul>Event: " + @params['applicationEvent'].to_s + "<li>Time: " + timestr +"</li></ul></li>"
-
+          @data = "<li><ul>Time: " + timestr + "<li>Event: " + @params['applicationEvent'].to_s + "</li><li>eventData: " + @params['eventData'].to_s + "</li></ul></li>"
+          
           Rho::WebView.execute_js("applicationNotify(\"#{@data}\");")
   end
   
