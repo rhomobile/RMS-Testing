@@ -8,7 +8,8 @@ build: "release"
 bbver: 4.6
 applog: "rholog.txt"
 capabilities:
-  - pim
+- pim
+- vibrate
 iphone:
   configuration: "Release"
   sdk: "iphonesimulator6.1"

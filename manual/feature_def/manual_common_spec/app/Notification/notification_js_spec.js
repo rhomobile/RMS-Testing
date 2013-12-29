@@ -272,6 +272,107 @@ describe("Notification Manual FD Tests", function () {
         });
     }
 
+    if (Rho.System.platform == "ANDROID") {
+        it("showStatus from background", function() {
+            runs(function () {
+                dispTestCaseRunning(" minimize application, showStatus from background after 3 sec");
+                dispExpectedResult(" see if toast is showing the message for short time, then you need switch to application back manually and check status dialog");
+            });
+            runs(function() {
+                Rho.Application.minimize();
+                setTimeout(function() {
+                     Rho.Notification.showStatus(null, "This is a status message", "Confirm");
+                }, 3000);
+            });
+            waitsFor(function() {
+                dispExpectedResult(" see if toast is showing the message for short time, then you need switch to application back manually and check status dialog");
+                return captured;
+            }, 'The toast should be shown and status pop-up displayed over restored application', 30000);
+            runs(function () {
+                expect(testResult).toEqual(true);
+            });
+        });
+        it("showPopup from background 1 (Android 4.1 and above)", function() {
+            runs(function () {
+                dispTestCaseRunning(" minimize application, showPopup with 3 buttons from background after 3 sec");
+                dispExpectedResult(" see if toast is showing the message for short time, then notification area for the message, press 'Ok' button. No dialog should be displayed in restored application since notification button is pressed.");
+            });
+            runs(function() {
+                Rho.Application.minimize();
+                setTimeout(function() {
+                    Rho.Notification.showPopup({
+                        title:"showPopup from background 1",
+                        message:"Touch 'Ok' button to restore test application",
+                        icon: "info",
+                        buttons: [{id:"accept", title:"Ok"},{id:"cancel",title:"Cancel"},{id:"other", title:"Suspend"}],
+                        kinds: ['notificationDialog', 'toast']
+                    }, function(params) {
+                        Rho.Application.restore();
+                    });
+                }, 3000);
+            });
+            waitsFor(function() {
+                dispExpectedResult(" see if toast is showing the message for short time, then notification area for the message, press 'Ok' button. NO dialog should be displayed in restored application since notification button is pressed.");
+                return captured;
+            }, 'The toast should be shown and notification message with 3 buttons should be shown', 30000);
+            runs(function () {
+                expect(testResult).toEqual(true);
+            });
+        });   
+        it("showPopup from background 2", function() {
+            runs(function () {
+                dispTestCaseRunning(" minimize application, showPopup with 3 buttons at Android 4.1 and above from background after 3 sec");
+                dispExpectedResult(" see if toast is showing the message for short time, then notification area for the message, touch the message above buttons. Dialog should be displayed in restored application.");
+            });
+            runs(function() {
+                Rho.Application.minimize();
+                setTimeout(function() {
+                    Rho.Notification.showPopup({
+                        title:"showPopup from background 2",
+                        message:"Touch the message to see dialog in test application. DO NOT touch buttons here.",
+                        icon: "info",
+                        buttons: [{id:"accept", title:"Ok"},{id:"cancel",title:"Cancel"},{id:"other", title:"Suspend"}],
+                        kinds: ['notificationDialog', 'toast']
+                    }, function(params) {
+                    });
+                }, 3000);
+            });
+            waitsFor(function() {
+                dispExpectedResult(" see if toast is showing the message for short time, then notification area for the message, touch the message above buttons. Dialog should be displayed in restored application.");
+                return captured;
+            }, 'The toast should be shown and notification message with 3 buttons should be shown', 30000);
+            runs(function () {
+                expect(testResult).toEqual(true);
+            });
+        });   
+        it("showPopup without dialog and with notification message and toast from background", function() {
+            runs(function () {
+                dispTestCaseRunning(" minimize application, showPopup notification and toast after 3 sec");
+                dispExpectedResult(" see if toast is showing the message for short time, then notification area for the message, touch the message to restore application. NO dialog should be displayed in restored application since no 'dialog' kind parameter was passed");
+            });
+            runs(function() {
+                Rho.Application.minimize();
+                setTimeout(function() {
+                    Rho.Notification.showPopup({
+                        title:"showPopup without dialog",
+                        message:"Touch this message to restore test application",
+                        icon: "info",
+                        kinds: ['notification', 'toast']
+                    }, function(params) {
+                    });
+                }, 3000);
+            });
+            waitsFor(function() {
+                dispExpectedResult(" see if toast is showing the message for short time, then notification area for the message, touch the message to restore application. NO dialog should be displayed in restored application since no 'dialog' kind parameter was passed");
+                return captured;
+            }, 'The toast should be shown and notification message without buttons should be shown', 30000);
+            runs(function () {
+                expect(testResult).toEqual(true);
+            });
+        });
+    }
+
+
     if (Rho.System.platform == "WINDOWS_DESKTOP" || Rho.System.isRhoSimulator) {
     } else 
     {
