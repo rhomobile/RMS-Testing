@@ -1,0 +1,24 @@
+#sdk: "C:/MotorolaRhoMobileSuite4.1.0.beta.12/ruby/lib/ruby/gems/1.9.1/gems/rhodes-4.1.0.beta.12"
+sdkversion: 4.1.0
+name: JS_Printing
+version: 1.0
+vendor: rhomobile
+build: debug
+bbver: 6.0
+applog: rholog.txt
+iphone:
+  configuration: Release
+  sdk: iphonesimulator7.0
+  provisionprofile:
+  codesignidentity: iPhone Developer
+  entitlements: ""
+  BundleIdentifier: com.rhomobile.jsprinting
+  BundleURLScheme: jsprinting
+wp:
+  productid: 'd9374b90-535a-0131-f10e-707d68d30f4a'
+symbian:
+  uid: '0xe5d7c9fe'
+android:
+  version: 2.3.3
+
+extensions: ["rhoconnect-client"]

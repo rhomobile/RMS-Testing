@@ -1,7 +1,7 @@
 #sdk: c:/work/rhodes
 app_type: "rhoelements"
 sdkversion: "3.5.0"
-name: "manual_common_spec"
+name: "manual_common_spec_beta12"
 version: 1.0
 vendor: "rhomobile"
 build: "release"
