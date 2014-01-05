@@ -114,6 +114,7 @@ var dispExpectedResult= function (data){
 }
 
 var dispTestCaseRunning = function (data){
+    data = nl2br(data);
 	document.getElementById('instruction').innerHTML = data;
 }
 
@@ -182,7 +183,7 @@ var captureResult = function(status){
 
 var _result = {
 	status: undefined,
-	time_to_wait: 30000,
+	time_to_wait: 300000,
 	responded: undefined,
 	passed: function(){
 		_result.status = true;
@@ -196,6 +197,13 @@ var _result = {
 		_result.status = undefined;
 		_result.responded = undefined;
 	},
+    runTest: function(){
+        _result.responded = true;
+        $('#pass').show();
+        $('#fail').show();
+        $('#runtest').hide();
+
+    },
 	waitForResponse: function(){
 		var timeout = false;
 		var responded = false;
@@ -216,10 +224,37 @@ var _result = {
 			{
 				expect(true).toEqual(_result.status);
 			});
-	}
+	},
+    waitToRunTest: function(){
+        runs(function()
+        {
+            $('#pass').hide();
+            $('#fail').hide();
+            $('#runtest').show();
+            setTimeout(function() {
+                timeout = true;
+            }, _result.time_to_wait);
+        });
+
+        waitsFor(function()
+        {
+            if(_result.responded == true)
+                return true;
+        }, 'waiting for user response', _result.time_to_wait+5000);
+
+        runs(function()
+        {
+            _result.responded = undefined;
+        });
+    }
 }
 
 beforeEach(function() {
     _result.reset();
     //document.getElementById("myList").innerHTML = '';
 });
+
+function nl2br (str, is_xhtml) {   
+    var breakTag = (is_xhtml || typeof is_xhtml === 'undefined') ? '<br />' : '<br>';    
+    return (str + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1'+ breakTag +'$2');
+}
