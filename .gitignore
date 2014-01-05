@@ -7,7 +7,10 @@ rhosimulator/
 .idea
 /*/*/*/extensions/*/ext/platform/iphone/build/
 /*/*/*/extensions/*/ext/platform/iphone/impl/readme.txt
-/*/*/*/extensions/*/ext/platform/iphone/*.xcodeproj/xcuserdata
+/*/*/*/extensions/*/ext/platform/iphone/*.xcodeproj/xcuserdata/
+/*/*/*/project/*/Rhodes/build/
+/*/*/*/project/*/build/
+/*/*/*/project/iphone/*.xcodeproj/xcuserdata
 rholog.txt
 rhoapi-modules.js
 server_url.js
@@ -17,5 +20,4 @@ TODO
 *.xml
 *.sh
 sim-public*
-*/feature_def/*/project/*/Rhodes/build/
-*/feature_def/*/project/*/build/
+
