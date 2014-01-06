@@ -28,8 +28,9 @@ var macipaddress = '';
 var captured = false;
 var errmsg = '';
 
-var audioMediaPath = Rho.RhoFile.join(Rho.Application.modelFolderPath('Printing'), "Printing/Audio");
-var videoMediaPath = Rho.RhoFile.join(Rho.Application.modelFolderPath('Printing'), "Printing/Video");
+//var audioMediaPath = Rho.RhoFile.join(Rho.Application.modelFolderPath('Printing'), "Printing_Files/Audio");
+var videoMediaPath = Rho.RhoFile.join(Rho.Application.modelFolderPath('Printing'), "Printing_Files/Video");
+var filesMediaPath = Rho.RhoFile.join(Rho.Application.modelFolderPath('Printing'), "Printing_Files/Files");
 
 
 function getkeys(obj) {
@@ -63,13 +64,15 @@ function ringtoneCallback(arguments) {
 
 function searchPrintersNow() {
 	if (!connect_type) {
+		/* Need to add get property for connection type
     	$('#test').css("display", "block");
     	setTimeout(function () {
             $('#test').onchange(function()
             	connect_type = $("#connection_type").val();
             	$('#test').css("display", "none");
             });
-        }, 5000);
+        }, 10000);*/
+        connect_type = Rho.Printer.connectionType;
     }
 	Rho.Printer.searchPrinters({"printerType":Printer.PRINTER_TYPE_ANY, "connectionType":connect_type}, searchPrinterCallback);	
 }
@@ -112,6 +115,22 @@ function connectCallback(stat_us) {
 
 function disconnectCallback(stat_us) {
 	displayTestResults(stat_us, printers, "");
+}
+
+function printFileCallback(stat_us) {
+	if (stat_us.status) {
+		displayTestResults(stat_us.status, printers, "Printing your file... ");
+	} else {
+		displayTestResults(stat_us, printers, "Printing your file... ");
+	}
+}
+
+function printRawStringCallback() {
+	if (stat_us.status) {
+		displayTestResults(stat_us.status, printers, "Printing your file... ");
+	} else {
+		displayTestResults(stat_us, printers, "Printing your file... ");
+	}
 }
 
 /*
@@ -260,13 +279,7 @@ describe("Printing", function () {
             displayTestExpectation("The printer connected with the device should be discovered successfully and return STATUS_SUCCESS.");
             
             runs(function () {
-            	$('#test').css("display", "block");
-            	setTimeout(function () {
-                    $('#test').onchange(function()
-                    	connect_type = $("#connection_type").val();
-                    	$('#test').css("display", "none");
-                    });
-                }, 5000);
+            	connect_type = Rho.Printer.connectionType;
             	Rho.Printer.searchPrinters({"printerType":Printer.PRINTER_TYPE_ANY, "connectionType":connect_type}, searchPrinterCallback);
             });
             
@@ -306,13 +319,7 @@ describe("Printing", function () {
             
             runs(function () {
             	if (!connect_type) {
-	            	$('#test').css("display", "block");
-	            	setTimeout(function () {
-	                    $('#test').onchange(function()
-	                    	connect_type = $("#connection_type").val();
-	                    	$('#test').css("display", "none");
-	                    });
-	                }, 5000);
+            		connect_type = Rho.Printer.connectionType;
 	            }
             	Rho.Printer.searchPrinters({"printerType":Printer.PRINTER_TYPE_ANY, "connectionType":connect_type, "timeout":15000}, searchPrinterCallback);
             });
@@ -344,13 +351,7 @@ describe("Printing", function () {
             
             runs(function () {
             	if (!connect_type) {
-	            	$('#test').css("display", "block");
-	            	setTimeout(function () {
-	                    $('#test').onchange(function()
-	                    	connect_type = $("#connection_type").val();
-	                    	$('#test').css("display", "none");
-	                    });
-	                }, 5000);
+            		connect_type = Rho.Printer.connectionType;
 	            }
             	Rho.Printer.searchPrinters({"timeout":15000}, searchPrinterCallback);
             });
@@ -433,13 +434,7 @@ describe("Printing", function () {
             	$('#address').css("display", "none");
             	macipaddress = $('#macip').val();
             	if (!connect_type) {
-	            	$('#test').css("display", "block");
-	            	setTimeout(function () {
-	                    $('#test').onchange(function()
-	                    	connect_type = $("#connection_type").val();
-	                    	$('#test').css("display", "none");
-	                    });
-	                }, 5000);
+            		connect_type = Rho.Printer.connectionType;
 	            }
             	Rho.Printer.searchPrinters({"printerType":Printer.PRINTER_TYPE_ANY, "connectionType":connect_type, "timeout":15000, "deviceAddress":macipaddress}, searchPrinterCallback);
             });
@@ -1215,7 +1210,7 @@ describe("Printing", function () {
             
             runs(function () {
             	var printer = Rho.Printer.getPrinterByID(printers[0].printerID);
-            	printer.disconnect();
+            	printer.disconnect(disconnectCallback);
             	printer.connect(connectCallback);
             	if (printer.isConnected || printer.isReadyToPrint)
 				{
@@ -1233,5 +1228,1006 @@ describe("Printing", function () {
                 expect(testResult).toEqual(true);
             });
         });
+        
+        it("VTXXX-0036-printFile Method (without callback function) ", function () {
+        	printers  = [];
+            displayTestDescription("VTXXX-0036 | printFile Method (without callback function) ");
+            displayTestInstruction("");
+            displayTestExpectation("The file should be sent successfully to the printer.");
+            
+            runs(function () {
+            	// Let the printer be search first then use stop
+            	searchPrintersNow();
+            });
+            
+            waitsFor(function () {
+                return true;
+            }, 'Searching for Printers....', 5000);
+            
+            runs(function () {
+            	var printer = Rho.Printer.getPrinterByID(printers[0].printerID);
+            	printer.connect();
+            	if (printer.isConnected || printer.isReadyToPrint)
+				{
+					var fileURI = Rho.RhoFile.join(filesMediaPath, "flower.jpg");
+					var print_str = Rho.Printer.printFile(fileURI);
+					waitsFor(function() {
+                        return print_str;
+                    }, '10sec wait for print', 10000);
+					displayTestResults(print_str, printers, "Printed ");
+					printer.disconnect();
+				}
+            	else
+            	{
+                    displayTestResults(printer.isConnected, printers, "Unable to Connect ");
+                }
+            });
+
+            waitsFor(function () {
+            	dispCurrentProcess("Is the 'flower.jpg' file sent successfully to the printer ? ");
+                return captured;
+            }, 'Waiting for Pass or Fail.', 10000);
+
+
+            runs(function () {
+                expect(testResult).toEqual(true);
+            });
+        });
+        
+        it("VTXXX-0037-printFile Method (with callback function) ", function () {
+        	printers  = [];
+            displayTestDescription("VTXXX-0037 | printFile Method (with callback function) ");
+            displayTestInstruction("");
+            displayTestExpectation("The file should be sent successfully to the printer.");
+            
+            runs(function () {
+            	// Let the printer be search first then use stop
+            	searchPrintersNow();
+            });
+            
+            waitsFor(function () {
+                return true;
+            }, 'Searching for Printers....', 5000);
+            
+            runs(function () {
+            	var printer = Rho.Printer.getPrinterByID(printers[0].printerID);
+            	printer.connect();
+            	if (printer.isConnected || printer.isReadyToPrint)
+				{
+					var fileURI = Rho.RhoFile.join(filesMediaPath, "simple_sun.jpg");
+					var print_str = Rho.Printer.printFile(fileURI, printFileCallback);
+					waitsFor(function() {
+                        return print_str;
+                    }, '10sec wait for print', 10000);
+					displayTestResults(print_str, printers, "Printed ");
+					printer.disconnect();
+				}
+            	else
+            	{
+                    displayTestResults(printer.isConnected, printers, "Unable to Connect ");
+                }
+            });
+
+            waitsFor(function () {
+            	dispCurrentProcess("Is the 'simple_sun.jpg' file sent successfully to the printer ? ");
+                return captured;
+            }, 'Waiting for Pass or Fail.', 10000);
+
+
+            runs(function () {
+                expect(testResult).toEqual(true);
+            });
+        });
+        
+        it("VTXXX-0038-printFile Method (with anonymous function for jpg file) ", function () {
+        	printers  = [];
+            displayTestDescription("VTXXX-0038 | printFile Method (with anonymous function for jpg file) ");
+            displayTestInstruction("");
+            displayTestExpectation("The file should be sent successfully to the printer.");
+            
+            runs(function () {
+            	// Let the printer be search first then use stop
+            	searchPrintersNow();
+            });
+            
+            waitsFor(function () {
+                return true;
+            }, 'Searching for Printers....', 5000);
+            
+            runs(function () {
+            	var printer = Rho.Printer.getPrinterByID(printers[0].printerID);
+            	printer.connect();
+            	if (printer.isConnected || printer.isReadyToPrint)
+				{
+					var fileURI = Rho.RhoFile.join(filesMediaPath, "motorola_logo.jpg");
+					var print_str = Rho.Printer.printFile(fileURI, function(){printFileCallback();});
+					waitsFor(function() {
+                        return print_str;
+                    }, '10sec wait for print', 10000);
+					displayTestResults(print_str, printers, "Printed ");
+					printer.disconnect();
+				}
+            	else
+            	{
+                    displayTestResults(printer.isConnected, printers, "Unable to Connect ");
+                }
+            });
+
+            waitsFor(function () {
+            	dispCurrentProcess("Is the 'motorola_logo.jpg' file sent successfully to the printer ? ");
+                return captured;
+            }, 'Waiting for Pass or Fail.', 10000);
+
+
+            runs(function () {
+                expect(testResult).toEqual(true);
+            });
+        });
+        
+        it("VTXXX-0039-printFile Method (without callback function for png file) ", function () {
+        	printers  = [];
+            displayTestDescription("VTXXX-0039 | printFile Method (without callback function for png file) ");
+            displayTestInstruction("");
+            displayTestExpectation("The file should be sent successfully to the printer.");
+            
+            runs(function () {
+            	// Let the printer be search first then use stop
+            	searchPrintersNow();
+            });
+            
+            waitsFor(function () {
+                return true;
+            }, 'Searching for Printers....', 5000);
+            
+            runs(function () {
+            	var printer = Rho.Printer.getPrinterByID(printers[0].printerID);
+            	printer.connect();
+            	if (printer.isConnected || printer.isReadyToPrint)
+				{
+					var fileURI = Rho.RhoFile.join(filesMediaPath, "basketball.png");
+					var print_str = Rho.Printer.printFile(fileURI);
+					waitsFor(function() {
+                        return print_str;
+                    }, '10sec wait for print', 10000);
+					displayTestResults(print_str, printers, "Printed ");
+					printer.disconnect();
+				}
+            	else
+            	{
+                    displayTestResults(printer.isConnected, printers, "Unable to Connect ");
+                }
+            });
+
+            waitsFor(function () {
+            	dispCurrentProcess("Is the 'basketball.png' file sent successfully to the printer ? ");
+                return captured;
+            }, 'Waiting for Pass or Fail.', 10000);
+
+
+            runs(function () {
+                expect(testResult).toEqual(true);
+            });
+        });
+        
+        it("VTXXX-0040-printFile Method (with callback function for png file) ", function () {
+        	printers  = [];
+            displayTestDescription("VTXXX-0040 | printFile Method (with callback function for png file) ");
+            displayTestInstruction("");
+            displayTestExpectation("The file should be sent successfully to the printer.");
+            
+            runs(function () {
+            	// Let the printer be search first then use stop
+            	searchPrintersNow();
+            });
+            
+            waitsFor(function () {
+                return true;
+            }, 'Searching for Printers....', 5000);
+            
+            runs(function () {
+            	var printer = Rho.Printer.getPrinterByID(printers[0].printerID);
+            	printer.connect();
+            	if (printer.isConnected || printer.isReadyToPrint)
+				{
+					var fileURI = Rho.RhoFile.join(filesMediaPath, "swirl.png");
+					var print_str = Rho.Printer.printFile(fileURI, printFileCallback);
+					waitsFor(function() {
+                        return print_str;
+                    }, '10sec wait for print', 10000);
+					displayTestResults(print_str, printers, "Printed ");
+					printer.disconnect();
+				}
+            	else
+            	{
+                    displayTestResults(printer.isConnected, printers, "Unable to Connect ");
+                }
+            });
+
+            waitsFor(function () {
+            	dispCurrentProcess("Is the 'swirl.png' file sent successfully to the printer ? ");
+                return captured;
+            }, 'Waiting for Pass or Fail.', 10000);
+
+
+            runs(function () {
+                expect(testResult).toEqual(true);
+            });
+        });
+        
+        it("VTXXX-0041-printFile Method (with anonymous function for png file) ", function () {
+        	printers  = [];
+            displayTestDescription("VTXXX-0041 | printFile Method (with anonymous function for png file) ");
+            displayTestInstruction("");
+            displayTestExpectation("The file should be sent successfully to the printer.");
+            
+            runs(function () {
+            	// Let the printer be search first then use stop
+            	searchPrintersNow();
+            });
+            
+            waitsFor(function () {
+                return true;
+            }, 'Searching for Printers....', 5000);
+            
+            runs(function () {
+            	var printer = Rho.Printer.getPrinterByID(printers[0].printerID);
+            	printer.connect();
+            	if (printer.isConnected || printer.isReadyToPrint)
+				{
+					var fileURI = Rho.RhoFile.join(filesMediaPath, "vine.png");
+					var print_str = Rho.Printer.printFile(fileURI, function(){printFileCallback();});
+					waitsFor(function() {
+                        return print_str;
+                    }, '10sec wait for print', 10000);
+					displayTestResults(print_str, printers, "Printed ");
+					printer.disconnect();
+				}
+            	else
+            	{
+                    displayTestResults(printer.isConnected, printers, "Unable to Connect ");
+                }
+            });
+
+            waitsFor(function () {
+            	dispCurrentProcess("Is the 'vine.png' file sent successfully to the printer ? ");
+                return captured;
+            }, 'Waiting for Pass or Fail.', 10000);
+
+
+            runs(function () {
+                expect(testResult).toEqual(true);
+            });
+        });
+        
+        var platform = Rho.System.platform;
+        if (platform == "WINDOWS") {
+	        it("VTXXX-0042-printFile Method (without callback function for bmp file) ", function () {
+	        	printers  = [];
+	            displayTestDescription("VTXXX-0042 | printFile Method (without callback function for bmp file) ");
+	            displayTestInstruction("");
+	            displayTestExpectation("The file should be sent successfully to the printer.");
+	            
+	            runs(function () {
+	            	// Let the printer be search first then use stop
+	            	searchPrintersNow();
+	            });
+	            
+	            waitsFor(function () {
+	                return true;
+	            }, 'Searching for Printers....', 5000);
+	            
+	            runs(function () {
+	            	var printer = Rho.Printer.getPrinterByID(printers[0].printerID);
+	            	printer.connect();
+	            	if (printer.isConnected || printer.isReadyToPrint)
+					{
+						var fileURI = Rho.RhoFile.join(filesMediaPath, "dots.bmp");
+						var print_str = Rho.Printer.printFile(fileURI);
+						waitsFor(function() {
+	                        return print_str;
+	                    }, '10sec wait for print', 10000);
+						displayTestResults(print_str, printers, "Printed ");
+						printer.disconnect();
+					}
+	            	else
+	            	{
+	                    displayTestResults(printer.isConnected, printers, "Unable to Connect ");
+	                }
+	            });
+	
+	            waitsFor(function () {
+	            	dispCurrentProcess("Is the 'dots.bmp' file sent successfully to the printer ? ");
+	                return captured;
+	            }, 'Waiting for Pass or Fail.', 10000);
+	
+	
+	            runs(function () {
+	                expect(testResult).toEqual(true);
+	            });
+	        });
+	        
+	        it("VTXXX-0043-printFile Method (with callback function for bmp file) ", function () {
+	        	printers  = [];
+	            displayTestDescription("VTXXX-0043 | printFile Method (with callback function for bmp file) ");
+	            displayTestInstruction("");
+	            displayTestExpectation("The file should be sent successfully to the printer.");
+	            
+	            runs(function () {
+	            	// Let the printer be search first then use stop
+	            	searchPrintersNow();
+	            });
+	            
+	            waitsFor(function () {
+	                return true;
+	            }, 'Searching for Printers....', 5000);
+	            
+	            runs(function () {
+	            	var printer = Rho.Printer.getPrinterByID(printers[0].printerID);
+	            	printer.connect();
+	            	if (printer.isConnected || printer.isReadyToPrint)
+					{
+						var fileURI = Rho.RhoFile.join(filesMediaPath, "grass.bmp");
+						var print_str = Rho.Printer.printFile(fileURI, printFileCallback);
+						waitsFor(function() {
+	                        return print_str;
+	                    }, '10sec wait for print', 10000);
+						displayTestResults(print_str, printers, "Printed ");
+						printer.disconnect();
+					}
+	            	else
+	            	{
+	                    displayTestResults(printer.isConnected, printers, "Unable to Connect ");
+	                }
+	            });
+	
+	            waitsFor(function () {
+	            	dispCurrentProcess("Is the 'grass.bmp' file sent successfully to the printer ? ");
+	                return captured;
+	            }, 'Waiting for Pass or Fail.', 10000);
+	
+	
+	            runs(function () {
+	                expect(testResult).toEqual(true);
+	            });
+	        });
+	        
+	        it("VTXXX-0044-printFile Method (with anonymous function for bmp file) ", function () {
+	        	printers  = [];
+	            displayTestDescription("VTXXX-0044 | printFile Method (with anonymous function for bmp file) ");
+	            displayTestInstruction("");
+	            displayTestExpectation("The file should be sent successfully to the printer.");
+	            
+	            runs(function () {
+	            	// Let the printer be search first then use stop
+	            	searchPrintersNow();
+	            });
+	            
+	            waitsFor(function () {
+	                return true;
+	            }, 'Searching for Printers....', 5000);
+	            
+	            runs(function () {
+	            	var printer = Rho.Printer.getPrinterByID(printers[0].printerID);
+	            	printer.connect();
+	            	if (printer.isConnected || printer.isReadyToPrint)
+					{
+						var fileURI = Rho.RhoFile.join(filesMediaPath, "motobike.bmp");
+						var print_str = Rho.Printer.printFile(fileURI, function(){printFileCallback();});
+						waitsFor(function() {
+	                        return print_str;
+	                    }, '10sec wait for print', 10000);
+						displayTestResults(print_str, printers, "Printed ");
+						printer.disconnect();
+					}
+	            	else
+	            	{
+	                    displayTestResults(printer.isConnected, printers, "Unable to Connect ");
+	                }
+	            });
+	
+	            waitsFor(function () {
+	            	dispCurrentProcess("Is the 'motobike.bmp' file sent successfully to the printer ? ");
+	                return captured;
+	            }, 'Waiting for Pass or Fail.', 10000);
+	
+	
+	            runs(function () {
+	                expect(testResult).toEqual(true);
+	            });
+	        });
+        }
+        
+        it("VTXXX-0045-printFile Method (without callback function for pdf file) ", function () {
+        	printers  = [];
+            displayTestDescription("VTXXX-0045 | printFile Method (without callback function for pdf file) ");
+            displayTestInstruction("");
+            displayTestExpectation("The file should be sent successfully to the printer.");
+            
+            runs(function () {
+            	// Let the printer be search first then use stop
+            	searchPrintersNow();
+            });
+            
+            waitsFor(function () {
+                return true;
+            }, 'Searching for Printers....', 5000);
+            
+            runs(function () {
+            	var printer = Rho.Printer.getPrinterByID(printers[0].printerID);
+            	printer.connect();
+            	if (printer.isConnected || printer.isReadyToPrint)
+				{
+					var fileURI = Rho.RhoFile.join(filesMediaPath, "pdfSample.pdf");
+					var print_str = Rho.Printer.printFile(fileURI);
+					waitsFor(function() {
+                        return print_str;
+                    }, '30sec wait for print', 30000);
+					displayTestResults(print_str, printers, "Printed ");
+					printer.disconnect();
+				}
+            	else
+            	{
+                    displayTestResults(printer.isConnected, printers, "Unable to Connect ");
+                }
+            });
+
+            waitsFor(function () {
+            	dispCurrentProcess("Is the 'pdfSample.pdf' file sent successfully to the printer ? ");
+                return captured;
+            }, 'Waiting for Pass or Fail.', 10000);
+
+
+            runs(function () {
+                expect(testResult).toEqual(true);
+            });
+        });
+        
+        it("VTXXX-0046-printFile Method (with callback function for pdf file) ", function () {
+        	printers  = [];
+            displayTestDescription("VTXXX-0046 | printFile Method (with callback function for pdf file) ");
+            displayTestInstruction("");
+            displayTestExpectation("The file should be sent successfully to the printer.");
+            
+            runs(function () {
+            	// Let the printer be search first then use stop
+            	searchPrintersNow();
+            });
+            
+            waitsFor(function () {
+                return true;
+            }, 'Searching for Printers....', 5000);
+            
+            runs(function () {
+            	var printer = Rho.Printer.getPrinterByID(printers[0].printerID);
+            	printer.connect();
+            	if (printer.isConnected || printer.isReadyToPrint)
+				{
+					var fileURI = Rho.RhoFile.join(filesMediaPath, "pdfSample.pdf");
+					var print_str = Rho.Printer.printFile(fileURI, printFileCallback);
+					waitsFor(function() {
+                        return print_str;
+                    }, '30sec wait for print', 30000);
+					displayTestResults(print_str, printers, "Printed ");
+					printer.disconnect();
+				}
+            	else
+            	{
+                    displayTestResults(printer.isConnected, printers, "Unable to Connect ");
+                }
+            });
+
+            waitsFor(function () {
+            	dispCurrentProcess("Is the 'pdfSample.pdf' file sent successfully to the printer ? ");
+                return captured;
+            }, 'Waiting for Pass or Fail.', 10000);
+
+
+            runs(function () {
+                expect(testResult).toEqual(true);
+            });
+        });
+        
+        it("VTXXX-0047-printFile Method (with anonymous function for pdf file) ", function () {
+        	printers  = [];
+            displayTestDescription("VTXXX-0047 | printFile Method (with anonymous function for pdf file) ");
+            displayTestInstruction("");
+            displayTestExpectation("The file should be sent successfully to the printer.");
+            
+            runs(function () {
+            	// Let the printer be search first then use stop
+            	searchPrintersNow();
+            });
+            
+            waitsFor(function () {
+                return true;
+            }, 'Searching for Printers....', 5000);
+            
+            runs(function () {
+            	var printer = Rho.Printer.getPrinterByID(printers[0].printerID);
+            	printer.connect();
+            	if (printer.isConnected || printer.isReadyToPrint)
+				{
+					var fileURI = Rho.RhoFile.join(filesMediaPath, "pdfSample.pdf");
+					var print_str = Rho.Printer.printFile(fileURI, function(){printFileCallback();});
+					waitsFor(function() {
+                        return print_str;
+                    }, '30sec wait for print', 30000);
+					displayTestResults(print_str, printers, "Printed ");
+					printer.disconnect();
+				}
+            	else
+            	{
+                    displayTestResults(printer.isConnected, printers, "Unable to Connect ");
+                }
+            });
+
+            waitsFor(function () {
+            	dispCurrentProcess("Is the 'pdfSample.pdf' file sent successfully to the printer ? ");
+                return captured;
+            }, 'Waiting for Pass or Fail.', 10000);
+
+
+            runs(function () {
+                expect(testResult).toEqual(true);
+            });
+        });
+        
+        it("VTXXX-0048-printFile Method (with callback function and No File specified in fileURI) ", function () {
+        	printers  = [];
+            displayTestDescription("VTXXX-0048 | printFile Method (with callback function and No File specified in fileURI) ");
+            displayTestInstruction("");
+            displayTestExpectation("No file should be sent to the printer. The callback should return STATUS_ERROR.");
+            
+            runs(function () {
+            	// Let the printer be search first then use stop
+            	searchPrintersNow();
+            });
+            
+            waitsFor(function () {
+                return true;
+            }, 'Searching for Printers....', 5000);
+            
+            runs(function () {
+            	var printer = Rho.Printer.getPrinterByID(printers[0].printerID);
+            	printer.connect();
+            	if (printer.isConnected || printer.isReadyToPrint)
+				{
+					var fileURI = Rho.RhoFile.join(filesMediaPath, "");
+					var print_str = Rho.Printer.printFile(fileURI, printFileCallback);
+					waitsFor(function() {
+                        return print_str;
+                    }, '10sec wait for print', 10000);
+					displayTestResults(print_str, printers, "No File Sent to Printer ");
+					printer.disconnect();
+				}
+            	else
+            	{
+                    displayTestResults(printer.isConnected, printers, "Unable to Connect ");
+                }
+            });
+
+            waitsFor(function () {
+            	dispCurrentProcess("Does the test return STATUS_ERROR and no file is sent to the printer ? ");
+                return captured;
+            }, 'Waiting for Pass or Fail.', 10000);
+
+
+            runs(function () {
+                expect(testResult).toEqual(true);
+            });
+        });
+        
+        it("VTXXX-0049-printFile Method (with callback function and fileURI has no file at that location with that specified name) ", function () {
+        	printers  = [];
+            displayTestDescription("VTXXX-0049 | printFile Method (with callback function and fileURI has no file at that location with that specified name) ");
+            displayTestInstruction("");
+            displayTestExpectation("No file should be sent to the printer. The callback should return STATUS_ERROR.");
+            
+            runs(function () {
+            	// Let the printer be search first then use stop
+            	searchPrintersNow();
+            });
+            
+            waitsFor(function () {
+                return true;
+            }, 'Searching for Printers....', 5000);
+            
+            runs(function () {
+            	var printer = Rho.Printer.getPrinterByID(printers[0].printerID);
+            	printer.connect();
+            	if (printer.isConnected || printer.isReadyToPrint)
+				{
+					var fileURI = Rho.RhoFile.join(filesMediaPath, "abcdef.jpg");
+					var print_str = Rho.Printer.printFile(fileURI, printFileCallback);
+					waitsFor(function() {
+                        return print_str;
+                    }, '10sec wait for print', 10000);
+					displayTestResults(print_str, printers, "No File Sent to Printer ");
+					printer.disconnect();
+				}
+            	else
+            	{
+                    displayTestResults(printer.isConnected, printers, "Unable to Connect ");
+                }
+            });
+
+            waitsFor(function () {
+            	dispCurrentProcess("Does the test return STATUS_ERROR and no file is sent to the printer ? ");
+                return captured;
+            }, 'Waiting for Pass or Fail.', 10000);
+
+
+            runs(function () {
+                expect(testResult).toEqual(true);
+            });
+        });
+        
+        it("VTXXX-0050-printRawString Method (without callback function for ZPL Command) ", function () {
+        	printers  = [];
+            displayTestDescription("VTXXX-0050 | printRawString Method (without callback function for ZPL Command) ");
+            displayTestInstruction("");
+            displayTestExpectation("The raw string should be sent successfully and printed on the printer.");
+            
+            runs(function () {
+            	// Let the printer be search first then use stop
+            	searchPrintersNow();
+            });
+            
+            waitsFor(function () {
+                return true;
+            }, 'Searching for Printers....', 5000);
+            
+            runs(function () {
+            	var printer = Rho.Printer.getPrinterByID(printers[0].printerID);
+            	printer.connect();
+            	if (printer.isConnected || printer.isReadyToPrint)
+				{
+					var command = "^XA^FO50,50^ADN,36,20^FDTesting^FS^XZ";
+					var print_str = Rho.Printer.printRawString(fileURI, printFileCallback);
+					waitsFor(function() {
+                        return print_str;
+                    }, '10sec wait for print', 10000);
+					displayTestResults(print_str, printers, "Printed ");
+					printer.disconnect();
+				}
+            	else
+            	{
+                    displayTestResults(printer.isConnected, printers, "Unable to Connect ");
+                }
+            });
+
+            waitsFor(function () {
+            	dispCurrentProcess("Is the raw string printed on the printer ? ");
+                return captured;
+            }, 'Waiting for Pass or Fail.', 10000);
+
+
+            runs(function () {
+                expect(testResult).toEqual(true);
+            });
+        });
+        
+        it("VTXXX-0051-printRawString Method (with callback function for ZPL Command) ", function () {
+        	printers  = [];
+            displayTestDescription("VTXXX-0051 | printRawString Method (with callback function for ZPL Command) ");
+            displayTestInstruction("");
+            displayTestExpectation("The raw string should be sent successfully and printed on the printer. Also return STATUS_SUCCESS.");
+            
+            runs(function () {
+            	// Let the printer be search first then use stop
+            	searchPrintersNow();
+            });
+            
+            waitsFor(function () {
+                return true;
+            }, 'Searching for Printers....', 5000);
+            
+            runs(function () {
+            	var printer = Rho.Printer.getPrinterByID(printers[0].printerID);
+            	printer.connect();
+            	if (printer.isConnected || printer.isReadyToPrint)
+				{
+					var command = "^XA^FO50,50^ADN,36,20^FDTesting^FS^XZ";
+					var print_str = Rho.Printer.printRawString(fileURI, printRawStringCallback);
+					waitsFor(function() {
+                        return print_str;
+                    }, '10sec wait for print', 10000);
+					displayTestResults(print_str, printers, "Printed ");
+					printer.disconnect();
+				}
+            	else
+            	{
+                    displayTestResults(printer.isConnected, printers, "Unable to Connect ");
+                }
+            });
+
+            waitsFor(function () {
+            	dispCurrentProcess("Is the raw string printed on the printer ? ");
+                return captured;
+            }, 'Waiting for Pass or Fail.', 10000);
+
+
+            runs(function () {
+                expect(testResult).toEqual(true);
+            });
+        });
+        
+        it("VTXXX-0052-printRawString Method (with anonymous function for ZPL Command) ", function () {
+        	printers  = [];
+            displayTestDescription("VTXXX-0052 | printRawString Method (with anonymous function for ZPL Command) ");
+            displayTestInstruction("");
+            displayTestExpectation("The raw string should be sent successfully and printed on the printer. Also return STATUS_SUCCESS.");
+            
+            runs(function () {
+            	// Let the printer be search first then use stop
+            	searchPrintersNow();
+            });
+            
+            waitsFor(function () {
+                return true;
+            }, 'Searching for Printers....', 5000);
+            
+            runs(function () {
+            	var printer = Rho.Printer.getPrinterByID(printers[0].printerID);
+            	printer.connect();
+            	if (printer.isConnected || printer.isReadyToPrint)
+				{
+					var command = "^XA^FO50,50^ADN,36,20^FDTesting^FS^XZ";
+					var print_str = Rho.Printer.printRawString(fileURI, printRawStringCallback);
+					waitsFor(function() {
+                        return print_str;
+                    }, '10sec wait for print', 10000);
+					displayTestResults(print_str, printers, "Printed ");
+					printer.disconnect();
+				}
+            	else
+            	{
+                    displayTestResults(printer.isConnected, printers, "Unable to Connect ");
+                }
+            });
+
+            waitsFor(function () {
+            	dispCurrentProcess("Is the raw string printed on the printer ? ");
+                return captured;
+            }, 'Waiting for Pass or Fail.', 10000);
+
+
+            runs(function () {
+                expect(testResult).toEqual(true);
+            });
+        });
+        
+        it("VTXXX-0053-printRawString Method (without callback function for CPCL Command) ", function () {
+        	printers  = [];
+            displayTestDescription("VTXXX-0053 | printRawString Method (without callback function for CPCL Command) ");
+            displayTestInstruction("");
+            displayTestExpectation("The raw string should be sent successfully and printed on the printer.");
+            
+            runs(function () {
+            	// Let the printer be search first then use stop
+            	searchPrintersNow();
+            });
+            
+            waitsFor(function () {
+                return true;
+            }, 'Searching for Printers....', 5000);
+            
+            runs(function () {
+            	var printer = Rho.Printer.getPrinterByID(printers[0].printerID);
+            	printer.connect();
+            	if (printer.isConnected || printer.isReadyToPrint)
+				{
+					var command = "! 0.3937 200 200 1 1 IN-INCHEST 4 0 0 0 1 cm = 0.3937” IN-DOTST 4 0 0 48 1 mm = 8 dots B 128 1 1 48 16 112 UNITST 4 0 48 160 UNITSFORMPRINT";
+					var print_str = Rho.Printer.printRawString(fileURI, printFileCallback);
+					waitsFor(function() {
+                        return print_str;
+                    }, '10sec wait for print', 10000);
+					displayTestResults(print_str, printers, "Printed ");
+					printer.disconnect();
+				}
+            	else
+            	{
+                    displayTestResults(printer.isConnected, printers, "Unable to Connect ");
+                }
+            });
+
+            waitsFor(function () {
+            	dispCurrentProcess("Is the raw string printed on the printer ? ");
+                return captured;
+            }, 'Waiting for Pass or Fail.', 10000);
+
+
+            runs(function () {
+                expect(testResult).toEqual(true);
+            });
+        });
+        
+        it("VTXXX-0054-printRawString Method (with callback function for CPCL Command) ", function () {
+        	printers  = [];
+            displayTestDescription("VTXXX-0054 | printRawString Method (with callback function for CPCL Command) ");
+            displayTestInstruction("");
+            displayTestExpectation("The raw string should be sent successfully and printed on the printer. Also return STATUS_SUCCESS.");
+            
+            runs(function () {
+            	// Let the printer be search first then use stop
+            	searchPrintersNow();
+            });
+            
+            waitsFor(function () {
+                return true;
+            }, 'Searching for Printers....', 5000);
+            
+            runs(function () {
+            	var printer = Rho.Printer.getPrinterByID(printers[0].printerID);
+            	printer.connect();
+            	if (printer.isConnected || printer.isReadyToPrint)
+				{
+					var command = "! 0.3937 200 200 1 1IN-INCHEST 4 0 0 0 1 cm = 0.3937”IN-DOTST 4 0 0 48 1 mm = 8 dotsB 128 1 1 48 16 112 UNITST 4 0 48 160 UNITSFORMPRINT";
+					var print_str = Rho.Printer.printRawString(fileURI, printRawStringCallback);
+					waitsFor(function() {
+                        return print_str;
+                    }, '10sec wait for print', 10000);
+					displayTestResults(print_str, printers, "Printed ");
+					printer.disconnect();
+				}
+            	else
+            	{
+                    displayTestResults(printer.isConnected, printers, "Unable to Connect ");
+                }
+            });
+
+            waitsFor(function () {
+            	dispCurrentProcess("Is the raw string printed on the printer ? ");
+                return captured;
+            }, 'Waiting for Pass or Fail.', 10000);
+
+
+            runs(function () {
+                expect(testResult).toEqual(true);
+            });
+        });
+        
+        it("VTXXX-0055-printRawString Method (with anonymous function for CPCL Command) ", function () {
+        	printers  = [];
+            displayTestDescription("VTXXX-0055 | printRawString Method (with anonymous function for CPCL Command) ");
+            displayTestInstruction("");
+            displayTestExpectation("The raw string should be sent successfully and printed on the printer. Also return STATUS_SUCCESS.");
+            
+            runs(function () {
+            	// Let the printer be search first then use stop
+            	searchPrintersNow();
+            });
+            
+            waitsFor(function () {
+                return true;
+            }, 'Searching for Printers....', 5000);
+            
+            runs(function () {
+            	var printer = Rho.Printer.getPrinterByID(printers[0].printerID);
+            	printer.connect();
+            	if (printer.isConnected || printer.isReadyToPrint)
+				{
+					var command = "! 0.3937 200 200 1 1IN-INCHEST 4 0 0 0 1 cm = 0.3937”IN-DOTST 4 0 0 48 1 mm = 8 dotsB 128 1 1 48 16 112 UNITST 4 0 48 160 UNITSFORMPRINT";
+					var print_str = Rho.Printer.printRawString(fileURI, printRawStringCallback);
+					waitsFor(function() {
+                        return print_str;
+                    }, '10sec wait for print', 10000);
+					displayTestResults(print_str, printers, "Printed ");
+					printer.disconnect();
+				}
+            	else
+            	{
+                    displayTestResults(printer.isConnected, printers, "Unable to Connect ");
+                }
+            });
+
+            waitsFor(function () {
+            	dispCurrentProcess("Is the raw string printed on the printer ? ");
+                return captured;
+            }, 'Waiting for Pass or Fail.', 10000);
+
+
+            runs(function () {
+                expect(testResult).toEqual(true);
+            });
+        });
+        
+        it("VTXXX-0056-printRawString Method with callback (with the printer turned off) ", function () {
+        	printers  = [];
+            displayTestDescription("VTXXX-0056 | printRawString Method with callback (with the printer turned off) ");
+            displayTestInstruction("");
+            displayTestExpectation("The raw string should not be sent and printed on the printer. The callback function should return STATUS_ERROR.");
+            
+            runs(function () {
+            	// Let the printer be search first then use stop
+            	searchPrintersNow();
+            });
+            
+            waitsFor(function () {
+                return true;
+            }, 'Searching for Printers....', 5000);
+            
+            runs(function () {
+            	var printer = Rho.Printer.getPrinterByID(printers[0].printerID);
+            	waitsFor(function () {
+                    return true;
+                }, 'Turn OFF the Printer', 5000);
+            	printer.connect();
+            	if (printer.isConnected || printer.isReadyToPrint)
+				{
+					var command = "^XA^FO50,50^ADN,36,20^FDTesting^FS^XZ";
+					var print_str = Rho.Printer.printRawString(fileURI, printRawStringCallback);
+					waitsFor(function() {
+                        return print_str;
+                    }, '10sec wait for print', 10000);
+					displayTestResults(print_str, printers, "Printed ");
+					printer.disconnect();
+				}
+            	else
+            	{
+                    displayTestResults(printer.isConnected, printers, "Unable to Connect ");
+                }
+            });
+
+            waitsFor(function () {
+            	dispCurrentProcess("Is the method returning with error ? ");
+                return captured;
+            }, 'Waiting for Pass or Fail.', 10000);
+
+
+            runs(function () {
+                expect(testResult).toEqual(true);
+            });
+        });
+        
+        it("VTXXX-0057-printRawString Method with callback (with the printer's blue tooth[applicable for Bluetooth Printers only], tcp/network[applicable for network printers], USB[applicable for USB printers] turned off/disconnected) ", function () {
+        	printers  = [];
+            displayTestDescription("VTXXX-0057 | printRawString Method with callback (with the printer's blue tooth[applicable for Bluetooth Printers only], tcp/network[applicable for network printers], USB[applicable for USB printers] turned off/disconnected) ");
+            displayTestInstruction("");
+            displayTestExpectation("The raw string should not be sent and printed on the printer. The callback function should return STATUS_ERROR.");
+            
+            runs(function () {
+            	// Let the printer be search first then use stop
+            	searchPrintersNow();
+            });
+            
+            waitsFor(function () {
+                return true;
+            }, 'Searching for Printers....', 5000);
+            
+            runs(function () {
+            	var printer = Rho.Printer.getPrinterByID(printers[0].printerID);
+            	waitsFor(function () {
+                    return true;
+                }, 'Turn OFF(Bluetooth or TCP/Network or USB) of the Printer', 5000);
+            	printer.connect();
+            	if (printer.isConnected || printer.isReadyToPrint)
+				{
+					var command = "^XA^FO50,50^ADN,36,20^FDTesting^FS^XZ";
+					var print_str = Rho.Printer.printRawString(fileURI, printRawStringCallback);
+					waitsFor(function() {
+                        return print_str;
+                    }, '10sec wait for print', 10000);
+					displayTestResults(print_str, printers, "Printed ");
+					printer.disconnect();
+				}
+            	else
+            	{
+                    displayTestResults(printer.isConnected, printers, "Unable to Connect ");
+                }
+            });
+
+            waitsFor(function () {
+            	dispCurrentProcess("Is the method returning with error ? ");
+                return captured;
+            }, 'Waiting for Pass or Fail.', 10000);
+
+
+            runs(function () {
+                expect(testResult).toEqual(true);
+            });
+        });
+        
+        // Need to write tests for "requestState" after implementation and more info from the developer
     });
 });
