@@ -81,8 +81,20 @@
 	<P>
 	<b>Expected Result: </b><div id="expectedresult"></div>
 	<P>
-	<input type="button" value="Test Passed" onclick="captureResult(true)" />
-	<input type="button" value="Test Failed" onclick="captureResult(false)"/>
+
+	<input type="button" value="Test Passed" onclick="captureResult(true)" id="oldpass"/>
+	<input type="button" value="Test Failed" onclick="captureResult(false)" id="oldfail"/>
+
+    <input type="button" value="Run Test" onclick="_result.runTest();" id="runtest"/>
+    <input type="button" value="Test Passed" onclick="_result.passed();" id="pass" />
+    <input type="button" value="Test Failed" onclick="_result.failed();" id="fail" />
 	<div id="actResult" style="display:none">init</div>
 </body>
+<script type="text/javascript">
+    $('#pass').hide();
+    $('#fail').hide();
+    $('#oldpass').hide();
+    $('#oldfail').hide();
+    $('#runtest').hide();
+</script>
 </html>

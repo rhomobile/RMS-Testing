@@ -5,6 +5,20 @@ require 'helpers/browser_helper'
 require 'helpers/spec_helper'
 
 class FilelistController < Rho::RhoController
+
+	def openFile
+      path = Rho::RhoFile.join(Rho::Application.userFolder, "testFile.txt")
+      @f= Rho::RhoFile.new(path, 2) #Rho::RhoFile.OPEN_FOR_READ 2
+      Rho::WebView.executeJavascript("Ruby.sendValueToJS(#{@f.isOpened()})")
+    end
+    
+	def closeFile
+      path = Rho::RhoFile.join(Rho::Application.userFolder, "testFile.txt")
+      @f= Rho::RhoFile.new(path, 2) #Rho::RhoFile.OPEN_FOR_READ
+      @f.close()
+      Rho::WebView.executeJavascript("Ruby.sendValueToJS('#{@f.isOpened()}')")
+	end
+
   
   #Test methods below for - RMS 4.1 : [SPB] Fix File reading errors in Ruby 
   

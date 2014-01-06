@@ -16,7 +16,9 @@ elif [ "$RHO_PLATFORM" = "wp8" ]; then
 cd platform/wp8
 rake --trace
 
+elif [ "$RHO_PLATFORM" = "osx" ]; then
+
+cd platform/qt
+rake --trace
+
 fi
-
-
-
