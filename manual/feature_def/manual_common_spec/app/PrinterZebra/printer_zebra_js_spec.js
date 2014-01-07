@@ -8,7 +8,7 @@ describe("Printer Zebra Manual Test", function() {
 	var enableFlag = false;
 	var callbackstatus = false;
 	var searchFlag = false;
-	var enumData = Rho.PrinterZebra.PrinterZebra();
+	//var enumData = Rho.PrinterZebra.enumerateSupportedTypes();
 	var printers_array = [];
 	var printers_errors = [];
 	var discovery_finished = false;
@@ -17,115 +17,9 @@ describe("Printer Zebra Manual Test", function() {
 	var stopsearch = '';
 	var calback_flag = false;
 	var deviceaddressFlag = false;
-	var ZPLstr = "^XA^FO50,50^ADN,36,20^FDZebraPrinting^FS^XZ"
+	var ZPLstr = "^XA^FO50,50^ADN,36,20^FDZebraPrinting^FS^XZ"; 
+	var CCPLstr = "! 0.3937 200 200 1 1IN-INCHEST 4 0 0 0 1 cm = 0.3937”IN-DOTST 4 0 0 48 1 mm = 8 dotsB 128 1 1 48 16 112 UNITST40 48 160 UNITSFORMPRINT"
 
-
-	function searchPrinterCallback(printer) {
-		if (printer.status == Rho.PrinterZebra.STATUS_SUCCESS && printer.printerID == STATUS_OK) {
-			printers_array.push(printer);
-		} 
-		else if (printer.status == Rho.PrinterZebra.STATUS_DONE || printer.status == Rho.PrinterZebra.STATUS_ERR_TIMEOUT) {
-			discovery_finished = true;
-		} 
-		else if (printer.message == Rho.PrinterZebra.STATUS_ERROR) {
-			printers_errors.push(printer)
-		}
-	}
-
-	function displaySearchResults(display_printers, display_errors) {
-		if (display_printers.length > 0) {
-			document.getElementById('actResult').innerHTML = display_printers.toString();
-			
-		} 
-		if (display_errors.length > 0) {
-			$("#actResult").append(display_errors.toString());
-		}
-	
-	}
-	
-	function PrinterConnectiontype() {
-		connect_type = Rho.PrinterZebra.connectionType;
-		document.getElementById("connectionType").innerHTML = connect_type;
-	}
-
-	function enumerateCallback(printer) {
-		if (printer.length > 0) {
-			document.getElementById('actResult').innerHTML = printer.toString();
-		} 
-		else {
-			document.getElementById('actResult').innerHTML = "Could not find printer types.";
-		}
-	}
-		
-	//TODO: Need to modify
-	function stopSearchPrinterCallback(printer) {
-		if (testResult.toLowerCase().indexOf("STATUS_ERROR") <= 0) {
-			testResult = "STATUS_SUCCESS";
-			document.getElementById('actResult').innerHTML = testResult;
-		} else {
-			testResult = "STATUS_ERROR";
-			document.getElementById('actResult').innerHTML = testResult;
-		}
-	}		
-
-	function printRawStringCallback(printer) {
-		if(printer.toString() == Rho.PrinterZebra.STATUS_SUCCESS) {
-			document.getElementById('actResult').innerHTML = printer.toString();
-		}
-		else if(printer.toString() == Rho.PrinterZebra.STATUS_ERROR) {
-			document.getElementById('actResult').innerHTML = printer.toString();
-		}
-		else {
-			document.getElementById('actResult').innerHTML = printer.toString();
-		}	
-	}
-	
-	function connectCallback(printer) {
-		if(printer) {
-			document.getElementById('actResult').innerHTML = printer.toString();
-		}
-		else {
-			document.getElementById('actResult').innerHTML = "Nil value";
-		}	
-	}
-	
-	function disconnectCallback(printer) {
-		if(printer.toString() == Rho.PrinterZebra.STATUS_SUCCESS) {
-			document.getElementById('actResult').innerHTML = printer.toString();
-		}
-		else if(printer.toString() == Rho.PrinterZebra.STATUS_ERROR) {
-			document.getElementById('actResult').innerHTML = printer.toString();
-		}
-		else {
-			document.getElementById('actResult').innerHTML = printer.toString();
-		}		
-	}
-	
-	function printRawStringCallback(printer) {
-		if(printer.toString() == Rho.PrinterZebra.STATUS_SUCCESS) {
-			document.getElementById('actResult').innerHTML = printer.toString();
-		}
-		else if(printer.toString() == Rho.PrinterZebra.STATUS_ERROR) {
-			document.getElementById('actResult').innerHTML = printer.toString();
-		}
-		else {
-			document.getElementById('actResult').innerHTML = printer.toString();
-		}		
-	}
-	
-	function printFileCallback(printer) {
-		if(printer.toString() == Rho.PrinterZebra.STATUS_SUCCESS) {
-			document.getElementById('actResult').innerHTML = printer.toString();
-		}
-		else if(printer.toString() == Rho.PrinterZebra.STATUS_ERROR) {
-			document.getElementById('actResult').innerHTML = printer.toString();
-		}
-		else {
-			document.getElementById('actResult').innerHTML = printer.toString();
-		}		
-	}
-	
-	
 	beforeEach(function() {
 		document.getElementById("actResult").innerHTML = "init";
 		discovery_finished = false;
@@ -2764,4 +2658,4158 @@ describe("Printer Zebra Manual Test", function() {
 			expect("pass").toEqual(document.getElementById("actResult").innerHTML);
 		});
 	});
+
+	it("VTXXX-0118 | sendFileContents method with HTML CSS filepath ( with callback )" , function() {
+		runs(function() {
+			setObjective("VTXXX-0118 | sendFileContents method with HTML CSS  filepath ( with callback )");
+			setInstruction("1. Connect a Zebra printer with the device <br /> 2. Call sendFileContents (HTML CSS  file path) with callback.");
+			setExpected("1. Callback should be fired on successful print with return STATUS_SUCCESS <br /> 2. STATUS_ERROR should be thrown on failure in print.");
+		});
+		
+		
+		runs(function() {
+				PrinterConnectiontype();
+			});
+		
+		runs(function() {
+			var PrinterInstance = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			connect_status = PrinterInstance.connect();
+			waitsFor(function()	{
+				return PrinterInstance.isConnected;
+			}, '9sec wait for connection', ENABLE9K);
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.sendFileContents(htmlcssfilepath, sendfilecontentsCallback);
+			}
+			else {
+				displayResult("Failed to connect to the printer", connect_status);	
+			}
+		});
+		
+		runs(function() {
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+		});
+		waitsFor(function() {
+			return document.getElementById("actResult").innerHTML != "init";
+		}, "Timed out waiting for tester to respond", ENABLE30MIN);
+		runs(function() {
+			expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+		});
+	});	
+
+	it("VTXXX-0119 | sendFileContents method with js filepath ( with callback )" , function() {
+		runs(function() {
+			setObjective("VTXXX-0119 | sendFileContents method with js filepath ( with callback )");
+			setInstruction("1. Connect a Zebra printer with the device <br /> 2. Call sendFileContents (js  file path) with callback.");
+			setExpected("1. Callback should be fired on successful print with return STATUS_SUCCESS <br /> 2. STATUS_ERROR should be thrown on failure in print.");
+		});
+		
+		
+		runs(function() {
+				PrinterConnectiontype();
+			});
+		
+		runs(function() {
+			var PrinterInstance = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			connect_status = PrinterInstance.connect();
+			waitsFor(function()	{
+				return PrinterInstance.isConnected;
+			}, '9sec wait for connection', ENABLE9K);
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.sendFileContents(jsfilepath, sendfilecontentsCallback);
+			}
+			else {
+				displayResult("Failed to connect to the printer", connect_status);	
+			}
+		});
+		
+		runs(function() {
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+		});
+		waitsFor(function() {
+			return document.getElementById("actResult").innerHTML != "init";
+		}, "Timed out waiting for tester to respond", ENABLE30MIN);
+		runs(function() {
+			expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+		});
+	});	
+	
+	it("VTXXX-0120 | sendFileContents method with cpp filepath ( with callback )" , function() {
+		runs(function() {
+			setObjective("VTXXX-0120 | sendFileContents method with cpp filepath ( with callback )");
+			setInstruction("1. Connect a Zebra printer with the device <br /> 2. Call sendFileContents (cpp  file path) with callback.");
+			setExpected("1. Callback should be fired on successful print with return STATUS_SUCCESS <br /> 2. STATUS_ERROR should be thrown on failure in print.");
+		});
+		
+		
+		runs(function() {
+				PrinterConnectiontype();
+			});
+		
+		runs(function() {
+			var PrinterInstance = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			connect_status = PrinterInstance.connect();
+			waitsFor(function()	{
+				return PrinterInstance.isConnected;
+			}, '9sec wait for connection', ENABLE9K);
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.sendFileContents(cppfilepath, sendfilecontentsCallback);
+			}
+			else {
+				displayResult("Failed to connect to the printer", connect_status);	
+			}
+		});
+		
+		runs(function() {
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+		});
+		waitsFor(function() {
+			return document.getElementById("actResult").innerHTML != "init";
+		}, "Timed out waiting for tester to respond", ENABLE30MIN);
+		runs(function() {
+			expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+		});
+	});		
+
+	it("VTXXX-0121 | sendFileContents method with jpg filepath ( with callback )" , function() {
+		runs(function() {
+			setObjective("VTXXX-0121 | sendFileContents method with jpg filepath ( with callback )");
+			setInstruction("1. Connect a Zebra printer with the device <br /> 2. Call sendFileContents (jpg  file path) with callback.");
+			setExpected("1. Callback should be fired on successful print with return STATUS_SUCCESS <br /> 2. STATUS_ERROR should be thrown on failure in print.");
+		});
+		
+		
+		runs(function() {
+				PrinterConnectiontype();
+			});
+		
+		runs(function() {
+			var PrinterInstance = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			connect_status = PrinterInstance.connect();
+			waitsFor(function()	{
+				return PrinterInstance.isConnected;
+			}, '9sec wait for connection', ENABLE9K);
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.sendFileContents(jpgfilepath, sendfilecontentsCallback);
+			}
+			else {
+				displayResult("Failed to connect to the printer", connect_status);	
+			}
+		});
+		
+		runs(function() {
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+		});
+		waitsFor(function() {
+			return document.getElementById("actResult").innerHTML != "init";
+		}, "Timed out waiting for tester to respond", ENABLE30MIN);
+		runs(function() {
+			expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+		});
+	});	
+	
+	it("VTXXX-0122 | sendFileContents method with png filepath ( with callback )" , function() {
+		runs(function() {
+			setObjective("VTXXX-0122 | sendFileContents method with png filepath ( with callback )");
+			setInstruction("1. Connect a Zebra printer with the device <br /> 2. Call sendFileContents (png  file path) with callback.");
+			setExpected("1. Callback should be fired on successful print with return STATUS_SUCCESS <br /> 2. STATUS_ERROR should be thrown on failure in print.");
+		});
+		
+		
+		runs(function() {
+				PrinterConnectiontype();
+			});
+		
+		runs(function() {
+			var PrinterInstance = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			connect_status = PrinterInstance.connect();
+			waitsFor(function()	{
+				return PrinterInstance.isConnected;
+			}, '9sec wait for connection', ENABLE9K);
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.sendFileContents(pngfilepath, sendfilecontentsCallback);
+			}
+			else {
+				displayResult("Failed to connect to the printer", connect_status);	
+			}
+		});
+		
+		runs(function() {
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+		});
+		waitsFor(function() {
+			return document.getElementById("actResult").innerHTML != "init";
+		}, "Timed out waiting for tester to respond", ENABLE30MIN);
+		runs(function() {
+			expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+		});
+	});	
+	
+	it("VTXXX-0123 | sendFileContents method with bmp filepath ( with callback )" , function() {
+		runs(function() {
+			setObjective("VTXXX-0123 | sendFileContents method with bmp filepath ( with callback )");
+			setInstruction("1. Connect a Zebra printer with the device <br /> 2. Call sendFileContents (bmp  file path) with callback.");
+			setExpected("1. Callback should be fired on successful print with return STATUS_SUCCESS <br /> 2. STATUS_ERROR should be thrown on failure in print.");
+		});
+		
+		
+		runs(function() {
+				PrinterConnectiontype();
+			});
+		
+		runs(function() {
+			var PrinterInstance = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			connect_status = PrinterInstance.connect();
+			waitsFor(function()	{
+				return PrinterInstance.isConnected;
+			}, '9sec wait for connection', ENABLE9K);
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.sendFileContents(bmpfilepath, sendfilecontentsCallback);
+			}
+			else {
+				displayResult("Failed to connect to the printer", connect_status);	
+			}
+		});
+		
+		runs(function() {
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+		});
+		waitsFor(function() {
+			return document.getElementById("actResult").innerHTML != "init";
+		}, "Timed out waiting for tester to respond", ENABLE30MIN);
+		runs(function() {
+			expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+		});
+	});	
+
+	it("VTXXX-0124 | sendFileContents method with gif filepath ( with callback )" , function() {
+		runs(function() {
+			setObjective("VTXXX-0124 | sendFileContents method with gif filepath ( with callback )");
+			setInstruction("1. Connect a Zebra printer with the device <br /> 2. Call sendFileContents (gif  file path) with callback.");
+			setExpected("1. Callback should be fired on successful print with return STATUS_SUCCESS <br /> 2. STATUS_ERROR should be thrown on failure in print.");
+		});
+		
+		
+		runs(function() {
+				PrinterConnectiontype();
+			});
+		
+		runs(function() {
+			var PrinterInstance = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			connect_status = PrinterInstance.connect();
+			waitsFor(function()	{
+				return PrinterInstance.isConnected;
+			}, '9sec wait for connection', ENABLE9K);
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.sendFileContents(giffilepath, sendfilecontentsCallback);
+			}
+			else {
+				displayResult("Failed to connect to the printer", connect_status);	
+			}
+		});
+		
+		runs(function() {
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+		});
+		waitsFor(function() {
+			return document.getElementById("actResult").innerHTML != "init";
+		}, "Timed out waiting for tester to respond", ENABLE30MIN);
+		runs(function() {
+			expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+		});
+	});	
+	
+	it("VTXXX-0125 | sendFileContents method with pdf filepath ( with callback )" , function() {
+		runs(function() {
+			setObjective("VTXXX-0125 | sendFileContents method with pdf filepath ( with callback )");
+			setInstruction("1. Connect a Zebra printer with the device <br /> 2. Call sendFileContents (pdf  file path) with callback.");
+			setExpected("1. Callback should be fired on successful print with return STATUS_SUCCESS <br /> 2. STATUS_ERROR should be thrown on failure in print.");
+		});
+		
+		
+		runs(function() {
+				PrinterConnectiontype();
+			});
+		
+		runs(function() {
+			var PrinterInstance = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			connect_status = PrinterInstance.connect();
+			waitsFor(function()	{
+				return PrinterInstance.isConnected;
+			}, '9sec wait for connection', ENABLE9K);
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.sendFileContents(pdffilepath, sendfilecontentsCallback);
+			}
+			else {
+				displayResult("Failed to connect to the printer", connect_status);	
+			}
+		});
+		
+		runs(function() {
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+		});
+		waitsFor(function() {
+			return document.getElementById("actResult").innerHTML != "init";
+		}, "Timed out waiting for tester to respond", ENABLE30MIN);
+		runs(function() {
+			expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+		});
+	});		
+
+	it("VTXXX-0126 | sendFileContents method with HASH ZPL format filepath ( with callback )" , function() {
+		runs(function() {
+			setObjective("VTXXX-0126 | sendFileContents method with HASH ZPL format filepath ( with callback )");
+			setInstruction("1. Connect a Zebra printer with the device <br /> 2. Call sendFileContents (HASH ZPL format  file path) with callback.");
+			setExpected("1. Callback should be fired on successful print with return STATUS_SUCCESS <br /> 2. STATUS_ERROR should be thrown on failure in print.");
+		});
+		
+		
+		runs(function() {
+				PrinterConnectiontype();
+			});
+		
+		runs(function() {
+			var PrinterInstance = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			connect_status = PrinterInstance.connect();
+			waitsFor(function()	{
+				return PrinterInstance.isConnected;
+			}, '9sec wait for connection', ENABLE9K);
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.sendFileContents(hashzplfilepath, sendfilecontentsCallback);
+			}
+			else {
+				displayResult("Failed to connect to the printer", connect_status);	
+			}
+		});
+		
+		runs(function() {
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+		});
+		waitsFor(function() {
+			return document.getElementById("actResult").innerHTML != "init";
+		}, "Timed out waiting for tester to respond", ENABLE30MIN);
+		runs(function() {
+			expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+		});
+	});	
+	
+	it("VTXXX-0127 | sendFileContents method with HASH CCPL format filepath ( with callback )" , function() {
+		runs(function() {
+			setObjective("VTXXX-0127 | sendFileContents method with HASH CCPL format filepath ( with callback )");
+			setInstruction("1. Connect a Zebra printer with the device <br /> 2. Call sendFileContents (HASH CCPL format  file path) with callback.");
+			setExpected("1. Callback should be fired on successful print with return STATUS_SUCCESS <br /> 2. STATUS_ERROR should be thrown on failure in print.");
+		});
+		
+		
+		runs(function() {
+				PrinterConnectiontype();
+			});
+		
+		runs(function() {
+			var PrinterInstance = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			connect_status = PrinterInstance.connect();
+			waitsFor(function()	{
+				return PrinterInstance.isConnected;
+			}, '9sec wait for connection', ENABLE9K);
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.sendFileContents(hashccplfilepath, sendfilecontentsCallback);
+			}
+			else {
+				displayResult("Failed to connect to the printer", connect_status);	
+			}
+		});
+		
+		runs(function() {
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+		});
+		waitsFor(function() {
+			return document.getElementById("actResult").innerHTML != "init";
+		}, "Timed out waiting for tester to respond", ENABLE30MIN);
+		runs(function() {
+			expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+		});
+	});		
+	
+	it("VTXXX-0128 | sendFileContents method with Array ZPL format filepath ( with callback )" , function() {
+		runs(function() {
+			setObjective("VTXXX-0128 | sendFileContents method with Array ZPL format filepath ( with callback )");
+			setInstruction("1. Connect a Zebra printer with the device <br /> 2. Call sendFileContents (Array ZPL format  file path) with callback.");
+			setExpected("1. Callback should be fired on successful print with return STATUS_SUCCESS <br /> 2. STATUS_ERROR should be thrown on failure in print.");
+		});
+		
+		
+		runs(function() {
+				PrinterConnectiontype();
+			});
+		
+		runs(function() {
+			var PrinterInstance = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			connect_status = PrinterInstance.connect();
+			waitsFor(function()	{
+				return PrinterInstance.isConnected;
+			}, '9sec wait for connection', ENABLE9K);
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.sendFileContents(arrayzplfilepath, sendfilecontentsCallback);
+			}
+			else {
+				displayResult("Failed to connect to the printer", connect_status);	
+			}
+		});
+		
+		runs(function() {
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+		});
+		waitsFor(function() {
+			return document.getElementById("actResult").innerHTML != "init";
+		}, "Timed out waiting for tester to respond", ENABLE30MIN);
+		runs(function() {
+			expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+		});
+	});	
+	
+	it("VTXXX-0129 | sendFileContents method with Array CCPL format filepath ( with callback )" , function() {
+		runs(function() {
+			setObjective("VTXXX-0129 | sendFileContents method with Array CCPL format filepath ( with callback )");
+			setInstruction("1. Connect a Zebra printer with the device <br /> 2. Call sendFileContents (Array CCPL format  file path) with callback.");
+			setExpected("1. Callback should be fired on successful print with return STATUS_SUCCESS <br /> 2. STATUS_ERROR should be thrown on failure in print.");
+		});
+		
+		
+		runs(function() {
+				PrinterConnectiontype();
+			});
+		
+		runs(function() {
+			var PrinterInstance = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			connect_status = PrinterInstance.connect();
+			waitsFor(function()	{
+				return PrinterInstance.isConnected;
+			}, '9sec wait for connection', ENABLE9K);
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.sendFileContents(arrayccplfilepath, sendfilecontentsCallback);
+			}
+			else {
+				displayResult("Failed to connect to the printer", connect_status);	
+			}
+		});
+		
+		runs(function() {
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+		});
+		waitsFor(function() {
+			return document.getElementById("actResult").innerHTML != "init";
+		}, "Timed out waiting for tester to respond", ENABLE30MIN);
+		runs(function() {
+			expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+		});
+	});		
+
+	it("VTXXX-0130 | sendFileContents method with Invalid file contents filepath ( with callback )" , function() {
+		runs(function() {
+			setObjective("VTXXX-0130 | sendFileContents method with Invalid file contents filepath ( with callback )");
+			setInstruction("1. Connect a Zebra printer with the device <br /> 2. Call sendFileContents (Invalid file contents file path) with callback.");
+			setExpected("1. Callback should be fired on successful print with return STATUS_SUCCESS <br /> 2. STATUS_ERROR should be thrown on failure in print.");
+		});
+		
+		
+		runs(function() {
+				PrinterConnectiontype();
+			});
+		
+		runs(function() {
+			var PrinterInstance = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			connect_status = PrinterInstance.connect();
+			waitsFor(function()	{
+				return PrinterInstance.isConnected;
+			}, '9sec wait for connection', ENABLE9K);
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.sendFileContents(invalidcontentsfilepath, sendfilecontentsCallback);
+			}
+			else {
+				displayResult("Failed to connect to the printer", connect_status);	
+			}
+		});
+		
+		runs(function() {
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+		});
+		waitsFor(function() {
+			return document.getElementById("actResult").innerHTML != "init";
+		}, "Timed out waiting for tester to respond", ENABLE30MIN);
+		runs(function() {
+			expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+		});
+	});	
+
+	it("VTXXX-0131 | sendFileContents method with Invalid filepath ( with callback )" , function() {
+		runs(function() {
+			setObjective("VTXXX-0131 | sendFileContents method with Invalid filepath ( with callback )");
+			setInstruction("1. Connect a Zebra printer with the device <br /> 2. Call sendFileContents (Invalid file path) with callback.");
+			setExpected("1. Callback should be fired on successful print with return STATUS_SUCCESS <br /> 2. STATUS_ERROR should be thrown on failure in print.");
+		});
+		
+		
+		runs(function() {
+				PrinterConnectiontype();
+			});
+		
+		runs(function() {
+			var PrinterInstance = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			connect_status = PrinterInstance.connect();
+			waitsFor(function()	{
+				return PrinterInstance.isConnected;
+			}, '9sec wait for connection', ENABLE9K);
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.sendFileContents(invalidfilepath, sendfilecontentsCallback);
+			}
+			else {
+				displayResult("Failed to connect to the printer", connect_status);	
+			}
+		});
+		
+		runs(function() {
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+		});
+		waitsFor(function() {
+			return document.getElementById("actResult").innerHTML != "init";
+		}, "Timed out waiting for tester to respond", ENABLE30MIN);
+		runs(function() {
+			expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+		});
+	});		
+	
+	it("VTXXX-0132 | sendFileContents method with PDF filepath ( with Anonymous callback )" , function() {
+		runs(function() {
+			setObjective("VTXXX-0132 | sendFileContents method with PDF filepath ( with Anonymous callback )");
+			setInstruction("1. Connect a Zebra printer with the device <br /> 2. Call sendFileContents (PDF file path) with Anonymous callback.");
+			setExpected("1. Callback should be fired on successful print with return STATUS_SUCCESS <br /> 2. STATUS_ERROR should be thrown on failure in print.");
+		});
+		
+		
+		runs(function() {
+				PrinterConnectiontype();
+			});
+		
+		runs(function() {
+			var PrinterInstance = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			connect_status = PrinterInstance.connect();
+			waitsFor(function()	{
+				return PrinterInstance.isConnected;
+			}, '9sec wait for connection', ENABLE9K);
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.sendFileContents(pdffilepath, function(data){sendfilecontentsCallback(data);});
+			}
+			else {
+				displayResult("Failed to connect to the printer", connect_status);	
+			}
+		});
+		
+		runs(function() {
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+		});
+		waitsFor(function() {
+			return document.getElementById("actResult").innerHTML != "init";
+		}, "Timed out waiting for tester to respond", ENABLE30MIN);
+		runs(function() {
+			expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+		});
+	});	
+
+	it("VTXXX-0133 | sendFileContents method with any file or PDF or XLS in filepath with no connection or connection loss between printer and device( with callback )" , function() {
+		runs(function() {
+			setObjective("VTXXX-0133 | sendFileContents method with PDF filepath ( with Anonymous callback )");
+			setInstruction("1. Disconnect the printer. <br />2. Send XLS file contents ( with callback )");
+			setExpected("1. Callback should be fired on successful print with return STATUS_SUCCESS <br /> 2. STATUS_ERROR should be thrown on failure in print.");
+		});
+		
+		
+		runs(function() {
+			PrinterConnectiontype();
+		});
+		
+		runs(function() {
+			var PrinterInstance = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+			
+			if (!PrinterInstance.isConnected) {
+				PrinterInstance.sendFileContents(pdffilepath, sendfilecontentsCallback);
+			}
+			else {
+				displayResult("Printer is not disconnected", connect_status);	
+			}
+		});
+		
+		runs(function() {
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+		});
+		waitsFor(function() {
+			return document.getElementById("actResult").innerHTML != "init";
+		}, "Timed out waiting for tester to respond", ENABLE30MIN);
+		runs(function() {
+			expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+		});
+	});
+
+	it("VTXXX-0134 | sendFileContents method with ( PDF or XLS or DOC or TXT or JS or JPG or BMP or GIF or PNG or HASH ZPL or Array CCPL )filepath ( without Callback )" , function() {
+		runs(function() {
+			setObjective("VTXXX-0134 | sendFileContents method with ( PDF or XLS or DOC or TXT or JS or JPG or BMP or GIF or PNG or HASH ZPL or Array CCPL )filepath ( without Callback )");
+			setInstruction("1. Connect a Zebra printer with the device <br /> 2. Call sendFileContents ( PDF or XLS or DOC or TXT or JS or JPG or BMP or GIF or PNG or HASH ZPL or Array CCPL ) ( without Callback ).");
+			setExpected("1. Callback should be fired on successful print with return STATUS_SUCCESS <br /> 2. STATUS_ERROR should be thrown on failure in print.");
+		});
+		
+		
+		runs(function() {
+				PrinterConnectiontype();
+			});
+		
+		runs(function() {
+			var PrinterInstance = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			connect_status = PrinterInstance.connect();
+			waitsFor(function()	{
+				return PrinterInstance.isConnected;
+			}, '9sec wait for connection', ENABLE9K);
+			if (PrinterInstance.isConnected) {
+				//TODO: add code
+			}
+			else {
+				displayResult("Failed to connect to the printer", connect_status);	
+			}
+		});
+		
+		runs(function() {
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+		});
+		waitsFor(function() {
+			return document.getElementById("actResult").innerHTML != "init";
+		}, "Timed out waiting for tester to respond", ENABLE30MIN);
+		runs(function() {
+			expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+		});
+	});	
+
+	it("VTXXX-0135 | sendFileContents method with Invalid file contents filepath ( without callback )" , function() {
+		runs(function() {
+			setObjective("VTXXX-0130 | sendFileContents method with Invalid file contents filepath ( without callback )");
+			setInstruction("1. Connect a Zebra printer with the device <br /> 2. Call sendFileContents (Invalid file contents file path) without callback.");
+			setExpected("1.STATUS_ERROR should be thrown on failure in print.");
+		});
+		
+		
+		runs(function() {
+				PrinterConnectiontype();
+			});
+		
+		runs(function() {
+			var PrinterInstance = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			connect_status = PrinterInstance.connect();
+			waitsFor(function()	{
+				return PrinterInstance.isConnected;
+			}, '9sec wait for connection', ENABLE9K);
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.sendFileContents(invalidcontentsfilepath);
+			}
+			else {
+				displayResult("Failed to connect to the printer", connect_status);	
+			}
+		});
+		
+		runs(function() {
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+		});
+		waitsFor(function() {
+			return document.getElementById("actResult").innerHTML != "init";
+		}, "Timed out waiting for tester to respond", ENABLE30MIN);
+		runs(function() {
+			expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+		});
+	});	
+
+	it("VTXXX-0136 | sendFileContents method with Invalid filepath ( without callback )" , function() {
+		runs(function() {
+			setObjective("VTXXX-0136 | sendFileContents method with Invalid filepath ( without callback )");
+			setInstruction("1. Connect a Zebra printer with the device <br /> 2. Call sendFileContents (Invalid file path) without callback.");
+			setExpected("1.STATUS_ERROR should be thrown on failure in print.");
+		});
+		
+		
+		runs(function() {
+				PrinterConnectiontype();
+			});
+		
+		runs(function() {
+			var PrinterInstance = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			connect_status = PrinterInstance.connect();
+			waitsFor(function()	{
+				return PrinterInstance.isConnected;
+			}, '9sec wait for connection', ENABLE9K);
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.sendFileContents(invalidfilepath);
+			}
+			else {
+				displayResult("Failed to connect to the printer", connect_status);	
+			}
+		});
+		
+		runs(function() {
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+		});
+		waitsFor(function() {
+			return document.getElementById("actResult").innerHTML != "init";
+		}, "Timed out waiting for tester to respond", ENABLE30MIN);
+		runs(function() {
+			expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+		});
+	});	
+
+	it("VTXXX-0137 | sendFileContents method with any file or PDF or XLS in filepath with no connection or connection loss between printer and device( without callback )" , function() {
+		runs(function() {
+			setObjective("VTXXX-0137 | sendFileContents method with any file or PDF or XLS in filepath with no connection or connection loss between printer and device( without callback )");
+			setInstruction("1. Disconnect the printer. <br /> 2. sendFileContents method with any file or PDF or XLS without callback.");
+			setExpected("1.STATUS_ERROR should be thrown on failure in print.");
+		});
+		
+		
+		runs(function() {
+				PrinterConnectiontype();
+			});
+		
+		runs(function() {
+			var PrinterInstance = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			connect_status = PrinterInstance.disconnect();
+			if (!PrinterInstance.isConnected) {
+				PrinterInstance.sendFileContents(invalidfilepath);
+			}
+			else {
+				displayResult("Failed to disconnect the printer", connect_status);	
+			}
+		});
+		
+		runs(function() {
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+		});
+		waitsFor(function() {
+			return document.getElementById("actResult").innerHTML != "init";
+		}, "Timed out waiting for tester to respond", ENABLE30MIN);
+		runs(function() {
+			expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+		});
+	});		
+
+	it("VTXXX-0138 | printStoredFormatWithHash method with ZPL HASH ( with Callback )" , function() {
+		runs(function() {
+			setObjective("VTXXX-0138 | printStoredFormatWithHash method with ZPL HASH ( with Callback )");
+			setInstruction("1. Connect a Zebra printer with the device <br /> 2. Call printStoredFormatWithHash (  'E:FORMAT.ZPL',  HASH ZPL ) with callback.");
+			setExpected("1. On successful print callback should return with STATUS_SUCCESS <br />2. On failure print callback should return with STATUS_ERROR ");
+		});
+		
+		
+		runs(function() {
+				PrinterConnectiontype();
+			});
+		
+		runs(function() {
+			var PrinterInstance = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			connect_status = PrinterInstance.connect();
+			waitsFor(function()	{
+				return PrinterInstance.isConnected;
+			}, '9sec wait for connection', ENABLE9K);
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.printStoredFormatWithHash(zplformat, hashzpl, printStoredHashCallback);
+			}
+			else {
+				displayResult("Failed to connect to the printer", connect_status);	
+			}
+		});
+		
+		runs(function() {
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+		});
+		waitsFor(function() {
+			return document.getElementById("actResult").innerHTML != "init";
+		}, "Timed out waiting for tester to respond", ENABLE30MIN);
+		runs(function() {
+			expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+		});
+	});	
+
+	it("VTXXX-0139 | printStoredFormatWithHash method with CCPL HASH ( with Callback )" , function() {
+		runs(function() {
+			setObjective("VTXXX-0139 | printStoredFormatWithHash method with CCPL HASH ( with Callback )");
+			setInstruction("1. Connect a Zebra printer with the device <br /> 2. Call printStoredFormatWithHash (  'E:FORMAT.CCPL',  HASH CCPL ) with callback.");
+			setExpected("1. On successful print callback should return with STATUS_SUCCESS <br />2. On failure print callback should return with STATUS_ERROR ");
+		});
+		
+		
+		runs(function() {
+				PrinterConnectiontype();
+			});
+		
+		runs(function() {
+			var PrinterInstance = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			connect_status = PrinterInstance.connect();
+			waitsFor(function()	{
+				return PrinterInstance.isConnected;
+			}, '9sec wait for connection', ENABLE9K);
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.printStoredFormatWithHash(ccplformat, hashccpl, printStoredHashCallback);
+			}
+			else {
+				displayResult("Failed to connect to the printer", connect_status);	
+			}
+		});
+		
+		runs(function() {
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+		});
+		waitsFor(function() {
+			return document.getElementById("actResult").innerHTML != "init";
+		}, "Timed out waiting for tester to respond", ENABLE30MIN);
+		runs(function() {
+			expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+		});
+	});	
+
+	it("VTXXX-0140 | Print Any HASH stored format by using printStoredFormatWithHash method with no connection between printer and device ( with Callback )" , function() {
+		runs(function() {
+			setObjective("VTXXX-0140 | Print Any HASH stored format by using printStoredFormatWithHash method with no connection between printer and device ( with Callback )");
+			setInstruction("1. Disconnect the printer. <br /> 2. Call printStoredFormatWithHash (  'E:FORMAT.ZPL',  HASH ZPL ) with callback.");
+			setExpected("1. On failure print callback should return with STATUS_ERROR ");
+		});
+		
+		
+		runs(function() {
+				PrinterConnectiontype();
+			});
+		
+		runs(function() {
+			var PrinterInstance = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+			
+			if (!PrinterInstance.isConnected) {
+				PrinterInstance.printStoredFormatWithHash(ccplformat, hashccpl, printStoredHashCallback);
+			}
+			else {
+				displayResult("Failed to disconnect the printer", connect_status);	
+			}
+		});
+		
+		runs(function() {
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+		});
+		waitsFor(function() {
+			return document.getElementById("actResult").innerHTML != "init";
+		}, "Timed out waiting for tester to respond", ENABLE30MIN);
+		runs(function() {
+			expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+		});
+	});		
+
+	it("VTXXX-0141 | printStoredFormatWithHash method with ZPL HASH ( without Callback )" , function() {
+		runs(function() {
+			setObjective("VTXXX-0141 | printStoredFormatWithHash method with ZPL HASH ( without Callback )");
+			setInstruction("1. Connect a Zebra printer with the device <br /> 2. Call printStoredFormatWithHash (  'E:FORMAT.ZPL',  HASH ZPL ) without callback.");
+			setExpected("1. On successful print should return with STATUS_SUCCESS <br />2. On failure print should return with STATUS_ERROR ");
+		});
+		
+		
+		runs(function() {
+				PrinterConnectiontype();
+			});
+		
+		runs(function() {
+			var PrinterInstance = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			connect_status = PrinterInstance.connect();
+			waitsFor(function()	{
+				return PrinterInstance.isConnected;
+			}, '9sec wait for connection', ENABLE9K);
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.printStoredFormatWithHash(zplformat, hashzpl);
+			}
+			else {
+				displayResult("Failed to connect to the printer", connect_status);	
+			}
+		});
+		
+		runs(function() {
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+		});
+		waitsFor(function() {
+			return document.getElementById("actResult").innerHTML != "init";
+		}, "Timed out waiting for tester to respond", ENABLE30MIN);
+		runs(function() {
+			expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+		});
+	});	
+
+	it("VTXXX-0142 | printStoredFormatWithHash method with CCPL HASH ( without Callback )" , function() {
+		runs(function() {
+			setObjective("VTXXX-0142 | printStoredFormatWithHash method with CCPL HASH ( without Callback )");
+			setInstruction("1. Connect a Zebra printer with the device <br /> 2. Call printStoredFormatWithHash (  'E:FORMAT.CCPL',  HASH CCPL ) without callback.");
+			setExpected("1. On successful print should return with STATUS_SUCCESS <br />2. On failure print should return with STATUS_ERROR ");
+		});
+		
+		
+		runs(function() {
+				PrinterConnectiontype();
+			});
+		
+		runs(function() {
+			var PrinterInstance = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			connect_status = PrinterInstance.connect();
+			waitsFor(function()	{
+				return PrinterInstance.isConnected;
+			}, '9sec wait for connection', ENABLE9K);
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.printStoredFormatWithHash(ccplformat, hashccpl);
+			}
+			else {
+				displayResult("Failed to connect to the printer", connect_status);	
+			}
+		});
+		
+		runs(function() {
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+		});
+		waitsFor(function() {
+			return document.getElementById("actResult").innerHTML != "init";
+		}, "Timed out waiting for tester to respond", ENABLE30MIN);
+		runs(function() {
+			expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+		});
+	});	
+
+	it("VTXXX-0143 | Print Any HASH stored format by using printStoredFormatWithHash method with no connection between printer and device ( without Callback )" , function() {
+		runs(function() {
+			setObjective("VTXXX-0143 | Print Any HASH stored format by using printStoredFormatWithHash method with no connection between printer and device ( without Callback )");
+			setInstruction("1. Disconnect the printer. <br /> 2. Call printStoredFormatWithHash (  'E:FORMAT.ZPL',  HASH ZPL ) without callback.");
+			setExpected("1. On failure print should return with STATUS_ERROR ");
+		});
+		
+		
+		runs(function() {
+				PrinterConnectiontype();
+			});
+		
+		runs(function() {
+			var PrinterInstance = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+			
+			if (!PrinterInstance.isConnected) {
+				PrinterInstance.printStoredFormatWithHash(ccplformat, hashccpl);
+			}
+			else {
+				displayResult("Failed to disconnect the printer", connect_status);	
+			}
+		});
+		
+		runs(function() {
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+		});
+		waitsFor(function() {
+			return document.getElementById("actResult").innerHTML != "init";
+		}, "Timed out waiting for tester to respond", ENABLE30MIN);
+		runs(function() {
+			expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+		});
+	});		
+
+	it("VTXXX-0144 | Print Invalid HASH stored format with invalid path by using printStoredFormatWithHash method ( with Callback )" , function() {
+		runs(function() {
+			setObjective("VTXXX-0144 | printStoredFormatWithHash method with CCPL HASH ( with Callback )");
+			setInstruction("1. Connect a Zebra printer with the device <br /> 2. Call printStoredFormatWithHash (  'Invalid Path',  Invalid HASH ZPL ) with callback.");
+			setExpected("1. On failure print callback should return with STATUS_ERROR ");
+		});
+		
+		
+		runs(function() {
+				PrinterConnectiontype();
+			});
+		
+		runs(function() {
+			var PrinterInstance = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			connect_status = PrinterInstance.connect();
+			waitsFor(function()	{
+				return PrinterInstance.isConnected;
+			}, '9sec wait for connection', ENABLE9K);
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.printStoredFormatWithHash(invalidformatformat, invalidzplhash, printStoredHashCallback);
+			}
+			else {
+				displayResult("Failed to connect to the printer", connect_status);	
+			}
+		});
+		
+		runs(function() {
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+		});
+		waitsFor(function() {
+			return document.getElementById("actResult").innerHTML != "init";
+		}, "Timed out waiting for tester to respond", ENABLE30MIN);
+		runs(function() {
+			expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+		});
+	});	
+
+	it("VTXXX-0145 | printStoredFormatWithHash method with ZPL HASH ( with Anonymous  Callback )" , function() {
+		runs(function() {
+			setObjective("VTXXX-0145 | printStoredFormatWithHash method with ZPL HASH ( with Anonymous  Callback )");
+			setInstruction("1. Connect a Zebra printer with the device <br /> 2. Call printStoredFormatWithHash (  'E:FORMAT.ZPL',  HASH ZPL ) with Anonymous  callback.");
+			setExpected("1. On successful print callback should return with STATUS_SUCCESS <br />2. On failure print callback should return with STATUS_ERROR ");
+		});
+		
+		
+		runs(function() {
+				PrinterConnectiontype();
+			});
+		
+		runs(function() {
+			var PrinterInstance = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			connect_status = PrinterInstance.connect();
+			waitsFor(function()	{
+				return PrinterInstance.isConnected;
+			}, '9sec wait for connection', ENABLE9K);
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.printStoredFormatWithHash(zplformat, hashzpl, function(data) { printStoredHashCallback(data) });
+			}
+			else {
+				displayResult("Failed to connect to the printer", connect_status);	
+			}
+		});
+		
+		runs(function() {
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+		});
+		waitsFor(function() {
+			return document.getElementById("actResult").innerHTML != "init";
+		}, "Timed out waiting for tester to respond", ENABLE30MIN);
+		runs(function() {
+			expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+		});
+	});	
+
+
+	it("VTXXX-0146 | printStoredFormatWithHash method with CCPL HASH ( with Anonymous Callback )" , function() {
+		runs(function() {
+			setObjective("VTXXX-0146 | printStoredFormatWithHash method with CCPL HASH ( with Anonymous Callback )");
+			setInstruction("1. Connect a Zebra printer with the device <br /> 2. Call printStoredFormatWithHash (  'E:FORMAT.CCPL',  HASH CCPL ) with Anonymous callback.");
+			setExpected("1. On successful print callback should return with STATUS_SUCCESS <br />2. On failure print callback should return with STATUS_ERROR ");
+		});
+		
+		
+		runs(function() {
+				PrinterConnectiontype();
+			});
+		
+		runs(function() {
+			var PrinterInstance = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			connect_status = PrinterInstance.connect();
+			waitsFor(function()	{
+				return PrinterInstance.isConnected;
+			}, '9sec wait for connection', ENABLE9K);
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.printStoredFormatWithHash(ccplformat, hashccpl, function(data) { printStoredHashCallback(data) });
+			}
+			else {
+				displayResult("Failed to connect to the printer", connect_status);	
+			}
+		});
+		
+		runs(function() {
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+		});
+		waitsFor(function() {
+			return document.getElementById("actResult").innerHTML != "init";
+		}, "Timed out waiting for tester to respond", ENABLE30MIN);
+		runs(function() {
+			expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+		});
+	});		
+
+	
+	it("VTXXX-0147 | printStoredFormatWithArray method with ZPL ARRAY ( with Callback )" , function() {
+		runs(function() {
+			setObjective("VTXXX-0147 | printStoredFormatWithArray method with ZPL ARRAY ( with Callback )");
+			setInstruction("1. Connect a Zebra printer with the device <br /> 2. Call printStoredFormatWithArray (  'E:FORMAT.ZPL',  ARRAY ZPL ) with callback.");
+			setExpected("1. On successful print callback should return with STATUS_SUCCESS <br />2. On failure print callback should return with STATUS_ERROR ");
+		});
+		
+		
+		runs(function() {
+				PrinterConnectiontype();
+			});
+		
+		runs(function() {
+			var PrinterInstance = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			connect_status = PrinterInstance.connect();
+			waitsFor(function()	{
+				return PrinterInstance.isConnected;
+			}, '9sec wait for connection', ENABLE9K);
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.printStoredFormatWithArray(zplformat, arrayzpl, printStoredArrayCallback);
+			}
+			else {
+				displayResult("Failed to connect to the printer", connect_status);	
+			}
+		});
+		
+		runs(function() {
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+		});
+		waitsFor(function() {
+			return document.getElementById("actResult").innerHTML != "init";
+		}, "Timed out waiting for tester to respond", ENABLE30MIN);
+		runs(function() {
+			expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+		});
+	});	
+
+	it("VTXXX-0148 | printStoredFormatWithArray method with CCPL ARRAY ( with Callback )" , function() {
+		runs(function() {
+			setObjective("VTXXX-0148 | printStoredFormatWithArray method with CCPL ARRAY ( with Callback )");
+			setInstruction("1. Connect a Zebra printer with the device <br /> 2. Call printStoredFormatWithArray (  'E:FORMAT.CCPL',  ARRAY CCPL ) with callback.");
+			setExpected("1. On successful print callback should return with STATUS_SUCCESS <br />2. On failure print callback should return with STATUS_ERROR ");
+		});
+		
+		
+		runs(function() {
+				PrinterConnectiontype();
+			});
+		
+		runs(function() {
+			var PrinterInstance = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			connect_status = PrinterInstance.connect();
+			waitsFor(function()	{
+				return PrinterInstance.isConnected;
+			}, '9sec wait for connection', ENABLE9K);
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.printStoredFormatWithArray(ccplformat, arrayccpl, printStoredArrayCallback);
+			}
+			else {
+				displayResult("Failed to connect to the printer", connect_status);	
+			}
+		});
+		
+		runs(function() {
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+		});
+		waitsFor(function() {
+			return document.getElementById("actResult").innerHTML != "init";
+		}, "Timed out waiting for tester to respond", ENABLE30MIN);
+		runs(function() {
+			expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+		});
+	});	
+
+	it("VTXXX-0149 | Print Any ARRAY stored format by using printStoredFormatWithArray method with no connection between printer and device ( with Callback )" , function() {
+		runs(function() {
+			setObjective("VTXXX-0149 | Print Any ARRAY stored format by using printStoredFormatWithArray method with no connection between printer and device ( with Callback )");
+			setInstruction("1. Disconnect the printer. <br /> 2. Call printStoredFormatWithArray (  'E:FORMAT.ZPL',  ARRAY ZPL ) with callback.");
+			setExpected("1. On failure print callback should return with STATUS_ERROR ");
+		});
+		
+		
+		runs(function() {
+				PrinterConnectiontype();
+			});
+		
+		runs(function() {
+			var PrinterInstance = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+			
+			if (!PrinterInstance.isConnected) {
+				PrinterInstance.printStoredFormatWithArray(ccplformat, arrayccpl, printStoredArrayCallback);
+			}
+			else {
+				displayResult("Failed to disconnect the printer", connect_status);	
+			}
+		});
+		
+		runs(function() {
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+		});
+		waitsFor(function() {
+			return document.getElementById("actResult").innerHTML != "init";
+		}, "Timed out waiting for tester to respond", ENABLE30MIN);
+		runs(function() {
+			expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+		});
+	});		
+
+	it("VTXXX-0150 | printStoredFormatWithArray method with ZPL ARRAY ( without Callback )" , function() {
+		runs(function() {
+			setObjective("VTXXX-0150 | printStoredFormatWithArray method with ZPL ARRAY ( without Callback )");
+			setInstruction("1. Connect a Zebra printer with the device <br /> 2. Call printStoredFormatWithArray (  'E:FORMAT.ZPL',  ARRAY ZPL ) without callback.");
+			setExpected("1. On successful print should return with STATUS_SUCCESS <br />2. On failure print should return with STATUS_ERROR ");
+		});
+		
+		
+		runs(function() {
+				PrinterConnectiontype();
+			});
+		
+		runs(function() {
+			var PrinterInstance = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			connect_status = PrinterInstance.connect();
+			waitsFor(function()	{
+				return PrinterInstance.isConnected;
+			}, '9sec wait for connection', ENABLE9K);
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.printStoredFormatWithArray(zplformat, arrayzpl);
+			}
+			else {
+				displayResult("Failed to connect to the printer", connect_status);	
+			}
+		});
+		
+		runs(function() {
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+		});
+		waitsFor(function() {
+			return document.getElementById("actResult").innerHTML != "init";
+		}, "Timed out waiting for tester to respond", ENABLE30MIN);
+		runs(function() {
+			expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+		});
+	});	
+
+	it("VTXXX-0151 | printStoredFormatWithArray method with CCPL ARRAY ( without Callback )" , function() {
+		runs(function() {
+			setObjective("VTXXX-0151 | printStoredFormatWithArray method with CCPL ARRAY ( without Callback )");
+			setInstruction("1. Connect a Zebra printer with the device <br /> 2. Call printStoredFormatWithArray (  'E:FORMAT.CCPL',  ARRAY CCPL ) without callback.");
+			setExpected("1. On successful print should return with STATUS_SUCCESS <br />2. On failure print should return with STATUS_ERROR ");
+		});
+		
+		
+		runs(function() {
+				PrinterConnectiontype();
+			});
+		
+		runs(function() {
+			var PrinterInstance = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			connect_status = PrinterInstance.connect();
+			waitsFor(function()	{
+				return PrinterInstance.isConnected;
+			}, '9sec wait for connection', ENABLE9K);
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.printStoredFormatWithArray(ccplformat, arrayccpl);
+			}
+			else {
+				displayResult("Failed to connect to the printer", connect_status);	
+			}
+		});
+		
+		runs(function() {
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+		});
+		waitsFor(function() {
+			return document.getElementById("actResult").innerHTML != "init";
+		}, "Timed out waiting for tester to respond", ENABLE30MIN);
+		runs(function() {
+			expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+		});
+	});	
+
+	it("VTXXX-0152 | Print Any ARRAY stored format by using printStoredFormatWithArray method with no connection between printer and device ( without Callback )" , function() {
+		runs(function() {
+			setObjective("VTXXX-0152 | Print Any ARRAY stored format by using printStoredFormatWithArray method with no connection between printer and device ( without Callback )");
+			setInstruction("1. Disconnect the printer. <br /> 2. Call printStoredFormatWithArray (  'E:FORMAT.ZPL',  ARRAY ZPL ) without callback.");
+			setExpected("1. On failure print should return with STATUS_ERROR ");
+		});
+		
+		
+		runs(function() {
+				PrinterConnectiontype();
+			});
+		
+		runs(function() {
+			var PrinterInstance = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+			
+			if (!PrinterInstance.isConnected) {
+				PrinterInstance.printStoredFormatWithArray(ccplformat, arrayccpl);
+			}
+			else {
+				displayResult("Failed to disconnect the printer", connect_status);	
+			}
+		});
+		
+		runs(function() {
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+		});
+		waitsFor(function() {
+			return document.getElementById("actResult").innerHTML != "init";
+		}, "Timed out waiting for tester to respond", ENABLE30MIN);
+		runs(function() {
+			expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+		});
+	});		
+
+	it("VTXXX-0153 | Print Invalid ARRAY stored format with invalid path by using printStoredFormatWithArray method ( with Callback )" , function() {
+		runs(function() {
+			setObjective("VTXXX-0153 | printStoredFormatWithArray method with CCPL ARRAY ( with Callback )");
+			setInstruction("1. Connect a Zebra printer with the device <br /> 2. Call printStoredFormatWithArray (  'Invalid Path',  Invalid ARRAY ZPL ) with callback.");
+			setExpected("1. On failure print callback should return with STATUS_ERROR ");
+		});
+		
+		
+		runs(function() {
+				PrinterConnectiontype();
+			});
+		
+		runs(function() {
+			var PrinterInstance = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			connect_status = PrinterInstance.connect();
+			waitsFor(function()	{
+				return PrinterInstance.isConnected;
+			}, '9sec wait for connection', ENABLE9K);
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.printStoredFormatWithArray(invalidformatformat, invalidzplarray, printStoredArrayCallback);
+			}
+			else {
+				displayResult("Failed to connect to the printer", connect_status);	
+			}
+		});
+		
+		runs(function() {
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+		});
+		waitsFor(function() {
+			return document.getElementById("actResult").innerHTML != "init";
+		}, "Timed out waiting for tester to respond", ENABLE30MIN);
+		runs(function() {
+			expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+		});
+	});	
+
+	it("VTXXX-0154 | printStoredFormatWithArray method with ZPL ARRAY ( with Anonymous  Callback )" , function() {
+		runs(function() {
+			setObjective("VTXXX-0154 | printStoredFormatWithArray method with ZPL ARRAY ( with Anonymous  Callback )");
+			setInstruction("1. Connect a Zebra printer with the device <br /> 2. Call printStoredFormatWithArray (  'E:FORMAT.ZPL',  ARRAY ZPL ) with Anonymous  callback.");
+			setExpected("1. On successful print callback should return with STATUS_SUCCESS <br />2. On failure print callback should return with STATUS_ERROR ");
+		});
+		
+		
+		runs(function() {
+				PrinterConnectiontype();
+			});
+		
+		runs(function() {
+			var PrinterInstance = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			connect_status = PrinterInstance.connect();
+			waitsFor(function()	{
+				return PrinterInstance.isConnected;
+			}, '9sec wait for connection', ENABLE9K);
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.printStoredFormatWithArray(zplformat, arrayzpl, function(data) { printStoredArrayCallback(data) });
+			}
+			else {
+				displayResult("Failed to connect to the printer", connect_status);	
+			}
+		});
+		
+		runs(function() {
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+		});
+		waitsFor(function() {
+			return document.getElementById("actResult").innerHTML != "init";
+		}, "Timed out waiting for tester to respond", ENABLE30MIN);
+		runs(function() {
+			expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+		});
+	});	
+
+	it("VTXXX-0155 | printStoredFormatWithArray method with CCPL ARRAY ( with Anonymous Callback )" , function() {
+		runs(function() {
+			setObjective("VTXXX-0155 | printStoredFormatWithArray method with CCPL ARRAY ( with Anonymous Callback )");
+			setInstruction("1. Connect a Zebra printer with the device <br /> 2. Call printStoredFormatWithArray (  'E:FORMAT.CCPL',  ARRAY CCPL ) with Anonymous callback.");
+			setExpected("1. On successful print callback should return with STATUS_SUCCESS <br />2. On failure print callback should return with STATUS_ERROR ");
+		});
+		
+		
+		runs(function() {
+				PrinterConnectiontype();
+			});
+		
+		runs(function() {
+			var PrinterInstance = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			connect_status = PrinterInstance.connect();
+			waitsFor(function()	{
+				return PrinterInstance.isConnected;
+			}, '9sec wait for connection', ENABLE9K);
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.printStoredFormatWithArray(ccplformat, arrayccpl, function(data) { printStoredArrayCallback(data) });
+			}
+			else {
+				displayResult("Failed to connect to the printer", connect_status);	
+			}
+		});
+		
+		runs(function() {
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+		});
+		waitsFor(function() {
+			return document.getElementById("actResult").innerHTML != "init";
+		}, "Timed out waiting for tester to respond", ENABLE30MIN);
+		runs(function() {
+			expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+		});
+	});		
+	
+	it("VTXXX-0156 | Print PNG file (320X240) with Path to image file, x=0, y =0 and NIL options printImageFromFile method( with Callback )" , function() {
+		runs(function() {
+			setObjective("VTXXX-0156 | Print PNG file (320X240) with Path to image file, x=0, y =0 and NIL options printImageFromFile method( with Callback )");
+			setInstruction("1. Connect a Zebra printer with the device <br /> 2. Call printImageFromFile with callback.");
+			setExpected("1. On successful print callback should return with STATUS_SUCCESS <br />2. On failure print callback should return with STATUS_ERROR ");
+		});
+		
+		
+		runs(function() {
+				PrinterConnectiontype();
+			});
+		
+		runs(function() {
+			var PrinterInstance = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			connect_status = PrinterInstance.connect();
+			waitsFor(function()	{
+				return PrinterInstance.isConnected;
+			}, '9sec wait for connection', ENABLE9K);
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.printImageFromFile(pngimagepath_320px, 0, 0, {}, printImageFromFileCallback);
+			}
+			else {
+				displayResult("Failed to connect to the printer", connect_status);	
+			}
+		});
+		
+		runs(function() {
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+		});
+		waitsFor(function() {
+			return document.getElementById("actResult").innerHTML != "init";
+		}, "Timed out waiting for tester to respond", ENABLE30MIN);
+		runs(function() {
+			expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+		});
+	});	
+	
+	it("VTXXX-0157 | Print PNG file (320X240) with Path to image file, x=50, y =50 and NIL options printImageFromFile method( with Callback )" , function() {
+		runs(function() {
+			setObjective("VTXXX-0157 | Print PNG file (320X240) with Path to image file, x=50, y =50 and NIL options printImageFromFile method( with Callback )");
+			setInstruction("1. Connect a Zebra printer with the device <br /> 2. Call printImageFromFile with callback.");
+			setExpected("1. On successful print callback should return with STATUS_SUCCESS <br />2. On failure print callback should return with STATUS_ERROR ");
+		});
+		
+		
+		runs(function() {
+				PrinterConnectiontype();
+			});
+		
+		runs(function() {
+			var PrinterInstance = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			connect_status = PrinterInstance.connect();
+			waitsFor(function()	{
+				return PrinterInstance.isConnected;
+			}, '9sec wait for connection', ENABLE9K);
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.printImageFromFile(pngimagepath_320px, 50, 50, {}, printImageFromFileCallback);
+			}
+			else {
+				displayResult("Failed to connect to the printer", connect_status);	
+			}
+		});
+		
+		runs(function() {
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+		});
+		waitsFor(function() {
+			return document.getElementById("actResult").innerHTML != "init";
+		}, "Timed out waiting for tester to respond", ENABLE30MIN);
+		runs(function() {
+			expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+		});
+	});		
+	
+	it("VTXXX-0158 | Print PNG file (320X240) with Path to image file, x=-100, y =-200 and NIL options printImageFromFile method ( with Callback )" , function() {
+		runs(function() {
+			setObjective("VTXXX-0158 | Print PNG file (320X240) with Path to image file, x=-100, y =-200 and NIL options printImageFromFile method ( with Callback )");
+			setInstruction("1. Connect a Zebra printer with the device <br /> 2. Call printImageFromFile with callback.");
+			setExpected("1. On successful print callback should return with STATUS_SUCCESS <br />2. On failure print callback should return with STATUS_ERROR ");
+		});
+		
+		
+		runs(function() {
+				PrinterConnectiontype();
+			});
+		
+		runs(function() {
+			var PrinterInstance = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			connect_status = PrinterInstance.connect();
+			waitsFor(function()	{
+				return PrinterInstance.isConnected;
+			}, '9sec wait for connection', ENABLE9K);
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.printImageFromFile(pngimagepath_320px, -100, -200, {}, printImageFromFileCallback);
+			}
+			else {
+				displayResult("Failed to connect to the printer", connect_status);	
+			}
+		});
+		
+		runs(function() {
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+		});
+		waitsFor(function() {
+			return document.getElementById("actResult").innerHTML != "init";
+		}, "Timed out waiting for tester to respond", ENABLE30MIN);
+		runs(function() {
+			expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+		});
+	});		
+	
+	it("VTXXX-0159 | Print PNG file (320X240) with Path to image file, x=0, y =0 and options as width as 50, height as 50 and isInsideFormat as True printImageFromFile method ( with Callback )" , function() {
+		runs(function() {
+			setObjective("VTXXX-0159 | Print PNG file (320X240) with Path to image file, x=0, y =0 and options as width as 50, height as 50 and isInsideFormat as True printImageFromFile method ( with Callback )");
+			setInstruction("1. Connect a Zebra printer with the device <br /> 2. Call printImageFromFile with callback.");
+			setExpected("1. On successful print callback should return with STATUS_SUCCESS <br />2. On failure print callback should return with STATUS_ERROR ");
+		});
+		
+		
+		runs(function() {
+				PrinterConnectiontype();
+			});
+		
+		runs(function() {
+			var PrinterInstance = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			connect_status = PrinterInstance.connect();
+			waitsFor(function()	{
+				return PrinterInstance.isConnected;
+			}, '9sec wait for connection', ENABLE9K);
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.printImageFromFile(pngimagepath_320px, 0, 0, {'height':50, 'width':50, 'isInsideFormat':true}, printImageFromFileCallback);
+			}
+			else {
+				displayResult("Failed to connect to the printer", connect_status);	
+			}
+		});
+		
+		runs(function() {
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+		});
+		waitsFor(function() {
+			return document.getElementById("actResult").innerHTML != "init";
+		}, "Timed out waiting for tester to respond", ENABLE30MIN);
+		runs(function() {
+			expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+		});
+	});
+	
+	it("VTXXX-0160 | Print PNG file (320X240) with Path to image file, x=50, y =100 and options as width as -1, height as -1 and isInsideFormat as false printImageFromFile method ( with Callback )" , function() {
+		runs(function() {
+			setObjective("VTXXX-0160 |Print PNG file (320X240) with Path to image file, x=50, y =100 and options as width as -1, height as -1 and isInsideFormat as false printImageFromFile method ( with Callback )");
+			setInstruction("1. Connect a Zebra printer with the device <br /> 2. Call printImageFromFile with callback.");
+			setExpected("1. On successful print callback should return with STATUS_SUCCESS <br />2. On failure print callback should return with STATUS_ERROR ");
+		});
+		
+		
+		runs(function() {
+				PrinterConnectiontype();
+			});
+		
+		runs(function() {
+			var PrinterInstance = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			connect_status = PrinterInstance.connect();
+			waitsFor(function()	{
+				return PrinterInstance.isConnected;
+			}, '9sec wait for connection', ENABLE9K);
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.printImageFromFile(pngimagepath_320px, 50, 100, {'height':-1, 'width':-1, 'isInsideFormat':false}, printImageFromFileCallback);
+			}
+			else {
+				displayResult("Failed to connect to the printer", connect_status);	
+			}
+		});
+		
+		runs(function() {
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+		});
+		waitsFor(function() {
+			return document.getElementById("actResult").innerHTML != "init";
+		}, "Timed out waiting for tester to respond", ENABLE30MIN);
+		runs(function() {
+			expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+		});
+	});
+	
+	it("VTXXX-0161 | Print PNG file (320X240) with Path to image file, x=-100, y =-100 and options as width as -50, height as -50 and isInsideFormat as false printImageFromFile method ( with Callback )" , function() {
+		runs(function() {
+			setObjective("VTXXX-0161 |Print PNG file (320X240) with Path to image file, x=-100, y =-100 and options as width as -50, height as -50 and isInsideFormat as false printImageFromFile method ( with Callback )");
+			setInstruction("1. Connect a Zebra printer with the device <br /> 2. Call printImageFromFile with callback.");
+			setExpected("1. On successful print callback should return with STATUS_SUCCESS <br />2. On failure print callback should return with STATUS_ERROR ");
+		});
+		
+		
+		runs(function() {
+				PrinterConnectiontype();
+			});
+		
+		runs(function() {
+			var PrinterInstance = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			connect_status = PrinterInstance.connect();
+			waitsFor(function()	{
+				return PrinterInstance.isConnected;
+			}, '9sec wait for connection', ENABLE9K);
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.printImageFromFile(pngimagepath_320px, -100, -100, {'height':-50, 'width':-50, 'isInsideFormat':false}, printImageFromFileCallback);
+			}
+			else {
+				displayResult("Failed to connect to the printer", connect_status);	
+			}
+		});
+		
+		runs(function() {
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+		});
+		waitsFor(function() {
+			return document.getElementById("actResult").innerHTML != "init";
+		}, "Timed out waiting for tester to respond", ENABLE30MIN);
+		runs(function() {
+			expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+		});
+	});
+	
+	it("VTXXX-0162 | Print JPG file (320X240) with Path to image file, x=50, y =50 and NIL options printImageFromFile method ( with Callback )" , function() {
+		runs(function() {
+			setObjective("VTXXX-0162 |Print JPG file (320X240) with Path to image file, x=50, y =50 and NIL options printImageFromFile method ( with Callback )");
+			setInstruction("1. Connect a Zebra printer with the device <br /> 2. Call printImageFromFile with callback.");
+			setExpected("1. On successful print callback should return with STATUS_SUCCESS <br />2. On failure print callback should return with STATUS_ERROR ");
+		});
+		
+		
+		runs(function() {
+				PrinterConnectiontype();
+			});
+		
+		runs(function() {
+			var PrinterInstance = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			connect_status = PrinterInstance.connect();
+			waitsFor(function()	{
+				return PrinterInstance.isConnected;
+			}, '9sec wait for connection', ENABLE9K);
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.printImageFromFile(jpgimagepath_320px, 50, 50, {}, printImageFromFileCallback);
+			}
+			else {
+				displayResult("Failed to connect to the printer", connect_status);	
+			}
+		});
+		
+		runs(function() {
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+		});
+		waitsFor(function() {
+			return document.getElementById("actResult").innerHTML != "init";
+		}, "Timed out waiting for tester to respond", ENABLE30MIN);
+		runs(function() {
+			expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+		});
+	});
+
+	it("VTXXX-0163 | Print JPG file (320X240) with Path to image file, x=0, y =0 and options as width as 50, height as 50 and isInsideFormat as True printImageFromFile method( with Callback )" , function() {
+		runs(function() {
+			setObjective("VTXXX-0163 |Print JPG file (320X240) with Path to image file, x=0, y =0 and options as width as 50, height as 50 and isInsideFormat as True printImageFromFile method( with Callback )");
+			setInstruction("1. Connect a Zebra printer with the device <br /> 2. Call printImageFromFile with callback.");
+			setExpected("1. On successful print callback should return with STATUS_SUCCESS <br />2. On failure print callback should return with STATUS_ERROR ");
+		});
+		
+		
+		runs(function() {
+				PrinterConnectiontype();
+			});
+		
+		runs(function() {
+			var PrinterInstance = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			connect_status = PrinterInstance.connect();
+			waitsFor(function()	{
+				return PrinterInstance.isConnected;
+			}, '9sec wait for connection', ENABLE9K);
+			
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.printImageFromFile(jpgimagepath_320px, 0, 0, {'height':50, 'width':50, 'isInsideFormat':true}, printImageFromFileCallback);
+			}
+			else {
+				displayResult("Failed to connect to the printer", connect_status);	
+			}
+		});
+		
+		runs(function() {
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+		});
+		waitsFor(function() {
+			return document.getElementById("actResult").innerHTML != "init";
+		}, "Timed out waiting for tester to respond", ENABLE30MIN);
+		runs(function() {
+			expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+		});
+	});	
+
+	it("VTXXX-0164 | Print JPG file (320X240) with Path to image file, x=50, y =100 and options as width as -1, height as -1 and isInsideFormat as false printImageFromFile method ( with Callback )" , function() {
+		runs(function() {
+			setObjective("VTXXX-0164 |Print JPG file (320X240) with Path to image file, x=50, y =100 and options as width as -1, height as -1 and isInsideFormat as false printImageFromFile method ( with Callback )");
+			setInstruction("1. Connect a Zebra printer with the device <br /> 2. Call printImageFromFile with callback.");
+			setExpected("1. On successful print callback should return with STATUS_SUCCESS <br />2. On failure print callback should return with STATUS_ERROR ");
+		});
+		
+		
+		runs(function() {
+				PrinterConnectiontype();
+			});
+		
+		runs(function() {
+			var PrinterInstance = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			connect_status = PrinterInstance.connect();
+			waitsFor(function()	{
+				return PrinterInstance.isConnected;
+			}, '9sec wait for connection', ENABLE9K);
+			
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.printImageFromFile(jpgimagepath_320px, 50, 100, {'height':-1, 'width':-1, 'isInsideFormat':false}, printImageFromFileCallback);
+			}
+			else {
+				displayResult("Failed to connect to the printer", connect_status);	
+			}
+		});
+		
+		runs(function() {
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+		});
+		waitsFor(function() {
+			return document.getElementById("actResult").innerHTML != "init";
+		}, "Timed out waiting for tester to respond", ENABLE30MIN);
+		runs(function() {
+			expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+		});
+	});	
+	
+	it("VTXXX-0165 | Print PNG file (640X480) with Path to image file, x=0, y =0 and options as width as 50, height as 50 and isInsideFormat as True printImageFromFile method ( with Callback )" , function() {
+		runs(function() {
+			setObjective("VTXXX-0165 |Print PNG file (640X480) with Path to image file, x=0, y =0 and options as width as 50, height as 50 and isInsideFormat as True printImageFromFile method ( with Callback )");
+			setInstruction("1. Connect a Zebra printer with the device <br /> 2. Call printImageFromFile with callback.");
+			setExpected("1. On successful print callback should return with STATUS_SUCCESS <br />2. On failure print callback should return with STATUS_ERROR ");
+		});
+		
+		
+		runs(function() {
+				PrinterConnectiontype();
+			});
+		
+		runs(function() {
+			var PrinterInstance = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			connect_status = PrinterInstance.connect();
+			waitsFor(function()	{
+				return PrinterInstance.isConnected;
+			}, '9sec wait for connection', ENABLE9K);
+			
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.printImageFromFile(pngimagepath_640px, 0, 0, {'height':50, 'width':50, 'isInsideFormat':true}, printImageFromFileCallback);
+			}
+			else {
+				displayResult("Failed to connect to the printer", connect_status);	
+			}
+		});
+		
+		runs(function() {
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+		});
+		waitsFor(function() {
+			return document.getElementById("actResult").innerHTML != "init";
+		}, "Timed out waiting for tester to respond", ENABLE30MIN);
+		runs(function() {
+			expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+		});
+	});	
+	
+	it("VTXXX-0166 | Print PNG file (640X480) with Path to image file, x=50, y =100 and options as width as -1, height as -1 and isInsideFormat as false printImageFromFile method( with Callback )" , function() {
+		runs(function() {
+			setObjective("VTXXX-0166 |Print PNG file (640X480) with Path to image file, x=50, y =100 and options as width as -1, height as -1 and isInsideFormat as false printImageFromFile method( with Callback )");
+			setInstruction("1. Connect a Zebra printer with the device <br /> 2. Call printImageFromFile with callback.");
+			setExpected("1. On successful print callback should return with STATUS_SUCCESS <br />2. On failure print callback should return with STATUS_ERROR ");
+		});
+		
+		
+		runs(function() {
+				PrinterConnectiontype();
+			});
+		
+		runs(function() {
+			var PrinterInstance = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			connect_status = PrinterInstance.connect();
+			waitsFor(function()	{
+				return PrinterInstance.isConnected;
+			}, '9sec wait for connection', ENABLE9K);
+			
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.printImageFromFile(pngimagepath_640px, 50, 100, {'height':-1, 'width':-1, 'isInsideFormat':false}, printImageFromFileCallback);
+			}
+			else {
+				displayResult("Failed to connect to the printer", connect_status);	
+			}
+		});
+		
+		runs(function() {
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+		});
+		waitsFor(function() {
+			return document.getElementById("actResult").innerHTML != "init";
+		}, "Timed out waiting for tester to respond", ENABLE30MIN);
+		runs(function() {
+			expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+		});
+	});		
+	
+	it("VTXXX-0167 | Print JPG file (640X480) with Path to image file, x=0, y =0 and options as width as 50, height as 50 and isInsideFormat as True printImageFromFile method ( with Callback )" , function() {
+		runs(function() {
+			setObjective("VTXXX-0167 |Print JPG file (640X480) with Path to image file, x=0, y =0 and options as width as 50, height as 50 and isInsideFormat as True printImageFromFile method ( with Callback )");
+			setInstruction("1. Connect a Zebra printer with the device <br /> 2. Call printImageFromFile with callback.");
+			setExpected("1. On successful print callback should return with STATUS_SUCCESS <br />2. On failure print callback should return with STATUS_ERROR ");
+		});
+		
+		
+		runs(function() {
+				PrinterConnectiontype();
+			});
+		
+		runs(function() {
+			var PrinterInstance = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			connect_status = PrinterInstance.connect();
+			waitsFor(function()	{
+				return PrinterInstance.isConnected;
+			}, '9sec wait for connection', ENABLE9K);
+			
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.printImageFromFile(jpgimagepath_640px, 0, 0, {'height':50, 'width':50, 'isInsideFormat':true}, printImageFromFileCallback);
+			}
+			else {
+				displayResult("Failed to connect to the printer", connect_status);	
+			}
+		});
+		
+		runs(function() {
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+		});
+		waitsFor(function() {
+			return document.getElementById("actResult").innerHTML != "init";
+		}, "Timed out waiting for tester to respond", ENABLE30MIN);
+		runs(function() {
+			expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+		});
+	});	
+	
+	it("VTXXX-0168 | Print JPG file (640X480) with Path to image file, x=50, y =100 and options as width as -1, height as -1 and isInsideFormat as false printImageFromFile method( with Callback )" , function() {
+		runs(function() {
+			setObjective("VTXXX-0168 |Print JPG file (640X480) with Path to image file, x=50, y =100 and options as width as -1, height as -1 and isInsideFormat as false printImageFromFile method( with Callback )");
+			setInstruction("1. Connect a Zebra printer with the device <br /> 2. Call printImageFromFile with callback.");
+			setExpected("1. On successful print callback should return with STATUS_SUCCESS <br />2. On failure print callback should return with STATUS_ERROR ");
+		});
+		
+		
+		runs(function() {
+				PrinterConnectiontype();
+			});
+		
+		runs(function() {
+			var PrinterInstance = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			connect_status = PrinterInstance.connect();
+			waitsFor(function()	{
+				return PrinterInstance.isConnected;
+			}, '9sec wait for connection', ENABLE9K);
+			
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.printImageFromFile(jpgimagepath_640px, 50, 100, {'height':-1, 'width':-1, 'isInsideFormat':false}, printImageFromFileCallback);
+			}
+			else {
+				displayResult("Failed to connect to the printer", connect_status);	
+			}
+		});
+		
+		runs(function() {
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+		});
+		waitsFor(function() {
+			return document.getElementById("actResult").innerHTML != "init";
+		}, "Timed out waiting for tester to respond", ENABLE30MIN);
+		runs(function() {
+			expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+		});
+	});			
+	
+	it("VTXXX-0169 | Print PNG file (1024X768) with Path to image file, x=0, y =0 and options as width as 50, height as 50 and isInsideFormat as True printImageFromFile method ( with Callback )" , function() {
+		runs(function() {
+			setObjective("VTXXX-0169 |Print PNG file (1024X768) with Path to image file, x=0, y =0 and options as width as 50, height as 50 and isInsideFormat as True printImageFromFile method ( with Callback )");
+			setInstruction("1. Connect a Zebra printer with the device <br /> 2. Call printImageFromFile with callback.");
+			setExpected("1. On successful print callback should return with STATUS_SUCCESS <br />2. On failure print callback should return with STATUS_ERROR ");
+		});
+		
+		
+		runs(function() {
+				PrinterConnectiontype();
+			});
+		
+		runs(function() {
+			var PrinterInstance = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			connect_status = PrinterInstance.connect();
+			waitsFor(function()	{
+				return PrinterInstance.isConnected;
+			}, '9sec wait for connection', ENABLE9K);
+			
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.printImageFromFile(pngimagepath_1024px, 0, 0, {'height':50, 'width':50, 'isInsideFormat':true}, printImageFromFileCallback);
+			}
+			else {
+				displayResult("Failed to connect to the printer", connect_status);	
+			}
+		});
+		
+		runs(function() {
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+		});
+		waitsFor(function() {
+			return document.getElementById("actResult").innerHTML != "init";
+		}, "Timed out waiting for tester to respond", ENABLE30MIN);
+		runs(function() {
+			expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+		});
+	});	
+	
+	it("VTXXX-0170 | Print PNG file (1024X768) with Path to image file, x=50, y =100 and options as width as -1, height as -1 and isInsideFormat as false printImageFromFile method( with Callback )" , function() {
+		runs(function() {
+			setObjective("VTXXX-0170 |Print PNG file (1024X768) with Path to image file, x=50, y =100 and options as width as -1, height as -1 and isInsideFormat as false printImageFromFile method( with Callback )");
+			setInstruction("1. Connect a Zebra printer with the device <br /> 2. Call printImageFromFile with callback.");
+			setExpected("1. On successful print callback should return with STATUS_SUCCESS <br />2. On failure print callback should return with STATUS_ERROR ");
+		});
+		
+		
+		runs(function() {
+				PrinterConnectiontype();
+			});
+		
+		runs(function() {
+			var PrinterInstance = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			connect_status = PrinterInstance.connect();
+			waitsFor(function()	{
+				return PrinterInstance.isConnected;
+			}, '9sec wait for connection', ENABLE9K);
+			
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.printImageFromFile(pngimagepath_1024px, 50, 100, {'height':-1, 'width':-1, 'isInsideFormat':false}, printImageFromFileCallback);
+			}
+			else {
+				displayResult("Failed to connect to the printer", connect_status);	
+			}
+		});
+		
+		runs(function() {
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+		});
+		waitsFor(function() {
+			return document.getElementById("actResult").innerHTML != "init";
+		}, "Timed out waiting for tester to respond", ENABLE30MIN);
+		runs(function() {
+			expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+		});
+	});		
+	
+	it("VTXXX-0171 | Print JPG file (1024X768) with Path to image file, x=0, y =0 and options as width as 50, height as 50 and isInsideFormat as True printImageFromFile method ( with Callback )" , function() {
+		runs(function() {
+			setObjective("VTXXX-0171 |Print JPG file (1024X768) with Path to image file, x=0, y =0 and options as width as 50, height as 50 and isInsideFormat as True printImageFromFile method ( with Callback )");
+			setInstruction("1. Connect a Zebra printer with the device <br /> 2. Call printImageFromFile with callback.");
+			setExpected("1. On successful print callback should return with STATUS_SUCCESS <br />2. On failure print callback should return with STATUS_ERROR ");
+		});
+		
+		
+		runs(function() {
+				PrinterConnectiontype();
+			});
+		
+		runs(function() {
+			var PrinterInstance = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			connect_status = PrinterInstance.connect();
+			waitsFor(function()	{
+				return PrinterInstance.isConnected;
+			}, '9sec wait for connection', ENABLE9K);
+			
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.printImageFromFile(jpgimagepath_1024px, 0, 0, {'height':50, 'width':50, 'isInsideFormat':true}, printImageFromFileCallback);
+			}
+			else {
+				displayResult("Failed to connect to the printer", connect_status);	
+			}
+		});
+		
+		runs(function() {
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+		});
+		waitsFor(function() {
+			return document.getElementById("actResult").innerHTML != "init";
+		}, "Timed out waiting for tester to respond", ENABLE30MIN);
+		runs(function() {
+			expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+		});
+	});	
+	
+	it("VTXXX-0172 | Print JPG file (1024X768) with Path to image file, x=50, y =100 and options as width as -1, height as -1 and isInsideFormat as false printImageFromFile method( with Callback )" , function() {
+		runs(function() {
+			setObjective("VTXXX-0172 |Print JPG file (1024X768) with Path to image file, x=50, y =100 and options as width as -1, height as -1 and isInsideFormat as false printImageFromFile method( with Callback )");
+			setInstruction("1. Connect a Zebra printer with the device <br /> 2. Call printImageFromFile with callback.");
+			setExpected("1. On successful print callback should return with STATUS_SUCCESS <br />2. On failure print callback should return with STATUS_ERROR ");
+		});
+		
+		
+		runs(function() {
+				PrinterConnectiontype();
+			});
+		
+		runs(function() {
+			var PrinterInstance = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			connect_status = PrinterInstance.connect();
+			waitsFor(function()	{
+				return PrinterInstance.isConnected;
+			}, '9sec wait for connection', ENABLE9K);
+			
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.printImageFromFile(jpgimagepath_1024px, 50, 100, {'height':-1, 'width':-1, 'isInsideFormat':false}, printImageFromFileCallback);
+			}
+			else {
+				displayResult("Failed to connect to the printer", connect_status);	
+			}
+		});
+		
+		runs(function() {
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+		});
+		waitsFor(function() {
+			return document.getElementById("actResult").innerHTML != "init";
+		}, "Timed out waiting for tester to respond", ENABLE30MIN);
+		runs(function() {
+			expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+		});
+	});	
+
+	it("VTXXX-0173 | Print PNG file (2048X1536) with Path to image file, x=0, y =0 and options as width as 50, height as 50 and isInsideFormat as True printImageFromFile method ( with Callback )" , function() {
+		runs(function() {
+			setObjective("VTXXX-0173 |Print PNG file (2048X1536) with Path to image file, x=0, y =0 and options as width as 50, height as 50 and isInsideFormat as True printImageFromFile method ( with Callback )");
+			setInstruction("1. Connect a Zebra printer with the device <br /> 2. Call printImageFromFile with callback.");
+			setExpected("1. On successful print callback should return with STATUS_SUCCESS <br />2. On failure print callback should return with STATUS_ERROR ");
+		});
+		
+		
+		runs(function() {
+				PrinterConnectiontype();
+			});
+		
+		runs(function() {
+			var PrinterInstance = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			connect_status = PrinterInstance.connect();
+			waitsFor(function()	{
+				return PrinterInstance.isConnected;
+			}, '9sec wait for connection', ENABLE9K);
+			
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.printImageFromFile(pngimagepath_2048px, 0, 0, {'height':50, 'width':50, 'isInsideFormat':true}, printImageFromFileCallback);
+			}
+			else {
+				displayResult("Failed to connect to the printer", connect_status);	
+			}
+		});
+		
+		runs(function() {
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+		});
+		waitsFor(function() {
+			return document.getElementById("actResult").innerHTML != "init";
+		}, "Timed out waiting for tester to respond", ENABLE30MIN);
+		runs(function() {
+			expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+		});
+	});	
+
+	it("VTXXX-0174 | Print JPG file (2048X1536) with Path to image file, x=50, y =100 and options as width as -1, height as -1 and isInsideFormat as false printImageFromFile method( with Callback )" , function() {
+		runs(function() {
+			setObjective("VTXXX-0174 |Print JPG file (2048X1536) with Path to image file, x=50, y =100 and options as width as -1, height as -1 and isInsideFormat as false printImageFromFile method( with Callback )");
+			setInstruction("1. Connect a Zebra printer with the device <br /> 2. Call printImageFromFile with callback.");
+			setExpected("1. On successful print callback should return with STATUS_SUCCESS <br />2. On failure print callback should return with STATUS_ERROR ");
+		});
+		
+		
+		runs(function() {
+				PrinterConnectiontype();
+			});
+		
+		runs(function() {
+			var PrinterInstance = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			connect_status = PrinterInstance.connect();
+			waitsFor(function()	{
+				return PrinterInstance.isConnected;
+			}, '9sec wait for connection', ENABLE9K);
+			
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.printImageFromFile(jpgimagepath_2048px, 50, 100, {'height':-1, 'width':-1, 'isInsideFormat':false}, printImageFromFileCallback);
+			}
+			else {
+				displayResult("Failed to connect to the printer", connect_status);	
+			}
+		});
+		
+		runs(function() {
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+		});
+		waitsFor(function() {
+			return document.getElementById("actResult").innerHTML != "init";
+		}, "Timed out waiting for tester to respond", ENABLE30MIN);
+		runs(function() {
+			expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+		});
+	});		
+	
+	it("VTXXX-0175 | Print PNG file (1024X768) with Path to image file, x=0, y =0 and options as width as 50, height as 50 and isInsideFormat as True printImageFromFile method ( without Callback )" , function() {
+		runs(function() {
+			setObjective("VTXXX-0173 |Print PNG file (1024X768) with Path to image file, x=0, y =0 and options as width as 50, height as 50 and isInsideFormat as True printImageFromFile method ( without Callback )");
+			setInstruction("1. Connect a Zebra printer with the device <br /> 2. Call printImageFromFile without callback.");
+			setExpected("1. On successful print should return with STATUS_SUCCESS <br />2. On failure print should return with STATUS_ERROR ");
+		});
+		
+		
+		runs(function() {
+				PrinterConnectiontype();
+			});
+		
+		runs(function() {
+			var PrinterInstance = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			connect_status = PrinterInstance.connect();
+			waitsFor(function()	{
+				return PrinterInstance.isConnected;
+			}, '9sec wait for connection', ENABLE9K);
+			
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.printImageFromFile(pngimagepath_1024px, 0, 0, {'height':50, 'width':50, 'isInsideFormat':true});
+			}
+			else {
+				displayResult("Failed to connect to the printer", connect_status);	
+			}
+		});
+		
+		runs(function() {
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+		});
+		waitsFor(function() {
+			return document.getElementById("actResult").innerHTML != "init";
+		}, "Timed out waiting for tester to respond", ENABLE30MIN);
+		runs(function() {
+			expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+		});
+	});	
+
+	it("VTXXX-0176 | Print PNG file (1024X768) with Path to image file, x=50, y =100 and options as width as -1, height as -1 and isInsideFormat as false printImageFromFile method( without Callback )" , function() {
+		runs(function() {
+			setObjective("VTXXX-0176 |Print PNG file (1024X768) with Path to image file, x=50, y =100 and options as width as -1, height as -1 and isInsideFormat as false printImageFromFile method( without Callback )");
+			setInstruction("1. Connect a Zebra printer with the device <br /> 2. Call printImageFromFile without callback.");
+			setExpected("1. On successful print should return with STATUS_SUCCESS <br />2. On failure print should return with STATUS_ERROR ");
+		});
+		
+		
+		runs(function() {
+				PrinterConnectiontype();
+			});
+		
+		runs(function() {
+			var PrinterInstance = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			connect_status = PrinterInstance.connect();
+			waitsFor(function()	{
+				return PrinterInstance.isConnected;
+			}, '9sec wait for connection', ENABLE9K);
+			
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.printImageFromFile(pngimagepath_1024px, 50,100, {'width': -1, 'height': -1, 'isInsideFormat': false});
+			}
+			else {
+				displayResult("Failed to connect to the printer", connect_status);	
+			}
+		});
+		
+		runs(function() {
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+		});
+		waitsFor(function() {
+			return document.getElementById("actResult").innerHTML != "init";
+		}, "Timed out waiting for tester to respond", ENABLE30MIN);
+		runs(function() {
+			expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+		});
+	});	
+	
+	it("VTXXX-0177 | Print JPG file (1024X768) with Path to image file, x=0, y =0 and options as width as 50, height as 50 and isInsideFormat as True printImageFromFile method ( without Callback )" , function() {
+		runs(function() {
+			setObjective("VTXXX-0177 |Print JPG file (1024X768) with Path to image file, x=0, y =0 and options as width as 50, height as 50 and isInsideFormat as True printImageFromFile method ( without Callback )");
+			setInstruction("1. Connect a Zebra printer with the device <br /> 2. Call printImageFromFile without callback.");
+			setExpected("1. On successful print should return with STATUS_SUCCESS <br />2. On failure print should return with STATUS_ERROR ");
+		});
+		
+		
+		runs(function() {
+				PrinterConnectiontype();
+			});
+		
+		runs(function() {
+			var PrinterInstance = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			connect_status = PrinterInstance.connect();
+			waitsFor(function()	{
+				return PrinterInstance.isConnected;
+			}, '9sec wait for connection', ENABLE9K);
+			
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.printImageFromFile(jpgimagepath_1024px, 0, 0, {'height':50, 'width':50, 'isInsideFormat':true});
+			}
+			else {
+				displayResult("Failed to connect to the printer", connect_status);	
+			}
+		});
+		
+		runs(function() {
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+		});
+		waitsFor(function() {
+			return document.getElementById("actResult").innerHTML != "init";
+		}, "Timed out waiting for tester to respond", ENABLE30MIN);
+		runs(function() {
+			expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+		});
+	});	
+	
+	it("VTXXX-0178 | Print JPG file (1024X768) with Path to image file, x=50, y =100 and options as width as -1, height as -1 and isInsideFormat as false printImageFromFile method( without Callback )" , function() {
+		runs(function() {
+			setObjective("VTXXX-0178 |Print JPG file (1024X768) with Path to image file, x=50, y =100 and options as width as -1, height as -1 and isInsideFormat as false printImageFromFile method( without Callback )");
+			setInstruction("1. Connect a Zebra printer with the device <br /> 2. Call printImageFromFile without callback.");
+			setExpected("1. On successful print should return with STATUS_SUCCESS <br />2. On failure print should return with STATUS_ERROR ");
+		});
+		
+		
+		runs(function() {
+				PrinterConnectiontype();
+			});
+		
+		runs(function() {
+			var PrinterInstance = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			connect_status = PrinterInstance.connect();
+			waitsFor(function()	{
+				return PrinterInstance.isConnected;
+			}, '9sec wait for connection', ENABLE9K);
+			
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.printImageFromFile(jpgimagepath_1024px, 50, 100, {'height':-1, 'width':-1, 'isInsideFormat':false});
+			}
+			else {
+				displayResult("Failed to connect to the printer", connect_status);	
+			}
+		});
+		
+		runs(function() {
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+		});
+		waitsFor(function() {
+			return document.getElementById("actResult").innerHTML != "init";
+		}, "Timed out waiting for tester to respond", ENABLE30MIN);
+		runs(function() {
+			expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+		});
+	});			
+
+	it("VTXXX-0179 | Print PNG file (1024X768) with Path to image file, x=0, y =0 and options as width as 50, height as 50 and isInsideFormat as True printImageFromFile method ( with Anonymous Callback )" , function() {
+		runs(function() {
+			setObjective("VTXXX-0169 |Print PNG file (1024X768) with Path to image file, x=0, y =0 and options as width as 50, height as 50 and isInsideFormat as True printImageFromFile method ( with Anonymous Callback )");
+			setInstruction("1. Connect a Zebra printer with the device <br /> 2. Call printImageFromFile with Anonymous callback.");
+			setExpected("1. On successful print callback should return with STATUS_SUCCESS <br />2. On failure print callback should return with STATUS_ERROR ");
+		});
+		
+		
+		runs(function() {
+				PrinterConnectiontype();
+			});
+		
+		runs(function() {
+			var PrinterInstance = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			connect_status = PrinterInstance.connect();
+			waitsFor(function()	{
+				return PrinterInstance.isConnected;
+			}, '9sec wait for connection', ENABLE9K);
+			
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.printImageFromFile(pngimagepath_1024px, 0, 0, {'height':50, 'width':50, 'isInsideFormat':true}, function(data) {printImageFromFileCallback(data);});
+			}
+			else {
+				displayResult("Failed to connect to the printer", connect_status);	
+			}
+		});
+		
+		runs(function() {
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+		});
+		waitsFor(function() {
+			return document.getElementById("actResult").innerHTML != "init";
+		}, "Timed out waiting for tester to respond", ENABLE30MIN);
+		runs(function() {
+			expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+		});
+	});	
+	
+	it("VTXXX-0180 | Print PNG file (1024X768) with Path to image file, x=50, y =100 and options as width as -1, height as -1 and isInsideFormat as false printImageFromFile method( with Anonymous Callback )" , function() {
+		runs(function() {
+			setObjective("VTXXX-0180 |Print PNG file (1024X768) with Path to image file, x=50, y =100 and options as width as -1, height as -1 and isInsideFormat as false printImageFromFile method( with Anonymous Callback )");
+			setInstruction("1. Connect a Zebra printer with the device <br /> 2. Call printImageFromFile with Anonymous callback.");
+			setExpected("1. On successful print callback should return with STATUS_SUCCESS <br />2. On failure print callback should return with STATUS_ERROR ");
+		});
+		
+		
+		runs(function() {
+				PrinterConnectiontype();
+			});
+		
+		runs(function() {
+			var PrinterInstance = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			connect_status = PrinterInstance.connect();
+			waitsFor(function()	{
+				return PrinterInstance.isConnected;
+			}, '9sec wait for connection', ENABLE9K);
+			
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.printImageFromFile(pngimagepath_1024px, 50, 100, {'height':-1, 'width':-1, 'isInsideFormat':false}, function(data) {printImageFromFileCallback(data);});
+			}
+			else {
+				displayResult("Failed to connect to the printer", connect_status);	
+			}
+		});
+		
+		runs(function() {
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+		});
+		waitsFor(function() {
+			return document.getElementById("actResult").innerHTML != "init";
+		}, "Timed out waiting for tester to respond", ENABLE30MIN);
+		runs(function() {
+			expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+		});
+	});		
+	
+	it("VTXXX-0181 | Print JPG file (1024X768) with Path to image file, x=0, y =0 and options as width as 50, height as 50 and isInsideFormat as True printImageFromFile method ( with Anonymous Callback )" , function() {
+		runs(function() {
+			setObjective("VTXXX-0181 |Print JPG file (1024X768) with Path to image file, x=0, y =0 and options as width as 50, height as 50 and isInsideFormat as True printImageFromFile method ( with Anonymous Callback )");
+			setInstruction("1. Connect a Zebra printer with the device <br /> 2. Call printImageFromFile with Anonymous callback.");
+			setExpected("1. On successful print callback should return with STATUS_SUCCESS <br />2. On failure print callback should return with STATUS_ERROR ");
+		});
+		
+		
+		runs(function() {
+				PrinterConnectiontype();
+			});
+		
+		runs(function() {
+			var PrinterInstance = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			connect_status = PrinterInstance.connect();
+			waitsFor(function()	{
+				return PrinterInstance.isConnected;
+			}, '9sec wait for connection', ENABLE9K);
+			
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.printImageFromFile(jpgimagepath_1024px, 0, 0, {'height':50, 'width':50, 'isInsideFormat':true}, function(data) {printImageFromFileCallback(data);});
+			}
+			else {
+				displayResult("Failed to connect to the printer", connect_status);	
+			}
+		});
+		
+		runs(function() {
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+		});
+		waitsFor(function() {
+			return document.getElementById("actResult").innerHTML != "init";
+		}, "Timed out waiting for tester to respond", ENABLE30MIN);
+		runs(function() {
+			expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+		});
+	});	
+	
+	it("VTXXX-0182 | Print JPG file (1024X768) with Path to image file, x=50, y =100 and options as width as -1, height as -1 and isInsideFormat as false printImageFromFile method( with Anonymous Callback )" , function() {
+		runs(function() {
+			setObjective("VTXXX-0182 |Print JPG file (1024X768) with Path to image file, x=50, y =100 and options as width as -1, height as -1 and isInsideFormat as false printImageFromFile method( with Anonymous Callback )");
+			setInstruction("1. Connect a Zebra printer with the device <br /> 2. Call printImageFromFile with Anonymous callback.");
+			setExpected("1. On successful print callback should return with STATUS_SUCCESS <br />2. On failure print callback should return with STATUS_ERROR ");
+		});
+		
+		
+		runs(function() {
+				PrinterConnectiontype();
+			});
+		
+		runs(function() {
+			var PrinterInstance = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			connect_status = PrinterInstance.connect();
+			waitsFor(function()	{
+				return PrinterInstance.isConnected;
+			}, '9sec wait for connection', ENABLE9K);
+			
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.printImageFromFile(jpgimagepath_1024px, 50, 100, {'height':-1, 'width':-1, 'isInsideFormat':false}, function(data) {printImageFromFileCallback(data);});
+			}
+			else {
+				displayResult("Failed to connect to the printer", connect_status);	
+			}
+		});
+		
+		runs(function() {
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+		});
+		waitsFor(function() {
+			return document.getElementById("actResult").innerHTML != "init";
+		}, "Timed out waiting for tester to respond", ENABLE30MIN);
+		runs(function() {
+			expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+		});
+	});	
+	
+	it("VTXXX-0183 | storeImage method with valid printerDriveAndFileName D:FILE.GRF, imageFilePathOnDevice BMP (320X240), width = 50, height = 50  ( with Callback)" , function() {
+		runs(function() {
+			setObjective("VTXXX-0183 | storeImage method with valid printerDriveAndFileName D:FILE.GRF, imageFilePathOnDevice BMP (320X240), width = 50, height = 50  ( with Callback)");
+			setInstruction("1. Connect a Zebra printer with the device <br /> 2. Call storeImage with callback.");
+			setExpected("1.  On successful storing image callback should return with STATUS_SUCCESS. <br />2. File should be stored at D:FILE.GRF on printer <br />3. On failure storing image callback should return with STATUS_ERROR ");
+		});
+		
+		
+		runs(function() {
+				PrinterConnectiontype();
+			});
+		
+		runs(function() {
+			var PrinterInstance = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			connect_status = PrinterInstance.connect();
+			waitsFor(function()	{
+				return PrinterInstance.isConnected;
+			}, '9sec wait for connection', ENABLE9K);
+			
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.storeImage(printerDriveAndFileName, bmpimagepath_320px, 50, 50,storeImageCallback);
+			}
+			else {
+				displayResult("Failed to connect to the printer", connect_status);	
+			}
+		});
+		
+		runs(function() {
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+		});
+		waitsFor(function() {
+			return document.getElementById("actResult").innerHTML != "init";
+		}, "Timed out waiting for tester to respond", ENABLE30MIN);
+		runs(function() {
+			expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+		});
+	});		
+	
+	it("VTXXX-0184 | storeImage method with valid printerDriveAndFileName D:FILE.GRF, imageFilePathOnDevice BMP (320X240), width = 0, height = 0  ( with Callback)" , function() {
+		runs(function() {
+			setObjective("VTXXX-0184 | storeImage method with valid printerDriveAndFileName D:FILE.GRF, imageFilePathOnDevice BMP (320X240), width = 0, height = 0  ( with Callback)");
+			setInstruction("1. Connect a Zebra printer with the device <br /> 2. Call storeImage with callback.");
+			setExpected("1.  On successful storing image callback should return with STATUS_SUCCESS. <br />2. File should be stored at D:FILE.GRF on printer <br />3. On failure storing image callback should return with STATUS_ERROR ");
+		});
+		
+		
+		runs(function() {
+				PrinterConnectiontype();
+			});
+		
+		runs(function() {
+			var PrinterInstance = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			connect_status = PrinterInstance.connect();
+			waitsFor(function()	{
+				return PrinterInstance.isConnected;
+			}, '9sec wait for connection', ENABLE9K);
+			
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.storeImage(printerDriveAndFileName, bmpimagepath_320px, 0, 0,storeImageCallback);
+			}
+			else {
+				displayResult("Failed to connect to the printer", connect_status);	
+			}
+		});
+		
+		runs(function() {
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+		});
+		waitsFor(function() {
+			return document.getElementById("actResult").innerHTML != "init";
+		}, "Timed out waiting for tester to respond", ENABLE30MIN);
+		runs(function() {
+			expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+		});
+	});		
+
+	it("VTXXX-0185 | storeImage method with printerDriveAndFileName without drive FILE.GRF, imageFilePathOnDevice BMP (320X240), width = -1, height = -1  ( with Callback)" , function() {
+		runs(function() {
+			setObjective("VTXXX-0185 | storeImage method with printerDriveAndFileName without drive FILE.GRF, imageFilePathOnDevice BMP (320X240), width = -1, height = -1  ( with Callback)");
+			setInstruction("1. Connect a Zebra printer with the device <br /> 2. Call storeImage with callback.");
+			setExpected("1.  On successful storing image callback should return with STATUS_SUCCESS. <br />2. File should be stored at default drive E:FILE.GRF on printer <br />3. On failure storing image callback should return with STATUS_ERROR ");
+		});
+		
+		
+		runs(function() {
+				PrinterConnectiontype();
+			});
+		
+		runs(function() {
+			var PrinterInstance = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			connect_status = PrinterInstance.connect();
+			waitsFor(function()	{
+				return PrinterInstance.isConnected;
+			}, '9sec wait for connection', ENABLE9K);
+			
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.storeImage(printerOnlyFileName, bmpimagepath_320px, -1, -1,storeImageCallback);
+			}
+			else {
+				displayResult("Failed to connect to the printer", connect_status);	
+			}
+		});
+		
+		runs(function() {
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+		});
+		waitsFor(function() {
+			return document.getElementById("actResult").innerHTML != "init";
+		}, "Timed out waiting for tester to respond", ENABLE30MIN);
+		runs(function() {
+			expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+		});
+	});		
+	
+	it("VTXXX-0186 | storeImage method with   Invalid drive path, Invalid  image path, width = 0, height = 0  ( with Callback)" , function() {
+		runs(function() {
+			setObjective("VTXXX-0186 | storeImage method with   Invalid drive path, Invalid  image path, width = 0, height = 0  ( with Callback)");
+			setInstruction("1. Connect a Zebra printer with the device <br /> 2. Call storeImage with callback.");
+			setExpected("1. On failure storing image callback should return with STATUS_ERROR ");
+		});
+		
+		
+		runs(function() {
+				PrinterConnectiontype();
+			});
+		
+		runs(function() {
+			var PrinterInstance = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			connect_status = PrinterInstance.connect();
+			waitsFor(function()	{
+				return PrinterInstance.isConnected;
+			}, '9sec wait for connection', ENABLE9K);
+			
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.storeImage(Invaliddrivepath, invalidImagepath, 0, 0,storeImageCallback);
+			}
+			else {
+				displayResult("Failed to connect to the printer", connect_status);	
+			}
+		});
+		
+		runs(function() {
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+		});
+		waitsFor(function() {
+			return document.getElementById("actResult").innerHTML != "init";
+		}, "Timed out waiting for tester to respond", ENABLE30MIN);
+		runs(function() {
+			expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+		});
+	});		
+	
+	it("VTXXX-0187 | storeImage method with '', '', width = 0, height = 0  ( with Callback)" , function() {
+		runs(function() {
+			setObjective("VTXXX-0187 | storeImage method with '', '', width = 0, height = 0  ( with Callback)");
+			setInstruction("1. Connect a Zebra printer with the device <br /> 2. Call storeImage with callback.");
+			setExpected("1. On failure storing image callback should return with STATUS_ERROR ");
+		});
+		
+		
+		runs(function() {
+				PrinterConnectiontype();
+			});
+		
+		runs(function() {
+			var PrinterInstance = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			connect_status = PrinterInstance.connect();
+			waitsFor(function()	{
+				return PrinterInstance.isConnected;
+			}, '9sec wait for connection', ENABLE9K);
+			
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.storeImage("", "", 0, 0,storeImageCallback);
+			}
+			else {
+				displayResult("Failed to connect to the printer", connect_status);	
+			}
+		});
+		
+		runs(function() {
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+		});
+		waitsFor(function() {
+			return document.getElementById("actResult").innerHTML != "init";
+		}, "Timed out waiting for tester to respond", ENABLE30MIN);
+		runs(function() {
+			expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+		});
+	});
+	
+	it("VTXXX-0188 | storeImage method with valid printerDriveAndFileName BMP (640X480), imageFilePathOnDevice, width = 50, height = 50  ( with Callback)" , function() {
+		runs(function() {
+			setObjective("VTXXX-0188 | storeImage method with valid printerDriveAndFileName BMP (640X480), imageFilePathOnDevice, width = 50, height = 50  ( with Callback)");
+			setInstruction("1. Connect a Zebra printer with the device <br /> 2. Call storeImage with callback.");
+			setExpected("1.  On successful storing image callback should return with STATUS_SUCCESS.<br />2. File should be stored at    D:FILE.GRF on printer <br />3. On failure storing image callback should return with STATUS_ERROR ");
+		});
+		
+		
+		runs(function() {
+				PrinterConnectiontype();
+			});
+		
+		runs(function() {
+			var PrinterInstance = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			connect_status = PrinterInstance.connect();
+			waitsFor(function()	{
+				return PrinterInstance.isConnected;
+			}, '9sec wait for connection', ENABLE9K);
+			
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.storeImage(printerDriveAndFileName, bmpimagepath_640px, 50, 50,storeImageCallback);
+			}
+			else {
+				displayResult("Failed to connect to the printer", connect_status);	
+			}
+		});
+		
+		runs(function() {
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+		});
+		waitsFor(function() {
+			return document.getElementById("actResult").innerHTML != "init";
+		}, "Timed out waiting for tester to respond", ENABLE30MIN);
+		runs(function() {
+			expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+		});
+	});	
+	
+	it("VTXXX-0189 | storeImage method with valid printerDriveAndFileName BMP (1024X768) , imageFilePathOnDevice, width = 150, height = 150  ( with Callback)" , function() {
+		runs(function() {
+			setObjective("VTXXX-0189 | storeImage method with valid printerDriveAndFileName BMP (1024X768) , imageFilePathOnDevice, width = 150, height = 150  ( with Callback)");
+			setInstruction("1. Connect a Zebra printer with the device <br /> 2. Call storeImage with callback.");
+			setExpected("1.  On successful storing image callback should return with STATUS_SUCCESS.<br />2. File should be stored at    D:FILE.GRF on printer <br />3. On failure storing image callback should return with STATUS_ERROR ");
+		});
+		
+		
+		runs(function() {
+				PrinterConnectiontype();
+			});
+		
+		runs(function() {
+			var PrinterInstance = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			connect_status = PrinterInstance.connect();
+			waitsFor(function()	{
+				return PrinterInstance.isConnected;
+			}, '9sec wait for connection', ENABLE9K);
+			
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.storeImage(printerDriveAndFileName, bmpimagepath_1024px, 150, 150,storeImageCallback);
+			}
+			else {
+				displayResult("Failed to connect to the printer", connect_status);	
+			}
+		});
+		
+		runs(function() {
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+		});
+		waitsFor(function() {
+			return document.getElementById("actResult").innerHTML != "init";
+		}, "Timed out waiting for tester to respond", ENABLE30MIN);
+		runs(function() {
+			expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+		});
+	});		
+	
+	it("VTXXX-0190 | storeImage method with valid printerDriveAndFileName BMP (2048X1536), imageFilePathOnDevice, width = -1, height = -1 ( with Callback)" , function() {
+		runs(function() {
+			setObjective("VTXXX-0190 | storeImage method with valid printerDriveAndFileName BMP (2048X1536), imageFilePathOnDevice, width = -1, height = -1 ( with Callback)");
+			setInstruction("1. Connect a Zebra printer with the device <br /> 2. Call storeImage with callback.");
+			setExpected("1.  On successful storing image callback should return with STATUS_SUCCESS.<br />2. File should be stored at    D:FILE.GRF on printer <br />3. On failure storing image callback should return with STATUS_ERROR ");
+		});
+		
+		
+		runs(function() {
+				PrinterConnectiontype();
+			});
+		
+		runs(function() {
+			var PrinterInstance = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			connect_status = PrinterInstance.connect();
+			waitsFor(function()	{
+				return PrinterInstance.isConnected;
+			}, '9sec wait for connection', ENABLE9K);
+			
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.storeImage(printerDriveAndFileName, bmpimagepath_2048px, -1, -1,storeImageCallback);
+			}
+			else {
+				displayResult("Failed to connect to the printer", connect_status);	
+			}
+		});
+		
+		runs(function() {
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+		});
+		waitsFor(function() {
+			return document.getElementById("actResult").innerHTML != "init";
+		}, "Timed out waiting for tester to respond", ENABLE30MIN);
+		runs(function() {
+			expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+		});
+	});		
+	
+	it("VTXXX-0191 | storeImage method  printerDriveAndFileName without print drive FILE.GRF, imageFilePathOnDevice JPG (320X240), width = 50, height = 50  ( with Callback)" , function() {
+		runs(function() {
+			setObjective("VTXXX-0191 | storeImage method  printerDriveAndFileName without print drive FILE.GRF, imageFilePathOnDevice JPG (320X240), width = 50, height = 50  ( with Callback)");
+			setInstruction("1. Connect a Zebra printer with the device <br /> 2. Call storeImage with callback.");
+			setExpected("1.  On successful storing image callback should return with STATUS_SUCCESS.<br />2.  File should be stored at  default E:FILE.GRF on printer <br />3. On failure storing image callback should return with STATUS_ERROR ");
+		});
+		
+		
+		runs(function() {
+				PrinterConnectiontype();
+			});
+		
+		runs(function() {
+			var PrinterInstance = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			connect_status = PrinterInstance.connect();
+			waitsFor(function()	{
+				return PrinterInstance.isConnected;
+			}, '9sec wait for connection', ENABLE9K);
+			
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.storeImage(printerOnlyFileName, jpgimagepath_320px, 50, 50,storeImageCallback);
+			}
+			else {
+				displayResult("Failed to connect to the printer", connect_status);	
+			}
+		});
+		
+		runs(function() {
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+		});
+		waitsFor(function() {
+			return document.getElementById("actResult").innerHTML != "init";
+		}, "Timed out waiting for tester to respond", ENABLE30MIN);
+		runs(function() {
+			expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+		});
+	});	
+	
+	it("VTXXX-0192 | storeImage method with valid printerDriveAndFileName JPG (640X480), imageFilePathOnDevice, width = 50, height = 50  ( with Callback)" , function() {
+		runs(function() {
+			setObjective("VTXXX-0192 | storeImage method with valid printerDriveAndFileName JPG (640X480), imageFilePathOnDevice, width = 50, height = 50  ( with Callback)");
+			setInstruction("1. Connect a Zebra printer with the device <br /> 2. Call storeImage with callback.");
+			setExpected("1.  On successful storing image callback should return with STATUS_SUCCESS.<br />2.  File should be stored at  D:FILE.GRF on printer <br />3. On failure storing image callback should return with STATUS_ERROR ");
+		});
+		
+		
+		runs(function() {
+				PrinterConnectiontype();
+			});
+		
+		runs(function() {
+			var PrinterInstance = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			connect_status = PrinterInstance.connect();
+			waitsFor(function()	{
+				return PrinterInstance.isConnected;
+			}, '9sec wait for connection', ENABLE9K);
+			
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.storeImage(printerDriveAndFileName, jpgimagepath_640px, 50, 50,storeImageCallback);
+			}
+			else {
+				displayResult("Failed to connect to the printer", connect_status);	
+			}
+		});
+		
+		runs(function() {
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+		});
+		waitsFor(function() {
+			return document.getElementById("actResult").innerHTML != "init";
+		}, "Timed out waiting for tester to respond", ENABLE30MIN);
+		runs(function() {
+			expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+		});
+	});	
+	
+	it("VTXXX-0193 | storeImage method with valid printerDriveAndFileName JPG (1024X768) , imageFilePathOnDevice, width = 150, height = 150  ( with Callback)" , function() {
+		runs(function() {
+			setObjective("VTXXX-0193 | storeImage method with valid printerDriveAndFileName JPG (1024X768) , imageFilePathOnDevice, width = 150, height = 150  ( with Callback)");
+			setInstruction("1. Connect a Zebra printer with the device <br /> 2. Call storeImage with callback.");
+			setExpected("1.  On successful storing image callback should return with STATUS_SUCCESS.<br />2.  File should be stored at  D:FILE.GRF on printer <br />3. On failure storing image callback should return with STATUS_ERROR ");
+		});
+		
+		
+		runs(function() {
+				PrinterConnectiontype();
+			});
+		
+		runs(function() {
+			var PrinterInstance = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			connect_status = PrinterInstance.connect();
+			waitsFor(function()	{
+				return PrinterInstance.isConnected;
+			}, '9sec wait for connection', ENABLE9K);
+			
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.storeImage(printerDriveAndFileName, jpgimagepath_1024px, 150, 150,storeImageCallback);
+			}
+			else {
+				displayResult("Failed to connect to the printer", connect_status);	
+			}
+		});
+		
+		runs(function() {
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+		});
+		waitsFor(function() {
+			return document.getElementById("actResult").innerHTML != "init";
+		}, "Timed out waiting for tester to respond", ENABLE30MIN);
+		runs(function() {
+			expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+		});
+	});	
+	
+	it("VTXXX-0194 | storeImage method with valid printerDriveAndFileName JPG (2048X1536), imageFilePathOnDevice, width = -1, height = -1 ( with Callback)" , function() {
+		runs(function() {
+			setObjective("VTXXX-0194 | storeImage method with valid printerDriveAndFileName JPG (2048X1536), imageFilePathOnDevice, width = -1, height = -1 ( with Callback)");
+			setInstruction("1. Connect a Zebra printer with the device <br /> 2. Call storeImage with callback.");
+			setExpected("1.  On successful storing image callback should return with STATUS_SUCCESS.<br />2.  File should be stored at  D:FILE.GRF on printer <br />3. On failure storing image callback should return with STATUS_ERROR ");
+		});
+		
+		
+		runs(function() {
+				PrinterConnectiontype();
+			});
+		
+		runs(function() {
+			var PrinterInstance = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			connect_status = PrinterInstance.connect();
+			waitsFor(function()	{
+				return PrinterInstance.isConnected;
+			}, '9sec wait for connection', ENABLE9K);
+			
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.storeImage(printerDriveAndFileName, jpgimagepath_2048px, -1, -1,storeImageCallback);
+			}
+			else {
+				displayResult("Failed to connect to the printer", connect_status);	
+			}
+		});
+		
+		runs(function() {
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+		});
+		waitsFor(function() {
+			return document.getElementById("actResult").innerHTML != "init";
+		}, "Timed out waiting for tester to respond", ENABLE30MIN);
+		runs(function() {
+			expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+		});
+	});		
+	
+	it("VTXXX-0195 | storeImage method  printerDriveAndFileName without print drive FILE.GRF, imageFilePathOnDevice PNG (320X240), width = 50, height = 50  ( with Callback)" , function() {
+		runs(function() {
+			setObjective("VTXXX-0195 | storeImage method  printerDriveAndFileName without print drive FILE.GRF, imageFilePathOnDevice PNG (320X240), width = 50, height = 50  ( with Callback)");
+			setInstruction("1. Connect a Zebra printer with the device <br /> 2. Call storeImage with callback.");
+			setExpected("1.  On successful storing image callback should return with STATUS_SUCCESS.<br />2.  File should be stored at  default E:FILE.GRF on printer <br />3. On failure storing image callback should return with STATUS_ERROR ");
+		});
+		
+		
+		runs(function() {
+				PrinterConnectiontype();
+			});
+		
+		runs(function() {
+			var PrinterInstance = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			connect_status = PrinterInstance.connect();
+			waitsFor(function()	{
+				return PrinterInstance.isConnected;
+			}, '9sec wait for connection', ENABLE9K);
+			
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.storeImage(printerOnlyFileName, pngimagepath_320px, 50, 50,storeImageCallback);
+			}
+			else {
+				displayResult("Failed to connect to the printer", connect_status);	
+			}
+		});
+		
+		runs(function() {
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+		});
+		waitsFor(function() {
+			return document.getElementById("actResult").innerHTML != "init";
+		}, "Timed out waiting for tester to respond", ENABLE30MIN);
+		runs(function() {
+			expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+		});
+	});	
+	
+	it("VTXXX-0196 | storeImage method with valid printerDriveAndFileName PNG (640X480), imageFilePathOnDevice, width = 50, height = 50  ( with Callback)" , function() {
+		runs(function() {
+			setObjective("VTXXX-0196 | storeImage method with valid printerDriveAndFileName PNG (640X480), imageFilePathOnDevice, width = 50, height = 50  ( with Callback)");
+			setInstruction("1. Connect a Zebra printer with the device <br /> 2. Call storeImage with callback.");
+			setExpected("1.  On successful storing image callback should return with STATUS_SUCCESS.<br />2.  File should be stored at  D:FILE.GRF on printer <br />3. On failure storing image callback should return with STATUS_ERROR ");
+		});
+		
+		
+		runs(function() {
+				PrinterConnectiontype();
+			});
+		
+		runs(function() {
+			var PrinterInstance = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			connect_status = PrinterInstance.connect();
+			waitsFor(function()	{
+				return PrinterInstance.isConnected;
+			}, '9sec wait for connection', ENABLE9K);
+			
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.storeImage(printerDriveAndFileName, pngimagepath_640px, 50, 50,storeImageCallback);
+			}
+			else {
+				displayResult("Failed to connect to the printer", connect_status);	
+			}
+		});
+		
+		runs(function() {
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+		});
+		waitsFor(function() {
+			return document.getElementById("actResult").innerHTML != "init";
+		}, "Timed out waiting for tester to respond", ENABLE30MIN);
+		runs(function() {
+			expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+		});
+	});	
+	
+	it("VTXXX-0197 | storeImage method with valid printerDriveAndFileName PNG (1024X768) , imageFilePathOnDevice, width = 150, height = 150  ( with Callback)" , function() {
+		runs(function() {
+			setObjective("VTXXX-0197 | storeImage method with valid printerDriveAndFileName PNG (1024X768) , imageFilePathOnDevice, width = 150, height = 150  ( with Callback)");
+			setInstruction("1. Connect a Zebra printer with the device <br /> 2. Call storeImage with callback.");
+			setExpected("1.  On successful storing image callback should return with STATUS_SUCCESS.<br />2.  File should be stored at  D:FILE.GRF on printer <br />3. On failure storing image callback should return with STATUS_ERROR ");
+		});
+		
+		
+		runs(function() {
+				PrinterConnectiontype();
+			});
+		
+		runs(function() {
+			var PrinterInstance = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			connect_status = PrinterInstance.connect();
+			waitsFor(function()	{
+				return PrinterInstance.isConnected;
+			}, '9sec wait for connection', ENABLE9K);
+			
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.storeImage(printerDriveAndFileName, pngimagepath_1024px, 150, 150,storeImageCallback);
+			}
+			else {
+				displayResult("Failed to connect to the printer", connect_status);	
+			}
+		});
+		
+		runs(function() {
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+		});
+		waitsFor(function() {
+			return document.getElementById("actResult").innerHTML != "init";
+		}, "Timed out waiting for tester to respond", ENABLE30MIN);
+		runs(function() {
+			expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+		});
+	});	
+	
+	it("VTXXX-0198 | storeImage method with valid printerDriveAndFileName PNG (2048X1536), imageFilePathOnDevice, width = -1, height = -1 ( with Callback)" , function() {
+		runs(function() {
+			setObjective("VTXXX-0198 | storeImage method with valid printerDriveAndFileName PNG (2048X1536), imageFilePathOnDevice, width = -1, height = -1 ( with Callback)");
+			setInstruction("1. Connect a Zebra printer with the device <br /> 2. Call storeImage with callback.");
+			setExpected("1.  On successful storing image callback should return with STATUS_SUCCESS.<br />2.  File should be stored at  D:FILE.GRF on printer <br />3. On failure storing image callback should return with STATUS_ERROR ");
+		});
+		
+		
+		runs(function() {
+				PrinterConnectiontype();
+			});
+		
+		runs(function() {
+			var PrinterInstance = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			connect_status = PrinterInstance.connect();
+			waitsFor(function()	{
+				return PrinterInstance.isConnected;
+			}, '9sec wait for connection', ENABLE9K);
+			
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.storeImage(printerDriveAndFileName, pngimagepath_2048px, -1, -1,storeImageCallback);
+			}
+			else {
+				displayResult("Failed to connect to the printer", connect_status);	
+			}
+		});
+		
+		runs(function() {
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+		});
+		waitsFor(function() {
+			return document.getElementById("actResult").innerHTML != "init";
+		}, "Timed out waiting for tester to respond", ENABLE30MIN);
+		runs(function() {
+			expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+		});
+	});		
+	
+	it("VTXXX-0199 | storeImage method  printerDriveAndFileName without print drive FILE.GRF, imageFilePathOnDevice GIF (320X240), width = 50, height = 50  ( with Callback)" , function() {
+		runs(function() {
+			setObjective("VTXXX-0199 | storeImage method  printerDriveAndFileName without print drive FILE.GRF, imageFilePathOnDevice GIF (320X240), width = 50, height = 50  ( with Callback)");
+			setInstruction("1. Connect a Zebra printer with the device <br /> 2. Call storeImage with callback.");
+			setExpected("1.  On successful storing image callback should return with STATUS_SUCCESS.<br />2.  File should be stored at  default E:FILE.GRF on printer <br />3. On failure storing image callback should return with STATUS_ERROR ");
+		});
+		
+		
+		runs(function() {
+				PrinterConnectiontype();
+			});
+		
+		runs(function() {
+			var PrinterInstance = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			connect_status = PrinterInstance.connect();
+			waitsFor(function()	{
+				return PrinterInstance.isConnected;
+			}, '9sec wait for connection', ENABLE9K);
+			
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.storeImage(printerOnlyFileName, gifimagepath_320px, 50, 50,storeImageCallback);
+			}
+			else {
+				displayResult("Failed to connect to the printer", connect_status);	
+			}
+		});
+		
+		runs(function() {
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+		});
+		waitsFor(function() {
+			return document.getElementById("actResult").innerHTML != "init";
+		}, "Timed out waiting for tester to respond", ENABLE30MIN);
+		runs(function() {
+			expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+		});
+	});	
+	
+	it("VTXXX-0200 | storeImage method with valid printerDriveAndFileName GIF (640X480), imageFilePathOnDevice, width = 50, height = 50  ( with Callback)" , function() {
+		runs(function() {
+			setObjective("VTXXX-0200 | storeImage method with valid printerDriveAndFileName GIF (640X480), imageFilePathOnDevice, width = 50, height = 50  ( with Callback)");
+			setInstruction("1. Connect a Zebra printer with the device <br /> 2. Call storeImage with callback.");
+			setExpected("1.  On successful storing image callback should return with STATUS_SUCCESS.<br />2.  File should be stored at  D:FILE.GRF on printer <br />3. On failure storing image callback should return with STATUS_ERROR ");
+		});
+		
+		
+		runs(function() {
+				PrinterConnectiontype();
+			});
+		
+		runs(function() {
+			var PrinterInstance = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			connect_status = PrinterInstance.connect();
+			waitsFor(function()	{
+				return PrinterInstance.isConnected;
+			}, '9sec wait for connection', ENABLE9K);
+			
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.storeImage(printerDriveAndFileName, gifimagepath_640px, 50, 50,storeImageCallback);
+			}
+			else {
+				displayResult("Failed to connect to the printer", connect_status);	
+			}
+		});
+		
+		runs(function() {
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+		});
+		waitsFor(function() {
+			return document.getElementById("actResult").innerHTML != "init";
+		}, "Timed out waiting for tester to respond", ENABLE30MIN);
+		runs(function() {
+			expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+		});
+	});	
+	
+	it("VTXXX-0201 | storeImage method with valid printerDriveAndFileName GIF (1024X768) , imageFilePathOnDevice, width = 150, height = 150  ( with Callback)" , function() {
+		runs(function() {
+			setObjective("VTXXX-0201 | storeImage method with valid printerDriveAndFileName GIF (1024X768) , imageFilePathOnDevice, width = 150, height = 150  ( with Callback)");
+			setInstruction("1. Connect a Zebra printer with the device <br /> 2. Call storeImage with callback.");
+			setExpected("1.  On successful storing image callback should return with STATUS_SUCCESS.<br />2.  File should be stored at  D:FILE.GRF on printer <br />3. On failure storing image callback should return with STATUS_ERROR ");
+		});
+		
+		
+		runs(function() {
+				PrinterConnectiontype();
+			});
+		
+		runs(function() {
+			var PrinterInstance = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			connect_status = PrinterInstance.connect();
+			waitsFor(function()	{
+				return PrinterInstance.isConnected;
+			}, '9sec wait for connection', ENABLE9K);
+			
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.storeImage(printerDriveAndFileName, gifimagepath_1024px, 150, 150,storeImageCallback);
+			}
+			else {
+				displayResult("Failed to connect to the printer", connect_status);	
+			}
+		});
+		
+		runs(function() {
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+		});
+		waitsFor(function() {
+			return document.getElementById("actResult").innerHTML != "init";
+		}, "Timed out waiting for tester to respond", ENABLE30MIN);
+		runs(function() {
+			expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+		});
+	});	
+	
+	it("VTXXX-0202 | storeImage method with valid printerDriveAndFileName GIF (2048X1536), imageFilePathOnDevice, width = -1, height = -1 ( with Callback)" , function() {
+		runs(function() {
+			setObjective("VTXXX-0202 | storeImage method with valid printerDriveAndFileName GIF (2048X1536), imageFilePathOnDevice, width = -1, height = -1 ( with Callback)");
+			setInstruction("1. Connect a Zebra printer with the device <br /> 2. Call storeImage with callback.");
+			setExpected("1.  On successful storing image callback should return with STATUS_SUCCESS.<br />2.  File should be stored at  D:FILE.GRF on printer <br />3. On failure storing image callback should return with STATUS_ERROR ");
+		});
+		
+		
+		runs(function() {
+				PrinterConnectiontype();
+			});
+		
+		runs(function() {
+			var PrinterInstance = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			connect_status = PrinterInstance.connect();
+			waitsFor(function()	{
+				return PrinterInstance.isConnected;
+			}, '9sec wait for connection', ENABLE9K);
+			
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.storeImage(printerDriveAndFileName, gifimagepath_2048px, -1, -1,storeImageCallback);
+			}
+			else {
+				displayResult("Failed to connect to the printer", connect_status);	
+			}
+		});
+		
+		runs(function() {
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+		});
+		waitsFor(function() {
+			return document.getElementById("actResult").innerHTML != "init";
+		}, "Timed out waiting for tester to respond", ENABLE30MIN);
+		runs(function() {
+			expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+		});
+	});	
+
+	it("VTXXX-0203 | storeImage method  printerDriveAndFileName without print drive FILE.GRF, imageFilePathOnDevice BMP (320X240), width = 50, height = 50  ( without Callback)" , function() {
+		runs(function() {
+			setObjective("VTXXX-0203 | storeImage method  printerDriveAndFileName without print drive FILE.GRF, imageFilePathOnDevice BMP (320X240), width = 50, height = 50  ( without Callback)");
+			setInstruction("1. Connect a Zebra printer with the device <br /> 2. Call storeImage with callback.");
+			setExpected("1.  On successful storing image should return with STATUS_SUCCESS.<br />2.  File should be stored at  E:FILE.GRF on printer <br />3. On failure storing image should return with STATUS_ERROR ");
+		});
+		
+		
+		runs(function() {
+				PrinterConnectiontype();
+			});
+		
+		runs(function() {
+			var PrinterInstance = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			connect_status = PrinterInstance.connect();
+			waitsFor(function()	{
+				return PrinterInstance.isConnected;
+			}, '9sec wait for connection', ENABLE9K);
+			
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.storeImage(printerOnlyFileName, bmpimagepath_320px, 50, 50);
+			}
+			else {
+				displayResult("Failed to connect to the printer", connect_status);	
+			}
+		});
+		
+		runs(function() {
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+		});
+		waitsFor(function() {
+			return document.getElementById("actResult").innerHTML != "init";
+		}, "Timed out waiting for tester to respond", ENABLE30MIN);
+		runs(function() {
+			expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+		});
+	});		
+
+	it("VTXXX-0204 | storeImage method with valid printerDriveAndFileName BMP (640X480), imageFilePathOnDevice, width = 50, height = 50  ( without Callback)" , function() {
+		runs(function() {
+			setObjective("VTXXX-0204 | storeImage method with valid printerDriveAndFileName BMP (640X480), imageFilePathOnDevice, width = 50, height = 50  ( without Callback)");
+			setInstruction("1. Connect a Zebra printer with the device <br /> 2. Call storeImage with callback.");
+			setExpected("1.  On successful storing image should return with STATUS_SUCCESS.<br />2.  File should be stored at  D:FILE.GRF on printer <br />3. On failure storing image should return with STATUS_ERROR ");
+		});
+		
+		
+		runs(function() {
+				PrinterConnectiontype();
+			});
+		
+		runs(function() {
+			var PrinterInstance = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			connect_status = PrinterInstance.connect();
+			waitsFor(function()	{
+				return PrinterInstance.isConnected;
+			}, '9sec wait for connection', ENABLE9K);
+			
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.storeImage(printerDriveAndFileName, bmpimagepath_640px, 50, 50);
+			}
+			else {
+				displayResult("Failed to connect to the printer", connect_status);	
+			}
+		});
+		
+		runs(function() {
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+		});
+		waitsFor(function() {
+			return document.getElementById("actResult").innerHTML != "init";
+		}, "Timed out waiting for tester to respond", ENABLE30MIN);
+		runs(function() {
+			expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+		});
+	});	
+
+	it("VTXXX-0205 | storeImage method with valid printerDriveAndFileName BMP (1024X768) , imageFilePathOnDevice, width = 150, height = 150  ( without Callback)" , function() {
+		runs(function() {
+			setObjective("VTXXX-0205 | storeImage method with valid printerDriveAndFileName BMP (1024X768) , imageFilePathOnDevice, width = 150, height = 150  ( without Callback)");
+			setInstruction("1. Connect a Zebra printer with the device <br /> 2. Call storeImage with callback.");
+			setExpected("1.  On successful storing image should return with STATUS_SUCCESS.<br />2.  File should be stored at  D:FILE.GRF on printer <br />3. On failure storing image should return with STATUS_ERROR ");
+		});
+		
+		
+		runs(function() {
+				PrinterConnectiontype();
+			});
+		
+		runs(function() {
+			var PrinterInstance = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			connect_status = PrinterInstance.connect();
+			waitsFor(function()	{
+				return PrinterInstance.isConnected;
+			}, '9sec wait for connection', ENABLE9K);
+			
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.storeImage(printerDriveAndFileName, bmpimagepath_1024px, 150, 150);
+			}
+			else {
+				displayResult("Failed to connect to the printer", connect_status);	
+			}
+		});
+		
+		runs(function() {
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+		});
+		waitsFor(function() {
+			return document.getElementById("actResult").innerHTML != "init";
+		}, "Timed out waiting for tester to respond", ENABLE30MIN);
+		runs(function() {
+			expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+		});
+	});		
+	
+	it("VTXXX-0206 | storeImage method with valid printerDriveAndFileName BMP (2048X1536), imageFilePathOnDevice, width = -1, height = -1 ( without Callback)" , function() {
+		runs(function() {
+			setObjective("VTXXX-0206 | storeImage method with valid printerDriveAndFileName BMP (2048X1536), imageFilePathOnDevice, width = -1, height = -1 ( without Callback)");
+			setInstruction("1. Connect a Zebra printer with the device <br /> 2. Call storeImage with callback.");
+			setExpected("1.  On successful storing image should return with STATUS_SUCCESS.<br />2.  File should be stored at  D:FILE.GRF on printer <br />3. On failure storing image should return with STATUS_ERROR ");
+		});
+		
+		
+		runs(function() {
+				PrinterConnectiontype();
+			});
+		
+		runs(function() {
+			var PrinterInstance = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			connect_status = PrinterInstance.connect();
+			waitsFor(function()	{
+				return PrinterInstance.isConnected;
+			}, '9sec wait for connection', ENABLE9K);
+			
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.storeImage(printerDriveAndFileName, bmpimagepath_2048px, -1, -1);
+			}
+			else {
+				displayResult("Failed to connect to the printer", connect_status);	
+			}
+		});
+		
+		runs(function() {
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+		});
+		waitsFor(function() {
+			return document.getElementById("actResult").innerHTML != "init";
+		}, "Timed out waiting for tester to respond", ENABLE30MIN);
+		runs(function() {
+			expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+		});
+	});	
+
+	it("VTXXX-0207 | storeImage method  printerDriveAndFileName without print drive FILE.GRF, imageFilePathOnDevice GIF (320X240), width = 50, height = 50  ( without Callback)" , function() {
+		runs(function() {
+			setObjective("VTXXX-0207 | storeImage method  printerDriveAndFileName without print drive FILE.GRF, imageFilePathOnDevice GIF (320X240), width = 50, height = 50  ( without Callback)");
+			setInstruction("1. Connect a Zebra printer with the device <br /> 2. Call storeImage with callback.");
+			setExpected("1.  On successful storing image should return with STATUS_SUCCESS.<br />2.  File should be stored at  E:FILE.GRF on printer <br />3. On failure storing image should return with STATUS_ERROR ");
+		});
+		
+		
+		runs(function() {
+				PrinterConnectiontype();
+			});
+		
+		runs(function() {
+			var PrinterInstance = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			connect_status = PrinterInstance.connect();
+			waitsFor(function()	{
+				return PrinterInstance.isConnected;
+			}, '9sec wait for connection', ENABLE9K);
+			
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.storeImage(printerOnlyFileName, gifimagepath_320px, 50, 50);
+			}
+			else {
+				displayResult("Failed to connect to the printer", connect_status);	
+			}
+		});
+		
+		runs(function() {
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+		});
+		waitsFor(function() {
+			return document.getElementById("actResult").innerHTML != "init";
+		}, "Timed out waiting for tester to respond", ENABLE30MIN);
+		runs(function() {
+			expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+		});
+	});		
+
+	it("VTXXX-0208 | storeImage method with valid printerDriveAndFileName GIF (640X480), imageFilePathOnDevice, width = 50, height = 50  ( without Callback)" , function() {
+		runs(function() {
+			setObjective("VTXXX-0208 | storeImage method with valid printerDriveAndFileName GIF (640X480), imageFilePathOnDevice, width = 50, height = 50  ( without Callback)");
+			setInstruction("1. Connect a Zebra printer with the device <br /> 2. Call storeImage with callback.");
+			setExpected("1.  On successful storing image should return with STATUS_SUCCESS.<br />2.  File should be stored at  D:FILE.GRF on printer <br />3. On failure storing image should return with STATUS_ERROR ");
+		});
+		
+		
+		runs(function() {
+				PrinterConnectiontype();
+			});
+		
+		runs(function() {
+			var PrinterInstance = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			connect_status = PrinterInstance.connect();
+			waitsFor(function()	{
+				return PrinterInstance.isConnected;
+			}, '9sec wait for connection', ENABLE9K);
+			
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.storeImage(printerDriveAndFileName, gifimagepath_640px, 50, 50);
+			}
+			else {
+				displayResult("Failed to connect to the printer", connect_status);	
+			}
+		});
+		
+		runs(function() {
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+		});
+		waitsFor(function() {
+			return document.getElementById("actResult").innerHTML != "init";
+		}, "Timed out waiting for tester to respond", ENABLE30MIN);
+		runs(function() {
+			expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+		});
+	});	
+
+	it("VTXXX-0209 | storeImage method with valid printerDriveAndFileName GIF (1024X768) , imageFilePathOnDevice, width = 150, height = 150  ( without Callback)" , function() {
+		runs(function() {
+			setObjective("VTXXX-0209 | storeImage method with valid printerDriveAndFileName GIF (1024X768) , imageFilePathOnDevice, width = 150, height = 150  ( without Callback)");
+			setInstruction("1. Connect a Zebra printer with the device <br /> 2. Call storeImage with callback.");
+			setExpected("1.  On successful storing image should return with STATUS_SUCCESS.<br />2.  File should be stored at  D:FILE.GRF on printer <br />3. On failure storing image should return with STATUS_ERROR ");
+		});
+		
+		
+		runs(function() {
+				PrinterConnectiontype();
+			});
+		
+		runs(function() {
+			var PrinterInstance = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			connect_status = PrinterInstance.connect();
+			waitsFor(function()	{
+				return PrinterInstance.isConnected;
+			}, '9sec wait for connection', ENABLE9K);
+			
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.storeImage(printerDriveAndFileName, gifimagepath_1024px, 150, 150);
+			}
+			else {
+				displayResult("Failed to connect to the printer", connect_status);	
+			}
+		});
+		
+		runs(function() {
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+		});
+		waitsFor(function() {
+			return document.getElementById("actResult").innerHTML != "init";
+		}, "Timed out waiting for tester to respond", ENABLE30MIN);
+		runs(function() {
+			expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+		});
+	});		
+	
+	it("VTXXX-0210 | storeImage method with valid printerDriveAndFileName GIF (2048X1536), imageFilePathOnDevice, width = -1, height = -1 ( without Callback)" , function() {
+		runs(function() {
+			setObjective("VTXXX-0210 | storeImage method with valid printerDriveAndFileName GIF (2048X1536), imageFilePathOnDevice, width = -1, height = -1 ( without Callback)");
+			setInstruction("1. Connect a Zebra printer with the device <br /> 2. Call storeImage with callback.");
+			setExpected("1.  On successful storing image should return with STATUS_SUCCESS.<br />2.  File should be stored at  D:FILE.GRF on printer <br />3. On failure storing image should return with STATUS_ERROR ");
+		});
+		
+		
+		runs(function() {
+				PrinterConnectiontype();
+			});
+		
+		runs(function() {
+			var PrinterInstance = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			connect_status = PrinterInstance.connect();
+			waitsFor(function()	{
+				return PrinterInstance.isConnected;
+			}, '9sec wait for connection', ENABLE9K);
+			
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.storeImage(printerDriveAndFileName, gifimagepath_2048px, -1, -1);
+			}
+			else {
+				displayResult("Failed to connect to the printer", connect_status);	
+			}
+		});
+		
+		runs(function() {
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+		});
+		waitsFor(function() {
+			return document.getElementById("actResult").innerHTML != "init";
+		}, "Timed out waiting for tester to respond", ENABLE30MIN);
+		runs(function() {
+			expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+		});
+	});		
+
+	it("VTXXX-0211 | storeImage method  printerDriveAndFileName without print drive FILE.GRF, imageFilePathOnDevice JPG (320X240), width = 50, height = 50  ( without Callback)" , function() {
+		runs(function() {
+			setObjective("VTXXX-0211 | storeImage method  printerDriveAndFileName without print drive FILE.GRF, imageFilePathOnDevice JPG (320X240), width = 50, height = 50  ( without Callback)");
+			setInstruction("1. Connect a Zebra printer with the device <br /> 2. Call storeImage with callback.");
+			setExpected("1.  On successful storing image should return with STATUS_SUCCESS.<br />2.  File should be stored at  E:FILE.GRF on printer <br />3. On failure storing image should return with STATUS_ERROR ");
+		});
+		
+		
+		runs(function() {
+				PrinterConnectiontype();
+			});
+		
+		runs(function() {
+			var PrinterInstance = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			connect_status = PrinterInstance.connect();
+			waitsFor(function()	{
+				return PrinterInstance.isConnected;
+			}, '9sec wait for connection', ENABLE9K);
+			
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.storeImage(printerOnlyFileName, jpgimagepath_320px, 50, 50);
+			}
+			else {
+				displayResult("Failed to connect to the printer", connect_status);	
+			}
+		});
+		
+		runs(function() {
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+		});
+		waitsFor(function() {
+			return document.getElementById("actResult").innerHTML != "init";
+		}, "Timed out waiting for tester to respond", ENABLE30MIN);
+		runs(function() {
+			expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+		});
+	});		
+
+	it("VTXXX-0212 | storeImage method with valid printerDriveAndFileName JPG (640X480), imageFilePathOnDevice, width = 50, height = 50  ( without Callback)" , function() {
+		runs(function() {
+			setObjective("VTXXX-0212 | storeImage method with valid printerDriveAndFileName JPG (640X480), imageFilePathOnDevice, width = 50, height = 50  ( without Callback)");
+			setInstruction("1. Connect a Zebra printer with the device <br /> 2. Call storeImage with callback.");
+			setExpected("1.  On successful storing image should return with STATUS_SUCCESS.<br />2.  File should be stored at  D:FILE.GRF on printer <br />3. On failure storing image should return with STATUS_ERROR ");
+		});
+		
+		
+		runs(function() {
+				PrinterConnectiontype();
+			});
+		
+		runs(function() {
+			var PrinterInstance = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			connect_status = PrinterInstance.connect();
+			waitsFor(function()	{
+				return PrinterInstance.isConnected;
+			}, '9sec wait for connection', ENABLE9K);
+			
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.storeImage(printerDriveAndFileName, jpgimagepath_640px, 50, 50);
+			}
+			else {
+				displayResult("Failed to connect to the printer", connect_status);	
+			}
+		});
+		
+		runs(function() {
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+		});
+		waitsFor(function() {
+			return document.getElementById("actResult").innerHTML != "init";
+		}, "Timed out waiting for tester to respond", ENABLE30MIN);
+		runs(function() {
+			expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+		});
+	});	
+
+	it("VTXXX-0213 | storeImage method with valid printerDriveAndFileName JPG (1024X768) , imageFilePathOnDevice, width = 150, height = 150  ( without Callback)" , function() {
+		runs(function() {
+			setObjective("VTXXX-0213 | storeImage method with valid printerDriveAndFileName JPG (1024X768) , imageFilePathOnDevice, width = 150, height = 150  ( without Callback)");
+			setInstruction("1. Connect a Zebra printer with the device <br /> 2. Call storeImage with callback.");
+			setExpected("1.  On successful storing image should return with STATUS_SUCCESS.<br />2.  File should be stored at  D:FILE.GRF on printer <br />3. On failure storing image should return with STATUS_ERROR ");
+		});
+		
+		
+		runs(function() {
+				PrinterConnectiontype();
+			});
+		
+		runs(function() {
+			var PrinterInstance = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			connect_status = PrinterInstance.connect();
+			waitsFor(function()	{
+				return PrinterInstance.isConnected;
+			}, '9sec wait for connection', ENABLE9K);
+			
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.storeImage(printerDriveAndFileName, jpgimagepath_1024px, 150, 150);
+			}
+			else {
+				displayResult("Failed to connect to the printer", connect_status);	
+			}
+		});
+		
+		runs(function() {
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+		});
+		waitsFor(function() {
+			return document.getElementById("actResult").innerHTML != "init";
+		}, "Timed out waiting for tester to respond", ENABLE30MIN);
+		runs(function() {
+			expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+		});
+	});		
+	
+	it("VTXXX-0214 | storeImage method with valid printerDriveAndFileName JPG (2048X1536), imageFilePathOnDevice, width = -1, height = -1 ( without Callback)" , function() {
+		runs(function() {
+			setObjective("VTXXX-0214 | storeImage method with valid printerDriveAndFileName JPG (2048X1536), imageFilePathOnDevice, width = -1, height = -1 ( without Callback)");
+			setInstruction("1. Connect a Zebra printer with the device <br /> 2. Call storeImage with callback.");
+			setExpected("1.  On successful storing image should return with STATUS_SUCCESS.<br />2.  File should be stored at  D:FILE.GRF on printer <br />3. On failure storing image should return with STATUS_ERROR ");
+		});
+		
+		
+		runs(function() {
+				PrinterConnectiontype();
+			});
+		
+		runs(function() {
+			var PrinterInstance = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			connect_status = PrinterInstance.connect();
+			waitsFor(function()	{
+				return PrinterInstance.isConnected;
+			}, '9sec wait for connection', ENABLE9K);
+			
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.storeImage(printerDriveAndFileName, jpgimagepath_2048px, -1, -1);
+			}
+			else {
+				displayResult("Failed to connect to the printer", connect_status);	
+			}
+		});
+		
+		runs(function() {
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+		});
+		waitsFor(function() {
+			return document.getElementById("actResult").innerHTML != "init";
+		}, "Timed out waiting for tester to respond", ENABLE30MIN);
+		runs(function() {
+			expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+		});
+	});	
+
+	it("VTXXX-0215 | storeImage method  printerDriveAndFileName without print drive FILE.GRF, imageFilePathOnDevice PNG (320X240), width = 50, height = 50  ( without Callback)" , function() {
+		runs(function() {
+			setObjective("VTXXX-0215 | storeImage method  printerDriveAndFileName without print drive FILE.GRF, imageFilePathOnDevice PNG (320X240), width = 50, height = 50  ( without Callback)");
+			setInstruction("1. Connect a Zebra printer with the device <br /> 2. Call storeImage with callback.");
+			setExpected("1.  On successful storing image should return with STATUS_SUCCESS.<br />2.  File should be stored at  E:FILE.GRF on printer <br />3. On failure storing image should return with STATUS_ERROR ");
+		});
+		
+		
+		runs(function() {
+				PrinterConnectiontype();
+			});
+		
+		runs(function() {
+			var PrinterInstance = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			connect_status = PrinterInstance.connect();
+			waitsFor(function()	{
+				return PrinterInstance.isConnected;
+			}, '9sec wait for connection', ENABLE9K);
+			
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.storeImage(printerOnlyFileName, pngimagepath_320px, 50, 50);
+			}
+			else {
+				displayResult("Failed to connect to the printer", connect_status);	
+			}
+		});
+		
+		runs(function() {
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+		});
+		waitsFor(function() {
+			return document.getElementById("actResult").innerHTML != "init";
+		}, "Timed out waiting for tester to respond", ENABLE30MIN);
+		runs(function() {
+			expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+		});
+	});		
+
+	it("VTXXX-0216 | storeImage method with valid printerDriveAndFileName PNG (640X480), imageFilePathOnDevice, width = 50, height = 50  ( without Callback)" , function() {
+		runs(function() {
+			setObjective("VTXXX-0216 | storeImage method with valid printerDriveAndFileName PNG (640X480), imageFilePathOnDevice, width = 50, height = 50  ( without Callback)");
+			setInstruction("1. Connect a Zebra printer with the device <br /> 2. Call storeImage with callback.");
+			setExpected("1.  On successful storing image should return with STATUS_SUCCESS.<br />2.  File should be stored at  D:FILE.GRF on printer <br />3. On failure storing image should return with STATUS_ERROR ");
+		});
+		
+		
+		runs(function() {
+				PrinterConnectiontype();
+			});
+		
+		runs(function() {
+			var PrinterInstance = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			connect_status = PrinterInstance.connect();
+			waitsFor(function()	{
+				return PrinterInstance.isConnected;
+			}, '9sec wait for connection', ENABLE9K);
+			
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.storeImage(printerDriveAndFileName, pngimagepath_640px, 50, 50);
+			}
+			else {
+				displayResult("Failed to connect to the printer", connect_status);	
+			}
+		});
+		
+		runs(function() {
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+		});
+		waitsFor(function() {
+			return document.getElementById("actResult").innerHTML != "init";
+		}, "Timed out waiting for tester to respond", ENABLE30MIN);
+		runs(function() {
+			expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+		});
+	});	
+
+	it("VTXXX-0217 | storeImage method with valid printerDriveAndFileName PNG (1024X768) , imageFilePathOnDevice, width = 150, height = 150  ( without Callback)" , function() {
+		runs(function() {
+			setObjective("VTXXX-0217 | storeImage method with valid printerDriveAndFileName PNG (1024X768) , imageFilePathOnDevice, width = 150, height = 150  ( without Callback)");
+			setInstruction("1. Connect a Zebra printer with the device <br /> 2. Call storeImage with callback.");
+			setExpected("1.  On successful storing image should return with STATUS_SUCCESS.<br />2.  File should be stored at  D:FILE.GRF on printer <br />3. On failure storing image should return with STATUS_ERROR ");
+		});
+		
+		
+		runs(function() {
+				PrinterConnectiontype();
+			});
+		
+		runs(function() {
+			var PrinterInstance = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			connect_status = PrinterInstance.connect();
+			waitsFor(function()	{
+				return PrinterInstance.isConnected;
+			}, '9sec wait for connection', ENABLE9K);
+			
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.storeImage(printerDriveAndFileName, pngimagepath_1024px, 150, 150);
+			}
+			else {
+				displayResult("Failed to connect to the printer", connect_status);	
+			}
+		});
+		
+		runs(function() {
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+		});
+		waitsFor(function() {
+			return document.getElementById("actResult").innerHTML != "init";
+		}, "Timed out waiting for tester to respond", ENABLE30MIN);
+		runs(function() {
+			expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+		});
+	});		
+	
+	it("VTXXX-0218 | storeImage method with valid printerDriveAndFileName PNG (2048X1536), imageFilePathOnDevice, width = -1, height = -1 ( without Callback)" , function() {
+		runs(function() {
+			setObjective("VTXXX-0218 | storeImage method with valid printerDriveAndFileName PNG (2048X1536), imageFilePathOnDevice, width = -1, height = -1 ( without Callback)");
+			setInstruction("1. Connect a Zebra printer with the device <br /> 2. Call storeImage with callback.");
+			setExpected("1.  On successful storing image should return with STATUS_SUCCESS.<br />2.  File should be stored at  D:FILE.GRF on printer <br />3. On failure storing image should return with STATUS_ERROR ");
+		});
+		
+		
+		runs(function() {
+				PrinterConnectiontype();
+			});
+		
+		runs(function() {
+			var PrinterInstance = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			connect_status = PrinterInstance.connect();
+			waitsFor(function()	{
+				return PrinterInstance.isConnected;
+			}, '9sec wait for connection', ENABLE9K);
+			
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.storeImage(printerDriveAndFileName, pngimagepath_2048px, -1, -1);
+			}
+			else {
+				displayResult("Failed to connect to the printer", connect_status);	
+			}
+		});
+		
+		runs(function() {
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+		});
+		waitsFor(function() {
+			return document.getElementById("actResult").innerHTML != "init";
+		}, "Timed out waiting for tester to respond", ENABLE30MIN);
+		runs(function() {
+			expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+		});
+	});		
+
+	it("VTXXX-0219 | storeImage method  printerDriveAndFileName without print drive FILE.GRF, imageFilePathOnDevice BMP (320X240), width = 50, height = 50  ( with Anonymous Callback)" , function() {
+		runs(function() {
+			setObjective("VTXXX-0219 | storeImage method  printerDriveAndFileName without print drive FILE.GRF, imageFilePathOnDevice BMP (320X240), width = 50, height = 50  ( with Anonymous Callback)");
+			setInstruction("1. Connect a Zebra printer with the device <br /> 2. Call storeImage with Anonymous Callback.");
+			setExpected("1.  On successful storing image callback should return with STATUS_SUCCESS.<br />2.  File should be stored at  E:FILE.GRF on printer <br />3. On failure storing image callback should return with STATUS_ERROR ");
+		});
+		
+		
+		runs(function() {
+				PrinterConnectiontype();
+			});
+		
+		runs(function() {
+			var PrinterInstance = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			connect_status = PrinterInstance.connect();
+			waitsFor(function()	{
+				return PrinterInstance.isConnected;
+			}, '9sec wait for connection', ENABLE9K);
+			
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.storeImage(printerOnlyFileName, bmpimagepath_320px, 50, 50, function(data){storeImageCallback(data)});
+			}
+			else {
+				displayResult("Failed to connect to the printer", connect_status);	
+			}
+		});
+		
+		runs(function() {
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+		});
+		waitsFor(function() {
+			return document.getElementById("actResult").innerHTML != "init";
+		}, "Timed out waiting for tester to respond", ENABLE30MIN);
+		runs(function() {
+			expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+		});
+	});		
+
+	it("VTXXX-0220 | storeImage method with valid printerDriveAndFileName GIF (640X480), imageFilePathOnDevice, width = 50, height = 50  ( with Anonymous Callback)" , function() {
+		runs(function() {
+			setObjective("VTXXX-0220 | storeImage method with valid printerDriveAndFileName GIF (640X480), imageFilePathOnDevice, width = 50, height = 50  ( with Anonymous Callback)");
+			setInstruction("1. Connect a Zebra printer with the device <br /> 2. Call storeImage with Anonymous Callback.");
+			setExpected("1.  On successful storing image callback should return with STATUS_SUCCESS.<br />2.  File should be stored at  D:FILE.GRF on printer <br />3. On failure storing image callback should return with STATUS_ERROR ");
+		});
+		
+		
+		runs(function() {
+				PrinterConnectiontype();
+			});
+		
+		runs(function() {
+			var PrinterInstance = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			connect_status = PrinterInstance.connect();
+			waitsFor(function()	{
+				return PrinterInstance.isConnected;
+			}, '9sec wait for connection', ENABLE9K);
+			
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.storeImage(printerDriveAndFileName, gifimagepath_640px, 50, 50,function(data){storeImageCallback(data)});
+			}
+			else {
+				displayResult("Failed to connect to the printer", connect_status);	
+			}
+		});
+		
+		runs(function() {
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+		});
+		waitsFor(function() {
+			return document.getElementById("actResult").innerHTML != "init";
+		}, "Timed out waiting for tester to respond", ENABLE30MIN);
+		runs(function() {
+			expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+		});
+	});	
+
+	it("VTXXX-0221 | storeImage method with valid printerDriveAndFileName JPG (1024X768) , imageFilePathOnDevice, width = 150, height = 150  ( with Anonymous Callback)" , function() {
+		runs(function() {
+			setObjective("VTXXX-0221 | storeImage method with valid printerDriveAndFileName JPG (1024X768) , imageFilePathOnDevice, width = 150, height = 150  ( with Anonymous Callback)");
+			setInstruction("1. Connect a Zebra printer with the device <br /> 2. Call storeImage with Anonymous Callback.");
+			setExpected("1.  On successful storing image callback should return with STATUS_SUCCESS.<br />2.  File should be stored at  D:FILE.GRF on printer <br />3. On failure storing image callback should return with STATUS_ERROR ");
+		});
+		
+		
+		runs(function() {
+				PrinterConnectiontype();
+			});
+		
+		runs(function() {
+			var PrinterInstance = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			connect_status = PrinterInstance.connect();
+			waitsFor(function()	{
+				return PrinterInstance.isConnected;
+			}, '9sec wait for connection', ENABLE9K);
+			
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.storeImage(printerDriveAndFileName, jpgimagepath_1024px, 150, 150);
+			}
+			else {
+				displayResult("Failed to connect to the printer", connect_status,function(data){storeImageCallback(data)});	
+			}
+		});
+		
+		runs(function() {
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+		});
+		waitsFor(function() {
+			return document.getElementById("actResult").innerHTML != "init";
+		}, "Timed out waiting for tester to respond", ENABLE30MIN);
+		runs(function() {
+			expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+		});
+	});		
+	
+	it("VTXXX-0222 | storeImage method with valid printerDriveAndFileName PNG (2048X1536), imageFilePathOnDevice, width = -1, height = -1 ( with Anonymous Callback)" , function() {
+		runs(function() {
+			setObjective("VTXXX-0222 | storeImage method with valid printerDriveAndFileName PNG (2048X1536), imageFilePathOnDevice, width = -1, height = -1 ( with Anonymous Callback)");
+			setInstruction("1. Connect a Zebra printer with the device <br /> 2. Call storeImage with Anonymous Callback.");
+			setExpected("1.  On successful storing image callback should return with STATUS_SUCCESS.<br />2.  File should be stored at  D:FILE.GRF on printer <br />3. On failure storing image callback should return with STATUS_ERROR ");
+		});
+		
+		
+		runs(function() {
+				PrinterConnectiontype();
+			});
+		
+		runs(function() {
+			var PrinterInstance = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			connect_status = PrinterInstance.connect();
+			waitsFor(function()	{
+				return PrinterInstance.isConnected;
+			}, '9sec wait for connection', ENABLE9K);
+			
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.storeImage(printerDriveAndFileName, pngimagepath_2048px, -1, -1,function(data){storeImageCallback(data)});
+			}
+			else {
+				displayResult("Failed to connect to the printer", connect_status);	
+			}
+		});
+		
+		runs(function() {
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+		});
+		waitsFor(function() {
+			return document.getElementById("actResult").innerHTML != "init";
+		}, "Timed out waiting for tester to respond", ENABLE30MIN);
+		runs(function() {
+			expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+		});
+	});		
 });
