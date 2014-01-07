@@ -766,11 +766,11 @@ describe("Printing", function () {
         });
         
         it("VTXXX-0019-connect Method (with callback function) ", function () {
-        	printers  = [];
+        	//printers  = [];
             displayTestDescription("VTXXX-0019 | connect Method (with callback function) ");
             displayTestInstruction("");
             displayTestExpectation("The callback should return STATUS_OK");
-
+            /*
             runs(function () {
             	// Let the printer be search first then use stop
             	searchPrintersNow();
@@ -779,7 +779,7 @@ describe("Printing", function () {
             waitsFor(function () {
                 return true;
             }, 'Searching for Printers....', 5000);
-            
+            */
             runs(function () {
             	var printer = Rho.Printer.getPrinterByID(printers[0].printerID);
             	printer.connect(connectCallback);
@@ -798,11 +798,11 @@ describe("Printing", function () {
         });
         
         it("VTXXX-0020-connect Method (with anonymous function) ", function () {
-        	printers  = [];
+        	//printers  = [];
             displayTestDescription("VTXXX-0020 | connect Method (with anonymous function) ");
             displayTestInstruction("");
             displayTestExpectation("The callback should return STATUS_OK");
-
+            /*
             runs(function () {
             	// Let the printer be search first then use stop
             	searchPrintersNow();
@@ -811,7 +811,7 @@ describe("Printing", function () {
             waitsFor(function () {
                 return true;
             }, 'Searching for Printers....', 5000);
-            
+            */
             runs(function () {
             	var printer = Rho.Printer.getPrinterByID(printers[0].printerID);
             	printer.connect(function(){connectCallback();});
@@ -833,11 +833,11 @@ describe("Printing", function () {
         });
         
         it("VTXXX-0021-connect Method (with param \"timeout\") ", function () {
-        	printers  = [];
+        	//printers  = [];
             displayTestDescription("VTXXX-0021 | connect Method (with param \"timeout\") ");
             displayTestInstruction("");
             displayTestExpectation("The Printer.isConnected should return STATUS_OK");
-
+            /*
             runs(function () {
             	// Let the printer be search first then use stop
             	searchPrintersNow();
@@ -846,7 +846,7 @@ describe("Printing", function () {
             waitsFor(function () {
                 return true;
             }, 'Searching for Printers....', 5000);
-            
+            */
             runs(function () {
             	var printer = Rho.Printer.getPrinterByID(printers[0].printerID);
             	printer.connect({"timeout":20000}, connectCallback);
@@ -868,11 +868,11 @@ describe("Printing", function () {
         });
         
         it("VTXXX-0022-connect Method (with param \"timeout\":0) ", function () {
-        	printers  = [];
+        	//printers  = [];
             displayTestDescription("VTXXX-0022 | connect Method (with param \"timeout\":0) ");
             displayTestInstruction("");
             displayTestExpectation("The Printer.isConnected should return STATUS_TIMEOUT");
-
+            /*
             runs(function () {
             	// Let the printer be search first then use stop
             	searchPrintersNow();
@@ -881,7 +881,7 @@ describe("Printing", function () {
             waitsFor(function () {
                 return true;
             }, 'Searching for Printers....', 5000);
-            
+            */
             runs(function () {
             	var printer = Rho.Printer.getPrinterByID(printers[0].printerID);
             	printer.connect({"timeout":0}, connectCallback);
@@ -903,11 +903,11 @@ describe("Printing", function () {
         });
         
         it("VTXXX-0023-connect Method (with param \"timeout\":1000) ", function () {
-        	printers  = [];
+        	//printers  = [];
             displayTestDescription("VTXXX-0023 | connect Method (with param \"timeout\":1000) ");
             displayTestInstruction("");
             displayTestExpectation("The Printer.isConnected should return STATUS_TIMEOUT");
-
+            /*
             runs(function () {
             	// Let the printer be search first then use stop
             	searchPrintersNow();
@@ -916,7 +916,7 @@ describe("Printing", function () {
             waitsFor(function () {
                 return true;
             }, 'Searching for Printers....', 5000);
-            
+            */
             runs(function () {
             	var printer = Rho.Printer.getPrinterByID(printers[0].printerID);
             	printer.connect({"timeout":1000}, connectCallback);
@@ -938,11 +938,11 @@ describe("Printing", function () {
         });
         
         it("VTXXX-0024-connect Method (with param \"timeout\":15000.5) ", function () {
-        	printers  = [];
+        	//printers  = [];
             displayTestDescription("VTXXX-0024 | connect Method (with param \"timeout\":15000.5) ");
             displayTestInstruction("");
             displayTestExpectation("The method should return STATUS_ERROR due to the param value passed as float.");
-
+            /*
             runs(function () {
             	// Let the printer be search first then use stop
             	searchPrintersNow();
@@ -951,7 +951,7 @@ describe("Printing", function () {
             waitsFor(function () {
                 return true;
             }, 'Searching for Printers....', 5000);
-            
+            */
             runs(function () {
             	var printer = Rho.Printer.getPrinterByID(printers[0].printerID);
             	printer.connect({"timeout":15000.5}, connectCallback);
@@ -973,7 +973,7 @@ describe("Printing", function () {
         });
         
         it("VTXXX-0025-connect Method (with param \"timeout\") with device disconnected ", function () {
-        	printers  = [];
+        	//printers  = [];
             displayTestDescription("VTXXX-0025 | connect Method (with param \"timeout\") with device disconnected ");
             displayTestInstruction("");
             displayTestExpectation("The Printer.isConnected should return STATUS_ERROR or STATUS_NOT_FOUND.");
@@ -981,7 +981,7 @@ describe("Printing", function () {
             waitsFor(function () {
                 return true;
             }, 'Please Turn OFF the Printer....', 10000);
-
+			/*
             runs(function () {
             	// Let the printer be search first then use stop
             	searchPrintersNow();
@@ -990,7 +990,7 @@ describe("Printing", function () {
             waitsFor(function () {
                 return true;
             }, 'Searching for Printers....', 5000);
-            
+            */
             runs(function () {
             	var printer = Rho.Printer.getPrinterByID(printers[0].printerID);
             	printer.connect({"timeout":20000}, connectCallback);
@@ -1051,11 +1051,12 @@ describe("Printing", function () {
         });
         
         it("VTXXX-0031-disconnect Method (with callback function) ", function () {
-        	printers  = [];
+        	//printers  = [];
             displayTestDescription("VTXXX-0031 | disconnect Method (with callback function) ");
             displayTestInstruction("");
             displayTestExpectation("The method should execute without errors.");
             
+            /*
             runs(function () {
             	// Let the printer be search first then use stop
             	searchPrintersNow();
@@ -1064,6 +1065,7 @@ describe("Printing", function () {
             waitsFor(function () {
                 return true;
             }, 'Searching for Printers....', 5000);
+            */
             
             runs(function () {
             	var printer = Rho.Printer.getPrinterByID(printers[0].printerID);
@@ -1086,11 +1088,12 @@ describe("Printing", function () {
         });
         
         it("VTXXX-0032-disconnect Method (with anonymous function) ", function () {
-        	printers  = [];
+        	//printers  = [];
             displayTestDescription("VTXXX-0032 | disconnect Method (with anonymous function) ");
             displayTestInstruction("");
             displayTestExpectation("The method should execute without errors.");
             
+            /*
             runs(function () {
             	// Let the printer be search first then use stop
             	searchPrintersNow();
@@ -1099,6 +1102,7 @@ describe("Printing", function () {
             waitsFor(function () {
                 return true;
             }, 'Searching for Printers....', 5000);
+            */
             
             runs(function () {
             	var printer = Rho.Printer.getPrinterByID(printers[0].printerID);
@@ -1121,11 +1125,12 @@ describe("Printing", function () {
         });
         
         it("VTXXX-0033-disconnect Method (sending string to print)) ", function () {
-        	printers  = [];
+        	//printers  = [];
             displayTestDescription("VTXXX-0033 | disconnect Method (sending string to print) ");
             displayTestInstruction("");
             displayTestExpectation("The string should not be printed on the printer.");
             
+            /*
             runs(function () {
             	// Let the printer be search first then use stop
             	searchPrintersNow();
@@ -1134,6 +1139,7 @@ describe("Printing", function () {
             waitsFor(function () {
                 return true;
             }, 'Searching for Printers....', 5000);
+            */
             
             runs(function () {
             	var printer = Rho.Printer.getPrinterByID(printers[0].printerID);
@@ -1158,11 +1164,12 @@ describe("Printing", function () {
         });
         
         it("VTXXX-0034-disconnect Method (call this before the connect method) ", function () {
-        	printers  = [];
+        	//printers  = [];
             displayTestDescription("VTXXX-0034 | disconnect Method (call this before the connect method) ");
             displayTestInstruction("");
             displayTestExpectation("The method should execute without any error.");
             
+            /*
             runs(function () {
             	// Let the printer be search first then use stop
             	searchPrintersNow();
@@ -1171,6 +1178,7 @@ describe("Printing", function () {
             waitsFor(function () {
                 return true;
             }, 'Searching for Printers....', 5000);
+            */
             
             runs(function () {
             	var printer = Rho.Printer.getPrinterByID(printers[0].printerID);
@@ -1194,11 +1202,12 @@ describe("Printing", function () {
         });
         
         it("VTXXX-0035-disconnect Method with callback (call this before the connect method) ", function () {
-        	printers  = [];
+        	//printers  = [];
             displayTestDescription("VTXXX-0035 | disconnect Method with callback (call this before the connect method) ");
             displayTestInstruction("");
             displayTestExpectation("The method should execute with STATUS_ERROR.");
             
+            /*
             runs(function () {
             	// Let the printer be search first then use stop
             	searchPrintersNow();
@@ -1207,6 +1216,7 @@ describe("Printing", function () {
             waitsFor(function () {
                 return true;
             }, 'Searching for Printers....', 5000);
+            */
             
             runs(function () {
             	var printer = Rho.Printer.getPrinterByID(printers[0].printerID);
@@ -1230,11 +1240,12 @@ describe("Printing", function () {
         });
         
         it("VTXXX-0036-printFile Method (without callback function) ", function () {
-        	printers  = [];
+        	//printers  = [];
             displayTestDescription("VTXXX-0036 | printFile Method (without callback function) ");
             displayTestInstruction("");
             displayTestExpectation("The file should be sent successfully to the printer.");
             
+            /*
             runs(function () {
             	// Let the printer be search first then use stop
             	searchPrintersNow();
@@ -1243,6 +1254,7 @@ describe("Printing", function () {
             waitsFor(function () {
                 return true;
             }, 'Searching for Printers....', 5000);
+            */
             
             runs(function () {
             	var printer = Rho.Printer.getPrinterByID(printers[0].printerID);
@@ -1275,11 +1287,12 @@ describe("Printing", function () {
         });
         
         it("VTXXX-0037-printFile Method (with callback function) ", function () {
-        	printers  = [];
+        	//printers  = [];
             displayTestDescription("VTXXX-0037 | printFile Method (with callback function) ");
             displayTestInstruction("");
             displayTestExpectation("The file should be sent successfully to the printer.");
             
+            /*
             runs(function () {
             	// Let the printer be search first then use stop
             	searchPrintersNow();
@@ -1288,6 +1301,7 @@ describe("Printing", function () {
             waitsFor(function () {
                 return true;
             }, 'Searching for Printers....', 5000);
+            */
             
             runs(function () {
             	var printer = Rho.Printer.getPrinterByID(printers[0].printerID);
@@ -1320,11 +1334,12 @@ describe("Printing", function () {
         });
         
         it("VTXXX-0038-printFile Method (with anonymous function for jpg file) ", function () {
-        	printers  = [];
+        	//printers  = [];
             displayTestDescription("VTXXX-0038 | printFile Method (with anonymous function for jpg file) ");
             displayTestInstruction("");
             displayTestExpectation("The file should be sent successfully to the printer.");
             
+            /*
             runs(function () {
             	// Let the printer be search first then use stop
             	searchPrintersNow();
@@ -1333,6 +1348,7 @@ describe("Printing", function () {
             waitsFor(function () {
                 return true;
             }, 'Searching for Printers....', 5000);
+            */
             
             runs(function () {
             	var printer = Rho.Printer.getPrinterByID(printers[0].printerID);
@@ -1365,11 +1381,12 @@ describe("Printing", function () {
         });
         
         it("VTXXX-0039-printFile Method (without callback function for png file) ", function () {
-        	printers  = [];
+        	//printers  = [];
             displayTestDescription("VTXXX-0039 | printFile Method (without callback function for png file) ");
             displayTestInstruction("");
             displayTestExpectation("The file should be sent successfully to the printer.");
             
+            /*
             runs(function () {
             	// Let the printer be search first then use stop
             	searchPrintersNow();
@@ -1378,6 +1395,7 @@ describe("Printing", function () {
             waitsFor(function () {
                 return true;
             }, 'Searching for Printers....', 5000);
+            */
             
             runs(function () {
             	var printer = Rho.Printer.getPrinterByID(printers[0].printerID);
@@ -1410,11 +1428,12 @@ describe("Printing", function () {
         });
         
         it("VTXXX-0040-printFile Method (with callback function for png file) ", function () {
-        	printers  = [];
+        	//printers  = [];
             displayTestDescription("VTXXX-0040 | printFile Method (with callback function for png file) ");
             displayTestInstruction("");
             displayTestExpectation("The file should be sent successfully to the printer.");
             
+            /*
             runs(function () {
             	// Let the printer be search first then use stop
             	searchPrintersNow();
@@ -1423,6 +1442,7 @@ describe("Printing", function () {
             waitsFor(function () {
                 return true;
             }, 'Searching for Printers....', 5000);
+            */
             
             runs(function () {
             	var printer = Rho.Printer.getPrinterByID(printers[0].printerID);
@@ -1455,11 +1475,12 @@ describe("Printing", function () {
         });
         
         it("VTXXX-0041-printFile Method (with anonymous function for png file) ", function () {
-        	printers  = [];
+        	//printers  = [];
             displayTestDescription("VTXXX-0041 | printFile Method (with anonymous function for png file) ");
             displayTestInstruction("");
             displayTestExpectation("The file should be sent successfully to the printer.");
             
+            /*
             runs(function () {
             	// Let the printer be search first then use stop
             	searchPrintersNow();
@@ -1468,6 +1489,7 @@ describe("Printing", function () {
             waitsFor(function () {
                 return true;
             }, 'Searching for Printers....', 5000);
+            */
             
             runs(function () {
             	var printer = Rho.Printer.getPrinterByID(printers[0].printerID);
@@ -1502,11 +1524,12 @@ describe("Printing", function () {
         var platform = Rho.System.platform;
         if (platform == "WINDOWS") {
 	        it("VTXXX-0042-printFile Method (without callback function for bmp file) ", function () {
-	        	printers  = [];
+	        	//printers  = [];
 	            displayTestDescription("VTXXX-0042 | printFile Method (without callback function for bmp file) ");
 	            displayTestInstruction("");
 	            displayTestExpectation("The file should be sent successfully to the printer.");
 	            
+	            /*
 	            runs(function () {
 	            	// Let the printer be search first then use stop
 	            	searchPrintersNow();
@@ -1515,6 +1538,7 @@ describe("Printing", function () {
 	            waitsFor(function () {
 	                return true;
 	            }, 'Searching for Printers....', 5000);
+	            */
 	            
 	            runs(function () {
 	            	var printer = Rho.Printer.getPrinterByID(printers[0].printerID);
@@ -1547,11 +1571,12 @@ describe("Printing", function () {
 	        });
 	        
 	        it("VTXXX-0043-printFile Method (with callback function for bmp file) ", function () {
-	        	printers  = [];
+	        	//printers  = [];
 	            displayTestDescription("VTXXX-0043 | printFile Method (with callback function for bmp file) ");
 	            displayTestInstruction("");
 	            displayTestExpectation("The file should be sent successfully to the printer.");
 	            
+	            /*
 	            runs(function () {
 	            	// Let the printer be search first then use stop
 	            	searchPrintersNow();
@@ -1560,6 +1585,7 @@ describe("Printing", function () {
 	            waitsFor(function () {
 	                return true;
 	            }, 'Searching for Printers....', 5000);
+	            */
 	            
 	            runs(function () {
 	            	var printer = Rho.Printer.getPrinterByID(printers[0].printerID);
@@ -1592,11 +1618,12 @@ describe("Printing", function () {
 	        });
 	        
 	        it("VTXXX-0044-printFile Method (with anonymous function for bmp file) ", function () {
-	        	printers  = [];
+	        	//printers  = [];
 	            displayTestDescription("VTXXX-0044 | printFile Method (with anonymous function for bmp file) ");
 	            displayTestInstruction("");
 	            displayTestExpectation("The file should be sent successfully to the printer.");
 	            
+	            /*
 	            runs(function () {
 	            	// Let the printer be search first then use stop
 	            	searchPrintersNow();
@@ -1605,6 +1632,7 @@ describe("Printing", function () {
 	            waitsFor(function () {
 	                return true;
 	            }, 'Searching for Printers....', 5000);
+	            */
 	            
 	            runs(function () {
 	            	var printer = Rho.Printer.getPrinterByID(printers[0].printerID);
@@ -1638,11 +1666,12 @@ describe("Printing", function () {
         }
         
         it("VTXXX-0045-printFile Method (without callback function for pdf file) ", function () {
-        	printers  = [];
+        	//printers  = [];
             displayTestDescription("VTXXX-0045 | printFile Method (without callback function for pdf file) ");
             displayTestInstruction("");
             displayTestExpectation("The file should be sent successfully to the printer.");
             
+            /*
             runs(function () {
             	// Let the printer be search first then use stop
             	searchPrintersNow();
@@ -1651,6 +1680,7 @@ describe("Printing", function () {
             waitsFor(function () {
                 return true;
             }, 'Searching for Printers....', 5000);
+            */
             
             runs(function () {
             	var printer = Rho.Printer.getPrinterByID(printers[0].printerID);
@@ -1683,11 +1713,12 @@ describe("Printing", function () {
         });
         
         it("VTXXX-0046-printFile Method (with callback function for pdf file) ", function () {
-        	printers  = [];
+        	//printers  = [];
             displayTestDescription("VTXXX-0046 | printFile Method (with callback function for pdf file) ");
             displayTestInstruction("");
             displayTestExpectation("The file should be sent successfully to the printer.");
             
+            /*
             runs(function () {
             	// Let the printer be search first then use stop
             	searchPrintersNow();
@@ -1696,6 +1727,7 @@ describe("Printing", function () {
             waitsFor(function () {
                 return true;
             }, 'Searching for Printers....', 5000);
+            */
             
             runs(function () {
             	var printer = Rho.Printer.getPrinterByID(printers[0].printerID);
@@ -1728,11 +1760,12 @@ describe("Printing", function () {
         });
         
         it("VTXXX-0047-printFile Method (with anonymous function for pdf file) ", function () {
-        	printers  = [];
+        	//printers  = [];
             displayTestDescription("VTXXX-0047 | printFile Method (with anonymous function for pdf file) ");
             displayTestInstruction("");
             displayTestExpectation("The file should be sent successfully to the printer.");
             
+            /*
             runs(function () {
             	// Let the printer be search first then use stop
             	searchPrintersNow();
@@ -1741,6 +1774,7 @@ describe("Printing", function () {
             waitsFor(function () {
                 return true;
             }, 'Searching for Printers....', 5000);
+            */
             
             runs(function () {
             	var printer = Rho.Printer.getPrinterByID(printers[0].printerID);
@@ -1773,11 +1807,12 @@ describe("Printing", function () {
         });
         
         it("VTXXX-0048-printFile Method (with callback function and No File specified in fileURI) ", function () {
-        	printers  = [];
+        	//printers  = [];
             displayTestDescription("VTXXX-0048 | printFile Method (with callback function and No File specified in fileURI) ");
             displayTestInstruction("");
             displayTestExpectation("No file should be sent to the printer. The callback should return STATUS_ERROR.");
             
+            /*
             runs(function () {
             	// Let the printer be search first then use stop
             	searchPrintersNow();
@@ -1786,6 +1821,7 @@ describe("Printing", function () {
             waitsFor(function () {
                 return true;
             }, 'Searching for Printers....', 5000);
+            */
             
             runs(function () {
             	var printer = Rho.Printer.getPrinterByID(printers[0].printerID);
@@ -1818,11 +1854,12 @@ describe("Printing", function () {
         });
         
         it("VTXXX-0049-printFile Method (with callback function and fileURI has no file at that location with that specified name) ", function () {
-        	printers  = [];
+        	//printers  = [];
             displayTestDescription("VTXXX-0049 | printFile Method (with callback function and fileURI has no file at that location with that specified name) ");
             displayTestInstruction("");
             displayTestExpectation("No file should be sent to the printer. The callback should return STATUS_ERROR.");
             
+            /*
             runs(function () {
             	// Let the printer be search first then use stop
             	searchPrintersNow();
@@ -1831,6 +1868,7 @@ describe("Printing", function () {
             waitsFor(function () {
                 return true;
             }, 'Searching for Printers....', 5000);
+            */
             
             runs(function () {
             	var printer = Rho.Printer.getPrinterByID(printers[0].printerID);
@@ -1863,11 +1901,12 @@ describe("Printing", function () {
         });
         
         it("VTXXX-0050-printRawString Method (without callback function for ZPL Command) ", function () {
-        	printers  = [];
+        	//printers  = [];
             displayTestDescription("VTXXX-0050 | printRawString Method (without callback function for ZPL Command) ");
             displayTestInstruction("");
             displayTestExpectation("The raw string should be sent successfully and printed on the printer.");
             
+            /*
             runs(function () {
             	// Let the printer be search first then use stop
             	searchPrintersNow();
@@ -1876,6 +1915,7 @@ describe("Printing", function () {
             waitsFor(function () {
                 return true;
             }, 'Searching for Printers....', 5000);
+            */
             
             runs(function () {
             	var printer = Rho.Printer.getPrinterByID(printers[0].printerID);
@@ -1908,11 +1948,12 @@ describe("Printing", function () {
         });
         
         it("VTXXX-0051-printRawString Method (with callback function for ZPL Command) ", function () {
-        	printers  = [];
+        	//printers  = [];
             displayTestDescription("VTXXX-0051 | printRawString Method (with callback function for ZPL Command) ");
             displayTestInstruction("");
             displayTestExpectation("The raw string should be sent successfully and printed on the printer. Also return STATUS_SUCCESS.");
             
+            /*
             runs(function () {
             	// Let the printer be search first then use stop
             	searchPrintersNow();
@@ -1921,6 +1962,7 @@ describe("Printing", function () {
             waitsFor(function () {
                 return true;
             }, 'Searching for Printers....', 5000);
+            */
             
             runs(function () {
             	var printer = Rho.Printer.getPrinterByID(printers[0].printerID);
@@ -1953,11 +1995,12 @@ describe("Printing", function () {
         });
         
         it("VTXXX-0052-printRawString Method (with anonymous function for ZPL Command) ", function () {
-        	printers  = [];
+        	//printers  = [];
             displayTestDescription("VTXXX-0052 | printRawString Method (with anonymous function for ZPL Command) ");
             displayTestInstruction("");
             displayTestExpectation("The raw string should be sent successfully and printed on the printer. Also return STATUS_SUCCESS.");
             
+            /*
             runs(function () {
             	// Let the printer be search first then use stop
             	searchPrintersNow();
@@ -1966,6 +2009,7 @@ describe("Printing", function () {
             waitsFor(function () {
                 return true;
             }, 'Searching for Printers....', 5000);
+            */
             
             runs(function () {
             	var printer = Rho.Printer.getPrinterByID(printers[0].printerID);
@@ -1998,11 +2042,12 @@ describe("Printing", function () {
         });
         
         it("VTXXX-0053-printRawString Method (without callback function for CPCL Command) ", function () {
-        	printers  = [];
+        	//printers  = [];
             displayTestDescription("VTXXX-0053 | printRawString Method (without callback function for CPCL Command) ");
             displayTestInstruction("");
             displayTestExpectation("The raw string should be sent successfully and printed on the printer.");
             
+            /*
             runs(function () {
             	// Let the printer be search first then use stop
             	searchPrintersNow();
@@ -2011,13 +2056,14 @@ describe("Printing", function () {
             waitsFor(function () {
                 return true;
             }, 'Searching for Printers....', 5000);
+            */
             
             runs(function () {
             	var printer = Rho.Printer.getPrinterByID(printers[0].printerID);
             	printer.connect();
             	if (printer.isConnected || printer.isReadyToPrint)
 				{
-					var command = "! 0.3937 200 200 1 1 IN-INCHEST 4 0 0 0 1 cm = 0.3937‚Äù IN-DOTST 4 0 0 48 1 mm = 8 dots B 128 1 1 48 16 112 UNITST 4 0 48 160 UNITSFORMPRINT";
+					var command = "! 0.3937 200 200 1 1 IN-INCHEST 4 0 0 0 1 cm = 0.3937î IN-DOTST 4 0 0 48 1 mm = 8 dots B 128 1 1 48 16 112 UNITST 4 0 48 160 UNITSFORMPRINT";
 					var print_str = Rho.Printer.printRawString(fileURI, printFileCallback);
 					waitsFor(function() {
                         return print_str;
@@ -2043,11 +2089,12 @@ describe("Printing", function () {
         });
         
         it("VTXXX-0054-printRawString Method (with callback function for CPCL Command) ", function () {
-        	printers  = [];
+        	//printers  = [];
             displayTestDescription("VTXXX-0054 | printRawString Method (with callback function for CPCL Command) ");
             displayTestInstruction("");
             displayTestExpectation("The raw string should be sent successfully and printed on the printer. Also return STATUS_SUCCESS.");
             
+            /*
             runs(function () {
             	// Let the printer be search first then use stop
             	searchPrintersNow();
@@ -2056,13 +2103,14 @@ describe("Printing", function () {
             waitsFor(function () {
                 return true;
             }, 'Searching for Printers....', 5000);
+            */
             
             runs(function () {
             	var printer = Rho.Printer.getPrinterByID(printers[0].printerID);
             	printer.connect();
             	if (printer.isConnected || printer.isReadyToPrint)
 				{
-					var command = "! 0.3937 200 200 1 1IN-INCHEST 4 0 0 0 1 cm = 0.3937‚ÄùIN-DOTST 4 0 0 48 1 mm = 8 dotsB 128 1 1 48 16 112 UNITST 4 0 48 160 UNITSFORMPRINT";
+					var command = "! 0.3937 200 200 1 1IN-INCHEST 4 0 0 0 1 cm = 0.3937îIN-DOTST 4 0 0 48 1 mm = 8 dotsB 128 1 1 48 16 112 UNITST 4 0 48 160 UNITSFORMPRINT";
 					var print_str = Rho.Printer.printRawString(fileURI, printRawStringCallback);
 					waitsFor(function() {
                         return print_str;
@@ -2088,11 +2136,12 @@ describe("Printing", function () {
         });
         
         it("VTXXX-0055-printRawString Method (with anonymous function for CPCL Command) ", function () {
-        	printers  = [];
+        	//printers  = [];
             displayTestDescription("VTXXX-0055 | printRawString Method (with anonymous function for CPCL Command) ");
             displayTestInstruction("");
             displayTestExpectation("The raw string should be sent successfully and printed on the printer. Also return STATUS_SUCCESS.");
             
+            /*
             runs(function () {
             	// Let the printer be search first then use stop
             	searchPrintersNow();
@@ -2101,13 +2150,14 @@ describe("Printing", function () {
             waitsFor(function () {
                 return true;
             }, 'Searching for Printers....', 5000);
+            */
             
             runs(function () {
             	var printer = Rho.Printer.getPrinterByID(printers[0].printerID);
             	printer.connect();
             	if (printer.isConnected || printer.isReadyToPrint)
 				{
-					var command = "! 0.3937 200 200 1 1IN-INCHEST 4 0 0 0 1 cm = 0.3937‚ÄùIN-DOTST 4 0 0 48 1 mm = 8 dotsB 128 1 1 48 16 112 UNITST 4 0 48 160 UNITSFORMPRINT";
+					var command = "! 0.3937 200 200 1 1IN-INCHEST 4 0 0 0 1 cm = 0.3937îIN-DOTST 4 0 0 48 1 mm = 8 dotsB 128 1 1 48 16 112 UNITST 4 0 48 160 UNITSFORMPRINT";
 					var print_str = Rho.Printer.printRawString(fileURI, printRawStringCallback);
 					waitsFor(function() {
                         return print_str;
@@ -2133,11 +2183,12 @@ describe("Printing", function () {
         });
         
         it("VTXXX-0056-printRawString Method with callback (with the printer turned off) ", function () {
-        	printers  = [];
+        	//printers  = [];
             displayTestDescription("VTXXX-0056 | printRawString Method with callback (with the printer turned off) ");
             displayTestInstruction("");
             displayTestExpectation("The raw string should not be sent and printed on the printer. The callback function should return STATUS_ERROR.");
             
+            /*
             runs(function () {
             	// Let the printer be search first then use stop
             	searchPrintersNow();
@@ -2146,6 +2197,7 @@ describe("Printing", function () {
             waitsFor(function () {
                 return true;
             }, 'Searching for Printers....', 5000);
+            */
             
             runs(function () {
             	var printer = Rho.Printer.getPrinterByID(printers[0].printerID);
