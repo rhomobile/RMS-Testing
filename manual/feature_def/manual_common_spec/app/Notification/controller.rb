@@ -84,7 +84,7 @@ def rho_notification_iconuserdefined
     Rho::Notification.showPopup({
         :message => "Displaying a Normal Popup",
         :kinds => ["notification"],
-        icon: Rho::RhoFile.join(Rho::Application.modelFolderPath('Notification'), 'icon.png')});
+        :icon => Rho::RhoFile.join(Rho::Application.modelFolderPath('Notification'), 'icon.png')});
 end
 
 def rho_showPopup_notificationDialog
@@ -135,7 +135,7 @@ def rho_notificationdialog_iconuserdefined
         :message => "Displaying a Normal Popup",
         :kinds => ["notificationDialog"],
         :buttons => [{:id => 'ok', :title => 'ok'}],
-        icon: Rho::RhoFile.join(Rho::Application.modelFolderPath('Notification'), 'icon.png')});
+        :icon => Rho::RhoFile.join(Rho::Application.modelFolderPath('Notification'), 'icon.png')});
 end
 
 def rho_showPopup_kind_toast
