@@ -12,7 +12,7 @@ iphone:
   codesignidentity: "iPhone Developer"
   entitlements: 
   BundleIdentifier: "com.rhomobile.intent"
-  BundleURLScheme: "intent"
+  BundleURLScheme: "Intent"
 wp:
   productid: "24ef94f0-4924-0131-3982-548564a893b0"
 symbian:

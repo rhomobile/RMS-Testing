@@ -468,13 +468,19 @@
 /*
  * Application Written By Bhakta
  *
+ * Application which receive messages is named as target application.
+ * Target App Name : Intent
+ * Target App Location : https://github.com/rhomobile/RMS-Testing/tree/master/manual/other/Intent
+ * Instruction: Before running the test install Intent application on device.
+ *
  */
 -->
     <div class="method_tests wm android ios">
         <div class="test_scenario">
             <p>send application message to target application when <b>target application is already running</b></p>
             <p>Run the target application before executing test</p>
-            <p>Rho.System.sendApplicationMessage(appName, 'param1=hello&amp;param2=123')</p>
+            <p>Rho.System.sendApplicationMessage(appName, 'param1=hello&amp;param2=3')</p>
+            <p class="test_case_expected">The message should be shown on Target App with application name(Click on button getMessage to get the sent message).</p>
             <h6>JAVASCRIPT</h6>
             <div class="test_scenario_controls">
                 <a href="javascript:void(0)" onclick="Rho.System.sendApplicationMessage(getAppNameTosendMessage(), 'param1=hello&param2=3');">Send</a>
@@ -490,8 +496,9 @@
     <div class="method_tests wm android ios">
         <div class="test_scenario">
             <p>send application message to target application when <b>target application is not running</b></p>
-            <p>Start the Target App If not Running</p>
-            <p>Rho.System.sendApplicationMessage(appName, 'param1=hello&amp;param2=123')</p>
+            <p>Quit the Target App If Running</p>
+            <p>Rho.System.sendApplicationMessage(appName, 'param1=hello&amp;param2=4')</p>
+            <p class="test_case_expected">The target application should get launched automatically in background(android/wm), for ios app should come to foreground and should receive the message with application name(Click on button getMessage to get the sent message).</p>
             <h6>JAVASCRIPT</h6>
             <div class="test_scenario_controls">
                 <a href="javascript:void(0)" onclick="Rho.System.sendApplicationMessage(getAppNameTosendMessage(), 'param1=hello&param2=4');">Send</a>
@@ -508,6 +515,7 @@
         <div class="test_scenario">
             <p>send normal text to target application</p>
             <p>Rho.System.sendApplicationMessage(appName,<b>'data=Send an alert to everyone'</b>)</p>
+            <p class="test_case_expected">The message should be shown on Target App with application name(Click on button getMessage to get the sent message).</p>
             <h6>JAVASCRIPT</h6>
             <div class="test_scenario_controls">
                 <a href="javascript:void(0)" onclick="Rho.System.sendApplicationMessage(getAppNameTosendMessage(), 'data=Send an alert to everyone');">Send</a>
@@ -525,6 +533,7 @@
             <p>Send image (base64 encoded data) to target application.</p>
             <img src='/app/System/solarsystem.jpg' alt="solar system" width='200' height= '200'>
             <p>Rho.System.sendApplicationMessage(appName, <b>'data=imagedata'</b>)</p>
+            <p class="test_case_expected">Above image should be shown on Target App(Click on button getMessage to get the sent message).</p>
             <h6>JAVASCRIPT</h6>
             <div class="test_scenario_controls">
                 <a href="javascript:void(0)" onclick="Rho.System.sendApplicationMessage(getAppNameTosendMessage(), 'image='+getBase64FromImageUrl('solarsystem.jpg'));">Send</a>
@@ -541,6 +550,7 @@
         <div class="test_scenario">
             <p>Send JSON data to target application</p>
             <p>Rho.System.sendApplicationMessage(appName, <b>'data=JSON'</b>)</p>
+            <p class="test_case_expected">JSON data should get displayed on target application with sent application name.</p>
             <h6>JAVASCRIPT</h6>
             <div class="test_scenario_controls">
                 <a href="javascript:void(0)" onclick="sendJSONStringToTarget();">Send</a>
@@ -557,6 +567,7 @@
         <div class="test_scenario">
             <p>Send null as last params in sendApplicationMessage</p>
             <p>Rho.System.sendApplicationMessage(appName, <b>''</b>)</p>
+            <p class="test_case_expected">message key should have no value in target app or it should return empty string on target app while clicking on getMessage button</p>
             <h6>JAVASCRIPT</h6>
             <div class="test_scenario_controls">
                 <a href="javascript:void(0)" onclick="Rho.System.sendApplicationMessage(getAppNameTosendMessage(), '')">Send</a>
@@ -573,6 +584,7 @@
         <div class="test_scenario">
             <p>Send a message to target app when app is <b>not available on device</b>.</p>
             <p>Rho.System.sendApplicationMessage(<b>non_exist_app</b>, 'data=hello')</p>
+            <p class="test_case_expected">The error message(exception) should be thrown when target application is not available so that developer may show alert to download from some where else(may be from app store).</p>
             <h6>JAVASCRIPT</h6>
             <div class="test_scenario_controls">
                 <a href="javascript:void(0)" onclick="Rho.System.sendApplicationMessage('non_exist_app', 'data=hello')">Send</a>
@@ -587,7 +599,8 @@
 
     <div class="method_tests wm android ios">
         <div class="test_scenario">
-            <p>Call <b>Rho.System.getApplicationMessage</b> when nothing has sent to target application.</p>
+            <p>Call <b>Rho.System.getApplicationMessage</b> when nothing has sent to source application.</p>
+            <p class="test_case_expected">It should return null as long as app does not receive any message from any application.</p>
             <h6>JAVASCRIPT</h6>
             <div class="test_scenario_controls">
                 <a href="javascript:void(0)" onclick="alert(Rho.System.getApplicationMessage)">Send</a>
@@ -603,6 +616,7 @@
     <div class="method_tests wm android ios">
         <div class="test_scenario">
             <p>Get GPS Coordinates from Target Application</p>
+            <p class="test_case_expected">The target application should send GPS coordinates back to the source application. Gps Coordinates should get displayed below. To get GPS corodinate take the device out side and wait for few seconds. If any error thrown, the error should get displayed below.</p>
             <div class="test_scenario_controls">
                 <a href="javascript:void(0)" onclick="getGPSCoordinates()">Send</a>
             </div>
@@ -615,6 +629,7 @@
     <div class="method_tests wm android ios">
         <div class="test_scenario">
             <p>Scan A Barcode</p>
+            <p class="test_case_expected">Use target app to scan the barcode and returns the scanned data to source app. (The target app should remain at background only on Android and WM)</p>
             <div class="test_scenario_controls">
                 <a href="javascript:void(0)" onclick="scanBarcode()">Send</a>
             </div>
@@ -623,10 +638,10 @@
             <span class="test_scenario_number">VT300-<br/></span>
         </div>
     </div>
-
+    <!-- Need to write such test cases for android -->
     <div class="method_tests wm android ios">
         <div class="test_scenario">
-            <p>Scan A Barcode</p>
+            <p>send an Intent to non rhodes app.</p>
             <div class="test_scenario_controls">
                 <a href="javascript:void(0)" onclick="Rho.System.sendApplicationMessage(getNonRhodesApp(), 'data=hello')">Send</a>
             </div>

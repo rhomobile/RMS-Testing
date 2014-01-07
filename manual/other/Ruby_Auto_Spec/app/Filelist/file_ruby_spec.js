@@ -1,3 +1,59 @@
+describe("RMS 4.0 File JS API", function () {
+	
+	beforeEach(function() {
+		timeout = false;
+	});
+	
+	// open file
+	it("Open File - true", function() {
+			runs(function()
+			{
+				Ruby.call('Filelist','openFile');	
+				// Time to wait ajax to be happen
+				setTimeout(function() {
+					timeout = true;
+				}, 500);
+			});
+
+			waitsFor(function(){
+				if(timeout == true){
+					return true;
+				}
+			}, 'Wait for 1 sec ajax call to happen', 1000);
+
+			runs(function(){
+				expect(Ruby.getReturnedValue()).toBe(true);
+			});
+	});
+	
+	// close with valid path
+	it("VT288-003 : Close File - isOpened() should return false",function(){ //VT288-003 : is close ? | true
+		runs(function()
+			{
+				Ruby.call('Filelist','closeFile');	
+				// Time to wait ajax to be happen
+				setTimeout(function() {
+					timeout = true;
+				}, 500);
+			});
+		
+		waitsFor(function(){
+			if(timeout == true){
+				return true;
+			}
+		}, 'Wait for 1 sec ajax call to happen', 1000);
+
+		runs(function(){
+			expect(Ruby.getReturnedValue()).toBe(false);
+		});
+		
+	});
+	
+});
+
+
+
+
 describe("RMS 4.1 : [SPB] Fix File reading errors in Ruby", function () {
 		var description;
 		var expectString = "Could not open file: '/programFiles/Test/rholog.txt'"
