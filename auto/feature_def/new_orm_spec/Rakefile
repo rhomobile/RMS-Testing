@@ -5,7 +5,7 @@ unless File.exists? "build.yml"
   exit 1
 end
 
-class PhoneSpecDecorator
+class OrmSpecDecorator
   def before_spec
     @server, addr, port = Jake.run_local_server
     File.open(File.join($app_path, 'app', 'local_server.rb'), 'w') do |f|
@@ -25,19 +25,19 @@ end
 
 $app_config = YAML::load_file("build.yml")
 $app_path = File.expand_path(File.dirname(__FILE__))
-$app_spec_decorator = PhoneSpecDecorator.new
+$app_spec_decorator = OrmSpecDecorator.new
 
 if ENV["RHO_HOME"].nil?
-  if $app_config["sdk"] 
+  if $app_config["sdk"]
     rakefilepath = "#{$app_config["sdk"]}/Rakefile"
   else
     begin
       rakefilepath = `get-rhodes-info --rhodes-path`.chomp
       rakefilepath  = File.join(rakefilepath, "Rakefile")
     rescue
-      rakefilepath  = ""	
+      rakefilepath  = ""
     end
-  end  
+  end
 else
   rakefilepath = "#{ENV["RHO_HOME"]}/Rakefile"
 end
