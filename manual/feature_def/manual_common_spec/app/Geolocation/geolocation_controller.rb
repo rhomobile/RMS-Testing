@@ -125,8 +125,9 @@ class GeolocationController < Rho::RhoController
     puts "$$$$$$$$$$$ GEOCALLBACK : $$$$$$$$$$$$$$$"
     puts "geo_callback : #{@params}"
     value = @params.to_json
-    value = "Callback fired count #{$count}"+value
+    value = "Callback fired count #{$count} <br> Value: "+value
     jsmethod = "updateSetNotificationDiv('" + value + "')"
+    $count += 1
     Rho::WebView.executeJavascript(jsmethod)
   end
 
@@ -134,8 +135,9 @@ class GeolocationController < Rho::RhoController
     puts "$$$$$$$$$$$ GEOCALLBACK EX : $$$$$$$$$$$$$$$"
     puts "geo_callback : #{@params}"
     value = @params.to_json
-    value = "Callback fired count #{$count}"+value
+    value = "Callback fired count #{$count} <br> Value:"+value 
     jsmethod = "updateSetNotificationEXDiv('" + value + "')"
+    $count += 1
     Rho::WebView.executeJavascript(jsmethod)
   end
 

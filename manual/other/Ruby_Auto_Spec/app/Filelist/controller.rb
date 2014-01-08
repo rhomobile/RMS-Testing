@@ -5,6 +5,20 @@ require 'helpers/browser_helper'
 require 'helpers/spec_helper'
 
 class FilelistController < Rho::RhoController
+
+	def openFile
+      path = Rho::RhoFile.join(Rho::Application.userFolder, "testFile.txt")
+      @f= Rho::RhoFile.new(path, Rho::RhoFile::OPEN_FOR_READ)
+      Rho::WebView.executeJavascript("Ruby.sendValueToJS(#{@f.isOpened})")
+    end
+    
+	def closeFile
+      path = Rho::RhoFile.join(Rho::Application.userFolder, "testFile.txt")
+      @f= Rho::RhoFile.new(path, Rho::RhoFile::OPEN_FOR_READ)
+      @f.close
+      Rho::WebView.executeJavascript("Ruby.sendValueToJS('#{@f.isOpened}')")
+	end
+
   
   #Test methods below for - RMS 4.1 : [SPB] Fix File reading errors in Ruby 
   
@@ -14,7 +28,7 @@ class FilelistController < Rho::RhoController
     Rho::RhoFile.makeDir(temporaryDirectory)
     
     begin
-      Rho::RhoFile.new(invalidpath, 2) #Rho::RhoFile.OPEN_FOR_READ
+      Rho::RhoFile.new(invalidpath, Rho::RhoFile::OPEN_FOR_READ)
     rescue => e
       description = e
     end
@@ -30,7 +44,7 @@ class FilelistController < Rho::RhoController
       Rho::RhoFile.makeDir(temporaryDirectory)
       
       begin
-        Rho::RhoFile.new(invalidpath, 4) #Rho::RhoFile.OPEN_FOR_READ_WRITE
+        Rho::RhoFile.new(invalidpath, Rho::RhoFile::OPEN_FOR_READ_WRITE)
       rescue => e
         description = e
       end
@@ -47,7 +61,7 @@ class FilelistController < Rho::RhoController
          Rho::RhoFile.deleteFile(openTestFile)
      end
      begin
-       Rho::RhoFile.new(openTestFile, 1) #Rho::RhoFile.OPEN_FOR_APPEND
+       Rho::RhoFile.new(openTestFile, Rho::RhoFile::OPEN_FOR_APPEND)
      rescue => e
         description = e
      end
@@ -61,7 +75,7 @@ class FilelistController < Rho::RhoController
         Rho::RhoFile.deleteFile(openTestFile)
      end
      begin
-        Rho::RhoFile.new(openTestFile, 3) #Rho::RhoFile.OPEN_FOR_WRITE
+        Rho::RhoFile.new(openTestFile, Rho::RhoFile::OPEN_FOR_WRITE)
      rescue => e
         description = e
      end
@@ -87,7 +101,7 @@ class FilelistController < Rho::RhoController
       temporaryDirectory = Rho::RhoFile.join(Rho::Application.userFolder, "temporaryDirectory")
       Rho::RhoFile.makeDir(temporaryDirectory)
       filename = Rho::RhoFile.join(temporaryDirectory, "emptyFile")
-      file = Rho::RhoFile.new(filename, 3) #Rho::RhoFile.OPEN_FOR_WRITE
+      file = Rho::RhoFile.new(filename, Rho::RhoFile::OPEN_FOR_WRITE)
          
       begin
         file.write("") 
@@ -105,7 +119,7 @@ class FilelistController < Rho::RhoController
       temporaryDirectory = Rho::RhoFile.join(Rho::Application.userFolder, "temporaryDirectory")
       Rho::RhoFile.makeDir(temporaryDirectory)
       filename = Rho::RhoFile.join(temporaryDirectory, "emptyFile")
-      file = Rho::RhoFile.new(filename, 3) #Rho::RhoFile.OPEN_FOR_WRITE
+      file = Rho::RhoFile.new(filename, Rho::RhoFile::OPEN_FOR_WRITE)
            
       begin
         file.write('\r\n')
@@ -123,7 +137,7 @@ class FilelistController < Rho::RhoController
       temporaryDirectory = Rho::RhoFile.join(Rho::Application.userFolder, "temporaryDirectory")
       Rho::RhoFile.makeDir(temporaryDirectory)
       filename = Rho::RhoFile.join(temporaryDirectory, "emptyFile")
-      file = Rho::RhoFile.new(filename, 3) #Rho::RhoFile.OPEN_FOR_WRITE
+      file = Rho::RhoFile.new(filename, Rho::RhoFile::OPEN_FOR_WRITE)
             
       begin
         file.write("ab") 
