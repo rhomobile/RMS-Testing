@@ -1,0 +1,13 @@
+To run ruby specs
+
+* Checkout rhodes to branch "neworm_dev"
+
+* Edit file "rhoconfig.txt" file to select which implementation to run:
+  'use_new_rhom' property and set it to 0 to run legacy orm code,
+  or 1 to exec a new orm code
+
+* Run from auto/feature_def/new_orm_spec_js directory the following command
+
+  rake run:android:spec
+
+* spec results in orm_spec_results.xml, emulator logs in RhoLogSpec.txt
