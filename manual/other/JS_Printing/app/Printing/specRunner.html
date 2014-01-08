@@ -76,7 +76,7 @@
 
 </head>
 <body>
-<h4>Printing manual tests</h4>
+<h2>Printing manual tests</h2>
 <div id="description"></div>
 <div id="instruction"></div>
 <div id="expectation"></div>
@@ -107,9 +107,14 @@
 <br/>
 <div id='result'>
 <table>
-    <tr>
+    <tr id="for_js">
         <td><button onclick="captureResult(true)">Pass</button></td>
         <td><button onclick="captureResult(false)">Fail</button></td>
+    </tr>
+    <tr id="for_ruby">
+    	<td><input type="button" value="Run Test" onclick="_result.runTest();" id="runtest"/></td>
+	    <td><input type="button" value="Test Passed" onclick="_result.passed();" id="pass" /></td>
+	    <td><input type="button" value="Test Failed" onclick="_result.failed();" id="fail" /></td>
     </tr>
 </table>
 </div>

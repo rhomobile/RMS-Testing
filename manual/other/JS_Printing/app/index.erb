@@ -1,24 +1,24 @@
-<div data-role="page" data-url="<%= Rho::Application.startURI %>/">
-
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Manual specs</title>
+    <meta name="viewport" content="initial-scale=1.0, width=device-width"/>
+    <script type="text/javascript" src="/public/jquery/jquery-1.6.4.min.js"></script>
+    <script type="text/javascript" src="/public/jquery/jquery.json-2.3.min.js"></script>
+    <script type="text/javascript" src="/public/api/rhoapi-modules.js"></script>
+    <script type="text/javascript" src="/public/js/helpers.js"></script>
     
-  <div data-role="header" data-position="inline">
-    <h1>JsPrinting</h1>
-    <% if Rho::RhoConnectClient.isLoggedIn %>
-    <a href="<%= url_for :controller => :Settings, :action => :do_sync %>" class="ui-btn-left" data-icon="refresh">
-      Sync
-    </a>
-    <a href="<%= url_for :controller => :Settings, :action => :logout %>" class="ui-btn-right" data-icon="star">
-	    Logout
-	  </a>
-    <% else %>
-        <a href="<%= url_for :controller => :Settings, :action => :login %>" class="ui-btn-right" data-icon="star">Login</a>
-    <% end %>
-  </div>
+</head>
+<body>
 
-  <div data-role="content">
-    <ul data-role="listview">
-      <li><a href="#">Add link here...</a></li>
-    </ul>
-  </div>
+<h3>Manual Specs which use Jasmine</h3>
+<ul>
+	
+    <li><a href="/app/Printing/specRunner.html?spec=Printing_with_JS">Printer Tests</a></li>
+    
+</ul>
 
-</div>
+
+</body>
+</html>
+

@@ -11,7 +11,7 @@ function displayTestExpectation(aString) {
 }
 
 function displayTestResults(tresult, pppp, abcd) {
-	if (pppp.lenght > 0) {
+	if (pppp.length > 0) {
 		var str = tresult + "<br/>";
 		str += abcd;
 		document.getElementById('actualResult').innerHTML = str;
@@ -28,7 +28,6 @@ var macipaddress = '';
 var captured = false;
 var errmsg = '';
 
-//var audioMediaPath = Rho.RhoFile.join(Rho.Application.modelFolderPath('Printing'), "Printing_Files/Audio");
 var videoMediaPath = Rho.RhoFile.join(Rho.Application.modelFolderPath('Printing'), "Printing_Files/Video");
 var filesMediaPath = Rho.RhoFile.join(Rho.Application.modelFolderPath('Printing'), "Printing_Files/Files");
 
@@ -44,23 +43,6 @@ function getkeys(obj) {
 
     return allkeys;
 }
-/*
-function ringtoneCallback(arguments) {
-    var ringtones = arguments;
-    global_ringtones = arguments;
-    var htmlout = '<select name="choose a ringtone" size="1" id="item1">';
-    var keys = getkeys(ringtones);
-    ringtone_names = keys;
-    for (var i = 0; i < keys.length; i++) {
-        htmlout += '<option>';
-        htmlout += keys[i];
-        htmlout += '</option>'
-    }
-    htmlout += '</select>';
-    document.getElementById('ringtones').innerHTML = htmlout;
-    callbackCalled = true;
-}
-*/
 
 function searchPrintersNow() {
 	if (!connect_type) {
@@ -133,25 +115,11 @@ function printRawStringCallback() {
 	}
 }
 
-/*
- function ringtonePlayed()
- {
- callbackCalled = true;
- }
-
- function audioFilePlayed()
- {
- callbackCalled = true;
- }
-
- function videoFilePlayed()
- {
- callbackCalled = true;
- }
- */
-describe("Printing", function () {
+describe("Printing_with_JS", function () {
     beforeEach(function () {
         /* ... Set up your object ... */
+    	$('#for_js').show();
+    	$('#for_ruby').hide();
     });
 
     afterEach(function () {
@@ -172,7 +140,6 @@ describe("Printing", function () {
 
         });
 
-        // This test relies on the device having an audio file
         it("VTXXX-0001-enumerateSupportedTypes Method (without callback function)", function () {
             displayTestDescription("VTXXX-0001-enumerateSupportedTypes Method (without callback function)");
             displayTestInstruction("");
@@ -252,7 +219,7 @@ describe("Printing", function () {
             
             runs(function () {
             	displayTestResults(testResult, printers, printers[0].toString());
-            	/*if (printers.lenght > 0) {
+            	/*if (printers.length > 0) {
             		var str = testResult;
             		str += printers[0].toString();
             		document.getElementById('actualResult').innerHTML = testResult;
@@ -280,7 +247,7 @@ describe("Printing", function () {
             
             runs(function () {
             	connect_type = Rho.Printer.connectionType;
-            	Rho.Printer.searchPrinters({"printerType":Printer.PRINTER_TYPE_ANY, "connectionType":connect_type}, searchPrinterCallback);
+            	Rho.Printer.searchPrinters({"printerType":Rho.Printer.PRINTER_TYPE_ANY, "connectionType":connect_type}, searchPrinterCallback);
             });
             
             waitsFor(function () {
@@ -290,7 +257,7 @@ describe("Printing", function () {
             runs(function () {
             	displayTestResults(testResult, printers, printers[0].toString());
             	/*
-            	if (printers.lenght > 0) {
+            	if (printers.length > 0) {
             		var str = testResult + "<br/>";
             		str += printers[0].toString();
             		document.getElementById('actualResult').innerHTML = testResult;
@@ -321,7 +288,7 @@ describe("Printing", function () {
             	if (!connect_type) {
             		connect_type = Rho.Printer.connectionType;
 	            }
-            	Rho.Printer.searchPrinters({"printerType":Printer.PRINTER_TYPE_ANY, "connectionType":connect_type, "timeout":15000}, searchPrinterCallback);
+            	Rho.Printer.searchPrinters({"printerType":Rho.Printer.PRINTER_TYPE_ANY, "connectionType":connect_type, "timeout":15000}, searchPrinterCallback);
             });
             
             waitsFor(function () {
@@ -436,7 +403,7 @@ describe("Printing", function () {
             	if (!connect_type) {
             		connect_type = Rho.Printer.connectionType;
 	            }
-            	Rho.Printer.searchPrinters({"printerType":Printer.PRINTER_TYPE_ANY, "connectionType":connect_type, "timeout":15000, "deviceAddress":macipaddress}, searchPrinterCallback);
+            	Rho.Printer.searchPrinters({"printerType":Rho.Printer.PRINTER_TYPE_ANY, "connectionType":connect_type, "timeout":15000, "deviceAddress":macipaddress}, searchPrinterCallback);
             });
             
             waitsFor(function () {
@@ -458,35 +425,37 @@ describe("Printing", function () {
             });
         });
         
-        it("VTXXX-0010-searchPrinters Method for non-zebra printer(with options \"printerType\" and \"connectionType\")", function () {
-        	printers  = [];
-            displayTestDescription("VTXXX-0010 | searchPrinters Method for non-zebra printer(with options \"printerType\" and \"connectionType\")");
-            displayTestInstruction("");
-            displayTestExpectation("The printer should not be discovered with these settings and return error message for STATUS_ERROR.");
-                        
-            runs(function () {
-            	
-            	Rho.Printer.searchPrinters({"printerType":Printer.PRINTER_TYPE_ZEBRA, "connectionType":Rho.Printer.CONNECTION_TYPE_TCP}, searchPrinterCallback);
-            });
-            
-            waitsFor(function () {
-                return true;
-            }, 'Searching for Printers....', 5000);
-            
-            runs(function () {
-            	displayTestResults(testResult, printers, errmsg);
-            });
-
-            waitsFor(function () {
-                dispCurrentProcess("Can you see the STATUS_ERROR and Error Message in the results? ");
-                return captured;
-            }, 'Waiting for Pass or Fail.', 10000);
-
-
-            runs(function () {
-                expect(testResult).toEqual(true);
-            });
-        });
+        if (Rho.Printer.printerType != Rho.Printer.PRINTER_TYPE_ZEBRA || Rho.Printer.connectionType != Rho.Printer.CONNECTION_TYPE_TCP) {
+	        it("VTXXX-0010-searchPrinters Method for non-zebra printer(with options \"printerType\" and \"connectionType\")", function () {
+	        	printers  = [];
+	            displayTestDescription("VTXXX-0010 | searchPrinters Method for non-zebra printer(with options \"printerType\" and \"connectionType\")");
+	            displayTestInstruction("");
+	            displayTestExpectation("The printer should not be discovered with these settings and return error message for STATUS_ERROR.");
+	                        
+	            runs(function () {
+	            	
+	            	Rho.Printer.searchPrinters({"printerType":Rho.Printer.PRINTER_TYPE_ZEBRA, "connectionType":Rho.Printer.CONNECTION_TYPE_TCP}, searchPrinterCallback);
+	            });
+	            
+	            waitsFor(function () {
+	                return true;
+	            }, 'Searching for Printers....', 5000);
+	            
+	            runs(function () {
+	            	displayTestResults(testResult, printers, errmsg);
+	            });
+	
+	            waitsFor(function () {
+	                dispCurrentProcess("Can you see the STATUS_ERROR and Error Message in the results? ");
+	                return captured;
+	            }, 'Waiting for Pass or Fail.', 10000);
+	
+	
+	            runs(function () {
+	                expect(testResult).toEqual(true);
+	            });
+	        });
+        }
         
         it("VTXXX-0011-searchPrinters Method(with only option \"devicePort\":80)", function () {
         	printers  = [];
@@ -711,7 +680,7 @@ describe("Printing", function () {
             });
 
             waitsFor(function () {
-                dispCurrentProcess("Can you see Success Message in the results? ");
+                dispCurrentProcess("Can you see Error Message in the results? ");
                 return captured;
             }, 'Waiting for Pass or Fail.', 10000);
 
@@ -1010,6 +979,8 @@ describe("Printing", function () {
                 expect(testResult).toEqual(true);
             });
         });
+        
+        // Need to write tests for "updateState" after implementation from the developer(if applicable)
         
         it("VTXXX-0030-disconnect Method (without callback function) ", function () {
         	printers  = [];
@@ -2282,4 +2253,628 @@ describe("Printing", function () {
         
         // Need to write tests for "requestState" after implementation and more info from the developer
     });
+});
+
+describe("Printing_with_Ruby", function () {
+	beforeEach(function () {
+        /* ... Set up your object ... */
+    	$('#for_js').hide();
+    	$('#for_ruby').show();
+    });
+	describe("Printing Tests", function () {
+		it("VTXXX-0001-enumerateSupportedTypes Method (without callback function)", function () {
+            displayTestDescription("VTXXX-0001-enumerateSupportedTypes Method (without callback function)");
+            displayTestInstruction("");
+            displayTestExpectation("Method should return the result as names/list of printer types that are supported in this build.");
+            
+            _result.waitToRunTest();
+
+            runs(function () {
+            	Ruby.call("Printing","rho_enumerateSupportedTypes");
+            	//displayTestResults(Ruby.getReturnedValue()+"<br>", [], "");
+                document.getElementById('actualResult').innerHTML = Ruby.getReturnedValue();
+                
+                dispCurrentProcess("Can you see the supported Printer Types? ");
+            });
+
+            _result.waitForResponse();
+        });
+		
+		it("VTXXX-0002-enumerateSupportedTypes Method (with callback function)", function () {
+            displayTestDescription("VTXXX-0002 | enumerateSupportedTypes Method (with callback function)");
+            displayTestInstruction("");
+            displayTestExpectation("Method should return the result as names/list of printer types that are supported in this build.");
+            
+            _result.waitToRunTest();
+            
+            runs(function () {
+            	Ruby.call("Printing","rho_enumerateSupportedTypes_callback");
+                document.getElementById('actualResult').innerHTML = Ruby.getReturnedValue();
+                
+                dispCurrentProcess("Can you see the supported Printer Types? ");
+            });
+
+            _result.waitForResponse();
+        });
+		
+		it("VTXXX-0003-enumerateSupportedTypes Method (with anonymous function)", function () {
+            displayTestDescription("VTXXX-0003 | enumerateSupportedTypes Method (with anonymous function)");
+            displayTestInstruction("");
+            displayTestExpectation("Method should return the result as names/list of printer types that are supported in this build.");
+            
+            _result.waitToRunTest();
+
+            runs(function () {
+            	Ruby.call("Printing","rho_enumerateSupportedTypes_anonymous");
+                document.getElementById('actualResult').innerHTML = Ruby.getReturnedValue();
+                
+                dispCurrentProcess("Can you see the supported Printer Types? ");
+            });
+
+            _result.waitForResponse();
+        });
+		
+		it("VTXXX-0004-searchPrinters Method(default options)", function () {
+        	printers  = [];
+            displayTestDescription("VTXXX-0004 | searchPrinters Method(default options)");
+            displayTestInstruction("");
+            displayTestExpectation("The printer connected with the device should be discovered successfully and return STATUS_SUCCESS.");
+
+            _result.waitToRunTest();
+            
+            runs(function () {
+            	Ruby.call("Printing","rho_searchPrinters");
+            });
+            
+            waitsFor(function () {
+                return true;
+            }, 'Searching for Printers....', 10000);
+            
+            runs(function () {
+            	displayTestResults(Ruby.getReturnedValue(), printers, "");
+            	dispCurrentProcess("Can you see the status and Printer in the results? ");
+            });
+
+            _result.waitForResponse();
+        });
+		
+		it("VTXXX-0005-searchPrinters Method(with options \"printerType\" and \"connectionType\")", function () {
+        	printers  = [];
+            displayTestDescription("VTXXX-0005 | searchPrinters Method(with options \"printerType\" and \"connectionType\")");
+            displayTestInstruction("");
+            displayTestExpectation("The printer connected with the device should be discovered successfully and return STATUS_SUCCESS.");
+            
+            _result.waitToRunTest();
+            runs(function () {
+            	Ruby.call("Printing","rho_searchPrinters_printerType_connectType");
+            });
+            
+            waitsFor(function () {
+                return true;
+            }, 'Searching for Printers....', 5000);
+            
+            runs(function () {
+            	displayTestResults(Ruby.getReturnedValue(), printers, "");
+            	dispCurrentProcess("Can you see the status and Printer in the results? ");
+            });
+
+            _result.waitForResponse();
+        });
+		
+		it("VTXXX-0006-searchPrinters Method(with options \"printerType\", \"connectionType\", \"timeout\")", function () {
+        	printers  = [];
+            displayTestDescription("VTXXX-0006 | searchPrinters Method(with options \"printerType\", \"connectionType\", \"timeout\")");
+            displayTestInstruction("");
+            displayTestExpectation("The printer connected with the device should be discovered successfully and return STATUS_SUCCESS.");
+            
+            _result.waitToRunTest();
+            runs(function () {
+            	Ruby.call("Printing","rho_searchPrinters_printerType_connectType_timeout");
+            });
+            
+            waitsFor(function () {
+                return true;
+            }, 'Searching for Printers....', 5000);
+            
+            runs(function () {
+            	displayTestResults(Ruby.getReturnedValue(), printers, "");
+            	dispCurrentProcess("Can you see the status and Printer in the results? ");
+            });
+
+            _result.waitForResponse();
+        });
+		
+		it("VTXXX-0007-searchPrinters Method(with only option \"timeout\")", function () {
+        	printers  = [];
+            displayTestDescription("VTXXX-0007 | with only option \"timeout\")");
+            displayTestInstruction("");
+            displayTestExpectation("The printer connected with the device should be discovered successfully and return STATUS_SUCCESS.");
+            
+            _result.waitToRunTest();
+            runs(function () {
+            	Ruby.call("Printing","rho_searchPrinters_timeout");
+            });
+            
+            waitsFor(function () {
+                return true;
+            }, 'Searching for Printers....', 5000);
+            
+            runs(function () {
+            	displayTestResults(Ruby.getReturnedValue(), printers, "");
+            	dispCurrentProcess("Can you see the status and Printer in the results? ");
+            });
+
+            _result.waitForResponse();
+        });
+		
+		it("VTXXX-0008-searchPrinters Method(with only option \"deviceAddress\")", function () {
+        	printers  = [];
+            displayTestDescription("VTXXX-0008 | searchPrinters Method(with only option \"deviceAddress\")");
+            displayTestInstruction("");
+            displayTestExpectation("The printer connected with the device should be discovered successfully and return STATUS_SUCCESS.");
+            
+            _result.waitToRunTest();
+            
+            runs(function() {
+            	$('#address').css("display", "block");
+            });
+            
+            waitsFor(function () {
+                dispCurrentProcess("Please provide MAC/IP address of the printer ");
+                return captured;
+            }, 'Waiting for Click "Ok".', 100000);
+            
+            runs(function () {
+            	$('#address').css("display", "none");
+            	macipaddress = $('#macip').val();
+            	Ruby.call("Printing","rho_searchPrinters_macip{:macip => " + macipaddress + "}");
+            });
+            
+            waitsFor(function () {
+                return true;
+            }, 'Searching for Printers....', 5000);
+            
+            runs(function () {
+            	displayTestResults(Ruby.getReturnedValue(), printers, "");
+            	dispCurrentProcess("Can you see the status and Printer in the results? ");
+            });
+
+            _result.waitForResponse();
+        });
+		
+		it("VTXXX-0009-searchPrinters Method(with options \"printerType\", \"connectionType\", \"timeout\", \"deviceAddress\")", function () {
+        	printers  = [];
+            displayTestDescription("VTXXX-0009 | searchPrinters Method(with options \"printerType\", \"connectionType\", \"timeout\", \"deviceAddress\")");
+            displayTestInstruction("");
+            displayTestExpectation("The printer connected with the device should be discovered successfully and return STATUS_SUCCESS.");
+            
+            _result.waitToRunTest();
+            
+            waitsFor(function () {
+                dispCurrentProcess("Please provide MAC/IP address of the printer or Click 'Ok' if already provided. ");
+                return captured;
+            }, 'Waiting for Click "Ok".', 100000);
+            
+            runs(function () {
+            	Ruby.call("Printing","rho_searchPrinters_macip_all{:macip => " + macipaddress + "}");
+            });
+            
+            waitsFor(function () {
+                return true;
+            }, 'Searching for Printers....', 5000);
+            
+            runs(function () {
+            	displayTestResults(Ruby.getReturnedValue(), printers, "");
+            	dispCurrentProcess("Can you see the status and Printer in the results? ");
+            });
+
+            _result.waitForResponse();
+        });
+		
+		if (Rho.Printer.printerType != Rho.Printer.PRINTER_TYPE_ZEBRA || Rho.Printer.connectionType != Rho.Printer.CONNECTION_TYPE_TCP) {
+	        it("VTXXX-0010-searchPrinters Method for non-zebra printer(with options \"printerType\" and \"connectionType\")", function () {
+	        	printers  = [];
+	            displayTestDescription("VTXXX-0010 | searchPrinters Method for non-zebra printer(with options \"printerType\" and \"connectionType\")");
+	            displayTestInstruction("");
+	            displayTestExpectation("The printer should not be discovered with these settings and return error message for STATUS_ERROR.");
+	                        
+	            _result.waitToRunTest();
+	            
+	            runs(function () {
+	            	Ruby.call("Printing","rho_searchPrinters_printerType_connectType{:p_type => " + Rho.Printer.PRINTER_TYPE_ZEBRA + ", :p_connectype => " + Rho.Printer.CONNECTION_TYPE_TCP + "}");
+	            });
+	            
+	            waitsFor(function () {
+	                return true;
+	            }, 'Searching for Printers....', 5000);
+	            
+	            runs(function () {
+	            	displayTestResults(Ruby.getReturnedValue(), printers, "");
+	            	dispCurrentProcess("Can you see the STATUS_ERROR and Error Message in the results? ");
+	            });
+
+	            _result.waitForResponse();
+	        });
+        }
+		
+        it("VTXXX-0011-searchPrinters Method(with only option \"devicePort\":80)", function () {
+        	printers  = [];
+            displayTestDescription("VTXXX-0011 | searchPrinters Method(with only option \"devicePort\")");
+            displayTestInstruction("");
+            displayTestExpectation("The printer should not be discovered with these settings and return error message for STATUS_ERROR.");
+
+            _result.waitToRunTest();
+            
+            runs(function () {
+            	Ruby.call("Printing","rho_searchPrinters_devicePort");
+            	Rho.Printer.searchPrinters({"devicePort":80}, searchPrinterCallback);
+            });
+            
+            waitsFor(function () {
+                return true;
+            }, 'Searching for Printers....', 5000);
+            
+            runs(function () {
+            	displayTestResults(Ruby.getReturnedValue(), printers, "");
+            	dispCurrentProcess("Can you see the STATUS_ERROR and Error Message in the results? ");
+            });
+
+            _result.waitForResponse();
+        });
+        
+        it("VTXXX-0012-stopSearch Method (without callback function)", function () {
+        	printers  = [];
+            displayTestDescription("VTXXX-0012 | stopSearch Method (without callback function)");
+            displayTestInstruction("");
+            displayTestExpectation("The search should be terminated and printer should not be discovered.");
+            
+            _result.waitToRunTest();
+                        
+            runs(function () {
+            	// Let the printer be search first then use stop
+            	Ruby.call("Printing","rho_stopSearch");
+            });
+            
+            waitsFor(function () {
+                return true;
+            }, 'Searching for Printers....', 5000);
+            
+            runs(function () {
+            	displayTestResults(Ruby.getReturnedValue(), printers, "");
+            	dispCurrentProcess("Can you see any printer listed in the results? ");
+            });
+
+            _result.waitForResponse();
+        });
+        
+        it("VTXXX-0013-stopSearch Method (with callback function)", function () {
+        	printers  = [];
+            displayTestDescription("VTXXX-0013 | stopSearch Method (with callback function)");
+            displayTestInstruction("");
+            displayTestExpectation("The search should be terminated and printer should not be discovered.");
+            
+            _result.waitToRunTest();
+                        
+            runs(function () {
+            	// Let the printer be search first then use stop
+            	Ruby.call("Printing","rho_stopSearch{:_type => \"callbk\"}");
+            });
+            
+            waitsFor(function () {
+                return true;
+            }, 'Searching for Printers....', 5000);
+            
+            runs(function () {
+            	displayTestResults(Ruby.getReturnedValue(), printers, "");
+            	dispCurrentProcess("Can you see any printer listed in the results? ");
+            });
+
+            _result.waitForResponse();
+        });
+        
+        it("VTXXX-0014-stopSearch Method (with anonymous function)", function () {
+        	printers  = [];
+            displayTestDescription("VTXXX-0014 | stopSearch Method (with anonymous function)");
+            displayTestInstruction("");
+            displayTestExpectation("The search should be terminated and printer should not be discovered.");
+
+            _result.waitToRunTest();
+            
+            runs(function () {
+            	// Let the printer be search first then use stop
+            	Ruby.call("Printing","rho_stopSearch{:_type => \"anony\"}");
+            });
+            
+            waitsFor(function () {
+                return true;
+            }, 'Searching for Printers....', 5000);
+            
+            runs(function () {
+            	displayTestResults(Ruby.getReturnedValue(), printers, "");
+            	dispCurrentProcess("Can you see any printer listed in the results? ");
+            });
+
+            _result.waitForResponse();
+        });
+        
+        it("VTXXX-0015-getPrinterByID Method ", function () {
+        	printers  = [];
+            displayTestDescription("VTXXX-0015 | getPrinterByID Method ");
+            displayTestInstruction("");
+            displayTestExpectation("The method should return an instance of the connected printer.");
+
+            _result.waitToRunTest();
+            
+            runs(function () {
+            	Ruby.call("Printing","rho_searchPrinters");
+            });
+            
+            waitsFor(function () {
+                return true;
+            }, 'Searching for Printers....', 5000);
+            
+            runs(function () {
+            	Ruby.call("Printing","rho_getPrinterByID");
+            });
+            
+            runs(function () {
+            	displayTestResults(Ruby.getReturnedValue(), printers, "");
+            	dispCurrentProcess("Can you see Success Message in the results? ");
+            });
+
+            _result.waitForResponse();
+        });
+        
+        it("VTXXX-0016-getPrinterByID Method without discovering the printer ", function () {
+        	printers  = [];
+            displayTestDescription("VTXXX-0016 | getPrinterByID Method without discovering the printer ");
+            displayTestInstruction("");
+            displayTestExpectation("The method should not return any instance of the disconnected printer and STATUS_ERROR should be returned with error message.");
+            
+            _result.waitToRunTest();
+            
+            runs(function () {
+            	Ruby.call("Printing","rho_getPrinterByID_without_discovery");
+            });
+            
+            runs(function () {
+            	displayTestResults(Ruby.getReturnedValue(), printers, "");
+            	dispCurrentProcess("Can you see Error Message in the results? ");
+            });
+
+            _result.waitForResponse();
+        });
+        
+        it("VTXXX-0017-getPrinterByID Method with device turned off device ", function () {
+        	printers  = [];
+            displayTestDescription("VTXXX-0017 | getPrinterByID Method with device turned off device ");
+            displayTestInstruction("");
+            displayTestExpectation("The method should not return any instance of the disconnected printer and STATUS_ERROR should be returned with error message.");
+
+            _result.waitToRunTest();
+            
+            waitsFor(function () {
+                return true;
+            }, 'Please Turn Off the Printer....', 10000);
+            
+            runs(function () {
+            	Ruby.call("Printing","rho_searchPrinters");
+            });
+            
+            waitsFor(function () {
+                return true;
+            }, 'Searching for Printers....', 5000);
+            
+            runs(function () {
+            	Ruby.call("Printing","rho_getPrinterByID_without_discovery");
+            });
+            
+            runs(function () {
+            	displayTestResults(Ruby.getReturnedValue(), printers, "");
+            	dispCurrentProcess("Can you see Error Message in the results? ");
+            });
+
+            _result.waitForResponse();
+        });
+        
+        it("VTXXX-0018-connect Method (without callback function) ", function () {
+        	printers  = [];
+            displayTestDescription("VTXXX-0018 | connect Method (without callback function) ");
+            displayTestInstruction("");
+            displayTestExpectation("The string should be printed successfully on the printer.");
+
+            _result.waitToRunTest();
+            
+            waitsFor(function () {
+                return true;
+            }, 'Please Turn On the Printer....', 30000);
+            
+            runs(function () {
+            	Ruby.call("Printing","rho_searchPrinters");
+            });
+            
+            waitsFor(function () {
+                return true;
+            }, 'Searching for Printers....', 5000);
+            
+            runs(function () {
+            	Ruby.call("Printing","rho_connect");
+            	dispCurrentProcess("Did the Printer print the string \"Hello Printing!\"? ");
+            });
+
+            _result.waitForResponse();
+        });
+        
+        it("VTXXX-0019-connect Method (with callback function) ", function () {
+            displayTestDescription("VTXXX-0019 | connect Method (with callback function) ");
+            displayTestInstruction("");
+            displayTestExpectation("The callback should return STATUS_OK");
+
+            _result.waitToRunTest();
+            
+            runs(function () {
+            	Ruby.call("Printing","rho_connect_callback");
+            });
+
+            runs(function () {
+            	displayTestResults(Ruby.getReturnedValue(), printers, "");
+            	dispCurrentProcess("Did you get status as STATUS_OK? ");
+            });
+
+            _result.waitForResponse();
+        });
+        
+        it("VTXXX-0020-connect Method (with anonymous function) ", function () {
+            displayTestDescription("VTXXX-0020 | connect Method (with anonymous function) ");
+            displayTestInstruction("");
+            displayTestExpectation("The callback should return STATUS_OK");
+
+
+            _result.waitToRunTest();
+            
+            runs(function () {
+            	Ruby.call("Printing","rho_connect_anony");
+            });
+
+            runs(function () {
+            	displayTestResults(Ruby.getReturnedValue(), printers, "");
+            	dispCurrentProcess("Did you get status as STATUS_OK? ");
+            });
+
+            _result.waitForResponse();
+        });
+        
+        it("VTXXX-0021-connect Method (with param \"timeout\") ", function () {
+            displayTestDescription("VTXXX-0021 | connect Method (with param \"timeout\") ");
+            displayTestInstruction("");
+            displayTestExpectation("The Printer.isConnected should return STATUS_OK");
+
+            _result.waitToRunTest();
+            
+            runs(function () {
+            	Ruby.call("Printing","rho_connect_timeout{:duration => 20000}");
+            });
+
+            runs(function () {
+            	displayTestResults(Ruby.getReturnedValue(), printers, "");
+            	dispCurrentProcess("Did you get status as STATUS_OK? ");
+            });
+
+            _result.waitForResponse();
+        });
+        
+        it("VTXXX-0022-connect Method (with param \"timeout\":0) ", function () {
+            displayTestDescription("VTXXX-0022 | connect Method (with param \"timeout\":0) ");
+            displayTestInstruction("");
+            displayTestExpectation("The Printer.isConnected should return STATUS_TIMEOUT");
+
+            _result.waitToRunTest();
+            
+            runs(function () {
+            	Ruby.call("Printing","rho_connect_timeout{:duration => 0}");
+            });
+            
+            runs(function () {
+            	displayTestResults(Ruby.getReturnedValue(), printers, "");
+            	dispCurrentProcess("Did you get the status STATUS_TIMEOUT? ");
+            });
+
+            _result.waitForResponse();
+        });
+        
+        it("VTXXX-0023-connect Method (with param \"timeout\":1000) ", function () {
+            displayTestDescription("VTXXX-0023 | connect Method (with param \"timeout\":1000) ");
+            displayTestInstruction("");
+            displayTestExpectation("The Printer.isConnected should return STATUS_TIMEOUT");
+            
+            _result.waitToRunTest();
+            
+            runs(function () {
+            	Ruby.call("Printing","rho_connect_timeout{:duration => 1000}");
+            });
+            
+            runs(function () {
+            	displayTestResults(Ruby.getReturnedValue(), printers, "");
+            	dispCurrentProcess("Did you get the status STATUS_TIMEOUT? ");
+            });
+
+            _result.waitForResponse();
+        });
+        
+        it("VTXXX-0024-connect Method (with param \"timeout\":15000.5) ", function () {
+            displayTestDescription("VTXXX-0024 | connect Method (with param \"timeout\":15000.5) ");
+            displayTestInstruction("");
+            displayTestExpectation("The method should return STATUS_ERROR due to the param value passed as float.");
+            
+            _result.waitToRunTest();
+            
+            runs(function () {
+            	Ruby.call("Printing","rho_connect_timeout{:duration => 15000.5, :convType => \"fl_oat\"}");
+            });
+            
+            runs(function () {
+            	displayTestResults(Ruby.getReturnedValue(), printers, "");
+            	dispCurrentProcess("Did you get the status STATUS_ERROR or error message? ");
+            });
+
+            _result.waitForResponse();
+        });
+        
+        it("VTXXX-0025-connect Method (with param \"timeout\") with device disconnected ", function () {
+            displayTestDescription("VTXXX-0025 | connect Method (with param \"timeout\") with device disconnected ");
+            displayTestInstruction("");
+            displayTestExpectation("The Printer.isConnected should return STATUS_ERROR or STATUS_NOT_FOUND.");
+
+            _result.waitToRunTest();
+            
+            waitsFor(function () {
+                return true;
+            }, 'Please Turn OFF the Printer....', 10000);
+
+            runs(function () {
+            	Ruby.call("Printing","rho_connect_timeout{:duration => 20000}");
+            });
+            
+            runs(function () {
+            	displayTestResults(Ruby.getReturnedValue(), printers, "");
+            	dispCurrentProcess("Did you get the status STATUS_ERROR or STATUS_NOT_FOUND? ");
+            });
+
+            _result.waitForResponse();
+        });
+        
+        // Need to write tests for "updateState" after implementation from the developer(if applicable)
+        
+        it("VTXXX-0030-disconnect Method (without callback function) ", function () {
+        	printers  = [];
+            displayTestDescription("VTXXX-0030 | disconnect Method (without callback function) ");
+            displayTestInstruction("");
+            displayTestExpectation("The method should execute without errors.");
+            
+            _result.waitToRunTest();
+            
+            waitsFor(function () {
+                return true;
+            }, 'Please Turn On the Printer....', 30000);
+            
+            runs(function () {
+            	Ruby.call("Printing","rho_searchPrinters");
+            });
+            
+            waitsFor(function () {
+                return true;
+            }, 'Searching for Printers....', 5000);
+            
+            runs(function () {
+            	Ruby.call("Printing","rho_disconnect");
+            });
+            
+            runs(function () {
+            	displayTestResults(Ruby.getReturnedValue(), printers, "");
+            	dispCurrentProcess("Did the method execute without errors? ");
+            });
+
+            _result.waitForResponse();
+        });
+	});
 });
