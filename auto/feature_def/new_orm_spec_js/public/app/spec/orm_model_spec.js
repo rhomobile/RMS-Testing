@@ -1,384 +1,388 @@
-  var Model;
-  var object;
-  var db = null;
- 
-  var cleanVars = function(object) {
-    var vars = object.vars();
-    var cleanVars = {};
-    for (var key in vars) {
-        if (vars.hasOwnProperty(key)) {
-            if (key !== 'object' && key !== 'source_id') {
-                cleanVars[key] = vars[key];
-            }
-        }
+// Describe:
+// <model's object>
+// <model's fixed_schema>
+// OrmModel(ST)
+// OrmModel(PropertyBag)
+
+var Model;
+var object;
+var db = null;
+
+var cleanVars = function(object) {
+  var vars = object.vars();
+  var cleanVars = {};
+  for (var key in vars) {
+    if (vars.hasOwnProperty(key)) {
+      if (key !== 'object' && key !== 'source_id') {
+        cleanVars[key] = vars[key];
+      }
     }
-    return cleanVars;
-  };
+  }
+  return cleanVars;
+};
 
-  describe("<model's object>", function() {
-
- function reset(){
+describe("<model's object>", function() {
+  function reset() {
     db = Rho.ORMHelper.dbConnection("local");
     Rho.ORM.clear();
     var partitions = Rho.ORMHelper.getDbPartitions();
     $.each(partitions, function(index, db2) {
-      db2.$execute_sql("DELETE FROM SOURCES");
-      db2.$execute_sql("DELETE FROM OBJECT_VALUES");
-      db2.$execute_sql("DELETE FROM CHANGED_VALUES");
+        db2.$execute_sql("DELETE FROM SOURCES");
+        db2.$execute_sql("DELETE FROM OBJECT_VALUES");
+        db2.$execute_sql("DELETE FROM CHANGED_VALUES");
     });
-  }
+  };
+
+  var modelDef = function(model){
+    model.modelName('Product'),
+    model.property("key");
+    model.set("partition","local");
+  };
+  var modelDef2 = function(model){
+    model.modelName("Item");
+    model.property("key","string");
+    model.set("partition","local");
+  };
+
+  beforeEach(function(){
+    reset();
+    Model = Rho.ORM.addModel(modelDef);
+    Model.deleteAll();
+    object = Model.make({'key': 'value'});
+  });
 
 
+  it('returns vars', function() {
+    expect(cleanVars(object)).toEqual({'key': 'value'});
+  });
+
+  it('retrieves object id', function() {
+    expect(object.object()).toBe(object.get('object'));
+  });
+
+  it('gets existing property', function() {
+    expect(object.get('key')).toBe('value');
+  });
+
+  it('gets absent property', function() {
+    expect(object.get('absent key')).toBeUndefined();
+  });
+
+  it('sets property', function() {
+    object.set('key', 'another value');
+    expect(cleanVars(object)).toEqual({'key': 'another value'});
+  });
+
+  it('sets new property', function() {
+    object.set('new key', 'new value');
+    expect(cleanVars(object)).toEqual({'key': 'value', 'new key': 'new value'});
+  });
+
+  it('supports set chaining', function() {
+    object.set('key', 'another value').set('new key', 'new value');
+    expect(cleanVars(object)).toEqual({'key': 'another value', 'new key': 'new value'});
+  });
+
+  it('sets property', function() {
+    object.set('key', 'another value');
+    expect(cleanVars(object)).toEqual({'key': 'another value'});
+  });
+
+  it('sets property with empty name', function() {
+    object.set('', 'another value');
+    expect(cleanVars(object)).toEqual({'key': 'value', '': 'another value'});
+  });
+
+  it('has properties', function() {
+    expect(object.has('key')).toBe(true);
+    expect(object.has('absent key')).toBe(false);
+  });
+
+  it('VT302-0200 | creates object in database', function() {
     var modelDef = function(model){
         model.modelName('Product'),
         model.property("key");
-        model.set("partition","local");
     };
-    var modelDef2 = function(model){
-        model.modelName("Item");
-        model.property("key","string");
-        model.set("partition","local");
+    //var Model = Rho.ORM.addModel(modelDef);
+    var before = Model.count();
+    Model.create({'key': 'value'});
+    var after = Model.count();
+    expect(after).toBe(before + 1);
+  });
+
+  it('VT302-0234 | saves object to database', function() {
+    var modelDef = function(model){
+        model.modelName('Product'),
+        model.property("key");
     };
+    //var Model = Rho.ORM.addModel(modelDef);
+    Model.deleteAll({});
 
-    beforeEach(function(){
-      reset();
-      Model = Rho.ORM.addModel(modelDef);
-      Model.deleteAll();
-      object = Model.make({'key': 'value'});
-    });
+    var object = Model.create({'key': 'value'});
 
+    expect(Model.find(object.object()).vars()).toEqual(object.vars());
+    object.set('key', 'another value').set('new key', 'new value');
+    expect(Model.find(object.object()).vars()).not.toEqual(object.vars());
+    object.save();
+    expect(Model.find(object.object()).vars()).toEqual(object.vars());
+  });
 
-    it('returns vars', function() {
-        expect(cleanVars(object)).toEqual({'key': 'value'});
-    });
+  it('VT302-0254 | updates object attributes in database', function() {
+    //var Model = Rho.ORM.addModel(modelDef);
+    Model.deleteAll();
 
-    it('retrieves object id', function() {
-        expect(object.object()).toBe(object.get('object'));
-    });
+    var object = Model.create({'key': 'value', 'original key': 'original value'});
 
-    it('gets existing property', function() {
-        expect(object.get('key')).toBe('value');
-    });
+    expect(Model.find(object.object()).vars()).toEqual(object.vars());
+    object.updateAttributes({'key': 'another value', 'new key': 'new value'});
+    expect(Model.find(object.object()).vars()).toEqual(object.vars());
+    expect(cleanVars(object)).toEqual({'key': 'another value', 'new key': 'new value', 'original key': 'original value'});
+  });
 
-    it('gets absent property', function() {
-        expect(object.get('absent key')).toBeUndefined();
-    });
+  it('VT302-0210 | destroys object in database', function() {
+    //var Model = Rho.ORM.addModel(modelDef);
 
-    it('sets property', function() {
-        object.set('key', 'another value');
-        expect(cleanVars(object)).toEqual({'key': 'another value'});
-    });
+    Model.deleteAll();
 
-    it('sets new property', function() {
-        object.set('new key', 'new value');
-        expect(cleanVars(object)).toEqual({'key': 'value', 'new key': 'new value'});
-    });
+    var object1 = Model.create({'key1': 'value1'});
+    var object2 = Model.create({'key2': 'value2'});
 
-    it('supports set chaining', function() {
-        object.set('key', 'another value').set('new key', 'new value');
-        expect(cleanVars(object)).toEqual({'key': 'another value', 'new key': 'new value'});
-    });
+    expect(Model.count()).toBe(2);
 
-    it('sets property', function() {
-        object.set('key', 'another value');
-        expect(cleanVars(object)).toEqual({'key': 'another value'});
-    });
+    object1.destroy();
 
-    it('sets property with empty name', function() {
-        object.set('', 'another value');
-        expect(cleanVars(object)).toEqual({'key': 'value', '': 'another value'});
-    });
+    var found = Model.find('all');
+    expect(found.length).toBe(1);
+    expect(found[0].vars()).toEqual(object2.vars());
+  });
 
-    it('has properties', function() {
-        expect(object.has('key')).toBe(true);
-        expect(object.has('absent key')).toBe(false);
-    });
+  it('VT302-0201 | does not create empty object in database', function() {
+    //var Model = Rho.ORM.addModel(modelDef);
+    var before = Model.count();
+    Model.create();
+    expect(Model.count()).toBe(before);
+  });
 
-    it('VT302-0200 | creates object in database', function() {
-        var modelDef = function(model){
-            model.modelName('Product'),
-            model.property("key");
-        };
-        //var Model = Rho.ORM.addModel(modelDef);
-        var before = Model.count();
-        Model.create({'key': 'value'});
-        var after = Model.count();
-        expect(after).toBe(before + 1);
-    });
+  it('VT302-0256 | does not create object with the only empty property in database', function() {
+    //var Model = Rho.ORM.addModel(modelDef);
+    var before = Model.count();
+    Model.create({'': 'value'});
+    expect(Model.count()).toBe(before);
+  });
 
-    it('VT302-0234 | saves object to database', function() {
-        var modelDef = function(model){
-            model.modelName('Product'),
-            model.property("key");
-        };
-        //var Model = Rho.ORM.addModel(modelDef);
-        Model.deleteAll({});
+  it('VT302-0204 | deletes all objects in database', function() {
+    //var Model = Rho.ORM.addModel(modelDef);
+    Model.create({'key': 'value'});
+    expect(Model.count()).toBeGreaterThan(0);
+    Model.deleteAll();
+    expect(Model.count()).toBe(0);
+  });
 
-        var object = Model.create({'key': 'value'});
-
-        expect(Model.find(object.object()).vars()).toEqual(object.vars());
-        object.set('key', 'another value').set('new key', 'new value');
-        expect(Model.find(object.object()).vars()).not.toEqual(object.vars());
-        object.save();
-        expect(Model.find(object.object()).vars()).toEqual(object.vars());
-    });
-
-    it('VT302-0254 | updates object attributes in database', function() {
-        //var Model = Rho.ORM.addModel(modelDef);
-        Model.deleteAll();
-
-        var object = Model.create({'key': 'value', 'original key': 'original value'});
-
-        expect(Model.find(object.object()).vars()).toEqual(object.vars());
-        object.updateAttributes({'key': 'another value', 'new key': 'new value'});
-        expect(Model.find(object.object()).vars()).toEqual(object.vars());
-        expect(cleanVars(object)).toEqual({'key': 'another value', 'new key': 'new value', 'original key': 'original value'});
-    });
-
-    it('VT302-0210 | destroys object in database', function() {
-        //var Model = Rho.ORM.addModel(modelDef);
-
-        Model.deleteAll();
-
-        var object1 = Model.create({'key1': 'value1'});
-        var object2 = Model.create({'key2': 'value2'});
-
-        expect(Model.count()).toBe(2);
-
-        object1.destroy();
-
-        var found = Model.find('all');
-        expect(found.length).toBe(1);
-        expect(found[0].vars()).toEqual(object2.vars());
-    });
-
-    it('VT302-0201 | does not create empty object in database', function() {
-        //var Model = Rho.ORM.addModel(modelDef);
-        var before = Model.count();
-        Model.create();
-        expect(Model.count()).toBe(before);
-    });
-
-    it('VT302-0256 | does not create object with the only empty property in database', function() {
-        //var Model = Rho.ORM.addModel(modelDef);
-        var before = Model.count();
-        Model.create({'': 'value'});
-        expect(Model.count()).toBe(before);
-    });
-
-    it('VT302-0204 | deletes all objects in database', function() {
-        //var Model = Rho.ORM.addModel(modelDef);
-        Model.create({'key': 'value'});
-        expect(Model.count()).toBeGreaterThan(0);
-        Model.deleteAll();
-        expect(Model.count()).toBe(0);
-    });
-//Bhakta: Changed the Description Because destroy method works on single activerecord object.
-    it('VT302-0211 | delete object in sync database', function() {
-      var modelDefs3 = function(model){
+  //Bhakta: Changed the Description Because destroy method works on single activerecord object.
+  it('VT302-0211 | delete object in sync database', function() {
+    var modelDefs3 = function(model){
         model.modelName("Item");
         model.property("name","string");
         model.set("partition","local");
         model.enable("sync");
-      };
-      var Modelsync = Rho.ORM.addModel(modelDefs3);
-      Modelsync.create({'name': 'tests'});
-      var cv = db.$execute_sql("select * from CHANGED_VALUES");
-      expect(cv[0].map.update_type).toEqual("create");
+    };
+    var Modelsync = Rho.ORM.addModel(modelDefs3);
+    Modelsync.create({'name': 'tests'});
+    var cv = db.$execute_sql("select * from CHANGED_VALUES");
+    expect(cv[0].map.update_type).toEqual("create");
 
-      cv=db.$execute_sql("delete from CHANGED_VALUES");
-      expect(cv).toEqual([]);
+    cv=db.$execute_sql("delete from CHANGED_VALUES");
+    expect(cv).toEqual([]);
 
-      var obj = Modelsync.find("first");
-      obj.destroy();
-      cv = db.$execute_sql("select * from CHANGED_VALUES");
-      expect(cv[0].map.update_type).toEqual("delete");
-    });
+    var obj = Modelsync.find("first");
+    obj.destroy();
+    cv = db.$execute_sql("select * from CHANGED_VALUES");
+    expect(cv[0].map.update_type).toEqual("delete");
+  });
 
-    it('VT302-0211 | update object in sync database', function() {
-      var modelDefs3 = function(model){
+  it('VT302-0211 | update object in sync database', function() {
+    var modelDefs3 = function(model){
         model.modelName("Item");
         model.property("name","string");
         model.set("partition","local");
         model.enable("sync");
-      };
-      var Modelsync = Rho.ORM.addModel(modelDefs3);
-      Modelsync.create({'name': 'tests'});
-      var cv = db.$execute_sql("select * from CHANGED_VALUES");
-      expect(cv[0].map.update_type).toEqual("create");
+    };
+    var Modelsync = Rho.ORM.addModel(modelDefs3);
+    Modelsync.create({'name': 'tests'});
+    var cv = db.$execute_sql("select * from CHANGED_VALUES");
+    expect(cv[0].map.update_type).toEqual("create");
 
-      cv=db.$execute_sql("delete from CHANGED_VALUES");
-      expect(cv).toEqual([]);
+    cv=db.$execute_sql("delete from CHANGED_VALUES");
+    expect(cv).toEqual([]);
 
-      var obj = Modelsync.find("first");
-      obj.updateAttributes({name:"tests2"});
-      cv = db.$execute_sql("select * from CHANGED_VALUES");
-      expect(cv[0].map.update_type).toEqual("update");
-    });
+    var obj = Modelsync.find("first");
+    obj.updateAttributes({name:"tests2"});
+    cv = db.$execute_sql("select * from CHANGED_VALUES");
+    expect(cv[0].map.update_type).toEqual("update");
+  });
 
-    it('VT302-0257 | deletes all objects of specific model in database', function() {
-        var Model1 = Rho.ORM.addModel(modelDef);
-        var Model2 = Rho.ORM.addModel(modelDef2);
+  it('VT302-0257 | deletes all objects of specific model in database', function() {
+    var Model1 = Rho.ORM.addModel(modelDef);
+    var Model2 = Rho.ORM.addModel(modelDef2);
 
-        Model1.create({'key': 'value'});
-        Model2.create({'key': 'value'});
+    Model1.create({'key': 'value'});
+    Model2.create({'key': 'value'});
 
-        expect(Model1.count()).toBeGreaterThan(0);
-        expect(Model2.count()).toBeGreaterThan(0);
+    expect(Model1.count()).toBeGreaterThan(0);
+    expect(Model2.count()).toBeGreaterThan(0);
 
-        var before1 = Model1.count();
-        Model2.deleteAll();
-        var after1 = Model1.count();
+    var before1 = Model1.count();
+    Model2.deleteAll();
+    var after1 = Model1.count();
 
-        expect(after1).toBe(before1);
-        expect(Model2.count()).toBe(0);
-    });
+    expect(after1).toBe(before1);
+    expect(Model2.count()).toBe(0);
+  });
 
-    it('VT302-0217 | reads object from database', function() {
-        //var Model = Rho.ORM.addModel(modelDef);
-        Model.deleteAll();
-        Model.create({'key': 'value'});
-        var found = Model.find('all');
-        expect(found.length).toBe(1);
-        expect(cleanVars(found[0])).toEqual({'key': 'value'});
-    });
+  it('VT302-0217 | reads object from database', function() {
+    //var Model = Rho.ORM.addModel(modelDef);
+    Model.deleteAll();
+    Model.create({'key': 'value'});
+    var found = Model.find('all');
+    expect(found.length).toBe(1);
+    expect(cleanVars(found[0])).toEqual({'key': 'value'});
+  });
+
+  it('compares 2 objects props', function() {
+    //var Model = Rho.ORM.addModel(modelDef);
+    var m1 = Model.create({'key': 'value'});
+    var m2 = Model.create({'key': 'value'});
+    res = (m1.get('key') == m2.get('key'));
+    expect(res).toBe(true);
+  });
+
+  it('VT302-0258 | does not write empty property to database', function() {
+    //var Model = Rho.ORM.addModel(modelDef);
+    Model.deleteAll();
+    Model.create({'key': 'value', '': 'empty'});
+    var found = Model.find('all');
+    expect(found.length).toBe(1);
+    expect(cleanVars(found[0])).toEqual({'key': 'value'});
+  });
+
+  it('counts objects in database', function() {
+    var Model1 = Rho.ORM.addModel(modelDef);
+    var Model2 = Rho.ORM.addModel(modelDef2);
+
+    var before1 = Model1.count();
+
+    Model1.create({'key': 'value'});
+    Model1.create({'key': 'value'});
+    Model2.create({'key': 'value'});
+
+    var after1 = Model1.count();
+
+    expect(after1).toBe(before1 + 2);
+  });
+
+  it('VT302-0259 | counts objects in database using find', function() {
+    var Model1 = Rho.ORM.addModel(modelDef);
+    var Model2 = Rho.ORM.addModel(modelDef2);
+
+    var before1 = Model1.find('count');
+
+    Model1.create({'key': 'value'});
+    Model1.create({'key': 'value'});
+    Model2.create({'key': 'value'});
+
+    var after1 = Model1.find('count');
+
+    expect(after1).toBe(before1 + 2);
+  });
+
+  it('VT302-0260 | counts objects in database using find with condition', function() {
+    var Model1 = Rho.ORM.addModel(modelDef);
+    var Model2 = Rho.ORM.addModel(modelDef2);
+
+    var before1 = Model1.find('count', {conditions: {'key': 'value to find'}});
+
+    Model1.create({'key': 'value'});
+    Model1.create({'key': 'value to find'});
+    Model1.create({'key': 'value to find'});
+    Model1.create({'another key': 'value to find'});
+    Model2.create({'key': 'value to find'});
+
+    var after1 = Model1.find('count', {conditions: {'key': 'value to find'}});
+
+    expect(after1).toBe(before1 + 2);
+  });
 
 
-    it('compares 2 objects props', function() {
-        //var Model = Rho.ORM.addModel(modelDef);
-        var m1 = Model.create({'key': 'value'});
-        var m2 = Model.create({'key': 'value'});
-        res = (m1.get('key') == m2.get('key'));
-        expect(res).toBe(true);
-    });
+  it('VT302-0261 | finds all objects in database', function() {
+    var Model1 = Rho.ORM.addModel(modelDef);
+    var Model2 = Rho.ORM.addModel(modelDef2);
 
-    it('VT302-0258 | does not write empty property to database', function() {
-        //var Model = Rho.ORM.addModel(modelDef);
-        Model.deleteAll();
-        Model.create({'key': 'value', '': 'empty'});
-        var found = Model.find('all');
-        expect(found.length).toBe(1);
-        expect(cleanVars(found[0])).toEqual({'key': 'value'});
-    });
+    Model1.deleteAll();
 
-    it('counts objects in database', function() {
-        var Model1 = Rho.ORM.addModel(modelDef);
-        var Model2 = Rho.ORM.addModel(modelDef2);
+    Model1.create({'key1': 'value1'});
+    Model2.create({'key2': 'value2'});
+    Model1.create({'key3': 'value3'});
 
-        var before1 = Model1.count();
+    var found = Model1.find('all');
 
-        Model1.create({'key': 'value'});
-        Model1.create({'key': 'value'});
-        Model2.create({'key': 'value'});
+    expect(found.length).toBe(2);
+    var i = (found[0].has('key1')) ? 0 : 1;
+    expect(cleanVars(found[i    ])).toEqual({'key1': 'value1'});
+    expect(cleanVars(found[1 - i])).toEqual({'key3': 'value3'});
+  });
 
-        var after1 = Model1.count();
+  it('VT302-0218 | finds all objects with one condition', function() {
+    //var Model = Rho.ORM.addModel(modelDef);
 
-        expect(after1).toBe(before1 + 2);
-    });
+    Model.deleteAll();
 
-    it('VT302-0259 | counts objects in database using find', function() {
-        var Model1 = Rho.ORM.addModel(modelDef);
-        var Model2 = Rho.ORM.addModel(modelDef2);
+    Model.create({'key': 'value1'});
+    var objects = [Model.create({'key': 'value2'}), Model.create({'key': 'value2'})];
 
-        var before1 = Model1.find('count');
+    var found = Model.find('all', {conditions: {'key': 'value2'}});
 
-        Model1.create({'key': 'value'});
-        Model1.create({'key': 'value'});
-        Model2.create({'key': 'value'});
+    expect(found.length).toBe(2);
+    var i = (found[0].object() === objects[0].object()) ? 0 : 1;
+    expect(found[i    ].vars()).toEqual(objects[0].vars());
+    expect(found[1 - i].vars()).toEqual(objects[1].vars());
+  });
 
-        var after1 = Model1.find('count');
+  it('VT302-0262 | finds all objects with conditions', function() {
+    //var Model = Rho.ORM.addModel(modelDef);
 
-        expect(after1).toBe(before1 + 2);
-    });
+    Model.deleteAll();
 
-    it('VT302-0260 | counts objects in database using find with condition', function() {
-        var Model1 = Rho.ORM.addModel(modelDef);
-        var Model2 = Rho.ORM.addModel(modelDef2);
+    Model.create({'key1': 'value2'});
+    Model.create({'key2': 'value3'});
+    var objects = [
+        Model.create({'key1': 'value2', 'key2': 'value3'}),
+        Model.create({'key1': 'value2', 'key2': 'value3'})
+    ];
+    Model.create({'key1': 'value2', 'key2': 'value2'});
+    Model.create({'key1': 'value3', 'key2': 'value3'});
 
-        var before1 = Model1.find('count', {conditions: {'key': 'value to find'}});
+    var found = Model.find('all', {conditions: {'key1': 'value2', 'key2': 'value3'}});
 
-        Model1.create({'key': 'value'});
-        Model1.create({'key': 'value to find'});
-        Model1.create({'key': 'value to find'});
-        Model1.create({'another key': 'value to find'});
-        Model2.create({'key': 'value to find'});
+    expect(found.length).toBe(2);
+    var i = (found[0].object() === objects[0].object()) ? 0 : 1;
+    expect(found[i    ].vars()).toEqual(objects[0].vars());
+    expect(found[1 - i].vars()).toEqual(objects[1].vars());
+  });
 
-        var after1 = Model1.find('count', {conditions: {'key': 'value to find'}});
+  it('finds specific object', function() {
+    var original = Model.create({'key1': 'value1'});
+    Model.create({'key2': 'value2'});
+    expect(Model.find(original.object()).vars()).toEqual(original.vars());
+  });
 
-        expect(after1).toBe(before1 + 2);
-    });
+  it('VT302-0227 | should finds first object in database', function() {
+    Model.deleteAll();
+    var originals = [Model.create({'key1': 'value1'}), Model.create({'key3': 'value3'})];
+    var found = Model.find('first');
+    expect(found.vars()).toEqual(originals[(found.has('key1')) ? 0 : 1].vars());
+  });
 
-
-    it('VT302-0261 | finds all objects in database', function() {
-        var Model1 = Rho.ORM.addModel(modelDef);
-        var Model2 = Rho.ORM.addModel(modelDef2);
-
-        Model1.deleteAll();
-
-        Model1.create({'key1': 'value1'});
-        Model2.create({'key2': 'value2'});
-        Model1.create({'key3': 'value3'});
-
-        var found = Model1.find('all');
-
-        expect(found.length).toBe(2);
-        var i = (found[0].has('key1')) ? 0 : 1;
-        expect(cleanVars(found[i    ])).toEqual({'key1': 'value1'});
-        expect(cleanVars(found[1 - i])).toEqual({'key3': 'value3'});
-    });
-
-    it('VT302-0218 | finds all objects with one condition', function() {
-        //var Model = Rho.ORM.addModel(modelDef);
-
-        Model.deleteAll();
-
-        Model.create({'key': 'value1'});
-        var objects = [Model.create({'key': 'value2'}), Model.create({'key': 'value2'})];
-
-        var found = Model.find('all', {conditions: {'key': 'value2'}});
-
-        expect(found.length).toBe(2);
-        var i = (found[0].object() === objects[0].object()) ? 0 : 1;
-        expect(found[i    ].vars()).toEqual(objects[0].vars());
-        expect(found[1 - i].vars()).toEqual(objects[1].vars());
-    });
-
-    it('VT302-0262 | finds all objects with conditions', function() {
-        //var Model = Rho.ORM.addModel(modelDef);
-
-        Model.deleteAll();
-
-        Model.create({'key1': 'value2'});
-        Model.create({'key2': 'value3'});
-        var objects = [
-            Model.create({'key1': 'value2', 'key2': 'value3'}),
-            Model.create({'key1': 'value2', 'key2': 'value3'})
-        ];
-        Model.create({'key1': 'value2', 'key2': 'value2'});
-        Model.create({'key1': 'value3', 'key2': 'value3'});
-
-        var found = Model.find('all', {conditions: {'key1': 'value2', 'key2': 'value3'}});
-
-        expect(found.length).toBe(2);
-        var i = (found[0].object() === objects[0].object()) ? 0 : 1;
-        expect(found[i    ].vars()).toEqual(objects[0].vars());
-        expect(found[1 - i].vars()).toEqual(objects[1].vars());
-    });
-
-    it('finds specific object', function() {
-        var original = Model.create({'key1': 'value1'});
-        Model.create({'key2': 'value2'});
-        expect(Model.find(original.object()).vars()).toEqual(original.vars());
-    });
-
-    it('VT302-0227 | should finds first object in database', function() {
-        Model.deleteAll();
-        var originals = [Model.create({'key1': 'value1'}), Model.create({'key3': 'value3'})];
-        var found = Model.find('first');
-        expect(found.vars()).toEqual(originals[(found.has('key1')) ? 0 : 1].vars());
-    });
-
-// Bhakta: This way of calling find is not mentioned in Docs.
+  // Bhakta: This way of calling find is not mentioned in Docs.
   it("should find with conditions",function() {
     Model.deleteAll();
     var res;
@@ -400,7 +404,8 @@
     expect(res[1].get("name")).toEqual("Aeroprise");
     expect(res[1].get("industry")).toEqual("Technology");
   });
-// Bhakta: This way of calling find is not mentioned in Docs.
+
+  // Bhakta: This way of calling find is not mentioned in Docs.
   it("should find with select",function() {
     Model.deleteAll();
     var res;
@@ -434,7 +439,7 @@
   //   var query = '%IND%';
   //   // res = Model.find( "all",
   //   //   {
-       
+
   //   //   });
 
   //   // conditions : {func:'UPPER', name:'name', op:'LIKE'}: query,
@@ -723,8 +728,6 @@
     expect(res[1].get("industry")).toEqual("Zoo");
     expect(res[2].get("industry")).toEqual("Tech");
   });
-
-
 
   it("VT302-0252 | should update record",function(){
     var record = Model.create({"name":"Zoolo","industry":"Tech"});
@@ -1036,22 +1039,9 @@ describe("<model's fixed_schema>", function() {
     expect(object.has('key')).toBe(true);
     expect(object.has('absent key')).toBe(false);
   });
-
-//     describe("rhom pagination",function(){
-//         it("should support paginate with no options",function(){
-
-//         })
-
-//         it("should support paginate with options and conditions",function(){
-
-//         })
-
-//         it("should support paginate with options and order",function(){
-
-//         })
 });
 
-describe("OrmModel(ST) Test Starts Here", function() {
+describe("OrmModel(ST)", function() {
 
   var db = null;
   var Model;
@@ -1097,14 +1087,14 @@ describe("OrmModel(ST) Test Starts Here", function() {
     fixedModel = Rho.ORM.addModel(defModel);
   };
 
-  describe("OrmModel(PropertyBag) Test Starts Here", function() {
+  describe("OrmModel(PropertyBag)", function() {
     beforeEach(function(){
         reset();
         createModel(defaultDefModelP);
     });
 
     afterEach(function(){
-      
+
     });
 
     it('VT302-0202 | Call create passing a empty hash({})',function(){
@@ -1142,7 +1132,7 @@ describe("OrmModel(ST) Test Starts Here", function() {
     it('VT302-0218 | finds all objects with one condition for e.g Model.find("all", {conditions: {"key": "value2"}})',function(){
 
         itemTypes = ['Electronics','Softwares','Cameras','Books'];
-        
+
         var productModel = function (model){
             model.modelName('ProductTest');
             model.property("id","integer");
@@ -1167,7 +1157,7 @@ describe("OrmModel(ST) Test Starts Here", function() {
     it("finds all objects with conditions for e.g Model.find('all', {conditions: {'key1': 'value2', 'key2': 'value3'}}) ",function(){
 
         itemTypes = ['Electronics','Softwares','Cameras','Books']
-        
+
         var productModel = function (model){
 
             model.modelName('ProductTest');
@@ -1192,7 +1182,7 @@ describe("OrmModel(ST) Test Starts Here", function() {
     });
 
     it("VT302-0219 | Call find with all and with order any column name of string type. For e.g find('all',{conditions:{},order:'name'})",function() {
-        
+
         var productModel = function (model){
 
             model.modelName('ProductTest');
@@ -1208,14 +1198,14 @@ describe("OrmModel(ST) Test Starts Here", function() {
         Model.create({"name":"Foolo"});
 
         var res = Model.find("all",{conditions:{},order:"name"});
-        
+
         expect(res[0].get("name")).toEqual("Foolo");
         expect(res[1].get("name")).toEqual("Mobio");
         expect(res[2].get("name")).toEqual("Zoolo");
     });
 
     it("VT302-0264 | Call find with all and with order any column name of integer type. For e.g find('all',{conditions:{},order:'name'})",function() {
-        
+
         var productModel = function (model){
 
             model.modelName('ProductTest');
@@ -1328,7 +1318,7 @@ describe("OrmModel(ST) Test Starts Here", function() {
 it('VT302-0228 | finds first objects with one condition for e.g Model.find("first", {conditions: {"key": "value2"}})',function(){
 
         itemTypes = ['Electronics','Softwares','Cameras','Books']
-        
+
         var productModel = function (model){
 
             model.modelName('ProductTest');
@@ -1353,7 +1343,7 @@ it('VT302-0228 | finds first objects with one condition for e.g Model.find("firs
     it("finds first objects with conditions for e.g Model.find('all', {conditions: {'key1': 'value2', 'key2': 'value3'}}) ",function(){
 
         itemTypes = ['Electronics','Softwares','Cameras','Books']
-        
+
         var productModel = function (model){
 
             model.modelName('ProductTest');
@@ -1378,7 +1368,7 @@ it('VT302-0228 | finds first objects with one condition for e.g Model.find("firs
     });
 
     it("VT302-0229 | Call find with first and with order any column name of string type. For e.g find('all',{conditions:{},order:'name'})",function() {
-        
+
         var productModel = function (model){
 
             model.modelName('ProductTest');
@@ -1394,12 +1384,12 @@ it('VT302-0228 | finds first objects with one condition for e.g Model.find("firs
         Model.create({"name":"Foolo"});
 
         var res = Model.find("first",{conditions:{},order:"name"});
-        
+
         expect(res.get("name")).toEqual("Foolo");
     });
 
     it("VT302-0265 | Call find with first and with order any column name of integer type. For e.g find('all',{conditions:{},order:'name'})",function() {
-        
+
         var productModel = function (model){
 
             model.modelName('ProductTest');
@@ -1433,7 +1423,7 @@ it('VT302-0228 | finds first objects with one condition for e.g Model.find("firs
         Model.create({"name":"Zoolo"});
         Model.create({"name":"Foolo"});
         var res = Model.find("first",{conditions:{},order:"",orderdir:"DESC"});
-        
+
         //expect(res.count()).toEqual(1);
         expect(res.get("name")).toEqual("Mobio");
     });
@@ -1499,7 +1489,7 @@ it('VT302-0228 | finds first objects with one condition for e.g Model.find("firs
     it('VT302-0259 | find count ',function(){
 
         itemTypes = ['Electronics','Softwares','Cameras','Books']
-        
+
         var productModel = function (model){
 
             model.modelName('ProductTest');
@@ -1525,7 +1515,7 @@ it('VT302-0228 | finds first objects with one condition for e.g Model.find("firs
     it('VT302-0260 | find count objects with one condition for e.g Model.find("count", {conditions: {"key": "value2"}})',function(){
 
         itemTypes = ['Electronics','Softwares']
-        
+
         var productModel = function (model){
 
             model.modelName('ProductTest');
