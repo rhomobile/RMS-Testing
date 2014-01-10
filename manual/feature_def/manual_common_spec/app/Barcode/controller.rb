@@ -3,126 +3,81 @@ require 'rho/rhocontroller'
 class BarcodeController < Rho::RhoController
   @layout = :simplelayout
   
-  def index
-    puts "Moto Barcode index controller"
-
-    #if System::get_property('platform') == 'ANDROID'
-    #    Barcode.enumerate()
-    #    $scanners = [{'deviceName'=>'SCN1', 'friendlyName'=>'SCANNER_INTERNAL'}]
-    #else
-        if !$scanners
-            $scanners = []
-            Barcode.enumerate( url_for(:action => :enum_callback) )    
+  def enableSCN
+    #Alert.show_popup("In enableSCN")
+    scnid = @params['scnid']
+    puts "Scanner Type #{scnid}"
+    Barcode.enumerate(lambda{|args| 
+      puts "lamda: #{args}"
+      data = ''
+      args['result'].each do |thing|
+  
+        id = thing.getProperty('ID').to_s
+        puts "ID is #{id}"
+        puts "scnid is #{scnid}"
+        if id == scnid
+          thing.enable({}, url_for(:action => :enableCallback))
+          puts "Scanner enabled #{id}"
         end
-    #end
-
-    redirect url_for(:action => :show_scanners)
-  end
-
-  def show_scanners
-    render :back => '/app'
-  end
-    
-  def enum_callback
-    puts "enum_callback : #{@params}"
-    
-    $scanners = @params['scannerArray']
-    $scanners = @params['result'] unless $scanners
-    
-    puts "$scanners : #{$scanners}"
-    WebView.navigate( url_for(:action => :show_scanners) ) 
-  end
-
-  def take
-      Barcode.disable
-	  #Barcode.stop
-      scanner = @params['scanner']
-      puts "take - using scanner: #{scanner}"
-      #Barcode.take_barcode(url_for(:action => :take_callback), {:deviceName => scanner})
-      $scanners[scanner.to_i()].take( nil, url_for(:action => :take_callback) )
-      redirect :action => :wait
-  end
-
-  def cancel_take
-      #Barcode.stop
-      #Barcode.disable
-      redirect :action => :index
-  end
   
-  def take_callback
-      status = @params['status']
-      barcode = @params['barcode']
-
-      puts 'take_callback'
-      puts 'status = '+status.to_s unless status == nil
-      puts 'barcode = '+barcode.to_s unless barcode == nil
-
-      if status == 'ok'
-          Alert.show_popup(
-              :message => "Barcode["+barcode.to_s+"]",
-              :title => "Take barcode",
-              :buttons => ["Ok"],
-              :callback => url_for(:action => :popup_callback)
-          )
-      elsif status == 'cancel'
-          Alert.show_popup(
-              :message => "Barcode taking was canceled !",
-              :title => "Take barcode",
-              :buttons => ["Ok"],
-              :callback => url_for(:action => :popup_callback)
-          )
       end
-      #Barcode.disable
-      #WebView.navigate(url_for(:action => :index))
+      });
   end
 
-  def popup_callback
-    #puts "popup_callback: #{@params}"
-    WebView.navigate url_for(:action => :index)
+  def BarcodeDisable
+    Rho::Barcode.disable
   end
 
-  def multiscan
-    scanner = @params['scanner']
-    puts "multiscan - using scanner: #{scanner}"
-    #$barcodes = []
-    #Barcode.enable( url_for(:action => :multi_callback), {:deviceName => scanner})
-    $scanners[scanner.to_i()].enable( nil, url_for(:action => :multi_callback) )    
-    redirect :action => :show_barcodes
+  def setTriggerConnected
+    value = @params['value']
+    puts "TriggerConnected value is #{value}"
+    if value == "true"
+    Barcode.setProperty('triggerConnected','true')
+    elsif value == "false"
+    Barcode.setProperty('triggerConnected','false')
+    end
   end
 
-  def multi_callback
-      puts "multi_callback : #{@params}"
+  def setTriggerConnectedFalse
+      Barcode.setProperty('triggerConnected','false')
+  end
+
+  def enableCallback
+     #Alert.show_popup("In mydecodeevent")
+     puts "In mydecodeevent"  
+     scannerData = @params
+     mydata = scannerData["data"]
+     mysource = scannerData["source"]  
+     mytype = scannerData["type"]
+     mytime = scannerData["time"]
+     mylength = scannerData["length"]
+       
+     scandata="Data:- "+mydata+"  Source:- "+mysource+"  Type:- "+mytype+"  Time:- "+mytime+"  Length:- "+mylength  
+     Rho::WebView.executeJavascript('enablecallbackdata("'+scandata+'")')
+   end
+
+  def enableSCNwithTriggerConnected
+    #Alert.show_popup("In enableSCN")
+    scnid = @params['scnid']
+    value = @params['value']
+    puts "Scanner Type #{scnid}"
+    puts "TriggerConnected value is #{value}"
+    Barcode.enumerate(lambda{|args| 
+      puts "lamda: #{args}"
+      data = ''
+      args['result'].each do |thing|
   
-      status = "ok" #@params['status']
-      barcode = @params['data']
-
-      puts 'status = '+status.to_s unless status == nil
-      puts 'barcode = '+barcode.to_s unless barcode == nil
-
-      #$barcodes += [barcode] if status == 'ok'
-      
-      #WebView.refresh
-      WebView.executeJavascript("addBarcode('#{barcode}')")
-      #TODO: call execute_js here to update list of the barcodes, Refresh is call navigate which is disable the scanner
-  end
+        id = thing.getProperty('ID').to_s
+        puts "ID is #{id}"
+        puts "scnid is #{scnid}"
+        if id == scnid
+          thing.enable({"triggerConnected" => value}, url_for(:action => :enableCallback))
+          puts "Scanner enabled #{id}"
+        end
   
-  def show_barcodes
-    render :back => 'callback:' + url_for(:action => :go_back)
-  end
-  
-  def go_back
-    #Barcode.disable
-    WebView.navigate url_for(:action => :index)
-  end
-  
-  def start_scan
-    Barcode.start
-    redirect :action => :show_barcodes        
+      end
+      });
   end
 
-  def stop_scan
-    Barcode.stop
-    redirect :action => :show_barcodes        
-  end
-     
+
 end
