@@ -8,7 +8,7 @@ describe("Printer Zebra Manual Test", function() {
 	var enableFlag = false;
 	var callbackstatus = false;
 	var searchFlag = false;
-	//var enumData = Rho.PrinterZebra.enumerateSupportedTypes();
+	var enumData = Rho.PrinterZebra.enumerateSupportedTypes();
 	var printers_array = [];
 	var printers_errors = [];
 	var discovery_finished = false;
@@ -31,7 +31,7 @@ describe("Printer Zebra Manual Test", function() {
 		deviceaddressFlag = false;
 		retrievedFlag = false;
 		connect_status = '';
-
+		$('#myList').empty();
 	});
 
 	afterEach(function() {
@@ -46,7 +46,6 @@ describe("Printer Zebra Manual Test", function() {
 			setInstruction("");
 			setExpected("Method should return the result as names/list of printer types that are supported in this build.");
 		});
-		
 		runs(function() {
 			var printerTypes = Rho.PrinterZebra.enumerateSupportedTypes();
 			/*waitsFor(function() {
@@ -121,6 +120,8 @@ describe("Printer Zebra Manual Test", function() {
 			});
 		});
 	});
+	
+	
 	
 	//searchPrinters Method
 	
