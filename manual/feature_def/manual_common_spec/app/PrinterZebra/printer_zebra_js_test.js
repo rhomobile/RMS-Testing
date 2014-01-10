@@ -26,6 +26,46 @@ function setAction(data) {
 	document.getElementById("action").innerHTML = data;
 }
 
+var displayPrinterResult = function (desc, data){
+	if (desc != "Output: ")
+    {
+    	var node=document.createElement("LI");
+    	var textnode =document.createTextNode(desc);
+    	node.appendChild(textnode);
+    	document.getElementById("myList").appendChild(node);
+    }
+	node = document.createElement("LI");
+    textnode = document.createTextNode("Output:");
+    node.appendChild(textnode);
+
+    list = document.createElement("ul");
+    node.appendChild(list);
+
+    lines = data.split(/\r\n|\r|\n|<br>|<br\/>/g);
+
+    var len = lines.length, i;
+
+    for(i = 0; i < len; i++ )
+        lines[i] && lines.push(lines[i]);
+
+    lines.splice(0 , len);
+
+    if (lines.length > 1)
+    {
+        var time = new Date();
+        lines.unshift("Time: " + leftZeroFill(time.getHours(),2) + ":" + leftZeroFill(time.getMinutes(),2) + ":" + leftZeroFill(time.getSeconds(),2) + "." + leftZeroFill(~~(time.getMilliseconds()/10),2));
+    }
+
+    Rho.Log.info(lines.join('\n'),"GOT IT!");
+
+    for(var cnt = 0 ; cnt < lines.length; cnt++ )
+    {
+       list.appendChild(document.createElement("LI")).appendChild(document.createTextNode(lines[cnt]));    
+    }
+	
+	document.getElementById("myList").appendChild(node);
+}
+
 function searchPrinterCallback(printer) {
 	if (printer.status == Rho.PrinterZebra.STATUS_SUCCESS && printer.printerID == STATUS_OK) {
 		printers_array.push(printer);
@@ -40,70 +80,74 @@ function searchPrinterCallback(printer) {
 
 function displaySearchResults(display_printers, display_errors) {
 	if (display_printers.length > 0) {
-		document.getElementById('actResult').innerHTML = display_printers.toString();
+		displayPrinterResult("Result:", display_printers.toString());
 	} 
+	
 	if (display_errors.length > 0) {
-		$("#actResult").append(display_errors.toString());
+		$('#myList').append("<li>"+display_errors.toString()+"<li>");
 	}
 
 }
 
 function PrinterConnectiontype() {
 	connect_type = Rho.PrinterZebra.connectionType;
-	document.getElementById("connectionType").innerHTML = connect_type;
+	$('#connectionType').show();
+	//$('#connectionType').empty();
+	//document.getElementById("connectionType").innerTEXT = connect_type;
+	$('#connectionType').html(connect_type);
 }
 
 function enumerateCallback(printer) {
 	if (printer.length > 0) {
-		document.getElementById('actResult').innerHTML = printer.toString();
+		displayPrinterResult("Result:", printer.toString());
 	} 
 	else {
-		document.getElementById('actResult').innerHTML = "Could not find printer types.";
+		displayPrinterResult("Result:","Could not find printer types.");
 	}
 }
 		
 function stopSearchPrinterCallback(printer) {
 	if(printer.toString() == Rho.PrinterZebra.STATUS_SUCCESS) {
-		document.getElementById('actResult').innerHTML = printer.toString();
+		displayPrinterResult("Result:",printer.toString());
 	}
 	else if(printer.toString() == Rho.PrinterZebra.STATUS_ERROR) {
-		document.getElementById('actResult').innerHTML = printer.toString();
+		displayPrinterResult("Result:",printer.toString());
 	}
 	else {
-		document.getElementById('actResult').innerHTML = printer.toString();
+		displayPrinterResult("Result:",printer.toString());
 	}
 }		
 
 function printRawStringCallback(printer) {
 	if(printer.toString() == Rho.PrinterZebra.STATUS_SUCCESS) {
-		document.getElementById('actResult').innerHTML = printer.toString();
+		displayPrinterResult("Result:",printer.toString());
 	}
 	else if(printer.toString() == Rho.PrinterZebra.STATUS_ERROR) {
-		document.getElementById('actResult').innerHTML = printer.toString();
+		displayPrinterResult("Result:",printer.toString());
 	}
 	else {
-		document.getElementById('actResult').innerHTML = printer.toString();
+		displayPrinterResult("Result:",printer.toString());
 	}	
 }
 
 function connectCallback(printer) {
 	if(printer) {
-		document.getElementById('actResult').innerHTML = printer.toString();
+		displayPrinterResult("Result:",printer.toString());
 	}
 	else {
-		document.getElementById('actResult').innerHTML = "Nil value";
+		displayPrinterResult("Result:","Nil value");
 	}	
 }
 
 function disconnectCallback(printer) {
 	if(printer.toString() == Rho.PrinterZebra.STATUS_SUCCESS) {
-		document.getElementById('actResult').innerHTML = printer.toString();
+		displayPrinterResult("Result:",printer.toString());
 	}
 	else if(printer.toString() == Rho.PrinterZebra.STATUS_ERROR) {
-		document.getElementById('actResult').innerHTML = printer.toString();
+		displayPrinterResult("Result:",printer.toString());
 	}
 	else {
-		document.getElementById('actResult').innerHTML = printer.toString();
+		displayPrinterResult("Result:",printer.toString());
 	}		
 }
 
@@ -111,109 +155,109 @@ function disconnectCallback(printer) {
 
 function printFileCallback(printer) {
 	if(printer.toString() == Rho.PrinterZebra.STATUS_SUCCESS) {
-		document.getElementById('actResult').innerHTML = printer.toString();
+		displayPrinterResult("Result:",printer.toString());
 	}
 	else if(printer.toString() == Rho.PrinterZebra.STATUS_ERROR) {
-		document.getElementById('actResult').innerHTML = printer.toString();
+		displayPrinterResult("Result:",printer.toString());
 	}
 	else {
-		document.getElementById('actResult').innerHTML = printer.toString();
+		displayPrinterResult("Result:",printer.toString());
 	}		
 }
 
 function retrieveCallback(printer) {
 	if (printer.status == Rho.PrinterZebra.STATUS_SUCCESS) {
-		document.getElementById('actResult').innerHTML = JSON.stringify(printer);
+		displayPrinterResult("Result:",JSON.stringify(printer));
 	} 
 	else if(printer.status == Rho.PrinterZebra.STATUS_ERROR) {
-		document.getElementById('actResult').innerHTML = JSON.stringify(printer);
+		displayPrinterResult("Result:",JSON.stringify(printer));
 	} 
 	else {
-		document.getElementById('actResult').innerHTML = JSON.stringify(printer);
+		displayPrinterResult("Result:",JSON.stringify(printer));
 	} 
 }
 
 function retrieveextensionCallback(printer) {
 	if (printer.status == Rho.PrinterZebra.STATUS_SUCCESS) {
-		document.getElementById('actResult').innerHTML = JSON.stringify(printer);
+		displayPrinterResult("Result:",JSON.stringify(printer));
 	} 
 	else if(printer.status == Rho.PrinterZebra.STATUS_ERROR) {
-		document.getElementById('actResult').innerHTML = JSON.stringify(printer);
+		displayPrinterResult("Result:",JSON.stringify(printer));
 	} 
 	else {
-		document.getElementById('actResult').innerHTML = JSON.stringify(printer);
+		displayPrinterResult("Result:",JSON.stringify(printer));
 	} 
 }
 
 function sendfilecontentsCallback(printer) {
 	if (printer.status == Rho.PrinterZebra.STATUS_SUCCESS) {
-		document.getElementById('actResult').innerHTML = printer.toString();
+		displayPrinterResult("Result:",printer.toString());
 	} 
 	else if(printer.status == Rho.PrinterZebra.STATUS_ERROR) {
-		document.getElementById('actResult').innerHTML = printer.toString();
+		displayPrinterResult("Result:",printer.toString());
 	} 
 	else {
-		document.getElementById('actResult').innerHTML = printer.toString();
+		displayPrinterResult("Result:",printer.toString());
 	} 
 }
 
 function printStoredHashCallback(printer) {
 	if (printer.status == Rho.PrinterZebra.STATUS_SUCCESS) {
-		document.getElementById('actResult').innerHTML = printer.toString();
+		displayPrinterResult("Result:",printer.toString());
 	} 
 	else if(printer.status == Rho.PrinterZebra.STATUS_ERROR) {
-		document.getElementById('actResult').innerHTML = printer.toString();
+		displayPrinterResult("Result:",printer.toString());
 	} 
 	else {
-		document.getElementById('actResult').innerHTML = printer.toString();
+		displayPrinterResult("Result:",printer.toString());
 	} 
 }
 
 function printStoredArrayCallback(printer) {
 	if (printer.status == Rho.PrinterZebra.STATUS_SUCCESS) {
-		document.getElementById('actResult').innerHTML = printer.toString();
+		displayPrinterResult("Result:",printer.toString());
 	} 
 	else if(printer.status == Rho.PrinterZebra.STATUS_ERROR) {
-		document.getElementById('actResult').innerHTML = printer.toString();
+		displayPrinterResult("Result:",printer.toString());
 	} 
 	else {
-		document.getElementById('actResult').innerHTML = printer.toString();
+		displayPrinterResult("Result:",printer.toString());
 	} 
 }
 
 function printImageFromFileCallback(printer) {
 	if (printer.status == Rho.PrinterZebra.STATUS_SUCCESS) {
-		document.getElementById('actResult').innerHTML = printer.toString();
+		displayPrinterResult("Result:",printer.toString());
 	} 
 	else if(printer.status == Rho.PrinterZebra.STATUS_ERROR) {
-		document.getElementById('actResult').innerHTML = printer.toString();
+		displayPrinterResult("Result:",printer.toString());
 	} 
 	else {
-		document.getElementById('actResult').innerHTML = printer.toString();
+		displayPrinterResult("Result:",printer.toString());
 	} 
 }
 
 function storeImageCallback(printer) {
 	if (printer.status == Rho.PrinterZebra.STATUS_SUCCESS) {
-		document.getElementById('actResult').innerHTML = printer.toString();
+		displayPrinterResult("Result:",printer.toString());
 	} 
 	else if(printer.status == Rho.PrinterZebra.STATUS_ERROR) {
-		document.getElementById('actResult').innerHTML = printer.toString();
+		displayPrinterResult("Result:",printer.toString());
 	} 
 	else {
-		document.getElementById('actResult').innerHTML = printer.toString();
+		displayPrinterResult("Result:",printer.toString());
 	} 
 }
 
 function requestStateCallback(printer) {
 	if (printer.status == Rho.PrinterZebra.STATUS_SUCCESS) {
-		document.getElementById('actResult').innerHTML = JSON.stringify(printer);
+		displayPrinterResult("Result:",JSON.stringify(printer));
 	} 
 	else if(printer.status == Rho.PrinterZebra.STATUS_ERROR) {
-		document.getElementById('actResult').innerHTML = JSON.stringify(printer.status);
+		displayPrinterResult("Result:",JSON.stringify(printer.status));
 	} 
 	else {
-		document.getElementById('actResult').innerHTML = JSON.stringify(printer);
+		displayPrinterResult("Result:",JSON.stringify(printer));
 	} 
 }
 /*
@@ -232,7 +276,6 @@ function addCombo()	{
 	textb.value="";
 }
 */
-var fileURI = Rho.RhoFile.join(Rho.Application.modelFolderPath('PrinterZebra'), "PrinterZebraFiles/image1.jpg");
 var txtfilepath = Rho.RhoFile.join(Rho.Application.modelFolderPath('PrinterZebra'), "PrinterZebraFiles/txtfile.txt");
 var csvfilepath = Rho.RhoFile.join(Rho.Application.modelFolderPath('PrinterZebra'), "PrinterZebraFiles/csvfile.csv");
 var xlsfilepath = Rho.RhoFile.join(Rho.Application.modelFolderPath('PrinterZebra'), "PrinterZebraFiles/xlsfile.xls");

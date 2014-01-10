@@ -21,9 +21,9 @@ describe("Barcode Manual Test", function() {
 
 	   (function(objSCN){ 
 
-		   	var scnid = objSCN.getProperty('ID');
-		   	var scntype = objSCN.getProperty('scannerType');
-		   	var reticleType = (objSCN.friendlyName == "2D Imager" && isAndroid ? "hardwareReticle" : "softwareReticle");
+			   	var scnid = objSCN.getProperty('ID');
+			   	var scntype = objSCN.getProperty('scannerType');
+			   	var reticleType = (objSCN.friendlyName == "2D Imager" && isAndroid ? "hardwareReticle" : "softwareReticle");
 
 			beforeEach(function() {
 				enableFlag = false;
@@ -1548,7 +1548,7 @@ describe("Barcode Manual Test", function() {
 						{
 							setObjective("disconnect the trigger when scanner disabled");
 							setInstruction("Press Hardware Trigger button");
-							setExpected("Scanner beam should comeup");
+							setExpected("Scanner beam should not comeup");
 							objSCN.setProperty("triggerConnected", "false");
 							objSCN.enable({},callbackenable);
 							setTimeout(function() {
@@ -1829,9 +1829,7 @@ describe("Barcode Manual Test", function() {
 							});
 						});
 					});	
-
 				}
-
 			});	
 		})(enumData[j]);
 	}
