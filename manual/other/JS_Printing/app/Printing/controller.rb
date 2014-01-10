@@ -100,6 +100,76 @@ class Printing < Rho::RhoController
     end
   }
   
+  #callback function for disconnect
+  def disconnect_callback(stat_us)
+    begin
+      Rho::WebView.executeJavascript("Ruby.sendValueToJS(#{stat_us})")
+    rescue => ex
+      puts "Exception Thrown: #{ex.message}"
+      jsmethod = 'Ruby.sendValueToJS("' + ex.message + '")'
+      Rho::WebView.executeJavascript(jsmethod)
+    end
+  end
+  
+  #anonymous function for disconnect
+  disconnectAnony = lambda {|stat_us|
+    begin
+      Rho::WebView.executeJavascript("Ruby.sendValueToJS(#{stat_us})")
+    rescue => ex
+      puts "Exception Thrown: #{ex.message}"
+      jsmethod = 'Ruby.sendValueToJS("' + ex.message + '")'
+      Rho::WebView.executeJavascript(jsmethod)
+    end
+  }
+  
+  #callback function for printFIle
+  def printFIle_callback(stat_us)
+    begin
+      stat_us = stat_us + "Printing your file... "
+      Rho::WebView.executeJavascript("Ruby.sendValueToJS(#{stat_us})")
+    rescue => ex
+      puts "Exception Thrown: #{ex.message}"
+      jsmethod = 'Ruby.sendValueToJS("' + ex.message + '")'
+      Rho::WebView.executeJavascript(jsmethod)
+    end
+  end
+  
+  #anonymous function for printFIle
+  printFIleAnony = lambda {|stat_us|
+    begin
+      stat_us = stat_us + "Printing your file... "
+      Rho::WebView.executeJavascript("Ruby.sendValueToJS(#{stat_us})")
+    rescue => ex
+      puts "Exception Thrown: #{ex.message}"
+      jsmethod = 'Ruby.sendValueToJS("' + ex.message + '")'
+      Rho::WebView.executeJavascript(jsmethod)
+    end
+  }
+  
+  #callback function for printFIle
+  def printRawString_callback(stat_us)
+    begin
+      stat_us = stat_us + "Printing your file... "
+      Rho::WebView.executeJavascript("Ruby.sendValueToJS(#{stat_us})")
+    rescue => ex
+      puts "Exception Thrown: #{ex.message}"
+      jsmethod = 'Ruby.sendValueToJS("' + ex.message + '")'
+      Rho::WebView.executeJavascript(jsmethod)
+    end
+  end
+  
+  #anonymous function for printRawString
+  printRawStringAnony = lambda {|stat_us|
+    begin
+      stat_us = stat_us + "Printing your file... "
+      Rho::WebView.executeJavascript("Ruby.sendValueToJS(#{stat_us})")
+    rescue => ex
+      puts "Exception Thrown: #{ex.message}"
+      jsmethod = 'Ruby.sendValueToJS("' + ex.message + '")'
+      Rho::WebView.executeJavascript(jsmethod)
+    end
+  }
+  
   # test_cases are below here
 
 	def rho_enumerateSupportedTypes
@@ -365,7 +435,7 @@ class Printing < Rho::RhoController
       if printers.length
         printer = Rho::Printer.getPrinterByID(printers[0].printerID)
         printer.connect({
-          :callback => :connect_callback
+          :callback => url_for(:action => :connect_callback)
         });
         if (printer.isConnected || printer.isReadyToPrint)
            printer.disconnect()
@@ -413,7 +483,7 @@ class Printing < Rho::RhoController
           :options => [
             "timeout" => @params[:duration]
             ],
-          :callback => :connect_callback
+          :callback => url_for(:action => :connect_callback)
         });
         if (printer.isConnected || printer.isReadyToPrint)
            printer.disconnect()
@@ -445,5 +515,278 @@ class Printing < Rho::RhoController
       Rho::WebView.executeJavascript(jsmethod)
     end
   end
-       
+  
+  def rho_disconnect_callback
+    begin
+      if printers.length
+        printer = Rho::Printer.getPrinterByID(printers[0].printerID)
+        printer.connect()
+        if (printer.isConnected || printer.isReadyToPrint)
+          printer.disconnect({
+            :callback => url_for(:action => :disconnect_callback)
+          });
+        else
+          p_str = printer.status + " \n " + printer.message
+          Rho::WebView.executeJavascript("Ruby.sendValueToJS(#{p_str})")
+        end
+      end
+    rescue
+      puts "Exception Thrown: #{ex.message}"
+      jsmethod = 'Ruby.sendValueToJS("' + ex.message + '")'
+      Rho::WebView.executeJavascript(jsmethod)
+    end
+  end
+  
+  def rho_disconnect_anony
+    begin
+      if printers.length
+        printer = Rho::Printer.getPrinterByID(printers[0].printerID)
+        printer.connect()
+        if (printer.isConnected || printer.isReadyToPrint)
+          printer.disconnect({
+            :callback => disconnectAnony
+          });
+        else
+          p_str = printer.status + " \n " + printer.message
+          Rho::WebView.executeJavascript("Ruby.sendValueToJS(#{p_str})")
+        end
+      end
+    rescue
+      puts "Exception Thrown: #{ex.message}"
+      jsmethod = 'Ruby.sendValueToJS("' + ex.message + '")'
+      Rho::WebView.executeJavascript(jsmethod)
+    end
+  end
+  
+  def rho_disconnect_and_print
+    begin
+      if printers.length
+        printer = Rho::Printer.getPrinterByID(printers[0].printerID)
+        printer.connect()
+        if (printer.isConnected || printer.isReadyToPrint)
+          printer.disconnect();
+          prs_str = printer.printRawString("Hello Printing!");
+          Rho::WebView.executeJavascript("Ruby.sendValueToJS(#{prs_str})")
+        else
+          p_str = printer.status + " \n " + printer.message
+          Rho::WebView.executeJavascript("Ruby.sendValueToJS(#{p_str})")
+        end
+      end
+    rescue
+      puts "Exception Thrown: #{ex.message}"
+      jsmethod = 'Ruby.sendValueToJS("' + ex.message + '")'
+      Rho::WebView.executeJavascript(jsmethod)
+    end
+  end
+  
+  def rho_disconnect_disconnect
+    begin
+      if printers.length
+        printer = Rho::Printer.getPrinterByID(printers[0].printerID)
+        printer.disconnect()
+        printer.connect()
+        if (printer.isConnected || printer.isReadyToPrint)
+          printer.disconnect({
+            :callback => url_for(:action => :disconnect_callback)
+          });
+        else
+          p_str = printer.status + " \n " + printer.message
+          Rho::WebView.executeJavascript("Ruby.sendValueToJS(#{p_str})")
+        end
+      end
+    rescue
+      puts "Exception Thrown: #{ex.message}"
+      jsmethod = 'Ruby.sendValueToJS("' + ex.message + '")'
+      Rho::WebView.executeJavascript(jsmethod)
+    end
+  end
+  
+  def rho_disconnect_callback_disconnect
+    begin
+      if printers.length
+        printer = Rho::Printer.getPrinterByID(printers[0].printerID)
+        printer.disconnect({
+          :callback => url_for(:action => :disconnect_callback)
+        });
+        printer.connect()
+        if (printer.isConnected || printer.isReadyToPrint)
+          printer.disconnect({
+            :callback => url_for(:action => :disconnect_callback)
+          });
+        else
+          p_str = printer.status + " \n " + printer.message
+          Rho::WebView.executeJavascript("Ruby.sendValueToJS(#{p_str})")
+        end
+      end
+    rescue
+      puts "Exception Thrown: #{ex.message}"
+      jsmethod = 'Ruby.sendValueToJS("' + ex.message + '")'
+      Rho::WebView.executeJavascript(jsmethod)
+    end
+  end
+
+  def rho_printFile
+    begin
+      if @params[:fileURI]
+        fileURI = @params[:fileURI]
+      else
+        fileURI = ""
+      end
+      if printers.length
+        printer = Rho::Printer.getPrinterByID(printers[0].printerID)
+        printer.connect()
+        if (printer.isConnected || printer.isReadyToPrint)
+          p_str = printer.printFile({
+            :fileURI => fileURI
+          });
+          Rho::WebView.executeJavascript("Ruby.sendValueToJS(#{p_str})")
+        else
+          p_str = printer.status + " \n " + printer.message
+          Rho::WebView.executeJavascript("Ruby.sendValueToJS(#{p_str})")
+        end
+      end
+    rescue
+      puts "Exception Thrown: #{ex.message}"
+      jsmethod = 'Ruby.sendValueToJS("' + ex.message + '")'
+      Rho::WebView.executeJavascript(jsmethod)
+    end
+  end
+
+  def rho_printFile_callback
+    begin
+      if @params[:fileURI]
+        fileURI = @params[:fileURI]
+      else
+        fileURI = ""
+      end
+      if printers.length
+        printer = Rho::Printer.getPrinterByID(printers[0].printerID)
+        printer.connect()
+        if (printer.isConnected || printer.isReadyToPrint)
+          p_str = printer.printFile({
+            :fileURI => fileURI,
+            :callback => url_for(:action => :printFIle_callback)
+          });
+        else
+          p_str = printer.status + " \n " + printer.message
+          Rho::WebView.executeJavascript("Ruby.sendValueToJS(#{p_str})")
+        end
+      end
+    rescue
+      puts "Exception Thrown: #{ex.message}"
+      jsmethod = 'Ruby.sendValueToJS("' + ex.message + '")'
+      Rho::WebView.executeJavascript(jsmethod)
+    end
+  end
+  
+  def rho_printFile_anony
+    begin
+      if @params[:fileURI]
+        fileURI = @params[:fileURI]
+      else
+        fileURI = ""
+      end
+      if printers.length
+        printer = Rho::Printer.getPrinterByID(printers[0].printerID)
+        printer.connect()
+        if (printer.isConnected || printer.isReadyToPrint)
+          p_str = printer.printFile({
+            :fileURI => fileURI,
+            :callback => printFIleAnony
+          });
+        else
+          p_str = printer.status + " \n " + printer.message
+          Rho::WebView.executeJavascript("Ruby.sendValueToJS(#{p_str})")
+        end
+      end
+    rescue
+      puts "Exception Thrown: #{ex.message}"
+      jsmethod = 'Ruby.sendValueToJS("' + ex.message + '")'
+      Rho::WebView.executeJavascript(jsmethod)
+    end
+  end
+  
+  def rho_printRawString
+    begin
+      if @params[:cmmd]
+        cmmd = @params[:cmmd]
+      else
+        cmmd = ""
+      end
+      if printers.length
+        printer = Rho::Printer.getPrinterByID(printers[0].printerID)
+        printer.connect()
+        if (printer.isConnected || printer.isReadyToPrint)
+          p_str = printer.printRawString({
+            :command => cmmd
+          });
+          Rho::WebView.executeJavascript("Ruby.sendValueToJS(#{p_str})")
+        else
+          p_str = printer.status + " \n " + printer.message
+          Rho::WebView.executeJavascript("Ruby.sendValueToJS(#{p_str})")
+        end
+      end
+    rescue
+      puts "Exception Thrown: #{ex.message}"
+      jsmethod = 'Ruby.sendValueToJS("' + ex.message + '")'
+      Rho::WebView.executeJavascript(jsmethod)
+    end
+  end
+
+  def rho_printRawString_callback
+    begin
+      if @params[:cmmd]
+        cmmd = @params[:cmmd]
+      else
+        cmmd = ""
+      end
+      if printers.length
+        printer = Rho::Printer.getPrinterByID(printers[0].printerID)
+        printer.connect()
+        if (printer.isConnected || printer.isReadyToPrint)
+          p_str = printer.printRawString({
+            :command => cmmd,
+            :callback => url_for(:action => :printRawString_callback)
+          });
+          Rho::WebView.executeJavascript("Ruby.sendValueToJS(#{p_str})")
+        else
+          p_str = printer.status + " \n " + printer.message
+          Rho::WebView.executeJavascript("Ruby.sendValueToJS(#{p_str})")
+        end
+      end
+    rescue
+      puts "Exception Thrown: #{ex.message}"
+      jsmethod = 'Ruby.sendValueToJS("' + ex.message + '")'
+      Rho::WebView.executeJavascript(jsmethod)
+    end
+  end
+  
+  def rho_printRawString_anony
+    begin
+      if @params[:cmmd]
+        cmmd = @params[:cmmd]
+      else
+        cmmd = ""
+      end
+      if printers.length
+        printer = Rho::Printer.getPrinterByID(printers[0].printerID)
+        printer.connect()
+        if (printer.isConnected || printer.isReadyToPrint)
+          p_str = printer.printRawString({
+            :command => cmmd,
+            :callback => printRawStringAnony
+          });
+          Rho::WebView.executeJavascript("Ruby.sendValueToJS(#{p_str})")
+        else
+          p_str = printer.status + " \n " + printer.message
+          Rho::WebView.executeJavascript("Ruby.sendValueToJS(#{p_str})")
+        end
+      end
+    rescue
+      puts "Exception Thrown: #{ex.message}"
+      jsmethod = 'Ruby.sendValueToJS("' + ex.message + '")'
+      Rho::WebView.executeJavascript(jsmethod)
+    end
+  end
+  
 end
