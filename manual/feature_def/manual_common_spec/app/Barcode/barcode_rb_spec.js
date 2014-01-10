@@ -96,7 +96,6 @@ describe("Barcode Manual Test", function() {
 							setInstruction("Press Hardware Trigger button");
 							setExpected("Scanner beam should not comeup");
 							Ruby.call("Barcode","setTriggerConnected?value=false");
-							//objSCN.setProperty("triggerConnected", "false");
 							waitsFor(function() {
 							return document.getElementById("actResult").innerHTML != "init";
 							}, "Timed out waiting for tester to respond", 300000);
@@ -115,7 +114,6 @@ describe("Barcode Manual Test", function() {
 							setInstruction("Press Hardware Trigger button");
 							setExpected("Scanner beam should comeup and scan successful");
 							Ruby.call("Barcode","setTriggerConnected?value=true");
-							//objSCN.setProperty("triggerConnected", "true");
 							setTimeout(function() {
 								enableFlag = true;
 							}, ENABLE1K);
@@ -149,7 +147,6 @@ describe("Barcode Manual Test", function() {
 							setExpected("Scanner beam should comeup and scan successful");
 							var scnid = objSCN.getProperty('ID');
 							Ruby.call("Barcode","enableSCN?scnid="+scnid);
-							//objSCN.enable({},callbackenable);
 							setTimeout(function() {
 								enableFlag = true;
 							}, ENABLE8K);
@@ -178,10 +175,9 @@ describe("Barcode Manual Test", function() {
 						{
 							setObjective("disconnect the trigger when scanner disabled");
 							setInstruction("Press Hardware Trigger button");
-							setExpected("Scanner beam should comeup");
+							setExpected("Scanner beam should not comeup");
 
 							Ruby.call("Barcode","setTriggerConnected?value=false");						
-							//objSCN.setProperty("triggerConnected", "false");
 							var scnid = objSCN.getProperty('ID');
 							Ruby.call("Barcode","enableSCN?scnid="+scnid);
 							setTimeout(function() {
@@ -211,20 +207,18 @@ describe("Barcode Manual Test", function() {
 						runs(function()
 						{
 							setObjective("set triggerConnected as true after scanner disable");
-							setInstruction("wait for 9 sec and Press Hardware Trigger button");
+							setInstruction("Press Hardware Trigger button");
 							setExpected("Scanner beam should not comeup");
 							Ruby.call("Barcode","setTriggerConnected?value=true");							
-							//objSCN.setProperty("triggerConnected", "true");
-							//objSCN.enable({},callbackenable);
 							setTimeout(function() {
 								enableFlag = true;
-							}, ENABLE8K);
+							}, ENABLE1K);
 						});
 
 						waitsFor(function()
 						{
 							return enableFlag;
-						}, '2sec wait to enable the Scanner', 9000);
+						}, '2sec wait to enable the Scanner', 2000);
 
 						runs(function()
 						{
@@ -244,7 +238,7 @@ describe("Barcode Manual Test", function() {
 						{
 							setObjective("call start after setting triggerConnected as false");
 							setInstruction("wait for 9 sec and don't Press Hardware Trigger button");
-							setExpected("Scanner beam should comeup automatically");
+							setExpected("Scanner beam should not comeup automatically");
 							var scnid = objSCN.getProperty('ID');
 							Ruby.call("Barcode","enableSCN?scnid="+scnid);
 							setTimeout(function() {
@@ -259,14 +253,14 @@ describe("Barcode Manual Test", function() {
 
 						runs(function()
 						{
-							Ruby.call("Barcode","setTriggerConnected?value=false");							
-							//objSCN.setProperty("triggerConnected", "false");
-							objSCN.start();
+							Ruby.call("Barcode","setTriggerConnected?value=false");
+							Ruby.call("Barcode","BarcodeStart");
 							waitsFor(function() {
 							return document.getElementById("actResult").innerHTML != "init";
 							}, "Timed out waiting for tester to respond", 300000);
 							runs(function() {
 							expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+							Ruby.call("Barcode","BarcodeStop");
 							Ruby.call("Barcode","BarcodeDisable");
 							});
 
@@ -295,7 +289,6 @@ describe("Barcode Manual Test", function() {
 						runs(function()
 						{
 							Ruby.call("Barcode","setTriggerConnected?value=false");							
-							//objSCN.setProperty("triggerConnected", "false");
 							Rho.KeyCapture.captureTrigger(function(data){alert(data.triggerFlag);});
 							waitsFor(function() {
 							return document.getElementById("actResult").innerHTML != "init";
@@ -331,8 +324,6 @@ describe("Barcode Manual Test", function() {
 						{
 							Ruby.call("Barcode","setTriggerConnected?value=false");	
 							Ruby.call("Barcode","setTriggerConnected?value=true");															
-							//objSCN.setProperty("triggerConnected", "false");
-							//objSCN.setProperty("triggerConnected", "true");
 							waitsFor(function() {
 							return document.getElementById("actResult").innerHTML != "init";
 							}, "Timed out waiting for tester to respond", 300000);
@@ -365,7 +356,6 @@ describe("Barcode Manual Test", function() {
 						runs(function()
 						{
 							Ruby.call("Barcode","setTriggerConnected?value=true");
-							//objSCN.setProperty("triggerConnected", "true");
 							waitsFor(function() {
 							return document.getElementById("actResult").innerHTML != "init";
 							}, "Timed out waiting for tester to respond", 300000);
@@ -384,8 +374,7 @@ describe("Barcode Manual Test", function() {
 							setInstruction("wait for 9 sec and Press Hardware Trigger button then minimize the app and restore it after 5 sec and press trigger again");
 							setExpected("Scanner beam should not comeup after restore the application also");
 							var scnid = objSCN.getProperty('ID');
-							Ruby.call("Barcode","enableSCNwithTriggerConnected?value=true&scnid="+scnid);
-							//objSCN.enable({"triggerConnected":false},callbackenable);
+							Ruby.call("Barcode","enableSCNwithTriggerConnected?value=false&scnid="+scnid);
 							setTimeout(function() {
 								enableFlag = true;
 							}, ENABLE8K);
@@ -398,8 +387,6 @@ describe("Barcode Manual Test", function() {
 
 						runs(function()
 						{
-							//objSCN.setProperty("triggerConnected", "false");
-
 							waitsFor(function() {
 							return document.getElementById("actResult").innerHTML != "init";
 							}, "Timed out waiting for tester to respond", 300000);
@@ -433,7 +420,6 @@ describe("Barcode Manual Test", function() {
 						runs(function()
 						{
 							Ruby.call("Barcode","setTriggerConnected?value=false");
-							//objSCN.setProperty("triggerConnected", "false");
 							waitsFor(function() {
 							return document.getElementById("actResult").innerHTML != "init";
 							}, "Timed out waiting for tester to respond", 300000);
@@ -466,7 +452,6 @@ describe("Barcode Manual Test", function() {
 						runs(function()
 						{
 							Ruby.call("Barcode","setTriggerConnected?value=false");
-							//objSCN.setProperty("triggerConnected", "false");
 							waitsFor(function() {
 							return document.getElementById("actResult").innerHTML != "init";
 							}, "Timed out waiting for tester to respond", 300000);

@@ -1578,19 +1578,19 @@ describe("Barcode Manual Test", function() {
 						runs(function()
 						{
 							setObjective("set triggerConnected as true after scanner disable");
-							setInstruction("wait for 9 sec and Press Hardware Trigger button");
+							setInstruction("Press Hardware Trigger button");
 							setExpected("Scanner beam should not comeup");
 							objSCN.setProperty("triggerConnected", "true");
 							//objSCN.enable({},callbackenable);
 							setTimeout(function() {
 								enableFlag = true;
-							}, ENABLE8K);
+							}, ENABLE1K);
 						});
 
 						waitsFor(function()
 						{
 							return enableFlag;
-						}, '2sec wait to enable the Scanner', 9000);
+						}, '2sec wait', 2000);
 
 						runs(function()
 						{
@@ -1610,7 +1610,7 @@ describe("Barcode Manual Test", function() {
 						{
 							setObjective("call start after setting triggerConnected as false");
 							setInstruction("wait for 9 sec and don't Press Hardware Trigger button");
-							setExpected("Scanner beam should comeup automatically");
+							setExpected("Scanner beam should not comeup automatically");
 							objSCN.enable({},callbackenable);
 							setTimeout(function() {
 								enableFlag = true;
@@ -1631,6 +1631,7 @@ describe("Barcode Manual Test", function() {
 							}, "Timed out waiting for tester to respond", 300000);
 							runs(function() {
 							expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+							objSCN.stop();
 							objSCN.disable();
 							});
 

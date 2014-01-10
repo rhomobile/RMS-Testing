@@ -28,6 +28,14 @@ class BarcodeController < Rho::RhoController
     Rho::Barcode.disable
   end
 
+  def BarcodeStart
+    Rho::Barcode.start
+  end
+
+  def BarcodeStop
+    Rho::Barcode.stop
+  end  
+
   def setTriggerConnected
     value = @params['value']
     puts "TriggerConnected value is #{value}"
