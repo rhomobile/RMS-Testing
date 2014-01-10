@@ -1,8 +1,5 @@
-
-var dpxInstance = new Rho.DPX();
-
-describe('Rho.DPX JS API', function() {
 describe('Rho.DPX APIs Set Test', function() {
+var dpxInstance = new Rho.DPX();
 
 describe('getting property default value', function() {
 
@@ -27,7 +24,7 @@ describe('getting property default value', function() {
 		});
 
 		it('Should get flashMode default value', function() {
-		expect(dpxInstance.flashMode).toEqual(off);
+		expect(dpxInstance.flashMode).toEqual(Rho.DPX.FLASH_OFF);
 		});
 
 		it('Should get identificationTimeout default value', function() {
@@ -35,7 +32,7 @@ describe('getting property default value', function() {
 		});
 
 		it('Should get inputSource default value', function() {
-		expect(dpxInstance.inputSource).toEqual('camera');
+		expect(dpxInstance.inputSource).toEqual(Rho.DPX.SOURCE_CAMERA);
 		});
 
 		it('Should get logDirectory default value', function() {
@@ -43,7 +40,7 @@ describe('getting property default value', function() {
 		});
 
 		it('Should get manualResolution default value', function() {
-		expect(dpxInstance.manualResolution).toEqual('1600x1200');
+		expect(dpxInstance.manualResolution).toEqual(Rho.DPX.RESOLUTION_MEDIUM);
 		});
 
 		it('Should get manualResolutionMode default value', function() {
@@ -51,7 +48,7 @@ describe('getting property default value', function() {
 		});
 
 		it('Should get ocrLanguage default value', function() {
-		expect(dpxInstance.ocrLanguage).toEqual('english');
+		expect(dpxInstance.ocrLanguage).toEqual(Rho.DPX.LANGUAGE_ENGLISH);
 		});
 
 		it('Should get processingTimeout default value', function() {
@@ -59,7 +56,7 @@ describe('getting property default value', function() {
 		});
 
 		it('Should get userMode default value', function() {
-		expect(dpxInstance.userMode).toEqual('snapshot');
+		expect(dpxInstance.userMode).toEqual(Rho.DPX.USER_MODE_SNAPSHOT);
 		});
 
 		it('Should get uiResultConfirmation default value', function() {
@@ -284,69 +281,54 @@ describe('Setting fileInteractiveMode', function() {
 describe('Setting flashMode', function() {
 
 		it('Should Set flashMode to FLASH_OFF using direct calling method', function() {
-		dpxInstance.flashMode=dpxInstance.FLASH_OFF;
-		expect(dpxInstance.flashMode).toEqual(dpxInstance.FLASH_OFF);
-		});
-		
-		it('Should Set flashMode to off using direct calling method', function() {
-		dpxInstance.flashMode='off';
-		expect(dpxInstance.flashMode).toEqual('off');
+		dpxInstance.flashMode=Rho.DPX.FLASH_OFF;
+		expect(dpxInstance.flashMode).toEqual(Rho.DPX.FLASH_OFF);
 		});
 		
 		it('Should Set flashMode to off using setProperty calling method', function() {
-		dpxInstance.setProperty('flashMode','off');
-		expect(dpxInstance.getProperty('flashMode')).toEqual('off');
+		dpxInstance.setProperty('flashMode',Rho.DPX.FLASH_OFF);
+		expect(dpxInstance.getProperty('flashMode')).toEqual(Rho.DPX.FLASH_OFF);
 		});
 		
 		it('Should Set flashMode to off using setProperties calling method', function() {
-		dpxInstance.setProperties({'flashMode' : 'off'});
+		dpxInstance.setProperties({'flashMode' : Rho.DPX.FLASH_OFF});
 		var data = dpxInstance.getProperties(['flashMode']);
 		data = data['flashMode'];
-		expect(data).toEqual('off');
+		expect(data).toEqual(Rho.DPX.FLASH_OFF);
 		});
 		
 		it('Should Set flashMode to FLASH_AUTO using direct calling method', function() {
-		dpxInstance.flashMode=dpxInstance.FLASH_AUTO;
-		expect(dpxInstance.flashMode).toEqual(dpxInstance.FLASH_AUTO);
+		dpxInstance.flashMode=Rho.DPX.FLASH_AUTO;
+		expect(dpxInstance.flashMode).toEqual(Rho.DPX.FLASH_AUTO);
 		});
 		
-		it('Should Set flashMode to auto using direct calling method', function() {
-		dpxInstance.flashMode='auto';
-		expect(dpxInstance.flashMode).toEqual('auto');
-		});
-		
-		it('Should Set flashMode to auto using setProperty calling method', function() {
-		dpxInstance.setProperty('flashMode','auto');
-		expect(dpxInstance.getProperty('flashMode')).toEqual('auto');
+    	it('Should Set flashMode to auto using setProperty calling method', function() {
+		dpxInstance.setProperty('flashMode',Rho.DPX.FLASH_AUTO);
+		expect(dpxInstance.getProperty('flashMode')).toEqual('FLASH_AUTO');
 		});
 		
 		it('Should Set flashMode to auto using setProperties calling method', function() {
-		dpxInstance.setProperties({'flashMode' : 'auto'});
+		dpxInstance.setProperties({'flashMode' : Rho.DPX.FLASH_AUTO});
 		var data = dpxInstance.getProperties(['flashMode']);
 		data = data['flashMode'];
-		expect(data).toEqual('auto');
+		expect(data).toEqual(Rho.DPX.FLASH_AUTO);
 		});
 		
 		it('Should Set flashMode to FLASH_ON using direct calling method', function() {
-		dpxInstance.flashMode=dpxInstance.FLASH_ON;
-		expect(dpxInstance.flashMode).toEqual(dpxInstance.FLASH_ON);
-		});
-		
-		it('Should Set flashMode to on using direct calling method', function() {
-		dpxInstance.flashMode='on';
-		expect(dpxInstance.flashMode).toEqual('on');
-		});
-		
+		dpxInstance.flashMode=Rho.DPX.FLASH_ON;
+		expect(dpxInstance.flashMode).toEqual(Rho.DPX.FLASH_ON);
+		});		
+
 		it('Should Set flashMode to on using setProperty calling method', function() {
-		dpxInstance.setProperty('flashMode','on');
-		expect(dpxInstance.getProperty('flashMode')).toEqual('on');
+		dpxInstance.setProperty('flashMode',Rho.DPX.FLASH_ON);
+		expect(dpxInstance.getProperty('flashMode')).toEqual(Rho.DPX.FLASH_ON);
 		});
 		
 		it('Should Set flashMode to on using setProperties calling method', function() {
-		dpxInstance.setProperties({'flashMode' : 'on'});
+		dpxInstance.setProperties({'flashMode' : Rho.DPX.FLASH_ON});
 		var data = dpxInstance.getProperties(['flashMode']);
 		data = data['flashMode'];
-		expect(data).toEqual('on');
+		expect(data).toEqual(Rho.DPX.FLASH_ON);
 		});
 });
 
@@ -409,69 +391,54 @@ describe('Setting identificationTimeout', function() {
 describe('Setting inputSource', function() {
 
 		it('Should Set inputSource to SOURCE_CAMERA using direct calling method', function() {
-		dpxInstance.inputSource=dpxInstance.SOURCE_CAMERA;
-		expect(dpxInstance.inputSource).toEqual(dpxInstance.SOURCE_CAMERA);
+		dpxInstance.inputSource=Rho.DPX.SOURCE_CAMERA;
+		expect(dpxInstance.inputSource).toEqual(Rho.DPX.SOURCE_CAMERA);
 		});
-		
-		it('Should Set inputSource to camera using direct calling method', function() {
-		dpxInstance.inputSource='camera';
-		expect(dpxInstance.inputSource).toEqual('camera');
-		});
-		
+	
 		it('Should Set inputSource to camera using setProperty calling method', function() {
-		dpxInstance.setProperty('inputSource','camera');
-		expect(dpxInstance.getProperty('inputSource')).toEqual('camera');
+		dpxInstance.setProperty('inputSource', Rho.DPX.SOURCE_CAMERA);
+		expect(dpxInstance.getProperty('inputSource')).toEqual(Rho.DPX.SOURCE_CAMERA);
 		});
 		
 		it('Should Set inputSource to camera using setProperties calling method', function() {
-		dpxInstance.setProperties({'inputSource' : 'camera'});
+		dpxInstance.setProperties({'inputSource' : Rho.DPX.SOURCE_CAMERA});
 		var data = dpxInstance.getProperties(['inputSource']);
 		data = data['inputSource'];
-		expect(data).toEqual('camera');
+		expect(data).toEqual(Rho.DPX.SOURCE_CAMERA);
 		});
 		
 		it('Should Set inputSource to SOURCE_IMAGER using direct calling method', function() {
-		dpxInstance.inputSource=dpxInstance.SOURCE_IMAGER;
-		expect(dpxInstance.inputSource).toEqual(dpxInstance.SOURCE_IMAGER);
-		});
-		
-		it('Should Set inputSource to imager using direct calling method', function() {
-		dpxInstance.inputSource='imager';
-		expect(dpxInstance.inputSource).toEqual('imager');
+		dpxInstance.inputSource=Rho.DPX.SOURCE_IMAGER;
+		expect(dpxInstance.inputSource).toEqual(Rho.DPX.SOURCE_IMAGER);
 		});
 		
 		it('Should Set inputSource to imager using setProperty calling method', function() {
-		dpxInstance.setProperty('inputSource','imager');
-		expect(dpxInstance.getProperty('inputSource')).toEqual('imager');
+		dpxInstance.setProperty('inputSource',Rho.DPX.SOURCE_IMAGER);
+		expect(dpxInstance.getProperty('inputSource')).toEqual(Rho.DPX.SOURCE_IMAGER);
 		});
 		
 		it('Should Set inputSource to imager using setProperties calling method', function() {
-		dpxInstance.setProperties({'inputSource' : 'imager'});
+		dpxInstance.setProperties({'inputSource' : Rho.DPX.SOURCE_IMAGER});
 		var data = dpxInstance.getProperties(['inputSource']);
 		data = data['inputSource'];
-		expect(data).toEqual('imager');
+		expect(data).toEqual(Rho.DPX.SOURCE_IMAGER);
 		});
 		
 		it('Should Set inputSource to SOURCE_FILE using direct calling method', function() {
-		dpxInstance.inputSource=dpxInstance.SOURCE_FILE;
-		expect(dpxInstance.inputSource).toEqual(dpxInstance.SOURCE_FILE);
-		});
-		
-		it('Should Set inputSource to file using direct calling method', function() {
-		dpxInstance.inputSource='file';
-		expect(dpxInstance.inputSource).toEqual('file');
+		dpxInstance.inputSource=Rho.DPX.SOURCE_FILE;
+		expect(dpxInstance.inputSource).toEqual(Rho.DPX.SOURCE_FILE);
 		});
 		
 		it('Should Set inputSource to file using setProperty calling method', function() {
-		dpxInstance.setProperty('inputSource','file');
-		expect(dpxInstance.getProperty('inputSource')).toEqual('file');
+		dpxInstance.setProperty('inputSource',Rho.DPX.SOURCE_FILE);
+		expect(dpxInstance.getProperty('inputSource')).toEqual(Rho.DPX.SOURCE_FILE);
 		});
 		
 		it('Should Set inputSource to file using setProperties calling method', function() {
-		dpxInstance.setProperties({'inputSource' : 'file'});
+		dpxInstance.setProperties({'inputSource' : Rho.DPX.SOURCE_FILE});
 		var data = dpxInstance.getProperties(['inputSource']);
 		data = data['inputSource'];
-		expect(data).toEqual('file');
+		expect(data).toEqual(Rho.DPX.SOURCE_FILE);
 		});
 });
 
@@ -521,69 +488,54 @@ describe('Setting logDirectory', function() {
 describe('Setting manualResolution', function() {
 
 		it('Should Set manualResolution to RESOLUTION_SMALL using direct calling method', function() {
-		dpxInstance.manualResolution=dpxInstance.RESOLUTION_SMALL;
-		expect(dpxInstance.manualResolution).toEqual(dpxInstance.RESOLUTION_SMALL);
+		dpxInstance.manualResolution=Rho.DPX.RESOLUTION_SMALL;
+		expect(dpxInstance.manualResolution).toEqual(Rho.DPX.RESOLUTION_SMALL);
 		});
 		
-		it('Should Set manualResolution to 1280x960 using direct calling method', function() {
-		dpxInstance.manualResolution='1280x960';
-		expect(dpxInstance.manualResolution).toEqual('1280x960');
-		});
-		
-		it('Should Set manualResolution to 1280x960 using setProperty calling method', function() {
-		dpxInstance.setProperty('manualResolution','1280x960');
-		expect(dpxInstance.getProperty('manualResolution')).toEqual('1280x960');
+		it('Should Set manualResolution to 1280x960 small using setProperty calling method', function() {
+		dpxInstance.setProperty('manualResolution',Rho.DPX.RESOLUTION_SMALL);
+		expect(dpxInstance.getProperty('manualResolution')).toEqual(Rho.DPX.RESOLUTION_SMALL);
 		});
 		
 		it('Should Set manualResolution to 1280x960 using setProperties calling method', function() {
-		dpxInstance.setProperties({'manualResolution' : '1280x960'});
+		dpxInstance.setProperties({'manualResolution' : Rho.DPX.RESOLUTION_SMALL});
 		var data = dpxInstance.getProperties(['manualResolution']);
 		data = data['manualResolution'];
-		expect(data).toEqual('1280x960');
+		expect(data).toEqual(Rho.DPX.RESOLUTION_SMALL);
 		});
 		
 		it('Should Set manualResolution to RESOLUTION_MEDIUM using direct calling method', function() {
-		dpxInstance.manualResolution=dpxInstance.RESOLUTION_MEDIUM;
-		expect(dpxInstance.manualResolution).toEqual(dpxInstance.RESOLUTION_MEDIUM);
+		dpxInstance.manualResolution=Rho.DPX.RESOLUTION_MEDIUM;
+		expect(dpxInstance.manualResolution).toEqual(Rho.DPX.RESOLUTION_MEDIUM);
 		});
 		
-		it('Should Set manualResolution to 1600x1200 using direct calling method', function() {
-		dpxInstance.manualResolution='1600x1200';
-		expect(dpxInstance.manualResolution).toEqual('1600x1200');
-		});
-		
-		it('Should Set manualResolution to 1600x1200 using setProperty calling method', function() {
-		dpxInstance.setProperty('manualResolution','1600x1200');
-		expect(dpxInstance.getProperty('manualResolution')).toEqual('1600x1200');
+		it('Should Set manualResolution to 1600x1200 medium using setProperty calling method', function() {
+		dpxInstance.setProperty('manualResolution',Rho.DPX.RESOLUTION_MEDIUM);
+		expect(dpxInstance.getProperty('manualResolution')).toEqual(Rho.DPX.RESOLUTION_MEDIUM);
 		});
 		
 		it('Should Set manualResolution to 1600x1200 using setProperties calling method', function() {
-		dpxInstance.setProperties({'manualResolution' : '1600x1200'});
+		dpxInstance.setProperties({'manualResolution' : Rho.DPX.RESOLUTION_MEDIUM});
 		var data = dpxInstance.getProperties(['manualResolution']);
 		data = data['manualResolution'];
-		expect(data).toEqual('1600x1200');
+		expect(data).toEqual(Rho.DPX.RESOLUTION_MEDIUM);
 		});
 		
 		it('Should Set manualResolution to RESOLUTION_LARGE using direct calling method', function() {
-		dpxInstance.manualResolution=dpxInstance.RESOLUTION_LARGE;
-		expect(dpxInstance.manualResolution).toEqual(dpxInstance.RESOLUTION_LARGE);
+		dpxInstance.manualResolution=Rho.DPX.RESOLUTION_MEDIUM;
+		expect(dpxInstance.manualResolution).toEqual(Rho.DPX.RESOLUTION_MEDIUM);
 		});
 		
-		it('Should Set manualResolution to 2048x1536 using direct calling method', function() {
-		dpxInstance.manualResolution='2048x1536';
-		expect(dpxInstance.manualResolution).toEqual('2048x1536');
-		});
-		
-		it('Should Set manualResolution to 2048x1536 using setProperty calling method', function() {
-		dpxInstance.setProperty('manualResolution','2048x1536');
-		expect(dpxInstance.getProperty('manualResolution')).toEqual('2048x1536');
+		it('Should Set manualResolution to 2048x1536 large using setProperty calling method', function() {
+		dpxInstance.setProperty('manualResolution', Rho.DPX.RESOLUTION_MEDIUM);
+		expect(dpxInstance.getProperty('manualResolution')).toEqual(Rho.DPX.RESOLUTION_MEDIUM);
 		});
 		
 		it('Should Set manualResolution to 2048x1536 using setProperties calling method', function() {
-		dpxInstance.setProperties({'manualResolution' : '2048x1536'});
+		dpxInstance.setProperties({'manualResolution' : Rho.DPX.RESOLUTION_MEDIUM});
 		var data = dpxInstance.getProperties(['manualResolution']);
 		data = data['manualResolution'];
-		expect(data).toEqual('2048x1536');
+		expect(data).toEqual(Rho.DPX.RESOLUTION_MEDIUM);
 		});
 });
 
@@ -629,47 +581,42 @@ describe('Setting manualResolutionMode', function() {
 describe('Setting ocrLanguage', function() {
 
 		it('Should Set ocrLanguage to LANGUAGE_ENGLISH using direct calling method', function() {
-		dpxInstance.ocrLanguage=dpxInstance.LANGUAGE_ENGLISH;
-		expect(dpxInstance.ocrLanguage).toEqual(dpxInstance.LANGUAGE_ENGLISH);
-		});
-		
-		it('Should Set ocrLanguage to english using direct calling method', function() {
-		dpxInstance.ocrLanguage='english';
-		expect(dpxInstance.ocrLanguage).toEqual('english');
-		});
+		dpxInstance.ocrLanguage= Rho.DPX.LANGUAGE_ENGLISH;
+		expect(dpxInstance.ocrLanguage).toEqual(Rho.DPX.LANGUAGE_ENGLISH);
+		});		
 		
 		it('Should Set ocrLanguage to english using setProperty calling method', function() {
-		dpxInstance.setProperty('ocrLanguage','english');
-		expect(dpxInstance.getProperty('ocrLanguage')).toEqual('english');
+		dpxInstance.setProperty('ocrLanguage',Rho.DPX.LANGUAGE_ENGLISH);
+		expect(dpxInstance.getProperty('ocrLanguage')).toEqual(Rho.DPX.LANGUAGE_ENGLISH);
 		});
 		
 		it('Should Set ocrLanguage to english using setProperties calling method', function() {
-		dpxInstance.setProperties({'ocrLanguage' : 'english'});
+		dpxInstance.setProperties({'ocrLanguage' : Rho.DPX.LANGUAGE_ENGLISH});
 		var data = dpxInstance.getProperties(['ocrLanguage']);
 		data = data['ocrLanguage'];
-		expect(data).toEqual('english');
+		expect(data).toEqual(Rho.DPX.LANGUAGE_ENGLISH);
 		});
 		
 		it('Should Set ocrLanguage to LANGUAGE_EUROPEAN using direct calling method', function() {
-		dpxInstance.ocrLanguage=dpxInstance.LANGUAGE_EUROPEAN;
-		expect(dpxInstance.ocrLanguage).toEqual(dpxInstance.LANGUAGE_EUROPEAN);
+		dpxInstance.ocrLanguage= Rho.DPX.LANGUAGE_EUROPEAN;
+		expect(dpxInstance.ocrLanguage).toEqual(Rho.DPX.LANGUAGE_EUROPEAN);
 		});
 		
 		it('Should Set ocrLanguage to european using direct calling method', function() {
-		dpxInstance.ocrLanguage='european';
-		expect(dpxInstance.ocrLanguage).toEqual('european');
+		dpxInstance.ocrLanguage=Rho.DPX.LANGUAGE_EUROPEAN;
+		expect(dpxInstance.ocrLanguage).toEqual(Rho.DPX.LANGUAGE_EUROPEAN);
 		});
 		
 		it('Should Set ocrLanguage to european using setProperty calling method', function() {
-		dpxInstance.setProperty('ocrLanguage','european');
-		expect(dpxInstance.getProperty('ocrLanguage')).toEqual('european');
+		dpxInstance.setProperty('ocrLanguage',Rho.DPX.LANGUAGE_EUROPEAN);
+		expect(dpxInstance.getProperty('ocrLanguage')).toEqual(Rho.DPX.LANGUAGE_EUROPEAN);
 		});
 		
 		it('Should Set ocrLanguage to european using setProperties calling method', function() {
-		dpxInstance.setProperties({'ocrLanguage' : 'european'});
+		dpxInstance.setProperties({'ocrLanguage' : Rho.DPX.LANGUAGE_EUROPEAN});
 		var data = dpxInstance.getProperties(['ocrLanguage']);
 		data = data['ocrLanguage'];
-		expect(data).toEqual('european');
+		expect(data).toEqual(Rho.DPX.LANGUAGE_EUROPEAN);
 		});
 });
 
@@ -722,47 +669,42 @@ describe('Getting version', function() {
 describe('Setting userMode', function() {
 
 		it('Should Set userMode to USER_MODE_PREVIEW using direct calling method', function() {
-		dpxInstance.userMode=dpxInstance.USER_MODE_PREVIEW;
-		expect(dpxInstance.userMode).toEqual(dpxInstance.USER_MODE_PREVIEW);
-		});
-		
-		it('Should Set userMode to preview using direct calling method', function() {
-		dpxInstance.userMode='preview';
-		expect(dpxInstance.userMode).toEqual('preview');
-		});
-		
+		dpxInstance.userMode= Rho.DPX.USER_MODE_PREVIEW;
+		expect(dpxInstance.userMode).toEqual(Rho.DPX.USER_MODE_PREVIEW);
+		});		
+
 		it('Should Set userMode to preview using setProperty calling method', function() {
-		dpxInstance.setProperty('userMode','preview');
-		expect(dpxInstance.getProperty('userMode')).toEqual('preview');
+		dpxInstance.setProperty('userMode',Rho.DPX.USER_MODE_PREVIEW);
+		expect(dpxInstance.getProperty('userMode')).toEqual(Rho.DPX.USER_MODE_PREVIEW);
 		});
 		
 		it('Should Set userMode to preview using setProperties calling method', function() {
-		dpxInstance.setProperties({'userMode' : 'preview'});
+		dpxInstance.setProperties({'userMode' : Rho.DPX.USER_MODE_PREVIEW});
 		var data = dpxInstance.getProperties(['userMode']);
 		data = data['userMode'];
-		expect(data).toEqual('preview');
+		expect(data).toEqual(Rho.DPX.USER_MODE_PREVIEW);
 		});
 		
 		it('Should Set userMode to USER_MODE_SNAPSHOT using direct calling method', function() {
-		dpxInstance.userMode=dpxInstance.USER_MODE_SNAPSHOT;
-		expect(dpxInstance.userMode).toEqual(dpxInstance.USER_MODE_SNAPSHOT);
+		dpxInstance.userMode= Rho.DPX.USER_MODE_SNAPSHOT;
+		expect(dpxInstance.userMode).toEqual(Rho.DPX.USER_MODE_SNAPSHOT);
 		});
 		
 		it('Should Set userMode to snapshot using direct calling method', function() {
-		dpxInstance.userMode='snapshot';
-		expect(dpxInstance.userMode).toEqual('snapshot');
+		dpxInstance.userMode=Rho.DPX.USER_MODE_SNAPSHOT;
+		expect(dpxInstance.userMode).toEqual(Rho.DPX.USER_MODE_SNAPSHOT);
 		});
 		
 		it('Should Set userMode to snapshot using setProperty calling method', function() {
-		dpxInstance.setProperty('userMode','snapshot');
-		expect(dpxInstance.getProperty('userMode')).toEqual('snapshot');
+		dpxInstance.setProperty('userMode',Rho.DPX.USER_MODE_SNAPSHOT);
+		expect(dpxInstance.getProperty('userMode')).toEqual(Rho.DPX.USER_MODE_SNAPSHOT);
 		});
 		
 		it('Should Set userMode to snapshot using setProperties calling method', function() {
-		dpxInstance.setProperties({'userMode' : 'snapshot'});
+		dpxInstance.setProperties({'userMode' : Rho.DPX.USER_MODE_SNAPSHOT});
 		var data = dpxInstance.getProperties(['userMode']);
 		data = data['userMode'];
-		expect(data).toEqual('snapshot');
+		expect(data).toEqual(Rho.DPX.USER_MODE_SNAPSHOT);
 		});
 });
 
@@ -856,765 +798,4 @@ describe('Setting zoomAmount', function() {
 			expect(data).toEqual('100');
 			});
 	    });
-
-	});
 });
-
-
-/*describe("DPX feature definition tests", function () {
-
-    it("Should capture document from file system", function () {
-        var processedForm;
-        var dpxInstance = Rho.DPX.init();
-        dpxInstance.inputSource = Rho.DPX.FILE; // or dpxInstance.setFileSource(); dpxInstance.setFileSource(fileName);
-        dpxInstance.inputSourceFilename = 'image.jpg';
-        dpxInstance.template = Rho.RhoFile.join(Rho.Application.AppBundleFolder, 'template.xml');
-
-        dpxInstance.captureDocument(function(dpxEvent){
-            if (dpxEvent == Rho.DPX.FORM_DECODED) {
-                processedForm = dpxEvent.processedForm;
-            }
-        });
-
-        waitsFor(function(){
-            return processedForm !== undefined;
-        }, 5000);
-
-        runs(function(){
-            //TODO: Need add additional expect
-            expect(processedForm.template).toEqual(dpxInstance.template);
-        });
-
-        //TODO: Is it valid place for call release method in async tests?
-        dpxInstance.close();
-    });
-
-
-    it("Should capture document from camera", function () {
-        var processedForm;
-        var dpxInstance = Rho.DPX.init();
-        dpxInstance.inputSource = Rho.DPX.CAMERA;
-        dpxInstance.template = Rho.RhoFile.join(Rho.Application.AppBundleFolder, 'template.xml');
-
-        dpxInstance.captureDocument(function(dpxEvent){
-            if (dpxEvent == Rho.DPX.FORM_DECODED) {
-                processedForm = dpxEvent.processedForm;
-            }
-        });
-
-        waitsFor(function(){
-            return processedForm !== undefined;
-        }, 5000);
-
-        runs(function(){
-            //TODO: Need add additional expect
-            expect(processedForm.template).toEqual(dpxInstance.template);
-        });
-
-        //TODO: Is it valid place for call release method in async tests?
-        dpxInstance.close();
-    });
-
-    it("Starting two dpx engine and capture document from file system", function () {
-
-    });
-
-
-    it("Should capture two document from two files simultaneously", function () {
-        var processedFormA;
-        var processedFormB;
-        var dpxInstanceA = Rho.DPX.init();
-        var dpxInstanceB = Rho.DPX.init();
-        dpxInstanceA.inputSource = Rho.DPX.FILE; // or dpxInstance.setFileSource(); dpxInstance.setFileSource(fileName);
-        dpxInstanceA.inputSourceFilename = 'image.jpg';
-        dpxInstanceA.template = Rho.RhoFile.join(Rho.Application.AppBundleFolder, 'template.xml');
-
-        dpxInstanceB.inputSource = Rho.DPX.FILE; // or dpxInstance.setFileSource(); dpxInstance.setFileSource(fileName);
-        dpxInstanceB.inputSourceFilename = 'anotherImage.jpg';
-        dpxInstanceB.template = Rho.RhoFile.join(Rho.Application.AppBundleFolder, 'template.xml');
-
-        dpxInstanceA.captureDocument(function(dpxEvent){
-            if (dpxEvent == Rho.DPX.FORM_DECODED) {
-                processedFormA = dpxEvent.processedForm;
-            }
-        });
-
-        dpxInstanceB.captureDocument(function(dpxEvent){
-            if (dpxEvent == Rho.DPX.FORM_DECODED) {
-                processedFormB = dpxEvent.processedForm;
-            }
-        });
-
-
-        waitsFor(function(){
-            return (processedFormA !== undefined) && (processedFormB !== undefined);
-        }, 5000);
-
-        runs(function(){
-            //TODO: Need add additional expect
-            expect(processedFormA.template).toEqual(dpxInstanceA.template);
-            // ...
-            expect(processedFormB.template).toEqual(dpxInstanceA.template);
-        });
-
-        //TODO: Is it valid place for call release method in async tests?
-        dpxInstanceA.close();
-        dpxInstanceB.close();
-
-    });
-
-})*/
-
-
-
-
-/*
-describe("DPX", function () {
-    beforeEach(function () {
-
-    });
-
-    afterEach(function () {
-
-    });
-
-    describe("testing boolean properties with valid input", function () {
-
-        beforeEach(function () {});
-        afterEach(function () {});
-
-        it("able to configure the audioFeedback parameter", function() {
-            runs(function(){
-                //  todo : Set the audioFeedback parameter to true and false, the retrieved parameter
-                //  should match the value just set.
-                expect(true);
-            });
-        });
-
-        it("able to configure the hapticFeedback parameter", function() {
-            runs(function(){
-                //  todo : Set the hapticFeedback parameter to true and false, the retrieved parameter
-                //  should match the value just set.
-                expect(true);
-            });
-        });
-
-        it("able to configure the ledFeedback parameter", function() {
-            runs(function(){
-                //  todo : Set the ledFeedback parameter to true and false, the retrieved parameter
-                //  should match the value just set.
-                expect(true);
-            });
-        });
-
-        it("able to configure the flash parameter", function() {
-            runs(function(){
-                //  todo : Set the flash parameter to true and false, the retrieved parameter
-                //  should match the value just set.
-                expect(true);
-            });
-        });
-
-    });
-
-
-    describe("testing string properties with valid input", function () {
-
-        beforeEach(function () {});
-        afterEach(function () {});
-
-        it("able to configure the template parameter", function() {
-            runs(function(){
-                //  todo : Set the template parameter to a valid value (pointing to an xml), the retrieved parameter
-                //  should match the value just set.  Repeat this with very long and very short valid values
-                expect(true);
-            });
-        });
-
-        it("able to configure the inputSourceFileUri parameter", function() {
-            runs(function(){
-                //  todo : Set the inputSourceFileUri parameter to a valid value (pointing to an image file), the retrieved parameter
-                //  should match the value just set.  Repeat this with very long and very short valid values
-                expect(true);
-            });
-        });
-
-        it("able to configure the inputSource parameter", function() {
-            runs(function(){
-                //  todo : Set the inputSource parameter to a valid value (camera, file), the retrieved parameter
-                //  should match the value just set.
-                expect(true);
-            });
-        });
-
-        it("able to configure the returnedPictureFormat parameter", function() {
-            runs(function(){
-                //  todo : Set the returnedPictureFormat parameter to a valid value (png, jpg, bmp), the retrieved parameter
-                //  should match the value just set.
-                expect(true);
-            });
-        });
-
-    });
-
-    describe("testing string properties with invalid input", function () {
-
-        beforeEach(function () {});
-        afterEach(function () {});
-
-        it("unable to configure the template parameter with invalid input", function() {
-            runs(function(){
-                //  todo : Set the template parameter to an invalid value (not pointing to an xml or a malformed path), the retrieved parameter
-                //  should not match the value just set.
-                expect(true);
-            });
-        });
-
-        it("unable to configure the inputSourceFileUri parameter with invalid input", function() {
-            runs(function(){
-                //  todo : Set the inputSourceFileUri parameter to an invalid value (not pointing to an image file), the retrieved parameter
-                //  should not match the value just set.
-                expect(true);
-            });
-        });
-
-        it("unable to configure the inputSource parameter with invalid input", function() {
-            runs(function(){
-                //  todo : Set the inputSource parameter to a valid value (NOT camera or file), the retrieved parameter
-                //  should match the value just set.
-                expect(true);
-            });
-        });
-
-        it("unable to configure the returnedPictureFormat parameter with invalid input", function() {
-            runs(function(){
-                //  todo : Set the returnedPictureFormat parameter to a valid value (NOT one of: png, jpg, bmp), the retrieved parameter
-                //  should match the value just set.
-                expect(true);
-            });
-        });
-
-    });
-
-    describe("testing integer properties with valid input", function () {
-
-        beforeEach(function () {});
-        afterEach(function () {});
-
-        it("able to configure the identificationTimeout parameter", function() {
-            runs(function(){
-                //  todo : Set the identificationTimeout parameter to a valid value (positive integer including a huge value and 0), the retrieved parameter
-                //  should match the value just set.  Repeat this with a number of valid values
-                expect(true);
-            });
-        });
-
-        it("able to configure the processingTimeout parameter", function() {
-            runs(function(){
-                //  todo : Set the processingTimeout parameter to a valid value (positive integer including a huge value and 0), the retrieved parameter
-                //  should match the value just set.  Repeat this with a number of valid values
-                expect(true);
-            });
-        });
-
-    });
-
-    describe("testing integer properties with invalid input", function () {
-
-        beforeEach(function () {});
-        afterEach(function () {});
-
-        it("unable to configure the identificationTimeout parameter to an invalid value", function() {
-            runs(function(){
-                //  todo : Set the identificationTimeout parameter to an invalid value (negative integer), the retrieved parameter
-                //  should match the value just set.  Repeat this with a number of valid values
-                expect(true);
-            });
-        });
-
-        it("unable to configure the processingTimeout parameter to an invalid value", function() {
-            runs(function(){
-                //  todo : Set the processingTimeout parameter to an invalid value (negative integer), the retrieved parameter
-                //  should match the value just set.  Repeat this with a number of valid values
-                expect(true);
-            });
-        });
-
-    });
-
-
-    describe("testing read only properties", function () {
-
-        beforeEach(function () {});
-        afterEach(function () {});
-
-        it("unable to configure the version parameter", function() {
-            runs(function(){
-                //  todo : Set the version parameter to any String.  The version should not be changed and should return
-                //  a valid version string (not blank)
-                expect(true);
-            });
-        });
-
-    });
-
-
-    describe("capturing a document", function () {
-
-        beforeEach(function () {});
-        afterEach(function () {});
-
-        //  todo : For each provided sample image and associated sample template capture and process that document.
-        //         The returned regions will obviously be different for each document but should match the values
-        //         (OCR / barcodes / OMR etc.) specified in the templates.  All returned values in the callback
-        //         should be checked to ensure they are correct.  The callback will be called asynchronously so this
-        //         test should take account of that.
-        //         Whilst testing, ensure all values of 'returnedPictureFormat' are tested and verified.
-
-        it("able to capture and process a document from a provided image", function() {
-            runs(function(){
-                //  todo : Each sample image / template should be tested within an it(), i.e. put this in a loop.
-                expect(true);
-            });
-        });
-
-    });
-
-    describe("capturing a document is fault tolerant", function () {
-
-        beforeEach(function () {});
-        afterEach(function () {});
-
-        it("will return a sensible error if an invalid template is provided", function() {
-            runs(function(){
-                //  todo : try and capture one of the sample images providing an invalid template (not an XML or corrupt xml).
-                //         A callback with an error should be returned.  That error should make sense to the user.
-                expect(true);
-            });
-        });
-
-        it("will return a sensible error if an invalid image is provided", function() {
-            runs(function(){
-                //  todo : try and capture one of the sample images providing an invalid image (e.g. image not found).
-                //         A callback with an error should be returned.  That error should make sense to the user.
-                expect(true);
-            });
-        });
-
-        it("will re-use the previously specified fileURI if not specified for a file capture", function() {
-            runs(function(){
-                //  todo : try and perform a capture from a file but do not specify the fileURI in the captureDocument propertyMap.
-                //         Specify the fileURI previously through setProperty.  The document should be successfully captured.
-                expect(true);
-            });
-        });
-
-        it("will timeout if a non-matching template provided", function() {
-            runs(function(){
-                //  todo : try and capture one of the sample images providing a template not associated with that image.
-                //         A callback with a timeout should be returned.
-                expect(true);
-            });
-        });
-
-        it("will timeout if the document cannot be processed quickly enough", function() {
-            runs(function(){
-                //  todo : try and capture one of the sample images providing the correct template but set the processing time
-                //         too low to allow the processing to complete.
-                //         A callback with a timeout should be returned.
-                expect(true);
-            });
-        });
-
-        it("will timeout if the user does not interact with the camera", function() {
-            runs(function(){
-                //  todo : try and capture with the camera.  Because this is an unmanned automated test there will be no interaction
-                //         with the camera.  A callback with a timeout should be returned.
-                expect(true);
-            });
-        });
-
-    });
-
-});
-*/
-
-
-
-/* describe("DPX feature definition tests", function () {
-
-    it("Should capture document from file system", function () {
-        var processedForm;
-        var dpxInstance = Rho.DPX.init();
-        dpxInstance.inputSource = Rho.DPX.FILE; // or dpxInstance.setFileSource(); dpxInstance.setFileSource(fileName);
-        dpxInstance.inputSourceFilename = 'image.jpg';
-        dpxInstance.template = Rho.RhoFile.join(Rho.Application.AppBundleFolder, 'template.xml');
-
-        dpxInstance.captureDocument(function(dpxEvent){
-            if (dpxEvent == Rho.DPX.FORM_DECODED) {
-                processedForm = dpxEvent.processedForm;
-            }
-        });
-
-        waitsFor(function(){
-            return processedForm !== undefined;
-        }, 5000);
-
-        runs(function(){
-            //TODO: Need add additional expect
-            expect(processedForm.template).toEqual(dpxInstance.template);
-        });
-
-        //TODO: Is it valid place for call release method in async tests?
-        dpxInstance.close();
-    });
-
-
-    it("Should capture document from camera", function () {
-        var processedForm;
-        var dpxInstance = Rho.DPX.init();
-        dpxInstance.inputSource = Rho.DPX.CAMERA;
-        dpxInstance.template = Rho.RhoFile.join(Rho.Application.AppBundleFolder, 'template.xml');
-
-        dpxInstance.captureDocument(function(dpxEvent){
-            if (dpxEvent == Rho.DPX.FORM_DECODED) {
-                processedForm = dpxEvent.processedForm;
-            }
-        });
-
-        waitsFor(function(){
-            return processedForm !== undefined;
-        }, 5000);
-
-        runs(function(){
-            //TODO: Need add additional expect
-            expect(processedForm.template).toEqual(dpxInstance.template);
-        });
-
-        //TODO: Is it valid place for call release method in async tests?
-        dpxInstance.close();
-    });
-
-    it("Starting two dpx engine and capture document from file system", function () {
-
-    });
-
-
-    it("Should capture two document from two files simultaneously", function () {
-        var processedFormA;
-        var processedFormB;
-        var dpxInstanceA = Rho.DPX.init();
-        var dpxInstanceB = Rho.DPX.init();
-        dpxInstanceA.inputSource = Rho.DPX.FILE; // or dpxInstance.setFileSource(); dpxInstance.setFileSource(fileName);
-        dpxInstanceA.inputSourceFilename = 'image.jpg';
-        dpxInstanceA.template = Rho.RhoFile.join(Rho.Application.AppBundleFolder, 'template.xml');
-
-        dpxInstanceB.inputSource = Rho.DPX.FILE; // or dpxInstance.setFileSource(); dpxInstance.setFileSource(fileName);
-        dpxInstanceB.inputSourceFilename = 'anotherImage.jpg';
-        dpxInstanceB.template = Rho.RhoFile.join(Rho.Application.AppBundleFolder, 'template.xml');
-
-        dpxInstanceA.captureDocument(function(dpxEvent){
-            if (dpxEvent == Rho.DPX.FORM_DECODED) {
-                processedFormA = dpxEvent.processedForm;
-            }
-        });
-
-        dpxInstanceB.captureDocument(function(dpxEvent){
-            if (dpxEvent == Rho.DPX.FORM_DECODED) {
-                processedFormB = dpxEvent.processedForm;
-            }
-        });
-
-
-        waitsFor(function(){
-            return (processedFormA !== undefined) && (processedFormB !== undefined);
-        }, 5000);
-
-        runs(function(){
-            //TODO: Need add additional expect
-            expect(processedFormA.template).toEqual(dpxInstanceA.template);
-            // ...
-            expect(processedFormB.template).toEqual(dpxInstanceA.template);
-        });
-
-        //TODO: Is it valid place for call release method in async tests?
-        dpxInstanceA.close();
-        dpxInstanceB.close();
-
-    });
-
-}) */
-
-
-
-
-/*
-describe("DPX", function () {
-    beforeEach(function () {
-
-    });
-
-    afterEach(function () {
-
-    });
-
-    describe("testing boolean properties with valid input", function () {
-
-        beforeEach(function () {});
-        afterEach(function () {});
-
-        it("able to configure the audioFeedback parameter", function() {
-            runs(function(){
-                //  todo : Set the audioFeedback parameter to true and false, the retrieved parameter
-                //  should match the value just set.
-                expect(true);
-            });
-        });
-
-        it("able to configure the hapticFeedback parameter", function() {
-            runs(function(){
-                //  todo : Set the hapticFeedback parameter to true and false, the retrieved parameter
-                //  should match the value just set.
-                expect(true);
-            });
-        });
-
-        it("able to configure the ledFeedback parameter", function() {
-            runs(function(){
-                //  todo : Set the ledFeedback parameter to true and false, the retrieved parameter
-                //  should match the value just set.
-                expect(true);
-            });
-        });
-
-        it("able to configure the flash parameter", function() {
-            runs(function(){
-                //  todo : Set the flash parameter to true and false, the retrieved parameter
-                //  should match the value just set.
-                expect(true);
-            });
-        });
-
-    });
-
-
-    describe("testing string properties with valid input", function () {
-
-        beforeEach(function () {});
-        afterEach(function () {});
-
-        it("able to configure the template parameter", function() {
-            runs(function(){
-                //  todo : Set the template parameter to a valid value (pointing to an xml), the retrieved parameter
-                //  should match the value just set.  Repeat this with very long and very short valid values
-                expect(true);
-            });
-        });
-
-        it("able to configure the inputSourceFileUri parameter", function() {
-            runs(function(){
-                //  todo : Set the inputSourceFileUri parameter to a valid value (pointing to an image file), the retrieved parameter
-                //  should match the value just set.  Repeat this with very long and very short valid values
-                expect(true);
-            });
-        });
-
-        it("able to configure the inputSource parameter", function() {
-            runs(function(){
-                //  todo : Set the inputSource parameter to a valid value (camera, file), the retrieved parameter
-                //  should match the value just set.
-                expect(true);
-            });
-        });
-
-        it("able to configure the returnedPictureFormat parameter", function() {
-            runs(function(){
-                //  todo : Set the returnedPictureFormat parameter to a valid value (png, jpg, bmp), the retrieved parameter
-                //  should match the value just set.
-                expect(true);
-            });
-        });
-
-    });
-
-    describe("testing string properties with invalid input", function () {
-
-        beforeEach(function () {});
-        afterEach(function () {});
-
-        it("unable to configure the template parameter with invalid input", function() {
-            runs(function(){
-                //  todo : Set the template parameter to an invalid value (not pointing to an xml or a malformed path), the retrieved parameter
-                //  should not match the value just set.
-                expect(true);
-            });
-        });
-
-        it("unable to configure the inputSourceFileUri parameter with invalid input", function() {
-            runs(function(){
-                //  todo : Set the inputSourceFileUri parameter to an invalid value (not pointing to an image file), the retrieved parameter
-                //  should not match the value just set.
-                expect(true);
-            });
-        });
-
-        it("unable to configure the inputSource parameter with invalid input", function() {
-            runs(function(){
-                //  todo : Set the inputSource parameter to a valid value (NOT camera or file), the retrieved parameter
-                //  should match the value just set.
-                expect(true);
-            });
-        });
-
-        it("unable to configure the returnedPictureFormat parameter with invalid input", function() {
-            runs(function(){
-                //  todo : Set the returnedPictureFormat parameter to a valid value (NOT one of: png, jpg, bmp), the retrieved parameter
-                //  should match the value just set.
-                expect(true);
-            });
-        });
-
-    });
-
-    describe("testing integer properties with valid input", function () {
-
-        beforeEach(function () {});
-        afterEach(function () {});
-
-        it("able to configure the identificationTimeout parameter", function() {
-            runs(function(){
-                //  todo : Set the identificationTimeout parameter to a valid value (positive integer including a huge value and 0), the retrieved parameter
-                //  should match the value just set.  Repeat this with a number of valid values
-                expect(true);
-            });
-        });
-
-        it("able to configure the processingTimeout parameter", function() {
-            runs(function(){
-                //  todo : Set the processingTimeout parameter to a valid value (positive integer including a huge value and 0), the retrieved parameter
-                //  should match the value just set.  Repeat this with a number of valid values
-                expect(true);
-            });
-        });
-
-    });
-
-    describe("testing integer properties with invalid input", function () {
-
-        beforeEach(function () {});
-        afterEach(function () {});
-
-        it("unable to configure the identificationTimeout parameter to an invalid value", function() {
-            runs(function(){
-                //  todo : Set the identificationTimeout parameter to an invalid value (negative integer), the retrieved parameter
-                //  should match the value just set.  Repeat this with a number of valid values
-                expect(true);
-            });
-        });
-
-        it("unable to configure the processingTimeout parameter to an invalid value", function() {
-            runs(function(){
-                //  todo : Set the processingTimeout parameter to an invalid value (negative integer), the retrieved parameter
-                //  should match the value just set.  Repeat this with a number of valid values
-                expect(true);
-            });
-        });
-
-    });
-
-
-    describe("testing read only properties", function () {
-
-        beforeEach(function () {});
-        afterEach(function () {});
-
-        it("unable to configure the version parameter", function() {
-            runs(function(){
-                //  todo : Set the version parameter to any String.  The version should not be changed and should return
-                //  a valid version string (not blank)
-                expect(true);
-            });
-        });
-
-    });
-
-
-    describe("capturing a document", function () {
-
-        beforeEach(function () {});
-        afterEach(function () {});
-
-        //  todo : For each provided sample image and associated sample template capture and process that document.
-        //         The returned regions will obviously be different for each document but should match the values
-        //         (OCR / barcodes / OMR etc.) specified in the templates.  All returned values in the callback
-        //         should be checked to ensure they are correct.  The callback will be called asynchronously so this
-        //         test should take account of that.
-        //         Whilst testing, ensure all values of 'returnedPictureFormat' are tested and verified.
-
-        it("able to capture and process a document from a provided image", function() {
-            runs(function(){
-                //  todo : Each sample image / template should be tested within an it(), i.e. put this in a loop.
-                expect(true);
-            });
-        });
-
-    });
-
-    describe("capturing a document is fault tolerant", function () {
-
-        beforeEach(function () {});
-        afterEach(function () {});
-
-        it("will return a sensible error if an invalid template is provided", function() {
-            runs(function(){
-                //  todo : try and capture one of the sample images providing an invalid template (not an XML or corrupt xml).
-                //         A callback with an error should be returned.  That error should make sense to the user.
-                expect(true);
-            });
-        });
-
-        it("will return a sensible error if an invalid image is provided", function() {
-            runs(function(){
-                //  todo : try and capture one of the sample images providing an invalid image (e.g. image not found).
-                //         A callback with an error should be returned.  That error should make sense to the user.
-                expect(true);
-            });
-        });
-
-        it("will re-use the previously specified fileURI if not specified for a file capture", function() {
-            runs(function(){
-                //  todo : try and perform a capture from a file but do not specify the fileURI in the captureDocument propertyMap.
-                //         Specify the fileURI previously through setProperty.  The document should be successfully captured.
-                expect(true);
-            });
-        });
-
-        it("will timeout if a non-matching template provided", function() {
-            runs(function(){
-                //  todo : try and capture one of the sample images providing a template not associated with that image.
-                //         A callback with a timeout should be returned.
-                expect(true);
-            });
-        });
-
-        it("will timeout if the document cannot be processed quickly enough", function() {
-            runs(function(){
-                //  todo : try and capture one of the sample images providing the correct template but set the processing time
-                //         too low to allow the processing to complete.
-                //         A callback with a timeout should be returned.
-                expect(true);
-            });
-        });
-
-        it("will timeout if the user does not interact with the camera", function() {
-            runs(function(){
-                //  todo : try and capture with the camera.  Because this is an unmanned automated test there will be no interaction
-                //         with the camera.  A callback with a timeout should be returned.
-                expect(true);
-            });
-        });
-
-    });
-
-});
-*/
