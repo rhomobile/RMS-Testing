@@ -1,9 +1,7 @@
 
 # sdkversion: 4.0.0
 sdk: "../../../../rhodes"
-
 name: new_orm_spec_js
-# app_type: rhoelements
 version: 1.0
 vendor: rhomobile
 build: release
@@ -26,9 +24,10 @@ android:
 # symbian:
 #   uid: '0xe1a1ef92'
 
-extensions:
-- json
-
 paths:
   extensions:
-  - ../../../../../Motorola-Extensions/extensions
+  - ../../../../rhoconnect-client/ext
+
+extensions:
+- json
+- rhoconnect-client

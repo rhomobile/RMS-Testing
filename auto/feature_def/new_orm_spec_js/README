@@ -1,11 +1,11 @@
 To run js spec:
 
-* Checkout rhodes to branch "neworm_modeldef_js"
+* Checkout rhodes to branch "neworm_dev"
 
 * Run from auto/feature_def/new_orm_spec_js directory the following command
 
   rake run:android:spec
 
-* spec results in a bunch of *.xml files, emulator logs in RhoLogSpec.txt
+* spec results are in a bunch of *.xml files, emulator logs in RhoLogSpec.txt
 
 
