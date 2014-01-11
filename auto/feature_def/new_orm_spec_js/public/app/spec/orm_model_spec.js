@@ -4,34 +4,10 @@
 // OrmModel(ST)
 // OrmModel(PropertyBag)
 
-var Model;
-var object;
-var db = null;
-
-var cleanVars = function(object) {
-  var vars = object.vars();
-  var cleanVars = {};
-  for (var key in vars) {
-    if (vars.hasOwnProperty(key)) {
-      if (key !== 'object' && key !== 'source_id') {
-        cleanVars[key] = vars[key];
-      }
-    }
-  }
-  return cleanVars;
-};
-
 describe("<model's object>", function() {
-  function reset() {
-    db = Rho.ORMHelper.dbConnection("local");
-    Rho.ORM.clear();
-    var partitions = Rho.ORMHelper.getDbPartitions();
-    $.each(partitions, function(index, db2) {
-        db2.$execute_sql("DELETE FROM SOURCES");
-        db2.$execute_sql("DELETE FROM OBJECT_VALUES");
-        db2.$execute_sql("DELETE FROM CHANGED_VALUES");
-    });
-  };
+  var Model;
+  var object;
+  var db = null;
 
   var modelDef = function(model){
     model.modelName('Product'),
@@ -42,6 +18,17 @@ describe("<model's object>", function() {
     model.modelName("Item");
     model.property("key","string");
     model.set("partition","local");
+  };
+
+  function reset() {
+    db = Rho.ORMHelper.dbConnection("local");
+    Rho.ORM.clear();
+    var partitions = Rho.ORMHelper.getDbPartitions();
+    $.each(partitions, function(index, db2) {
+        db2.$execute_sql("DELETE FROM SOURCES");
+        db2.$execute_sql("DELETE FROM OBJECT_VALUES");
+        db2.$execute_sql("DELETE FROM CHANGED_VALUES");
+    });
   };
 
   beforeEach(function(){

@@ -53,7 +53,7 @@ function isAndroidOrApplePlatform() {
 
 //Add user log to log file.
 var writeIntoLog = function (desc, data){
-		
+
 }
 
 function leftZeroFill(number, targetLength) {
@@ -100,9 +100,9 @@ var displayResult = function (desc, data){
 
     for(var cnt = 0 ; cnt < lines.length; cnt++ )
     {
-       list.appendChild(document.createElement("LI")).appendChild(document.createTextNode(lines[cnt]));    
+       list.appendChild(document.createElement("LI")).appendChild(document.createTextNode(lines[cnt]));
     }
-    
+
     document.getElementById("myList").appendChild(node);
 }
 
@@ -122,22 +122,22 @@ function getRandomName()
 
 //Add Html Element Dynamically
 function add(type) {
- 
+
     //Create an input type dynamically.
     var element = document.createElement("input");
- 
+
     //Assign different attributes to the element.
     element.setAttribute("type", type);
     element.setAttribute("value", type);
     element.setAttribute("name", type);
     element.setAttribute("id", type);
- 
- 
+
+
     var foo = document.getElementById("fooBar");
- 
+
     //Append the element in page (in span).
     foo.appendChild(element);
- 
+
 }
 
 function isTestApplicable (anArray){
@@ -157,10 +157,32 @@ specHelpers.loadEvent = function()
 	var outputElement = document.createElement('div');
 	outputElement.id = 'output'
 	outputElement.style = 'display:none';
-	
+
 	document.body.appendChild(title);
 //	document.body.appendChild(div);
 	document.body.appendChild(ul);
 	document.body.appendChild(outputElement);
 }
 window.addEventListener('DOMContentLoaded', specHelpers.loadEvent);
+
+
+//////////////////////////
+// TODO: Old ORM specific
+function getModelSource(modelName) {
+    return Opal.Rho._scope.RhoConfig.$sources().map[modelName];
+}
+
+var cleanVars = function(object) {
+  var vars = object.vars();
+  var cleanVars = {};
+  for (var key in vars) {
+    if (vars.hasOwnProperty(key)) {
+      if (key !== 'object' && key !== 'source_id') {
+        cleanVars[key] = vars[key];
+      }
+    }
+  }
+  return cleanVars;
+};
+
+

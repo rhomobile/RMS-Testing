@@ -2,20 +2,6 @@
 // <ORM module specs>
 // <ORM Db Reset specs>
 
-var db = null;
-var cleanVars = function(object) {
-  var vars = object.vars();
-  var cleanVars = {};
-  for (var key in vars) {
-    if (vars.hasOwnProperty(key)) {
-      if (key !== 'object' && key !== 'source_id') {
-        cleanVars[key] = vars[key];
-      }
-    }
-  }
-  return cleanVars;
-};
-
 describe("<ORM module specs>", function() {
   var reset = function() {
     db = Rho.ORMHelper.dbConnection("local");
@@ -31,7 +17,7 @@ describe("<ORM module specs>", function() {
     Rho.ORM.clear();
   };
 
-  beforeEach(function(){
+  beforeEach(function() {
     reset();
   });
 
@@ -48,7 +34,8 @@ describe("<ORM module specs>", function() {
         model.set("partition","local");
     };
     p = Rho.ORM.addModel(Product);
-    source = Opal.Rho._scope.RhoConfig.$sources().map["Product"];
+
+    source = getModelSource('Product');
     expect(source.sync_type).toEqual('incremental');
     expect(source.name).toEqual('Product');
   });
@@ -62,7 +49,8 @@ describe("<ORM module specs>", function() {
         model.set("partition","local");
     };
     p = Rho.ORM.addModel(Product);
-    source = Opal.Rho._scope.RhoConfig.$sources().map["123456"];
+
+    source = getModelSource("123456");
     expect(source.sync_type).toEqual('incremental');
     expect(source.name).toEqual('123456');
   });
@@ -75,7 +63,8 @@ describe("<ORM module specs>", function() {
         model.property("brand","string");
     };
     p = Rho.ORM.addModel(Product);
-    source = Opal.Rho._scope.RhoConfig.$sources().map["Product"];
+
+    source = getModelSource('Product');
     expect(source.sync_type).toEqual('incremental');
     expect(source.name).toEqual('Product');
   });
@@ -89,7 +78,8 @@ describe("<ORM module specs>", function() {
         model.set("partition","local");
     };
     p = Rho.ORM.addModel(Product);
-    source = Opal.Rho._scope.RhoConfig.$sources().map["Product"];
+
+    source = getModelSource('Product');
     expect(source.sync_type).toEqual('none');
     expect(source.name).toEqual('Product');
   });
@@ -103,7 +93,8 @@ describe("<ORM module specs>", function() {
         model.set("partition","local");
     };
     p = Rho.ORM.addModel(Product);
-    source = Opal.Rho._scope.RhoConfig.$sources().map["Product"];
+
+    source = getModelSource('Product');
     expect(source.sync_type).toEqual('none');
     expect(source.name).toEqual('Product');
   });
@@ -118,7 +109,8 @@ describe("<ORM module specs>", function() {
         model.set("partition","local");
     };
     p = Rho.ORM.addModel(Product);
-    source = Opal.Rho._scope.RhoConfig.$sources().map["Product"];
+
+    source = getModelSource('Product');
     expect(source.partition).toEqual('local');
     expect(source.sync_type).toEqual('incremental');
     expect(source.name).toEqual('Product');
@@ -133,21 +125,23 @@ describe("<ORM module specs>", function() {
         model.property("brand","string");
     };
     p = Rho.ORM.addModel(Product);
-    source = Opal.Rho._scope.RhoConfig.$sources().map["Product"];
+
+    source = getModelSource('Product');
     expect(source.sync_type).toEqual('incremental');
     expect(source.partition).toEqual('user');
     expect(source.name).toEqual('Product');
   });
 
   it('VT302-0011 | Create a Model with property("name","string")',function(){
-    source = Opal.Rho._scope.RhoConfig.$sources().map["Product"];
+    source = getModelSource('Product');
     expect(source).toBeUndefined();
     var Product = function(model){
         model.modelName("Product");
         model.property("name","string");
     };
     p = Rho.ORM.addModel(Product);
-    source = Opal.Rho._scope.RhoConfig.$sources().map["Product"];
+
+    source = getModelSource('Product');
     expect(source.property['name'][0]).toEqual('string');
     expect(source.partition).toEqual('local');
     expect(source.name).toEqual('Product');
@@ -159,7 +153,8 @@ describe("<ORM module specs>", function() {
         model.property("id","integer");
     };
     p = Rho.ORM.addModel(Product);
-    source = Opal.Rho._scope.RhoConfig.$sources().map["Product"];
+
+    source = getModelSource('Product');
     expect(source.property['id'][0]).toEqual('integer');
     expect(source.partition).toEqual('local');
     expect(source.name).toEqual('Product');
@@ -171,7 +166,8 @@ describe("<ORM module specs>", function() {
         model.property("float_prop","float");
     };
     p = Rho.ORM.addModel(Product);
-    source = Opal.Rho._scope.RhoConfig.$sources().map["Product"];
+
+    source = getModelSource('Product');
     expect(source.property['float_prop'][0]).toEqual('float');
     expect(source.partition).toEqual('local');
     expect(source.name).toEqual('Product');
@@ -183,7 +179,8 @@ describe("<ORM module specs>", function() {
         model.property("date_prop","date");
     };
     p = Rho.ORM.addModel(Product);
-    source = Opal.Rho._scope.RhoConfig.$sources().map["Product"];
+
+    source = getModelSource('Product');
     expect(source.property['date_prop'][0]).toEqual('date');
     expect(source.partition).toEqual('local');
     expect(source.name).toEqual('Product');
@@ -195,7 +192,8 @@ describe("<ORM module specs>", function() {
         model.property("time_prop","time");
     };
     p = Rho.ORM.addModel(Product);
-    source = Opal.Rho._scope.RhoConfig.$sources().map["Product"];
+
+    source = getModelSource('Product');
     expect(source.property['time_prop'][0]).toEqual('time');
     expect(source.partition).toEqual('local');
     expect(source.name).toEqual('Product');
@@ -207,7 +205,8 @@ describe("<ORM module specs>", function() {
         model.property("image_url","blob");
     };
     p = Rho.ORM.addModel(Product);
-    source = Opal.Rho._scope.RhoConfig.$sources().map["Product"];
+
+    source = getModelSource('Product');
     expect(source.property['image_url'][0]).toEqual('blob');
     expect(source.partition).toEqual('local');
     expect(source.name).toEqual('Product');
@@ -219,7 +218,8 @@ describe("<ORM module specs>", function() {
         model.property("mycustomproperty","hello");
     };
     p = Rho.ORM.addModel(Product);
-    source = Opal.Rho._scope.RhoConfig.$sources().map["Product"];
+
+    source = getModelSource('Product');
     expect(source.property['mycustomproperty'][0]).toEqual('hello');
     expect(source.partition).toEqual('local');
     expect(source.name).toEqual('Product');
@@ -231,7 +231,8 @@ describe("<ORM module specs>", function() {
         model.property("image_url","blob","overwrite");
     };
     p = Rho.ORM.addModel(Product);
-    source = Opal.Rho._scope.RhoConfig.$sources().map["Product"];
+
+    source = getModelSource('Product');
     expect(source.property['image_url'][0]).toEqual('blob');
     expect(source.property['image_url'][1]).toEqual('overwrite');
     expect(source.partition).toEqual('local');
@@ -517,8 +518,8 @@ describe("<ORM module specs>", function() {
         model.set("sync_type","bulk_only");
     };
     p = Rho.ORM.addModel(Product);
-    source = Opal.Rho._scope.RhoConfig.$sources().map["Product"];
 
+    source = getModelSource('Product');
     expect(source.sync_type).toEqual('bulk_only');
     expect(source.partition).toEqual('user');
     expect(source.name).toEqual('Product');
@@ -533,8 +534,8 @@ describe("<ORM module specs>", function() {
         model.set("sync_priority",1);
     };
     p = Rho.ORM.addModel(Product);
-    source = Opal.Rho._scope.RhoConfig.$sources().map["Product"];
 
+    source = getModelSource('Product');
     expect(source.sync_type).toEqual('incremental');
     expect(source.sync_priority).toEqual(1);
     expect(source.name).toEqual('Product');
@@ -549,8 +550,8 @@ describe("<ORM module specs>", function() {
         model.set("partition","app");
     };
     p = Rho.ORM.addModel(Product);
-    source = Opal.Rho._scope.RhoConfig.$sources().map["Product"];
 
+    source = getModelSource('Product');
     expect(source.partition).toEqual('app');
     expect(source.sync_type).toEqual('incremental');
     expect(source.name).toEqual('Product');
@@ -564,8 +565,8 @@ describe("<ORM module specs>", function() {
         model.set("schema_version",'1.0');
     };
     p = Rho.ORM.addModel(Product);
-    source = Opal.Rho._scope.RhoConfig.$sources().map["Product"];
 
+    source = getModelSource('Product');
     expect(source.schema_version).toEqual('1.0');
     expect(source.partition).toEqual('local');
     expect(source.name).toEqual('Product');
