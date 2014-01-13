@@ -3265,7 +3265,7 @@ var arr_scanner_property = [
 	OSTypes			:	"All",
 	propertyValue	:	"10",
 	expectedResult	:	"10"
-}
+},
 {
 	testName		:	"VT282-4309 | Set triggerConnected :true  | true",
 	propertyName	:	"triggerConnected",
