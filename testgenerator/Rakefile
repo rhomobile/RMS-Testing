@@ -83,4 +83,16 @@ namespace :generate do
 		end
 		
 	end
+	
+	task :testcase, :pathtoxml, :sheetno do |t,args|
+		require File.dirname(__FILE__) + "/generate_manual_spec.rb"
+		#if filepath == 'http'
+			generate_test_from_google_xls args.pathtoxml, args.sheetno
+		#elsif filepath == 'local'
+			#generate_test_from_ms_xls
+		#end
+		cmd = "js-beautify -f ./#{$file_name} -o ./#{$file_name}"
+		exec cmd
+	end
 end
+
