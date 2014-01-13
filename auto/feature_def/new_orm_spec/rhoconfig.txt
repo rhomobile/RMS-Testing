@@ -39,7 +39,8 @@ test_push_client = win32_client
 
 # Uncomment the following line to use NewORM API
 #use_new_rhom = 1
+#use_new_orm = 1
 
 # Uncomment the following line to use legacy ORM API
-# by default: use_new_rhom = 0
-#use_new_rhom = 0
+# by default: use_new_orm = 0
+#use_new_orm = 0

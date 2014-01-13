@@ -19,13 +19,18 @@ iphone:
 #wm:
 #  extensions: ["barcode"]
 
-extensions:
-- mspec
-- fileutils
-- json
-
 wp:
   productid: 'fd55c4d0-51fa-012e-7844-6caec51bd50e'
 
 android:
   version: 4.3
+
+paths:
+  extensions:
+  - ../../../../rhoconnect-client/ext
+
+extensions:
+- mspec
+- fileutils
+- json
+- rhoconnect-client
