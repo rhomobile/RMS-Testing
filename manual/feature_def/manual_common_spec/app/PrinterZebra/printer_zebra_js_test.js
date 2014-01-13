@@ -260,22 +260,27 @@ function requestStateCallback(printer) {
 		displayPrinterResult("Result:",JSON.stringify(printer));
 	} 
 }
-/*
-function addCombo()	{
-	var textb=document.getElementById("txtCombo");
-	var combo=document.getElementById("combo");
-	var option=document.createElement("option");
-	option.text=textb.value;
-	option.value=textb.value;
-	try {
-		combo.add(option,null);
-	}
-	catch(error) {
-		combo.add(option);
-	}
-	textb.value="";
+
+function addCombo()
+{
+	$('#select_box_wrapper').show();
+	var textb= {'txtfile': txtfilepath, 'csvfile':csvfilepath, 'xlsfile':xlsfilepath, 'docfile':docfilepath, 'htmlcssfile':htmlcssfilepath, 'jsfile':jsfilepath, 'cppfile':cppfilepath, 'pdffile':pdffilepath, 'hashzplfile':hashzplfilepath, 'hashccplfile':hashccplfilepath, 'arrayzplfile':arrayzplfilepath, 'arrayccplfile':arrayccplfilepath, 'invalidcontentsfile':invalidcontentsfilepath, 'invalidfilepath':invalidfilepath};
+	for(var files in textb) {
+		var combo=document.getElementById("combo");
+		var option=document.createElement("option");
+		option.text=files;
+		option.value=textb[files];
+		try {
+			combo.add(option,null);
+		}
+		catch(error) {
+			combo.add(option);
+		}
+	}	
 }
-*/
+function hideCombo() {
+	$('#select_box_wrapper').hide();
+}
 var txtfilepath = Rho.RhoFile.join(Rho.Application.modelFolderPath('PrinterZebra'), "PrinterZebraFiles/txtfile.txt");
 var csvfilepath = Rho.RhoFile.join(Rho.Application.modelFolderPath('PrinterZebra'), "PrinterZebraFiles/csvfile.csv");
 var xlsfilepath = Rho.RhoFile.join(Rho.Application.modelFolderPath('PrinterZebra'), "PrinterZebraFiles/xlsfile.xls");
@@ -292,14 +297,14 @@ var invalidcontentsfilepath = Rho.RhoFile.join(Rho.Application.modelFolderPath('
 var invalidfilepath = "ZA://flder"
 
 
-var zplformatpath = "";
-var hashzpl = {};
-var ccplformatpath = "";
-var hashccpl = "";
-var invalidformatpath = "";
-var invalidzplhash = {};
-var arrayzpl = [];
-var arrayccpl = [];
+var zplformatpath = "e:zplformat.zpl";
+var hashzpl = {0:'val1',5:'val2',1:'val3',25:'val4',100:'val5'};
+var ccplformatpath = "e:ccplformat.ccpl";
+var hashccpl = {0:'val1',1:'val3',5:'val2',25:'val4',100:'val5'};
+var invalidformatpath = "bg:ccplformat.invalid";
+var invalidzplhash = {0,10203,2211,3355sasa};
+var arrayzpl = [0,1,10,5,20];
+var arrayccpl = [0,1,2,3,4,5,6];
 var pngimagepath_320px = Rho.RhoFile.join(Rho.Application.modelFolderPath('PrinterZebra'), "PrinterZebraFiles/pngimagepath_320px.png"); 
 var pngimagepath_640px = Rho.RhoFile.join(Rho.Application.modelFolderPath('PrinterZebra'), "PrinterZebraFiles/pngimagepath_640px.png"); 
 var pngimagepath_1024px = Rho.RhoFile.join(Rho.Application.modelFolderPath('PrinterZebra'), "PrinterZebraFiles/pngimagepath_1024px.png"); 
@@ -320,4 +325,5 @@ var bmpimagepath_640px = Rho.RhoFile.join(Rho.Application.modelFolderPath('Print
 var bmpimagepath_1024px = Rho.RhoFile.join(Rho.Application.modelFolderPath('PrinterZebra'), "PrinterZebraFiles/bmpimagepath_1024px.bmp"); 
 var bmpimagepath_2048px = Rho.RhoFile.join(Rho.Application.modelFolderPath('PrinterZebra'), "PrinterZebraFiles/bmpimagepath_2048px.bmp"); 
 
-var printerDriveAndFileName = "";
+var printerDriveAndFileName = "D:FILE.GRF";
+var printerOnlyFileName = "FILE.GRF"

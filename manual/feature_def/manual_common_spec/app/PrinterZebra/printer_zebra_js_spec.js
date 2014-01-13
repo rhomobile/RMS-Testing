@@ -7,15 +7,13 @@ describe("Printer Zebra Manual Test", function() {
 	var ENABLE30MIN = 1800000;
 	var enableFlag = false;
 	var callbackstatus = false;
-	var searchFlag = false;
-	var enumData = Rho.PrinterZebra.enumerateSupportedTypes();
+	//var enumData = Rho.PrinterZebra.enumerateSupportedTypes();
 	var printers_array = [];
 	var printers_errors = [];
 	var discovery_finished = false;
 	var connect_type = '';
 	var macipaddress = '';
 	var stopsearch = '';
-	var calback_flag = false;
 	var deviceaddressFlag = false;
 	var CommandZPL = "^XA^FO50,50^ADN,36,20^FDZebraPrinting^FS^XZ"; 
 	var CommandCCPL = "! 0.3937 200 200 1 1IN-INCHEST 4 0 0 0 1 cm = 0.3937”IN-DOTST 4 0 0 48 1 mm = 8 dotsB 128 1 1 48 16 112 UNITST40 48 160 UNITSFORMPRINT";
@@ -24,10 +22,8 @@ describe("Printer Zebra Manual Test", function() {
 	beforeEach(function() {
 		document.getElementById("actResult").innerHTML = "init";
 		discovery_finished = false;
-		searchFlag = false;
 		connectFlag = false;
 		stopsearch ='';
-		calback_flag = false
 		deviceaddressFlag = false;
 		retrievedFlag = false;
 		connect_status = '';
@@ -731,17 +727,6 @@ describe("Printer Zebra Manual Test", function() {
 			PrinterConnectiontype();
 		}); 
 			
-		/*runs(function() {
-			Rho.PrinterZebra.searchPrinters({"printerType":Printer.PRINTER_TYPE_ZEBRA, "connectionType":connect_type}, searchPrinterCallback);
-		});
-		
-		waitsFor(function() {
-			return discovery_finished;
-		}, '120sec waiting for Search printer', ENABLE120K);
-	
-		runs(function() {
-			displaySearchResults(printers_array, printers_errors);
-		}); */
 
 		runs(function () {
 			var printer = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
@@ -773,18 +758,7 @@ describe("Printer Zebra Manual Test", function() {
 			PrinterConnectiontype();
 		}); 
 			
-	/*	runs(function() {
-			Rho.PrinterZebra.searchPrinters({"printerType":Printer.PRINTER_TYPE_ZEBRA, "connectionType":connect_type}, searchPrinterCallback);
-		});
-		
-		waitsFor(function() {
-			return discovery_finished;
-		}, '120sec waiting for Search printer', ENABLE120K);
-	
-	
-		runs(function() {
-			displaySearchResults(printers_array, printers_errors);
-		}); */
+
 
 		runs(function () {
 			var printer = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
@@ -1311,9 +1285,6 @@ describe("Printer Zebra Manual Test", function() {
 			printer.disconnect(disconnectCallback);
 			printer.connect(connectCallback);
 			if(printer.isConnected == printer.STATUS_OK || printer.isReadyToPrint == printer.STATUS_OK) {
-				var print_str = printer.printRawString(CommandZPL);
-				waitsFor(function () {}, '10sec wait for print', ENABLE10K);
-				displayResult("print attempt", print_str);
 				printer.disconnect();
 			}
 			else {
@@ -1333,9 +1304,9 @@ describe("Printer Zebra Manual Test", function() {
 	
 	// printFile Method 
 	
-	it("VTXXX-0036|printFile Method (without callback function)", function () {
+	it("VTXXX-0036|printFile Method (without callback function jpg file)", function () {
 		runs(function () {
-			setObjective("printFile Method (without callback function)");
+			setObjective("printFile Method (without callback function jpg file)");
 			setInstruction("");
 			setExpected("The file should be sent successfully to the printer.");
 		});
@@ -1356,14 +1327,14 @@ describe("Printer Zebra Manual Test", function() {
 		});*/
 		runs(function () {
 			var printer = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
-			printer.disconnect(disconnectCallback);
-			printer.connect(connectCallback);
+			printer.connect();
 			if(printer.isConnected == printer.STATUS_OK || printer.isReadyToPrint == printer.STATUS_OK) {
 				var print_str = printer.printFile(jpgimagepath_640px);
 				waitsFor(function () {
 					return print_str;
 				}, '10sec wait for print', ENABLE10K);
 				displayResult("Printed ", print_str);
+				printer.disconnect();
 			}
 			else {
 				displayResult("Unable to Connect ", printer.isConnected);
@@ -1379,9 +1350,9 @@ describe("Printer Zebra Manual Test", function() {
 			});
 		});
 	});
-	it("VTXXX-0037|printFile Method (with callback function))", function () {
+	it("VTXXX-0037|printFile Method (with callback function jpg file))", function () {
 		runs(function () {
-			setObjective("printFile Method (with callback function)");
+			setObjective("printFile Method (with callback function jpg file)");
 			setInstruction("");
 			setExpected("The file should be sent successfully to the printer.");
 		});
@@ -1402,106 +1373,14 @@ describe("Printer Zebra Manual Test", function() {
 		});*/
 		runs(function () {
 			var printer = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
-			printer.disconnect(disconnectCallback);
-			printer.connect(connectCallback);
+			printer.connect();
 			if(printer.isConnected == printer.STATUS_OK || printer.isReadyToPrint == printer.STATUS_OK) {
-				printer.printFile(jpgimagepath_640px, printFileCallback);
+				var print_str = printer.printFile(jpgimagepath_640px, printFileCallback);
 				waitsFor(function () {
 					return print_str;
 				}, '10sec wait for print', ENABLE10K);
 				displayResult("Printed ", print_str);
-			}
-			else {
-				displayResult("Unable to Connect ", printer.isConnected);
-			}
-		});
-		runs(function () {
-			setAction("Have you seen the correct output ?");
-			waitsFor(function () {
-				return document.getElementById("actResult").innerHTML != "init";
-			}, "Timed out waiting for tester to respond", ENABLE30MIN);
-			runs(function () {
-				expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-			});
-		});
-	});
-	it("VTXXX-0038|printFile Method (without callback function)", function () {
-		runs(function () {
-			setObjective("printFile Method (without callback function)");
-			setInstruction("");
-			setExpected("The file should be sent successfully to the printer.");
-		});
-		runs(function() {
-			PrinterConnectiontype();
-		}); 
-		/*runs(function () {
-			Rho.PrinterZebra.searchPrinters({
-				"printerType": Printer.PRINTER_TYPE_ZEBRA,
-				"connectionType": connect_type
-			}, searchPrinterCallback);
-			waitsFor(function () {
-				return discovery_finished;
-			}, '120sec waiting for Search printer', ENABLE120K);
-		});
-		runs(function () {
-			displaySearchResults(printers_array, printers_errors);
-		});*/
-		runs(function () {
-			var printer = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
-			printer.disconnect(disconnectCallback);
-			printer.connect(connectCallback);
-			if(printer.isConnected == printer.STATUS_OK || printer.isReadyToPrint == printer.STATUS_OK) {
-				var print_str = printer.printFile(pngimagepath_640px);
-				waitsFor(function () {
-					return print_str;
-				}, '10sec wait for print', ENABLE10K);
-				displayResult("Printed ", print_str);
-			}
-			else {
-				displayResult("Unable to Connect ", printer.isConnected);
-			}
-		});
-		runs(function () {
-			setAction("Have you seen the correct output ?");
-			waitsFor(function () {
-				return document.getElementById("actResult").innerHTML != "init";
-			}, "Timed out waiting for tester to respond", ENABLE30MIN);
-			runs(function () {
-				expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-			});
-		});
-	});
-	it("VTXXX-0039|printFile Method (with callback function))", function () {
-		runs(function () {
-			setObjective("printFile Method (with callback function)");
-			setInstruction("");
-			setExpected("The file should be sent successfully to the printer.");
-		});
-		runs(function() {
-			PrinterConnectiontype();
-		}); 
-		/*runs(function () {
-			Rho.PrinterZebra.searchPrinters({
-				"printerType": Printer.PRINTER_TYPE_ZEBRA,
-				"connectionType": connect_type
-			}, searchPrinterCallback);
-			waitsFor(function () {
-				return discovery_finished;
-			}, '120sec waiting for Search printer', ENABLE120K);
-		});
-		runs(function () {
-			displaySearchResults(printers_array, printers_errors);
-		});*/
-		runs(function () {
-			var printer = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
-			printer.disconnect(disconnectCallback);
-			printer.connect(connectCallback);
-			if(printer.isConnected == printer.STATUS_OK || printer.isReadyToPrint == printer.STATUS_OK) {
-				printer.printFile(pngimagepath_640px, printFileCallback);
-				waitsFor(function () {
-					return print_str;
-				}, '10sec wait for print', ENABLE10K);
-				displayResult("Printed ", print_str);
+				printer.disconnect();
 			}
 			else {
 				displayResult("Unable to Connect ", printer.isConnected);
@@ -1518,8 +1397,194 @@ describe("Printer Zebra Manual Test", function() {
 		});
 	});
 	
+	it("VTXXX-0038|printFile Method (with anonymous function for jpg file)", function () {
+		runs(function () {
+			setObjective("printFile Method (with anonymous function for jpg file)");
+			setInstruction("");
+			setExpected("The file should be sent successfully to the printer.");
+		});
+		runs(function() {
+			PrinterConnectiontype();
+		}); 
+		/*runs(function () {
+			Rho.PrinterZebra.searchPrinters({
+				"printerType": Printer.PRINTER_TYPE_ZEBRA,
+				"connectionType": connect_type
+			}, searchPrinterCallback);
+			waitsFor(function () {
+				return discovery_finished;
+			}, '120sec waiting for Search printer', ENABLE120K);
+		});
+		runs(function () {
+			displaySearchResults(printers_array, printers_errors);
+		});*/
+		runs(function () {
+			var printer = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			printer.connect();
+			if(printer.isConnected == printer.STATUS_OK || printer.isReadyToPrint == printer.STATUS_OK) {
+				var print_str = printer.printFile(jpgimagepath_640px, function(data){printFileCallback(data)});
+				waitsFor(function () {
+					return print_str;
+				}, '10sec wait for print', ENABLE10K);
+				displayResult("Printed ", print_str);
+				printer.disconnect();
+			}
+			else {
+				displayResult("Unable to Connect ", printer.isConnected);
+			}
+		});
+		runs(function () {
+			setAction("Have you seen the correct output ?");
+			waitsFor(function () {
+				return document.getElementById("actResult").innerHTML != "init";
+			}, "Timed out waiting for tester to respond", ENABLE30MIN);
+			runs(function () {
+				expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+			});
+		});
+	});
+	
+	it("VTXXX-0039|printFile Method (without callback function png file)", function () {
+		runs(function () {
+			setObjective("printFile Method (without callback function)");
+			setInstruction("");
+			setExpected("The file should be sent successfully to the printer.");
+		});
+		runs(function() {
+			PrinterConnectiontype();
+		}); 
+		/*runs(function () {
+			Rho.PrinterZebra.searchPrinters({
+				"printerType": Printer.PRINTER_TYPE_ZEBRA,
+				"connectionType": connect_type
+			}, searchPrinterCallback);
+			waitsFor(function () {
+				return discovery_finished;
+			}, '120sec waiting for Search printer', ENABLE120K);
+		});
+		runs(function () {
+			displaySearchResults(printers_array, printers_errors);
+		});*/
+		runs(function () {
+			var printer = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			printer.connect();
+			if(printer.isConnected == printer.STATUS_OK || printer.isReadyToPrint == printer.STATUS_OK) {
+				var print_str = printer.printFile(pngimagepath_640px);
+				waitsFor(function () {
+					return print_str;
+				}, '10sec wait for print', ENABLE10K);
+				displayResult("Printed ", print_str);
+				printer.disconnect();
+			}
+			else {
+				displayResult("Unable to Connect ", printer.isConnected);
+			}
+		});
+		runs(function () {
+			setAction("Have you seen the correct output ?");
+			waitsFor(function () {
+				return document.getElementById("actResult").innerHTML != "init";
+			}, "Timed out waiting for tester to respond", ENABLE30MIN);
+			runs(function () {
+				expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+			});
+		});
+	});
+	it("VTXXX-0040|printFile Method (with callback function png file)", function () {
+		runs(function () {
+			setObjective("printFile Method (with callback function)");
+			setInstruction("");
+			setExpected("The file should be sent successfully to the printer.");
+		});
+		runs(function() {
+			PrinterConnectiontype();
+		}); 
+		/*runs(function () {
+			Rho.PrinterZebra.searchPrinters({
+				"printerType": Printer.PRINTER_TYPE_ZEBRA,
+				"connectionType": connect_type
+			}, searchPrinterCallback);
+			waitsFor(function () {
+				return discovery_finished;
+			}, '120sec waiting for Search printer', ENABLE120K);
+		});
+		runs(function () {
+			displaySearchResults(printers_array, printers_errors);
+		});*/
+		runs(function () {
+			var printer = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			printer.connect();
+			if(printer.isConnected == printer.STATUS_OK || printer.isReadyToPrint == printer.STATUS_OK) {
+				print_str = printer.printFile(pngimagepath_640px, printFileCallback);
+				waitsFor(function () {
+					return print_str;
+				}, '10sec wait for print', ENABLE10K);
+				displayResult("Printed ", print_str);
+				printer.disconnect();
+			}
+			else {
+				displayResult("Unable to Connect ", printer.isConnected);
+			}
+		});
+		runs(function () {
+			setAction("Have you seen the correct output ?");
+			waitsFor(function () {
+				return document.getElementById("actResult").innerHTML != "init";
+			}, "Timed out waiting for tester to respond", ENABLE30MIN);
+			runs(function () {
+				expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+			});
+		});
+	});
+
+	it("VTXXX-0041|printFile Method (with anonymous function for png file)", function () {
+		runs(function () {
+			setObjective("printFile Method (with callback function)");
+			setInstruction("");
+			setExpected("The file should be sent successfully to the printer.");
+		});
+		runs(function() {
+			PrinterConnectiontype();
+		}); 
+		/*runs(function () {
+			Rho.PrinterZebra.searchPrinters({
+				"printerType": Printer.PRINTER_TYPE_ZEBRA,
+				"connectionType": connect_type
+			}, searchPrinterCallback);
+			waitsFor(function () {
+				return discovery_finished;
+			}, '120sec waiting for Search printer', ENABLE120K);
+		});
+		runs(function () {
+			displaySearchResults(printers_array, printers_errors);
+		});*/
+		runs(function () {
+			var printer = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			printer.connect();
+			if(printer.isConnected == printer.STATUS_OK || printer.isReadyToPrint == printer.STATUS_OK) {
+				print_str = printer.printFile(pngimagepath_640px, function(data){printFileCallback(data)});
+				waitsFor(function () {
+					return print_str;
+				}, '10sec wait for print', ENABLE10K);
+				displayResult("Printed ", print_str);
+				printer.disconnect();
+			}
+			else {
+				displayResult("Unable to Connect ", printer.isConnected);
+			}
+		});
+		runs(function () {
+			setAction("Have you seen the correct output ?");
+			waitsFor(function () {
+				return document.getElementById("actResult").innerHTML != "init";
+			}, "Timed out waiting for tester to respond", ENABLE30MIN);
+			runs(function () {
+				expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+			});
+		});
+	});	
 	if (Rho.System.platform != "ANDROID") {
-		it("VTXXX-0040|printFile Method (without callback function)", function () {
+		it("VTXXX-0042|printFile Method (without callback function)", function () {
 			runs(function () {
 				setObjective("printFile Method (without callback function)");
 				setInstruction("");
@@ -1542,14 +1607,14 @@ describe("Printer Zebra Manual Test", function() {
 			});*/
 			runs(function () {
 				var printer = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
-				printer.disconnect(disconnectCallback);
-				printer.connect(connectCallback);
+				printer.connect();
 				if(printer.isConnected == printer.STATUS_OK || printer.isReadyToPrint == printer.STATUS_OK) {
 					var print_str = printer.printFile(bmpimagepath_640px);
 					waitsFor(function () {
 						return print_str;
 					}, '10sec wait for print', ENABLE10K);
 					displayResult("Printed ", print_str);
+					printer.disconnect();
 				}
 				else {
 					displayResult("Unable to Connect ", printer.isConnected);
@@ -1565,7 +1630,7 @@ describe("Printer Zebra Manual Test", function() {
 				});
 			});
 		});
-		it("VTXXX-0041|printFile Method (with callback function))", function () {
+		it("VTXXX-0043|printFile Method (with callback function))", function () {
 			runs(function () {
 				setObjective("printFile Method (with callback function)");
 				setInstruction("");
@@ -1588,14 +1653,14 @@ describe("Printer Zebra Manual Test", function() {
 			});*/
 			runs(function () {
 				var printer = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
-				printer.disconnect(disconnectCallback);
-				printer.connect(connectCallback);
+				printer.connect();
 				if(printer.isConnected == printer.STATUS_OK || printer.isReadyToPrint == printer.STATUS_OK) {
 					printer.printFile(bmpimagepath_640px, printFileCallback);
 					waitsFor(function () {
 						return print_str;
 					}, '10sec wait for print', ENABLE10K);
 					displayResult("Printed ", print_str);
+					printer.disconnect();
 				}
 				else {
 					displayResult("Unable to Connect ", printer.isConnected);
@@ -1611,12 +1676,62 @@ describe("Printer Zebra Manual Test", function() {
 				});
 			});
 		});
+		
+		it("VTXXX-0044|printFile Method (with anonymous function for bmp file)", function () {
+			runs(function () {
+				setObjective("printFile Method (with anonymous function for bmp file)");
+				setInstruction("");
+				setExpected("The file should be sent successfully to the printer.");
+			});
+			runs(function() {
+				PrinterConnectiontype();
+			}); 
+			/*runs(function () {
+				Rho.PrinterZebra.searchPrinters({
+					"printerType": Printer.PRINTER_TYPE_ZEBRA,
+					"connectionType": connect_type
+				}, searchPrinterCallback);
+				waitsFor(function () {
+					return discovery_finished;
+				}, '120sec waiting for Search printer', ENABLE120K);
+			});
+			runs(function () {
+				displaySearchResults(printers_array, printers_errors);
+			});*/
+			runs(function () {
+				var printer = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+				printer.connect();
+				if(printer.isConnected == printer.STATUS_OK || printer.isReadyToPrint == printer.STATUS_OK) {
+					var print_str = printer.printFile(bmpimagepath_640px, function(data) { printFileCallback(data) });
+					waitsFor(function () {
+						return print_str;
+					}, '10sec wait for print', ENABLE10K);
+					displayResult("Printed ", print_str);
+					printer.disconnect();
+				}
+				else {
+					displayResult("Unable to Connect ", printer.isConnected);
+				}
+			});
+			runs(function () {
+				setAction("Have you seen the correct output ?");
+				waitsFor(function () {
+					return document.getElementById("actResult").innerHTML != "init";
+				}, "Timed out waiting for tester to respond", ENABLE30MIN);
+				runs(function () {
+					expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+				});
+			});
+		});
+		
+		
 	}	
-	it("VTXXX-0042|printFile Method (with anonymous function for pdf file", function () {
+	
+	it("VTXXX-0045|printFile Method (without callback function for pdf file)", function () {
 		runs(function () {
-			setObjective("printFile Method (with anonymous function for pdf file");
+			setObjective("printFile Method (without callback function for pdf file)");
 			setInstruction("");
-			setExpected("1.The file should be sent successfully to the printer. <br />2. The callback should return STATUS_SUCCESS.");
+			setExpected("1.The file should be sent successfully to the printer.");
 		});
 		runs(function() {
 			PrinterConnectiontype();
@@ -1635,16 +1750,61 @@ describe("Printer Zebra Manual Test", function() {
 		});*/
 		runs(function () {
 			var printer = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
-			printer.disconnect(disconnectCallback);
-			printer.connect(connectCallback);
+			printer.connect();
 			if(printer.isConnected == printer.STATUS_OK || printer.isReadyToPrint == printer.STATUS_OK) {
-				printer.printFile(pdffilepath, function () {
-					printFileCallback()
-				});
+				var print_str = printer.printFile(pdffilepath);
 				waitsFor(function () {
 					return print_str;
 				}, '10sec wait for print', ENABLE10K);
 				displayResult("Printed ", print_str);
+				printer.disconnect();
+			}
+			else {
+				displayResult("Unable to Connect ", printer.isConnected);
+			}
+		});
+		runs(function () {
+			setAction("Have you seen the correct output ?");
+			waitsFor(function () {
+				return document.getElementById("actResult").innerHTML != "init";
+			}, "Timed out waiting for tester to respond", ENABLE30MIN);
+			runs(function () {
+				expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+			});
+		});
+	});
+
+	it("VTXXX-0046|printFile Method (with callback function for pdf file) ", function () {
+		runs(function () {
+			setObjective("printFile Method (with callback function for pdf file) ");
+			setInstruction("");
+			setExpected("1.The file should be sent successfully to the printer.");
+		});
+		runs(function() {
+			PrinterConnectiontype();
+		}); 
+		/*runs(function () {
+			Rho.PrinterZebra.searchPrinters({
+				"printerType": Printer.PRINTER_TYPE_ZEBRA,
+				"connectionType": connect_type
+			}, searchPrinterCallback);
+			waitsFor(function () {
+				return discovery_finished;
+			}, '120sec waiting for Search printer', ENABLE120K);
+		});
+		runs(function () {
+			displaySearchResults(printers_array, printers_errors);
+		});*/
+		runs(function () {
+			var printer = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			printer.connect();
+			if(printer.isConnected == printer.STATUS_OK || printer.isReadyToPrint == printer.STATUS_OK) {
+				var print_str = printer.printFile(pdffilepath, printFileCallback);
+				waitsFor(function () {
+					return print_str;
+				}, '10sec wait for print', ENABLE10K);
+				displayResult("Printed ", print_str);
+				printer.disconnect();
 			}
 			else {
 				displayResult("Unable to Connect ", printer.isConnected);
@@ -1661,11 +1821,12 @@ describe("Printer Zebra Manual Test", function() {
 		});
 	});
 	
-	it("VTXXX-0043|printFile Method (with anonymous function))", function () {
+
+	it("VTXXX-0047|printFile Method (with anonymous function for pdf file) ", function () {
 		runs(function () {
-			setObjective("printFile Method (with anonymous function)");
+			setObjective("printFile Method (with anonymous function for pdf file) ");
 			setInstruction("");
-			setExpected("The file should be sent successfully to the printer.");
+			setExpected("1.The file should be sent successfully to the printer.");
 		});
 		runs(function() {
 			PrinterConnectiontype();
@@ -1684,17 +1845,15 @@ describe("Printer Zebra Manual Test", function() {
 		});*/
 		runs(function () {
 			var printer = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
-			printer.disconnect(disconnectCallback);
-			printer.connect(connectCallback);
+			
+			printer.connect();
 			if(printer.isConnected == printer.STATUS_OK || printer.isReadyToPrint == printer.STATUS_OK) {
-				var fileURI = Rho.RhoFile.join(Rho.Application.modelFolderPath('PrinterZebra'), "PrinterZebraFiles/test1.pdf");
-				printer.printFile(fileURI, function () {
-					printFileCallback()
-				});
+				var print_str = printer.printFile(pdffilepath, function(data){printFileCallback(data)});
 				waitsFor(function () {
 					return print_str;
 				}, '10sec wait for print', ENABLE10K);
 				displayResult("Printed ", print_str);
+				printer.disconnect();
 			}
 			else {
 				displayResult("Unable to Connect ", printer.isConnected);
@@ -1710,7 +1869,10 @@ describe("Printer Zebra Manual Test", function() {
 			});
 		});
 	});
-	it("VTXXX-0044|printFile Method (with callback function and No File specified in fileURI)", function () {
+
+	
+
+	it("VTXXX-0048|printFile Method (with callback function and No File specified in fileURI)", function () {
 		runs(function () {
 			setObjective("printFile Method (with callback function and No File specified in fileURI)");
 			setInstruction("");
@@ -1733,15 +1895,16 @@ describe("Printer Zebra Manual Test", function() {
 		});*/
 		runs(function () {
 			var printer = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
-			printer.disconnect(disconnectCallback);
-			printer.connect(connectCallback);
+			printer.connect();
 			if(printer.isConnected == printer.STATUS_OK || printer.isReadyToPrint == printer.STATUS_OK) {
 				var fileURI = "";
-				printer.printFile(fileURI, printFileCallback);
+				var print_str = printer.printFile(fileURI, printFileCallback);
 				waitsFor(function () {
 					return print_str;
 				}, '10sec wait for print', ENABLE10K);
 				displayResult("Printed ", print_str);
+				printer.disconnect();
+			
 			}
 			else {
 				displayResult("Unable to Connect ", printer.isConnected);
@@ -1757,7 +1920,7 @@ describe("Printer Zebra Manual Test", function() {
 		});
 	});
 	
-	it("VTXXX-0045|printFile Method (with callback function and fileURI has no file at that location)", function () {
+	it("VTXXX-0049|printFile Method (with callback function and fileURI has no file at that location)", function () {
 		runs(function () {
 			setObjective("printFile Method (with callback function and fileURI has no file at that location)");
 			setInstruction("");
@@ -1780,15 +1943,16 @@ describe("Printer Zebra Manual Test", function() {
 		});*/
 		runs(function () {
 			var printer = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
-			printer.disconnect(disconnectCallback);
-			printer.connect(connectCallback);
+			
+			printer.connect();
 			if(printer.isConnected == printer.STATUS_OK || printer.isReadyToPrint == printer.STATUS_OK) {
 				var fileURI = '/app/NoFile/';
-				printer.printFile(fileURI, printFileCallback);
+				var print_str = printer.printFile(fileURI, printFileCallback);
 				waitsFor(function () {
 					return print_str;
 				}, '10sec wait for print', ENABLE10K);
 				displayResult("Printed ", print_str);
+				printer.disconnect();
 			}
 			else {
 				displayResult("Unable to Connect ", printer.isConnected);
@@ -1807,9 +1971,9 @@ describe("Printer Zebra Manual Test", function() {
 	
 	// printRawString Method
 	
-	it("VTXXX-0046|printRawString Method (without callback function)", function () {
+	it("VTXXX-0050|printRawString Method (without callback function for ZPL Command)", function () {
 		runs(function () {
-			setObjective("printRawString Method (without callback function)");
+			setObjective("printRawString Method (without callback function for ZPL Command)");
 			setInstruction("");
 			setExpected("The raw string should be sent successfully and printed on the printer.");
 		});
@@ -1830,13 +1994,15 @@ describe("Printer Zebra Manual Test", function() {
 		});*/
 		runs(function () {
 			var printer = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
-			printer.disconnect(disconnectCallback);
-			printer.connect(connectCallback);
+			printer.connect();
 			if(printer.isConnected == printer.STATUS_OK || printer.isReadyToPrint == printer.STATUS_OK) {
-				print_str = printer.printRawString(CommandZPL)
+				var print_str = printer.printRawString(CommandZPL)
 				waitsFor(function () {
 					return print_str;
 				}, '10sec wait for print', ENABLE10K);
+				displayResult("Printed ", print_str);
+				printer.disconnect();
+			
 			}
 			else {
 				displayResult("Unable to Connect ", printer.isConnected);
@@ -1852,9 +2018,9 @@ describe("Printer Zebra Manual Test", function() {
 			});
 		});
 	});
-	it("VTXXX-0047|printRawString Method (with callback function)", function () {
+	it("VTXXX-0051|printRawString Method (with callback function for ZPL Command)", function () {
 		runs(function () {
-			setObjective("printRawString Method (with callback function)");
+			setObjective("printRawString Method (with callback function for ZPL Command)");
 			setInstruction("");
 			setExpected("1. The raw string should be sent successfully and printed on the printer. <br />2. The callback should return STATUS_SUCCESS.");
 		});
@@ -1875,13 +2041,15 @@ describe("Printer Zebra Manual Test", function() {
 		});*/
 		runs(function () {
 			var printer = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
-			printer.disconnect(disconnectCallback);
-			printer.connect(connectCallback);
+			printer.connect();
 			if(printer.isConnected == printer.STATUS_OK || printer.isReadyToPrint == printer.STATUS_OK) {
-				print_str = printer.printRawString(CommandCCPL, printRawStringCallback)
+				var print_str = printer.printRawString(CommandZPL, printRawStringCallback)
 				waitsFor(function () {
 					return print_str;
 				}, '10sec wait for print', ENABLE10K);
+				displayResult("Printed ", print_str);
+				printer.disconnect();
+			
 			}
 			else {
 				displayResult("Unable to Connect ", printer.isConnected);
@@ -1898,9 +2066,9 @@ describe("Printer Zebra Manual Test", function() {
 		});
 	});
 	
-	it("VTXXX-0048|printRawString Method (with anonymous function)", function () {
+	it("VTXXX-0052|printRawString Method (with anonymous function for ZPL Command)", function () {
 		runs(function () {
-			setObjective("printRawString Method (with anonymous function)");
+			setObjective("printRawString Method (with anonymous function  for ZPL Command)");
 			setInstruction("");
 			setExpected("1. The raw string should be sent successfully and printed on the printer. <br />2. The callback should return STATUS_SUCCESS.");
 		});
@@ -1921,15 +2089,264 @@ describe("Printer Zebra Manual Test", function() {
 		});*/
 		runs(function () {
 			var printer = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
-			printer.disconnect(disconnectCallback);
-			printer.connect(connectCallback);
+			printer.connect();
 			if(printer.isConnected == printer.STATUS_OK || printer.isReadyToPrint == printer.STATUS_OK) {
-				print_str = printer.printRawString(CommandZPL, function () {
+				var print_str = printer.printRawString(CommandZPL, function () {
 					printRawStringCallback()
 				})
 				waitsFor(function () {
 					return print_str;
 				}, '10sec wait for print', ENABLE10K);
+				displayResult("Printed ", print_str);
+				printer.disconnect();
+			}
+			else {
+				displayResult("Unable to Connect ", printer.isConnected);
+			}
+		});
+		runs(function () {
+			setAction("Have you seen the correct output ?");
+			waitsFor(function () {
+				return document.getElementById("actResult").innerHTML != "init";
+			}, "Timed out waiting for tester to respond", ENABLE30MIN);
+			runs(function () {
+				expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+			});
+		});
+	});
+	
+	it("VTXXX-0053|printRawString Method (without callback function for CCPL Command)", function () {
+		runs(function () {
+			setObjective("printRawString Method (without callback function for CCPL Command)");
+			setInstruction("");
+			setExpected("The raw string should be sent successfully and printed on the printer.");
+		});
+		runs(function() {
+			PrinterConnectiontype();
+		}); 
+		/*runs(function () {
+			Rho.PrinterZebra.searchPrinters({
+				"printerType": Printer.PRINTER_TYPE_ZEBRA,
+				"connectionType": connect_type
+			}, searchPrinterCallback);
+			waitsFor(function () {
+				return discovery_finished;
+			}, '120sec waiting for Search printer', ENABLE120K);
+		});
+		runs(function () {
+			displaySearchResults(printers_array, printers_errors);
+		});*/
+		runs(function () {
+			var printer = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			printer.connect();
+			if(printer.isConnected == printer.STATUS_OK || printer.isReadyToPrint == printer.STATUS_OK) {
+				var print_str = printer.printRawString(CommandCCPL)
+				waitsFor(function () {
+					return print_str;
+				}, '10sec wait for print', ENABLE10K);
+				displayResult("Printed ", print_str);
+				printer.disconnect();
+			
+			}
+			else {
+				displayResult("Unable to Connect ", printer.isConnected);
+			}
+		});
+		runs(function () {
+			setAction("Have you seen the correct output ?");
+			waitsFor(function () {
+				return document.getElementById("actResult").innerHTML != "init";
+			}, "Timed out waiting for tester to respond", ENABLE30MIN);
+			runs(function () {
+				expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+			});
+		});
+	});
+	it("VTXXX-0054|printRawString Method (with callback function for CCPL Command)", function () {
+		runs(function () {
+			setObjective("printRawString Method (with callback function for CCPL Command)");
+			setInstruction("");
+			setExpected("1. The raw string should be sent successfully and printed on the printer. <br />2. The callback should return STATUS_SUCCESS.");
+		});
+		runs(function() {
+			PrinterConnectiontype();
+		}); 
+		/*runs(function () {
+			Rho.PrinterZebra.searchPrinters({
+				"printerType": Printer.PRINTER_TYPE_ZEBRA,
+				"connectionType": connect_type
+			}, searchPrinterCallback);
+			waitsFor(function () {
+				return discovery_finished;
+			}, '120sec waiting for Search printer', ENABLE120K);
+		});
+		runs(function () {
+			displaySearchResults(printers_array, printers_errors);
+		});*/
+		runs(function () {
+			var printer = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			printer.connect();
+			if(printer.isConnected == printer.STATUS_OK || printer.isReadyToPrint == printer.STATUS_OK) {
+				var print_str = printer.printRawString(CommandCCPL, printRawStringCallback)
+				waitsFor(function () {
+					return print_str;
+				}, '10sec wait for print', ENABLE10K);
+				displayResult("Printed ", print_str);
+				printer.disconnect();
+			
+			}
+			else {
+				displayResult("Unable to Connect ", printer.isConnected);
+			}
+		});
+		runs(function () {
+			setAction("Have you seen the correct output ?");
+			waitsFor(function () {
+				return document.getElementById("actResult").innerHTML != "init";
+			}, "Timed out waiting for tester to respond", ENABLE30MIN);
+			runs(function () {
+				expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+			});
+		});
+	});
+	
+	it("VTXXX-0055|printRawString Method (with anonymous function for CCPL Command)", function () {
+		runs(function () {
+			setObjective("printRawString Method (with anonymous function  for CCPL Command)");
+			setInstruction("");
+			setExpected("1. The raw string should be sent successfully and printed on the printer. <br />2. The callback should return STATUS_SUCCESS.");
+		});
+		runs(function() {
+			PrinterConnectiontype();
+		}); 
+		/*runs(function () {
+			Rho.PrinterZebra.searchPrinters({
+				"printerType": Printer.PRINTER_TYPE_ZEBRA,
+				"connectionType": connect_type
+			}, searchPrinterCallback);
+			waitsFor(function () {
+				return discovery_finished;
+			}, '120sec waiting for Search printer', ENABLE120K);
+		});
+		runs(function () {
+			displaySearchResults(printers_array, printers_errors);
+		});*/
+		runs(function () {
+			var printer = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			printer.connect();
+			if(printer.isConnected == printer.STATUS_OK || printer.isReadyToPrint == printer.STATUS_OK) {
+				var print_str = printer.printRawString(CommandCCPL, function () {
+					printRawStringCallback()
+				})
+				waitsFor(function () {
+					return print_str;
+				}, '10sec wait for print', ENABLE10K);
+				displayResult("Printed ", print_str);
+				printer.disconnect();
+			}
+			else {
+				displayResult("Unable to Connect ", printer.isConnected);
+			}
+		});
+		runs(function () {
+			setAction("Have you seen the correct output ?");
+			waitsFor(function () {
+				return document.getElementById("actResult").innerHTML != "init";
+			}, "Timed out waiting for tester to respond", ENABLE30MIN);
+			runs(function () {
+				expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+			});
+		});
+	});
+	
+	
+	it("VTXXX-0056|printRawString Method with callback (with the printer turned off) ", function () {
+		runs(function () {
+			setObjective("printRawString Method with callback (with the printer turned off) ");
+			setInstruction("");
+			setExpected("1. The raw string should not be sent and printed on the printer. The callback function should return STATUS_ERROR.");
+		});
+		runs(function() {
+			PrinterConnectiontype();
+		}); 
+		/*runs(function () {
+			Rho.PrinterZebra.searchPrinters({
+				"printerType": Printer.PRINTER_TYPE_ZEBRA,
+				"connectionType": connect_type
+			}, searchPrinterCallback);
+			waitsFor(function () {
+				return discovery_finished;
+			}, '120sec waiting for Search printer', ENABLE120K);
+		});
+		runs(function () {
+			displaySearchResults(printers_array, printers_errors);
+		});*/
+		runs(function () {
+			var printer = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			waitsFor(function () {
+                    return true;
+                }, 'Turn OFF the Printer', 5000);
+			printer.connect();
+			if(printer.isConnected == printer.STATUS_OK || printer.isReadyToPrint == printer.STATUS_OK) {
+				var print_str = printer.printRawString(CommandZPL, printRawStringCallback)
+				waitsFor(function () {
+					return print_str;
+				}, '10sec wait for print', ENABLE10K);
+				displayResult("Printed ", print_str);
+				printer.disconnect();
+			
+			}
+			else {
+				displayResult("Unable to Connect ", printer.isConnected);
+			}
+		});
+		runs(function () {
+			setAction("Have you seen the correct output ?");
+			waitsFor(function () {
+				return document.getElementById("actResult").innerHTML != "init";
+			}, "Timed out waiting for tester to respond", ENABLE30MIN);
+			runs(function () {
+				expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+			});
+		});
+	});
+	
+	it("VTXXX-0057|printRawString Method with callback (with the printer's blue tooth[applicable for Bluetooth Printers only], tcp/network[applicable for network printers], USB[applicable for USB printers] turned off/disconnected)", function () {
+		runs(function () {
+			setObjective("printRawString Method with callback (with the printer's blue tooth[applicable for Bluetooth Printers only], tcp/network[applicable for network printers], USB[applicable for USB printers] turned off/disconnected)");
+			setInstruction("");
+			setExpected("1. The raw string should not be sent and printed on the printer. The callback function should return STATUS_ERROR.");
+		});
+		runs(function() {
+			PrinterConnectiontype();
+		}); 
+		/*runs(function () {
+			Rho.PrinterZebra.searchPrinters({
+				"printerType": Printer.PRINTER_TYPE_ZEBRA,
+				"connectionType": connect_type
+			}, searchPrinterCallback);
+			waitsFor(function () {
+				return discovery_finished;
+			}, '120sec waiting for Search printer', ENABLE120K);
+		});
+		runs(function () {
+			displaySearchResults(printers_array, printers_errors);
+		});*/
+		runs(function () {
+			var printer = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			waitsFor(function () {
+                    return true;
+                }, 'Turn OFF(Bluetooth or TCP/Network or USB) of the Printer', 5000);
+			printer.connect();
+			if(printer.isConnected == printer.STATUS_OK || printer.isReadyToPrint == printer.STATUS_OK) {
+				var print_str = printer.printRawString(CommandCCPL, function () {
+					printRawStringCallback()
+				})
+				waitsFor(function () {
+					return print_str;
+				}, '10sec wait for print', ENABLE10K);
+				displayResult("Printed ", print_str);
+				printer.disconnect();
 			}
 			else {
 				displayResult("Unable to Connect ", printer.isConnected);
@@ -3314,7 +3731,8 @@ describe("Printer Zebra Manual Test", function() {
 				return PrinterInstance.isConnected;
 			}, '9sec wait for connection', ENABLE9K); */
 			if (PrinterInstance.isConnected) {
-				//TODO: add code
+				var selected_value = document.getElementById("combo").value;
+				PrinterInstance.sendFileContents(selected_value);
 			}
 			else {
 				displayResult("Failed to connect to the printer", connect_status);	
@@ -3331,7 +3749,9 @@ describe("Printer Zebra Manual Test", function() {
 		}, "Timed out waiting for tester to respond", ENABLE30MIN);
 		runs(function() {
 			expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+			hideCombo();
 		});
+		
 	});	
 
 	it("VTXXX-0135 | sendFileContents method with Invalid file contents filepath ( without callback )" , function() {
@@ -6935,6 +7355,441 @@ describe("Printer Zebra Manual Test", function() {
 			expect("pass").toEqual(document.getElementById("actResult").innerHTML);
 		});
 	});		
+	
+	 it('Set maxTimeoutForRead 10 sec and call retrieveFileNames', function() {
+        dispTestCaseRunning('1. Connect a Zebra printer with the device using Bluetooth setting.<br/>2. Search for the Zebra printer and get id of the printer.<br/>3. By using the Zebra printer ID, Create an instance.<br/>4. By using the instance, connect to the Printer.<br/>5. Store some files in the Zebra printer like ( image1.jpg, img2.png, img3.bmp, testfile.pdf, printarray.zpl, printhash.zpl and file with no extention )<br/>6. Set maxTimeoutForRead = 10 sec<br/>6. Retrieve file names stored on the printer by calling Instance.PrinterZebra.retrieveFileNames() with callback.<br/>7. Once the file names are retrieved Disconnect the printer');
+        dispExpectedResult('1. Should be able to retrieve filenames in 10 sec.<br/>2. Timeout error should be thrown on failure to retrieve the files in 10sec.');
+        //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
+        _result.waitToRunTest();
+        runs(function() {
+			var PrinterInstance = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			PrinterInstance.maxTimeoutForRead = 10000;
+			connect_status = PrinterInstance.connect();
+			if (PrinterInstance.isConnected) {
+				retrievedfilenames = PrinterInstance.retrieveFileNames(retrieveCallback);
+				waitsFor(function() {
+					if(retrievedfilenames.status == STATUS_SUCCESS) {
+						retrievedFlag = true;	
+					}
+					return retrievedFlag;
+				}, '9sec wait to retrieve filenames', ENABLE9K);
+				displayResult("Retrieved file names: ", JSON.stringify(retrievedfilenames));
+			}
+			else {
+				displayResult("Failed to connect to the printer", connect_status);	
+			}
+		});
+		
+		runs(function() {
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+		});
+		
+        
+        //Common Method implemented to wait for tester to make it pass or fail.Code available in specHelper.js
+        _result.waitForResponse();
+    });
+    it('maxTimeoutForRead 0 sec', function() {
+        dispTestCaseRunning('1. Connect a Zebra printer with the device using Bluetooth setting.<br/>2. Search for the Zebra printer and get id of the printer.<br/>3. By using the Zebra printer ID, Create an instance.<br/>4. By using the instance, connect to the Printer.<br/>5. Store some files in the Zebra printer like ( image1.jpg, img2.png, img3.bmp, testfile.pdf, printarray.zpl, printhash.zpl and file with no extention )<br/>6. Set maxTimeoutForRead = 0 sec<br/>6. Retrieve file names stored on the printer by calling Instance.PrinterZebra.retrieveFileNames() with callback.<br/>7. Once the file names are retrieved Disconnect the printer');
+        dispExpectedResult('1.  Timeout error should be thrown on failure to retrieve the files in 0sec.');
+        //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
+        _result.waitToRunTest();
+		
+         runs(function() {
+			var PrinterInstance = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			PrinterInstance.maxTimeoutForRead = 0;
+			connect_status = PrinterInstance.connect();
+			if (PrinterInstance.isConnected) {
+				retrievedfilenames = PrinterInstance.retrieveFileNames(retrieveCallback);
+				waitsFor(function() {
+					if(retrievedfilenames.status == STATUS_SUCCESS) {
+						retrievedFlag = true;	
+					}
+					return retrievedFlag;
+				}, '9sec wait to retrieve filenames', ENABLE9K);
+				displayResult("Retrieved file names: ", JSON.stringify(retrievedfilenames));
+			}
+			else {
+				displayResult("Failed to connect to the printer", connect_status);	
+			}
+		});
+		
+		runs(function() {
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+		});
+		
+        
+        //Common Method implemented to wait for tester to make it pass or fail.Code available in specHelper.js
+        _result.waitForResponse();
+    });
+    it('maxTimeoutForRead -1 sec', function() {
+        dispTestCaseRunning('1. Connect a Zebra printer with the device using Bluetooth setting.<br/>2. Search for the Zebra printer and get id of the printer.<br/>3. By using the Zebra printer ID, Create an instance.<br/>4. By using the instance, connect to the Printer.<br/>5. Store some files in the Zebra printer like ( image1.jpg, img2.png, img3.bmp, testfile.pdf, printarray.zpl, printhash.zpl and file with no extention )<br/>6. Set maxTimeoutForRead = -1 sec<br/>6. Retrieve file names stored on the printer by calling Instance.PrinterZebra.retrieveFileNames() with callback.<br/>7. Once the file names are retrieved Disconnect the printer');
+        dispExpectedResult('1.  Timeout error should be thrown on failure to retrieve the files.');
+        //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
+        _result.waitToRunTest();
+        
+		runs(function() {
+			var PrinterInstance = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			PrinterInstance.maxTimeoutForRead = -1;
+			connect_status = PrinterInstance.connect();
+			if (PrinterInstance.isConnected) {
+				retrievedfilenames = PrinterInstance.retrieveFileNames(retrieveCallback);
+				waitsFor(function() {
+					if(retrievedfilenames.status == STATUS_SUCCESS) {
+						retrievedFlag = true;	
+					}
+					return retrievedFlag;
+				}, '9sec wait to retrieve filenames', ENABLE9K);
+				displayResult("Retrieved file names: ", JSON.stringify(retrievedfilenames));
+			}
+			else {
+				displayResult("Failed to connect to the printer", connect_status);	
+			}
+		});
+		
+		runs(function() {
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+		});
+		
+        //Common Method implemented to wait for tester to make it pass or fail.Code available in specHelper.js
+        _result.waitForResponse();
+    });
+    it('Set maxTimeoutForOpen 10 sec and call connect', function() {
+        dispTestCaseRunning('1. Connect a Zebra printer with the device using Bluetooth setting.<br/>2. Search for the Zebra printer and get id of the printer.<br/>3. By using the Zebra printer ID, Create an instance.<br/>5. set maxTimeoutForOpen = 10 sec<br/>6. By using the instance, connect to the Printer.');
+        dispExpectedResult('1. Should be able to Open TCP connection and connect.<br/>2. Timeout error should be thrown on fail.');
+        //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
+        _result.waitToRunTest();
+       
+	   	runs(function() {
+			var PrinterInstance = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			PrinterInstance.maxTimeoutForOpen = 10000;
+			connect_status = PrinterInstance.connect();
+			if (PrinterInstance.isConnected) {
+				displayResult("Connected ", connect_status);
+			}
+			else {
+				displayResult("Failed to connect to the printer", connect_status);	
+			}
+		});
+		
+		runs(function() {
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+		});
+	   
+        //Common Method implemented to wait for tester to make it pass or fail.Code available in specHelper.js
+        _result.waitForResponse();
+    });
+    it('maxTimeoutForOpen 0 sec', function() {
+        dispTestCaseRunning('1. Connect a Zebra printer with the device using Bluetooth setting.<br/>2. Search for the Zebra printer and get id of the printer.<br/>3. By using the Zebra printer ID, Create an instance.<br/>5. set maxTimeoutForOpen = 0 sec<br/>6. By using the instance, connect to the Printer.');
+        dispExpectedResult('1.  Timeout error should be thrown on failure to connect in 0sec.');
+        //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
+        _result.waitToRunTest();
+        
+	   	runs(function() {
+			var PrinterInstance = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			PrinterInstance.maxTimeoutForOpen = 0;
+			connect_status = PrinterInstance.connect();
+			if (PrinterInstance.isConnected) {
+				displayResult("Connected ", connect_status);
+			}
+			else {
+				displayResult("Failed to connect to the printer", connect_status);	
+			}
+		});
+		
+        //Common Method implemented to wait for tester to make it pass or fail.Code available in specHelper.js
+        _result.waitForResponse();
+    });
+    it('maxTimeoutForOpen -1 sec', function() {
+        dispTestCaseRunning('1. Connect a Zebra printer with the device using Bluetooth setting.<br/>2. Search for the Zebra printer and get id of the printer.<br/>3. By using the Zebra printer ID, Create an instance.<br/>5. set maxTimeoutForOpen = -1 sec<br/>6. By using the instance, connect to the Printer.');
+        dispExpectedResult('1.  Timeout error should be thrown on failure to connect.');
+        //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
+        _result.waitToRunTest();
+        
+	   	runs(function() {
+			var PrinterInstance = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			PrinterInstance.maxTimeoutForOpen = -1;
+			connect_status = PrinterInstance.connect();
+			if (PrinterInstance.isConnected) {
+				displayResult("Connected ", connect_status);
+			}
+			else {
+				displayResult("Failed to connect to the printer", connect_status);	
+			}
+		});
+		
+        //Common Method implemented to wait for tester to make it pass or fail.Code available in specHelper.js
+        _result.waitForResponse();
+    });
+    it('timeToWaitForMoreData 10 sec after retrieve files', function() {
+        dispTestCaseRunning('1. Connect a Zebra printer with the device using Bluetooth setting.<br/>2. Search for the Zebra printer and get id of the printer.<br/>3. By using the Zebra printer ID, Create an instance.<br/>4. By using the instance, connect to the Printer.<br/>5. Store some files in the Zebra printer like ( image1.jpg, img2.png, img3.bmp, testfile.pdf, printarray.zpl, printhash.zpl and file with no extention )<br/>6. Set maxTimeoutForRead = 1 sec<br/>7. set timeToWaitForMoreData = 10 sec<br/>6. Retrieve file names stored on the printer by calling Instance.PrinterZebra.retrieveFileNames() with callback.<br/>7. Once the file names are retrieved Disconnect the printer');
+        dispExpectedResult('1. Should be able to wait 10 sec for more data after timeout for read occurs.');
+        //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
+        _result.waitToRunTest();
+        
+         runs(function() {
+			var PrinterInstance = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			PrinterInstance.maxTimeoutForRead = 1000;
+			PrinterInstance.timeToWaitForMoreData = 10000;
+			connect_status = PrinterInstance.connect();
+			if (PrinterInstance.isConnected) {
+				retrievedfilenames = PrinterInstance.retrieveFileNames(retrieveCallback);
+				waitsFor(function() {
+					if(retrievedfilenames.status == STATUS_SUCCESS) {
+						retrievedFlag = true;	
+					}
+					return retrievedFlag;
+				}, '9sec wait to retrieve filenames', ENABLE9K);
+				displayResult("Retrieved file names: ", JSON.stringify(retrievedfilenames));
+			}
+			else {
+				displayResult("Failed to connect to the printer", connect_status);	
+			}
+		});
+		
+		runs(function() {
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+		});
+		
+        
+        //Common Method implemented to wait for tester to make it pass or fail.Code available in specHelper.js
+        _result.waitForResponse();
+    });
+    it('timeToWaitForMoreData -1 sec after retrieve files', function() {
+        dispTestCaseRunning('1. Connect a Zebra printer with the device using Bluetooth setting.<br/>2. Search for the Zebra printer and get id of the printer.<br/>3. By using the Zebra printer ID, Create an instance.<br/>4. By using the instance, connect to the Printer.<br/>5. Store some files in the Zebra printer like ( image1.jpg, img2.png, img3.bmp, testfile.pdf, printarray.zpl, printhash.zpl and file with no extention )<br/>6. Set maxTimeoutForRead = 1 sec<br/>7. set timeToWaitForMoreData = -1 sec<br/>6. Retrieve file names stored on the printer by calling Instance.PrinterZebra.retrieveFileNames() with callback.<br/>7. Once the file names are retrieved Disconnect the printer');
+        dispExpectedResult('1.  Timeout error should be thrown on failure.');
+        //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
+        _result.waitToRunTest();
+        
+         runs(function() {
+			var PrinterInstance = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			PrinterInstance.maxTimeoutForRead = 1000;
+			PrinterInstance.timeToWaitForMoreData = -1;
+			connect_status = PrinterInstance.connect();
+			if (PrinterInstance.isConnected) {
+				retrievedfilenames = PrinterInstance.retrieveFileNames(retrieveCallback);
+				waitsFor(function() {
+					if(retrievedfilenames.status == STATUS_SUCCESS) {
+						retrievedFlag = true;	
+					}
+					return retrievedFlag;
+				}, '9sec wait to retrieve filenames', ENABLE9K);
+				displayResult("Retrieved file names: ", JSON.stringify(retrievedfilenames));
+			}
+			else {
+				displayResult("Failed to connect to the printer", connect_status);	
+			}
+		});
+		
+		runs(function() {
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+		});
+        //Common Method implemented to wait for tester to make it pass or fail.Code available in specHelper.js
+        _result.waitForResponse();
+    });
+    it('timeToWaitAfterReadInMilliseconds 10 sec', function() {
+        dispTestCaseRunning('1. Connect a Zebra printer with the device using Bluetooth setting.<br/>2. Search for the Zebra printer and get id of the printer.<br/>3. By using the Zebra printer ID, Create an instance.<br/>4. By using the instance, connect to the Printer.<br/>5. Store some files in the Zebra printer like ( image1.jpg, img2.png, img3.bmp, testfile.pdf, printarray.zpl, printhash.zpl and file with no extention )<br/>6. Set maxTimeoutForRead = 10 sec<br/>7. set timeToWaitAfterReadInMilliseconds = 10 sec<br/>6. Retrieve file names stored on the printer by calling Instance.PrinterZebra.retrieveFileNames() with callback.<br/>7. Once the file names are retrieved Disconnect the printer');
+        dispExpectedResult('1. Should wait for 10 sec more after retrieving files.');
+        //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
+        _result.waitToRunTest();
+        
+         runs(function() {
+			var PrinterInstance = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			PrinterInstance.maxTimeoutForRead = 10000;
+			PrinterInstance.timeToWaitAfterReadInMilliseconds = 10000;
+			connect_status = PrinterInstance.connect();
+			if (PrinterInstance.isConnected) {
+				retrievedfilenames = PrinterInstance.retrieveFileNames(retrieveCallback);
+				waitsFor(function() {
+					if(retrievedfilenames.status == STATUS_SUCCESS) {
+						retrievedFlag = true;	
+					}
+					return retrievedFlag;
+				}, '9sec wait to retrieve filenames', ENABLE9K);
+				displayResult("Retrieved file names: ", JSON.stringify(retrievedfilenames));
+			}
+			else {
+				displayResult("Failed to connect to the printer", connect_status);	
+			}
+		});
+		
+		runs(function() {
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+		});
+		
+        //Common Method implemented to wait for tester to make it pass or fail.Code available in specHelper.js
+        _result.waitForResponse();
+    });
+    it('timeToWaitAfterReadInMilliseconds 0 sec', function() {
+        dispTestCaseRunning('1. Connect a Zebra printer with the device using Bluetooth setting.<br/>2. Search for the Zebra printer and get id of the printer.<br/>3. By using the Zebra printer ID, Create an instance.<br/>4. By using the instance, connect to the Printer.<br/>5. Store some files in the Zebra printer like ( image1.jpg, img2.png, img3.bmp, testfile.pdf, printarray.zpl, printhash.zpl and file with no extention )<br/>6. Set maxTimeoutForRead = 10 sec<br/>7. set timeToWaitAfterReadInMilliseconds = 0 sec<br/>6. Retrieve file names stored on the printer by calling Instance.PrinterZebra.retrieveFileNames() with callback.<br/>7. Once the file names are retrieved Disconnect the printer');
+        dispExpectedResult('1. Should wait for 0 sec more after retrieving files.');
+        //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
+        _result.waitToRunTest();
+        
+         runs(function() {
+			var PrinterInstance = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			PrinterInstance.maxTimeoutForRead = 10000;
+			PrinterInstance.timeToWaitAfterReadInMilliseconds = 0;
+			connect_status = PrinterInstance.connect();
+			if (PrinterInstance.isConnected) {
+				retrievedfilenames = PrinterInstance.retrieveFileNames(retrieveCallback);
+				waitsFor(function() {
+					if(retrievedfilenames.status == STATUS_SUCCESS) {
+						retrievedFlag = true;	
+					}
+					return retrievedFlag;
+				}, '9sec wait to retrieve filenames', ENABLE9K);
+				displayResult("Retrieved file names: ", JSON.stringify(retrievedfilenames));
+			}
+			else {
+				displayResult("Failed to connect to the printer", connect_status);	
+			}
+		});
+		
+		runs(function() {
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+		});
+		
+        //Common Method implemented to wait for tester to make it pass or fail.Code available in specHelper.js
+        _result.waitForResponse();
+    });
+    it('timeToWaitAfterReadInMilliseconds -1 sec', function() {
+        dispTestCaseRunning('1. Connect a Zebra printer with the device using Bluetooth setting.<br/>2. Search for the Zebra printer and get id of the printer.<br/>3. By using the Zebra printer ID, Create an instance.<br/>4. By using the instance, connect to the Printer.<br/>5. Store some files in the Zebra printer like ( image1.jpg, img2.png, img3.bmp, testfile.pdf, printarray.zpl, printhash.zpl and file with no extention )<br/>6. Set maxTimeoutForRead = 10 sec<br/>7. set timeToWaitAfterReadInMilliseconds = -1 sec<br/>6. Retrieve file names stored on the printer by calling Instance.PrinterZebra.retrieveFileNames() with callback.<br/>7. Once the file names are retrieved Disconnect the printer');
+        dispExpectedResult('1. Should wait for -1 sec more after retrieving files.');
+        //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
+        _result.waitToRunTest();
+        
+         runs(function() {
+			var PrinterInstance = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			PrinterInstance.maxTimeoutForRead = 10000;
+			PrinterInstance.timeToWaitAfterReadInMilliseconds = -1;
+			connect_status = PrinterInstance.connect();
+			if (PrinterInstance.isConnected) {
+				retrievedfilenames = PrinterInstance.retrieveFileNames(retrieveCallback);
+				waitsFor(function() {
+					if(retrievedfilenames.status == STATUS_SUCCESS) {
+						retrievedFlag = true;	
+					}
+					return retrievedFlag;
+				}, '9sec wait to retrieve filenames', ENABLE9K);
+				displayResult("Retrieved file names: ", JSON.stringify(retrievedfilenames));
+			}
+			else {
+				displayResult("Failed to connect to the printer", connect_status);	
+			}
+		});
+		
+		runs(function() {
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+		});
+		
+        //Common Method implemented to wait for tester to make it pass or fail.Code available in specHelper.js
+        _result.waitForResponse();
+    });
+    it('timeToWaitAfterWriteInMilliseconds 10 sec', function() {
+        dispTestCaseRunning('1. Connect a Zebra printer with the device using Bluetooth setting.<br/>2. Search for the Zebra printer and get id of the printer.<br/>3. By using the Zebra printer ID, Create an instance.<br/>4. By using the instance, connect to the Printer.<br/>5. Store some files in the Zebra printer like ( image1.jpg, img2.png, img3.bmp, testfile.pdf, printarray.zpl, printhash.zpl and file with no extention )<br/>6. set timeToWaitAfterWriteInMilliseconds = 10 sec<br/>7. Store image files with callback.<br/>8. Once the file names are retrieved Disconnect the printer');
+        dispExpectedResult('1. Should wait for 10 sec more after storing image files files.');
+        //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
+        _result.waitToRunTest();
+        
+         runs(function() {
+			var PrinterInstance = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			PrinterInstance.timeToWaitAfterWriteInMilliseconds = 10000;
+			connect_status = PrinterInstance.connect();
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.storeImage(printerDriveAndFileName, bmpimagepath_320px, 50, 50,storeImageCallback);
+			}
+			else {
+				displayResult("Failed to connect to the printer", connect_status);	
+			}
+			
+		});
+		
+		runs(function() {
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+		});
+		
+        //Common Method implemented to wait for tester to make it pass or fail.Code available in specHelper.js
+        _result.waitForResponse();
+    });
+    it('timeToWaitAfterWriteInMilliseconds 0 sec', function() {
+        dispTestCaseRunning('1. Connect a Zebra printer with the device using Bluetooth setting.<br/>2. Search for the Zebra printer and get id of the printer.<br/>3. By using the Zebra printer ID, Create an instance.<br/>4. By using the instance, connect to the Printer.<br/>5. Store some files in the Zebra printer like ( image1.jpg, img2.png, img3.bmp, testfile.pdf, printarray.zpl, printhash.zpl and file with no extention )<br/>6. set timeToWaitAfterWriteInMilliseconds = 0 sec<br/>6. Store image files with callback.<br/>7. Once the file names are retrieved Disconnect the printer');
+        dispExpectedResult('1. Should wait for 0 sec more after storing image files files.');
+        //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
+        _result.waitToRunTest();
+        
+		 runs(function() {
+			var PrinterInstance = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			PrinterInstance.timeToWaitAfterWriteInMilliseconds = 0;
+			connect_status = PrinterInstance.connect();
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.storeImage(printerDriveAndFileName, bmpimagepath_320px, 50, 50,storeImageCallback);
+			}
+			else {
+				displayResult("Failed to connect to the printer", connect_status);	
+			}
+			
+		});
+		
+		runs(function() {
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+		});
+		
+        //Common Method implemented to wait for tester to make it pass or fail.Code available in specHelper.js
+        _result.waitForResponse();
+    });
+    it('timeToWaitAfterWriteInMilliseconds -1 sec', function() {
+        dispTestCaseRunning('1. Connect a Zebra printer with the device using Bluetooth setting.<br/>2. Search for the Zebra printer and get id of the printer.<br/>3. By using the Zebra printer ID, Create an instance.<br/>4. By using the instance, connect to the Printer.<br/>5. Store some files in the Zebra printer like ( image1.jpg, img2.png, img3.bmp, testfile.pdf, printarray.zpl, printhash.zpl and file with no extention )<br/>7. set timeToWaitAfterWriteInMilliseconds = -1 sec<br/>6. Store image files with callback.<br/>7. Once the file names are retrieved Disconnect the printer');
+        dispExpectedResult('1. Should wait for -1 sec more after storing image files files.');
+        //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
+        _result.waitToRunTest();
+        
+		
+		 runs(function() {
+			var PrinterInstance = Rho.PrinterZebra.getPrinterByID(printers_array[0].printerID);
+			PrinterInstance.timeToWaitAfterWriteInMilliseconds = -1;
+			connect_status = PrinterInstance.connect();
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.storeImage(printerDriveAndFileName, bmpimagepath_320px, 50, 50,storeImageCallback);
+			}
+			else {
+				displayResult("Failed to connect to the printer", connect_status);	
+			}
+			
+		});
+		
+		runs(function() {
+			if (PrinterInstance.isConnected) {
+				PrinterInstance.disconnect();
+			}
+		});
+		
+		
+        //Common Method implemented to wait for tester to make it pass or fail.Code available in specHelper.js
+        _result.waitForResponse();
+    });
+	
 	
 	it("VTXXX-0225 | requestState Method with callback (check All Zebra printer states)  " , function() {
 		runs(function() {
