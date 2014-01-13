@@ -119,8 +119,8 @@ function printRawStringCallback() {
 describe("Printing_with_JS", function () {
     beforeEach(function () {
         /* ... Set up your object ... */
-        $('#for_js').show();
-        $('#for_ruby').hide();
+        $('#for_js').hide();
+        $('#for_ruby').show();
     });
 
     afterEach(function () {
@@ -217,6 +217,8 @@ describe("Printing_with_JS", function () {
             displayTestInstruction("");
             displayTestExpectation("Method should return the result as names/list of printer types that are supported in this build.");
 
+            _result.waitToRunTest();
+
             runs(function () {
                 var printerTypes = Rho.Printer.enumerateSupportedTypes();
 
@@ -228,15 +230,15 @@ describe("Printing_with_JS", function () {
                 return captured;
             }, 'Waiting for Pass or Fail.', 10000);
 
-            runs(function () {
-                expect(testResult).toEqual(true);
-            });
+            _result.waitForResponse();
         });
 
         it("VTXXX-0002-enumerateSupportedTypes Method (with callback function)", function () {
             displayTestDescription("VTXXX-0002 | enumerateSupportedTypes Method (with callback function)");
             displayTestInstruction("");
             displayTestExpectation("Method should return the result as names/list of printer types that are supported in this build.");
+
+            _result.waitToRunTest();
 
             runs(function () {
                 Rho.Printer.enumerateSupportedTypes(enumerateCallback);
@@ -249,15 +251,15 @@ describe("Printing_with_JS", function () {
             }, 'Waiting for Pass or Fail.', 10000);
 
 
-            runs(function () {
-                expect(testResult).toEqual(true);
-            });
+            _result.waitForResponse();
         });
 
         it("VTXXX-0003-enumerateSupportedTypes Method (with anonymous function)", function () {
             displayTestDescription("VTXXX-0003 | enumerateSupportedTypes Method (with anonymous function)");
             displayTestInstruction("");
             displayTestExpectation("Method should return the result as names/list of printer types that are supported in this build.");
+
+            _result.waitToRunTest();
 
             runs(function () {
                 Rho.Printer.enumerateSupportedTypes(function (printer) {
@@ -272,9 +274,7 @@ describe("Printing_with_JS", function () {
             }, 'Waiting for Pass or Fail.', 10000);
 
 
-            runs(function () {
-                expect(testResult).toEqual(true);
-            });
+            _result.waitForResponse();
         });
 
         it("VTXXX-0004-searchPrinters Method(default options)", function () {
@@ -282,6 +282,8 @@ describe("Printing_with_JS", function () {
             displayTestDescription("VTXXX-0004 | searchPrinters Method(default options)");
             displayTestInstruction("");
             displayTestExpectation("The printer connected with the device should be discovered successfully and return STATUS_SUCCESS.");
+
+            _result.waitToRunTest();
 
             runs(function () {
                 Rho.Printer.searchPrinters(searchPrinterCallback);
@@ -308,9 +310,7 @@ describe("Printing_with_JS", function () {
             }, 'Waiting for Pass or Fail.', 5000);
 
 
-            runs(function () {
-                expect(testResult).toEqual(true);
-            });
+            _result.waitForResponse();
         });
 
         it("VTXXX-0005-searchPrinters Method(with options \"printerType\" and \"connectionType\")", function () {
@@ -318,6 +318,8 @@ describe("Printing_with_JS", function () {
             displayTestDescription("VTXXX-0005 | searchPrinters Method(with options \"printerType\" and \"connectionType\")");
             displayTestInstruction("");
             displayTestExpectation("The printer connected with the device should be discovered successfully and return STATUS_SUCCESS.");
+
+            _result.waitToRunTest();
 
             runs(function () {
                 connect_type = Rho.Printer.connectionType;
@@ -350,9 +352,7 @@ describe("Printing_with_JS", function () {
             }, 'Waiting for Pass or Fail.', 10000);
 
 
-            runs(function () {
-                expect(testResult).toEqual(true);
-            });
+            _result.waitForResponse();
         });
 
         it("VTXXX-0006-searchPrinters Method(with options \"printerType\", \"connectionType\", \"timeout\")", function () {
@@ -360,6 +360,8 @@ describe("Printing_with_JS", function () {
             displayTestDescription("VTXXX-0006 | searchPrinters Method(with options \"printerType\", \"connectionType\", \"timeout\")");
             displayTestInstruction("");
             displayTestExpectation("The printer connected with the device should be discovered successfully and return STATUS_SUCCESS.");
+
+            _result.waitToRunTest();
 
             runs(function () {
                 if (!connect_type) {
@@ -386,9 +388,7 @@ describe("Printing_with_JS", function () {
             }, 'Waiting for Pass or Fail.', 10000);
 
 
-            runs(function () {
-                expect(testResult).toEqual(true);
-            });
+            _result.waitForResponse();
         });
 
         it("VTXXX-0007-searchPrinters Method(with only option \"timeout\")", function () {
@@ -396,6 +396,8 @@ describe("Printing_with_JS", function () {
             displayTestDescription("VTXXX-0007 | with only option \"timeout\")");
             displayTestInstruction("");
             displayTestExpectation("The printer connected with the device should be discovered successfully and return STATUS_SUCCESS.");
+
+            _result.waitToRunTest();
 
             runs(function () {
                 if (!connect_type) {
@@ -420,9 +422,7 @@ describe("Printing_with_JS", function () {
             }, 'Waiting for Pass or Fail.', 10000);
 
 
-            runs(function () {
-                expect(testResult).toEqual(true);
-            });
+            _result.waitForResponse();
         });
 
         it("VTXXX-0008-searchPrinters Method(with only option \"deviceAddress\")", function () {
@@ -430,6 +430,8 @@ describe("Printing_with_JS", function () {
             displayTestDescription("VTXXX-0008 | searchPrinters Method(with only option \"deviceAddress\")");
             displayTestInstruction("");
             displayTestExpectation("The printer connected with the device should be discovered successfully and return STATUS_SUCCESS.");
+
+            _result.waitToRunTest();
 
             runs(function () {
                 $('#address').css("display", "block");
@@ -462,9 +464,7 @@ describe("Printing_with_JS", function () {
             }, 'Waiting for Pass or Fail.', 10000);
 
 
-            runs(function () {
-                expect(testResult).toEqual(true);
-            });
+            _result.waitForResponse();
         });
 
         it("VTXXX-0009-searchPrinters Method(with options \"printerType\", \"connectionType\", \"timeout\", \"deviceAddress\")", function () {
@@ -472,6 +472,8 @@ describe("Printing_with_JS", function () {
             displayTestDescription("VTXXX-0009 | searchPrinters Method(with options \"printerType\", \"connectionType\", \"timeout\", \"deviceAddress\")");
             displayTestInstruction("");
             displayTestExpectation("The printer connected with the device should be discovered successfully and return STATUS_SUCCESS.");
+
+            _result.waitToRunTest();
 
             runs(function () {
                 $('#address').css("display", "block");
@@ -510,9 +512,7 @@ describe("Printing_with_JS", function () {
             }, 'Waiting for Pass or Fail.', 10000);
 
 
-            runs(function () {
-                expect(testResult).toEqual(true);
-            });
+            _result.waitForResponse();
         });
 
         if (Rho.Printer.printerType != Rho.Printer.PRINTER_TYPE_ZEBRA || Rho.Printer.connectionType != Rho.Printer.CONNECTION_TYPE_TCP) {
@@ -521,6 +521,8 @@ describe("Printing_with_JS", function () {
                 displayTestDescription("VTXXX-0010 | searchPrinters Method for non-zebra printer(with options \"printerType\" and \"connectionType\")");
                 displayTestInstruction("");
                 displayTestExpectation("The printer should not be discovered with these settings and return error message for STATUS_ERROR.");
+
+                _result.waitToRunTest();
 
                 runs(function () {
 
@@ -556,6 +558,8 @@ describe("Printing_with_JS", function () {
             displayTestInstruction("");
             displayTestExpectation("The printer should not be discovered with these settings and return error message for STATUS_ERROR.");
 
+            _result.waitToRunTest();
+
             runs(function () {
 
                 Rho.Printer.searchPrinters({
@@ -577,9 +581,7 @@ describe("Printing_with_JS", function () {
             }, 'Waiting for Pass or Fail.', 10000);
 
 
-            runs(function () {
-                expect(testResult).toEqual(true);
-            });
+            _result.waitForResponse();
         });
 
         it("VTXXX-0012-stopSearch Method (without callback function)", function () {
@@ -587,6 +589,8 @@ describe("Printing_with_JS", function () {
             displayTestDescription("VTXXX-0012 | stopSearch Method (without callback function)");
             displayTestInstruction("");
             displayTestExpectation("The search should be terminated and printer should not be discovered.");
+
+            _result.waitToRunTest();
 
             runs(function () {
                 // Let the printer be search first then use stop
@@ -608,9 +612,7 @@ describe("Printing_with_JS", function () {
             }, 'Waiting for Pass or Fail.', 10000);
 
 
-            runs(function () {
-                expect(testResult).toEqual(true);
-            });
+            _result.waitForResponse();
         });
 
         it("VTXXX-0013-stopSearch Method (with callback function)", function () {
@@ -618,6 +620,8 @@ describe("Printing_with_JS", function () {
             displayTestDescription("VTXXX-0013 | stopSearch Method (with callback function)");
             displayTestInstruction("");
             displayTestExpectation("The search should be terminated and printer should not be discovered.");
+
+            _result.waitToRunTest();
 
             runs(function () {
                 // Let the printer be search first then use stop
@@ -639,9 +643,7 @@ describe("Printing_with_JS", function () {
             }, 'Waiting for Pass or Fail.', 10000);
 
 
-            runs(function () {
-                expect(testResult).toEqual(true);
-            });
+            _result.waitForResponse();
         });
 
         it("VTXXX-0014-stopSearch Method (with anonymous function)", function () {
@@ -649,6 +651,8 @@ describe("Printing_with_JS", function () {
             displayTestDescription("VTXXX-0014 | stopSearch Method (with anonymous function)");
             displayTestInstruction("");
             displayTestExpectation("The search should be terminated and printer should not be discovered.");
+
+            _result.waitToRunTest();
 
             runs(function () {
                 // Let the printer be search first then use stop
@@ -672,9 +676,7 @@ describe("Printing_with_JS", function () {
             }, 'Waiting for Pass or Fail.', 10000);
 
 
-            runs(function () {
-                expect(testResult).toEqual(true);
-            });
+            _result.waitForResponse();
         });
 
         it("VTXXX-0015-getPrinterByID Method ", function () {
@@ -682,6 +684,8 @@ describe("Printing_with_JS", function () {
             displayTestDescription("VTXXX-0015 | getPrinterByID Method ");
             displayTestInstruction("");
             displayTestExpectation("The method should return an instance of the connected printer.");
+
+            _result.waitToRunTest();
 
             runs(function () {
                 // Let the printer be search first then use stop
@@ -709,9 +713,7 @@ describe("Printing_with_JS", function () {
             }, 'Waiting for Pass or Fail.', 10000);
 
 
-            runs(function () {
-                expect(testResult).toEqual(true);
-            });
+            _result.waitForResponse();
         });
 
         it("VTXXX-0016-getPrinterByID Method without discovering the printer ", function () {
@@ -719,6 +721,8 @@ describe("Printing_with_JS", function () {
             displayTestDescription("VTXXX-0016 | getPrinterByID Method without discovering the printer ");
             displayTestInstruction("");
             displayTestExpectation("The method should not return any instance of the disconnected printer and STATUS_ERROR should be returned with error message.");
+
+            _result.waitToRunTest();
 
             runs(function () {
                 //try {
@@ -735,9 +739,7 @@ describe("Printing_with_JS", function () {
             }, 'Waiting for Pass or Fail.', 10000);
 
 
-            runs(function () {
-                expect(testResult).toEqual(true);
-            });
+            _result.waitForResponse();
         });
 
         it("VTXXX-0017-getPrinterByID Method with device turned off device ", function () {
@@ -745,6 +747,8 @@ describe("Printing_with_JS", function () {
             displayTestDescription("VTXXX-0017 | getPrinterByID Method with device turned off device ");
             displayTestInstruction("");
             displayTestExpectation("The method should not return any instance of the disconnected printer and STATUS_ERROR should be returned with error message.");
+
+            _result.waitToRunTest();
 
             waitsFor(function () {
                 return true;
@@ -776,9 +780,7 @@ describe("Printing_with_JS", function () {
             }, 'Waiting for Pass or Fail.', 10000);
 
 
-            runs(function () {
-                expect(testResult).toEqual(true);
-            });
+            _result.waitForResponse();
         });
 
         it("VTXXX-0018-connect Method (without callback function) ", function () {
@@ -786,6 +788,8 @@ describe("Printing_with_JS", function () {
             displayTestDescription("VTXXX-0018 | connect Method (without callback function) ");
             displayTestInstruction("");
             displayTestExpectation("The string should be printed successfully on the printer.");
+
+            _result.waitToRunTest();
 
             waitsFor(function () {
                 return true;
@@ -817,9 +821,7 @@ describe("Printing_with_JS", function () {
             }, 'Waiting for Pass or Fail.', 10000);
 
 
-            runs(function () {
-                expect(testResult).toEqual(true);
-            });
+            _result.waitForResponse();
         });
 
         it("VTXXX-0019-connect Method (with callback function) ", function () {
@@ -827,6 +829,9 @@ describe("Printing_with_JS", function () {
             displayTestDescription("VTXXX-0019 | connect Method (with callback function) ");
             displayTestInstruction("");
             displayTestExpectation("The callback should return STATUS_OK");
+
+            _result.waitToRunTest();
+
             /*
             runs(function () {
             	// Let the printer be search first then use stop
@@ -849,9 +854,7 @@ describe("Printing_with_JS", function () {
             }, 'Waiting for Pass or Fail.', 10000);
 
 
-            runs(function () {
-                expect(testResult).toEqual(true);
-            });
+            _result.waitForResponse();
         });
 
         it("VTXXX-0020-connect Method (with anonymous function) ", function () {
@@ -859,6 +862,9 @@ describe("Printing_with_JS", function () {
             displayTestDescription("VTXXX-0020 | connect Method (with anonymous function) ");
             displayTestInstruction("");
             displayTestExpectation("The callback should return STATUS_OK");
+
+            _result.waitToRunTest();
+
             /*
             runs(function () {
             	// Let the printer be search first then use stop
@@ -885,9 +891,7 @@ describe("Printing_with_JS", function () {
             }, 'Waiting for Pass or Fail.', 10000);
 
 
-            runs(function () {
-                expect(testResult).toEqual(true);
-            });
+            _result.waitForResponse();
         });
 
         it("VTXXX-0021-connect Method (with param \"timeout\") ", function () {
@@ -895,6 +899,9 @@ describe("Printing_with_JS", function () {
             displayTestDescription("VTXXX-0021 | connect Method (with param \"timeout\") ");
             displayTestInstruction("");
             displayTestExpectation("The Printer.isConnected should return STATUS_OK");
+
+            _result.waitToRunTest();
+
             /*
             runs(function () {
             	// Let the printer be search first then use stop
@@ -921,9 +928,7 @@ describe("Printing_with_JS", function () {
             }, 'Waiting for Pass or Fail.', 10000);
 
 
-            runs(function () {
-                expect(testResult).toEqual(true);
-            });
+            _result.waitForResponse();
         });
 
         it("VTXXX-0022-connect Method (with param \"timeout\":0) ", function () {
@@ -931,6 +936,9 @@ describe("Printing_with_JS", function () {
             displayTestDescription("VTXXX-0022 | connect Method (with param \"timeout\":0) ");
             displayTestInstruction("");
             displayTestExpectation("The Printer.isConnected should return STATUS_TIMEOUT");
+
+            _result.waitToRunTest();
+
             /*
             runs(function () {
             	// Let the printer be search first then use stop
@@ -957,9 +965,7 @@ describe("Printing_with_JS", function () {
             }, 'Waiting for Pass or Fail.', 10000);
 
 
-            runs(function () {
-                expect(testResult).toEqual(true);
-            });
+            _result.waitForResponse();
         });
 
         it("VTXXX-0023-connect Method (with param \"timeout\":1000) ", function () {
@@ -967,6 +973,9 @@ describe("Printing_with_JS", function () {
             displayTestDescription("VTXXX-0023 | connect Method (with param \"timeout\":1000) ");
             displayTestInstruction("");
             displayTestExpectation("The Printer.isConnected should return STATUS_TIMEOUT");
+
+            _result.waitToRunTest();
+
             /*
             runs(function () {
             	// Let the printer be search first then use stop
@@ -993,9 +1002,7 @@ describe("Printing_with_JS", function () {
             }, 'Waiting for Pass or Fail.', 10000);
 
 
-            runs(function () {
-                expect(testResult).toEqual(true);
-            });
+            _result.waitForResponse();
         });
 
         it("VTXXX-0024-connect Method (with param \"timeout\":15000.5) ", function () {
@@ -1003,6 +1010,9 @@ describe("Printing_with_JS", function () {
             displayTestDescription("VTXXX-0024 | connect Method (with param \"timeout\":15000.5) ");
             displayTestInstruction("");
             displayTestExpectation("The method should return STATUS_ERROR due to the param value passed as float.");
+
+            _result.waitToRunTest();
+
             /*
             runs(function () {
             	// Let the printer be search first then use stop
@@ -1029,9 +1039,7 @@ describe("Printing_with_JS", function () {
             }, 'Waiting for Pass or Fail.', 10000);
 
 
-            runs(function () {
-                expect(testResult).toEqual(true);
-            });
+            _result.waitForResponse();
         });
 
         it("VTXXX-0025-connect Method (with param \"timeout\") with device disconnected ", function () {
@@ -1039,6 +1047,8 @@ describe("Printing_with_JS", function () {
             displayTestDescription("VTXXX-0025 | connect Method (with param \"timeout\") with device disconnected ");
             displayTestInstruction("");
             displayTestExpectation("The Printer.isConnected should return STATUS_ERROR or STATUS_NOT_FOUND.");
+
+            _result.waitToRunTest();
 
             waitsFor(function () {
                 return true;
@@ -1069,9 +1079,7 @@ describe("Printing_with_JS", function () {
             }, 'Waiting for Pass or Fail.', 10000);
 
 
-            runs(function () {
-                expect(testResult).toEqual(true);
-            });
+            _result.waitForResponse();
         });
 
         // Need to write tests for "updateState" after implementation from the developer(if applicable)
@@ -1081,6 +1089,8 @@ describe("Printing_with_JS", function () {
             displayTestDescription("VTXXX-0030 | disconnect Method (without callback function) ");
             displayTestInstruction("");
             displayTestExpectation("The method should execute without errors.");
+
+            _result.waitToRunTest();
 
             waitsFor(function () {
                 return true;
@@ -1109,9 +1119,7 @@ describe("Printing_with_JS", function () {
             }, 'Waiting for Pass or Fail.', 10000);
 
 
-            runs(function () {
-                expect(testResult).toEqual(true);
-            });
+            _result.waitForResponse();
         });
 
         it("VTXXX-0031-disconnect Method (with callback function) ", function () {
@@ -1119,6 +1127,8 @@ describe("Printing_with_JS", function () {
             displayTestDescription("VTXXX-0031 | disconnect Method (with callback function) ");
             displayTestInstruction("");
             displayTestExpectation("The method should execute without errors.");
+
+            _result.waitToRunTest();
 
             /*
             runs(function () {
@@ -1145,9 +1155,7 @@ describe("Printing_with_JS", function () {
             }, 'Waiting for Pass or Fail.', 10000);
 
 
-            runs(function () {
-                expect(testResult).toEqual(true);
-            });
+            _result.waitForResponse();
         });
 
         it("VTXXX-0032-disconnect Method (with anonymous function) ", function () {
@@ -1155,6 +1163,8 @@ describe("Printing_with_JS", function () {
             displayTestDescription("VTXXX-0032 | disconnect Method (with anonymous function) ");
             displayTestInstruction("");
             displayTestExpectation("The method should execute without errors.");
+
+            _result.waitToRunTest();
 
             /*
             runs(function () {
@@ -1183,9 +1193,7 @@ describe("Printing_with_JS", function () {
             }, 'Waiting for Pass or Fail.', 10000);
 
 
-            runs(function () {
-                expect(testResult).toEqual(true);
-            });
+            _result.waitForResponse();
         });
 
         it("VTXXX-0033-disconnect Method (sending string to print)) ", function () {
@@ -1193,6 +1201,8 @@ describe("Printing_with_JS", function () {
             displayTestDescription("VTXXX-0033 | disconnect Method (sending string to print) ");
             displayTestInstruction("");
             displayTestExpectation("The string should not be printed on the printer.");
+
+            _result.waitToRunTest();
 
             /*
             runs(function () {
@@ -1221,9 +1231,7 @@ describe("Printing_with_JS", function () {
             }, 'Waiting for Pass or Fail.', 10000);
 
 
-            runs(function () {
-                expect(testResult).toEqual(true);
-            });
+            _result.waitForResponse();
         });
 
         it("VTXXX-0034-disconnect Method (call this before the connect method) ", function () {
@@ -1231,6 +1239,8 @@ describe("Printing_with_JS", function () {
             displayTestDescription("VTXXX-0034 | disconnect Method (call this before the connect method) ");
             displayTestInstruction("");
             displayTestExpectation("The method should execute without any error.");
+
+            _result.waitToRunTest();
 
             /*
             runs(function () {
@@ -1258,9 +1268,7 @@ describe("Printing_with_JS", function () {
             }, 'Waiting for Pass or Fail.', 10000);
 
 
-            runs(function () {
-                expect(testResult).toEqual(true);
-            });
+            _result.waitForResponse();
         });
 
         it("VTXXX-0035-disconnect Method with callback (call this before the connect method) ", function () {
@@ -1268,6 +1276,8 @@ describe("Printing_with_JS", function () {
             displayTestDescription("VTXXX-0035 | disconnect Method with callback (call this before the connect method) ");
             displayTestInstruction("");
             displayTestExpectation("The method should execute with STATUS_ERROR.");
+
+            _result.waitToRunTest();
 
             /*
             runs(function () {
@@ -1295,9 +1305,7 @@ describe("Printing_with_JS", function () {
             }, 'Waiting for Pass or Fail.', 10000);
 
 
-            runs(function () {
-                expect(testResult).toEqual(true);
-            });
+            _result.waitForResponse();
         });
 
         it("VTXXX-0036-printFile Method (without callback function for jpg file) ", function () {
@@ -1305,6 +1313,8 @@ describe("Printing_with_JS", function () {
             displayTestDescription("VTXXX-0036 | printFile Method (without callback function) ");
             displayTestInstruction("");
             displayTestExpectation("The file should be sent successfully to the printer.");
+
+            _result.waitToRunTest();
 
             /*
             runs(function () {
@@ -1339,9 +1349,7 @@ describe("Printing_with_JS", function () {
             }, 'Waiting for Pass or Fail.', 10000);
 
 
-            runs(function () {
-                expect(testResult).toEqual(true);
-            });
+            _result.waitForResponse();
         });
 
         it("VTXXX-0037-printFile Method (with callback function for jpg file) ", function () {
@@ -1349,6 +1357,8 @@ describe("Printing_with_JS", function () {
             displayTestDescription("VTXXX-0037 | printFile Method (with callback function) ");
             displayTestInstruction("");
             displayTestExpectation("The file should be sent successfully to the printer.");
+
+            _result.waitToRunTest();
 
             /*
             runs(function () {
@@ -1383,9 +1393,7 @@ describe("Printing_with_JS", function () {
             }, 'Waiting for Pass or Fail.', 10000);
 
 
-            runs(function () {
-                expect(testResult).toEqual(true);
-            });
+            _result.waitForResponse();
         });
 
         it("VTXXX-0038-printFile Method (with anonymous function for jpg file) ", function () {
@@ -1393,6 +1401,8 @@ describe("Printing_with_JS", function () {
             displayTestDescription("VTXXX-0038 | printFile Method (with anonymous function for jpg file) ");
             displayTestInstruction("");
             displayTestExpectation("The file should be sent successfully to the printer.");
+
+            _result.waitToRunTest();
 
             /*
             runs(function () {
@@ -1429,9 +1439,7 @@ describe("Printing_with_JS", function () {
             }, 'Waiting for Pass or Fail.', 10000);
 
 
-            runs(function () {
-                expect(testResult).toEqual(true);
-            });
+            _result.waitForResponse();
         });
 
         it("VTXXX-0039-printFile Method (without callback function for png file) ", function () {
@@ -1439,6 +1447,8 @@ describe("Printing_with_JS", function () {
             displayTestDescription("VTXXX-0039 | printFile Method (without callback function for png file) ");
             displayTestInstruction("");
             displayTestExpectation("The file should be sent successfully to the printer.");
+
+            _result.waitToRunTest();
 
             /*
             runs(function () {
@@ -1473,9 +1483,7 @@ describe("Printing_with_JS", function () {
             }, 'Waiting for Pass or Fail.', 10000);
 
 
-            runs(function () {
-                expect(testResult).toEqual(true);
-            });
+            _result.waitForResponse();
         });
 
         it("VTXXX-0040-printFile Method (with callback function for png file) ", function () {
@@ -1483,6 +1491,8 @@ describe("Printing_with_JS", function () {
             displayTestDescription("VTXXX-0040 | printFile Method (with callback function for png file) ");
             displayTestInstruction("");
             displayTestExpectation("The file should be sent successfully to the printer.");
+
+            _result.waitToRunTest();
 
             /*
             runs(function () {
@@ -1517,9 +1527,7 @@ describe("Printing_with_JS", function () {
             }, 'Waiting for Pass or Fail.', 10000);
 
 
-            runs(function () {
-                expect(testResult).toEqual(true);
-            });
+            _result.waitForResponse();
         });
 
         it("VTXXX-0041-printFile Method (with anonymous function for png file) ", function () {
@@ -1527,6 +1535,8 @@ describe("Printing_with_JS", function () {
             displayTestDescription("VTXXX-0041 | printFile Method (with anonymous function for png file) ");
             displayTestInstruction("");
             displayTestExpectation("The file should be sent successfully to the printer.");
+
+            _result.waitToRunTest();
 
             /*
             runs(function () {
@@ -1563,9 +1573,7 @@ describe("Printing_with_JS", function () {
             }, 'Waiting for Pass or Fail.', 10000);
 
 
-            runs(function () {
-                expect(testResult).toEqual(true);
-            });
+            _result.waitForResponse();
         });
 
         if (platform == "WINDOWS") {
@@ -1574,6 +1582,8 @@ describe("Printing_with_JS", function () {
                 displayTestDescription("VTXXX-0042 | printFile Method (without callback function for bmp file) ");
                 displayTestInstruction("");
                 displayTestExpectation("The file should be sent successfully to the printer.");
+
+                _result.waitToRunTest();
 
                 /*
 	            runs(function () {
@@ -1619,6 +1629,8 @@ describe("Printing_with_JS", function () {
                 displayTestInstruction("");
                 displayTestExpectation("The file should be sent successfully to the printer.");
 
+                _result.waitToRunTest();
+
                 /*
 	            runs(function () {
 	            	// Let the printer be search first then use stop
@@ -1662,6 +1674,8 @@ describe("Printing_with_JS", function () {
                 displayTestDescription("VTXXX-0044 | printFile Method (with anonymous function for bmp file) ");
                 displayTestInstruction("");
                 displayTestExpectation("The file should be sent successfully to the printer.");
+
+                _result.waitToRunTest();
 
                 /*
 	            runs(function () {
@@ -1710,6 +1724,8 @@ describe("Printing_with_JS", function () {
             displayTestInstruction("");
             displayTestExpectation("The file should be sent successfully to the printer.");
 
+            _result.waitToRunTest();
+
             /*
             runs(function () {
             	// Let the printer be search first then use stop
@@ -1743,9 +1759,7 @@ describe("Printing_with_JS", function () {
             }, 'Waiting for Pass or Fail.', 10000);
 
 
-            runs(function () {
-                expect(testResult).toEqual(true);
-            });
+            _result.waitForResponse();
         });
 
         it("VTXXX-0046-printFile Method (with callback function for pdf file) ", function () {
@@ -1753,6 +1767,8 @@ describe("Printing_with_JS", function () {
             displayTestDescription("VTXXX-0046 | printFile Method (with callback function for pdf file) ");
             displayTestInstruction("");
             displayTestExpectation("The file should be sent successfully to the printer.");
+
+            _result.waitToRunTest();
 
             /*
             runs(function () {
@@ -1787,9 +1803,7 @@ describe("Printing_with_JS", function () {
             }, 'Waiting for Pass or Fail.', 10000);
 
 
-            runs(function () {
-                expect(testResult).toEqual(true);
-            });
+            _result.waitForResponse();
         });
 
         it("VTXXX-0047-printFile Method (with anonymous function for pdf file) ", function () {
@@ -1797,6 +1811,8 @@ describe("Printing_with_JS", function () {
             displayTestDescription("VTXXX-0047 | printFile Method (with anonymous function for pdf file) ");
             displayTestInstruction("");
             displayTestExpectation("The file should be sent successfully to the printer.");
+
+            _result.waitToRunTest();
 
             /*
             runs(function () {
@@ -1833,9 +1849,7 @@ describe("Printing_with_JS", function () {
             }, 'Waiting for Pass or Fail.', 10000);
 
 
-            runs(function () {
-                expect(testResult).toEqual(true);
-            });
+            _result.waitForResponse();
         });
 
         it("VTXXX-0048-printFile Method (with callback function and No File specified in fileURI) ", function () {
@@ -1843,6 +1857,8 @@ describe("Printing_with_JS", function () {
             displayTestDescription("VTXXX-0048 | printFile Method (with callback function and No File specified in fileURI) ");
             displayTestInstruction("");
             displayTestExpectation("No file should be sent to the printer. The callback should return STATUS_ERROR.");
+
+            _result.waitToRunTest();
 
             /*
             runs(function () {
@@ -1877,9 +1893,7 @@ describe("Printing_with_JS", function () {
             }, 'Waiting for Pass or Fail.', 10000);
 
 
-            runs(function () {
-                expect(testResult).toEqual(true);
-            });
+            _result.waitForResponse();
         });
 
         it("VTXXX-0049-printFile Method (with callback function and fileURI has no file at that location with that specified name) ", function () {
@@ -1887,6 +1901,8 @@ describe("Printing_with_JS", function () {
             displayTestDescription("VTXXX-0049 | printFile Method (with callback function and fileURI has no file at that location with that specified name) ");
             displayTestInstruction("");
             displayTestExpectation("No file should be sent to the printer. The callback should return STATUS_ERROR.");
+
+            _result.waitToRunTest();
 
             /*
             runs(function () {
@@ -1921,9 +1937,7 @@ describe("Printing_with_JS", function () {
             }, 'Waiting for Pass or Fail.', 10000);
 
 
-            runs(function () {
-                expect(testResult).toEqual(true);
-            });
+            _result.waitForResponse();
         });
 
         it("VTXXX-0050-printRawString Method (without callback function for ZPL Command) ", function () {
@@ -1931,6 +1945,8 @@ describe("Printing_with_JS", function () {
             displayTestDescription("VTXXX-0050 | printRawString Method (without callback function for ZPL Command) ");
             displayTestInstruction("");
             displayTestExpectation("The raw string should be sent successfully and printed on the printer.");
+
+            _result.waitToRunTest();
 
             /*
             runs(function () {
@@ -1965,9 +1981,7 @@ describe("Printing_with_JS", function () {
             }, 'Waiting for Pass or Fail.', 10000);
 
 
-            runs(function () {
-                expect(testResult).toEqual(true);
-            });
+            _result.waitForResponse();
         });
 
         it("VTXXX-0051-printRawString Method (with callback function for ZPL Command) ", function () {
@@ -1976,6 +1990,8 @@ describe("Printing_with_JS", function () {
             displayTestInstruction("");
             displayTestExpectation("The raw string should be sent successfully and printed on the printer. Also return STATUS_SUCCESS.");
 
+            _result.waitToRunTest();
+
             /*
             runs(function () {
             	// Let the printer be search first then use stop
@@ -2009,9 +2025,7 @@ describe("Printing_with_JS", function () {
             }, 'Waiting for Pass or Fail.', 10000);
 
 
-            runs(function () {
-                expect(testResult).toEqual(true);
-            });
+            _result.waitForResponse();
         });
 
         it("VTXXX-0052-printRawString Method (with anonymous function for ZPL Command) ", function () {
@@ -2020,6 +2034,8 @@ describe("Printing_with_JS", function () {
             displayTestInstruction("");
             displayTestExpectation("The raw string should be sent successfully and printed on the printer. Also return STATUS_SUCCESS.");
 
+            _result.waitToRunTest();
+
             /*
             runs(function () {
             	// Let the printer be search first then use stop
@@ -2053,9 +2069,7 @@ describe("Printing_with_JS", function () {
             }, 'Waiting for Pass or Fail.', 10000);
 
 
-            runs(function () {
-                expect(testResult).toEqual(true);
-            });
+            _result.waitForResponse();
         });
 
         it("VTXXX-0053-printRawString Method (without callback function for CPCL Command) ", function () {
@@ -2063,6 +2077,8 @@ describe("Printing_with_JS", function () {
             displayTestDescription("VTXXX-0053 | printRawString Method (without callback function for CPCL Command) ");
             displayTestInstruction("");
             displayTestExpectation("The raw string should be sent successfully and printed on the printer.");
+
+            _result.waitToRunTest();
 
             /*
             runs(function () {
@@ -2097,9 +2113,7 @@ describe("Printing_with_JS", function () {
             }, 'Waiting for Pass or Fail.', 10000);
 
 
-            runs(function () {
-                expect(testResult).toEqual(true);
-            });
+            _result.waitForResponse();
         });
 
         it("VTXXX-0054-printRawString Method (with callback function for CPCL Command) ", function () {
@@ -2108,6 +2122,8 @@ describe("Printing_with_JS", function () {
             displayTestInstruction("");
             displayTestExpectation("The raw string should be sent successfully and printed on the printer. Also return STATUS_SUCCESS.");
 
+            _result.waitToRunTest();
+
             /*
             runs(function () {
             	// Let the printer be search first then use stop
@@ -2141,9 +2157,7 @@ describe("Printing_with_JS", function () {
             }, 'Waiting for Pass or Fail.', 10000);
 
 
-            runs(function () {
-                expect(testResult).toEqual(true);
-            });
+            _result.waitForResponse();
         });
 
         it("VTXXX-0055-printRawString Method (with anonymous function for CPCL Command) ", function () {
@@ -2152,6 +2166,8 @@ describe("Printing_with_JS", function () {
             displayTestInstruction("");
             displayTestExpectation("The raw string should be sent successfully and printed on the printer. Also return STATUS_SUCCESS.");
 
+            _result.waitToRunTest();
+
             /*
             runs(function () {
             	// Let the printer be search first then use stop
@@ -2185,9 +2201,7 @@ describe("Printing_with_JS", function () {
             }, 'Waiting for Pass or Fail.', 10000);
 
 
-            runs(function () {
-                expect(testResult).toEqual(true);
-            });
+            _result.waitForResponse();
         });
 
         it("VTXXX-0056-printRawString Method with callback (with the printer turned off) ", function () {
@@ -2195,6 +2209,8 @@ describe("Printing_with_JS", function () {
             displayTestDescription("VTXXX-0056 | printRawString Method with callback (with the printer turned off) ");
             displayTestInstruction("");
             displayTestExpectation("The raw string should not be sent and printed on the printer. The callback function should return STATUS_ERROR.");
+
+            _result.waitToRunTest();
 
             /*
             runs(function () {
@@ -2232,9 +2248,7 @@ describe("Printing_with_JS", function () {
             }, 'Waiting for Pass or Fail.', 10000);
 
 
-            runs(function () {
-                expect(testResult).toEqual(true);
-            });
+            _result.waitForResponse();
         });
 
         it("VTXXX-0057-printRawString Method with callback (with the printer's blue tooth[applicable for Bluetooth Printers only], tcp/network[applicable for network printers], USB[applicable for USB printers] turned off/disconnected) ", function () {
@@ -2242,6 +2256,8 @@ describe("Printing_with_JS", function () {
             displayTestDescription("VTXXX-0057 | printRawString Method with callback (with the printer's blue tooth[applicable for Bluetooth Printers only], tcp/network[applicable for network printers], USB[applicable for USB printers] turned off/disconnected) ");
             displayTestInstruction("");
             displayTestExpectation("The raw string should not be sent and printed on the printer. The callback function should return STATUS_ERROR.");
+
+            _result.waitToRunTest();
 
             runs(function () {
                 // Let the printer be search first then use stop
@@ -2277,9 +2293,7 @@ describe("Printing_with_JS", function () {
             }, 'Waiting for Pass or Fail.', 10000);
 
 
-            runs(function () {
-                expect(testResult).toEqual(true);
-            });
+            _result.waitForResponse();
         });
 
         // Need to write tests for "requestState" after implementation and more info from the developer
