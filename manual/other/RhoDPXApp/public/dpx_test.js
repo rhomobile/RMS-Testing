@@ -1,4 +1,56 @@
+/*
+if (!Rho.DPX) {
+    Rho.DPX = {isMock: true};
+    Rho.DPX.FLASH_ON = 'on';
+    Rho.DPX.SOURCE_CAMERA = 'camera';
+    Rho.DPX.RESOLUTION_SMALL = '1280x960';
+    Rho.DPX.RESOLUTION_MEDIUM = '1600x1200';
+    Rho.DPX.RESOLUTION_LARGE = '2048x1536';
+    Rho.DPX.USER_MODE_SNAPSHOT = 'snapshot';
+}
+*/
+
 var dpx_tests = (function() {
+    var TEMPLATES_DIR = 'file:///sdcard/templates/';
+    if (!Rho.RhoFile.exists(TEMPLATES_DIR) || Rho.RhoFile.isDir(TEMPLATES_DIR)) {
+        alert('templates folder is not exist');
+        return null;
+    }
+
+    var templates = [];
+
+    $.each(Rho.RhoFile.listDir(TEMPLATES_DIR), function(idx, fileName) {
+        if (fileName.match(/\.xml$/))
+            templates.push(fileName);
+    });
+    // templates = ['a.xml', 'b.xml', 'c.xml'];
+
+    var resolutions = [
+        Rho.DPX.RESOLUTION_SMALL,
+        Rho.DPX.RESOLUTION_MEDIUM,
+        Rho.DPX.RESOLUTION_LARGE
+    ]
+
+    function fillDropDown(dropDown, input, values) {
+        $.each(values, function(idx, fileName) {
+            var a = $('<a>').attr({
+                href: '#', 'data-x-value': fileName
+            }).text(fileName).click(function(evt){
+                input.val($(evt.target).data('x-value'));
+            });
+            var li = $('<li>').append(a);
+
+            dropDown.append(li);
+        });
+    }
+
+
+    $(document).ready(function(){
+        fillDropDown($('ul.dropdown-menu.x-templates'),   $('input.form-control.x-template'),   templates);
+        fillDropDown($('ul.dropdown-menu.x-resolutions'), $('input.form-control.x-resolution'), resolutions);
+    });
+
+
     var each = function(object, f) {
         for (var p in object) {
             if (object.hasOwnProperty(p)) {
@@ -130,6 +182,7 @@ var dpx_tests = (function() {
         create_image(dpx, form['formCapture']['image']);
     };
 
+
     var params = {
         'template': 'file:///sdcard/templates/Logistics%20Post.xml',
 
@@ -152,6 +205,10 @@ var dpx_tests = (function() {
 
     var create_dpx = function() {
         var dpx = new Rho.DPX();
+
+        params.template = Rho.RhoFile.join(TEMPLATES_DIR, $('input.form-control.x-template').val());
+        params.manualResolution = $('input.form-control.x-resolution').val();
+
         each(params, function(k, v) {
             create_text(k + ': "' + v + '"');
             create_tag('br');

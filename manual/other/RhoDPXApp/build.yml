@@ -1,4 +1,5 @@
 ---
+#sdk: ../../../../rhodes
 sdkversion: 4.1.0
 name: RhoDPXApp
 version: '1.0'
@@ -11,5 +12,12 @@ android:
   capabilities:
   - motoroladev
 extensions:
-- dpx
+#- dpx
 debug: 1
+
+rhosim:
+  ajax_api_bridge: true
+
+minify:
+  js: false
+  css: false
