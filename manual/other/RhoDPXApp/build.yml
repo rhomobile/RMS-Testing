@@ -12,7 +12,7 @@ android:
   capabilities:
   - motoroladev
 extensions:
-#- dpx
+  - dpx
 debug: 1
 
 rhosim:
