@@ -578,49 +578,6 @@ describe('Setting manualResolutionMode', function() {
 });
 
 
-describe('Setting ocrLanguage', function() {
-
-		it('Should Set ocrLanguage to LANGUAGE_ENGLISH using direct calling method', function() {
-		dpxInstance.ocrLanguage= Rho.DPX.LANGUAGE_ENGLISH;
-		expect(dpxInstance.ocrLanguage).toEqual(Rho.DPX.LANGUAGE_ENGLISH);
-		});		
-		
-		it('Should Set ocrLanguage to english using setProperty calling method', function() {
-		dpxInstance.setProperty('ocrLanguage',Rho.DPX.LANGUAGE_ENGLISH);
-		expect(dpxInstance.getProperty('ocrLanguage')).toEqual(Rho.DPX.LANGUAGE_ENGLISH);
-		});
-		
-		it('Should Set ocrLanguage to english using setProperties calling method', function() {
-		dpxInstance.setProperties({'ocrLanguage' : Rho.DPX.LANGUAGE_ENGLISH});
-		var data = dpxInstance.getProperties(['ocrLanguage']);
-		data = data['ocrLanguage'];
-		expect(data).toEqual(Rho.DPX.LANGUAGE_ENGLISH);
-		});
-		
-		it('Should Set ocrLanguage to LANGUAGE_EUROPEAN using direct calling method', function() {
-		dpxInstance.ocrLanguage= Rho.DPX.LANGUAGE_EUROPEAN;
-		expect(dpxInstance.ocrLanguage).toEqual(Rho.DPX.LANGUAGE_EUROPEAN);
-		});
-		
-		it('Should Set ocrLanguage to european using direct calling method', function() {
-		dpxInstance.ocrLanguage=Rho.DPX.LANGUAGE_EUROPEAN;
-		expect(dpxInstance.ocrLanguage).toEqual(Rho.DPX.LANGUAGE_EUROPEAN);
-		});
-		
-		it('Should Set ocrLanguage to european using setProperty calling method', function() {
-		dpxInstance.setProperty('ocrLanguage',Rho.DPX.LANGUAGE_EUROPEAN);
-		expect(dpxInstance.getProperty('ocrLanguage')).toEqual(Rho.DPX.LANGUAGE_EUROPEAN);
-		});
-		
-		it('Should Set ocrLanguage to european using setProperties calling method', function() {
-		dpxInstance.setProperties({'ocrLanguage' : Rho.DPX.LANGUAGE_EUROPEAN});
-		var data = dpxInstance.getProperties(['ocrLanguage']);
-		data = data['ocrLanguage'];
-		expect(data).toEqual(Rho.DPX.LANGUAGE_EUROPEAN);
-		});
-});
-
-
 describe('Setting processingTimeout', function() {
 
 		it('Should Set processingTimeout to 20000 using direct calling method', function() {
