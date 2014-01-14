@@ -1,7 +1,9 @@
+var testResult = '';
+var captured = false;
+var callbackCount = 0;
+
 describe("Notification Manual FD Tests", function () {
-    var testResult = '';
-    var captured = false;
-    var callbackCount = 0;
+
 
     var buttonCallback = function (args) {
 
