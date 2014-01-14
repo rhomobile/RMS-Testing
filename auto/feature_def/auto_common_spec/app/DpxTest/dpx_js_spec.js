@@ -1,5 +1,14 @@
 describe('Rho.DPX APIs Set Test', function() {
-var dpxInstance = new Rho.DPX();
+
+var dpxInstance;
+
+beforeEach(function() {
+    dpxInstance = new Rho.DPX();
+});
+
+afterEach(function () {
+    dpxInstance.close();
+});
 
 describe('getting property default value', function() {
 
@@ -28,7 +37,7 @@ describe('getting property default value', function() {
 		});
 
 		it('Should get identificationTimeout default value', function() {
-		expect(dpxInstance.identificationTimeout).toEqual(1500);
+		expect(dpxInstance.identificationTimeout).toEqual(15000);
 		});
 
 		it('Should get inputSource default value', function() {
@@ -88,6 +97,51 @@ describe('Setting template', function() {
 });
 
 
+describe('Set audioFeedback', function() {
+
+    var property = 'audioFeedback';
+
+    var check = function(value) {
+        expect(dpxInstance[property]).toEqual(value);
+        expect(dpxInstance.getProperty(property)).toEqual(value.toString());
+        expect(dpxInstance.getProperties([property])[property]).toEqual(value.toString());
+    };
+
+    var make_it = function(caption, code) {
+        return function(value) {
+            it(caption(value), function() {
+                code(value);
+                check(value);
+            });
+        };
+    };
+
+    var its = [
+        make_it(
+            function(v) { return "dpxInstance['" + property + "'] = " + v; },
+            function(v) { dpxInstance[property] = v; }
+        ),
+        make_it(
+            function(v) { return "dpxInstance.setProperty('" + property + "', " + v + ')'; },
+            function(v) { dpxInstance.setProperty(property, v); }
+        ),
+        make_it(
+            function(v) { return "dpxInstance.setProperties({'" + property + "': '" + v + "'})'"; },
+            function(v) {
+                var map = {};
+                map[property] = v.toString();
+                dpxInstance.setProperties(map);
+            }
+        )
+    ];
+
+    for (var i = 0; i < its.length; ++i) {
+        its[i](true);
+        its[i](false);
+    }
+});
+
+
 describe('Setting audioFeedback', function() {
 
 		it('Should Set audioFeedback to true using direct calling method', function() {
@@ -96,12 +150,12 @@ describe('Setting audioFeedback', function() {
 		});
 		
 		it('Should Set audioFeedback to true using setProperty calling method', function() {
-		dpxInstance.setProperty('audioFeedback','true');
+		dpxInstance.setProperty('audioFeedback',true);
 		expect(dpxInstance.getProperty('audioFeedback')).toEqual('true');
 		});
 		
 		it('Should Set audioFeedback to true using setProperties calling method', function() {
-		dpxInstance.setProperties({'audioFeedback' : true});
+		dpxInstance.setProperties({'audioFeedback' : 'true'});
 		var data = dpxInstance.getProperties(['audioFeedback']);
 		data = data['audioFeedback'];
 		expect(data).toEqual('true');
@@ -118,7 +172,7 @@ describe('Setting audioFeedback', function() {
 		});
 		
 		it('Should Set audioFeedback to false using setProperties calling method', function() {
-		dpxInstance.setProperties({'audioFeedback' : false});
+		dpxInstance.setProperties({'audioFeedback' : 'false'});
 		var data = dpxInstance.getProperties(['audioFeedback']);
 		data = data['audioFeedback'];
 		expect(data).toEqual('false');
@@ -134,12 +188,12 @@ describe('Setting debug', function() {
 		});
 		
 		it('Should Set debug to true using setProperty calling method', function() {
-		dpxInstance.setProperty('debug','true');
+		dpxInstance.setProperty('debug',true);
 		expect(dpxInstance.getProperty('debug')).toEqual('true');
 		});
 		
 		it('Should Set debug to true using setProperties calling method', function() {
-		dpxInstance.setProperties({'debug' : true});
+		dpxInstance.setProperties({'debug' : 'true'});
 		var data = dpxInstance.getProperties(['debug']);
 		data = data['debug'];
 		expect(data).toEqual('true');
@@ -156,7 +210,7 @@ describe('Setting debug', function() {
 		});
 		
 		it('Should Set debug to false using setProperties calling method', function() {
-		dpxInstance.setProperties({'debug' : false});
+		dpxInstance.setProperties({'debug' : 'false'});
 		var data = dpxInstance.getProperties(['debug']);
 		data = data['debug'];
 		expect(data).toEqual('false');
@@ -172,12 +226,12 @@ describe('Setting hapticFeedback', function() {
 		});
 		
 		it('Should Set hapticFeedback to true using setProperty calling method', function() {
-		dpxInstance.setProperty('hapticFeedback','true');
+		dpxInstance.setProperty('hapticFeedback',true);
 		expect(dpxInstance.getProperty('hapticFeedback')).toEqual('true');
 		});
 		
 		it('Should Set hapticFeedback to true using setProperties calling method', function() {
-		dpxInstance.setProperties({'hapticFeedback' : true});
+		dpxInstance.setProperties({'hapticFeedback' : 'true'});
 		var data = dpxInstance.getProperties(['hapticFeedback']);
 		data = data['hapticFeedback'];
 		expect(data).toEqual('true');
@@ -194,7 +248,7 @@ describe('Setting hapticFeedback', function() {
 		});
 		
 		it('Should Set hapticFeedback to false using setProperties calling method', function() {
-		dpxInstance.setProperties({'hapticFeedback' : false});
+		dpxInstance.setProperties({'hapticFeedback' : 'false'});
 		var data = dpxInstance.getProperties(['hapticFeedback']);
 		data = data['hapticFeedback'];
 		expect(data).toEqual('false');
@@ -210,12 +264,12 @@ describe('Setting ledFeedback', function() {
 		});
 		
 		it('Should Set ledFeedback to true using setProperty calling method', function() {
-		dpxInstance.setProperty('ledFeedback','true');
+		dpxInstance.setProperty('ledFeedback',true);
 		expect(dpxInstance.getProperty('ledFeedback')).toEqual('true');
 		});
 		
 		it('Should Set ledFeedback to true using setProperties calling method', function() {
-		dpxInstance.setProperties({'ledFeedback' : true});
+		dpxInstance.setProperties({'ledFeedback' : 'true'});
 		var data = dpxInstance.getProperties(['ledFeedback']);
 		data = data['ledFeedback'];
 		expect(data).toEqual('true');
@@ -232,7 +286,7 @@ describe('Setting ledFeedback', function() {
 		});
 		
 		it('Should Set ledFeedback to false using setProperties calling method', function() {
-		dpxInstance.setProperties({'ledFeedback' : false});
+		dpxInstance.setProperties({'ledFeedback' : 'false'});
 		var data = dpxInstance.getProperties(['ledFeedback']);
 		data = data['ledFeedback'];
 		expect(data).toEqual('false');
@@ -248,12 +302,12 @@ describe('Setting fileInteractiveMode', function() {
 		});
 		
 		it('Should Set fileInteractiveMode to true using setProperty calling method', function() {
-		dpxInstance.setProperty('fileInteractiveMode','true');
+		dpxInstance.setProperty('fileInteractiveMode',true);
 		expect(dpxInstance.getProperty('fileInteractiveMode')).toEqual('true');
 		});
 		
 		it('Should Set fileInteractiveMode to true using setProperties calling method', function() {
-		dpxInstance.setProperties({'fileInteractiveMode' : true});
+		dpxInstance.setProperties({'fileInteractiveMode' : 'true'});
 		var data = dpxInstance.getProperties(['fileInteractiveMode']);
 		data = data['fileInteractiveMode'];
 		expect(data).toEqual('true');
@@ -270,7 +324,7 @@ describe('Setting fileInteractiveMode', function() {
 		});
 		
 		it('Should Set fileInteractiveMode to false using setProperties calling method', function() {
-		dpxInstance.setProperties({'fileInteractiveMode' : false});
+		dpxInstance.setProperties({'fileInteractiveMode' : 'false'});
 		var data = dpxInstance.getProperties(['fileInteractiveMode']);
 		data = data['fileInteractiveMode'];
 		expect(data).toEqual('false');
@@ -304,7 +358,7 @@ describe('Setting flashMode', function() {
 		
     	it('Should Set flashMode to auto using setProperty calling method', function() {
 		dpxInstance.setProperty('flashMode',Rho.DPX.FLASH_AUTO);
-		expect(dpxInstance.getProperty('flashMode')).toEqual('FLASH_AUTO');
+		expect(dpxInstance.getProperty('flashMode')).toEqual(Rho.DPX.FLASH_AUTO);
 		});
 		
 		it('Should Set flashMode to auto using setProperties calling method', function() {
@@ -346,7 +400,7 @@ describe('Setting identificationTimeout', function() {
 		});
 		
 		it('Should Set identificationTimeout to 0 using setProperties calling method', function() {
-		dpxInstance.setProperties({'identificationTimeout' : 0});
+		dpxInstance.setProperties({'identificationTimeout' : '0'});
 		var data = dpxInstance.getProperties(['identificationTimeout']);
 		data = data['identificationTimeout'];
 		expect(data).toEqual('0');
@@ -363,7 +417,7 @@ describe('Setting identificationTimeout', function() {
 		});
 		
 		it('Should Set identificationTimeout to 1000 using setProperties calling method', function() {
-		dpxInstance.setProperties({'identificationTimeout' : 1000});
+		dpxInstance.setProperties({'identificationTimeout' : '1000'});
 		var data = dpxInstance.getProperties(['identificationTimeout']);
 		data = data['identificationTimeout'];
 		expect(data).toEqual('1000');
@@ -380,7 +434,7 @@ describe('Setting identificationTimeout', function() {
 		});
 		
 		it('Should Set identificationTimeout to 20000 using setProperties calling method', function() {
-		dpxInstance.setProperties({'identificationTimeout' : 20000});
+		dpxInstance.setProperties({'identificationTimeout' : '20000'});
 		var data = dpxInstance.getProperties(['identificationTimeout']);
 		data = data['identificationTimeout'];
 		expect(data).toEqual('20000');
@@ -548,12 +602,12 @@ describe('Setting manualResolutionMode', function() {
 		});
 		
 		it('Should Set manualResolutionMode to true using setProperty calling method', function() {
-		dpxInstance.setProperty('manualResolutionMode','true');
+		dpxInstance.setProperty('manualResolutionMode',true);
 		expect(dpxInstance.getProperty('manualResolutionMode')).toEqual('true');
 		});
 		
 		it('Should Set manualResolutionMode to true using setProperties calling method', function() {
-		dpxInstance.setProperties({'manualResolutionMode' : true});
+		dpxInstance.setProperties({'manualResolutionMode' : 'true'});
 		var data = dpxInstance.getProperties(['manualResolutionMode']);
 		data = data['manualResolutionMode'];
 		expect(data).toEqual('true');
@@ -570,7 +624,7 @@ describe('Setting manualResolutionMode', function() {
 		});
 		
 		it('Should Set manualResolutionMode to false using setProperties calling method', function() {
-		dpxInstance.setProperties({'manualResolutionMode' : false});
+		dpxInstance.setProperties({'manualResolutionMode' : 'false'});
 		var data = dpxInstance.getProperties(['manualResolutionMode']);
 		data = data['manualResolutionMode'];
 		expect(data).toEqual('false');
@@ -591,7 +645,7 @@ describe('Setting processingTimeout', function() {
 		});
 		
 		it('Should Set processingTimeout to 20000 using setProperties calling method', function() {
-		dpxInstance.setProperties({'processingTimeout' : 20000});
+		dpxInstance.setProperties({'processingTimeout' : '20000'});
 		var data = dpxInstance.getProperties(['processingTimeout']);
 		data = data['processingTimeout'];
 		expect(data).toEqual('20000');
@@ -608,7 +662,7 @@ describe('Setting processingTimeout', function() {
 		});
 		
 		it('Should Set processingTimeout to 30000 using setProperties calling method', function() {
-		dpxInstance.setProperties({'processingTimeout' : 30000});
+		dpxInstance.setProperties({'processingTimeout' : '30000'});
 		var data = dpxInstance.getProperties(['processingTimeout']);
 		data = data['processingTimeout'];
 		expect(data).toEqual('30000');
@@ -618,7 +672,7 @@ describe('Setting processingTimeout', function() {
 
 describe('Getting version', function() {
 		it('Should return version value as a string', function() {
-		expect(dpxInstance.version).isNotEmptyString();
+		expect(Rho.DPX.version).isNotEmptyString();
 		});
 });
 
@@ -673,12 +727,12 @@ describe('Setting uiResultConfirmation', function() {
 		});
 		
 		it('Should Set uiResultConfirmation to true using setProperty calling method', function() {
-		dpxInstance.setProperty('uiResultConfirmation','true');
+		dpxInstance.setProperty('uiResultConfirmation',true);
 		expect(dpxInstance.getProperty('uiResultConfirmation')).toEqual('true');
 		});
 		
 		it('Should Set uiResultConfirmation to true using setProperties calling method', function() {
-		dpxInstance.setProperties({'uiResultConfirmation' : true});
+		dpxInstance.setProperties({'uiResultConfirmation' : 'true'});
 		var data = dpxInstance.getProperties(['uiResultConfirmation']);
 		data = data['uiResultConfirmation'];
 		expect(data).toEqual('true');
@@ -695,7 +749,7 @@ describe('Setting uiResultConfirmation', function() {
 		});
 		
 		it('Should Set uiResultConfirmation to false using setProperties calling method', function() {
-		dpxInstance.setProperties({'uiResultConfirmation' : false});
+		dpxInstance.setProperties({'uiResultConfirmation' : 'false'});
 		var data = dpxInstance.getProperties(['uiResultConfirmation']);
 		data = data['uiResultConfirmation'];
 		expect(data).toEqual('false');
@@ -715,7 +769,7 @@ describe('Setting zoomAmount', function() {
 			});
 			
 			it('Should Set zoomAmount to 0 using setProperties calling method', function() {
-			dpxInstance.setProperties({'zoomAmount' : 0});
+			dpxInstance.setProperties({'zoomAmount' : '0'});
 			var data = dpxInstance.getProperties(['zoomAmount']);
 			data = data['zoomAmount'];
 			expect(data).toEqual('0');
@@ -732,7 +786,7 @@ describe('Setting zoomAmount', function() {
 			});
 			
 			it('Should Set zoomAmount to 50 using setProperties calling method', function() {
-			dpxInstance.setProperties({'zoomAmount' : 50});
+			dpxInstance.setProperties({'zoomAmount' : '50'});
 			var data = dpxInstance.getProperties(['zoomAmount']);
 			data = data['zoomAmount'];
 			expect(data).toEqual('50');
@@ -749,7 +803,7 @@ describe('Setting zoomAmount', function() {
 			});
 			
 			it('Should Set zoomAmount to 100 using setProperties calling method', function() {
-			dpxInstance.setProperties({'zoomAmount' : 100});
+			dpxInstance.setProperties({'zoomAmount' : '100'});
 			var data = dpxInstance.getProperties(['zoomAmount']);
 			data = data['zoomAmount'];
 			expect(data).toEqual('100');
