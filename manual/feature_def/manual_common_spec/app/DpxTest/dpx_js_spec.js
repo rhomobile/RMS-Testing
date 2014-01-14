@@ -1,8 +1,8 @@
-var getformCaptureImageId = null;
-var getregionImageId = null;
-var dpxInstance = null;
-
 describe('DPX Functionality Test', function() {
+    var getformCaptureImageId = null;
+    var getregionImageId = null;
+    var dpxInstance = null;
+
 	beforeEach(function() {
 		getformCaptureImageId = null;
 		getregionImageId = null;
@@ -20,10 +20,7 @@ describe('DPX Functionality Test', function() {
         //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
         _result.waitToRunTest();
         runs(function() {
-				//var dpxInstance = new Rho.DPX();
-				var dpxVersion = pxInstance.version;
-				displayResult("Output: ", dpxVersion);
-
+				displayResult("Output: ", Rho.DPX.version);
         });
         //Add more waitsfor or run blocks if required.
         //Common Method implemented to wait for tester to make it pass or fail.Code available in specHelper.js
