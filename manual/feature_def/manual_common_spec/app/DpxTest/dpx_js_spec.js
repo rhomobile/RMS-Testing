@@ -14,19 +14,6 @@ describe('DPX Functionality Test', function() {
 		dpxInstance.close(); 
     });
 	
-	it('Objective:\nGet the DPX engine version', function() {
-        dispTestCaseRunning('1. call the property version to know the DPX engine version');
-        dispExpectedResult('should return the DPX engine version');
-        //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
-        _result.waitToRunTest();
-        runs(function() {
-				displayResult("Output: ", Rho.DPX.version);
-        });
-        //Add more waitsfor or run blocks if required.
-        //Common Method implemented to wait for tester to make it pass or fail.Code available in specHelper.js
-        _result.waitForResponse();
-    });
-
     it('Objective:\nDocument capture with template having Optical Character Recognition (ocr)', function() {
         dispTestCaseRunning('1. Set template property to path of template.xml has region of Optical Character Recognition \n/sdcard/Application/template.xml\n2.Set inputsource to camera\n3. Call setCallback method with callback\n4. Call captureDocument method Capture a document by taking a photo usig camera');
         dispExpectedResult('captured document should get processed successfully and callback fired once for each field defined in the template');
