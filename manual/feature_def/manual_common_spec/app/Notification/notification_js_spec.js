@@ -315,10 +315,10 @@ describe("Notification Manual FD Tests", function () {
                 _result.waitForResponse();
             });
 
-            it("should display a normal pop up if no kind has mentioned.",function(){
+            it("should display a normal pop up if no type has mentioned.",function(){
 
                 dispTestCaseRunning("Call Rho.Notification.showPopup(\n {title:'Displaying a pop up',\n message: 'A test message for default popup', \n icon: 'info'} , \n function(params) {});");
-                dispExpectedResult("It should display a normal pop up if no kind has mentioned when application is in foreground.");
+                dispExpectedResult("It should display a normal pop up if no type has mentioned when application is in foreground.");
 
                 //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
                 _result.waitToRunTest();
@@ -362,32 +362,9 @@ describe("Notification Manual FD Tests", function () {
                 _result.waitForResponse();
             });
 
-            it("should display a popup when kinds is only dialog",function(){
+            it("should display a popup when types is only Rho.Notification.TYPE_DIALOG",function(){
 
-                dispTestCaseRunning('Call Rho.Notification.showPopup({title:"Displaying a pop up",\n message:"Test Message",\n icon: "info",\n <b>kinds: ["dialog"]</b>}, function(params) {});');
-                dispExpectedResult("A dialog should come when application is in foreground.");
-
-                //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
-                _result.waitToRunTest();
-
-                runs(function(){
-                    Rho.Notification.showPopup({
-                            title:"Displaying a pop up",
-                            message:"Test Message",
-                            icon: "info",
-                            buttons: [{id: 'ok', title: 'ok'}],
-                            kinds: ["dialog"]},
-                        function(params) {}
-                    );
-                });
-
-                //Common Method implemented to wait for tester to make it pass or fail.Code available in specHelper.js
-                _result.waitForResponse();
-            });
-
-            it("should display a popup when kinds is only Rho.Notification.KIND_DIALOG",function(){
-
-                dispTestCaseRunning('Call Rho.Notification.showPopup({title:"Displaying a pop up",\n message:"Test message",\n icon: "info",\n <b>kinds: [Rho.KIND_DIALOG]</b>}, function(params) {});');
+                dispTestCaseRunning('Call Rho.Notification.showPopup({title:"Displaying a pop up",\n message:"Test message",\n icon: "info",\n <b>types: [Rho.TYPE_DIALOG]</b>}, function(params) {});');
                 dispExpectedResult("A dialog should come.");
 
                 //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
@@ -399,7 +376,7 @@ describe("Notification Manual FD Tests", function () {
                             message:"Test Message",
                             icon: "info",
                             buttons: [{id: 'ok', title: 'ok'}],
-                            kinds: [Rho.Notification.KIND_DIALOG]},
+                            types: [Rho.Notification.TYPE_DIALOG]},
                         function(params) {}
                     );
                 });
@@ -408,9 +385,9 @@ describe("Notification Manual FD Tests", function () {
                 _result.waitForResponse();
             });
 
-            it("should display a popup when kinds is only dialog when application is in background",function(){
+            it("should display a popup when types is only Rho.Notification.TYPE_DIALOG when application is in background",function(){
 
-                dispTestCaseRunning('Call Rho.Notification.showPopup({title:"Displaying a pop up",\n message:"Test Message",\n icon: "info",\n <b>kinds: ["dialog"]</b>}, function(params) {});');
+                dispTestCaseRunning('Call Rho.Notification.showPopup({title:"Displaying a pop up",\n message:"Test Message",\n icon: "info",\n <b>types: ["dialog"]</b>}, function(params) {});');
                 dispExpectedResult("A dialog should come when app will come to foreground. And no notification should come in notification bar.");
 
                 //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
@@ -424,7 +401,7 @@ describe("Notification Manual FD Tests", function () {
                                 message:"Test Message",
                                 icon: "info",
                                 buttons: [{id: 'ok', title: 'ok'}],
-                                kinds: [Rho.Notification.KIND_DIALOG]},
+                                types: [Rho.Notification.TYPE_DIALOG]},
                             function(params) {}
                         );
                     }, 3000);
@@ -435,9 +412,10 @@ describe("Notification Manual FD Tests", function () {
                 _result.waitForResponse();
             })
 
-            it("should display a notification in notification bar when app is in background when kinds is only notification.",function(){
 
-                dispTestCaseRunning('Call Rho.Notification.showPopup({title:"Displaying a pop up",\n message:"Test Message",\n icon: "info",\n <b>kinds: ["notification"]</b>}, function(params) {});');
+            it("should display a notification in notification bar when app is in background when types is only Rho.Notification.TYPE_NOTIFICATION.",function(){
+
+                dispTestCaseRunning('Call Rho.Notification.showPopup({title:"Displaying a pop up",\n message:"Test Message",\n icon: "info",\n <b>types: [Rho.Notification.TYPE_NOTIFICATION]</b>}, function(params) {});');
                 dispExpectedResult("Notification should come in notification bar when app is in background. On clicking on notiication the application should come to foreground.");
 
                 //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
@@ -448,30 +426,7 @@ describe("Notification Manual FD Tests", function () {
                     setTimeout(function() {
                         Rho.Notification.showPopup({
                                 message:"Test Message",
-                                kinds: [Rho.Notification.KIND_NOTIFICATION]}
-                        );
-                    }, 3000);
-
-                });
-
-                //Common Method implemented to wait for tester to make it pass or fail.Code available in specHelper.js
-                _result.waitForResponse();
-            });
-
-            it("should display a notification in notification bar when app is in background when kinds is only Rho.Notification.KIND_NOTIFICATION.",function(){
-
-                dispTestCaseRunning('Call Rho.Notification.showPopup({title:"Displaying a pop up",\n message:"Test Message",\n icon: "info",\n <b>kinds: [Rho.Notification.KIND_NOTIFICATION]</b>}, function(params) {});');
-                dispExpectedResult("Notification should come in notification bar when app is in background. On clicking on notiication the application should come to foreground.");
-
-                //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
-                _result.waitToRunTest();
-
-                runs(function(){
-                    Rho.Application.minimize();
-                    setTimeout(function() {
-                        Rho.Notification.showPopup({
-                                message:"Test Message",
-                                kinds: [Rho.Notification.KIND_NOTIFICATION]}
+                                types: [Rho.Notification.TYPE_NOTIFICATION]}
                         );
                     }, 3000);
                 });
@@ -480,10 +435,10 @@ describe("Notification Manual FD Tests", function () {
                 _result.waitForResponse();
             });
 
-            it("should not display any notification in notification bar when app is in foreground when kinds is only notification.",function(){
+            it("should not display any notification in notification bar when app is in foreground when types is only notification.",function(){
 
-                dispTestCaseRunning('Call Rho.Notification.showPopup({title:"Displaying a pop up",\n message:"Test Message",\n icon: "info",\n <b>kinds: ["notification"]</b>}, function(params) {});');
-                dispExpectedResult("should not display any notification in notification bar when app is in foreground when kinds is only notification.");
+                dispTestCaseRunning('Call Rho.Notification.showPopup({title:"Displaying a pop up",\n message:"Test Message",\n icon: "info",\n <b>types: ["notification"]</b>}, function(params) {});');
+                dispExpectedResult("should not display any notification in notification bar when app is in foreground when types is only notification.");
 
                 //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
                 _result.waitToRunTest();
@@ -491,7 +446,7 @@ describe("Notification Manual FD Tests", function () {
                 runs(function(){
                     Rho.Notification.showPopup({
                             message:"Test Message",
-                            kinds: [Rho.Notification.KIND_NOTIFICATION]}
+                            types: [Rho.Notification.TYPE_NOTIFICATION]}
                     );
                 });
 
@@ -501,7 +456,7 @@ describe("Notification Manual FD Tests", function () {
 
             it("should display a alert(!) icon in notification bar with message",function(){
 
-                dispTestCaseRunning('Call Rho.Notification.showPopup({title:"Displaying a pop up",\n message:"Test Message",\n icon: "alert",\n <b>kinds: ["notification"]</b>}, function(params) {});');
+                dispTestCaseRunning('Call Rho.Notification.showPopup({title:"Displaying a pop up",\n message:"Test Message",\n icon: "alert",\n <b>types: ["notification"]</b>}, function(params) {});');
 
                 dispExpectedResult(jasmine.getEnv().currentSpec.description);
 
@@ -513,7 +468,7 @@ describe("Notification Manual FD Tests", function () {
                     setTimeout(function() {
                         Rho.Notification.showPopup({
                                 message:"Test Message",
-                                kinds: [Rho.Notification.KIND_NOTIFICATION],
+                                types: [Rho.Notification.TYPE_NOTIFICATION],
                                 icon:"alert"}
                         );
                     }, 3000);
@@ -526,7 +481,7 @@ describe("Notification Manual FD Tests", function () {
 
             it("should display a question(?) icon in notification bar with message",function(){
 
-                dispTestCaseRunning('Call Rho.Notification.showPopup({message:"Test Message",\n icon: "question",\n <b>kinds: ["notification"]</b>});');
+                dispTestCaseRunning('Call Rho.Notification.showPopup({message:"Test Message",\n icon: "question",\n <b>types: ["notification"]</b>});');
                 dispExpectedResult(jasmine.getEnv().currentSpec.description);
 
                 //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
@@ -537,7 +492,7 @@ describe("Notification Manual FD Tests", function () {
                     setTimeout(function() {
                         Rho.Notification.showPopup({
                                 message:"Test Message",
-                                kinds: [Rho.Notification.KIND_NOTIFICATION],
+                                types: [Rho.Notification.TYPE_NOTIFICATION],
                                 icon:"question"}
                         );
                     }, 3000);
@@ -550,7 +505,7 @@ describe("Notification Manual FD Tests", function () {
 
             it("should display a info icon in notification bar with message",function(){
 
-                dispTestCaseRunning('Call Rho.Notification.showPopup({message:"Test Message",\n <b>icon: "info"</b>,\n <b>kinds: ["notification"]</b>});');
+                dispTestCaseRunning('Call Rho.Notification.showPopup({message:"Test Message",\n <b>icon: "info"</b>,\n <b>types: ["notification"]</b>});');
                 dispExpectedResult(jasmine.getEnv().currentSpec.description);
 
                 //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
@@ -561,7 +516,7 @@ describe("Notification Manual FD Tests", function () {
                     setTimeout(function() {
                         Rho.Notification.showPopup({
                                 message:"Test Message",
-                                kinds: [Rho.Notification.KIND_NOTIFICATION],
+                                types: [Rho.Notification.TYPE_NOTIFICATION],
                                 icon:"info"}
                         );
                     }, 3000);
@@ -573,7 +528,7 @@ describe("Notification Manual FD Tests", function () {
 
             it("should display application icon in notification bar with message when no icon param provided (default behavior) ",function(){
 
-                dispTestCaseRunning('Call Rho.Notification.showPopup({message:"Test Message",\n <b>kinds: ["notification"]});');
+                dispTestCaseRunning('Call Rho.Notification.showPopup({message:"Test Message",\n <b>types: ["notification"]});');
                 dispExpectedResult(jasmine.getEnv().currentSpec.description);
 
                 //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
@@ -584,7 +539,7 @@ describe("Notification Manual FD Tests", function () {
                     setTimeout(function() {
                         Rho.Notification.showPopup({
                                 message:"Test Message",
-                                kinds: [Rho.Notification.KIND_NOTIFICATION]}
+                                types: [Rho.Notification.TYPE_NOTIFICATION]}
                         );
                     }, 3000);
                 });
@@ -595,7 +550,7 @@ describe("Notification Manual FD Tests", function () {
 
             it("should display user defined icon in notification bar with message ",function(){
 
-                dispTestCaseRunning('Call Rho.Notification.showPopup({message:"Test Message",\n <b>kinds: ["notification"]});');
+                dispTestCaseRunning('Call Rho.Notification.showPopup({message:"Test Message",\n <b>types: ["notification"]});');
                 dispExpectedResult(jasmine.getEnv().currentSpec.description +"icon: <img src='/app/Notification/icon.png' alt='alert' width='50' height= '50'>");
 
                 //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
@@ -606,7 +561,7 @@ describe("Notification Manual FD Tests", function () {
                     setTimeout(function() {
                         Rho.Notification.showPopup({
                                 message:"Test Message",
-                                kinds: [Rho.Notification.KIND_NOTIFICATION],
+                                types: [Rho.Notification.TYPE_NOTIFICATION],
                                 icon: Rho.RhoFile.join(Rho.Application.modelFolderPath('Notification'), 'icon.png')}
                         );
                     }, 3000);
@@ -616,9 +571,9 @@ describe("Notification Manual FD Tests", function () {
                 _result.waitForResponse();
             });
 
-            it("Should allow to interact with application from notification area without activating the application when kinds is only notificationDialog.",function(){
+            it("Should allow to interact with application from notification area without activating the application when types is only notificationDialog.",function(){
 
-                dispTestCaseRunning('Call Rho.Notification.showPopup({title:"Displaying a pop up",\n message:"Test Message",\n icon: "info",\n <b>kinds: ["notificationDialog"]</b>}, function(params) {});');
+                dispTestCaseRunning('Call Rho.Notification.showPopup({title:"Displaying a pop up",\n message:"Test Message",\n icon: "info",\n <b>types: ["notificationDialog"]</b>}, function(params) {});');
                 dispExpectedResult("showPopup callback should get fired and in test app it's implemented in such a manner, it will display a toast confirming which button got clicked.");
 
                 //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
@@ -631,8 +586,8 @@ describe("Notification Manual FD Tests", function () {
                                 title:"Displaying a pop up",
                                 message:"Test Message",
                                 icon: "info",
-                                buttons: [{id: 'yes', title: 'yes'},{id: 'no', title: 'no'}],
-                                kinds: [Rho.Notification.KIND_NOTIFICATION_DIALOG]},
+                                buttons: [{id: 'accept', title: 'yes'},{id: 'cancel', title: 'no'}],
+                                types: [Rho.Notification.TYPE_NOTIFICATION_DIALOG]},
                             function(params) {
                                 Rho.Notification.showStatus("Test", JSON.stringify(params), "Confirm");
                             }
@@ -644,39 +599,10 @@ describe("Notification Manual FD Tests", function () {
                 _result.waitForResponse();
             });
 
-            it("Should allow to interact with application from notification area without activating the application when kinds is only Rho.Notification.KIND_NOTIFICATION_DIALOG.",function(){
+            it("should display a dialog when app is in foreground when types is only notificationDialog.",function(){
 
-                dispTestCaseRunning('Call Rho.Notification.showPopup({title:"Displaying a pop up",\n message:"Test Message",\n icon: "info",\n <b>kinds: [Rho.Notification.KIND_NOTIFICATION_DIALOG]</b>}, function(params) {});');
-                dispExpectedResult("showPopup callback should get fired and in test app it implemented in such a manner, it will display a toast confirming which button got clicked.");
-
-                //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
-                _result.waitToRunTest();
-
-                runs(function(){
-                    Rho.Application.minimize();
-                    setTimeout(function() {
-                        Rho.Notification.showPopup({
-                                title:"Displaying a pop up",
-                                message:"Test Message",
-                                icon: "info",
-                                buttons: [{id: 'ok', title: 'ok'}],
-                                kinds: [Rho.Notification.KIND_NOTIFICATION_DIALOG]},
-                            function(params) {
-                                Rho.Notification.showStatus("Test", JSON.stringify(params), "Confirm");
-                            }
-                        );
-                    }, 3000);
-
-                });
-
-                //Common Method implemented to wait for tester to make it pass or fail.Code available in specHelper.js
-                _result.waitForResponse();
-            });
-
-            it("should display a dialog when app is in foreground when kinds is only notificationDialog.",function(){
-
-                dispTestCaseRunning('Call Rho.Notification.showPopup({title:"Displaying a pop up",\n message:"Test Message",\n icon: "info",\n <b>kinds: ["notificationDialog"]</b>}, function(params) {});');
-                dispExpectedResult("should display a dialog when app is in <b> foreground </b> when kinds is only notificationDialog.");
+                dispTestCaseRunning('Call Rho.Notification.showPopup({title:"Displaying a pop up",\n message:"Test Message",\n icon: "info",\n <b>types: ["notificationDialog"]</b>}, function(params) {});');
+                dispExpectedResult("should display a dialog when app is in <b> foreground </b> when types is only notificationDialog.");
 
                 //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
                 _result.waitToRunTest();
@@ -686,8 +612,8 @@ describe("Notification Manual FD Tests", function () {
                             title:"Displaying a pop up",
                             message:"Test Message",
                             icon: "info",
-                            buttons: [{id: 'ok', title: 'ok'}],
-                            kinds: [Rho.Notification.KIND_NOTIFICATION_DIALOG]},
+                            buttons: [{id: 'accept', title: 'ok'}],
+                            types: [Rho.Notification.TYPE_NOTIFICATION_DIALOG]},
                         function(params) {
                             Rho.Notification.showStatus("Test", JSON.stringify(params), "Confirm");
                         }
@@ -700,7 +626,7 @@ describe("Notification Manual FD Tests", function () {
 
             it("should display a alert(!) icon in notification bar with buttons",function(){
 
-                dispTestCaseRunning('Call Rho.Notification.showPopup({title:"Displaying a pop up",\n message:"Test Message",\n icon: "alert",\n <b>kinds: ["notificationDialog"]</b>}, function(params) {});');
+                dispTestCaseRunning('Call Rho.Notification.showPopup({title:"Displaying a pop up",\n message:"Test Message",\n icon: "alert",\n <b>types: ["notificationDialog"]</b>}, function(params) {});');
                 dispExpectedResult(jasmine.getEnv().currentSpec.description);
 
                 //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
@@ -714,8 +640,8 @@ describe("Notification Manual FD Tests", function () {
                                 title:"Displaying a pop up",
                                 message:"Test Message",
                                 icon: "alert",
-                                buttons: [{id: 'ok', title: 'ok'}],
-                                kinds: [Rho.Notification.KIND_NOTIFICATION_DIALOG]},
+                                buttons: [{id: 'accept', title: 'ok'}],
+                                types: [Rho.Notification.TYPE_NOTIFICATION_DIALOG]},
                             function(params) {
                                 Rho.Notification.showStatus("Test", JSON.stringify(params), "Confirm");
                             }
@@ -730,7 +656,7 @@ describe("Notification Manual FD Tests", function () {
 
             it("should display a question(?) icon in notification bar with buttons",function(){
 
-                dispTestCaseRunning('Call Rho.Notification.showPopup({title:"Displaying a pop up",\n message:"Test Message",\n icon: "question",\n <b>kinds: ["notificationDialog"]</b>}, function(params) {});');
+                dispTestCaseRunning('Call Rho.Notification.showPopup({title:"Displaying a pop up",\n message:"Test Message",\n icon: "question",\n <b>types: ["notificationDialog"]</b>}, function(params) {});');
                 dispExpectedResult(jasmine.getEnv().currentSpec.description);
 
                 //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
@@ -743,8 +669,8 @@ describe("Notification Manual FD Tests", function () {
                                 title:"Displaying a pop up",
                                 message:"Test Message",
                                 icon: "question",
-                                buttons: [{id: 'ok', title: 'ok'}],
-                                kinds: [Rho.Notification.KIND_NOTIFICATION_DIALOG]},
+                                buttons: [{id: 'accept', title: 'ok'}],
+                                types: [Rho.Notification.TYPE_NOTIFICATION_DIALOG]},
                             function(params) {
                                 Rho.Notification.showStatus("Test", JSON.stringify(params), "Confirm");
                             }
@@ -758,7 +684,7 @@ describe("Notification Manual FD Tests", function () {
 
             it("should display a info icon in notification bar with buttons",function(){
 
-                dispTestCaseRunning('Call Rho.Notification.showPopup({title:"showPopup without dialog",\n message:"Test Message",\n icon: "info",\n <b>kinds: ["notificationDialog"]</b>}, function(params) {});');
+                dispTestCaseRunning('Call Rho.Notification.showPopup({title:"showPopup without dialog",\n message:"Test Message",\n icon: "info",\n <b>types: ["notificationDialog"]</b>}, function(params) {});');
                 dispExpectedResult(jasmine.getEnv().currentSpec.description);
 
                 //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
@@ -771,8 +697,8 @@ describe("Notification Manual FD Tests", function () {
                                 title:"Displaying a pop up",
                                 message:"Test Message",
                                 icon: "info",
-                                buttons: [{id: 'ok', title: 'ok'}],
-                                kinds: [Rho.Notification.KIND_NOTIFICATION_DIALOG]},
+                                buttons: [{id: 'accept', title: 'ok'}],
+                                types: [Rho.Notification.TYPE_NOTIFICATION_DIALOG]},
                             function(params) {
                                 Rho.Notification.showStatus("Test", JSON.stringify(params), "Confirm");
                             }
@@ -786,7 +712,7 @@ describe("Notification Manual FD Tests", function () {
 
             it("should display application icon in notification bar with message and buttons when no icon param provided (default behavior) ",function(){
 
-                dispTestCaseRunning('Call Rho.Notification.showPopup({title:"showPopup without dialog",\n message:"Test Message",\n <b>kinds: ["notificationDialog"]</b>}, function(params) {});');
+                dispTestCaseRunning('Call Rho.Notification.showPopup({title:"showPopup without dialog",\n message:"Test Message",\n <b>types: ["notificationDialog"]</b>}, function(params) {});');
                 dispExpectedResult(jasmine.getEnv().currentSpec.description);
 
                 //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
@@ -798,8 +724,8 @@ describe("Notification Manual FD Tests", function () {
                         Rho.Notification.showPopup({
                                 title:"Displaying a pop up",
                                 message:"Test Message",
-                                buttons: [{id: 'ok', title: 'ok'}],
-                                kinds: [Rho.Notification.KIND_NOTIFICATION_DIALOG]},
+                                buttons: [{id: 'accept', title: 'ok'}],
+                                types: [Rho.Notification.TYPE_NOTIFICATION_DIALOG]},
                             function(params) {
                                 Rho.Notification.showStatus("Test", JSON.stringify(params), "Confirm");
                             }
@@ -813,7 +739,7 @@ describe("Notification Manual FD Tests", function () {
 
             it("should display user defined icon in notification bar with message and buttons ",function(){
 
-                dispTestCaseRunning('Call Rho.Notification.showPopup({title:"showPopup without dialog",\n message:"Test Message",\n icon: <b>user defined icon</b>,\n <b>kinds: ["notificationDialog"]</b>}, function(params) {});');
+                dispTestCaseRunning('Call Rho.Notification.showPopup({title:"showPopup without dialog",\n message:"Test Message",\n icon: <b>user defined icon</b>,\n <b>types: ["notificationDialog"]</b>}, function(params) {});');
                 dispExpectedResult(jasmine.getEnv().currentSpec.description +"icon: <img src='/app/Notification/icon.png' alt='alert' width='50' height= '50'>");
 
                 //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
@@ -826,8 +752,8 @@ describe("Notification Manual FD Tests", function () {
                                 title:"Displaying a pop up",
                                 message:"Test Message",
                                 icon: Rho.RhoFile.join(Rho.Application.modelFolderPath('Notification'), 'icon.png'),
-                                buttons: [{id: 'ok', title: 'ok'}],
-                                kinds: [Rho.Notification.KIND_NOTIFICATION_DIALOG]},
+                                buttons: [{id: 'accept', title: 'ok'}],
+                                types: [Rho.Notification.TYPE_NOTIFICATION_DIALOG]},
                             function(params) {
                                 Rho.Notification.showStatus("Test", JSON.stringify(params), "Confirm");
                             }
@@ -840,9 +766,9 @@ describe("Notification Manual FD Tests", function () {
             });
 
 
-            it("should display a toast when kinds is only toast",function(){
+            it("should display a toast when types is only Rho.Notification.TYPE_TOAST",function(){
 
-                dispTestCaseRunning('Call Rho.Notification.showPopup({message:"Test Message",<b>kinds: ["toast"]</b>}); when application is in foreground');
+                dispTestCaseRunning('Call Rho.Notification.showPopup({message:"Test Message",<b>types: [Rho.Notification.TYPE_TOAST]</b>}); when application is in foreground');
                 dispExpectedResult("It should display a toast message whether application is in background or foreground.");
 
                 //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
@@ -851,7 +777,7 @@ describe("Notification Manual FD Tests", function () {
                 runs(function(){
                     Rho.Notification.showPopup({
                             message:"Test Message",
-                            kinds: [Rho.Notification.KIND_TOAST]}
+                            types: [Rho.Notification.TYPE_TOAST]}
                     );
                 });
 
@@ -859,28 +785,9 @@ describe("Notification Manual FD Tests", function () {
                 _result.waitForResponse();
             });
 
-            it("should display a toast when kinds is only Rho.Notification.KIND_TOAST",function(){
+            it("should display a toast when types is only toast and application is in background",function(){
 
-                dispTestCaseRunning('Call Rho.Notification.showPopup({message:"Test Message",<b>kinds: [Rho.Notification.KIND_TOAST]</b>}); when application is in foreground');
-                dispExpectedResult("It should display a toast message whether application is in background or foreground.");
-
-                //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
-                _result.waitToRunTest();
-
-                runs(function(){
-                    Rho.Notification.showPopup({
-                            message:"Test Message",
-                            kinds: [Rho.Notification.KIND_TOAST]}
-                    );
-                });
-
-                //Common Method implemented to wait for tester to make it pass or fail.Code available in specHelper.js
-                _result.waitForResponse();
-            });
-
-            it("should display a toast when kinds is only toast and application is in background",function(){
-
-                dispTestCaseRunning('Call Rho.Notification.showPopup({message:"Test Message",<b>kinds: ["toast"]</b>}); when application is in background');
+                dispTestCaseRunning('Call Rho.Notification.showPopup({message:"Test Message",<b>types: ["toast"]</b>}); when application is in background');
                 dispExpectedResult("It should display a toast message whether application is in background or foreground.");
 
                 //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
@@ -891,7 +798,7 @@ describe("Notification Manual FD Tests", function () {
                     setTimeout(function() {
                         Rho.Notification.showPopup({
                                 message:"Test Message",
-                                kinds: [Rho.Notification.KIND_TOAST]}
+                                types: [Rho.Notification.TYPE_TOAST]}
                         );
                     }, 3000);
 
@@ -901,9 +808,9 @@ describe("Notification Manual FD Tests", function () {
                 _result.waitForResponse();
             });
 
-            it("should display all applicable kind of notification when kinds mentioned with dialog, notification, notificationDialog, toast and when app is in foreground.",function(){
+            it("should display all applicable type of notification when types mentioned with dialog, notification, notificationDialog, toast and when app is in foreground.",function(){
 
-                dispTestCaseRunning('Call Rho.Notification.showPopup({title:"Displaying a pop up",\n message:"Test Message",\n icon: "info",\n <b>kinds: ["dialog", "notification", "notificationDialog", "toast"]</b>}, function(params) {});');
+                dispTestCaseRunning('Call Rho.Notification.showPopup({title:"Displaying a pop up",\n message:"Test Message",\n icon: "info",\n <b>types: ["dialog", "notification", "notificationDialog", "toast"]</b>}, function(params) {});');
                 dispExpectedResult("It should display a dialog only as toast will not get visible with dialog.'notification', 'notificationDialog' will have no effect as application is in foreground.");
 
                 //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
@@ -916,7 +823,7 @@ describe("Notification Manual FD Tests", function () {
                             buttons: [
                                 {id: 'ok', title: 'ok'}
                             ],
-                            kinds: [Rho.Notification.KIND_DIALOG, Rho.Notification.KIND_NOTIFICATION, Rho.Notification.KIND_NOTIFICATION_DIALOG, Rho.Notification.KIND_TOAST]},
+                            types: [Rho.Notification.TYPE_DIALOG, Rho.Notification.TYPE_NOTIFICATION, Rho.Notification.TYPE_NOTIFICATION_DIALOG, Rho.Notification.TYPE_TOAST]},
                         function (params) {
                         }
                     );
@@ -926,9 +833,9 @@ describe("Notification Manual FD Tests", function () {
                 _result.waitForResponse();
             });
 
-            it("should display all applicable kind of notification when kinds mentioned with dialog, notificationDialog, toast and when app is in background.",function(){
+            it("should display all applicable type of notification when types mentioned with dialog, notificationDialog, toast and when app is in background.",function(){
 
-                dispTestCaseRunning('Call Rho.Notification.showPopup({title:"Displaying a pop up",\n message:"Test Message",\n icon: "info",\n <b>kinds: ["dialog", "notificationDialog", "toast"]</b>}, function(params) {});');
+                dispTestCaseRunning('Call Rho.Notification.showPopup({title:"Displaying a pop up",\n message:"Test Message",\n icon: "info",\n <b>types: ["dialog", "notificationDialog", "toast"]</b>}, function(params) {});');
                 dispExpectedResult("It should display notification dialog and toast when application is in background.");
 
                 //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
@@ -941,8 +848,8 @@ describe("Notification Manual FD Tests", function () {
                         Rho.Notification.showPopup({
                                 title:"Displaying a pop up",
                                 message:"Test Message",
-                                buttons: [{id: 'ok', title: 'ok'}],
-                                kinds: [Rho.Notification.KIND_DIALOG, Rho.Notification.KIND_NOTIFICATION_DIALOG, Rho.Notification.KIND_TOAST]},
+                                buttons: [{id: 'accept', title: 'ok'}],
+                                types: [Rho.Notification.TYPE_DIALOG, Rho.Notification.TYPE_NOTIFICATION_DIALOG, Rho.Notification.TYPE_TOAST]},
                             function(params) {}
                         );
                     }, 3000);
@@ -955,7 +862,7 @@ describe("Notification Manual FD Tests", function () {
 
             it("should display only dialog",function(){
 
-                dispTestCaseRunning('Call Rho.Notification.showPopup({title:"Displaying a pop up",\n message:"Test Message",\n icon: "info",\n <b>kinds: ["dialog", "toast"]</b>}, function(params) {});');
+                dispTestCaseRunning('Call Rho.Notification.showPopup({title:"Displaying a pop up",\n message:"Test Message",\n icon: "info",\n <b>types: ["notificationDialog", "toast"]</b>}, function(params) {});');
                 dispExpectedResult("It should display a dialog only as toast will not get visible with dialog");
 
                 //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
@@ -966,29 +873,7 @@ describe("Notification Manual FD Tests", function () {
                             message:"Test Message",
                             icon: "info",
                             buttons: [{id: 'ok', title: 'ok'}],
-                            kinds: [Rho.Notification.KIND_DIALOG, Rho.Notification.KIND_TOAST]},
-                        function(params) {}
-                    );
-                });
-
-                //Common Method implemented to wait for tester to make it pass or fail.Code available in specHelper.js
-                _result.waitForResponse();
-            });
-
-            it("should display only dialog",function(){
-
-                dispTestCaseRunning('Call Rho.Notification.showPopup({title:"Displaying a pop up",\n message:"Test Message",\n icon: "info",\n <b>kinds: ["notificationDialog", "toast"]</b>}, function(params) {});');
-                dispExpectedResult("It should display a dialog only as toast will not get visible with dialog");
-
-                //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
-                _result.waitToRunTest();
-                runs(function(){
-                    Rho.Notification.showPopup({
-                            title:"Displaying a pop up",
-                            message:"Test Message",
-                            icon: "info",
-                            buttons: [{id: 'ok', title: 'ok'}],
-                            kinds: [Rho.Notification.KIND_NOTIFICATION_DIALOG, Rho.Notification.KIND_TOAST]},
+                            types: [Rho.Notification.TYPE_NOTIFICATION_DIALOG, Rho.Notification.TYPE_TOAST]},
                         function(params) {}
                     );
                 });
@@ -1093,10 +978,10 @@ describe("Notification Manual FD Tests", function () {
                 _result.waitForResponse();
             });
 
-            it("should display a normal pop up if no kind has mentioned.",function(){
+            it("should display a normal pop up if no type has mentioned.",function(){
 
                 dispTestCaseRunning("Call Rho::Notification.showPopup(\n {title:'Displaying a pop up',\n message: 'A test message for default popup', \n icon: 'info'} , \n function(params) {});");
-                dispExpectedResult("It should display a normal pop up if no kind has mentioned when application is in foreground.");
+                dispExpectedResult("It should display a normal pop up if no type has mentioned when application is in foreground.");
 
                 //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
                 _result.waitToRunTest();
@@ -1128,61 +1013,25 @@ describe("Notification Manual FD Tests", function () {
                 _result.waitForResponse();
             });
 
-            it("should display a popup when kinds is only dialog",function(){
+            it("should display a popup when types is only Rho.Notification.TYPE_DIALOG",function(){
 
-                dispTestCaseRunning('Call Rho::Notification.showPopup({title:"Displaying a pop up",\n message:"Test Message",\n icon: "info",\n <b>kinds: ["dialog"]</b>}, function(params) {});');
-                dispExpectedResult("A dialog should come when application is in foreground.");
-
-                //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
-                _result.waitToRunTest();
-
-                runs(function(){
-                    Ruby.call("Notification","rho_showPopup_kind_dialog");
-                });
-
-                //Common Method implemented to wait for tester to make it pass or fail.Code available in specHelper.js
-                _result.waitForResponse();
-            });
-
-            it("should display a popup when kinds is only Rho.Notification.KIND_DIALOG",function(){
-
-                dispTestCaseRunning('Call Rho::Notification.showPopup({title:"Displaying a pop up",\n message:"Test message",\n icon: "info",\n <b>kinds: [Rho.KIND_DIALOG]</b>}, function(params) {});');
+                dispTestCaseRunning('Call Rho::Notification.showPopup({title:"Displaying a pop up",\n message:"Test message",\n icon: "info",\n <b>types: [Rho.TYPE_DIALOG]</b>}, function(params) {});');
                 dispExpectedResult("A dialog should come.");
 
                 //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
                 _result.waitToRunTest();
 
                 runs(function(){
-                    Ruby.call("Notification","rho_showPopup_kind_constdialog");
+                    Ruby.call("Notification","rho_showPopup_type_constdialog");
                 });
 
                 //Common Method implemented to wait for tester to make it pass or fail.Code available in specHelper.js
                 _result.waitForResponse();
             });
 
-            it("should display a popup when kinds is only dialog when application is in background",function(){
+            it("should display a notification in notification bar when app is in background when types is only Rho.Notification.TYPE_NOTIFICATION.",function(){
 
-                dispTestCaseRunning('Call Rho::Notification.showPopup({title:"Displaying a pop up",\n message:"Test Message",\n icon: "info",\n <b>kinds: ["dialog"]</b>}, function(params) {});');
-                dispExpectedResult("A dialog should come when app will come to foreground. And no notification should come in notification bar.");
-
-                //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
-                _result.waitToRunTest();
-
-                runs(function(){
-                    Rho.Application.minimize();
-                    setTimeout(function() {
-                        Ruby.call("Notification","rho_showPopup_kind_dialog");
-                    }, 3000);
-
-                });
-
-                //Common Method implemented to wait for tester to make it pass or fail.Code available in specHelper.js
-                _result.waitForResponse();
-            });
-
-            it("should display a notification in notification bar when app is in background when kinds is only notification.",function(){
-
-                dispTestCaseRunning('Call Rho::Notification.showPopup({title:"Displaying a pop up",\n message:"Test Message",\n icon: "info",\n <b>kinds: ["notification"]</b>}, function(params) {});');
+                dispTestCaseRunning('Call Rho::Notification.showPopup({title:"Displaying a pop up",\n message:"Test Message",\n icon: "info",\n <b>types: [Rho.Notification.TYPE_NOTIFICATION]</b>}, function(params) {});');
                 dispExpectedResult("Notification should come in notification bar when app is in background. On clicking on notiication the application should come to foreground.");
 
                 //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
@@ -1191,27 +1040,7 @@ describe("Notification Manual FD Tests", function () {
                 runs(function(){
                     Rho.Application.minimize();
                     setTimeout(function() {
-                        Ruby.call("Notification","rho_showPopup_kind_notification");
-                    }, 3000);
-
-                });
-
-                //Common Method implemented to wait for tester to make it pass or fail.Code available in specHelper.js
-                _result.waitForResponse();
-            });
-
-            it("should display a notification in notification bar when app is in background when kinds is only Rho.Notification.KIND_NOTIFICATION.",function(){
-
-                dispTestCaseRunning('Call Rho::Notification.showPopup({title:"Displaying a pop up",\n message:"Test Message",\n icon: "info",\n <b>kinds: [Rho.Notification.KIND_NOTIFICATION]</b>}, function(params) {});');
-                dispExpectedResult("Notification should come in notification bar when app is in background. On clicking on notiication the application should come to foreground.");
-
-                //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
-                _result.waitToRunTest();
-
-                runs(function(){
-                    Rho.Application.minimize();
-                    setTimeout(function() {
-                        Ruby.call("Notification","rho_showPopup_kind_constnotification");
+                        Ruby.call("Notification","rho_showPopup_type_constnotification");
                     }, 3000);
                 });
 
@@ -1219,16 +1048,16 @@ describe("Notification Manual FD Tests", function () {
                 _result.waitForResponse();
             });
 
-            it("should not display any notification in notification bar when app is in foreground when kinds is only notification.",function(){
+            it("should not display any notification in notification bar when app is in foreground when types is only notification.",function(){
 
-                dispTestCaseRunning('Call Rho::Notification.showPopup({title:"Displaying a pop up",\n message:"Test Message",\n icon: "info",\n <b>kinds: ["notification"]</b>}, function(params) {});');
-                dispExpectedResult("Noshould not display any notification in notification bar when app is in foreground when kinds is only notification.");
+                dispTestCaseRunning('Call Rho::Notification.showPopup({title:"Displaying a pop up",\n message:"Test Message",\n icon: "info",\n <b>types: ["notification"]</b>}, function(params) {});');
+                dispExpectedResult("Noshould not display any notification in notification bar when app is in foreground when types is only notification.");
 
                 //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
                 _result.waitToRunTest();
 
                 runs(function(){
-                    Ruby.call("Notification","rho_showPopup_kind_notification");
+                    Ruby.call("Notification","rho_showPopup_type_constnotification");
                 });
 
                 //Common Method implemented to wait for tester to make it pass or fail.Code available in specHelper.js
@@ -1237,7 +1066,7 @@ describe("Notification Manual FD Tests", function () {
 
             it("should display a alert(!) icon in notification bar with message",function(){
 
-                dispTestCaseRunning('Call Rho::Notification.showPopup({title:"Displaying a pop up",\n message:"Test Message",\n icon: "alert",\n <b>kinds: ["notification"]</b>}, function(params) {});');
+                dispTestCaseRunning('Call Rho::Notification.showPopup({title:"Displaying a pop up",\n message:"Test Message",\n icon: "alert",\n <b>types: ["notification"]</b>}, function(params) {});');
 
                 dispExpectedResult(jasmine.getEnv().currentSpec.description);
 
@@ -1258,7 +1087,7 @@ describe("Notification Manual FD Tests", function () {
 
             it("should display a question(?) icon in notification bar with message",function(){
 
-                dispTestCaseRunning('Call Rho::Notification.showPopup({message:"Test Message",\n icon: "question",\n <b>kinds: ["notification"]</b>});');
+                dispTestCaseRunning('Call Rho::Notification.showPopup({message:"Test Message",\n icon: "question",\n <b>types: ["notification"]</b>});');
                 dispExpectedResult(jasmine.getEnv().currentSpec.description);
 
                 //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
@@ -1278,7 +1107,7 @@ describe("Notification Manual FD Tests", function () {
 
             it("should display a info icon in notification bar with message",function(){
 
-                dispTestCaseRunning('Call Rho::Notification.showPopup({message:"Test Message",\n <b>icon: "info"</b>,\n <b>kinds: ["notification"]</b>});');
+                dispTestCaseRunning('Call Rho::Notification.showPopup({message:"Test Message",\n <b>icon: "info"</b>,\n <b>types: ["notification"]</b>});');
                 dispExpectedResult(jasmine.getEnv().currentSpec.description);
 
                 //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
@@ -1297,7 +1126,7 @@ describe("Notification Manual FD Tests", function () {
 
             it("should display application icon in notification bar with message when no icon param provided (default behavior) ",function(){
 
-                dispTestCaseRunning('Call Rho::Notification.showPopup({message:"Test Message",\n <b>kinds: ["notification"]});');
+                dispTestCaseRunning('Call Rho::Notification.showPopup({message:"Test Message",\n <b>types: ["notification"]});');
                 dispExpectedResult(jasmine.getEnv().currentSpec.description);
 
                 //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
@@ -1306,7 +1135,7 @@ describe("Notification Manual FD Tests", function () {
                 runs(function(){
                     Rho.Application.minimize();
                     setTimeout(function() {
-                        Ruby.call("Notification","rho_showPopup_kind_notification");
+                        Ruby.call("Notification","rho_showPopup_type_constnotification");
                     }, 3000);
                 });
 
@@ -1316,7 +1145,7 @@ describe("Notification Manual FD Tests", function () {
 
             it("should display user defined icon in notification bar with message ",function(){
 
-                dispTestCaseRunning('Call Rho::Notification.showPopup({message:"Test Message",\n <b>kinds: ["notification"]});');
+                dispTestCaseRunning('Call Rho::Notification.showPopup({message:"Test Message",\n <b>types: ["notification"]});');
                 dispExpectedResult(jasmine.getEnv().currentSpec.description +"icon: <img src='/app/Notification/icon.png' alt='alert' width='50' height= '50'>");
 
                 //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
@@ -1333,28 +1162,9 @@ describe("Notification Manual FD Tests", function () {
                 _result.waitForResponse();
             });
 
-            it("Should allow to interact with application from notification area without activating the application when kinds is only notificationDialog.",function(){
+            it("Should allow to interact with application from notification area without activating the application when types is only Rho.Notification.TYPE_NOTIFICATION_DIALOG.",function(){
 
-                dispTestCaseRunning('Call Rho::Notification.showPopup({title:"Displaying a pop up",\n message:"Test Message",\n icon: "info",\n <b>kinds: ["notificationDialog"]</b>}, function(params) {});');
-                dispExpectedResult("showPopup callback should get fired and in test app it's implemented in such a manner, it will display a toast confirming which button got clicked.");
-
-                //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
-                _result.waitToRunTest();
-
-                runs(function(){
-                    Rho.Application.minimize();
-                    setTimeout(function() {
-                        Ruby.call("Notification","rho_showPopup_notificationDialog");
-                    }, 3000);
-                });
-
-                //Common Method implemented to wait for tester to make it pass or fail.Code available in specHelper.js
-                _result.waitForResponse();
-            });
-
-            it("Should allow to interact with application from notification area without activating the application when kinds is only Rho.Notification.KIND_NOTIFICATION_DIALOG.",function(){
-
-                dispTestCaseRunning('Call Rho.Notification.showPopup({title:"Displaying a pop up",\n message:"Test Message",\n icon: "info",\n <b>kinds: [Rho.Notification.KIND_NOTIFICATION_DIALOG]</b>}, function(params) {});');
+                dispTestCaseRunning('Call Rho.Notification.showPopup({title:"Displaying a pop up",\n message:"Test Message",\n icon: "info",\n <b>types: [Rho.Notification.TYPE_NOTIFICATION_DIALOG]</b>}, function(params) {});');
                 dispExpectedResult("showPopup callback should get fired and in test app it implemented in such a manner, it will display a toast confirming which button got clicked.");
 
                 //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
@@ -1372,16 +1182,16 @@ describe("Notification Manual FD Tests", function () {
                 _result.waitForResponse();
             });
 
-            it("should display a dialog when app is in foreground when kinds is only notificationDialog.",function(){
+            it("should display a dialog when app is in foreground when types is only notificationDialog.",function(){
 
-                dispTestCaseRunning('Call Rho.Notification.showPopup({title:"Displaying a pop up",\n message:"Test Message",\n icon: "info",\n <b>kinds: ["notificationDialog"]</b>}, function(params) {});');
-                dispExpectedResult("should display a dialog when app is in <b> foreground </b> when kinds is only notificationDialog.");
+                dispTestCaseRunning('Call Rho.Notification.showPopup({title:"Displaying a pop up",\n message:"Test Message",\n icon: "info",\n <b>types: ["notificationDialog"]</b>}, function(params) {});');
+                dispExpectedResult("should display a dialog when app is in <b> foreground </b> when types is only notificationDialog.");
 
                 //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
                 _result.waitToRunTest();
 
                 runs(function(){
-                    Ruby.call("Notification","rho_showPopup_notificationDialog");
+                    Ruby.call("Notification","rho_showPopup_constnotificationDialog");
                 });
 
                 //Common Method implemented to wait for tester to make it pass or fail.Code available in specHelper.js
@@ -1390,7 +1200,7 @@ describe("Notification Manual FD Tests", function () {
 
             it("should display a alert(!) icon in notification bar with buttons",function(){
 
-                dispTestCaseRunning('Call Rho.Notification.showPopup({title:"Displaying a pop up",\n message:"Test Message",\n icon: "alert",\n <b>kinds: ["notificationDialog"]</b>}, function(params) {});');
+                dispTestCaseRunning('Call Rho.Notification.showPopup({title:"Displaying a pop up",\n message:"Test Message",\n icon: "alert",\n <b>types: ["notificationDialog"]</b>}, function(params) {});');
                 dispExpectedResult(jasmine.getEnv().currentSpec.description);
 
                 //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
@@ -1411,7 +1221,7 @@ describe("Notification Manual FD Tests", function () {
 
             it("should display a question(?) icon in notification bar with buttons",function(){
 
-                dispTestCaseRunning('Call Rho.Notification.showPopup({title:"Displaying a pop up",\n message:"Test Message",\n icon: "question",\n <b>kinds: ["notificationDialog"]</b>}, function(params) {});');
+                dispTestCaseRunning('Call Rho.Notification.showPopup({title:"Displaying a pop up",\n message:"Test Message",\n icon: "question",\n <b>types: ["notificationDialog"]</b>}, function(params) {});');
                 dispExpectedResult(jasmine.getEnv().currentSpec.description);
 
                 //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
@@ -1431,7 +1241,7 @@ describe("Notification Manual FD Tests", function () {
 
             it("should display a info icon in notification bar with buttons",function(){
 
-                dispTestCaseRunning('Call Rho.Notification.showPopup({title:"showPopup without dialog",\n message:"Test Message",\n icon: "info",\n <b>kinds: ["notificationDialog"]</b>}, function(params) {});');
+                dispTestCaseRunning('Call Rho.Notification.showPopup({title:"showPopup without dialog",\n message:"Test Message",\n icon: "info",\n <b>types: ["notificationDialog"]</b>}, function(params) {});');
                 dispExpectedResult(jasmine.getEnv().currentSpec.description);
 
                 //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
@@ -1450,7 +1260,7 @@ describe("Notification Manual FD Tests", function () {
 
             it("should display application icon in notification bar with message and buttons when no icon param provided (default behavior) ",function(){
 
-                dispTestCaseRunning('Call Rho.Notification.showPopup({title:"showPopup without dialog",\n message:"Test Message",\n <b>kinds: ["notificationDialog"]</b>}, function(params) {});');
+                dispTestCaseRunning('Call Rho.Notification.showPopup({title:"showPopup without dialog",\n message:"Test Message",\n <b>types: ["notificationDialog"]</b>}, function(params) {});');
                 dispExpectedResult(jasmine.getEnv().currentSpec.description);
 
                 //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
@@ -1459,7 +1269,7 @@ describe("Notification Manual FD Tests", function () {
                 runs(function(){
                     Rho.Application.minimize();
                     setTimeout(function() {
-                        Ruby.call("Notification","rho_showPopup_notificationDialog");
+                        Ruby.call("Notification","rho_showPopup_constnotificationDialog");
                     }, 3000);
                 });
 
@@ -1469,7 +1279,7 @@ describe("Notification Manual FD Tests", function () {
 
             it("should display user defined icon in notification bar with message and buttons ",function(){
 
-                dispTestCaseRunning('Call Rho.Notification.showPopup({title:"showPopup without dialog",\n message:"Test Message",\n icon: <b>user defined icon</b>,\n <b>kinds: ["notificationDialog"]</b>}, function(params) {});');
+                dispTestCaseRunning('Call Rho.Notification.showPopup({title:"showPopup without dialog",\n message:"Test Message",\n icon: <b>user defined icon</b>,\n <b>types: ["notificationDialog"]</b>}, function(params) {});');
                 dispExpectedResult(jasmine.getEnv().currentSpec.description +"icon: <img src='/app/Notification/icon.png' alt='alert' width='50' height= '50'>");
 
                 //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
@@ -1486,41 +1296,25 @@ describe("Notification Manual FD Tests", function () {
                 _result.waitForResponse();
             });
 
-            it("should display a toast when kinds is only toast",function(){
+            it("should display a toast when type is only Rho.Notification.TYPE_TOAST",function(){
 
-                dispTestCaseRunning('Call Rho.Notification.showPopup({message:"Test Message",<b>kinds: ["toast"]</b>}); when application is in foreground');
+                dispTestCaseRunning('Call Rho.Notification.showPopup({message:"Test Message",<b>types: [Rho.Notification.TYPE_TOAST]</b>}); when application is in foreground');
                 dispExpectedResult("It should display a toast message whether application is in background or foreground.");
 
                 //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
                 _result.waitToRunTest();
 
                 runs(function(){
-                    Ruby.call("Notification","rho_showPopup_kind_toast");
+                    Ruby.call("Notification","rho_showPopup_type_consttoast");
                 });
 
                 //Common Method implemented to wait for tester to make it pass or fail.Code available in specHelper.js
                 _result.waitForResponse();
             });
 
-            it("should display a toast when kind is only Rho.Notification.KIND_TOAST",function(){
+            it("should display a toast when types is only toast and application is in background",function(){
 
-                dispTestCaseRunning('Call Rho.Notification.showPopup({message:"Test Message",<b>kinds: [Rho.Notification.KIND_TOAST]</b>}); when application is in foreground');
-                dispExpectedResult("It should display a toast message whether application is in background or foreground.");
-
-                //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
-                _result.waitToRunTest();
-
-                runs(function(){
-                    Ruby.call("Notification","rho_showPopup_kind_consttoast");
-                });
-
-                //Common Method implemented to wait for tester to make it pass or fail.Code available in specHelper.js
-                _result.waitForResponse();
-            });
-
-            it("should display a toast when kinds is only toast and application is in background",function(){
-
-                dispTestCaseRunning('Call Rho.Notification.showPopup({message:"Test Message",<b>kinds: ["toast"]</b>}); when application is in background');
+                dispTestCaseRunning('Call Rho.Notification.showPopup({message:"Test Message",<b>types: ["toast"]</b>}); when application is in background');
                 dispExpectedResult("It should display a toast message whether application is in background or foreground.");
 
                 //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
@@ -1529,7 +1323,7 @@ describe("Notification Manual FD Tests", function () {
                 runs(function(){
                     Rho.Application.minimize();
                     setTimeout(function() {
-                        Ruby.call("Notification","rho_showPopup_kind_toast");
+                        Ruby.call("Notification","rho_showPopup_type_consttoast");
                     }, 3000);
 
                 });
@@ -1538,24 +1332,24 @@ describe("Notification Manual FD Tests", function () {
                 _result.waitForResponse();
             });
 
-            it("should display all applicable kind of notification when kinds mentioned with dialog, notification, notificationDialog, toast and when app is in foreground.",function(){
+            it("should display all applicable type of notification when types mentioned with dialog, notification, notificationDialog, toast and when app is in foreground.",function(){
 
-                dispTestCaseRunning('Call Rho.Notification.showPopup({title:"Displaying a pop up",\n message:"Test Message",\n icon: "info",\n <b>kinds: ["dialog", "notification", "notificationDialog", "toast"]</b>}, function(params) {});');
-                dispExpectedResult("It should display a dialog and a toast.'notification', 'notificationDialog' will have no effect as application is in foreground.");
+                dispTestCaseRunning('Call Rho.Notification.showPopup({title:"Displaying a pop up",\n message:"Test Message",\n icon: "info",\n <b>types: ["dialog", "notification", "notificationDialog", "toast"]</b>}, function(params) {});');
+                dispExpectedResult("It should display a dialog. TYPE_NOTIFICATION, TYPE_NOTIFICATION_DIALOG will have no effect as application is in foreground. TYPE_NOAST will have no effect as status popup is already shown.");
 
                 //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
                 _result.waitToRunTest();
                 runs(function(){
-                    Ruby.call("Notification","rho_showPopup_kind_all");
+                    Ruby.call("Notification","rho_showPopup_type_all");
                 });
 
                 //Common Method implemented to wait for tester to make it pass or fail.Code available in specHelper.js
                 _result.waitForResponse();
             });
 
-            it("should display all applicable kind of notification when kinds mentioned with dialog, notificationDialog, toast and when app is in background.",function(){
+            it("should display all applicable type of notification when types mentioned with dialog, notificationDialog, toast and when app is in background.",function(){
 
-                dispTestCaseRunning('Call Rho.Notification.showPopup({title:"Displaying a pop up",\n message:"Test Message",\n icon: "info",\n <b>kinds: ["dialog", "notificationDialog", "toast"]</b>}, function(params) {});');
+                dispTestCaseRunning('Call Rho.Notification.showPopup({title:"Displaying a pop up",\n message:"Test Message",\n icon: "info",\n <b>types: ["dialog", "notificationDialog", "toast"]</b>}, function(params) {});');
                 dispExpectedResult("It should display notification dialog and toast when application is in background.");
 
                 //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
@@ -1565,7 +1359,7 @@ describe("Notification Manual FD Tests", function () {
 
                     Rho.Application.minimize();
                     setTimeout(function() {
-                        Ruby.call("Notification","rho_showPopup_kind_all");
+                        Ruby.call("Notification","rho_showPopup_type_all");
                     }, 3000);
 
                 });
