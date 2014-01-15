@@ -1505,7 +1505,6 @@ describe("Barcode Manual Test", function() {
 							runs(function() {
 							expect("pass").toEqual(document.getElementById("actResult").innerHTML);
 							objSCN.setProperty("triggerConnected", "false");
-							alert("hi");
 							objSCN.disable();
 							});
 
