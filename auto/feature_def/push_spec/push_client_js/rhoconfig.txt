@@ -88,4 +88,4 @@ use_bb_full_browser=6
 # for example: 'http://localhost:9292/application
 syncserver = 'http://localhost:9292'
 Push.rhoconnect.pushServer='http://localhost:8675'
-Push.rhoconnect.pushAppName='appmike'
+Push.rhoconnect.pushAppName='someappname'
