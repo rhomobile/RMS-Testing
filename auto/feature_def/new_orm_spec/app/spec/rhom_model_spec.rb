@@ -1,23 +1,6 @@
 describe "RhomModel" do
 
   before(:all) do
-    Rho::RHO.load_all_sources()
-    @save_sync_types = getTestDB().select_from_table('sources','name, sync_type')
-    getTestDB().update_into_table('sources', {'sync_type'=>'none'})
-
-    Rho::RhoConfig.sources[getProduct.to_s]['sync_type'] = 'incremental' if $spec_settings[:sync_model]
-    Rho::RhoConfig.sources[getCustomer.to_s]['sync_type'] = 'incremental' if $spec_settings[:sync_model]
-
-    # puts "Rho::RhoConfig.sources: "
-    # puts Rho::RhoConfig.sources.inspect
-    # =>
-    # {
-    #   "Customer"=>{"sync_type"=>"incremental", "sync_priority"=>2, "property"=>{"address"=>[:string, nil], "created_at"=>[:string, nil], "city"=>[:string, nil], "email"=>[:string, nil], "last"=>[:string, nil], "updated_at"=>[:string, nil], "lat"=>[:string, nil], "long"=>[:string, nil], "phone"=>[:string, nil], "state"=>[:string, nil], "zip"=>[:string, nil]}, "name"=>"Customer", :loaded=>true, "partition"=>"user", "str_associations"=>"Product,quantity,Product,sku", "str_blob_attribs"=>"", "source_id"=>3},
-    #   "Customer_s"=>{"sync_type"=>"incremental", "sync_priority"=>1, "schema_version"=>"1.0", "schema"=>{"property"=>{"address"=>[:string, nil], "created_at"=>[:string, nil], "city"=>[:string, nil], "email"=>[:string, nil], "first"=>[:string, nil], "last"=>[:string, nil], "updated_at"=>[:string, nil], "lat"=>[:string, nil], "long"=>[:string, nil], "phone"=>[:string, nil], "state"=>[:string, nil], "zip"=>[:string, nil]}}, "name"=>"Customer_s", :loaded=>true, "partition"=>"user", "str_associations"=>"Product_s,quantity,Product_s,sku", "str_blob_attribs"=>"", "source_id"=>4},
-    #   "Product"=>{"sync_type"=>"incremental", "sync_priority"=>1, "belongs_to"=>[{"quantity"=>"Customer"}, {"sku"=>"Customer"}], "property"=>{}, "name"=>"Product", :loaded=>true, "partition"=>"user", "str_associations"=>"", "str_blob_attribs"=>"", "source_id"=>5},
-    #   "Product_s"=>{"sync_type"=>"incremental", "sync_priority"=>2, "schema_version"=>"1.0", "belongs_to"=>[{"quantity"=>"Customer_s"}, {"sku"=>"Customer_s"}], "schema"=>{"property"=>{"brand"=>[:string, nil], "created_at"=>[:string, nil], "name"=>[:string, nil], "price"=>[:string, nil], "quantity"=>[:string, nil], "sku"=>[:string, nil], "updated_at"=>[:string, nil]}}, "name"=>"Product_s", :loaded=>true, "partition"=>"user", "str_associations"=>"", "str_blob_attribs"=>"", "source_id"=>6}
-    # }
-    #
   end
 
   after(:all) do
@@ -52,19 +35,9 @@ describe "RhomModel" do
     attrs = {"name" => "Test","brand" => "Android"}
     @product = getProduct.create(attrs)
 
-    # TODO:
-    # puts "---------- Properties ..."
-    # puts @product
-    # puts @product.loaded
-    # puts @product.model_name
-    # puts @product.sync_type if $spec_settings[:sync_model]
-    # puts @product.partition
-    # puts @product.sync_priority
-    # puts @product.fixed_schema
-    # puts @product.freezed
-    # puts "----------"
-
-    @product.source_id.should == Rho::RhoConfig.sources[getProduct.to_s]['source_id']
+    res = ::Rho::RHO.get_user_db().select_from_table('sources','name,sync_type,source_id',
+      {"name" => getProduct.to_s})
+    @product.source_id.to_i.should == res[0]['source_id'].to_i
     @product.name.should == attrs['name']
     @product.brand.should == attrs['brand']
     @product.source_id.should_not be_nil
@@ -86,7 +59,6 @@ describe "RhomModel" do
     # # puts @product1.inspect
     # puts "should create model:"
     # puts @product2.inspect
-
     @product2.object.should =="#{@product1.object}"
     @product2.name.should == vars['name']
     @product2.brand.should == vars['brand']
