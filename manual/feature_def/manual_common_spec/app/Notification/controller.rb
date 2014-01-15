@@ -23,141 +23,113 @@ def rho_default_showPopup
         :title =>"Displaying a pop up",
         :message => "Displaying a Normal Popup",
         :icon => "info",
-        :buttons => [{:id => 'ok', :title => 'ok'}]},url_for(:action => :popup_callback)
+        :buttons => [{:id => 'accept', :title => 'ok'}]},url_for(:action => :popup_callback)
     );
 end
 
-def rho_showPopup_kind_dialog
+def rho_showPopup_type_constdialog
     Rho::Notification.showPopup({
         :title =>"Displaying a pop up",
         :message => "Displaying a Normal Popup",
         :icon => "info",
-        :buttons => [{:id => 'ok', :title => 'ok'}],
-        :kinds => ["dialog"]},url_for(:action => :popup_callback)
+        :buttons => [{:id => 'accept', :title => 'ok'}],
+        :types => [Rho::Notification::TYPE_DIALOG]},url_for(:action => :popup_callback)
     );
 end
 
-def rho_showPopup_kind_constdialog
-    Rho::Notification.showPopup({
-        :title =>"Displaying a pop up",
-        :message => "Displaying a Normal Popup",
-        :icon => "info",
-        :buttons => [{:id => 'ok', :title => 'ok'}],
-        :kinds => [Rho::Notification::KIND_DIALOG]},url_for(:action => :popup_callback)
-    );
-end
-
-def rho_showPopup_kind_notification
+def rho_showPopup_type_constnotification
     Rho::Notification.showPopup({
         :message => "Displaying a Normal Popup",
-        :kinds => ["notification"]});
-end
-
-def rho_showPopup_kind_constnotification
-    Rho::Notification.showPopup({
-        :message => "Displaying a Normal Popup",
-        :kinds => [Rho::Notification::KIND_NOTIFICATION]});
+        :types => [Rho::Notification::TYPE_NOTIFICATION]});
 end
 
 def rho_notification_iconinfo
     Rho::Notification.showPopup({
         :message => "Displaying a Normal Popup",
-        :kinds => ["notification"],
+        :types => [Rho::Notification::TYPE_NOTIFICATION],
         :icon => "info"});
 end
 
 def rho_notification_iconalert
     Rho::Notification.showPopup({
         :message => "Displaying a Normal Popup",
-        :kinds => ["notification"],
+        :types => [Rho::Notification::TYPE_NOTIFICATION],
         :icon => "alert"});
 end
 
 def rho_notification_iconquestion
     Rho::Notification.showPopup({
         :message => "Displaying a Normal Popup",
-        :kinds => ["notification"],
+        :types => [Rho::Notification::TYPE_NOTIFICATION],
         :icon => "question"});
 end
 
 def rho_notification_iconuserdefined
     Rho::Notification.showPopup({
         :message => "Displaying a Normal Popup",
-        :kinds => ["notification"],
+        :types => [Rho::Notification::TYPE_NOTIFICATION],
         :icon => Rho::RhoFile.join(Rho::Application.modelFolderPath('Notification'), 'icon.png')});
-end
-
-def rho_showPopup_notificationDialog
-	    Rho::Notification.showPopup({
-        :title =>"Displaying a pop up",
-        :message => "Displaying a Normal Popup",
-        :buttons => [{:id => 'ok', :title => 'ok'}],
-        :kinds => ["notificationDialog"]},url_for(:action => :popup_dialog_callback)
-    );
 end
 
 def rho_showPopup_constnotificationDialog
 	    Rho::Notification.showPopup({
         :title =>"Displaying a pop up",
         :message => "Displaying a Normal Popup",
-        :icon => "info",
-        :buttons => [{:id => 'yes', :title => 'yes'},{:id => 'no', :title => 'no'},{:id => 'cancel', :title => 'cancel'},{:id => 'ok', :title => 'ok'}],
-        :kinds => [Rho::Notification::KIND_NOTIFICATION_DIALOG]},url_for(:action => :popup_dialog_callback)
+        :buttons => [{:id => 'accept', :title => 'yes'},{:id => 'no', :title => 'no'},{:id => 'cancel', :title => 'cancel'},{:id => 'ok', :title => 'ok'}],
+        :types => [Rho::Notification::TYPE_NOTIFICATION_DIALOG]}, url_for(:action => :popup_dialog_callback)
     );
 end
 
 def rho_notificationdialog_iconinfo
     Rho::Notification.showPopup({
         :message => "Displaying a Normal Popup",
-        :kinds => ["notificationDialog"],
-        :buttons => [{:id => 'ok', :title => 'ok'}],
+        :types => [Rho::Notification::TYPE_NOTIFICATION_DIALOG],
+        :buttons => [{:id => 'accept', :title => 'ok'}],
         :icon => "info"});
 end
 
 def rho_notificationdialog_iconalert
     Rho::Notification.showPopup({
         :message => "Displaying a Normal Popup",
-        :kinds => ["notificationDialog"],
-        :buttons => [{:id => 'ok', :title => 'ok'}],
+        :types => [Rho::Notification::TYPE_NOTIFICATION_DIALOG],
+        :buttons => [{:id => 'accept', :title => 'ok'}],
         :icon => "alert"});
 end
 
 def rho_notificationdialog_iconquestion
     Rho::Notification.showPopup({
         :message => "Displaying a Normal Popup",
-        :kinds => ["notificationDialog"],
-        :buttons => [{:id => 'ok', :title => 'ok'}],
+        :types => [Rho::Notification::TYPE_NOTIFICATION_DIALOG],
+        :buttons => [{:id => 'accept', :title => 'ok'}],
         :icon => "question"});
 end
 
 def rho_notificationdialog_iconuserdefined
     Rho::Notification.showPopup({
         :message => "Displaying a Normal Popup",
-        :kinds => ["notificationDialog"],
-        :buttons => [{:id => 'ok', :title => 'ok'}],
+        :types => [Rho::Notification::TYPE_NOTIFICATION_DIALOG],
+        :buttons => [{:id => 'accept', :title => 'ok'}],
         :icon => Rho::RhoFile.join(Rho::Application.modelFolderPath('Notification'), 'icon.png')});
 end
 
-def rho_showPopup_kind_toast
+def rho_showPopup_type_consttoast
     Rho::Notification.showPopup({
         :message => "Displaying text in toast ...",
-        :kinds => ["toast"]});
-end
-
-def rho_showPopup_kind_consttoast
-    Rho::Notification.showPopup({
-        :message => "Displaying text in toast ...",
-        :kinds => [Rho::Notification::KIND_TOAST]}
+        :types => [Rho::Notification::TYPE_TOAST]}
     );
 end
 
-def rho_showPopup_kind_all
+def rho_showPopup_type_all
     Rho::Notification.showPopup({
         :title =>"Displaying a pop up",
         :message => "Displaying a Normal message",
         :icon => "info",
-        :buttons => [{:id => 'ok', :title => 'ok'}],
-        :kinds => ["dialog",'notificationDialog','toast','notification']},url_for(:action => :popup_callback)
+        :buttons => [{:id => 'accept', :title => 'ok'}],
+        :types => [Rho::Notification::TYPE_DIALOG,
+                   Rho::Notification::TYPE_NOTIFICATION_DIALOG,
+                   Rho::Notification::TYPE_TOAST,
+                   Rho::Notification::TYPE_NOTIFICATION]
+        },url_for(:action => :popup_callback)
     );
 end
 

@@ -131,7 +131,7 @@ describe("Barcode Manual Test", function() {
 							}, "Timed out waiting for tester to respond", 300000);
 							runs(function() {
 							expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-							objSCN.setProperty("triggerConnected", "false");
+							Ruby.call("Barcode","setTriggerConnected?value=false");
 							Ruby.call("Barcode","BarcodeDisable");
 							});
 
