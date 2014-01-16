@@ -8,46 +8,15 @@ USE_COPY_FILES = true
 if defined? RHO_ME || defined? RHO_WP7 || System.get_property('platform') == 'WINDOWS'
  USE_COPY_FILES = false
 end
-
 puts "USE_COPY_FILES: #{USE_COPY_FILES}"
-
-def getAccount
-    return Account_s if $spec_settings[:schema_model]
-    Account
-end
-
-def getCase
-    return Case_s if $spec_settings[:schema_model]
-    Case
-end
-
-def getTestDB
-    ::Rho::RHO.get_db_partitions['local']
-end
-
-def clean_db_data
-    #Rhom::Rhom.database_full_reset(true)
-    getTestDB().start_transaction
-    getTestDB().delete_all_from_table('client_info')
-    getTestDB().delete_all_from_table('object_values')
-    getTestDB().delete_all_from_table('changed_values')
-    getTestDB().delete_all_from_table('Account_s')
-    getTestDB().delete_all_from_table('Case_s')
-    getTestDB().commit
-end
-
-def copy_file(src, dst_dir)
-    content = File.binread(src)
-    File.open(File.join( dst_dir, File.basename(src) ), "wb"){|f| f.write(content) }
-end
 
 class Test_Helper
   def before_all(tables, folder)
     @tables, @folder = tables, folder
 
     Rho::RHO.load_all_sources()
-    @save_sync_types = getTestDB().select_from_table('sources','name, sync_type')
-    getTestDB().update_into_table('sources',{'sync_type'=>'none'})
+    # @save_sync_types = getTestDB().select_from_table('sources','name, sync_type')
+    # getTestDB().update_into_table('sources',{'sync_type'=>'none'})
     Rho::RhoConfig.sources[getAccount.to_s]['sync_type'] = 'incremental' if $spec_settings[:sync_model]
     Rho::RhoConfig.sources[getCase.to_s]['sync_type'] = 'incremental' if $spec_settings[:sync_model]
     clean_db_data
@@ -82,7 +51,6 @@ class Test_Helper
     else
       clean_db_data
     end
-    Rho::RhoConfig.sources()[getCase.to_s]['freezed'] = false if !$spec_settings[:schema_model]
   end
 
   def before_each
@@ -92,10 +60,9 @@ class Test_Helper
   end
 
   def after_all
-    @save_sync_types.each do |src|
-      getTestDB().update_into_table('sources',{'sync_type'=>src['sync_type']}, {'name'=>src['name']})
-    end
-    Rho::RhoConfig.sources[getAccount.to_s]['sync_type'] = 'none'
+    # @save_sync_types.each do |src|
+    #   getTestDB().update_into_table('sources',{'sync_type'=>src['sync_type']}, {'name'=>src['name']})
+    # end
   end
 end
 
@@ -134,7 +101,8 @@ describe "Rhom::RhomObject" do
     results = getCase.find(:all)
     results.length.should == 1
 
-    source_id = Rho::RhoConfig.sources[getCase.to_s]['source_id']
+    res = getTestDB.select_from_table('sources','source_id', {"name" => getCase.to_s})
+    source_id = res[0]['source_id']
     object = results[0].object
     if $spec_settings[:schema_model]
       res = getTestDB().select_from_table(getCase.to_s, "*")
@@ -1423,13 +1391,15 @@ end
 
 if !defined?(RHO_WP7)
   it "should not add property to freezed model" do
+    # TODO: Rho::RhoConfig.sources and 'freezed'
     if !$spec_settings[:schema_model]
         props = Rho::RhoConfig.sources()[getCase.to_s]
         props['freezed'] = true
-
-        props['freezed'].should == true
         #props['property'].should_not be_nil
         #props['property']['description'].should_not be_nil
+        # puts "************* 1:"
+        # puts props.inspect
+        # puts "************* 1:"
     end
 
     lambda { obj = getCase().new( :wrong_address => 'test') }.should raise_error(ArgumentError)
@@ -1454,10 +1424,10 @@ if !defined?(RHO_WP7)
 end
 
   it "should add property to freezed model" do
+    # TODO: Rho::RhoConfig.sources and 'freezed'
     if !$spec_settings[:schema_model]
       props = Rho::RhoConfig.sources()[getCase.to_s]
       props['freezed'] = true
-      props['freezed'].should == true
     end
 
     obj = getCase().new( :description => 'test')
