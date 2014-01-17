@@ -39,6 +39,8 @@
 
 	<!-- include spec files here... -->
 	<script type="text/javascript" src="printer_zebra_js_spec.js"></script>
+    <script type="text/javascript" src="ba-debug.js"></script>
+    <script type="text/javascript" src="stacktrace.js" /></script>
    
 	<script type="text/javascript">
 
@@ -47,26 +49,32 @@
         jasmineEnv.updateInterval = 1000;
 
         var htmlReporter = new jasmine.HtmlReporter();
-        var junitReporter = new jasmine.JUnitXmlReporter();
-        junitReporter.useDotNotation = false
+        //var junitReporter = new jasmine.JUnitXmlReporter();
+        //junitReporter.useDotNotation = false
         jasmineEnv.addReporter(htmlReporter);
-        jasmineEnv.addReporter(new jasmine.JUnitXmlReporter('.\\', true, true));
+        //jasmineEnv.addReporter(new jasmine.JUnitXmlReporter('.\\', true, true));
 
         jasmineEnv.specFilter = function (spec) {
             return htmlReporter.specFilter(spec);
         };
 
-        var currentWindowOnload = window.onload;
-        window.onload = function() {
-          if (currentWindowOnload) {
-            currentWindowOnload();
-          }
-
-          execJasmine();
-        };
+        $( window ).load(function() {
+            window.debug.setCallback(         
+                function( level ) {
+                    var args = Array.prototype.slice.call( arguments, 1 );
+                    alert('Landed in callback ' + JSON.stringify(args,2) );
+                    $('#debug').length || $('<div id="debug"/>').appendTo( 'body' );
+                    $('<div/>')
+                        .addClass( 'debug-' + level )
+                        .html( '[' + level + '] ' + args )
+                        .appendTo( '#debug' );
+                } 
+            );
+            execJasmine();
+        });
 
         function execJasmine() {
-          jasmineEnv.execute();
+            jasmineEnv.execute();
         }
 
     })();
@@ -81,8 +89,12 @@
   </textarea>
 </div>
     <h1>Printer Zebra Manual Tests</h1>
-	connectionType: <div id="connectionType" style="display:none"></div>
-    <P>
+
+    <div>Discovered Devices: <select id="dev_list"></select></div>
+    <div>Device Connection: <select id="dev_conn_type"></select></div>
+    <div>Device Address: <input type="text" id="dev_addr" value="127.0.0.1" /></div>
+    <div>Device Port: <input type="text" id="dev_port" value="6101" /></div>
+
     <b>Test Objective: </b><div id="objective"></div>
     <P>
     <b>Test Running: </b><div id="instruction"></div>
@@ -94,6 +106,8 @@
 	<div id="select_box_wrapper" style="display:none">
 		<select name="combo" id="combo"></select>
 	</div>
+
+    <b>Console: </b><div id="debug"/></div>
 	
     <input type="button" value="Test Passed" onclick="testPassed()" />
     <input type="button" value="Test Failed" onclick="testFailed()" />

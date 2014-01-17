@@ -66,198 +66,84 @@ var displayPrinterResult = function (desc, data){
 	document.getElementById("myList").appendChild(node);
 }
 
-function searchPrinterCallback(printer) {
-	if (printer.status == Rho.PrinterZebra.STATUS_SUCCESS && printer.printerID == STATUS_OK) {
-		printers_array.push(printer);
-	} 
-	else if (printer.status == Rho.PrinterZebra.STATUS_DONE || printer.status == Rho.PrinterZebra.STATUS_ERR_TIMEOUT) {
-		discovery_finished = true;
-	} 
-	else if (printer.message == Rho.PrinterZebra.STATUS_ERROR) {
-		printers_errors.push(printer)
-	}
-}
-
 function displaySearchResults(display_printers, display_errors) {
 	if (display_printers.length > 0) {
-		displayPrinterResult("Result:", display_printers.toString());
+		displayPrinterResult("Result:", JSON.stringify(display_printers," "));
 	} 
 	
 	if (display_errors.length > 0) {
-		$('#myList').append("<li>"+display_errors.toString()+"<li>");
+		$('#myList').append("<li>"+JSON.stringify(display_errors," ")+"<li>");
 	}
 
 }
 
 function PrinterConnectiontype() {
-	connect_type = Rho.PrinterZebra.connectionType;
+	//connect_type = Rho.PrinterZebra.connectionType;
 	$('#connectionType').show();
 	//$('#connectionType').empty();
 	//document.getElementById("connectionType").innerTEXT = connect_type;
-	$('#connectionType').html(connect_type);
+	//$('#connectionType').html(connect_type);
 }
 
-function enumerateCallback(printer) {
-	if (printer.length > 0) {
-		displayPrinterResult("Result:", printer.toString());
+function enumerateCallback(callbackValue) {
+	if (callbackValue.length > 0) {
+		displayPrinterResult("Result:", JSON.stringify(callbackValue," "));
 	} 
 	else {
-		displayPrinterResult("Result:","Could not find printer types.");
+		displayPrinterResult("Result:","Could not find callbackValue types.");
 	}
 }
 		
-function stopSearchPrinterCallback(printer) {
-	if(printer.toString() == Rho.PrinterZebra.STATUS_SUCCESS) {
-		displayPrinterResult("Result:",printer.toString());
-	}
-	else if(printer.toString() == Rho.PrinterZebra.STATUS_ERROR) {
-		displayPrinterResult("Result:",printer.toString());
+function handleStatusCallback(callbackValue) {
+	if(callbackValue == Rho.PrinterZebra.PRINTER_STATUS_SUCCESS) {
+		displayPrinterResult("Result:",JSON.stringify(callbackValue, 2));
 	}
 	else {
-		displayPrinterResult("Result:",printer.toString());
+		displayPrinterResult("Error:",JSON.stringify(callbackValue, 2));
 	}
 }		
 
-function printRawStringCallback(printer) {
-	if(printer.toString() == Rho.PrinterZebra.STATUS_SUCCESS) {
-		displayPrinterResult("Result:",printer.toString());
-	}
-	else if(printer.toString() == Rho.PrinterZebra.STATUS_ERROR) {
-		displayPrinterResult("Result:",printer.toString());
-	}
-	else {
-		displayPrinterResult("Result:",printer.toString());
-	}	
-}
-
-function connectCallback(printer) {
-	if(printer) {
-		displayPrinterResult("Result:",printer.toString());
+function connectCallback(callbackValue) {
+	if(callbackValue) {
+		displayPrinterResult("Result:",JSON.stringify(callbackValue, 2));
 	}
 	else {
 		displayPrinterResult("Result:","Nil value");
 	}	
 }
 
-function disconnectCallback(printer) {
-	if(printer.toString() == Rho.PrinterZebra.STATUS_SUCCESS) {
-		displayPrinterResult("Result:",printer.toString());
-	}
-	else if(printer.toString() == Rho.PrinterZebra.STATUS_ERROR) {
-		displayPrinterResult("Result:",printer.toString());
-	}
-	else {
-		displayPrinterResult("Result:",printer.toString());
-	}		
-}
-
-
-
-function printFileCallback(printer) {
-	if(printer.toString() == Rho.PrinterZebra.STATUS_SUCCESS) {
-		displayPrinterResult("Result:",printer.toString());
-	}
-	else if(printer.toString() == Rho.PrinterZebra.STATUS_ERROR) {
-		displayPrinterResult("Result:",printer.toString());
-	}
-	else {
-		displayPrinterResult("Result:",printer.toString());
-	}		
-}
-
-function retrieveCallback(printer) {
-	if (printer.status == Rho.PrinterZebra.STATUS_SUCCESS) {
-		displayPrinterResult("Result:",JSON.stringify(printer));
+function retrieveCallback(callbackValue) {
+	if (callbackValue.status == Rho.PrinterZebra.PRINTER_STATUS_SUCCESS) {
+		displayPrinterResult("Result:",JSON.stringify(callbackValue));
 	} 
-	else if(printer.status == Rho.PrinterZebra.STATUS_ERROR) {
-		displayPrinterResult("Result:",JSON.stringify(printer));
+	else if(callbackValue.status == Rho.PrinterZebra.PRINTER_STATUS_ERROR) {
+		displayPrinterResult("Result:",JSON.stringify(callbackValue));
 	} 
 	else {
-		displayPrinterResult("Result:",JSON.stringify(printer));
+		displayPrinterResult("Result:",JSON.stringify(callbackValue));
 	} 
 }
 
-function retrieveextensionCallback(printer) {
-	if (printer.status == Rho.PrinterZebra.STATUS_SUCCESS) {
-		displayPrinterResult("Result:",JSON.stringify(printer));
+function retrieveextensionCallback(callbackValue) {
+	if (callbackValue.status == Rho.PrinterZebra.PRINTER_STATUS_SUCCESS) {
+		displayPrinterResult("Result:",JSON.stringify(callbackValue));
 	} 
-	else if(printer.status == Rho.PrinterZebra.STATUS_ERROR) {
-		displayPrinterResult("Result:",JSON.stringify(printer));
+	else if(callbackValue.status == Rho.PrinterZebra.PRINTER_STATUS_ERROR) {
+		displayPrinterResult("Result:",JSON.stringify(callbackValue));
 	} 
 	else {
-		displayPrinterResult("Result:",JSON.stringify(printer));
+		displayPrinterResult("Result:",JSON.stringify(callbackValue));
 	} 
 }
-
-function sendfilecontentsCallback(printer) {
-	if (printer.status == Rho.PrinterZebra.STATUS_SUCCESS) {
-		displayPrinterResult("Result:",printer.toString());
+function requestStateCallback(callbackValue) {
+	if (callbackValue.status == Rho.PrinterZebra.PRINTER_STATUS_SUCCESS) {
+		displayPrinterResult("Result:",JSON.stringify(callbackValue));
 	} 
-	else if(printer.status == Rho.PrinterZebra.STATUS_ERROR) {
-		displayPrinterResult("Result:",printer.toString());
-	} 
-	else {
-		displayPrinterResult("Result:",printer.toString());
-	} 
-}
-
-function printStoredHashCallback(printer) {
-	if (printer.status == Rho.PrinterZebra.STATUS_SUCCESS) {
-		displayPrinterResult("Result:",printer.toString());
-	} 
-	else if(printer.status == Rho.PrinterZebra.STATUS_ERROR) {
-		displayPrinterResult("Result:",printer.toString());
+	else if(callbackValue.status == Rho.PrinterZebra.PRINTER_STATUS_ERROR) {
+		displayPrinterResult("Result:",JSON.stringify(callbackValue.status));
 	} 
 	else {
-		displayPrinterResult("Result:",printer.toString());
-	} 
-}
-
-function printStoredArrayCallback(printer) {
-	if (printer.status == Rho.PrinterZebra.STATUS_SUCCESS) {
-		displayPrinterResult("Result:",printer.toString());
-	} 
-	else if(printer.status == Rho.PrinterZebra.STATUS_ERROR) {
-		displayPrinterResult("Result:",printer.toString());
-	} 
-	else {
-		displayPrinterResult("Result:",printer.toString());
-	} 
-}
-
-function printImageFromFileCallback(printer) {
-	if (printer.status == Rho.PrinterZebra.STATUS_SUCCESS) {
-		displayPrinterResult("Result:",printer.toString());
-	} 
-	else if(printer.status == Rho.PrinterZebra.STATUS_ERROR) {
-		displayPrinterResult("Result:",printer.toString());
-	} 
-	else {
-		displayPrinterResult("Result:",printer.toString());
-	} 
-}
-
-function storeImageCallback(printer) {
-	if (printer.status == Rho.PrinterZebra.STATUS_SUCCESS) {
-		displayPrinterResult("Result:",printer.toString());
-	} 
-	else if(printer.status == Rho.PrinterZebra.STATUS_ERROR) {
-		displayPrinterResult("Result:",printer.toString());
-	} 
-	else {
-		displayPrinterResult("Result:",printer.toString());
-	} 
-}
-
-function requestStateCallback(printer) {
-	if (printer.status == Rho.PrinterZebra.STATUS_SUCCESS) {
-		displayPrinterResult("Result:",JSON.stringify(printer));
-	} 
-	else if(printer.status == Rho.PrinterZebra.STATUS_ERROR) {
-		displayPrinterResult("Result:",JSON.stringify(printer.status));
-	} 
-	else {
-		displayPrinterResult("Result:",JSON.stringify(printer));
+		displayPrinterResult("Result:",JSON.stringify(callbackValue));
 	} 
 }
 
@@ -302,7 +188,8 @@ var hashzpl = {0:'val1',5:'val2',1:'val3',25:'val4',100:'val5'};
 var ccplformatpath = "e:ccplformat.ccpl";
 var hashccpl = {0:'val1',1:'val3',5:'val2',25:'val4',100:'val5'};
 var invalidformatpath = "bg:ccplformat.invalid";
-var invalidzplhash = {0,10203,2211,3355sasa};
+// hash should be parseable by javascript
+var invalidzplhash = {0:'val1',10203:'val1',2211:'val1','3355sasa':'val1'};
 var arrayzpl = [0,1,10,5,20];
 var arrayccpl = [0,1,2,3,4,5,6];
 var pngimagepath_320px = Rho.RhoFile.join(Rho.Application.modelFolderPath('PrinterZebra'), "PrinterZebraFiles/pngimagepath_320px.png"); 
