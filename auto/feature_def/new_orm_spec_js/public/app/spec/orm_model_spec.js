@@ -22,13 +22,13 @@ describe("<model's object>", function() {
 
   function reset() {
     db = Rho.ORMHelper.dbConnection("local");
-    Rho.ORM.clear();
     var partitions = Rho.ORMHelper.getDbPartitions();
     $.each(partitions, function(index, db2) {
         db2.$execute_sql("DELETE FROM SOURCES");
         db2.$execute_sql("DELETE FROM OBJECT_VALUES");
         db2.$execute_sql("DELETE FROM CHANGED_VALUES");
     });
+    Rho.ORM.clear();
   };
 
   beforeEach(function(){
@@ -755,13 +755,13 @@ describe("<model's fixed_schema>", function() {
 
    function reset(){
     db = Rho.ORMHelper.dbConnection("local");
-    Rho.ORM.clear();
     var partitions = Rho.ORMHelper.getDbPartitions();
     $.each(partitions, function(index, db2) {
       db2.$execute_sql("DELETE FROM SOURCES");
       db2.$execute_sql("DELETE FROM OBJECT_VALUES");
       db2.$execute_sql("DELETE FROM CHANGED_VALUES");
     });
+    Rho.ORM.clear();
   }
 
   var modelDef = function(model){

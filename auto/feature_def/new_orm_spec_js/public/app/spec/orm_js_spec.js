@@ -21,7 +21,7 @@ describe("<ORM module specs>", function() {
     reset();
   });
 
-  it('VT302-0001 | Check Rho.ORM exist or not | Should return an object',function(){
+  it('VT302-0001 | Check Rho.ORM exist or not | Should return an object',function() {
     expect(typeof(Rho.ORM)).toEqual('object');
   });
 
@@ -33,7 +33,7 @@ describe("<ORM module specs>", function() {
         model.property("brand","string");
         model.set("partition","local");
     };
-    p = Rho.ORM.addModel(Product);
+    Rho.ORM.addModel(Product);
 
     source = getModelSource('Product');
     expect(source.sync_type).toEqual('incremental');
@@ -48,7 +48,7 @@ describe("<ORM module specs>", function() {
         model.property("brand","string");
         model.set("partition","local");
     };
-    p = Rho.ORM.addModel(Product);
+    Rho.ORM.addModel(Product);
 
     source = getModelSource("123456");
     expect(source.sync_type).toEqual('incremental');
@@ -62,7 +62,7 @@ describe("<ORM module specs>", function() {
         model.property("name","string");
         model.property("brand","string");
     };
-    p = Rho.ORM.addModel(Product);
+    Rho.ORM.addModel(Product);
 
     source = getModelSource('Product');
     expect(source.sync_type).toEqual('incremental');
@@ -77,7 +77,7 @@ describe("<ORM module specs>", function() {
         model.property("brand","string");
         model.set("partition","local");
     };
-    p = Rho.ORM.addModel(Product);
+    Rho.ORM.addModel(Product);
 
     source = getModelSource('Product');
     expect(source.sync_type).toEqual('none');
@@ -92,7 +92,7 @@ describe("<ORM module specs>", function() {
         model.property("brand","string");
         model.set("partition","local");
     };
-    p = Rho.ORM.addModel(Product);
+    Rho.ORM.addModel(Product);
 
     source = getModelSource('Product');
     expect(source.sync_type).toEqual('none');
@@ -108,7 +108,7 @@ describe("<ORM module specs>", function() {
         model.property("brand","string");
         model.set("partition","local");
     };
-    p = Rho.ORM.addModel(Product);
+    Rho.ORM.addModel(Product);
 
     source = getModelSource('Product');
     expect(source.partition).toEqual('local');
@@ -124,7 +124,7 @@ describe("<ORM module specs>", function() {
         model.property("name","string");
         model.property("brand","string");
     };
-    p = Rho.ORM.addModel(Product);
+    Rho.ORM.addModel(Product);
 
     source = getModelSource('Product');
     expect(source.sync_type).toEqual('incremental');
@@ -139,7 +139,7 @@ describe("<ORM module specs>", function() {
         model.modelName("Product");
         model.property("name","string");
     };
-    p = Rho.ORM.addModel(Product);
+    Rho.ORM.addModel(Product);
 
     source = getModelSource('Product');
     expect(source.property['name'][0]).toEqual('string');
@@ -152,7 +152,7 @@ describe("<ORM module specs>", function() {
         model.modelName("Product");
         model.property("id","integer");
     };
-    p = Rho.ORM.addModel(Product);
+    Rho.ORM.addModel(Product);
 
     source = getModelSource('Product');
     expect(source.property['id'][0]).toEqual('integer');
@@ -165,7 +165,7 @@ describe("<ORM module specs>", function() {
         model.modelName("Product");
         model.property("float_prop","float");
     };
-    p = Rho.ORM.addModel(Product);
+    Rho.ORM.addModel(Product);
 
     source = getModelSource('Product');
     expect(source.property['float_prop'][0]).toEqual('float');
@@ -178,7 +178,7 @@ describe("<ORM module specs>", function() {
         model.modelName("Product");
         model.property("date_prop","date");
     };
-    p = Rho.ORM.addModel(Product);
+    Rho.ORM.addModel(Product);
 
     source = getModelSource('Product');
     expect(source.property['date_prop'][0]).toEqual('date');
@@ -191,7 +191,7 @@ describe("<ORM module specs>", function() {
         model.modelName("Product");
         model.property("time_prop","time");
     };
-    p = Rho.ORM.addModel(Product);
+    Rho.ORM.addModel(Product);
 
     source = getModelSource('Product');
     expect(source.property['time_prop'][0]).toEqual('time');
@@ -204,7 +204,7 @@ describe("<ORM module specs>", function() {
         model.modelName("Product");
         model.property("image_url","blob");
     };
-    p = Rho.ORM.addModel(Product);
+    Rho.ORM.addModel(Product);
 
     source = getModelSource('Product');
     expect(source.property['image_url'][0]).toEqual('blob');
@@ -217,7 +217,7 @@ describe("<ORM module specs>", function() {
         model.modelName("Product");
         model.property("mycustomproperty","hello");
     };
-    p = Rho.ORM.addModel(Product);
+    Rho.ORM.addModel(Product);
 
     source = getModelSource('Product');
     expect(source.property['mycustomproperty'][0]).toEqual('hello');
@@ -230,7 +230,7 @@ describe("<ORM module specs>", function() {
         model.modelName("Product");
         model.property("image_url","blob","overwrite");
     };
-    p = Rho.ORM.addModel(Product);
+    Rho.ORM.addModel(Product);
 
     source = getModelSource('Product');
     expect(source.property['image_url'][0]).toEqual('blob');
@@ -517,7 +517,7 @@ describe("<ORM module specs>", function() {
         model.property("time_prop","time");
         model.set("sync_type","bulk_only");
     };
-    p = Rho.ORM.addModel(Product);
+    Rho.ORM.addModel(Product);
 
     source = getModelSource('Product');
     expect(source.sync_type).toEqual('bulk_only');
@@ -533,7 +533,7 @@ describe("<ORM module specs>", function() {
         model.property("brand","string");
         model.set("sync_priority",1);
     };
-    p = Rho.ORM.addModel(Product);
+    Rho.ORM.addModel(Product);
 
     source = getModelSource('Product');
     expect(source.sync_type).toEqual('incremental');
@@ -549,7 +549,7 @@ describe("<ORM module specs>", function() {
         model.property("brand","string");
         model.set("partition","app");
     };
-    p = Rho.ORM.addModel(Product);
+    Rho.ORM.addModel(Product);
 
     source = getModelSource('Product');
     expect(source.partition).toEqual('app');
@@ -564,7 +564,7 @@ describe("<ORM module specs>", function() {
         model.property("brand","string");
         model.set("schema_version",'1.0');
     };
-    p = Rho.ORM.addModel(Product);
+    Rho.ORM.addModel(Product);
 
     source = getModelSource('Product');
     expect(source.schema_version).toEqual('1.0');
@@ -739,7 +739,6 @@ describe("<ORM Db Reset specs>", function() {
     db.$execute_sql("DELETE FROM SOURCES");
     db.$execute_sql("DELETE FROM OBJECT_VALUES");
     db_u.$execute_sql("DELETE FROM OBJECT_VALUES");
-    Rho.ORM.clear();
   });
 
   it("VT302-0042 | Call databaseFullReset(false) should not reset client info databaseFullReset tables",function(){
@@ -791,7 +790,6 @@ describe("<ORM Db Reset specs>", function() {
 
     db.$execute_sql("DELETE FROM SOURCES");
     db.$execute_sql("DELETE FROM OBJECT_VALUES");
-    Rho.ORM.clear();
   });
 
   it("VT302-0043 | should reset client info databaseFullReset tables of all partitions",function(){
@@ -877,7 +875,6 @@ describe("<ORM Db Reset specs>", function() {
     db_local.$execute_sql("DELETE FROM OBJECT_VALUES");
     db_user.$execute_sql("DROP TABLE Product");
     db_local.$execute_sql("DROP TABLE Product_local");
-    Rho.ORM.clear();
   });
 
   it("VT302-0044 | Call databaseFullReset(false,false) should not reset client info and local models ",function(){
@@ -931,7 +928,6 @@ describe("<ORM Db Reset specs>", function() {
 
     db.$execute_sql("DELETE FROM SOURCES");
     db.$execute_sql("DELETE FROM OBJECT_VALUES");
-    Rho.ORM.clear();
   });
 
   it("VT302-0045 | Call databaseFullReset(true,true) should reset client info and local models ",function(){
@@ -984,7 +980,6 @@ describe("<ORM Db Reset specs>", function() {
 
     db.$execute_sql("DELETE FROM SOURCES");
     db.$execute_sql("DELETE FROM OBJECT_VALUES");
-    Rho.ORM.clear();
   });
 
   it("VT302-0046 | should reset client info databaseFullReset tables",function(){
@@ -1003,7 +998,6 @@ describe("<ORM Db Reset specs>", function() {
 
     db.$execute_sql("DELETE FROM SOURCES");
     db.$execute_sql("DELETE FROM OBJECT_VALUES");
-    Rho.ORM.clear();
   });
 
   it("VT302-0047 | should reset client info databaseFullReset tables with undefined params",function(){
@@ -1034,7 +1028,6 @@ describe("<ORM Db Reset specs>", function() {
 
     db.$execute_sql("DELETE FROM SOURCES");
     db.$execute_sql("DELETE FROM OBJECT_VALUES");
-    Rho.ORM.clear();
   });
 
   it("VT302-0048 | should reset client info databaseFullReset tables with no params",function(){
@@ -1067,7 +1060,6 @@ describe("<ORM Db Reset specs>", function() {
     db.$execute_sql("DELETE FROM SOURCES");
     db.$execute_sql("DELETE FROM OBJECT_VALUES");
     db.$execute_sql("DROP TABLE Product");
-    Rho.ORM.clear();
   });
 
   it("VT302-0050 | should reset object_values and not sources table if set databaseFullResetAndLogout",function(){
@@ -1101,7 +1093,6 @@ describe("<ORM Db Reset specs>", function() {
     expect(objects).toEqual([]);
     db.$execute_sql("DELETE FROM SOURCES");
     db.$execute_sql("DELETE FROM OBJECT_VALUES");
-    Rho.ORM.clear();
   });
 
   it("VT302-0053 | should delete all records only from selected models fixedschema databaseFullResetEx",function(){
@@ -1133,7 +1124,6 @@ describe("<ORM Db Reset specs>", function() {
     db.$execute_sql("DELETE FROM SOURCES");
     db.$execute_sql("DELETE FROM OBJECT_VALUES");
     db.$execute_sql("DROP TABLE Product");
-    Rho.ORM.clear();
   });
 
   it("VT302-0054 | should delete all records only from selected models propertyBag databaseFullResetEx",function(){
@@ -1163,7 +1153,6 @@ describe("<ORM Db Reset specs>", function() {
     expect(db_product).toEqual([]);
     db.$execute_sql("DELETE FROM SOURCES");
     db.$execute_sql("DELETE FROM OBJECT_VALUES");
-    Rho.ORM.clear();
   });
 
   it("VT302-0055 | should reset client_info table if set databaseFullResetEx",function(){
@@ -1196,7 +1185,6 @@ describe("<ORM Db Reset specs>", function() {
     expect(db_product2).toEqual([]);
     db.$execute_sql("DELETE FROM SOURCES");
     db.$execute_sql("DELETE FROM OBJECT_VALUES");
-    Rho.ORM.clear();
   });
 
   it("VT302-0056 | Call databaseFullResetEx with Model name as Hash and reset_client_info as false and reset_local_models to false",function(){
@@ -1248,7 +1236,6 @@ describe("<ORM Db Reset specs>", function() {
 
     db.$execute_sql("DELETE FROM SOURCES");
     db.$execute_sql("DELETE FROM OBJECT_VALUES");
-    Rho.ORM.clear();
   });
 
   it("VT302-0057 | Call databaseFullResetEx with Model name as Hash and reset_client_info as false",function(){
@@ -1298,7 +1285,6 @@ describe("<ORM Db Reset specs>", function() {
 
     db.$execute_sql("DELETE FROM SOURCES");
     db.$execute_sql("DELETE FROM OBJECT_VALUES");
-    Rho.ORM.clear();
   });
 
   it("VT302-0058 | Call databaseFullResetEx with Model name as Hash and reset_client_info as false and reset_local_models to true",function(){
@@ -1333,7 +1319,6 @@ describe("<ORM Db Reset specs>", function() {
 
     db.$execute_sql("DELETE FROM SOURCES");
     db.$execute_sql("DELETE FROM OBJECT_VALUES");
-    Rho.ORM.clear();
   });
 
   it("VT302-0060 | should do nothing if localdb and localdb flag set to false",function(){
@@ -1364,7 +1349,6 @@ describe("<ORM Db Reset specs>", function() {
     expect(db_product[1].map.value).toEqual("2");
     db.$execute_sql("DELETE FROM SOURCES");
     db.$execute_sql("DELETE FROM OBJECT_VALUES");
-    Rho.ORM.clear();
   });
 
   it("VT302-0062 | should reset client and local db if databaseFullclientResetAndLogout",function(){
@@ -1394,7 +1378,6 @@ describe("<ORM Db Reset specs>", function() {
     expect(client_info).toEqual([]);
     db.$execute_sql("DELETE FROM SOURCES");
     db.$execute_sql("DELETE FROM OBJECT_VALUES");
-    Rho.ORM.clear();
   });
 
   it("VT302-0063 | call databaseLocalReset without having any local model | Should not removed data from synced database",function(){
@@ -1454,7 +1437,6 @@ describe("<ORM Db Reset specs>", function() {
 
       db.$execute_sql("DELETE FROM SOURCES");
       db.$execute_sql("DELETE FROM OBJECT_VALUES");
-      Rho.ORM.clear();
   });
 
   it("VT302-0066 | call databaseLocalReset with changes in both local and user model | Should removed local model data",function(){
@@ -1504,7 +1486,6 @@ describe("<ORM Db Reset specs>", function() {
 
       db.$execute_sql("DELETE FROM SOURCES");
       db.$execute_sql("DELETE FROM OBJECT_VALUES");
-      Rho.ORM.clear();
   });
 
   it("VT302-0068b | Call haveLocalChanges without having any model",function(){
@@ -1526,20 +1507,18 @@ describe("<ORM Db Reset specs>", function() {
     db.$execute_sql("DELETE FROM OBJECT_VALUES");
     db.$execute_sql("DELETE FROM CHANGED_VALUES");
     expect(Rho.ORM.haveLocalChanges()).toEqual(false);
-    Rho.ORM.clear();
   });
 
   it("should load source from table if exists",function(){
-    Rho.ORM.clear();
     Rho.ORM.clearFreeSourceIds();
     db.$execute_sql("DELETE FROM SOURCES");
 
-    console.log("add model1 Customer*******");
+    console.log("add model1 'Customer'");
     var customer = Rho.ORM.addModel(function(model){
       model.modelName("Customer");
       model.set("partition","local");
     });
-    console.log("add model2 Product*******");
+    console.log("add model2 'Product'");
     var product = Rho.ORM.addModel(function(model){
       model.modelName("Product");
       model.set("partition","local");
@@ -1559,15 +1538,15 @@ describe("<ORM Db Reset specs>", function() {
     expect(db_customer[0].map.source_id).toEqual("40001");
     expect(db_customer.length).toEqual(1);
 
-    Rho.ORM.clear();
+    Rho.ORM.clear(); // TODO: do we need it?
 
-    console.log("add model4 Customer2*******");
+    console.log("add model4 'Customer2'");
     customer = Rho.ORM.addModel(function(model){
       model.modelName("Customer");
       model.set("partition","local");
     });
 
-    console.log("add model3 Product2*******");
+    console.log("add model3 'Product2'");
     product = Rho.ORM.addModel(function(model){
       model.modelName("Product");
       model.set("partition","local");

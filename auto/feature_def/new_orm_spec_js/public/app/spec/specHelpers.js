@@ -159,7 +159,6 @@ specHelpers.loadEvent = function()
 	outputElement.style = 'display:none';
 
 	document.body.appendChild(title);
-//	document.body.appendChild(div);
 	document.body.appendChild(ul);
 	document.body.appendChild(outputElement);
 }
@@ -169,7 +168,8 @@ window.addEventListener('DOMContentLoaded', specHelpers.loadEvent);
 //////////////////////////
 // TODO: Old ORM specific
 function getModelSource(modelName) {
-    return Opal.Rho._scope.RhoConfig.$sources().map[modelName];
+  return Rho.ORMHelper.getAllSources()[modelName];
+  // return Opal.Rho._scope.RhoConfig.$sources().map[modelName];
 }
 
 var cleanVars = function(object) {
@@ -185,4 +185,17 @@ var cleanVars = function(object) {
   return cleanVars;
 };
 
+var RhoORM = function() {
+  return Rho.ORM;
+  // if (typeof(Rho.NewORM) != "undefined") {
+  //   if (Rho.NewORM.useNewOrm()) {
+  //     console.log("- Using New ORM!");
+  //     return Rho.NewORM;
+  //   }
+  //   console.log("1: - Using Old ORM!");
+  //   return Rho.ORM;
+  // }
+  // console.log("2: - Using Old ORM!");
+  // return Rho.ORM;
+}();
 
