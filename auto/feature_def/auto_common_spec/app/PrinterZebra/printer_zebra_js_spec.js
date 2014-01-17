@@ -1,33 +1,35 @@
 var printers = [];
 var discovery_finished = false;
 var timeouterror_flag = false;
-var connect_type = Rho.Printer.connectionType;
 var errmsg = '';
 var connect_status = '';
+var printer_instance = '';
+var ENABLE120K = 120000;
+
 function searchPrinterCallback(printer) {
-    if (printer.status == "PRINTER_STATUS_OK") {
+    if (printer.status == Rho.PrinterZebra.PRINTER_STATUS_OK) {
         printers.push(printer);
-    } else if (printer.status == "PRINTER_STATUS_DONE" ) {
+    } else if (printer.status == Rho.PrinterZebra.PRINTER_STATUS_DONE ) {
         discovery_finished = true;
     }
-	else if ( printer.status == "PRINTER_STATUS_ERR_TIMEOUT" )	
+	else if ( printer.status == Rho.PrinterZebra.PRINTER_STATUS_ERR_TIMEOUT )	{
 		discovery_finished = true;
 		timeouterror_flag = true;
     }
-	else if (printer.status == PRINTER_STATUS_ERROR) {
+	else if (printer.status == Rho.PrinterZebra.PRINTER_STATUS_ERROR) {
         errmsg = printer.message; // when status = ERROR
     }
 }
 
 function searchPrintersNow() {
-    Rho.Printer.searchPrinters({
-        "printerType": Printer.PRINTER_TYPE_ZEBRA,
-        "connectionType": connect_type
+    Rho.PrinterZebra.searchPrinters({
+        "printerType": Rho.PrinterZebra.PRINTER_TYPE_ZEBRA,
+        "connectionType": Rho.PrinterZebra.CONNECTION_TYPE_BLUETOOTH
     }, searchPrinterCallback);
 }
 
 function connectCallback(printer) {
-	if(printer.status == "PRINTER_STATUS_OK") {
+	if(printer.status == Rho.PrinterZebra.PRINTER_STATUS_OK) {
 		connect_status = printer.status;
 	}
 	else {
@@ -46,15 +48,15 @@ describe('Rho.PrinterZebra Search Printer JS API', function() {
 		
 		runs(function() {
 			if (printers.length > 0 && discovery_finished == true)	{
-				var printer_instance = Rho.PrinterZebra.getPrinterByID(printers[0].printerID);
+				printer_instance = Rho.PrinterZebra.getPrinterByID(printers[0].printerID);
 				printer_instance.connect(connectCallback);
-				expect(connect_status).toEqual("PRINTER_STATUS_OK");
+				expect(connect_status).toEqual(Rho.PrinterZebra.PRINTER_STATUS_OK);
 			}
 			else if (timeouterror_flag == true && printers.length == 0) {
 				expect(printers.length).toBeGreaterThan('0');
 			}
 			else if (errmsg == Rho.Printer.STATUS_ERROR) {
-				expect(errmsg).toEqual("PRINTER_STATUS_ERROR");
+				expect(errmsg).toEqual(Rho.PrinterZebra.PRINTER_STATUS_ERROR);
 			}
 		});
 	});
