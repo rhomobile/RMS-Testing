@@ -185,6 +185,7 @@ var _result = {
 	status: undefined,
 	time_to_wait: 300000,
 	responded: undefined,
+    auto_test: false,
 	passed: function(){
 		_result.status = true;
 		_result.responded = true;
@@ -196,11 +197,14 @@ var _result = {
 	reset: function(){
 		_result.status = undefined;
 		_result.responded = undefined;
+        _result.auto_test = false;
 	},
     runTest: function(){
         _result.responded = true;
-        $('#pass').show();
-        $('#fail').show();
+        if (!_result.auto_test) {
+            $('#pass').show();
+            $('#fail').show();
+        }
         $('#runtest').hide();
 
     },
@@ -246,6 +250,10 @@ var _result = {
         {
             _result.responded = undefined;
         });
+    },
+    waitToRunAutoTest: function() {
+        _result.auto_test = true;
+        _result.waitToRunTest();
     }
 }
 
