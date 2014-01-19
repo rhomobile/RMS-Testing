@@ -16,13 +16,12 @@ describe('Printer Zebra', function() {
     var stopsearch = '';
     var deviceaddressFlag = false;
     var CommandZPL = '^XA^FO50,50^ADN,36,20^FDZebraPrinting^FS^XZ';
-    var CommandCCPL = '! U1 setvar "device.languages" "line_print"\r\n! 0.3937 200 200 1 1IN-INCHEST 4 0 0 0 1 cm = 0.3937”IN-DOTST 4 0 0 48 1 mm = 8 dotsB 128 1 1 48 16 112 UNITST40 48 160 UNITSFORMPRINT\r! U1 setvar "device.languages" "zpl"\r\n';
+    var CommandCCPL = '"! 0 200 200 210 1\r\nTEXT 4 0 30 40 Hello World\r\nFORM\r\nPRINT\r\n';
     var connect_status = '';
     var existingPritingObject = null;
     var last_found_printer = null;
 
     // DO NOT COPYPASTE IT!
-
     function makeFilePath(filename) {
         return Rho.RhoFile.join(Rho.Application.modelFolderPath('PrinterZebra'), Rho.RhoFile.join('PrinterZebraFiles', filename));
     }
@@ -40,7 +39,6 @@ describe('Printer Zebra', function() {
     }
 
     // BLACK WOODO MAGIC
-
     function evaluateHashValues(obj) {
         var result = {};
         var keys = objkeys(searchParamaters);
@@ -52,7 +50,6 @@ describe('Printer Zebra', function() {
     }
 
     // make a list of all available combinations of fields within object
-
     function makeAllCombinationsOfFileds(obj) {
         var combinations = []; //All combinations
         var keys = objkeys(obj);
@@ -87,27 +84,28 @@ describe('Printer Zebra', function() {
     var arrayccplfilepath = makeFilePath('arrayccplfile.ccpl');
     var invalidcontentsfilepath = makeFilePath('invalidcontetsfile');
 
+    var sizes = ['320px','640px','1024px','2048px'];
+    var extensions = ['png','jpg','gif','bmp'];
+
+    for (var e = extensions.length - 1; e >= 0; e--) {
+        var collection = [];
+        for (var sz = 0; sz < sizes.length; sz++) {
+            var varname = extensions[e]+'imagepath_'+sizes[sz];
+            var filepath = makeFilePath(varname + '.' + extensions[e]);
+            // EVAL INTENT!
+            eval("var "+ varname + " = '" + filepath +"'");
+
+            collection.push(varname);
+        }
+        eval("var " + extensions[e] + "_s" + " = [" + collection.join(",") +"];" );
+    }
+
     var pngimagepath_320px = makeFilePath('pngimagepath_320px.png');
-    var pngimagepath_640px = makeFilePath('pngimagepath_640px.png');
-    var pngimagepath_1024px = makeFilePath('pngimagepath_1024px.png');
-    var pngimagepath_2048px = makeFilePath('pngimagepath_2048px.png');
 
-    var jpgimagepath_320px = makeFilePath('jpgimagepath_320px.jpg');
-    var jpgimagepath_640px = makeFilePath('jpgimagepath_640px.jpg');
-    var jpgimagepath_1024px = makeFilePath('jpgimagepath_1024px.jpg');
-    var jpgimagepath_2048px = makeFilePath('jpgimagepath_2048px.jpg');
+    var test_cpcl = makeFilePath('test_cpcl.lbl');
+    var test_zpl = makeFilePath('test_zpl.zpl');
 
-    var gifimagepath_320px = makeFilePath('gifimagepath_320px.gif');
-    var gifimagepath_640px = makeFilePath('gifimagepath_640px.gif');
-    var gifimagepath_1024px = makeFilePath('gifimagepath_1024px.gif');
-    var gifimagepath_2048px = makeFilePath('gifimagepath_2048px.gif');
-
-    var bmpimagepath_320px = makeFilePath('bmpimagepath_320px.bmp');
-    var bmpimagepath_640px = makeFilePath('bmpimagepath_640px.bmp');
-    var bmpimagepath_1024px = makeFilePath('bmpimagepath_1024px.bmp');
-    var bmpimagepath_2048px = makeFilePath('bmpimagepath_2048px.bmp');
-
-    var printerDriveAndFileName = 'D:FILE.GRF';
+    var printerDriveAndFileName = 'E:FILE.GRF';
     var printerOnlyFileName = 'FILE.GRF';
     var invalidfilepath = 'ZA://flder';
 
@@ -152,100 +150,6 @@ describe('Printer Zebra', function() {
 
         displayPrinterResult(jasmine.getEnv().currentSpec.description, query);
     }
-
-    function PrinterConnectiontype() {
-        //connect_type = Rho.PrinterZebra.connectionType;
-        $('#connectionType').show();
-        //$('#connectionType').empty();
-        //document.getElementById("connectionType").innerTEXT = connect_type;
-        //$('#connectionType').html(connect_type);
-    }
-
-    function enumerateCallback(callbackValue) {
-        if (callbackValue.length > 0) {
-            displayPrinterResult('Result:', callbackValue);
-        } else {
-            displayPrinterResult('Result:', 'Could not find callbackValue types.');
-        }
-    }
-
-    function handleStatusCallback(callbackValue) {
-        if (callbackValue == Rho.PrinterZebra.PRINTER_STATUS_SUCCESS) {
-            displayPrinterResult('Result:', callbackValue);
-        } else {
-            displayPrinterResult('Error:', callbackValue);
-        }
-    }
-
-    function connectCallback(callbackValue) {
-        if (callbackValue) {
-            displayPrinterResult('Result:', callbackValue);
-        } else {
-            displayPrinterResult('Result:', 'Nil value');
-        }
-    }
-
-    function retrieveCallback(callbackValue) {
-        if (callbackValue.status == Rho.PrinterZebra.PRINTER_STATUS_SUCCESS) {
-            displayPrinterResult('Result:', callbackValue);
-        } else if (callbackValue.status == Rho.PrinterZebra.PRINTER_STATUS_ERROR) {
-            displayPrinterResult('Result:', callbackValue);
-        } else {
-            displayPrinterResult('Result:', callbackValue);
-        }
-    }
-
-    function retrieveextensionCallback(callbackValue) {
-        if (callbackValue.status == Rho.PrinterZebra.PRINTER_STATUS_SUCCESS) {
-            displayPrinterResult('Result:', callbackValue);
-        } else if (callbackValue.status == Rho.PrinterZebra.PRINTER_STATUS_ERROR) {
-            displayPrinterResult('Result:', callbackValue);
-        } else {
-            displayPrinterResult('Result:', callbackValue);
-        }
-    }
-
-    function requestStateCallback(callbackValue) {
-        if (callbackValue.status == Rho.PrinterZebra.PRINTER_STATUS_SUCCESS) {
-            displayPrinterResult('Result:', callbackValue);
-        } else if (callbackValue.status == Rho.PrinterZebra.PRINTER_STATUS_ERROR) {
-            displayPrinterResult('Result:', callbackValue.status);
-        } else {
-            displayPrinterResult('Result:', callbackValue);
-        }
-    }
-
-    // put discovered printers in the one list and update input field values
-
-    function setupDiscoverPrintersCallback(callbackValue) {
-        $('#myList').append('<li>' + JSON.stringify(callbackValue, null, ' ') + '<li>');
-        if (callbackValue.status == Rho.PrinterZebra.PRINTER_STATUS_SUCCESS && callbackValue.printerID && callbackValue.printerID.length > 0) {
-            var printerId = callbackValue.printerID;
-            printers_array.push(printerId);
-
-            var printerInstance = Rho.PrinterZebra.getPrinterByID(printerId);
-            last_found_printer = printerInstance;
-
-            var printerType = printerInstance.printerType.replace('PRINTER_TYPE_', '');
-            var connType = printerInstance.connectionType.replace('CONNECTION_TYPE_', '');
-            var devName = printerType + '-' + connType + '@' + printerInstance.deviceAddress;
-            var pid = printerInstance.connectionType + '|' + printerInstance.deviceAddress + '|' + printerInstance.devicePort;
-
-            $('#dev_list').append($('<option>', {
-                value: pid
-            }).text(devName));
-        } else if (callbackValue.status == Rho.PrinterZebra.PRINTER_STATUS_SUCCESS) {
-            discovery_finished = true;
-
-            $('#dev_list').val($('#dev_list option:eq(1)').val()).trigger('change');
-        } else if (callbackValue.message == Rho.PrinterZebra.PRINTER_STATUS_ERROR) {
-            discovery_finished = true;
-
-            printers_errors.push(callbackValue);
-        }
-    }
-
-    // regular search callback
 
     function searchPrinterCallback(callbackValue) {
         if (callbackValue.status == Rho.PrinterZebra.PRINTER_STATUS_SUCCESS && callbackValue.printerID && callbackValue.printerID.length > 0) {
@@ -300,7 +204,7 @@ describe('Printer Zebra', function() {
         });
 
         runs(function() {
-            Rho.PrinterZebra.searchPrinters({}, setupDiscoverPrintersCallback);
+            Rho.PrinterZebra.searchPrinters({}, searchPrinterCallback);
         });
 
         waitsFor(function() {
@@ -308,6 +212,21 @@ describe('Printer Zebra', function() {
         }, '60sec waiting for Search printer', ENABLE60K);
 
         runs(function() {
+            for (var i = 0; i < printers_array.length; i++) {
+                var printerInstance = Rho.PrinterZebra.getPrinterByID(printers_array[i]);
+                last_found_printer = printerInstance;
+
+                var printerType = printerInstance.printerType.replace('PRINTER_TYPE_', '');
+                var connType = printerInstance.connectionType.replace('CONNECTION_TYPE_', '');
+                var devName = printerType + '-' + connType + '@' + printerInstance.deviceAddress;
+                var pid = printerInstance.connectionType + '|' + printerInstance.deviceAddress + '|' + printerInstance.devicePort;
+
+                $('#dev_list').append($('<option>', {
+                    value: pid
+                }).text(devName));
+            }
+            $('#dev_list').val($('#dev_list option:eq(1)').val()).trigger('change');
+
             displaySearchResults({}, printers_array, printers_errors);
             expect(printers_errors).toEqual([]);
             expect(printers_array.length).toBeGreaterThan(0);
@@ -688,9 +607,8 @@ describe('Printer Zebra', function() {
 
     // 
     describe('printFile method', function() {
-        it('should just print label', function() {
+        it('should connect', function() {
             doConnect();
-            doPrintTestLabel();
         });
 
         it('should print png with callback', function() {
@@ -727,9 +645,8 @@ describe('Printer Zebra', function() {
     });
 
     describe('printRawString method', function() {
-        it('should just print label', function() {
+        it('should connect', function() {
             doConnect();
-            doPrintTestLabel();
         });
 
         it('should print ZPL Command with callback', function() {
@@ -738,7 +655,164 @@ describe('Printer Zebra', function() {
         });
         it('should print CPCL Command with callback', function() {
             doPrintTestLabel();
-            //doPrintRawCommand(CommandCCPL);
+            doPrintRawCommand(CommandCCPL);
         });
     });
+
+    function doSendFileContents(filename) {
+        runs(function() {
+            callresult = null;
+            thisprinter.sendFileContents(filename,cbk);
+        });
+
+        waitsFor(function() {
+            return callresult !== null;
+        }, 'wait doSendFileContents', 7000);
+
+        runs(function() {
+            expect(callresult).toEqual(Rho.PrinterZebra.PRINTER_STATUS_SUCCESS);
+        });
+    }
+
+    describe('sendFileContents method', function() {
+        it('should connect', function() {
+            doConnect();
+        });
+
+        it('should print test_zpl.zpl', function() {
+            doPrintTestLabel();
+            doSendFileContents(test_zpl);
+        });
+        it('should print test_cpcl.lbl', function() {
+            doPrintTestLabel();
+            doSendFileContents(test_cpcl);
+        });
+    });
+
+    function doRetrieveFileNames(filelist) {
+        runs(function() {
+            callresult = null;
+            thisprinter.retrieveFileNames(cbk);
+        });
+
+        waitsFor(function() {
+            return callresult !== null;
+        }, 'wait doRetrieveFileNames', 7000);
+
+        runs(function() {
+            expect(callresult.status).toEqual(Rho.PrinterZebra.PRINTER_STATUS_SUCCESS);
+            expect(callresult.fileNames).toEqual(filelist);
+        });
+    }
+
+    function doRetrieveFileNamesWithExtensions(ext,filelist) {
+        runs(function() {
+            callresult = null;
+            thisprinter.retrieveFileNamesWithExtensions(ext,cbk);
+        });
+
+        waitsFor(function() {
+            return callresult !== null;
+        }, 'wait doRetrieveFileNames', 7000);
+
+        runs(function() {
+            expect(callresult.status).toEqual(Rho.PrinterZebra.PRINTER_STATUS_SUCCESS);
+            expect(callresult.fileNames).toEqual(filelist);
+        });
+    }
+
+    describe('retrieveFileNames method', function() {
+        it('should connect', function() {
+            doConnect();
+        });
+
+        it('should retrieveFileNames return empty list', function() {
+            doRetrieveFileNames([]);
+        });
+        it('should pretrieveFileNamesWithExtensions return empty list', function() {
+            doRetrieveFileNamesWithExtensions(['FMT','LBL','GRF'],[]);
+        });
+    });
+
+    function generateStoreImage(from,to,width,height,isOk,force) {
+        if (!Rho.RhoFile.exists(from)) {
+            if (!isOk && !force) {
+                return;
+            }
+            isOk = false;
+        }
+        var def = isOk ? 'should ' : 'should not ';
+        var deftext = [def,'store image',Rho.RhoFile.basename(from),'=>',to,'[w:',width,'h:',height,']'];
+
+        it( deftext.join(' ') , function() {
+            runs(function() {
+                callresult = null;
+                thisprinter.storeImage(to,from,width,height,cbk);
+            });
+
+            waitsFor(function() {
+                return callresult !== null;
+            }, 'wait storeImage', 10000);
+
+            runs(function() {
+                if (isOk !== false) {
+                    expect(callresult).toEqual(Rho.PrinterZebra.PRINTER_STATUS_SUCCESS);
+                    callresult = null;
+                    //thisprinter.retrieveFileNamesWithExtensions(['GRF'],cbk);
+                } else {
+                    expect(callresult).toNotEqual(Rho.PrinterZebra.PRINTER_STATUS_SUCCESS);
+                }
+            });
+        });
+
+        /*waitsFor(function() {
+            return callresult !== null;
+        }, 'wait retrieveFileNames', 7000);
+
+        runs(function() {
+            if (isOk !== false) {
+                expect(callresult.status).toEqual(Rho.PrinterZebra.PRINTER_STATUS_SUCCESS);
+                expect(callresult.fileNames).toContain(to);
+            }
+        });*/
+    }
+
+    describe('storeImage method', function() {
+        it('should connect', function() {
+            doConnect();
+        });
+
+        generateStoreImage(pngimagepath_320px,'PNG.GRF',50,50,true);
+
+        generateStoreImage(pngimagepath_320px,'E:TF1.GRF',50,50,true);
+        generateStoreImage(pngimagepath_320px,'R:TF1.GRF',50,50,true);
+        generateStoreImage(pngimagepath_320px,'E:TF2.GRF',0,0,true);
+        generateStoreImage(pngimagepath_320px,'TF2.GRF',-1,-1,true);
+        generateStoreImage(invalidfilepath,'TF2.GRF',0,0,false,true);
+        generateStoreImage('','',0,0,false,true);
+
+        var sizes = [0,1,10,50,100,1000,-1];
+        var formats = [png_s,jpg_s];
+
+        for (var i = 0; i < formats.length; i++) {
+            var files = formats[i];
+            for (var j = 0; j < sizes.length; j++) {
+                for (var k = 0; k < files.length; k++) {
+                    generateStoreImage(files[k],'C'+i+j+k+'.GRF',sizes[j],sizes[j],true);
+                }
+            }
+        }
+
+        var othersizes = [0,1,10,100,1000];
+        var otherformats = [bmp_s,gif_s];
+        for (var i = 0; i < otherformats.length; i++) {
+            var files = otherformats[i];
+            for (var j = 0; j < sizes.length; j++) {
+                for (var k = 0; k < files.length; k++) {
+                    generateStoreImage(files[k],'F'+i+j+k+'.GRF',sizes[j],sizes[j],false);
+                }
+            }
+        }
+    });
+
 });
