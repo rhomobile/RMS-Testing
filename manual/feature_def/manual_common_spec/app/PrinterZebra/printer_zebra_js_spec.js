@@ -815,4 +815,64 @@ describe('Printer Zebra', function() {
         }
     });
 
+    function generatePrintImage(from,x,y,options,isOk,force) {
+        if (!Rho.RhoFile.exists(from)) {
+            if (!isOk && !force) {
+                return;
+            }
+            isOk = false;
+        }
+        var def = isOk ? 'should ' : 'should not ';
+        var deftext = [def,'print image',Rho.RhoFile.basename(from),'x:',x,'y:',y,'options:',JSON.stringify(options,null," ") ];
+
+        it( deftext.join(' ') , function() {
+            doPrintTestLabel();
+
+            runs(function() {
+                callresult = null;
+                thisprinter.printImageFromFile(from,x,y,options,cbk);
+            });
+
+            waitsFor(function() {
+                return callresult !== null;
+            }, 'wait printImageFromFile', 10000);
+
+            runs(function() {
+                if (isOk !== false) {
+                    expect(callresult).toEqual(Rho.PrinterZebra.PRINTER_STATUS_SUCCESS);
+                    callresult = null;
+                } else {
+                    expect(callresult).toNotEqual(Rho.PrinterZebra.PRINTER_STATUS_SUCCESS);
+                }
+            });
+        });
+    }
+
+    describe('printImageFromFile method', function() {
+        it('should connect', function() {
+            doConnect();
+        });
+
+        generatePrintImage(pngimagepath_320px,100,100,{'width':0,'height':0},true);
+
+        var sizes = [10,100,-1];
+        var formats = [png_s,jpg_s];
+        var offsets = [[0,0],[10,10],[-10,-10],[50,50],[-50,-50],[100,-100]];
+        var offIter = 0;
+
+        for (var i = 0; i < formats.length; i++) {
+            var files = formats[i];
+            for (var j = 0; j < sizes.length; j++) {
+                for (var k = 0; k < files.length; k++) {
+                    var coords = offsets[offIter];
+                    offIter++;
+                    if (offIter == offsets.length) {
+                        offIter = 0;
+                    }
+                    generatePrintImage(files[k],coords[0],coords[1],{'width':sizes[j],'height':sizes[j]},true);
+                }
+            }
+        }
+    });
+
 });
