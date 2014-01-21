@@ -59,7 +59,7 @@ describe('DPX Functionality Test', function() {
         dpxInstance = null;
     });
 
-    if (false) it('Document capture with barcode, omr, ocr, picture.', function() {
+    it('Document capture with barcode, omr, ocr, picture.', function() {
         dispTestCaseRunning('Select "/sdcard/templates/1024w_754h_Delivery Attempt Notification.yuv" and tap to scan.');
         dispExpectedResult('No expected result. This is automatic test.');
 
@@ -90,7 +90,7 @@ describe('DPX Functionality Test', function() {
         _result.waitForResponse();
     });
 
-    if (false) it('Only audio feedback is on.', function() {
+    it('Only audio feedback is on.', function() {
         dispTestCaseRunning('Run test\nwait a little\nselect "/sdcard/templates/1024w_754h_Delivery Attempt Notification.yuv"\ntap to scan.');
         dispExpectedResult('callbackType should be success.\nThere must be only audio feedback at end of scan.');
 
@@ -117,7 +117,7 @@ describe('DPX Functionality Test', function() {
         _result.waitForResponse();
     });
 
-    if (false) it('Only haptic feedback is on.', function() {
+    it('Only haptic feedback is on.', function() {
         dispTestCaseRunning('Run test\nwait a little\nselect "/sdcard/templates/1024w_754h_Delivery Attempt Notification.yuv"\ntap to scan.');
         dispExpectedResult('callbackType should be success.\nThere must be only haptic feedback at end of scan.');
 
@@ -144,7 +144,7 @@ describe('DPX Functionality Test', function() {
         _result.waitForResponse();
     });
 
-    if (false) it('Only led feedback is on.', function() {
+    it('Only led feedback is on.', function() {
         dispTestCaseRunning('Run test\nwait a little\nselect "/sdcard/templates/1024w_754h_Delivery Attempt Notification.yuv"\ntap to scan.');
         dispExpectedResult('callbackType should be success.\nThere must be only led feedback at end of scan.');
 
@@ -171,7 +171,7 @@ describe('DPX Functionality Test', function() {
         _result.waitForResponse();
     });
 
-    if (false) it('flash mode is on', function() {
+    it('flash mode is on', function() {
         dispTestCaseRunning('Scan Delivery Attempt Notification');
         dispExpectedResult('callbackType should be success.\nFlash must be on during scan.');
 
@@ -194,7 +194,7 @@ describe('DPX Functionality Test', function() {
         _result.waitForResponse();
     });
 
-    if (false) it('flash mode is off', function() {
+    it('flash mode is off', function() {
         dispTestCaseRunning('Scan Delivery Attempt Notification');
         dispExpectedResult('callbackType should be success.\nFlash must be off during scan.');
 
@@ -217,7 +217,7 @@ describe('DPX Functionality Test', function() {
         _result.waitForResponse();
     });
 
-    if (false) it('flash mode is auto (dark)', function() {
+    it('flash mode is auto (dark)', function() {
         dispTestCaseRunning('Scan Delivery Attempt Notification in dark environment.');
         dispExpectedResult('callbackType should be success.\nFlash must be on.');
 
@@ -240,7 +240,7 @@ describe('DPX Functionality Test', function() {
         _result.waitForResponse();
     });
 
-    if (false) it('flash mode is auto (light)', function() {
+    it('flash mode is auto (light)', function() {
         dispTestCaseRunning('Scan Delivery Attempt Notification in good lighting.');
         dispExpectedResult('callbackType should be success.\nFlash must be off.');
 
@@ -263,7 +263,7 @@ describe('DPX Functionality Test', function() {
         _result.waitForResponse();
     });
 
-    if (false) it('processingTimeout 1 second', function() {
+    it('processingTimeout 1 second', function() {
         dispTestCaseRunning('1. Frame Delivery Attempt Notification in camera.\n2. Tap to scan.\n3. Immediately start swinging of device.');
         dispExpectedResult('failureReason should be processingTimeout. Scanning should take about one second.');
 
@@ -285,7 +285,7 @@ describe('DPX Functionality Test', function() {
         _result.waitForResponse();
     });
 
-    if (false) it('processingTimeout 5 second', function() {
+    it('processingTimeout 5 second', function() {
         dispTestCaseRunning('1. Frame Delivery Attempt Notification in camera.\n2. Tap to scan.\n3. Immediately start swinging of device.');
         dispExpectedResult('failureReason should be processingTimeout. Scanning should take about five second.');
 
@@ -307,7 +307,7 @@ describe('DPX Functionality Test', function() {
         _result.waitForResponse();
     });
 
-    if (false) it('identificationTimeout 1 second', function() {
+    it('identificationTimeout 1 second', function() {
         dispTestCaseRunning('1. Frame Delivery Attempt Notification in camera.\n2. Tap to scan.\n3. ?');
         dispExpectedResult('failureReason should be identificationTimeout. Scanning should take about one second.');
 
@@ -329,7 +329,7 @@ describe('DPX Functionality Test', function() {
         _result.waitForResponse();
     });
 
-    if (false) it('identificationTimeout 5 second', function() {
+    it('identificationTimeout 5 second', function() {
         dispTestCaseRunning('1. Frame Delivery Attempt Notification in camera.\n2. Tap to scan.\n3. ?');
         dispExpectedResult('failureReason should be identificationTimeout. Scanning should take about five second.');
 
@@ -351,7 +351,7 @@ describe('DPX Functionality Test', function() {
         _result.waitForResponse();
     });
 
-    if (false) it('scan with imager', function() {
+    it('scan with imager', function() {
         dispTestCaseRunning('Scan Delivery Attempt Notification with imager');
         dispExpectedResult('No expected result. This is automatic test.');
 
@@ -373,7 +373,7 @@ describe('DPX Functionality Test', function() {
         _result.waitForResponse();
     });
 
-    if (false) it('Disable fileInteractiveMode for file source.', function() {
+    it('Disable fileInteractiveMode for file source.', function() {
         dispTestCaseRunning('Just run test.');
         dispExpectedResult('No expected result. This is automatic test.');
 
@@ -397,7 +397,7 @@ describe('DPX Functionality Test', function() {
         _result.waitForResponse();
     });
 
-    if (false) it('Debug mode.', function() {
+    it('Debug mode.', function() {
         dispTestCaseRunning('Select "/sdcard/templates/1024w_754h_Delivery Attempt Notification.yuv" and tap to scan.');
         dispExpectedResult('callbackType should be success.\nThere is new subdirectory in /sdcard/RhoDPXLog directory.');
 
@@ -423,7 +423,7 @@ describe('DPX Functionality Test', function() {
         _result.waitForResponse();
     });
 
-    if (false) it('Different manual resolutions.', function() {
+    it('Different manual resolutions.', function() {
         dispTestCaseRunning('Repeat three times:\n1. Frame Delivery Attempt Notification in camera.\n2. Tap to scan.');
         dispExpectedResult('callbackType should be success.\nNote accending distances to document during framing.');
 
@@ -454,7 +454,7 @@ describe('DPX Functionality Test', function() {
         _result.waitForResponse();
     });
 
-    if (false) it('Different user modes.', function() {
+    it('Different user modes.', function() {
         dispTestCaseRunning('Repeat twice:\n1. Frame Delivery Attempt Notification in camera.\n2. Tap to scan.');
         dispExpectedResult('callbackType should be success.\nNote descending distances to document during framing.');
 
@@ -479,7 +479,7 @@ describe('DPX Functionality Test', function() {
         _result.waitForResponse();
     });
 
-    if (false) it('uiResultConfirmation in effect.', function() {
+    it('uiResultConfirmation in effect.', function() {
         dispTestCaseRunning('Run test\nwait a little\nselect "/sdcard/templates/1024w_754h_Delivery Attempt Notification.yuv"\ntap to scan.\npress "Accept" on UI confirmation screen.');
         dispExpectedResult('callbackType should be success.\nThere must be UI confirmation screen after scanning.');
 
@@ -502,7 +502,7 @@ describe('DPX Functionality Test', function() {
         _result.waitForResponse();
     });
 
-    if (false) it('Different zoom amounts.', function() {
+    it('Different zoom amounts.', function() {
         dispTestCaseRunning('Repeat three times:\n1. Frame Delivery Attempt Notification in camera.\n2. Tap to scan.');
         dispExpectedResult('callbackType should be success.\nNote accending distances to document during framing.');
 
@@ -531,7 +531,7 @@ describe('DPX Functionality Test', function() {
         _result.waitForResponse();
     });
 
-    if (false) it('getDataUri retrieves images.', function() {
+    it('getDataUri retrieves images.', function() {
         var add_image = function(image) {
             var list = document.getElementById('myList');
 
