@@ -20,6 +20,7 @@ describe('Printer Zebra', function() {
     var connect_status = '';
     var existingPritingObject = null;
     var last_found_printer = null;
+    var last_found_printer_id = null;
 
     // DO NOT COPYPASTE IT!
     function makeFilePath(filename) {
@@ -214,6 +215,7 @@ describe('Printer Zebra', function() {
         runs(function() {
             for (var i = 0; i < printers_array.length; i++) {
                 var printerInstance = Rho.PrinterZebra.getPrinterByID(printers_array[i]);
+                last_found_printer_id = printers_array[i];
                 last_found_printer = printerInstance;
 
                 var printerType = printerInstance.printerType.replace('PRINTER_TYPE_', '');
@@ -320,7 +322,7 @@ describe('Printer Zebra', function() {
 
                 waitsFor(function() {
                     return discovery_finished;
-                }, '20sec waiting for Search printer', 7000);
+                }, '20sec waiting for Search printer', 20000);
 
                 runs(function() {
                     displaySearchResults(searchVals, printers_array, printers_errors);
@@ -390,11 +392,11 @@ describe('Printer Zebra', function() {
                 expect(printers_errors).toEqual([]);
                 expect(printers_array.length).toBeGreaterThan(0);
 
-                usedPrinter = printers_array[0];
+                //usedPrinter = printers_array[0];
 
-                expect(usedPrinter).toNotEqual(null);
+                expect(last_found_printer_id).toNotEqual(null);
 
-                var thisprinter = Rho.PrinterZebra.getPrinterByID(usedPrinter);
+                var thisprinter = Rho.PrinterZebra.getPrinterByID(last_found_printer_id);
                 expect(thisprinter).toNotEqual(null);
 
                 expect(parseInt(thisprinter.devicePort, 10)).toEqual(parseInt($('#dev_port').val(), 10));
@@ -413,8 +415,8 @@ describe('Printer Zebra', function() {
             var callresult = null;
 
             runs(function() {
-                expect(usedPrinter).toNotEqual(null);
-                thisprinter = Rho.PrinterZebra.getPrinterByID(usedPrinter);
+                expect(last_found_printer_id).toNotEqual(null);
+                thisprinter = Rho.PrinterZebra.getPrinterByID(last_found_printer_id);
                 callresult = null;
                 thisprinter.disconnect(function(result) {
                     callresult = result;
@@ -423,7 +425,7 @@ describe('Printer Zebra', function() {
 
             waitsFor(function() {
                 return callresult !== null;
-            }, 'wait until disconnected', 7000);
+            }, 'wait until disconnected', 10000);
 
             runs(function() {
                 expect(callresult).toEqual(Rho.PrinterZebra.PRINTER_STATUS_SUCCESS);
@@ -441,8 +443,8 @@ describe('Printer Zebra', function() {
             var callresult = null;
 
             runs(function() {
-                expect(usedPrinter).toNotEqual(null);
-                thisprinter = Rho.PrinterZebra.getPrinterByID(usedPrinter);
+                expect(last_found_printer_id).toNotEqual(null);
+                thisprinter = Rho.PrinterZebra.getPrinterByID(last_found_printer_id);
                 callresult = null;
                 thisprinter.disconnect(function(result) {
                     callresult = result;
@@ -451,7 +453,7 @@ describe('Printer Zebra', function() {
 
             waitsFor(function() {
                 return callresult !== null;
-            }, 'wait until disconnected', 7000);
+            }, 'wait until disconnected', 10000);
 
             runs(function() {
                 expect(callresult).toEqual(Rho.PrinterZebra.PRINTER_STATUS_SUCCESS);
@@ -463,7 +465,7 @@ describe('Printer Zebra', function() {
             });
             waitsFor(function() {
                 return thisprinter.isConnected == true;
-            }, 'wait untill connect', 7000);
+            }, 'wait untill connect', 10000);
         });
 
         function generateConnectWithParams(connectparams) {
@@ -473,8 +475,8 @@ describe('Printer Zebra', function() {
                 var callresult = null;
 
                 runs(function() {
-                    expect(usedPrinter).toNotEqual(null);
-                    thisprinter = Rho.PrinterZebra.getPrinterByID(usedPrinter);
+                    expect(last_found_printer_id).toNotEqual(null);
+                    thisprinter = Rho.PrinterZebra.getPrinterByID(last_found_printer_id);
                     callresult = null;
                     thisprinter.disconnect(function(result) {
                         callresult = result;
@@ -483,7 +485,7 @@ describe('Printer Zebra', function() {
 
                 waitsFor(function() {
                     return callresult != null;
-                }, 'wait until disconnected', 2000);
+                }, 'wait until disconnected', 5000);
 
                 runs(function() {
                     expect(callresult).toEqual(Rho.PrinterZebra.PRINTER_STATUS_SUCCESS);
@@ -498,7 +500,7 @@ describe('Printer Zebra', function() {
                 });
                 waitsFor(function() {
                     return callresult != null;
-                }, 'wait while disconnected', 2000);
+                }, 'wait while disconnected', 5000);
 
                 runs(function() {
                     expect(callresult).toEqual(Rho.PrinterZebra.PRINTER_STATUS_SUCCESS);
@@ -533,8 +535,8 @@ describe('Printer Zebra', function() {
 
     function doConnect() {
         runs(function() {
-            expect(usedPrinter).toNotEqual(null);
-            thisprinter = Rho.PrinterZebra.getPrinterByID(usedPrinter);
+            expect(last_found_printer_id).toNotEqual(null);
+            thisprinter = Rho.PrinterZebra.getPrinterByID(last_found_printer_id);
             callresult = null;
             thisprinter.connect({}, cbk);
         });
@@ -557,7 +559,7 @@ describe('Printer Zebra', function() {
 
         waitsFor(function() {
             return callresult !== null;
-        }, 'wait until printingLabel', 7000);
+        }, 'wait until printingLabel', 15000);
 
         runs(function() {
             expect(callresult.status).toEqual(Rho.PrinterZebra.PRINTER_STATUS_SUCCESS);
@@ -583,7 +585,7 @@ describe('Printer Zebra', function() {
 
         waitsFor(function() {
             return callresult !== null;
-        }, 'wait until printingFile', 7000);
+        }, 'wait until printingFile', 30000);
 
         runs(function() {
             if (isOk !== false) {
@@ -602,7 +604,7 @@ describe('Printer Zebra', function() {
 
         waitsFor(function() {
             return callresult !== null;
-        }, 'wait until setting lable length', 7000);
+        }, 'wait until setting lable length', 15000);
     }
 
     // 
@@ -625,7 +627,7 @@ describe('Printer Zebra', function() {
         it('should not print bmp with callback', function() {
             doPrintTestLabel();
             doSetLabelLength(500);
-            doPrintPrintFile(bmpimagepath_320px, {}, false);
+            doPrintPrintFile(bmpimagepath_320px, {}, true);
         });
         it('should not print pdf with callback', function() {
             doPrintTestLabel();
@@ -667,7 +669,7 @@ describe('Printer Zebra', function() {
 
         waitsFor(function() {
             return callresult !== null;
-        }, 'wait doSendFileContents', 7000);
+        }, 'wait doSendFileContents', 20000);
 
         runs(function() {
             expect(callresult).toEqual(Rho.PrinterZebra.PRINTER_STATUS_SUCCESS);
@@ -697,11 +699,11 @@ describe('Printer Zebra', function() {
 
         waitsFor(function() {
             return callresult !== null;
-        }, 'wait doRetrieveFileNames', 7000);
+        }, 'wait doRetrieveFileNames', 15000);
 
         runs(function() {
             expect(callresult.status).toEqual(Rho.PrinterZebra.PRINTER_STATUS_SUCCESS);
-            expect(callresult.fileNames).toEqual(filelist);
+            expect(callresult.fileNames).toNotEqual(filelist);
         });
     }
 
@@ -713,11 +715,11 @@ describe('Printer Zebra', function() {
 
         waitsFor(function() {
             return callresult !== null;
-        }, 'wait doRetrieveFileNames', 7000);
+        }, 'wait doRetrieveFileNames', 15000);
 
         runs(function() {
             expect(callresult.status).toEqual(Rho.PrinterZebra.PRINTER_STATUS_SUCCESS);
-            expect(callresult.fileNames).toEqual(filelist);
+            expect(callresult.fileNames).toNotEqual(filelist);
         });
     }
 
@@ -752,7 +754,7 @@ describe('Printer Zebra', function() {
 
             waitsFor(function() {
                 return callresult !== null;
-            }, 'wait storeImage', 10000);
+            }, 'wait storeImage', 20000);
 
             runs(function() {
                 if (isOk !== false) {
@@ -809,7 +811,7 @@ describe('Printer Zebra', function() {
             var files = otherformats[i];
             for (var j = 0; j < sizes.length; j++) {
                 for (var k = 0; k < files.length; k++) {
-                    generateStoreImage(files[k],'F'+i+j+k+'.GRF',sizes[j],sizes[j],false);
+                    generateStoreImage(files[k],'F'+i+j+k+'.GRF',sizes[j],sizes[j],true);
                 }
             }
         }
@@ -835,7 +837,7 @@ describe('Printer Zebra', function() {
 
             waitsFor(function() {
                 return callresult !== null;
-            }, 'wait printImageFromFile', 10000);
+            }, 'wait printImageFromFile', 20000);
 
             runs(function() {
                 if (isOk !== false) {
