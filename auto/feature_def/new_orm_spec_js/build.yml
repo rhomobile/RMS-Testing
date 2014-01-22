@@ -16,6 +16,8 @@ iphone:
   entitlements:
 android:
   version: 4.3
+  # Not working with 4.4.2!
+  # version: 4.4.2
 
 # wm:
 #   sdk: "Windows Mobile 6.5.3 Professional DTK (ARMV4I)"
