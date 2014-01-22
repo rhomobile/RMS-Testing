@@ -60,16 +60,14 @@ describe('DPX Functionality Test', function() {
     });
 
     it('Document capture with barcode, omr, ocr, picture.', function() {
-        dispTestCaseRunning('Select "/sdcard/templates/1024w_754h_Delivery Attempt Notification.yuv" and tap to scan.');
+        dispTestCaseRunning('Scan Delivery Attempt Notification');
         dispExpectedResult('No expected result. This is automatic test.');
 
         _result.waitToRunAutoTest();
 
         runs(function() {
             dpxInstance.template = 'file:///sdcard/templates/Logistics%20Post.xml';
-            dpxInstance.inputSource = Rho.DPX.SOURCE_FILE;
-            dpxInstance.inputSourceFilename = '/sdcard/templates/1024w_754h_Delivery Attempt Notification.yuv';
-            dpxInstance.fileInteractiveMode = true;
+            dpxInstance.inputSource = Rho.DPX.SOURCE_CAMERA;
             dpxInstance.uiResultConfirmation = false;
 
             dpxInstance.setCallback(function(dict) {
@@ -91,16 +89,14 @@ describe('DPX Functionality Test', function() {
     });
 
     it('Only audio feedback is on.', function() {
-        dispTestCaseRunning('Run test\nwait a little\nselect "/sdcard/templates/1024w_754h_Delivery Attempt Notification.yuv"\ntap to scan.');
+        dispTestCaseRunning('Scan Delivery Attempt Notification');
         dispExpectedResult('callbackType should be success.\nThere must be only audio feedback at end of scan.');
 
         _result.waitToRunTest();
 
         runs(function() {
             dpxInstance.template = 'file:///sdcard/templates/Logistics%20Post.xml';
-            dpxInstance.inputSource = Rho.DPX.SOURCE_FILE;
-            dpxInstance.inputSourceFilename = '/sdcard/templates/1024w_754h_Delivery Attempt Notification.yuv';
-            dpxInstance.fileInteractiveMode = true;
+            dpxInstance.inputSource = Rho.DPX.SOURCE_CAMERA;
             dpxInstance.uiResultConfirmation = false;
 
             dpxInstance.audioFeedback = true;
@@ -118,16 +114,14 @@ describe('DPX Functionality Test', function() {
     });
 
     it('Only haptic feedback is on.', function() {
-        dispTestCaseRunning('Run test\nwait a little\nselect "/sdcard/templates/1024w_754h_Delivery Attempt Notification.yuv"\ntap to scan.');
+        dispTestCaseRunning('Scan Delivery Attempt Notification');
         dispExpectedResult('callbackType should be success.\nThere must be only haptic feedback at end of scan.');
 
         _result.waitToRunTest();
 
         runs(function() {
             dpxInstance.template = 'file:///sdcard/templates/Logistics%20Post.xml';
-            dpxInstance.inputSource = Rho.DPX.SOURCE_FILE;
-            dpxInstance.inputSourceFilename = '/sdcard/templates/1024w_754h_Delivery Attempt Notification.yuv';
-            dpxInstance.fileInteractiveMode = true;
+            dpxInstance.inputSource = Rho.DPX.SOURCE_CAMERA;
             dpxInstance.uiResultConfirmation = false;
 
             dpxInstance.audioFeedback = false;
@@ -145,16 +139,14 @@ describe('DPX Functionality Test', function() {
     });
 
     it('Only led feedback is on.', function() {
-        dispTestCaseRunning('Run test\nwait a little\nselect "/sdcard/templates/1024w_754h_Delivery Attempt Notification.yuv"\ntap to scan.');
+        dispTestCaseRunning('Scan Delivery Attempt Notification');
         dispExpectedResult('callbackType should be success.\nThere must be only led feedback at end of scan.');
 
         _result.waitToRunTest();
 
         runs(function() {
             dpxInstance.template = 'file:///sdcard/templates/Logistics%20Post.xml';
-            dpxInstance.inputSource = Rho.DPX.SOURCE_FILE;
-            dpxInstance.inputSourceFilename = '/sdcard/templates/1024w_754h_Delivery Attempt Notification.yuv';
-            dpxInstance.fileInteractiveMode = true;
+            dpxInstance.inputSource = Rho.DPX.SOURCE_CAMERA;
             dpxInstance.uiResultConfirmation = false;
 
             dpxInstance.audioFeedback = false;
@@ -308,8 +300,8 @@ describe('DPX Functionality Test', function() {
     });
 
     it('identificationTimeout 1 second', function() {
-        dispTestCaseRunning('1. Frame Delivery Attempt Notification in camera.\n2. Tap to scan.\n3. ?');
-        dispExpectedResult('failureReason should be identificationTimeout. Scanning should take about one second.');
+        dispTestCaseRunning('Do not frame form.');
+        dispExpectedResult('failureReason should be identificationTimeout. Identification should take about one second.');
 
         _result.waitToRunTest();
 
@@ -330,8 +322,8 @@ describe('DPX Functionality Test', function() {
     });
 
     it('identificationTimeout 5 second', function() {
-        dispTestCaseRunning('1. Frame Delivery Attempt Notification in camera.\n2. Tap to scan.\n3. ?');
-        dispExpectedResult('failureReason should be identificationTimeout. Scanning should take about five second.');
+        dispTestCaseRunning('Do not frame form.');
+        dispExpectedResult('failureReason should be identificationTimeout. Identification should take about five second.');
 
         _result.waitToRunTest();
 
@@ -351,7 +343,7 @@ describe('DPX Functionality Test', function() {
         _result.waitForResponse();
     });
 
-    it('scan with imager', function() {
+    xit('scan with imager', function() {
         dispTestCaseRunning('Scan Delivery Attempt Notification with imager');
         dispExpectedResult('No expected result. This is automatic test.');
 
@@ -373,41 +365,15 @@ describe('DPX Functionality Test', function() {
         _result.waitForResponse();
     });
 
-    it('Disable fileInteractiveMode for file source.', function() {
-        dispTestCaseRunning('Just run test.');
-        dispExpectedResult('No expected result. This is automatic test.');
-
-        _result.waitToRunAutoTest();
-
-        runs(function() {
-            dpxInstance.template = 'file:///sdcard/templates/Logistics%20Post.xml';
-            dpxInstance.inputSource = Rho.DPX.SOURCE_FILE;
-            dpxInstance.inputSourceFilename = '/sdcard/templates/1024w_754h_Delivery Attempt Notification.yuv';
-            dpxInstance.fileInteractiveMode = false;
-            dpxInstance.uiResultConfirmation = false;
-
-            dpxInstance.setCallback(function(dict) {
-                expect(dict['callbackType']).toEqual(Rho.DPX.SUCCESS);
-                _result.passed();
-            });
-
-            dpxInstance.captureDocument();
-        });
-
-        _result.waitForResponse();
-    });
-
     it('Debug mode.', function() {
-        dispTestCaseRunning('Select "/sdcard/templates/1024w_754h_Delivery Attempt Notification.yuv" and tap to scan.');
+        dispTestCaseRunning('Scan Delivery Attempt Notification');
         dispExpectedResult('callbackType should be success.\nThere is new subdirectory in /sdcard/RhoDPXLog directory.');
 
         _result.waitToRunTest();
 
         runs(function() {
             dpxInstance.template = 'file:///sdcard/templates/Logistics%20Post.xml';
-            dpxInstance.inputSource = Rho.DPX.SOURCE_FILE;
-            dpxInstance.inputSourceFilename = '/sdcard/templates/1024w_754h_Delivery Attempt Notification.yuv';
-            dpxInstance.fileInteractiveMode = true;
+            dpxInstance.inputSource = Rho.DPX.SOURCE_CAMERA;
             dpxInstance.uiResultConfirmation = false;
 
             dpxInstance.debug = true;
@@ -423,73 +389,15 @@ describe('DPX Functionality Test', function() {
         _result.waitForResponse();
     });
 
-    it('Different manual resolutions.', function() {
-        dispTestCaseRunning('Repeat three times:\n1. Frame Delivery Attempt Notification in camera.\n2. Tap to scan.');
-        dispExpectedResult('callbackType should be success.\nNote accending distances to document during framing.');
-
-        _result.waitToRunTest();
-
-        runs(function() {
-            dpxInstance.template = 'file:///sdcard/templates/Logistics%20Post.xml';
-            dpxInstance.uiResultConfirmation = false;
-            dpxInstance.inputSource = Rho.DPX.SOURCE_CAMERA;
-            dpxInstance.userMode = Rho.DPX.USER_MODE_PREVIEW;
-            dpxInstance.manualResolutionMode = true;
-
-            dpxInstance.manualResolution = Rho.DPX.RESOLUTION_SMALL;
-            dpxInstance.setCallback(function(dict) {
-                dpxInstance.manualResolution = Rho.DPX.RESOLUTION_MEDIUM;
-                dpxInstance.setCallback(function(dict) {
-                    dpxInstance.manualResolution = Rho.DPX.RESOLUTION_LARGE;
-                    dpxInstance.setCallback(function(dict) {
-                        displayResult('Output: ', 'callbackType is ' + dict['callbackType']);
-                    });
-                    dpxInstance.captureDocument();
-                });
-                dpxInstance.captureDocument();
-            });
-            dpxInstance.captureDocument();
-        });
-
-        _result.waitForResponse();
-    });
-
-    it('Different user modes.', function() {
-        dispTestCaseRunning('Repeat twice:\n1. Frame Delivery Attempt Notification in camera.\n2. Tap to scan.');
-        dispExpectedResult('callbackType should be success.\nNote descending distances to document during framing.');
-
-        _result.waitToRunTest();
-
-        runs(function() {
-            dpxInstance.template = 'file:///sdcard/templates/Logistics%20Post.xml';
-            dpxInstance.uiResultConfirmation = false;
-            dpxInstance.inputSource = Rho.DPX.SOURCE_CAMERA;
-
-            dpxInstance.userMode = Rho.DPX.USER_MODE_PREVIEW;
-            dpxInstance.setCallback(function(dict) {
-                dpxInstance.userMode = Rho.DPX.USER_MODE_SNAPSHOT;
-                dpxInstance.setCallback(function(dict) {
-                    displayResult('Output: ', 'callbackType is ' + dict['callbackType']);
-                });
-                dpxInstance.captureDocument();
-            });
-            dpxInstance.captureDocument();
-        });
-
-        _result.waitForResponse();
-    });
-
     it('uiResultConfirmation in effect.', function() {
-        dispTestCaseRunning('Run test\nwait a little\nselect "/sdcard/templates/1024w_754h_Delivery Attempt Notification.yuv"\ntap to scan.\npress "Accept" on UI confirmation screen.');
+        dispTestCaseRunning('Scan Delivery Attempt Notification\nPress "Accept" on UI confirmation screen.');
         dispExpectedResult('callbackType should be success.\nThere must be UI confirmation screen after scanning.');
 
         _result.waitToRunTest();
 
         runs(function() {
             dpxInstance.template = 'file:///sdcard/templates/Logistics%20Post.xml';
-            dpxInstance.inputSource = Rho.DPX.SOURCE_FILE;
-            dpxInstance.inputSourceFilename = '/sdcard/templates/1024w_754h_Delivery Attempt Notification.yuv';
-            dpxInstance.fileInteractiveMode = true;
+            dpxInstance.inputSource = Rho.DPX.SOURCE_CAMERA;
             dpxInstance.uiResultConfirmation = true;
 
             dpxInstance.setCallback(function(dict) {
@@ -503,27 +411,18 @@ describe('DPX Functionality Test', function() {
     });
 
     it('Different zoom amounts.', function() {
-        dispTestCaseRunning('Repeat three times:\n1. Frame Delivery Attempt Notification in camera.\n2. Tap to scan.');
-        dispExpectedResult('callbackType should be success.\nNote accending distances to document during framing.');
+        dispTestCaseRunning('Frame Delivery Attempt Notification in camera.\n2. Change zoom amount using onscreen controls.\n3. Scan form.');
+        dispExpectedResult('callbackType should be success.\nZoom amount should affect distance to document during framing.');
 
         _result.waitToRunTest();
 
         runs(function() {
             dpxInstance.template = 'file:///sdcard/templates/Logistics%20Post.xml';
-            dpxInstance.uiResultConfirmation = false;
             dpxInstance.inputSource = Rho.DPX.SOURCE_CAMERA;
+            dpxInstance.uiResultConfirmation = false;
 
-            dpxInstance.zoomAmount = 0;
             dpxInstance.setCallback(function(dict) {
-                dpxInstance.manualResolution = 50;
-                dpxInstance.setCallback(function(dict) {
-                    dpxInstance.zoomAmount = 100;
-                    dpxInstance.setCallback(function(dict) {
-                        displayResult('Output: ', 'callbackType is ' + dict['callbackType']);
-                    });
-                    dpxInstance.captureDocument();
-                });
-                dpxInstance.captureDocument();
+                displayResult('Output: ', 'callbackType is ' + dict['callbackType']);
             });
             dpxInstance.captureDocument();
         });
@@ -550,9 +449,7 @@ describe('DPX Functionality Test', function() {
 
         runs(function() {
             dpxInstance.template = 'file:///sdcard/templates/Logistics%20Post.xml';
-            dpxInstance.inputSource = Rho.DPX.SOURCE_FILE;
-            dpxInstance.inputSourceFilename = '/sdcard/templates/1024w_754h_Delivery Attempt Notification.yuv';
-            dpxInstance.fileInteractiveMode = true;
+            dpxInstance.inputSource = Rho.DPX.SOURCE_CAMERA;
             dpxInstance.uiResultConfirmation = false;
 
             dpxInstance.setCallback(function(dict) {
