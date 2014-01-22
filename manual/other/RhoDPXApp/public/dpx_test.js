@@ -1,53 +1,42 @@
-/*
-if (!Rho.DPX) {
-    Rho.DPX = {isMock: true};
-    Rho.DPX.FLASH_ON = 'on';
-    Rho.DPX.SOURCE_CAMERA = 'camera';
-    Rho.DPX.RESOLUTION_SMALL = '1280x960';
-    Rho.DPX.RESOLUTION_MEDIUM = '1600x1200';
-    Rho.DPX.RESOLUTION_LARGE = '2048x1536';
-    Rho.DPX.USER_MODE_SNAPSHOT = 'snapshot';
-}
-*/
 
 var dpx_tests = (function() {
-    var TEMPLATES_DIR = 'file:///sdcard/templates/';
-    if (!Rho.RhoFile.exists(TEMPLATES_DIR) || Rho.RhoFile.isDir(TEMPLATES_DIR)) {
-        alert('templates folder is not exist');
-        return null;
-    }
+    var TEMPLATES_DIR = '/storage/sdcard/templates';
 
     var templates = [];
-
-    $.each(Rho.RhoFile.listDir(TEMPLATES_DIR), function(idx, fileName) {
-        if (fileName.match(/\.xml$/))
+    if (!Rho.RhoFile.exists(TEMPLATES_DIR) || !Rho.RhoFile.isDir(TEMPLATES_DIR)) {
+        alert('templates folder "' + TEMPLATES_DIR  + '" is not exist');
+    } else {
+        $.each(Rho.RhoFile.listDir(TEMPLATES_DIR), function(idx, fileName) {
+            if (fileName.match(/\.xml$/))
             templates.push(fileName);
-    });
-    // templates = ['a.xml', 'b.xml', 'c.xml'];
+        });
+    }
 
     var resolutions = [
         Rho.DPX.RESOLUTION_SMALL,
         Rho.DPX.RESOLUTION_MEDIUM,
         Rho.DPX.RESOLUTION_LARGE
-    ]
+    ];
 
-    function fillDropDown(dropDown, input, values) {
+    var fillDropDown = function(dropDown, input, value, values) {
+        input.val(value);
         $.each(values, function(idx, fileName) {
             var a = $('<a>').attr({
                 href: '#', 'data-x-value': fileName
-            }).text(fileName).click(function(evt){
+            }).text(
+                fileName
+            ).click(function(evt){
                 input.val($(evt.target).data('x-value'));
             });
             var li = $('<li>').append(a);
 
             dropDown.append(li);
         });
-    }
-
+    };
 
     $(document).ready(function(){
-        fillDropDown($('ul.dropdown-menu.x-templates'),   $('input.form-control.x-template'),   templates);
-        fillDropDown($('ul.dropdown-menu.x-resolutions'), $('input.form-control.x-resolution'), resolutions);
+        fillDropDown($('ul.dropdown-menu.x-templates'  ), $('input.form-control.x-template'  ), 'Logistics Post.xml'     , templates  );
+        fillDropDown($('ul.dropdown-menu.x-resolutions'), $('input.form-control.x-resolution'), Rho.DPX.RESOLUTION_MEDIUM, resolutions);
     });
 
 
@@ -172,10 +161,13 @@ var dpx_tests = (function() {
                 create_text('AC: ' + region['absoluteOcrConfidence'] + ', ' + 'RC: ' + region['relativeOcrConfidence']);
                 create_tag('br');
             } 
-            create_text(region['processedData']);
-            if (region.hasOwnProperty('image')) {
+            if (region.hasOwnProperty('processedData')) {
+                create_text(region['processedData']);
                 create_tag('br');
+            }
+            if (region.hasOwnProperty('image')) {
                 create_image(dpx, region['image']);
+                create_tag('br');
             }
         }
         create_tag('hr');
@@ -183,31 +175,25 @@ var dpx_tests = (function() {
     };
 
 
-    var params = {
-        'template': 'file:///sdcard/templates/Logistics%20Post.xml',
-
-        'debug': true,
-
-        'audioFeedback': false,
-        'hapticFeedback': false,
-        'ledFeedback': false,
-
-        'flashMode': Rho.DPX.FLASH_ON,
-        'inputSource': Rho.DPX.SOURCE_CAMERA, 
-        'inputSourceFilename': '/sdcard/templates/1024w_754h_Delivery Attempt Notification.yuv', 
-        'fileInteractiveMode': true, // false does not work
-        'manualResolutionMode': true,
-        'manualResolution': Rho.DPX.RESOLUTION_SMALL,
-        'userMode': Rho.DPX.USER_MODE_SNAPSHOT,
-        'zoomAmount': 100,
-        'uiResultConfirmation': false
-    };
-
     var create_dpx = function() {
         var dpx = new Rho.DPX();
 
-        params.template = Rho.RhoFile.join(TEMPLATES_DIR, $('input.form-control.x-template').val());
-        params.manualResolution = $('input.form-control.x-resolution').val();
+        var params = {
+            'template': 'file://' + encodeURI(Rho.RhoFile.join(TEMPLATES_DIR, $('input.form-control.x-template').val())),
+
+            'manualResolution': $('input.form-control.x-resolution').val(),
+
+            'debug': false,
+
+            'audioFeedback': false,
+            'hapticFeedback': false,
+            'ledFeedback': true,
+
+            'inputSource': Rho.DPX.SOURCE_FILE, 
+            'inputSourceFilename': '/sdcard/templates/1024w_754h_Delivery Attempt Notification.yuv',
+            'fileInteractiveMode': true,
+            'uiResultConfirmation': false
+        };
 
         each(params, function(k, v) {
             create_text(k + ': "' + v + '"');
