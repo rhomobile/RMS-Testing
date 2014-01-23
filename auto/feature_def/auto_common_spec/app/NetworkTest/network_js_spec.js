@@ -22,7 +22,7 @@ describe('Network JS API', function() {
     var imagesDownloadFolder = Rho.RhoFile.join( Rho.Application.userFolder,"images" );
     Rho.RhoFile.makeDir(imagesDownloadFolder);
          
-    var waitTimeout = 30000;
+    var waitTimeout = 90000;
     
     var callbackCount = 0;
          
