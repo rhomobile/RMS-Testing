@@ -37,6 +37,6 @@ def clean_db_data
 end
 
 def copy_file(src, dst_dir)
-    content = File.binread(src)
-    File.open(File.join( dst_dir, File.basename(src) ), "wb"){|f| f.write(content) }
+  content = File.binread(src)
+  File.open(File.join( dst_dir, File.basename(src) ), "wb"){|f| f.write(content) }
 end
