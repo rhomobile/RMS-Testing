@@ -1,5 +1,5 @@
 describe("New ORM Model Specs", function() {
-  // var useNewORM = false;
+  //var useNewORM = false;
   var useNewORM = Rho.NewORM.useNewOrm();
   console.log("useNewORM: " + useNewORM);
 
@@ -107,8 +107,15 @@ describe("New ORM Model Specs", function() {
       expect(p.model_name).toEqual('Product');
       expect(p.sync_type).toEqual('incremental');
       expect(p.partition).toEqual('user');
+
+      // default values of other properties
+      expect(p.loaded).toBe(false); // FIXME: correct?
+      expect(p.sync_priority).toEqual(1000);
+      expect(p.source_id).toBeGreaterThan(0);
+      expect(p.fixed_schema).toBe(true);
+      expect(p.freezed).toBe(true); // FIXME: correct?
     } else {
-     expect(p).toEqual(model);
+      expect(p).toEqual(model);
     }
   });
 
