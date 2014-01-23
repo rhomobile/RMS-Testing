@@ -463,29 +463,28 @@ if(!isAndroidPlatform() && isAnyButApplePlatform())
 	      
 	it("VT284-040|smart Battery status with  ANONYMOUS callback|", function () {
 		runs(function () {
-			dispTestCaseRunning("smart Battery status with  ANONYMOUS callback");
-			dispExpectedResult("smart Battery event should be fired with all the return parameters");
-			Rho.Battery.stopBatteryStatus();
-			Rho.Battery.batteryStatus({trigger :'periodic'},function (args){
-				var result = '';
-				result += '<br/>serialNumber: ' + JSON.stringify(smartBatteryStatusCallback["serialNumber"]);
-				result += '<br/>partNumber: ' + JSON.stringify(smartBatteryStatusCallback["partNumber"]);
-				result += '<br/>batteryChargeCycles: ' + JSON.stringify(smartBatteryStatusCallback["batteryChargeCycles"]);
-				result += '<br/>ratedCapacity: ' + JSON.stringify(smartBatteryStatusCallback["ratedCapacity"]);
-				result += '<br/>manufactureDate: ' + JSON.stringify(smartBatteryStatusCallback["manufactureDate"]);
-				result += '<br/>stateOfHealth: ' + JSON.stringify(smartBatteryStatusCallback["stateOfHealth"]);
-				displayResult("Output: ",result);
-			});
+				dispTestCaseRunning("smart Battery status with  ANONYMOUS callback");
+				dispExpectedResult("smart Battery event should be fired with all the return parameters");
+				Rho.Battery.smartBatteryStatusCallback(function (args){
+						var result = '';
+						result += '<br/>serialNumber: ' + JSON.stringify(args["serialNumber"]);
+						result += '<br/>partNumber: ' + JSON.stringify(args["partNumber"]);
+						result += '<br/>batteryChargeCycles: ' + JSON.stringify(args["batteryChargeCycles"]);
+						result += '<br/>ratedCapacity: ' + JSON.stringify(args["ratedCapacity"]);
+						result += '<br/>manufactureDate: ' + JSON.stringify(args["manufactureDate"]);
+						result += '<br/>stateOfHealth: ' + JSON.stringify(args["stateOfHealth"]);
+						displayResult("Output: ",result);
+				});
 		});
-	          
+                  
 		waitsFor(function () {
-			return captured;
+				return captured;
 		}, 'Tester should have responded by now', 180000);
-	  
+  
 		runs(function () {
-			expect(testResult).toEqual(true);
+				expect(testResult).toEqual(true);
 		});
-	});        
+    });        
 	                 
 	it("VT284-043|smartBatteryStatus with callback|", function () {
 		runs(function () {

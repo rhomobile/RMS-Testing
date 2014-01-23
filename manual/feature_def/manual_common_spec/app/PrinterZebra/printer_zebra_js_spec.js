@@ -876,5 +876,110 @@ describe('Printer Zebra', function() {
             }
         }
     });
+		
+	function generategetproperty(property, values) {
+		var deftext = ['Should return',property,'value as a ',type ];
+		it( deftext.join(' ') , function() {
+			runs(function() {
+				if(type == 'string') {
+					//TODO: Add Display code
+					expect(thisprinter.property).isNotEmptyString();
+				}
+				else if (type == 'int') {
+					//TODO: Add Display code
+					expect(thisprinter.property).isNumberGreaterThenZero();
+				}
+				else if (type == 'isBoolean') {
+					//TODO: Add Display code
+					expect(thisprinter.property).isBoolean();
+				}		
+			});
+		});
+		
+	}	
+	
+	describe('PrinterZebra APIs Property Get Test', function() {
+		
+		it('should connect', function() {
+			doConnect();
+		});
+			
+		var offIter = 0;
+		var formats = [['connectionType', 'string'],['deviceAddress', 'string'],['ID', 'string'], ['deviceName', 'string'], ['printerType', 'string'], ['isConnected', 'boolean'], ['controlLanguage', 'string'], ['maxTimeoutForRead', 'int'],['maxTimeoutForOpen','int'], ['timeToWaitForMoreData', 'int']];
+		for (var i = 0; i < formats.length; i++) {
+			var property = formats[i][0];
+			var type = formats[i][1];
+      generategetproperty(property, type);
+		}
+		
+		if(thisprinter.connectionType != "CONNECTION_TYPE_BLUETOOTH") {	
+			it('Should return devicePort value as an integer', function () {
+				//TODO: Add Display code
+				expect(thisprinter.devicePort).isNumberGreaterThenZero();
+			});
+		}
+	
+	
+		/*it('Should return printerEventCallback value as a Callback', function () {
+			expect(thisprinter.printerEventCallback).toEqual(function(event) {});
+		});*/
+		
+		it('Should Get timeToWaitAfterReadInMilliseconds default value', function() {
+				expect(thisprinter.getProperty('timeToWaitAfterReadInMilliseconds')).toEqual('10000');
+		});	
+		
+		it('Should Get timeToWaitAfterWriteInMilliseconds default value', function() {
+				expect(thisprinter.getProperty('timeToWaitAfterWriteInMilliseconds')).toEqual('200000');
+		});
+			
+	});	
+		
+	function generatesetproperty(property, values) {
+		var deftext = ['Should Set',property,' to ',values,' using direct calling method' ];
+		it( deftext.join(' ') , function() {
+			runs(function() {
+				thisprinter.property = values;
+				expect(thisprinter.property).toEqual(values);
+			});
+		});
+		
+		deftext = ['Should Set',property,' to ',values,' using setProperty calling method' ];
+		it( deftext.join(' ') , function() {
+			runs(function() {
+				thisprinter.setProperty(property, values);
+				expect(thisprinter.getProperty(property)).toEqual(values);
+			});
+		});
+		
+		deftext = ['Should Set',property,' to ',values,' using setProperties calling method' ];
+		it( deftext.join(' ') , function() {
+			runs(function() {
+				thisprinter.setProperties({
+					property: values
+				});
+				var data = thisprinter.getProperties([property]);
+				data = data[property];
+				expect(data).toEqual(values);
+			});
+		});
+	}	
+	  
+	describe('Setting Zebra property Values', function() {
+		
+		it('should connect', function() {
+			doConnect();
+		});
+		
+		var values = [0,50000,-1];
+		var formats = ['maxTimeoutForRead','maxTimeoutForOpen','timeToWaitForMoreData','timeToWaitAfterReadInMilliseconds', 'timeToWaitAfterWriteInMilliseconds'];
+		for (var i = 0; i < formats.length; i++) {
+			var property = formats[i];
+			for (var j = 0; j < values.length; j++) {
+				generatesetproperty(property, values[j]);
+			}
+		}
+	});		
+	
+
 
 });

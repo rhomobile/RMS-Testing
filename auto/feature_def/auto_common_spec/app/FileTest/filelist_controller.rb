@@ -27,7 +27,7 @@ class FilelistController < Rho::RhoController
     temporaryDirectory = Rho::RhoFile.join(Rho::Application.userFolder, "temporaryDirectory")
     Rho::RhoFile.makeDir(temporaryDirectory)
     begin
-      description = Rho::RhoFile.new(invalidpath, Rho::RhoFile::OPEN_FOR_READ)
+      Rho::RhoFile.new(invalidpath, Rho::RhoFile::OPEN_FOR_READ)
     rescue => e
       description = e
     end
@@ -40,7 +40,7 @@ class FilelistController < Rho::RhoController
       temporaryDirectory = Rho::RhoFile.join(Rho::Application.userFolder, "temporaryDirectory")
       Rho::RhoFile.makeDir(temporaryDirectory)
       begin
-        description = Rho::RhoFile.new(invalidpath, Rho::RhoFile::OPEN_FOR_READ_WRITE)
+        Rho::RhoFile.new(invalidpath, Rho::RhoFile::OPEN_FOR_READ_WRITE)
       rescue => e
         description = e
       end
@@ -88,7 +88,7 @@ class FilelistController < Rho::RhoController
       temporaryDirectory = Rho::RhoFile.join(Rho::Application.userFolder, "temporaryDirectory")
       Rho::RhoFile.makeDir(temporaryDirectory)
       begin
-        description = Rho::RhoFile.read(invalidpath)
+        Rho::RhoFile.read(invalidpath)
       rescue => e
         description = e
       end
