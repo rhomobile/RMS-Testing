@@ -876,5 +876,128 @@ describe('Printer Zebra', function() {
             }
         }
     });
+		
+	describe('PrinterZebra APIs Property Get Test', function() {
+		
+		it('should connect', function() {
+			doConnect();
+		});
+				
+		it('Should return connectionType value as a string', function () {
+			//TODO: Add Display code
+			expect(thisprinter.connectionType).isNotEmptyString();
+		});
+	
+		it('Should return deviceAddress value as a string', function () {
+			//TODO: Add Display code
+			expect(thisprinter.deviceAddress).isNotEmptyString();
+		});
+	
+		if(thisprinter.connectionType != "CONNECTION_TYPE_BLUETOOTH") {	
+			it('Should return devicePort value as an integer', function () {
+				//TODO: Add Display code
+				expect(thisprinter.devicePort).isNumberGreaterThenZero();
+			});
+		}
+	
+		it('Should return ID value as a string', function () {
+			//TODO: Add Display code
+			expect(thisprinter.ID).isNotEmptyString();
+		});
+
+		it('Should return deviceName value as a string', function () {
+			//TODO: Add Display code
+			expect(thisprinter.deviceName).isNotEmptyString();
+		});
+
+		it('Should return printerType value as a string', function () {
+			//TODO: Add Display code
+			expect(thisprinter.printerType).isNotEmptyString();
+		});
+
+		it('Should return isConnected value as BOOLEAN (true or false)', function () {
+			//TODO: Add Display code
+			expect(thisprinter.isConnected).isBoolean();
+		});
+	
+		/*it('Should return printerEventCallback value as a Callback', function () {
+			expect(thisprinter.printerEventCallback).toEqual(function(event) {});
+		});*/
+	
+		it('Should return controlLanguage value as a string', function () {
+			//TODO: Add Display code
+			expect(thisprinter.controlLanguage).isNotEmptyString();
+		});
+		
+		it('Should Get maxTimeoutForRead default value', function() {
+				//TODO: Add Display code
+				expect(thisprinter.getProperty('maxTimeoutForRead')).isNumberGreaterThenZero();
+		});
+		
+		it('Should Get maxTimeoutForOpen default value', function() {
+				//TODO: Add Display code
+				expect(thisprinter.getProperty('maxTimeoutForOpen')).isNumberGreaterThenZero();
+		});
+		
+		it('Should Get timeToWaitForMoreData default value', function() {
+				//TODO: Add Display code
+				expect(thisprinter.getProperty('timeToWaitForMoreData')).isNumberGreaterThenZero();
+		});
+		
+		it('Should Get timeToWaitAfterReadInMilliseconds default value', function() {
+				expect(thisprinter.getProperty('timeToWaitAfterReadInMilliseconds')).toEqual('10000');
+		});	
+		
+		it('Should Get timeToWaitAfterWriteInMilliseconds default value', function() {
+				expect(thisprinter.getProperty('timeToWaitAfterWriteInMilliseconds')).toEqual('200000');
+		});
+			
+	});	
+		
+	function generatesetproperty(property, values) {
+		var deftext = ['Should Set',property,' to ',values,' using direct calling method' ];
+		it( deftext.join(' ') , function() {
+			runs(function() {
+				thisprinter.property = values;
+				expect(thisprinter.property).toEqual(values);
+			});
+		});
+		
+		deftext = ['Should Set',property,' to ',values,' using setProperty calling method' ];
+		it( deftext.join(' ') , function() {
+			runs(function() {
+				thisprinter.setProperty(property, values);
+				expect(thisprinter.getProperty(property)).toEqual(values);
+			});
+		});
+		
+		deftext = ['Should Set',property,' to ',values,' using setProperties calling method' ];
+		it( deftext.join(' ') , function() {
+			runs(function() {
+				thisprinter.setProperties({
+					property: values
+				});
+				var data = thisprinter.getProperties([property]);
+				data = data[property];
+				expect(data).toEqual(values);
+			});
+		});
+	}	
+	  
+	describe('Setting Zebra property Values', function() {
+		
+		it('should connect', function() {
+			doConnect();
+		});
+		
+		var values = [0,50000,-1];
+		var formats = ['maxTimeoutForRead','maxTimeoutForOpen','timeToWaitForMoreData','timeToWaitAfterReadInMilliseconds', 'timeToWaitAfterWriteInMilliseconds'];
+		for (var i = 0; i < formats.length; i++) {
+			var property = formats[i];
+			for (var j = 0; j < values.length; j++) {
+				generatesetproperty(property, values[i]);
+			}
+		}
+	});		
 
 });
