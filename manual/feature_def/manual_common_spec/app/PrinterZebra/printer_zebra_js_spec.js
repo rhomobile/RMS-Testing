@@ -877,22 +877,41 @@ describe('Printer Zebra', function() {
         }
     });
 		
+	function generategetproperty(property, values) {
+		var deftext = ['Should return',property,'value as a ',type ];
+		it( deftext.join(' ') , function() {
+			runs(function() {
+				if(type == 'string') {
+					//TODO: Add Display code
+					expect(thisprinter.property).isNotEmptyString();
+				}
+				else if (type == 'int') {
+					//TODO: Add Display code
+					expect(thisprinter.property).isNumberGreaterThenZero();
+				}
+				else if (type == 'isBoolean') {
+					//TODO: Add Display code
+					expect(thisprinter.property).isBoolean();
+				}		
+			});
+		});
+		
+	}	
+	
 	describe('PrinterZebra APIs Property Get Test', function() {
 		
 		it('should connect', function() {
 			doConnect();
 		});
-				
-		it('Should return connectionType value as a string', function () {
-			//TODO: Add Display code
-			expect(thisprinter.connectionType).isNotEmptyString();
-		});
-	
-		it('Should return deviceAddress value as a string', function () {
-			//TODO: Add Display code
-			expect(thisprinter.deviceAddress).isNotEmptyString();
-		});
-	
+			
+		var offIter = 0;
+		var formats = [['connectionType', 'string'],['deviceAddress', 'string'],['ID', 'string'], ['deviceName', 'string'], ['printerType', 'string'], ['isConnected', 'boolean'], ['controlLanguage', 'string'], ['maxTimeoutForRead', 'int'],['maxTimeoutForOpen','int'], ['timeToWaitForMoreData', 'int']];
+		for (var i = 0; i < formats.length; i++) {
+			var property = formats[i][0];
+			var type = formats[i][1];
+      generategetproperty(property, type);
+		}
+		
 		if(thisprinter.connectionType != "CONNECTION_TYPE_BLUETOOTH") {	
 			it('Should return devicePort value as an integer', function () {
 				//TODO: Add Display code
@@ -900,49 +919,10 @@ describe('Printer Zebra', function() {
 			});
 		}
 	
-		it('Should return ID value as a string', function () {
-			//TODO: Add Display code
-			expect(thisprinter.ID).isNotEmptyString();
-		});
-
-		it('Should return deviceName value as a string', function () {
-			//TODO: Add Display code
-			expect(thisprinter.deviceName).isNotEmptyString();
-		});
-
-		it('Should return printerType value as a string', function () {
-			//TODO: Add Display code
-			expect(thisprinter.printerType).isNotEmptyString();
-		});
-
-		it('Should return isConnected value as BOOLEAN (true or false)', function () {
-			//TODO: Add Display code
-			expect(thisprinter.isConnected).isBoolean();
-		});
 	
 		/*it('Should return printerEventCallback value as a Callback', function () {
 			expect(thisprinter.printerEventCallback).toEqual(function(event) {});
 		});*/
-	
-		it('Should return controlLanguage value as a string', function () {
-			//TODO: Add Display code
-			expect(thisprinter.controlLanguage).isNotEmptyString();
-		});
-		
-		it('Should Get maxTimeoutForRead default value', function() {
-				//TODO: Add Display code
-				expect(thisprinter.getProperty('maxTimeoutForRead')).isNumberGreaterThenZero();
-		});
-		
-		it('Should Get maxTimeoutForOpen default value', function() {
-				//TODO: Add Display code
-				expect(thisprinter.getProperty('maxTimeoutForOpen')).isNumberGreaterThenZero();
-		});
-		
-		it('Should Get timeToWaitForMoreData default value', function() {
-				//TODO: Add Display code
-				expect(thisprinter.getProperty('timeToWaitForMoreData')).isNumberGreaterThenZero();
-		});
 		
 		it('Should Get timeToWaitAfterReadInMilliseconds default value', function() {
 				expect(thisprinter.getProperty('timeToWaitAfterReadInMilliseconds')).toEqual('10000');
@@ -995,9 +975,11 @@ describe('Printer Zebra', function() {
 		for (var i = 0; i < formats.length; i++) {
 			var property = formats[i];
 			for (var j = 0; j < values.length; j++) {
-				generatesetproperty(property, values[i]);
+				generatesetproperty(property, values[j]);
 			}
 		}
 	});		
+	
+
 
 });
