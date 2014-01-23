@@ -164,3 +164,23 @@ specHelpers.loadEvent = function()
 	document.body.appendChild(outputElement);
 }
 window.addEventListener('DOMContentLoaded', specHelpers.loadEvent);
+
+//Common Method for ruby method call from javascript
+var Ruby = {
+    data: undefined,
+    call: function(controller,method){
+        Ruby.data = undefined;
+        url = '/app/'+controller+'/'+method
+        $.get(url)
+        .success(function(data){
+
+            }); 
+        return false;
+    },
+    sendValueToJS: function(data){ //Send data from ruby controller to js
+        Ruby.data = data;
+    },
+    getReturnedValue: function(){
+        return Ruby.data;
+    }
+}
