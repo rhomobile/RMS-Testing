@@ -17,6 +17,8 @@ var extraData = function(EXTRA, DATA){
         if(EXTRA == "EXTRA_HTML_TEXT") me.EXTRA_HTML_TEXT = DATA;
         if(EXTRA == "EXTRA_STREAM") me.EXTRA_STREAM = DATA;
         if(EXTRA == "EXTRA_SUBJECT") me.EXTRA_SUBJECT = DATA;
+        if(EXTRA == "EXTRA_CC") me.EXTRA_CC = DATA;
+        if(EXTRA == "EXTRA_BCC") me.EXTRA_BCC = DATA;
         if(EXTRA == "EXTRA_TEXT") me.EXTRA_TEXT = DATA;
     }
 };
@@ -261,20 +263,18 @@ describe('Intent_UseCases Functionality Test', function () {
             });
             _result.waitForResponse();
         });
-    }
-    it('mimeType - Launch browser from test app by setting mimeType to "text/html" and Data to "<Some HTML text>"', function () {
-        dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":"START_ACTIVITY","action":"ACTION_VIEW","categories":"","appName":"","targetClass":"","uri":"","mimeType":"text/html","data":"<h3 style=\'color:green\'>Test case passed if you see this text in Green color with browser</h3>"}}');
-        dispExpectedResult('Browser should be launched successfully.');
-        _result.waitToRunTest();
-        runs(function () {
-            var enterData = [{"EXTRA":"EXTRA_HTML_TEXT","DATA":"<h3 style=\'color:green\'>Test case passed if you see this text in Green color with browser</h3>"}];
-            var data = getData(enterData);
-            var params = new parameters("START_ACTIVITY","ACTION_VIEW","","","","","text/html",data);
-            Rho.Intent.send(params);
+        it('mimeType - Launch browser from test app by setting mimeType to "text/html" and Data to "<Some HTML text>"', function () {
+            dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":"START_ACTIVITY","action":"ACTION_VIEW","categories":"","appName":"","targetClass":"","uri":"","mimeType":"text/html","data":"<h3 style=\'color:green\'>Test case passed if you see this text in Green color with browser</h3>"}}');
+            dispExpectedResult('Browser should be launched successfully.');
+            _result.waitToRunTest();
+            runs(function () {
+                var enterData = [{"EXTRA":"EXTRA_HTML_TEXT","DATA":"<h3 style=\'color:green\'>Test case passed if you see this text in Green color with browser</h3>"}];
+                var data = getData(enterData);
+                var params = new parameters("START_ACTIVITY","ACTION_VIEW","","","","","text/html",data);
+                Rho.Intent.send(params);
+            });
+            _result.waitForResponse();
         });
-        _result.waitForResponse();
-    });
-    if(isAndroidPlatform()){
         it('mimeType - Launch Message application from test app by setting mimeType "vnd.android-dir/mms-sms" and Data to "This is message body !"', function () {
             dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":"START_ACTIVITY","action":"","categories":"","appName":"","targetClass":"","uri":"","mimeType":"vnd.android-dir/mms-sms","data":"This should be in message body!"}}');
             dispExpectedResult('Messaging app launched successfully.');
@@ -539,6 +539,45 @@ describe('Intent_UseCases Functionality Test', function () {
         });
         _result.waitForResponse();
     });
+    it('Start Listening to the background intents - broadcast messages (receiving broadcast messages)', function () {
+        dispTestCaseRunning('Test app should receive broad cast messages with the help of Start Listening API.');
+        dispExpectedResult('Test appliation starts listening to background intents and should alert the broadcast message received and also should trigger callback function of the send method which alerts test case passed.');
+        _result.waitToRunTest();
+        runs(function () {
+            var mytestapp = Rho.Application.appName;
+            var data = {
+                "myData":"This is broad cast data !"
+            };
+            var params = new parameters("BROADCAST","ACTION_VIEW","",mytestapp,"","","",data);
+            var receiveCB = function(intents){
+                var receivedParam = intents.params;
+                if(receivedParam.data.myData == "This is broad cast data !")
+                {
+                    alert("startListening Callback: fired !");
+                }
+            };
+            var successCB = function(intents){
+                    var intentParam = intents.params;
+                    console.log("intentType : "+intentParam.intentType+"</br>"+
+                    "intentType : "+intentParam.intentType+"</br>"+
+                    "action : "+intentParam.action+"</br>"+
+                    "categories : "+intentParam.categories+"</br>"+
+                    "appName : "+intentParam.appName+"</br>"+
+                    "targetClass : "+intentParam.targetClass+"</br>"+
+                    "uri : "+intentParam.uri+"</br>"+
+                    "mimeType : "+intentParam.mimeType+"</br>"+
+                    "data : "+intentParam.data.myData);
+                    if(params === intents){
+                        alert("send Callback: fired - Test Passed !");
+                    }else{
+                        alert("send Callback: fired - Test Failed !");
+                    }
+                };
+            Rho.Intent.startListening(receiveCB);
+            Rho.Intent.send(params, successCB);
+        });
+        _result.waitForResponse();
+    });
     it('Try to start listening to the background intents, when already started listenting.', function () {
         dispTestCaseRunning('Try to start listening to the background intents, when already started listenting.');
         dispExpectedResult('No effect or no crash should be seen in the test application.');
@@ -614,7 +653,25 @@ describe('Intent_UseCases Functionality Test', function () {
             Rho.Intent.send(params);
         });
         _result.waitForResponse();
-    })  
+    });
+    it('Sending array of data with the intent', function(){
+        dispTestCaseRunning('Sending Intent with multiple EXTRA\'s');
+        dispExpectedResult('Email compose screen should be displayed with prefilled To, CC, BCC and Subject field !');
+        _result.waitToRunTest();
+        runs(function(){
+            var enterData = [
+            {"EXTRA":"EXTRA_EMAIL", "DATA":"test@domain.com"},
+            {"EXTRA":"EXTRA_CC", "DATA":"carbon.copy@domain.com"},
+            {"EXTRA":"EXTRA_BCC", "DATA":"bcc.email@domain.com"},
+            {"EXTRA":"EXTRA_SUBJECT", "DATA":"Email Subject !"},
+            {"EXTRA":"EXTRA_TEXT","DATA":"Email body content !"}
+            ];
+            vara data = getData(enterData);
+            var params = new parameters("START_ACTIVITY","ACTION_SEND","","","","","text/plain",data);
+            Rho.Intent.send(params);
+        });
+        _result.waitForResponse();
+    });    
 
     // Negative test case:
     it('Sending Intent with null parameter', function(){
@@ -668,6 +725,39 @@ describe('Intent_UseCases Functionality Test', function () {
             var successCB = "This is not a call back function!";
             var params = new parameters("START_ACTIVITY","ACTION_MAIN","","com.smap.targetapp","","","","");
             Rho.Intent.send(params, null);
+        });
+        _result.waitForResponse();
+    });
+     it('Stop Listening to the background intents with empty callback', function () {
+        dispTestCaseRunning('Executing stopListening method without callback function !');
+        dispExpectedResult('No effect or no crash should be seen in the test application.');
+        _result.waitToRunTest();
+        runs(function () {
+            var mytestapp = Rho.Application.appName;
+            var data = {
+                "myData":"This is broad cast data !"
+            };
+            var params = new parameters("BROADCAST","","",mytestapp,"","","",data);
+            Rho.Intent.startListening();
+            Rho.Intent.send(params);
+        });
+        _result.waitForResponse();
+    });
+    it('Stop Listening to the background intents callback without argument', function () {
+        dispTestCaseRunning('Executing stopListening method with callback function which does not have argument !');
+        dispExpectedResult('No effect or no crash should be seen in the test application.');
+        _result.waitToRunTest();
+        runs(function () {
+            var mytestapp = Rho.Application.appName;
+            var data = {
+                "myData":"This is broad cast data !"
+            };
+            var receiveCB = function(){
+                alert("Callback without arguments !");
+            };
+            var params = new parameters("BROADCAST","","",mytestapp,"","","",data);
+            Rho.Intent.startListening(receiveCB);
+            Rho.Intent.send(params);
         });
         _result.waitForResponse();
     });
