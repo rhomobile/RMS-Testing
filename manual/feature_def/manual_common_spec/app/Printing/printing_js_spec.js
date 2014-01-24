@@ -445,9 +445,9 @@ describe("Printing_with_JS", function () {
             _result.waitForResponse();
         });
 
-        if (Rho.Printer.printerType != Rho.Printer.PRINTER_TYPE_ZEBRA || Rho.Printer.connectionType != Rho.Printer.CONNECTION_TYPE_TCP) {
-            it("VTXXX-0010-searchPrinters Method for non-zebra printer(with options \"printerType\" and \"connectionType\")", function () {
-                printers = [];
+        it("VTXXX-0010-searchPrinters Method for non-zebra printer(with options \"printerType\" and \"connectionType\")", function () {
+			if (Rho.Printer.printerType != Rho.Printer.PRINTER_TYPE_ZEBRA || Rho.Printer.connectionType != Rho.Printer.CONNECTION_TYPE_TCP) {
+				printers = [];
                 displayTestDescription("VTXXX-0010 | searchPrinters Method for non-zebra printer(with options \"printerType\" and \"connectionType\")");
                 displayTestInstruction("");
                 displayTestExpectation("The printer should not be discovered with these settings and return error message for STATUS_ERROR.");
@@ -479,8 +479,11 @@ describe("Printing_with_JS", function () {
                 runs(function () {
                     expect(testResult).toEqual(true);
                 });
-            });
-        }
+			} else {
+				displayTestDescription("Skipping test because Printer connected is Zebra or Contection Type is TCP")
+			}
+        });
+        
 
         it("VTXXX-0011-searchPrinters Method(with only option \"devicePort\":80)", function () {
             printers = [];
