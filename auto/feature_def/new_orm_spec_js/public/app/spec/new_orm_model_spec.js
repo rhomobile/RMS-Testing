@@ -1,5 +1,5 @@
 describe("New ORM Model Specs", function() {
-  //var useNewORM = false;
+  var useNewORM = false;
   var useNewORM = Rho.NewORM.useNewOrm();
   console.log("useNewORM: " + useNewORM);
 
