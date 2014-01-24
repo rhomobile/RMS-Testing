@@ -494,7 +494,7 @@ describe('Printer Zebra', function() {
 
                 runs(function() {
                     callresult = null;
-                    thisprinter.connect(connectparams, function cbk(val) {
+                    thisprinter.connectWithOptions(connectparams, function cbk(val) {
                         callresult = val;
                     });
                 });
@@ -538,7 +538,7 @@ describe('Printer Zebra', function() {
             expect(last_found_printer_id).toNotEqual(null);
             thisprinter = Rho.PrinterZebra.getPrinterByID(last_found_printer_id);
             callresult = null;
-            thisprinter.connect({}, cbk);
+            thisprinter.connect(cbk);
         });
 
         waitsFor(function() {
@@ -877,7 +877,7 @@ describe('Printer Zebra', function() {
         }
     });
 		
-	function generategetproperty(property, values) {
+	function generategetproperty(property, type) {
 		var deftext = ['Should return',property,'value as a ',type ];
 		it( deftext.join(' ') , function() {
 			runs(function() {
@@ -934,32 +934,35 @@ describe('Printer Zebra', function() {
 			
 	});	
 		
-	function generatesetproperty(property, values) {
-		var deftext = ['Should Set',property,' to ',values,' using direct calling method' ];
+	function generatesetproperty(property, value) {
+		var deftext = ['Should Set',property,' to ',value,' using direct calling method' ];
 		it( deftext.join(' ') , function() {
 			runs(function() {
-				thisprinter.property = values;
-				expect(thisprinter.property).toEqual(values);
+				thisprinter.property = value;
+				expect(thisprinter.property).toEqual(value);
 			});
 		});
 		
-		deftext = ['Should Set',property,' to ',values,' using setProperty calling method' ];
+		deftext = ['Should Set',property,' to ',value,' using setProperty calling method' ];
 		it( deftext.join(' ') , function() {
 			runs(function() {
-				thisprinter.setProperty(property, values);
-				expect(thisprinter.getProperty(property)).toEqual(values);
+				thisprinter.setProperty(property, value);
+                expect(thisprinter.property).toEqual(value);
+                // getProperty returns string type
+				expect(parseInt(thisprinter.getProperty(property),10)).toEqual(value);
 			});
 		});
 		
-		deftext = ['Should Set',property,' to ',values,' using setProperties calling method' ];
+		deftext = ['Should Set',property,' to ',value,' using setProperties calling method' ];
 		it( deftext.join(' ') , function() {
 			runs(function() {
 				thisprinter.setProperties({
-					property: values
+					property: value
 				});
+                // getProperties also returns property values as a strings
 				var data = thisprinter.getProperties([property]);
-				data = data[property];
-				expect(data).toEqual(values);
+				data = parseInt(data[property],10);
+				expect(data).toEqual(value);
 			});
 		});
 	}	

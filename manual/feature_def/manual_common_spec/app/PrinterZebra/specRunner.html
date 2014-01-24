@@ -51,16 +51,7 @@
 
     <!-- include spec files here... -->
     <script type="text/javascript" src="printer_zebra_js_spec.js"></script>
-    <!-- <script type="text/javascript" src="ba-debug.js"></script> -->
     <script type="text/javascript" src="stacktrace.js" /></script> 
-
-    <!-- <script type="text/javascript" src="https://getfirebug.com/firebug-lite.js">
-		{
-			overrideConsole: false,
-			startOpened: true,
-			enableTrace: true
-		}
-		</script> -->
 
     <script type="text/javascript">
     (function() {
@@ -79,24 +70,13 @@
 
 
         $(window).load(function() {
-            /*window.debug.setCallback(
-                function(level) {
-                    var args = Array.prototype.slice.call(arguments, 1);
-                    alert('Landed in callback ' + JSON.stringify(args, nil, 2));
-                    $('#debug').length || $('<div id="debug"/>').appendTo('body');
-                    $('<div/>')
-                        .addClass('debug-' + level)
-                        .html('[' + level + '] ' + args)
-                        .appendTo('#debug');
-                }
-            );*/
             execJasmine();
             if (ParsingErrors.length > 0) {
                 for (var i = 0; i < ParsingErrors.length; i++) {
                     $('#logs').append(ParsingErrors[i]);
                 };
             } else {
-                //$('#console').hide();
+                $('#console').hide();
             }
 
             window.onerror = function(message, source, lineno, column, errorObj) {
@@ -111,12 +91,11 @@
            		$('#console').show();
            		var iargs = [];
            		for (var i = 0; i < args.length; i++) {
-           			iargs.push(JSON.stringify(args[i], nil, 2));
+           			iargs.push(JSON.stringify(args[i], null, 2));
            		};
                 $('#logs').append(iargs.join(', '));
            	}
 
-/*
             console.log = (function() {
 			    var log = console.log;
 
@@ -124,7 +103,7 @@
 			    	log.call(console, arguments);
 			    	addMsg(arguments);
 			    }
-			})();*/
+			})();
 
             console.error = (function() {
 			    var error = console.error;
