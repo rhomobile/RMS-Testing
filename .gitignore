@@ -20,4 +20,6 @@ TODO
 *.xml
 *.sh
 sim-public*
-
+RhoLogSpec.txt
+**/app/local_server.rb
+**/app/local_server.js

@@ -1,20 +1,76 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta name="viewport" content="width=device-width, height=device-height, minimum-scale=1.0, maximum-scale=1.0, initial-scale=1.0, user-scalable=no"/>
-<meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
-<script src="api/rhoapi-modules.js" type="text/javascript"></script>
-<script src="dpx_test.js" type="text/javascript"></script>
+    <meta name="viewport"
+          content="width=device-width, height=device-height, minimum-scale=1.0, maximum-scale=1.0, initial-scale=1.0, user-scalable=no"/>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
+
+    <script type="text/javascript" src="jquery/jquery-1.9.1.min.js"></script>
+
+    <script src="api/rhoapi-modules.js" type="text/javascript"></script>
+    <script src="dpx_test.js" type="text/javascript"></script>
+
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap-theme.min.css"/>
+
+    <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
 </head>
 <body>
-<button onClick="alert(Rho.DPX.version);">Get DPX version</button>
-<br>
-<button onClick="dpx_tests.open();">open</button>
-<button onClick="dpx_tests.start();">start</button>
-<button onClick="dpx_tests.close();">close</button>
-<br>
-<button onClick="dpx_tests.capture();">capture</button>
-<button onClick="dpx_tests.clear();">clear output</button>
-<div id="output"/>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">DPX sample</h3>
+    </div>
+    <div class="panel-body">
+
+
+        <div class="btn-group btn-group-justified">
+            <a type="button" class="btn btn-info" onClick="alert(Rho.DPX.version);">Get DPX version</a>
+        </div>
+
+        <div class="btn-group btn-group-justified">
+
+            <div class="input-group">
+                <div class="input-group-btn">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Template <span
+                            class="caret"></span></button>
+                    <ul class="dropdown-menu x-templates">
+                    </ul>
+                </div>
+                <input type="text" class="form-control x-template" readonly="readonly" value="">
+            </div>
+
+        </div>
+
+        <div class="btn-group btn-group-justified">
+
+            <div class="input-group">
+                <div class="input-group-btn">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Resolution <span
+                            class="caret"></span></button>
+                    <ul class="dropdown-menu x-resolutions">
+                    </ul>
+                </div>
+                <input type="text" class="form-control x-resolution" readonly="readonly" value="">
+            </div>
+
+        </div>
+
+        <div class="btn-group btn-group-justified">
+
+            <a type="button" class="btn btn-primary" onClick="dpx_tests.open();">open</a>
+            <a type="button" class="btn btn-primary" onClick="dpx_tests.start();">start</a>
+            <a type="button" class="btn btn-primary" onClick="dpx_tests.close();">close</a>
+        </div>
+
+        <div class="btn-group btn-group-justified">
+            <a type="button" class="btn btn-success" onClick="dpx_tests.capture();">capture</a>
+            <a type="button" class="btn btn-danger" onClick="dpx_tests.clear();">clear output</a>
+        </div>
+
+        <div id="output"></div>
+    </div>
+</div>
+
 </body>
 </html> 

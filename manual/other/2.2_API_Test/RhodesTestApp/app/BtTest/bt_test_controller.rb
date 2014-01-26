@@ -128,8 +128,8 @@ class BtTestController < Rho::RhoController
   def session_get_status
     $testCaseID = "VT229-0460"
     result = Rho::BluetoothSession.get_status($connected_bt_device_name)
-    
-    result = ''
+     Alert.show_status("BT",result.to_s,"hide")
+ #   result = ''
     @params.each do |thing|
       result = result.to_s() + "<br>" + thing.map{|k,v| "#{k}=#{v}"}.join(' ') + "<br/>" 
      end
@@ -166,6 +166,7 @@ class BtTestController < Rho::RhoController
     o = [('A'..'Z')].map{|i| i.to_a}.flatten 
     name = (0...20).map{ o[rand(o.length)] }.join
     value = Rho::BluetoothSession.write_string($connected_bt_device_name, name)
+    Alert.show_status("BT",value.to_s,"hide")
     puts "Write Returns: #{value}"
   end
 

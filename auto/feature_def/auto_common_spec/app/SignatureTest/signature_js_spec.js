@@ -19,7 +19,7 @@ describe("Signature JS API Test", function() {
 		(function(arrSignatureshow,arrSignaturetake){
 
             /* vmusulainen - I have not found any expect at each test */
-			xdescribe("set/get Property and set/get properties with all combination", function() {
+			describe("set/get Property and set/get properties with all combination", function() {
 
 				beforeEach(function() {
 					getpropertiesdata ='';
@@ -85,8 +85,8 @@ describe("Signature JS API Test", function() {
 					});
 				});				
 
-
-				it("VT299-2001 | call getProperties() with sync callback and hash |", function() {
+//propertybag is not supported in signature
+				xit("VT299-2001 | call getProperties() with sync callback and hash |", function() {
 
 					runs(function() {
 					    Rho.Signature.setProperties({'bgColor':'#FF0000','border':'true','penWidth':'2'});
@@ -104,7 +104,7 @@ describe("Signature JS API Test", function() {
 					});
 				});
 
-				it("VT299-2002 | call getProperties() with anonymous callback and hash |", function() {
+				xit("VT299-2002 | call getProperties() with anonymous callback and hash |", function() {
 
 					runs(function() {    
 					    Rho.Signature.setProperties({'bgColor':'#FFFF00','border':false,'penWidth':1});
@@ -122,7 +122,7 @@ describe("Signature JS API Test", function() {
 					});							
 				});
 
-				it("VT299-2000 | call getProperties() without callback |" + camtype, function() {
+				xit("VT299-2000 | call getProperties() without callback |", function() {
 
 					    //Rho.Signature.clearAllProperties();
 					    Rho.Signature.setProperties({'bgColor':'#FFFFFF','border':true,'penWidth':3});
@@ -133,7 +133,7 @@ describe("Signature JS API Test", function() {
 						expect(getpropertiesdata).toContain(3);
 				});
 
-				it("VT299-2004 | call getProperty() with sync callback and property |", function() {
+				xit("VT299-2004 | call getProperty() with sync callback and property |", function() {
 
 					runs(function() {  									    
 					    Rho.Signature.setProperty('compressionFormat','jpg');
@@ -149,7 +149,7 @@ describe("Signature JS API Test", function() {
 					});										
 				});
 
-				it("VT299-2005 | call getProperty() with anonymous callback and property |", function() {
+				xit("VT299-2005 | call getProperty() with anonymous callback and property |", function() {
 
 					runs(function() {
 					    Rho.Signature.setProperty('penWidth','5');
@@ -165,7 +165,7 @@ describe("Signature JS API Test", function() {
 					});								
 				});
 
-				it("VT299-2003 | call getProperty() without callback |", function() {
+				xit("VT299-2003 | call getProperty() without callback |", function() {
 	    
 					    Rho.Signature.setProperty('penWidth',4);
 						var data = Rho.Signature.getProperty("penWidth");
@@ -263,6 +263,7 @@ describe("Signature JS API Test", function() {
 				});
 			});
 /*
+//property bag is not supported in Signature
 			describe("Signature property using set/getProperty", function() {
 
 				for (var i=0;i<arrSignatureshow.length;i++){
@@ -356,8 +357,7 @@ describe("Signature JS API Test", function() {
 				}
 			});
 
-            // This is uncorrect tests
-            xdescribe("Signature property set using show()", function () {
+            describe("Signature property set using show()", function () {
 
                 var flag = false;
 
@@ -417,7 +417,7 @@ describe("Signature JS API Test", function() {
                 }
             });
 
-			xdescribe("Signature property set using takeFullScreen()", function() {
+			describe("Signature property set using takeFullScreen()", function() {
 
 				var flag = false;
 

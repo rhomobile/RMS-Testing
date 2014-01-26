@@ -49,9 +49,8 @@
     <li><a href="/app/System/specRunner.html">System Test</a></li>
     <li><a href="/app/Barcode/specRunner.html">HW Barcode Test (WM, MotoAndroid)</a></li>
     <li><a href="/app/Barcode/specRunnerSW.html">SW Barcode Test (iOS, ConsumerAndroid)</a></li>
-    <li><a href="/app/Notification/specRunner.html?spec=Notification Manual FD Tests">Notification Tests</a></li>
-    <li><a href="/app/Notification/specRunner.html?spec=new-notification-implementation">Notification Tests(showStatus and showPopup)</a></li>
-    
+    <li><a href="/app/Notification/specRunner.html">Notification Tests</a></li>
+	<li><a href="/app/Intent/specRunner.html">Intent Test Cases</a></li>
     <li><a href="/app/BatteryTest/specRunner.html">Battery Tests</a></li>
     <li><a href="/app/Signal/specRunner.html">Signal Tests</a></li>
     <li><a href="/app/Mediaplayer/specRunner.html">Mediaplayer Tests</a></li>
@@ -64,6 +63,7 @@
     <li><a href="/app/CameraTest/specRunner.html">Camera Tests</a></li>
     <li><a href="/app/ScreenOrientationTest/specRunner.html">Screen Orientation test page</a></li>
 	<li><a href="/app/PrinterZebra/specRunner.html">Printer Zebra test page</a></li>
+	<li><a href="/app/Printing/specRunner.html">Printing (Generic) Tests</a></li>
 </ul>
 
 <div>[RUBY SAS]</div>
@@ -71,6 +71,7 @@
     <script type="text/javascript">
 
         $("#ruby").append('<li><a href="/app/ApplicationTest">Application</a></li>');
+        $("#ruby").append('<li><a href="/app/Barcode/specRunner_ruby.html">HW Barcode Test Ruby</a></li>');
         if (!isWindowsPhone8Platform()) {
             $("#ruby").append('<li><a href="/app/Barcode">Barcode</a></li>');
         }

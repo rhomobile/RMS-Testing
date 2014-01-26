@@ -22,5 +22,8 @@ android:
   version: 2.3.3
 extensions:
 - rhoconnect-client
+- mediaplayer
+- screenorientation
+- sensor
 app_type: rhoelements
 capabilities: []
