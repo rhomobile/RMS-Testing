@@ -1,15 +1,16 @@
-var parameters = function(intentType, action, categories, appName, targetClass, uri, mimeType, data){
-    var me = this;
-    me.params = {};
-    if(intentType !="") me.params.intentType = intentType;
-    if(action!="") me.params.action = action;
-    if(categories!="") me.params.categories = categories;
-    if(appName!="") me.params.appName = appName;
-    if(targetClass!="") me.params.targetClass = targetClass;
-    if(uri!="") me.params.uri = uri;
-    if(mimeType!="") me.params.mimeType = mimeType;
-    if(data!="") me.params.data = data;
+var parameters = function (intentType, action, categories, appName, targetClass, uri, mimeType, data) {
+    var result = {};
+    if (intentType != "") result.intentType = intentType;
+    if (action != "") result.action = action;
+    if (categories != "") result.categories = categories;
+    if (appName != "") result.appName = appName;
+    if (targetClass != "") result.targetClass = targetClass;
+    if (uri != "") result.uri = uri;
+    if (mimeType != "") result.mimeType = mimeType;
+    if (data != "") result.data = data;
+    return result;
 };
+
 var extraData = function(EXTRA, DATA){
     var me = this;
     if(EXTRA!=""){
@@ -41,7 +42,7 @@ describe('Intent_UseCases Functionality Test', function () {
             dispExpectedResult('The Target application should be launched successfully.');
             _result.waitToRunTest();
             runs(function () {
-                var params = new parameters("START_ACTIVITY","ACTION_MAIN","","com.smap.targetapp","","","","");
+                var params = new parameters(Rho.Intent.START_ACTIVITY, "ACTION_MAIN", "", "com.smap.targetapp", "", "", "", "");
                 Rho.Intent.send(params);
             });
             _result.waitForResponse();
