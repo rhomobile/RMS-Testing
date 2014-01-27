@@ -315,7 +315,7 @@ describe('Printer Zebra', function() {
 
                 runs(function() {
                     // check if search was ended before printer discovery
-                    if (searchVals['timeout'] && !searchParamaters['deviceAddress']) {
+                    if (searchParamaters['timeout'] && !searchParamaters['deviceAddress'] && $('#dev_conn_type').val()!=Rho.PrinterZebra.CONNECTION_TYPE_BLUETOOTH) {
                         expect(discovery_finished).toEqual(false);
                     }
                 });

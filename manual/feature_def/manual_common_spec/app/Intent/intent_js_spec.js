@@ -27,8 +27,9 @@ var getData = function(enterData){
     console.log("arrayLength : "+ enterData.length);
     if(enterData.length>0){
         for(var i=0; i<enterData.length; i++){
-            var data = new extraData(enterData[i].EXTRA,enterData[i].DATA);
-            dataArray.push(data);
+            if(enterData[i].EXTRA!==""){
+                dataReturn[enterData[i].EXTRA] = enterData[i].DATA;
+            }
         }
     }
     return dataArray;
@@ -95,6 +96,24 @@ describe('Intent_UseCases Functionality Test', function () {
             });
             _result.waitForResponse();
         });
+        it('intentType - Start service of the test appliation.', function () {
+            dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":"START_SERVICE","action":"","categories":"","appName":"testApp","targetClass":"com.rhomobile.rhodes.RhodesService","uri":"","mimeType":"","data":""}}');
+            dispExpectedResult('Service of test application should be started successfully.');
+            _result.waitToRunTest();
+            runs(function () {
+                var mytestapp = Rho.Application.appName;
+                var params = new parameters("START_SERVICE","","",mytestapp,"com.rhomobile.rhodes.RhodesService","","","");
+                var intentCB = function(intents){
+                    if(params == intents){
+                        alert("Test case passed!");
+                    } else {
+                        alert("Test case failed!");
+                    }
+                };
+                Rho.Intent.send(params, intentCB);
+            });
+            _result.waitForResponse();
+        });
         it('intentType - Start service of the target appliation.', function () {
             dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":"START_SERVICE","action":"","categories":"","appName":"com.smap.targetapp","targetClass":"MyFirstService","uri":"","mimeType":"","data":""}}');
             dispExpectedResult('Service of target applciation should be started successfully.');
@@ -126,25 +145,33 @@ describe('Intent_UseCases Functionality Test', function () {
             _result.waitForResponse();
         });
         it('intentType - Broadcast data from test app and receive at test app.', function () {
-            dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":"BROADCAST","action":"com.smap.targetapp.mySecondAction","categories":"","appName":"","targetClass":"","uri":"","mimeType":"","data":{"myData":"Test case passed If you see this alert!"}}}');
+            dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":"BROADCAST","action":"com.smap.targetapp.mySecondAction","categories":"","appName":"","targetClass":"","uri":"","mimeType":"","data":{"myData":"Test case passed If you see this in an alert !"}}}');
             dispExpectedResult('Broadcast should be successful.');
             _result.waitToRunTest();
             runs(function () {
                 var data = {
-                    "myData":"Test case passed If you see this alert!"
+                    "myData":"Test case passed If you see this in an alert !"
+                };
+                var listeningCB = function(intents){
+                    if(intents.data.myData = "Test case passed If you see this in an alert !"){
+                        alert("Test case Passed!");
+                    } else {
+                        alert("Test case Failed!");
+                    }
                 };
                 var params = new parameters("BROADCAST","com.smap.targetapp.mySecondAction","","","","","",data);
+                Rho.Intent.startListening(listeningCB);
                 Rho.Intent.send(params);
             });
             _result.waitForResponse();
         });
         it('intentType - Broadcast data from test app and receive at target app.', function () {
-            dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":"BROADCAST","action":"","categories":"","appName":"com.smap.targetapp","targetClass":"","uri":"","mimeType":"","data":{"broadCastData":"Target -Test case passed if you see this alert !"}}}');
+            dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":"BROADCAST","action":"","categories":"","appName":"com.smap.targetapp","targetClass":"","uri":"","mimeType":"","data":{"broadCastData":"Target -Test case passed If you see this in Andorid Toast !"}}}');
             dispExpectedResult('Broadcast should be successful.');
             _result.waitToRunTest();
             runs(function () {
                 var data = {
-                    "broadCastData":"Target - Test case passed if you see this in alert box! "
+                    "broadCastData":"Target - Test case passed if you see this in Android Toast !"
                 };
                 var params = new parameters("BROADCAST","com.smap.targetapp.mySecondAction","","","","","",data);
                 Rho.Intent.send(params);
@@ -152,12 +179,12 @@ describe('Intent_UseCases Functionality Test', function () {
             _result.waitForResponse();
         });
         it('intentType - Broadcast data from test app and receive at target app, when target app is not running.', function () {
-            dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":"BROADCAST","action":"","categories":"","appName":"com.smap.targetapp","targetClass":"","uri":"","mimeType":"","data":{"broadCastData":"Target: Test case passed if you see this alert !"}}}');
+            dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":"BROADCAST","action":"","categories":"","appName":"com.smap.targetapp","targetClass":"","uri":"","mimeType":"","data":{"broadCastData":"Target: Test case passed If you see this in Andorid Toast !"}}}');
             dispExpectedResult('Broadcast should be successful.');
             _result.waitToRunTest();
             runs(function () {
                 var data = {
-                    "broadCastData":"Target - Test case passed if you see this in alert box! "
+                    "broadCastData":"Target - Test case passed If you see this in Andorid Toast !"
                 }
                 var params = new parameters("BROADCAST","com.smap.targetapp.mySecondAction","","","","","",data);
                 Rho.Intent.send(params);
@@ -648,7 +675,7 @@ describe('Intent_UseCases Functionality Test', function () {
         _result.waitToRunTest();
         runs(function(){
             var enterData = [{"EXTRA":"EXTRA_TEXT", "DATA":"This is message to be sent!"}];
-            vara data = getData(enterData);
+            var data = getData(enterData);
             var params = new parameters("START_ACTIVITY","ACTION_SEND","","","","","text/plain",data);
             Rho.Intent.send(params);
         });
@@ -666,7 +693,7 @@ describe('Intent_UseCases Functionality Test', function () {
             {"EXTRA":"EXTRA_SUBJECT", "DATA":"Email Subject !"},
             {"EXTRA":"EXTRA_TEXT","DATA":"Email body content !"}
             ];
-            vara data = getData(enterData);
+            var data = getData(enterData);
             var params = new parameters("START_ACTIVITY","ACTION_SEND","","","","","text/plain",data);
             Rho.Intent.send(params);
         });
