@@ -27,8 +27,9 @@ var getData = function(enterData){
     console.log("arrayLength : "+ enterData.length);
     if(enterData.length>0){
         for(var i=0; i<enterData.length; i++){
-            var data = new extraData(enterData[i].EXTRA,enterData[i].DATA);
-            dataArray.push(data);
+            if(enterData[i].EXTRA!==""){
+                dataReturn[enterData[i].EXTRA] = enterData[i].DATA;
+            }
         }
     }
     return dataArray;
@@ -674,7 +675,7 @@ describe('Intent_UseCases Functionality Test', function () {
         _result.waitToRunTest();
         runs(function(){
             var enterData = [{"EXTRA":"EXTRA_TEXT", "DATA":"This is message to be sent!"}];
-            vara data = getData(enterData);
+            var data = getData(enterData);
             var params = new parameters("START_ACTIVITY","ACTION_SEND","","","","","text/plain",data);
             Rho.Intent.send(params);
         });
@@ -692,7 +693,7 @@ describe('Intent_UseCases Functionality Test', function () {
             {"EXTRA":"EXTRA_SUBJECT", "DATA":"Email Subject !"},
             {"EXTRA":"EXTRA_TEXT","DATA":"Email body content !"}
             ];
-            vara data = getData(enterData);
+            var data = getData(enterData);
             var params = new parameters("START_ACTIVITY","ACTION_SEND","","","","","text/plain",data);
             Rho.Intent.send(params);
         });
