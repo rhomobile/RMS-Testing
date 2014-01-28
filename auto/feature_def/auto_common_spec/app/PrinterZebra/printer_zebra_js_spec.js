@@ -1,5 +1,5 @@
 $(document).ready(function(){
-document.body.innerHTML += '<div id="mystatus">Status Will Come Here<ul id="myList"></ul></div>';
+	document.body.innerHTML += '<div id="mystatus">Status Will Come Here<ul id="myList"></ul><button size="10" onclick="location=location">Refresh</button></div>';
 });
 
 describe('Rho.PrinterZebra Search Printer JS API', function() {
@@ -12,103 +12,162 @@ describe('Rho.PrinterZebra Search Printer JS API', function() {
 	var ENABLE120K = 120000;
 	var objPrinter = '';
 	var connected = undefined;
-
+	var searched = undefined;
+	var CommandZPL = '^XA^FO50,50^ADN,36,20^FDZebraPrinting^FS^XZ';
+	var callresult = null;
+	
 	beforeEach(function(){
 		connected = undefined;
 	});
-	Rho.PrinterZebra.searchPrinters({"printerType": Rho.PrinterZebra.PRINTER_TYPE_ZEBRA,"connectionType": Rho.PrinterZebra.CONNECTION_TYPE_BLUETOOTH
-	}, searchPrinterCallback);
 
-	function searchPrinterCallback(printer) {
-		displayResult("Searching ....."+"<br/>");
-		if (printer.status == Rho.PrinterZebra.PRINTER_STATUS_OK) {
-			displayResult("Got One ....."+"<br/>");
-			printers.push(printer);
-		} 
-		else if (printer.status == Rho.PrinterZebra.PRINTER_STATUS_DONE ) {
-			displayResult("Finished ....."+"<br/>");
-			for(var i=0;i<printers.length;i++){
-				objPrinter = Rho.PrinterZebra.getPrinterByID(printers[i].printerID);
-				(function(printer_instance) {
-					describe('Rho.PrinterZebra APIs Set Test', function() {
-						describe("Printer type " + printer_instance.printerID, function() {
+	
+	function cbk(val) {
+    callresult = val;
+  }
+		
+
+	function makeTestLabel() {
+        return '^XA^MNN^LL200^XZ^XA^JUS^XZ^XA^FO50,50^A0I25,25^FD' + jasmine.getEnv().currentSpec.description + '^FS^XZ\r\n';
+    }
+		
+
+	function searchPrinterCallback(callbackValue) {
+
+		if ((callbackValue.status == Rho.PrinterZebra.PRINTER_STATUS_SUCCESS) && callbackValue.printerID && (callbackValue.printerID.length > 0)) {
+			printers.push(callbackValue.printerID);
+		}
+		else if (callbackValue.status == Rho.PrinterZebra.PRINTER_STATUS_SUCCESS ) {
+			if(callbackValue.status == Rho.PrinterZebra.PRINTER_STATUS_ERR_TIMEOUT) {
+				alert("Timeout");
+			}
+			if(printers.length > 0){
+				searched = true;
+			}
+			else{
+			 location = location;
+			}
+		}
+		else{
+			alert("last else ");
+		}
+		
+	}
+	describe('Rho.PrinterZebra APIs Set Test', function() {
+		it("Search Printer", function(){
+			runs(function(){
+				Rho.PrinterZebra.searchPrinters({"printerType": Rho.PrinterZebra.PRINTER_TYPE_ZEBRA,"connectionType": Rho.PrinterZebra.CONNECTION_TYPE_TCP, "timeout":30000}, searchPrinterCallback);
+			});
+			waitsFor(function(){
+				if(searched)
+					return true;
+			},50000);
+		});
+
+		describe("Printer type " + JSON.stringify(printer_instance), function() {
+			describe('Connect to Printer', function () {
+				it('Should connect to a printer and then start tests', function () {
+					runs(function(){
+						printer_instance = Rho.PrinterZebra.getPrinterByID(printers[0]);
+						printer_instance.connect(cbk);
+							waitsFor(function() {
+							return callresult !== null;
+						}, 'wait until connected', 7000);
+
+						runs(function() {
+								expect(callresult).toEqual(Rho.PrinterZebra.PRINTER_STATUS_SUCCESS);
+								expect(printer_instance.isConnected).toEqual(true);
+						});
+					});
+				});	
 						
-							describe('Connect to Printer', function () {
-								it('Should connect to a printer and then start tests', function () {
-									runs(function(){
-										printer_instance.connect(connectCallback);
-									});
-									waitsFor(function(){
-										if(connected){
-											return true;
-										}
-									},50000);
-								});
-							});
+				it('should print ZPL Command with callback', function() {
+					callresult = null;
+					alert("Raw")
+					printer_instance.printRawString(makeTestLabel(), {}, cbk);
+				});
 						
-							describe('Getting connectionType', function () {
-								it('Should return connectionType value as a string', function () {
-									expect(printer_instance.connectionType).isNotEmptyString();
-								});
-							});
+				waitsFor(function() {
+					return callresult !== null;
+				}, 'wait until setting lable length', 15000);
+						
+				
+			});
 							
-							describe('Getting deviceAddress', function () {
-									it('Should return deviceAddress value as a string', function () {
-										expect(printer_instance.deviceAddress).isNotEmptyString();
-									});
-							});		
-							
-							if(printer_instance.connectionType != "CONNECTION_TYPE_BLUETOOTH") {	
-								describe('Getting devicePort', function () {
-									it('Should return devicePort value as an integer', function () {
-										expect(printer_instance.devicePort).isNumberGreaterThenZero();
-									});
-								});
-							}
+			describe('Getting connectionType', function () {
+				it('Should return connectionType value as a string', function () {
+					alert(callresult);
+					alert(printer_instance.connectionType)
+					expect(printer_instance.connectionType).isNotEmptyString();
+				});
+			});
+			
+			
+			if(printer_instance.connectionType != Rho.PrinterZebra.CONNECTION_TYPE_BLUETOOTH) {		
+				describe('Getting deviceAddress', function () {
+						it('Should return deviceAddress value as a string', function () {
+							alert(printer_instance.deviceAddress)
+							expect(printer_instance.deviceAddress).isNotEmptyString();
+						});
+				});		
+			
+			
+				describe('Getting devicePort', function () {
+					it('Should return devicePort value as an integer', function () {
+						alert(printer_instance.devicePort)
+						expect(printer_instance.devicePort).isNumberGreaterThenZero();
+					});
+				});
+			}
 
-							
-							describe('Getting ID', function () {
-								it('Should return ID value as a string', function () {
-									expect(printer_instance.ID).isNotEmptyString();
-								});
-							});
+			
+			describe('Getting ID', function () {
+				it('Should return ID value as a string', function () {
+					alert(printer_instance.ID)
+					expect(printer_instance.ID).isNotEmptyString();
+				});
+			});
 
 
-							describe('Getting deviceName', function () {
-								it('Should return deviceName value as a string', function () {
-									expect(printer_instance.deviceName).isNotEmptyString();
-								});
-							});
+			describe('Getting deviceName', function () {
+				it('Should return deviceName value as a string', function () {
+					alert(printer_instance.deviceName)
+					expect(printer_instance.deviceName).isNotEmptyString();
+				});
+			});
 
 
-							describe('Getting printerType', function () {
-								it('Should return printerType value as a string', function () {
-									expect(printer_instance.printerType).isNotEmptyString();
-								});
-							});
+			describe('Getting printerType', function () {
+				it('Should return printerType value as a string', function () {
+					alert(printer_instance.printerType)
+					expect(printer_instance.printerType).isNotEmptyString();
+				});
+			});
 
 
-							describe('Getting isConnected', function () {
-								it('Should return isConnected value as BOOLEAN (true or false)', function () {
-									expect(printer_instance.isConnected).isBoolean();
-								});
-							});
+			describe('Getting isConnected', function () {
+				it('Should return isConnected value as BOOLEAN (true or false)', function () {
+					alert(printer_instance.isConnected);
+					expect(printer_instance.isConnected).isBoolean();
+				});
+			});
 
-							describe('Getting printerEventCallback', function () {
-								it('Should return printerEventCallback value as a Callback', function () {
-									//TODO : Need to modify the expected.
-									expect(printer_instance.printerEventCallback).toEqual(function(event) {});
-								});
-							});
+			xdescribe('Getting printerEventCallback', function () {
+				it('Should return printerEventCallback value as a Callback', function () {
+					//TODO : Need to modify the expected.
+					expect(printer_instance.printerEventCallback).toEqual(function(event) {});
+				});
+			});
 
-							describe('Getting controlLanguage', function () {
-								it('Should return controlLanguage value as a string', function () {
-									expect(printer_instance.controlLanguage).isNotEmptyString();
-								});
-							});
+			describe('Getting controlLanguage', function () {
+				it('Should return controlLanguage value as a string', function () {
+					alert(printer_instance.controlLanguage)
+					expect(printer_instance.controlLanguage).isNotEmptyString();
+				});
+			});
 									
 							describe('Setting maxTimeoutForRead', function() {
 								 it('Should Get maxTimeoutForRead default value', function() {
+									alert(printer_instance.maxTimeoutForRead);
 									expect(printer_instance.getProperty('maxTimeoutForRead')).isNumberGreaterThenZero();
 								});
 								
@@ -122,7 +181,7 @@ describe('Rho.PrinterZebra Search Printer JS API', function() {
 								});
 								it('Should Set maxTimeoutForRead to 0 using setProperties calling method', function() {
 									printer_instance.setProperties({
-										'maxTimeoutForRead': 0
+										maxTimeoutForRead: '0'
 									});
 									var data = printer_instance.getProperties(['maxTimeoutForRead']);
 									data = data['maxTimeoutForRead'];
@@ -138,7 +197,7 @@ describe('Rho.PrinterZebra Search Printer JS API', function() {
 								});
 								it('Should Set maxTimeoutForRead to 50000 using setProperties calling method', function() {
 									printer_instance.setProperties({
-										'maxTimeoutForRead': 50000
+										maxTimeoutForRead: '50000'
 									});
 									var data = printer_instance.getProperties(['maxTimeoutForRead']);
 									data = data['maxTimeoutForRead'];
@@ -150,6 +209,7 @@ describe('Rho.PrinterZebra Search Printer JS API', function() {
 
 							describe('Setting maxTimeoutForOpen', function() {
 								it('Should Get maxTimeoutForOpen default value', function() {
+									alert(printer_instance.maxTimeoutForOpen)
 									expect(printer_instance.getProperty('maxTimeoutForOpen')).isNumberGreaterThenZero();
 								});
 								
@@ -163,7 +223,7 @@ describe('Rho.PrinterZebra Search Printer JS API', function() {
 								});
 								it('Should Set maxTimeoutForOpen to 0 using setProperties calling method', function() {
 									printer_instance.setProperties({
-										'maxTimeoutForOpen': 0
+										maxTimeoutForOpen: '0'
 									});
 									var data = printer_instance.getProperties(['maxTimeoutForOpen']);
 									data = data['maxTimeoutForOpen'];
@@ -179,7 +239,7 @@ describe('Rho.PrinterZebra Search Printer JS API', function() {
 								});
 								it('Should Set maxTimeoutForOpen to 50000 using setProperties calling method', function() {
 									printer_instance.setProperties({
-										'maxTimeoutForOpen': 50000
+										maxTimeoutForOpen: '50000'
 									});
 									var data = printer_instance.getProperties(['maxTimeoutForOpen']);
 									data = data['maxTimeoutForOpen'];
@@ -190,6 +250,7 @@ describe('Rho.PrinterZebra Search Printer JS API', function() {
 
 							describe('Setting timeToWaitForMoreData', function() {
 								it('Should Get timeToWaitForMoreData default value', function() {
+									alert(printer_instance.timeToWaitForMoreData);
 									expect(printer_instance.getProperty('timeToWaitForMoreData')).isNumberGreaterThenZero();
 								});
 								
@@ -203,7 +264,7 @@ describe('Rho.PrinterZebra Search Printer JS API', function() {
 								});
 								it('Should Set timeToWaitForMoreData to 0 using setProperties calling method', function() {
 									printer_instance.setProperties({
-										'timeToWaitForMoreData': 0
+										timeToWaitForMoreData: '0'
 									});
 									var data = printer_instance.getProperties(['timeToWaitForMoreData']);
 									data = data['timeToWaitForMoreData'];
@@ -219,7 +280,7 @@ describe('Rho.PrinterZebra Search Printer JS API', function() {
 								});
 								it('Should Set timeToWaitForMoreData to 50000 using setProperties calling method', function() {
 									printer_instance.setProperties({
-										'timeToWaitForMoreData': 50000
+										timeToWaitForMoreData: '50000'
 									});
 									var data = printer_instance.getProperties(['timeToWaitForMoreData']);
 									data = data['timeToWaitForMoreData'];
@@ -230,6 +291,7 @@ describe('Rho.PrinterZebra Search Printer JS API', function() {
 
 							describe('Setting timeToWaitAfterReadInMilliseconds', function() {
 								it('Should Get timeToWaitAfterReadInMilliseconds default value', function() {
+									alert(printer_instance.timeToWaitAfterReadInMilliseconds);
 									expect(printer_instance.getProperty('timeToWaitAfterReadInMilliseconds')).toEqual('10000');
 								});
 								
@@ -243,7 +305,7 @@ describe('Rho.PrinterZebra Search Printer JS API', function() {
 								});
 								it('Should Set timeToWaitAfterReadInMilliseconds to 0 using setProperties calling method', function() {
 									printer_instance.setProperties({
-										'timeToWaitAfterReadInMilliseconds': 0
+										timeToWaitAfterReadInMilliseconds: '0'
 									});
 									var data = printer_instance.getProperties(['timeToWaitAfterReadInMilliseconds']);
 									data = data['timeToWaitAfterReadInMilliseconds'];
@@ -259,7 +321,7 @@ describe('Rho.PrinterZebra Search Printer JS API', function() {
 								});
 								it('Should Set timeToWaitAfterReadInMilliseconds to 50000 using setProperties calling method', function() {
 									printer_instance.setProperties({
-										'timeToWaitAfterReadInMilliseconds': 50000
+										timeToWaitAfterReadInMilliseconds: '50000'
 									});
 									var data = printer_instance.getProperties(['timeToWaitAfterReadInMilliseconds']);
 									data = data['timeToWaitAfterReadInMilliseconds'];
@@ -270,6 +332,7 @@ describe('Rho.PrinterZebra Search Printer JS API', function() {
 
 							describe('Setting timeToWaitAfterWriteInMilliseconds', function() {
 								it('Should Get timeToWaitAfterWriteInMilliseconds default value', function() {
+									alert(printer_instance.timeToWaitAfterWriteInMilliseconds);
 									expect(printer_instance.getProperty('timeToWaitAfterWriteInMilliseconds')).toEqual('200000');
 								});
 								
@@ -283,7 +346,7 @@ describe('Rho.PrinterZebra Search Printer JS API', function() {
 								});
 								it('Should Set timeToWaitAfterWriteInMilliseconds to 0 using setProperties calling method', function() {
 									printer_instance.setProperties({
-										'timeToWaitAfterWriteInMilliseconds': 0
+										timeToWaitAfterWriteInMilliseconds: '0'
 									});
 									var data = printer_instance.getProperties(['timeToWaitAfterWriteInMilliseconds']);
 									data = data['timeToWaitAfterWriteInMilliseconds'];
@@ -299,31 +362,17 @@ describe('Rho.PrinterZebra Search Printer JS API', function() {
 								});
 								it('Should Set timeToWaitAfterWriteInMilliseconds to 50000 using setProperties calling method', function() {
 									printer_instance.setProperties({
-										'timeToWaitAfterWriteInMilliseconds': 50000
+										timeToWaitAfterWriteInMilliseconds: '50000'
 									});
 									var data = printer_instance.getProperties(['timeToWaitAfterWriteInMilliseconds']);
 									data = data['timeToWaitAfterWriteInMilliseconds'];
 									expect(data).toEqual('50000');
 								});
 							});
-						});
-					});
-				})(objPrinter);
-			}
-		}
-		else if ( printer.status == Rho.PrinterZebra.PRINTER_STATUS_ERR_TIMEOUT )	{
-		}
-		else if (printer.status == Rho.PrinterZebra.PRINTER_STATUS_ERROR) {
-		}
-	}
 
-	function connectCallback(printer) {
-		if(printer.status == Rho.PrinterZebra.PRINTER_STATUS_OK) {
-			connected = true;
-		}
-		else {
-			connected = false;
-		}	
-	}
+				});
+
+			});
+
 });
 	

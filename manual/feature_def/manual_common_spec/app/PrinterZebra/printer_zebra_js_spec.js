@@ -315,7 +315,7 @@ describe('Printer Zebra', function() {
 
                 runs(function() {
                     // check if search was ended before printer discovery
-                    if (searchVals['timeout'] && !searchParamaters['deviceAddress']) {
+                    if (searchParamaters['timeout'] && !searchParamaters['deviceAddress'] && $('#dev_conn_type').val()!=Rho.PrinterZebra.CONNECTION_TYPE_BLUETOOTH) {
                         expect(discovery_finished).toEqual(false);
                     }
                 });
@@ -534,7 +534,8 @@ describe('Printer Zebra', function() {
     }
 
     function doConnect() {
-        runs(function() {
+
+         runs(function() {
             expect(last_found_printer_id).toNotEqual(null);
             thisprinter = Rho.PrinterZebra.getPrinterByID(last_found_printer_id);
             callresult = null;
@@ -543,11 +544,12 @@ describe('Printer Zebra', function() {
 
         waitsFor(function() {
             return callresult !== null;
-        }, 'wait until connected', 7000);
+        }, 'wait until connected', 10000);
 
         runs(function() {
             expect(callresult).toEqual(Rho.PrinterZebra.PRINTER_STATUS_SUCCESS);
             expect(thisprinter.isConnected).toEqual(true);
+            callresult = null;
         });
     }
 
@@ -559,10 +561,11 @@ describe('Printer Zebra', function() {
 
         waitsFor(function() {
             return callresult !== null;
-        }, 'wait until printingLabel', 15000);
+        }, 'wait until printingLabel', 20000);
 
         runs(function() {
             expect(callresult.status).toEqual(Rho.PrinterZebra.PRINTER_STATUS_SUCCESS);
+            callresult = null;
         });
     }
 
@@ -627,7 +630,7 @@ describe('Printer Zebra', function() {
         it('should not print bmp with callback', function() {
             doPrintTestLabel();
             doSetLabelLength(500);
-            doPrintPrintFile(bmpimagepath_320px, {}, true);
+            doPrintPrintFile(bmpimagepath_320px, {}, false);
         });
         it('should not print pdf with callback', function() {
             doPrintTestLabel();
@@ -669,7 +672,7 @@ describe('Printer Zebra', function() {
 
         waitsFor(function() {
             return callresult !== null;
-        }, 'wait doSendFileContents', 20000);
+        }, 'wait doSendFileContents', 30000);
 
         runs(function() {
             expect(callresult).toEqual(Rho.PrinterZebra.PRINTER_STATUS_SUCCESS);
@@ -699,7 +702,7 @@ describe('Printer Zebra', function() {
 
         waitsFor(function() {
             return callresult !== null;
-        }, 'wait doRetrieveFileNames', 15000);
+        }, 'wait doRetrieveFileNames', 30000);
 
         runs(function() {
             expect(callresult.status).toEqual(Rho.PrinterZebra.PRINTER_STATUS_SUCCESS);
@@ -715,7 +718,7 @@ describe('Printer Zebra', function() {
 
         waitsFor(function() {
             return callresult !== null;
-        }, 'wait doRetrieveFileNames', 15000);
+        }, 'wait doRetrieveFileNames', 30000);
 
         runs(function() {
             expect(callresult.status).toEqual(Rho.PrinterZebra.PRINTER_STATUS_SUCCESS);
@@ -728,16 +731,16 @@ describe('Printer Zebra', function() {
             doConnect();
         });
 
-        it('should retrieveFileNames return empty list', function() {
+        it('should retrieveFileNames return non empty list', function() {
             doRetrieveFileNames([]);
         });
-        it('should pretrieveFileNamesWithExtensions return empty list', function() {
+        it('should pretrieveFileNamesWithExtensions return non empty list', function() {
             doRetrieveFileNamesWithExtensions(['FMT','LBL','GRF'],[]);
         });
     });
 
     function generateStoreImage(from,to,width,height,isOk,force) {
-        if (!Rho.RhoFile.exists(from)) {
+        if ((!Rho.RhoFile.exists(from)) || (width == 0) || (height == 0)) {
             if (!isOk && !force) {
                 return;
             }
@@ -754,7 +757,7 @@ describe('Printer Zebra', function() {
 
             waitsFor(function() {
                 return callresult !== null;
-            }, 'wait storeImage', 20000);
+            }, 'wait storeImage', 30000);
 
             runs(function() {
                 if (isOk !== false) {
@@ -763,6 +766,7 @@ describe('Printer Zebra', function() {
                     //thisprinter.retrieveFileNamesWithExtensions(['GRF'],cbk);
                 } else {
                     expect(callresult).toNotEqual(Rho.PrinterZebra.PRINTER_STATUS_SUCCESS);
+                    callresult = null;
                 }
             });
         });
@@ -788,7 +792,7 @@ describe('Printer Zebra', function() {
 
         generateStoreImage(pngimagepath_320px,'E:TF1.GRF',50,50,true);
         generateStoreImage(pngimagepath_320px,'R:TF1.GRF',50,50,true);
-        generateStoreImage(pngimagepath_320px,'E:TF2.GRF',0,0,true);
+        generateStoreImage(pngimagepath_320px,'E:TF2.GRF',0,0,false);
         generateStoreImage(pngimagepath_320px,'TF2.GRF',-1,-1,true);
         generateStoreImage(invalidfilepath,'TF2.GRF',0,0,false,true);
         generateStoreImage('','',0,0,false,true);
@@ -800,7 +804,13 @@ describe('Printer Zebra', function() {
             var files = formats[i];
             for (var j = 0; j < sizes.length; j++) {
                 for (var k = 0; k < files.length; k++) {
-                    generateStoreImage(files[k],'C'+i+j+k+'.GRF',sizes[j],sizes[j],true);
+                    if (sizes[j] == 0) {
+                        // invalid size
+                        generateStoreImage(files[k],'C'+i+j+k+'.GRF',sizes[j],sizes[j],false);
+                    }
+                    else {
+                        generateStoreImage(files[k],'C'+i+j+k+'.GRF',sizes[j],sizes[j],true);
+                    }
                 }
             }
         }
@@ -811,19 +821,19 @@ describe('Printer Zebra', function() {
             var files = otherformats[i];
             for (var j = 0; j < sizes.length; j++) {
                 for (var k = 0; k < files.length; k++) {
-                    generateStoreImage(files[k],'F'+i+j+k+'.GRF',sizes[j],sizes[j],true);
+                    generateStoreImage(files[k],'F'+i+j+k+'.GRF',sizes[j],sizes[j],false);
                 }
             }
         }
     });
 
     function generatePrintImage(from,x,y,options,isOk,force) {
-        if (!Rho.RhoFile.exists(from)) {
+         if ((!Rho.RhoFile.exists(from))) {
             if (!isOk && !force) {
                 return;
             }
             isOk = false;
-        }
+         }
         var def = isOk ? 'should ' : 'should not ';
         var deftext = [def,'print image',Rho.RhoFile.basename(from),'x:',x,'y:',y,'options:',JSON.stringify(options,null," ") ];
 
@@ -837,7 +847,7 @@ describe('Printer Zebra', function() {
 
             waitsFor(function() {
                 return callresult !== null;
-            }, 'wait printImageFromFile', 20000);
+            }, 'wait printImageFromFile', 30000);
 
             runs(function() {
                 if (isOk !== false) {
@@ -855,7 +865,7 @@ describe('Printer Zebra', function() {
             doConnect();
         });
 
-        generatePrintImage(pngimagepath_320px,100,100,{'width':0,'height':0},true);
+        generatePrintImage(pngimagepath_320px,100,100,{'width':0,'height':0},false);
 
         var sizes = [10,100,-1];
         var formats = [png_s,jpg_s];
@@ -871,7 +881,12 @@ describe('Printer Zebra', function() {
                     if (offIter == offsets.length) {
                         offIter = 0;
                     }
-                    generatePrintImage(files[k],coords[0],coords[1],{'width':sizes[j],'height':sizes[j]},true);
+                    if (sizes[j] == 0) {
+                        generatePrintImage(files[k],coords[0],coords[1],{'width':sizes[j],'height':sizes[j]},false);
+                    }
+                    else {
+                        generatePrintImage(files[k],coords[0],coords[1],{'width':sizes[j],'height':sizes[j]},true);
+                    }
                 }
             }
         }
@@ -912,7 +927,7 @@ describe('Printer Zebra', function() {
       generategetproperty(property, type);
 		}
 		
-		if(thisprinter.connectionType != "CONNECTION_TYPE_BLUETOOTH") {	
+		if(thisprinter.getProperty("connectionType") != "CONNECTION_TYPE_BLUETOOTH") {
 			it('Should return devicePort value as an integer', function () {
 				//TODO: Add Display code
 				expect(thisprinter.devicePort).isNumberGreaterThenZero();
@@ -925,17 +940,17 @@ describe('Printer Zebra', function() {
 		});*/
 		
 		it('Should Get timeToWaitAfterReadInMilliseconds default value', function() {
-				expect(thisprinter.getProperty('timeToWaitAfterReadInMilliseconds')).toEqual('10000');
+				expect(thisprinter.getProperty('timeToWaitAfterReadInMilliseconds')).toEqual('10');
 		});	
 		
 		it('Should Get timeToWaitAfterWriteInMilliseconds default value', function() {
-				expect(thisprinter.getProperty('timeToWaitAfterWriteInMilliseconds')).toEqual('200000');
+				expect(thisprinter.getProperty('timeToWaitAfterWriteInMilliseconds')).toEqual('200');
 		});
 			
 	});	
 		
 	function generatesetproperty(property, value) {
-		var deftext = ['Should Set',property,' to ',value,' using direct calling method' ];
+		var deftext = ['Should Set',property,' to ',value.toString(),' using direct calling method' ];
 		it( deftext.join(' ') , function() {
 			runs(function() {
 				thisprinter.property = value;
@@ -943,10 +958,10 @@ describe('Printer Zebra', function() {
 			});
 		});
 		
-		deftext = ['Should Set',property,' to ',value,' using setProperty calling method' ];
+		deftext = ['Should Set',property,' to ',value.toString(),' using setProperty calling method' ];
 		it( deftext.join(' ') , function() {
 			runs(function() {
-				thisprinter.setProperty(property, value);
+				thisprinter.setProperty(property, value.toString());
                 expect(thisprinter.property).toEqual(value);
                 // getProperty returns string type
 				expect(parseInt(thisprinter.getProperty(property),10)).toEqual(value);
@@ -957,7 +972,7 @@ describe('Printer Zebra', function() {
 		it( deftext.join(' ') , function() {
 			runs(function() {
 				thisprinter.setProperties({
-					property: value
+					property: value.toString()
 				});
                 // getProperties also returns property values as a strings
 				var data = thisprinter.getProperties([property]);
