@@ -18,11 +18,11 @@ describe("New ORM Model Specs", function() {
   } else { // Old ORM
     var Product = function(model){
       model.modelName("Product");
-      // model.enable("fixedSchema");
+      model.enable("fixedSchema");
       model.enable("sync");
       model.property("name","string");
       model.property("brand","string");
-      model.set("partition","user");
+      // model.set("partition","user");
     };
 
     var addProductModel = function() {
@@ -30,9 +30,7 @@ describe("New ORM Model Specs", function() {
     };
   }
 
-  var reset = function(syncdb) {
-    // console.log("-- reset db: " + syncdb);
-    db = Rho.ORMHelper.dbConnection(syncdb);
+  var reset = function() {
     var partitions = Rho.ORMHelper.getDbPartitions();
     $.each(partitions, function(index, db2) {
       db2.$execute_sql("DELETE FROM SOURCES");
@@ -45,8 +43,7 @@ describe("New ORM Model Specs", function() {
   };
 
   beforeEach(function() {
-    //reset("local");
-    reset("user");
+    reset();
   });
 
   it('Check Rho.ORM exist or not | Should return an "function" or "object"',function(){
@@ -74,7 +71,6 @@ describe("New ORM Model Specs", function() {
   it('Should create model',function() {
     //var sources = Rho.ORMModel.enumerate();
     //console.log(sources); // => null
-
     var model = addProductModel();
     expect(model).toBeDefined();
     expect(model).not.toBe(null);
@@ -155,8 +151,7 @@ describe("New ORM Model Specs", function() {
     }
   });
 
-
-  // TODO:
+  // FIXME:
   xit('VT302-0204 | deletes all objects in database', function() {
     var model = addProductModel();
     model.create({"name":"iphone","brand":"Apple"});

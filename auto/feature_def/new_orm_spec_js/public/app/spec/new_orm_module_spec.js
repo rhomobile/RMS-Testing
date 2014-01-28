@@ -15,7 +15,6 @@ describe("ORM Module Specs", function() {
   }
 
   var getModelSource = function (modelName) {
-    // console.log("getModelSource: " + modelName);
     if (useNewORM) {
       var source = Rho.ORM.getModel(modelName);
     } else {
@@ -26,9 +25,7 @@ describe("ORM Module Specs", function() {
     }
     return source;
   }
-  var reset = function(syncdb) {
-    // console.log("-- reset db: " + syncdb);
-    var db = Rho.ORMHelper.dbConnection(syncdb);
+  var reset = function() {
     var partitions = Rho.ORMHelper.getDbPartitions();
     $.each(partitions, function(index, db2) {
       db2.$execute_sql("DELETE FROM SOURCES");
@@ -44,8 +41,7 @@ describe("ORM Module Specs", function() {
   var appDB   = Rho.ORMHelper.dbConnection('app');
 
   beforeEach(function() {
-    reset("local");
-    // reset("user");
+    reset();
     if (!useNewORM) Rho.ORM.clear();
   });
 
@@ -75,8 +71,6 @@ describe("ORM Module Specs", function() {
     }
     addModel("Product", Product);
     var source = getModelSource('Product');
-
-    // console.log("source: " + source);
     // console.log(JSON.stringify(source)); // =>
     // {"sync_type":"incremental","partition":"local",
     //  "property":{"name":["string",null],"brand":["string",null]},
@@ -85,12 +79,6 @@ describe("ORM Module Specs", function() {
     expect(source.model_name).toEqual('Product');
     expect(source.sync_type).toEqual('incremental');
     expect(source.partition).toEqual('local');
-
-    // FIXME: source.getProperty("name") returns nothing  (new orm)
-    // console.log("VT302-0004: ");
-    // console.log("name: " + source.getProperty("name"));
-    // console.log("brand: " + source.getProperty("brand"));
-
   });
 
   it('VT302-0005 | Call Rho.ORM.addModel, passing model name as numerical string',function(){
@@ -114,7 +102,6 @@ describe("ORM Module Specs", function() {
     var source = getModelSource("123456");
 
     expect(source.model_name).toEqual('123456');
-    // expect(source.sync_type).toEqual('incremental');
   });
 
   it('VT302-0006 | set enable as sync at the time of creating model',function() {
@@ -134,14 +121,11 @@ describe("ORM Module Specs", function() {
         // model.set("partition","local");
       };
     }
-
-    reset("user");
     addModel("Product", Product);
     var source = getModelSource('Product');
 
     expect(source.sync_type).toEqual('incremental');
     expect(source.partition).toEqual('user');
-    // expect(source.model_name).toEqual('Product');
   });
 
   it('VT302-0007 | set enable as propertyBag at the time of creating model',function(){
@@ -251,7 +235,6 @@ describe("ORM Module Specs", function() {
         model.property("brand","string");
       };
     }
-    reset("user");
     addModel("Product", Product);
     var source = getModelSource('Product');
 
