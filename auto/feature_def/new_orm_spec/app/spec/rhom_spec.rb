@@ -1,5 +1,5 @@
 describe "Rhom" do
-  # use_new_orm = false
+  @use_new_orm = false
   @use_new_orm = Rho::RHO.use_new_orm
   puts "Rhom specs: use_new_orm: #{@use_new_orm}"
 
@@ -67,48 +67,33 @@ describe "Rhom" do
     Product.create( { :name => 'prod1' } )
     Customer.create( { :city => 'SPB' } )
 
-    # FIXME:
-    if @use_new_orm
-      Product.find("all").length.should > 0
-    else
-      Product.find(:all).length.should > 0
-    end
+    Product.find(:all).length.should > 0
     Customer.find(:count).should > 0
 
     Rhom::Rhom.database_full_reset_ex( :models => ['Product', 'Customer'] )
     Rho::RhoConfig.reset_models.should == 'Product,Customer'
 
-    # FIXME:
-    if @use_new_orm
-      Product.find("all").length.should == 0
-    else
-      Product.find(:all).length.should == 0
-    end
+    Product.find(:all).length.should == 0
     Customer.find(:count).should == 0
   end
 
+  # FIXME:
   # - 4
   it "Should  delete all objects for a given model" do
     Product.create( { :name => 'prod1' } )
     Customer.create( { :city => 'SPB' } )
 
-    # FIXME:
-    if @use_new_orm
-      Product.find("all").length.should > 0
-    else
-      Product.find(:all).length.should > 0
-    end
+    Product.find(:all).length.should > 0
     Customer.find(:count).should > 0
 
     Rhom::Rhom.database_full_reset_ex( :models => ['Product'] )
     Rho::RhoConfig.reset_models.should == 'Product'
 
     # FIXME:
-    if @use_new_orm
-      Product.find(":all").should be_nil
-    else
-      Product.find(:all).length.should == 0
-    end
+    Product.find(:count).should == 0
+    Product.find(:all).should be_empty # =>
+    # *** FAIL:
+    # Rhom - Expected [#<Product:0x2a3b12a0 @vars={:city=>"SPB", :object=>"1253302596"}>] to be empty
     Customer.find(:count).should > 0
   end
 

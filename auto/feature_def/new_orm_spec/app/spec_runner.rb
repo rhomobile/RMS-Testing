@@ -13,9 +13,9 @@ class SpecRunner < MSpecScript
       [ {:schema_model=>true, :sync_model=>true},  {:schema_model=>true, :sync_model=>false},
         {:schema_model=>false, :sync_model=>true} , {:schema_model=>false, :sync_model=>false} ]
     ]
-    config[:files] << [ "spec/rhom_object_spec",
-        [ {:schema_model=>true, :sync_model=>true},  {:schema_model=>true, :sync_model=>false},
-          {:schema_model=>false, :sync_model=>true} , {:schema_model=>false, :sync_model=>false} ] ]
+    # config[:files] << [ "spec/rhom_object_spec",
+    #     [ {:schema_model=>true, :sync_model=>true},  {:schema_model=>true, :sync_model=>false},
+    #       {:schema_model=>false, :sync_model=>true} , {:schema_model=>false, :sync_model=>false} ] ]
     config[:files] << "spec/rhom_spec"
   end
 
