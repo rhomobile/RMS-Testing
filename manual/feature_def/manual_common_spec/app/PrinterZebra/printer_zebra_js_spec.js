@@ -998,6 +998,52 @@ describe('Printer Zebra', function() {
 		}
 	});		
 	
+	describe('enumerateSupportedControlLanguages method', function() {
+		it('should connect', function() {
+			doConnect();
+		});
+		
+		it('using result', function() {
+				runs(function() {
+						var languagesTypes = thisprinter.enumerateSupportedControlLanguages();
+						expect(languagesTypes).toEqual([Rho.PrinterZebra.PRINTER_LANGUAGE_ZPL, Rho.PrinterZebra.PRINTER_LANGUAGE_CPCL]);
+				});
+		});
+		it('using callback', function() {
+				var enumCb = null;
 
+				function enumerateControlLanguagesCallback(callbackValue) {
+						enumCb = callbackValue;
+				}
+				runs(function() {
+						thisprinter.enumerateSupportedControlLanguages(enumerateControlLanguagesCallback);
+				});
+				waitsFor(function() {
+						return enumCb !== null;
+				}, 'Timed out waiting for testing callback', 2000);
+				
+				runs(function() {
+						expect(enumCb).toEqual([Rho.PrinterZebra.PRINTER_LANGUAGE_ZPL, Rho.PrinterZebra.PRINTER_LANGUAGE_CPCL]);
+				});
+		});
+		it('using anonymous callback', function() {
+				var enumCb = null;
+
+				runs(function() {
+						thisprinter.enumerateSupportedControlLanguages(
+								function(callbackValue) {
+										enumCb = callbackValue;
+								});
+				});
+				waitsFor(function() {
+						return enumCb !== null;
+				}, 'Timed out waiting for testing callback', 2000);
+				runs(function() {
+						expect(enumCb).toContain([Rho.PrinterZebra.PRINTER_LANGUAGE_ZPL, Rho.PrinterZebra.PRINTER_LANGUAGE_CPCL, Rho.PrinterZebra.PRINTER_LANGUAGE_EPS]);
+				});
+		});
+  });
+	
+	
 
 });
