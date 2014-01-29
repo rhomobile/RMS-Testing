@@ -60,7 +60,7 @@ describe('Intent_UseCases Functionality Test', function () {
             dispExpectedResult('The Target application which is running in the background should be bought to foreground.');
             _result.waitToRunTest();
             runs(function () {
-                var params = new parameters(Rho.Intent.START_ACTIVITY,"ACTION_MAIN","","com.smap.target","","","","");
+                var params = new parameters(Rho.Intent.START_ACTIVITY,"ACTION_MAIN","","com.smap.targetapp","","","","");
                 Rho.Intent.send(params);
             });
             _result.waitForResponse();
@@ -84,7 +84,7 @@ describe('Intent_UseCases Functionality Test', function () {
             dispExpectedResult('The Target application should be launched successfully with Passed Text in it.');
             _result.waitToRunTest();
             runs(function () {
-                var params = new parameters(Rho.Intent.START_ACTIVITY,"ACTION_MAIN","","com.smap.targetapp","MainActivity","","","");
+                var params = new parameters(Rho.Intent.START_ACTIVITY,"ACTION_MAIN","","com.smap.targetapp","com.smap.targetapp.MainActivity","","","");
                 Rho.Intent.send(params);
             });
             _result.waitForResponse();
@@ -140,7 +140,7 @@ describe('Intent_UseCases Functionality Test', function () {
             dispExpectedResult('Service of target applciation should be started successfully.');
             _result.waitToRunTest();
             runs(function () {
-                var params = new parameters(Rho.Intent.START_SERVICE,"","","com.smap.targetapp","MyFirstService","","","");
+                var params = new parameters(Rho.Intent.START_SERVICE,"","","com.smap.targetapp","com.smap.targetapp.MyFirstService","","","");
                 Rho.Intent.send(params);
             });
             _result.waitForResponse();
@@ -153,7 +153,7 @@ describe('Intent_UseCases Functionality Test', function () {
             dispExpectedResult('Service of the target applciation should be started successfully.');
             _result.waitToRunTest();
             runs(function () {
-                var params = new parameters(Rho.Intent.START_SERVICE,"","","com.smap.targetapp","MyFirstService","","","");
+                var params = new parameters(Rho.Intent.START_SERVICE,"","","com.smap.targetapp","com.smap.targetapp.MyFirstService","","","");
                 Rho.Intent.send(params);
             });
             _result.waitForResponse();
@@ -166,7 +166,7 @@ describe('Intent_UseCases Functionality Test', function () {
             dispExpectedResult('No effect or crash should be seen in the test application or target appliation, since the service is already instantiated');
             _result.waitToRunTest();
             runs(function () {
-                var params = new parameters(Rho.Intent.START_SERVICE,"ACTION_MAIN","","com.smap.targetapp","MyFirstService","","","");
+                var params = new parameters(Rho.Intent.START_SERVICE,"ACTION_MAIN","","com.smap.targetapp","com.smap.targetapp.MyFirstService","","","");
                 Rho.Intent.send(params);
                 Rho.Intent.send(params);
             });
