@@ -1,8 +1,16 @@
 describe("Barcode Test", function() {
 	
+	var ENABLE8K = 8000;
+	var ENABLE1K = 1000;
 	var enableFlag = false;
 	var decodeFlag = false;
 	//var enumData = '';
+	
+	if(Rho.System.platform == 'ANDROID')
+	{
+		ENABLE8K = 0; ENABLE1K = 0;
+		isAndroid = true;
+	}
 
 	var callbacktake = function (data){
 			enablecallbackdata(JSON.stringify(data));
@@ -409,11 +417,11 @@ describe("Barcode Test", function() {
 //The below tests are added for MK devices as Presentation mode is only supported on MK device
 	if(isWindowsMobilePlatform())
 	{
-		it("VT282-xx1 | Scan the barcode with presentation mode as parameter of enable method|" + scnid + scntype , function() {
+		it("VT282-xx1 | Scan the barcode with presentation mode as parameter of enable method|" + scnid , function() {
 
 			runs(function()
 			{
-				setObjective("VT282-1762 |Enable with presentation mode as parameter of enable method|");
+				setObjective("VT282-xx1 |Enable with presentation mode as parameter of enable method|");
 				setInstruction("Scan Barcode code128 with " + scnid);
 				setExpected("Is retruned decoded hash displayed correctly with all data?");
 				objSCN.enable({'aimType':'presentation'},callbackenable);
@@ -440,11 +448,11 @@ describe("Barcode Test", function() {
 			});
 		});
 
-		it("VT282-xx2 | check for presentation mode without scan for the first time |" + scnid + scntype , function() {
+		it("VT282-xx2 | check for presentation mode without scan for the first time |" + scnid , function() {
 
 			runs(function()
 			{
-				setObjective("VT282-1762 |check for presentation mode without scan for the first time|");
+				setObjective("VT282-xx2 |check for presentation mode without scan for the first time|");
 				setInstruction("Don't Scan Barcode and check for beam to stop then bring back the barcode under scanner");
 				setExpected("Scanner beam should come up and decode should be successful");
 				objSCN.enable({'aimType':'presentation'},callbackenable);
@@ -471,11 +479,11 @@ describe("Barcode Test", function() {
 			});
 		});
 
-		it("VT282-xx3 | check for presentation mode with repeat scan |" + scnid + scntype , function() {
+		it("VT282-xx3 | check for presentation mode with repeat scan |" + scnid , function() {
 
 			runs(function()
 			{
-				setObjective("VT282-1762 |check for presentation mode with repeat scan |");
+				setObjective("VT282-xx3 |check for presentation mode with repeat scan |");
 				setInstruction("Scan Barcode then remove the barcode from beam area of scanner then bring back the scanner and repeat this for 3-4 times");
 				setExpected("Scanner beam should come up and decode should be successful eachtime");
 				objSCN.enable({'aimType':'presentation'},callbackenable);
@@ -502,11 +510,11 @@ describe("Barcode Test", function() {
 			});
 		});
 
-		it("VT282-xx4 | setting presentation mode after enable call |" + scnid + scntype , function() {
+		it("VT282-xx4 | setting presentation mode after enable call |" + scnid , function() {
 
 			runs(function()
 			{
-				setObjective("VT282-1762 |setting presentation mode after enable call|");
+				setObjective("VT282-xx4 |setting presentation mode after enable call|");
 				setInstruction("check for presentation mode " + scnid);
 				setExpected("sacnner beam should come everytime the object goes near to scanner beam area");
 				objSCN.enable({},callbackenable);
@@ -538,7 +546,7 @@ describe("Barcode Test", function() {
 			
 			runs(function()
 			{
-				setObjective("VT282-1770 | Enable with presentation mode and scanTimeout 10000 and callback as anonymous function |");
+				setObjective("VT282-xx5 | Enable with presentation mode and scanTimeout 10000 and callback as anonymous function |");
 				setInstruction("check functionality of scanTimeout as 10000 and presentation mode");
 				setExpected("Baeam or viewfinder will stop automatically after 10 second?");
 				objSCN.enable({'scanTimeout':10000,'aimType':'presentation'},function(data){enablecallbackdata(JSON.stringify(data));});
@@ -554,6 +562,7 @@ describe("Barcode Test", function() {
 
 			runs(function()
 			{	
+				objSCN.start();
 				waitsFor(function() {
 				return document.getElementById("actResult").innerHTML != "init";
 				}, "Timed out waiting for tester to respond", 300000);
@@ -564,11 +573,11 @@ describe("Barcode Test", function() {
 			});
 		});
 
-		it("VT282-1764 | Enable with alldecoders enabled and callback |"+ scnid + scntype, function() {
+		it("VT282-xx6 | Enable with alldecoders enabled and callback |"+ scnid, function() {
 			
 			runs(function()
 			{
-				setObjective("VT282-1764 | Enable with alldecoders enabled and callback as function |");
+				setObjective("VT282-xx6 | Enable with alldecoders enabled and callback as function |");
 				setInstruction("Scan code93 and MSI barcode with " + scnid);
 				setExpected("Is decoded data comes after scanning code93 and MSI?");
 				objSCN.enable({'allDecoders':'true','aimType':'presentation'},callbackenable);
@@ -584,6 +593,7 @@ describe("Barcode Test", function() {
 
 			runs(function()
 			{
+				objSCN.start();
 				waitsFor(function() {
 				return document.getElementById("actResult").innerHTML != "init";
 				}, "Timed out waiting for tester to respond", 300000);
@@ -594,11 +604,11 @@ describe("Barcode Test", function() {
 			});
 		});
 
-		it("VT282-1766 | Enable with alldecoders disabled, code128 as enabled without callback |"+ scnid + scntype, function() {
+		it("VT282-xx7 | Enable with alldecoders disabled, code128 as enabled without callback |"+ scnid, function() {
 			
 			runs(function()
 			{
-				setObjective("VT282-1766 | Enable with alldecoders disabled, code128 as enabled without callback");
+				setObjective("VT282-xx7 | Enable with alldecoders disabled, code128 as enabled without callback");
 				setInstruction("putting focus inside textbox and Scan code39 barcode then scan code128 barcode with " + scnid);
 				setExpected("only code128 barcode should decode");
 				objSCN.enable({'allDecoders':false,'code128':true,'aimType':'presentation'});
@@ -614,6 +624,7 @@ describe("Barcode Test", function() {
 
 			runs(function()
 			{		
+				objSCN.start();
 				waitsFor(function() {
 				return document.getElementById("actResult").innerHTML != "init";
 				}, "Timed out waiting for tester to respond", 300000);
@@ -624,11 +635,11 @@ describe("Barcode Test", function() {
 			});
 		});
 
-		it("VT282-1778/79 | call setDefault with" + scnid + "and take |", function() {
+		it("VT282-xx8 | call setDefault with" + scnid + "and take |", function() {
 
 			runs(function()
 			{
-				setObjective("VT282-1778/79 | call setDefault and take");
+				setObjective("VT282-xx8 | call setDefault and take");
 				setInstruction("Take method wait for scanner beam or viewfinder to come automatically and Scan code 128 barcode");
 				setExpected("code128 barcode should decode and retrun value should be decoded data and status");
 				Rho.Barcode.setDefault(objSCN);
@@ -646,6 +657,7 @@ describe("Barcode Test", function() {
 			runs(function()
 			{		
 				objSCN.allDecoders = true;
+				objSCN.start();
 				waitsFor(function() {
 				return document.getElementById("actResult").innerHTML != "init";
 				}, "Timed out waiting for tester to respond", 300000);
@@ -656,11 +668,11 @@ describe("Barcode Test", function() {
 			});
 		});
 
-		it("VT282-xx7 | call take with presentation mode|", function() {
+		it("VT282-xx9 | call take with presentation mode|", function() {
 
 			runs(function()
 			{
-				setObjective("VT282-1778/79 | call setDefault and take");
+				setObjective("VT282-xx9 | call setDefault and take");
 				setInstruction("Take method wait for scanner beam or viewfinder to come automatically and Scan code 128 barcode");
 				setExpected("code128 barcode should decode and retrun value should be decoded data and status");
 				Rho.Barcode.setDefault(objSCN);
@@ -677,7 +689,7 @@ describe("Barcode Test", function() {
 
 			runs(function()
 			{		
-				objSCN.allDecoders = true;
+				objSCN.start();
 				waitsFor(function() {
 				return document.getElementById("actResult").innerHTML != "init";
 				}, "Timed out waiting for tester to respond", 300000);
