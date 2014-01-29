@@ -41,6 +41,7 @@ android:
 #  - ../../../../Motorola-Extensions/build/ci/extensions
 #  - ../../../../Motorola-Extensions/lib/commonAPI
     - sensor
+  manifest_template: AndroidManifest.erb
 #security_token: "123"
 wm:
   ajax_api_bridge: false
