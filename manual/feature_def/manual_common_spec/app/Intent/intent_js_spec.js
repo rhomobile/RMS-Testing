@@ -66,7 +66,6 @@ describe('Intent_UseCases Functionality Test', function () {
             _result.waitForResponse();
         });
         it('intentType - StartActivity: Try to launch target appilcation by \'packageName\', which is not installed.', function () {
-            displayPrecondition("");
             displayObjective("intentType - StartActivity: Try to launch target appilcation by \'packageName\', which is not installed.");
             dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":Rho.Intent.START_ACTIVITY,"action":"ACTION_MAIN","categories":"","appName":"com.notInstalled","targetClass":"","uri":"","mimeType":"","data":""}}');
             dispExpectedResult('No effect, No crash should be seen in the test application.');
@@ -105,7 +104,6 @@ describe('Intent_UseCases Functionality Test', function () {
         });
         it('intentType - StartActivity: Try to launch target appilcation by \'className\', which is not installed.', function () {
             displayObjective("intentType - StartActivity: Try to launch target appilcation by \'className\', which is not installed.");
-            displayPrecondition("");
             dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":Rho.Intent.START_ACTIVITY,"action":"ACTION_MAIN","categories":"","appName":"com.notinstalled","targetClass":"MainActivity","uri":"","mimeType":"","data":""}}');
             dispExpectedResult('No effect, No crash should be seen in the test application.');
             _result.waitToRunTest();
@@ -117,7 +115,6 @@ describe('Intent_UseCases Functionality Test', function () {
         });
         it('intentType - Start service of the test appliation.', function () {
             displayObjective("intentType - Start service of the test appliation.");
-            displayPrecondition("");
             dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":Rho.Intent.START_SERVICE,"action":"","categories":"","appName":"testApp","targetClass":"com.rhomobile.rhodes.RhodesService","uri":"","mimeType":"","data":""}}');
             dispExpectedResult('Service of test application should be started successfully.');
             _result.waitToRunTest();
@@ -150,6 +147,8 @@ describe('Intent_UseCases Functionality Test', function () {
         });
         it('intentType - Start service of the target application which is not running.', function () {
             displayObjective("intentType - Start service of the target application which is not running.");
+            var preConditions = ["Ensure Target application installed in the device","Ensure that Target appliation is not running."];
+            displayPrecondition(preConditions);
             dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":Rho.Intent.START_SERVICE,"action":"","categories":"","appName":"com.smap.targetapp","targetClass":"MyFirstService","uri":"","mimeType":"","data":""}}');
             dispExpectedResult('Service of the target applciation should be started successfully.');
             _result.waitToRunTest();
@@ -161,26 +160,29 @@ describe('Intent_UseCases Functionality Test', function () {
         });
         it('intentType - Start service of the target applciation in which the service is already instantiated', function () {
             displayObjective("intentType - Start service of the target applciation in which the service is already instantiated");
+            var preConditions = ["Ensure Target application installed in the device"];
+            displayPrecondition(preConditions);
             dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":Rho.Intent.START_SERVICE,"action":"","categories":"","appName":"com.smap.targetapp","targetClass":"MyFirstService","uri":"","mimeType":"","data":""}}');
             dispExpectedResult('No effect or crash should be seen in the test application or target appliation, since the service is already instantiated');
             _result.waitToRunTest();
             runs(function () {
                 var params = new parameters(Rho.Intent.START_SERVICE,"ACTION_MAIN","","com.smap.targetapp","MyFirstService","","","");
                 Rho.Intent.send(params);
+                Rho.Intent.send(params);
             });
             _result.waitForResponse();
         });
         it('intentType - Broadcast data from test app and receive at test app.', function () {
             displayObjective("intentType - Broadcast data from test app and receive at test app.");
-            dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":Rho.Intent.BROADCAST,"action":"com.smap.targetapp.mySecondAction","categories":"","appName":"","targetClass":"","uri":"","mimeType":"","data":{"myData":"Test case passed If you see this in an alert !"}}}');
+            dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":Rho.Intent.BROADCAST,"action":"com.smap.targetapp.mySecondAction","categories":"","appName":"","targetClass":"","uri":"","mimeType":"","data":{"myData":"This is my broadcast data!"}}}');
             dispExpectedResult('Broadcast should be successful.');
             _result.waitToRunTest();
             runs(function () {
                 var data = {
-                    "myData":"Test case passed If you see this in an alert !"
+                    "myData":"This is my broadcast data!"
                 };
                 var listeningCB = function(intents){
-                    if(intents.data.myData = "Test case passed If you see this in an alert !"){
+                    if(intents.data.myData = "This is my broadcast data!"){
                         alert("Test case Passed!");
                     } else {
                         alert("Test case Failed!");
@@ -194,6 +196,8 @@ describe('Intent_UseCases Functionality Test', function () {
         });
         it('intentType - Broadcast data from test app and receive at target app.', function () {
             displayObjective("intentType - Broadcast data from test app and receive at target app.");
+            var preConditions = ["Ensure Target application installed in the device"];
+            displayPrecondition(preConditions);
             dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":Rho.Intent.BROADCAST,"action":"","categories":"","appName":"com.smap.targetapp","targetClass":"","uri":"","mimeType":"","data":{"broadCastData":"Target -Test case passed If you see this in Andorid Toast !"}}}');
             dispExpectedResult('Broadcast should be successful.');
             _result.waitToRunTest();
@@ -208,6 +212,8 @@ describe('Intent_UseCases Functionality Test', function () {
         });
         it('intentType - Broadcast data from test app and receive at target app, when target app is not running.', function () {
             displayObjective("intentType - Broadcast data from test app and receive at target app, when target app is not running.");
+            var preConditions = ["Ensure Target application installed but not running in the device"];
+            displayPrecondition(preConditions);
             dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":Rho.Intent.BROADCAST,"action":"","categories":"","appName":"com.smap.targetapp","targetClass":"","uri":"","mimeType":"","data":{"broadCastData":"Target: Test case passed If you see this in Andorid Toast !"}}}');
             dispExpectedResult('Broadcast should be successful.');
             _result.waitToRunTest();
@@ -354,7 +360,7 @@ describe('Intent_UseCases Functionality Test', function () {
             _result.waitForResponse();
         });
     }
-    it('mimeType - Launch Music player from test app by setting mimeType "audio/x-mpeg-3" and Data to "streaming data"', function () {
+    xit('mimeType - Launch Music player from test app by setting mimeType "audio/x-mpeg-3" and Data to "streaming data"', function () {
         displayObjective('mimeType - Launch Music player from test app by setting mimeType "audio/x-mpeg-3" and Data to "streaming data"');
         dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":Rho.Intent.START_ACTIVITY,"action":"","categories":"","appName":"","targetClass":"","uri":"","mimeType":"audio/x-mpeg-3","data":""}}');
         dispExpectedResult('MusicPlayer should be launched successfully');
@@ -454,6 +460,8 @@ describe('Intent_UseCases Functionality Test', function () {
     });
     it('uri - Launch Email appliation with data from test app by setting URI "mailto:abcd@domain.com"', function () {
         displayObjective('uri - Launch Email appliation with data from test app by setting URI "mailto:abcd@domain.com"');
+        var preConditions = ["Ensure default mail box is configured in the device"];
+            displayPrecondition(preConditions);
         dispTestCaseRunning('Sending Intent with parameters Sending Intent with parameters {"params":{"intentType":Rho.Intent.START_ACTIVITY,"action":"","categories":"","appName":"","targetClass":"","uri":"mailto:abcd@domain.com","mimeType":"","data":""}}');
         dispExpectedResult('Email compose view should be launched with pre-filled recepient email address.');
         _result.waitToRunTest();
@@ -476,6 +484,8 @@ describe('Intent_UseCases Functionality Test', function () {
     });
     it('uri - Launch Maps with pre-set lat and longitute values from test app by setting Uri "geo:latitude,longitude"', function () {
         displayObjective('uri - Launch Maps with pre-set lat and longitute values from test app by setting Uri "geo:latitude,longitude"');
+        var preConditions = ["Ensure maps application present in the device"];
+            displayPrecondition(preConditions);
         dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":Rho.Intent.START_ACTIVITY,"action":"ACTION_VIEW","categories":"","appName":"","targetClass":"","uri":"geo:12.9667° N, 77.5667° E","mimeType":"","data":""}}');
         dispExpectedResult('Maps application launched with the pre-set Lattitude and Longitude');
         _result.waitToRunTest();
@@ -499,6 +509,8 @@ describe('Intent_UseCases Functionality Test', function () {
     if(isAndroidPlatform()){
         it('uri - Launch Contacts from test application via Uri "content://contacts/people/" and Action: ACTION_VIEW', function () {
             displayObjective('uri - Launch Contacts from test application via Uri "content://contacts/people/" and Action: ACTION_VIEW');
+            var preConditions = ["Ensure atleast one contact is present in the device"];
+            displayPrecondition(preConditions);
             dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":Rho.Intent.START_ACTIVITY,"action":"ACTION_VIEW","categories":"","appName":"","targetClass":"","uri":"content://contacts/people/","mimeType":"","data":""}}');
             dispExpectedResult('Contacts application is launched successfully');
             _result.waitToRunTest();
@@ -508,9 +520,11 @@ describe('Intent_UseCases Functionality Test', function () {
             });
             _result.waitForResponse();
         });
-        it('uri - Launch Contacts from test application via Uri "content://contacts/people/" and Action: ACTION_VIEW', function () {
+        it('uri - Launch individual contact from test application via Uri "content://contacts/people/1" and Action: ACTION_VIEW', function () {
             displayObjective('uri - Launch Contacts from test application via Uri "content://contacts/people/" and Action: ACTION_VIEW');
-            dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":Rho.Intent.START_ACTIVITY,"action":"ACTION_EDIT","categories":"","appName":"","targetClass":"","uri":"content://contacts/people/","mimeType":"","data":""}}');
+            var preConditions = ["Ensure atleast one contact is present in the device"];
+            displayPrecondition(preConditions);
+            dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":Rho.Intent.START_ACTIVITY,"action":"ACTION_EDIT","categories":"","appName":"","targetClass":"","uri":"content://contacts/people/1","mimeType":"","data":""}}');
             dispExpectedResult('Contacts application is launched in edit mode of the first contact successfully');
             _result.waitToRunTest();
             runs(function () {
@@ -521,6 +535,8 @@ describe('Intent_UseCases Functionality Test', function () {
         });
         it('uri - Launch target application from test application via Custom Uri "myApp://homeScreen"', function () {
             displayObjective('uri - Launch target application from test application via Custom Uri "myApp://homeScreen"');
+            var preConditions = ["Ensure Target app is installed in the device"];
+            displayPrecondition(preConditions);
             dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":Rho.Intent.START_ACTIVITY,"action":"","categories":"","appName":"","targetClass":"","uri":"myApp://homeScreen","mimeType":"","data":""}}');
             dispExpectedResult('Target applicatoin is launched by custom Uri successfully.');
             _result.waitToRunTest();
@@ -544,6 +560,8 @@ describe('Intent_UseCases Functionality Test', function () {
     }
     it('uri - Launch Email compose screen with pre-filled email from test application by setting URI and data.', function () {
         displayObjective('uri - Launch Email compose screen with pre-filled email from test application by setting URI and data.');
+        var preConditions = ["Ensure default mailbox is configured in the device"];
+        displayPrecondition(preConditions);
         dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":Rho.Intent.START_ACTIVITY,"action":"","categories":"","appName":"","targetClass":"","uri":"mailto:abcd@domain.com","mimeType":"","data":"This is test email body"}}');
         dispExpectedResult('Email compose screen should be launched successfully with pre-filled data in it.');
         _result.waitToRunTest();
@@ -573,6 +591,8 @@ describe('Intent_UseCases Functionality Test', function () {
     if(isAndroidPlatform()){
         it('Callback : Send an Intent and the same intent details should be seen in the callback.', function () {
             displayObjective('Callback : Send an Intent and the same intent details should be seen in the callback.');
+            var preConditions = ["Ensure Target application is installed in the device"];
+            displayPrecondition(preConditions);
             dispTestCaseRunning('Sending intent with callback should handle the returned intent in the callback fuction. The parameters below should match with call back handled intent parameters. <br/> {"params":{"intentType":Rho.Intent.START_ACTIVITY,"action":"ACTION_MAIN","categories":"","appName":"com.smap.targetapp","targetClass":"","uri":"","mimeType":"","data":{"myData":"This is Test data !"}}}');
             dispExpectedResult('The intent param sent from test application should be returned back to the callback handler. Test case passed only if an alert message should be shown with result: Passed!');
             _result.waitToRunTest();
@@ -693,7 +713,7 @@ describe('Intent_UseCases Functionality Test', function () {
     it('Stop Listening to the background intents', function () {
         displayObjective('Stop Listening to the background intents');
         dispTestCaseRunning('Execute \'Stop Listening\' API.');
-        dispExpectedResult('Test application should stop listening to background intents ie., ( test application should not receive any broad cast messages).');
+        dispExpectedResult('Test application should stop listening to background intents ie., (test application should not receive any broad cast messages).');
         _result.waitToRunTest();
         runs(function () {
             var mytestapp = Rho.Application.appName;
@@ -783,7 +803,18 @@ describe('Intent_UseCases Functionality Test', function () {
         dispExpectedResult('No effect or crash should be seen at the test application.');
         _result.waitToRunTest();
         runs(function(){
-            var params = new parameters("","","","","","","","");
+            var params = {
+                "params":{
+                    "intentType":null,
+                    "action":null,
+                    "categories":null,
+                    "appName":null,
+                    "targetClass":null,
+                    "uri":null,
+                    "mimeType":null,
+                    "data":null
+                }
+            };
             Rho.Intent.send(params);
         });
         _result.waitForResponse();
