@@ -115,9 +115,16 @@ describe "Rhom::RhomObject" do
     account.object.should == '3560c0a0-ef58-2f40-68a5-fffffffffffff'
   end
 
+  # FIXME: broken for property bag!
   it "should retrieve an object of model`" do
     results = getCase.find(:all)
-    results.length.should == 1
+
+    puts "FIXME: should retrieve an object of model "
+    puts getCase.inspect
+    puts results.inspect
+
+    results.length.should == 1 # *** FAIL: Rhom::RhomObject - Expected 3 to equal 1
+    #
 
     res = getTestDB.select_from_table('sources','source_id', {"name" => getCase.to_s})
     source_id = res[0]['source_id']
@@ -132,13 +139,15 @@ describe "Rhom::RhomObject" do
     results[0].case_number.should == case_number
   end
 
+  # FIXME:
   it "should retrieve all objects of model" do
     results = getAccount.find(:all, :order => 'name', :orderdir => "DESC")
-    results.length.should == 2
+    results.length.should == 2 # *** FAIL: Expected 3 to equal 2
     results[0].name.should >= results[1].name
     results[0].industry.should == results[1].industry
   end
 
+  # FIXME: FAIL: Rhom::RhomObject - super from singleton method that is defined to multiple classes is not supported;
   it "should respond to find_all method and retrieve all objects of model" do
     results = getAccount.find_all(:order => 'name', :orderdir => "DESC")
     results.length.should == 2
@@ -147,23 +156,27 @@ describe "Rhom::RhomObject" do
   end
 
 if !defined?(RHO_WP7)
+  # FIXME:
   it "should raise RecordNotFound error if nil given as a find argument" do
     begin
       bExc = false
       getAccount.find(nil)
     rescue Exception => e
       puts "Exception thrown: #{e}"
-      bExc = e.is_a?(::Rhom::RecordNotFound)
+      bExc = e.is_a?(::Rhom::RecordNotFound) # *** FAIL: Rhom::RhomObject - uninitialized constant Rhom::RecordNotFound
     end
     bExc.should == true
   end
 end
 
+  # FIXME:
   it "should save string with zeroes" do
-    val = "\1\2\3\0\5\8\6\7\34"
+    #val = "\1\2\3\0\5\8\6\7\34"
+    val = "\x01\x02\x03\x00\x058\x06\a\x1C"
     item = getAccount.create(:industry => Rho::RhoSupport::binary_encode(val))
     item2 = getAccount.find(item.object)
     Rho::RhoSupport::binary_decode(item2.industry).should == val
+    # *** FAIL: Rhom::RhomObject - Expected "\x01\x02\x03" to equal "\x01\x02\x03\x00\x058\x06\a\x1C"
   end
 
 #=begin
@@ -325,6 +338,7 @@ end
 
   end
 
+  # FIXME:
   it "should create a record diff case name" do
     item = getAccount.create( 'propOne'=>'1', 'TwoProps'=>'2')
     item.propOne.should == '1'
@@ -1027,13 +1041,14 @@ end
     end
   end
 
+  # FIXME:
   it "should delete_all with multiple conditions" do
     vars = {"name"=>"Aeroprise", "website"=>"test.com"}
     account = getAccount.create(vars)
 
     test_cond = {'name' => 'Aeroprise', 'website'=>'aeroprise.com'}
     accts = getAccount.find(:all, :conditions => test_cond)
-    accts.length.should == 1
+    accts.length.should == 1 # # FIXME: Expected 4 to equal 1
 
     if $spec_settings[:sync_model]
       records = getTestDB().select_from_table('changed_values','*', {'source_id' => getAccount().get_source_id(), "update_type"=>'delete'} )
@@ -1060,6 +1075,7 @@ end
     end
   end
 
+  # FIXME:
   it "should delete_all with advanced conditions" do
     vars = {"name"=>"Aeroprise", "website"=>"test.com"}
     account = getAccount.create(vars)
@@ -1067,7 +1083,7 @@ end
     test_cond = {{:func=>'UPPER', :name=>'name', :op=>'LIKE'} => 'AERO%',
         {:func=>'UPPER', :name=>'website', :op=>'LIKE'} => 'TEST%'}
 
-    accts = getAccount.find(:all, :conditions => test_cond, :op => 'OR')
+    accts = getAccount.find(:all, :conditions => test_cond, :op => 'OR') # FIXME: ArgumentError: wrong number of arguments (2 for 3)
     accts.length.should == 2
 
     if $spec_settings[:sync_model]
@@ -1095,6 +1111,7 @@ end
     end
   end
 
+  # FIXME:
   it "should not find with advanced condition" do
     vars = {"name"=>"Aeroprise", "website"=>"testaa.com"}
     account = getAccount.create(vars)
@@ -1103,6 +1120,7 @@ end
         {:func=>'UPPER', :name=>'website', :op=>'LIKE'} => 'TEST'}
 
     accts = getAccount.find(:all, :select => ['name', 'website'],  :conditions => test_cond, :op => 'OR')
+    # ArgumentError: wrong number of arguments (2 for 3)
     accts.length.should > 0
     accts = getAccount.find(:all, :select => ['name', 'website'], :conditions => {{:func=>'UPPER', :name=>'website', :op=>'='} => 'TEST'} )
     accts.length.should == 0
@@ -1122,6 +1140,7 @@ end
     accts.length.should == 0
  end
 
+  # FIXME:
   it "should support blob type" do
     file_name = File.join(Rho::RhoApplication::get_blob_folder, 'MyText123.txt')
     File.delete(file_name) if File.exists?(file_name)
@@ -1144,38 +1163,44 @@ end
 
     item.destroy
     item2 = getAccount.find(item.object)
-    item2.should be_nil
+    item2.should be_nil # FIXME: Expected [] to be nil
     File.exists?(file_name).should == false
   end
 
+  # FIXME:
   it "should include only selected column without order" do
     @accts = getAccount.find(:all, :select => ['name'] )
 
     @accts[0].name.should_not be_nil
     @accts[0].industry.should be_nil
-    @accts[0].vars.length.should == 3
+    @accts[0].vars.length.should == 3 # Expected 19 to equal 3
   end
 
+  # FIXME:
   it "should include only selected column" do
     @accts = getAccount.find(:all, :select => ['name'], :order => 'name', :orderdir => 'DESC' )
 
     @accts[0].name.should == "Mobio India"
+    # Expected "implement SugarCRM sample app" to equal "Mobio India"
     @accts[0].industry.should be_nil
     @accts[0].vars.length.should == 3
   end
 
+  # FIXME:
   it "should include only selected columns" do
     @accts = getAccount.find(:all, :select => ['name','industry'], :order => 'name', :orderdir => 'DESC')
 
     @accts[0].name.should == "Mobio India"
+    # Expected "implement SugarCRM sample app" to equal "Mobio India"
     @accts[0].industry.should == "Technology"
     @accts[0].shipping_address_street.should be_nil
     @accts[0].vars.length.should == 4
   end
 
+  # FIXME:
   it "should include selected columns and conditions" do
     @accts = getAccount.find(:all, :conditions => {'name' => 'Mobio India'}, :select => ['name','industry'])
-    @accts.length.should == 1
+    @accts.length.should == 1 # FIXME: Expected 3 to equal 1
     @accts[0].name.should == "Mobio India"
     @accts[0].industry.should == "Technology"
     @accts[0].shipping_address_street.should be_nil
@@ -1191,19 +1216,23 @@ end
   #@accts[0].vars.length.should == 3
   #end
 
+  # FIXME:
   it "should support find with conditions => nil" do
     @accts = getAccount.find(:all, :conditions => {'description' => nil})
-    @accts.length.should == 1
+    @accts.length.should == 1 # FIXME: Expected 3 to equal 1
     @accts[0].name.should == "Aeroprise"
     @accts[0].industry.should == "Technology"
   end
 
+  # FIXME:
   it "should find with sql multiple conditions" do
     @acct = getAccount.find(:first, :conditions => [ "name = ? AND industry = ?", "'Mobio India'", "'Technology'" ], :select => ['name', 'industry'])
+    # FIXME: RuntimeError: no such column: name
     @acct.name.should == "Mobio India"
     @acct.industry.should == "Technology"
   end
 
+  # FIXME:
   it "should support sql conditions arg" do
     @accts = getAccount.find(:all, :conditions => "name = 'Mobio India'", :select => ['name', 'industry'])
     @accts.length.should == 1
@@ -1211,6 +1240,7 @@ end
     @accts[0].industry.should == "Technology"
   end
 
+  # FIXME:
   it "should support simple sql conditions" do
     @accts = getAccount.find(:all, :conditions => ["name = ?", "'Mobio India'"], :select => ['name', 'industry'])
     @accts.length.should == 1
@@ -1218,6 +1248,7 @@ end
     @accts[0].industry.should == "Technology"
   end
 
+  # FIXME:
   it "should support complex sql conditions arg" do
     @accts = getAccount.find(:all, :conditions => "name like 'Mobio%'", :select => ['name', 'industry'])
     @accts.length.should == 1
@@ -1225,35 +1256,41 @@ end
     @accts[0].industry.should == "Technology"
   end
 
+  # FIXME:
   it "should support sql conditions single filter" do
     @accts = getAccount.find(:all, :conditions => ["name like ?", "'Mob%'"], :select => ['name', 'industry'])
+    # FIXME: RuntimeError: no such column: name
     @accts.length.should == 1
     @accts[0].name.should == "Mobio India"
     @accts[0].industry.should == "Technology"
   end
 
+  # FIXME:
   it "should support sql conditions single filter with order" do
     return if USE_HSQLDB
 
     @accts = getAccount.find(:all, :conditions => ["name like ?", "'Mob%'"], :select => ['name', 'industry'], :order=>'name', :orderdir => 'DESC' )
+    # FIXME: RuntimeError: no such column: name
     @accts.length.should == 1
     @accts[0].name.should == "Mobio India"
     @accts[0].industry.should == "Technology"
   end
 
+  # FIXME:
   it "should support sql conditions with multiple filters" do
     @accts = getAccount.find(:all, :conditions => ["name like ? and industry like ?", "'Mob%'", "'Tech%'"], :select => ['name', 'industry'])
+    # FIXME: RuntimeError: no such column: name
     @accts.length.should == 1
     @accts[0].name.should == "Mobio India"
     @accts[0].industry.should == "Technology"
   end
 
-
+  # FIXME:
   it "should return records when order by is nil for some records" do
     return if USE_HSQLDB
 
     @accts = getAccount.find(:all, :order => 'shipping_address_country', :dont_ignore_missed_attribs => true, :select => ['name'])
-    @accts.length.should == 2
+    @accts.length.should == 2 # FIXME: Expected 3 to equal 2
 
     if ( @accts[1].name == "Aeroprise" )
       @accts[1].name.should == "Aeroprise"
@@ -1284,7 +1321,7 @@ end
 
     size = 3
     @accts = getAccount.find(:all, :conditions => { {:func=> 'CAST', :name=>'rating as INTEGER', :op=>'<'} => size } )
-    @accts.length.should == 2
+    @accts.length.should == 2 # FIXME: Expected 11 to equal 2
     @accts[0].rating.to_i.should < size
     @accts[1].rating.to_i.should < size
 
@@ -1297,6 +1334,7 @@ end
   end
 
 #TO FIX in next release. issue in pivotal - 29776177
+# FIXME:
 if !defined?(RHO_WP7)
   it "should find with sql by number" do
     getAccount.create('rating'=>1)
@@ -1310,6 +1348,7 @@ if !defined?(RHO_WP7)
 
     size = 3
     @accts = getAccount.find(:all, :conditions => ["CAST(rating as INTEGER)< ?", "#{size}"], :select => ['rating'] )
+    # FIXME: RuntimeError: no such column: rating
     @accts.length.should == 2
     @accts[0].rating.to_i.should < size
     @accts[1].rating.to_i.should < size
@@ -1323,6 +1362,7 @@ if !defined?(RHO_WP7)
   end
 end
 
+  # FIXME:
   it "should complex find by number" do
     getAccount.create('rating'=>1)
     getAccount.create('rating'=>2)
@@ -1338,7 +1378,7 @@ end
         :conditions => {
          {:func=> 'CAST', :name=>'rating as INTEGER', :op=>'<'} => size,
          {:func=>'UPPER', :name=>'industry', :op=>'LIKE'} => '%ZERO%'},
-         :op => 'OR' )
+         :op => 'OR' ) # FIXME: ArgumentError: wrong number of arguments (2 for 3)
 
     @accts.length.should == 2
     @accts[0].rating.to_i.should < size
@@ -1387,13 +1427,14 @@ end
   end
 
 
+  # FIXME:
   it "should find by object" do
     accts = getAccount.find(:all,:conditions=>
         {
             { :name => "object", :op =>"IN" } => ['44e804f2-4933-4e20-271c-48fcecd9450d','63cf13da-cff4-99e7-f946-48fcec93f1cc']
         }
     )
-    accts.length.should == 2
+    accts.length.should == 2 # Expected 3 to equal 2
 
     accts = getAccount.find(:all,:conditions=>
         {
@@ -1404,13 +1445,14 @@ end
 
   end
 
+  # FIXME:
   it "should complex find by object" do
     accts = getAccount.find(:all,:conditions=> {
             { :name => "object", :op =>"IN" } => ['44e804f2-4933-4e20-271c-48fcecd9450d','63cf13da-cff4-99e7-f946-48fcec93f1cc'],
             { :name => "name" } => 'Mobio India'
         }
     )
-    accts.length.should == 1
+    accts.length.should == 1 # Expected 3 to equal 1
 
     accts = getAccount.find(:all,:conditions=>{
             { :name => "object", :op =>"IN" } => ['1','2','3'],
