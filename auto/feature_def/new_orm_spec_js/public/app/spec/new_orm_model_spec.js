@@ -31,14 +31,18 @@ describe("New ORM Model Specs", function() {
   }
 
   var reset = function() {
-    var partitions = Rho.ORMHelper.getDbPartitions();
+    console.log('loading partitions... ' + Rho.ORM + ' ' + Rho.ORMHelper);
+    var partitions = Rho.ORM.getDbPartitions();
+    console.log('loaded partitions...');
     $.each(partitions, function(index, db2) {
-      db2.$execute_sql("DELETE FROM SOURCES");
-      db2.$execute_sql("DELETE FROM OBJECT_VALUES");
-      db2.$execute_sql("DELETE FROM CHANGED_VALUES");
-      if(db2.$is_table_exist("Product")){
-        db2.$execute_sql("DROP TABLE Product");
+      console.log('each partition: ' + JSON.stringify(db2));
+      db2.executeSql("DELETE FROM SOURCES");
+      db2.executeSql("DELETE FROM OBJECT_VALUES");
+      db2.executeSql("DELETE FROM CHANGED_VALUES");
+      if(db2.isTableExist("Product")){
+        db2.executeSql("DROP TABLE Product");
       }
+      console.log('finished each partition: ' + JSON.stringify(db2));
     });
   };
 
@@ -55,7 +59,7 @@ describe("New ORM Model Specs", function() {
 
   it("Should return client id",function(){
     var db = Rho.ORMHelper.dbConnection("user");
-    db.$execute_sql("DELETE FROM CLIENT_INFO");
+    db.executeSql("DELETE FROM CLIENT_INFO");
     var client_id = Rho.ORM.getClientId();
 
     if(useNewORM) // FIXME:
@@ -63,7 +67,7 @@ describe("New ORM Model Specs", function() {
     else
       expect(client_id).toEqual([]);
 
-    db.$execute_sql("INSERT INTO CLIENT_INFO (client_id) VALUES(7)");
+    db.executeSql("INSERT INTO CLIENT_INFO (client_id) VALUES(7)");
     client_id = Rho.ORM.getClientId();
     expect(client_id).toEqual("7");
   });
@@ -78,7 +82,7 @@ describe("New ORM Model Specs", function() {
     // models = Rho.ORMModel.enumerate();
     // console.log(JSON.stringify(models)); // => [{}]
     var db = Rho.ORMHelper.dbConnection("user");
-    var res = db.$execute_sql("select * from sources where name = 'Product'");
+    var res = db.executeSql("select * from sources where name = 'Product'");
     //console.log(JSON.stringify(res));
     // =>
     // [ {"map":
