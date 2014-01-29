@@ -12,6 +12,21 @@
             xmlHttpReq.send();
         }
     }
+
+    function onIntentReceived( intent ) {
+        var o = ""
+        
+        for (var p in intent) {
+            o += p + ":" + intent[p] + "\n";
+        }
+    
+        alert( "Intent:\n" + o );
+        
+        if ( intent[uri].length > 0 ) {
+            Rho.System.openUrl( intent[uri] );
+        }
+    }
+
 </script>
 
 <div data-role="page" data-url="<%= Rho::RhoConfig.start_path %>/">
@@ -44,4 +59,10 @@
 </div>
 <div id="js_getApplicationMessage">
 	<button onclick ='alert(JSON.stringify(Rho.System.getApplicationMessage()));'>Javascript: Get Application Message</button>
+</div>
+<div id="js_startListenIntents">
+    <button onclick ="Rho.Intent.startListening(onIntentReceived);">Javascript: Start listen intents</button>
+</div>
+<div id="js_stopListenIntents">
+    <button onclick ="Rho.Intent.stopListening();">Javascript: Stop listen intents</button>
 </div>
