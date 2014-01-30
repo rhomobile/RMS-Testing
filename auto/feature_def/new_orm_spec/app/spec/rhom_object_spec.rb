@@ -2,12 +2,14 @@ require 'rhom'
 require 'rho/rhoutils'
 require 'json'
 
-@use_new_orm = Rho::RHO.use_new_orm
+@use_new_orm = begin Rho::RHO.use_new_orm rescue false end
 puts "Rhom specs: use_new_orm: #{@use_new_orm}"
 
 USE_HSQLDB = !System.get_property('has_sqlite')
-USE_COPY_FILES = true
-USE_COPY_FILES = false if (defined? RHO_ME || defined? RHO_WP7 || System.get_property('platform') == 'WINDOWS')
+unless defined? USE_COPY_FILES
+  USE_COPY_FILES = true
+  USE_COPY_FILES = false if (defined? RHO_ME || defined? RHO_WP7 || System.get_property('platform') == 'WINDOWS')
+end
 puts "USE_COPY_FILES: #{USE_COPY_FILES}" # => false
 
 class Test_Helper
@@ -119,9 +121,9 @@ describe "Rhom::RhomObject" do
   it "should retrieve an object of model`" do
     results = getCase.find(:all)
 
-    puts "FIXME: should retrieve an object of model "
-    puts getCase.inspect
-    puts results.inspect
+    # puts "FIXME: should retrieve an object of model "
+    # puts getCase.inspect
+    # puts results.inspect
 
     results.length.should == 1 # *** FAIL: Rhom::RhomObject - Expected 3 to equal 1
     #
@@ -162,7 +164,7 @@ if !defined?(RHO_WP7)
       bExc = false
       getAccount.find(nil)
     rescue Exception => e
-      puts "Exception thrown: #{e}"
+      # puts "Exception thrown: #{e}"
       bExc = e.is_a?(::Rhom::RecordNotFound) # *** FAIL: Rhom::RhomObject - uninitialized constant Rhom::RecordNotFound
     end
     bExc.should == true

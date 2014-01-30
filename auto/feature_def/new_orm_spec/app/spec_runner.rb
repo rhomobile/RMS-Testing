@@ -9,14 +9,13 @@ class SpecRunner < MSpecScript
     MSpec.backtrace = true
 
     config[:files] << "spec/spec_helper"
-    # config[:files] << [ "spec/rhom_model_spec",
-    #   [ {:schema_model=>true, :sync_model=>true},  {:schema_model=>true, :sync_model=>false},
-    #     {:schema_model=>false, :sync_model=>true} , {:schema_model=>false, :sync_model=>false} ]
-    # ]
+    config[:files] << [ "spec/rhom_model_spec",
+      [ {:schema_model=>true, :sync_model=>true},  {:schema_model=>true, :sync_model=>false},
+        {:schema_model=>false, :sync_model=>true} , {:schema_model=>false, :sync_model=>false} ]
+    ]
 
     # Testing for property bag / no sync
-    config[:files] << ["spec/rhom_object_spec", [{:schema_model=>false, :sync_model=>false}]]
-
+    # config[:files] << ["spec/rhom_object_spec", [{:schema_model=>false, :sync_model=>false}]]
     # Testing for fixed schema / no sync
     # config[:files] << ["spec/rhom_object_spec", [{:schema_model=>true, :sync_model=>false}]]
 
@@ -24,11 +23,11 @@ class SpecRunner < MSpecScript
     # Testing for fixed schema / no sync
     # Testing for property bag / sync
     # Testing for property bag / no sync
-    # config[:files] << [ "spec/rhom_object_spec",
-    #     [ {:schema_model=>true, :sync_model=>true},  {:schema_model=>true, :sync_model=>false},
-    #       {:schema_model=>false, :sync_model=>true} , {:schema_model=>false, :sync_model=>false} ] ]
+    config[:files] << [ "spec/rhom_object_spec",
+        [ {:schema_model=>true, :sync_model=>true},  {:schema_model=>true, :sync_model=>false},
+          {:schema_model=>false, :sync_model=>true} , {:schema_model=>false, :sync_model=>false} ] ]
 
-    # config[:files] << "spec/rhom_spec"
+    config[:files] << "spec/rhom_spec"
   end
 
   def run
@@ -46,11 +45,7 @@ class SpecRunner < MSpecScript
       res = Rho::Network.post(postProps)
       puts "Post #{File.basename(results_path)} to local server. Status: #{res['status']}"
     end
-    MSpec.exit_code
 
-    sleep(2)
-    # End marker to nofity rake spec runner that all done
-    puts "MSpec runner is finished"
-    Rho::System.exit
+    MSpec.exit_code
   end
 end

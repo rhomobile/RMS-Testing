@@ -5,8 +5,8 @@ class SpecRunnerController < Rho::RhoController
 
   #GET /SpecRunner
   def index
-    GC.enable() unless System::get_property('platform') == 'Blackberry'  
-    
+    GC.enable() unless System::get_property('platform') == 'Blackberry'
+
     @msg = 'MSpec version: '+MSpec::VERSION
     @runner = SpecRunner.new
     @code = @runner.run
@@ -14,11 +14,15 @@ class SpecRunnerController < Rho::RhoController
     @count = MSpec.count
     @is_network_available = MSpec.is_network_available
     @errorMessages = MSpec.errorMessages
-    
+
     puts "***Total:  " + @count.to_s
     puts "***Passed: " + (@count - @exc_count).to_s
     puts "***Failed: " + @exc_count.to_s
-    #Process.exit
+    puts "MSpec exit code: #{@code}"
+
+    # End marker to nofity rake spec runner that all done
+    puts "MSpec runner stopped."
+
     render
   end
 end

@@ -1,6 +1,5 @@
 describe "Rhom" do
-  @use_new_orm = false
-  @use_new_orm = Rho::RHO.use_new_orm
+  @use_new_orm = begin Rho::RHO.use_new_orm rescue false end
   puts "Rhom specs: use_new_orm: #{@use_new_orm}"
 
   before(:each) do
