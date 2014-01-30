@@ -46,8 +46,11 @@ class SpecRunner < MSpecScript
       res = Rho::Network.post(postProps)
       puts "Post #{File.basename(results_path)} to local server. Status: #{res['status']}"
     end
-
     MSpec.exit_code
-    System.exit
+
+    sleep(2)
+    # End marker to nofity rake spec runner that all done
+    puts "MSpec runner is finished"
+    Rho::System.exit
   end
 end
