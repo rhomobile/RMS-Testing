@@ -300,7 +300,7 @@ describe('Printer Zebra', function() {
                         searchVals['connectionType'] = $('#dev_conn_type').val();
                     }
                     if (searchParamaters['timeout']) {
-                        searchVals['timeout'] = 5000;
+                        searchVals['timeout'] = 30000;
                     }
                     if (searchParamaters['devicePort']) {
                         searchVals['devicePort'] = $('#dev_port').val();
@@ -322,7 +322,7 @@ describe('Printer Zebra', function() {
 
                 waitsFor(function() {
                     return discovery_finished;
-                }, '20sec waiting for Search printer', 20000);
+                }, '20sec waiting for Search printer', 35000);
 
                 runs(function() {
                     displaySearchResults(searchVals, printers_array, printers_errors);
@@ -382,7 +382,7 @@ describe('Printer Zebra', function() {
 
             waitsFor(function() {
                 return discovery_finished;
-            }, '20sec waiting for Search printer', 7000);
+            }, '20sec waiting for Search printer', 30000);
 
             runs(function() {
                 displaySearchResults(searchVals, printers_array, printers_errors);
@@ -1039,7 +1039,7 @@ describe('Printer Zebra', function() {
 						return enumCb !== null;
 				}, 'Timed out waiting for testing callback', 2000);
 				runs(function() {
-						expect(enumCb).toContain([Rho.PrinterZebra.PRINTER_LANGUAGE_ZPL, Rho.PrinterZebra.PRINTER_LANGUAGE_CPCL, Rho.PrinterZebra.PRINTER_LANGUAGE_EPS]);
+						expect(enumCb).toContain([Rho.PrinterZebra.PRINTER_LANGUAGE_ZPL, Rho.PrinterZebra.PRINTER_LANGUAGE_CPCL]);
 				});
 		});
   });
