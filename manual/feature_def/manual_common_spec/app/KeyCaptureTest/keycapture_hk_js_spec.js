@@ -188,8 +188,8 @@ describe("KeyCapture Test", function() {
 				});
 
 			});
-
-			it("VT289-007 | set homeKeyValue to trigger key |", function() {
+//trigger key can not bet set as Homekey
+			xit("VT289-007 | set homeKeyValue to trigger key |", function() {
 
 				runs(function()
 				{
@@ -220,7 +220,7 @@ describe("KeyCapture Test", function() {
 				{
 					setObjective("VT289-008 | set homeKeyValue to null");
 					setInstruction("press enter key and check for application navigate");
-					setExpected("Application should navigate to Homepage of application after Pressing the enter key ");
+					setExpected("Application should navigate to Homepage of application after Pressing the enter key");
 					Rho.KeyCapture.homeKeyValue = '0x0D';
 					Rho.KeyCapture.homeKeyValue = '';
 				});
@@ -242,9 +242,9 @@ describe("KeyCapture Test", function() {
 
 				runs(function()
 				{
-					setObjective("VT289-009 | set homeKeyValue to 1 and 2");
+					setObjective("VT289-009 | set homeKeyValue to 1 and then 2");
 					setInstruction("press 1 and 2 key and check for application navigate");
-					setExpected("Application should navigate to Homepage of application after Pressing the numeric key 1 and 2 ");
+					setExpected("Application should navigate to Homepage of application after Pressing the numeric key 2 only ");
 					Rho.KeyCapture.homeKeyValue = '0x31';
 					Rho.KeyCapture.homeKeyValue = '0x32';
 				});
@@ -286,8 +286,8 @@ describe("KeyCapture Test", function() {
 				});
 
 			});
-
-			it("VT289-034 | call captureTrigger after setting homeKeyValue |", function() {
+////trigger key can not bet set as Homekey
+			xit("VT289-034 | call captureTrigger after setting homeKeyValue |", function() {
 
 				runs(function()
 				{
