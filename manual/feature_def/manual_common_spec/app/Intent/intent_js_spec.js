@@ -423,12 +423,12 @@ describe('Intent_UseCases Functionality Test', function () {
     }
     if(isApplePlatform()){
         it('appName - Launch iOS application via \'appName\' (BundleURLScheme) from test application.', function () {
-            displayObjective('appName - Launch iOS application via \'appName\' (BundleURLScheme) from test application.');
-            dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":Rho.Intent.START_ACTIVITY,"action":"","categories":"","appName":"ios bundle url","targetClass":"","uri":"","mimeType":"","data":""}}');
+            displayObjective('appName - Launch iOS application via \'testapp\' (BundleURLScheme) from test application.');
+            dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":Rho.Intent.START_ACTIVITY,"action":"","categories":"","testapp":"ios bundle url","targetClass":"","uri":"","mimeType":"","data":""}}');
             dispExpectedResult('iOS application should be launched whose bundleUrlScheme matches.');
             _result.waitToRunTest();
             runs(function () {
-                var params = new parameters(Rho.Intent.START_ACTIVITY,"","","ios app url","","","","");
+                var params = new parameters(Rho.Intent.START_ACTIVITY,"","","testapp","","","","");
                 Rho.Intent.send(params);
             });
             _result.waitForResponse();
