@@ -10,7 +10,7 @@ public class BroadCastReceiver extends BroadcastReceiver {
 	@Override
 	public void onReceive(Context context, Intent intent) {
 		String testData = "";
-		testData = intent.getStringExtra("MyData");
+		testData = intent.getStringExtra("myData");
 		Toast toast = Toast.makeText(context, testData + " - Toast from Target Application", Toast.LENGTH_SHORT);
 		toast.show();
 	}
