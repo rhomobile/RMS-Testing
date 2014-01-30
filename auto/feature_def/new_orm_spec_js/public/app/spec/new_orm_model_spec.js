@@ -31,18 +31,14 @@ describe("New ORM Model Specs", function() {
   }
 
   var reset = function() {
-    console.log('loading partitions... ' + Rho.ORM + ' ' + Rho.ORMHelper);
     var partitions = Rho.ORM.getDbPartitions();
-    console.log('loaded partitions...');
     $.each(partitions, function(index, db2) {
-      console.log('each partition: ' + JSON.stringify(db2));
       db2.executeSql("DELETE FROM SOURCES");
       db2.executeSql("DELETE FROM OBJECT_VALUES");
       db2.executeSql("DELETE FROM CHANGED_VALUES");
       if(db2.isTableExist("Product")){
         db2.executeSql("DROP TABLE Product");
       }
-      console.log('finished each partition: ' + JSON.stringify(db2));
     });
   };
 
@@ -94,9 +90,10 @@ describe("New ORM Model Specs", function() {
     //       "sync_type":"incremental","token":""
     //     }
     //  }]
-    expect(res[0].map.name).toEqual('Product');
-    expect(res[0].map.sync_type).toEqual('incremental');
-    expect(res[0].map.partition).toEqual('user');
+    console.log("we have here  + " + JSON.stringify(res));
+    expect(res[0].name).toEqual('Product');
+    expect(res[0].sync_type).toEqual('incremental');
+    expect(res[0].partition).toEqual('user');
   });
 
   it('Get a model by its name after it has been added', function() {
@@ -109,7 +106,7 @@ describe("New ORM Model Specs", function() {
       expect(p.partition).toEqual('user');
 
       // default values of other properties
-      expect(p.loaded).toBe(false); // FIXME: correct?
+      expect(p.loaded).toBe(true); // FIXME: correct?
       expect(p.sync_priority).toEqual(1000);
       expect(p.source_id).toBeGreaterThan(0);
       expect(p.fixed_schema).toBe(true);

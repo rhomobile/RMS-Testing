@@ -43,7 +43,7 @@ var arr_sig_property = [
 	testName		:	"VT299-1006 | Set border :true| true",
 	propertyName	:	"border",
 	sigTypes		:	"show",
-	OSTypes			:	"All",
+	OSTypes			:	"ANDROID WM",
 	propertyValue	:	"true",
 	expectedResult	:	true
 },
@@ -67,7 +67,7 @@ var arr_sig_property = [
 	testName		:	"VT299-1009 | Set compressionFormat :bmp| bmp",
 	propertyName	:	"compressionFormat",
 	sigTypes		:	"All",
-	OSTypes			:	"All",
+	OSTypes			:	"ANDROID WM",
 	propertyValue	:	"bmp",
 	expectedResult	:	"bmp"
 },
@@ -243,7 +243,7 @@ var arr_sig_property = [
 	testName		:	"VT299-1031 | Set outputFormat :dataUri| dataUri",
 	propertyName	:	"outputFormat",
 	sigTypes		:	"All",
-	OSTypes			:	"All",
+	OSTypes			:	"ANDROID WM",
 	propertyValue	:	"dataUri",
 	expectedResult	:	"dataUri"
 },

@@ -1,6 +1,6 @@
 describe("Cardreader JS API", function() {
 	
-	if(!(Rho.System.platform == "ANDROID" && (Rho.System.deviceName.indexOf('Motorola Solutions') == 0 && Rho.System.oemInfo != 'TC55')))
+	if(Rho.System.platform == "ANDROID" && Rho.System.oemInfo == 'TC55')
 	{
 		describe("Rho.CardReader not available on this device", function() {
 			it("does nothing", function() {
