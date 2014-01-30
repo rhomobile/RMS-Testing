@@ -65,16 +65,22 @@ describe('Intent_UseCases Functionality Test', function () {
             });
             _result.waitForResponse();
         });
-        xit('intentType - StartActivity: Try to launch target appilcation by \'packageName\', which is not installed.', function () {
-            displayObjective("intentType - StartActivity: Try to launch target appilcation by \'packageName\', which is not installed.");
+        it('Start activity of absent application should raise exception', function () {
+            /*displayObjective("intentType - StartActivity: Try to launch target appilcation by \'packageName\', which is not installed.");
             dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":Rho.Intent.START_ACTIVITY,"action":"ACTION_MAIN","categories":"","appName":"com.notInstalled","targetClass":"","uri":"","mimeType":"","data":""}}');
             dispExpectedResult('No effect, No crash should be seen in the test application.');
             _result.waitToRunTest();
             runs(function () {
-                var params = new parameters(Rho.Intent.START_ACTIVITY,"ACTION_MAIN","","com.notInstalled","","","","");
-                Rho.Intent.send(params);
+
             });
-            _result.waitForResponse();
+            _result.waitForResponse();*/
+            //var params = new parameters(Rho.Intent.START_ACTIVITY,"ACTION_MAIN","","com.notInstalled","","","","");
+
+            var parameters = {intentType: Rho.Intent.START_ACTIVITY, action: 'ACTION_MAIN', appName: 'com.notInstalled'}
+            expect(function () {
+                Rho.Intent.send(parameters)
+            }).toThrow();
+
         });
         it('intentType - StartActivity: Launch target application by \'className\',which is installed but not running.', function () {
             displayObjective("intentType - StartActivity: Launch target application by \'className\',which is installed but not running.");
@@ -102,16 +108,24 @@ describe('Intent_UseCases Functionality Test', function () {
             });
             _result.waitForResponse();
         });
-        xit('intentType - StartActivity: Try to launch target appilcation by \'className\', which is not installed.', function () {
+        it('intentType - StartActivity: Try to launch target appilcation by \'className\', which is not installed.', function () {
+            /*
             displayObjective("intentType - StartActivity: Try to launch target appilcation by \'className\', which is not installed.");
             dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":Rho.Intent.START_ACTIVITY,"action":"ACTION_MAIN","categories":"","appName":"com.notinstalled","targetClass":"MainActivity","uri":"","mimeType":"","data":""}}');
             dispExpectedResult('No effect, No crash should be seen in the test application.');
             _result.waitToRunTest();
             runs(function () {
-                var params = new parameters(Rho.Intent.START_ACTIVITY,"ACTION_MAIN","","com.smap.targetapp","dummyClass","","","");
+                var params = new parameters(Rho.Intent.START_ACTIVITY, "ACTION_MAIN", "", "com.smap.targetapp", "dummyClass", "", "", "");
                 Rho.Intent.send(params);
-            });
+                });
             _result.waitForResponse();
+            */
+
+            var parameters = {intentType: Rho.Intent.START_ACTIVITY, action: 'ACTION_MAIN', appName: 'com.notInstalled', targetClass: 'dummyClass'}
+            expect(function () {
+                Rho.Intent.send(parameters)
+            }).toThrow();
+
         });
         xit('intentType - Start service of the test appliation.', function () {
             displayObjective("intentType - Start service of the test appliation.");
@@ -158,6 +172,7 @@ describe('Intent_UseCases Functionality Test', function () {
             });
             _result.waitForResponse();
         });
+
         it('intentType - Start service of the target applciation in which the service is already instantiated', function () {
             displayObjective("intentType - Start service of the target applciation in which the service is already instantiated");
             var preConditions = ["Ensure Target application installed in the device"];
@@ -373,7 +388,7 @@ describe('Intent_UseCases Functionality Test', function () {
         _result.waitForResponse();
     });
     xit('mimeType - Launch Image viewer from test app by setting uri to "image data URI"', function () {
-        displayObjective('mimeType - Launch Image viewer from test app by setting mimeType "image/* (jpeg, gif, png etc.,)" and Data to "image data URI"');
+        displayObjective('mimeType - Launch Image viewer from test app by setting mimeType "image (jpeg, gif, png etc.,)" and Data to "image data URI"');
         dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":Rho.Intent.START_ACTIVITY,"action":"","categories":"","appName":"","targetClass":"","uri":"","mimeType":"image/jpeg","data":"<data:image/jpeg;base64,/qerwe.... >"}}');
         dispExpectedResult('Image viewer should be launched successfully.');
         _result.waitToRunTest();
@@ -397,7 +412,8 @@ describe('Intent_UseCases Functionality Test', function () {
             _result.waitForResponse();
         });
     }
-    xit('appName - Try to Launch non-existing Application via \'appName\' from test application.', function () {
+    it('appName - Try to Launch non-existing Application via \'appName\' from test application.', function () {
+/*
         displayObjective('appName - Try to Launch non-existing Application via \'appName\' from test application.');
         dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":Rho.Intent.START_ACTIVITY,"action":"","categories":"","appName":"nonExistingApp","targetClass":"","uri":"","mimeType":"","data":""}}');
         dispExpectedResult('No effect and no crash should be seen.');
@@ -407,7 +423,14 @@ describe('Intent_UseCases Functionality Test', function () {
             Rho.Intent.send(params);
         });
         _result.waitForResponse();
+*/
+
+        var parameters = {intentType: Rho.Intent.START_ACTIVITY, action: 'ACTION_MAIN', appName: 'nonExistingApp'}
+        expect(function () {
+            Rho.Intent.send(parameters)
+        }).toThrow();
     });
+
     if(isAndroidPlatform()){
         it('appName - Launch Android application via \'appName\' (packageName) from test application.', function () {
             displayObjective('appName - Launch Android application via \'appName\' (packageName) from test application.');
@@ -580,7 +603,7 @@ describe('Intent_UseCases Functionality Test', function () {
             _result.waitToRunTest();
             runs(function () {
                 var enterData = {"EXTRA_TEXT":"Test case passed only if this is displayed in message body with prefille recepient number !"};
-                var params = new parameters(Rho.Intent.START_ACTIVITY,"ACTION_SEND","","","","content://sms","",data);
+                var params = new parameters(Rho.Intent.START_ACTIVITY,"ACTION_SEND","","","","content://sms","", enterData);
                 Rho.Intent.send(params);
             });
             _result.waitForResponse();
@@ -782,7 +805,8 @@ describe('Intent_UseCases Functionality Test', function () {
     });    
 
     // Negative test case:
-    it('Sending Intent with null parameter', function(){
+    it('Sending Intent with null parameter should raise error', function(){
+/*
         displayObjective('Sending Intent with null parameter');
         dispTestCaseRunning('No parameters passed to the Rho.Intent.send() API');
         dispExpectedResult('No Effect or no crash should be seen in the test application');
@@ -791,9 +815,15 @@ describe('Intent_UseCases Functionality Test', function () {
             Rho.Intent.send();
         })
         _result.waitForResponse();
+*/
+
+        expect(function () {
+            Rho.Intent.send()
+        }).toThrow();
+
     });
-    it('Sending Intent with intentparameter Object with null values', function(){
-        displayObjective('Sending Intent with intent parameter Object with null values');
+    it('Sending Intent with intent parameter Object with null values should raises error', function(){
+/*        displayObjective('Sending Intent with intent parameter Object with null values');
         dispTestCaseRunning('Sending intent with null intent parameter object');
         dispExpectedResult('No effect or crash should be seen at the test application.');
         _result.waitToRunTest();
@@ -812,10 +842,23 @@ describe('Intent_UseCases Functionality Test', function () {
             };
             Rho.Intent.send(params);
         });
-        _result.waitForResponse();
+        _result.waitForResponse();*/
+
+        var parameters = {
+            intentType: null,
+            action: null,
+            categories: null,
+            appName: null,
+            targetClass: null,
+            uri: null,
+            mimeType: null,
+            data: null}
+        expect(function () {
+            Rho.Intent.send(parameters)
+        }).toThrow();
     });
-    it('Sending Intent with callback which does not handle the intent parameter', function(){
-        displayObjective('Sending Intent with callback which does not handle the intent parameter');
+    it('Sending Intent with callback which does\'n handle the input argument shouldn\'t raise error', function(){
+/*        displayObjective('Sending Intent with callback which does not handle the intent parameter');
         dispTestCaseRunning('Sending intent with callback which has empty argument');
         dispExpectedResult('No effect or crash should be seen in the test applciation.');
         _result.waitToRunTest();
@@ -826,10 +869,24 @@ describe('Intent_UseCases Functionality Test', function () {
             var params = new parameters(Rho.Intent.START_ACTIVITY,"ACTION_MAIN","","com.smap.targetapp","","","","");
             Rho.Intent.send(params, successCB);
         });
-        _result.waitForResponse();
+        _result.waitForResponse();*/
+
+        var parameters = {
+            intentType: null,
+            action: null,
+            categories: null,
+            appName: null,
+            targetClass: null,
+            uri: null,
+            mimeType: null,
+            data: null}
+        expect(function () {
+            Rho.Intent.send(parameters, function(){})
+        }).not.toThrow();
+
     });
     it('Sending Intent with variable in place of callback function', function(){
-        displayObjective('Sending Intent with variable in place of callback function');
+/*        displayObjective('Sending Intent with variable in place of callback function');
         dispTestCaseRunning('Sending intent with string variable as a callback parameter');
         dispExpectedResult('No effect or crash should be seen in the test applciation.');
         _result.waitToRunTest();
@@ -838,10 +895,17 @@ describe('Intent_UseCases Functionality Test', function () {
             var params = new parameters(Rho.Intent.START_ACTIVITY,"ACTION_MAIN","","com.smap.targetapp","","","","");
             Rho.Intent.send(params, successCB);
         });
-        _result.waitForResponse();
+        _result.waitForResponse();*/
+
+        var parameters = { intentType: Rho.Intent.START_ACTIVITY, action: 'ACTION_MAIN', appName: 'com.smap.targetapp' };
+        var successCB = "This is not a call back function!";
+        expect(function () {
+            Rho.Intent.send(parameters, successCB);
+        }).toThrow();
+
     });
     it('Sending Intent with null in place of callback function', function(){
-        displayObjective('Sending Intent with null in place of callback function');
+/*        displayObjective('Sending Intent with null in place of callback function');
         dispTestCaseRunning('Sending intent with NULL value as a callback parameter');
         dispExpectedResult('No effect or crash should be seen in the test applciation.');
         _result.waitToRunTest();
@@ -850,8 +914,14 @@ describe('Intent_UseCases Functionality Test', function () {
             var params = new parameters(Rho.Intent.START_ACTIVITY,"ACTION_MAIN","","com.smap.targetapp","","","","");
             Rho.Intent.send(params, null);
         });
-        _result.waitForResponse();
+        _result.waitForResponse();*/
+
+        var parameters = { intentType: Rho.Intent.START_ACTIVITY, action: 'ACTION_MAIN', appName: 'com.smap.targetapp' };
+        expect(function () {
+            Rho.Intent.send(parameters, null);
+        }).toThrow();
     });
+
      xit('Stop Listening to the background intents with empty callback', function () {
         displayObjective('Stop Listening to the background intents with empty callback');
         dispTestCaseRunning('Executing stopListening method without callback function !');
