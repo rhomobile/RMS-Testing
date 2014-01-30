@@ -1,4 +1,6 @@
 describe('Signature specs', function () {
+    var defaultBorderValue = Rho.System.platform != 'APPLE';
+
     var preservedProperties;
     var getPropertiesData
     var getPropertyData;
@@ -77,8 +79,8 @@ describe('Signature specs', function () {
         expect(Rho.Signature.penWidth).toEqual(3);
     });
 
-    it("Default value of border should be true", function () {
-        expect(Rho.Signature.border).toEqual(true);
+    it("Default value of border should be " + defaultBorderValue, function () {
+        expect(Rho.Signature.border).toEqual(defaultBorderValue);
     });
 
     it("Default value of height should be 150", function () {
@@ -117,7 +119,7 @@ describe('Signature specs', function () {
 
             runs(function () {
                 expect(Rho.Signature.bgColor).toEqual('#FF0000');
-                expect(Rho.Signature.border).toEqual(true);
+                expect(Rho.Signature.border).toEqual(defaultBorderValue);
                 expect(Rho.Signature.penWidth).toEqual(20);
             });
         });
@@ -135,7 +137,7 @@ describe('Signature specs', function () {
 
             runs(function () {
                 expect(Rho.Signature.bgColor).toEqual('#FF0000');
-                expect(Rho.Signature.border).toEqual(true);
+                expect(Rho.Signature.border).toEqual(defaultBorderValue);
                 expect(Rho.Signature.penWidth).toEqual(1);
             });
         });
@@ -180,7 +182,7 @@ describe('Signature specs', function () {
                 expect(Rho.Signature.outputFormat).toEqual('image');
                 expect(Rho.Signature.penColor).toEqual('#FF000000');
                 expect(Rho.Signature.penWidth).toEqual(3);
-                expect(Rho.Signature.border).toEqual(true);
+                expect(Rho.Signature.border).toEqual(defaultBorderValue);
                 expect(Rho.Signature.height).toEqual(150);
                 expect(Rho.Signature.left).toEqual(15);
                 expect(Rho.Signature.top).toEqual(60);
