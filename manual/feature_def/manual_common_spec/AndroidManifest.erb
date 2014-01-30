@@ -66,6 +66,13 @@
       <grant-uri-permission android:pathPrefix='/rhodes/apps/'/>
     </provider>
 
+    <receiver android:name='com.rho.intent.IntentReceiver'>
+      <intent-filter>
+        <action android:name="com.rhomobile.BROADCAST" />
+        <category android:name="<%=@appPackageName%>" />
+      </intent-filter>
+    </receiver>
+
     <!-- application tag addon templates from extensions -->
     <% @applicationManifestAdds.each do |extAdd| %>
       <%=render extAdd%>

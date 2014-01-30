@@ -66,14 +66,14 @@ describe('Intent_UseCases Functionality Test', function () {
             _result.waitForResponse();
         });
         it('Start activity of absent application should raise exception', function () {
-            /*displayObjective("intentType - StartActivity: Try to launch target appilcation by \'packageName\', which is not installed.");
-            dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":Rho.Intent.START_ACTIVITY,"action":"ACTION_MAIN","categories":"","appName":"com.notInstalled","targetClass":"","uri":"","mimeType":"","data":""}}');
-            dispExpectedResult('No effect, No crash should be seen in the test application.');
-            _result.waitToRunTest();
-            runs(function () {
-
-            });
-            _result.waitForResponse();*/
+            //displayObjective("intentType - StartActivity: Try to launch target appilcation by \'packageName\', which is not installed.");
+            //dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":Rho.Intent.START_ACTIVITY,"action":"ACTION_MAIN","categories":"","appName":"com.notInstalled","targetClass":"","uri":"","mimeType":"","data":""}}');
+            //dispExpectedResult('No effect, No crash should be seen in the test application.');
+            //_result.waitToRunTest();
+            //runs(function () {
+            //
+            //});
+            //_result.waitForResponse();
             //var params = new parameters(Rho.Intent.START_ACTIVITY,"ACTION_MAIN","","com.notInstalled","","","","");
 
             var parameters = {intentType: Rho.Intent.START_ACTIVITY, action: 'ACTION_MAIN', appName: 'com.notInstalled'}
@@ -109,17 +109,15 @@ describe('Intent_UseCases Functionality Test', function () {
             _result.waitForResponse();
         });
         it('intentType - StartActivity: Try to launch target appilcation by \'className\', which is not installed.', function () {
-            /*
-            displayObjective("intentType - StartActivity: Try to launch target appilcation by \'className\', which is not installed.");
-            dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":Rho.Intent.START_ACTIVITY,"action":"ACTION_MAIN","categories":"","appName":"com.notinstalled","targetClass":"MainActivity","uri":"","mimeType":"","data":""}}');
-            dispExpectedResult('No effect, No crash should be seen in the test application.');
-            _result.waitToRunTest();
-            runs(function () {
-                var params = new parameters(Rho.Intent.START_ACTIVITY, "ACTION_MAIN", "", "com.smap.targetapp", "dummyClass", "", "", "");
-                Rho.Intent.send(params);
-                });
-            _result.waitForResponse();
-            */
+            //displayObjective("intentType - StartActivity: Try to launch target appilcation by \'className\', which is not installed.");
+            //dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":Rho.Intent.START_ACTIVITY,"action":"ACTION_MAIN","categories":"","appName":"com.notinstalled","targetClass":"MainActivity","uri":"","mimeType":"","data":""}}');
+            //dispExpectedResult('No effect, No crash should be seen in the test application.');
+            //_result.waitToRunTest();
+            //runs(function () {
+            //    var params = new parameters(Rho.Intent.START_ACTIVITY, "ACTION_MAIN", "", "com.smap.targetapp", "dummyClass", "", "", "");
+            //    Rho.Intent.send(params);
+            //    });
+            //_result.waitForResponse();
 
             var parameters = {intentType: Rho.Intent.START_ACTIVITY, action: 'ACTION_MAIN', appName: 'com.notInstalled', targetClass: 'dummyClass'}
             expect(function () {
@@ -127,22 +125,23 @@ describe('Intent_UseCases Functionality Test', function () {
             }).toThrow();
 
         });
-        xit('intentType - Start service of the test appliation.', function () {
+        it('intentType - Start service of the test appliation.', function () {
             displayObjective("intentType - Start service of the test appliation.");
-            dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":Rho.Intent.START_SERVICE,"action":"","categories":"","appName":"testApp","targetClass":"com.rhomobile.rhodes.RhodesService","uri":"","mimeType":"","data":""}}');
-            dispExpectedResult('Service of test application should be started successfully.');
+            dispTestCaseRunning('Sending Intent with parameters {"intentType":Rho.Intent.START_SERVICE,"appName":"manual_common_spec","targetClass":"RhodesService"}');
+            dispExpectedResult('Service of test application should be started and toast from service is shown.');
             _result.waitToRunTest();
             runs(function () {
-                var mytestapp = Rho.Application.appName;
-                var params = new parameters(Rho.Intent.START_SERVICE,"","",mytestapp,"com.rhomobile.rhodes.RhodesService","","","");
-                var intentCB = function(intents){
-                    if(params == intents){
+                var mytestapp = 'com.rhomobile.manual_common_spec';
+                var params = new parameters(Rho.Intent.START_SERVICE,"","",mytestapp,"com.rhomobile.rhodes.RhodesService","","",{"message":"Message to service"});
+                var intentCB = function(intent){
+                    if(intent.data.message == "Message to service"){
                         alert("Test case passed!");
                     } else {
                         alert("Test case failed!");
                     }
                 };
-                Rho.Intent.send(params, intentCB);
+                Rho.Intent.startListening(intentCB);
+                Rho.Intent.send(params);
             });
             _result.waitForResponse();
         });
@@ -150,7 +149,7 @@ describe('Intent_UseCases Functionality Test', function () {
             displayObjective("intentType - Start service of the target appliation.");
             var preConditions = ["Ensure Target application installed in the device","Ensure Target application is running in background"];
             displayPrecondition(preConditions);
-            dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":Rho.Intent.START_SERVICE,"action":"","categories":"","appName":"com.smap.targetapp","targetClass":"MyFirstService","uri":"","mimeType":"","data":""}}');
+            dispTestCaseRunning('Sending Intent with parameters {"intentType":Rho.Intent.START_SERVICE, "appName":"com.smap.targetapp", "targetClass":"MyFirstService"}');
             dispExpectedResult('Service of target applciation should be started successfully.');
             _result.waitToRunTest();
             runs(function () {
@@ -163,7 +162,7 @@ describe('Intent_UseCases Functionality Test', function () {
             displayObjective("intentType - Start service of the target application which is not running.");
             var preConditions = ["Ensure Target application installed in the device","Ensure that Target appliation is not running."];
             displayPrecondition(preConditions);
-            dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":Rho.Intent.START_SERVICE,"action":"","categories":"","appName":"com.smap.targetapp","targetClass":"MyFirstService","uri":"","mimeType":"","data":""}}');
+            dispTestCaseRunning('Sending Intent with parameters {"intentType":Rho.Intent.START_SERVICE, "appName":"com.smap.targetapp", "targetClass":"MyFirstService"}');
             dispExpectedResult('Service of the target applciation should be started successfully.');
             _result.waitToRunTest();
             runs(function () {
@@ -177,7 +176,7 @@ describe('Intent_UseCases Functionality Test', function () {
             displayObjective("intentType - Start service of the target applciation in which the service is already instantiated");
             var preConditions = ["Ensure Target application installed in the device"];
             displayPrecondition(preConditions);
-            dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":Rho.Intent.START_SERVICE,"action":"","categories":"","appName":"com.smap.targetapp","targetClass":"MyFirstService","uri":"","mimeType":"","data":""}}');
+            dispTestCaseRunning('Sending Intent two times with parameters {"intentType":Rho.Intent.START_SERVICE, "appName":"com.smap.targetapp", "targetClass":"MyFirstService"}');
             dispExpectedResult('No crash should be seen in the test application or target appliation, since the service is already instantiated');
             _result.waitToRunTest();
             runs(function () {
@@ -187,56 +186,51 @@ describe('Intent_UseCases Functionality Test', function () {
             });
             _result.waitForResponse();
         });
-        it('intentType - Broadcast data from test app and receive at test app.', function () {
-            displayObjective("intentType - Broadcast data from test app and receive at test app.");
-            dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":Rho.Intent.BROADCAST,"action":"com.smap.targetapp.mySecondAction","categories":"","appName":"","targetClass":"","uri":"","mimeType":"","data":{"myData":"This is my broadcast data!"}}}');
-            dispExpectedResult('Broadcast should be successful.');
+        it('intentType - Broadcast data from test app and receive at target app.', function () {
+            displayObjective("intentType - Broadcast data from test app and receive at target app.");
+            var preConditions = ["Ensure Target application installed in the device"];
+            displayPrecondition(preConditions);
+            dispTestCaseRunning('Sending Intent with parameters {"intentType":Rho.Intent.BROADCAST, "action":"com.smap.targetapp.mySecondAction", "data":{"toast":"Target -Test case passed If you see this in Andorid Toast !"}}');
+            dispExpectedResult('Broadcast should be successful and toast from testApp is displayed.');
             _result.waitToRunTest();
             runs(function () {
                 var data = {
-                    "myData":"This is my broadcast data!"
+                    "toast":"Target - Test case passed if you see this in Android Toast !"
                 };
-                var listeningCB = function(intents){
-                    if(intents.data.myData = "This is my broadcast data!"){
+                var params = new parameters(Rho.Intent.BROADCAST,"com.smap.targetapp.mySecondAction","","","","","",data);
+                Rho.Intent.send(params);
+            });
+            _result.waitForResponse();
+        });
+        it('intentType - Broadcast data from test app and receive back at test app.', function () {
+            displayObjective("intentType - Broadcast data from test app and receive at test app.");
+            dispTestCaseRunning('Sending Intent with parameters {"intentType":Rho.Intent.BROADCAST, "action":"com.smap.targetapp.mySecondAction", "data":{"reply":"This is my broadcast data!"}}');
+            dispExpectedResult('Broadcast and reply to RhodesService would be successful and alert from test app callback is displayed.');
+            _result.waitToRunTest();
+            runs(function () {
+                var listeningCB = function(intent){
+                    if(intent.data.reply == "This is my broadcast data!"){
                         alert("Test case Passed!");
                     } else {
                         alert("Test case Failed!");
                     }
                 };
-                var params = new parameters(Rho.Intent.BROADCAST,"com.smap.targetapp.mySecondAction","","","","","",data);
                 Rho.Intent.startListening(listeningCB);
+                
+                var params = new parameters(Rho.Intent.BROADCAST,"com.smap.targetapp.mySecondAction","","","","","",{"reply":"This is my broadcast data!"});
                 Rho.Intent.send(params);
             });
             _result.waitForResponse();
         });
-        xit('intentType - Broadcast data from test app and receive at target app.', function () {
-            displayObjective("intentType - Broadcast data from test app and receive at target app.");
-            var preConditions = ["Ensure Target application installed in the device"];
-            displayPrecondition(preConditions);
-            dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":Rho.Intent.BROADCAST,"action":"","categories":"","appName":"com.smap.targetapp","targetClass":"","uri":"","mimeType":"","data":{"broadCastData":"Target -Test case passed If you see this in Andorid Toast !"}}}');
-            dispExpectedResult('Broadcast should be successful.');
-            _result.waitToRunTest();
-            runs(function () {
-                var data = {
-                    "broadCastData":"Target - Test case passed if you see this in Android Toast !"
-                };
-                var params = new parameters(Rho.Intent.BROADCAST,"com.smap.targetapp.mySecondAction","","","","","",data);
-                Rho.Intent.send(params);
-            });
-            _result.waitForResponse();
-        });
-        xit('intentType - Broadcast data from test app and receive at target app, when target app is not running.', function () {
+        it('intentType - Broadcast data from test app and receive at target app, when target app is not running.', function () {
             displayObjective("intentType - Broadcast data from test app and receive at target app, when target app is not running.");
             var preConditions = ["Ensure Target application installed but not running in the device"];
             displayPrecondition(preConditions);
-            dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":Rho.Intent.BROADCAST,"action":"","categories":"","appName":"com.smap.targetapp","targetClass":"","uri":"","mimeType":"","data":{"broadCastData":"Target: Test case passed If you see this in Andorid Toast !"}}}');
+            dispTestCaseRunning('Sending Intent with parameters {"intentType":Rho.Intent.BROADCAST, "appName":"com.smap.targetapp", "data":{"toast":"Target: Test case passed If you see this in Andorid Toast !"}}');
             dispExpectedResult('Broadcast should be successful.');
             _result.waitToRunTest();
             runs(function () {
-                var data = {
-                    "broadCastData":"Target - Test case passed If you see this in Andorid Toast !"
-                }
-                var params = new parameters(Rho.Intent.BROADCAST,"com.smap.targetapp.mySecondAction","","","","","",data);
+                var params = new parameters(Rho.Intent.BROADCAST,"","","com.smap.targetapp","","","",{"toast":"Target - Test case passed If you see this in Andorid Toast !"});
                 Rho.Intent.send(params);
             });
             _result.waitForResponse();
@@ -413,17 +407,15 @@ describe('Intent_UseCases Functionality Test', function () {
         });
     }
     it('appName - Try to Launch non-existing Application via \'appName\' from test application.', function () {
-/*
-        displayObjective('appName - Try to Launch non-existing Application via \'appName\' from test application.');
-        dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":Rho.Intent.START_ACTIVITY,"action":"","categories":"","appName":"nonExistingApp","targetClass":"","uri":"","mimeType":"","data":""}}');
-        dispExpectedResult('No effect and no crash should be seen.');
-        _result.waitToRunTest();
-        runs(function () {
-            var params = new parameters(Rho.Intent.START_ACTIVITY,"","","nonExistingApp","","","","");
-            Rho.Intent.send(params);
-        });
-        _result.waitForResponse();
-*/
+        //displayObjective('appName - Try to Launch non-existing Application via \'appName\' from test application.');
+        //dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":Rho.Intent.START_ACTIVITY,"action":"","categories":"","appName":"nonExistingApp","targetClass":"","uri":"","mimeType":"","data":""}}');
+        //dispExpectedResult('No effect and no crash should be seen.');
+        //_result.waitToRunTest();
+        //runs(function () {
+        //    var params = new parameters(Rho.Intent.START_ACTIVITY,"","","nonExistingApp","","","","");
+        //    Rho.Intent.send(params);
+        //});
+        //_result.waitForResponse();
 
         var parameters = {intentType: Rho.Intent.START_ACTIVITY, action: 'ACTION_MAIN', appName: 'nonExistingApp'}
         expect(function () {
@@ -596,7 +588,7 @@ describe('Intent_UseCases Functionality Test', function () {
         _result.waitForResponse();
     });
     if(isAndroidPlatform()){
-        it('category - Launch Message application from test app by setting URI "content://sms" and data "This is message body".', function () {
+        xit('category - Launch Message application from test app by setting URI "content://sms" and data "This is message body".', function () {
             displayObjective('category - Launch Message application from test app by setting URI "content://sms" and data "This is message body".');
             dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":Rho.Intent.START_ACTIVITY,"action":"","categories":"","appName":"","targetClass":"","uri":"content://sms","mimeType":"","data":"This is SMS message body"}}');
             dispExpectedResult('Message compose screen should be launched successfully with data in it.');
@@ -608,8 +600,6 @@ describe('Intent_UseCases Functionality Test', function () {
             });
             _result.waitForResponse();
         });
-    }
-    if(isAndroidPlatform()){
         it('Callback : Send an Intent and the same intent details should be seen in the callback.', function () {
             displayObjective('Callback : Send an Intent and the same intent details should be seen in the callback.');
             var preConditions = ["Ensure Target application is installed in the device"];
@@ -622,18 +612,19 @@ describe('Intent_UseCases Functionality Test', function () {
                     "myData":"This is Test data !"
                 };
                 var params = new parameters(Rho.Intent.START_ACTIVITY,"ACTION_MAIN","","com.smap.targetapp","","","",data);
-                var successCB = function(intents){
-                    var intentParam = intents.params;
-                    console.log("intentType : "+intentParam.intentType+"</br>"+
-                    "intentType : "+intentParam.intentType+"</br>"+
-                    "action : "+intentParam.action+"</br>"+
-                    "categories : "+intentParam.categories+"</br>"+
-                    "appName : "+intentParam.appName+"</br>"+
-                    "targetClass : "+intentParam.targetClass+"</br>"+
-                    "uri : "+intentParam.uri+"</br>"+
-                    "mimeType : "+intentParam.mimeType+"</br>"+
-                    "data : "+intentParam.data.myData);
-                    if(params === intentParams){
+                var successCB = function(intent){
+                    console.log(JSON.stringify(intent))
+                    //var intentParam = intents.params;
+                    //console.log("intentType : "+intentParam.intentType+"</br>"+
+                    //"intentType : "+intentParam.intentType+"</br>"+
+                    //"action : "+intentParam.action+"</br>"+
+                    //"categories : "+intentParam.categories+"</br>"+
+                    //"appName : "+intentParam.appName+"</br>"+
+                    //"targetClass : "+intentParam.targetClass+"</br>"+
+                    //"uri : "+intentParam.uri+"</br>"+
+                    //"mimeType : "+intentParam.mimeType+"</br>"+
+                    //"data : "+intentParam.data.myData);
+                    if(intent.data.myData == "This is Test data !"){
                         alert("Test Passed !");
                     }else{
                         alert("Test Failed !");
@@ -643,179 +634,169 @@ describe('Intent_UseCases Functionality Test', function () {
             });
             _result.waitForResponse();
         });
-    }
-    xit('Start Listening to the background intents - broadcast messages (receiving broadcast messages)', function () {
-        displayObjective('Start Listening to the background intents - broadcast messages (receiving broadcast messages)');
-        dispTestCaseRunning('Test app should receive broad cast messages with the help of Start Listening API.');
-        dispExpectedResult('Test appliation starts listening to background intents and should alert the broadcast message received');
-        _result.waitToRunTest();
-        runs(function () {
-            var mytestapp = Rho.Application.appName;
-            var data = {
-                "myData":"This is broad cast data !"
-            };
-            var params = new parameters(Rho.Intent.BROADCAST,"ACTION_VIEW","",mytestapp,"","","",data);
-            var receiveCB = function(intents){
-                var receivedParam = intents.params;
-                if(receivedParam.data.myData == "This is broad cast data !")
-                {
-                    alert("Test case passed !");
-                }
-            };
-            Rho.Intent.startListening(receiveCB);
-            Rho.Intent.send(params);
-        });
-        _result.waitForResponse();
-    });
-    xit('Start Listening to the background intents - broadcast messages (receiving broadcast messages)', function () {
-        displayObjective('Start Listening to the background intents - broadcast messages (receiving broadcast messages)');
-        dispTestCaseRunning('Test app should receive broad cast messages with the help of Start Listening API.');
-        dispExpectedResult('Test appliation starts listening to background intents and should alert the broadcast message received and also should trigger callback function of the send method which alerts test case passed.');
-        _result.waitToRunTest();
-        runs(function () {
-            var mytestapp = Rho.Application.appName;
-            var data = {
-                "myData":"This is broad cast data !"
-            };
-            var params = new parameters(Rho.Intent.BROADCAST,"ACTION_VIEW","",mytestapp,"","","",data);
-            var receiveCB = function(intents){
-                var receivedParam = intents.params;
-                if(receivedParam.data.myData == "This is broad cast data !")
-                {
-                    alert("startListening Callback: fired !");
-                }
-            };
-            var successCB = function(intents){
-                    var intentParam = intents.params;
-                    console.log("intentType : "+intentParam.intentType+"</br>"+
-                    "intentType : "+intentParam.intentType+"</br>"+
-                    "action : "+intentParam.action+"</br>"+
-                    "categories : "+intentParam.categories+"</br>"+
-                    "appName : "+intentParam.appName+"</br>"+
-                    "targetClass : "+intentParam.targetClass+"</br>"+
-                    "uri : "+intentParam.uri+"</br>"+
-                    "mimeType : "+intentParam.mimeType+"</br>"+
-                    "data : "+intentParam.data.myData);
-                    if(params === intents){
-                        alert("send Callback: fired - Test Passed !");
-                    }else{
-                        alert("send Callback: fired - Test Failed !");
+        it('Start Listening to the background intents - broadcast messages (receiving broadcast messages)', function () {
+            displayObjective('Start Listening to the background intents - broadcast messages (receiving broadcast messages)');
+            dispTestCaseRunning('Test app should receive broad cast messages with the help of Start Listening API.');
+            dispExpectedResult('Test appliation starts listening to background intents and should alert the broadcast message received');
+            _result.waitToRunTest();
+            runs(function () {
+                var data = {
+                    "myData":"This is broad cast data 2!"
+                };
+                var params = new parameters(Rho.Intent.BROADCAST,"com.rhomobile.BROADCAST",["com.rhomobile.manual_common_spec"],"","","","",data);
+                var receiveCB = function(intent){
+                    if(intent.data.myData == "This is broad cast data 2!")
+                    {
+                        alert("Test case passed !");
                     }
                 };
-            Rho.Intent.startListening(receiveCB);
-            Rho.Intent.send(params, successCB);
+                Rho.Intent.startListening(receiveCB);
+                Rho.Intent.send(params);
+            });
+            _result.waitForResponse();
         });
-        _result.waitForResponse();
-    });
-    xit('Try to start listening to the background intents, when already started listenting.', function () {
-        displayObjective('Try to start listening to the background intents, when already started listenting.');
-        dispTestCaseRunning('Try to start listening to the background intents, when already started listenting.');
-        dispExpectedResult('No effect or no crash should be seen in the test application.');
-        _result.waitToRunTest();
-        runs(function () {
-            var mytestapp = Rho.Application.appName;
-            var data = {
-                "myData":"This is broad cast data !"
-            };
-            var params = new parameters(Rho.Intent.BROADCAST,"","",mytestapp,"","","",data);
-            var receiveCB = function(intents){
-                var receivedParam = intents.params;
-                if(receivedParam.data.myData == "This is broad cast data !")
-                {
-                    alert("Test case passed !");
-                }
-            };
-            Rho.Intent.startListening(receiveCB);
-            Rho.Intent.startListening(receiveCB);
-            Rho.Intent.send(params);
+        xit('Start Listening to the background intents - broadcast messages (receiving broadcast messages)', function () {
+            displayObjective('Start Listening to the background intents - broadcast messages (receiving broadcast messages)');
+            dispTestCaseRunning('Test app should receive broad cast messages with the help of Start Listening API.');
+            dispExpectedResult('Test appliation starts listening to background intents and should alert the broadcast message received and also should trigger callback function of the send method which alerts test case passed.');
+            _result.waitToRunTest();
+            runs(function () {
+                var data = {
+                    "myData":"This is broad cast data !"
+                };
+                var params = new parameters(Rho.Intent.BROADCAST,"com.rhomobile.BROADCAST",["com.rhomobile.manual_common_spec"],"","","","",data);
+                var receiveCB = function(intent){
+                    if(intent.data.myData == "This is broad cast data 3!")
+                    {
+                        alert("startListening Callback: fired !");
+                    }
+                };
+                var successCB = function(intent){
+                        console.log(JSON.stringify(intent))
+                        //var intentParam = intents.params;
+                        //console.log("intentType : "+intentParam.intentType+"</br>"+
+                        //"intentType : "+intentParam.intentType+"</br>"+
+                        //"action : "+intentParam.action+"</br>"+
+                        //"categories : "+intentParam.categories+"</br>"+
+                        //"appName : "+intentParam.appName+"</br>"+
+                        //"targetClass : "+intentParam.targetClass+"</br>"+
+                        //"uri : "+intentParam.uri+"</br>"+
+                        //"mimeType : "+intentParam.mimeType+"</br>"+
+                        //"data : "+intentParam.data.myData);
+                        if(intent.data.myData == "This is broad cast data 3!"){
+                            alert("send Callback: fired - Test Passed !");
+                        }else{
+                            alert("send Callback: fired - Test Failed !");
+                        }
+                    };
+                Rho.Intent.startListening(receiveCB);
+                Rho.Intent.send(params, successCB);
+            });
+            _result.waitForResponse();
         });
-        _result.waitForResponse();
-    });
-    xit('Stop Listening to the background intents', function () {
-        displayObjective('Stop Listening to the background intents');
-        dispTestCaseRunning('Execute \'Stop Listening\' API.');
-        dispExpectedResult('Test application should stop listening to background intents ie., (test application should not receive any broad cast messages).');
-        _result.waitToRunTest();
-        runs(function () {
-            var mytestapp = Rho.Application.appName;
-            var data = {
-                "myData":"This is broad cast data !"
-            };
-            var params = new parameters(Rho.Intent.BROADCAST,"","",mytestapp,"","","",data);
-            var receiveCB = function(intents){
-                var receivedParam = intents.params;
-                alert("Test Case failed if you see this alert message!");
-            };
-            Rho.Intent.startListening(receiveCB);
-            Rho.Intent.stopListening();
-            Rho.Intent.send(params);
+        xit('Try to start listening to the background intents, when already started listenting.', function () {
+            displayObjective('Try to start listening to the background intents, when already started listenting.');
+            dispTestCaseRunning('Try to start listening to the background intents, when already started listenting.');
+            dispExpectedResult('No effect or no crash should be seen in the test application.');
+            _result.waitToRunTest();
+            runs(function () {
+                var data = {
+                    "myData":"This is broad cast data 4!"
+                };
+                var params = new parameters(Rho.Intent.BROADCAST,"com.rhomobile.BROADCAST",["com.rhomobile.manual_common_spec"],"","","","",data);
+                var receiveCB = function(intent){
+                    if(intent.data.myData == "This is broad cast data 4!")
+                    {
+                        alert("Test case passed !");
+                    }
+                };
+                Rho.Intent.startListening(receiveCB);
+                Rho.Intent.startListening(receiveCB);
+                Rho.Intent.send(params);
+            });
+            _result.waitForResponse();
         });
-        _result.waitForResponse();
-    });
-    xit('Stop Listening to the background intents before executing startListenting method', function () {
-        displayObjective('Stop Listening to the background intents before executing startListenting method');
-        dispTestCaseRunning('Performing multiple execution of \'Stop Listening\'.');
-        dispExpectedResult('No effect or no crash should be seen in the test application.');
-        _result.waitToRunTest();
-        runs(function () {
-            var mytestapp = Rho.Application.appName;
-            var data = {
-                "myData":"This is broad cast data !"
-            };
-            var params = new parameters(Rho.Intent.BROADCAST,"","",mytestapp,"","","",data);
-            var receiveCB = function(intents){
-                var receivedParam = intents.params;
-                alert("Test Case failed if you see this alert message!");
-            };
-            Rho.Intent.startListening(receiveCB);
-            Rho.Intent.stopListening();
-            Rho.Intent.stopListening();
-            Rho.Intent.send(params);
+        it('Stop Listening to the background intents', function () {
+            displayObjective('Stop Listening to the background intents');
+            dispTestCaseRunning('Execute \'Stop Listening\' API.');
+            dispExpectedResult('Test application should stop listening to background intents ie., (test application should not receive any broad cast messages).');
+            _result.waitToRunTest();
+            runs(function () {
+                var data = {
+                    "myData":"This is broad cast data 5!"
+                };
+                var params = new parameters(Rho.Intent.BROADCAST,"com.rhomobile.BROADCAST",["com.rhomobile.manual_common_spec"],"","","","",data);
+                var receiveCB = function(intent){
+                    alert("Test Case failed if you see this alert message!");
+                };
+                Rho.Intent.startListening(receiveCB);
+                Rho.Intent.stopListening();
+                Rho.Intent.send(params);
+            });
+            _result.waitForResponse();
         });
-        _result.waitForResponse();
-    });
-    it('Suggest different applications to send text message', function(){
-        displayObjective('Suggest different applications to send text message');
-        dispTestCaseRunning('Sending Intent matches with multiple activities, should suggest for the application to launch!');
-        dispExpectedResult('Application chooser should be shown to the user in performing the intent!');
-        _result.waitToRunTest();
-        runs(function(){
-            var data = {"EXTRA_TEXT":"This is message to be sent!"};
-            var params = new parameters(Rho.Intent.START_ACTIVITY,"ACTION_SEND","","","","","text/plain",data);
-            Rho.Intent.send(params);
+        it('Stop Listening to the background intents before executing startListenting method', function () {
+            displayObjective('Stop Listening to the background intents before executing startListenting method');
+            dispTestCaseRunning('Performing multiple execution of \'Stop Listening\'.');
+            dispExpectedResult('No effect or no crash should be seen in the test application.');
+            _result.waitToRunTest();
+            runs(function () {
+                var mytestapp = 'com.rhomobile.manual_common_spec';
+                var data = {
+                    "myData":"This is broad cast data !"
+                };
+                var params = new parameters(Rho.Intent.BROADCAST,"com.rhomobile.BROADCAST",["com.rhomobile.manual_common_spec"],"","","","",data);
+                var receiveCB = function(intents){
+                    var receivedParam = intents.params;
+                    alert("Test Case failed if you see this alert message!");
+                };
+                Rho.Intent.startListening(receiveCB);
+                Rho.Intent.stopListening();
+                Rho.Intent.stopListening();
+                Rho.Intent.send(params);
+            });
+            _result.waitForResponse();
         });
-        _result.waitForResponse();
-    });
-    it('Sending array of data with the intent', function(){
-        displayObjective('Sending array of data with the intent');
-        dispTestCaseRunning('Sending Intent with multiple EXTRA\'s');
-        dispExpectedResult('Email compose screen should be displayed with prefilled To, CC, BCC and Subject field !');
-        _result.waitToRunTest();
-        runs(function(){
-            var data = 
-            {"EXTRA_EMAIL":"test@domain.com",
-             "EXTRA_CC":"carbon.copy@domain.com",
-             "EXTRA_BCC":"bcc.email@domain.com",
-             "EXTRA_SUBJECT":"Email Subject !",
-             "EXTRA_TEXT":"Email body content !"};
-            var params = new parameters(Rho.Intent.START_ACTIVITY,"ACTION_SEND","","","","","text/plain",data);
-            Rho.Intent.send(params);
+        it('Suggest different applications to send text message', function(){
+            displayObjective('Suggest different applications to send text message');
+            dispTestCaseRunning('Sending Intent matches with multiple activities, should suggest for the application to launch!');
+            dispExpectedResult('Application chooser should be shown to the user in performing the intent!');
+            _result.waitToRunTest();
+            runs(function(){
+                var data = {"EXTRA_TEXT":"This is message to be sent!"};
+                var params = new parameters(Rho.Intent.START_ACTIVITY,"ACTION_SEND","","","","","text/plain",data);
+                Rho.Intent.send(params);
+            });
+            _result.waitForResponse();
         });
-        _result.waitForResponse();
-    });    
-
+        it('Sending array of data with the intent', function(){
+            displayObjective('Sending array of data with the intent');
+            dispTestCaseRunning('Sending Intent with multiple EXTRA\'s');
+            dispExpectedResult('Email compose screen should be displayed with prefilled To, CC, BCC and Subject field !');
+            _result.waitToRunTest();
+            runs(function(){
+                var data = 
+                {"EXTRA_EMAIL":"test@domain.com",
+                 "EXTRA_CC":"carbon.copy@domain.com",
+                 "EXTRA_BCC":"bcc.email@domain.com",
+                 "EXTRA_SUBJECT":"Email Subject !",
+                 "EXTRA_TEXT":"Email body content !"};
+                var params = new parameters(Rho.Intent.START_ACTIVITY,"ACTION_SEND","","","","","text/plain",data);
+                Rho.Intent.send(params);
+            });
+            _result.waitForResponse();
+        });   
+    }
     // Negative test case:
     it('Sending Intent with null parameter should raise error', function(){
-/*
-        displayObjective('Sending Intent with null parameter');
-        dispTestCaseRunning('No parameters passed to the Rho.Intent.send() API');
-        dispExpectedResult('No Effect or no crash should be seen in the test application');
-        _result.waitToRunTest();
-        runs(function(){
-            Rho.Intent.send();
-        })
-        _result.waitForResponse();
-*/
+        //displayObjective('Sending Intent with null parameter');
+        //dispTestCaseRunning('No parameters passed to the Rho.Intent.send() API');
+        //dispExpectedResult('No Effect or no crash should be seen in the test application');
+        //_result.waitToRunTest();
+        //runs(function(){
+        //    Rho.Intent.send();
+        //})
+        //_result.waitForResponse();
 
         expect(function () {
             Rho.Intent.send()
@@ -823,26 +804,26 @@ describe('Intent_UseCases Functionality Test', function () {
 
     });
     it('Sending Intent with intent parameter Object with null values should raises error', function(){
-/*        displayObjective('Sending Intent with intent parameter Object with null values');
-        dispTestCaseRunning('Sending intent with null intent parameter object');
-        dispExpectedResult('No effect or crash should be seen at the test application.');
-        _result.waitToRunTest();
-        runs(function(){
-            var params = {
-                "params":{
-                    intentType:null,
-                    action:null,
-                    categories:null,
-                    appName:null,
-                    targetClass:null,
-                    uri:null,
-                    mimeType:null,
-                    data:null
-                }
-            };
-            Rho.Intent.send(params);
-        });
-        _result.waitForResponse();*/
+        //displayObjective('Sending Intent with intent parameter Object with null values');
+        //dispTestCaseRunning('Sending intent with null intent parameter object');
+        //dispExpectedResult('No effect or crash should be seen at the test application.');
+        //_result.waitToRunTest();
+        //runs(function(){
+        //    var params = {
+        //        "params":{
+        //            intentType:null,
+        //            action:null,
+        //            categories:null,
+        //            appName:null,
+        //            targetClass:null,
+        //            uri:null,
+        //            mimeType:null,
+        //            data:null
+        //        }
+        //    };
+        //    Rho.Intent.send(params);
+        //});
+        //_result.waitForResponse();
 
         var parameters = {
             intentType: null,
@@ -858,18 +839,18 @@ describe('Intent_UseCases Functionality Test', function () {
         }).toThrow();
     });
     it('Sending Intent with callback which does\'n handle the input argument shouldn\'t raise error', function(){
-/*        displayObjective('Sending Intent with callback which does not handle the intent parameter');
-        dispTestCaseRunning('Sending intent with callback which has empty argument');
-        dispExpectedResult('No effect or crash should be seen in the test applciation.');
-        _result.waitToRunTest();
-        runs(function(){
-            var successCB = function(){
-                console.log("This is callback from intent API");
-            };
-            var params = new parameters(Rho.Intent.START_ACTIVITY,"ACTION_MAIN","","com.smap.targetapp","","","","");
-            Rho.Intent.send(params, successCB);
-        });
-        _result.waitForResponse();*/
+        //displayObjective('Sending Intent with callback which does not handle the intent parameter');
+        //dispTestCaseRunning('Sending intent with callback which has empty argument');
+        //dispExpectedResult('No effect or crash should be seen in the test applciation.');
+        //_result.waitToRunTest();
+        //runs(function(){
+        //    var successCB = function(){
+        //        console.log("This is callback from intent API");
+        //    };
+        //    var params = new parameters(Rho.Intent.START_ACTIVITY,"ACTION_MAIN","","com.smap.targetapp","","","","");
+        //    Rho.Intent.send(params, successCB);
+        //});
+        //_result.waitForResponse();
 
         var parameters = {
             intentType: null,
@@ -886,16 +867,16 @@ describe('Intent_UseCases Functionality Test', function () {
 
     });
     it('Sending Intent with variable in place of callback function', function(){
-/*        displayObjective('Sending Intent with variable in place of callback function');
-        dispTestCaseRunning('Sending intent with string variable as a callback parameter');
-        dispExpectedResult('No effect or crash should be seen in the test applciation.');
-        _result.waitToRunTest();
-        runs(function(){
-            var successCB = "This is not a call back function!";
-            var params = new parameters(Rho.Intent.START_ACTIVITY,"ACTION_MAIN","","com.smap.targetapp","","","","");
-            Rho.Intent.send(params, successCB);
-        });
-        _result.waitForResponse();*/
+        //displayObjective('Sending Intent with variable in place of callback function');
+        //dispTestCaseRunning('Sending intent with string variable as a callback parameter');
+        //dispExpectedResult('No effect or crash should be seen in the test applciation.');
+        //_result.waitToRunTest();
+        //runs(function(){
+        //    var successCB = "This is not a call back function!";
+        //    var params = new parameters(Rho.Intent.START_ACTIVITY,"ACTION_MAIN","","com.smap.targetapp","","","","");
+        //    Rho.Intent.send(params, successCB);
+        //});
+        //_result.waitForResponse();
 
         var parameters = { intentType: Rho.Intent.START_ACTIVITY, action: 'ACTION_MAIN', appName: 'com.smap.targetapp' };
         var successCB = "This is not a call back function!";
@@ -905,53 +886,52 @@ describe('Intent_UseCases Functionality Test', function () {
 
     });
     it('Sending Intent with null in place of callback function', function(){
-/*        displayObjective('Sending Intent with null in place of callback function');
+        displayObjective('Sending Intent with null in place of callback function');
         dispTestCaseRunning('Sending intent with NULL value as a callback parameter');
-        dispExpectedResult('No effect or crash should be seen in the test applciation.');
+        dispExpectedResult('No crash or any bad behavior should be seen in the test applciation.');
         _result.waitToRunTest();
         runs(function(){
-            var successCB = "This is not a call back function!";
             var params = new parameters(Rho.Intent.START_ACTIVITY,"ACTION_MAIN","","com.smap.targetapp","","","","");
             Rho.Intent.send(params, null);
         });
-        _result.waitForResponse();*/
-
-        var parameters = { intentType: Rho.Intent.START_ACTIVITY, action: 'ACTION_MAIN', appName: 'com.smap.targetapp' };
-        expect(function () {
-            Rho.Intent.send(parameters, null);
-        }).toThrow();
-    });
-
-     xit('Stop Listening to the background intents with empty callback', function () {
-        displayObjective('Stop Listening to the background intents with empty callback');
-        dispTestCaseRunning('Executing stopListening method without callback function !');
-        dispExpectedResult('No effect or no crash should be seen in the test application.');
-        _result.waitToRunTest();
-        runs(function () {
-            var mytestapp = Rho.Application.appName;
-            var data = {
-                "myData":"This is broad cast data !"
-            };
-            var params = new parameters(Rho.Intent.BROADCAST,"","",mytestapp,"","","",data);
-            Rho.Intent.startListening();
-            Rho.Intent.send(params);
-        });
         _result.waitForResponse();
     });
-    xit('Stop Listening to the background intents callback without argument', function () {
+
+    it('Start Listening to the background intents with empty callback', function () {
+        //displayObjective('Stop Listening to the background intents with empty callback');
+        //dispTestCaseRunning('Executing stopListening method without callback function !');
+        //dispExpectedResult('No effect or no crash should be seen in the test application.');
+        //_result.waitToRunTest();
+        //runs(function () {
+        //    var data = {
+        //        "myData":"This is broad cast data !"
+        //    };
+        //    var params = new parameters(Rho.Intent.BROADCAST,"com.rhomobile.BROADCAST",["com.rhomobile.manual_common_spec"],"","","","",data);
+        //    Rho.Intent.startListening();
+        //    Rho.Intent.send(params);
+        //});
+        //_result.waitForResponse();
+        
+        expect(function () {
+            Rho.Intent.startListening();
+            Rho.Intent.send({intentType: Rho.Intent.START_ACTIVITY, action: 'ACTION_MAIN', appName: 'com.smap.targetapp'});
+        }).toThrow();
+        
+    });
+    it('Start Listening to the background intents using callback without argument', function () {
         displayObjective('Stop Listening to the background intents callback without argument');
         dispTestCaseRunning('Executing stopListening method with callback function which does not have argument !');
-        dispExpectedResult('No effect or no crash should be seen in the test application.');
+        dispExpectedResult('No crash or bad behavior should be seen in the test application.');
         _result.waitToRunTest();
         runs(function () {
-            var mytestapp = Rho.Application.appName;
+            var mytestapp = 'com.rhomobile.manual_common_spec';
             var data = {
                 "myData":"This is broad cast data !"
             };
             var receiveCB = function(){
                 alert("Callback without arguments !");
             };
-            var params = new parameters(Rho.Intent.BROADCAST,"","",mytestapp,"","","",data);
+            var params = new parameters(Rho.Intent.BROADCAST,"com.rhomobile.BROADCAST",["com.rhomobile.manual_common_spec"],"","","","",data);
             Rho.Intent.startListening(receiveCB);
             Rho.Intent.send(params);
         });

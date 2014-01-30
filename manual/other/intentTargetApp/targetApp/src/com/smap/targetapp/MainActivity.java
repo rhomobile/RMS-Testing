@@ -2,7 +2,11 @@ package com.smap.targetapp;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.util.Log;
 import android.view.Menu;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 
 public class MainActivity extends Activity {
 
@@ -10,6 +14,17 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        
+        Button button = (Button) findViewById(R.id.btnResult);
+        button.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.i("targetApp", "Set result: " + getIntent());
+                setResult(RESULT_OK, getIntent());
+                finish();
+            }
+        });
+        
     }
 
     @Override
