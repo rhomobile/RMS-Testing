@@ -10,12 +10,10 @@ describe("<model's object>", function() {
   var db = null;
 
   var modelDef = function(model){
-    model.modelName('Product'),
     model.property("key");
     model.set("partition","local");
   };
   var modelDef2 = function(model){
-    model.modelName("Item");
     model.property("key","string");
     model.set("partition","local");
   };
@@ -24,16 +22,16 @@ describe("<model's object>", function() {
     db = Rho.ORMHelper.dbConnection("local");
     var partitions = Rho.ORMHelper.getDbPartitions();
     $.each(partitions, function(index, db2) {
-        db2.$execute_sql("DELETE FROM SOURCES");
-        db2.$execute_sql("DELETE FROM OBJECT_VALUES");
-        db2.$execute_sql("DELETE FROM CHANGED_VALUES");
+        db2.executeSql("DELETE FROM SOURCES");
+        db2.executeSql("DELETE FROM OBJECT_VALUES");
+        db2.executeSql("DELETE FROM CHANGED_VALUES");
     });
     Rho.ORM.clear();
   };
 
   beforeEach(function(){
     reset();
-    Model = Rho.ORM.addModel(modelDef);
+    Model = Rho.ORM.addModel('Product', modelDef);
     Model.deleteAll();
     object = Model.make({'key': 'value'});
   });
@@ -168,23 +166,22 @@ describe("<model's object>", function() {
   //Bhakta: Changed the Description Because destroy method works on single activerecord object.
   it('VT302-0211 | delete object in sync database', function() {
     var modelDefs3 = function(model){
-        model.modelName("Item");
         model.property("name","string");
         model.set("partition","local");
         model.enable("sync");
     };
-    var Modelsync = Rho.ORM.addModel(modelDefs3);
+    var Modelsync = Rho.ORM.addModel('Item', modelDefs3);
     Modelsync.create({'name': 'tests'});
-    var cv = db.$execute_sql("select * from CHANGED_VALUES");
-    expect(cv[0].map.update_type).toEqual("create");
+    var cv = db.executeSql("select * from CHANGED_VALUES");
+    expect(cv[0].update_type).toEqual("create");
 
-    cv=db.$execute_sql("delete from CHANGED_VALUES");
+    cv=db.executeSql("delete from CHANGED_VALUES");
     expect(cv).toEqual([]);
 
     var obj = Modelsync.find("first");
     obj.destroy();
-    cv = db.$execute_sql("select * from CHANGED_VALUES");
-    expect(cv[0].map.update_type).toEqual("delete");
+    cv = db.executeSql("select * from CHANGED_VALUES");
+    expect(cv[0].update_type).toEqual("delete");
   });
 
   it('VT302-0211 | update object in sync database', function() {
@@ -194,23 +191,23 @@ describe("<model's object>", function() {
         model.set("partition","local");
         model.enable("sync");
     };
-    var Modelsync = Rho.ORM.addModel(modelDefs3);
+    var Modelsync = Rho.ORM.addModel('Item', modelDefs3);
     Modelsync.create({'name': 'tests'});
-    var cv = db.$execute_sql("select * from CHANGED_VALUES");
-    expect(cv[0].map.update_type).toEqual("create");
+    var cv = db.executeSql("select * from CHANGED_VALUES");
+    expect(cv[0].update_type).toEqual("create");
 
-    cv=db.$execute_sql("delete from CHANGED_VALUES");
+    cv=db.executeSql("delete from CHANGED_VALUES");
     expect(cv).toEqual([]);
 
     var obj = Modelsync.find("first");
     obj.updateAttributes({name:"tests2"});
-    cv = db.$execute_sql("select * from CHANGED_VALUES");
-    expect(cv[0].map.update_type).toEqual("update");
+    cv = db.executeSql("select * from CHANGED_VALUES");
+    expect(cv[0].update_type).toEqual("update");
   });
 
   it('VT302-0257 | deletes all objects of specific model in database', function() {
-    var Model1 = Rho.ORM.addModel(modelDef);
-    var Model2 = Rho.ORM.addModel(modelDef2);
+    var Model1 = Rho.ORM.addModel('Product', modelDef);
+    var Model2 = Rho.ORM.addModel('Item', modelDef2);
 
     Model1.create({'key': 'value'});
     Model2.create({'key': 'value'});
@@ -253,8 +250,8 @@ describe("<model's object>", function() {
   });
 
   it('counts objects in database', function() {
-    var Model1 = Rho.ORM.addModel(modelDef);
-    var Model2 = Rho.ORM.addModel(modelDef2);
+    var Model1 = Rho.ORM.addModel('Product', modelDef);
+    var Model2 = Rho.ORM.addModel('Item', modelDef2);
 
     var before1 = Model1.count();
 
@@ -268,8 +265,8 @@ describe("<model's object>", function() {
   });
 
   it('VT302-0259 | counts objects in database using find', function() {
-    var Model1 = Rho.ORM.addModel(modelDef);
-    var Model2 = Rho.ORM.addModel(modelDef2);
+    var Model1 = Rho.ORM.addModel('Product', modelDef);
+    var Model2 = Rho.ORM.addModel('Item', modelDef2);
 
     var before1 = Model1.find('count');
 
@@ -283,8 +280,8 @@ describe("<model's object>", function() {
   });
 
   it('VT302-0260 | counts objects in database using find with condition', function() {
-    var Model1 = Rho.ORM.addModel(modelDef);
-    var Model2 = Rho.ORM.addModel(modelDef2);
+    var Model1 = Rho.ORM.addModel('Product'. modelDef);
+    var Model2 = Rho.ORM.addModel('Item', modelDef2);
 
     var before1 = Model1.find('count', {conditions: {'key': 'value to find'}});
 
@@ -301,8 +298,8 @@ describe("<model's object>", function() {
 
 
   it('VT302-0261 | finds all objects in database', function() {
-    var Model1 = Rho.ORM.addModel(modelDef);
-    var Model2 = Rho.ORM.addModel(modelDef2);
+    var Model1 = Rho.ORM.addModel('Product', modelDef);
+    var Model2 = Rho.ORM.addModel('Item', modelDef2);
 
     Model1.deleteAll();
 
@@ -757,9 +754,9 @@ describe("<model's fixed_schema>", function() {
     db = Rho.ORMHelper.dbConnection("local");
     var partitions = Rho.ORMHelper.getDbPartitions();
     $.each(partitions, function(index, db2) {
-      db2.$execute_sql("DELETE FROM SOURCES");
-      db2.$execute_sql("DELETE FROM OBJECT_VALUES");
-      db2.$execute_sql("DELETE FROM CHANGED_VALUES");
+      db2.executeSql("DELETE FROM SOURCES");
+      db2.executeSql("DELETE FROM OBJECT_VALUES");
+      db2.executeSql("DELETE FROM CHANGED_VALUES");
     });
     Rho.ORM.clear();
   }
@@ -780,13 +777,13 @@ describe("<model's fixed_schema>", function() {
   };
   beforeEach(function(){
     reset();
-    if(db.$is_table_exist('Product'))
-      db.$execute_sql("DROP TABLE Product");
-    if(db.$is_table_exist('ProductSync'))
-      db.$execute_sql("DROP TABLE ProductSync");
-    Model = Rho.ORM.addModel(modelDef);
+    if(db.isTableExist('Product'))
+      db.executeSql("DROP TABLE Product");
+    if(db.isTableExist('ProductSync'))
+      db.executeSql("DROP TABLE ProductSync");
+    Model = Rho.ORM.addModel('Product', modelDef);
     Model.deleteAll();
-    Model2 = Rho.ORM.addModel(modelDef2);
+    Model2 = Rho.ORM.addModel('Item', modelDef2);
     Model2.deleteAll();
   });
 
@@ -796,30 +793,29 @@ describe("<model's fixed_schema>", function() {
     expect(obj.get("name")).toEqual("testfixed");
 
     var dblocal = Rho.ORMHelper.dbConnection("local");
-    var dboutput = dblocal.$execute_sql("select * from Product");
-    expect(dboutput[0].map.name).toEqual("testfixed");
+    var dboutput = dblocal.executeSql("select * from Product");
+    expect(dboutput[0].name).toEqual("testfixed");
   });
 
   it("VT302-0264 | should create sync model in db",function(){
     Model2.create({"name":"testname"});
-    var res = db.$execute_sql("select * from CHANGED_VALUES");
-    expect(res[0].map.update_type).toEqual("create");
+    var res = db.executeSql("select * from CHANGED_VALUES");
+    expect(res[0].update_type).toEqual("create");
   });
 
   it("should support blob type",function(){
       var blobber = function(model){
-        model.modelName("Blob");
         model.enable("fixedSchema");
         model.enable("sync");
         model.property("name");
         model.set("partition","local");
         model.property("image","blob");
       };
-      var BlobbModel = Rho.ORM.addModel(blobber);
+      var BlobbModel = Rho.ORM.addModel('Blob', blobber);
       BlobbModel.create({name:"testblob",image:"randomdatahere"});
       var obj = BlobbModel.find("first");
       expect(obj.get("name")).toEqual('testblob');
-      db.$execute_sql("DROP TABLE Blob");
+      db.executeSql("DROP TABLE Blob");
   });
 
   it("should return orderFunction",function(){
@@ -838,8 +834,8 @@ describe("<model's fixed_schema>", function() {
     expect(obj.get("name")).toEqual("testfixed");
 
     var dblocal = Rho.ORMHelper.dbConnection("local");
-    var dboutput = dblocal.$execute_sql("select * from Product");
-    expect(dboutput[0].map.name).toEqual("testfixed");
+    var dboutput = dblocal.executeSql("select * from Product");
+    expect(dboutput[0].name).toEqual("testfixed");
 
     obj.updateAttributes({name:"testfixed2"});
     var obj2 = Model.find("first");
@@ -852,8 +848,8 @@ describe("<model's fixed_schema>", function() {
     expect(obj.get("name")).toEqual("testfixed");
     expect(obj.get("brand")).toEqual('4');
     var dblocal = Rho.ORMHelper.dbConnection("local");
-    var dboutput = dblocal.$execute_sql("select * from Product");
-    expect(dboutput[0].map.name).toEqual("testfixed");
+    var dboutput = dblocal.executeSql("select * from Product");
+    expect(dboutput[0].name).toEqual("testfixed");
 
     obj.updateAttributes({name:"testfixed2",brand:2});
     var obj2 = Model.find("first");
@@ -867,8 +863,8 @@ describe("<model's fixed_schema>", function() {
     expect(obj.get("name")).toEqual("testfixed");
 
     var dblocal = Rho.ORMHelper.dbConnection("local");
-    var dboutput = dblocal.$execute_sql("select * from Product");
-    expect(dboutput[0].map.name).toEqual("testfixed");
+    var dboutput = dblocal.executeSql("select * from Product");
+    expect(dboutput[0].name).toEqual("testfixed");
 
     obj.destroy();
 
@@ -882,17 +878,17 @@ describe("<model's fixed_schema>", function() {
     expect(obj.get("name")).toEqual("testfixed");
 
     var dblocal = Rho.ORMHelper.dbConnection("local");
-    var dboutput = dblocal.$execute_sql("select * from ProductSync");
-    expect(dboutput[0].map.name).toEqual("testfixed");
+    var dboutput = dblocal.executeSql("select * from ProductSync");
+    expect(dboutput[0].name).toEqual("testfixed");
 
-    var dbchanged = dblocal.$execute_sql("select * from CHANGED_VALUES");
-    expect(dbchanged[0].map.update_type).toEqual("create");
+    var dbchanged = dblocal.executeSql("select * from CHANGED_VALUES");
+    expect(dbchanged[0].update_type).toEqual("create");
     obj.destroy();
 
     var obj2 = Model.find("first");
     expect(obj2).toEqual([]);
 
-    dbchanged = dblocal.$execute_sql("select * from CHANGED_VALUES");
+    dbchanged = dblocal.executeSql("select * from CHANGED_VALUES");
     expect(dbchanged).toEqual([]);
   });
 
@@ -902,19 +898,19 @@ describe("<model's fixed_schema>", function() {
     expect(obj.get("name")).toEqual("testfixed");
 
     var dblocal = Rho.ORMHelper.dbConnection("local");
-    var dboutput = dblocal.$execute_sql("select * from ProductSync");
-    expect(dboutput[0].map.name).toEqual("testfixed");
+    var dboutput = dblocal.executeSql("select * from ProductSync");
+    expect(dboutput[0].name).toEqual("testfixed");
 
-    var dbchanged = dblocal.$execute_sql("select * from CHANGED_VALUES");
-    expect(dbchanged[0].map.update_type).toEqual("create");
-    var cv = db.$execute_sql("delete from CHANGED_VALUES");
+    var dbchanged = dblocal.executeSql("select * from CHANGED_VALUES");
+    expect(dbchanged[0].update_type).toEqual("create");
+    var cv = db.executeSql("delete from CHANGED_VALUES");
     expect(cv).toEqual([]);
 
     obj = Model2.find("first");
     obj.destroy();
 
-    cv = db.$execute_sql("select * from CHANGED_VALUES");
-    expect(cv[0].map.update_type).toEqual("delete");
+    cv = db.executeSql("select * from CHANGED_VALUES");
+    expect(cv[0].update_type).toEqual("delete");
   });
 
    it('VT302-0215 | destroys fixedSchema item after CHANGED_VALUES updated', function() {
@@ -923,19 +919,19 @@ describe("<model's fixed_schema>", function() {
     expect(obj.get("name")).toEqual("testfixed");
 
     var dblocal = Rho.ORMHelper.dbConnection("local");
-    var dboutput = dblocal.$execute_sql("select * from ProductSync");
-    expect(dboutput[0].map.name).toEqual("testfixed");
+    var dboutput = dblocal.executeSql("select * from ProductSync");
+    expect(dboutput[0].name).toEqual("testfixed");
 
-    var dbchanged = dblocal.$execute_sql("select * from CHANGED_VALUES");
-    expect(dbchanged[0].map.update_type).toEqual("create");
-    var cv = dblocal.$execute_sql("delete from CHANGED_VALUES");
+    var dbchanged = dblocal.executeSql("select * from CHANGED_VALUES");
+    expect(dbchanged[0].update_type).toEqual("create");
+    var cv = dblocal.executeSql("delete from CHANGED_VALUES");
     expect(cv).toEqual([]);
 
     obj = Model2.find("first");
     obj.updateAttributes({name:"testfixed2"});
 
-    cv = dblocal.$execute_sql("select * from CHANGED_VALUES");
-    expect(cv[0].map.update_type).toEqual("update");
+    cv = dblocal.executeSql("select * from CHANGED_VALUES");
+    expect(cv[0].update_type).toEqual("update");
   });
 
   it("VT302-0233 | should make object fixedSchema",function(){
@@ -1039,45 +1035,43 @@ describe("OrmModel(ST)", function() {
     var partitions = Rho.ORMHelper.getDbPartitions();
 
     $.each(partitions, function(index, db2) {
-      db2.$execute_sql("DELETE FROM SOURCES");
-      db2.$execute_sql("DELETE FROM OBJECT_VALUES");
-      db2.$execute_sql("DELETE FROM CHANGED_VALUES");
-      if(db2.$is_table_exist("Product")){
-        db2.$execute_sql("DROP TABLE Product");
+      db2.executeSql("DELETE FROM SOURCES");
+      db2.executeSql("DELETE FROM OBJECT_VALUES");
+      db2.executeSql("DELETE FROM CHANGED_VALUES");
+      if(db2.isTableExist("Product")){
+        db2.executeSql("DROP TABLE Product");
       }
-      if(db2.$is_table_exist("ProductFixed")){
-        db2.$execute_sql("DROP TABLE ProductFixed");
+      if(db2.isTableExist("ProductFixed")){
+        db2.executeSql("DROP TABLE ProductFixed");
       }
     });
     Rho.ORM.clear();
   };
 
   var defaultDefModelP = function(model){
-      model.modelName('Product'),
       model.property("id");
       model.set("partition","local");
   };
 
   var defaultDefModelF = function(model){
-      model.modelName('ProductFixed'),
       model.enable("fixedSchema");
       model.property("key");
       model.property("value","string");
       model.set("partition","local");
   };
 
-  var createModel = function (defModel){
-    Model = Rho.ORM.addModel(defModel);
+  var createModel = function (name, defModel){
+    Model = Rho.ORM.addModel(name, defModel);
   };
 
-  var createFixedModel = function(defModel){
-    fixedModel = Rho.ORM.addModel(defModel);
+  var createFixedModel = function(name, defModel){
+    fixedModel = Rho.ORM.addModel(name, defModel);
   };
 
   describe("OrmModel(PropertyBag)", function() {
     beforeEach(function(){
         reset();
-        createModel(defaultDefModelP);
+        createModel('Product', defaultDefModelP);
     });
 
     afterEach(function(){
@@ -1121,13 +1115,12 @@ describe("OrmModel(ST)", function() {
         itemTypes = ['Electronics','Softwares','Cameras','Books'];
 
         var productModel = function (model){
-            model.modelName('ProductTest');
             model.property("id","integer");
             model.property("name","string");
             model.property("type","string");
         };
 
-        createModel(productModel);
+        createModel('ProductTest', productModel);
 
         for (var i=0;i<=50;i++){
             var nameValue = "Item "+i;
@@ -1146,14 +1139,12 @@ describe("OrmModel(ST)", function() {
         itemTypes = ['Electronics','Softwares','Cameras','Books']
 
         var productModel = function (model){
-
-            model.modelName('ProductTest');
             model.property("id","integer");
             model.property("name","string");
             model.property("type","string");
         }
 
-        createModel(productModel);
+        createModel('ProductTest', productModel);
 
         for (var i=0;i<=100;i++){
             var nameValue = "Item "+i;
@@ -1171,14 +1162,12 @@ describe("OrmModel(ST)", function() {
     it("VT302-0219 | Call find with all and with order any column name of string type. For e.g find('all',{conditions:{},order:'name'})",function() {
 
         var productModel = function (model){
-
-            model.modelName('ProductTest');
             model.property("id","integer");
             model.property("name","string");
             model.property("type","string");
         }
 
-        createModel(productModel);
+        createModel('ProductTest', productModel);
 
         Model.create({"name":"Mobio"});
         Model.create({"name":"Zoolo"});
@@ -1201,7 +1190,7 @@ describe("OrmModel(ST)", function() {
             model.property("type","string");
         }
 
-        createModel(productModel);
+        createModel('ProductTest', productModel);
 
         Model.create({"id":656});
         Model.create({"id":2});
@@ -1307,14 +1296,12 @@ it('VT302-0228 | finds first objects with one condition for e.g Model.find("firs
         itemTypes = ['Electronics','Softwares','Cameras','Books']
 
         var productModel = function (model){
-
-            model.modelName('ProductTest');
             model.property("id","integer");
             model.property("name","string");
             model.property("type","string");
         }
 
-        createModel(productModel);
+        createModel('ProductTest', productModel);
 
         for (var i=0;i<=100;i++){
             var nameValue = "Item "+i;
@@ -1332,14 +1319,12 @@ it('VT302-0228 | finds first objects with one condition for e.g Model.find("firs
         itemTypes = ['Electronics','Softwares','Cameras','Books']
 
         var productModel = function (model){
-
-            model.modelName('ProductTest');
             model.property("id","integer");
             model.property("name","string");
             model.property("type","string");
         }
 
-        createModel(productModel);
+        createModel('ProductTest', productModel);
 
         for (var i=0;i<=100;i++){
             var nameValue = "Item "+i;
@@ -1357,14 +1342,12 @@ it('VT302-0228 | finds first objects with one condition for e.g Model.find("firs
     it("VT302-0229 | Call find with first and with order any column name of string type. For e.g find('all',{conditions:{},order:'name'})",function() {
 
         var productModel = function (model){
-
-            model.modelName('ProductTest');
             model.property("id","integer");
             model.property("name","string");
             model.property("type","string");
         }
 
-        createModel(productModel);
+        createModel('ProductTest', productModel);
 
         Model.create({"name":"Mobio"});
         Model.create({"name":"Zoolo"});
@@ -1378,14 +1361,12 @@ it('VT302-0228 | finds first objects with one condition for e.g Model.find("firs
     it("VT302-0265 | Call find with first and with order any column name of integer type. For e.g find('all',{conditions:{},order:'name'})",function() {
 
         var productModel = function (model){
-
-            model.modelName('ProductTest');
             model.property("id","integer");
             model.property("name","string");
             model.property("type","string");
         }
 
-        createModel(productModel);
+        createModel('ProductTest', productModel);
 
         Model.create({"id":656});
         Model.create({"id":2});
@@ -1478,14 +1459,12 @@ it('VT302-0228 | finds first objects with one condition for e.g Model.find("firs
         itemTypes = ['Electronics','Softwares','Cameras','Books']
 
         var productModel = function (model){
-
-            model.modelName('ProductTest');
             model.property("id","integer");
             model.property("name","string");
             model.property("type","string");
         }
 
-        createModel(productModel);
+        createModel('ProductTest', productModel);
 
         for (var i=0;i<=100;i++){
             var nameValue = "Item "+i;
@@ -1504,14 +1483,12 @@ it('VT302-0228 | finds first objects with one condition for e.g Model.find("firs
         itemTypes = ['Electronics','Softwares']
 
         var productModel = function (model){
-
-            model.modelName('ProductTest');
             model.property("id","integer");
             model.property("name","string");
             model.property("type","string");
         }
 
-        createModel(productModel);
+        createModel('ProductTest', productModel);
 
         for (var i=0;i<=100;i++){
             var nameValue = "Item "+i;

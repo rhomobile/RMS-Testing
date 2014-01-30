@@ -28,12 +28,12 @@ describe("ORM Module Specs", function() {
   var reset = function() {
     var partitions = Rho.ORMHelper.getDbPartitions();
     $.each(partitions, function(index, db2) {
-      db2.$execute_sql("DELETE FROM SOURCES");
-      db2.$execute_sql("DELETE FROM OBJECT_VALUES");
-      db2.$execute_sql("DELETE FROM CHANGED_VALUES");
-      if(db2.$is_table_exist("Product")) db2.$execute_sql("DROP TABLE Product");
-      if(db2.$is_table_exist("Item")) db2.$execute_sql("DROP TABLE Item");
-      if(db2.$is_table_exist("Item2")) db2.$execute_sql("DROP TABLE Item2");
+      db2.executeSql("DELETE FROM SOURCES");
+      db2.executeSql("DELETE FROM OBJECT_VALUES");
+      db2.executeSql("DELETE FROM CHANGED_VALUES");
+      if(db2.isTableExist("Product")) db2.executeSql("DROP TABLE Product");
+      if(db2.isTableExist("Item")) db2.executeSql("DROP TABLE Item");
+      if(db2.isTableExist("Item2")) db2.executeSql("DROP TABLE Item2");
     });
   };
   var localDB = Rho.ORMHelper.dbConnection('local');
@@ -428,9 +428,9 @@ describe("ORM Module Specs", function() {
     model.create({"name":"test"});
     expect(model).toBeDefined();
 
-    res = localDB.$execute_sql("SELECT * FROM Product INDEXED BY p1 Where name = 'test' "); // FIXME: error
+    res = localDB.executeSql("SELECT * FROM Product INDEXED BY p1 Where name = 'test' "); // FIXME: error
     // => could not prepare statement: 1; Message: no such index: p1
-    expect(res[0].map.name).toEqual('test');
+    expect(res[0].name).toEqual('test');
   });
 
   // TODO:
@@ -457,9 +457,9 @@ describe("ORM Module Specs", function() {
     model.create({"name":"test","price":87.89});
     expect(model).toBeDefined();
 
-    res = localDB.$execute_sql("SELECT * FROM Product INDEXED BY p1 Where name = 'test' "); // FIXME: error
+    res = localDB.executeSql("SELECT * FROM Product INDEXED BY p1 Where name = 'test' "); // FIXME: error
     // => could not prepare statement: 1; Message: no such index: p1
-    expect(res[0].map.name).toEqual('test');
+    expect(res[0].name).toEqual('test');
   });
 
   // TODO:
@@ -492,11 +492,11 @@ describe("ORM Module Specs", function() {
     model.create({"name":"debug","price":0.78,"type":"testing2"});
     expect(model).toBeDefined();
 
-    res = localDB.$execute_sql("SELECT * FROM Product INDEXED BY p1 Where name = 'test' "); // FIXME: error
+    res = localDB.executeSql("SELECT * FROM Product INDEXED BY p1 Where name = 'test' "); // FIXME: error
     // => could not prepare statement: 1; Message: no such index: p1
-    res2 = localDB.$execute_sql("SELECT * FROM Product INDEXED BY p2 Where type = 'testing2' "); // FIXME: error
-    expect(res[0].map.name).toEqual('test');
-    expect(res2[0].map.name).toEqual('debug');
+    res2 = localDB.executeSql("SELECT * FROM Product INDEXED BY p2 Where type = 'testing2' "); // FIXME: error
+    expect(res[0].name).toEqual('test');
+    expect(res2[0].name).toEqual('debug');
   });
 
   // TODO:
@@ -523,9 +523,9 @@ describe("ORM Module Specs", function() {
     model.create({"name":"test"});
     expect(model).toBeDefined();
 
-    res = localDB.$execute_sql("SELECT * FROM Product INDEXED BY u1 Where name = 'test' ");
+    res = localDB.executeSql("SELECT * FROM Product INDEXED BY u1 Where name = 'test' ");
     console.log("res: " + JSON.stringify(res));
-    expect(res[0].map.name).toEqual('test');
+    expect(res[0].name).toEqual('test');
   });
 
   // TODO:
@@ -555,9 +555,9 @@ describe("ORM Module Specs", function() {
 
     expect(model).toBeDefined();
 
-    res = localDB.$execute_sql("SELECT * FROM Product INDEXED BY u2 Where name = 'test' ");
+    res = localDB.executeSql("SELECT * FROM Product INDEXED BY u2 Where name = 'test' ");
     // => could not prepare statement: 1; Message: no such index: u2
-    expect(res[0].map.name).toEqual('test');
+    expect(res[0].name).toEqual('test');
   });
 
   // TODO:
@@ -592,12 +592,12 @@ describe("ORM Module Specs", function() {
 
     expect(model).toBeDefined();
 
-    res = localDB.$execute_sql("SELECT * FROM Product INDEXED BY u1 Where name = 'test' ");
+    res = localDB.executeSql("SELECT * FROM Product INDEXED BY u1 Where name = 'test' ");
     // => could not prepare statement: 1; Message: no such index: u1
-    res2 = localDB.$execute_sql("SELECT * FROM Product INDEXED BY u2 Where type = 'testing2' ");
+    res2 = localDB.executeSql("SELECT * FROM Product INDEXED BY u2 Where type = 'testing2' ");
 
-    expect(res[0].map.name).toEqual('test');
-    expect(res2[0].map.name).toEqual('debug');
+    expect(res[0].name).toEqual('test');
+    expect(res2[0].name).toEqual('debug');
   });
 
   // TODO:
@@ -852,7 +852,7 @@ describe("ORM Module Specs", function() {
     expect(source.partition).toEqual('local');
     expect(source.model_name).toEqual('Product');
 
-    var res = localDB.$execute_sql("select * from sources where name = 'Product'");
+    var res = localDB.executeSql("select * from sources where name = 'Product'");
     //console.log(JSON.stringify(res)); // =>
     // [{"map":
     //   {"associations":"","backend_refresh_time":"0","blob_attribs":"","last_deleted_size":"0","last_inserted_size":"0",
@@ -860,9 +860,9 @@ describe("ORM Module Specs", function() {
     //    "name":"Product","partition":"local","schema":"",
     //    "schema_version":"1.0","source_attribs":"","source_id":"40027","sync_priority":"1000","sync_type":"none","token":""}
     //  }]
-    //console.log(res[0].map.schema); // =>
+    //console.log(res[0].schema); // =>
     // CREATE TABLE "Product" ( "brand" varchar default null,"name" varchar default null,"object" varchar(255) PRIMARY KEY );
-    expect(res[0].map.schema_version).toEqual('1.0');
+    expect(res[0].schema_version).toEqual('1.0');
     // expect(source.schema_version).toEqual('1.0'); // FIXME: source.schema_version n/a
   });
 
@@ -922,7 +922,7 @@ describe("ORM Module Specs", function() {
       expect(Rho.ORM.getModel('Product')).toBe(model);
     }
 
-    res = localDB.$execute_sql("SELECT * FROM Product",[]);
+    res = localDB.executeSql("SELECT * FROM Product",[]);
     // console.log(JSON.stringify(res)); // => []
     expect(res).toEqual([]);
   });
@@ -945,17 +945,17 @@ describe("ORM Module Specs", function() {
 
   //   Model.create({"name":"test","brand":"PUMA"});
   //   var db2 = Rho.ORMHelper.dbConnection("local");
-  //   var objects = db2.$execute_sql("select * from OBJECT_VALUES");
+  //   var objects = db2.executeSql("select * from OBJECT_VALUES");
 
-  //   expect(objects[0].map.value).toEqual('test');
+  //   expect(objects[0].value).toEqual('test');
 
   //   try{
   //   Model.create({"name":"test2","brand":"REBOOK","Price":54.05});
-  //   var objects = db2.$execute_sql("select * from OBJECT_VALUES");
-  //   expect(objects[2].map.value).not.toEqual("test2");
-  //   expect(objects[3].map.value).not.toEqual("REBOOK");
+  //   var objects = db2.executeSql("select * from OBJECT_VALUES");
+  //   expect(objects[2].value).not.toEqual("test2");
+  //   expect(objects[3].value).not.toEqual("REBOOK");
   //   //Number is returning as a String.
-  //   expect(objects[4].map.value).not.toEqual(54.05);
+  //   expect(objects[4].value).not.toEqual(54.05);
   //   }
   //   catch(e){
   //     error = e.message;
