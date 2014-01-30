@@ -24,7 +24,7 @@ public class MyFirstService extends Service {
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
 		Log.d("Test","on start");
-		Toast.makeText(getBaseContext(),"Service Started !",Toast.LENGTH_LONG).show();
+		Toast.makeText(getBaseContext(),"Service Started !",Toast.LENGTH_SHORT).show();
 		return START_STICKY;
 	}
 
