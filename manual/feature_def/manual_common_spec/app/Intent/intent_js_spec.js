@@ -337,7 +337,7 @@ describe('Intent_UseCases Functionality Test', function () {
         });
         _result.waitForResponse();
     });
-    if(!isAndroidPlatform()){
+    if(!isAndroidPlatform() && !isApplePlatform()){
         // No common app in android supports "data:" URIs in intents
         it('mimeType - Launch Image viewer from test app by setting uri to "image data URI"', function () {
             displayObjective('mimeType - Launch Image viewer from test app by setting mimeType "image (jpeg, gif, png etc.,)" and Data to "image data URI"');
@@ -410,67 +410,70 @@ describe('Intent_UseCases Functionality Test', function () {
         });
         _result.waitForResponse();
     });
-    it('uri - Launch Message application with data from test app by setting URI "sms:9611896991"', function () {
-        displayObjective('uri - Launch Message application with data from test app by setting URI "sms:9611896991"');
-        dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":Rho.Intent.START_ACTIVITY,"action":"","categories":"","appName":"","targetClass":"","uri":"sms:9611896991","mimeType":"","data":""}}');
-        dispExpectedResult('Message compose application should be launched with pre-filled recepient number.');
-        _result.waitToRunTest();
-        runs(function () {
-            var params = new parameters(Rho.Intent.START_ACTIVITY,"","","","","sms:9611896991","","");
-            Rho.Intent.send(params);
-        });
-        _result.waitForResponse();
-    });
-    it('uri - Launch Email appliation with data from test app by setting URI "mailto:abcd@domain.com"', function () {
-        displayObjective('uri - Launch Email appliation with data from test app by setting URI "mailto:abcd@domain.com"');
-        var preConditions = ["Ensure default mail box is configured in the device"];
+    
+    if (!isApplePlatform) {
+         it('uri - Launch Message application with data from test app by setting URI "sms:9611896991"', function () {
+            displayObjective('uri - Launch Message application with data from test app by setting URI "sms:9611896991"');
+            dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":Rho.Intent.START_ACTIVITY,"action":"","categories":"","appName":"","targetClass":"","uri":"sms:9611896991","mimeType":"","data":""}}');
+            dispExpectedResult('Message compose application should be launched with pre-filled recepient number.');
+            _result.waitToRunTest();
+            runs(function () {
+                 var params = new parameters(Rho.Intent.START_ACTIVITY,"","","","","sms:9611896991","","");
+                 Rho.Intent.send(params);
+                 });
+            _result.waitForResponse();
+            });
+         it('uri - Launch Email appliation with data from test app by setting URI "mailto:abcd@domain.com"', function () {
+            displayObjective('uri - Launch Email appliation with data from test app by setting URI "mailto:abcd@domain.com"');
+            var preConditions = ["Ensure default mail box is configured in the device"];
             displayPrecondition(preConditions);
-        dispTestCaseRunning('Sending Intent with parameters Sending Intent with parameters {"params":{"intentType":Rho.Intent.START_ACTIVITY,"action":"","categories":"","appName":"","targetClass":"","uri":"mailto:abcd@domain.com","mimeType":"","data":""}}');
-        dispExpectedResult('Email compose view should be launched with pre-filled recepient email address.');
-        _result.waitToRunTest();
-        runs(function () {
-            var params = new parameters(Rho.Intent.START_ACTIVITY,"","","","","mailto:abcd@domain.com","","");
-            Rho.Intent.send(params);
-        });
-        _result.waitForResponse();
-    });
-    it('uri - Launch dialler with pre-filled number from test application by setting URI "tel:9611896991" and with Action: ACTION_DIAL', function () {
-        displayObjective('uri - Launch dialler with pre-filled number from test application by setting URI "tel:9611896991" and with Action: ACTION_DIAL');
-        dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":Rho.Intent.START_ACTIVITY,"action":"ACTION_DIAL","categories":"","appName":"","targetClass":"","uri":"mailto:abcd@domain.com","mimeType":"","data":""}}');
-        dispExpectedResult('Dialer launches with pre-loaded number in it.');
-        _result.waitToRunTest();
-        runs(function () {
-            var params = new parameters(Rho.Intent.START_ACTIVITY,"ACTION_DIAL","","","","tel:9611896991","","");
-            Rho.Intent.send(params);
-        });
-        _result.waitForResponse();
-    });
-    if(!isAndroidPlatform()){
-        it('uri - Launch Maps with pre-set lat and longitute values from test app by setting Uri "geo:latitude,longitude"', function () {
+            dispTestCaseRunning('Sending Intent with parameters Sending Intent with parameters {"params":{"intentType":Rho.Intent.START_ACTIVITY,"action":"","categories":"","appName":"","targetClass":"","uri":"mailto:abcd@domain.com","mimeType":"","data":""}}');
+            dispExpectedResult('Email compose view should be launched with pre-filled recepient email address.');
+            _result.waitToRunTest();
+            runs(function () {
+                 var params = new parameters(Rho.Intent.START_ACTIVITY,"","","","","mailto:abcd@domain.com","","");
+                 Rho.Intent.send(params);
+                 });
+            _result.waitForResponse();
+            });
+         it('uri - Launch dialler with pre-filled number from test application by setting URI "tel:9611896991" and with Action: ACTION_DIAL', function () {
+            displayObjective('uri - Launch dialler with pre-filled number from test application by setting URI "tel:9611896991" and with Action: ACTION_DIAL');
+            dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":Rho.Intent.START_ACTIVITY,"action":"ACTION_DIAL","categories":"","appName":"","targetClass":"","uri":"mailto:abcd@domain.com","mimeType":"","data":""}}');
+            dispExpectedResult('Dialer launches with pre-loaded number in it.');
+            _result.waitToRunTest();
+            runs(function () {
+                 var params = new parameters(Rho.Intent.START_ACTIVITY,"ACTION_DIAL","","","","tel:9611896991","","");
+                 Rho.Intent.send(params);
+                 });
+            _result.waitForResponse();
+            });
+         if(!isAndroidPlatform()){
+         it('uri - Launch Maps with pre-set lat and longitute values from test app by setting Uri "geo:latitude,longitude"', function () {
             displayObjective('uri - Launch Maps with pre-set lat and longitute values from test app by setting Uri "geo:latitude,longitude"');
             var preConditions = ["Ensure maps application present in the device"];
-                displayPrecondition(preConditions);
+            displayPrecondition(preConditions);
             dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":Rho.Intent.START_ACTIVITY,"action":"ACTION_VIEW","categories":"","appName":"","targetClass":"","uri":"geo:12.9667° N, 77.5667° E","mimeType":"","data":""}}');
             dispExpectedResult('Maps application launched with the pre-set Lattitude and Longitude');
             _result.waitToRunTest();
             runs(function () {
-                var params = new parameters(Rho.Intent.START_ACTIVITY,"ACTION_VIEW","","","","geo:12.9667° N, 77.5667° E","","");
-                Rho.Intent.send(params);
-            });
+                 var params = new parameters(Rho.Intent.START_ACTIVITY,"ACTION_VIEW","","","","geo:12.9667° N, 77.5667° E","","");
+                 Rho.Intent.send(params);
+                 });
             _result.waitForResponse();
-        });
+            });
+         }
+         it('uri - Make a call from test application by setting URI "tel:9611896991" and Action : "ACTION_CALL"', function () {
+            displayObjective('uri - Make a call from test application by setting URI "tel:9611896991" and Action : "ACTION_CALL"');
+            dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":Rho.Intent.START_ACTIVITY,"action":"ACTION_CALL","categories":"","appName":"","targetClass":"","uri":"mailto:abcd@domain.com","mimeType":"","data":""}}');
+            dispExpectedResult('Phone call made to the pre-loaded number.');
+            _result.waitToRunTest();
+            runs(function () {
+                 var params = new parameters(Rho.Intent.START_ACTIVITY,"ACTION_CALL","","","","tel:9611896991","","");
+                 Rho.Intent.send(params);
+                 });
+            _result.waitForResponse();
+            });
     }
-    it('uri - Make a call from test application by setting URI "tel:9611896991" and Action : "ACTION_CALL"', function () {
-        displayObjective('uri - Make a call from test application by setting URI "tel:9611896991" and Action : "ACTION_CALL"');
-        dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":Rho.Intent.START_ACTIVITY,"action":"ACTION_CALL","categories":"","appName":"","targetClass":"","uri":"mailto:abcd@domain.com","mimeType":"","data":""}}');
-        dispExpectedResult('Phone call made to the pre-loaded number.');
-        _result.waitToRunTest();
-        runs(function () {
-            var params = new parameters(Rho.Intent.START_ACTIVITY,"ACTION_CALL","","","","tel:9611896991","","");
-            Rho.Intent.send(params);
-        });
-        _result.waitForResponse();
-    });
     if(isAndroidPlatform()){
         it('uri - Launch Contacts from test application via Uri "content://contacts/people/" and Action: ACTION_VIEW', function () {
             displayObjective('uri - Launch Contacts from test application via Uri "content://contacts/people/" and Action: ACTION_VIEW');
@@ -546,22 +549,24 @@ describe('Intent_UseCases Functionality Test', function () {
             _result.waitForResponse();
         });
     }
-    it('uri - Launch Email compose screen with pre-filled email from test application by setting URI and data.', function () {
-        displayObjective('uri - Launch Email compose screen with pre-filled email from test application by setting URI and data.');
-        var preConditions = ["Ensure default mailbox is configured in the device"];
-        displayPrecondition(preConditions);
-        dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":Rho.Intent.START_ACTIVITY,"action":"","categories":"","appName":"","targetClass":"","uri":"mailto:abcd@domain.com","mimeType":"","data":"This is test email body"}}');
-        dispExpectedResult('Email compose screen should be launched successfully with pre-filled data in it.');
-        _result.waitToRunTest();
-        runs(function () {
-            var data = {
-                "body":"Test case Passed : only if this is displayed in email body content with prefilled recepient address !"
-            };
-            var params = new parameters(Rho.Intent.START_ACTIVITY,"","","","","mailto:abcd@domain.com","",data);
-            Rho.Intent.send(params);
-        });
-        _result.waitForResponse();
-    });
+    if(!isApplePlatform) {
+         it('uri - Launch Email compose screen with pre-filled email from test application by setting URI and data.', function () {
+            displayObjective('uri - Launch Email compose screen with pre-filled email from test application by setting URI and data.');
+            var preConditions = ["Ensure default mailbox is configured in the device"];
+            displayPrecondition(preConditions);
+            dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":Rho.Intent.START_ACTIVITY,"action":"","categories":"","appName":"","targetClass":"","uri":"mailto:abcd@domain.com","mimeType":"","data":"This is test email body"}}');
+            dispExpectedResult('Email compose screen should be launched successfully with pre-filled data in it.');
+            _result.waitToRunTest();
+            runs(function () {
+                 var data = {
+                 "body":"Test case Passed : only if this is displayed in email body content with prefilled recepient address !"
+                 };
+                 var params = new parameters(Rho.Intent.START_ACTIVITY,"","","","","mailto:abcd@domain.com","",data);
+                 Rho.Intent.send(params);
+                 });
+            _result.waitForResponse();
+            });
+    }
     if(isAndroidPlatform()){
         xit('category - Launch Message application from test app by setting URI "content://sms" and data "This is message body".', function () {
             // What is content://sms ???
@@ -806,8 +811,15 @@ describe('Intent_UseCases Functionality Test', function () {
         dispTestCaseRunning('Sending intent with NULL value as a callback parameter');
         dispExpectedResult('No crash or any bad behavior should be seen in the test applciation.');
         _result.waitToRunTest();
+       
+        var appName = "com.smap.targetapp";
+       
+        if ( isApplePlatform() ) {
+          appName = "testapp";
+        }
+       
         runs(function(){
-            var params = new parameters(Rho.Intent.START_ACTIVITY,"ACTION_MAIN","","com.smap.targetapp","","","","");
+            var params = new parameters(Rho.Intent.START_ACTIVITY,"ACTION_MAIN","",appName,"","","","");
             Rho.Intent.send(params, null);
         });
         _result.waitForResponse();
@@ -834,6 +846,7 @@ describe('Intent_UseCases Functionality Test', function () {
         }).toThrow();
         
     });
+    if (!isApplePlatform()) {
     it('Start Listening to the background intents using callback without argument', function () {
         displayObjective('Stop Listening to the background intents callback without argument');
         dispTestCaseRunning('Executing stopListening method with callback function which does not have argument !');
@@ -853,5 +866,6 @@ describe('Intent_UseCases Functionality Test', function () {
         });
         _result.waitForResponse();
     });
+    }
 });
     
