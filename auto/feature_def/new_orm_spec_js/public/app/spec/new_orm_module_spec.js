@@ -634,22 +634,27 @@ describe("ORM Module Specs", function() {
     var item = addModel('Item', Item);
 
     // FIXME:
-    sources = Rho.ORMHelper.getAllSources();
-    expect(sources.Product.str_associations).toEqual("Item");
-    expect(sources.Item.belongs_to[0]).toEqual("Product");
+    if(useNewORM){
+      expect(product.associations).toEqual("Item,product_id");
+      expect(item.getBelongsTo('product_id')[0]).toEqual("Product");
+    } else {
+      sources = Rho.ORMHelper.getAllSources();
+      expect(sources.Product.str_associations).toEqual("Item");
+      expect(sources.Item.belongs_to[0]).toEqual("Product");  
+    };
   });
 
-  // TODO:
-  it("VT302-0026 | should add belongs_to relationship in any load order",function(){
+  // The only way would be to use new Model, + model Def + initModel explicitly
+  xit("VT302-0026 | should add belongs_to relationship in any load order in JS - but only using initModel",function(){
     if(useNewORM) {
-      var Product = function(model){
+      var ProductDef = function(model){
         model.setModelProperty("name","string","");
         model.setModelProperty("price","float","");
         model.fixed_schema = true;
         model.setSchemaIndex("u1", ["name"], true); // FIXME: ?
         model.set("partition","local");
       };
-      var Item = function(model){
+      var ItemDef = function(model){
         model.setModelProperty("name","string", "");
         model.setModelProperty("code","string", "");
         model.fixed_schema = true;
@@ -658,7 +663,7 @@ describe("ORM Module Specs", function() {
         model.setBelongsTo("product_id", "Product"); // FIXME: 2 params?
       };
     } else {
-      var Product = function(model){
+      var ProductDef = function(model){
         model.modelName("Product");
         model.property("name","string");
         model.property("price","float");
@@ -666,7 +671,7 @@ describe("ORM Module Specs", function() {
         model.addUniqueIndex("u1",["name"]);
         model.set("partition","local");
       };
-      var Item = function(model){
+      var ItemDef = function(model){
         model.modelName("Item");
         model.property("name","string");
         model.property("code");
@@ -676,13 +681,29 @@ describe("ORM Module Specs", function() {
         model.belongs_to("Product");
       };
     }
-    var item = addModel('Item', Item);
-    var product = addModel('Product', Product);
-
-    // FIXME:
-    sources = Rho.ORMHelper.getAllSources();
-    expect(sources.Product.str_associations).toEqual("Item");
-    expect(sources.Item.belongs_to[0]).toEqual("Product");
+    var item;
+    var product;
+    if(useNewORM) {
+      item = new Rho.NewORMModel('Item');
+      ItemDef(item);
+      product = new Rho.NewORMModel('Product');
+      ProductDef(product); 
+      // and only now - do explicit init
+      item.initModel();
+      product.initModel();
+    } else {
+      item = addModel(ItemDef);
+      product = addModel(ProductDef);
+    }
+    
+    if(useNewORM){
+      expect(product.associations).toEqual("Item,product_id");
+      expect(item.getBelongsTo('product_id')[0]).toEqual("Product");
+    } else {
+      sources = Rho.ORMHelper.getAllSources();
+      expect(sources.Product.str_associations).toEqual("Item");
+      expect(sources.Item.belongs_to[0]).toEqual("Product");  
+    };
   });
 
   // TODO:
@@ -744,10 +765,17 @@ describe("ORM Module Specs", function() {
     var item2 = addModel('Item2', Item2);
 
     // FIXME:
-    sources = Rho.ORMHelper.getAllSources();
-    expect(sources.Product.str_associations).toEqual("Item,Item2");
-    expect(sources.Item.belongs_to[0]).toEqual("Product");
-    expect(sources.Item2.belongs_to[0]).toEqual("Product");
+    // FIXME:
+    if(useNewORM){
+      expect(product.associations).toEqual("Item,product_id,Item2,product_id");
+      expect(item.getBelongsTo('product_id')[0]).toEqual("Product");
+      expect(item2.getBelongsTo('product_id')[0]).toEqual("Product");
+    } else {
+      sources = Rho.ORMHelper.getAllSources();
+      expect(sources.Product.str_associations).toEqual("Item,Item2");
+      expect(sources.Item.belongs_to[0]).toEqual("Product");
+      expect(sources.Item2.belongs_to[0]).toEqual("Product"); 
+    };
   });
 
   it("VT302-0030 | Create a model with sync type bulk_only",function(){

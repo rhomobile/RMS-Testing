@@ -8,11 +8,8 @@ describe("<model's object>", function() {
   var Model;
   var object;
   var db = null;
+  var useNewOrm = Rho.NewORM.useNewOrm();
 
-  var modelDef = function(model){
-    model.property("key");
-    model.set("partition","local");
-  };
   var modelDef2 = function(model){
     model.property("key","string");
     model.set("partition","local");
@@ -31,7 +28,20 @@ describe("<model's object>", function() {
 
   beforeEach(function(){
     reset();
-    Model = Rho.ORM.addModel('Product', modelDef);
+    if(useNewOrm) {
+      var modelDef = function(model){
+        model.setModelProperty("key", "string");
+        model.set("partition","local");  
+      };
+      Model = Rho.ORM.addModel('Product', modelDef);
+    } else {
+      var modelDef = function(model){
+        model.modelName('Prodyct');
+        model.property("key");
+        model.set("partition","local");
+      };
+      Model = Rho.ORM.addModel(modelDef);
+    };
     Model.deleteAll();
     object = Model.make({'key': 'value'});
   });
