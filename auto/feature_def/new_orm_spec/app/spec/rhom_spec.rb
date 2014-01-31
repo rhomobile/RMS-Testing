@@ -2,7 +2,6 @@
 # FIXME list
 # 1) "Should  delete all objects for a given model"
 
-
 describe "Rhom" do
   @use_new_orm = begin Rho::RHO.use_new_orm rescue false end
   puts "Rhom specs: use_new_orm: #{@use_new_orm}"
@@ -70,6 +69,7 @@ describe "Rhom" do
 
     Rhom::Rhom.database_full_reset_ex( :models => ['Product', 'Customer'] )
 
+    Rho::RhoConfig.reset_models.should == 'Product,Customer'
     Product.find(:all).length.should == 0
     Customer.find(:count).should == 0
   end
@@ -84,6 +84,7 @@ describe "Rhom" do
 
     Rhom::Rhom.database_full_reset_ex( :models => ['Product'] )
 
+    Rho::RhoConfig.reset_models.should == 'Product'
     Product.find(:count).should == 0
 
     # FIXME: find(:all) for property bag returns values for another object!
