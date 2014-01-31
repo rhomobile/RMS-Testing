@@ -9,6 +9,7 @@ class SpecRunner < MSpecScript
     MSpec.backtrace = true
 
     config[:files] << "spec/spec_helper"
+
     # config[:files] << [ "spec/rhom_model_spec",
     #   [ {:schema_model=>true, :sync_model=>true},  {:schema_model=>true, :sync_model=>false},
     #     {:schema_model=>false, :sync_model=>true} , {:schema_model=>false, :sync_model=>false} ]
@@ -19,7 +20,7 @@ class SpecRunner < MSpecScript
     # Failed: 0
 
     # Testing for fixed schema / sync
-    # config[:files] << ["spec/rhom_object_spec", [{:schema_model => true, :sync_model => true}]]
+    config[:files] << ["spec/rhom_object_spec", [{:schema_model => true, :sync_model => true}]]
     # =>
     # Total: 79
     # Passed: 22
@@ -46,9 +47,9 @@ class SpecRunner < MSpecScript
     # Passed: 21
     # Failed: 58
 
-    config[:files] << [ "spec/rhom_object_spec",
-        [ {:schema_model=>true, :sync_model=>true},  {:schema_model=>true, :sync_model=>false},
-          {:schema_model=>false, :sync_model=>true} , {:schema_model=>false, :sync_model=>false} ] ]
+    # config[:files] << [ "spec/rhom_object_spec",
+    #     [ {:schema_model=>true, :sync_model=>true},  {:schema_model=>true, :sync_model=>false},
+    #       {:schema_model=>false, :sync_model=>true} , {:schema_model=>false, :sync_model=>false} ] ]
     # =>
     # Total: 316
     # Passed: 86
