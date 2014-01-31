@@ -14,6 +14,20 @@ describe("ORM Module Specs", function() {
     };
   }
 
+  var checkModelProperty = function(source, propname, proptype, propoption){
+    if(useNewORM){
+      expect(source.getModelProperty(propname).type).toEqual(proptype);
+      if(propoption.length > 0) {
+        expect(source.getModelProperty(propname).option).toEqual(propoption); 
+      };
+    } else {
+      expect(source.property[propname][0]).toEqual(proptype);
+      if(propoption.length > 0) {
+        expect(source.property[propname][1]).toEqual(propoption);
+      };
+    };
+  };
+
   var getModelSource = function (modelName) {
     if (useNewORM) {
       var source = Rho.ORM.getModel(modelName);
@@ -258,7 +272,7 @@ describe("ORM Module Specs", function() {
     addModel('Product', Product);
     var source = getModelSource('Product');
 
-    expect(source.property['name'][0]).toEqual('string'); // FIXME: source.property
+    checkModelProperty(source, 'name', 'string', '');
     expect(source.partition).toEqual('local');
     expect(source.model_name).toEqual('Product');
   });
@@ -278,7 +292,7 @@ describe("ORM Module Specs", function() {
     addModel('Product', Product);
     var source = getModelSource('Product');
 
-    expect(source.property['id'][0]).toEqual('integer'); // FIXME: source.property
+    checkModelProperty(source, 'id', 'integer', '');
     expect(source.partition).toEqual('local');
     expect(source.model_name).toEqual('Product');
   });
@@ -298,7 +312,7 @@ describe("ORM Module Specs", function() {
     addModel('Product', Product);
     var source = getModelSource('Product');
 
-    expect(source.property['float_prop'][0]).toEqual('float');  // FIXME: source.property
+    checkModelProperty(source, 'float_prop', 'float', '');
     expect(source.partition).toEqual('local');
     expect(source.model_name).toEqual('Product');
   });
@@ -318,7 +332,7 @@ describe("ORM Module Specs", function() {
     addModel('Product', Product);
     var source = getModelSource('Product');
 
-    expect(source.property['date_prop'][0]).toEqual('date');  // FIXME: source.property
+    checkModelProperty(source, 'date_prop', 'date', '');
     expect(source.partition).toEqual('local');
     expect(source.model_name).toEqual('Product');
   });
@@ -338,7 +352,7 @@ describe("ORM Module Specs", function() {
     addModel('Product', Product);
     var source = getModelSource('Product');
 
-    expect(source.property['time_prop'][0]).toEqual('time');  // FIXME: source.property
+    checkModelProperty(source, 'time_prop', 'time', '');
     expect(source.partition).toEqual('local');
     expect(source.model_name).toEqual('Product');
   });
@@ -358,27 +372,7 @@ describe("ORM Module Specs", function() {
     addModel('Product', Product);
     var source = getModelSource('Product');
 
-    expect(source.property['image_url'][0]).toEqual('blob');  // FIXME: source.property
-    expect(source.partition).toEqual('local');
-    expect(source.model_name).toEqual('Product');
-  });
-
-  //TODO: !!!
-  it("VT302-0017 | Create a Model with property('mycustomproperty', 'hello')",function(){
-    if(useNewORM) {
-      var Product = function(model){
-        model.setModelProperty("mycustomproperty","hello", "");
-      };
-    } else {
-      var Product = function(model){
-        model.modelName("Product");
-        model.property("mycustomproperty","hello");
-      };
-    }
-    addModel('Product', Product);
-    var source = getModelSource('Product');
-
-    expect(source.property['mycustomproperty'][0]).toEqual('hello');  // FIXME: source.property
+    checkModelProperty(source, 'image_url', 'blob', '');
     expect(source.partition).toEqual('local');
     expect(source.model_name).toEqual('Product');
   });
@@ -398,8 +392,7 @@ describe("ORM Module Specs", function() {
     addModel('Product', Product);
     var source = getModelSource('Product');
 
-    expect(source.property['image_url'][0]).toEqual('blob');  // FIXME: source.property
-    expect(source.property['image_url'][1]).toEqual('overwrite');  // FIXME: source.property
+    checkModelProperty(source, 'image_url', 'blob', 'overwrite');
     expect(source.partition).toEqual('local');
     expect(source.model_name).toEqual('Product');
   });
@@ -457,7 +450,7 @@ describe("ORM Module Specs", function() {
     model.create({"name":"test","price":87.89});
     expect(model).toBeDefined();
 
-    res = localDB.executeSql("SELECT * FROM Product INDEXED BY p1 Where name = 'test' "); // FIXME: error
+    res = localDB.executeSql("SELECT * FROM Product INDEXED BY \"p1\" Where name = 'test' "); // FIXME: error
     // => could not prepare statement: 1; Message: no such index: p1
     expect(res[0].name).toEqual('test');
   });
