@@ -18,7 +18,7 @@ describe("ORM Module Specs", function() {
     if(useNewORM){
       expect(source.getModelProperty(propname).type).toEqual(proptype);
       if(propoption.length > 0) {
-        expect(source.getModelProperty(propname).option).toEqual(propoption); 
+        expect(source.getModelProperty(propname).option).toEqual(propoption);
       };
     } else {
       expect(source.property[propname][0]).toEqual(proptype);
@@ -257,7 +257,6 @@ describe("ORM Module Specs", function() {
     expect(source.model_name).toEqual('Product');
   });
 
-  //TODO: !!!
   it('VT302-0011 | Create a Model with property("name","string")',function() {
     if(useNewORM) {
       var Product = function(model){
@@ -277,7 +276,6 @@ describe("ORM Module Specs", function() {
     expect(source.model_name).toEqual('Product');
   });
 
-  //TODO: !!!
   it("VT302-0012 | Create a Model with property('int_prop', 'integer')",function(){
     if (useNewORM) {
       var Product = function(model){
@@ -297,7 +295,6 @@ describe("ORM Module Specs", function() {
     expect(source.model_name).toEqual('Product');
   });
 
-  //TODO: !!!
   it("VT302-0013 | Create a Model with property ('float_prop', 'float')",function(){
     if(useNewORM) {
       var Product = function(model){
@@ -317,7 +314,6 @@ describe("ORM Module Specs", function() {
     expect(source.model_name).toEqual('Product');
   });
 
-  //TODO: !!!
   it("VT302-0014 | Create a Model with property ('date_prop', 'date')",function(){
     if(useNewORM) {
       var Product = function(model){
@@ -337,7 +333,6 @@ describe("ORM Module Specs", function() {
     expect(source.model_name).toEqual('Product');
   });
 
-  //TODO: !!!
   it("VT302-0015 | Create a Model with property ('time_prop', 'time')",function(){
     if(useNewORM) {
       var Product = function(model){
@@ -357,7 +352,6 @@ describe("ORM Module Specs", function() {
     expect(source.model_name).toEqual('Product');
   });
 
-  //TODO: !!!
   it("VT302-0016 | Create a Model with property ('image_url', 'blob')",function(){
     if (useNewORM) {
       var Product = function(model){
@@ -377,7 +371,6 @@ describe("ORM Module Specs", function() {
     expect(source.model_name).toEqual('Product');
   });
 
-  //TODO: !!!
   it("VT302-0018 | Create a Model with property('image_url', 'blob', 'overwrite')",function(){
     if(useNewORM) {
       var Product = function(model){
@@ -397,7 +390,6 @@ describe("ORM Module Specs", function() {
     expect(source.model_name).toEqual('Product');
   });
 
-  // TODO:
   it("VT302-0019 | should add index",function() {
     if(useNewORM) {
       var Product = function(model) {
@@ -421,19 +413,17 @@ describe("ORM Module Specs", function() {
     model.create({"name":"test"});
     expect(model).toBeDefined();
 
-    res = localDB.executeSql("SELECT * FROM Product INDEXED BY p1 Where name = 'test' "); // FIXME: error
-    // => could not prepare statement: 1; Message: no such index: p1
+    res = localDB.executeSql("SELECT * FROM Product INDEXED BY p1 Where name = 'test' ");
     expect(res[0].name).toEqual('test');
   });
 
-  // TODO:
   it("VT302-0020 | addIndex to multiple columns while creating a model",function() {
     if(useNewORM) {
       var Product = function(model){
         model.setModelProperty("name","string","");
         model.setModelProperty("price","float","");
         model.fixed_schema = true;
-        model.setSchemaIndex("p1", ["name","price"], false); // FIXME: ?
+        model.setSchemaIndex("p1", ["name","price"], false);
         model.set("partition","local");
       };
     } else {
@@ -450,12 +440,11 @@ describe("ORM Module Specs", function() {
     model.create({"name":"test","price":87.89});
     expect(model).toBeDefined();
 
-    res = localDB.executeSql("SELECT * FROM Product INDEXED BY \"p1\" Where name = 'test' "); // FIXME: error
-    // => could not prepare statement: 1; Message: no such index: p1
+    res = localDB.executeSql("SELECT * FROM Product INDEXED BY \"p1\" Where name = 'test' ");
     expect(res[0].name).toEqual('test');
   });
 
-  // TODO:
+
   it("VT302-0021 | add multiple Index to multiple columns while creating a model",function(){
     if(useNewORM) {
       var Product = function(model){
@@ -485,21 +474,19 @@ describe("ORM Module Specs", function() {
     model.create({"name":"debug","price":0.78,"type":"testing2"});
     expect(model).toBeDefined();
 
-    res = localDB.executeSql("SELECT * FROM Product INDEXED BY p1 Where name = 'test' "); // FIXME: error
-    // => could not prepare statement: 1; Message: no such index: p1
-    res2 = localDB.executeSql("SELECT * FROM Product INDEXED BY p2 Where type = 'testing2' "); // FIXME: error
+    res = localDB.executeSql("SELECT * FROM Product INDEXED BY p1 Where name = 'test' ");
+    res2 = localDB.executeSql("SELECT * FROM Product INDEXED BY p2 Where type = 'testing2' ");
     expect(res[0].name).toEqual('test');
     expect(res2[0].name).toEqual('debug');
   });
 
-  // TODO:
   it("VT302-0022 | should add unique index",function(){
     if(useNewORM) {
       var Product = function(model){
         model.setModelProperty("name","string","");
         model.setModelProperty("price","float","");
         model.fixed_schema = true;
-        model.setSchemaIndex("u1", ["name"], true); // FIXME: ?
+        model.setSchemaIndex("u1", ["name"], true);
         model.set("partition","local");
       };
     } else {
@@ -521,7 +508,6 @@ describe("ORM Module Specs", function() {
     expect(res[0].name).toEqual('test');
   });
 
-  // TODO:
   it("VT302-0023 | addUniqueIndex to multiple columns while creating a model",function(){
     if(useNewORM) {
       var Product = function(model){
@@ -549,11 +535,9 @@ describe("ORM Module Specs", function() {
     expect(model).toBeDefined();
 
     res = localDB.executeSql("SELECT * FROM Product INDEXED BY u2 Where name = 'test' ");
-    // => could not prepare statement: 1; Message: no such index: u2
     expect(res[0].name).toEqual('test');
   });
 
-  // TODO:
   it("VT302-0024 | add multiple Unique Index to multiple columns while creating a model",function(){
     if(useNewORM) {
       var Product = function(model){
@@ -586,14 +570,13 @@ describe("ORM Module Specs", function() {
     expect(model).toBeDefined();
 
     res = localDB.executeSql("SELECT * FROM Product INDEXED BY u1 Where name = 'test' ");
-    // => could not prepare statement: 1; Message: no such index: u1
     res2 = localDB.executeSql("SELECT * FROM Product INDEXED BY u2 Where type = 'testing2' ");
 
     expect(res[0].name).toEqual('test');
     expect(res2[0].name).toEqual('debug');
   });
 
-  // TODO:
+  // FIXME:
   it("VT302-0025 | should add belongs_to relationship",function(){
     if(useNewORM) {
       var Product = function(model){
@@ -639,7 +622,7 @@ describe("ORM Module Specs", function() {
     expect(sources.Item.belongs_to[0]).toEqual("Product");
   });
 
-  // TODO:
+  // FIXME:
   it("VT302-0026 | should add belongs_to relationship in any load order",function(){
     if(useNewORM) {
       var Product = function(model){
@@ -685,7 +668,7 @@ describe("ORM Module Specs", function() {
     expect(sources.Item.belongs_to[0]).toEqual("Product");
   });
 
-  // TODO:
+  // FIXME:
   it("VT302-0027 | should add multiple belongs_to relationship in any load order",function(){
     if(useNewORM) {
       var Product = function(model){
