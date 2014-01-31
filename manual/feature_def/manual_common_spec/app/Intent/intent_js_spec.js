@@ -11,25 +11,11 @@ var parameters = function (intentType, action, categories, appName, targetClass,
     return result;
 };
 
-var extraData = function(EXTRA, DATA){
-    var me = this;
-    if(EXTRA!=""){
-        if(EXTRA == "EXTRA_EMAIL") me.EXTRA_EMAIL = DATA;
-        if(EXTRA == "EXTRA_HTML_TEXT") me.EXTRA_HTML_TEXT = DATA;
-        if(EXTRA == "EXTRA_STREAM") me.EXTRA_STREAM = DATA;
-        if(EXTRA == "EXTRA_SUBJECT") me.EXTRA_SUBJECT = DATA;
-        if(EXTRA == "EXTRA_CC") me.EXTRA_CC = DATA;
-        if(EXTRA == "EXTRA_BCC") me.EXTRA_BCC = DATA;
-        if(EXTRA == "EXTRA_TEXT") me.EXTRA_TEXT = DATA;
-    }
-};
 var getData = function(enterData){
     var dataReturn = {};
     console.log("arrayLength : "+ enterData.length);
     if(enterData.length>0){
         for(var i=0; i<enterData.length; i++){
-            /*var data = new extraData(enterData[i].EXTRA,enterData[i].DATA);
-            dataArray.push(data);*/
             if(enterData[i].EXTRA!==""){
                 dataReturn[enterData[i].EXTRA] = enterData[i].DATA;
             }
@@ -362,7 +348,7 @@ describe('Intent_UseCases Functionality Test', function () {
             _result.waitToRunTest();
             runs(function () {
                 
-                var params = new parameters(Rho.Intent.START_ACTIVITY,"","","","","",data);
+                var params = new parameters(Rho.Intent.START_ACTIVITY,"","","","","vnd.android-dir/mms-sms",data);
                 Rho.Intent.send(params);
             });
             _result.waitForResponse();
