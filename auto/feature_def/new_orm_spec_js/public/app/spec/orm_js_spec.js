@@ -32,7 +32,7 @@ describe("ORM Db Reset Specs", function() {
 
   beforeEach(function() {
     reset();
-    if (!useNewORM) Rho.ORM.clear();
+    Rho.ORM.clear();
   });
 
   it("VT302-0041 | Call databaseFullReset(true) should reset client info databaseFullReset tables",function(){
@@ -165,14 +165,12 @@ describe("ORM Db Reset Specs", function() {
         model.setModelProperty("name","string","");
         model.setModelProperty("price","float","");
         model.set("partition","local");
-        model.enable("sync");
         model.fixed_schema = true;
       };
       var Item_local_pb = function(model){
         model.setModelProperty("name","string","");
         model.setModelProperty("price","float","");
         model.set("partition","local");
-        model.enable("sync");
       };
       var P_user_fixed = Rho.ORM.addModel("Product", Product_user_fixed);
       var I_user_pb = Rho.ORM.addModel("Item", Item_user_pb);
@@ -199,7 +197,6 @@ describe("ORM Db Reset Specs", function() {
         model.property("name","string");
         model.property("price","float");
         model.set("partition","local");
-        model.enable("sync");
         model.enable("fixedSchema");
       };
       var Item_local_pb = function(model){
@@ -207,7 +204,6 @@ describe("ORM Db Reset Specs", function() {
         model.property("name","string");
         model.property("price","float");
         model.set("partition","local");
-        model.enable("sync");
       };
       var P_user_fixed = Rho.ORM.addModel(Product_user_fixed);
       var I_user_pb = Rho.ORM.addModel(Item_user_pb);
@@ -434,8 +430,7 @@ describe("ORM Db Reset Specs", function() {
     var db_product = userDB.executeSql("Select * from Product");
     expect(db_product[0].name).toEqual("test");
 
-    // FIXME: Wrong number of arguments: 0 instead of 2
-    Rho.ORM.databaseFullReset();
+    Rho.NewORM.databaseFullReset();
 
     db_product = userDB.executeSql("Select * from Product");
     expect(db_product).toEqual([]);
@@ -570,13 +565,13 @@ describe("ORM Db Reset Specs", function() {
     expect(db_product[0].value).toEqual("test");
     expect(db_product[1].value).toEqual("2");
     if (useNewORM) {
-      var ary = ['Product'];
+      var ary = [];
       Rho.ORM.databaseFullResetEx(ary, true, false);
       // FIXME:
       // => reset_client_info should not be true if reset selected models
     }
     else {
-      var ary = {"models":['Product'],"reset_client_info":true};
+      var ary = {"reset_client_info":true};
       Rho.ORM.databaseFullResetEx(ary);
     }
 
@@ -790,12 +785,11 @@ describe("ORM Db Reset Specs", function() {
 
   // FIXME: !!!
   it("VT302-0062 | should reset client and local db if databaseFullclientResetAndLogout",function(){
-    localDB.executeSql("INSERT INTO CLIENT_INFO (client_id) VALUES(7)");
+    userDB.executeSql("INSERT INTO CLIENT_INFO (client_id) VALUES(7)");
     if (useNewORM) {
       var Product = function(model){
         model.setModelProperty("name","string","");
         model.setModelProperty("price","float","");
-        model.enable("sync");
         model.set("partition","local");
       };
       var model1 = Rho.ORM.addModel("Product", Product);
@@ -804,24 +798,21 @@ describe("ORM Db Reset Specs", function() {
         model.modelName("Product");
         model.property("name","string");
         model.property("price","float");
-        model.enable("sync");
         model.set("partition","local");
       };
       var model1 = Rho.ORM.addModel(Product);
     }
     var p = model1.create({'name':'test','price':2.0});
     var objects = localDB.executeSql("select * from OBJECT_VALUES");
-    var client_info = localDB.executeSql("select * from client_info");
+    var client_info = userDB.executeSql("select * from client_info");
 
     expect(find_attrib_with_value(objects,'name','test')).toEqual("test");
     expect(client_info[0].client_id).toEqual("7");
 
     Rho.ORM.databaseFullclientResetAndLogout();
-    // FIXME: !!!
-    // has no method "databaseFullclientResetAndLogout"
 
     objects = localDB.executeSql("select * from OBJECT_VALUES");
-    client_info = localDB.executeSql("select * from client_info");
+    client_info = userDB.executeSql("select * from client_info");
     expect(objects).toEqual([]);
     expect(client_info).toEqual([]);
   });

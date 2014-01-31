@@ -7,6 +7,9 @@ describe('Signature specs', function () {
     var callbackStatus;
     var flag;
     var callbackWasCalled;
+    var delayTimeout;
+    var delayHideTimeout;
+    
     var callbackGetProperties = function (data) {
         getPropertiesData = JSON.stringify(data);
         callbackStatus = true;
@@ -14,6 +17,20 @@ describe('Signature specs', function () {
     var callbackGetProperty = function (data) {
         getPropertyData = data;
         callbackStatus = true;
+    }
+
+    function delayCall() {
+        flag = false;
+        delayTimeout = setTimeout(function () {
+            flag = true;
+        }, ENABLE_TIMEOUT_VALUE);
+    }
+
+    function delayHideCall() {
+        flag = false;
+        delayHideTimeout = setTimeout(function () {
+            flag = true;
+        }, HIDE_TIMEOUT_VALUE);
     }
 
 
@@ -40,6 +57,19 @@ describe('Signature specs', function () {
     });
 
     afterEach(function () {
+
+        if(delayTimeout)
+        {
+            window.clearTimeout(delayTimeout);
+            delayTimeout = null;
+        } 
+
+        if(delayHideTimeout)
+        {
+            window.clearTimeout(delayHideTimeout);
+            delayHideTimeout = null;
+        }   
+             
         Rho.Signature.bgColor = preservedProperties.bgColor;
         Rho.Signature.compressionFormat = preservedProperties.compressionFormat;
         Rho.Signature.fileName = preservedProperties.fileName;
@@ -55,50 +85,52 @@ describe('Signature specs', function () {
         Rho.Signature.hide();
     });
 
-    it("Default value of bgColor should be '#FFFFFFFF'", function () {
-        expect(Rho.Signature.bgColor).toEqual('#FFFFFFFF');
-    });
+    describe('Signature specs with show() and takeFullScreen() functions', function () {
 
-    it("Default value of compressionFormat should be 'png'", function () {
-        expect(Rho.Signature.compressionFormat).toEqual('png');
-    });
+        it("Default value of bgColor should be '#FFFFFFFF'", function () {
+            expect(Rho.Signature.bgColor).toEqual('#FFFFFFFF');
+        });
 
-    it("Default value of fileName should be 'signature'", function () {
-        expect(Rho.Signature.fileName).toEqual('signature');
-    });
+        it("Default value of compressionFormat should be 'png'", function () {
+            expect(Rho.Signature.compressionFormat).toEqual('png');
+        });
 
-    it("Default value of outputFormat should be 'image'", function () {
-        expect(Rho.Signature.outputFormat).toEqual('image');
-    });
+        it("Default value of fileName should be 'signature'", function () {
+            expect(Rho.Signature.fileName).toEqual('signature');
+        });
 
-    it("Default value of penColor should be '#FF000000'", function () {
-        expect(Rho.Signature.penColor).toEqual('#FF000000');
-    });
+        it("Default value of outputFormat should be 'image'", function () {
+            expect(Rho.Signature.outputFormat).toEqual('image');
+        });
 
-    it("Default value of penWidth should be 3", function () {
-        expect(Rho.Signature.penWidth).toEqual(3);
-    });
+        it("Default value of penColor should be '#FF000000'", function () {
+            expect(Rho.Signature.penColor).toEqual('#FF000000');
+        });
 
-    it("Default value of border should be " + defaultBorderValue, function () {
-        expect(Rho.Signature.border).toEqual(defaultBorderValue);
-    });
+        it("Default value of penWidth should be 3", function () {
+            expect(Rho.Signature.penWidth).toEqual(3);
+        });
 
-    it("Default value of height should be 150", function () {
-        expect(Rho.Signature.height).toEqual(150);
-    });
+        it("Default value of border should be " + defaultBorderValue, function () {
+            expect(Rho.Signature.border).toEqual(defaultBorderValue);
+        });
 
-    it("Default value of left should be 15", function () {
-        expect(Rho.Signature.left).toEqual(15);
-    });
+        it("Default value of height should be 150", function () {
+            expect(Rho.Signature.height).toEqual(150);
+        });
 
-    it("Default value of top should be 60", function () {
-        expect(Rho.Signature.top).toEqual(60);
-    });
+        it("Default value of left should be 15", function () {
+            expect(Rho.Signature.left).toEqual(15);
+        });
 
-    it("Default value of width should be 200", function () {
-        expect(Rho.Signature.width).toEqual(200);
-    });
+        it("Default value of top should be 60", function () {
+            expect(Rho.Signature.top).toEqual(60);
+        });
 
+        it("Default value of width should be 200", function () {
+            expect(Rho.Signature.width).toEqual(200);
+        });
+    });
 
     describe('Signature specs with show() and takeFullScreen() functions', function () {
 
@@ -108,51 +140,56 @@ describe('Signature specs', function () {
 
         it("VT299-2006 | call show() with all string |", function () {
 
-            Rho.Signature.show({bgColor: '#FF0000', border: 'true', penWidth: '20'});
+            Rho.Signature.show({bgColor: '#FF0000', border: 'true', penWidth: '2'});
 
-            setTimeout(function () {
-                flag = true
-            }, 1000);
+            delayCall();
             waitsFor(function () {
                 return flag;
-            }, "Waiting to hide", 2000);
+            }, "delay before expect", ENABLE_TIMEOUT_VALUE1);
 
             runs(function () {
                 expect(Rho.Signature.bgColor).toEqual('#FF0000');
-                expect(Rho.Signature.border).toEqual(defaultBorderValue);
-                expect(Rho.Signature.penWidth).toEqual(20);
+                expect(Rho.Signature.border).toEqual(true);
+                expect(Rho.Signature.penWidth).toEqual(2);
             });
         });
 
         it("VT299-2007 | call takeFullScreen() with all string |", function () {
 
-            Rho.Signature.takeFullScreen({'bgColor': '#FF0000', 'outputFormat': 'image', 'penWidth': '1'}, sigCallback);
-
-            setTimeout(function () {
-                flag = true
-            }, 1000);
+            delayHideCall();
             waitsFor(function () {
                 return flag;
-            }, "Waiting to hide", 2000);
+            }, "delay before expect", HIDE_TIMEOUT_VALUE1);
+
+            Rho.Signature.takeFullScreen({'bgColor': '#FF0000', 'outputFormat': 'image', 'penWidth': '1'}, sigCallback);
+
+            delayCall();
+            waitsFor(function () {
+                return flag;
+            }, "delay before expect", ENABLE_TIMEOUT_VALUE1);
 
             runs(function () {
                 expect(Rho.Signature.bgColor).toEqual('#FF0000');
                 expect(Rho.Signature.border).toEqual(defaultBorderValue);
+                expect(Rho.Signature.outputFormat).toEqual('image');
                 expect(Rho.Signature.penWidth).toEqual(1);
             });
         });
 
-        it("VT299-2010 | Call takeFullScreen()  to check default values of all property |", function () {
+        it("VT299-2010 | Call takeFullScreen() to check default values of all property |", function () {
+
+            delayHideCall();
+            waitsFor(function () {
+                return flag;
+            }, "delay before expect", HIDE_TIMEOUT_VALUE1);
 
             Rho.Signature.takeFullScreen({}, function (data) {
             });
 
-            setTimeout(function () {
-                flag = true
-            }, 1000);
+            delayCall();
             waitsFor(function () {
                 return flag;
-            }, "Waiting to hide", 2000);
+            }, "delay before expect", ENABLE_TIMEOUT_VALUE1);
 
             runs(function () {
                 expect(Rho.Signature.bgColor).toEqual('#FFFFFFFF');
@@ -168,12 +205,10 @@ describe('Signature specs', function () {
 
             Rho.Signature.show();
 
-            setTimeout(function () {
-                flag = true
-            }, 1000);
+            delayCall();
             waitsFor(function () {
                 return flag;
-            }, "Waiting to hide", 2000);
+            }, "delay before expect", ENABLE_TIMEOUT_VALUE1);
 
             runs(function () {
                 expect(Rho.Signature.bgColor).toEqual('#FFFFFFFF');
@@ -195,12 +230,10 @@ describe('Signature specs', function () {
 
             Rho.Signature.show({'bgColor': '#FF0000', 'border': false, 'penWidth': 1});
 
-            setTimeout(function () {
-                flag = true
-            }, 1000);
+            delayCall();
             waitsFor(function () {
                 return flag;
-            }, "Waiting to hide", 2000);
+            }, "delay before expect", ENABLE_TIMEOUT_VALUE1);
 
             runs(function () {
                 expect(Rho.Signature.bgColor).toEqual('#FF0000');
@@ -209,13 +242,35 @@ describe('Signature specs', function () {
             });
         });
 
+        it("VT299-2009 | call takeFullScreen() with required data types |", function() {
+
+            delayHideCall();
+            waitsFor(function () {
+                return flag;
+            }, "delay before expect", HIDE_TIMEOUT_VALUE1);
+
+            Rho.Signature.takeFullScreen({'bgColor': '#FF0000', 'outputFormat': 'image', 'penWidth': 3}, sigCallback);
+
+            delayCall();
+            waitsFor(function () {
+                return flag;
+            }, "delay before expect", ENABLE_TIMEOUT_VALUE1);
+
+            runs(function () {
+                expect(Rho.Signature.bgColor).toEqual('#FF0000');
+                expect(Rho.Signature.outputFormat).toEqual('image');
+                expect(Rho.Signature.penWidth).toEqual(3);
+            });
+        });       
+
     });
 
     var arrSIGshow = getApplicablePropertiesShow();
     var arrSIGtake = getApplicablePropertiesFullScreen();
     (function (showSpecArray, takeFullScreenSpecArray) {
 
-        //propertybag is not supported in signature
+        /*
+        //propertybag is not supported in signatur
         xdescribe("set/get Property and set/get properties with all combination", function () {
 
 
@@ -308,64 +363,64 @@ describe('Signature specs', function () {
             });
         });
 
-        /*
-         //property bag is not supported in Signature
-         describe("Signature property using set/getProperty", function() {
 
-         for (var i=0;i<showSpecArray.length;i++){
+        //property bag is not supported in Signature
+        xdescribe("Signature property using set/getProperty", function() {
 
-         (function(idx){
-         it(showSpecArray[idx]['testName'], function() {
+            for (var i=0;i<showSpecArray.length;i++){
 
-         Rho.Signature.setProperty(showSpecArray[idx]['propertyName'],showSpecArray[idx]['propertyValue']);
-         var data = Rho.Signature.getProperty(showSpecArray[idx]['propertyName']);
-         expect(data).toEqual(showSpecArray[idx]['expectedResult']);
-         });
+                (function(idx){
+                    it(showSpecArray[idx]['testName'], function() {
 
-         })(i);
-         }
-         });
+                            Rho.Signature.setProperty(showSpecArray[idx]['propertyName'],showSpecArray[idx]['propertyValue']);
+                            var data = Rho.Signature.getProperty(showSpecArray[idx]['propertyName']);
+                            expect(data).toEqual(showSpecArray[idx]['expectedResult']);
+                    });
 
-         describe("Signature property Using set/getProperties ", function() {
+                })(i);
+            }
+        });
 
-         for (var i=0;i<showSpecArray.length;i++){
+        xdescribe("Signature property Using set/getProperties ", function() {
 
-         (function(idx){
-         it(showSpecArray[idx]['testName'], function() {
+            for (var i=0;i<showSpecArray.length;i++){
 
-         var propertyName = showSpecArray[idx]['propertyName'];
-         var propertyValue = showSpecArray[idx]['propertyValue'];
+                (function(idx){
+                    it(showSpecArray[idx]['testName'], function() {
+                    
+                        var propertyName = showSpecArray[idx]['propertyName'];
+                        var propertyValue = showSpecArray[idx]['propertyValue'];
 
-         if (propertyValue == 'true')
-         var strProperty = '{"'+propertyName+'" :'+true+'}';
-         else if (propertyValue == 'false')
-         var strProperty = '{"'+propertyName+'" :'+false+'}';
-         else if (!isNaN(propertyValue)){
-         propertyValue = parseInt(propertyValue);
-         var strProperty = '{"'+propertyName+'" :'+propertyValue+'}';
-         }
-         else{
-         var strProperty = '{"'+propertyName+'" : "'+propertyValue+'"}'
-         }
+                        if (propertyValue == 'true')
+                            var strProperty = '{"'+propertyName+'" :'+true+'}';
+                        else if (propertyValue == 'false')
+                            var strProperty = '{"'+propertyName+'" :'+false+'}';
+                        else if (!isNaN(propertyValue)){
+                            propertyValue = parseInt(propertyValue);
+                            var strProperty = '{"'+propertyName+'" :'+propertyValue+'}';
+                        }
+                        else{
+                            var strProperty = '{"'+propertyName+'" : "'+propertyValue+'"}'
+                        }
 
-         var objProperty = JSON.parse(strProperty);
+                        var objProperty = JSON.parse(strProperty);
+                    
+                        Rho.Signature.setProperties(objProperty);
 
-         Rho.Signature.setProperties(objProperty);
+                        var strGetProperty = '["'+showSpecArray[idx]['propertyName']+'"]';
+                        var objGetProperty = JSON.parse(strGetProperty);
 
-         var strGetProperty = '["'+showSpecArray[idx]['propertyName']+'"]';
-         var objGetProperty = JSON.parse(strGetProperty);
+                        var data = Rho.Signature.getProperties(objGetProperty);
 
-         var data = Rho.Signature.getProperties(objGetProperty);
+        
+                        data = data[arrSignatureshow[idx]['propertyName']];
+                        expect(data).toEqual(arrSignatureshow[idx]['expectedResult']);
 
-
-         data = data[showSpecArray[idx]['propertyName']];
-         expect(data).toEqual(showSpecArray[idx]['expectedResult']);
-
-         });
-         })(i);
-         }
-         });
-         */
+                    });
+                })(i);
+            }
+        });
+        */
 
         describe("Signature property setting Directly", function () {
             for (var i = 0; i < showSpecArray.length; i++) {
@@ -398,6 +453,11 @@ describe('Signature specs', function () {
         });
 
         describe("Signature property set using show()", function () {
+
+            afterEach(function () {
+                Rho.Signature.hide();
+            });
+
             for (var i = 0; i < showSpecArray.length; i++) {
                 (function (idx) {
                     it(showSpecArray[idx]['testName'], function () {
@@ -418,12 +478,10 @@ describe('Signature specs', function () {
 
                         Rho.Signature.show(objProperty);
 
-                        setTimeout(function () {
-                            flag = true
-                        }, ENABLE_TIMEOUT_VALUE);
+                        delayCall();
                         waitsFor(function () {
                             return flag;
-                        }, "Waiting for enable", 2000);
+                        }, "delay before expect", ENABLE_TIMEOUT_VALUE1);
 
                         runs(function () {
                             var data = eval(Rho.Signature)[showSpecArray[idx]['propertyName']];
@@ -435,9 +493,26 @@ describe('Signature specs', function () {
         });
 
         describe("Signature property set using takeFullScreen()", function () {
+
+            beforeEach(function() {
+                flag = false;
+            });
+
+            afterEach(function () {
+                Rho.Signature.hide();
+            });
+
             for (var i = 0; i < takeFullScreenSpecArray.length; i++) {
                 (function (idx) {
                 it(takeFullScreenSpecArray[i]['testName'], function () {
+
+                    runs(function () {
+                        delayHideCall();
+                        waitsFor(function () {
+                            return flag;
+                        }, "delay before expect", HIDE_TIMEOUT_VALUE1);
+                    });                    
+
                     var propertyName = takeFullScreenSpecArray[idx]['propertyName'];
                     var propertyValue = takeFullScreenSpecArray[idx]['propertyValue'];
                     if (propertyValue == 'true')
@@ -455,12 +530,10 @@ describe('Signature specs', function () {
 
                     Rho.Signature.takeFullScreen(objProperty, sigCallback);
 
-                    setTimeout(function () {
-                        flag = true
-                    }, ENABLE_TIMEOUT_VALUE);
+                    delayCall();
                     waitsFor(function () {
                         return flag;
-                    }, "Waiting for enable", 2000);
+                    }, "delay before expect", ENABLE_TIMEOUT_VALUE1);
 
                     runs(function () {
                         var data = eval(Rho.Signature)[takeFullScreenSpecArray[idx]['propertyName']];
@@ -472,7 +545,5 @@ describe('Signature specs', function () {
         });
 
     })(arrSIGshow, arrSIGtake);
-
-
 });
 
