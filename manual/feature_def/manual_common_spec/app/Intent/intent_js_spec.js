@@ -500,6 +500,13 @@ describe('Intent_UseCases Functionality Test', function () {
         });
         xit('uri - Launch target application from test application via Custom Uri "myApp://homeScreen"', function () {
             // What is myApp://homeScreen ???
+            /* 
+            myApp - is the Scheme
+            homeScreen - is the host
+            w.r.t Custom URI
+            
+            Updated target application with the android manifest file. Need to test it with Native app, lets keep this test case until with xit.
+            */
             displayObjective('uri - Launch target application from test application via Custom Uri "myApp://homeScreen"');
             var preConditions = ["Ensure Target app is installed in the device"];
             displayPrecondition(preConditions);
@@ -514,6 +521,20 @@ describe('Intent_UseCases Functionality Test', function () {
         });
         xit('uri - Launch SMS application from test application via URI "content://sms"', function () {
             // What is content://sms ???
+            // http://stackoverflow.com/questions/662420/android-sms-content-content-sms-sent
+            /* Some of the Examples 
+            Inbox = "content://sms/inbox"
+            Failed = "content://sms/failed"
+            Queued = "content://sms/queued"
+            Sent = "content://sms/sent"
+            Draft = "content://sms/draft"
+            Outbox = "content://sms/outbox"
+            Undelivered = "content://sms/undelivered"
+            All = "content://sms/all"
+            Conversations = "content://sms/conversations".
+            
+            Tested with Native application working fine :
+            */
             displayObjective('uri - Launch SMS application from test application via URI "content://sms"');
             dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":Rho.Intent.START_ACTIVITY,"action":"","categories":"","appName":"","targetClass":"","uri":"content://sms","mimeType":"","data":""}}');
             dispExpectedResult('Message appliation launched successfully.');
@@ -544,6 +565,20 @@ describe('Intent_UseCases Functionality Test', function () {
     if(isAndroidPlatform()){
         xit('category - Launch Message application from test app by setting URI "content://sms" and data "This is message body".', function () {
             // What is content://sms ???
+            // http://stackoverflow.com/questions/662420/android-sms-content-content-sms-sent
+            /* Some of the Examples 
+            Inbox = "content://sms/inbox"
+            Failed = "content://sms/failed"
+            Queued = "content://sms/queued"
+            Sent = "content://sms/sent"
+            Draft = "content://sms/draft"
+            Outbox = "content://sms/outbox"
+            Undelivered = "content://sms/undelivered"
+            All = "content://sms/all"
+            Conversations = "content://sms/conversations".
+            
+            Tested with Native application working fine :
+            */
             displayObjective('category - Launch Message application from test app by setting URI "content://sms" and data "This is message body".');
             dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":Rho.Intent.START_ACTIVITY,"action":"","categories":"","appName":"","targetClass":"","uri":"content://sms","mimeType":"","data":"This is SMS message body"}}');
             dispExpectedResult('Message compose screen should be launched successfully with data in it.');
