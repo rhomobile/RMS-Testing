@@ -1,3 +1,8 @@
+# New ORM failures
+# FIXME list
+# 1) "Should  delete all objects for a given model"
+
+
 describe "Rhom" do
   @use_new_orm = begin Rho::RHO.use_new_orm rescue false end
   puts "Rhom specs: use_new_orm: #{@use_new_orm}"
@@ -39,8 +44,6 @@ describe "Rhom" do
     Rhom::Rhom.have_local_changes.should be_false
   end
 
-  # Original Rhom specs
-  # - 1
   it "Should raise an exception if database_full_reset_ex called incorrectly" do
     begin
       exc = false
@@ -48,20 +51,16 @@ describe "Rhom" do
     rescue => e
       exc = true
     end
-
     exc.should be_true
   end
 
-  # - 2
   it "Should support different parameters for database_full_reset_ex method" do
-    # neworm: undefined method `database_full_reset_ex'
     Rhom::Rhom.database_full_reset_ex
     Rhom::Rhom.database_full_reset_ex( :reset_client_info => true )
     Rhom::Rhom.database_full_reset_ex( :reset_local_models => true )
     Rhom::Rhom.database_full_reset_ex( :reset_local_models => true, :reset_client_info => false )
   end
 
-  # - 3
   it "Should  delete all objects for given models" do
     Product.create( { :name => 'prod1' } )
     Customer.create( { :city => 'SPB' } )
@@ -70,14 +69,12 @@ describe "Rhom" do
     Customer.find(:count).should > 0
 
     Rhom::Rhom.database_full_reset_ex( :models => ['Product', 'Customer'] )
-    Rho::RhoConfig.reset_models.should == 'Product,Customer'
 
     Product.find(:all).length.should == 0
     Customer.find(:count).should == 0
   end
 
   # FIXME:
-  # - 4
   it "Should  delete all objects for a given model" do
     Product.create( { :name => 'prod1' } )
     Customer.create( { :city => 'SPB' } )
@@ -86,13 +83,13 @@ describe "Rhom" do
     Customer.find(:count).should > 0
 
     Rhom::Rhom.database_full_reset_ex( :models => ['Product'] )
-    Rho::RhoConfig.reset_models.should == 'Product'
 
-    # FIXME:
     Product.find(:count).should == 0
+
+    # FIXME: find(:all) for property bag returns values for another object!
     Product.find(:all).should be_empty # =>
-    # *** FAIL:
-    # Rhom - Expected [#<Product:0x2a3b12a0 @vars={:city=>"SPB", :object=>"1253302596"}>] to be empty
+    # *** FAIL: Rhom - Expected [#<Product:0xc0f0ecc @vars={:city=>"SPB", :object=>"1489578700"}>] to be empty
+
     Customer.find(:count).should > 0
   end
 
