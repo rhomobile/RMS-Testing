@@ -11,18 +11,6 @@ var parameters = function (intentType, action, categories, appName, targetClass,
     return result;
 };
 
-var getData = function(enterData){
-    var dataReturn = {};
-    console.log("arrayLength : "+ enterData.length);
-    if(enterData.length>0){
-        for(var i=0; i<enterData.length; i++){
-            if(enterData[i].EXTRA!==""){
-                dataReturn[enterData[i].EXTRA] = enterData[i].DATA;
-            }
-        }
-    }
-    return dataReturn;
-};
 describe('Intent_UseCases Functionality Test', function () {
     if(isAndroidPlatform()){
         it('intentType - StartActivity: Launch target application by \'packageName\', which is installed but not running.', function () {
@@ -286,6 +274,7 @@ describe('Intent_UseCases Functionality Test', function () {
             _result.waitForResponse();
         });
         xit('category - Launch Maps application from test app by setting category "CATEGORY_APP_MAPS" and action "ACTION_MAIN"', function () {
+            // Does not accepted by Android for some reason
             displayObjective('category - Launch Maps application from test app by setting category "CATEGORY_APP_MAPS" and action "ACTION_MAIN"');
             dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":Rho.Intent.START_ACTIVITY,"action":"ACTION_MAIN","categories":["CATEGORY_APP_MAPS"],"appName":"","targetClass":"","uri":"","mimeType":"","data":""}}');
             dispExpectedResult('Maps should be launched successfully.');
@@ -310,6 +299,7 @@ describe('Intent_UseCases Functionality Test', function () {
             _result.waitForResponse();
         });
         xit('mimeType - Launch browser from test app by setting mimeType to "text/html" and Data to "<Some HTML text>"', function () {
+            // EXTRA_*_TEXT is effective with ACTION_SEND only
             displayObjective('mimeType - Launch browser from test app by setting mimeType to "text/html" and Data to "<Some HTML text>"');
             dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":Rho.Intent.START_ACTIVITY,"action":"ACTION_VIEW","categories":"","appName":"","targetClass":"","uri":"","mimeType":"text/html","data":"<h3 style=\'color:green\'>Test case passed if you see this text in Green color with browser</h3>"}}');
             dispExpectedResult('Browser should be launched successfully.');
@@ -322,6 +312,7 @@ describe('Intent_UseCases Functionality Test', function () {
             _result.waitForResponse();
         });
         xit('mimeType - Launch Message application from test app by setting mimeType "vnd.android-dir/mms-sms" and Data to "This is message body !"', function () {
+            // mimeType param can be used to override default mime type from URL and has no effect used separately without other data
             displayObjective('mimeType - Launch Message application from test app by setting mimeType "vnd.android-dir/mms-sms" and Data to "This is message body !"');
             dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":Rho.Intent.START_ACTIVITY,"action":"","categories":"","appName":"","targetClass":"","uri":"","mimeType":"vnd.android-dir/mms-sms","data":"This should be in message body!"}}');
             dispExpectedResult('Messaging app launched successfully.');
@@ -335,33 +326,36 @@ describe('Intent_UseCases Functionality Test', function () {
         });
     }
     xit('mimeType - Launch Music player from test app by setting mimeType "audio/x-mpeg-3" and Data to "streaming data"', function () {
+        // mimeType param can be used to override default mime type from URL and has no effect used separately without other data
         displayObjective('mimeType - Launch Music player from test app by setting mimeType "audio/x-mpeg-3" and Data to "streaming data"');
         dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":Rho.Intent.START_ACTIVITY,"action":"","categories":"","appName":"","targetClass":"","uri":"","mimeType":"audio/x-mpeg-3","data":""}}');
         dispExpectedResult('MusicPlayer should be launched successfully');
         _result.waitToRunTest();
         runs(function () {
-            var enterData = [{"DATA":""}];
-                var data = getData(enterData);
-            var params = new parameters(Rho.Intent.START_ACTIVITY,"","","","","","audio/x-mpeg-3",data);
+            var params = new parameters(Rho.Intent.START_ACTIVITY,"","","","","","audio/x-mpeg-3","");
             Rho.Intent.send(params);
         });
         _result.waitForResponse();
     });
-    xit('mimeType - Launch Image viewer from test app by setting uri to "image data URI"', function () {
-        displayObjective('mimeType - Launch Image viewer from test app by setting mimeType "image (jpeg, gif, png etc.,)" and Data to "image data URI"');
-        dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":Rho.Intent.START_ACTIVITY,"action":"","categories":"","appName":"","targetClass":"","uri":"","mimeType":"image/jpeg","data":"<data:image/jpeg;base64,/qerwe.... >"}}');
-        dispExpectedResult('Image viewer should be launched successfully.');
-        _result.waitToRunTest();
-        runs(function () {
-            var uri = "data:image/jpeg;base64,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";
-            var params = new parameters(Rho.Intent.START_ACTIVITY,"","","","",uri,"","");
-            Rho.Intent.send(params);
+    if(!isAndroidPlatform()){
+        // No common app in android supports "data:" URIs in intents
+        it('mimeType - Launch Image viewer from test app by setting uri to "image data URI"', function () {
+            displayObjective('mimeType - Launch Image viewer from test app by setting mimeType "image (jpeg, gif, png etc.,)" and Data to "image data URI"');
+            dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":Rho.Intent.START_ACTIVITY,"action":"","categories":"","appName":"","targetClass":"","uri":"","mimeType":"image/jpeg","data":"<data:image/jpeg;base64,/qerwe.... >"}}');
+            dispExpectedResult('Image viewer should be launched successfully.');
+            _result.waitToRunTest();
+            runs(function () {
+                var uri = "data:image/jpeg;base64,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";
+                var params = new parameters(Rho.Intent.START_ACTIVITY,"","","","",uri,"image/jpeg","");
+                Rho.Intent.send(params);
+                //Rho.System.openUrl(uri);
+            });
+            _result.waitForResponse();
         });
-        _result.waitForResponse();
-    });
+    }
     if(!isAndroidPlatform() && !isApplePlatform()){
-        displayObjective('appName - Launch any other Application by setting \'appName\' in intent params, from test application.');
         it('appName - Launch any other Application by setting \'appName\' in intent params, from test application.', function () {
+            displayObjective('appName - Launch any other Application by setting \'appName\' in intent params, from test application.');
             dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":Rho.Intent.START_ACTIVITY,"action":"","categories":"","appName":"testApp","targetClass":"","uri":"","mimeType":"","data":""}}');
             dispExpectedResult('Application should be launched from test application successfully');
             _result.waitToRunTest();
@@ -451,19 +445,21 @@ describe('Intent_UseCases Functionality Test', function () {
         });
         _result.waitForResponse();
     });
-    xit('uri - Launch Maps with pre-set lat and longitute values from test app by setting Uri "geo:latitude,longitude"', function () {
-        displayObjective('uri - Launch Maps with pre-set lat and longitute values from test app by setting Uri "geo:latitude,longitude"');
-        var preConditions = ["Ensure maps application present in the device"];
-            displayPrecondition(preConditions);
-        dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":Rho.Intent.START_ACTIVITY,"action":"ACTION_VIEW","categories":"","appName":"","targetClass":"","uri":"geo:12.9667° N, 77.5667° E","mimeType":"","data":""}}');
-        dispExpectedResult('Maps application launched with the pre-set Lattitude and Longitude');
-        _result.waitToRunTest();
-        runs(function () {
-            var params = new parameters(Rho.Intent.START_ACTIVITY,"ACTION_VIEW","","","","geo:12.9667° N, 77.5667° E","","");
-            Rho.Intent.send(params);
+    if(!isAndroidPlatform()){
+        it('uri - Launch Maps with pre-set lat and longitute values from test app by setting Uri "geo:latitude,longitude"', function () {
+            displayObjective('uri - Launch Maps with pre-set lat and longitute values from test app by setting Uri "geo:latitude,longitude"');
+            var preConditions = ["Ensure maps application present in the device"];
+                displayPrecondition(preConditions);
+            dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":Rho.Intent.START_ACTIVITY,"action":"ACTION_VIEW","categories":"","appName":"","targetClass":"","uri":"geo:12.9667° N, 77.5667° E","mimeType":"","data":""}}');
+            dispExpectedResult('Maps application launched with the pre-set Lattitude and Longitude');
+            _result.waitToRunTest();
+            runs(function () {
+                var params = new parameters(Rho.Intent.START_ACTIVITY,"ACTION_VIEW","","","","geo:12.9667° N, 77.5667° E","","");
+                Rho.Intent.send(params);
+            });
+            _result.waitForResponse();
         });
-        _result.waitForResponse();
-    });
+    }
     it('uri - Make a call from test application by setting URI "tel:9611896991" and Action : "ACTION_CALL"', function () {
         displayObjective('uri - Make a call from test application by setting URI "tel:9611896991" and Action : "ACTION_CALL"');
         dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":Rho.Intent.START_ACTIVITY,"action":"ACTION_CALL","categories":"","appName":"","targetClass":"","uri":"mailto:abcd@domain.com","mimeType":"","data":""}}');
@@ -503,6 +499,7 @@ describe('Intent_UseCases Functionality Test', function () {
             _result.waitForResponse();
         });
         xit('uri - Launch target application from test application via Custom Uri "myApp://homeScreen"', function () {
+            // What is myApp://homeScreen ???
             displayObjective('uri - Launch target application from test application via Custom Uri "myApp://homeScreen"');
             var preConditions = ["Ensure Target app is installed in the device"];
             displayPrecondition(preConditions);
@@ -516,6 +513,7 @@ describe('Intent_UseCases Functionality Test', function () {
             _result.waitForResponse();
         });
         xit('uri - Launch SMS application from test application via URI "content://sms"', function () {
+            // What is content://sms ???
             displayObjective('uri - Launch SMS application from test application via URI "content://sms"');
             dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":Rho.Intent.START_ACTIVITY,"action":"","categories":"","appName":"","targetClass":"","uri":"content://sms","mimeType":"","data":""}}');
             dispExpectedResult('Message appliation launched successfully.');
@@ -545,6 +543,7 @@ describe('Intent_UseCases Functionality Test', function () {
     });
     if(isAndroidPlatform()){
         xit('category - Launch Message application from test app by setting URI "content://sms" and data "This is message body".', function () {
+            // What is content://sms ???
             displayObjective('category - Launch Message application from test app by setting URI "content://sms" and data "This is message body".');
             dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":Rho.Intent.START_ACTIVITY,"action":"","categories":"","appName":"","targetClass":"","uri":"content://sms","mimeType":"","data":"This is SMS message body"}}');
             dispExpectedResult('Message compose screen should be launched successfully with data in it.');
@@ -580,7 +579,8 @@ describe('Intent_UseCases Functionality Test', function () {
             });
             _result.waitForResponse();
         });
-        it('Start Listening to the background intents - broadcast messages (receiving broadcast messages)', function () {
+        xit('Start Listening to the background intents - broadcast messages (receiving broadcast messages)', function () {
+            // Is not supported by Intent API
             displayObjective('Start Listening to the background intents - broadcast messages (receiving broadcast messages)');
             dispTestCaseRunning('Test app should receive broad cast messages with the help of Start Listening API.');
             dispExpectedResult('Test appliation starts listening to background intents and should alert the broadcast message received');
@@ -596,12 +596,11 @@ describe('Intent_UseCases Functionality Test', function () {
                         alert("Test case passed !");
                     }
                 };
-                Rho.Intent.startListening(receiveCB);
-                Rho.Intent.send(params);
+                Rho.Intent.send(params, receiveCB);
             });
             _result.waitForResponse();
         });
-        xit('Start Listening to the background intents - broadcast messages (receiving broadcast messages)', function () {
+        it('Start Listening to the background intents - broadcast messages (receiving broadcast messages)', function () {
             displayObjective('Start Listening to the background intents - broadcast messages (receiving broadcast messages)');
             dispTestCaseRunning('Test app should receive broad cast messages with the help of Start Listening API.');
             dispExpectedResult('Test appliation starts listening to background intents and should alert the broadcast message received and also should trigger callback function of the send method which alerts test case passed.');
@@ -614,7 +613,7 @@ describe('Intent_UseCases Functionality Test', function () {
                 var receiveCB = function(intent){
                     if(intent.data.myData == "This is broad cast data 3!")
                     {
-                        alert("startListening Callback: fired !");
+                        alert("Test case passed !");
                     }
                 };
                 var successCB = function(intent){
@@ -630,7 +629,7 @@ describe('Intent_UseCases Functionality Test', function () {
             });
             _result.waitForResponse();
         });
-        xit('Try to start listening to the background intents, when already started listenting.', function () {
+        it('Try to start listening to the background intents, when already started listenting.', function () {
             displayObjective('Try to start listening to the background intents, when already started listenting.');
             dispTestCaseRunning('Try to start listening to the background intents, when already started listenting.');
             dispExpectedResult('No effect or no crash should be seen in the test application.');
@@ -820,3 +819,4 @@ describe('Intent_UseCases Functionality Test', function () {
         _result.waitForResponse();
     });
 });
+    
