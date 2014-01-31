@@ -18,11 +18,11 @@ describe("New ORM Model Specs", function() {
   } else { // Old ORM
     var Product = function(model){
       model.modelName("Product");
-      // model.enable("fixedSchema");
+      model.enable("fixedSchema");
       model.enable("sync");
       model.property("name","string");
       model.property("brand","string");
-      model.set("partition","user");
+      // model.set("partition","user");
     };
 
     var addProductModel = function() {
@@ -30,23 +30,20 @@ describe("New ORM Model Specs", function() {
     };
   }
 
-  var reset = function(syncdb) {
-    // console.log("-- reset db: " + syncdb);
-    db = Rho.ORMHelper.dbConnection(syncdb);
-    var partitions = Rho.ORMHelper.getDbPartitions();
+  var reset = function() {
+    var partitions = Rho.ORM.getDbPartitions();
     $.each(partitions, function(index, db2) {
-      db2.$execute_sql("DELETE FROM SOURCES");
-      db2.$execute_sql("DELETE FROM OBJECT_VALUES");
-      db2.$execute_sql("DELETE FROM CHANGED_VALUES");
-      if(db2.$is_table_exist("Product")){
-        db2.$execute_sql("DROP TABLE Product");
+      db2.executeSql("DELETE FROM SOURCES");
+      db2.executeSql("DELETE FROM OBJECT_VALUES");
+      db2.executeSql("DELETE FROM CHANGED_VALUES");
+      if(db2.isTableExist("Product")){
+        db2.executeSql("DROP TABLE Product");
       }
     });
   };
 
   beforeEach(function() {
-    //reset("local");
-    reset("user");
+    reset();
   });
 
   it('Check Rho.ORM exist or not | Should return an "function" or "object"',function(){
@@ -58,7 +55,7 @@ describe("New ORM Model Specs", function() {
 
   it("Should return client id",function(){
     var db = Rho.ORMHelper.dbConnection("user");
-    db.$execute_sql("DELETE FROM CLIENT_INFO");
+    db.executeSql("DELETE FROM CLIENT_INFO");
     var client_id = Rho.ORM.getClientId();
 
     if(useNewORM) // FIXME:
@@ -66,7 +63,7 @@ describe("New ORM Model Specs", function() {
     else
       expect(client_id).toEqual([]);
 
-    db.$execute_sql("INSERT INTO CLIENT_INFO (client_id) VALUES(7)");
+    db.executeSql("INSERT INTO CLIENT_INFO (client_id) VALUES(7)");
     client_id = Rho.ORM.getClientId();
     expect(client_id).toEqual("7");
   });
@@ -74,7 +71,6 @@ describe("New ORM Model Specs", function() {
   it('Should create model',function() {
     //var sources = Rho.ORMModel.enumerate();
     //console.log(sources); // => null
-
     var model = addProductModel();
     expect(model).toBeDefined();
     expect(model).not.toBe(null);
@@ -82,7 +78,7 @@ describe("New ORM Model Specs", function() {
     // models = Rho.ORMModel.enumerate();
     // console.log(JSON.stringify(models)); // => [{}]
     var db = Rho.ORMHelper.dbConnection("user");
-    var res = db.$execute_sql("select * from sources where name = 'Product'");
+    var res = db.executeSql("select * from sources where name = 'Product'");
     //console.log(JSON.stringify(res));
     // =>
     // [ {"map":
@@ -94,9 +90,10 @@ describe("New ORM Model Specs", function() {
     //       "sync_type":"incremental","token":""
     //     }
     //  }]
-    expect(res[0].map.name).toEqual('Product');
-    expect(res[0].map.sync_type).toEqual('incremental');
-    expect(res[0].map.partition).toEqual('user');
+    console.log("we have here  + " + JSON.stringify(res));
+    expect(res[0].name).toEqual('Product');
+    expect(res[0].sync_type).toEqual('incremental');
+    expect(res[0].partition).toEqual('user');
   });
 
   it('Get a model by its name after it has been added', function() {
@@ -109,7 +106,7 @@ describe("New ORM Model Specs", function() {
       expect(p.partition).toEqual('user');
 
       // default values of other properties
-      expect(p.loaded).toBe(false); // FIXME: correct?
+      expect(p.loaded).toBe(true); // FIXME: correct?
       expect(p.sync_priority).toEqual(1000);
       expect(p.source_id).toBeGreaterThan(0);
       expect(p.fixed_schema).toBe(true);
@@ -155,8 +152,7 @@ describe("New ORM Model Specs", function() {
     }
   });
 
-
-  // TODO:
+  // FIXME:
   xit('VT302-0204 | deletes all objects in database', function() {
     var model = addProductModel();
     model.create({"name":"iphone","brand":"Apple"});

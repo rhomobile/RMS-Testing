@@ -13,9 +13,20 @@ class SpecRunner < MSpecScript
       [ {:schema_model=>true, :sync_model=>true},  {:schema_model=>true, :sync_model=>false},
         {:schema_model=>false, :sync_model=>true} , {:schema_model=>false, :sync_model=>false} ]
     ]
+
+    # Testing for property bag / no sync
+    # config[:files] << ["spec/rhom_object_spec", [{:schema_model=>false, :sync_model=>false}]]
+    # Testing for fixed schema / no sync
+    # config[:files] << ["spec/rhom_object_spec", [{:schema_model=>true, :sync_model=>false}]]
+
+    # Testing for fixed schema / sync
+    # Testing for fixed schema / no sync
+    # Testing for property bag / sync
+    # Testing for property bag / no sync
     config[:files] << [ "spec/rhom_object_spec",
         [ {:schema_model=>true, :sync_model=>true},  {:schema_model=>true, :sync_model=>false},
           {:schema_model=>false, :sync_model=>true} , {:schema_model=>false, :sync_model=>false} ] ]
+
     config[:files] << "spec/rhom_spec"
   end
 
@@ -36,6 +47,5 @@ class SpecRunner < MSpecScript
     end
 
     MSpec.exit_code
-    System.exit
   end
 end

@@ -109,6 +109,21 @@ var dispCurrentProcess = function (data){
 	document.getElementById('detailsdiv').innerHTML = data;
 }
 
+var displayObjective = function(data){
+    document.getElementById('objective').innerHTML = data;
+}
+var displayPrecondition = function(data){
+    if(data.length>0){
+        var retData = "<b>PreConditions:</b><br/><ul>";
+        for (var i=0; i<data.length;i++){
+            retData = retData + "<li>"+data[i]+"</li>"
+        }
+        retData = retData + "</ul>";
+        document.getElementById('preCondition').innerHTML = retData;
+    }else{
+        document.getElementById('preCondition').innerHTML = " - ";
+    }
+}
 var dispExpectedResult= function (data){
 	document.getElementById('expectedresult').innerHTML = data;
 }

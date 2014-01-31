@@ -1,16 +1,9 @@
 describe "RhomModel" do
-
-  before(:all) do
-  end
-
-  after(:all) do
-  end
+  @use_new_orm = begin Rho::RHO.use_new_orm rescue false end
+  puts "Rhom specs: use_new_orm: #{@use_new_orm}"
 
   before(:each) do
     clean_db_data
-  end
-
-  after(:each) do
   end
 
   it "should get count of objects" do
@@ -107,7 +100,11 @@ describe "RhomModel" do
 
     @product.destroy
 
-    getProduct.find(product_id).should be_nil
+    if @use_new_orm
+      getProduct.find(product_id).should be_empty
+    else
+      getProduct.find(product_id).should be_nil
+    end
     (count - 1).should == getProduct.count
   end
 
