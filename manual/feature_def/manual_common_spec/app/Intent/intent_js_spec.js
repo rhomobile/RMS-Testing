@@ -11,6 +11,7 @@ var parameters = function (intentType, action, categories, appName, targetClass,
     return result;
 };
 
+
 describe('Intent_UseCases Functionality Test', function () {
     if(isAndroidPlatform()){
         it('intentType - StartActivity: Launch target application by \'packageName\', which is installed but not running.', function () {
@@ -337,7 +338,8 @@ describe('Intent_UseCases Functionality Test', function () {
         });
         _result.waitForResponse();
     });
-    if(!isAndroidPlatform() && !isApplePlatform()){
+    //TODO: Is such method usage supports on iOS ?
+    if(isApplePlatform()){
         // No common app in android supports "data:" URIs in intents
         it('mimeType - Launch Image viewer from test app by setting uri to "image data URI"', function () {
             displayObjective('mimeType - Launch Image viewer from test app by setting mimeType "image (jpeg, gif, png etc.,)" and Data to "image data URI"');
@@ -353,15 +355,16 @@ describe('Intent_UseCases Functionality Test', function () {
             _result.waitForResponse();
         });
     }
-    if(!isAndroidPlatform() && !isApplePlatform()){
+    if(isAnyWindowsFamilyPlatform()){
         it('appName - Launch any other Application by setting \'appName\' in intent params, from test application.', function () {
             displayObjective('appName - Launch any other Application by setting \'appName\' in intent params, from test application.');
-            dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":Rho.Intent.START_ACTIVITY,"action":"","categories":"","appName":"testApp","targetClass":"","uri":"","mimeType":"","data":""}}');
+            dispTestCaseRunning('Se   nding Intent with parameters {"params":{"intentType":Rho.Intent.START_ACTIVITY,"action":"","categories":"","appName":"testApp","targetClass":"","uri":"","mimeType":"","data":""}}');
             dispExpectedResult('Application should be launched from test application successfully');
             _result.waitToRunTest();
             runs(function () {
-                var params = new parameters(Rho.Intent.START_ACTIVITY,"","","testApp","","","","");
-                Rho.Intent.send(params);
+                //var params = new parameters(Rho.Intent.START_ACTIVITY,"","","rhomobile TestApp/TestApp.exe","","","","");
+                var parameters = {intentType: Rho.Intent.START_ACTIVITY, appName: "rhomobile TestApp/TestApp.exe", data: {}};
+                Rho.Intent.send(parameters);
             });
             _result.waitForResponse();
         });
@@ -399,6 +402,7 @@ describe('Intent_UseCases Functionality Test', function () {
             _result.waitForResponse();
         });
     }
+    if (isAnyButWindowsFamilyPlatform()){
     it('uri - Launch URL via browser appliation from test app by setting URI "http://www.google.com"', function () {
         displayObjective('uri - Launch URL via browser appliation from test app by setting URI "http://www.google.com"');
         dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":Rho.Intent.START_ACTIVITY,"action":"ACTION_VIEW","categories":"","appName":"","targetClass":"","uri":"http://www.google.com","mimeType":"","data":""}}');
@@ -410,7 +414,7 @@ describe('Intent_UseCases Functionality Test', function () {
         });
         _result.waitForResponse();
     });
-    
+    }
     if (!isApplePlatform) {
          it('uri - Launch Message application with data from test app by setting URI "sms:9611896991"', function () {
             displayObjective('uri - Launch Message application with data from test app by setting URI "sms:9611896991"');
@@ -811,16 +815,18 @@ describe('Intent_UseCases Functionality Test', function () {
         dispTestCaseRunning('Sending intent with NULL value as a callback parameter');
         dispExpectedResult('No crash or any bad behavior should be seen in the test applciation.');
         _result.waitToRunTest();
-       
-        var appName = "com.smap.targetapp";
-       
-        if ( isApplePlatform() ) {
-          appName = "testapp";
+
+        if (isAndroidPlatform()) {
+            parameters = {intentType: Rho.Intent.START_ACTIVITY, appName:  "com.smap.targetapp"};
         }
-       
+        if (isApplePlatform()) {
+            parameters = {intentType: Rho.Intent.START_ACTIVITY, appName: "testapp"};
+        }
+        if (isAnyWindowsFamilyPlatform()) {
+            parameters = {intentType: Rho.Intent.START_ACTIVITY, appName: "rhomobile TestApp/TestApp.exe", data: {}};
+        }
         runs(function(){
-            var params = new parameters(Rho.Intent.START_ACTIVITY,"ACTION_MAIN","",appName,"","","","");
-            Rho.Intent.send(params, null);
+            Rho.Intent.send(parameters, null);
         });
         _result.waitForResponse();
     });
@@ -839,10 +845,21 @@ describe('Intent_UseCases Functionality Test', function () {
         //    Rho.Intent.send(params);
         //});
         //_result.waitForResponse();
-        
+
+        var parameters;
+        if (isAndroidPlatform()) {
+            parameters = {intentType: Rho.Intent.BROADCAST, action: "com.rhomobile.BROADCAST", appName: "com.smap.targetapp", data: {myData: "This is broad cast data!" } };
+        }
+        if (isApplePlatform()) {
+            parameters = {intentType: Rho.Intent.BROADCAST, action: "com.rhomobile.BROADCAST", appName: "testapp", data: {myData: "This is broad cast data!" } };
+        }
+        if (isAnyWindowsFamilyPlatform()) {
+            parameters = {intentType: Rho.Intent.BROADCAST, appName: "rhomobile TestApp/TestApp.exe", data: {myData: "This is broad cast data!" } };
+        }
+
         expect(function () {
             Rho.Intent.startListening();
-            Rho.Intent.send({intentType: Rho.Intent.START_ACTIVITY, action: 'ACTION_MAIN', appName: 'com.smap.targetapp'});
+            Rho.Intent.send(parameters);
         }).toThrow();
         
     });
@@ -853,16 +870,22 @@ describe('Intent_UseCases Functionality Test', function () {
         dispExpectedResult('No crash or bad behavior should be seen in the test application.');
         _result.waitToRunTest();
         runs(function () {
-            var mytestapp = 'com.rhomobile.manual_common_spec';
-            var data = {
-                "myData":"This is broad cast data !"
-            };
-            var receiveCB = function(){
+            var parameters;
+            if (isAndroidPlatform()) {
+                parameters = {intentType: Rho.Intent.BROADCAST, action: "com.rhomobile.BROADCAST", appName: "com.smap.targetapp", data: {myData: "This is broad cast data!" } };
+            }
+            if (isApplePlatform()) {
+                parameters = {intentType: Rho.Intent.BROADCAST, action: "com.rhomobile.BROADCAST", appName: "testapp", data: {myData: "This is broad cast data!" } };
+            }
+            if (isAnyWindowsFamilyPlatform()) {
+                parameters = {intentType: Rho.Intent.BROADCAST, appName: "rhomobile TestApp/TestApp.exe", data: {myData: "This is broad cast data!" } };
+            }
+            var callback = function(){
                 alert("Callback without arguments !");
             };
-            var params = new parameters(Rho.Intent.BROADCAST,"com.rhomobile.BROADCAST",["com.rhomobile.manual_common_spec"],"","","","",data);
-            Rho.Intent.startListening(receiveCB);
-            Rho.Intent.send(params);
+            //var params = new parameters(Rho.Intent.BROADCAST,"com.rhomobile.BROADCAST",["com.rhomobile.manual_common_spec"],"","","","",data);
+            Rho.Intent.startListening(callback);
+            Rho.Intent.send(parameters);
         });
         _result.waitForResponse();
     });
