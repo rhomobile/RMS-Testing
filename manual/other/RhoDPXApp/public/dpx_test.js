@@ -186,12 +186,10 @@ var dpx_tests = (function() {
             'debug': false,
 
             'audioFeedback': false,
-            'hapticFeedback': false,
+            'hapticFeedback': true,
             'ledFeedback': true,
 
-            'inputSource': Rho.DPX.SOURCE_FILE, 
-            'inputSourceFilename': '/sdcard/templates/1024w_754h_Delivery Attempt Notification.yuv',
-            'fileInteractiveMode': true,
+            'inputSource': Rho.DPX.SOURCE_CAMERA, 
             'uiResultConfirmation': false
         };
 
@@ -218,7 +216,7 @@ var dpx_tests = (function() {
             dpx.setCallback(function(dict) {
                 callback(dict, dpx);
 
-                if (dict['callbackType'] === 'success' || dict['callbackType'] === 'failure') {
+                if (dict['callbackType'] === 'stop') {
                     dpx.close();
                 }
             });
