@@ -12,12 +12,6 @@ var dpx_tests = (function() {
         });
     }
 
-    var resolutions = [
-        Rho.DPX.RESOLUTION_SMALL,
-        Rho.DPX.RESOLUTION_MEDIUM,
-        Rho.DPX.RESOLUTION_LARGE
-    ];
-
     var fillDropDown = function(dropDown, input, value, values) {
         input.val(value);
         $.each(values, function(idx, fileName) {
@@ -36,7 +30,6 @@ var dpx_tests = (function() {
 
     $(document).ready(function(){
         fillDropDown($('ul.dropdown-menu.x-templates'  ), $('input.form-control.x-template'  ), 'Logistics Post.xml'     , templates  );
-        fillDropDown($('ul.dropdown-menu.x-resolutions'), $('input.form-control.x-resolution'), Rho.DPX.RESOLUTION_MEDIUM, resolutions);
     });
 
 
@@ -181,15 +174,12 @@ var dpx_tests = (function() {
         var params = {
             'template': 'file://' + encodeURI(Rho.RhoFile.join(TEMPLATES_DIR, $('input.form-control.x-template').val())),
 
-            'manualResolution': $('input.form-control.x-resolution').val(),
-
             'debug': false,
 
             'audioFeedback': false,
             'hapticFeedback': true,
             'ledFeedback': true,
 
-            'inputSource': Rho.DPX.SOURCE_CAMERA, 
             'uiResultConfirmation': false
         };
 
