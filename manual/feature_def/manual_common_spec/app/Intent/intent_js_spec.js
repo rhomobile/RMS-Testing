@@ -208,7 +208,7 @@ describe('Intent_UseCases Functionality Test', function () {
             _result.waitForResponse();
         });
         it('category - Launch browser from test application by setting category "CATEGORY_APP_BROWSER" and action "ACTION_MAIN"', function () {
-            displayObjective('category - Launch browser from test application by setting category "CATEGORY_APP_BROWSER" and action "ACTION_MAIN"');
+            displayObjective('category - Launch browser from test application by setting category "CATEGORY_APP_BROWSER" and action "ACTION_MAIN". Starting from android Android 4.0.3 (15) ICE_CREAM_SANDWICH_MR1');
             dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":Rho.Intent.START_ACTIVITY,"action":"ACTION_MAIN","categories":["CATEGORY_APP_BROWSER"],"appName":"","targetClass":"","uri":"","mimeType":"","data":""}}');
             dispExpectedResult('Browser should be launched with blank screen');
             _result.waitToRunTest();
@@ -220,7 +220,7 @@ describe('Intent_UseCases Functionality Test', function () {
             _result.waitForResponse();
         });
         it('category - Launch Music Player from test application by setting category "CATEGORY_APP_MUSIC"  and action "ACTION_MAIN"', function () {
-            displayObjective('category - Launch Music Player from test application by setting category "CATEGORY_APP_MUSIC"  and action "ACTION_MAIN"');
+            displayObjective('category - Launch Music Player from test application by setting category "CATEGORY_APP_MUSIC"  and action "ACTION_MAIN". Starting from android Android 4.0.3 (15) ICE_CREAM_SANDWICH_MR1');
             dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":Rho.Intent.START_ACTIVITY,"action":"ACTION_MAIN","categories":["CATEGORY_APP_MUSIC"],"appName":"","targetClass":"","uri":"","mimeType":"","data":""}}');
             dispExpectedResult('Launch Music Player from test application by setting category "CATEGORY_APP_MUSIC"  and action "ACTION_MAIN"');
             _result.waitToRunTest();
@@ -232,7 +232,7 @@ describe('Intent_UseCases Functionality Test', function () {
             _result.waitForResponse();
         });
         it('category - Launch Calculator from test applciation by setting category "CATEGORY_APP_CALCULATOR"  and action "ACTION_MAIN"', function () {
-            displayObjective('category - Launch Calculator from test applciation by setting category "CATEGORY_APP_CALCULATOR"  and action "ACTION_MAIN"');
+            displayObjective('category - Launch Calculator from test applciation by setting category "CATEGORY_APP_CALCULATOR"  and action "ACTION_MAIN". Starting from android Android 4.0.3 (15) ICE_CREAM_SANDWICH_MR1');
             dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":Rho.Intent.START_ACTIVITY,"action":"ACTION_MAIN","categories":["CATEGORY_APP_CALCULATOR"],"appName":"","targetClass":"","uri":"","mimeType":"","data":""}}');
             dispExpectedResult('Calculator should be launched successfully.');
             _result.waitToRunTest();
@@ -244,7 +244,7 @@ describe('Intent_UseCases Functionality Test', function () {
             _result.waitForResponse();
         });
         it('category - Launch Calendar from test application by setting category "CATEGORY_APP_CALENDAR" and action "ACTION_MAIN"', function () {
-            displayObjective('category - Launch Calendar from test application by setting category "CATEGORY_APP_CALENDAR" and action "ACTION_MAIN"');
+            displayObjective('category - Launch Calendar from test application by setting category "CATEGORY_APP_CALENDAR" and action "ACTION_MAIN". Starting from android Android 4.0.3 (15) ICE_CREAM_SANDWICH_MR1');
             dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":Rho.Intent.START_ACTIVITY,"action":"ACTION_MAIN","categories":["CATEGORY_APP_CALENDAR"],"appName":"","targetClass":"","uri":"","mimeType":"","data":""}}');
             dispExpectedResult('Calendar should be launched successfully.');
             _result.waitToRunTest();
@@ -256,7 +256,7 @@ describe('Intent_UseCases Functionality Test', function () {
             _result.waitForResponse();
         });
         it('category - Launch contacts from test application by setting category "CATEGORY_APP_CONTACTS" and action "ACTION_MAIN"', function () {
-            displayObjective('category - Launch contacts from test application by setting category "CATEGORY_APP_CONTACTS" and action "ACTION_MAIN"');
+            displayObjective('category - Launch contacts from test application by setting category "CATEGORY_APP_CONTACTS" and action "ACTION_MAIN". Starting from android Android 4.0.3 (15) ICE_CREAM_SANDWICH_MR1');
             dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":Rho.Intent.START_ACTIVITY,"action":"ACTION_MAIN","categories":["CATEGORY_APP_CONTACTS"],"appName":"","targetClass":"","uri":"","mimeType":"","data":""}}');
             dispExpectedResult('Contacts applciation should be launched successfully.');
             _result.waitToRunTest();
@@ -268,7 +268,7 @@ describe('Intent_UseCases Functionality Test', function () {
             _result.waitForResponse();
         });
         it('category - Launch Email application from test application by setting category "CATEGORY_APP_EMAIL" and action "ACTION_MAIN"', function () {
-            displayObjective('category - Launch Email application from test application by setting category "CATEGORY_APP_EMAIL" and action "ACTION_MAIN"');
+            displayObjective('category - Launch Email application from test application by setting category "CATEGORY_APP_EMAIL" and action "ACTION_MAIN". Starting from android Android 4.0.3 (15) ICE_CREAM_SANDWICH_MR1');
             dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":Rho.Intent.START_ACTIVITY,"action":"ACTION_MAIN","categories":["CATEGORY_APP_EMAIL"],"appName":"","targetClass":"","uri":"","mimeType":"","data":""}}');
             dispExpectedResult('Email application should be launched successfully.');
             _result.waitToRunTest();
@@ -280,7 +280,7 @@ describe('Intent_UseCases Functionality Test', function () {
             _result.waitForResponse();
         });
         it('category - Launch Gallery application from test app by setting category "CATEGORY_APP_GALLERY" and action "ACTION_MAIN"', function () {
-            displayObjective('category - Launch Gallery application from test app by setting category "CATEGORY_APP_GALLERY" and action "ACTION_MAIN"');
+            displayObjective('category - Launch Gallery application from test app by setting category "CATEGORY_APP_GALLERY" and action "ACTION_MAIN". Starting from android Android 4.0.3 (15) ICE_CREAM_SANDWICH_MR1');
             dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":Rho.Intent.START_ACTIVITY,"action":"ACTION_MAIN","categories":["CATEGORY_APP_GALLERY"],"appName":"","targetClass":"","uri":"","mimeType":"","data":""}}');
             dispExpectedResult('Gallery launched successfully');
             _result.waitToRunTest();
@@ -293,7 +293,7 @@ describe('Intent_UseCases Functionality Test', function () {
         });
         xit('category - Launch Maps application from test app by setting category "CATEGORY_APP_MAPS" and action "ACTION_MAIN"', function () {
             // Does not accepted by Android for some reason
-            displayObjective('category - Launch Maps application from test app by setting category "CATEGORY_APP_MAPS" and action "ACTION_MAIN"');
+            displayObjective('category - Launch Maps application from test app by setting category "CATEGORY_APP_MAPS" and action "ACTION_MAIN". Starting from android Android 4.0.3 (15) ICE_CREAM_SANDWICH_MR1');
             dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":Rho.Intent.START_ACTIVITY,"action":"ACTION_MAIN","categories":["CATEGORY_APP_MAPS"],"appName":"","targetClass":"","uri":"","mimeType":"","data":""}}');
             dispExpectedResult('Maps should be launched successfully.');
             _result.waitToRunTest();
@@ -305,7 +305,7 @@ describe('Intent_UseCases Functionality Test', function () {
             _result.waitForResponse();
         });
         it('category - Launch Message application from test app by setting category "CATEGORY_APP_MESSAGING" and action "ACTION_MAIN"', function () {
-            displayObjective('category - Launch Message application from test app by setting category "CATEGORY_APP_MESSAGING" and action "ACTION_MAIN"');
+            displayObjective('category - Launch Message application from test app by setting category "CATEGORY_APP_MESSAGING" and action "ACTION_MAIN". Starting from android Android 4.0.3 (15) ICE_CREAM_SANDWICH_MR1');
             dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":Rho.Intent.START_ACTIVITY,"action":"ACTION_MAIN","categories":["CATEGORY_APP_MESSAGING"],"appName":"","targetClass":"","uri":"","mimeType":"","data":""}}');
             dispExpectedResult('Messaging app launched successfully.');
             _result.waitToRunTest();
@@ -882,8 +882,8 @@ describe('Intent_UseCases Functionality Test', function () {
     });
     if (!isApplePlatform()) {
     it('Start Listening to the background intents using callback without argument', function () {
-        displayObjective('Stop Listening to the background intents callback without argument');
-        dispTestCaseRunning('Executing stopListening method with callback function which does not have argument !');
+        displayObjective('Start Listening to the background intents callback without argument');
+        dispTestCaseRunning('Executing startListening method with callback function which does not have argument !');
         dispExpectedResult('No crash or bad behavior should be seen in the test application and an alert message should be shown to the user.');
         _result.waitToRunTest();
         runs(function () {
