@@ -343,28 +343,6 @@ describe('DPX Functionality Test', function() {
         _result.waitForResponse();
     });
 
-    xit('scan with imager', function() {
-        dispTestCaseRunning('Scan Delivery Attempt Notification with imager');
-        dispExpectedResult('No expected result. This is automatic test.');
-
-        _result.waitToRunAutoTest();
-
-        runs(function() {
-            dpxInstance.template = 'file:///sdcard/templates/Logistics%20Post.xml';
-            dpxInstance.inputSource = Rho.DPX.SOURCE_IMAGER;
-            dpxInstance.uiResultConfirmation = false;
-
-            dpxInstance.setCallback(function(dict) {
-                expect(dict['callbackType']).toEqual(Rho.DPX.SUCCESS);
-                _result.passed();
-            });
-
-            dpxInstance.captureDocument();
-        });
-
-        _result.waitForResponse();
-    });
-
     it('Debug mode.', function() {
         dispTestCaseRunning('Scan Delivery Attempt Notification');
         dispExpectedResult('callbackType should be success.\nThere is new subdirectory in /sdcard/RhoDPXLog directory.');
@@ -404,26 +382,6 @@ describe('DPX Functionality Test', function() {
                 displayResult('Output: ', 'callbackType is ' + dict['callbackType']);
             });
 
-            dpxInstance.captureDocument();
-        });
-
-        _result.waitForResponse();
-    });
-
-    it('Different zoom amounts.', function() {
-        dispTestCaseRunning('Frame Delivery Attempt Notification in camera.\n2. Change zoom amount using onscreen controls.\n3. Scan form.');
-        dispExpectedResult('callbackType should be success.\nZoom amount should affect distance to document during framing.');
-
-        _result.waitToRunTest();
-
-        runs(function() {
-            dpxInstance.template = 'file:///sdcard/templates/Logistics%20Post.xml';
-            dpxInstance.inputSource = Rho.DPX.SOURCE_CAMERA;
-            dpxInstance.uiResultConfirmation = false;
-
-            dpxInstance.setCallback(function(dict) {
-                displayResult('Output: ', 'callbackType is ' + dict['callbackType']);
-            });
             dpxInstance.captureDocument();
         });
 
@@ -597,41 +555,6 @@ describe('DPX Functionality Test', function() {
         _result.waitForResponse();
     });
 
-    it('Objective:\nDocument capture with set fileInteractiveMode property to inavlid value, inputSource  property set to SOURCE_FILE (file) and inputSourceFilename set to valid full path to the image to be processed\n\n', function() {
-        dispTestCaseRunning('1. Set template property to path of template.xml has region of  picture\n/sdcard/Application/template.xml\n2.Set fileInteractiveMode to invalid\n3.Set inputSource to File\n4. inputSourceFilename to /sdcard/Appliaction/image.jpg\n5. Call setCallback method with callback\n6. Call captureDocument method Capture a document by given image as a file\n');
-        dispExpectedResult('should not capture the impage because  fileInteractiveMode set to invalid');
-        _result.waitToRunTest();
-        runs(function() {
-                //var dpxInstance = new Rho.DPX();
-                dpxInstance.template = Rho.RhoFile.join(Rho.Application.AppBundleFolder, 'picture.xml');
-                dpxInstance.inputSource = Rho.DPX.SOURCE_FILE;
-                dpxInstance.fileInteractiveMode = 'invalid';
-                dpxInstance.inputSourceFilename = Rho.RhoFile.join(Rho.Application.AppBundleFolder, 'image.jpg');
-                dpxInstance.setCallback(captureCallback);
-                dpxInstance.captureDocument();
-         });
-         _result.waitForResponse();
-     });
-
-    it('Objective:\nDocument capture with set fileInteractiveMode property to true, inputSource  property set to SOURCE_FILE (file) and inputSourceFilename set to invalid path to the image to be processed\n\n', function() {
-        dispTestCaseRunning('1. Set template property to path of template.xml has region of  picture\n/sdcard/Application/template.xml\n2.Set fileInteractiveMode to true\n3.Set inputSource to File\n4. inputSourceFilename to /Appliaction/sdcard/image.jpg\n5. Call setCallback method with callback\n6. Call captureDocument method Capture a document by given image as a file\n');
-        dispExpectedResult('should not capture the impage because  inputSourceFilename set to invalid path');
-         //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
-         _result.waitToRunTest();
-         runs(function() {
-                //var dpxInstance = new Rho.DPX();
-                dpxInstance.template = Rho.RhoFile.join(Rho.Application.AppBundleFolder, 'picture.xml');
-                dpxInstance.inputSource = Rho.DPX.SOURCE_FILE;
-                dpxInstance.fileInteractiveMode = 'true';
-                dpxInstance.inputSourceFilename = Rho.RhoFile.join(Rho.Application.AppBundleFolder, 'invalid.jpg');
-                dpxInstance.setCallback(captureCallback);
-                dpxInstance.captureDocument();
-        });
-        //Add more waitsfor or run blocks if required.
-        //Common Method implemented to wait for tester to make it pass or fail.Code available in specHelper.js
-        _result.waitForResponse();
-    });
-
     it('Objective:\nDocument capture with inputSource  property set to invalid value\n\n', function() {
         dispTestCaseRunning('1. Set template property to path of template.xml has region of  picture\n/sdcard/Application/template.xml\n2.Set fileInteractiveMode to true\n3.Set inputSource to Invalid\n4. inputSourceFilename to /sdcard/Appliaction/image.jpg\n5. Call setCallback method with callback\n6. Call captureDocument method Capture a document by given image as a file\n');
         dispExpectedResult('should not capture the impage because  inputSource set to invalid source');
@@ -689,25 +612,6 @@ describe('DPX Functionality Test', function() {
         _result.waitForResponse();
     });
 
-    it('Objective:\nDocument capture set manualResolutionMode  set to true and manualResolution set to invalid value  \nNote: Only applicabel to inputsource camera', function() {
-        dispTestCaseRunning('1. Set template property to path of template.xml has region of  picture\n/sdcard/Application/template.xml\n2. Set manualResolutionMode to true\n3. Set manualResolution to inavalid (0000X0000)\n4. Set inputSource to camera\n5. Call setCallback method with callback\n6. Call captureDocument method Capture a document by taking a photo using camera\n\nNote: Only applicabel to inputsource camera');
-        dispExpectedResult('captured document should get processed successfully and callback fired once for each field defined in the template\n\n and image size should be RESOLUTION_MEDIUM (1600x1200) default value');
-        //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
-        _result.waitToRunTest();
-        runs(function() {
-                //var dpxInstance = new Rho.DPX();
-                dpxInstance.template = Rho.RhoFile.join(Rho.Application.AppBundleFolder, 'picture.xml');
-                dpxInstance.manualResolutionMode = true;
-                dpxInstance.manualResolution ='invalid';
-                dpxInstance.inputSource = Rho.DPX.SOURCE_CAMERA;
-                dpxInstance.setCallback(captureCallback);
-                dpxInstance.captureDocument();
-        });
-        //Add more waitsfor or run blocks if required.
-        //Common Method implemented to wait for tester to make it pass or fail.Code available in specHelper.js
-        _result.waitForResponse();
-    });
-
     it('Objective:\nDocument capture set processingTimeout  property set to invalid value', function() {
         dispTestCaseRunning('1. Set template property to path of template.xml has region of  picture\n/sdcard/Application/template.xml\n2.Set processingTimeout to invalid\n3. Set inputSource to camera\n4. Call setCallback method with callback\n5. Call captureDocument method Capture a document by taking a photo using camera');
         dispExpectedResult('processingTimeout error should returned in callback when captured document is not able to processed successfully in 10 seconds');
@@ -717,24 +621,6 @@ describe('DPX Functionality Test', function() {
                 //var dpxInstance = new Rho.DPX();
                 dpxInstance.template = Rho.RhoFile.join(Rho.Application.AppBundleFolder, 'picture.xml');
                 dpxInstance.processingTimeout = -10000;
-                dpxInstance.inputSource = Rho.DPX.SOURCE_CAMERA;
-                dpxInstance.setCallback(captureCallback);
-                dpxInstance.captureDocument();
-        });
-        //Add more waitsfor or run blocks if required.
-        //Common Method implemented to wait for tester to make it pass or fail.Code available in specHelper.js
-        _result.waitForResponse();
-    });
-
-    it('Objective:\nDocument capture set userMode property with set to invalid value\n', function() {
-        dispTestCaseRunning('1. Set template property to path of template.xml has region of  picture\n/sdcard/Application/template.xml\n2.Set userMode to invalid\n3. Set inputSource to camera\n4. Call setCallback method with callback\n5. Call captureDocument method Capture a document by taking a photo using camera\n\nNote: Only valid for Input Source is camera');
-        dispExpectedResult('snapshot mode should be used to capture document and it should get processed successfully and callback fired once for each field defined in the template ');
-        //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
-        _result.waitToRunTest();
-        runs(function() {
-                //var dpxInstance = new Rho.DPX();
-                dpxInstance.template = Rho.RhoFile.join(Rho.Application.AppBundleFolder, 'picture.xml');
-                dpxInstance.userMode = 'invalid';
                 dpxInstance.inputSource = Rho.DPX.SOURCE_CAMERA;
                 dpxInstance.setCallback(captureCallback);
                 dpxInstance.captureDocument();
@@ -763,42 +649,6 @@ describe('DPX Functionality Test', function() {
     });
 
 
-    it('Objective:\nDocument capture set zoomAmount property with set to 150 \n', function() {
-        dispTestCaseRunning('1. Set template property to path of template.xml has region of  picture\n/sdcard/Application/template.xml\n2. Set zoomAmount to 150\n3. Set inputSource to camera\n4. Call setCallback method with callback\n5. Call captureDocument method Capture a document by taking a photo using camera\n\nNote: Only applicalbe to input source camera\n');
-        dispExpectedResult('There should not be any camera zoom  and \ncaptured document should get processed successfully and callback fired once for each field defined in the template ');
-        //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
-        _result.waitToRunTest();
-        runs(function() {
-                //var dpxInstance = new Rho.DPX();
-                dpxInstance.template = Rho.RhoFile.join(Rho.Application.AppBundleFolder, 'picture.xml');
-                dpxInstance.zoomAmount = 150;
-                dpxInstance.inputSource = Rho.DPX.SOURCE_CAMERA;
-                dpxInstance.setCallback(captureCallback);
-                dpxInstance.captureDocument();
-        });
-        //Add more waitsfor or run blocks if required.
-        //Common Method implemented to wait for tester to make it pass or fail.Code available in specHelper.js
-        _result.waitForResponse();
-    });
-
-    it('Objective:\nDocument capture set zoomAmount property with set to -50 \n\n', function() {
-        dispTestCaseRunning('1. Set template property to path of template.xml has region of  picture\n/sdcard/Application/template.xml\n2. Set zoomAmount to -50\n3. Set inputSource to camera\n4. Call setCallback method with callback\n5. Call captureDocument method Capture a document by taking a photo using camera\n\nNote: Only applicalbe to input source camera\n');
-        dispExpectedResult('There should not be any camera zoom  and \ncaptured document should get processed successfully and callback fired once for each field defined in the template ');
-        //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
-        _result.waitToRunTest();
-        runs(function() {
-                //var dpxInstance = new Rho.DPX();
-                dpxInstance.template = Rho.RhoFile.join(Rho.Application.AppBundleFolder, 'picture.xml');
-                dpxInstance.zoomAmount = -50;
-                dpxInstance.inputSource = Rho.DPX.SOURCE_CAMERA;
-                dpxInstance.setCallback(captureCallback);
-                dpxInstance.captureDocument();
-        });
-        //Add more waitsfor or run blocks if required.
-        //Common Method implemented to wait for tester to make it pass or fail.Code available in specHelper.js
-        _result.waitForResponse();
-    });
-
     it('Objective:\nDocument capture and show image on HTML page using invalid Id of image in imageId param calling getDataUri method\n', function() {
         dispTestCaseRunning('1. Set template property to path of template.xml has region of  picture\n/sdcard/Application/template.xml\n2. Set inputSource to camera\n3. Call setCallback method with callback\n4. Call captureDocument method Capture a document by taking a photo using camera\n5. Call getDataUri method with invalid imageid (id of image will be returned in callback with processedData)\n\n');
         dispExpectedResult('captured document should get processed successfully and callback fired once for each field defined in the template and \n\nit should not show the image on HTML page insert data URI in src attribute of img tag');
@@ -807,7 +657,6 @@ describe('DPX Functionality Test', function() {
         runs(function() {
                 //var dpxInstance = new Rho.DPX();
                 dpxInstance.template = Rho.RhoFile.join(Rho.Application.AppBundleFolder, 'picture.xml');
-                dpxInstance.zoomAmount = 100;
                 dpxInstance.inputSource = Rho.DPX.SOURCE_CAMERA;
                 dpxInstance.setCallback(captureCallback);
                 dpxInstance.captureDocument();
