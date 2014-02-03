@@ -216,7 +216,7 @@ var dpx_tests = (function() {
             dpx.setCallback(function(dict) {
                 callback(dict, dpx);
 
-                if (dict['callbackType'] === 'stop') {
+                if (dict['callbackType'] === Rho.DPX.STOP) {
                     dpx.close();
                 }
             });
