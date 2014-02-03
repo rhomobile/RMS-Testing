@@ -1,5 +1,6 @@
-var parameters = function (intentType, action, categories, appName, targetClass, uri, mimeType, data) {
+var parameters = function (intentType, permission, action, categories, appName, targetClass, uri, mimeType, data) {
     var result = {};
+    if (permission != "") result.permission = permission;
     if (intentType != "") result.intentType = intentType;
     if (action != "") result.action = action;
     if (categories != "") result.categories = categories;
@@ -22,7 +23,7 @@ describe('Intent_UseCases Functionality Test', function () {
             dispExpectedResult('The Target application should be launched successfully.');
             _result.waitToRunTest();
             runs(function () {
-                var params = new parameters(Rho.Intent.START_ACTIVITY, "ACTION_MAIN", "", "com.smap.targetapp", "", "", "", "");
+                var params = new parameters(Rho.Intent.START_ACTIVITY, "", "ACTION_MAIN", "", "com.smap.targetapp", "", "", "", "");
                 Rho.Intent.send(params);
             });
             _result.waitForResponse();
@@ -35,7 +36,7 @@ describe('Intent_UseCases Functionality Test', function () {
             dispExpectedResult('The Target application which is running in the background should be bought to foreground.');
             _result.waitToRunTest();
             runs(function () {
-                var params = new parameters(Rho.Intent.START_ACTIVITY,"ACTION_MAIN","","com.smap.targetapp","","","","");
+                var params = new parameters(Rho.Intent.START_ACTIVITY,"","ACTION_MAIN","","com.smap.targetapp","","","","");
                 Rho.Intent.send(params);
             });
             _result.waitForResponse();
@@ -55,7 +56,7 @@ describe('Intent_UseCases Functionality Test', function () {
             dispExpectedResult('The Target application should be launched successfully with Passed Text in it.');
             _result.waitToRunTest();
             runs(function () {
-                var params = new parameters(Rho.Intent.START_ACTIVITY,"ACTION_MAIN","","com.smap.targetapp","com.smap.targetapp.MainActivity","","","");
+                var params = new parameters(Rho.Intent.START_ACTIVITY,"","ACTION_MAIN","","com.smap.targetapp","com.smap.targetapp.MainActivity","","","");
                 Rho.Intent.send(params);
             });
             _result.waitForResponse();
@@ -68,7 +69,7 @@ describe('Intent_UseCases Functionality Test', function () {
             dispExpectedResult('The Target application which is running in the background should be bought to foreground.');
             _result.waitToRunTest();
             runs(function () {
-                var params = new parameters(Rho.Intent.START_ACTIVITY,"ACTION_MAIN","","com.smap.targetapp","com.smap.targetapp.MainActivity","","","");
+                var params = new parameters(Rho.Intent.START_ACTIVITY,"","ACTION_MAIN","","com.smap.targetapp","com.smap.targetapp.MainActivity","","","");
                 Rho.Intent.send(params);
             });
             _result.waitForResponse();
@@ -87,7 +88,7 @@ describe('Intent_UseCases Functionality Test', function () {
             _result.waitToRunTest();
             runs(function () {
                 var mytestapp = 'com.rhomobile.manual_common_spec';
-                var params = new parameters(Rho.Intent.START_SERVICE,"","",mytestapp,"com.rhomobile.rhodes.RhodesService","","",{"message":"Message to service"});
+                var params = new parameters(Rho.Intent.START_SERVICE,"","","",mytestapp,"com.rhomobile.rhodes.RhodesService","","",{"message":"Message to service"});
                 var intentCB = function(intent){
                     if(intent.data.message == "Message to service"){
                         alert("Test case passed!");
@@ -108,7 +109,7 @@ describe('Intent_UseCases Functionality Test', function () {
             dispExpectedResult('Service of target applciation should be started successfully.');
             _result.waitToRunTest();
             runs(function () {
-                var params = new parameters(Rho.Intent.START_SERVICE,"","","com.smap.targetapp","com.smap.targetapp.MyFirstService","","","");
+                var params = new parameters(Rho.Intent.START_SERVICE,"","","","com.smap.targetapp","com.smap.targetapp.MyFirstService","","","");
                 Rho.Intent.send(params);
             });
             _result.waitForResponse();
@@ -121,7 +122,7 @@ describe('Intent_UseCases Functionality Test', function () {
             dispExpectedResult('Service of the target applciation should be started successfully.');
             _result.waitToRunTest();
             runs(function () {
-                var params = new parameters(Rho.Intent.START_SERVICE,"","","com.smap.targetapp","com.smap.targetapp.MyFirstService","","","");
+                var params = new parameters(Rho.Intent.START_SERVICE,"","","","com.smap.targetapp","com.smap.targetapp.MyFirstService","","","");
                 Rho.Intent.send(params);
             });
             _result.waitForResponse();
@@ -135,7 +136,7 @@ describe('Intent_UseCases Functionality Test', function () {
             dispExpectedResult('No crash should be seen in the test application or target appliation, since the service is already instantiated');
             _result.waitToRunTest();
             runs(function () {
-                var params = new parameters(Rho.Intent.START_SERVICE,"ACTION_MAIN","","com.smap.targetapp","com.smap.targetapp.MyFirstService","","","");
+                var params = new parameters(Rho.Intent.START_SERVICE,"","ACTION_MAIN","","com.smap.targetapp","com.smap.targetapp.MyFirstService","","","");
                 Rho.Intent.send(params);
                 Rho.Intent.send(params);
             });
@@ -152,7 +153,23 @@ describe('Intent_UseCases Functionality Test', function () {
                 var data = {
                     "toast":"Target - Test case passed if you see this in Android Toast !"
                 };
-                var params = new parameters(Rho.Intent.BROADCAST,"com.smap.targetapp.mySecondAction","","","","","",data);
+                var params = new parameters(Rho.Intent.BROADCAST,"","com.smap.targetapp.mySecondAction","","","","","",data);
+                Rho.Intent.send(params);
+            });
+            _result.waitForResponse();
+        });
+		it('intentType - Broadcast data from test app and receive at target app with permission', function () {
+            displayObjective("intentType - Broadcast data from test app and receive at target app which has permission");
+            var preConditions = ["Ensure that both Target application 1 and 2 installed in the device"];
+            displayPrecondition(preConditions);
+            dispTestCaseRunning('Sending Intent with parameters {"intentType":Rho.Intent.BROADCAST, "permission":"com.example.testtarget.PERMISSION","action":"com.smap.targetapp.mySecondAction", "data":{"toast":"Target -Test case passed If you see this in Andorid Toast !"}}');
+            dispExpectedResult('Broadcast should be successful and only one toast is displayed "Target - Test case passed if you see \'PERMISSION\' after this : PERMISSION" ');
+            _result.waitToRunTest();
+            runs(function () {
+                var data = {
+                    "toast":"Target - Test case passed if you see 'PERMISSION' after this : "
+                };
+                var params = new parameters(Rho.Intent.BROADCAST,"com.example.testtarget.PERMISSION","com.smap.targetapp.mySecondAction","","","","","",data);
                 Rho.Intent.send(params);
             });
             _result.waitForResponse();
@@ -172,7 +189,7 @@ describe('Intent_UseCases Functionality Test', function () {
                 };
                 Rho.Intent.startListening(listeningCB);
                 
-                var params = new parameters(Rho.Intent.BROADCAST,"com.smap.targetapp.mySecondAction","","","","","",{"reply":"This is my broadcast data!"});
+                var params = new parameters(Rho.Intent.BROADCAST,"","com.smap.targetapp.mySecondAction","","","","","",{"reply":"This is my broadcast data!"});
                 Rho.Intent.send(params);
             });
             _result.waitForResponse();
@@ -185,7 +202,7 @@ describe('Intent_UseCases Functionality Test', function () {
             dispExpectedResult('Broadcast should be successful.');
             _result.waitToRunTest();
             runs(function () {
-                var params = new parameters(Rho.Intent.BROADCAST,"","","com.smap.targetapp","","","",{"toast":"Target - Test case passed If you see this in Andorid Toast !"});
+                var params = new parameters(Rho.Intent.BROADCAST,"","","","com.smap.targetapp","","","",{"toast":"Target - Test case passed If you see this in Andorid Toast !"});
                 Rho.Intent.send(params);
             });
             _result.waitForResponse();
@@ -197,7 +214,7 @@ describe('Intent_UseCases Functionality Test', function () {
             _result.waitToRunTest();
             runs(function () {
                 var category = ["CATEGORY_APP_BROWSER"];
-                var params = new parameters(Rho.Intent.START_ACTIVITY,"ACTION_MAIN",category,"","","","","");
+                var params = new parameters(Rho.Intent.START_ACTIVITY,"","ACTION_MAIN",category,"","","","","");
                 Rho.Intent.send(params);
             });
             _result.waitForResponse();
@@ -209,7 +226,7 @@ describe('Intent_UseCases Functionality Test', function () {
             _result.waitToRunTest();
             runs(function () {
                 var category = ["CATEGORY_APP_MUSIC","CATEGORY_APP_MUSIC"];
-                var params = new parameters(Rho.Intent.START_ACTIVITY,"ACTION_MAIN",category,"","","","","");
+                var params = new parameters(Rho.Intent.START_ACTIVITY,"","ACTION_MAIN",category,"","","","","");
                 Rho.Intent.send(params);
             });
             _result.waitForResponse();
@@ -221,7 +238,7 @@ describe('Intent_UseCases Functionality Test', function () {
             _result.waitToRunTest();
             runs(function () {
                 var category = ["CATEGORY_APP_CALCULATOR"];
-                var params = new parameters(Rho.Intent.START_ACTIVITY,"ACTION_MAIN",category,"","","","","");
+                var params = new parameters(Rho.Intent.START_ACTIVITY,"","ACTION_MAIN",category,"","","","","");
                 Rho.Intent.send(params);
             });
             _result.waitForResponse();
@@ -233,7 +250,7 @@ describe('Intent_UseCases Functionality Test', function () {
             _result.waitToRunTest();
             runs(function () {
                 var category = ["CATEGORY_APP_CALENDAR"];
-                var params = new parameters(Rho.Intent.START_ACTIVITY,"ACTION_MAIN",category,"","","","","");
+                var params = new parameters(Rho.Intent.START_ACTIVITY,"","ACTION_MAIN",category,"","","","","");
                 Rho.Intent.send(params);
             });
             _result.waitForResponse();
@@ -245,7 +262,7 @@ describe('Intent_UseCases Functionality Test', function () {
             _result.waitToRunTest();
             runs(function () {
                 var category = ["CATEGORY_APP_CONTACTS"];
-                var params = new parameters(Rho.Intent.START_ACTIVITY,"ACTION_MAIN",category,"","","","","");
+                var params = new parameters(Rho.Intent.START_ACTIVITY,"","ACTION_MAIN",category,"","","","","");
                 Rho.Intent.send(params);
             });
             _result.waitForResponse();
@@ -257,7 +274,7 @@ describe('Intent_UseCases Functionality Test', function () {
             _result.waitToRunTest();
             runs(function () {
                 var category = ["CATEGORY_APP_EMAIL"];
-                var params = new parameters(Rho.Intent.START_ACTIVITY,"ACTION_MAIN",category,"","","","","");
+                var params = new parameters(Rho.Intent.START_ACTIVITY,"","ACTION_MAIN",category,"","","","","");
                 Rho.Intent.send(params);
             });
             _result.waitForResponse();
@@ -269,7 +286,7 @@ describe('Intent_UseCases Functionality Test', function () {
             _result.waitToRunTest();
             runs(function () {
                 var category = ["CATEGORY_APP_GALLERY"];
-                var params = new parameters(Rho.Intent.START_ACTIVITY,"ACTION_MAIN",category,"","","","","");
+                var params = new parameters(Rho.Intent.START_ACTIVITY,"","ACTION_MAIN",category,"","","","","");
                 Rho.Intent.send(params);
             });
             _result.waitForResponse();
@@ -282,7 +299,7 @@ describe('Intent_UseCases Functionality Test', function () {
             _result.waitToRunTest();
             runs(function () {
                 var category = ["CATEGORY_APP_MAPS"];
-                var params = new parameters(Rho.Intent.START_ACTIVITY,"ACTION_MAIN",category,"","","","","");
+                var params = new parameters(Rho.Intent.START_ACTIVITY,"","ACTION_MAIN",category,"","","","","");
                 Rho.Intent.send(params);
             });
             _result.waitForResponse();
@@ -294,7 +311,7 @@ describe('Intent_UseCases Functionality Test', function () {
             _result.waitToRunTest();
             runs(function () {
                 var category = ["CATEGORY_APP_MESSAGING"];
-                var params = new parameters(Rho.Intent.START_ACTIVITY,"ACTION_MAIN",category,"","","","","");
+                var params = new parameters(Rho.Intent.START_ACTIVITY,"","ACTION_MAIN",category,"","","","","");
                 Rho.Intent.send(params);
             });
             _result.waitForResponse();
@@ -307,7 +324,7 @@ describe('Intent_UseCases Functionality Test', function () {
             _result.waitToRunTest();
             runs(function () {
                 var data = {"EXTRA_HTML_TEXT":"<h3 style=\'color:green\'>Test case passed if you see this text in Green color with browser</h3>"};
-                var params = new parameters(Rho.Intent.START_ACTIVITY,"ACTION_VIEW","","","","","text/html",data);
+                var params = new parameters(Rho.Intent.START_ACTIVITY,"","ACTION_VIEW","","","","","text/html",data);
                 Rho.Intent.send(params);
             });
             _result.waitForResponse();
@@ -320,7 +337,7 @@ describe('Intent_UseCases Functionality Test', function () {
             _result.waitToRunTest();
             runs(function () {
                 
-                var params = new parameters(Rho.Intent.START_ACTIVITY,"","","","","vnd.android-dir/mms-sms",data);
+                var params = new parameters(Rho.Intent.START_ACTIVITY,"","","","","","vnd.android-dir/mms-sms",data);
                 Rho.Intent.send(params);
             });
             _result.waitForResponse();
@@ -333,7 +350,7 @@ describe('Intent_UseCases Functionality Test', function () {
         dispExpectedResult('MusicPlayer should be launched successfully');
         _result.waitToRunTest();
         runs(function () {
-            var params = new parameters(Rho.Intent.START_ACTIVITY,"","","","","","audio/x-mpeg-3","");
+            var params = new parameters(Rho.Intent.START_ACTIVITY,"","","","","","","audio/x-mpeg-3","");
             Rho.Intent.send(params);
         });
         _result.waitForResponse();
@@ -348,7 +365,7 @@ describe('Intent_UseCases Functionality Test', function () {
             _result.waitToRunTest();
             runs(function () {
                 var uri = "data:image/jpeg;base64,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";
-                var params = new parameters(Rho.Intent.START_ACTIVITY,"","","","",uri,"image/jpeg","");
+                var params = new parameters(Rho.Intent.START_ACTIVITY,"","","","","",uri,"image/jpeg","");
                 Rho.Intent.send(params);
                 //Rho.System.openUrl(uri);
             });
@@ -383,7 +400,7 @@ describe('Intent_UseCases Functionality Test', function () {
             dispExpectedResult('Android application should launched whose package name matches.');
             _result.waitToRunTest();
             runs(function () {
-                var params = new parameters(Rho.Intent.START_ACTIVITY,"","","com.smap.targetapp","","","","");
+                var params = new parameters(Rho.Intent.START_ACTIVITY,"","","","com.smap.targetapp","","","","");
                 Rho.Intent.send(params);
             });
             _result.waitForResponse();
@@ -396,7 +413,7 @@ describe('Intent_UseCases Functionality Test', function () {
             dispExpectedResult('iOS application should be launched whose bundleUrlScheme matches.');
             _result.waitToRunTest();
             runs(function () {
-                var params = new parameters(Rho.Intent.START_ACTIVITY,"","","testapp","","","","");
+                var params = new parameters(Rho.Intent.START_ACTIVITY,"","","","testapp","","","","");
                 Rho.Intent.send(params);
             });
             _result.waitForResponse();
@@ -409,7 +426,7 @@ describe('Intent_UseCases Functionality Test', function () {
         dispExpectedResult('Browser should be launched with default data in the view.');
         _result.waitToRunTest();
         runs(function () {
-            var params = new parameters(Rho.Intent.START_ACTIVITY,"ACTION_VIEW","","","","http://www.google.com","","");
+            var params = new parameters(Rho.Intent.START_ACTIVITY,"","ACTION_VIEW","","","","http://www.google.com","","");
             Rho.Intent.send(params);
         });
         _result.waitForResponse();
@@ -422,7 +439,7 @@ describe('Intent_UseCases Functionality Test', function () {
             dispExpectedResult('Message compose application should be launched with pre-filled recepient number.');
             _result.waitToRunTest();
             runs(function () {
-                 var params = new parameters(Rho.Intent.START_ACTIVITY,"","","","","sms:9611896991","","");
+                 var params = new parameters(Rho.Intent.START_ACTIVITY,"","","","","","sms:9611896991","","");
                  Rho.Intent.send(params);
                  });
             _result.waitForResponse();
@@ -435,7 +452,7 @@ describe('Intent_UseCases Functionality Test', function () {
             dispExpectedResult('Email compose view should be launched with pre-filled recepient email address.');
             _result.waitToRunTest();
             runs(function () {
-                 var params = new parameters(Rho.Intent.START_ACTIVITY,"","","","","mailto:abcd@domain.com","","");
+                 var params = new parameters(Rho.Intent.START_ACTIVITY,"","","","","","mailto:abcd@domain.com","","");
                  Rho.Intent.send(params);
                  });
             _result.waitForResponse();
@@ -446,7 +463,7 @@ describe('Intent_UseCases Functionality Test', function () {
             dispExpectedResult('Dialer launches with pre-loaded number in it.');
             _result.waitToRunTest();
             runs(function () {
-                 var params = new parameters(Rho.Intent.START_ACTIVITY,"ACTION_DIAL","","","","tel:9611896991","","");
+                 var params = new parameters(Rho.Intent.START_ACTIVITY,"","ACTION_DIAL","","","","tel:9611896991","","");
                  Rho.Intent.send(params);
                  });
             _result.waitForResponse();
@@ -460,7 +477,7 @@ describe('Intent_UseCases Functionality Test', function () {
             dispExpectedResult('Maps application launched with the pre-set Lattitude and Longitude');
             _result.waitToRunTest();
             runs(function () {
-                 var params = new parameters(Rho.Intent.START_ACTIVITY,"ACTION_VIEW","","","","geo:12.9667° N, 77.5667° E","","");
+                 var params = new parameters(Rho.Intent.START_ACTIVITY,"","ACTION_VIEW","","","","geo:12.9667° N, 77.5667° E","","");
                  Rho.Intent.send(params);
                  });
             _result.waitForResponse();
@@ -472,7 +489,7 @@ describe('Intent_UseCases Functionality Test', function () {
             dispExpectedResult('Phone call made to the pre-loaded number.');
             _result.waitToRunTest();
             runs(function () {
-                 var params = new parameters(Rho.Intent.START_ACTIVITY,"ACTION_CALL","","","","tel:9611896991","","");
+                 var params = new parameters(Rho.Intent.START_ACTIVITY,"","ACTION_CALL","","","","tel:9611896991","","");
                  Rho.Intent.send(params);
                  });
             _result.waitForResponse();
@@ -487,7 +504,7 @@ describe('Intent_UseCases Functionality Test', function () {
             dispExpectedResult('Contacts application is launched successfully');
             _result.waitToRunTest();
             runs(function () {
-                var params = new parameters(Rho.Intent.START_ACTIVITY,"ACTION_VIEW","","","","content://contacts/people/","","");
+                var params = new parameters(Rho.Intent.START_ACTIVITY,"","ACTION_VIEW","","","","content://contacts/people/","","");
                 Rho.Intent.send(params);
             });
             _result.waitForResponse();
@@ -500,7 +517,7 @@ describe('Intent_UseCases Functionality Test', function () {
             dispExpectedResult('Contacts application is launched in edit mode of the first contact successfully');
             _result.waitToRunTest();
             runs(function () {
-                var params = new parameters(Rho.Intent.START_ACTIVITY,"ACTION_EDIT","","","","content://contacts/people/1","","");
+                var params = new parameters(Rho.Intent.START_ACTIVITY,"","ACTION_EDIT","","","","content://contacts/people/1","","");
                 Rho.Intent.send(params);
             });
             _result.waitForResponse();
@@ -521,7 +538,7 @@ describe('Intent_UseCases Functionality Test', function () {
             dispExpectedResult('Target applicatoin is launched by custom Uri successfully.');
             _result.waitToRunTest();
             runs(function () {
-                var params = new parameters(Rho.Intent.START_ACTIVITY,"","","","","myApp://homeScreen","","");
+                var params = new parameters(Rho.Intent.START_ACTIVITY,"","","","","","myApp://homeScreen","","");
                 Rho.Intent.send(params);
             });
             _result.waitForResponse();
@@ -547,7 +564,7 @@ describe('Intent_UseCases Functionality Test', function () {
             dispExpectedResult('Message appliation launched successfully.');
             _result.waitToRunTest();
             runs(function () {
-                var params = new parameters(Rho.Intent.START_ACTIVITY,"","","","","content://sms","","");
+                var params = new parameters(Rho.Intent.START_ACTIVITY,"","","","","","content://sms","","");
                 Rho.Intent.send(params);
             });
             _result.waitForResponse();
@@ -565,7 +582,7 @@ describe('Intent_UseCases Functionality Test', function () {
                  var data = {
                  "body":"Test case Passed : only if this is displayed in email body content with prefilled recepient address !"
                  };
-                 var params = new parameters(Rho.Intent.START_ACTIVITY,"","","","","mailto:abcd@domain.com","",data);
+                 var params = new parameters(Rho.Intent.START_ACTIVITY,"","","","","","mailto:abcd@domain.com","",data);
                  Rho.Intent.send(params);
                  });
             _result.waitForResponse();
@@ -594,7 +611,7 @@ describe('Intent_UseCases Functionality Test', function () {
             _result.waitToRunTest();
             runs(function () {
                 var enterData = {"EXTRA_TEXT":"Test case passed only if this is displayed in message body with prefille recepient number !"};
-                var params = new parameters(Rho.Intent.START_ACTIVITY,"ACTION_SEND","","","","content://sms","", enterData);
+                var params = new parameters(Rho.Intent.START_ACTIVITY,"","ACTION_SEND","","","","content://sms","", enterData);
                 Rho.Intent.send(params);
             });
             _result.waitForResponse();
@@ -610,7 +627,7 @@ describe('Intent_UseCases Functionality Test', function () {
                 var data = {
                     "myData":"This is Test data !"
                 };
-                var params = new parameters(Rho.Intent.START_ACTIVITY,"ACTION_MAIN","","com.smap.targetapp","","","",data);
+                var params = new parameters(Rho.Intent.START_ACTIVITY,"","ACTION_MAIN","","com.smap.targetapp","","","",data);
                 var successCB = function(intent){
                     console.log(JSON.stringify(intent))
                     if(intent.data.myData == "This is Test data !"){
@@ -633,7 +650,7 @@ describe('Intent_UseCases Functionality Test', function () {
                 var data = {
                     "myData":"This is broad cast data 2!"
                 };
-                var params = new parameters(Rho.Intent.BROADCAST,"com.rhomobile.BROADCAST",["com.rhomobile.manual_common_spec"],"","","","",data);
+                var params = new parameters(Rho.Intent.BROADCAST,"","com.rhomobile.BROADCAST",["com.rhomobile.manual_common_spec"],"","","","",data);
                 var receiveCB = function(intent){
                     if(intent.data.myData == "This is broad cast data 2!")
                     {
@@ -653,7 +670,7 @@ describe('Intent_UseCases Functionality Test', function () {
                 var data = {
                     "myData":"This is broad cast data 3!"
                 };
-                var params = new parameters(Rho.Intent.BROADCAST,"com.rhomobile.BROADCAST",["com.rhomobile.manual_common_spec"],"","","","",data);
+                var params = new parameters(Rho.Intent.BROADCAST,"","com.rhomobile.BROADCAST",["com.rhomobile.manual_common_spec"],"","","","",data);
                 var receiveCB = function(intent){
                     if(intent.data.myData == "This is broad cast data 3!")
                     {
@@ -682,7 +699,7 @@ describe('Intent_UseCases Functionality Test', function () {
                 var data = {
                     "myData":"This is broad cast data 4!"
                 };
-                var params = new parameters(Rho.Intent.BROADCAST,"com.rhomobile.BROADCAST",["com.rhomobile.manual_common_spec"],"","","","",data);
+                var params = new parameters(Rho.Intent.BROADCAST,"","com.rhomobile.BROADCAST",["com.rhomobile.manual_common_spec"],"","","","",data);
                 var receiveCB = function(intent){
                     if(intent.data.myData == "This is broad cast data 4!")
                     {
@@ -704,7 +721,7 @@ describe('Intent_UseCases Functionality Test', function () {
                 var data = {
                     "myData":"This is broad cast data 5!"
                 };
-                var params = new parameters(Rho.Intent.BROADCAST,"com.rhomobile.BROADCAST",["com.rhomobile.manual_common_spec"],"","","","",data);
+                var params = new parameters(Rho.Intent.BROADCAST,"","com.rhomobile.BROADCAST",["com.rhomobile.manual_common_spec"],"","","","",data);
                 var receiveCB = function(intent){
                     alert("Test Case failed if you see this alert message!");
                 };
@@ -724,7 +741,7 @@ describe('Intent_UseCases Functionality Test', function () {
                 var data = {
                     "myData":"This is broad cast data !"
                 };
-                var params = new parameters(Rho.Intent.BROADCAST,"com.rhomobile.BROADCAST",["com.rhomobile.manual_common_spec"],"","","","",data);
+                var params = new parameters(Rho.Intent.BROADCAST,"","com.rhomobile.BROADCAST",["com.rhomobile.manual_common_spec"],"","","","",data);
                 var receiveCB = function(intents){
                     var receivedParam = intents.params;
                     alert("Test Case failed if you see this alert message!");
@@ -743,7 +760,7 @@ describe('Intent_UseCases Functionality Test', function () {
             _result.waitToRunTest();
             runs(function(){
                 var data = {"EXTRA_TEXT":"This is message to be sent!"};
-                var params = new parameters(Rho.Intent.START_ACTIVITY,"ACTION_SEND","","","","","text/plain",data);
+                var params = new parameters(Rho.Intent.START_ACTIVITY,"","ACTION_SEND","","","","","text/plain",data);
                 Rho.Intent.send(params);
             });
             _result.waitForResponse();
@@ -760,7 +777,7 @@ describe('Intent_UseCases Functionality Test', function () {
                  "EXTRA_BCC":"bcc.email@domain.com",
                  "EXTRA_SUBJECT":"Email Subject !",
                  "EXTRA_TEXT":"Email body content !"};
-                var params = new parameters(Rho.Intent.START_ACTIVITY,"ACTION_SEND","","","","","text/plain",data);
+                var params = new parameters(Rho.Intent.START_ACTIVITY,"","ACTION_SEND","","","","","text/plain",data);
                 Rho.Intent.send(params);
             });
             _result.waitForResponse();
@@ -848,7 +865,7 @@ describe('Intent_UseCases Functionality Test', function () {
 
         var parameters;
         if (isAndroidPlatform()) {
-            parameters = {intentType: Rho.Intent.BROADCAST, action: "com.rhomobile.BROADCAST", appName: "com.smap.targetapp", data: {myData: "This is broad cast data!" } };
+            parameters = {intentType: Rho.Intent.BROADCAST, action: "com.rhomobile.BROADCAST", appName: "com.rhomobile.manual_common_spec", data: {myData: "This is broad cast data!" } };
         }
         if (isApplePlatform()) {
             parameters = {intentType: Rho.Intent.BROADCAST, action: "com.rhomobile.BROADCAST", appName: "testapp", data: {myData: "This is broad cast data!" } };
@@ -867,15 +884,12 @@ describe('Intent_UseCases Functionality Test', function () {
     it('Start Listening to the background intents using callback without argument', function () {
         displayObjective('Stop Listening to the background intents callback without argument');
         dispTestCaseRunning('Executing stopListening method with callback function which does not have argument !');
-        dispExpectedResult('No crash or bad behavior should be seen in the test application.');
+        dispExpectedResult('No crash or bad behavior should be seen in the test application and an alert message should be shown to the user.');
         _result.waitToRunTest();
         runs(function () {
             var parameters;
             if (isAndroidPlatform()) {
-                parameters = {intentType: Rho.Intent.BROADCAST, action: "com.rhomobile.BROADCAST", appName: "com.smap.targetapp", data: {myData: "This is broad cast data!" } };
-            }
-            if (isApplePlatform()) {
-                parameters = {intentType: Rho.Intent.BROADCAST, action: "com.rhomobile.BROADCAST", appName: "testapp", data: {myData: "This is broad cast data!" } };
+                parameters = {intentType: Rho.Intent.BROADCAST, action: "com.rhomobile.BROADCAST", appName: "com.rhomobile.manual_common_spec", data: {myData: "This is broad cast data!" } };
             }
             if (isAnyWindowsFamilyPlatform()) {
                 parameters = {intentType: Rho.Intent.BROADCAST, appName: "rhomobile TestApp/TestApp.exe", data: {myData: "This is broad cast data!" } };
