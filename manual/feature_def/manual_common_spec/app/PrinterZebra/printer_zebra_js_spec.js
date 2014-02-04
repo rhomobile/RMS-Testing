@@ -1044,6 +1044,95 @@ describe('Printer Zebra', function() {
 		});
   });
 	
+	var listofrequeststate = [Rho.PrinterZebra.PRINTER_STATE_IS_HEAD_COLD, Rho.PrinterZebra.PRINTER_STATE_IS_HEAD_OPEN, Rho.PrinterZebra.PRINTER_STATE_IS_HEAD_TOO_HOT, Rho.PrinterZebra.PRINTER_STATE_IS_PARTIAL_FORMAT_IN_PROGRESS, Rho.PrinterZebra.PRINTER_STATE_IS_PAUSED, Rho.PrinterZebra.PRINTER_STATE_IS_RECEIVE_BUFFER_FULL, Rho.PrinterZebra.PRINTER_STATE_IS_RIBBON_OUT, Rho.PrinterZebra.PRINTER_STATE_LABEL_LENGTH_IN_DOTS, Rho.PrinterZebra.PRINTER_STATE_LABELS_REMAINING_IN_BATCH, Rho.PrinterZebra.PRINTER_STATE_NUMBER_OF_FORMATS_IN_RECEIVE_BUFFER, Rho.PrinterZebra.PRINTER_STATE_PRINT_MODE, Rho.PrinterZebra.PRINTER_STATE_IS_READY_TO_PRINT, 	Rho.PrinterZebra.PRINTER_STATE_IS_COVER_OPENED, Rho.PrinterZebra.PRINTER_STATE_IS_DRAWER_OPENED, Rho.PrinterZebra.PRINTER_STATE_IS_PAPER_OUT, Rho.PrinterZebra.PRINTER_STATE_IS_BATTERY_LOW];
+		var requeststate_boolean = ["PRINTER_STATE_IS_HEAD_COLD", "PRINTER_STATE_IS_HEAD_OPEN", "PRINTER_STATE_IS_HEAD_TOO_HOT", "PRINTER_STATE_IS_PARTIAL_FORMAT_IN_PROGRESS", "PRINTER_STATE_IS_PAUSED", "PRINTER_STATE_IS_RECEIVE_BUFFER_FULL", "PRINTER_STATE_IS_RIBBON_OUT", "PRINTER_STATE_LABELS_REMAINING_IN_BATCH", "PRINTER_STATE_IS_READY_TO_PRINT", "	PRINTER_STATE_IS_COVER_OPENED", "PRINTER_STATE_IS_DRAWER_OPENED", "PRINTER_STATE_IS_PAPER_OUT", "PRINTER_STATE_IS_BATTERY_LOW"];
+		var requeststate_int = ["PRINTER_STATE_LABEL_LENGTH_IN_DOTS", "PRINTER_STATE_NUMBER_OF_FORMATS_IN_RECEIVE_BUFFER"];
+		var requeststate_printmode = ["PRINTER_STATE_PRINT_MODE"];
+		var printmode_values = [Rho.PrinterZebra.PRINT_MODE_APPLICATOR, Rho.PrinterZebra.PRINT_MODE_CUTTER, Rho.PrinterZebra.PRINT_MODE_DELAYED_CUT, Rho.PrinterZebra.PRINT_MODE_KIOSK, Rho.PrinterZebra.PRINT_MODE_LINERLESS_PEEL, Rho.PrinterZebra.PRINT_MODE_LINERLESS_REWIND, Rho.PrinterZebra.PRINT_MODE_LINERLESS_REWIND, Rho.PrinterZebra.PRINT_MODE_PARTIAL_CUTTER, Rho.PrinterZebra.PRINT_MODE_PEEL_OFF, Rho.PrinterZebra.PRINT_MODE_REWIND, Rho.PrinterZebra.PRINT_MODE_RFID, Rho.PrinterZebra.PRINT_MODE_TEAR_OFF, Rho.PrinterZebra.PRINT_MODE_UNKNOWN];
+		var requeststate_callbackValue = {};
+		function requestStateCallback(args) {
+			if (args.status == Rho.PrinterZebra.PRINTER_STATUS_SUCCESS) {
+				expect(args.status).toEqual(Rho.PrinterZebra.PRINTER_STATUS_SUCCESS);	
+				requeststate_callbackValue = args;
+					
+			} else if (args.status == Rho.PrinterZebra.PRINTER_STATUS_ERROR) {
+				expect(args.status).toEqual(Rho.PrinterZebra.PRINTER_STATUS_SUCCESS);
+			} 
+			callresult = true;
+		}
+	
+	describe('requestState method', function() {
+		it('should connect', function() {
+				doConnect();
+		});
+				
+		it("Request printer state for list of parameters", function() {
+			runs(function() {
+					callresult = null;
+					thisprinter.requestState(listofrequeststate, requestStateCallback);
+			});
+
+			waitsFor(function() {
+					return callresult !== null;
+			}, 'wait requestState', 30000);
+			
+			runs(function() {
+				expect(requeststate_callbackValue.status).toEqual(Rho.PrinterZebra.PRINTER_STATUS_SUCCESS);
+			});
+		});	
+			
+		it("Result of Request printer state Boolean values", function() {	
+			runs(function() {
+				if(requeststate_callbackValue.status == Rho.PrinterZebra.PRINTER_STATUS_SUCCESS) {
+					for(var i =0; i<requeststate_boolean.length;i++) {
+						if(requeststate_callbackValue[requeststate_boolean[i]] != undefined) {
+							var result = requeststate_callbackValue[requeststate_boolean[i]];
+							expect(result).isBoolean();
+						}	
+					}
+				}
+				else
+				{
+					expect(requeststate_callbackValue.status).toEqual(Rho.PrinterZebra.PRINTER_STATUS_SUCCESS);
+				}					
+			});
+		});
+				
+		it("Result of Request printer state int values", function() {		
+			runs(function() {
+				if(requeststate_callbackValue.status == Rho.PrinterZebra.PRINTER_STATUS_SUCCESS) {
+					for(var i =0; i<requeststate_int.length;i++) {
+						if(requeststate_callbackValue[requeststate_boolean[i]] != undefined) {
+							var result = (requeststate_callbackValue[requeststate_int[i]]>=0)?true:false;
+							expect(result).toEqual(true);
+						}
+					}
+				}
+				else
+				{
+					expect(requeststate_callbackValue.status).toEqual(Rho.PrinterZebra.PRINTER_STATUS_SUCCESS);
+				}				
+			});
+		});
+				
+		it("Result of Request printer state printmode values", function() {
+			runs(function() {
+				if(requeststate_callbackValue.status == Rho.PrinterZebra.PRINTER_STATUS_SUCCESS) {
+					for(var i =0; i<requeststate_printmode.length;i++) {
+						if(requeststate_callbackValue[requeststate_boolean[i]] != undefined) {	
+							var result = requeststate_callbackValue[requeststate_printmode[i]];
+							expect(result).toContain(printmode_values);
+						}	
+					}
+				}
+				else
+				{
+					expect(requeststate_callbackValue.status).toEqual(Rho.PrinterZebra.PRINTER_STATUS_SUCCESS);
+				}
+			});
+		});
+			
+	});	
 	
 
 });

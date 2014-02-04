@@ -194,7 +194,7 @@ describe('Printer Zebra', function() {
     afterEach(function() {});
 
     // setup 
-    xit('initialize before tests', function() {
+    it('initialize before tests', function() {
 				dispTestCaseRunning("initializing before tests, Will search the Zebra Printers");
 				dispExpectedResult("should Wait until devices are discovered to continue");
 			  runs(function() {
@@ -353,7 +353,7 @@ describe('Printer Zebra', function() {
     }
 
     // printFile method
-    xdescribe('printFile method', function() {
+    describe('printFile method', function() {
         it('should connect', function() {
 				  doConnect();
 				});
@@ -419,7 +419,7 @@ describe('Printer Zebra', function() {
         });
     });
 
-    xdescribe('printRawString method', function() {
+    describe('printRawString method', function() {
         it('should connect', function() {
             doConnect();
         });
@@ -464,7 +464,7 @@ describe('Printer Zebra', function() {
 				_result.waitForResponse();
     }
 
-    xdescribe('sendFileContents method', function() {
+    describe('sendFileContents method', function() {
         it('should connect', function() {
             doConnect();
         });
@@ -563,6 +563,7 @@ describe('Printer Zebra', function() {
         }
     });
 
+		
 		
 
 });
