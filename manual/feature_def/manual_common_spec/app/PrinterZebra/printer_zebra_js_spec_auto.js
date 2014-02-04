@@ -1022,6 +1022,135 @@ describe('Printer Zebra', function() {
 		});
 			
 	});	
+	
+	function doprintStoredFormatWithHash(formatpath, hashvalue, callback_value, lang) {
+		var deftext = [];
+		var def = '';
+		if (callback_value == 0) {
+			def = 'with'
+		}
+		else if(callback_value == 1) {
+			def = 'without'
+		}
+		else if(callback_value == 2) {
+			def = 'Anonymous'
+		}
+		 
+		deftext = ['Should Print a ',lang,' stored format by Hash ',def,' callback'];
+		
+		it( deftext.join('') , function() {
+			doPrintTestLabel();
+			doSetLabelLength(500);
+			runs(function() {
+				callresult = null;
+				if(callback_value == 0) {
+					thisprinter.printStoredFormatWithHash(formatpath, hashvalue, cbk);
+				}
+				else if(callback_value == 1) {
+					callresult = thisprinter.printStoredFormatWithHash(formatpath, hashvalue);
+				}	
+				else if(callback_value == 2) {
+					thisprinter.printStoredFormatWithHash(formatpath, hashvalue, function(callbackValue) {callresult = callbackValue;});
+				}	
+			});
+			waitsFor(function() {
+					return callresult !== null;
+			}, 'wait to Print', 30000);
+			
+			runs(function() {
+			
+				if(lang != 'invalid')	{
+						expect(callresult).toEqual(Rho.PrinterZebra.PRINTER_STATUS_SUCCESS);
+					}	
+				else {	
+						expect(callresult).toEqual(Rho.PrinterZebra.PRINTER_STATUS_ERROR);
+				}	
+			});		
+		});		
+	}
+	
+	describe('printStoredFormatWithHash method', function() {
+		it('should connect', function() {
+				doConnect();
+		});
+		doprintStoredFormatWithHash(zplformatpath, hashzpl, 0, "ZPL Language");
+		doprintStoredFormatWithHash(zplformatpath, hashzpl, 1, "ZPL Language");
+		doprintStoredFormatWithHash(zplformatpath, hashzpl, 2, "ZPL Language");
+		
+		doprintStoredFormatWithHash(ccplformatpath, hashccpl, 0, "CCPL Language");
+		doprintStoredFormatWithHash(ccplformatpath, hashccpl, 1, "CCPL Language");
+		doprintStoredFormatWithHash(ccplformatpath, hashccpl, 2, "CCPL Language");
+		
+		doprintStoredFormatWithHash(invalidformatpath, invalidzplhash, 0, "invalid");
+		
+	});
+	
+	
+	function doprintStoredFormatWithArray(formatpath, arrayvalue, callback_value, lang) {
+	
+		var deftext = [];
+		var dispcase = [];
+		var dispexp = [];
+		var def = '';
+		if (callback_value == 0) {
+			def = 'with'
+		}
+		else if(callback_value == 1) {
+			def = 'without'
+		}
+		else if(callback_value == 2) {
+			def = 'Anonymous'
+		}
+		 
+		deftext = ['Should Print a ',lang,' stored format by Array ',def,' callback'];
+		
+		it( deftext.join('') , function() {
+			doPrintTestLabel();
+			doSetLabelLength(500);
+			runs(function() {
+				callresult = null;
+				if(callback_value == 0) {
+					thisprinter.printStoredFormatWithArray(formatpath, arrayvalue, cbk);
+				}
+				else if(callback_value == 1) {
+					callresult = thisprinter.printStoredFormatWithArray(formatpath, arrayvalue);
+				}	
+				else if(callback_value == 2) {
+					thisprinter.printStoredFormatWithArray(formatpath, arrayvalue, function(callbackValue) {callresult = callbackValue;});
+				}	
+			});
+			waitsFor(function() {
+					return callresult !== null;
+			}, 'wait to Print', 30000);
+			
+			runs(function() {
+			
+				if(lang != 'invalid')	{
+						expect(callresult).toEqual(Rho.PrinterZebra.PRINTER_STATUS_SUCCESS);
+				}	
+				else {	
+						expect(callresult).toEqual(Rho.PrinterZebra.PRINTER_STATUS_ERROR);
+				}	
+			});		
+		});		
+	}
+	
+	describe('printStoredFormatWithArray method', function() {
+		it('should connect', function() {
+				doConnect();
+		});
+		doprintStoredFormatWithArray(zplformatpath, arrayzpl, 0, "ZPL Language");
+		doprintStoredFormatWithArray(zplformatpath, arrayzpl, 1, "ZPL Language");
+		doprintStoredFormatWithArray(zplformatpath, arrayzpl, 2, "ZPL Language");
+		
+		doprintStoredFormatWithArray(ccplformatpath, arrayccpl, 0, "CCPL Language");
+		doprintStoredFormatWithArray(ccplformatpath, arrayccpl, 1, "CCPL Language");
+		doprintStoredFormatWithArray(ccplformatpath, arrayccpl, 2, "CCPL Language");
+		
+		doprintStoredFormatWithArray(invalidformatpath, invalidzplhash, 0, "invalid");
+		
+	});
+
 
 	
 

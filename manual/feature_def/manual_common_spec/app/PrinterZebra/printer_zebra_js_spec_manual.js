@@ -353,7 +353,7 @@ describe('Printer Zebra', function() {
     }
 
     // printFile method
-    describe('printFile method', function() {
+    xdescribe('printFile method', function() {
         it('should connect', function() {
 				  doConnect();
 				});
@@ -419,7 +419,7 @@ describe('Printer Zebra', function() {
         });
     });
 
-    describe('printRawString method', function() {
+    xdescribe('printRawString method', function() {
         it('should connect', function() {
             doConnect();
         });
@@ -464,7 +464,7 @@ describe('Printer Zebra', function() {
 				_result.waitForResponse();
     }
 
-    describe('sendFileContents method', function() {
+    xdescribe('sendFileContents method', function() {
         it('should connect', function() {
             doConnect();
         });
@@ -531,7 +531,7 @@ describe('Printer Zebra', function() {
         });
     }
 
-    describe('printImageFromFile method', function() {
+    xdescribe('printImageFromFile method', function() {
         it('should connect', function() {
             doConnect();
         });
@@ -563,7 +563,363 @@ describe('Printer Zebra', function() {
         }
     });
 
+		var listofrequeststate = [Rho.PrinterZebra.PRINTER_STATE_IS_HEAD_COLD, Rho.PrinterZebra.PRINTER_STATE_IS_HEAD_OPEN, Rho.PrinterZebra.PRINTER_STATE_IS_HEAD_TOO_HOT, Rho.PrinterZebra.PRINTER_STATE_IS_PARTIAL_FORMAT_IN_PROGRESS, Rho.PrinterZebra.PRINTER_STATE_IS_PAUSED, Rho.PrinterZebra.PRINTER_STATE_IS_RECEIVE_BUFFER_FULL, Rho.PrinterZebra.PRINTER_STATE_IS_RIBBON_OUT, Rho.PrinterZebra.PRINTER_STATE_LABEL_LENGTH_IN_DOTS, Rho.PrinterZebra.PRINTER_STATE_LABELS_REMAINING_IN_BATCH, Rho.PrinterZebra.PRINTER_STATE_NUMBER_OF_FORMATS_IN_RECEIVE_BUFFER, Rho.PrinterZebra.PRINTER_STATE_IS_READY_TO_PRINT, 	Rho.PrinterZebra.PRINTER_STATE_IS_COVER_OPENED, Rho.PrinterZebra.PRINTER_STATE_IS_DRAWER_OPENED, Rho.PrinterZebra.PRINTER_STATE_IS_PAPER_OUT, Rho.PrinterZebra.PRINTER_STATE_IS_BATTERY_LOW];
+		var printmode_state= [Rho.PrinterZebra.PRINTER_STATE_PRINT_MODE];
+		var printmode_values = [Rho.PrinterZebra.PRINT_MODE_APPLICATOR, Rho.PrinterZebra.PRINT_MODE_CUTTER, Rho.PrinterZebra.PRINT_MODE_DELAYED_CUT, Rho.PrinterZebra.PRINT_MODE_KIOSK, Rho.PrinterZebra.PRINT_MODE_LINERLESS_PEEL, Rho.PrinterZebra.PRINT_MODE_LINERLESS_REWIND, Rho.PrinterZebra.PRINT_MODE_LINERLESS_REWIND, Rho.PrinterZebra.PRINT_MODE_PARTIAL_CUTTER, Rho.PrinterZebra.PRINT_MODE_PEEL_OFF, Rho.PrinterZebra.PRINT_MODE_REWIND, Rho.PrinterZebra.PRINT_MODE_RFID, Rho.PrinterZebra.PRINT_MODE_TEAR_OFF, Rho.PrinterZebra.PRINT_MODE_UNKNOWN];
+		var requeststate_callbackValue = {};
 		
+		function requestStateCallback(args) {
+			if (args.status == Rho.PrinterZebra.PRINTER_STATUS_SUCCESS) {
+				requeststate_callbackValue = args;
+					
+			} else if (args.status == Rho.PrinterZebra.PRINTER_STATUS_ERROR) {
+			
+			} 
+			callresult = true;
+		}
+		
+	function dorequestState(requestStatearray, printmode) {
+			
+		var deftext = [];
+		var dispcase = [];
+		var dispexp = [];
+		
+		if(printmode == undefined) {
+			deftext = ['Set printer to ',requestStatearray,' state'];
+			dispcase = ['Set printer to ',requestStatearray,' state'];
+			dispexp = ['Should return True if ',requestStatearray,' is set'];
+		}	
+		else {
+			deftext = ['Set printer to ',printmode,' state'];
+			dispcase = ['Set printer to ',printmode,' state by manually Zebra utilities'];
+			dispexp = ['Should return ',printmode,' value for ',requestStatearray,''];
+		} 
+		
+		it( deftext.join('') , function() {
+			dispTestCaseRunning(dispcase.join(''));
+			dispExpectedResult(dispexp.join(''));
+			_result.waitToRunTest();
+				
+			runs(function() {
+					callresult = null;
+					thisprinter.requestState([requestStatearray], requestStateCallback);
+			});
+
+			waitsFor(function() {
+					return callresult !== null;
+			}, 'wait requestState', 30000);
+			
+			runs(function() {
+				if(requeststate_callbackValue.status ==  Rho.PrinterZebra.PRINTER_STATUS_SUCCESS) {
+					displayResult(jasmine.getEnv().currentSpec.description, JSON.stringyfy(requeststate_callbackValue));
+				}
+				else {
+					displayResult(jasmine.getEnv().currentSpec.description, requeststate_callbackValue.status);
+				}
+			});
+			_result.waitForResponse();
+		});		
+	}	
+		
+	xdescribe('requestState method', function() {
+		it('should connect', function() {
+				doConnect();
+		});
+		
+		for(var i = 0; i<listofrequeststate.length;i++) {
+			dorequestState(listofrequeststate[i]);
+		}	
+		
+		for(var i = 0; i<printmode_values.length;i++) {
+			dorequestState(printmode_state[0], printmode_values[i]);
+		}	
+	
+	});	
+	
+
+	function doprintStoredFormatWithHash(formatpath, hashvalue, callback_value, lang) {
+	
+		var deftext = [];
+		var dispcase = [];
+		var dispexp = [];
+		var def = '';
+		if (callback_value == 0) {
+			def = 'with'
+		}
+		else if(callback_value == 1) {
+			def = 'without'
+		}
+		else if(callback_value == 2) {
+			def = 'Anonymous'
+		}
+		 
+		deftext = ['Should Print a ',lang,' stored format by Hash ',def,' callback'];
+		dispcase = ['1. Should Print label <br />2.Should Print a ',lang,' stored format on the printer fields specified by the Hash'];
+		dispexp = ['Should Print a ',lang,' stored format on the printer fields specified by the Hash'];
+	
+		it( deftext.join('') , function() {
+			dispTestCaseRunning(dispcase.join(''));
+			dispExpectedResult(dispexp.join(''));
+			//Common Method implemented to wait for tester to run the test.Code available in specHelper.js
+			_result.waitToRunTest();
+			
+			doPrintTestLabel();
+			doSetLabelLength(500);
+			runs(function() {
+				callresult = null;
+				if(callback_value == 0) {
+					thisprinter.printStoredFormatWithHash(formatpath, hashvalue, cbk);
+				}
+				else if(callback_value == 1) {
+					callresult = thisprinter.printStoredFormatWithHash(formatpath, hashvalue);
+				}	
+				else if(callback_value == 2) {
+					thisprinter.printStoredFormatWithHash(formatpath, hashvalue, function(callbackValue) {callresult = callbackValue;});
+				}	
+			});
+			waitsFor(function() {
+					return callresult !== null;
+			}, 'wait to Print', 30000);
+			
+			runs(function() {
+			
+				if(lang != 'invalid')	{
+					//	expect(callresult).toEqual(Rho.PrinterZebra.PRINTER_STATUS_SUCCESS);
+					displayResult(jasmine.getEnv().currentSpec.description, callresult.toString());
+				}	
+				else {	
+					//	expect(callresult).toEqual(Rho.PrinterZebra.PRINTER_STATUS_ERROR);
+					displayResult(jasmine.getEnv().currentSpec.description, callresult.toString());
+				}	
+			});		
+			_result.waitForResponse();
+		});		
+		
+	
+	}
+	xdescribe('printStoredFormatWithHash method', function() {
+		it('should connect', function() {
+				doConnect();
+		});
+		doprintStoredFormatWithHash(zplformatpath, hashzpl, 0, "ZPL Language");
+		doprintStoredFormatWithHash(zplformatpath, hashzpl, 1, "ZPL Language");
+		doprintStoredFormatWithHash(zplformatpath, hashzpl, 2, "ZPL Language");
+		
+		doprintStoredFormatWithHash(ccplformatpath, hashccpl, 0, "CCPL Language");
+		doprintStoredFormatWithHash(ccplformatpath, hashccpl, 1, "CCPL Language");
+		doprintStoredFormatWithHash(ccplformatpath, hashccpl, 2, "CCPL Language");
+		
+		doprintStoredFormatWithHash(invalidformatpath, invalidzplhash, 0, "invalid");
+		
+	})
+	
+	
+		function doprintStoredFormatWithArray(formatpath, arrayvalue, callback_value, lang) {
+	
+		var deftext = [];
+		var dispcase = [];
+		var dispexp = [];
+		var def = '';
+		if (callback_value == 0) {
+			def = 'with'
+		}
+		else if(callback_value == 1) {
+			def = 'without'
+		}
+		else if(callback_value == 2) {
+			def = 'Anonymous'
+		}
+		 
+		deftext = ['Should Print a ',lang,' stored format by Array ',def,' callback'];
+		dispcase = ['1. Should Print label <br />2.Should Print a ',lang,' stored format on the printer fields specified by the Array'];
+		dispexp = ['Should Print a ',lang,' stored format on the printer fields specified by the Array'];
+	
+		it( deftext.join('') , function() {
+			dispTestCaseRunning(dispcase.join(''));
+			dispExpectedResult(dispexp.join(''));
+			//Common Method implemented to wait for tester to run the test.Code available in specHelper.js
+			_result.waitToRunTest();
+			
+			doPrintTestLabel();
+			doSetLabelLength(500);
+			runs(function() {
+				callresult = null;
+				if(callback_value == 0) {
+					thisprinter.printStoredFormatWithArray(formatpath, arrayvalue, cbk);
+				}
+				else if(callback_value == 1) {
+					callresult = thisprinter.printStoredFormatWithArray(formatpath, arrayvalue);
+				}	
+				else if(callback_value == 2) {
+					thisprinter.printStoredFormatWithArray(formatpath, arrayvalue, function(callbackValue) {callresult = callbackValue;});
+				}	
+			});
+			waitsFor(function() {
+					return callresult !== null;
+			}, 'wait to Print', 30000);
+			
+			runs(function() {
+			
+				if(lang != 'invalid')	{
+					//	expect(callresult).toEqual(Rho.PrinterZebra.PRINTER_STATUS_SUCCESS);
+					displayResult(jasmine.getEnv().currentSpec.description, callresult.toString());
+				}	
+				else {	
+					//	expect(callresult).toEqual(Rho.PrinterZebra.PRINTER_STATUS_ERROR);
+					displayResult(jasmine.getEnv().currentSpec.description, callresult.toString());
+				}	
+			});		
+			_result.waitForResponse();
+		});		
+		
+	
+	}
+	xdescribe('printStoredFormatWithArray method', function() {
+		it('should connect', function() {
+				doConnect();
+		});
+		doprintStoredFormatWithArray(zplformatpath, arrayzpl, 0, "ZPL Language");
+		doprintStoredFormatWithArray(zplformatpath, arrayzpl, 1, "ZPL Language");
+		doprintStoredFormatWithArray(zplformatpath, arrayzpl, 2, "ZPL Language");
+		
+		doprintStoredFormatWithArray(ccplformatpath, arrayccpl, 0, "CCPL Language");
+		doprintStoredFormatWithArray(ccplformatpath, arrayccpl, 1, "CCPL Language");
+		doprintStoredFormatWithArray(ccplformatpath, arrayccpl, 2, "CCPL Language");
+		
+		doprintStoredFormatWithArray(invalidformatpath, invalidzplhash, 0, "invalid");
+		
+	})
+	
+	function doprintStoredFormatWithHash(formatpath, hashvalue, callback_value, lang) {
+		var deftext = [];
+		var def = '';
+		if (callback_value == 0) {
+			def = 'with'
+		}
+		else if(callback_value == 1) {
+			def = 'without'
+		}
+		else if(callback_value == 2) {
+			def = 'Anonymous'
+		}
+		 
+		deftext = ['Should Print a ',lang,' stored format by Hash ',def,' callback'];
+		
+		it( deftext.join('') , function() {
+			doPrintTestLabel();
+			doSetLabelLength(500);
+			runs(function() {
+				callresult = null;
+				if(callback_value == 0) {
+					thisprinter.printStoredFormatWithHash(formatpath, hashvalue, cbk);
+				}
+				else if(callback_value == 1) {
+					callresult = thisprinter.printStoredFormatWithHash(formatpath, hashvalue);
+				}	
+				else if(callback_value == 2) {
+					thisprinter.printStoredFormatWithHash(formatpath, hashvalue, function(callbackValue) {callresult = callbackValue;});
+				}	
+			});
+			waitsFor(function() {
+					return callresult !== null;
+			}, 'wait to Print', 30000);
+			
+			runs(function() {
+			
+				if(lang != 'invalid')	{
+						expect(callresult).toEqual(Rho.PrinterZebra.PRINTER_STATUS_SUCCESS);
+					}	
+				else {	
+						expect(callresult).toEqual(Rho.PrinterZebra.PRINTER_STATUS_ERROR);
+				}	
+			});		
+		});		
+	}
+	
+	describe('printStoredFormatWithHash method', function() {
+		it('should connect', function() {
+				doConnect();
+		});
+		doprintStoredFormatWithHash(zplformatpath, hashzpl, 0, "ZPL Language");
+		doprintStoredFormatWithHash(zplformatpath, hashzpl, 1, "ZPL Language");
+		doprintStoredFormatWithHash(zplformatpath, hashzpl, 2, "ZPL Language");
+		
+		doprintStoredFormatWithHash(ccplformatpath, hashccpl, 0, "CCPL Language");
+		doprintStoredFormatWithHash(ccplformatpath, hashccpl, 1, "CCPL Language");
+		doprintStoredFormatWithHash(ccplformatpath, hashccpl, 2, "CCPL Language");
+		
+		doprintStoredFormatWithHash(invalidformatpath, invalidzplhash, 0, "invalid");
+		
+	});
+	
+	
+	function doprintStoredFormatWithArray(formatpath, arrayvalue, callback_value, lang) {
+	
+		var deftext = [];
+		var dispcase = [];
+		var dispexp = [];
+		var def = '';
+		if (callback_value == 0) {
+			def = 'with'
+		}
+		else if(callback_value == 1) {
+			def = 'without'
+		}
+		else if(callback_value == 2) {
+			def = 'Anonymous'
+		}
+		 
+		deftext = ['Should Print a ',lang,' stored format by Array ',def,' callback'];
+		
+		it( deftext.join('') , function() {
+			doPrintTestLabel();
+			doSetLabelLength(500);
+			runs(function() {
+				callresult = null;
+				if(callback_value == 0) {
+					thisprinter.printStoredFormatWithArray(formatpath, arrayvalue, cbk);
+				}
+				else if(callback_value == 1) {
+					callresult = thisprinter.printStoredFormatWithArray(formatpath, arrayvalue);
+				}	
+				else if(callback_value == 2) {
+					thisprinter.printStoredFormatWithArray(formatpath, arrayvalue, function(callbackValue) {callresult = callbackValue;});
+				}	
+			});
+			waitsFor(function() {
+					return callresult !== null;
+			}, 'wait to Print', 30000);
+			
+			runs(function() {
+			
+				if(lang != 'invalid')	{
+						expect(callresult).toEqual(Rho.PrinterZebra.PRINTER_STATUS_SUCCESS);
+				}	
+				else {	
+						expect(callresult).toEqual(Rho.PrinterZebra.PRINTER_STATUS_ERROR);
+				}	
+			});		
+		});		
+	}
+	
+	describe('printStoredFormatWithArray method', function() {
+		it('should connect', function() {
+				doConnect();
+		});
+		doprintStoredFormatWithArray(zplformatpath, arrayzpl, 0, "ZPL Language");
+		doprintStoredFormatWithArray(zplformatpath, arrayzpl, 1, "ZPL Language");
+		doprintStoredFormatWithArray(zplformatpath, arrayzpl, 2, "ZPL Language");
+		
+		doprintStoredFormatWithArray(ccplformatpath, arrayccpl, 0, "CCPL Language");
+		doprintStoredFormatWithArray(ccplformatpath, arrayccpl, 1, "CCPL Language");
+		doprintStoredFormatWithArray(ccplformatpath, arrayccpl, 2, "CCPL Language");
+		
+		doprintStoredFormatWithArray(invalidformatpath, invalidzplhash, 0, "invalid");
+		
+	});
+
+
+	
 		
 
 });
