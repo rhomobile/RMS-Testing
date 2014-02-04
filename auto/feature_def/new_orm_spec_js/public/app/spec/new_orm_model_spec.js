@@ -40,6 +40,16 @@ describe("New ORM Model Specs", function() {
         db2.executeSql("DROP TABLE Product");
       }
     });
+
+    // $.each(partitions, function(index, db2) {
+    //   db2.$execute_sql("DELETE FROM SOURCES");
+    //   db2.$execute_sql("DELETE FROM OBJECT_VALUES");
+    //   db2.$execute_sql("DELETE FROM CHANGED_VALUES");
+    //   if(db2.$is_table_exist("Product")){
+    //     db2.$execute_sql("DROP TABLE Product");
+    //   }
+    // });
+
   };
 
   beforeEach(function() {
@@ -141,7 +151,7 @@ describe("New ORM Model Specs", function() {
     var model = addProductModel();
     var count = 0;
 
-    if(useNewORM) { // FIXME: Add alias count()!
+    if(useNewORM) {
       expect(model.getCount()).toBe(count);
       model.create({"name":"iphone", "brand":"Apple"});
       expect(model.getCount()).toBe(count + 1);
@@ -152,13 +162,14 @@ describe("New ORM Model Specs", function() {
     }
   });
 
-  // FIXME:
-  xit('VT302-0204 | deletes all objects in database', function() {
+  it('VT302-0204 | deletes all objects in database', function() {
     var model = addProductModel();
     model.create({"name":"iphone","brand":"Apple"});
     expect(model.count()).toBeGreaterThan(0);
+    if(useNewORM) expect(model.getCount()).toBeGreaterThan(0);
     model.deleteAll();
     expect(model.count()).toBe(0);
+    if(useNewORM) expect(model.getCount()).toBe(0);
   });
 
 });

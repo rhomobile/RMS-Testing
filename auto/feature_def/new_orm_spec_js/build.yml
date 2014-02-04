@@ -6,7 +6,7 @@ version: 1.0
 vendor: rhomobile
 build: release
 bbver: 4.6
-applog: rholog.txt
+applog: RhoLogSpec.txt
 
 iphone:
   configuration: Release
