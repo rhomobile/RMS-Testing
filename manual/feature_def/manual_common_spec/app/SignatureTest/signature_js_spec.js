@@ -195,6 +195,42 @@ describe("Signature Manual Test", function () {
             });
         });
 
+        it("VT299-005 | Call takeFullScreen and press clear |", function () {
+
+            runs(function () {
+                setObjective("VT299-005 | Call takeFullScreen and press clear |");
+                setInstruction("Wait for 10 sec for Fullscreen Signature box to comeup and press clear after drawing any signature on signature area");
+                setExpected("The signature area should be clear after pressing button clear");
+                delayForNineSeconds();
+            });
+
+            runs(function () {
+                waitsFor(function () {
+                    return readFlag;
+                }, 'wait to callback to fire or timeout', 10000);
+
+                runs(function () {
+                    Rho.Signature.fileName = Rho.RhoFile.join(Rho.Application.databaseBlobFolder, 'VT299-005');
+                    Rho.Signature.takeFullScreen({}, callbacktake);
+                    delayForNineSeconds();
+                });
+
+                waitsFor(function () {
+                    return readFlag || takecallbackfired;
+                }, 'wait to callback to fire or timeout', 10000);
+            });
+
+            runs(function () {
+                Rho.Signature.hide();
+                waitsFor(function () {
+                    return document.getElementById("actResult").innerHTML != "init";
+                }, "Timed out waiting for tester to respond", 300000);
+                runs(function () {
+                    expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+                });
+            });
+        });
+
         it("VT299-006 | Call takeFullScreen with callback as function and minimize |", function () {
 
             runs(function () {
@@ -576,7 +612,8 @@ describe("Signature Manual Test", function () {
             });
         });
 
-        if (isAnyButApplePlatform()) {
+        if (isAnyButApplePlatform()) 
+        {
             it("VT299-017 | Call takeFullScreen with compressionFormat as bmp, fileName as VT299-017 and outputFormat as Image |", function () {
 
                 runs(function () {
@@ -612,9 +649,7 @@ describe("Signature Manual Test", function () {
                     });
                 });
             });
-        }
 
-        if (isAnyButApplePlatform()) {
             it("VT299-018 | Call takeFullScreen with compressionFormat as jpg, fileName as VT299-018 and outputFormat as dataUri |", function () {
 
                 runs(function () {
@@ -654,6 +689,7 @@ describe("Signature Manual Test", function () {
                 });
             });
         }
+
         it("VT299-019 | Call show with bgColor as #FFFF8C00 (ARGB), penColor as #00FF00(RGB), penWidth as 1, and callback |", function () {
 
             runs(function () {
@@ -733,7 +769,8 @@ describe("Signature Manual Test", function () {
             });
         });
 
-        if (isAnyButApplePlatform()) {
+        if (isAnyButApplePlatform()) 
+        {
             it("VT299-021 | Call show with left as 20, top as 70, width as 250 and height as 200, border as false and callback |", function () {
 
                 runs(function () {
@@ -755,7 +792,6 @@ describe("Signature Manual Test", function () {
                     });
 
                     waitsFor(function () {
-                        //var stat = readFlag || takecallbackfired;
                         return readFlag;
                     }, 'wait to callback to fire or timeout', 10000);
                 });
@@ -771,8 +807,7 @@ describe("Signature Manual Test", function () {
                     });
                 });
             });
-        }
-        if (isAnyButApplePlatform()) {
+
             it("VT299-022 | Call show with left as 10, top as 50, width as 180 and height as 120, border as false and outputFormat as dataURI|", function () {
 
                 runs(function () {
@@ -795,7 +830,6 @@ describe("Signature Manual Test", function () {
                 });
 
                 waitsFor(function () {
-                    //var stat = readFlag || takecallbackfired;
                     return readFlag;
                 }, 'wait to callback to fire or timeout', 10000);
 
@@ -812,9 +846,6 @@ describe("Signature Manual Test", function () {
                     expect("pass").toEqual(document.getElementById("actResult").innerHTML);
                 });
             });
-        }
-
-        if (isAnyButApplePlatform()) {
 
             it("VT299-023 | Call show after setting all properties and outputFormat as dataURI|", function () {
 
@@ -846,7 +877,6 @@ describe("Signature Manual Test", function () {
                     });
 
                     waitsFor(function () {
-                        //var stat = readFlag || takecallbackfired;
                         return readFlag;
                     }, 'wait to callback to fire or timeout', 10000);
                 });
@@ -911,7 +941,8 @@ describe("Signature Manual Test", function () {
             });
         });
 
-        if (isAnyButApplePlatform()) {
+        if (isAnyButApplePlatform()) 
+        {
 
             it("VT299-025 | Call setVectorCallback with function callback|", function () {
 
