@@ -14,8 +14,8 @@ var parameters = function (intentType, permission, action, categories, appName, 
 
 describe('Intent_UseCases Functionality Test', function () {
     if(isAndroidPlatform()){
-        it('intentType - StartActivity: Launch target application by \'packageName\', which is installed but not running.', function () {
-            displayObjective("intentType - StartActivity: Launch target application by packageName, which is installed but not running");
+        it('VT328_01 | intentType - StartActivity: Launch target application by \'packageName\', which is installed but not running.', function () {
+            displayObjective("VT328_01 | intentType - StartActivity: Launch target application by packageName, which is installed but not running");
             var preConditions = ["Ensure Target application installed in the device", "Ensure Target application is not running"];
             displayPrecondition(preConditions);
             dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":Rho.Intent.START_ACTIVITY,"action":"ACTION_MAIN","categories":"","appName":"com.smap.targetapp","targetClass":"","uri":"","mimeType":"","data":""}}');
@@ -27,8 +27,8 @@ describe('Intent_UseCases Functionality Test', function () {
             });
             _result.waitForResponse();
         });
-        it('intentType - StartActivity: Launch target application by \'packageName\', which is running in background.', function () {
-            displayObjective("intentType - StartActivity: Launch target application by \'packageName\', which is running in background.");
+        it('VT328_02 | intentType - StartActivity: Launch target application by \'packageName\', which is running in background.', function () {
+            displayObjective("VT328_02 | intentType - StartActivity: Launch target application by \'packageName\', which is running in background.");
             var preConditions = ["Ensure Target application installed in the device", "Ensure Target application is running in background"];
             displayPrecondition(preConditions);
             dispTestCaseRunning('Sending Intent with parameters: </br> {"params":{"intentType":Rho.Intent.START_ACTIVITY,"action":"ACTION_MAIN","categories":"","appName":"com.smap.targetapp","targetClass":"","uri":"","mimeType":"","data":""}}');
@@ -40,8 +40,8 @@ describe('Intent_UseCases Functionality Test', function () {
             });
             _result.waitForResponse();
         });
-        it('intentType - StartActivity: Launch target application by \'className\',which is installed but not running.', function () {
-            displayObjective("intentType - StartActivity: Launch target application by \'className\',which is installed but not running.");
+        it('VT328_03 | intentType - StartActivity: Launch target application by \'className\',which is installed but not running.', function () {
+            displayObjective("VT328_03 | intentType - StartActivity: Launch target application by \'className\',which is installed but not running.");
             var preConditions = ["Ensure Target application installed in the device"];
             displayPrecondition(preConditions);
             dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":Rho.Intent.START_ACTIVITY,"action":"ACTION_MAIN","categories":"","appName":"com.smap.targetapp","targetClass":"MainActivity","uri":"","mimeType":"","data":""}}');
@@ -53,8 +53,8 @@ describe('Intent_UseCases Functionality Test', function () {
             });
             _result.waitForResponse();
         });
-        it('intentType - StartActivity: Launch target application by \'className\', which is running in background.', function () {
-            displayObjective("intentType - StartActivity: Launch target application by \'className\', which is running in background.");
+        it('VT328_04 | intentType - StartActivity: Launch target application by \'className\', which is running in background.', function () {
+            displayObjective("VT328_04 | intentType - StartActivity: Launch target application by \'className\', which is running in background.");
             var preConditions = ["Ensure Target application installed in the device","Ensure Target application running in background"];
             displayPrecondition(preConditions);
             dispTestCaseRunning('Ensure the Target application is running in the background. <br/>Sending Intent with parameters {"params":{"intentType":Rho.Intent.START_ACTIVITY,"action":"ACTION_MAIN","categories":"","appName":"com.smap.targetapp","targetClass":"MainActivity","uri":"","mimeType":"","data":""}} <br/> should bring the application to foreground');
@@ -66,8 +66,8 @@ describe('Intent_UseCases Functionality Test', function () {
             });
             _result.waitForResponse();
         });
-        it('intentType - Start service of the test appliation.', function () {
-            displayObjective("intentType - Start service of the test appliation.");
+        it('VT328_05 | intentType - Start service of the test appliation.', function () {
+            displayObjective("VT328_05 | intentType - Start service of the test appliation.");
             dispTestCaseRunning('Sending Intent with parameters {"intentType":Rho.Intent.START_SERVICE,"appName":"manual_common_spec","targetClass":"RhodesService"}');
             dispExpectedResult('Service of test application should be started and toast from service is shown.');
             _result.waitToRunTest();
@@ -86,8 +86,8 @@ describe('Intent_UseCases Functionality Test', function () {
             });
             _result.waitForResponse();
         });
-        it('intentType - Start service of the target appliation.', function () {
-            displayObjective("intentType - Start service of the target appliation.");
+        it('VT328_06 | intentType - Start service of the target appliation.', function () {
+            displayObjective("VT328_06 | intentType - Start service of the target appliation.");
             var preConditions = ["Ensure Target application installed in the device","Ensure Target application is running in background"];
             displayPrecondition(preConditions);
             dispTestCaseRunning('Sending Intent with parameters {"intentType":Rho.Intent.START_SERVICE, "appName":"com.smap.targetapp", "targetClass":"MyFirstService"}');
@@ -99,8 +99,8 @@ describe('Intent_UseCases Functionality Test', function () {
             });
             _result.waitForResponse();
         });
-        it('intentType - Start service of the target application which is not running.', function () {
-            displayObjective("intentType - Start service of the target application which is not running.");
+        it('VT328_07 | intentType - Start service of the target application which is not running.', function () {
+            displayObjective("VT328_07 | intentType - Start service of the target application which is not running.");
             var preConditions = ["Ensure Target application installed in the device","Ensure that Target appliation is not running."];
             displayPrecondition(preConditions);
             dispTestCaseRunning('Sending Intent with parameters {"intentType":Rho.Intent.START_SERVICE, "appName":"com.smap.targetapp", "targetClass":"MyFirstService"}');
@@ -113,8 +113,8 @@ describe('Intent_UseCases Functionality Test', function () {
             _result.waitForResponse();
         });
 
-        it('intentType - Start service of the target applciation in which the service is already instantiated', function () {
-            displayObjective("intentType - Start service of the target applciation in which the service is already instantiated");
+        it('VT328_08 | intentType - Start service of the target applciation in which the service is already instantiated', function () {
+            displayObjective("VT328_08 | intentType - Start service of the target applciation in which the service is already instantiated");
             var preConditions = ["Ensure Target application installed in the device"];
             displayPrecondition(preConditions);
             dispTestCaseRunning('Sending Intent two times with parameters {"intentType":Rho.Intent.START_SERVICE, "appName":"com.smap.targetapp", "targetClass":"MyFirstService"}');
@@ -127,8 +127,8 @@ describe('Intent_UseCases Functionality Test', function () {
             });
             _result.waitForResponse();
         });
-        it('intentType - Broadcast data from test app and receive at target app.', function () {
-            displayObjective("intentType - Broadcast data from test app and receive at target app.");
+        it('VT328_09 | intentType - Broadcast data from test app and receive at target app.', function () {
+            displayObjective("VT328_09 | intentType - Broadcast data from test app and receive at target app.");
             var preConditions = ["Ensure Target application installed in the device"];
             displayPrecondition(preConditions);
             dispTestCaseRunning('Sending Intent with parameters {"intentType":Rho.Intent.BROADCAST, "action":"com.smap.targetapp.mySecondAction", "data":{"toast":"Target -Test case passed If you see this in Andorid Toast !"}}');
@@ -143,8 +143,8 @@ describe('Intent_UseCases Functionality Test', function () {
             });
             _result.waitForResponse();
         });
-		it('intentType - Broadcast data from test app and receive at target app with permission', function () {
-            displayObjective("intentType - Broadcast data from test app and receive at target app which has permission");
+		it('VT328_10 | intentType - Broadcast data from test app and receive at target app with permission', function () {
+            displayObjective("VT328_10 | intentType - Broadcast data from test app and receive at target app which has permission");
             var preConditions = ["Ensure that both Target application 1 and 2 installed in the device"];
             displayPrecondition(preConditions);
             dispTestCaseRunning('Sending Intent with parameters {"intentType":Rho.Intent.BROADCAST, "permission":"com.example.testtarget.PERMISSION","action":"com.smap.targetapp.mySecondAction", "data":{"toast":"Target -Test case passed If you see this in Andorid Toast !"}}');
@@ -159,8 +159,8 @@ describe('Intent_UseCases Functionality Test', function () {
             });
             _result.waitForResponse();
         });
-        it('intentType - Broadcast data from test app and receive back at test app.', function () {
-            displayObjective("intentType - Broadcast data from test app and receive at test app.");
+        it('VT328_11 | intentType - Broadcast data from test app and receive back at test app.', function () {
+            displayObjective("VT328_11 | intentType - Broadcast data from test app and receive at test app.");
             dispTestCaseRunning('Sending Intent with parameters {"intentType":Rho.Intent.BROADCAST, "action":"com.smap.targetapp.mySecondAction", "data":{"reply":"This is my broadcast data!"}}');
             dispExpectedResult('Broadcast and reply to RhodesService would be successful and alert from test app callback is displayed.');
             _result.waitToRunTest();
@@ -179,8 +179,8 @@ describe('Intent_UseCases Functionality Test', function () {
             });
             _result.waitForResponse();
         });
-        it('intentType - Broadcast data from test app and receive at target app, when target app is not running.', function () {
-            displayObjective("intentType - Broadcast data from test app and receive at target app, when target app is not running.");
+        it('VT328_12 | intentType - Broadcast data from test app and receive at target app, when target app is not running.', function () {
+            displayObjective("VT328_12 | intentType - Broadcast data from test app and receive at target app, when target app is not running.");
             var preConditions = ["Ensure Target application installed but not running in the device"];
             displayPrecondition(preConditions);
             dispTestCaseRunning('Sending Intent with parameters {"intentType":Rho.Intent.BROADCAST, "appName":"com.smap.targetapp", "data":{"toast":"Target: Test case passed If you see this in Andorid Toast !"}}');
@@ -192,8 +192,8 @@ describe('Intent_UseCases Functionality Test', function () {
             });
             _result.waitForResponse();
         });
-        it('category - Launch browser from test application by setting category "CATEGORY_APP_BROWSER" and action "ACTION_MAIN"', function () {
-            displayObjective('category - Launch browser from test application by setting category "CATEGORY_APP_BROWSER" and action "ACTION_MAIN". Starting from android Android 4.0.3 (15) ICE_CREAM_SANDWICH_MR1');
+        it('VT328_13 | category - Launch browser from test application by setting category "CATEGORY_APP_BROWSER" and action "ACTION_MAIN"', function () {
+            displayObjective('VT328_13 | category - Launch browser from test application by setting category "CATEGORY_APP_BROWSER" and action "ACTION_MAIN". Starting from android Android 4.0.3 (15) ICE_CREAM_SANDWICH_MR1');
             dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":Rho.Intent.START_ACTIVITY,"action":"ACTION_MAIN","categories":["CATEGORY_APP_BROWSER"],"appName":"","targetClass":"","uri":"","mimeType":"","data":""}}');
             dispExpectedResult('Browser should be launched with blank screen');
             _result.waitToRunTest();
@@ -204,8 +204,8 @@ describe('Intent_UseCases Functionality Test', function () {
             });
             _result.waitForResponse();
         });
-        it('category - Launch Music Player from test application by setting category "CATEGORY_APP_MUSIC"  and action "ACTION_MAIN"', function () {
-            displayObjective('category - Launch Music Player from test application by setting category "CATEGORY_APP_MUSIC"  and action "ACTION_MAIN". Starting from android Android 4.0.3 (15) ICE_CREAM_SANDWICH_MR1');
+        it('VT328_14 | category - Launch Music Player from test application by setting category "CATEGORY_APP_MUSIC"  and action "ACTION_MAIN"', function () {
+            displayObjective('VT328_14 | category - Launch Music Player from test application by setting category "CATEGORY_APP_MUSIC"  and action "ACTION_MAIN". Starting from android Android 4.0.3 (15) ICE_CREAM_SANDWICH_MR1');
             dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":Rho.Intent.START_ACTIVITY,"action":"ACTION_MAIN","categories":["CATEGORY_APP_MUSIC"],"appName":"","targetClass":"","uri":"","mimeType":"","data":""}}');
             dispExpectedResult('Launch Music Player from test application by setting category "CATEGORY_APP_MUSIC"  and action "ACTION_MAIN"');
             _result.waitToRunTest();
@@ -216,8 +216,8 @@ describe('Intent_UseCases Functionality Test', function () {
             });
             _result.waitForResponse();
         });
-        it('category - Launch Calculator from test applciation by setting category "CATEGORY_APP_CALCULATOR"  and action "ACTION_MAIN"', function () {
-            displayObjective('category - Launch Calculator from test applciation by setting category "CATEGORY_APP_CALCULATOR"  and action "ACTION_MAIN". Starting from android Android 4.0.3 (15) ICE_CREAM_SANDWICH_MR1');
+        it('VT328_15 | category - Launch Calculator from test applciation by setting category "CATEGORY_APP_CALCULATOR"  and action "ACTION_MAIN"', function () {
+            displayObjective('VT328_15 | category - Launch Calculator from test applciation by setting category "CATEGORY_APP_CALCULATOR"  and action "ACTION_MAIN". Starting from android Android 4.0.3 (15) ICE_CREAM_SANDWICH_MR1');
             dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":Rho.Intent.START_ACTIVITY,"action":"ACTION_MAIN","categories":["CATEGORY_APP_CALCULATOR"],"appName":"","targetClass":"","uri":"","mimeType":"","data":""}}');
             dispExpectedResult('Calculator should be launched successfully.');
             _result.waitToRunTest();
@@ -228,8 +228,8 @@ describe('Intent_UseCases Functionality Test', function () {
             });
             _result.waitForResponse();
         });
-        it('category - Launch Calendar from test application by setting category "CATEGORY_APP_CALENDAR" and action "ACTION_MAIN"', function () {
-            displayObjective('category - Launch Calendar from test application by setting category "CATEGORY_APP_CALENDAR" and action "ACTION_MAIN". Starting from android Android 4.0.3 (15) ICE_CREAM_SANDWICH_MR1');
+        it('VT328_16 | category - Launch Calendar from test application by setting category "CATEGORY_APP_CALENDAR" and action "ACTION_MAIN"', function () {
+            displayObjective('VT328_16 | category - Launch Calendar from test application by setting category "CATEGORY_APP_CALENDAR" and action "ACTION_MAIN". Starting from android Android 4.0.3 (15) ICE_CREAM_SANDWICH_MR1');
             dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":Rho.Intent.START_ACTIVITY,"action":"ACTION_MAIN","categories":["CATEGORY_APP_CALENDAR"],"appName":"","targetClass":"","uri":"","mimeType":"","data":""}}');
             dispExpectedResult('Calendar should be launched successfully.');
             _result.waitToRunTest();
@@ -240,8 +240,8 @@ describe('Intent_UseCases Functionality Test', function () {
             });
             _result.waitForResponse();
         });
-        it('category - Launch contacts from test application by setting category "CATEGORY_APP_CONTACTS" and action "ACTION_MAIN"', function () {
-            displayObjective('category - Launch contacts from test application by setting category "CATEGORY_APP_CONTACTS" and action "ACTION_MAIN". Starting from android Android 4.0.3 (15) ICE_CREAM_SANDWICH_MR1');
+        it('VT328_17 | category - Launch contacts from test application by setting category "CATEGORY_APP_CONTACTS" and action "ACTION_MAIN"', function () {
+            displayObjective('VT328_17 | category - Launch contacts from test application by setting category "CATEGORY_APP_CONTACTS" and action "ACTION_MAIN". Starting from android Android 4.0.3 (15) ICE_CREAM_SANDWICH_MR1');
             dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":Rho.Intent.START_ACTIVITY,"action":"ACTION_MAIN","categories":["CATEGORY_APP_CONTACTS"],"appName":"","targetClass":"","uri":"","mimeType":"","data":""}}');
             dispExpectedResult('Contacts applciation should be launched successfully.');
             _result.waitToRunTest();
@@ -252,8 +252,8 @@ describe('Intent_UseCases Functionality Test', function () {
             });
             _result.waitForResponse();
         });
-        it('category - Launch Email application from test application by setting category "CATEGORY_APP_EMAIL" and action "ACTION_MAIN"', function () {
-            displayObjective('category - Launch Email application from test application by setting category "CATEGORY_APP_EMAIL" and action "ACTION_MAIN". Starting from android Android 4.0.3 (15) ICE_CREAM_SANDWICH_MR1');
+        it('VT328_18 | category - Launch Email application from test application by setting category "CATEGORY_APP_EMAIL" and action "ACTION_MAIN"', function () {
+            displayObjective('VT328_18 | category - Launch Email application from test application by setting category "CATEGORY_APP_EMAIL" and action "ACTION_MAIN". Starting from android Android 4.0.3 (15) ICE_CREAM_SANDWICH_MR1');
             dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":Rho.Intent.START_ACTIVITY,"action":"ACTION_MAIN","categories":["CATEGORY_APP_EMAIL"],"appName":"","targetClass":"","uri":"","mimeType":"","data":""}}');
             dispExpectedResult('Email application should be launched successfully.');
             _result.waitToRunTest();
@@ -264,8 +264,8 @@ describe('Intent_UseCases Functionality Test', function () {
             });
             _result.waitForResponse();
         });
-        it('category - Launch Gallery application from test app by setting category "CATEGORY_APP_GALLERY" and action "ACTION_MAIN"', function () {
-            displayObjective('category - Launch Gallery application from test app by setting category "CATEGORY_APP_GALLERY" and action "ACTION_MAIN". Starting from android Android 4.0.3 (15) ICE_CREAM_SANDWICH_MR1');
+        it('VT328_19 | category - Launch Gallery application from test app by setting category "CATEGORY_APP_GALLERY" and action "ACTION_MAIN"', function () {
+            displayObjective('VT328_19 | category - Launch Gallery application from test app by setting category "CATEGORY_APP_GALLERY" and action "ACTION_MAIN". Starting from android Android 4.0.3 (15) ICE_CREAM_SANDWICH_MR1');
             dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":Rho.Intent.START_ACTIVITY,"action":"ACTION_MAIN","categories":["CATEGORY_APP_GALLERY"],"appName":"","targetClass":"","uri":"","mimeType":"","data":""}}');
             dispExpectedResult('Gallery launched successfully');
             _result.waitToRunTest();
@@ -276,9 +276,9 @@ describe('Intent_UseCases Functionality Test', function () {
             });
             _result.waitForResponse();
         });
-        xit('category - Launch Maps application from test app by setting category "CATEGORY_APP_MAPS" and action "ACTION_MAIN"', function () {
+        xit('VT328_20 | category - Launch Maps application from test app by setting category "CATEGORY_APP_MAPS" and action "ACTION_MAIN"', function () {
             // Does not accepted by Android for some reason
-            displayObjective('category - Launch Maps application from test app by setting category "CATEGORY_APP_MAPS" and action "ACTION_MAIN". Starting from android Android 4.0.3 (15) ICE_CREAM_SANDWICH_MR1');
+            displayObjective('VT328_20 | category - Launch Maps application from test app by setting category "CATEGORY_APP_MAPS" and action "ACTION_MAIN". Starting from android Android 4.0.3 (15) ICE_CREAM_SANDWICH_MR1');
             dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":Rho.Intent.START_ACTIVITY,"action":"ACTION_MAIN","categories":["CATEGORY_APP_MAPS"],"appName":"","targetClass":"","uri":"","mimeType":"","data":""}}');
             dispExpectedResult('Maps should be launched successfully.');
             _result.waitToRunTest();
@@ -289,8 +289,8 @@ describe('Intent_UseCases Functionality Test', function () {
             });
             _result.waitForResponse();
         });
-        it('category - Launch Message application from test app by setting category "CATEGORY_APP_MESSAGING" and action "ACTION_MAIN"', function () {
-            displayObjective('category - Launch Message application from test app by setting category "CATEGORY_APP_MESSAGING" and action "ACTION_MAIN". Starting from android Android 4.0.3 (15) ICE_CREAM_SANDWICH_MR1');
+        it('VT328_21 | category - Launch Message application from test app by setting category "CATEGORY_APP_MESSAGING" and action "ACTION_MAIN"', function () {
+            displayObjective('VT328_21 | category - Launch Message application from test app by setting category "CATEGORY_APP_MESSAGING" and action "ACTION_MAIN". Starting from android Android 4.0.3 (15) ICE_CREAM_SANDWICH_MR1');
             dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":Rho.Intent.START_ACTIVITY,"action":"ACTION_MAIN","categories":["CATEGORY_APP_MESSAGING"],"appName":"","targetClass":"","uri":"","mimeType":"","data":""}}');
             dispExpectedResult('Messaging app launched successfully.');
             _result.waitToRunTest();
@@ -301,9 +301,9 @@ describe('Intent_UseCases Functionality Test', function () {
             });
             _result.waitForResponse();
         });
-        it('mimeType - Launch Message application from test app by setting mimeType "vnd.android-dir/mms-sms" and Data to "<Some HTML text>"', function () {
-            displayObjective('mimeType - Launch Message application from test app by setting mimeType "vnd.android-dir/mms-sms" and Data to "<Some HTML text>"');
-            dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":Rho.Intent.START_ACTIVITY,"action":"ACTION_VIEW","categories":"","appName":"","targetClass":"","uri":"","mimeType":"text/html","data":"<h3 style=\'color:green\'>Test case passed if you see this text in Green color with browser</h3>"}}');
+        it('VT328_22 | mimeType - Launch Message application from test app by setting mimeType "vnd.android-dir/mms-sms" and Data to "<Some HTML text>"', function () {
+            displayObjective('VT328_22 | mimeType - Launch Message application from test app by setting mimeType "vnd.android-dir/mms-sms" and Data to "<Some HTML text>"');
+            dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":Rho.Intent.START_ACTIVITY,"action":"ACTION_SEND","categories":"","appName":"","targetClass":"","uri":"","mimeType":"vnd.android-dir/mms-sms",{"EXTRA_HTML_TEXT":"<h3 style=\'color:green\'>Test case passed if you see this text in Green color with browser</h3>"}}}');
             dispExpectedResult('Messaging app launched successfully and message body should contain "Test case passed if you see this text in Green color with browser" in green color');
             _result.waitToRunTest();
             runs(function () {
@@ -313,10 +313,10 @@ describe('Intent_UseCases Functionality Test', function () {
             });
             _result.waitForResponse();
         });
-        it('mimeType - Launch Message application from test app by setting mimeType "vnd.android-dir/mms-sms" and Data to "This is message body !"', function () {
+        it('VT328_23 | mimeType - Launch Message application from test app by setting mimeType "vnd.android-dir/mms-sms" and Data to "This is message body !"', function () {
             // mimeType param can be used to override default mime type from URL and has no effect used separately without other data
-            displayObjective('mimeType - Launch Message application from test app by setting mimeType "vnd.android-dir/mms-sms" and Data to "This is message body !"');
-            dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":Rho.Intent.START_ACTIVITY,"action":"","categories":"","appName":"","targetClass":"","uri":"","mimeType":"vnd.android-dir/mms-sms","data":"This should be in message body!"}}');
+            displayObjective('VT328_23 | mimeType - Launch Message application from test app by setting mimeType "vnd.android-dir/mms-sms" and Data to "This is message body !"');
+            dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":Rho.Intent.START_ACTIVITY,"action":"ACTION_SEND","categories":"","appName":"","targetClass":"","uri":"","mimeType":"vnd.android-dir/mms-sms",{"EXTRA_TEXT":"This should be in message body!"}}}');
             dispExpectedResult('Messaging app launched successfully and message body should contain "This is message body !"');
             _result.waitToRunTest();
             runs(function () {
@@ -326,8 +326,8 @@ describe('Intent_UseCases Functionality Test', function () {
             });
             _result.waitForResponse();
         });
-		xit('mimeType - Launch Image viewer from test app by setting an EXTRA - EXTRA_STREAM with "image data URI"', function () {
-            displayObjective('mimeType - Launch Image viewer from test app by setting mimeType "image (jpeg, gif, png etc.,)" and Data to "image data URI"');
+		xit('VT328_24 | mimeType - Launch Image viewer from test app by setting an EXTRA - EXTRA_STREAM with "image data URI"', function () {
+            displayObjective('VT328_24 | mimeType - Launch Image viewer from test app by setting mimeType "image (jpeg, gif, png etc.,)" and Data to "image data URI"');
             dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":Rho.Intent.START_ACTIVITY,"action":"","categories":"","appName":"","targetClass":"","uri":"","mimeType":"image/jpeg",{"EXTRA_STREAM":"data:image/jpeg;base64,/qerwe.... "}}');
             dispExpectedResult('Image viewer should be launched successfully.');
             _result.waitToRunTest();
@@ -342,8 +342,8 @@ describe('Intent_UseCases Functionality Test', function () {
     //TODO: Is such method usage supports on iOS ?
     if(isApplePlatform()){
         // No common app in android supports "data:" URIs in intents
-        it('mimeType - Launch Image viewer from test app by setting uri to "image data URI"', function () {
-            displayObjective('mimeType - Launch Image viewer from test app by setting mimeType "image (jpeg, gif, png etc.,)" and Data to "image data URI"');
+        it('VT328_24 | mimeType - Launch Image viewer from test app by setting uri to "image data URI"', function () {
+            displayObjective('VT328_24 | mimeType - Launch Image viewer from test app by setting mimeType "image (jpeg, gif, png etc.,)" and Data to "image data URI"');
             dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":Rho.Intent.START_ACTIVITY,"action":"","categories":"","appName":"","targetClass":"","uri":"","mimeType":"image/jpeg","data":"<data:image/jpeg;base64,/qerwe.... >"}}');
             dispExpectedResult('Image viewer should be launched successfully.');
             _result.waitToRunTest();
@@ -357,9 +357,9 @@ describe('Intent_UseCases Functionality Test', function () {
         });
     }
     if(isAnyWindowsFamilyPlatform()){
-        it('appName - Launch any other Application by setting \'appName\' in intent params, from test application.', function () {
-            displayObjective('appName - Launch any other Application by setting \'appName\' in intent params, from test application.');
-            dispTestCaseRunning('Se   nding Intent with parameters {"params":{"intentType":Rho.Intent.START_ACTIVITY,"action":"","categories":"","appName":"testApp","targetClass":"","uri":"","mimeType":"","data":""}}');
+        it('VT328_25 | appName - Launch any other Application by setting \'appName\' in intent params, from test application.', function () {
+            displayObjective('VT328_25 | appName - Launch any other Application by setting \'appName\' in intent params, from test application.');
+            dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":Rho.Intent.START_ACTIVITY,"action":"","categories":"","appName":"testApp","targetClass":"","uri":"","mimeType":"","data":""}}');
             dispExpectedResult('Application should be launched from test application successfully');
             _result.waitToRunTest();
             runs(function () {
@@ -371,8 +371,8 @@ describe('Intent_UseCases Functionality Test', function () {
     }
 
     if(isAndroidPlatform()){
-        it('appName - Launch Android application via \'appName\' (packageName) from test application.', function () {
-            displayObjective('appName - Launch Android application via \'appName\' (packageName) from test application.');
+        it('VT328_26 | appName - Launch Android application via \'appName\' (packageName) from test application.', function () {
+            displayObjective('VT328_26 | appName - Launch Android application via \'appName\' (packageName) from test application.');
             dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":Rho.Intent.START_ACTIVITY,"action":"","categories":"","appName":"com.smap.targetapp","targetClass":"","uri":"","mimeType":"","data":""}}');
             dispExpectedResult('Android application should launched whose package name matches.');
             _result.waitToRunTest();
@@ -384,8 +384,8 @@ describe('Intent_UseCases Functionality Test', function () {
         });
     }
     if(isApplePlatform()){
-        it('appName - Launch iOS application via \'appName\' (BundleURLScheme) from test application.', function () {
-            displayObjective('appName - Launch iOS application via \'testapp\' (BundleURLScheme) from test application.');
+        it('VT328_27 | appName - Launch iOS application via \'appName\' (BundleURLScheme) from test application.', function () {
+            displayObjective('VT328_27 | appName - Launch iOS application via \'testapp\' (BundleURLScheme) from test application.');
             dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":Rho.Intent.START_ACTIVITY,"action":"","categories":"","testapp":"ios bundle url","targetClass":"","uri":"","mimeType":"","data":""}}');
             dispExpectedResult('iOS application should be launched whose bundleUrlScheme matches.');
             _result.waitToRunTest();
@@ -397,8 +397,8 @@ describe('Intent_UseCases Functionality Test', function () {
         });
     }
     if (isAnyButWindowsFamilyPlatform()){
-    it('uri - Launch URL via browser appliation from test app by setting URI "http://www.google.com"', function () {
-        displayObjective('uri - Launch URL via browser appliation from test app by setting URI "http://www.google.com"');
+    it('VT328_28 | uri - Launch URL via browser appliation from test app by setting URI "http://www.google.com"', function () {
+        displayObjective('VT328_28 | uri - Launch URL via browser appliation from test app by setting URI "http://www.google.com"');
         dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":Rho.Intent.START_ACTIVITY,"action":"ACTION_VIEW","categories":"","appName":"","targetClass":"","uri":"http://www.google.com","mimeType":"","data":""}}');
         dispExpectedResult('Browser should be launched with default data in the view.');
         _result.waitToRunTest();
@@ -410,8 +410,8 @@ describe('Intent_UseCases Functionality Test', function () {
     });
     }
     if (!isApplePlatform) {
-         it('uri - Launch Message application with data from test app by setting URI "sms:9611896991"', function () {
-            displayObjective('uri - Launch Message application with data from test app by setting URI "sms:9611896991"');
+         it('VT328_29 | uri - Launch Message application with data from test app by setting URI "sms:9611896991"', function () {
+            displayObjective('VT328_29 | uri - Launch Message application with data from test app by setting URI "sms:9611896991"');
             dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":Rho.Intent.START_ACTIVITY,"action":"","categories":"","appName":"","targetClass":"","uri":"sms:9611896991","mimeType":"","data":""}}');
             dispExpectedResult('Message compose application should be launched with pre-filled recepient number.');
             _result.waitToRunTest();
@@ -421,8 +421,8 @@ describe('Intent_UseCases Functionality Test', function () {
                  });
             _result.waitForResponse();
             });
-         it('uri - Launch Email appliation with data from test app by setting URI "mailto:abcd@domain.com"', function () {
-            displayObjective('uri - Launch Email appliation with data from test app by setting URI "mailto:abcd@domain.com"');
+         it('VT328_30 | uri - Launch Email appliation with data from test app by setting URI "mailto:abcd@domain.com"', function () {
+            displayObjective('VT328_30 | uri - Launch Email appliation with data from test app by setting URI "mailto:abcd@domain.com"');
             var preConditions = ["Ensure default mail box is configured in the device"];
             displayPrecondition(preConditions);
             dispTestCaseRunning('Sending Intent with parameters Sending Intent with parameters {"params":{"intentType":Rho.Intent.START_ACTIVITY,"action":"","categories":"","appName":"","targetClass":"","uri":"mailto:abcd@domain.com","mimeType":"","data":""}}');
@@ -434,9 +434,9 @@ describe('Intent_UseCases Functionality Test', function () {
                  });
             _result.waitForResponse();
             });
-         it('uri - Launch dialler with pre-filled number from test application by setting URI "tel:9611896991" and with Action: ACTION_DIAL', function () {
-            displayObjective('uri - Launch dialler with pre-filled number from test application by setting URI "tel:9611896991" and with Action: ACTION_DIAL');
-            dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":Rho.Intent.START_ACTIVITY,"action":"ACTION_DIAL","categories":"","appName":"","targetClass":"","uri":"mailto:abcd@domain.com","mimeType":"","data":""}}');
+         it('VT328_31 | uri - Launch dialler with pre-filled number from test application by setting URI "tel:9611896991" and with Action: ACTION_DIAL', function () {
+            displayObjective('VT328_31 | uri - Launch dialler with pre-filled number from test application by setting URI "tel:9611896991" and with Action: ACTION_DIAL');
+            dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":Rho.Intent.START_ACTIVITY,"action":"ACTION_DIAL","categories":"","appName":"","targetClass":"","uri":"tel:9611896991","mimeType":"","data":""}}');
             dispExpectedResult('Dialer launches with pre-loaded number in it.');
             _result.waitToRunTest();
             runs(function () {
@@ -446,8 +446,8 @@ describe('Intent_UseCases Functionality Test', function () {
             _result.waitForResponse();
             });
          if(!isAndroidPlatform()){
-         it('uri - Launch Maps with pre-set lat and longitute values from test app by setting Uri "geo:latitude,longitude"', function () {
-            displayObjective('uri - Launch Maps with pre-set lat and longitute values from test app by setting Uri "geo:latitude,longitude"');
+         it('VT328_32 | uri - Launch Maps with pre-set lat and longitute values from test app by setting Uri "geo:latitude,longitude"', function () {
+            displayObjective('VT328_32 | uri - Launch Maps with pre-set lat and longitute values from test app by setting Uri "geo:latitude,longitude"');
             var preConditions = ["Ensure maps application present in the device"];
             displayPrecondition(preConditions);
             dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":Rho.Intent.START_ACTIVITY,"action":"ACTION_VIEW","categories":"","appName":"","targetClass":"","uri":"geo:12.9667° N, 77.5667° E","mimeType":"","data":""}}');
@@ -460,9 +460,9 @@ describe('Intent_UseCases Functionality Test', function () {
             _result.waitForResponse();
             });
          }
-         it('uri - Make a call from test application by setting URI "tel:9611896991" and Action : "ACTION_CALL"', function () {
-            displayObjective('uri - Make a call from test application by setting URI "tel:9611896991" and Action : "ACTION_CALL"');
-            dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":Rho.Intent.START_ACTIVITY,"action":"ACTION_CALL","categories":"","appName":"","targetClass":"","uri":"mailto:abcd@domain.com","mimeType":"","data":""}}');
+         it('VT328_33 | uri - Make a call from test application by setting URI "tel:9611896991" and Action : "ACTION_CALL"', function () {
+            displayObjective('VT328_33 | uri - Make a call from test application by setting URI "tel:9611896991" and Action : "ACTION_CALL"');
+            dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":Rho.Intent.START_ACTIVITY,"action":"ACTION_CALL","categories":"","appName":"","targetClass":"","uri":"tel:9611896991","mimeType":"","data":""}}');
             dispExpectedResult('Phone call made to the pre-loaded number.');
             _result.waitToRunTest();
             runs(function () {
@@ -473,8 +473,8 @@ describe('Intent_UseCases Functionality Test', function () {
             });
     }
     if(isAndroidPlatform()){
-        it('uri - Launch Contacts from test application via Uri "content://contacts/people/" and Action: ACTION_VIEW', function () {
-            displayObjective('uri - Launch Contacts from test application via Uri "content://contacts/people/" and Action: ACTION_VIEW');
+        it('VT328_34 | uri - Launch Contacts from test application via Uri "content://contacts/people/" and Action: ACTION_VIEW', function () {
+            displayObjective('VT328_34 | uri - Launch Contacts from test application via Uri "content://contacts/people/" and Action: ACTION_VIEW');
             var preConditions = ["Ensure atleast one contact is present in the device"];
             displayPrecondition(preConditions);
             dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":Rho.Intent.START_ACTIVITY,"action":"ACTION_VIEW","categories":"","appName":"","targetClass":"","uri":"content://contacts/people/","mimeType":"","data":""}}');
@@ -486,8 +486,8 @@ describe('Intent_UseCases Functionality Test', function () {
             });
             _result.waitForResponse();
         });
-        it('uri - Launch individual contact from test application via Uri "content://contacts/people/1" and Action: ACTION_VIEW', function () {
-            displayObjective('uri - Launch Contacts from test application via Uri "content://contacts/people/" and Action: ACTION_VIEW');
+        it('VT328_35 | uri - Launch individual contact from test application via Uri "content://contacts/people/1" and Action: ACTION_VIEW', function () {
+            displayObjective('VT328_35 | uri - Launch Contacts from test application via Uri "content://contacts/people/" and Action: ACTION_VIEW');
             var preConditions = ["Ensure atleast one contact is present in the device"];
             displayPrecondition(preConditions);
             dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":Rho.Intent.START_ACTIVITY,"action":"ACTION_EDIT","categories":"","appName":"","targetClass":"","uri":"content://contacts/people/1","mimeType":"","data":""}}');
@@ -501,8 +501,8 @@ describe('Intent_UseCases Functionality Test', function () {
         });
     }
     if(!isApplePlatform) {
-         it('uri - Launch Email compose screen with pre-filled email from test application by setting URI and data.', function () {
-            displayObjective('uri - Launch Email compose screen with pre-filled email from test application by setting URI and data.');
+         it('VT328_36 | uri - Launch Email compose screen with pre-filled email from test application by setting URI and data.', function () {
+            displayObjective('VT328_36 | uri - Launch Email compose screen with pre-filled email from test application by setting URI and data.');
             var preConditions = ["Ensure default mailbox is configured in the device"];
             displayPrecondition(preConditions);
             dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":Rho.Intent.START_ACTIVITY,"action":"","categories":"","appName":"","targetClass":"","uri":"mailto:abcd@domain.com","mimeType":"","data":"This is test email body"}}');
@@ -519,8 +519,8 @@ describe('Intent_UseCases Functionality Test', function () {
             });
     }
     if(isAndroidPlatform()){
-        it('Callback : Send an Intent and the same intent details should be seen in the callback.', function () {
-            displayObjective('Callback : Send an Intent and the same intent details should be seen in the callback.');
+        it('VT328_38 | Callback : Send an Intent and the same intent details should be seen in the callback.', function () {
+            displayObjective('VT328_38 | Callback : Send an Intent and the same intent details should be seen in the callback.');
             var preConditions = ["Ensure Target application is installed in the device"];
             displayPrecondition(preConditions);
             dispTestCaseRunning('Sending intent with callback should handle the returned intent in the callback fuction. The parameters below should match with call back handled intent parameters. <br/> {"params":{"intentType":Rho.Intent.START_ACTIVITY,"action":"ACTION_MAIN","categories":"","appName":"com.smap.targetapp","targetClass":"","uri":"","mimeType":"","data":{"myData":"This is Test data !"}}}');
@@ -543,8 +543,8 @@ describe('Intent_UseCases Functionality Test', function () {
             });
             _result.waitForResponse();
         });
-        it('Start Listening to the background intents - broadcast messages (receiving broadcast messages)', function () {
-            displayObjective('Start Listening to the background intents - broadcast messages (receiving broadcast messages)');
+        it('VT328_39 | Start Listening to the background intents - broadcast messages (receiving broadcast messages)', function () {
+            displayObjective('VT328_39 | Start Listening to the background intents - broadcast messages (receiving broadcast messages)');
             dispTestCaseRunning('Test app should receive broad cast messages with the help of Start Listening API.');
             dispExpectedResult('Test appliation starts listening to background intents and should alert the broadcast message received and also should trigger callback function of the send method which alerts test case passed.');
             _result.waitToRunTest();
@@ -564,8 +564,8 @@ describe('Intent_UseCases Functionality Test', function () {
             });
             _result.waitForResponse();
         });
-        it('Try to start listening to the background intents, when already started listenting.', function () {
-            displayObjective('Try to start listening to the background intents, when already started listenting.');
+        it('VT328_40 | Try to start listening to the background intents, when already started listenting.', function () {
+            displayObjective('VT328_40 | Try to start listening to the background intents, when already started listenting.');
             dispTestCaseRunning('Try to start listening to the background intents, when already started listenting.');
             dispExpectedResult('No effect or no crash should be seen in the test application.');
             _result.waitToRunTest();
@@ -586,8 +586,8 @@ describe('Intent_UseCases Functionality Test', function () {
             });
             _result.waitForResponse();
         });
-        it('Stop Listening to the background intents', function () {
-            displayObjective('Stop Listening to the background intents');
+        it('VT328_41 | Stop Listening to the background intents', function () {
+            displayObjective('VT328_41 | Stop Listening to the background intents');
             dispTestCaseRunning('Execute \'Stop Listening\' API.');
             dispExpectedResult('Test application should stop listening to background intents ie., (test application should not receive any broad cast messages).');
             _result.waitToRunTest();
@@ -605,8 +605,8 @@ describe('Intent_UseCases Functionality Test', function () {
             });
             _result.waitForResponse();
         });
-        it('Stop Listening to the background intents before executing startListenting method', function () {
-            displayObjective('Stop Listening to the background intents before executing startListenting method');
+        it('VT328_42 | Stop Listening to the background intents before executing startListenting method', function () {
+            displayObjective('VT328_42 | Stop Listening to the background intents before executing startListenting method');
             dispTestCaseRunning('Performing multiple execution of \'Stop Listening\'.');
             dispExpectedResult('No effect or no crash should be seen in the test application.');
             _result.waitToRunTest();
@@ -627,8 +627,8 @@ describe('Intent_UseCases Functionality Test', function () {
             });
             _result.waitForResponse();
         });
-        it('Suggest different applications to send text message', function(){
-            displayObjective('Suggest different applications to send text message');
+        it('VT328_43 | Suggest different applications to send text message', function(){
+            displayObjective('VT328_43 | Suggest different applications to send text message');
             dispTestCaseRunning('Sending Intent matches with multiple activities, should suggest for the application to launch!');
             dispExpectedResult('Application chooser should be shown to the user in performing the intent!');
             _result.waitToRunTest();
@@ -639,8 +639,8 @@ describe('Intent_UseCases Functionality Test', function () {
             });
             _result.waitForResponse();
         });
-        it('Sending array of data with the intent', function(){
-            displayObjective('Sending array of data with the intent');
+        it('VT328_44 | Sending array of data with the intent', function(){
+            displayObjective('VT328_44 | Sending array of data with the intent');
             dispTestCaseRunning('Sending Intent with multiple EXTRA\'s');
             dispExpectedResult('Email compose screen should be displayed with prefilled To, CC, BCC and Subject field !');
             _result.waitToRunTest();
@@ -657,8 +657,8 @@ describe('Intent_UseCases Functionality Test', function () {
             _result.waitForResponse();
         });   
     }
-    it('Sending Intent with null in place of callback function', function(){
-        displayObjective('Sending Intent with null in place of callback function');
+    it('VT328_45 | Sending Intent with null in place of callback function', function(){
+        displayObjective('VT328_45 | Sending Intent with null in place of callback function');
         dispTestCaseRunning('Sending intent with NULL value as a callback parameter');
         dispExpectedResult('No crash or any bad behavior should be seen in the test applciation.');
         _result.waitToRunTest();
@@ -678,8 +678,8 @@ describe('Intent_UseCases Functionality Test', function () {
         _result.waitForResponse();
     });
     if (!isApplePlatform()) {
-    it('Start Listening to the background intents using callback without argument', function () {
-        displayObjective('Start Listening to the background intents callback without argument');
+    it('VT328_46 | Start Listening to the background intents using callback without argument', function () {
+        displayObjective('VT328_46 | Start Listening to the background intents callback without argument');
         dispTestCaseRunning('Executing startListening method with callback function which does not have argument !');
         dispExpectedResult('No crash or bad behavior should be seen in the test application and an alert message should be shown to the user.');
         _result.waitToRunTest();
@@ -694,7 +694,6 @@ describe('Intent_UseCases Functionality Test', function () {
             var callback = function(){
                 alert("Callback without arguments !");
             };
-            //var params = new parameters(Rho.Intent.BROADCAST,"com.rhomobile.BROADCAST",["com.rhomobile.manual_common_spec"],"","","","",data);
             Rho.Intent.startListening(callback);
             Rho.Intent.send(parameters);
         });
