@@ -374,5 +374,5 @@ var getApplicablePropertiesFullScreen = function (){
 
 var ENABLE_TIMEOUT_VALUE = (Rho.System.platform == "ANDROID" ? 2000 : 2000);
 var ENABLE_TIMEOUT_VALUE1 = (Rho.System.platform == "ANDROID" ? 3000 : 3000);
-var HIDE_TIMEOUT_VALUE = (Rho.System.platform == "ANDROID" ? 2000 : 2000);
-var HIDE_TIMEOUT_VALUE1 = (Rho.System.platform == "ANDROID" ? 3000 : 3000);
+var HIDE_TIMEOUT_VALUE = (Rho.System.platform == "ANDROID" ? 4000 : 4000);
+var HIDE_TIMEOUT_VALUE1 = (Rho.System.platform == "ANDROID" ? 5000 : 5000);
