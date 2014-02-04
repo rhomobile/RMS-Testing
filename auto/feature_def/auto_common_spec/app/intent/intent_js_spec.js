@@ -1,7 +1,6 @@
 describe("Intent JS API Test", function() {
 	var getpropertiesdata ='';
     var callbackstatus = false;
-
     var callbackgetproperties = function (data){
 		getpropertiesdata = data;
 		callbackstatus = true;
@@ -21,7 +20,7 @@ describe("Intent JS API Test", function() {
 
 	var testCase = [
 		{
-			"id":"VT_ID_001",
+			"id":"VT328_47",
 			"description":"Check for callback while starting an activity from target appliaction",
 			"intentType":"Rho.Intent.START_ACTIVITY",
 			"intentAction":"ACTION_MAIN",
@@ -33,7 +32,7 @@ describe("Intent JS API Test", function() {
 			"intentData":""
 		},
 		{
-			"id":"VT_ID_002",
+			"id":"VT328_48",
 			"description":"Check for callback while starting an activity from target appliaction which is running in the background",
 			"intentType":"Rho.Intent.START_ACTIVITY",
 			"intentAction":"ACTION_MAIN",
@@ -45,7 +44,7 @@ describe("Intent JS API Test", function() {
 			"intentData":""
 		},
 		{
-			"id":"VT_ID_003",
+			"id":"VT328_49",
 			"description":"Check for callback while starting an activity from target application using targetClass",
 			"intentType":"Rho.Intent.START_ACTIVITY",
 			"intentAction":"ACTION_MAIN",
@@ -57,7 +56,7 @@ describe("Intent JS API Test", function() {
 			"intentData":""
 		},
 		{
-			"id":"VT_ID_004",
+			"id":"VT328_50",
 			"description":"Check for callback while launching browser from test application",
 			"intentType":"Rho.Intent.START_ACTIVITY",
 			"intentAction":"ACTION_MAIN",
@@ -69,7 +68,7 @@ describe("Intent JS API Test", function() {
 			"intentData":""
 		},
 		{
-			"id":"VT_ID_005",
+			"id":"VT328_51",
 			"description":"Check for callback while launching browser from test application",
 			"intentType":"Rho.Intent.START_ACTIVITY",
 			"intentAction":"ACTION_MAIN",
@@ -81,7 +80,7 @@ describe("Intent JS API Test", function() {
 			"intentData":""
 		},
 		{
-			"id":"VT_ID_006",
+			"id":"VT328_52",
 			"description":"Check for callback while launching browser from test application",
 			"intentType":"Rho.Intent.START_ACTIVITY",
 			"intentAction":"ACTION_MAIN",
@@ -93,7 +92,7 @@ describe("Intent JS API Test", function() {
 			"intentData":""
 		},
 		{
-			"id":"VT_ID_007",
+			"id":"VT328_53",
 			"description":"Check for callback while launching browser from test application",
 			"intentType":"Rho.Intent.START_ACTIVITY",
 			"intentAction":"ACTION_MAIN",
@@ -105,7 +104,7 @@ describe("Intent JS API Test", function() {
 			"intentData":""
 		},
 		{
-			"id":"VT_ID_008",
+			"id":"VT328_54",
 			"description":"Check for callback while launching browser from test application",
 			"intentType":"Rho.Intent.START_ACTIVITY",
 			"intentAction":"ACTION_MAIN",
@@ -117,7 +116,7 @@ describe("Intent JS API Test", function() {
 			"intentData":""
 		},
 		{
-			"id":"VT_ID_009",
+			"id":"VT328_55",
 			"description":"Check for callback while launching browser from test application",
 			"intentType":"Rho.Intent.START_ACTIVITY",
 			"intentAction":"ACTION_MAIN",
@@ -129,7 +128,7 @@ describe("Intent JS API Test", function() {
 			"intentData":""
 		},
 		{
-			"id":"VT_ID_010",
+			"id":"VT328_56",
 			"description":"Check for callback while launching browser from test application",
 			"intentType":"Rho.Intent.START_ACTIVITY",
 			"intentAction":"ACTION_MAIN",
@@ -141,7 +140,7 @@ describe("Intent JS API Test", function() {
 			"intentData":""
 		},
 		{
-			"id":"VT_ID_011",
+			"id":"VT328_57",
 			"description":"Check for callback while launching browser from test application",
 			"intentType":"Rho.Intent.START_ACTIVITY",
 			"intentAction":"ACTION_MAIN",
@@ -183,31 +182,31 @@ describe("Intent JS API Test", function() {
 		}
 	}
 	if(isAndroidPlatform()){
-		it('appName - Try to Launch non-existing Application via \'appName\' from test application.', function () {
+		it('VT328_58 | appName - Try to Launch non-existing Application via \'appName\' from test application.', function () {
 	        var parameters = {intentType: Rho.Intent.START_ACTIVITY, action: 'ACTION_MAIN', appName: 'nonExistingApp'}
 	        expect(function () {
 	            Rho.Intent.send(parameters)
 	        }).toThrow();
 	    });
-	    it('intentType - StartActivity: Try to launch target appilcation by \'className\', which is not installed.', function () {
+	    it('VT328_59 | intentType - StartActivity: Try to launch target appilcation by \'className\', which is not installed.', function () {
 		    var parameters = {intentType: Rho.Intent.START_ACTIVITY, action: 'ACTION_MAIN', appName: 'com.notInstalled', targetClass: 'dummyClass'}
 		    expect(function () {
 		        Rho.Intent.send(parameters)
 		    }).toThrow();
 	    });
-		it('Start activity of absent application should raise exception', function () {
+		it('VT328_60 | Start activity of absent application should raise exception', function () {
 		    var parameters = {intentType: Rho.Intent.START_ACTIVITY, action: 'ACTION_MAIN', appName: 'com.notInstalled'}
 		    expect(function () {
 		        Rho.Intent.send(parameters)
 		    }).toThrow();
 		});
 	}
-    it('Sending Intent with null parameter should raise error', function(){
+    it('VT328_61 | Sending Intent with null parameter should raise error', function(){
         expect(function () {
             Rho.Intent.send()
         }).toThrow();
     });
-    it('Sending Intent with intent parameter Object with null values should raises error', function(){
+    it('VT328_62 | Sending Intent with intent parameter Object with null values should raises error', function(){
         var parameters = {
             intentType: null,
             action: null,
@@ -221,7 +220,7 @@ describe("Intent JS API Test", function() {
             Rho.Intent.send(parameters)
         }).toThrow();
     });
-    it('Sending Intent with callback which does\'n handle the input argument shouldn\'t raise error', function(){
+    it('VT328_63 | Sending Intent with callback which does\'n handle the input argument shouldn\'t raise error', function(){
         var parameters = {
             intentType: null,
             action: null,
@@ -236,14 +235,14 @@ describe("Intent JS API Test", function() {
         }).not.toThrow();
 
     });
-    it('Sending Intent with variable in place of callback function', function(){
+    it('VT328_64 | Sending Intent with variable in place of callback function', function(){
         var parameters = { intentType: Rho.Intent.START_ACTIVITY, action: 'ACTION_MAIN', appName: 'com.smap.targetapp' };
         var successCB = "This is not a call back function!";
         expect(function () {
             Rho.Intent.send(parameters, successCB);
         }).toThrow();
     });
-    it('Broad cast with callback', function () {
+    it('VT328_65 | Broad cast with callback', function () {
         var data = {
             "myData":"This is broad cast data 2!"
         };
@@ -258,7 +257,7 @@ describe("Intent JS API Test", function() {
         	Rho.Intent.send(params, receiveCB);
         }).toThrow();
 	});
-    it('Start Listening to the background intents with empty callback', function () {
+    it('VT328_66 | Start Listening to the background intents with empty callback', function () {
 
         var parameters;
         if (isAndroidPlatform()) {
