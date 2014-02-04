@@ -173,7 +173,12 @@ function getModelSource(modelName) {
 }
 
 var cleanVars = function(object) {
-  var vars = object.vars();
+  var vars;
+  if(Rho.NewORM.useNewOrm()) {
+    vars = object;
+  } else {
+    vars = object.vars();
+  };
   var cleanVars = {};
   for (var key in vars) {
     if (vars.hasOwnProperty(key)) {
@@ -183,6 +188,21 @@ var cleanVars = function(object) {
     }
   }
   return cleanVars;
+};
+
+var allVars = function(object) {
+  var allvars;
+  if(Rho.NewORM.useNewOrm()) {
+    allvars = {};
+    for (var key in object) {
+      if (object.hasOwnProperty(key)) {
+        allvars[key] = object[key];
+      };
+    };
+  } else {
+    allvars = object.vars();
+  };
+  return allvars;
 };
 
 var RhoORM = function() {
