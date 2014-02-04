@@ -1013,6 +1013,47 @@ describe("<model's fixed_schema>", function() {
     expect(res[1].get("industry")).toEqual("Zoo");
     expect(res[2].get("industry")).toEqual("Tech");
   });
+
+  it("should order fixed_schema model by multiple column and default orderdir",function() {
+    Model.create({"name":"Zoolo","industry":"Tech"});
+    Model.create({"name":"Zoolo","industry":"Zoo"});
+    Model.create({"name":"Foolo","industry":"Business"});
+    // 2nd order dir would be ASC by default
+    var res = Model.find("all",{conditions:{},order:["name","industry"],orderdir:["DESC"]});
+    expect(res[0].get("industry")).toEqual("Tech");
+    expect(res[1].get("industry")).toEqual("Zoo");
+    expect(res[2].get("industry")).toEqual("Business");
+  });
+
+  it("VT302-0222 | Call find with all and order by any column_name and orderdir as empty string",function() {
+    Model.create({"name":"Mobio"});
+    Model.create({"name":"Zoolo"});
+    Model.create({"name":"Foolo"});
+    var res = Model.find("all",{conditions:{},order:"name",orderdir:""});
+    expect(res[2].get("name")).toEqual("Zoolo");
+    expect(res[1].get("name")).toEqual("Mobio");
+    expect(res[0].get("name")).toEqual("Foolo");
+  });
+
+  it("VT302-0265 | Call find with first and with order any column name of integer type. For e.g find('all',{conditions:{},order:'name'})",function() {
+
+      Model.create({"brand":656});
+      Model.create({"brand":2});
+      Model.create({"brand":65});
+      var res = Model.find("all",{conditions:{},order:"brand"});
+      expect(res[0].get("brand")).toEqual('2');
+      //expect(res.count()).toEqual(1);
+  });
+
+  it("VT302-0266 | Call find with first and order by any column_name and orderdir as empty string",function() {
+      Model.create({"name":"Mobio"});
+      Model.create({"name":"Zoolo"});
+      Model.create({"name":"Foolo"});
+      var res = Model.find("first",{conditions:{},order:"name",orderdir:""});
+
+      //expect(res.count()).toEqual(1);
+      expect(res.get("name")).toEqual("Foolo");
+  });
 });
 
 describe("OrmModel(ST)", function() {
@@ -1020,6 +1061,7 @@ describe("OrmModel(ST)", function() {
   var db = null;
   var Model;
   var fixedModel;
+  var useNewOrm = Rho.NewORM.useNewOrm();
 
   var reset = function(){
     db = Rho.ORMHelper.dbConnection("local");
@@ -1037,36 +1079,46 @@ describe("OrmModel(ST)", function() {
       }
     });
     Rho.ORM.clear();
-  };
 
-  var defaultDefModelP = function(model){
-      model.property("id");
-      model.set("partition","local");
-  };
+    if(useNewOrm) {
+      var defaultDefModelP = function(model){
+        model.setModelProperty("id","integer","");
+        model.setModelProperty("name","string","");
+        model.setModelProperty("type","string","");
+        model.set("partition","local");
+      };
 
-  var defaultDefModelF = function(model){
-      model.enable("fixedSchema");
-      model.property("key");
-      model.property("value","string");
-      model.set("partition","local");
-  };
+      var defaultDefModelF = function(model){
+        model.enable("fixed_schema");
+        model.setModelProperty("key", "string", "");
+        model.setModelProperty("value","string", "");
+        model.set("partition","local");
+      };
+      Model = Rho.ORM.addModel('Product', defaultDefModelP);
+      fixedModel = Rho.ORM.addModel('ProductFixed', defaultDefModelF);
 
-  var createModel = function (name, defModel){
-    Model = Rho.ORM.addModel(name, defModel);
-  };
+    } else {
+      var defaultDefModelP = function(model){
+        model.modelName("Product");
+        model.property("id");
+        model.set("partition","local");
+      };
 
-  var createFixedModel = function(name, defModel){
-    fixedModel = Rho.ORM.addModel(name, defModel);
+      var defaultDefModelF = function(model){
+        model.modelName("ProductFixed");
+        model.enable("fixedSchema");
+        model.property("key");
+        model.property("value","string");
+        model.set("partition","local");
+      };
+      Model = Rho.ORM.addModel(defaultDefModelP);
+      fixedModel = Rho.ORM.addModel(defaultDefModelF);
+    };
   };
 
   describe("OrmModel(PropertyBag)", function() {
     beforeEach(function(){
         reset();
-        createModel('Product', defaultDefModelP);
-    });
-
-    afterEach(function(){
-
     });
 
     it('VT302-0202 | Call create passing a empty hash({})',function(){
@@ -1105,14 +1157,6 @@ describe("OrmModel(ST)", function() {
 
         itemTypes = ['Electronics','Softwares','Cameras','Books'];
 
-        var productModel = function (model){
-            model.property("id","integer");
-            model.property("name","string");
-            model.property("type","string");
-        };
-
-        createModel('ProductTest', productModel);
-
         for (var i=0;i<=50;i++){
             var nameValue = "Item "+i;
             var itemType = itemTypes[Math.floor(Math.random()*itemTypes.length)];
@@ -1129,14 +1173,6 @@ describe("OrmModel(ST)", function() {
 
         itemTypes = ['Electronics','Softwares','Cameras','Books']
 
-        var productModel = function (model){
-            model.property("id","integer");
-            model.property("name","string");
-            model.property("type","string");
-        }
-
-        createModel('ProductTest', productModel);
-
         for (var i=0;i<=100;i++){
             var nameValue = "Item "+i;
             var itemType = itemTypes[Math.floor(Math.random()*itemTypes.length)];
@@ -1148,68 +1184,6 @@ describe("OrmModel(ST)", function() {
         expect(obj.length).toBeLessThan(101);
         expect(obj.length).toBeGreaterThan(0);
 
-    });
-
-    it("VT302-0219 | Call find with all and with order any column name of string type. For e.g find('all',{conditions:{},order:'name'})",function() {
-
-        var productModel = function (model){
-            model.property("id","integer");
-            model.property("name","string");
-            model.property("type","string");
-        }
-
-        createModel('ProductTest', productModel);
-
-        Model.create({"name":"Mobio"});
-        Model.create({"name":"Zoolo"});
-        Model.create({"name":"Foolo"});
-
-        var res = Model.find("all",{conditions:{},order:"name"});
-
-        expect(res[0].get("name")).toEqual("Foolo");
-        expect(res[1].get("name")).toEqual("Mobio");
-        expect(res[2].get("name")).toEqual("Zoolo");
-    });
-
-    it("VT302-0264 | Call find with all and with order any column name of integer type. For e.g find('all',{conditions:{},order:'name'})",function() {
-
-        var productModel = function (model){
-
-            model.modelName('ProductTest');
-            model.property("id","integer");
-            model.property("name","string");
-            model.property("type","string");
-        }
-
-        createModel('ProductTest', productModel);
-
-        Model.create({"id":656});
-        Model.create({"id":2});
-        Model.create({"id":65});
-        var res = Model.find("all",{conditions:{},order:"id"});
-        expect(res[0].get("id")).toEqual('2');
-        expect(res[1].get("id")).toEqual('65');
-        expect(res[2].get("id")).toEqual('656');
-    });
-
-    it("VT302-0222 | Call find with all and order by any column_name and orderdir as empty string",function() {
-        Model.create({"name":"Mobio"});
-        Model.create({"name":"Zoolo"});
-        Model.create({"name":"Foolo"});
-        var res = Model.find("all",{conditions:{},order:"name",orderdir:""});
-        expect(res[2].get("name")).toEqual("Zoolo");
-        expect(res[1].get("name")).toEqual("Mobio");
-        expect(res[0].get("name")).toEqual("Foolo");
-    });
-
-    it("VT302-0223 | Call find with all and order as empty string and orderdir as DESC",function() {
-        Model.create({"name":"Mobio"});
-        Model.create({"name":"Zoolo"});
-        Model.create({"name":"Foolo"});
-        var res = Model.find("all",{conditions:{},order:"",orderdir:"DESC"});
-        expect(res[0].get("name")).toEqual("Mobio");
-        expect(res[1].get("name")).toEqual("Zoolo");
-        expect(res[2].get("name")).toEqual("Foolo");
     });
 
     it("VT302-0224 | Call find with all and select two columns",function() {
@@ -1234,7 +1208,7 @@ describe("OrmModel(ST)", function() {
         expect(res[1].get("industry")).toBeUndefined();
     });
 
-    it("VT302-0225 | Call find with all and select zero columns",function() {
+    it("VT302-0225 | Call find with all and select empty Array",function() {
         Model.deleteAll();
         var res;
         expect(Model.count()).toEqual(0);
@@ -1249,21 +1223,25 @@ describe("OrmModel(ST)", function() {
                       select: []
                     });
 
-        expect(res).toEqual([]);
-        // expect(res[0].get("name")).toEqual("Moto");
-        // expect(res[0].get("Address")).toEqual("USA");
-        // expect(res[0].get("industry")).toEqual("Technology");
+        if(useNewOrm) {
+          expect(res[0].get("name")).toEqual("Moto");
+          expect(res[0].get("Address")).toEqual("USA");
+          expect(res[0].get("industry")).toEqual("Technology");
 
-        // expect(res[1].get("name")).toEqual("Aeroprise");
-        // expect(res[1].get("Address")).toEqual("Bangalore");
-        // expect(res[1].get("industry")).toEqual("Technology");
+          expect(res[1].get("name")).toEqual("Aeroprise");
+          expect(res[1].get("Address")).toEqual("Bangalore");
+          expect(res[1].get("industry")).toEqual("Technology");
 
-        // expect(res[2].get("name")).toEqual("PWC");
-        // expect(res[2].get("Address")).toEqual("Russia");
-        // expect(res[2].get("industry")).toEqual("Accounting");
+          expect(res[2].get("name")).toEqual("PWC");
+          expect(res[2].get("Address")).toEqual("Russia");
+          expect(res[2].get("industry")).toEqual("Accounting");
+        } else {
+          // this is a bug in OLD ORM : empty select means all attribs, not no attribs
+          expect(res).toEqual([]);
+        };
     });
 
-    xit("VT302-0226 | Call find with all and select empty String",function() {
+    xit("VT302-0226 | Call find with all , conditions empty hash and select empty String",function() {
         Model.deleteAll();
         var res;
         expect(Model.count()).toEqual(0);
@@ -1275,8 +1253,6 @@ describe("OrmModel(ST)", function() {
         res = Model.find("all",
                     {
                       conditions: {},
-                      order: "",
-                      orderdir: "",
                       select: []
                     });
         expect(res.count()).toEqual(3);
@@ -1285,14 +1261,6 @@ describe("OrmModel(ST)", function() {
 it('VT302-0228 | finds first objects with one condition for e.g Model.find("first", {conditions: {"key": "value2"}})',function(){
 
         itemTypes = ['Electronics','Softwares','Cameras','Books']
-
-        var productModel = function (model){
-            model.property("id","integer");
-            model.property("name","string");
-            model.property("type","string");
-        }
-
-        createModel('ProductTest', productModel);
 
         for (var i=0;i<=100;i++){
             var nameValue = "Item "+i;
@@ -1309,14 +1277,6 @@ it('VT302-0228 | finds first objects with one condition for e.g Model.find("firs
 
         itemTypes = ['Electronics','Softwares','Cameras','Books']
 
-        var productModel = function (model){
-            model.property("id","integer");
-            model.property("name","string");
-            model.property("type","string");
-        }
-
-        createModel('ProductTest', productModel);
-
         for (var i=0;i<=100;i++){
             var nameValue = "Item "+i;
             var itemType = itemTypes[Math.floor(Math.random()*itemTypes.length)];
@@ -1328,63 +1288,6 @@ it('VT302-0228 | finds first objects with one condition for e.g Model.find("firs
         expect(obj.get("id")).toEqual("1");
         expect(obj.get("name")).toEqual("Item 1");
 
-    });
-
-    it("VT302-0229 | Call find with first and with order any column name of string type. For e.g find('all',{conditions:{},order:'name'})",function() {
-
-        var productModel = function (model){
-            model.property("id","integer");
-            model.property("name","string");
-            model.property("type","string");
-        }
-
-        createModel('ProductTest', productModel);
-
-        Model.create({"name":"Mobio"});
-        Model.create({"name":"Zoolo"});
-        Model.create({"name":"Foolo"});
-
-        var res = Model.find("first",{conditions:{},order:"name"});
-
-        expect(res.get("name")).toEqual("Foolo");
-    });
-
-    it("VT302-0265 | Call find with first and with order any column name of integer type. For e.g find('all',{conditions:{},order:'name'})",function() {
-
-        var productModel = function (model){
-            model.property("id","integer");
-            model.property("name","string");
-            model.property("type","string");
-        }
-
-        createModel('ProductTest', productModel);
-
-        Model.create({"id":656});
-        Model.create({"id":2});
-        Model.create({"id":65});
-        var res = Model.find("first",{conditions:{},order:"id"});
-        expect(res.get("id")).toEqual('2');
-        //expect(res.count()).toEqual(1);
-    });
-
-    it("VT302-0266 | Call find with first and order by any column_name and orderdir as empty string",function() {
-        Model.create({"name":"Mobio"});
-        Model.create({"name":"Zoolo"});
-        Model.create({"name":"Foolo"});
-        var res = Model.find("first",{conditions:{},order:"name",orderdir:""});
-
-        //expect(res.count()).toEqual(1);
-        expect(res.get("name")).toEqual("Foolo");
-    });
-
-    it("VT302-0267 | Call find with first and order as empty string and orderdir as DESC",function() {
-        Model.create({"name":"Mobio"});
-        Model.create({"name":"Zoolo"});
-        Model.create({"name":"Foolo"});
-        var res = Model.find("first",{conditions:{},order:"",orderdir:"DESC"});
-
-        //expect(res.count()).toEqual(1);
-        expect(res.get("name")).toEqual("Mobio");
     });
 
     it("VT302-0268 | Call find with first and select two columns",function() {
@@ -1438,8 +1341,6 @@ it('VT302-0228 | finds first objects with one condition for e.g Model.find("firs
         res = Model.find("first",
                     {
                       conditions: {},
-                      order: "",
-                      orderdir: "",
                       select: []
                     });
         expect(res.get("name")).toEqual("Moto");
@@ -1448,14 +1349,6 @@ it('VT302-0228 | finds first objects with one condition for e.g Model.find("firs
     it('VT302-0259 | find count ',function(){
 
         itemTypes = ['Electronics','Softwares','Cameras','Books']
-
-        var productModel = function (model){
-            model.property("id","integer");
-            model.property("name","string");
-            model.property("type","string");
-        }
-
-        createModel('ProductTest', productModel);
 
         for (var i=0;i<=100;i++){
             var nameValue = "Item "+i;
@@ -1473,14 +1366,6 @@ it('VT302-0228 | finds first objects with one condition for e.g Model.find("firs
 
         itemTypes = ['Electronics','Softwares']
 
-        var productModel = function (model){
-            model.property("id","integer");
-            model.property("name","string");
-            model.property("type","string");
-        }
-
-        createModel('ProductTest', productModel);
-
         for (var i=0;i<=100;i++){
             var nameValue = "Item "+i;
             var itemType = itemTypes[Math.floor(Math.random()*itemTypes.length)];
@@ -1494,7 +1379,6 @@ it('VT302-0228 | finds first objects with one condition for e.g Model.find("firs
     });
 
     it("VT302-0235 | should make record",function(){
-        createFixedModel(defaultDefModelF);
         var record = fixedModel.make({"key":"1","value":"Tested"});
         var res = fixedModel.count();
         record.save();
@@ -1513,7 +1397,11 @@ it('VT302-0228 | finds first objects with one condition for e.g Model.find("firs
         var record = Model.create({});
         record.updateAttributes();
         var res = Model.find("first",{conditions:{"name":"Zoolo"}});
-        expect(res).toEqual([]);
+        if(useNewOrm) {
+          expect(res).toEqual(undefined);
+        } else {
+          expect(res).toEqual([]);
+        };
     });
 
   });
