@@ -1,9 +1,5 @@
 describe("ORM Module Specs", function() {
-  var useNewORM = false;
-  var useNewORM = Rho.NewORM.useNewOrm();
-  console.log("useNewORM: " + useNewORM);
-
-  if(useNewORM) {
+  if(useNewOrm) {
     var addModel = function(name, model) {
       return Rho.ORM.addModel(name, model);
     };
@@ -15,7 +11,7 @@ describe("ORM Module Specs", function() {
   }
 
   var checkModelProperty = function(source, propname, proptype, propoption){
-    if(useNewORM){
+    if(useNewOrm){
       expect(source.getModelProperty(propname).type).toEqual(proptype);
       if(propoption.length > 0) {
         expect(source.getModelProperty(propname).option).toEqual(propoption);
@@ -29,7 +25,7 @@ describe("ORM Module Specs", function() {
   };
 
   var getModelSource = function (modelName) {
-    if (useNewORM) {
+    if (useNewOrm) {
       var source = Rho.ORM.getModel(modelName);
     } else {
       // var source = Opal.Rho._scope.RhoConfig.$sources().map[modelName];
@@ -56,18 +52,15 @@ describe("ORM Module Specs", function() {
 
   beforeEach(function() {
     reset();
-    if (!useNewORM) Rho.ORM.clear();
+    if (!useNewOrm) Rho.ORM.clear();
   });
 
-  it('VT302-0001 | Check Rho.ORM exist or not | Should return an object',function() {
-    if(useNewORM)
-      expect(typeof(Rho.ORM)).toEqual('function');
-    else
-      expect(typeof(Rho.ORM)).toEqual('object');
+  it('VT302-0001 | Check Rho.ORM exist or not | Should return a function',function() {
+    expect(typeof(Rho.ORM)).toEqual('function');
   });
 
   it('VT302-0004 | Should create model',function() {
-    if(useNewORM) {
+    if(useNewOrm) {
       var Product = function(model) {
         model.enable("sync");
         model.setModelProperty("name","string", "");
@@ -96,7 +89,7 @@ describe("ORM Module Specs", function() {
   });
 
   it('VT302-0005 | Call Rho.ORM.addModel, passing model name as numerical string',function(){
-    if(useNewORM) {
+    if(useNewOrm) {
         var Product = function(model) {
           model.enable("sync");
           model.setModelProperty("name","string", "");
@@ -119,7 +112,7 @@ describe("ORM Module Specs", function() {
   });
 
   it('VT302-0006 | set enable as sync at the time of creating model',function() {
-    if(useNewORM) {
+    if(useNewOrm) {
       var Product = function(model) {
         model.enable("sync");
         model.setModelProperty("name","string", "");
@@ -143,7 +136,7 @@ describe("ORM Module Specs", function() {
   });
 
   it('VT302-0007 | set enable as propertyBag at the time of creating model',function(){
-    if(useNewORM) {
+    if(useNewOrm) {
       var Product = function(model) {
         model.fixed_schema = false;
         model.setModelProperty("name","string", "");
@@ -165,14 +158,14 @@ describe("ORM Module Specs", function() {
     expect(source.sync_type).toEqual('none');
     expect(source.model_name).toEqual('Product');
 
-    if (useNewORM)
+    if (useNewOrm)
       expect(source.fixed_schema).toBe(false);
     else
       expect(source.schema).toBeUndefined();
   });
 
   it('VT302-0008 | set enable as fixedSchema at the time of creating model',function(){
-    if(useNewORM) {
+    if(useNewOrm) {
       var Product = function(model) {
         model.fixed_schema = true;
         model.setModelProperty("name","string", "");
@@ -194,7 +187,7 @@ describe("ORM Module Specs", function() {
     expect(source.sync_type).toEqual('none');
     expect(source.model_name).toEqual('Product');
 
-    if (useNewORM)
+    if (useNewOrm)
       expect(source.fixed_schema).toBe(true);
     else {
       expect(source.schema).toBeDefined();
@@ -206,7 +199,7 @@ describe("ORM Module Specs", function() {
   });
 
   it('VT302-0009 | Set sync and set propertyBag at the time of creating model',function() {
-    if(useNewORM) {
+    if(useNewOrm) {
       var Product = function(model) {
         model.fixed_schema = false;
         model.enable("sync");
@@ -233,7 +226,7 @@ describe("ORM Module Specs", function() {
   });
 
   it('VT302-0010 | Set sync and set fixedSchema at the time of creating model',function(){
-    if(useNewORM) {
+    if(useNewOrm) {
       var Product = function(model) {
         model.enable("sync");
         model.fixed_schema = true;
@@ -258,7 +251,7 @@ describe("ORM Module Specs", function() {
   });
 
   it('VT302-0011 | Create a Model with property("name","string")',function() {
-    if(useNewORM) {
+    if(useNewOrm) {
       var Product = function(model){
         model.setModelProperty("name","string", "");
       };
@@ -277,7 +270,7 @@ describe("ORM Module Specs", function() {
   });
 
   it("VT302-0012 | Create a Model with property('int_prop', 'integer')",function(){
-    if (useNewORM) {
+    if (useNewOrm) {
       var Product = function(model){
         model.setModelProperty("id","integer", "");
       };
@@ -296,7 +289,7 @@ describe("ORM Module Specs", function() {
   });
 
   it("VT302-0013 | Create a Model with property ('float_prop', 'float')",function(){
-    if(useNewORM) {
+    if(useNewOrm) {
       var Product = function(model){
         model.setModelProperty("float_prop","float", "");
       };
@@ -315,7 +308,7 @@ describe("ORM Module Specs", function() {
   });
 
   it("VT302-0014 | Create a Model with property ('date_prop', 'date')",function(){
-    if(useNewORM) {
+    if(useNewOrm) {
       var Product = function(model){
         model.setModelProperty("date_prop","date", "");
       };
@@ -334,7 +327,7 @@ describe("ORM Module Specs", function() {
   });
 
   it("VT302-0015 | Create a Model with property ('time_prop', 'time')",function(){
-    if(useNewORM) {
+    if(useNewOrm) {
       var Product = function(model){
         model.setModelProperty("time_prop","time", "");
       };
@@ -353,7 +346,7 @@ describe("ORM Module Specs", function() {
   });
 
   it("VT302-0016 | Create a Model with property ('image_url', 'blob')",function(){
-    if (useNewORM) {
+    if (useNewOrm) {
       var Product = function(model){
         model.setModelProperty("image_url","blob", "");
       };
@@ -372,7 +365,7 @@ describe("ORM Module Specs", function() {
   });
 
   it("VT302-0018 | Create a Model with property('image_url', 'blob', 'overwrite')",function(){
-    if(useNewORM) {
+    if(useNewOrm) {
       var Product = function(model){
         model.setModelProperty("image_url","blob","overwrite");
       };
@@ -391,12 +384,12 @@ describe("ORM Module Specs", function() {
   });
 
   it("VT302-0019 | should add index",function() {
-    if(useNewORM) {
+    if(useNewOrm) {
       var Product = function(model) {
         model.fixed_schema = true;
         model.setModelProperty("name", "string", "");
         model.setModelProperty("price","float", "");
-        model.setSchemaIndex("p1", ["name"], false); // FIXME: ?
+        model.setSchemaIndex("p1", ["name"], false);
         model.set("partition","local");
       };
     } else {
@@ -418,7 +411,7 @@ describe("ORM Module Specs", function() {
   });
 
   it("VT302-0020 | addIndex to multiple columns while creating a model",function() {
-    if(useNewORM) {
+    if(useNewOrm) {
       var Product = function(model){
         model.setModelProperty("name","string","");
         model.setModelProperty("price","float","");
@@ -446,14 +439,14 @@ describe("ORM Module Specs", function() {
 
 
   it("VT302-0021 | add multiple Index to multiple columns while creating a model",function(){
-    if(useNewORM) {
+    if(useNewOrm) {
       var Product = function(model){
         model.setModelProperty("name","string","");
         model.setModelProperty("price","float","");
         model.setModelProperty("type","string","");
         model.fixed_schema = true;
-        model.setSchemaIndex("p1", ["name","price"], false); // FIXME: ?
-        model.setSchemaIndex("p2", ["type"], false);         // FIXME: ?
+        model.setSchemaIndex("p1", ["name","price"], false);
+        model.setSchemaIndex("p2", ["type"], false);
         model.set("partition","local");
       };
     } else {
@@ -481,7 +474,7 @@ describe("ORM Module Specs", function() {
   });
 
   it("VT302-0022 | should add unique index",function(){
-    if(useNewORM) {
+    if(useNewOrm) {
       var Product = function(model){
         model.setModelProperty("name","string","");
         model.setModelProperty("price","float","");
@@ -504,17 +497,17 @@ describe("ORM Module Specs", function() {
     expect(model).toBeDefined();
 
     res = localDB.executeSql("SELECT * FROM Product INDEXED BY u1 Where name = 'test' ");
-    console.log("res: " + JSON.stringify(res));
+    // console.log("res: " + JSON.stringify(res));
     expect(res[0].name).toEqual('test');
   });
 
   it("VT302-0023 | addUniqueIndex to multiple columns while creating a model",function(){
-    if(useNewORM) {
+    if(useNewOrm) {
       var Product = function(model){
         model.setModelProperty("name","string","");
         model.setModelProperty("price","float","");
         model.fixed_schema = true;
-        model.setSchemaIndex("u2", ["name","price"], true); // FIXME: ?
+        model.setSchemaIndex("u2", ["name","price"], true);
         model.set("partition","local");
       };
     } else {
@@ -539,14 +532,14 @@ describe("ORM Module Specs", function() {
   });
 
   it("VT302-0024 | add multiple Unique Index to multiple columns while creating a model",function(){
-    if(useNewORM) {
+    if(useNewOrm) {
       var Product = function(model){
         model.setModelProperty("name","string","");
         model.setModelProperty("price","float","");
         model.setModelProperty("type","string","");
         model.fixed_schema = true;
-        model.setSchemaIndex("u1", ["name","price"], true); // FIXME: ?
-        model.setSchemaIndex("u2", ["type"], true);         // FIXME: ?
+        model.setSchemaIndex("u1", ["name","price"], true);
+        model.setSchemaIndex("u2", ["type"], true);
         model.set("partition","local");
       };
     } else {
@@ -576,14 +569,13 @@ describe("ORM Module Specs", function() {
     expect(res2[0].name).toEqual('debug');
   });
 
-  // FIXME:
   it("VT302-0025 | should add belongs_to relationship",function(){
-    if(useNewORM) {
+    if(useNewOrm) {
       var Product = function(model){
         model.setModelProperty("name","string","");
         model.setModelProperty("price","float","");
         model.fixed_schema = true;
-        model.setSchemaIndex("u1", ["name"], true); // FIXME: ?
+        model.setSchemaIndex("u1", ["name"], true);
         model.set("partition","local");
       };
       var Item = function(model){
@@ -592,7 +584,7 @@ describe("ORM Module Specs", function() {
         model.fixed_schema = true;
         model.enable('sync');
         model.set("partition","local");
-        model.setBelongsTo("product_id", "Product"); // FIXME: 2 params?
+        model.setBelongsTo("product_id", "Product");
       };
     } else {
       var Product = function(model){
@@ -616,25 +608,24 @@ describe("ORM Module Specs", function() {
     var product = addModel('Product', Product);
     var item = addModel('Item', Item);
 
-    // FIXME:
-    if(useNewORM){
+    if(useNewOrm){
       expect(product.associations).toEqual("Item,product_id");
       expect(item.getBelongsTo('product_id')[0]).toEqual("Product");
     } else {
       sources = Rho.ORMHelper.getAllSources();
       expect(sources.Product.str_associations).toEqual("Item");
-      expect(sources.Item.belongs_to[0]).toEqual("Product");  
+      expect(sources.Item.belongs_to[0]).toEqual("Product");
     };
   });
 
   // The only way would be to use new Model, + model Def + initModel explicitly
   it("VT302-0026 | should add belongs_to relationship in any load order in JS - but only using initModel",function(){
-    if(useNewORM) {
+    if(useNewOrm) {
       var ProductDef = function(model){
         model.setModelProperty("name","string","");
         model.setModelProperty("price","float","");
         model.fixed_schema = true;
-        model.setSchemaIndex("u1", ["name"], true); // FIXME: ?
+        model.setSchemaIndex("u1", ["name"], true);
         model.set("partition","local");
       };
       var ItemDef = function(model){
@@ -643,7 +634,7 @@ describe("ORM Module Specs", function() {
         model.fixed_schema = true;
         model.enable('sync');
         model.set("partition","local");
-        model.setBelongsTo("product_id", "Product"); // FIXME: 2 params?
+        model.setBelongsTo("product_id", "Product");
       };
     } else {
       var ProductDef = function(model){
@@ -664,39 +655,35 @@ describe("ORM Module Specs", function() {
         model.belongs_to("Product");
       };
     }
-    var item;
-    var product;
-    if(useNewORM) {
-      item = new Rho.NewORMModel('Item');
+
+    if(useNewOrm) {
+      var item = new Rho.NewORMModel('Item');
+      var product = new Rho.NewORMModel('Product');
       ItemDef(item);
-      product = new Rho.NewORMModel('Product');
-      ProductDef(product); 
+      ProductDef(product);
       // and only now - do explicit init
       item.initModel();
       product.initModel();
-    } else {
-      item = addModel(ItemDef);
-      product = addModel(ProductDef);
-    }
-    
-    if(useNewORM){
+
       expect(product.associations).toEqual("Item,product_id");
       expect(item.getBelongsTo('product_id')[0]).toEqual("Product");
     } else {
+      var item = addModel("Item", ItemDef);
+      var product = addModel("Product", ProductDef);
+
       sources = Rho.ORMHelper.getAllSources();
       expect(sources.Product.str_associations).toEqual("Item");
-      expect(sources.Item.belongs_to[0]).toEqual("Product");  
-    };
+      expect(sources.Item.belongs_to[0]).toEqual("Product");
+    }
   });
 
-  // FIXME:
   it("VT302-0027 | should add multiple belongs_to relationship in any load order",function(){
-    if(useNewORM) {
+    if(useNewOrm) {
       var Product = function(model){
         model.setModelProperty("name","string","");
         model.setModelProperty("price","float","");
         model.fixed_schema = true;
-        model.setSchemaIndex("u1", ["name"], true); // FIXME: ?
+        model.setSchemaIndex("u1", ["name"], true);
         model.set("partition","local");
       };
       var Item = function(model){
@@ -705,7 +692,7 @@ describe("ORM Module Specs", function() {
         model.fixed_schema = true;
         model.enable('sync');
         model.set("partition","local");
-        model.setBelongsTo("product_id", "Product"); // FIXME: 2 params?
+        model.setBelongsTo("product_id", "Product");
       };
       var Item2 = function(model){
         model.setModelProperty("name","string", "");
@@ -713,7 +700,7 @@ describe("ORM Module Specs", function() {
         model.fixed_schema = true;
         model.enable('sync');
         model.set("partition","local");
-        model.setBelongsTo("product_id", "Product"); // FIXME: 2 params?
+        model.setBelongsTo("product_id", "Product");
       };
     } else {
       var Product = function(model){
@@ -747,9 +734,7 @@ describe("ORM Module Specs", function() {
     var item  = addModel('Item', Item);
     var item2 = addModel('Item2', Item2);
 
-    // FIXME:
-    // FIXME:
-    if(useNewORM){
+    if(useNewOrm){
       expect(product.associations).toEqual("Item,product_id,Item2,product_id");
       expect(item.getBelongsTo('product_id')[0]).toEqual("Product");
       expect(item2.getBelongsTo('product_id')[0]).toEqual("Product");
@@ -757,12 +742,12 @@ describe("ORM Module Specs", function() {
       sources = Rho.ORMHelper.getAllSources();
       expect(sources.Product.str_associations).toEqual("Item,Item2");
       expect(sources.Item.belongs_to[0]).toEqual("Product");
-      expect(sources.Item2.belongs_to[0]).toEqual("Product"); 
+      expect(sources.Item2.belongs_to[0]).toEqual("Product");
     };
   });
 
   it("VT302-0030 | Create a model with sync type bulk_only",function(){
-    if(useNewORM) {
+    if(useNewOrm) {
       var Product = function(model){
         model.enable("sync");
         model.setModelProperty("time_prop","time", "");
@@ -785,7 +770,7 @@ describe("ORM Module Specs", function() {
   });
 
   it('VT302-0031 | Create a model with sync_priority as 1',function(){
-    if(useNewORM) {
+    if(useNewOrm) {
       var Product = function(model){
         model.enable("sync");
         model.setModelProperty("name","string", "");
@@ -810,7 +795,7 @@ describe("ORM Module Specs", function() {
   });
 
   it('VT302-0032 | Create a model with in app Partition',function(){
-    if(useNewORM) {
+    if(useNewOrm) {
       var Product = function(model){
         model.enable("sync");
         model.setModelProperty("name","string", "");
@@ -835,7 +820,7 @@ describe("ORM Module Specs", function() {
   });
 
   it('VT302-0033 | Create a model with schema_version, 1.0',function() {
-    if(useNewORM) {
+    if(useNewOrm) {
       var Product = function(model){
         model.fixed_schema = true;
         model.setProperty('schema_version','1.0');
@@ -867,11 +852,10 @@ describe("ORM Module Specs", function() {
     //console.log(res[0].schema); // =>
     // CREATE TABLE "Product" ( "brand" varchar default null,"name" varchar default null,"object" varchar(255) PRIMARY KEY );
     expect(res[0].schema_version).toEqual('1.0');
-    // expect(source.schema_version).toEqual('1.0'); // FIXME: source.schema_version n/a
   });
 
   it('VT302-0038 | Get a model by its name after it has been added', function() {
-    if(useNewORM) {
+    if(useNewOrm) {
       var Product = function(model) {
         model.enable("sync");
         model.setModelProperty("name","string", "");
@@ -890,14 +874,14 @@ describe("ORM Module Specs", function() {
     var model = addModel('Product', Product);
     expect(model).toBeDefined();
 
-    if(useNewORM)
+    if(useNewOrm)
       expect(Rho.ORM.getModel('Product')).not.toBeNull();
     else
       expect(Rho.ORM.getModel('Product')).toBe(model);
   });
 
-  it('VT302-0008 | should add fixed schema model with table', function() {
-    if(useNewORM) {
+  it('VT302-0039 | should add fixed schema model with table', function() {
+    if(useNewOrm) {
       var Product = function(model) {
         model.fixed_schema = true;
         model.enable("sync");
@@ -918,7 +902,7 @@ describe("ORM Module Specs", function() {
     var model = addModel('Product', Product);
     expect(model).toBeDefined();
 
-    if(useNewORM) {
+    if(useNewOrm) {
       expect(Rho.ORM.getModel('Product')).not.toBeNull();
     } else {
       var sources = Rho.ORMHelper.getAllSources();

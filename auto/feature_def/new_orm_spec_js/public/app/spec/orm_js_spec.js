@@ -1,8 +1,4 @@
 describe("ORM Db Reset Specs", function() {
-  var useNewORM = false;
-  var useNewORM = Rho.NewORM.useNewOrm();
-  console.log("useNewORM: " + useNewORM);
-
   var localDB = Rho.ORMHelper.dbConnection('local');
   var userDB  = Rho.ORMHelper.dbConnection('user');
   var appDB   = Rho.ORMHelper.dbConnection('app');
@@ -40,7 +36,7 @@ describe("ORM Db Reset Specs", function() {
     var client_id = userDB.executeSql("Select * from client_info");
     expect(client_id[0].client_id).toEqual("7");
 
-    if (useNewORM) {
+   if (useNewOrm) {
       var Product = function(model){
         model.setModelProperty("name","string","");
         model.setModelProperty("brand","string","");
@@ -94,7 +90,7 @@ describe("ORM Db Reset Specs", function() {
     var client_id = userDB.executeSql("Select * from client_info");
     expect(client_id[0].client_id).toEqual("7");
 
-    if (useNewORM) {
+    if (useNewOrm) {
       var Product = function(model){
         model.setModelProperty("name","string","");
         model.setModelProperty("brand","string","");
@@ -145,9 +141,8 @@ describe("ORM Db Reset Specs", function() {
     expect(find_value_of_attrib(objects, 'brand')).toEqual('PUMA');
   });
 
-  // FIXME:
   it("VT302-0043 | should reset client info databaseFullReset tables of all partitions",function(){
-    if (useNewORM) {
+    if (useNewOrm) {
       var Product_user_fixed = function(model){
         model.setModelProperty("name","string","");
         model.setModelProperty("price","float","");
@@ -215,38 +210,26 @@ describe("ORM Db Reset Specs", function() {
     I_user_pb.create({'name':'user_pb','price':2.0});
     P_local_fixed.create({'name':'local_fixed','price':2.0});
     I_local_pb.create({'name':'local_pb','price':2.0});
-    console.log("1: ");
 
     var user_f = userDB.executeSql("Select * from Product");
-
-    console.log(JSON.stringify(user_f));
     var user_p = userDB.executeSql("Select * from OBJECT_VALUES");
     expect(user_f[0].name).toEqual("user_fixed");
     expect(find_value_of_attrib(user_p, 'name')).toEqual("user_pb");
 
-    console.log("2: tables: ");
     var tables = localDB.executeSql("SELECT name FROM sqlite_master WHERE type='table' ORDER BY name");
-    console.log(JSON.stringify(tables));
     var local_f = localDB.executeSql("select * from Product_local");
-    // FIXME:
-    // => could not prepare statement: 1; Message: no such table: Product_local
-    console.log("Product_local: ");
-    console.log(JSON.stringify(local_f));
 
     var local_p = localDB.executeSql("Select * from OBJECT_VALUES");
     expect(local_f[0].name).toEqual("local_fixed");
     expect(find_value_of_attrib(local_p, 'name')).toEqual("local_pb");
-    console.log("3: ");
 
     Rho.ORM.databaseFullReset(false,true);
 
-    console.log("4: ");
     user_f = userDB.executeSql("Select * from Product");
     user_p = userDB.executeSql("Select * from OBJECT_VALUES");
     expect(user_f).toEqual([]);
     expect(user_p).toEqual([]);
     expect(userDB.isTableExist("Product")).toBe(true);
-    console.log("5: ");
 
     local_f = localDB.executeSql("Select * from Product_local");
     local_p = localDB.executeSql("Select * from OBJECT_VALUES");
@@ -260,7 +243,7 @@ describe("ORM Db Reset Specs", function() {
     var client_id = userDB.executeSql("Select * from client_info");
     expect(client_id[0].client_id).toEqual("7");
 
-    if (useNewORM) {
+    if (useNewOrm) {
       var Product = function(model){
         model.setModelProperty("name", "string", "");
         model.setModelProperty("brand", "string", "");
@@ -313,7 +296,7 @@ describe("ORM Db Reset Specs", function() {
     var client_id = userDB.executeSql("Select * from client_info");
     expect(client_id[0].client_id).toEqual("7");
 
-    if (useNewORM) {
+    if (useNewOrm) {
       var Product = function(model){
         model.setModelProperty("name", "string", "");
         model.setModelProperty("brand", "string", "");
@@ -374,7 +357,7 @@ describe("ORM Db Reset Specs", function() {
   });
 
   it("VT302-0047 | should reset client info databaseFullReset tables with undefined params",function(){
-    if (useNewORM) {
+    if (useNewOrm) {
       var Product = function(model){
         model.setModelProperty("name","string","");
         model.setModelProperty("price","float","");
@@ -403,9 +386,8 @@ describe("ORM Db Reset Specs", function() {
     expect(db_product).toEqual([]);
   });
 
-  // FIXME:
   it("VT302-0048 | should reset client info databaseFullReset tables with no params",function(){
-    if (useNewORM) {
+    if (useNewOrm) {
       var Product = function(model){
         model.fixed_schema =true;
         model.setModelProperty("name","string","");
@@ -437,7 +419,7 @@ describe("ORM Db Reset Specs", function() {
   });
 
   it("VT302-0050 | should reset object_values and not sources table if set databaseFullResetAndLogout",function(){
-    if (useNewORM) {
+    if (useNewOrm) {
       var Product = function(model){
         model.setModelProperty("name","string","");
         model.setModelProperty("price","float","");
@@ -471,7 +453,7 @@ describe("ORM Db Reset Specs", function() {
   });
 
   it("VT302-0053 | should delete all records only from selected models fixedschema databaseFullResetEx",function(){
-    if (useNewORM) {
+    if (useNewOrm) {
       var Product = function(model){
         model.setModelProperty("name","string","");
         model.setModelProperty("price","float","");
@@ -495,7 +477,7 @@ describe("ORM Db Reset Specs", function() {
     var db_product = userDB.executeSql("Select * from Product");
     expect(db_product[0].name).toEqual("test");
 
-    if (useNewORM)
+    if (useNewOrm)
       var ary = ['Product'];
     else
       var ary = {"models":['Product']};
@@ -506,7 +488,7 @@ describe("ORM Db Reset Specs", function() {
   });
 
   it("VT302-0054 | should delete all records only from selected models propertyBag databaseFullResetEx",function(){
-    if (useNewORM) {
+    if (useNewOrm) {
       var Product = function(model){
         model.setModelProperty("name","string","");
         model.setModelProperty("price","float","");
@@ -527,7 +509,7 @@ describe("ORM Db Reset Specs", function() {
     expect(db_product[0].value).toEqual("test");
     expect(db_product[1].value).toEqual("2");
 
-    if (useNewORM)
+    if (useNewOrm)
       var ary = ['Product'];
     else
       var ary = {"models":['Product']};
@@ -537,11 +519,10 @@ describe("ORM Db Reset Specs", function() {
     expect(db_product).toEqual([]);
   });
 
-  // FIXME:
   it("VT302-0055 | should reset client_info table if set databaseFullResetEx",function(){
     userDB.executeSql("INSERT INTO CLIENT_INFO (client_id) VALUES(7)");
 
-    if (useNewORM) {
+    if (useNewOrm) {
       var Product = function(model){
         model.setModelProperty("name","string","");
         model.setModelProperty("price","float","");
@@ -564,26 +545,24 @@ describe("ORM Db Reset Specs", function() {
     expect(db_product2).toEqual("7");
     expect(db_product[0].value).toEqual("test");
     expect(db_product[1].value).toEqual("2");
-    if (useNewORM) {
+
+    if (useNewOrm) {
       var ary = [];
       Rho.ORM.databaseFullResetEx(ary, true, false);
-      // FIXME:
-      // => reset_client_info should not be true if reset selected models
-    }
-    else {
-      var ary = {"reset_client_info":true};
+    } else {
+      var ary = {"models":['Product'],"reset_client_info":true};
       Rho.ORM.databaseFullResetEx(ary);
     }
-
     db_product = userDB.executeSql("Select * from OBJECT_VALUES");
     db_product2 = userDB.executeSql("Select * from client_info");
+
     expect(db_product2).toEqual([]);
   });
 
   it("VT302-0056 | Call databaseFullResetEx with Model name as Hash and reset_client_info as false and reset_local_models to false",function(){
     userDB.executeSql("INSERT INTO CLIENT_INFO (client_id) VALUES(7)");
 
-    if (useNewORM) {
+    if (useNewOrm) {
       var Product = function(model){
         model.setModelProperty("name","string","");
         model.setModelProperty("price","float","");
@@ -620,15 +599,13 @@ describe("ORM Db Reset Specs", function() {
     var db_product2 = Rho.ORM.getClientId();
 
     expect(db_product2).toEqual("7");
-    // console.log(JSON.stringify(db_product));
-
     expect(db_product.length).toBe(4);
     expect(find_attrib_with_value(db_product,'name','test')).toEqual("test");
     expect(find_attrib_with_value(db_product,'price','2')).toEqual("2");
     expect(find_attrib_with_value(db_product,'name','test2')).toEqual("test2");
     expect(find_attrib_with_value(db_product,'price','4')).toEqual("4");
 
-    if (useNewORM) {
+    if (useNewOrm) {
       Rho.ORM.databaseFullResetEx(['Product'], false, false);
     }
     else {
@@ -647,7 +624,7 @@ describe("ORM Db Reset Specs", function() {
 
   it("VT302-0057 | Call databaseFullResetEx with Model name as Hash and reset_client_info as false",function(){
     userDB.executeSql("INSERT INTO CLIENT_INFO (client_id) VALUES(7)");
-    if (useNewORM) {
+    if (useNewOrm) {
       var Product = function(model){
         model.setModelProperty("name","string","");
         model.setModelProperty("price","float","");
@@ -688,7 +665,7 @@ describe("ORM Db Reset Specs", function() {
     expect(find_attrib_with_value(db_product,'name','test2')).toEqual("test2");
     expect(find_attrib_with_value(db_product,'price','4')).toEqual("4");
 
-    if (useNewORM) {
+    if (useNewOrm) {
       Rho.ORM.databaseFullResetEx(['Product'], false, false);
     }
     else {
@@ -707,7 +684,7 @@ describe("ORM Db Reset Specs", function() {
 
   it("VT302-0058 | Call databaseFullResetEx with Model name as Hash and reset_client_info as false and reset_local_models to true",function(){
     userDB.executeSql("INSERT INTO CLIENT_INFO (client_id) VALUES(7)");
-    if (useNewORM) {
+    if (useNewOrm) {
       var Product = function(model){
         model.setModelProperty("name","string","");
         model.setModelProperty("price","float","");
@@ -732,7 +709,7 @@ describe("ORM Db Reset Specs", function() {
     expect(find_attrib_with_value(db_product,'name','test')).toEqual("test");
     expect(find_attrib_with_value(db_product,'price','2')).toEqual("2");
 
-    if (useNewORM) {
+    if (useNewOrm) {
       Rho.ORM.databaseFullResetEx(['Product'], false, true);
     }
     else {
@@ -747,7 +724,7 @@ describe("ORM Db Reset Specs", function() {
   });
 
   it("VT302-0060 | should do nothing if localdb and localdb flag set to false",function(){
-    if (useNewORM) {
+    if (useNewOrm) {
       var Product = function(model){
         model.setModelProperty("name","string","");
         model.setModelProperty("price","float","");
@@ -769,7 +746,7 @@ describe("ORM Db Reset Specs", function() {
     expect(find_attrib_with_value(db_product,'name','test')).toEqual("test");
     expect(find_attrib_with_value(db_product,'price','2')).toEqual("2");
 
-    if (useNewORM) {
+    if (useNewOrm) {
       Rho.ORM.databaseFullResetEx(['Product'], false, false);
     }
     else {
@@ -783,10 +760,9 @@ describe("ORM Db Reset Specs", function() {
     expect(find_attrib_with_value(db_product,'price','2')).toEqual("2");
   });
 
-  // FIXME: !!!
   it("VT302-0062 | should reset client and local db if databaseFullclientResetAndLogout",function(){
     userDB.executeSql("INSERT INTO CLIENT_INFO (client_id) VALUES(7)");
-    if (useNewORM) {
+    if (useNewOrm) {
       var Product = function(model){
         model.setModelProperty("name","string","");
         model.setModelProperty("price","float","");
@@ -819,7 +795,7 @@ describe("ORM Db Reset Specs", function() {
 
   it("VT302-0063 | call databaseLocalReset without having any local model | Should not removed data from synced database",function(){
     userDB.executeSql("INSERT INTO CLIENT_INFO (client_id) VALUES(7)");
-    if (useNewORM) {
+    if (useNewOrm) {
       var Product = function(model){
         model.enable("sync");
         model.setModelProperty("name","string","");
@@ -854,7 +830,7 @@ describe("ORM Db Reset Specs", function() {
   it("VT302-0065 | call databaseLocalReset with changes in local model | Should removed local model data",function(){
     userDB.executeSql("INSERT INTO CLIENT_INFO (client_id) VALUES(7)");
 
-    if (useNewORM) {
+    if (useNewOrm) {
       var Product = function(model){
         model.setModelProperty("name","string","");
         model.setModelProperty("price","float","");
@@ -887,7 +863,7 @@ describe("ORM Db Reset Specs", function() {
 
   it("VT302-0066 | call databaseLocalReset with changes in both local and user model | Should removed local model data",function(){
     userDB.executeSql("INSERT INTO CLIENT_INFO (client_id) VALUES(7)");
-    if (useNewORM) {
+    if (useNewOrm) {
       var Product = function(model){
         model.setModelProperty("name","string","");
         model.setModelProperty("price","float","");
@@ -954,10 +930,10 @@ describe("ORM Db Reset Specs", function() {
   });
 
   it("should load source from table if it exists",function(){
-    if (!useNewORM) Rho.ORM.clearFreeSourceIds();
+    if (!useNewOrm) Rho.ORM.clearFreeSourceIds();
     localDB.executeSql("DELETE FROM SOURCES");
 
-    if (useNewORM) {
+    if (useNewOrm) {
       var customer = Rho.ORM.addModel("Customer", function(model){
         model.set("partition","local");
       });
@@ -989,21 +965,6 @@ describe("ORM Db Reset Specs", function() {
 
     expect(parseInt(db_product[0].source_id)).toEqual(product_src_id);
     expect(parseInt(db_customer[0].source_id)).toEqual(customer_src_id);
-
-  //   Rho.ORM.clear();
-  //   //console.log("add model4 'Customer2'");
-  //   customer = Rho.ORM.addModel(function(model){
-  //     model.modelName("Customer");
-  //     model.set("partition","local");
-  //   });
-  //   //console.log("add model3 'Product2'");
-  //   product = Rho.ORM.addModel(function(model){
-  //     model.modelName("Product");
-  //     model.set("partition","local");
-  //   });
-  //   sources = Rho.ORMHelper.getAllSources();
-  //   expect(String(customer_src_id)).toEqual(sources["Customer"].source_id);
-  //   expect(String(product_src_id)).toEqual(sources["Product"].source_id);
   });
 
 });

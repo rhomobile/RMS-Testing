@@ -1,9 +1,5 @@
-describe("New ORM Model Specs", function() {
-  var useNewORM = false;
-  var useNewORM = Rho.NewORM.useNewOrm();
-  console.log("useNewORM: " + useNewORM);
-
-  if(useNewORM) {
+describe("Basic CRUD Model Specs", function() {
+  if(useNewOrm) {
     var Product = function(model) {
       model.fixed_schema = true;
       model.setProperty('schema_version','1.0');
@@ -40,27 +36,10 @@ describe("New ORM Model Specs", function() {
         db2.executeSql("DROP TABLE Product");
       }
     });
-
-    // $.each(partitions, function(index, db2) {
-    //   db2.$execute_sql("DELETE FROM SOURCES");
-    //   db2.$execute_sql("DELETE FROM OBJECT_VALUES");
-    //   db2.$execute_sql("DELETE FROM CHANGED_VALUES");
-    //   if(db2.$is_table_exist("Product")){
-    //     db2.$execute_sql("DROP TABLE Product");
-    //   }
-    // });
-
   };
 
   beforeEach(function() {
     reset();
-  });
-
-  it('Check Rho.ORM exist or not | Should return an "function" or "object"',function(){
-    if(useNewORM)
-      expect(typeof(Rho.ORM)).toEqual('function');
-    else
-      expect(typeof(Rho.ORM)).toEqual('object');
   });
 
   it("Should return client id",function(){
@@ -68,7 +47,7 @@ describe("New ORM Model Specs", function() {
     db.executeSql("DELETE FROM CLIENT_INFO");
     var client_id = Rho.ORM.getClientId();
 
-    if(useNewORM) // FIXME:
+    if(useNewOrm) // FIXME:
       expect(client_id).toEqual(null); // TBD: New ORM returns null
     else
       expect(client_id).toEqual([]);
@@ -79,14 +58,10 @@ describe("New ORM Model Specs", function() {
   });
 
   it('Should create model',function() {
-    //var sources = Rho.ORMModel.enumerate();
-    //console.log(sources); // => null
     var model = addProductModel();
     expect(model).toBeDefined();
     expect(model).not.toBe(null);
 
-    // models = Rho.ORMModel.enumerate();
-    // console.log(JSON.stringify(models)); // => [{}]
     var db = Rho.ORMHelper.dbConnection("user");
     var res = db.executeSql("select * from sources where name = 'Product'");
     //console.log(JSON.stringify(res));
@@ -100,7 +75,6 @@ describe("New ORM Model Specs", function() {
     //       "sync_type":"incremental","token":""
     //     }
     //  }]
-    console.log("we have here  + " + JSON.stringify(res));
     expect(res[0].name).toEqual('Product');
     expect(res[0].sync_type).toEqual('incremental');
     expect(res[0].partition).toEqual('user');
@@ -110,17 +84,17 @@ describe("New ORM Model Specs", function() {
     var model = addProductModel();
     var p = Rho.ORM.getModel('Product');
 
-    if(useNewORM) {
+    if(useNewOrm) {
       expect(p.model_name).toEqual('Product');
       expect(p.sync_type).toEqual('incremental');
       expect(p.partition).toEqual('user');
 
       // default values of other properties
-      expect(p.loaded).toBe(true); // FIXME: correct?
+      expect(p.loaded).toBe(true);
       expect(p.sync_priority).toEqual(1000);
       expect(p.source_id).toBeGreaterThan(0);
       expect(p.fixed_schema).toBe(true);
-      expect(p.freezed).toBe(true); // FIXME: correct?
+      expect(p.freezed).toBe(true);
     } else {
       expect(p).toEqual(model);
     }
@@ -129,7 +103,7 @@ describe("New ORM Model Specs", function() {
   it('Model object returned by addModel method should have model properties or be defined', function() {
     var productModel = addProductModel();
 
-    if(useNewORM) {
+    if(useNewOrm) {
       expect(productModel.model_name).toEqual('Product');
       expect(productModel.sync_type).toEqual('incremental');
       expect(productModel.partition).toEqual('user');
@@ -141,7 +115,7 @@ describe("New ORM Model Specs", function() {
 
   it('Model object returned by addModel for none-existing source should be null or undefined', function() {
     var sth = Rho.ORM.getModel('Someting');
-    if(useNewORM)
+    if(useNewOrm)
       expect(sth).toBeNull();
     else // should de 'undefined' for Old ORM
       expect(sth).toBeUndefined();
@@ -151,7 +125,7 @@ describe("New ORM Model Specs", function() {
     var model = addProductModel();
     var count = 0;
 
-    if(useNewORM) {
+    if(useNewOrm) {
       expect(model.getCount()).toBe(count);
       model.create({"name":"iphone", "brand":"Apple"});
       expect(model.getCount()).toBe(count + 1);
@@ -162,14 +136,14 @@ describe("New ORM Model Specs", function() {
     }
   });
 
-  it('VT302-0204 | deletes all objects in database', function() {
+  it('Model should count deleted objects', function() {
     var model = addProductModel();
     model.create({"name":"iphone","brand":"Apple"});
     expect(model.count()).toBeGreaterThan(0);
-    if(useNewORM) expect(model.getCount()).toBeGreaterThan(0);
+    if(useNewOrm) expect(model.getCount()).toBeGreaterThan(0);
     model.deleteAll();
     expect(model.count()).toBe(0);
-    if(useNewORM) expect(model.getCount()).toBe(0);
+    if(useNewOrm) expect(model.getCount()).toBe(0);
   });
 
 });
