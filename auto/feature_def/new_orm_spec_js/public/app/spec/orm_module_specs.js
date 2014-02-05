@@ -1,15 +1,4 @@
 describe("ORM Module Specs", function() {
-  if(useNewOrm) {
-    var addModel = function(name, model) {
-      return Rho.ORM.addModel(name, model);
-    };
-
-  } else {
-    var addModel = function(name, model) {
-      return Rho.ORM.addModel(model);
-    };
-  }
-
   var checkModelProperty = function(source, propname, proptype, propoption){
     if(useNewOrm){
       expect(source.getModelProperty(propname).type).toEqual(proptype);
@@ -23,7 +12,6 @@ describe("ORM Module Specs", function() {
       };
     };
   };
-
   var getModelSource = function (modelName) {
     if (useNewOrm) {
       var source = Rho.ORM.getModel(modelName);
@@ -34,7 +22,7 @@ describe("ORM Module Specs", function() {
       source.model_name = source.name;
     }
     return source;
-  }
+  };
   var reset = function() {
     var partitions = Rho.ORMHelper.getDbPartitions();
     $.each(partitions, function(index, db2) {
@@ -52,7 +40,7 @@ describe("ORM Module Specs", function() {
 
   beforeEach(function() {
     reset();
-    if (!useNewOrm) Rho.ORM.clear();
+    Rho.ORM.clear();
   });
 
   it('VT302-0001 | Check Rho.ORM exist or not | Should return a function',function() {
@@ -76,7 +64,7 @@ describe("ORM Module Specs", function() {
         model.set("partition","local");
       };
     }
-    addModel("Product", Product);
+    specHelpers.addModel("Product", Product);
     var source = getModelSource('Product');
     // console.log(JSON.stringify(source)); // =>
     // {"sync_type":"incremental","partition":"local",
@@ -105,7 +93,7 @@ describe("ORM Module Specs", function() {
         model.set("partition","local");
       };
     }
-    addModel("123456", Product);
+    specHelpers.addModel("123456", Product);
     var source = getModelSource("123456");
 
     expect(source.model_name).toEqual('123456');
@@ -128,7 +116,7 @@ describe("ORM Module Specs", function() {
         // model.set("partition","local");
       };
     }
-    addModel("Product", Product);
+    specHelpers.addModel("Product", Product);
     var source = getModelSource('Product');
 
     expect(source.sync_type).toEqual('incremental');
@@ -152,7 +140,7 @@ describe("ORM Module Specs", function() {
         model.set("partition","local");
       };
     }
-    addModel("Product", Product);
+    specHelpers.addModel("Product", Product);
 
     var source = getModelSource('Product');
     expect(source.sync_type).toEqual('none');
@@ -181,7 +169,7 @@ describe("ORM Module Specs", function() {
         model.set("partition","local");
       };
     }
-    addModel("Product", Product);
+    specHelpers.addModel("Product", Product);
 
     var source = getModelSource('Product');
     expect(source.sync_type).toEqual('none');
@@ -217,7 +205,7 @@ describe("ORM Module Specs", function() {
         model.set("partition","local");
       };
     }
-    addModel("Product", Product);
+    specHelpers.addModel("Product", Product);
     var source = getModelSource('Product');
 
     expect(source.partition).toEqual('local');
@@ -242,7 +230,7 @@ describe("ORM Module Specs", function() {
         model.property("brand","string");
       };
     }
-    addModel("Product", Product);
+    specHelpers.addModel("Product", Product);
     var source = getModelSource('Product');
 
     expect(source.sync_type).toEqual('incremental');
@@ -261,7 +249,7 @@ describe("ORM Module Specs", function() {
         model.property("name","string");
       };
     }
-    addModel('Product', Product);
+    specHelpers.addModel('Product', Product);
     var source = getModelSource('Product');
 
     checkModelProperty(source, 'name', 'string', '');
@@ -280,7 +268,7 @@ describe("ORM Module Specs", function() {
         model.property("id","integer");
       };
     }
-    addModel('Product', Product);
+    specHelpers.addModel('Product', Product);
     var source = getModelSource('Product');
 
     checkModelProperty(source, 'id', 'integer', '');
@@ -299,7 +287,7 @@ describe("ORM Module Specs", function() {
         model.property("float_prop","float");
       };
     }
-    addModel('Product', Product);
+    specHelpers.addModel('Product', Product);
     var source = getModelSource('Product');
 
     checkModelProperty(source, 'float_prop', 'float', '');
@@ -318,7 +306,7 @@ describe("ORM Module Specs", function() {
         model.property("date_prop","date");
       };
     }
-    addModel('Product', Product);
+    specHelpers.addModel('Product', Product);
     var source = getModelSource('Product');
 
     checkModelProperty(source, 'date_prop', 'date', '');
@@ -337,7 +325,7 @@ describe("ORM Module Specs", function() {
         model.property("time_prop","time");
       };
     }
-    addModel('Product', Product);
+    specHelpers.addModel('Product', Product);
     var source = getModelSource('Product');
 
     checkModelProperty(source, 'time_prop', 'time', '');
@@ -356,7 +344,7 @@ describe("ORM Module Specs", function() {
           model.property("image_url","blob");
       };
     }
-    addModel('Product', Product);
+    specHelpers.addModel('Product', Product);
     var source = getModelSource('Product');
 
     checkModelProperty(source, 'image_url', 'blob', '');
@@ -375,7 +363,7 @@ describe("ORM Module Specs", function() {
         model.property("image_url","blob","overwrite");
       };
     }
-    addModel('Product', Product);
+    specHelpers.addModel('Product', Product);
     var source = getModelSource('Product');
 
     checkModelProperty(source, 'image_url', 'blob', 'overwrite');
@@ -402,7 +390,7 @@ describe("ORM Module Specs", function() {
         model.set("partition","local");
       };
     }
-    var model = addModel('Product', Product);
+    var model = specHelpers.addModel('Product', Product);
     model.create({"name":"test"});
     expect(model).toBeDefined();
 
@@ -429,7 +417,7 @@ describe("ORM Module Specs", function() {
         model.set("partition","local");
       };
     }
-    var model = addModel('Product', Product);
+    var model = specHelpers.addModel('Product', Product);
     model.create({"name":"test","price":87.89});
     expect(model).toBeDefined();
 
@@ -461,7 +449,7 @@ describe("ORM Module Specs", function() {
         model.set("partition","local");
       };
     }
-    var model = addModel('Product', Product);
+    var model = specHelpers.addModel('Product', Product);
 
     model.create({"name":"test","price":87.89,"type":"testing"});
     model.create({"name":"debug","price":0.78,"type":"testing2"});
@@ -492,7 +480,7 @@ describe("ORM Module Specs", function() {
         model.set("partition","local");
       };
     }
-    var model = addModel('Product', Product);
+    var model = specHelpers.addModel('Product', Product);
     model.create({"name":"test"});
     expect(model).toBeDefined();
 
@@ -520,7 +508,7 @@ describe("ORM Module Specs", function() {
         model.set("partition","local");
       };
     }
-    var model = addModel('Product', Product);
+    var model = specHelpers.addModel('Product', Product);
     model.create({"name":"test","price":87.89});
     model.create({"name":"test","price":87.90});
     model.create({"name":"test2","price":87.90});
@@ -554,7 +542,7 @@ describe("ORM Module Specs", function() {
         model.set("partition","local");
       };
     }
-    var model = addModel('Product', Product);
+    var model = specHelpers.addModel('Product', Product);
     model.create({"name":"test","price":87.89,"type":"testing"});
     model.create({"name":"test","price":87.00,"type":"testing3"});
     model.create({"name":"test1","price":87.00,"type":"testing4"});
@@ -605,8 +593,8 @@ describe("ORM Module Specs", function() {
         model.belongs_to("Product");
       };
     }
-    var product = addModel('Product', Product);
-    var item = addModel('Item', Item);
+    var product = specHelpers.addModel('Product', Product);
+    var item = specHelpers.addModel('Item', Item);
 
     if(useNewOrm){
       expect(product.associations).toEqual("Item,product_id");
@@ -668,8 +656,8 @@ describe("ORM Module Specs", function() {
       expect(product.associations).toEqual("Item,product_id");
       expect(item.getBelongsTo('product_id')[0]).toEqual("Product");
     } else {
-      var item = addModel("Item", ItemDef);
-      var product = addModel("Product", ProductDef);
+      var item = specHelpers.addModel("Item", ItemDef);
+      var product = specHelpers.addModel("Product", ProductDef);
 
       sources = Rho.ORMHelper.getAllSources();
       expect(sources.Product.str_associations).toEqual("Item");
@@ -730,9 +718,9 @@ describe("ORM Module Specs", function() {
         model.belongs_to("Product");
       };
     }
-    var product = addModel('Product', Product);
-    var item  = addModel('Item', Item);
-    var item2 = addModel('Item2', Item2);
+    var product = specHelpers.addModel('Product', Product);
+    var item  = specHelpers.addModel('Item', Item);
+    var item2 = specHelpers.addModel('Item2', Item2);
 
     if(useNewOrm){
       expect(product.associations).toEqual("Item,product_id,Item2,product_id");
@@ -761,7 +749,7 @@ describe("ORM Module Specs", function() {
         model.set("sync_type","bulk_only");
       };
     }
-    addModel('Product', Product);
+    specHelpers.addModel('Product', Product);
 
     var source = getModelSource('Product');
     expect(source.sync_type).toEqual('bulk_only');
@@ -786,7 +774,7 @@ describe("ORM Module Specs", function() {
         model.set("sync_priority", 1);
       };
     }
-    addModel('Product', Product);
+    specHelpers.addModel('Product', Product);
 
     var source = getModelSource('Product');
     expect(source.sync_type).toEqual('incremental');
@@ -811,7 +799,7 @@ describe("ORM Module Specs", function() {
         model.set("partition","app");
       };
     }
-    addModel('Product', Product);
+    specHelpers.addModel('Product', Product);
 
     var source = getModelSource('Product');
     expect(source.partition).toEqual('app');
@@ -835,7 +823,7 @@ describe("ORM Module Specs", function() {
         model.set("schema_version",'1.0');
       };
     }
-    addModel('Product', Product);
+    specHelpers.addModel('Product', Product);
     var source = getModelSource('Product');
 
     expect(source.partition).toEqual('local');
@@ -871,7 +859,7 @@ describe("ORM Module Specs", function() {
         model.set("partition","local");
       };
     }
-    var model = addModel('Product', Product);
+    var model = specHelpers.addModel('Product', Product);
     expect(model).toBeDefined();
 
     if(useNewOrm)
@@ -899,7 +887,7 @@ describe("ORM Module Specs", function() {
         model.set("partition","local");
       };
     }
-    var model = addModel('Product', Product);
+    var model = specHelpers.addModel('Product', Product);
     expect(model).toBeDefined();
 
     if(useNewOrm) {

@@ -166,17 +166,14 @@ window.addEventListener('DOMContentLoaded', specHelpers.loadEvent);
 
 
 ///////////////////////////////////////////////////
-// Old ORM specific
-function getModelSource(modelName) {
-  return Rho.ORMHelper.getAllSources()[modelName];
-  // return Opal.Rho._scope.RhoConfig.$sources().map[modelName];
-}
-
 var useNewOrm = false;
 var useNewOrm = Rho.NewORM.useNewOrm();
 console.log("useNewOrm: " + useNewOrm);
 
-var cleanVars = function(object) {
+specHelpers.addModel = function(name, model) {
+  return (useNewOrm) ?  Rho.ORM.addModel(name, model) : Rho.ORM.addModel(model);
+}
+specHelpers.cleanVars = function(object) {
   var vars;
   if(useNewOrm) {
     vars = object;
@@ -192,9 +189,8 @@ var cleanVars = function(object) {
     }
   }
   return cleanVars;
-};
-
-var allVars = function(object) {
+}
+specHelpers.allVars = function(object) {
   var allvars;
   if(useNewOrm) {
     allvars = {};
@@ -207,4 +203,4 @@ var allVars = function(object) {
     allvars = object.vars();
   };
   return allvars;
-};
+}

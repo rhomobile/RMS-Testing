@@ -1,15 +1,42 @@
 // Describe:
+
 // "Model_Object"
 // "Fixed Schema Models"
 // "Property Bag Models"
 
 describe("Model Object", function() {
   var model;
-  var model2;
   var object;
+  var modelDef = function(model){
+    if(!useNewOrm) {
+      model.modelName('Product');
+      model.property("key","string");
+    } else
+      model.setModelProperty("key", "string", "");
+
+    model.set("partition","local");
+  };
+  var modelDef2 = function(model){
+    if(!useNewOrm) {
+      model.modelName("Item");
+      model.property("key","string");
+    } else
+      model.setModelProperty("key", "string", "");
+
+    model.set("partition","local");
+  };
+  var modelDefs3 = function(model){
+    if(!useNewOrm) {
+      model.modelName("Item");
+      model.property("name","string");
+    } else
+      model.setModelProperty("name", "string", "");
+
+    model.enable("sync");
+  };
 
   function reset() {
-    //Rho.ORM.clear();
+    Rho.ORM.clear();
     var partitions = Rho.ORMHelper.getDbPartitions();
     $.each(partitions, function(index, db2) {
       db2.executeSql("delete FROM SOURCES");
@@ -18,40 +45,15 @@ describe("Model Object", function() {
     });
   };
 
-  beforeEach(function(){
+  beforeEach(function() {
     reset();
-    if(useNewOrm) {
-      var modelDef = function(model){
-        model.setModelProperty("key", "string", "");
-        model.set("partition","local");
-      };
-      var modelDef2 = function(model){
-        model.setModelProperty("key","string", "");
-        model.set("partition","local");
-      };
-      model = Rho.ORM.addModel('Product', modelDef);
-      model2 = Rho.ORM.addModel('Item', modelDef2);
-    } else {
-      var modelDef = function(model){
-        model.modelName('Product');
-        model.property("key");
-        model.set("partition","local");
-      };
-      var modelDef2 = function(model){
-        model.modelName('Item');
-        model.property("key","string");
-        model.set("partition","local");
-      };
-      model = Rho.ORM.addModel(modelDef);
-      model2 = Rho.ORM.addModel(modelDef2);
-    }
+    model = specHelpers.addModel('Product', modelDef);
     model.deleteAll();
-    model2.deleteAll();
     object = model.make({'key': 'value'});
   });
 
   it('returns vars', function() {
-    expect(cleanVars(object)).toEqual({'key': 'value'});
+    expect(specHelpers.cleanVars(object)).toEqual({'key': 'value'});
   });
 
   it('retrieves object id', function() {
@@ -72,22 +74,22 @@ describe("Model Object", function() {
 
   it('sets property', function() {
     object.set('key', 'another value');
-    expect(cleanVars(object)).toEqual({'key': 'another value'});
+    expect(specHelpers.cleanVars(object)).toEqual({'key': 'another value'});
   });
 
   it('sets new property', function() {
     object.set('new_key', 'new value');
-    expect(cleanVars(object)).toEqual({'key': 'value', 'new_key': 'new value'});
+    expect(specHelpers.cleanVars(object)).toEqual({'key': 'value', 'new_key': 'new value'});
   });
 
   it('supports set chaining', function() {
     object.set('key', 'another value').set('new_key', 'new value');
-    expect(cleanVars(object)).toEqual({'key': 'another value', 'new_key': 'new value'});
+    expect(specHelpers.cleanVars(object)).toEqual({'key': 'another value', 'new_key': 'new value'});
   });
 
   it('sets property with empty name', function() {
     object.set('', 'another value');
-    expect(cleanVars(object)).toEqual({'key': 'value', '': 'another value'});
+    expect(specHelpers.cleanVars(object)).toEqual({'key': 'value', '': 'another value'});
   });
 
   it('has properties', function() {
@@ -96,7 +98,6 @@ describe("Model Object", function() {
   });
 
   it('VT302-0200 | creates object in database', function() {
-    //var model = Rho.ORM.addModel(modelDef);
     var before = model.count();
     model.create({'key': 'value'});
     var after = model.count();
@@ -108,11 +109,11 @@ describe("Model Object", function() {
     var object = model.create({'key': 'value'});
 
     if(useNewOrm) {
-      expect(allVars(model.find(object.object))).toEqual(allVars(object));
+      expect(specHelpers.allVars(model.find(object.object))).toEqual(specHelpers.allVars(object));
       object.set('key', 'another value').set('new_key', 'new value');
-      expect(allVars(model.find(object.object))).not.toEqual(allVars(object));
+      expect(specHelpers.allVars(model.find(object.object))).not.toEqual(specHelpers.allVars(object));
       object.save();
-      expect(allVars(model.find(object.object))).toEqual(allVars(object));
+      expect(specHelpers.allVars(model.find(object.object))).toEqual(specHelpers.allVars(object));
     } else {
       expect(model.find(object.object()).vars()).toEqual(object.vars());
       object.set('key', 'another value').set('new key', 'new value');
@@ -127,15 +128,15 @@ describe("Model Object", function() {
     var object = model.create({'key': 'value', 'original_key': 'original value'});
 
     if(useNewOrm) {
-      expect(allVars(model.find(object.object))).toEqual(allVars(object));
+      expect(specHelpers.allVars(model.find(object.object))).toEqual(specHelpers.allVars(object));
       object.updateAttributes({'key': 'another value', 'new_key': 'new value'});
-      expect(allVars(model.find(object.object))).toEqual(allVars(object));
-      expect(cleanVars(object)).toEqual({'key': 'another value', 'new_key': 'new value', 'original_key': 'original value'});
+      expect(specHelpers.allVars(model.find(object.object))).toEqual(specHelpers.allVars(object));
+      expect(specHelpers.cleanVars(object)).toEqual({'key': 'another value', 'new_key': 'new value', 'original_key': 'original value'});
     } else {
-      expect(allVars(model.find(object.object()))).toEqual(allVars(object));
+      expect(specHelpers.allVars(model.find(object.object()))).toEqual(specHelpers.allVars(object));
       object.updateAttributes({'key': 'another value', 'new_key': 'new value'});
       expect(model.find(object.object()).vars()).toEqual(object.vars());
-      expect(cleanVars(object)).toEqual({'key': 'another value', 'new_key': 'new value', 'original_key': 'original value'});
+      expect(specHelpers.cleanVars(object)).toEqual({'key': 'another value', 'new_key': 'new value', 'original_key': 'original value'});
     };
   });
 
@@ -150,7 +151,7 @@ describe("Model Object", function() {
 
     var found = model.find('all');
     expect(found.length).toBe(1);
-    expect(allVars(found[0])).toEqual(allVars(object2));
+    expect(specHelpers.allVars(found[0])).toEqual(specHelpers.allVars(object2));
   });
 
   it('VT302-0201 | does not create empty object in database', function() {
@@ -172,27 +173,18 @@ describe("Model Object", function() {
     expect(model.count()).toBe(0);
   });
 
-  // FIXME:
+  // ==========================================================
   it('VT302-0211 | delete object in sync database', function() {
-   var Modelsync;
-    if(useNewOrm) {
-      var modelDefs3 = function(model){
-        model.setModelProperty("name","string", "");
-        model.enable("sync");
-      };
-      Modelsync = Rho.ORM.addModel('Item', modelDefs3);
-    } else {
-      var modelDefs3 = function(model){
-        model.modelName('Item');
-        model.property("name","string");
-        model.enable("sync");
-      };
-      Modelsync = Rho.ORM.addModel(modelDefs3);
-    };
-    var userDb = Rho.ORMHelper.dbConnection("user");
+    var Modelsync = specHelpers.addModel("Item", modelDefs3);
     Modelsync.create({'name': 'tests'});
-    // emulate object's creation in RhoConnect
+
+    var userDb = Rho.ORMHelper.dbConnection("user");
     var cv = userDb.executeSql("select * from CHANGED_VALUES");
+
+    console.log("T302-0211.1: ");
+    console.log(cv);
+    console.log(JSON.stringify(cv));
+
     expect(cv[0].update_type).toEqual("create");
 
     cv = userDb.executeSql("delete from CHANGED_VALUES");
@@ -200,33 +192,25 @@ describe("Model Object", function() {
 
     var obj = Modelsync.find("first");
     obj.destroy();
+
     cv = userDb.executeSql("select * from CHANGED_VALUES");
     expect(cv[0].update_type).toEqual("delete");
   });
 
-  // FIXME:
   it('VT302-0211 | update object in sync database', function() {
-    var Modelsync;
-    if(useNewOrm) {
-      var modelDefs3 = function(model){
-        model.setModelProperty("name","string", "");
-        model.enable("sync");
-      };
-      Modelsync = Rho.ORM.addModel('Item', modelDefs3);
-    } else {
-      var modelDefs3 = function(model){
-        model.modelName('Item');
-        model.property("name","string");
-        model.enable("sync");
-      };
-      Modelsync = Rho.ORM.addModel(modelDefs3);
-    };
-    var userDb = Rho.ORMHelper.dbConnection("user");
+    var Modelsync = specHelpers.addModel("Item", modelDefs3);
     Modelsync.create({'name': 'tests'});
+
+    var userDb = Rho.ORMHelper.dbConnection("user");
     var cv = userDb.executeSql("select * from CHANGED_VALUES");
+
+    console.log("T302-0211.2: ");
+    console.log(cv);
+    console.log(JSON.stringify(cv));
+
     expect(cv[0].update_type).toEqual("create");
 
-    cv=userDb.executeSql("delete from CHANGED_VALUES");
+    cv = userDb.executeSql("delete from CHANGED_VALUES");
     expect(cv).toEqual([]);
 
     var obj = Modelsync.find("first");
@@ -236,13 +220,16 @@ describe("Model Object", function() {
   });
 
   it('VT302-0257 | deletes all objects of specific model in database', function() {
-    model.create({'key': 'value'});
+    var model1 = specHelpers.addModel("Product", modelDef);
+    var model2 = specHelpers.addModel("Item", modelDef2);
+
+    model1.create({'key': 'value'});
     model2.create({'key': 'value'});
 
-    expect(model.count()).toBeGreaterThan(0);
+    expect(model1.count()).toBeGreaterThan(0);
     expect(model2.count()).toBeGreaterThan(0);
 
-    var before1 = model.count();
+    var before1 = model1.count();
     model2.deleteAll();
     var after1 = model.count();
 
@@ -251,16 +238,14 @@ describe("Model Object", function() {
   });
 
   it('VT302-0217 | reads object from database', function() {
-    //var model = Rho.ORM.addModel(modelDef);
     model.deleteAll();
     model.create({'key': 'value'});
     var found = model.find('all');
     expect(found.length).toBe(1);
-    expect(cleanVars(found[0])).toEqual({'key': 'value'});
+    expect(specHelpers.cleanVars(found[0])).toEqual({'key': 'value'});
   });
 
   it('compares 2 objects props', function() {
-    //var model = Rho.ORM.addModel(modelDef);
     var m1 = model.create({'key': 'value'});
     var m2 = model.create({'key': 'value'});
     res = (m1.get('key') == m2.get('key'));
@@ -272,10 +257,11 @@ describe("Model Object", function() {
     model.create({'key': 'value', '': 'empty'});
     var found = model.find('all');
     expect(found.length).toBe(1);
-    expect(cleanVars(found[0])).toEqual({'key': 'value'});
+    expect(specHelpers.cleanVars(found[0])).toEqual({'key': 'value'});
   });
 
   it('counts objects in database', function() {
+    var model2 = specHelpers.addModel("Item", modelDef2);
     var before1 = model.count();
 
     model.create({'key': 'value'});
@@ -288,6 +274,7 @@ describe("Model Object", function() {
   });
 
   it('VT302-0259 | counts objects in database using find', function() {
+    var model2 = specHelpers.addModel("Item", modelDef2);
     var before1 = model.find('count');
 
     model.create({'key': 'value'});
@@ -300,6 +287,7 @@ describe("Model Object", function() {
   });
 
   it('VT302-0260 | counts objects in database using find with condition', function() {
+    var model2 = specHelpers.addModel("Item", modelDef2);
     var before1 = model.find('count', {conditions: {'key': 'value to find'}});
 
     model.create({'key': 'value'});
@@ -314,6 +302,8 @@ describe("Model Object", function() {
   });
 
   it('VT302-0261 | finds all objects in database', function() {
+    var model2 = specHelpers.addModel("Item", modelDef2);
+
     model.create({'key1': 'value1'});
     model2.create({'key2': 'value2'});
     model.create({'key3': 'value3'});
@@ -322,8 +312,8 @@ describe("Model Object", function() {
 
     expect(found.length).toBe(2);
     var i = (found[0].has('key1')) ? 0 : 1;
-    expect(cleanVars(found[i])).toEqual({'key1': 'value1'});
-    expect(cleanVars(found[1 - i])).toEqual({'key3': 'value3'});
+    expect(specHelpers.cleanVars(found[i])).toEqual({'key1': 'value1'});
+    expect(specHelpers.cleanVars(found[1 - i])).toEqual({'key3': 'value3'});
   });
 
   it('VT302-0218 | finds all objects with one condition', function() {
@@ -335,12 +325,12 @@ describe("Model Object", function() {
     expect(found.length).toBe(2);
     if(useNewOrm) {
       var i = (found[0].object === objects[0].object) ? 0 : 1;
-      expect(cleanVars(found[i])).toEqual(cleanVars(objects[0]));
-      expect(cleanVars(found[1 - i])).toEqual(cleanVars(objects[1]));
+      expect(specHelpers.cleanVars(found[i])).toEqual(specHelpers.cleanVars(objects[0]));
+      expect(specHelpers.cleanVars(found[1 - i])).toEqual(specHelpers.cleanVars(objects[1]));
     } else {
       var i = (found[0].object() === objects[0].object()) ? 0 : 1;
-      expect(cleanVars(found[i])).toEqual(cleanVars(objects[0]));
-      expect(cleanVars(found[1 - i])).toEqual(cleanVars(objects[1]));
+      expect(specHelpers.cleanVars(found[i])).toEqual(specHelpers.cleanVars(objects[0]));
+      expect(specHelpers.cleanVars(found[1 - i])).toEqual(specHelpers.cleanVars(objects[1]));
     };
   });
 
@@ -361,12 +351,12 @@ describe("Model Object", function() {
     expect(found.length).toBe(2);
     if(useNewOrm) {
       var i = (found[0].object === objects[0].object) ? 0 : 1;
-      expect(cleanVars(found[i])).toEqual(cleanVars(objects[0]));
-      expect(cleanVars(found[1 - i])).toEqual(cleanVars(objects[1]));
+      expect(specHelpers.cleanVars(found[i])).toEqual(specHelpers.cleanVars(objects[0]));
+      expect(specHelpers.cleanVars(found[1 - i])).toEqual(specHelpers.cleanVars(objects[1]));
     } else {
       var i = (found[0].object() === objects[0].object()) ? 0 : 1;
-      expect(cleanVars(found[i])).toEqual(cleanVars(objects[0]));
-      expect(cleanVars(found[1 - i])).toEqual(cleanVars(objects[1]));
+      expect(specHelpers.cleanVars(found[i])).toEqual(specHelpers.cleanVars(objects[0]));
+      expect(specHelpers.cleanVars(found[1 - i])).toEqual(specHelpers.cleanVars(objects[1]));
     };
   });
 
@@ -374,10 +364,10 @@ describe("Model Object", function() {
     var original = model.create({'key1': 'value1'});
     model.create({'key2': 'value2'});
     if(useNewOrm) {
-      expect(allVars(model.find(original.object))).toEqual(allVars(original));
+      expect(specHelpers.allVars(model.find(original.object))).toEqual(specHelpers.allVars(original));
     }
     else {
-      expect(allVars(model.find(original.object()))).toEqual(allVars(original));
+      expect(specHelpers.allVars(model.find(original.object()))).toEqual(specHelpers.allVars(original));
     };
   });
 
@@ -385,7 +375,7 @@ describe("Model Object", function() {
     model.deleteAll();
     var originals = [model.create({'key1': 'value1'}), model.create({'key3': 'value3'})];
     var found = model.find('first');
-    expect(allVars(found)).toEqual(allVars(originals[(found.has('key1')) ? 0 : 1]));
+    expect(specHelpers.allVars(found)).toEqual(specHelpers.allVars(originals[(found.has('key1')) ? 0 : 1]));
   });
 
   // Bhakta: This way of calling find is not mentioned in Docs.
