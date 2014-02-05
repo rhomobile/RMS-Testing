@@ -216,7 +216,7 @@ describe('Printer Zebra', function() {
         });
 
         runs(function() {
-            Rho.PrinterZebra.searchPrinters({"printerType": Rho.PrinterZebra.PRINTER_TYPE_ZEBRA,"connectionType": Rho.PrinterZebra.CONNECTION_TYPE_TCP, "timeout":30000}, searchPrinterCallback);
+            Rho.PrinterZebra.searchPrinters({}, searchPrinterCallback);
         });
 
         waitsFor(function() {
@@ -264,14 +264,14 @@ describe('Printer Zebra', function() {
     }
 
     function doConnect() {
-				dispTestCaseRunning("Connecting... to Zebra printer");
-				dispExpectedResult("Should connect to the Zebra printer");
-		    runs(function() {
-            expect(last_found_printer_id).toNotEqual(null);
-            thisprinter = Rho.PrinterZebra.getPrinterByID(last_found_printer_id);
-            callresult = null;
-            thisprinter.connect(cbk);
-        });
+		dispTestCaseRunning("Connecting... to Zebra printer");
+		dispExpectedResult("Should connect to the Zebra printer");
+	    runs(function() {
+        expect(last_found_printer_id).toNotEqual(null);
+        thisprinter = Rho.PrinterZebra.getPrinterByID(last_found_printer_id);
+        callresult = null;
+        thisprinter.connect(cbk);
+    });
 
         waitsFor(function() {
             return callresult !== null;
@@ -282,7 +282,7 @@ describe('Printer Zebra', function() {
             expect(thisprinter.isConnected).toEqual(true);
             callresult = null;
         });
-		}
+	}
 
     function doPrintTestLabel() {
 				
@@ -331,10 +331,10 @@ describe('Printer Zebra', function() {
                 expect(callresult).toNotEqual(Rho.PrinterZebra.PRINTER_STATUS_SUCCESS);
             }
         });*/
-				runs(function() {
-					displayResult(jasmine.getEnv().currentSpec.description, callresult.toString());
-				});
-				_result.waitForResponse();
+		runs(function() {
+			displayResult(jasmine.getEnv().currentSpec.description, callresult.toString());
+		});
+		_result.waitForResponse();
     }
 
     function doPrintRawCommand(cmd) {
@@ -347,97 +347,97 @@ describe('Printer Zebra', function() {
             return callresult !== null;
         }, 'wait until setting lable length', 15000);
 				
-				runs(function() {
-					displayResult("Test", callresult.toString());
-				});
+		runs(function() {
+			displayResult(jasmine.getEnv().currentSpec.description, callresult.toString());
+		});
     }
 
     // printFile method
-    xdescribe('printFile method', function() {
+    describe('printFile method', function() {
         it('should connect', function() {
-				  doConnect();
-				});
+		  doConnect();
+		});
 
         it('should print png with callback', function() {
-					dispTestCaseRunning("1. Should Print label <br />2. Should print PNG image.");
-					dispExpectedResult("Should print png with callback");
-					//Common Method implemented to wait for tester to run the test.Code available in specHelper.js
-					_result.waitToRunTest();
-					
-					doPrintTestLabel();
-					doSetLabelLength(500);
-					doPrintPrintFile(pngimagepath_320px, {});
-						
+			dispTestCaseRunning("1. Should Print label <br />2. Should print PNG image.");
+			dispExpectedResult("Should print png with callback");
+			//Common Method implemented to wait for tester to run the test.Code available in specHelper.js
+			_result.waitToRunTest();
+			
+			doPrintTestLabel();
+			doSetLabelLength(500);
+			doPrintPrintFile(pngimagepath_320px, {});
+				
         });
 
         it('should print jpeg with callback', function() {
-						dispTestCaseRunning("1. Should Print label <br />2. Should print jpeg image.");
-						dispExpectedResult("should print jpeg with callback");
-						//Common Method implemented to wait for tester to run the test.Code available in specHelper.js
-						_result.waitToRunTest();
+			dispTestCaseRunning("1. Should Print label <br />2. Should print jpeg image.");
+			dispExpectedResult("should print jpeg with callback");
+			//Common Method implemented to wait for tester to run the test.Code available in specHelper.js
+			_result.waitToRunTest();
 						
             doPrintTestLabel();
             doSetLabelLength(500);
             doPrintPrintFile(jpgimagepath_320px, {});
         });
         it('should not print bmp with callback', function() {
-						dispTestCaseRunning("1. Should Print label <br />2. Should print bmp image.");
-						dispExpectedResult("should print bmp with callback");
-						//Common Method implemented to wait for tester to run the test.Code available in specHelper.js
-						_result.waitToRunTest();
-						
+			dispTestCaseRunning("1. Should Print label <br />2. Should print bmp image.");
+			dispExpectedResult("should print bmp with callback");
+			//Common Method implemented to wait for tester to run the test.Code available in specHelper.js
+			_result.waitToRunTest();
+			
             doPrintTestLabel();
             doSetLabelLength(500);
             doPrintPrintFile(bmpimagepath_320px, {}, false);
         });
         it('should not print pdf with callback', function() {
-						dispTestCaseRunning(" 1. Should Print label <br />2. Should print PDF file.");
-						dispExpectedResult("should print PDF with callback");
-						//Common Method implemented to wait for tester to run the test.Code available in specHelper.js
-						_result.waitToRunTest();
+			dispTestCaseRunning(" 1. Should Print label <br />2. Should print PDF file.");
+			dispExpectedResult("should print PDF with callback");
+			//Common Method implemented to wait for tester to run the test.Code available in specHelper.js
+			_result.waitToRunTest();
             doPrintTestLabel();
             doSetLabelLength(500);
             doPrintPrintFile(pdffilepath, {}, false);
         });
         it('should not print empty filename with callback', function() {
-						dispTestCaseRunning(" 1. Should Print label <br />2. should not print empty filename ");
-						dispExpectedResult("should not print empty filename with callback");
-						//Common Method implemented to wait for tester to run the test.Code available in specHelper.js
-						_result.waitToRunTest();
+    		dispTestCaseRunning(" 1. Should Print label <br />2. should not print empty filename ");
+    		dispExpectedResult("should not print empty filename with callback");
+    		//Common Method implemented to wait for tester to run the test.Code available in specHelper.js
+    		_result.waitToRunTest();
             doPrintTestLabel();
             doSetLabelLength(500);
             doPrintPrintFile('', {}, false);
         });
         it('should not print invalid filename with callback', function() {
-						dispTestCaseRunning(" 1. Should Print label <br />2. should not print invalid filename ");
-						dispExpectedResult("should not print invalid filename with callback");
-						//Common Method implemented to wait for tester to run the test.Code available in specHelper.js
-						_result.waitToRunTest();
+    		dispTestCaseRunning(" 1. Should Print label <br />2. should not print invalid filename ");
+    		dispExpectedResult("should not print invalid filename with callback");
+    		//Common Method implemented to wait for tester to run the test.Code available in specHelper.js
+    		_result.waitToRunTest();
             doPrintTestLabel();
             doSetLabelLength(500);
             doPrintPrintFile(invalidfilepath, {}, false);
         });
     });
 
-    xdescribe('printRawString method', function() {
+    describe('printRawString method', function() {
         it('should connect', function() {
             doConnect();
         });
 
         it('should print ZPL Command with callback', function() {
-						dispTestCaseRunning(" 1. Should Print label <br />2. should print ZPL Command ");
-						dispExpectedResult("should print ZPL Command with callback");
-						//Common Method implemented to wait for tester to run the test.Code available in specHelper.js
-						_result.waitToRunTest();
+			dispTestCaseRunning(" 1. Should Print label <br />2. should print ZPL Command ");
+			dispExpectedResult("should print ZPL Command with callback");
+			//Common Method implemented to wait for tester to run the test.Code available in specHelper.js
+			_result.waitToRunTest();
             doPrintTestLabel();
             doPrintRawCommand(CommandZPL);
-						_result.waitForResponse();
+			_result.waitForResponse();
         });
         it('should print CPCL Command with callback', function() {
-						dispTestCaseRunning(" 1. Should Print label <br />2. should print CPCL Command ");
-						dispExpectedResult("should print CPCL Command with callback");
-						//Common Method implemented to wait for tester to run the test.Code available in specHelper.js
-						_result.waitToRunTest();
+    		dispTestCaseRunning(" 1. Should Print label <br />2. should print CPCL Command ");
+    		dispExpectedResult("should print CPCL Command with callback");
+    		//Common Method implemented to wait for tester to run the test.Code available in specHelper.js
+    		_result.waitToRunTest();
             doPrintTestLabel();
             doPrintRawCommand(CommandCCPL);
 						_result.waitForResponse();
@@ -457,31 +457,31 @@ describe('Printer Zebra', function() {
        /* runs(function() {
             expect(callresult).toEqual(Rho.PrinterZebra.PRINTER_STATUS_SUCCESS);
         });*/
-				runs(function() {
-					displayResult(jasmine.getEnv().currentSpec.description, callresult.toString());
-				});
+		runs(function() {
+			displayResult(jasmine.getEnv().currentSpec.description, callresult.toString());
+		});
 				
-				_result.waitForResponse();
+		_result.waitForResponse();
     }
 
-    xdescribe('sendFileContents method', function() {
+    describe('sendFileContents method', function() {
         it('should connect', function() {
             doConnect();
         });
 
         it('should print test_zpl.zpl', function() {
-						dispTestCaseRunning(" 1. Should Print label <br />2. should send test_zpl.zpl file and should get printed");
-						dispExpectedResult("should print test_zpl.zpl");
-						//Common Method implemented to wait for tester to run the test.Code available in specHelper.js
-						_result.waitToRunTest();
+			dispTestCaseRunning(" 1. Should Print label <br />2. should send test_zpl.zpl file and should get printed");
+			dispExpectedResult("should print test_zpl.zpl");
+			//Common Method implemented to wait for tester to run the test.Code available in specHelper.js
+			_result.waitToRunTest();
             doPrintTestLabel();
             doSendFileContents(test_zpl);
         });
         it('should print test_cpcl.lbl', function() {
-					dispTestCaseRunning(" Test");
-						dispExpectedResult("should print test_CCPL.CCPL");
-						//Common Method implemented to wait for tester to run the test.Code available in specHelper.js
-						_result.waitToRunTest();
+			dispTestCaseRunning(" Test");
+			dispExpectedResult("should print test_CCPL.CCPL");
+			//Common Method implemented to wait for tester to run the test.Code available in specHelper.js
+			_result.waitToRunTest();
             doPrintTestLabel();
             doSendFileContents(test_cpcl);
         });
@@ -501,10 +501,10 @@ describe('Printer Zebra', function() {
         var deftext = [def,'print image',Rho.RhoFile.basename(from),'x:',x,'y:',y,'options:',JSON.stringify(options,null," ") ];
 
         it( deftext.join(' ') , function() {
-						dispTestCaseRunning("1. Should Print label <br />2. "+def+" Print "+Rho.RhoFile.basename(from)+" image");
-						dispExpectedResult(jasmine.getEnv().currentSpec.description, callresult.toString());
-						//Common Method implemented to wait for tester to run the test.Code available in specHelper.js
-						_result.waitToRunTest();
+			dispTestCaseRunning("1. Should Print label <br />2. "+def+" Print "+Rho.RhoFile.basename(from)+" image");
+			dispExpectedResult(jasmine.getEnv().currentSpec.description, callresult.toString());
+			//Common Method implemented to wait for tester to run the test.Code available in specHelper.js
+			_result.waitToRunTest();
             doPrintTestLabel();
 
             runs(function() {
@@ -524,14 +524,14 @@ describe('Printer Zebra', function() {
                     expect(callresult).toNotEqual(Rho.PrinterZebra.PRINTER_STATUS_SUCCESS);
                 }
             });*/
-						runs(function() {
-							displayResult(jasmine.getEnv().currentSpec.description, callresult.toString());
-						});
-						_result.waitForResponse();
+			runs(function() {
+				displayResult(jasmine.getEnv().currentSpec.description, callresult.toString());
+			});
+			_result.waitForResponse();
         });
     }
 
-    xdescribe('printImageFromFile method', function() {
+    describe('printImageFromFile method', function() {
         it('should connect', function() {
             doConnect();
         });
@@ -563,21 +563,21 @@ describe('Printer Zebra', function() {
         }
     });
 
-		var listofrequeststate = [Rho.PrinterZebra.PRINTER_STATE_IS_HEAD_COLD, Rho.PrinterZebra.PRINTER_STATE_IS_HEAD_OPEN, Rho.PrinterZebra.PRINTER_STATE_IS_HEAD_TOO_HOT, Rho.PrinterZebra.PRINTER_STATE_IS_PARTIAL_FORMAT_IN_PROGRESS, Rho.PrinterZebra.PRINTER_STATE_IS_PAUSED, Rho.PrinterZebra.PRINTER_STATE_IS_RECEIVE_BUFFER_FULL, Rho.PrinterZebra.PRINTER_STATE_IS_RIBBON_OUT, Rho.PrinterZebra.PRINTER_STATE_LABEL_LENGTH_IN_DOTS, Rho.PrinterZebra.PRINTER_STATE_LABELS_REMAINING_IN_BATCH, Rho.PrinterZebra.PRINTER_STATE_NUMBER_OF_FORMATS_IN_RECEIVE_BUFFER, Rho.PrinterZebra.PRINTER_STATE_IS_READY_TO_PRINT, 	Rho.PrinterZebra.PRINTER_STATE_IS_COVER_OPENED, Rho.PrinterZebra.PRINTER_STATE_IS_DRAWER_OPENED, Rho.PrinterZebra.PRINTER_STATE_IS_PAPER_OUT, Rho.PrinterZebra.PRINTER_STATE_IS_BATTERY_LOW];
-		var printmode_state= [Rho.PrinterZebra.PRINTER_STATE_PRINT_MODE];
-		var printmode_values = [Rho.PrinterZebra.PRINT_MODE_APPLICATOR, Rho.PrinterZebra.PRINT_MODE_CUTTER, Rho.PrinterZebra.PRINT_MODE_DELAYED_CUT, Rho.PrinterZebra.PRINT_MODE_KIOSK, Rho.PrinterZebra.PRINT_MODE_LINERLESS_PEEL, Rho.PrinterZebra.PRINT_MODE_LINERLESS_REWIND, Rho.PrinterZebra.PRINT_MODE_LINERLESS_REWIND, Rho.PrinterZebra.PRINT_MODE_PARTIAL_CUTTER, Rho.PrinterZebra.PRINT_MODE_PEEL_OFF, Rho.PrinterZebra.PRINT_MODE_REWIND, Rho.PrinterZebra.PRINT_MODE_RFID, Rho.PrinterZebra.PRINT_MODE_TEAR_OFF, Rho.PrinterZebra.PRINT_MODE_UNKNOWN];
-		var requeststate_callbackValue = {};
-		
-		function requestStateCallback(args) {
-			if (args.status == Rho.PrinterZebra.PRINTER_STATUS_SUCCESS) {
-				requeststate_callbackValue = args;
-					
-			} else if (args.status == Rho.PrinterZebra.PRINTER_STATUS_ERROR) {
-			
-			} 
-			callresult = true;
-		}
-		
+	var listofrequeststate = [Rho.PrinterZebra.PRINTER_STATE_IS_HEAD_COLD, Rho.PrinterZebra.PRINTER_STATE_IS_HEAD_OPEN, Rho.PrinterZebra.PRINTER_STATE_IS_HEAD_TOO_HOT, Rho.PrinterZebra.PRINTER_STATE_IS_PARTIAL_FORMAT_IN_PROGRESS, Rho.PrinterZebra.PRINTER_STATE_IS_PAUSED, Rho.PrinterZebra.PRINTER_STATE_IS_RECEIVE_BUFFER_FULL, Rho.PrinterZebra.PRINTER_STATE_IS_RIBBON_OUT, Rho.PrinterZebra.PRINTER_STATE_LABEL_LENGTH_IN_DOTS, Rho.PrinterZebra.PRINTER_STATE_LABELS_REMAINING_IN_BATCH, Rho.PrinterZebra.PRINTER_STATE_NUMBER_OF_FORMATS_IN_RECEIVE_BUFFER, Rho.PrinterZebra.PRINTER_STATE_IS_READY_TO_PRINT, 	Rho.PrinterZebra.PRINTER_STATE_IS_COVER_OPENED, Rho.PrinterZebra.PRINTER_STATE_IS_DRAWER_OPENED, Rho.PrinterZebra.PRINTER_STATE_IS_PAPER_OUT, Rho.PrinterZebra.PRINTER_STATE_IS_BATTERY_LOW];
+	var printmode_state= [Rho.PrinterZebra.PRINTER_STATE_PRINT_MODE];
+	var printmode_values = [Rho.PrinterZebra.PRINT_MODE_APPLICATOR, Rho.PrinterZebra.PRINT_MODE_CUTTER, Rho.PrinterZebra.PRINT_MODE_DELAYED_CUT, Rho.PrinterZebra.PRINT_MODE_KIOSK, Rho.PrinterZebra.PRINT_MODE_LINERLESS_PEEL, Rho.PrinterZebra.PRINT_MODE_LINERLESS_REWIND, Rho.PrinterZebra.PRINT_MODE_LINERLESS_REWIND, Rho.PrinterZebra.PRINT_MODE_PARTIAL_CUTTER, Rho.PrinterZebra.PRINT_MODE_PEEL_OFF, Rho.PrinterZebra.PRINT_MODE_REWIND, Rho.PrinterZebra.PRINT_MODE_RFID, Rho.PrinterZebra.PRINT_MODE_TEAR_OFF, Rho.PrinterZebra.PRINT_MODE_UNKNOWN];
+	var requeststate_callbackValue = {};
+	
+	function requestStateCallback(args) {
+		if (args.status == Rho.PrinterZebra.PRINTER_STATUS_SUCCESS) {
+			requeststate_callbackValue = args;
+				
+		} else if (args.status == Rho.PrinterZebra.PRINTER_STATUS_ERROR) {
+            requeststate_callbackValue = args;
+		} 
+		callresult = true;
+	}
+	
 	function dorequestState(requestStatearray, printmode) {
 			
 		var deftext = [];
@@ -601,27 +601,29 @@ describe('Printer Zebra', function() {
 			_result.waitToRunTest();
 				
 			runs(function() {
-					callresult = null;
-					thisprinter.requestState([requestStatearray], requestStateCallback);
+				callresult = null;
+				thisprinter.requestState([requestStatearray], requestStateCallback);
 			});
 
 			waitsFor(function() {
-					return callresult !== null;
+				return callresult !== null;
 			}, 'wait requestState', 30000);
 			
 			runs(function() {
 				if(requeststate_callbackValue.status ==  Rho.PrinterZebra.PRINTER_STATUS_SUCCESS) {
-					displayResult(jasmine.getEnv().currentSpec.description, JSON.stringyfy(requeststate_callbackValue));
+					displayResult(jasmine.getEnv().currentSpec.description, JSON.stringify(requeststate_callbackValue));
 				}
 				else {
-					displayResult(jasmine.getEnv().currentSpec.description, requeststate_callbackValue.status);
+					displayResult(jasmine.getEnv().currentSpec.description, JSON.stringify(requeststate_callbackValue));
 				}
 			});
+
 			_result.waitForResponse();
+
 		});		
 	}	
 		
-	xdescribe('requestState method', function() {
+	describe('requestState method', function() {
 		it('should connect', function() {
 				doConnect();
 		});
@@ -637,25 +639,10 @@ describe('Printer Zebra', function() {
 	});	
 	
 
-	function doprintStoredFormatWithHash(formatpath, hashvalue, callback_value, lang) {
-	
-		var deftext = [];
-		var dispcase = [];
-		var dispexp = [];
-		var def = '';
-		if (callback_value == 0) {
-			def = 'with'
-		}
-		else if(callback_value == 1) {
-			def = 'without'
-		}
-		else if(callback_value == 2) {
-			def = 'Anonymous'
-		}
-		 
-		deftext = ['Should Print a ',lang,' stored format by Hash ',def,' callback'];
-		dispcase = ['1. Should Print label <br />2.Should Print a ',lang,' stored format on the printer fields specified by the Hash'];
-		dispexp = ['Should Print a ',lang,' stored format on the printer fields specified by the Hash'];
+	function doprintStoredFormatWithHash(formatpath, hashvalue, callback_type, lang) {
+	    var deftext = ['Should Print a ',lang,' stored format by Hash ',callback_type,' callback'];
+		var dispcase = ['1. Should Print label <br />2.Should Print a ',lang,' stored format on the printer fields specified by the Hash'];
+		var dispexp = ['Should Print a ',lang,' stored format on the printer fields specified by the Hash'];
 	
 		it( deftext.join('') , function() {
 			dispTestCaseRunning(dispcase.join(''));
@@ -665,258 +652,116 @@ describe('Printer Zebra', function() {
 			
 			doPrintTestLabel();
 			doSetLabelLength(500);
+
 			runs(function() {
 				callresult = null;
-				if(callback_value == 0) {
+				if(callback_value == 'with') {
 					thisprinter.printStoredFormatWithHash(formatpath, hashvalue, cbk);
 				}
-				else if(callback_value == 1) {
+				else if(callback_value == 'without') {
 					callresult = thisprinter.printStoredFormatWithHash(formatpath, hashvalue);
 				}	
-				else if(callback_value == 2) {
+				else if(callback_value == 'Anonymous') {
 					thisprinter.printStoredFormatWithHash(formatpath, hashvalue, function(callbackValue) {callresult = callbackValue;});
 				}	
 			});
+
 			waitsFor(function() {
 					return callresult !== null;
 			}, 'wait to Print', 30000);
 			
 			runs(function() {
-			
 				if(lang != 'invalid')	{
-					//	expect(callresult).toEqual(Rho.PrinterZebra.PRINTER_STATUS_SUCCESS);
 					displayResult(jasmine.getEnv().currentSpec.description, callresult.toString());
 				}	
 				else {	
-					//	expect(callresult).toEqual(Rho.PrinterZebra.PRINTER_STATUS_ERROR);
 					displayResult(jasmine.getEnv().currentSpec.description, callresult.toString());
 				}	
 			});		
+
 			_result.waitForResponse();
 		});		
-		
-	
 	}
-	xdescribe('printStoredFormatWithHash method', function() {
-		it('should connect', function() {
-				doConnect();
-		});
-		doprintStoredFormatWithHash(zplformatpath, hashzpl, 0, "ZPL Language");
-		doprintStoredFormatWithHash(zplformatpath, hashzpl, 1, "ZPL Language");
-		doprintStoredFormatWithHash(zplformatpath, hashzpl, 2, "ZPL Language");
-		
-		doprintStoredFormatWithHash(ccplformatpath, hashccpl, 0, "CCPL Language");
-		doprintStoredFormatWithHash(ccplformatpath, hashccpl, 1, "CCPL Language");
-		doprintStoredFormatWithHash(ccplformatpath, hashccpl, 2, "CCPL Language");
-		
-		doprintStoredFormatWithHash(invalidformatpath, invalidzplhash, 0, "invalid");
-		
-	})
-	
-	
-		function doprintStoredFormatWithArray(formatpath, arrayvalue, callback_value, lang) {
-	
-		var deftext = [];
-		var dispcase = [];
-		var dispexp = [];
-		var def = '';
-		if (callback_value == 0) {
-			def = 'with'
-		}
-		else if(callback_value == 1) {
-			def = 'without'
-		}
-		else if(callback_value == 2) {
-			def = 'Anonymous'
-		}
-		 
-		deftext = ['Should Print a ',lang,' stored format by Array ',def,' callback'];
-		dispcase = ['1. Should Print label <br />2.Should Print a ',lang,' stored format on the printer fields specified by the Array'];
-		dispexp = ['Should Print a ',lang,' stored format on the printer fields specified by the Array'];
-	
-		it( deftext.join('') , function() {
-			dispTestCaseRunning(dispcase.join(''));
-			dispExpectedResult(dispexp.join(''));
-			//Common Method implemented to wait for tester to run the test.Code available in specHelper.js
-			_result.waitToRunTest();
-			
-			doPrintTestLabel();
-			doSetLabelLength(500);
-			runs(function() {
-				callresult = null;
-				if(callback_value == 0) {
-					thisprinter.printStoredFormatWithArray(formatpath, arrayvalue, cbk);
-				}
-				else if(callback_value == 1) {
-					callresult = thisprinter.printStoredFormatWithArray(formatpath, arrayvalue);
-				}	
-				else if(callback_value == 2) {
-					thisprinter.printStoredFormatWithArray(formatpath, arrayvalue, function(callbackValue) {callresult = callbackValue;});
-				}	
-			});
-			waitsFor(function() {
-					return callresult !== null;
-			}, 'wait to Print', 30000);
-			
-			runs(function() {
-			
-				if(lang != 'invalid')	{
-					//	expect(callresult).toEqual(Rho.PrinterZebra.PRINTER_STATUS_SUCCESS);
-					displayResult(jasmine.getEnv().currentSpec.description, callresult.toString());
-				}	
-				else {	
-					//	expect(callresult).toEqual(Rho.PrinterZebra.PRINTER_STATUS_ERROR);
-					displayResult(jasmine.getEnv().currentSpec.description, callresult.toString());
-				}	
-			});		
-			_result.waitForResponse();
-		});		
-		
-	
-	}
-	xdescribe('printStoredFormatWithArray method', function() {
-		it('should connect', function() {
-				doConnect();
-		});
-		doprintStoredFormatWithArray(zplformatpath, arrayzpl, 0, "ZPL Language");
-		doprintStoredFormatWithArray(zplformatpath, arrayzpl, 1, "ZPL Language");
-		doprintStoredFormatWithArray(zplformatpath, arrayzpl, 2, "ZPL Language");
-		
-		doprintStoredFormatWithArray(ccplformatpath, arrayccpl, 0, "CCPL Language");
-		doprintStoredFormatWithArray(ccplformatpath, arrayccpl, 1, "CCPL Language");
-		doprintStoredFormatWithArray(ccplformatpath, arrayccpl, 2, "CCPL Language");
-		
-		doprintStoredFormatWithArray(invalidformatpath, invalidzplhash, 0, "invalid");
-		
-	})
-	
-	function doprintStoredFormatWithHash(formatpath, hashvalue, callback_value, lang) {
-		var deftext = [];
-		var def = '';
-		if (callback_value == 0) {
-			def = 'with'
-		}
-		else if(callback_value == 1) {
-			def = 'without'
-		}
-		else if(callback_value == 2) {
-			def = 'Anonymous'
-		}
-		 
-		deftext = ['Should Print a ',lang,' stored format by Hash ',def,' callback'];
-		
-		it( deftext.join('') , function() {
-			doPrintTestLabel();
-			doSetLabelLength(500);
-			runs(function() {
-				callresult = null;
-				if(callback_value == 0) {
-					thisprinter.printStoredFormatWithHash(formatpath, hashvalue, cbk);
-				}
-				else if(callback_value == 1) {
-					callresult = thisprinter.printStoredFormatWithHash(formatpath, hashvalue);
-				}	
-				else if(callback_value == 2) {
-					thisprinter.printStoredFormatWithHash(formatpath, hashvalue, function(callbackValue) {callresult = callbackValue;});
-				}	
-			});
-			waitsFor(function() {
-					return callresult !== null;
-			}, 'wait to Print', 30000);
-			
-			runs(function() {
-			
-				if(lang != 'invalid')	{
-						expect(callresult).toEqual(Rho.PrinterZebra.PRINTER_STATUS_SUCCESS);
-					}	
-				else {	
-						expect(callresult).toEqual(Rho.PrinterZebra.PRINTER_STATUS_ERROR);
-				}	
-			});		
-		});		
-	}
-	
+
 	describe('printStoredFormatWithHash method', function() {
 		it('should connect', function() {
-				doConnect();
+			doConnect();
 		});
-		doprintStoredFormatWithHash(zplformatpath, hashzpl, 0, "ZPL Language");
-		doprintStoredFormatWithHash(zplformatpath, hashzpl, 1, "ZPL Language");
-		doprintStoredFormatWithHash(zplformatpath, hashzpl, 2, "ZPL Language");
-		
-		doprintStoredFormatWithHash(ccplformatpath, hashccpl, 0, "CCPL Language");
-		doprintStoredFormatWithHash(ccplformatpath, hashccpl, 1, "CCPL Language");
-		doprintStoredFormatWithHash(ccplformatpath, hashccpl, 2, "CCPL Language");
-		
-		doprintStoredFormatWithHash(invalidformatpath, invalidzplhash, 0, "invalid");
+
+		doprintStoredFormatWithHash(zplformatpath, hashzpl, 'with', "ZPL Language");
+        doprintStoredFormatWithHash(zplformatpath, hashzpl, 'without', "ZPL Language");
+        doprintStoredFormatWithHash(zplformatpath, hashzpl, 'Anonymous', "ZPL Language");
+        
+        doprintStoredFormatWithHash(ccplformatpath, hashccpl, 'with', "CCPL Language");
+        doprintStoredFormatWithHash(ccplformatpath, hashccpl, 'without', "CCPL Language");
+        doprintStoredFormatWithHash(ccplformatpath, hashccpl, 'Anonymous', "CCPL Language");
+        
+        doprintStoredFormatWithHash(invalidformatpath, invalidzplhash, 'with', "invalid");
 		
 	});
 	
 	
-	function doprintStoredFormatWithArray(formatpath, arrayvalue, callback_value, lang) {
+	function doprintStoredFormatWithArray(formatpath, arrayvalue, callback_type, lang) {
+		var deftext = ['Should Print a ',lang,' stored format by Array ',callback_type,' callback'];
+		var dispcase = ['1. Should Print label <br />2.Should Print a ',lang,' stored format on the printer fields specified by the Array'];
+		var dispexp = ['Should Print a ',lang,' stored format on the printer fields specified by the Array'];
 	
-		var deftext = [];
-		var dispcase = [];
-		var dispexp = [];
-		var def = '';
-		if (callback_value == 0) {
-			def = 'with'
-		}
-		else if(callback_value == 1) {
-			def = 'without'
-		}
-		else if(callback_value == 2) {
-			def = 'Anonymous'
-		}
-		 
-		deftext = ['Should Print a ',lang,' stored format by Array ',def,' callback'];
-		
 		it( deftext.join('') , function() {
+			dispTestCaseRunning(dispcase.join(''));
+			dispExpectedResult(dispexp.join(''));
+			//Common Method implemented to wait for tester to run the test.Code available in specHelper.js
+			_result.waitToRunTest();
+			
 			doPrintTestLabel();
 			doSetLabelLength(500);
+
 			runs(function() {
 				callresult = null;
-				if(callback_value == 0) {
+				if(callback_value == 'with') {
 					thisprinter.printStoredFormatWithArray(formatpath, arrayvalue, cbk);
 				}
-				else if(callback_value == 1) {
+				else if(callback_value == 'without') {
 					callresult = thisprinter.printStoredFormatWithArray(formatpath, arrayvalue);
 				}	
-				else if(callback_value == 2) {
+				else if(callback_value == 'Anonymous') {
 					thisprinter.printStoredFormatWithArray(formatpath, arrayvalue, function(callbackValue) {callresult = callbackValue;});
 				}	
 			});
+
 			waitsFor(function() {
-					return callresult !== null;
+				return callresult !== null;
 			}, 'wait to Print', 30000);
 			
 			runs(function() {
-			
 				if(lang != 'invalid')	{
-						expect(callresult).toEqual(Rho.PrinterZebra.PRINTER_STATUS_SUCCESS);
+					displayResult(jasmine.getEnv().currentSpec.description, callresult.toString());
 				}	
 				else {	
-						expect(callresult).toEqual(Rho.PrinterZebra.PRINTER_STATUS_ERROR);
+					displayResult(jasmine.getEnv().currentSpec.description, callresult.toString());
 				}	
-			});		
+			});	
+
+			_result.waitForResponse();
 		});		
 	}
-	
+
 	describe('printStoredFormatWithArray method', function() {
 		it('should connect', function() {
-				doConnect();
+			doConnect();
 		});
-		doprintStoredFormatWithArray(zplformatpath, arrayzpl, 0, "ZPL Language");
-		doprintStoredFormatWithArray(zplformatpath, arrayzpl, 1, "ZPL Language");
-		doprintStoredFormatWithArray(zplformatpath, arrayzpl, 2, "ZPL Language");
-		
-		doprintStoredFormatWithArray(ccplformatpath, arrayccpl, 0, "CCPL Language");
-		doprintStoredFormatWithArray(ccplformatpath, arrayccpl, 1, "CCPL Language");
-		doprintStoredFormatWithArray(ccplformatpath, arrayccpl, 2, "CCPL Language");
-		
-		doprintStoredFormatWithArray(invalidformatpath, invalidzplhash, 0, "invalid");
+
+		doprintStoredFormatWithArray(zplformatpath, arrayzpl, 'with', "ZPL Language");
+        doprintStoredFormatWithArray(zplformatpath, arrayzpl, 'without', "ZPL Language");
+        doprintStoredFormatWithArray(zplformatpath, arrayzpl, 'Anonymous', "ZPL Language");
+        
+        doprintStoredFormatWithArray(ccplformatpath, arrayccpl,'with', "CCPL Language");
+        doprintStoredFormatWithArray(ccplformatpath, arrayccpl, 'without', "CCPL Language");
+        doprintStoredFormatWithArray(ccplformatpath, arrayccpl, 'Anonymous', "CCPL Language");
+        
+        doprintStoredFormatWithArray(invalidformatpath, invalidzplhash, 'with', "invalid");
 		
 	});
+	
 
 
 	
