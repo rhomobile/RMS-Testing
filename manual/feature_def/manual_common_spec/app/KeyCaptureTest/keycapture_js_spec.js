@@ -41,12 +41,12 @@ describe("KeyCapture Test", function() {
 				if (isWindowsMobilePlatform())
 				{					
 					setInstruction("click inside textbox and Press hardware key " +hardwareKeysTest.testKey11.description+"press other keys aswell");
-					setExpected("Callback should fire with value" +hardwareKeysTest.testKey11.string + "only and " + hardwareKeysTest.testKey11.description +"should showup in textbox");
+					setExpected("Callback should fire with value" +hardwareKeysTest.testKey11.value + "only and " + hardwareKeysTest.testKey11.description +"should showup in textbox");
 				}
 				else
 				{
 					setInstruction("Press hardware key " +hardwareKeysTest.testKey11.description+"press other keys aswell");
-					setExpected("Callback should fire with value " +hardwareKeysTest.testKey11.string+"only and pressed key should be dispatched. Note:Dispatch is NA for ios");
+					setExpected("Callback should fire with value " +hardwareKeysTest.testKey11.value+"only and pressed key should be dispatched. Note:Dispatch is NA for ios");
 				}
 				Rho.KeyCapture.captureKey(true,hardwareKeysTest.testKey11.string,capturekeycallback);
 			});
@@ -73,12 +73,12 @@ describe("KeyCapture Test", function() {
 				if (isWindowsMobilePlatform())
 				{
 					setInstruction("Press hardware key " +hardwareKeysTest.testKey13.description+" press other keys as well");
-					setExpected("Callback should fire with value " +hardwareKeysTest.testKey13.string+ " only and only " +hardwareKeysTest.testKey13.description+" should not comeup in textbox" );
+					setExpected("Callback should fire with value " +hardwareKeysTest.testKey13.value+ " only and only " +hardwareKeysTest.testKey13.description+" should not comeup in textbox" );
 				}
 				else
 				{
 					setInstruction("Press hardware key " +hardwareKeysTest.testKey13.description+" press other keys as well");
-					setExpected("Callback should fire with value " +hardwareKeysTest.testKey13.string+" only and only "+hardwareKeysTest.testKey13.description+ " key should not dispatch. Note:Dispatch is NA for ios");						
+					setExpected("Callback should fire with value " +hardwareKeysTest.testKey13.value+" only and only "+hardwareKeysTest.testKey13.description+ " key should not dispatch. Note:Dispatch is NA for ios");						
 				}
 				//var keyval1 = Rho.KeyCapture.captureKey(true,hardwareKeysTest.testKey13.string);
 				Rho.KeyCapture.captureKey(false,hardwareKeysTest.testKey13.string,capturekeycallback);
@@ -104,7 +104,7 @@ describe("KeyCapture Test", function() {
 			{
 				setObjective("VT289-014 | call captureKey keyValue for " +hardwareKeysTest.testKey14.description+" and callback as Anynomous function");
 				setInstruction("Press hardware key " +hardwareKeysTest.testKey14.description);
-				setExpected("Callback should fire with value " +hardwareKeysTest.testKey14.string);
+				setExpected("Callback should fire with value " +hardwareKeysTest.testKey14.value);
 				Rho.KeyCapture.captureKey(true,hardwareKeysTest.testKey14.string,function(data){callbackdata(data.keyValue);});
 			});
 

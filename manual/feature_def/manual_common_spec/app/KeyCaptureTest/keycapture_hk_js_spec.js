@@ -173,7 +173,7 @@ describe("KeyCapture Test", function() {
 					setObjective("VT289-006 | set homeKeyValue to symbol key #");
 					setInstruction("press the symbol key # and check for application navigat");
 					setExpected("Application should navigate to Homepage of application after Pressing the alphabet key #");
-					Rho.KeyCapture.homeKeyValue = '0x78';
+					Rho.KeyCapture.homeKeyValue = '0x10';
 				});
 
 				runs(function()
@@ -268,7 +268,7 @@ describe("KeyCapture Test", function() {
 				{
 					setObjective("VT289-033 | call captureKey after setting homeKeyValue");
 					setInstruction("Click inside Textbox, Press enterkey");
-					setExpected("Application should navigate to Homepage of application after Pressing enter key, the capture callback will not fire. ");
+					setExpected("Application should not navigate to Homepage of application after Pressing enter key, the capture callback will fire. ");
 					Rho.KeyCapture.homeKeyValue = '0x0D';
 					Rho.KeyCapture.captureKey(true,'0x0D',capturekeycallback);
 				});
