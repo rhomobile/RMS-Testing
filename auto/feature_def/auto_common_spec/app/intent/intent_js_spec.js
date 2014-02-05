@@ -69,7 +69,7 @@ describe("Intent JS API Test", function() {
 		},
 		{
 			"id":"VT328_51",
-			"description":"Check for callback while launching browser from test application",
+			"description":"Check for callback while launching Music Player from test application",
 			"intentType":"Rho.Intent.START_ACTIVITY",
 			"intentAction":"ACTION_MAIN",
 			"intentCategories":["CATEGORY_APP_MUSIC"],
@@ -81,7 +81,7 @@ describe("Intent JS API Test", function() {
 		},
 		{
 			"id":"VT328_52",
-			"description":"Check for callback while launching browser from test application",
+			"description":"Check for callback while launching calculator from test application",
 			"intentType":"Rho.Intent.START_ACTIVITY",
 			"intentAction":"ACTION_MAIN",
 			"intentCategories":["CATEGORY_APP_CALCULATOR"],
@@ -93,7 +93,7 @@ describe("Intent JS API Test", function() {
 		},
 		{
 			"id":"VT328_53",
-			"description":"Check for callback while launching browser from test application",
+			"description":"Check for callback while launching calendar from test application",
 			"intentType":"Rho.Intent.START_ACTIVITY",
 			"intentAction":"ACTION_MAIN",
 			"intentCategories":["CATEGORY_APP_CALENDAR"],
@@ -105,7 +105,7 @@ describe("Intent JS API Test", function() {
 		},
 		{
 			"id":"VT328_54",
-			"description":"Check for callback while launching browser from test application",
+			"description":"Check for callback while launching contacts from test application",
 			"intentType":"Rho.Intent.START_ACTIVITY",
 			"intentAction":"ACTION_MAIN",
 			"intentCategories":["CATEGORY_APP_CONTACTS"],
@@ -117,7 +117,7 @@ describe("Intent JS API Test", function() {
 		},
 		{
 			"id":"VT328_55",
-			"description":"Check for callback while launching browser from test application",
+			"description":"Check for callback while launching email from test application",
 			"intentType":"Rho.Intent.START_ACTIVITY",
 			"intentAction":"ACTION_MAIN",
 			"intentCategories":["CATEGORY_APP_EMAIL"],
@@ -129,7 +129,7 @@ describe("Intent JS API Test", function() {
 		},
 		{
 			"id":"VT328_56",
-			"description":"Check for callback while launching browser from test application",
+			"description":"Check for callback while launching gallery from test application",
 			"intentType":"Rho.Intent.START_ACTIVITY",
 			"intentAction":"ACTION_MAIN",
 			"intentCategories":["CATEGORY_APP_GALLERY"],
@@ -141,7 +141,7 @@ describe("Intent JS API Test", function() {
 		},
 		{
 			"id":"VT328_57",
-			"description":"Check for callback while launching browser from test application",
+			"description":"Check for callback while launching messaging from test application",
 			"intentType":"Rho.Intent.START_ACTIVITY",
 			"intentAction":"ACTION_MAIN",
 			"intentCategories":["CATEGORY_APP_MESSAGING"],
