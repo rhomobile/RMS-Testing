@@ -172,7 +172,6 @@ var dpx_tests = (function() {
         var dpx = new Rho.DPX();
 
         var params = {
-            'template': 'file://' + encodeURI(Rho.RhoFile.join(TEMPLATES_DIR, $('input.form-control.x-template').val())),
 
             'debug': false,
 
@@ -180,7 +179,9 @@ var dpx_tests = (function() {
             'hapticFeedback': true,
             'ledFeedback': true,
 
-            'uiResultConfirmation': false
+            'uiResultConfirmation': false,
+
+            'template': 'file://' + encodeURI(Rho.RhoFile.join(TEMPLATES_DIR, $('input.form-control.x-template').val()))
         };
 
         each(params, function(k, v) {
@@ -203,14 +204,13 @@ var dpx_tests = (function() {
     var capture = function() {
         try {
             var dpx = create_dpx();
-            dpx.setCallback(function(dict) {
+            dpx.captureDocument(function(dict) {
                 callback(dict, dpx);
 
                 if (dict['callbackType'] === Rho.DPX.STOP) {
                     dpx.close();
                 }
             });
-            dpx.captureDocument();
         } catch (e) {
             log('EXCEPTION ' + e);
         }
@@ -221,9 +221,6 @@ var dpx_tests = (function() {
     var open = function() {
         try {
             dpx = create_dpx();
-            dpx.setCallback(function(dict) {
-                callback(dict, dpx);
-            });
         } catch (e) {
             log('EXCEPTION ' + e);
         }
@@ -231,7 +228,9 @@ var dpx_tests = (function() {
 
     var start = function() {
         try {
-            dpx.captureDocument();
+            dpx.captureDocument(function(dict) {
+                callback(dict, dpx);
+            });
         } catch (e) {
             log('EXCEPTION ' + e);
         }
