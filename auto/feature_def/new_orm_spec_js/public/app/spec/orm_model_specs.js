@@ -777,6 +777,17 @@ if (useNewOrm) {
       //expect(res.count()).toEqual(1);
       expect(res.get("name")).toEqual("Foolo");
   });
+
+  it("Should return model object(s) based on sql query", function() {
+    model.create({"name":"Mobio"});
+    model.create({"name":"Zoolo"});
+    model.create({"name":"Foolo"});
+    // Return array of objects ordered by name
+    var res = model.findBySql("select * from Product order by name");
+
+    expect(res[0]["name"]).toEqual("Foolo");
+  });
+
 } // end of useNewOrm
 
 });
