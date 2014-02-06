@@ -149,7 +149,7 @@ describe('Signature specs', function () {
 
             runs(function () {
                 expect(Rho.Signature.bgColor).toEqual('#FF0000');
-                expect(Rho.Signature.border).toEqual(true);
+                expect(Rho.Signature.border).toEqual(defaultBorderValue);
                 expect(Rho.Signature.penWidth).toEqual(2);
             });
         });

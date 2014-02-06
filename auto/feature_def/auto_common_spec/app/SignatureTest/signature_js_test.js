@@ -35,7 +35,7 @@ var arr_sig_property = [
 	testName		:	"VT299-1005 | Set border :false| false",
 	propertyName	:	"border",
 	sigTypes		:	"show",
-	OSTypes			:	"All",
+	OSTypes			:	"ANDROID WM",
 	propertyValue	:	"false",
 	expectedResult	:	false
 },
