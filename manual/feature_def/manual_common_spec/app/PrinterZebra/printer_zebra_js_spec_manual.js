@@ -297,7 +297,7 @@ describe('Printer Zebra', function() {
 
         runs(function() {
             //expect(callresult.status).toEqual(Rho.PrinterZebra.PRINTER_STATUS_SUCCESS);
-						displayResult(jasmine.getEnv().currentSpec.description, callresult.toString());
+			displayResult(jasmine.getEnv().currentSpec.description, callresult.toString());
             callresult = null;
         });
 					
@@ -337,6 +337,35 @@ describe('Printer Zebra', function() {
 		_result.waitForResponse();
     }
 
+   
+    function doPrintFileDiffTypeCallback(filename, options, callback_type) {
+        runs(function() {
+            callresult = null;
+            if(callback_type == 'without')  {
+                callresult = thisprinter.printFile(filename, options);
+            }
+            else if (callback_type == 'Anonymous') {
+                thisprinter.printFile(filename, options, function(callbackValue) { callresult = callbackValue;})
+            }
+        });
+
+        waitsFor(function() {
+            return callresult !== null;
+        }, 'wait until printingFile', 30000);
+
+        /*runs(function() {
+            if (isOk !== false) {
+                expect(callresult).toEqual(Rho.PrinterZebra.PRINTER_STATUS_SUCCESS);
+            } else {
+                expect(callresult).toNotEqual(Rho.PrinterZebra.PRINTER_STATUS_SUCCESS);
+            }
+        });*/
+        runs(function() {
+            displayResult(jasmine.getEnv().currentSpec.description, callresult.toString());
+        });
+        _result.waitForResponse();
+    }
+
     function doPrintRawCommand(cmd) {
         runs(function() {
             callresult = null;
@@ -351,6 +380,27 @@ describe('Printer Zebra', function() {
 			displayResult(jasmine.getEnv().currentSpec.description, callresult.toString());
 		});
     }
+
+    function doPrintRawCommandDiffTypeCallback(cmd, callback_type) {
+        runs(function() {
+            callresult = null;
+            if(callback_type == 'without')  {
+                callresult = thisprinter.printRawString(cmd, {});
+            }
+            else if (callback_type == 'Anonymous') {
+                thisprinter.printRawString(cmd, {}, function(callbackValue) { callresult = callbackValue;})
+            }
+        });
+
+        waitsFor(function() {
+            return callresult !== null;
+        }, 'wait until setting lable length', 15000);
+                
+        runs(function() {
+            displayResult(jasmine.getEnv().currentSpec.description, callresult.toString());
+        });
+    }
+     
 
     // printFile method
     describe('printFile method', function() {
@@ -370,6 +420,30 @@ describe('Printer Zebra', function() {
 				
         });
 
+        it('should print png without callback', function() {
+            dispTestCaseRunning("1. Should Print label <br />2. Should print PNG image.");
+            dispExpectedResult("Should print png without callback");
+            //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
+            _result.waitToRunTest();
+            
+            doPrintTestLabel();
+            doSetLabelLength(500);
+            doPrintFileDiffTypeCallback(pngimagepath_320px, {}, 'without');
+                
+        });
+
+        it('should print png Anonymous callback', function() {
+            dispTestCaseRunning("1. Should Print label <br />2. Should print PNG image.");
+            dispExpectedResult("Should print png Anonymous callback");
+            //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
+            _result.waitToRunTest();
+            
+            doPrintTestLabel();
+            doSetLabelLength(500);
+            doPrintFileDiffTypeCallback(pngimagepath_320px, {}, 'Anonymous');
+                
+        });
+
         it('should print jpeg with callback', function() {
 			dispTestCaseRunning("1. Should Print label <br />2. Should print jpeg image.");
 			dispExpectedResult("should print jpeg with callback");
@@ -380,7 +454,31 @@ describe('Printer Zebra', function() {
             doSetLabelLength(500);
             doPrintPrintFile(jpgimagepath_320px, {});
         });
-        it('should not print bmp with callback', function() {
+
+         it('should print jpeg without callback', function() {
+            dispTestCaseRunning("1. Should Print label <br />2. Should print PNG image.");
+            dispExpectedResult("Should print jpeg without callback");
+            //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
+            _result.waitToRunTest();
+            
+            doPrintTestLabel();
+            doSetLabelLength(500);
+            doPrintFileDiffTypeCallback(jpgimagepath_320px, {}, 'without');
+                
+        });
+
+        it('should print jpeg Anonymous callback', function() {
+            dispTestCaseRunning("1. Should Print label <br />2. Should print PNG image.");
+            dispExpectedResult("Should print jpeg Anonymous callback");
+            //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
+            _result.waitToRunTest();
+            
+            doPrintTestLabel();
+            doSetLabelLength(500);
+            doPrintFileDiffTypeCallback(jpgimagepath_320px, {}, 'Anonymous');
+        });   
+
+        it('should print bmp with callback', function() {
 			dispTestCaseRunning("1. Should Print label <br />2. Should print bmp image.");
 			dispExpectedResult("should print bmp with callback");
 			//Common Method implemented to wait for tester to run the test.Code available in specHelper.js
@@ -390,7 +488,32 @@ describe('Printer Zebra', function() {
             doSetLabelLength(500);
             doPrintPrintFile(bmpimagepath_320px, {}, false);
         });
-        it('should not print pdf with callback', function() {
+
+        it('should print bmp without callback', function() {
+            dispTestCaseRunning("1. Should Print label <br />2. Should print PNG image.");
+            dispExpectedResult("Should print bmp without callback");
+            //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
+            _result.waitToRunTest();
+            
+            doPrintTestLabel();
+            doSetLabelLength(500);
+            doPrintFileDiffTypeCallback(bmpimagepath_320px, {}, 'without');
+                
+        });
+
+        it('should print bmp Anonymous callback', function() {
+            dispTestCaseRunning("1. Should Print label <br />2. Should print PNG image.");
+            dispExpectedResult("Should print bmp Anonymous callback");
+            //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
+            _result.waitToRunTest();
+            
+            doPrintTestLabel();
+            doSetLabelLength(500);
+            doPrintFileDiffTypeCallback(bmpimagepath_320px, {}, 'Anonymous');
+
+        });       
+
+        it('should print pdf with callback', function() {
 			dispTestCaseRunning(" 1. Should Print label <br />2. Should print PDF file.");
 			dispExpectedResult("should print PDF with callback");
 			//Common Method implemented to wait for tester to run the test.Code available in specHelper.js
@@ -399,6 +522,31 @@ describe('Printer Zebra', function() {
             doSetLabelLength(500);
             doPrintPrintFile(pdffilepath, {}, false);
         });
+
+        it('should print pdf without callback', function() {
+            dispTestCaseRunning("1. Should Print label <br />2. Should print PNG image.");
+            dispExpectedResult("Should print pdf without callback");
+            //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
+            _result.waitToRunTest();
+            
+            doPrintTestLabel();
+            doSetLabelLength(500);
+            doPrintFileDiffTypeCallback(pdffilepath, {}, 'without');
+                
+        });
+
+        it('should print pdf Anonymous callback', function() {
+            dispTestCaseRunning("1. Should Print label <br />2. Should print PNG image.");
+            dispExpectedResult("Should print pdf Anonymous callback");
+            //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
+            _result.waitToRunTest();
+            
+            doPrintTestLabel();
+            doSetLabelLength(500);
+            doPrintFileDiffTypeCallback(pdffilepath, {}, 'Anonymous');
+
+        }); 
+
         it('should not print empty filename with callback', function() {
     		dispTestCaseRunning(" 1. Should Print label <br />2. should not print empty filename ");
     		dispExpectedResult("should not print empty filename with callback");
@@ -440,14 +588,53 @@ describe('Printer Zebra', function() {
     		_result.waitToRunTest();
             doPrintTestLabel();
             doPrintRawCommand(CommandCCPL);
-						_result.waitForResponse();
+			_result.waitForResponse();
         });
+
+         it('should print ZPL Command without callback', function() {
+            dispTestCaseRunning(" 1. Should Print label <br />2. should print ZPL Command ");
+            dispExpectedResult("should print ZPL Command without callback");
+            //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
+            _result.waitToRunTest();
+            doPrintTestLabel();
+            doPrintRawCommandDiffTypeCallback(CommandZPL, 'without');
+            _result.waitForResponse();
+        });
+
+        it('should print CPCL Command with Anonymous', function() {
+            dispTestCaseRunning(" 1. Should Print label <br />2. should print CPCL Command ");
+            dispExpectedResult("should print CPCL Command Anonymous callback");
+            //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
+            _result.waitToRunTest();
+            doPrintTestLabel();
+            doPrintRawCommandDiffTypeCallback(CommandCCPL, 'Anonymous');
+            _result.waitForResponse();
+        });
+
+        it('should not print String with callback', function() {
+            dispTestCaseRunning(" 1. Should Print label <br />2. Pass a simple string to print");
+            dispExpectedResult("should not print string with callback. Callback should return error");
+            //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
+            _result.waitToRunTest();
+            doPrintTestLabel();
+            doPrintRawCommand('Simple string');
+            _result.waitForResponse();
+        });
+
     });
 
-    function doSendFileContents(filename) {
+    function doSendFileContents(filename, callback_type) {
         runs(function() {
             callresult = null;
-            thisprinter.sendFileContents(filename,cbk);
+            if(callback_type == 'with') {
+                thisprinter.sendFileContents(filename,cbk);
+            }
+            else if(callback_type == 'without')  {
+                callresult = thisprinter.sendFileContents(filename);
+            }
+            else if (callback_type == 'Anonymous') {
+                thisprinter.sendFileContents(filename, function(callbackValue) { callresult = callbackValue;})
+            }
         });
 
         waitsFor(function() {
@@ -464,27 +651,82 @@ describe('Printer Zebra', function() {
 		_result.waitForResponse();
     }
 
+
+
     describe('sendFileContents method', function() {
         it('should connect', function() {
             doConnect();
         });
 
-        it('should print test_zpl.zpl', function() {
+        it('should print test_zpl.zpl with callback', function() {
 			dispTestCaseRunning(" 1. Should Print label <br />2. should send test_zpl.zpl file and should get printed");
 			dispExpectedResult("should print test_zpl.zpl");
 			//Common Method implemented to wait for tester to run the test.Code available in specHelper.js
 			_result.waitToRunTest();
             doPrintTestLabel();
-            doSendFileContents(test_zpl);
+            doSendFileContents(test_zpl, 'with');
         });
-        it('should print test_cpcl.lbl', function() {
-			dispTestCaseRunning(" Test");
+        it('should print test_cpcl.lbl with callback', function() {
+			dispTestCaseRunning(" 1. Should Print label <br />2. should send  test_zpl.zpl file and should get printed");
 			dispExpectedResult("should print test_CCPL.CCPL");
 			//Common Method implemented to wait for tester to run the test.Code available in specHelper.js
 			_result.waitToRunTest();
             doPrintTestLabel();
-            doSendFileContents(test_cpcl);
+            doSendFileContents(test_cpcl, 'with');
         });
+
+        it('should print txtfilepath without callback', function() {
+            dispTestCaseRunning(" 1. Should Print label <br />2. should send txtfilepath file and should get printed");
+            dispExpectedResult("should print txtfilepath");
+            //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
+            _result.waitToRunTest();
+            doPrintTestLabel();
+            doSendFileContents(txtfilepath, 'without');
+        });
+        it('should print csvfilepath Anonymous Callback', function() {
+            dispTestCaseRunning(" 1. Should Print label <br />2. should send csvfilepath file and should get printed");
+            dispExpectedResult("should print csvfilepath");
+            //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
+            _result.waitToRunTest();
+            doPrintTestLabel();
+            doSendFileContents(csvfilepath, 'Anonymous');
+        });
+
+         it('should print docfilepath with callback', function() {
+            dispTestCaseRunning(" 1. Should Print label <br />2. should send  docfilepath file and should get printed");
+            dispExpectedResult("should print docfilepath");
+            //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
+            _result.waitToRunTest();
+            doPrintTestLabel();
+            doSendFileContents(docfilepath, 'with');
+        });
+
+        it('should print htmlcssfilepath without callback', function() {
+            dispTestCaseRunning(" 1. Should Print label <br />2. should send htmlcssfilepath file and should get printed");
+            dispExpectedResult("should print htmlcssfilepath");
+            //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
+            _result.waitToRunTest();
+            doPrintTestLabel();
+            doSendFileContents(htmlcssfilepath, 'without');
+        });
+        it('should print jsfilepath Anonymous Callback', function() {
+            dispTestCaseRunning(" 1. Should Print label <br />2. should send jsfilepath file and should get printed");
+            dispExpectedResult("should print jsfilepath");
+            //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
+            _result.waitToRunTest();
+            doPrintTestLabel();
+            doSendFileContents(test_cpcl, 'Anonymous');
+        });
+
+        it('should not print invalidcontentsfilepath with callback', function() {
+            dispTestCaseRunning(" 1. Should Print label <br />2. should send invalidcontentsfilepath file and should not get printed");
+            dispExpectedResult("should not print invalidcontentsfilepath");
+            //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
+            _result.waitToRunTest();
+            doPrintTestLabel();
+            doSendFileContents(invalidcontentsfilepath, 'with');
+        });
+
     });
 
 
@@ -561,6 +803,60 @@ describe('Printer Zebra', function() {
                 }
             }
         }
+    });
+
+ function generatePrintImageWithoutAnonymous(callback_type, from,x,y,options,isOk,force) {
+         if ((!Rho.RhoFile.exists(from))) {
+            if (!isOk && !force) {
+                return;
+            }
+            isOk = false;
+         }
+        var def = isOk ? 'should ' : 'should not ';
+        var deftext = [def,'print image',callback_type,'callback',Rho.RhoFile.basename(from),'x:',x,'y:',y,'options:',JSON.stringify(options,null," ") ];
+
+        it( deftext.join(' ') , function() {
+            dispTestCaseRunning("1. Should Print label <br />2. "+def+" Print "+Rho.RhoFile.basename(from)+" image");
+            dispExpectedResult(jasmine.getEnv().currentSpec.description, callresult.toString());
+            //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
+            _result.waitToRunTest();
+            doPrintTestLabel();
+
+            runs(function() {
+                callresult = null;
+                if(callback_type == 'without')  {
+                    callresult = thisprinter.printImageFromFile(from,x,y,options);
+                }
+                else if (callback_type == 'Anonymous') {
+                    thisprinter.printImageFromFile(from,x,y,options,function(callbackValue) { callresult = callbackValue;})
+                }
+            });
+
+            waitsFor(function() {
+                return callresult !== null;
+            }, 'wait printImageFromFile', 30000);
+
+    
+            runs(function() {
+                displayResult(jasmine.getEnv().currentSpec.description, callresult.toString());
+            });
+            _result.waitForResponse();
+        });
+    }
+
+    describe('printImageFromFile method', function() {
+        it('should connect', function() {
+            doConnect();
+        });
+
+        generatePrintImageWithoutAnonymous('without', pngimagepath_320px,100,100,{'width':10,'height':10,'isInsideFormat':true},true);
+        generatePrintImageWithoutAnonymous('Anonymous', pngimagepath_640px,10,10,{'width':50,'height':50,'isInsideFormat':false},true);
+        generatePrintImageWithoutAnonymous('Anonymous', pngimagepath_1024px,10,10,{'width':-1,'height':-1,'isInsideFormat':false},true);
+        generatePrintImageWithoutAnonymous('without', jpgimagepath_320px,100,100,{'width':10,'height':10,'isInsideFormat':true},true);
+        generatePrintImageWithoutAnonymous('Anonymous', jpgimagepath_640px,10,10,{'width':50,'height':50,'isInsideFormat':true},true);
+        generatePrintImageWithoutAnonymous('Anonymous', pngimagepath_1024px,10,10,{'width':-1,'height':-1,'isInsideFormat':false},true);
+
+        
     });
 
 	var listofrequeststate = [Rho.PrinterZebra.PRINTER_STATE_IS_HEAD_COLD, Rho.PrinterZebra.PRINTER_STATE_IS_HEAD_OPEN, Rho.PrinterZebra.PRINTER_STATE_IS_HEAD_TOO_HOT, Rho.PrinterZebra.PRINTER_STATE_IS_PARTIAL_FORMAT_IN_PROGRESS, Rho.PrinterZebra.PRINTER_STATE_IS_PAUSED, Rho.PrinterZebra.PRINTER_STATE_IS_RECEIVE_BUFFER_FULL, Rho.PrinterZebra.PRINTER_STATE_IS_RIBBON_OUT, Rho.PrinterZebra.PRINTER_STATE_LABEL_LENGTH_IN_DOTS, Rho.PrinterZebra.PRINTER_STATE_LABELS_REMAINING_IN_BATCH, Rho.PrinterZebra.PRINTER_STATE_NUMBER_OF_FORMATS_IN_RECEIVE_BUFFER, Rho.PrinterZebra.PRINTER_STATE_IS_READY_TO_PRINT, 	Rho.PrinterZebra.PRINTER_STATE_IS_COVER_OPENED, Rho.PrinterZebra.PRINTER_STATE_IS_DRAWER_OPENED, Rho.PrinterZebra.PRINTER_STATE_IS_PAPER_OUT, Rho.PrinterZebra.PRINTER_STATE_IS_BATTERY_LOW];
@@ -763,7 +1059,146 @@ describe('Printer Zebra', function() {
 	});
 	
 
+    describe('getAllProperties method', function() {
+        it('should connect', function() {
+            doConnect();
+        });
 
+        it( "Should get All printer zebra properties using getAllProperties", function() {
+            dispTestCaseRunning("1. Should Display All printer zebra properties");
+            dispExpectedResult(jasmine.getEnv().currentSpec.description, callresult.toString());
+            //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
+            _result.waitToRunTest();
+            var allproperties = {};
+            runs(function() {
+                allproperties = thisprinter.getAllProperties();
+            });
+
+            runs(function() {
+                displayResult(jasmine.getEnv().currentSpec.description, JSON.stringify(allproperties));
+            });
+            _result.waitForResponse();
+        });
+       
+    });
+
+    describe('maxTimeoutForRead property ', function() {
+        it('should connect', function() {
+            thisprinter.maxTimeoutForRead = 1000;
+            doConnect();
+        });
+
+        it('should get timeout error after setting maxTimeoutForRead to 1 sec', function() {
+            dispTestCaseRunning("1. maxTimeoutForRead to 1 sec is already set<br />2. Turn off the printer or move outside the printer network and run the test to print");
+            dispExpectedResult("Should get timeout error after 1 sec and Should not print any thing");
+            //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
+            _result.waitToRunTest();
+        
+            runs(function() {
+                doPrintTestLabel(); 
+            }); 
+
+            _result.waitForResponse();
+
+        })    
+
+    });
+
+    describe('maxTimeoutForOpen property ', function() {
+        it('should connect', function() {
+            doConnect();
+        });
+
+        it('should print text successfully after setting maxTimeoutForOpen to 10 sec', function() {
+            dispTestCaseRunning("1. Set maxTimeoutForOpen to 10 sec <br />2. Print any text");
+            dispExpectedResult("Should get print successfully within 10 sec");
+            //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
+            _result.waitToRunTest();
+            
+            runs(function() {
+                thisprinter.maxTimeoutForOpen = 10000;
+                doPrintTestLabel(); 
+            }); 
+
+            _result.waitForResponse();
+
+        })  
+
+        it('should get timeout error setting maxTimeoutForOpen to 0 sec', function() {
+            dispTestCaseRunning("1. Set maxTimeoutForOpen to 0 sec<br />2. Print after 5 sec");
+            dispExpectedResult("should get timeout error");
+            //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
+            _result.waitToRunTest();
+            
+            runs(function() {
+                thisprinter.maxTimeoutForOpen = 10000;
+            }); 
+
+            waitsFor(function() {
+                return true;
+            }, 'wait for timeout', 5000);
+
+            runs(function() {
+                doPrintTestLabel(); 
+            }); 
+
+            _result.waitForResponse();
+
+        })   
+
+    });
+
+    describe('timeToWaitForMoreData property ', function() {
+        it('should connect', function() {
+            doConnect();
+        });
+
+        it('should print 2 labels successfully after setting timeToWaitForMoreData to 10 sec', function() {
+            dispTestCaseRunning("1. set timeToWaitForMoreData to 10 sec <br />2. Print any text");
+            dispExpectedResult("should print 2 labels successfully");
+            //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
+            _result.waitToRunTest();
+
+            runs(function() {
+                doPrintTestLabel(); 
+            }); 
+            
+            runs(function() {
+                thisprinter.timeToWaitForMoreData = 10000;
+                doPrintTestLabel(); 
+            }); 
+
+            _result.waitForResponse();
+
+        })  
+
+       it('should print 1 label only after setting timeToWaitForMoreData to 0 sec', function() {
+            dispTestCaseRunning("1. set timeToWaitForMoreData to 0 sec <br />2. Print any text");
+            dispExpectedResult("should print 1 label only");
+            //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
+            _result.waitToRunTest();
+
+            runs(function() {
+                doPrintTestLabel(); 
+            }); 
+            
+            runs(function() {
+                thisprinter.timeToWaitForMoreData = 0;
+            }); 
+
+            waitsFor(function() {
+                return true;
+            }, 'wait for timeout', 5000);
+
+            runs(function() {
+                doPrintTestLabel(); 
+            }); 
+
+            _result.waitForResponse();
+
+        })   
+
+    });
 	
 		
 

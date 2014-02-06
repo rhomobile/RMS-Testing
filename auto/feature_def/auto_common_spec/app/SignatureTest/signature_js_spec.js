@@ -33,20 +33,23 @@ describe('Signature specs', function () {
         }, HIDE_TIMEOUT_VALUE);
     }
 
+    preservedProperties = {};
+    preservedProperties.bgColor = Rho.Signature.bgColor;
+    //added the if condition because on WM it' faling and saying Invalid compression format
+    if (!isWindowsMobilePlatform()){
+    preservedProperties.compressionFormat = Rho.Signature.compressionFormat;}
+    preservedProperties.fileName = Rho.Signature.fileName;
+    preservedProperties.outputFormat = Rho.Signature.outputFormat;
+    preservedProperties.penColor = Rho.Signature.penColor;
+    preservedProperties.penWidth = Rho.Signature.penWidth;
+    preservedProperties.border = Rho.Signature.border;
+    preservedProperties.height = Rho.Signature.height;
+    preservedProperties.left = Rho.Signature.left;
+    preservedProperties.top = Rho.Signature.top;
+    preservedProperties.width = Rho.Signature.width;
+
 
     beforeEach(function () {
-        preservedProperties = {};
-        preservedProperties.bgColor = Rho.Signature.bgColor;
-        preservedProperties.compressionFormat = Rho.Signature.compressionFormat;
-        preservedProperties.fileName = Rho.Signature.fileName;
-        preservedProperties.outputFormat = Rho.Signature.outputFormat;
-        preservedProperties.penColor = Rho.Signature.penColor;
-        preservedProperties.penWidth = Rho.Signature.penWidth;
-        preservedProperties.border = Rho.Signature.border;
-        preservedProperties.height = Rho.Signature.height;
-        preservedProperties.left = Rho.Signature.left;
-        preservedProperties.top = Rho.Signature.top;
-        preservedProperties.width = Rho.Signature.width;
 
         flag = false;
         callbackWasCalled = false;
@@ -69,18 +72,6 @@ describe('Signature specs', function () {
             window.clearTimeout(delayHideTimeout);
             delayHideTimeout = null;
         }   
-             
-        Rho.Signature.bgColor = preservedProperties.bgColor;
-        Rho.Signature.compressionFormat = preservedProperties.compressionFormat;
-        Rho.Signature.fileName = preservedProperties.fileName;
-        Rho.Signature.outputFormat = preservedProperties.outputFormat;
-        Rho.Signature.penColor = preservedProperties.penColor;
-        Rho.Signature.penWidth = preservedProperties.penWidth;
-        Rho.Signature.border = preservedProperties.border;
-        Rho.Signature.height = preservedProperties.height;
-        Rho.Signature.left = preservedProperties.left;
-        Rho.Signature.top = preservedProperties.top;
-        Rho.Signature.width = preservedProperties.width;
 
         //Rho.Signature.hide();
     });
@@ -134,8 +125,22 @@ describe('Signature specs', function () {
 
     describe('Signature specs with show() and takeFullScreen() functions', function () {
 
-        afterEach(function () {
+        afterEach(function () {            
             Rho.Signature.hide();
+
+            Rho.Signature.bgColor = preservedProperties.bgColor;
+            //added the if condition because on WM it' faling and saying Invalid compression format
+            if (!isWindowsMobilePlatform()){
+            Rho.Signature.compressionFormat = preservedProperties.compressionFormat;}
+            Rho.Signature.fileName = preservedProperties.fileName;
+            Rho.Signature.outputFormat = preservedProperties.outputFormat;
+            Rho.Signature.penColor = preservedProperties.penColor;
+            Rho.Signature.penWidth = preservedProperties.penWidth;
+            Rho.Signature.border = preservedProperties.border;
+            Rho.Signature.height = preservedProperties.height;
+            Rho.Signature.left = preservedProperties.left;
+            Rho.Signature.top = preservedProperties.top;
+            Rho.Signature.width = preservedProperties.width;
         });
 
         it("VT299-2006 | call show() with all string |", function () {
@@ -149,7 +154,7 @@ describe('Signature specs', function () {
 
             runs(function () {
                 expect(Rho.Signature.bgColor).toEqual('#FF0000');
-                expect(Rho.Signature.border).toEqual(true);
+                expect(Rho.Signature.border).toEqual(defaultBorderValue);
                 expect(Rho.Signature.penWidth).toEqual(2);
             });
         });
@@ -434,6 +439,22 @@ describe('Signature specs', function () {
         */
 
         describe("Signature property setting Directly", function () {
+            afterEach(function () {
+                Rho.Signature.bgColor = preservedProperties.bgColor;
+                //added the if condition because on WM it' faling and saying Invalid compression format
+                if (!isWindowsMobilePlatform()){
+                Rho.Signature.compressionFormat = preservedProperties.compressionFormat;}
+                Rho.Signature.fileName = preservedProperties.fileName;
+                Rho.Signature.outputFormat = preservedProperties.outputFormat;
+                Rho.Signature.penColor = preservedProperties.penColor;
+                Rho.Signature.penWidth = preservedProperties.penWidth;
+                Rho.Signature.border = preservedProperties.border;
+                Rho.Signature.height = preservedProperties.height;
+                Rho.Signature.left = preservedProperties.left;
+                Rho.Signature.top = preservedProperties.top;
+                Rho.Signature.width = preservedProperties.width;
+            });
+
             for (var i = 0; i < showSpecArray.length; i++) {
                 (function (idx) {
                     it(showSpecArray[idx]['testName'], function () {
@@ -467,6 +488,20 @@ describe('Signature specs', function () {
 
             afterEach(function() {
                 Rho.Signature.hide();
+
+                Rho.Signature.bgColor = preservedProperties.bgColor;
+                //added the if condition because on WM it' faling and saying Invalid compression format
+                if (!isWindowsMobilePlatform()){
+                Rho.Signature.compressionFormat = preservedProperties.compressionFormat;}
+                Rho.Signature.fileName = preservedProperties.fileName;
+                Rho.Signature.outputFormat = preservedProperties.outputFormat;
+                Rho.Signature.penColor = preservedProperties.penColor;
+                Rho.Signature.penWidth = preservedProperties.penWidth;
+                Rho.Signature.border = preservedProperties.border;
+                Rho.Signature.height = preservedProperties.height;
+                Rho.Signature.left = preservedProperties.left;
+                Rho.Signature.top = preservedProperties.top;
+                Rho.Signature.width = preservedProperties.width;
             });
 
             for (var i = 0; i < showSpecArray.length; i++) {
@@ -515,6 +550,20 @@ describe('Signature specs', function () {
 
             afterEach(function() {
                 Rho.Signature.hide();
+
+                Rho.Signature.bgColor = preservedProperties.bgColor;
+                //added the if condition because on WM it' faling and saying Invalid compression format
+                if (!isWindowsMobilePlatform()){
+                Rho.Signature.compressionFormat = preservedProperties.compressionFormat;}
+                Rho.Signature.fileName = preservedProperties.fileName;
+                Rho.Signature.outputFormat = preservedProperties.outputFormat;
+                Rho.Signature.penColor = preservedProperties.penColor;
+                Rho.Signature.penWidth = preservedProperties.penWidth;
+                Rho.Signature.border = preservedProperties.border;
+                Rho.Signature.height = preservedProperties.height;
+                Rho.Signature.left = preservedProperties.left;
+                Rho.Signature.top = preservedProperties.top;
+                Rho.Signature.width = preservedProperties.width;
             });
 
             for (var i = 0; i < takeFullScreenSpecArray.length; i++) {
