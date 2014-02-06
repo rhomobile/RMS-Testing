@@ -51,6 +51,9 @@ describe('DPX Functionality Test', function() {
     beforeEach(function() {
         getformCaptureImageId = null;
         getregionImageId = null;
+        if (dpxInstance !== null) {
+            dpxInstance.close();
+        }
         dpxInstance = new Rho.DPX();
     });
 
