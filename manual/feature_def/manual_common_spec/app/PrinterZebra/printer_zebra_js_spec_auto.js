@@ -614,10 +614,18 @@ describe('Printer Zebra', function() {
    
 
 
-    function doRetrieveFileNames(filelist) {
+    function doRetrieveFileNames(filelist, callback_type) {
         runs(function() {
             callresult = null;
-            thisprinter.retrieveFileNames(cbk);
+            if(callback_type == 'with') {
+                thisprinter.retrieveFileNames(cbk);
+            }
+            else if(callback_type == 'without')  {
+                callresult = thisprinter.retrieveFileNames();
+            }
+            else if (callback_type == 'Anonymous') {
+                thisprinter.retrieveFileNames(function(callbackValue) { callresult = callbackValue;})
+            }
         });
 
         waitsFor(function() {
@@ -630,10 +638,18 @@ describe('Printer Zebra', function() {
         });
     }
 
-    function doRetrieveFileNamesWithExtensions(ext,filelist) {
+    function doRetrieveFileNamesWithExtensions(ext,filelist,callback_type) {
         runs(function() {
             callresult = null;
-            thisprinter.retrieveFileNamesWithExtensions(ext,cbk);
+            if(callback_type == 'with') {
+                thisprinter.retrieveFileNamesWithExtensions(ext,cbk);
+            }
+            else if(callback_type == 'without')  {
+                callresult = thisprinter.retrieveFileNamesWithExtensions(ext);
+            }
+            else if (callback_type == 'Anonymous') {
+                thisprinter.retrieveFileNamesWithExtensions(ext, function(callbackValue) { callresult = callbackValue;})
+            }
         });
 
         waitsFor(function() {
@@ -651,11 +667,40 @@ describe('Printer Zebra', function() {
             doConnect();
         });
 
-        it('should retrieveFileNames return non empty list', function() {
-            doRetrieveFileNames([]);
+        it('should retrieveFileNames return non empty list with callback', function() {
+            doRetrieveFileNames([], 'with');
         });
-        it('should retrieveFileNamesWithExtensions return non empty list', function() {
-            doRetrieveFileNamesWithExtensions(['FMT','LBL','GRF','PRF','CFG','WML','BAT','CPF','TXT','PCX'],[]);
+        it('should retrieveFileNames return non empty list without callback', function() {
+            doRetrieveFileNames([], 'without');
+        });
+        it('should retrieveFileNames return non empty list Anonymous callback', function() {
+            doRetrieveFileNames([], 'Anonymous');
+        });
+
+        it('should retrieveFileNamesWithExtensions return non empty list with callback', function() {
+            doRetrieveFileNamesWithExtensions(['FMT','LBL','GRF','PRF','CFG','WML','BAT','CPF','TXT','PCX'],[],'with');
+        });
+        it('should retrieveFileNamesWithExtensions return non empty list without callback', function() {
+            doRetrieveFileNamesWithExtensions(['FMT','LBL','GRF','PRF','CFG','WML','BAT','CPF','TXT','PCX'],[],'without');
+        });
+        it('should retrieveFileNamesWithExtensions return non empty list Anonymous callback', function() {
+            doRetrieveFileNamesWithExtensions(['FMT','LBL','GRF','PRF','CFG','WML','BAT','CPF','TXT','PCX'],[],'Anonymous');
+        });
+
+        it('should not retrieveFileNamesWithExtensions return  empty list with callback', function() {
+            runs(function() {
+                callresult = null;
+                thisprinter.retrieveFileNamesWithExtensions([],cbk);
+            });
+
+            waitsFor(function() {
+                return callresult !== null;
+            }, 'wait doRetrieveFileNames', 30000);
+
+            runs(function() {
+                expect(callresult.status).toEqual(Rho.PrinterZebra.PRINTER_STATUS_SUCCESS);
+                expect(callresult.fileNames).toEqual([]);
+            });
         });
     });
 
@@ -747,6 +792,70 @@ describe('Printer Zebra', function() {
         }
     });
 
+
+     function generateStoreImageWithoutAnonymous(from,to,width,height,isOk,force, callback_type) {
+        if ((!Rho.RhoFile.exists(from)) || (width == 0) || (height == 0)) {
+            if (!isOk && !force) {
+                return;
+            }
+            isOk = false;
+        }
+        var def = isOk ? 'should ' : 'should not ';
+        var deftext = [def,'store image',Rho.RhoFile.basename(from),'=>',to,'[w:',width,'h:',height,']'];
+
+        it( deftext.join(' ') , function() {
+            runs(function() {
+                callresult = null;
+               if(callback_type == 'without')  {
+                    callresult = thisprinter.storeImage(to,from,width,height);
+                }
+                else if (callback_type == 'Anonymous') {
+                    thisprinter.storeImage(to,from,width,height, function(callbackValue) { callresult = callbackValue;})
+                }
+
+            });
+
+            waitsFor(function() {
+                return callresult !== null;
+            }, 'wait storeImage', 30000);
+
+            runs(function() {
+                if (isOk !== false) {
+                    expect(callresult).toEqual(Rho.PrinterZebra.PRINTER_STATUS_SUCCESS);
+                    callresult = null;
+                    //thisprinter.retrieveFileNamesWithExtensions(['GRF'],cbk);
+                } else {
+                    expect(callresult).toNotEqual(Rho.PrinterZebra.PRINTER_STATUS_SUCCESS);
+                    callresult = null;
+                }
+            });
+        });
+
+
+    }
+
+
+    describe('storeImage method without callback and Anonymous', function() {
+        it('should connect', function() {
+            doConnect();
+        });
+
+        generateStoreImageWithoutAnonymous(pngimagepath_320px,'PNG.GRF',50,50,true,'without');
+        generateStoreImageWithoutAnonymous(pngimagepath_640px,'E:TF1.GRF',50,50,true, 'Anonymous');
+        generateStoreImageWithoutAnonymous(pngimagepath_1024px,'R:TF1.GRF',50,50,true, 'without');
+        generateStoreImageWithoutAnonymous(pngimagepath_2048px,'E:TF2.GRF',0,0,false, 'Anonymous');
+        generateStoreImageWithoutAnonymous(pngimagepath_320px,'TF2.GRF',-1,-1,true, 'without');
+
+        generateStoreImageWithoutAnonymous(jpgimagepath_320px,'JPG.GRF',50,50,true,'without');
+        generateStoreImageWithoutAnonymous(jpgimagepath_640px,'E:JF1.GRF',50,50,true, 'Anonymous');
+        generateStoreImageWithoutAnonymous(jpgimagepath_1024px,'R:JF1.GRF',50,50,true, 'without');
+        generateStoreImageWithoutAnonymous(jpgimagepath_2048px,'E:JF2.GRF',0,0,false, 'Anonymous');
+        generateStoreImageWithoutAnonymous(jpgimagepath_320px,'JF2.GRF',-1,-1,true, 'without');
+
+
+
+    });
+
     function generatePrintImage(from,x,y,options,isOk,force) {
          if ((!Rho.RhoFile.exists(from))) {
             if (!isOk && !force) {
@@ -786,21 +895,40 @@ describe('Printer Zebra', function() {
 		it( deftext.join(' ') , function() {
 			runs(function() {
 				if(type == 'string') {
-					//TODO: Add Display code
-					expect(thisprinter.property).isNotEmptyString();
+					expect(thisprinter.getProperty(property).isNotEmptyString());
 				}
 				else if (type == 'int') {
-					//TODO: Add Display code
-					expect(thisprinter.property).isNumberGreaterThenZero();
+					expect(thisprinter.getProperty(property).isNumberGreaterThenZero());
 				}
 				else if (type == 'isBoolean') {
-					//TODO: Add Display code
-					expect(thisprinter.property).isBoolean();
+					expect(thisprinter.getProperty(property).isBoolean());
 				}		
 			});
 		});
 		
-	}	
+	}
+
+    function generategetproperties(property, type) {
+        var deftext = ['Should return',properties,'value as a ',type ];
+        it( deftext.join(' ') , function() {
+            runs(function() {
+                if(type == 'string') {
+                    var data = thisprinter.getProperties([property]);
+                    expect(data).isNotEmptyString();
+                }
+                else if (type == 'int') {
+                    var data = thisprinter.getProperties([property]);
+                    data = parseInt(data[property],10);
+                    expect(data).isNumberGreaterThenZero();
+                }
+                else if (type == 'isBoolean') {
+                    var data = thisprinter.getProperties([property]);
+                    expect(data).isBoolean();
+                }       
+            });
+        });
+        
+    }   	
 	
 	describe('PrinterZebra APIs Property Get Test', function() {
 		
@@ -813,21 +941,21 @@ describe('Printer Zebra', function() {
 		for (var i = 0; i < formats.length; i++) {
 			var property = formats[i][0];
 			var type = formats[i][1];
-      generategetproperty(property, type);
+            generategetproperty(property, type);
+            generategetproperties(property, type);
 		}
 		
 		if(thisprinter.getProperty("connectionType") != "CONNECTION_TYPE_BLUETOOTH") {
 			it('Should return devicePort value as an integer', function () {
-				//TODO: Add Display code
 				expect(thisprinter.devicePort).isNumberGreaterThenZero();
 			});
+
+            it('Should return devicePort value as an integer using get properties', function () {
+                var data = thisprinter.getProperties([devicePort]);    
+                expect(data).isNumberGreaterThenZero();
+            });
 		}
 	
-	
-		/*it('Should return printerEventCallback value as a Callback', function () {
-			expect(thisprinter.printerEventCallback).toEqual(function(event) {});
-		});*/
-		
 		it('Should Get timeToWaitAfterReadInMilliseconds default value', function() {
 				expect(thisprinter.getProperty('timeToWaitAfterReadInMilliseconds')).toEqual('10');
 		});	
@@ -887,6 +1015,7 @@ describe('Printer Zebra', function() {
 		}
 	});		
 	
+    //enumerateSupportedControlLanguages method tests
 	describe('enumerateSupportedControlLanguages method', function() {
 		it('should connect', function() {
 			doConnect();
@@ -928,27 +1057,29 @@ describe('Printer Zebra', function() {
 						return enumCb !== null;
 				}, 'Timed out waiting for testing callback', 2000);
 				runs(function() {
-						expect(enumCb).toContain([Rho.PrinterZebra.PRINTER_LANGUAGE_ZPL, Rho.PrinterZebra.PRINTER_LANGUAGE_CPCL, Rho.PrinterZebra.PRINTER_LANGUAGE_EPS]);
+						expect(enumCb).toEqual([Rho.PrinterZebra.PRINTER_LANGUAGE_ZPL, Rho.PrinterZebra.PRINTER_LANGUAGE_CPCL]);
 				});
 		});
-  });
+    });
 	
-		var listofrequeststate = [Rho.PrinterZebra.PRINTER_STATE_IS_HEAD_COLD, Rho.PrinterZebra.PRINTER_STATE_IS_HEAD_OPEN, Rho.PrinterZebra.PRINTER_STATE_IS_HEAD_TOO_HOT, Rho.PrinterZebra.PRINTER_STATE_IS_PARTIAL_FORMAT_IN_PROGRESS, Rho.PrinterZebra.PRINTER_STATE_IS_PAUSED, Rho.PrinterZebra.PRINTER_STATE_IS_RECEIVE_BUFFER_FULL, Rho.PrinterZebra.PRINTER_STATE_IS_RIBBON_OUT, Rho.PrinterZebra.PRINTER_STATE_LABEL_LENGTH_IN_DOTS, Rho.PrinterZebra.PRINTER_STATE_LABELS_REMAINING_IN_BATCH, Rho.PrinterZebra.PRINTER_STATE_NUMBER_OF_FORMATS_IN_RECEIVE_BUFFER, Rho.PrinterZebra.PRINTER_STATE_PRINT_MODE, Rho.PrinterZebra.PRINTER_STATE_IS_READY_TO_PRINT, 	Rho.PrinterZebra.PRINTER_STATE_IS_COVER_OPENED, Rho.PrinterZebra.PRINTER_STATE_IS_DRAWER_OPENED, Rho.PrinterZebra.PRINTER_STATE_IS_PAPER_OUT, Rho.PrinterZebra.PRINTER_STATE_IS_BATTERY_LOW];
-		var requeststate_boolean = ["PRINTER_STATE_IS_HEAD_COLD", "PRINTER_STATE_IS_HEAD_OPEN", "PRINTER_STATE_IS_HEAD_TOO_HOT", "PRINTER_STATE_IS_PARTIAL_FORMAT_IN_PROGRESS", "PRINTER_STATE_IS_PAUSED", "PRINTER_STATE_IS_RECEIVE_BUFFER_FULL", "PRINTER_STATE_IS_RIBBON_OUT", "PRINTER_STATE_LABELS_REMAINING_IN_BATCH", "PRINTER_STATE_IS_READY_TO_PRINT", "	PRINTER_STATE_IS_COVER_OPENED", "PRINTER_STATE_IS_DRAWER_OPENED", "PRINTER_STATE_IS_PAPER_OUT", "PRINTER_STATE_IS_BATTERY_LOW"];
-		var requeststate_int = ["PRINTER_STATE_LABEL_LENGTH_IN_DOTS", "PRINTER_STATE_NUMBER_OF_FORMATS_IN_RECEIVE_BUFFER"];
-		var requeststate_printmode = ["PRINTER_STATE_PRINT_MODE"];
-		var printmode_values = [Rho.PrinterZebra.PRINT_MODE_APPLICATOR, Rho.PrinterZebra.PRINT_MODE_CUTTER, Rho.PrinterZebra.PRINT_MODE_DELAYED_CUT, Rho.PrinterZebra.PRINT_MODE_KIOSK, Rho.PrinterZebra.PRINT_MODE_LINERLESS_PEEL, Rho.PrinterZebra.PRINT_MODE_LINERLESS_REWIND, Rho.PrinterZebra.PRINT_MODE_LINERLESS_REWIND, Rho.PrinterZebra.PRINT_MODE_PARTIAL_CUTTER, Rho.PrinterZebra.PRINT_MODE_PEEL_OFF, Rho.PrinterZebra.PRINT_MODE_REWIND, Rho.PrinterZebra.PRINT_MODE_RFID, Rho.PrinterZebra.PRINT_MODE_TEAR_OFF, Rho.PrinterZebra.PRINT_MODE_UNKNOWN];
-		var requeststate_callbackValue = {};
-		function requestStateCallback(args) {
-			if (args.status == Rho.PrinterZebra.PRINTER_STATUS_SUCCESS) {
-				expect(args.status).toEqual(Rho.PrinterZebra.PRINTER_STATUS_SUCCESS);	
-				requeststate_callbackValue = args;
-					
-			} else if (args.status == Rho.PrinterZebra.PRINTER_STATUS_ERROR) {
-				expect(args.status).toEqual(Rho.PrinterZebra.PRINTER_STATUS_SUCCESS);
-			} 
-			callresult = true;
-		}
+
+    //requestState method tests
+	var listofrequeststate = [Rho.PrinterZebra.PRINTER_STATE_IS_HEAD_COLD, Rho.PrinterZebra.PRINTER_STATE_IS_HEAD_OPEN, Rho.PrinterZebra.PRINTER_STATE_IS_HEAD_TOO_HOT, Rho.PrinterZebra.PRINTER_STATE_IS_PARTIAL_FORMAT_IN_PROGRESS, Rho.PrinterZebra.PRINTER_STATE_IS_PAUSED, Rho.PrinterZebra.PRINTER_STATE_IS_RECEIVE_BUFFER_FULL, Rho.PrinterZebra.PRINTER_STATE_IS_RIBBON_OUT, Rho.PrinterZebra.PRINTER_STATE_LABEL_LENGTH_IN_DOTS, Rho.PrinterZebra.PRINTER_STATE_LABELS_REMAINING_IN_BATCH, Rho.PrinterZebra.PRINTER_STATE_NUMBER_OF_FORMATS_IN_RECEIVE_BUFFER, Rho.PrinterZebra.PRINTER_STATE_PRINT_MODE, Rho.PrinterZebra.PRINTER_STATE_IS_READY_TO_PRINT, 	Rho.PrinterZebra.PRINTER_STATE_IS_COVER_OPENED, Rho.PrinterZebra.PRINTER_STATE_IS_DRAWER_OPENED, Rho.PrinterZebra.PRINTER_STATE_IS_PAPER_OUT, Rho.PrinterZebra.PRINTER_STATE_IS_BATTERY_LOW];
+	var requeststate_boolean = ["PRINTER_STATE_IS_HEAD_COLD", "PRINTER_STATE_IS_HEAD_OPEN", "PRINTER_STATE_IS_HEAD_TOO_HOT", "PRINTER_STATE_IS_PARTIAL_FORMAT_IN_PROGRESS", "PRINTER_STATE_IS_PAUSED", "PRINTER_STATE_IS_RECEIVE_BUFFER_FULL", "PRINTER_STATE_IS_RIBBON_OUT", "PRINTER_STATE_LABELS_REMAINING_IN_BATCH", "PRINTER_STATE_IS_READY_TO_PRINT", "	PRINTER_STATE_IS_COVER_OPENED", "PRINTER_STATE_IS_DRAWER_OPENED", "PRINTER_STATE_IS_PAPER_OUT", "PRINTER_STATE_IS_BATTERY_LOW"];
+	var requeststate_int = ["PRINTER_STATE_LABEL_LENGTH_IN_DOTS", "PRINTER_STATE_NUMBER_OF_FORMATS_IN_RECEIVE_BUFFER"];
+	var requeststate_printmode = ["PRINTER_STATE_PRINT_MODE"];
+	var printmode_values = [Rho.PrinterZebra.PRINT_MODE_APPLICATOR, Rho.PrinterZebra.PRINT_MODE_CUTTER, Rho.PrinterZebra.PRINT_MODE_DELAYED_CUT, Rho.PrinterZebra.PRINT_MODE_KIOSK, Rho.PrinterZebra.PRINT_MODE_LINERLESS_PEEL, Rho.PrinterZebra.PRINT_MODE_LINERLESS_REWIND, Rho.PrinterZebra.PRINT_MODE_LINERLESS_REWIND, Rho.PrinterZebra.PRINT_MODE_PARTIAL_CUTTER, Rho.PrinterZebra.PRINT_MODE_PEEL_OFF, Rho.PrinterZebra.PRINT_MODE_REWIND, Rho.PrinterZebra.PRINT_MODE_RFID, Rho.PrinterZebra.PRINT_MODE_TEAR_OFF, Rho.PrinterZebra.PRINT_MODE_UNKNOWN];
+	var requeststate_callbackValue = {};
+	function requestStateCallback(args) {
+		if (args.status == Rho.PrinterZebra.PRINTER_STATUS_SUCCESS) {
+			expect(args.status).toEqual(Rho.PrinterZebra.PRINTER_STATUS_SUCCESS);	
+			requeststate_callbackValue = args;
+				
+		} else if (args.status == Rho.PrinterZebra.PRINTER_STATUS_ERROR) {
+			expect(args.status).toEqual(Rho.PrinterZebra.PRINTER_STATUS_SUCCESS);
+		} 
+		callresult = true;
+	}
 	
 	describe('requestState method', function() {
 		it('should connect', function() {
@@ -1023,114 +1154,69 @@ describe('Printer Zebra', function() {
 			
 	});	
 	
-	function doprintStoredFormatWithHash(formatpath, hashvalue, callback_type, lang) {
-        var deftext = ['Should Print a ',lang,' stored format by Hash ',callback_type,' callback'];
-        
-        it( deftext.join('') , function() {
-            
-            doPrintTestLabel();
-            doSetLabelLength(500);
-            
-            runs(function() {
+	
+    // stopSearch method tests
+    describe('stopSearch method', function() {
+        it("stopSearch Method (without callback function)", function () {
+
+            runs(function () {
+                // Let the printer be search first then use stop
                 callresult = null;
-                if(callback_value == 'with') {
-                    thisprinter.printStoredFormatWithHash(formatpath, hashvalue, cbk);
-                }
-                else if(callback_value == 'without') {
-                    callresult = thisprinter.printStoredFormatWithHash(formatpath, hashvalue);
-                }   
-                else if(callback_value == 'Anonymous') {
-                    thisprinter.printStoredFormatWithHash(formatpath, hashvalue, function(callbackValue) {callresult = callbackValue;});
-                }   
+                Rho.PrinterZebra.searchPrinters({}, searchPrinterCallback);
+                callresult = Rho.PrinterZebra.stopSearch();
             });
 
-            waitsFor(function() {
-                    return callresult !== null;
-            }, 'wait to Print', 30000);
-            
-            runs(function() {
-                if(lang != 'invalid')   {
-                        expect(callresult).toEqual(Rho.PrinterZebra.PRINTER_STATUS_SUCCESS);
-                    }   
-                else {  
-                        expect(callresult).toEqual(Rho.PrinterZebra.PRINTER_STATUS_ERROR);
-                }   
-            });     
-        });     
-    }
-    
-    describe('printStoredFormatWithHash method', function() {
-        it('should connect', function() {
-                doConnect();
-        });
+            waitsFor(function () {
+                return callresult !== null
+            }, 'Stopping the Search Printers....', 5000);
 
-        doprintStoredFormatWithHash(zplformatpath, hashzpl, 'with', "ZPL Language");
-        doprintStoredFormatWithHash(zplformatpath, hashzpl, 'without', "ZPL Language");
-        doprintStoredFormatWithHash(zplformatpath, hashzpl, 'Anonymous', "ZPL Language");
-        
-        doprintStoredFormatWithHash(ccplformatpath, hashccpl, 'with', "CCPL Language");
-        doprintStoredFormatWithHash(ccplformatpath, hashccpl, 'without', "CCPL Language");
-        doprintStoredFormatWithHash(ccplformatpath, hashccpl, 'Anonymous', "CCPL Language");
-        
-        doprintStoredFormatWithHash(invalidformatpath, invalidzplhash, 'with', "invalid");
-        
-    });
-    
-    
-    function doprintStoredFormatWithArray(formatpath, arrayvalue, callback_type, lang) {
-    
-        var deftext = ['Should Print a ',lang,' stored format by Array ',callback_type,' callback'];
-        
-        it( deftext.join('') , function() {
-            
-            doPrintTestLabel();
-            doSetLabelLength(500);
-            
             runs(function() {
-                callresult = null;
-                if(callback_type == 'with') {
-                    thisprinter.printStoredFormatWithArray(formatpath, arrayvalue, cbk);
-                }
-                else if(callback_type == 'without') {
-                    callresult = thisprinter.printStoredFormatWithArray(formatpath, arrayvalue);
-                }   
-                else if(callback_type == 'Anonymous') {
-                    thisprinter.printStoredFormatWithArray(formatpath, arrayvalue, function(callbackValue) {callresult = callbackValue;});
-                }   
+                expect(printers_array).toEqual([]);
+                expect(callresult).toEqual(Rho.PrinterZebra.PRINTER_STATUS_SUCCESS);
             });
-            
-            waitsFor(function() {
-                    return callresult !== null;
-            }, 'wait to Print', 30000);
-            
-            runs(function() {
-                if(lang != 'invalid')   {
-                        expect(callresult).toEqual(Rho.PrinterZebra.PRINTER_STATUS_SUCCESS);
-                }   
-                else {  
-                        expect(callresult).toEqual(Rho.PrinterZebra.PRINTER_STATUS_ERROR);
-                }   
-            });     
-        });     
-    }
-    
-    describe('printStoredFormatWithArray method', function() {
-        it('should connect', function() {
-                doConnect();
+
         });
 
-        doprintStoredFormatWithArray(zplformatpath, arrayzpl, 'with', "ZPL Language");
-        doprintStoredFormatWithArray(zplformatpath, arrayzpl, 'without', "ZPL Language");
-        doprintStoredFormatWithArray(zplformatpath, arrayzpl, 'Anonymous', "ZPL Language");
-        
-        doprintStoredFormatWithArray(ccplformatpath, arrayccpl,'with', "CCPL Language");
-        doprintStoredFormatWithArray(ccplformatpath, arrayccpl, 'without', "CCPL Language");
-        doprintStoredFormatWithArray(ccplformatpath, arrayccpl, 'Anonymous', "CCPL Language");
-        
-        doprintStoredFormatWithArray(invalidformatpath, invalidzplhash, 'with', "invalid");
-    });
+        it("stopSearch Method (with callback function)", function () {
 
+            runs(function () {
+                // Let the printer be search first then use stop
+                callresult = null;
+                Rho.PrinterZebra.searchPrinters({}, searchPrinterCallback);
+                Rho.PrinterZebra.stopSearch(cbk);
+            });
 
+            waitsFor(function () {
+                return callresult !== null
+            }, 'Stopping the Search Printers....', 5000);
+
+            runs(function() {
+                expect(printers_array).toEqual([]);
+                expect(callresult).toEqual(Rho.PrinterZebra.PRINTER_STATUS_SUCCESS);
+            });
+
+        });
+
+        it("stopSearch Method (with anonymous function)", function () {
+
+            runs(function () {
+                // Let the printer be search first then use stop
+                callresult = null;
+                Rho.PrinterZebra.searchPrinters({}, searchPrinterCallback);
+                Rho.PrinterZebra.stopSearch( function(callbackValue) { callresult = callbackValue; });
+            });
+
+            waitsFor(function () {
+                return callresult !== null
+            }, 'Stopping the Search Printers....', 5000);
+
+            runs(function() {
+                expect(printers_array).toEqual([]);
+                expect(callresult).toEqual(Rho.PrinterZebra.PRINTER_STATUS_SUCCESS);
+            });
+
+        });
+    });    
 
 	
 
