@@ -158,12 +158,12 @@ describe('Printer Zebra', function() {
             printers_array.push(callbackValue.printerID);
         } else if (callbackValue.status == Rho.PrinterZebra.PRINTER_STATUS_SUCCESS) {
             //discovery_finished = true;
-						if(printers_array.length > 0){
-							discovery_finished = true;
-						}
-						else{
-						 location = location;
-						}
+			if(printers_array.length > 0){
+				discovery_finished = true;
+			}
+			else{
+			 location = location;
+			}
         } else {
             printers_errors.push(callbackValue);
             discovery_finished = true;
@@ -623,6 +623,8 @@ describe('Printer Zebra', function() {
 
     });
 
+
+    //sendFileContents method
     function doSendFileContents(filename, callback_type) {
         runs(function() {
             callresult = null;
@@ -935,9 +937,9 @@ describe('Printer Zebra', function() {
 	});	
 	
 
-	function doprintStoredFormatWithHash(formatpath, hashvalue, callback_type, lang) {
+	function doprintStoredFormatWithHash(format, formatpath, hashvalue, callback_type, lang) {
 	    var deftext = ['Should Print a ',lang,' stored format by Hash ',callback_type,' callback'];
-		var dispcase = ['1. Should Print label <br />2.Should Print a ',lang,' stored format on the printer fields specified by the Hash'];
+		var dispcase = ['1. Should Store format path using printRawString<br />2.Should Print a ',lang,' stored format on the printer fields specified by the Hash'];
 		var dispexp = ['Should Print a ',lang,' stored format on the printer fields specified by the Hash'];
 	
 		it( deftext.join('') , function() {
@@ -945,9 +947,13 @@ describe('Printer Zebra', function() {
 			dispExpectedResult(dispexp.join(''));
 			//Common Method implemented to wait for tester to run the test.Code available in specHelper.js
 			_result.waitToRunTest();
-			
-			doPrintTestLabel();
-			doSetLabelLength(500);
+			runs(function() {
+                callresult = null;
+                thisprinter.printRawString(format, {}, cbk);
+            });    
+            waitsFor(function() {
+            return callresult !== null;
+            }, 'wait until printing', 20000);
 
 			runs(function() {
 				callresult = null;
@@ -984,20 +990,30 @@ describe('Printer Zebra', function() {
 			doConnect();
 		});
 
-		doprintStoredFormatWithHash(zplformatpath, hashzpl, 'with', "ZPL Language");
-        doprintStoredFormatWithHash(zplformatpath, hashzpl, 'without', "ZPL Language");
-        doprintStoredFormatWithHash(zplformatpath, hashzpl, 'Anonymous', "ZPL Language");
+        var zplstoredformat = '^XA^DFFORMAT^FS^LH30,30^FO20,10^AF^FN1^FS^FO20,60^B3,,40,,^FN2^FS^FO20,120^AF^FN3^FS^FO20,180^AF^FN4^FS^FO20,240^AF^FN5^FS^FO20,300^AF^FN6^FS^XZ';
+         var ccplstoredformat = "! DF FORMAT.FMT\n" +
+                  "! 0 200 200 310 1\n" +
+                  "CENTER\n" +
+                  "TEXT 4 1 0 50 RECEIPT\n" +
+                  "TEXT 4 0 0 150 \\\\\n" +
+                  "TEXT 4 0 0 200 \\\\\n" +
+                  "TEXT 4 0 0 250 \\\\\n" +
+                  "FORM\n" +
+                  "PRINT\n";
+		doprintStoredFormatWithHash(zplstoredformat, 'E:FORMAT.ZPL', hashzpl, 'with', "ZPL Language");
+        doprintStoredFormatWithHash(zplstoredformat, 'E:FORMAT.ZPL', hashzpl, 'without', "ZPL Language");
+        doprintStoredFormatWithHash(zplstoredformat, 'E:FORMAT.ZPL', hashzpl, 'Anonymous', "ZPL Language");
         
-        doprintStoredFormatWithHash(ccplformatpath, hashccpl, 'with', "CCPL Language");
-        doprintStoredFormatWithHash(ccplformatpath, hashccpl, 'without', "CCPL Language");
-        doprintStoredFormatWithHash(ccplformatpath, hashccpl, 'Anonymous', "CCPL Language");
+        doprintStoredFormatWithHash(ccplstoredformat, 'E:FORMAT.FMT', hashccpl, 'with', "CCPL Language");
+        doprintStoredFormatWithHash(ccplstoredformat, 'E:FORMAT.FMT', hashccpl, 'without', "CCPL Language");
+        doprintStoredFormatWithHash(ccplstoredformat, 'E:FORMAT.FMT', hashccpl, 'Anonymous', "CCPL Language");
         
-        doprintStoredFormatWithHash(invalidformatpath, invalidzplhash, 'with', "invalid");
+        doprintStoredFormatWithHash(invalidformatpath, 'E:FORMAT.ZPL', invalidzplhash, 'with', "invalid");
 		
 	});
 	
 	
-	function doprintStoredFormatWithArray(formatpath, arrayvalue, callback_type, lang) {
+	function doprintStoredFormatWithArray(format, formatpath, arrayvalue, callback_type, lang) {
 		var deftext = ['Should Print a ',lang,' stored format by Array ',callback_type,' callback'];
 		var dispcase = ['1. Should Print label <br />2.Should Print a ',lang,' stored format on the printer fields specified by the Array'];
 		var dispexp = ['Should Print a ',lang,' stored format on the printer fields specified by the Array'];
@@ -1008,8 +1024,13 @@ describe('Printer Zebra', function() {
 			//Common Method implemented to wait for tester to run the test.Code available in specHelper.js
 			_result.waitToRunTest();
 			
-			doPrintTestLabel();
-			doSetLabelLength(500);
+			runs(function() {
+                callresult = null;
+                thisprinter.printRawString(format, {}, cbk);
+            });    
+            waitsFor(function() {
+            return callresult !== null;
+            }, 'wait until printing', 20000);
 
 			runs(function() {
 				callresult = null;
@@ -1045,16 +1066,25 @@ describe('Printer Zebra', function() {
 		it('should connect', function() {
 			doConnect();
 		});
-
-		doprintStoredFormatWithArray(zplformatpath, arrayzpl, 'with', "ZPL Language");
-        doprintStoredFormatWithArray(zplformatpath, arrayzpl, 'without', "ZPL Language");
-        doprintStoredFormatWithArray(zplformatpath, arrayzpl, 'Anonymous', "ZPL Language");
+        var zplstoredformat = '^XA^DFFORMAT^FS^LH30,30^FO20,10^AF^FN1^FS^FO20,60^B3,,40,,^FN2^FS^FO20,120^AF^FN3^FS^FO20,180^AF^FN4^FS^FO20,240^AF^FN5^FS^FO20,300^AF^FN6^FS^XZ';
+        var ccplstoredformat = "! DF FORMAT.FMT\n" +
+                  "! 0 200 200 310 1\n" +
+                  "CENTER\n" +
+                  "TEXT 4 1 0 50 RECEIPT\n" +
+                  "TEXT 4 0 0 150 \\\\\n" +
+                  "TEXT 4 0 0 200 \\\\\n" +
+                  "TEXT 4 0 0 250 \\\\\n" +
+                  "FORM\n" +
+                  "PRINT\n";
+		doprintStoredFormatWithArray(zplstoredformat, 'E:FORMAT.ZPL', arrayzpl, 'with', "ZPL Language");
+        doprintStoredFormatWithArray(zplstoredformat, 'E:FORMAT.ZPL', arrayzpl, 'without', "ZPL Language");
+        doprintStoredFormatWithArray(zplstoredformat, 'E:FORMAT.ZPL', arrayzpl, 'Anonymous', "ZPL Language");
         
-        doprintStoredFormatWithArray(ccplformatpath, arrayccpl,'with', "CCPL Language");
-        doprintStoredFormatWithArray(ccplformatpath, arrayccpl, 'without', "CCPL Language");
-        doprintStoredFormatWithArray(ccplformatpath, arrayccpl, 'Anonymous', "CCPL Language");
+        doprintStoredFormatWithArray(ccplstoredformat, 'E:FORMAT.FMT', arrayccpl,'with', "CCPL Language");
+        doprintStoredFormatWithArray(ccplstoredformat, 'E:FORMAT.FMT', arrayccpl, 'without', "CCPL Language");
+        doprintStoredFormatWithArray(ccplstoredformat, 'E:FORMAT.FMT', arrayccpl, 'Anonymous', "CCPL Language");
         
-        doprintStoredFormatWithArray(invalidformatpath, invalidzplhash, 'with', "invalid");
+        doprintStoredFormatWithArray(invalidformatpath, 'E:FORMAT.ZPL', invalidzplhash, 'with', "invalid");
 		
 	});
 	
@@ -1082,124 +1112,7 @@ describe('Printer Zebra', function() {
        
     });
 
-    describe('maxTimeoutForRead property ', function() {
-        it('should connect', function() {
-            thisprinter.maxTimeoutForRead = 1000;
-            doConnect();
-        });
-
-        it('should get timeout error after setting maxTimeoutForRead to 1 sec', function() {
-            dispTestCaseRunning("1. maxTimeoutForRead to 1 sec is already set<br />2. Turn off the printer or move outside the printer network and run the test to print");
-            dispExpectedResult("Should get timeout error after 1 sec and Should not print any thing");
-            //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
-            _result.waitToRunTest();
-        
-            runs(function() {
-                doPrintTestLabel(); 
-            }); 
-
-            _result.waitForResponse();
-
-        })    
-
-    });
-
-    describe('maxTimeoutForOpen property ', function() {
-        it('should connect', function() {
-            doConnect();
-        });
-
-        it('should print text successfully after setting maxTimeoutForOpen to 10 sec', function() {
-            dispTestCaseRunning("1. Set maxTimeoutForOpen to 10 sec <br />2. Print any text");
-            dispExpectedResult("Should get print successfully within 10 sec");
-            //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
-            _result.waitToRunTest();
-            
-            runs(function() {
-                thisprinter.maxTimeoutForOpen = 10000;
-                doPrintTestLabel(); 
-            }); 
-
-            _result.waitForResponse();
-
-        })  
-
-        it('should get timeout error setting maxTimeoutForOpen to 0 sec', function() {
-            dispTestCaseRunning("1. Set maxTimeoutForOpen to 0 sec<br />2. Print after 5 sec");
-            dispExpectedResult("should get timeout error");
-            //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
-            _result.waitToRunTest();
-            
-            runs(function() {
-                thisprinter.maxTimeoutForOpen = 10000;
-            }); 
-
-            waitsFor(function() {
-                return true;
-            }, 'wait for timeout', 5000);
-
-            runs(function() {
-                doPrintTestLabel(); 
-            }); 
-
-            _result.waitForResponse();
-
-        })   
-
-    });
-
-    describe('timeToWaitForMoreData property ', function() {
-        it('should connect', function() {
-            doConnect();
-        });
-
-        it('should print 2 labels successfully after setting timeToWaitForMoreData to 10 sec', function() {
-            dispTestCaseRunning("1. set timeToWaitForMoreData to 10 sec <br />2. Print any text");
-            dispExpectedResult("should print 2 labels successfully");
-            //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
-            _result.waitToRunTest();
-
-            runs(function() {
-                doPrintTestLabel(); 
-            }); 
-            
-            runs(function() {
-                thisprinter.timeToWaitForMoreData = 10000;
-                doPrintTestLabel(); 
-            }); 
-
-            _result.waitForResponse();
-
-        })  
-
-       it('should print 1 label only after setting timeToWaitForMoreData to 0 sec', function() {
-            dispTestCaseRunning("1. set timeToWaitForMoreData to 0 sec <br />2. Print any text");
-            dispExpectedResult("should print 1 label only");
-            //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
-            _result.waitToRunTest();
-
-            runs(function() {
-                doPrintTestLabel(); 
-            }); 
-            
-            runs(function() {
-                thisprinter.timeToWaitForMoreData = 0;
-            }); 
-
-            waitsFor(function() {
-                return true;
-            }, 'wait for timeout', 5000);
-
-            runs(function() {
-                doPrintTestLabel(); 
-            }); 
-
-            _result.waitForResponse();
-
-        })   
-
-    });
-	
+   	
 		
 
 });
