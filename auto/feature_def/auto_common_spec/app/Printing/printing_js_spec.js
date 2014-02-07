@@ -531,7 +531,10 @@ describe('Printing Generic', function() {
     ////////////////////////////////
     var thisprinter = null;
     var callresult = null;
-
+	
+	function cbk(val) {
+        callresult = val;
+    }
    
     function doConnect() {
 
