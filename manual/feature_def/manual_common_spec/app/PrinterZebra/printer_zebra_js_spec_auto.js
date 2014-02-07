@@ -368,6 +368,7 @@ describe('Printer Zebra', function() {
     var errorCode = null;
     var usedPrinter = null;
 
+    //getPrinterByID method
     describe('should getPrinterByID', function() {
         // find printer
         it('and get base properties', function() {
@@ -468,9 +469,53 @@ describe('Printer Zebra', function() {
             }, 'wait untill connect', 10000);
         });
 
-        function generateConnectWithParams(connectparams) {
+        it('disconnect and try to print should return status error', function() {
+            var callresult = null;
+            var thisprinter = null;
+            expect(last_found_printer_id).toNotEqual(null);
+            thisprinter = Rho.PrinterZebra.getPrinterByID(last_found_printer_id);
+
+            if (thisprinter.isConnected == false){
+                thisprinter.connect(function(val){
+                    callresult = val;
+                });
+                waitsFor(function() {
+                    return callresult !== null;
+                }, 'wait until connected', 10000);
+            }
+            runs(function() {
+                expect(thisprinter.isConnected).toEqual(true);
+            });
+            runs(function() {
+                callresult = null;
+                thisprinter.disconnect(function(result) {
+                    callresult = result;
+                });
+            });
+            waitsFor(function() {
+                return callresult !== null;
+            }, 'wait until disconnected', 10000);
+
+            runs(function() {
+                expect(callresult).toEqual(Rho.PrinterZebra.PRINTER_STATUS_SUCCESS);
+                expect(thisprinter.isConnected).toEqual(false);
+            });
+            runs(function() {
+                thisprinter.printRawString(CommandZPL, cbk);
+            });
+
+            waitsFor(function() {
+                return callresult !== null;
+            }, 'wait.. trying to print..', 15000);
+
+            runs(function() {
+                expect(callresult).toEqual(Rho.PrinterZebra.PRINTER_STATUS_ERROR);
+            });
+        });
+
+        function generateConnectWithParams(connectparams, case_type) {
             // connect and wait for callback
-            it('should just connect with callback params' + JSON.stringify(connectparams, null, " "), function() {
+            it('should just connect' + case_type + 'callback params' + JSON.stringify(connectparams, null, " "), function() {
                 var thisprinter = null;
                 var callresult = null;
 
@@ -478,9 +523,7 @@ describe('Printer Zebra', function() {
                     expect(last_found_printer_id).toNotEqual(null);
                     thisprinter = Rho.PrinterZebra.getPrinterByID(last_found_printer_id);
                     callresult = null;
-                    thisprinter.disconnect(function(result) {
-                        callresult = result;
-                    });
+                    thisprinter.disconnect(cbk);
                 });
 
                 waitsFor(function() {
@@ -494,34 +537,45 @@ describe('Printer Zebra', function() {
 
                 runs(function() {
                     callresult = null;
-                    thisprinter.connectWithOptions(connectparams, function cbk(val) {
-                        callresult = val;
-                    });
+
+                    if (case_type == 'without'){
+                        callresult = thisprinter.connectWithOptions(connectparams);
+                    } else if (case_type == 'withcb') {
+                        thisprinter.connectWithOptions(connectparams, cbk);
+                    } else if (case_type == 'anonymous') {
+                        thisprinter.connectWithOptions(connectparams, function cbk(val) {
+                            callresult = val;
+                        });    
+                    }
                 });
+
                 waitsFor(function() {
                     return callresult != null;
                 }, 'wait while disconnected', 5000);
 
                 runs(function() {
-                    expect(callresult).toEqual(Rho.PrinterZebra.PRINTER_STATUS_SUCCESS);
+                    expect(callresult).toEqual(Rho.Printer.PRINTER_STATUS_SUCCESS);
                     expect(thisprinter.isConnected).toEqual(true);
                 });
             });
         }
 
         var connectParams = [{}, {
-            "timeout": 20000
-        }, {
-            "timeout": 0
-        }, {
-            "timeout": 1000
-        }, {
-            "timeout": 15000.5
+                "timeout": 20000
+            }, {
+                "timeout": 0
+            }, {
+                "timeout": 1000
+            }, {
+                "timeout": 15000.5
         }, ];
 
         for (var i = 0; i < connectParams.length; i++) {
-            generateConnectWithParams(connectParams[i]);
+            generateConnectWithParams(connectParams[i], 'without');
+            generateConnectWithParams(connectParams[i], 'withcb');
+            generateConnectWithParams(connectParams[i], 'anonymous');
         }
+
     });
 
 
@@ -552,66 +606,6 @@ describe('Printer Zebra', function() {
             callresult = null;
         });
     }
-
-    function doPrintTestLabel() {
-        runs(function() {
-            callresult = null;
-            thisprinter.printRawString(makeTestLabel(), {}, cbk);
-        });
-
-        waitsFor(function() {
-            return callresult !== null;
-        }, 'wait until printingLabel', 20000);
-
-        runs(function() {
-            expect(callresult.status).toEqual(Rho.PrinterZebra.PRINTER_STATUS_SUCCESS);
-            callresult = null;
-        });
-    }
-
-    function doSetLabelLength(len) {
-        runs(function() {
-            callresult = null;
-            thisprinter.printRawString('^XA^MNN^LL' + len + '^XA^JUS^XZ', {}, cbk);
-        });
-
-        waitsFor(function() {
-            return callresult !== null;
-        }, 'wait until setting lable length', 7000);
-    }
-
-    function doPrintPrintFile(filename, options, isOk) {
-        runs(function() {
-            callresult = null;
-            thisprinter.printFile(filename, options, cbk);
-        });
-
-        waitsFor(function() {
-            return callresult !== null;
-        }, 'wait until printingFile', 30000);
-
-        runs(function() {
-            if (isOk !== false) {
-                expect(callresult).toEqual(Rho.PrinterZebra.PRINTER_STATUS_SUCCESS);
-            } else {
-                expect(callresult).toNotEqual(Rho.PrinterZebra.PRINTER_STATUS_SUCCESS);
-            }
-        });
-    }
-
-    function doPrintRawCommand(cmd) {
-        runs(function() {
-            callresult = null;
-            thisprinter.printRawString(cmd, {}, cbk);
-        });
-
-        waitsFor(function() {
-            return callresult !== null;
-        }, 'wait until setting lable length', 15000);
-    }
-
-    // 
-   
 
 
     function doRetrieveFileNames(filelist, callback_type) {
@@ -855,39 +849,6 @@ describe('Printer Zebra', function() {
 
 
     });
-
-    function generatePrintImage(from,x,y,options,isOk,force) {
-         if ((!Rho.RhoFile.exists(from))) {
-            if (!isOk && !force) {
-                return;
-            }
-            isOk = false;
-         }
-        var def = isOk ? 'should ' : 'should not ';
-        var deftext = [def,'print image',Rho.RhoFile.basename(from),'x:',x,'y:',y,'options:',JSON.stringify(options,null," ") ];
-
-        it( deftext.join(' ') , function() {
-            doPrintTestLabel();
-
-            runs(function() {
-                callresult = null;
-                thisprinter.printImageFromFile(from,x,y,options,cbk);
-            });
-
-            waitsFor(function() {
-                return callresult !== null;
-            }, 'wait printImageFromFile', 30000);
-
-            runs(function() {
-                if (isOk !== false) {
-                    expect(callresult).toEqual(Rho.PrinterZebra.PRINTER_STATUS_SUCCESS);
-                    callresult = null;
-                } else {
-                    expect(callresult).toNotEqual(Rho.PrinterZebra.PRINTER_STATUS_SUCCESS);
-                }
-            });
-        });
-    }
 
   	
 	function generategetproperty(property, type) {
@@ -1217,6 +1178,212 @@ describe('Printer Zebra', function() {
 
         });
     });    
+
+    xdescribe("Get & Set default PrinterZebra", function() {
+        var thisprinter = null;
+        var printerObj = null;
+
+        it('get default PrinterZebra', function() {
+            runs(function() {
+                thisprinter = Rho.PrinterZebra.getDefault();
+                expect(thisprinter).toEqual('PrinterZebra');
+            });
+        });
+
+        it('set default PrinterZebra', function() {
+            runs(function() {
+                expect(last_found_printer_id).toNotEqual(null);
+                printerObj = Rho.PrinterZebra.getPrinterByID(last_found_printer_id);
+                Rho.PrinterZebra.setDefault(printerObj);
+                expect(Rho.PrinterZebra.getDefault()).toEqual(printerObj);
+            });
+        });
+
+    });  
+
+    function doPrintTestLabel(value_type) {
+                
+        runs(function() {
+            callresult = null;
+            thisprinter.printRawString(makeTestLabel(), {}, cbk);
+        });
+
+        waitsFor(function() {
+            return callresult !== null;
+        }, 'wait until printingLabel', 20000);
+
+        runs(function() {
+            if(value_type > 0) {
+                expect(callresult.status).toEqual(Rho.PrinterZebra.PRINTER_STATUS_SUCCESS);
+            }
+            else {
+                expect(callresult.status).toEqual(Rho.PrinterZebra.PRINTER_STATUS_ERR_TIMEOUT);
+            }
+
+        });
+                    
+    }
+
+
+     describe('maxTimeoutForRead property ', function() {
+        it('should connect', function() {
+            doConnect();
+        });
+
+        it('should get print text/label within 10 sec succesfully after setting maxTimeoutForRead to 10 sec', function() {
+            runs(function() {
+                thisprinter.maxTimeoutForRead = 10000;
+            });
+            
+            doPrintTestLabel(); 
+            
+
+        })    
+
+
+        it('should get timeout error after setting maxTimeoutForRead to 0 sec', function() {
+             runs(function() {
+                thisprinter.maxTimeoutForRead = 0;
+            });
+            waitsFor(function() {
+                return true;
+            }, 'wait for timeout', 5000);
+
+           
+        })    
+
+    });
+
+    describe('maxTimeoutForOpen property ', function() {
+        it('should connect', function() {
+            doConnect();
+        });
+
+        it('should print text successfully after setting maxTimeoutForOpen to 10 sec', function() {
+            runs(function() {
+                thisprinter.maxTimeoutForOpen = 10000;
+            }); 
+
+            doPrintTestLabel(10000); 
+
+        })  
+
+        it('should get timeout error setting maxTimeoutForOpen to 0 sec', function() {
+            runs(function() {
+                thisprinter.maxTimeoutForOpen = 0;
+            }); 
+
+            waitsFor(function() {
+                return true;
+            }, 'wait for timeout', 5000);
+
+            doPrintTestLabel(0); 
+       })   
+
+    });
+
+    describe('timeToWaitForMoreData property ', function() {
+        it('should connect', function() {
+            doConnect();
+        });
+
+        it('should print 2 labels successfully after setting timeToWaitForMoreData to 10 sec', function() {
+       
+            doPrintTestLabel(10000); 
+            
+            runs(function() {
+                thisprinter.timeToWaitForMoreData = 10000;
+            }); 
+
+            doPrintTestLabel(10000); 
+
+       
+        })  
+
+       it('should print 1 label only after setting timeToWaitForMoreData to 0 sec', function() {
+          
+            doPrintTestLabel(10000); 
+            
+            runs(function() {
+                thisprinter.timeToWaitForMoreData = 0;
+            }); 
+
+            waitsFor(function() {
+                return true;
+            }, 'wait for timeout', 5000);
+
+            doPrintTestLabel(0);  
+
+        
+        })   
+
+    });
+
+    if(thisprinter.getProperty("connectionType") == "CONNECTION_TYPE_BLUETOOTH") {
+        describe('timeToWaitAfterReadInMilliseconds property ', function() {
+            it('should connect', function() {
+                doConnect();
+            });
+
+            it('should print text after setting timeToWaitAfterReadInMilliseconds to 10 sec', function() {
+                
+                runs(function() {
+                    thisprinter.timeToWaitAfterReadInMilliseconds = 10000;
+                }); 
+
+                doPrintTestLabel(10000); 
+
+            })  
+
+           it('should not print any label after setting timeToWaitAfterReadInMilliseconds to 0 sec', function() {
+                
+                runs(function() {
+                    thisprinter.timeToWaitAfterReadInMilliseconds = 0;
+                }); 
+
+                waitsFor(function() {
+                    return true;
+                }, 'wait for timeout', 5000);
+
+                doPrintTestLabel(0);  
+
+            })   
+
+        });
+
+        describe('timeToWaitAfterWriteInMilliseconds property ', function() {
+            it('should connect', function() {
+                doConnect();
+            });
+
+            it('should print text after setting timeToWaitAfterWriteInMilliseconds to 10 sec', function() {
+                
+                runs(function() {
+                    thisprinter.timeToWaitAfterWriteInMilliseconds = 10000;
+                }); 
+
+                doPrintTestLabel(10000); 
+
+            })  
+
+           it('should not print any label after setting timeToWaitAfterWriteInMilliseconds to 0 sec', function() {
+                
+                runs(function() {
+                    thisprinter.timeToWaitAfterWriteInMilliseconds = 0;
+                }); 
+
+                waitsFor(function() {
+                    return true;
+                }, 'wait for timeout', 5000);
+
+                doPrintTestLabel(0);  
+
+            })   
+
+        });
+
+    }
+ 
 
 	
 
