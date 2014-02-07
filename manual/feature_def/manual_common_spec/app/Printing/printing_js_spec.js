@@ -12,7 +12,6 @@ describe('Printing Generic', function() {
     var printers_errors = [];
     var discovery_finished = false;
     var connect_type = Rho.Printer.CONNECTION_TYPE_TCP;
-    var macipaddress = '';
     var stopsearch = '';
     var deviceaddressFlag = false;
     var CommandZPL = '^XA^FO50,50^ADN,36,20^FDPrinting^FS^XZ';
@@ -39,37 +38,6 @@ describe('Printing Generic', function() {
         return '^XA^MNN^LL200^XZ^XA^JUS^XZ^XA^FO50,50^A0I25,25^FD' + jasmine.getEnv().currentSpec.description + '^FS^XZ\r\n';
     }
 
-    // BLACK WOODO MAGIC
-    function evaluateHashValues(obj) {
-        var result = {};
-        var keys = objkeys(searchParamaters);
-        for (var i = keys.length - 1; i >= 0; i--) {
-            var key = keys[i];
-            result[key] = obj[key]();
-        }
-        return result;
-    }
-
-    // make a list of all available combinations of fields within object
-    function makeAllCombinationsOfFileds(obj) {
-        var combinations = []; //All combinations
-        var keys = objkeys(obj);
-        var quantity = (1 << keys.length);
-        if (quantity > 0) {
-            for (var i = 0; i < quantity; i++) {
-                var combination = {};
-                for (var j = 0; j < keys.length; j++) {
-                    if ((i & (1 << j))) {
-                        var key = keys[j];
-                        combination[key] = obj[key];
-                    }
-                }
-                combinations.push(combination);
-            }
-        }
-        Rho.Log.info(" " + JSON.stringify(combinations, null, 2), "APP");
-        return combinations;
-    }
 
 	var testResult = '';
 	var captured = false;
@@ -525,7 +493,7 @@ describe('Printing Generic', function() {
             doPrintPrintFileAnonCbk(pdffilepath, {});
         });
 
-
+        // empty filename
         it('should not print empty filename with callback', function() {
     		dispTestCaseRunning(" 1. Should Print label <br />2. should not print empty filename.");
     		dispExpectedResult("should not print empty filename with callback");
@@ -536,6 +504,7 @@ describe('Printing Generic', function() {
             doPrintPrintFileCbk('', {});
         });
 
+        // invalid filename
         it('should not print invalid filename with callback', function() {
 			dispTestCaseRunning(" 1. Should Print label <br />2. should not print invalid filename");
 			dispExpectedResult("should not print invalid filename with callback");
@@ -702,6 +671,60 @@ describe('Printing Generic', function() {
     });
 
 
+    function generatePrintImageWithoutAnonymous(callback_type, from,x,y,options,isOk,force) {
+         if ((!Rho.RhoFile.exists(from))) {
+            if (!isOk && !force) {
+                return;
+            }
+            isOk = false;
+         }
+        var def = isOk ? 'should ' : 'should not ';
+        var deftext = [def,'print image',callback_type,'callback',Rho.RhoFile.basename(from),'x:',x,'y:',y,'options:',JSON.stringify(options,null," ") ];
+
+        it( deftext.join(' ') , function() {
+            dispTestCaseRunning("1. Should Print label <br />2. "+def+" Print "+Rho.RhoFile.basename(from)+" image");
+            dispExpectedResult(jasmine.getEnv().currentSpec.description, callresult.toString());
+            //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
+            _result.waitToRunTest();
+            doPrintTestLabel();
+
+            runs(function() {
+                callresult = null;
+                if(callback_type == 'without')  {
+                    callresult = thisprinter.printImageFromFile(from,x,y,options);
+                }
+                else if (callback_type == 'Anonymous') {
+                    thisprinter.printImageFromFile(from,x,y,options,function(callbackValue) { callresult = callbackValue;})
+                }
+            });
+
+            waitsFor(function() {
+                return callresult !== null;
+            }, 'wait printImageFromFile', 30000);
+
+    
+            runs(function() {
+                displayResult(jasmine.getEnv().currentSpec.description, callresult.toString());
+            });
+            _result.waitForResponse();
+        });
+    }
+
+    describe('printImageFromFile method more test cases', function() {
+        it('should connect', function() {
+            doConnect();
+        });
+
+        generatePrintImageWithoutAnonymous('without', pngimagepath_320px,100,100,{'width':10,'height':10,'isInsideFormat':true},true);
+        generatePrintImageWithoutAnonymous('Anonymous', pngimagepath_640px,10,10,{'width':50,'height':50,'isInsideFormat':false},true);
+        generatePrintImageWithoutAnonymous('Anonymous', pngimagepath_1024px,10,10,{'width':-1,'height':-1,'isInsideFormat':false},true);
+        generatePrintImageWithoutAnonymous('without', jpgimagepath_320px,100,100,{'width':10,'height':10,'isInsideFormat':true},true);
+        generatePrintImageWithoutAnonymous('Anonymous', jpgimagepath_640px,10,10,{'width':50,'height':50,'isInsideFormat':true},true);
+        generatePrintImageWithoutAnonymous('Anonymous', pngimagepath_1024px,10,10,{'width':-1,'height':-1,'isInsideFormat':false},true);
+
+    });
+
+
     var listofrequeststate = [Rho.Printer.PRINTER_STATE_IS_READY_TO_PRINT,   Rho.Printer.PRINTER_STATE_IS_COVER_OPENED, Rho.Printer.PRINTER_STATE_IS_DRAWER_OPENED, Rho.Printer.PRINTER_STATE_IS_PAPER_OUT, Rho.Printer.PRINTER_STATE_IS_BATTERY_LOW];
     var requeststate_callbackValue = {};
     
@@ -756,7 +779,7 @@ describe('Printing Generic', function() {
         
     describe('requestState method', function() {
         it('should connect', function() {
-                doConnect();
+            doConnect();
         });
         
         for(var i = 0; i<listofrequeststate.length;i++) {
@@ -765,5 +788,125 @@ describe('Printing Generic', function() {
     
     });
 
+    // get and set default printer -- disabled bec its crashing the app as of now
+    xdescribe("Should print a raw string using the get default printer", function() {
+        var thisprinter = null;
+        var printerObj = null;
 
+        _result.waitToRunTest();
+
+        dispTestCaseRunning("Set default printer and print a raw string using the get default");
+        dispExpectedResult(jasmine.getEnv().currentSpec.description, callresult.toString());
+
+        runs(function() {
+            expect(last_found_printer_id).toNotEqual(null);
+            printerObj = Rho.Printer.getPrinterByID(last_found_printer_id);
+            Rho.Printer.setDefault(printerObj);
+            expect(Rho.Printer.getDefault()).toEqual(printerObj);
+        });
+    
+        runs(function() {
+            thisprinter = Rho.Printer.getDefault();
+            thisprinter.connect(cbk);
+        });
+
+        waitsFor(function() {
+            return callresult !== null;
+        }, 'wait until connected', 10000);
+
+        runs(function() {
+            thisprinter.printRawString(CommandCCPL, {});
+        });
+        
+        _result.waitForResponse();
+
+    });
+
+    // display all properties of printer
+    describe('getAllProperties method', function() {
+        it('should connect', function() {
+            doConnect();
+        });
+
+        it( "Should get All printer properties using getAllProperties", function() {
+            dispTestCaseRunning("1. Should Display All printer properties");
+            dispExpectedResult(jasmine.getEnv().currentSpec.description, callresult.toString());
+            //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
+            _result.waitToRunTest();
+            var allproperties = {};
+            runs(function() {
+                allproperties = thisprinter.getAllProperties();
+            });
+
+            runs(function() {
+                displayResult(jasmine.getEnv().currentSpec.description, JSON.stringify(allproperties));
+            });
+            _result.waitForResponse();
+        });
+       
+    });
+
+    // display PRINTER_STATUS_ERR_TIMEOUT when turned off the printer
+    describe ('Should get PRINTER_STATUS_ERR_TIMEOUT when trying to connect the turned off printer'), function() {
+
+        it ('Should get PRINTER_STATUS_ERR_TIMEOUT when using connect printer to a turned off printer'), function() {
+            var thisprinter = null;
+            var callresult = null;
+
+            dispTestCaseRunning("Turn off the Printer and then click on Run Test");
+
+            _result.waitToRunTest();
+
+            dispExpectedResult("Should get PRINTER_STATUS_ERR_TIMEOUT when using connect printer to a turned off printer");
+
+             runs(function() {
+                expect(last_found_printer_id).toNotEqual(null);
+                thisprinter = Rho.Printer.getPrinterByID(last_found_printer_id);
+                callresult = null;
+                thisprinter.connect(cbk);
+            });
+
+            waitsFor(function() {
+                return callresult != null;
+            }, 'wait while disconnected', 5000);
+
+            runs(function() {
+                displayResult(jasmine.getEnv().currentSpec.description, callresult.toString());
+            });
+
+            _result.waitForResponse();
+        });
+
+        it ('Should get PRINTER_STATUS_ERR_TIMEOUT when using connectWithOptions printer to a turned off printer'), function() {
+            var thisprinter = null;
+            var callresult = null;
+
+            dispTestCaseRunning("Turn off the Printer and then click on Run Test");
+
+            _result.waitToRunTest();
+
+            dispExpectedResult("Should get PRINTER_STATUS_ERR_TIMEOUT when using connectWithOptions printer to a turned off printer");
+
+             runs(function() {
+                expect(last_found_printer_id).toNotEqual(null);
+                thisprinter = Rho.Printer.getPrinterByID(last_found_printer_id);
+                callresult = null;
+                thisprinter.connectWithOptions({
+                    "timeout": 0
+                });
+            });
+
+            waitsFor(function() {
+                return callresult != null;
+            }, 'wait while disconnected', 5000);
+
+            runs(function() {
+                displayResult(jasmine.getEnv().currentSpec.description, callresult.toString());
+            });
+
+            _result.waitForResponse();
+        });
+    });
+
+	
 });

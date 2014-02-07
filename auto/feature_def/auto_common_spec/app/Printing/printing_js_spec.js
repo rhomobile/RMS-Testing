@@ -488,7 +488,7 @@ describe('Printing Generic', function() {
                     callresult = null;
 
                     if (case_type == 'without'){
-                        thisprinter.connectWithOptions(connectparams);
+                        callresult = thisprinter.connectWithOptions(connectparams);
                     } else if (case_type == 'withcb') {
                         thisprinter.connectWithOptions(connectparams, cbk);
                     } else if (case_type == 'anonymous') {
@@ -503,9 +503,7 @@ describe('Printing Generic', function() {
                 }, 'wait while disconnected', 5000);
 
                 runs(function() {
-                    if (case_type !== 'without') {
-                        expect(callresult).toEqual(Rho.Printer.PRINTER_STATUS_SUCCESS);
-                    }
+                    expect(callresult).toEqual(Rho.Printer.PRINTER_STATUS_SUCCESS);
                     expect(thisprinter.isConnected).toEqual(true);
                 });
             });
