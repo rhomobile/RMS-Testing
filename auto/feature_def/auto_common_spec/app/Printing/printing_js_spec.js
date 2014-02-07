@@ -712,8 +712,9 @@ describe('Printing Generic', function() {
         var deftext = ['Should return',property,'value as a ',type ];
         it( deftext.join(' ') , function() {
             runs(function() {
-                if(type == 'string') {
+                if (type == 'string') {
                     var data = thisprinter.getProperties([property]);
+                    data = JSON.stringify(data[property]);
                     expect(data).isNotEmptyString();
                 }
                 else if (type == 'int') {
@@ -723,7 +724,7 @@ describe('Printing Generic', function() {
                 }
                 else if (type == 'isBoolean') {
                     var data = thisprinter.getProperties([property]);
-                    expect(data).isBoolean();
+                    expect(data.property).isBoolean();
                 }       
             });
         });

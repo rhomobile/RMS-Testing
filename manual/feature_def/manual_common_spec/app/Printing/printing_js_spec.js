@@ -848,9 +848,9 @@ describe('Printing Generic', function() {
     });
 
     // display PRINTER_STATUS_ERR_TIMEOUT when turned off the printer
-    describe ('Should get PRINTER_STATUS_ERR_TIMEOUT when trying to connect the turned off printer'), function() {
+    describe ("Should get PRINTER_STATUS_ERR_TIMEOUT when trying to connect the turned off printer", function() {
 
-        it ('Should get PRINTER_STATUS_ERR_TIMEOUT when using connect printer to a turned off printer'), function() {
+        it ("Should get PRINTER_STATUS_ERR_TIMEOUT when using connect printer to a turned off printer", function() {
             var thisprinter = null;
             var callresult = null;
 
@@ -878,7 +878,7 @@ describe('Printing Generic', function() {
             _result.waitForResponse();
         });
 
-        it ('Should get PRINTER_STATUS_ERR_TIMEOUT when using connectWithOptions printer to a turned off printer'), function() {
+        it ("Should get PRINTER_STATUS_ERR_TIMEOUT when using connectWithOptions printer to a turned off printer", function() {
             var thisprinter = null;
             var callresult = null;
 
