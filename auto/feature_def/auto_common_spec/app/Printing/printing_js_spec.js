@@ -608,8 +608,8 @@ describe('Printing Generic', function() {
     
     // stopSearch method tests
     describe('stopSearch method', function() {
-        it("stopSearch Method (without callback function)", function () {
-
+	
+        it("stopSearch Method", function () {
             runs(function () {
                 // Let the printer be search first then use stop
                 callresult = null;
@@ -627,46 +627,7 @@ describe('Printing Generic', function() {
             });
 
         });
-
-        it("stopSearch Method (with callback function)", function () {
-
-            runs(function () {
-                // Let the printer be search first then use stop
-                callresult = null;
-                Rho.Printer.searchPrinters({}, searchPrinterCallback);
-                Rho.Printer.stopSearch(cbk);
-            });
-
-            waitsFor(function () {
-                return callresult !== null
-            }, 'Stopping the Search Printers....', 5000);
-
-            runs(function() {
-                expect(printers_array).toEqual([]);
-                expect(callresult).toEqual(Rho.Printer.PRINTER_STATUS_SUCCESS);
-            });
-
-        });
-
-        it("stopSearch Method (with anonymous function)", function () {
-
-            runs(function () {
-                // Let the printer be search first then use stop
-                callresult = null;
-                Rho.Printer.searchPrinters({}, searchPrinterCallback);
-                Rho.Printer.stopSearch( function(callbackValue) { callresult = callbackValue; });
-            });
-
-            waitsFor(function () {
-                return callresult !== null
-            }, 'Stopping the Search Printers....', 5000);
-
-            runs(function() {
-                expect(printers_array).toEqual([]);
-                expect(callresult).toEqual(Rho.Printer.PRINTER_STATUS_SUCCESS);
-            });
-
-        });
+		
     });
 
 
@@ -731,13 +692,13 @@ describe('Printing Generic', function() {
         it( deftext.join(' ') , function() {
             runs(function() {
                 if(type == 'string') {
-                    expect(thisprinter.getProperty(property).isNotEmptyString());
+                    expect(thisprinter.getProperty(property)).isNotEmptyString();
                 }
                 else if (type == 'int') {
-                    expect(thisprinter.getProperty(property).isNumberGreaterThenZero());
+                    expect(thisprinter.getProperty(property)).isNumberGreaterThenZero();
                 }
                 else if (type == 'isBoolean') {
-                    expect(thisprinter.getProperty(property).isBoolean());
+                    expect(thisprinter.getProperty(property)).isBoolean();
                 }       
             });
         });
@@ -745,7 +706,7 @@ describe('Printing Generic', function() {
     }
     
     function generategetproperties(property, type) {
-        var deftext = ['Should return',properties,'value as a ',type ];
+        var deftext = ['Should return',property,'value as a ',type ];
         it( deftext.join(' ') , function() {
             runs(function() {
                 if(type == 'string') {

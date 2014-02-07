@@ -790,36 +790,37 @@ describe('Printing Generic', function() {
 
     // get and set default printer -- disabled bec its crashing the app as of now
     xdescribe("Should print a raw string using the get default printer", function() {
-        var thisprinter = null;
-        var printerObj = null;
+		it("Should print a raw string using the get default printer", function() {
+			var thisprinter = null;
+			var printerObj = null;
 
-        _result.waitToRunTest();
+			_result.waitToRunTest();
 
-        dispTestCaseRunning("Set default printer and print a raw string using the get default");
-        dispExpectedResult(jasmine.getEnv().currentSpec.description, callresult.toString());
+			dispTestCaseRunning("Set default printer and print a raw string using the get default");
+			dispExpectedResult(jasmine.getEnv().currentSpec.description, callresult.toString());
 
-        runs(function() {
-            expect(last_found_printer_id).toNotEqual(null);
-            printerObj = Rho.Printer.getPrinterByID(last_found_printer_id);
-            Rho.Printer.setDefault(printerObj);
-            expect(Rho.Printer.getDefault()).toEqual(printerObj);
-        });
-    
-        runs(function() {
-            thisprinter = Rho.Printer.getDefault();
-            thisprinter.connect(cbk);
-        });
+			runs(function() {
+				expect(last_found_printer_id).toNotEqual(null);
+				printerObj = Rho.Printer.getPrinterByID(last_found_printer_id);
+				Rho.Printer.setDefault(printerObj);
+				expect(Rho.Printer.getDefault()).toEqual(printerObj);
+			});
+		
+			runs(function() {
+				thisprinter = Rho.Printer.getDefault();
+				thisprinter.connect(cbk);
+			});
 
-        waitsFor(function() {
-            return callresult !== null;
-        }, 'wait until connected', 10000);
+			waitsFor(function() {
+				return callresult !== null;
+			}, 'wait until connected', 10000);
 
-        runs(function() {
-            thisprinter.printRawString(CommandCCPL, {});
-        });
-        
-        _result.waitForResponse();
-
+			runs(function() {
+				thisprinter.printRawString(CommandCCPL, {});
+			});
+			
+			_result.waitForResponse();
+		});
     });
 
     // display all properties of printer
