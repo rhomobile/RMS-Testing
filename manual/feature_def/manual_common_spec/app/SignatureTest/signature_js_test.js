@@ -23,20 +23,20 @@ function setExpected(expected)
 	document.getElementById("expResult").innerHTML = expected;
 }
 
-function takecallbackdata(data)
+function imageCallback(data)
 {
 	document.getElementById("clbkStatus").innerHTML = data.status;
 	document.getElementById("clbkURI").innerHTML = data.imageUri;
     $("#capturedImage").attr('src', data.imageUri);
 }
 
-function URIcallbackdata(data)
+function dataUriCallback(data)
 {
 	document.getElementById("clbkStatus").innerHTML = data.status;
 	document.getElementById("capturedImage").src = data.imageUri;
 }
 
-function vectorcallbackdata(data)
+function vectorCallback(data)
 {
 	document.getElementById("clbkVector").innerHTML = data.vectorArray;
 }
