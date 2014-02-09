@@ -1,7 +1,80 @@
 describe('Near Field Communication Tests', function () {
 
-    describe('NFC Tag tests', function () {
-         beforeEach(function () {
+    describe("Adapter specs for basic properties and", function () {
+
+        it('Property \"supported\" should return true if NFC supported on this device', function () {
+            var spec = new ManualSpec(jasmine, window.document);
+            spec.addGoal(jasmine.getEnv().currentSpec.description);
+            spec.addExpectation("Property \"supported\" should return \"true\" if device supports NFC feature");
+            spec.displayScenario();
+            spec.waitForButtonPressing("Run test");
+
+            spec.addResult("Property \"supported\"", Rho.NFC.Adapter.supported);
+
+            runs(function () {
+                spec.displayResults();
+                spec.waitForResponse();
+            });
+        });
+
+        it('Property \"version\" should return version of the NFC engine', function () {
+            var spec = new ManualSpec(jasmine, window.document);
+            spec.addGoal(jasmine.getEnv().currentSpec.description);
+            spec.addPrecondition("Device with NFC feature");
+            spec.addExpectation("Property \"version\" should return string with version of NFC engine");
+            spec.displayScenario();
+            spec.waitForButtonPressing("Run test");
+
+            spec.addResult("Property \"version\"", Rho.NFC.Adapter.version);
+
+            runs(function () {
+                spec.displayResults();
+                spec.waitForResponse();
+            });
+        });
+
+        it('Method \"activate\" should activate NFC engine', function () {
+            var spec = new ManualSpec(jasmine, window.document);
+            spec.addGoal(jasmine.getEnv().currentSpec.description);
+            ;
+            spec.addPrecondition("Device with NFC feature");
+            spec.addExpectation("Result of method activate should be \"OK\" if NFC engine activated successfully");
+            spec.addExpectation("Property \"isActive\" should return true if NFC engine activated successfully");
+            spec.displayScenario();
+            spec.waitForButtonPressing("Run test");
+
+            spec.addResult("Result of executing method \"activate\"", Rho.NFC.Adapter.activate());
+            spec.addResult("Property \"isActive\"", Rho.NFC.Adapter.isActive);
+
+            runs(function () {
+                spec.displayResults();
+                spec.waitForResponse();
+            });
+        });
+
+        it('Method \"stop\" should deactivate NFC engine', function () {
+            var spec = new ManualSpec(jasmine, window.document);
+            spec.addGoal(jasmine.getEnv().currentSpec.description);
+            spec.addPrecondition("Device with NFC feature");
+            spec.addExpectation("Result of method stop should be \"OK\" if NFC engine deactivated successfully");
+            spec.addExpectation("Property \"isActive\" should return false if NFC engine deactivated successfully");
+            spec.displayScenario();
+            spec.waitForButtonPressing("Run test");
+
+            Rho.NFC.Adapter.activate();
+            spec.addResult("Result of executing method \"stop\"", Rho.NFC.Adapter.stop());
+            spec.addResult("Property \"isActive\"", Rho.NFC.Adapter.isActive);
+
+            runs(function () {
+                spec.displayResults();
+                spec.waitForResponse();
+            });
+        });
+    });
+
+    describe('Adapter specs for handlers', function () {
+
+        beforeEach(function () {
             Rho.NFC.Adapter.activate();
         });
 
@@ -11,75 +84,74 @@ describe('Near Field Communication Tests', function () {
 
 
         it('Tag reading', function () {
-            var flag = false;
-            var test = new ManualTest();
-            test.addGoal("Check work of setTagDetectionHandler");
-            test.addPrecondition("Smart tag");
-            test.addStep('Press "Start test" button');
-            test.addStep('Touch tag to device');
-            test.addExpectation("Status should be OK and tag information should be displayed");
-            test.displayScenario();
-            test.waitForSpecStart();
+            var flag;
+            var spec = new ManualSpec();
+            spec.addGoal("Check work of setTagDetectionHandler");
+            spec.addPrecondition("Smart tag");
+            spec.addStep('Press "Start test" button');
+            spec.addStep('Touch tag to device');
+            spec.addExpectation("Status should be OK and tag information should be displayed");
+            spec.displayScenario();
+            spec.waitForButtonPressing("Run test");
 
             Rho.NFC.Adapter.setTagDetectionHandler([], function (status, tagID) {
-                test.addResult('Status', status);
+                spec.addResult('Status', status);
                 var tag = Rho.NFC.Tag.getTagById(tagID);
-                test.addResult('Tag ID', tag.ID);
-                test.addResult('Tag type', tag.type);
-                test.addResult('Tag serialNumber', tag.serialNumber);
-                test.addResult('Tag size', tag.size);
-                test.addResult('Tag freeSize', tag.freeSize);
-                test.addResult('Tag isReadOnly', tag.isReadOnly);
-                test.addResult('Tag isNdef', tag.isNdef);
+                spec.addResult('Tag ID', tag.ID);
+                spec.addResult('Tag type', tag.type);
+                spec.addResult('Tag serialNumber', tag.serialNumber);
+                spec.addResult('Tag size', tag.size);
+                spec.addResult('Tag freeSize', tag.freeSize);
+                spec.addResult('Tag isReadOnly', tag.isReadOnly);
+                spec.addResult('Tag isNdef', tag.isNdef);
                 flag = true;
             });
 
+            flag = false;
             waitsFor(function () {
                 return flag;
             }, "Callback hasn't called for in ten seconds", 10000);
 
             runs(function () {
-                test.displayResult();
-                test.waitForUserAction();
+                spec.displayResults();
+                spec.waitForResponse();
             });
-
         });
 
         it('Message reading', function () {
-            var flag = false;
-            var test = new ManualTest();
-            test.addGoal("Check work of setMessageHandler");
-            test.addPrecondition("Another NFC device");
-            test.addStep('Press "Start test" button');
-            test.addStep('Touch another NFC device to device');
-            test.addExpectation("Status should be OK and message information should be displayed");
-            test.displayScenario();
-            test.waitForSpecStart();
+            var flag;
+            var spec = new ManualSpec();
+            spec.addGoal("Check work of setMessageHandler");
+            spec.addPrecondition("Another NFC device");
+            spec.addStep('Press "Start test" button');
+            spec.addStep('Touch another NFC device to device');
+            spec.addExpectation("Status should be OK and message information should be displayed");
+            spec.displayScenario();
+            spec.waitForButtonPressing("Run test");
 
             Rho.NFC.Adapter.setMessageHandler(0, [], function (status, messageID) {
-                test.addResult('Status', status);
+                spec.addResult('Status', status);
                 var message = Rho.NFC.Message.getMeessageById(messageID);
-                test.addResult('Message ID', message.ID);
-                message.getRecords().forEach(function(each){
+                spec.addResult('Message ID', message.ID);
+                message.getRecords().forEach(function (each) {
                     var record = Rho.NFC.Record.getRecordById(each);
-                    test.addResult('Record ID', record.ID);
-                    test.addResult('Record type', record.TNF);
-                    test.addResult('Record type', record.type);
-                    test.addResult('Record payload', record.payloadAsString);
+                    spec.addResult('Record ID', record.ID);
+                    spec.addResult('Record type', record.TNF);
+                    spec.addResult('Record type', record.type);
+                    spec.addResult('Record payload', record.payloadAsString);
                 })
                 flag = true;
             });
 
+            flag = false;
             waitsFor(function () {
                 return flag;
             }, "Callback hasn't called for in ten seconds", 10000);
 
             runs(function () {
-                test.displayResult();
-                test.waitForUserAction();
+                spec.displayResults();
+                spec.waitForResponse();
             });
-
         });
-
     });
 });
