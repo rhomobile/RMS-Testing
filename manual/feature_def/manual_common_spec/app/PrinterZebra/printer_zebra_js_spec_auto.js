@@ -787,7 +787,7 @@ describe('Printer Zebra', function() {
     });
 
 
-     function generateStoreImageWithoutAnonymous(from,to,width,height,isOk,force, callback_type) {
+     function generateStoreImageWithoutAnonymous(callback_type, from,to,width,height,isOk,force) {
         if ((!Rho.RhoFile.exists(from)) || (width == 0) || (height == 0)) {
             if (!isOk && !force) {
                 return;
@@ -834,17 +834,17 @@ describe('Printer Zebra', function() {
             doConnect();
         });
 
-        generateStoreImageWithoutAnonymous(pngimagepath_320px,'PNG.GRF',50,50,true,'without');
-        generateStoreImageWithoutAnonymous(pngimagepath_640px,'E:TF1.GRF',50,50,true, 'Anonymous');
-        generateStoreImageWithoutAnonymous(pngimagepath_1024px,'R:TF1.GRF',50,50,true, 'without');
-        generateStoreImageWithoutAnonymous(pngimagepath_2048px,'E:TF2.GRF',0,0,false, 'Anonymous');
-        generateStoreImageWithoutAnonymous(pngimagepath_320px,'TF2.GRF',-1,-1,true, 'without');
+        generateStoreImageWithoutAnonymous('without', pngimagepath_320px,'PNG.GRF',50,50,true,);
+        generateStoreImageWithoutAnonymous('Anonymous', pngimagepath_640px,'E:TF1.GRF',50,50,true);
+        generateStoreImageWithoutAnonymous('without', pngimagepath_1024px,'R:TF1.GRF',50,50,true);
+        generateStoreImageWithoutAnonymous('Anonymous', pngimagepath_2048px,'E:TF2.GRF',0,0,false);
+        generateStoreImageWithoutAnonymous('without', pngimagepath_320px,'TF2.GRF',-1,-1,true);
 
-        generateStoreImageWithoutAnonymous(jpgimagepath_320px,'JPG.GRF',50,50,true,'without');
-        generateStoreImageWithoutAnonymous(jpgimagepath_640px,'E:JF1.GRF',50,50,true, 'Anonymous');
-        generateStoreImageWithoutAnonymous(jpgimagepath_1024px,'R:JF1.GRF',50,50,true, 'without');
-        generateStoreImageWithoutAnonymous(jpgimagepath_2048px,'E:JF2.GRF',0,0,false, 'Anonymous');
-        generateStoreImageWithoutAnonymous(jpgimagepath_320px,'JF2.GRF',-1,-1,true, 'without');
+        generateStoreImageWithoutAnonymous('without', jpgimagepath_320px,'JPG.GRF',50,50,true);
+        generateStoreImageWithoutAnonymous('Anonymous', jpgimagepath_640px,'E:JF1.GRF',50,50,true);
+        generateStoreImageWithoutAnonymous('without', jpgimagepath_1024px,'R:JF1.GRF',50,50,true);
+        generateStoreImageWithoutAnonymous('Anonymous', jpgimagepath_2048px,'E:JF2.GRF',0,0,false);
+        generateStoreImageWithoutAnonymous('without', jpgimagepath_320px,'JF2.GRF',-1,-1,true);
 
 
 
@@ -856,13 +856,13 @@ describe('Printer Zebra', function() {
 		it( deftext.join(' ') , function() {
 			runs(function() {
 				if(type == 'string') {
-					expect(thisprinter.getProperty(property).isNotEmptyString());
+					expect(thisprinter.getProperty(property)).isNotEmptyString();
 				}
 				else if (type == 'int') {
-					expect(thisprinter.getProperty(property).isNumberGreaterThenZero());
+					expect(thisprinter.getProperty(property)).isNumberGreaterThenZero();
 				}
 				else if (type == 'isBoolean') {
-					expect(thisprinter.getProperty(property).isBoolean());
+					expect(thisprinter.getProperty(property)).isBoolean();
 				}		
 			});
 		});
@@ -875,6 +875,7 @@ describe('Printer Zebra', function() {
             runs(function() {
                 if(type == 'string') {
                     var data = thisprinter.getProperties([property]);
+                    data = JSON.stringify(data[property]);
                     expect(data).isNotEmptyString();
                 }
                 else if (type == 'int') {
@@ -884,7 +885,7 @@ describe('Printer Zebra', function() {
                 }
                 else if (type == 'isBoolean') {
                     var data = thisprinter.getProperties([property]);
-                    expect(data).isBoolean();
+                    expect(data.property).isBoolean();
                 }       
             });
         });
@@ -1138,7 +1139,7 @@ describe('Printer Zebra', function() {
 
         });
 
-        it("stopSearch Method (with callback function)", function () {
+        xit("stopSearch Method (with callback function)", function () {
 
             runs(function () {
                 // Let the printer be search first then use stop
@@ -1158,7 +1159,7 @@ describe('Printer Zebra', function() {
 
         });
 
-        it("stopSearch Method (with anonymous function)", function () {
+        xit("stopSearch Method (with anonymous function)", function () {
 
             runs(function () {
                 // Let the printer be search first then use stop
@@ -1179,7 +1180,7 @@ describe('Printer Zebra', function() {
         });
     });    
 
-    xdescribe("Get & Set default PrinterZebra", function() {
+    describe("Get & Set default PrinterZebra", function() {
         var thisprinter = null;
         var printerObj = null;
 
@@ -1319,7 +1320,7 @@ describe('Printer Zebra', function() {
 
     });
 
-    if(thisprinter.getProperty("connectionType") == "CONNECTION_TYPE_BLUETOOTH") {
+   // if(Rho.PrinterZebra.getProperty("connectionType") == "CONNECTION_TYPE_BLUETOOTH") {
         describe('timeToWaitAfterReadInMilliseconds property ', function() {
             it('should connect', function() {
                 doConnect();
@@ -1382,7 +1383,7 @@ describe('Printer Zebra', function() {
 
         });
 
-    }
+   // }
  
 
 	

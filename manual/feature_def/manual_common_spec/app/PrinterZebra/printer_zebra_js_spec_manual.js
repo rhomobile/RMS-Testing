@@ -746,7 +746,7 @@ describe('Printer Zebra', function() {
 
         it( deftext.join(' ') , function() {
 			dispTestCaseRunning("1. Should Print label <br />2. "+def+" Print "+Rho.RhoFile.basename(from)+" image");
-			dispExpectedResult(jasmine.getEnv().currentSpec.description, callresult.toString());
+			dispExpectedResult(jasmine.getEnv().currentSpec.description);
 			//Common Method implemented to wait for tester to run the test.Code available in specHelper.js
 			_result.waitToRunTest();
             doPrintTestLabel();
@@ -769,7 +769,7 @@ describe('Printer Zebra', function() {
                 }
             });*/
 			runs(function() {
-				displayResult(jasmine.getEnv().currentSpec.description, callresult.toString());
+				displayResult(jasmine.getEnv().currentSpec.description, callresult);
 			});
 			_result.waitForResponse();
         });
@@ -819,7 +819,7 @@ describe('Printer Zebra', function() {
 
         it( deftext.join(' ') , function() {
             dispTestCaseRunning("1. Should Print label <br />2. "+def+" Print "+Rho.RhoFile.basename(from)+" image");
-            dispExpectedResult(jasmine.getEnv().currentSpec.description, callresult.toString());
+            dispExpectedResult(jasmine.getEnv().currentSpec.description);
             //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
             _result.waitToRunTest();
             doPrintTestLabel();
@@ -957,13 +957,13 @@ describe('Printer Zebra', function() {
 
 			runs(function() {
 				callresult = null;
-				if(callback_value == 'with') {
+				if(callback_type == 'with') {
 					thisprinter.printStoredFormatWithHash(formatpath, hashvalue, cbk);
 				}
-				else if(callback_value == 'without') {
+				else if(callback_type == 'without') {
 					callresult = thisprinter.printStoredFormatWithHash(formatpath, hashvalue);
 				}	
-				else if(callback_value == 'Anonymous') {
+				else if(callback_type == 'Anonymous') {
 					thisprinter.printStoredFormatWithHash(formatpath, hashvalue, function(callbackValue) {callresult = callbackValue;});
 				}	
 			});
@@ -1034,13 +1034,13 @@ describe('Printer Zebra', function() {
 
 			runs(function() {
 				callresult = null;
-				if(callback_value == 'with') {
+				if(callback_type == 'with') {
 					thisprinter.printStoredFormatWithArray(formatpath, arrayvalue, cbk);
 				}
-				else if(callback_value == 'without') {
+				else if(callback_type == 'without') {
 					callresult = thisprinter.printStoredFormatWithArray(formatpath, arrayvalue);
 				}	
-				else if(callback_value == 'Anonymous') {
+				else if(callback_type == 'Anonymous') {
 					thisprinter.printStoredFormatWithArray(formatpath, arrayvalue, function(callbackValue) {callresult = callbackValue;});
 				}	
 			});
@@ -1112,7 +1112,99 @@ describe('Printer Zebra', function() {
        
     });
 
-   	
+    describe("Should print a raw string using the get default printer", function() {
+        it("Should print a raw string using the get default printer", function() {
+            var thisprinter = null;
+            var printerObj = null;
+            dispTestCaseRunning("Set default printer and print a raw string using the get default");
+            dispExpectedResult(jasmine.getEnv().currentSpec.description, callresult.toString());
+
+            _result.waitToRunTest();
+
+            
+            runs(function() {
+                expect(last_found_printer_id).toNotEqual(null);
+                printerObj = Rho.PrinterZebra.getPrinterByID(last_found_printer_id);
+                Rho.PrinterZebra.setDefault(printerObj);
+                expect(Rho.PrinterZebra.getDefault()).toEqual(printerObj);
+            });
+        
+            runs(function() {
+                thisprinter = Rho.PrinterZebra.getDefault();
+                thisprinter.connect(cbk);
+            });
+
+            waitsFor(function() {
+                return callresult !== null;
+            }, 'wait until connected', 10000);
+
+            runs(function() {
+                thisprinter.printRawString(CommandCCPL, {});
+            });
+            
+            _result.waitForResponse();
+        });
+    });
+
+
+   	 describe ("Should get PRINTER_STATUS_ERR_TIMEOUT when trying to connect the turned off printer", function() {
+
+        it ("Should get PRINTER_STATUS_ERR_TIMEOUT when using connect printer to a turned off printer", function() {
+            var thisprinter = null;
+            var callresult = null;
+            dispTestCaseRunning("Turn off the Printer and then click on Run Test");
+            dispExpectedResult("Should get PRINTER_STATUS_ERR_TIMEOUT when using connect printer to a turned off printer");
+            _result.waitToRunTest();
+
+            
+
+             runs(function() {
+                expect(last_found_printer_id).toNotEqual(null);
+                thisprinter = Rho.PrinterZebra.getPrinterByID(last_found_printer_id);
+                callresult = null;
+                thisprinter.connect(cbk);
+            });
+
+            waitsFor(function() {
+                return callresult != null;
+            }, 'wait while disconnected', 5000);
+
+            runs(function() {
+                displayResult(jasmine.getEnv().currentSpec.description, callresult.toString());
+            });
+
+            _result.waitForResponse();
+        });
+
+        it ("Should get PRINTER_STATUS_ERR_TIMEOUT when using connectWithOptions printer to a turned off printer", function() {
+            var thisprinter = null;
+            var callresult = null;
+            dispExpectedResult("Should get PRINTER_STATUS_ERR_TIMEOUT when using connectWithOptions printer to a turned off printer");
+            dispTestCaseRunning("Turn off the Printer and then click on Run Test");
+            _result.waitToRunTest();
+
+           
+
+             runs(function() {
+                expect(last_found_printer_id).toNotEqual(null);
+                thisprinter = Rho.PrinterZebra.getPrinterByID(last_found_printer_id);
+                callresult = null;
+                thisprinter.connectWithOptions({
+                    "timeout": 0
+                });
+            });
+
+            waitsFor(function() {
+                return callresult != null;
+            }, 'wait while disconnected', 5000);
+
+            runs(function() {
+                displayResult(jasmine.getEnv().currentSpec.description, callresult.toString());
+            });
+
+            _result.waitForResponse();
+        });
+    })
 		
 
 });
