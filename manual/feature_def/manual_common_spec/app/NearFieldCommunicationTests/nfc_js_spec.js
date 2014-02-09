@@ -36,7 +36,6 @@ describe('Near Field Communication Tests', function () {
         it('Method \"activate\" should activate NFC engine', function () {
             var spec = new ManualSpec(jasmine, window.document);
             spec.addGoal(jasmine.getEnv().currentSpec.description);
-            ;
             spec.addPrecondition("Device with NFC feature");
             spec.addExpectation("Result of method activate should be \"OK\" if NFC engine activated successfully");
             spec.addExpectation("Property \"isActive\" should return true if NFC engine activated successfully");
@@ -97,13 +96,19 @@ describe('Near Field Communication Tests', function () {
             Rho.NFC.Adapter.setTagDetectionHandler([], function (status, tagID) {
                 spec.addResult('Status', status);
                 var tag = Rho.NFC.Tag.getTagById(tagID);
-                spec.addResult('Tag ID', tag.ID);
-                spec.addResult('Tag type', tag.type);
-                spec.addResult('Tag serialNumber', tag.serialNumber);
-                spec.addResult('Tag size', tag.size);
-                spec.addResult('Tag freeSize', tag.freeSize);
-                spec.addResult('Tag isReadOnly', tag.isReadOnly);
-                spec.addResult('Tag isNdef', tag.isNdef);
+                try {
+                    spec.addResult('Tag.ID', tag.ID);
+                    spec.addResult('Tag.type', tag.type);
+                    spec.addResult('Tag.serialNumber', tag.serialNumber);
+                    spec.addResult('Tag.size', tag.size);
+                    spec.addResult('Tag.freeSize', tag.freeSize);
+                    spec.addResult('Tag.isReadOnly', tag.isReadOnly);
+                    spec.addResult('Tag.isNdef', tag.isNdef);
+                    spec.addResult('Tag.isConnected', tag.isConnected);
+                }
+                finally {
+                    tag.close();
+                }
                 flag = true;
             });
 
@@ -132,14 +137,24 @@ describe('Near Field Communication Tests', function () {
             Rho.NFC.Adapter.setMessageHandler(0, [], function (status, messageID) {
                 spec.addResult('Status', status);
                 var message = Rho.NFC.Message.getMeessageById(messageID);
-                spec.addResult('Message ID', message.ID);
-                message.getRecords().forEach(function (each) {
-                    var record = Rho.NFC.Record.getRecordById(each);
-                    spec.addResult('Record ID', record.ID);
-                    spec.addResult('Record type', record.TNF);
-                    spec.addResult('Record type', record.type);
-                    spec.addResult('Record payload', record.payloadAsString);
-                })
+                try {
+                    spec.addResult('Message.ID', message.ID);
+                    message.getRecords().forEach(function (each) {
+                        var record = Rho.NFC.Record.getRecordById(each);
+                        try {
+                            spec.addResult('Record.ID', record.ID);
+                            spec.addResult('Record.TNF', record.TNF);
+                            spec.addResult('Record.type', record.type);
+                            spec.addResult('Record.payloadAsString', record.getPayloadAsString());
+                        }
+                        finally {
+                            record.close();
+                        }
+                    });
+                }
+                finally {
+                    message.close();
+                }
                 flag = true;
             });
 
