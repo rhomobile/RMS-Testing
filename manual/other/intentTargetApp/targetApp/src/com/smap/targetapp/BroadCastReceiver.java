@@ -14,8 +14,13 @@ public class BroadCastReceiver extends BroadcastReceiver {
 	    Log.i("targetApp", "Broadcast is received: " + intent );
 	    
 		String toastStr = intent.getStringExtra("toast");
+		String myDataStr = intent.getStringExtra("myData");
 		if (toastStr != null) {
 		    Toast toast = Toast.makeText(context, toastStr + " - Toast from Target Application", Toast.LENGTH_SHORT);
+		    toast.show();
+		}
+		if(myDataStr!= null){
+			Toast toast = Toast.makeText(context, myDataStr + " - Toast from Target Application", Toast.LENGTH_SHORT);
 		    toast.show();
 		}
 		

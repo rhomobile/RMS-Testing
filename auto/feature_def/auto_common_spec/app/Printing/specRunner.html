@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>RSM JS Test</title>
+    <title>Printing (Generic) JS Test</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
     <META HTTP-Equiv="MinimizeButton" content="visibility:Visible;top:30 ">
     <META HTTP-Equiv="quitbutton" Content="visibility:visible">
@@ -128,9 +128,10 @@
 </head>
 
 <body>
-
-    <h1>Printer (Generic) Automatic Tests</h1>
-
+    <div id="console"><b>Console: </b>
+        <div id="logs" /></div>
+    </div><br/>
+    
     <div>Discovered Devices:
         <select id="dev_list"></select>
     </div>
@@ -143,7 +144,35 @@
     <div>Device Port:
         <input type="text" id="dev_port" value="6101" />
     </div>
-	
+
+    <div><b>Test Output: </b>
+        <div id="test_output"></div>
+    </div>
+
+<!--    <div id="manual_contols">
+        <div><b>Test Objective: </b>
+            <div id="objective"></div>
+        </div>
+        <div><b>Test Running: </b>
+            <div id="instruction"></div>
+        </div>
+        <div><b>Expected Result: </b>
+            <div id="expResult"></div>
+        </div>
+        <b>Decoded Data: </b><div id="clbkData" style="word-wrap: break-word;"></div>
+        <div id="select_box_wrapper" style="display:none">
+            <select name="combo" id="combo"></select>
+        </div>
+        <div><b>Test Output: </b>
+            <div id="test_output"></div>
+        </div>
+        <div id="action"></div>
+        <div id="actResult" style="display:none">init</div>
+        <input type="button" value="Test Passed" onclick="testPassed()" />
+        <input type="button" value="Test Failed" onclick="testFailed()" />
+    </div>
+    <div id="actResult" style="display:none">init</div> -->
+
 </body>
 
 </html>

@@ -5,14 +5,21 @@ How to run ORM js specs
 
 * Checkout rhodes to branch "neworm_dev"
 
+  $ git checkout git checkout neworm_dev
+  $ git pull origin neworm_dev
+
 * Edit file "rhoconfig.txt" file to select which implementation to run:
-  'use_new_orm = 0' property to run legacy old orm code,
-  otherwise 'use_new_orm = 1' to exec a new orm code
+  set 'use_new_orm = 0' property to run legacy Old ORM code,
+  otherwise set 'use_new_orm = 1' to execute specs with New ORM code
 
-* Run from auto/feature_def/new_orm_spec_js directory the following command
+* In addition, if you select to run specs with Old ORM, then edit
+  public/app/specRunner.html file and enable script tag for rhoapi-modules-ORM.js file
 
-  rake run:android:spec
+* Run from auto/feature_def/new_orm_spec_js directory one of the following platform specific command
 
-* spec results are in a bunch of xml files, emulator logs in RhoLogSpec.txt
+  $ rake run:android:spec
+  $ rake run:iphone:spec
+
+* spec results can be found in a bunch of xml files, rhodes emulator logs in RhoLogSpec.txt
 
 

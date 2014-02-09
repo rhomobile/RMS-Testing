@@ -12,12 +12,6 @@ var dpx_tests = (function() {
         });
     }
 
-    var resolutions = [
-        Rho.DPX.RESOLUTION_SMALL,
-        Rho.DPX.RESOLUTION_MEDIUM,
-        Rho.DPX.RESOLUTION_LARGE
-    ];
-
     var fillDropDown = function(dropDown, input, value, values) {
         input.val(value);
         $.each(values, function(idx, fileName) {
@@ -36,7 +30,6 @@ var dpx_tests = (function() {
 
     $(document).ready(function(){
         fillDropDown($('ul.dropdown-menu.x-templates'  ), $('input.form-control.x-template'  ), 'Logistics Post.xml'     , templates  );
-        fillDropDown($('ul.dropdown-menu.x-resolutions'), $('input.form-control.x-resolution'), Rho.DPX.RESOLUTION_MEDIUM, resolutions);
     });
 
 
@@ -179,20 +172,16 @@ var dpx_tests = (function() {
         var dpx = new Rho.DPX();
 
         var params = {
-            'template': 'file://' + encodeURI(Rho.RhoFile.join(TEMPLATES_DIR, $('input.form-control.x-template').val())),
-
-            'manualResolution': $('input.form-control.x-resolution').val(),
 
             'debug': false,
 
             'audioFeedback': false,
-            'hapticFeedback': false,
+            'hapticFeedback': true,
             'ledFeedback': true,
 
-            'inputSource': Rho.DPX.SOURCE_FILE, 
-            'inputSourceFilename': '/sdcard/templates/1024w_754h_Delivery Attempt Notification.yuv',
-            'fileInteractiveMode': true,
-            'uiResultConfirmation': false
+            'uiResultConfirmation': false,
+
+            'template': 'file://' + encodeURI(Rho.RhoFile.join(TEMPLATES_DIR, $('input.form-control.x-template').val()))
         };
 
         each(params, function(k, v) {
@@ -215,14 +204,13 @@ var dpx_tests = (function() {
     var capture = function() {
         try {
             var dpx = create_dpx();
-            dpx.setCallback(function(dict) {
+            dpx.captureDocument(function(dict) {
                 callback(dict, dpx);
 
-                if (dict['callbackType'] === 'success' || dict['callbackType'] === 'failure') {
+                if (dict['callbackType'] === Rho.DPX.STOP) {
                     dpx.close();
                 }
             });
-            dpx.captureDocument();
         } catch (e) {
             log('EXCEPTION ' + e);
         }
@@ -233,9 +221,6 @@ var dpx_tests = (function() {
     var open = function() {
         try {
             dpx = create_dpx();
-            dpx.setCallback(function(dict) {
-                callback(dict, dpx);
-            });
         } catch (e) {
             log('EXCEPTION ' + e);
         }
@@ -243,7 +228,9 @@ var dpx_tests = (function() {
 
     var start = function() {
         try {
-            dpx.captureDocument();
+            dpx.captureDocument(function(dict) {
+                callback(dict, dpx);
+            });
         } catch (e) {
             log('EXCEPTION ' + e);
         }

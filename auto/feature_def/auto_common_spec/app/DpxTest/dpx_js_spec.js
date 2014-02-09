@@ -28,10 +28,6 @@ describe('getting property default value', function() {
 		expect(dpxInstance.hapticFeedback).toEqual(true);
 		});
 
-		it('Should get fileInteractiveMode default value', function() {
-		expect(dpxInstance.fileInteractiveMode).toEqual(true);
-		});
-
 		it('Should get flashMode default value', function() {
 		expect(dpxInstance.flashMode).toEqual(Rho.DPX.FLASH_OFF);
 		});
@@ -48,14 +44,6 @@ describe('getting property default value', function() {
 		expect(dpxInstance.logDirectory).toEqual('/sdcard/DPXLog');
 		});
 
-		it('Should get manualResolution default value', function() {
-		expect(dpxInstance.manualResolution).toEqual(Rho.DPX.RESOLUTION_MEDIUM);
-		});
-
-		it('Should get manualResolutionMode default value', function() {
-		expect(dpxInstance.manualResolutionMode).toEqual(false);
-		});
-
 		it('Should get ocrLanguage default value', function() {
 		expect(dpxInstance.ocrLanguage).toEqual(Rho.DPX.LANGUAGE_ENGLISH);
 		});
@@ -64,16 +52,8 @@ describe('getting property default value', function() {
 		expect(dpxInstance.processingTimeout).toEqual(10000);
 		});
 
-		it('Should get userMode default value', function() {
-		expect(dpxInstance.userMode).toEqual(Rho.DPX.USER_MODE_SNAPSHOT);
-		});
-
 		it('Should get uiResultConfirmation default value', function() {
 		expect(dpxInstance.uiResultConfirmation).toEqual(true);
-		});
-
-		it('Should get zoomAmount default value', function() {
-		expect(dpxInstance.zoomAmount).toEqual(0);
 		});
 
 	});
@@ -294,44 +274,6 @@ describe('Setting ledFeedback', function() {
 });
 
 
-describe('Setting fileInteractiveMode', function() {
-
-		it('Should Set fileInteractiveMode to true using direct calling method', function() {
-		dpxInstance.fileInteractiveMode=true;
-		expect(dpxInstance.fileInteractiveMode).toEqual(true);
-		});
-		
-		it('Should Set fileInteractiveMode to true using setProperty calling method', function() {
-		dpxInstance.setProperty('fileInteractiveMode',true);
-		expect(dpxInstance.getProperty('fileInteractiveMode')).toEqual('true');
-		});
-		
-		it('Should Set fileInteractiveMode to true using setProperties calling method', function() {
-		dpxInstance.setProperties({'fileInteractiveMode' : 'true'});
-		var data = dpxInstance.getProperties(['fileInteractiveMode']);
-		data = data['fileInteractiveMode'];
-		expect(data).toEqual('true');
-		});
-		
-		it('Should Set fileInteractiveMode to false using direct calling method', function() {
-		dpxInstance.fileInteractiveMode=false;
-		expect(dpxInstance.fileInteractiveMode).toEqual(false);
-		});
-		
-		it('Should Set fileInteractiveMode to false using setProperty calling method', function() {
-		dpxInstance.setProperty('fileInteractiveMode','false');
-		expect(dpxInstance.getProperty('fileInteractiveMode')).toEqual('false');
-		});
-		
-		it('Should Set fileInteractiveMode to false using setProperties calling method', function() {
-		dpxInstance.setProperties({'fileInteractiveMode' : 'false'});
-		var data = dpxInstance.getProperties(['fileInteractiveMode']);
-		data = data['fileInteractiveMode'];
-		expect(data).toEqual('false');
-		});
-});
-
-
 describe('Setting flashMode', function() {
 
 		it('Should Set flashMode to FLASH_OFF using direct calling method', function() {
@@ -460,61 +402,6 @@ describe('Setting inputSource', function() {
 		data = data['inputSource'];
 		expect(data).toEqual(Rho.DPX.SOURCE_CAMERA);
 		});
-		
-		it('Should Set inputSource to SOURCE_IMAGER using direct calling method', function() {
-		dpxInstance.inputSource=Rho.DPX.SOURCE_IMAGER;
-		expect(dpxInstance.inputSource).toEqual(Rho.DPX.SOURCE_IMAGER);
-		});
-		
-		it('Should Set inputSource to imager using setProperty calling method', function() {
-		dpxInstance.setProperty('inputSource',Rho.DPX.SOURCE_IMAGER);
-		expect(dpxInstance.getProperty('inputSource')).toEqual(Rho.DPX.SOURCE_IMAGER);
-		});
-		
-		it('Should Set inputSource to imager using setProperties calling method', function() {
-		dpxInstance.setProperties({'inputSource' : Rho.DPX.SOURCE_IMAGER});
-		var data = dpxInstance.getProperties(['inputSource']);
-		data = data['inputSource'];
-		expect(data).toEqual(Rho.DPX.SOURCE_IMAGER);
-		});
-		
-		it('Should Set inputSource to SOURCE_FILE using direct calling method', function() {
-		dpxInstance.inputSource=Rho.DPX.SOURCE_FILE;
-		expect(dpxInstance.inputSource).toEqual(Rho.DPX.SOURCE_FILE);
-		});
-		
-		it('Should Set inputSource to file using setProperty calling method', function() {
-		dpxInstance.setProperty('inputSource',Rho.DPX.SOURCE_FILE);
-		expect(dpxInstance.getProperty('inputSource')).toEqual(Rho.DPX.SOURCE_FILE);
-		});
-		
-		it('Should Set inputSource to file using setProperties calling method', function() {
-		dpxInstance.setProperties({'inputSource' : Rho.DPX.SOURCE_FILE});
-		var data = dpxInstance.getProperties(['inputSource']);
-		data = data['inputSource'];
-		expect(data).toEqual(Rho.DPX.SOURCE_FILE);
-		});
-});
-
-
-describe('Setting inputSourceFilename', function() {
-
-		it('Should Set inputSourceFilename to file://Application/image.jpg using direct calling method', function() {
-		dpxInstance.inputSourceFilename='file://Application/image.jpg';
-		expect(dpxInstance.inputSourceFilename).toEqual('file://Application/image.jpg');
-		});
-		
-		it('Should Set inputSourceFilename to file://Application/image.jpg using setProperty calling method', function() {
-		dpxInstance.setProperty('inputSourceFilename','file://Application/image.jpg');
-		expect(dpxInstance.getProperty('inputSourceFilename')).toEqual('file://Application/image.jpg');
-		});
-		
-		it('Should Set inputSourceFilename to file://Application/image.jpg using setProperties calling method', function() {
-		dpxInstance.setProperties({'inputSourceFilename' : 'file://Application/image.jpg'});
-		var data = dpxInstance.getProperties(['inputSourceFilename']);
-		data = data['inputSourceFilename'];
-		expect(data).toEqual('file://Application/image.jpg');
-		});
 });
 
 
@@ -535,99 +422,6 @@ describe('Setting logDirectory', function() {
 		var data = dpxInstance.getProperties(['logDirectory']);
 		data = data['logDirectory'];
 		expect(data).toEqual('file://application/DPXLog');
-		});
-});
-
-
-describe('Setting manualResolution', function() {
-
-		it('Should Set manualResolution to RESOLUTION_SMALL using direct calling method', function() {
-		dpxInstance.manualResolution=Rho.DPX.RESOLUTION_SMALL;
-		expect(dpxInstance.manualResolution).toEqual(Rho.DPX.RESOLUTION_SMALL);
-		});
-		
-		it('Should Set manualResolution to 1280x960 small using setProperty calling method', function() {
-		dpxInstance.setProperty('manualResolution',Rho.DPX.RESOLUTION_SMALL);
-		expect(dpxInstance.getProperty('manualResolution')).toEqual(Rho.DPX.RESOLUTION_SMALL);
-		});
-		
-		it('Should Set manualResolution to 1280x960 using setProperties calling method', function() {
-		dpxInstance.setProperties({'manualResolution' : Rho.DPX.RESOLUTION_SMALL});
-		var data = dpxInstance.getProperties(['manualResolution']);
-		data = data['manualResolution'];
-		expect(data).toEqual(Rho.DPX.RESOLUTION_SMALL);
-		});
-		
-		it('Should Set manualResolution to RESOLUTION_MEDIUM using direct calling method', function() {
-		dpxInstance.manualResolution=Rho.DPX.RESOLUTION_MEDIUM;
-		expect(dpxInstance.manualResolution).toEqual(Rho.DPX.RESOLUTION_MEDIUM);
-		});
-		
-		it('Should Set manualResolution to 1600x1200 medium using setProperty calling method', function() {
-		dpxInstance.setProperty('manualResolution',Rho.DPX.RESOLUTION_MEDIUM);
-		expect(dpxInstance.getProperty('manualResolution')).toEqual(Rho.DPX.RESOLUTION_MEDIUM);
-		});
-		
-		it('Should Set manualResolution to 1600x1200 using setProperties calling method', function() {
-		dpxInstance.setProperties({'manualResolution' : Rho.DPX.RESOLUTION_MEDIUM});
-		var data = dpxInstance.getProperties(['manualResolution']);
-		data = data['manualResolution'];
-		expect(data).toEqual(Rho.DPX.RESOLUTION_MEDIUM);
-		});
-		
-		it('Should Set manualResolution to RESOLUTION_LARGE using direct calling method', function() {
-		dpxInstance.manualResolution=Rho.DPX.RESOLUTION_MEDIUM;
-		expect(dpxInstance.manualResolution).toEqual(Rho.DPX.RESOLUTION_MEDIUM);
-		});
-		
-		it('Should Set manualResolution to 2048x1536 large using setProperty calling method', function() {
-		dpxInstance.setProperty('manualResolution', Rho.DPX.RESOLUTION_MEDIUM);
-		expect(dpxInstance.getProperty('manualResolution')).toEqual(Rho.DPX.RESOLUTION_MEDIUM);
-		});
-		
-		it('Should Set manualResolution to 2048x1536 using setProperties calling method', function() {
-		dpxInstance.setProperties({'manualResolution' : Rho.DPX.RESOLUTION_MEDIUM});
-		var data = dpxInstance.getProperties(['manualResolution']);
-		data = data['manualResolution'];
-		expect(data).toEqual(Rho.DPX.RESOLUTION_MEDIUM);
-		});
-});
-
-
-describe('Setting manualResolutionMode', function() {
-
-		it('Should Set manualResolutionMode to true using direct calling method', function() {
-		dpxInstance.manualResolutionMode=true;
-		expect(dpxInstance.manualResolutionMode).toEqual(true);
-		});
-		
-		it('Should Set manualResolutionMode to true using setProperty calling method', function() {
-		dpxInstance.setProperty('manualResolutionMode',true);
-		expect(dpxInstance.getProperty('manualResolutionMode')).toEqual('true');
-		});
-		
-		it('Should Set manualResolutionMode to true using setProperties calling method', function() {
-		dpxInstance.setProperties({'manualResolutionMode' : 'true'});
-		var data = dpxInstance.getProperties(['manualResolutionMode']);
-		data = data['manualResolutionMode'];
-		expect(data).toEqual('true');
-		});
-		
-		it('Should Set manualResolutionMode to false using direct calling method', function() {
-		dpxInstance.manualResolutionMode=false;
-		expect(dpxInstance.manualResolutionMode).toEqual(false);
-		});
-		
-		it('Should Set manualResolutionMode to false using setProperty calling method', function() {
-		dpxInstance.setProperty('manualResolutionMode','false');
-		expect(dpxInstance.getProperty('manualResolutionMode')).toEqual('false');
-		});
-		
-		it('Should Set manualResolutionMode to false using setProperties calling method', function() {
-		dpxInstance.setProperties({'manualResolutionMode' : 'false'});
-		var data = dpxInstance.getProperties(['manualResolutionMode']);
-		data = data['manualResolutionMode'];
-		expect(data).toEqual('false');
 		});
 });
 
@@ -677,49 +471,6 @@ describe('Getting version', function() {
 });
 
 
-describe('Setting userMode', function() {
-
-		it('Should Set userMode to USER_MODE_PREVIEW using direct calling method', function() {
-		dpxInstance.userMode= Rho.DPX.USER_MODE_PREVIEW;
-		expect(dpxInstance.userMode).toEqual(Rho.DPX.USER_MODE_PREVIEW);
-		});		
-
-		it('Should Set userMode to preview using setProperty calling method', function() {
-		dpxInstance.setProperty('userMode',Rho.DPX.USER_MODE_PREVIEW);
-		expect(dpxInstance.getProperty('userMode')).toEqual(Rho.DPX.USER_MODE_PREVIEW);
-		});
-		
-		it('Should Set userMode to preview using setProperties calling method', function() {
-		dpxInstance.setProperties({'userMode' : Rho.DPX.USER_MODE_PREVIEW});
-		var data = dpxInstance.getProperties(['userMode']);
-		data = data['userMode'];
-		expect(data).toEqual(Rho.DPX.USER_MODE_PREVIEW);
-		});
-		
-		it('Should Set userMode to USER_MODE_SNAPSHOT using direct calling method', function() {
-		dpxInstance.userMode= Rho.DPX.USER_MODE_SNAPSHOT;
-		expect(dpxInstance.userMode).toEqual(Rho.DPX.USER_MODE_SNAPSHOT);
-		});
-		
-		it('Should Set userMode to snapshot using direct calling method', function() {
-		dpxInstance.userMode=Rho.DPX.USER_MODE_SNAPSHOT;
-		expect(dpxInstance.userMode).toEqual(Rho.DPX.USER_MODE_SNAPSHOT);
-		});
-		
-		it('Should Set userMode to snapshot using setProperty calling method', function() {
-		dpxInstance.setProperty('userMode',Rho.DPX.USER_MODE_SNAPSHOT);
-		expect(dpxInstance.getProperty('userMode')).toEqual(Rho.DPX.USER_MODE_SNAPSHOT);
-		});
-		
-		it('Should Set userMode to snapshot using setProperties calling method', function() {
-		dpxInstance.setProperties({'userMode' : Rho.DPX.USER_MODE_SNAPSHOT});
-		var data = dpxInstance.getProperties(['userMode']);
-		data = data['userMode'];
-		expect(data).toEqual(Rho.DPX.USER_MODE_SNAPSHOT);
-		});
-});
-
-
 describe('Setting uiResultConfirmation', function() {
 		it('Should Set uiResultConfirmation to true using direct calling method', function() {
 		dpxInstance.uiResultConfirmation=true;
@@ -757,56 +508,4 @@ describe('Setting uiResultConfirmation', function() {
 });
 
 
-describe('Setting zoomAmount', function() {
-			it('Should Set zoomAmount to 0 using direct calling method', function() {
-			dpxInstance.zoomAmount=0;
-			expect(dpxInstance.zoomAmount).toEqual(0);
-			});
-			
-			it('Should Set zoomAmount to 0 using setProperty calling method', function() {
-			dpxInstance.setProperty('zoomAmount','0');
-			expect(dpxInstance.getProperty('zoomAmount')).toEqual('0');
-			});
-			
-			it('Should Set zoomAmount to 0 using setProperties calling method', function() {
-			dpxInstance.setProperties({'zoomAmount' : '0'});
-			var data = dpxInstance.getProperties(['zoomAmount']);
-			data = data['zoomAmount'];
-			expect(data).toEqual('0');
-			});
-			
-			it('Should Set zoomAmount to 50 using direct calling method', function() {
-			dpxInstance.zoomAmount=50;
-			expect(dpxInstance.zoomAmount).toEqual(50);
-			});
-			
-			it('Should Set zoomAmount to 50 using setProperty calling method', function() {
-			dpxInstance.setProperty('zoomAmount','50');
-			expect(dpxInstance.getProperty('zoomAmount')).toEqual('50');
-			});
-			
-			it('Should Set zoomAmount to 50 using setProperties calling method', function() {
-			dpxInstance.setProperties({'zoomAmount' : '50'});
-			var data = dpxInstance.getProperties(['zoomAmount']);
-			data = data['zoomAmount'];
-			expect(data).toEqual('50');
-			});
-			
-			it('Should Set zoomAmount to 100 using direct calling method', function() {
-			dpxInstance.zoomAmount=100;
-			expect(dpxInstance.zoomAmount).toEqual(100);
-			});
-			
-			it('Should Set zoomAmount to 100 using setProperty calling method', function() {
-			dpxInstance.setProperty('zoomAmount','100');
-			expect(dpxInstance.getProperty('zoomAmount')).toEqual('100');
-			});
-			
-			it('Should Set zoomAmount to 100 using setProperties calling method', function() {
-			dpxInstance.setProperties({'zoomAmount' : '100'});
-			var data = dpxInstance.getProperties(['zoomAmount']);
-			data = data['zoomAmount'];
-			expect(data).toEqual('100');
-			});
-	    });
 });
