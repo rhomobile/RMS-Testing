@@ -28,8 +28,17 @@ describe('Printer Zebra', function() {
     var arrayzplfilepath = makeFilePath('arrayzplfile.zpl');
     var arrayccplfilepath = makeFilePath('arrayccplfile.ccpl');
     var invalidcontentsfilepath = makeFilePath('invalidcontetsfile');
-
-    var sizes = ['320px', '640px', '1024px', '2048px'];
+    var sizes = [];
+    
+    if (Rho.System.platform == Rho.System.PLATFORM_WM_CE)
+    {
+        sizes = ['320px', '640px', '1024px'];
+    }
+    else
+    {
+        sizes = ['320px', '640px', '1024px', '2048px'];
+    }
+        
     var extensions = ['png', 'jpg', 'gif', 'bmp'];
 
     for (var e = extensions.length - 1; e >= 0; e--) {
@@ -730,16 +739,16 @@ describe('Printer Zebra', function() {
             });
         });
 
-        /*waitsFor(function() {
-            return callresult !== null;
-        }, 'wait retrieveFileNames', 7000);
+//        waitsFor(function() {
+//            return callresult !== null;
+//        }, 'wait retrieveFileNames', 7000);
 
-        runs(function() {
-            if (isOk !== false) {
-                expect(callresult.status).toEqual(Rho.PrinterZebra.PRINTER_STATUS_SUCCESS);
-                expect(callresult.fileNames).toContain(to);
-            }
-        });*/
+//        runs(function() {
+//            if (isOk !== false) {
+//                expect(callresult.status).toEqual(Rho.PrinterZebra.PRINTER_STATUS_SUCCESS);
+//                expect(callresult.fileNames).toContain(to);
+//            }
+//        });
     }
 
     describe('storeImage method', function() {
@@ -893,9 +902,9 @@ describe('Printer Zebra', function() {
             });
         }
 
-        /*it('Should return printerEventCallback value as a Callback', function () {
-            expect(thisprinter.printerEventCallback).toEqual(function(event) {});
-        });*/
+//        it('Should return printerEventCallback value as a Callback', function () {
+//            expect(thisprinter.printerEventCallback).toEqual(function(event) {});
+//        });
 
         it('Should Get timeToWaitAfterReadInMilliseconds default value', function() {
             expect(thisprinter.getProperty('timeToWaitAfterReadInMilliseconds')).toEqual('10');
