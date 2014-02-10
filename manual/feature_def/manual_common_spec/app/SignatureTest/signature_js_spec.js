@@ -1393,7 +1393,7 @@ describe("Signature Manual Test", function () {
 
             runs(function () {
                 setObjective("VT299-034 |Call show and minimize|");
-                setInstruction("Wait for 10 sec for Fullscreen Signature box to comeup and minimize appliaction after drawing any signature on signature area and then restore app after 5 sec");
+                setInstruction("Wait for 10 sec for Signature box to comeup and minimize appliaction after drawing any signature on signature area and then restore app after 5 sec");
                 setExpected("The application should not behave abruptly and signature windows should be visible on restore");
                 delayForNineSeconds();
             });
@@ -1430,7 +1430,7 @@ describe("Signature Manual Test", function () {
 
             runs(function () {
                 setObjective("VT299-035 |Call show and suspend the device|");
-                setInstruction("Wait for 10 sec for Fullscreen Signature box to comeup and suspend the device after drawing any signature on signature area and then resume app after 5 sec");
+                setInstruction("Wait for 10 sec for Signature box to comeup and suspend the device after drawing any signature on signature area and then resume app after 5 sec");
                 setExpected("The application should not behave abruptly and signature windows should be visible on restore");
                 delayForNineSeconds();
             });
@@ -1463,10 +1463,152 @@ describe("Signature Manual Test", function () {
             });
         });
 
-        it("VT299-036 | Call takeFullScreen with callback as function and wait for timeout |", function () {
+        it("VT299-036 | Call show and scroll the page on screen|", function () {
 
             runs(function () {
-                setObjective("VT299-036 |Call takeFullScreen with callback as function and wait for timeout|");
+                setObjective("VT299-036 |Call show and scroll the page on screen|");
+                setInstruction("Wait for 10 sec for Signature box to comeup and scroll the page");
+                setExpected("The signature area should not change it's postion with scrolling the page");
+                delayForNineSeconds();
+            });
+
+            runs(function () {
+                waitsFor(function () {
+                    return readFlag;
+                }, 'wait for Tester to read', 10000);
+
+                runs(function () {
+                    Rho.Signature.show();
+                    delayForNineSeconds();
+                });
+
+                waitsFor(function () {
+                    return readFlag;
+                }, 'wait to callback to fire or timeout', 10000);
+            });
+
+            runs(function () {
+                Rho.Signature.hide();
+                waitsFor(function () {
+                    return document.getElementById("actResult").innerHTML != "init";
+                }, "Timed out waiting for tester to respond", 300000);
+                runs(function () {
+                    expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+                });
+            });
+        });
+
+        it("VT299-037 | Call show and rotate the device|", function () {
+
+            runs(function () {
+                setObjective("VT299-037 |Call show and rotate the device|");
+                setInstruction("Wait for 10 sec for Signature box to comeup and rotate the device");
+                setExpected("The signature area should be visible after rotating the device");
+                delayForNineSeconds();
+            });
+
+            runs(function () {
+                waitsFor(function () {
+                    return readFlag;
+                }, 'wait for Tester to read', 10000);
+
+                runs(function () {
+                    Rho.Signature.show();
+                    delayForNineSeconds();
+                });
+
+                waitsFor(function () {
+                    return readFlag;
+                }, 'wait to callback to fire or timeout', 10000);
+            });
+
+            runs(function () {
+                Rho.Signature.hide();
+                waitsFor(function () {
+                    return document.getElementById("actResult").innerHTML != "init";
+                }, "Timed out waiting for tester to respond", 300000);
+                runs(function () {
+                    expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+                });
+            });
+        });
+
+        it("VT299-038 | Call takeFullScreen and rotate the device portrait to landscape |", function () {
+
+            runs(function () {
+                setObjective("VT299-038 |Call takeFullScreen and rotate the device portrait to landscape|");
+                setInstruction("Wait for 10 sec for Fullscreen Signature box to comeup and rotate the device");
+                setExpected("Signature area with all buttons should be visible after rotation");
+                delayForNineSeconds();
+            });
+
+            runs(function () {
+                waitsFor(function () {
+                    return readFlag;
+                }, 'wait for Tester to read', 10000);
+
+                runs(function () {
+                    Rho.Signature.fileName = Rho.RhoFile.join(Rho.Application.databaseBlobFolder, 'VT299-038');
+                    Rho.Signature.takeFullScreen({}, callbackImage);
+                    delayForNineSeconds();
+                });
+
+                waitsFor(function () {
+                    return readFlag || sigCallbackFired;
+                }, 'wait to callback to fire or timeout', 10000);
+            });
+
+            runs(function () {
+                Rho.Signature.hide();
+                waitsFor(function () {
+                    return document.getElementById("actResult").innerHTML != "init";
+                }, "Timed out waiting for tester to respond", 300000);
+                runs(function () {
+                    expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+                });
+            });
+        });
+
+        it("VT299-039 | Call takeFullScreen and rotate the device landscape to portrait |", function () {
+
+            runs(function () {
+                setObjective("VT299-039 |Call takeFullScreen and rotate the device landscape to portrait|");
+                setInstruction("keep the device in landcsape, Wait for 10 sec for Fullscreen Signature box to comeup and rotate the device");
+                setExpected("Signature area with all buttons should be visible after rotation");
+                delayForNineSeconds();
+            });
+
+            runs(function () {
+                waitsFor(function () {
+                    return readFlag;
+                }, 'wait for Tester to read', 10000);
+
+                runs(function () {
+                    Rho.Signature.fileName = Rho.RhoFile.join(Rho.Application.databaseBlobFolder, 'VT299-039');
+                    Rho.Signature.takeFullScreen({}, callbackImage);
+                    delayForNineSeconds();
+                });
+
+                waitsFor(function () {
+                    return readFlag || sigCallbackFired;
+                }, 'wait to callback to fire or timeout', 10000);
+            });
+
+            runs(function () {
+                Rho.Signature.hide();
+                waitsFor(function () {
+                    return document.getElementById("actResult").innerHTML != "init";
+                }, "Timed out waiting for tester to respond", 300000);
+                runs(function () {
+                    expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+                });
+            });
+        });
+
+        it("VT299-040 | Call takeFullScreen with callback as function and wait for timeout |", function () {
+
+            runs(function () {
+                setObjective("VT299-040 |Call takeFullScreen with callback as function and wait for timeout|");
                 setInstruction("Wait for 10 sec for Fullscreen Signature box to comeup and don't press capture , wait for 30 seconds");
                 setExpected("The signature window should not hide automatically");
                 delayForNineSeconds();
