@@ -168,11 +168,11 @@ end
   # FIXME:
   it "should create multiple records offline" do
     vars = {"name"=>"foobarthree", "industry"=>"entertainment"}
-    getAccount.changed?.should == false # Not implemented!
+    getAccount.changed?.should == false
 
     account = getAccount.create(vars)
     if $spec_settings[:sync_model]
-      getAccount.changed?.should == true
+      getAccount.changed?.should == true # Expected false to equal true
       account.changed?.should == true
     end
 
@@ -204,7 +204,7 @@ end
 
     if $spec_settings[:sync_model]
       records = getTestDB().select_from_table('changed_values','*', 'update_type' => 'update')
-      records.length.should == 1
+      records.length.should == 1 # FIXME: Expected 0 to equal 1
     end
   end
 
@@ -240,7 +240,7 @@ end
 
     if $spec_settings[:sync_model]
       records = getTestDB().select_from_table('changed_values','*', 'update_type' => 'create')
-      records.length.should == 1
+      records.length.should == 1  # FIXME: Expected 0 to equal 1
       records[0]['attrib'].should == 'object'
 
       records = getTestDB().select_from_table('changed_values','*', 'update_type' => 'update')
@@ -267,7 +267,7 @@ end
 
     if $spec_settings[:sync_model]
       records = getTestDB().select_from_table('changed_values','*', 'update_type' => 'create')
-      records.length.should == 1
+      records.length.should == 1  # FIXME: Expected 0 to equal 1
       records[0]['attrib'].should == 'object'
 
       records = getTestDB().select_from_table('changed_values','*', 'update_type' => 'update')
@@ -354,9 +354,12 @@ end
     item2 = getAccount.find(item.object)
 
     # FIXME: old orm returns
-    # puts item.vars.inspect
+    puts "BAB: #{getAccount}"
+    puts "item.vars.inspect:"
+    puts item.vars.inspect
     # => {:object=>"160226845285978.9", :source_id=>40005, :propOne=>"1", :TwoProps=>"2"}
-    # puts item2.vars.inspect
+    puts "item2.vars.inspect:"
+    puts item2.vars.inspect
     # => {:source_id=>40005, :object=>"160226845285978.9", :propOne=>"1", :TwoProps=>"2"}
     # but new orm does not return source_id!
     # {:TwoProps=>"2", :object=>"1328537541", :propOne=>"1", :source_id=>"40001"}
