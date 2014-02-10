@@ -342,7 +342,7 @@ describe('Intent_UseCases Functionality Test', function () {
     //TODO: Is such method usage supports on iOS ?
     if(isApplePlatform()){
         // No common app in android supports "data:" URIs in intents
-        it('VT328_24 | mimeType - Launch Image viewer from test app by setting uri to "image data URI"', function () {
+        it('VT328_25 | mimeType - Launch Image viewer from test app by setting uri to "image data URI"', function () {
             displayObjective('VT328_24 | mimeType - Launch Image viewer from test app by setting mimeType "image (jpeg, gif, png etc.,)" and Data to "image data URI"');
             dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":Rho.Intent.START_ACTIVITY,"action":"","categories":"","appName":"","targetClass":"","uri":"","mimeType":"image/jpeg","data":"<data:image/jpeg;base64,/qerwe.... >"}}');
             dispExpectedResult('Image viewer should be launched successfully.');
@@ -357,7 +357,7 @@ describe('Intent_UseCases Functionality Test', function () {
         });
     }
     if(isAnyWindowsFamilyPlatform()){
-        it('VT328_25 | appName - Launch any other Application by setting \'appName\' in intent params, from test application.', function () {
+        it('VT328_26 | appName - Launch any other Application by setting \'appName\' in intent params, from test application.', function () {
             displayObjective('VT328_25 | appName - Launch any other Application by setting \'appName\' in intent params, from test application.');
             dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":Rho.Intent.START_ACTIVITY,"action":"","categories":"","appName":"testApp","targetClass":"","uri":"","mimeType":"","data":""}}');
             dispExpectedResult('Application should be launched from test application successfully');
@@ -371,7 +371,7 @@ describe('Intent_UseCases Functionality Test', function () {
     }
 
     if(isAndroidPlatform()){
-        it('VT328_26 | appName - Launch Android application via \'appName\' (packageName) from test application.', function () {
+        it('VT328_27 | appName - Launch Android application via \'appName\' (packageName) from test application.', function () {
             displayObjective('VT328_26 | appName - Launch Android application via \'appName\' (packageName) from test application.');
             dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":Rho.Intent.START_ACTIVITY,"action":"","categories":"","appName":"com.smap.targetapp","targetClass":"","uri":"","mimeType":"","data":""}}');
             dispExpectedResult('Android application should launched whose package name matches.');
@@ -384,7 +384,7 @@ describe('Intent_UseCases Functionality Test', function () {
         });
     }
     if(isApplePlatform()){
-        it('VT328_27 | appName - Launch iOS application via \'appName\' (BundleURLScheme) from test application.', function () {
+        it('VT328_28 | appName - Launch iOS application via \'appName\' (BundleURLScheme) from test application.', function () {
             displayObjective('VT328_27 | appName - Launch iOS application via \'testapp\' (BundleURLScheme) from test application.');
             dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":Rho.Intent.START_ACTIVITY,"action":"","categories":"","testapp":"ios bundle url","targetClass":"","uri":"","mimeType":"","data":""}}');
             dispExpectedResult('iOS application should be launched whose bundleUrlScheme matches.');
@@ -397,7 +397,7 @@ describe('Intent_UseCases Functionality Test', function () {
         });
     }
     if (isAnyButWindowsFamilyPlatform()){
-    it('VT328_28 | uri - Launch URL via browser appliation from test app by setting URI "http://www.google.com"', function () {
+    it('VT328_29 | uri - Launch URL via browser appliation from test app by setting URI "http://www.google.com"', function () {
         displayObjective('VT328_28 | uri - Launch URL via browser appliation from test app by setting URI "http://www.google.com"');
         dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":Rho.Intent.START_ACTIVITY,"action":"ACTION_VIEW","categories":"","appName":"","targetClass":"","uri":"http://www.google.com","mimeType":"","data":""}}');
         dispExpectedResult('Browser should be launched with default data in the view.');
@@ -409,8 +409,8 @@ describe('Intent_UseCases Functionality Test', function () {
         _result.waitForResponse();
     });
     }
-    if (!isApplePlatform) {
-         it('VT328_29 | uri - Launch Message application with data from test app by setting URI "sms:9611896991"', function () {
+    if (!isApplePlatform()) {
+         it('VT328_30 | uri - Launch Message application with data from test app by setting URI "sms:9611896991"', function () {
             displayObjective('VT328_29 | uri - Launch Message application with data from test app by setting URI "sms:9611896991"');
             dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":Rho.Intent.START_ACTIVITY,"action":"","categories":"","appName":"","targetClass":"","uri":"sms:9611896991","mimeType":"","data":""}}');
             dispExpectedResult('Message compose application should be launched with pre-filled recepient number.');
@@ -421,7 +421,7 @@ describe('Intent_UseCases Functionality Test', function () {
                  });
             _result.waitForResponse();
             });
-         it('VT328_30 | uri - Launch Email appliation with data from test app by setting URI "mailto:abcd@domain.com"', function () {
+         it('VT328_31 | uri - Launch Email appliation with data from test app by setting URI "mailto:abcd@domain.com"', function () {
             displayObjective('VT328_30 | uri - Launch Email appliation with data from test app by setting URI "mailto:abcd@domain.com"');
             var preConditions = ["Ensure default mail box is configured in the device"];
             displayPrecondition(preConditions);
@@ -434,7 +434,7 @@ describe('Intent_UseCases Functionality Test', function () {
                  });
             _result.waitForResponse();
             });
-         it('VT328_31 | uri - Launch dialler with pre-filled number from test application by setting URI "tel:9611896991" and with Action: ACTION_DIAL', function () {
+         it('VT328_32 | uri - Launch dialler with pre-filled number from test application by setting URI "tel:9611896991" and with Action: ACTION_DIAL', function () {
             displayObjective('VT328_31 | uri - Launch dialler with pre-filled number from test application by setting URI "tel:9611896991" and with Action: ACTION_DIAL');
             dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":Rho.Intent.START_ACTIVITY,"action":"ACTION_DIAL","categories":"","appName":"","targetClass":"","uri":"tel:9611896991","mimeType":"","data":""}}');
             dispExpectedResult('Dialer launches with pre-loaded number in it.');
@@ -446,7 +446,7 @@ describe('Intent_UseCases Functionality Test', function () {
             _result.waitForResponse();
             });
          if(!isAndroidPlatform()){
-         it('VT328_32 | uri - Launch Maps with pre-set lat and longitute values from test app by setting Uri "geo:latitude,longitude"', function () {
+         it('VT328_33 | uri - Launch Maps with pre-set lat and longitute values from test app by setting Uri "geo:latitude,longitude"', function () {
             displayObjective('VT328_32 | uri - Launch Maps with pre-set lat and longitute values from test app by setting Uri "geo:latitude,longitude"');
             var preConditions = ["Ensure maps application present in the device"];
             displayPrecondition(preConditions);
@@ -460,7 +460,7 @@ describe('Intent_UseCases Functionality Test', function () {
             _result.waitForResponse();
             });
          }
-         it('VT328_33 | uri - Make a call from test application by setting URI "tel:9611896991" and Action : "ACTION_CALL"', function () {
+         it('VT328_34 | uri - Make a call from test application by setting URI "tel:9611896991" and Action : "ACTION_CALL"', function () {
             displayObjective('VT328_33 | uri - Make a call from test application by setting URI "tel:9611896991" and Action : "ACTION_CALL"');
             dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":Rho.Intent.START_ACTIVITY,"action":"ACTION_CALL","categories":"","appName":"","targetClass":"","uri":"tel:9611896991","mimeType":"","data":""}}');
             dispExpectedResult('Phone call made to the pre-loaded number.');
@@ -473,7 +473,7 @@ describe('Intent_UseCases Functionality Test', function () {
             });
     }
     if(isAndroidPlatform()){
-        it('VT328_34 | uri - Launch Contacts from test application via Uri "content://contacts/people/" and Action: ACTION_VIEW', function () {
+        it('VT328_35 | uri - Launch Contacts from test application via Uri "content://contacts/people/" and Action: ACTION_VIEW', function () {
             displayObjective('VT328_34 | uri - Launch Contacts from test application via Uri "content://contacts/people/" and Action: ACTION_VIEW');
             var preConditions = ["Ensure atleast one contact is present in the device"];
             displayPrecondition(preConditions);
@@ -486,7 +486,7 @@ describe('Intent_UseCases Functionality Test', function () {
             });
             _result.waitForResponse();
         });
-        it('VT328_35 | uri - Launch individual contact from test application via Uri "content://contacts/people/1" and Action: ACTION_VIEW', function () {
+        it('VT328_36 | uri - Launch individual contact from test application via Uri "content://contacts/people/1" and Action: ACTION_VIEW', function () {
             displayObjective('VT328_35 | uri - Launch Contacts from test application via Uri "content://contacts/people/" and Action: ACTION_VIEW');
             var preConditions = ["Ensure atleast one contact is present in the device"];
             displayPrecondition(preConditions);
@@ -500,8 +500,8 @@ describe('Intent_UseCases Functionality Test', function () {
             _result.waitForResponse();
         });
     }
-    if(!isApplePlatform) {
-         it('VT328_36 | uri - Launch Email compose screen with pre-filled email from test application by setting URI and data.', function () {
+    if(!isApplePlatform()) {
+         it('VT328_37 | uri - Launch Email compose screen with pre-filled email from test application by setting URI and data.', function () {
             displayObjective('VT328_36 | uri - Launch Email compose screen with pre-filled email from test application by setting URI and data.');
             var preConditions = ["Ensure default mailbox is configured in the device"];
             displayPrecondition(preConditions);
