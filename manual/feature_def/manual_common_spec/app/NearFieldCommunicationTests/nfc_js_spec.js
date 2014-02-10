@@ -81,7 +81,6 @@ describe('Near Field Communication Tests', function () {
             Rho.NFC.Adapter.stop();
         });
 
-
         it('Tag reading', function () {
             var flag;
             var spec = new ManualSpec();
@@ -115,7 +114,7 @@ describe('Near Field Communication Tests', function () {
             flag = false;
             waitsFor(function () {
                 return flag;
-            }, "Callback hasn't called for in ten seconds", 10000);
+            }, "WaitsFor timeout", 10000);
 
             runs(function () {
                 spec.displayResults();
@@ -127,9 +126,9 @@ describe('Near Field Communication Tests', function () {
             var flag;
             var spec = new ManualSpec();
             spec.addGoal("Check work of setMessageHandler");
-            spec.addPrecondition("Another NFC device");
+            spec.addPrecondition("Smart tag");
             spec.addStep('Press "Start test" button');
-            spec.addStep('Touch another NFC device to device');
+            spec.addStep('Touch tag to device');
             spec.addExpectation("Status should be OK and message information should be displayed");
             spec.displayScenario();
             spec.waitForButtonPressing("Run test");
@@ -161,12 +160,97 @@ describe('Near Field Communication Tests', function () {
             flag = false;
             waitsFor(function () {
                 return flag;
-            }, "Callback hasn't called for in ten seconds", 10000);
+            }, "WaitsFor timeout", 10000);
 
             runs(function () {
                 spec.displayResults();
                 spec.waitForResponse();
             });
         });
+
+        it('Message writing', function () {
+            var spec = new ManualSpec();
+            spec.addGoal("Check message writing");
+            spec.addPrecondition("Smart tag");
+            spec.addStep('Press "Reading tag" button and touch tag to device');
+            spec.addStep('Press "Writing tag" button and touch tag to device');
+            spec.addStep('Press "Reading tag" button and touch tag to device');
+            spec.addExpectation("Status should be OK and message information should be displayed");
+            spec.displayScenario();
+            spec.waitForButtonPressing("Reading tag");
+
+            var tagID;
+
+            Rho.NFC.Adapter.setTagDetectionHandler([], function (status, ID) {
+                tagID = ID;
+            });
+
+            waitsFor(function () {
+                return tagID != undefined;
+            }, "WaitsFor timeout", 60000);
+
+            runs(function () {
+
+                var tag = Rho.NFC.Tag.getTagById(tagID);
+                var message = Rho.NFC.Message.create();
+                var record = Rho.NFC.Record.createText("en", "Some text");
+                message.addRecord(record.ID);
+                tag.formatNDEF();
+                tag.writeMessage(message.ID);
+                tag.transceive();
+
+                record.close();
+                message.close();
+
+                tag.close();
+                tagID = undefined;
+                spec.waitForButtonPressing("Writing tag");
+            });
+
+            waitsFor(function () {
+                return tagID != undefined;
+            }, "WaitsFor timeout", 60000);
+
+            runs(function () {
+                tagID = undefined;
+                spec.waitForButtonPressing("Reading tag");
+                var messageHandlerFlag;
+                Rho.NFC.Adapter.setMessageHandler(0, [], function (status, messageID) {
+                    spec.addResult('Status', status);
+                    var message = Rho.NFC.Message.getMeessageById(messageID);
+                    try {
+                        spec.addResult('Message.ID', message.ID);
+                        message.getRecords().forEach(function (each) {
+                            var record = Rho.NFC.Record.getRecordById(each);
+                            try {
+                                spec.addResult('Record.ID', record.ID);
+                                spec.addResult('Record.TNF', record.TNF);
+                                spec.addResult('Record.type', record.type);
+                                spec.addResult('Record.payloadAsString', record.getPayloadAsString());
+                            }
+                            finally {
+                                record.close();
+                            }
+                        });
+                    }
+                    finally {
+                        message.close();
+                    }
+                    messageHandlerFlag = true;
+                });
+
+                messageHandlerFlag = false;
+            });
+            waitsFor(function () {
+                return messageHandlerFlag;
+            }, "WaitsFor timeout", 60000);
+
+            runs(function () {
+                spec.displayResults();
+                spec.waitForResponse();
+            });
+        });
+
+
     });
 });
