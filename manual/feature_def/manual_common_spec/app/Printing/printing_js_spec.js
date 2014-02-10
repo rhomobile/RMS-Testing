@@ -166,7 +166,7 @@ describe('Printing Generic', function() {
     it('initialize before tests', function() {
 		dispTestCaseRunning("initialize before tests, searching for printers..");
 		dispExpectedResult("Please Wait until devices are discovered to continue");
-		_result.waitToRunTest();
+		//_result.waitToRunTest();
         runs(function() {
             //dispTestCaseRunning(jasmine.getEnv().currentSpec.description);
             //dispExpectedResult('Wait until devices are discovered to continue');
@@ -217,7 +217,7 @@ describe('Printing Generic', function() {
             //expect(printers_errors).toEqual([]);
            // expect(printers_array.length).toBeGreaterThan(0);
         });
-		_result.waitForResponse();
+		//_result.waitForResponse();
     });
 
 
@@ -609,8 +609,8 @@ describe('Printing Generic', function() {
         var deftext = [def,'print image',Rho.RhoFile.basename(from),'x:',x,'y:',y,'options:',JSON.stringify(options,null," ") ];
 
         it( deftext.join(' ') , function() {
-			dispTestCaseRunning(" Test");
-			dispExpectedResult("should print image");
+			dispTestCaseRunning("Print image from file tests");
+			dispExpectedResult(deftext.toString());
 			//Common Method implemented to wait for tester to run the test.Code available in specHelper.js
 			_result.waitToRunTest();
             doPrintTestLabel();

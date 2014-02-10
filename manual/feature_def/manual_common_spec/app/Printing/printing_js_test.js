@@ -67,6 +67,170 @@ var displayPrinterResult = function(desc, data, placeTimestamp) {
     }
 };
 
+function displaySearchResults(paramaters, display_printers, display_errors) {
+    var query = {
+        'Parameters:': paramaters
+    };
+    if (display_errors.length > 0) {
+        query['Errors:'] = display_errors;
+    }
+    if (display_printers.length > 0) {
+        query['Discoveder printers:'] = display_printers;
+    }
+
+    displayPrinterResult(jasmine.getEnv().currentSpec.description, query);
+}
+
+function setupTestFields() {
+    $('#dev_list').empty();
+    $('#dev_list').prepend('<option value=\'\'>none</option>').val('');
+    $('#dev_list').change(function() {
+        var valueSelected = $(this).val();
+        if (valueSelected == '') {
+            $('#dev_addr').val('127.0.0.1');
+            $('#dev_port').val('6101');
+            $('#dev_conn_type').val(Rho.PrinterZebra.CONNECTION_TYPE_TCP);
+        } else {
+            var res = valueSelected.split('|');
+            $('#dev_conn_type').val(res[0]);
+            $('#dev_addr').val(res[1]);
+            $('#dev_port').val(res[2]);
+        }
+    });
+}
+
+function updatePrinterList(printers) {
+    for (var i = 0; i < printers.length; i++) {
+        var printerInstance = Rho.PrinterZebra.getPrinterByID(printers[i]);
+        var printerType = printerInstance.printerType.replace('PRINTER_TYPE_', '');
+        var connType = printerInstance.connectionType.replace('CONNECTION_TYPE_', '');
+        var devName = printerType + '-' + connType + '@' + printerInstance.deviceAddress;
+        var pid = printerInstance.connectionType + '|' + printerInstance.deviceAddress + '|' + printerInstance.devicePort;
+
+        $('#dev_list').append($('<option>', {
+            value: pid
+        }).text(devName));
+    }
+    $('#dev_list').val($('#dev_list option:eq(1)').val()).trigger('change');
+}
+
+function uniqArray(array) {
+    var temp = {};
+    for (var i = 0; i < array.length; i++) {
+        temp[array[i]] = true;
+    }
+    var uniq = [];
+    for (var k in temp) {
+        uniq.push(k);
+    }
+    return uniq;
+}
+
+function runSearch(options, timeout) {
+    Rho.Log.info("doSearch #1", "JSC");
+
+    if (!timeout || timeout < 100) {
+        timeout = 100;
+    }
+
+    var SO = {
+        discovered: [],
+        printers: [],
+        errors: [],
+        last_printer: null,
+        last_printer_id: null,
+        finished: false,
+        total: 3,
+        curr: 0,
+    };
+
+    var start = new Date();
+    var last_start = start;
+
+    function searchPrinterCallback(callbackValue) {
+        var printer_id = callbackValue.printerID;
+        if (callbackValue.status == Rho.PrinterZebra.PRINTER_STATUS_SUCCESS) {
+            if (printer_id && printer_id.length > 0) {
+                SO.discovered.push(printer_id);
+                SO.last_printer_id = printer_id;
+                SO.last_printer = Rho.PrinterZebra.getPrinterByID(printer_id);
+            } else {
+                checkSearch();
+            }
+        } else {
+            SO.errors.push(callbackValue);
+
+            displayPrinterResult('Search error:', callbackValue, true);
+
+            SO.finished = true;
+        }
+    }
+
+    function checkSearch() {
+        var curr_time = new Date();
+        var last_el = curr_time - last_start;
+        var elapsed = curr_time - start;
+        last_start = curr_time;
+
+        SO.curr += 1;
+
+        if ((SO.curr > SO.total) || ((elapsed + last_el) > timeout)) {
+            SO.printers = uniqArray(SO.discovered);
+
+            displayPrinterResult('Discovered printers', SO.printers, true);
+
+            SO.finished = true;
+        } else {
+            if (SO.curr <= 1) {
+                Rho.PrinterZebra.searchPrinters(options, searchPrinterCallback);
+            } else {
+                setTimeout(function() {
+                    Rho.PrinterZebra.searchPrinters(options, searchPrinterCallback);
+                }, 200);
+            }
+        }
+    }
+
+    displayPrinterResult('Starting search', options, true);
+
+    checkSearch();
+
+    return SO;
+}
+
+function makeTestLabel(label) {
+    return '^XA^MNN^LL200^XZ^XA^JUS^XZ^XA^FO150,50,0^A0I25,25^TBI,300,75^FD' + label + '^FS^XZ\r\n';
+}
+
+function objkeys(obj) {
+    var keys = [];
+    $.each(obj, function(key, value) {
+        keys.push(key);
+    });
+    return keys;
+}
+
+// make a list of all available combinations of fields within object
+
+function makeAllCombinationsOfFileds(obj) {
+    var combinations = []; //All combinations
+    var keys = objkeys(obj);
+    var quantity = (1 << keys.length);
+    if (quantity > 0) {
+        for (var i = 0; i < quantity; i++) {
+            var combination = {};
+            for (var j = 0; j < keys.length; j++) {
+                if ((i & (1 << j))) {
+                    var key = keys[j];
+                    combination[key] = obj[key];
+                }
+            }
+            combinations.push(combination);
+        }
+    }
+    return combinations;
+}
+
 function addCombo() {
     $('#select_box_wrapper').show();
     var textb = {
