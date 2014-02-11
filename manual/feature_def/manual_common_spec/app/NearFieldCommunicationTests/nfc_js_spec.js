@@ -77,13 +77,13 @@ describe('Near Field Communication Tests', function () {
             Rho.NFC.Adapter.activate();
         });
 
-        beforeEach(function () {
+        afterEach(function () {
             Rho.NFC.Adapter.stop();
         });
 
         it('Tag reading', function () {
             var flag;
-            var spec = new ManualSpec();
+            var spec = new ManualSpec(jasmine, window.document);
             spec.addGoal("Check work of setTagDetectionHandler");
             spec.addPrecondition("Smart tag");
             spec.addStep('Press "Start test" button');
@@ -124,7 +124,7 @@ describe('Near Field Communication Tests', function () {
 
         it('Message reading', function () {
             var flag;
-            var spec = new ManualSpec();
+            var spec = new ManualSpec(jasmine, window.document);
             spec.addGoal("Check work of setMessageHandler");
             spec.addPrecondition("Smart tag");
             spec.addStep('Press "Start test" button');
@@ -169,7 +169,7 @@ describe('Near Field Communication Tests', function () {
         });
 
         it('Message writing', function () {
-            var spec = new ManualSpec();
+            var spec = new ManualSpec(jasmine, window.document);
             spec.addGoal("Check message writing");
             spec.addPrecondition("Smart tag");
             spec.addStep('Press "Reading tag" button and touch tag to device');
