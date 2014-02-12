@@ -363,7 +363,7 @@ describe('Intent_UseCases Functionality Test', function () {
             dispExpectedResult('Application should be launched from test application successfully');
             _result.waitToRunTest();
             runs(function () {
-                var parameters = {intentType: Rho.Intent.START_ACTIVITY, appName: "TestApp", data: {}};
+                var parameters = {intentType: Rho.Intent.START_ACTIVITY, appName: "rhomobile TestApp/TestApp.exe", data: {}};
                 Rho.Intent.send(parameters);
             });
             _result.waitForResponse();
@@ -408,6 +408,41 @@ describe('Intent_UseCases Functionality Test', function () {
         });
         _result.waitForResponse();
     });
+    it('VT328_30 | uri - Launch Message application with data from test app by setting URI "sms:9611896991"', function () {
+        displayObjective('VT328_29 | uri - Launch Message application with data from test app by setting URI "sms:9611896991"');
+        dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":Rho.Intent.START_ACTIVITY,"action":"","categories":"","appName":"","targetClass":"","uri":"sms:9611896991","mimeType":"","data":""}}');
+        dispExpectedResult('Message compose application should be launched with pre-filled recepient number.');
+        _result.waitToRunTest();
+        runs(function () {
+        	var params = new parameters("","","","","","","sms:9611896991","","");
+            Rho.Intent.send(params);
+            });
+        _result.waitForResponse();
+        });
+    it('VT328_31 | uri - Launch Email appliation with data from test app by setting URI "mailto:abcd@domain.com"', function () {
+        displayObjective('VT328_30 | uri - Launch Email appliation with data from test app by setting URI "mailto:abcd@domain.com"');
+        var preConditions = ["Ensure default mail box is configured in the device"];
+        displayPrecondition(preConditions);
+        dispTestCaseRunning('Sending Intent with parameters Sending Intent with parameters {"params":{"intentType":Rho.Intent.START_ACTIVITY,"action":"","categories":"","appName":"","targetClass":"","uri":"mailto:abcd@domain.com","mimeType":"","data":""}}');
+        dispExpectedResult('Email compose view should be launched with pre-filled recepient email address.');
+        _result.waitToRunTest();
+        runs(function () {
+        	var params = new parameters("","","","","","","mailto:abcd@domain.com","","");
+             Rho.Intent.send(params);
+             });
+        _result.waitForResponse();
+        });
+     it('VT328_32 | uri - Launch dialler with pre-filled number from test application by setting URI "tel:9611896991" and with Action: ACTION_DIAL', function () {
+        displayObjective('VT328_31 | uri - Launch dialler with pre-filled number from test application by setting URI "tel:9611896991" and with Action: ACTION_DIAL');
+        dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":Rho.Intent.START_ACTIVITY,"action":"ACTION_DIAL","categories":"","appName":"","targetClass":"","uri":"tel:9611896991","mimeType":"","data":""}}');
+        dispExpectedResult('Dialer launches with pre-loaded number in it.');
+        _result.waitToRunTest();
+        runs(function () {
+             var params = new parameters(Rho.Intent.START_ACTIVITY,"","ACTION_DIAL","","","","tel:9611896991","","");
+             Rho.Intent.send(params);
+             });
+        _result.waitForResponse();
+        });
     }
     if (!isApplePlatform()) {
          it('VT328_30 | uri - Launch Message application with data from test app by setting URI "sms:9611896991"', function () {
@@ -416,9 +451,15 @@ describe('Intent_UseCases Functionality Test', function () {
             dispExpectedResult('Message compose application should be launched with pre-filled recepient number.');
             _result.waitToRunTest();
             runs(function () {
-                 var params = new parameters(Rho.Intent.START_ACTIVITY,"","","","","","sms:9611896991","","");
-                 Rho.Intent.send(params);
-                 });
+            	var params;
+            	if (isAndroidPlatform()) {
+            		params = new parameters(Rho.Intent.START_ACTIVITY,"","","","","","sms:9611896991","","");
+                }
+                if (isAnyWindowsFamilyPlatform()) {
+                	params = new parameters("","","","","","","sms:9611896991","","");
+                }
+                Rho.Intent.send(params);
+                });
             _result.waitForResponse();
             });
          it('VT328_31 | uri - Launch Email appliation with data from test app by setting URI "mailto:abcd@domain.com"', function () {
@@ -429,7 +470,13 @@ describe('Intent_UseCases Functionality Test', function () {
             dispExpectedResult('Email compose view should be launched with pre-filled recepient email address.');
             _result.waitToRunTest();
             runs(function () {
-                 var params = new parameters(Rho.Intent.START_ACTIVITY,"","","","","","mailto:abcd@domain.com","","");
+            	var params;
+            	if (isAndroidPlatform()) {
+            		params = new parameters(Rho.Intent.START_ACTIVITY,"","","","","","mailto:abcd@domain.com","","");
+                }
+                if (isAnyWindowsFamilyPlatform()) {
+                	params = new parameters("","","","","","","mailto:abcd@domain.com","","");
+                }
                  Rho.Intent.send(params);
                  });
             _result.waitForResponse();
@@ -558,16 +605,13 @@ describe('Intent_UseCases Functionality Test', function () {
                 params = new parameters(Rho.Intent.BROADCAST,"","com.rhomobile.BROADCAST",["com.rhomobile.manual_common_spec"],"","","","",data);
             }
             if (isApplePlatform()) {
-                params = new parameters(Rho.Intent.BROADCAST,"","","","testApp","","","",data);
+                params = new parameters(Rho.Intent.BROADCAST,"","","","manualcommonspec","","","",data);
             }
             if (isAnyWindowsFamilyPlatform()) {
-                params = new parameters(Rho.Intent.BROADCAST,"","","","rhomobile testApp/testApp.exe","","","",data);
+                params = new parameters(Rho.Intent.BROADCAST,"","","","rhomobile manual_common_spec/manual_common_spec.exe","","","",data);
             }
             var receiveCB = function(intent){
-                if(intent.data.myData == "This is broad cast data 3!")
-                {
-                    alert("Test case passed !");
-                }
+            	alert(JSON.stringify(intent));
             };
             Rho.Intent.startListening(receiveCB);
             Rho.Intent.send(params);
@@ -588,16 +632,13 @@ describe('Intent_UseCases Functionality Test', function () {
                 params = new parameters(Rho.Intent.BROADCAST,"","com.rhomobile.BROADCAST",["com.rhomobile.manual_common_spec"],"","","","",data);
             }
             if (isApplePlatform()) {
-                params = new parameters(Rho.Intent.BROADCAST,"","","","testApp","","","",data);
+                params = new parameters(Rho.Intent.BROADCAST,"","","","manualcommonspec","","","",data);
             }
             if (isAnyWindowsFamilyPlatform()) {
-                params = new parameters(Rho.Intent.BROADCAST,"","","","rhomobile testApp/testApp.exe","","","",data);
+                params = new parameters(Rho.Intent.BROADCAST,"","","","rhomobile manual_common_spec/manual_common_spec.exe","","","",data);
             }
             var receiveCB = function(intent){
-                if(intent.data.myData == "This is broad cast data 4!")
-                {
-                    alert("Test case passed !");
-                }
+            	alert(JSON.stringify(intent));
             };
             Rho.Intent.startListening(receiveCB);
             Rho.Intent.startListening(receiveCB);
@@ -619,10 +660,10 @@ describe('Intent_UseCases Functionality Test', function () {
                 params = new parameters(Rho.Intent.BROADCAST,"","com.rhomobile.BROADCAST",["com.rhomobile.manual_common_spec"],"","","","",data);
             }
             if (isApplePlatform()) {
-                params = new parameters(Rho.Intent.BROADCAST,"","","","testApp","","","",data);
+                params = new parameters(Rho.Intent.BROADCAST,"","","","manualcommonspec","","","",data);
             }
             if (isAnyWindowsFamilyPlatform()) {
-                params = new parameters(Rho.Intent.BROADCAST,"","","","rhomobile testApp/testApp.exe","","","",data);
+                params = new parameters(Rho.Intent.BROADCAST,"","","","rhomobile manual_common_spec/manual_common_spec.exe","","","",data);
             }
             var receiveCB = function(intent){
                 alert("Test Case failed if you see this alert message!");
@@ -648,10 +689,10 @@ describe('Intent_UseCases Functionality Test', function () {
                 params = new parameters(Rho.Intent.BROADCAST,"","com.rhomobile.BROADCAST",["com.rhomobile.manual_common_spec"],"","","","",data);
             }
             if (isApplePlatform()) {
-                params = new parameters(Rho.Intent.BROADCAST,"","","","testApp","","","",data);
+                params = new parameters(Rho.Intent.BROADCAST,"","","","manualcommonspec","","","",data);
             }
             if (isAnyWindowsFamilyPlatform()) {
-                params = new parameters(Rho.Intent.BROADCAST,"","","","rhomobile testApp/testApp.exe","","","",data);
+                params = new parameters(Rho.Intent.BROADCAST,"","","","rhomobile manual_common_spec/manual_common_spec.exe","","","",data);
             }
             var receiveCB = function(intents){
                 var receivedParam = intents.params;
@@ -727,7 +768,7 @@ describe('Intent_UseCases Functionality Test', function () {
                 parameters = {intentType: Rho.Intent.BROADCAST, action: "com.rhomobile.BROADCAST", appName: "com.rhomobile.manual_common_spec", data: {myData: "This is broad cast data!" } };
             }
             if (isAnyWindowsFamilyPlatform()) {
-                parameters = {intentType: Rho.Intent.BROADCAST, appName: "rhomobile TestApp/TestApp.exe", data: {myData: "This is broad cast data!" } };
+                parameters = {intentType: Rho.Intent.BROADCAST, appName: "rhomobile manual_common_spec/manual_common_spec.exe", data: {myData: "This is broad cast data!" } };
             }
             var callback = function(){
                 alert("Callback without arguments !");

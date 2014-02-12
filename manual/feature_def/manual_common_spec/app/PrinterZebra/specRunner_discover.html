@@ -24,8 +24,9 @@
             log.call(console, arguments);
             if (LogHandler) {
                 LogHandler.call(this, arguments);
-            } else {
-                LogHandler.push("console.log: " + arguments.join(", "));
+            } else {                
+                var args = Array.prototype.slice.call(arguments)
+                ConsoleLog.push("console.log: " + args.join(", "));
             }
         }
     })();
@@ -39,7 +40,6 @@
     <script type="text/javascript" src="/public/jasmine/jasmine.js"></script>
     <script type="text/javascript" src="/public/jasmine/jasmine-html.js"></script>
 
-     <script type="text/javascript" src="/public/jasmine/jasmine-html.js"></script>
     <script type="text/javascript" src="/public/jasmine/fileReporter.js"></script>
     <script type="text/javascript" src="/public/jasmine/jasmine.junit_reporter.js"></script>
     <script type="text/javascript" src="/public/api/rhoapi-modules.js"></script>
@@ -66,7 +66,7 @@
     <script type="text/javascript" src="../helpers/jasmine-extensions.js"></script>
 
     <!-- include spec files here... -->
-    <script type="text/javascript" src="printer_zebra_js_spec.js"></script>
+    <script type="text/javascript" src="printer_zebra_js_spec_discover.js"></script>
     <script type="text/javascript" src="stacktrace.js" /></script> 
 
     <script type="text/javascript">
@@ -95,6 +95,10 @@
                 for (var i = 0; i < ParsingErrors.length; i++) {
                     $('#logs').append(ParsingErrors[i]);
                 };
+            } else if (ConsoleLog.length > 0) {
+                for (var i = 0; i < ConsoleLog.length; i++) {
+                    $('#logs').append(ConsoleLog[i]);
+                };
             } else {
                 $('#console').hide();
             }
@@ -116,14 +120,7 @@
                 $('#logs').append(iargs.join(', '));
             }
 
-            console.log = (function() {
-                var log = console.log;
-
-                return function() {
-                    log.call(console, arguments);
-                    addMsg(arguments);
-                }
-            })();
+            LogHandler = function() { addMsg(arguments); }
 
             console.error = (function() {
                 var error = console.error;
@@ -134,7 +131,7 @@
                         error.call(console, exception.stack);      
                     } else {
                         error.call(console, arguments);
-                        addMsg(arguments || []);
+                        addMsg(Array.prototype.slice.call(arguments));
                     }
                 }
             })();

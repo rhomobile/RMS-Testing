@@ -10,10 +10,26 @@
 
     <script type="text/javascript">
     var ParsingErrors = [];
+    var ConsoleLog = [];
+    var LogHandler = null;
 
     window.onerror = function(message, source, lineno) {
         ParsingErrors.push("Error:" + message + "\n" + "file:" + source + "\n" + "line:" + lineno);
     };
+
+    console.log = (function() {
+        var log = console.log;
+
+        return function() {
+            log.call(console, arguments);
+            if (LogHandler) {
+                LogHandler.call(this, arguments);
+            } else {                
+                var args = Array.prototype.slice.call(arguments)
+                ConsoleLog.push("console.log: " + args.join(", "));
+            }
+        }
+    })();
     </script>
 
     <script type="text/javascript" charset="utf-8" src="/public/jquery/jquery-1.6.4.min.js"></script>
@@ -24,7 +40,7 @@
     <script type="text/javascript" src="/public/jasmine/jasmine.js"></script>
     <script type="text/javascript" src="/public/jasmine/jasmine-html.js"></script>
 
-     <script type="text/javascript" src="/public/jasmine/jasmine-html.js"></script>
+    <script type="text/javascript" src="/public/jasmine/fileReporter.js"></script>
     <script type="text/javascript" src="/public/jasmine/jasmine.junit_reporter.js"></script>
     <script type="text/javascript" src="/public/api/rhoapi-modules.js"></script>
 		<script type="text/javascript" src="../helpers/manualSpecLauncher.js"></script>
@@ -58,6 +74,10 @@
         var jasmineEnv = jasmine.getEnv();
         jasmineEnv.updateInterval = 1000;
 
+
+        var fileReporter = new jasmine.FileReporter("failedSpecs.txt");
+        jasmineEnv.addReporter(fileReporter);
+
         var htmlReporter = new jasmine.HtmlReporter();
         //var junitReporter = new jasmine.JUnitXmlReporter();
         //junitReporter.useDotNotation = false
@@ -75,6 +95,10 @@
                 for (var i = 0; i < ParsingErrors.length; i++) {
                     $('#logs').append(ParsingErrors[i]);
                 };
+            } else if (ConsoleLog.length > 0) {
+                for (var i = 0; i < ConsoleLog.length; i++) {
+                    $('#logs').append(ConsoleLog[i]);
+                };
             } else {
                 $('#console').hide();
             }
@@ -83,41 +107,34 @@
                 $('#console').show();
                 $('#logs').append('<p>' + "Error:" + message + "\n" + "file:" + source + "\n" + "line:" + lineno);
                 if(errorObj !== undefined) {
-                	$('#logs').append(printStackTrace(errorObj).join('<br>'));
+                    $('#logs').append(printStackTrace(errorObj).join('<br>'));
                 }
             }
 
-           	function addMsg(args) {
-           		$('#console').show();
-           		var iargs = [];
-           		for (var i = 0; i < args.length; i++) {
-           			iargs.push(JSON.stringify(args[i], null, 2));
-           		};
+            function addMsg(args) {
+                $('#console').show();
+                var iargs = [];
+                for (var i = 0; i < args.length; i++) {
+                    iargs.push(JSON.stringify(args[i], null, 2));
+                };
                 $('#logs').append(iargs.join(', '));
-           	}
+            }
 
-            console.log = (function() {
-			    var log = console.log;
-
-			    return function() {
-			    	log.call(console, arguments);
-			    	addMsg(arguments);
-			    }
-			})();
+            LogHandler = function() { addMsg(arguments); }
 
             console.error = (function() {
-			    var error = console.error;
+                var error = console.error;
 
-			    return function(exception) {
-			    	addMsg(printStackTrace().join('<br>'));
-			        if (exception.stack && typeof exception.stack !== 'undefined') {
-			            error.call(console, exception.stack);      
-			        } else {
-			            error.call(console, arguments);
-			            addMsg(arguments || []);
-			        }
-			    }
-			})();
+                return function(exception) {
+                    addMsg(printStackTrace().join('<br>'));
+                    if (exception.stack && typeof exception.stack !== 'undefined') {
+                        error.call(console, exception.stack);      
+                    } else {
+                        error.call(console, arguments);
+                        addMsg(Array.prototype.slice.call(arguments));
+                    }
+                }
+            })();
         });
 
         function execJasmine() {
