@@ -264,6 +264,13 @@ $secure_server.mount_proc '/test_methods' do |req,res|
     end
 end
 
+$secure_server.mount_proc '/download_image' do |req,res|
+    res.body = File.open( File.join( File.dirname(__FILE__),"test.jpg" ), "rb" )
+    res["content-type"]="image/jpeg"
+    res.status = 200
+end
+
+
 $secure_server_with_client_auth.mount_proc '/test_methods' do |req,res|
     
     client_cert = req.client_cert

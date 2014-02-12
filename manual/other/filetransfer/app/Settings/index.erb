@@ -1,0 +1,20 @@
+<div data-role="page">
+
+  <div data-role="header" data-position="inline">
+    <h1>Settings</h1>
+  </div>
+
+  <div data-role="content">
+    <ul data-role="listview">
+      <% if @msg %>
+          <li class="error-message"><%= @msg %></li>
+      <% end %>
+
+      <li><a href="#" onclick ="$.get('/app/Settings/test_http');">Test HTTP</a></li>
+      <li><a href="#" onclick ="$.get('/app/Settings/test_https');">Test HTTPS</a></li>
+      <li><a href="#" onclick ="$.get('/app/Settings/test_https_dl');">Test HTTPS download</a></li>
+
+          
+    </ul>
+  </div>
+</div>
