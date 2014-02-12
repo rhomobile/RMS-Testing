@@ -363,7 +363,7 @@ describe('Intent_UseCases Functionality Test', function () {
             dispExpectedResult('Application should be launched from test application successfully');
             _result.waitToRunTest();
             runs(function () {
-                var parameters = {intentType: Rho.Intent.START_ACTIVITY, appName: "TestApp", data: {}};
+                var parameters = {intentType: Rho.Intent.START_ACTIVITY, appName: "rhomobile TestApp/TestApp.exe", data: {}};
                 Rho.Intent.send(parameters);
             });
             _result.waitForResponse();
@@ -416,9 +416,15 @@ describe('Intent_UseCases Functionality Test', function () {
             dispExpectedResult('Message compose application should be launched with pre-filled recepient number.');
             _result.waitToRunTest();
             runs(function () {
-                 var params = new parameters(Rho.Intent.START_ACTIVITY,"","","","","","sms:9611896991","","");
-                 Rho.Intent.send(params);
-                 });
+            	var params;
+            	if (isAndroidPlatform()) {
+            		params = new parameters(Rho.Intent.START_ACTIVITY,"","","","","","sms:9611896991","","");
+                }
+                if (isAnyWindowsFamilyPlatform()) {
+                	params = new parameters("","","","","","","sms:9611896991","","");
+                }
+                Rho.Intent.send(params);
+                });
             _result.waitForResponse();
             });
          it('VT328_31 | uri - Launch Email appliation with data from test app by setting URI "mailto:abcd@domain.com"', function () {
@@ -429,7 +435,13 @@ describe('Intent_UseCases Functionality Test', function () {
             dispExpectedResult('Email compose view should be launched with pre-filled recepient email address.');
             _result.waitToRunTest();
             runs(function () {
-                 var params = new parameters(Rho.Intent.START_ACTIVITY,"","","","","","mailto:abcd@domain.com","","");
+            	var params;
+            	if (isAndroidPlatform()) {
+            		params = new parameters(Rho.Intent.START_ACTIVITY,"","","","","","mailto:abcd@domain.com","","");
+                }
+                if (isAnyWindowsFamilyPlatform()) {
+                	params = new parameters("","","","","","","mailto:abcd@domain.com","","");
+                }
                  Rho.Intent.send(params);
                  });
             _result.waitForResponse();
@@ -561,13 +573,10 @@ describe('Intent_UseCases Functionality Test', function () {
                 params = new parameters(Rho.Intent.BROADCAST,"","","","testApp","","","",data);
             }
             if (isAnyWindowsFamilyPlatform()) {
-                params = new parameters(Rho.Intent.BROADCAST,"","","","rhomobile testApp/testApp.exe","","","",data);
+                params = new parameters(Rho.Intent.BROADCAST,"","","","rhomobile manual_common_spec/manual_common_spec.exe","","","",data);
             }
             var receiveCB = function(intent){
-                if(intent.data.myData == "This is broad cast data 3!")
-                {
-                    alert("Test case passed !");
-                }
+            	alert(JSON.stringify(intent));
             };
             Rho.Intent.startListening(receiveCB);
             Rho.Intent.send(params);
@@ -591,13 +600,10 @@ describe('Intent_UseCases Functionality Test', function () {
                 params = new parameters(Rho.Intent.BROADCAST,"","","","testApp","","","",data);
             }
             if (isAnyWindowsFamilyPlatform()) {
-                params = new parameters(Rho.Intent.BROADCAST,"","","","rhomobile testApp/testApp.exe","","","",data);
+                params = new parameters(Rho.Intent.BROADCAST,"","","","rhomobile manual_common_spec/manual_common_spec.exe","","","",data);
             }
             var receiveCB = function(intent){
-                if(intent.data.myData == "This is broad cast data 4!")
-                {
-                    alert("Test case passed !");
-                }
+            	alert(JSON.stringify(intent));
             };
             Rho.Intent.startListening(receiveCB);
             Rho.Intent.startListening(receiveCB);
@@ -622,7 +628,7 @@ describe('Intent_UseCases Functionality Test', function () {
                 params = new parameters(Rho.Intent.BROADCAST,"","","","testApp","","","",data);
             }
             if (isAnyWindowsFamilyPlatform()) {
-                params = new parameters(Rho.Intent.BROADCAST,"","","","rhomobile testApp/testApp.exe","","","",data);
+                params = new parameters(Rho.Intent.BROADCAST,"","","","rhomobile manual_common_spec/manual_common_spec.exe","","","",data);
             }
             var receiveCB = function(intent){
                 alert("Test Case failed if you see this alert message!");
@@ -651,7 +657,7 @@ describe('Intent_UseCases Functionality Test', function () {
                 params = new parameters(Rho.Intent.BROADCAST,"","","","testApp","","","",data);
             }
             if (isAnyWindowsFamilyPlatform()) {
-                params = new parameters(Rho.Intent.BROADCAST,"","","","rhomobile testApp/testApp.exe","","","",data);
+                params = new parameters(Rho.Intent.BROADCAST,"","","","rhomobile manual_common_spec/manual_common_spec.exe","","","",data);
             }
             var receiveCB = function(intents){
                 var receivedParam = intents.params;
@@ -727,7 +733,7 @@ describe('Intent_UseCases Functionality Test', function () {
                 parameters = {intentType: Rho.Intent.BROADCAST, action: "com.rhomobile.BROADCAST", appName: "com.rhomobile.manual_common_spec", data: {myData: "This is broad cast data!" } };
             }
             if (isAnyWindowsFamilyPlatform()) {
-                parameters = {intentType: Rho.Intent.BROADCAST, appName: "rhomobile TestApp/TestApp.exe", data: {myData: "This is broad cast data!" } };
+                parameters = {intentType: Rho.Intent.BROADCAST, appName: "rhomobile manual_common_spec/manual_common_spec.exe", data: {myData: "This is broad cast data!" } };
             }
             var callback = function(){
                 alert("Callback without arguments !");
