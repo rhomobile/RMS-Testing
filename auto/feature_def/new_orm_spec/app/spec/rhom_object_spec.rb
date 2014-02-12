@@ -548,13 +548,10 @@ end
   it "should update record with time field" do
     @acct = getAccount.find('44e804f2-4933-4e20-271c-48fcecd9450d')
 
-    # FIXME: The following line does not work
-    # @acct.update_attributes(:last_checked =>Time.now())
-    # But this one ok if time passed as string
     @acct.update_attributes( :last_checked => Time.now.to_s )
 
     @accts = getAccount.find(:all,
-      :conditions => { {:name=>'last_checked', :op=>'>'}=>(Time.now-(10*60)).to_i() } )
+      :conditions => { {:name=>'last_checked', :op=>'>'}=>(Time.now-(10*60)).to_s } )
 
     @accts.length.should == 1
     @accts[0].object.should == '44e804f2-4933-4e20-271c-48fcecd9450d'
@@ -921,13 +918,15 @@ end
   it "should delete_all" do
     vars = {"name"=>"foobarthree", "industry"=>"entertainment"}
     account = getAccount.create(vars)
+    acc_source_id = account.source_id  
     getAccount.count.should > 0
     if $spec_settings[:sync_model]
-        records = getTestDB().select_from_table('changed_values','*', {'source_id' => getAccount().get_source_id(), "update_type"=>'delete'} )
-        records.length.should == 0
 
-        records = getTestDB().select_from_table('changed_values','*', {'source_id' => getAccount().get_source_id(), "update_type"=>'create'} )
-        records.length.should > 0
+      records = getTestDB().select_from_table('changed_values','*', {'source_id' => acc_source_id, "update_type"=>'delete'} )
+      records.length.should == 0
+
+      records = getTestDB().select_from_table('changed_values','*', {'source_id' => acc_source_id, "update_type"=>'create'} )
+      records.length.should > 0
 
     end
 
@@ -935,25 +934,26 @@ end
     getAccount.count.should == 0
 
     if $spec_settings[:sync_model]
-        records = getTestDB().select_from_table('changed_values','*', {'source_id' => getAccount().get_source_id(), "update_type"=>'delete'} )
-        records.length.should > 0
+      records = getTestDB().select_from_table('changed_values','*', {'source_id' => acc_source_id, "update_type"=>'delete'} )
+      records.length.should > 0
 
-        records = getTestDB().select_from_table('changed_values','*', {'source_id' => getAccount().get_source_id(), "update_type"=>'create'} )
-        records.length.should == 0
+      records = getTestDB().select_from_table('changed_values','*', {'source_id' => acc_source_id, "update_type"=>'create'} )
+      records.length.should == 0
     end
   end
 
   it "should delete_all with conditions" do
     vars = {"name"=>"foobarthree", "industry"=>"entertainment"}
     account = getAccount.create(vars)
+    acc_source_id = account.source_id  
     @accts = getAccount.find(:all, :conditions => {'name' => 'Mobio India'})
     @accts.length.should > 0
 
     if $spec_settings[:sync_model]
-        records = getTestDB().select_from_table('changed_values','*', {'source_id' => getAccount().get_source_id(), "update_type"=>'delete'} )
+        records = getTestDB().select_from_table('changed_values','*', {'source_id' => acc_source_id, "update_type"=>'delete'} )
         records.length.should == 0
 
-        records = getTestDB().select_from_table('changed_values','*', {'source_id' => getAccount().get_source_id(), "update_type"=>'create'} )
+        records = getTestDB().select_from_table('changed_values','*', {'source_id' => acc_source_id, "update_type"=>'create'} )
         records.length.should > 0
 
     end
@@ -964,10 +964,10 @@ end
     @accts.length.should == 0
 
     if $spec_settings[:sync_model]
-        records = getTestDB().select_from_table('changed_values','*', {'source_id' => getAccount().get_source_id(), "update_type"=>'delete'} )
+        records = getTestDB().select_from_table('changed_values','*', {'source_id' => acc_source_id, "update_type"=>'delete'} )
         records.length.should > 0
 
-        records = getTestDB().select_from_table('changed_values','*', {'source_id' => getAccount().get_source_id(), "update_type"=>'create'} )
+        records = getTestDB().select_from_table('changed_values','*', {'source_id' => acc_source_id, "update_type"=>'create'} )
         records.length.should > 0
 
     end
@@ -977,9 +977,10 @@ end
   it "should delete_all with conditions across objects" do
     @accts = getAccount.find(:all, :conditions => {'industry' => 'Technology'})
     @accts.length.should > 0
+    acc_source_id = @accts[0].source_id
 
     if $spec_settings[:sync_model]
-      records = getTestDB().select_from_table('changed_values','*', {'source_id' => getAccount().get_source_id(), "update_type"=>'delete'} )
+      records = getTestDB().select_from_table('changed_values','*', {'source_id' => acc_source_id, "update_type"=>'delete'} )
       records.length.should == 0
     end
 
@@ -993,27 +994,28 @@ end
     @accts.length.should == 0
 
     if $spec_settings[:sync_model]
-      records = getTestDB().select_from_table('changed_values','*', {'source_id' => getAccount().get_source_id(), "update_type"=>'delete'} )
+      records = getTestDB().select_from_table('changed_values','*', {'source_id' => acc_source_id, "update_type"=>'delete'} )
       records.length.should > 0
     end
   end
 
   it "should delete_all not delete from other sources" do
     vars = {"name"=>"Aeroprise"}
-    account = getCase().create(vars)
+    case1 = getCase().create(vars)
 
     accts = getAccount.find(:all)
     accts.length.should > 0
+    acc_source_id = accts[0].source_id
 
     test_cond = {'name' => 'Aeroprise'}
     cases = getCase().find(:all, :conditions => test_cond)
     cases.length.should > 0
 
     if $spec_settings[:sync_model]
-      records = getTestDB().select_from_table('changed_values','*', {'source_id' => getAccount().get_source_id(), "update_type"=>'delete'} )
+      records = getTestDB().select_from_table('changed_values','*', {'source_id' => acc_source_id, "update_type"=>'delete'} )
       records.length.should == 0
 
-      records = getTestDB().select_from_table('changed_values','*', {'source_id' => getCase().get_source_id(), "update_type"=>'create'} )
+      records = getTestDB().select_from_table('changed_values','*', {'source_id' => case1.source_id, "update_type"=>'create'} )
       records.length.should > 0
     end
 
@@ -1028,10 +1030,10 @@ end
     accts.length.should > 0
 
     if $spec_settings[:sync_model]
-      records = getTestDB().select_from_table('changed_values','*', {'source_id' => getAccount().get_source_id(), "update_type"=>'delete'} )
+      records = getTestDB().select_from_table('changed_values','*', {'source_id' => acc_source_id, "update_type"=>'delete'} )
       records.length.should > 0
 
-      records = getTestDB().select_from_table('changed_values','*', {'source_id' => getCase().get_source_id(), "update_type"=>'create'} )
+      records = getTestDB().select_from_table('changed_values','*', {'source_id' => case1.source_id, "update_type"=>'create'} )
       records.length.should > 0
     end
   end
@@ -1046,10 +1048,10 @@ end
     accts.length.should == 1 # # FIXME: Expected 4 to equal 1
 
     if $spec_settings[:sync_model]
-      records = getTestDB().select_from_table('changed_values','*', {'source_id' => getAccount().get_source_id(), "update_type"=>'delete'} )
+      records = getTestDB().select_from_table('changed_values','*', {'source_id' => account.source_id, "update_type"=>'delete'} )
       records.length.should == 0
 
-      records = getTestDB().select_from_table('changed_values','*', {'source_id' => getAccount().get_source_id(), "update_type"=>'create'} )
+      records = getTestDB().select_from_table('changed_values','*', {'source_id' => account.source_id, "update_type"=>'create'} )
       records.length.should > 0
     end
 
@@ -1059,12 +1061,13 @@ end
 
     accts = getAccount.find(:all, :conditions => vars)
     accts.length.should == 1
+    acc_source_id = accts[0].source_id
 
     if $spec_settings[:sync_model]
-      records = getTestDB().select_from_table('changed_values','*', {'source_id' => getAccount().get_source_id(), "update_type"=>'delete'} )
+      records = getTestDB().select_from_table('changed_values','*', {'source_id' => acc_source_id, "update_type"=>'delete'} )
       records.length.should > 0
 
-      records = getTestDB().select_from_table('changed_values','*', {'source_id' => getAccount().get_source_id(), "update_type"=>'create'} )
+      records = getTestDB().select_from_table('changed_values','*', {'source_id' => acc_source_id, "update_type"=>'create'} )
       records.length.should == 1
       records[0]['attrib'].should == 'object'
     end
@@ -1080,12 +1083,13 @@ end
 
     accts = getAccount.find(:all, :conditions => test_cond, :op => 'OR') # FIXME: ArgumentError: wrong number of arguments (2 for 3)
     accts.length.should == 2
+    acc_source_id = accts[0].source_id
 
     if $spec_settings[:sync_model]
-      records = getTestDB().select_from_table('changed_values','*', {'source_id' => getAccount().get_source_id(), "update_type"=>'delete'} )
+      records = getTestDB().select_from_table('changed_values','*', {'source_id' => acc_source_id, "update_type"=>'delete'} )
       records.length.should == 0
 
-      records = getTestDB().select_from_table('changed_values','*', {'source_id' => getAccount().get_source_id(), "update_type"=>'create'} )
+      records = getTestDB().select_from_table('changed_values','*', {'source_id' => acc_source_id, "update_type"=>'create'} )
       records.length.should > 0
     end
 
@@ -1098,10 +1102,10 @@ end
     accts.length.should == 0
 
     if $spec_settings[:sync_model]
-      records = getTestDB().select_from_table('changed_values','*', {'source_id' => getAccount().get_source_id(), "update_type"=>'delete'} )
+      records = getTestDB().select_from_table('changed_values','*', {'source_id' => acc_source_id, "update_type"=>'delete'} )
       records.length.should > 0
 
-      records = getTestDB().select_from_table('changed_values','*', {'source_id' => getAccount().get_source_id(), "update_type"=>'create'} )
+      records = getTestDB().select_from_table('changed_values','*', {'source_id' => acc_source_id, "update_type"=>'create'} )
       records.length.should == 0
     end
   end
