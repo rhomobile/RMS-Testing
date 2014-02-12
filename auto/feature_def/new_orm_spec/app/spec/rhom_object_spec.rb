@@ -63,14 +63,14 @@ class Test_Helper
   end
 end
 
-# Compare if vars of model1 are subset of vars of model2
-# Find for New ORM returns all properties
-# TODO: Should find return also :source_id or simply skip it?
-def compare_vars_of_models(model1, model2)
-  model1.vars.each do |property, value|
-    next if property == :source_id
-    value.should == model2.vars[property]
-  end
+# Returns intersection of vars
+# TODO: New ORM in find does not return :source_id
+def intersection_of_vars(vars1, vars2)
+  intersection = vars1.keys & vars2.keys
+  inter = {}
+  intersection.each { |k| inter[k] = vars2[k] }
+  inter[:source_id] = vars1[:source_id] unless intersection.include?(:source_id) # FIXME:
+  inter
 end
 
 describe "Rhom::RhomObject" do
@@ -343,7 +343,7 @@ end
 
     item2 = getAccount.find(item.object)
 
-    compare_vars_of_models(item, item2)
+    intersection_of_vars(item.vars, item2.vars).should == item.vars
     item2.propOne.should == attributes['propOne']
     item2.TwoProps.should == attributes['TwoProps']
 
@@ -364,7 +364,7 @@ end
 
     item2 = getAccount.find(item.object)
 
-    compare_vars_of_models(item, item2)
+    intersection_of_vars(item.vars, item2.vars).should == item.vars
     item2.propOne.should == new_attributes['propOne']
     item2.TwoProps.should == new_attributes['TwoProps']
 
