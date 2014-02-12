@@ -33,7 +33,7 @@ describe("<ORM module specs>", function() {
     });
 
     it('VT302-0001 | Check Rho.ORM exist or not | Should return an object',function(){
-      expect(typeof(Rho.ORM)).toEqual('object');
+      expect(typeof(Rho.ORM)).toEqual('function');
     });
 
     it('VT302-0004 | should create model',function(){
