@@ -92,7 +92,7 @@ describe "Rhom::RhomObject" do
     # puts " -- before all"
     @helper = Test_Helper.new
     @helper.before_all(['client_info','object_values'], 'spec')
-    
+
     if $spec_settings[:sync_model]
       unless @use_new_orm
         Rho::RhoConfig.sources[getAccount.to_s]['sync_type'] = 'incremental'
@@ -186,7 +186,7 @@ end
 
     account = getAccount.create(vars)
     if $spec_settings[:sync_model]
-      puts " partition is : #{getAccount.partition}, #{getAccount.getProperty("sync_type")}"
+      puts " partition is : #{getAccount.partition}, #{getAccount.getProperty("sync_type")}" if @use_new_orm
       getAccount.changed?.should == true # Expected false to equal true
       account.changed?.should == true
     end
@@ -918,7 +918,7 @@ end
   it "should delete_all" do
     vars = {"name"=>"foobarthree", "industry"=>"entertainment"}
     account = getAccount.create(vars)
-    acc_source_id = account.source_id  
+    acc_source_id = account.source_id
     getAccount.count.should > 0
     if $spec_settings[:sync_model]
 
@@ -945,7 +945,7 @@ end
   it "should delete_all with conditions" do
     vars = {"name"=>"foobarthree", "industry"=>"entertainment"}
     account = getAccount.create(vars)
-    acc_source_id = account.source_id  
+    acc_source_id = account.source_id
     @accts = getAccount.find(:all, :conditions => {'name' => 'Mobio India'})
     @accts.length.should > 0
 
