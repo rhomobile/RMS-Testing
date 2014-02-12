@@ -1,10 +1,6 @@
 describe('Rho.DPX APIs Set Test', function() {
 
-var dpxInstance;
-
-beforeEach(function() {
-    dpxInstance = new Rho.DPX();
-});
+var dpxInstance = Rho.DPX;
 
 afterEach(function () {
     dpxInstance.close();
