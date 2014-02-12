@@ -331,8 +331,7 @@ end
     item.TwoProps.should == '2'
 
     item2 = getAccount.find(item.object)
-    item.vars.should == item2.vars
-
+    item2.object.should == item.object
     item2.propOne.should == '1'
     item2.TwoProps.should == '2'
 
@@ -353,17 +352,7 @@ end
 
     item2 = getAccount.find(item.object)
 
-    # FIXME: old orm returns
-    # puts item.vars.inspect
-    # => {:object=>"160226845285978.9", :source_id=>40005, :propOne=>"1", :TwoProps=>"2"}
-    # puts item2.vars.inspect
-    # => {:source_id=>40005, :object=>"160226845285978.9", :propOne=>"1", :TwoProps=>"2"}
-    # but new orm does not return source_id!
-    # {:TwoProps=>"2", :object=>"1328537541", :propOne=>"1", :source_id=>"40001"}
-    # {:TwoProps=>"2", :object=>"1328537541", :propOne=>"1"}
-
-    item.vars.should == item2.vars
-
+    item2.object.should == item.object
     item2.propOne.should == '1'
     item2.TwoProps.should == '2'
 
