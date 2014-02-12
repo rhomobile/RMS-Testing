@@ -464,7 +464,7 @@ describe('Printing Generic', function() {
         // connectWithOptions tests
         function generateConnectWithParams(connectparams, case_type) {
             // connect and wait for callback
-            it('should just connect' + case_type + 'callback params' + JSON.stringify(connectparams, null, " "), function() {
+            it('using connectWithOptions should just connect ' + case_type + ' callback params' + JSON.stringify(connectparams, null, " "), function() {
                 var thisprinter = null;
                 var callresult = null;
 
@@ -489,7 +489,7 @@ describe('Printing Generic', function() {
 
                     if (case_type == 'without'){
                         callresult = thisprinter.connectWithOptions(connectparams);
-                    } else if (case_type == 'withcb') {
+                    } else if (case_type == 'withcallback') {
                         thisprinter.connectWithOptions(connectparams, cbk);
                     } else if (case_type == 'anonymous') {
                         thisprinter.connectWithOptions(connectparams, function cbk(val) {
@@ -500,7 +500,7 @@ describe('Printing Generic', function() {
 
                 waitsFor(function() {
                     return callresult != null;
-                }, 'wait while disconnected', 5000);
+                }, 'wait while connecting', 5000);
 
                 runs(function() {
                     expect(callresult).toEqual(Rho.Printer.PRINTER_STATUS_SUCCESS);
@@ -521,7 +521,7 @@ describe('Printing Generic', function() {
 
         for (var i = 0; i < connectParams.length; i++) {
             generateConnectWithParams(connectParams[i], 'without');
-            generateConnectWithParams(connectParams[i], 'withcb');
+            generateConnectWithParams(connectParams[i], 'withcallback');
             generateConnectWithParams(connectParams[i], 'anonymous');
         }
 
@@ -795,7 +795,7 @@ describe('Printing Generic', function() {
         it('calling zebra specific method should throw exception', function() {
 
             runs(function() {
-                expect(discovery_finished).toEqual(Rho.Printer.PRINTER_STATUS_SUCCESS);
+                expect(callresult).toEqual(Rho.Printer.PRINTER_STATUS_SUCCESS);
             });
 
             expect(function () {

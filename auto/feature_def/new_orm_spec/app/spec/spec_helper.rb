@@ -9,22 +9,21 @@ def getCustomer
 end
 
 def getAccount
-    return Account_s if $spec_settings[:schema_model]
-    Account
+  return Account_s if $spec_settings[:schema_model]
+  Account
 end
 
 def getCase
-    return Case_s if $spec_settings[:schema_model]
-    Case
+  return Case_s if $spec_settings[:schema_model]
+  Case
 end
 
 def getTestDB
   ::Rho::RHO.get_db_partitions['local']
-  #::Rho::RHO.get_db_partitions['user']
 end
 
-def clean_db_data
-  db = getTestDB
+def clean_db_data(patrition = 'local')
+  db = ::Rho::RHO.get_db_partitions[patrition]
   db.start_transaction
   db.delete_all_from_table('client_info')
   db.delete_all_from_table('object_values')

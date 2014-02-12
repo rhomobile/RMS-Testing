@@ -342,7 +342,7 @@ describe('Intent_UseCases Functionality Test', function () {
     //TODO: Is such method usage supports on iOS ?
     if(isApplePlatform()){
         // No common app in android supports "data:" URIs in intents
-        it('VT328_24 | mimeType - Launch Image viewer from test app by setting uri to "image data URI"', function () {
+        it('VT328_25 | mimeType - Launch Image viewer from test app by setting uri to "image data URI"', function () {
             displayObjective('VT328_24 | mimeType - Launch Image viewer from test app by setting mimeType "image (jpeg, gif, png etc.,)" and Data to "image data URI"');
             dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":Rho.Intent.START_ACTIVITY,"action":"","categories":"","appName":"","targetClass":"","uri":"","mimeType":"image/jpeg","data":"<data:image/jpeg;base64,/qerwe.... >"}}');
             dispExpectedResult('Image viewer should be launched successfully.');
@@ -357,13 +357,13 @@ describe('Intent_UseCases Functionality Test', function () {
         });
     }
     if(isAnyWindowsFamilyPlatform()){
-        it('VT328_25 | appName - Launch any other Application by setting \'appName\' in intent params, from test application.', function () {
+        it('VT328_26 | appName - Launch any other Application by setting \'appName\' in intent params, from test application.', function () {
             displayObjective('VT328_25 | appName - Launch any other Application by setting \'appName\' in intent params, from test application.');
             dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":Rho.Intent.START_ACTIVITY,"action":"","categories":"","appName":"testApp","targetClass":"","uri":"","mimeType":"","data":""}}');
             dispExpectedResult('Application should be launched from test application successfully');
             _result.waitToRunTest();
             runs(function () {
-                var parameters = {intentType: Rho.Intent.START_ACTIVITY, appName: "rhomobile TestApp/TestApp.exe", data: {}};
+                var parameters = {intentType: Rho.Intent.START_ACTIVITY, appName: "TestApp", data: {}};
                 Rho.Intent.send(parameters);
             });
             _result.waitForResponse();
@@ -371,7 +371,7 @@ describe('Intent_UseCases Functionality Test', function () {
     }
 
     if(isAndroidPlatform()){
-        it('VT328_26 | appName - Launch Android application via \'appName\' (packageName) from test application.', function () {
+        it('VT328_27 | appName - Launch Android application via \'appName\' (packageName) from test application.', function () {
             displayObjective('VT328_26 | appName - Launch Android application via \'appName\' (packageName) from test application.');
             dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":Rho.Intent.START_ACTIVITY,"action":"","categories":"","appName":"com.smap.targetapp","targetClass":"","uri":"","mimeType":"","data":""}}');
             dispExpectedResult('Android application should launched whose package name matches.');
@@ -384,7 +384,7 @@ describe('Intent_UseCases Functionality Test', function () {
         });
     }
     if(isApplePlatform()){
-        it('VT328_27 | appName - Launch iOS application via \'appName\' (BundleURLScheme) from test application.', function () {
+        it('VT328_28 | appName - Launch iOS application via \'appName\' (BundleURLScheme) from test application.', function () {
             displayObjective('VT328_27 | appName - Launch iOS application via \'testapp\' (BundleURLScheme) from test application.');
             dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":Rho.Intent.START_ACTIVITY,"action":"","categories":"","testapp":"ios bundle url","targetClass":"","uri":"","mimeType":"","data":""}}');
             dispExpectedResult('iOS application should be launched whose bundleUrlScheme matches.');
@@ -397,7 +397,7 @@ describe('Intent_UseCases Functionality Test', function () {
         });
     }
     if (isAnyButWindowsFamilyPlatform()){
-    it('VT328_28 | uri - Launch URL via browser appliation from test app by setting URI "http://www.google.com"', function () {
+    it('VT328_29 | uri - Launch URL via browser appliation from test app by setting URI "http://www.google.com"', function () {
         displayObjective('VT328_28 | uri - Launch URL via browser appliation from test app by setting URI "http://www.google.com"');
         dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":Rho.Intent.START_ACTIVITY,"action":"ACTION_VIEW","categories":"","appName":"","targetClass":"","uri":"http://www.google.com","mimeType":"","data":""}}');
         dispExpectedResult('Browser should be launched with default data in the view.');
@@ -409,8 +409,8 @@ describe('Intent_UseCases Functionality Test', function () {
         _result.waitForResponse();
     });
     }
-    if (!isApplePlatform) {
-         it('VT328_29 | uri - Launch Message application with data from test app by setting URI "sms:9611896991"', function () {
+    if (!isApplePlatform()) {
+         it('VT328_30 | uri - Launch Message application with data from test app by setting URI "sms:9611896991"', function () {
             displayObjective('VT328_29 | uri - Launch Message application with data from test app by setting URI "sms:9611896991"');
             dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":Rho.Intent.START_ACTIVITY,"action":"","categories":"","appName":"","targetClass":"","uri":"sms:9611896991","mimeType":"","data":""}}');
             dispExpectedResult('Message compose application should be launched with pre-filled recepient number.');
@@ -421,7 +421,7 @@ describe('Intent_UseCases Functionality Test', function () {
                  });
             _result.waitForResponse();
             });
-         it('VT328_30 | uri - Launch Email appliation with data from test app by setting URI "mailto:abcd@domain.com"', function () {
+         it('VT328_31 | uri - Launch Email appliation with data from test app by setting URI "mailto:abcd@domain.com"', function () {
             displayObjective('VT328_30 | uri - Launch Email appliation with data from test app by setting URI "mailto:abcd@domain.com"');
             var preConditions = ["Ensure default mail box is configured in the device"];
             displayPrecondition(preConditions);
@@ -434,7 +434,7 @@ describe('Intent_UseCases Functionality Test', function () {
                  });
             _result.waitForResponse();
             });
-         it('VT328_31 | uri - Launch dialler with pre-filled number from test application by setting URI "tel:9611896991" and with Action: ACTION_DIAL', function () {
+         it('VT328_32 | uri - Launch dialler with pre-filled number from test application by setting URI "tel:9611896991" and with Action: ACTION_DIAL', function () {
             displayObjective('VT328_31 | uri - Launch dialler with pre-filled number from test application by setting URI "tel:9611896991" and with Action: ACTION_DIAL');
             dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":Rho.Intent.START_ACTIVITY,"action":"ACTION_DIAL","categories":"","appName":"","targetClass":"","uri":"tel:9611896991","mimeType":"","data":""}}');
             dispExpectedResult('Dialer launches with pre-loaded number in it.');
@@ -446,7 +446,7 @@ describe('Intent_UseCases Functionality Test', function () {
             _result.waitForResponse();
             });
          if(!isAndroidPlatform()){
-         it('VT328_32 | uri - Launch Maps with pre-set lat and longitute values from test app by setting Uri "geo:latitude,longitude"', function () {
+         it('VT328_33 | uri - Launch Maps with pre-set lat and longitute values from test app by setting Uri "geo:latitude,longitude"', function () {
             displayObjective('VT328_32 | uri - Launch Maps with pre-set lat and longitute values from test app by setting Uri "geo:latitude,longitude"');
             var preConditions = ["Ensure maps application present in the device"];
             displayPrecondition(preConditions);
@@ -460,7 +460,7 @@ describe('Intent_UseCases Functionality Test', function () {
             _result.waitForResponse();
             });
          }
-         it('VT328_33 | uri - Make a call from test application by setting URI "tel:9611896991" and Action : "ACTION_CALL"', function () {
+         it('VT328_34 | uri - Make a call from test application by setting URI "tel:9611896991" and Action : "ACTION_CALL"', function () {
             displayObjective('VT328_33 | uri - Make a call from test application by setting URI "tel:9611896991" and Action : "ACTION_CALL"');
             dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":Rho.Intent.START_ACTIVITY,"action":"ACTION_CALL","categories":"","appName":"","targetClass":"","uri":"tel:9611896991","mimeType":"","data":""}}');
             dispExpectedResult('Phone call made to the pre-loaded number.');
@@ -473,7 +473,7 @@ describe('Intent_UseCases Functionality Test', function () {
             });
     }
     if(isAndroidPlatform()){
-        it('VT328_34 | uri - Launch Contacts from test application via Uri "content://contacts/people/" and Action: ACTION_VIEW', function () {
+        it('VT328_35 | uri - Launch Contacts from test application via Uri "content://contacts/people/" and Action: ACTION_VIEW', function () {
             displayObjective('VT328_34 | uri - Launch Contacts from test application via Uri "content://contacts/people/" and Action: ACTION_VIEW');
             var preConditions = ["Ensure atleast one contact is present in the device"];
             displayPrecondition(preConditions);
@@ -486,7 +486,7 @@ describe('Intent_UseCases Functionality Test', function () {
             });
             _result.waitForResponse();
         });
-        it('VT328_35 | uri - Launch individual contact from test application via Uri "content://contacts/people/1" and Action: ACTION_VIEW', function () {
+        it('VT328_36 | uri - Launch individual contact from test application via Uri "content://contacts/people/1" and Action: ACTION_VIEW', function () {
             displayObjective('VT328_35 | uri - Launch Contacts from test application via Uri "content://contacts/people/" and Action: ACTION_VIEW');
             var preConditions = ["Ensure atleast one contact is present in the device"];
             displayPrecondition(preConditions);
@@ -500,8 +500,8 @@ describe('Intent_UseCases Functionality Test', function () {
             _result.waitForResponse();
         });
     }
-    if(!isApplePlatform) {
-         it('VT328_36 | uri - Launch Email compose screen with pre-filled email from test application by setting URI and data.', function () {
+    if(!isApplePlatform()) {
+         it('VT328_37 | uri - Launch Email compose screen with pre-filled email from test application by setting URI and data.', function () {
             displayObjective('VT328_36 | uri - Launch Email compose screen with pre-filled email from test application by setting URI and data.');
             var preConditions = ["Ensure default mailbox is configured in the device"];
             displayPrecondition(preConditions);
@@ -543,90 +543,128 @@ describe('Intent_UseCases Functionality Test', function () {
             });
             _result.waitForResponse();
         });
-        it('VT328_39 | Start Listening to the background intents - broadcast messages (receiving broadcast messages)', function () {
-            displayObjective('VT328_39 | Start Listening to the background intents - broadcast messages (receiving broadcast messages)');
-            dispTestCaseRunning('Test app should receive broad cast messages with the help of Start Listening API.');
-            dispExpectedResult('Test appliation starts listening to background intents and should alert the broadcast message received and also should trigger callback function of the send method which alerts test case passed.');
-            _result.waitToRunTest();
-            runs(function () {
-                var data = {
-                    "myData":"This is broad cast data 3!"
-                };
-                var params = new parameters(Rho.Intent.BROADCAST,"","com.rhomobile.BROADCAST",["com.rhomobile.manual_common_spec"],"","","","",data);
-                var receiveCB = function(intent){
-                    if(intent.data.myData == "This is broad cast data 3!")
-                    {
-                        alert("Test case passed !");
-                    }
-                };
-                Rho.Intent.startListening(receiveCB);
-                Rho.Intent.send(params);
-            });
-            _result.waitForResponse();
+    }
+    it('VT328_39 | Start Listening to the background intents - broadcast messages (receiving broadcast messages)', function () {
+        displayObjective('VT328_39 | Start Listening to the background intents - broadcast messages (receiving broadcast messages)');
+        dispTestCaseRunning('Test app should receive broad cast messages with the help of Start Listening API.');
+        dispExpectedResult('Test appliation starts listening to background intents and should alert the broadcast message received and also should trigger callback function of the send method which alerts test case passed.');
+        _result.waitToRunTest();
+        runs(function () {
+            var data = {
+                "myData":"This is broad cast data 3!"
+            };
+            var params;
+            if (isAndroidPlatform()) {
+                params = new parameters(Rho.Intent.BROADCAST,"","com.rhomobile.BROADCAST",["com.rhomobile.manual_common_spec"],"","","","",data);
+            }
+            if (isApplePlatform()) {
+                params = new parameters(Rho.Intent.BROADCAST,"","","","testApp","","","",data);
+            }
+            if (isAnyWindowsFamilyPlatform()) {
+                params = new parameters(Rho.Intent.BROADCAST,"","","","rhomobile testApp/testApp.exe","","","",data);
+            }
+            var receiveCB = function(intent){
+                if(intent.data.myData == "This is broad cast data 3!")
+                {
+                    alert("Test case passed !");
+                }
+            };
+            Rho.Intent.startListening(receiveCB);
+            Rho.Intent.send(params);
         });
-        it('VT328_40 | Try to start listening to the background intents, when already started listenting.', function () {
-            displayObjective('VT328_40 | Try to start listening to the background intents, when already started listenting.');
-            dispTestCaseRunning('Try to start listening to the background intents, when already started listenting.');
-            dispExpectedResult('No effect or no crash should be seen in the test application.');
-            _result.waitToRunTest();
-            runs(function () {
-                var data = {
-                    "myData":"This is broad cast data 4!"
-                };
-                var params = new parameters(Rho.Intent.BROADCAST,"","com.rhomobile.BROADCAST",["com.rhomobile.manual_common_spec"],"","","","",data);
-                var receiveCB = function(intent){
-                    if(intent.data.myData == "This is broad cast data 4!")
-                    {
-                        alert("Test case passed !");
-                    }
-                };
-                Rho.Intent.startListening(receiveCB);
-                Rho.Intent.startListening(receiveCB);
-                Rho.Intent.send(params);
-            });
-            _result.waitForResponse();
+        _result.waitForResponse();
+    });
+    it('VT328_40 | Try to start listening to the background intents, when already started listenting.', function () {
+        displayObjective('VT328_40 | Try to start listening to the background intents, when already started listenting.');
+        dispTestCaseRunning('Try to start listening to the background intents, when already started listenting.');
+        dispExpectedResult('No effect or no crash should be seen in the test application.');
+        _result.waitToRunTest();
+        runs(function () {
+            var data = {
+                "myData":"This is broad cast data 4!"
+            };
+            var params;
+            if (isAndroidPlatform()) {
+                params = new parameters(Rho.Intent.BROADCAST,"","com.rhomobile.BROADCAST",["com.rhomobile.manual_common_spec"],"","","","",data);
+            }
+            if (isApplePlatform()) {
+                params = new parameters(Rho.Intent.BROADCAST,"","","","testApp","","","",data);
+            }
+            if (isAnyWindowsFamilyPlatform()) {
+                params = new parameters(Rho.Intent.BROADCAST,"","","","rhomobile testApp/testApp.exe","","","",data);
+            }
+            var receiveCB = function(intent){
+                if(intent.data.myData == "This is broad cast data 4!")
+                {
+                    alert("Test case passed !");
+                }
+            };
+            Rho.Intent.startListening(receiveCB);
+            Rho.Intent.startListening(receiveCB);
+            Rho.Intent.send(params);
         });
-        it('VT328_41 | Stop Listening to the background intents', function () {
-            displayObjective('VT328_41 | Stop Listening to the background intents');
-            dispTestCaseRunning('Execute \'Stop Listening\' API.');
-            dispExpectedResult('Test application should stop listening to background intents ie., (test application should not receive any broad cast messages).');
-            _result.waitToRunTest();
-            runs(function () {
-                var data = {
-                    "myData":"This is broad cast data 5!"
-                };
-                var params = new parameters(Rho.Intent.BROADCAST,"","com.rhomobile.BROADCAST",["com.rhomobile.manual_common_spec"],"","","","",data);
-                var receiveCB = function(intent){
-                    alert("Test Case failed if you see this alert message!");
-                };
-                Rho.Intent.startListening(receiveCB);
-                Rho.Intent.stopListening();
-                Rho.Intent.send(params);
-            });
-            _result.waitForResponse();
+        _result.waitForResponse();
+    });
+    it('VT328_41 | Stop Listening to the background intents', function () {
+        displayObjective('VT328_41 | Stop Listening to the background intents');
+        dispTestCaseRunning('Execute \'Stop Listening\' API.');
+        dispExpectedResult('Test application should stop listening to background intents ie., (test application should not receive any broad cast messages).');
+        _result.waitToRunTest();
+        runs(function () {
+            var data = {
+                "myData":"This is broad cast data 5!"
+            };
+            var params;
+            if (isAndroidPlatform()) {
+                params = new parameters(Rho.Intent.BROADCAST,"","com.rhomobile.BROADCAST",["com.rhomobile.manual_common_spec"],"","","","",data);
+            }
+            if (isApplePlatform()) {
+                params = new parameters(Rho.Intent.BROADCAST,"","","","testApp","","","",data);
+            }
+            if (isAnyWindowsFamilyPlatform()) {
+                params = new parameters(Rho.Intent.BROADCAST,"","","","rhomobile testApp/testApp.exe","","","",data);
+            }
+            var receiveCB = function(intent){
+                alert("Test Case failed if you see this alert message!");
+            };
+            Rho.Intent.startListening(receiveCB);
+            Rho.Intent.stopListening();
+            Rho.Intent.send(params);
         });
-        it('VT328_42 | Stop Listening to the background intents before executing startListenting method', function () {
-            displayObjective('VT328_42 | Stop Listening to the background intents before executing startListenting method');
-            dispTestCaseRunning('Performing multiple execution of \'Stop Listening\'.');
-            dispExpectedResult('No effect or no crash should be seen in the test application.');
-            _result.waitToRunTest();
-            runs(function () {
-                var mytestapp = 'com.rhomobile.manual_common_spec';
-                var data = {
-                    "myData":"This is broad cast data !"
-                };
-                var params = new parameters(Rho.Intent.BROADCAST,"","com.rhomobile.BROADCAST",["com.rhomobile.manual_common_spec"],"","","","",data);
-                var receiveCB = function(intents){
-                    var receivedParam = intents.params;
-                    alert("Test Case failed if you see this alert message!");
-                };
-                Rho.Intent.startListening(receiveCB);
-                Rho.Intent.stopListening();
-                Rho.Intent.stopListening();
-                Rho.Intent.send(params);
-            });
-            _result.waitForResponse();
+        _result.waitForResponse();
+    });
+    it('VT328_42 | Stop Listening to the background intents before executing startListenting method', function () {
+        displayObjective('VT328_42 | Stop Listening to the background intents before executing startListenting method');
+        dispTestCaseRunning('Performing multiple execution of \'Stop Listening\'.');
+        dispExpectedResult('No effect or no crash should be seen in the test application.');
+        _result.waitToRunTest();
+        runs(function () {
+            var mytestapp = 'com.rhomobile.manual_common_spec';
+            var data = {
+                "myData":"This is broad cast data !"
+            };
+            var params;
+            if (isAndroidPlatform()) {
+                params = new parameters(Rho.Intent.BROADCAST,"","com.rhomobile.BROADCAST",["com.rhomobile.manual_common_spec"],"","","","",data);
+            }
+            if (isApplePlatform()) {
+                params = new parameters(Rho.Intent.BROADCAST,"","","","testApp","","","",data);
+            }
+            if (isAnyWindowsFamilyPlatform()) {
+                params = new parameters(Rho.Intent.BROADCAST,"","","","rhomobile testApp/testApp.exe","","","",data);
+            }
+            var receiveCB = function(intents){
+                var receivedParam = intents.params;
+                alert("Test Case failed if you see this alert message!");
+            };
+            Rho.Intent.startListening(receiveCB);
+            Rho.Intent.stopListening();
+            Rho.Intent.stopListening();
+            Rho.Intent.send(params);
         });
+        _result.waitForResponse();
+    });
+    if(isAndroidPlatform()){
         it('VT328_43 | Suggest different applications to send text message', function(){
             displayObjective('VT328_43 | Suggest different applications to send text message');
             dispTestCaseRunning('Sending Intent matches with multiple activities, should suggest for the application to launch!');

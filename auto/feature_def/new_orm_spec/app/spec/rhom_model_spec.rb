@@ -1,3 +1,8 @@
+# # New ORM failures
+#
+# FIXME list: *** FAIL: RhomModel - no such table: Product
+# for getProduct.find !
+
 describe "RhomModel" do
   @use_new_orm = begin Rho::RHO.use_new_orm rescue false end
   puts "Rhom specs: use_new_orm: #{@use_new_orm}"

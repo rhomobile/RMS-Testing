@@ -1,13 +1,15 @@
 # New ORM failures
-# FIXME list
-# 1) "Should  delete all objects for a given model"
+#
+# FIXME list:
+# 1) "Should  delete all objects for given property bag models" do
+# 2) "Should  delete all objects for a given property bag model"
 
 describe "Rhom" do
   @use_new_orm = begin Rho::RHO.use_new_orm rescue false end
   puts "Rhom specs: use_new_orm: #{@use_new_orm}"
 
   before(:each) do
-    clean_db_data
+    clean_db_data('user')
   end
 
   it 'Check Rhom::Rhom exist or not | Should return an object' do
@@ -60,11 +62,46 @@ describe "Rhom" do
     Rhom::Rhom.database_full_reset_ex( :reset_local_models => true, :reset_client_info => false )
   end
 
-  it "Should  delete all objects for given models" do
-    Product.create( { :name => 'prod1' } )
-    Customer.create( { :city => 'SPB' } )
 
-    Product.find(:all).length.should > 0
+  it "Should  delete all objects for given fixed schema models" do
+    Product_s.create( { :brand => "Apple", :name => 'iPhone 5S', :price => "$199", :quantity => "10" } )
+    Product_s.create( { :brand => "Samsung", :name => 'Galaxy S4', :price => "$99.99", :quantity => "20" } )
+    Customer_s.create( { :city => 'SPB', :address => "Fontanka" } )
+
+    Product_s.find(:all).length.should > 0
+    Customer_s.find(:count).should > 0
+
+    Rhom::Rhom.database_full_reset_ex( :models => ['Product_s', 'Customer_s'] )
+
+    Rho::RhoConfig.reset_models.should == 'Product_s,Customer_s'
+    Product_s.find(:all).length.should == 0
+    Customer_s.find(:count).should == 0
+  end
+
+  it "Should  delete all objects for a given fixed schema model" do
+    Product_s.create( { :brand => "Apple", :name => 'iPhone 5S', :price => "$199", :quantity => "10" } )
+    Product_s.create( { :brand => "Samsung", :name => 'Galaxy S4', :price => "$99.99", :quantity => "20" } )
+    Customer_s.create( { :city => 'SPB', :address => "Fontanka" } )
+
+    Product_s.find(:all).length.should > 0
+    Customer_s.find(:count).should > 0
+
+    Rhom::Rhom.database_full_reset_ex( :models => ['Product_s'] )
+
+    Rho::RhoConfig.reset_models.should == 'Product_s'
+    Product_s.find(:count).should == 0
+
+    Product_s.find(:all).should be_empty # =>
+    Customer_s.find(:count).should > 0
+  end
+
+  # # FIXME:
+  it "Should  delete all objects for given property bag models" do
+    Product.create( { :brand => "Apple", :name => 'iPhone 5S', :price => "$199", :quantity => "10" } )
+    Product.create( { :brand => "Samsung", :name => 'Galaxy S4', :price => "$99.99", :quantity => "20" } )
+    Customer.create( { :city => 'SPB', :address => "Fontanka" } )
+
+    Product.find(:all).length.should > 0 # *** FAIL: Rhom - no such table: Product
     Customer.find(:count).should > 0
 
     Rhom::Rhom.database_full_reset_ex( :models => ['Product', 'Customer'] )
@@ -74,12 +111,13 @@ describe "Rhom" do
     Customer.find(:count).should == 0
   end
 
-  # FIXME:
-  it "Should  delete all objects for a given model" do
-    Product.create( { :name => 'prod1' } )
-    Customer.create( { :city => 'SPB' } )
+  # # FIXME:
+  it "Should  delete all objects for a given property bag model" do
+    Product.create( { :brand => "Apple", :name => 'iPhone 5S', :price => "$199", :quantity => "10" } )
+    Product.create( { :brand => "Samsung", :name => 'Galaxy S4', :price => "$99.99", :quantity => "20" } )
+    Customer.create( { :city => 'SPB', :address => "Fontanka" } )
 
-    Product.find(:all).length.should > 0
+    Product.find(:all).length.should > 0 # *** FAIL: Rhom - no such table: Product
     Customer.find(:count).should > 0
 
     Rhom::Rhom.database_full_reset_ex( :models => ['Product'] )
@@ -87,10 +125,7 @@ describe "Rhom" do
     Rho::RhoConfig.reset_models.should == 'Product'
     Product.find(:count).should == 0
 
-    # FIXME: find(:all) for property bag returns values for another object!
-    Product.find(:all).should be_empty # =>
-    # *** FAIL: Rhom - Expected [#<Product:0xc0f0ecc @vars={:city=>"SPB", :object=>"1489578700"}>] to be empty
-
+    Product.find(:all).should be_empty
     Customer.find(:count).should > 0
   end
 
