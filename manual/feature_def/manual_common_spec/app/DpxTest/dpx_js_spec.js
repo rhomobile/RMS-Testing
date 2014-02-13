@@ -44,22 +44,33 @@ describe('DPX Functionality Test', function() {
         return list.join('');
     };
 
+    var runsCaptureDocument = function(callbackType, callback) {
+        var stopped = false;
+
+        runs(function() {
+            displayResult('Output: ', '-');
+            Rho.DPX.captureDocument(function(dict) {
+                if (dict['callbackType'] === callbackType) {
+                    callback(dict);
+                }
+                if (dict['callbackType'] === Rho.DPX.STOP) {
+                    stopped = true;
+                }
+            });
+        });
+
+        waitsFor(function() {
+            return stopped;
+        }, "the capture to complete", 1000000);
+    };
+
     var getformCaptureImageId = null;
     var getregionImageId = null;
-    var dpxInstance;
 
     beforeEach(function() {
         getformCaptureImageId = null;
         getregionImageId = null;
-        if (dpxInstance !== null) {
-            dpxInstance.close();
-        }
-        dpxInstance = new Rho.DPX();
-    });
-
-    afterEach(function () {
-        dpxInstance.close();
-        dpxInstance = null;
+        Rho.DPX.close();
     });
 
     it('Document capture with barcode, omr, ocr, picture.', function() {
@@ -68,22 +79,19 @@ describe('DPX Functionality Test', function() {
 
         _result.waitToRunAutoTest();
 
-        runs(function() {
-            dpxInstance.template = 'file:///sdcard/templates/Logistics%20Post.xml';
-            dpxInstance.inputSource = Rho.DPX.SOURCE_CAMERA;
-            dpxInstance.uiResultConfirmation = false;
+        Rho.DPX.template = 'file:///sdcard/templates/Logistics%20Post.xml';
+        Rho.DPX.uiResultConfirmation = false;
+        Rho.DPX.audioFeedback = false;
 
-            dpxInstance.captureDocument(function(dict) {
-                // displayResult('Output: ', pprint(dict));
-                expect(dict['callbackType']).toEqual(Rho.DPX.SUCCESS);
-                var regions = dict['processedForm']['regions'];
-                expect(regions[0]['processingMode']).toEqual(Rho.DPX.PM_BARCODE);
-                expect(regions[1]['processingMode']).toEqual(Rho.DPX.PM_OMR);
-                expect(regions[2]['processingMode']).toEqual(Rho.DPX.PM_OCR);
-                expect(regions[5]['processingMode']).toEqual(Rho.DPX.PM_PICTURE);
+        runsCaptureDocument(Rho.DPX.SUCCESS, function(dict) {
+            // displayResult('Output: ', pprint(dict));
+            var regions = dict['processedForm']['regions'];
+            expect(regions[0]['processingMode']).toEqual(Rho.DPX.PM_BARCODE);
+            expect(regions[1]['processingMode']).toEqual(Rho.DPX.PM_OMR);
+            expect(regions[2]['processingMode']).toEqual(Rho.DPX.PM_OCR);
+            expect(regions[5]['processingMode']).toEqual(Rho.DPX.PM_PICTURE);
 
-                _result.passed();
-            });
+            _result.passed();
         });
 
         _result.waitForResponse();
@@ -95,18 +103,15 @@ describe('DPX Functionality Test', function() {
 
         _result.waitToRunTest();
 
-        runs(function() {
-            dpxInstance.template = 'file:///sdcard/templates/Logistics%20Post.xml';
-            dpxInstance.inputSource = Rho.DPX.SOURCE_CAMERA;
-            dpxInstance.uiResultConfirmation = false;
+        Rho.DPX.template = 'file:///sdcard/templates/Logistics%20Post.xml';
+        Rho.DPX.uiResultConfirmation = false;
 
-            dpxInstance.audioFeedback = true;
-            dpxInstance.hapticFeedback = false;
-            dpxInstance.ledFeedback = false;
+        Rho.DPX.audioFeedback = true;
+        Rho.DPX.hapticFeedback = false;
+        Rho.DPX.ledFeedback = false;
 
-            dpxInstance.captureDocument(function(dict) {
-                displayResult('Output: ', 'callbackType is ' + dict['callbackType']);
-            });
+        runsCaptureDocument(Rho.DPX.SUCCESS, function(dict) {
+            displayResult('Output: ', 'callbackType is ' + dict['callbackType']);
         });
 
         _result.waitForResponse();
@@ -118,18 +123,15 @@ describe('DPX Functionality Test', function() {
 
         _result.waitToRunTest();
 
-        runs(function() {
-            dpxInstance.template = 'file:///sdcard/templates/Logistics%20Post.xml';
-            dpxInstance.inputSource = Rho.DPX.SOURCE_CAMERA;
-            dpxInstance.uiResultConfirmation = false;
+        Rho.DPX.template = 'file:///sdcard/templates/Logistics%20Post.xml';
+        Rho.DPX.uiResultConfirmation = false;
 
-            dpxInstance.audioFeedback = false;
-            dpxInstance.hapticFeedback = true;
-            dpxInstance.ledFeedback = false;
+        Rho.DPX.audioFeedback = false;
+        Rho.DPX.hapticFeedback = true;
+        Rho.DPX.ledFeedback = false;
 
-            dpxInstance.captureDocument(function(dict) {
-                displayResult('Output: ', 'callbackType is ' + dict['callbackType']);
-            });
+        runsCaptureDocument(Rho.DPX.SUCCESS, function(dict) {
+            displayResult('Output: ', 'callbackType is ' + dict['callbackType']);
         });
 
         _result.waitForResponse();
@@ -141,18 +143,15 @@ describe('DPX Functionality Test', function() {
 
         _result.waitToRunTest();
 
-        runs(function() {
-            dpxInstance.template = 'file:///sdcard/templates/Logistics%20Post.xml';
-            dpxInstance.inputSource = Rho.DPX.SOURCE_CAMERA;
-            dpxInstance.uiResultConfirmation = false;
+        Rho.DPX.template = 'file:///sdcard/templates/Logistics%20Post.xml';
+        Rho.DPX.uiResultConfirmation = false;
 
-            dpxInstance.audioFeedback = false;
-            dpxInstance.hapticFeedback = false;
-            dpxInstance.ledFeedback = true;
+        Rho.DPX.audioFeedback = false;
+        Rho.DPX.hapticFeedback = false;
+        Rho.DPX.ledFeedback = true;
 
-            dpxInstance.captureDocument(function(dict) {
-                displayResult('Output: ', 'callbackType is ' + dict['callbackType']);
-            });
+        runsCaptureDocument(Rho.DPX.SUCCESS, function(dict) {
+            displayResult('Output: ', 'callbackType is ' + dict['callbackType']);
         });
 
         _result.waitForResponse();
@@ -164,16 +163,14 @@ describe('DPX Functionality Test', function() {
 
         _result.waitToRunTest();
 
-        runs(function() {
-            dpxInstance.template = 'file:///sdcard/templates/Logistics%20Post.xml';
-            dpxInstance.inputSource = Rho.DPX.SOURCE_CAMERA;
-            dpxInstance.uiResultConfirmation = false;
+        Rho.DPX.template = 'file:///sdcard/templates/Logistics%20Post.xml';
+        Rho.DPX.uiResultConfirmation = false;
+        Rho.DPX.audioFeedback = false;
 
-            dpxInstance.flashMode = Rho.DPX.FLASH_ON;
+        Rho.DPX.flashMode = Rho.DPX.FLASH_ON;
 
-            dpxInstance.captureDocument(function(dict) {
-                displayResult('Output: ', 'callbackType is ' + dict['callbackType']);
-            });
+        runsCaptureDocument(Rho.DPX.SUCCESS, function(dict) {
+            displayResult('Output: ', 'callbackType is ' + dict['callbackType']);
         });
 
         _result.waitForResponse();
@@ -185,16 +182,14 @@ describe('DPX Functionality Test', function() {
 
         _result.waitToRunTest();
 
-        runs(function() {
-            dpxInstance.template = 'file:///sdcard/templates/Logistics%20Post.xml';
-            dpxInstance.inputSource = Rho.DPX.SOURCE_CAMERA;
-            dpxInstance.uiResultConfirmation = false;
+        Rho.DPX.template = 'file:///sdcard/templates/Logistics%20Post.xml';
+        Rho.DPX.uiResultConfirmation = false;
+        Rho.DPX.audioFeedback = false;
 
-            dpxInstance.flashMode = Rho.DPX.FLASH_OFF;
+        Rho.DPX.flashMode = Rho.DPX.FLASH_OFF;
 
-            dpxInstance.captureDocument(function(dict) {
-                displayResult('Output: ', 'callbackType is ' + dict['callbackType']);
-            });
+        runsCaptureDocument(Rho.DPX.SUCCESS, function(dict) {
+            displayResult('Output: ', 'callbackType is ' + dict['callbackType']);
         });
 
         _result.waitForResponse();
@@ -206,16 +201,14 @@ describe('DPX Functionality Test', function() {
 
         _result.waitToRunTest();
 
-        runs(function() {
-            dpxInstance.template = 'file:///sdcard/templates/Logistics%20Post.xml';
-            dpxInstance.inputSource = Rho.DPX.SOURCE_CAMERA;
-            dpxInstance.uiResultConfirmation = false;
+        Rho.DPX.template = 'file:///sdcard/templates/Logistics%20Post.xml';
+        Rho.DPX.uiResultConfirmation = false;
+        Rho.DPX.audioFeedback = false;
 
-            dpxInstance.flashMode = Rho.DPX.FLASH_AUTO;
+        Rho.DPX.flashMode = Rho.DPX.FLASH_AUTO;
 
-            dpxInstance.captureDocument(function(dict) {
-                displayResult('Output: ', 'callbackType is ' + dict['callbackType']);
-            });
+        runsCaptureDocument(Rho.DPX.SUCCESS, function(dict) {
+            displayResult('Output: ', 'callbackType is ' + dict['callbackType']);
         });
 
         _result.waitForResponse();
@@ -227,16 +220,14 @@ describe('DPX Functionality Test', function() {
 
         _result.waitToRunTest();
 
-        runs(function() {
-            dpxInstance.template = 'file:///sdcard/templates/Logistics%20Post.xml';
-            dpxInstance.inputSource = Rho.DPX.SOURCE_CAMERA;
-            dpxInstance.uiResultConfirmation = false;
+        Rho.DPX.template = 'file:///sdcard/templates/Logistics%20Post.xml';
+        Rho.DPX.uiResultConfirmation = false;
+        Rho.DPX.audioFeedback = false;
 
-            dpxInstance.flashMode = Rho.DPX.FLASH_AUTO;
+        Rho.DPX.flashMode = Rho.DPX.FLASH_AUTO;
 
-            dpxInstance.captureDocument(function(dict) {
-                displayResult('Output: ', 'callbackType is ' + dict['callbackType']);
-            });
+        runsCaptureDocument(Rho.DPX.SUCCESS, function(dict) {
+            displayResult('Output: ', 'callbackType is ' + dict['callbackType']);
         });
 
         _result.waitForResponse();
@@ -248,15 +239,14 @@ describe('DPX Functionality Test', function() {
 
         _result.waitToRunTest();
 
-        runs(function() {
-            dpxInstance.template = 'file:///sdcard/templates/Logistics%20Post.xml';
-            dpxInstance.inputSource = Rho.DPX.SOURCE_CAMERA;
+        Rho.DPX.template = 'file:///sdcard/templates/Logistics%20Post.xml';
+        Rho.DPX.uiResultConfirmation = false;
+        Rho.DPX.audioFeedback = false;
 
-            dpxInstance.processingTimeout = 1000;
+        Rho.DPX.processingTimeout = 1000;
 
-            dpxInstance.captureDocument(function(dict) {
-                displayResult('Output: ', 'failureReason is ' + dict['failureReason']);
-            });
+        runsCaptureDocument(Rho.DPX.FAILURE, function(dict) {
+            displayResult('Output: ', 'failureReason is ' + dict['failureReason']);
         });
 
         _result.waitForResponse();
@@ -268,55 +258,64 @@ describe('DPX Functionality Test', function() {
 
         _result.waitToRunTest();
 
-        runs(function() {
-            dpxInstance.template = 'file:///sdcard/templates/Logistics%20Post.xml';
-            dpxInstance.inputSource = Rho.DPX.SOURCE_CAMERA;
+        Rho.DPX.template = 'file:///sdcard/templates/Logistics%20Post.xml';
+        Rho.DPX.uiResultConfirmation = false;
+        Rho.DPX.audioFeedback = false;
 
-            dpxInstance.processingTimeout = 5000;
+        Rho.DPX.processingTimeout = 5000;
 
-            dpxInstance.captureDocument(function(dict) {
-                displayResult('Output: ', 'failureReason is ' + dict['failureReason']);
-            });
-        });
-
-        _result.waitForResponse();
-    });
-
-    it('identificationTimeout 1 second', function() {
-        dispTestCaseRunning('Do not frame form.');
-        dispExpectedResult('failureReason should be identificationTimeout. Identification should take about one second.');
-
-        _result.waitToRunTest();
-
-        runs(function() {
-            dpxInstance.template = 'file:///sdcard/templates/Logistics%20Post.xml';
-            dpxInstance.inputSource = Rho.DPX.SOURCE_CAMERA;
-
-            dpxInstance.identificationTimeout = 1000;
-
-            dpxInstance.captureDocument(function(dict) {
-                displayResult('Output: ', 'failureReason is ' + dict['failureReason']);
-            });
+        runsCaptureDocument(Rho.DPX.FAILURE, function(dict) {
+            displayResult('Output: ', 'failureReason is ' + dict['failureReason']);
         });
 
         _result.waitForResponse();
     });
 
     it('identificationTimeout 5 second', function() {
-        dispTestCaseRunning('Do not frame form.');
-        dispExpectedResult('failureReason should be identificationTimeout. Identification should take about five second.');
+        dispTestCaseRunning('Do not frame form. Wait for 20s. Press back button.');
+        dispExpectedResult('identificationTimeout should be about 5.');
 
         _result.waitToRunTest();
 
+        Rho.DPX.template = 'file:///sdcard/templates/Logistics%20Post.xml';
+        Rho.DPX.uiResultConfirmation = false;
+        Rho.DPX.audioFeedback = false;
+
+        Rho.DPX.identificationTimeout = 5000;
+
+        var start;
         runs(function() {
-            dpxInstance.template = 'file:///sdcard/templates/Logistics%20Post.xml';
-            dpxInstance.inputSource = Rho.DPX.SOURCE_CAMERA;
+            start = new Date().getTime();
+        });
 
-            dpxInstance.identificationTimeout = 5000;
+        runsCaptureDocument(Rho.DPX.FAILURE, function(dict) {
+            var finish = new Date().getTime();
+            displayResult('Output: ', 'identificationTimeout is ' + (finish - start) / 1000);
+        });
 
-            dpxInstance.captureDocument(function(dict) {
-                displayResult('Output: ', 'failureReason is ' + dict['failureReason']);
-            });
+        _result.waitForResponse();
+    });
+
+    it('identificationTimeout 10 second', function() {
+        dispTestCaseRunning('Do not frame form. Wait for 20s. Press back button.');
+        dispExpectedResult('identificationTimeout should be about 10.');
+
+        _result.waitToRunTest();
+
+        Rho.DPX.template = 'file:///sdcard/templates/Logistics%20Post.xml';
+        Rho.DPX.uiResultConfirmation = false;
+        Rho.DPX.audioFeedback = false;
+
+        Rho.DPX.identificationTimeout = 10000;
+
+        var start;
+        runs(function() {
+            start = new Date().getTime();
+        });
+
+        runsCaptureDocument(Rho.DPX.FAILURE, function(dict) {
+            var finish = new Date().getTime();
+            displayResult('Output: ', 'identificationTimeout is ' + (finish - start) / 1000);
         });
 
         _result.waitForResponse();
@@ -328,17 +327,15 @@ describe('DPX Functionality Test', function() {
 
         _result.waitToRunTest();
 
-        runs(function() {
-            dpxInstance.template = 'file:///sdcard/templates/Logistics%20Post.xml';
-            dpxInstance.inputSource = Rho.DPX.SOURCE_CAMERA;
-            dpxInstance.uiResultConfirmation = false;
+        Rho.DPX.template = 'file:///sdcard/templates/Logistics%20Post.xml';
+        Rho.DPX.uiResultConfirmation = false;
+        Rho.DPX.audioFeedback = false;
 
-            dpxInstance.debug = true;
-            dpxInstance.logDirectory = '/sdcard/RhoDPXLog';
+        Rho.DPX.debug = true;
+        Rho.DPX.logDirectory = '/sdcard/RhoDPXLog';
 
-            dpxInstance.captureDocument(function(dict) {
-                displayResult('Output: ', 'callbackType is ' + dict['callbackType']);
-            });
+        runsCaptureDocument(Rho.DPX.SUCCESS, function(dict) {
+            displayResult('Output: ', 'callbackType is ' + dict['callbackType']);
         });
 
         _result.waitForResponse();
@@ -350,14 +347,13 @@ describe('DPX Functionality Test', function() {
 
         _result.waitToRunTest();
 
-        runs(function() {
-            dpxInstance.template = 'file:///sdcard/templates/Logistics%20Post.xml';
-            dpxInstance.inputSource = Rho.DPX.SOURCE_CAMERA;
-            dpxInstance.uiResultConfirmation = true;
+        Rho.DPX.template = 'file:///sdcard/templates/Logistics%20Post.xml';
+        Rho.DPX.audioFeedback = false;
 
-            dpxInstance.captureDocument(function(dict) {
-                displayResult('Output: ', 'callbackType is ' + dict['callbackType']);
-            });
+        Rho.DPX.uiResultConfirmation = true;
+
+        runsCaptureDocument(Rho.DPX.SUCCESS, function(dict) {
+            displayResult('Output: ', 'callbackType is ' + dict['callbackType']);
         });
 
         _result.waitForResponse();
@@ -371,32 +367,30 @@ describe('DPX Functionality Test', function() {
             list.appendChild(item);
 
             var img = document.createElement('img');
-            img.setAttribute('src', dpxInstance.getDataUri(image['id']));
+            img.setAttribute('src', Rho.DPX.getDataUri(image['id']));
             item.appendChild(img);
         };
 
-        dispTestCaseRunning('Run test\nwait a little\nselect "/sdcard/templates/1024w_754h_Delivery Attempt Notification.yuv"\ntap to scan.');
+        dispTestCaseRunning('Scan Delivery Attempt Notification.');
         dispExpectedResult('You should see images for regions and for whole form.');
 
         _result.waitToRunTest();
 
-        runs(function() {
-            dpxInstance.template = 'file:///sdcard/templates/Logistics%20Post.xml';
-            dpxInstance.inputSource = Rho.DPX.SOURCE_CAMERA;
-            dpxInstance.uiResultConfirmation = false;
+        Rho.DPX.template = 'file:///sdcard/templates/Logistics%20Post.xml';
+        Rho.DPX.uiResultConfirmation = false;
+        Rho.DPX.audioFeedback = false;
 
-            dpxInstance.captureDocument(function(dict) {
-                $('#myList').empty();
-                var list = document.getElementById('myList');
+        runsCaptureDocument(Rho.DPX.SUCCESS, function(dict) {
+            $('#myList').empty();
+            var list = document.getElementById('myList');
 
-                var regions = dict['processedForm']['regions'];
-                for (var i = 0; i < regions.length; ++i) {
-                    if (regions[i].hasOwnProperty('image')) {
-                        add_image(regions[i]['image']);
-                    }
+            var regions = dict['processedForm']['regions'];
+            for (var i = 0; i < regions.length; ++i) {
+                if (regions[i].hasOwnProperty('image')) {
+                    add_image(regions[i]['image']);
                 }
-                add_image(dict['processedForm']['formCapture']['image']);
-            });
+            }
+            add_image(dict['processedForm']['formCapture']['image']);
         });
 
         _result.waitForResponse();
@@ -408,8 +402,8 @@ describe('DPX Functionality Test', function() {
         //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
         _result.waitToRunTest();
         runs(function() {
-            dpxInstance.template = Rho.RhoFile.join(Rho.Application.AppBundleFolder, 'invalid.xml');
-            dpxInstance.captureDocument(captureCallback);
+            Rho.DPX.template = Rho.RhoFile.join(Rho.Application.AppBundleFolder, 'invalid.xml');
+            Rho.DPX.captureDocument(captureCallback);
         });
         //Add more waitsfor or run blocks if required.
         //Common Method implemented to wait for tester to make it pass or fail.Code available in specHelper.js
@@ -422,10 +416,9 @@ describe('DPX Functionality Test', function() {
         //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
         _result.waitToRunTest();
         runs(function() {
-                //var dpxInstance = new Rho.DPX();
-                dpxInstance.inputSource = Rho.DPX.SOURCE_CAMERA;
-                dpxInstance.template = Rho.RhoFile.join(Rho.Application.AppBundleFolder, 'picture.xml');
-                dpxInstance.captureDocument(captureCallback);
+                Rho.DPX.inputSource = Rho.DPX.SOURCE_CAMERA;
+                Rho.DPX.template = Rho.RhoFile.join(Rho.Application.AppBundleFolder, 'picture.xml');
+                Rho.DPX.captureDocument(captureCallback);
         });
         //Add more waitsfor or run blocks if required.
         //Common Method implemented to wait for tester to make it pass or fail.Code available in specHelper.js
@@ -439,11 +432,10 @@ describe('DPX Functionality Test', function() {
         //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
         _result.waitToRunTest();
         runs(function() {
-                //var dpxInstance = new Rho.DPX();
-                dpxInstance.inputSource = Rho.DPX.SOURCE_CAMERA;
-                dpxInstance.audioFeedback = 'invalid';
-                dpxInstance.template = Rho.RhoFile.join(Rho.Application.AppBundleFolder, 'picture.xml');
-                dpxInstance.captureDocument(captureCallback);
+                Rho.DPX.inputSource = Rho.DPX.SOURCE_CAMERA;
+                Rho.DPX.audioFeedback = 'invalid';
+                Rho.DPX.template = Rho.RhoFile.join(Rho.Application.AppBundleFolder, 'picture.xml');
+                Rho.DPX.captureDocument(captureCallback);
         });
         //Add more waitsfor or run blocks if required.
         //Common Method implemented to wait for tester to make it pass or fail.Code available in specHelper.js
@@ -456,11 +448,10 @@ describe('DPX Functionality Test', function() {
         //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
         _result.waitToRunTest();
         runs(function() {
-                //var dpxInstance = new Rho.DPX();
-                dpxInstance.inputSource = Rho.DPX.SOURCE_CAMERA;
-                dpxInstance.hapticFeedback = 'invalid';
-                dpxInstance.template = Rho.RhoFile.join(Rho.Application.AppBundleFolder, 'picture.xml');
-                dpxInstance.captureDocument(captureCallback);
+                Rho.DPX.inputSource = Rho.DPX.SOURCE_CAMERA;
+                Rho.DPX.hapticFeedback = 'invalid';
+                Rho.DPX.template = Rho.RhoFile.join(Rho.Application.AppBundleFolder, 'picture.xml');
+                Rho.DPX.captureDocument(captureCallback);
         });
         //Add more waitsfor or run blocks if required.
         //Common Method implemented to wait for tester to make it pass or fail.Code available in specHelper.js
@@ -473,11 +464,10 @@ describe('DPX Functionality Test', function() {
         //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
         _result.waitToRunTest();
         runs(function() {
-                //var dpxInstance = new Rho.DPX();
-                dpxInstance.inputSource = Rho.DPX.SOURCE_CAMERA;
-                dpxInstance.ledFeedback = 'invalid';
-                dpxInstance.template = Rho.RhoFile.join(Rho.Application.AppBundleFolder, 'picture.xml');
-                dpxInstance.captureDocument(captureCallback);
+                Rho.DPX.inputSource = Rho.DPX.SOURCE_CAMERA;
+                Rho.DPX.ledFeedback = 'invalid';
+                Rho.DPX.template = Rho.RhoFile.join(Rho.Application.AppBundleFolder, 'picture.xml');
+                Rho.DPX.captureDocument(captureCallback);
         });
         //Add more waitsfor or run blocks if required.
         //Common Method implemented to wait for tester to make it pass or fail.Code available in specHelper.js
@@ -491,11 +481,10 @@ describe('DPX Functionality Test', function() {
         //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
         _result.waitToRunTest();
         runs(function() {
-                //var dpxInstance = new Rho.DPX();
-                dpxInstance.inputSource = Rho.DPX.SOURCE_CAMERA;
-                dpxInstance.flashMode = 'invalid';
-                dpxInstance.template = Rho.RhoFile.join(Rho.Application.AppBundleFolder, 'picture.xml');
-                dpxInstance.captureDocument(captureCallback);
+                Rho.DPX.inputSource = Rho.DPX.SOURCE_CAMERA;
+                Rho.DPX.flashMode = 'invalid';
+                Rho.DPX.template = Rho.RhoFile.join(Rho.Application.AppBundleFolder, 'picture.xml');
+                Rho.DPX.captureDocument(captureCallback);
         });
         //Add more waitsfor or run blocks if required.
         //Common Method implemented to wait for tester to make it pass or fail.Code available in specHelper.js
@@ -508,11 +497,10 @@ describe('DPX Functionality Test', function() {
         //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
         _result.waitToRunTest();
         runs(function() {
-                //var dpxInstance = new Rho.DPX();
-                dpxInstance.inputSource = Rho.DPX.SOURCE_CAMERA;
-                dpxInstance.identificationTimeout = -10000;
-                dpxInstance.template = Rho.RhoFile.join(Rho.Application.AppBundleFolder, 'picture.xml');
-                dpxInstance.captureDocument(captureCallback);
+                Rho.DPX.inputSource = Rho.DPX.SOURCE_CAMERA;
+                Rho.DPX.identificationTimeout = -10000;
+                Rho.DPX.template = Rho.RhoFile.join(Rho.Application.AppBundleFolder, 'picture.xml');
+                Rho.DPX.captureDocument(captureCallback);
         });
         //Add more waitsfor or run blocks if required.
         //Common Method implemented to wait for tester to make it pass or fail.Code available in specHelper.js
@@ -525,12 +513,11 @@ describe('DPX Functionality Test', function() {
         //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
         _result.waitToRunTest();
         runs(function() {
-                //var dpxInstance = new Rho.DPX();
-                dpxInstance.template = Rho.RhoFile.join(Rho.Application.AppBundleFolder, 'picture.xml');
-                dpxInstance.inputSource = 'invalid';
-                dpxInstance.fileInteractiveMode = 'true';
-                dpxInstance.inputSourceFilename = Rho.RhoFile.join(Rho.Application.AppBundleFolder, 'image.jpg');
-                dpxInstance.captureDocument(captureCallback);
+                Rho.DPX.template = Rho.RhoFile.join(Rho.Application.AppBundleFolder, 'picture.xml');
+                Rho.DPX.inputSource = 'invalid';
+                Rho.DPX.fileInteractiveMode = 'true';
+                Rho.DPX.inputSourceFilename = Rho.RhoFile.join(Rho.Application.AppBundleFolder, 'image.jpg');
+                Rho.DPX.captureDocument(captureCallback);
         });
         //Add more waitsfor or run blocks if required.
         //Common Method implemented to wait for tester to make it pass or fail.Code available in specHelper.js
@@ -543,12 +530,11 @@ describe('DPX Functionality Test', function() {
         //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
         _result.waitToRunTest();
         runs(function() {
-                //var dpxInstance = new Rho.DPX();
-                dpxInstance.template = Rho.RhoFile.join(Rho.Application.AppBundleFolder, 'picture.xml');
-                dpxInstance.debug = 'invalid';
-                dpxInstance.logDirectory = '/sdcard/Application/DPXLog';
-                dpxInstance.inputSource = Rho.DPX.SOURCE_CAMERA;
-                dpxInstance.captureDocument(captureCallback);
+                Rho.DPX.template = Rho.RhoFile.join(Rho.Application.AppBundleFolder, 'picture.xml');
+                Rho.DPX.debug = 'invalid';
+                Rho.DPX.logDirectory = '/sdcard/Application/DPXLog';
+                Rho.DPX.inputSource = Rho.DPX.SOURCE_CAMERA;
+                Rho.DPX.captureDocument(captureCallback);
         });
         //Add more waitsfor or run blocks if required.
         //Common Method implemented to wait for tester to make it pass or fail.Code available in specHelper.js
@@ -561,12 +547,11 @@ describe('DPX Functionality Test', function() {
         //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
         _result.waitToRunTest();
         runs(function() {
-                //var dpxInstance = new Rho.DPX();
-                dpxInstance.template = Rho.RhoFile.join(Rho.Application.AppBundleFolder, 'picture.xml');
-                dpxInstance.debug = true;
-                dpxInstance.logDirectory = '/Application/sdcard/DPXLog';
-                dpxInstance.inputSource = Rho.DPX.SOURCE_CAMERA;
-                dpxInstance.captureDocument(captureCallback);
+                Rho.DPX.template = Rho.RhoFile.join(Rho.Application.AppBundleFolder, 'picture.xml');
+                Rho.DPX.debug = true;
+                Rho.DPX.logDirectory = '/Application/sdcard/DPXLog';
+                Rho.DPX.inputSource = Rho.DPX.SOURCE_CAMERA;
+                Rho.DPX.captureDocument(captureCallback);
         });
         //Add more waitsfor or run blocks if required.
         //Common Method implemented to wait for tester to make it pass or fail.Code available in specHelper.js
@@ -579,11 +564,10 @@ describe('DPX Functionality Test', function() {
         //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
         _result.waitToRunTest();
         runs(function() {
-                //var dpxInstance = new Rho.DPX();
-                dpxInstance.template = Rho.RhoFile.join(Rho.Application.AppBundleFolder, 'picture.xml');
-                dpxInstance.processingTimeout = -10000;
-                dpxInstance.inputSource = Rho.DPX.SOURCE_CAMERA;
-                dpxInstance.captureDocument(captureCallback);
+                Rho.DPX.template = Rho.RhoFile.join(Rho.Application.AppBundleFolder, 'picture.xml');
+                Rho.DPX.processingTimeout = -10000;
+                Rho.DPX.inputSource = Rho.DPX.SOURCE_CAMERA;
+                Rho.DPX.captureDocument(captureCallback);
         });
         //Add more waitsfor or run blocks if required.
         //Common Method implemented to wait for tester to make it pass or fail.Code available in specHelper.js
@@ -596,11 +580,10 @@ describe('DPX Functionality Test', function() {
         //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
         _result.waitToRunTest();
         runs(function() {
-                //var dpxInstance = new Rho.DPX();
-                dpxInstance.template = Rho.RhoFile.join(Rho.Application.AppBundleFolder, 'picture.xml');
-                dpxInstance.uiResultConfirmation = 'invalid';
-                dpxInstance.inputSource = Rho.DPX.SOURCE_CAMERA;
-                dpxInstance.captureDocument(captureCallback);
+                Rho.DPX.template = Rho.RhoFile.join(Rho.Application.AppBundleFolder, 'picture.xml');
+                Rho.DPX.uiResultConfirmation = 'invalid';
+                Rho.DPX.inputSource = Rho.DPX.SOURCE_CAMERA;
+                Rho.DPX.captureDocument(captureCallback);
         });
         //Add more waitsfor or run blocks if required.
         //Common Method implemented to wait for tester to make it pass or fail.Code available in specHelper.js
@@ -614,14 +597,13 @@ describe('DPX Functionality Test', function() {
         //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
         _result.waitToRunTest();
         runs(function() {
-                //var dpxInstance = new Rho.DPX();
-                dpxInstance.template = Rho.RhoFile.join(Rho.Application.AppBundleFolder, 'picture.xml');
-                dpxInstance.inputSource = Rho.DPX.SOURCE_CAMERA;
-                dpxInstance.captureDocument(captureCallback);
+                Rho.DPX.template = Rho.RhoFile.join(Rho.Application.AppBundleFolder, 'picture.xml');
+                Rho.DPX.inputSource = Rho.DPX.SOURCE_CAMERA;
+                Rho.DPX.captureDocument(captureCallback);
                 waitsFor(function () {
                         return getregionImageId != null;
                 }, '90sec Wait before move to next test', 90000);
-                dpxInstance.getDataUri(100);
+                Rho.DPX.getDataUri(100);
         });
         //Add more waitsfor or run blocks if required.
         //Common Method implemented to wait for tester to make it pass or fail.Code available in specHelper.js
@@ -634,10 +616,9 @@ describe('DPX Functionality Test', function() {
         //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
         _result.waitToRunTest();
         runs(function() {
-                //var dpxInstance = new Rho.DPX();
-                dpxInstance.inputSource = Rho.DPX.SOURCE_CAMERA;
-                dpxInstance.template = 'http://192.168.6.18/neon/ReceivedFiles/picture.xml';
-                dpxInstance.captureDocument(captureCallback);
+                Rho.DPX.inputSource = Rho.DPX.SOURCE_CAMERA;
+                Rho.DPX.template = 'http://192.168.6.18/neon/ReceivedFiles/picture.xml';
+                Rho.DPX.captureDocument(captureCallback);
         });
         //Add more waitsfor or run blocks if required.
         //Common Method implemented to wait for tester to make it pass or fail.Code available in specHelper.js

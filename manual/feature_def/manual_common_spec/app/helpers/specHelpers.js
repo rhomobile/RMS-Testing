@@ -226,27 +226,22 @@ var _result = {
 	waitForResponse: function(){
 		var timeout = false;
 		var responded = false;
-		runs(function()
-			{
-				setTimeout(function() {
-					timeout = true;
-				}, _result.time_to_wait);
-			});
+		runs(function() {
+            setTimeout(function() {
+                timeout = true;
+            }, _result.time_to_wait);
+        });
 
-			waitsFor(function()
-			{
-				if(_result.responded == true)
-					return true;
-			}, 'waiting for user response', _result.time_to_wait+5000);
+        waitsFor(function() {
+            return _result.responded;
+        }, 'waiting for user response', _result.time_to_wait+5000);
 
-			runs(function()
-			{
-				expect(true).toEqual(_result.status);
-			});
-	},
+        runs(function() {
+            expect(true).toEqual(_result.status);
+        });
+    },
     waitToRunTest: function(){
-        runs(function()
-        {
+        runs(function() {
             $('#pass').hide();
             $('#fail').hide();
             $('#runtest').show();
@@ -255,14 +250,11 @@ var _result = {
             }, _result.time_to_wait);
         });
 
-        waitsFor(function()
-        {
-            if(_result.responded == true)
-                return true;
+        waitsFor(function() {
+            return _result.responded;
         }, 'waiting for user response', _result.time_to_wait+5000);
 
-        runs(function()
-        {
+        runs(function() {
             _result.responded = undefined;
         });
     },
