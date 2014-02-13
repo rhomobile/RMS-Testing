@@ -334,14 +334,7 @@ describe('Printer Zebra', function() {
             return callresult !== null;
         }, 'wait until printingFile', 30000);
 
-        /*runs(function() {
-            if (isOk !== false) {
-                expect(callresult).toEqual(Rho.PrinterZebra.PRINTER_STATUS_SUCCESS);
-            } else {
-                expect(callresult).toNotEqual(Rho.PrinterZebra.PRINTER_STATUS_SUCCESS);
-            }
-        });*/
-		runs(function() {
+        runs(function() {
 			displayResult(jasmine.getEnv().currentSpec.description, callresult.toString());
 		});
 		_result.waitForResponse();
@@ -352,7 +345,7 @@ describe('Printer Zebra', function() {
         runs(function() {
             callresult = null;
             if(callback_type == 'without')  {
-                callresult = thisprinter.printFile(filename, options);
+                thisprinter.printFile(filename, options);
             }
             else if (callback_type == 'Anonymous') {
                 thisprinter.printFile(filename, options, function(callbackValue) { callresult = callbackValue;})
@@ -360,16 +353,16 @@ describe('Printer Zebra', function() {
         });
 
         waitsFor(function() {
-            return callresult !== null;
+            if(callback_type == 'without') {
+                setTimeout(function(){callresult = true;},10000);
+                return callresult;
+            }
+            else {
+                return callresult !== null;
+            }
+            
         }, 'wait until printingFile', 30000);
 
-        /*runs(function() {
-            if (isOk !== false) {
-                expect(callresult).toEqual(Rho.PrinterZebra.PRINTER_STATUS_SUCCESS);
-            } else {
-                expect(callresult).toNotEqual(Rho.PrinterZebra.PRINTER_STATUS_SUCCESS);
-            }
-        });*/
         runs(function() {
             displayResult(jasmine.getEnv().currentSpec.description, callresult.toString());
         });
@@ -395,7 +388,7 @@ describe('Printer Zebra', function() {
         runs(function() {
             callresult = null;
             if(callback_type == 'without')  {
-                callresult = thisprinter.printRawString(cmd, {});
+                thisprinter.printRawString(cmd, {});
             }
             else if (callback_type == 'Anonymous') {
                 thisprinter.printRawString(cmd, {}, function(callbackValue) { callresult = callbackValue;})
@@ -403,7 +396,13 @@ describe('Printer Zebra', function() {
         });
 
         waitsFor(function() {
-            return callresult !== null;
+            if(callback_type == 'without') {
+                setTimeout(function(){callresult = true;},10000);
+                return callresult;
+            }
+            else {
+                return callresult !== null;
+            }
         }, 'wait until setting lable length', 15000);
                 
         runs(function() {
@@ -466,7 +465,7 @@ describe('Printer Zebra', function() {
         });
 
          it('should print jpeg without callback', function() {
-            dispTestCaseRunning("1. Should Print label <br />2. Should print PNG image.");
+            dispTestCaseRunning("1. Should Print label <br />2. Should print jpeg image.");
             dispExpectedResult("Should print jpeg without callback");
             //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
             _result.waitToRunTest();
@@ -478,7 +477,7 @@ describe('Printer Zebra', function() {
         });
 
         it('should print jpeg Anonymous callback', function() {
-            dispTestCaseRunning("1. Should Print label <br />2. Should print PNG image.");
+            dispTestCaseRunning("1. Should Print label <br />2. Should print jpeg image.");
             dispExpectedResult("Should print jpeg Anonymous callback");
             //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
             _result.waitToRunTest();
@@ -500,7 +499,7 @@ describe('Printer Zebra', function() {
         });
 
         it('should print bmp without callback', function() {
-            dispTestCaseRunning("1. Should Print label <br />2. Should print PNG image.");
+            dispTestCaseRunning("1. Should Print label <br />2. Should print bmp image.");
             dispExpectedResult("Should print bmp without callback");
             //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
             _result.waitToRunTest();
@@ -512,7 +511,7 @@ describe('Printer Zebra', function() {
         });
 
         it('should print bmp Anonymous callback', function() {
-            dispTestCaseRunning("1. Should Print label <br />2. Should print PNG image.");
+            dispTestCaseRunning("1. Should Print label <br />2. Should print bmp image.");
             dispExpectedResult("Should print bmp Anonymous callback");
             //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
             _result.waitToRunTest();
@@ -534,7 +533,7 @@ describe('Printer Zebra', function() {
         });
 
         it('should print pdf without callback', function() {
-            dispTestCaseRunning("1. Should Print label <br />2. Should print PNG image.");
+            dispTestCaseRunning("1. Should Print label <br />2. Should print PDF image.");
             dispExpectedResult("Should print pdf without callback");
             //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
             _result.waitToRunTest();
@@ -546,7 +545,7 @@ describe('Printer Zebra', function() {
         });
 
         it('should print pdf Anonymous callback', function() {
-            dispTestCaseRunning("1. Should Print label <br />2. Should print PNG image.");
+            dispTestCaseRunning("1. Should Print label <br />2. Should print PDF image.");
             dispExpectedResult("Should print pdf Anonymous callback");
             //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
             _result.waitToRunTest();
@@ -642,7 +641,7 @@ describe('Printer Zebra', function() {
                 thisprinter.sendFileContents(filename,cbk);
             }
             else if(callback_type == 'without')  {
-                callresult = thisprinter.sendFileContents(filename);
+                thisprinter.sendFileContents(filename);
             }
             else if (callback_type == 'Anonymous') {
                 thisprinter.sendFileContents(filename, function(callbackValue) { callresult = callbackValue;})
@@ -650,7 +649,13 @@ describe('Printer Zebra', function() {
         });
 
         waitsFor(function() {
-            return callresult !== null;
+            if(callback_type == 'without') {
+                setTimeout(function(){callresult = true;},10000);
+                return callresult;
+            }
+            else {
+                return callresult !== null;
+            }
         }, 'wait doSendFileContents', 30000);
 
        /* runs(function() {
@@ -837,7 +842,7 @@ describe('Printer Zebra', function() {
             runs(function() {
                 callresult = null;
                 if(callback_type == 'without')  {
-                    callresult = thisprinter.printImageFromFile(from,x,y,options);
+                    thisprinter.printImageFromFile(from,x,y,options);
                 }
                 else if (callback_type == 'Anonymous') {
                     thisprinter.printImageFromFile(from,x,y,options,function(callbackValue) { callresult = callbackValue;})
@@ -845,7 +850,13 @@ describe('Printer Zebra', function() {
             });
 
             waitsFor(function() {
-                return callresult !== null;
+                if(callback_type == 'without') {
+                    setTimeout(function(){callresult = true;},10000);
+                    return callresult;
+                }
+                else {
+                    return callresult !== null;
+                }
             }, 'wait printImageFromFile', 30000);
 
     
@@ -971,7 +982,7 @@ describe('Printer Zebra', function() {
 					thisprinter.printStoredFormatWithHash(formatpath, hashvalue, cbk);
 				}
 				else if(callback_type == 'without') {
-					callresult = thisprinter.printStoredFormatWithHash(formatpath, hashvalue);
+					thisprinter.printStoredFormatWithHash(formatpath, hashvalue);
 				}	
 				else if(callback_type == 'Anonymous') {
 					thisprinter.printStoredFormatWithHash(formatpath, hashvalue, function(callbackValue) {callresult = callbackValue;});
@@ -979,7 +990,13 @@ describe('Printer Zebra', function() {
 			});
 
 			waitsFor(function() {
-					return callresult !== null;
+				if(callback_type == 'without') {
+                    setTimeout(function(){callresult = true;},10000);
+                    return callresult;
+                }
+                else {
+                    return callresult !== null;
+                }
 			}, 'wait to Print', 30000);
 			
 			runs(function() {
@@ -1048,7 +1065,7 @@ describe('Printer Zebra', function() {
 					thisprinter.printStoredFormatWithArray(formatpath, arrayvalue, cbk);
 				}
 				else if(callback_type == 'without') {
-					callresult = thisprinter.printStoredFormatWithArray(formatpath, arrayvalue);
+					thisprinter.printStoredFormatWithArray(formatpath, arrayvalue);
 				}	
 				else if(callback_type == 'Anonymous') {
 					thisprinter.printStoredFormatWithArray(formatpath, arrayvalue, function(callbackValue) {callresult = callbackValue;});
@@ -1056,7 +1073,13 @@ describe('Printer Zebra', function() {
 			});
 
 			waitsFor(function() {
-				return callresult !== null;
+				if(callback_type == 'without') {
+                    setTimeout(function(){callresult = true;},10000);
+                    return callresult;
+                }
+                else {
+                    return callresult !== null;
+                }
 			}, 'wait to Print', 30000);
 			
 			runs(function() {
@@ -1106,7 +1129,7 @@ describe('Printer Zebra', function() {
 
         it( "Should get All printer zebra properties using getAllProperties", function() {
             dispTestCaseRunning("1. Should Display All printer zebra properties");
-            dispExpectedResult(jasmine.getEnv().currentSpec.description, callresult.toString());
+            dispExpectedResult(jasmine.getEnv().currentSpec.description);
             //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
             _result.waitToRunTest();
             var allproperties = {};
@@ -1122,12 +1145,12 @@ describe('Printer Zebra', function() {
        
     });
 
-    describe("Should print a raw string using the get default printer", function() {
-        it("Should print a raw string using the get default printer", function() {
+    describe("Should print a raw string after setting default printer", function() {
+        it("Should print a raw string after setting default printer ", function() {
             var thisprinter = null;
             var printerObj = null;
-            dispTestCaseRunning("Set default printer and print a raw string using the get default");
-            dispExpectedResult(jasmine.getEnv().currentSpec.description, callresult.toString());
+            dispTestCaseRunning("Set default printer and print a raw string using the default");
+            dispExpectedResult(jasmine.getEnv().currentSpec.description);
 
             _result.waitToRunTest();
 
@@ -1140,8 +1163,7 @@ describe('Printer Zebra', function() {
             });
         
             runs(function() {
-                thisprinter = Rho.PrinterZebra.getDefault();
-                thisprinter.connect(cbk);
+                Rho.PrinterZebra.connect(cbk);
             });
 
             waitsFor(function() {
@@ -1149,7 +1171,7 @@ describe('Printer Zebra', function() {
             }, 'wait until connected', 10000);
 
             runs(function() {
-                thisprinter.printRawString(CommandCCPL, {});
+                Rho.PrinterZebra.printRawString(CommandCCPL, {});
             });
             
             _result.waitForResponse();
@@ -1177,7 +1199,7 @@ describe('Printer Zebra', function() {
 
             waitsFor(function() {
                 return callresult != null;
-            }, 'wait while disconnected', 5000);
+            }, 'wait while connect', 5000);
 
             runs(function() {
                 displayResult(jasmine.getEnv().currentSpec.description, callresult.toString());
@@ -1206,7 +1228,7 @@ describe('Printer Zebra', function() {
 
             waitsFor(function() {
                 return callresult != null;
-            }, 'wait while disconnected', 5000);
+            }, 'wait while Connect', 5000);
 
             runs(function() {
                 displayResult(jasmine.getEnv().currentSpec.description, callresult.toString());
@@ -1214,8 +1236,7 @@ describe('Printer Zebra', function() {
 
             _result.waitForResponse();
         });
-    })
-		
+    });
 
 });
 
