@@ -1100,75 +1100,31 @@ describe('Printer Zebra', function() {
 
     });
 
-    // stopSearch method tests
-    describe('stopSearch method', function() {
-        it("stopSearch Method (without callback function)", function() {
-            var callresult = null;
+    if(!isWindowsMobilePlatform()) {
+        // stopSearch method tests
+        describe('stopSearch method', function() {
+            it("callback should not fire after calling stopSearch", function() {
+                var callresult = null;
 
-            function cbk(val) {
-                callresult = val;
-            }
+                function cbk(val) {
+                    callresult = val;
+                }
 
-            runs(function() {
-                // Let the printer be search first then use stop
-                callresult = null;
-                Rho.PrinterZebra.searchPrinters({}, searchPrinterCallback);
-                callresult = Rho.PrinterZebra.stopSearch();
-            });
+                runs(function() {
+                    // Let the printer be search first then use stop
+                    callresult = null;
+                    searchObject = runSearch({}, 20000);
+                    Rho.PrinterZebra.stopSearch();
+                });
 
-            waitsFor(function() {
-                return callresult !== null;
-            }, 'Stopping the Search Printers....', 5000);
+                waits(21000);
 
-            runs(function() {
-                expect(printers_array).toEqual([]);
-                expect(callresult).toEqual(Rho.PrinterZebra.PRINTER_STATUS_SUCCESS);
-            });
-
-        });
-
-        xit("stopSearch Method (with callback function)", function() {
-
-            runs(function() {
-                // Let the printer be search first then use stop
-                callresult = null;
-                Rho.PrinterZebra.searchPrinters({}, searchPrinterCallback);
-                Rho.PrinterZebra.stopSearch(cbk);
-            });
-
-            waitsFor(function() {
-                return callresult !== null;
-            }, 'Stopping the Search Printers....', 5000);
-
-            runs(function() {
-                expect(printers_array).toEqual([]);
-                expect(callresult).toEqual(Rho.PrinterZebra.PRINTER_STATUS_SUCCESS);
-            });
-
-        });
-
-        xit("stopSearch Method (with anonymous function)", function() {
-
-            runs(function() {
-                // Let the printer be search first then use stop
-                callresult = null;
-                Rho.PrinterZebra.searchPrinters({}, searchPrinterCallback);
-                Rho.PrinterZebra.stopSearch(function(callbackValue) {
-                    callresult = callbackValue;
+                runs(function() {
+                    expect(searchObject.finished).toEqual(false);
                 });
             });
-
-            waitsFor(function() {
-                return callresult !== null;
-            }, 'Stopping the Search Printers....', 5000);
-
-            runs(function() {
-                expect(printers_array).toEqual([]);
-                expect(callresult).toEqual(Rho.PrinterZebra.PRINTER_STATUS_SUCCESS);
-            });
-
         });
-    });
+    }
 
     describe("Get & Set default PrinterZebra", function() {
         var thisprinter = null;
