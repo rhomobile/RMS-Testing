@@ -675,6 +675,9 @@ end
   end
 
   it "should find with advanced AND conditions and non-string value" do
+    res1 = getAccount.find(:all, {:select => ['name']})
+    puts " we have this here : #{res1.inspect}"
+
     res = getAccount.find( :all,
        :conditions => {
         {:func=>'length', :name=>'name', :op=>'>'} => 0
@@ -1216,7 +1219,10 @@ end
 
   # FIXME:
   it "should find with sql multiple conditions" do
-    @acct = getAccount.find(:first, :conditions => [ "name = ? AND industry = ?", "'Mobio India'", "'Technology'" ], :select => ['name', 'industry'])
+    #@acct1 = getAccount.find(:all, :select => ['name', 'industry'])
+    #uts " we have #{@acct1.inspect}"
+
+    @acct = getAccount.find(:first, :conditions => [ "name = ? AND industry = ?", "Mobio India", "Technology" ], :select => ['name', 'industry'])
     # FIXME: RuntimeError: no such column: name
     @acct.name.should == "Mobio India"
     @acct.industry.should == "Technology"
@@ -1232,7 +1238,7 @@ end
 
   # FIXME:
   it "should support simple sql conditions" do
-    @accts = getAccount.find(:all, :conditions => ["name = ?", "'Mobio India'"], :select => ['name', 'industry'])
+    @accts = getAccount.find(:all, :conditions => ["name = ?", "Mobio India"], :select => ['name', 'industry'])
     @accts.length.should == 1
     @accts[0].name.should == "Mobio India"
     @accts[0].industry.should == "Technology"
@@ -1248,7 +1254,7 @@ end
 
   # FIXME:
   it "should support sql conditions single filter" do
-    @accts = getAccount.find(:all, :conditions => ["name like ?", "'Mob%'"], :select => ['name', 'industry'])
+    @accts = getAccount.find(:all, :conditions => ["name like ?", "Mob%"], :select => ['name', 'industry'])
     # FIXME: RuntimeError: no such column: name
     @accts.length.should == 1
     @accts[0].name.should == "Mobio India"
@@ -1259,7 +1265,7 @@ end
   it "should support sql conditions single filter with order" do
     return if USE_HSQLDB
 
-    @accts = getAccount.find(:all, :conditions => ["name like ?", "'Mob%'"], :select => ['name', 'industry'], :order=>'name', :orderdir => 'DESC' )
+    @accts = getAccount.find(:all, :conditions => ["name like ?", "Mob%"], :select => ['name', 'industry'], :order=>'name', :orderdir => 'DESC' )
     # FIXME: RuntimeError: no such column: name
     @accts.length.should == 1
     @accts[0].name.should == "Mobio India"
@@ -1268,7 +1274,7 @@ end
 
   # FIXME:
   it "should support sql conditions with multiple filters" do
-    @accts = getAccount.find(:all, :conditions => ["name like ? and industry like ?", "'Mob%'", "'Tech%'"], :select => ['name', 'industry'])
+    @accts = getAccount.find(:all, :conditions => ["name like ? and industry like ?", "Mob%", "Tech%"], :select => ['name', 'industry'])
     # FIXME: RuntimeError: no such column: name
     @accts.length.should == 1
     @accts[0].name.should == "Mobio India"
