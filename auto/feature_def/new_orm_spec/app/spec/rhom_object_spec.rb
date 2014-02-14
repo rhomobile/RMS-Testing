@@ -166,7 +166,6 @@ unless @use_new_orm
   end
 end
 
-  # FIXME:
   it "should create multiple records offline" do
     vars = {"name"=>"foobarthree", "industry"=>"entertainment"}
     getAccount.changed?.should == false
@@ -174,7 +173,7 @@ end
     account = getAccount.create(vars)
     if $spec_settings[:sync_model]
       puts " partition is : #{getAccount.partition}, #{getAccount.getProperty("sync_type")}" if @use_new_orm
-      getAccount.changed?.should == true # Expected false to equal true
+      getAccount.changed?.should == true
       account.changed?.should == true
     end
 
@@ -206,7 +205,7 @@ end
 
     if $spec_settings[:sync_model]
       records = getTestDB().select_from_table('changed_values','*', 'update_type' => 'update')
-      records.length.should == 1 # FIXME: Expected 0 to equal 1
+      records.length.should == 1
     end
   end
 
