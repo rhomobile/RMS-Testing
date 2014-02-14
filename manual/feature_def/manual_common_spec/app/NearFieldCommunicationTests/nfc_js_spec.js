@@ -92,9 +92,9 @@ describe('Near Field Communication Tests', function () {
             spec.displayScenario();
             spec.waitForButtonPressing("Run test");
 
-            Rho.NFC.Adapter.setTagDetectionHandler([], function (status, tagID) {
-                spec.addResult('Status', status);
-                var tag = Rho.NFC.Tag.getTagById(tagID);
+            Rho.NFC.Adapter.setTagDetectionHandler([], function (anObject) {
+                spec.addResult('Status', anObject.status);
+                var tag = Rho.NFC.Tag.getTagById(anObject.tagID);
                 try {
                     spec.addResult('Tag.ID', tag.ID);
                     spec.addResult('Tag.type', tag.type);
@@ -133,9 +133,9 @@ describe('Near Field Communication Tests', function () {
             spec.displayScenario();
             spec.waitForButtonPressing("Run test");
 
-            Rho.NFC.Adapter.setMessageHandler(0, [], function (status, messageID) {
-                spec.addResult('Status', status);
-                var message = Rho.NFC.Message.getMeessageById(messageID);
+            Rho.NFC.Adapter.setMessageHandler(function (anObject) {
+                spec.addResult('Status', anObject.status);
+                var message = Rho.NFC.Message.getMeessageById(anObject.messageID);
                 try {
                     spec.addResult('Message.ID', message.ID);
                     message.getRecords().forEach(function (each) {
@@ -181,8 +181,8 @@ describe('Near Field Communication Tests', function () {
 
             var tagID;
 
-            Rho.NFC.Adapter.setTagDetectionHandler([], function (status, ID) {
-                tagID = ID;
+            Rho.NFC.Adapter.setTagDetectionHandler([], function (anObject) {
+                tagID = anObject.tagID;
             });
 
             waitsFor(function () {
@@ -215,9 +215,9 @@ describe('Near Field Communication Tests', function () {
                 tagID = undefined;
                 spec.waitForButtonPressing("Reading tag");
                 var messageHandlerFlag;
-                Rho.NFC.Adapter.setMessageHandler(0, [], function (status, messageID) {
-                    spec.addResult('Status', status);
-                    var message = Rho.NFC.Message.getMeessageById(messageID);
+                Rho.NFC.Adapter.setMessageHandler(function (anObject) {
+                    spec.addResult('Status', anObject.status);
+                    var message = Rho.NFC.Message.getMeessageById(anObject.messageID);
                     try {
                         spec.addResult('Message.ID', message.ID);
                         message.getRecords().forEach(function (each) {
