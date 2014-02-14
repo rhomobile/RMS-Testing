@@ -427,7 +427,12 @@ describe('Intent_UseCases Functionality Test', function () {
         dispExpectedResult('Email compose view should be launched with pre-filled recepient email address.');
         _result.waitToRunTest();
         runs(function () {
-        	var params = new parameters("","","","","","","mailto:abcd@domain.com","","");
+             var params;
+             if (isAndroidPlatform()) {
+                params = new parameters(Rho.Intent.START_ACTIVITY,"","","","","","mailto:abcd@domain.com","","");
+             } else {
+                params = new parameters("","","","","","","mailto:abcd@domain.com","","");
+             }
              Rho.Intent.send(params);
              });
         _result.waitForResponse();
