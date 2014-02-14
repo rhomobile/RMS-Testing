@@ -1,9 +1,3 @@
-# New ORM failures
-#
-# FIXME list:
-# 1) "Should  delete all objects for given property bag models" do
-# 2) "Should  delete all objects for a given property bag model"
-
 describe "Rhom" do
   @use_new_orm = begin Rho::RHO.use_new_orm rescue false end
   puts "Rhom specs: use_new_orm: #{@use_new_orm}"
@@ -95,13 +89,12 @@ describe "Rhom" do
     Customer_s.find(:count).should > 0
   end
 
-  # # FIXME:
   it "Should  delete all objects for given property bag models" do
     Product.create( { :brand => "Apple", :name => 'iPhone 5S', :price => "$199", :quantity => "10" } )
     Product.create( { :brand => "Samsung", :name => 'Galaxy S4', :price => "$99.99", :quantity => "20" } )
     Customer.create( { :city => 'SPB', :address => "Fontanka" } )
 
-    Product.find(:all).length.should > 0 # *** FAIL: Rhom - no such table: Product
+    Product.find(:all).length.should > 0
     Customer.find(:count).should > 0
 
     Rhom::Rhom.database_full_reset_ex( :models => ['Product', 'Customer'] )
@@ -111,13 +104,12 @@ describe "Rhom" do
     Customer.find(:count).should == 0
   end
 
-  # # FIXME:
   it "Should  delete all objects for a given property bag model" do
     Product.create( { :brand => "Apple", :name => 'iPhone 5S', :price => "$199", :quantity => "10" } )
     Product.create( { :brand => "Samsung", :name => 'Galaxy S4', :price => "$99.99", :quantity => "20" } )
     Customer.create( { :city => 'SPB', :address => "Fontanka" } )
 
-    Product.find(:all).length.should > 0 # *** FAIL: Rhom - no such table: Product
+    Product.find(:all).length.should > 0
     Customer.find(:count).should > 0
 
     Rhom::Rhom.database_full_reset_ex( :models => ['Product'] )

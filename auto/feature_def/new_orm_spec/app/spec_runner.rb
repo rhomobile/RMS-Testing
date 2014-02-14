@@ -14,31 +14,42 @@ class SpecRunner < MSpecScript
       [ {:schema_model=>true, :sync_model=>true},  {:schema_model=>true, :sync_model=>false},
         {:schema_model=>false, :sync_model=>true} , {:schema_model=>false, :sync_model=>false} ]
     ]
-    #  => Total: 40 Passed: 30 Failed: 10
+    #  => Total: 40 Passed: 40 Failed: 0
 
+    #############################################################################################
     # 1. Testing for fixed schema / sync
     # config[:files] << ["spec/rhom_object_spec", [{:schema_model => true, :sync_model => true}]]
-    # => Total: 78  Passed: 24  Failed: 54
+    # => Total: 78  Passed: 77  Failed: 1
 
     # 2. Testing for fixed schema / no sync
     # config[:files] << ["spec/rhom_object_spec", [{:schema_model => true, :sync_model => false}]]
-    # => Total: 78  Passed: 35   Failed: 43
+    # => Total: 78  Passed: 77   Failed: 1
 
     # 3. Testing for property bag / sync
-    # config[:files] << ["spec/rhom_object_spec", [{:schema_model => false, :sync_model => true}]]
-    # => Total: 78 Passed: 5  Failed: 73
+    # ßconfig[:files] << ["spec/rhom_object_spec", [{:schema_model => false, :sync_model => true}]]
+    # => Total: 78 Passed: 45  Failed: 33
 
     # 4. Testing for property bag / no sync
     # config[:files] << ["spec/rhom_object_spec", [{:schema_model => false, :sync_model => false}]]
-    # => Total: 78  Passed: 5  Failed: 73
+    # => Total: 78  Passed: 45  Failed: 33
+    #############################################################################################
 
     config[:files] << [ "spec/rhom_object_spec",
         [ {:schema_model=>true, :sync_model=>true},  {:schema_model=>true, :sync_model=>false},
           {:schema_model=>false, :sync_model=>true} , {:schema_model=>false, :sync_model=>false} ] ]
-    # => Total: 312 Passed: 69 Failed: 243
+    # => Total: 312 Passed: 244 Failed: 68
 
     config[:files] << "spec/rhom_spec"
-    # Total: 10 Passed: 8 Failed: 2
+    # Total: 10 Passed: 10 Failed: 0
+
+    config[:files] << [ "spec/rhom_paginate_spec",
+        [ {:schema_model => true, :sync_model => true},
+          {:schema_model => true, :sync_model => false} ] ]
+    # Total: 10 Passed: 10 Failed: 0
+
+    # config[:files] << [ "spec/rhom_paginate_spec",
+    #     [ {:schema_model=>true, :sync_model=>true},  {:schema_model=>true, :sync_model=>false},
+    #       {:schema_model=>false, :sync_model=>true} , {:schema_model=>false, :sync_model=>false} ] ]
 
   end
 

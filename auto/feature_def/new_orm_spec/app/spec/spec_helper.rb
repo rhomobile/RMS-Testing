@@ -1,3 +1,60 @@
+require 'rhom'
+require 'rho/rhoutils'
+require 'json'
+
+USE_HSQLDB = !System.get_property('has_sqlite') unless defined? USE_HSQLDB
+unless defined? USE_COPY_FILES
+  USE_COPY_FILES = true
+  USE_COPY_FILES = false if (defined? RHO_ME || defined? RHO_WP7 || System.get_property('platform') == 'WINDOWS')
+end
+puts "USE_COPY_FILES: #{USE_COPY_FILES}" # => false
+
+class Test_Helper
+  def before_all(tables, folder)
+    @tables, @folder = tables, folder
+    Rho::RHO.load_all_sources()
+    clean_db_data
+    @source_map = { 'Account' => 'Account_s', 'Case' => 'Case_s'} if $spec_settings[:schema_model]
+    if USE_COPY_FILES
+      Rho::RhoUtils.load_offline_data(@tables, @folder, @source_map)
+      src_path = Rho::RhoFSConnector::get_db_fullpathname('local')
+      if USE_HSQLDB
+        src_path.sub!(".sqlite", ".data")
+        copy_file( src_path, Rho::RhoFSConnector::get_blob_folder() )
+        src_path.sub!(".data", ".script")
+        copy_file( src_path, Rho::RhoFSConnector::get_blob_folder() )
+      else
+        copy_file( src_path, Rho::RhoFSConnector::get_blob_folder() )
+      end
+    end
+  end
+
+  def after_each
+    if USE_COPY_FILES
+      dst_path = Rho::RhoFSConnector::get_db_fullpathname('local')
+      src_path = File.join( Rho::RhoFSConnector::get_blob_folder(), File.basename(dst_path))
+      if USE_HSQLDB
+        src_path.sub!(".sqlite", ".data")
+        copy_file( src_path, File.dirname(dst_path) )
+        src_path.sub!(".data", ".script")
+        copy_file( src_path, File.dirname(dst_path) )
+      else
+        copy_file( src_path, File.dirname(dst_path) )
+      end
+    else
+      clean_db_data
+    end
+  end
+
+  def before_each
+    Rho::RhoUtils.load_offline_data(@tables, @folder, @source_map) unless USE_COPY_FILES
+  end
+
+  def after_all
+  end
+end
+
+###################################################
 def getProduct
   return Product_s if $spec_settings[:schema_model]
   Product
