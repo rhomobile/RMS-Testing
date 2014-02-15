@@ -1,6 +1,6 @@
 describe('Near Field Communication Tests', function () {
 
-    describe("Adapter specs for basic properties and", function () {
+    describe("Adapter specs without engine activation", function () {
 
         it('Property \"supported\" should return true if NFC supported on this device', function () {
             var spec = new ManualSpec(jasmine, window.document);
@@ -71,7 +71,7 @@ describe('Near Field Communication Tests', function () {
         });
     });
 
-    describe('Adapter specs for handlers', function () {
+    describe('Adapter specs with negine activation', function () {
 
         beforeEach(function () {
             Rho.NFC.Adapter.activate();
@@ -80,6 +80,38 @@ describe('Near Field Communication Tests', function () {
         afterEach(function () {
             Rho.NFC.Adapter.stop();
         });
+
+        it('Get device capabilities', function () {
+            var flag;
+            var spec = new ManualSpec(jasmine, window.document);
+            spec.addGoal("Check get device information");
+            spec.addPrecondition("Device with NFC feature");
+            spec.addStep('Press "Run test" button');
+            spec.addStep('Check capabilities');
+            spec.addExpectation("Some capabilities will displayed");
+            spec.displayScenario();
+            spec.waitForButtonPressing("Run test");
+
+            runs(function () {
+                var capabilities = Rho.NFC.Adapter.getDeviceInfo();
+                for (var property in capabilities) {
+                    if (capabilities.hasOwnProperty(property)) {
+                        spec.addResult(property, capabilities[property]);
+                    }
+                }
+                flag = true;
+            });
+            waitsFor(function () {
+                return flag;
+            }, "WaitsFor timeout", 20000);
+
+            runs(function () {
+                spec.displayResults();
+                spec.waitForResponse();
+            });
+
+        });
+
 
         it('Tag reading', function () {
             var flag;
@@ -255,4 +287,5 @@ describe('Near Field Communication Tests', function () {
 
 
     });
-});
+})
+;
