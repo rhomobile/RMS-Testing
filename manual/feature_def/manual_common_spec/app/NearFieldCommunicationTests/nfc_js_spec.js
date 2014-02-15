@@ -92,29 +92,31 @@ describe('Near Field Communication Tests', function () {
             spec.displayScenario();
             spec.waitForButtonPressing("Run test");
 
-            Rho.NFC.Adapter.setTagDetectionHandler([], function (anObject) {
-                spec.addResult('Status', anObject.status);
-                var tag = Rho.NFC.Tag.getTagById(anObject.tagID);
-                try {
-                    spec.addResult('Tag.ID', tag.ID);
-                    spec.addResult('Tag.type', tag.type);
-                    spec.addResult('Tag.serialNumber', tag.serialNumber);
-                    spec.addResult('Tag.size', tag.size);
-                    spec.addResult('Tag.freeSize', tag.freeSize);
-                    spec.addResult('Tag.isReadOnly', tag.isReadOnly);
-                    spec.addResult('Tag.isNdef', tag.isNdef);
-                    spec.addResult('Tag.isConnected', tag.isConnected);
-                }
-                finally {
-                    tag.close();
-                }
-                flag = true;
-            });
+            runs(function () {
+                Rho.NFC.Adapter.setTagDetectionHandler([], function (anObject) {
+                    spec.addResult('Status', anObject.status);
+                    var tag = Rho.NFC.Tag.getTagById(anObject.tagID);
+                    try {
+                        spec.addResult('Tag.ID', tag.ID);
+                        spec.addResult('Tag.type', tag.type);
+                        spec.addResult('Tag.serialNumber', tag.serialNumber);
+                        spec.addResult('Tag.size', tag.size);
+                        spec.addResult('Tag.freeSize', tag.freeSize);
+                        spec.addResult('Tag.isReadOnly', tag.isReadOnly);
+                        spec.addResult('Tag.isNdef', tag.isNdef);
+                        spec.addResult('Tag.isConnected', tag.isConnected);
+                    }
+                    finally {
+                        tag.close();
+                    }
+                    flag = true;
+                });
 
-            flag = false;
+                flag = false;
+            });
             waitsFor(function () {
                 return flag;
-            }, "WaitsFor timeout", 10000);
+            }, "WaitsFor timeout", 20000);
 
             runs(function () {
                 spec.displayResults();
