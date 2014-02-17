@@ -19,17 +19,10 @@ android:
   # Not working with 4.4.2!
   # version: 4.4.2
 
-# wm:
-#   sdk: "Windows Mobile 6.5.3 Professional DTK (ARMV4I)"
-# wp:
-#   productid: 'b6479381-42a8-0130-78de-3caec51bd50e'
-# symbian:
-#   uid: '0xe1a1ef92'
-
-paths:
-  extensions:
-  - ../../../../rhoconnect-client/ext
+# paths:
+#   extensions:
+#   - ../../../../rhoconnect-client/ext
 
 extensions:
 - json
-- rhoconnect-client
+# - rhoconnect-client

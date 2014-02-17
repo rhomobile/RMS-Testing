@@ -14,10 +14,6 @@ iphone:
   entitlements: ""
   codesignidentity: ""
   configuration: Release
-#  extensions: ["barcode"]
-
-#wm:
-#  extensions: ["barcode"]
 
 wp:
   productid: 'fd55c4d0-51fa-012e-7844-6caec51bd50e'
@@ -26,12 +22,7 @@ android:
   version: 4.3
   # version: 4.4.2
 
-paths:
-  extensions:
-  - ../../../../rhoconnect-client/ext
-
 extensions:
 - mspec
 - fileutils
 - json
-- rhoconnect-client
