@@ -581,14 +581,14 @@ describe('Printer Zebra', function() {
              
              
         //for (var i = 0; i < connectParams.length; i++) {
-            generateConnectWithParams(connectParams[0], 'without', true);
-            generateConnectWithParams(connectParams[0], 'withcb', true);
-            generateConnectWithParams(connectParams[0], 'anonymous', true);
-        //}
-             generateConnectWithParams(connectParams[1], 'without', false);
-             generateConnectWithParams(connectParams[1], 'withcb', false);
-             generateConnectWithParams(connectParams[1], 'anonymous', false);
+             generateConnectWithParams(connectParams[0], 'without', true);
+             generateConnectWithParams(connectParams[0], 'withcb', true);
+             generateConnectWithParams(connectParams[0], 'anonymous', true);
 
+             generateConnectWithParams(connectParams[1], 'without', true);
+            generateConnectWithParams(connectParams[1], 'withcb', true);
+            generateConnectWithParams(connectParams[1], 'anonymous', true);
+        //}
              generateConnectWithParams(connectParams[2], 'without', false);
              generateConnectWithParams(connectParams[2], 'withcb', false);
              generateConnectWithParams(connectParams[2], 'anonymous', false);
@@ -596,6 +596,10 @@ describe('Printer Zebra', function() {
              generateConnectWithParams(connectParams[3], 'without', false);
              generateConnectWithParams(connectParams[3], 'withcb', false);
              generateConnectWithParams(connectParams[3], 'anonymous', false);
+
+             generateConnectWithParams(connectParams[4], 'without', false);
+             generateConnectWithParams(connectParams[4], 'withcb', false);
+             generateConnectWithParams(connectParams[4], 'anonymous', false);
     });
 
     function doRetrieveFileNames(filelist, callback_type) {
