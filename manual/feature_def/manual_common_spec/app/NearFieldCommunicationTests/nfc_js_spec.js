@@ -71,7 +71,7 @@ describe('Near Field Communication Tests', function () {
         });
     });
 
-    describe('Adapter specs with negine activation', function () {
+    describe('Adapter specs with engine activation', function () {
 
         beforeEach(function () {
             Rho.NFC.Adapter.activate();
@@ -126,9 +126,8 @@ describe('Near Field Communication Tests', function () {
 
             runs(function () {
                 Rho.NFC.Adapter.setTagDetectionHandler([], function (anObject) {
-                    spec.addResult('Status', anObject.status);
-                    var tag = Rho.NFC.Tag.getTagById(anObject.tagID);
                     try {
+                    var tag = Rho.NFC.Tag.getTagById(anObject["tagId"]);
                         spec.addResult('Tag.ID', tag.ID);
                         spec.addResult('Tag.type', tag.type);
                         spec.addResult('Tag.serialNumber', tag.serialNumber);
@@ -168,17 +167,16 @@ describe('Near Field Communication Tests', function () {
             spec.waitForButtonPressing("Run test");
 
             Rho.NFC.Adapter.setMessageHandler(function (anObject) {
-                spec.addResult('Status', anObject.status);
-                var message = Rho.NFC.Message.getMeessageById(anObject.messageID);
+                var message = Rho.NFC.Message.getMessageById(anObject["messageId"]);
                 try {
                     spec.addResult('Message.ID', message.ID);
                     message.getRecords().forEach(function (each) {
-                        var record = Rho.NFC.Record.getRecordById(each);
+                        var record = each;
                         try {
                             spec.addResult('Record.ID', record.ID);
-                            spec.addResult('Record.TNF', record.TNF);
-                            spec.addResult('Record.type', record.type);
-                            spec.addResult('Record.payloadAsString', record.getPayloadAsString());
+                            spec.addResult('Record.tnf', record.tnf);
+                            spec.addResult('Record.typeName', record.typeName);
+                            spec.addResult('Record.payload', record.payload);
                         }
                         finally {
                             record.close();
