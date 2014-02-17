@@ -1,8 +1,8 @@
 describe('Near Field Communication Tests', function () {
 
-    describe("Adapter specs for basic properties and", function () {
+    describe("Adapter specs without engine activation", function () {
 
-        it('Property \"supported\" should return true if NFC supported on this device', function () {
+        it("Property \"supported\" should return true if NFC supported on this device", function () {
             var spec = new ManualSpec(jasmine, window.document);
             spec.addGoal(jasmine.getEnv().currentSpec.description);
             spec.addExpectation("Property \"supported\" should return \"true\" if device supports NFC feature");
@@ -17,7 +17,7 @@ describe('Near Field Communication Tests', function () {
             });
         });
 
-        it('Property \"version\" should return version of the NFC engine', function () {
+        it("Property \"version\" should return version of the NFC engine", function () {
             var spec = new ManualSpec(jasmine, window.document);
             spec.addGoal(jasmine.getEnv().currentSpec.description);
             spec.addPrecondition("Device with NFC feature");
@@ -33,7 +33,7 @@ describe('Near Field Communication Tests', function () {
             });
         });
 
-        it('Method \"activate\" should activate NFC engine', function () {
+        it("Method \"activate\" should activate NFC engine", function () {
             var spec = new ManualSpec(jasmine, window.document);
             spec.addGoal(jasmine.getEnv().currentSpec.description);
             spec.addPrecondition("Device with NFC feature");
@@ -51,7 +51,7 @@ describe('Near Field Communication Tests', function () {
             });
         });
 
-        it('Method \"stop\" should deactivate NFC engine', function () {
+        it("Method \"stop\" should deactivate NFC engine", function () {
             var spec = new ManualSpec(jasmine, window.document);
             spec.addGoal(jasmine.getEnv().currentSpec.description);
             spec.addPrecondition("Device with NFC feature");
@@ -71,7 +71,7 @@ describe('Near Field Communication Tests', function () {
         });
     });
 
-    describe('Adapter specs for handlers', function () {
+    describe("Adapter specs with engine activation", function () {
 
         beforeEach(function () {
             Rho.NFC.Adapter.activate();
@@ -80,6 +80,89 @@ describe('Near Field Communication Tests', function () {
         afterEach(function () {
             Rho.NFC.Adapter.stop();
         });
+
+        it("Get device capabilities", function () {
+            var flag;
+            var spec = new ManualSpec(jasmine, window.document);
+            spec.addGoal("Check get device information");
+            spec.addPrecondition("Device with NFC feature");
+            spec.addExpectation("Some capabilities will displayed");
+            spec.displayScenario();
+            spec.waitForButtonPressing("Run test");
+
+            runs(function () {
+                var capabilities = Rho.NFC.Adapter.getDeviceInfo();
+                for (var property in capabilities) {
+                    if (capabilities.hasOwnProperty(property)) {
+                        spec.addResult(property, capabilities[property]);
+                    }
+                }
+                flag = true;
+            });
+            waitsFor(function () {
+                return flag;
+            }, "WaitsFor timeout", 20000);
+
+            runs(function () {
+                spec.displayResults();
+                spec.waitForResponse();
+            });
+
+        });
+
+
+        it("ConfigChangeHandler should fires on pollingTimeout changing", function () {
+            var flag;
+            var spec = new ManualSpec(jasmine, window.document);
+            spec.addGoal("Check work of configChangeHandler and incoming arguments");
+            spec.addExpectation("ConfigChangeHandler should be called and incoming arguments pollingTimeout should be equal 10 sec");
+            spec.displayScenario();
+            spec.waitForButtonPressing("Run test");
+
+            runs(function () {
+                Rho.NFC.Adapter.setConfigChangeHandler([], function (anObject) {
+                    spec.addResult('PollingTimeout', anObject.pollingTimeout);
+                    flag = true;
+                });
+                flag = false;
+                Rho.NFC.Adapter.pollingTimeout = 10;
+            });
+            waitsFor(function () {
+                return flag;
+            }, "WaitsFor timeout", 20000);
+
+            runs(function () {
+                spec.displayResults();
+                spec.waitForResponse();
+            });
+        });
+
+        it("ConfigChangeHandler should fires on passKey changing", function () {
+            var flag;
+            var spec = new ManualSpec(jasmine, window.document);
+            spec.addGoal("Check work of passKey and incoming arguments");
+            spec.addExpectation("ConfigChangeHandler should be called and incoming argument \"passKey\" should be equal \"123456\"");
+            spec.displayScenario();
+            spec.waitForButtonPressing("Run test");
+
+            runs(function () {
+                Rho.NFC.Adapter.setConfigChangeHandler([], function (anObject) {
+                    spec.addResult("PassKey", anObject.passKey);
+                    flag = true;
+                });
+                flag = false;
+                Rho.NFC.Adapter.passKey = "123456";
+            });
+            waitsFor(function () {
+                return flag;
+            }, "WaitsFor timeout", 20000);
+
+            runs(function () {
+                spec.displayResults();
+                spec.waitForResponse();
+            });
+        });
+
 
         it('Tag reading', function () {
             var flag;
@@ -92,29 +175,30 @@ describe('Near Field Communication Tests', function () {
             spec.displayScenario();
             spec.waitForButtonPressing("Run test");
 
-            Rho.NFC.Adapter.setTagDetectionHandler([], function (anObject) {
-                spec.addResult('Status', anObject.status);
-                var tag = Rho.NFC.Tag.getTagById(anObject.tagID);
-                try {
-                    spec.addResult('Tag.ID', tag.ID);
-                    spec.addResult('Tag.type', tag.type);
-                    spec.addResult('Tag.serialNumber', tag.serialNumber);
-                    spec.addResult('Tag.size', tag.size);
-                    spec.addResult('Tag.freeSize', tag.freeSize);
-                    spec.addResult('Tag.isReadOnly', tag.isReadOnly);
-                    spec.addResult('Tag.isNdef', tag.isNdef);
-                    spec.addResult('Tag.isConnected', tag.isConnected);
-                }
-                finally {
-                    tag.close();
-                }
-                flag = true;
-            });
+            runs(function () {
+                Rho.NFC.Adapter.setTagDetectionHandler([], function (anObject) {
+                    try {
+                        var tag = Rho.NFC.Tag.getTagById(anObject["tagId"]);
+                        spec.addResult('Tag.ID', tag.ID);
+                        spec.addResult('Tag.type', tag.type);
+                        spec.addResult('Tag.serialNumber', tag.serialNumber);
+                        spec.addResult('Tag.size', tag.size);
+                        spec.addResult('Tag.freeSize', tag.freeSize);
+                        spec.addResult('Tag.isReadOnly', tag.isReadOnly);
+                        spec.addResult('Tag.isNdef', tag.isNdef);
+                        spec.addResult('Tag.isConnected', tag.isConnected);
+                    }
+                    finally {
+                        tag.close();
+                    }
+                    flag = true;
+                });
 
-            flag = false;
+                flag = false;
+            });
             waitsFor(function () {
                 return flag;
-            }, "WaitsFor timeout", 10000);
+            }, "WaitsFor timeout", 20000);
 
             runs(function () {
                 spec.displayResults();
@@ -134,17 +218,16 @@ describe('Near Field Communication Tests', function () {
             spec.waitForButtonPressing("Run test");
 
             Rho.NFC.Adapter.setMessageHandler(function (anObject) {
-                spec.addResult('Status', anObject.status);
-                var message = Rho.NFC.Message.getMeessageById(anObject.messageID);
+                var message = Rho.NFC.Message.getMessageById(anObject["messageId"]);
                 try {
                     spec.addResult('Message.ID', message.ID);
                     message.getRecords().forEach(function (each) {
-                        var record = Rho.NFC.Record.getRecordById(each);
+                        var record = each;
                         try {
                             spec.addResult('Record.ID', record.ID);
-                            spec.addResult('Record.TNF', record.TNF);
-                            spec.addResult('Record.type', record.type);
-                            spec.addResult('Record.payloadAsString', record.getPayloadAsString());
+                            spec.addResult('Record.tnf', record.tnf);
+                            spec.addResult('Record.typeName', record.typeName);
+                            spec.addResult('Record.payload', record.payload);
                         }
                         finally {
                             record.close();
@@ -253,4 +336,5 @@ describe('Near Field Communication Tests', function () {
 
 
     });
-});
+})
+;
