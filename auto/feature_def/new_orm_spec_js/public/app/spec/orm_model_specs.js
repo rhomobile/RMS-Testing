@@ -789,7 +789,6 @@ if (useNewOrm) {
     expect(res[0]["name"]).toEqual("Foolo");
   });
 
-  // FIXME: paginate broken!
   it ("Should support paginate with default options", function() {
     // default options: page = 0, per_page = 10
     for (var i = 0; i < 25; i++)
@@ -797,44 +796,42 @@ if (useNewOrm) {
 
     var options = {};
     var found = model.paginate(options);
-    expect(found.length).toEqual(25); // should be 10!
+    expect(found.length).toEqual(10);
     expect(found[0].get("name")).toEqual('Acme_0');
 
     options['page'] = 0;
     found = model.paginate(options);
-    expect(found.length).toEqual(25); // should be 10!
+    expect(found.length).toEqual(10);
     expect(found[9].get("name")).toEqual('Acme_9');
 
     options['page'] = 2;
     found = model.paginate(options);
-    expect(found.length).toEqual(25); // should be 5!
-    // expect(found[0].get("name")).toEqual('Acme_20');
-    // expect(found[4].get("name")).toEqual('Acme_24');
+    expect(found.length).toEqual(5);
+    expect(found[0].get("name")).toEqual('Acme_20');
+    expect(found[4].get("name")).toEqual('Acme_24');
 
     options = {per_page:20};
     found = model.paginate(options);
-    expect(found.length).toEqual(25); // should be 20!
+    expect(found.length).toEqual(20);
     expect(found[0].get("name")).toEqual('Acme_0');
     expect(found[19].get("name")).toEqual('Acme_19');
   });
 
-  // FIXME: paginate broken!
   it ("Should support paginate with options", function() {
     for (var i = 0; i < 25; i++)
       model.create({name: ("Acme_" + i), industry: ("Tech_" + i)});
 
     var options = {page:0, per_page:20};
     var found = model.paginate(options);
-    expect(found.length).toEqual(25); // should be 20!
+    expect(found.length).toEqual(20);
     expect(found[0].get("name")).toEqual('Acme_0');
     expect(found[19].get("name")).toEqual('Acme_19');
 
     options['page'] = 1;
     found = model.paginate(options);
-    expect(found.length).toEqual(25); // should be 5!
-    // expect(found[0].get("name")).toEqual('Acme_20');
-    // expect(found[4].get("name")).toEqual('Acme_24');
-
+    expect(found.length).toEqual(5);
+    expect(found[0].get("name")).toEqual('Acme_20');
+    expect(found[4].get("name")).toEqual('Acme_24');
   });
 
 } // end of useNewOrm
