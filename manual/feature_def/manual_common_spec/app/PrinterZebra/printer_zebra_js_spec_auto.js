@@ -35,7 +35,8 @@ describe('Printer Zebra', function() {
     if (Rho.System.platform == Rho.System.PLATFORM_WM_CE) {
         sizes = ['320px', '640px', '1024px'];
     } else {
-        sizes = ['320px', '640px', '1024px', '2048px'];
+        // 2048 is too large for all platfroms !
+        sizes = ['320px', '640px', '1024px'];
     }
 
     var extensions = ['png', 'jpg', 'gif', 'bmp'];
@@ -364,7 +365,7 @@ describe('Printer Zebra', function() {
 
             waitsFor(function() {
                 return searchObject.finished;
-            }, '20sec waiting for Search printer', 30000);
+            }, '30sec waiting for Search printer', 30000);
 
             runs(function() {
                 displaySearchResults(searchVals, searchObject.printers, searchObject.errors);
@@ -466,7 +467,7 @@ describe('Printer Zebra', function() {
                 });
                 waitsFor(function() {
                     return callresult !== null;
-                }, 'wait until connected', 10000);
+                }, 'wait until connected', 15000);
             }
             runs(function() {
                 expect(thisprinter.isConnected).toEqual(true);
@@ -479,13 +480,14 @@ describe('Printer Zebra', function() {
             });
             waitsFor(function() {
                 return callresult !== null;
-            }, 'wait until disconnected', 10000);
+            }, 'wait until disconnected', 15000);
 
             runs(function() {
                 expect(callresult).toEqual(Rho.PrinterZebra.PRINTER_STATUS_SUCCESS);
                 expect(thisprinter.isConnected).toEqual(false);
             });
             runs(function() {
+                callresult = null;
                 thisprinter.printRawString(CommandZPL, cbk);
             });
 
@@ -498,7 +500,7 @@ describe('Printer Zebra', function() {
             });
         });
 
-        function generateConnectWithParams(connectparams, case_type) {
+        function generateConnectWithParams(connectparams, case_type, expectedResult) {
             // connect and wait for callback
             it('should connect ' + case_type + ' callback; params:' + JSON.stringify(connectparams, null, " "), function() {
                 var thisprinter = null;
@@ -547,10 +549,18 @@ describe('Printer Zebra', function() {
                 }, 'wait while disconnected', 5000);
 
                 runs(function() {
-                    if (case_type != 'without') {
-                        expect(callresult).toEqual(Rho.Printer.PRINTER_STATUS_SUCCESS);
-                    }
-                    expect(thisprinter.isConnected).toEqual(true);
+                     if (expectedResult) {
+                            if (case_type != 'without') {
+                                expect(callresult).toEqual(Rho.Printer.PRINTER_STATUS_SUCCESS);
+                            }
+                            expect(thisprinter.isConnected).toEqual(true);
+                     }
+                     else {
+                        if (case_type != 'without') {
+                            expect(callresult).toEqual(Rho.Printer.PRINTER_STATUS_ERROR);
+                        }
+                        expect(thisprinter.isConnected).toEqual(false);
+                     }
                 });
             });
         }
@@ -560,17 +570,32 @@ describe('Printer Zebra', function() {
         }, {
             "timeout": 0
         }, {
-            "timeout": 1000
+            "timeout": 10
         }, {
             "timeout": 15000.5
         }, ];
 
-        for (var i = 0; i < connectParams.length; i++) {
-            generateConnectWithParams(connectParams[i], 'without');
-            generateConnectWithParams(connectParams[i], 'withcb');
-            generateConnectWithParams(connectParams[i], 'anonymous');
-        }
+        // 20 sec is enought for connect
+        // 0 and 10 too short time - should not connected for this time
+        // 15000.5 - invalid type - must be integer
+             
+             
+        //for (var i = 0; i < connectParams.length; i++) {
+            generateConnectWithParams(connectParams[0], 'without', true);
+            generateConnectWithParams(connectParams[0], 'withcb', true);
+            generateConnectWithParams(connectParams[0], 'anonymous', true);
+        //}
+             generateConnectWithParams(connectParams[1], 'without', false);
+             generateConnectWithParams(connectParams[1], 'withcb', false);
+             generateConnectWithParams(connectParams[1], 'anonymous', false);
 
+             generateConnectWithParams(connectParams[2], 'without', false);
+             generateConnectWithParams(connectParams[2], 'withcb', false);
+             generateConnectWithParams(connectParams[2], 'anonymous', false);
+
+             generateConnectWithParams(connectParams[3], 'without', false);
+             generateConnectWithParams(connectParams[3], 'withcb', false);
+             generateConnectWithParams(connectParams[3], 'anonymous', false);
     });
 
     function doRetrieveFileNames(filelist, callback_type) {
@@ -593,7 +618,7 @@ describe('Printer Zebra', function() {
 
         waitsFor(function() {
             return callresult !== null;
-        }, 'wait doRetrieveFileNames', 30000);
+        }, 'wait doRetrieveFileNames', 60000);
 
         runs(function() {
             expect(callresult.status).toEqual(Rho.PrinterZebra.PRINTER_STATUS_SUCCESS);
@@ -621,7 +646,7 @@ describe('Printer Zebra', function() {
 
         waitsFor(function() {
             return callresult !== null;
-        }, 'wait doRetrieveFileNames', 30000);
+        }, 'wait doRetrieveFileNames', 60000);
 
         runs(function() {
             expect(callresult.status).toEqual(Rho.PrinterZebra.PRINTER_STATUS_SUCCESS);
@@ -869,11 +894,11 @@ describe('Printer Zebra', function() {
             ['ID', 'string'],
             ['deviceName', 'string'],
             ['printerType', 'string'],
-            ['isConnected', 'boolean'],
-            ['controlLanguage', 'string'],
-            ['maxTimeoutForRead', 'int'],
-            ['maxTimeoutForOpen', 'int'],
-            ['timeToWaitForMoreData', 'int']
+            ['isConnected', 'boolean']
+            //['controlLanguage', 'string'], this properties is unsupported - see XML
+            //['maxTimeoutForRead', 'int'],
+            //['maxTimeoutForOpen', 'int'],
+            //['timeToWaitForMoreData', 'int']
         ];
         for (var i = 0; i < formats.length; i++) {
             var property = formats[i][0];
@@ -900,17 +925,7 @@ describe('Printer Zebra', function() {
             });
         });
 
-        it('Should Get timeToWaitAfterReadInMilliseconds default value', function() {
-            runs(function() {
-                expect(thisprinter.getProperty('timeToWaitAfterReadInMilliseconds')).toEqual('10');
-            });
-        });
-
-        it('Should Get timeToWaitAfterWriteInMilliseconds default value', function() {
-            runs(function() {
-                expect(thisprinter.getProperty('timeToWaitAfterWriteInMilliseconds')).toEqual('200');
-            });
-        });
+        //  removed "timeToWaitAfterReadInMilliseconds" and "timeToWaitAfterWriteInMilliseconds" - this properties do not supported now
 
     });
 
