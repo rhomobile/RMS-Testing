@@ -1127,207 +1127,29 @@ describe('Printer Zebra', function() {
     }
 
     describe("Get & Set default PrinterZebra", function() {
-        var thisprinter = null;
         var printerObj = null;
+
+        it('there is an instance of a printer', function() {
+            runs(function() {
+                expect(last_found_printer_id).toNotEqual(null);
+                printerObj = Rho.PrinterZebra.getPrinterByID(last_found_printer_id);
+                Rho.PrinterZebra.setDefault(printerObj);
+            });
+        });
 
         it('get default PrinterZebra', function() {
             runs(function() {
                 thisprinter = Rho.PrinterZebra.getDefault();
-                expect(thisprinter.__rhoClass).toEqual('Rho.PrinterZebra');
+                expect(thisprinter.ID).toNotEqual(null);
             });
         });
 
         it('set default PrinterZebra', function() {
             runs(function() {
-                expect(last_found_printer_id).toNotEqual(null);
-                printerObj = Rho.PrinterZebra.getPrinterByID(last_found_printer_id);
                 Rho.PrinterZebra.setDefault(printerObj);
-                var defId = Rho.PrinterZebra.getDefault();
-                expect(defId).toEqual(printerObj);
+                var defPrinter = Rho.PrinterZebra.getDefault();
+                expect(defPrinter.ID).toEqual(printerObj.ID);
             });
-        });
-
-    });
-
-    function doPrintTestLabel(value_type) {
-        var callresult = null;
-
-        function cbk(val) {
-            callresult = val;
-        }
-
-        runs(function() {
-            callresult = null;
-            thisprinter.printRawString(makeTestLabel("test"), {}, cbk);
-        });
-
-        waitsFor(function() {
-            return callresult !== null;
-        }, 'wait until printingLabel', 20000);
-
-        runs(function() {
-            if (value_type > 0) {
-                expect(callresult.status).toEqual(Rho.PrinterZebra.PRINTER_STATUS_SUCCESS);
-            } else {
-                expect(callresult.status).toEqual(Rho.PrinterZebra.PRINTER_STATUS_ERR_TIMEOUT);
-            }
-        });
-    }
-
-
-    describe('maxTimeoutForRead property ', function() {
-        it('should connect', function() {
-            doConnect();
-        });
-
-        it('should get print text/label within 10 sec succesfully after setting maxTimeoutForRead to 10 sec', function() {
-            runs(function() {
-                thisprinter.maxTimeoutForRead = 10000;
-            });
-
-            doPrintTestLabel();
-
-
-        });
-
-
-        it('should get timeout error after setting maxTimeoutForRead to 0 sec', function() {
-            runs(function() {
-                thisprinter.maxTimeoutForRead = 0;
-            });
-            waitsFor(function() {
-                return true;
-            }, 'wait for timeout', 5000);
-
-
-        });
-
-    });
-
-    describe('maxTimeoutForOpen property ', function() {
-        it('should connect', function() {
-            doConnect();
-        });
-
-        it('should print text successfully after setting maxTimeoutForOpen to 10 sec', function() {
-            runs(function() {
-                thisprinter.maxTimeoutForOpen = 10000;
-            });
-
-            doPrintTestLabel(10000);
-
-        });
-
-        it('should get timeout error setting maxTimeoutForOpen to 0 sec', function() {
-            runs(function() {
-                thisprinter.maxTimeoutForOpen = 0;
-            });
-
-            waitsFor(function() {
-                return true;
-            }, 'wait for timeout', 5000);
-
-            doPrintTestLabel(0);
-        });
-
-    });
-
-    describe('timeToWaitForMoreData property ', function() {
-        it('should connect', function() {
-            doConnect();
-        });
-
-        it('should print 2 labels successfully after setting timeToWaitForMoreData to 10 sec', function() {
-
-            doPrintTestLabel(10000);
-
-            runs(function() {
-                thisprinter.timeToWaitForMoreData = 10000;
-            });
-
-            doPrintTestLabel(10000);
-
-
-        });
-
-        it('should print 1 label only after setting timeToWaitForMoreData to 0 sec', function() {
-
-            doPrintTestLabel(10000);
-
-            runs(function() {
-                thisprinter.timeToWaitForMoreData = 0;
-            });
-
-            waitsFor(function() {
-                return true;
-            }, 'wait for timeout', 5000);
-
-            doPrintTestLabel(0);
-
-
-        });
-
-    });
-
-    // if(Rho.PrinterZebra.getProperty("connectionType") == "CONNECTION_TYPE_BLUETOOTH") {
-    describe('timeToWaitAfterReadInMilliseconds property ', function() {
-        it('should connect', function() {
-            doConnect();
-        });
-
-        it('should print text after setting timeToWaitAfterReadInMilliseconds to 10 sec', function() {
-
-            runs(function() {
-                thisprinter.timeToWaitAfterReadInMilliseconds = 10000;
-            });
-
-            doPrintTestLabel(10000);
-
-        });
-
-        it('should not print any label after setting timeToWaitAfterReadInMilliseconds to 0 sec', function() {
-
-            runs(function() {
-                thisprinter.timeToWaitAfterReadInMilliseconds = 0;
-            });
-
-            waitsFor(function() {
-                return true;
-            }, 'wait for timeout', 5000);
-
-            doPrintTestLabel(0);
-
-        });
-
-    });
-
-    describe('timeToWaitAfterWriteInMilliseconds property ', function() {
-        it('should connect', function() {
-            doConnect();
-        });
-
-        it('should print text after setting timeToWaitAfterWriteInMilliseconds to 10 sec', function() {
-
-            runs(function() {
-                thisprinter.timeToWaitAfterWriteInMilliseconds = 10000;
-            });
-
-            doPrintTestLabel(10000);
-
-        });
-
-        it('should not print any label after setting timeToWaitAfterWriteInMilliseconds to 0 sec', function() {
-
-            runs(function() {
-                thisprinter.timeToWaitAfterWriteInMilliseconds = 0;
-            });
-
-            waitsFor(function() {
-                return true;
-            }, 'wait for timeout', 5000);
-
-            doPrintTestLabel(0);
-
         });
 
     });
