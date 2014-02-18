@@ -41,7 +41,7 @@ describe('Near Field Communication Tests', function () {
             spec.waitForButtonPressing("Run test");
 
             runs(function () {
-                spec.addResult("Result of executing method \"activate\"", Rho.NFC.Adapter.activate());
+                Rho.NFC.Adapter.activate();
                 spec.addResult("Property \"isActive\"", Rho.NFC.Adapter.isActive);
                 spec.displayResults();
                 spec.waitForResponse();
@@ -59,8 +59,28 @@ describe('Near Field Communication Tests', function () {
 
             runs(function () {
                 Rho.NFC.Adapter.activate();
-                spec.addResult("Result of executing method \"stop\"", Rho.NFC.Adapter.stop());
+                Rho.NFC.Adapter.stop();
                 spec.addResult("Property \"isActive\"", Rho.NFC.Adapter.isActive);
+                spec.displayResults();
+                spec.waitForResponse();
+            });
+        });
+
+        it("Method \"reset\" should reset configuration of NFC engine", function () {
+            var spec = new ManualSpec(jasmine, window.document);
+            spec.addGoal(jasmine.getEnv().currentSpec.description);
+            spec.addPrecondition("Device with NFC feature");
+            spec.addExpectation("Value of \"pollingTimeout\" property should be 90");
+            spec.addExpectation("Value of \"passKey\" property should be empty string");
+            spec.displayScenario();
+            spec.waitForButtonPressing("Run test");
+
+            runs(function () {
+                Rho.NFC.Adapter.pollingTimeout = 10;
+                Rho.NFC.Adapter.passKey = "123456";
+                Rho.NFC.Adapter.reset();
+                spec.addResult("Property \"pollingTimeout\"", Rho.NFC.Adapter.pollingTimeout);
+                spec.addResult("Property \"passKey\"", Rho.NFC.Adapter.passkey);
                 spec.displayResults();
                 spec.waitForResponse();
             });
