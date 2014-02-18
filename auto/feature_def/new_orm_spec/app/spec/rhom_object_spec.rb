@@ -1353,7 +1353,6 @@ end
       items = getAccount.find(:all, :conditions => {:float_test => 2.3} )
       # FIXME: *** FAIL: Rhom::RhomObject - undefined method `length' for 2.3:Float
       #        lib/newrhom/newrhom_object_factory.rb:68:in `block in _normalize_complex_condition'
-      puts "BAB: #{items.inspect}"
       items.should_not be_nil
       items.length.should == 1
       item2 = items[0]
@@ -1367,7 +1366,6 @@ end
       item2.time_test.to_i.should == attributes[:time_test]
 
       items = getAccount.find(:all, :conditions => { {:name=>'float_test', :op=>'<'}=> 53 } )
-      puts "BAB: #{items.inspect}"
       items.should_not be_nil
       items.length.should == 1
       item2 = items[0]
