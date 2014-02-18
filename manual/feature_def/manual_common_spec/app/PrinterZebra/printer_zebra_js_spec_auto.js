@@ -411,7 +411,7 @@ describe('Printer Zebra', function() {
 
             waitsFor(function() {
                 return callresult !== null;
-            }, 'wait until disconnected', 10000);
+            }, 'wait until disconnected', 20000);
 
             runs(function() {
                 expect(callresult).toEqual(Rho.PrinterZebra.PRINTER_STATUS_SUCCESS);
@@ -440,7 +440,7 @@ describe('Printer Zebra', function() {
 
             waitsFor(function() {
                 return callresult !== null;
-            }, 'wait until disconnected', 10000);
+            }, 'wait until disconnected', 20000);
 
             runs(function() {
                 expect(callresult).toEqual(Rho.PrinterZebra.PRINTER_STATUS_SUCCESS);
@@ -452,11 +452,12 @@ describe('Printer Zebra', function() {
             });
             waitsFor(function() {
                 return thisprinter.isConnected == true;
-            }, 'wait untill connect', 10000);
+            }, 'wait untill connect', 20000);
         });
 
         it('disconnect and try to print should return status error', function() {
             var callresult = null;
+           var callresultp = null;
             var thisprinter = null;
             expect(last_found_printer_id).toNotEqual(null);
             thisprinter = Rho.PrinterZebra.getPrinterByID(last_found_printer_id);
@@ -467,7 +468,7 @@ describe('Printer Zebra', function() {
                 });
                 waitsFor(function() {
                     return callresult !== null;
-                }, 'wait until connected', 15000);
+                }, 'wait until connected', 25000);
             }
             runs(function() {
                 expect(thisprinter.isConnected).toEqual(true);
@@ -480,23 +481,25 @@ describe('Printer Zebra', function() {
             });
             waitsFor(function() {
                 return callresult !== null;
-            }, 'wait until disconnected', 15000);
+            }, 'wait until disconnected', 25000);
 
             runs(function() {
                 expect(callresult).toEqual(Rho.PrinterZebra.PRINTER_STATUS_SUCCESS);
                 expect(thisprinter.isConnected).toEqual(false);
             });
             runs(function() {
-                callresult = null;
-                thisprinter.printRawString(CommandZPL, cbk);
+                callresultp = null;
+                 thisprinter.printRawString(CommandZPL, {}, function(result) {
+                                            callresultp = result;
+                                            });
             });
 
             waitsFor(function() {
-                return callresult !== null;
-            }, 'wait.. trying to print..', 15000);
+                return callresultp !== null;
+            }, 'wait.. trying to print..', 25000);
 
             runs(function() {
-                expect(callresult).toEqual(Rho.PrinterZebra.PRINTER_STATUS_ERROR);
+                expect(callresultp.status).toEqual(Rho.PrinterZebra.PRINTER_STATUS_ERROR);
             });
         });
 
@@ -519,7 +522,7 @@ describe('Printer Zebra', function() {
 
                 waitsFor(function() {
                     return callresult !== null;
-                }, 'wait until disconnected', 5000);
+                }, 'wait until disconnected', 20000);
 
                 runs(function() {
                     expect(callresult).toEqual(Rho.PrinterZebra.PRINTER_STATUS_SUCCESS);
@@ -546,7 +549,7 @@ describe('Printer Zebra', function() {
                     } else {
                         return callresult !== null;
                     }
-                }, 'wait while disconnected', 5000);
+                }, 'wait while disconnected', 25000);
 
                 runs(function() {
                      if (expectedResult) {
@@ -580,11 +583,15 @@ describe('Printer Zebra', function() {
         // 15000.5 - invalid type - must be integer
              
              
+             
+             
         //for (var i = 0; i < connectParams.length; i++) {
              generateConnectWithParams(connectParams[0], 'without', true);
              generateConnectWithParams(connectParams[0], 'withcb', true);
              generateConnectWithParams(connectParams[0], 'anonymous', true);
-
+        if (Rho.System.platform != Rho.System.PLATFORM_ANDROID) {
+             
+             
              generateConnectWithParams(connectParams[1], 'without', true);
             generateConnectWithParams(connectParams[1], 'withcb', true);
             generateConnectWithParams(connectParams[1], 'anonymous', true);
@@ -600,6 +607,7 @@ describe('Printer Zebra', function() {
              generateConnectWithParams(connectParams[4], 'without', false);
              generateConnectWithParams(connectParams[4], 'withcb', false);
              generateConnectWithParams(connectParams[4], 'anonymous', false);
+        }
     });
 
     function doRetrieveFileNames(filelist, callback_type) {
@@ -691,7 +699,7 @@ describe('Printer Zebra', function() {
 
             waitsFor(function() {
                 return callresult !== null;
-            }, 'wait doRetrieveFileNames', 30000);
+            }, 'wait doRetrieveFileNames', 60000);
 
             runs(function() {
                 expect(callresult.status).toEqual(Rho.PrinterZebra.PRINTER_STATUS_SUCCESS);
@@ -724,7 +732,7 @@ describe('Printer Zebra', function() {
 
             waitsFor(function() {
                 return callresult !== null;
-            }, 'wait storeImage', 30000);
+            }, 'wait storeImage', 60000);
 
             runs(function() {
                 if (isOk !== false) {
@@ -814,7 +822,7 @@ describe('Printer Zebra', function() {
 
             waitsFor(function() {
                 return callresult !== null;
-            }, 'wait storeImage', 30000);
+            }, 'wait storeImage', 60000);
 
             runs(function() {
                 if (isOk !== false) {
@@ -835,16 +843,18 @@ describe('Printer Zebra', function() {
             doConnect();
         });
 
+        // 2048 is TOO LARGE for ticket printers !
+             
         generateStoreImageWithoutAnonymous('with', pngimagepath_320px, 'PNG.GRF', 50, 50, true);
         generateStoreImageWithoutAnonymous('Anonymous', pngimagepath_640px, 'E:TF1.GRF', 50, 50, true);
         generateStoreImageWithoutAnonymous('with', pngimagepath_1024px, 'R:TF1.GRF', 50, 50, true);
-        generateStoreImageWithoutAnonymous('Anonymous', pngimagepath_2048px, 'E:TF2.GRF', 0, 0, false);
+        //generateStoreImageWithoutAnonymous('Anonymous', pngimagepath_2048px, 'E:TF2.GRF', 0, 0, false);
         generateStoreImageWithoutAnonymous('with', pngimagepath_320px, 'TF2.GRF', -1, -1, true);
 
         generateStoreImageWithoutAnonymous('with', jpgimagepath_320px, 'JPG.GRF', 50, 50, true);
         generateStoreImageWithoutAnonymous('Anonymous', jpgimagepath_640px, 'E:JF1.GRF', 50, 50, true);
         generateStoreImageWithoutAnonymous('with', jpgimagepath_1024px, 'R:JF1.GRF', 50, 50, true);
-        generateStoreImageWithoutAnonymous('Anonymous', jpgimagepath_2048px, 'E:JF2.GRF', 0, 0, false);
+        //generateStoreImageWithoutAnonymous('Anonymous', jpgimagepath_2048px, 'E:JF2.GRF', 0, 0, false);
         generateStoreImageWithoutAnonymous('with', jpgimagepath_320px, 'JF2.GRF', -1, -1, true);
     });
 
@@ -1068,7 +1078,7 @@ describe('Printer Zebra', function() {
 
             waitsFor(function() {
                 return callresult !== null;
-            }, 'wait requestState', 30000);
+            }, 'wait requestState', 60000);
 
             runs(function() {
                 expect(callresult.status).toEqual(Rho.PrinterZebra.PRINTER_STATUS_SUCCESS);
@@ -1110,7 +1120,7 @@ describe('Printer Zebra', function() {
                     for (var i = 0; i < requeststate_printmode.length; i++) {
                         if (callresult[requeststate_printmode[i]] !== undefined) {
                             var result = callresult[requeststate_printmode[i]];
-                            expect(result).toContain(printmode_values);
+                            expect(printmode_values).toContain(result);
                         }
                     }
                 }
@@ -1132,11 +1142,11 @@ describe('Printer Zebra', function() {
                 runs(function() {
                     // Let the printer be search first then use stop
                     callresult = null;
-                    searchObject = runSearch({}, 20000);
+                    searchObject = runSearch({}, 60000);
                     Rho.PrinterZebra.stopSearch();
                 });
 
-                waits(21000);
+                waits(65000);
 
                 runs(function() {
                     expect(searchObject.finished).toEqual(false);
