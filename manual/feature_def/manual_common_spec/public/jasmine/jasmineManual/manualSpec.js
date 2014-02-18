@@ -243,9 +243,10 @@ function ManualSpec(aJasmine, aDocument) {
         var timeout = setTimeout(function () {
             flag = true
         }, this.userActionTimeout);
+        var that = this;
         button.onclick = function () {
             clearTimeout(timeout);
-            this.userControlsContainer().removeChild(button);
+            that.userControlsContainer().removeChild(button);
             flag = true;
         };
         this.userControlsContainer().appendChild(button);
