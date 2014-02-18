@@ -245,6 +245,7 @@ function ManualSpec(aJasmine, aDocument) {
         }, this.userActionTimeout);
         button.onclick = function () {
             clearTimeout(timeout);
+            this.userControlsContainer().removeChild(button);
             flag = true;
         };
         this.userControlsContainer().appendChild(button);
