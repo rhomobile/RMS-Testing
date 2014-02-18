@@ -938,58 +938,6 @@ describe('Printer Zebra', function() {
                 }
             });
         });
-
-        //  removed "timeToWaitAfterReadInMilliseconds" and "timeToWaitAfterWriteInMilliseconds" - this properties do not supported now
-
-    });
-
-    function generatesetproperty(property, value) {
-        var deftext = ['Should Set', property, ' to ', value.toString(), ' using direct calling method'];
-        it(deftext.join(' '), function() {
-            runs(function() {
-                thisprinter[property] = value;
-                expect(thisprinter[property]).toEqual(value);
-            });
-        });
-
-        deftext = ['Should Set', property, ' to ', value.toString(), ' using setProperty calling method'];
-        it(deftext.join(' '), function() {
-            runs(function() {
-                thisprinter.setProperty(property, value.toString());
-                expect(thisprinter[property]).toEqual(value);
-                // getProperty returns string type
-                expect(parseInt(thisprinter.getProperty(property), 10)).toEqual(value);
-            });
-        });
-
-        deftext = ['Should Set', property, ' to ', value, ' using setProperties calling method'];
-        it(deftext.join(' '), function() {
-            runs(function() {
-                thisprinter.setProperties({
-                    property: value.toString()
-                });
-                // getProperties also returns property values as a strings
-                var data = thisprinter.getProperties([property]);
-                data = parseInt(data[property], 10);
-                expect(data).toEqual(value);
-            });
-        });
-    }
-
-    describe('Setting Zebra property Values', function() {
-
-        it('should connect', function() {
-            doConnect();
-        });
-
-        var values = [0, 50000, -1];
-        var formats = ['maxTimeoutForRead', 'maxTimeoutForOpen', 'timeToWaitForMoreData', 'timeToWaitAfterReadInMilliseconds', 'timeToWaitAfterWriteInMilliseconds'];
-        for (var i = 0; i < formats.length; i++) {
-            var property = formats[i];
-            for (var j = 0; j < values.length; j++) {
-                generatesetproperty(property, values[j]);
-            }
-        }
     });
 
     //enumerateSupportedControlLanguages method tests
