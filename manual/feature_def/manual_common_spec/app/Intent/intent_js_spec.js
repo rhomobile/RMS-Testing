@@ -152,7 +152,7 @@ describe('Intent_UseCases Functionality Test', function () {
             _result.waitToRunTest();
             runs(function () {
                 var data = {
-                    "toast":"Target - Test case passed if you see 'PERMISSION' after this : "
+                    "MyData":"Target - Test case passed if you see 'PERMISSION' after this : "
                 };
                 var params = new parameters(Rho.Intent.BROADCAST,"com.example.testtarget.PERMISSION","com.smap.targetapp.mySecondAction","","","","","",data);
                 Rho.Intent.send(params);
