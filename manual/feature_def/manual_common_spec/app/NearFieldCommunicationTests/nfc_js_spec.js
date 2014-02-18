@@ -120,7 +120,7 @@ describe('Near Field Communication Tests', function () {
             spec.waitForButtonPressing("Run test");
 
             runs(function () {
-                Rho.NFC.Adapter.setConfigChangeHandler([], function (anObject) {
+                Rho.NFC.Adapter.setConfigChangeHandler(function (anObject) {
                     spec.addResult('PollingTimeout', anObject.pollingTimeout);
                     flag = true;
                 });
@@ -146,7 +146,7 @@ describe('Near Field Communication Tests', function () {
             spec.waitForButtonPressing("Run test");
 
             runs(function () {
-                Rho.NFC.Adapter.setConfigChangeHandler([], function (anObject) {
+                Rho.NFC.Adapter.setConfigChangeHandler(function (anObject) {
                     spec.addResult("PassKey", anObject.passKey);
                     flag = true;
                 });
