@@ -1073,6 +1073,7 @@ end
  end
 
   # FIXME: Expected [] to be nil ?
+  # FIXME: destroy for FS / PropBag does not delete blob file
   it "should support blob type" do
     file_name = File.join(Rho::RhoApplication::get_blob_folder, 'MyText123.txt')
     File.delete(file_name) if File.exists?(file_name)
