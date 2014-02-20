@@ -1,5 +1,8 @@
 package com.smap.targetapp;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.util.Log;
@@ -24,6 +27,15 @@ public class MainActivity extends Activity {
                 finish();
             }
         });
+        
+        Timer t = new Timer();
+        t.schedule(new TimerTask() {
+        	public void run() {
+        		Log.i("targetApp", "Set result: " + getIntent());
+                setResult(RESULT_OK, getIntent());
+                finish();
+        	}
+        }, 5000);
         
     }
 

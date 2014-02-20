@@ -147,7 +147,7 @@
 
 <body>
     <div id="console"><b>Console: </b>
-        <div id="logs" /></div>
+        <div id="logs" ></div>
     </div>
     <h1>Printer Zebra Semi-automatic Tests</h1>
 
@@ -165,7 +165,7 @@
     </div>
 
     <div><b>Console: </b>
-        <div id="debug" /></div>
+        <div id="debug" ></div>
     </div>
 
     <div id="manual_contols">
@@ -186,10 +186,22 @@
             <div id="test_output"></div>
         </div>
         <div id="action"></div>
+        <input type="button" value="Test Passed" onclick="captureResult(true)" id="oldpass"/>
+        <input type="button" value="Test Failed" onclick="captureResult(false)" id="oldfail"/>
+
+        <input type="button" value="Run Test" onclick="_result.runTest();" id="runtest"/>
+        <input type="button" value="Test Passed" onclick="_result.passed();" id="pass" />
+        <input type="button" value="Test Failed" onclick="_result.failed();" id="fail" />
+        <input type="button" value="Done" onclick="_result.done();" id="done" />
         <div id="actResult" style="display:none">init</div>
-        <input type="button" value="Test Passed" onclick="testPassed()" />
-        <input type="button" value="Test Failed" onclick="testFailed()" />
     </div>
 </body>
-
+<script type="text/javascript">
+    $('#pass').hide();
+    $('#fail').hide();
+    $('#oldpass').hide();
+    $('#oldfail').hide();
+    $('#runtest').hide();
+    $('#done').hide();
+</script>
 </html>

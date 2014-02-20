@@ -1,12 +1,11 @@
 ---
-name: new_orm_spec
-# sdk: "../rhodes"
 sdk: "../../../../rhodes"
-#applog: rholog.txt
-version: 1.0.1
+name: new_orm_spec
+applog: RhoLogSpec.txt
+version: 1.1
 
 vendor: rhomobile
-sdkversion: 4.0
+sdkversion: 4.1
 
 wmsdk: "Windows Mobile 6 Professional SDK (ARMV4I)"
 iphone:
@@ -14,10 +13,6 @@ iphone:
   entitlements: ""
   codesignidentity: ""
   configuration: Release
-#  extensions: ["barcode"]
-
-#wm:
-#  extensions: ["barcode"]
 
 wp:
   productid: 'fd55c4d0-51fa-012e-7844-6caec51bd50e'
@@ -26,12 +21,7 @@ android:
   version: 4.3
   # version: 4.4.2
 
-paths:
-  extensions:
-  - ../../../../rhoconnect-client/ext
-
 extensions:
 - mspec
 - fileutils
 - json
-- rhoconnect-client

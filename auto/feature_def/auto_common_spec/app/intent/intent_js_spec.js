@@ -2,9 +2,9 @@ describe("Intent JS API Test", function() {
 	var getpropertiesdata ='';
     var callbackstatus = false;
     var callbackgetproperties = function (data){
-		getpropertiesdata = data;
-		callbackstatus = true;
-		Rho.Application.restore();
+        getpropertiesdata = data;
+        callbackstatus = true;
+        Rho.Application.restore();
 	};
 	var parameters = function (intentType, action, categories, appName, targetClass, uri, mimeType, data) {
     	var result = {};
@@ -31,7 +31,7 @@ describe("Intent JS API Test", function() {
 			"intentTargetClass":"",
 			"intentUri":"",
 			"intentMimeType":"",
-			"intentData":""
+			"intentData":{"reply":"intent reply"}
 		},
 		{
 			"id":"VT328_48",
@@ -43,7 +43,7 @@ describe("Intent JS API Test", function() {
 			"intentTargetClass":"",
 			"intentUri":"",
 			"intentMimeType":"",
-			"intentData":""
+			"intentData":{"reply":"intent reply"}
 		},
 		{
 			"id":"VT328_49",
@@ -55,7 +55,7 @@ describe("Intent JS API Test", function() {
 			"intentTargetClass":"com.smap.targetapp.MainActivity",
 			"intentUri":"",
 			"intentMimeType":"",
-			"intentData":""
+			"intentData":{"reply":"intent reply"}
 		},
 		{
 			"id":"VT328_50",
@@ -67,7 +67,7 @@ describe("Intent JS API Test", function() {
 			"intentTargetClass":"",
 			"intentUri":"",
 			"intentMimeType":"",
-			"intentData":""
+			"intentData":{"reply":"intent reply"}
 		},
 		{
 			"id":"VT328_51",
@@ -79,7 +79,7 @@ describe("Intent JS API Test", function() {
 			"intentTargetClass":"",
 			"intentUri":"",
 			"intentMimeType":"",
-			"intentData":""
+			"intentData":{"reply":"intent reply"}
 		},
 		{
 			"id":"VT328_52",
@@ -91,7 +91,7 @@ describe("Intent JS API Test", function() {
 			"intentTargetClass":"",
 			"intentUri":"",
 			"intentMimeType":"",
-			"intentData":""
+			"intentData":{"reply":"intent reply"}
 		},
 		{
 			"id":"VT328_53",
@@ -103,7 +103,7 @@ describe("Intent JS API Test", function() {
 			"intentTargetClass":"",
 			"intentUri":"",
 			"intentMimeType":"",
-			"intentData":""
+			"intentData":{"reply":"intent reply"}
 		},
 		{
 			"id":"VT328_54",
@@ -115,7 +115,7 @@ describe("Intent JS API Test", function() {
 			"intentTargetClass":"",
 			"intentUri":"",
 			"intentMimeType":"",
-			"intentData":""
+			"intentData":{"reply":"intent reply"}
 		},
 		{
 			"id":"VT328_55",
@@ -127,7 +127,7 @@ describe("Intent JS API Test", function() {
 			"intentTargetClass":"",
 			"intentUri":"",
 			"intentMimeType":"",
-			"intentData":""
+			"intentData":{"reply":"intent reply"}
 		},
 		{
 			"id":"VT328_56",
@@ -139,7 +139,7 @@ describe("Intent JS API Test", function() {
 			"intentTargetClass":"",
 			"intentUri":"",
 			"intentMimeType":"",
-			"intentData":""
+			"intentData":{"reply":"intent reply"}
 		},
 		{
 			"id":"VT328_57",
@@ -151,7 +151,7 @@ describe("Intent JS API Test", function() {
 			"intentTargetClass":"",
 			"intentUri":"",
 			"intentMimeType":"",
-			"intentData":""
+			"intentData":{"reply":"intent reply"}
 		}
 	];
 
@@ -178,24 +178,13 @@ describe("Intent JS API Test", function() {
 					return callbackstatus;
 				}, '30sec Wait before move to next test', 30000);
 				runs(function(){
-					var receivedData = {};
-					if(paramArray[i].intentType) receivedData.intentType = getpropertiesdata.intentType;
-					if(paramArray[i].categories) receivedData.categories = getpropertiesdata.categories;
-					if(paramArray[i].action) receivedData.action = getpropertiesdata.action;
-					if(paramArray[i].appName) receivedData.appName = getpropertiesdata.appName;
-					if(paramArray[i].targetClass) receivedData.targetClass = getpropertiesdata.targetClass;
-				    if(paramArray[i].uri) receivedData.uri = getpropertiesdata.uri;
-				    if(paramArray[i].mimeType) receivedData.mimeType = getpropertiesdata.mimeType;
-				    if(paramArray[i].data) receivedData.data = getpropertiesdata.data;
-					
-					expect(callbackstatus).toEqual(true);
-					expect(paramArray[i]).toEqual(receivedData);
+                    expect(callbackstatus).toEqual(true);
+                    expect(paramArray[i].data["reply"]).toEqual(getpropertiesdata.data["reply"]);
 					i++;
 				});
 			});
 		}
 	}
-	
 	it('VT328_58 | appName - Try to Launch non-existing Application via \'appName\' from test application.', function () {
         var parameters = {intentType: Rho.Intent.START_ACTIVITY, action: 'android.intent.action.MAIN', appName: 'nonExistingApp'}
         expect(function () {
@@ -292,4 +281,14 @@ describe("Intent JS API Test", function() {
             Rho.Intent.send(parameters);
         }).toThrow();
     });
+    
+    if ( isAndroidPlatform() ) {
+        it('VT328_66 | Pass intent data array with unsupported type', function() {
+            var parameters = { intentType:Rho.Intent.START_ACTIVITY, action:"ACTION_SEND", data:{"EXTRA_EMAIL":[0.1,0.2,0.3]} };
+           
+            expect(function () {
+                Rho.Intent.send(parameters);
+            }).toThrow();
+        });
+    }
 });

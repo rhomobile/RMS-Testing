@@ -3,7 +3,7 @@ function ManualSpec(aJasmine, aDocument) {
     instance.jasmine = aJasmine;
     instance.document = aDocument;
     instance.userActionTimeout = 3000000;
-    instance.waitsForTimeout =  instance.userActionTimeout + 10000;
+    instance.waitsForTimeout = instance.userActionTimeout + 10000;
 
     instance.containerID = "specContainer";
     instance.goalscontainerID = "specGoalsContainer";
@@ -161,6 +161,22 @@ function ManualSpec(aJasmine, aDocument) {
         return container;
     };
 
+    instance.hasGoals = function () {
+        return this.goals.length != 0;
+    }
+
+    instance.hasPreconditions = function () {
+        return this.goals.length != 0;
+    }
+
+    instance.hasSteps = function () {
+        return this.goals.length != 0;
+    }
+
+    instance.hasExpectations = function () {
+        return this.goals.length != 0;
+    }
+
     instance.displayGoals = function () {
         var list = this.document.createElement('ol');
         this.goals.forEach(function (each) {
@@ -229,10 +245,18 @@ function ManualSpec(aJasmine, aDocument) {
 
     instance.displayScenario = function () {
         this.displayTitle();
-        this.displayGoals();
-        this.displayPreconditions();
-        this.displaySteps();
-        this.displayExpectations();
+        if (this.hasGoals()) {
+            this.displayGoals();
+        }
+        if (this.hasPreconditions()) {
+            this.displayPreconditions();
+        }
+        if (this.hasSteps()) {
+            this.displaySteps();
+        }
+        if (this.hasExpectations()) {
+            this.displayExpectations();
+        }
     };
 
     instance.waitForButtonPressing = function (aString) {
@@ -240,11 +264,13 @@ function ManualSpec(aJasmine, aDocument) {
         var button = this.document.createElement("button");
         button.appendChild(this.document.createTextNode(aString));
         var flag = false;
-        var timeout = setTimeout(function () {
+        var timeoutID = setTimeout(function () {
             flag = true
         }, this.userActionTimeout);
+        var that = this;
         button.onclick = function () {
-            clearTimeout(timeout);
+            clearTimeout(timeoutID);
+            that.userControlsContainer().removeChild(button);
             flag = true;
         };
         this.userControlsContainer().appendChild(button);
@@ -273,13 +299,17 @@ function ManualSpec(aJasmine, aDocument) {
         this.userControlsContainer().innerHTML = "";
         var button = this.document.createElement("button");
         button.setAttribute("class", "passedButton");
-        button.onclick = function () { finishSpec(true); };
+        button.onclick = function () {
+            finishSpec(true);
+        };
         button.appendChild(this.document.createTextNode("Passed"));
         this.userControlsContainer().appendChild(button);
 
         button = this.document.createElement("button");
         button.setAttribute("class", "failedButton");
-        button.onclick = function () { finishSpec(false) };
+        button.onclick = function () {
+            finishSpec(false)
+        };
         button.appendChild(this.document.createTextNode("Failed"));
         this.userControlsContainer().appendChild(button);
 
@@ -294,7 +324,7 @@ function ManualSpec(aJasmine, aDocument) {
 
     };
 
-    instance.initialize = function(){
+    instance.initialize = function () {
         var container = this.document.getElementById(this.containerID);
         if (container != null) {
             container.innerHTML = "";
