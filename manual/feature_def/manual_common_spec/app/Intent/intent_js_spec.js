@@ -497,7 +497,7 @@ describe('Intent_UseCases Functionality Test', function () {
                  });
             _result.waitForResponse();
             });
-         if(!isAndroidPlatform()){
+         if(!isWindowsMobileOrAndroidPlatform()){
          it('VT328_33 | uri - Launch Maps with pre-set lat and longitute values from test app by setting Uri "geo:latitude,longitude"', function () {
             displayObjective('VT328_32 | uri - Launch Maps with pre-set lat and longitute values from test app by setting Uri "geo:latitude,longitude"');
             var preConditions = ["Ensure maps application present in the device"];
