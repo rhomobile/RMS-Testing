@@ -730,9 +730,9 @@ describe('Intent_UseCases Functionality Test', function () {
             _result.waitToRunTest();
             runs(function(){
                 var data = 
-                {"EXTRA_EMAIL":"test@domain.com",
-                 "EXTRA_CC":"carbon.copy@domain.com",
-                 "EXTRA_BCC":"bcc.email@domain.com",
+                {"EXTRA_EMAIL":["test@domain.com"],
+                 "EXTRA_CC":["carbon.copy@domain.com"],
+                 "EXTRA_BCC":["bcc.email@domain.com"],
                  "EXTRA_SUBJECT":"Email Subject !",
                  "EXTRA_TEXT":"Email body content !"};
                 var params = new parameters(Rho.Intent.START_ACTIVITY,"","ACTION_SEND","","","","","text/plain",data);

@@ -281,4 +281,14 @@ describe("Intent JS API Test", function() {
             Rho.Intent.send(parameters);
         }).toThrow();
     });
+    
+    if ( isAndroidPlatform() ) {
+        it('VT328_66 | Pass intent data array with unsupported type', function() {
+            var parameters = { intentType:Rho.Intent.START_ACTIVITY, action:"ACTION_SEND", data:{"EXTRA_EMAIL":[0.1,0.2,0.3]} };
+           
+            expect(function () {
+                Rho.Intent.send(parameters);
+            }).toThrow();
+        });
+    }
 });
