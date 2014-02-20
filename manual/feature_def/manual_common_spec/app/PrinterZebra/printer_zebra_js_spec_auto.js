@@ -281,7 +281,7 @@ describe('Printer Zebra', function() {
         runs(function() {
             setObjective(jasmine.getEnv().currentSpec.description);
             setInstruction('Wait until devices are discovered to continue');
-            setExpected('Press any button to continute');
+            setExpected('');
             setupTestFields();
         });
 
@@ -294,6 +294,8 @@ describe('Printer Zebra', function() {
         }, '60sec waiting for Search printer', ENABLE60K);
 
         runs(function() {
+            setInstruction('Use drop-down list to select tested device and then press "done" button.');
+            setExpected('There shpuld be at least one device to select.');
             if (searchObject.printers.length > 0) {
                 displaySearchResults({}, searchObject.printers, searchObject.errors);
                 updatePrinterList(searchObject.printers);
@@ -301,6 +303,14 @@ describe('Printer Zebra', function() {
             }
             expect(searchObject.errors).toEqual([]);
             expect(searchObject.printers.length).toBeGreaterThan(0);
+        });
+
+        _result.waitUntilDone();
+
+        runs(function() {
+            var printerSettings = $('#dev_list').val().split('|');
+            last_found_printer_id = printerSettings[3];
+            last_found_printer = Rho.PrinterZebra.getPrinterByID(last_found_printer_id);
         });
     });
 
