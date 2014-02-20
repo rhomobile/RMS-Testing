@@ -1,5 +1,8 @@
-# Startup page for your application
+# Start path for auto tests (default)
 start_path = '/app'
+
+# Start path for running app directly
+# start_path = '/app/SpecRunner/start'
 
 # Path to the options page (in this case handled by javascript)
 options_path = '/app/Settings'

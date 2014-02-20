@@ -11,6 +11,7 @@ rhosimulator/
 /*/*/*/project/*/Rhodes/build/
 /*/*/*/project/*/build/
 /*/*/*/project/iphone/*.xcodeproj/xcuserdata
+*.iseq
 rholog.txt
 rhoapi-modules.js
 server_url.js

@@ -3,8 +3,18 @@ require 'spec_runner'
 
 class SpecRunnerController < Rho::RhoController
 
+  def start
+    render
+  end
+
   #GET /SpecRunner
   def index
+    run_specs
+
+    render
+  end
+
+  def run_specs
     GC.enable() unless System::get_property('platform') == 'Blackberry'
 
     @msg = 'MSpec version: '+MSpec::VERSION
@@ -22,7 +32,5 @@ class SpecRunnerController < Rho::RhoController
 
     # End marker to nofity rake spec runner that all done
     puts "MSpec runner stopped."
-
-    render
   end
 end
