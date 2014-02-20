@@ -462,7 +462,8 @@ describe('Printing Generic', function() {
             doPrintPrintFileAnonCbk(bmpimagepath_320px, {});
         });
 
-        //pdf
+        //pdf is unsupported !!!
+        /*
         it('should print pdf without callback', function() {
 			dispTestCaseRunning(" 1. Should Print label <br />2. Should print PDF file.");
 			dispExpectedResult("should print pDF file");
@@ -492,6 +493,7 @@ describe('Printing Generic', function() {
             doSetLabelLength(500);
             doPrintPrintFileAnonCbk(pdffilepath, {});
         });
+        */
 
         // empty filename
         it('should not print empty filename with callback', function() {
@@ -725,7 +727,8 @@ describe('Printing Generic', function() {
     });
 
 
-    var listofrequeststate = [Rho.Printer.PRINTER_STATE_IS_READY_TO_PRINT,   Rho.Printer.PRINTER_STATE_IS_COVER_OPENED, Rho.Printer.PRINTER_STATE_IS_DRAWER_OPENED, Rho.Printer.PRINTER_STATE_IS_PAPER_OUT, Rho.Printer.PRINTER_STATE_IS_BATTERY_LOW];
+    // PRINTER_STATE_IS_COVER_OPENED, PRINTER_STATE_IS_DRAWER_OPENED, PRINTER_STATE_IS_BATTERY_LOW - unsupported by Zebra Printer !!!
+    var listofrequeststate = [Rho.Printer.PRINTER_STATE_IS_READY_TO_PRINT,   Rho.Printer.PRINTER_STATE_IS_PAPER_OUT];
     var requeststate_callbackValue = {};
     
     function requestStateCallback(args) {
@@ -848,9 +851,9 @@ describe('Printing Generic', function() {
     });
 
     // display PRINTER_STATUS_ERR_TIMEOUT when turned off the printer
-    describe ("Should get PRINTER_STATUS_ERR_TIMEOUT when trying to connect the turned off printer", function() {
+    describe ("Should get PRINTER_STATUS_ERROR when trying to connect the turned off printer", function() {
 
-        it ("Should get PRINTER_STATUS_ERR_TIMEOUT when using connect printer to a turned off printer", function() {
+        it ("Should get PRINTER_STATUS_ERROR when using connect printer to a turned off printer", function() {
             var thisprinter = null;
             var callresult = null;
 
@@ -858,7 +861,7 @@ describe('Printing Generic', function() {
 
             _result.waitToRunTest();
 
-            dispExpectedResult("Should get PRINTER_STATUS_ERR_TIMEOUT when using connect printer to a turned off printer");
+            dispExpectedResult("Should get PRINTER_STATUS_ERROR when using connect printer to a turned off printer");
 
              runs(function() {
                 expect(last_found_printer_id).toNotEqual(null);
@@ -869,7 +872,7 @@ describe('Printing Generic', function() {
 
             waitsFor(function() {
                 return callresult != null;
-            }, 'wait while disconnected', 5000);
+            }, 'wait while disconnected', 20000);
 
             runs(function() {
                 displayResult(jasmine.getEnv().currentSpec.description, callresult.toString());
@@ -878,7 +881,7 @@ describe('Printing Generic', function() {
             _result.waitForResponse();
         });
 
-        it ("Should get PRINTER_STATUS_ERR_TIMEOUT when using connectWithOptions printer to a turned off printer", function() {
+        it ("Should get PRINTER_STATUS_ERROR when using connectWithOptions printer to a turned off printer", function() {
             var thisprinter = null;
             var callresult = null;
 
@@ -886,7 +889,7 @@ describe('Printing Generic', function() {
 
             _result.waitToRunTest();
 
-            dispExpectedResult("Should get PRINTER_STATUS_ERR_TIMEOUT when using connectWithOptions printer to a turned off printer");
+            dispExpectedResult("Should get PRINTER_STATUS_ERROR when using connectWithOptions printer to a turned off printer");
 
              runs(function() {
                 expect(last_found_printer_id).toNotEqual(null);
@@ -899,7 +902,7 @@ describe('Printing Generic', function() {
 
             waitsFor(function() {
                 return callresult != null;
-            }, 'wait while disconnected', 5000);
+            }, 'wait while disconnected', 20000);
 
             runs(function() {
                 displayResult(jasmine.getEnv().currentSpec.description, callresult.toString());

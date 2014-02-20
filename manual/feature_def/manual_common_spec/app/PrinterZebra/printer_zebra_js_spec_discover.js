@@ -30,7 +30,7 @@ describe('Printer Zebra', function() {
         });
 
         runs(function() {
-            searchObject = runSearch({}, 15000);
+            searchObject = runSearch({}, 30000);
         });
 
         waitsFor(function() {
@@ -59,10 +59,11 @@ describe('Printer Zebra', function() {
 
         // generator for search
 
-        function generateSearchTest(description, searchParamaters, shouldFail) {
+        function generateSearchTest(description, searchParamaters) {
             it(description, function() {
                 var searchVals = {};
                 var searchObj = {}
+               var shouldFail = false;
                 runs(function() {
                     if (searchParamaters['printerType']) {
                         searchVals['printerType'] = Rho.Printer.PRINTER_TYPE_ZEBRA;
@@ -71,7 +72,7 @@ describe('Printer Zebra', function() {
                         searchVals['connectionType'] = $('#dev_conn_type').val();
                     }
                     if (searchParamaters['timeout']) {
-                        searchVals['timeout'] = 10000;
+                        searchVals['timeout'] = 10;
                     }
                     if (searchParamaters['devicePort']) {
                         searchVals['devicePort'] = $('#dev_port').val();
@@ -79,21 +80,25 @@ describe('Printer Zebra', function() {
                     if (searchParamaters['deviceAddress']) {
                         searchVals['deviceAddress'] = $('#dev_addr').val();
                     }
-                    searchObject = runSearch(searchVals, 15000);
+                     if (searchParamaters['shouldFailed']) {
+                        shouldFail = true;
+                     }
+                    searchObject = runSearch(searchVals, 35000);
                 });
 
                 waits(2000);
 
-                runs(function() {
+                //runs(function() {
                     // check if search was ended before printer discovery
-                    if (searchParamaters['timeout'] && !searchParamaters['deviceAddress'] && $('#dev_conn_type').val() != Rho.PrinterZebra.CONNECTION_TYPE_BLUETOOTH) {
-                        expect(searchObject.finished).toEqual(false);
-                    }
-                });
+                    //if (searchParamaters['timeout'] && !searchParamaters['deviceAddress'] && $('#dev_conn_type').val() != Rho.PrinterZebra.CONNECTION_TYPE_BLUETOOTH) {
+                    //if (searchParamaters['timeout']) {
+                    //    expect(searchObject.finished).toEqual(false);
+                    //}
+                //});
 
                 waitsFor(function() {
                     return searchObject.finished;
-                }, '20sec waiting for Search printer', 20000);
+                }, '40sec waiting for Search printer', 40000);
 
                 runs(function() {
                     displaySearchResults(searchVals, searchObject.printers, searchObject.errors);
@@ -101,7 +106,9 @@ describe('Printer Zebra', function() {
 
                 runs(function() {
                     if (shouldFail) {
-                        expect(searchObject.errors).toBeGreaterThan(0);
+                        expect(searchObject.errors).toEqual([]);
+                        expect(searchObject.printers.length).toEqual(0);
+                        //expect(searchObject.errors).toBeGreaterThan(0);
                     } else {
                         expect(searchObject.errors).toEqual([]);
                         expect(searchObject.printers.length).toBeGreaterThan(0);
@@ -121,16 +128,57 @@ describe('Printer Zebra', function() {
         };
 
         // test all the combinations
-        var combinations = makeAllCombinationsOfFileds(searchParamaters);
+        //var combinations = makeAllCombinationsOfFileds(searchParamaters);
+        var combinations = [
+                            {    'printerType': false,  'connectionType': false,    'timeout': false,   'devicePort': false,    'deviceAddress': false, 'shouldFailed': false},
+                            {    'printerType': false,  'connectionType': false,    'timeout': false,   'devicePort': false,    'deviceAddress': true,  'shouldFailed': false},
+                            {    'printerType': false,  'connectionType': false,    'timeout': false,   'devicePort': true,     'deviceAddress': false, 'shouldFailed': false},
+                            {    'printerType': false,  'connectionType': false,    'timeout': false,   'devicePort': true,     'deviceAddress': true,  'shouldFailed': false},
+                            {    'printerType': false,  'connectionType': false,    'timeout': true,    'devicePort': false,    'deviceAddress': false, 'shouldFailed': true},
+                            {    'printerType': false,  'connectionType': false,    'timeout': true,    'devicePort': false,    'deviceAddress': true,  'shouldFailed': true},
+                            {    'printerType': false,  'connectionType': false,    'timeout': true,    'devicePort': true,     'deviceAddress': false, 'shouldFailed': true},
+                            {    'printerType': false,  'connectionType': false,    'timeout': true,    'devicePort': true,     'deviceAddress': true,  'shouldFailed': true},
+                            {    'printerType': false,  'connectionType': true,     'timeout': false,   'devicePort': false,    'deviceAddress': false, 'shouldFailed': false},
+                            {    'printerType': false,  'connectionType': true,     'timeout': false,   'devicePort': false,    'deviceAddress': true,  'shouldFailed': false},
+                            {    'printerType': false,  'connectionType': true,     'timeout': false,   'devicePort': true,     'deviceAddress': false, 'shouldFailed': false},
+                            {    'printerType': false,  'connectionType': true,     'timeout': false,   'devicePort': true,     'deviceAddress': true,  'shouldFailed': false},
+                            {    'printerType': false,  'connectionType': true,     'timeout': true,    'devicePort': false,    'deviceAddress': false, 'shouldFailed': true},
+                            {    'printerType': false,  'connectionType': true,     'timeout': true,    'devicePort': false,    'deviceAddress': true,  'shouldFailed': true},
+                            {    'printerType': false,  'connectionType': true,     'timeout': true,    'devicePort': true,     'deviceAddress': false, 'shouldFailed': true},
+                            {    'printerType': false,  'connectionType': true,     'timeout': true,    'devicePort': true,     'deviceAddress': true,  'shouldFailed': true},
+                            {    'printerType': true,   'connectionType': false,    'timeout': false,   'devicePort': false,    'deviceAddress': false, 'shouldFailed': false},
+                            {    'printerType': true,   'connectionType': false,    'timeout': false,   'devicePort': false,    'deviceAddress': true,  'shouldFailed': false},
+                            {    'printerType': true,   'connectionType': false,    'timeout': false,   'devicePort': true,     'deviceAddress': false, 'shouldFailed': false},
+                            {    'printerType': true,   'connectionType': false,    'timeout': false,   'devicePort': true,     'deviceAddress': true,  'shouldFailed': false},
+                            {    'printerType': true,   'connectionType': false,    'timeout': true,    'devicePort': false,    'deviceAddress': false, 'shouldFailed': true},
+                            {    'printerType': true,   'connectionType': false,    'timeout': true,    'devicePort': false,    'deviceAddress': true,  'shouldFailed': true},
+                            {    'printerType': true,   'connectionType': false,    'timeout': true,    'devicePort': true,     'deviceAddress': false, 'shouldFailed': true},
+                            {    'printerType': true,   'connectionType': false,    'timeout': true,    'devicePort': true,     'deviceAddress': true,  'shouldFailed': true},
+                            {    'printerType': true,   'connectionType': true,     'timeout': false,   'devicePort': false,    'deviceAddress': false, 'shouldFailed': false},
+                            {    'printerType': true,   'connectionType': true,     'timeout': false,   'devicePort': false,    'deviceAddress': true,  'shouldFailed': false},
+                            {    'printerType': true,   'connectionType': true,     'timeout': false,   'devicePort': true,     'deviceAddress': false, 'shouldFailed': false},
+                            {    'printerType': true,   'connectionType': true,     'timeout': false,   'devicePort': true,     'deviceAddress': true,  'shouldFailed': false},
+                            {    'printerType': true,   'connectionType': true,     'timeout': true,    'devicePort': false,    'deviceAddress': false, 'shouldFailed': true},
+                            {    'printerType': true,   'connectionType': true,     'timeout': true,    'devicePort': false,    'deviceAddress': true,  'shouldFailed': true},
+                            {    'printerType': true,   'connectionType': true,     'timeout': true,    'devicePort': true,     'deviceAddress': false, 'shouldFailed': true},
+                            {    'printerType': true,   'connectionType': true,     'timeout': true,    'devicePort': true,     'deviceAddress': true,  'shouldFailed': true},
+             ];
 
         for (var i = 0; i < combinations.length; i++) {
             var obj = combinations[i];
             var keys = objkeys(obj);
             var description = '(default options)';
             if (keys.length > 0) {
-                description = '(with options ' + keys.join(', ') + ')';
+                //description = '(with options ' + keys.join(', ') + ')';
+                description = '(with options ';
+                for (var j = 0; j < keys.length; j++) {
+                    if (obj[keys[j]]) {
+                        description = description + keys[j] + ', ';
+                    }
+                }
+              description = description + ')';
             }
-            generateSearchTest(description, obj, false);
+            generateSearchTest(description, obj);
         }
 
     });

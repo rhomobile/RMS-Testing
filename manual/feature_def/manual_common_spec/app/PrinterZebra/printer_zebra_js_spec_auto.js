@@ -599,7 +599,7 @@ describe('Printer Zebra', function() {
              generateConnectWithParams(connectParams[0], 'without', true);
              generateConnectWithParams(connectParams[0], 'withcb', true);
              generateConnectWithParams(connectParams[0], 'anonymous', true);
-        if (Rho.System.platform != Rho.System.PLATFORM_ANDROID) {
+        //if (Rho.System.platform != Rho.System.PLATFORM_ANDROID) {
              
              
              generateConnectWithParams(connectParams[1], 'without', true);
@@ -617,7 +617,7 @@ describe('Printer Zebra', function() {
              generateConnectWithParams(connectParams[4], 'without', false);
              generateConnectWithParams(connectParams[4], 'withcb', false);
              generateConnectWithParams(connectParams[4], 'anonymous', false);
-        }
+        //}
     });
 
     function doRetrieveFileNames(filelist, callback_type) {
