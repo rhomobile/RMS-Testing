@@ -3,6 +3,9 @@
 */*/*/bin/
 */*/*/*/*/*/*/*/generated/
 */*/*/*/*/*/*/generated/
+*/*/*/*/*/generated/
+*/*/*/*/generated/
+
 rhosimulator/
 .idea
 /*/*/*/extensions/*/ext/platform/iphone/build/
