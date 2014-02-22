@@ -21,7 +21,7 @@ server_url.js
 TODO
 *.bak
 *.changes
-*.xml
+#*.xml
 *.sh
 sim-public*
 RhoLogSpec.txt
