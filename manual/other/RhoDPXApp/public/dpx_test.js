@@ -172,12 +172,12 @@ var dpx_tests = (function() {
         var dpx = Rho.DPX;
 
         var params = {
-
             'debug': false,
 
             'audioFeedback': false,
             'hapticFeedback': true,
             'ledFeedback': true,
+            'flashMode': 'off',
 
             'uiResultConfirmation': false,
             'processingTimeout': $('input.x-processing-timeout').val(),
