@@ -180,7 +180,7 @@ var dpx_tests = (function() {
             'ledFeedback': true,
 
             'uiResultConfirmation': false,
-            'processingTimeout': $('input.form-control.x-processing-timeout').val(),
+            'processingTimeout': $('input.x-processing-timeout').val(),
 
             'template': 'file://' + encodeURI(Rho.RhoFile.join(TEMPLATES_DIR, $('input.form-control.x-template').val()))
         };
