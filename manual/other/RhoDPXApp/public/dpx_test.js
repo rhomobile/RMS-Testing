@@ -169,7 +169,7 @@ var dpx_tests = (function() {
 
 
     var create_dpx = function() {
-        var dpx = new Rho.DPX();
+        var dpx = Rho.DPX;
 
         var params = {
 
@@ -180,6 +180,7 @@ var dpx_tests = (function() {
             'ledFeedback': true,
 
             'uiResultConfirmation': false,
+            'processingTimeout': $('input.form-control.x-processing-timeout').val(),
 
             'template': 'file://' + encodeURI(Rho.RhoFile.join(TEMPLATES_DIR, $('input.form-control.x-template').val()))
         };
@@ -244,8 +245,17 @@ var dpx_tests = (function() {
         }
     };
 
+    var fetch = function() {
+        try {
+            create_dpx().fetchTemplates('userName', 'password');
+        } catch (e) {
+            log('EXCEPTION ' + e);
+        }
+    };
+
     return {
         capture: capture,
+        fetch: fetch,
         open: open,
         start: start,
         close: close,

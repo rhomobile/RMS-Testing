@@ -25,7 +25,8 @@
 
 
         <div class="btn-group btn-group-justified">
-            <a type="button" class="btn btn-info" onClick="alert(Rho.DPX.version);">Get DPX version</a>
+            <a type="button" class="btn btn-info" onClick="alert(Rho.DPX.version);">DPX version</a>
+            <a type="button" class="btn btn-primary" onClick="dpx_tests.fetch();">fetch templates</a>
         </div>
 
         <div class="btn-group btn-group-justified">
@@ -39,7 +40,9 @@
                 </div>
                 <input type="text" class="form-control x-template" readonly="readonly" value="">
             </div>
-
+            <div class="input-group">
+                Processing timeout <input type="text" class="x-processing-timeout" value="10000"> ms
+            </div>
         </div>
 
         <div class="btn-group btn-group-justified">
