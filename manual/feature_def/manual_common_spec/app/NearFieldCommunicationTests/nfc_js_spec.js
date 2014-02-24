@@ -8,14 +8,11 @@ describe('Near Field Communication Tests', function () {
             spec.addExpectation("Property \"supported\" should return \"true\" if device supports NFC feature");
             spec.displayScenario();
             spec.waitForButtonPressing("Run test");
-            alert(1);
             runs(function () {
-                alert(2);
                 spec.addResult("Property \"supported\"", Rho.NFC.Adapter.supported);
                 spec.displayResults();
                 spec.waitForResponse();
             });
-            alert(3);
         });
 
         it("Property \"version\" should return version of the NFC engine", function () {
