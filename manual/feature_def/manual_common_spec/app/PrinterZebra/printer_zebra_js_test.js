@@ -101,7 +101,7 @@ function updatePrinterList(printers) {
         var printerType = printerInstance.printerType.replace('PRINTER_TYPE_', '');
         var connType = printerInstance.connectionType.replace('CONNECTION_TYPE_', '');
         var devName = printerType + '-' + connType + '@' + printerInstance.deviceAddress;
-        var pid = printerInstance.connectionType + '|' + printerInstance.deviceAddress + '|' + printerInstance.devicePort;
+        var pid = printerInstance.connectionType + '|' + printerInstance.deviceAddress + '|' + printerInstance.devicePort + '|' + printers[i];
 
         $('#dev_list').append($('<option>', {
             value: pid
