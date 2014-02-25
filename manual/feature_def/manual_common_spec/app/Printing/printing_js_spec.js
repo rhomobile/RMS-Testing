@@ -269,7 +269,7 @@ describe('Printing Generic', function() {
         }, 'wait until printingLabel', 20000);
 
         runs(function() {
-            //expect(callresult.status).toEqual(Rho.Printer.PRINTER_STATUS_SUCCESS);
+            displayResult(jasmine.getEnv().currentSpec.description, callresult.toString());
             callresult = null;
         });
 					
@@ -295,6 +295,11 @@ describe('Printing Generic', function() {
         waitsFor(function() {
             return;
         }, 'wait until printingFile', 30000);
+		
+		runs(function() {
+			displayResult(jasmine.getEnv().currentSpec.description, callresult.toString());
+            callresult = null;
+        });
 
 		_result.waitForResponse();
     }
@@ -308,6 +313,10 @@ describe('Printing Generic', function() {
         waitsFor(function() {
             return callresult !== null;
         }, 'wait until printingFile', 30000);
+		
+		runs(function() {
+			displayResult(jasmine.getEnv().currentSpec.description, callresult.toString());
+        });
 
         _result.waitForResponse();
     }
@@ -323,6 +332,10 @@ describe('Printing Generic', function() {
         waitsFor(function() {
             return callresult !== null;
         }, 'wait until printingFile', 30000);
+		
+		runs(function() {
+			displayResult(jasmine.getEnv().currentSpec.description, callresult.toString());
+        });
 
         _result.waitForResponse();
     }
@@ -336,6 +349,9 @@ describe('Printing Generic', function() {
         waitsFor(function() {
             return;
         }, 'wait until setting lable length', 15000);
+		runs(function() {
+			displayResult(jasmine.getEnv().currentSpec.description, callresult.toString());
+        });
     }
 
     function doPrintRawCommandCbk(cmd) {
@@ -347,6 +363,9 @@ describe('Printing Generic', function() {
         waitsFor(function() {
             return callresult !== null;
         }, 'wait until setting lable length', 15000);
+		runs(function() {
+			displayResult(jasmine.getEnv().currentSpec.description, callresult.toString());
+        });
     }
 
     function doPrintRawCommandAnonCbk(cmd) {
@@ -360,6 +379,9 @@ describe('Printing Generic', function() {
         waitsFor(function() {
             return callresult !== null;
         }, 'wait until setting lable length', 15000);
+		runs(function() {
+			displayResult(jasmine.getEnv().currentSpec.description, callresult.toString());
+        });
     }
 
 
@@ -432,7 +454,7 @@ describe('Printing Generic', function() {
         });
 
         //bmp
-        it('should print bmp without callback only in WM/CE devices', function() {
+        xit('should print bmp without callback only in WM/CE devices', function() {
 			dispTestCaseRunning(" 1. Should Print label <br />2. Should print bmp image.");
 			dispExpectedResult("should print bmp image file  in WM/CE devices and not in android or ios device");
 			//Common Method implemented to wait for tester to run the test.Code available in specHelper.js
@@ -442,7 +464,7 @@ describe('Printing Generic', function() {
             doPrintPrintFile(bmpimagepath_320px, {});
         });
 
-        it('should print bmp with callback only in WM/CE devices', function() {
+        xit('should print bmp with callback only in WM/CE devices', function() {
             dispTestCaseRunning(" 1. Should Print label <br />2. Should print bmp image.");
             dispExpectedResult("should print bmp image file  in WM/CE devices and not in android or ios device");
             //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
@@ -452,7 +474,7 @@ describe('Printing Generic', function() {
             doPrintPrintFileCbk(bmpimagepath_320px, {});
         });
 
-        it('should print bmp with anonymous function only in WM/CE devices', function() {
+        xit('should print bmp with anonymous function only in WM/CE devices', function() {
             dispTestCaseRunning(" 1. Should Print label <br />2. Should print bmp image.");
             dispExpectedResult("should print bmp image file in WM/CE devices and not in android or ios device");
             //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
@@ -792,7 +814,7 @@ describe('Printing Generic', function() {
     });
 
     // get and set default printer -- disabled bec its crashing the app as of now
-    xdescribe("Should print a raw string using the get default printer", function() {
+    describe("Should print a raw string using the get default printer", function() {
 		it("Should print a raw string using the get default printer", function() {
 			var thisprinter = null;
 			var printerObj = null;
