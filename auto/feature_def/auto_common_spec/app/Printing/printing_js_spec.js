@@ -733,10 +733,6 @@ describe('Printing Generic', function() {
     // Get Printer property & properties
     describe("Getting properties of the connected printer", function() {
         
-        it('should connect', function() {
-            doConnect();
-        });
-            
         var offIter = 0;
         var formats = [['connectionType', 'string'],['deviceAddress', 'string'],['ID', 'string'], ['deviceName', 'string'], ['printerType', 'string'], ['isConnected', 'boolean']];
         
@@ -747,22 +743,32 @@ describe('Printing Generic', function() {
             generategetproperties(property, type);
         }
         
-        if(thisprinter.getProperty("connectionType") != "CONNECTION_TYPE_BLUETOOTH") {
+       it('should connect', function() {
+                doConnect();
+            });
+
             it('Should return devicePort value as an integer', function () {
-                expect(thisprinter.devicePort).isNumberGreaterThenZero();
+				runs(function() {
+					if(thisprinter.getProperty("connectionType") != "CONNECTION_TYPE_BLUETOOTH") {
+						expect(thisprinter.devicePort).isNumberGreaterThenZero();
+					}
+				});
             });
 
             it('Should return devicePort value as an integer using get properties', function () {
-                var data = thisprinter.getProperties([devicePort]);    
-                expect(data).isNumberGreaterThenZero();
+				runs(function() {
+					if(thisprinter.getProperty("connectionType") != "CONNECTION_TYPE_BLUETOOTH") {
+						var data = thisprinter.getProperties(['devicePort']);    
+						expect(data).isNumberGreaterThenZero();
+					}
+				});
             });
-        }
 
     }); 
 
     
-    // get and set default printer -- disabled bec its crashing the app as of now
-    xdescribe("Get & Set default printer", function() {
+    // get and set default printer
+    describe("Get & Set default printer", function() {
         var thisprinter = null;
         var printerObj = null;
 
