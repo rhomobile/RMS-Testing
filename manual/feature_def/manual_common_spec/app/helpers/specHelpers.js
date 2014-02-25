@@ -121,8 +121,14 @@ var displayPrecondition = function(data){
         retData = retData + "</ul>";
         document.getElementById('preCondition').innerHTML = retData;
     }else{
-        document.getElementById('preCondition').innerHTML = " - ";
+        document.getElementById('preCondition').innerHTML = "";
     }
+}
+var dispVerificationStatus = function(data){
+    var node=document.createElement("li");
+    var textnode=document.createTextNode(data);
+    node.appendChild(textnode);
+    document.getElementById('verificationResult').appendChild(node);
 }
 var dispExpectedResult= function (data){
 	document.getElementById('expectedresult').innerHTML = data;
