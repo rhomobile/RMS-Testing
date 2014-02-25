@@ -1,7 +1,5 @@
-(function(){
-
-var preConditions = [];
-describe('NFC Adapter test cases : ', function(){
+describe('Near Field Communication test cases : ', function(){
+    var preConditions = [];
     beforeEach(function(){
         preConditions = [];
         document.getElementById("verificationResult").innerHTML = "";
@@ -1340,5 +1338,4 @@ describe('NFC Adapter test cases : ', function(){
          _result.waitForResponse();
     });
 });
-})();
  
