@@ -875,12 +875,14 @@ describe('Printer Zebra', function() {
         var deftext = ['Should return', property, 'value as a ', type];
         it(deftext.join(' '), function() {
             runs(function() {
+                var propertyVal = thisprinter.getProperty(property);
                 if (type == 'string') {
-                    expect(thisprinter.getProperty(property)).isNotEmptyString();
+                    expect(propertyVal).isNotEmptyString();
                 } else if (type == 'int') {
-                    expect(thisprinter.getProperty(property)).isNumberGreaterThenZero();
+                    var num = parseInt(propertyVal, 10);
+                    expect(num).isNumberGreaterThenZero();
                 } else if (type == 'isBoolean') {
-                    expect(thisprinter.getProperty(property)).isBoolean();
+                    expect(propertyVal).isBoolean();
                 }
             });
         });
@@ -892,12 +894,12 @@ describe('Printer Zebra', function() {
             runs(function() {
                 if (type == 'string') {
                     var data = thisprinter.getProperties([property]);
-                    data = JSON.stringify(data[property]);
+                    data = data[property];
                     expect(data).isNotEmptyString();
                 } else if (type == 'int') {
                     var data = thisprinter.getProperties([property]);
-                    data = parseInt(data[property], 10);
-                    expect(data).isNumberGreaterThenZero();
+                    var val = parseInt(data[property], 10);
+                    expect(val).isNumberGreaterThenZero();
                 } else if (type == 'isBoolean') {
                     var data = thisprinter.getProperties([property]);
                     expect(data.property).isBoolean();
@@ -921,10 +923,6 @@ describe('Printer Zebra', function() {
             ['deviceName', 'string'],
             ['printerType', 'string'],
             ['isConnected', 'boolean']
-            //['controlLanguage', 'string'], this properties is unsupported - see XML
-            //['maxTimeoutForRead', 'int'],
-            //['maxTimeoutForOpen', 'int'],
-            //['timeToWaitForMoreData', 'int']
         ];
         for (var i = 0; i < formats.length; i++) {
             var property = formats[i][0];
@@ -946,7 +944,8 @@ describe('Printer Zebra', function() {
             runs(function() {
                 if (thisprinter.getProperty("connectionType") != "CONNECTION_TYPE_BLUETOOTH") {
                     var data = thisprinter.getProperties(['devicePort']);
-                    expect(data).isNumberGreaterThenZero();
+                    var val = parseInt(data.devicePort, 10);
+                    expect(val).isNumberGreaterThenZero();
                 }
             });
         });
