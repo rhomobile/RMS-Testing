@@ -1,5 +1,5 @@
 require 'mspec'
-require 'local_server'
+require 'local_server' rescue nil
 
 class SpecRunner < MSpecScript
   def initialize
@@ -56,12 +56,14 @@ class SpecRunner < MSpecScript
     MSpec.process
 
     unless Rho::System.isRhoSimulator
-      postProps = Hash.new
-      postProps['url'] = "http://#{SPEC_LOCAL_SERVER_HOST}:#{SPEC_LOCAL_SERVER_PORT}?filename=#{File.basename(results_path)}"
-      contents = File.read(results_path)
-      postProps['body'] = contents
-      res = Rho::Network.post(postProps)
-      puts "Post #{File.basename(results_path)} to local server. Status: #{res['status']}"
+      if defined? SPEC_LOCAL_SERVER_HOST and defined? SPEC_LOCAL_SERVER_PORT
+        postProps = Hash.new
+        postProps['url'] = "http://#{SPEC_LOCAL_SERVER_HOST}:#{SPEC_LOCAL_SERVER_PORT}?filename=#{File.basename(results_path)}"
+        contents = File.read(results_path)
+        postProps['body'] = contents
+        res = Rho::Network.post(postProps)
+        puts "Post #{File.basename(results_path)} to local server. Status: #{res['status']}"
+      end
     end
 
     MSpec.exit_code

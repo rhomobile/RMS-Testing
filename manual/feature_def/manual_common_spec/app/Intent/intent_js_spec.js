@@ -497,7 +497,7 @@ describe('Intent_UseCases Functionality Test', function () {
                  });
             _result.waitForResponse();
             });
-         if(!isAndroidPlatform()){
+         if(!isWindowsMobileOrAndroidPlatform()){
          it('VT328_33 | uri - Launch Maps with pre-set lat and longitute values from test app by setting Uri "geo:latitude,longitude"', function () {
             displayObjective('VT328_32 | uri - Launch Maps with pre-set lat and longitute values from test app by setting Uri "geo:latitude,longitude"');
             var preConditions = ["Ensure maps application present in the device"];
@@ -730,9 +730,9 @@ describe('Intent_UseCases Functionality Test', function () {
             _result.waitToRunTest();
             runs(function(){
                 var data = 
-                {"EXTRA_EMAIL":"test@domain.com",
-                 "EXTRA_CC":"carbon.copy@domain.com",
-                 "EXTRA_BCC":"bcc.email@domain.com",
+                {"EXTRA_EMAIL":["test@domain.com"],
+                 "EXTRA_CC":["carbon.copy@domain.com"],
+                 "EXTRA_BCC":["bcc.email@domain.com"],
                  "EXTRA_SUBJECT":"Email Subject !",
                  "EXTRA_TEXT":"Email body content !"};
                 var params = new parameters(Rho.Intent.START_ACTIVITY,"","ACTION_SEND","","","","","text/plain",data);

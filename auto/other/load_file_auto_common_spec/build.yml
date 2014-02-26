@@ -4,7 +4,7 @@ paths:
 
 # Please use relative pathes
 
-  - ../../../../Motorola-Extensions/build/ci/extensions
+  - ../../../extensions
 #  - ../../../../Motorola-Extensions/lib/commonAPI
 #  - ../../../../rhoconnect-client/ext/
 

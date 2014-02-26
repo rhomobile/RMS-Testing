@@ -1,0 +1,19 @@
+
+<div class="toolbar">
+  <h1 id="pageTitle">
+    New ORM Specs
+  </h1>
+</div>
+
+<p>Press "Start" to begin!</p>
+
+<form id="start-test" method="GET" action="<%= url_for :action => :index %>">
+  <button type="submit">Start</button>
+</form>
+
+<script type='text/javascript'>
+  $("#start-test").submit(function(event) {
+    $('button').prop('disabled', true);
+    $('button').html('Running...');
+  });
+</script>
