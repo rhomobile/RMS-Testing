@@ -448,7 +448,9 @@ describe('Printing Generic', function() {
                 expect(thisprinter.isConnected).toEqual(false);
             });
             runs(function() {
-                thisprinter.printRawString(CommandZPL, cbk);
+                thisprinter.printRawString(CommandZPL, {}, function(val){
+                    callresult = val;
+                });
             });
 
             waitsFor(function() {
