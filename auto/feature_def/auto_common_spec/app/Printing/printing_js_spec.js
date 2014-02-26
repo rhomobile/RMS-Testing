@@ -467,12 +467,15 @@ describe('Printing Generic', function() {
             it('using connectWithOptions should just connect ' + case_type + ' callback params' + JSON.stringify(connectparams, null, " "), function() {
                 var thisprinter = null;
                 var callresult = null;
+                function cbkf(val) {
+                    callresult = val;
+                }
 
                 runs(function() {
                     expect(last_found_printer_id).toNotEqual(null);
                     thisprinter = Rho.Printer.getPrinterByID(last_found_printer_id);
                     callresult = null;
-                    thisprinter.disconnect(cbk);
+                    thisprinter.disconnect(cbkf);
                 });
 
                 waitsFor(function() {
@@ -490,7 +493,7 @@ describe('Printing Generic', function() {
                     if (case_type == 'without'){
                         callresult = thisprinter.connectWithOptions(connectparams);
                     } else if (case_type == 'withcallback') {
-                        thisprinter.connectWithOptions(connectparams, cbk);
+                        thisprinter.connectWithOptions(connectparams, cbkf);
                     } else if (case_type == 'anonymous') {
                         thisprinter.connectWithOptions(connectparams, function cbk(val) {
                             callresult = val;
@@ -571,7 +574,7 @@ describe('Printing Generic', function() {
         it('using result (without callback)', function() {
             runs(function() {
                 var languagesTypes = thisprinter.enumerateSupportedControlLanguages();
-                expect(languagesTypes).toContain(controlLangs);
+                expect(languagesTypes).toEqual(controlLangs);
             });
         });
         it('using callback', function() {
@@ -588,7 +591,7 @@ describe('Printing Generic', function() {
             }, 'Timed out waiting for testing callback', 2000);
             
             runs(function() {
-                expect(enumCb).toContain(controlLangs);
+                expect(enumCb).toEqual(controlLangs);
             });
         });
         it('using anonymous callback', function() {
@@ -596,14 +599,14 @@ describe('Printing Generic', function() {
 
             runs(function() {
                 thisprinter.enumerateSupportedControlLanguages(function(callbackValue){
-                        enumCb = callbackValue;
+                    enumCb = callbackValue;
                 });
             });
             waitsFor(function() {
                 return enumCb !== null;
             }, 'Timed out waiting for testing callback', 2000);
             runs(function() {
-                expect(enumCb).toContain(controlLangs);
+                expect(enumCb).toEqual(controlLangs);
             });
         });
     });
@@ -636,7 +639,7 @@ describe('Printing Generic', function() {
 
     // requestState methods
     var listofrequeststate = [Rho.Printer.PRINTER_STATE_IS_READY_TO_PRINT,    Rho.Printer.PRINTER_STATE_IS_COVER_OPENED, Rho.Printer.PRINTER_STATE_IS_DRAWER_OPENED, Rho.Printer.PRINTER_STATE_IS_PAPER_OUT, Rho.Printer.PRINTER_STATE_IS_BATTERY_LOW];
-    var requeststate_boolean = ["PRINTER_STATE_IS_READY_TO_PRINT", "   PRINTER_STATE_IS_COVER_OPENED", "PRINTER_STATE_IS_DRAWER_OPENED", "PRINTER_STATE_IS_PAPER_OUT", "PRINTER_STATE_IS_BATTERY_LOW"];
+    var requeststate_boolean = ["PRINTER_STATE_IS_READY_TO_PRINT", "PRINTER_STATE_IS_COVER_OPENED", "PRINTER_STATE_IS_DRAWER_OPENED", "PRINTER_STATE_IS_PAPER_OUT", "PRINTER_STATE_IS_BATTERY_LOW"];
     var requeststate_callbackValue = {};
     function requestStateCallback(args) {
         if (args.status == Rho.Printer.PRINTER_STATUS_SUCCESS) {
@@ -799,10 +802,6 @@ describe('Printing Generic', function() {
         });
         
         it('calling zebra specific method should throw exception', function() {
-
-            runs(function() {
-                expect(callresult).toEqual(Rho.Printer.PRINTER_STATUS_SUCCESS);
-            });
 
             expect(function () {
                 thisprinter.retrieveFileNames(cbk);
