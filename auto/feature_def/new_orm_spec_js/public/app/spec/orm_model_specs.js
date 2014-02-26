@@ -748,7 +748,7 @@ if (useNewOrm) {
 } // end of useNewOrm
 
 if (useNewOrm) {
-  // The following specs n/a in Old ORM specs for fixed schema
+  // The following examples are n/a in Old ORM specs for fixed schema
   it("VT302-0222 | Call find with all and order by any column_name and orderdir as empty string",function() {
     model.create({"name":"Mobio"});
     model.create({"name":"Zoolo"});
@@ -870,7 +870,6 @@ if (useNewOrm) {
 
     for(var i in rows) {
       var row = rows[i];
-      console.log(row);
       if(row.attrib == 'brand') {
         expect(row.value).toEqual(attrs.brand);
       } else if (row.attrib == 'name') {
@@ -1180,8 +1179,7 @@ describe("Property Bag Models", function() {
   });
 
 if (useNewOrm) {
-  // The following specs n/a in Old ORM specs for property bag
-
+  // The following examples are n/a in Old ORM specs for property bag
   it('Should do full update for property bag if model enable :full_update', function() {
     var PBProduct = function(model) {
       model.setModelProperty("name","string", "");
@@ -1207,7 +1205,6 @@ if (useNewOrm) {
     expect(rows.length).toBeGreaterThan(1);
     for(var i in rows) {
       var row = rows[i];
-      console.log(row);
       if(row.attrib == 'brand') {
         expect(row.value).toEqual(attrs.brand);
       } else if (row.attrib == 'name') {
@@ -1221,8 +1218,6 @@ if (useNewOrm) {
       }
     }
   });
-
 }
-
 
 });
