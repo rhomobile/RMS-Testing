@@ -288,7 +288,7 @@ describe('Printing Generic', function() {
 
     function doPrintPrintFile(filename, options) {
         runs(function() {
-            //callresult = null;
+            callresult = null;
             thisprinter.printFile(filename, options);
         });
 
@@ -298,7 +298,6 @@ describe('Printing Generic', function() {
 		
 		runs(function() {
 			displayResult(jasmine.getEnv().currentSpec.description, callresult.toString());
-            callresult = null;
         });
 
 		_result.waitForResponse();
@@ -342,7 +341,7 @@ describe('Printing Generic', function() {
 
     function doPrintRawCommand(cmd) {
         runs(function() {
-            //callresult = null;
+            callresult = null;
             thisprinter.printRawString(cmd, {});
         });
 
@@ -464,7 +463,7 @@ describe('Printing Generic', function() {
             doPrintPrintFile(bmpimagepath_320px, {});
         });
 
-        xit('should print bmp with callback only in WM/CE devices', function() {
+        it('should print bmp with callback only in WM/CE devices', function() {
             dispTestCaseRunning(" 1. Should Print label <br />2. Should print bmp image.");
             dispExpectedResult("should print bmp image file  in WM/CE devices and not in android or ios device");
             //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
