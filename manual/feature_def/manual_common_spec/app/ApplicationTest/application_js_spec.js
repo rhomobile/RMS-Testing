@@ -1,8 +1,8 @@
-describe("Application Module Test Starts Here", function () {
+describe("Application manual specs", function () {
 
-    it("Property \"appBundleFolder\"", function () {
+    it("Property \"appBundleFolder\" should return path to folder of application bundle", function () {
         var spec = new ManualSpec(jasmine, window.document);
-        spec.addGoal("Property \"appBundleFolder\" should return path to folder of application bundle");
+        spec.addGoal(jasmine.getEnv().currentSpec.description);
         spec.addExpectation("String ends with \"path/manual_common_spec/app\"");
         spec.displayScenario();
         runs(function () {

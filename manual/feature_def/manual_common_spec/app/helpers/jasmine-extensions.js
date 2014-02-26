@@ -26,6 +26,9 @@ beforeEach(function() {
             return (typeOk) && (this.actual > 0);
         },
         isBoolean: function() {
+            this.message = function() {
+                return "Expected " + (typeof this.actual) + " to be a boolean";
+            };
             return (typeof this.actual) == 'boolean';
         }
     });

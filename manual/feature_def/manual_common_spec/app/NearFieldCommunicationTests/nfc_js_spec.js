@@ -184,6 +184,36 @@ describe('Near Field Communication Tests', function () {
         });
 
 
+        it("Pairing devices via Bluetooth", function () {
+
+            var spec = new ManualSpec(jasmine, window.document);
+            spec.addGoal("Check connection to a bluetooth device to obtain device properties");
+            spec.addPrecondition("Another bluetooth device");
+            spec.addStep("Set bluetooth password as \"123456\"");
+            spec.addStep("Set bluetooth password as \"123456\"");
+            spec.addStep("Place both devices close");
+            spec.addExpectation("It should display name and MAC address of pairing device");
+            spec.displayScenario();
+            spec.waitForButtonPressing("Run test");
+            var flag;
+            runs(function () {
+                flag = false;
+                Rho.NFC.btConnect(function (object) {
+                    spec.addResult('Device name', object.btName);
+                    spec.addResult('Device MAC address', object.btAddress);
+                    flag = true;
+            });
+
+            waitsFor(function () {
+                return flag;
+            }, "WaitsFor timeout", 20000);
+
+            runs(function () {
+                spec.displayResults();
+                spec.waitForResponse();
+            });
+        });
+
         it('Tag reading', function () {
             var flag;
             var spec = new ManualSpec(jasmine, window.document);
