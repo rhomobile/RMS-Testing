@@ -1284,6 +1284,7 @@ describe("Signature Manual Test", function () {
             });             
         });
 
+        /* test not correct - see Signature doc. Inline capture and fullScreen capturework with different capture area and inline signature functions do not effect to fullScreen mode !
         it("VT299-032 | Call takeFullScreen and then call hide and then call takeFullScreen again |", function () {
 
             runs(function () {
@@ -1388,6 +1389,7 @@ describe("Signature Manual Test", function () {
                 });
             });
         });
+        */
 
         it("VT299-034 | Call show and minimize |", function () {
 
