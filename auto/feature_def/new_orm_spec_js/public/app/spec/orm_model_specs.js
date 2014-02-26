@@ -834,6 +834,57 @@ if (useNewOrm) {
     expect(found[4].get("name")).toEqual('Acme_24');
   });
 
+  it('Should do full update for fixed schema if model enable :full_update', function() {
+    var FsProduct = function(model) {
+      model.fixed_schema = true;
+      model.setProperty('schema_version','1.0');
+
+      model.setModelProperty("name","string", "");
+      model.setModelProperty("brand","string", "");
+      model.setModelProperty("price","string", "");
+      model.setModelProperty("quantity","string", "");
+      model.setModelProperty("sku","string", "");
+
+      model.enable("sync");
+      model.enable("full_update");
+    };
+
+    var model = Rho.ORM.addModel('FsProduct', FsProduct);
+    var attrs = { "brand":"Samsung", "name":'Galaxy S4', "price": "$99.99", "quantity":"20" };
+    var galaxy_phone = model.create(attrs);
+    var db = Rho.ORMHelper.dbConnection("user");
+    var res = db.executeSql("DELETE FROM CHANGED_VALUES");
+
+    var gp = model.find(galaxy_phone.object)
+    gp.updateAttributes({name: "Galaxy S5"});
+    var rows = db.executeSql("select * from CHANGED_VALUES");
+    // console.log(JSON.stringify(rows));
+    /*
+     [{"attrib":"brand","attrib_type":"","object":"3743762664","sent":"0","source_id":"1","update_type":"update","value":"Samsung"},
+      {"attrib":"name","attrib_type":"","object":"3743762664","sent":"0","source_id":"1","update_type":"update","value":"Galaxy S5"},
+      {"attrib":"price","attrib_type":"","object":"3743762664","sent":"0","source_id":"1","update_type":"update","value":"$99.99"},
+      {"attrib":"quantity","attrib_type":"","object":"3743762664","sent":"0","source_id":"1","update_type":"update","value":"20"},
+      {"attrib":"sku","attrib_type":"","object":"3743762664","sent":"0","source_id":"1","update_type":"update","value":""}]
+    */
+    expect(rows.length).toBeGreaterThan(1);
+
+    for(var i in rows) {
+      var row = rows[i];
+      console.log(row);
+      if(row.attrib == 'brand') {
+        expect(row.value).toEqual(attrs.brand);
+      } else if (row.attrib == 'name') {
+        expect(row.value).toEqual("Galaxy S5");
+      } else if (row.attrib == 'price') {
+        expect(row.value).toEqual(attrs.price);
+      } else if (row.attrib == 'quantity') {
+        expect(row.value).toEqual(attrs.quantity);
+      } else {
+        expect(row.update_type).toEqual('update');
+      }
+    }
+  });
+
 } // end of useNewOrm
 
 });
@@ -1127,5 +1178,51 @@ describe("Property Bag Models", function() {
       expect(res).toEqual([]);
     };
   });
+
+if (useNewOrm) {
+  // The following specs n/a in Old ORM specs for property bag
+
+  it('Should do full update for property bag if model enable :full_update', function() {
+    var PBProduct = function(model) {
+      model.setModelProperty("name","string", "");
+      model.setModelProperty("brand","string", "");
+      model.setModelProperty("price","string", "");
+      model.setModelProperty("quantity","string", "");
+      model.setModelProperty("sku","string", "");
+
+      model.enable("sync");
+      model.enable("full_update");
+    };
+
+    var model = Rho.ORM.addModel('PBProduct', PBProduct);
+    var attrs = { "brand":"Samsung", "name":'Galaxy S4', "price": "$99.99", "quantity":"20" };
+    var galaxy_phone = model.create(attrs);
+    var db = Rho.ORMHelper.dbConnection("user");
+    var res = db.executeSql("DELETE FROM CHANGED_VALUES");
+
+    var gp = model.find(galaxy_phone.object)
+    gp.updateAttributes({name: "Galaxy S5"});
+    var rows = db.executeSql("select * from CHANGED_VALUES");
+
+    expect(rows.length).toBeGreaterThan(1);
+    for(var i in rows) {
+      var row = rows[i];
+      console.log(row);
+      if(row.attrib == 'brand') {
+        expect(row.value).toEqual(attrs.brand);
+      } else if (row.attrib == 'name') {
+        expect(row.value).toEqual("Galaxy S5");
+      } else if (row.attrib == 'price') {
+        expect(row.value).toEqual(attrs.price);
+      } else if (row.attrib == 'quantity') {
+        expect(row.value).toEqual(attrs.quantity);
+      } else {
+        expect(row.update_type).toEqual('update');
+      }
+    }
+  });
+
+}
+
 
 });
