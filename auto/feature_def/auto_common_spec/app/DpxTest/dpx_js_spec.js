@@ -1,5 +1,29 @@
 describe('Rho.DPX APIs Set Test', function() {
 
+var failCaptureDocument = function(expectedFailureReason) {
+    var stopped = false;
+    var failureReason;
+
+    runs(function() {
+        Rho.DPX.captureDocument(function(dict) {
+            if (dict['callbackType'] === Rho.DPX.FAILURE) {
+                failureReason = dict['failureReason'];
+            }
+            if (dict['callbackType'] === Rho.DPX.STOP) {
+                stopped = true;
+            }
+        });
+    });
+
+    waitsFor(function() {
+        return stopped;
+    }, 'the capture to complete', 5000);
+
+    runs(function() {
+        expect(failureReason).toEqual(expectedFailureReason);
+    });
+};
+
 var dpxInstance = Rho.DPX;
 
 afterEach(function () {
@@ -503,5 +527,10 @@ describe('Setting uiResultConfirmation', function() {
 		});
 });
 
+
+    it('Nonexistent template URI', function() {
+        Rho.DPX.template = 'file:///nonexistent.xml';
+        failCaptureDocument('error: Can not read template.');
+    });
 
 });
