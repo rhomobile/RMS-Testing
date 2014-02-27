@@ -423,22 +423,6 @@ describe('DPX Functionality Test', function() {
     });
 
 
-    it('Objective:\nDocument capture with flashMode  property set to invalid value\n', function() {
-        dispTestCaseRunning('1. Set template property to path of template.xml has region of  picture\n/sdcard/Application/template.xml\n2.Set flashMode to flash\n3. Call captureDocument method Capture a document by taking a photo\n');
-        dispExpectedResult('Shold not get the flash at the time of capturing the photo and captured document should get  proceessed successfully callback fired once for each field defined in the template');
-        //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
-        _result.waitToRunTest();
-        runs(function() {
-                Rho.DPX.inputSource = Rho.DPX.SOURCE_CAMERA;
-                Rho.DPX.flashMode = 'invalid';
-                Rho.DPX.template = Rho.RhoFile.join(Rho.Application.AppBundleFolder, 'picture.xml');
-                Rho.DPX.captureDocument(captureCallback);
-        });
-        //Add more waitsfor or run blocks if required.
-        //Common Method implemented to wait for tester to make it pass or fail.Code available in specHelper.js
-        _result.waitForResponse();
-    });
-
     it('Objective:\nDocument capture with identificationTimeout  property set to -10000 (-10 second)\n\n', function() {
         dispTestCaseRunning('1. Set template property to path of template.xml has region of  picture\n/sdcard/Application/template.xml\n2.Set inputSource to camera\n3.Set identificationTimeout to -10000\n4. Call captureDocument method Capture a document by taking a photo using camera\n');
         dispExpectedResult('Callack should return identification timout(FAILURE_IDENTIFICATION_TIMEOUT)\nwhen not able to capture the photo within -10 seconds');

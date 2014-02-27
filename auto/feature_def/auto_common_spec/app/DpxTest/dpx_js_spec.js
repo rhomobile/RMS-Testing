@@ -528,6 +528,12 @@ describe('Setting uiResultConfirmation', function() {
 });
 
 
+    it('flashMode invalid value', function() {
+        Rho.DPX.template = 'file:///sdcard/templates/Logistics%20Post.xml';
+        Rho.DPX.flashMode = 'invalid';
+        failCaptureDocument("error: Invalid value 'invalid' for flashMode property.");
+    });
+
     it('Nonexistent template URI', function() {
         Rho.DPX.template = 'file:///nonexistent.xml';
         failCaptureDocument('error: Can not read template.');
