@@ -773,24 +773,31 @@ describe('Printing Generic', function() {
     
     // get and set default printer
     describe("Get & Set default printer", function() {
-        var thisprinter = null;
         var printerObj = null;
 
-        it('get default printer', function() {
-            runs(function() {
-                thisprinter = Rho.Printer.getDefault();
-                expect(thisprinter).toEqual('printer');
-            });
-        });
-
-        it('set default printer', function() {
+        it('there is an instance of a printer', function() {
             runs(function() {
                 expect(last_found_printer_id).toNotEqual(null);
                 printerObj = Rho.Printer.getPrinterByID(last_found_printer_id);
                 Rho.Printer.setDefault(printerObj);
-                expect(Rho.Printer.getDefault()).toEqual(printerObj);
             });
         });
+
+        it('get default Printer', function() {
+            runs(function() {
+                thisprinter = Rho.Printer.getDefault();
+                expect(thisprinter.ID).toNotEqual(null);
+            });
+        });
+
+        it('set default Printer', function() {
+            runs(function() {
+                Rho.Printer.setDefault(printerObj);
+                var defPrinter = Rho.Printer.getDefault();
+                expect(defPrinter.ID).toEqual(printerObj.ID);
+            });
+        });
+
 
     });
 
