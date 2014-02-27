@@ -119,21 +119,23 @@ describe('Printer Zebra', function() {
     var invalidfilepath = 'ZA://flder';
 
 
-    var zplformatpath = 'e:zplformat.zpl';
+    //var zplformatpath = 'e:zplformat.zpl';
     var hashzpl = {
-        0: 'val1',
-        5: 'val2',
-        1: 'val3',
-        25: 'val4',
-        100: 'val5'
+        '1': 'val1',
+        '2': 'val2',
+        '3': 'val3',
+        '4': 'val4',
+        '5': 'val5',
+        '6': 'val6'
     };
-    var ccplformatpath = 'e:ccplformat.ccpl';
+    //var ccplformatpath = 'e:ccplformat.ccpl';
     var hashccpl = {
-        0: 'val1',
-        1: 'val3',
-        5: 'val2',
-        25: 'val4',
-        100: 'val5'
+        '1': 'val1',
+        '2': 'val2',
+        '3': 'val3',
+        '4': 'val4',
+        '5': 'val5',
+        '6': 'val6'
     };
     var invalidformatpath = 'bg:ccplformat.invalid';
     // hash should be parseable by javascript
@@ -143,8 +145,8 @@ describe('Printer Zebra', function() {
         2211: 'val1',
         '3355sasa': 'val1'
     };
-    var arrayzpl = [0, 1, 10, 5, 20];
-    var arrayccpl = [0, 1, 2, 3, 4, 5, 6];
+    var arrayzpl = ['val2', 'val1', 'val3', 'val4', 'val5', 'val6'];
+    var arrayccpl = ['val1', 'val2', 'val3', 'val4', 'val5', 'val6'];
 
     function displaySearchResults(paramaters, display_printers, display_errors) {
         var query = {
@@ -1064,8 +1066,8 @@ describe('Printer Zebra', function() {
             doConnect();
         });
 
-        var zplstoredformat = '^XA^DFFORMAT^FS^LH30,30^FO20,10^AF^FN1^FS^FO20,60^B3,,40,,^FN2^FS^FO20,120^AF^FN3^FS^FO20,180^AF^FN4^FS^FO20,240^AF^FN5^FS^FO20,300^AF^FN6^FS^XZ';
-        var ccplstoredformat = "! DF FORMAT.FMT\n" +
+        var zplstoredformat = '^XA^DFE:FORMAT.ZPL^FS^LH30,30^FO20,10^AF^FN1^FS^FO20,60^B3,,40,,^FN2^FS^FO20,120^AF^FN3^FS^FO20,180^AF^FN4^FS^FO20,240^AF^FN5^FS^FO20,300^AF^FN6^FS^XZ';
+        var ccplstoredformat = "! DF E:FORMATAS.FMT\n" +
             "! 0 200 200 310 1\n" +
             "CENTER\n" +
             "TEXT 4 1 0 50 RECEIPT\n" +
@@ -1074,13 +1076,14 @@ describe('Printer Zebra', function() {
             "TEXT 4 0 0 250 \\\\\n" +
             "FORM\n" +
             "PRINT\n";
+             
         doprintStoredFormatWithHash(zplstoredformat, 'E:FORMAT.ZPL', hashzpl, 'with', "ZPL Language");
         doprintStoredFormatWithHash(zplstoredformat, 'E:FORMAT.ZPL', hashzpl, 'without', "ZPL Language");
         doprintStoredFormatWithHash(zplstoredformat, 'E:FORMAT.ZPL', hashzpl, 'Anonymous', "ZPL Language");
 
-        doprintStoredFormatWithHash(ccplstoredformat, 'E:FORMAT.FMT', hashccpl, 'with', "CCPL Language");
-        doprintStoredFormatWithHash(ccplstoredformat, 'E:FORMAT.FMT', hashccpl, 'without', "CCPL Language");
-        doprintStoredFormatWithHash(ccplstoredformat, 'E:FORMAT.FMT', hashccpl, 'Anonymous', "CCPL Language");
+        doprintStoredFormatWithHash(ccplstoredformat, 'E:FORMATAS.FMT', hashccpl, 'with', "CCPL Language");
+        doprintStoredFormatWithHash(ccplstoredformat, 'E:FORMATAS.FMT', hashccpl, 'without', "CCPL Language");
+        doprintStoredFormatWithHash(ccplstoredformat, 'E:FORMATAS.FMT', hashccpl, 'Anonymous', "CCPL Language");
 
         doprintStoredFormatWithHash(invalidformatpath, 'E:FORMAT.ZPL', invalidzplhash, 'with', "invalid");
 
@@ -1146,8 +1149,8 @@ describe('Printer Zebra', function() {
         it('should connect', function() {
             doConnect();
         });
-        var zplstoredformat = '^XA^DFFORMAT^FS^LH30,30^FO20,10^AF^FN1^FS^FO20,60^B3,,40,,^FN2^FS^FO20,120^AF^FN3^FS^FO20,180^AF^FN4^FS^FO20,240^AF^FN5^FS^FO20,300^AF^FN6^FS^XZ';
-        var ccplstoredformat = "! DF FORMAT.FMT\n" +
+        var zplstoredformat = '^XA^DFE:FORMAT.ZPL^FS^LH30,30^FO20,10^AF^FN1^FS^FO20,60^B3,,40,,^FN2^FS^FO20,120^AF^FN3^FS^FO20,180^AF^FN4^FS^FO20,240^AF^FN5^FS^FO20,300^AF^FN6^FS^XZ';
+        var ccplstoredformat = "! DF E:FORMATAS.FMT\n" +
             "! 0 200 200 310 1\n" +
             "CENTER\n" +
             "TEXT 4 1 0 50 RECEIPT\n" +
@@ -1157,15 +1160,15 @@ describe('Printer Zebra', function() {
             "FORM\n" +
             "PRINT\n";
 
-        doPrintRawCommand(zplstoredformat);
-        doPrintRawCommand(ccplstoredformat);
+        //doPrintRawCommand(zplstoredformat);
+        //doPrintRawCommand(ccplstoredformat);
         doprintStoredFormatWithArray(zplstoredformat, 'E:FORMAT.ZPL', arrayzpl, 'with', "ZPL Language");
         doprintStoredFormatWithArray(zplstoredformat, 'E:FORMAT.ZPL', arrayzpl, 'without', "ZPL Language");
         doprintStoredFormatWithArray(zplstoredformat, 'E:FORMAT.ZPL', arrayzpl, 'Anonymous', "ZPL Language");
 
-        doprintStoredFormatWithArray(ccplstoredformat, 'E:FORMAT.FMT', arrayccpl, 'with', "CCPL Language");
-        doprintStoredFormatWithArray(ccplstoredformat, 'E:FORMAT.FMT', arrayccpl, 'without', "CCPL Language");
-        doprintStoredFormatWithArray(ccplstoredformat, 'E:FORMAT.FMT', arrayccpl, 'Anonymous', "CCPL Language");
+        doprintStoredFormatWithArray(ccplstoredformat, 'E:FORMATAS.FMT', arrayccpl, 'with', "CCPL Language");
+        doprintStoredFormatWithArray(ccplstoredformat, 'E:FORMATAS.FMT', arrayccpl, 'without', "CCPL Language");
+        doprintStoredFormatWithArray(ccplstoredformat, 'E:FORMATAS.FMT', arrayccpl, 'Anonymous', "CCPL Language");
 
         doprintStoredFormatWithArray(invalidformatpath, 'E:FORMAT.ZPL', invalidzplhash, 'with', "invalid");
 
