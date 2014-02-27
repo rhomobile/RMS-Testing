@@ -83,15 +83,19 @@ describe('DPX Functionality Test', function() {
         Rho.DPX.uiResultConfirmation = false;
         Rho.DPX.audioFeedback = false;
 
+        var regions;
+
         runsCaptureDocument(Rho.DPX.SUCCESS, function(dict) {
-            // displayResult('Output: ', pprint(dict));
-            var regions = dict['processedForm']['regions'];
+            regions = dict['processedForm']['regions'];
+        });
+
+        runs(function() {
+            _result.passed();
+
             expect(regions[0]['processingMode']).toEqual(Rho.DPX.PM_BARCODE);
             expect(regions[1]['processingMode']).toEqual(Rho.DPX.PM_OMR);
             expect(regions[2]['processingMode']).toEqual(Rho.DPX.PM_OCR);
             expect(regions[5]['processingMode']).toEqual(Rho.DPX.PM_PICTURE);
-
-            _result.passed();
         });
 
         _result.waitForResponse();
