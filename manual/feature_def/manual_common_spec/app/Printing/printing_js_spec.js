@@ -304,8 +304,11 @@ describe('Printing Generic', function() {
     }
 
     function doPrintPrintFileCbk(filename, options) {
+		var callresult = null;
+		function cbk(val) {
+			callresult = val;
+		}
         runs(function() {
-            callresult = null;
             thisprinter.printFile(filename, options, cbk);
         });
 
@@ -354,8 +357,11 @@ describe('Printing Generic', function() {
     }
 
     function doPrintRawCommandCbk(cmd) {
+		var callresult = null;
+		function cbk(val) {
+			callresult = val;
+		}
         runs(function() {
-            callresult = null;
             thisprinter.printRawString(cmd, {}, cbk);
         });
 
@@ -638,8 +644,12 @@ describe('Printing Generic', function() {
 			_result.waitToRunTest();
             doPrintTestLabel();
 
+			var callresult = null;
+			function cbk(val) {
+				callresult = val;
+			}
+		
             runs(function() {
-                callresult = null;
                 thisprinter.printImageFromFile(from,x,y,options,cbk);
             });
 
@@ -877,7 +887,9 @@ describe('Printing Generic', function() {
         it ("Should get PRINTER_STATUS_ERROR when using connect printer to a turned off printer", function() {
             var thisprinter = null;
             var callresult = null;
-
+			function cbk(val) {
+                callresult = val;
+            }
             dispTestCaseRunning("Turn off the Printer and then click on Run Test");
 
             _result.waitToRunTest();
@@ -918,7 +930,11 @@ describe('Printing Generic', function() {
                 callresult = null;
                 thisprinter.connectWithOptions({
                     "timeout": 0
-                });
+                }, 
+				function(val){
+                    callresult = val;
+                }
+				);
             });
 
             waitsFor(function() {

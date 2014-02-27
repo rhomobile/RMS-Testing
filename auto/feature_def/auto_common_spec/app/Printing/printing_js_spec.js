@@ -263,7 +263,7 @@ describe('Printing Generic', function() {
 
                 waitsFor(function() {
                     return discovery_finished;
-                }, '20sec waiting for Search printer', 20000);
+                }, '20sec waiting for Search printer', 40000);
 
                 // runs(function() {
                 //     displaySearchResults(searchVals, printers_array, printers_errors);
@@ -459,7 +459,7 @@ describe('Printing Generic', function() {
             }, 'wait.. trying to print..', 15000);
 
             runs(function() {
-                expect(callresult).toEqual(Rho.Printer.PRINTER_STATUS_ERROR);
+                expect(callresult.status).toEqual(Rho.Printer.PRINTER_STATUS_ERROR);
             });
         });
 
@@ -483,7 +483,7 @@ describe('Printing Generic', function() {
 
                 waitsFor(function() {
                     return callresult != null;
-                }, 'wait until disconnected', 5000);
+                }, 'wait until disconnected', 10000);
 
                 runs(function() {
                     expect(callresult).toEqual(Rho.Printer.PRINTER_STATUS_SUCCESS);
@@ -506,7 +506,7 @@ describe('Printing Generic', function() {
 
                 waitsFor(function() {
                     return callresult != null;
-                }, 'wait while connecting', 5000);
+                }, 'wait while connecting', 50000);
 
                 runs(function() {
                     expect(callresult).toEqual(Rho.Printer.PRINTER_STATUS_SUCCESS);
