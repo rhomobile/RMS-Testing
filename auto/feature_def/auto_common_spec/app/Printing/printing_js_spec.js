@@ -448,6 +448,7 @@ describe('Printing Generic', function() {
                 expect(thisprinter.isConnected).toEqual(false);
             });
             runs(function() {
+				callresult = null;
                 thisprinter.printRawString(CommandZPL, {}, function(val){
                     callresult = val;
                 });
