@@ -615,29 +615,27 @@ describe('Printing Generic', function() {
     });
 
     
-    // stopSearch method tests
-    describe('stopSearch method', function() {
-	
-        it("stopSearch Method", function () {
-            runs(function () {
-                // Let the printer be search first then use stop
-                callresult = null;
-                Rho.Printer.searchPrinters({}, searchPrinterCallback);
-                callresult = Rho.Printer.stopSearch();
+     // stopSearch method tests
+    if(!isWindowsMobilePlatform()) {
+
+        describe('stopSearch method', function() {
+            it("callback should not fire after calling stopSearch", function () {
+                runs(function () {
+                    // Let the printer be search first then use stop
+                    callresult = null;
+                    searchObject = runSearch({}, 60000);
+                    callresult = Rho.Printer.stopSearch();
+                });
+
+                waits(65000);
+
+                runs(function() {
+                    expect(searchObject.finished).toEqual(false);
+                });
+
             });
-
-            waitsFor(function () {
-                return callresult !== null
-            }, 'Stopping the Search Printers....', 5000);
-
-            runs(function() {
-                expect(printers_array).toEqual([]);
-                expect(callresult).toEqual(Rho.Printer.PRINTER_STATUS_SUCCESS);
-            });
-
         });
-		
-    });
+    }
 
 
     // requestState methods
