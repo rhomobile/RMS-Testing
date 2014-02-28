@@ -8,14 +8,11 @@ describe('Near Field Communication Tests', function () {
             spec.addExpectation("Property \"supported\" should return \"true\" if device supports NFC feature");
             spec.displayScenario();
             spec.waitForButtonPressing("Run test");
-            alert(1);
             runs(function () {
-                alert(2);
                 spec.addResult("Property \"supported\"", Rho.NFC.Adapter.supported);
                 spec.displayResults();
                 spec.waitForResponse();
             });
-            alert(3);
         });
 
         it("Property \"version\" should return version of the NFC engine", function () {
@@ -187,6 +184,35 @@ describe('Near Field Communication Tests', function () {
         });
 
 
+        it("Pairing devices via Bluetooth", function () {
+
+            var spec = new ManualSpec(jasmine, window.document);
+            spec.addGoal("Check connection to a bluetooth device to obtain device properties");
+            spec.addPrecondition("Another bluetooth device");
+            spec.addStep("Set bluetooth password as \"123456\"");
+            spec.addStep("Place both devices close");
+            spec.addExpectation("It should display name and MAC address of pairing device");
+            spec.displayScenario();
+            spec.waitForButtonPressing("Run test");
+            var flag;
+            runs(function () {
+                flag = false;
+                Rho.NFC.btConnect(function (object) {
+                    spec.addResult('Device name', object.btName);
+                    spec.addResult('Device MAC address', object.btAddress);
+                    flag = true;
+            });
+
+            waitsFor(function () {
+                return flag;
+            }, "WaitsFor timeout", 20000);
+
+            runs(function () {
+                spec.displayResults();
+                spec.waitForResponse();
+            });
+        });
+
         it('Tag reading', function () {
             var flag;
             var spec = new ManualSpec(jasmine, window.document);
@@ -247,7 +273,12 @@ describe('Near Field Communication Tests', function () {
                         try {
                             spec.addResult('Record.ID', record.ID);
                             spec.addResult('Record.tnf', record.tnf);
+                            spec.addResult('Record.recordId', record.recordId);
+                            spec.addResult('Record.type', record.type);
                             spec.addResult('Record.typeName', record.typeName);
+                            spec.addResult('Record.textLanguage', record.textLanguage);
+                            spec.addResult('Record.textCharEncoding', record.textCharEncoding);
+                            spec.addResult('Record.uriProtocol', record.uriProtocol);
                             spec.addResult('Record.payload', record.payload);
                         }
                         finally {
@@ -276,17 +307,16 @@ describe('Near Field Communication Tests', function () {
             var spec = new ManualSpec(jasmine, window.document);
             spec.addGoal("Check message writing");
             spec.addPrecondition("Smart tag");
-            spec.addStep('Press "Reading tag" button and touch tag to device');
             spec.addStep('Press "Writing tag" button and touch tag to device');
             spec.addStep('Press "Reading tag" button and touch tag to device');
             spec.addExpectation("Status should be OK and message information should be displayed");
             spec.displayScenario();
-            spec.waitForButtonPressing("Reading tag");
+            spec.waitForButtonPressing("Writing tag");
 
             var tagID;
 
             Rho.NFC.Adapter.setTagDetectionHandler([], function (anObject) {
-                tagID = anObject.tagID;
+                tagID = anObject["tagId"];
             });
 
             waitsFor(function () {
@@ -296,21 +326,22 @@ describe('Near Field Communication Tests', function () {
             runs(function () {
 
                 var tag = Rho.NFC.Tag.getTagById(tagID);
+                if(tag.isNdef == false) {tag.formatNDEF();}
                 var message = Rho.NFC.Message.create();
-                var record = Rho.NFC.Record.createText("en", "Some text");
+                var record = Rho.NFC.Record.create();
+                record.type = 1;
+                record.textLanguage = "en";
+                record.payload = "some text";
                 message.addRecord(record.ID);
-                tag.writeMessage(message.ID);
+                var messages;
+                messages[0] = message.ID;
+                tag.writeMessage(messages);
 
                 record.close();
                 message.close();
                 tag.close();
                 tagID = undefined;
-                spec.waitForButtonPressing("Writing tag");
             });
-
-            waitsFor(function () {
-                return tagID != undefined;
-            }, "WaitsFor timeout", 60000);
 
             runs(function () {
                 tagID = undefined;
@@ -318,16 +349,16 @@ describe('Near Field Communication Tests', function () {
                 var messageHandlerFlag;
                 Rho.NFC.Adapter.setMessageHandler(function (anObject) {
                     spec.addResult('Status', anObject.status);
-                    var message = Rho.NFC.Message.getMeessageById(anObject.messageID);
+                    var message = Rho.NFC.Message.getMessageById(anObject.messageID);
                     try {
                         spec.addResult('Message.ID', message.ID);
                         message.getRecords().forEach(function (each) {
                             var record = Rho.NFC.Record.getRecordById(each);
                             try {
                                 spec.addResult('Record.ID', record.ID);
-                                spec.addResult('Record.TNF', record.TNF);
+                                spec.addResult('Record.TNF', record.tnf);
                                 spec.addResult('Record.type', record.type);
-                                spec.addResult('Record.payloadAsString', record.getPayloadAsString());
+                                spec.addResult('Record.payload', record.payload);
                             }
                             finally {
                                 record.close();

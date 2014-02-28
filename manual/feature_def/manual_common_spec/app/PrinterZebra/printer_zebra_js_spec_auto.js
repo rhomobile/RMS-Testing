@@ -394,7 +394,7 @@ describe('Printer Zebra', function() {
                 expect(parseInt(thisprinter.devicePort, 10)).toEqual(parseInt($('#dev_port').val(), 10));
                 expect(thisprinter.deviceAddress).toEqual($('#dev_addr').val());
                 expect(thisprinter.connectionType).toEqual($('#dev_conn_type').val());
-                expect(thisprinter.isConnected).isNotEmptyString();
+                expect(thisprinter.isConnected.toString()).isNotEmptyString();
             });
         });
     });
@@ -875,12 +875,14 @@ describe('Printer Zebra', function() {
         var deftext = ['Should return', property, 'value as a ', type];
         it(deftext.join(' '), function() {
             runs(function() {
+                var propertyVal = thisprinter.getProperty(property);
                 if (type == 'string') {
-                    expect(thisprinter.getProperty(property)).isNotEmptyString();
+                    expect(propertyVal).isNotEmptyString();
                 } else if (type == 'int') {
-                    expect(thisprinter.getProperty(property)).isNumberGreaterThenZero();
+                    var num = parseInt(propertyVal, 10);
+                    expect(num).isNumberGreaterThenZero();
                 } else if (type == 'isBoolean') {
-                    expect(thisprinter.getProperty(property)).isBoolean();
+                    expect(propertyVal).isBoolean();
                 }
             });
         });
@@ -892,12 +894,12 @@ describe('Printer Zebra', function() {
             runs(function() {
                 if (type == 'string') {
                     var data = thisprinter.getProperties([property]);
-                    data = JSON.stringify(data[property]);
+                    data = data[property];
                     expect(data).isNotEmptyString();
                 } else if (type == 'int') {
                     var data = thisprinter.getProperties([property]);
-                    data = parseInt(data[property], 10);
-                    expect(data).isNumberGreaterThenZero();
+                    var val = parseInt(data[property], 10);
+                    expect(val).isNumberGreaterThenZero();
                 } else if (type == 'isBoolean') {
                     var data = thisprinter.getProperties([property]);
                     expect(data.property).isBoolean();
@@ -921,10 +923,6 @@ describe('Printer Zebra', function() {
             ['deviceName', 'string'],
             ['printerType', 'string'],
             ['isConnected', 'boolean']
-            //['controlLanguage', 'string'], this properties is unsupported - see XML
-            //['maxTimeoutForRead', 'int'],
-            //['maxTimeoutForOpen', 'int'],
-            //['timeToWaitForMoreData', 'int']
         ];
         for (var i = 0; i < formats.length; i++) {
             var property = formats[i][0];
@@ -946,7 +944,8 @@ describe('Printer Zebra', function() {
             runs(function() {
                 if (thisprinter.getProperty("connectionType") != "CONNECTION_TYPE_BLUETOOTH") {
                     var data = thisprinter.getProperties(['devicePort']);
-                    expect(data).isNumberGreaterThenZero();
+                    var val = parseInt(data.devicePort, 10);
+                    expect(val).isNumberGreaterThenZero();
                 }
             });
         });
@@ -1002,8 +1001,8 @@ describe('Printer Zebra', function() {
 
     //requestState method tests
     var listofrequeststate = [Rho.PrinterZebra.PRINTER_STATE_IS_HEAD_COLD, Rho.PrinterZebra.PRINTER_STATE_IS_HEAD_OPEN, Rho.PrinterZebra.PRINTER_STATE_IS_HEAD_TOO_HOT, Rho.PrinterZebra.PRINTER_STATE_IS_PARTIAL_FORMAT_IN_PROGRESS, Rho.PrinterZebra.PRINTER_STATE_IS_PAUSED, Rho.PrinterZebra.PRINTER_STATE_IS_RECEIVE_BUFFER_FULL, Rho.PrinterZebra.PRINTER_STATE_IS_RIBBON_OUT, Rho.PrinterZebra.PRINTER_STATE_LABEL_LENGTH_IN_DOTS, Rho.PrinterZebra.PRINTER_STATE_LABELS_REMAINING_IN_BATCH, Rho.PrinterZebra.PRINTER_STATE_NUMBER_OF_FORMATS_IN_RECEIVE_BUFFER, Rho.PrinterZebra.PRINTER_STATE_PRINT_MODE, Rho.PrinterZebra.PRINTER_STATE_IS_READY_TO_PRINT, Rho.PrinterZebra.PRINTER_STATE_IS_COVER_OPENED, Rho.PrinterZebra.PRINTER_STATE_IS_DRAWER_OPENED, Rho.PrinterZebra.PRINTER_STATE_IS_PAPER_OUT, Rho.PrinterZebra.PRINTER_STATE_IS_BATTERY_LOW];
-    var requeststate_boolean = ["PRINTER_STATE_IS_HEAD_COLD", "PRINTER_STATE_IS_HEAD_OPEN", "PRINTER_STATE_IS_HEAD_TOO_HOT", "PRINTER_STATE_IS_PARTIAL_FORMAT_IN_PROGRESS", "PRINTER_STATE_IS_PAUSED", "PRINTER_STATE_IS_RECEIVE_BUFFER_FULL", "PRINTER_STATE_IS_RIBBON_OUT", "PRINTER_STATE_LABELS_REMAINING_IN_BATCH", "PRINTER_STATE_IS_READY_TO_PRINT", "   PRINTER_STATE_IS_COVER_OPENED", "PRINTER_STATE_IS_DRAWER_OPENED", "PRINTER_STATE_IS_PAPER_OUT", "PRINTER_STATE_IS_BATTERY_LOW"];
-    var requeststate_int = ["PRINTER_STATE_LABEL_LENGTH_IN_DOTS", "PRINTER_STATE_NUMBER_OF_FORMATS_IN_RECEIVE_BUFFER"];
+    var requeststate_boolean = ["PRINTER_STATE_IS_HEAD_COLD", "PRINTER_STATE_IS_HEAD_OPEN", "PRINTER_STATE_IS_HEAD_TOO_HOT", "PRINTER_STATE_IS_PARTIAL_FORMAT_IN_PROGRESS", "PRINTER_STATE_IS_PAUSED", "PRINTER_STATE_IS_RECEIVE_BUFFER_FULL", "PRINTER_STATE_IS_RIBBON_OUT", "PRINTER_STATE_IS_READY_TO_PRINT", "PRINTER_STATE_IS_COVER_OPENED", "PRINTER_STATE_IS_DRAWER_OPENED", "PRINTER_STATE_IS_PAPER_OUT", "PRINTER_STATE_IS_BATTERY_LOW"];
+    var requeststate_int = ["PRINTER_STATE_LABEL_LENGTH_IN_DOTS", "PRINTER_STATE_LABELS_REMAINING_IN_BATCH", "PRINTER_STATE_NUMBER_OF_FORMATS_IN_RECEIVE_BUFFER"];
     var requeststate_printmode = ["PRINTER_STATE_PRINT_MODE"];
     var printmode_values = [Rho.PrinterZebra.PRINT_MODE_APPLICATOR, Rho.PrinterZebra.PRINT_MODE_CUTTER, Rho.PrinterZebra.PRINT_MODE_DELAYED_CUT, Rho.PrinterZebra.PRINT_MODE_KIOSK, Rho.PrinterZebra.PRINT_MODE_LINERLESS_PEEL, Rho.PrinterZebra.PRINT_MODE_LINERLESS_REWIND, Rho.PrinterZebra.PRINT_MODE_LINERLESS_REWIND, Rho.PrinterZebra.PRINT_MODE_PARTIAL_CUTTER, Rho.PrinterZebra.PRINT_MODE_PEEL_OFF, Rho.PrinterZebra.PRINT_MODE_REWIND, Rho.PrinterZebra.PRINT_MODE_RFID, Rho.PrinterZebra.PRINT_MODE_TEAR_OFF, Rho.PrinterZebra.PRINT_MODE_UNKNOWN];
     var requeststate_callbackValue = {};

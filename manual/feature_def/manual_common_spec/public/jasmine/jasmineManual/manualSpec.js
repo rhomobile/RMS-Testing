@@ -166,15 +166,15 @@ function ManualSpec(aJasmine, aDocument) {
     }
 
     instance.hasPreconditions = function () {
-        return this.goals.length != 0;
+        return this.preconditions.length != 0;
     }
 
     instance.hasSteps = function () {
-        return this.goals.length != 0;
+        return this.steps.length != 0;
     }
 
     instance.hasExpectations = function () {
-        return this.goals.length != 0;
+        return this.expectations.length != 0;
     }
 
     instance.displayGoals = function () {

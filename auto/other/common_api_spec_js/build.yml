@@ -3,6 +3,7 @@ paths:
   extensions:
   - ../common_api_spec/extensions/
   - ../../feature_def/auto_common_spec/extensions/
+  - ../../../extensions
 
 sdkversion: 3.3.2
 name: auto_common_spec_js

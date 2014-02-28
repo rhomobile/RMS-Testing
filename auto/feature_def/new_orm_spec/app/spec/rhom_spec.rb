@@ -121,4 +121,66 @@ describe "Rhom" do
     Customer.find(:count).should > 0
   end
 
+  it "should full update for fixed schema if model enable :full_update" do
+    attrs = { :brand => "Samsung", :name => 'Galaxy S4', :price => "$99.99", :quantity => "20" }
+    galaxy_phone = FixedSchemaProduct.create( attrs )
+
+    db = ::Rho::RHO.get_user_db
+    db.delete_all_from_table('changed_values')
+
+    update_attributes = {:name => "Galaxy S5"}
+    gp = FixedSchemaProduct.find(galaxy_phone.object)
+    gp.update_attributes(update_attributes)
+
+    rows = db.select_from_table('changed_values','*')
+    # puts rows.inspect
+
+    rows.size.should >= 4
+    rows.each do |row|
+      case row['attrib']
+      when 'brand'
+        row['value'].should == attrs[:brand]
+      when 'name'
+        row['value'].should == "Galaxy S5"
+      when 'price'
+        row['value'].should == attrs[:price]
+      when 'quantity'
+        row['value'].should == attrs[:quantity]
+      else
+        row["update_type"].should == "update"
+      end
+    end
+  end
+
+  it "should full update for property bag if model enable :full_update" do
+    attrs = { :brand => "Samsung", :name => 'Galaxy S4', :price => "$99.99", :quantity => "20" }
+    galaxy_phone = PropertyBagProduct.create( attrs )
+    gp = PropertyBagProduct.find(galaxy_phone.object)
+
+    db = ::Rho::RHO.get_user_db
+    db.delete_all_from_table('changed_values')
+
+    update_attributes = {:name => "Galaxy S5"}
+    gp.update_attributes(update_attributes)
+
+    rows = db.select_from_table('changed_values','*')
+    # puts rows.inspect
+
+    rows.size.should >= 4
+    rows.each do |row|
+      case row['attrib']
+      when 'brand'
+        row['value'].should == attrs[:brand]
+      when 'name'
+        row['value'].should == "Galaxy S5"
+      when 'price'
+        row['value'].should == attrs[:price]
+      when 'quantity'
+        row['value'].should == attrs[:quantity]
+      else
+        row["update_type"].should == "update"
+      end
+    end
+  end
+
 end

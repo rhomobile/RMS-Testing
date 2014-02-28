@@ -3,6 +3,9 @@
 */*/*/bin/
 */*/*/*/*/*/*/*/generated/
 */*/*/*/*/*/*/generated/
+*/*/*/*/*/generated/
+*/*/*/*/generated/
+
 rhosimulator/
 .idea
 /*/*/*/extensions/*/ext/platform/iphone/build/
@@ -18,7 +21,7 @@ server_url.js
 TODO
 *.bak
 *.changes
-*.xml
+#*.xml
 *.sh
 sim-public*
 RhoLogSpec.txt

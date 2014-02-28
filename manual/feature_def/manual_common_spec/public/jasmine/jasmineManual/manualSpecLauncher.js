@@ -39,7 +39,7 @@ function ManualSpecLauncher(aJasmine, aDocument) {
         if (container == null) {
             container = this.document.createElement('div');
             container.setAttribute('id', this.containerId);
-            container.setAttribute('style', 'border: 1px solid grey;');
+            container.setAttribute('class', 'container');
             this.body().insertBefore(container, this.body().firstChild);
         }
         return container;

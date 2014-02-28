@@ -209,6 +209,10 @@ var _result = {
 		_result.status = false;
 		_result.responded = true;
 	},
+    done: function(){
+        _result.status = true;
+        _result.responded = true;
+    },
 	reset: function(){
 		_result.status = undefined;
 		_result.responded = undefined;
@@ -221,6 +225,7 @@ var _result = {
             $('#fail').show();
         }
         $('#runtest').hide();
+        $('#done').hide();
 
     },
 	waitForResponse: function(){
@@ -244,6 +249,7 @@ var _result = {
         runs(function() {
             $('#pass').hide();
             $('#fail').hide();
+            $('#done').hide();
             $('#runtest').show();
             setTimeout(function() {
                 timeout = true;
@@ -256,6 +262,26 @@ var _result = {
 
         runs(function() {
             _result.responded = undefined;
+        });
+    },
+    waitUntilDone: function(){
+        runs(function() {
+            $('#pass').hide();
+            $('#fail').hide();
+            $('#done').show();
+            $('#runtest').hide();
+            setTimeout(function() {
+                timeout = true;
+            }, _result.time_to_wait);
+        });
+
+        waitsFor(function() {
+            return _result.responded;
+        }, 'waiting for user response', _result.time_to_wait+5000);
+
+        runs(function() {
+            _result.responded = undefined;
+             $('#done').hide();
         });
     },
     waitToRunAutoTest: function() {

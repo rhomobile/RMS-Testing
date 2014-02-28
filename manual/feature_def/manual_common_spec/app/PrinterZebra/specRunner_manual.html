@@ -43,6 +43,7 @@
     <script type="text/javascript" src="/public/jasmine/fileReporter.js"></script>
     <script type="text/javascript" src="/public/jasmine/jasmine.junit_reporter.js"></script>
     <script type="text/javascript" src="/public/api/rhoapi-modules.js"></script>
+    
 		<script type="text/javascript" src="../helpers/manualSpecLauncher.js"></script>
     <style>
     #detailsdiv {
@@ -197,6 +198,7 @@
     <input type="button" value="Run Test" onclick="_result.runTest();" id="runtest"/>
     <input type="button" value="Test Passed" onclick="_result.passed();" id="pass" />
     <input type="button" value="Test Failed" onclick="_result.failed();" id="fail" />
+    <input type="button" value="Done" onclick="_result.done();" id="done" />
 	<div id="actResult" style="display:none">init</div>
 	<br/><br/>
 	<ul id="myList">
@@ -210,5 +212,6 @@
     $('#oldpass').hide();
     $('#oldfail').hide();
     $('#runtest').hide();
+    $('#done').hide();
 </script>
 </html>

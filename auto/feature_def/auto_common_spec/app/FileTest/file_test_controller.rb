@@ -2,9 +2,8 @@ require 'rho/rhocontroller'
 require 'json'
 require 'helpers/application_helper'
 require 'helpers/browser_helper'
-require 'helpers/spec_helper'
 
-class FilelistController < Rho::RhoController
+class FileTestController < Rho::RhoController
 
   def openFile
       path = Rho::RhoFile.join(Rho::Application.userFolder, "testFile.txt")
@@ -22,7 +21,7 @@ class FilelistController < Rho::RhoController
   
   #Test methods below for - RMS 4.1 : [SPB] Fix File reading errors in Ruby 
   
-  def read_nonexistfile    
+  def read_nonexistfile  
     invalidpath = "/programFiles/Test/rholog.txt"
     temporaryDirectory = Rho::RhoFile.join(Rho::Application.userFolder, "temporaryDirectory")
     Rho::RhoFile.makeDir(temporaryDirectory)
