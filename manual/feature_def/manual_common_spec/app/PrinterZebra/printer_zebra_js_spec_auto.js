@@ -394,7 +394,7 @@ describe('Printer Zebra', function() {
                 expect(parseInt(thisprinter.devicePort, 10)).toEqual(parseInt($('#dev_port').val(), 10));
                 expect(thisprinter.deviceAddress).toEqual($('#dev_addr').val());
                 expect(thisprinter.connectionType).toEqual($('#dev_conn_type').val());
-                expect(thisprinter.isConnected).isNotEmptyString();
+                expect(thisprinter.isConnected.toString()).isNotEmptyString();
             });
         });
     });
