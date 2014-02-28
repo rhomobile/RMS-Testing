@@ -1081,9 +1081,9 @@ describe('Printer Zebra', function() {
         doprintStoredFormatWithHash(zplstoredformat, 'E:FORMAT.ZPL', hashzpl, 'without', "ZPL Language");
         doprintStoredFormatWithHash(zplstoredformat, 'E:FORMAT.ZPL', hashzpl, 'Anonymous', "ZPL Language");
 
-        doprintStoredFormatWithHash(ccplstoredformat, 'E:FORMATAS.FMT', hashccpl, 'with', "CCPL Language");
-        doprintStoredFormatWithHash(ccplstoredformat, 'E:FORMATAS.FMT', hashccpl, 'without', "CCPL Language");
-        doprintStoredFormatWithHash(ccplstoredformat, 'E:FORMATAS.FMT', hashccpl, 'Anonymous', "CCPL Language");
+        //doprintStoredFormatWithHash(ccplstoredformat, 'E:FORMATAS.FMT', hashccpl, 'with', "CCPL Language");
+        //doprintStoredFormatWithHash(ccplstoredformat, 'E:FORMATAS.FMT', hashccpl, 'without', "CCPL Language");
+        //doprintStoredFormatWithHash(ccplstoredformat, 'E:FORMATAS.FMT', hashccpl, 'Anonymous', "CCPL Language");
 
         doprintStoredFormatWithHash(invalidformatpath, 'E:FORMAT.ZPL', invalidzplhash, 'with', "invalid");
 
@@ -1166,9 +1166,9 @@ describe('Printer Zebra', function() {
         doprintStoredFormatWithArray(zplstoredformat, 'E:FORMAT.ZPL', arrayzpl, 'without', "ZPL Language");
         doprintStoredFormatWithArray(zplstoredformat, 'E:FORMAT.ZPL', arrayzpl, 'Anonymous', "ZPL Language");
 
-        doprintStoredFormatWithArray(ccplstoredformat, 'E:FORMATAS.FMT', arrayccpl, 'with', "CCPL Language");
-        doprintStoredFormatWithArray(ccplstoredformat, 'E:FORMATAS.FMT', arrayccpl, 'without', "CCPL Language");
-        doprintStoredFormatWithArray(ccplstoredformat, 'E:FORMATAS.FMT', arrayccpl, 'Anonymous', "CCPL Language");
+        //doprintStoredFormatWithArray(ccplstoredformat, 'E:FORMATAS.FMT', arrayccpl, 'with', "CCPL Language");
+        //doprintStoredFormatWithArray(ccplstoredformat, 'E:FORMATAS.FMT', arrayccpl, 'without', "CCPL Language");
+        //doprintStoredFormatWithArray(ccplstoredformat, 'E:FORMATAS.FMT', arrayccpl, 'Anonymous', "CCPL Language");
 
         doprintStoredFormatWithArray(invalidformatpath, 'E:FORMAT.ZPL', invalidzplhash, 'with', "invalid");
 
