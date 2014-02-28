@@ -55,7 +55,13 @@ describe('Printing Generic', function() {
     var arrayccplfilepath = makeFilePath('arrayccplfile.ccpl');
     var invalidcontentsfilepath = makeFilePath('invalidcontetsfile');
 
-    var sizes = ['320px','640px','1024px','2048px'];
+    var sizes = [];
+
+    if (Rho.System.platform == Rho.System.PLATFORM_WM_CE) {
+        sizes = ['320px', '640px', '1024px'];
+    } else {
+        sizes = ['320px', '640px', '1024px', '2048px'];
+    }
     var extensions = ['png','jpg','gif','bmp'];
 
     for (var e = extensions.length - 1; e >= 0; e--) {
@@ -258,9 +264,11 @@ describe('Printing Generic', function() {
     }
 
     function doPrintTestLabel() {
-				
+		var callresult = null;
+		function cbk(val) {
+			callresult = val;
+		}
         runs(function() {
-            callresult = null;
             thisprinter.printRawString(makeTestLabel(), {}, cbk);
         });
 
@@ -276,8 +284,11 @@ describe('Printing Generic', function() {
     }
 
     function doSetLabelLength(len) {
+		var callresult = null;
+		function cbk(val) {
+			callresult = val;
+		}
         runs(function() {
-            callresult = null;
             thisprinter.printRawString('^XA^MNN^LL' + len + '^XA^JUS^XZ', {}, cbk);
         });
 
@@ -288,7 +299,6 @@ describe('Printing Generic', function() {
 
     function doPrintPrintFile(filename, options) {
         runs(function() {
-            callresult = null;
             thisprinter.printFile(filename, options);
         });
 
@@ -296,9 +306,9 @@ describe('Printing Generic', function() {
             return;
         }, 'wait until printingFile', 30000);
 		
-		runs(function() {
-			displayResult(jasmine.getEnv().currentSpec.description, callresult.toString());
-        });
+		// runs(function() {
+			// displayResult(jasmine.getEnv().currentSpec.description, callresult.toString());
+        // });
 
 		_result.waitForResponse();
     }
@@ -325,7 +335,7 @@ describe('Printing Generic', function() {
 
     function doPrintPrintFileAnonCbk(filename, options) {
         runs(function() {
-            callresult = null;
+            var callresult = null;
             thisprinter.printFile(filename, options, function(val){ 
                 callresult = val; 
             });
@@ -375,7 +385,7 @@ describe('Printing Generic', function() {
 
     function doPrintRawCommandAnonCbk(cmd) {
         runs(function() {
-            callresult = null;
+            var callresult = null;
             thisprinter.printRawString(cmd, {}, function(val){ 
                 callresult = val; 
             });
@@ -722,7 +732,7 @@ describe('Printing Generic', function() {
             doPrintTestLabel();
 
             runs(function() {
-                callresult = null;
+                var callresult = null;
                 if(callback_type == 'without')  {
                     callresult = thisprinter.printImageFromFile(from,x,y,options);
                 }
