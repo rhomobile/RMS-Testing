@@ -55,7 +55,13 @@ describe('Printing Generic', function() {
     var arrayccplfilepath = makeFilePath('arrayccplfile.ccpl');
     var invalidcontentsfilepath = makeFilePath('invalidcontetsfile');
 
-    var sizes = ['320px','640px','1024px','2048px'];
+    var sizes = [];
+
+    if (Rho.System.platform == Rho.System.PLATFORM_WM_CE) {
+        sizes = ['320px', '640px', '1024px'];
+    } else {
+        sizes = ['320px', '640px', '1024px', '2048px'];
+    }
     var extensions = ['png','jpg','gif','bmp'];
 
     for (var e = extensions.length - 1; e >= 0; e--) {
@@ -258,9 +264,11 @@ describe('Printing Generic', function() {
     }
 
     function doPrintTestLabel() {
-				
+		var callresult = null;
+		function cbk(val) {
+			callresult = val;
+		}
         runs(function() {
-            callresult = null;
             thisprinter.printRawString(makeTestLabel(), {}, cbk);
         });
 
@@ -268,16 +276,19 @@ describe('Printing Generic', function() {
             return callresult !== null;
         }, 'wait until printingLabel', 20000);
 
-        runs(function() {
-            //expect(callresult.status).toEqual(Rho.Printer.PRINTER_STATUS_SUCCESS);
-            callresult = null;
-        });
+        //runs(function() {
+        //    displayResult(jasmine.getEnv().currentSpec.description, callresult.toString());
+        //    callresult = null;
+        //});
 					
     }
 
     function doSetLabelLength(len) {
+		var callresult = null;
+		function cbk(val) {
+			callresult = val;
+		}
         runs(function() {
-            callresult = null;
             thisprinter.printRawString('^XA^MNN^LL' + len + '^XA^JUS^XZ', {}, cbk);
         });
 
@@ -287,34 +298,46 @@ describe('Printing Generic', function() {
     }
 
     function doPrintPrintFile(filename, options) {
+		var callresult = null;
         runs(function() {
-            //callresult = null;
             thisprinter.printFile(filename, options);
         });
 
         waitsFor(function() {
-            return;
-        }, 'wait until printingFile', 30000);
+			setTimeout(function(){callresult = true;},10000);
+            return callresult;
+        }, 'wait until setting lable length', 15000);
+		
+		// runs(function() {
+			// displayResult(jasmine.getEnv().currentSpec.description, callresult.toString());
+        // });
 
 		_result.waitForResponse();
     }
 
     function doPrintPrintFileCbk(filename, options) {
+		var callresult = null;
+		function cbk(val) {
+			callresult = val;
+		}
         runs(function() {
-            callresult = null;
             thisprinter.printFile(filename, options, cbk);
         });
 
         waitsFor(function() {
             return callresult !== null;
-        }, 'wait until printingFile', 30000);
+        }, 'wait until printingFile', 15000);
+		
+		runs(function() {
+			displayResult(jasmine.getEnv().currentSpec.description, callresult.toString());
+        });
 
         _result.waitForResponse();
     }
 
     function doPrintPrintFileAnonCbk(filename, options) {
         runs(function() {
-            callresult = null;
+            var callresult = null;
             thisprinter.printFile(filename, options, function(val){ 
                 callresult = val; 
             });
@@ -322,36 +345,49 @@ describe('Printing Generic', function() {
 
         waitsFor(function() {
             return callresult !== null;
-        }, 'wait until printingFile', 30000);
+        }, 'wait until printingFile', 15000);
+		
+		runs(function() {
+			displayResult(jasmine.getEnv().currentSpec.description, callresult.toString());
+        });
 
         _result.waitForResponse();
     }
 
     function doPrintRawCommand(cmd) {
         runs(function() {
-            //callresult = null;
+            callresult = null;
             thisprinter.printRawString(cmd, {});
         });
 
         waitsFor(function() {
             return;
         }, 'wait until setting lable length', 15000);
+		runs(function() {
+			displayResult(jasmine.getEnv().currentSpec.description, callresult.toString());
+        });
     }
 
     function doPrintRawCommandCbk(cmd) {
+		var callresult = null;
+		function cbk(val) {
+			callresult = val;
+		}
         runs(function() {
-            callresult = null;
             thisprinter.printRawString(cmd, {}, cbk);
         });
 
         waitsFor(function() {
             return callresult !== null;
         }, 'wait until setting lable length', 15000);
+		runs(function() {
+			displayResult(jasmine.getEnv().currentSpec.description, callresult.toString());
+        });
     }
 
     function doPrintRawCommandAnonCbk(cmd) {
         runs(function() {
-            callresult = null;
+            var callresult = null;
             thisprinter.printRawString(cmd, {}, function(val){ 
                 callresult = val; 
             });
@@ -360,6 +396,9 @@ describe('Printing Generic', function() {
         waitsFor(function() {
             return callresult !== null;
         }, 'wait until setting lable length', 15000);
+		runs(function() {
+			displayResult(jasmine.getEnv().currentSpec.description, callresult.toString());
+        });
     }
 
 
@@ -432,7 +471,7 @@ describe('Printing Generic', function() {
         });
 
         //bmp
-        it('should print bmp without callback only in WM/CE devices', function() {
+        xit('should print bmp without callback only in WM/CE devices', function() {
 			dispTestCaseRunning(" 1. Should Print label <br />2. Should print bmp image.");
 			dispExpectedResult("should print bmp image file  in WM/CE devices and not in android or ios device");
 			//Common Method implemented to wait for tester to run the test.Code available in specHelper.js
@@ -452,7 +491,7 @@ describe('Printing Generic', function() {
             doPrintPrintFileCbk(bmpimagepath_320px, {});
         });
 
-        it('should print bmp with anonymous function only in WM/CE devices', function() {
+        xit('should print bmp with anonymous function only in WM/CE devices', function() {
             dispTestCaseRunning(" 1. Should Print label <br />2. Should print bmp image.");
             dispExpectedResult("should print bmp image file in WM/CE devices and not in android or ios device");
             //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
@@ -617,14 +656,18 @@ describe('Printing Generic', function() {
 			_result.waitToRunTest();
             doPrintTestLabel();
 
+			var callresult = null;
+			function cbk(val) {
+				callresult = val;
+			}
+		
             runs(function() {
-                callresult = null;
                 thisprinter.printImageFromFile(from,x,y,options,cbk);
             });
 
             waitsFor(function() {
                 return callresult !== null;
-            }, 'wait printImageFromFile', 30000);
+            }, 'wait printImageFromFile', 15000);
 
             /*runs(function() {
                 if (isOk !== false) {
@@ -634,6 +677,9 @@ describe('Printing Generic', function() {
                     expect(callresult).toNotEqual(Rho.Printer.PRINTER_STATUS_SUCCESS);
                 }
             });*/
+			runs(function() {
+				displayResult(jasmine.getEnv().currentSpec.description, callresult.toString());
+			});
 			_result.waitForResponse();
         });
     }
@@ -691,9 +737,9 @@ describe('Printing Generic', function() {
             doPrintTestLabel();
 
             runs(function() {
-                callresult = null;
+                var callresult = null;
                 if(callback_type == 'without')  {
-                    callresult = thisprinter.printImageFromFile(from,x,y,options);
+					thisprinter.printImageFromFile(from,x,y,options);
                 }
                 else if (callback_type == 'Anonymous') {
                     thisprinter.printImageFromFile(from,x,y,options,function(callbackValue) { callresult = callbackValue;})
@@ -701,7 +747,13 @@ describe('Printing Generic', function() {
             });
 
             waitsFor(function() {
-                return callresult !== null;
+                if(callback_type == 'without') {
+                    setTimeout(function(){callresult = true;},10000);
+                    return callresult;
+                }
+                else {
+                    return callresult !== null;
+                }
             }, 'wait printImageFromFile', 30000);
 
     
@@ -792,7 +844,7 @@ describe('Printing Generic', function() {
     });
 
     // get and set default printer -- disabled bec its crashing the app as of now
-    xdescribe("Should print a raw string using the get default printer", function() {
+    describe("Should print a raw string using the get default printer", function() {
 		it("Should print a raw string using the get default printer", function() {
 			var thisprinter = null;
 			var printerObj = null;
@@ -856,7 +908,9 @@ describe('Printing Generic', function() {
         it ("Should get PRINTER_STATUS_ERROR when using connect printer to a turned off printer", function() {
             var thisprinter = null;
             var callresult = null;
-
+			function cbk(val) {
+                callresult = val;
+            }
             dispTestCaseRunning("Turn off the Printer and then click on Run Test");
 
             _result.waitToRunTest();
@@ -897,7 +951,11 @@ describe('Printing Generic', function() {
                 callresult = null;
                 thisprinter.connectWithOptions({
                     "timeout": 0
-                });
+                }, 
+				function(val){
+                    callresult = val;
+                }
+				);
             });
 
             waitsFor(function() {
