@@ -276,10 +276,10 @@ describe('Printing Generic', function() {
             return callresult !== null;
         }, 'wait until printingLabel', 20000);
 
-        runs(function() {
-            displayResult(jasmine.getEnv().currentSpec.description, callresult.toString());
-            callresult = null;
-        });
+        //runs(function() {
+        //    displayResult(jasmine.getEnv().currentSpec.description, callresult.toString());
+        //    callresult = null;
+        //});
 					
     }
 
@@ -298,13 +298,15 @@ describe('Printing Generic', function() {
     }
 
     function doPrintPrintFile(filename, options) {
+		var callresult = null;
         runs(function() {
             thisprinter.printFile(filename, options);
         });
 
         waitsFor(function() {
-            return;
-        }, 'wait until printingFile', 30000);
+			setTimeout(function(){callresult = true;},10000);
+            return callresult;
+        }, 'wait until setting lable length', 15000);
 		
 		// runs(function() {
 			// displayResult(jasmine.getEnv().currentSpec.description, callresult.toString());
@@ -324,7 +326,7 @@ describe('Printing Generic', function() {
 
         waitsFor(function() {
             return callresult !== null;
-        }, 'wait until printingFile', 30000);
+        }, 'wait until printingFile', 15000);
 		
 		runs(function() {
 			displayResult(jasmine.getEnv().currentSpec.description, callresult.toString());
@@ -343,7 +345,7 @@ describe('Printing Generic', function() {
 
         waitsFor(function() {
             return callresult !== null;
-        }, 'wait until printingFile', 30000);
+        }, 'wait until printingFile', 15000);
 		
 		runs(function() {
 			displayResult(jasmine.getEnv().currentSpec.description, callresult.toString());
@@ -665,7 +667,7 @@ describe('Printing Generic', function() {
 
             waitsFor(function() {
                 return callresult !== null;
-            }, 'wait printImageFromFile', 30000);
+            }, 'wait printImageFromFile', 15000);
 
             /*runs(function() {
                 if (isOk !== false) {
@@ -675,6 +677,9 @@ describe('Printing Generic', function() {
                     expect(callresult).toNotEqual(Rho.Printer.PRINTER_STATUS_SUCCESS);
                 }
             });*/
+			runs(function() {
+				displayResult(jasmine.getEnv().currentSpec.description, callresult.toString());
+			});
 			_result.waitForResponse();
         });
     }
@@ -734,7 +739,7 @@ describe('Printing Generic', function() {
             runs(function() {
                 var callresult = null;
                 if(callback_type == 'without')  {
-                    callresult = thisprinter.printImageFromFile(from,x,y,options);
+					thisprinter.printImageFromFile(from,x,y,options);
                 }
                 else if (callback_type == 'Anonymous') {
                     thisprinter.printImageFromFile(from,x,y,options,function(callbackValue) { callresult = callbackValue;})
@@ -742,7 +747,13 @@ describe('Printing Generic', function() {
             });
 
             waitsFor(function() {
-                return callresult !== null;
+                if(callback_type == 'without') {
+                    setTimeout(function(){callresult = true;},10000);
+                    return callresult;
+                }
+                else {
+                    return callresult !== null;
+                }
             }, 'wait printImageFromFile', 30000);
 
     

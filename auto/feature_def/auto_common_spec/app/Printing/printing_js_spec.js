@@ -263,7 +263,7 @@ describe('Printing Generic', function() {
 
                 waitsFor(function() {
                     return discovery_finished;
-                }, '20sec waiting for Search printer', 40000);
+                }, '20sec waiting for Search printer', 20000);
 
                 // runs(function() {
                 //     displaySearchResults(searchVals, printers_array, printers_errors);
@@ -494,7 +494,7 @@ describe('Printing Generic', function() {
                     callresult = null;
 
                     if (case_type == 'without'){
-                        callresult = thisprinter.connectWithOptions(connectparams);
+                        thisprinter.connectWithOptions(connectparams);
                     } else if (case_type == 'withcallback') {
                         thisprinter.connectWithOptions(connectparams, cbkf);
                     } else if (case_type == 'anonymous') {
@@ -506,10 +506,12 @@ describe('Printing Generic', function() {
 
                 waitsFor(function() {
                     return callresult != null;
-                }, 'wait while connecting', 50000);
+                }, 'wait while connecting', 30000);
 
                 runs(function() {
-                    expect(callresult).toEqual(Rho.Printer.PRINTER_STATUS_SUCCESS);
+					if (case_type != 'without'){
+						expect(callresult).toEqual(Rho.Printer.PRINTER_STATUS_SUCCESS);
+					}
                     expect(thisprinter.isConnected).toEqual(true);
                 });
             });
