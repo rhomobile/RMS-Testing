@@ -1231,14 +1231,13 @@ describe('Printer Zebra', function() {
         });
     });
 
+    describe("Should get PRINTER_STATUS_ERR_TIMEOUT  or PRINTER_STATUS_ERROR when trying to connect the turned off printer", function() {
 
-    describe("Should get PRINTER_STATUS_ERR_TIMEOUT when trying to connect the turned off printer", function() {
-
-        it("Should get PRINTER_STATUS_ERR_TIMEOUT when using connect printer to a turned off printer", function() {
+        it("Should get PRINTER_STATUS_ERR_TIMEOUT  or PRINTER_STATUS_ERROR when using connect printer to a turned off printer", function() {
             var thisprinter = null;
-            var callresult = null;
+            //var callresult = null;
             dispTestCaseRunning("Turn off the Printer and then click on Run Test");
-            dispExpectedResult("Should get PRINTER_STATUS_ERR_TIMEOUT when using connect printer to a turned off printer");
+            dispExpectedResult("Should get PRINTER_STATUS_ERR_TIMEOUT or PRINTER_STATUS_ERROR when using connect printer to a turned off printer");
             _result.waitToRunTest();
 
 
@@ -1252,7 +1251,7 @@ describe('Printer Zebra', function() {
 
             waitsFor(function() {
                 return callresult != null;
-            }, 'wait while connect', 5000);
+            }, 'wait while connect', 25000);
 
             runs(function() {
                 displayResult(jasmine.getEnv().currentSpec.description, callresult.toString());
@@ -1261,10 +1260,11 @@ describe('Printer Zebra', function() {
             _result.waitForResponse();
         });
 
-        it("Should get PRINTER_STATUS_ERR_TIMEOUT when using connectWithOptions printer to a turned off printer", function() {
+        /* this test is totally invalid - connect() and connectWithOptions() called asynchroniosly !!! Test do not use callback for check  result !
+        it("Should get PRINTER_STATUS_ERR_TIMEOUT  or PRINTER_STATUS_ERROR when using connectWithOptions printer to a turned off printer", function() {
             var thisprinter = null;
-            var callresult = null;
-            dispExpectedResult("Should get PRINTER_STATUS_ERR_TIMEOUT when using connectWithOptions printer to a turned off printer");
+            //var callresult = null;
+            dispExpectedResult("Should get PRINTER_STATUS_ERR_TIMEOUT or PRINTER_STATUS_ERROR when using connectWithOptions printer to a turned off printer");
             dispTestCaseRunning("Turn off the Printer and then click on Run Test");
             _result.waitToRunTest();
 
@@ -1281,7 +1281,7 @@ describe('Printer Zebra', function() {
 
             waitsFor(function() {
                 return callresult != null;
-            }, 'wait while Connect', 5000);
+            }, 'wait while Connect', 15000);
 
             runs(function() {
                 displayResult(jasmine.getEnv().currentSpec.description, callresult.toString());
@@ -1289,6 +1289,8 @@ describe('Printer Zebra', function() {
 
             _result.waitForResponse();
         });
+         
+        */
     });
 
 });
