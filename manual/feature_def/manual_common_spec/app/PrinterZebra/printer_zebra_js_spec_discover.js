@@ -64,6 +64,7 @@ describe('Printer Zebra', function() {
                 var searchVals = {};
                 var searchObj = {}
                var shouldFail = false;
+               var isTimeout = false;
                 runs(function() {
                     if (searchParamaters['printerType']) {
                         searchVals['printerType'] = Rho.Printer.PRINTER_TYPE_ZEBRA;
@@ -72,7 +73,8 @@ describe('Printer Zebra', function() {
                         searchVals['connectionType'] = $('#dev_conn_type').val();
                     }
                     if (searchParamaters['timeout']) {
-                        searchVals['timeout'] = 10;
+                        searchVals['timeout'] = 100;
+                        isTimeout = true;
                     }
                     if (searchParamaters['devicePort']) {
                         searchVals['devicePort'] = $('#dev_port').val();
@@ -86,15 +88,15 @@ describe('Printer Zebra', function() {
                     searchObject = runSearch(searchVals, 35000);
                 });
 
-                waits(2000);
+                waits(5000);
 
-                //runs(function() {
+                runs(function() {
                     // check if search was ended before printer discovery
                     //if (searchParamaters['timeout'] && !searchParamaters['deviceAddress'] && $('#dev_conn_type').val() != Rho.PrinterZebra.CONNECTION_TYPE_BLUETOOTH) {
-                    //if (searchParamaters['timeout']) {
-                    //    expect(searchObject.finished).toEqual(false);
-                    //}
-                //});
+                    if (isTimeout) {
+                        expect(searchObject.finished).toEqual(true);
+                    }
+                });
 
                 waitsFor(function() {
                     return searchObject.finished;
@@ -105,13 +107,15 @@ describe('Printer Zebra', function() {
                 });
 
                 runs(function() {
-                    if (shouldFail) {
-                        expect(searchObject.errors).toEqual([]);
-                        expect(searchObject.printers.length).toEqual(0);
-                        //expect(searchObject.errors).toBeGreaterThan(0);
-                    } else {
-                        expect(searchObject.errors).toEqual([]);
-                        expect(searchObject.printers.length).toBeGreaterThan(0);
+                     if (!isTimeout) {
+                       if (shouldFail) {
+                           expect(searchObject.errors).toEqual([]);
+                           expect(searchObject.printers.length).toEqual(0);
+                           //expect(searchObject.errors).toBeGreaterThan(0);
+                       } else {
+                           expect(searchObject.errors).toEqual([]);
+                           expect(searchObject.printers.length).toBeGreaterThan(0);
+                       }
                     }
                 });
             });
