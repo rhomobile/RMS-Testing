@@ -668,7 +668,7 @@ describe('Printer Zebra', function() {
             if (callback_type == 'without') {
                 setTimeout(function() {
                     callresult = true;
-                }, 10000);
+                }, 20000);
                 return callresult;
             } else {
                 return callresult !== null;
@@ -750,8 +750,8 @@ describe('Printer Zebra', function() {
         });
 
         it('should not print invalidcontentsfilepath with callback', function() {
-            dispTestCaseRunning(" 1. Should Print label <br />2. should send invalidcontentsfilepath file and should not get printed");
-            dispExpectedResult("should not print invalidcontentsfilepath");
+            dispTestCaseRunning(" 1. Should Print label <br />2. should send invalidcontentsfilepath file and should not get printed and should not get crashed");
+            dispExpectedResult("should not print invalidcontentsfilepath, API can return SUCCESS, but should not get crashed !");
             //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
             _result.waitToRunTest();
             doPrintTestLabel();
