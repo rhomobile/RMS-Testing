@@ -306,6 +306,37 @@ describe('Near Field Communication Tests', function () {
                 spec.waitForResponse();
             });
         });
+        
+        it("Method \"exchangeData\" should exchnage data with Tag", function () {
+            var spec = new ManualSpec(jasmine, window.document);
+            spec.addGoal("Check data exchange");
+            spec.addPrecondition("Smart tag");
+            spec.addStep('Press "Run test" button');
+            spec.addStep('Touch tag to device');
+            spec.addExpectation("Value of \"receiveData\" property should be displayed");
+            spec.displayScenario();
+            spec.waitForButtonPressing("Run test");
+            
+            var tagID;
+
+            Rho.NFC.Adapter.setTagDetectionHandler([], function (anObject) {
+                tagID = anObject["tagId"];
+            });
+
+            waitsFor(function () {
+                return tagID != undefined;
+            }, "WaitsFor timeout", 60000);
+
+            runs(function () {
+                var tag = Rho.NFC.Tag.getTagById(tagID);
+                // if tag.isReadOnly == false
+                if(tag.isNdef == false) {tag.formatNDEF();}
+                var result = tag.exchangeData("testdata");
+                spec.addResult("Property \"receiveData\"", result.receiveData);
+                spec.displayResults();
+                spec.waitForResponse();
+            });
+        });
 
         it('Message writing', function () {
             var spec = new ManualSpec(jasmine, window.document);
