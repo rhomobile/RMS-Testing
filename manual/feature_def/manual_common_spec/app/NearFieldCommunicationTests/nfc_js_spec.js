@@ -64,7 +64,18 @@ describe('Near Field Communication Tests', function () {
                 spec.waitForResponse();
             });
         });
+    });
 
+    describe("Adapter specs with engine activation", function () {
+
+        beforeEach(function () {
+            Rho.NFC.Adapter.activate();
+        });
+
+        afterEach(function () {
+            Rho.NFC.Adapter.stop();
+        });
+        
         it("Method \"reset\" should reset configuration of NFC engine", function () {
             var spec = new ManualSpec(jasmine, window.document);
             spec.addGoal(jasmine.getEnv().currentSpec.description);
@@ -76,24 +87,13 @@ describe('Near Field Communication Tests', function () {
 
             runs(function () {
                 Rho.NFC.Adapter.pollingTimeout = 10;
-                Rho.NFC.Adapter.passKey = "123456";
+                Rho.NFC.Adapter.passkey = "123456";
                 Rho.NFC.Adapter.reset();
                 spec.addResult("Property \"pollingTimeout\"", Rho.NFC.Adapter.pollingTimeout);
                 spec.addResult("Property \"passKey\"", Rho.NFC.Adapter.passkey);
                 spec.displayResults();
                 spec.waitForResponse();
             });
-        });
-    });
-
-    describe("Adapter specs with engine activation", function () {
-
-        beforeEach(function () {
-            Rho.NFC.Adapter.activate();
-        });
-
-        afterEach(function () {
-            Rho.NFC.Adapter.stop();
         });
 
         it("Get device capabilities", function () {
@@ -170,7 +170,7 @@ describe('Near Field Communication Tests', function () {
 
             runs(function () {
                 flag = false;
-                Rho.NFC.Adapter.passKey = "123456";
+                Rho.NFC.Adapter.passkey = "123456";
             });
 
             waitsFor(function () {
@@ -197,16 +197,16 @@ describe('Near Field Communication Tests', function () {
             var flag;
             runs(function () {
                 flag = false;
-                Rho.NFC.Adapter.passKey = "123456";
-                Rho.NFC.btConnect(function (object) {
-                    spec.addResult('Device name', object.btName);
-                    spec.addResult('Device MAC address', object.btAddress);
+                Rho.NFC.Adapter.passkey = "123456";
+                Rho.NFC.Adapter.btConnect(function (object) {
+                    spec.addResult('Device name', object["btName"]);
+                    spec.addResult('Device MAC address', object["btAddress"]);
                     flag = true;
             });
 
             waitsFor(function () {
                 return flag;
-            }, "WaitsFor timeout", 20000);
+            }, "WaitsFor timeout", 60000);
 
             runs(function () {
                 spec.displayResults();
