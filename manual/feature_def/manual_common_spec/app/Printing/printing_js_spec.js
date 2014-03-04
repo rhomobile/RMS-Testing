@@ -730,7 +730,7 @@ describe('Printing Generic', function() {
 
         it( deftext.join(' ') , function() {
             dispTestCaseRunning("1. Should Print label <br />2. "+def+" Print "+Rho.RhoFile.basename(from)+" image");
-            dispExpectedResult(jasmine.getEnv().currentSpec.description, callresult.toString());
+            dispExpectedResult(jasmine.getEnv().currentSpec.description, ""/*callresult.toString()*/);
             //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
             _result.waitToRunTest();
             doPrintTestLabel();
@@ -767,12 +767,15 @@ describe('Printing Generic', function() {
         it('should connect', function() {
             doConnect();
         });
-
-        generatePrintImageWithoutAnonymous('without', pngimagepath_320px,100,100,{'width':10,'height':10,'isInsideFormat':true},true);
+             
+             
+        // isInsideFormat == true used for print inside format rpint - current uses of this property is incorrect !!!
+        // in current test code only FALSE value is valid for used for isInsideFormat !!!
+        generatePrintImageWithoutAnonymous('without', pngimagepath_320px,100,100,{'width':10,'height':10,'isInsideFormat':false},true);
         generatePrintImageWithoutAnonymous('Anonymous', pngimagepath_640px,10,10,{'width':50,'height':50,'isInsideFormat':false},true);
         generatePrintImageWithoutAnonymous('Anonymous', pngimagepath_1024px,10,10,{'width':-1,'height':-1,'isInsideFormat':false},true);
-        generatePrintImageWithoutAnonymous('without', jpgimagepath_320px,100,100,{'width':10,'height':10,'isInsideFormat':true},true);
-        generatePrintImageWithoutAnonymous('Anonymous', jpgimagepath_640px,10,10,{'width':50,'height':50,'isInsideFormat':true},true);
+        generatePrintImageWithoutAnonymous('without', jpgimagepath_320px,100,100,{'width':10,'height':10,'isInsideFormat':false},true);
+        generatePrintImageWithoutAnonymous('Anonymous', jpgimagepath_640px,10,10,{'width':50,'height':50,'isInsideFormat':false},true);
         generatePrintImageWithoutAnonymous('Anonymous', pngimagepath_1024px,10,10,{'width':-1,'height':-1,'isInsideFormat':false},true);
 
     });
@@ -851,13 +854,13 @@ describe('Printing Generic', function() {
 			_result.waitToRunTest();
 
 			dispTestCaseRunning("Set default printer and print a raw string using the get default");
-			dispExpectedResult(jasmine.getEnv().currentSpec.description, callresult.toString());
+			dispExpectedResult(jasmine.getEnv().currentSpec.description, ""/*callresult.toString()*/);
 
 			runs(function() {
 				expect(last_found_printer_id).toNotEqual(null);
 				printerObj = Rho.Printer.getPrinterByID(last_found_printer_id);
 				Rho.Printer.setDefault(printerObj);
-				expect(Rho.Printer.getDefault()).toEqual(printerObj);
+				expect(Rho.Printer.getDefault().ID).toEqual(printerObj.ID);
 			});
 		
 			runs(function() {
@@ -885,7 +888,7 @@ describe('Printing Generic', function() {
 
         it( "Should get All printer properties using getAllProperties", function() {
             dispTestCaseRunning("1. Should Display All printer properties");
-            dispExpectedResult(jasmine.getEnv().currentSpec.description, callresult.toString());
+            dispExpectedResult(jasmine.getEnv().currentSpec.description, ""/*callresult.toString()*/);
             //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
             _result.waitToRunTest();
             var allproperties = {};
