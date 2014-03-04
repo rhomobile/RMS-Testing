@@ -57,11 +57,10 @@ describe('Printing Generic', function() {
 
     var sizes = [];
 
-    if (Rho.System.platform == Rho.System.PLATFORM_WM_CE) {
-        sizes = ['320px', '640px', '1024px'];
-    } else {
-        sizes = ['320px', '640px', '1024px', '2048px'];
-    }
+    // 2048 size is too large for mobile printers !!!
+    sizes = ['320px', '640px', '1024px'];
+
+         
     var extensions = ['png','jpg','gif','bmp'];
 
     for (var e = extensions.length - 1; e >= 0; e--) {
