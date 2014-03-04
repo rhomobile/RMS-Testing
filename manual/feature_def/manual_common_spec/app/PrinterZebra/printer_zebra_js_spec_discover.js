@@ -1,6 +1,7 @@
 describe('Printer Zebra', function() {
     var ENABLE9K = 9000;
     var ENABLE10K = 10000;
+    var ENABLE30K = 30000;
     var ENABLE60K = 60000;
     var ENABLE120K = 120000;
     var ENABLE5MIN = 300000;
@@ -88,7 +89,7 @@ describe('Printer Zebra', function() {
                     searchObject = runSearch(searchVals, 35000);
                 });
 
-                waits(5000);
+                waits(ENABLE30K);
 
                 runs(function() {
                     // check if search was ended before printer discovery
