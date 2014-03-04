@@ -555,7 +555,10 @@ describe('Printer Zebra', function() {
 
                 waitsFor(function() {
                     if (case_type == 'without') {
-                        return thisprinter.isConnected;
+                         if (!expectedResult) {
+                            return !thisprinter.isConnected;
+                         }
+                         return thisprinter.isConnected;
                     } else {
                         return callresult !== null;
                     }
@@ -570,7 +573,7 @@ describe('Printer Zebra', function() {
                      }
                      else {
                         if (case_type != 'without') {
-                            expect(callresult).toEqual(Rho.Printer.PRINTER_STATUS_ERR_TIMEOUT);
+                            expect((callresult == Rho.Printer.PRINTER_STATUS_ERR_TIMEOUT) || (callresult == Rho.Printer.PRINTER_STATUS_ERROR)).toEqual(true);
                         }
                         expect(thisprinter.isConnected).toEqual(false);
                      }
@@ -583,7 +586,7 @@ describe('Printer Zebra', function() {
         }, {
             "timeout": 0
         }, {
-            "timeout": 10
+            "timeout": 1
         },
         //                     {
         //    "timeout": 15000.5
@@ -591,7 +594,8 @@ describe('Printer Zebra', function() {
                              ];
 
         // 20 sec is enought for connect
-        // 0 and 10 too short time - should not connected for this time
+        // 0 is invalid timeout
+        // 10 too short time - should not connected for this time
         // 15000.5 - invalid type - must be integer (but in this case method must return ERROR not TIMEOUT!)
              
              
