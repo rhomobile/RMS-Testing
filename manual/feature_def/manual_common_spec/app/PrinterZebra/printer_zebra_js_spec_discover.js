@@ -100,7 +100,7 @@ describe('Printer Zebra', function() {
 
                 waitsFor(function() {
                     return searchObject.finished;
-                }, '40sec waiting for Search printer', 40000);
+                }, '40sec waiting for Search printer', ENABLE60K);
 
                 runs(function() {
                     displaySearchResults(searchVals, searchObject.printers, searchObject.errors);
