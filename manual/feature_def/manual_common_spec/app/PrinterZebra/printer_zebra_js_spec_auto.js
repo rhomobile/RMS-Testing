@@ -1121,28 +1121,26 @@ describe('Printer Zebra', function() {
     describe("Get & Set default PrinterZebra", function() {
         var printerObj = null;
 
-        it('there is an instance of a printer', function() {
+        it('there is an instance of a printer, ', function() {
             runs(function() {
                 expect(last_found_printer_id).toNotEqual(null);
-                printerObj = Rho.PrinterZebra.getPrinterByID(last_found_printer_id);
-                Rho.PrinterZebra.setDefault(printerObj);
-            });
-        });
 
-        it('get default PrinterZebra', function() {
-            runs(function() {
-                thisprinter = Rho.PrinterZebra.getDefault();
-                expect(thisprinter.ID).toNotEqual(null);
             });
         });
 
         it('set default PrinterZebra', function() {
             runs(function() {
-                Rho.PrinterZebra.setDefault(printerObj);
-                var defPrinter = Rho.PrinterZebra.getDefault();
-                expect(defPrinter.ID).toEqual(printerObj.ID);
+                printerObj = Rho.PrinterZebra.getPrinterByID(last_found_printer_id);
+                Rho.PrinterZebra.setDefault( printerObj );
             });
         });
 
+        it('get default PrinterZebra', function() {
+            runs(function() {
+                expect(Rho.PrinterZebra.ID).toNotEqual(null);
+                expect(Rho.PrinterZebra.ID).toEqual(last_found_printer_id);
+                expect(Rho.PrinterZebra.getDefault().ID).toEqual(printerObj.ID);
+            });
+        });
     });
 });
