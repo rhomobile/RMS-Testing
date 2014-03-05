@@ -509,7 +509,7 @@ describe('Printer Zebra', function() {
             }, 'wait.. trying to print..', 25000);
 
             runs(function() {
-                expect(callresultp.status).toEqual(Rho.PrinterZebra.PRINTER_STATUS_ERROR);
+                expect(callresultp.status).toBeIn([Rho.PrinterZebra.PRINTER_STATUS_ERROR,Rho.PrinterZebra.PRINTER_STATUS_ERR_NOT_CONNECTED]);
             });
         });
 
