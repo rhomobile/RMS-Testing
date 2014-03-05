@@ -46,6 +46,14 @@ describe('Printer Zebra', function() {
             expect(searchObject.errors).toEqual([]);
             expect(searchObject.printers.length).toBeGreaterThan(0);
         });
+        
+        _result.waitUntilDone();
+
+        runs(function() {
+            var printerSettings = $('#dev_list').val().split('|');
+            last_found_printer_id = printerSettings[3];
+            last_found_printer = Rho.PrinterZebra.getPrinterByID(last_found_printer_id);
+        });
     });
 
 
