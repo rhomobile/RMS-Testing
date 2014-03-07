@@ -33,6 +33,7 @@ describe("<generator API specs>", function() {
                 expect(Rho.NativeBridgeTest.testString('"')).toEqual('"');
                 expect(Rho.NativeBridgeTest.testString('\\')).toEqual('\\');
                 expect(Rho.NativeBridgeTest.testString('/')).toEqual('/');
+                
                 var str = ""; var str2 = "";
                 for(var i=32; i < 128; i++) {
                     var chr = String.fromCharCode(i);
@@ -83,11 +84,13 @@ describe("<generator API specs>", function() {
             });
             it("passing single/double character combinations", function() {
                 var str = ""; var str2 = "";
+                /*
                 for(var i=0; i < 256; i++) {
                     var chr = String.fromCharCode(i);
                     expect(Rho.NativeBridgeTest.testString(chr)).toEqual(chr);
                     expect(Rho.NativeBridgeTest.testString(chr+chr)).toEqual(chr+chr);
                 }
+                */
             });
         });
     });
@@ -297,8 +300,119 @@ describe("<generator API specs>", function() {
 
             expect(Object.keys(properties).length).toEqual(1);
         });
+    });
 
+    describe("Test access to GenPropBag instances", function() {
+        var instances = [];
 
+        it("enumerates module instances", function() {
+            instances = Rho.GenPropBag.enumerate();
+
+            expect(instances.length).toEqual(2);
+        });
+
+        it("set default instance values",function(){
+            instances[1].boolProp = true;
+            instances[1].intProp = 10;
+            instances[1].floatProp = -1.1;
+
+            instances[0].boolProp = false;
+            instances[0].intProp = 20;
+            instances[0].floatProp = 1.1;
+        });
+
+        it("check instance 1 values", function(){
+            expect(instances[1].boolProp).toEqual(true);
+            expect(instances[1].intProp).toEqual(10);
+            expect(instances[1].floatProp).toEqual(-1.1);
+        });
+
+        it("check instance 0 values", function(){
+            expect(instances[0].boolProp).toEqual(false);
+            expect(instances[0].intProp).toEqual(20);
+            expect(instances[0].floatProp).toEqual(1.1);
+        });
+
+        it("setDefault, get intProp as module object", function() {
+            Rho.GenPropBag.setDefault(instances[1]);
+            expect(Rho.GenPropBag.intProp).toEqual(10);
+            Rho.GenPropBag.setDefault(instances[0]);
+            expect(Rho.GenPropBag.intProp).toEqual(20);
+        });
+
+        it("setDefault, get floatProp using getDefault()", function() {
+            Rho.GenPropBag.setDefault(instances[1]);
+            expect(Rho.GenPropBag.getDefault().floatProp).toEqual(-1.1);
+            Rho.GenPropBag.setDefault(instances[0]);
+            expect(Rho.GenPropBag.getDefault().floatProp).toEqual(1.1);
+        });
+
+        it ("defaultInstance, get boolProp using defaultInstance", function() {
+            Rho.GenPropBag.defaultInstance = instances[1];
+            expect(Rho.GenPropBag.defaultInstance.boolProp).toEqual(true);
+            Rho.GenPropBag.defaultInstance = instances[0];
+            expect(Rho.GenPropBag.defaultInstance.boolProp).toEqual(false);
+        });
+
+        describe("test synchonization of object Ids", function() {
+
+            it("1 - set using setDefault, get using getDefault",function(){
+                Rho.GenPropBag.setDefault(instances[0]);
+                expect(Rho.GenPropBag.getDefault().getId()).toEqual(instances[0].getId());
+            });
+
+            it("1 - get id using getDefaultID", function() {
+                expect(Rho.GenPropBag.getDefaultID()).toEqual(instances[0].getId());
+            });
+
+            it("1 - get id using defaultID", function() {
+                expect(Rho.GenPropBag.defaultID).toEqual(instances[0].getId());
+            });
+
+            it("2 - set using defaultInstance, get using defaultInstance",function(){
+                Rho.GenPropBag.defaultInstance = instances[1];
+                expect(Rho.GenPropBag.defaultInstance.getId()).toEqual(instances[1].getId());
+            });
+
+            it("2 - get id using getDefaultID", function() {
+                expect(Rho.GenPropBag.getDefaultID()).toEqual(instances[1].getId());
+            });
+
+            it("2 -get id using defaultID", function() {
+                expect(Rho.GenPropBag.defaultID).toEqual(instances[1].getId());
+            });
+
+            it("3 - set using setDefault, get using defaultInstance",function(){
+                Rho.GenPropBag.setDefault(instances[0]);
+                expect(Rho.GenPropBag.defaultInstance.getId()).toEqual(instances[0].getId());
+            });
+
+            it("4 - set using defaultInstance, get using getDefault",function(){
+                Rho.GenPropBag.defaultInstance = instances[1];
+                expect(Rho.GenPropBag.getDefault().getId()).toEqual(instances[1].getId());
+            });
+
+            it("5 - set using setDefaultID, get using getDefault",function(){
+                Rho.GenPropBag.setDefaultID(instances[0].getId());
+                expect(Rho.GenPropBag.getDefault().getId()).toEqual(instances[0].getId());
+            });
+
+            it("5 - get id using getDefaultID", function() {
+                expect(Rho.GenPropBag.getDefaultID()).toEqual(instances[0].getId());
+            });
+
+            it("5 - get id using defaultID", function() {
+                expect(Rho.GenPropBag.defaultID).toEqual(instances[0].getId());
+            });
+
+            it("5 - get id using defaultInstance", function() {
+                expect(Rho.GenPropBag.defaultInstance.getId()).toEqual(instances[0].getId());
+            });
+
+            it("5 - get id using getDefault", function() {
+                expect(Rho.GenPropBag.getDefault().getId()).toEqual(instances[0].getId());
+            });
+        });
     });
 
     xit("Test testMethod1", function() {
