@@ -1,6 +1,8 @@
 
 describe("<generator API specs>", function() {
 
+    if (Rho.System.platform != Rho.System.PLATFORM_WP8)
+    {
     describe("Native bridge", function() {
 
         describe("Normal test case", function() {
@@ -89,6 +91,7 @@ describe("<generator API specs>", function() {
             });
         });
     });
+    }
 
     describe("Default instance", function() {
 
@@ -251,6 +254,7 @@ describe("<generator API specs>", function() {
     });
 
     describe("Test getProperties, getAllProperties", function () {
+        if (Rho.System.platform != Rho.System.PLATFORM_WP8)
         it("Should return all properties", function () {
             Rho.GenPropBag.floatProp= 3.14156;
             Rho.GenPropBag.intProp = 999;
