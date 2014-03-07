@@ -234,7 +234,6 @@ describe("<generator API specs>", function() {
 
             Rho.Log.info(objs.toString(), "test" );
 
-            expect(objs[1].boolProp).toEqual(false);
             objs[1].boolProp = true;
             expect(objs[1].boolProp).toEqual(true);
         });
@@ -305,20 +304,22 @@ describe("<generator API specs>", function() {
     describe("Test access to GenPropBag instances", function() {
         var instances = [];
 
-        it("enumerates module instances", function() {
+        beforeEach(function(){
             instances = Rho.GenPropBag.enumerate();
 
-            expect(instances.length).toEqual(2);
+            if (instances.length > 1) { 
+                instances[1].boolProp = true;
+                instances[1].intProp = 10;
+                instances[1].floatProp = -1.1;
+
+                instances[0].boolProp = false;
+                instances[0].intProp = 20;
+                instances[0].floatProp = 1.1;
+            }
         });
 
-        it("set default instance values",function(){
-            instances[1].boolProp = true;
-            instances[1].intProp = 10;
-            instances[1].floatProp = -1.1;
-
-            instances[0].boolProp = false;
-            instances[0].intProp = 20;
-            instances[0].floatProp = 1.1;
+        it("enumerates module instances", function() {
+            expect(instances.length).toEqual(2);
         });
 
         it("check instance 1 values", function(){
@@ -362,10 +363,12 @@ describe("<generator API specs>", function() {
             });
 
             it("1 - get id using getDefaultID", function() {
+                Rho.GenPropBag.setDefault(instances[0]);
                 expect(Rho.GenPropBag.getDefaultID()).toEqual(instances[0].getId());
             });
 
             it("1 - get id using defaultID", function() {
+                Rho.GenPropBag.setDefault(instances[0]);
                 expect(Rho.GenPropBag.defaultID).toEqual(instances[0].getId());
             });
 
@@ -375,10 +378,12 @@ describe("<generator API specs>", function() {
             });
 
             it("2 - get id using getDefaultID", function() {
+                Rho.GenPropBag.defaultInstance = instances[1];
                 expect(Rho.GenPropBag.getDefaultID()).toEqual(instances[1].getId());
             });
 
             it("2 -get id using defaultID", function() {
+                Rho.GenPropBag.defaultInstance = instances[1];
                 expect(Rho.GenPropBag.defaultID).toEqual(instances[1].getId());
             });
 
@@ -398,18 +403,22 @@ describe("<generator API specs>", function() {
             });
 
             it("5 - get id using getDefaultID", function() {
+                Rho.GenPropBag.setDefaultID(instances[0].getId());
                 expect(Rho.GenPropBag.getDefaultID()).toEqual(instances[0].getId());
             });
 
             it("5 - get id using defaultID", function() {
+                Rho.GenPropBag.setDefaultID(instances[0].getId());
                 expect(Rho.GenPropBag.defaultID).toEqual(instances[0].getId());
             });
 
             it("5 - get id using defaultInstance", function() {
+                Rho.GenPropBag.setDefaultID(instances[0].getId());
                 expect(Rho.GenPropBag.defaultInstance.getId()).toEqual(instances[0].getId());
             });
 
             it("5 - get id using getDefault", function() {
+                Rho.GenPropBag.setDefaultID(instances[0].getId());
                 expect(Rho.GenPropBag.getDefault().getId()).toEqual(instances[0].getId());
             });
         });
