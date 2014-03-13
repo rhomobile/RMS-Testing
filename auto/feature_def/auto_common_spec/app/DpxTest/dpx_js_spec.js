@@ -539,4 +539,9 @@ describe('Setting uiResultConfirmation', function() {
         failCaptureDocument('error: Can not read template.');
     });
 
+    it('HTTP template URI', function() {
+        Rho.DPX.template = 'http://rhomobile-suite.s3.amazonaws.com/tmp/Logistics%20Post.xml';
+        failCaptureDocument('error: Can not read template.');
+    });
+
 });

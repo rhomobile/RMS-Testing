@@ -160,6 +160,8 @@ describe("Cardreader JS API", function() {
 		var flag = false;
 
 		it("Rho.CardReader.open", function() {
+			
+			waits(2000);
 
 			runs(function() {
 				Rho.CardReader.open();
@@ -199,6 +201,8 @@ describe("Cardreader JS API", function() {
 		var flag = false;
 
 		it("Rho.CardReader.open", function() {
+			
+			waits(2000);
 
 			runs(function() {
 				Rho.CardReader.open();
@@ -260,6 +264,8 @@ describe("Cardreader JS API", function() {
 		var flag = false;
 		var obj=Rho.CardReader.getDefault();
 		it("obj.open", function() {
+			
+			waits(2000);
 
 			runs(function() {
 				obj.open();
@@ -299,6 +305,8 @@ describe("Cardreader JS API", function() {
 		var flag = false;
 		var obj=Rho.CardReader.getDefault();
 		it("obj.open", function() {
+			
+			waits(2000);
 
 			runs(function() {
 				obj.open();
@@ -402,6 +410,8 @@ describe("Cardreader JS API", function() {
 		var flag = false;
 
 		it("Rho.CardReader.open", function() {
+			
+			waits(2000);
 						
 			runs(function() {
 				Rho.CardReader.open();

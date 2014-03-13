@@ -7,7 +7,7 @@ function testFailed() {
 }
 
 function setExpected(expected) {
-    document.getElementById('expResult').innerHTML = expected;
+    document.getElementById('expectedresult').innerHTML = expected;
 }
 
 function enablecallbackdata(data) {

@@ -83,15 +83,19 @@ describe('DPX Functionality Test', function() {
         Rho.DPX.uiResultConfirmation = false;
         Rho.DPX.audioFeedback = false;
 
+        var regions;
+
         runsCaptureDocument(Rho.DPX.SUCCESS, function(dict) {
-            // displayResult('Output: ', pprint(dict));
-            var regions = dict['processedForm']['regions'];
+            regions = dict['processedForm']['regions'];
+        });
+
+        runs(function() {
+            _result.passed();
+
             expect(regions[0]['processingMode']).toEqual(Rho.DPX.PM_BARCODE);
             expect(regions[1]['processingMode']).toEqual(Rho.DPX.PM_OMR);
             expect(regions[2]['processingMode']).toEqual(Rho.DPX.PM_OCR);
             expect(regions[5]['processingMode']).toEqual(Rho.DPX.PM_PICTURE);
-
-            _result.passed();
         });
 
         _result.waitForResponse();
@@ -536,21 +540,6 @@ describe('DPX Functionality Test', function() {
                         return getregionImageId != null;
                 }, '90sec Wait before move to next test', 90000);
                 Rho.DPX.getDataUri(100);
-        });
-        //Add more waitsfor or run blocks if required.
-        //Common Method implemented to wait for tester to make it pass or fail.Code available in specHelper.js
-        _result.waitForResponse();
-    });
-
-    it('Objective:\nDocument capture with template from http location', function() {
-        dispTestCaseRunning('1. Set template property to http path of template.xml has region of  picture\nhttp://192.168.6.18/neon/template.xml\n2.Set inputsource to camera\n3. Call captureDocument method Capture a document by taking a photo using camera\n');
-        dispExpectedResult('captured document should get processed successfully and callback fired once for each field defined in the template');
-        //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
-        _result.waitToRunTest();
-        runs(function() {
-                Rho.DPX.inputSource = Rho.DPX.SOURCE_CAMERA;
-                Rho.DPX.template = 'http://192.168.6.18/neon/ReceivedFiles/picture.xml';
-                Rho.DPX.captureDocument(captureCallback);
         });
         //Add more waitsfor or run blocks if required.
         //Common Method implemented to wait for tester to make it pass or fail.Code available in specHelper.js

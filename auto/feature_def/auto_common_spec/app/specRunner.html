@@ -9,18 +9,25 @@
 	</script>
     
 	<script type="text/javascript" id="runnerList">
-		var listOfRunners = [
-            "BarcodeTest/specRunner.html",
-            "LogTest/specRunner.html",
+		var listOfRunners = (Rho.System.platform == Rho.System.PLATFORM_WP8) ? [
+			"LogTest/specRunner.html",
+			"DatabaseTest/specRunner.html",
+			"FileTest/specRunner.html",
+			"GeneratorTest/specRunner.html",
+			"NetworkTest/specRunner.html",
+			"OrmTest/specRunner.html"
+		] : [
+			"BarcodeTest/specRunner.html",
+			"LogTest/specRunner.html",
 			"CardReaderTest/specRunner.html",
 			"DatabaseTest/specRunner.html",
 			"FileTest/specRunner.html",
-            "GeneratorTest/specRunner.html",
+			"GeneratorTest/specRunner.html",
 			"KeyCaptureTest/specRunner.html",
-            "NetworkTest/specRunner.html",
-            "OrmTest/specRunner.html",
+			"NetworkTest/specRunner.html",
+			"OrmTest/specRunner.html",
 			"ScreenOrientationTest/specRunner.html",
-       		"SystemRE1Test/specRunner.html",
+			"SystemRE1Test/specRunner.html",
 			"SensorsTest/specRunner.html",
 			"WebsocketTest/specRunner.html"
 			//"SignatureTest/specRunner.html", //Not released yet

@@ -668,7 +668,7 @@ describe('Printer Zebra', function() {
             if (callback_type == 'without') {
                 setTimeout(function() {
                     callresult = true;
-                }, 10000);
+                }, 20000);
                 return callresult;
             } else {
                 return callresult !== null;
@@ -750,8 +750,8 @@ describe('Printer Zebra', function() {
         });
 
         it('should not print invalidcontentsfilepath with callback', function() {
-            dispTestCaseRunning(" 1. Should Print label <br />2. should send invalidcontentsfilepath file and should not get printed");
-            dispExpectedResult("should not print invalidcontentsfilepath");
+            dispTestCaseRunning(" 1. Should Print label <br />2. should send invalidcontentsfilepath file and should not get printed and should not get crashed");
+            dispExpectedResult("should not print invalidcontentsfilepath, API can return SUCCESS, but should not get crashed !");
             //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
             _result.waitToRunTest();
             doPrintTestLabel();
@@ -1081,9 +1081,9 @@ describe('Printer Zebra', function() {
         doprintStoredFormatWithHash(zplstoredformat, 'E:FORMAT.ZPL', hashzpl, 'without', "ZPL Language");
         doprintStoredFormatWithHash(zplstoredformat, 'E:FORMAT.ZPL', hashzpl, 'Anonymous', "ZPL Language");
 
-        doprintStoredFormatWithHash(ccplstoredformat, 'E:FORMATAS.FMT', hashccpl, 'with', "CCPL Language");
-        doprintStoredFormatWithHash(ccplstoredformat, 'E:FORMATAS.FMT', hashccpl, 'without', "CCPL Language");
-        doprintStoredFormatWithHash(ccplstoredformat, 'E:FORMATAS.FMT', hashccpl, 'Anonymous', "CCPL Language");
+        //doprintStoredFormatWithHash(ccplstoredformat, 'E:FORMATAS.FMT', hashccpl, 'with', "CCPL Language");
+        //doprintStoredFormatWithHash(ccplstoredformat, 'E:FORMATAS.FMT', hashccpl, 'without', "CCPL Language");
+        //doprintStoredFormatWithHash(ccplstoredformat, 'E:FORMATAS.FMT', hashccpl, 'Anonymous', "CCPL Language");
 
         doprintStoredFormatWithHash(invalidformatpath, 'E:FORMAT.ZPL', invalidzplhash, 'with', "invalid");
 
@@ -1166,9 +1166,9 @@ describe('Printer Zebra', function() {
         doprintStoredFormatWithArray(zplstoredformat, 'E:FORMAT.ZPL', arrayzpl, 'without', "ZPL Language");
         doprintStoredFormatWithArray(zplstoredformat, 'E:FORMAT.ZPL', arrayzpl, 'Anonymous', "ZPL Language");
 
-        doprintStoredFormatWithArray(ccplstoredformat, 'E:FORMATAS.FMT', arrayccpl, 'with', "CCPL Language");
-        doprintStoredFormatWithArray(ccplstoredformat, 'E:FORMATAS.FMT', arrayccpl, 'without', "CCPL Language");
-        doprintStoredFormatWithArray(ccplstoredformat, 'E:FORMATAS.FMT', arrayccpl, 'Anonymous', "CCPL Language");
+        //doprintStoredFormatWithArray(ccplstoredformat, 'E:FORMATAS.FMT', arrayccpl, 'with', "CCPL Language");
+        //doprintStoredFormatWithArray(ccplstoredformat, 'E:FORMATAS.FMT', arrayccpl, 'without', "CCPL Language");
+        //doprintStoredFormatWithArray(ccplstoredformat, 'E:FORMATAS.FMT', arrayccpl, 'Anonymous', "CCPL Language");
 
         doprintStoredFormatWithArray(invalidformatpath, 'E:FORMAT.ZPL', invalidzplhash, 'with', "invalid");
 
@@ -1202,21 +1202,21 @@ describe('Printer Zebra', function() {
         it("Should print a raw string after setting default printer ", function() {
             var thisprinter = null;
             var printerObj = null;
+            var callresult = null;
             dispTestCaseRunning("Set default printer and print a raw string using the default");
             dispExpectedResult(jasmine.getEnv().currentSpec.description);
 
             _result.waitToRunTest();
 
-
             runs(function() {
                 expect(last_found_printer_id).toNotEqual(null);
                 printerObj = Rho.PrinterZebra.getPrinterByID(last_found_printer_id);
                 Rho.PrinterZebra.setDefault(printerObj);
-                expect(Rho.PrinterZebra.getDefault()).toEqual(printerObj);
+                expect(Rho.PrinterZebra.getDefault().getId()).toEqual(printerObj.getId());
             });
 
             runs(function() {
-                Rho.PrinterZebra.connect(cbk);
+                Rho.PrinterZebra.connect(function(res){ console.log(res); callresult = res; });
             });
 
             waitsFor(function() {
@@ -1231,28 +1231,25 @@ describe('Printer Zebra', function() {
         });
     });
 
+    describe("Should get PRINTER_STATUS_ERR_TIMEOUT  or PRINTER_STATUS_ERROR when trying to connect the turned off printer", function() {
 
-    describe("Should get PRINTER_STATUS_ERR_TIMEOUT when trying to connect the turned off printer", function() {
-
-        it("Should get PRINTER_STATUS_ERR_TIMEOUT when using connect printer to a turned off printer", function() {
+        it("Should get PRINTER_STATUS_ERR_TIMEOUT  or PRINTER_STATUS_ERROR when using connect printer to a turned off printer", function() {
             var thisprinter = null;
             var callresult = null;
             dispTestCaseRunning("Turn off the Printer and then click on Run Test");
-            dispExpectedResult("Should get PRINTER_STATUS_ERR_TIMEOUT when using connect printer to a turned off printer");
+            dispExpectedResult("Should get PRINTER_STATUS_ERR_TIMEOUT or PRINTER_STATUS_ERROR when using connect printer to a turned off printer");
             _result.waitToRunTest();
-
-
 
             runs(function() {
                 expect(last_found_printer_id).toNotEqual(null);
                 thisprinter = Rho.PrinterZebra.getPrinterByID(last_found_printer_id);
                 callresult = null;
-                thisprinter.connect(cbk);
+                thisprinter.connect(function(res){ console.log(res); callresult = res; });
             });
 
             waitsFor(function() {
-                return callresult != null;
-            }, 'wait while connect', 5000);
+                return callresult !== null;
+            }, 'wait while connect', 25000);
 
             runs(function() {
                 displayResult(jasmine.getEnv().currentSpec.description, callresult.toString());
@@ -1261,27 +1258,25 @@ describe('Printer Zebra', function() {
             _result.waitForResponse();
         });
 
-        it("Should get PRINTER_STATUS_ERR_TIMEOUT when using connectWithOptions printer to a turned off printer", function() {
+        it("Should get PRINTER_STATUS_ERR_TIMEOUT  or PRINTER_STATUS_ERROR when using connectWithOptions printer to a turned off printer", function() {
             var thisprinter = null;
             var callresult = null;
-            dispExpectedResult("Should get PRINTER_STATUS_ERR_TIMEOUT when using connectWithOptions printer to a turned off printer");
+            dispExpectedResult("Should get PRINTER_STATUS_ERR_TIMEOUT or PRINTER_STATUS_ERROR when using connectWithOptions printer to a turned off printer");
             dispTestCaseRunning("Turn off the Printer and then click on Run Test");
             _result.waitToRunTest();
-
-
 
             runs(function() {
                 expect(last_found_printer_id).toNotEqual(null);
                 thisprinter = Rho.PrinterZebra.getPrinterByID(last_found_printer_id);
                 callresult = null;
                 thisprinter.connectWithOptions({
-                    "timeout": 0
-                });
+                    "timeout": 1000
+                },function(res){ console.log(res); callresult = res; });
             });
 
             waitsFor(function() {
-                return callresult != null;
-            }, 'wait while Connect', 5000);
+                return callresult !== null;
+            }, 'wait while Connect', 15000);
 
             runs(function() {
                 displayResult(jasmine.getEnv().currentSpec.description, callresult.toString());
@@ -1289,6 +1284,7 @@ describe('Printer Zebra', function() {
 
             _result.waitForResponse();
         });
+         
     });
 
 });

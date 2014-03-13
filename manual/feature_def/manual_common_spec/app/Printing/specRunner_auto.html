@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>RSM JS Test</title>
+    <title>Printing (Generic) JS Test</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
     <META HTTP-Equiv="MinimizeButton" content="visibility:Visible;top:30 ">
     <META HTTP-Equiv="quitbutton" Content="visibility:visible">
@@ -10,26 +10,10 @@
 
     <script type="text/javascript">
     var ParsingErrors = [];
-    var ConsoleLog = [];
-    var LogHandler = null;
 
     window.onerror = function(message, source, lineno) {
         ParsingErrors.push("Error:" + message + "\n" + "file:" + source + "\n" + "line:" + lineno);
     };
-
-    console.log = (function() {
-        var log = console.log;
-
-        return function() {
-            log.call(console, arguments);
-            if (LogHandler) {
-                LogHandler.call(this, arguments);
-            } else {                
-                var args = Array.prototype.slice.call(arguments)
-                ConsoleLog.push("console.log: " + args.join(", "));
-            }
-        }
-    })();
     </script>
 
     <script type="text/javascript" charset="utf-8" src="/public/jquery/jquery-1.6.4.min.js"></script>
@@ -40,7 +24,7 @@
     <script type="text/javascript" src="/public/jasmine/jasmine.js"></script>
     <script type="text/javascript" src="/public/jasmine/jasmine-html.js"></script>
 
-    <script type="text/javascript" src="/public/jasmine/fileReporter.js"></script>
+     <script type="text/javascript" src="/public/jasmine/jasmine-html.js"></script>
     <script type="text/javascript" src="/public/jasmine/jasmine.junit_reporter.js"></script>
     <script type="text/javascript" src="/public/api/rhoapi-modules.js"></script>
 
@@ -61,22 +45,17 @@
     </style>
 
     <!-- include Helper files here... -->
-    <script type="text/javascript" src="printer_zebra_js_test.js"></script>
+    <script type="text/javascript" src="printing_js_test.js"></script>
     <script type="text/javascript" src="../helpers/specHelpers.js"></script>
     <script type="text/javascript" src="../helpers/jasmine-extensions.js"></script>
 
     <!-- include spec files here... -->
-    <script type="text/javascript" src="printer_zebra_js_spec_discover.js"></script>
-    <script type="text/javascript" src="stacktrace.js" /></script> 
-
+    <script type="text/javascript" src="printing_js_spec_auto.js"></script>
+    
     <script type="text/javascript">
     (function() {
         var jasmineEnv = jasmine.getEnv();
         jasmineEnv.updateInterval = 1000;
-
-
-        var fileReporter = new jasmine.FileReporter("failedSpecs.txt");
-        jasmineEnv.addReporter(fileReporter);
 
         var htmlReporter = new jasmine.HtmlReporter();
         //var junitReporter = new jasmine.JUnitXmlReporter();
@@ -94,10 +73,6 @@
             if (ParsingErrors.length > 0) {
                 for (var i = 0; i < ParsingErrors.length; i++) {
                     $('#logs').append(ParsingErrors[i]);
-                };
-            } else if (ConsoleLog.length > 0) {
-                for (var i = 0; i < ConsoleLog.length; i++) {
-                    $('#logs').append(ConsoleLog[i]);
                 };
             } else {
                 $('#console').hide();
@@ -120,7 +95,14 @@
                 $('#logs').append(iargs.join(', '));
             }
 
-            LogHandler = function() { addMsg(arguments); }
+            console.log = (function() {
+                var log = console.log;
+
+                return function() {
+                    log.call(console, arguments);
+                    addMsg(arguments);
+                }
+            })();
 
             console.error = (function() {
                 var error = console.error;
@@ -131,7 +113,7 @@
                         error.call(console, exception.stack);      
                     } else {
                         error.call(console, arguments);
-                        addMsg(Array.prototype.slice.call(arguments));
+                        addMsg(arguments || []);
                     }
                 }
             })();
@@ -148,9 +130,8 @@
 <body>
     <div id="console"><b>Console: </b>
         <div id="logs" /></div>
-    </div>
-    <h1>Printer Zebra Semi-automatic Tests</h1>
-
+    </div><br/>
+    
     <div>Discovered Devices:
         <select id="dev_list"></select>
     </div>
@@ -164,11 +145,11 @@
         <input type="text" id="dev_port" value="6101" />
     </div>
 
-    <div><b>Console: </b>
-        <div id="debug" /></div>
+    <div><b>Test Output: </b>
+        <div id="test_output"></div>
     </div>
 
-    <div id="manual_contols">
+<!--    <div id="manual_contols">
         <div><b>Test Objective: </b>
             <div id="objective"></div>
         </div>
@@ -178,7 +159,7 @@
         <div><b>Expected Result: </b>
             <div id="expResult"></div>
         </div>
-        <!--<b>Decoded Data: </b><div id="clbkData" style="word-wrap: break-word;"></div>-->
+        <b>Decoded Data: </b><div id="clbkData" style="word-wrap: break-word;"></div>
         <div id="select_box_wrapper" style="display:none">
             <select name="combo" id="combo"></select>
         </div>
@@ -187,23 +168,11 @@
         </div>
         <div id="action"></div>
         <div id="actResult" style="display:none">init</div>
-        <input type="button" value="Test Passed" onclick="captureResult(true)" id="oldpass"/>
-        <input type="button" value="Test Failed" onclick="captureResult(false)" id="oldfail"/>
-
-        <input type="button" value="Run Test" onclick="_result.runTest();" id="runtest"/>
-        <input type="button" value="Test Passed" onclick="_result.passed();" id="pass" />
-        <input type="button" value="Test Failed" onclick="_result.failed();" id="fail" />
-        <input type="button" value="Done" onclick="_result.done();" id="done" />
-        <div id="actResult" style="display:none">init</div>
+        <input type="button" value="Test Passed" onclick="testPassed()" />
+        <input type="button" value="Test Failed" onclick="testFailed()" />
     </div>
+    <div id="actResult" style="display:none">init</div> -->
+
 </body>
-<script type="text/javascript">
-    $('#pass').hide();
-    $('#fail').hide();
-    $('#oldpass').hide();
-    $('#oldfail').hide();
-    $('#runtest').hide();
-    $('#done').hide();
-</script>
 
 </html>

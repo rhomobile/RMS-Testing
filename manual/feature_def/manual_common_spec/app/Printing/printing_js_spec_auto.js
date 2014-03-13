@@ -218,8 +218,8 @@ describe('Printing Generic', function() {
 
 
 
-    // search printer automatically with all available parameters
-    describe('searchPrinters Method', function() {
+    // search printer automatically with all available parameters - moved to discovery
+    xdescribe('searchPrinters Method', function() {
         var searchParamaters = {};
 
         beforeEach(function() {
@@ -459,7 +459,7 @@ describe('Printing Generic', function() {
             }, 'wait.. trying to print..', 15000);
 
             runs(function() {
-                expect(callresult.status).toEqual(Rho.Printer.PRINTER_STATUS_ERROR);
+                expect(callresult.status).toEqual(Rho.Printer.PRINTER_STATUS_ERR_NOT_CONNECTED);
             });
         });
 
@@ -505,8 +505,14 @@ describe('Printing Generic', function() {
                 });
 
                 waitsFor(function() {
-                    return callresult != null;
-                }, 'wait while connecting', 30000);
+                    if(case_type == 'without') {
+                        setTimeout(function(){callresult = true;},10000);
+                        return callresult;
+                    }
+                    else {
+                        return callresult !== null;
+                    }
+                }, 'wait for connect', 30000);
 
                 runs(function() {
 					if (case_type != 'without'){
@@ -764,8 +770,9 @@ describe('Printing Generic', function() {
             it('Should return devicePort value as an integer using get properties', function () {
 				runs(function() {
 					if(thisprinter.getProperty("connectionType") != "CONNECTION_TYPE_BLUETOOTH") {
-						var data = thisprinter.getProperties(['devicePort']);    
-						expect(data).isNumberGreaterThenZero();
+						var data = thisprinter.getProperties(['devicePort']);
+						var val = parseInt(data.devicePort, 10);
+						expect(val).isNumberGreaterThenZero();
 					}
 				});
             });
