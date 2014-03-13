@@ -201,6 +201,7 @@ var _result = {
 	time_to_wait: 300000,
 	responded: undefined,
     auto_test: false,
+    auto_fill: undefined,
 	passed: function(){
 		_result.status = true;
 		_result.responded = true;
@@ -228,9 +229,34 @@ var _result = {
         $('#done').hide();
 
     },
+    auto: function() {
+        _result.auto_fill = true;
+    },
+    man: function() {
+        _result.auto_fill = false;
+    },
+    waitForSelectTestMode: function() {
+        $("#action").find(":button").hide();
+        $("#auto").show();
+        $("#man").show();
+        _result.auto_fill = undefined;
+
+        runs(function() {
+            setTimeout(function() {
+                timeout = true;
+            }, _result.time_to_wait);
+        });
+
+        waitsFor(function() {
+            return _result.auto_fill !== undefined;
+        }, 'waiting for user response', _result.time_to_wait+5000);
+
+        runs(function() {
+            $("#action").find(":button").hide();
+        });
+    },
 	waitForResponse: function(){
 		var timeout = false;
-		var responded = false;
 		runs(function() {
             setTimeout(function() {
                 timeout = true;
@@ -264,19 +290,26 @@ var _result = {
             _result.responded = undefined;
         });
     },
-    waitUntilDone: function(){
+    waitUntilDone: function(needToWaitFn){
+        var canWeSkipWait = false;
+
         runs(function() {
             $('#pass').hide();
             $('#fail').hide();
             $('#done').show();
             $('#runtest').hide();
+            _result.responded = false;
+
+            if (needToWaitFn !== undefined && needToWaitFn !== null) {
+                canWeSkipWait = !needToWaitFn();
+            }
             setTimeout(function() {
                 timeout = true;
             }, _result.time_to_wait);
         });
 
         waitsFor(function() {
-            return _result.responded;
+            return _result.responded || canWeSkipWait;
         }, 'waiting for user response', _result.time_to_wait+5000);
 
         runs(function() {

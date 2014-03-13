@@ -23,15 +23,36 @@ describe('Printer Zebra', function() {
     // setup 
     it('initialize before tests', function() {
         var searchObject = {};
-        runs(function() {
-            setObjective(jasmine.getEnv().currentSpec.description);
-            setInstruction('Wait until devices are discovered to continue');
-            setExpected('Press any button to continute');
-            setupTestFields();
-        });
 
         runs(function() {
-            searchObject = runSearch({}, 30000);
+            setObjective(jasmine.getEnv().currentSpec.description);
+            setInstruction('Select desired discovery mode');
+        });
+
+        _result.waitForSelectTestMode();
+
+        runs(function() {
+            if (_result.auto_fill === false) {
+                setInstruction('Set device type, address and port, then press "done button"');
+            } else {
+                setInstruction('Wait until devices are discovered to continue');
+            }
+        });
+
+        _result.waitUntilDone(function(){ return _result.auto_fill === false; });
+
+        runs(function() {
+            if (_result.auto_fill == true) {
+                searchObject = runSearch({}, 30000);
+            } else {
+                searchVals = {};
+                searchVals['connectionType'] = $('#dev_conn_type').val();
+                searchVals['devicePort'] = $('#dev_port').val();
+                searchVals['deviceAddress'] = $('#dev_addr').val();
+                searchObject = runSearch(searchVals, 30000);
+            }
+            setExpected('');
+            setupTestFields();
         });
 
         waitsFor(function() {
@@ -39,6 +60,8 @@ describe('Printer Zebra', function() {
         }, '60sec waiting for Search printer', ENABLE60K);
 
         runs(function() {
+            setInstruction('Use drop-down list to select tested device and then press "done" button.');
+            setExpected('There shopud be at least one device to select.');
             if (searchObject.printers.length > 0) {
                 displaySearchResults({}, searchObject.printers, searchObject.errors);
                 updatePrinterList(searchObject.printers);
@@ -47,8 +70,8 @@ describe('Printer Zebra', function() {
             expect(searchObject.errors).toEqual([]);
             expect(searchObject.printers.length).toBeGreaterThan(0);
         });
-        
-        _result.waitUntilDone();
+
+        _result.waitUntilDone(function(){ return _result.auto_fill === true; });
 
         runs(function() {
             var printerSettings = $('#dev_list').val().split('|');
