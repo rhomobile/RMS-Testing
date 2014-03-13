@@ -211,6 +211,8 @@ describe("Log JS API", function () {
 			});
 		});
 		
+		if (clientPlatform != Rho.System.PLATFORM_WP8)
+		{
 		// Call sendLog()
 		it("VT290-397 : send log file with valid path, no callback| log exists", function() {
 			var flag = false;
@@ -378,7 +380,7 @@ describe("Log JS API", function () {
 			});
 
 		});
-
+		}
 
 		// Set log destination to file only
 		it("VT290-300 : Log destination to file only", function() {
@@ -1095,7 +1097,7 @@ describe("Log JS API", function () {
 */
 		}
 
-		if (clientPlatform == Rho.System.PLATFORM_ANDROID || clientPlatform == Rho.System.PLATFORM_IOS || clientPlatform == Rho.System.PLATFORM_WP8 )
+		if (clientPlatform == Rho.System.PLATFORM_ANDROID || clientPlatform == Rho.System.PLATFORM_IOS) // || clientPlatform == Rho.System.PLATFORM_WP8
 		{
 			// Set Netrace to true
 			it("VT290-361 : Set netrace to true | true", function() {

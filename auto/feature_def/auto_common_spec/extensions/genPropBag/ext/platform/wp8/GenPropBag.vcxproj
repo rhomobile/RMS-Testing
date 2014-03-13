@@ -19,7 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{d5343df0-b0eb-0130-785e-406c8f3c4bb4}</ProjectGuid>
+    <ProjectGuid>{5B53B2AC-AB6A-4916-ABE9-80E065FEFB74}</ProjectGuid>
     <RootNamespace>genPropBag</RootNamespace>
     <DefaultLanguage>en-US</DefaultLanguage>
     <MinimumVisualStudioVersion>11.0</MinimumVisualStudioVersion>

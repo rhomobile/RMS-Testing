@@ -14,8 +14,8 @@ describe('Printing Generic', function() {
     var connect_type = Rho.Printer.CONNECTION_TYPE_TCP;
     var stopsearch = '';
     var deviceaddressFlag = false;
-    var CommandZPL = '^XA^FO50,50^ADN,36,20^FDPrinting^FS^XZ';
-    var CommandCCPL = '"! 0 200 200 210 1\r\nTEXT 4 0 30 40 Hello World\r\nFORM\r\nPRINT\r\n';
+    var CommandZPL = '^XA^FO50,50^ADN,36,20^FDPrintingZPL^FS^XZ';
+    var CommandCCPL = '"! 0 200 200 210 1\r\nTEXT 4 0 30 40 Printing CCPL\r\nFORM\r\nPRINT\r\n';
     var connect_status = '';
     var existingPritingObject = null;
     var last_found_printer = null;
@@ -57,11 +57,10 @@ describe('Printing Generic', function() {
 
     var sizes = [];
 
-    if (Rho.System.platform == Rho.System.PLATFORM_WM_CE) {
-        sizes = ['320px', '640px', '1024px'];
-    } else {
-        sizes = ['320px', '640px', '1024px', '2048px'];
-    }
+    // 2048 size is too large for mobile printers !!!
+    sizes = ['320px', '640px', '1024px'];
+
+         
     var extensions = ['png','jpg','gif','bmp'];
 
     for (var e = extensions.length - 1; e >= 0; e--) {
@@ -276,10 +275,10 @@ describe('Printing Generic', function() {
             return callresult !== null;
         }, 'wait until printingLabel', 20000);
 
-        //runs(function() {
-        //    displayResult(jasmine.getEnv().currentSpec.description, callresult.toString());
-        //    callresult = null;
-        //});
+        runs(function() {
+            displayResult(jasmine.getEnv().currentSpec.description, callresult.toString());
+            callresult = null;
+        });
 					
     }
 
@@ -308,9 +307,9 @@ describe('Printing Generic', function() {
             return callresult;
         }, 'wait until setting lable length', 15000);
 		
-		// runs(function() {
-			// displayResult(jasmine.getEnv().currentSpec.description, callresult.toString());
-        // });
+		runs(function() {
+			displayResult(jasmine.getEnv().currentSpec.description, callresult.toString());
+        });
 
 		_result.waitForResponse();
     }
@@ -337,7 +336,7 @@ describe('Printing Generic', function() {
 
     function doPrintPrintFileAnonCbk(filename, options) {
         runs(function() {
-            var callresult = null;
+            callresult = null;
             thisprinter.printFile(filename, options, function(val){ 
                 callresult = val; 
             });
@@ -387,7 +386,7 @@ describe('Printing Generic', function() {
 
     function doPrintRawCommandAnonCbk(cmd) {
         runs(function() {
-            var callresult = null;
+            callresult = null;
             thisprinter.printRawString(cmd, {}, function(val){ 
                 callresult = val; 
             });
@@ -421,7 +420,7 @@ describe('Printing Generic', function() {
 
         it('should print png with callback', function() {
             dispTestCaseRunning(" 1. Should Print label <br />2. Should print PNG image ");
-            dispExpectedResult("should print png image");
+            dispExpectedResult("should print png image and return PRINTER_STATUS_SUCCESS upon printing");
             //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
             _result.waitToRunTest();
             doPrintTestLabel();
@@ -431,7 +430,7 @@ describe('Printing Generic', function() {
 
         it('should print png with anonymous function', function() {
             dispTestCaseRunning(" 1. Should Print label <br />2. Should print PNG image ");
-            dispExpectedResult("should print png image");
+            dispExpectedResult("should print png image and return PRINTER_STATUS_SUCCESS upon printing");
             //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
             _result.waitToRunTest();
             doPrintTestLabel();
@@ -452,7 +451,7 @@ describe('Printing Generic', function() {
 
         it('should print jpeg with callback', function() {
             dispTestCaseRunning(" 1. Should Print label <br />2. Should print jpeg image. ");
-            dispExpectedResult("should print jpeg image");
+            dispExpectedResult("should print jpeg image and return PRINTER_STATUS_SUCCESS upon printing");
             //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
             _result.waitToRunTest();
             doPrintTestLabel();
@@ -462,7 +461,7 @@ describe('Printing Generic', function() {
 
         it('should print jpeg with anonymous function', function() {
             dispTestCaseRunning(" 1. Should Print label <br />2. Should print jpeg image. ");
-            dispExpectedResult("should print jpeg image file");
+            dispExpectedResult("should print jpeg image file and return PRINTER_STATUS_SUCCESS upon printing");
             //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
             _result.waitToRunTest();
             doPrintTestLabel();
@@ -501,11 +500,10 @@ describe('Printing Generic', function() {
             doPrintPrintFileAnonCbk(bmpimagepath_320px, {});
         });
 
-        //pdf is unsupported !!!
-        /*
-        it('should print pdf without callback', function() {
+        
+        xit('should print pdf without callback', function() {
 			dispTestCaseRunning(" 1. Should Print label <br />2. Should print PDF file.");
-			dispExpectedResult("should print pDF file");
+			dispExpectedResult("should print pdf file");
 			//Common Method implemented to wait for tester to run the test.Code available in specHelper.js
 			_result.waitToRunTest();
             doPrintTestLabel();
@@ -513,9 +511,9 @@ describe('Printing Generic', function() {
             doPrintPrintFile(pdffilepath, {});
         });
 
-        it('should print pdf with callback', function() {
+        it('should not print pdf with callback', function() {
             dispTestCaseRunning(" 1. Should Print label <br />2. Should print PDF file.");
-            dispExpectedResult("should print pDF file");
+            dispExpectedResult("should not print pDF file and return PRINTER_STATUS_ERR_UNSUPPORTED");
             //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
             _result.waitToRunTest();
             doPrintTestLabel();
@@ -523,7 +521,7 @@ describe('Printing Generic', function() {
             doPrintPrintFileCbk(pdffilepath, {});
         });
 
-        it('should print pdf with anonymous function', function() {
+        xit('should print pdf with anonymous function', function() {
             dispTestCaseRunning(" 1. Should Print label <br />2. Should print PDF file.");
             dispExpectedResult("should print pDF file");
             //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
@@ -532,12 +530,12 @@ describe('Printing Generic', function() {
             doSetLabelLength(500);
             doPrintPrintFileAnonCbk(pdffilepath, {});
         });
-        */
+        
 
         // empty filename
         it('should not print empty filename with callback', function() {
     		dispTestCaseRunning(" 1. Should Print label <br />2. should not print empty filename.");
-    		dispExpectedResult("should not print empty filename with callback");
+    		dispExpectedResult("should not print empty filename");
     		//Common Method implemented to wait for tester to run the test.Code available in specHelper.js
     		_result.waitToRunTest();
             doPrintTestLabel();
@@ -548,7 +546,7 @@ describe('Printing Generic', function() {
         // invalid filename
         it('should not print invalid filename with callback', function() {
 			dispTestCaseRunning(" 1. Should Print label <br />2. should not print invalid filename");
-			dispExpectedResult("should not print invalid filename with callback");
+			dispExpectedResult("should not print invalid filename");
 			//Common Method implemented to wait for tester to run the test.Code available in specHelper.js
 			_result.waitToRunTest();
             doPrintTestLabel();
@@ -577,7 +575,7 @@ describe('Printing Generic', function() {
 
         it('should print ZPL Command with callback', function() {
             dispTestCaseRunning(" 1. Should Print label <br />2. should print ZPL Command ");
-            dispExpectedResult("should print ZPL Command with callback");
+            dispExpectedResult("should print ZPL Command with callback and return PRINTER_STATUS_SUCCESS upon printing");
             //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
             _result.waitToRunTest();
             doPrintTestLabel();
@@ -587,7 +585,7 @@ describe('Printing Generic', function() {
 
         it('should print ZPL Command with anonymous function', function() {
             dispTestCaseRunning(" 1. Should Print label <br />2. should print ZPL Command ");
-            dispExpectedResult("should print ZPL Command with anonymous function");
+            dispExpectedResult("should print ZPL Command with anonymous function and return PRINTER_STATUS_SUCCESS upon printing");
             //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
             _result.waitToRunTest();
             doPrintTestLabel();
@@ -608,7 +606,7 @@ describe('Printing Generic', function() {
 
         it('should print CPCL Command with callback', function() {
             dispTestCaseRunning(" 1. Should Print label <br />2. should print CPCL Command ");
-            dispExpectedResult("should print CPCL Command with callback");
+            dispExpectedResult("should print CPCL Command with callback and return PRINTER_STATUS_SUCCESS upon printing");
             //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
             _result.waitToRunTest();
             doPrintTestLabel();
@@ -618,7 +616,7 @@ describe('Printing Generic', function() {
 
         it('should print CPCL Command with anonymous function', function() {
             dispTestCaseRunning(" 1. Should Print label <br />2. should print CPCL Command ");
-            dispExpectedResult("should print CPCL Command with anonymous function");
+            dispExpectedResult("should print CPCL Command with anonymous function and return PRINTER_STATUS_SUCCESS upon printing");
             //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
             _result.waitToRunTest();
             doPrintTestLabel();
@@ -731,7 +729,7 @@ describe('Printing Generic', function() {
 
         it( deftext.join(' ') , function() {
             dispTestCaseRunning("1. Should Print label <br />2. "+def+" Print "+Rho.RhoFile.basename(from)+" image");
-            dispExpectedResult(jasmine.getEnv().currentSpec.description, callresult.toString());
+            dispExpectedResult(jasmine.getEnv().currentSpec.description, ""/*callresult.toString()*/);
             //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
             _result.waitToRunTest();
             doPrintTestLabel();
@@ -768,12 +766,15 @@ describe('Printing Generic', function() {
         it('should connect', function() {
             doConnect();
         });
-
-        generatePrintImageWithoutAnonymous('without', pngimagepath_320px,100,100,{'width':10,'height':10,'isInsideFormat':true},true);
+             
+             
+        // isInsideFormat == true used for print inside format rpint - current uses of this property is incorrect !!!
+        // in current test code only FALSE value is valid for used for isInsideFormat !!!
+        generatePrintImageWithoutAnonymous('without', pngimagepath_320px,100,100,{'width':10,'height':10,'isInsideFormat':false},true);
         generatePrintImageWithoutAnonymous('Anonymous', pngimagepath_640px,10,10,{'width':50,'height':50,'isInsideFormat':false},true);
         generatePrintImageWithoutAnonymous('Anonymous', pngimagepath_1024px,10,10,{'width':-1,'height':-1,'isInsideFormat':false},true);
-        generatePrintImageWithoutAnonymous('without', jpgimagepath_320px,100,100,{'width':10,'height':10,'isInsideFormat':true},true);
-        generatePrintImageWithoutAnonymous('Anonymous', jpgimagepath_640px,10,10,{'width':50,'height':50,'isInsideFormat':true},true);
+        generatePrintImageWithoutAnonymous('without', jpgimagepath_320px,100,100,{'width':10,'height':10,'isInsideFormat':false},true);
+        generatePrintImageWithoutAnonymous('Anonymous', jpgimagepath_640px,10,10,{'width':50,'height':50,'isInsideFormat':false},true);
         generatePrintImageWithoutAnonymous('Anonymous', pngimagepath_1024px,10,10,{'width':-1,'height':-1,'isInsideFormat':false},true);
 
     });
@@ -843,7 +844,7 @@ describe('Printing Generic', function() {
     
     });
 
-    // get and set default printer -- disabled bec its crashing the app as of now
+    // get and set default printer
     describe("Should print a raw string using the get default printer", function() {
 		it("Should print a raw string using the get default printer", function() {
 			var thisprinter = null;
@@ -852,13 +853,13 @@ describe('Printing Generic', function() {
 			_result.waitToRunTest();
 
 			dispTestCaseRunning("Set default printer and print a raw string using the get default");
-			dispExpectedResult(jasmine.getEnv().currentSpec.description, callresult.toString());
+			dispExpectedResult(jasmine.getEnv().currentSpec.description, ""/*callresult.toString()*/);
 
 			runs(function() {
 				expect(last_found_printer_id).toNotEqual(null);
 				printerObj = Rho.Printer.getPrinterByID(last_found_printer_id);
 				Rho.Printer.setDefault(printerObj);
-				expect(Rho.Printer.getDefault()).toEqual(printerObj);
+				expect(Rho.Printer.getDefault().ID).toEqual(printerObj.ID);
 			});
 		
 			runs(function() {
@@ -885,8 +886,8 @@ describe('Printing Generic', function() {
         });
 
         it( "Should get All printer properties using getAllProperties", function() {
-            dispTestCaseRunning("1. Should Display All printer properties");
-            dispExpectedResult(jasmine.getEnv().currentSpec.description, callresult.toString());
+            dispTestCaseRunning("1. Should display all printer properties");
+            dispExpectedResult(jasmine.getEnv().currentSpec.description, ""/*callresult.toString()*/);
             //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
             _result.waitToRunTest();
             var allproperties = {};

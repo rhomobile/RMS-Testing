@@ -509,7 +509,7 @@ describe('Printer Zebra', function() {
             }, 'wait.. trying to print..', 25000);
 
             runs(function() {
-                expect(callresultp.status).toEqual(Rho.PrinterZebra.PRINTER_STATUS_ERROR);
+                expect(callresultp.status).toBeIn([Rho.PrinterZebra.PRINTER_STATUS_ERROR,Rho.PrinterZebra.PRINTER_STATUS_ERR_NOT_CONNECTED]);
             });
         });
 
@@ -555,7 +555,10 @@ describe('Printer Zebra', function() {
 
                 waitsFor(function() {
                     if (case_type == 'without') {
-                        return thisprinter.isConnected;
+                         if (!expectedResult) {
+                            return !thisprinter.isConnected;
+                         }
+                         return thisprinter.isConnected;
                     } else {
                         return callresult !== null;
                     }
@@ -570,7 +573,7 @@ describe('Printer Zebra', function() {
                      }
                      else {
                         if (case_type != 'without') {
-                            expect(callresult).toEqual(Rho.Printer.PRINTER_STATUS_ERR_TIMEOUT);
+                            expect((callresult == Rho.Printer.PRINTER_STATUS_ERR_TIMEOUT) || (callresult == Rho.Printer.PRINTER_STATUS_ERROR)).toEqual(true);
                         }
                         expect(thisprinter.isConnected).toEqual(false);
                      }
@@ -583,7 +586,7 @@ describe('Printer Zebra', function() {
         }, {
             "timeout": 0
         }, {
-            "timeout": 10
+            "timeout": 1
         },
         //                     {
         //    "timeout": 15000.5
@@ -591,7 +594,8 @@ describe('Printer Zebra', function() {
                              ];
 
         // 20 sec is enought for connect
-        // 0 and 10 too short time - should not connected for this time
+        // 0 is invalid timeout
+        // 10 too short time - should not connected for this time
         // 15000.5 - invalid type - must be integer (but in this case method must return ERROR not TIMEOUT!)
              
              
@@ -1117,28 +1121,26 @@ describe('Printer Zebra', function() {
     describe("Get & Set default PrinterZebra", function() {
         var printerObj = null;
 
-        it('there is an instance of a printer', function() {
+        it('there is an instance of a printer, ', function() {
             runs(function() {
                 expect(last_found_printer_id).toNotEqual(null);
-                printerObj = Rho.PrinterZebra.getPrinterByID(last_found_printer_id);
-                Rho.PrinterZebra.setDefault(printerObj);
-            });
-        });
 
-        it('get default PrinterZebra', function() {
-            runs(function() {
-                thisprinter = Rho.PrinterZebra.getDefault();
-                expect(thisprinter.ID).toNotEqual(null);
             });
         });
 
         it('set default PrinterZebra', function() {
             runs(function() {
-                Rho.PrinterZebra.setDefault(printerObj);
-                var defPrinter = Rho.PrinterZebra.getDefault();
-                expect(defPrinter.ID).toEqual(printerObj.ID);
+                printerObj = Rho.PrinterZebra.getPrinterByID(last_found_printer_id);
+                Rho.PrinterZebra.setDefault( printerObj );
             });
         });
 
+        it('get default PrinterZebra', function() {
+            runs(function() {
+                expect(Rho.PrinterZebra.ID).toNotEqual(null);
+                expect(Rho.PrinterZebra.ID).toEqual(last_found_printer_id);
+                expect(Rho.PrinterZebra.getDefault().ID).toEqual(printerObj.ID);
+            });
+        });
     });
 });

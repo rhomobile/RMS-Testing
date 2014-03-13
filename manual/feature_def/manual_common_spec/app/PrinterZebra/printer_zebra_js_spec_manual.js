@@ -1202,21 +1202,21 @@ describe('Printer Zebra', function() {
         it("Should print a raw string after setting default printer ", function() {
             var thisprinter = null;
             var printerObj = null;
+            var callresult = null;
             dispTestCaseRunning("Set default printer and print a raw string using the default");
             dispExpectedResult(jasmine.getEnv().currentSpec.description);
 
             _result.waitToRunTest();
 
-
             runs(function() {
                 expect(last_found_printer_id).toNotEqual(null);
                 printerObj = Rho.PrinterZebra.getPrinterByID(last_found_printer_id);
                 Rho.PrinterZebra.setDefault(printerObj);
-                expect(Rho.PrinterZebra.getDefault()).toEqual(printerObj);
+                expect(Rho.PrinterZebra.getDefault().getId()).toEqual(printerObj.getId());
             });
 
             runs(function() {
-                Rho.PrinterZebra.connect(cbk);
+                Rho.PrinterZebra.connect(function(res){ console.log(res); callresult = res; });
             });
 
             waitsFor(function() {
@@ -1235,22 +1235,20 @@ describe('Printer Zebra', function() {
 
         it("Should get PRINTER_STATUS_ERR_TIMEOUT  or PRINTER_STATUS_ERROR when using connect printer to a turned off printer", function() {
             var thisprinter = null;
-            //var callresult = null;
+            var callresult = null;
             dispTestCaseRunning("Turn off the Printer and then click on Run Test");
             dispExpectedResult("Should get PRINTER_STATUS_ERR_TIMEOUT or PRINTER_STATUS_ERROR when using connect printer to a turned off printer");
             _result.waitToRunTest();
-
-
 
             runs(function() {
                 expect(last_found_printer_id).toNotEqual(null);
                 thisprinter = Rho.PrinterZebra.getPrinterByID(last_found_printer_id);
                 callresult = null;
-                thisprinter.connect(cbk);
+                thisprinter.connect(function(res){ console.log(res); callresult = res; });
             });
 
             waitsFor(function() {
-                return callresult != null;
+                return callresult !== null;
             }, 'wait while connect', 25000);
 
             runs(function() {
@@ -1260,27 +1258,24 @@ describe('Printer Zebra', function() {
             _result.waitForResponse();
         });
 
-        /* this test is totally invalid - connect() and connectWithOptions() called asynchroniosly !!! Test do not use callback for check  result !
         it("Should get PRINTER_STATUS_ERR_TIMEOUT  or PRINTER_STATUS_ERROR when using connectWithOptions printer to a turned off printer", function() {
             var thisprinter = null;
-            //var callresult = null;
+            var callresult = null;
             dispExpectedResult("Should get PRINTER_STATUS_ERR_TIMEOUT or PRINTER_STATUS_ERROR when using connectWithOptions printer to a turned off printer");
             dispTestCaseRunning("Turn off the Printer and then click on Run Test");
             _result.waitToRunTest();
-
-
 
             runs(function() {
                 expect(last_found_printer_id).toNotEqual(null);
                 thisprinter = Rho.PrinterZebra.getPrinterByID(last_found_printer_id);
                 callresult = null;
                 thisprinter.connectWithOptions({
-                    "timeout": 0
-                });
+                    "timeout": 1000
+                },function(res){ console.log(res); callresult = res; });
             });
 
             waitsFor(function() {
-                return callresult != null;
+                return callresult !== null;
             }, 'wait while Connect', 15000);
 
             runs(function() {
@@ -1290,7 +1285,6 @@ describe('Printer Zebra', function() {
             _result.waitForResponse();
         });
          
-        */
     });
 
 });

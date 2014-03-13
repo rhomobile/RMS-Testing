@@ -1,14 +1,13 @@
-describe('Printer Zebra', function() {
+describe('Printing Generic', function() {
     var ENABLE9K = 9000;
     var ENABLE10K = 10000;
-    var ENABLE30K = 30000;
     var ENABLE60K = 60000;
     var ENABLE120K = 120000;
     var ENABLE5MIN = 300000;
     var ENABLE30MIN = 1800000;
-    var connect_type = Rho.PrinterZebra.CONNECTION_TYPE_TCP;
-    var CommandZPL = '^XA^FO50,50^ADN,36,20^FDZebraPrinting^FS^XZ';
-    var CommandCCPL = '"! 0 200 200 210 1\r\nTEXT 4 0 30 40 Hello World\r\nFORM\r\nPRINT\r\n';
+    var connect_type = Rho.Printer.CONNECTION_TYPE_TCP;
+    var CommandZPL = '^XA^FO50,50^ADN,36,20^FDPrinting Generic ZPL^FS^XZ';
+    var CommandCCPL = '"! 0 200 200 210 1\r\nTEXT 4 0 30 40 Printing Generic CCPL\r\nFORM\r\nPRINT\r\n';
     var last_found_printer_id = null;
 
     beforeEach(function() {
@@ -46,14 +45,6 @@ describe('Printer Zebra', function() {
             }
             expect(searchObject.errors).toEqual([]);
             expect(searchObject.printers.length).toBeGreaterThan(0);
-        });
-        
-        _result.waitUntilDone();
-
-        runs(function() {
-            var printerSettings = $('#dev_list').val().split('|');
-            last_found_printer_id = printerSettings[3];
-            last_found_printer = Rho.PrinterZebra.getPrinterByID(last_found_printer_id);
         });
     });
 
@@ -97,7 +88,7 @@ describe('Printer Zebra', function() {
                     searchObject = runSearch(searchVals, 35000);
                 });
 
-                waits(ENABLE30K);
+                waits(5000);
 
                 runs(function() {
                     // check if search was ended before printer discovery
@@ -109,7 +100,7 @@ describe('Printer Zebra', function() {
 
                 waitsFor(function() {
                     return searchObject.finished;
-                }, '40sec waiting for Search printer', ENABLE60K);
+                }, '40sec waiting for Search printer', 40000);
 
                 runs(function() {
                     displaySearchResults(searchVals, searchObject.printers, searchObject.errors);

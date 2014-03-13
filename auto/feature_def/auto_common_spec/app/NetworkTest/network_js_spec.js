@@ -67,6 +67,7 @@ describe('Network JS API', function() {
        
     });
 
+        if (Rho.System.platform != Rho.System.PLATFORM_WP8)
         it('VT293-0014 | detectConnection with wlan profile enabled', function () {
 
             runs(function () {
@@ -102,6 +103,7 @@ describe('Network JS API', function() {
 
         });
 
+        if (Rho.System.platform != Rho.System.PLATFORM_WP8)
         it('VT293-0016 | detectConnection with ananymous callback', function () {
 
             runs(function () {
@@ -186,6 +188,7 @@ describe('Network JS API', function() {
 
         });
 
+        if (Rho.System.platform != Rho.System.PLATFORM_WP8)
         it('VT293-0021 | detectConnection with pollinterval and dtectionTimeout', function () {
             var flag = false;
             runs(function () {
@@ -221,6 +224,7 @@ describe('Network JS API', function() {
         });
 
 
+        if (Rho.System.platform != Rho.System.PLATFORM_WP8)
         it('VT293-0022 | stopDetectingConnection with wlan profile enabled', function () {
             var flag = false;
             runs(function () {
@@ -355,8 +359,6 @@ describe('Network JS API', function() {
                     expect(data).toEqual('initial POST request is: test and test2');
                 });
             });
-
-        }
 
     it('VT293-0040 | post with valide url', function() {
        var flag = false;
@@ -683,6 +685,8 @@ describe('Network JS API', function() {
             //TODO: Need to add Code for File exist.
         });
     });
+        }
+
 
      it('VT293-0050 | download file with overwrite true and createfolder fasle value with callback', function() {
        var flag = false;
@@ -721,6 +725,8 @@ describe('Network JS API', function() {
     });
 
 
+     if (Rho.System.platform != Rho.System.PLATFORM_WP8)
+     {
      it('VT293-0051 | download file with overwrite true and createfolder true value with callback', function() {
        var flag = false;
        var callbackCalled = false;
@@ -1079,4 +1085,5 @@ describe('Network JS API', function() {
         });
        }
     );
+    }
 });
