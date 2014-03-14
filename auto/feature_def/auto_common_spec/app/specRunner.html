@@ -16,6 +16,15 @@
 			"GeneratorTest/specRunner.html",
 			"NetworkTest/specRunner.html",
 			"OrmTest/specRunner.html"
+		] : ( (Rho.System.platform == Rho.System.PLATFORM_WINDOWS_DESKTOP) ? [
+			"LogTest/specRunner.html",
+			"DatabaseTest/specRunner.html",
+			"FileTest/specRunner.html",
+			"GeneratorTest/specRunner.html",
+			"NetworkTest/specRunner.html",
+			"OrmTest/specRunner.html",
+			"SystemRE1Test/specRunner.html",
+			"WebsocketTest/specRunner.html"
 		] : [
 			"BarcodeTest/specRunner.html",
 			"LogTest/specRunner.html",
@@ -34,7 +43,7 @@
 			//"ApplicationTest/specRunner.html", //Not ready, use manual
 			//"IndicatorsTest/specRunner.html", //Broken on WMCE
 			//"WebViewTest/specRunner.html" //Not Ready, use manual
-		];
+		]);
 		
 	</script>
     <script type='text/javascript'>		
