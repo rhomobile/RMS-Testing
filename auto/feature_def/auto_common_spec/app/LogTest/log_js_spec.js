@@ -211,7 +211,7 @@ describe("Log JS API", function () {
 			});
 		});
 		
-		if (clientPlatform != Rho.System.PLATFORM_WP8)
+		if ((clientPlatform != Rho.System.PLATFORM_WP8) && (clientPlatform != Rho.System.PLATFORM_WINDOWS_DESKTOP))
 		{
 		// Call sendLog()
 		it("VT290-397 : send log file with valid path, no callback| log exists", function() {
@@ -1023,7 +1023,7 @@ describe("Log JS API", function () {
 		});
 		*/
 
-		if (Rho.System.platform != "WP8") {
+		if ((Rho.System.platform != Rho.System.PLATFORM_WP8) && (Rho.System.platform != Rho.System.PLATFORM_WINDOWS_DESKTOP)) {
 
 			// Set Log Memory period to 2 seconds
 			it("VT290-355 : Set Log Memory period to 2 secs | 2000", function () {
