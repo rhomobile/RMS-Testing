@@ -109,11 +109,27 @@ var dispCurrentProcess = function (data){
 	document.getElementById('detailsdiv').innerHTML = data;
 }
 
+var displayObjective = function(data){
+    document.getElementById('objective').innerHTML = data;
+}
+var displayPrecondition = function(data){
+    if(data.length>0){
+        var retData = "<b>PreConditions:</b><br/><ul>";
+        for (var i=0; i<data.length;i++){
+            retData = retData + "<li>"+data[i]+"</li>"
+        }
+        retData = retData + "</ul>";
+        document.getElementById('preCondition').innerHTML = retData;
+    }else{
+        document.getElementById('preCondition').innerHTML = " - ";
+    }
+}
 var dispExpectedResult= function (data){
 	document.getElementById('expectedresult').innerHTML = data;
 }
 
 var dispTestCaseRunning = function (data){
+    data = nl2br(data);
 	document.getElementById('instruction').innerHTML = data;
 }
 
@@ -158,4 +174,141 @@ function isTestApplicable (anArray){
 var captureResult = function(status){
     testResult = status;
     captured = true;
+}
+
+var _result = {
+	status: undefined,
+	time_to_wait: 300000,
+	responded: undefined,
+    auto_test: false,
+    auto_fill: undefined,
+	passed: function(){
+		_result.status = true;
+		_result.responded = true;
+	},
+	failed: function(){
+		_result.status = false;
+		_result.responded = true;
+	},
+    done: function(){
+        _result.status = true;
+        _result.responded = true;
+    },
+	reset: function(){
+		_result.status = undefined;
+		_result.responded = undefined;
+        _result.auto_test = false;
+	},
+    runTest: function(){
+        _result.responded = true;
+        if (!_result.auto_test) {
+            $('#pass').show();
+            $('#fail').show();
+        }
+        $('#runtest').hide();
+        $('#done').hide();
+
+    },
+    auto: function() {
+        _result.auto_fill = true;
+    },
+    man: function() {
+        _result.auto_fill = false;
+    },
+    waitForSelectTestMode: function() {
+        $("#action").find(":button").hide();
+        $("#auto").show();
+        $("#man").show();
+        _result.auto_fill = undefined;
+
+        runs(function() {
+            setTimeout(function() {
+                timeout = true;
+            }, _result.time_to_wait);
+        });
+
+        waitsFor(function() {
+            return _result.auto_fill !== undefined;
+        }, 'waiting for user response', _result.time_to_wait+5000);
+
+        runs(function() {
+            $("#action").find(":button").hide();
+        });
+    },
+	waitForResponse: function(){
+		var timeout = false;
+		runs(function() {
+            setTimeout(function() {
+                timeout = true;
+            }, _result.time_to_wait);
+        });
+
+        waitsFor(function() {
+            return _result.responded;
+        }, 'waiting for user response', _result.time_to_wait+5000);
+
+        runs(function() {
+            expect(true).toEqual(_result.status);
+        });
+    },
+    waitToRunTest: function(){
+        runs(function() {
+            $('#pass').hide();
+            $('#fail').hide();
+            $('#done').hide();
+            $('#runtest').show();
+            setTimeout(function() {
+                timeout = true;
+            }, _result.time_to_wait);
+        });
+
+        waitsFor(function() {
+            return _result.responded;
+        }, 'waiting for user response', _result.time_to_wait+5000);
+
+        runs(function() {
+            _result.responded = undefined;
+        });
+    },
+    waitUntilDone: function(needToWaitFn){
+        var canWeSkipWait = false;
+
+        runs(function() {
+            $('#pass').hide();
+            $('#fail').hide();
+            $('#done').show();
+            $('#runtest').hide();
+            _result.responded = false;
+
+            if (needToWaitFn !== undefined && needToWaitFn !== null) {
+                canWeSkipWait = !needToWaitFn();
+            }
+            setTimeout(function() {
+                timeout = true;
+            }, _result.time_to_wait);
+        });
+
+        waitsFor(function() {
+            return _result.responded || canWeSkipWait;
+        }, 'waiting for user response', _result.time_to_wait+5000);
+
+        runs(function() {
+            _result.responded = undefined;
+             $('#done').hide();
+        });
+    },
+    waitToRunAutoTest: function() {
+        _result.auto_test = true;
+        _result.waitToRunTest();
+    }
+}
+
+beforeEach(function() {
+    _result.reset();
+    //document.getElementById("myList").innerHTML = '';
+});
+
+function nl2br (str, is_xhtml) {   
+    var breakTag = (is_xhtml || typeof is_xhtml === 'undefined') ? '<br />' : '<br>';    
+    return (str + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1'+ breakTag +'$2');
 }
