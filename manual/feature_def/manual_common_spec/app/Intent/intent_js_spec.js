@@ -739,6 +739,44 @@ describe('Intent_UseCases Functionality Test', function () {
                 Rho.Intent.send(params);
             });
             _result.waitForResponse();
+        });
+        it('Send intent to view jpeg from package', function(){
+            displayObjective('Send intent to view jpeg from package (Use Adobe Reader app only!)');
+            dispTestCaseRunning('Sending intent with URI to internal jpeg file');
+            dispExpectedResult('Image viewer app should be opened with image content');
+            _result.waitToRunTest();
+            runs(function(){
+                var path;
+                pdf = "content://com.rhomobile.manual_common_spec/rhodata/apps/public/intent/rhodes.jpg";
+                // path = "/mnt/sdcard/GlorpTutorial.pdf";
+                // path = "file:///sdcard/Rhodes.pdf";
+                var parameters = {
+                    intentType: Rho.Intent.START_ACTIVITY,
+                    action: "ACTION_VIEW",
+                    uri: pdf };
+                    //mimeType: "application/pdf"};
+                Rho.Intent.send(parameters);
+            });
+            _result.waitForResponse();        
+        });   
+        it('Send intent to view pdf from package', function(){
+            displayObjective('Send intent to view pdf from package (Use Adobe Reader app only!)');
+            dispTestCaseRunning('Sending intent with URI to internal pdf file');
+            dispExpectedResult('Adobe Reader app should be opened with pdf content');
+            _result.waitToRunTest();
+            runs(function(){
+                var path;
+                pdf = "content://com.rhomobile.manual_common_spec/rhodata/apps/public/intent/rhodes.pdf";
+                // path = "/mnt/sdcard/GlorpTutorial.pdf";
+                // path = "file:///sdcard/Rhodes.pdf";
+                var parameters = {
+                    intentType: Rho.Intent.START_ACTIVITY,
+                    action: "ACTION_VIEW",
+                    uri: pdf };
+                    //mimeType: "application/pdf"};
+                Rho.Intent.send(parameters);
+            });
+            _result.waitForResponse();        
         });   
     }
     it('VT328_45 | Sending Intent with null in place of callback function', function(){
