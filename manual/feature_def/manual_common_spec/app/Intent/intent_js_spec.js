@@ -779,6 +779,93 @@ describe('Intent_UseCases Functionality Test', function () {
             _result.waitForResponse();        
         });   
     }
+    if(isAndroidPlatform()){
+        it('VT328_43 | Suggest different applications to send text message', function(){
+            displayObjective('VT328_43 | Suggest different applications to send text message');
+            dispTestCaseRunning('Sending Intent matches with multiple activities, should suggest for the application to launch!');
+            dispExpectedResult('Application chooser should be shown to the user in performing the intent!');
+            _result.waitToRunTest();
+            runs(function(){
+                var data = {"EXTRA_TEXT":"This is message to be sent!"};
+                var params = new parameters(Rho.Intent.START_ACTIVITY,"","ACTION_SEND","","","","","text/plain",data);
+                Rho.Intent.send(params);
+            });
+            _result.waitForResponse();
+        });
+        it('VT328_44 | Sending array of data with the intent', function(){
+            displayObjective('VT328_44 | Sending array of data with the intent');
+            dispTestCaseRunning('Sending Intent with multiple EXTRA\'s');
+            dispExpectedResult('Email compose screen should be displayed with prefilled To, CC, BCC and Subject field !');
+            _result.waitToRunTest();
+            runs(function(){
+                var data =
+                {"EXTRA_EMAIL":["test@domain.com"],
+                 "EXTRA_CC":["carbon.copy@domain.com"],
+                 "EXTRA_BCC":["bcc.email@domain.com"],
+                 "EXTRA_SUBJECT":"Email Subject !",
+                 "EXTRA_TEXT":"Email body content !"};
+                var params = new parameters(Rho.Intent.START_ACTIVITY,"","ACTION_SEND","","","","","text/plain",data);
+                Rho.Intent.send(params);
+            });
+            _result.waitForResponse();
+        });
+        it('Send intent to view jpeg from package', function(){
+            displayObjective('Send intent to view jpeg from package (Use Adobe Reader app only!)');
+            dispTestCaseRunning('Sending intent with URI to internal jpeg file');
+            dispExpectedResult('Image viewer app should be opened with image content');
+            _result.waitToRunTest();
+            runs(function(){
+                var path;
+                pdf = "content://com.rhomobile.manual_common_spec/rhodata/apps/public/intent/rhodes.jpg";
+                // path = "/mnt/sdcard/GlorpTutorial.pdf";
+                // path = "file:///sdcard/Rhodes.pdf";
+                var parameters = {
+                    intentType: Rho.Intent.START_ACTIVITY,
+                    action: "ACTION_VIEW",
+                    uri: pdf };
+                    //mimeType: "application/pdf"};
+                Rho.Intent.send(parameters);
+            });
+            _result.waitForResponse();
+        });
+        it('Send intent to view pdf from package', function(){
+            displayObjective('Send intent to view pdf from package (Use Adobe Reader app only!)');
+            dispTestCaseRunning('Sending intent with URI to internal pdf file');
+            dispExpectedResult('Adobe Reader app should be opened with pdf content');
+            _result.waitToRunTest();
+            runs(function(){
+                var path;
+                pdf = "content://com.rhomobile.manual_common_spec/rhodata/apps/public/intent/rhodes.pdf";
+                // path = "/mnt/sdcard/GlorpTutorial.pdf";
+                // path = "file:///sdcard/Rhodes.pdf";
+                var parameters = {
+                    intentType: Rho.Intent.START_ACTIVITY,
+                    action: "ACTION_VIEW",
+                    uri: pdf };
+                //mimeType: "application/pdf"};
+                Rho.Intent.send(parameters);
+            });
+            _result.waitForResponse();
+        });
+
+        it('Send intent to view mp4 from package', function(){
+            displayObjective('Send intent to view mp4 from package');
+            dispTestCaseRunning('Sending intent with URI to internal mp4 file');
+            dispExpectedResult('Video player app should be opened with mp4 content');
+            _result.waitToRunTest();
+            runs(function(){
+                var uri = "content://com.rhomobile.manual_common_spec/rhodata/apps/public/media/nfc.mp4";
+                var parameters = {
+                    intentType: Rho.Intent.START_ACTIVITY,
+                    action: "ACTION_VIEW",
+                    mimeType: "video/mp4",
+                    uri: uri };
+                Rho.Intent.send(parameters);
+            });
+            _result.waitForResponse();
+        });
+    }
+
     it('VT328_45 | Sending Intent with null in place of callback function', function(){
         displayObjective('VT328_45 | Sending Intent with null in place of callback function');
         dispTestCaseRunning('Sending intent with NULL value as a callback parameter');

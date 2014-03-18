@@ -60,6 +60,27 @@
 <body>
 <h3>Rho.System</h3>
 
+
+<div class="method_tests android ios win32 wm wp8">
+
+    <script type="text/javascript">
+        function openMp4(){
+        var path = Rho.Application.publicFolder + '/media/nfc.mp4';
+         Rho.System.openUrl(path);
+        }
+        </script>
+
+    <div class="method_name">System.openUrl</div>
+    <div class="method_desc">Open mp4 via System.openUrl</div>
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <div>
+                <button onclick="openMp4()">Rho.System.openUrl(mp4)</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="method_tests ios">
     <div class="method_name">Rho.System.applicationIconBadge</div>
     <div class="method_desc">Application Icon Badge : application icon should have badge number (IOS only)</div>
@@ -648,7 +669,6 @@
             <span class="test_scenario_number">VT300-<br/></span>
         </div>
     </div>
-
 </div>
 
 <div class="method_tests android win32 wm wp8">
