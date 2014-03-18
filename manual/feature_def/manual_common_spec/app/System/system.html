@@ -64,22 +64,51 @@
 <div class="method_tests android ios win32 wm wp8">
 
     <script type="text/javascript">
-        function openMp4(){
-        var path = Rho.Application.publicFolder + '/media/nfc.mp4';
-         Rho.System.openUrl(path);
+        function openMp4FromPackage() {
+            var path = Rho.Application.publicFolder + '/media/nfc.mp4';
+            Rho.System.openUrl(path);
         }
-        </script>
+    </script>
 
     <div class="method_name">System.openUrl</div>
-    <div class="method_desc">Open mp4 via System.openUrl</div>
+    <div class="method_desc">Open mp4 from package via System.openUrl</div>
     <div class="test_scenario">
         <div class="test_scenario_controls">
             <div>
-                <button onclick="openMp4()">Rho.System.openUrl(mp4)</button>
+                <button onclick="openMp4FromPackage()">Rho.System.openUrl(mp4)</button>
             </div>
         </div>
     </div>
 </div>
+
+
+<div class="method_tests android ios win32 wm wp8">
+
+    <script type="text/javascript">
+        function openMp4FromSDcard() {
+            var source = Rho.Application.publicFolder + '/media/nfc.mp4';
+            var destination = '/mnt/sdcard/nfc.mp4';
+            if (Rho.RhoFile.copy(source, destination) != 0) {
+                alert('Copy file to sdcard failed');
+                return;
+            }
+            Rho.System.openUrl('file://' + destination);
+        }
+    </script>
+
+    <div class="method_name">System.openUrl</div>
+    <div class="method_desc">Open mp4 from sdcard via System.openUrl</div>
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <div>
+                <button onclick="openMp4FromSDcard()">Rho.System.openUrl(mp4)</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
 
 <div class="method_tests ios">
     <div class="method_name">Rho.System.applicationIconBadge</div>
