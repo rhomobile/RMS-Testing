@@ -263,6 +263,10 @@ describe('Printer Zebra', function() {
         runs(function() {
             var printerSettings = $('#dev_list').val().split('|');
             last_found_printer_id = printerSettings[3];
+            window.onunload = function(){
+                var printer = Rho.PrinterZebra.getPrinterByID(last_found_printer_id);
+                printer.disconnect();
+            };
             last_found_printer = Rho.PrinterZebra.getPrinterByID(last_found_printer_id);
         });
     });
