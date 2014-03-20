@@ -36,5 +36,5 @@ android:
   mapping: on
   capabilities:
     - network_state
-  extensions: ["barcode"]
+  extensions: [barcode, gmaps]
   version: 2.3.3
