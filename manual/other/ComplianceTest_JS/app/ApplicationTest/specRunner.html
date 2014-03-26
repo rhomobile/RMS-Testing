@@ -38,8 +38,7 @@
 
 
 	<!-- include spec files here... -->
-	<script type="text/javascript" src="./application_js_spec.js"></script>
-    <script type="text/javascript" src="./application_js_test.js"></script>
+	<script type="text/javascript" src="application_js_spec.js"></script>
 
 	<script type="text/javascript">
 
@@ -76,6 +75,13 @@
 
 </head>
 <body>
+<script type="text/javascript">
+    $('#pass').hide();
+    $('#fail').hide();
+    $('#oldpass').hide();
+    $('#oldfail').hide();
+    $('#runtest').hide();
+</script>
 <div>
   <textarea rows="2" cols="10" tabindex="1">
   </textarea>&nbsp;&nbsp;&nbsp;
@@ -83,17 +89,20 @@
   </textarea>
 </div>
     <h1>Application Manual FD Tests</h1>
-    <P>
-    <b>Test Objective: </b><div id="objective"></div>
-    <P>
+    <br/>
+    <div id="preCondition"></div>
+    <br/>
     <b>Test Running: </b><div id="instruction"></div>
-    <P>
-    <b>Expected Result: </b><div id="expResult"></div>
-    <P>
-    <b>Return Data: </b><div id="clbkData" style="word-wrap: break-word;"></div>
-    <P>
-    <input type="button" value="Test Passed" onclick="testPassed()" />
-    <input type="button" value="Test Failed" onclick="testFailed()" />
+    <br/>
+    <b>Expected Result: </b><div id="expectedresult"></div>
+    <br/>
+    <div>
+        <ul id="verificationResult">
+        </ul>
+    </div>
+    <input type="button" value="Run Test" onclick="_result.runTest();" id="runtest"/>
+    <input type="button" value="Test Passed" onclick="_result.passed();" id="pass" />
+    <input type="button" value="Test Failed" onclick="_result.failed();" id="fail" />
     <div id="actResult" style="display:none">init</div>
 </body>
 </html>

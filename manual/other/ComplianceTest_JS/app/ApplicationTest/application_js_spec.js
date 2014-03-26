@@ -2,102 +2,68 @@ describe("Application Module Test Starts Here", function() {
 
     beforeEach(function() {
         data ='';
-        document.getElementById("actResult").innerHTML = "init";
-        displaydata(data);
+        document.getElementById('verificationResult').innerHTML = "";
     });
 
 
     it("VT200-0613 | get BadLink Uri without setting it", function() {
+        dispTestCaseRunning("VT200-0613 | get BadLink Uri without setting it");
+        dispExpectedResult("Application should return the default badlink uri " );
+        _result.waitToRunTest();
 
         runs(function()
         {
-            setObjective("VT200-0613 | get BadLink Uri without setting it");
-            setInstruction("check for displayed output");
-            setExpected("Application should return the default badlink uri " );
             var data = Rho.Application.badLinkURI;
-            displaydata(data);
+            dispVerificationStatus(data);
         });
-
-        runs(function()
-        {       
-            waitsFor(function() {
-            return document.getElementById("actResult").innerHTML != "init";
-            }, "Timed out waiting for tester to respond", 300000);
-            runs(function() {
-            expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-            }); 
-        });
+        _result.waitForResponse();
 
     });
 
     it("VT200-0614 | Security Token Not passed", function() {
 
-        runs(function()
-        {
-            setObjective("VT200-0614 | Security Token Not passed");
-            setInstruction("check for output");
-            setExpected("it should return  false as the security token check  was passed " );
+        dispTestCaseRunning("VT200-0614 | Security Token Not passed");
+        //setInstruction("check for output");
+        dispExpectedResult("it should return  false as the security token check  was passed " );
+        _result.waitToRunTest();
+        runs(function(){
             var data = Rho.Application.securityTokenNotPassed;
-            displaydata(data);
+            dispVerificationStatus(data);
         });
-
-        runs(function()
-        {       
-            waitsFor(function() {
-            return document.getElementById("actResult").innerHTML != "init";
-            }, "Timed out waiting for tester to respond", 300000);
-            runs(function() {
-            expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-            }); 
-        });
+        _result.waitForResponse();
 
     });
 
     it("VT200-0615 | set StartUri to a web page", function() {
 
-        runs(function()
-        {
-            setObjective("VT200-0615 | set StartUri to a web page");
-            setInstruction("Click on Home button");
-            setExpected("application should navigate to the start uri provided after opening " );
-            var data = Rho.Application.startURI;
-            displaydata(data);
-        });
 
-        runs(function()
-        {       
-            waitsFor(function() {
-            return document.getElementById("actResult").innerHTML != "init";
-            }, "Timed out waiting for tester to respond", 300000);
-            runs(function() {
-            expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-            }); 
+        dispTestCaseRunning("VT200-0615 | set StartUri to a web page");
+        //setInstruction("Click on Home button");
+        dispExpectedResult("application should navigate to the start uri provided after opening " );
+        _result.waitToRunTest();
+        runs(function(){
+            var data = Rho.Application.startURI;
+            dispVerificationStatus(data);
         });
+        _result.waitForResponse();
 
     });
 
     it("VT200-0616 | Database File path with Local as Partition", function() {
 
-        runs(function()
-        {
-            setObjective("VT200-0616 | Database File path with Local as Partition");
-            setInstruction("check for output");
-            setExpected("should return the location of the database file with partition name local" );
+
+        dispTestCaseRunning("VT200-0616 | Database File path with Local as Partition");
+        //setInstruction("check for output");
+        dispExpectedResult("should return the location of the database file with partition name local" );
+        _result.waitToRunTest();
+        runs(function(){
             var beja = Rho.Application.databaseFilePath('local');
             var jija=Rho.Application.relativeDatabaseBlobFilePath(beja)
             var data=Rho.Application.expandDatabaseBlobFilePath(jija);
-            displaydata(data);
+            dispVerificationStatus(data);
         });
 
-        runs(function()
-        {       
-            waitsFor(function() {
-            return document.getElementById("actResult").innerHTML != "init";
-            }, "Timed out waiting for tester to respond", 300000);
-            runs(function() {
-            expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-            }); 
-        });
+        _result.waitForResponse();
 
     });
 
