@@ -134,6 +134,11 @@ var dispExpectedResult= function (data){
 	document.getElementById('expectedresult').innerHTML = data;
 }
 
+var dispTestSteps = function (data){
+    data = nl2br(data);
+    document.getElementById('instruction').innerHTML = data;
+}
+
 var dispTestCaseRunning = function (data){
     data = nl2br(data);
 	document.getElementById('instruction').innerHTML = data;
