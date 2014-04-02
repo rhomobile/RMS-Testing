@@ -169,60 +169,66 @@ describe('Printing Generic', function() {
 
     // setup 
     it('initialize before tests', function() {
-		dispTestCaseRunning("initialize before tests, searching for printers..");
-		dispExpectedResult("Please Wait until devices are discovered to continue");
-		//_result.waitToRunTest();
-        runs(function() {
-            //dispTestCaseRunning(jasmine.getEnv().currentSpec.description);
-            //dispExpectedResult('Wait until devices are discovered to continue');
-            //dispExpectedResult('Press any button to continute');
-            $('#dev_list').empty();
-            $('#dev_list').prepend('<option value=\'\'>none</option>').val('');
-            $('#dev_list').change(function() {
-                var valueSelected = $(this).val();
-                if (valueSelected == '') {
-                    $('#dev_addr').val('127.0.0.1');
-                    $('#dev_port').val('6101');
-                    $('#dev_conn_type').val(Rho.Printer.CONNECTION_TYPE_TCP);
-                } else {
-                    var res = valueSelected.split('|');
-                    $('#dev_conn_type').val(res[0]);
-                    $('#dev_addr').val(res[1]);
-                    $('#dev_port').val(res[2]);
-                }
-            });
-        });
+        var searchObject = {};
 
         runs(function() {
-            Rho.Printer.searchPrinters({}, searchPrinterCallback);
+            setObjective(jasmine.getEnv().currentSpec.description);
+            setInstruction('Select desired discovery mode');
+        });
+
+        _result.waitForSelectTestMode();
+
+        runs(function() {
+            if (_result.auto_fill === false) {
+                setInstruction('Set device type, address and port, then press "done button"');
+            } else {
+                setInstruction('Wait until devices are discovered to continue');
+            }
+        });
+
+        _result.waitUntilDone(function(){ return _result.auto_fill === false; });
+
+        runs(function() {
+            if (_result.auto_fill == true) {
+                searchObject = runSearch({}, 30000);
+            } else {
+                searchVals = {};
+                searchVals['connectionType'] = $('#dev_conn_type').val();
+                searchVals['devicePort'] = $('#dev_port').val();
+                searchVals['deviceAddress'] = $('#dev_addr').val();
+                searchObject = runSearch(searchVals, 30000);
+            }
+            setExpected('');
+            setupTestFields();
         });
 
         waitsFor(function() {
-            return discovery_finished;
+            return searchObject.finished;
         }, '60sec waiting for Search printer', ENABLE60K);
 
         runs(function() {
-            for (var i = 0; i < printers_array.length; i++) {
-                var printerInstance = Rho.Printer.getPrinterByID(printers_array[i]);
-                last_found_printer_id = printers_array[i];
-                last_found_printer = printerInstance;
-
-                var printerType = printerInstance.printerType.replace('PRINTER_TYPE_', '');
-                var connType = printerInstance.connectionType.replace('CONNECTION_TYPE_', '');
-                var devName = printerType + '-' + connType + '@' + printerInstance.deviceAddress;
-                var pid = printerInstance.connectionType + '|' + printerInstance.deviceAddress + '|' + printerInstance.devicePort;
-
-                $('#dev_list').append($('<option>', {
-                    value: pid
-                }).text(devName));
+            setInstruction('Use drop-down list to select tested device and then press "done" button.');
+            setExpected('There shopud be at least one device to select.');
+            if (searchObject.printers.length > 0) {
+                displaySearchResults({}, searchObject.printers, searchObject.errors);
+                updatePrinterList(searchObject.printers);
+                last_found_printer_id = searchObject.printers[0];
             }
-            $('#dev_list').val($('#dev_list option:eq(1)').val()).trigger('change');
-
-            displaySearchResults({}, printers_array, printers_errors);
-            //expect(printers_errors).toEqual([]);
-           // expect(printers_array.length).toBeGreaterThan(0);
+            expect(searchObject.errors).toEqual([]);
+            expect(searchObject.printers.length).toBeGreaterThan(0);
         });
-		//_result.waitForResponse();
+
+        _result.waitUntilDone(function(){ return _result.auto_fill === true; });
+
+        runs(function() {
+            var printerSettings = $('#dev_list').val().split('|');
+            last_found_printer_id = printerSettings[3];
+            window.onunload = function(){
+                var printer = Rho.Printer.getPrinterByID(last_found_printer_id);
+                printer.disconnect();
+            };
+            last_found_printer = Rho.Printer.getPrinterByID(last_found_printer_id);
+        });
     });
 
 
@@ -308,7 +314,7 @@ describe('Printing Generic', function() {
         }, 'wait until setting lable length', 15000);
 		
 		runs(function() {
-			displayResult(jasmine.getEnv().currentSpec.description, callresult.toString());
+			displayResult(jasmine.getEnv().currentSpec.description, JSON.stringify(callresult));
         });
 
 		_result.waitForResponse();
@@ -354,16 +360,18 @@ describe('Printing Generic', function() {
     }
 
     function doPrintRawCommand(cmd) {
+		var callresult = null;
         runs(function() {
-            callresult = null;
             thisprinter.printRawString(cmd, {});
         });
 
         waitsFor(function() {
-            return;
+			setTimeout(function(){callresult = true;},10000);
+            return callresult;
         }, 'wait until setting lable length', 15000);
+		
 		runs(function() {
-			displayResult(jasmine.getEnv().currentSpec.description, callresult.toString());
+			displayResult(jasmine.getEnv().currentSpec.description, JSON.stringify(callresult));
         });
     }
 
@@ -380,13 +388,13 @@ describe('Printing Generic', function() {
             return callresult !== null;
         }, 'wait until setting lable length', 15000);
 		runs(function() {
-			displayResult(jasmine.getEnv().currentSpec.description, callresult.toString());
+			displayResult(jasmine.getEnv().currentSpec.description, JSON.stringify(callresult));
         });
     }
 
     function doPrintRawCommandAnonCbk(cmd) {
+		var callresult = null;
         runs(function() {
-            callresult = null;
             thisprinter.printRawString(cmd, {}, function(val){ 
                 callresult = val; 
             });
@@ -396,7 +404,7 @@ describe('Printing Generic', function() {
             return callresult !== null;
         }, 'wait until setting lable length', 15000);
 		runs(function() {
-			displayResult(jasmine.getEnv().currentSpec.description, callresult.toString());
+			displayResult(jasmine.getEnv().currentSpec.description, JSON.stringify(callresult));
         });
     }
 

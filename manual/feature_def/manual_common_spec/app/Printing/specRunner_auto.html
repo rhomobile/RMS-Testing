@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Printing (Generic) JS Test</title>
+    <title>Printing (Generic) Semi-auto JS Test</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
     <META HTTP-Equiv="MinimizeButton" content="visibility:Visible;top:30 ">
     <META HTTP-Equiv="quitbutton" Content="visibility:visible">
@@ -149,7 +149,7 @@
         <div id="test_output"></div>
     </div>
 
-<!--    <div id="manual_contols">
+    <div id="manual_contols">
         <div><b>Test Objective: </b>
             <div id="objective"></div>
         </div>
@@ -158,21 +158,40 @@
         </div>
         <div><b>Expected Result: </b>
             <div id="expResult"></div>
-        </div>
-        <b>Decoded Data: </b><div id="clbkData" style="word-wrap: break-word;"></div>
+        </div>     
         <div id="select_box_wrapper" style="display:none">
             <select name="combo" id="combo"></select>
         </div>
+		<P>
+		<b>Expected Result: </b><div id="expectedresult"></div>
+		<P>
         <div><b>Test Output: </b>
             <div id="test_output"></div>
         </div>
-        <div id="action"></div>
+        <div id="action">
+            <input type="button" value="Test Passed" onclick="captureResult(true)" id="oldpass" />
+            <input type="button" value="Test Failed" onclick="captureResult(false)" id="oldfail" />
+            <input type="button" value="Run Test" onclick="_result.runTest();" id="runtest" />
+            <input type="button" value="Test Passed" onclick="_result.passed();" id="pass" />
+            <input type="button" value="Test Failed" onclick="_result.failed();" id="fail" />
+            <input type="button" value="Done" onclick="_result.done();" id="done" />
+            <input type="button" value="Enter device address manually" onclick="_result.man();" id="man" />
+            <input type="button" value="Auto search for devices" onclick="_result.auto();" id="auto" />
+		</div>
         <div id="actResult" style="display:none">init</div>
-        <input type="button" value="Test Passed" onclick="testPassed()" />
-        <input type="button" value="Test Failed" onclick="testFailed()" />
     </div>
-    <div id="actResult" style="display:none">init</div> -->
+	<br/><br/>
+    <ul id="myList"></ul>
+    <ul id="myList2"></ul>
 
 </body>
-
+<script type="text/javascript">
+	$("#action").find(":button").hide();
+	$('#pass').hide();
+    $('#fail').hide();
+    $('#oldpass').hide();
+    $('#oldfail').hide();
+    $('#runtest').hide();
+    $('#done').hide();
+</script>
 </html>
