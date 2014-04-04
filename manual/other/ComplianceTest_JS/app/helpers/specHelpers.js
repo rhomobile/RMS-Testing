@@ -314,12 +314,32 @@ var _result = {
     }
 }
 
-beforeEach(function() {
-    _result.reset();
-    //document.getElementById("myList").innerHTML = '';
-});
+//Common Method for ruby method call from javascript
+var Ruby = {
+    data: undefined,
+    call: function(controller,method){
+        Ruby.data = undefined;
+        url = '/app/'+controller+'/'+method
+        $.get(url)
+        .success(function(data){
+
+            }); 
+        return false;
+    },
+    sendValueToJS: function(data){ //Send data from ruby controller to js
+        Ruby.data = data;
+    },
+    getReturnedValue: function(){
+        return Ruby.data;
+    }
+}
 
 function nl2br (str, is_xhtml) {   
     var breakTag = (is_xhtml || typeof is_xhtml === 'undefined') ? '<br />' : '<br>';    
     return (str + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1'+ breakTag +'$2');
 }
+
+beforeEach(function() {
+    _result.reset();
+    //document.getElementById("myList").innerHTML = '';
+});

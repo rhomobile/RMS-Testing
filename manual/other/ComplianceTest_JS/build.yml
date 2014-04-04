@@ -26,4 +26,5 @@ extensions:
 - screenorientation
 - sensor
 app_type: rhoelements
-capabilities: []
+capabilities:
+  - gps
