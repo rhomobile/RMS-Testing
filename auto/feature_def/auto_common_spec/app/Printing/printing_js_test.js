@@ -63,6 +63,92 @@ var displayPrinterResult = function(desc, data, placeTimestamp) {
     }
 };
 
+function displaySearchResults(paramaters, display_printers, display_errors) {
+    var query = {
+        'Parameters:': paramaters
+    };
+    if (display_errors.length > 0) {
+        query['Errors:'] = display_errors;
+    }
+    if (display_printers.length > 0) {
+        query['Discoveder printers:'] = display_printers;
+    }
+
+    displayPrinterResult(jasmine.getEnv().currentSpec.description, query);
+}
+
+function runSearch(options, timeout) {
+    Rho.Log.info("doSearch #1", "JSC");
+
+    if (!timeout || timeout < 100) {
+        timeout = 100;
+    }
+
+    var SO = {
+        discovered: [],
+        printers: [],
+        errors: [],
+        last_printer: null,
+        last_printer_id: null,
+        finished: false,
+        total: 3,
+        curr: 0,
+    };
+
+    var start = new Date();
+    var last_start = start;
+
+    function searchPrinterCallback(callbackValue) {
+        var printer_id = callbackValue.printerID;
+        if (callbackValue.status == Rho.Printer.PRINTER_STATUS_SUCCESS) {
+            if (printer_id && printer_id.length > 0) {
+                SO.discovered.push(printer_id);
+                SO.last_printer_id = printer_id;
+                SO.last_printer = Rho.Printer.getPrinterByID(printer_id);
+            } else {
+                checkSearch();
+            }
+        } else {
+            SO.errors.push(callbackValue);
+
+            displayPrinterResult('Search error:', callbackValue, true);
+
+            SO.finished = true;
+        }
+    }
+
+    function checkSearch() {
+        var curr_time = new Date();
+        var last_el = curr_time - last_start;
+        var elapsed = curr_time - start;
+        last_start = curr_time;
+
+        SO.curr += 1;
+
+        if ((SO.curr > SO.total) || ((elapsed + last_el) > timeout)) {
+            SO.printers = uniqArray(SO.discovered);
+
+            displayPrinterResult('Discovered printers', SO.printers, true);
+
+            SO.finished = true;
+        } else {
+            if (SO.curr <= 1) {
+                Rho.Printer.searchPrinters(options, searchPrinterCallback);
+            } else {
+                setTimeout(function() {
+                    Rho.Printer.searchPrinters(options, searchPrinterCallback);
+                }, 200);
+            }
+        }
+    }
+
+    displayPrinterResult('Starting search', options, true);
+
+    checkSearch();
+
+    return SO;
+}
+
 function addCombo() {
     $('#select_box_wrapper').show();
     var textb = {

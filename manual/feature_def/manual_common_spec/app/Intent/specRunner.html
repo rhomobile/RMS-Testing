@@ -18,6 +18,11 @@
     <script type="text/javascript" src="../helpers/rhologReporter.js"></script>
    	<script type="text/javascript" src="/public/api/rhoapi-modules.js"></script>
 
+    <!-- js scripts and css for manual jasmine -->
+    <script type="text/javascript" src="../../public/jasmine/jasmineManual/manualSpecLauncher.js"></script>
+    <script type="text/javascript" src="../../public/jasmine/jasmineManual/manualSpec.js"></script>
+    <link type="text/css" rel="stylesheet" href="../../public/jasmine/jasmineManual/manualSpec.css">
+
 	<style>
 	#detailsdiv {
     background: url("/public/images/grid2.gif") repeat scroll 0 0 transparent;
@@ -58,16 +63,14 @@
         };
 
         var currentWindowOnload = window.onload;
-        window.onload = function() {
-          if (currentWindowOnload) {
-            currentWindowOnload();
-          }
-
-          execJasmine();
-        };
-
-        function execJasmine() {
-          jasmineEnv.execute();
+        window.onload = function () {
+            if (currentWindowOnload) {
+                currentWindowOnload();
+            }
+            var launcher = ManualSpecLauncher(jasmine, window.document);
+            if (window.location.href.indexOf('?') != -1) {
+                jasmineEnv.execute();
+            }
         }
 
     })();

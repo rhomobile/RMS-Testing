@@ -278,15 +278,36 @@ describe('Printer Zebra', function() {
     // setup 
     it('initialize before tests', function() {
         var searchObject = {};
-        runs(function() {
-            setObjective(jasmine.getEnv().currentSpec.description);
-            setInstruction('Wait until devices are discovered to continue');
-            setExpected('');
-            setupTestFields();
-        });
 
         runs(function() {
-            searchObject = runSearch({}, 30000);
+            setObjective(jasmine.getEnv().currentSpec.description);
+            setInstruction('Select desired discovery mode');
+        });
+
+        _result.waitForSelectTestMode();
+
+        runs(function() {
+            if (_result.auto_fill === false) {
+                setInstruction('Set device type, address and port, then press "done button"');
+            } else {
+                setInstruction('Wait until devices are discovered to continue');
+            }
+        });
+
+        _result.waitUntilDone(function(){ return _result.auto_fill === false; });
+
+        runs(function() {
+            if (_result.auto_fill == true) {
+                searchObject = runSearch({}, 30000);
+            } else {
+                searchVals = {};
+                searchVals['connectionType'] = $('#dev_conn_type').val();
+                searchVals['devicePort'] = $('#dev_port').val();
+                searchVals['deviceAddress'] = $('#dev_addr').val();
+                searchObject = runSearch(searchVals, 30000);
+            }
+            setExpected('');
+            setupTestFields();
         });
 
         waitsFor(function() {
@@ -295,7 +316,7 @@ describe('Printer Zebra', function() {
 
         runs(function() {
             setInstruction('Use drop-down list to select tested device and then press "done" button.');
-            setExpected('There shpuld be at least one device to select.');
+            setExpected('There shopud be at least one device to select.');
             if (searchObject.printers.length > 0) {
                 displaySearchResults({}, searchObject.printers, searchObject.errors);
                 updatePrinterList(searchObject.printers);
@@ -305,11 +326,15 @@ describe('Printer Zebra', function() {
             expect(searchObject.printers.length).toBeGreaterThan(0);
         });
 
-        _result.waitUntilDone();
+        _result.waitUntilDone(function(){ return _result.auto_fill === true; });
 
         runs(function() {
             var printerSettings = $('#dev_list').val().split('|');
             last_found_printer_id = printerSettings[3];
+            window.onunload = function(){
+                var printer = Rho.PrinterZebra.getPrinterByID(last_found_printer_id);
+                printer.disconnect();
+            };
             last_found_printer = Rho.PrinterZebra.getPrinterByID(last_found_printer_id);
         });
     });
@@ -394,7 +419,7 @@ describe('Printer Zebra', function() {
                 expect(parseInt(thisprinter.devicePort, 10)).toEqual(parseInt($('#dev_port').val(), 10));
                 expect(thisprinter.deviceAddress).toEqual($('#dev_addr').val());
                 expect(thisprinter.connectionType).toEqual($('#dev_conn_type').val());
-                expect(thisprinter.isConnected).isNotEmptyString();
+                expect(thisprinter.isConnected.toString()).isNotEmptyString();
             });
         });
     });
@@ -509,7 +534,7 @@ describe('Printer Zebra', function() {
             }, 'wait.. trying to print..', 25000);
 
             runs(function() {
-                expect(callresultp.status).toEqual(Rho.PrinterZebra.PRINTER_STATUS_ERROR);
+                expect(callresultp.status).toBeIn([Rho.PrinterZebra.PRINTER_STATUS_ERROR,Rho.PrinterZebra.PRINTER_STATUS_ERR_NOT_CONNECTED]);
             });
         });
 
@@ -555,7 +580,10 @@ describe('Printer Zebra', function() {
 
                 waitsFor(function() {
                     if (case_type == 'without') {
-                        return thisprinter.isConnected;
+                         if (!expectedResult) {
+                            return !thisprinter.isConnected;
+                         }
+                         return thisprinter.isConnected;
                     } else {
                         return callresult !== null;
                     }
@@ -570,7 +598,7 @@ describe('Printer Zebra', function() {
                      }
                      else {
                         if (case_type != 'without') {
-                            expect(callresult).toEqual(Rho.Printer.PRINTER_STATUS_ERR_TIMEOUT);
+                            expect((callresult == Rho.Printer.PRINTER_STATUS_ERR_TIMEOUT) || (callresult == Rho.Printer.PRINTER_STATUS_ERROR)).toEqual(true);
                         }
                         expect(thisprinter.isConnected).toEqual(false);
                      }
@@ -583,7 +611,7 @@ describe('Printer Zebra', function() {
         }, {
             "timeout": 0
         }, {
-            "timeout": 10
+            "timeout": 1
         },
         //                     {
         //    "timeout": 15000.5
@@ -591,7 +619,8 @@ describe('Printer Zebra', function() {
                              ];
 
         // 20 sec is enought for connect
-        // 0 and 10 too short time - should not connected for this time
+        // 0 is invalid timeout
+        // 10 too short time - should not connected for this time
         // 15000.5 - invalid type - must be integer (but in this case method must return ERROR not TIMEOUT!)
              
              
@@ -1117,28 +1146,26 @@ describe('Printer Zebra', function() {
     describe("Get & Set default PrinterZebra", function() {
         var printerObj = null;
 
-        it('there is an instance of a printer', function() {
+        it('there is an instance of a printer, ', function() {
             runs(function() {
                 expect(last_found_printer_id).toNotEqual(null);
-                printerObj = Rho.PrinterZebra.getPrinterByID(last_found_printer_id);
-                Rho.PrinterZebra.setDefault(printerObj);
-            });
-        });
 
-        it('get default PrinterZebra', function() {
-            runs(function() {
-                thisprinter = Rho.PrinterZebra.getDefault();
-                expect(thisprinter.ID).toNotEqual(null);
             });
         });
 
         it('set default PrinterZebra', function() {
             runs(function() {
-                Rho.PrinterZebra.setDefault(printerObj);
-                var defPrinter = Rho.PrinterZebra.getDefault();
-                expect(defPrinter.ID).toEqual(printerObj.ID);
+                printerObj = Rho.PrinterZebra.getPrinterByID(last_found_printer_id);
+                Rho.PrinterZebra.setDefault( printerObj );
             });
         });
 
+        it('get default PrinterZebra', function() {
+            runs(function() {
+                expect(Rho.PrinterZebra.ID).toNotEqual(null);
+                expect(Rho.PrinterZebra.ID).toEqual(last_found_printer_id);
+                expect(Rho.PrinterZebra.getDefault().ID).toEqual(printerObj.ID);
+            });
+        });
     });
 });

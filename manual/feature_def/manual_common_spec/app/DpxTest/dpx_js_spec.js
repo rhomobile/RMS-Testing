@@ -83,15 +83,19 @@ describe('DPX Functionality Test', function() {
         Rho.DPX.uiResultConfirmation = false;
         Rho.DPX.audioFeedback = false;
 
+        var regions;
+
         runsCaptureDocument(Rho.DPX.SUCCESS, function(dict) {
-            // displayResult('Output: ', pprint(dict));
-            var regions = dict['processedForm']['regions'];
+            regions = dict['processedForm']['regions'];
+        });
+
+        runs(function() {
+            _result.passed();
+
             expect(regions[0]['processingMode']).toEqual(Rho.DPX.PM_BARCODE);
             expect(regions[1]['processingMode']).toEqual(Rho.DPX.PM_OMR);
             expect(regions[2]['processingMode']).toEqual(Rho.DPX.PM_OCR);
             expect(regions[5]['processingMode']).toEqual(Rho.DPX.PM_PICTURE);
-
-            _result.passed();
         });
 
         _result.waitForResponse();
@@ -187,44 +191,6 @@ describe('DPX Functionality Test', function() {
         Rho.DPX.audioFeedback = false;
 
         Rho.DPX.flashMode = Rho.DPX.FLASH_OFF;
-
-        runsCaptureDocument(Rho.DPX.SUCCESS, function(dict) {
-            displayResult('Output: ', 'callbackType is ' + dict['callbackType']);
-        });
-
-        _result.waitForResponse();
-    });
-
-    it('flash mode is auto (dark)', function() {
-        dispTestCaseRunning('Scan Delivery Attempt Notification in dark environment.');
-        dispExpectedResult('callbackType should be success.\nFlash must be on.');
-
-        _result.waitToRunTest();
-
-        Rho.DPX.template = 'file:///sdcard/templates/Logistics%20Post.xml';
-        Rho.DPX.uiResultConfirmation = false;
-        Rho.DPX.audioFeedback = false;
-
-        Rho.DPX.flashMode = Rho.DPX.FLASH_AUTO;
-
-        runsCaptureDocument(Rho.DPX.SUCCESS, function(dict) {
-            displayResult('Output: ', 'callbackType is ' + dict['callbackType']);
-        });
-
-        _result.waitForResponse();
-    });
-
-    it('flash mode is auto (light)', function() {
-        dispTestCaseRunning('Scan Delivery Attempt Notification in good lighting.');
-        dispExpectedResult('callbackType should be success.\nFlash must be off.');
-
-        _result.waitToRunTest();
-
-        Rho.DPX.template = 'file:///sdcard/templates/Logistics%20Post.xml';
-        Rho.DPX.uiResultConfirmation = false;
-        Rho.DPX.audioFeedback = false;
-
-        Rho.DPX.flashMode = Rho.DPX.FLASH_AUTO;
 
         runsCaptureDocument(Rho.DPX.SUCCESS, function(dict) {
             displayResult('Output: ', 'callbackType is ' + dict['callbackType']);
@@ -396,20 +362,6 @@ describe('DPX Functionality Test', function() {
         _result.waitForResponse();
     });
 
-    it('Objective:\nDocument capture with template from invalid location', function() {
-        dispTestCaseRunning('1. Set template property to http path of template.xml has region of  picture\n/Application/sdcard/template.xml\n2.Set inputsource to imager\n3. Call captureDocument method Capture a document by taking a photo using imager \n');
-        dispExpectedResult('It should return DPX engine generic error.(FAILURE_ERROR) or identificationTimeout(FAILURE_IDENTIFICATION_TIMEOUT)');
-        //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
-        _result.waitToRunTest();
-        runs(function() {
-            Rho.DPX.template = Rho.RhoFile.join(Rho.Application.AppBundleFolder, 'invalid.xml');
-            Rho.DPX.captureDocument(captureCallback);
-        });
-        //Add more waitsfor or run blocks if required.
-        //Common Method implemented to wait for tester to make it pass or fail.Code available in specHelper.js
-        _result.waitForResponse();
-    });
-
     it('Objective:\nDocument capture set audioFeedback  property with default value', function() {
         dispTestCaseRunning('1. Set template property to path of template.xml has region of Optical Character Recognition \n/sdcard/Application/template.xml\n2. Call captureDocument method Capture a document by taking a photo\n\n\n\n\n');
         dispExpectedResult('Should get the audio feedback at the time captured document is getting processed after proceessed successfully callback fired once for each field defined in the template');
@@ -474,22 +426,6 @@ describe('DPX Functionality Test', function() {
         _result.waitForResponse();
     });
 
-
-    it('Objective:\nDocument capture with flashMode  property set to invalid value\n', function() {
-        dispTestCaseRunning('1. Set template property to path of template.xml has region of  picture\n/sdcard/Application/template.xml\n2.Set flashMode to flash\n3. Call captureDocument method Capture a document by taking a photo\n');
-        dispExpectedResult('Shold not get the flash at the time of capturing the photo and captured document should get  proceessed successfully callback fired once for each field defined in the template');
-        //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
-        _result.waitToRunTest();
-        runs(function() {
-                Rho.DPX.inputSource = Rho.DPX.SOURCE_CAMERA;
-                Rho.DPX.flashMode = 'invalid';
-                Rho.DPX.template = Rho.RhoFile.join(Rho.Application.AppBundleFolder, 'picture.xml');
-                Rho.DPX.captureDocument(captureCallback);
-        });
-        //Add more waitsfor or run blocks if required.
-        //Common Method implemented to wait for tester to make it pass or fail.Code available in specHelper.js
-        _result.waitForResponse();
-    });
 
     it('Objective:\nDocument capture with identificationTimeout  property set to -10000 (-10 second)\n\n', function() {
         dispTestCaseRunning('1. Set template property to path of template.xml has region of  picture\n/sdcard/Application/template.xml\n2.Set inputSource to camera\n3.Set identificationTimeout to -10000\n4. Call captureDocument method Capture a document by taking a photo using camera\n');
@@ -604,21 +540,6 @@ describe('DPX Functionality Test', function() {
                         return getregionImageId != null;
                 }, '90sec Wait before move to next test', 90000);
                 Rho.DPX.getDataUri(100);
-        });
-        //Add more waitsfor or run blocks if required.
-        //Common Method implemented to wait for tester to make it pass or fail.Code available in specHelper.js
-        _result.waitForResponse();
-    });
-
-    it('Objective:\nDocument capture with template from http location', function() {
-        dispTestCaseRunning('1. Set template property to http path of template.xml has region of  picture\nhttp://192.168.6.18/neon/template.xml\n2.Set inputsource to camera\n3. Call captureDocument method Capture a document by taking a photo using camera\n');
-        dispExpectedResult('captured document should get processed successfully and callback fired once for each field defined in the template');
-        //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
-        _result.waitToRunTest();
-        runs(function() {
-                Rho.DPX.inputSource = Rho.DPX.SOURCE_CAMERA;
-                Rho.DPX.template = 'http://192.168.6.18/neon/ReceivedFiles/picture.xml';
-                Rho.DPX.captureDocument(captureCallback);
         });
         //Add more waitsfor or run blocks if required.
         //Common Method implemented to wait for tester to make it pass or fail.Code available in specHelper.js

@@ -1,0 +1,25 @@
+---
+sdkversion: 4.1.0
+name: PlainRhodesApp
+version: '1.0'
+vendor: rhomobile
+build: debug
+applog: rholog.txt
+iphone:
+  configuration: Release
+  sdk: iphonesimulator7.0
+  provisionprofile: ''
+  codesignidentity: iPhone Developer
+  entitlements: ''
+  BundleIdentifier: com.rhomobile.plainrhodesapp
+  BundleURLScheme: plainrhodesapp
+wp8:
+  productid: 31dc2a80-81c4-0131-d9f5-0024d76525bc
+android:
+  manifest_template: AndroidManifest.erb
+  version: 2.3.3
+wm: ''
+extensions:
+- rhoconnect-client
+app_type: rhoelements
+capabilities: []

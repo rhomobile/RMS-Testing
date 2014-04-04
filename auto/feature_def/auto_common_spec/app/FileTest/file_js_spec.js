@@ -462,6 +462,7 @@ describe("RMS 4.0 File JS API", function () {
     });
 	
 	
+    if (Rho.System.platform != Rho.System.PLATFORM_WP8)
     it("VT288-092 :Doesn't raises exception while loading empty file", function () {
         var filename = Rho.RhoFile.join(temporaryDirectory, "emptyFile");
         var file = new Rho.RhoFile(filename, Rho.RhoFile.OPEN_FOR_WRITE);

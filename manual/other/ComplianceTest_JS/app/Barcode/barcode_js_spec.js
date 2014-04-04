@@ -15,7 +15,7 @@ describe("Barcode Manual Test", function() {
 	}
 
 	var callbackenable = function (data){
-			enablecallbackdata(JSON.stringify(data).replace(/[,]/g,'<br />'));
+			dispVerificationStatus(JSON.stringify(data).replace(/[,]/g,'<br />'));
 		}
 
    for (var j = 0;j<enumData.length;j++){
@@ -31,8 +31,7 @@ describe("Barcode Manual Test", function() {
 				decodeFlag = false;
 				readFlag = false;
 				decodedata ='';
-				document.getElementById("actResult").innerHTML = "init";
-				enablecallbackdata(decodedata);
+				document.getElementById("verificationResult").innerHTML = "";
 			});
 
 			afterEach(function() {
@@ -43,203 +42,133 @@ describe("Barcode Manual Test", function() {
 				if (Rho.System.isMotorolaDevice == true) 
 				{
 					it("VT200-0591 | Enable with callback as function |" + scnid + scntype , function() {
-
-						runs(function()
-						{
-							setObjective("VT200-0591 |Enable with callback as function|");
-							setInstruction("Scan Barcode code128 with " + scnid);
-							setExpected("Is returned decoded hash displayed correctly with all data?");
+						displayObjective("VT200-0591 |Enable with callback as function|");
+						dispTestSteps("Scan Barcode code128 with " + scnid);
+						dispExpectedResult("Is returned decoded hash displayed correctly with all data?");
+						_result.waitToRunTest();
+						runs(function(){
 							objSCN.enable({},callbackenable);
 							setTimeout(function() {
 								enableFlag = true;
 							}, ENABLE8K);
 						});
-
-						waitsFor(function()
-						{
+						waitsFor(function(){
 							return enableFlag;
 						}, '2sec wait to enable the Scanner', 9000);
-
-						runs(function()
-						{
-							waitsFor(function() {
-							return document.getElementById("actResult").innerHTML != "init";
-							}, "Timed out waiting for tester to respond", 300000);
-							runs(function() {
-							expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-							});
-						});
+						_result.waitForResponse();
 					});
 
 					it("VT200-0592 | Enable with alldecoders enabled and callback as function URL |"+ scnid + scntype, function() {
-						
-						runs(function()
-						{
-							setObjective("VT200-0592 | Enable with alldecoders enabled and callback as function |");
-							setInstruction("Scan code93 and MSI barcode with " + scnid);
-							setExpected("Is decoded data comes after scanning code93 and MSI?");
+						displayObjective("VT200-0592 | Enable with alldecoders enabled and callback as function |");
+						dispTestSteps("Scan code93 and MSI barcode with " + scnid);
+						dispExpectedResult("Is decoded data comes after scanning code93 and MSI?");
+						_result.waitToRunTest();
+						runs(function(){
 							objSCN.enable({'allDecoders':'true'},callbackenable);
 							setTimeout(function() {
 								enableFlag = true;
 							}, ENABLE1K);
 						});
-
-						waitsFor(function()
-						{
+						waitsFor(function(){
 							return enableFlag;
 						}, '2sec Wait to enable the Scanner', 2000);
-
-						runs(function()
-						{
-							waitsFor(function() {
-							return document.getElementById("actResult").innerHTML != "init";
-							}, "Timed out waiting for tester to respond", 300000);
-							runs(function() {
-							expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-							});			
-						});
+						_result.waitForResponse();
 					});
 
 					it("VT200-0593 | Enable with picklist " + reticleType + ", scanTimeout 3000 and callback as function |"+ scnid + scntype, function() {
-						
-
-						runs(function()
-						{
-							setObjective("VT200-0593 | Enable with picklist " + reticleType + ", scanTimeout 3000 and callback as function ");
-							setInstruction("don't scan and check scanTimeout as 3000 and check picklistMode as " + reticleType + " with " +  scnid);
-							setExpected("Baeam or viewfinder will stop automatically after 3 second? \n only the barcode in the center of the image is decoded for picklistMode as " + reticleType);
+						displayObjective("VT200-0593 | Enable with picklist " + reticleType + ", scanTimeout 3000 and callback as function ");
+						dispTestSteps("don't scan and check scanTimeout as 3000 and check picklistMode as " + reticleType + " with " +  scnid);
+						dispExpectedResult("Baeam or viewfinder will stop automatically after 3 second? \n only the barcode in the center of the image is decoded for picklistMode as " + reticleType);
+						_result.waitToRunTest();
+						runs(function(){
 							objSCN.enable({'scanTimeout':'3000','picklistMode':reticleType},callbackenable);
 							setTimeout(function() {
 								enableFlag = true;
 							}, ENABLE1K);
 						});
-
-						waitsFor(function()
-						{
+						waitsFor(function() {
 							return enableFlag;
 						}, '2sec Wait to enable the Scanner', 2000);
-
-						runs(function()
-						{
-							waitsFor(function() {
-							return document.getElementById("actResult").innerHTML != "init";
-							}, "Timed out waiting for tester to respond", 300000);
-							runs(function() {
-							expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-							});	
-						});
-
+						_result.waitForResponse();
 					});
 
 					it("VT200-0594| Enable with alldecoders disabled, code128 as enabled without callback |"+ scnid + scntype, function() {
-						
-						runs(function()
-						{
-							setObjective("VT200-0594 | Enable with alldecoders disabled, code128 as enabled without callback");
-							setInstruction("putting focus inside textbox and Scan code39 barcode then scan code128 barcode with " + scnid);
-							setExpected("only code128 barcode should decode");
+						displayObjective("VT200-0594 | Enable with alldecoders disabled, code128 as enabled without callback");
+						dispTestSteps("putting focus inside textbox and Scan code39 barcode then scan code128 barcode with " + scnid);
+						dispExpectedResult("only code128 barcode should decode");
+						_result.waitToRunTest();
+						runs(function() {
 							objSCN.enable({'allDecoders':false,'code128':true});
 							setTimeout(function() {
 								enableFlag = true;
 							}, ENABLE1K);
 						});
-
-						waitsFor(function()
-						{
+						waitsFor(function() {
 							return enableFlag;
 						}, '2sec Wait to enable the Scanner', 2000);
-
-						runs(function()
-						{		
-							waitsFor(function() {
-							return document.getElementById("actResult").innerHTML != "init";
-							}, "Timed out waiting for tester to respond", 300000);
-							runs(function() {
-							expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+						_result.waitForResponse();
+						runs(function() {
 							objSCN.allDecoders = true;
-							});	
 						});
 					});
 
 					it("VT200-0595 | Enable with picklist " + reticleType + ", scanTimeout 3000 and callback as anonymous function |"+ scnid, function() {
-						
-						runs(function()
-						{
-							setObjective("VT200-0595| Enable with picklist " + reticleType + ", scanTimeout 3000 and callback as anonymous function |");
-							setInstruction("check functionality of scanTimeout as 3000 and picklistMode " + reticleType + " with " + scnid);
-							setExpected("Baeam or viewfinder will stop automatically after 3 second? only the barcode in the center of the image is decoded for picklistMode as " + reticleType);
-							//objSCN.enable({'scanTimeout':7000,'picklistMode':reticleType},function(data){enablecallbackdata(JSON.stringify(data));});
+						displayObjective("VT200-0595| Enable with picklist " + reticleType + ", scanTimeout 3000 and callback as anonymous function |");
+						dispTestSteps("check functionality of scanTimeout as 3000 and picklistMode " + reticleType + " with " + scnid);
+						dispExpectedResult("Baeam or viewfinder will stop automatically after 3 second? only the barcode in the center of the image is decoded for picklistMode as " + reticleType);
+						_result.waitToRunTest();
+						runs(function() {
 							objSCN.enable({'scanTimeout':3000,'picklistMode':reticleType},function(data){enablecallbackdata(JSON.stringify(data));});
 							setTimeout(function() {
 								enableFlag = true;
 							}, ENABLE1K);
 						});
-
-						waitsFor(function()
-						{
+						waitsFor(function(){
 							return enableFlag;
 						}, '2sec Wait to enable the Scanner', 2000);
-
-						runs(function()
-						{	
-							waitsFor(function() {
-							return document.getElementById("actResult").innerHTML != "init";
-							}, "Timed out waiting for tester to respond", 300000);
-							runs(function() {
-							expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+						_result.waitForResponse();
+						runs(function(){
 							objSCN.disable();
-							});		
 						});
 					});
 				}
 
 					it("VT200-0596| call setDefault with" + scnid + "and take |", function() {
-
-						runs(function()
-						{
-							setObjective("VT200-0596 | call setDefault and take");
-							setInstruction("Take method wait for scanner beam or viewfinder to come automatically without pressing hadrware trigger " + scnid + " Scan code 128 barcode");
-							setExpected("code128 barcode should decode and retrun value should be decoded data and status");
+						displayObjective("VT200-0596 | call setDefault and take");
+						dispTestSteps("Take method wait for scanner beam or viewfinder to come automatically without pressing hadrware trigger " + scnid + " Scan code 128 barcode");
+						dispExpectedResult("code128 barcode should decode and retrun value should be decoded data and status");
+						_result.waitToRunTest();
+						runs(function(){
 							Rho.Barcode.setDefault(objSCN);
 							Rho.Barcode.take({},callbackenable);
 							setTimeout(function() {
 								enableFlag = true;
 							}, ENABLE8K);
 						});
-
-						waitsFor(function()
-						{
+						waitsFor(function(){
 							return enableFlag;
 						}, '2sec wait to enable the Scanner', 9000);
-
-						runs(function()
-						{		
+						_result.waitForResponse();
+						runs(function(){		
 							objSCN.allDecoders = true;
-							waitsFor(function() {
-							return document.getElementById("actResult").innerHTML != "init";
-							}, "Timed out waiting for tester to respond", 300000);
-							runs(function() {
-							expect("pass").toEqual(document.getElementById("actResult").innerHTML);
 							objSCN.disable();
-							});	
 						});
 					});
 
-					xit("VT200-xxx | Start and stop scanner |"+ scnid, function() {
-						
+					it("VT200-xxx | Start and stop scanner |"+ scnid, function() {
+						displayObjective("VT200-xxx | Start and stop scanner |");
+						dispTestSteps("Don't press hardware trigger" + scnid);
+						dispExpectedResult("Scanner beam or viewfinder should comeup automatically and will stop after 8 sec");
+						_result.waitToRunTest();
 						runs(function()
 						{
-							setObjective("VT200-xxx | Start and stop scanner |");
-							setInstruction("Don't press hardware trigger" + scnid);
-							setExpected("Scanner beam or viewfinder should comeup automatically and will stop after 8 sec");
 							objSCN.enable({},callbackenable);
 							setTimeout(function() {
 								enableFlag = true;
 							}, ENABLE8K);
 						});
 
-						waitsFor(function()
-						{
+						waitsFor(function(){
 							return enableFlag;
 						}, '2sec wait to enable the Scanner', 9000);
 
@@ -252,284 +181,172 @@ describe("Barcode Manual Test", function() {
 							}, 8000);
 						});
 
-						waitsFor(function()
-						{
+						waitsFor(function() {
 							return decodeFlag;
 						}, '15sec Wait to Scan the Barcode', 9000);
 
-						runs(function()
-						{
+						runs(function(){
 							objSCN.stop();
-							waitsFor(function() {
-							return document.getElementById("actResult").innerHTML != "init";
-							}, "Timed out waiting for tester to respond", 300000);
-							runs(function() {
-							expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+						});
+						_result.waitForResponse();
+						runs(function(){
 							objSCN.disable();
-							});
 						});
 					});
 
 					it("VT200-0597 | take with picklist " + reticleType + ", scanTimeout 10000 and callback |"+ scnid, function() {
-						
-						runs(function()
-						{
-							setObjective("VT200-0597 | take with picklist " + reticleType + ", scanTimeout 10000 and callback |");
-							setInstruction("Wait for scanner to start and check for picklist as " + reticleType + " with " + scnid);
-							setExpected("only the barcode in the center of the image is decoded for picklistMode as " + reticleType);
+						displayObjective("VT200-0597 | take with picklist " + reticleType + ", scanTimeout 10000 and callback |");
+						dispTestSteps("Wait for scanner to start and check for picklist as " + reticleType + " with " + scnid);
+						dispExpectedResult("only the barcode in the center of the image is decoded for picklistMode as " + reticleType);
+						_result.waitToRunTest();
+						runs(function() {
+							objSCN.take({'scanTimeout':10000,'picklistMode':reticleType},callbackenable);
 							setTimeout(function() {
-								readFlag = true;
+								enableFlag = true;
 							}, ENABLE8K);
-
-							runs(function() {
-								waitsFor(function()
-								{
-									return readFlag;
-								}, '8sec wait to read the instructions', 9000);
-
-								objSCN.take({'scanTimeout':10000,'picklistMode':reticleType},callbackenable);
-								setTimeout(function() {
-									enableFlag = true;
-								}, ENABLE8K);
-								});
 						});
-
-						waitsFor(function()
-						{
+						waitsFor(function() {
 							return enableFlag;
 						}, '9sec wait to enable the Scanner', 9000);
-
-						runs(function()
-						{		
-							waitsFor(function() {
-							return document.getElementById("actResult").innerHTML != "init";
-							}, "Timed out waiting for tester to respond", 300000);
-							runs(function() {
-							expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-							//objSCN.disable();
-							});
-						});
+						_result.waitForResponse();
 					});
 
 					it("VT200-0598 | Take with alldecoders disabled, code128 as enabled with callback as function URL |"+ scnid, function() {
-					
-						runs(function()
-						{
-							setObjective("VT200-0598 | Take with alldecoders disabled, code128 as enabled with callback as function |");
-							setInstruction("scan code39 and then code128 with" + scnid);
-							setExpected("Only code128 should be decoded");
+						displayObjective("VT200-0598 | Take with alldecoders disabled, code128 as enabled with callback as function |");
+						dispTestSteps("scan code39 and then code128 with" + scnid);
+						dispExpectedResult("Only code128 should be decoded");
+						_result.waitToRunTest();
+						runs(function(){
+							objSCN.take({'allDecoders':false,'code128':true,'scanTimeout':10000},callbackenable);
 							setTimeout(function() {
-								readFlag = true;
-							}, ENABLE8K);
-
-							runs(function() {
-								waitsFor(function()
-								{
-									return readFlag;
-								}, '8sec wait to read the instructions', 9000);
-
-								objSCN.take({'allDecoders':false,'code128':true,'scanTimeout':10000},callbackenable);
-								setTimeout(function() {
-									enableFlag = true;
-								}, ENABLE1K);
-								});
+								enableFlag = true;
+							}, ENABLE1K);
 						});
-
-						waitsFor(function()
-						{
+						waitsFor(function() {
 							return enableFlag;
 						}, '2sec wait to enable the Scanner', 2000);
-
-						runs(function()
-						{		
-							waitsFor(function() {
-							return document.getElementById("actResult").innerHTML != "init";
-							}, "Timed out waiting for tester to respond", 300000);
-							runs(function() {
-							expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+						_result.waitForResponse();
+						runs(function(){	
 							objSCN.setProperty("allDecoders",true);
-							//objSCN.disable();
-							});
 						});
 					});
 
 					it("VT200-0599 | Take with callback as anonymous function |"+ scnid, function() {
-						
-						runs(function()
-						{
-							setObjective("VT200-0599 | Take with callback as anonymous function|");
-							setInstruction("scan code39 with" + scnid);
-							setExpected("data of code39 and status as Ok should be returned");
-
+						displayObjective("VT200-0599 | Take with callback as anonymous function|");
+						dispTestSteps("scan code39 with" + scnid);
+						dispExpectedResult("data of code39 and status as Ok should be returned");
+						_result.waitToRunTest();
+						runs(function(){
+							objSCN.take({'scanTimeout':10000},function(data){enablecallbackdata(JSON.stringify(data));});
 							setTimeout(function() {
-								readFlag = true;
-							}, ENABLE8K);
-
-							runs(function() {
-								waitsFor(function()
-								{
-									return readFlag;
-								}, '8sec wait to read the instructions', 9000);
-
-								objSCN.take({'scanTimeout':10000},function(data){enablecallbackdata(JSON.stringify(data));});
-								setTimeout(function() {
-									enableFlag = true;
-								}, 4000);
-								objSCN.allDecoders = true;
-								});
+								enableFlag = true;
+							}, 4000);
+							objSCN.allDecoders = true;
 						});
-
-						waitsFor(function()
-						{
+						waitsFor(function(){
 							return enableFlag;
 						}, '2sec wait to enable the Scanner', 5000);
-
-						runs(function()
-						{		
-							waitsFor(function() {
-							return document.getElementById("actResult").innerHTML != "init";
-							}, "Timed out waiting for tester to respond", 300000);
-							runs(function() {
-							expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+						_result.waitForResponse();
+						runs(function() {
 							objSCN.disable();
-							});
 						});
 					});
 
 				if (Rho.System.isMotorolaDevice == true) 
 				{
 					it("VT200-0600 | autotenter true with setproperty |"+ scnid, function() {
-						
-						runs(function()
-						{
-							setObjective("VT200-0600 | autotenter true with setproperty | ");
-							setInstruction("Put the focus inside textbox and scan code128 barcode with" + scnid);
-							setExpected("Barcode data should come inside textbox with an enter at the end, no callback hash should return");
+						displayObjective("VT200-0600 | autotenter true with setproperty | ");
+						dispTestSteps("Put the focus inside textbox and scan code128 barcode with" + scnid);
+						dispExpectedResult("Barcode data should come inside textbox with an enter at the end, no callback hash should return");
+						_result.waitToRunTest();
+						runs(function() {
 							objSCN.enable();
 							setTimeout(function() {
 								enableFlag = true;
 							}, ENABLE1K);
 						});
-						waitsFor(function()
-						{
+						waitsFor(function() {
 							return enableFlag;
 						}, '2sec wait to enable the Scanner', 2000);
-
-						runs(function()
-						{		
+						runs(function() {		
 							objSCN.setProperty("autoenter","true");
-							waitsFor(function() {
-							return document.getElementById("actResult").innerHTML != "init";
-							}, "Timed out waiting for tester to respond", 300000);
-							runs(function() {
-							expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-							//objSCN.disable();
-							});
 						});
+						_result.waitForResponse();
 					});
 
 					it("VT200-0601 | set decodeSound to local wave file path |"+ scnid, function() {
-						
-						runs(function()
-						{
-							setObjective("VT200-0601 | set decodeSound to local wave file path|");
-							setInstruction("Scan code128 barcode with" + scnid + "check for the wave file to play(wave file should at application/sdcard folder)");
-							setExpected("wave file should play after barcode is decoded");
+						displayObjective("VT200-0601 | set decodeSound to local wave file path|");
+						dispTestSteps("Scan code128 barcode with" + scnid + "check for the wave file to play(wave file should at application/sdcard folder)");
+						dispExpectedResult("wave file should play after barcode is decoded");
+						_result.waitToRunTest();
+						runs(function() {
 							objSCN.enable({},callbackenable);
 							setTimeout(function() {
 								enableFlag = true;
 							}, ENABLE1K);
-							//dispCurrentProcess("Enabling Scanner");
 						});
-						waitsFor(function()
-						{
+						waitsFor(function() {
 							return enableFlag;
 						}, '2sec wait to enable the Scanner', 2000);
 
-						runs(function()
-						{		
-							if(isAndroid)
-							{
+						runs(function() {		
+							if(isAndroid) {
 								objSCN.decodeSound = 'file:///sdcard/decode.wav';
 							}
-							else
-							{
+							else {
 								objSCN.decodeSound = 'file://Application/alarm5.wav';
 							}
-							waitsFor(function() {
-							return document.getElementById("actResult").innerHTML != "init";
-							}, "Timed out waiting for tester to respond", 300000);
+							_result.waitForResponse();
 							runs(function() {
-							expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-							objSCN.disable();
-							});
-						});
-					});
-				}
-					it("VT200-0602 | call getAllProperties() without callback(Sync Access) |"+ scnid, function() {
-						
-						runs(function()
-						{
-							setObjective("VT200-0602 | call getAllProperties() without callback(Sync Access) |");
-							setInstruction("Don't scan and check for all the supported propertylist for scanner" + scnid);
-							setExpected("all the supported properties with their default value should return with Sync Access");
-							objSCN.enable();
-							setTimeout(function() {
-								enableFlag = true;
-							}, ENABLE8K);
-						});
-						waitsFor(function()
-						{
-							return enableFlag;
-						}, '2sec wait to enable the Scanner', 9000);
-
-						runs(function()
-						{		
-							var data = objSCN.getAllProperties();
-							callbackenable(data);
-							waitsFor(function() {
-							return document.getElementById("actResult").innerHTML != "init";
-							}, "Timed out waiting for tester to respond", 300000);
-							runs(function() {
-							expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-							//objSCN.disable();
-							});
-						});
-					});
-
-					it("VT200-0603 | call getSupportedProperties() with async callback |"+ scnid + scntype, function() {
-
-						runs(function()
-						{
-							setObjective("VT200-0603 | call getSupportedProperties() with async callback |");
-							setInstruction("check for all the supported propertylist for scanner" + scnid);
-							setExpected("all the supported properties should return in async callback");
-							objSCN.enable();
-							setTimeout(function()
-							{
-								enableFlag = true;
-							}, ENABLE8K);
-						});
-						waitsFor(function()
-						{
-							return enableFlag;
-						}, '2sec wait to enable the Scanner', 9000);
-
-						runs(function()
-						{		
-							objSCN.getSupportedProperties(callbackenable);
-							waitsFor(function()
-							{
-								return document.getElementById("actResult").innerHTML != "init";
-							}, "Timed out waiting for tester to respond", 300000);
-							
-							runs(function()
-							{
-								expect("pass").toEqual(document.getElementById("actResult").innerHTML);
 								objSCN.disable();
 							});
 						});
 					});
+				}
+				it("VT200-0602 | call getAllProperties() without callback(Sync Access) |"+ scnid, function() {
+					displayObjective("VT200-0602 | call getAllProperties() without callback(Sync Access) |");
+					dispTestSteps("Don't scan and check for all the supported propertylist for scanner" + scnid);
+					dispExpectedResult("all the supported properties with their default value should return with Sync Access");
+					_result.waitToRunTest();
+					runs(function() {
+						objSCN.enable();
+						setTimeout(function() {
+							enableFlag = true;
+						}, ENABLE8K);
+					});
+					waitsFor(function() {
+						return enableFlag;
+					}, '2sec wait to enable the Scanner', 9000);
+					runs(function() {		
+						var data = objSCN.getAllProperties();
+						callbackenable(data);
+					});
+					_result.waitForResponse();
+				});
+
+				it("VT200-0603 | call getSupportedProperties() with async callback |"+ scnid + scntype, function() {
+					displayObjective("VT200-0603 | call getSupportedProperties() with async callback |");
+					dispTestSteps("check for all the supported propertylist for scanner" + scnid);
+					dispExpectedResult("all the supported properties should return in async callback");
+					_result.waitToRunTest();
+					runs(function() {
+						objSCN.enable();
+						setTimeout(function() {             
+							enableFlag = true;
+						}, ENABLE8K);
+					});
+					waitsFor(function() {
+						return enableFlag;
+					}, '2sec wait to enable the Scanner', 9000);
+
+					runs(function() {		
+						objSCN.getSupportedProperties(callbackenable);							
+					});
+					_result.waitForResponse();
+					runs(function() {
+						objSCN.disable();
+					});
+				});
 			});	
 		})(enumData[j]);
 	}
@@ -537,19 +354,15 @@ describe("Barcode Manual Test", function() {
 
 describe("Enumerate Scanner ", function() {
 	var enumObjCount = false;
-
 	var enumCallback = function (enumobj){
-
 		enumobj.length>0 ? enumObjCount=true : enumObjCount=false
-
 	};
 
 	beforeEach(function() {
 		enumObjCount = false;
 	});
 
-	it("Enumerate Scanner callback as function", function() {
-				
+	it("Enumerate Scanner callback as function", function() {		
 		runs(function() {
 			Rho.Barcode.enumerate(enumCallback);
 		});
@@ -561,8 +374,7 @@ describe("Enumerate Scanner ", function() {
 		});
 	});
 
-	it("Enumerate Scanner with anonymous function as callback", function() {
-			
+	it("Enumerate Scanner with anonymous function as callback", function() {		
 		runs(function() {
 			Rho.Barcode.enumerate(function(obj){
 				enumCallback(obj);
@@ -577,7 +389,6 @@ describe("Enumerate Scanner ", function() {
  	});
 
 	it("Enumerate Scanners without callback (Synchronous Access)", function() {
-			
 		runs(function() {
 			var obj = Rho.Barcode.enumerate();
 			callBackfired = enumCallback(obj);

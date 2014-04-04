@@ -7,7 +7,7 @@ function testFailed() {
 }
 
 function setExpected(expected) {
-    document.getElementById('expResult').innerHTML = expected;
+    document.getElementById('expectedresult').innerHTML = expected;
 }
 
 function enablecallbackdata(data) {
@@ -89,7 +89,7 @@ function setupTestFields() {
         if (valueSelected == '') {
             $('#dev_addr').val('127.0.0.1');
             $('#dev_port').val('6101');
-            $('#dev_conn_type').val(Rho.PrinterZebra.CONNECTION_TYPE_TCP);
+            $('#dev_conn_type').val(Rho.Printer.CONNECTION_TYPE_TCP);
         } else {
             var res = valueSelected.split('|');
             $('#dev_conn_type').val(res[0]);
@@ -101,11 +101,11 @@ function setupTestFields() {
 
 function updatePrinterList(printers) {
     for (var i = 0; i < printers.length; i++) {
-        var printerInstance = Rho.PrinterZebra.getPrinterByID(printers[i]);
+        var printerInstance = Rho.Printer.getPrinterByID(printers[i]);
         var printerType = printerInstance.printerType.replace('PRINTER_TYPE_', '');
         var connType = printerInstance.connectionType.replace('CONNECTION_TYPE_', '');
         var devName = printerType + '-' + connType + '@' + printerInstance.deviceAddress;
-        var pid = printerInstance.connectionType + '|' + printerInstance.deviceAddress + '|' + printerInstance.devicePort;
+        var pid = printerInstance.connectionType + '|' + printerInstance.deviceAddress + '|' + printerInstance.devicePort + '|' + printers[i];
 
         $('#dev_list').append($('<option>', {
             value: pid
@@ -149,11 +149,11 @@ function runSearch(options, timeout) {
 
     function searchPrinterCallback(callbackValue) {
         var printer_id = callbackValue.printerID;
-        if (callbackValue.status == Rho.PrinterZebra.PRINTER_STATUS_SUCCESS) {
+        if (callbackValue.status == Rho.Printer.PRINTER_STATUS_SUCCESS) {
             if (printer_id && printer_id.length > 0) {
                 SO.discovered.push(printer_id);
                 SO.last_printer_id = printer_id;
-                SO.last_printer = Rho.PrinterZebra.getPrinterByID(printer_id);
+                SO.last_printer = Rho.Printer.getPrinterByID(printer_id);
             } else {
                 checkSearch();
             }
@@ -182,10 +182,10 @@ function runSearch(options, timeout) {
             SO.finished = true;
         } else {
             if (SO.curr <= 1) {
-                Rho.PrinterZebra.searchPrinters(options, searchPrinterCallback);
+                Rho.Printer.searchPrinters(options, searchPrinterCallback);
             } else {
                 setTimeout(function() {
-                    Rho.PrinterZebra.searchPrinters(options, searchPrinterCallback);
+                    Rho.Printer.searchPrinters(options, searchPrinterCallback);
                 }, 200);
             }
         }

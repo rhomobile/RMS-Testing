@@ -78,8 +78,11 @@
 <body>
 <h4>Mediaplayer manual tests</h4>
 <div id="description"></div>
-<div id="instruction"></div>
-<div id="expectation"></div>
+<P>
+<b>Test Running: </b><div id="instruction"></div>
+<P>
+<b>Expected Result: </b><div id="expectedresult"></div>
+<P>
 
 <div id="detailsdiv"></div>
 <br/><br/>
@@ -93,13 +96,19 @@
 <div id='result'>
 <table>
     <tr>
-        <td><button onclick="captureResult(true)">Pass</button></td>
-        <td><button onclick="captureResult(false)">Fail</button></td>
+		<td><input type="button" value="Run Test" onclick="_result.runTest();" id="runtest"/></td>
+		<td><input type="button" value="Test Passed" onclick="_result.passed();" id="pass" /></td>
+		<td><input type="button" value="Test Failed" onclick="_result.failed();" id="fail" /></td>
     </tr>
 </table>
 </div>
 
 </body>
+<script type="text/javascript">
+    $('#pass').hide();
+    $('#fail').hide();
+    $('#runtest').hide();
+</script>
 </html>
 
 

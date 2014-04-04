@@ -13,6 +13,13 @@ beforeEach(function() {
             };
             return res;
         },
+        toBeIn: function(variants) {
+            var idx = variants.indexOf(this.actual);
+            this.message = function() {
+                return "Expected "+ this.actual + " to equal one of those values: " + variants.join(', ');
+            };
+            return idx >= 0;
+        },
         isNumberGreaterThenZero: function() {
             var typeOk = (typeof this.actual) == 'number';
 

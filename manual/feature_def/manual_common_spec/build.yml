@@ -33,6 +33,7 @@ symbian:
   uid: "0xeeceaf9f"
 #sdk: "MC3000c50b (ARMV4I)"
 android:
+  no_compression: [pdf, png, html, js, css]
   ajax_api_bridge: false
   version: "4.0.3"
   extensions:
