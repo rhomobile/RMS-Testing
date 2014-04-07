@@ -25,6 +25,8 @@ extensions:
 - mediaplayer
 - screenorientation
 - sensor
+- printing
+- printing_zebra
 app_type: rhoelements
 capabilities:
   - gps
