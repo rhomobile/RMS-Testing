@@ -104,6 +104,44 @@ describe('DPX Functionality Test', function() {
         _result.waitForResponse();
     });
 
+    it('autoImageCapture turned off.', function() {
+        dispTestCaseRunning('Frame Delivery Attempt Notification\nTap screen on corresponding prompt.');
+        dispExpectedResult('callbackType should be success.');
+
+        _result.waitToRunTest();
+
+        Rho.DPX.template = logPostTemplate;
+        Rho.DPX.audioFeedback = false;
+        Rho.DPX.uiResultConfirmation = false;
+
+        Rho.DPX.autoImageCapture = false;
+
+        runsCaptureDocument(Rho.DPX.SUCCESS, function(dict) {
+            displayResult('Output: ', 'callbackType is ' + dict['callbackType']);
+        });
+
+        _result.waitForResponse();
+    });
+
+    it('autoImageCapture in effect.', function() {
+        dispTestCaseRunning('Frame Delivery Attempt Notification\nHold device steady.');
+        dispExpectedResult('callbackType should be success.\nDevice should scan form automatically.');
+
+        _result.waitToRunTest();
+
+        Rho.DPX.template = logPostTemplate;
+        Rho.DPX.audioFeedback = false;
+        Rho.DPX.uiResultConfirmation = false;
+
+        Rho.DPX.autoImageCapture = true;
+
+        runsCaptureDocument(Rho.DPX.SUCCESS, function(dict) {
+            displayResult('Output: ', 'callbackType is ' + dict['callbackType']);
+        });
+
+        _result.waitForResponse();
+    });
+
     it('Only audio feedback is on.', function() {
         dispTestCaseRunning('Scan Delivery Attempt Notification');
         dispExpectedResult('callbackType should be success.\nThere must be only audio feedback at end of scan.');
@@ -202,6 +240,25 @@ describe('DPX Functionality Test', function() {
         _result.waitForResponse();
     });
 
+    it('flash mode is disabled', function() {
+        dispTestCaseRunning('Scan Delivery Attempt Notification');
+        dispExpectedResult('callbackType should be success.\nFlash must be disbaled during scan.');
+
+        _result.waitToRunTest();
+
+        Rho.DPX.template = logPostTemplate;
+        Rho.DPX.uiResultConfirmation = false;
+        Rho.DPX.audioFeedback = false;
+
+        Rho.DPX.flashMode = Rho.DPX.FLASH_DISABLED;
+
+        runsCaptureDocument(Rho.DPX.SUCCESS, function(dict) {
+            displayResult('Output: ', 'callbackType is ' + dict['callbackType']);
+        });
+
+        _result.waitForResponse();
+    });
+
     it('processingTimeout 1 second', function() {
         dispTestCaseRunning('1. Frame Delivery Attempt Notification in camera.\n2. Tap to scan.\n3. Immediately start swinging of device.');
         dispExpectedResult('failureReason should be processingTimeout. Scanning should take about one second.');
@@ -211,6 +268,7 @@ describe('DPX Functionality Test', function() {
         Rho.DPX.template = logPostTemplate;
         Rho.DPX.uiResultConfirmation = false;
         Rho.DPX.audioFeedback = false;
+        Rho.DPX.autoImageCapture = false;
 
         Rho.DPX.processingTimeout = 1000;
 
@@ -230,6 +288,7 @@ describe('DPX Functionality Test', function() {
         Rho.DPX.template = logPostTemplate;
         Rho.DPX.uiResultConfirmation = false;
         Rho.DPX.audioFeedback = false;
+        Rho.DPX.autoImageCapture = false;
 
         Rho.DPX.processingTimeout = 5000;
 
