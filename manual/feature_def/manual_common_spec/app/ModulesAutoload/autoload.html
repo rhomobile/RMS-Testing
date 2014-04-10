@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>API distinct modules autoload test</title>
+    <meta name="viewport" content="initial-scale=1.0, width=device-width"/>
+    <script type="text/javascript" src="../../public/api/rhoapi.js" data-api-modules="System,WebView"></script>
+    <style>
+        th {
+            font-weight: bold;
+        }
+
+        th, td {
+            padding: 4px;
+        }
+
+        table, tr, th, td {
+            border: 1px solid gray;
+        }
+    </style>
+
+    <script type="text/javascript">
+        function onLoad() {
+            document.getElementById('Rho').innerHTML = typeof Rho;
+            if ('object' == typeof Rho) {
+                document.getElementById('Rho.System').innerHTML = typeof Rho['System'];
+                document.getElementById('Rho.WebView').innerHTML = typeof Rho['WebView'];
+                document.getElementById('Rho.Barcode').innerHTML = typeof Rho['Barcode'];
+
+                document.getElementById('Rho.System.platform').innerHTML = Rho.System.platform;
+                document.getElementById('Rho.System.phoneId').innerHTML = Rho.System.phoneId;
+                document.getElementById('Rho.WebView.currentLocation()').innerHTML = Rho.WebView.currentLocation();
+            }
+        };
+    </script>
+
+</head>
+<body onload="onLoad();">
+<p>
+    This page should load modules Rho.System and Rho.WebView automatically.
+    It should not load module Rho.Barcode.<br>
+    <br>
+    Use following syntax to list modules are being loaded automatically:<br>
+    <br>
+    &lt;script type="text/javascript" src="../../public/api/rhoapi.js" data-api-modules="System,WebView"&gt;&lt;/script&gt;
+</p>
+<table>
+    <tr>
+        <th>module</th>
+        <th>type should be</th>
+        <th>actual type</th>
+    </tr>
+    <tr>
+        <td>Rho</td>
+        <td>object</td>
+        <td><span id="Rho">ERROR</span></td>
+    </tr>
+    <tr>
+        <td>Rho.System</td>
+        <td>function</td>
+        <td><span id="Rho.System">ERROR</span></td>
+    </tr>
+    <tr>
+        <td>Rho.WebView</td>
+        <td>function</td>
+        <td><span id="Rho.WebView">ERROR</span></td>
+    </tr>
+    <tr>
+        <td>Rho.Barcode</td>
+        <td>undefined</td>
+        <td><span id="Rho.Barcode">ERROR</span></td>
+    </tr>
+</table>
+<p>Rho.System.platform == "<span id="Rho.System.platform">ERROR</span>"</p>
+<p>Rho.System.phoneId == "<span id="Rho.System.phoneId">ERROR</span>"</p>
+<p>Rho.WebView.currentLocation() == "<span id="Rho.WebView.currentLocation()">ERROR</span>"</p>
+
+</body>
+</html>
