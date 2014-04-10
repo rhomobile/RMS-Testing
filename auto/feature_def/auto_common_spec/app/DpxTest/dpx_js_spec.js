@@ -313,23 +313,6 @@ describe('Setting flashMode', function() {
 		expect(data).toEqual(Rho.DPX.FLASH_OFF);
 		});
 		
-		it('Should Set flashMode to FLASH_AUTO using direct calling method', function() {
-		dpxInstance.flashMode=Rho.DPX.FLASH_AUTO;
-		expect(dpxInstance.flashMode).toEqual(Rho.DPX.FLASH_AUTO);
-		});
-		
-    	it('Should Set flashMode to auto using setProperty calling method', function() {
-		dpxInstance.setProperty('flashMode',Rho.DPX.FLASH_AUTO);
-		expect(dpxInstance.getProperty('flashMode')).toEqual(Rho.DPX.FLASH_AUTO);
-		});
-		
-		it('Should Set flashMode to auto using setProperties calling method', function() {
-		dpxInstance.setProperties({'flashMode' : Rho.DPX.FLASH_AUTO});
-		var data = dpxInstance.getProperties(['flashMode']);
-		data = data['flashMode'];
-		expect(data).toEqual(Rho.DPX.FLASH_AUTO);
-		});
-		
 		it('Should Set flashMode to FLASH_ON using direct calling method', function() {
 		dpxInstance.flashMode=Rho.DPX.FLASH_ON;
 		expect(dpxInstance.flashMode).toEqual(Rho.DPX.FLASH_ON);
@@ -529,7 +512,7 @@ describe('Setting uiResultConfirmation', function() {
 
 
     it('flashMode invalid value', function() {
-        Rho.DPX.template = 'file:///sdcard/templates/Logistics%20Post.xml';
+        Rho.DPX.template = 'file://' + encodeURI('/storage/sdcard1/dpx/templates/Logistics Post.xml');
         Rho.DPX.flashMode = 'invalid';
         failCaptureDocument("error: Invalid value 'invalid' for flashMode property.");
     });
