@@ -1,5 +1,8 @@
 describe('DPX Functionality Test', function() {
 
+    var logPostTemplate = 'file:///sdcard/templates/Logistics%20Post.xml';
+    logPostTemplate = 'file://' + encodeURI('/storage/sdcard1/dpx/templates/Logistics Post.xml');
+
     var pprint = function(value) {
         var list = [];
         var each = function(object, f) {
@@ -79,7 +82,7 @@ describe('DPX Functionality Test', function() {
 
         _result.waitToRunAutoTest();
 
-        Rho.DPX.template = 'file:///sdcard/templates/Logistics%20Post.xml';
+        Rho.DPX.template = logPostTemplate;
         Rho.DPX.uiResultConfirmation = false;
         Rho.DPX.audioFeedback = false;
 
@@ -107,7 +110,7 @@ describe('DPX Functionality Test', function() {
 
         _result.waitToRunTest();
 
-        Rho.DPX.template = 'file:///sdcard/templates/Logistics%20Post.xml';
+        Rho.DPX.template = logPostTemplate;
         Rho.DPX.uiResultConfirmation = false;
 
         Rho.DPX.audioFeedback = true;
@@ -127,7 +130,7 @@ describe('DPX Functionality Test', function() {
 
         _result.waitToRunTest();
 
-        Rho.DPX.template = 'file:///sdcard/templates/Logistics%20Post.xml';
+        Rho.DPX.template = logPostTemplate;
         Rho.DPX.uiResultConfirmation = false;
 
         Rho.DPX.audioFeedback = false;
@@ -147,7 +150,7 @@ describe('DPX Functionality Test', function() {
 
         _result.waitToRunTest();
 
-        Rho.DPX.template = 'file:///sdcard/templates/Logistics%20Post.xml';
+        Rho.DPX.template = logPostTemplate;
         Rho.DPX.uiResultConfirmation = false;
 
         Rho.DPX.audioFeedback = false;
@@ -167,7 +170,7 @@ describe('DPX Functionality Test', function() {
 
         _result.waitToRunTest();
 
-        Rho.DPX.template = 'file:///sdcard/templates/Logistics%20Post.xml';
+        Rho.DPX.template = logPostTemplate;
         Rho.DPX.uiResultConfirmation = false;
         Rho.DPX.audioFeedback = false;
 
@@ -186,7 +189,7 @@ describe('DPX Functionality Test', function() {
 
         _result.waitToRunTest();
 
-        Rho.DPX.template = 'file:///sdcard/templates/Logistics%20Post.xml';
+        Rho.DPX.template = logPostTemplate;
         Rho.DPX.uiResultConfirmation = false;
         Rho.DPX.audioFeedback = false;
 
@@ -205,7 +208,7 @@ describe('DPX Functionality Test', function() {
 
         _result.waitToRunTest();
 
-        Rho.DPX.template = 'file:///sdcard/templates/Logistics%20Post.xml';
+        Rho.DPX.template = logPostTemplate;
         Rho.DPX.uiResultConfirmation = false;
         Rho.DPX.audioFeedback = false;
 
@@ -224,7 +227,7 @@ describe('DPX Functionality Test', function() {
 
         _result.waitToRunTest();
 
-        Rho.DPX.template = 'file:///sdcard/templates/Logistics%20Post.xml';
+        Rho.DPX.template = logPostTemplate;
         Rho.DPX.uiResultConfirmation = false;
         Rho.DPX.audioFeedback = false;
 
@@ -243,7 +246,7 @@ describe('DPX Functionality Test', function() {
 
         _result.waitToRunTest();
 
-        Rho.DPX.template = 'file:///sdcard/templates/Logistics%20Post.xml';
+        Rho.DPX.template = logPostTemplate;
         Rho.DPX.uiResultConfirmation = false;
         Rho.DPX.audioFeedback = false;
 
@@ -268,7 +271,7 @@ describe('DPX Functionality Test', function() {
 
         _result.waitToRunTest();
 
-        Rho.DPX.template = 'file:///sdcard/templates/Logistics%20Post.xml';
+        Rho.DPX.template = logPostTemplate;
         Rho.DPX.uiResultConfirmation = false;
         Rho.DPX.audioFeedback = false;
 
@@ -293,7 +296,7 @@ describe('DPX Functionality Test', function() {
 
         _result.waitToRunTest();
 
-        Rho.DPX.template = 'file:///sdcard/templates/Logistics%20Post.xml';
+        Rho.DPX.template = logPostTemplate;
         Rho.DPX.uiResultConfirmation = false;
         Rho.DPX.audioFeedback = false;
 
@@ -313,7 +316,7 @@ describe('DPX Functionality Test', function() {
 
         _result.waitToRunTest();
 
-        Rho.DPX.template = 'file:///sdcard/templates/Logistics%20Post.xml';
+        Rho.DPX.template = logPostTemplate;
         Rho.DPX.audioFeedback = false;
 
         Rho.DPX.uiResultConfirmation = true;
@@ -342,7 +345,7 @@ describe('DPX Functionality Test', function() {
 
         _result.waitToRunTest();
 
-        Rho.DPX.template = 'file:///sdcard/templates/Logistics%20Post.xml';
+        Rho.DPX.template = logPostTemplate;
         Rho.DPX.uiResultConfirmation = false;
         Rho.DPX.audioFeedback = false;
 
