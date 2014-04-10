@@ -24,6 +24,49 @@ var failCaptureDocument = function(expectedFailureReason) {
     });
 };
 
+var makeIts = function(property, values) {
+    var check = function(value) {
+        expect(dpxInstance[property]).toEqual(value);
+        expect(dpxInstance.getProperty(property)).toEqual(value.toString());
+        expect(dpxInstance.getProperties([property])[property]).toEqual(value.toString());
+    };
+
+    var makeIt = function(caption, code) {
+        return function(value) {
+            it(caption(value), function() {
+                code(value);
+                check(value);
+            });
+        };
+    };
+
+    var its = [
+        makeIt(
+            function(v) { return "dpxInstance['" + property + "'] = " + v; },
+            function(v) { dpxInstance[property] = v; }
+        ),
+        makeIt(
+            function(v) { return "dpxInstance.setProperty('" + property + "', " + v + ')'; },
+            function(v) { dpxInstance.setProperty(property, v); }
+        ),
+        makeIt(
+            function(v) { return "dpxInstance.setProperties({'" + property + "': '" + v + "'})'"; },
+            function(v) {
+                var map = {};
+                map[property] = v.toString();
+                dpxInstance.setProperties(map);
+            }
+        )
+    ];
+
+    for (var i = 0; i < its.length; ++i) {
+        for (var j = 0; j < values.length; ++j) {
+            its[i](values[j]);
+        }
+    }
+};
+
+
 var dpxInstance = Rho.DPX;
 
 afterEach(function () {
@@ -96,51 +139,17 @@ describe('Setting template', function() {
 		});
 });
 
-
 describe('Set audioFeedback', function() {
-
-    var property = 'audioFeedback';
-
-    var check = function(value) {
-        expect(dpxInstance[property]).toEqual(value);
-        expect(dpxInstance.getProperty(property)).toEqual(value.toString());
-        expect(dpxInstance.getProperties([property])[property]).toEqual(value.toString());
-    };
-
-    var make_it = function(caption, code) {
-        return function(value) {
-            it(caption(value), function() {
-                code(value);
-                check(value);
-            });
-        };
-    };
-
-    var its = [
-        make_it(
-            function(v) { return "dpxInstance['" + property + "'] = " + v; },
-            function(v) { dpxInstance[property] = v; }
-        ),
-        make_it(
-            function(v) { return "dpxInstance.setProperty('" + property + "', " + v + ')'; },
-            function(v) { dpxInstance.setProperty(property, v); }
-        ),
-        make_it(
-            function(v) { return "dpxInstance.setProperties({'" + property + "': '" + v + "'})'"; },
-            function(v) {
-                var map = {};
-                map[property] = v.toString();
-                dpxInstance.setProperties(map);
-            }
-        )
-    ];
-
-    for (var i = 0; i < its.length; ++i) {
-        its[i](true);
-        its[i](false);
-    }
+    makeIts('audioFeedback', [false, true]);
 });
 
+describe('Set autoImageCapture', function() {
+    makeIts('autoImageCapture', [false, true]);
+});
+
+describe('Set flashMode', function() {
+    makeIts('flashMode', ['on', 'off', 'disabled']);
+});
 
 describe('Setting audioFeedback', function() {
 
