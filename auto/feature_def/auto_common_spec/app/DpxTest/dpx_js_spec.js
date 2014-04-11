@@ -24,46 +24,69 @@ var failCaptureDocument = function(expectedFailureReason) {
     });
 };
 
-var makeIts = function(property, values) {
-    var check = function(value) {
-        expect(dpxInstance[property]).toEqual(value);
-        expect(dpxInstance.getProperty(property)).toEqual(value.toString());
-        expect(dpxInstance.getProperties([property])[property]).toEqual(value.toString());
-    };
+var describePropertySetTest = function(property, values, invalidValues) {
 
-    var makeIt = function(caption, code) {
-        return function(value) {
-            it(caption(value), function() {
-                code(value);
-                check(value);
-            });
+    describe('Set ' + property, function() {
+        var check = function(value) {
+            expect(dpxInstance[property]).toEqual(value);
+            expect(dpxInstance.getProperty(property)).toEqual(value.toString());
+            expect(dpxInstance.getProperties([property])[property]).toEqual(value.toString());
         };
-    };
 
-    var its = [
-        makeIt(
-            function(v) { return "dpxInstance['" + property + "'] = " + v; },
-            function(v) { dpxInstance[property] = v; }
-        ),
-        makeIt(
-            function(v) { return "dpxInstance.setProperty('" + property + "', " + v + ')'; },
-            function(v) { dpxInstance.setProperty(property, v); }
-        ),
-        makeIt(
-            function(v) { return "dpxInstance.setProperties({'" + property + "': '" + v + "'})'"; },
-            function(v) {
-                var map = {};
-                map[property] = v.toString();
-                dpxInstance.setProperties(map);
+        var makeIt = function(caption, code) {
+            return function(value) {
+                it(caption(value), function() {
+                    code(value);
+                    check(value);
+                });
+            };
+        };
+
+        var its = [
+            makeIt(
+                function(v) { return "dpxInstance['" + property + "'] = " + v; },
+                function(v) { dpxInstance[property] = v; }
+            ),
+            makeIt(
+                function(v) { return "dpxInstance.setProperty('" + property + "', " + v + ')'; },
+                function(v) { dpxInstance.setProperty(property, v); }
+            ),
+            makeIt(
+                function(v) { return "dpxInstance.setProperties({'" + property + "': '" + v + "'})'"; },
+                function(v) {
+                    var map = {};
+                    map[property] = v.toString();
+                    dpxInstance.setProperties(map);
+                }
+            )
+        ];
+
+        for (var i = 0; i < its.length; ++i) {
+            for (var j = 0; j < values.length; ++j) {
+                its[i](values[j]);
             }
-        )
-    ];
-
-    for (var i = 0; i < its.length; ++i) {
-        for (var j = 0; j < values.length; ++j) {
-            its[i](values[j]);
         }
-    }
+    });
+
+    describe('Set invalid ' + property, function() {
+        for (var j = 0; j < invalidValues.length; ++j) {
+            (function(value) {
+                it("Rho.DPX['" + property + "'] = " + value, function() {
+                    Rho.DPX.template = 'file://' + encodeURI('/storage/sdcard1/dpx/templates/Logistics Post.xml');
+                    Rho.DPX[property] = value;
+                    runs(function() {
+                        expect(Rho.DPX[property]).toEqual(value);
+                    });
+
+                    failCaptureDocument("error: Invalid value '" + value + "' for " + property + " property.");
+
+                    runs(function() {
+                        expect(Rho.DPX[property]).toEqual(value);
+                    });
+                });
+            })(invalidValues[j]);
+        };
+    });
 };
 
 
@@ -139,17 +162,13 @@ describe('Setting template', function() {
 		});
 });
 
-describe('Set audioFeedback', function() {
-    makeIts('audioFeedback', [false, true]);
-});
-
-describe('Set autoImageCapture', function() {
-    makeIts('autoImageCapture', [false, true]);
-});
-
-describe('Set flashMode', function() {
-    makeIts('flashMode', ['on', 'off', 'disabled']);
-});
+describePropertySetTest('audioFeedback'         , [false, true            ], [         ]);
+describePropertySetTest('autoImageCapture'      , [false, true            ], [         ]);
+describePropertySetTest('flashMode'             , ['on', 'off', 'disabled'], ['invalid']);
+describePropertySetTest('delayResultDisplay'    , [false, true            ], [         ]);
+describePropertySetTest('frameThreshold'        , [5, 15, 30              ], [4, 31    ]);
+describePropertySetTest('negativeFrameThreshold', [0, 2, 20               ], [-1, 21   ]);
+describePropertySetTest('decodeAudioFeedback'   , ['', 'file.wav'         ], [         ]);
 
 describe('Setting audioFeedback', function() {
 
@@ -519,12 +538,6 @@ describe('Setting uiResultConfirmation', function() {
 		});
 });
 
-
-    it('flashMode invalid value', function() {
-        Rho.DPX.template = 'file://' + encodeURI('/storage/sdcard1/dpx/templates/Logistics Post.xml');
-        Rho.DPX.flashMode = 'invalid';
-        failCaptureDocument("error: Invalid value 'invalid' for flashMode property.");
-    });
 
     it('Nonexistent template URI', function() {
         Rho.DPX.template = 'file:///nonexistent.xml';
