@@ -45,6 +45,7 @@ symbian:
 android:
   version: 4.2.2
   extensions: ["nativeBridgeTest", "barcode", "screenorientation", "instrumentation", "cardreader", "indicators", "sensor"]
+  abis: ["arm","x86"]
   capabilities:
   - native_browser
 wm:
