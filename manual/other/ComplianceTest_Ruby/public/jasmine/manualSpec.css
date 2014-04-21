@@ -1,0 +1,50 @@
+.container {
+    border: 1px solid darkblue;
+    margin: 5px;
+    font-size: 11px;
+    font-family: Monaco, "Lucida Console", monospace;
+    line-height: 14px;
+    color: #333333;
+}
+
+.specTitle {
+    padding: 3px;
+    font-size: 12px;
+    font-weight: bolder;
+    background-color: steelblue;
+    color: white;
+}
+
+.goalsContainer {
+    padding: 3px;
+}
+
+.preconditionsContainer {
+    padding: 3px;
+}
+
+.stepsContainer {
+    padding: 3px;
+}
+
+.expectationsContainer {
+    padding: 3px;
+}
+
+.resultsContainer {
+    padding: 3px;
+}
+
+.failedButton{
+    background-color: darkred;
+    color: white;
+}
+
+.passedButton{
+    background-color: darkgreen;
+    color: white;
+}
+
+.containerTitle{
+    font-weight: bold;
+}
