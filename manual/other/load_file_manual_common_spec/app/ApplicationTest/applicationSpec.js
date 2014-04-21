@@ -24,6 +24,19 @@ appEventsTest.setCallback = function ()
 
 describe("<application module specs>", function () {
 
+    beforeEach(function(){
+        var matchers = {
+            isNotEmptyString: function () {
+                return (typeof this.actual == 'string') && (this.actual.length != 0)
+            }
+        };
+
+        this.addMatchers(
+            matchers
+        );
+
+    })
+
     it("Test appBundleFolder property", function () {
         expect(Rho.Application.appBundleFolder).isNotEmptyString();
     });
