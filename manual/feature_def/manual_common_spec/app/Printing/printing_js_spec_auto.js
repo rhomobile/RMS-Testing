@@ -113,6 +113,15 @@ describe('Printing Generic', function() {
 
         printers_array = [];
         printers_errors = [];
+
+        var matchers = {
+            isNotEmptyString: function () {
+                return (typeof this.actual == 'string') && (this.actual.length != 0)
+            }
+        };
+        this.addMatchers(
+            matchers
+        );
     });
 
     afterEach(function() {});
