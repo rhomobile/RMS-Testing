@@ -16,6 +16,7 @@ class PrinterZebraController < Rho::RhoController
 
 @arrayzpl = ['val2', 'val1', 'val3', 'val4', 'val5', 'val6']
 
+
 #callback function
 def printer_callback
   begin
@@ -25,17 +26,16 @@ def printer_callback
       Rho::WebView.executeJavascript('Ruby.sendValueToJS("'+ @params['result'] +'")')
     end
   rescue => ex
-    Alert.show_popup(ex.to_s)
-    jsmethod = 'Ruby.sendValueToJS("' + ex + '")'
+    jsmethod = 'Ruby.sendValueToJS("' + ex.message + '")'
     Rho::WebView.executeJavascript(jsmethod)
   end
 end
 
+#callback function for req state
 def printer_callback_req
   begin
-    Alert.show_popup(@params.to_s)
-    Alert.show_popup(@params['PRINTER_STATE_IS_READY_TO_PRINT'])
-    Rho::WebView.executeJavascript("Ruby.sendValueToJS( \"#{@params.to_s}\")")
+    @p_str = 'PRINTER_STATE_IS_READY_TO_PRINT : ' + @params['PRINTER_STATE_IS_READY_TO_PRINT'].to_s
+    Rho::WebView.executeJavascript("Ruby.sendValueToJS('#{@p_str}')")
   rescue => ex
     jsmethod = 'Ruby.sendValueToJS("' + ex.message + '")'
     Rho::WebView.executeJavascript(jsmethod)
@@ -66,12 +66,8 @@ def rho_printFile_callback
       end
       @printer = Rho::PrinterZebra.getPrinterByID(@params['pid'])
 
-      if (@printer.isConnected || @printer.isReadyToPrint)
-        @printer.printFile(fileURI, {}, url_for(:action => :printer_callback))
-      else
-        p_str = @printer.status + " \n " + @printer.message
-        Rho::WebView.executeJavascript("Ruby.sendValueToJS(#{p_str})")
-      end
+      @printer.printFile(fileURI, {}, url_for(:action => :printer_callback))
+
     rescue => ex
       jsmethod = 'Ruby.sendValueToJS("' + ex.message + '")'
       Rho::WebView.executeJavascript(jsmethod)
@@ -90,16 +86,12 @@ def rho_printRawString_callback
     else
       cmmd = '"! 0 200 200 210 1\r\nTEXT 4 0 30 40 Printing Zebra CCPL\r\nFORM\r\nPRINT\r\n'
     end
-    @printer = Rho::PrinterZebra.getPrinterByID(@params['pid'])
 
-    if (@printer.isConnected || @printer.isReadyToPrint)
-      @printer.printRawString(cmmd, {}, url_for(:action => :printer_callback))
-    else
-      p_str = @printer.status + " \n " + @printer.message
-      Rho::WebView.executeJavascript("Ruby.sendValueToJS(#{p_str})")
-    end
+    @printer = Rho::PrinterZebra.getPrinterByID(@params['pid'])
+    @printer.printRawString(cmmd, {}, url_for(:action => :printer_callback))
 
   rescue => ex
+    Alert.show_popup(ex.to_s)
     jsmethod = 'Ruby.sendValueToJS("' + ex.message + '")'
     Rho::WebView.executeJavascript(jsmethod)
   end
@@ -114,12 +106,8 @@ def rho_doSendFileContents
     end
     @printer = Rho::PrinterZebra.getPrinterByID(@params['pid'])
 
-    if (@printer.isConnected || @printer.isReadyToPrint)
-      @printer.sendFileContents(fileURI, url_for(:action => :printer_callback))
-    else
-      p_str = @printer.status + " \n " + @printer.message
-      Rho::WebView.executeJavascript("Ruby.sendValueToJS(#{p_str})")
-    end
+    @printer.sendFileContents(fileURI, url_for(:action => :printer_callback))
+
   rescue => ex
     jsmethod = 'Ruby.sendValueToJS("' + ex.message + '")'
     Rho::WebView.executeJavascript(jsmethod)
@@ -128,23 +116,13 @@ end
 
 def rho_printFileImage_callback
   begin
-    Alert.show_popup(@params.to_s)
-    if @params['file'] && @params['x'] && @params['y'] && @params['opt']
+    if @params['file']
       fileURI = @params['file']
-      x = @params['x']
-      y = @params['y']
-      options = @params['opt']
     end
   
     @printer = Rho::PrinterZebra.getPrinterByID(@params['pid'])
-    
-    if (@printer.isConnected || @printer.isReadyToPrint)      
-      @printer.printImageFromFile(fileURI, x, y, {:width =>-1, :height =>-1}, url_for(:action => :printer_callback))
-    else
-      p_str = @printer.status + " \n " + @printer.message
-      Rho::WebView.executeJavascript("Ruby.sendValueToJS(#{p_str})")
-    end
-    
+    @printer.printImageFromFile(fileURI, 50, 50, {'width' => -1, 'height' => -1}, url_for(:action => :printer_callback))
+
   rescue => ex
     jsmethod = 'Ruby.sendValueToJS("' + ex.message + '")'
     Rho::WebView.executeJavascript(jsmethod)
@@ -155,7 +133,7 @@ def rho_printerReqState
   begin
 
     @printer = Rho::PrinterZebra.getPrinterByID(@params['pid'])
-    @printer.requestState([Rho::PrinterZebra::PRINTER_STATE_IS_READY_TO_PRINT, Rho::PrinterZebra::PRINTER_STATE_IS_PAPER_OUT], url_for(:action => :printer_callback_req))
+    @printer.requestState([Rho::PrinterZebra::PRINTER_STATE_IS_READY_TO_PRINT], url_for(:action => :printer_callback_req))
 
   rescue => ex
     jsmethod = 'Ruby.sendValueToJS("' + ex.message + '")'
@@ -163,37 +141,28 @@ def rho_printerReqState
   end
 end
 
-def rho_printerStoredFormat_raw
-  begin
-    @printer = Rho::PrinterZebra.getPrinterByID(@params['pid'])
+# def rho_printerStoredFormat_raw
+#   begin
+#     @printer = Rho::PrinterZebra.getPrinterByID(@params['pid'])
     
-    if (@printer.isConnected || @printer.isReadyToPrint)
-      @printer.printRawString(@formatpath, {}, url_for(:action => :printer_callback))
-    else
-      p_str = @printer.status + " \n " + @printer.message
-      Rho::WebView.executeJavascript("Ruby.sendValueToJS(#{p_str})")
-    end
+#     if (@printer.isConnected || @printer.isReadyToPrint)
+#       @printer.printRawString(@formatpath, {}, url_for(:action => :printer_callback))
+#     else
+#       p_str = @printer.status + " \n " + @printer.message
+#       Rho::WebView.executeJavascript("Ruby.sendValueToJS(#{p_str})")
+#     end
 
-  rescue => ex
-    jsmethod = 'Ruby.sendValueToJS("' + ex.message + '")'
-    Rho::WebView.executeJavascript(jsmethod)
-  end
-end
+#   rescue => ex
+#     jsmethod = 'Ruby.sendValueToJS("' + ex.message + '")'
+#     Rho::WebView.executeJavascript(jsmethod)
+#   end
+# end
 
 def rho_printerStoredHash
   begin
  
     @printer = Rho::PrinterZebra.getPrinterByID(@params['pid'])
-    
-    if (@printer.isConnected || @printer.isReadyToPrint)
-      if @params['formatpath'] == 'zplstoredformat'
-        @printer.printStoredFormatWithHash(@zplstoredformat, @hashzpl, url_for(:action => :printer_callback));
-      else
-      end
-    else
-      p_str = @printer.status + " \n " + @printer.message
-      Rho::WebView.executeJavascript("Ruby.sendValueToJS(#{p_str})")
-    end
+    @printer.printStoredFormatWithHash(@zplstoredformat, @hashzpl, url_for(:action => :printer_callback))
 
   rescue => ex
     jsmethod = 'Ruby.sendValueToJS("' + ex.message + '")'
@@ -205,13 +174,7 @@ def rho_printerStoredArray
   begin
   
     @printer = Rho::PrinterZebra.getPrinterByID(@params['pid'])
-    
-    if (@printer.isConnected || @printer.isReadyToPrint)
-      @printer.printStoredFormatWithArray(@zplstoredformat, @arrayzpl, url_for(:action => :printer_callback));
-    else
-      p_str = @printer.status + " \n " + @printer.message
-      Rho::WebView.executeJavascript("Ruby.sendValueToJS(#{p_str})")
-    end
+    @printer.printStoredFormatWithArray(@zplstoredformat, @arrayzpl, url_for(:action => :printer_callback))
 
   rescue => ex
     jsmethod = 'Ruby.sendValueToJS("' + ex.message + '")'
@@ -223,9 +186,6 @@ def rho_disconnect
   begin
     if @params['pid']
       @printer = Rho::PrinterZebra.getPrinterByID(@params['pid'])
-    end
-    if !@printer.isConnected
-      @printer.connect(url_for(:action => :printer_callback))
     end
     if @printer.isConnected
       @printer.disconnect(url_for(:action => :printer_callback))
