@@ -394,6 +394,33 @@ describe('Printer Zebra', function() {
             doConnect();
         });
 
+		it('Search printer method with callback', function() {
+            dispTestCaseRunning("search printer method ");
+            dispExpectedResult("should search and display printer id");
+            _result.waitToRunTest();
+            runs(function() {
+               
+                Ruby.call('PrinterZebra','rho_searchPrinters');
+                
+                setTimeout(function() {
+                    timeout = true;
+                }, 20000);
+                
+            });
+
+            waitsFor(function(){
+                if(timeout == true){
+                    return true;
+                }
+            }, 'Wait for 10msec ajax call to happen', 30000);
+
+            runs(function() {
+                displayResult("Output: ", Ruby.getReturnedValue()+"<br/>");
+            });
+            _result.waitForResponse();
+        });
+		
+		
         it('Should print png image with callback', function() {
             dispTestCaseRunning("print PNG image.");
             dispExpectedResult("Should print png image and status should return PRINTER_STATUS_SUCCESS");

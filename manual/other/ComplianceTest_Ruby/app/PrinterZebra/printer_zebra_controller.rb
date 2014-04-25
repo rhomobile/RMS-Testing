@@ -31,6 +31,18 @@ def printer_callback
   end
 end
 
+#callback function for searchPrinters
+def searchPrinters_callback
+  begin
+    if @params
+      Rho::WebView.executeJavascript('Ruby.sendValueToJS("'+ @params['printerID'] +'")')
+    end
+  rescue => ex
+    jsmethod = 'Ruby.sendValueToJS("' + ex.message + '")'
+    Rho::WebView.executeJavascript(jsmethod)
+  end
+end
+
 #callback function for req state
 def printer_callback_req
   begin
@@ -56,6 +68,16 @@ def rho_connect
     Rho::WebView.executeJavascript(jsmethod)
   end
 end
+
+def rho_searchPrinters
+  begin
+    Rho::PrinterZebra.searchPrinters({}, url_for(:action => :searchPrinters_callback))
+  rescue => ex
+    jsmethod = 'Ruby.sendValueToJS("' + ex.message + '")'
+    Rho::WebView.executeJavascript(jsmethod)
+  end
+end
+
 
 def rho_printFile_callback
    begin
