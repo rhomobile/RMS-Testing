@@ -389,7 +389,7 @@ describe('Printer Zebra', function() {
 
 
     // printFile method
-    xdescribe('printFile method', function() {
+    describe('printFile method', function() {
         it('should connect', function() {
             doConnect();
         });
@@ -406,7 +406,7 @@ describe('Printer Zebra', function() {
         });
     });
 
-    xdescribe('printRawString method', function() {
+    describe('printRawString method', function() {
       
         it('should print ZPL Command with callback', function() {
             dispTestCaseRunning("print ZPL Command ");
@@ -458,7 +458,7 @@ describe('Printer Zebra', function() {
 
 
 
-    xdescribe('sendFileContents method', function() {
+    describe('sendFileContents method', function() {
         it('should print test_zpl.zpl with callback', function() {
             dispTestCaseRunning("send test_zpl.zpl file to get printed");
             dispExpectedResult("should print Test from test_zpl.zpl file and status should return PRINTER_STATUS_SUCCESS");
@@ -521,7 +521,7 @@ describe('Printer Zebra', function() {
         });
     }
 
-    xdescribe('printImageFromFile method', function() {
+    describe('printImageFromFile method', function() {
        
         var sizes = [-1];
         var formats = [jpg_s];
