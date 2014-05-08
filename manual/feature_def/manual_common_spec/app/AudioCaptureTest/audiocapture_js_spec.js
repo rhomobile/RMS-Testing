@@ -66,8 +66,8 @@ describe("Audio Capture Test", function(){
     
     if(isAndroidPlatform()){
         arrAudioCapture['encoder']= {
-            //"values": [Rho.AudioCapture.ENCODER_AAC, Rho.AudioCapture.ENCODER_AMR_NB, Rho.AudioCapture.ENCODER_AMR_WB, "INVALID", null],
-            "values": ["AAC", "AMR_NB", "AMR_WB", "INVALID", null],
+            "values": [Rho.AudioCapture.ENCODER_AAC, Rho.AudioCapture.ENCODER_AMR_NB, Rho.AudioCapture.ENCODER_AMR_WB, "INVALID", null],
+            //"values": ["AAC", "AMR_NB", "AMR_WB", "INVALID", null],
             "expected": "Callback should return ok and full file path of recored audiofile and in captured audio for ENCODER_AAC as .mp4, ENCODER_AMR_NB & ENCODER_AMR_WB as .3gpp "
         };
     }
