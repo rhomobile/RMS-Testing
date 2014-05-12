@@ -59,11 +59,12 @@ describe('Rho.AudioCapture JS API', function () {
 					expect(Rho.AudioCapture.maxDuration).toEqual(20000);
 				});
 
+				/* --fileName is mandatory hence removed--
 				it('Should get fileName default value', function () {
 					expect(Rho.AudioCapture.fileName).toEqual('AudioCapture');
 				});
-
-                /* --source has been removed--
+				
+                --source has been removed--
 				it('Should get source default value', function () {
 					expect(Rho.AudioCapture.source).toEqual(Rho.AudioCapture.MIC);
 				});    */
@@ -357,12 +358,12 @@ describe('Rho.AudioCapture JS API', function () {
     
     arrAudioCapture['maxDuration'] = {
         "values": [10000, 60000, 1000, 500, 1500 , 0, -3000, null],
-        "expected": "Callback should return ok and full file path of recored audiofile and Capture audio duration should be "
+        "expected": "Callback should return ok and full file path of recorded audiofile and Capture audio duration should be "
     };
 
     arrAudioCapture['fileName']= {
         "values":  ["audio_123", "1234", "12345 audio", "audio_capture"],
-        "expected": "Callback should return ok and full file path of recored audiofile and captured audio should get save with the fileName as "
+        "expected": "Callback should return ok and full file path of recorded audiofile and captured audio should get save with the fileName as "
     };
 
     for (var object in arrAudioCapture) {
