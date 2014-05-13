@@ -52,7 +52,7 @@ describe('Rho.AudioCapture JS API', function () {
                 });
             });
         }
-		if (["WINDOWS", "ANDROID"].indexOf(Rho.System.platform) != -1) {
+		if (["WINDOWS", "ANDROID", "APPLE"].indexOf(Rho.System.platform) != -1) {
 			describe('getting property default value', function () {
 
 				it('Should get maxDuration default value', function () {
@@ -78,7 +78,7 @@ describe('Rho.AudioCapture JS API', function () {
 				
 			});    
 		}
-        if (["WINDOWS", "ANDROID"].indexOf(Rho.System.platform) != -1) {
+        if (["WINDOWS", "ANDROID", "APPLE"].indexOf(Rho.System.platform) != -1) {
             describe('Setting maxDuration', function () {
                 it('Should Set maxDuration to 1000 using direct calling method', function () {
                     Rho.AudioCapture.maxDuration = 1000;
@@ -178,7 +178,7 @@ describe('Rho.AudioCapture JS API', function () {
                 });
             });
         }
-        if (["ANDROID"].indexOf(Rho.System.platform) != -1) {
+        if (["ANDROID", "APPLE"].indexOf(Rho.System.platform) != -1) {
             describe('Setting fileName', function () {
                 it('Should Set fileName to myAudio using direct calling method', function () {
                     Rho.AudioCapture.fileName = 'myAudio.mp4';
