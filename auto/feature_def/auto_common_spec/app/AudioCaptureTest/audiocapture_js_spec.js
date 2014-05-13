@@ -1,5 +1,36 @@
 describe('Rho.AudioCapture JS API', function () {
+
     describe('Rho.AudioCapture APIs Set Test', function () {
+	
+		if (["WINDOWS", "ANDROID"].indexOf(Rho.System.platform) != -1) {
+			describe('getting property default value', function () {
+
+				it('Should get maxDuration default value', function () {
+					expect(Rho.AudioCapture.maxDuration).toEqual(20000);
+				});
+
+				/* --fileName is mandatory hence removed--
+				it('Should get fileName default value', function () {
+					expect(Rho.AudioCapture.fileName).toEqual('AudioCapture');
+				});
+				
+                --source has been removed--
+				it('Should get source default value', function () {
+					expect(Rho.AudioCapture.source).toEqual(Rho.AudioCapture.MIC);
+				});    */
+			});
+	
+		}
+		if (["ANDROID"].indexOf(Rho.System.platform) != -1) {
+			describe('getting property default value', function () {
+
+				it('Should get encoder default value', function () {
+					expect(Rho.AudioCapture.encoder).toEqual(Rho.AudioCapture.ENCODER_AAC);
+				});
+				
+			});    
+		}
+	
         if (["ANDROID"].indexOf(Rho.System.platform) != -1) {
             describe('Setting encoder', function () {
                 it('Should Set encoder to ENCODER_AAC using direct calling method', function () {
@@ -52,34 +83,7 @@ describe('Rho.AudioCapture JS API', function () {
                 });
             });
         }
-		if (["WINDOWS", "ANDROID"].indexOf(Rho.System.platform) != -1) {
-			describe('getting property default value', function () {
-
-				it('Should get maxDuration default value', function () {
-					expect(Rho.AudioCapture.maxDuration).toEqual(20000);
-				});
-
-				/* --fileName is mandatory hence removed--
-				it('Should get fileName default value', function () {
-					expect(Rho.AudioCapture.fileName).toEqual('AudioCapture');
-				});
-				
-                --source has been removed--
-				it('Should get source default value', function () {
-					expect(Rho.AudioCapture.source).toEqual(Rho.AudioCapture.MIC);
-				});    */
-			});
-	
-		}
-		if (["ANDROID"].indexOf(Rho.System.platform) != -1) {
-			describe('getting property default value', function () {
-
-				it('Should get encoder default value', function () {
-					expect(Rho.AudioCapture.encoder).toEqual(Rho.AudioCapture.ENCODER_AAC);
-				});
-				
-			});    
-		}
+		
         if (["WINDOWS", "ANDROID"].indexOf(Rho.System.platform) != -1) {
             describe('Setting maxDuration', function () {
                 it('Should Set maxDuration to 1000 using direct calling method', function () {
@@ -92,7 +96,7 @@ describe('Rho.AudioCapture JS API', function () {
                 });
                 it('Should Set maxDuration to 1000 using setProperties calling method', function () {
                     Rho.AudioCapture.setProperties({
-                        'maxDuration': 1000
+                        'maxDuration': '1000'
                     });
                     var data = Rho.AudioCapture.getProperties(['maxDuration']);
                     data = data['maxDuration'];
@@ -108,7 +112,7 @@ describe('Rho.AudioCapture JS API', function () {
                 });
                 it('Should Set maxDuration to 2000 using setProperties calling method', function () {
                     Rho.AudioCapture.setProperties({
-                        'maxDuration': 2000
+                        'maxDuration': '2000'
                     });
                     var data = Rho.AudioCapture.getProperties(['maxDuration']);
                     data = data['maxDuration'];
@@ -132,7 +136,7 @@ describe('Rho.AudioCapture JS API', function () {
                 });
                 it('Should Set maxDuration to -1000 using direct calling method', function () {
                     Rho.AudioCapture.maxDuration = -1000;
-                    expect(Rho.AudioCapture.maxDuration).toEqual(-1000);
+                    expect(Rho.AudioCapture.maxDuration).toEqual(20000);
                 });
                 it('Should Set maxDuration to -1000 using setProperty calling method', function () {
                     Rho.AudioCapture.setProperty('maxDuration', '-1000');
@@ -184,7 +188,7 @@ describe('Rho.AudioCapture JS API', function () {
             describe('Setting fileName', function () {
                 it('Should Set fileName to myAudio using direct calling method', function () {
                     Rho.AudioCapture.fileName = 'myAudio.mp4';
-                    expect(Rho.AudioCapture.fileName).toEqual('myAudio');
+                    expect(Rho.AudioCapture.fileName).toEqual('myAudio.mp4');
                 });
                 it('Should Set fileName to myAudio using setProperty calling method', function () {
                     Rho.AudioCapture.setProperty('fileName', 'myAudio');
@@ -319,485 +323,522 @@ describe('Rho.AudioCapture JS API', function () {
     });
 
 
-    var createPropertyArray = function(arrData){
-        var arrAudio = {};
 
-        if(arrData['fileName']){
-            arrAudio['fileName'] = arrData['fileName']
-        }
-        else{
-            arrAudio['fileName'] = Rho.RhoFile.join(AudioCapturedFolder,"myaudio");
-        }
+	describe("Audio Capture Behaviour Test", function(){
 
-        if(arrData["maxDuration"])
-            arrAudio['maxDuration'] = arrData['maxDuration'];
+		var callbackStatus = false;
+		var status = "";
+		var filePath = "";
+		var message = "";
+		var AudioCapturedFolder = Rho.RhoFile.join( Rho.Application.userFolder, "audio" );
+		Rho.RhoFile.makeDir(AudioCapturedFolder);
+		
+		var audioCallBack = function (args) {
+			if(args['fileName']){
+				//filePath = args['fileName'];
+				filePath = args.fileName.substring(7);
+			}
+			if(args['message']){
+				message = args['message'];
+			}
+			if(args['status']){
+				status = args['status'];
+			}
 
-        return arrAudio;
-    };
+			callbackStatus = true;			
+		};
+		
+		var createPropertyArray = function(arrData){
+			var arrAudio = {};
 
-    var AudioCapturedFolder = Rho.RhoFile.join( Rho.Application.userFolder, "audio" );
-    Rho.RhoFile.makeDir(AudioCapturedFolder);
+			if(arrData['fileName']){
+				arrAudio['fileName'] = arrData['fileName']
+			}
+			else{
+				arrAudio['fileName'] = Rho.RhoFile.join(AudioCapturedFolder,"myaudio");
+			}
 
-    var callbackStatus = false;
-    var filePath = "";
+			if(arrData["maxDuration"]){
+				arrAudio['maxDuration'] = arrData['maxDuration'];
+			}else{
+				arrAudio['maxDuration'] = 10000;
+			}
+			
+			if(arrData["encoder"]){
+				arrAudio['encoder'] = arrData['encoder'];
+			}
+			//alert(JSON.stringify(arrAudio));
+			return arrAudio;
+		};
+		
+		var arrAudioCapture = {};
+		
+		arrAudioCapture['maxDuration'] = {
+			"values": [10000, 60000, 1000, 500, 1500 , 0, -3000, null],
+			"expected": "Callback should return ok and full file path of recorded audiofile and Capture audio duration should be "
+		};
 
-    beforeEach(function () {
-        callbackStatus = false;
-		filePath = "";
-    });
+		arrAudioCapture['fileName']= {
+			"values":  ["audio_123", "1234", "12345 audio", "audio_capture"],
+			"expected": "Callback should return ok and full file path of recorded audiofile and captured audio should get save with the fileName as "
+		};
 
-    var audioCallBack = function (args) {
-        //File Exist Check
-        if(Rho.RhoFile.exists(args['fileName'])){
-            filePath = args['fileName'];
-            callbackStatus = true;
-        }        
-    }
+		
+		beforeEach(function () {
+			callbackStatus = false;
+			status = "";
+			filePath = "";
+		});
+		
+		afterEach(function () {
+			var file = filePath.substring(0, filePath.lastIndexOf("/"));
+			Rho.RhoFile.deleteRecursive(file, true);
+		});
 
-    var arrAudioCapture = {};
+		for (var object in arrAudioCapture) {
+
+			(function(propertyName,listPropertyValue){
+
+				for (var i = 0; i < listPropertyValue['values'].length; i++) {
+					
+					(function(propertyValue){
+						
+						it('set '+propertyName+'with value '+ propertyValue, function () {
+							var startTime = '';
+							var arrayData = {};
+							arrayData[propertyName] = propertyValue;
+							var data = createPropertyArray(arrayData);
+							
+							
+							if(propertyName == "maxDuration" && propertyValue > 1000){
+								var durationToWait = propertyValue + 1;
+							}else{
+								var durationToWait = 20001;
+							}
+							
+							runs(function () {
+								Rho.AudioCapture.start(data, audioCallBack);
+								startTime = new Date();
+							});
+							
+							waitsFor(function(){
+								return callbackStatus;
+							},"Waiting for audio capture to finished",durationToWait);
+							
+							runs(function(){
+								var endTime = new Date();
+								expect(callbackStatus).toBeTruthy();
+								expect(endTime - startTime).toBeGreaterThan(durationToWait);
+								expect(Rho.RhoFile.exists(filePath)).toBeTruthy();
+							});
+
+					   });
+				   
+				   })(listPropertyValue['values'][i])
+					
+				}
+
+			})(object,arrAudioCapture[object]);
+		   
+		}
+
+
+		if(isWindowsMobilePlatform()){
+			it('call start with filename set to "myaudio.wav" with extension', function () {
+
+				runs(function(){
+					Rho.AudioCapture.start(createPropertyArray({'fileName': Rho.RhoFile.join(AudioCapturedFolder,"myaudio.wav")}), audioCallBack);
+				});
+				
+				waitsFor(function(){
+					return callbackStatus;
+				},"Waiting for audio capture to finished",10001);
+				
+
+				runs(function(){
+					expect(callbackStatus).toBeTruthy();
+					expect(filePath).toMatch(/.wav/);
+					expect(Rho.RhoFile.exists(filePath)).toBeTruthy();
+				});
+				
+			});
+
+			it('call start with filename set to "\\Temp\\myaudio"', function () {
+
+				runs(function(){
+					Rho.AudioCapture.start(createPropertyArray({'fileName':  "\\Temp\\myaudio"}), audioCallBack);
+				});
+				
+				waitsFor(function(){
+					return callbackStatus;
+				},"Waiting for audio capture to finished",10001);
+
+				runs(function(){
+					expect(callbackStatus).toBeTruthy();
+					expect(Rho.RhoFile.exists(filePath)).toBeTruthy();
+				});
+				
+			});
+		
+			it('call start with filename set to "\\Temp\\myaudio.wav"', function () {
+
+				runs(function(){
+					Rho.AudioCapture.start(createPropertyArray({'fileName':  "\\Temp\\myaudio.wav"}), audioCallBack);
+				});
+				
+				waitsFor(function(){
+					return callbackStatus;
+				},"Waiting for audio capture to finished",10001);
+				
+				runs(function(){
+					expect(callbackStatus).toBeTruthy();
+					expect(filePath).toMatch(/.wav/);
+					expect(Rho.RhoFile.exists(filePath)).toBeTruthy();
+				});
+
+			});
+			
+			it('call start with filename set to path which does not exists in device \\create\\audio', function () {
+
+				runs(function(){
+					Rho.AudioCapture.start(createPropertyArray({'fileName': "\\create\\audio"}), audioCallBack);
+				});
+				
+				waitsFor(function(){
+					return callbackStatus;
+				},"Waiting for audio capture to finished",10001);
+				
+				runs(function(){
+					expect(callbackStatus).toBeTruthy();
+					expect(message).toMatch(/error/);
+				});
+			});
+
+		}
+
+
+		if(isAndroidPlatform()){
+
+		   it('call start with filename set to "myaudio.mp4" with extension', function () {
+				var fname = Rho.RhoFile.join(AudioCapturedFolder,"myaudio.mp4");
+				
+				runs(function(){
+					Rho.AudioCapture.start(createPropertyArray({'fileName': fname}), audioCallBack);
+				});
+				
+				waitsFor(function(){
+					return callbackStatus;
+				},"Waiting for audio capture to finished",10001);
+				
+				runs(function(){
+					expect(callbackStatus).toBeTruthy();
+					expect(filePath).toMatch(/.mp4/);
+					expect(Rho.RhoFile.exists(filePath)).toBeTruthy();
+				});
+			});
+
+
+			it('call start with filename set to "/sdcard/Temp/myaudio"', function () {
+
+				var dirName = "/sdcard/Temp";
+				var isDirExists = Rho.RhoFile.isDir(dirName);
+				if(isDirExists == false){
+					Rho.RhoFile.makeDir(dirName);
+				}				
+				
+				runs(function(){
+					Rho.AudioCapture.start(createPropertyArray({'fileName': "/sdcard/Temp/myaudio"}), audioCallBack);
+				});
+				
+				waitsFor(function(){
+					return callbackStatus;
+				},"Waiting for audio capture to finished",10001);
+				
+				runs(function(){
+					expect(callbackStatus).toBeTruthy();
+					expect(filePath).toMatch(/.mp4/);
+					expect(Rho.RhoFile.exists(filePath)).toBeTruthy();
+				});
+			});
+
+			it('call start with filename set to "/sdcard/Temp/myaudio.mp4"', function () {
+
+				var dirName = "/sdcard/Temp";
+				var isDirExists = Rho.RhoFile.isDir(dirName);
+				if(isDirExists == false){
+					Rho.RhoFile.makeDir(dirName);
+				}
+				
+				runs(function(){
+					Rho.AudioCapture.start(createPropertyArray({'fileName': "/sdcard/Temp/myaudio.mp4"}), audioCallBack);
+				});
+				
+				waitsFor(function(){
+					return callbackStatus;
+				},"Waiting for audio capture to finished",10001);				
+				
+				runs(function(){
+					expect(callbackStatus).toBeTruthy();
+					expect(filePath).toMatch(/.mp4/);
+					expect(Rho.RhoFile.exists(filePath)).toBeTruthy();
+				});
+			});             
+		
+			it('call start with filename set to path which does not exists in device /create/audio', function () {
+
+				runs(function(){
+					Rho.AudioCapture.start(createPropertyArray({'fileName': "/create/audio"}), audioCallBack);
+				});
+				
+				waitsFor(function(){
+					return callbackStatus;
+				},"Waiting for audio capture to finished",10001);				
+
+				runs(function(){
+					expect(callbackStatus).toBeTruthy();
+					expect(Rho.RhoFile.exists(filePath)).toBeFalsy();
+				});
+			});
+			
+			it('capture the audio with two different encoders(ENCODER_ACC and ENCODER_AMR_NB) with same fileName', function () {
+				
+				runs(function(){
+					Rho.AudioCapture.start(createPropertyArray({'encoder': Rho.AudioCapture.ENCODER_AAC}), audioCallBack);
+				});
+				
+				waitsFor(function(){
+					return callbackStatus;
+				},"Waiting for audio capture to finished",10001);
+				
+				runs(function(){
+					expect(filePath).toMatch(/.mp4/);
+					expect(Rho.RhoFile.exists(filePath)).toBeTruthy();
+					expect(callbackStatus).toBeTruthy();
+				});
+				
+				var mp4file = filePath;
+				runs(function(){
+					Rho.AudioCapture.start(createPropertyArray({'fileName': file, 'encoder': Rho.AudioCapture.ENCODER_AMR_NB}), audioCallBack);
+				});
+
+				waitsFor(function(){
+					return callbackStatus;
+				},"Waiting for audio capture to finished",10001);
+
+				runs(function(){
+					expect(callbackStatus).toBeTruthy();
+					expect(filePath).toMatch(/.3gpp/);
+					expect(Rho.RhoFile.exists(mp4file)).toBeTruthy();
+					expect(Rho.RhoFile.exists(filePath)).toBeTruthy();
+				});
+			});
+
+			
+			it('capture the audio with two different encoders(ENCODER_ACC and ENCODER_AMR_WB) with same fileName', function () {
+				
+				runs(function(){
+					Rho.AudioCapture.start(createPropertyArray({'encoder': Rho.AudioCapture.ENCODER_AAC}), audioCallBack);
+				});
+				
+				waitsFor(function(){
+					return callbackStatus;
+				},"Waiting for audio capture to finished",10001);
+				
+				runs(function(){
+					expect(filePath).toMatch(/.mp4/);
+					expect(callbackStatus).toBeTruthy();
+				});
+				
+				var mp4file = filePath;
+				runs(function(){
+					Rho.AudioCapture.start(createPropertyArray({'encoder': Rho.AudioCapture.ENCODER_AMR_WB}), audioCallBack);
+				});
+
+				waitsFor(function(){
+					return callbackStatus;
+				},"Waiting for audio capture to finished",10001);
+
+				runs(function(){
+					expect(callbackStatus).toBeTruthy();
+					expect(Rho.RhoFile.exists(mp4file)).toBeTruthy();
+					expect(filePath).toMatch(/.3gpp/);
+					expect(Rho.RhoFile.exists(filePath)).toBeTruthy();
+				});
+			});
+	
+			it('capture the audio with two different encoders(ENCODER_AMR_NB and ENCODER_AMR_WB) with same fileName', function () {
+				
+				runs(function(){
+					Rho.AudioCapture.start(createPropertyArray({'encoder': Rho.AudioCapture.ENCODER_AMR_NB}), audioCallBack);
+				});
+				
+				waitsFor(function(){
+					return callbackStatus;
+				},"Waiting for audio capture to finished",10001);
+				
+				runs(function(){
+					expect(callbackStatus).toBeTruthy();
+					expect(filePath).toMatch(/3gpp/);
+					expect(Rho.RhoFile.exists(filePath)).toBeTruthy();
+				});
+
+				runs(function(){
+					Rho.AudioCapture.start(createPropertyArray({'encoder': Rho.AudioCapture.ENCODER_AMR_WB}), audioCallBack);
+				});
+
+				waitsFor(function(){
+					return callbackStatus;
+				},"Waiting for audio capture to finished",10001);
+
+				runs(function(){
+					expect(callbackStatus).toBeTruthy();
+					expect(filePath).toMatch(/3gpp/);
+					expect(Rho.RhoFile.exists(filePath)).toBeTruthy();
+				});
+			});
+
+
+		}
+
+
+		var arrStopTime = [2000, 4000, 10000];
+		
+		for (var i = 0; i < arrStopTime.length; i++) {
+			(function(valStopTime){
+				
+				it('call stop method after capturing '+ valStopTime +' msecs of audio capture', function () {
+
+					runs(function(){
+						Rho.AudioCapture.start(createPropertyArray({}), audioCallBack);
+
+						setTimeout(function(){
+							Rho.AudioCapture.stop();
+						},valStopTime);
+					});
+					
+					waitsFor(function(){
+						return callbackStatus;
+					},"Waiting for audio capture to finished",valStopTime+1);
+					
+					runs(function(){
+						expect(callbackStatus).toBeTruthy();
+						expect(Rho.RhoFile.exists(filePath)).toBeTruthy();
+					});
+				});
+			
+			})(arrStopTime[i])
+		}
+
+
+		var arrCancelTime = [3000, 10000];
+
+		for (var i = 0; i < arrCancelTime.length; i++) {
+			(function(valCancelTime){
+				
+				it('call stop method after capturing '+ valCancelTime +' msecs of audio capture', function () {
+
+					runs(function(){
+						Rho.AudioCapture.start(createPropertyArray({'maxDuration': 15000}), audioCallBack);
+
+						setTimeout(function(){
+							Rho.AudioCapture.cancel();
+						},valCancelTime);
+					});
+					
+					waitsFor(function(){
+						return callbackStatus;
+					},"Waiting for audio capture to finished",valCancelTime+1);
+					
+					runs(function(){
+						expect(status).toEqual('cancel');
+						expect(Rho.RhoFile.exists(filePath)).toBeFalsy();
+					});
+				});
+			
+			})(arrCancelTime[i])
+		}   
+
+		it('call stop method after capturing 10 seconds of audio capture and again call cancel method continuosly', function () {
+		
+			runs(function(){
+				Rho.AudioCapture.start({'maxDuration': 15000}, audioCallBack);
+
+				setTimeout(function(){
+					Rho.AudioCapture.stop();
+					Rho.AudioCapture.cancel();
+				},10000);
+			});
+			
+			waitsFor(function(){
+				return callbackStatus;
+			},"Waiting for audio capture to finished",10001);
+
+			runs(function(){
+				expect(callbackStatus).toBeTruthy();
+				expect(Rho.RhoFile.exists(filePath)).toBeTruthy();
+			});
+		});
+
+		it('call cancel method after capturing 10 seconds of audio capture and again call stop method continuously', function () {
+	
+			runs(function(){
+				Rho.AudioCapture.start({'maxDuration': 15000}, audioCallBack);
+
+				setTimeout(function(){
+					Rho.AudioCapture.cancel();
+					Rho.AudioCapture.stop();
+				},12000);
+			});
+
+			waitsFor(function(){
+				return callbackStatus;
+			},"Waiting for audio capture to finished",12001);			
+			
+			runs(function(){
+				expect(callbackStatus).toBeTruthy();
+				expect(Rho.RhoFile.exists(filePath)).toBeFalsy();
+				expect(status).toEqual();
+			});
+		});
+
+		it('Once captured the audio file by setting all properties again call start without setting any properties', function () {
+		
+			var data = {};
+			
+			if(isAndroidPlatform){
+				data = createPropertyArray({'encoder' = Rho.AudioCapture.ENCODER_AMR_WB})
+			}else{
+				data = createPropertyArray({})
+			}
+
+			runs(function(){
+					Rho.AudioCapture.start(data, audioCallBack);
+			});
+
+			waitsFor(function(){
+				return callbackStatus;
+			},"Waiting for audio capture to finished",10001);
+			
+			runs(function(){
+				expect(callbackStatus).toBeTruthy();
+				expect(Rho.RhoFile.exists(filePath)).toBeTruthy();
+			});
+			
+			runs(function(){
+				Rho.AudioCapture.start({}, audioCallBack);
+			});
+			
+			waitsFor(function(){
+				return callbackStatus;
+			},"Waiting for audio capture to finished",10001);
+			
+			runs(function(){
+				expect(callbackStatus).toBeTruthy();
+				expect(Rho.RhoFile.exists(filePath)).toBeTruthy();
+			});			
+			
+		});
+		
+	});
     
-    arrAudioCapture['maxDuration'] = {
-        "values": [10000, 60000, 1000, 500, 1500 , 0, -3000, null],
-        "expected": "Callback should return ok and full file path of recorded audiofile and Capture audio duration should be "
-    };
-
-    arrAudioCapture['fileName']= {
-        "values":  ["audio_123", "1234", "12345 audio", "audio_capture"],
-        "expected": "Callback should return ok and full file path of recorded audiofile and captured audio should get save with the fileName as "
-    };
-
-    for (var object in arrAudioCapture) {
-
-        (function(propertyName,listPropertyValue){
-
-            for (var i = 0; i < listPropertyValue['values'].length; i++) {
-                
-                (function(propertyValue){
-                    
-                    it('set '+propertyName+'with value '+ propertyValue, function () {
-
-                        var arrayData = {};
-                        arrayData[propertyName] = propertyValue;
-                        var data = createPropertyArray(arrayData);
-                        var startTime = new Date();
-                        runs(function () {
-                            Rho.AudioCapture.start(data, audioCallBack);
-                        });
-
-                        runs(function(){
-                            var endTime = new Date();
-                            var captureTime = endTime - startTime;
-                            if (propertyValue < 1000){
-                                expect(captureTime).toBeGreaterThan(20000);
-                                expect(captureTime).toBeLessThan(22000);}
-                            else{
-                                expect(captureTime).toBeGreaterThan(propertyValue);
-                                expect(captureTime).toBeLessThan(propertyValue+2000);}
-                            expect(callbackStatus).toEqual(true);
-                        });
-
-                   });
-               
-               })(listPropertyValue['values'][i])
-                
-            }
-
-        })(object,arrAudioCapture[object]);
-       
-    }
-
-
-    if(isWindowsMobilePlatform()){
-
-        it('call start with filename set to "myaudio.wav" with extension', function () {
-            dispTestCaseRunning(jasmine.getEnv().currentSpec.description);
-            dispExpectedResult('Callback should return ok and full file path of recored audiofile and captured audio should get save with the fileName as myaudio.wav');
-
-            var fname = Rho.RhoFile.join(AudioCapturedFolder,"myaudio.wav");
-
-            runs(function(){
-                Rho.AudioCapture.start({'fileName': fname, 'maxDuration': 10000}, audioCallBack);
-            });
-
-            runs(function(){
-                expect(filePath).toEqual(fname);
-                expect(callbackStatus).toEqual(true);
-            });
-            
-        });
-
-        it('call start with filename set to "\\Temp\\myaudio"', function () {
-            dispTestCaseRunning(jasmine.getEnv().currentSpec.description);
-            dispExpectedResult('Callback should return ok and full file path of recored audiofile and captured audio should get save with the fileName as myaudio in Temp folder');
-
-            var dirName = "\\Temp";
-            var isDirExists = Rho.RhoFile.isDir(dirName);
-
-            runs(function(){
-                
-                if(isDirExists == false){
-                    Rho.RhoFile.makeDir(dirName);
-                }
-
-                Rho.AudioCapture.start({'fileName': "\\Temp\\myaudio", 'maxDuration': 10000}, audioCallBack);
-            });
-
-            runs(function(){
-                expect(filePath).toEqual("\\Temp\\myaudio.wav");
-                expect(callbackStatus).toEqual(true);
-            });
-            
-        });
-        
-        it('call start with filename set to "\\Temp\\myaudio.wav"', function () {
-            dispTestCaseRunning(jasmine.getEnv().currentSpec.description);
-            dispExpectedResult('Callback should return ok and full file path of recored audiofile and captured audio should get save with the fileName as myaudio in Temp folder');
-            
-            var dirName = "\\Temp";
-            var isDirExists = Rho.RhoFile.isDir(dirName);
-
-            runs(function(){
-                
-                if(isDirExists == false){
-                    Rho.RhoFile.makeDir(dirName);
-                }
-
-                Rho.AudioCapture.start({'fileName': "\\Temp\\myaudio.wav", 'maxDuration': 10000}, audioCallBack);
-            });
-            
-            runs(function(){
-                expect(filePath).toEqual("\\Temp\\myaudio.wav");
-                expect(callbackStatus).toEqual(true);
-            });
-
-        });
-        
-        it('call start with filename set to path which does not exists in device \\create\\audio', function () {
-            dispTestCaseRunning(jasmine.getEnv().currentSpec.description);
-            dispExpectedResult('Callback should return proper error message');
-            
-            runs(function(){
-                Rho.AudioCapture.start({'fileName': "\\create\\audio", 'maxDuration': 10000}, audioCallBack);
-            });
-
-            runs(function(){
-                expect(callbackStatus).toEqual(false);
-            });
-        });
-
-    }
-
-
-    if(isAndroidPlatform()){
-
-       it('call start with filename set to "myaudio.mp4" with extension', function () {
-            dispTestCaseRunning(jasmine.getEnv().currentSpec.description);
-            dispExpectedResult('Callback should return ok and full file path of recored audiofile and captured audio should get save with the fileName as myaudio.mp4');
-
-            var fname = Rho.RhoFile.join(AudioCapturedFolder,"myaudio.mp4");
-
-            runs(function(){
-                Rho.AudioCapture.start({'fileName': fname, 'maxDuration': 10000}, audioCallBack);
-            });
-            
-            runs(function(){
-                expect(filePath).toEqual(fname);
-                expect(callbackStatus).toEqual(true);
-            });
-        });
-
-
-        it('call start with filename set to "/sdcard/Temp/myaudio"', function () {
-            dispTestCaseRunning(jasmine.getEnv().currentSpec.description);
-            dispExpectedResult('Callback should return ok and full file path of recored audiofile and captured audio should get save with the fileName as myaudio in /sdcard/Temp folder');
-
-            var dirName = "/sdcard/Temp";
-            var isDirExists = Rho.RhoFile.isDir(dirName);
-
-            runs(function(){
-                
-                if(isDirExists == false){
-                    Rho.RhoFile.makeDir(dirName);
-                }
-
-                Rho.AudioCapture.start({'fileName': "/sdcard/Temp/myaudio", 'maxDuration': 10000}, audioCallBack);
-            });
-            
-            runs(function(){
-                expect(filePath).toEqual("/sdcard/Temp/myaudio.mp4");
-                expect(callbackStatus).toEqual(true);
-            });
-        });
-
-        it('call start with filename set to "/sdcard/Temp/myaudio.mp4"', function () {
-            dispTestCaseRunning(jasmine.getEnv().currentSpec.description);
-            dispExpectedResult('Callback should return ok and full file path of recored audiofile and captured audio should get save with the fileName as myaudio in /sdcard/Temp folder');
-
-            var dirName = "/sdcard/Temp";
-            var isDirExists = Rho.RhoFile.isDir(dirName);
-
-            runs(function(){
-                
-                if(isDirExists == false){
-                    Rho.RhoFile.makeDir(dirName);
-                }
-
-                Rho.AudioCapture.start({'fileName': "/sdcard/Temp/myaudio.mp4", 'maxDuration': 10000}, audioCallBack);
-            });
-            
-            runs(function(){
-                expect(filePath).toEqual("/sdcard/Temp/myaudio.mp4");
-                expect(callbackStatus).toEqual(true);
-            });
-        });             
-        
-        it('call start with filename set to path which does not exists in device /create/audio', function () {
-            dispTestCaseRunning(jasmine.getEnv().currentSpec.description);
-            dispExpectedResult('Callback should return proper error message');
-            
-            runs(function(){
-                Rho.AudioCapture.start({'fileName': "/create/audio", 'maxDuration': 10000}, audioCallBack);
-            });
-
-            runs(function(){
-                expect(callbackStatus).toEqual(false);
-            });
-        });
-        
-        //same name audio files with different encoders test series
-        
-        it('capture the audio with two different encoders(ENCODER_ACC and ENCODER_AMR_NB) with same fileName - 1st part', function () {
-            dispTestCaseRunning(jasmine.getEnv().currentSpec.description);
-            dispExpectedResult('Callback should return ok and full file path of recored audiofile and should capture audio files in Application folder with fileName as audioencode1.mp4');
-
-            var fname = Rho.RhoFile.join(AudioCapturedFolder,"audioencode1");
-
-            runs(function(){
-                Rho.AudioCapture.start({'fileName': fname, 'maxDuration': 10000}, audioCallBack);
-            });
-
-            runs(function(){
-                expect(filePath).toEqual(fname + ".mp4");
-                expect(callbackStatus).toEqual(true);
-            });
-        });
-
-        it('capture the audio with two different encoders(ENCODER_ACC and ENCODER_AMR_NB) with same fileName - 2nd part', function () {
-            dispTestCaseRunning(jasmine.getEnv().currentSpec.description);
-            dispExpectedResult('Callback should return ok and full file path of recored audiofile and there should be two captured audio files in Application folder with fileName as audioencode1.mp4 and audioencode1.3gpp');
-
-            var fname = Rho.RhoFile.join(AudioCapturedFolder,"audioencode1");
-
-            runs(function(){
-                Rho.AudioCapture.start({'fileName': fname, 'maxDuration': 10000, 'encoder': Rho.AudioCapture.ENCODER_AMR_NB}, audioCallBack);
-            });
-
-            runs(function(){
-                expect(Rho.RhoFile.exists(fname+".mp4")).toEqual(true);
-                expect(filePath).toEqual(fname + ".3gpp");
-                expect(callbackStatus).toEqual(true);
-            });
-        });
-        
-        it('capture the audio with two different encoders(ENCODER_ACC and ENCODER_AMR_WB) with same fileName - 1st part', function () {
-            dispTestCaseRunning(jasmine.getEnv().currentSpec.description);
-            dispExpectedResult('Callback should return ok and full file path of recored audiofile and should capture audio files in Application folder with fileName as audioencode2.mp4');
-
-            var fname = Rho.RhoFile.join(AudioCapturedFolder,"audioencode2");
-
-            runs(function(){
-                Rho.AudioCapture.start({'fileName': fname, 'maxDuration': 10000}, audioCallBack);
-            });
-
-            runs(function(){
-                expect(filePath).toEqual(fname + ".mp4");
-                expect(callbackStatus).toEqual(true);
-            });
-        });
-
-        it('capture the audio with two different encoders(ENCODER_ACC and ENCODER_AMR_WB) with same fileName - 2nd part', function () {
-            dispTestCaseRunning(jasmine.getEnv().currentSpec.description);
-            dispExpectedResult('Callback should return ok and full file path of recored audiofile and there should be two captured audio files in Application folder with fileName as audioencode2.mp4 and audioencode2.3gpp');
-            
-            var fname = Rho.RhoFile.join(AudioCapturedFolder,"audioencode2");
-
-            runs(function(){
-                Rho.AudioCapture.start({'fileName': fname, 'maxDuration': 10000, 'encoder': Rho.AudioCapture.ENCODER_AMR_WB}, audioCallBack);
-            });
-
-            runs(function(){
-                expect(Rho.RhoFile.exists(fname+".mp4")).toEqual(true);
-                expect(filePath).toEqual(fname + ".3gpp");
-                expect(callbackStatus).toEqual(true);
-            });
-        });
-        
-        it('capture the audio with two different encoders(ENCODER_AMR_NB and ENCODER_AMR_WB) with same fileName - 1st part', function () {
-            dispTestCaseRunning(jasmine.getEnv().currentSpec.description);
-            dispExpectedResult('Callback should return ok and full file path of recored audiofile and should capture audio files in Application folder with fileName as audioencode3.3gpp');
-            
-            var fname = Rho.RhoFile.join(AudioCapturedFolder,"audioencode3");
-
-            runs(function(){
-                Rho.AudioCapture.start({'fileName': fname, 'maxDuration': 10000, 'encoder': Rho.AudioCapture.ENCODER_AMR_NB}, audioCallBack);
-            });
-
-            runs(function(){
-                expect(filePath).toEqual(fname + ".3gpp");
-                expect(callbackStatus).toEqual(true);
-            });
-        });
-
-        it('capture the audio with two different encoders(ENCODER_AMR_NB and ENCODER_AMR_WB) with same fileName - 2nd part', function () {
-            dispTestCaseRunning(jasmine.getEnv().currentSpec.description);
-            dispExpectedResult('Callback should return ok and full file path of recored audiofile and first time captured file should get overwritten by second time captured file so only one file should be present in device path as audioencode3.3gpp');
-            
-            var fname = Rho.RhoFile.join(AudioCapturedFolder,"audioencode3");
-
-            runs(function(){
-                Rho.AudioCapture.start({'fileName': fname, 'maxDuration': 10000, 'encoder': Rho.AudioCapture.ENCODER_AMR_WB}, audioCallBack);
-            });
-
-            runs(function(){
-                expect(filePath).toEqual(fname + ".3gpp");
-                expect(callbackStatus).toEqual(true);
-            });
-        });
-    }
-
-
-    var arrStopTime = [2000, 4000, 10000];
-    
-    for (var i = 0; i < arrStopTime.length; i++) {
-        (function(valStopTime){
-            
-            it('call stop method after capturing '+ valStopTime +' msecs of audio capture', function () {
-                dispTestCaseRunning(jasmine.getEnv().currentSpec.description);
-                dispExpectedResult('Callback should return ok and full file path of recored audiofile and Captured audio duration should be ' + valStopTime + ' msecs in audiowithstop');
-                
-                var fname = Rho.RhoFile.join(AudioCapturedFolder,"audiowithstop");
-
-                runs(function(){
-                    Rho.AudioCapture.start({'fileName': fname, 'maxDuration': 10000}, audioCallBack);
-
-                    setTimeout(function(){
-                        Rho.AudioCapture.stop();
-                    },valStopTime);
-                });
-                
-                runs(function(){
-                    expect(callbackStatus).toEqual(true);
-                    Rho.RhoFile.deleteFile(filePath);
-                });
-            });
-        
-        })(arrStopTime[i])
-    }
-
-
-    var arrCancelTime = [3000, 10000];
-
-    for (var i = 0; i < arrCancelTime.length; i++) {
-        (function(valCancelTime){
-            
-            it('call stop method after capturing '+ valCancelTime +' msecs of audio capture', function () {
-                dispTestCaseRunning(jasmine.getEnv().currentSpec.description);
-                dispExpectedResult('Callback should return CANCEL Captured audio for ' + valCancelTime + ' msecs should get discarded and it should not save on device');
-                
-                var fname = Rho.RhoFile.join(AudioCapturedFolder,"audiowithcancel");
-
-                runs(function(){
-                    Rho.AudioCapture.start({'fileName': fname, 'maxDuration': 15000}, audioCallBack);
-
-                    setTimeout(function(){
-                        Rho.AudioCapture.cancel();
-                    },valCancelTime);
-                });
-                
-                runs(function(){
-                    expect(callbackStatus).toEqual(false);
-                });
-            });
-        
-        })(arrCancelTime[i])
-    }   
-
-    it('call stop method after capturing 10 seconds of audio capture and again call cancel method continuosly', function () {
-        dispTestCaseRunning(jasmine.getEnv().currentSpec.description);
-        dispExpectedResult('Callback should return ok and full file path of recored audiofile and captured audio duration should be 10 seconds in audiowithstart1');
-        
-        var fname = Rho.RhoFile.join(AudioCapturedFolder,"audiowithstart1");
-
-        runs(function(){
-            Rho.AudioCapture.start({'fileName': fname, 'maxDuration': 15000}, audioCallBack);
-
-            setTimeout(function(){
-                Rho.AudioCapture.cancel();
-                setTimeout(function(){
-                     Rho.AudioCapture.stop();
-                },10000);
-            },12000);
-        });
-
-        runs(function(){
-            expect(callbackStatus).toEqual(true);
-        });
-    });
-
-    it('call cancel method after capturing 10 seconds of audio capture and again call stop method continuosly', function () {
-        dispTestCaseRunning(jasmine.getEnv().currentSpec.description);
-        dispExpectedResult('Callback should return cancel and Captured audio for 10 seconds should get discarded and it should not save on device');
-        
-        var fname = Rho.RhoFile.join(AudioCapturedFolder,"audiocancel");
-
-        runs(function(){
-            Rho.AudioCapture.start({'fileName': fname, 'maxDuration': 15000}, audioCallBack);
-
-            setTimeout(function(){
-                Rho.AudioCapture.stop();
-                setTimeout(function(){
-                     Rho.AudioCapture.cancel();
-                },10000);
-            },12000);
-        });
-
-        runs(function(){
-            expect(callbackStatus).toEqual(false);
-        });
-    });
-
-    it('Once captured the audio file by setting all properties again call start without setting any properties - part 1', function () {
-        dispTestCaseRunning(jasmine.getEnv().currentSpec.description);
-        dispExpectedResult('audio file should get save with the name as audiotest, it should not take affect on any other properties set while capture is going on');
-        
-        var fname = Rho.RhoFile.join(AudioCapturedFolder,"setprop_audio");
-
-        var data = {};
-        data['fileName'] = fname;
-        data['maxDuration'] = 10000;
-        if(isAndroidPlatform){ data['encoder'] = Rho.AudioCapture.ENCODER_AMR_WB };
-
-        runs(function(){
-            Rho.AudioCapture.start(data, audioCallBack);
-        });
-        
-        runs(function(){
-            expect(callbackStatus).toEqual(true);
-        });
-    });
-
-    it('Once captured the audio file by setting all properties again call start without setting any properties - part 2', function () {
-        dispTestCaseRunning(jasmine.getEnv().currentSpec.description);
-        dispExpectedResult('audio file should get save with the name as audiotest, it should not take affect on any other properties set while capture is going on');
-
-        runs(function(){
-            Rho.AudioCapture.start({}, audioCallBack);
-        });
-        
-        runs(function(){
-            expect(callbackStatus).toEqual(true);
-        });
-    });
-
-
 });
