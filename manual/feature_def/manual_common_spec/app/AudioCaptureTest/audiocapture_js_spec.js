@@ -508,7 +508,9 @@ describe("Audio Capture Test", function(){
 
         _result.waitForResponse();
     });
-    
+
+  if (isAnyButApplePlatform()) {
+         
     it('quit the application at the time of audio is getting captured should not crash', function () {
         dispTestCaseRunning(jasmine.getEnv().currentSpec.description);
         dispExpectedResult('Callback should return cancel and of Application should not behave abnormal or crash');
@@ -573,7 +575,8 @@ describe("Audio Capture Test", function(){
 
         _result.waitForResponse();
     });
-    
+  }
+         
     it('Call start method with all prooperties set', function () {
         dispTestCaseRunning(jasmine.getEnv().currentSpec.description);
         dispExpectedResult('Callback should return ok and full file path of recored audiofile and captured audio file name should be wmallparams, and audio duration should be 8 seconds');
@@ -627,6 +630,7 @@ describe("Audio Capture Test", function(){
         _result.waitForResponse();
     });
 
+  if (isAnyButApplePlatform()) {
     it('minimize the application at time capture is going on', function () {
         dispTestCaseRunning(jasmine.getEnv().currentSpec.description);
         dispExpectedResult('Callback should return ok and full file path of recored audiofile, audio should successfully capture event the application is in minimize state');
@@ -694,6 +698,6 @@ describe("Audio Capture Test", function(){
 
         _result.waitForResponse();
     });
-
+  }
 
 });
