@@ -24,3 +24,14 @@ android:
   version: 2.1
 
 extensions: []
+
+rhohub:
+  url: https://appstaging.rhohub.com/api/v1/
+
+#paths:
+#  extensions:
+#    - C:/projects/Motorola-Extension/extensions
+#    - C:/projects/Motorola-Extension/lib/commonAPI
+
+wm:
+  webkit_outprocess: 0
