@@ -25,11 +25,11 @@ describe("Audio Capture Test", function(){
         var resultDiv = document.getElementById('actResult');
         resultDiv.innerHTML = JSON.stringify(args);
         resultDiv.style.display = 'block';
-        
+        var playFile=args.fileName.substring(7);//Using substring because the returned file also has "file://" protocol.
         //File Exist Check
-        if(Rho.RhoFile.exists(args['fileName'])){
+        if(Rho.RhoFile.exists(playFile)){
             // Audio Play
-            Rho.Mediaplayer.start(args['fileName']);
+            Rho.Mediaplayer.start(playFile);
             setTimeout(function(){
                 Rho.Mediaplayer.stop();
             },30000);
