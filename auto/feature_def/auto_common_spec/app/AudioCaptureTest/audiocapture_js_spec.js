@@ -403,8 +403,8 @@ describe('Rho.AudioCapture JS API', function () {
 				var startTime = '';
 				
 				runs(function () {
-					Rho.AudioCapture.start({'fileName': Rho.RhoFile.join(AudioCapturedFolder,"myaudio"), 'maxDuration': null}, audioCallBack);
 					startTime = new Date().getTime();
+					Rho.AudioCapture.start({'fileName': Rho.RhoFile.join(AudioCapturedFolder,"myaudio"), 'maxDuration': null}, audioCallBack);
 				});
 				
 				waitsFor(function(){
@@ -447,8 +447,8 @@ describe('Rho.AudioCapture JS API', function () {
 							}
 							
 							runs(function () {
-								Rho.AudioCapture.start(data, audioCallBack);
 								startTime = new Date().getTime();
+								Rho.AudioCapture.start(data, audioCallBack);
 							});
 							
 							waitsFor(function(){
@@ -772,7 +772,7 @@ describe('Rho.AudioCapture JS API', function () {
 		for (var i = 0; i < arrCancelTime.length; i++) {
 			(function(valCancelTime){
 				
-				it('call stop method after capturing '+ valCancelTime +' msecs of audio capture', function () {
+				it('call cancel method after capturing '+ valCancelTime +' msecs of audio capture', function () {
 
 					runs(function(){
 						Rho.AudioCapture.start(createPropertyArray({'maxDuration': 15000}), audioCallBack);
@@ -843,14 +843,14 @@ describe('Rho.AudioCapture JS API', function () {
 		
 			var data = {};
 			
-			if(isAndroidPlatform){
+			if(isAndroidPlatform()){
 				data = createPropertyArray({'encoder': Rho.AudioCapture.ENCODER_AMR_WB})
 			}else{
 				data = createPropertyArray({})
 			}
 
 			runs(function(){
-					Rho.AudioCapture.start(data, audioCallBack);
+				Rho.AudioCapture.start(data, audioCallBack);
 			});
 
 			waitsFor(function(){
