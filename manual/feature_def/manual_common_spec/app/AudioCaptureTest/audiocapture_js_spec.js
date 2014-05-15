@@ -252,7 +252,7 @@ describe("Audio Capture Test", function(){
             Rho.AudioCapture.start({'fileName': fname}, audioCallBack);
             Rho.AudioCapture.setProperties({
                 'fileName': fname1,
-                'maxDuration': 10000
+                'maxDuration': '10000'
             });
         });
         
