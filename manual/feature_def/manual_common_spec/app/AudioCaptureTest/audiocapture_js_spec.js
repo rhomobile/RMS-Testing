@@ -139,7 +139,7 @@ describe("Audio Capture Test", function(){
 
     it('call start method two times continusly', function () {
         dispTestCaseRunning(jasmine.getEnv().currentSpec.description);
-        dispExpectedResult('First time call of satrt method should get discarded on calling start method second time<br/>and  Callback should return ok and full file path of recored audiofile and captured audio should save on the device audiowithstart for 5secs');
+        dispExpectedResult('First time call of satrt method should NOT get discarded on calling start method second time<br/>and  Callback should return ok and full file path of recored audiofile and captured audio should save on the device audiowithstart for 10 secs');
         
         _result.waitToRunTest();
 
