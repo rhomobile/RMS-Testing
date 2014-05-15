@@ -232,7 +232,7 @@ describe("Audio Capture Test", function(){
             var fname = Rho.RhoFile.join(AudioCapturedFolder,"androidallparams");
 
             runs(function () {
-                Rho.AudioCapture.start({'fileName': fname, 'maxDuration': 8000, 'encoder': RHo.AudioCapture.ENCODER_AMR_WB}, audioCallBack);
+                Rho.AudioCapture.start({'fileName': fname, 'maxDuration': 8000, 'encoder': Rho.AudioCapture.ENCODER_AMR_WB}, audioCallBack);
             });
 
             _result.waitForResponse();
