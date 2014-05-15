@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Performance Improvements</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+	<META HTTP-Equiv="MinimizeButton" content="visibility:Visible;top:30 " >
+	<META HTTP-Equiv="quitbutton" Content="visibility:visible">
+	<META HTTP-Equiv="ReloadButton" Content="visibility:visible">
+	<script type="text/javascript">
+		var start = new Date().getTime();
+		var latency ="1";
+		function callApi(){
+			Rho.Barcode.enumerate();
+		}
+		function onLoad() {
+		  var now = new Date().getTime();
+		  latency = now - start;
+		  var ele = document.getElementById('res');
+		  ele.innerHTML = "<b> Page Loading time with Duplicate Modules : " + latency + "ms</b>";
+		}
+	</script>
+	<script type="text/javascript" src="/public/api/rhoapi-modules.js" data-api-modules="Barcode,Barcode,Barcode"></script>
+</head>
+<body onload="onLoad()">
+<h2>Performance Improvement:</h2>
+<h3>TestCase : Try to load same module more than once and try to call the API of the module</h3>
+<h3 id='res'></h3>
+<br/>
+<input type="button" onclick="callApi()" value="Call Rho API" />
+</body>
+</html>

@@ -4,7 +4,7 @@ $ws = nil
 
 def startWsServer( host, port )
     $ws = EM.run {
-        EM::WebSocket.run(:host => '192.168.0.102', :port => 8084) do |ws|
+        EM::WebSocket.run(:host => host, :port => port) do |ws|
             ws.onopen { |handshake|
                 puts "WebSocket connection open"
             }

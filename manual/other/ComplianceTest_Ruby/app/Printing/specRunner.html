@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Printing (Generic) Semi-automatic JS Test</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <META HTTP-Equiv="MinimizeButton" content="visibility:Visible;top:30 ">
+    <META HTTP-Equiv="quitbutton" Content="visibility:visible">
+    <META HTTP-Equiv="ReloadButton" Content="visibility:visible">
+
+    <script type="text/javascript">
+    var ParsingErrors = [];
+
+    window.onerror = function(message, source, lineno) {
+        ParsingErrors.push("Error:" + message + "\n" + "file:" + source + "\n" + "line:" + lineno);
+    };
+    </script>
+
+    <script type="text/javascript" charset="utf-8" src="/public/jquery/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="/public/jquery/jquery.json-2.3.min.js"></script>
+
+    <link type="image/png" rel="shortcut icon" href="/public/jasmine/jasmine_favicon.png">
+    <link type="text/css" rel="stylesheet" href="/public/jasmine/jasmine.css">
+    <script type="text/javascript" src="/public/jasmine/jasmine.js"></script>
+    <script type="text/javascript" src="/public/jasmine/jasmine-html.js"></script>
+
+     <script type="text/javascript" src="/public/jasmine/jasmine-html.js"></script>
+    <script type="text/javascript" src="/public/jasmine/jasmine.junit_reporter.js"></script>
+    <script type="text/javascript" src="/public/api/rhoapi-modules.js"></script>
+		<script type="text/javascript" src="../helpers/manualSpecLauncher.js"></script>
+    <style>
+    #detailsdiv {
+        background: url("/public/images/grid2.gif") repeat scroll 0 0 transparent;
+        border: 1px solid #DCDCDC;
+        color: #8B0000;
+        display: block;
+        font-weight: bold;
+        left: 80px;
+        padding: 10px;
+        position: fixed;
+        text-align: center;
+        top: 100px;
+        width: 180px;
+    }
+    </style>
+
+    <!-- include Helper files here... -->
+	<script type="text/javascript" src="../helpers/jasmine-extensions.js"></script>
+	<script type="text/javascript" src="../helpers/specHelpers.js"></script>
+    <script type="text/javascript" src="printing_js_test.js"></script>
+
+    <!-- include spec files here... -->
+    <script type="text/javascript" src="printing_ruby_compliance_spec.js"></script>
+
+    <script type="text/javascript">
+    (function() {
+        var jasmineEnv = jasmine.getEnv();
+        jasmineEnv.updateInterval = 1000;
+
+        var htmlReporter = new jasmine.HtmlReporter();
+        //var junitReporter = new jasmine.JUnitXmlReporter();
+        //junitReporter.useDotNotation = false
+        jasmineEnv.addReporter(htmlReporter);
+        //jasmineEnv.addReporter(new jasmine.JUnitXmlReporter('.\\', true, true));
+
+        jasmineEnv.specFilter = function(spec) {
+            return htmlReporter.specFilter(spec);
+        };
+
+
+        $(window).load(function() {
+            execJasmine();
+            if (ParsingErrors.length > 0) {
+                for (var i = 0; i < ParsingErrors.length; i++) {
+                    $('#logs').append(ParsingErrors[i]);
+                };
+            } else {
+                $('#console').hide();
+            }
+
+            window.onerror = function(message, source, lineno, column, errorObj) {
+                $('#console').show();
+                $('#logs').append('<p>' + "Error:" + message + "\n" + "file:" + source + "\n" + "line:" + lineno);
+                if(errorObj !== undefined) {
+                	$('#logs').append(printStackTrace(errorObj).join('<br>'));
+                }
+            }
+
+           	function addMsg(args) {
+           		$('#console').show();
+           		var iargs = [];
+           		for (var i = 0; i < args.length; i++) {
+           			iargs.push(JSON.stringify(args[i], null, 2));
+           		};
+                $('#logs').append(iargs.join(', '));
+           	}
+
+            console.log = (function() {
+			    var log = console.log;
+
+			    return function() {
+			    	log.call(console, arguments);
+			    	addMsg(arguments);
+			    }
+			})();
+
+            console.error = (function() {
+			    var error = console.error;
+
+			    return function(exception) {
+			    	addMsg(printStackTrace().join('<br>'));
+			        if (exception.stack && typeof exception.stack !== 'undefined') {
+			            error.call(console, exception.stack);      
+			        } else {
+			            error.call(console, arguments);
+			            addMsg(arguments || []);
+			        }
+			    }
+			})();
+        });
+
+        function execJasmine() {
+            jasmineEnv.execute();
+        }
+    })();
+    </script>
+
+</head>
+
+<body>
+    <div id="console"><b>Console: </b>
+        <div id="logs" ></div>
+    </div>
+
+    <div>Discovered Devices:
+        <select id="dev_list"></select>
+    </div>
+    <div>Device Connection:
+        <select id="dev_conn_type"></select>
+    </div>
+    <div>Device Address:
+        <input type="text" id="dev_addr" value="00037A0C9B41" />
+    </div>
+    <div>Device Port:
+        <input type="text" id="dev_port" value="6101" />
+    </div>
+
+    <div><b>Console: </b>
+        <div id="debug" ></div>
+    </div>
+
+    <div id="manual_contols">
+		<div><b>Test Objective: </b>
+            <div id="objective"></div>
+        </div>
+        <div><b>Test Running: </b>
+            <div id="instruction"></div>
+        </div>
+        <div style="display:none">
+		<b>Expected Result: </b><div id="expResult"></div>
+		</div>
+    	<P>
+		<div id="select_box_wrapper" style="display:none">
+            <select name="combo" id="combo"></select>
+        </div>
+		<P>
+		<b>Expected Result: </b><div id="expectedresult"></div>
+		<P>
+        <b>Test Output: </b><div id="test_output"></div>
+    	<div id="action">
+            <input type="button" value="Test Passed" onclick="captureResult(true)" id="oldpass" />
+            <input type="button" value="Test Failed" onclick="captureResult(false)" id="oldfail" />
+
+            <input type="button" value="Run Test" onclick="_result.runTest();" id="runtest" />
+            <input type="button" value="Test Passed" onclick="_result.passed();" id="pass" />
+            <input type="button" value="Test Failed" onclick="_result.failed();" id="fail" />
+            <input type="button" value="Done" onclick="_result.done();" id="done" />
+            <input type="button" value="Enter device address manually" onclick="_result.man();" id="man" />
+            <input type="button" value="Auto search for devices" onclick="_result.auto();" id="auto" />
+        </div>
+		<div id="actResult" style="display:none">init</div>
+    </div>
+    <br/><br/>
+    <ul id="myList"></ul>
+    <ul id="myList2"></ul>
+
+</body>
+<script type="text/javascript">
+$("#action").find(":button").hide();
+ $('#pass').hide();
+    $('#fail').hide();
+    $('#oldpass').hide();
+    $('#oldfail').hide();
+    $('#runtest').hide();
+    $('#done').hide();
+</script>
+</html>

@@ -1,5 +1,8 @@
 describe('DPX Functionality Test', function() {
 
+    var logPostTemplate = 'file:///sdcard/templates/Logistics%20Post.xml';
+    logPostTemplate = 'file://' + encodeURI('/storage/sdcard1/dpx/templates/Logistics Post.xml');
+
     var pprint = function(value) {
         var list = [];
         var each = function(object, f) {
@@ -79,7 +82,7 @@ describe('DPX Functionality Test', function() {
 
         _result.waitToRunAutoTest();
 
-        Rho.DPX.template = 'file:///sdcard/templates/Logistics%20Post.xml';
+        Rho.DPX.template = logPostTemplate;
         Rho.DPX.uiResultConfirmation = false;
         Rho.DPX.audioFeedback = false;
 
@@ -101,13 +104,51 @@ describe('DPX Functionality Test', function() {
         _result.waitForResponse();
     });
 
+    it('autoImageCapture turned off.', function() {
+        dispTestCaseRunning('Frame Delivery Attempt Notification\nTap screen on corresponding prompt.');
+        dispExpectedResult('callbackType should be success.');
+
+        _result.waitToRunTest();
+
+        Rho.DPX.template = logPostTemplate;
+        Rho.DPX.audioFeedback = false;
+        Rho.DPX.uiResultConfirmation = false;
+
+        Rho.DPX.autoImageCapture = false;
+
+        runsCaptureDocument(Rho.DPX.SUCCESS, function(dict) {
+            displayResult('Output: ', 'callbackType is ' + dict['callbackType']);
+        });
+
+        _result.waitForResponse();
+    });
+
+    it('autoImageCapture in effect.', function() {
+        dispTestCaseRunning('Frame Delivery Attempt Notification\nHold device steady.');
+        dispExpectedResult('callbackType should be success.\nDevice should scan form automatically.');
+
+        _result.waitToRunTest();
+
+        Rho.DPX.template = logPostTemplate;
+        Rho.DPX.audioFeedback = false;
+        Rho.DPX.uiResultConfirmation = false;
+
+        Rho.DPX.autoImageCapture = true;
+
+        runsCaptureDocument(Rho.DPX.SUCCESS, function(dict) {
+            displayResult('Output: ', 'callbackType is ' + dict['callbackType']);
+        });
+
+        _result.waitForResponse();
+    });
+
     it('Only audio feedback is on.', function() {
         dispTestCaseRunning('Scan Delivery Attempt Notification');
         dispExpectedResult('callbackType should be success.\nThere must be only audio feedback at end of scan.');
 
         _result.waitToRunTest();
 
-        Rho.DPX.template = 'file:///sdcard/templates/Logistics%20Post.xml';
+        Rho.DPX.template = logPostTemplate;
         Rho.DPX.uiResultConfirmation = false;
 
         Rho.DPX.audioFeedback = true;
@@ -127,7 +168,7 @@ describe('DPX Functionality Test', function() {
 
         _result.waitToRunTest();
 
-        Rho.DPX.template = 'file:///sdcard/templates/Logistics%20Post.xml';
+        Rho.DPX.template = logPostTemplate;
         Rho.DPX.uiResultConfirmation = false;
 
         Rho.DPX.audioFeedback = false;
@@ -147,7 +188,7 @@ describe('DPX Functionality Test', function() {
 
         _result.waitToRunTest();
 
-        Rho.DPX.template = 'file:///sdcard/templates/Logistics%20Post.xml';
+        Rho.DPX.template = logPostTemplate;
         Rho.DPX.uiResultConfirmation = false;
 
         Rho.DPX.audioFeedback = false;
@@ -167,7 +208,7 @@ describe('DPX Functionality Test', function() {
 
         _result.waitToRunTest();
 
-        Rho.DPX.template = 'file:///sdcard/templates/Logistics%20Post.xml';
+        Rho.DPX.template = logPostTemplate;
         Rho.DPX.uiResultConfirmation = false;
         Rho.DPX.audioFeedback = false;
 
@@ -186,11 +227,30 @@ describe('DPX Functionality Test', function() {
 
         _result.waitToRunTest();
 
-        Rho.DPX.template = 'file:///sdcard/templates/Logistics%20Post.xml';
+        Rho.DPX.template = logPostTemplate;
         Rho.DPX.uiResultConfirmation = false;
         Rho.DPX.audioFeedback = false;
 
         Rho.DPX.flashMode = Rho.DPX.FLASH_OFF;
+
+        runsCaptureDocument(Rho.DPX.SUCCESS, function(dict) {
+            displayResult('Output: ', 'callbackType is ' + dict['callbackType']);
+        });
+
+        _result.waitForResponse();
+    });
+
+    it('flash mode is disabled', function() {
+        dispTestCaseRunning('Scan Delivery Attempt Notification');
+        dispExpectedResult('callbackType should be success.\nFlash must be disbaled during scan.');
+
+        _result.waitToRunTest();
+
+        Rho.DPX.template = logPostTemplate;
+        Rho.DPX.uiResultConfirmation = false;
+        Rho.DPX.audioFeedback = false;
+
+        Rho.DPX.flashMode = Rho.DPX.FLASH_DISABLED;
 
         runsCaptureDocument(Rho.DPX.SUCCESS, function(dict) {
             displayResult('Output: ', 'callbackType is ' + dict['callbackType']);
@@ -205,9 +265,10 @@ describe('DPX Functionality Test', function() {
 
         _result.waitToRunTest();
 
-        Rho.DPX.template = 'file:///sdcard/templates/Logistics%20Post.xml';
+        Rho.DPX.template = logPostTemplate;
         Rho.DPX.uiResultConfirmation = false;
         Rho.DPX.audioFeedback = false;
+        Rho.DPX.autoImageCapture = false;
 
         Rho.DPX.processingTimeout = 1000;
 
@@ -224,9 +285,10 @@ describe('DPX Functionality Test', function() {
 
         _result.waitToRunTest();
 
-        Rho.DPX.template = 'file:///sdcard/templates/Logistics%20Post.xml';
+        Rho.DPX.template = logPostTemplate;
         Rho.DPX.uiResultConfirmation = false;
         Rho.DPX.audioFeedback = false;
+        Rho.DPX.autoImageCapture = false;
 
         Rho.DPX.processingTimeout = 5000;
 
@@ -243,7 +305,7 @@ describe('DPX Functionality Test', function() {
 
         _result.waitToRunTest();
 
-        Rho.DPX.template = 'file:///sdcard/templates/Logistics%20Post.xml';
+        Rho.DPX.template = logPostTemplate;
         Rho.DPX.uiResultConfirmation = false;
         Rho.DPX.audioFeedback = false;
 
@@ -268,7 +330,7 @@ describe('DPX Functionality Test', function() {
 
         _result.waitToRunTest();
 
-        Rho.DPX.template = 'file:///sdcard/templates/Logistics%20Post.xml';
+        Rho.DPX.template = logPostTemplate;
         Rho.DPX.uiResultConfirmation = false;
         Rho.DPX.audioFeedback = false;
 
@@ -293,7 +355,7 @@ describe('DPX Functionality Test', function() {
 
         _result.waitToRunTest();
 
-        Rho.DPX.template = 'file:///sdcard/templates/Logistics%20Post.xml';
+        Rho.DPX.template = logPostTemplate;
         Rho.DPX.uiResultConfirmation = false;
         Rho.DPX.audioFeedback = false;
 
@@ -313,7 +375,7 @@ describe('DPX Functionality Test', function() {
 
         _result.waitToRunTest();
 
-        Rho.DPX.template = 'file:///sdcard/templates/Logistics%20Post.xml';
+        Rho.DPX.template = logPostTemplate;
         Rho.DPX.audioFeedback = false;
 
         Rho.DPX.uiResultConfirmation = true;
@@ -342,7 +404,7 @@ describe('DPX Functionality Test', function() {
 
         _result.waitToRunTest();
 
-        Rho.DPX.template = 'file:///sdcard/templates/Logistics%20Post.xml';
+        Rho.DPX.template = logPostTemplate;
         Rho.DPX.uiResultConfirmation = false;
         Rho.DPX.audioFeedback = false;
 

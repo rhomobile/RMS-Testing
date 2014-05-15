@@ -35,6 +35,22 @@
             */
         } 
 
+        function perf_counter()
+        {
+             var st_date = new Date();
+
+             for (var i=0;i<100;i++)
+             {
+                var pl = Rho.System.platform;
+             }
+ 
+             var end_date = new Date();
+
+             var diff = end_date - st_date;
+
+             alert("time=" + diff/1000);
+        }
+
     </script>
 
 </head>
@@ -46,7 +62,7 @@
 -->    
 <a href="#" onclick="alert( Rho.System.platform );">Show Platform</a><br/>
 <a href="#" onclick="barcodeTest();">Barcode enumerate</a><br/>
-
+<!-- <a href="#" onclick="perf_counter();">performance test</a><br/> -->
 </body>
 </html>
 

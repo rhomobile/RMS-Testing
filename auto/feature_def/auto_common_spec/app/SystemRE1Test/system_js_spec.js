@@ -1,5 +1,15 @@
 describe("System JS API", function () {
 
+    beforeEach(function(){
+        var matchers = {
+            isNotEmptyString: function () { return (typeof this.actual == 'string') && (this.actual.length != 0) },
+            toBeBetween: function(start, stop) { return start < this.actual && this.actual < stop }
+        };
+
+        this.addMatchers(matchers);
+    });
+
+
 	describe("server port", function() {
 		it("should return free server port", function(){
 			expect(Rho.System.freeServerPort).toBeBetween(1024, 65536);

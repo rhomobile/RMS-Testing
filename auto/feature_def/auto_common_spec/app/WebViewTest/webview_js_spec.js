@@ -2,6 +2,21 @@
 
 describe("WebView JS API", function () {
 
+    beforeEach(function () {
+        var matchers = {
+            isNotEmptyString: function () {
+                return (typeof this.actual == 'string') && (this.actual.length != 0)
+            },
+            isNumberGreaterThenZero: function () {
+                return (typeof this.actual == 'number') && (this.actual > 0)
+            }
+        };
+        this.addMatchers(
+            matchers
+        );
+
+    });
+
     it("Test framework property", function () {
         expect(Rho.WebView.framework).isNotEmptyString();
     });

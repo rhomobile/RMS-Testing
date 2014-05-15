@@ -1,6 +1,6 @@
 
 var dpx_tests = (function() {
-    var TEMPLATES_DIR = '/storage/sdcard/templates';
+    var TEMPLATES_DIR = '/storage/sdcard1/dpx/templates';
 
     var templates = [];
     if (!Rho.RhoFile.exists(TEMPLATES_DIR) || !Rho.RhoFile.isDir(TEMPLATES_DIR)) {
@@ -177,6 +177,7 @@ var dpx_tests = (function() {
             'audioFeedback': false,
             'hapticFeedback': true,
             'ledFeedback': true,
+            'autoImageCapture': false,
             'flashMode': 'off',
 
             'uiResultConfirmation': false,
