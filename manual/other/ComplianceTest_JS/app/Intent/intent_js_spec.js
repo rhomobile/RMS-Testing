@@ -205,7 +205,7 @@ describe('Intent_UseCases Functionality Test', function () {
                 params = new parameters(Rho.Intent.BROADCAST,"","","","manualcommonspec","","","",data);
             }
             if (isAnyWindowsFamilyPlatform()) {
-                params = new parameters(Rho.Intent.BROADCAST,"","","","rhomobile manual_common_spec/manual_common_spec.exe","","","",data);
+                params = new parameters(Rho.Intent.BROADCAST,"","","","rhomobile ComplianceTest_JS/ComplianceTest_JS.exe","","","",data);
             }
             var receiveCB = function(intent){
             	alert(JSON.stringify(intent));
@@ -232,7 +232,7 @@ describe('Intent_UseCases Functionality Test', function () {
                 params = new parameters(Rho.Intent.BROADCAST,"","","","manualcommonspec","","","",data);
             }
             if (isAnyWindowsFamilyPlatform()) {
-                params = new parameters(Rho.Intent.BROADCAST,"","","","rhomobile manual_common_spec/manual_common_spec.exe","","","",data);
+                params = new parameters(Rho.Intent.BROADCAST,"","","","rhomobile ComplianceTest_JS/ComplianceTest_JS.exe","","","",data);
             }
             var receiveCB = function(intent){
                 alert("Test Case failed if you see this alert message!");
