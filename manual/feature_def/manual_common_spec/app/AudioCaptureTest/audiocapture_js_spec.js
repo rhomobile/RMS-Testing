@@ -25,11 +25,11 @@ describe("Audio Capture Test", function(){
         var resultDiv = document.getElementById('actResult');
         resultDiv.innerHTML = JSON.stringify(args);
         resultDiv.style.display = 'block';
-        var tempFileName=args.fileName.substring(7);
+        var playFile = args.fileName.substring(7);
         //File Exist Check
-        if(Rho.RhoFile.exists(tempFileName)){
+        if(Rho.RhoFile.exists(playFile)){
             // Audio Play
-            Rho.Mediaplayer.start(tempFileName);
+            Rho.Mediaplayer.start(playFile);
             setTimeout(function(){
                 Rho.Mediaplayer.stop();
             },30000);
@@ -139,7 +139,7 @@ describe("Audio Capture Test", function(){
 
     it('call start method two times continusly', function () {
         dispTestCaseRunning(jasmine.getEnv().currentSpec.description);
-        dispExpectedResult('First time call of satrt method should NOT get discarded on calling start method second time<br/>and  Callback should return ok and full file path of recored audiofile and captured audio should save on the device audiowithstart for 10 secs');
+        dispExpectedResult('First time call of start method should NOT get discarded on calling start method second time<br/>and  Callback should return ok and full file path of recored audiofile and captured audio should save on the device audiowithstart for 10 secs');
         
         _result.waitToRunTest();
 
@@ -301,7 +301,7 @@ describe("Audio Capture Test", function(){
 
     it('suspend and resume the device at time of audio capture', function () {
         dispTestCaseRunning(jasmine.getEnv().currentSpec.description);
-        dispExpectedResult('audio capture should get discarded/canclled in WM/CE devices But should get saved in Android devices');
+        dispExpectedResult('audio capture should be recorded successfuly on resume of the process.');
         
         _result.waitToRunTest();
 
@@ -336,7 +336,7 @@ describe("Audio Capture Test", function(){
 	if (isAnyButApplePlatform()) {
 		it('quit the application at the time of audio is getting captured should not crash', function () {
 			dispTestCaseRunning(jasmine.getEnv().currentSpec.description);
-			dispExpectedResult('Callback should return cancel and of Application should not behave abnormal or crash');
+			dispExpectedResult('Application should not behave abnormal or crash');
 			
 			_result.waitToRunTest();
 
