@@ -337,7 +337,11 @@ describe('Rho.AudioCapture JS API', function () {
 		
 		var audioCallBack = function (args) {
 			if(args['fileName']){
-				filePath = args.fileName.substring(7);
+				if(isAnyButApplePlatform()){
+					filePath = args.fileName.substring(7);
+				}else{
+					filePath = args.fileName;
+				}
 			}
 			if(args['message']){
 				message = args['message'];

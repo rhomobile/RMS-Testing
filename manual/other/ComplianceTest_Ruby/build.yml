@@ -4,6 +4,10 @@ version: "1.0"
 vendor: "rhomobile"
 build: "debug"
 applog: "rholog.txt"
+rhohub:
+  url: "https://appstaging.rhohub.com/api/v1/"
+connection:
+  proxy: "http://wwwgate0.mot.com:1080"
 iphone:
   configuration: "Release"
   sdk: "iphonesimulator7.0"
@@ -19,6 +23,8 @@ android:
   ajax_api_bridge: false
   version: "4.2.2"
   extensions:
+    - mediaplayer
+    - audiocapture
     - signature
     - printing
     - printing_zebra
@@ -28,6 +34,8 @@ wm:
 #sdk: "MC3000c50b (ARMV4I)"
   sdk: "Windows Mobile 6.5.3 Professional DTK (ARMV4I)"
   extensions:
+    - mediaplayer
+    - audiocapture
     - printing
     - printing_zebra
     - signature
