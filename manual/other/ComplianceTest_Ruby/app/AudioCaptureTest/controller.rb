@@ -9,15 +9,14 @@ class AudioCaptureTestController < Rho::RhoController
 def audio_callback
   @filename = @params['fileName'][7..-1]
   @data = @params.to_json
+  Rho::WebView.executeJavascript("document.getElementById('actResult').innerHTML=JSON.stringify(#{@data})")
+  Rho::WebView.executeJavascript("document.getElementById('actResult').style.display='block'")
   
   if Rho::RhoFile.exists(@filename)
-    Rho::WebView.executeJavascript("document.getElementById('actResult').innerHTML=JSON.stringify(#{@data})")
     Rho::Mediaplayer.start(@filename)
   else
-    Rho::WebView.executeJavascript("document.getElementById('actResult').innerHTML='File Does Not Exists'")
+    Rho::WebView.executeJavascript("document.getElementById('actResult').innerHTML= document.getElementById('actResult').innerHTML + '<br/>File Not Exist'")
   end
-    
-  Rho::WebView.executeJavascript("document.getElementById('actResult').style.display='block'")
 end
 
 
