@@ -23,6 +23,7 @@ android:
   ajax_api_bridge: false
   version: "4.2.2"
   extensions:
+    - indicators
     - mediaplayer
     - audiocapture
     - signature
@@ -34,6 +35,7 @@ wm:
 #sdk: "MC3000c50b (ARMV4I)"
   sdk: "Windows Mobile 6.5.3 Professional DTK (ARMV4I)"
   extensions:
+    - indicators
     - mediaplayer
     - audiocapture
     - printing
