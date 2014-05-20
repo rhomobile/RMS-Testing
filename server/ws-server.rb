@@ -12,8 +12,13 @@ def startWsServer( host, port )
             ws.onclose { puts "Connection closed" }
         
             ws.onmessage { |msg|
-                puts "Recieved message: #{msg}"
-                ws.send "Pong: #{msg}"
+				if(msg == "JSON")
+					puts "Recieved message: #{msg}"
+					ws.send '{"id": "ZoomIn", "label": "Zoom In"}'
+				else
+					puts "Recieved message: #{msg}"
+					ws.send "Pong: #{msg}"
+				end
             }
         end
     }
