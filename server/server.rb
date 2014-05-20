@@ -247,6 +247,31 @@ $local_server.mount_proc '/get_gzip' do |req,res|
     res.status = 200    
 end
 
+$local_server.mount_proc( '/time_stream' ) do |req, res|
+  res.content_type = 'text/event-stream'
+  r,w = IO.pipe
+  res.body = r
+  res.chunked = true
+  t = Thread.new do
+    begin
+      20.times do
+        w << 'data: ' << Time.now.to_s << "\x0D\x0A"
+        w << "\x0D\x0A"
+        w.flush
+        sleep 1
+      end
+      w << 'event: end' << "\x0D\x0A"
+      w << 'data: end'  << "\x0D\x0A"
+      w << "\x0D\x0A"
+      w.flush
+    rescue => err
+      puts "#{err.inspect}"
+    ensure
+      w.close()
+    end
+  end
+end
+
 #Secure server mount points
 $secure_server.mount_proc '/test_methods' do |req,res|
     if req.request_method == "GET" then
