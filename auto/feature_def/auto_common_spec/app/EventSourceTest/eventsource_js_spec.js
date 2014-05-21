@@ -15,8 +15,19 @@ if (Rho.System.platform == Rho.System.PLATFORM_ANDROID) {
         beforeEach(function() {
         });
              
-        it('Creates websocket', function() {
-          
+        it('Accepts events from server', function() {
+          var eventCount = 0;
+          var es;
+
+          runs(function(){
+            es = new EventSource(srvURL);
+            es.onmessage = function(event) {
+              ++eventCount;
+            }
+          });
+
+          waitsFor( function() {return eventCount>=21;}, 30000, "Didn't receive all events." );
+          runs(function() { expect(eventCount).toEqual(21); es.close(); } );          
         });
                       
     });
