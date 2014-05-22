@@ -17,7 +17,8 @@ $propertyValues =
 "previewHeight" => [{"value"=> 20},{"value"=> 50},{"value"=> 0},{"value"=> 60}]}
 
 def generate_js_camera_spec
-	apicontent = YAML.load_file('Camera\camera.yml')
+	yamlfilepath = Dir.tmpdir() + "/" + 'Camera/camera.yml'
+	apicontent = YAML.load_file(yamlfilepath)
 
 	#Get the object name
 	$objectName = "#{apicontent['API']['MODULE']['parent']}.#{apicontent['API']['MODULE']['name']}"

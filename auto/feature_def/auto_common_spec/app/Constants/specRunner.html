@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Constants Test Page</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+	<META HTTP-Equiv="MinimizeButton" content="visibility:Visible;top:30 " >
+	<META HTTP-Equiv="quitbutton" Content="visibility:visible">
+	<META HTTP-Equiv="ReloadButton" Content="visibility:visible">
+	
+    <script type="text/javascript" charset="utf-8" src="/public/jquery/jquery-1.6.4.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="/public/jquery/jquery.json-2.3.min.js"></script>
+
+    <link type="image/png" rel="shortcut icon" href="/public/jasmine/jasmine_favicon.png">
+    <link type="text/css" rel="stylesheet" href="/public/jasmine/jasmine.css">
+    <script type="text/javascript" src="/public/jasmine/jasmine.js"></script>
+    <script type="text/javascript" src="/public/jasmine/jasmine-html.js"></script>
+    <script type="text/javascript" src="/public/jasmine/jasmine.junit_reporter.js"></script>
+    <script type="text/javascript" src="../helpers/rhologReporter.js"></script>
+	<script type="text/javascript" src="../helpers/specHelpers.js"></script>
+    <!--<script type="text/javascript" src="/public/api/rhoapi-modules.js"></script>-->
+    <script type="text/javascript" src="/public/api/rhoapi.js" data-api-modules="Application, Barcode, Intent, Battery, CardReader,Log, NativeMenubar,NativeTabbar, NativeToolbar, Network, Notification, ORM, Push, RhoFile, Sensor, SignalIndicators, Signature, System, WebView"></script>
+	<!-- include spec files here... -->
+	<script type="text/javascript" src="rhoconstants_js_spec.js"></script>
+	<script type="text/javascript">
+	function onLoad(){
+		alert("while loading");
+	}
+	</script>	
+	<script type="text/javascript">
+
+    (function () {
+        var jasmineEnv = jasmine.getEnv();
+        jasmineEnv.updateInterval = 1000;
+
+        var htmlReporter = new jasmine.HtmlReporter();
+        var junitReporter = new jasmine.JUnitXmlReporter();
+        junitReporter.useDotNotation = false
+        jasmineEnv.addReporter(htmlReporter);
+        jasmineEnv.addReporter(new jasmine.JUnitXmlReporter('.\\', true, true));
+        jasmineEnv.addReporter(new jasmine.RhologReporter());
+        jasmineEnv.specFilter = function (spec) {
+            return htmlReporter.specFilter(spec);
+        };
+
+        var currentWindowOnload = window.onload;
+        window.onload = function() {
+          if (currentWindowOnload) {
+            currentWindowOnload();
+          }
+
+          execJasmine();
+        };
+
+        function execJasmine() {
+          jasmineEnv.execute();
+        }
+
+    })();
+	</script>
+</head>
+<body>
+    <div id="actResult" style="display:none">init</div>
+</body>
+</html>

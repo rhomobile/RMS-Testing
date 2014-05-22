@@ -21,9 +21,13 @@ symbian:
 android:
   version: 2.3.3
 extensions:
+- audiocapture
 - rhoconnect-client
 - mediaplayer
 - screenorientation
 - sensor
+- printing
+- printing_zebra
 app_type: rhoelements
-capabilities: []
+capabilities:
+  - gps

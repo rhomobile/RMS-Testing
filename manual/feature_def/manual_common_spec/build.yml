@@ -1,4 +1,4 @@
-#sdk: c:/work/rhodes
+#sdk: c:/projects/rhodes
 app_type: "rhoelements"
 sdkversion: "3.5.0"
 name: "manual_common_spec"
@@ -33,6 +33,7 @@ symbian:
   uid: "0xeeceaf9f"
 #sdk: "MC3000c50b (ARMV4I)"
 android:
+  no_compression: [pdf, png, html, js, css]
   ajax_api_bridge: false
   version: "4.0.3"
   extensions:
@@ -44,6 +45,7 @@ android:
   manifest_template: AndroidManifest.erb
 #security_token: "123"
 wm:
+  webkit_outprocess: 0	
   ajax_api_bridge: false
   sdk: "Windows Mobile 6.5.3 Professional DTK (ARMV4I)"
   extensions:
@@ -54,6 +56,6 @@ wm:
 paths:
   extensions: 
 
-minify:
-  js: false
-  css: false
+#minify:
+#  js: false
+#  css: false

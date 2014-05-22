@@ -304,6 +304,16 @@ describe('Printer Zebra', function() {
         $('#select_box_wrapper').empty();
         $('#myList').empty();
         $('#event_list').empty();
+
+        var matchers = {
+            isNotEmptyString: function () {
+                return (typeof this.actual == 'string') && (this.actual.length != 0)
+            }
+        };
+        this.addMatchers(
+            matchers
+        );
+
     });
 
     afterEach(function() {});

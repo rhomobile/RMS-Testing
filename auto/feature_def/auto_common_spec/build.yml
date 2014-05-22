@@ -31,7 +31,7 @@ bbver: 4.6
 applog: rholog.txt
 iphone:
   configuration: Release
-  sdk: iphonesimulator6.1
+  sdk: iphonesimulator7.1
   provisionprofile:
   codesignidentity:
   entitlements:
@@ -44,10 +44,11 @@ symbian:
   uid: '0xe1a1ef92'
 android:
   version: 4.2.2
-  extensions: ["nativeBridgeTest", "barcode", "screenorientation", "instrumentation", "cardreader", "indicators", "sensor"]
+  extensions: ["nativeBridgeTest", "barcode", "screenorientation", "instrumentation", "cardreader", "indicators", "sensor", "websocket"]
   capabilities:
   - native_browser
 wm:
+  webkit_outprocess: 1
   #use_shared_runtime: yes
   #sdk: MC3000c50b (ARMV4I)
   sdk: "Windows Mobile 6.5.3 Professional DTK (ARMV4I)"

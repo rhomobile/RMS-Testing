@@ -1,0 +1,77 @@
+function quit()
+{
+	var xmlhttp;
+	if (window.XMLHttpRequest)
+	{// code for IE7+, Firefox, Chrome, Opera, Safari
+		xmlhttp=new XMLHttpRequest();
+	}
+	else
+	{// code for IE6, IE5
+		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	xmlhttp.open("GET","/app/Settings/quitApp", false);
+	xmlhttp.send();
+}
+
+(function ()
+{
+	var jasmineEnv = jasmine.getEnv();
+	jasmineEnv.updateInterval = 1000;
+
+	var htmlReporter = new jasmine.HtmlReporter();
+    jasmineEnv.addReporter(htmlReporter);
+
+	jasmineEnv.addReporter(new jasmine.JUnitXmlReporter('.\\', true, true));
+	jasmineEnv.specFilter = function (spec) {
+		return htmlReporter.specFilter(spec);
+	};
+
+	var currentWindowOnload = window.onload;
+	window.onload = function () {
+		if (currentWindowOnload) {
+			currentWindowOnload();
+		}
+		execJasmine();
+	};
+
+	function execJasmine()
+	{
+		var oldCallback = jasmineEnv.currentRunner().finishCallback;
+		jasmineEnv.currentRunner().finishCallback = function()
+		{
+			try
+			{
+				oldCallback.apply(this, arguments);
+			}
+			catch(e)
+			{
+				console.log('Could not send results: ' + e);
+			}
+			var getParams = window.location.search.replace( "?", "" );
+			if(getParams.length > 0)
+			{
+				var decodedParams = decodeURIComponent(getParams);
+				var decodedArray = JSON.parse(decodedParams);
+				var nextPageUrl = '../' + decodedArray[0];
+				if(decodedArray.length == 0)
+				{
+					Rho.Application.quit();
+				}
+				else if(decodedArray.length == 1)
+				{
+					window.location.href = nextPageUrl + "?" + encodeURIComponent("[]");
+					return;
+				}
+				var newArray = decodedArray.slice(1,decodedArray.length);
+				var encodedArray = encodeURIComponent(JSON.stringify(newArray));
+				window.location.href = nextPageUrl + '?' + encodedArray;
+			}
+			else
+			{
+				//Running locally. Ignore
+			}
+		};
+		jasmineEnv.execute();
+	}
+
+})();

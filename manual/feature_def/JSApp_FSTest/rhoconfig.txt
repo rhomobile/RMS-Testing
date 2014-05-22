@@ -19,7 +19,7 @@ rhobundle_zip_pwd = nil
 MinSeverity  = 1 
 
 # enable copy log messages to standard output, useful for debugging
-LogToOutput = 1
+LogToOutput = 0
 
 # '*' means all categories, otherwise list them : Cat1, Cat2 
 LogCategories = *

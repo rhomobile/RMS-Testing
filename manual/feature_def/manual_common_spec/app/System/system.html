@@ -60,6 +60,56 @@
 <body>
 <h3>Rho.System</h3>
 
+
+<div class="method_tests android ios win32 wm wp8">
+
+    <script type="text/javascript">
+        function openMp4FromPackage() {
+            var path = Rho.Application.publicFolder + '/media/nfc.mp4';
+            Rho.System.openUrl(path);
+        }
+    </script>
+
+    <div class="method_name">System.openUrl</div>
+    <div class="method_desc">Open mp4 from package via System.openUrl</div>
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <div>
+                <button onclick="openMp4FromPackage()">Rho.System.openUrl(mp4)</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="method_tests android ios win32 wm wp8">
+
+    <script type="text/javascript">
+        function openMp4FromSDcard() {
+            var source = Rho.Application.publicFolder + '/media/nfc.mp4';
+            var destination = '/mnt/sdcard/nfc.mp4';
+            if (Rho.RhoFile.copy(source, destination) != 0) {
+                alert('Copy file to sdcard failed');
+                return;
+            }
+            Rho.System.openUrl('file://' + destination);
+        }
+    </script>
+
+    <div class="method_name">System.openUrl</div>
+    <div class="method_desc">Open mp4 from sdcard via System.openUrl</div>
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <div>
+                <button onclick="openMp4FromSDcard()">Rho.System.openUrl(mp4)</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
 <div class="method_tests ios">
     <div class="method_name">Rho.System.applicationIconBadge</div>
     <div class="method_desc">Application Icon Badge : application icon should have badge number (IOS only)</div>
@@ -409,6 +459,16 @@
         </div>
     </div>
 
+    <div class="method_tests win32">
+        <div class="test_scenario">
+            <div class="test_scenario_controls">
+                <a href="javascript:void(0)" onclick="Rho.System.runApplication('rhomobile/testApp/testApp.exe','ParamsAreSet');"> call
+                    runApplication with application name 'rhomobile/testApp/testApp.exe'. Build TestApp installer for Win32 and install TestApp first!</a>
+            </div>
+            <span class="test_scenario_number">VT300-064 <br/></span>
+        </div>
+    </div>
+
     <div class="method_tests ios">
         <div class="test_scenario">
             <div class="test_scenario_controls">
@@ -648,7 +708,6 @@
             <span class="test_scenario_number">VT300-<br/></span>
         </div>
     </div>
-
 </div>
 
 <div class="method_tests android win32 wm wp8">

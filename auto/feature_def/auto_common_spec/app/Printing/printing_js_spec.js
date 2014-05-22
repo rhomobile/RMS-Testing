@@ -1,6 +1,23 @@
 
 describe('Printing Generic', function() {
 
+    beforeEach(function () {
+        var matchers = {
+            isNotEmptyString: function () {
+                return (typeof this.actual == 'string') && (this.actual.length != 0)
+            },
+            isNumberGreaterThenZero: function () {
+                return (typeof this.actual == 'number') && (this.actual > 0)
+            },
+            isBoolean: function () {
+                return typeof this.actual == 'boolean';
+            }
+        };
+        this.addMatchers(
+            matchers
+        );
+    });
+
     //var allEnumPrinters = [Rho.Printer.PRINTER_TYPE_ANY, Rho.Printer.PRINTER_TYPE_NATIVE, Rho.Printer.PRINTER_TYPE_ZEBRA, Rho.Printer.PRINTER_TYPE_EPSON, Rho.Printer.PRINTER_TYPE_APD]
     var allEnumPrinters = [Rho.Printer.PRINTER_TYPE_ZEBRA]
     var printers_array = [];
@@ -113,6 +130,15 @@ describe('Printing Generic', function() {
 
         printers_array = [];
         printers_errors = [];
+
+        var matchers = {
+            isNotEmptyString: function () {
+                return (typeof this.actual == 'string') && (this.actual.length != 0)
+            }
+        };
+        this.addMatchers(
+            matchers
+        );
     });
 
     afterEach(function() {});
@@ -448,7 +474,10 @@ describe('Printing Generic', function() {
                 expect(thisprinter.isConnected).toEqual(false);
             });
             runs(function() {
-                thisprinter.printRawString(CommandZPL, cbk);
+				callresult = null;
+                thisprinter.printRawString(CommandZPL, {}, function(val){
+                    callresult = val;
+                });
             });
 
             waitsFor(function() {
@@ -456,7 +485,7 @@ describe('Printing Generic', function() {
             }, 'wait.. trying to print..', 15000);
 
             runs(function() {
-                expect(callresult).toEqual(Rho.Printer.PRINTER_STATUS_ERROR);
+                expect(callresult.status).toEqual(Rho.Printer.PRINTER_STATUS_ERROR);
             });
         });
 
@@ -467,17 +496,20 @@ describe('Printing Generic', function() {
             it('using connectWithOptions should just connect ' + case_type + ' callback params' + JSON.stringify(connectparams, null, " "), function() {
                 var thisprinter = null;
                 var callresult = null;
+                function cbkf(val) {
+                    callresult = val;
+                }
 
                 runs(function() {
                     expect(last_found_printer_id).toNotEqual(null);
                     thisprinter = Rho.Printer.getPrinterByID(last_found_printer_id);
                     callresult = null;
-                    thisprinter.disconnect(cbk);
+                    thisprinter.disconnect(cbkf);
                 });
 
                 waitsFor(function() {
                     return callresult != null;
-                }, 'wait until disconnected', 5000);
+                }, 'wait until disconnected', 10000);
 
                 runs(function() {
                     expect(callresult).toEqual(Rho.Printer.PRINTER_STATUS_SUCCESS);
@@ -488,9 +520,9 @@ describe('Printing Generic', function() {
                     callresult = null;
 
                     if (case_type == 'without'){
-                        callresult = thisprinter.connectWithOptions(connectparams);
+                        thisprinter.connectWithOptions(connectparams);
                     } else if (case_type == 'withcallback') {
-                        thisprinter.connectWithOptions(connectparams, cbk);
+                        thisprinter.connectWithOptions(connectparams, cbkf);
                     } else if (case_type == 'anonymous') {
                         thisprinter.connectWithOptions(connectparams, function cbk(val) {
                             callresult = val;
@@ -500,10 +532,12 @@ describe('Printing Generic', function() {
 
                 waitsFor(function() {
                     return callresult != null;
-                }, 'wait while connecting', 5000);
+                }, 'wait while connecting', 30000);
 
                 runs(function() {
-                    expect(callresult).toEqual(Rho.Printer.PRINTER_STATUS_SUCCESS);
+					if (case_type != 'without'){
+						expect(callresult).toEqual(Rho.Printer.PRINTER_STATUS_SUCCESS);
+					}
                     expect(thisprinter.isConnected).toEqual(true);
                 });
             });
@@ -571,7 +605,7 @@ describe('Printing Generic', function() {
         it('using result (without callback)', function() {
             runs(function() {
                 var languagesTypes = thisprinter.enumerateSupportedControlLanguages();
-                expect(languagesTypes).toContain(controlLangs);
+                expect(languagesTypes).toEqual(controlLangs);
             });
         });
         it('using callback', function() {
@@ -588,7 +622,7 @@ describe('Printing Generic', function() {
             }, 'Timed out waiting for testing callback', 2000);
             
             runs(function() {
-                expect(enumCb).toContain(controlLangs);
+                expect(enumCb).toEqual(controlLangs);
             });
         });
         it('using anonymous callback', function() {
@@ -596,47 +630,45 @@ describe('Printing Generic', function() {
 
             runs(function() {
                 thisprinter.enumerateSupportedControlLanguages(function(callbackValue){
-                        enumCb = callbackValue;
+                    enumCb = callbackValue;
                 });
             });
             waitsFor(function() {
                 return enumCb !== null;
             }, 'Timed out waiting for testing callback', 2000);
             runs(function() {
-                expect(enumCb).toContain(controlLangs);
+                expect(enumCb).toEqual(controlLangs);
             });
         });
     });
 
     
-    // stopSearch method tests
-    describe('stopSearch method', function() {
-	
-        it("stopSearch Method", function () {
-            runs(function () {
-                // Let the printer be search first then use stop
-                callresult = null;
-                Rho.Printer.searchPrinters({}, searchPrinterCallback);
-                callresult = Rho.Printer.stopSearch();
+     // stopSearch method tests
+    if(!isWindowsMobilePlatform()) {
+
+        describe('stopSearch method', function() {
+            it("callback should not fire after calling stopSearch", function () {
+                runs(function () {
+                    // Let the printer be search first then use stop
+                    callresult = null;
+                    searchObject = runSearch({}, 60000);
+                    callresult = Rho.Printer.stopSearch();
+                });
+
+                waits(65000);
+
+                runs(function() {
+                    expect(searchObject.finished).toEqual(false);
+                });
+
             });
-
-            waitsFor(function () {
-                return callresult !== null
-            }, 'Stopping the Search Printers....', 5000);
-
-            runs(function() {
-                expect(printers_array).toEqual([]);
-                expect(callresult).toEqual(Rho.Printer.PRINTER_STATUS_SUCCESS);
-            });
-
         });
-		
-    });
+    }
 
 
     // requestState methods
     var listofrequeststate = [Rho.Printer.PRINTER_STATE_IS_READY_TO_PRINT,    Rho.Printer.PRINTER_STATE_IS_COVER_OPENED, Rho.Printer.PRINTER_STATE_IS_DRAWER_OPENED, Rho.Printer.PRINTER_STATE_IS_PAPER_OUT, Rho.Printer.PRINTER_STATE_IS_BATTERY_LOW];
-    var requeststate_boolean = ["PRINTER_STATE_IS_READY_TO_PRINT", "   PRINTER_STATE_IS_COVER_OPENED", "PRINTER_STATE_IS_DRAWER_OPENED", "PRINTER_STATE_IS_PAPER_OUT", "PRINTER_STATE_IS_BATTERY_LOW"];
+    var requeststate_boolean = ["PRINTER_STATE_IS_READY_TO_PRINT", "PRINTER_STATE_IS_COVER_OPENED", "PRINTER_STATE_IS_DRAWER_OPENED", "PRINTER_STATE_IS_PAPER_OUT", "PRINTER_STATE_IS_BATTERY_LOW"];
     var requeststate_callbackValue = {};
     function requestStateCallback(args) {
         if (args.status == Rho.Printer.PRINTER_STATUS_SUCCESS) {
@@ -733,10 +765,6 @@ describe('Printing Generic', function() {
     // Get Printer property & properties
     describe("Getting properties of the connected printer", function() {
         
-        it('should connect', function() {
-            doConnect();
-        });
-            
         var offIter = 0;
         var formats = [['connectionType', 'string'],['deviceAddress', 'string'],['ID', 'string'], ['deviceName', 'string'], ['printerType', 'string'], ['isConnected', 'boolean']];
         
@@ -747,40 +775,57 @@ describe('Printing Generic', function() {
             generategetproperties(property, type);
         }
         
-        if(thisprinter.getProperty("connectionType") != "CONNECTION_TYPE_BLUETOOTH") {
+       it('should connect', function() {
+                doConnect();
+            });
+
             it('Should return devicePort value as an integer', function () {
-                expect(thisprinter.devicePort).isNumberGreaterThenZero();
+				runs(function() {
+					if(thisprinter.getProperty("connectionType") != "CONNECTION_TYPE_BLUETOOTH") {
+						expect(thisprinter.devicePort).isNumberGreaterThenZero();
+					}
+				});
             });
 
             it('Should return devicePort value as an integer using get properties', function () {
-                var data = thisprinter.getProperties([devicePort]);    
-                expect(data).isNumberGreaterThenZero();
+				runs(function() {
+					if(thisprinter.getProperty("connectionType") != "CONNECTION_TYPE_BLUETOOTH") {
+						var data = thisprinter.getProperties(['devicePort']);    
+						expect(data).isNumberGreaterThenZero();
+					}
+				});
             });
-        }
 
     }); 
 
     
-    // get and set default printer -- disabled bec its crashing the app as of now
-    xdescribe("Get & Set default printer", function() {
-        var thisprinter = null;
+    // get and set default printer
+    describe("Get & Set default printer", function() {
         var printerObj = null;
 
-        it('get default printer', function() {
-            runs(function() {
-                thisprinter = Rho.Printer.getDefault();
-                expect(thisprinter).toEqual('printer');
-            });
-        });
-
-        it('set default printer', function() {
+        it('there is an instance of a printer', function() {
             runs(function() {
                 expect(last_found_printer_id).toNotEqual(null);
                 printerObj = Rho.Printer.getPrinterByID(last_found_printer_id);
                 Rho.Printer.setDefault(printerObj);
-                expect(Rho.Printer.getDefault()).toEqual(printerObj);
             });
         });
+
+        it('get default Printer', function() {
+            runs(function() {
+                thisprinter = Rho.Printer.getDefault();
+                expect(thisprinter.ID).toNotEqual(null);
+            });
+        });
+
+        it('set default Printer', function() {
+            runs(function() {
+                Rho.Printer.setDefault(printerObj);
+                var defPrinter = Rho.Printer.getDefault();
+                expect(defPrinter.ID).toEqual(printerObj.ID);
+            });
+        });
+
 
     });
 
@@ -793,10 +838,6 @@ describe('Printing Generic', function() {
         });
         
         it('calling zebra specific method should throw exception', function() {
-
-            runs(function() {
-                expect(callresult).toEqual(Rho.Printer.PRINTER_STATUS_SUCCESS);
-            });
 
             expect(function () {
                 thisprinter.retrieveFileNames(cbk);

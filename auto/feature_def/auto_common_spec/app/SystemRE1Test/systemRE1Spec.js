@@ -1,4 +1,21 @@
 describe("System", function() {
+
+    beforeEach(function () {
+        var matchers = {
+            isNotEmptyString: function () {
+                return (typeof this.actual == 'string') && (this.actual.length != 0)
+            },
+            isNumberGreaterThenZero: function () {
+                return (typeof this.actual == 'number') && (this.actual > 0)
+            },
+            isBoolean: function () {
+                return typeof this.actual == 'boolean';
+            }
+        };
+        this.addMatchers(
+            matchers
+        );
+    });
 	describe("<System Module Specs>", function () {
 
 	    /* System property specs */

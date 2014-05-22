@@ -54,7 +54,8 @@ $propertyValues =
 "invalidDecodeSound" => [{"value" => "file://application/alarm.wav"}]}
 
 def generate_js_barcode_spec
-	apicontent = YAML.load_file('Barcode\Barcode.yml')
+	yamlfilepath = Dir.tmpdir() + "/" + 'Barcode/Barcode.yml'
+	apicontent = YAML.load_file(yamlfilepath)
 
 	#Get the object name
 	$objectName = "#{apicontent['API']['MODULE']['parent']}.#{apicontent['API']['MODULE']['name']}"

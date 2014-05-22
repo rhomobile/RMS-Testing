@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>PageLoading Time</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+	<META HTTP-Equiv="MinimizeButton" content="visibility:Visible;top:30 " >
+	<META HTTP-Equiv="quitbutton" Content="visibility:visible">
+	<META HTTP-Equiv="ReloadButton" Content="visibility:visible">
+	<script type="text/javascript">
+		var start = new Date().getTime();
+		var latency ="1";
+		function onLoad() {
+		  var now = new Date().getTime();
+		  latency = now - start;
+		  var ele = document.getElementById('res');
+		  ele.innerHTML = "<b> Page Loading time without jQuery : " + latency + "ms</b>";
+		}
+	</script>
+	<script type="text/javascript" src="/public/api/rhoapi-modules.js"></script>
+</head>
+<body onload="onLoad()">
+<h3 id='res'></h3>
+</body>
+</html>

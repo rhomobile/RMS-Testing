@@ -33,8 +33,8 @@ wp:
 
 android:
   apikey: "0tLch9tZSX1G7PQRWwmqvINECUGtJ8ReArpPJxw"
-  mapping: enabled
+  mapping: on
   capabilities:
     - network_state
-  extensions: ["barcode"]
+  extensions: [barcode, gmaps]
   version: 2.3.3
