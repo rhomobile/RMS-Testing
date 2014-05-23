@@ -62,6 +62,10 @@ if (Rho.System.platform == Rho.System.PLATFORM_ANDROID) {
 			expect(EventSource).toBeDefined();
 		});
 		
+		it("should raise exception if url is empty", function(){
+			expect(function(){new EventSource("")}).toThrow(new Error("Failed to construct 'EventSource': Cannot open an EventSource to an empty URL."));
+		});
+		
 		it('should create server sent event object and readyState status connecting',function(){
 			source = new EventSource(srvURL);
 			expect(source).not.toEqual(null);
