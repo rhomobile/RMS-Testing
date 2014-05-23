@@ -1,0 +1,115 @@
+describe("Generic Test",function(){
+	var processId = '';
+	var app_name = '';
+
+	if(isAndroidPlatform){
+	app_name = 'com.rhomobile.testapp';
+	}
+	else if(isWindowsMobilePlatform){
+	app_name = "\Application\MemoryCheck.exe"
+	}
+	
+	beforeEach(function(){
+		processId = "";
+	});
+
+	afterEach(function(){
+
+	});
+	
+	describe("Generic auto test",function(){
+	
+		it("should check generic.LaunchProcessNonBlocking exist",function(){
+			expect(generic.LaunchprocessNonBlocking).toEqual(jasmine.any(Function));
+		});
+		
+		it("should check generic.CloseProcess exist", function(){
+			expect(generic.CloseProcess).toEqual(jasmine.any(Function));
+		});
+		
+		it("should check generic.GetProcessExitCode exist", function(){
+			expect(generic.GetProcessExitCode).toEqual(jasmine.any(Function));
+		});
+	
+	});
+	describe("Generic manual test", function(){
+		it("should launch application and brings to foreground",function(){
+
+			dispTestCaseRunning("Call generic.LaunchProcessNonBlocking(app_name,'')");
+			dispExpectedResult("application should get launched, comes to foreground and you can open other app too by sending launched app to background \n This should return the process id");
+
+			//Common Method implemented to wait for tester to run the test.Code available in specHelper.js
+			_result.waitToRunTest();
+
+			runs(function(){
+				processId = generic.LaunchProcessNonBlocking(app_name,'');
+				displayResult("Output:",processId+"<br/>");
+			});
+
+			//Common Method implemented to wait for tester to make it pass or fail.Code available in specHelper.js
+			_result.waitForResponse();
+		});
+		
+		it("should close the application by calling generic.CloseProcess",function(){
+
+			dispTestCaseRunning("This will call generic.CloseProcess passed with handler to close the launched application");
+			dispExpectedResult("This will launch the application and will close after 5 sec automatically");
+
+			//Common Method implemented to wait for tester to run the test.Code available in specHelper.js
+			_result.waitToRunTest();
+
+			runs(function(){
+				processId = generic.LaunchProcessNonBlocking(app_name,'');
+				setTimeout(function() {
+					generic.CloseProcess(processId);
+				}, 3000);
+			});
+
+			//Common Method implemented to wait for tester to make it pass or fail.Code available in specHelper.js
+			_result.waitForResponse();
+		});
+		
+		it("should return the exit code of a previously run LaunchProcessNonBlocking call",function(){
+
+			dispTestCaseRunning("This will call generic.GetProcessExitCode passing with launched handler. /n 1: Click on run test. \n 2: Then closed the launched application within 10 secs.");
+			dispExpectedResult("It should return the exit code for the non blocking launched process");
+
+			//Common Method implemented to wait for tester to run the test.Code available in specHelper.js
+			_result.waitToRunTest();
+
+			runs(function(){
+				processId = generic.LaunchProcessNonBlocking(app_name,'');
+				setTimeout(function() {
+					generic.GetProcessExitCode(processId);
+					displayResult("Output:",processId+"<br/>");
+				}, 10000);
+			});
+
+			//Common Method implemented to wait for tester to make it pass or fail.Code available in specHelper.js
+			_result.waitForResponse();
+		});
+		
+		it("should return the exit code of a previously run LaunchProcessNonBlocking call (application closed by calling generic.CloseProcess)",function(){
+
+			dispTestCaseRunning("This will call generic.GetProcessExitCode passing with launched handler. /n 1: Click on run test. \n 2: Then application will get closed automatically after 3 secs.");
+			dispExpectedResult("It should return the exit code for the non blocking launched process");
+
+			//Common Method implemented to wait for tester to run the test.Code available in specHelper.js
+			_result.waitToRunTest();
+
+			runs(function(){
+				processId = generic.LaunchProcessNonBlocking(app_name,'');
+				setTimeout(function() {
+					generic.CloseProcess(processId);
+					generic.GetProcessExitCode(processId);
+					displayResult("Output:",processId+"<br/>");
+				}, 3000);
+			});
+
+			//Common Method implemented to wait for tester to make it pass or fail.Code available in specHelper.js
+			_result.waitForResponse();
+		});
+	});
+	
+	
+});
