@@ -92,6 +92,10 @@ if (Rho.System.platform == Rho.System.PLATFORM_ANDROID) {
 			cbOnerrorCalled = false;
         });
 		
+		it("should raise exception if url is empty", function(){
+			expect(function(){new Websocket("")}).toThrow(new Error("Failed to construct 'WebSocket': The URL '' is invalid."));
+		});
+		
 		it('Creates websocket with first argument', function(){
 			ws1 = new Websocket(srvURL);
 			expect(ws1).not.toEqual(null);
