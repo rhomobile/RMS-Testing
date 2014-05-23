@@ -30,6 +30,18 @@ describe("Generic Test",function(){
 		it("should check generic.GetProcessExitCode exist", function(){
 			expect(generic.GetProcessExitCode).toEqual(jasmine.any(Function));
 		});
+		
+		it("should raised exception when empty string passed to generic.LaunchProcessNonBlocking",function(){
+			expect(function(){generic.LaunchProcessNonBlocking('','')}).toThrow(new Error("Add error message here"));
+		});
+		
+		it("should raise exception when no process id passed to generic.CloseProcess", function(){
+			expect(function(){generic.CloseProcess()}).toThrow(new Error("Add error message here"));
+		});
+		
+		it("should raise exception when no process id passed to generic.GetProcessExitCode", function(){
+			expect(function(){generic.GetProcessExitCode()}).toThrow(new Error("Add error message here"));
+		});
 	
 	});
 	describe("Generic manual test", function(){
