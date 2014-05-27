@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <script type="text/javascript" charset="utf-8" src="../../public/api/rhoapi-modules.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../../public/js/server_url.js"></script>
+    <script type="text/javascript" src="../../public/jquery/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="../helpers/specHelpers.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var currentPlatform = Rho.System.platform;
+            //Disable tests not suitable for current platform
+            $("option[platform]").each(function (idx, element) {
+                var testPlatforms = $(element).attr("platform").split(",");
+                for (var i = 0; i < testPlatforms.length; i++) {
+                    testPlatforms[i] = (testPlatforms[i]).trim()
+                }
+                if (testPlatforms.indexOf(currentPlatform) == -1) {
+                    $(element).attr("disabled", "disabled");
+                }
+            })
+        })
+    </script>
+
+    <script type="text/javascript">
+
+    var selected_Module="";
+    
+    function describe() {
+        
+        selected_Module = myChoice.value;
+        
+        clearAll();
+        
+        if(selected_Module=="VT200-0658"){
+            setDescription("Network status notifications should be returned as connected when wlan profile is enabled and disconnected when wlan profile disabled and network status should be poll after every 6 seconds. Poll interval does not supported on WM/CE. Notification send when Wifi or Cell network appear/disappear, to check internet connectivity use detectConnection.");
+            setExpected("Connected if have network, Disconnected otherwise. Update each 6 seconds.");
+        }
+                 
+        if(selected_Module=="VT200-0659"){
+            setDescription("It should Stop network status notifications ");
+            setExpected("No network status notifications should be observed in the status field.");
+        }       
+        
+        if(selected_Module=="VT200-0660"){
+            setDescription("WM ONLY. Precondition: Connects RhoElements through a Wide Area Network. The connection destination must be first configured through the Connection Manager and the destination name provided to this method");
+            setExpected("this will fail because of callback is mandatory for connectWan method");
+        }
+        
+        if(selected_Module=="VT200-0661"){
+            setDescription("WM ONLY. Precondition: Connects RhoElements through a Wide Area Network. The connection destination must be first configured through the Connection Manager and the destination name provided to this method");
+            setExpected("wanStatusEvent should fire and should populate the all associated parameters with valid values.");
+        }
+                  
+        if(selected_Module=="VT200-0662"){
+            setDescription("Connect device to the cell network. it should return boolean value 'true'.");
+            setExpected("true");
+        }
+                  
+        if(selected_Module=="VT200-0663"){
+            setDescription("calls hasNetwork() method");
+            setExpected("true if connected to any cell or wifi network, false otherwise");
+        }
+        
+        if(selected_Module=="VT200-0664"){
+            setDescription("calls hasWifiNetwork() method");
+            setExpected("true if wifi is connected, false otherwise");
+        }
+        
+    }
+        
+    function getmodulename(){
+
+        var srvHost = SERVER_HOST;
+        var srvPort = SERVER_PORT;
+        var srvHttpUrl = "http://" + srvHost + ":" + srvPort.toString();
+        var srvHttpTestMethodsUrl = srvHttpUrl + "/test_methods";
+        var srvHttpDownloadImageUrl = srvHttpUrl + "/download_image";
+        var srvHttpDownloadImageUrlAuth = srvHttpUrl + "/download_image_auth";
+        var srvHttpUploadTextFileUrl = srvHttpUrl + "/upload_text_file";
+        
+        var srvSecureHost = SERVER_HOST;
+        var srvSecurePort = SECURE_PORT;
+        var srvSecureUrl = "https://" + srvSecureHost + ":" + srvSecurePort.toString();
+        var srvSecureTestMethodsUrl = srvSecureUrl + "/test_methods";
+        
+        //var srvSecureTestMethodsUrlWithClientAuth = "https://" + SECURE_HOST_CA + ":" + SECURE_PORT_CA.toString() + "/test_methods";
+
+
+        selected_Module = myChoice.value;
+        
+        //Rho.Network.stopStatusNotify();
+        
+        setActual("");
+        setStatus("");
+        
+        var to = parseInt( document.getElementsByName('netTimeout')[0].value);
+        if (isNaN(to)) {
+            to = 10;
+        }
+        
+        Ruby.call('NetworkTest','response_timeout?time='+to);
+
+        
+        if(selected_Module=="VT200-0658") {
+            Ruby.call('NetworkTest','start_status');
+        }
+
+        if(selected_Module=="VT200-0659") {
+            Ruby.call('NetworkTest','stop_status');
+        }
+            
+        if(selected_Module=="VT200-0660") {
+            Ruby.call('NetworkTest','disconnect_wan?notify=yes');
+        }
+            
+        if(selected_Module=="VT200-0661") {
+            Ruby.call('NetworkTest','disconnect_wan?call=yes');
+        }
+
+        if(selected_Module=="VT200-0662") {
+            Ruby.call('NetworkTest','cell_network');
+        }
+            
+        if(selected_Module=="VT200-0663") {
+            Ruby.call('NetworkTest','has_network');
+        }
+
+        if(selected_Module=="VT200-0664") {
+            Ruby.call('NetworkTest','wifi_network');
+        }
+
+    }
+
+    function stop_status_notify() {
+      // Stop network status notifications
+      Ruby.call('NetworkTest','stop_status');
+    }
+
+    function disconnect_wan_status_notify() {
+        // Stop wan status notifications
+        Ruby.call('NetworkTest','disconnect_wan');
+    }
+
+    function stop_detecting_connection() {
+        Ruby.call('NetworkTest','stop_detecting_connection');
+    }
+
+            
+    function setDescription(dsc) {
+        desc.innerHTML = dsc;
+    }
+
+    function setExpected(expctd) {
+        expected.innerHTML = expctd;
+    }
+
+    function setActual(actl) {
+        actual.innerHTML = actl;
+    }
+
+    function setStatus(stts) {
+
+        var currentdate = new Date();
+        var datetime = "";
+        
+        if ( stts != "" ) {
+            datetime = currentdate.getDate() + "/"
+            + (currentdate.getMonth()+1)  + "/"
+            + currentdate.getFullYear() + " @ "
+            + currentdate.getHours() + ":"
+            + currentdate.getMinutes() + ":"
+            + currentdate.getSeconds();
+        }
+        
+        info.innerHTML = datetime + " : " + stts;
+    }
+
+    function clearAll() {
+        setDescription("");
+        setExpected("");
+        setActual("");
+        setStatus("");
+    }
+
+
+</script>
+
+</head>
+<body>
+
+
+<form name="controlForm" id="controlForm" action="" >
+    
+    Network timeout (seconds): <input type="text" name="netTimeout" value="">
+    <br>
+
+    
+Select Test To Run &nbsp;&nbsp;
+<select name="myChoice" id="myChoice" onchange="describe()" onselect="describe()">
+<OPTION value="Select option" >VT-ID</OPTION>
+<OPTION value="VT200-0658">VT200-0658</OPTION>
+<OPTION value="VT200-0659">VT200-0659</OPTION>
+<OPTION platform = "WINDOWS" value="VT200-0660">VT200-0660</OPTION>
+<OPTION platform = "WINDOWS" value="VT200-0661">VT200-0661</OPTION>
+<OPTION value="VT200-0662">VT200-0662</OPTION>
+<OPTION value="VT200-0663">VT200-0663</OPTION>
+<OPTION value="VT200-0664">VT200-0664</OPTION>
+
+</select>
+    
+<P><input type="button" onclick="getmodulename();" value="Run This Test"/></P>
+<P><input type="button" onclick="stop_status_notify();" value="Stop_Status_Notify"/>
+<input type="button" onclick="disconnect_wan_status_notify();" value="Disconnect_Wan"/></P>
+<P><input type="button" onclick="stop_detecting_connection();" value="Stop_Detecting"/></P>
+    
+    <br>
+    <h3>Test description:</h3>
+    <div id="desc"></div>
+    <h3>Expected result:</h3>
+    <div id="expected"></div>
+    <h3>Actual result:</h3>
+    <div id="actual"></div>
+    <h4>Status:</h4>
+    <div id="info"></div>
+    
+</form>
+</body>
+</html>
