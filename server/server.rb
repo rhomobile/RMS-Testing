@@ -347,8 +347,8 @@ $local_server.mount_proc( '/time_stream' ) do |req, res|
   res.chunked = true
   
   res.body = proc { |w|
-      20.times do
-        w << 'data: ' + Time.now.to_s + "\x0D\x0A"
+      2.times do
+        w << 'data: ' + "server time:" + Time.now.to_s + "\x0D\x0A"
         w << "\x0D\x0A"
         sleep 1
       end
@@ -357,6 +357,24 @@ $local_server.mount_proc( '/time_stream' ) do |req, res|
       w << "\x0D\x0A"
   }
 end
+
+$local_server.mount_proc( '/time_stream2' ) do |req, res|
+  res.content_type = 'text/event-stream'
+  #res.chunked = true
+  
+  
+  #res.body = proc { |w|
+    sleep 1
+
+    res.body = #'data: {"msg": "First message"}' + "\x0D\x0A" +
+    'event: userlogon' + "\x0D\x0A" +
+    'data: {"username": "John123"}'+ "\x0D\x0A"+"\x0D\x0A";
+#    'event: update' + "\x0D\x0A" +
+#    'data: {"username": "John123", "emotion": "happy"}' + "\x0D\x0A"
+  #}
+  
+end
+
 
 #Secure server mount points
 $secure_server.mount_proc '/test_methods' do |req,res|
