@@ -1,6 +1,23 @@
 
 describe('Printing Generic', function() {
 
+    beforeEach(function () {
+        var matchers = {
+            isNotEmptyString: function () {
+                return (typeof this.actual == 'string') && (this.actual.length != 0)
+            },
+            isNumberGreaterThenZero: function () {
+                return (typeof this.actual == 'number') && (this.actual > 0)
+            },
+            isBoolean: function () {
+                return typeof this.actual == 'boolean';
+            }
+        };
+        this.addMatchers(
+            matchers
+        );
+    });
+
     //var allEnumPrinters = [Rho.Printer.PRINTER_TYPE_ANY, Rho.Printer.PRINTER_TYPE_NATIVE, Rho.Printer.PRINTER_TYPE_ZEBRA, Rho.Printer.PRINTER_TYPE_EPSON, Rho.Printer.PRINTER_TYPE_APD]
     var allEnumPrinters = [Rho.Printer.PRINTER_TYPE_ZEBRA]
     var printers_array = [];

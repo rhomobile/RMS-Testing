@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>PageLoading Time</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+	<META HTTP-Equiv="MinimizeButton" content="visibility:Visible;top:30 " >
+	<META HTTP-Equiv="quitbutton" Content="visibility:visible">
+	<META HTTP-Equiv="ReloadButton" Content="visibility:visible">
+	<script type="text/javascript">
+		var start = new Date().getTime();
+		var latency ="1";
+		function onLoad() {
+		  var now = new Date().getTime();
+		  latency = now - start;
+		  var ele = document.getElementById('res');
+		  ele.innerHTML = "<b> Page Loading time with all Modules : " + latency + "ms</b>";
+		}
+	</script>
+	<script type="text/javascript" src="/public/api/rhoapi.js" data-api-modules="Barcode,Battery,CardReader,Database,Intent,KeyCapture,KeyState,Log,Mediaplayer,NativeMenubar,NativeTabbar,NativeToolbar,Navbar,Network,Notification,Push,RhoFile,Sensor,SignalIndicators,Signature,System,WebView"></script>
+	<script type="text/javascript">
+	function startTest(){
+	var moduleObj = [
+	{"name":"Barcode",
+	"value":typeof(Rho.Barcode)=="function"},
+	{"name":"Battery",
+	"value":typeof(Rho.Battery)=="function"},
+	{"name":"CardReader",
+	"value":typeof(Rho.CardReader)=="function"},
+	{"name":"Database",
+	"value":typeof(Rho.Database)=="function"},
+	{"name":"Intent",
+	"value":typeof(Rho.Intent)=="function"},
+	{"name":"KeyCapture",
+	"value":typeof(Rho.KeyCapture)=="function"},
+	{"name":"KeyState",
+	"value":typeof(Rho.KeyState)=="function"},
+	{"name":"Log",
+	"value":typeof(Rho.Log)=="function"},
+	{"name":"Mediaplayer",
+	"value":typeof(Rho.Mediaplayer)=="function"},
+	{"name":"NativeMenubar",
+	"value":typeof(Rho.NativeMenubar)=="function"},
+	{"name":"NativeTabbar",
+	"value":typeof(Rho.NativeTabbar)=="function"},
+	{"name":"NativeToolbar",
+	"value":typeof(Rho.NativeToolbar)=="function"},
+	{"name":"Navbar",
+	"value":typeof(Rho.Navbar)=="function"},
+	{"name":"Network",
+	"value":typeof(Rho.Network)=="function"},
+	{"name":"NewORM",
+	"value":typeof(Rho.NewORM)=="function"},
+	{"name":"ORM",
+	"value":typeof(Rho.ORM)=="function"},
+	{"name":"Push",
+	"value":typeof(Rho.Push)=="function"},
+	{"name":"Rho.File",
+	"value":typeof(Rho.RhoFile)=="function"},
+	{"name":"Sensor",
+	"value":typeof(Rho.Sensor)=="function"},
+	{"name":"SignalIndicators",
+	"value":typeof(Rho.SignalIndicators)=="function"},
+	{"name":"Signature",
+	"value":typeof(Rho.Signature)=="function"},
+	{"name":"System",
+	"value":typeof(Rho.System)=="function"},
+	{"name":"WebView",
+	"value":typeof(Rho.WebView)=="function"},
+	{"name":"Notification",
+	"value":typeof(Rho.Notification)=="function"}];
+	moduleObj.forEach(function(val, index){
+		var table = document.getElementById('result');
+		var rowCount = table.rows.length;
+		var row = table.insertRow(rowCount);
+		var cell1 = row.insertCell(0);
+		cell1.innerHTML = val.name;
+		var cell2 = row.insertCell(1);
+		cell2.innerHTML = val.value;
+	});
+}
+</script>
+</head>
+<body onload="onLoad()">
+<h2>Performance Improvement:</h2>
+<h3 id='res'></h3>
+<h3>Expected Result: </h3>
+<ol>
+	<li>Compare the Page Loading time with 4.1 application</li>
+	<li>Also Check for the module inclusion status</li>
+</ol>
+<input type="button" id="startTest" onclick="startTest()" value="startTest" />
+<table id='result' border>
+	<tr>
+		<td>Module</td>
+		<td>Status</td>
+	</tr>
+	<script type="text/javascript">
+	</script>
+</table>
+</body>
+</html>

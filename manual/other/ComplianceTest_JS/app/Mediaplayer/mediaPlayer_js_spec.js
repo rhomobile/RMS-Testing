@@ -17,8 +17,14 @@ describe("Media Player", function () {
 		_result.waitToRunTest();
 
 		runs(function () {
-			var audiolocation = Rho.RhoFile.join(audioMediaPath, "badfeeling.wav");
 
+			var audiolocation = "";
+			if(isWindowsMobilePlatform()){
+				audiolocation = Rho.RhoFile.join(audioMediaPath, "badfeeling.wav");
+			}
+			if(isAndroidPlatform() || isApplePlatform()){
+				audiolocation = Rho.RhoFile.join(audioMediaPath, "super_android_tune.mp3");
+			}
 			Rho.Mediaplayer.start(audiolocation);
 			setTimeout(function () {
 				Rho.Mediaplayer.stop();
@@ -63,8 +69,14 @@ describe("Media Player", function () {
 			_result.waitToRunTest();
 		
 			runs(function () {
-				var audiolocation = Rho.RhoFile.join(audioMediaPath, "super_android_tune.mp3");
-
+				var audiolocation = "";
+				if(isWindowsMobilePlatform()){
+					audiolocation = Rho.RhoFile.join(audioMediaPath, "badfeeling.wav");
+				}
+				if(isAndroidPlatform() || isApplePlatform()){
+					audiolocation = Rho.RhoFile.join(audioMediaPath, "super_android_tune.mp3");
+				}
+				console.log(audiolocation);
 				Rho.Mediaplayer.start(audiolocation);
 				setTimeout(function () {
 					Rho.Mediaplayer.stop();
@@ -90,9 +102,14 @@ describe("Media Player", function () {
 		_result.waitToRunTest();
 		
 		runs(function () {
-			var platform = Rho.System.platform;
-			var Videolocation = Rho.RhoFile.join(videoMediaPath, "AMR-NB.mp4");
-
+			var Videolocation = "";
+			if(isWindowsMobilePlatform()){
+				Videolocation = Rho.RhoFile.join(videoMediaPath, "video.wmv");
+			}
+			if(isAndroidPlatform() || isApplePlatform()){
+				Videolocation = Rho.RhoFile.join(videoMediaPath, "test.mp4");
+			}
+			console.log(Videolocation);
 			Rho.Mediaplayer.startvideo(Videolocation);
 			setTimeout(function () {
 				Rho.Mediaplayer.stopvideo();
@@ -137,8 +154,14 @@ describe("Media Player", function () {
 			_result.waitToRunTest();
 		
 			runs(function () {
-				var Videolocation = Rho.RhoFile.join(videoMediaPath, "test.mp4");
-
+				var Videolocation = "";
+				if(isWindowsMobilePlatform()){
+					Videolocation = Rho.RhoFile.join(videoMediaPath, "video.wmv");
+				}
+				if(isAndroidPlatform() || isApplePlatform()){
+					Videolocation = Rho.RhoFile.join(videoMediaPath, "test.mp4");
+				}
+				console.log(Videolocation);
 				Rho.Mediaplayer.startvideo(Videolocation);
 				setTimeout(function () {
 					Rho.Mediaplayer.stopvideo();

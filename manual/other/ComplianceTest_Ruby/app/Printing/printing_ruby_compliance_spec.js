@@ -112,8 +112,8 @@ describe('Printing Generic', function() {
     });
 
     afterEach(function() {});
-    
-    
+
+
     // setup 
     it('initialize before tests', function() {
         var searchObject = {};
@@ -305,6 +305,32 @@ describe('Printing Generic', function() {
 			doConnect();
         });
 
+        it('Search printer method with callback', function() {
+            dispTestCaseRunning("search printer method ");
+            dispExpectedResult("should search and display printer id");
+            _result.waitToRunTest();
+            runs(function() {
+               
+                Ruby.call('Printing','rho_searchPrinters');
+                
+                setTimeout(function() {
+                    timeout = true;
+                }, 20000);
+                
+            });
+
+            waitsFor(function(){
+                if(timeout == true){
+                    return true;
+                }
+            }, 'Wait for 10msec ajax call to happen', 30000);
+
+            runs(function() {
+                displayResult("Output: ", Ruby.getReturnedValue()+"<br/>");
+            });
+            _result.waitForResponse();
+        });
+
         // png
         it('should print png with callback', function() {
             dispTestCaseRunning(" 1. Should Print label <br />2. Should print PNG image ");
@@ -356,6 +382,10 @@ describe('Printing Generic', function() {
 
     // printImageFromFile method tests
     describe('printImageFromFile method', function() {
+
+        xit('should connect', function() {
+            doConnect();
+        });
 
         it('Print png image from file tests', function() {
             dispTestCaseRunning("Print png image from file tests");

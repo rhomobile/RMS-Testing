@@ -10,7 +10,8 @@ $propertyValues =
 "fileName" => [{"value" => "file://application/alarm.wav"}]}
 
 def generate_js_audiocapture_spec
-	apicontent = YAML.load_file('AudioCapture\audiocapture.yml')
+	yamlfilepath = Dir.tmpdir() + "/" + 'AudioCapture/audiocapture.yml'
+	apicontent = YAML.load_file(yamlfilepath)
 
 	#Get the object name
 	$objectName = "#{apicontent['API']['MODULE']['parent']}.#{apicontent['API']['MODULE']['name']}"

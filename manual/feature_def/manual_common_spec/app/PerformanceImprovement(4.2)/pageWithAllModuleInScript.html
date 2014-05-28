@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Performance Improvement</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+	<META HTTP-Equiv="MinimizeButton" content="visibility:Visible;top:30 " >
+	<META HTTP-Equiv="quitbutton" Content="visibility:visible">
+	<META HTTP-Equiv="ReloadButton" Content="visibility:visible">
+	<script type="text/javascript" src="/public/api/rhoapi.js"></script>
+	<script type="text/javascript" src="/public/api/Rho.Barcode.js"></script>
+	<script type="text/javascript" src="/public/api/Rho.Battery.js"></script>
+	<script type="text/javascript" src="/public/api/Rho.CardReader.js"></script>
+	<script type="text/javascript" src="/public/api/Rho.Database.js"></script>
+	<script type="text/javascript" src="/public/api/Rho.Intent.js"></script>
+	<script type="text/javascript" src="/public/api/Rho.KeyCapture.js"></script>
+	<script type="text/javascript" src="/public/api/Rho.KeyState.js"></script>
+	<script type="text/javascript" src="/public/api/Rho.Log.js"></script>
+	<script type="text/javascript" src="/public/api/Rho.Mediaplayer.js"></script>
+	<script type="text/javascript" src="/public/api/Rho.NativeMenubar.js"></script>
+	<script type="text/javascript" src="/public/api/Rho.NativeTabbar.js"></script>
+	<script type="text/javascript" src="/public/api/Rho.NativeToolbar.js"></script>
+	<script type="text/javascript" src="/public/api/Rho.Navbar.js"></script>
+	<script type="text/javascript" src="/public/api/Rho.Network.js"></script>
+	<script type="text/javascript" src="/public/api/Rho.NewORM.js"></script>
+	<script type="text/javascript" src="/public/api/Rho.Notification.js"></script>
+	<script type="text/javascript" src="/public/api/Rho.ORM.js"></script>
+	<script type="text/javascript" src="/public/api/Rho.Push.js"></script>
+	<script type="text/javascript" src="/public/api/Rho.RhoFile.js"></script>
+	<script type="text/javascript" src="/public/api/Rho.Sensor.js"></script>
+	<script type="text/javascript" src="/public/api/Rho.SignalIndicators.js"></script>
+	<script type="text/javascript" src="/public/api/Rho.Signature.js"></script>
+	<script type="text/javascript" src="/public/api/Rho.System.js"></script>
+	<script type="text/javascript" src="/public/api/Rho.WebView.js"></script>
+	<script type="text/javascript">
+		var start = new Date().getTime();
+		var latency ="";
+		function onLoad() {
+		  var now = new Date().getTime();
+		  latency = now - start;
+		  var ele = document.getElementById('res');
+		  ele.innerHTML = "<b> Page Loading time with all Modules : " + latency + "ms</b>";
+		}
+		function testModule(){
+		var moduleObj = [
+		{"name":"Barcode",
+		"value":typeof(Rho.Barcode)=="function"},
+		{"name":"Battery",
+		"value":typeof(Rho.Battery)=="function"},
+		{"name":"CardReader",
+		"value":typeof(Rho.CardReader)=="function"},
+		{"name":"Database",
+		"value":typeof(Rho.Database)=="function"},
+		{"name":"Intent",
+		"value":typeof(Rho.Intent)=="function"},
+		{"name":"KeyCapture",
+		"value":typeof(Rho.KeyCapture)=="function"},
+		{"name":"KeyState",
+		"value":typeof(Rho.KeyState)=="function"},
+		{"name":"Log",
+		"value":typeof(Rho.Log)=="function"},
+		{"name":"Mediaplayer",
+		"value":typeof(Rho.Mediaplayer)=="function"},
+		{"name":"NativeMenubar",
+		"value":typeof(Rho.NativeMenubar)=="function"},
+		{"name":"NativeTabbar",
+		"value":typeof(Rho.NativeTabbar)=="function"},
+		{"name":"NativeToolbar",
+		"value":typeof(Rho.NativeToolbar)=="function"},
+		{"name":"Navbar",
+		"value":typeof(Rho.Navbar)=="function"},
+		{"name":"Network",
+		"value":typeof(Rho.Network)=="function"},
+		{"name":"NewORM",
+		"value":typeof(Rho.NewORM)=="function"},
+		{"name":"ORM",
+		"value":typeof(Rho.ORM)=="function"},
+		{"name":"Push",
+		"value":typeof(Rho.Push)=="function"},
+		{"name":"Rho.File",
+		"value":typeof(Rho.RhoFile)=="function"},
+		{"name":"Sensor",
+		"value":typeof(Rho.Sensor)=="function"},
+		{"name":"SignalIndicators",
+		"value":typeof(Rho.SignalIndicators)=="function"},
+		{"name":"Signature",
+		"value":typeof(Rho.Signature)=="function"},
+		{"name":"System",
+		"value":typeof(Rho.System)=="function"},
+		{"name":"WebView",
+		"value":typeof(Rho.WebView)=="function"},
+		{"name":"Notification",
+		"value":typeof(Rho.Notification)=="function"}];
+		moduleObj.forEach(function(val, index){
+			var table = document.getElementById('result');
+			var rowCount = table.rows.length;
+			var row = table.insertRow(rowCount);
+			var cell1 = row.insertCell(0);
+			cell1.innerHTML = val.name;
+			var cell2 = row.insertCell(1);
+			cell2.innerHTML = val.value;
+		});
+	}
+	</script>
+</head>
+<body onload="onLoad()">
+<h3>Performance Improvement:</h3>
+<h3 id='res'></h3>
+<h3>Expected:</h3>
+<ol>
+	<li>Check for all Module Test</li>
+</ol>
+<input type="button" id="startTest" onclick="testModule()" value="startTest" />
+<table id='result' border>
+	<tr>
+		<td>Module</td>
+		<td>Status</td>
+	</tr>
+</table>
+</body>
+</html>

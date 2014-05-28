@@ -21,6 +21,7 @@ symbian:
 android:
   version: 2.3.3
 extensions:
+- audiocapture
 - rhoconnect-client
 - mediaplayer
 - screenorientation

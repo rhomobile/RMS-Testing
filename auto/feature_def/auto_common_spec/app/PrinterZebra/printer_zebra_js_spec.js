@@ -20,12 +20,16 @@ describe('Rho.PrinterZebra Search Printer JS API', function () {
         connected = undefined;
         var matchers = {
             isNotEmptyString: function () {
-                return (typeof this.actual == 'string') && (this.actual.length != 0)
+                return ((typeof this.actual) == 'string') && (this.actual.length != 0)
+            },
+            isNumberGreaterThenZero: function () {
+                return ((typeof this.actual) == 'number') && (this.actual > 0)
+            },
+            isBoolean: function () {
+                return (typeof this.actual) == 'boolean';
             }
         };
-        this.addMatchers(
-            matchers
-        );
+        this.addMatchers(matchers);
     });
 
 

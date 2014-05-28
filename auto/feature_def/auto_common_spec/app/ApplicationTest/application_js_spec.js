@@ -37,7 +37,7 @@ describe("Application JS API", function () {
             matchers
         );
 
-    })
+    });
 
 	describe("Basic specs", function () {
 		

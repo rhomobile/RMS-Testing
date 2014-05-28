@@ -116,141 +116,88 @@ describe("Signature Manual Test", function () {
 
         it("VT299-001 | Call takeFullScreen with callback as function and returned status OK |", function () {
 
+            displayObjective("VT299-001 |Call takeFullScreen with callback as function and returned status OK|");
+            dispTestSteps("Wait for 10 sec for Fullscreen Signature box to comeup and press capture after drawing any signature on signature area");
+            dispExpectedResult("The returned status should be OK and path of the captured signature image should be returned (Image should be rendered on page)");
+            _result.waitToRunTest();
+
             runs(function () {
-                setObjective("VT299-001 |Call takeFullScreen with callback as function and returned status OK|");
-                setInstruction("Wait for 10 sec for Fullscreen Signature box to comeup and press capture after drawing any signature on signature area");
-                setExpected("The returned status should be OK and path of the captured signature image should be returned (Image should be rendered on page)");
+                Rho.Signature.fileName = Rho.RhoFile.join(Rho.Application.databaseBlobFolder, 'VT299-001');
+                Rho.Signature.takeFullScreen({}, callbackImage);
                 delayForNineSeconds();
             });
-
-            runs(function () {
-                waitsFor(function () {
-                    return readFlag;
-                }, 'wait for Tester to read', 10000);
-
-                runs(function () {
-                    Rho.Signature.fileName = Rho.RhoFile.join(Rho.Application.databaseBlobFolder, 'VT299-001');
-                    Rho.Signature.takeFullScreen({}, callbackImage);
-                    delayForNineSeconds();
-                });
-
-                waitsFor(function () {
-                    return readFlag || sigCallbackFired;
-                }, 'wait to callback to fire or timeout', 10000);
-            });
+            waitsFor(function () {
+                return readFlag || sigCallbackFired;
+            }, 'wait to callback to fire or timeout', 10000);
 
             runs(function () {
                 Rho.Signature.hide();
-                waitsFor(function () {
-                    return document.getElementById("actResult").innerHTML != "init";
-                }, "Timed out waiting for tester to respond", 300000);
-                runs(function () {
-                    expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-                });
+                _result.waitForResponse();
             });
         });
 
         it("VT299-002 | Call takeFullScreen with callback as function and returned status cancel |", function () {
 
+            displayObjective("VT299-002 |Call takeFullScreen with callback as function and returned status cancel |");
+            dispTestSteps("Wait for 10 sec for Fullscreen Signature box to comeup and press cancel after drawing any signature on signature area");
+            dispExpectedResult("The returned status should be cancel and no path of the signature image should be returned");
+            _result.waitToRunTest();
+
             runs(function () {
-                setObjective("VT299-002 |Call takeFullScreen with callback as function and returned status cancel |");
-                setInstruction("Wait for 10 sec for Fullscreen Signature box to comeup and press cancel after drawing any signature on signature area");
-                setExpected("The returned status should be cancel and no path of the signature image should be returned");
+                Rho.Signature.fileName = Rho.RhoFile.join(Rho.Application.databaseBlobFolder, 'VT299-002');
+                Rho.Signature.takeFullScreen({}, callbackImage);
                 delayForNineSeconds();
             });
-
-            runs(function () {
-                waitsFor(function () {
-                    return readFlag;
-                }, 'wait for Tester to read', 10000);
-
-                runs(function () {
-                    Rho.Signature.fileName = Rho.RhoFile.join(Rho.Application.databaseBlobFolder, 'VT299-002');
-                    Rho.Signature.takeFullScreen({}, callbackImage);
-                    delayForNineSeconds();
-                });
-
-                waitsFor(function () {
-                    return readFlag || sigCallbackFired;
-                }, 'wait to callback to fire or timeout', 10000);
-            });
+            waitsFor(function () {
+                return readFlag || sigCallbackFired;
+            }, 'wait to callback to fire or timeout', 10000);
 
             runs(function () {
                 Rho.Signature.hide();
-                waitsFor(function () {
-                    return document.getElementById("actResult").innerHTML != "init";
-                }, "Timed out waiting for tester to respond", 300000);
-                runs(function () {
-                    expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-                });
+                _result.waitForResponse();
             });
         });
 
         it("VT299-010 | Call capture with callback as anonymous function |", function () {
 
-            runs(function () {
-                setObjective("VT299-010 |Call capture with callback as anonymous function|");
-                setInstruction("Wait for 10 sec for Signature box(NonFullScreen) to comeup and draw any signature on signature area and wait for");
-                setExpected("The returned status should be OK and path of the captured signature image should be returned (Image should be rendered on page)");
-                delayForNineSeconds();
-            });
+            displayObjective("VT299-010 |Call capture with callback as anonymous function|");
+            dispTestSteps("Wait for 10 sec for Signature box(NonFullScreen) to comeup and draw any signature on signature area and wait for");
+            dispExpectedResult("The returned status should be OK and path of the captured signature image should be returned (Image should be rendered on page)");
+            _result.waitToRunTest();
 
             runs(function () {
-                waitsFor(function () {
-                    return readFlag;
-                }, 'wait for Tester to read', 10000);
-
-                runs(function () {
-                    Rho.Signature.fileName = Rho.RhoFile.join(Rho.Application.databaseBlobFolder, 'VT299-010');
-                    Rho.Signature.show();
-                    delayForFiveSeconds();
-                });
-
-                waitsFor(function () {
-                    //var stat = readFlag || sigCallbackFired;
-                    return readFlag;
-                }, 'wait to callback to fire or timeout', 6000);
+                Rho.Signature.fileName = Rho.RhoFile.join(Rho.Application.databaseBlobFolder, 'VT299-010');
+                Rho.Signature.show();
+                delayForFiveSeconds();
             });
+            waitsFor(function () {
+               return readFlag;
+            }, 'wait to callback to fire or timeout', 6000);
 
             runs(function () {
                 Rho.Signature.capture(function (data) {
                     imageCallback(data);
                 });
                 Rho.Signature.hide();
-                waitsFor(function () {
-                    return document.getElementById("actResult").innerHTML != "init";
-                }, "Timed out waiting for tester to respond", 300000);
-                runs(function () {
-                    expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-                });
+                _result.waitForResponse();
             });
         });
 
         it("VT299-011 | Call capture and call clear |", function () {
 
-            runs(function () {
-                setObjective("VT299-011 |Call capture and call clear|");
-                setInstruction("Wait for 10 sec for Signature box(NonFullScreen) to comeup and draw any signature on signature area and wait for clear to call");
-                setExpected("The signature area should be clear after clear has been called and a clear signature image should be saved at returned path");
-                delayForNineSeconds();
-            });
+            displayObjective("VT299-011 |Call capture and call clear|");
+            dispTestSteps("Wait for 10 sec for Signature box(NonFullScreen) to comeup and draw any signature on signature area and wait for clear to call");
+            dispExpectedResult("The signature area should be clear after clear has been called and a clear signature image should be saved at returned path");
+            _result.waitToRunTest();
 
             runs(function () {
-                waitsFor(function () {
-                    return readFlag;
-                }, 'wait for Tester to read', 10000);
-
-                runs(function () {
-                    Rho.Signature.fileName = Rho.RhoFile.join(Rho.Application.databaseBlobFolder, 'VT299-011');
-                    Rho.Signature.show();
-                    delayForFiveSeconds();
-                });
-
-                waitsFor(function () {
-                    //var stat = readFlag || sigCallbackFired;
-                    return readFlag;
-                }, 'wait to callback to fire or timeout', 6000);
+                Rho.Signature.fileName = Rho.RhoFile.join(Rho.Application.databaseBlobFolder, 'VT299-011');
+                Rho.Signature.show();
+                delayForFiveSeconds();
             });
+            waitsFor(function () {
+                return readFlag;
+            }, 'wait to callback to fire or timeout', 6000);
 
             runs(function () {
                 Rho.Signature.clear();
@@ -258,51 +205,33 @@ describe("Signature Manual Test", function () {
                     callbackImage(data);
                 });
                 Rho.Signature.hide();
-                waitsFor(function () {
-                    return document.getElementById("actResult").innerHTML != "init";
-                }, "Timed out waiting for tester to respond", 300000);
-                runs(function () {
-                    expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-                });
+                _result.waitForResponse();
             });
         });
 
         it("VT299-015 | Call takeFullScreen with setting compressionFormat as jpg, fileName as VT299-015 and outputFormat as Image |", function () {
 
+            displayObjective("VT299-015 |Call takeFullScreen with setting compressionFormat as jpg, fileName as VT299-015 and outputFormat as Image|");
+            dispTestSteps("Wait for 10 sec for Signature box(FullScreen) to comeup and press capture after drawing, check the image at returned URI");
+            dispExpectedResult("The format of saved image should be jpg with name VT299-015 and Image should be saved at retrurned path (saved image is rendered for validation)");
+            _result.waitToRunTest();
+
             runs(function () {
-                setObjective("VT299-015 |Call takeFullScreen with setting compressionFormat as jpg, fileName as VT299-015 and outputFormat as Image|");
-                setInstruction("Wait for 10 sec for Signature box(FullScreen) to comeup and press capture after drawing, check the image at returned URI");
-                setExpected("The format of saved image should be jpg with name VT299-015 and Image should be saved at retrurned path (saved image is rendered for validation)");
+                Rho.Signature.bgColor = '#FF0000';
+                Rho.Signature.penColor = '#0000FF';
+                Rho.Signature.penWidth = 3;
+                var fileName = Rho.RhoFile.join(Rho.Application.databaseBlobFolder, 'VT299-015');
+                Rho.Signature.takeFullScreen({compressionFormat: CONST_JPG, fileName: fileName, outputFormat: 'image'}, callbackImage);
                 delayForNineSeconds();
             });
 
-            runs(function () {
-                waitsFor(function () {
-                    return readFlag;
-                }, 'wait for Tester to read', 10000);
-
-                runs(function () {
-                    Rho.Signature.bgColor = '#FF0000';
-                    Rho.Signature.penColor = '#0000FF';
-                    Rho.Signature.penWidth = 3;
-                    var fileName = Rho.RhoFile.join(Rho.Application.databaseBlobFolder, 'VT299-015');
-                    Rho.Signature.takeFullScreen({compressionFormat: CONST_JPG, fileName: fileName, outputFormat: 'image'}, callbackImage);
-                    delayForNineSeconds();
-                });
-
-                waitsFor(function () {
-                    return readFlag || sigCallbackFired;
-                }, 'wait to callback to fire or timeout', 10000);
-            });
+            waitsFor(function () {
+                return readFlag || sigCallbackFired;
+            }, 'wait to callback to fire or timeout', 10000);
 
             runs(function () {
                 Rho.Signature.hide();
-                waitsFor(function () {
-                    return document.getElementById("actResult").innerHTML != "init";
-                }, "Timed out waiting for tester to respond", 300000);
-                runs(function () {
-                    expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-                });
+                _result.waitForResponse();
             });
         });
 
@@ -310,78 +239,50 @@ describe("Signature Manual Test", function () {
         {
             it("VT299-018 | Call takeFullScreen with compressionFormat as jpg, fileName as VT299-018 and outputFormat as dataUri |", function () {
 
+                displayObjective("VT299-018 |Call takeFullScreen with compressionFormat as jpg, fileName as VT299-018 and outputFormat as dataUri|");
+                dispTestSteps("Wait for 10 sec for Signature box(FullScreen) to comeup and press capture after drawing, check the image at returned URI");
+                dispExpectedResult("The signature should be rendered in page as callback returns datauri (no path of image) and image should be black signature area with white normal pen");
+                _result.waitToRunTest();
+
                 runs(function () {
-                    setObjective("VT299-018 |Call takeFullScreen with compressionFormat as jpg, fileName as VT299-018 and outputFormat as dataUri|");
-                    setInstruction("Wait for 10 sec for Signature box(FullScreen) to comeup and press capture after drawing, check the image at returned URI");
-                    setExpected("The signature should be rendered in page as callback returns datauri (no path of image) and image should be black signature area with white normal pen");
+                    Rho.Signature.bgColor = '#000000';
+                    Rho.Signature.penColor = '#FFFFFF';
+                    Rho.Signature.penWidth = 3;
+                    var fileName = Rho.RhoFile.join(Rho.Application.databaseBlobFolder, 'VT299-018');
+                    Rho.Signature.takeFullScreen({compressionFormat: CONST_JPG, fileName: fileName, outputFormat: 'dataUri'}, callbackDataUri);
                     delayForNineSeconds();
                 });
-
-                runs(function () {
-                    waitsFor(function () {
-                        return readFlag;
-                    }, 'wait for Tester to read', 10000);
-
-                    runs(function () {
-                        Rho.Signature.bgColor = '#000000';
-                        Rho.Signature.penColor = '#FFFFFF';
-                        Rho.Signature.penWidth = 3;
-                        var fileName = Rho.RhoFile.join(Rho.Application.databaseBlobFolder, 'VT299-018');
-                        Rho.Signature.takeFullScreen({compressionFormat: CONST_JPG, fileName: fileName, outputFormat: 'dataUri'}, callbackDataUri);
-                        delayForNineSeconds();
-                    });
-
-                    waitsFor(function () {
-                        return readFlag || sigCallbackFired;
-                    }, 'wait to callback to fire or timeout', 10000);
-                });
+                waitsFor(function () {
+                    return readFlag || sigCallbackFired;
+                }, 'wait to callback to fire or timeout', 10000);
 
                 runs(function () {
                     Rho.Signature.hide();
-                    waitsFor(function () {
-                        return document.getElementById("actResult").innerHTML != "init";
-                    }, "Timed out waiting for tester to respond", 300000);
-                    runs(function () {
-                        expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-                    });
+                    _result.waitForResponse();
                 });
             });
         }
 
         it("VT299-019 | Call show with bgColor as #FFFF8C00 (ARGB), penColor as #00FF00(RGB), penWidth as 1, and callback |", function () {
 
-            runs(function () {
-                setObjective("VT299-019 |Call show with bgColor as #FFFF8C00 (ARGB), penColor as #00FF00(RGB), penWidth as 1, and callback|");
-                setInstruction("Wait for 10 sec for Signature box(NonFullScreen) to comeup and wait after drawing, check the image at returned URI");
-                setExpected("The signature area should be default area of color darkOrange and pen as green with thin width penline and signature should be saved at return path with name VT299-019.jpg (saved image is rendered for validation)");
-                delayForNineSeconds();
-            });
+            displayObjective("VT299-019 |Call show with bgColor as #FFFF8C00 (ARGB), penColor as #00FF00(RGB), penWidth as 1, and callback|");
+            dispTestSteps("Wait for 10 sec for Signature box(NonFullScreen) to comeup and wait after drawing, check the image at returned URI");
+            dispExpectedResult("The signature area should be default area of color darkOrange and pen as green with thin width penline and signature should be saved at return path with name VT299-019.jpg (saved image is rendered for validation)");
+            _result.waitToRunTest();
 
             runs(function () {
-                waitsFor(function () {
-                    return readFlag;
-                }, 'wait for Tester to read', 10000);
-
-                runs(function () {
-                    var fileName = Rho.RhoFile.join(Rho.Application.databaseBlobFolder, 'VT299-019');
-                    Rho.Signature.show({bgColor: '#FFFF8C00', penColor: '#FF00FF00', penWidth: 1, compressionFormat: CONST_JPG, fileName: fileName, outputFormat: 'image'});
-                    delayForFiveSeconds();
-                });
-
-                waitsFor(function () {
-                    return readFlag;
-                }, 'wait to callback to fire or timeout', 6000);
+                var fileName = Rho.RhoFile.join(Rho.Application.databaseBlobFolder, 'VT299-019');
+                Rho.Signature.show({bgColor: '#FFFF8C00', penColor: '#FF00FF00', penWidth: 1, compressionFormat: CONST_JPG, fileName: fileName, outputFormat: 'image'});
+                delayForFiveSeconds();
             });
+            waitsFor(function () {
+                return readFlag;
+            }, 'wait to callback to fire or timeout', 6000);
 
             runs(function () {
                 Rho.Signature.capture(callbackImage);
                 Rho.Signature.hide();
-                waitsFor(function () {
-                    return document.getElementById("actResult").innerHTML != "init";
-                }, "Timed out waiting for tester to respond", 300000);
-                runs(function () {
-                    expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-                });
+                _result.waitForResponse();
             });
         });
 
@@ -389,51 +290,115 @@ describe("Signature Manual Test", function () {
         {
             it("VT299-023 | Call show after setting all properties and outputFormat as dataURI|", function () {
 
-                runs(function () {
-                    setObjective("VT299-023 |Call show after setting all properties and outputFormat as dataURI|");
-                    setInstruction("Wait for 10 sec for Signature box(NonFullScreen) to comeup and wait after drawing, check the image at returned URI");
-                    setExpected("The signature area should be nonfullscreen area with border of specified size  left as 15, top as 60, width as 200 and height as 150 with penline width as 5(thickest than prev test), signature should be rendered in page as callback returns the dataURI, no path should retrun");
-                    delayForNineSeconds();
-                });
+                displayObjective("VT299-023 |Call show after setting all properties and outputFormat as dataURI|");
+                dispTestSteps("Wait for 10 sec for Signature box(NonFullScreen) to comeup and wait after drawing, check the image at returned URI");
+                dispExpectedResult("The signature area should be nonfullscreen area with border of specified size  left as 15, top as 60, width as 200 and height as 150 with penline width as 5(thickest than prev test), signature should be rendered in page as callback returns the dataURI, no path should retrun");
+                _result.waitToRunTest();
 
                 runs(function () {
-                    waitsFor(function () {
-                        return readFlag;
-                    }, 'wait for Tester to read', 10000);
+                    Rho.Signature.bgColor = '#00FF00';
+                    Rho.Signature.penColor = '#FF800000';
+                    Rho.Signature.penWidth = 5;
+                    Rho.Signature.left = 15;
+                    Rho.Signature.top = 60;
+                    Rho.Signature.height = 150;
+                    Rho.Signature.width = 200;
+                    Rho.Signature.outputFormat = 'dataUri';
+                    Rho.Signature.border = true;
+                    Rho.Signature.show();
 
-                    runs(function () {
-                        Rho.Signature.bgColor = '#00FF00';
-                        Rho.Signature.penColor = '#FF800000';
-                        Rho.Signature.penWidth = 5;
-                        Rho.Signature.left = 15;
-                        Rho.Signature.top = 60;
-                        Rho.Signature.height = 150;
-                        Rho.Signature.width = 200;
-                        Rho.Signature.outputFormat = 'dataUri';
-                        Rho.Signature.border = true;
-                        Rho.Signature.show();
-
-                        delayForFiveSeconds();
-                    });
-
-                    waitsFor(function () {
-                        return readFlag;
-                    }, 'wait to callback to fire or timeout', 6000);
+                    delayForFiveSeconds();
                 });
+                waitsFor(function () {
+                    return readFlag;
+                }, 'wait to callback to fire or timeout', 6000);
 
                 runs(function () {
                     Rho.Signature.capture(callbackDataUri);
                     Rho.Signature.hide();
-                    waitsFor(function () {
-                        return document.getElementById("actResult").innerHTML != "init";
-                    }, "Timed out waiting for tester to respond", 300000);
-                    runs(function () {
-                        expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-                    });
+                    _result.waitForResponse();
+                });
+            });
+
+            it("VT299-025 | Call setVectorCallback with function callback|", function () {
+
+                displayObjective("VT299-025 |Call setVectorCallback with function callback|");
+                dispTestSteps("Wait for 10 sec for Signature box(NonFullScreen) to comeup and draw a line, check for setVectorCallback to fire ");
+                dispExpectedResult("The signature area should be Nonfullscreen area and setVectorCallback callback will be fired after 'pen up' occurs in the signature box.");
+                _result.waitToRunTest();
+
+                runs(function () {
+                    Rho.Signature.bgColor = '#00FF00';
+                    Rho.Signature.penColor = '#FF800000';
+                    Rho.Signature.penWidth = 5;
+                    Rho.Signature.left = 15;
+                    Rho.Signature.top = 60;
+                    Rho.Signature.height = 150;
+                    Rho.Signature.width = 200;
+                    Rho.Signature.outputFormat = 'image';
+                    Rho.Signature.border = false;
+                    Rho.Signature.fileName = Rho.RhoFile.join(Rho.Application.databaseBlobFolder, 'VT299-025');
+                    Rho.Signature.compressionFormat = CONST_JPG;
+                    Rho.Signature.setVectorCallback(callbackVector);
+                    Rho.Signature.show();
+
+                    delayForFiveSeconds();
+                });
+                waitsFor(function () {
+                    return readFlag || sigCallbackFired || vectorCallbackFired;
+                }, 'wait to callback to fire or timeout', 6000);
+
+                runs(function () {
+                    Rho.Signature.hide();
+                    _result.waitForResponse();
                 });
             });
         }
 
+        it("VT299-037 | Call show and rotate the device|", function () {
+
+            displayObjective("VT299-037 |Call show and rotate the device|");
+            dispTestSteps("Wait for 10 sec for Signature box to comeup and rotate the device");
+            dispExpectedResult("The signature area should be visible after rotating the device");
+            _result.waitToRunTest();
+
+            runs(function () {
+                Rho.Signature.show();
+                delayForNineSeconds();
+            });
+
+            waitsFor(function () {
+                return readFlag;
+            }, 'wait to callback to fire or timeout', 10000);
+
+            runs(function () {
+                Rho.Signature.hide();
+                _result.waitForResponse();
+            });
+        });
+
+        it("VT299-038 | Call takeFullScreen and rotate the device portrait to landscape |", function () {
+
+            displayObjective("VT299-038 |Call takeFullScreen and rotate the device portrait to landscape|");
+            dispTestSteps("Wait for 10 sec for Fullscreen Signature box to comeup and rotate the device");
+            dispExpectedResult("Signature area with all buttons should be visible after rotation");
+            _result.waitToRunTest();
+
+            runs(function () {
+                Rho.Signature.fileName = Rho.RhoFile.join(Rho.Application.databaseBlobFolder, 'VT299-038');
+                Rho.Signature.takeFullScreen({}, callbackImage);
+                delayForNineSeconds();
+            });
+
+            waitsFor(function () {
+                return readFlag || sigCallbackFired;
+            }, 'wait to callback to fire or timeout', 10000);
+
+            runs(function () {
+                Rho.Signature.hide();
+                _result.waitForResponse();
+            });
+        });
  
     });
 });	

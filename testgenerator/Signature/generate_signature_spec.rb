@@ -18,7 +18,8 @@ $propertyValues =
 }
 
 def generate_js_signature_spec
-	apicontent = YAML.load_file('Signature\signature.yml')
+	yamlfilepath = Dir.tmpdir() + "/" + 'Signature/signature.yml'
+	apicontent = YAML.load_file(yamlfilepath)
 
 	#Get the object name
 	$objectName = "#{apicontent['API']['MODULE']['parent']}.#{apicontent['API']['MODULE']['name']}"
