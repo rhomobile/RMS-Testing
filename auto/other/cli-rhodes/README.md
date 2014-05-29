@@ -1,9 +1,7 @@
 RSPEC Auto Tests for cli-rhohub requirements
 ===========
 
-This will help to generate test in jasmine from xls/Google spreadsheet.
-
-= Prerequisite
+Prerequisite
 	It requires rspec gem to run the tests.
 
 	= How to install
