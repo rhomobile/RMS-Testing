@@ -123,9 +123,9 @@ def getDownloadedBuildPath(stdIO)
 	stdIO.each {|entry|
 
 		if shouldInclude.all?{ |word| entry.include? word }
-			pathContent = entry.split
-			filePath = pathContent[pathContent.length - 1]
-			if filePath.include? "/bin/MC3000c50b (ARMV4I)"
+			pathContent = entry.split('into')
+			filePath = pathContent[pathContent.length - 1].strip
+			if ((filePath.include? '/bin/MC3000c50b (ARMV4I)') || (filePath.include? ("/bin/wm")))
 			   extension = ".cab"
 			elsif filePath.include? "/bin/android"
 				extension = "_signed.apk"
