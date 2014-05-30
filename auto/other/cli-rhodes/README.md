@@ -7,6 +7,7 @@ Prerequisite
 	= How to install
 
 		$ gem install rspec
+		$ gem install rails --no-rdoc --no-ri
   
 	= How to use
 
