@@ -199,7 +199,7 @@ describe('Intent_UseCases Functionality Test', function () {
             };
             var params;
             if (isAndroidPlatform()) {
-                params = new parameters(Rho.Intent.BROADCAST,"","com.rhomobile.BROADCAST",["com.rhomobile.manual_common_spec"],"","","","",data);
+                params = new parameters(Rho.Intent.BROADCAST,"","com.rhomobile.BROADCAST",["com.rhomobile.ComplianceTest_JS"],"","","","",data);
             }
             if (isApplePlatform()) {
                 params = new parameters(Rho.Intent.BROADCAST,"","","","manualcommonspec","","","",data);
@@ -226,7 +226,7 @@ describe('Intent_UseCases Functionality Test', function () {
             };
             var params;
             if (isAndroidPlatform()) {
-                params = new parameters(Rho.Intent.BROADCAST,"","com.rhomobile.BROADCAST",["com.rhomobile.manual_common_spec"],"","","","",data);
+                params = new parameters(Rho.Intent.BROADCAST,"","com.rhomobile.BROADCAST",["com.rhomobile.ComplianceTest_JS"],"","","","",data);
             }
             if (isApplePlatform()) {
                 params = new parameters(Rho.Intent.BROADCAST,"","","","manualcommonspec","","","",data);

@@ -9,6 +9,10 @@ vendor: "rhomobile"
 build: "debug"
 bbver: "4.6"
 applog: "rholog.txt"
+rhohub:
+  url: "https://appstaging.rhohub.com/api/v1/"
+connection:
+  proxy: "http://wwwgate0.mot.com:1080"
 iphone:
   configuration: "Release"
   sdk: "iphonesimulator5.0"
@@ -29,16 +33,16 @@ wm:
     - openssl.so
     - openssl
     - ezcrypto
-    - rhoconnect-client    
+    - rhoconnect-client
 #mapping: yes
-  #sdk: "MC3000c50b (ARMV4I)"
+#sdk: "MC3000c50b (ARMV4I)"
   sdk: "Windows Mobile 6.5.3 Professional DTK (ARMV4I)"
 symbian:
   uid: "0xe01c7e9f"
 android:
   extensions:
     - barcode
-    #- rainbow
+#- rainbow
     - nfc
     - digest
     - digest-md5
@@ -49,14 +53,14 @@ android:
     - openssl.so
     - openssl
     - ezcrypto
-    #- rawsensors
+#- rawsensors
     - audiocapture
-    #- rhoconnect-client
+#- rhoconnect-client
   capabilities:
     - network_state
     - sdcard
     - calendar
-  version: 2.3.3
+  version: "4.2.2"
 extensions:
   - json
   - rhoxml
@@ -71,12 +75,3 @@ capabilities:
   - phone
   - bluetooth
   - calendar
-  #- non_motorola_device
-  #- native_browser
-  #- motorola_browser
-
-#paths:
-#  extensions:
-#  - ../../../../../Motorola-Extensions/build/ci/extensions
-#  - ../../../../../Motorola-Extensions/lib/commonAPI
-#  - ../../../../../rhoconnect-client/ext

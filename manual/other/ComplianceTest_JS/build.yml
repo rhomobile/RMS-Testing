@@ -1,33 +1,54 @@
----
-sdkversion: 4.0.0
-name: ComplianceTest_JS
-version: '1.0'
-vendor: rhomobile
-build: debug
-bbver: '6.0'
-applog: rholog.txt
-iphone:
-  configuration: Release
-  sdk: iphonesimulator6.0
-  provisionprofile: ''
-  codesignidentity: ''
-  entitlements: ''
-  BundleIdentifier: com.rhomobile.compliancetestjs
-  BundleURLScheme: compliancetestjs
-wp:
-  productid: 88e69430-071c-0131-3d46-606720a825c8
-symbian:
-  uid: '0xede7d59e'
-android:
-  version: 2.3.3
-extensions:
-- audiocapture
-- rhoconnect-client
-- mediaplayer
-- screenorientation
-- sensor
-- printing
-- printing_zebra
-app_type: rhoelements
+sdkversion: "3.5.0"
+name: "readSdcardCapab"
+#app_type: "rhoelements"
+version: "1.0"
+vendor: "rhomobile"
+build: "release"
+bbver: "4.6"
+applog: "rholog.txt"
 capabilities:
-  - gps
+  - read_sdcard
+rhohub:
+  url: "https://appstaging.rhohub.com/api/v1/"
+connection:
+  proxy: "http://wwwgate0.mot.com:1080"
+iphone:
+  configuration: "Release"
+  sdk: "iphonesimulator6.0"
+  provisionprofile: 
+  codesignidentity: 
+  entitlements: 
+  BundleIdentifier: "com.rhomobile.compliancetestjs"
+  BundleURLScheme: "compliancetestjs"
+wp:
+  productid: "88e69430-071c-0131-3d46-606720a825c8"
+symbian:
+  uid: "0xede7d59e"
+android:
+  version: "4.2.2"
+extensions:
+  - rhoconnect-client
+  - audiocapture
+  - signature
+  - barcode
+  - indicators
+  - cardreader
+  - mediaplayer
+  - screenorientation
+  - sensor
+  - printing
+  - printing_zebra
+wm:
+#sdk: "Windows Mobile 6.5.3 Professional DTK (ARMV4I)"
+ #sdk: "MC3000c50b (ARMV4I)"
+  extensions:
+    - rhoconnect-client
+    - audiocapture
+    - barcode
+    - indicators
+    - cardreader
+    - mediaplayer
+    - screenorientation
+    - sensor
+    - printing
+    - printing_zebra
