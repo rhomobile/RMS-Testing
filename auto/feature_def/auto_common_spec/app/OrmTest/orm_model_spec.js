@@ -14,7 +14,7 @@
     }
     return cleanVars;
   };
-describe("ORM JS API", function() {
+describe("ORM Model JS API", function() {
   describe("<model's object>", function() {
 
  function reset(){
