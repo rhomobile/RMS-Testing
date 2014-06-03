@@ -14,7 +14,7 @@
     }
     return cleanVars;
   };
-
+describe("ORM JS API", function() {
   describe("<model's object>", function() {
 
  function reset(){
@@ -1573,4 +1573,5 @@ it('VT302-0228 | finds first objects with one condition for e.g Model.find("firs
 
   });
 
+});
 });
