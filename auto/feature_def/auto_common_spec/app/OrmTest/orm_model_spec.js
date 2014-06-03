@@ -1051,7 +1051,7 @@ describe("<model's fixed_schema>", function() {
 //         })
 });
 
-describe("OrmModel(ST) Test Starts Here", function() {
+describe("(ST) Tests", function() {
 
   var db = null;
   var Model;
@@ -1096,8 +1096,9 @@ describe("OrmModel(ST) Test Starts Here", function() {
   var createFixedModel = function(defModel){
     fixedModel = Rho.ORM.addModel(defModel);
   };
-
-  describe("OrmModel(PropertyBag) Test Starts Here", function() {
+    /**************************/
+    /*   PropertyBag Tests    */
+    /**************************/
     beforeEach(function(){
         reset();
         createModel(defaultDefModelP);
@@ -1570,8 +1571,6 @@ it('VT302-0228 | finds first objects with one condition for e.g Model.find("firs
         var res = Model.find("first",{conditions:{"name":"Zoolo"}});
         expect(res).toEqual([]);
     });
-
-  });
 
 });
 });
