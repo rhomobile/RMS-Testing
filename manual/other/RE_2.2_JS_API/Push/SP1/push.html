@@ -1,0 +1,41 @@
+<META HTTP-Equiv="Push" Content="Port:8080">
+<META HTTP-Equiv="Push" Content="Path:/push">
+<META HTTP-Equiv="Push" Content="Response:/Response.html">
+<META HTTP-Equiv="Push-detected" Content="url('Javascript:onPush('%s','%s');')">
+<META HTTP-Equiv="Push" Content="Start">
+<META HTTP-Equiv="push" Content="unattended:enable">
+
+<script>
+
+var bNotify = false;
+    /******************************************************************************
+    *  This function is triggered when the device is pushed to by the client
+    *  pc.  It identifies the action to do based on the first querystring value.
+    * ***************************************************************************/
+    function onPush(func,message) {
+
+        if (func == 'locate') {
+		    
+            alert('Message from Server : '+message);
+			
+            bNotify = true;
+        }
+        else {
+            
+            bNotify = false;
+        }
+
+
+    }
+	
+	function running() {
+        if (bNotify) 
+        {
+             Generic.PlayWave('\\windows\\alarm5.wav', 1);
+        }
+        tmr = setTimeout('running()', 2000);
+
+    }
+    running();
+	
+</script>

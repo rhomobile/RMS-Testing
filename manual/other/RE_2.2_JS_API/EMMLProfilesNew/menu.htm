@@ -1,0 +1,31 @@
+<html>
+
+<META HTTP-Equiv="EMMLProfile" Content="name:test;import:url('file://\program files\pocketbrowser\html\buttons.emmp');">
+
+<script>
+
+   function doQuit()
+   {
+      var objGeneric = new ActiveXObject("PocketBrowser.Generic");
+      objGeneric.InvokeMETAFunction('application', 'quit');
+   }
+   
+   
+   function doApplyProfile(profile)
+   {
+      var objGeneric = new ActiveXObject("PocketBrowser.Generic");
+      objGeneric.InvokeMETAFunction('EMMLProfile', 'Apply:' + profile);
+   }
+</script>
+
+<body>
+
+    <a href="javascript:doApplyProfile('test.showbuttons');">Apply ShowButtons Profile</a>
+    <br>
+    <a href="javascript:doApplyProfile('test.hidebuttons');">Apply HideButtons Profile</a>
+  <br>
+    <a href="page2.htm">Page 2</a>
+<br><br><br>
+    <a href="javascript:doQuit();">Quit PB</a>
+</body>
+</html>

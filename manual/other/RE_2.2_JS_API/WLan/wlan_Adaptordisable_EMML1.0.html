@@ -1,0 +1,27 @@
+<HTML>
+<HEAD>
+<script type="text/javascript" src="src/asl.js"></script>
+<META HTTP-Equiv="wlan" Content="disableAdapter" />
+<META HTTP-Equiv="wlan" Content="adapterPowerStateEvent:url('javascript:OnadpaterJs('%s');')" />
+<META HTTP-Equiv="wlan" Content="getpowerstate" />
+
+
+
+<script>
+
+function OnadpaterJs(status) {
+        htmDiv.innerHTML = "wlan: " +status;
+	}
+
+   
+</script>
+ </HEAD>
+ <BODY>
+   <br /><br />
+      <!--<div id="htmDiv">event will fire here...</div>-->
+      <br /><br /><br /><br /><br />
+<p>JScript Event with Adapter disabled</p>
+<P><BR><INPUT TYPE="button" VALUE="EnableAdapter" ONCLICK="Generic.InvokeMETAFunction('wlan','enableAdapter')"></P> 
+</BODY>
+</HTML>
+

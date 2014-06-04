@@ -1,0 +1,97 @@
+<html>
+<head> <script type="text/javascript" src="src/asl.js"></script>
+    <title>PB wlan Test</title>
+<META HTTP-Equiv="MinimizeButton" Content="Visibility:Visible;left:50">
+
+<script language="javascript">
+
+
+    function enableadapter() {
+	generic.InvokeMETAFunction('wlan', 'enableAdapter');
+      //wlan.enableAdapter(); 
+    }
+
+    function disableadapter() {
+	generic.InvokeMETAFunction('wlan', 'disableAdapter');
+     //wlan.disableAdapter(); 
+    }
+
+    function getpowerstate() {
+	generic.InvokeMETAFunction('wlan', 'getAdapterPowerState');
+	//wlan.getAdapterPowerState(); 
+    }
+
+    
+    function eventURL() {
+      
+        //wlan.adapterPowerStateEvent = "url('http://192.168.6.18/PB3.x/NavigateTest.html')";
+     generic.InvokeMETAFunction("wlan", "adapterPowerStateEvent:url('http://192.168.6.18/Navigate.html?Resposnse=%s');"); 
+    }
+
+    function eventStatusJson() {
+       
+      //wlan.adapterPowerStateEvent = "OnadpaterJson(%json)";
+		//wlan.adapterPowerStateEvent = 'OnadpaterJson(%json)';
+		generic.InvokeMETAFunction("wlan", "adapterPowerStateEvent:url('javascript:OnadpaterJson(%json)')"); 
+       
+    }
+	
+	 function eventStatusJs() {
+	 generic.InvokeMETAFunction("wlan", "adapterPowerStateEvent:url('javascript:OnadpaterJs('%s')')"); 
+        //wlan.adapterPowerStateEvent = "OnadpaterJs('%s')";
+    }
+
+   
+      function OnadpaterJson(jsondata) {
+    message.innerHTML = "wlan: " +jsondata.status;
+	   
+		
+	}
+      function OnadpaterJs(status) {
+        message.innerHTML = "wlan: " +status;
+	}
+
+    
+
+    function eventASP() {
+       
+        
+        wlan.adapterPowerStateEvent = "url('http://192.168.6.18/pb3.x/indicators/signal.asp?Signalpercentage=%s&ESSID=%s&MacAdd=%s&Adapter=%s&DHCPServ=%s&Mode=%s&Gateway=%s&IPAddress=%s&RSSI=%s&Subnet=%s&Wins=%s')";
+    }
+
+</Script>
+
+</head>
+<body>
+
+
+<form id="frm" action="">
+<BR><BR>
+<div id="message">Message</div>
+<BR>
+
+<input type="button" onclick="enableadapter();" value="enable">
+<BR><BR><BR>
+
+<input type="button" onclick="disableadapter();" value="Disable">
+<BR><BR><BR>
+<input type="button" onclick="getpowerstate();" value="PowerState">
+
+<BR><BR><BR>
+
+
+
+<input type="button" id="EventASP" onclick="eventASP();" value="EventASP">
+
+<BR><BR><BR>
+
+<input type="button" id="EventStatusJson" onclick="eventStatusJson();" value="EventStatusJson">
+
+<BR><BR><BR>
+<input type="button" id="EventStatusJs" onclick="eventStatusJs();" value="EventStatusJs">
+<BR><BR><BR>
+<input type="button" id="EventURL" onclick="eventURL();" value="EventURL">
+
+</form>
+</body>
+</html>
