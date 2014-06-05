@@ -29,6 +29,23 @@ if (Rho.System.platform == Rho.System.PLATFORM_ANDROID ) {
           waitsFor( function() {return eventCount>=3;}, 30000, "Didn't receive all events." );
           runs(function() { expect(eventCount).toEqual(3); es.close(); } );
         });
+
+        it('Works correctly when received wrong mime-type', function() {
+          var es;
+          var url = "http://"+srvHost+":"+srvPort.toString()+"/time_stream_wrong_mime";
+          var haveError = false;
+
+          runs(function(){
+            es = new EventSource(url);
+            es.onerror = function(event) {
+              haveError = true;
+            }
+
+          });
+
+          waitsFor( function() {return haveError;}, 2000, "Didn't receive error." );
+          runs(function() { expect(haveError).toEqual(true); es.close(); } );
+        });
                       
     });
 	
