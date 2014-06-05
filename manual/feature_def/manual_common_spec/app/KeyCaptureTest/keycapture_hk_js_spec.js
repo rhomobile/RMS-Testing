@@ -173,7 +173,7 @@ describe("KeyCapture Test", function() {
 					setObjective("VT289-006 | set homeKeyValue to symbol key #");
 					setInstruction("press the symbol key # and check for application navigat");
 					setExpected("Application should navigate to Homepage of application after Pressing the alphabet key #");
-					Rho.KeyCapture.homeKeyValue = '0x10';
+					Rho.KeyCapture.homeKeyValue = '0x23';
 				});
 
 				runs(function()
