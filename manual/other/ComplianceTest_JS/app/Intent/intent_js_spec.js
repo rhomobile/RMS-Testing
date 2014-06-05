@@ -144,7 +144,7 @@ describe('Intent_UseCases Functionality Test', function () {
         dispExpectedResult('Message compose application should be launched with pre-filled recepient number.');
         _result.waitToRunTest();
         runs(function () {
-        	var params = new parameters("","","","","","","sms:9611896991","","");
+        	var params = new parameters(Rho.Intent.START_ACTIVITY,"","","","","","sms:9611896991","","");
             Rho.Intent.send(params);
             });
         _result.waitForResponse();

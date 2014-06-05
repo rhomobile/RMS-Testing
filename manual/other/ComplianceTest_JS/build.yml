@@ -1,13 +1,14 @@
 sdkversion: "3.5.0"
-name: "readSdcardCapab"
-#app_type: "rhoelements"
+name: "compliancetest_js"
+app_type: "rhoelements"
 version: "1.0"
 vendor: "rhomobile"
 build: "release"
 bbver: "4.6"
 applog: "rholog.txt"
-capabilities:
-  - read_sdcard
+#capabilities:
+#  - read_sdcard
+#  - write_sdcard
 rhohub:
   url: "https://appstaging.rhohub.com/api/v1/"
 connection:
