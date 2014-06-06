@@ -78,7 +78,7 @@ def intent_send
 			when '29'
 				params_constructor(Rho::Intent::START_ACTIVITY,"","ACTION_VIEW","","","","http://www.google.com","","")
 			when '30'
-				params_constructor("","","","","","","sms:9611896991","","")
+				params_constructor(Rho::Intent::START_ACTIVITY,"","","","","","sms:9611896991","","")
 			when '311'
 				params_constructor(Rho::Intent::START_ACTIVITY,"","","","","","mailto:abcd@domain.com","","")
 			when '312'
@@ -129,25 +129,25 @@ def intent_listen_send
 			case @params['par']
 			when '5'
 				data = { 'message' => 'Message to service' }
-				params_constructor(Rho::Intent::START_SERVICE,"","","","com.rhomobile.ComplianceTest_Ruby","com.rhomobile.rhodes.RhodesService","","",data)
+				params_constructor(Rho::Intent::START_SERVICE,"","","","com.rhomobile.compliancetest_ruby","com.rhomobile.rhodes.RhodesService","","",data)
 			when '11'
 				data = { 'reply' => 'This is my broadcast data!' }
 				params_constructor(Rho::Intent::BROADCAST,"","com.smap.targetapp.mySecondAction","","","","","",data)
 			when '391'
 				data = { 'myData' => 'This is broadcast data 3!' }
-				params_constructor(Rho::Intent::BROADCAST,"","com.rhomobile.BROADCAST",["com.rhomobile.ComplianceTest_Ruby"],"","","","",data)
+				params_constructor(Rho::Intent::BROADCAST,"","com.rhomobile.BROADCAST",["com.rhomobile.compliancetest_ruby"],"","","","",data)
 			when '392'
 				data = { 'myData' => 'This is broadcast data 3!' }
 				params_constructor(Rho::Intent::BROADCAST,"","","","manualcommonspec","","","",data)
 			when '393'
 				data = { 'myData' => 'This is broadcast data 3!' }
-				params_constructor(Rho::Intent::BROADCAST,"","","","rhomobile ComplianceTest_Ruby/ComplianceTest_Ruby.exe","","","",data)
+				params_constructor(Rho::Intent::BROADCAST,"","","","rhomobile compliancetest_ruby/compliancetest_ruby.exe","","","",data)
 			when '461'
 				data = { 'myData' => 'This is broadcast data!'}
-				params_constructor(Rho::Intent::BROADCAST,"","com.rhomobile.BROADCAST","","com.rhomobile.ComplianceTest_Ruby","","","",data)
+				params_constructor(Rho::Intent::BROADCAST,"","com.rhomobile.BROADCAST","","com.rhomobile.compliancetest_ruby","","","",data)
 			when '462'
 				data = { 'myData' => 'This is broadcast data!'}
-				params_constructor(Rho::Intent::BROADCAST,"","com.rhomobile.BROADCAST","","rhomobile ComplianceTest_Ruby/ComplianceTest_Ruby.exe","","","",data)
+				params_constructor(Rho::Intent::BROADCAST,"","com.rhomobile.BROADCAST","","rhomobile compliancetest_ruby/compliancetest_ruby.exe","","","",data)
 			else
 
 			end
@@ -185,11 +185,11 @@ def intent_listen_stop
 		if @params['par']
 			case @params['par']
 			when '411'
-				params_constructor(Rho::Intent::BROADCAST,"","com.rhomobile.BROADCAST",["com.rhomobile.ComplianceTest_Ruby"],"","","","",data)
+				params_constructor(Rho::Intent::BROADCAST,"","com.rhomobile.BROADCAST",["com.rhomobile.compliancetest_ruby"],"","","","",data)
 			when '412'
-				params_constructor(Rho::Intent::BROADCAST,"","","","ComplianceTest_Ruby","","","",data)					
+				params_constructor(Rho::Intent::BROADCAST,"","","","compliancetest_ruby","","","",data)					
 			when '413'
-				params_constructor(Rho::Intent::BROADCAST,"","","","rhomobile ComplianceTest_Ruby/ComplianceTest_Ruby.exe","","","",data)
+				params_constructor(Rho::Intent::BROADCAST,"","","","rhomobile compliancetest_ruby/compliancetest_ruby.exe","","","",data)
 			else
 			end
 		end

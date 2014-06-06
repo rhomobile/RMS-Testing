@@ -360,21 +360,21 @@ end
 
 $local_server.mount_proc( '/time_stream2' ) do |req, res|
   res.content_type = 'text/event-stream'
-  #res.chunked = true
-  
-  
-  #res.body = proc { |w|
     sleep 1
 
-    res.body = #'data: {"msg": "First message"}' + "\x0D\x0A" +
-    'event: userlogon' + "\x0D\x0A" +
-    'data: {"username": "John123"}'+ "\x0D\x0A"+"\x0D\x0A";
-#    'event: update' + "\x0D\x0A" +
-#    'data: {"username": "John123", "emotion": "happy"}' + "\x0D\x0A"
-  #}
-  
+    res.body =
+      'event: userlogon' + "\x0D\x0A" +
+      'data: {"username": "John123"}'+ "\x0D\x0A"+"\x0D\x0A";
 end
 
+$local_server.mount_proc( '/time_stream_wrong_mime' ) do |req, res|
+  res.content_type = 'text/html'
+    sleep 1
+
+    res.body =
+      'event: userlogon' + "\x0D\x0A" +
+      'data: {"username": "John123"}'+ "\x0D\x0A"+"\x0D\x0A";
+end
 
 #Secure server mount points
 $secure_server.mount_proc '/test_methods' do |req,res|

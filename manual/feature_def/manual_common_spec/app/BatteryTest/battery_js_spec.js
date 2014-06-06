@@ -465,7 +465,7 @@ if(!isAndroidPlatform() && isAnyButApplePlatform())
 		runs(function () {
 				dispTestCaseRunning("smart Battery status with  ANONYMOUS callback");
 				dispExpectedResult("smart Battery event should be fired with all the return parameters");
-				Rho.Battery.smartBatteryStatusCallback(function (args){
+				Rho.Battery.smartBatteryStatus(function (args){
 						var result = '';
 						result += '<br/>serialNumber: ' + JSON.stringify(args["serialNumber"]);
 						result += '<br/>partNumber: ' + JSON.stringify(args["partNumber"]);
