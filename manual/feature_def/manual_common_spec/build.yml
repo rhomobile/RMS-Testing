@@ -45,7 +45,7 @@ android:
   manifest_template: AndroidManifest.erb
 #security_token: "123"
 wm:
-  webkit_outprocess: 0	
+  webkit_outprocess: 1
   ajax_api_bridge: false
   sdk: "Windows Mobile 6.5.3 Professional DTK (ARMV4I)"
   extensions:
