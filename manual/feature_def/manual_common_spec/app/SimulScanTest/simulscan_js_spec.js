@@ -1,7 +1,7 @@
-describe('DPX Functionality Test', function() {
+describe('SimulScan Functionality Test', function() {
 
     var logPostTemplate = 'file:///sdcard/templates/Logistics%20Post.xml';
-    logPostTemplate = 'file://' + encodeURI('/storage/sdcard1/dpx/templates/Logistics Post.xml');
+    logPostTemplate = 'file://' + encodeURI('/storage/sdcard1/simulscan/templates/Logistics Post.xml');
 
     var pprint = function(value) {
         var list = [];
@@ -52,11 +52,11 @@ describe('DPX Functionality Test', function() {
 
         runs(function() {
             displayResult('Output: ', '-');
-            Rho.DPX.captureDocument(function(dict) {
+            Rho.SimulScan.captureDocument(function(dict) {
                 if (dict['callbackType'] === callbackType) {
                     callback(dict);
                 }
-                if (dict['callbackType'] === Rho.DPX.STOP) {
+                if (dict['callbackType'] === Rho.SimulScan.STOP) {
                     stopped = true;
                 }
             });
@@ -73,7 +73,7 @@ describe('DPX Functionality Test', function() {
     beforeEach(function() {
         getformCaptureImageId = null;
         getregionImageId = null;
-        Rho.DPX.close();
+        Rho.SimulScan.close();
     });
 
     it('Document capture with barcode, omr, ocr, picture.', function() {
@@ -82,23 +82,23 @@ describe('DPX Functionality Test', function() {
 
         _result.waitToRunAutoTest();
 
-        Rho.DPX.template = logPostTemplate;
-        Rho.DPX.uiResultConfirmation = false;
-        Rho.DPX.audioFeedback = false;
+        Rho.SimulScan.template = logPostTemplate;
+        Rho.SimulScan.uiResultConfirmation = false;
+        Rho.SimulScan.audioFeedback = false;
 
         var regions;
 
-        runsCaptureDocument(Rho.DPX.SUCCESS, function(dict) {
+        runsCaptureDocument(Rho.SimulScan.SUCCESS, function(dict) {
             regions = dict['processedForm']['regions'];
         });
 
         runs(function() {
             _result.passed();
 
-            expect(regions[0]['processingMode']).toEqual(Rho.DPX.PM_BARCODE);
-            expect(regions[1]['processingMode']).toEqual(Rho.DPX.PM_OMR);
-            expect(regions[2]['processingMode']).toEqual(Rho.DPX.PM_OCR);
-            expect(regions[5]['processingMode']).toEqual(Rho.DPX.PM_PICTURE);
+            expect(regions[0]['processingMode']).toEqual(Rho.SimulScan.PM_BARCODE);
+            expect(regions[1]['processingMode']).toEqual(Rho.SimulScan.PM_OMR);
+            expect(regions[2]['processingMode']).toEqual(Rho.SimulScan.PM_OCR);
+            expect(regions[5]['processingMode']).toEqual(Rho.SimulScan.PM_PICTURE);
         });
 
         _result.waitForResponse();
@@ -110,13 +110,13 @@ describe('DPX Functionality Test', function() {
 
         _result.waitToRunTest();
 
-        Rho.DPX.template = logPostTemplate;
-        Rho.DPX.audioFeedback = false;
-        Rho.DPX.uiResultConfirmation = false;
+        Rho.SimulScan.template = logPostTemplate;
+        Rho.SimulScan.audioFeedback = false;
+        Rho.SimulScan.uiResultConfirmation = false;
 
-        Rho.DPX.autoImageCapture = false;
+        Rho.SimulScan.autoImageCapture = false;
 
-        runsCaptureDocument(Rho.DPX.SUCCESS, function(dict) {
+        runsCaptureDocument(Rho.SimulScan.SUCCESS, function(dict) {
             displayResult('Output: ', 'callbackType is ' + dict['callbackType']);
         });
 
@@ -129,13 +129,13 @@ describe('DPX Functionality Test', function() {
 
         _result.waitToRunTest();
 
-        Rho.DPX.template = logPostTemplate;
-        Rho.DPX.audioFeedback = false;
-        Rho.DPX.uiResultConfirmation = false;
+        Rho.SimulScan.template = logPostTemplate;
+        Rho.SimulScan.audioFeedback = false;
+        Rho.SimulScan.uiResultConfirmation = false;
 
-        Rho.DPX.autoImageCapture = true;
+        Rho.SimulScan.autoImageCapture = true;
 
-        runsCaptureDocument(Rho.DPX.SUCCESS, function(dict) {
+        runsCaptureDocument(Rho.SimulScan.SUCCESS, function(dict) {
             displayResult('Output: ', 'callbackType is ' + dict['callbackType']);
         });
 
@@ -148,14 +148,14 @@ describe('DPX Functionality Test', function() {
 
         _result.waitToRunTest();
 
-        Rho.DPX.template = logPostTemplate;
-        Rho.DPX.uiResultConfirmation = false;
+        Rho.SimulScan.template = logPostTemplate;
+        Rho.SimulScan.uiResultConfirmation = false;
 
-        Rho.DPX.audioFeedback = true;
-        Rho.DPX.hapticFeedback = false;
-        Rho.DPX.ledFeedback = false;
+        Rho.SimulScan.audioFeedback = true;
+        Rho.SimulScan.hapticFeedback = false;
+        Rho.SimulScan.ledFeedback = false;
 
-        runsCaptureDocument(Rho.DPX.SUCCESS, function(dict) {
+        runsCaptureDocument(Rho.SimulScan.SUCCESS, function(dict) {
             displayResult('Output: ', 'callbackType is ' + dict['callbackType']);
         });
 
@@ -168,14 +168,14 @@ describe('DPX Functionality Test', function() {
 
         _result.waitToRunTest();
 
-        Rho.DPX.template = logPostTemplate;
-        Rho.DPX.uiResultConfirmation = false;
+        Rho.SimulScan.template = logPostTemplate;
+        Rho.SimulScan.uiResultConfirmation = false;
 
-        Rho.DPX.audioFeedback = false;
-        Rho.DPX.hapticFeedback = true;
-        Rho.DPX.ledFeedback = false;
+        Rho.SimulScan.audioFeedback = false;
+        Rho.SimulScan.hapticFeedback = true;
+        Rho.SimulScan.ledFeedback = false;
 
-        runsCaptureDocument(Rho.DPX.SUCCESS, function(dict) {
+        runsCaptureDocument(Rho.SimulScan.SUCCESS, function(dict) {
             displayResult('Output: ', 'callbackType is ' + dict['callbackType']);
         });
 
@@ -188,14 +188,14 @@ describe('DPX Functionality Test', function() {
 
         _result.waitToRunTest();
 
-        Rho.DPX.template = logPostTemplate;
-        Rho.DPX.uiResultConfirmation = false;
+        Rho.SimulScan.template = logPostTemplate;
+        Rho.SimulScan.uiResultConfirmation = false;
 
-        Rho.DPX.audioFeedback = false;
-        Rho.DPX.hapticFeedback = false;
-        Rho.DPX.ledFeedback = true;
+        Rho.SimulScan.audioFeedback = false;
+        Rho.SimulScan.hapticFeedback = false;
+        Rho.SimulScan.ledFeedback = true;
 
-        runsCaptureDocument(Rho.DPX.SUCCESS, function(dict) {
+        runsCaptureDocument(Rho.SimulScan.SUCCESS, function(dict) {
             displayResult('Output: ', 'callbackType is ' + dict['callbackType']);
         });
 
@@ -208,13 +208,13 @@ describe('DPX Functionality Test', function() {
 
         _result.waitToRunTest();
 
-        Rho.DPX.template = logPostTemplate;
-        Rho.DPX.uiResultConfirmation = false;
-        Rho.DPX.audioFeedback = false;
+        Rho.SimulScan.template = logPostTemplate;
+        Rho.SimulScan.uiResultConfirmation = false;
+        Rho.SimulScan.audioFeedback = false;
 
-        Rho.DPX.flashMode = Rho.DPX.FLASH_ON;
+        Rho.SimulScan.flashMode = Rho.SimulScan.FLASH_ON;
 
-        runsCaptureDocument(Rho.DPX.SUCCESS, function(dict) {
+        runsCaptureDocument(Rho.SimulScan.SUCCESS, function(dict) {
             displayResult('Output: ', 'callbackType is ' + dict['callbackType']);
         });
 
@@ -227,13 +227,13 @@ describe('DPX Functionality Test', function() {
 
         _result.waitToRunTest();
 
-        Rho.DPX.template = logPostTemplate;
-        Rho.DPX.uiResultConfirmation = false;
-        Rho.DPX.audioFeedback = false;
+        Rho.SimulScan.template = logPostTemplate;
+        Rho.SimulScan.uiResultConfirmation = false;
+        Rho.SimulScan.audioFeedback = false;
 
-        Rho.DPX.flashMode = Rho.DPX.FLASH_OFF;
+        Rho.SimulScan.flashMode = Rho.SimulScan.FLASH_OFF;
 
-        runsCaptureDocument(Rho.DPX.SUCCESS, function(dict) {
+        runsCaptureDocument(Rho.SimulScan.SUCCESS, function(dict) {
             displayResult('Output: ', 'callbackType is ' + dict['callbackType']);
         });
 
@@ -246,13 +246,13 @@ describe('DPX Functionality Test', function() {
 
         _result.waitToRunTest();
 
-        Rho.DPX.template = logPostTemplate;
-        Rho.DPX.uiResultConfirmation = false;
-        Rho.DPX.audioFeedback = false;
+        Rho.SimulScan.template = logPostTemplate;
+        Rho.SimulScan.uiResultConfirmation = false;
+        Rho.SimulScan.audioFeedback = false;
 
-        Rho.DPX.flashMode = Rho.DPX.FLASH_DISABLED;
+        Rho.SimulScan.flashMode = Rho.SimulScan.FLASH_DISABLED;
 
-        runsCaptureDocument(Rho.DPX.SUCCESS, function(dict) {
+        runsCaptureDocument(Rho.SimulScan.SUCCESS, function(dict) {
             displayResult('Output: ', 'callbackType is ' + dict['callbackType']);
         });
 
@@ -265,14 +265,14 @@ describe('DPX Functionality Test', function() {
 
         _result.waitToRunTest();
 
-        Rho.DPX.template = logPostTemplate;
-        Rho.DPX.uiResultConfirmation = false;
-        Rho.DPX.audioFeedback = false;
-        Rho.DPX.autoImageCapture = false;
+        Rho.SimulScan.template = logPostTemplate;
+        Rho.SimulScan.uiResultConfirmation = false;
+        Rho.SimulScan.audioFeedback = false;
+        Rho.SimulScan.autoImageCapture = false;
 
-        Rho.DPX.processingTimeout = 1000;
+        Rho.SimulScan.processingTimeout = 1000;
 
-        runsCaptureDocument(Rho.DPX.FAILURE, function(dict) {
+        runsCaptureDocument(Rho.SimulScan.FAILURE, function(dict) {
             displayResult('Output: ', 'failureReason is ' + dict['failureReason']);
         });
 
@@ -285,14 +285,14 @@ describe('DPX Functionality Test', function() {
 
         _result.waitToRunTest();
 
-        Rho.DPX.template = logPostTemplate;
-        Rho.DPX.uiResultConfirmation = false;
-        Rho.DPX.audioFeedback = false;
-        Rho.DPX.autoImageCapture = false;
+        Rho.SimulScan.template = logPostTemplate;
+        Rho.SimulScan.uiResultConfirmation = false;
+        Rho.SimulScan.audioFeedback = false;
+        Rho.SimulScan.autoImageCapture = false;
 
-        Rho.DPX.processingTimeout = 5000;
+        Rho.SimulScan.processingTimeout = 5000;
 
-        runsCaptureDocument(Rho.DPX.FAILURE, function(dict) {
+        runsCaptureDocument(Rho.SimulScan.FAILURE, function(dict) {
             displayResult('Output: ', 'failureReason is ' + dict['failureReason']);
         });
 
@@ -305,18 +305,18 @@ describe('DPX Functionality Test', function() {
 
         _result.waitToRunTest();
 
-        Rho.DPX.template = logPostTemplate;
-        Rho.DPX.uiResultConfirmation = false;
-        Rho.DPX.audioFeedback = false;
+        Rho.SimulScan.template = logPostTemplate;
+        Rho.SimulScan.uiResultConfirmation = false;
+        Rho.SimulScan.audioFeedback = false;
 
-        Rho.DPX.identificationTimeout = 5000;
+        Rho.SimulScan.identificationTimeout = 5000;
 
         var start;
         runs(function() {
             start = new Date().getTime();
         });
 
-        runsCaptureDocument(Rho.DPX.FAILURE, function(dict) {
+        runsCaptureDocument(Rho.SimulScan.FAILURE, function(dict) {
             var finish = new Date().getTime();
             displayResult('Output: ', 'identificationTimeout is ' + (finish - start) / 1000);
         });
@@ -330,18 +330,18 @@ describe('DPX Functionality Test', function() {
 
         _result.waitToRunTest();
 
-        Rho.DPX.template = logPostTemplate;
-        Rho.DPX.uiResultConfirmation = false;
-        Rho.DPX.audioFeedback = false;
+        Rho.SimulScan.template = logPostTemplate;
+        Rho.SimulScan.uiResultConfirmation = false;
+        Rho.SimulScan.audioFeedback = false;
 
-        Rho.DPX.identificationTimeout = 10000;
+        Rho.SimulScan.identificationTimeout = 10000;
 
         var start;
         runs(function() {
             start = new Date().getTime();
         });
 
-        runsCaptureDocument(Rho.DPX.FAILURE, function(dict) {
+        runsCaptureDocument(Rho.SimulScan.FAILURE, function(dict) {
             var finish = new Date().getTime();
             displayResult('Output: ', 'identificationTimeout is ' + (finish - start) / 1000);
         });
@@ -351,18 +351,18 @@ describe('DPX Functionality Test', function() {
 
     it('Debug mode.', function() {
         dispTestCaseRunning('Scan Delivery Attempt Notification');
-        dispExpectedResult('callbackType should be success.\nThere is new subdirectory in /sdcard/RhoDPXLog directory.');
+        dispExpectedResult('callbackType should be success.\nThere is new subdirectory in /sdcard/RhoSimulScanLog directory.');
 
         _result.waitToRunTest();
 
-        Rho.DPX.template = logPostTemplate;
-        Rho.DPX.uiResultConfirmation = false;
-        Rho.DPX.audioFeedback = false;
+        Rho.SimulScan.template = logPostTemplate;
+        Rho.SimulScan.uiResultConfirmation = false;
+        Rho.SimulScan.audioFeedback = false;
 
-        Rho.DPX.debug = true;
-        Rho.DPX.logDirectory = '/sdcard/RhoDPXLog';
+        Rho.SimulScan.debug = true;
+        Rho.SimulScan.logDirectory = '/sdcard/RhoSimulScanLog';
 
-        runsCaptureDocument(Rho.DPX.SUCCESS, function(dict) {
+        runsCaptureDocument(Rho.SimulScan.SUCCESS, function(dict) {
             displayResult('Output: ', 'callbackType is ' + dict['callbackType']);
         });
 
@@ -375,12 +375,12 @@ describe('DPX Functionality Test', function() {
 
         _result.waitToRunTest();
 
-        Rho.DPX.template = logPostTemplate;
-        Rho.DPX.audioFeedback = false;
+        Rho.SimulScan.template = logPostTemplate;
+        Rho.SimulScan.audioFeedback = false;
 
-        Rho.DPX.uiResultConfirmation = true;
+        Rho.SimulScan.uiResultConfirmation = true;
 
-        runsCaptureDocument(Rho.DPX.SUCCESS, function(dict) {
+        runsCaptureDocument(Rho.SimulScan.SUCCESS, function(dict) {
             displayResult('Output: ', 'callbackType is ' + dict['callbackType']);
         });
 
@@ -395,7 +395,7 @@ describe('DPX Functionality Test', function() {
             list.appendChild(item);
 
             var img = document.createElement('img');
-            img.setAttribute('src', Rho.DPX.getDataUri(image['id']));
+            img.setAttribute('src', Rho.SimulScan.getDataUri(image['id']));
             item.appendChild(img);
         };
 
@@ -404,11 +404,11 @@ describe('DPX Functionality Test', function() {
 
         _result.waitToRunTest();
 
-        Rho.DPX.template = logPostTemplate;
-        Rho.DPX.uiResultConfirmation = false;
-        Rho.DPX.audioFeedback = false;
+        Rho.SimulScan.template = logPostTemplate;
+        Rho.SimulScan.uiResultConfirmation = false;
+        Rho.SimulScan.audioFeedback = false;
 
-        runsCaptureDocument(Rho.DPX.SUCCESS, function(dict) {
+        runsCaptureDocument(Rho.SimulScan.SUCCESS, function(dict) {
             $('#myList').empty();
             var list = document.getElementById('myList');
 
@@ -430,9 +430,9 @@ describe('DPX Functionality Test', function() {
         //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
         _result.waitToRunTest();
         runs(function() {
-                Rho.DPX.inputSource = Rho.DPX.SOURCE_CAMERA;
-                Rho.DPX.template = Rho.RhoFile.join(Rho.Application.AppBundleFolder, 'picture.xml');
-                Rho.DPX.captureDocument(captureCallback);
+                Rho.SimulScan.inputSource = Rho.SimulScan.SOURCE_CAMERA;
+                Rho.SimulScan.template = Rho.RhoFile.join(Rho.Application.AppBundleFolder, 'picture.xml');
+                Rho.SimulScan.captureDocument(captureCallback);
         });
         //Add more waitsfor or run blocks if required.
         //Common Method implemented to wait for tester to make it pass or fail.Code available in specHelper.js
@@ -446,10 +446,10 @@ describe('DPX Functionality Test', function() {
         //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
         _result.waitToRunTest();
         runs(function() {
-                Rho.DPX.inputSource = Rho.DPX.SOURCE_CAMERA;
-                Rho.DPX.audioFeedback = 'invalid';
-                Rho.DPX.template = Rho.RhoFile.join(Rho.Application.AppBundleFolder, 'picture.xml');
-                Rho.DPX.captureDocument(captureCallback);
+                Rho.SimulScan.inputSource = Rho.SimulScan.SOURCE_CAMERA;
+                Rho.SimulScan.audioFeedback = 'invalid';
+                Rho.SimulScan.template = Rho.RhoFile.join(Rho.Application.AppBundleFolder, 'picture.xml');
+                Rho.SimulScan.captureDocument(captureCallback);
         });
         //Add more waitsfor or run blocks if required.
         //Common Method implemented to wait for tester to make it pass or fail.Code available in specHelper.js
@@ -462,10 +462,10 @@ describe('DPX Functionality Test', function() {
         //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
         _result.waitToRunTest();
         runs(function() {
-                Rho.DPX.inputSource = Rho.DPX.SOURCE_CAMERA;
-                Rho.DPX.hapticFeedback = 'invalid';
-                Rho.DPX.template = Rho.RhoFile.join(Rho.Application.AppBundleFolder, 'picture.xml');
-                Rho.DPX.captureDocument(captureCallback);
+                Rho.SimulScan.inputSource = Rho.SimulScan.SOURCE_CAMERA;
+                Rho.SimulScan.hapticFeedback = 'invalid';
+                Rho.SimulScan.template = Rho.RhoFile.join(Rho.Application.AppBundleFolder, 'picture.xml');
+                Rho.SimulScan.captureDocument(captureCallback);
         });
         //Add more waitsfor or run blocks if required.
         //Common Method implemented to wait for tester to make it pass or fail.Code available in specHelper.js
@@ -478,10 +478,10 @@ describe('DPX Functionality Test', function() {
         //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
         _result.waitToRunTest();
         runs(function() {
-                Rho.DPX.inputSource = Rho.DPX.SOURCE_CAMERA;
-                Rho.DPX.ledFeedback = 'invalid';
-                Rho.DPX.template = Rho.RhoFile.join(Rho.Application.AppBundleFolder, 'picture.xml');
-                Rho.DPX.captureDocument(captureCallback);
+                Rho.SimulScan.inputSource = Rho.SimulScan.SOURCE_CAMERA;
+                Rho.SimulScan.ledFeedback = 'invalid';
+                Rho.SimulScan.template = Rho.RhoFile.join(Rho.Application.AppBundleFolder, 'picture.xml');
+                Rho.SimulScan.captureDocument(captureCallback);
         });
         //Add more waitsfor or run blocks if required.
         //Common Method implemented to wait for tester to make it pass or fail.Code available in specHelper.js
@@ -495,10 +495,10 @@ describe('DPX Functionality Test', function() {
         //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
         _result.waitToRunTest();
         runs(function() {
-                Rho.DPX.inputSource = Rho.DPX.SOURCE_CAMERA;
-                Rho.DPX.identificationTimeout = -10000;
-                Rho.DPX.template = Rho.RhoFile.join(Rho.Application.AppBundleFolder, 'picture.xml');
-                Rho.DPX.captureDocument(captureCallback);
+                Rho.SimulScan.inputSource = Rho.SimulScan.SOURCE_CAMERA;
+                Rho.SimulScan.identificationTimeout = -10000;
+                Rho.SimulScan.template = Rho.RhoFile.join(Rho.Application.AppBundleFolder, 'picture.xml');
+                Rho.SimulScan.captureDocument(captureCallback);
         });
         //Add more waitsfor or run blocks if required.
         //Common Method implemented to wait for tester to make it pass or fail.Code available in specHelper.js
@@ -511,28 +511,28 @@ describe('DPX Functionality Test', function() {
         //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
         _result.waitToRunTest();
         runs(function() {
-                Rho.DPX.template = Rho.RhoFile.join(Rho.Application.AppBundleFolder, 'picture.xml');
-                Rho.DPX.inputSource = 'invalid';
-                Rho.DPX.fileInteractiveMode = 'true';
-                Rho.DPX.inputSourceFilename = Rho.RhoFile.join(Rho.Application.AppBundleFolder, 'image.jpg');
-                Rho.DPX.captureDocument(captureCallback);
+                Rho.SimulScan.template = Rho.RhoFile.join(Rho.Application.AppBundleFolder, 'picture.xml');
+                Rho.SimulScan.inputSource = 'invalid';
+                Rho.SimulScan.fileInteractiveMode = 'true';
+                Rho.SimulScan.inputSourceFilename = Rho.RhoFile.join(Rho.Application.AppBundleFolder, 'image.jpg');
+                Rho.SimulScan.captureDocument(captureCallback);
         });
         //Add more waitsfor or run blocks if required.
         //Common Method implemented to wait for tester to make it pass or fail.Code available in specHelper.js
         _result.waitForResponse();
     });
 
-    it('Objective:\nDocument capture set debug property  to invalid value and logDirectory  property set to /sdcard/Application/DPXLog\n\n', function() {
-        dispTestCaseRunning('1. Set template property to path of template.xml has region of  picture\n/sdcard/Application/template.xml\n2.Set debug to invalid\n3.Set logDirectory to /sdcard/Application/DPXLog\n4.Set inputSource to camera\n5. Call captureDocument method Capture a document by taking a photo using camera\n');
+    it('Objective:\nDocument capture set debug property  to invalid value and logDirectory  property set to /sdcard/Application/SimulScanLog\n\n', function() {
+        dispTestCaseRunning('1. Set template property to path of template.xml has region of  picture\n/sdcard/Application/template.xml\n2.Set debug to invalid\n3.Set logDirectory to /sdcard/Application/SimulScanLog\n4.Set inputSource to camera\n5. Call captureDocument method Capture a document by taking a photo using camera\n');
         dispExpectedResult('captured document should get processed successfully and callback fired once for each field defined in the template \n\nbut It should not create the logdirectory at specified path because debug property default value is set to invalid');
         //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
         _result.waitToRunTest();
         runs(function() {
-                Rho.DPX.template = Rho.RhoFile.join(Rho.Application.AppBundleFolder, 'picture.xml');
-                Rho.DPX.debug = 'invalid';
-                Rho.DPX.logDirectory = '/sdcard/Application/DPXLog';
-                Rho.DPX.inputSource = Rho.DPX.SOURCE_CAMERA;
-                Rho.DPX.captureDocument(captureCallback);
+                Rho.SimulScan.template = Rho.RhoFile.join(Rho.Application.AppBundleFolder, 'picture.xml');
+                Rho.SimulScan.debug = 'invalid';
+                Rho.SimulScan.logDirectory = '/sdcard/Application/SimulScanLog';
+                Rho.SimulScan.inputSource = Rho.SimulScan.SOURCE_CAMERA;
+                Rho.SimulScan.captureDocument(captureCallback);
         });
         //Add more waitsfor or run blocks if required.
         //Common Method implemented to wait for tester to make it pass or fail.Code available in specHelper.js
@@ -540,16 +540,16 @@ describe('DPX Functionality Test', function() {
     });
 
     it('Objective:\nDocument capture set debug property  to true  and logDirectory  property set to invalid path\n', function() {
-        dispTestCaseRunning('1. Set template property to path of template.xml has region of  picture\n/sdcard/Application/template.xml\n2.Set debug to true\n3.Set logDirectory to /Application/sdcard/DPXLog\n4.Set inputSource to camera\n5. Call captureDocument method Capture a document by taking a photo using camera\n');
+        dispTestCaseRunning('1. Set template property to path of template.xml has region of  picture\n/sdcard/Application/template.xml\n2.Set debug to true\n3.Set logDirectory to /Application/sdcard/SimulScanLog\n4.Set inputSource to camera\n5. Call captureDocument method Capture a document by taking a photo using camera\n');
         dispExpectedResult('captured document should get processed successfully and callback fired once for each field defined in the template \n\nand It should not create the logdirectory because specified path is invalid');
         //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
         _result.waitToRunTest();
         runs(function() {
-                Rho.DPX.template = Rho.RhoFile.join(Rho.Application.AppBundleFolder, 'picture.xml');
-                Rho.DPX.debug = true;
-                Rho.DPX.logDirectory = '/Application/sdcard/DPXLog';
-                Rho.DPX.inputSource = Rho.DPX.SOURCE_CAMERA;
-                Rho.DPX.captureDocument(captureCallback);
+                Rho.SimulScan.template = Rho.RhoFile.join(Rho.Application.AppBundleFolder, 'picture.xml');
+                Rho.SimulScan.debug = true;
+                Rho.SimulScan.logDirectory = '/Application/sdcard/SimulScanLog';
+                Rho.SimulScan.inputSource = Rho.SimulScan.SOURCE_CAMERA;
+                Rho.SimulScan.captureDocument(captureCallback);
         });
         //Add more waitsfor or run blocks if required.
         //Common Method implemented to wait for tester to make it pass or fail.Code available in specHelper.js
@@ -562,10 +562,10 @@ describe('DPX Functionality Test', function() {
         //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
         _result.waitToRunTest();
         runs(function() {
-                Rho.DPX.template = Rho.RhoFile.join(Rho.Application.AppBundleFolder, 'picture.xml');
-                Rho.DPX.processingTimeout = -10000;
-                Rho.DPX.inputSource = Rho.DPX.SOURCE_CAMERA;
-                Rho.DPX.captureDocument(captureCallback);
+                Rho.SimulScan.template = Rho.RhoFile.join(Rho.Application.AppBundleFolder, 'picture.xml');
+                Rho.SimulScan.processingTimeout = -10000;
+                Rho.SimulScan.inputSource = Rho.SimulScan.SOURCE_CAMERA;
+                Rho.SimulScan.captureDocument(captureCallback);
         });
         //Add more waitsfor or run blocks if required.
         //Common Method implemented to wait for tester to make it pass or fail.Code available in specHelper.js
@@ -574,14 +574,14 @@ describe('DPX Functionality Test', function() {
 
     it('Objective:\nDocument capture set uiResultConfirmation property set to invalid\n', function() {
         dispTestCaseRunning('1. Set template property to path of template.xml has region of  picture\n/sdcard/Application/template.xml\n2. Set uiResultConfirmation to invalid\n3. Set inputSource to camera\n4. Call captureDocument method Capture a document by taking a photo using camera\n');
-        dispExpectedResult('It should shows a UI confirmation with results in DPXView before sending results back to application \n\nafter captured document successfully processed and callback fired once for each field defined in the template ');
+        dispExpectedResult('It should shows a UI confirmation with results in SimulScanView before sending results back to application \n\nafter captured document successfully processed and callback fired once for each field defined in the template ');
         //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
         _result.waitToRunTest();
         runs(function() {
-                Rho.DPX.template = Rho.RhoFile.join(Rho.Application.AppBundleFolder, 'picture.xml');
-                Rho.DPX.uiResultConfirmation = 'invalid';
-                Rho.DPX.inputSource = Rho.DPX.SOURCE_CAMERA;
-                Rho.DPX.captureDocument(captureCallback);
+                Rho.SimulScan.template = Rho.RhoFile.join(Rho.Application.AppBundleFolder, 'picture.xml');
+                Rho.SimulScan.uiResultConfirmation = 'invalid';
+                Rho.SimulScan.inputSource = Rho.SimulScan.SOURCE_CAMERA;
+                Rho.SimulScan.captureDocument(captureCallback);
         });
         //Add more waitsfor or run blocks if required.
         //Common Method implemented to wait for tester to make it pass or fail.Code available in specHelper.js
@@ -595,13 +595,13 @@ describe('DPX Functionality Test', function() {
         //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
         _result.waitToRunTest();
         runs(function() {
-                Rho.DPX.template = Rho.RhoFile.join(Rho.Application.AppBundleFolder, 'picture.xml');
-                Rho.DPX.inputSource = Rho.DPX.SOURCE_CAMERA;
-                Rho.DPX.captureDocument(captureCallback);
+                Rho.SimulScan.template = Rho.RhoFile.join(Rho.Application.AppBundleFolder, 'picture.xml');
+                Rho.SimulScan.inputSource = Rho.SimulScan.SOURCE_CAMERA;
+                Rho.SimulScan.captureDocument(captureCallback);
                 waitsFor(function () {
                         return getregionImageId != null;
                 }, '90sec Wait before move to next test', 90000);
-                Rho.DPX.getDataUri(100);
+                Rho.SimulScan.getDataUri(100);
         });
         //Add more waitsfor or run blocks if required.
         //Common Method implemented to wait for tester to make it pass or fail.Code available in specHelper.js

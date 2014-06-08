@@ -7,7 +7,7 @@ $objectName = ''
 $arrConstants = Array.new
 
 $arrException = {
-"Rho.DPX" => [{"constName" => "SOURCE_CAMERA","value"=>"camera","applicableto"=>"js"}],
+"Rho.SimulScan" => [{"constName" => "SOURCE_CAMERA","value"=>"camera","applicableto"=>"js"}],
 "Rho.Network" => [{"constName" => "AUTH_BASIC","value"=>"basic","applicableto"=>"js"}],
 "Rho.WebView" => [{"constName" => "SAVE_FORMAT_JPEG","value"=>"jpeg","applicableto"=>"js"}]
 }
