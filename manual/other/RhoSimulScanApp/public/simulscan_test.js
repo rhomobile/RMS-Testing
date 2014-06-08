@@ -1,6 +1,6 @@
 
-var dpx_tests = (function() {
-    var TEMPLATES_DIR = '/storage/sdcard1/dpx/templates';
+var simulscan_tests = (function() {
+    var TEMPLATES_DIR = '/storage/sdcard1/simulscan/templates';
 
     var templates = [];
     if (!Rho.RhoFile.exists(TEMPLATES_DIR) || !Rho.RhoFile.isDir(TEMPLATES_DIR)) {
@@ -123,15 +123,15 @@ var dpx_tests = (function() {
         get_output().appendChild(document.createTextNode(text));
     };
 
-    var create_image = function(dpx, image) {
+    var create_image = function(simulscan, image) {
         var img = document.createElement('img');
-        img.setAttribute('src', dpx.getDataUri(image['id']));
+        img.setAttribute('src', simulscan.getDataUri(image['id']));
         get_output().appendChild(img);
         create_tag('br');
         create_text(image['width'] + 'x' + image['height']);
     };
 
-    var show_failure = function(failure, dpx) {
+    var show_failure = function(failure, simulscan) {
         if (failure === undefined) {
             return;
         }
@@ -139,7 +139,7 @@ var dpx_tests = (function() {
         create_text(failure);
     };
 
-    var show_form = function(form, dpx) {
+    var show_form = function(form, simulscan) {
         if (form === undefined) {
             return;
         }
@@ -159,17 +159,17 @@ var dpx_tests = (function() {
                 create_tag('br');
             }
             if (region.hasOwnProperty('image')) {
-                create_image(dpx, region['image']);
+                create_image(simulscan, region['image']);
                 create_tag('br');
             }
         }
         create_tag('hr');
-        create_image(dpx, form['formCapture']['image']);
+        create_image(simulscan, form['formCapture']['image']);
     };
 
 
-    var create_dpx = function() {
-        var dpx = Rho.DPX;
+    var create_simulscan = function() {
+        var simulscan = Rho.SimulScan;
 
         var params = {
             'debug': false,
@@ -189,28 +189,28 @@ var dpx_tests = (function() {
         each(params, function(k, v) {
             create_text(k + ': "' + v + '"');
             create_tag('br');
-            dpx.setProperty(k, v);
+            simulscan.setProperty(k, v);
         });
-        return dpx;
+        return simulscan;
     };
 
-    var callback = function(dict, dpx) {
+    var callback = function(dict, simulscan) {
         log_call(dict);
         create_tag('hr');
         create_text('callbackType ' + dict['callbackType']);
         create_tag('br');
-        show_form(dict['processedForm'], dpx);
-        show_failure(dict['failureReason'], dpx);
+        show_form(dict['processedForm'], simulscan);
+        show_failure(dict['failureReason'], simulscan);
     };
 
     var capture = function() {
         try {
-            var dpx = create_dpx();
-            dpx.captureDocument(function(dict) {
-                callback(dict, dpx);
+            var simulscan = create_simulscan();
+            simulscan.captureDocument(function(dict) {
+                callback(dict, simulscan);
 
-                if (dict['callbackType'] === Rho.DPX.STOP) {
-                    dpx.close();
+                if (dict['callbackType'] === Rho.SimulScan.STOP) {
+                    simulscan.close();
                 }
             });
         } catch (e) {
@@ -218,11 +218,11 @@ var dpx_tests = (function() {
         }
     };
 
-    var dpx = undefined;
+    var simulscan = undefined;
 
     var open = function() {
         try {
-            dpx = create_dpx();
+            simulscan = create_simulscan();
         } catch (e) {
             log('EXCEPTION ' + e);
         }
@@ -230,8 +230,8 @@ var dpx_tests = (function() {
 
     var start = function() {
         try {
-            dpx.captureDocument(function(dict) {
-                callback(dict, dpx);
+            simulscan.captureDocument(function(dict) {
+                callback(dict, simulscan);
             });
         } catch (e) {
             log('EXCEPTION ' + e);
@@ -240,7 +240,7 @@ var dpx_tests = (function() {
 
     var close = function() {
         try {
-            dpx.close();
+            simulscan.close();
         } catch (e) {
             log('EXCEPTION ' + e);
         }
@@ -248,7 +248,7 @@ var dpx_tests = (function() {
 
     var fetch = function() {
         try {
-            create_dpx().fetchTemplates('userName', 'password');
+            create_simulscan().fetchTemplates('userName', 'password');
         } catch (e) {
             log('EXCEPTION ' + e);
         }

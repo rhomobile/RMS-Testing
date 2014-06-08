@@ -39,7 +39,7 @@ MaxLogFileSize=50000
 logserver = 'http://rhologs.heroku.com' 
 
 # log file prefix - contain human-readable text
-logname='RhoDPXApp'
+logname='RhoSimulScanApp'
 
 # Keep track of the last visited page
 KeepTrackOfLastVisitedPage = 0 

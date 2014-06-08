@@ -1,7 +1,7 @@
 ---
 #sdk: ../../../../rhodes
 sdkversion: 4.1.0
-name: RhoDPXApp
+name: RhoSimulScanApp
 version: '1.0'
 vendor: rhomobile
 build: debug
@@ -12,7 +12,7 @@ android:
   capabilities:
   - motoroladev
 extensions:
-  - dpx
+  - simulscan
 debug: 1
 
 rhosim:
