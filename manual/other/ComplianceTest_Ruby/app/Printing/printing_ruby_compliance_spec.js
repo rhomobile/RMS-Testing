@@ -360,7 +360,7 @@ describe('Printing Generic', function() {
     describe('printRawString method', function() {
 
         it('should print ZPL Command with callback', function() {
-            dispTestCaseRunning(" 1. should print ZPL Command ");
+            dispTestCaseRunning(" should print ZPL Command ");
             dispExpectedResult("should print ZPL Command and return PRINT_STATUS_SUCCESS after printing");
             //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
             _result.waitToRunTest();
@@ -368,8 +368,8 @@ describe('Printing Generic', function() {
             doPrintRawCommandCbk('zpl');
         });
 
-        xit('should print CPCL Command with callback', function() {
-            dispTestCaseRunning(" 1. should print CPCL Command ");
+        it('should print CPCL Command with callback', function() {
+            dispTestCaseRunning("should print CPCL Command ");
             dispExpectedResult("should print CPCL Command and return PRINT_STATUS_SUCCESS after printing");
             //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
             _result.waitToRunTest();
