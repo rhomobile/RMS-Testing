@@ -12,3 +12,8 @@ https://169.254.2.2:8082/test_methods
 https://169.254.2.2:8083/test_methods
 
 If they works, build application and run tests.
+
+watcher.rb
+
+If you modify which port to use, remember to modify watcher.rb if you intend it to check the health of the script.
+watcher.rb will check the status of the process every n seconds, if it is not found, it will restart it.
