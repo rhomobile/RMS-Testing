@@ -222,7 +222,7 @@ describe("Audio Capture Test", function(){
     });
 
 
-    if(isAndroidPlatform){
+    if(isAndroidPlatform()){
         it('<br/>Call start method with all properties set', function () {
             dispTestCaseRunning(jasmine.getEnv().currentSpec.description);
             dispExpectedResult('Callback should return ok and full file path of recored audiofile and and captured audio file name should be captured with default source MIC, and captured audio fileName should be androidallparams with encoder ENCODER_AMR_WB  and audio duration should be 8 seconds');
