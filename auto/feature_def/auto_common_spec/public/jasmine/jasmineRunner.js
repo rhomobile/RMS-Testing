@@ -27,6 +27,9 @@ function quit()
     var fileReporter = new jasmine.FileReporter("failedSpecs.txt");
     jasmineEnv.addReporter(fileReporter);
 
+    // var remoteReporter = new jasmine.NetworkReporter('http://192.168.1.239:8081/upload_test_log');
+    // jasmineEnv.addReporter(remoteReporter);
+
 	//var junitReporter = new jasmine.JUnitXmlReporter();
 	//junitReporter.useDotNotation = false
 

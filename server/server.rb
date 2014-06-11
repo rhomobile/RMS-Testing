@@ -4,6 +4,7 @@ require 'socket'
 require 'openssl'
 require 'net/http'
 require 'rexml/document'
+require 'json'
 
 
 
@@ -291,6 +292,30 @@ $local_server.mount_proc '/get_last_log' do |req,res|
     res.status = 200
 end
 
+$local_server.mount_proc '/upload_test_log' do |req,res|
+    
+    message = req.body 
+
+    puts "Received message #{message.length}"
+
+    suite_name = ""
+
+    begin
+      json = JSON.parse(message)
+      suite_name = (json["suites"].first)["name"].gsub(/[^a-z0-9]/i,'_').downcase
+      message = JSON.pretty_generate(json)
+    rescue Exception => e
+      message += "\r\nError #{e.inspect}"
+    end
+
+    File.open("log_#{suite_name}#{Time.now.to_i.to_s}.txt", 'w') do |f|
+       f.puts(message);
+    end   
+
+    res.body = "Ok"
+    res.status = 200
+end
+
 $local_server.mount_proc '/post_gzip' do |req,res|
     puts "GZIP request is: \n[START]\n #{req.inspect}\n[END]"
     
@@ -439,6 +464,20 @@ to_generate.each do |path|
     f.puts("WEBSOCKET_PORT=#{webSocketPort};");
     
     f.close()
+end
+
+to_js = [
+  '../manual/feature_def/manual_common_spec/public/jasmine/jasmineRunner.js',
+  '../auto/feature_def/auto_common_spec/public/jasmine/jasmineRunner.js'
+]
+
+to_js.each do |path|
+  if File.exists?(path)
+    content = File.read(path).gsub(/(?<=NetworkReporter\()'(.*?)'(?=\))/i,"'http://#{host}:#{port}/upload_test_log'")
+    File.open(path, "w") { |io| 
+      io.write(content)
+    }
+  end
 end
 
 modify_iOS_Application_plist_file(host, port)
