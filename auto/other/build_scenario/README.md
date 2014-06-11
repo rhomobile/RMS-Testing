@@ -29,3 +29,6 @@ Prerequisite
 
 		output.html file will be generated inside application folder
 		Open the .html file to view results. (It includes command line output in .html file too)
+
+	Note:
+	Make sure build.yml contains valid provisioning profile, SDK details for ios.
