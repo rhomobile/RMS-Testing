@@ -6,8 +6,6 @@ build: "debug"
 applog: "rholog.txt"
 rhohub:
   url: "https://appstaging.rhohub.com/api/v1/"
-connection:
-  proxy: "http://wwwgate0.mot.com:1080"
 iphone:
   configuration: "Release"
   sdk: "iphonesimulator7.0"
@@ -30,5 +28,5 @@ extensions:
 wm:
 app_type: "rhoelements"
 #capabilities: ["read_sdcard"]
-#capabilities: ["write_sdcard"]
-#capabilities: ["read_sdcard", "write_sdcard"]
+#capabilities: ["sdcard"]
+
