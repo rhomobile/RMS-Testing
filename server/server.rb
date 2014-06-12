@@ -292,28 +292,101 @@ $local_server.mount_proc '/get_last_log' do |req,res|
     res.status = 200
 end
 
+def parse_specs(root, path, fails)
+  root.each do |item|
+    name = "#{path} >> #{item["n"]}"
+    if item["e"] == 0
+      fails << {:type => :disabled, :name => name, :item => item}
+    end
+
+    if item["s"] == 0
+      details = []
+      message = ""
+      item["f"].each do |fail|
+        if !fail["m"].empty?
+          message += "  Message: #{fail["m"]}\n"
+        end
+        if !fail["s"].empty?
+          message += "  Stack:\n====\n#{fail["s"]}\n====\n"
+        end
+
+      end
+      fails << {:type => :fail, :name => name, :item => item, :message => message}
+    end
+  end
+end
+
+def parse_suites(root, path, fails)
+  root.each do |item|
+    name = "#{path} >> #{item["name"]}"
+    if item["specs"]
+      parse_specs(item["specs"], name, fails)
+    end
+    if item["suites"]
+      parse_suites(item["suites"], name, fails)
+    end  
+  end
+end
+
+def generate_fail_report(root)
+  report = []
+
+  fails = []
+
+  parse_suites(root["suites"], "", fails)
+
+  if !fails.empty?
+    report << "Total specs: #{root["total"]}, failures: #{root["failures"]}, skipped: #{root["not_run"]}\n"
+
+    fails.each do |fail|
+      case fail[:type] 
+      when :disabled
+        report << "Disabled test: #{fail[:name]}"
+      when :fail
+        report << "Failed test: #{fail[:name]}\n#{fail[:message]}"
+      end
+    end
+
+    report << "\n"
+  end
+
+  report.empty? ? nil : report.join("\n")
+end
+
 $local_server.mount_proc '/upload_test_log' do |req,res|
-    
     message = req.body 
 
-    puts "Received message #{message.length}"
+    res.body = "Ok"
+    res.status = 200
 
-    suite_name = ""
+    suite_name = nil
 
     begin
       json = JSON.parse(message)
-      suite_name = (json["suites"].first)["name"].gsub(/[^a-z0-9]/i,'_').downcase
+      first_suite = json["suites"].first
+      if !first_suite.nil?
+        suite_name = first_suite["name"].gsub(/[^a-z0-9]+/i,'_').downcase
+      end
       message = JSON.pretty_generate(json)
     rescue Exception => e
       message += "\r\nError #{e.inspect}"
     end
 
-    File.open("log_#{suite_name}#{Time.now.to_i.to_s}.txt", 'w') do |f|
-       f.puts(message);
-    end   
+    if !suite_name.nil?
+      # disable raw log saving
 
-    res.body = "Ok"
-    res.status = 200
+      # File.open("log_#{suite_name}_#{Time.now.to_i.to_s}.raw", 'w') do |f|
+      #    f.puts(message);
+      # end  
+
+      fail_report = generate_fail_report(json)
+
+      if !fail_report.nil?
+        File.open("fail_#{suite_name}_#{Time.now.to_i.to_s}.txt", 'w') do |f|
+           f.puts(fail_report);
+        end   
+      end
+    end
 end
 
 $local_server.mount_proc '/post_gzip' do |req,res|

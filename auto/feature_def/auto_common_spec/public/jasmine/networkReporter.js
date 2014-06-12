@@ -66,7 +66,7 @@
         },
 
         reportSpecResults: function(spec) {
-            var elapsed = spec.startTime ? (new Date() - spec.startTime) / 1000 : 0;
+            var elapsed = spec.startTime ? (new Date() - spec.startTime) : 0;
             var results = spec.results();
             var skipped = !!results.skipped;
             var id = spec.id;
@@ -75,6 +75,8 @@
             var testSpec = {
                 elapsed: elapsed,
                 executed: !skipped,
+                passed_asserts: results.passedCount,
+                total_asserts: results.totalCount,
                 failures: [],
                 id: spec.id,
                 name: spec.description,
@@ -169,7 +171,7 @@
                 name : suites[i].name,
                 executed : suites[i].executed ? 1 : 0,
                 success : suites[i].success ? 1 : 0,
-                time : suites[i].elapsed
+                time : suites[i].elapsed / 1000
             };
 
             if (suites[i].suites.length > 0) {
@@ -194,10 +196,24 @@
 
             var item = {
                 n : spec.name,
-                e : spec.executed ? 1 : 0,
-                s : spec.success ? 1 : 0,
-                t : spec.elapsed
+                t : spec.elapsed / 1000
             };
+
+            if (!spec.executed) {
+                item.e = 0
+            }
+
+            if (!spec.success) {
+                item.s = 0
+            }
+
+            if (spec.passed_asserts > 0) {
+                item.p_a = spec.passed_asserts;
+            }
+
+            if (spec.total_asserts > 0) {
+                item.t_a = spec.total_asserts;
+            } 
 
             var fails = [];
 
