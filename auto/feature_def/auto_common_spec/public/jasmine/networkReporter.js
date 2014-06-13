@@ -1,4 +1,4 @@
-(function () {
+(function() {
     'use strict';
 
     if (!jasmine) {
@@ -12,7 +12,6 @@
 
         this.reportName = 'Jasmine Results';
         this.testSuites = {};
-        this.testSpecs = {};
         this.testRun = {
             suites: []
         };
@@ -68,7 +67,7 @@
         reportSpecResults: function(spec) {
             var elapsed = spec.startTime ? (new Date() - spec.startTime) : 0;
             var results = spec.results();
-            var skipped = !!results.skipped;
+            var skipped = !! results.skipped;
             var id = spec.id;
             var suite = spec.suite;
             var testSuite = this.testSuites[suite.id];
@@ -82,7 +81,7 @@
                 name: spec.description,
                 success: results.passed()
             };
-            this.testSpecs[spec.id] = testSpec;
+
             testSuite.specs.push(testSpec);
 
             if (!testSpec.success) {
@@ -93,7 +92,8 @@
                     if (result.passed && !result.passed()) {
                         var failure = {
                             message: result.toString(),
-                            stack: result.trace.stack ? result.trace.stack : ''
+                            stack: result.trace.stack ? result.trace.stack : '',
+                            idx: i
                         };
                         testSpec.failures.push(failure);
                     }
@@ -108,15 +108,16 @@
         },
 
         writeFile: function(text) {
-            Rho.Network.post(
-                { url : this.url, body : text + '\r\n' }
-            );
+            Rho.Network.post({
+                url: this.url,
+                body: text + '\r\n'
+            });
         }
     };
 
     function dateString(date) {
         var year = date.getFullYear();
-        var month = date.getMonth()+1; // 0-based
+        var month = date.getMonth() + 1; // 0-based
         var day = date.getDate();
         return year + '-' + formatAsTwoDigits(month) + '-' + formatAsTwoDigits(day);
     }
@@ -133,7 +134,9 @@
     }
 
     function getSkippedCount(specs) {
-        if (!specs.length) { return 0; }
+        if (!specs.length) {
+            return 0;
+        }
         for (var i = 0, count = 0; i < specs.length; i++) {
             if (specs[i].results().skipped) {
                 count++;
@@ -151,13 +154,32 @@
         var specCount = specs.length;
         var skippedCount = getSkippedCount(specs);
 
+        var sys_props = [
+            'platform', 'osVersion', 'phoneId', 'deviceName',
+            'locale', 'isEmulator', 'isRhoSimulator', 'oemInfo',
+            'uuid', 'localServerPort', 'webviewFramework',
+            'hasNetwork', 'hasSqlite'
+        ];
+
+        var props = Rho.System.getProperties(sys_props);
+
+        var sorted_props = {};
+
+        for (var i = 0; i < sys_props.length; i++) {
+            var name = sys_props[i];
+            sorted_props[name] = props[name];
+        }
+
         var result = {
-            date : dateString(date),
-            time : timeString(date),
-            total : specCount,
-            failures : results.failedCount,
-            not_run : skippedCount,
-            suites : convertSuites(testRun.suites) 
+            date: dateString(date),
+            time: timeString(date),
+            app_name: Rho.Application.appName,
+            spec_path: location.pathname,
+            total: specCount,
+            failures: results.failedCount,
+            not_run: skippedCount,
+            system: sorted_props,
+            suites: convertSuites(testRun.suites)
         };
 
         return JSON.stringify(result);
@@ -167,19 +189,19 @@
         var result = [];
 
         for (var i = 0; i < suites.length; i++) {
+            var suite = suites[i];
             var item = {
-                name : suites[i].name,
-                executed : suites[i].executed ? 1 : 0,
-                success : suites[i].success ? 1 : 0,
-                time : suites[i].elapsed / 1000
+                name: suite.name,
+                result: suite.executed ? (suite.success ? 1 : -1) : 0,
+                time: suite.elapsed / 1000
             };
 
-            if (suites[i].suites.length > 0) {
-                item.suites = convertSuites(suites[i].suites);
+            if (suite.suites.length > 0) {
+                item.suites = convertSuites(suite.suites);
             }
 
-            if (suites[i].specs.length > 0) {
-                item.specs = convertSpecs(suites[i].specs);
+            if (suite.specs.length > 0) {
+                item.specs = convertSpecs(suite.specs);
             }
 
             result.push(item);
@@ -195,17 +217,10 @@
             var spec = specs[i];
 
             var item = {
-                n : spec.name,
-                t : spec.elapsed / 1000
+                n: spec.name,
+                t: spec.elapsed / 1000,
+                r: spec.executed ? (spec.success ? 1 : -1) : 0
             };
-
-            if (!spec.executed) {
-                item.e = 0
-            }
-
-            if (!spec.success) {
-                item.s = 0
-            }
 
             if (spec.passed_asserts > 0) {
                 item.p_a = spec.passed_asserts;
@@ -213,29 +228,37 @@
 
             if (spec.total_asserts > 0) {
                 item.t_a = spec.total_asserts;
-            } 
-
-            var fails = [];
-
-            for (var j = 0; j < spec.failures.length; j++) {
-                var failure = spec.failures[j];
-
-                fails.push(
-                    {
-                        m : failure.message,
-                        s : failure.stack
-                    }
-                );
             }
 
-            if (fails.length > 0) {
-                item.f = fails;
+            if (spec.failures.length > 0) {
+                item.f = convertFailures(spec.failures);
             }
 
             result.push(item);
         }
 
         return result;
+    }
+
+    function convertFailures(failures) {
+        var fail_list = [];
+        for (var j = 0; j < failures.length; j++) {
+            var failure = failures[j];
+
+            var fail_descr = {
+                i: failure.idx
+            };
+
+            if (failure.message.length > 0) {
+                fail_descr.m = failure.message;
+            }
+
+            if (failure.stack.length > 0) {
+                fail_descr.s = failure.stack;
+            }
+            fail_list.push(fail_descr);
+        }
+        return fail_list;
     }
 
     jasmine.NetworkReporter = NetworkReporter;
