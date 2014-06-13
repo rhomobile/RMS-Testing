@@ -1,0 +1,331 @@
+.QuitButtonDefault{
+quitbutton-visibility:visible;
+}
+
+.QuitButtonValid
+{
+  quitbutton-top:50;
+  quitbutton-left:60;
+  quitbutton-height:100;
+  quitbutton-width:100;
+  quitbutton-imageup:url('ftp://tandv:H0neymoon@ftp.tandv.wtgdev.net/Resource/BMW.bmp');
+  quitbutton-imagedown:url('http://tandv.wtgdev.net/Resource/Porsche.gif');
+  quitbutton-visibility:visible;
+}
+
+.QuitButtonEmpty
+{
+  quitbutton-top:;
+  quitbutton-left:;
+  quitbutton-height:;
+  quitbutton-width:;
+  quitbutton-imageup:;
+  quitbutton-imagedown:);
+  quitbutton-visibility:visible;
+}
+
+.QuitButtonInvalid
+{
+  quitbutton-top:aaa;
+  quitbutton-left:aaa;
+  quitbutton-height:aaa;
+  quitbutton-width:aaa;
+  quitbutton-imageup:url('ftp://tandv:H0neymoon@ftp.tandv.wtgdev.net/Resource/aaa.bmp);
+  quitbutton-imagedown:url('http://tandv.wtgdev.net/Resource/bbb.gif');
+  quitbutton-visibility:visible;
+}
+
+.QuitButtonHide
+{
+  quitbutton-visibility:hidden;
+}
+
+.BackButtonValid{
+  backbutton-top:50;
+  backbutton-left:60;
+  backbutton-height:100;
+  backbutton-width:100;
+  backbutton-imageup:url('ftp://tandv:H0neymoon@ftp.tandv.wtgdev.net/Resource/BMW.bmp');
+  backbutton-imagedown:url('http://tandv.wtgdev.net/Resource/Porsche.gif');
+  backbutton-visibility:visible;
+}
+
+.BackButtonEmpty
+{
+  backbutton-top:;
+  backbutton-left:;
+  backbutton-height:;
+  backbutton-width:;
+  backbutton-imageup:;
+  backbutton-imagedown:);
+  backbutton-visibility:visible;
+}
+
+.BackButtonInvalid
+{
+  backbutton-top:aaa;
+  backbutton-left:aaa;
+  backbutton-height:aaa;
+  backbutton-width:aaa;
+  backbutton-imageup:url('ftp://tandv:H0neymoon@ftp.tandv.wtgdev.net/Resource/aaa.bmp);
+  backbutton-imagedown:url('http://tandv.wtgdev.net/Resource/bbb.gif');
+  backbutton-visibility:visible;
+}
+
+.BackButtonHide
+{
+  backbutton-visibility:hidden;
+}
+
+.ForwardButtonValid{
+  forwardButton-top:50;
+  forwardButton-left:60;
+  forwardButton-height:100;
+  forwardButton-width:100;
+  forwardButton-imageup:url('ftp://tandv:H0neymoon@ftp.tandv.wtgdev.net/Resource/BMW.bmp');
+  forwardButton-imagedown:url('http://tandv.wtgdev.net/Resource/Porsche.gif');
+  forwardButton-visibility:visible;
+}
+
+.ForwardButtonEmpty
+{
+  forwardButton-top:;
+  forwardButton-left:;
+  forwardButton-height:;
+  forwardButton-width:;
+  forwardButton-imageup:;
+  forwardButton-imagedown:);
+  forwardButton-visibility:visible;
+}
+
+.ForwardButtonInvalid
+{
+  forwardButton-top:aaa;
+  forwardButton-left:aaa;
+  forwardButton-height:aaa;
+  forwardButton-width:aaa;
+  forwardButton-imageup:url('ftp://tandv:H0neymoon@ftp.tandv.wtgdev.net/Resource/aaa.bmp);
+  forwardButton-imagedown:url('http://tandv.wtgdev.net/Resource/bbb.gif');
+  forwardButton-visibility:visible;
+}
+
+.ForwardButtonHide
+{
+  forwardButton-visibility:hidden;
+}
+
+.HomeButtonValid{
+  homeButton-top:50;
+  homeButton-left:60;
+  homeButton-height:100;
+  homeButton-width:100;
+  homeButton-imageup:url('ftp://tandv:H0neymoon@ftp.tandv.wtgdev.net/Resource/BMW.bmp');
+  homeButton-imagedown:url('http://tandv.wtgdev.net/Resource/Porsche.gif');
+  homeButton-visibility:visible;
+}
+
+.HomeButtonEmpty
+{
+  homeButton-top:;
+  homeButton-left:;
+  homeButton-height:;
+  homeButton-width:;
+  homeButton-imageup:;
+  homeButton-imagedown:);
+  homeButton-visibility:visible;
+}
+
+.HomeButtonInvalid
+{
+  homeButton-top:aaa;
+  homeButton-left:aaa;
+  homeButton-height:aaa;
+  homeButton-width:aaa;
+  homeButton-imageup:url('ftp://tandv:H0neymoon@ftp.tandv.wtgdev.net/Resource/aaa.bmp);
+  homeButton-imagedown:url('http://tandv.wtgdev.net/Resource/bbb.gif');
+  homeButton-visibility:visible;
+}
+
+.HomeButtonHide
+{
+  homeButton-visibility:hidden;
+}
+
+
+.ReloadButtonValid{
+  reloadButton-top:50;
+  reloadButton-left:60;
+  reloadButton-height:100;
+  reloadButton-width:100;
+  reloadButton-imageup:url('ftp://tandv:H0neymoon@ftp.tandv.wtgdev.net/Resource/BMW.bmp');
+  reloadButton-imagedown:url('http://tandv.wtgdev.net/Resource/Porsche.gif');
+  reloadButton-visibility:visible;
+}
+
+.ReloadButtonEmpty
+{
+  reloadButton-top:;
+  reloadButton-left:;
+  reloadButton-height:;
+  reloadButton-width:;
+  reloadButton-imageup:;
+  reloadButton-imagedown:);
+  reloadButton-visibility:visible;
+}
+
+.ReloadButtonInvalid
+{
+  reloadButton-top:aaa;
+  reloadButton-left:aaa;
+  reloadButton-height:aaa;
+  reloadButton-width:aaa;
+  reloadButton-imageup:url('ftp://tandv:H0neymoon@ftp.tandv.wtgdev.net/Resource/aaa.bmp);
+  reloadButton-imagedown:url('http://tandv.wtgdev.net/Resource/bbb.gif');
+  reloadButton-visibility:visible;
+}
+
+.ReloadButtonHide
+{
+  reloadButton-visibility:hidden;
+}
+
+.StopButtonValid{
+  stopButton-top:100;
+  stopButton-left:300;
+  stopButton-height:100;
+  stopButton-width:100;
+  stopButton-imageup:url('ftp://tandv:H0neymoon@ftp.tandv.wtgdev.net/Resource/BMW.bmp');
+  stopButton-imagedown:url('http://tandv.wtgdev.net/Resource/Porsche.gif');
+  stopButton-visibility:visible;
+}
+
+.StopButtonEmpty
+{
+  stopButton-top:;
+  stopButton-left:;
+  stopButton-height:;
+  stopButton-width:;
+  stopButton-imageup:;
+  stopButton-imagedown:);
+  stopButton-visibility:visible;
+}
+
+.StopButtonInvalid
+{
+  stopButton-top:aaa;
+  stopButton-left:aaa;
+  stopButton-height:aaa;
+  stopButton-width:aaa;
+  stopButton-imageup:url('ftp://tandv:H0neymoon@ftp.tandv.wtgdev.net/Resource/aaa.bmp);
+  stopButton-imagedown:url('http://tandv.wtgdev.net/Resource/bbb.gif');
+  stopButton-visibility:visible;
+}
+
+.StopButtonHide
+{
+  stopButton-visibility:hidden;
+}
+
+.AddressBarValid{
+  addressBar-top:0;
+  addressBar-left:0;
+  addressBar-width:300;
+  addressBar-visibility:visible;
+}
+
+.AddressBarEmpty
+{
+  addressBar-top:;
+  addressBar-left:;
+  addressBar-width:;
+  addressBar-visibility:visible;
+}
+
+.AddressBarInvalid
+{
+  addressBar-top:aaa;
+  addressBar-left:aaa;
+  addressBar-width:aaa;
+  addressBar-visibility:visible;
+}
+
+.AddressBarHide
+{
+  addressBar-visibility:hidden;
+}
+
+
+.GoButton{
+  GoButton-top:200;
+  GoButton-left:60;
+  GoButton-height:100;
+  GoButton-width:100;
+  GoButton-imageup:url('ftp://tandv:H0neymoon@ftp.tandv.wtgdev.net/Resource/Sym.bmp');
+  GoButton-imagedown:url('http://tandv.wtgdev.net/Resource/Symbol.gif');
+  GoButton-visibility:visible;
+}
+
+.GoButtonEmpty
+{
+  GoButton-top:;
+  GoButton-left:;
+  GoButton-height:;
+  GoButton-width:;
+  GoButton-imageup:;
+  GoButton-imagedown:);
+  GoButton-visibility:visible;
+}
+
+.GoButtonInvalid
+{
+  GoButton-top:aaa;
+  GoButton-left:aaa;
+  GoButton-height:aaa;
+  GoButton-width:aaa;
+  GoButton-imageup:url('ftp://tandv:H0neymoon@ftp.tandv.wtgdev.net/Resource/aaa.bmp);
+  GoButton-imagedown:url('http://tandv.wtgdev.net/Resource/bbb.gif');
+  GoButton-visibility:visible;
+}
+
+.GoButtonHide
+{
+  GoButton-visibility:hidden;
+}
+
+
+.MinimizeButton{
+  MinimizeButton-top:50;
+  MinimizeButton-left:60;
+  MinimizeButton-height:100;
+  MinimizeButton-width:100;
+  MinimizeButton-imageup:url('ftp://tandv:H0neymoon@ftp.tandv.wtgdev.net/Resource/BMW.bmp');
+  MinimizeButton-imagedown:url('http://tandv.wtgdev.net/Resource/Symbol.gif');
+  MinimizeButton-visibility:visible;
+}
+
+.MinimizeButtonEmpty
+{
+  MinimizeButton-top:;
+  MinimizeButton-left:;
+  MinimizeButton-height:;
+  MinimizeButton-width:;
+  MinimizeButton-imageup:;
+  MinimizeButton-imagedown:);
+  MinimizeButton-visibility:visible;
+}
+
+.MinimizeButtonInvalid
+{
+  MinimizeButton-top:aaa;
+  MinimizeButton-left:aaa;
+  MinimizeButton-height:aaa;
+  MinimizeButton-width:aaa;
+  MinimizeButton-imageup:url('ftp://tandv:H0neymoon@ftp.tandv.wtgdev.net/Resource/aaa.bmp);
+  MinimizeButton-imagedown:url('http://tandv.wtgdev.net/Resource/bbb.gif');
+  MinimizeButton-visibility:visible;
+}
+
+.MinimizeButtonHide
+{
+  MinimizeButton-visibility:hidden;
+}

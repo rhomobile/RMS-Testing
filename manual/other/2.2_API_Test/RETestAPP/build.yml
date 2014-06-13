@@ -1,43 +1,57 @@
+#sdk: e:\win7_git\rhodes
+app_type: "rhoelements"
 sdkversion: "3.5.0"
-name: "RETestAPP"
-#motorola_license_company: "Motorola Test and Validation"
-#motorola_license: "0277106A081D151A000307771A7E1C75"
-#motorola_license: "`OLrrql(`iVCdNt=PJ1DH=jKVc5O@ixKTtEMTWDVSQO@D2CnbLU@_)K(DvBALrln`WjnL@0n/[FLHhj$KEs.C?x)c(O6dju{2yA(;s;`"
-version: "1.0"
+name: "Only_readsdcard"
+version: 1.0
 vendor: "rhomobile"
-build: "debug"
-bbver: "4.6"
+build: "release"
+bbver: 4.6
 applog: "rholog.txt"
+#capabilities:
+#- vibrate
+rhohub:
+  url: "https://appstaging.rhohub.com/api/v1/"
+connection:
+  proxy: http://wwwgate0.mot.com:1080
 iphone:
+  ajax_api_bridge: false
   configuration: "Release"
-  sdk: "iphonesimulator5.0"
+  sdk: "iphonesimulator6.1"
   provisionprofile: 
   codesignidentity: 
   entitlements: 
-  BundleIdentifier: "com.rhomobile.retestapp"
-  BundleURLScheme: "retestapp"
-  emulatortarget: "iphone"
+#extensions: ["sensor", "signature", "barcode", "mediaplayer", "mediacapture"]
+  extensions:
+    - sensor
+    - barcode
+    - mediaplayer
+    - screenorientation
+  BundleIdentifier: "manual_common_spec"
+  BundleURLScheme: "manual_common_spec"
 wp:
-  productid: "dc201bf1-e2e9-012f-10dc-00216a8a58d0"
-wm:
-#sdk: "MC3000c50b (ARMV4I)"
-  sdk: "Windows Mobile 6.5.3 Professional DTK (ARMV4I)"
-#sdk: "Windows Mobile 6 Professional SDK (ARMV4I)"
-#use_shared_runtime: 1
+  ajax_api_bridge: false
+  productid: "fa586990-6e21-0130-bf9e-3c075409010c"
+#extensions: ["signature", "barcode", "mediaplayer", "sensor"]
 symbian:
-  uid: "0xe01c7e9f"
+  uid: "0xeeceaf9f"
+#sdk: "MC3000c50b (ARMV4I)"
 android:
-  capabilities:
-    - network_state
-    - sdcard
-    - calendar
-#- non_motorola_device
-  version: "2.3.3"
-extensions:
-  - json
-  - rhoxml
-  - rhodes_translator
-  #- rhoconnect-client
-app_type: "rhoelements"
-capabilities: 
-#- non_motorola_device
+  version: "4.2.2"
+  extensions:
+    - printing
+    - printing_zebra
+#abis: ["x86"]
+#javascript_application: true
+#sdk: "Windows Mobile 6 Professional SDK (ARMV4I)"
+#sdk: "MC3000c50b (ARMV4I)"
+wm:
+  sdk: "Windows Mobile 6.5.3 Professional DTK (ARMV4I)"
+  extensions:
+    - printing
+#javascript_application: true
+    - printing_zebra
+paths:
+  extensions: 
+minify:
+  js: false
+  css: false

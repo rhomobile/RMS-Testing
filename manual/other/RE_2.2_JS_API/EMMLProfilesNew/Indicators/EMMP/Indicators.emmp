@@ -1,0 +1,42 @@
+.Battery
+{
+    battery-Left:50;
+    battery-Top:50;
+    battery-IconPosition:Bottom;
+    battery-GraphPosition:Right;
+    battery-color:#9370db;
+    battery-visibility:visible;
+    battery-BatteryEvent:url('Javascript:OnBattery('%s','%s','%s');');
+ }
+
+.Signal
+{
+    signal-Left:50;
+    signal-Iconposition:Top;
+    signal-GraphPosition:Right;
+    signal-Top:200;
+    signal-color:#ff0000;
+    signal-visibility:visible;
+    signal-signalevent:url('Javascript:OnSignal('%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s');');
+   }
+   
+   .BatteryHide
+   {
+    battery-Left:50;
+    battery-Top:50;
+    battery-IconPosition:Top;
+    battery-Iconposition:right;
+    battery-color:#FF0000;
+    battery-visibility:hidden;
+    
+ }
+
+.SignalHide
+{
+    signal-Left:50;
+    signal-Iconposition:Bottom;
+    signal-GraphPosition:Right;
+    signal-Top:200;
+    signal-color:#FFFF00;
+    signal-visibility:hidden;
+   }

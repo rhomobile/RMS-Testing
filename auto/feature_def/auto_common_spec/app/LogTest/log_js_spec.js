@@ -211,7 +211,7 @@ describe("Log JS API", function () {
 			});
 		});
 		
-		if ((clientPlatform != Rho.System.PLATFORM_WP8) && (clientPlatform != Rho.System.PLATFORM_WINDOWS_DESKTOP))
+		if ((clientPlatform != Rho.System.PLATFORM_WP8) && (clientPlatform != Rho.System.PLATFORM_WINDOWS_DESKTOP) && (clientPlatform != Rho.System.PLATFORM_WM_CE))
 		{
 		// Call sendLog()
 		it("VT290-397 : send log file with valid path, no callback| log exists", function() {
@@ -596,6 +596,7 @@ describe("Log JS API", function () {
 			});
 		});
 
+		if (clientPlatform != Rho.System.PLATFORM_WM_CE) {
 		// Set Log destinationURI to valid destination with host address having IP address.
 		it("VT290-315 : Set Log destinationURI to valid destination with host address having DNS Name as address.", function() {
 			runs(function(){
@@ -635,6 +636,7 @@ describe("Log JS API", function () {
 				Rho.Log.info(info, "VT290-317");
 			});
 		});
+		}
 
 		// Set Log excludeCategories one module
 		it("VT290-321 : Set Log excludeCategories : Application", function() {

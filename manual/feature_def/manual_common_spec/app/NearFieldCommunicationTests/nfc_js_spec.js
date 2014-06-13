@@ -337,6 +337,37 @@ describe('Near Field Communication Tests', function () {
                 spec.waitForResponse();
             });
         });
+        
+        it("Method \"makeReadOnly\" should make Tag read only", function () {
+            var spec = new ManualSpec(jasmine, window.document);
+            spec.addGoal("make Tag read only");
+            spec.addPrecondition("Smart tag");
+            spec.addStep('Press "Run test" button');
+            spec.addStep('Touch tag to device');
+            spec.addExpectation("Value of \"isReadOnly\" property should be displayed");
+            spec.displayScenario();
+            spec.waitForButtonPressing("Run test");
+            
+            var tagID;
+
+            Rho.NFC.Adapter.setTagDetectionHandler([], function (anObject) {
+                tagID = anObject["tagId"];
+            });
+
+            waitsFor(function () {
+                return tagID != undefined;
+            }, "WaitsFor timeout", 60000);
+
+            runs(function () {
+                var tag = Rho.NFC.Tag.getTagById(tagID);
+                // if tag.isReadOnly == false
+                //if(tag.isNdef == false) {tag.formatNDEF();}
+                tag.makeReadOnly();
+                spec.addResult("Property \"isReadOnly\"", tag.isReadOnly);
+                spec.displayResults();
+                spec.waitForResponse();
+            });
+        });
 
         it('Message writing', function () {
             var spec = new ManualSpec(jasmine, window.document);

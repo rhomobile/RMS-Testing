@@ -4,7 +4,7 @@ function sleep (msec)
     while (new Date().getTime() - start < msec);
 }
 
-if (Rho.System.platform == Rho.System.PLATFORM_ANDROID) {
+if (Rho.System.platform == Rho.System.PLATFORM_ANDROID ) {
 
     describe('Eventsource JS API', function() {
              
@@ -26,8 +26,25 @@ if (Rho.System.platform == Rho.System.PLATFORM_ANDROID) {
             }
           });
 
-          waitsFor( function() {return eventCount>=21;}, 30000, "Didn't receive all events." );
-          runs(function() { expect(eventCount).toEqual(21); es.close(); } );          
+          waitsFor( function() {return eventCount>=3;}, 30000, "Didn't receive all events." );
+          runs(function() { expect(eventCount).toEqual(3); es.close(); } );
+        });
+
+        it('Works correctly when received wrong mime-type', function() {
+          var es;
+          var url = "http://"+srvHost+":"+srvPort.toString()+"/time_stream_wrong_mime";
+          var haveError = false;
+
+          runs(function(){
+            es = new EventSource(url);
+            es.onerror = function(event) {
+              haveError = true;
+            }
+
+          });
+
+          waitsFor( function() {return haveError;}, 2000, "Didn't receive error." );
+          runs(function() { expect(haveError).toEqual(true); es.close(); } );
         });
                       
     });
@@ -39,7 +56,7 @@ if (Rho.System.platform == Rho.System.PLATFORM_ANDROID) {
 		var srvURL = "http://"+srvHost+":"+srvPort.toString()+"/time_stream";
 
 		//var srvURL = "http://localhost:9090/sse/sse.php"
-		var source = null;
+		//var source = null;
 		var cbOnopenCalled = false;
 		var cbOnmessageCalled = false;
 		var cbOnerrorCalled = false;
@@ -51,42 +68,56 @@ if (Rho.System.platform == Rho.System.PLATFORM_ANDROID) {
 			cbOnerrorCalled = false;
 			cbOnuserlogonCalled = false;
 			source = null;
-			source = new EventSource(srvURL);
+			//source = new EventSource(srvURL);
 		});
 		
 		afterEach(function(){
-			source.close();
+			//source.close();
 		});
 		
 		it('should check Server-Sent Events Support', function(){
 			expect(EventSource).toBeDefined();
 		});
 		
+		it("should raise exception if url is empty", function(){
+			expect(function(){
+                new EventSource("")
+            }
+            ).toThrow(new Error("Failed to construct 'EventSource': Cannot open an EventSource to an empty URL."));
+		});
+		
 		it('should create server sent event object and readyState status connecting',function(){
-			source = new EventSource(srvURL);
+			var source = new EventSource(srvURL);
 			expect(source).not.toEqual(null);
 			expect(source.readyState).toEqual(EventSource.CONNECTING);
+            source.close();
 		});
 		
 		it("should fire onopen callback and readyState status open ",function(){
-
-			source.onopen(function(event){
+        
+            var source = new EventSource(srvURL);
+           
+			source.onopen = function(event){
 				cbOnopenCalled = true;
-			});
+			};
 			waitsFor(function(){
 				return cbOnopenCalled;
 			},"waiting for onopen callback to be fired",50000);
 			runs(function(){
 				expect(source.readyState).toEqual(EventSource.OPEN);
 			});
+            runs(function(){ source.close(); } );
 		});
 		
 		it("should fire onmessage callback when received from server", function(){
+            var source = new EventSource(srvURL);
+
+        
 			var data = ''
-			source.onmessage(function(event){
+			source.onmessage = function(event){
 				data = event.data;
 				cbOnmessageCalled = true;
-			});
+			};
 			
 			waitsFor(function(){
 				return cbOnmessageCalled;
@@ -94,17 +125,19 @@ if (Rho.System.platform == Rho.System.PLATFORM_ANDROID) {
 			runs(function(){
 				expect(data).toMatch(/server time:/);
 			});
+           
+            runs(function(){ source.close(); } );
 		});
 		
 		it("should check readyState status as closed when closed() called ", function(){
+            var source = new EventSource(srvURL);
 			source.close();
 			expect(source.readyState).toEqual(EventSource.CLOSED);
 
 		});
 		
 		it("should fire onerror callback when its not able to connect to specified server",function(){
-			source = null
-			source = new EventSource("/test.php");
+			var source = new EventSource("/test.php");
 
 			source.onerror = function(event){
 				cbOnerrorCalled = true;
@@ -113,9 +146,12 @@ if (Rho.System.platform == Rho.System.PLATFORM_ANDROID) {
 			waitsFor(function(){
 				return cbOnerrorCalled;
 			},"Waiting for onerror callback to be fired", 50000);
+            
+            runs(function(){ source.close(); } );
 		});
 		
 		it('should fire onopen callback while setting using addEventListener',function(){
+            var source = new EventSource(srvURL);
 
 			source.addEventListener('open', function(e) {
 				cbOnopenCalled = true;
@@ -128,10 +164,14 @@ if (Rho.System.platform == Rho.System.PLATFORM_ANDROID) {
 			runs(function(){
 				expect(source.readyState).toEqual(EventSource.OPEN);
 			});
+           
+            runs(function(){ source.close(); } );
 
 		});
 		
 		it('should fire onmessage callback while setting using addEventListener',function(){
+            var source = new EventSource(srvURL);
+            var data = '';
 
 			source.addEventListener('message', function(e) {
 				data = e.data;
@@ -144,10 +184,14 @@ if (Rho.System.platform == Rho.System.PLATFORM_ANDROID) {
 			runs(function(){
 				expect(data).toMatch(/server time:/);
 			});
+           
+            runs(function(){ source.close(); } );
 
 		});
 		
 		it('should check for message event contains a e.lastEventId property', function(e){
+            var source = new EventSource(srvURL);
+
 			var lastEventId = null;
 			source.addEventListener('message', function(e) {
 				lastEventId = e.lastEventId;
@@ -161,9 +205,14 @@ if (Rho.System.platform == Rho.System.PLATFORM_ANDROID) {
 			runs(function(){
 				expect(lastEventId).not.toEqual(null);
 			});
+           
+            runs(function(){ source.close(); } );
 		});
 		
 		it("should check for message event contains a e.origin property",function(){
+
+            var source = new EventSource(srvURL);
+
 			var origin = null;
 			source.addEventListener('message', function(e) {
 				origin = e.origin;
@@ -178,6 +227,9 @@ if (Rho.System.platform == Rho.System.PLATFORM_ANDROID) {
 			runs(function(){
 				expect(origin).toMatch(/http:/);
 			});
+            
+            runs(function(){ source.close(); } );
+
 		});
 		
 		it("should fire custom event set through addEventListener", function(){
@@ -188,10 +240,12 @@ if (Rho.System.platform == Rho.System.PLATFORM_ANDROID) {
 			event: update\n
 			data: {"username": "John123", "emotion": "happy"}\n\n
 			*/
+            var source = new EventSource("http://"+srvHost+":"+srvPort.toString()+"/time_stream2");
+            
 			var data = '';
 			source.addEventListener('userlogon', function(e){
-				data = JSON.parse(e.data);
 				cbOnuserlogonCalled = true;
+				data = JSON.parse(e.data);
 				console.log(e);
 			});
 			waitsFor(function(){
@@ -200,15 +254,17 @@ if (Rho.System.platform == Rho.System.PLATFORM_ANDROID) {
 			runs(function(){
 				expect(data.username).toEqual("John123");
 			});
+            
+            runs(function(){ source.close(); } );
 		
 		});
 		
 		it('should fire onerror callback while setting using addEventListener', function(){
 			
-			source = null
-			source = new EventSource("/test.php");
+			var source = new EventSource("/test.php");
 			source.addEventListener('error', function(e) {
 				cbOnerrorCalled = true;
+                source.close();
 			}, false);
 
 			waitsFor(function(){
@@ -217,6 +273,7 @@ if (Rho.System.platform == Rho.System.PLATFORM_ANDROID) {
 			runs(function(){
 				expect(source.readyState).toEqual(EventSource.CLOSED);
 			});
+           
 		});
 	
 

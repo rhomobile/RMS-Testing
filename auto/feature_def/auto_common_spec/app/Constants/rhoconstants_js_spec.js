@@ -533,60 +533,60 @@ arrConstants['Rho.Battery'] = [{
   value: 'down',
   applicableto: 'js'
 }];
-arrConstants['Rho.DPX'] = [{
-  constant: 'Rho.DPX.FLASH_OFF',
+arrConstants['Rho.SimulScan'] = [{
+  constant: 'Rho.SimulScan.FLASH_OFF',
   value: 'off',
   applicableto: 'js'
 }, {
-  constant: 'Rho.DPX.FLASH_ON',
+  constant: 'Rho.SimulScan.FLASH_ON',
   value: 'on',
   applicableto: 'js'
 }, {
-  constant: 'Rho.DPX.FLASH_DISABLED',
+  constant: 'Rho.SimulScan.FLASH_DISABLED',
   value: 'disabled',
   applicableto: 'js'
 }, {
-  constant: 'Rho.DPX.SUCCESS',
+  constant: 'Rho.SimulScan.SUCCESS',
   value: 'success',
   applicableto: 'js'
 }, {
-  constant: 'Rho.DPX.FAILURE',
+  constant: 'Rho.SimulScan.FAILURE',
   value: 'failure',
   applicableto: 'js'
 }, {
-  constant: 'Rho.DPX.STOP',
+  constant: 'Rho.SimulScan.STOP',
   value: 'stop',
   applicableto: 'js'
 }, {
-  constant: 'Rho.DPX.FAILURE_ERROR',
+  constant: 'Rho.SimulScan.FAILURE_ERROR',
   value: 'error',
   applicableto: 'js'
 }, {
-  constant: 'Rho.DPX.FAILURE_IDENTIFICATION_TIMEOUT',
+  constant: 'Rho.SimulScan.FAILURE_IDENTIFICATION_TIMEOUT',
   value: 'identificationTimeout',
   applicableto: 'js'
 }, {
-  constant: 'Rho.DPX.FAILURE_PROCESSING_TIMEOUT',
+  constant: 'Rho.SimulScan.FAILURE_PROCESSING_TIMEOUT',
   value: 'processingTimeout',
   applicableto: 'js'
 }, {
-  constant: 'Rho.DPX.PM_OCR',
+  constant: 'Rho.SimulScan.PM_OCR',
   value: 'ocr',
   applicableto: 'js'
 }, {
-  constant: 'Rho.DPX.PM_OMR',
+  constant: 'Rho.SimulScan.PM_OMR',
   value: 'omr',
   applicableto: 'js'
 }, {
-  constant: 'Rho.DPX.PM_PICTURE',
+  constant: 'Rho.SimulScan.PM_PICTURE',
   value: 'picture',
   applicableto: 'js'
 }, {
-  constant: 'Rho.DPX.PM_BARCODE',
+  constant: 'Rho.SimulScan.PM_BARCODE',
   value: 'barcode',
   applicableto: 'js'
 }, {
-  constant: 'Rho.DPX.SOURCE_CAMERA',
+  constant: 'Rho.SimulScan.SOURCE_CAMERA',
   value: 'camera',
   applicableto: 'js'
 }];

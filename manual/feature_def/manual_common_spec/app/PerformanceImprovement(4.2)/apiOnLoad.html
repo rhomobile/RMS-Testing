@@ -1,35 +1,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Repeat Static Api call for 100 times</title>
+	<title>Api On Load</title>
 	<script type="text/javascript" src="/public/api/rhoapi-modules.js"></script>
 	<script type="text/javascript">
 	var myOnLoad = function(){
 	 	console.log("myOnLoad: init");
         var retData = "<li>Rho.Application.appName : " + Rho.Application.appName + "</li>" +
-        "<li>Rho.AudioCapture.encoder : " + Rho.AudioCapture.encoder + "</li>" +
-        "<li>Rho.Barcode.adaptiveScanning : " + Rho.Barcode.adaptiveScanning + "</li>" +
-        "<li>Rho.Battery.refreshInterval : " + Rho.Battery.refreshInterval + "</li>" +
-        "<li>Rho.CardReader.autoEnter : " + Rho.CardReader.autoEnter + "</li>" +
-        "<li>Rho.DPX.audioFeedback : " + Rho.DPX.audioFeedback + "</li>" +
-        "<li>Rho.KeyCapture.homeKeyValue : " + Rho.KeyCapture.homeKeyValue + "</li>" +
         "<li>Rho.Log.level : " + Rho.Log.level + "</li>" +
         "<li>Rho.NativeMenubar.mainButton : " + Rho.NativeMenubar.mainButton + "</li>" +
-        "<li>Rho.Network.authType : " + Rho.Network.authType + "</li>" +
-        "<li>Rho.Printer.printerType : " + Rho.Printer.printerType + "</li>" +
-        "<li>Rho.PrinterZebra.printerType : " + Rho.PrinterZebra.printerType + "</li>" +
-        "<li>Rho.Push.type : " + Rho.Push.type + "</li>" +
-        "<li>Rho.RhoConnectClient.pageSize : " + Rho.RhoConnectClient.pageSize + "</li>" +
-        "<li>Rho.ScreenOrientation.autoRotate : " + Rho.ScreenOrientation.autoRotate + "</li>" +
-        "<li>Rho.SignalIndicators.refreshInterval : " + Rho.SignalIndicators.refreshInterval + "</li>"+
-        "<li>Rho.Signature.bgColor : " + Rho.Signature.bgColor + "</li>"+
         "<li>Rho.System.platform : " + Rho.System.platform + "</li>";
         document.getElementById('res').innerHTML = retData;
 	};
 	</script>
 </head>
 <body onload="myOnLoad()">
-	<h3>To check the Application loading time (Page with most api module's property is accessed).</h3>
+	<h3>To check the Application loading time (Page with api module's property is accessed).</h3>
 	<ul id="res"></ul>
 </body>
 </html>

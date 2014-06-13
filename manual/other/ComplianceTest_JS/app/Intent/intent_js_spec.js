@@ -144,7 +144,7 @@ describe('Intent_UseCases Functionality Test', function () {
         dispExpectedResult('Message compose application should be launched with pre-filled recepient number.');
         _result.waitToRunTest();
         runs(function () {
-        	var params = new parameters("","","","","","","sms:9611896991","","");
+        	var params = new parameters(Rho.Intent.START_ACTIVITY,"","","","","","sms:9611896991","","");
             Rho.Intent.send(params);
             });
         _result.waitForResponse();
@@ -199,7 +199,7 @@ describe('Intent_UseCases Functionality Test', function () {
             };
             var params;
             if (isAndroidPlatform()) {
-                params = new parameters(Rho.Intent.BROADCAST,"","com.rhomobile.BROADCAST",["com.rhomobile.manual_common_spec"],"","","","",data);
+                params = new parameters(Rho.Intent.BROADCAST,"","com.rhomobile.BROADCAST",["com.rhomobile.ComplianceTest_JS"],"","","","",data);
             }
             if (isApplePlatform()) {
                 params = new parameters(Rho.Intent.BROADCAST,"","","","manualcommonspec","","","",data);
@@ -226,7 +226,7 @@ describe('Intent_UseCases Functionality Test', function () {
             };
             var params;
             if (isAndroidPlatform()) {
-                params = new parameters(Rho.Intent.BROADCAST,"","com.rhomobile.BROADCAST",["com.rhomobile.manual_common_spec"],"","","","",data);
+                params = new parameters(Rho.Intent.BROADCAST,"","com.rhomobile.BROADCAST",["com.rhomobile.ComplianceTest_JS"],"","","","",data);
             }
             if (isApplePlatform()) {
                 params = new parameters(Rho.Intent.BROADCAST,"","","","manualcommonspec","","","",data);

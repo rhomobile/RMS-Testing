@@ -14,6 +14,7 @@ rhobundle_zip_pwd = nil
 # log level
 # 0-trace, 1-info(app level), 3-warnings, 4-errors
 # for production set to 3
+LogFilePath = '/mnt/sdcard/Rhodes.log'
 MinSeverity  = 1 
 
 # enable copy log messages to standard output, useful for debugging

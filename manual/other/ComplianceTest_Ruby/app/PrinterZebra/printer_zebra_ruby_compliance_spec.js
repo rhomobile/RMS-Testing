@@ -40,37 +40,6 @@ describe('Printer Zebra', function() {
         return '^XA^MNN^LL200^XZ^XA^JUS^XZ^XA^FO50,50^A0I25,25^FD' + jasmine.getEnv().currentSpec.description + '^FS^XZ\r\n';
     }
 
-    // BLACK WOODO MAGIC
-    function evaluateHashValues(obj) {
-        var result = {};
-        var keys = objkeys(searchParamaters);
-        for (var i = keys.length - 1; i >= 0; i--) {
-            var key = keys[i];
-            result[key] = obj[key]();
-        }
-        return result;
-    }
-
-    // make a list of all available combinations of fields within object
-    function makeAllCombinationsOfFileds(obj) {
-        var combinations = []; //All combinations
-        var keys = objkeys(obj);
-        var quantity = (1 << keys.length);
-        if (quantity > 0) {
-            for (var i = 0; i < quantity; i++) {
-                var combination = {};
-                for (var j = 0; j < keys.length; j++) {
-                    if ((i & (1 << j))) {
-                        var key = keys[j];
-                        combination[key] = obj[key];
-                    }
-                }
-                combinations.push(combination);
-            }
-        }
-        Rho.Log.info(" " + JSON.stringify(combinations, null, 2), "APP");
-        return combinations;
-    }
     var testResult = '';
     var captured = false;
     var txtfilepath = makeFilePath('txtfile.txt');
@@ -308,42 +277,12 @@ describe('Printer Zebra', function() {
         });
     }
 
-    // function doPrintTestLabel() {
-
-    //     runs(function() {
-    //         callresult = null;
-    //         thisprinter.printRawString(makeTestLabel(), {}, cbk);
-    //     });
-
-    //     waitsFor(function() {
-    //         return callresult !== null;
-    //     }, 'wait until printingLabel', 20000);
-
-    //     runs(function() {
-    //         //expect(callresult.status).toEqual(Rho.PrinterZebra.PRINTER_STATUS_SUCCESS);
-    //         displayResult("Print test label", JSON.stringify(callresult));
-    //         callresult = null;
-    //     });
-
-    // }
-
-    // function doSetLabelLength(len) {
-    //     runs(function() {
-    //         callresult = null;
-    //         thisprinter.printRawString('^XA^MNN^LL' + len + '^XA^JUS^XZ', {}, cbk);
-    //     });
-
-    //     waitsFor(function() {
-    //         return callresult !== null;
-    //     }, 'wait until setting lable length', 7000);
-    // }
-
     function doPrintPrintFile(filename, options, isOk) {
         var testResult = '';
         runs(function() {
             expect(last_found_printer_id).toNotEqual(null);
             
-            Ruby.call('PrinterZebra','rho_printFile_callback?pid='+last_found_printer_id+'&file='+filename);
+            Ruby.call('PrinterZebra','rho_printFile?pid='+last_found_printer_id+'&file='+filename);
             
             setTimeout(function() {
                 testResult = Ruby.getReturnedValue();
@@ -355,7 +294,7 @@ describe('Printer Zebra', function() {
         }, 'Wait for 10msec ajax call to happen', 10000);
 
         runs(function() {
-            displayResult(jasmine.getEnv().currentSpec.description, testResult.toString());
+            displayResult(jasmine.getEnv().currentSpec.description, testResult);
             //expect(testResult).toEqual('PRINTER_STATUS_SUCCESS');
         });
 
@@ -368,7 +307,7 @@ describe('Printer Zebra', function() {
         runs(function() {
             expect(last_found_printer_id).toNotEqual(null);
             
-            Ruby.call('PrinterZebra','rho_printRawString_callback?pid=' + last_found_printer_id + '&rawstr='+ cmd );
+            Ruby.call('PrinterZebra','rho_printRawString?pid=' + last_found_printer_id + '&rawstr='+ cmd );
             
             setTimeout(function() {
                 testResult = Ruby.getReturnedValue();
@@ -380,7 +319,7 @@ describe('Printer Zebra', function() {
         }, 'Wait for 10msec ajax call to happen', 10000);
 
         runs(function() {
-            displayResult(jasmine.getEnv().currentSpec.description, testResult.toString());
+            displayResult(jasmine.getEnv().currentSpec.description, testResult);
             //expect(testResult).toEqual('PRINTER_STATUS_SUCCESS');
         });
 
@@ -476,7 +415,7 @@ describe('Printer Zebra', function() {
         }, 'Wait for 10msec ajax call to happen', 10000);
 
         runs(function() {
-            displayResult(jasmine.getEnv().currentSpec.description, JSON.stringify(testResult));
+            displayResult(jasmine.getEnv().currentSpec.description, testResult);
             //expect(testResult).toEqual('PRINTER_STATUS_SUCCESS');
         });
 
@@ -527,7 +466,7 @@ describe('Printer Zebra', function() {
             runs(function() {
                 expect(last_found_printer_id).toNotEqual(null);
                 
-                Ruby.call('PrinterZebra','rho_printFileImage_callback?pid='+last_found_printer_id+'&file='+from+'&x='+x+'&y='+y);
+                Ruby.call('PrinterZebra','rho_printFileImage?pid='+last_found_printer_id+'&file='+from+'&x='+x+'&y='+y);
                 
                 setTimeout(function() {
                     testResult = Ruby.getReturnedValue();
@@ -540,7 +479,7 @@ describe('Printer Zebra', function() {
             }, 'Wait for 10msec ajax call to happen', 10000);
 
             runs(function() {
-                displayResult(jasmine.getEnv().currentSpec.description, testResult.toString());
+                displayResult(jasmine.getEnv().currentSpec.description, testResult);
                 //expect(testResult).toEqual('PRINTER_STATUS_SUCCESS');
             });
 
@@ -629,7 +568,7 @@ describe('Printer Zebra', function() {
             }, 'Wait for 10msec ajax call to happen', 10000);
 
             runs(function() {
-                displayResult(jasmine.getEnv().currentSpec.description, testResult.toString());
+                displayResult(jasmine.getEnv().currentSpec.description, testResult);
             });
 
             _result.waitForResponse();
@@ -637,7 +576,7 @@ describe('Printer Zebra', function() {
     }
 
     describe('requestState method', function() {
-        it('should connect', function() {
+        xit('should connect', function() {
             doConnect();
         });
 
@@ -659,26 +598,9 @@ describe('Printer Zebra', function() {
             //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
             _result.waitToRunTest();
 
-            var testResult = '';
-            // runs(function() {
-            //     expect(last_found_printer_id).toNotEqual(null);
-                
-            //     Ruby.call('PrinterZebra','rho_printerStoredFormat_raw?pid='+last_found_printer_id+'&format='+format);
-                
-            //     setTimeout(function() {
-            //         testResult = Ruby.getReturnedValue();
-            //     }, 10000);
-                
-            // });
-
-            // waitsFor(function(){
-            //     return testResult !== '';
-            // }, 'Wait for 20msec ajax call to happen', 20000);
-
-
             runs(function() {
                 testResult = '';
-                Ruby.call('PrinterZebra','rho_printerStoredHash?pid='+last_found_printer_id+'&formatpath='+formatpath);
+                Ruby.call('PrinterZebra','rho_printerStoredHash?pid='+last_found_printer_id);
                 
                 setTimeout(function() {
                     testResult = Ruby.getReturnedValue();
@@ -690,7 +612,7 @@ describe('Printer Zebra', function() {
             }, 'Wait for 10msec ajax call to happen', 10000);
 
             runs(function() {
-                displayResult(jasmine.getEnv().currentSpec.description, testResult.toString());
+                displayResult(jasmine.getEnv().currentSpec.description, testResult);
             });
 
             _result.waitForResponse();
@@ -699,17 +621,6 @@ describe('Printer Zebra', function() {
 
     describe('printStoredFormatWithHash method', function() {
 
-        var zplstoredformat = '^XA^DFE:FORMAT.ZPL^FS^LH30,30^FO20,10^AF^FN1^FS^FO20,60^B3,,40,,^FN2^FS^FO20,120^AF^FN3^FS^FO20,180^AF^FN4^FS^FO20,240^AF^FN5^FS^FO20,300^AF^FN6^FS^XZ';
-        var ccplstoredformat = "! DF E:FORMATAS.FMT\n" +
-            "! 0 200 200 310 1\n" +
-            "CENTER\n" +
-            "TEXT 4 1 0 50 RECEIPT\n" +
-            "TEXT 4 0 0 150 \\\\\n" +
-            "TEXT 4 0 0 200 \\\\\n" +
-            "TEXT 4 0 0 250 \\\\\n" +
-            "FORM\n" +
-            "PRINT\n";
-             
         doprintStoredFormatWithHash('zplstoredformat', 'E:FORMAT.ZPL', hashzpl, 'with', "ZPL Language");
   
     });
@@ -726,25 +637,8 @@ describe('Printer Zebra', function() {
             //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
             _result.waitToRunTest();
 
-            var testResult = '';
-            // runs(function() {
-            //     expect(last_found_printer_id).toNotEqual(null);
-                
-            //     Ruby.call('PrinterZebra','rho_printerStoredFormat_raw?pid='+last_found_printer_id);
-                
-            //     setTimeout(function() {
-            //         testResult = Ruby.getReturnedValue();
-            //     }, 5000);
-                
-            // });
-
-            // waitsFor(function(){
-            //     return testResult !== '';
-            // }, 'Wait for 10msec ajax call to happen', 10000);
-
-
             runs(function() {
-                //testResult = '';
+                testResult = '';
                 Ruby.call('PrinterZebra','rho_printerStoredArray?pid='+last_found_printer_id);
                 
                 setTimeout(function() {
@@ -757,7 +651,7 @@ describe('Printer Zebra', function() {
             }, 'Wait for 10msec ajax call to happen', 10000);
 
             runs(function() {
-                displayResult(jasmine.getEnv().currentSpec.description, testResult.toString());
+                displayResult(jasmine.getEnv().currentSpec.description, testResult);
             });
 
             _result.waitForResponse();
@@ -765,17 +659,6 @@ describe('Printer Zebra', function() {
     }
 
     describe('printStoredFormatWithArray method', function() {
-
-        var zplstoredformat = '^XA^DFE:FORMAT.ZPL^FS^LH30,30^FO20,10^AF^FN1^FS^FO20,60^B3,,40,,^FN2^FS^FO20,120^AF^FN3^FS^FO20,180^AF^FN4^FS^FO20,240^AF^FN5^FS^FO20,300^AF^FN6^FS^XZ';
-        var ccplstoredformat = "! DF E:FORMATAS.FMT\n" +
-            "! 0 200 200 310 1\n" +
-            "CENTER\n" +
-            "TEXT 4 1 0 50 RECEIPT\n" +
-            "TEXT 4 0 0 150 \\\\\n" +
-            "TEXT 4 0 0 200 \\\\\n" +
-            "TEXT 4 0 0 250 \\\\\n" +
-            "FORM\n" +
-            "PRINT\n";
 
         doprintStoredFormatWithArray('zplstoredformat', 'E:FORMAT.ZPL', arrayzpl, 'with', "ZPL Language");
 

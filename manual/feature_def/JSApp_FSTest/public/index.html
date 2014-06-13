@@ -22,17 +22,7 @@
         {
             //console.log("CONSOLE!");
             //Rho.Log.info("Test", "TEST");	 
-            Rho.Application.nativeMenu = Rho.Application.defaultNativeMenu;
-            /*
-            var toolElements = new Array();
-            toolElements = [
-                {label: 'back', action: 'back'},
-                {action: "separator"},
-                {label: 'Home', action: 'Home'}
-            ];
-            var toolProperties = {backgroundColor: 0xDD4814, iOS7IconColor: 0xFFFFFF};
-            Rho.NativeToolbar.create(toolElements, toolProperties);
-            */
+            //Rho.Application.nativeMenu = Rho.Application.defaultNativeMenu;
         } 
 
         function perf_counter()
@@ -62,6 +52,9 @@
 -->    
 <a href="#" onclick="alert( Rho.System.platform );">Show Platform</a><br/>
 <a href="#" onclick="barcodeTest();">Barcode enumerate</a><br/>
+<a href="developmenttest.htm">ActiveX tests (IE only, WM only)</a><br/>
+<a href="scan_spantag.htm">Meta tags tests (WM only)</a><br/>
+
 <!-- <a href="#" onclick="perf_counter();">performance test</a><br/> -->
 </body>
 </html>
