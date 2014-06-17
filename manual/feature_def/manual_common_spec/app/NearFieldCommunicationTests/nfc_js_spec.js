@@ -446,6 +446,33 @@ describe('Near Field Communication Tests', function () {
                 spec.waitForResponse();
             });
         });
+        
+        it('NFC - GENERAL - Detect only the passed supported Tags with the api \"setTagDetectionHandler\".', function(){
+            var spec = new ManualSpec(jasmine, window.document);
+            spec.addGoal("Check for detecting only supported tags with 'setTagDetectionHandler'.");
+            spec.addPrecondition("Tap or Bring non supported NFC tag close the NFC device.");
+            spec.addStep("Press 'Run Test' button");
+            spec.addStep("Bring NFC tag of type other than 4.");
+            spec.addExpectation("Test case passed, if you don't see 'setTagDetectionHandler callback = triggered'.");
+            spec.displayScenario();
+            spec.waitForButtonPressing("Run test");
+            var tagID;
+            var supportedTags = [4];
+            Rho.NFC.Adapter.setTagDetectionHandler(supportedTags, function(tagInfo){
+        		tagID = tagInfo["tagId"];
+                spec.addResult("setTagDetectionHandler callback", "triggered");
+                var tagObj = Rho.NFC.Tag.getTagById(tagInfo.tagId);
+                spec.addResult("Tag type detected ", tagObj.type);
+                tagObj.close();
+                });
+            waitsFor(function () {
+                return tagID != undefined;
+            },"WaitsFor timeout", 6000);
+             runs(function () {
+                spec.displayResults();
+                spec.waitForResponse();
+             });
+        });
 });
 
 });
