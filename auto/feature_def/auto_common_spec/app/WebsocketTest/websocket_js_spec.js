@@ -11,75 +11,71 @@ if (Rho.System.platform == Rho.System.PLATFORM_ANDROID) {
         var srvHost = WEBSOCKET_HOST;
         var srvPort = WEBSOCKET_PORT;
         var srvURL = "ws://"+srvHost+":"+srvPort.toString();
-        var ws = null;
              
-             
-        var receivedMessage = null;
-        var connected = false;
-        var cbCalled = false;
-             
-        beforeEach(function() {
-            cbCalled = false;
-        });
-             
-        it('Creates websocket', function() {
-          ws = new Websocket(srvURL);
+        it('Creates websocket, connects, sends/receives message and close websocket', function() {
+          var openCalled = false;
+          var errorCalled = false;
+          var numMessageCalled = 0;
+          var closeCalled = false;
+          var message = "Test message";
+          var receivedMessage = null;
+          
+          var ws = new Websocket(srvURL);
           expect(ws).toNotEqual(null);
 
           ws.onopen = function() {
-            cbCalled = true;
+            openCalled = true;
             Rho.Log.info("Websocket connection estabilished.", "WEBSOCKET");
           };
-
-          ws.onclose = function(event) {
-            cbCalled = true;
-            Rho.Log.info('Closed websocket with code: ' + event.code + ' reason: ' + event.reason, "WEBSOCKET");
-          };
-
+          
           ws.onmessage = function(event) {
-            cbCalled = true;              
-            Rho.Log.info("Websocket data received " + event.data, "WEBSOCKET");
-            receivedMessage = event.data;
+               ++numMessageCalled;
+               Rho.Log.info("Websocket data received " + event.data, "WEBSOCKET");
+               receivedMessage = event.data;
           };
-
+           
           ws.onerror = function(error) {
-            cbCalled = true;
+            errorCalled = true;
             Rho.Log.error("Error " + error.message, "WEBSOCKET");
           };
+          
+          ws.onclose = function(event) {
+            closeCalled = true;
+            Rho.Log.info('Closed websocket with code: ' + event.code + ' reason: ' + event.reason, "WEBSOCKET");
+           };
+           
+          waitsFor( function() {return openCalled;}, 5000, "Websocket connect timeout" );
+          
+          runs(function() {
+            expect(ws.readyState).toEqual(Websocket.OPEN);
+            expect(errorCalled).toBeFalsy();
+          }
+          );
+          
+          runs(function() {
+            for (var i=0;i<5;++i)
+              ws.send(message);
+          });
+           
+           waitsFor( function() {return numMessageCalled==5;}, 5000, "Websocket send timeout" );
+           runs(function() {
+             expect(receivedMessage).toEqual("Pong: " + message);
+           });
 
-          waitsFor( function() {return cbCalled;}, 5000, "Websocket connect timeout" );
-        });
-                      
-        it('Connects websocket', function() {
-             runs(function() { expect(ws.readyState).toEqual(Websocket.OPEN) });
-        });
-             
-        it('Sends and receives message', function() {
-             var message = "Test message";
-             runs(function() { ws.send(message); } );
-             waitsFor( function() {return cbCalled;}, 5000, "Websocket send timeout" );
-             runs(function() {
-                expect(receivedMessage).toEqual("Pong: " + message);
-             });
-        });
-
-        it('Disconnects websocket', function() {
            runs(function() { ws.close(); });
-           waitsFor( function() {return cbCalled;}, 5000, "Websocket disconnect timeout" );
+           waitsFor( function() {return closeCalled;}, 5000, "Websocket disconnect timeout" );
            runs(function() { expect(ws.readyState).toEqual(Websocket.CLOSED) });
         });
+             
     });
 	
 	describe("Web socket js api test by bhakta", function(){
 	
         var srvHost = WEBSOCKET_HOST,
         srvPort = WEBSOCKET_PORT,
-        srvURL = "ws://"+srvHost+":"+srvPort.toString(),
+        srvURL = "ws://"+srvHost+":"+srvPort.toString();
 
-        receivedMessage = null,
-        connected = false;
-
-		it("should raise exception if url is empty", function(){
+		xit("should raise exception if url is empty", function(){
 			expect(function(){new Websocket("")}).toThrow(new Error("Websocket URL is empty."));
 		});
 		
@@ -95,7 +91,7 @@ if (Rho.System.platform == Rho.System.PLATFORM_ANDROID) {
 				Rho.Log.info("Websocket connection estabilished.", "WEBSOCKET");
 			};
 			
-			waitsFor( function() {return cbOnopenCalled;}, 50000, "Websocket connect timeout" );
+			waitsFor( function() {return cbOnopenCalled; }, 50000, "Websocket connect timeout" );
 
 			runs( function() { ws1.close(); } );
 		});
@@ -113,12 +109,12 @@ if (Rho.System.platform == Rho.System.PLATFORM_ANDROID) {
 				Rho.Log.info("Websocket connection estabilished.", "WEBSOCKET");
 			};
 			
-			waitsFor( function() {return cbOnopenCalled;}, 50000, "Websocket connect timeout" );
+			waitsFor( function() {return cbOnopenCalled; }, 50000, "Websocket connect timeout" );
 
 			runs( function() { ws2.close(); } );
 		});
 
-		it('should check readystate connection connecting AND should check readystate connection open and onopen callback should fire', function(){
+        it('should check readystate connection connecting AND should check readystate connection open and onopen callback should fire', function(){
 			var cbOnopenCalled = false;
 			var cbOnmessageCalled = false;
 			var cbOncloseCalled = false;
@@ -271,8 +267,8 @@ if (Rho.System.platform == Rho.System.PLATFORM_ANDROID) {
 
 			ws.onopen = function() {
 				cbOnopenCalled = true;
-  			Rho.Log.info("Websocket connection estabilished.", "WEBSOCKET");
-      }
+                Rho.Log.info("Websocket connection estabilished.", "WEBSOCKET");
+            }
 			ws.onclose = function(event) {
 				cbOncloseCalled = true;
 				Rho.Log.info("Websocket connection closed.", "WEBSOCKET");
