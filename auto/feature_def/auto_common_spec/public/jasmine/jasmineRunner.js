@@ -65,9 +65,8 @@ function quit()
 				var nextPageUrl = '../' + decodedArray[0];
 				if(decodedArray.length == 0)
 				{
-                    			var contents = Rho.RhoFile.read(fileReporter.path());
-                    			Rho.Log.info( "\r\n" + contents, "FailedSpecs summary");
-                    			Rho.Application.quit();
+                    fileReporter.saveResultsToLog();
+                    Rho.Application.quit();
 				}
 				else if(decodedArray.length == 1)
 				{
