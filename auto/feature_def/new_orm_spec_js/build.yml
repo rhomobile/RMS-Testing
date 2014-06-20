@@ -1,5 +1,5 @@
 ---
-sdk: "../../../../rhodes"
+#sdk: "../../../../rhodes"
 name: new_orm_spec_js
 applog: RhoLogSpec.txt
 version: 1.1
@@ -26,5 +26,5 @@ wp:
 #   - ../../../../rhoconnect-client/ext
 
 extensions:
-- json
-# - rhoconnect-client
+  - json
+  - rhoconnect-client
