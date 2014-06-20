@@ -62,10 +62,10 @@ describe("Generic Test",function(){
 			_result.waitForResponse();
 		});
 		
-		it("should close the application by calling generic.CloseProcess",function(){
+		it("should close the handle application by calling generic.CloseProcess",function(){
 
 			dispTestCaseRunning("This will call generic.CloseProcess passed with handler to close the launched application");
-			dispExpectedResult("This will launch the application and will close after 5 sec automatically");
+			dispExpectedResult("This will launch the application and will close the handle after 5 sec automatically");
 
 			//Common Method implemented to wait for tester to run the test.Code available in specHelper.js
 			_result.waitToRunTest();
@@ -91,9 +91,10 @@ describe("Generic Test",function(){
 
 			runs(function(){
 				processId = generic.LaunchProcessNonBlocking(app_name,'');
+				displayResult("Output:","Process ID "+processId+"<br/>");
 				setTimeout(function() {
-					generic.GetProcessExitCode(processId);
-					displayResult("Output:",processId+"<br/>");
+					var exitProcessId = generic.GetProcessExitCode(processId);
+					displayResult("Output:","Exit Code ID "+exitProcessId+"<br/>");
 				}, 10000);
 			});
 
@@ -111,10 +112,11 @@ describe("Generic Test",function(){
 
 			runs(function(){
 				processId = generic.LaunchProcessNonBlocking(app_name,'');
+				displayResult("Output:","Process ID "+processId+"<br/>");
 				setTimeout(function() {
 					generic.CloseProcess(processId);
-					generic.GetProcessExitCode(processId);
-					displayResult("Output:",processId+"<br/>");
+					var exitProcessId = generic.GetProcessExitCode(processId);
+					displayResult("Output:","Exit Code ID "+exitProcessId+"<br/>");
 				}, 3000);
 			});
 
