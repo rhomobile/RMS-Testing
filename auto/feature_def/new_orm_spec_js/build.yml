@@ -28,3 +28,4 @@ wp:
 extensions:
   - json
   - rhoconnect-client
+app_type: rhoelements
