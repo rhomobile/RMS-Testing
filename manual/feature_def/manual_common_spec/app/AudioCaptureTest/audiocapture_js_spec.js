@@ -181,7 +181,7 @@ describe("Audio Capture Test", function(){
 			
 			setTimeout(function(){
 				Rho.AudioCapture.start({'fileName': fname2, 'maxDuration': 5000}, audioCallBack);
-			},"time to restore manually", 7000);
+			},21000);
 		});
         
         _result.waitForResponse();
