@@ -603,7 +603,7 @@ describe('Intent_UseCases Functionality Test', function () {
     it('VT328_39 | Start Listening to the background intents - broadcast messages (receiving broadcast messages)', function () {
         displayObjective('VT328_39 | Start Listening to the background intents - broadcast messages (receiving broadcast messages)');
         dispTestCaseRunning('Test app should receive broad cast messages with the help of Start Listening API.');
-        dispExpectedResult('Test appliation starts listening to background intents and should alert the broadcast message received and also should trigger callback function of the send method which alerts test case passed.');
+        dispExpectedResult('Test appliation starts listening to background intents and should alert the broadcast message received which means test case passed.');
         _result.waitToRunTest();
         runs(function () {
             var data = {
