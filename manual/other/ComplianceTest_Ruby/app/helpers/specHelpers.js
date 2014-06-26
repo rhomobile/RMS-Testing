@@ -50,6 +50,32 @@ function isAndroidOrApplePlatform() {
     return isAndroidPlatform() || isApplePlatform();
 }
 
+//Basic specRunner html js funcs
+
+function testPassed() {
+    document.getElementById('actResult').innerHTML = 'pass';
+}
+
+function testFailed() {
+    document.getElementById('actResult').innerHTML = 'fail';
+}
+
+function setExpected(expected) {
+    document.getElementById('expResult').innerHTML = expected;
+}
+
+function setObjective(objective) {
+    document.getElementById('objective').innerHTML = objective;
+}
+
+function setInstruction(instruction) {
+    document.getElementById('instruction').innerHTML = instruction;
+}
+
+function enablecallbackdata(data) {
+    document.getElementById('clbkData').innerHTML = data;
+}
+
 //Add user log to log file.
 var writeIntoLog = function (desc, data){
 		
@@ -131,6 +157,25 @@ var dispExpectedResult= function (data){
 var dispTestCaseRunning = function (data){
     data = nl2br(data);
 	document.getElementById('instruction').innerHTML = data;
+}
+
+var displayPrecondition = function(data){
+    if(data.length>0){
+        var retData = "<b>PreConditions:</b><br/><ul>";
+        for (var i=0; i<data.length;i++){
+            retData = retData + "<li>"+data[i]+"</li>"
+        }
+        retData = retData + "</ul>";
+        document.getElementById('preCondition').innerHTML = retData;
+    }else{
+        document.getElementById('preCondition').innerHTML = "";
+    }
+}
+var dispVerificationStatus = function(data){
+    var node=document.createElement("li");
+    var textnode=document.createTextNode(data);
+    node.appendChild(textnode);
+    document.getElementById('verificationResult').appendChild(node);
 }
 
 // Get Random Name {Used in Database to get Random table name for each test}
