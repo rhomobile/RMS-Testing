@@ -30,5 +30,6 @@ extensions:
 - printing
 - printing_zebra
 - signature
+- screenorientation
 app_type: "rhoelements"
 capabilities:
