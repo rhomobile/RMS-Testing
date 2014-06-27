@@ -446,6 +446,311 @@ describe('Near Field Communication Tests', function () {
                 spec.waitForResponse();
             });
         });
+        
+        it('NFC - GENERAL - Detect only the passed supported Tags with the api \"setTagDetectionHandler\".', function(){
+            var spec = new ManualSpec(jasmine, window.document);
+            spec.addGoal("Check for detecting only supported tags with 'setTagDetectionHandler'.");
+            spec.addPrecondition("Tap or Bring non supported NFC tag close the NFC device.");
+            spec.addStep("Press 'Run Test' button");
+            spec.addStep("Bring NFC tag of type other than 4.");
+            spec.addExpectation("Test case passed, if you don't see 'setTagDetectionHandler callback = triggered'.");
+            spec.displayScenario();
+            spec.waitForButtonPressing("Run test");
+            var tagID;
+            var supportedTags = [4];
+            Rho.NFC.Adapter.setTagDetectionHandler(supportedTags, function(tagInfo){
+        		tagID = tagInfo["tagId"];
+                spec.addResult("setTagDetectionHandler callback", "triggered");
+                var tagObj = Rho.NFC.Tag.getTagById(tagInfo.tagId);
+                spec.addResult("Tag type detected ", tagObj.type);
+                tagObj.close();
+                });
+            waitsFor(function () {
+                return tagID != undefined;
+            },"WaitsFor timeout", 6000);
+             runs(function () {
+                spec.displayResults();
+                spec.waitForResponse();
+             });
+        });
+        it('NFC - ADAPTER - Stop NFC device which is already stopped:', function(){
+        	var spec = new ManualSpec(jasmine, window.document);
+            spec.addGoal('NFC - ADAPTER - Check for multiple stop method');
+            spec.addPrecondition("Ensure NFC device is activated.");
+            spec.addSteps("Press 'RunTest' button to check multiple stop of NFC device.");
+            spec.addExpectation('Check that No abnormal behavior is seen by performing multiple NFC device stop');
+            spec.displayScenario();
+            spec.waitForButtonPressing("Run test");
+            runs(function(){
+                spec.addResult("'isActive' before stop method " , Rho.NFC.Adapter.isActive);
+                Rho.NFC.Adapter.stop();
+                Rho.NFC.Adapter.stop();
+                Rho.NFC.Adapter.stop();
+                spec.addResult("'isActive'after 3 times of stop method ", Rho.NFC.Adapter.isActive);
+                spec.displayResults();
+                spec.waitForResponse();
+            });
+        });
+        it('NFC - ADAPTER - Activate NFC device which is already Active', function(){
+        	var spec = new ManualSpec(jasmine, window.document);
+            spec.addGoal('NFC - ADAPTER - Check for multiple activate method');
+            spec.addStep("Press 'RunTest' button to check multiple stop of NFC device.");
+            spec.addExpectation('Check that No abnormal behavior is seen by performing multiple NFC activate');
+            spec.displayScenario();
+            spec.waitForButtonPressing("Run test");
+            runs(function(){
+            	Rho.NFC.Adapter.stop();
+                spec.addResult("'isActive' before activate method " , Rho.NFC.Adapter.isActive);
+                Rho.NFC.Adapter.activate();
+                Rho.NFC.Adapter.activate();
+                Rho.NFC.Adapter.activate();
+                spec.addResult("'isActive'after 3 times of activate method ", Rho.NFC.Adapter.isActive);
+                spec.displayResults();
+                spec.waitForResponse();
+            });
+        });
+        it('NFC - ADAPTER - Get NFC details of the device before activating the NFC device', function(){
+        	var spec = new ManualSpec(jasmine, window.document);
+            spec.addGoal("NFC - ADAPTER - Get NFC Device info before NFC engine activation.");
+            spec.addExpectation('Getting NFC Device info should not be possible before activating the NFC engine');
+            spec.displayScenario();
+            spec.waitForButtonPressing("Run test");
+            var errThrown;
+            runs(function () {
+                Rho.NFC.Adapter.stop();
+                try{
+                    var result = Rho.NFC.Adapter.getDeviceInfo();
+                    spec.addResult("FirmwareVersion", result.firmwareVersion);
+                    spec.addResult("Formating Tags", result.formattingTagsSupported);
+                    spec.addResult("Operation Modes", result.operatingModesSupported);
+                    spec.addResult("Tags Supported", result.tagsSupported);
+                    spec.addResult("Write Protected Tags", result.writeProtectedTagsSupported);
+                }
+                catch(err){
+        			errThrown = err;
+        			alert(err);
+        		}
+        		waitsFor(function(){
+        			return errThrown != undefined;
+        		},"waitsFor timeout", 6000);
+        		
+        		expect(errThrown).toEqual("NFC stack is not activated");
+            });
+            
+        });
+        it('NFC - ADAPTER - Register for tag detection before activating the NFC device using "setTagDetectionHandler()"', function(){
+            var spec = new ManualSpec(jasmine, window.document);
+        	spec.addGoal("NFC - ADAPTER - Register for tag detection before activating the NFC device using \"setTagDetectionHandler()\".");
+            spec.addStep("Press 'RunTest' button");
+            spec.addStep("Tap or Bring any supported NFC tag close the NFC device");
+            spec.addExpectation('This is Semi- Auto case !.');
+            spec.displayScenario();
+            spec.waitForButtonPressing("Run test");
+            Rho.NFC.Adapter.stop();
+            var wait;
+            var tagDetectionHandler = {
+            	tagCB: function(tagInfo){
+            		throw new Error("Tag detection Handler Triggered!")
+                }
+            };
+            spyOn(tagDetectionHandler,'tagCB');
+            var supportedTags = [];
+            Rho.NFC.Adapter.setTagDetectionHandler(supportedTags, tagDetectionHandler.tagCB);
+            waitsFor(function(){
+            	 setTimeout(function(){ wait=true;}, 5000);
+            	 return wait == true;
+            },"waitsFor timeout",7000);
+            runs(function(){
+            	expect(tagDetectionHandler.tagCB).not.toHaveBeenCalled();
+            });
+        });
+        it('NFC - ADAPTER - Register for message detection before activating the NFC device using "setMessageHandler()"', function(){
+            var spec = new ManualSpec(jasmine, window.document);
+        	spec.addGoal("NFC - ADAPTER - Register for message detection before activating the NFC device using \"setMessageHandler()\".");
+            spec.addStep("Press 'RunTest' button");
+            spec.addStep("Tap or Bring any supported NFC tag close the NFC device");
+            spec.addExpectation('This is Semi- Auto case !.');
+            spec.displayScenario();
+            spec.waitForButtonPressing("Run test");
+            Rho.NFC.Adapter.stop();
+            var wait;
+            var messageHandler = {
+            	messageCB: function(tagInfo){
+            		throw new Error("Message Handler Triggered!");
+                }
+            };
+            spyOn(messageHandler,'messageCB');
+            var supportedTags = [];
+            Rho.NFC.Adapter.setMessageHandler(messageHandler.messageCB);
+            waitsFor(function(){
+            	 setTimeout(function(){ wait=true;}, 5000);
+            	 return wait == true;
+            },"waitsFor timeout",7000);
+            runs(function(){
+            	expect(messageHandler.messageCB).not.toHaveBeenCalled();
+            });
+        });
+        it('NFC - ADAPTER - Check for adapter properties before activating NFC device.', function(){
+        	var spec = new ManualSpec(jasmine, window.document);
+        	spec.addGoal("NFC - ADAPTER - Check for adapter properties before activating NFC device.");
+        	spec.addExpectation("Adapter properties should not be accessible before activating NFC engine.");
+        	spec.displayScenario();
+        	spec.waitForButtonPressing("Run test");
+        	Rho.NFC.Adapter.stop();
+        	var errThrown;
+        	runs(function(){
+        		try {
+        			spec.addResult("supported", Rho.NFC.Adapter.supported);
+            		spec.addResult("isActive", Rho.NFC.Adapter.isActive);
+            		spec.addResult("version", Rho.NFC.Adapter.version);
+            		spec.addResult("pollingTimeout", Rho.NFC.Adapter.pollingTimeout);
+                    Rho.NFC.Adapter.passkey = "Failed_If_You_See_This";
+                    spec.addResult("passkey", Rho.NFC.Adapter.passkey);
+        		}
+        		catch(err){
+        			errThrown = err;
+        		}
+        		waitsFor(function(){
+        			return errThrown != undefined;
+        		},"waitsFor timeout", 6000);
+        		
+        		expect(errThrown).toEqual("NFC stack is not activated");
+        	});
+        });
+        it('NFC - TAG - Format tag to NDEF format', function(){
+        	var spec = new ManualSpec(jasmine, window.document);
+            spec.addGoal("VTxxx_029 | NFC - TAG - Format tag to NDEF format");
+            spec.addStep("Press 'RunTest' button");
+            spec.addStep("Tap or Bring NFC tag close the the NFC device to make it NDEF format");
+            spec.addExpectation('Check that tag is NDEF formated by checking the property isNdef set to true.');
+            spec.displayScenario();
+            spec.waitForButtonPressing("Run test");
+            var tagID;
+            var supportedTags = [];
+            Rho.NFC.Adapter.setTagDetectionHandler(supportedTags, function(tagInfo){
+                spec.addResult("setTagDetectionHandler callback", "triggered");
+                var tagObj = Rho.NFC.Tag.getTagById(tagInfo.tagId);
+                spec.addResult("'isNdef' status before formatNDEF", tagObj.isNdef);
+                tagObj.formatNDEF();
+                spec.addResult("'isNdef' status after formatNDEF", tagObj.isNdef);
+                tagID = tagInfo["tagId"];
+                });
+            waitsFor(function () {
+                return tagID != undefined;
+            },"WaitsFor timeout", 6000);
+             runs(function () {
+                spec.displayResults();
+                spec.waitForResponse();
+             });
+        });
+        it('NFC - TAG - Write URI message to a NDEF formatted tag.', function(){
+        	var spec = new ManualSpec(jasmine, window.document);
+        	spec.addGoal("NFC - TAG - Write URI message to a NDEF formatted tag.");
+        	spec.addStep("Press 'RunTest' button");
+        	spec.addStep("Tap or Bring supported NFC tag close the the NFC device to write URI message in it.");
+        	spec.addExpectation("Test case passed if URI message \"testdomain.com\" is displayed with the result");
+        	spec.displayScenario();
+        	spec.waitForButtonPressing("Run test");
+        	var tagID;
+        	Rho.NFC.Adapter.setTagDetectionHandler([], function(tagInfo){
+        		var tagObj = Rho.NFC.Tag.getTagById(tagInfo.tagId);
+                var msgID = [];
+                var recID = "";
+                var recordObj = Rho.NFC.Record.create();
+                recID = recordObj.ID;
+                recordObj.type = Rho.NFC.Record.NDEF_RTD_URI;
+                recordObj.uriProtocol = 1;
+                recordObj.payload = "testdomain.com";
+                var messageObj = Rho.NFC.Message.create();
+                msgID[0] = messageObj.ID;
+                if(recID!=null || recID!=""){
+                   messageObj.addRecord(recID);
+                }
+                tagObj.writeMessage(msgID);
+                spec.addResult("Message written to Tag with message ID", msgID);
+                tagID = tagInfo["tagId"];
+        	});
+        	waitsFor(function(){
+        		return tagID != undefined;
+        	}, "waitsFor timeout", 6000);
+        	runs(function(){
+        		spec.displayResults();
+        		spec.waitForResponse();
+        	});
+        });
+        it('NFC - GENERAL - Clear the message of the tag, by providing empty text in it.', function(){
+        	var spec = new ManualSpec(jasmine, window.document);
+            spec.addGoal("NFC - GENERAL - Try to clear the message of the tag, by providing empty text in it.");
+            spec.addStep("Press 'RunTest' button");
+            spec.addStep("Tap or Bring NFC tag close the NFC device to write empty string in it.");
+            spec.addExpectation('Message in the NFC tag is cleared.');
+            spec.displayScenario();
+            spec.waitForButtonPressing("Run tests");
+            var tagID;
+            var supportedTags = [];
+            Rho.NFC.Adapter.setTagDetectionHandler(supportedTags, function(tagInfo){
+                var tagObj = Rho.NFC.Tag.getTagById(tagInfo.tagId);
+                var msgID = [];
+                var recID = "";
+                var recordObj = Rho.NFC.Record.create();
+                recID = recordObj.ID;
+                recordObj.type = Rho.NFC.Record.NDEF_RTD_TEXT;
+                recordObj.textLanguage = "en";
+                recordObj.payload = "";
+                var messageObj = Rho.NFC.Message.create();
+                msgID[0] = messageObj.ID;
+                if(recID!=null || recID!=""){
+                    messageObj.addRecord(recID);
+                }
+                tagObj.writeMessage(msgID);
+                spec.addResult("Message written to Tag with message ID", msgID);
+                tagID = tagInfo["tagId"];
+                });
+            waitsFor(function(){
+            	return tagID != undefined;
+            },"waitsFor timeout", 6000);
+			runs(function(){
+				spec.displayResults();
+				spec.waitForResponse();
+			});
+        });
+        it('NFC - GENERAL - Try to write oversized text message to a tag.', function(){
+        	var spec = new ManualSpec(jasmine, window.document);
+            spec.addGoal("NFC - GENERAL - Try to write oversized text message to a tag.");
+            spec.addStep("Press 'RunTest' button");
+            spec.addStep("Tap or Bring NFC tag close the NFC device to write oversized string in it.");
+            spec.addExpectation('No abnormal behaviour is seen with the application');
+            spec.displayScenario();
+            spec.waitForButtonPressing("Run tests");
+            var tagID;
+            var supportedTags = [];
+            Rho.NFC.Adapter.setTagDetectionHandler(supportedTags, function(tagInfo){
+                var tagObj = Rho.NFC.Tag.getTagById(tagInfo.tagId);
+                var msgID = [];
+                var recID = "";
+                var recordObj = Rho.NFC.Record.create();
+                recID = recordObj.ID;
+                recordObj.type = Rho.NFC.Record.NDEF_RTD_TEXT;
+                recordObj.textLanguage = "en";
+                recordObj.payload = "This is test message.This is test message.This is test message.This is test message.This is test message.";
+                var messageObj = Rho.NFC.Message.create();
+                msgID[0] = messageObj.ID;
+                if(recID!=null || recID!=""){
+                    messageObj.addRecord(recID);
+                }
+                tagObj.writeMessage(msgID);
+                spec.addResult("Message written to Tag with message ID", msgID);
+                tagID = tagInfo["tagId"];
+                });
+            waitsFor(function(){
+            	return tagID != undefined;
+            },"waitsFor timeout", 6000);
+            
+			runs(function(){
+				spec.displayResults();
+				spec.waitForResponse();
+			});
+        });
 });
 
 });

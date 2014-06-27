@@ -17,7 +17,7 @@
     };
 
     FileReporter.prototype = {
-        path: function (){
+        path: function () {
             return Rho.RhoFile.join(Rho.Application.userFolder, this.filename);
         },
 
@@ -48,6 +48,16 @@
             var fWrite = new Rho.RhoFile(this.path(), Rho.RhoFile.OPEN_FOR_APPEND);
             fWrite.write(str + '\r\n');
             fWrite.close();
+        },
+
+        saveResultsToLog: function () {
+            if (Rho.RhoFile.exists(this.path())) {
+                var contents = Rho.RhoFile.read(this.path());
+                Rho.Log.info("\r\n" + contents, "FailedSpecs summary");
+            }
+            else {
+                Rho.Log.info("File " + this.path() + ' not founded. Did specs passed fine?', 'Jasmine specRunner');
+            }
         }
     };
 

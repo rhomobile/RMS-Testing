@@ -987,6 +987,7 @@ describe("RMS 4.0 File JS API", function () {
 	        if (Rho.RhoFile.exists(openTestFile)) {
 	            Rho.RhoFile.deleteFile(openTestFile);
 	        }
+           
 	        expect(function () {
 	            new Rho.RhoFile(openTestFile, Rho.RhoFile.OPEN_FOR_APPEND);
 	        }).not.toThrow();
@@ -1157,14 +1158,14 @@ describe("RMS 4.1 : [SPB] Fix File reading errors in Ruby", function () {
 					// Time to wait ajax to be happen
 					setTimeout(function() {
 						timeout = true;
-					}, 500);
+					}, 1000);
 				});
 
 				waitsFor(function(){
 					if(timeout == true){
 						return true;
 					}
-				}, 'Wait for 1 sec ajax call to happen', 1000);
+				}, 'Wait for 1 sec ajax call to happen', 2000);
 
 				runs(function(){
 					expect(Ruby.getReturnedValue()).toBe(expectString);
@@ -1180,14 +1181,14 @@ describe("RMS 4.1 : [SPB] Fix File reading errors in Ruby", function () {
 					// Time to wait ajax to be happen
 					setTimeout(function() {
 						timeout = true;
-					}, 500);
+					}, 1000);
 				});
 
 				waitsFor(function(){
 					if(timeout == true){
 						return true;
 					}
-				}, 'Wait for 1 sec ajax call to happen', 1000);
+				}, 'Wait for 1 sec ajax call to happen', 2000);
 
 				runs(function(){
 					expect(Ruby.getReturnedValue()).toBe(expectString);
@@ -1202,14 +1203,14 @@ describe("RMS 4.1 : [SPB] Fix File reading errors in Ruby", function () {
 					// Time to wait ajax to be happen
 					setTimeout(function() {
 						timeout = true;
-					}, 500);
+					}, 1000);
 				});
 
 				waitsFor(function(){
 					if(timeout == true){
 						return true;
 					}
-				}, 'Wait for 1 sec ajax call to happen', 1000);
+				}, 'Wait for 1 sec ajax call to happen', 2000);
 
 				runs(function(){
 					expect(Ruby.getReturnedValue()).toBe('');
@@ -1223,14 +1224,14 @@ describe("RMS 4.1 : [SPB] Fix File reading errors in Ruby", function () {
 					// Time to wait ajax to be happen
 					setTimeout(function() {
 						timeout = true;
-					}, 500);
+					}, 1000);
 				});
 
 				waitsFor(function(){
 					if(timeout == true){
 						return true;
 					}
-				}, 'Wait for 1 sec ajax call to happen', 1000);
+				}, 'Wait for 1 sec ajax call to happen', 2000);
 
 				runs(function(){
 					expect(Ruby.getReturnedValue()).toBe('');
@@ -1245,14 +1246,14 @@ describe("RMS 4.1 : [SPB] Fix File reading errors in Ruby", function () {
 					// Time to wait ajax to be happen
 					setTimeout(function() {
 						timeout = true;
-					}, 500);
+					}, 1000);
 				});
 
 				waitsFor(function(){
 					if(timeout == true){
 						return true;
 					}
-				}, 'Wait for 1 sec ajax call to happen', 1000);
+				}, 'Wait for 1 sec ajax call to happen', 2000);
 
 				runs(function(){
 					expect(Ruby.getReturnedValue()).toBe(expectString1);
@@ -1267,14 +1268,14 @@ describe("RMS 4.1 : [SPB] Fix File reading errors in Ruby", function () {
 					// Time to wait ajax to be happen
 					setTimeout(function() {
 						timeout = true;
-					}, 500);
+					}, 1000);
 				});
 
 				waitsFor(function(){
 					if(timeout == true){
 						return true;
 					}
-				}, 'Wait for 1 sec ajax call to happen', 1000);
+				}, 'Wait for 1 sec ajax call to happen', 2000);
 
 				runs(function(){
 					expect(Ruby.getReturnedValue()).toBe('');
@@ -1288,14 +1289,14 @@ describe("RMS 4.1 : [SPB] Fix File reading errors in Ruby", function () {
 					// Time to wait ajax to be happen
 					setTimeout(function() {
 						timeout = true;
-					}, 500);
+					}, 1000);
 				});
 
 				waitsFor(function(){
 					if(timeout == true){
 						return true;
 					}
-				}, 'Wait for 1 sec ajax call to happen', 1000);
+				}, 'Wait for 1 sec ajax call to happen', 2000);
 
 				runs(function(){
 					expect(Ruby.getReturnedValue()).toBe('');
@@ -1309,14 +1310,14 @@ describe("RMS 4.1 : [SPB] Fix File reading errors in Ruby", function () {
 					// Time to wait ajax to be happen
 					setTimeout(function() {
 						timeout = true;
-					}, 500);
+					}, 1000);
 				});
 
 				waitsFor(function(){
 					if(timeout == true){
 						return true;
 					}
-				}, 'Wait for 1 sec ajax call to happen', 1000);
+				}, 'Wait for 1 sec ajax call to happen', 2000);
 
 				runs(function(){
 					expect(Ruby.getReturnedValue()).toBe('');

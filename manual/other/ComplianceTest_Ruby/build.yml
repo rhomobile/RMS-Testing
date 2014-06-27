@@ -4,42 +4,32 @@ version: "1.0"
 vendor: "rhomobile"
 build: "debug"
 applog: "rholog.txt"
-rhohub:
-  url: "https://appstaging.rhohub.com/api/v1/"
-connection:
-  proxy: "http://wwwgate0.mot.com:1080"
 iphone:
   configuration: "Release"
   sdk: "iphonesimulator7.0"
   provisionprofile: 
   codesignidentity: "iPhone Developer"
   entitlements: 
-  BundleIdentifier: "com.rhomobile.manualprintingrubytest"
-  BundleURLScheme: "manualprintingrubytest"
+  BundleIdentifier: "com.rhomobile.compliancerubytest"
+  BundleURLScheme: "compliancerubytest"
 wp8:
   productid: "da37e740-9d27-0131-ad03-0023241f0ea9"
 android:
   manifest_template: "AndroidManifest.erb"
   ajax_api_bridge: false
   version: "4.2.2"
-  extensions:
-    - indicators
-    - mediaplayer
-    - audiocapture
-    - signature
-    - printing
-    - printing_zebra
   capabilities:
 wm:
   ajax_api_bridge: false
 #sdk: "MC3000c50b (ARMV4I)"
   sdk: "Windows Mobile 6.5.3 Professional DTK (ARMV4I)"
-  extensions:
-    - indicators
-    - mediaplayer
-    - audiocapture
-    - printing
-    - printing_zebra
-    - signature
+extensions:
+- indicators
+- mediaplayer
+- audiocapture
+- printing
+- printing_zebra
+- signature
+- screenorientation
 app_type: "rhoelements"
 capabilities:

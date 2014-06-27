@@ -345,6 +345,7 @@ end
 $local_server.mount_proc( '/time_stream' ) do |req, res|
   res.content_type = 'text/event-stream'
   res.chunked = true
+  res['Access-Control-Allow-Origin'] = "*"
   
   res.body = proc { |w|
       2.times do
@@ -360,6 +361,8 @@ end
 
 $local_server.mount_proc( '/time_stream2' ) do |req, res|
   res.content_type = 'text/event-stream'
+  res['Access-Control-Allow-Origin'] = "*"
+
     sleep 1
 
     res.body =
@@ -368,7 +371,9 @@ $local_server.mount_proc( '/time_stream2' ) do |req, res|
 end
 
 $local_server.mount_proc( '/time_stream_wrong_mime' ) do |req, res|
-  res.content_type = 'text/html'
+    res.content_type = 'text/html'
+    res['Access-Control-Allow-Origin'] = "*"
+
     sleep 1
 
     res.body =

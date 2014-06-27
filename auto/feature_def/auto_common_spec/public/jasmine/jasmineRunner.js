@@ -72,9 +72,8 @@ function quit()
 				var nextPageUrl = '../' + decodedArray[0];
 				if(decodedArray.length == 0)
 				{
-                    			var contents = Rho.RhoFile.read(fileReporter.path());
-                    			Rho.Log.info( "\r\n" + contents, "FailedSpecs summary");
-                    			Rho.Application.quit();
+                    fileReporter.saveResultsToLog();
+                    Rho.Application.quit();
 				}
 				else if(decodedArray.length == 1)
 				{
@@ -88,6 +87,9 @@ function quit()
 			else
 			{
 				//Running locally. Ignore
+				// Bangalore Jenkins Directly replacing rhoconfig.txt on wm and ce devices by pointing start_path=/app/module_name/specRunner.html
+				// Added this line to quit appliction automatically.
+				Rho.Application.quit();
 			}
 		};
 		jasmineEnv.execute();
