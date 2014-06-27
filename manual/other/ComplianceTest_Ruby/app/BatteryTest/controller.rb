@@ -7,24 +7,24 @@ class BatteryTestController < Rho::RhoController
 
 def status_callback
     @result = ""
-	  @result += '<br/>AcLineStatus: ' + @params['acLineStatus']
-    @result += '<br/>BatteryLifePercent: ' + @params['batteryLifePercent']
-    @result += '<br/>BackupBatteryLifePercent: ' + @params['backupBatteryLifePercent']
-    @result += '<br/>Trigger: ' + @params['trigger']
-    @result += '<br/>BatteryLifeKnown: ' + @params['batteryLifeKnown']
-    @result += '<br/>BackupBatteryLifeKnown: ' + @params['backupBatteryLifeKnown']
+	@result += '<br/>AcLineStatus: ' + @params['acLineStatus'].to_s
+    @result += '<br/>BatteryLifePercent: ' + @params['batteryLifePercent'].to_s
+    @result += '<br/>BackupBatteryLifePercent: ' + @params['backupBatteryLifePercent'].to_s
+    @result += '<br/>Trigger: ' + @params['trigger'].to_s
+    @result += '<br/>BatteryLifeKnown: ' + @params['batteryLifeKnown'].to_s
+    @result += '<br/>BackupBatteryLifeKnown: ' + @params['backupBatteryLifeKnown'].to_s
   Rho::WebView.executeJavascript("document.getElementById('actResult').innerHTML= '#{@result}'")
   Rho::WebView.executeJavascript("document.getElementById('actResult').style.display='block'")
 end
 
 def smart_battery_status_callback
   @result = ""
-	@result += '<br/>serialNumber: ' + @params['serialNumber']
-	@result += '<br/>partNumber: ' + @params['partNumber']
-	@result += '<br/>batteryChargeCycles: ' + @params['batteryChargeCycles']
-	@result += '<br/>ratedCapacity: ' + @params['ratedCapacity']
-	@result += '<br/>manufactureDate: ' + @params['manufactureDate']
-	@result += '<br/>stateOfHealth: ' + @params['stateOfHealth']
+	@result += '<br/>serialNumber: ' + @params['serialNumber'].to_s
+	@result += '<br/>partNumber: ' + @params['partNumber'].to_s
+	@result += '<br/>batteryChargeCycles: ' + @params['batteryChargeCycles'].to_s
+	@result += '<br/>ratedCapacity: ' + @params['ratedCapacity'].to_s
+	@result += '<br/>manufactureDate: ' + @params['manufactureDate'].to_s
+	@result += '<br/>stateOfHealth: ' + @params['stateOfHealth'].to_s
   Rho::WebView.executeJavascript("document.getElementById('actResult').innerHTML='#{@result}'")
   Rho::WebView.executeJavascript("document.getElementById('actResult').style.display='block'")
 end
