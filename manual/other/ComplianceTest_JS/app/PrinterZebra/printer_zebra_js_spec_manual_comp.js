@@ -847,8 +847,8 @@ describe('Printer Zebra', function() {
         }
 
         it('disconnect and try to print should return status error', function() {
-            dispTestCaseRunning("1. Run test will try to print the Rawstring after disconnect");
-            dispExpectedResult("Should return status error when try to print Rawstring after disconnect");
+            dispTestCaseRunning("1. Run test will try to print the print png after disconnect");
+            dispExpectedResult("Should return status error when try to print print png after disconnect");
             //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
             _result.waitToRunTest();
             var callresult = null;
@@ -868,34 +868,13 @@ describe('Printer Zebra', function() {
             runs(function() {
                 expect(thisprinter.isConnected).toEqual(true);
             });
+			
             runs(function() {
-                callresult = null;
-                thisprinter.disconnect(function(result) {
-                    callresult = result;
-                });
+                thisprinter.disconnect();
             });
-            waitsFor(function() {
-                return callresult !== null;
-            }, 'wait until disconnected', 25000);
-
-            runs(function() {
-                expect(callresult).toEqual(Rho.PrinterZebra.PRINTER_STATUS_SUCCESS);
-                expect(thisprinter.isConnected).toEqual(false);
-            });
-            runs(function() {
-                callresultp = null;
-                 thisprinter.printRawString(CommandZPL, {}, function(result) {
-                                            callresultp = result;
-                                            });
-            });
-
-            waitsFor(function() {
-                return callresultp !== null;
-            }, 'wait.. trying to print..', 25000);
-
-            runs(function() {
-                displayResult(jasmine.getEnv().currentSpec.description, callresultp.status);
-            });
+            
+			doPrintPrintFile(pngimagepath_320px, {});
+			
             _result.waitForResponse();
             
         });

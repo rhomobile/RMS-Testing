@@ -27,6 +27,13 @@ function quit()
     var fileReporter = new jasmine.FileReporter("failedSpecs.txt");
     jasmineEnv.addReporter(fileReporter);
 
+    network_server = null;
+
+    if (network_server !== null && network_server.length > 0) {
+		var remoteReporter = new jasmine.NetworkReporter(network_server);
+		jasmineEnv.addReporter(remoteReporter);
+	}
+
 	//var junitReporter = new jasmine.JUnitXmlReporter();
 	//junitReporter.useDotNotation = false
 
@@ -65,7 +72,8 @@ function quit()
 				var nextPageUrl = '../' + decodedArray[0];
 				if(decodedArray.length == 0)
 				{
-					Rho.Application.quit();
+                    fileReporter.saveResultsToLog();
+                    Rho.Application.quit();
 				}
 				else if(decodedArray.length == 1)
 				{
@@ -79,6 +87,9 @@ function quit()
 			else
 			{
 				//Running locally. Ignore
+				// Bangalore Jenkins Directly replacing rhoconfig.txt on wm and ce devices by pointing start_path=/app/module_name/specRunner.html
+				// Added this line to quit appliction automatically.
+				Rho.Application.quit();
 			}
 		};
 		jasmineEnv.execute();

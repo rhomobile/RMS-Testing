@@ -156,36 +156,40 @@ describe("Audio Capture Test", function(){
 	
     it('try to capture the audio after application brought to forgorund from background', function () {
         dispTestCaseRunning(jasmine.getEnv().currentSpec.description);
-        dispExpectedResult('Callback should return ok and full file path of recored audiofile  and In step 3 captured audio should play successfully audioTest1 <br/><br/>after step 3 captured audio file should play successfully audioTest2');
+        dispExpectedResult('Callback should return ok and full file path of recored audiofile and captured 5secs audio should play successfully audioTest1 and minimize<br/>After minimized, restore manually and again 5sec audio will be captured audioTest2 & audio file should play successfully');
         
         _result.waitToRunTest();
 
         var fname1 = Rho.RhoFile.join(AudioCapturedFolder,"audioTest1");
-
+		var flag = false;
+		
         runs(function () {
             Rho.AudioCapture.start({'fileName': fname1, 'maxDuration': 5000}, audioCallBack);
 
             setTimeout(function(){
                 Rho.Application.minimize();
-            },7000);
+				flag = true;
+            },15000);
         });
+		
+		waitsFor(function() {
+            return flag !== false;
+        }, 'wait until minimize', 17000);
 
-        var fname2 = Rho.RhoFile.join(AudioCapturedFolder,"audioTest2");
-
-        runs(function () {
-            setTimeout(function(){
-                Rho.Application.restore();
-            },1000);
-
-            Rho.AudioCapture.start({'fileName': fname2, 'maxDuration': 5000}, audioCallBack);
-        });
+		runs(function () {
+			var fname2 = Rho.RhoFile.join(AudioCapturedFolder,"audioTest2");
+			
+			setTimeout(function(){
+				Rho.AudioCapture.start({'fileName': fname2, 'maxDuration': 5000}, audioCallBack);
+			},21000);
+		});
         
         _result.waitForResponse();
     });
    
     it('try to capture the audio while application in background', function () {
         dispTestCaseRunning(jasmine.getEnv().currentSpec.description);
-        dispExpectedResult('Callback should return ok and Audio capture should happen when application sent to backgorund');
+        dispExpectedResult('Callback should return ok and Audio capture should happen when application sent to backgorund <br/> after audio played, restore it manually');
         
         _result.waitToRunTest();
 
@@ -199,9 +203,10 @@ describe("Audio Capture Test", function(){
             Rho.AudioCapture.start({'fileName': fname, 'maxDuration': 15000}, audioCallBack);
         });
 
-        setTimeout(function(){
-            Rho.Application.restore();
-        },2000);
+		// restore doesn't work in wm/ce and android
+        //setTimeout(function(){
+        //    Rho.Application.restore();
+        //},2000);
 
         _result.waitForResponse();
     });
@@ -222,7 +227,7 @@ describe("Audio Capture Test", function(){
     });
 
 
-    if(isAndroidPlatform){
+    if(isAndroidPlatform()){
         it('<br/>Call start method with all properties set', function () {
             dispTestCaseRunning(jasmine.getEnv().currentSpec.description);
             dispExpectedResult('Callback should return ok and full file path of recored audiofile and and captured audio file name should be captured with default source MIC, and captured audio fileName should be androidallparams with encoder ENCODER_AMR_WB  and audio duration should be 8 seconds');

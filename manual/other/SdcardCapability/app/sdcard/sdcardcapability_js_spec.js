@@ -75,7 +75,7 @@ describe('SDcard capability tests using different APIs', function(){
 	
 
 
-	describe('SDcard capability WRITE tests using different APIs', function(){
+	describe('SDcard capability READ & WRITE tests using different APIs', function(){
 	
 		var filePath = '';
 		var message = '';
@@ -205,7 +205,7 @@ describe('SDcard capability tests using different APIs', function(){
 		xit("Imager API - Capture and save the file in sdcard |", function () {
 			
 		    displayObjective(jasmine.getEnv().currentSpec.description);
-            dispTestCaseRunning("Imager API - will enumerate and use the first avaiable imager to capture and save in the sdcard path '/sdcard/Temp/'");
+            dispTestCaseRunning("Imager API - will enumerate and use the first available imager to capture and save in the sdcard path '/sdcard/Temp/'");
             dispExpectedResult("Image should be saved in the sdcard at '/sdcard/Temp/' as imager_capture.bmp");
        
 			_result.waitToRunTest();
@@ -251,8 +251,8 @@ describe('SDcard capability tests using different APIs', function(){
 		it("Network API - upload file from sdcard |", function () {
 		
 			displayObjective(jasmine.getEnv().currentSpec.description);
-            dispTestCaseRunning("Kindly make sure image called loading.png exists in the sdcard path '/sdcard/Temp/' before running this test");
-            dispExpectedResult("Image file should be read from sdcard successfully uploaded");
+            dispTestCaseRunning("Kindly make sure image called loading.png exists in the sdcard path '/sdcard/Temp/' & connected to the same network as of the server before running this test");
+            dispExpectedResult("Image file should be read from sdcard successfully & uploaded");
 			
 			_result.waitToRunTest();
 			

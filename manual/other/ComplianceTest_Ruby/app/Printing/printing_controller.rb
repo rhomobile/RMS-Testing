@@ -50,13 +50,26 @@ class PrintingController < Rho::RhoController
 
 
   #callback function
-  def printer_callback
+  def printer_callback_connect
     begin
       if @params['status']
         Rho::WebView.executeJavascript('Ruby.sendValueToJS("'+ @params['status'] +'")')
       else
         Rho::WebView.executeJavascript('Ruby.sendValueToJS("'+ @params['result'] +'")')
       end
+    rescue => ex
+      jsmethod = 'Ruby.sendValueToJS("' + ex.message + '")'
+      Rho::WebView.executeJavascript(jsmethod)
+    end
+  end
+  
+  #callback function
+  def printer_callback
+    begin
+		if @params
+		  @data = @params.to_json
+		  Rho::WebView.executeJavascript("Ruby.sendValueToJS(JSON.stringify(#{@data}))")
+		end
     rescue => ex
       jsmethod = 'Ruby.sendValueToJS("' + ex.message + '")'
       Rho::WebView.executeJavascript(jsmethod)
@@ -79,7 +92,7 @@ class PrintingController < Rho::RhoController
     begin
       if @params['pid']
         @printer = Rho::Printer.getPrinterByID(@params['pid'])
-        @printer.connect(url_for(:action => :printer_callback))
+        @printer.connect(url_for(:action => :printer_callback_connect))
       end
     rescue => ex
       jsmethod = 'Ruby.sendValueToJS("' + ex.message + '")'
@@ -101,7 +114,7 @@ class PrintingController < Rho::RhoController
     end
   end
 
-  def rho_printFile_callback
+  def rho_printFile
     begin
       if @params['file']
         fileURI = @params['file']
@@ -118,7 +131,7 @@ class PrintingController < Rho::RhoController
     end
   end
 
-  def rho_printRawString_callback
+  def rho_printRawString
     begin
       if @params['rawstr']
         rawstr = @params['rawstr']
@@ -140,7 +153,7 @@ class PrintingController < Rho::RhoController
     end
   end
 
-  def rho_printFileImage_callback
+  def rho_printFileImage
     begin
       if @params['file']
         fileURI = @params['file']
@@ -149,7 +162,7 @@ class PrintingController < Rho::RhoController
       end
     
       @printer = Rho::Printer.getPrinterByID(@params['pid'])
-      @printer.printImageFromFile(fileURI, 50, 50, {'width' => -1, 'height' => -1}, url_for(:action => :printer_callback))
+      @printer.printImageFromFile(fileURI, 50, 50, {'width' => 100, 'height' => 100}, url_for(:action => :printer_callback))
 
     rescue => ex
       jsmethod = 'Ruby.sendValueToJS("' + ex.message + '")'

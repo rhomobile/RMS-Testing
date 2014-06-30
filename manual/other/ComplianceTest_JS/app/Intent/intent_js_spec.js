@@ -114,7 +114,7 @@ describe('Intent_UseCases Functionality Test', function () {
     }
     if(isApplePlatform()){
         it('VT328_28 | appName - Launch iOS application via \'appName\' (BundleURLScheme) from test application.', function () {
-            displayObjective('VT328_27 | appName - Launch iOS application via \'testapp\' (BundleURLScheme) from test application.');
+            displayObjective('VT328_28 | appName - Launch iOS application via \'testapp\' (BundleURLScheme) from test application.');
             dispTestCaseRunning('Sending Intent with parameters {"intentType":Rho.Intent.START_ACTIVITY,"testapp":"testapp"}');
             dispExpectedResult('iOS application should be launched whose bundleUrlScheme matches.');
             _result.waitToRunTest();
@@ -124,42 +124,27 @@ describe('Intent_UseCases Functionality Test', function () {
             });
             _result.waitForResponse();
         });
-    }
-    if (isAnyButWindowsFamilyPlatform()){
-    it('VT328_29 | uri - Launch URL via browser appliation from test app by setting URI "http://www.google.com"', function () {
-        displayObjective('VT328_28 | uri - Launch URL via browser appliation from test app by setting URI "http://www.google.com"');
-        dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":Rho.Intent.START_ACTIVITY,"action":"ACTION_VIEW","categories":"","appName":"","targetClass":"","uri":"http://www.google.com","mimeType":"","data":""}}');
-        dispExpectedResult('Browser should be launched with default data in the view.');
-        _result.waitToRunTest();
-        runs(function () {
-            var params = new parameters(Rho.Intent.START_ACTIVITY,"","ACTION_VIEW","","","","http://www.google.com","","");
-            Rho.Intent.send(params);
-        });
-        _result.waitForResponse();
-    });
-    if (!isApplePlatform()) {
-    it('VT328_30 | uri - Launch Message application with data from test app by setting URI "sms:9611896991"', function () {
-        displayObjective('VT328_29 | uri - Launch Message application with data from test app by setting URI "sms:9611896991"');
-        dispTestCaseRunning('Sending Intent with parameters {"intentType":Rho.Intent.START_ACTIVITY,"uri":"sms:9611896991"}');
-        dispExpectedResult('Message compose application should be launched with pre-filled recepient number.');
-        _result.waitToRunTest();
-        runs(function () {
-        	var params = new parameters("","","","","","","sms:9611896991","","");
-            Rho.Intent.send(params);
+        it('VT328_29 | uri - Launch URL via browser appliation from test app by setting URI "http://www.google.com"', function () {
+            displayObjective('VT328_29 | uri - Launch URL via browser appliation from test app by setting URI "http://www.google.com"');
+            dispTestCaseRunning('Sending Intent with parameters {"params":{"intentType":Rho.Intent.START_ACTIVITY,"action":"ACTION_VIEW","categories":"","appName":"","targetClass":"","uri":"http://www.google.com","mimeType":"","data":""}}');
+            dispExpectedResult('Browser should be launched with default data in the view.');
+            _result.waitToRunTest();
+            runs(function () {
+                var params = new parameters(Rho.Intent.START_ACTIVITY,"","ACTION_VIEW","","","","http://www.google.com","","");
+                Rho.Intent.send(params);
             });
-        _result.waitForResponse();
+            _result.waitForResponse();
         });
-    }
-     it('VT328_32 | uri - Launch dialler with pre-filled number from test application by setting URI "tel:9611896991" and with Action: ACTION_DIAL', function () {
-        displayObjective('VT328_31 | uri - Launch dialler with pre-filled number from test application by setting URI "tel:9611896991" and with Action: ACTION_DIAL');
-        dispTestCaseRunning('Sending Intent with parameters {"intentType":Rho.Intent.START_ACTIVITY,"action":"ACTION_DIAL","uri":"tel:9611896991"}');
-        dispExpectedResult('Dialer launches with pre-loaded number in it.');
-        _result.waitToRunTest();
-        runs(function () {
-             var params = new parameters(Rho.Intent.START_ACTIVITY,"","ACTION_DIAL","","","","tel:9611896991","","");
-             Rho.Intent.send(params);
-             });
-        _result.waitForResponse();
+        it('VT328_32 | uri - Launch dialler with pre-filled number from test application by setting URI "tel:9611896991" and with Action: ACTION_DIAL', function () {
+            displayObjective('VT328_32 | uri - Launch dialler with pre-filled number from test application by setting URI "tel:9611896991" and with Action: ACTION_DIAL');
+            dispTestCaseRunning('Sending Intent with parameters {"intentType":Rho.Intent.START_ACTIVITY,"action":"ACTION_DIAL","uri":"tel:9611896991"}');
+            dispExpectedResult('Dialer launches with pre-loaded number in it.');
+            _result.waitToRunTest();
+            runs(function () {
+                 var params = new parameters(Rho.Intent.START_ACTIVITY,"","ACTION_DIAL","","","","tel:9611896991","","");
+                 Rho.Intent.send(params);
+                 });
+            _result.waitForResponse();
         });
     }
     if(isAndroidPlatform()){
@@ -199,13 +184,13 @@ describe('Intent_UseCases Functionality Test', function () {
             };
             var params;
             if (isAndroidPlatform()) {
-                params = new parameters(Rho.Intent.BROADCAST,"","com.rhomobile.BROADCAST",["com.rhomobile.ComplianceTest_JS"],"","","","",data);
+                params = new parameters(Rho.Intent.BROADCAST,"","com.rhomobile.BROADCAST","","com.rhomobile.compliancetest_js","","","",data);
             }
             if (isApplePlatform()) {
-                params = new parameters(Rho.Intent.BROADCAST,"","","","manualcommonspec","","","",data);
+                params = new parameters(Rho.Intent.BROADCAST,"","","","compliancetestjs","","","",data);
             }
             if (isAnyWindowsFamilyPlatform()) {
-                params = new parameters(Rho.Intent.BROADCAST,"","","","rhomobile ComplianceTest_JS/ComplianceTest_JS.exe","","","",data);
+                params = new parameters(Rho.Intent.BROADCAST,"","","","rhomobile compliancetest_js/compliancetest_js.exe","","","",data);
             }
             var receiveCB = function(intent){
             	alert(JSON.stringify(intent));
@@ -226,13 +211,13 @@ describe('Intent_UseCases Functionality Test', function () {
             };
             var params;
             if (isAndroidPlatform()) {
-                params = new parameters(Rho.Intent.BROADCAST,"","com.rhomobile.BROADCAST",["com.rhomobile.ComplianceTest_JS"],"","","","",data);
+                params = new parameters(Rho.Intent.BROADCAST,"","com.rhomobile.BROADCAST","","com.rhomobile.compliancetestjs","","","",data);
             }
             if (isApplePlatform()) {
-                params = new parameters(Rho.Intent.BROADCAST,"","","","manualcommonspec","","","",data);
+                params = new parameters(Rho.Intent.BROADCAST,"","","","compliancetestjs","","","",data);
             }
             if (isAnyWindowsFamilyPlatform()) {
-                params = new parameters(Rho.Intent.BROADCAST,"","","","rhomobile ComplianceTest_JS/ComplianceTest_JS.exe","","","",data);
+                params = new parameters(Rho.Intent.BROADCAST,"","","","rhomobile compliancetest_js/compliancetest_js.exe","","","",data);
             }
             var receiveCB = function(intent){
                 alert("Test Case failed if you see this alert message!");

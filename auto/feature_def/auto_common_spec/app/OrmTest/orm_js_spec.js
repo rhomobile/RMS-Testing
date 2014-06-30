@@ -11,7 +11,7 @@
         }
         return cleanVars;
     };
-
+describe("ORM JS API", function() {
 describe("<ORM module specs>", function() {
   var reset = function(){
     db = Rho.ORMHelper.dbConnection("local");
@@ -1573,4 +1573,5 @@ describe("<ORM Db Reset specs>", function() {
     expect(String(customer_src_id)).toEqual(sources["Customer"].source_id);
     expect(String(product_src_id)).toEqual(sources["Product"].source_id);
   });
+});
 });

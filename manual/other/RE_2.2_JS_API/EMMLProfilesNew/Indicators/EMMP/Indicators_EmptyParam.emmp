@@ -1,0 +1,27 @@
+.Battery{
+    battery-Left:;
+    battery-Top:;
+    battery-IconPosition:;
+    battery-GraphPosition:Right;
+    battery-color:;
+    battery-visibility:visible;
+    battery-BatteryEvent:url('');
+ }
+
+.Signal{
+    signal-Left:;
+    signal-Iconposition:;
+    signal-GraphPosition:;
+    signal-Top:;
+    signal-color:;
+    signal-visibility:visible;
+    signal-signalevent:url('');
+   }
+   
+   .BatteryHide{
+    battery-visibility:hidden;
+ }
+
+.SignalHide{
+    signal-visibility:hidden;
+   }

@@ -253,7 +253,7 @@ describe('Printing Generic', function() {
         runs(function() {
             expect(last_found_printer_id).toNotEqual(null);
             
-            Ruby.call('Printing','rho_printFile_callback?pid='+last_found_printer_id+'&file='+filename);
+            Ruby.call('Printing','rho_printFile?pid='+last_found_printer_id+'&file='+filename);
             
             setTimeout(function() {
                 testResult = Ruby.getReturnedValue();
@@ -266,7 +266,7 @@ describe('Printing Generic', function() {
         }, 'Wait for 10msec ajax call to happen', 10000);
 
         runs(function() {
-            displayResult("Output: ", testResult.toString() +"<br/>");
+            displayResult("Output: ", testResult +"<br/>");
             //expect(testResult).toEqual('PRINTER_STATUS_SUCCESS');
         });
 
@@ -278,7 +278,7 @@ describe('Printing Generic', function() {
 		runs(function() {
             expect(last_found_printer_id).toNotEqual(null);
             
-            Ruby.call('Printing','rho_printRawString_callback?pid=' + last_found_printer_id + '&rawstr='+ cmd );
+            Ruby.call('Printing','rho_printRawString?pid=' + last_found_printer_id + '&rawstr='+ cmd );
             
             setTimeout(function() {
                 testResult = Ruby.getReturnedValue();
@@ -291,7 +291,7 @@ describe('Printing Generic', function() {
         }, 'Wait for 10msec ajax call to happen', 10000);
 
         runs(function() {
-            displayResult("Output: ", testResult.toString() +"<br/>");
+            displayResult("Output: ", testResult +"<br/>");
             //expect(testResult).toEqual('PRINTER_STATUS_SUCCESS');
         });
 
@@ -333,7 +333,7 @@ describe('Printing Generic', function() {
 
         // png
         it('should print png with callback', function() {
-            dispTestCaseRunning(" 1. Should Print label <br />2. Should print PNG image ");
+            dispTestCaseRunning(" 1. Should print PNG image ");
             dispExpectedResult("should print png image and return PRINT_STATUS_SUCCESS after printing");
             //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
             _result.waitToRunTest();
@@ -344,7 +344,7 @@ describe('Printing Generic', function() {
 
         //jpg
         it('should print jpeg with callback', function() {
-            dispTestCaseRunning(" 1. Should Print label <br />2. Should print jpeg image. ");
+            dispTestCaseRunning(" 1. Should print jpeg image. ");
             dispExpectedResult("should print jpeg image and return PRINT_STATUS_SUCCESS after printing");
             //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
             _result.waitToRunTest();
@@ -360,7 +360,7 @@ describe('Printing Generic', function() {
     describe('printRawString method', function() {
 
         it('should print ZPL Command with callback', function() {
-            dispTestCaseRunning(" 1. Should Print label <br />2. should print ZPL Command ");
+            dispTestCaseRunning(" should print ZPL Command ");
             dispExpectedResult("should print ZPL Command and return PRINT_STATUS_SUCCESS after printing");
             //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
             _result.waitToRunTest();
@@ -369,7 +369,7 @@ describe('Printing Generic', function() {
         });
 
         it('should print CPCL Command with callback', function() {
-            dispTestCaseRunning(" 1. Should Print label <br />2. should print CPCL Command ");
+            dispTestCaseRunning("should print CPCL Command ");
             dispExpectedResult("should print CPCL Command and return PRINT_STATUS_SUCCESS after printing");
             //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
             _result.waitToRunTest();
@@ -389,7 +389,7 @@ describe('Printing Generic', function() {
 
         it('Print png image from file tests', function() {
             dispTestCaseRunning("Print png image from file tests");
-            dispExpectedResult("should print png image with x:100 y:100 of width:50 height:50");
+            dispExpectedResult("should print png image with x:50 y:50 of width:100 height:100");
 
             _result.waitToRunTest();
 
@@ -397,7 +397,7 @@ describe('Printing Generic', function() {
             runs(function() {
                 expect(last_found_printer_id).toNotEqual(null);
                 
-                Ruby.call('Printing','rho_printFileImage_callback?pid='+last_found_printer_id+'&file='+pngimagepath_320px);
+                Ruby.call('Printing','rho_printFileImage?pid='+last_found_printer_id+'&file='+pngimagepath_320px);
                 
                 setTimeout(function() {
                     testResult = Ruby.getReturnedValue();
@@ -410,7 +410,7 @@ describe('Printing Generic', function() {
             }, 'Wait for 10msec ajax call to happen', 10000);
 
             runs(function() {
-                displayResult("Output: ", testResult.toString()+"<br/>");
+                displayResult("Output: ", testResult +"<br/>");
                 //expect(testResult).toEqual('PRINTER_STATUS_SUCCESS');
             });
 
@@ -419,7 +419,7 @@ describe('Printing Generic', function() {
 
         it('Print jpg image from file tests', function() {
             dispTestCaseRunning("Print jpg image from file tests");
-            dispExpectedResult("should print jpg image with x:100 y:100 of width:50 height:50");
+            dispExpectedResult("should print jpg image with x:50 y:50 of width:100 height:100");
 
             _result.waitToRunTest();
 
@@ -427,7 +427,7 @@ describe('Printing Generic', function() {
             runs(function() {
                 expect(last_found_printer_id).toNotEqual(null);
                 
-                Ruby.call('Printing','rho_printFileImage_callback?pid='+last_found_printer_id+'&file='+jpgimagepath_640px);
+                Ruby.call('Printing','rho_printFileImage?pid='+last_found_printer_id+'&file='+jpgimagepath_640px);
                 
                 setTimeout(function() {
                     testResult = Ruby.getReturnedValue();
@@ -440,7 +440,7 @@ describe('Printing Generic', function() {
             }, 'Wait for 10msec ajax call to happen', 10000);
 
             runs(function() {
-                displayResult("Output: ", testResult.toString()+"<br/>");
+                displayResult("Output: ", testResult +"<br/>");
                 //expect(testResult).toEqual('PRINTER_STATUS_SUCCESS');
             });
 

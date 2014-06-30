@@ -64,7 +64,7 @@ namespace :generate do
 			Rake::Task['generate:xmltoymal:camera'].execute
 			Rake::Task['generate:xmltoymal:battery'].execute
 			Rake::Task['generate:xmltoymal:database'].execute
-			Rake::Task['generate:xmltoymal:dpx'].execute
+			Rake::Task['generate:xmltoymal:simulscan'].execute
 			Rake::Task['generate:xmltoymal:intent'].execute
 			Rake::Task['generate:xmltoymal:keycapture'].execute
 			Rake::Task['generate:xmltoymal:keystate'].execute
@@ -99,7 +99,7 @@ namespace :generate do
 			generate_js_spec "Camera"
 			generate_js_spec "Battery"
 			generate_js_spec "Database"
-			generate_js_spec "Dpx"
+			generate_js_spec "SimulScan"
 			generate_js_spec "Intent"
 			generate_js_spec "KeyCapture"
 			generate_js_spec "KeyState"
@@ -183,8 +183,8 @@ namespace :generate do
 		end
 		
 		#desc "Converts xml to ymal"
-		task :dpx do
-			module_xmltoymal PATH_DPX, "Dpx"
+		task :simulscan do
+			module_xmltoymal PATH_SIMULSCAN, "SimulScan"
 		end
 		
 		#desc "Converts xml to ymal"

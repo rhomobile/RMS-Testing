@@ -456,7 +456,7 @@ describe('Printing Generic', function() {
         }
     });
 		
-		    describe('connect and disconnect methods', function() {
+	describe('connect and disconnect methods', function() {
         var callresult = null;
 
         function cbk(val) {
@@ -464,8 +464,8 @@ describe('Printing Generic', function() {
         }
 
         it('disconnect and try to print should return status error', function() {
-            dispTestCaseRunning("1. Run test will try to print the Rawstring after disconnect");
-            dispExpectedResult("Should return status error when try to print Rawstring after disconnect");
+            dispTestCaseRunning("1. Run test will try to print the png image after disconnect");
+            dispExpectedResult("Should return status error when try to print png image after disconnect");
             //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
             _result.waitToRunTest();
             var callresult = null;
@@ -486,33 +486,11 @@ describe('Printing Generic', function() {
                 expect(thisprinter.isConnected).toEqual(true);
             });
             runs(function() {
-                callresult = null;
-                thisprinter.disconnect(function(result) {
-                    callresult = result;
-                });
+                thisprinter.disconnect();
             });
-            waitsFor(function() {
-                return callresult !== null;
-            }, 'wait until disconnected', 25000);
-
-            runs(function() {
-                expect(callresult).toEqual(Rho.Printer.PRINTER_STATUS_SUCCESS);
-                expect(thisprinter.isConnected).toEqual(false);
-            });
-            runs(function() {
-                callresultp = null;
-                 thisprinter.printRawString(CommandZPL, {}, function(result) {
-                                            callresultp = result;
-                                            });
-            });
-
-            waitsFor(function() {
-                return callresultp !== null;
-            }, 'wait.. trying to print..', 25000);
-
-            runs(function() {
-                displayResult(jasmine.getEnv().currentSpec.description, callresultp.status);
-            });
+            
+			doPrintPrintFileCbk(pngimagepath_320px, {});
+			
             _result.waitForResponse();
             
         });
