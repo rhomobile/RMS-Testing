@@ -4,38 +4,12 @@ require 'fileutils'
 require 'yaml'
 require 'spec_helper'
 
-describe "Testing Rhodes cli" do
-
-
+describe "Testing Cloud Building through cli" do
 
 	#load './Rakefile'
   	before(:each) do
     	stdout = ''
   	end
-
-	xit "should ask for token after running the command rake cloud:initialize without setting token" do
-
-		# Delete the token in home directory if any token exist.
-		FileUtils.rm_rf(Dir.home+"/.rhomobile")
-
-		Open3.popen3('rake cloud:initialize') do |stdin, stdout, stderr, wait_thr|
-		    stdout = stdout.read
-			expect(stdout).to match(/In order to use Rhodes framework you should set RhoHub API token for it/) # passes
-			puts "stdout is:" + stdout.gsub(/\n/, "<br/>")
-		  	puts "stderr is:" + stderr.read
-		end
-
-	end
-
-	xit "should set the token by calling rake token:set[ad63553d542f7ff81cee22c079a09b4cdedef5a348def84e92]" do
-
-		Open3.popen3('rake token:set[ad63553d542f7ff81cee22c079a09b4cdedef5a348def84e92]') do |stdin, stdout, stderr, wait_thr|
-		    stdout = stdout.read
-			expect(stdout).to match(/Token and subscription are valid/)
-			puts "stdout is:" + stdout.gsub(/\n/, "<br/>")
-		  	puts "stderr is:" + stderr.read
-		end
-	end
 
 	it "should not throw any error with rake cloud:info inside valid rhohub project" do
 
@@ -93,7 +67,7 @@ describe "Testing Rhodes cli" do
 		expect(File.exist?(filePath)).to be true
 	end
 
-	it "should rake cloud:build:<platform>:<mode>:download for Android" do
+	it "should build for Android platform with command rake rake cloud:build:android:production" do
 		buffer = []
 		filePath = ''
 		Open3.popen3('rake cloud:build:android:production') do |stdin, stdout, stderr, wait_thr|
@@ -119,7 +93,7 @@ describe "Testing Rhodes cli" do
 		expect(File.exist?(filePath)).to be true
 	end
 
-	it "should rake cloud:build:<platform>:<mode>:development for iphone" do
+	it "should build for Iphone platform with command rake rake cloud:build:iphone:development" do
 		buffer = []
 		filePath = ''
 		Open3.popen3('rake cloud:build:iphone:development') do |stdin, stdout, stderr, wait_thr|
@@ -144,7 +118,7 @@ describe "Testing Rhodes cli" do
 
 		expect(File.exist?(filePath)).to be true
 	end
-	it "should rake cloud:build:<platform>:<mode>:download for win32" do
+	it "should build for Win32 platform with command rake rake cloud:build:win32:production" do
 		buffer = []
 		filePath = ''
 		Open3.popen3('rake cloud:build:win32:production') do |stdin, stdout, stderr, wait_thr|
@@ -206,7 +180,7 @@ describe "Testing Rhodes cli" do
 			rescue
 			end
 
-			expect(buffer).to match(/Error building/)
+			expect(buffer).to match(/ERROR: Build log/)
 			#expect(buffer).not_to match(/Download link/)
 		end
 	end
@@ -374,11 +348,11 @@ describe "Testing Rhodes cli" do
 		}
 	end
 
-	xit "rake cloud:clear:cache after downloading mutilple build" do
+	it "rake cloud:clear:cache after downloading mutilple build" do
 		#Not yet implemented as a feature
 	end
 
-	xit "rake cloud:build:platform with particular rho version" do
+	it "rake cloud:build:platform with particular rho version" do
 		add_yml_setting("build.yml",{"rhohub" => {"rhodesgem" => "4.2.0.beta.12"}})
 
 		buffer = []
@@ -435,5 +409,108 @@ describe "Testing Rhodes cli" do
 		expect(File.exist?(filePath)).to be true
 
 	end
+	
+	it "should list all rhohub builds with command rake cloud:show:build" do
+
+		Open3.popen3('rake cloud:show:build') do |stdin, stdout, stderr, wait_thr|
+		  	stdout = stdout.read
+		  	expect(stdout).to match(/Download link/)			
+		  	puts "stdout is:" + stdout.gsub(/\n/, "<br/>")
+		  	puts "stderr is:" + stderr.read
+		end
+	end
+
+	it "should list failed logs only with command rake cloud:show:fail_log" do
+
+		Open3.popen3('rake cloud:show:fail_log') do |stdin, stdout, stderr, wait_thr|
+
+		  	buffer = ''
+			begin
+			    while line = stdout.readline
+			      puts line.gsub(/\n/, "<br/>")
+			      buffer = buffer + "\n" + line
+			    end
+			rescue
+			end
+
+			expect(buffer).to match(/ERROR: Build log/).and match(/failed/)
+			expect(buffer).to_not match(/completed/)
+			#expect(buffer).not_to match(/Download link/)
+		end
+	end
+	
+	it "should provide status of build with command rake cloud:show:build[build_id]" do
+		buffer = []
+		filePath = ''
+		Open3.popen3('rake cloud:build:android:production') do |stdin, stdout, stderr, wait_thr|
+			stdout = stdout.read
+			expect(stdout).to match(/queued/)
+			puts "stdout is:" + stdout.gsub(/\n/, "<br/>")
+		  	puts "stderr is:" + stderr.read
+		end
+
+		build_id = getQueuedBuilds
+
+		Open3.popen3("rake cloud:show:build[#{build_id[0]}]") do |stdin, stdout, stderr, wait_thr|
+		  	stdout = stdout.read
+		  	expect(stdout).to match(/queued/)
+		  	puts "stdout is:" + stdout.gsub(/\n/, "<br/>")
+		  	puts "stderr is:" + stderr.read
+		end
+		
+		Open3.popen3("rake cloud:download[#{build_id[0]}]") do |stdin, stdout, stderr, wait_thr|
+			begin
+		    while line = stdout.readline
+				puts line.gsub(/\n/, '<br>')
+				buffer << line
+		    end
+			rescue
+			end
+		end
+		
+		Open3.popen3("rake cloud:show:build[#{build_id[0]}]") do |stdin, stdout, stderr, wait_thr|
+		  	stdout = stdout.read
+		  	expect(stdout).to match(/completed/).or match(/failed/)
+		  	puts "stdout is:" + stdout.gsub(/\n/, "<br/>")
+		  	puts "stderr is:" + stderr.read
+		end		
+	end
+	
+	it "should provide status and log of build with command rake cloud:show:fail_log[build_id]" do
+		buffer = []
+		filePath = ''
+		Open3.popen3('rake cloud:build:android:production') do |stdin, stdout, stderr, wait_thr|
+			stdout = stdout.read
+			expect(stdout).to match(/queued/)
+			puts "stdout is:" + stdout.gsub(/\n/, "<br/>")
+		  	puts "stderr is:" + stderr.read
+		end
+
+		build_id = getQueuedBuilds
+
+		Open3.popen3("rake cloud:show:build[#{build_id[0]}]") do |stdin, stdout, stderr, wait_thr|
+		  	stdout = stdout.read
+		  	expect(stdout).to match(/queued/)
+		  	puts "stdout is:" + stdout.gsub(/\n/, "<br/>")
+		  	puts "stderr is:" + stderr.read
+		end
+		
+		Open3.popen3("rake cloud:download[#{build_id[0]}]") do |stdin, stdout, stderr, wait_thr|
+			begin
+		    while line = stdout.readline
+				puts line.gsub(/\n/, '<br>')
+				buffer << line
+		    end
+			rescue
+			end
+		end
+		
+		Open3.popen3("rake cloud:show:build[#{build_id[0]}]") do |stdin, stdout, stderr, wait_thr|
+		  	stdout = stdout.read
+		  	expect(stdout).to match(/completed/).or match(/failed/).and match(/Error building/)
+		  	puts "stdout is:" + stdout.gsub(/\n/, "<br/>")
+		  	puts "stderr is:" + stderr.read
+		end		
+	end	
 
 end
