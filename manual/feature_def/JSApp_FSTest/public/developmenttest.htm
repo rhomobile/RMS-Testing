@@ -40,6 +40,22 @@ function testActiveXGenericLog()
 	objGeneric.Log('Log Example',1);
 }
 
+function testActiveXGenericConvolutedLog()
+{
+	objGeneric2 = new ActiveXObject('PocketBrowser.Generic');
+	objGeneric2.Log('This is a log from the convoluted example (objGeneric2)',1);
+	setTimeout("objGeneric2.Log('Log from convoluted example in timeout (objGeneric2)',1);", 100);
+	objGeneric3.Log('This is a log from the convoluted example (objGeneric3)',1);
+	setTimeout("objGeneric3.Log('Log from convoluted example in timeout (objGeneric3)',1);", 100);
+}
+
+function testActiveXGenericInvokeMETA()
+{
+	var objGeneric = new ActiveXObject('PocketBrowser.Generic');
+	objGeneric.InvokeMETAFunction("scanner","enabled");
+	divReturnValue.innerHTML = "Scanner is Enabled";
+}
+
 function testActiveXGenericOEM()
 {
         alert("create objGeneric");
