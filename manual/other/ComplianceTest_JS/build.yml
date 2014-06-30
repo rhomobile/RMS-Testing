@@ -27,6 +27,7 @@ symbian:
   uid: "0xede7d59e"
 android:
   version: "4.2.2"
+  manifest_template: AndroidManifest.erb
 extensions:
   - rhoconnect-client
   - audiocapture
