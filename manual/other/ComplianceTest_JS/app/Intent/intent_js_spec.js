@@ -184,13 +184,13 @@ describe('Intent_UseCases Functionality Test', function () {
             };
             var params;
             if (isAndroidPlatform()) {
-                params = new parameters(Rho.Intent.BROADCAST,"","com.rhomobile.BROADCAST",["com.rhomobile.ComplianceTest_JS"],"","","","",data);
+                params = new parameters(Rho.Intent.BROADCAST,"","com.rhomobile.BROADCAST","","com.rhomobile.compliancetest_js","","","",data);
             }
             if (isApplePlatform()) {
                 params = new parameters(Rho.Intent.BROADCAST,"","","","compliancetestjs","","","",data);
             }
             if (isAnyWindowsFamilyPlatform()) {
-                params = new parameters(Rho.Intent.BROADCAST,"","","","rhomobile ComplianceTest_JS/ComplianceTest_JS.exe","","","",data);
+                params = new parameters(Rho.Intent.BROADCAST,"","","","rhomobile compliancetest_js/compliancetest_js.exe","","","",data);
             }
             var receiveCB = function(intent){
             	alert(JSON.stringify(intent));
@@ -211,13 +211,13 @@ describe('Intent_UseCases Functionality Test', function () {
             };
             var params;
             if (isAndroidPlatform()) {
-                params = new parameters(Rho.Intent.BROADCAST,"","com.rhomobile.BROADCAST",["com.rhomobile.ComplianceTest_JS"],"","","","",data);
+                params = new parameters(Rho.Intent.BROADCAST,"","com.rhomobile.BROADCAST","","com.rhomobile.compliancetestjs","","","",data);
             }
             if (isApplePlatform()) {
                 params = new parameters(Rho.Intent.BROADCAST,"","","","compliancetestjs","","","",data);
             }
             if (isAnyWindowsFamilyPlatform()) {
-                params = new parameters(Rho.Intent.BROADCAST,"","","","rhomobile ComplianceTest_JS/ComplianceTest_JS.exe","","","",data);
+                params = new parameters(Rho.Intent.BROADCAST,"","","","rhomobile compliancetest_js/compliancetest_js.exe","","","",data);
             }
             var receiveCB = function(intent){
                 alert("Test Case failed if you see this alert message!");
