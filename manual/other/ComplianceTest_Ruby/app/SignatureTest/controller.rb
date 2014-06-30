@@ -3,9 +3,7 @@ require 'json'
 require 'helpers/application_helper'
 require 'helpers/browser_helper'
 
-
-class SignaturetestController < Rho::RhoController
-
+class SignatureTestController < Rho::RhoController
 
 #Added to preserve the default values of signature
 def signature_setprops

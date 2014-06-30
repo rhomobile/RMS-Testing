@@ -34,9 +34,9 @@ describe("Signature Manual Test", function () {
     //Added to preserve the default values of signature
     function signature_init() {
         if (!isWindowsMobilePlatform()){
-            Ruby.call('Signaturetest','signature_setprops?win=yes');
+            Ruby.call('SignatureTest','signature_setprops?win=yes');
         } else {
-            Ruby.call('Signaturetest','signature_setprops');
+            Ruby.call('SignatureTest','signature_setprops');
         }
     }
 
@@ -75,9 +75,9 @@ describe("Signature Manual Test", function () {
         	}
 
             if (!isWindowsMobilePlatform()){
-                Ruby.call('Signaturetest','signature_setprop_afteach?win=yes')
+                Ruby.call('SignatureTest','signature_setprop_afteach?win=yes')
             } else {
-                Ruby.call('Signaturetest','signature_setprop_afteach')
+                Ruby.call('SignatureTest','signature_setprop_afteach')
             }
 
         });
@@ -94,7 +94,7 @@ describe("Signature Manual Test", function () {
             _result.waitToRunTest();
 
             runs(function () {
-                Ruby.call('Signaturetest','signature_fullscr?vtid=VT299-001');
+                Ruby.call('SignatureTest','signature_fullscr?vtid=VT299-001');
 
                 setTimeout(function() {
                     timeout = true;
@@ -123,7 +123,7 @@ describe("Signature Manual Test", function () {
             _result.waitToRunTest();
 
             runs(function () {
-                Ruby.call('Signaturetest','signature_fullscr?vtid=VT299-002');
+                Ruby.call('SignatureTest','signature_fullscr?vtid=VT299-002');
                 
                 setTimeout(function() {
                     timeout = true;
@@ -152,7 +152,7 @@ describe("Signature Manual Test", function () {
             _result.waitToRunTest();
 
             runs(function () {
-                Ruby.call('Signaturetest','signature_show?vtid=VT299-010');
+                Ruby.call('SignatureTest','signature_show?vtid=VT299-010');
                 
                 setTimeout(function() {
                     timeout = true;
@@ -166,7 +166,7 @@ describe("Signature Manual Test", function () {
             }, 'Wait for 1 sec ajax call to happen', 6000);
 
             runs(function () {
-                Ruby.call('Signaturetest','signature_capture');
+                Ruby.call('SignatureTest','signature_capture');
 
                 setTimeout(function() {
                     timeout = true;
@@ -180,7 +180,7 @@ describe("Signature Manual Test", function () {
             }, 'Wait for 1 sec ajax call to happen', 6000);
             
             runs(function () {
-                Ruby.call('Signaturetest','signature_hide');
+                Ruby.call('SignatureTest','signature_hide');
             });
 
             _result.waitForResponse();
@@ -199,7 +199,7 @@ describe("Signature Manual Test", function () {
             _result.waitToRunTest();
 
             runs(function () {
-                Ruby.call('Signaturetest','signature_show?vtid=VT299-011');
+                Ruby.call('SignatureTest','signature_show?vtid=VT299-011');
 
                 setTimeout(function() {
                     timeout = true;
@@ -214,7 +214,7 @@ describe("Signature Manual Test", function () {
 
             runs(function () {
                 timeout = false;
-                Ruby.call('Signaturetest','signature_clear');
+                Ruby.call('SignatureTest','signature_clear');
 
                 setTimeout(function() {
                     timeout = true;
@@ -229,7 +229,7 @@ describe("Signature Manual Test", function () {
             
             runs(function () {
                 timeout = false;
-                Ruby.call('Signaturetest','signature_capture');
+                Ruby.call('SignatureTest','signature_capture');
 
                 setTimeout(function() {
                     timeout = true;
@@ -243,7 +243,7 @@ describe("Signature Manual Test", function () {
             }, 'Wait for 1 sec ajax call to happen', 6000);
 
             runs(function () {
-                Ruby.call('Signaturetest','signature_hide');
+                Ruby.call('SignatureTest','signature_hide');
             });
 
             _result.waitForResponse();
@@ -262,7 +262,7 @@ describe("Signature Manual Test", function () {
             _result.waitToRunTest();
 
             runs(function () {
-                Ruby.call('Signaturetest','signature_fullscr_optImage?vtid=VT299-015&const='+CONST_JPG);
+                Ruby.call('SignatureTest','signature_fullscr_optImage?vtid=VT299-015&const='+CONST_JPG);
   
                 setTimeout(function() {
                     timeout = true;
@@ -276,7 +276,7 @@ describe("Signature Manual Test", function () {
             }, 'Wait for 1 sec ajax call to happen', 6000);
 
             runs(function () {
-                Ruby.call('Signaturetest','signature_hide');
+                Ruby.call('SignatureTest','signature_hide');
             });
 
             _result.waitForResponse();
@@ -297,7 +297,7 @@ describe("Signature Manual Test", function () {
                 _result.waitToRunTest();
 
                 runs(function () {
-                    Ruby.call('Signaturetest','signature_fullscr_optUri?vtid=VT299-018&const='+CONST_JPG);
+                    Ruby.call('SignatureTest','signature_fullscr_optUri?vtid=VT299-018&const='+CONST_JPG);
 
                     setTimeout(function() {
                         timeout = true;
@@ -311,7 +311,7 @@ describe("Signature Manual Test", function () {
                 }, 'Wait for 1 sec ajax call to happen', 6000);
 
                 runs(function () {
-                    Ruby.call('Signaturetest','signature_hide');
+                    Ruby.call('SignatureTest','signature_hide');
                 });
 
                 _result.waitForResponse();
@@ -331,7 +331,7 @@ describe("Signature Manual Test", function () {
             _result.waitToRunTest();
 
             runs(function () {
-                Ruby.call('Signaturetest','signature_show_opt?vtid=VT299-019&const='+CONST_JPG);
+                Ruby.call('SignatureTest','signature_show_opt?vtid=VT299-019&const='+CONST_JPG);
 
                 setTimeout(function() {
                     timeout = true;
@@ -346,7 +346,7 @@ describe("Signature Manual Test", function () {
 
             runs(function () {
                 timeout = false;
-                Ruby.call('Signaturetest','signature_capture');
+                Ruby.call('SignatureTest','signature_capture');
 
                 setTimeout(function() {
                     timeout = true;
@@ -360,7 +360,7 @@ describe("Signature Manual Test", function () {
             }, 'Wait for 1 sec ajax call to happen', 6000);
 
             runs(function () {
-                Ruby.call('Signaturetest','signature_hide');
+                Ruby.call('SignatureTest','signature_hide');
             });
 
             _result.waitForResponse();
@@ -381,7 +381,7 @@ describe("Signature Manual Test", function () {
                 _result.waitToRunTest();
 
                 runs(function () {
-                    Ruby.call('Signaturetest','signature_set_allprops?vtid=VT299-023');
+                    Ruby.call('SignatureTest','signature_set_allprops?vtid=VT299-023');
                     
                     setTimeout(function() {
                         timeout = true;
@@ -396,7 +396,7 @@ describe("Signature Manual Test", function () {
 
                 runs(function () {
                     timeout = false;
-                    Ruby.call('Signaturetest','signature_capture_datauri');
+                    Ruby.call('SignatureTest','signature_capture_datauri');
                     
                     setTimeout(function() {
                         timeout = true;
@@ -410,7 +410,7 @@ describe("Signature Manual Test", function () {
                 }, 'Wait for 1 sec ajax call to happen', 6000);
 
                 runs(function () {
-                    Ruby.call('Signaturetest','signature_hide');
+                    Ruby.call('SignatureTest','signature_hide');
                 });
 
                 _result.waitForResponse();
