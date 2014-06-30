@@ -98,7 +98,7 @@ describe "Testing build scenario" do
 
 		it "Build with all licensed extensions for WM/CE" do
 
-			add_yml_setting('build.yml',{"wm"=>{"extensions" =>["barcode","hardwarekeys","indicators","cardreader","signature","NFC","dpx"]}})
+			add_yml_setting('build.yml',{"wm"=>{"extensions" =>["barcode","hardwarekeys","indicators","cardreader","signature","NFC"]}})
 
 			initiate_build_wmce
 
@@ -227,7 +227,7 @@ describe "Testing build scenario" do
 		it "should build using all licensed extension with non_motorola_device capability for android" do
 
 			add_yml_setting('build.yml',{"capabilities"=>"non_motorola_device"})
-			add_yml_setting('build.yml',{"android"=>{"extensions"=>["barcode","hardwarekeys","indicators","cardreader","signature","NFC","dpx"], "manifest_template" => "AndroidManifest.erb"}})
+			add_yml_setting('build.yml',{"android"=>{"extensions"=>["barcode","hardwarekeys","indicators","cardreader","signature","NFC","SimulScan"], "manifest_template" => "AndroidManifest.erb"}})
 			delete_yml_setting('build.yml',"app_type")
 
 			initiate_build_android
@@ -242,7 +242,7 @@ describe "Testing build scenario" do
 
 		it "should build using all non-licensed extension when app type is not rhoelements for android" do
 
-			add_yml_setting('build.yml',{"android"=>{"extensions"=>["barcode","hardwarekeys","indicators","cardreader","signature","NFC","dpx"], "manifest_template" => "AndroidManifest.erb"}})
+			add_yml_setting('build.yml',{"android"=>{"extensions"=>["barcode","hardwarekeys","indicators","cardreader","signature","NFC","SimulScan"], "manifest_template" => "AndroidManifest.erb"}})
 			delete_yml_setting('build.yml','app_type')
 
 			initiate_build_android
@@ -269,7 +269,7 @@ describe "Testing build scenario" do
 		it "should build using all extensions when app type is rhoelements for android" do
 
 			add_yml_setting('build.yml',{"android"=>{"extensions"=>["audiocapture","coreapi","mediaplayer","screenorientation","printing","printing_zebra","sensor"], "manifest_template" => "AndroidManifest.erb"}})
-			add_yml_setting('build.yml',{"android"=>{"extensions"=>["barcode","hardwarekeys","indicators","cardreader","signature","NFC","dpx"]}})
+			add_yml_setting('build.yml',{"android"=>{"extensions"=>["barcode","hardwarekeys","indicators","cardreader","signature","NFC","SimulScan"]}})
 			add_yml_setting('build.yml',{"app_type"=>"rhoelements"})
 
 			initiate_build_android

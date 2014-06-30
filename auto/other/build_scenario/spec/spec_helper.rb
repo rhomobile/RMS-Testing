@@ -3,6 +3,8 @@ def getApplicationBuildPath(platform)
 
 	filePath = './bin/target/'
 	fileName = yml['name']
+	ios_sdk = yml['iphone']['sdk']
+	ios_configuration = yml['iphone']['configuration']
 	extension = ''
 
 	if (platform == 'wm')
@@ -12,7 +14,7 @@ def getApplicationBuildPath(platform)
 	elsif (platform == 'win32')
 		filePath = filePath + 'win32/' + fileName + '-setup.exe'
 	elsif (platform == 'ios')
-		filePath = filePath + 'ios/' + fileName + '.ipa'		
+		filePath = filePath + 'iOS/'+ios_sdk+'/'+ios_configuration+'/'+ fileName + '.ipa'		
 	end
 
 	filePath
