@@ -27,6 +27,13 @@ function quit()
     var fileReporter = new jasmine.FileReporter("failedSpecs.txt");
     jasmineEnv.addReporter(fileReporter);
 
+    network_server = null;
+
+    if (network_server !== null && network_server.length > 0) {
+		var remoteReporter = new jasmine.NetworkReporter(network_server);
+		jasmineEnv.addReporter(remoteReporter);
+	}
+
 	//var junitReporter = new jasmine.JUnitXmlReporter();
 	//junitReporter.useDotNotation = false
 

@@ -1,5 +1,5 @@
 def getCompletedBuilds
-	Open3.popen3('rake rhohub:list_builds') do |stdin, stdout, stderr, wait_thr|
+	Open3.popen3('rake cloud:list_builds') do |stdin, stdout, stderr, wait_thr|
 		buffer = []
 		completedBuild = {}
 		flag = false
@@ -45,7 +45,7 @@ end
 
 def getFailedBuilds
 
-	Open3.popen3('rake rhohub:list_builds') do |stdin, stdout, stderr, wait_thr|
+	Open3.popen3('rake cloud:list_builds') do |stdin, stdout, stderr, wait_thr|
 		buffer = []
 		failedBuild = {}
 		flag = false
@@ -90,7 +90,7 @@ def getFailedBuilds
 end
 
 def getQueuedBuilds
-	Open3.popen3('rake rhohub:list_builds') do |stdin, stdout, stderr, wait_thr|
+	Open3.popen3('rake cloud:list_builds') do |stdin, stdout, stderr, wait_thr|
 		buffer = []
 		queuedBuild = []
 		buildId = ''
