@@ -44,7 +44,6 @@ symbian:
   uid: '0xe1a1ef92'
 android:
   version: 4.2.2
-  abis: [x86]
   extensions: ["nativeBridgeTest", "barcode", "screenorientation", "instrumentation", "cardreader", "indicators", "sensor", "websocket", "eventsource"]  
   capabilities:
   - native_browser
