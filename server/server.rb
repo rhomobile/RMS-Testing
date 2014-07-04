@@ -381,6 +381,21 @@ $local_server.mount_proc( '/time_stream_wrong_mime' ) do |req, res|
       'data: {"username": "John123"}'+ "\x0D\x0A"+"\x0D\x0A";
 end
 
+$local_server.mount_proc( '/chunked' ) do |req, res|
+
+  res.chunked = true
+
+  res.body = proc { |w|
+      w << 'Chunked'
+
+      sleep 1
+
+      w << ' body'
+  }
+
+end
+
+
 #Secure server mount points
 $secure_server.mount_proc '/test_methods' do |req,res|
     if req.request_method == "GET" then

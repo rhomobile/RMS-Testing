@@ -1085,5 +1085,40 @@ describe('Network JS API', function() {
         });
        }
     );
+
+
+    it( 'Decode chunked body', function() {
+       var get_props = {
+            url : srvURL + "/chunked",
+       };
+       
+       var callbackCalled = false;
+       var status = '';
+       var body = '';
+       
+       var get_callback = function(args) {
+            status = args['status'];
+            body = args['body'];
+            callbackCalled = true;
+       }
+       
+       runs( function() {
+                Rho.Network.get(get_props, get_callback);
+            }
+        );
+       
+       waitsFor(function() {
+                return callbackCalled;
+            },
+            "Callback never called",
+            waitTimeout
+        );
+       
+       runs(function() {
+                expect(status).toEqual('ok');
+                expect(body).toEqual('Chunked body');
+            }
+        );
+    });
     }
 });
