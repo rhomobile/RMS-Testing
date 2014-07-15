@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Rho::Application</title>
+    <meta name="viewport" content="initial-scale=1.0, width=device-width"/>
+
+    <link type="text/css" rel="stylesheet" href="/public/css/manual_styles.css">
+
+    <script src="/public/jquery/jquery-1.9.1.min.js" type="text/javascript"></script>
+    <script type="text/javascript" charset="utf-8" src="../../public/api/rhoapi-modules.js"></script>
+   <!-- <script type="text/javascript" src="./application.js"></script> -->
+    <script type="text/javascript" src="../../public/js/helpers.js"></script>
+    <script type="text/javascript">
+
+        function setDomElementText(id, string){
+            var element = "#" + id + " span.result";
+            $(element).text(JSON.stringify(string));
+        };
+
+        $(document).ready(function(){
+            // hide all tests
+            $(".method_tests").hide();
+
+            // below show testcase if applicable to current platform
+            if (isAndroidPlatform()){
+                $(".android").show();
+            };
+
+            if (isApplePlatform()){
+                $(".ios").show();
+            };
+
+            if (isWindowsDesktopPlatform()){
+                $(".win32").show();
+            };
+
+            if (isWindowsMobilePlatform()){
+                $(".wm").show();
+            };
+
+            if (isWindowsPhone8Platform()){
+                $(".wp8").show();
+            };
+
+            //First click for getting default value
+            $(".getValue").click();
+        });
+    </script>
+</head>
+<body>
+
+<h1>Rho::Application</h1>
+
+<fieldset>
+	<legend>Rho::Application</legend>
+	<ul> Minimize, Restore and Quit:
+	    <li><a href="javascript:void(0)" onclick ="Ruby.call('Applicationtest','minimize');">VT200-0617 Minimize the Application (Mac RhoSimulator, WP8 not support it)</a></li>
+	    <li><a href="javascript:void(0)" onclick ="Ruby.call('Applicationtest','restore');">VT200-0618 Restore the Application (Mac RhoSimulator, WP8 not support it)</a></li>
+        <li><a href="javascript:void(0)" onclick ="Ruby.call('Applicationtest','quit');">VT200-0619 Quit the Application</a></li>
+		<li><a href="javascript:void(0)" onclick ="minQuit();">Minimize and Quit the Application</a></li>
+	</ul>
+</fieldset>
+
+<div id="title_test" >
+    <div class="method_name">Rho::Application.Title</div>
+    <div class="method_desc">Define Window caption text. If missed - caption from page used. WM and Windows Desktop Only! Not supported on CE.</div>
+
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <button onClick="Ruby.call('Application','set_title');">title("My Title")</button>
+        </div>
+        <div class="test_scenario_desc">
+            <span class="test_scenario_number">VT200-0621</span>
+            <span> Press button for set title for window to string ""</span>
+        </div>
+    </div>
+
+</div>
+
+<fieldset>
+	<legend>Rho::Application.Native Menu (Not applicable on iOS!)</legend>
+	<ul>VT200-0622 Redefine the NativMenu
+	    <li><a href="javascript:void(0)" onclick ="Ruby.call('Applicationtest','menu_test');">set Native menu to different actions</a></li>
+        <li><a href="javascript:void(0)" onclick ="Ruby.call('Applicationtest','menu_default');">set Default Native menu</a></li>
+		<li><a href="javascript:void(0)" onclick ="Ruby.call('Applicationtest','menu_reservedItem');">Add menu with action pointed to html page. Select Load a page menu item</a></li>
+		<li><a href="javascript:void(0)" onclick ="Ruby.call('Applicationtest','menu_jscall');">Javascript method call for Exit </a></li>
+	</ul>
+</fieldset>
+
+</body>
+<script type="text/javascript">
+
+function minQuit(){
+    Ruby.call('Applicationtest','minimize');
+
+    setTimeout(function(){
+        Ruby.call('Applicationtest','quit');
+    },3000);
+}
+
+//Common Method for ruby method call from javascript
+var Ruby = {
+    data: undefined,
+    call: function(controller,method){
+        Ruby.data = undefined;
+        url = '/app/'+controller+'/'+method
+        $.get(url)
+        .success(function(data){
+
+            }); 
+        return false;
+    },
+    sendValueToJS: function(data){ //Send data from ruby controller to js
+        Ruby.data = data;
+    },
+    getReturnedValue: function(){
+        return Ruby.data;
+    }
+}
+
+</script>
+</html>
