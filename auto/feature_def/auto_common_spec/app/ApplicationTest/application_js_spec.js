@@ -39,7 +39,7 @@ describe("Application JS API", function () {
 
     });
 
-	describe("Basic specs", function () {
+	xdescribe("Basic specs", function () {
 		
 	    it("Test appBundleFolder property", function () {
 	        var result = Rho.Application.appBundleFolder;
@@ -173,7 +173,7 @@ describe("Application JS API", function () {
 	});
 	
 
-	describe('Events specs', function() {
+	xdescribe('Events specs', function() {
     if (isApplePlatform()) {
         beforeEach(function() {
             Rho.AppEvents.simulateEvent(Rho.AppEvents.APP_EVENT_ACTIVATED);
@@ -286,4 +286,95 @@ describe("Application JS API", function () {
         });
     }	
 	});
+	
+	describe("Migrated from manual comman spec", function(){
+	
+		it("Property 'appBundleFolder' should return path to folder of application bundle", function () {
+			var path = Rho.Application.appBundleFolder;
+			expect(path).toMatch(/\/app/);
+			expect(Rho.RhoFile.isDir(path)).toBeTruthy();
+    	});
+		
+		it("Property 'appsBundleFolder'", function () {
+			var path = Rho.Application.appsBundleFolder
+			//TODO: Need to add a check auto_common_spec should be the last in the path
+			expect(path).toMatch(/auto_common_spec/);
+			expect(Rho.RhoFile.isDir(path)).toBeTruthy();
+    	});
+
+    	if (isWindowsMobilePlatform()) {
+
+	        it("Property 'badLinkURI'", function () {
+	        	var badlink_uri = Rho.Application.badLinkURI;
+				badlink_uri = badlink_uri.split("file://")[1];
+				alert(badlink_uri);
+	        	expect(badlink_uri).toMatch(/BadLink.html/);
+	        	expect(Rho.RhoFile.isFile(badlink_uri)).toBeTruthy();
+	        });
+
+    	}
+
+    	it("Property \"configPath\"", function () {
+        	var path = Rho.Application.configPath;
+        	expect(path).toMatch(/rhoconfig.txt/);
+        	expect(Rho.RhoFile.isFile(path)).toBeTruthy();
+    	});
+
+    	it("Property \"appName\"", function () {
+    		expect( Rho.Application.appName).toEqual("auto_common_spec");
+    	});
+
+    	it("Property \"publicFolder\"", function () {
+    		var path = Rho.Application.publicFolder;
+    		expect(path).toMatch(/public/);
+    		expect(Rho.RhoFile.isDir(path)).toBeTruthy();
+    	});
+
+    	it("Property \"settingsPageURI\"", function () {
+			Rho.Application.settingsPageURI = 'settings.html';
+    		var path = Rho.Application.settingsPageURI;
+    		expect(path).toMatch(/settings.html/);
+    	});
+
+	    it("Property \"splash\"", function () {
+	    	var splash_settings = Rho.Application.splash;
+	    	expect(splash_settings).toMatch(/delay|center|hcenter|vcenter|vzoom|hzoom|zoom/);
+    	});
+
+    	it("Property \"startURI\"", function () {
+    		var start_path = Rho.Application.startURI;
+    		expect(start_path).toMatch(/\/app\/ApplicationTest\/specRunner.html|\/app\/index.html/)
+    	});
+
+    	it("Property \"userFolder\"", function () {
+    		var path = Rho.Application.userFolder;
+    		expect(path).toMatch(/auto_common_spec/);
+    		expect(Rho.RhoFile.isDir(path)).toBeTruthy();
+    	});
+
+    	it("Property \"version\"", function () {
+    		var version = Rho.Application.version;
+	        expect(version).toEqual("1.0");
+    	});
+
+    	it("Property \"databaseBlobFolder\"", function () {
+    		var path = Rho.Application.databaseBlobFolder;
+    		expect(path).toMatch(/db\/db-files/);
+    		expect(Rho.RhoFile.isDir(path)).toBeTruthy();
+    	});
+
+    	it("Property \"modelsManifestPath\"", function () {
+    		var path = Rho.Application.modelsManifestPath;
+    		expect(path).toMatch(/app_manifest.txt/);
+    		expect(Rho.RhoFile.isFile(path)).toBeTruthy();
+    	});
+
+    	it("Property \"securityTokenNotPassed\" should return false if security token don't specified at build.yml", function () {
+	        expect(Rho.Application.securityTokenNotPassed).toBeFalsy();
+    	});
+	
+	});
+
+	
+
 });
