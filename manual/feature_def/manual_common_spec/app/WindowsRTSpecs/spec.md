@@ -61,7 +61,7 @@
 1 Launch RhoMobile Studio.  
 2 Create new RhoMobile application project using RhoMobile Studio.  
 3 Select `Menu->Project->Clean...`.   
-4 Select the project to get cleaned and select `ok`. 
+4 Select the project to get cleaned and select `ok`.  
 **Expected      : The project should get clean and the `app/bin` folder should get cleaned/flushed.**  
 
 ####TestCase ID : VTxxx-07  
@@ -70,5 +70,5 @@
 1 Launch RhoMobile Studio.  
 2 Create new RhoMobile application project using RhoMobile Studio.  
 3 Select `Menu->RhoMobile->Production build`.   
-4 Select the `Project-> Actual application`, `Platform-> WindowsRT`, and `Build-> Local`. 
+4 Select the `Project-> Actual application`, `Platform-> WindowsRT`, and `Build-> Local`.  
 **Expected      : The application build time should not be longer than any other platform.**  
