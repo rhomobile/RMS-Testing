@@ -68,7 +68,7 @@ describe('Rho.PrinterZebra Search Printer JS API', function () {
     describe('Rho.PrinterZebra APIs Set Test', function () {
         it("Search Printer", function () {
             runs(function () {
-                Rho.PrinterZebra.searchPrinters({"printerType": Rho.PrinterZebra.PRINTER_TYPE_ZEBRA, "connectionType": Rho.PrinterZebra.CONNECTION_TYPE_TCP, "timeout": 30000}, searchPrinterCallback);
+                Rho.PrinterZebra.searchPrinters({"printerType": Rho.PrinterZebra.PRINTER_TYPE_ZEBRA, "connectionType": Rho.PrinterZebra.CONNECTION_TYPE_ANY, "timeout": 30000}, searchPrinterCallback);
             });
             waitsFor(function () {
                 if (searched)
