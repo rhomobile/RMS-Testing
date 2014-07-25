@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Rho:System</title>
+    <meta name="viewport" content="initial-scale=1.0, width=device-width"/>
+
+    <link type="text/css" rel="stylesheet" href="../../public/css/manual_styles.css">
+
+    <script type="text/javascript" src="../../public/jquery/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="../../public/jquery/jquery.json-2.3.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../../public/js/server_url.js"></script>
+
+    <script type="text/javascript" charset="utf-8" src="../../public/api/rhoapi-modules.js"></script>
+    <script type="text/javascript" src="./system.js"></script>
+    <script type="text/javascript" src="../../public/js/helpers.js"></script>
+
+    <script type="text/javascript">
+
+        //Common Method for ruby method call from javascript
+        var Ruby = {
+            data: undefined,
+            call: function(controller,method){
+                Ruby.data = undefined;
+                url = '/app/'+controller+'/'+method
+                $.get(url)
+                .success(function(data){
+
+                    }); 
+                return false;
+            },
+            sendValueToJS: function(data){ //Send data from ruby controller to js
+                Ruby.data = data;
+            },
+            getReturnedValue: function(){
+                return Ruby.data;
+            }
+        }
+
+        $(document).ready(function () {
+            // hide all tests
+            $(".method_tests").hide();
+
+            // below show testcase if applicable to current platform
+            if (isApplePlatform()) {
+                $(".ios").show();
+            }
+            ;
+
+            if (isWindowsDesktopPlatform()) {
+                $(".win32").show();
+            }
+            ;
+
+            if (isAndroidPlatform()) {
+                $(".android").show();
+            }
+            ;
+
+            if (isWindowsMobilePlatform()) {
+                $(".wm").show();
+            }
+            ;
+
+            if (isWindowsPhone8Platform()) {
+                $(".wp8").show();
+            }
+            ;
+
+            //First click for getting default value
+            $(".getValue").click();
+        });
+
+        //This needs to be changed according to the Environment
+        var downloadedFilePath = '';
+        var httpServerUrl = "http://" + SERVER_HOST + ":" + SERVER_PORT.toString();
+
+    </script>
+</head>
+<body>
+<h3>Rho.System</h3>
+
+<div class="method_tests win32 wm">
+    <div class="method_name">Rho::System.httpProxyURI</div>
+    <div class="method_desc">HTTP Proxy URI : Proxy should set successfully to http://wwwgate0.mot.com:1080.
+        (Rhosimulator supports it only for windows platform)
+    </div>
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <a href="javascript:void(0)" onclick="Ruby.call('System','http_proxy');">Set
+                httpProxyURI </a><br/>
+            <a href="http://www.google.com">Navigate to Google </a>
+        </div>
+        <span class="test_scenario_number">VT200-0676<br/></span>
+    </div>
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <div id="Rho_System_httpProxyURI">
+                <a href="javascript:void(0)" onclick="Ruby.call('System','get_http_proxyURI');"> Get httpProxyURI : </a> <span
+                    class="result"> </span>
+            </div>
+            <span class="test_scenario_number">VT200-0xxx<br/></span>
+        </div>
+    </div>
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <div id="httpProxyURI">Default : <span class="defaultset"> </span>
+                <script type="text/javascript">
+                    Ruby.call('System','default_proxyset');
+                </script>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="method_tests wm">
+    <div class="method_name">Rho::System.keyboardState</div>
+    <div class="method_desc">Keyboard State : (For WM and CE the keyboard can be manually shown or hidden as required.
+        All other platforms only support 'automatic'. )
+    </div>
+    <div>Text Field<input type='text'></div>
+    <div>Numeric field<input type='number'></div>
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <a href="javascript:void(0)" onclick="Ruby.call('System','keyboard_state?state=shown');">Set keyboardState as shown</a>
+        </div>
+        <span class="test_scenario_number">VT200-0678 <br/></span>
+    </div>
+
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <a href="javascript:void(0)" onclick="Ruby.call('System','keyboard_state?state=hidden');">set showKeyboard as hidden</a>
+        </div>
+        <span class="test_scenario_number">VT200-0xxx <br/></span>
+    </div>
+    <div class="method_tests ios android win32 wp8">
+        <div class="test_scenario">
+            <div class="test_scenario_controls">
+                <a href="javascript:void(0)" onclick="Ruby.call('System','keyboard_state?state=automatic')">set keyboardState as
+                    automatic
+                    with textbox</a>
+            </div>
+            <span class="test_scenario_number">VT200-0xxx <br/></span>
+        </div>
+    </div> 
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <div id="Rho_System_keyboardState">
+                <a href="javascript:void(0)" onclick="Ruby.call('System','get_keyboard_state');"> Call getProperty with showKeyboard: </a>
+                <span class="result"> </span>
+            </div>
+            <span class="test_scenario_number">VT200-0xxx <br/></span>
+        </div>
+    </div>
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <div id="keyboardState"><span class="defaultset">Default:  </span>
+                <script type="text/javascript">
+                    Ruby.call('System','get_keyboard_state');
+                </script>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="method_tests android ios win32 wm wp8">
+    <div class="method_name">Rho::System.applicationInstall</div>
+    <div class="method_desc">Application install<b><i>You must have  running webbrick server  before  starting  test application</i></b></div>
+    <div class="method_tests wm"><b>Application install for Windows WM:</b>
+
+        <div class="test_scenario">
+            <div class="test_scenario_controls">
+                <a href="javascript:void(0)"
+                   onclick="var fname = download_filetolocal(httpServerUrl+'/TestAppWM6.5.cab', 'TestAppWM6.5.cab'); Rho.System.applicationInstall(fname);">WM: Install app from HTTP url</a><br/>
+                <a href="javascript:void(0)"
+                   onclick="var fname = download_filetolocal(httpServerUrl+'/TestAppCE.cab', 'TestAppCE.cab'); Ruby.call('System','app_install?file='+fname);">CE: Install app from HTTP url</a>
+                   
+            </div>
+            <span class="test_scenario_number">VT200-0679 <br/></span>
+        </div>
+
+
+    </div>
+
+
+    <div class="method_tests android"><b>Application Install for Android:</b>
+
+        <div class="test_scenario">
+            <div class="test_scenario_controls">
+                <a href="javascript:void(0)" onclick="var fname = httpServerUrl + '/TestApp_signed.apk'; Ruby.call('System','app_install?file='+fname);">Install app from HTTP url</a>
+            </div>
+            <span class="test_scenario_number">VT200-0679 <br/></span>
+        </div>
+    </div>
+
+    <div class="method_tests ios"><b>Application Install for iOS:</b>
+
+        <div class="test_scenario">
+            <div class="test_scenario_controls">
+                <a href="javascript:void(0)"
+                   onclick="var fname = itms-services://?action=download-manifest&url=' + httpServerUrl + '/TestApp.plist'; Ruby.call('System','app_install?file='+fname);">Install app from HTTP url</a>
+            </div>
+            <span class="test_scenario_number">VT200-0679 <br/></span>
+        </div>
+    </div>
+</div>
+
+
+<div class="method_tests android ios win32 wm wp8">
+    <div class="method_name">Rho.System.isApplicationInstalled</div>
+    <div class="method_desc">Is Application Installed</div>
+    <div class="method_tests wm">WM <br/>
+
+        <div class="test_scenario">
+            <div class="test_scenario_controls">
+                <a href="javascript:void(0)" onclick="var app = 'rhomobile testApp/testApp.exe'; Ruby.call('System','is_installed?file='+app);">Call
+                    isApplicationInstalled() with correct app name 'TestAppWM6.5'</a>
+            </div>
+            <span class="test_scenario_number">VT200-0xxx <br/></span>
+        </div>
+    </div>
+
+
+    <div class="method_tests android"> Android <br/>
+
+        <div class="test_scenario">
+            <div class="test_scenario_controls">
+                <a href="javascript:void(0)" onclick="var app = 'com.rhomobile.testapp'; Ruby.call('System','is_installed?file='+app);">Call
+                    isApplicationInstalled() with correct app name 'testapp'</a>
+            </div>
+            <span class="test_scenario_number">VT200-0xxx <br/></span>
+        </div>
+    </div>
+
+    <div class="method_tests ios"> IOS <br/>
+
+        <div class="test_scenario">
+            <div class="test_scenario_controls">
+                <a href="javascript:void(0)" onclick="var app = 'testapp'; Ruby.call('System','is_installed?file='+app);">Call
+                    isApplicationInstalled() with correct app name 'testapp'</a>
+            </div>
+            <span class="test_scenario_number">VT200-0xxx <br/></span>
+        </div>
+    </div>
+
+</div>
+
+<div class="method_tests android win32 wm ios wp8">
+    <div class="method_name">Rho::System.runApplication</div>
+    <div class="method_desc"> Run Application </div>
+
+    <div class="method_tests wm">
+        <div class="test_scenario">
+            <div class="test_scenario_controls">
+                <a href="javascript:void(0)" onclick="var app = rhomobile testApp/testApp.exe'; Ruby.call('System','run_app?file='+app);"> call
+                    runApplication with application name 'rhomobile testApp/testApp.exe'.</a>
+            </div>
+			<span class="test_scenario_number">VT200-0680 <br/></span>
+        </div>
+    </div>
+
+    <div class="method_tests ios">
+        <div class="test_scenario">
+            <div class="test_scenario_controls">
+                <a href="javascript:void(0)" onclick="var app = 'testApp'; Ruby.call('System','run_app?file='+app);"> call
+                    runApplication with application name 'testapp'.</a>
+            </div>
+			<span class="test_scenario_number">VT200-0680 <br/></span>
+        </div>
+    </div>
+
+    <div class="method_tests android">
+        <div class="test_scenario">
+            <div class="test_scenario_controls">
+                <a href="javascript:void(0)" onclick="var app = 'com.rhomobile.testapp'; Ruby.call('System','run_app?file='+app);"> call
+                    runApplication with application name 'testapp'.</a>
+            </div>
+			<span class="test_scenario_number">VT200-0680 <br/></span>
+        </div>
+    </div>
+
+</div>
+
+<div class="method_tests android win32 wm wp8">
+    <div class="method_name">Rho::System.applicationUninstall</div>
+    <div class="method_desc"> Application Uninstall</div>
+
+    <div class="method_tests wm">
+        <div class="test_scenario">
+            <div class="test_scenario_controls">
+                <a href="javascript:void(0)" onclick="var app = 'rhomobile TestApp/TestApp.exe'; Ruby.call('System','app_uninstall?file='+app);"> call
+                    applicationUninstall with application name 'rhomobile testApp/testApp.exe'. Not supported on Win CE.</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="method_tests android">
+        <div class="test_scenario">
+            <div class="test_scenario_controls">
+                <a href="javascript:void(0)" onclick="var app = 'com.rhomobile.testapp'; Ruby.call('System','app_uninstall?file='+app);"> call
+                    applicationUninstall with application name 'com.rhomobile.testapp'</a>
+            </div>
+        </div>
+    </div>
+
+    <span class="test_scenario_number">VT200-0681 <br/></span>
+</div>
+
+<div class="method_tests android ios win32 wm wp8">
+    <div class="method_name">Rho.System.replaceCurrentBundle</div>
+    <div class="method_desc">replaceCurrentBundle : application bundle will be replaced/partial updated with sample app bundle.</div>
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <a href="javascript:void(0)" onclick="callreplaceCurrentBundle();">call replaceCurrentBundle with total update</a>
+        </div>
+        <span class="test_scenario_number">VT200-0683<br/></span>
+    </div>
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+Check before partial update :<br>
+- open BundleTest page, follow instructions<br>
+            
+            <a href="javascript:void(0)" onclick="callupdateCurrentBundle();">call replaceCurrentBundle with partial update</a>
+<br>Check after partial update :<br>
+- open BundleTest page, follow instructions<br>
+            
+        </div>
+        <span class="test_scenario_number">VT200-0683<br/></span>
+    </div>
+</div>
+
+<div class="method_tests android ios win32 wm wp8">
+
+    <div class="method_tests android ios">
+        <div class="test_scenario">
+            <div class="test_scenario_controls">
+                <a href="javascript:void(0)" onclick="Ruby.call('System','autorotate_property?rotate=true');">Call set
+                    property
+                    with screenAutoRotate as true</a>
+            </div>
+            <span class="test_scenario_number">VT200-0xxx <br/></span>
+        </div>
+        <div class="test_scenario">
+            <div class="test_scenario_controls">
+                <a href="javascript:void(0)" onclick="Ruby.call('System','autorotate_property?rotate=false');">Call set
+                    property
+                    with screenAutoRotate as false</a>
+            </div>
+            <span class="test_scenario_number">VT200-0xxx <br/></span>
+        </div>
+        <div class="test_scenario">
+            <div class="test_scenario_controls">
+                <a href="javascript:void(0)" onclick="Ruby.call('System','get_property_screen');">Get Property
+                    screenAutoRotate</a>
+            </div>
+			<span class="test_scenario_number">VT200-0686<br/></span>
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>
+

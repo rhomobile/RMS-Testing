@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Rho::NativeMenubar</title>
+    <meta name="viewport" content="initial-scale=1.0, width=device-width"/>
+    <script src="/public/jquery/jquery-1.9.1.min.js" type="text/javascript"></script>
+    <script src="/public/jquery/jquery.json-2.3.min.js" type="text/javascript"></script>
+    <script type="text/javascript" charset="utf-8" src="../../public/api/rhoapi-modules.js"></script>
+    <script type="text/javascript" src="../../public/js/helpers.js"></script>
+	
+	
+</head>
+<body>
+
+<h1>Rho::NativeMenubar</h1>
+
+<fieldset>
+	<legend>Rho::NativeMenubar.MainMenu</legend>
+	<ul> Set the Native Menu bar and check whether all the actions are working, by clicking on the Label 
+	    <li><a href="javascript:void(0)" onclick ="Ruby.call('Nativemenubar','native_default');">VT200-0632-get defaultNative menu </a></li>
+	   <li><a href="javascript:void(0)" onclick ="Ruby.call('Nativemenubar','menu_test');">VT200-0633 Test Main menu with all actions</a></li>
+	   <li><a href="javascript:void(0)" onclick ="Ruby.call('Nativemenubar','menu_disabled');">VT200-0634 Test Main menu with disabled set to true for Log and Refresh</a></li>
+	 </ul>
+</fieldset>	
+
+<fieldset>
+	<legend>Extra Button and extraMenu </legend>
+	<ul> Check that only extrabutton is created when it has action and extraMenu is created when its not assigned any action ,applicable on WM only , click on left menu button after calling the method 
+	   <li><a href="javascript:void(0)" onclick ="Ruby.call('Nativemenubar','extramenu_test');">VT200-0635 Test extra menu with all actions</a></li>
+	   <li><a href="javascript:void(0)" onclick ="Ruby.call('Nativemenubar','extramenu_disabled');">VT200-0636 Test extra  menu with disabled set to true for Log and Refresh</a></li>
+	   <li><a href="javascript:void(0)" onclick ="Ruby.call('Nativemenubar','extramenu_action');">VT200-0637 extramenu with all the actions and with action assigned to extrabutton </a></li>
+	</ul>
+</fieldset>	
+
+<fieldset>
+	<legend>Main Button and MainMenu </legend>
+	<ul> Check that only MAin button is created when it has action and mainMenu is created when its not assigned any action 
+	    <li><a href="javascript:void(0)" onclick ="Ruby.call('Nativemenubar','menu_action');">VT200-0638 mainMenu  with all the actions and with action assigned to mainbutton </a></li>
+	  </ul>
+</fieldset>	
+
+</body>
+<script type="text/javascript">
+//Common Method for ruby method call from javascript
+var Ruby = {
+    data: undefined,
+    call: function(controller,method){
+        Ruby.data = undefined;
+        url = '/app/'+controller+'/'+method
+        $.get(url)
+        .success(function(data){
+
+            }); 
+        return false;
+    },
+    sendValueToJS: function(data){ //Send data from ruby controller to js
+        Ruby.data = data;
+    },
+    getReturnedValue: function(){
+        return Ruby.data;
+    }
+}
+</script>
+</html>
