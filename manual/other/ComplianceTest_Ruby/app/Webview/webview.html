@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Rho.WebView</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.1, maximum-scale=10.0, user-scalable=yes"/>
+
+    <link type="text/css" rel="stylesheet" href="../../public/css/manual_styles.css">
+
+    <script type="text/javascript" src="../../public/jquery/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="../../public/jquery/jquery.json-2.3.min.js"></script>
+
+    <script type="text/javascript" charset="utf-8" src="../../public/api/rhoapi-modules.js"></script>
+    <script type="text/javascript" src="../../public/js/helpers.js"></script>
+
+
+
+    <script type="text/javascript">
+
+        function doAction(val) {
+            var url = "/app/WebviewTest/" + val + "?rho_callback=1"
+            if (window.XMLHttpRequest) {
+                var xhr = new window.XMLHttpRequest();
+                xhr.open("GET", url, true);
+                xhr.send(null);
+            } else {
+                var xmlHttpReq = new ActiveXObject("Msxml2.XMLHTTP");
+                xmlHttpReq.open("GET", url, true);
+                xmlHttpReq.send();
+            }
+        }
+
+        function setDomElementText(id, string){
+            var element = "#" + id + " span.result";
+            $(element).text(JSON.stringify(string));
+        };
+        
+        function tabbarSwitch( nTab ) {
+            Rho.NativeTabbar.switchTab(nTab);
+        }
+        
+        $(document).ready(function(){
+            // hide all tests
+            $(".method_tests").hide();
+
+            // below show testcase if applicable to current platform
+            if (isAndroidPlatform()){
+                $(".android").show();
+            };
+
+            if (isApplePlatform()){
+                $(".ios").show();
+            };
+
+            if (isWindowsDesktopPlatform()){
+                $(".win32").show();
+            };
+
+            if (isWindowsMobilePlatform()){
+                $(".wm").show();
+            };
+
+            if (isWindowsPhone8Platform()){
+                $(".wp8").show();
+            };
+
+            //First click for getting default value
+            $(".getValue").click();
+        });
+    </script>
+
+
+</head>
+<body>
+
+
+<script type="text/javascript">
+ 
+    function validateTestResult(testID, expected, actual){
+        var result = "Expected: " + JSON.stringify(expected) + " actual: " + JSON.stringify(actual);
+        var cssClass = (expected == actual) ? "passed" : "failed";
+        var element = "#" + testID + " .test_case_result";
+        $(element).addClass(cssClass);
+        $(element).append(result);
+    }
+
+    if (Rho.System.platform == 'WINDOWS') {
+
+        Rho.Application.nativeMenu = [
+            { 'label':'Tab0', 'action': 'javascript:tabbarSwitch(0)'},
+            { 'label':'Tab1', 'action': 'javascript:tabbarSwitch(1)'},
+            { 'label':'Tab2', 'action': 'javascript:tabbarSwitch(2)'},
+            { 'label':'Tab3', 'action': 'javascript:tabbarSwitch(3)'},
+            { 'label':'Tab4', 'action': 'javascript:tabbarSwitch(4)'},
+            { 'label':'Exit', 'action': 'exit' }
+        ];
+    }
+
+</script>
+
+
+<h3>Rho::WebView</h3>
+
+<div class="container" data-platforms="android, ios, win32, wm, wp8">
+    <div class="method_name">Rho::WebView.activeTab</div>
+    <div class="method_description">Method should return index of webview active tab</div>
+
+    <div id="VT300-XXX" class="container">
+        <div class="test_case_number">VT300-XXX</div>
+        <div class="test_case_requirements">
+            Created toolbar(for return to main page, etc.). Press
+            <button onClick="Ruby.call('Webview','create_toolbar');">Create toolbar</button>
+            if needed.
+        </div>
+    </div>
+
+    <div id="VT200-0690" class="container">
+        <div class="test_case_number">VT200-0690</div>
+        <div class="test_case_requirements">
+            Created tabbar. Press
+            <button onClick="Ruby.call('Webview','create_tabbar');">Create tabbar</button>
+            if needed.
+        </div>
+        <div class="test_case_procedure">
+            <ol>
+                <li>
+                    <button onClick="Ruby.call('Webview','switch_tab');">Switch to tab 1</button>
+                </li>
+                <li>
+                    <button onClick='Ruby.call("Webview","active_tab?validate=true");'>Get active tab</button>
+                </li>
+                <li>It should return 1</li>
+            </ol>
+            <div class="test_case_result"></div>
+        </div>
+    </div>
+
+</div>
+
+
+<div id="activeTab_test" class="container" data-platforms="android, ios, win32, wm, wp8">
+    <div class="method_name">WebView.activeTab</div>
+    <div class="method_desc">An active tab index.</div>
+
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <button class="getValue" onClick='Ruby.call("Webview","active_tab");'> get activeTab</button>
+            <br/>
+	          <a href="javascript:void(0)" onclick="Ruby.call('Webview','create_tabbar_old');">
+					 NativeTabbar.create </a><br />
+				<a href="javascript:void(0)" onclick="Ruby.call('Webview','remove_tabbar');">Remove the Tabbar </a><br/>
+            <span class="result"></span>
+        </div>
+        <div class="test_scenario_desc">
+            <span class="test_scenario_number">VT200-0690</span>
+            <span> Get activeTab value</span>
+        </div>
+    </div>
+</div>
+
+<div id="enableCache_test" class="method_tests android">
+    <div class="method_name">WebView.enableCache</div>
+    <div class="method_desc">Enable/disable Browser cache. Use 'WebView.enableCache' parameter in rhoconfig.txt to configure this value.</div>
+
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <button class="getValue" onClick="Ruby.call('Webview','enable_cachetest');"> get enableCache</button>
+            <br/>
+            <span class="result"></span>
+        </div>
+        <div class="test_scenario_desc">
+            <span class="test_scenario_number">VT200-0691 </span>
+            <span> Get enableCache value</span>
+        </div>
+    </div>
+</div>
+
+
+<div id="enableZoom_test" class="method_tests android">
+    <div class="method_name">WebView.enableZoom</div>
+    <div class="method_desc">Enable WebView zoom. Use 'enable_screen_zoom' parameter in rhoconfig.txt to configure this value.</div>
+
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <button class="getValue" onClick="Ruby.call('Webview','enable_zoom');"> get enableZoom</button>
+            <br/>
+            <span class="result"></span>
+        </div>
+        <div class="test_scenario_desc">
+            <span class="test_scenario_number">VT200-0692</span>
+            <span> Get enableZoom value</span>
+        </div>
+    </div>
+</div>
+
+
+<div id="fullScreen_test" class="method_tests android ios win32 wm wp8">
+    <div class="method_name">WebView.fullScreen</div>
+    <div class="method_desc">Use full screen mode.</div>
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <button class="getValue" onClick="Ruby.call('Webview','enable_fullscreen');"> get fullScreen</button>
+            <br/>
+            <span class="result"></span>
+        </div>
+        <div class="test_scenario_desc">
+            <span class="test_scenario_number"></span>
+            <span> Get fullScreen value</span>
+        </div>
+    </div>
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <button onClick="Ruby.call('Webview','webview_fullscreen?data='+true);">fullScreen = true</button>
+        </div>
+        <div class="test_scenario_desc">
+            <span class="test_scenario_number">VT200-0693</span>
+            <span> Press to set fullScreen to true</span>
+        </div>
+        <div style="clear: both"></div>
+    </div>
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <button onClick="Ruby.call('Webview','webview_fullscreen?data='+false);">fullScreen = false</button>
+        </div>
+        <div class="test_scenario_desc">
+            <span class="test_scenario_number">VT200-xxx</span>
+            <span> Press to set fullScreen to false</span>
+        </div>
+        <div style="clear: both"></div>
+    </div>
+</div>
+
+
+<div id="zoomPage_test" class="method_tests wm">
+    <div class="method_name">WebView.zoomPage</div>
+    <div class="method_desc">Sets the zoom factor of the page. Factor 1.0 is no zoom, values less than 1.0 are zoomed out and values greater than 1.0 are zoomed in</div>
+
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <button class="getValue" onClick="Ruby.call('Webview','zoompage_test');"> get zoomPage</button>
+            <br/>
+            <span class="result"></span>
+        </div>
+        <div class="test_scenario_desc">
+            <span class="test_scenario_number"></span>
+            <span> Get zoomPage value</span>
+        </div>
+    </div>
+
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <button onClick="Ruby.call('Webview','webview_zoompage');">zoomPage = 1.5</button>
+        </div>
+        <div class="test_scenario_desc">
+            <span class="test_scenario_number">VT200-0694</span>
+            <span> Press to set zoomPage to 1.5</span>
+        </div>
+        <div style="clear: both"></div>
+    </div>
+
+</div>
+
+<div id="textZoomLevel_test" class="method_tests wm">
+    <div class="method_name">WebView.textZoomLevel</div>
+    <div class="method_desc">Sets the font size to be displayed on the page, set to 0 for the smallest font and 4 for the largest font.</div>
+
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <button class="getValue" onClick="Ruby.call('Webview','textZoomLevel_test');"> get textZoomLevel</button>
+            <span class="result"></span>
+        </div>
+        <div class="test_scenario_desc">
+            <span class="test_scenario_number"></span>
+            <span> Get textZoomLevel value</span>
+        </div>
+    </div>
+
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <button onClick="Ruby.call('Webview','webview_textzoomlevel');">textZoomLevel = 4</button>
+        </div>
+        <div class="test_scenario_desc">
+            <span class="test_scenario_number">VT200-0695</span>
+            <span> Press to set textZoomLevel to 4</span>
+        </div>
+        <div style="clear: both"></div>
+    </div>
+
+</div>
+
+<div id="navigate_test" class="method_tests android ios win32 wm wp8">
+    <div class="method_name">WebView.navigate()</div>
+    <div class="method_desc">Force WebView to navigate to a URL.</div>
+
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <button onClick="Ruby.call('Webview','webview_navigate');">navigate(google, 1)</button>
+        </div>
+        <div class="test_scenario_desc">
+            <span class="test_scenario_number">VT200-0696</span>
+            <span> Navigate tab index 1 to google</span>
+        </div>
+    </div>
+
+</div>
+
+
+
+<div id="refresh_test" class="method_tests android ios win32 wm wp8">
+    <div class="method_name">WebView.refresh()</div>
+    <div class="method_desc">Force WebView to refresh the current page.</div>
+    <div><span class="result"></span></div>
+
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <button onClick='setDomElementText("refresh_test", "This text was inserted by JS");'>Press for inserting text</button>
+        </div>
+        <div class="test_scenario_desc">
+            <span class="test_scenario_number"></span>
+            <span>Press button for inserting text by JS. This text should disappear after refreshing</span>
+        </div>
+    </div>
+
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <button onClick="Ruby.call('Webview','webview_refresh');">refresh(1)</button>
+        </div>
+        <div class="test_scenario_desc">
+            <span class="test_scenario_number">VT200-0697</span>
+            <span>Call refresh() for tab index 1</span>
+        </div>
+    </div>
+
+</div>
+
+<div id="save_test" class="method_tests android">
+    <div class="method_name">WebView.save()</div>
+    <div class="method_desc">Save current page to file system.</div>
+
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <button onClick='setDomElementText("save_test", "screenshot exists = " + Rho.RhoFile.exists(Rho.RhoFile.join(Rho.Application.userFolder, "screenshot.jpeg")));'>Check screenshot file</button>
+            <span class="result"></span>
+        </div>
+        <div class="test_scenario_desc">
+            <span class="test_scenario_number"></span>
+            <span>Check existing file with screenshot</span>
+        </div>
+    </div>
+
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <button onClick="Ruby.call('Webview','webview_save');">save(jpeg, path, 1)</button>
+        </div>
+        <div class="test_scenario_desc">
+            <span class="test_scenario_number">VT200-0698</span>
+            <span>Call save() for tab index 1</span>
+        </div>
+    </div>
+
+</div>
+
+<div id="setCookie_test" class="method_tests android ios win32">
+    <div class="method_name">WebView.setCookie()</div>
+    <div class="method_desc"> When WebView loads the specified url (either by selecting link or from calling WebView.navigate), it will add this cookie to the HTTP request.</div>
+
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <button onClick='setDomElementText("setCookie_test", document.cookie);'>Show document cookie</button>
+            <span class="result"></span>
+        </div>
+        <div class="test_scenario_desc">
+            <span class="test_scenario_number"></span>
+            <span>Show document cookie</span>
+        </div>
+    </div>
+
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <button onClick="Ruby.call('Webview','webview_setcookie');">Set single cookie</button>
+        </div>
+        <div class="test_scenario_desc">
+            <span class="test_scenario_number">VT200-0699</span>
+            <span>Set single cookie</span>
+        </div>
+    </div>
+
+
+</div>
+
+</body>
+<script type="text/javascript">
+//Common Method for ruby method call from javascript
+var Ruby = {
+    data: undefined,
+    call: function(controller,method){
+        Ruby.data = undefined;
+        url = '/app/'+controller+'/'+method
+        $.get(url)
+        .success(function(data){
+
+            }); 
+        return false;
+    },
+    sendValueToJS: function(data){ //Send data from ruby controller to js
+        Ruby.data = data;
+    },
+    getReturnedValue: function(){
+        return Ruby.data;
+    }
+}
+</script>
+</html>
+
