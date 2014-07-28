@@ -18,7 +18,7 @@ describe "TCPSocket#recv_nonblock" do
     end
   end
 
-  it "returns a String read from the socket" do
+  it "returns a String read from the socket----VT-0175" do
     @socket = TCPSocket.new @hostname, SocketSpecs.port
     @socket.write "TCPSocket#recv_nonblock"
 

@@ -2,7 +2,7 @@ require 'spec/spec_helper'
 require 'spec/library/socket/fixtures/classes'
 require 'spec/library/socket/shared/pack_sockaddr'
 
-describe "Socket#sockaddr_un" do
+describe "Socket#sockaddr_un----VT-0130" do
   if System::get_property('platform') != 'WINDOWS' &&
      System.get_property('platform') != 'WINDOWS_DESKTOP' && 
      System.get_property('platform') != 'ANDROID'

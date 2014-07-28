@@ -144,6 +144,6 @@ class SpecRunner < MSpecScript
     @@formatter.register
     MSpec.process
     MSpec.exit_code
-	System.exit
+	#System.exit
   end
 end

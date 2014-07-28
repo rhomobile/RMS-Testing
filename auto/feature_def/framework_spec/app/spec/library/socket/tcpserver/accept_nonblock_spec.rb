@@ -13,7 +13,7 @@ describe "Socket::TCPServer.accept_nonblock" do
 if System::get_property('platform') != 'WINDOWS' && 
    System.get_property('platform') != 'WINDOWS_DESKTOP'
 
-  it "accepts non blocking connections" do
+  it "accepts non blocking connections----VT-0141" do
     @server.listen(5)
     lambda { @server.accept_nonblock}.should raise_error(Errno::EAGAIN)
 
@@ -26,6 +26,19 @@ if System::get_property('platform') != 'WINDOWS' &&
 
     #    port.should == SocketSpecs.port
     #    address.should == "127.0.0.1"
+    s.should be_kind_of(TCPSocket)
+
+    c.close
+    s.close
+  end
+
+  it "accepts non blocking connections_2----VT-0142" do
+    @server.listen(5)
+    lambda { @server.accept_nonblock}.should raise_error(Errno::EWOULDBLOCK)
+
+    c = TCPSocket.new("127.0.0.1", SocketSpecs.port)
+    sleep 0.1
+    s = @server.accept_nonblock
     s.should be_kind_of(TCPSocket)
 
     c.close

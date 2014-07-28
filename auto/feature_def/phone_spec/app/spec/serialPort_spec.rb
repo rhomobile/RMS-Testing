@@ -1,3 +1,5 @@
+require 'serialport'
+
 describe 'Serial port' do
 
   before(:all) do

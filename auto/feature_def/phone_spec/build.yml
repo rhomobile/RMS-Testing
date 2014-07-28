@@ -26,7 +26,7 @@ capabilities:
   - calendar
   - gps
    
-extensions: ["mspec", "json", "rhoxml", "crypt", "fileutils"]  
+extensions: ["mspec", "json", "rhoxml", "crypt", "fileutils", "serialport"]  
 
 wp:
   productid: 'fd55c4d0-51fa-012e-7844-6caec51bd50e'

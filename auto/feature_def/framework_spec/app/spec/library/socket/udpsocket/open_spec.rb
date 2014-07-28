@@ -6,7 +6,7 @@ describe "UDPSocket.open" do
     @socket.close if @socket && !@socket.closed?
   end
 
-  it "allows calls to open without arguments" do
+  it "allows calls to open without arguments----VT-0190" do
     @socket = UDPSocket.open
     @socket.should be_kind_of(UDPSocket)
   end

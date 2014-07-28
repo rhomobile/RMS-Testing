@@ -6,7 +6,7 @@ if System.get_property('platform') != 'ANDROID'  &&
    System::get_property('platform') != 'WINDOWS' && 
    System.get_property('platform') != 'WINDOWS_DESKTOP'
 
-describe "Socket#sockaddr_in" do
+describe "Socket#sockaddr_in----VT-0129" do
   it_behaves_like :socket_pack_sockaddr_in, :sockaddr_in
 end
 

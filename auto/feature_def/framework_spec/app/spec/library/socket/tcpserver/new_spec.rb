@@ -6,7 +6,7 @@ describe "TCPServer.new" do
     @server.close if @server && !@server.closed?
   end
 
-  it "binds to a host and a port" do
+  it "binds to a host and a port----VT-0148" do
     @server = TCPServer.new('127.0.0.1', SocketSpecs.port)
     addr = @server.addr
     addr[0].should == 'AF_INET'
@@ -17,7 +17,7 @@ describe "TCPServer.new" do
     addr[3].should == '127.0.0.1'
   end
 
-  it "binds to localhost and a port with either IPv4 or IPv6" do
+  it "binds to localhost and a port with either IPv4 or IPv6----VT-0149" do
     @server = TCPServer.new(SocketSpecs.hostname, SocketSpecs.port)
     addr = @server.addr
     if addr[0] == 'AF_INET'
@@ -31,7 +31,7 @@ describe "TCPServer.new" do
     end
   end
 
-  it "binds to INADDR_ANY if the hostname is empty" do
+  it "binds to INADDR_ANY if the hostname is empty----VT-0150" do
     @server = TCPServer.new('', SocketSpecs.port)
     addr = @server.addr
     addr[0].should == 'AF_INET'
@@ -40,7 +40,7 @@ describe "TCPServer.new" do
     addr[3].should == '0.0.0.0'
   end
 
-  it "binds to INADDR_ANY if the hostname is empty and the port is a string" do
+  it "binds to INADDR_ANY if the hostname is empty and the port is a string----VT-0151" do
     @server = TCPServer.new('', SocketSpecs.port.to_s)
     addr = @server.addr
     addr[0].should == 'AF_INET'
@@ -49,7 +49,7 @@ describe "TCPServer.new" do
     addr[3].should == '0.0.0.0'
   end
 
-  it "coerces port to string, then determines port from that number or service name" do
+  it "coerces port to string, then determines port from that number or service name----VT-0152" do
     t = Object.new
     lambda { TCPServer.new(SocketSpecs.hostname, t) }.should raise_error(TypeError)
 
@@ -63,7 +63,7 @@ describe "TCPServer.new" do
     # pick such a service port that will be able to reliably bind...
   end
 
-  it "raises Errno::EADDRNOTAVAIL when the adress is unknown" do
+  it "raises Errno::EADDRNOTAVAIL when the adress is unknown----VT-0153" do
     lambda { TCPServer.new("1.2.3.4", 4000) }.should raise_error(Errno::EADDRNOTAVAIL)
   end
 
@@ -71,14 +71,14 @@ describe "TCPServer.new" do
   # DNS servers like opendns return A records for ANY host, including
   # traditionally invalidly named ones.
   quarantine! do
-    it "raises a SocketError when the host is unknown" do
+    it "raises a SocketError when the host is unknown----VT-0154" do
       lambda {
         TCPServer.new("--notavalidname", 4000)
       }.should raise_error(SocketError)
     end
   end
 
-  it "raises Errno::EADDRINUSE when address is already in use" do
+  it "raises Errno::EADDRINUSE when address is already in use----VT-0155" do
     lambda {
       @server = TCPServer.new('127.0.0.1', SocketSpecs.port)
       @server = TCPServer.new('127.0.0.1', SocketSpecs.port)
