@@ -11,7 +11,7 @@ iphone:
   # configuration: Release
   configuration: Debug
   sdk: iphoneos6.1
-  #sdk: iphonesimulator5.0
+  #sdk: iphonesimulator6.1
   provisionprofile:
   codesignidentity: "iPhone Developer"
   entitlements:
