@@ -16,7 +16,7 @@ connection:
 iphone:
   ajax_api_bridge: false
   configuration: "Release"
-  sdk: "iphonesimulator6.1"
+  sdk: "iphonesimulator7.1"
   provisionprofile: 
   codesignidentity: 
   entitlements: 
