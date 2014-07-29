@@ -11,7 +11,7 @@ capabilities:
   - pim
 iphone:
   configuration: Release
-  sdk: iphonesimulator6.1
+  sdk: iphonesimulator7.1
   provisionprofile:
   codesignidentity:
   entitlements:

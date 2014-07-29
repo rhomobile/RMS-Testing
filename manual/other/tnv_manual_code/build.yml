@@ -34,7 +34,7 @@ version: "1.0.7"
 vendor: "rhomobile"
 iphone:
   emulator: 5.0
-  sdk: "iphonesimulator6.1"
+  sdk: "iphonesimulator7.1"
   codesignidentity: 
   entitlements: 
   extensions:
