@@ -9,7 +9,7 @@ sdkversion: 4.1
 
 iphone:
   configuration: Release
-  sdk: iphonesimulator6.1
+  sdk: iphonesimulator7.1
   provisionprofile:
   codesignidentity:
   entitlements:
