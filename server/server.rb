@@ -147,8 +147,9 @@ $secure_server_with_client_auth = WEBrick::HTTPServer.new(:Port => securePortWit
                                          :SSLEnable => true,
                                          :SSLCertificate => cert2,
                                          :SSLPrivateKey => pkey2,
-                                         :SSLVerifyClient => OpenSSL::SSL::VERIFY_PEER,
-                                         :SSLCACertificateFile => File.join( File.dirname(__FILE__), 'client.crt' )
+                                         :SSLVerifyClient => OpenSSL::SSL::VERIFY_PEER | OpenSSL::SSL::VERIFY_FAIL_IF_NO_PEER_CERT,
+                                         :SSLCACertificateFile => File.join( File.dirname(__FILE__), 'client.crt' ),
+                                         :DocumentRoot => "Documents"
                                          )
 
 
