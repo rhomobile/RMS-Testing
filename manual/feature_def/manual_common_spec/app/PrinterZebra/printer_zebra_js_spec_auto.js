@@ -617,15 +617,14 @@ describe('Printer Zebra', function() {
 
         var connectParams = [{}, {
             "timeout": 20000
-        }, {
-            "timeout": 0
-        }, {
+        }, 
+		//{"timeout": 0}, - invalid as per doc
+		{
             "timeout": 1
         },
-        //                     {
-        //    "timeout": 15000.5
-        //},
-                             ];
+        {
+            "timeout": 15000.5
+        }];
 
         // 20 sec is enought for connect
         // 0 is invalid timeout
@@ -684,7 +683,8 @@ describe('Printer Zebra', function() {
 
         runs(function() {
             expect(callresult.status).toEqual(Rho.PrinterZebra.PRINTER_STATUS_SUCCESS);
-            expect(callresult.fileNames).toNotEqual(filelist);
+            expect(callresult.fileNames).toNotEqual(
+			);
         });
     }
 

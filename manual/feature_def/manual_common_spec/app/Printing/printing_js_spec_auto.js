@@ -544,12 +544,12 @@ describe('Printing Generic', function() {
 
         var connectParams = [{}, {
                 "timeout": 20000
-            }, {
-                "timeout": 0
-            }, {
+            }, 
+		//	{"timeout": 0}, //timeout = 0 is invalid as per doc
+			{
                 "timeout": 1000
             }, {
-                "timeout": 15000.5
+                "timeout": 15000
         }, ];
 
         for (var i = 0; i < connectParams.length; i++) {
