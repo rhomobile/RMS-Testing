@@ -1,0 +1,100 @@
+<html>
+<head><script type="text/javascript" src="http://192.168.6.18/NEON/src/elements.js"></script>
+    <title>PB 3.0 File Management Test static EMML 1.1</title>
+   <META HTTP-Equiv="MinimizeButton" Content="Visibility:Visible;left:10;top:10">
+<!--<META HTTP-Equiv="EMMLProfile" Content="name:myFilemgt;import:url('http://192.168.6.18/pb3.x/EMMLProfiles/FileManagement/FileManagement.emmp');">-->
+</head>
+<body>
+<br /><br /><br />
+<div id="Message">Message:</div>
+<form id="frmFileManagement" action="" >
+
+<tr><td><h4>Named File transfer(send) Persistant EMML Profile script</h4>
+<h4>Click on start button to transfer data.</h4>
+<a href="javascript:doImportNamedProfile();">Import named Profile</a>
+    <br>
+<a href="javascript:doApplyProfile('myFilemgt.sendFile');">Apply named Send Profile</a>
+    <br>
+<a href="javascript:doApplyProfile('myFilemgt.receiveFile');">Apply named Receive Profile</a>
+<br />    
+<a href="javascript:doImportunNamedProfile();">Import unnamed Profile</a>
+    <br>   
+<a href="javascript:doApplyProfile('sendFile');">Apply unnamed Send Profile</a>
+    <br>
+<a href="javascript:doApplyProfile('receiveFile');">Apply unnamed Receive Profile</a>
+  <br>  <br>  <br>
+<input type=button value="TransferfromFTPToDevice" onclick="TransferfromFTPToDevice();"><br /><br />
+<input type=button value="TransferFromDeviceToFTP" onclick="TransferFromDeviceToFTP();"><br /><br />
+
+
+<input type=button value="Clear Profile" onclick="clearProfile();">
+<P><INPUT TYPE="button" VALUE="Quit" ONCLICK="Quit();"></P>
+</form>
+<h4>Browse to another page to check for EMML profile persistance.</h4>
+<h4><a href="Persistant_FileMgt_Test.html">Click here to go to another page.</a></h4>
+<hr />
+<a href="../EMMLProfilesIndex.html">Back to EMML Profile Index</a>
+generic
+</body>
+</html>
+
+<script language=javascript>
+
+//var generic = new ActiveXObject("PocketBrowser.Generic");
+
+function doImportNamedProfile()
+{
+generic.InvokeMETAFunction('EMMLProfile', "name:myFilemgt;import:url('http://192.168.6.18/NEON/EMMLProfiles/FileManagement/FileManagement.emmp');");
+
+}
+
+function doImportunNamedProfile()
+{
+generic.InvokeMETAFunction('EMMLProfile', "import:url('http://192.168.6.18/NEON/EMMLProfiles/FileManagement/FileManagement.emmp');");
+
+}
+
+  function TransferFile() 
+   {
+    generic.InvokeMETAFunction('FileTransfer', 'Transfer');
+   }
+  
+  
+    function TransferfromFTPToDevice() 
+   {
+ generic.InvokeMETAFunction("FileTransfer", "Source:url('ftp://192.168.6.18//FileCollections//myfile.txt')");
+  generic.InvokeMETAFunction("FileTransfer", "Destination:url('file://\\Temp\\myEMMLProfilefolder\\EMMLprofilemyfilefromFTP.txt')");
+  generic.InvokeMETAFunction("FileTransfer", "username:ftpadmin");
+  generic.InvokeMETAFunction("FileTransfer", "password:ftpadmin");
+    generic.InvokeMETAFunction('FileTransfer', 'Transfer');
+   } 
+   
+    function TransferFromDeviceToFTP() 
+   {
+ generic.InvokeMETAFunction("FileTransfer", "Source:url('file://\\Application\\FileCollections\\myfile.txt')");
+  generic.InvokeMETAFunction("FileTransfer", "Destination:url('ftp://192.168.6.18//Received//EMMLProfileFromDevice.txt')");
+  generic.InvokeMETAFunction("FileTransfer", "username:ftpadmin");
+  generic.InvokeMETAFunction("FileTransfer", "password:ftpadmin");
+    generic.InvokeMETAFunction('FileTransfer', 'Transfer');
+   } 
+function Quit()
+{
+    generic.InvokeMETAFunction("Application", "Quit");
+}
+
+function MyTransferEvent(Msg) 
+{
+    Message.innerHTML="Transfer Message:"+Msg;
+    //alert("Transfer Message" + Msg);
+}
+
+function doApplyProfile(profile)
+ {
+    generic.InvokeMETAFunction('EMMLProfile', 'Apply:' + profile);
+}
+
+function clearProfile() 
+{
+    generic.InvokeMETAFunction('EMMLProfile', 'clear:myFilemgt');
+}
+</script>

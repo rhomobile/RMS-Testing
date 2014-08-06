@@ -1,0 +1,44 @@
+<html>
+<head><script type="text/javascript" src="http://192.168.6.18/NEON/src/elements.js"></script>
+<META HTTP-Equiv="quitbutton" Content="Top:10; Left:10; Visibility:Visible">
+
+
+
+</head>
+<body>
+<P>AutoReboot</P>
+<P><INPUT TYPE="button" VALUE="AutoReboot_True" ONCLICK="doSync_true();">
+<P><INPUT TYPE="button" VALUE="AutoReboot_False" ONCLICK="doSync_false();">
+<P><INPUT TYPE="button" VALUE="Four" ONCLICK="location.href='./4.html'"></P>
+<P><INPUT TYPE="button" VALUE="Back" ONCLICK="location.href='./AirBEAM.html'"></P>
+<P><BR>Last Revision : 22 Oct 2008 <BR>by Raj</P>
+
+</body>
+</html>
+
+<script>
+var ab = new ActiveXObject("PocketBrowser.AirBEAMSmart");
+
+var myobjGeneric = new ActiveXObject("PocketBrowser.Generic");
+
+   function doSync_true()
+   {
+      
+
+      ab.AutoReboot = true;
+      ab.AddPackage("license_yes");
+      setTimeout('ab.Run()', 100);
+   }
+   function doSync_false()
+   {
+
+      ab.AutoReboot = false;
+      ab.AddPackage("license_yes");
+      setTimeout('ab.Run()', 100);
+   }
+</script>
+
+ 
+
+
+

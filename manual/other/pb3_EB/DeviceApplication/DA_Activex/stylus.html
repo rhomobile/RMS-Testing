@@ -1,0 +1,39 @@
+<html>
+  <head><script type="text/javascript" src="http://192.168.6.18/NEON/src/elements.js"></script>
+  <META HTTP-EQUIV="OnKey0x54" content="Javascript:TouchScreenOn(true);">
+
+  <title>Stylus</title>
+  <SCRIPT Language="Javascript">
+  var objGeneric = new ActiveXObject("PocketBrowser.Generic");
+    
+    function TouchScreenOn(mode)
+    {
+      
+      if(mode==true)
+      {
+        objGeneric.InvokeMetaFunction('stylus', 'enabled');
+        message.innerHTML = "Touchscreen enabled";
+  
+      
+      }
+      else
+      {
+        objGeneric.InvokeMetaFunction('stylus', 'disabled');
+        message.innerHTML = "Touchscreen disabled<br> <b><i>Press the 'T' button to re-enable<i/></b><br>";
+  
+      }
+       
+    }
+    
+    
+  
+  </SCRIPT>
+  </head>
+  <body>
+    <input type="text"/><br><br>
+    <input TYPE="button" VALUE="Touch Screen off" ONCLICK="TouchScreenOn(false);">&nbsp;<br>
+    <div id="message"></div>
+    <a HREF="../TestMenu.html">Main Menu</a>
+    
+  </body>
+</html>

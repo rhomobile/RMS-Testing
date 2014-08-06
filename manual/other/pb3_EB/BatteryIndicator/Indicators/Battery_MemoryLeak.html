@@ -1,0 +1,38 @@
+<html>
+<head><script type="text/javascript" src="http://192.168.6.18/NEON/src/elements.js"></script><script type="text/javascript" src="http://192.168.6.18/NEON/src/elements.js"></script>
+<META HTTP-Equiv="quitbutton" Content="visibility:visible">
+<META HTTP-Equiv="quitbutton" Content="Left:0">
+<META HTTP-Equiv="quitbutton" Content="Top:0">
+
+
+
+<META HTTP-Equiv="battery" Content="Left:100;Top:90;IconPosition:Left;GraphPosition:Bottom;BatteryEvent:url('Javascript:OnBattery('%s','%s','%s');');color:FF0000;visibility:visible">
+
+<META HTTP-EQUIV="Timer" CONTENT="Interval:10000;Timeout:url('http://192.168.6.18/PB3.x/Indicators/Signal_memoryLeak.html');Start">
+
+
+
+
+</head>
+<body>
+<P><BR></P>
+<P><BR></P>
+<H1>BatteryNavigate</H1>
+<div id="bat">Battery readings should appear here</div>
+
+
+<BR><BR>
+<A HREF="./Indicators.html">Back</A>
+
+
+</body>
+</html>
+
+
+<SCRIPT LANGUAGE="JavaScript">
+function OnBattery(AC, main, backup)
+	{
+		bat.innerHTML = "AC: " + AC + "\<BR>main:" + main + "\<BR>backup: " + backup;
+		return;
+	}
+</SCRIPT>

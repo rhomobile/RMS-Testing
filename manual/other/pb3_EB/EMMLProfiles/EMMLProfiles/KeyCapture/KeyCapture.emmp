@@ -1,0 +1,7 @@
+.KeyAll{
+    KeyCapture-KeyValue:All;
+    KeyCapture-Dispatch:True;
+    KeyCapture-KeyEvent:url('javascript:MyKeyEvent('%s');');
+   }
+
+

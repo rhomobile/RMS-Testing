@@ -1,0 +1,16 @@
+.Signatureftp{
+    SignatureCapture-left:30;
+    SignatureCapture-top:90;
+    SignatureCapture-height:100;
+    SignatureCapture-bgcolor:#FFFF00;   
+    SignatureCapture-width:200;
+    SignatureCapture-border:Hidden;
+    SignatureCapture-Pencolor:#0000FF;
+    SignatureCapture-Penwidth:2;
+    SignatureCapture-visibility:visible;
+    SignatureCapture-Username:ftpadmin;
+    SignatureCapture-Password:ftpadmin; 
+    SignatureCapture-destination:url('ftp://192.168.6.18:21/Sig5.bmp');
+    SignatureCapture-SignatureSaveEvent:url('Javascript:onCaptured('%s');');
+    }
+

@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<HTML>
+
+<head><script type="text/javascript" src="http://192.168.6.18/NEON/src/elements.js"></script>
+<META HTTP-Equiv="MinimizeButton" Content="Visibility:Visible;top:80">
+<META HTTP-Equiv="keystate" Content="Visibility:Visible">
+<META HTTP-Equiv="Addressbar" Content="Visibility:hidden">
+<META HTTP-Equiv="TopCommandArea" Content="Visibility:hidden">
+<META HTTP-Equiv="BottomCommandArea" Content="Visibility:hidden">
+</HEAD>
+
+
+<BODY BGCOLOR="#FFFFEA" TEXT="#0000A0" LINK="#FF0000" VLINK="#808080" ALINK="#008040">
+<H2>Neon - Helium Test Site Amit</H2>
+<input type=button value="Quit" onclick="quitPB();" />
+<!--<input type=button value="New Window" onclick="openindex();" />-->
+ 
+ 
+<P><A HREF="./Signature.html">Signature</A></P>
+<P><A HREF="./vectorfunctionality1.html">VectorEvent</A></P>
+<P><A HREF="./SignalActiveX.html">SignalIndicator</A></P>
+<P><A HREF="./Battery.html">Battery</A></P>
+<P><A HREF="./BatteryJson.html">BatteryJSON</A></P>
+<P><A HREF="./SignalJson.html">SignalJson</A></P>
+<P><A HREF="./Network_GenMetaInvoke.html">Network</A></P>
+<P><A HREF="./AGeneric.html">AGeneric</A></P>
+<P><A HREF="./Log.html">Log</A></P>
+<p><A href="http://www.google.com">google</A></p><br />
+<input type=button onclick="Javascript:goBack();" value="NeonHistoryBack">
+<br>
+<input type=button onclick="Javascript:goBack1();" value="NeonHistoryBack using Window">
+<br>
+
+</BODY>
+</HTML>
+<SCRIPT>
+try
+{
+var generic = new ActiveXObject("PocketBrowser.Generic");
+}
+catch(err)
+{
+var GenericPlugin = document.createElement('embed'); 
+GenericPlugin.setAttribute('id',"embed1"); 
+GenericPlugin.setAttribute('type',"application/x-wtg-legacy-generic"); 
+GenericPlugin.setAttribute('hidden',"true"); 
+
+// Attach the plugin embed tags to the body 
+var theBody = document.getElementsByTagName('body')[0]; 
+theBody.appendChild(GenericPlugin); 
+}
+
+
+   function quitPB()
+   {
+     generic.InvokeMETAFunction('Application', 'Quit');
+   }
+   
+   function goBack()
+   {
+      document.location = 'history:back';
+   }
+ 
+   function goBack1()
+   {
+      window.location = 'history:back';
+   }
+ 
+
+  
+</SCRIPT>

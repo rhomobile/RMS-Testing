@@ -1,0 +1,46 @@
+<html>
+<head><script type="text/javascript" src="http://192.168.6.18/NEON/src/elements.js"></script>
+<META HTTP-Equiv="quitbutton" Content="visibility:visible">
+<META HTTP-Equiv="quitbutton" Content="Left:10">
+<META HTTP-Equiv="quitbutton" Content="Top:10">
+
+
+
+
+
+</head>
+<p>Send the Image to FTP</p>
+<BR><BR><BR><BR><BR><BR><BR><BR><BR><BR>
+
+Decoded data:<input id="datafield" type="text" value="" /><br /><p></p>
+<P><INPUT TYPE="button" VALUE="WriteLog" ONCLICK="doDisable();"></P>
+
+
+</body>
+</html>
+
+
+<SCRIPT>
+var objGeneric = new ActiveXObject("PocketBrowser.Generic");
+	
+
+  
+
+
+function doDisable()
+{
+   var rValue = objGeneric.Log('Scanner Disabled3 high', 3);
+   alert(rValue);
+   var rValue1 = objGeneric.Log('Scanner Disabled2 medium', 2);    
+   alert(rValue1);
+   var rValue2 = objGeneric.Log('Scanner Disabled1 low', 1);
+   alert(rValue2);
+  var rValue2 = objGeneric.Log('Scanner Disabled1 invalid', 0);
+   alert(rValue2);
+  
+ }
+
+
+</SCRIPT>
+
+

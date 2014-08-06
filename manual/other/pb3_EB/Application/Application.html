@@ -1,0 +1,67 @@
+<html>
+<head><script type="text/javascript" src="http://192.168.6.18/NEON/src/elements.js"></script>
+<title>PB Device Backlight Test</title>
+<META HTTP-Equiv="sipbutton" Content="visibility:visible">
+<script language=javascript>
+
+function setApps()
+{
+	var SelectedValue = frm.backdropdown.selectedIndex;
+	var selectBacklight = frm.backdropdown.options[SelectedValue].value;	
+    Message.innerHTML="value is:"+selectBacklight;
+	switch(selectBacklight)
+	{
+		case 'quit':
+
+			generic.InvokeMETAFunction('application', 'quit');
+			break;
+
+		case 'minimize':
+
+			generic.InvokeMETAFunction('application', 'minimize');
+			break;
+			
+	   case 'restore':
+
+			generic.InvokeMETAFunction('application', 'restore');
+			break;
+			
+		case 'EMPTY':
+
+			generic.InvokeMETAFunction('application', '');
+			break;
+
+
+	}
+}
+
+
+
+</script>
+
+
+</head>
+<body>
+<form id="frm" action="">
+<div id="Message">Message</div>
+<hr>
+Application:
+<select name="backdropdown" id="backdropdown">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="quit">quit</option>
+<option value="minimize">minimize</option>
+<option value="restore">restore</option>
+<option value="EMPTY">EMPTY</option>
+
+
+</select>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<input type=button onclick="setApps();" value="Set">
+<br><br><br>
+
+
+<A HREF='ApplicationIndex.html'>Back</A>
+
+</form>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<html>
+<head><script type="text/javascript" src="http://192.168.6.18/NEON/src/elements.js"></script>
+<title>PB Device Backlight Test</title>
+<META HTTP-Equiv="sipbutton" Content="visibility:visible">
+<META HTTP-Equiv="stopbutton" Content="visibility:visible">
+<META HTTP-Equiv="forwardbutton" Content="visibility:visible">
+<script type="text/javascript">
+   function goBack()
+   {
+      document.location = 'history:back';
+   }
+ 
+   function goBack1()
+   {
+      window.location = 'history:back';
+   }
+ 
+ 
+ 
+  function goJSBack()
+   {
+      window.history.back();
+   }
+ 
+  function goJSgo()
+   {
+      window.history.go(-1);
+   }
+   
+</script>
+
+</head>
+<body>
+<br><br><br><br><br><br><br><br>
+<input type=button onclick="Javascript:goBack();" value="NeonHistoryBack">
+<br>
+<input type=button onclick="Javascript:goBack1();" value="NeonHistoryBack using Window">
+<br>
+<input type=button onclick="Javascript:goJSBack();" value="JavaScriptHistoryBack">
+<br>
+<input type=button onclick="Javascript:goJSgo();" value="JavaScriptHistorygo">
+</body>
+</html>
+

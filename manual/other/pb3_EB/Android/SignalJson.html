@@ -1,0 +1,21 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0057)http://www.tandv.wtgdev.net/SignalStatic/SignalJason.html -->
+<HTML><head><script type="text/javascript" src="http://192.168.6.18/NEON/src/elements.js"></script>
+<META content="text/html; charset=windows-1252" http-equiv=Content-Type>
+<META name=GENERATOR content="MSHTML 8.00.6001.19120"></HEAD>
+<BODY><BR><BR><INPUT onclick=SignalVisible(); value=Visible type=button> 
+<DIV id=sig>Signal readings should appear here</DIV><BR><BR><A 
+href="http://www.tandv.wtgdev.net/SignalStatic/SignalStaticIndex.html">Back</A>
+<SCRIPT language=JavaScript>
+function SignalVisible()
+        {
+               generic.InvokeMETAFunction('Signal', 'visibility:visible');
+               generic.InvokeMETAFunction("Signal", "SignalEvent:url('Javascript:MySignalEvent(%json);')");
+        }
+function MySignalEvent(json)
+	{
+		sig.innerHTML = "SignalStrength: " + json.signalStrength + "\<BR>SSID:" + json.essid + "\<BR>MacAddress: " + json.macAddress+ "\<BR>AdapterName:" + json.adapterName + "\<BR>DHCPServer: " + json.dhcpServer+ "\<BR>DHCPStatic:" + json.dhcpStatic + "\<BR>Gateway: " + json.gateway+ "\<BR>IPAddress: " + json.ipAddress+ "\<BR>RSSI:" + json.rssi + "\<BR>SubnetMask: " + json.subnetMask+ "\<BR>Wins: " + json.wins;
+		return;
+	}
+</SCRIPT>
+ </BODY></HTML>

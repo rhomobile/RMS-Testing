@@ -1,0 +1,76 @@
+<HTML>
+<head><script type="text/javascript" src="http://192.168.6.18/NEON/src/elements.js"></script>
+<TITLE>Signal Test Index Page</TITLE>
+
+<META HTTP-Equiv="quitbutton" Content="visibility:visible">
+<META HTTP-Equiv="quitbutton" Content="Left:10">
+<META HTTP-Equiv="quitbutton" Content="Top:10">
+<script>
+    var a = 0;
+    function OnBattery(AC, main, backup) 
+    {
+        a = a + 1;
+
+        bat.innerHTML = "AC: " + AC + "\<BR>main:" + main + "\<BR>backup: " + backup + "\<BR>Count: " + a;
+        return;
+    }
+
+
+    function OnSignal(signal, ESSID, MAC, AdapterName, DHCPServer, DHCPStatic, Gateway, IPAddress, RSSI, SubnetMask, Wins) {
+        a = a + 1;
+        sig.innerHTML = "Signal: " + signal
+								+ "<BR>ESSID:" + ESSID
+								+ "<BR>MAC: " + MAC
+								+ "<BR>AdapterName: " + AdapterName
+								+ "<BR>DHCPServer: " + DHCPServer
+								+ "<BR>DHCPStatic: " + DHCPStatic
+								+ "<BR>Gateway: " + Gateway
+								+ "<BR>IPAddress: " + IPAddress
+								+ "<BR>RSSI: " + RSSI
+								+ "<BR>SubnetMask: " + SubnetMask
+								+ "<BR>Wins: " + Wins
+								+ "<BR>Count: " + a
+        return;
+    }
+</script>
+</HEAD>
+
+<BODY BGCOLOR="#FFFFEA" TEXT="#0000A0" LINK="#FF0000" VLINK="#808080" ALINK="#008040">
+<H2>PocketBrowser Test Site</H2>
+<div id="bat">Battery readings should appear here</div><br /><br />
+<div id="sig">Signal details should appear here</div><br />
+<table width="100">
+
+<tr>
+<td><A HREF="./SignalStatic/SignalStaticIndex.html">Signal Static Test</A></td>
+</tr>
+
+<tr>
+<td><A HREF="./Signal.html">Signal</A></td>
+</tr>
+<tr>
+<td><A HREF="./Signal_Static1.1.html">Signal_Static1.1</A></td>
+</tr>
+
+
+
+<tr>
+<td><A HREF="./Signal_MemoryLeak.html">Signal_MemoryLeak</A></td>
+</tr>
+
+<tr>
+<td><A HREF="./Signal_MemoryLeak1.html">Signal_MemoryLeak_anotherApproach</A></td>
+</tr>
+<tr>
+<td><A HREF="./TestSignal.html">Test Signal</A></td>
+</tr>
+
+<tr>
+<td><A HREF="../Index.html">Back</A></td>
+</tr>
+<P><INPUT TYPE="button" VALUE="Back" ONCLICK="location.href='../index.html'"></P>
+</table>
+</body>
+</HTML>
+
+

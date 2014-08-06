@@ -1,0 +1,19 @@
+<html>   <script>       function divclick(id) {
+           if (id == "div1") {
+               var NSEdit = new ActiveXObject("NoSIP.NSEdit");
+               NSEdit.ShowSIP(false);
+               alert('SIP Off');
+           }
+           else {
+               var NSEdit = new ActiveXObject("NoSIP.NSEdit");
+               NSEdit.ShowSIP(true);
+               alert('SIP On');
+           }
+       }   </script><body> </br></br> 
+ <div> 
+    Div&nbsp;NoSip&nbsp;<input type=text name=row1 onfocus="divclick('div1')" id="div1"> 
+ </div> 
+ <div> 
+    Div&nbsp;Sip&nbsp;<input type=text name=row2 onfocus="divclick('div2')" id="div2"> 
+ </div> 
+  </body></html>

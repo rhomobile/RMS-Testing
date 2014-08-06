@@ -1,0 +1,95 @@
+<html>
+<head><script type="text/javascript" src="http://192.168.6.18/NEON/src/elements.js"></script>
+    <title>NEON OnPower Event Test</title>
+
+<script language="javascript">
+
+//var SelectedItem="";
+var StressCount=0;
+
+
+
+
+function AttachOnPowerEvent()
+{
+  var SelectedItem="";  
+    var index=myfrm.mydropdown5.selectedIndex;
+    alert(index);
+    SelectedItem=myfrm.mydropdown5.options[index].value;
+    alert(SelectedItem);
+    if(SelectedItem=="JAVASCRIPT")
+    {
+        //generic.InvokeMETAFunction("PowerOn","PowerOnEvent:url('Javascript:MyOnPowerEvent();')");
+    }
+    else if(SelectedItem="HTMLLOCAL")
+    {
+        //generic.InvokeMETAFunction("PowerOn", "PowerOnEvent:url('file://\Android\Data\Navigate.html?PowerOnEventFiredLocal')");
+    }
+    else if(SelectedItem="HTMLHTTP")
+    {
+        //generic.InvokeMETAFunction("PowerOn", "PowerOnEvent:url('http://tandv.wtgdev.net/Navigate.html?PowerOnEventFiredHTTP')");
+    }
+    else if(SelectedItem="HTMLLOAD")
+    {
+        //generic.InvokeMETAFunction("PowerOn", "PowerOnEvent:url('http://ndtv.com')");
+    }
+    else if(SelectedItem="EMPTY")
+    {
+        //generic.InvokeMETAFunction("PowerOn", "PowerOnEvent:");
+    }
+    else if(SelectedItem="BACKLIGHT")
+    {
+        //generic.InvokeMETAFunction("PowerOn","PowerOnEvent:url('Javascript:MyOnPowerBackLightEvent();')");
+    }
+    else if(SelectedItem="DETACH")
+    {
+        //generic.InvokeMETAFunction("PowerOn", "PowerOnEvent:url('')");
+    }
+
+
+
+
+
+var str = index+ " attached successfully";
+document.getElementById('StatusDiv').innerHTML = str;
+document.getElementById('ResultDiv').innerHTML="Waiting for PowerOn Event to fire";
+}
+
+
+</script>
+</head>
+
+<body>
+
+<form id="myfrm" action="">
+
+<br><br>
+
+<div id="StatusDiv">Status:-</div>
+<div id="ResultDiv">Result:-</div>
+
+
+<select name="mydropdown5" id="mydropdown5">
+<option value="JAVASCRIPT">PowerOn JavaScript Event</option>
+<option value="HTMLLOCAL">PowerOn Navigate To Local URL</option>
+<option value="HTMLHTTP">PowerOn Navigate To HTTP URL</option>
+<option value="HTMLLOAD">PowerOn Navigate To Loaded HTTP URL</option>
+<option value="EMPTY">PowerOn Navigate To Empty URL</option>
+<option value="BACKLIGHT">PowerOn BackLightIntensity to 0</option>
+<option value="DETACH">Detach PowerOnEvent</option>
+</select>
+
+<table>
+<tr>
+    <td><input type="button" onclick="AttachOnPowerEvent();" value="Attach Event"/></td>
+    <td><Textarea id="txtShowResult"cols="10" rows="1"></Textarea></td>
+</tr>
+</table>
+
+
+</form>
+<h4><a href="./OnPowerPersistance.html">Go to another page to check Tag Persistance</a></h4>
+<h4><a href="./OnPowerIndex.html">back</a></h4>
+
+</body>
+</html>

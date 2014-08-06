@@ -1,0 +1,67 @@
+<html>
+<head><script type="text/javascript" src="http://192.168.6.18/NEON/src/elements.js"></script>
+<META HTTP-Equiv="quitbutton" Content="Top:10; Left:10; Visibility:Visible">
+<META HTTP-Equiv="addressbar" Content="Visibility:hidden">
+</head>
+<body>
+<P>GetLastMessage Method</P>
+<br /><br /><br /><br />
+<div id="myDiv">Message</div>
+<P><INPUT TYPE="button" VALUE="GetLastMessage" ONCLICK="OnTest();">
+<P><INPUT TYPE="button" VALUE="GetLastMessage Negative" ONCLICK="OnTest1();">
+<P><INPUT TYPE="button" VALUE="Test 4" ONCLICK="location.href='./4.html'"></P>
+<P><INPUT TYPE="button" VALUE="Back" ONCLICK="location.href='./APD.html'"></P>
+
+
+</body>
+</html>
+
+<SCRIPT LANGAUGE="JavaScript">
+try
+{
+var apd = new ActiveXObject("PocketBrowser.NarrowBand");
+}
+catch(err)
+{
+var APDPlugin = document.createElement('embed'); 
+APDPlugin.setAttribute('id',"embed1"); 
+APDPlugin.setAttribute('type',"application/x-wtg-legacy-apd"); 
+APDPlugin.setAttribute('hidden',"true"); 
+
+// Attach the plugin embed tags to the body 
+var theBody = document.getElementsByTagName('body')[0]; 
+theBody.appendChild(APDPlugin); 
+}
+
+function OnTest()
+{
+	
+//    var printerID = 'BC53:1|' + '00037A0C9B41';
+	var printerID = 'BC53:1|'+ '0017AC15E2C9';
+//	apd.PSExternalEx(261, printerID);
+   	if(apd.PSExternalEx(257, 'Hello World') > 0)
+   	{
+   	    myDiv.innerHTML=apd.PSGetLastMessage();
+
+   	}
+
+}
+
+
+function OnTest1()
+{
+
+   	
+   	if(apd.PSExternalEx(100, 'Hello World') > 0)
+   	{
+   	    myDiv.innerHTML=apd.PSGetLastMessage();
+
+   	}
+
+
+}
+
+
+</SCRIPT>
+
+

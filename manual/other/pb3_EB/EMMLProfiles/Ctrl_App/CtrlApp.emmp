@@ -1,0 +1,41 @@
+.QuitButtonValid
+{
+quitbutton-visibility:visible;
+}
+.QuitButtonValid
+{
+  quitbutton-top:50;
+  quitbutton-left:60;
+  quitbutton-height:100;
+  quitbutton-width:100;
+  quitbutton-imageup:url('ftp://tandv:H0neymoon@ftp.tandv.wtgdev.net/Resource/BMW.bmp');
+  quitbutton-imagedown:url('http://tandv.wtgdev.net/Resource/Porsche.gif');
+  quitbutton-visibility:visible;
+}
+
+.QuitButtonEmpty
+{
+  quitbutton-top:;
+  quitbutton-left:;
+  quitbutton-height:;
+  quitbutton-width:;
+  quitbutton-imageup:;
+  quitbutton-imagedown:);
+  quitbutton-visibility:visible;
+}
+
+.QuitButtonInvalid
+{
+  quitbutton-top:aaa;
+  quitbutton-left:aaa;
+  quitbutton-height:aaa;
+  quitbutton-width:aaa;
+  quitbutton-imageup:url('ftp://tandv:H0neymoon@ftp.tandv.wtgdev.net/Resource/aaa.bmp);
+  quitbutton-imagedown:url('http://tandv.wtgdev.net/Resource/bbb.gif');
+  quitbutton-visibility:visible;
+}
+
+.QuitButtonHide
+{
+  quitbutton-visibility:hidden;
+}

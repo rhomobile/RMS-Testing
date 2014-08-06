@@ -1,0 +1,1129 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head><script type="text/javascript" src="http://192.168.6.18/NEON/src/elements.js"></script>
+    <title>Untitled Page</title>
+  <META HTTP-Equiv="scanner" Content="DecodeEvent:url('javascript:doScan('%s', '%s', %s, '%s', '%s','%s');')">
+  <META HTTP-Equiv="Scanner" Content="EnumScannerEvent:url('Javascript:EnumScanners(%s);')">
+  <!--<META HTTP-Equiv="Scanner" Content="Enabled:SCN3">-->
+    
+ <script LANGUAGE="JAVASCRIPT">
+ 
+ var Generic = new ActiveXObject("PocketBrowser.Generic");
+ var selected_scanner="";
+ var selected_scannername="";
+ var attributes= new Array();
+ var count=0;
+ 
+ function reset()
+ {
+ 	count=0;
+ 
+ }
+ 
+  function DisconnetBT()
+ {
+ Generic.InvokeMETAFunction("RSM","BTDisconnect");
+ alert("Disconnected");
+ }
+  function UnpairBT()
+ {
+ Generic.InvokeMETAFunction("RSM","BTUnpair");
+ alert("Unpaired");
+ }
+ function StopPaging()
+ {
+ Generic.InvokeMETAFunction("RSM","PagingActivate:Stop");
+ alert("Paging Stopped");
+ }
+ function SetAttributes()
+ {
+Generic.InvokeMETAFunction("RSM","PagingActivate:Start");
+alert("Paging activated");
+ }
+ 
+
+
+function Get()
+{
+        
+        Generic.InvokeMETAFunction('RSM', 'ModelNumber');
+	    Generic.InvokeMETAFunction('RSM', 'SerialNumber');
+	    Generic.InvokeMETAFunction('RSM', 'BluetoothAddress');
+	    Generic.InvokeMETAFunction('RSM', 'DateOfManufacture');
+	    Generic.InvokeMETAFunction('RSM', 'DateOfService');
+	    Generic.InvokeMETAFunction('RSM', 'FirmwareVersion');
+        Generic.InvokeMETAFunction('RSM', 'DeviceClass');
+        Generic.InvokeMETAFunction('RSM', 'BatteryStatus');
+        Generic.InvokeMETAFunction('RSM', 'BatteryCapacity');
+        Generic.InvokeMETAFunction('RSM', 'BatteryID');
+        Generic.InvokeMETAFunction('RSM', 'BluetoothFriendlyName');  
+        
+        Generic.InvokeMETAFunction('RSM', 'Mems');      
+        Generic.InvokeMETAFunction('RSM', 'ProximityEnable');
+        Generic.InvokeMETAFunction('RSM', 'ProximityDistance');
+        Generic.InvokeMETAFunction('RSM', 'ProximityContinuous');
+        
+        Generic.InvokeMETAFunction('RSM', 'BluetoothAutoReconnect');
+        //Generic.InvokeMETAFunction('RSM', 'BluetoothReconnectAttempts');
+        Generic.InvokeMETAFunction('RSM', 'BluetoothBeepOnReconnectAttempt');
+        
+        Generic.InvokeMETAFunction('RSM', 'PagingEnable');
+        Generic.InvokeMETAFunction('RSM', 'PagingBeepSequence');
+	    
+	    Generic.InvokeMETAFunction('RSM', 'BluetoothInquiryMode');
+        Generic.InvokeMETAFunction('RSM', 'DecodeFeedback');   
+        Generic.InvokeMETAFunction('RSM', 'IgnoreCode128USPS');
+        Generic.InvokeMETAFunction('RSM', 'GoodScansDelay');
+        Generic.InvokeMETAFunction('RSM', 'BluetoothAuthentication');
+        Generic.InvokeMETAFunction('RSM', 'BluetoothPINcode');
+        Generic.InvokeMETAFunction('RSM', 'BluetoothPINCodeType');
+        Generic.InvokeMETAFunction('RSM', 'BluetoothEncryption');
+                
+        Generic.InvokeMETAFunction('RSM', 'ScanLineWidth');
+        Generic.InvokeMETAFunction('RSM', 'ScanTriggerWakeup');
+        Generic.InvokeMETAFunction('RSM', 'BluetoothHIDAutoReconnect');
+        Generic.InvokeMETAFunction('RSM', 'LowBatteryIndication');
+        Generic.InvokeMETAFunction('RSM', 'LowBatteryIndicationCycle');
+        
+        
+        Generic.InvokeMETAFunction('RSM', 'BluetoothReconnectAttempts');
+        alert("Get has been called");
+        Generic.InvokeMETAFunction("RSM", "Rsmgetevent:url('JavaScript:WriteOnTextBoxes(%s);')");
+      
+}
+
+
+function WriteOnTextBoxes(attributeArray)
+{
+    mydiv.innerHTML = attributeArray.length;
+    for (var a = 0; a < attributeArray.length; a++) 
+        {
+             //mydiv.innerHTML = attributeArray.length;  
+                   
+        }
+             RSMForm.ModelNumberR.value=attributeArray[0];    
+             RSMForm.SerialNumberR.value=attributeArray[1];        
+             RSMForm.BluetoothAddressR.value=attributeArray[2];   
+             RSMForm.DateOfManufactureR.value=attributeArray[3];    
+             RSMForm.DateOfServiceR.value=attributeArray[4];        
+             RSMForm.FirmwareVersionR.value=attributeArray[5]; 
+             RSMForm.DeviceClassR.value=attributeArray[6];   
+             RSMForm.BatteryStatusR.value=attributeArray[7];    
+             RSMForm.BatteryCapacityR.value=attributeArray[8];        
+             RSMForm.BatteryIDR.value=attributeArray[9];
+             RSMForm.BluetoothFriendlyNameR.value=attributeArray[10];
+              
+             RSMForm.MemsR.value=attributeArray[11];   
+             RSMForm.ProximityEnableR.value=attributeArray[12];    
+             RSMForm.ProximityDistanceR.value=attributeArray[13];        
+             RSMForm.ProximityContinuousR.value=attributeArray[14]; 
+             RSMForm.BluetoothAutoReconnectR.value=attributeArray[15];    
+             //RSMForm.BluetoothReconnectAttemptsR.value=attributeArray[16];        
+             RSMForm.BluetoothBeepOnReconnectAttemptR.value=attributeArray[16]; 
+             
+             RSMForm.PagingEnableR.value=attributeArray[17];        
+             RSMForm.PagingBeepSequenceR.value=attributeArray[18]; 
+             
+             RSMForm.BluetoothInquiryModeR.value=attributeArray[19];
+             RSMForm.DecodeFeedbackR.value=attributeArray[20];
+             RSMForm.IgnoreCode128USPSR.value=attributeArray[21];             
+             RSMForm.GoodScansDelayR.value=attributeArray[22];  
+             RSMForm.BluetoothAuthenticationR.value=attributeArray[23];  
+             RSMForm.BluetoothPINcodeR.value=attributeArray[24];  
+             RSMForm.BluetoothPINCodeTypeR.value=attributeArray[25];           
+             RSMForm.BluetoothEncryptionR.value=attributeArray[26];  
+             
+             RSMForm.ScanLineWidthR.value=attributeArray[27]; 
+             RSMForm.ScanTriggerWakeupR.value=attributeArray[28]; 
+             RSMForm.BluetoothHIDAutoReconnectR.value=attributeArray[29];              
+             RSMForm.LowBatteryIndicationR.value=attributeArray[30];             
+             RSMForm.LowBatteryIndicationCycleR.value=attributeArray[31];   
+             
+             RSMForm.BluetoothReconnectAttemptsR.value=attributeArray[32];           
+}
+function selectMems()
+{
+    var sltMems=RSMForm.mems_RSM.selectedIndex;
+	var selectedMems = RSMForm.mems_RSM.options[sltMems].value;
+	switch(selectedMems)
+	{
+		case 'Enabled':
+            alert(selectedMems);
+			Generic.InvokeMETAFunction('RSM', 'Mems:Enabled');
+			break;
+
+		case 'Disabled':
+            
+			Generic.InvokeMETAFunction('RSM', 'Mems:Disabled');
+			 alert(selectedMems);
+			break;
+	}
+}
+
+function selectproximityE()
+{
+    var sltproximityE=RSMForm.proximityE_RSM.selectedIndex;
+	var selectedproximityE = RSMForm.proximityE_RSM.options[sltproximityE].value;
+	switch(selectedproximityE)
+	{
+		case 'Enabled':
+            alert(selectedproximityE);
+			Generic.InvokeMETAFunction('RSM', 'ProximityEnable:Enabled');
+			break;
+
+		case 'Disabled':
+            alert(selectedproximityE);
+			Generic.InvokeMETAFunction('RSM', 'ProximityEnable:Disabled');
+			break;
+	}
+}
+
+function selectproximityD()
+{
+    var sltproximityD=RSMForm.proximityD_RSM.selectedIndex;
+	var selectedproximityD = RSMForm.proximityD_RSM.options[sltproximityD].value;
+	switch(selectedproximityD)
+	{
+		case 'Short':
+            alert(selectedproximityD);
+			Generic.InvokeMETAFunction('RSM', 'ProximityDistance:Short');
+			break;
+
+		case 'Medium':
+            alert(selectedproximityD);
+			Generic.InvokeMETAFunction('RSM', 'ProximityDistance:Medium');
+			break;
+		
+		case 'Long':
+            alert(selectedproximityD);
+			Generic.InvokeMETAFunction('RSM', 'ProximityDistance:Long');
+			break;
+	}
+}
+
+function selectproximityC()
+{
+    var sltproximityC=RSMForm.proximityC_RSM.selectedIndex;
+	var selectedproximityC = RSMForm.proximityC_RSM.options[sltproximityC].value;
+	switch(selectedproximityC)
+	{
+		case 'Enabled':
+            alert(selectedproximityC);
+			Generic.InvokeMETAFunction('RSM', 'ProximityContinuous:Enabled');
+			break;
+
+		case 'Disabled':
+            alert(selectedproximityC);
+			Generic.InvokeMETAFunction('RSM', 'ProximityContinuous:Disabled');
+			break;
+	}
+}
+
+function selectbautoReconnect()
+{
+    var sltbautoReconnect=RSMForm.bautoReconnect_RSM.selectedIndex;
+	var selectedbautoReconnect = RSMForm.bautoReconnect_RSM.options[sltbautoReconnect].value;
+	switch(selectedbautoReconnect)
+	{
+		case 'None':
+            alert(selectedbautoReconnect);
+			Generic.InvokeMETAFunction('RSM', 'BluetoothAutoReconnect:None');
+			break;
+
+		case 'OnPower':
+            alert(selectedbautoReconnect);
+			Generic.InvokeMETAFunction('RSM', 'BluetoothAutoReconnect:OnPower');
+			break;
+		
+		case 'OnOutofRange':
+            alert(selectedbautoReconnect);
+			Generic.InvokeMETAFunction('RSM', 'BluetoothAutoReconnect:OnOutofRange');
+			break;
+			
+		case 'OnPowerOutofRange':
+            alert(selectedbautoReconnect);
+			Generic.InvokeMETAFunction('RSM', 'BluetoothAutoReconnect:OnPowerOutofRange');
+			break;
+
+		case 'OnMemory':
+            alert(selectedbautoReconnect);
+			Generic.InvokeMETAFunction('RSM', 'BluetoothAutoReconnect:OnMemory');
+			break;
+	}
+}
+
+function setbreconnectAttempts()
+{
+	var breconnectAttempts=RSMForm.breconnectAttempts_RSM.value;
+	var breconnectAttemptsvalue="BluetoothReconnectAttempts:"+breconnectAttempts;
+	alert(breconnectAttemptsvalue);
+	Generic.InvokeMETAFunction('RSM', breconnectAttemptsvalue);
+}
+
+function selectbbeeponreconnectAttempts()
+{
+    var sltbbeeponreconnectAttempts_RSM=RSMForm.bbeeponreconnectAttempts_RSM.selectedIndex;
+	var selectedbbeeponreconnectAttempts_RSM = RSMForm.bbeeponreconnectAttempts_RSM.options[sltbbeeponreconnectAttempts_RSM].value;
+	switch(selectedbbeeponreconnectAttempts_RSM)
+	{
+		case 'True':
+            alert(selectedbbeeponreconnectAttempts_RSM);
+			Generic.InvokeMETAFunction('RSM', 'BluetoothBeepOnReconnectAttempt:True');
+			break;
+
+		case 'False':
+            alert(selectedbbeeponreconnectAttempts_RSM);
+			Generic.InvokeMETAFunction('RSM', 'BluetoothBeepOnReconnectAttempt:False');
+			break;
+	}
+}
+
+function selectPagingE()
+{
+    var sltPagingE=RSMForm.PagingE_RSM.selectedIndex;
+	var selectedPagingE = RSMForm.PagingE_RSM.options[sltPagingE].value;
+	switch(selectedPagingE)
+	{
+		case 'Enabled':
+            alert(selectedPagingE);
+			Generic.InvokeMETAFunction('RSM', 'PagingEnable:Enabled');
+			break;
+
+		case 'Disabled':
+            alert(selectedPagingE);
+			Generic.InvokeMETAFunction('RSM', 'PagingEnable:Disabled');
+			break;
+	}
+}
+
+function setpagingBeep()
+{
+	var pagingBeep=RSMForm.pagingBeep_RSM.value;
+	var pagingBeepvalue="PagingBeepSequence:"+pagingBeep;
+	alert(pagingBeepvalue);
+	Generic.InvokeMETAFunction('RSM', pagingBeepvalue);
+}
+
+function selectbinquiryMode()
+{
+    var sltbinquiryMode=RSMForm.binquiryMode_RSM.selectedIndex;
+	var selectedbinquiryMode = RSMForm.binquiryMode_RSM.options[sltbinquiryMode].value;
+	switch(selectedbinquiryMode)
+	{
+		case 'General':
+            alert(selectedbinquiryMode);
+			Generic.InvokeMETAFunction('RSM', 'BluetoothInquiryMode:General');
+			break;
+
+		case 'Limited':
+            alert(selectedbinquiryMode);
+			Generic.InvokeMETAFunction('RSM', 'BluetoothInquiryMode:Limited');
+			break;
+	}
+}
+
+function selectdecodeF()
+{
+    var sltdecodeF=RSMForm.decodeF_RSM.selectedIndex;
+	var selecteddecodeF = RSMForm.decodeF_RSM.options[sltdecodeF].value;
+	switch(selecteddecodeF)
+	{
+		case 'Enabled':
+            alert(selecteddecodeF);
+			Generic.InvokeMETAFunction('RSM', 'DecodeFeedback:Enabled');
+			break;
+
+		case 'Disabled':
+            alert(selecteddecodeF);
+			Generic.InvokeMETAFunction('RSM', 'DecodeFeedback:Disabled');
+			break;
+	}
+}
+function selectignoreCode128()
+{
+    var sltignoreCode128=RSMForm.ignoreCode128_RSM.selectedIndex;
+	var selectedignoreCode128 = RSMForm.ignoreCode128_RSM.options[sltignoreCode128].value;
+	switch(selectedignoreCode128)
+	{
+		case 'Enabled':
+            alert(selectedignoreCode128);
+			Generic.InvokeMETAFunction('RSM', 'IgnoreCode128USPS:Enabled');
+			break;
+
+		case 'Disabled':
+            alert(selectedignoreCode128);
+			Generic.InvokeMETAFunction('RSM', 'IgnoreCode128USPS:Disabled');
+			break;
+	}
+}
+
+function setgoodscanDelay()
+{
+	var goodscanDelay=RSMForm.goodscanDelay_RSM.value;
+	var goodscanDelayvalue="GoodScansDelay:"+goodscanDelay;
+	alert(goodscanDelayvalue);
+	Generic.InvokeMETAFunction('RSM', goodscanDelayvalue);
+}
+
+function selectbAuthentication()
+{
+    var sltbAuthentication=RSMForm.bAuthentication_RSM.selectedIndex;
+	var selectedbAuthentication = RSMForm.bAuthentication_RSM.options[sltbAuthentication].value;
+	switch(selectedbAuthentication)
+	{
+		case 'True':
+            alert(selectedbAuthentication);
+			Generic.InvokeMETAFunction('RSM', 'BluetoothAuthentication:True');
+			break;
+
+		case 'False':
+            alert(selectedbAuthentication);
+			Generic.InvokeMETAFunction('RSM', 'BluetoothAuthentication:False');
+			break;
+	}
+}
+
+function setbPINCode()
+{
+	var bPINCode=RSMForm.bPINCode_RSM.value;
+	var bPINCodevalue="BluetoothPINcode:"+bPINCode;
+	alert(bPINCodevalue);
+	Generic.InvokeMETAFunction('RSM', bPINCodevalue);
+}
+
+function selectbPINCodeType()
+{
+    var sltbPINCodeType=RSMForm.bPINCodeType_RSM.selectedIndex;
+	var selectedbPINCodeType = RSMForm.bPINCodeType_RSM.options[sltbPINCodeType].value;
+	switch(selectedbPINCodeType)
+	{
+		case 'PromptUser':
+            alert(selectedbPINCodeType);
+			Generic.InvokeMETAFunction('RSM', 'BluetoothPINCodeType:PromptUser');
+			break;
+
+		case 'UseStored':
+            alert(selectedbPINCodeType);
+			Generic.InvokeMETAFunction('RSM', 'BluetoothPINCodeType:UseStored');
+			break;
+	}
+}
+
+function selectbEncryption()
+{
+    var sltbEncryption=RSMForm.bEncryption_RSM.selectedIndex;
+	var selectedbEncryption = RSMForm.bEncryption_RSM.options[sltbEncryption].value;
+	switch(selectedbEncryption)
+	{
+		case 'True':
+            alert(selectedbEncryption);
+			Generic.InvokeMETAFunction('RSM', 'BluetoothEncryption:True');
+			break;
+
+		case 'False':
+            alert(selectedbEncryption);
+			Generic.InvokeMETAFunction('RSM', 'BluetoothEncryption:False');
+			break;
+	}
+}
+
+//function selectscanlineWidth()
+//{
+//    var sltbEncryption=RSMForm.scanlineWidth_RSM.selectedIndex;
+//	var selectedbEncryption = RSMForm.bEncryption_RSM.options[sltbEncryption].value;
+//	switch(selectedbEncryption)
+//	{
+//		case 'True':
+//            alert(selectedbEncryption);
+//			Generic.InvokeMETAFunction('RSM', 'BluetoothEncryption:True');
+//			break;
+
+//		case 'False':
+//            alert(selectedbEncryption);
+//			Generic.InvokeMETAFunction('RSM', 'BluetoothEncryption:False');
+//			break;
+//	}
+//}
+
+function selectscanlineWidth()
+{
+    var sltscanlineWidth=RSMForm.scanlineWidth_RSM.selectedIndex;
+	var selectedscanlineWidth = RSMForm.scanlineWidth_RSM.options[sltscanlineWidth].value;
+	switch(selectedscanlineWidth)
+	{
+		case 'Wide':
+            alert("scanlineWidth"+selectedscanlineWidth);
+			Generic.InvokeMETAFunction('RSM', 'ScanLineWidth:Wide');
+			break;
+
+		case 'Narrow':
+            alert("scanlineWidth"+selectedscanlineWidth);
+			Generic.InvokeMETAFunction('RSM', 'ScanLineWidth:Narrow');
+			break;
+	}
+}
+
+function selectstriggerWakeup()
+{
+    var sltstriggerWakeup=RSMForm.striggerWakeup_RSM.selectedIndex;
+	var selectedstriggerWakeup = RSMForm.striggerWakeup_RSM.options[sltstriggerWakeup].value;
+	switch(selectedstriggerWakeup)
+	{
+		case 'Enabled':
+            alert(selectedstriggerWakeup);
+			Generic.InvokeMETAFunction('RSM', 'ScanTriggerWakeup:Enabled');
+			break;
+
+		case 'Disabled':
+            alert(selectedstriggerWakeup);
+			Generic.InvokeMETAFunction('RSM', 'ScanTriggerWakeup:Disabled');
+			break;
+	}
+}
+
+function selectbHIDAutoReconnect()
+{
+    var sltbHIDAutoReconnect=RSMForm.bHIDAutoReconnect_RSM.selectedIndex;
+	var selectedbHIDAutoReconnect = RSMForm.bHIDAutoReconnect_RSM.options[sltbHIDAutoReconnect].value;
+	switch(selectedbHIDAutoReconnect)
+	{
+		case 'NeverReconnect':
+            alert(selectedbHIDAutoReconnect);
+			Generic.InvokeMETAFunction('RSM', 'BluetoothHIDAutoReconnect:NeverReconnect');
+			break;
+
+		case 'ReconnectOnData':
+            alert(selectedbHIDAutoReconnect);
+			Generic.InvokeMETAFunction('RSM', 'BluetoothHIDAutoReconnect:ReconnectOnData');
+			break;
+		
+		case 'ReconnectImmediately':
+            alert(selectedbHIDAutoReconnect);
+			Generic.InvokeMETAFunction('RSM', 'BluetoothHIDAutoReconnect:ReconnectImmediately');
+			break;
+	}
+}
+
+function selectlowbatteryIndication()
+{
+    var sltlowbatteryIndication=RSMForm.lowbatteryIndication_RSM.selectedIndex;
+	var selectedlowbatteryIndication = RSMForm.lowbatteryIndication_RSM.options[sltlowbatteryIndication].value;
+	switch(selectedlowbatteryIndication)
+	{
+		case 'Enabled':
+            alert(selectedlowbatteryIndication);
+			Generic.InvokeMETAFunction('RSM', 'LowBatteryIndication:Enabled');
+			break;
+
+		case 'Disabled':
+            alert(selectedlowbatteryIndication);
+			Generic.InvokeMETAFunction('RSM', 'LowBatteryIndication:Disabled');
+			break;
+	}
+}
+
+function setlowbatteryIndicationCycle()
+{
+	var lowbatteryIndicationCycle=RSMForm.lowbatteryIndicationCycle_RSM.value;
+	var lowbatteryIndicationCyclevalue="LowBatteryIndicationCycle:"+lowbatteryIndicationCycle;
+	alert(lowbatteryIndicationCyclevalue);
+	Generic.InvokeMETAFunction('RSM', lowbatteryIndicationCyclevalue);
+}
+
+function setFriendlyName()
+{
+	var fname=RSMForm.fname_RSM.value;
+	var fnamevalue="BluetoothFriendlyName:"+fname;
+	alert(fnamevalue);
+	Generic.InvokeMETAFunction('RSM', fnamevalue);
+}
+function RSMNav(attributeArray)
+{
+	for(i=0; i < attributeArray.length; i++)
+	{
+	 //alert("Attribute value"+attributeArray[i]);
+     //alert("Text field ID"+ attributes[i]);
+	 var myTextField = document.getElementById(attributes[i]);
+	 myTextField.value = attributeArray[i];
+	}
+	
+}
+
+ 
+ 
+/*function Scan()
+{
+    Generic.InvokeMETAFunction('Scanner','start');
+}*/
+ 
+ 
+function doScan(data, source, type, time, length)
+{
+    this.document.RSMForm.ScanData.value=data;
+}
+ 
+ 
+function trimAll(sString) 
+{ 
+   while (sString.substring(0,1) == ' ') 
+   { 
+        sString = sString.substring(1, sString.length); 
+   } 
+   while (sString.substring(sString.length-1, sString.length) == ' ') 
+   { 
+        sString = sString.substring(0,sString.length-1); 
+   } 
+   return sString; 
+} 
+
+
+
+function setEnumScannerTimer()
+{
+    setTimeout("onScannerEnable()", 3000);
+}
+
+function onScannerEnable()
+{
+	Generic.InvokeMETAFunction('Scanner', 'Enumerate');
+	//Get();
+}
+
+function EnumScanners(scannerArray)
+{
+	for (i=0; i < scannerArray.length; i++)
+	{
+       		this.document.RSMForm.myscanner.options[i + 1].text = scannerArray[i][0]+scannerArray[i][1];
+	   	this.document.RSMForm.myscanner.options[i + 1].value = scannerArray[i][0];
+	}
+}
+
+
+function selectScanner()
+{
+    var w = document.RSMForm.myscanner.selectedIndex;
+    selected_scanner = document.RSMForm.myscanner.options[w].value;
+    selected_scannername=document.RSMForm.myscanner.options[w].text;
+
+    var abcd="enabled:"+ selected_scanner;
+    //alert(abcd);
+
+    Generic.InvokeMETAFunction('Scanner',abcd);
+    
+}
+
+
+
+function hide()
+{
+    document.getElementById('myscanner').style.visibility = "hidden";
+}
+
+
+
+
+ 
+</script>
+</head>
+<body onLoad="setEnumScannerTimer();" >
+ <form name="RSMForm" id="RSMForm" action="" >
+ <br />
+ <br />
+ <br />
+ SelectScanner <select name="myscanner" id="myscanner"  onChange="selectScanner(); hide();">
+<OPTION value="Selectsacnner" >Selectscanner</OPTION> 
+<OPTION value="1" ></OPTION> 
+<OPTION value="2"></OPTION> 
+<OPTION value="3"></OPTION> 
+</select>
+<div id="mydiv">Attributes:-</div>
+
+    <input id="Button1" type="button" value="Get" onclick="Get();" />
+    <input id="Submit" type="button" value="Start Paging" onclick="SetAttributes();" />
+    <input id="Button2" type="button" value="Stop Paging" onclick="StopPaging();" />
+    
+    <input id="Button3" type="button" value="Disconnect BT" onclick="DisconnetBT();" />
+    <input id="Button4" type="button" value="Unpair" onclick="UnpairBT();" />
+    <!--<input id="Scan" type="button" value="Scan" onclick="Scan()"; />-->
+    <input id="ScanData" style="width: 184px" type="text" value=""/>
+    
+ <table id="RSMTable"  width="100%" border=1>
+ <tr align=left valign=middle >
+  <tr><td>
+ <input id="Mems" type="text" value="Mems" readonly="true" /> 
+ </td>
+ <td>
+     &nbsp;<input id="MemsR" type="text" value="" />
+ </td>
+ <td>
+<select name="mems_RSM" id="mems_RSM" onChange="selectMems();">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="Enabled">Enabled</option>
+<option value="Disabled">Disabled</option>
+</select>
+ </td>
+ </tr>
+ 
+ 
+    <tr><td>
+ <input id="ProximityEnable" type="text" value="ProximityEnable" readonly="true" /> 
+ </td>
+ <td>
+     &nbsp;<input id="ProximityEnableR" type="text" value="" />
+ </td>
+ <td>
+<select name="proximityE_RSM" id="proximityE_RSM" onChange="selectproximityE();">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="Enabled">Enabled</option>
+<option value="Disabled">Disabled</option>
+</select>
+ </td>
+ </tr>
+ 
+ 
+  <tr><td>
+ <input id="ProximityDistance" type="text" value="ProximityDistance" readonly="true" /> 
+ </td>
+ <td>
+     &nbsp;<input id="ProximityDistanceR" type="text" value="" />
+ </td>
+ <td>
+<select name="proximityD_RSM" id="proximityD_RSM" onChange="selectproximityD();">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="Short">Short</option>
+<option value="Medium">Medium</option>
+<option value="Long">Long</option>
+</select>
+ </td>
+ </tr>
+ 
+  <tr><td>
+ <input id="ProximityContinuous" type="text" value="ProximityContinuous" readonly="true" /> 
+ </td>
+ <td>
+     &nbsp;<input id="ProximityContinuousR" type="text" value="" />
+ </td>
+ <td>
+<select name="proximityC_RSM" id="proximityC_RSM" onChange="selectproximityC();">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="Enabled">Enabled</option>
+<option value="Disabled">Disabled</option>
+</select>
+ </td>
+ </tr>
+ 
+<tr><td>
+ <input id="BluetoothAutoReconnect" type="text" value="BluetoothAutoReconnect" readonly="true" /> 
+ </td>
+ <td>
+     &nbsp;<input id="BluetoothAutoReconnectR" type="text" value="" />
+ </td>
+ <td>
+<select name="bautoReconnect_RSM" id="bautoReconnect_RSM" onChange="selectbautoReconnect();">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="None">None</option>
+<option value="OnPower">OnPower</option>
+<option value="OnOutofRange">OnOutofRange</option>
+<option value="OnPowerOutofRange">OnPowerOutofRange</option>
+<option value="OnMemory">OnMemory</option>
+</select>
+ </td>
+ </tr>
+ 
+ <tr><td>
+ <input id="BluetoothReconnectAttempts" type="text" value="BluetoothReconnectAttempts" readonly="true" /> 
+ </td>
+ <td>
+     &nbsp;<input id="BluetoothReconnectAttemptsR" type="text" value="" />
+ </td>
+ <td>
+<Textarea id="breconnectAttempts_RSM" cols="10" rows="1"onchange="setbreconnectAttempts();"></Textarea>
+ </td>
+ </tr>
+  
+  <tr><td>
+ <input id="BluetoothBeepOnReconnectAttempt" type="text" value="BluetoothBeepOnReconnectAttempt" readonly="true" /> 
+ </td>
+ <td>
+     &nbsp;<input id="BluetoothBeepOnReconnectAttemptR" type="text" value="" />
+ </td>
+ <td>
+<select name="bbeeponreconnectAttempts_RSM" id="bbeeponreconnectAttempts_RSM" onChange="selectbbeeponreconnectAttempts();">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="True">True</option>
+<option value="False">False</option>
+</select>
+ </td>
+ </tr>
+ 
+<tr><td>
+ <input id="PagingEnable" type="text" value="PagingEnable" readonly="true" /> 
+ </td>
+ <td>
+     &nbsp;<input id="PagingEnableR" type="text" value="" />
+ </td>
+ <td>
+<select name="PagingE_RSM" id="PagingE_RSM" onChange="selectPagingE();">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="Enabled">Enabled</option>
+<option value="Disabled">Disabled</option>
+</select>
+ </td>
+ </tr>
+ 
+ <tr><td>
+ <input id="PagingBeepSequence" type="text" value="PagingBeepSequence" readonly="true" /> 
+ </td>
+ <td>
+     &nbsp;<input id="PagingBeepSequenceR" type="text" value="" />
+ </td>
+ <td>
+<Textarea id="pagingBeep_RSM" cols="10" rows="1"onchange="setpagingBeep();"></Textarea>
+ </td>
+ </tr>
+ 
+ <tr><td>
+ <input id="PagingActivate" type="text" value="PagingActivate" readonly="true" /> 
+ </td>
+ <td>
+     &nbsp;<input id="PagingActivateR" type="text" value="" />
+ </td>
+ <td>
+   <input id="PagingActivateW" type="text" value="" />
+ </td>
+ </tr>
+    <tr><td>
+ <input id="BluetoothInquiryMode" type="text" value="BluetoothInquiryMode" readonly="true" /> 
+ </td>
+ <td>
+     &nbsp;<input id="BluetoothInquiryModeR" type="text" value="" />
+ </td>
+ <td>
+<select name="binquiryMode_RSM" id="binquiryMode_RSM" onChange="selectbinquiryMode();">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="General">General</option>
+<option value="Limited">Limited</option>
+</select>
+ </td>
+ </tr>
+ 
+   <tr><td>
+ <input id="DecodeFeedback" type="text" value="DecodeFeedback" readonly="true" /> 
+ </td>
+ <td>
+     &nbsp;<input id="DecodeFeedbackR" type="text" value="" />
+ </td>
+ <td>
+<select name="decodeF_RSM" id="decodeF_RSM" onChange="selectdecodeF();">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="Enabled">Enabled</option>
+<option value="Disabled">Disabled</option>
+</select>
+ </td>
+ </tr>
+ 
+    <tr><td>
+ <input id="IgnoreCode128USPS" type="text" value="IgnoreCode128USPS" readonly="true" /> 
+ </td>
+ <td>
+     &nbsp;<input id="IgnoreCode128USPSR" type="text" value="" />
+ </td>
+ <td>
+<select name="ignoreCode128_RSM" id="ignoreCode128_RSM" onChange="selectignoreCode128();">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="Enabled">Enabled</option>
+<option value="Disabled">Disabled</option>
+</select>
+ </td>
+ </tr>
+  
+ <tr><td>
+ <input id="GoodScansDelay" type="text" value="GoodScansDelay" readonly="true" /> 
+ </td>
+ <td>
+     &nbsp;<input id="GoodScansDelayR" type="text" value="" />
+ </td>
+ <td>
+<Textarea id="goodscanDelay_RSM" cols="10" rows="1"onchange="setgoodscanDelay();"></Textarea>
+ </td>
+ </tr>
+ 
+  <tr><td>
+ <input id="BluetoothAuthentication" type="text" value="BluetoothAuthentication" readonly="true" /> 
+ </td>
+ <td>
+  <input id="BluetoothAuthenticationR" type="text" value="" />
+ </td>
+ <td>
+<select name="bAuthentication_RSM" id="bAuthentication_RSM" onChange="selectbAuthentication();">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="True">True</option>
+<option value="False">False</option>
+</select>
+ </td>
+ </tr>
+    <tr><td>
+ <input id="BluetoothPINcode" type="BluetoothPINcode" value="BluetoothPINcode" readonly="true" /> 
+ </td>
+ <td>
+     &nbsp;<input id="BluetoothPINcodeR" type="text" value="" />
+ </td>
+ <td>
+<Textarea id="bPINCode_RSM" cols="10" rows="1"onchange="setbPINCode();"></Textarea>
+ </td>
+ </tr>
+  <tr><td>
+ <input id="BluetoothPINCodeType" type="text" value="BluetoothPINCodeType" readonly="true" /> 
+ </td>
+ <td>
+     &nbsp;<input id="BluetoothPINCodeTypeR" type="text" value="" />
+ </td>
+ <td>
+<select name="bPINCodeType_RSM" id="bPINCodeType_RSM" onChange="selectbPINCodeType();">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="PromptUser">PromptUser</option>
+<option value="UseStored">UseStored</option>
+</select>
+ </td>
+ </tr>
+  
+ <tr><td>
+ <input id="BluetoothEncryption" type="text" value="BluetoothEncryption" readonly="true" style="height: 20px" /> 
+ </td>
+ <td>
+     &nbsp;<input id="BluetoothEncryptionR" type="text" value="" />
+ </td>
+ <td>
+<select name="bEncryption_RSM" id="bEncryption_RSM" onChange="selectbEncryption();">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="True">True</option>
+<option value="False">False</option>
+</select>
+ </td>
+ </tr>
+ 
+  <tr><td>
+ <input id="ScanLineWidth" type="text" value="ScanLineWidth" readonly="true" /> 
+ </td>
+ <td>
+     &nbsp;<input id="ScanLineWidthR" type="text" value="" />
+ </td>
+ <td>
+<select name="scanlineWidth_RSM" id="scanlineWidth_RSM" onChange="selectscanlineWidth();">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="Wide">Wide</option>
+<option value="Narrow">Narrow</option>
+</select>
+ </td>
+ </tr>
+ 
+   <tr><td>
+ <input id="ScanTriggerWakeup" type="text" value="ScanTriggerWakeup" readonly="true" /> 
+ </td>
+ <td>
+     &nbsp;<input id="ScanTriggerWakeupR" type="text" value="" />
+ </td>
+ <td>
+<select name="striggerWakeup_RSM" id="striggerWakeup_RSM" onChange="selectstriggerWakeup();">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="Enabled">Enabled</option>
+<option value="Disabled">Disabled</option>
+</select>
+ </td>
+ </tr>
+ 
+   <tr><td>
+ <input id="BluetoothHIDAutoReconnect" type="text" value="BluetoothHIDAutoReconnect" readonly="true" /> 
+ </td>
+ <td>
+     &nbsp;<input id="BluetoothHIDAutoReconnectR" type="text" value="" />
+ </td>
+ <td>
+<select name="bHIDAutoReconnect_RSM" id="bHIDAutoReconnect_RSM" onChange="selectbHIDAutoReconnect();">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="NeverReconnect">NeverReconnect</option>
+<option value="ReconnectOnData">ReconnectOnData</option>
+<option value="ReconnectImmediately">ReconnectImmediately</option>
+</select>
+ </td>
+ </tr>
+      <tr><td>
+ <input id="LowBatteryIndication" type="text" value="LowBatteryIndication" readonly="true" /> 
+ </td>
+ <td>
+     &nbsp;<input id="LowBatteryIndicationR" type="text" value="" />
+ </td>
+ <td>
+<select name="lowbatteryIndication_RSM" id="lowbatteryIndication_RSM" onChange="selectlowbatteryIndication();">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="Enabled">Enabled</option>
+<option value="Disabled">Disabled</option>
+</select>
+ </td>
+ </tr>
+ 
+  <tr><td>
+ <input id="LowBatteryIndicationCycle" type="text" value="LowBatteryIndicationCycle" readonly="true" /> 
+ </td>
+ <td>
+     &nbsp;<input id="LowBatteryIndicationCycleR" type="text" value="" />
+ </td>
+ <td>
+<Textarea id="lowbatteryIndicationCycle_RSM" cols="10" rows="1"onchange="setlowbatteryIndicationCycle();"></Textarea>
+ </td>
+ </tr>
+ 
+ 
+  <tr><td>
+ <input id="BluetoothFriendlyName" type="text" value="BluetoothFriendlyName" readonly="true" /> 
+ </td>
+ <td>
+     &nbsp;<input id="BluetoothFriendlyNameR" type="text" value="" />
+ </td>
+ <td>
+<Textarea id="fname_RSM" cols="10" rows="1"onchange="setFriendlyName();"></Textarea>
+ </td>
+ </tr>
+ 
+ <td>
+ <input id="ModelNumber" type="text" value="ModelNumber" readonly="true"  /> 
+ </td>
+ <td >
+  <input id="ModelNumberR" type="text" value="" />
+  </td>
+ <td >
+   <input id="ModelNumberW" type="text" value="" />
+ </td>
+ </tr>
+ <tr><td  >
+ <input id="SerialNumber" type="text" value="SerialNumber" readonly="true" /> 
+ </td>
+ <td >
+  <input id="SerialNumberR" type="text" value="" />
+ </td>
+ <td >
+   <input id="SerialNumberW" type="text" value="" />
+ </td>
+ </tr>
+ <tr><td >
+ <input id="DateOfManufacture" type="text" value="DateOfManufacture" readonly="true" /> 
+ </td>
+ <td >
+  <input id="DateOfManufactureR" type="text" value="" />
+ </td>
+ <td  >
+   <input id="DateOfManufactureW" type="text" value="" />
+ </td>
+ </tr>
+                              
+ <tr><td >
+ <input id="DateOfService" type="text" value="DateOfService" readonly="true" /> 
+ </td>
+ <td>
+  <input id="DateOfServiceR" type="text" value="" />
+ </td>
+ <td>
+   <input id="DateOfServiceW" type="text" value="" />
+ </td>
+ </tr>
+ 
+ <tr><td>
+ <input id="BluetoothAddress" type="text" value="BluetoothAddress" readonly="true" /> 
+ </td>
+ <td>
+  <input id="BluetoothAddressR" type="text" value="" />
+ </td>
+ <td>
+   <input id="BluetoothAddressW" type="text" value="" />
+ </td>
+ </tr>
+ 
+ <tr><td>
+ <input id="FirmwareVersion" type="text" value="FirmwareVersion" readonly="true" /> 
+ </td>
+ <td>
+  <input id="FirmwareVersionR" type="text" value="" />
+ </td>
+ <td>
+   <input id="FirmwareVersionW" type="text" value="" />
+ </td>
+ </tr>
+ 
+ 
+ <tr><td>
+ <input id="DeviceClass" type="text" value="DeviceClass" readonly="true" /> 
+ </td>
+ <td>
+  <input id="DeviceClassR" type="text" value="" />
+ </td>
+ <td>
+   <input id="DeviceClassW" type="text" value="" />
+ </td>
+ </tr>
+ 
+ 
+  <tr><td>
+ <input id="BatteryStatus" type="text" value="BatteryStatus" readonly="true" /> 
+ </td>
+ <td>
+  <input id="BatteryStatusR" type="text" value="" />
+ </td>
+ <td>
+   <input id="BatteryStatusW" type="text" value="" />
+ </td>
+ </tr>
+ 
+ 
+   <tr><td>
+ <input id="BatteryCapacity" type="text" value="BatteryCapacity" readonly="true" /> 
+ </td>
+ <td>
+  <input id="BatteryCapacityR" type="text" value="" />
+ </td>
+ <td>
+   <input id="BatteryCapacityW" type="text" value="" />
+ </td>
+ </tr>
+ 
+ 
+   <tr><td>
+ <input id="BatteryID" type="text" value="BatteryID" readonly="true" /> 
+ </td>
+ <td>
+  <input id="BatteryIDR" type="text" value="" />
+ </td>
+ <td>
+   <input id="BatteryIDW" type="text" value="" />
+ </td>
+ </tr>
+ 
+
+  <tr><td>
+ <input id="BTDisconnect" type="text" value="BTDisconnect" readonly="true" /> 
+ </td>
+ <td>
+     &nbsp;<input id="BTDisconnectR" type="text" value="" />
+ </td>
+ <td>
+   <input id="BTDisconnectW" type="text" value="" />
+ </td>
+ </tr>
+ 
+ 
+  <tr><td>
+ <input id="BTUnpair" type="text" value="BTUnpair" readonly="true" /> 
+ </td>
+ <td>
+     &nbsp;<input id="BTUnpairR" type="text" value="" />
+ </td>
+ <td>
+   <input id="BTUnpairW" type="text" value="" />
+ </td>
+ </tr>
+ 
+</table>
+
+</form>
+
+</body>
+</html>

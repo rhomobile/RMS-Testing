@@ -1,0 +1,35 @@
+<html>
+<head><script type="text/javascript" src="http://192.168.6.18/NEON/src/elements.js"></script>
+<META HTTP-Equiv="quitbutton" Content="visibility:visible">
+<META HTTP-Equiv="quitbutton" Content="Left:10">
+<META HTTP-Equiv="quitbutton" Content="Top:10">
+
+
+<META HTTP-Equiv="scanner" Content="disabled">
+
+
+
+</head>
+<p>Send the Image to FTP</p>
+<BR><BR><BR><BR><BR><BR><BR><BR><BR><BR>
+
+Decoded data:<input id="datafield" type="text" value="" /><br /><p></p>
+
+<P><INPUT TYPE="button" VALUE="Back" ONCLICK="location.href='./Image Capture.html'"></P>
+
+</body>
+</html>
+
+
+<SCRIPT>
+var objGeneric = new ActiveXObject("PocketBrowser.Generic");
+	
+
+  function doScan(data, source, type, time, length)
+   {
+   datafield.value=data;
+   }
+
+</SCRIPT>
+
+
