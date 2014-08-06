@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head><script type="text/javascript" src="http://192.168.6.18/NEON/src/elements.js"></script>
+<META HTTP-Equiv="BackButton" Content="Visibility:Visible"> 
+<META HTTP-Equiv="Scanner" Content="Enabled:SCN2">
+<META HTTP-Equiv="RSM" Content="BluetoothBeepOnReconnectAttempt:True">
+<META HTTP-Equiv="RSM" Content="ModelNumber">
+<META HTTP-Equiv="RSM" Content="SerialNumber">
+<META HTTP-Equiv="RSM" Content="BluetoothAddress">
+<META HTTP-Equiv="RSM" Content="BluetoothPINcode">
+<META HTTP-Equiv="RSM" Content="BluetoothFriendlyName">
+<META HTTP-Equiv="RSM" Content="BluetoothBeepOnReconnectAttempt">
+
+</HEAD>
+
+
+<BODY>
+<br />
+<br />
+<input type="button" onclick="onTest();" value="GetValues" /><br><br>
+Model Number: <span id=Span1></span><br>
+Serial Number: <span id=Span2></span><br>
+BT Address: <span id=Span3></span><br>
+BT PINcode: <span id=Span4></span><br>
+BT Friendly Name: <span id=Span5></span><br>
+BT BeepOnReconnectAttempt: <span id=Span6></span><br><br><br><br>
+<br />
+<P><INPUT TYPE="button" VALUE="Back" ONCLICK="Generic.InvokeMETAFunction('scanner', 'disabled');location.href='./RSM.html'"></P>
+
+</BODY>
+
+</html>
+
+<SCRIPT TYPE="TEXT/JAVASCRIPT">
+
+    var Generic = new ActiveXObject("PocketBrowser.Generic");
+
+    function RSMNav(attributeArray) 
+    {
+        //  Receive array of attribute values in the order they were registered and populate SPAN tags.
+   
+        var spanID;
+        var spanElement;
+        for (i = 0; i < attributeArray.length; i++) 
+        {
+            spanID = "Span" + (i + 1);
+            spanElement = document.getElementById(spanID);
+            spanElement.innerText = attributeArray[i];
+        }
+    }
+
+    function onTest() 
+    {
+
+        //Invoke some attributes to be returne
+       
+
+        Generic.InvokeMETAFunction("RSM", "Rsmgetevent:url('JavaScript:RSMNav(%s);')");
+        
+
+    }
+</SCRIPT>
+
+
+
+
+

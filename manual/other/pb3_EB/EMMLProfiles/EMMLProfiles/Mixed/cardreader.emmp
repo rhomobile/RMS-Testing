@@ -1,0 +1,11 @@
+.MSR{
+    cardreader:open;
+    cardreader-readevent:url('javascript:MyReadEvent('%s', '%s');');
+}
+
+.DCR{
+    cardreader:open;
+    cardreader-pinEntry:ON;
+    cardreader-pintimeout:0x2710;
+    cardreader-readevent:url('javascript:MyReadEvent('%s', '%s');');
+}

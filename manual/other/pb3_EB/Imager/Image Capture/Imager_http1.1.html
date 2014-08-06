@@ -1,0 +1,45 @@
+<html>
+<head><script type="text/javascript" src="http://192.168.6.18/NEON/src/elements.js"></script>
+<META HTTP-Equiv="quitbutton" Content="visibility:visible">
+<META HTTP-Equiv="quitbutton" Content="Left:10">
+<META HTTP-Equiv="quitbutton" Content="Top:10">
+
+
+
+
+<META HTTP-Equiv="imager" Content="left:30;top:90;height:100;width:200;aim:on;lamp:on;
+Protocol:Http;Destination:192.168.6.18/PB3.X/Image Capture/Upload.aspx;enabled:IMG3">
+
+<META HTTP-Equiv="imager" content="imagerevent:url('javascript:myevent('%s');')">
+
+
+</head>
+<p>Send the Image to FTP</p>
+<BR><BR><BR><BR><BR><BR><BR>
+<P><INPUT TYPE="button" VALUE="Capture" ONCLICK="doCapture();"></P>
+<P><INPUT TYPE="button" VALUE="Disable" ONCLICK="doDisable();"></P>
+<P><INPUT TYPE="button" VALUE="Back" ONCLICK="location.href='./Image Capture.html'"></P>
+
+</body>
+</html>
+
+
+<SCRIPT>
+var objGeneric = new ActiveXObject("PocketBrowser.Generic");
+	
+function doCapture()
+{
+	objGeneric.InvokeMETAFunction('imager', 'capture');
+}
+
+function doDisable()
+{
+	objGeneric.InvokeMETAFunction('imager', 'disabled');
+}
+function myevent(response)
+{	
+	alert(response);
+}
+</SCRIPT>
+
+

@@ -1,0 +1,58 @@
+<html>
+
+<body>
+<br><br><br><br><br><br>
+
+<p>Device to HTTP Stress</p>
+<div id="nos">TotalCount</div><br>
+<div id="myResponse">FileTransferResult:</div><br />
+<BR>
+<P><INPUT TYPE="button" VALUE="TransferDeviceToHTTP" ONCLICK="doCapture();"></P>
+
+<P><INPUT TYPE="button" VALUE="Back" ONCLICK="location.href='FileManagement_Index.html'"></P>
+
+</body>
+</html>
+
+<SCRIPT type="text/javascript">
+var iCount = 0;
+var jCount = 0;
+
+var generic = new ActiveXObject("PocketBrowser.Generic");
+	
+function doCapture()
+{
+
+		iCount++;
+
+	  if(iCount <= 3500)
+		{
+		    //imager.imagerEvent='myjsonevent(%json)';			
+			generic.InvokeMETAFunction("FileTransfer","Source:url('file://\\Application\\FileCollections\\myfile.txt')");
+		    generic.InvokeMETAFunction("FileTransfer","Destination:url('http://192.168.6.18/NEON/ReceivedFiles/Upload.aspx');username:ftpadmin;password:ftpadmin");
+			generic.InvokeMETAFunction("FileTransfer","TransferEvent:url('javascript:myevent('%s');')");
+			generic.InvokeMETAFunction("FileTransfer", "Transfer");
+			nos.innerHTML = "Totalcount :- "+iCount;
+			//myResponse.innerHTML="Capture Called";
+			captureLoop();	
+			
+		}
+		
+}
+
+function myevent(response) {
+
+        if(response=="Received")
+        {
+        jCount++;
+        }
+        myResponse.innerHTML="response:-"+response+" count:-"+jCount;
+
+    }
+
+function captureLoop()
+{
+	setTimeout("doCapture()", 20000);
+}
+
+</SCRIPT>

@@ -1,0 +1,9 @@
+.Telemetry{
+    Telemetry-Enable:RoadSpeed;
+    Telemetry-Enable:EngineRPM;
+    Telemetry-Enable:TotalDistance;
+    Telemetry-Enable:EngineLoad;
+    Telemetry-Enable:ABSControlStatus;
+    
+  }
+

@@ -1,0 +1,58 @@
+<HTML>
+<head><script type="text/javascript" src="http://192.168.6.18/NEON/src/elements.js"></script>
+<!--<BODY onload="OnTimer();">-->
+<META HTTP-Equiv="quitbutton" Content="visibility:visible">
+
+</HEAD>
+
+<BODY>
+<SCRIPT LANGUAGE="JavaScript">
+ var iCount = 0;
+try
+{
+var generic = new ActiveXObject("PocketBrowser.generic");
+}
+catch(err)
+{
+var genericPlugin = document.createElement('embed'); 
+genericPlugin.setAttribute('id',"embed1"); 
+genericPlugin.setAttribute('type',"application/x-wtg-legacy-generic"); 
+genericPlugin.setAttribute('hidden',"true"); 
+
+// Attach the plugin embed tags to the body 
+var theBody = document.getElementsByTagName('body')[0]; 
+theBody.appendChild(genericPlugin); 
+
+
+}
+    function OnTimer() 
+    {
+
+        iCount++;
+        if (iCount <= 50000) 
+        {
+            var rValue3 = generic.Log('This is high priority log my dear \n This is high priority log my dear \n This is high priority log my dear \n This is high priority log my dear', 3);
+            reg.innerHTML = rValue3;
+            nos.innerHTML = iCount;
+            captureLoop();
+
+        }
+    }
+
+    function captureLoop() {
+        OnTimer(); 
+        //setTimeout("OnTimer()", 5000);
+
+    }
+</SCRIPT>
+<br /><br /><br />
+<b>Log Memory Leak using Timer 5</b>
+
+<DIV ID="reg">Get Registry</DIV>
+<div id="nos">X Value</div>
+<P><INPUT TYPE="button" VALUE="StartTest" ONCLICK="OnTimer();"></P>
+<P><INPUT TYPE="button" VALUE="Back" ONCLICK="location.href='./generic ActiveX Object.html'"></P>
+
+</BODY>
+</HTML>
+

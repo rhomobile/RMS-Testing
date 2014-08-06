@@ -1,0 +1,186 @@
+<!--Signature Capture & HTTP Send-->
+<HTML>
+  <head><script type="text/javascript" src="http://192.168.6.18/NEON/src/elements.js"></script>
+  <SCRIPT>
+  var gen,height,bYellow,width,bBorder;
+  /******************************************************************************
+ *  This is the main entry point for the Javascript and 
+ *  is called from <BODY> 'onload'
+ * ***************************************************************************/          
+    function doLoad()
+    {
+      bYellow = true;
+      bborder = true;
+      height = 50;
+      width  = 200;
+      //Enable the activeX
+      gen = new ActiveXObject("SymbolBrowser.Generic");
+      gen.InvokeMETAFunction("signaturecapture", "enabled");
+       
+    }
+    
+    function doUnLoad()
+    {
+      gen.InvokeMETAFunction("signaturecapture", "disabled");
+       
+    }
+
+
+
+
+/*****************************************************************************
+ *  used to save the signature
+ *  
+ * ***************************************************************************/      
+    
+    function saveSignature()
+    {
+   
+          //use the action Meta tag 'Capture' to save the signature on a server  
+          gen.InvokeMETAFunction("signaturecapture", "capture");
+          
+    }
+
+/*****************************************************************************
+ *  used to lengthen/shorten the height of the signature box
+ *  
+ * ***************************************************************************/      
+    
+    function makeTaller()
+    {
+          var str;
+          if(height > 200)
+            return;
+          height = height + 10;
+          
+          str = "h="+height;
+          //dynamically change the height
+          gen.InvokeMETAFunction("signaturecapture", str);
+          
+     } 
+   
+    
+    function makeShorter()
+    {
+          var str;
+          if(height < 10)
+            return;
+          height = height - 10;
+          
+          str = "h="+height;
+          //dynamically change the height
+          gen.InvokeMETAFunction("signaturecapture", str);
+          
+    } 
+
+    function makeThinner()
+    {
+          var str;
+          if(width < 10)
+            return;
+          width = width - 10;
+          
+          str = "w="+width;
+          //dynamically change the height
+          gen.InvokeMETAFunction("signaturecapture", str);
+          
+    } 
+    
+    function makeFatter()
+    {
+          var str;
+          if(width > 210)
+            return;
+          width = width + 10;
+          
+          str = "w="+width;
+          //dynamically change the height
+          gen.InvokeMETAFunction("signaturecapture", str);
+          
+    }
+    
+    function setBorder()
+    {
+      if(bBorder)
+        gen.InvokeMETAFunction("signaturecapture", "border");
+      else
+        gen.InvokeMETAFunction("signaturecapture", "noborder");
+      bBorder = !bBorder;
+    
+    
+    }
+    
+/*****************************************************************************
+ *  used to toggle between 2 color schemes; colors are set using web color values
+ * ***************************************************************************/         
+    function changeColors()
+    {
+      if(bYellow){
+        //change to a grey background 
+        gen.InvokeMETAFunction("signaturecapture", "bgcolor=bb,bb,bb");
+        
+        //change to a lilac pen, note mixture of cases
+        gen.InvokeMETAFunction("signaturecapture", "pencolor=99,33,ff");
+        bYellow = false;
+      }
+      else{
+        //change to a yellow background 
+        gen.InvokeMETAFunction("signaturecapture", "bgcolor=ff,ff,00");
+        
+        //change to a green pen, note mixture of cases
+        gen.InvokeMETAFunction("signaturecapture", "pencolor=aa,00,00");
+        bYellow = true;
+      }
+      
+    }
+    
+
+  
+  </SCRIPT>
+
+	<TITLE>Signature Capture</TITLE>
+  <META HTTP-Equiv="quitbutton" Content="show">
+  <META HTTP-Equiv="quitbutton" Content="x=10">
+  <META HTTP-Equiv="quitbutton" Content="y=10">
+  
+  <META HTTP-Equiv="signaturecapture" Content="w=200">
+  <META HTTP-Equiv="signaturecapture" Content="h=50">
+  <META HTTP-Equiv="signaturecapture" Content="x=10">
+  <META HTTP-Equiv="signaturecapture" Content="y=100">
+  <META HTTP-Equiv="signaturecapture" Content="penwidth=2">
+  <META HTTP-Equiv="signaturecapture" Content="name=Sig">
+  <META HTTP-Equiv="signaturecapture" Content="pencolor=aa,00,00">
+  <META HTTP-Equiv="signaturecapture" Content="bgcolor=ff,ff,00">
+  
+  <META HTTP-Equiv="signaturecapture" Content="http:80">
+  <!--META HTTP-Equiv="signaturecapture" Content="url=software.uk.symbol.com/spb/imager/upload.aspx"-->
+  <META HTTP-Equiv="signaturecapture" Content="url=http://ds-laptop/PHTest/Received/HTTP/Upload.aspx">
+  <META HTTP-Equiv="FileTransferNavigate" Content="javascript:alert('%s');">
+  <!--META HTTP-Equiv="VectorNavigate" Content=""-->
+
+
+  
+  </HEAD>
+  <BODY BGCOLOR="#FFFFEA" TEXT="#0000A0" LINK="#FF0000" VLINK="#808080" ALINK="#008040" onload="doLoad()" onunload="doUnLoad()">
+  <TABLE width ="100%">
+    <TR align="right"><TD><P><INPUT TYPE="button" VALUE="<<Back" ONCLICK="location.href='../Launcher.html'"></P></TD>
+    </TR>
+  </TABLE>
+  
+
+  <H2>Signature Capture (and send via HTTP)</H2>
+	<P>Click on the buttons below to test the functionality...</P>
+  <BR><BR><BR><BR><BR><BR>
+  <INPUT type="button" value="Capture" onclick="saveSignature();">
+  <INPUT type="button" value="Change Colors" onclick="changeColors();"><BR>
+  <INPUT type="button" value="Reduce Height" onclick="makeShorter();">&nbsp;
+  <INPUT type="button" value="Increase Height" onclick="makeTaller();"><br>
+  <INPUT type="button" value="Reduce Width" onclick="makeThinner();">&nbsp;
+  <INPUT type="button" value="Increase Width" onclick="makeFatter();">
+  <INPUT type="button" value="Toggle Border" onclick="setBorder();">
+    
+	<P>Last Revision : 8 Jan 2007 <BR>Paul Henderson</P>
+  </BODY>
+</HTML>
+
+

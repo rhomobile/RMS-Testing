@@ -1,0 +1,54 @@
+<html>
+
+<META HTTP-Equiv="EMMLProfile" Content="apply:myProfile.Hold">
+
+<script>
+    var generic = new ActiveXObject("PocketBrowser.generic");
+    function doQuit() {
+
+        generic.InvokeMETAFunction('application', 'quit');
+    }
+
+
+    function doApplyProfile(profile) {
+      
+        generic.InvokeMETAFunction('EMMLProfile', 'Apply:' + profile);
+    }
+
+    function onGesture(id, count)
+     {
+         if (id == "Battery") 
+        {
+            message.innerHTML = "Linear gesture is detected and captured";
+            generic.InvokeMETAFunction("battery","left:20;top:20;visibility:hidden");
+        }
+        else if (id == "Signal") 
+        {
+
+            message.innerHTML = "Circular gesture is detected and captured"; 
+            generic.InvokeMETAFunction("signal","left:100;top:20;visibility:hidden");
+        }
+        else if (id == "Scan") 
+        {
+            message.innerHTML = "Hold gesture is detected and captured";
+            generic.InvokeMETAFunction("scanner","enabled;start");
+        }
+     }
+
+    
+     
+</script>
+
+<body>
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+<h4>Persistant Hold test script ,Upon detection scanner will be enabled</h4>
+<h4>Tap Hold and check it.</h4>
+ <div id="message"></div><br /><br />
+    <a href="javascript:doApplyProfile('myProfile.Hold');">Apply Named Profile</a>
+    <br>
+  
+<br><br>
+    <a href="javascript:doQuit();">Quit PB</a>
+
+</body>
+</html>

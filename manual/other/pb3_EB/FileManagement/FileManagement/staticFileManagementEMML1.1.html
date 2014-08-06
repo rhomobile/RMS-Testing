@@ -1,0 +1,33 @@
+﻿<html>
+<head><script type="text/javascript" src="http://192.168.6.18/NEON/src/elements.js"></script>
+    <title>PB 3.0 File Management Test static EMML 1.1</title>
+   
+    <META HTTP-Equiv="FileTransfer" content="TransferEvent:url('Javascript:MyTransferEvent('%s');');Source:url('ftp://192.168.6.18/large.txt');Destination:url('file://\Temp\myfolder\75.txt');Username:ftpadmin;Password:ftpadmin;CreateFolders:True;OverWrite:True;Transfer"> 
+    
+    
+<style type="text/css">
+body {scrollbar-base-color:blue;}
+</style>
+<script language=javascript>
+
+
+function MyTransferEvent(Msg)
+{
+alert("TransferMessage"+Msg);
+}
+
+
+
+
+</script>
+</head>
+
+<body>
+
+<form id="frmFileManagement" action="" onload="SetdeafultSettings();">
+
+
+
+</form>
+</body>
+</html>

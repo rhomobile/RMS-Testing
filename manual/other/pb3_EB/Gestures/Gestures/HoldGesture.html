@@ -1,0 +1,138 @@
+<html>
+<head><script type="text/javascript" src="http://192.168.6.18/NEON/src/elements.js"></script>
+    <title>PB 3.0 Hold Gesture Settings</title>
+<meta name="mobileoptimized" content="0" />
+<META HTTP-Equiv="SIPbutton" Content="visibility:visible">
+
+</head>
+<body>
+<form id="frmHoldGestures" action="GestureProcess_Hold.asp" method="post" >
+<h2>Hold Gesture Settings</h2>
+
+<table>
+    <tr>
+        <td><a href="main"></a></td>
+    </tr>
+    
+    <tr>
+    <td>
+    Preset   :- 
+    </td>
+    <td>
+<select name="cmdPreset" id="cmdPreset">
+<option value="NULL">NULL</option>
+<option value="center">center</option>
+<option value="Test">Test</option></select>
+</td>
+</tr>
+<tr>
+<td>
+Diagonstics:- 
+</td>
+<td>
+<select name="cmdDiagonstics" id="cmdDiagonstics">
+<option value="TRUE">TRUE</option>
+<option value="FALSE">FALSE</option>
+<option value="TEST">TEST</option>
+<option value="NULL">NULL</option>
+</select>
+
+</td>
+</tr>
+
+<tr>
+<td>
+Input ID:- 
+</td>
+<td>
+<input type=text name="txtHoldID" id="txtHoldID" value="MyHoldGesture" />
+</td>
+</tr>       
+<tr>
+<td>
+<select name="mydropdown1" id="mydropdown1">
+<option value="JavaScript">JavaScript</option>
+<option value="HTML">HTML</option>
+</select>
+</td>
+</tr>    
+
+</table>
+
+
+
+<table>
+
+
+<tr>
+<td>
+center-x:-
+</td>
+<td>
+<!--<input type=text name="txtcenterx" id="txtcenterx" value="200" />-->
+<input type=text name="txtcenterx" id="Text1" value="100" />
+</td>
+</tr>  
+ 
+<tr>
+<td>
+center-y:-
+</td>
+<td>
+<!--<input type=text name="txtcentery" id="txtcentery" value="100" />-->
+<input type=text name="txtcentery" id="Text2" value="100" />
+</td>
+</tr>   
+
+<tr>
+<td>
+radius:-
+</td>
+<td>
+<!--<input type=text name="txtradius" id="txtradius" value="80" />-->
+<input type=text name="txtradius" id="Text3" value="50" />
+</td>
+</tr>  
+
+
+<tr>
+<td>
+Delay:-
+</td>
+<td>
+<input type=text name="txtdelay" id="txtdelay" value="2000" />
+</td>
+</tr>  
+
+<tr>
+<td>
+Interval:-
+</td>
+<td>
+<input type=text name="txtinterval" id="txtinterval" value="3000" />
+</td>
+</tr>  
+
+
+<tr>
+<td>Type:- 
+</td>
+<td>
+<input type=text name="txtType" id="txtType" value="Hold" />
+</td>
+</tr> 
+
+
+
+
+
+  
+</table>
+<hr>
+<input type=submit><br />
+<a href=GestureIndex.html>Gesture Index</a>
+
+
+</form>
+</body>
+</html>

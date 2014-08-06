@@ -1,0 +1,123 @@
+.AddressBar1{
+    addressbar-left:30;
+    addressbar-top:50;
+    addressbar-width:200;
+    addressbar-visibility:visible;
+}
+
+.BackButton1{
+  backbutton-top:30;
+  backbutton-left:50;
+  backbutton-height:50;
+  backbutton-width:30;
+  backbutton-visibility:visible; 
+}
+
+.KeyState1{
+  KeyState-top:30;
+  KeyState-right:60;
+  KeyState-left:50;
+  KeyState-height:50;
+  KeyState-width:30;
+  KeyState-visibility:visible; 
+}
+
+.MinimizeButton1{
+  minimizebutton-top:30;
+  minimizebutton-left:50;
+  minimizebutton-height:50;
+  minimizebutton-width:30;
+  minimizebutton-visibility:visible;
+}
+
+.QuitButton1{
+  quitbutton-top:30;
+  quitbutton-left:50;
+  quitbutton-height:50;
+  quitbutton-width:30;
+  quitbutton-visibility:visible;
+}
+
+.ReloadButton1{
+  reloadbutton-top:30;
+  reloadbutton-left:50;
+  reloadbutton-height:50;
+  reloadbutton-width:30;
+  reloadbutton-visibility:visible; 
+}
+
+.PageZoomIn1{
+  ZoomInPageButton-top:30;
+  ZoomInPageButton-left:50;
+  ZoomInPageButton-height:50;
+  ZoomInPageButton-width:30;
+  ZoomInPageButton-visibility:visible; 
+}
+
+.PageZoomOut1{
+  ZoomOutPageButton-top:30;
+  ZoomOutPageButton-left:50;
+  ZoomOutPageButton-height:50;
+  ZoomOutPageButton-width:30;
+  ZoomOutPageButton-visibility:visible;
+}
+
+.ZoomTx1{
+  ZoomTextButton-top:30;
+  ZoomTextButton-left:50;
+  ZoomTextButton-height:50;
+  ZoomTextButton-width:30;
+  ZoomTextButton-visibility:visible;
+}
+
+.TopCommandArea1{
+  topcommandarea-height:50;
+  topcommandarea-color:#FF0000;
+  topcommandarea-visibility:visible;
+}
+
+.StopButton1{
+  Stopbutton-top:30;
+  Stopbutton-left:50;
+  Stopbutton-height:50;
+  Stopbutton-width:30;
+  Stopbutton-visibility:visible;
+}
+
+.SIPButton1{
+  SIPbutton-top:30;
+  SIPbutton-left:50;
+  SIPbutton-height:50;
+  SIPbutton-width:30;
+  SIPbutton-visibility:visible; 
+}
+
+.SIP1{ 
+  SIPbutton-top:80;
+  SIPbutton-left:50;
+  SIPbutton-height:50;
+  SIPbutton-width:50;
+  SIPbutton-visibility:visible;
+}
+
+.GoButton1{
+  gobutton-top:30;
+  gobutton-left:50;
+  gobutton-height:50;
+  gobutton-width:30;
+  gobutton-visibility:visible; 
+}
+
+.BottomCommandArea1{
+  bottomcommandarea-height:100;
+  bottomcommandarea-color:#FF0000;
+  bottomcommandarea-visibility:visible; 
+}
+
+
+.AddressBarHide{
+    addressbar-left:30;
+    addressbar-top:50;
+    addressbar-width:200;
+    addressbar-visibility:hidden;
+}

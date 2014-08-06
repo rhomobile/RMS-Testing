@@ -1,0 +1,69 @@
+<html>
+<head><script type="text/javascript" src="http://192.168.6.18/NEON/src/elements.js"></script>
+
+
+<META HTTP-Equiv="SignatureCapture"Content="left:30;top:120;height:100;bgcolor:#FF0000;width:200;border:Hidden;Pencolor:#FF00FF;Penwidth:2;visibility:visible;">
+
+<META HTTP-Equiv="SignatureCapture" content="Username:ftpadmin;Password:ftpadmin; destination:url('ftp://192.168.6.18:21/SignatureMemory.bmp')">
+
+<META HTTP-Equiv="SignatureCapture" content="SignatureSaveEvent:url('Javascript:onCaptured('%s');')">
+<SCRIPT>
+    var objGeneric = new ActiveXObject("PocketBrowser.Generic");
+    var iCount = 0;
+
+    function doCapture() {
+
+        iCount++;
+
+        if (iCount <= 50000) {
+           
+            objGeneric.InvokeMETAFunction('SignatureCapture', 'capture');
+            nos.innerHTML = iCount;
+            captureLoop();
+
+        }
+
+    }
+
+    function doClear() {
+        objGeneric.InvokeMETAFunction('SignatureCapture', 'clear');
+    }
+
+    function onCaptured(data) {
+        signature.innerHTML = "Signature Capture: " + data
+        return;
+    }
+
+    function Quit() {
+        objGeneric.InvokeMETAFunction("Application", "Quit");
+    }
+
+    function captureLoop() {
+        setTimeout("doCapture()", 5000);
+
+    }
+
+
+</SCRIPT>
+
+</head>
+<body>
+<p>Signature Capture Memory Leak Testing</p>
+<BR><BR><BR><BR><BR><BR><BR><BR><BR><BR>
+
+<DIV ID="signature">Capture Status</DIV>
+<div id="nos">X Value</div>
+
+<P><INPUT TYPE="button" VALUE="Capture" ONCLICK="doCapture();"></P>
+<P><INPUT TYPE="button" VALUE="Clear" ONCLICK="doClear();"></P>
+<P><INPUT TYPE="button" VALUE="Quit" ONCLICK="Quit();"></P>
+
+<BR>
+<A HREF="./Signature Capture.html">Back</A>
+</body>
+</html>
+
+
+
+
+

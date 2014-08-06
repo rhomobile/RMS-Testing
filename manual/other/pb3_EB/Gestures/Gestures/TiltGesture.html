@@ -1,0 +1,126 @@
+<html>
+<head><script type="text/javascript" src="http://192.168.6.18/NEON/src/elements.js"></script>
+    <title>PB 3.0 Tilt Gesture Settings</title>
+<META HTTP-Equiv="SIPbutton" Content="visibility:visible">
+
+</head>
+<body>
+<form id="frmTiltGestures" action="GestureProcess_Tilt.asp" method="post" >
+<h2>Tilt Gesture Settings</h2>
+
+<table>
+    <tr>
+        <td><a href="main"></a></td>
+    </tr>
+    
+    <tr>
+    <td>
+    Preset   :- 
+    </td>
+    <td>
+<select name="cmdPreset" id="cmdPreset">
+<option value="happy">face-up</option>
+<option value="happy">upright</option>
+<option value="Test">Test</option></select>
+</td>
+</tr>
+<tr>
+<td>
+Diagonstics:- 
+</td>
+<td>
+<select name="cmdDiagonstics" id="cmdDiagonstics">
+<option value="TRUE">TRUE</option>
+<option value="FALSE">FALSE</option>
+<option value="TEST">TEST</option>
+</select>
+
+</td>
+</tr>
+
+<tr>
+<td>
+Input ID:- 
+</td>
+<td>
+<input type=text name="txtTiltID" id="txtTiltID" value="" />
+</td>
+</tr>       
+    
+
+</table>
+
+
+
+<table>
+
+
+<tr>
+<td>
+target-x:-
+</td>
+<td>
+<input type=text name="txttargetx" id="txttargetx" value="" />
+</td>
+</tr>  
+
+<tr>
+<td>
+target-y:-
+</td>
+<td>
+<input type=text name="txttargety" id="txttargety" value="" />
+</td>
+</tr>  
+
+<tr>
+<td>
+target-z:-
+</td>
+<td>
+<input type=text name="txttargetz" id="txttargetz" value="" />
+</td>
+</tr>  
+
+ 
+<tr>
+<td>
+tolerance:-
+</td>
+<td>
+<input type=text name="txttolerance" id="txttolerance" value="" />
+</td>
+</tr>   
+
+<tr>
+<td>
+hysteresis:-
+</td>
+<td>
+<input type=text name="txthysteresis" id="txthysteresis" value="" />
+</td>
+</tr>  
+
+
+<tr>
+<td>Type:- 
+</td>
+<td>
+<input type=text name="txtType" id="txtType" value="Tilt" />
+</td>
+</tr> 
+
+
+
+
+
+  
+</table>
+<hr>
+<input type=submit><br />
+<a href=GestureIndex.html>Gesture Index</a>
+
+
+</form>
+</body>
+</html>

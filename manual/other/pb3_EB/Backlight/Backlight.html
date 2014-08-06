@@ -1,0 +1,121 @@
+<html>
+<head><script type="text/javascript" src="http://192.168.6.18/NEON/src/elements.js"></script>
+<title>PB Device Backlight Test</title>
+<META HTTP-Equiv="sipbutton" Content="visibility:visible">
+</head>
+<body>
+<form id="frm" action="">
+<div id="Message">Message</div>
+<hr>
+Backlight:
+<input type="radio" name="group1" value="ON" checked="checked" />ON
+<input type="radio" name="group1" value="OFF" />OFF
+<input type="radio" name="group1" value="OLDON" />OLDON
+<input type="radio" name="group1" value="OLDON1" />OLDON1
+<input type="radio" name="group1" value="OLDOFF" />OLDOFF
+<input type="radio" name="group1" value="EMPTY" />EMPTY
+<input type="radio" name="group1" value="EMPTY1" />EMPTY1
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<input type=button onclick="setBacklight();" value="SetBacklight">
+<br><br><br>
+
+Intensity:<Textarea id="txtIntensity"cols="10" rows="1">2</Textarea>
+&nbsp;&nbsp;&nbsp;&nbsp;
+<input type=button onclick="setIntensity();" value="SetIntensity">
+<hr>
+<br>
+
+<br><br>
+<A HREF='BacklightIndex.html'>Back</A>
+
+</form>
+</body>
+</html>
+<script language=javascript>
+try
+{
+var generic = new ActiveXObject("PocketBrowser.Generic");
+}
+catch(err)
+{
+var GenericPlugin = document.createElement('embed'); 
+GenericPlugin.setAttribute('id',"embed1"); 
+GenericPlugin.setAttribute('type',"application/x-wtg-legacy-generic"); 
+GenericPlugin.setAttribute('hidden',"true"); 
+
+// Attach the plugin embed tags to the body 
+var theBody = document.getElementsByTagName('body')[0]; 
+theBody.appendChild(GenericPlugin); 
+}
+function clearAlarm()
+{
+    outputSpan1.innerHTML = 'Alarm cleared';
+
+    generic.InvokeMETAFunction('Alarm', 'Clear');
+}
+
+
+function setBacklight()
+{
+   var selectBacklight="";
+   for (var i=0; i < frm.group1.length; i++)
+   	{   
+     	if (frm.group1[i].checked)
+      		{
+      		    
+      		selectBacklight= frm.group1[i].value;
+      			
+      	}
+   	}	
+   	Message.innerHTML="value is:"+selectBacklight;
+	switch(selectBacklight)
+	{
+		case 'ON':
+
+			generic.InvokeMETAFunction('backlight', 'ON');
+			break;
+
+		case 'OFF':
+
+			generic.InvokeMETAFunction('backlight', 'Off');
+			break;
+			
+	   case 'OLDON':
+
+			generic.InvokeMETAFunction('backlight-On',"Intensity:2" );
+			break;
+			
+	   case 'OLDON1':
+
+			generic.InvokeMETAFunction("backlight", "Intensity:5;On");
+			break;
+			
+	    case 'OLDOFF':
+
+			generic.InvokeMETAFunction('backlight-off', "Intensity:5");
+			break;
+			
+	   case 'EMPTY1':
+
+			generic.InvokeMETAFunction('backlight-On', "");
+			break;
+		case 'EMPTY':
+
+			generic.InvokeMETAFunction('backlight',"" );
+			break;
+
+
+	}
+}
+
+
+function setIntensity()
+{
+	var IntensityValue = frm.txtIntensity.value;
+	var IValue = "Intensity:"+IntensityValue;
+	Message.innerHTML="value is:"+IValue;
+	generic.InvokeMETAFunction('backlight', IValue);
+	
+}
+</script>

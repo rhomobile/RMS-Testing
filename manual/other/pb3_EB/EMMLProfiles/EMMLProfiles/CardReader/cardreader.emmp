@@ -1,0 +1,13 @@
+.MSR{
+    cardreader:open;
+    cardreader-modulename:MSR7000;
+    cardreader-readevent:url('javascript:MyReadEvent('%s', '%s');');
+}
+
+.DCR{
+    cardreader:open;
+    cardreader-modulename:DCR7000;
+    cardreader-pinEntry:ON;
+    cardreader-pintimeout:0x2710;
+    cardreader-readevent:url('javascript:MyReadEvent('%s', '%s');');
+}

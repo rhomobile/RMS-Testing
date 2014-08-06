@@ -1,0 +1,45 @@
+<html>
+
+<META HTTP-Equiv="EMMLProfile" Content="apply:myProfile.Linear">
+<META HTTP-Equiv="scanner" Content="DecodeEvent:url('javascript:doScan('%s', '%s', '%s', '%s', '%s');')">
+<script>
+    var Generic = new ActiveXObject("PocketBrowser.Generic");
+    function doQuit() {
+
+        Generic.InvokeMETAFunction('application', 'quit');
+    }
+
+
+    function doApplyProfile(profile) {
+      
+        Generic.InvokeMETAFunction('EMMLProfile', 'Apply:' + profile);
+    }
+
+    function onGesture(id, count)
+     {
+         if (id == "Scan1") 
+         {
+           
+             Generic.InvokeMETAFunction("Scanner", "all_decoders:disabled;Code128:enabled;enabled;start");
+         }
+
+     }
+
+     function doScan(data, source, type, time, length) 
+     {
+         message.innerHTML = "Decoded data is :" + data + "\nSource: " + source + "\nType: " + type + "\nTime: " + time + "Length: " + length;
+     }
+</script>
+
+<body>
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+<h4>Persistant linear test script</h4>
+ <div id="message"></div><br /><br /><br />
+<h4>Upon detection scanner will be enabled and code128 should be scanned.</h4>
+    
+  
+<br><br>
+    <a href="javascript:doQuit();">Quit PB</a>
+
+</body>
+</html>

@@ -1,0 +1,12 @@
+.AllBarcodesDisabled {
+     scanner-all_decoders:disabled;
+     scanner:enabled;
+     scanner-start;
+}
+
+.default_decoders
+{
+  scanner-all_decoders: disabled;
+  scanner:enabled;
+  scanner-start;
+}
