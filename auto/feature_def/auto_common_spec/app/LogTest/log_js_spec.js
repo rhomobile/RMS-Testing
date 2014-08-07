@@ -1,5 +1,40 @@
+function try_load_img(ip, timeout, callback) {
+    var ping_object = {};
+
+    if (!ping_object.inUse) {
+        ping_object.status = 'unchecked';
+        ping_object.inUse = true;
+        ping_object.callback = callback;
+        ping_object.ip = ip;
+        var _that = ping_object;
+        ping_object.img = new Image();
+        ping_object.img.onload = function () {
+            _that.inUse = false;
+            _that.callback(true, _that.ip);
+
+        };
+        ping_object.img.onerror = function (e) {
+            if (_that.inUse) {
+                _that.inUse = false;
+                _that.callback(false, _that.ip);
+            }
+
+        };
+        ping_object.start = new Date().getTime();
+        ping_object.img.src = 'http://'+ip+':'+SERVER_PORT.toString() + '/icon.png';
+        ping_object.timer = setTimeout(function () {
+            if (_that.inUse) {
+                _that.inUse = false;
+                _that.callback(false, _that.ip);
+            }
+        }, timeout);
+    }
+}
+
 describe("Log JS API", function () {
 	var originalLogLevel = Rho.Log.level;
+    var waitTimeout = 90000;
+    var serverTestTimeout = 10000;
 	
 	beforeEach(function () {
 		originalLogLevel = Rho.Log.level;
@@ -10,6 +45,72 @@ describe("Log JS API", function () {
 		Rho.Log.level = originalLogLevel;
 		Rho.Log.info("Log level after all tests: "+ Rho.Log.level, "TST");
 	});
+
+	var srvHost = '';
+	var srvPort = '';
+	var srvURL = '';
+
+	var srvHttpLogPostUrl = '';
+	var srvHttpLogGetUrl = '';
+	var srvHttpLogTestMsg = '';
+
+    function updateServerUrls(SERVER_HOST, SERVER_PORT) {
+        srvHost = SERVER_HOST;
+        srvPort = SERVER_PORT;
+        srvURL = 'http://'+SERVER_HOST+':'+SERVER_PORT.toString();
+ 
+		srvHttpLogPostUrl = srvURL + "/client_log";
+		srvHttpLogGetUrl = srvURL + "/get_last_log";
+		srvHttpLogTestMsg = srvURL + "/download";
+    }
+
+    updateServerUrls(SERVER_HOST, SERVER_PORT);
+
+	it('check available hosts', function() {
+        var accepted_url = [];
+        var total_servers = 0;
+
+        runs( function() {
+            if (HOSTS.length > 1) {
+                Rho.Log.info('More than 1 host','JSDB');
+
+                for (var i = 0; i < HOSTS.length; i++) {
+                    Rho.Log.info('Checking ' + HOSTS[i],'JSDB');
+
+                    total_servers += 1;
+
+                    try_load_img(HOSTS[i], serverTestTimeout, function(ok,ip) {
+                        Rho.Log.info('Callback from ' + ip + ' status ' + ok,'JSDB');
+                        if (ok) {
+                            accepted_url.push(ip);  
+                        }
+                        total_servers -= 1;
+                    });
+                };
+            }
+        } );
+
+        waitsFor( function() {
+                return total_servers == 0;
+            },
+            'Callback never called',
+            serverTestTimeout + 1000
+        );
+
+        runs( function() {
+            if (HOSTS.length > 1) {
+                if (accepted_url.length > 0) {
+                    updateServerUrls(accepted_url[0],SERVER_PORT);
+                }
+
+                for (var i = 0; i < accepted_url.length; i++) {
+                    Rho.Log.info('Could connect to host:' + accepted_url[i], 'DBG' );
+                };
+
+                expect(accepted_url.length).toBeGreaterThan(0);
+            }
+        });
+    });
 
 	describe("ST set", function () {
 
@@ -43,15 +144,6 @@ describe("Log JS API", function () {
 
 		// js handing code does some debug traces in log, we should filter them outs 
 		Rho.LogCapture.excludeCategories = "\"__rhoClass\", \"__rhoCallback\", Rho.callbackHandler, rho_cast<jstring, rho_cast<string";
-
-		var srvHost = SERVER_HOST;
-		var srvPort = SERVER_PORT;
-		var srvURL = "http://"+SERVER_HOST+":"+SERVER_PORT.toString();
-		var httpsSrvURL = "https://"+SECURE_HOST+":"+SECURE_PORT.toString();
-
-		var srvHttpLogPostUrl = srvURL + "/client_log";
-		var srvHttpLogGetUrl = srvURL + "/get_last_log";
-		var srvHttpLogTestMsg = srvURL + "/download";
 
 		var waitTimeout = 10000;
 		var clientPlatform = Rho.System.platform;		

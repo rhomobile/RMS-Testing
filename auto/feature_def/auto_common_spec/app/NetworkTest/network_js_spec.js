@@ -73,7 +73,7 @@ describe('Network JS API', function() {
     Rho.RhoFile.makeDir(imagesDownloadFolder);
          
     var waitTimeout = 90000;
-    var serverTestTimeout = 5000;
+    var serverTestTimeout = 10000;
     
     var callbackCount = 0;
          
