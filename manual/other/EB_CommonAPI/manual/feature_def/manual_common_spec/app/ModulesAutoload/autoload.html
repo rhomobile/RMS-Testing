@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>API distinct modules autoload test</title>
+    <meta name="viewport" content="initial-scale=1.0, width=device-width"/>
+    <script type="text/javascript" src="../../public/api/rhoapi.js" data-api-modules="System,WebView"></script>
+    <style>
+        th {
+            font-weight: bold;
+        }
+
+        th, td {
+            padding: 4px;
+        }
+
+        table, tr, th, td {
+            border: 1px solid gray;
+        }
+    </style>
+
+    <script type="text/javascript">
+        function onLoad() {
+            document.getElementById('Rho').innerHTML = typeof Rho;
+            if ('object' == typeof Rho) {
+                document.getElementById('EB.System').innerHTML = typeof Rho['System'];
+                document.getElementById('EB.WebView').innerHTML = typeof Rho['WebView'];
+                document.getElementById('EB.Barcode').innerHTML = typeof Rho['Barcode'];
+
+                document.getElementById('EB.System.platform').innerHTML = EB.System.platform;
+                document.getElementById('EB.System.phoneId').innerHTML = EB.System.phoneId;
+                document.getElementById('EB.WebView.currentLocation()').innerHTML = EB.WebView.currentLocation();
+            }
+        };
+    </script>
+
+</head>
+<body onload="onLoad();">
+<p>
+    This page should load modules EB.System and EB.WebView automatically.
+    It should not load module EB.Barcode.<br>
+    <br>
+    Use following syntax to list modules are being loaded automatically:<br>
+    <br>
+    &lt;script type="text/javascript" src="../../public/api/rhoapi.js" data-api-modules="System,WebView"&gt;&lt;/script&gt;
+</p>
+<table>
+    <tr>
+        <th>module</th>
+        <th>type should be</th>
+        <th>actual type</th>
+    </tr>
+    <tr>
+        <td>Rho</td>
+        <td>object</td>
+        <td><span id="Rho">ERROR</span></td>
+    </tr>
+    <tr>
+        <td>EB.System</td>
+        <td>function</td>
+        <td><span id="EB.System">ERROR</span></td>
+    </tr>
+    <tr>
+        <td>EB.WebView</td>
+        <td>function</td>
+        <td><span id="EB.WebView">ERROR</span></td>
+    </tr>
+    <tr>
+        <td>EB.Barcode</td>
+        <td>undefined</td>
+        <td><span id="EB.Barcode">ERROR</span></td>
+    </tr>
+</table>
+<p>EB.System.platform == "<span id="EB.System.platform">ERROR</span>"</p>
+<p>EB.System.phoneId == "<span id="EB.System.phoneId">ERROR</span>"</p>
+<p>EB.WebView.currentLocation() == "<span id="EB.WebView.currentLocation()">ERROR</span>"</p>
+
+</body>
+</html>

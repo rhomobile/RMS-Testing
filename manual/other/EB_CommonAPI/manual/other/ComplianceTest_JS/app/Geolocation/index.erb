@@ -1,0 +1,52 @@
+<script type="text/javascript" charset="utf-8" src="/public/jquery/jquery-1.6.4.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="/app/helpers/specHelpers.js"></script>
+
+<div data-role="page">
+
+    <h1>Geolocations</h1>
+
+	</div>
+
+  <div data-role="content">
+    <ul data-role="listview">
+     <li><a href="#" onclick="setNotification();">Set Notification</a></li>
+     <li><div id='notification'></div></li>
+     <li>Below Method is only applicable for Android</li>
+     <li><a href="#" onclick="setNotificationEX('minDistance',2);">Set Notification For Distance Change</a></li>
+     <li><a href="#" onclick="setNotificationEX('minTimeout',3);">Set Notification For Minimum Timeout</a></li>
+     <li><div id='notificationex'></div></li>
+     <li>TurnOFF Geolocation</li>
+     <li><a href="#" onclick="geoTurnOff();">Turn OFF</a></li>
+      <li>Run Test using Jasmine</li>
+      <li><a href="/app/Geolocation/specRunner.html">Geolocation Test using Jasmine</a></li>
+    </ul>
+  </div>
+
+</div>
+<script type="text/javascript">
+var setNotification = function(){
+  Ruby.call('Geolocation','setNotification');
+}
+
+var setNotificationEX = function(params,value){
+  var method = "setNotificationEX?"+params+"="+value;
+  Ruby.call('Geolocation',method);
+}
+
+var setNotificationEX_both = function(){
+  var method = "setNotificationEX?minDistance=2&minTimeout=30";
+  Ruby.call('Geolocation',method);
+}
+
+var geoTurnOff = function(){
+  Ruby.call('Geolocation','geoTurnOff');
+}
+
+function updateSetNotificationDiv(data) {
+  document.getElementById('notification').innerHTML = data;
+}
+
+function updateSetNotificationEXDiv(data) {
+    document.getElementById('notificationex').innerHTML = data;
+}
+</script>

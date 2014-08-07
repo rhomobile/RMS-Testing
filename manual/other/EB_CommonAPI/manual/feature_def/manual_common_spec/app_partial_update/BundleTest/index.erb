@@ -1,0 +1,21 @@
+<div data-role="page">
+
+  <div data-role="header" data-position="inline">
+    <h1>Image Page ORIG</h1>
+    <a href="<%= Rho::RhoConfig.start_path %>" class="ui-btn-left" data-icon="home" data-direction="reverse"
+       <%= "data-ajax='false'" if is_bb6 %>>Home</a>
+      
+  </div>
+
+  <div data-role="content">
+   <br>
+<%= link_to '[open page with image]', { :action => :pageimage }%> 
+   <br>
+<%= link_to '[open added page]', { :action => :pageadded }%> 
+   <br>
+<%= link_to '[open removed page]', { :action => :pageremoved }%> 
+   <br>
+  </div>
+
+</div>
+
