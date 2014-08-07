@@ -1,13 +1,15 @@
 describe("Barcode JS API", function() {
+	var barcodeNotSupportedDevices = ["VC70"];
 	var	enableflag = false;
 	var	disableflag = false;
 	var getpropertiesdata ='';
 	var getpropertydata ='';
     var enumData = Rho.Barcode.enumerate();
     var callbackstatus = false;
+    var pickListNotSupportedDevices = ["MC32","MC75A"];
+if(barcodeNotSupportedDevices.indexOf(Rho.System.deviceName) == -1){
 
-
-    var callbackgetproperties = function (data){
+	var callbackgetproperties = function (data){
 		getpropertiesdata = JSON.stringify(data);
 		callbackstatus = true;
 	}
@@ -82,13 +84,14 @@ describe("Barcode JS API", function() {
 				for (var i=0;i<arrScanner.length;i++){
 
 					(function(idx){
-						it(arrScanner[idx]['testName'], function() {
+						if(scnname.indexOf("Bluetooth") == -1){
+							it(arrScanner[idx]['testName'], function() {
 
-							    enumObject.setProperty(arrScanner[idx]['propertyName'],arrScanner[idx]['propertyValue']);
-								var data = enumObject.getProperty(arrScanner[idx]['propertyName']);
-								expect(data).toEqual(arrScanner[idx]['expectedResult']);
-						});
-
+								    enumObject.setProperty(arrScanner[idx]['propertyName'],arrScanner[idx]['propertyValue']);
+									var data = enumObject.getProperty(arrScanner[idx]['propertyName']);
+									expect(data).toEqual(arrScanner[idx]['expectedResult']);
+							});
+						}
 					})(i);
 
 				}
@@ -100,36 +103,38 @@ describe("Barcode JS API", function() {
 				for (var i=0;i<arrScanner.length;i++){
 
 					(function(idx){
-						it(arrScanner[idx]['testName'], function() {
-						
-							var propertyName = arrScanner[idx]['propertyName'];
-							var propertyValue = arrScanner[idx]['propertyValue'];
+						if(scnname.indexOf("Bluetooth") == -1){
+							it(arrScanner[idx]['testName'], function() {
+							
+								var propertyName = arrScanner[idx]['propertyName'];
+								var propertyValue = arrScanner[idx]['propertyValue'];
 
-							if (propertyValue == 'true')
-								var strProperty = '{"'+propertyName+'" :'+true+'}';
-							else if (propertyValue == 'false')
-								var strProperty = '{"'+propertyName+'" :'+false+'}';
-							else if (!isNaN(propertyValue)){
-								propertyValue = parseInt(propertyValue);
-								var strProperty = '{"'+propertyName+'" :'+propertyValue+'}';
-							}
-							else{
-								var strProperty = '{"'+propertyName+'" : "'+propertyValue+'"}'
-							}
+								if (propertyValue == 'true')
+									var strProperty = '{"'+propertyName+'" :'+true+'}';
+								else if (propertyValue == 'false')
+									var strProperty = '{"'+propertyName+'" :'+false+'}';
+								else if (!isNaN(propertyValue)){
+									propertyValue = parseInt(propertyValue);
+									var strProperty = '{"'+propertyName+'" :'+propertyValue+'}';
+								}
+								else{
+									var strProperty = '{"'+propertyName+'" : "'+propertyValue+'"}'
+								}
 
-							var objProperty = JSON.parse(strProperty);
-							enumObject.setProperties(objProperty);
+								var objProperty = JSON.parse(strProperty);
+								enumObject.setProperties(objProperty);
 
-							var strGetProperty = '["'+arrScanner[idx]['propertyName']+'"]';
-							var objGetProperty = JSON.parse(strGetProperty);
+								var strGetProperty = '["'+arrScanner[idx]['propertyName']+'"]';
+								var objGetProperty = JSON.parse(strGetProperty);
 
-							var data = enumObject.getProperties(objGetProperty);
+								var data = enumObject.getProperties(objGetProperty);
 
-			
-							data = data[arrScanner[idx]['propertyName']];
-							expect(data).toEqual(arrScanner[idx]['expectedResult']);
-	
-						});
+				
+								data = data[arrScanner[idx]['propertyName']];
+								expect(data).toEqual(arrScanner[idx]['expectedResult']);
+		
+							});
+						}
 					})(i);
 				}
 			});
@@ -179,7 +184,8 @@ describe("Barcode JS API", function() {
 					getpropertydata ='';
 					callbackstatus = false;
 				});
-
+				if(scnname.indexOf("Bluetooth") == -1){
+					if(pickListNotSupportedDevices.indexOf(Rho.System.deviceName) == -1){
 						it("VT282-2001 | call getProperties() with sync callback and hash |" + scnid, function() {
 
 							runs(function() {
@@ -189,7 +195,7 @@ describe("Barcode JS API", function() {
 
 							waitsFor(function(){
 								return callbackstatus;
-							});
+							},"Wait for callback status", 5000);
 
 							runs(function() {							
 								expect(getpropertiesdata).toContain('true');
@@ -208,7 +214,7 @@ describe("Barcode JS API", function() {
 
 							waitsFor(function(){
 								return callbackstatus;
-							});	
+							},"Wait for callback status", 5000);	
 
 							runs(function() {								
 								expect(getpropertiesdata).toContain('true');
@@ -227,24 +233,24 @@ describe("Barcode JS API", function() {
 								expect(getpropertiesdata).toContain('false');
 								expect(getpropertiesdata).toContain(RETICLE_TYPE);								
 						});
+					}
 
+					it("VT282-2004 | call getProperty() with sync callback and property |" + scnid, function() {
 
-						it("VT282-2004 | call getProperty() with sync callback and property |" + scnid, function() {
-
-							runs(function() {  									    
-							    enumObject.setProperty('allDecoders','true');
-								enumObject.getProperty("allDecoders",callbackgetproperty);
-							});
-
-							waitsFor(function(){
-								return callbackstatus;
-							});	
-							
-							runs(function() {	
-								expect(getpropertydata).toEqual('true');
-							});										
+						runs(function() {  									    
+						    enumObject.setProperty('allDecoders','true');
+							enumObject.getProperty("allDecoders",callbackgetproperty);
 						});
 
+						waitsFor(function(){
+							return callbackstatus;
+						},"Wait for callback status", 5000);	
+						
+						runs(function() {	
+							expect(getpropertydata).toEqual('true');
+						});										
+					});
+					if(pickListNotSupportedDevices.indexOf(Rho.System.deviceName) == -1){
 						it("VT282-2005 | call getProperty() with anonymous callback and property |" + scnid, function() {
 
 							runs(function() {
@@ -254,23 +260,24 @@ describe("Barcode JS API", function() {
 
 							waitsFor(function(){
 								return callbackstatus;
-							});	
+							},"Wait for callback status", 5000);	
 							
 							runs(function() {	
 								expect(getpropertydata).toEqual(RETICLE_TYPE);
 							});								
 						});
+					}
 
-
-						it("VT282-2003 | call getProperty() without callback |" + scnid, function() {
-			    
-							    enumObject.setProperty('allDecoders','true');
-								var data = enumObject.getProperty("allDecoders");
-								getpropertydata = data;
-								expect(getpropertydata).toEqual('true');								
-						});
-						
-						//  DCC - Removing this test as it is testing for ID property (unsupported)
+					it("VT282-2003 | call getProperty() without callback |" + scnid, function() {
+		    
+						    enumObject.setProperty('allDecoders','true');
+							var data = enumObject.getProperty("allDecoders");
+							getpropertydata = data;
+							expect(getpropertydata).toEqual('true');								
+					});
+				}
+				
+				//  DCC - Removing this test as it is testing for ID property (unsupported)
 //						it("VT282-2006 | call getDefault |" + scnid, function() {
 //								alert(enumObject);
 //							    Rho.Barcode.setDefault(enumObject);
@@ -278,7 +285,7 @@ describe("Barcode JS API", function() {
 //								expect(scnid).toEqual(defaultobj.getProperty('ID'));
 //						});
 
-						//  DCC - Removing this test as it is testing for ID property (unsupported)
+				//  DCC - Removing this test as it is testing for ID property (unsupported)
 //						it("VT282-2006A | call Default |" + scnid, function() {
 
 //							    //enumObject.clearAllProperties();
@@ -436,4 +443,11 @@ describe("Barcode JS API", function() {
 	 	});
 	 	
 	});
+
+}else{
+	it("This device does not support Barcode feature",function(){
+		expect(true).toEqual(true);
+	});
+}
+    
 });

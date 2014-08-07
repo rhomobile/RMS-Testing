@@ -518,7 +518,8 @@ var arr_scanner_property = [
 	scannerTypes	:	"All",
 	OSTypes			:	"WINDOWS",
 	propertyValue	:	"timedHold",
-	expectedResult	:	"timedHold"
+	expectedResult	:	"timedHold",
+	deviceNotSupport	: ["MK3100"]
 },
 {
 	testName		:	"VT282-3065 | Set aimType :timedRelease | timedRelease",
@@ -526,7 +527,8 @@ var arr_scanner_property = [
 	scannerTypes	:	"All",
 	OSTypes			:	"WINDOWS",
 	propertyValue	:	"timedRelease",
-	expectedResult	:	"timedRelease"
+	expectedResult	:	"timedRelease",
+	deviceNotSupport	: ["MK3100"]
 },
 {
 	testName		:	"VT282-3066 | Set aimType :presentation | presentation",
@@ -534,7 +536,8 @@ var arr_scanner_property = [
 	scannerTypes	:	"All",
 	OSTypes			:	"WINDOWS",
 	propertyValue	:	"presentation",
-	expectedResult	:	"presentation"
+	expectedResult	:	"presentation",
+	deviceNotSupport	: ["MK3100"]
 },
 {
 	testName		:	"VT282-3067 | Set aimType :pressAndRelease | pressAndRelease",
@@ -542,7 +545,8 @@ var arr_scanner_property = [
 	scannerTypes	:	"All",
 	OSTypes			:	"WINDOWS",
 	propertyValue	:	"pressAndRelease",
-	expectedResult	:	"pressAndRelease"
+	expectedResult	:	"pressAndRelease",
+	deviceNotSupport	: ["MK3100"]
 },
 {
 	testName		:	"VT282-3068 | Set aimType :continuousRead | continuousRead",
@@ -550,7 +554,8 @@ var arr_scanner_property = [
 	scannerTypes	:	"All",
 	OSTypes			:	"WINDOWS",
 	propertyValue	:	"continuousRead",
-	expectedResult	:	"continuousRead"
+	expectedResult	:	"continuousRead",
+	deviceNotSupport	: ["MK3100"]
 },
 {
 	testName		:	"VT282-3069 | Set beamWidth :normal | normal",
@@ -818,7 +823,8 @@ var arr_scanner_property = [
 	scannerTypes	:	"All",
 	OSTypes			:	"All",
 	propertyValue	:	"true",
-	expectedResult	:	"true"
+	expectedResult	:	"true",
+	deviceNotSupport	:["MC32"]
 },
 {
 	testName		:	"VT282-4004 | Set ausPostal:false  | false",
@@ -826,7 +832,8 @@ var arr_scanner_property = [
 	scannerTypes	:	"All",
 	OSTypes			:	"All",
 	propertyValue	:	"false",
-	expectedResult	:	"false"
+	expectedResult	:	"false",
+	deviceNotSupport	:["MC32"]
 },
 {
 	testName		:	"VT282-4005 | Set canPostal:True  | true",
@@ -834,7 +841,8 @@ var arr_scanner_property = [
 	scannerTypes	:	"All",
 	OSTypes			:	"All",
 	propertyValue	:	"true",
-	expectedResult	:	"true"
+	expectedResult	:	"true",
+	deviceNotSupport	:["MC32"]
 },
 {
 	testName		:	"VT282-4006 | Set canPostal:false  | false",
@@ -842,7 +850,8 @@ var arr_scanner_property = [
 	scannerTypes	:	"All",
 	OSTypes			:	"All",
 	propertyValue	:	"false",
-	expectedResult	:	"false"
+	expectedResult	:	"false",
+	deviceNotSupport	:["MC32"]
 },
 {
 	testName		:	"VT282-4007 | Set codabar:True  | true",
@@ -1970,7 +1979,8 @@ var arr_scanner_property = [
 	scannerTypes	:	"All",
 	OSTypes			:	"All",
 	propertyValue	:	"true",
-	expectedResult	:	"true"
+	expectedResult	:	"true",
+	deviceNotSupport	: ["MC32"]
 },
 {
 	testName		:	"VT282-4147 | Set japPostal  :false  | false",
@@ -1978,7 +1988,8 @@ var arr_scanner_property = [
 	scannerTypes	:	"All",
 	OSTypes			:	"All",
 	propertyValue	:	"false",
-	expectedResult	:	"false"
+	expectedResult	:	"false",
+	deviceNotSupport	: ["MC32"]
 },
 {
 	testName		:	"VT282-4148 | Set korean3of5  :True  | true",
@@ -2666,7 +2677,8 @@ var arr_scanner_property = [
 	scannerTypes	:	"All",
 	OSTypes			:	"All",
 	propertyValue	:	"true",
-	expectedResult	:	"true"
+	expectedResult	:	"true",
+	deviceNotSupport	: ["MC32"]
 },
 {
 	testName		:	"VT282-4234 | Set ukPostal :false  | false",
@@ -2674,7 +2686,8 @@ var arr_scanner_property = [
 	scannerTypes	:	"All",
 	OSTypes			:	"All",
 	propertyValue	:	"false",
-	expectedResult	:	"false"
+	expectedResult	:	"false",
+	deviceNotSupport	: ["MC32"]
 },
 {
 	testName		:	"VT282-4235 | Set ukPostalReportCheckDigit :True  | true",
@@ -2682,7 +2695,8 @@ var arr_scanner_property = [
 	scannerTypes	:	"All",
 	OSTypes			:	"ANDROID",
 	propertyValue	:	"true",
-	expectedResult	:	"true"
+	expectedResult	:	"true",
+	deviceNotSupport	: ["MC32"]
 },
 {
 	testName		:	"VT282-4236 | Set ukPostalReportCheckDigit :false  | false",
@@ -2690,7 +2704,8 @@ var arr_scanner_property = [
 	scannerTypes	:	"All",
 	OSTypes			:	"ANDROID",
 	propertyValue	:	"false",
-	expectedResult	:	"false"
+	expectedResult	:	"false",
+	deviceNotSupport	: ["MC32"]
 },
 {
 	testName		:	"VT282-4237 | Set upcEanBookland  :True  | true",
@@ -3130,7 +3145,8 @@ var arr_scanner_property = [
 	scannerTypes	:	"All",
 	OSTypes			:	"All",
 	propertyValue	:	"true",
-	expectedResult	:	"true"
+	expectedResult	:	"true",
+	deviceNotSupport	: ["MC32"]
 },
 {
 	testName		:	"VT282-4293 | Set us4state :false  | false",
@@ -3138,7 +3154,8 @@ var arr_scanner_property = [
 	scannerTypes	:	"All",
 	OSTypes			:	"All",
 	propertyValue	:	"false",
-	expectedResult	:	"false"
+	expectedResult	:	"false",
+	deviceNotSupport	: ["MC32"]
 },
 {
 	testName		:	"VT282-4294 | Set us4stateFics :true  | true",
@@ -3146,7 +3163,8 @@ var arr_scanner_property = [
 	scannerTypes	:	"All",
 	OSTypes			:	"All",
 	propertyValue	:	"true",
-	expectedResult	:	"true"
+	expectedResult	:	"true",
+	deviceNotSupport	: ["MC32"]
 },
 {
 	testName		:	"VT282-4295 | Set us4stateFics :false  | false",
@@ -3154,7 +3172,8 @@ var arr_scanner_property = [
 	scannerTypes	:	"All",
 	OSTypes			:	"All",
 	propertyValue	:	"false",
-	expectedResult	:	"false"
+	expectedResult	:	"false",
+	deviceNotSupport	: ["MC32"]
 },
 {
 	testName		:	"VT282-4296 | Set usPlanet :true  | true",
@@ -3162,7 +3181,8 @@ var arr_scanner_property = [
 	scannerTypes	:	"All",
 	OSTypes			:	"All",
 	propertyValue	:	"true",
-	expectedResult	:	"true"
+	expectedResult	:	"true",
+	deviceNotSupport	: ["MC32"]
 },
 {
 	testName		:	"VT282-4297 | Set usPlanet :false  | false",
@@ -3170,7 +3190,8 @@ var arr_scanner_property = [
 	scannerTypes	:	"All",
 	OSTypes			:	"All",
 	propertyValue	:	"false",
-	expectedResult	:	"false"
+	expectedResult	:	"false",
+	deviceNotSupport	: ["MC32"]
 },
 //NOT SUPPORTED ON GINGERBREAD.
 //{
@@ -3195,7 +3216,8 @@ var arr_scanner_property = [
 	scannerTypes	:	"All",
 	OSTypes			:	"All",
 	propertyValue	:	"true",
-	expectedResult	:	"true"
+	expectedResult	:	"true",
+	deviceNotSupport	: ["MC32"]
 },
 {
 	testName		:	"VT282-4301 | Set usPostNet :false  | false",
@@ -3203,7 +3225,8 @@ var arr_scanner_property = [
 	scannerTypes	:	"All",
 	OSTypes			:	"All",
 	propertyValue	:	"false",
-	expectedResult	:	"false"
+	expectedResult	:	"false",
+	deviceNotSupport	: ["MC32"]
 },
 //NOT SUPPORTED ON GINGERBREAD.
 //{
@@ -3304,10 +3327,19 @@ var getApplicableProperties = function (objScnType){
 
 		if((arr_scanner_property[i]['OSTypes'] == 'All') || (arr_scanner_property[i]['OSTypes'] == Rho.System.platform)){
 			var scnType = arr_scanner_property[i]['scannerTypes']
-
 			if(scnType == "All")
 			{ 
-				finalSCNObj.push(arr_scanner_property[i]);
+				if(!arr_scanner_property[i]['deviceNotSupport']){
+					if(deviceScannerType.indexOf("Bluetooth") == -1){
+						finalSCNObj.push(arr_scanner_property[i]);
+					}
+				}else{
+					if(arr_scanner_property[i]['deviceNotSupport'].indexOf(Rho.System.deviceName) == -1){
+						if(deviceScannerType.indexOf("Bluetooth") == -1){
+							finalSCNObj.push(arr_scanner_property[i]);
+						}
+					}
+				}
 			}
 			else if ((deviceScannerType == "2D Imager" || Rho.System.oemInfo == "MC40") && isAndroid && arr_scanner_property[i]['notOnAndroidImager'] === true)//If it is the Android hardware Imager
 			{
@@ -3328,6 +3360,12 @@ var getApplicableProperties = function (objScnType){
 			else if ((deviceScannerType.indexOf("Pico") != -1) && scnType == "Imager") //for Pico Imaging Scanner
 			{
 				finalSCNObj.push(arr_scanner_property[i]);
+			}
+			else if ((deviceScannerType.indexOf("Bluetooth") == -1))
+			{
+				if ((deviceScannerType.indexOf("SSI Scanner") != -1) && scnType == "1D Scanner"){
+					finalSCNObj.push(arr_scanner_property[i]);
+				}
 			}
 		}
 	}
