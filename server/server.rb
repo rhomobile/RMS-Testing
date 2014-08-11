@@ -4,6 +4,7 @@ require 'socket'
 require 'openssl'
 require 'net/http'
 require 'rexml/document'
+require 'json'
 
 
 
@@ -113,6 +114,10 @@ def localip
     Socket.do_not_reverse_lookup = orig
 end
 
+def public_ipv4
+  Socket.ip_address_list.select{|intf| intf.ipv4? and !intf.ipv4_loopback? and !intf.ipv4_multicast?}.map{|ipv| ipv.ip_address}.uniq
+end
+
 def modify_iOS_Application_plist_file(serverUrl, serverPort)
   plist_file = 'Documents/TestApp.plist'
   ipa_url = 'http://' + serverUrl + ':' + serverPort.to_s() + '/TestApp.ipa'
@@ -122,6 +127,7 @@ def modify_iOS_Application_plist_file(serverUrl, serverPort)
 end
 
 host = ARGV && ARGV[0] ? ARGV[0] : localip
+hosts = public_ipv4.push(host).uniq
 port = 8081
 securePort = 8082
 securePortWithClientAuth = 8083
@@ -458,6 +464,7 @@ to_generate.each do |path|
     f.puts("SECURE_PORT_CA=#{securePortWithClientAuth};");
     f.puts("WEBSOCKET_HOST='#{host}';");
     f.puts("WEBSOCKET_PORT=#{webSocketPort};");
+    f.puts("HOSTS=#{JSON.generate(hosts)};")
     
     f.close()
 end

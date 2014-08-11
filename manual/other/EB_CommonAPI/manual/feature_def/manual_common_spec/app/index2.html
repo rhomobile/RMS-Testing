@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Manual specs</title>
+    <meta name="viewport" content="initial-scale=1.0, width=device-width"/>
+    <script type="text/javascript" src="/public/jquery/jquery-1.6.4.min.js"></script>
+    <script type="text/javascript" src="/public/jquery/jquery.json-2.3.min.js"></script>
+    <script type="text/javascript" src="/public/api/rhoapi-modules.js"></script>
+    <script type="text/javascript" src="/public/js/helpers.js"></script>
+    
+</head>
+<body>
+<!-- Removed from 4.0
+<h4>Dev tests</h4>
+<a href="/app/Notification/notification.led.html">notification.led</a>
+<h3>Manual specs</h3> -->
+<h4>Manual specs without jasmine</h4>
+<ul>
+    <li><a href="/app/ModulesAutoload/autoload.html">API Modules autoload</a><br>
+    <li><a href="/app/System/system.html">System</a><br>
+        <b><i>You must have running webbrick server before starting tests</i></b></li>
+    <li><a href="/app/AudioCaptureTest/index.html">AudioCapture</a></li>
+    <li><a href="/app/WebviewTest/webview.html">WebView</a></li>
+    <li><a href="/app/NativeTabbarTest/NativeTabBar_MainPage.html">WM/CE NativeTabBar</a></li>
+    <li><a href="/app/NativeToolbarTest/Toolbar.html">NativeToolbar Test</a></li>
+    <li><a href="/app/Navbar/navbar.html">NavBar Test</a></li>
+    <li><a href="/app/ApplicationTest/application.html">Application Test</a></li>
+    <li><a href="/app/NetworkTest/network.html">Network Test</a></li>
+    <li><a href="/app/DatabaseTest/database.html">DatabaseTest</a></li>
+    <li><a href="/app/NativeTabbarTest/NativeTabBar_MainPage.html">TabbarTest</a></li>
+    <li><a href="/app/NativeMenuBarTest/menubar.html">MenuBarTest</a></li>
+    <li><a href="/app/Signal/signal.html">Signal</a></li>
+    <li><a href="/public/signal.html">SignalIndicators</a></li>
+    <li><a href="/app/SensorTest/">Sensor test</a></li>
+    <li><a href="/app/LogTest/">Log test</a></li>
+    <li><a href="/app/BundleTest/">Bundle test page</a></li>
+    <li><a href="/app/PerformanceImprovement(4.1)/index.html">PeformanceImprovement(MEB) - 4.1</a></li>
+    <li><a href="/app/PerformanceImprovement(4.2)/index.html">PeformanceImprovement(MEB) - 4.2</a></li>
+</ul>
+
+<h4>Manual Specs which use Jasmine</h4>
+<ul>
+    <li><a href="/app/Ajaxbridge/specRunner.html">AjaxBridge Test</a></li>
+    <li><a href="/app/Cardreader/specRunner.html">CardReader Test</a></li>
+    <li><a href="/app/Keystate/specRunner.html">KeyState Test</a></li>
+
+    <!-- This is copy auto tests -->
+    <!--<li><a href="/app/LogTest/specRunner.html">Log Test</a></li>-->
+
+    <!-- A -->
+    <li><a href="/app/ApplicationTest/specRunner.html">Application Test</a></li>
+    <!-- B -->
+    <li><a href="/app/BatteryTest/specRunner.html">Battery Tests</a></li>
+    <li><a href="/app/Barcode/specRunner.html">HW Barcode Test (WM, MotoAndroid)</a></li>
+    <li><a href="/app/Barcode/specRunnerSW.html">SW Barcode Test (iOS, ConsumerAndroid)/MK devices</a></li>
+    <!-- C -->
+    <li><a href="/app/CameraTest/specRunner.html">Camera Tests</a></li>
+    <!-- I -->
+    <li><a href="/app/Intent/specRunner.html">Intent Test Cases</a></li>
+
+    <!-- K -->
+    <li><a href="/app/KeyCaptureTest/specRunner.html">KeyCapture Tests</a></li>
+    <li><a href="/app/KeyCaptureTest/specRunner_hk.html">KeyCapture HomeKey Tests</a></li>
+
+    <!-- M -->
+    <li><a href="/app/Mediaplayer/specRunner.html">Mediaplayer Tests</a></li>
+
+    <!-- N -->
+    <li><a href="/app/NearFieldCommunicationTests/specRunner.html">Near field communication Tests</a></li>
+    <li><a href="/app/Notification/specRunner.html">Notification Tests</a></li>
+
+    <!-- P -->
+    <li>Printing<ul>
+    <li>EB.Printer (Generic)<ul>
+	<li><a href="/app/Printing/specRunner_discovery.html">Discovery Tests</a></li>
+	<li><a href="/app/Printing/specRunner_auto.html">Auto Tests</a></li>
+    <li><a href="/app/Printing/specRunner.html">Manual Tests</a></li>
+    </ul>
+    <li>EB.PrinterZebra<ul>
+    <li><a href="/app/PrinterZebra/specRunner_discover.html">Discovery</a></li>
+    <li><a href="/app/PrinterZebra/specRunner_auto.html">(Semi) Auto</a></li>
+    <li><a href="/app/PrinterZebra/specRunner_manual.html">Manual</a></li>
+    </ul>
+    </ul></li>
+
+    <!-- R -->
+    <li><a href="/app/RSMTest/specRunner.html">RSM Tests</a></li>
+    <li><a href="/app/RSMTest/auto_specRunner.html">Auto RSM Tests</a></li>
+    <!-- S -->
+    <li><a href="/app/ScreenOrientationTest/specRunner.html">Screen Orientation test page</a></li>
+    <li><a href="/app/Signal/specRunner.html">Signal Tests</a></li>
+    <li>Signature Tests: <a href="/app/SignatureTest/specRunner.html">Page 1</a> | <a href="/app/SignatureTest2/specRunner.html">Page 2</a></li>
+    <li><a href="/app/System/specRunner.html">System Test</a></li>
+    <!-- V -->
+    <li><a href="/app/VideoCaptureTest/specRunner.html">VideoCapture Tests</a></li>
+
+</ul>
+
+<h4>[RUBY SAS]</h4>
+<ul id="ruby">
+    <script type="text/javascript">
+
+        $("#ruby").append('<li><a href="/app/ApplicationTest">Application</a></li>');
+        $("#ruby").append('<li><a href="/app/Barcode/specRunner_ruby.html">HW Barcode Test Ruby</a></li>');
+        if (!isWindowsPhone8Platform()) {
+            $("#ruby").append('<li><a href="/app/Barcode">Barcode</a></li>');
+        }
+        if (!isWindowsPhone8Platform()) {
+            $("#ruby").append('<li><a href="/app/Image">Camera</a></li>');
+        }
+        $("#ruby").append('<li><a href="/app/NativeToolbarTest">NativeToolbar</a></li>');
+        $("#ruby").append('<li><a href="/app/NativeTabbarTest">NativeTabbar</a></li>');
+        if (!isWindowsPhone8Platform()) {
+            $("#ruby").append('<li><a href="/app/Navbar">Navigation Bar (iOS)</a></li>');
+        }
+
+        if (!isWindowsPhone8Platform()) {
+            $("#ruby").append('<li><a href="/app/AsyncDownloadFile">Network Download File</a></li>');
+        }
+        if (!isWindowsPhone8Platform()) {
+            $("#ruby").append('<li><a href="/app/AsyncHttpsTest">Network https get</a></li>');
+        }
+        if (!isWindowsPhone8Platform()) {
+            $("#ruby").append('<li><a href="/app/AsyncHttpTest">Network http get</a></li>');
+        }
+        if (!isWindowsPhone8Platform()) {
+            $("#ruby").append('<li><a href="/app/AsyncUploadFile">Network upload file</a></li>');
+        }
+        if (!isWindowsPhone8Platform()) {
+            $("#ruby").append('<li><a href="/app/DetectConnection">Network detect connection</a></li>');
+        }
+        if (!isWindowsPhone8Platform()) {
+            $("#ruby").append('<li><a href="/app/NetworkStatus">Network status notification</a></li>');
+        }
+		if (!isWindowsPhone8Platform()) {
+            $("#ruby").append('<li><a href="/app/Geolocation">Geolocation Test</a></li>');
+        }
+
+
+    </script>
+
+    <li><a href="/app/System">System</a></li>
+</ul>
+
+</body>
+</html>
+

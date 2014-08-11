@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Performance Improvement</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+	<META HTTP-Equiv="MinimizeButton" content="visibility:Visible;top:30 " >
+	<META HTTP-Equiv="quitbutton" Content="visibility:visible">
+	<META HTTP-Equiv="ReloadButton" Content="visibility:visible">
+	<script type="text/javascript" src="/public/api/rhoapi.js"></script>
+	<script type="text/javascript" src="/public/api/EB.Barcode.js"></script>
+	<script type="text/javascript" src="/public/api/EB.Battery.js"></script>
+	<script type="text/javascript" src="/public/api/EB.CardReader.js"></script>
+	<script type="text/javascript" src="/public/api/EB.Database.js"></script>
+	<script type="text/javascript" src="/public/api/EB.Intent.js"></script>
+	<script type="text/javascript" src="/public/api/EB.KeyCapture.js"></script>
+	<script type="text/javascript" src="/public/api/EB.KeyState.js"></script>
+	<script type="text/javascript" src="/public/api/EB.Log.js"></script>
+	<script type="text/javascript" src="/public/api/EB.Mediaplayer.js"></script>
+	<script type="text/javascript" src="/public/api/EB.NativeMenubar.js"></script>
+	<script type="text/javascript" src="/public/api/EB.NativeTabbar.js"></script>
+	<script type="text/javascript" src="/public/api/EB.NativeToolbar.js"></script>
+	<script type="text/javascript" src="/public/api/EB.Navbar.js"></script>
+	<script type="text/javascript" src="/public/api/EB.Network.js"></script>
+	<script type="text/javascript" src="/public/api/EB.NewORM.js"></script>
+	<script type="text/javascript" src="/public/api/EB.Notification.js"></script>
+	<script type="text/javascript" src="/public/api/EB.ORM.js"></script>
+	<script type="text/javascript" src="/public/api/EB.Push.js"></script>
+	<script type="text/javascript" src="/public/api/EB.RhoFile.js"></script>
+	<script type="text/javascript" src="/public/api/EB.Sensor.js"></script>
+	<script type="text/javascript" src="/public/api/EB.SignalIndicators.js"></script>
+	<script type="text/javascript" src="/public/api/EB.Signature.js"></script>
+	<script type="text/javascript" src="/public/api/EB.System.js"></script>
+	<script type="text/javascript" src="/public/api/EB.WebView.js"></script>
+	<script type="text/javascript">
+		var start = new Date().getTime();
+		var latency ="";
+		function onLoad() {
+		  var now = new Date().getTime();
+		  latency = now - start;
+		  var ele = document.getElementById('res');
+		  ele.innerHTML = "<b> Page Loading time with all Modules : " + latency + "ms</b>";
+		}
+		function testModule(){
+		var moduleObj = [
+		{"name":"Barcode",
+		"value":typeof(EB.Barcode)=="function"},
+		{"name":"Battery",
+		"value":typeof(EB.Battery)=="function"},
+		{"name":"CardReader",
+		"value":typeof(EB.CardReader)=="function"},
+		{"name":"Database",
+		"value":typeof(EB.Database)=="function"},
+		{"name":"Intent",
+		"value":typeof(EB.Intent)=="function"},
+		{"name":"KeyCapture",
+		"value":typeof(EB.KeyCapture)=="function"},
+		{"name":"KeyState",
+		"value":typeof(EB.KeyState)=="function"},
+		{"name":"Log",
+		"value":typeof(EB.Log)=="function"},
+		{"name":"Mediaplayer",
+		"value":typeof(EB.Mediaplayer)=="function"},
+		{"name":"NativeMenubar",
+		"value":typeof(EB.NativeMenubar)=="function"},
+		{"name":"NativeTabbar",
+		"value":typeof(EB.NativeTabbar)=="function"},
+		{"name":"NativeToolbar",
+		"value":typeof(EB.NativeToolbar)=="function"},
+		{"name":"Navbar",
+		"value":typeof(EB.Navbar)=="function"},
+		{"name":"Network",
+		"value":typeof(EB.Network)=="function"},
+		{"name":"NewORM",
+		"value":typeof(EB.NewORM)=="function"},
+		{"name":"ORM",
+		"value":typeof(EB.ORM)=="function"},
+		{"name":"Push",
+		"value":typeof(EB.Push)=="function"},
+		{"name":"EB.File",
+		"value":typeof(EB.RhoFile)=="function"},
+		{"name":"Sensor",
+		"value":typeof(EB.Sensor)=="function"},
+		{"name":"SignalIndicators",
+		"value":typeof(EB.SignalIndicators)=="function"},
+		{"name":"Signature",
+		"value":typeof(EB.Signature)=="function"},
+		{"name":"System",
+		"value":typeof(EB.System)=="function"},
+		{"name":"WebView",
+		"value":typeof(EB.WebView)=="function"},
+		{"name":"Notification",
+		"value":typeof(EB.Notification)=="function"}];
+		moduleObj.forEach(function(val, index){
+			var table = document.getElementById('result');
+			var rowCount = table.rows.length;
+			var row = table.insertRow(rowCount);
+			var cell1 = row.insertCell(0);
+			cell1.innerHTML = val.name;
+			var cell2 = row.insertCell(1);
+			cell2.innerHTML = val.value;
+		});
+	}
+	</script>
+</head>
+<body onload="onLoad()">
+<h3>Performance Improvement:</h3>
+<h3 id='res'></h3>
+<h3>Expected:</h3>
+<ol>
+	<li>Check for all Module Test</li>
+</ol>
+<input type="button" id="startTest" onclick="testModule()" value="startTest" />
+<table id='result' border>
+	<tr>
+		<td>Module</td>
+		<td>Status</td>
+	</tr>
+</table>
+</body>
+</html>

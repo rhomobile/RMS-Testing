@@ -1,0 +1,43 @@
+<?xml version = "1.0"?>
+<?xml-stylesheet type="text/xsl" href="pb_help.xsl"?>
+<API>
+    <MODULE name="NativeBridgeTest" parent="Rho">
+        <HELP_OVERVIEW>Test correctiness of basic data passed to and from native code</HELP_OVERVIEW>
+        <MORE_HELP>This is example of API. Implementation contain in extension.</MORE_HELP>
+    
+        <METHODS  access="STATIC">
+            <METHOD name="testBool" hasCallback="optional">
+                <PARAMS>
+                    <PARAM name="val" type="BOOLEAN">
+                    </PARAM>
+                </PARAMS>
+                <RETURN type="BOOLEAN"/>
+            </METHOD>
+            <METHOD name="testInt" hasCallback="optional">
+                <PARAMS>
+                    <PARAM name="val" type="INTEGER">
+                    </PARAM>
+                </PARAMS>
+                <RETURN type="INTEGER"/>
+            </METHOD>
+            <METHOD name="testFloat" hasCallback="optional">
+                <PARAMS>
+                    <PARAM name="val" type="FLOAT">
+                    </PARAM>
+                </PARAMS>
+                <RETURN type="FLOAT"/>
+            </METHOD>
+            <METHOD name="testString" hasCallback="optional">
+                <PARAMS>
+                    <PARAM name="val" type="STRING">
+                    </PARAM>
+                </PARAMS>
+                <RETURN type="STRING"/>
+            </METHOD>
+        </METHODS>
+        <VER_INTRODUCED>4.0.0</VER_INTRODUCED>
+        <PLATFORM>
+            iOS, Android
+         </PLATFORM>
+    </MODULE>
+</API>    

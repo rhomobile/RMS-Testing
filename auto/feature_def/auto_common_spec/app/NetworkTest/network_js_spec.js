@@ -4,46 +4,144 @@ function sleep (msec)
     while (new Date().getTime() - start < msec);
 }
 
+function try_load_img(ip, timeout, callback) {
+    var ping_object = {};
+
+    if (!ping_object.inUse) {
+        ping_object.status = 'unchecked';
+        ping_object.inUse = true;
+        ping_object.callback = callback;
+        ping_object.ip = ip;
+        var _that = ping_object;
+        ping_object.img = new Image();
+        ping_object.img.onload = function () {
+            _that.inUse = false;
+            _that.callback(true, _that.ip);
+
+        };
+        ping_object.img.onerror = function (e) {
+            if (_that.inUse) {
+                _that.inUse = false;
+                _that.callback(false, _that.ip);
+            }
+
+        };
+        ping_object.start = new Date().getTime();
+        ping_object.img.src = 'http://'+ip+':'+SERVER_PORT.toString() + '/icon.png';
+        ping_object.timer = setTimeout(function () {
+            if (_that.inUse) {
+                _that.inUse = false;
+                _that.callback(false, _that.ip);
+            }
+        }, timeout);
+    }
+}
+
 describe('Network JS API', function() {
          
-    var srvHost = SERVER_HOST;
-    var srvPort = SERVER_PORT;
-    var srvURL = "http://"+SERVER_HOST+":"+SERVER_PORT.toString();
-    var httpsSrvURL = "https://"+SECURE_HOST+":"+SECURE_PORT.toString();
+    var srvHost = '';
+    var srvPort = '';
+    var srvURL = '';
+    var httpsSrvURL = '';
  
-    var srvHttpTestMethodsUrl = srvURL + "/test_methods";
-    var srvHttpDownloadImageUrl = srvURL + "/download_image";
-    var srvHttpDownloadImageUrlAuth = srvURL + "/download_image_auth";
-    var srvHttpUploadTextFileUrl = srvURL + "/upload_text_file";
-    var srvHttpUploadTextFileUrlAuth = srvURL + "/upload_text_file_auth";
+    var srvHttpTestMethodsUrl = '';
+    var srvHttpDownloadImageUrl = '';
+    var srvHttpDownloadImageUrlAuth = '';
+    var srvHttpUploadTextFileUrl = '';
+    var srvHttpUploadTextFileUrlAuth = '';
 
-    var srvHttpsTestMethodsUrl = httpsSrvURL + "/test_methods";
+    var srvHttpsTestMethodsUrl = '';
+
+    function updateServerUrls(SERVER_HOST, SERVER_PORT, SECURE_HOST, SECURE_PORT) {
+        srvHost = SERVER_HOST;
+        srvPort = SERVER_PORT;
+        srvURL = 'http://'+SERVER_HOST+':'+SERVER_PORT.toString();
+        httpsSrvURL = 'https://'+SECURE_HOST+':'+SECURE_PORT.toString();
+ 
+        srvHttpTestMethodsUrl = srvURL + '/test_methods';
+        srvHttpDownloadImageUrl = srvURL + '/download_image';
+        srvHttpDownloadImageUrlAuth = srvURL + '/download_image_auth';
+        srvHttpUploadTextFileUrl = srvURL + '/upload_text_file';
+        srvHttpUploadTextFileUrlAuth = srvURL + '/upload_text_file_auth';
+
+        srvHttpsTestMethodsUrl = httpsSrvURL + '/test_methods';
+    }
+
+    updateServerUrls(SERVER_HOST, SERVER_PORT, SECURE_HOST, SECURE_PORT);
          
-    var imagesDownloadFolder = Rho.RhoFile.join( Rho.Application.userFolder,"images" );
+    var imagesDownloadFolder = Rho.RhoFile.join( Rho.Application.userFolder,'images' );
     Rho.RhoFile.makeDir(imagesDownloadFolder);
          
     var waitTimeout = 90000;
+    var serverTestTimeout = 10000;
     
     var callbackCount = 0;
          
-    var connectionInfo = "";
-    var failureMsg = "";
+    var connectionInfo = '';
+    var failureMsg = '';
          
     var detectConnectionCallback = function(args) {
         callbackCount += 1;
         connectionInfo = args.connectionInformation;
         failureMsg = args.failureMessage;
-        Rho.Log.info("detectConnectionCallback, count = " + callbackCount.toString() + "failureMsg: " + failureMsg, "net_spec" );
+        Rho.Log.info('detectConnectionCallback, count = ' + callbackCount.toString() + 'failureMsg: ' + failureMsg, 'net_spec' );
     }
          
     beforeEach(function() {
         callbackCount = 0;
-        connectionInfo = "";
-        failureMsg = "";
+        connectionInfo = '';
+        failureMsg = '';
     });
          
     afterEach(function() {
         Rho.Network.stopDetectingConnection(null);
+    });
+
+
+    it('check available hosts', function() {
+        var accepted_url = [];
+        var total_servers = 0;
+
+        runs( function() {
+            if (HOSTS.length > 1) {
+                Rho.Log.info('More than 1 host','JSDB');
+
+                for (var i = 0; i < HOSTS.length; i++) {
+                    Rho.Log.info('Checking ' + HOSTS[i],'JSDB');
+
+                    total_servers += 1;
+
+                    try_load_img(HOSTS[i], serverTestTimeout, function(ok,ip) {
+                        Rho.Log.info('Callback from ' + ip + ' status ' + ok,'JSDB');
+                        if (ok) {
+                            accepted_url.push(ip);  
+                        }
+                        total_servers -= 1;
+                    });
+                };
+            }
+        } );
+
+        waitsFor( function() {
+                return total_servers == 0;
+            },
+            'Callback never called',
+            serverTestTimeout + 1000
+        );
+
+        runs( function() {
+            if (HOSTS.length > 1) {
+                if (accepted_url.length > 0) {
+                    updateServerUrls(accepted_url[0],SERVER_PORT,accepted_url[0],SECURE_PORT);
+                }
+
+                for (var i = 0; i < accepted_url.length; i++) {
+                    Rho.Log.info('Could connect to host:' + accepted_url[i], 'DBG' );
+                };
+
+                expect(accepted_url.length).toBeGreaterThan(0);
+            }
+        });
     });
 
     it('VT293-0013 | cancel with wan/mguest connection', function() {
