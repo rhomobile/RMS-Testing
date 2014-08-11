@@ -1,6 +1,6 @@
 <%@ Language=VBScript %>
 <html>
-<head><script type="text/javascript" src="http://192.168.6.18/NEON/src/elements.js"></script>
+<head><script type="text/javascript" src="/src/elements.js"></script>
 <title>PB 3.0 Scanner Test</title>
    <!--<META HTTP-Equiv="scanner" Content="enabled">-->
    <META HTTP-Equiv="scanner" Content="DecodeEvent:url('javascript:doScan('%s', '%s', %s, '%s', '%s','%s');')">

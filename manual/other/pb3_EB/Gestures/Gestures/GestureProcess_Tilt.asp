@@ -1,6 +1,6 @@
 <%@ Language="VBscript" %>
 <html>
-<head><script type="text/javascript" src="http://192.168.6.18/NEON/src/elements.js"></script>
+<head><script type="text/javascript" src="/src/elements.js"></script>
 <title>Gesture Rendering</title>
 <script language="javascript" type="text/javascript">
 

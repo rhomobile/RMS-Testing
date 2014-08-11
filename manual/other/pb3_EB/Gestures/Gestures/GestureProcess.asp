@@ -1,6 +1,6 @@
 <%@ Language="VBscript" %>
 <html>
-<head><script type="text/javascript" src="http://192.168.6.18/NEON/src/elements.js"></script>
+<head><script type="text/javascript" src="/src/elements.js"></script>
 <title>Gesture Rendering</title>
 <!--<META HTTP-Equiv="gesture-detected" Content="url('Javascript:onGesture('%s','%s');')">-->
 <!--<META HTTP-Equiv="gesture-detected" Content="url('http://157.235.207.79/pb3.x/NavigateTest.html')">-->

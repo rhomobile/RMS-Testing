@@ -1,7 +1,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
 <html dir=ltr>
 
-<head><script type="text/javascript" src="http://192.168.6.18/NEON/src/elements.js"></script>
+<head><script type="text/javascript" src="/src/elements.js"></script>
 <style>
 a:link			{font:8pt/11pt verdana; color:FF0000}
 a:visited		{font:8pt/11pt verdana; color:#4e4e4e}

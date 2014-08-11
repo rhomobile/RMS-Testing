@@ -1,7 +1,7 @@
 <!--<%@ Language="JavaScript" %>-->
 <%@ Page Language="C#"%>
 <html>
-<head><script type="text/javascript" src="http://192.168.6.18/NEON/src/elements.js"></script>
+<head><script type="text/javascript" src="/src/elements.js"></script>
 <title>wlan Navigate</title>
 </head>
 <body>
