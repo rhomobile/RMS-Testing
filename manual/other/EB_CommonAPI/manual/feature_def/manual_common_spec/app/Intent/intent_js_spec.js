@@ -611,7 +611,7 @@ describe('Intent_UseCases Functionality Test', function () {
             };
             var params;
             if (isAndroidPlatform()) {
-                params = new parameters(EB.Intent.BROADCAST,"","com.rhomobile.BROADCAST",["com.rhomobile.manual_common_spec"],"","","","",data);
+                params = new parameters(EB.Intent.BROADCAST,"","com.rhomobile.BROADCAST",["com.motorolasolutions.enterprisebrowser"],"","","","",data);
             }
             if (isApplePlatform()) {
                 params = new parameters(EB.Intent.BROADCAST,"","","","manualcommonspec","","","",data);
@@ -638,7 +638,7 @@ describe('Intent_UseCases Functionality Test', function () {
             };
             var params;
             if (isAndroidPlatform()) {
-                params = new parameters(EB.Intent.BROADCAST,"","com.rhomobile.BROADCAST",["com.rhomobile.manual_common_spec"],"","","","",data);
+                params = new parameters(EB.Intent.BROADCAST,"","com.rhomobile.BROADCAST",["com.motorolasolutions.enterprisebrowser"],"","","","",data);
             }
             if (isApplePlatform()) {
                 params = new parameters(EB.Intent.BROADCAST,"","","","manualcommonspec","","","",data);
@@ -666,7 +666,7 @@ describe('Intent_UseCases Functionality Test', function () {
             };
             var params;
             if (isAndroidPlatform()) {
-                params = new parameters(EB.Intent.BROADCAST,"","com.rhomobile.BROADCAST",["com.rhomobile.manual_common_spec"],"","","","",data);
+                params = new parameters(EB.Intent.BROADCAST,"","com.rhomobile.BROADCAST",["com.motorolasolutions.enterprisebrowser"],"","","","",data);
             }
             if (isApplePlatform()) {
                 params = new parameters(EB.Intent.BROADCAST,"","","","manualcommonspec","","","",data);
@@ -695,7 +695,7 @@ describe('Intent_UseCases Functionality Test', function () {
             };
             var params;
             if (isAndroidPlatform()) {
-                params = new parameters(EB.Intent.BROADCAST,"","com.rhomobile.BROADCAST",["com.rhomobile.manual_common_spec"],"","","","",data);
+                params = new parameters(EB.Intent.BROADCAST,"","com.rhomobile.BROADCAST",["com.motorolasolutions.enterprisebrowser"],"","","","",data);
             }
             if (isApplePlatform()) {
                 params = new parameters(EB.Intent.BROADCAST,"","","","manualcommonspec","","","",data);
@@ -831,7 +831,7 @@ describe('Intent_UseCases Functionality Test', function () {
         runs(function () {
             var parameters;
             if (isAndroidPlatform()) {
-                parameters = {intentType: EB.Intent.BROADCAST, action: "com.rhomobile.BROADCAST", appName: "com.rhomobile.manual_common_spec", data: {myData: "This is broad cast data!" } };
+                parameters = {intentType: EB.Intent.BROADCAST, action: "com.rhomobile.BROADCAST", appName: "com.motorolasolutions.enterprisebrowser", data: {myData: "This is broad cast data!" } };
             }
             if (isAnyWindowsFamilyPlatform()) {
                 //parameters = {intentType: EB.Intent.BROADCAST, appName: "rhomobile manual_common_spec/manual_common_spec.exe", data: {myData: "This is broad cast data!" } };
