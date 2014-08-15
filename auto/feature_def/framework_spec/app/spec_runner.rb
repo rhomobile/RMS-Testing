@@ -1,6 +1,48 @@
 require 'mspec'
 require 'spec/spec_helper'
 
+class JasmineLikeFormatter < DottedFormatter
+
+  def after(state)
+    # do not put anything outside
+  end
+
+  def finish
+    Rho::Log.info("***Total: #{@tally.counter.examples}","APP")
+    Rho::Log.info("***Expectations: #{@tally.counter.expectations}","APP")
+    failed = @tally.counter.failures + @tally.counter.errors
+    passed = @tally.counter.examples - failed
+    Rho::Log.info("***Passed: #{passed}","APP")
+    # Failed should be the last line because Jake stops monitoring task after it
+    Rho::Log.info("***Failed: #{failed}","APP")
+  end
+end
+
+
+class JUnitRhoLogFormatter < JUnitFormatter
+  def initialize(file_name=nil)
+    super
+    @fname = file_name
+    @finish = StringIO.new()
+  end
+
+  def finish
+    super
+
+    @finish.rewind()
+
+    @finish.each do |out|
+      Rho::Log.info(out,"MSpec")
+    end
+
+    @finish.rewind()
+
+    if !@fname.nil?
+      File.open(@fname, "w") { |io| io.write(@finish.string) }
+    end
+  end
+end
+
 class SpecRunner < MSpecScript
   def initialize
     super
@@ -138,12 +180,22 @@ class SpecRunner < MSpecScript
   end
 
   def run
-    results_path = File.join(Rho::RhoApplication.get_base_app_path(), 'framework_spec_results.xml' )
-	MSpec.register_files config[:files]
-	@@formatter = JUnitFormatter.new(results_path)
+    MSpec.register_files config[:files]
+
+    file_name = File.join(Rho::RhoApplication.get_base_app_path(), 'phone_spec_results.xml' )
+
+    @@formatter = JUnitRhoLogFormatter.new( file_name )
     @@formatter.register
+
+    @@resulter = JasmineLikeFormatter.new()
+    @@resulter.register
+
     MSpec.process
+
+    # wait for complete output
+    sleep(10)
+
     MSpec.exit_code
-	System.exit
+    System.exit
   end
 end
