@@ -1,46 +1,5 @@
 require 'mspec'
-
-class JasmineLikeFormatter < DottedFormatter
-
-  def after(state)
-    # do not put anything outside
-  end
-
-  def finish
-    Rho::Log.info("***Total: #{@tally.counter.examples}","APP")
-    Rho::Log.info("***Expectations: #{@tally.counter.expectations}","APP")
-    failed = @tally.counter.failures + @tally.counter.errors
-    passed = @tally.counter.examples - failed
-    Rho::Log.info("***Passed: #{passed}","APP")
-    # Failed should be the last line because Jake stops monitoring task after it
-    Rho::Log.info("***Failed: #{failed}","APP")
-  end
-end
-
-
-class JUnitRhoLogFormatter < JUnitFormatter
-  def initialize(file_name=nil)
-    super
-    @fname = file_name
-    @finish = StringIO.new()
-  end
-
-  def finish
-    super
-
-    @finish.rewind()
-
-    @finish.each do |out|
-      Rho::Log.info(out,"JUNIT")
-    end
-
-    @finish.rewind()
-
-    if !@fname.nil?
-      File.open(@fname, "w") { |io| io.write(@finish.string) }
-    end
-  end
-end
+require 'spec_reporters'
 
 class SpecRunner < MSpecScript
 
@@ -133,6 +92,8 @@ class SpecRunner < MSpecScript
     sleep(10)
 
     MSpec.exit_code
+
+    Rho::Log.info("***Terminated","APP")
     System.exit
   end
 end
