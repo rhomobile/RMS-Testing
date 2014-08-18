@@ -31,7 +31,7 @@ class JUnitRhoLogFormatter < JUnitFormatter
     @finish.rewind()
 
     @finish.each do |out|
-      Rho::Log.info(out,"MSpec")
+      Rho::Log.info(out,"JUNIT")
     end
 
     @finish.rewind()

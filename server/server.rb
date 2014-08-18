@@ -449,24 +449,34 @@ $secure_server_with_client_auth.mount_proc '/test_methods' do |req,res|
     end
 end
 
-to_generate = [
+js_update_list = [
     '../manual/feature_def/manual_common_spec/public/js/server_url.js',
     '../auto/feature_def/auto_common_spec/public/js/server_url.js'
 ]
 
-to_generate.each do |path|
-    f = open(path,'w')
-    f.puts("SERVER_HOST='#{host}';")
-    f.puts("SERVER_PORT=#{port};");
-    f.puts("SECURE_HOST='#{host}';")
-    f.puts("SECURE_PORT=#{securePort};");
-    f.puts("SECURE_HOST_CA='#{host}';");
-    f.puts("SECURE_PORT_CA=#{securePortWithClientAuth};");
-    f.puts("WEBSOCKET_HOST='#{host}';");
-    f.puts("WEBSOCKET_PORT=#{webSocketPort};");
-    f.puts("HOSTS=#{JSON.generate(hosts)};")
-    
-    f.close()
+js_update_list.each do |path|
+    File.open(path,'w') do |f|
+      f.puts("SERVER_HOST='#{host}';")
+      f.puts("SERVER_PORT=#{port};");
+      f.puts("SECURE_HOST='#{host}';")
+      f.puts("SECURE_PORT=#{securePort};");
+      f.puts("SECURE_HOST_CA='#{host}';");
+      f.puts("SECURE_PORT_CA=#{securePortWithClientAuth};");
+      f.puts("WEBSOCKET_HOST='#{host}';");
+      f.puts("WEBSOCKET_PORT=#{webSocketPort};");
+      f.puts("HOSTS=#{JSON.generate(hosts)};")     
+    end
+end
+
+ruby_update_list = [
+    '../auto/feature_def/phone_spec/app/test_server.rb'
+]
+
+ruby_update_list.each do |path|
+    File.open(path,'w') do |f|
+      f.puts("SPEC_TEST_SERVER_HOST='#{host}';")
+      f.puts("SPEC_TEST_SERVER_PORT=#{port};");
+    end
 end
 
 modify_iOS_Application_plist_file(host, port)

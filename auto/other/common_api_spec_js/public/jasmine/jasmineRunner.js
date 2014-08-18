@@ -27,6 +27,13 @@ function quit()
     var fileReporter = new jasmine.FileReporter("failedSpecs.txt");
     jasmineEnv.addReporter(fileReporter);
 
+    network_server = null;
+
+    if (network_server !== null && network_server.length > 0) {
+		var remoteReporter = new jasmine.NetworkReporter(network_server);
+		jasmineEnv.addReporter(remoteReporter);
+	}
+
 	//var junitReporter = new jasmine.JUnitXmlReporter();
 	//junitReporter.useDotNotation = false
 
@@ -65,7 +72,10 @@ function quit()
 				var nextPageUrl = '../' + decodedArray[0];
 				if(decodedArray.length == 0)
 				{
-					Rho.Application.quit();
+                    fileReporter.saveResultsToLog();
+                    Rho.Log.info('***Terminated','APP');
+                    Rho.Application.quit();
+                    return;
 				}
 				else if(decodedArray.length == 1)
 				{
@@ -78,7 +88,9 @@ function quit()
 			}
 			else
 			{
-				//Running locally. Ignore
+				Rho.Log.info('***Terminated','APP');
+				Rho.Application.quit();
+				return;
 			}
 		};
 		jasmineEnv.execute();
