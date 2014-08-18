@@ -14,6 +14,9 @@ rhosimulator/
 /*/*/*/project/*/Rhodes/build/
 /*/*/*/project/*/build/
 /*/*/*/project/iphone/*.xcodeproj/xcuserdata
+/*/*/*/project/iphone/bin/
+/*/*/*/project/iphone/Resources/
+/*/*/*/junitrep
 *.iseq
 rholog.txt
 rhoapi-modules.js
@@ -30,3 +33,5 @@ RhoLogSpec.txt
 **/rholog-*.txt
 **/faillog.txt
 **/public/api/
+server_spec_reporter/logs
+
