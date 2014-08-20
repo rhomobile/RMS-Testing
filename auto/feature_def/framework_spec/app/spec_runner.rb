@@ -141,7 +141,7 @@ class SpecRunner < MSpecScript
   def run
     MSpec.register_files config[:files]
 
-    file_name = File.join(Rho::RhoApplication.get_base_app_path(), 'phone_spec_results.xml' )
+    file_name = File.join(Rho::RhoApplication.get_base_app_path(), 'framework_spec_results.xml' )
 
     @@formatter = JUnitRhoLogFormatter.new( file_name )
     @@formatter.register

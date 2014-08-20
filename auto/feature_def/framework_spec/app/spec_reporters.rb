@@ -43,7 +43,20 @@ class JUnitRhoLogFormatter < JUnitFormatter
     @finish.rewind()
 
     Rho::Log.info(@fname.nil? ? 'spec' : @fname,"JUNITNAME")
-    Rho::Log.info(@finish.string.gsub(/(?:[\r\n])+/, "~~"),'JUNITBLOB')
+    max_buffer_size = 4 * 1024
+    buffer = []
+    buffer_size = 0
+    @finish.each_line do |line|
+      buffer << line.rstrip
+      buffer_size += line.length + 2
+      if buffer_size > max_buffer_size
+        Rho::Log.info(buffer.join("~~"),'JUNITBLOB')
+        buffer = []
+        buffer_size = 0
+      end
+    end
+
+    Rho::Log.info(buffer.join("~~"),'JUNITBLOB') unless buffer.empty?
 
     @finish.rewind()
 

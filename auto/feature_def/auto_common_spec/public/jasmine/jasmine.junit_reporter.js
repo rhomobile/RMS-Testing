@@ -152,7 +152,7 @@
 		writeFile: function(filename, text)
 		{
             Rho.Log.info(filename,"JUNITNAME");
-            Rho.Log.info(text.replace(/(?:[\r\n])+/g, "~~"),'JUNITBLOB')
+            Rho.Log.info(text.replace(/(?:[\r\n])+/g, "~~"),'JUNITBLOB');
 
 			var xmlhttp;
 			if (window.XMLHttpRequest)
