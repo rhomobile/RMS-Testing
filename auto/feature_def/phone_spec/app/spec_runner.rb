@@ -1,5 +1,4 @@
 require 'mspec'
-require 'spec_reporters'
 
 class SpecRunner < MSpecScript
 
