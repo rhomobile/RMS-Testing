@@ -74,7 +74,10 @@ function quit()
 				{
                     fileReporter.saveResultsToLog();
                     Rho.Log.info('***Terminated','APP');
-                    Rho.Application.quit();
+					setTimeout(function() {
+						// give some time app to put all the log
+						Rho.Application.quit();
+					}, 5000);
                     return;
 				}
 				else if(decodedArray.length == 1)
@@ -92,7 +95,10 @@ function quit()
 				// Bangalore Jenkins Directly replacing rhoconfig.txt on wm and ce devices by pointing start_path=/app/module_name/specRunner.html
 				// Added this line to quit appliction automatically.
 				Rho.Log.info('***Terminated','APP');
-				Rho.Application.quit();
+				setTimeout(function() {
+					// give some time app to put all the log
+					Rho.Application.quit();
+				}, 5000);
 				return;
 			}
 		};
