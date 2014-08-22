@@ -51,8 +51,13 @@ class SpecRunner < MSpecScript
   def run
     results_path = File.join(Rho::RhoApplication.get_base_app_path(), 'orm_spec_results.xml' )
     MSpec.register_files config[:files]
-    @@formatter = JUnitFormatter.new(results_path)
+
+    @@formatter = JUnitRhoLogFormatter.new( results_path )
     @@formatter.register
+
+    @@resulter = JasmineLikeFormatter.new()
+    @@resulter.register
+
     MSpec.process
 
     unless Rho::System.isRhoSimulator
@@ -65,6 +70,8 @@ class SpecRunner < MSpecScript
         puts "Post #{File.basename(results_path)} to local server. Status: #{res['status']}"
       end
     end
+
+    Rho::Log.info("***Terminated","APP")
 
     MSpec.exit_code
   end
