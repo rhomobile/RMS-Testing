@@ -74,7 +74,10 @@ function quit()
 				{
                     fileReporter.saveResultsToLog();
                     Rho.Log.info('***Terminated','APP');
-                    Rho.Application.quit();
+					setTimeout(function() {
+						// give some time app to put all the log
+						Rho.Application.quit();
+					}, 5000);
                     return;
 				}
 				else if(decodedArray.length == 1)
@@ -89,7 +92,10 @@ function quit()
 			else
 			{
 				Rho.Log.info('***Terminated','APP');
-				Rho.Application.quit();
+				setTimeout(function() {
+					// give some time app to put all the log
+					Rho.Application.quit();
+				}, 5000);
 				return;
 			}
 		};
