@@ -3,10 +3,10 @@ How to run ORM js specs
 
 * make sure that location of your rhodes and rhoconnect-client sources matches settings used in build.yml file
 
-* Checkout rhodes to branch "neworm_dev"
+* Checkout rhodes to branch "master"
 
-  $ git checkout git checkout neworm_dev
-  $ git pull origin neworm_dev
+  $ git checkout master
+  $ git pull origin master
 
 * Edit file "rhoconfig.txt" file to select which implementation to run:
   set 'use_new_orm = 0' property to run legacy Old ORM code,
