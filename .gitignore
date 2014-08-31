@@ -11,11 +11,7 @@ rhosimulator/
 /*/*/*/extensions/*/ext/platform/iphone/build/
 /*/*/*/extensions/*/ext/platform/iphone/impl/readme.txt
 /*/*/*/extensions/*/ext/platform/iphone/*.xcodeproj/xcuserdata/
-/*/*/*/project/*/Rhodes/build/
-/*/*/*/project/*/build/
-/*/*/*/project/iphone/*.xcodeproj/xcuserdata
-/*/*/*/project/iphone/bin/
-/*/*/*/project/iphone/Resources/
+/*/*/*/project/iphone/
 /*/*/*/junitrep
 *.iseq
 rholog.txt
