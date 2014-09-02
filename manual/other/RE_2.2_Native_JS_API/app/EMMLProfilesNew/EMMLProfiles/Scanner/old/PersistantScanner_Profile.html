@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+<META HTTP-Equiv="EMMLProfile" Content="name:myScanner;import:url('http://157.235.207.79/pb3.x/EMMLProfiles/Scanner/scanner.emmp');">
+<!--<META HTTP-Equiv="EMMLProfile" Content="apply:myScanner.AllBarcodesDisabled;">-->
+<META HTTP-Equiv="scanner" Content="DecodeEvent:url('javascript:doScan('%s', '%s', %s, '%s', '%s');')">
+
+
+<script type="text/javascript">
+
+  var Generic = new ActiveXObject("PocketBrowser.Generic");
+
+  function doScan(data, source, type, time, length)
+   {
+   message.innerHTML="Decoded data is :"+data + "\nSource: " + source + "\nType: " + type + "\nTime: " + time + "Length: " + length;
+   }
+   
+   function doTest()
+   {
+       Generic.InvokeMETAFunction('Scanner','enabled;start');
+   }
+   
+   function stopScan()
+   {
+   Generic.InvokeMETAFunction('scanner','disabled;stop');
+   }
+
+   function doApplyProfile(profile)
+    {
+       
+       Generic.InvokeMETAFunction('EMMLProfile', 'Apply:'+profile);
+   }
+
+</script>     
+</head>
+<body>
+<h4>Named EMML Persistant Scanner Profile Script </h4>
+<h4>All Barcode is disabled and this should persist across pages within the same instance of Pocket Browser 3.0.</h4>
+<h5>Scan to check.</h5>
+<h5>Decode Data:<div id="message"></div></h5><br /><br />
+<INPUT TYPE="button" VALUE="Start Scan" ONCLICK="doTest();">
+<INPUT TYPE="button" VALUE="Stop Scan" ONCLICK="stopScan();">
+<br><br /><br />
+    <a href="javascript:doApplyProfile('myScanner.AllBarcodesDisabled');">Apply Profile - AllBarcodesDisabled</a>
+  <br>
+  <a href="javascript:doApplyProfile('myScanner.AllBarcodesEnabled');">Apply Profile - AllBarcodesEnabled</a>
+  <br>
+<h3>Browse to another page to check for EMML profile persistance.</h3>
+<h4><a href="PersistantScanner_Test.html">Click here to go to another page.</a></h4>
+<hr />
+<a href="../EMMLProfilesIndex.html">Back to EMML Profile Index</a>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+<META HTTP-Equiv="Addressbar" Content="Visibility:hidden">
+<title>SIP</title>
+<H2>SIP</H2>
+<script type="text/javascript">
+
+var myObj = new ActiveXObject("NoSIP.NSEdit");
+
+function fnControlSIP(bShowSIP)
+{
+	nosip.ShowSIP(bShowSIP);
+	if (bShowSIP)
+		msg.innerHTML = "The SIP is Shown";
+	else
+		msg.innerHTML = "The SIP is Hidden";
+}
+
+function backward(para)
+{
+myObj.ShowSIP(para);
+	if (para)
+		msg.innerHTML = "The SIP is Shown with backwards Compatibility";
+	else
+		msg.innerHTML = "The SIP is Hidden with backwards Compatibility";
+}
+
+function goBack()
+{
+  document.location = 'history:back';
+}
+
+</script>
+</head>
+<body>
+<DIV ID="msg">message </DIV>
+<form>
+<br /><br />
+<br /><br />
+<input type="button" onclick="fnControlSIP(true)" value="Show SIP" />
+<input type="button" onclick="fnControlSIP(false)" value="Hide SIP" />
+<br>
+<input type="button" onclick="backward(true)" value="Backshow SIP" />
+<input type="button" onclick="backward(false)" value="Backhide SIP" />
+<br>
+<input type=button onclick="Javascript:goBack();" value="Back">
+<br>
+</form>
+</body>
+</html>

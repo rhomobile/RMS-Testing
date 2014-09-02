@@ -1,0 +1,71 @@
+<!DOCTYPE html>  
+<html>  
+  <head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+  
+	<title>Geolocation test</title>
+    <script>
+	var watchId;
+	function requestLocationData()
+	{
+		if(!navigator.geolocation)
+		{
+			alert('Browser doesnt support Geolocation');
+		}
+		else
+		{
+			navigator.geolocation.getCurrentPosition(success, error);
+		}
+	}
+	
+	function requestWatchPosition()
+	{
+		if(!navigator.geolocation)
+		{
+			alert('Browser doesnt support Geolocation');
+		}
+		else
+		{
+		    var timeoutVal = 360 * 1000 * 1000;
+			watchId = navigator.geolocation.watchPosition(success, error,{ enableHighAccuracy: false, timeout: timeoutVal, maximumAge: 0 });
+		}
+	}
+	
+	function clearWatch()
+	{
+		if(!navigator.geolocation)
+		{
+			alert('Browser doesnt support Geolocation');
+		}
+		else
+		{
+			navigator.geolocation.clearWatch(watchId);
+		}
+	}
+	
+	function success(position)
+	{
+		document.getElementById('GpsData').innerHTML = 'latitude: ' + position.coords.latitude +
+													    '<br> longitude: ' + position.coords.longitude + 
+														'<br> altitude: ' + position.coords.altitude + 
+														'<br> accuracy: ' + position.coords.accuracy +
+														'<br> altitudeAccuracy: ' + position.coords.altitudeAccuracy +
+														'<br> heading: ' + position.coords.heading +
+														'<br> speed: ' + position.coords.speed +
+														'<br> timestamp: ' + position.timestamp;
+	}
+	
+	function error(error)
+	{
+		document.getElementById('GpsData').innerHTML = 'Error!';
+	}
+    </script>  
+  </head>  
+  <body>  
+   <br></br>
+   <p><input type="button" value="getCurrentPosition" onclick="javascript:requestLocationData()"></p>
+   <p><input type="button" value="watchPosition" onclick="javascript:requestWatchPosition()"></p>
+   <p><input type="button" value="clearWatch" onclick="javascript:clearWatch()"></p>
+   <div id="GpsData">0</div>
+  </body>  
+</html>  

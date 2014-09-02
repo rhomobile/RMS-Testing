@@ -1,0 +1,44 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+<META HTTP-Equiv="MinimizeButton" Content="Top:10; Left:10; Visibility:Visible">
+ 
+</head>
+<body>
+<!--<embed id="embed4" type="application/x-wtg-legacy-airbeam" width="1" height="1"> </embed>-->
+<br /><br /><br />
+<div id="myDiv">Message</div>
+<P>Add and Delete Package ActiveX</P>
+<P><INPUT TYPE="button" VALUE="AddPackage" ONCLICK="doSync();">
+
+<P><INPUT TYPE="button" VALUE="Back" ONCLICK="location.href='AirBEAM.html'"></P>
+<P><INPUT TYPE="button" VALUE="DeletePackage" ONCLICK="doDelete();">
+<script language="javascript">
+var myObj = new ActiveXObject("PocketBrowser.AirBEAMSmart"); 
+
+
+   var retVal="";
+   function doSync()
+   {
+     
+      retVal = myObj.AddPackage("key35");
+      setTimeout('myObj.Run();', 100); 
+      myDiv.innerHTML = "Add Package named key35: "+retVal;
+   }
+   
+    function doDelete()
+   {
+      myDiv.innerHTML = "Deleteing ";
+      myObj.DeletePackage = "key35";
+      setTimeout('myObj.Run()', 100);
+   
+   }
+   
+</script>
+</body>
+</html>
+
+
+
+

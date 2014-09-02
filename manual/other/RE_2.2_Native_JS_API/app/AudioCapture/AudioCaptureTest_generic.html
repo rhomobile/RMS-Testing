@@ -1,0 +1,302 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+<META HTTP-Equiv="MinimizeButton" Content="top:100;Visibility:Visible">
+
+</head>
+<body>
+<BR>
+<b>Audio Capture using Generic</b>
+<form id="frm" action="">
+<BR><BR>
+<A HREF="AudioCapture_Index.html">Back</A><br />
+<div id="message">Message</div>
+<BR><BR>
+<P><INPUT TYPE="button" VALUE="start" ONCLICK="doStart();">
+<INPUT TYPE="button" VALUE="stop" ONCLICK="doStop();"></P>
+<p><input type=button id="cancel" onclick="doCancel();" value="Cancel">
+<BR><BR>
+<table>
+    <tr>
+    <td><Textarea id="textDuration" cols="10" rows="1">10000</Textarea>
+	<input type=button onclick="Javascript:setAudioDuration();" value="setDuration">
+	</td>
+	 </tr>
+	  <tr>
+    <td><Textarea id="textLocalName" cols="15" rows="3">myLocalAudio</Textarea>
+	<input type=button onclick="Javascript:setAudioLocalName();" value="setAudioFileName"></td>
+	 </tr>
+ <tr>	<td><select name="SelectCodec" id="SelectCodec" onchange="selectCodecType();">
+                <OPTION VALUE="">Select Codec</OPTION>
+                <option value="AAC">AAC</option>
+                <option value="AMR_NB">AMR_NB</option>
+                <option value="AMR_WB">AMR_WB</option>
+                <option value="">EMPTY</option>
+                </select>
+           <input type="button" onclick="Javascript:setCodecType();" value="setCodec" />   
+</td></tr>
+</table>
+<hr>
+<table>
+<tr>
+Select DestinationType:<select name="SelectDestination" id="SelectDestination" onchange="doDestination();">
+<OPTION VALUE="">Select Destination type</OPTION>
+<option value="HTTP">HTTP</option>
+<option value="QUALIFIEDHTTP">QUALIFIED HTTP</option>
+<option value="FTP">FTP</option>
+<option value="QUALIFIEDFTP">QUALIFIED FTP</option>
+<option value="FILE1">FILE1</option>
+<option value="FILE2">FILE2</option>
+<option value="INVALIDFILE">INVALIDFILE</option>
+<option value="INVALIDHTTP">INVALIDHTTP</option>
+<option value="INVALIDFTP">INVALIDFTP</option>
+</select>
+</tr>
+	
+<tr>
+	<td><Textarea id="txtDestination" cols="21" rows="2"></Textarea></td>
+	<td><input type="button" onclick="Javascript:setDestination();" value="setDestination" /> </td>  
+	</tr>
+<tr>
+	<td><Textarea id="txtUserName"cols="10" rows="1">ftpadmin</Textarea></td>
+	<td><input type="button" onclick="Javascript:setUserName();" value="setUserName" /> </td> 
+	</tr>
+<tr>
+	<td><Textarea id="txtPassword"cols="10" rows="1">ftpadmin</Textarea></td>
+	<td><input type="button" onclick="Javascript:setPassword();" value="setPassword" /> </td> 
+	</tr>
+
+</table>
+
+<input type="radio" name="group1" value="javascript">javascript event
+<br>
+<input type="radio" name="group1" value="HTML">Navigate to HTML Page
+<br>
+<input type="radio" name="group1" value="JSON">JSON event
+<br>
+<input type="radio" name="group1" value="Empty">EmptyEvent
+<br>
+<input type="radio" name="group1" value="URLEmpty">Detach
+<br>
+
+
+<br>
+
+    <input type=button onclick="Javascript:attachAudioCaptureEvent();" value="AttachEvent">
+<hr>
+
+<BR>
+<P><INPUT TYPE="button" VALUE="Quit" ONCLICK="Quit();"></P>
+
+</form>
+</body>
+</html>
+<script language="javascript">
+var selectedVisibility=""; //Selected Visibility.
+var selectedBorder=""; //Selected Aim in the list.
+
+function setAudioLocalName()
+{
+var myLocalAudioName=frm.textLocalName.value;
+generic.InvokeMETAFunction('audioCapture', 'name:'+myLocalAudioName);
+message.innerHTML="setNameto"+myLocalAudioName;
+}
+
+function setAudioDuration()
+{
+var durationVal=frm.textDuration.value;
+generic.InvokeMETAFunction('audioCapture', 'duration:'+durationVal);
+message.innerHTML="setDurationto"+durationVal;
+}
+
+function setCodecType()
+{
+  var CodecValue=document.getElementById("SelectCodec").value;
+  //alert(CodecValue);  
+  generic.InvokeMETAFunction('audioCapture', 'codec:'+CodecValue);
+  message.innerHTML="setCodec"+CodecValue;
+}
+
+
+function setDestination()
+{
+var Destination = frm.txtDestination.value;
+var dest = "url('"+Destination+"')";
+generic.InvokeMETAFunction('audioCapture', 'destination:'+dest);
+message.innerHTML="Destination set to "+Destination;
+}
+
+
+function setUserName()
+{
+var UName = frm.txtUserName.value;
+generic.InvokeMETAFunction('audioCapture', 'username:'+UName);
+message.innerHTML="User Name set to "+UName;
+}
+
+function setPassword()
+{
+var UPass = frm.txtPassword.value;
+generic.InvokeMETAFunction('audioCapture', 'password:'+UPass);
+message.innerHTML="Password set to "+UPass;
+}
+
+function attachAudioCaptureEvent()
+{
+message.innerHTML="Response will appear here..";
+
+
+  	for (var i=0; i < frm.group1.length; i++)
+   	{   
+      		if (frm.group1[i].checked)
+      		{
+      			var type = frm.group1[i].value;
+      		}
+   	}	
+   	
+	if(type=="javascript")
+	{
+		generic.InvokeMETAFunction("audioCapture", "audioSaveEvent:url('javascript:onCaptured('%s')')"); 
+	}
+    else if(type=="HTML")
+	{
+		generic.InvokeMETAFunction("audioCapture", "audioSaveEvent:url('http://10.233.85.82/Navigate.html?Resposnse=%s')')"); 
+	}
+	else if(type=="JSON")
+	{
+		generic.InvokeMETAFunction("audioCapture", "audioSaveEvent:url('javascript:onCapturedjson(%json)')"); 
+	}
+	else if(type=="Empty")
+	{
+	generic.InvokeMETAFunction("audioCapture", "audioSaveEvent:"); 
+	}
+	else if(type=="URLEmpty")
+	{
+	generic.InvokeMETAFunction("audioCapture", "audioSaveEvent:url('')"); 
+	}
+
+}
+
+function onCaptured(response)
+{
+	message.innerHTML = "Javascript response ="+response;
+}
+
+function onCapturedjson(jsondata)
+{
+	message.innerHTML = "JSON response: " +jsondata.transferResult;
+}
+
+
+function doStart()
+{
+message.innerHTML="start";
+generic.InvokeMETAFunction("audioCapture", "start"); 
+}
+
+function doStop()
+{
+message.innerHTML="stop";
+generic.InvokeMETAFunction("audioCapture", "stop"); 
+}
+
+function doCancel()
+{
+message.innerHTML="cancel";
+generic.InvokeMETAFunction("audioCapture", "cancel"); 
+}
+
+function doDestination()
+{
+    var w = frm.SelectDestination.selectedIndex;
+    DestValue = frm.SelectDestination.options[w].value;
+    if(DestValue=="HTTP")
+    {
+    frm.txtDestination.value="http://10.233.85.82/NEON/ReceivedFiles/Upload.aspx";
+    }
+    else if(DestValue=="QUALIFIEDHTTP")
+    {
+    frm.txtDestination.value="http://10.233.85.82:80/NEON/ReceivedFiles/Upload.aspx";
+    frm.txtUserName.value="";
+    frm.txtPassword.value="";
+    }
+    else if(DestValue=="FTP")
+    {
+    frm.txtDestination.value="ftp://10.233.85.82/Received/audioFileInFTP.wav";
+    frm.txtUserName.value="ftpadmin";
+    frm.txtPassword.value="ftpadmin";
+    
+    }
+    else if(DestValue=="QUALIFIEDFTP")
+    {
+    frm.txtDestination.value="ftp://ftpadmin:ftpadmin@10.233.85.82/Received/audioinQFTP.wav";
+    frm.txtUserName.value="";
+    frm.txtPassword.value="";
+    
+    }
+    else if(DestValue=="FILE1")
+    {
+    frm.txtDestination.value="file://\\Temp\\CapturedaudioTemp.wav";
+    frm.txtUserName.value="";
+    frm.txtPassword.value="";
+    }
+    else if(DestValue=="FILE2")
+    {
+     frm.txtDestination.value="file://\\Application\\Airbeam\\CapturedaudioAPPAir.wav";
+     frm.txtUserName.value="";
+     frm.txtPassword.value="";
+    }
+    else if(DestValue=="RELATIVEHTTPDOWN")
+    {
+     frm.txtDestination.value="../ReceivedFiles/Upload.aspx";
+     frm.txtUserName.value="uploadtest";
+     frm.txtPassword.value="letmein";
+     
+    }
+    else if(DestValue=="RELATIVEHTTPUP")
+    {
+     frm.txtDestination.value="../ReceivedFiles/Upload.aspx";
+     frm.txtUserName.value="uploadtest";
+     frm.txtPassword.value="letmein";
+    }
+    else if(DestValue=="RELATIVEHTTPCURRENT")
+    {
+     frm.txtDestination.value="../ReceivedFiles/./Upload.aspx";
+     frm.txtUserName.value="uploadtest";
+     frm.txtPassword.value="letmein";
+    }
+    else if(DestValue=="INVALIDFILE")
+    {
+     frm.txtDestination.value="file://\\And\\data\\audioAndroidData.wav";
+     frm.txtUserName.value="";
+    frm.txtPassword.value="";
+    }
+    else if(DestValue=="INVALIDHTTP")
+    {
+    frm.txtDestination.value="http://tand";
+    frm.txtUserName.value="uploadtest";
+    frm.txtPassword.value="letmein";
+    }
+    else if(DestValue=="EMPTYHTTP")
+    {
+    frm.txtDestination.value="http://";
+    frm.txtUserName.value="uploadtest";
+    frm.txtPassword.value="letmein";
+    }
+    else if(DestValue=="INVALIDFTP")
+    {
+    frm.txtDestination.value="ftp://tandv";
+    frm.txtUserName.value="tandv";
+    frm.txtPassword.value="H0neymoon";
+    }
+    else if(DestValue=="EMPTYFTP")
+    {
+    frm.txtDestination.value="ftp://";
+    frm.txtUserName.value="tandv";
+    frm.txtPassword.value="H0neymoon";
+    }
+}
+
+</script>
+

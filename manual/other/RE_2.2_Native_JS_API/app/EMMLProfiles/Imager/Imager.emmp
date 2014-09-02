@@ -1,0 +1,28 @@
+.Imagecaptureftp{
+    imager-left:30;
+    imager-top:90;
+    imager-height:100;
+    imager-width:200;
+    imager-aim:on;
+    imager-lamp:off;
+    imager-Username:ftpadmin;
+    imager-Password:ftpadmin;
+	imager:enabled;
+    imager-destination:url('ftp://192.168.6.18:21/img.bmp');
+    imager-imagerevent:url('Javascript:myevent('%s');');
+    }
+
+
+
+.Imagecapturehttp{
+    
+    imager-left:30;
+    imager-top:90;
+    imager-height:100;
+    imager-width:200;
+    imager-aim:on;
+    imager-lamp:off;
+	imager:enabled;
+    imager-destination:url('http://192.168.6.18/NEON/ReceivedFiles/Upload.aspx');
+    imager-imagerevent:url('Javascript:myevent('%s');');
+    }

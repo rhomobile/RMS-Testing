@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+        <title>JavaScript - Detecting keystrokes</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <style type="text/css">
+            body {background: #f2f2f2; color: #333333; font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; position: relative; min-height: 100%; height: 100%; min-width: 100%; width: 100%; margin: 0 auto;}
+            h1, h2, h3, h4, h5, h6 {margin-top: 0.5em; margin-bottom: 0.5em; font-weight: bold;}
+            label { cursor: pointer; font-weight: bold; margin: 0;}
+            .container {width: 1152px; margin: 0 auto; overflow: auto;}
+            .eventbox {background-clip: padding-box; background-color: #FFFFFF; border: 2px solid #2EB2DC; border-radius: 4px; float: left; margin: 2px; padding: 4px; min-width: 120px;}
+            .clearfix {*zoom: 1;}
+            .clearfix:before, .clearfix:after {display: table; content: ""; line-height: 0;}
+            .clearfix:after {clear: both;}
+            #writeroot {max-height: 500px; overflow: auto; margin-top: 1em;}
+        </style>
+    </head>
+    <body>
+        <div class="container clearfix">
+            <h1 id="link7">Keycode Test</h1>
+            <p>
+                This application will show the event output for keydown, keypress and keyup events for all keys, based on
+                the state of the corresponding checkboxes. All keys fire a keydown and keyup event, all character keys and
+                symbol keys fire a keypress as well, while special (non-character, ex. Ctrl, Alt, Tab) do not. The event
+                output will provide the Event Type, keyCode, which, charCode and the key itself.
+            </p>
+            <p>
+                There are also custom hotkey events defined for Ctrl+0 - Ctrl+9 and Ctrl+A - Ctrl+Z. These hotkeys will
+                fire their event output regardless of the checkbox states. If the checkboxes are checked, you will see
+                the output for the standard events as well as the hotkey event.
+            </p>
+            <form id="testForm">
+                <label><input id="keydown" type="checkbox">keydown</label>
+                <label><input id="keypress" type="checkbox">keypress</label>
+                <label><input id="keyup" type="checkbox">keyup</label>
+                <button id="clearWriteroot">Clear Output</button>
+            </form>
+            <div id="writeroot" class="clearfix"></div>
+        </div>
+
+        <script src="jquery-1.8.3.min.js"></script>
+        <script src="jquery.hotkeys.js"></script>
+        <script type="text/javascript">
+            function setEvents() {
+                document['on' + this.id] = (this.checked) ? detectEvent : noop;
+            }
+
+            function detectEvent(e) {
+                var s = '', evt = e || window.event, etype = (evt.handleObj) ? '.' + evt.handleObj.namespace : '',
+                    keycode = evt.which || evt.keyCode,
+                    special = evt.type !== "keypress" && jQuery.hotkeys.specialKeys[keycode],
+                    character = String.fromCharCode(keycode).toLowerCase(),
+                    key = (evt.data) ? evt.data : ((special === false || typeof special == 'undefined') ? character : special);
+                s = '<strong>Event: </strong>' + evt.type + etype + '<br />';
+                s += '<strong>keyCode: </strong>' + evt.keyCode + '<br />';
+                s += '<strong>which: </strong>' + evt.which + '<br />';
+                s += '<strong>charCode: </strong>' + evt.charCode + '<br />';
+                s += '<strong>Key: </strong>' + key + '<br />';
+                writeData(s);
+                return true;
+            }
+
+            function noop() {/* nothing*/}
+
+            function clear() {
+                writeroot.innerHTML = '';
+                return false;
+            }
+
+            function writeData(msg) {
+                writeroot.innerHTML += '<div class="eventbox">' + msg + '</div>';
+                writeroot.scrollTop = writeroot.scrollHeight;
+            }
+
+            var Shortcut = {
+                hotkeys : false,
+                // use namespace to allow removing individual hotkeys or similar group of hotkeys
+                // add key combo to namespace but remove special chars to avoid unbind errors
+                // unbind old handler before adding new one
+                add : function(namespace, combo, callback) {
+                    if (this.hotkeys) {
+                        namespace = this.setNamespace(namespace, combo);
+                        this.remove(namespace);
+                        $(document).bind(namespace, combo, callback);
+                    }
+                },
+                remove : function(namespace, combo) {
+                    if (this.hotkeys) {
+                        namespace = this.setNamespace(namespace, combo);
+                        $(document).unbind(namespace);
+                    }
+                },
+                removeAll : function(namespace) {
+                    $(document).unbind(namespace);
+                },
+                setNamespace : function(namespace, combo) {
+                    return (combo) ? namespace + '.' + combo.replace(/[^a-zA-Z0-9]+/g, '') : namespace;
+                }
+            };
+
+            var alphanum = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789', writeroot = document.getElementById('writeroot');
+
+            document.getElementById('testForm').reset();
+            document.getElementById('clearWriteroot').onclick = clear;
+
+            var x = document.getElementById('testForm').getElementsByTagName('input');
+            for (var i = 0; i < x.length; i++) {
+                x[i].onclick = setEvents;
+                if (x[i].checked) { x[i].onclick(); }
+            }
+
+            if (jQuery.hotkeys) {
+                jQuery.hotkeys.global = true;
+                Shortcut.hotkeys = true;
+                for (var j = 0; j < alphanum.length; j++) {
+                    $(document).bind('keydown', ('Ctrl+' + alphanum.charAt(j)).toString(), false); //disable default event handler
+                    Shortcut.add('keydown', ('Ctrl+' + alphanum.charAt(j)).toString(), detectEvent); //bind custom handler
+                }
+            }
+        </script>
+    </body>
+</html>

@@ -1,0 +1,63 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+
+<META HTTP-Equiv="FileTransfer" content="TransferEvent:url('Javascript:MyTransferEvent('%s');');Source:url('file://\Application\FileCollections\myfile.txt');Destination:url('http://10.233.85.82/NEON/ReceivedFiles/Upload.aspx')">
+</head>
+<body>
+<br><br><br><br>
+<div id="myResponse">FileTransferResult:</div><BR>
+<p>Device to HTTP Stress</p>
+<BR><BR><BR><BR><BR><BR><BR>
+<div id="nos">X Value</div>
+<P><INPUT TYPE="button" VALUE="TransDevicetoHTTP" ONCLICK="doCapture();"></P>
+
+<P><INPUT TYPE="button" VALUE="Back" ONCLICK="location.href='FileManagement_Index.html'"></P>
+<P><INPUT TYPE="button" VALUE="Transfer" ONCLICK="Transfer();"></P>
+</body>
+</html>
+
+
+<SCRIPT type="text/javascript">
+var generic = new ActiveXObject("PocketBrowser.Generic");
+	
+var iCount = 0;
+var jCount = 0;
+	
+	function Transfer()
+	{
+	generic.InvokeMETAFunction('FileTransfer', 'Transfer');
+	}
+function doCapture()
+{
+	  if(iCount <= 50000)
+		{
+			fileTransfer.setEMML("Source:url('file://\\Application\\FileCollections\\myfile.txt');Destination:url('http://10.233.85.82//NEON//ReceivedFiles//Upload.aspx');Transfer");
+			nos.innerHTML = iCount;
+			captureLoop();	
+		}
+		
+		iCount++;
+		
+}
+
+
+
+function captureLoop()
+{
+	setTimeout("doCapture()", 30000);
+}
+
+function MyTransferEvent(response) {
+    if(response=="Received")
+    {
+    jCount++;
+    }
+     
+     myResponse.innerHTML="response"+response+"   SuccessCount:- "+jCount;
+	
+	
+    }
+
+</SCRIPT>

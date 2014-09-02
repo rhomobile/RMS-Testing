@@ -1,0 +1,56 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+<META HTTP-Equiv="quitbutton" Content="visibility:visible">
+<META HTTP-Equiv="quitbutton" Content="Left:10">
+<META HTTP-Equiv="quitbutton" Content="Top:10">
+
+<META HTTP-Equiv="EMMLProfile" Content="source:url('http://157.235.07.203/EMML_Profiles/Signature/Imager.emmp'); import:myImager;">
+<META HTTP-Equiv="EMMLProfile" Content="apply:myImager.Imagecapture;">
+
+<!--<META HTTP-Equiv="imager" Content="left:30;top:90;height:100;width:200;aim:off;lamp:off;Username:ftpadmin;Password:ftpadmin;
+Protocol:ftp;DestinationURL:10.233.85.82;enabled">  -->
+
+
+</head>
+<body>
+<h1>Named Imager EMML Profile Test</h1>
+<h2>EMML profile is imported and Imagecapture class is Applied and this should <B>not</B> persist across pages After clearing this profile.</h2>
+<h3>Click on Capture button to capture Image and send it to FTP server.</h3>
+<p>Send the Image to FTP</p>
+<BR><BR><BR><BR><BR><BR><BR>
+<P><INPUT TYPE="button" VALUE="Capture" ONCLICK="doCapture();"></P>
+<p><input type=button value="Clear Imported Profile" onclick="clearProfile();"></p>
+<P><INPUT TYPE="button" VALUE="Disable" ONCLICK="doDisable();"></P>
+
+<h3>Browse to another page to check for EMML profile persistance.</h3>
+<h4><a href="Persistant_Imager_Test.html">Click here to go to another page.</a></h4>
+<hr />
+<a href="../EMMLProfilesIndex.html">Back to EMML Profile Index</a>
+
+
+</body>
+</html>
+
+
+<script type="text/javascript">
+var objGeneric = new ActiveXObject("PocketBrowser.Generic");
+	
+function doCapture()
+{
+	objGeneric.InvokeMETAFunction('imager', 'capture');
+}
+
+function doDisable()
+{
+	objGeneric.InvokeMETAFunction('imager', 'disabled');
+}
+
+function clearProfile() {
+    Generic.InvokeMETAFunction('EMMLProfile', 'clear');
+}
+
+</script>
+
+

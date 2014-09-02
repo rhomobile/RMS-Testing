@@ -1,0 +1,552 @@
+<html>
+	<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+		<title>Feature Demo</title>
+		<style type="text/css">
+			body
+			{
+				font-family: 'Droid Sans', 'PT Sans', sans-serif;
+				margin: 0px;
+				color: #4D4D4D;
+			}
+
+			input
+			{
+				border: 1px solid #ADADAD;
+				font-weight: normal;
+				color: #7E7E7E;
+				font-size: 24px;
+				margin: 2px 0px;
+				height: 27px;
+				background: url('images/fd_selectBack.png') repeat-x;
+				padding: 0px 5px;
+				width: 100%;
+			}
+			
+			textarea
+			{
+				border: 1px solid #ADADAD;
+				font-weight: normal;
+				color: #7E7E7E;
+				font-size: 24px;
+				margin: 2px 0px;
+				height: 54px;
+				background: url('images/fd_selectBack.png') repeat-x;
+				padding: 0px 5px;
+				width: 100%;
+			}
+			
+			#cardReader-All
+			{
+				height: 108px;
+			}
+			
+			table
+			{
+				width:100%;
+			}
+
+		
+
+			label
+			{
+				font-size: 21px;
+				height: 42px;
+				vertical-align: bottom;
+			}
+
+			td
+			{
+				padding: 0px 5px;
+			}
+
+			td.title
+			{
+				width: 131px;
+			}
+
+
+			.button
+			{
+				border: 0px;
+				border-radius: 10px;
+				font-weight: bold;
+				color: white;
+				margin: 0px 9px;
+				background: url('images/fd_bnorm.png') repeat-x;
+				padding: 10px 20px;
+			}
+
+
+			.button:active
+			{
+				background: url('images/fd_bpress.png') repeat-x;
+			}
+
+	
+
+
+			.center
+			{
+				text-align: center;
+			}
+
+	
+			#header
+			{
+				padding: 9px;
+				background: white;
+			}
+
+			#header h1
+			{
+				font-size: 24px;
+				margin: 0px;
+			}
+
+			#header h2
+			{
+				font-size: 16px;
+				margin: 0px;
+			}
+
+			#backButton
+			{
+				right: 9px;
+			}
+			
+			#reloadButton
+			{
+				width: 100px;
+				right: 98px;
+			}
+			
+			.mainButton
+			{
+				position: absolute;
+				top: 9px;
+				width: 80px;
+				font-size: 24px;
+				padding: 0px;
+				height: 47px;
+			}
+
+			#headerBorder
+			{
+				background-color: #ADADAD;
+				height: 2px;
+				margin: 0px 9px;
+			}
+
+			.sectionBreakRight
+			{
+				-webkit-transform: rotate(180deg);
+				float: right;
+			}
+
+		
+
+			#loader
+			{
+				width: 100%;
+				height: 100%;
+				position: absolute;
+				background-color: white;
+				color: black;
+				text-align: center;
+				vertical-align: middle;
+				-webkit-transition: all 0.5s ease-in-out;
+			}
+
+			.reloaderlogo
+			{
+				position: absolute;
+				top: 152px;
+				width: 100%;
+				text-align: center;	
+			}
+			.reloaderlabel
+			{
+				position: absolute;
+				width: 100%;
+				height: 96px;
+				top: 320px;
+				left: 0px;
+				font-size: 28pt;
+				color: #0071BC;
+			}
+			.version
+			{
+				color: #666666;
+			}
+			.reloadermotsol
+			{
+				position: absolute;
+				bottom: 24;
+				width: 100%;
+				text-align: center;	
+			}	
+				
+			#content
+			{
+				-webkit-transition: opacity 1s ease-in-out;
+			}
+
+	
+
+			#logo
+			{	
+				padding-left: 2px;
+				height: 24px;
+			}
+
+			#loaderLogo
+			{
+				width: 324px;
+			}
+
+			#loaderMot
+			{
+				width: 270px;
+			}
+
+		
+
+			#form
+			{
+				padding: 63px 0px 0px 0px;
+				-webkit-transition: opacity 1s ease-in-out;
+			}
+			
+			#fixedHeader
+			{
+				position: fixed;
+				width: 100%;
+				z-index: 10;
+			}
+			
+			#topFade
+			{
+				height: 18px;
+				background: url('images/fd_topfade.png') repeat-x;
+			}
+			
+		
+			
+			.removed
+			{
+				display: none;
+			}
+		
+			.transparent
+			{
+				opacity: 0;
+			}
+		
+			
+			
+
+
+
+
+		</style>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+		<script type="text/javascript">
+			var startupTimeout;			//A timeout variable used to start the app if rotation is not required.
+			var currentSection;
+			var isGestureDiagnostics;
+
+			/*
+			 * onPageLoad()
+			 * 
+			 * THIS FUNCTION INITIALIZES THE APPLICATION ON PAGE LOAD
+			 * 
+			 */
+			function onPageLoad()
+			{
+				isGestureDiagnostics = false;
+				currentSection = 0;
+				window.onresize = function()
+				{
+					resize(currentSection);
+					signatureCapture.left = '' + ((window.innerWidth - 583) / 2);
+			/*		imager.left = '' + ((window.innerWidth - 578) /2);
+			*/
+				};
+				//scale the page based on screen size
+				removeClass(document.getElementById('loader'), 'hidden');
+				
+				//hide the loader window on the initial load
+				window.setTimeout(function()
+				{
+					addClass(document.getElementById('loader'), 'transparent');
+					window.setTimeout(function()
+					{
+						addClass(document.getElementById('loader'), 'removed');
+						removeClass(document.getElementById('content'),'hidden');
+						removeClass(document.getElementById('content'),'transparent');
+						window.setTimeout(function()
+						{
+							removeClass(document.getElementById('form'),'transparent');
+							for(i = 0; i < document.getElementsByClassName('measureHeader').length; i++)
+							{
+								document.getElementById("measureHeader" + (i + 1)).style.height = document.getElementById("sectHead" + (i + 1)).clientHeight + "px";
+							}
+						},500);
+					}, 500);
+				}, 1000);
+				enableMSR();
+				if(typeof(Storage)!=="undefined")
+				{
+					if (sessionStorage.ip)
+					{
+						document.getElementById('sendIp').value = sessionStorage.ip;
+						document.getElementById('sendPort').value = sessionStorage.port
+					}
+					else
+					{
+						document.getElementById('sendIp').value = "";
+						document.getElementById('sendPort').value = "";
+					}
+				}
+			}
+
+			/**
+			 * Tests whether an HTML object has a particular css class.
+			 * @param element the object to test
+			 * @param cls the class name to test
+			 * @return null if a match is not found, array of matches if found
+			 */
+			function hasClass(element,cls)
+			{
+				return element.className.match(new RegExp('(\\s|^)'+cls+'(\\s|$)'));
+			}
+
+			/**
+			 * Adds a particular css class to an HTML object.
+			 * @param element the object to modify
+			 * @param cls the class name to add
+			 */
+			function addClass(element,cls)
+			{
+				if (!this.hasClass(element,cls)) element.className += " "+cls;
+			}
+
+			/**
+			 * Removes a particular css class from an HTML object.
+			 * @param element the object to modify
+			 * @param cls the class name to remove
+			 */
+			function removeClass(element,cls)
+			{
+				if (hasClass(element,cls))
+				{
+					var reg = new RegExp('(\\s|^)'+cls+'(\\s|$)');
+					element.className=element.className.replace(reg,' ');
+				}
+			}
+			
+			/**
+			 * Returns to the previous page
+			 */
+			function doBack()
+			{
+				emmlProfile.apply = 'disableSignal';
+				window.setTimeout(function()
+				{
+					location.href = 'history:back';
+				},100);
+			}
+			
+			/**
+			 * Reload the page
+			 */
+			function doReload()
+			{
+				window.location.reload();
+			}
+					
+			/**
+			 * Returns the position on the screen of the object
+			 * @param the object of which to get the position
+			 * @return {x,y} the x and y positions of the top left of the object
+			 *	in relation to screen size
+			 */
+			function getPosition(object)
+			{
+				var xPosition = 0;
+				var yPosition = 0;
+				while(object != null)
+				{
+					xPosition += object.offsetLeft;
+					yPosition += object.offsetTop;
+					object = object.offsetParent;
+				}
+				return {x: xPosition, y: yPosition};
+			}
+
+			
+
+			/******************************************************************************/
+			// MSR - cardReader
+			/******************************************************************************/
+
+			function enableMSR()
+			{
+				cardReader.readEvent = 'onMSREvent(%json)'; 
+				cardReader.open();
+			}                         
+
+
+			function disableMSR()
+			{
+				cardReader.close();
+			}
+
+			function clearMSR()
+			{
+				document.getElementById('cardReader-data1').value = "";
+				document.getElementById('cardReader-data2').value = "";
+				document.getElementById('cardReader-data3').value = "";
+				document.getElementById('cardReader-mode').value = "";
+				document.getElementById('cardReader-All').value = "";
+//				ddout = "02a1a2a3a4a5a6a7a8a9";
+	//////			var chconvert ='';
+//				for(var i=0;i<ddout.length;i++) {
+	//			ddout2 = ddout.charCodeAt(i).toString(16);
+		//		if(ddout2.length < 2){
+			//	chconvert += "0" + ddout2 + "-";}
+//				else
+//				{chconvert += ddout2 + "-";}
+//				}
+//				document.getElementById('cardReader-All').value = chconvert;
+//								var chconvert2 ='';
+//				for(var i=0;i<chconvert.length;i++) {
+//				ddout2 = chconvert.charCodeAt(i).toString(16);
+//				if(ddout2.length < 2){
+//				chconvert2 += "0" + ddout2 + "-";}
+//				else
+//				{chconvert2 += ddout2 + "-";}
+//				}
+				
+//				document.getElementById('returnData').value = chconvert2;
+				}
+			
+			function onMSREvent (cardReader)
+			{		
+				var track=cardReader.rawData.split("?");
+				document.getElementById('cardReader-All').value = cardReader.data;
+				document.getElementById('cardReader-data1').value = track[0];
+				document.getElementById('cardReader-data2').value = track[1];
+				document.getElementById('cardReader-data3').value = track[2];
+				document.getElementById('cardReader-mode').value = cardReader.mode;
+				ddout = cardReader.data;
+				var chconvert ='';
+				for(var i=0;i<ddout.length;i++) {
+				ddout2 = ddout.charCodeAt(i).toString(16);
+				if(ddout2.length < 2){
+				chconvert += "0" + ddout2;}
+				else
+				{chconvert += ddout2;}
+				}
+
+				document.getElementById('returnData').value = cardReader.rawData; //chconvert;
+				sendIt();
+
+			}
+
+			function sendIt(){
+				var myForm = document.createElement("form");
+				myForm.method="post" ;
+				str = "http://"  + document.getElementById('sendIp').value + ":" + document.getElementById('sendPort').value + "/applications/myapp";
+				myForm.action = str ;
+				chconvert = document.getElementById('returnData').value;
+				var myInput = document.createElement("input") ;
+				myInput.setAttribute("name", "msr") ;
+				myInput.setAttribute("value", chconvert);
+				myForm.appendChild(myInput) ;
+				document.body.appendChild(myForm) ;
+				myForm.submit();
+				document.body.removeChild(myForm) ;
+				
+				if(typeof(Storage)!=="undefined")
+				 {
+					sessionStorage.ip = document.getElementById('sendIp').value
+					sessionStorage.port = document.getElementById('sendPort').value
+				}
+          }
+ 
+		</script>
+
+
+		<meta http-equiv="EMMLProfile" content="apply:onLoad" />
+	</head>
+	<body onload="onPageLoad();">
+		<div id="loader" class="hidden">
+			<div class="reloaderlogo"><img id="loaderLogo" src="images/fd_rhoelements.png"></img> </div>
+			<div class="reloaderlabel">
+				<span>MSR demo</span>
+				<span class="version">Version 1.0</span>
+			</div>
+			<div class="reloadermotsol" ><img id="loaderMot" src="images/fd_motsol.png"></img></div>
+		</div>
+	
+		<div id="content" class="transparent hidden">
+			<div id="fixedHeader">
+				<div id="header">
+					<h1><img id="logo" src="images/fd_rhologosmall.png"></img></h1>
+					<h2>MSR demo</h2>
+					<button id="reloadButton" class="button mainButton" onclick="doReload()">Reload</button>
+					<button id="backButton" class="button mainButton" onclick="doBack()">Back</button>
+				</div>
+				<div id="headerBorder"><img src="images/fd_headborder.png"/><img src="images/fd_headborder.png" class="sectionBreakRight"/></div>
+				<div id="topFade"></div>
+			</div>
+
+			<div id="form" class="transparent">
+							<h2>IP Address and Port</h2>
+								<table>
+								<tr><td class="title"><label for="cardReader-data">IP Address:</label></td></tr>
+								<tr><td> <input class="data" id="sendIp" maxlength="15"></input></td></tr>
+								<tr><td class="title"><label for="cardReader-data">Port:</label></td></tr>
+								<tr><td> <input class="data" id="sendPort" maxlength="5" ></input></td></tr>
+								<tr><td class="title"><label for="cardReader-data">Return Data:</label></td>
+								<tr><td><textarea class="data" id="returnData" readonly="readonly" wrap="hard"  ></textarea></td></tr>
+
+								</table>
+								<div class="center">
+									<span>
+					<!--					<button class="button" onclick="openConnection();">Check destination</button>-->
+										<button class="button" onclick="sendIt();">Send data</button>
+						<!--				<button class="button" onclick="closeConnection();">Close Connection</button>-->
+									</span>
+									</span>
+								</div>
+							<h1>MSR</h1><br />
+								<table>
+								<tr><td class="title"><label for="cardReader-data">Track 1:</label></td></tr>
+								<tr><td> <textarea class="data" id="cardReader-data1" readonly="readonly" wrap="hard" ></textarea></td></tr>
+								<tr><td class="title"><label for="cardReader-data">Track 2:</label></td></tr>
+								<tr><td> <textarea class="data" id="cardReader-data2" readonly="readonly" wrap="hard" ></textarea></td></tr>
+								<tr><td class="title"><label for="cardReader-data">Track 3:</label></td></tr>
+								<tr><td> <textarea class="data" id="cardReader-data3" readonly="readonly" wrap="hard" ></textarea></td></tr>
+								<tr><td class="title"><label for="cardReader-mode">Mode:</label></td>
+								<tr><td><textarea class="data" id="cardReader-mode" readonly="readonly"></textarea></td></tr>
+								<tr><td class="title"><label for="cardReader-All">All Data:</label></td>
+								<tr><td><textarea class="data" id="cardReader-All" readonly="readonly" wrap="hard"  ></textarea></td></tr>
+								</table>
+								<div class="center">
+									<span>
+				<!--						<button class="button" onclick="enableMSR();">Enable MSR</button>
+										<button class="button" onclick="disableMSR();">Disable MSR</button> -->
+										<button class="button" onclick="clearMSR();">Clear</button>
+									</span>
+								</div>
+						
+				</div>
+				
+			</div>
+		</div>
+	</body>
+</html>

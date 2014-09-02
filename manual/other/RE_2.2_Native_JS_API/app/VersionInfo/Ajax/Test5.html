@@ -1,0 +1,48 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+<script type="text/javascript">
+function showCustomer(str)
+{
+if (str=="")
+  {
+  document.getElementById("txtHint").innerHTML="";
+  return;
+  }  
+if (window.XMLHttpRequest)
+  {// code for IE7+, Firefox, Chrome, Opera, Safari
+  xmlhttp=new XMLHttpRequest();
+  }
+else
+  {// code for IE6, IE5
+  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+xmlhttp.onreadystatechange=function()
+  {
+  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    {
+    document.getElementById("txtHint").innerHTML=xmlhttp.responseText;
+    }
+}
+//alert(str);
+xmlhttp.open("GET","getcustomer.asp",true);
+xmlhttp.send();
+}
+</script>
+</head>
+<body>
+<form action=""> 
+<select name="TestIDbased" onchange="showCustomer(this.value)">
+<option value="">Select TestID</option>
+<option value="Sunil">Sunil</option>
+<option value="Joydeep">Joydeep</option>
+<option value="Rupayan">Rupayan</option>
+</select>
+</form>
+<br />
+<div id="txtHint">Table info will be listed here...</div>
+<br /><br /><br />
+<P><INPUT TYPE="button" VALUE="Back" ONCLICK="location.href='Ajaxindex.html'"></P>
+</body>
+</html>

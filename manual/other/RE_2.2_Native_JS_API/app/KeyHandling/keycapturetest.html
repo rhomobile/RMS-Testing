@@ -1,0 +1,35 @@
+﻿<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+<META HTTP-Equiv="KeyCapture" Content="KeyValue:All;Dispatch:False;KeyEvent:url('JavaScript:myFunc('key fired hello');')">
+
+
+<script language=javascript>
+
+function myFunc(string)
+{
+            alert(string);
+}
+</script>
+</head>
+<body>
+<form id="frmKeykandler" action="">
+<br><br><br><br><br>
+Key Handling issue test 2
+<br>
+<table>
+    <tr>
+        <td><a href="main"></a></td>
+    </tr>
+    <tr>
+        <Textarea id="txtInput" cols="15" rows="2"></Textarea>
+     </tr>
+ 
+    </table>
+    <P><INPUT TYPE="button" VALUE="alerttest" ONCLICK="myFunc('amit');"></P>  
+    <P><INPUT TYPE="button" VALUE="Back" ONCLICK="location.href='KeyHandling_Index.html'"></P>
+
+</form>
+</body>
+</html>

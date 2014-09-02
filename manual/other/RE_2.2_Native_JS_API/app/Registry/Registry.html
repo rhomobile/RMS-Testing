@@ -1,0 +1,143 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+    <title>PB Generic Registry Test</title>
+</head>
+<script language=javascript>
+
+var objGeneric = new ActiveXObject("PocketBrowser.Generic");
+var selectedVisibility=""; //Selected Visibility.
+
+function Quit()
+{
+    //alert('Quitting...');
+    objGeneric.InvokeMETAFunction("Application", "Quit"); 
+}
+
+
+function setRegistry()
+{
+	var sltdev = frm.hivedropdown.selectedIndex;
+	var selecteddev = frm.hivedropdown.options[sltdev].value;
+	//alert(selecteddev);
+	var keyValue = frm.txtKey.value;
+	//alert(keyValue);
+	var settingValue = frm.txtSetting.value;
+	//alert(settingValue);
+	var sltdev1=frm.typedropdown.selectedIndex;
+	var selecteddev1 = frm.typedropdown.options[sltdev1].value;
+	//alert(selecteddev1);
+	var sltdev2=frm.persdropdown.selectedIndex;
+	var selecteddev2 = frm.persdropdown.options[sltdev2].value;
+	//alert(selecteddev2);
+	var dataValue = frm.txtData.value;
+	//alert(dataValue);
+
+	objGeneric.InvokeMETAFunction('registry', 'hive:'+selecteddev);
+	objGeneric.InvokeMETAFunction('registry', 'key:'+keyValue);
+	objGeneric.InvokeMETAFunction('registry', 'setting:'+settingValue);
+	objGeneric.InvokeMETAFunction('registry', 'type:'+selecteddev1);
+	objGeneric.InvokeMETAFunction('registry', 'persistent:' + selecteddev2);
+	objGeneric.InvokeMETAFunction('registry', 'value:'+dataValue);
+	
+}
+
+function delRegistry()
+{
+	var sltdev = frm.hivedropdown.selectedIndex;
+	var selecteddev = frm.hivedropdown.options[sltdev].value;
+	//alert(selecteddev);
+	var keyValue = frm.txtKey.value;
+	//alert(keyValue);
+	var settingValue = frm.txtSetting.value;
+	//alert(settingValue);
+	var sltdev2=frm.persdropdown.selectedIndex;
+	var selecteddev2 = frm.persdropdown.options[sltdev2].value;	
+	
+	objGeneric.InvokeMETAFunction('registry', 'hive:'+selecteddev);
+	objGeneric.InvokeMETAFunction('registry', 'key:'+keyValue);
+	objGeneric.InvokeMETAFunction('registry', 'setting:'+settingValue);
+	objGeneric.InvokeMETAFunction('registry', 'persistent:'+selecteddev2);
+	objGeneric.InvokeMETAFunction('registry', 'delete');
+	//alert(strData);
+
+}
+
+function imageName()
+{
+
+	validexitCode = objGeneric.LaunchProcessNonBlocking('\\Application\\RegEdit.exe', '');
+}
+
+
+</script>
+
+<body>
+
+<form id="frm" action="">
+<INPUT align="center" type="button" value="Quit" onclick="Quit();">
+
+<input type=button onclick="imageName();" value="RegEdit">
+<BR>
+
+<hr>
+
+HIVE
+<select name="hivedropdown" id="hivedropdown">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="HKLM">HKLM</option>
+<option value="HKCU">HKCU</option>
+<option value="HKCR">HKCR</option>
+<option value="HKU">HKU</option>
+</select>
+<br><br>
+<tr>
+	<td>Key</td><td><Textarea id="txtKey"cols="21" rows="1">Software\Name</Textarea></td>
+	</tr>
+<br><br>
+<tr>
+	<td>Setting</td><td><Textarea id="txtSetting"cols="21" rows="1">Software</Textarea></td>
+	</tr>
+<br><br>
+	
+Type
+<select name="typedropdown" id="typedropdown">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="DWORD">DWORD</option>
+<option value="STRING">STRING</option>
+<option value="BINARY">BINARY</option>
+<option value="MULTISZ">MULTISZ</option>
+</select>
+<br><br>
+
+Persistent
+<select name="persdropdown" id="persdropdown">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="TRUE">TRUE</option>
+<option value="FALSE">FALSE</option>
+</select>
+<br><br>
+<tr>
+	<td>Value</td><td><Textarea id="txtData"cols="21" rows="1">Hello</Textarea></td>
+	</tr>
+
+
+<br>
+<!-- id="setReg" -->
+    	<input type=button onclick="Javascript:setRegistry();" value="Set Registry">
+<!-- id="getReg" -->
+	<input type=button onclick="Javascript:delRegistry();" value="Del Registry">
+<hr>
+
+<BR>
+<A HREF="./RegistryIndex.html">Back</A>
+
+<META HTTP-Equiv="quitbutton" Content="visibility:Hidden">
+<META HTTP-Equiv="backbutton" Content="visibility:Hidden">
+<META HTTP-Equiv="Reloadbutton" Content="visibility:Hidden">
+<META HTTP-Equiv="Minimizebutton" Content="visibility:Hidden">
+
+</form>
+</body>
+</html>

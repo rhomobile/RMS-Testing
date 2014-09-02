@@ -1,0 +1,97 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+
+</head>
+<body>
+<br /><br /><br />
+<div id="myNot">myNot..</div>
+<h4>Named DeviceApps EMML Profile Script verify</h4>
+<a href="javascript:doApplyProfile('myProfile.Alarm1');">Apply Alarm Profile</a><br />
+<a href="javascript:doApplyProfile('myProfile.Application1');">Apply Application Profile</a><br />
+<a href="javascript:doApplyProfile('myProfile.Backlight1');">Apply Backlight Profile</a><br />
+<a href="javascript:doApplyProfile('myProfile.Device1');">Apply Device Profile</a><br />
+<a href="javascript:doApplyProfile('myProfile.Hourglass1');">Apply Hourglass1 Profile</a><br />
+<a href="javascript:doApplyProfile('myProfile.Keylight1');">Apply Keylight1 Profile</a><br />
+<a href="javascript:doApplyProfile('myProfile.Notification1');">Apply Notification1 Profile</a><br />
+<a href="javascript:doApplyProfile('myProfile.PowerOn1');">Apply PowerOn1 Profile</a><br />
+<a href="javascript:doApplyProfile('myProfile.Reboot1');">Apply Reboot1 Profile</a><br />
+<a href="javascript:doApplyProfile('myProfile.ScreenOrientation1');">Apply ScreenOrientation1 Profile</a><br />
+<a href="javascript:doApplyProfile('myProfile.SIP1');">Apply SIP1 Profile</a><br />
+<a href="javascript:doApplyProfile('myProfile.SNTP');">Apply SNTP Profile</a><br />
+<a href="javascript:doApplyProfile('myProfile.Stylus1');">Apply Stylus1 Profile</a><br />
+<a href="javascript:doApplyProfile('myProfile.TextSize1');">Apply TextSize1 Profile</a><br />
+<a href="javascript:doApplyProfile('myProfile.Timer1');">Apply Timer Profile</a><br />
+<a href="javascript:doApplyProfile('myProfile.Volume1');">Apply Volume1 Profile</a><br />
+<a href="javascript:doApplyProfile('myProfile.Zoom1');">Apply Zoom1 Profile</a><br />
+<br><br><br>
+<input type=button value="ImportProfileold" onclick="importProfileold();">
+<input type=button value="ImportProfilenew" onclick="importProfilenew();"><br />
+<input type=button value="Clear Profile" onclick="clearProfile();">
+<input type=button value="Clear Alarm" onclick="clearAlarm();"><br />
+
+<h4>Browse to another page to check for EMML profile persistance.</h3>
+<h4><a href="Persistant_DA_Test.html">Click here to go to another page.</a></h4>
+<hr />
+<a href="Device Application.html">Back to Index page</a>
+<br /><P><INPUT TYPE="button" VALUE="Quit" ONCLICK="Quit();"></P>
+
+
+</body>
+</html>
+
+
+<SCRIPT LANGUAGE="JavaScript">
+      //var generic = new ActiveXObject("PocketBrowser.Generic");
+
+    function doTimer(time)
+     {
+          alert(time);
+     }
+
+  function setupNtfyArrjson(jsonObject) 
+   {
+    alert("Notify Event Fired"+jsonObject.notificationsArray.length);
+   }
+
+     function clearAlarm() 
+     {
+         alert("1");
+         generic.InvokeMETAFunction('Notification', 'Enumerate');
+         generic.InvokeMETAFunction('Alarm', 'clear');
+
+     }
+
+     function importProfileold()
+     {
+     generic.InvokeMETAFunction('EMMLProfile', "name:myProfile;import:url('http://10.233.85.82/NEON/DeviceApplication/DeviceApps.emmp');");
+     }
+     
+     
+     function importProfilenew()
+     {
+     generic.InvokeMETAFunction('EMMLProfile', "name:myProfile;importProfile:url('http://10.233.85.82/NEON/DeviceApplication/DeviceApps.emmp');");
+     }
+     
+     
+
+    function doApplyProfile(profile) 
+    {
+
+        generic.InvokeMETAFunction('EMMLProfile', 'Apply:'+profile);
+
+    }
+
+
+    function clearProfile() 
+    {
+        alert("clear");
+        generic.InvokeMETAFunction('EMMLProfile', 'clear:myProfile');
+    }
+
+function Quit()
+{
+	generic.InvokeMETAFunction("Application", "Quit");
+}
+</SCRIPT>

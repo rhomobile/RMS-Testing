@@ -1,0 +1,281 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+    <title>PB Device Application Test</title>
+<meta name="mobileoptimized" content="0" />
+
+
+</head>
+<body>
+
+<form id="frm" action="">
+
+<hr>
+SIP<br>
+Select Mode	<select name="sipMode" id="sipMode" onChange="selectSIPMode();">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="Manual">Manual</option>
+<option value="Automatic">Automatic</option>
+</select><br>
+<tr>
+      Left Position	<Textarea id="leftPosition" cols="10" rows="1"></Textarea>
+	</tr>
+	<input type=button onclick="setLeftPosition();" value="Left"><br>
+
+<tr>
+      Top Position	<Textarea id="topPosition" cols="10" rows="1"></Textarea>
+	 </tr>
+	 <input type=button onclick="setTopPosition();" value="Top"><br>
+<hr><br>
+
+<hr>
+SNTP<br>
+<tr>
+      ServerIP	<Textarea id="serversntp" cols="15" rows="1">10.233.85.82</Textarea></tr>
+	<input type=button onclick="setserverSNTP();" value="SNTP"><br>
+<hr><br>
+
+<hr>
+Stylus<br>
+Select Stylus	<select name="stylustag" id="stylustag" onChange="selectstylus();">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="Enabled">Enabled</option>
+<option value="Disabled">Disabled</option>
+<option value="Null">Null</option>
+</select>
+<hr><br>
+
+<hr>
+TextSize<br>
+Select TextSize	<select name="textsizetag" id="textsizetag" onChange="selecttextsize();">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="Largest">Largest</option>
+<option value="Larger">Larger</option>
+<option value="Invalid">Invalid</option>
+<option value="Null">Null</option>
+<option value="Smaller">Smaller</option>
+<option value="Smallest">Smallest</option>
+<option value="Medium">Medium</option>
+</select>
+<hr><br>
+
+<hr>
+Timer<br>
+<tr>
+	Interval	<Textarea id="txtinterval"cols="5" rows="1">5000</Textarea>
+	</tr>
+<br>
+<!--
+<input type="checkbox" name="purl">Timeout URL
+<input type="checkbox" name="pscript">Timeout JavaScript<br>-->
+Select Mode	<select name="sltTimer" id="sltTimer">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="purl">purl</option>
+<option value="pscript">pscript</option>
+</select>
+<br>
+<input type="button" value="Start" onClick="startTimer();">
+<input type="button" value="Stop" onClick="stopTimer();">
+<DIV ID="divTimer">Waiting...</DIV>
+<hr><br>
+
+<hr>
+Volume<br>
+<tr>
+      SetVolume	<Textarea id="volume" cols="7" rows="1">0xFFFF</Textarea>
+	</tr>
+
+	<input type=button onclick="setdevVolume();" value="volume"><br>
+<hr>
+
+<br><br>
+<A HREF="./Device Application.html">Back</A>
+
+<META HTTP-EQUIV="OnKey0x0d" content="javascript:doTest();">
+<!--<META HTTP-EQUIV="OnKey0x31" content="javascript:doTest1();">-->
+
+</form>
+</body>
+</html>
+<script language=javascript>
+
+
+var generic = new ActiveXObject("PocketBrowser.generic");
+
+
+function setserverSNTP()
+{
+    alert('Hello');
+	var ssntp=frm.serversntp.value;
+	var ssntpvalue="ServerIP:"+ssntp;
+	generic.InvokeMETAFunction('SNTP',ssntpvalue);
+	//generic.InvokeMETAFunction('SNTP','ServerIP:');
+}
+
+function selectstylus()
+{
+	var sltstylus=frm.stylustag.selectedIndex;
+	var selectedstylus = frm.stylustag.options[sltstylus].value;
+	switch(selectedstylus)
+	{
+		case 'Enabled':
+
+			generic.InvokeMETAFunction('Stylus', 'Enabled');
+			break;
+
+		case 'Disabled':
+
+			generic.InvokeMETAFunction('Stylus', 'Disabled');
+			break;		
+
+		case 'Null':
+
+			generic.InvokeMETAFunction('Stylus', '');
+			break;
+	}
+}
+
+function doTest()
+{
+	generic.InvokeMETAFunction('Stylus', 'Enabled');
+}
+
+//function doTest1() 
+//{
+//   generic.InvokeMETAFunction('timer', "Interval:5000;Timeout:url('http://10.233.85.82/PB3.x/index.html');Start");
+//}
+
+function selecttextsize()
+{
+	var slttextsize=frm.textsizetag.selectedIndex;
+	var selectedtextsize = frm.textsizetag.options[slttextsize].value;
+	switch(selectedtextsize)
+	{
+		case 'Largest':
+
+			generic.InvokeMETAFunction('TextSize', 'Largest');
+			break;
+
+		case 'Larger':
+
+			generic.InvokeMETAFunction('TextSize', 'Larger');
+			break;	
+
+		case 'Invalid':
+
+			generic.InvokeMETAFunction('TextSize', 'Small');
+			break;	
+
+		case 'Null':
+
+			generic.InvokeMETAFunction('TextSize', '');
+			break;
+
+		case 'Smaller':
+
+			generic.InvokeMETAFunction('TextSize', 'Smaller');
+			break;
+
+		case 'Smallest':
+
+			generic.InvokeMETAFunction('TextSize', 'Smallest');
+			break;
+
+		case 'Medium':
+
+			generic.InvokeMETAFunction('TextSize', 'Medium');
+			break;
+	}
+}
+
+function setdevVolume()
+{
+	var devvolume=frm.volume.value;
+	var devvolumevalue="SetVolume:"+devvolume;
+	alert(devvolumevalue);
+	generic.InvokeMETAFunction('Volume',devvolumevalue);
+}
+
+function startTimer()
+{    
+	var interv=frm.txtinterval.value;
+	var intervalvalue="Interval:"+interv;
+	//alert(intervalvalue);
+	generic.InvokeMETAFunction('Timer',intervalvalue);
+	
+	/*if(frm.purl.checked == true)
+	{
+		generic.InvokeMETAFunction("Timer","Timeout:url('http://www.google.com')");
+	}
+	if(frm.pscript.checked == true)
+	{
+		generic.InvokeMETAFunction("Timer","Timeout:url('javascript:doTimer('%s');')");
+	}*/
+	var sltevent=frm.sltTimer.selectedIndex;
+	var sldValue = frm.sltTimer.options[sltevent].value;
+	switch(sldValue)
+	{
+		case 'purl':
+
+			generic.InvokeMETAFunction("Timer","Timeout:url('http://10.233.85.82/pb3.x/index.html')");
+			break;
+
+		case 'pscript':
+             //var p=generic.InvokeMETAFunction("Timer","Timeout:");
+            
+			generic.InvokeMETAFunction("Timer","Timeout:url('javascript:doTimer('%s');')");
+			break;
+		
+	}
+	generic.InvokeMETAFunction('Timer','Start');	
+	
+}
+
+function stopTimer()
+{
+	generic.InvokeMETAFunction('Timer','Stop');	
+}
+
+function doTimer(time)
+{
+	divTimer.innerHTML = 'Time: ' + time;
+}
+
+function selectSIPMode()
+{
+	var sltSIP=frm.sipMode.selectedIndex;
+	var selectedValue = frm.sipMode.options[sltSIP].value;
+	switch(selectedValue)
+	{
+		case 'Manual':
+
+			generic.InvokeMETAFunction('SIPbutton', 'Visibility:Visible');
+			generic.InvokeMETAFunction('SIP', 'Manual');
+			break;
+
+		case 'Automatic':
+
+			generic.InvokeMETAFunction('SIP', 'Automatic');
+			break;
+		
+	}
+}
+
+function setLeftPosition()
+{
+	var leftpst=frm.leftPosition.value;
+	var leftpstvalue="Left:"+leftpst;
+	objGeneric.InvokeMETAFunction('SIP',leftpstvalue);
+}
+
+function setTopPosition()
+{
+	var toppst=frm.topPosition.value;
+	var toppstvalue="Top:"+toppst;
+	objGeneric.InvokeMETAFunction('SIP',toppstvalue);
+}
+
+
+
+</script>

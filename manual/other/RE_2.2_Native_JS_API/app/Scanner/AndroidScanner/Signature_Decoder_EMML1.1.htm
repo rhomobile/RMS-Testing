@@ -1,0 +1,42 @@
+<HTML>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+<meta http-equiv="Scanner" content="allDecoders:disabled;Signature:enabled;barcodeDataFormat:binary;dataBufferSize:20000;DecodeEvent:url('Javascript:onDecodeEventJSON(%json);')">
+<meta http-equiv="Scanner" content="signatureImageHeight:100;signatureImageWidth:400;signatureImageQuality:90;enabled:SCN1">
+
+<TITLE>Signature Decoder Capture Tests</TITLE>
+</HEAD>
+<BODY>
+  <script type="text/javascript">
+
+
+   function onDecodeEventJSON(jsonObject)
+   {
+	//var html = "<b>Decoded Data:</b><br>";
+	//html = html + "<br><i>Data:</i> (See Image)";
+	signatureBarcode.src = jsonObject.data;
+	}
+	
+	function Quit()
+    {
+		generic.InvokeMETAFunction("Application", "Quit");
+    }
+     
+  </script>
+
+
+<H1>Image Capture Tests</H1>
+<P>
+<br><br><br><br><br><br><br><br><br><br><br><br>
+	<div id="Image SaveResult">Image Save Result goes here</div>
+	<img src="" id="signatureBarcode"></img>
+  <BR>
+  <BR>
+  <INPUT align="center" type="button" value="Quit" onclick="Quit();">
+  <BR>  
+	<P>
+	<a href="javascript:location.reload();">Refresh the page</a>
+
+  </BODY>
+</HTML>

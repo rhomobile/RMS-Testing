@@ -1,0 +1,27 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+<META HTTP-EQUIV="OnKey0x0d" content="javascript:doTest();">
+<META HTTP-EQUIV="Application" content="ApplicationEvent:url('Javascript:doEvent('%s');')">
+
+<SCRIPT>
+    var objGeneric = new ActiveXObject("PocketBrowser.Generic");
+    function doTest() {
+        objGeneric.InvokeMETAFunction('Application', 'Minimize');
+        objGeneric.InvokeMETAFunction('Application', 'Restore');
+  
+    }
+    function doEvent(currentState) {
+        alert('RhoElements has been ' + currentState);
+    }
+</SCRIPT>
+
+</head>
+<body>
+<br /><br /><br /><br /><br />
+<p>Press enter to minimize and restore</p>
+<p>Application event</p>
+<br><A HREF="./EMML1_1_index.html">Back</A>
+</BODY>
+</html>

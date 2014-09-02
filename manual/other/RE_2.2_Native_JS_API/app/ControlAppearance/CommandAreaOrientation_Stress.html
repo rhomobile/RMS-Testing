@@ -1,0 +1,80 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+<!-- <META HTTP-Equiv="BottomCommandArea" Content="Visibility:Visible;Image:url('FILE://\Application\Resource\Ferrari.bmp')">
+ <META HTTP-Equiv="TopCommandArea" Content="Visibility:Visible;Image:url('FILE://\Application\Resource\Ferrari.bmp')">
+ <META HTTP-EQUIV="Timer" CONTENT="Interval:28800000;Timeout:url('Javascript:doTimer('%s');');Start">-->
+<META HTTP-Equiv="topcommandarea" Content="height:100;visibility:visible"> 
+<META HTTP-Equiv="bottomcommandarea" Content="height:100;visibility:visible"> 
+
+<script>
+
+
+ //var Generic = new ActiveXObject("PocketBrowser.Generic");
+    var interval;
+    
+ function dostart(inter) 
+      {
+          interval = inter;
+          OrientEvent()
+          setTimeout("OrientNormal()", interval);
+      }
+
+  
+
+
+  function OrientNormal() {
+      generic.InvokeMETAFunction('ScreenOrientation', 'Normal');
+      setTimeout("OrientLeftHanded()", interval);
+  }
+
+  function OrientLeftHanded() {
+      generic.InvokeMETAFunction('ScreenOrientation', 'LeftHanded');
+      setTimeout("OrientRightHanded()", interval);
+  }
+
+  function OrientRightHanded() {
+      generic.InvokeMETAFunction('ScreenOrientation', 'RightHanded');
+      setTimeout("OrientUpsideDown()", interval);
+  }
+
+  function OrientUpsideDown() {
+      generic.InvokeMETAFunction('ScreenOrientation', 'UpsideDown');
+      setTimeout("OrientNormal()", interval);
+  }
+
+  function OrientEvent() {
+      generic.InvokeMETAFunction("ScreenOrientation", "ScreenOrientationEvent: url('javascript: onOrientationChange('%s');')");
+  }
+
+  function onOrientationChange(OrientationState) {
+      bat.innerHTML = "ScreenOrientationEvent Fired: <br><b><font color=red>" + OrientationState + "</font>";
+      return;
+  }
+  
+//  function doTimer(time)
+//   {
+//       Generic.InvokeMETAFunction("Application", "Quit");
+//   }
+
+
+</script>
+
+</head>
+
+<BODY>
+<h4>CommandAreas ScreenOrientation Stress Test</h4><br><br>
+<a href="javascript:dostart(3000);">Start ScreenOrientation Stress Test - Change every 3 seconds.</a><br><br>
+<a href="javascript:dostart(2000);">Start ScreenOrientation Stress Test - Change every 2 seconds.</a><br><br>
+<a href="javascript:dostart(1000);">Start ScreenOrientation Stress Test - Change every 1 seconds.</a><br><br>
+<a href="javascript:dostart(500);">Start ScreenOrientation Stress Test - Change every .5 seconds.</a><br><br>
+
+<br>
+<div Id="bat">ScreenOrientationEvent Value should appear here</div><br /><br /><br />
+<input id="Back" type="button" value="Back" onclick="location.href='ControlAppearance.html'">
+
+
+
+</BODY>
+</HTML>

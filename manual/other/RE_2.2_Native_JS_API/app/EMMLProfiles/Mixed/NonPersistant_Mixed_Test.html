@@ -1,0 +1,97 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+
+</head>
+<body>
+<form id="frmCardReader" action="">
+<P><BR></P>
+<h4>UnNamed Indicators EMML Test Script Only</h4>
+<a href="javascript:doApplyProfile('MSR');">Apply MSR Profile</a>
+<br>
+<a href="javascript:doApplyProfile('Linear');">Apply Linear Gesture Profile</a>
+<br>
+<a href="javascript:doApplyProfile('AddressBar1');">Apply Addressbar show Profile</a>
+<br>
+<a href="javascript:doApplyProfile('AddressBarHide');">Apply Addressbar hidden Profile</a>
+<br>
+<a href="javascript:doApplyProfile('Battery');">Apply Battery show Profile</a>
+<br>
+<a href="javascript:doApplyProfile('BatteryHide');">Apply Battery hide Profile</a>
+<br><br /><br />
+
+<td>Card Data:</td><td><Textarea id="txtCardData" cols="20" rows="3"></Textarea></td><br /><br />
+<div Id="message">Gesture</div><br /><br /><br />
+
+
+<h4>Browse to another page to check for EMML profile persistance.</h3>
+<h4><a href="NonPersistant_Mixed_Profile.html">Click here to go to another page.</a></h4>
+<hr />
+<a href="../EMMLProfilesIndex.html">Back to EMML Profile Index</a>
+<br /><P><INPUT TYPE="button" VALUE="Quit" ONCLICK="Quit();"></P>
+
+</form>
+</body>
+</html>
+
+
+<SCRIPT LANGUAGE="JavaScript">
+    var Generic = new ActiveXObject("PocketBrowser.Generic");
+
+    function onGesture(id, count) {
+
+        if (id == "Scan1")
+         {
+            message.innerHTML = "Linear gesture is detected and captured";
+         }
+
+
+     }
+
+     function OnBattery(AC, main, backup) {
+
+         bat.innerHTML = "AC: " + AC + "\<BR>main:" + main + "\<BR>backup: " + backup;
+         return;
+     }
+
+     function MyReadEvent(data, mode) {
+         switch (mode) {
+             case 'CR':
+                 frmCardReader.txtCardData.value = "Card Data:- " + data;
+//                 ProcessCardData(data);
+//                 if (SelectedMSR == "DCR7000") 
+//                 {
+//                     frmCardReader.txtCardData.value = "Please turn the unit over and enter the PIN";
+//                 }
+                 break;
+             case 'ENCDATA':
+                 frmCardReader.txtCardData.value = "Encrypted data:- " + data;
+                 break;
+             case 'MESSAGE':
+                 frmCardReader.txtCardData.value = "Error:- " + data;
+                 break;
+             case 'PAN':
+                 frmCardReader.txtCardData.value = "PAN:- " + data;
+                
+                 break;
+         }
+     }
+   
+
+    function doApplyProfile(profile) 
+    {
+
+        Generic.InvokeMETAFunction('EMMLProfile', 'Apply:' + profile);
+    }
+
+    function clearProfile() 
+    {
+        Generic.InvokeMETAFunction('EMMLProfile', 'clear:myIndicators');
+    }
+
+function Quit()
+{
+	Generic.InvokeMETAFunction("Application", "Quit");
+}
+</SCRIPT>

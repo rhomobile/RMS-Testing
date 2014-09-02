@@ -1,0 +1,62 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+
+
+<META HTTP-Equiv="SignatureCapture" Content="left:10;top:10;height:100;bgcolor:#FFFF00;width:100;border:visible;Pencolor:#0000FF;Penwidth:2;visibility:visible">
+<meta http-equiv="SignatureCapture" content="VectorEvent:url('javascript:myvectorevent(%s);')" />
+
+
+</head>
+<body>
+<br /><br /><br /><br /><br /><br /><br /><br /><br />
+<textarea name="myTxt" id="myTxt" cols=20 rows=10></textarea>
+<input type=button onclick="Clear();" />
+<P><INPUT TYPE="button" VALUE="Back" ONCLICK="location.href='SignatureCapture.html'"></P>
+</body>
+</html>
+<script language=javascript>
+try
+{
+var generic = new ActiveXObject("PocketBrowser.Generic");
+}
+catch(err)
+{
+var GenericPlugin = document.createElement('embed'); 
+GenericPlugin.setAttribute('id',"embed1"); 
+GenericPlugin.setAttribute('type',"application/x-wtg-legacy-generic"); 
+GenericPlugin.setAttribute('hidden',"true"); 
+
+// Attach the plugin embed tags to the body 
+var theBody = document.getElementsByTagName('body')[0]; 
+theBody.appendChild(GenericPlugin); 
+}
+function myvectorevent(VectorArray)
+{
+	var spanID;
+	var spanElement;
+	//spanElement = document.getElementById(myTxt);
+	var i;
+	for(i=0; i < VectorArray.length; i++)
+	{
+		//alert(VectorArray[i]);
+		//spanElement.value = VectorArray[i];
+		myTxt.value = myTxt.value + "\n" + VectorArray[i];
+	}
+		//spanID = "Span" + (i+1);
+		//spanElement = document.getElementById(spanID);
+		//spanElement.innerText = VectorArray[i];
+}
+
+function Clear()
+{
+    myTxt.value="";
+    var generic = new ActiveXObject("PocketBrowser.Generic");
+	
+	generic.InvokeMETAFunction('SignatureCapture', 'clear');
+}
+</script>
+
+
+

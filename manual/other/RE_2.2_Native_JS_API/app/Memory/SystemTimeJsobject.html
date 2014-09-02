@@ -1,0 +1,69 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+
+<title>Memory TestScript</title>
+
+
+<script type="text/javascript">
+	       
+function setLocal()
+{
+	var setLocalValue = frm.txtsetLocal.value;
+	var IValue = "setLocal:"+setLocalValue;
+	Message.innerHTML="value is:"+IValue;
+	systemTime.setLocal=setLocalValue;	
+}  
+
+function setUtc()
+{
+	var setUtcValue = frm.txtsetUtc.value;
+	var IValue = "setUtc:"+setUtcValue;
+	Message.innerHTML="value is:"+IValue;
+	systemTime.setUtc=setUtcValue;	
+}
+
+function setsntpServerIp()
+{
+	var sntpServerIpValue = frm.txtsntpServerIp.value;
+	var IValue = "sntpServerIp:"+sntpServerIpValue;
+	Message.innerHTML="value is:"+IValue;
+	systemTime.sntpServerIp=sntpServerIpValue;	
+} 
+    
+ </script>
+</head>
+<body>
+<form id="frm" action="">
+<br /><br /><br />
+<b>SystemTime with JSOBJECT</b><br /><br />
+<div id="Message">Message</div>
+<br/>
+<hr>
+
+setLocal(YYYY-MM-DDTHH-MM-SS+/-HH offset from UTC-MM offset from UTC):<br/>
+<Textarea id="txtsetLocal"cols="30" rows="1">2011-12-25T09-57-00+01-00</Textarea>
+&nbsp;&nbsp;&nbsp;&nbsp;
+<input type=button onclick="setLocal();" value="setLocal">
+<hr/>
+
+<br/>
+setUtc(YYYY-MM-DDTHH-MM-SS+/-HH offset from UTC-MM offset from UTC):<br/>
+<Textarea id="txtsetUtc"cols="30" rows="1">2011-12-25T09-57-00+01-00</Textarea>
+&nbsp;&nbsp;&nbsp;&nbsp;
+<input type=button onclick="setUtc();" value="setUtc">
+<hr/>
+
+<br/>
+sntpServerIp:
+<Textarea id="txtsntpServerIp"cols="20" rows="1">132.163.4.102</Textarea>
+&nbsp;&nbsp;&nbsp;&nbsp;
+<input type=button onclick="setsntpServerIp();" value="setSntpServerIp">
+<hr/>
+
+</table>
+</form>
+
+</body>
+</html>

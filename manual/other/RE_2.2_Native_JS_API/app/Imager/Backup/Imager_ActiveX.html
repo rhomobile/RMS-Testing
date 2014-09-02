@@ -1,0 +1,543 @@
+<HTML>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+    <TITLE>Image Capture Test</TITLE>
+<meta name="mobileoptimized" content="0" />
+<script language=javascript>
+var objgeneric = new ActiveXObject("PocketBrowser.Generic");
+var selected_Imager=""; //For Reading Selected Scanner by list.
+var selectedLamp=""; //Selected Lamp in the list.
+var selectedAim=""; //Selected Aim in the list.
+
+
+
+
+
+function ApplyImagerEnumEvent()
+{
+
+ var count = frm.Select1.selectedIndex;
+ var selected_Event = frm.Select1.options[count].value;
+
+ message.innerHTML="EnumEvent Attached :-"+selected_Event;
+   if(selected_Event=="JAVASCRIPT")
+   {
+    objgeneric.InvokeMETAFunction("imager","imagerEnumEvent:url('javascript:Enumimagers(%s);')");
+   }
+   else if(selected_Event=="JSON")
+   {
+   objgeneric.InvokeMETAFunction("imager","imagerEnumEvent:url('javascript:EnumimagersJSON(%json);')");
+   }
+   else if(selected_Event=="HTML")
+   {
+
+   objgeneric.InvokeMETAFunction("imager","imagerEnumEvent:url('http://10.233.85.82/NEON/Navigate.html')");
+   }
+   else if(selected_Event=="DETACHEVENT")
+   {
+   objgeneric.InvokeMETAFunction("imager","imagerEnumEvent:url('')");
+   }
+   else if(selected_Event=="EMPTYEVENT")
+   {
+   objgeneric.InvokeMETAFunction("imager","imagerEnumEvent:");
+   }
+}
+
+
+function Enumimagers(imagerArray)
+{
+	var ImagerInfo = "Imagers On Device: " + imagerArray.length + "ID  --  Name:";
+	for (i=0; i < imagerArray.length; i++)
+	{
+	    ImagerInfo = ImagerInfo + imagerArray[i][0] + ' -- ' + imagerArray[i][1] + '<BR>';
+	    frm.mydropdown.options[i].text = imagerArray[i][0];
+	    frm.mydropdown.options[i].value = imagerArray[i][0];
+
+	}
+	message.innerHTML =ImagerInfo;
+}
+
+
+function EnumimagersJSON(jsonobject)
+{
+	var ImagerInfo = "JSON  Imagers On Device: " + jsonobject.imagerArray.length + "ID  --  Name:";
+	for (i=0; i < jsonobject.imagerArray.length; i++)
+	{
+	    ImagerInfo = ImagerInfo + jsonobject.imagerArray[i].deviceName + ' -- ' + jsonobject.imagerArray[i].friendlyName + '<BR>';
+	    frm.mydropdown.options[i].text = jsonobject.imagerArray[i].deviceName;
+	    frm.mydropdown.options[i].value = jsonobject.imagerArray[i].deviceName;
+
+	}
+	message.innerHTML =ImagerInfo;
+}
+
+
+function selectImager()
+{
+    var w = frm.mydropdown.selectedIndex;
+    selected_Imager = frm.mydropdown.options[w].value;
+    selImag.innerHTML = selected_Imager + "dropdownlistindex:" + w;
+}
+
+
+function doEnumerate()
+{
+ objgeneric.InvokeMETAFunction("imager", "Enumerate");
+}
+
+function enableselectedImager()
+{
+var temp="enabled:"+selected_Imager;
+objgeneric.InvokeMETAFunction('imager',temp);
+}
+
+function enablemyImager()
+{
+	objgeneric.InvokeMETAFunction('imager','enabled');
+}
+
+function enablemyImager1()
+{
+	objgeneric.InvokeMETAFunction('imager','enable');
+}
+
+function disableImager()
+{
+	objgeneric.InvokeMETAFunction('imager', 'disabled');
+}
+
+function disableImager1()
+{
+	objgeneric.InvokeMETAFunction('imager', 'disable');
+}
+
+function captureImager()
+{
+	objgeneric.InvokeMETAFunction('imager', 'capture');
+}
+
+
+
+function selectLamp()
+{
+	var sltLamp=frm.imgLamp.selectedIndex;
+	selectedLamp = frm.imgLamp.options[sltLamp].value;
+	switch(selectedLamp)
+	{
+		case 'On':
+
+			objgeneric.InvokeMETAFunction('imager', 'lamp:ON');
+			break;
+
+		case 'Off':
+
+			objgeneric.InvokeMETAFunction('imager', 'lamp:OFF');
+			break;
+		
+		case 'Test':
+
+			objgeneric.InvokeMETAFunction('imager', 'lamp:Test');
+			break;
+	   case 'Empty':
+
+			objgeneric.InvokeMETAFunction('imager', 'lamp:');
+			break;
+	}
+}
+
+function selectAim()
+{
+	var sltAim=frm.imgAim.selectedIndex;
+	selectedAim = frm.imgLamp.options[sltAim].value;
+	switch(selectedAim)
+	{
+		case 'On':
+
+			objgeneric.InvokeMETAFunction('imager', 'aim:ON');
+			break;
+
+		case 'Off':
+
+			objgeneric.InvokeMETAFunction('imager', 'aim:OFF');
+			break;
+
+		case 'Test':
+
+			objgeneric.InvokeMETAFunction('imager', 'aim:Test');
+			break;
+		case 'Empty':
+
+			objgeneric.InvokeMETAFunction('imager', 'aim:');
+			break;
+	}
+}
+
+
+function selectFlash()
+{
+	var sltFlash=frm.imgFlash.selectedIndex;
+	selectedFlash = frm.imgFlash.options[sltFlash].value;
+	
+	switch(selectedFlash)
+	{
+		case 'On':
+             
+			objgeneric.InvokeMETAFunction('imager', 'Flash:ON');
+			break;
+
+		case 'Off':
+             
+			objgeneric.InvokeMETAFunction('imager', 'Flash:OFF');
+			break;
+			
+	   case 'Auto':
+             
+			objgeneric.InvokeMETAFunction('imager', 'Flash:Auto');
+			break;
+			
+	  case 'red-eye':
+             
+			objgeneric.InvokeMETAFunction('imager', 'Flash:red-eye');
+			break;
+
+		case 'Test':
+             
+			objgeneric.InvokeMETAFunction('imager', 'Flash:Test');
+			break;
+		case 'Empty':
+             
+			objgeneric.InvokeMETAFunction('imager', 'Flash:');
+			break;
+	}
+}
+
+function setLeftPosition()
+{
+	var leftpst=frm.leftPosition.value;
+	var temp="Left:"+leftpst;
+	objgeneric.InvokeMETAFunction('imager',temp);
+}
+
+function setTopPosition()
+{
+	var toppst=frm.topPosition.value;
+	var temp1="Top:"+toppst;
+	objgeneric.InvokeMETAFunction('imager',temp1);
+}
+
+function setheight()
+{
+	var ht=frm.viewerHeight.value;
+	var temp2="Height:"+ht;
+	objgeneric.InvokeMETAFunction('imager',temp2);
+}
+
+function setwidth()
+{
+	var wd=frm.viewerWidth.value;
+	var temp3="Width:"+wd;
+	objgeneric.InvokeMETAFunction('imager',temp3);
+}
+
+function EmptyImagerContent()
+{
+objgeneric.InvokeMETAFunction('imager','');
+alert("Empty Imager content called");
+}
+
+function imgcapture()
+{
+	
+	myResponse.innerHTML="Response called";
+
+
+	var UserName = frm.txtUserName.value;
+	var uname = "username:"+UserName;
+	objgeneric.InvokeMETAFunction('imager', uname);
+
+	
+	var Password = frm.txtPassword.value;
+	var pword = "password:"+Password;
+	objgeneric.InvokeMETAFunction('imager', pword);
+	
+	var Sound = frm.txtSound.value;
+	
+	var wave = "sound:"+Sound;
+	
+	
+	if(Sound!="NULL")
+	{
+	objgeneric.InvokeMETAFunction('imager', wave);
+	}
+	var Destination = frm.txtDestination.value;
+	
+	var dest = "Destination:url('"+Destination+"')";
+
+	objgeneric.InvokeMETAFunction('imager', dest);
+	
+
+
+	
+  	for (var i=0; i < frm.group1.length; i++)
+   	{   
+      		if (frm.group1[i].checked)
+      		{
+      			var type = frm.group1[i].value;
+      		}
+   	}	
+   	
+	if(type=="javascript")
+	{
+		objgeneric.InvokeMETAFunction("imager","imagerevent:url('javascript:myevent('%s');')");
+	}
+    else if(type=="HTML")
+	{
+		objgeneric.InvokeMETAFunction("imager","imagerevent:url('http://10.233.85.82/Navigate.html?Resposnse=%s');");
+	}
+	else if(type=="JSON")
+	{
+	objgeneric.InvokeMETAFunction("imager","imagerevent:url('javascript:myjsonevent(%json);')");
+	}
+	else if(type=="Empty")
+	{
+	objgeneric.InvokeMETAFunction("imager","imagerevent:");
+	}
+	else if(type=="URLEmpty")
+	{
+	objgeneric.InvokeMETAFunction("imager","imagerevent:url('')");
+	}
+	
+	objgeneric.InvokeMETAFunction('imager', 'capture');
+	
+}
+
+function myevent(response)
+{	
+    myResponse.innerHTML="response ="+response;
+
+}
+
+function myjsonevent(jsonObject)
+{
+myResponse.innerHTML="JSON  response"+jsonObject.transferResult;
+}
+
+function doDestination()
+{
+    var w = frm.SelectDestination.selectedIndex;
+    DestValue = frm.SelectDestination.options[w].value;
+    if(DestValue=="HTTP")
+    {
+    frm.txtDestination.value="http://10.233.85.82/NEON/ReceivedFiles/Upload.aspx";
+    }
+    else if(DestValue=="QUALIFIEDHTTP")
+    {
+    frm.txtDestination.value="http://10.233.85.82:80/NEON/ReceivedFiles/Upload.aspx";
+    frm.txtUserName.value="";
+    frm.txtPassword.value="";
+    }
+    else if(DestValue=="FTP")
+    {
+    frm.txtDestination.value="ftp://10.233.85.82/Received/imageInFTP.bmp";
+    frm.txtUserName.value="ftpadmin";
+    frm.txtPassword.value="ftpadmin";
+    
+    }
+    else if(DestValue=="QUALIFIEDFTP")
+    {
+    frm.txtDestination.value="ftp://ftpadmin:ftpadmin@10.233.85.82/Received/imageinQFTP.bmp";
+    frm.txtUserName.value="";
+    frm.txtPassword.value="";
+    
+    }
+    else if(DestValue=="FILE1")
+    {
+    frm.txtDestination.value="file://\\Temp\\CapturedImageTemp.bmp";
+    frm.txtUserName.value="";
+    frm.txtPassword.value="";
+    }
+    else if(DestValue=="FILE2")
+    {
+     frm.txtDestination.value="file://\\Application\\Airbeam\\CapturedImageAPPAir.bmp";
+     frm.txtUserName.value="";
+    frm.txtPassword.value="";
+    }
+    else if(DestValue=="INVALIDFILE")
+    {
+     frm.txtDestination.value="file://\\And\\data\\imageAndroidData.bmp";
+     frm.txtUserName.value="";
+    frm.txtPassword.value="";
+    }
+    else if(DestValue=="INVALIDHTTP")
+    {
+    frm.txtDestination.value="http://tand";
+    frm.txtUserName.value="uploadtest";
+    frm.txtPassword.value="letmein";
+    }
+    else if(DestValue=="EMPTYHTTP")
+    {
+    frm.txtDestination.value="http://";
+    frm.txtUserName.value="uploadtest";
+    frm.txtPassword.value="letmein";
+    }
+    else if(DestValue=="INVALIDFTP")
+    {
+    frm.txtDestination.value="ftp://tandv";
+    frm.txtUserName.value="tandv";
+    frm.txtPassword.value="H0neymoon";
+    }
+    else if(DestValue=="EMPTYFTP")
+    {
+    frm.txtDestination.value="ftp://";
+    frm.txtUserName.value="tandv";
+    frm.txtPassword.value="H0neymoon";
+    }
+}
+
+</script>
+</HEAD>
+
+<form id="frm" action="">
+
+<BR><BR>Imager using Activex object<BR>
+<div id="myResponse">EventResponse:- </div><BR>
+<div id="message">Available Imagers:- </div><BR>
+<div id="selImag">Status:- </div><BR><BR>
+
+<BR>
+
+<select name="ImagerEnumEvent" id="Select1">
+<OPTION VALUE="JAVASCRIPT">JAVASCRIPT</OPTION>
+<option value="JSON">JSON</option>
+<option value="HTML">HTML</option>
+<option value="DETACHEVENT">DETACHEVENT</option>
+<option value="EMPTYEVENT">EMPTYEVENT</option>
+</select>
+
+<input type=button onclick="ApplyImagerEnumEvent();" value="Apply EnumEvent">
+<BR>
+
+<input type=button onclick="doEnumerate();" value="Enumerate Imagers"><BR><BR>
+Select Imager  <select name="mydropdown" id="mydropdown" onChange="selectImager();">
+<option value=""></option>
+<option value=""></option>
+<option value="SCN5"></option>
+</select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<input type=button onclick="enableselectedImager();" value="EnabledSelectedImager">
+<BR><BR>
+
+<input type=button value="Enable" onclick="enablemyImager1();" >
+<INPUT type=button value="Disable" onclick="disableImager1();">
+<br>
+<input type=button value="Enabled" onclick="enablemyImager();" >
+<INPUT type=button value="Disabled" onclick="disableImager();">
+<BR>
+
+<input type=button onclick="captureImager();" value="Capture">
+<BR>
+
+
+<BR><BR>
+
+
+
+
+    Left:	</td><td><Textarea id="leftPosition" cols="10" rows="1">240</Textarea>
+	<INPUT type=button onclick="Javascript:setLeftPosition();" value="Left">
+ 
+<br>	
+
+     Top:	</td><td><Textarea id="topPosition" cols="10" rows="1">40</Textarea>
+	<INPUT type=button onclick="Javascript:setTopPosition();" value="Top">
+   
+<br>
+
+      Height:	</td><td><Textarea id="viewerHeight" cols="10" rows="1">150</Textarea>
+	<INPUT type=button onclick="Javascript:setheight();" value="Height">
+    
+<br>
+
+      Width:	</td><td><Textarea id="viewerWidth" cols="10" rows="1">150</Textarea>
+	<INPUT type=button onclick="Javascript:setwidth();" value="Width">
+    <br>
+    
+    
+    
+    Select Lamp:   <select name="imgLamp" id="imgLamp" onChange="selectLamp();">
+<OPTION VALUE="">Select Lamp</OPTION>
+<option value="On">On</option>
+<option value="Off">Off</option>
+<option value="Test">Test</option>
+<option value="Empty">Empty</option>
+</select>
+<BR>
+
+Select Aim:	  <select name="imgAim" id="imgAim" onChange="selectAim();">
+<OPTION VALUE="">Select Aim</OPTION>
+<option value="On">On</option>
+<option value="Off">Off</option>
+<option value="Test">Test</option>
+<option value="Empty">Empty</option>
+</select>
+<hr />
+
+Select DestinationType:<select name="SelectDestination" id="SelectDestination" onchange="doDestination();">
+<OPTION VALUE="">Select Destination type</OPTION>
+<option value="HTTP">HTTP</option>
+<option value="QUALIFIEDHTTP">QUALIFIED HTTP</option>
+<option value="FTP">FTP</option>
+<option value="QUALIFIEDFTP">QUALIFIED FTP</option>
+<option value="FILE1">FILE1</option>
+<option value="FILE2">FILE2</option>
+<option value="INVALIDFILE">INVALIDFILE</option>
+<option value="INVALIDHTTP">INVALIDHTTP</option>
+<option value="EMPTYHTTP">EMPTYHTTP</option>
+<option value="INVALIDFTP">INVALIDFTP</option>
+<option value="EMPTYFTP">EMPTYFTP</option>
+</select>
+
+
+<table>
+
+
+
+<tr>
+	<td>Destination</td><td><Textarea id="txtDestination"cols="21" rows="1"></Textarea></td>
+	</tr>
+
+<tr>
+	<td>UserName</td><td><Textarea id="txtUserName"cols="10" rows="1"></Textarea></td>
+	</tr>
+<tr>
+	<td>Password</td><td><Textarea id="txtPassword"cols="10" rows="1"></Textarea></td>
+	</tr>
+<tr>
+	<td>Sound</td><td><Textarea id="txtSound"cols="21" rows="1">Application/Alarm5.wav</Textarea></td>
+	</tr>
+	<!---->
+
+</table>
+
+
+<input type="radio" name="group1" value="javascript">Navigate to javascript function
+<br>
+<input type="radio" name="group1" value="HTML">Navigate to HTML Page
+<br>
+<input type="radio" name="group1" value="JSON">JSON event
+<br>
+<input type="radio" name="group1" value="Empty">EmptyEvent
+<br>
+<input type="radio" name="group1" value="URLEmpty">EmptyURL
+<br>
+<input type="button" onclick="imgcapture();" value="AttachAndCapture">
+<br>
+<input type="button" onclick="EmptyImagerContent();" value="Empty Imager Content">
+
+<hr>
+<BR>
+<A HREF="Imager_Index.html">Back</A>
+
+</form>
+</BODY>
+</HTML>

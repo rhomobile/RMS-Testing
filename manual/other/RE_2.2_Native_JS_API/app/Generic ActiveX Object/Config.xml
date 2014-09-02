@@ -1,0 +1,133 @@
+<?xml version = "1.0"?>
+<!--
+PocketBrowser Configuration file
+-->
+<Configuration>
+   
+  <DebugButtons>
+    <DebugButtonsEnabled value="0" />
+  </DebugButtons>
+  
+  <Logger>
+    <LogProtocol value="FILE"/>
+    <LogPort    value="80"/>
+    <LogURI     value="File://\Program Files\PocketBrowser\Log.txt"/>
+    <LogError   value="0"/>
+    <LogWarning value="0"/>
+    <LogInfo    value="0"/>
+    <LogUser    value="0"/>
+    <LogMaxSize value="10"/>
+  </Logger>
+    
+  <FileLocations>
+    <RegEXFile  value="FILE://\Program Files\PocketBrowser\Config\RegEx.xml"/>
+    <PluginFile value="FILE://\Program Files\PocketBrowser\Config\Plugin.xml"/>
+  </FileLocations>
+  
+  <Screen>
+    <FullScreen value="1"/>
+  </Screen>
+  
+  <DeviceKeys>
+    <EnableFunctionKey_F1     value="0"/>
+    <EnableFunctionKey_F2     value="0"/>
+    <EnableFunctionKey_F3     value="0"/>
+    <EnableFunctionKey_F4     value="0"/>
+    <EnableFunctionKey_F5     value="0"/>
+    <EnableFunctionKey_F6     value="0"/>
+    <EnableFunctionKey_F7     value="0"/>
+    <EnableFunctionKey_F8     value="0"/>
+    <EnableFunctionKey_F9     value="0"/>
+    <EnableFunctionKey_F10    value="0"/>
+    <EnableFunctionKey_F11    value="0"/>
+    <EnableFunctionKey_F12    value="0"/>
+    <EnableApplicationKey_A1  value="0"/>	
+    <EnableApplicationKey_A2  value="0"/>	
+    <EnableApplicationKey_A3  value="0"/>	
+    <EnableApplicationKey_A4  value="0"/>	
+    <EnableApplicationKey_A5  value="0"/>	
+    <EnableApplicationKey_A6  value="0"/>	
+    <EnableApplicationKey_A7  value="0"/>	
+    <EnableApplicationKey_A8  value="0"/>	
+  </DeviceKeys>
+  
+  <Navigation>
+    <NavTimeout value="45000"/>
+  </Navigation>
+  
+	<UserData>
+  </UserData>
+    
+  <Applications>
+    <Application >
+      
+      <General>
+        <Name value="Menu"/>
+        <StartPage value="http://10.233.85.82/Neon/index.html" name="Menu"/>
+      </General>
+      
+      <Preloads>
+        <Preload value="Scanner"/>
+        <Preload value="Hourglass"/>
+        <Preload value="KeyCapture"/>
+        <Preload value="SIP"/>
+        <Preload value="Signal"/>
+		<Preload value="ScreenOrientation"/>
+      </Preloads>
+      <ScrollBars>
+        <ScrollBarsEnabled  value="1" />
+      </ScrollBars>
+      
+      <HTMLStyles>
+        <FitToScreenEnabled    value="1" />
+        <ClearTypeEnabled      value="1" />
+        <JavascriptEnabled     value="1" />
+        <TextSelectionEnabled  value="1" />
+      </HTMLStyles>
+      
+      <SIP>
+        <ResizeOnSIP  value="1"/>
+      </SIP>
+
+      <System>
+		<LowBatteryScan  value="0"/>
+	  </System>
+
+      <Sound>
+        <DecodeVolume           value="5"/>
+        <DecodeFrequency        value="0xBB8"/>
+        <InvalidDecodeFrequency value="0x9C4"/>
+        <DecodeDuration         value="250"/>
+        <ScanDecodeWav          value=""/>
+        <ScanInvalidWav         value=""/>
+        <ImagerCaptureWav       value=""/>
+      </Sound>
+      
+      <GUI>
+        <SignalRefresh      value="5000"/>
+        <BatteryRefresh     value="5000"/>
+        <HourglassEnabled  value="1" />
+        <HourglassLeft     value="" />
+        <HourglassTop      value="" />
+      </GUI>
+      
+      <Navigation>
+        <BadLinkURI value="FILE://\Program Files\PocketBrowser\HTML\BadLink.html"/>
+      </Navigation>
+      
+      <DeviceKeys>
+        <EnableCtrlKey_A          value="1"/>
+        <EnableCtrlKey_C          value="1"/>
+        <EnableCtrlKey_V          value="1"/>
+        <EnableCtrlKey_O          value="0"/>
+        <EnableCtrlKey_P          value="0"/>
+      </DeviceKeys>
+  
+      <DefaultMetaTags>
+      </DefaultMetaTags>
+    
+    </Application>
+    
+  </Applications>
+   
+</Configuration>

@@ -1,0 +1,93 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+
+<!--<META HTTP-Equiv="imager" Content="left:100;top:20;height:200;width:300;lamp:on;
+Destination:url('ftp://10.233.85.82/Received/imageInFTPStress.bmp');username:ftpadmin;password:ftpadmin;imagerevent:url('javascript:myevent('%s');');enabled:IMG1"> -->
+<META HTTP-Equiv="videoCapture" Content="Destination:url('ftp://10.233.85.82/Received/audioInFTPStress.bmp');username:ftpadmin;password:ftpadmin;videoSaveEvent:url('Javascript:onCapturedjson(%json)')">
+
+</head>
+<body>
+<br><br><br><br><br><br>
+<P><INPUT TYPE="button" VALUE="StartCapture" ONCLICK="doCapture();"></P>
+<P><INPUT TYPE="button" VALUE="Disable" ONCLICK="doDisable();"></P>
+<P><INPUT TYPE="button" VALUE="Capture" ONCLICK="captureImage();"></P>
+<P><INPUT TYPE="button" VALUE="Back" ONCLICK="location.href='Imager_Index.html'"></P>
+<div id="myResponse">EventResponse:</div><BR>
+<p>Stress-Capture the audio and send to FTP-Memory leak</p>
+<BR>
+<div id="nos">TotalCount</div>
+<div id="sCount">SuccessCount</div>
+</body>
+</html>
+
+
+<SCRIPT type="text/javascript">
+var generic = new ActiveXObject("PocketBrowser.Generic");
+	
+var iCount = 0;
+var jCount=0;
+	
+function doCapture()
+{
+
+		iCount++;
+
+	  if(iCount <= 3500)
+		{
+		   
+		    generic.InvokeMETAFunction("videoCapture","Destination:url('ftp://10.233.85.82//Received//audioInFTPStress.bmp');username:ftpadmin;password:ftpadmin");
+			generic.InvokeMETAFunction('videoCapture', 'duration:10000');
+			generic.InvokeMETAFunction('videoCapture', 'start');
+			nos.innerHTML = "Totalcount :- "+iCount;
+			//myResponse.innerHTML="Capture Called";
+			captureLoop();	
+			
+		}
+		
+}
+
+function captureImage()
+{
+alert("1");
+generic.InvokeMETAFunction('videoCapture', 'start');
+}
+
+function doDisable()
+{
+	generic.InvokeMETAFunction('videoCapture', 'stop');
+}
+
+function captureLoop()
+{
+        
+	setTimeout("doCapture()", 30000);
+	
+}
+
+function myevent(response) {
+
+        if(response=="OK: File Sent")
+        {
+        jCount++;
+        }
+        myResponse.innerHTML="response:-"+response+" count:-"+jCount;
+
+    }
+	
+function onCapturedjson(jsonObject)
+{
+
+        if(jsonObject.transferResult=="OK: File Sent")
+        {
+        jCount++;
+		sCount.innerHTML="Success Count:"+jCount;
+        }
+        myResponse.innerHTML="response:-"+jsonObject.transferResult+" count:-"+jCount;
+}
+
+
+</SCRIPT>
+
+

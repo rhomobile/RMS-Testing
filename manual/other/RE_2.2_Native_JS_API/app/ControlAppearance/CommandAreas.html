@@ -1,0 +1,240 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+<script type="text/javascript">
+var generic = new ActiveXObject("PocketBrowser.Generic");
+
+var selected_Module="";
+var selected_imageupmode="";
+var selected_imagedownmode="";
+
+function getmodulename()
+{
+var index = document.controlForm.myChoice.selectedIndex;
+selected_Module = document.controlForm.myChoice.options[index].value;
+myDiv.innerHTML=""+selected_Module;
+}
+
+
+
+function setheight()
+{
+var heightvalue = document.controlForm.height.value;
+var heightparam="height:"+heightvalue;
+generic.InvokeMETAFunction(selected_Module, heightparam);
+myDiv.innerHTML=selected_Module+heightparam;
+}
+
+function setvisibility()
+{
+var index = document.controlForm.visibility.selectedIndex;
+var visibilityvalue = document.controlForm.visibility.options[index].value;
+var visibilityparam="visibility:"+visibilityvalue;
+generic.InvokeMETAFunction(selected_Module, visibilityparam);
+myDiv.innerHTML=selected_Module+visibilityparam;
+}
+
+
+function setvisibility()
+{
+var index = document.controlForm.visibility.selectedIndex;
+var visibilityvalue = document.controlForm.visibility.options[index].value;
+var visibilityparam="visibility:"+visibilityvalue;
+generic.InvokeMETAFunction(selected_Module, visibilityparam);
+myDiv.innerHTML=selected_Module+visibilityparam;
+}
+
+ function getimageupChoice()
+  {
+   var index = document.controlForm.imageMode.selectedIndex;
+   var value= document.controlForm.imageMode.options[index].value;
+   
+   if(value=="http")
+   selected_imageupmode="http://10.233.85.82/Resource/";
+   else if(value=="httpinvalid1")
+   selected_imageupmode="http://";
+   else if(value=="httpinvalid2")
+   selected_imageupmode="http://10.233.85.82";
+ 
+   
+   else if(value=="ftp")
+   selected_imageupmode="ftp://ftpadmin:ftpadmin@10.233.85.82/Resource/";
+   else if(value=="ftpinvalid1")
+   selected_imageupmode="ftp://";
+   else if(value=="ftpinvalid2")
+   selected_imageupmode="ftp://ftpadmin:ftpadmin@10.233.85.82";
+   
+   else if(value=="local")
+   selected_imageupmode="file://\\Android\\data\\Resource\\";
+   else if(value=="localinvalid1")
+   selected_imageupmode="file://";
+   else if(value=="localinvalid2")
+   selected_imageupmode="file://\\Android";
+   
+   myDiv.innerHTML=selected_Module+selected_imageupmode;
+  }
+  
+  
+
+
+function setimage()
+{
+getimageupChoice();
+var index = document.controlForm.imageName.selectedIndex;
+var imageupvalue = document.controlForm.imageName.options[index].value;
+
+if(imageupvalue=="empty")
+{
+var imageupparam="image:url('"+selected_imageupmode+"')";
+}
+else
+{
+var imageupparam="image:url('"+selected_imageupmode+imageupvalue+"')";
+}
+generic.InvokeMETAFunction(selected_Module, imageupparam);
+myDiv.innerHTML=selected_Module+imageupparam;
+
+}
+
+
+
+
+function setcolor()
+{
+var colorvalue = document.controlForm.color.value;
+var colorparam="color:"+colorvalue;
+generic.InvokeMETAFunction(selected_Module, colorparam);
+myDiv.innerHTML=selected_Module+colorparam;
+}
+
+
+
+
+
+
+ function setnull()
+ {
+ document.controlForm.left.value="";
+ document.controlForm.top.value="";
+ document.controlForm.height.value="";
+ document.controlForm.width.value="";
+ document.controlForm.visibility.selectedIndex = 3;
+ document.controlForm.imageupname.selectedIndex = 0;
+ document.controlForm.imagedownname.selectedIndex = 0;
+ 
+ }
+ 
+ function trimAll(sString) 
+ { 
+   while (sString.substring(0,1) == ' ') 
+    { 
+    sString = sString.substring(1, sString.length); 
+    } 
+   while (sString.substring(sString.length-1, sString.length) == ' ') 
+    { 
+    sString = sString.substring(0,sString.length-1); 
+    } 
+    return sString; 
+ } 
+ 
+ 
+function quitPB()
+   {
+     generic.InvokeMETAFunction('Application', 'Quit');
+   }
+
+  
+
+</script>
+ <script type="text/javascript" src="jscolor.js"></script>
+
+</head>
+<body>
+<input type=button value="Quit" onclick="quitPB();" />
+<div id="myDiv">value</div>
+<form name="controlForm" id="controlForm" action="" >
+<input id="Back" type="button" value="Back" onclick="location.href='ControlAppearance.html'">
+<br /><br /><br />Select &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<select name="myChoice" id="myChoice" size=1" onchange="getmodulename();">
+<OPTION value="TopCommandArea">SELECT</OPTION> 
+<OPTION value="TopCommandArea">TopCommandArea</OPTION> 
+<OPTION value="BottomCommandArea">BottomCommandArea</OPTION> 
+</select>
+<br />
+<hr />
+<table border=1>
+
+<tr>
+<td> Height&nbsp;&nbsp;<input id="height" type="text" size=15 value="100"/></td>
+<td><input type="button" id="heightbutton" value="Set Height" onclick="setheight();"</td>
+</tr>
+
+
+<tr>
+<td>Visibility&nbsp;&nbsp; <select name="visibile" id="visibility"> 
+<OPTION value="visible" >visible</OPTION> 
+<OPTION value="hidden" >hidden</OPTION> 
+<OPTION value="aaaa" >invalid</OPTION> 
+<OPTION value="" >empty</OPTION> 
+<OPTION value="Select option" >Select</OPTION>
+</select>
+</td>
+<td><input type="button" id="visibilitybutton" value="Set visibility" onclick="setvisibility();"</td>
+</tr>
+
+
+
+
+
+<tr>
+<td>Imageup Mode:&nbsp;<select name="imageMode" id="imageMode" size=1"> 
+<OPTION value="http" >http</OPTION> 
+<OPTION value="httpinvalid1" >httpinvalid1</OPTION> 
+<OPTION value="httpinvalid2" >httpinvalid2</OPTION> 
+<OPTION value="ftp" >ftp</OPTION> 
+<OPTION value="ftpinvalid1" >ftpinvalid1</OPTION> 
+<OPTION value="ftpinvalid2" >ftpinvalid2</OPTION>
+<OPTION value="local" >local</OPTION> 
+<OPTION value="localinvalid1" >localinvalid1</OPTION> 
+<OPTION value="localinvalid2" >localinvalid2</OPTION> 
+<OPTION value="Select option" >Select</OPTION>
+</select>
+</td>
+</tr>
+
+<tr>
+<td>Image:&nbsp;<select name="imageName" id="imageName" size=1"> 
+<OPTION value="empty" >empty</OPTION> 
+<OPTION value="BMW.bmp" >BMW.bmp</OPTION> 
+<OPTION value="Sym.bmp" >Sym.bmp</OPTION> 
+<OPTION value="Ferrari.JPG" >Ferrari.JPG</OPTION> 
+<OPTION value="Infinity.jpeg" >Infinity.jpeg</OPTION> 
+<OPTION value="Symbol.gif" >Symbol.gif</OPTION> 
+<OPTION value="Porsche.gif" >Porsche.gif</OPTION> 
+<OPTION value="Symbol.dfg" >invalid(.dfg)</OPTION>
+</select>
+</td>
+<td><input type="button" id="imagebutton" value="Set Image" onclick="setimage();"</td>
+</tr>
+
+
+
+
+<tr>
+<td>Color&nbsp;&nbsp; <input id="color" value="#FFFFFF"  size=15 /> </td>
+<td><input type="button" id="colorbutton" value="Set Color" onclick="setcolor();"</td>
+</tr>
+</table>
+<br />
+<hr />
+&nbsp;&nbsp;
+<!--<input id="submit" type="button" value="submit" onclick="setallparams();" />-->
+&nbsp;&nbsp;&nbsp;
+<input type="reset" value="Reset!" />
+&nbsp;&nbsp;&nbsp;
+<input type="button" value="setNull" onclick="setnull();" /> 
+</form>
+</body>
+</html>

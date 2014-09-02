@@ -1,0 +1,149 @@
+<!--Telemetry Index-->
+
+<HTML>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+<META HTTP-Equiv="quitbutton" Content="visibility:visible">
+<META HTTP-Equiv="quitbutton" Content="left:10">
+<META HTTP-Equiv="quitbutton" Content="top:10">
+
+
+
+<META HTTP-Equiv="Telemetry" Content="TelemetryDataEvent:url('JavaScript:Nav('%s', '%s', '%s', '%s');)'"> 
+<META HTTP-Equiv="Telemetry" Content="Enable:RoadSpeed;Enable:EngineRPM;Enable:TotalDistance;Enable:EngineLoad;Enable:ABSControlStatus">
+<META HTTP-Equiv="Telemetry" Content="Enable:ThrottlePosition;Enable:ServiceBrakeSwitch;Enable:IgnitionStatus;Enable:ParkingBrakeSwitch;Enable:CruiseControlSwitch">
+<META HTTP-Equiv="Telemetry" Content="Enable:BrakesSwitch;Enable:ClutchStatus;Enable:CruiseControlSetSpeed;Enable:AcceleratorPedalPos;Enable:EngineOilPressure">
+<META HTTP-Equiv="Telemetry" Content="Enable:BoostPressure;Enable:EngineCoolantTemperature;Enable:EngineRetarderStatus;Enable:ATC_ASR_Status;Enable:TransmissionRangeSelected">
+<META HTTP-Equiv="Telemetry" Content="Enable:TransmissionRangeAttained;Enable:BatteryVoltage;Enable:EngineOilTemperature;Enable:TransmissionOilTemperature;Enable:FuelRate">
+<META HTTP-Equiv="Telemetry" Content="Enable:InstantaneousFuelEconomy;Enable:AverageFuelEconomy;Enable:TransmitterDiagnosticTable;Enable:TransmitterDiagnosticCode">
+<META HTTP-Equiv="Telemetry" Content="Enable:VehicleIDNumber;Enable:VehicleGlobalPosition">
+
+
+<!--<META HTTP-Equiv="Telemetry" Content="QueryFrequency:10000">-->
+<META HTTP-Equiv="Telemetry" Content="Invoke">
+
+
+<TITLE>Telemetry Test Index Page</TITLE>
+</HEAD>
+
+<BODY BGCOLOR="#FFFFEA" TEXT="#0000A0" LINK="#FF0000" VLINK="#808080" ALINK="#008040">
+<P>Enable filter and Invoke Static 1.1</P>
+Please ensure the simulator is running on the device.
+
+
+
+Speed		: <span id=roadSpeedSpan></span><br>
+RPM		: <span id=engineRPMSpan></span><br>
+Distance	: <span id=totalDistanceSpan></span><br>
+Load		: <span id=engineLoadSpan></span><br>
+ABS		: <span id=absControlStatusSpan></span><br>
+Throttle	: <span id=throttlePositionSpan></span><br>
+Service		: <span id=serviceBrakeSwitchSpan></span><br>
+Ignition	: <span id=ignitionStatusSpan></span><br>
+Parking		: <span id=parkingBrakeSwitchSpan></span><br>
+Cruise		: <span id=cruiseControlSwitchSpan></span><br>
+Brakes		: <span id=brakesSwitchSpan></span><br>
+Clutch		: <span id=clutchStatusSpan></span><br>
+Cruise		: <span id=cruiseControlSetSpeedSpan></span><br>
+Accelerator	: <span id=acceleratorPedalPosSpan></span><br>
+EngineOil	: <span id=engineOilPressureSpan></span><br>
+Boost		: <span id=boostPressureSpan></span><br>
+EngineCoolant	: <span id=engineCoolantTemperatureSpan></span><br>
+EngineRetarder	: <span id=engineRetarderStatusSpan></span><br>
+ATC_ASR		: <span id=atc_asr_StatusSpan></span><br>
+TRselected	: <span id=transmissionRangeSelectedSpan></span><br>
+TRattained	: <span id=transmissionRangeAttainedSpan></span><br>
+Battery		: <span id=batteryVoltageSpan></span><br>
+Temperature	: <span id=engineOilTemperatureSpan></span><br>
+Transmission	: <span id=transmissionOilTemperatureSpan></span><br>
+Fuel		: <span id=fuelRateSpan></span><br>
+Instantaneous	: <span id=instantaneousFuelEconomySpan></span><br>
+Average		: <span id=averageFuelEconomySpan></span><br>
+Transmitter	: <span id=transmitterDiagnosticTableSpan></span><br>
+Code		: <span id=transmitterDiagnosticCodeSpan></span><br>
+VehicleID	: <span id=vehicleIDNumberSpan></span><br>
+Global		: <span id=vehicleGlobalPositionSpan></span><br>
+
+
+<P><BR><INPUT TYPE="button" VALUE="Back" ONCLICK="location.href='./VC6090.html'"></P>
+
+
+
+</BODY>
+</HTML>
+
+<SCRIPT TYPE="TEXT/JAVASCRIPT">
+var Generic = new ActiveXObject("PocketBrowser.Generic");
+
+
+
+function Nav(filter, data, units, time)
+{
+	if (filter == "RoadSpeed")
+		roadSpeedSpan.innerText = data + " " + units + " at " + time;
+	else if(filter == "EngineRPM")
+		engineRPMSpan.innerText = data + " " + units + " at " + time;
+	else if(filter == "TotalDistance")
+		totalDistanceSpan.innerText = data + " " + units + " at " + time;
+	else if(filter == "EngineLoad")
+		engineLoadSpan.innerText = data + " " + units + " at " + time;
+	else if(filter == "ABSControlStatus")
+		absControlStatusSpan.innerText = data + " " + units + " at " + time;
+	else if(filter == "ThrottlePosition")
+		throttlePositionSpan.innerText = data + " " + units + " at " + time;
+	else if(filter == "ServiceBrakeSwitch")
+		serviceBrakeSwitchSpan.innerText = data + " " + units + " at " + time;
+	else if(filter == "IgnitionStatus")
+		ignitionStatusSpan.innerText = data + " " + units + " at " + time;
+	else if(filter == "ParkingBrakeSwitch")
+		parkingBrakeSwitchSpan.innerText = data + " " + units + " at " + time;
+	else if(filter == "CruiseControlSwitch")
+		cruiseControlSwitchSpan.innerText = data + " " + units + " at " + time;
+	else if(filter == "BrakesSwitch")
+		brakesSwitchSpan.innerText = data + " " + units + " at " + time;
+	else if(filter == "ClutchStatus")
+		clutchStatusSpan.innerText = data + " " + units + " at " + time;
+	else if(filter == "CruiseControlSetSpeed")
+		cruiseControlSetSpeedSpan.innerText = data + " " + units + " at " + time;
+	else if(filter == "AcceleratorPedalPos")
+		acceleratorPedalPosSpan.innerText = data + " " + units + " at " + time;
+	else if(filter == "EngineOilPressure")
+		engineOilPressureSpan.innerText = data + " " + units + " at " + time;
+	else if(filter == "BoostPressure")
+		boostPressureSpan.innerText = data + " " + units + " at " + time;
+	else if(filter == "EngineCoolantTemperature")
+		engineCoolantTemperatureSpan.innerText = data + " " + units + " at " + time;
+	else if(filter == "EngineRetarderStatus")
+		engineRetarderStatusSpan.innerText = data + " " + units + " at " + time;
+	else if(filter == "ATC_ASR_Status")
+		atc_asr_StatusSpan.innerText = data + " " + units + " at " + time;
+	else if(filter == "TransmissionRangeSelected")
+		transmissionRangeSelectedSpan.innerText = data + " " + units + " at " + time;
+	else if(filter == "TransmissionRangeAttained")
+		transmissionRangeAttainedSpan.innerText = data + " " + units + " at " + time;
+	else if(filter == "BatteryVoltage")
+		batteryVoltageSpan.innerText = data + " " + units + " at " + time;
+	else if(filter == "EngineOilTemperature")
+		engineOilTemperatureSpan.innerText = data + " " + units + " at " + time;
+	else if(filter == "TransmissionOilTemperature")
+		transmissionOilTemperatureSpan.innerText = data + " " + units + " at " + time;
+	else if(filter == "FuelRate")
+		fuelRateSpan.innerText = data + " " + units + " at " + time;
+	else if(filter == "InstantaneousFuelEconomy")
+		instantaneousFuelEconomySpan.innerText = data + " " + units + " at " + time;
+	else if(filter == "AverageFuelEconomy")
+		averageFuelEconomySpan.innerText = data + " " + units + " at " + time;
+	else if(filter == "TransmitterDiagnosticTable")
+		transmitterDiagnosticTableSpan.innerText = data + " " + units + " at " + time;
+	else if(filter == "TransmitterDiagnosticCode")
+		transmitterDiagnosticCodeSpan.innerText = data + " " + units + " at " + time;
+	else if(filter == "VehicleIDNumber")
+		vehicleIDNumberSpan.innerText = data + " " + units + " at " + time;
+	else if(filter == "VehicleGlobalPosition")
+		vehicleGlobalPositionSpan.innerText = data + " " + units + " at " + time;
+}
+
+
+
+</SCRIPT>

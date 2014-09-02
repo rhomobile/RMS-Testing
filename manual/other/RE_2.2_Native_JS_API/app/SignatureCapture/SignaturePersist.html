@@ -1,0 +1,292 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+<!--<META HTTP-Equiv="SignatureCapture"Content="left:10;top:60;width:100;height:100;BGColor:;visibility:visible">-->
+<META HTTP-Equiv="SignatureCapture" content="SignatureSaveEvent:url('Javascript:onCaptured('%s');')">
+<!--<META HTTP-Equiv="SignatureCapture" Content="VectorEvent:url('Javascript:onVectors(%s);')">-->
+</head>
+<script language=javascript>
+
+var selectedVisibility=""; //Selected Visibility.
+
+var selectedBorder=""; //Selected Aim in the list.
+var eventScript="";
+
+function Quit() 
+{
+//    generic.InvokeMETAFunction("Application", "Quit");
+
+}
+function selectVisibility()
+{
+	var sltVisibility=frm.sigVisibility.selectedIndex;
+	selectedVisibility = frm.sigVisibility.options[sltVisibility].value;
+	switch(selectedVisibility)
+	{
+		case 'Visible':
+            
+			generic.InvokeMETAFunction('SignatureCapture', 'Visibility:Visible');
+			break;
+
+		case 'Hidden':
+
+			generic.InvokeMETAFunction('SignatureCapture', 'Visibility:Hidden');
+			break;
+
+		
+		case 'Address':
+
+			generic.InvokeMETAFunction('SignatureCapture', 'Visibility:Address');
+			break;
+	}
+}
+
+
+function clearSignature()
+{
+	generic.InvokeMETAFunction('SignatureCapture', 'Clear');
+}
+
+function captureSignature()
+{
+	generic.InvokeMETAFunction('SignatureCapture', 'Name:SymbolPB');
+	generic.InvokeMETAFunction('SignatureCapture', 'Capture');
+}
+
+function setLeftPosition()
+{
+	var leftpst=frm.leftPosition.value;
+	var leftpstvalue="Left:"+leftpst;
+	generic.InvokeMETAFunction('SignatureCapture',leftpstvalue);
+}
+
+function setTopPosition()
+{
+	var toppst=frm.topPosition.value;
+	var toppstvalue="Top:"+toppst;
+	generic.InvokeMETAFunction('SignatureCapture',toppstvalue);
+}
+
+function setheight()
+{
+	var ht=frm.viewerHeight.value;
+	var setheightvalue="Height:"+ht;
+	generic.InvokeMETAFunction('SignatureCapture',setheightvalue);
+}
+
+function setwidth()
+{
+	var wd=frm.viewerWidth.value;
+	var setwidthvalue="Width:"+wd;
+	generic.InvokeMETAFunction('SignatureCapture',setwidthvalue);
+}
+
+function peninkwidth()
+{
+	var penwd=frm.inkwidth.value;
+	var penwdvalue="Penwidth:"+penwd;
+	generic.InvokeMETAFunction('SignatureCapture',penwdvalue);
+}
+
+function peninkcolor()
+{
+	var pcolor=frm.inkcolor.value;
+	var pencolorvalue="Pencolor:"+pcolor;
+	generic.InvokeMETAFunction('SignatureCapture',pencolorvalue);
+}
+
+function bgroundcolor()
+{
+	var backgcolor=frm.backgroundColor.value;
+	var backgcolorvalue="BGColor:"+backgcolor;
+	generic.InvokeMETAFunction('SignatureCapture',backgcolorvalue);
+}
+
+function selectBorder()
+{
+	var sltBorder=frm.sigBorder.selectedIndex;
+	selectedBorder = frm.sigBorder.options[sltBorder].value;
+	switch(selectedBorder)
+	{
+		case 'On':
+			generic.InvokeMETAFunction('SignatureCapture', 'Border:Visible');
+			break;
+
+		case 'Off':
+			generic.InvokeMETAFunction('SignatureCapture', 'Border:Hidden');
+			break;
+		
+		case 'Test':
+			generic.InvokeMETAFunction('SignatureCapture', 'Border:Address');
+			break;
+	}
+}
+
+function imgcapture()
+{
+
+	var DestinationValue = frm.txtDestination.value;
+	var dest = "Destination:"+DestinationValue;
+	generic.InvokeMETAFunction('SignatureCapture', dest);
+
+	if(frm.txtUserName.value.length != 0)
+	{
+		var UserName = frm.txtUserName.value;
+		var uname = "username:"+UserName;
+		generic.InvokeMETAFunction('SignatureCapture', uname);
+	}
+	
+	var Password = frm.txtPassword.value;
+	var pword = "password:"+Password;
+	generic.InvokeMETAFunction('SignatureCapture', pword);
+	
+	/*var sigName = frm.txtName.value;
+	var signaturename = "Name:"+sigName;
+	generic.InvokeMETAFunction('SignatureCapture', signaturename);*/
+	
+	
+
+	for (var i=0; i < frm.group1.length; i++)
+   	{   
+      		if (frm.group1[i].checked)
+      		{
+      			var type = frm.group1[i].value;
+      		}
+   	}	
+	
+
+	if(type=="javascript")	
+	{
+		generic.InvokeMETAFunction("SignatureCapture", "SignatureSaveEvent:url('javascript:onCaptured('%s');')");
+		//alert("hi");
+		//generic.InvokeMETAFunction("SignatureCapture", "SignatureSaveEvent:");
+	}
+
+	else if(type=="HTML")
+	{
+	    generic.InvokeMETAFunction("SignatureCapture", "SignatureSaveEvent:url('http://157.235.207.158/PB3.x/Signature Capture/SignatureNavigate.html')");
+	}
+
+	else if(type=="VectorArray")
+	{
+		generic.InvokeMETAFunction("SignatureCapture", "VectorEvent:url('javascript:myvectorevent(%s);')");
+	}
+
+	generic.InvokeMETAFunction('SignatureCapture', 'capture');
+	
+}
+
+
+
+function onCaptured(data)
+{
+	
+	message.innerHTML = "Data: " + data;
+}
+
+
+
+function doVisible()
+{
+generic.InvokeMETAFunction('SignatureCapture', 'left:10;top:60;width:100;height:100;BGColor:#FF0000;Visibility:visible');
+
+}
+
+function doHidden()
+{
+generic.InvokeMETAFunction('SignatureCapture', 'Visibility:Hidden');
+
+}
+
+function onVectors(data)
+{
+  var VectorAsHTML = "<TABLE><TR><TH>X</TH><TH>Y</TH><TH>X</TH><TH>Y</TH><TH>X</TH><TH>Y</TH></TR>";
+  for (var i=0; i<data.length; i = i + 6)
+  {
+    VectorAsHTML = VectorAsHTML + "<TR>"
+    VectorAsHTML = VectorAsHTML + "<TD>" + data[i] + "</TD><TD>" + data[i+1] + "</TD>";
+    VectorAsHTML = VectorAsHTML + "<TD>" + data[i+2] + "</TD><TD>" + data[i+3] + "</TD>";
+    VectorAsHTML = VectorAsHTML + "<TD>" + data[i+4] + "</TD><TD>" + data[i+5] + "</TD>";
+    VectorAsHTML = VectorAsHTML + "</TR>"
+  }
+  VectorAsHTML + "</TABLE>"
+  vectorOut.innerHTML = VectorAsHTML;
+}
+
+</script>
+
+<body>
+<div id="message">Message</div>
+<DIV id="vectorOut">Vectors Will Appear Here:</div>
+<form id="frm" action="">
+
+<BR><BR><BR><BR><BR>
+
+
+<INPUT TYPE="button" VALUE="Hidden" ONCLICK="doHidden();">
+<INPUT TYPE="button" VALUE="visible" ONCLICK="doVisible();">
+<br />
+<input type=button id="clear" onclick="clearSignature();" value="Clear">
+<input type=button id="capture" onclick="captureSignature();" value="CaptureLocal">
+<input type=button onclick="Javascript:imgcapture();" value="Capture">
+<BR>
+
+
+<table>
+ <!--<tr>
+      <td>Left Position:</td><td><Textarea id="leftPosition" cols="10" rows="1">20</Textarea>
+	<input type=button onclick="Javascript:setLeftPosition();" value="Left">
+</td></tr>
+	
+<tr>
+      <td>Top Position:</td><td><Textarea id="topPosition" cols="10" rows="1">20</Textarea>
+	<input type=button onclick="Javascript:setTopPosition();" value="Top">
+</td></tr>
+ <tr>
+      <td>Height:</td><td><Textarea id="viewerHeight" cols="10" rows="1">30</Textarea>
+	<input type=button onclick="Javascript:setheight();" value="Height">
+</td> </tr>
+ <tr>
+      <td>Width:</td><td><Textarea id="viewerWidth" cols="10" rows="1">130</Textarea>
+	<input type=button onclick="Javascript:setwidth();" value="Width">
+</td></tr>-->
+ <tr>
+      <td>Pen Width:</td><td><Textarea id="inkwidth" cols="10" rows="1">3</Textarea>
+	<input type=button onclick="Javascript:peninkwidth();" value="PenInk">
+</td></tr>
+ <tr>
+      <td>Pen Color:</td><td><Textarea id="inkcolor" cols="10" rows="1"></Textarea>
+	<input type=button onclick="Javascript:peninkcolor();" value="PenColor">
+</td></tr>
+ <tr>
+      <td>BG Color:</td><td><Textarea id="backgroundColor" cols="10" rows="1"></Textarea>
+	<input type=button onclick="Javascript:bgroundcolor();" value="BGColor">
+</td></tr>
+
+</table>
+
+
+
+<!--<input type="radio" name="group1" value="javascript">Navigate to javascript function
+<br>
+<input type="radio" name="group1" value="HTML" checked="checked">Navigate to HTML Page
+<br>
+<input type="radio" name="group1" value="VectorArray">Navigate to Vector Array function-->
+
+
+<!--<br>
+
+    <input type=button onclick="Javascript:imgcapture();" value="Capture">-->
+<!--<hr>-->
+
+<BR>
+<A HREF="SignatureCapture.html">Back</A><br />
+<A HREF="SignaturePersist1.html">Go to another page</A><br />
+
+
+<!--<P><INPUT TYPE="button" VALUE="Quit" ONCLICK="Quit();"></P>-->
+
+</form>
+</body>
+</html>

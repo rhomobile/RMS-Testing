@@ -1,0 +1,228 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+    <title>PB Battery Test</title>
+<script language=javascript>
+    var a = 0;
+    var generic = new ActiveXObject("PocketBrowser.Generic");
+
+    function batteryVisible() {
+        generic.InvokeMETAFunction('Battery', 'Visibility:Visible');
+    }
+
+    function batteryHidden() {
+        generic.InvokeMETAFunction('Battery', 'visibility:Hidden');
+    }
+
+    function batteryAddress() {
+        generic.InvokeMETAFunction('Battery', 'visibility:Address');
+    }
+
+
+
+//    function IconPositionGraphPosition() {
+//        var selectedPosition = "";
+//       var SlectedIndex = frm.mydropdown.selectedIndex;
+//     
+//        selectedPosition = frm.mydropdown.options[SlectedIndex].value;
+//        switch (selectedPosition) {
+//            case 'Left':
+
+//                generic.InvokeMETAFunction('Battery', 'Left:50; Top:50; layout:left;color:#00C000; visibility:visible');
+//                break;
+
+//            case 'Up':
+
+//               // generic.InvokeMETAFunction('Battery', 'Left:200; Top:200; layout:Up; GraphPosition:Right; color:#00C000; visibility:visible');
+//               generic.InvokeMETAFunction('Battery', 'Left:200; Top:200; layout:up;color:#00C000; visibility:visible');
+//                break;
+
+//            case 'Right':
+
+//               // generic.InvokeMETAFunction('Battery', 'Left:10; Top:10; layout:Right; GraphPosition:Top; color:#00C000; visibility:visible');
+//               generic.InvokeMETAFunction('Battery', 'Left:10; Top:10; layout:right; color:#00C000; visibility:visible');
+//                break;
+
+//            case 'Down':
+
+//                //generic.InvokeMETAFunction('Battery', 'Left:160; Top:160; layout:Down; GraphPosition:Right; color:#00C000; visibility:visible');
+//                generic.InvokeMETAFunction('Battery', 'Left:10; Top:10; layout:down;color:#00C000; visibility:visible');
+//                break;
+
+//         
+
+//        }
+//    }
+    function IconPositionGraphPosition() {
+    bat.innerHTML = "in";
+    var selectedPosition = "";
+        for (var i=0;i < frm.position.length; i++)
+   	{   
+     	if (frm.position[i].checked)
+      		{
+      		    
+      		selectedPosition= frm.position[i].value;
+      			
+      	}
+   	}
+   	bat.innerHTML = "kk"+selectedPosition;	
+
+        switch (selectedPosition) {
+            case 'Left':
+
+                generic.InvokeMETAFunction('Battery', 'Left:50; Top:50; layout:left;color:#00C000; visibility:visible');
+                break;
+
+            case 'Up':
+
+               // generic.InvokeMETAFunction('Battery', 'Left:200; Top:200; layout:Up; GraphPosition:Right; color:#00C000; visibility:visible');
+               generic.InvokeMETAFunction('Battery', 'Left:200; Top:200; layout:Up;color:#00C000; visibility:visible');
+             
+                break;
+
+            case 'Right':
+
+               // generic.InvokeMETAFunction('Battery', 'Left:10; Top:10; layout:Right; GraphPosition:Top; color:#00C000; visibility:visible');
+               generic.InvokeMETAFunction('Battery', 'Left:10; Top:10; layout:right; color:#00C000; visibility:visible');
+                break;
+
+            case 'Down':
+
+                //generic.InvokeMETAFunction('Battery', 'Left:160; Top:160; layout:Down; GraphPosition:Right; color:#00C000; visibility:visible');
+                generic.InvokeMETAFunction('Battery', 'Left:10; Top:10; layout:down;color:#00C000; visibility:visible');
+                break;
+
+         
+
+        }
+    }
+
+    function smartBattery() {
+
+        generic.InvokeMETAFunction('Battery','visibility:hidden');
+        //generic.InvokeMETAFunction("Battery", "SmartBatteryEvent:url('Javascript:SmartBattery1('%s','%s','%s','%s','%s','%s');')");
+        generic.InvokeMETAFunction("Battery", "SmartBatteryEvent:url('Javascript:SmartBattery1(%json);')");
+        //generic.InvokeMETAFunction("Battery","SmartBatteryEvent:");
+        generic.InvokeMETAFunction('Battery', 'GetSmartBatteryStatus');
+
+    }
+
+//    function SmartBattery1(SN, PN, BC, RC, MA, SH) {
+//       //alert("event fired");
+//       bat.innerHTML = "SN: " + SN + "\<BR>PN:" + PN + "\<BR>BC: " + BC + "\<BR>RC: " + RC + "\<BR>MA:" + MA + "\<BR>SH: " + SH;
+//       return;
+//    }
+
+    function SmartBattery1(json){
+     bat.innerHTML = "SN: " + json.serialNumber + "\<BR>PN:" + json.partNumber+ "\<BR>BC: " +json.batteryChargeCycles + "\<BR>RC: " + json.ratedCapacity + "\<BR>MA:" + json.manufactureDate + "\<BR>SH: " + json.stateOfHealth;
+    }
+    function eventStatus() {
+
+        generic.InvokeMETAFunction('Battery', 'visibility:visible');
+        generic.InvokeMETAFunction("Battery", "BatteryEvent:url('Javascript:OnBattery('%s','%s','%s');')");
+        //generic.InvokeMETAFunction("Battery","BatteryEvent:");
+    }
+
+    function OnBattery(AC, main, backup) {
+        a = a + 1;
+
+        bat.innerHTML = "AC: " + AC + "\<BR>main:" + main + "\<BR>backup: " + backup + "\<BR>Count: "+a;
+        return;
+    }
+
+    function eventURL() {
+        generic.InvokeMETAFunction('Battery', 'visibility:visible');
+        generic.InvokeMETAFunction("Battery", "BatteryEvent:url('http://10.233.85.82/PB3.x/Navigate.html')");
+    }
+
+    function setLeftPosition() {
+        var leftpst = frm.leftPosition.value;
+        var temp = "Left:" + leftpst;
+        generic.InvokeMETAFunction('Battery', temp);
+    }
+
+    function setTopPosition() {
+        var toppst = frm.topPosition.value;
+        var temp1 = "Top:" + toppst;
+        generic.InvokeMETAFunction('Battery', temp1);
+    }
+
+    function setcolor() {
+        var clr = frm.colorRGB.value;
+        var temp2 = "Color:" + clr;
+        generic.InvokeMETAFunction('Battery', temp2);
+    }
+
+
+
+</script>
+
+</head>
+<body>
+
+<form id="frm" action="">
+<br>
+<br>
+<br>
+<br>
+<br>
+<div id="bat">Battery readings should appear here Saurav</div>
+
+<BR><BR>
+
+<input type=button onclick="batteryVisible();" value="Visible">
+
+<input type=button id="Hidden" onclick="batteryHidden();" value="Hidden">
+
+<BR><BR>
+
+<input type=button id="Address" onclick="batteryAddress();" value="Address">
+
+<BR><BR>
+
+<input type=button id="EventStatus" onclick="eventStatus();" value="EventStatus">
+
+<BR><BR>
+
+<input type=button id="EventURL" onclick="eventURL();" value="EventURL">
+
+<BR><BR>
+
+<input type=button id="SmartBattery" onclick="smartBattery();" value="SmartBattery">
+
+<BR><BR>
+<input type=button id="Button1" onclick="IconPositionGraphPosition();" value="Position">
+<!--Position
+<select name="mydropdown" id="mydropdown" onChange="IconPositionGraphPosition();">
+<option value="Left">Left</option>
+<option value="Up">Up</option>
+<option value="Right">Right</option>
+<option value="Down">Down</option>
+
+</select>-->
+<input type="radio" name="position" value="Left" /> Left<br />
+<input type="radio" name="position" value="Up" /> Up<br />
+<input type="radio" name="position" value="Right" /> Right<br />
+<input type="radio" name="position" value="Down" /> Down<br />
+<BR><BR>
+<table border=1 width=100%>
+ <tr>
+      <td>Left Position:</td><td><Textarea id="leftPosition" cols="10" rows="1">350</Textarea> <INPUT type=button onclick="Javascript:setLeftPosition();" value="Left"></td>
+    </tr>
+ <tr>
+      <td>Top Position:</td><td><Textarea id="topPosition" cols="10" rows="1">250</Textarea> <INPUT type=button onclick="Javascript:setTopPosition();" value="Top"></td>
+    </tr>
+ <tr>
+      <td>Color:</td><td><Textarea id="colorRGB" cols="10" rows="1">#E066FF</Textarea> <INPUT type=button onclick="Javascript:setcolor();" value="Color"></td>
+    </tr>
+
+</table>
+
+<BR>
+<A HREF="battIndex.html">Back</A>
+
+
+</form>
+</body>
+</html>

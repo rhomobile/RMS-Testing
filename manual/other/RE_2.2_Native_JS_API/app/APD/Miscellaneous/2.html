@@ -1,0 +1,435 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+<META HTTP-Equiv="quitbutton" Content="Top:10; Left:10; Visibility:Visible">
+<META HTTP-Equiv="minimizebutton" Content="Visibility:Visible">
+<META HTTP-Equiv="reloadbutton" Content="Visibility:Visible">
+
+
+</head>
+<body>
+
+<br /><br /><br /><br /><div id="myDiv">Result</div><br />
+<div id="myPath">pathlocation</div><br />
+<div id="LastMessage">LastMessage</div>
+<P>Test APD Commands</P>
+
+<select name="myBTAddress" id="myBTAddress" size=1" onchange="getprintermac();">
+<OPTION value="Select option" >Select option</OPTION>
+<OPTION value="BC53:1|00037A032772" >ZebraWithPIN</OPTION> 
+<OPTION value="BC53:1|00:03:7A:03:27:72" >ZebraWithPINcolon</OPTION> 
+<OPTION value="BC53|00:03:7A:03:27:72" >ZebraWithPINcolonWithoutPort</OPTION> 
+<OPTION value="WC53:6101|192168006010" >WirelessZebrawithcolon</OPTION> 
+<OPTION value="WC53:6101|192.168.006.010" >WirelessZebrawithoutcolon</OPTION> 
+<OPTION value="WC53|192.168.6.10" >WirelessZebrawithoutPort</OPTION> 
+<OPTION value="" >empty</OPTION> 
+<OPTION value="BC64:1|00037A31A5B3" >InvalidForZebraWithoutpin</OPTION> 
+<OPTION value="BC53:1|00225801CABC">ZebraQL320+</OPTION> 
+
+</select><br />
+PrintID applicable for Bluetooth only.<br />
+Opens the previously defined port by the setPrinter command<br />
+<table border="0" cellpadding="0">
+<tr>
+<th></th>
+<th></th>
+</tr>
+<tr><td><P><INPUT TYPE="button" VALUE="GetLastMessageMethod" ONCLICK="GetLastMessageMethod();"></P></td>
+<td><P><INPUT TYPE="button" VALUE="embeddedCommandInformatFile" ONCLICK="embeddedCommandInformatFile();"></P></td></tr>
+
+<tr><td><P><INPUT TYPE="button" VALUE="SetPrinterID" ONCLICK="SetPrinterID();"></P></td>
+<td><P><INPUT TYPE="button" VALUE="SetPrinterIDNegativeCommand" ONCLICK="SetPrinterIDNegative();"></P></td></tr>
+
+<tr><td><P><INPUT TYPE="button" VALUE="GetPrinterID" ONCLICK="GetPrinterID();"></P></td>
+<td><P><INPUT TYPE="button" VALUE="GetPrinterIDNegativeCommand" ONCLICK="GetPrinterIDNegativeCommand();"></P></td></tr>
+
+<tr><td><P><INPUT TYPE="button" VALUE="SetFormatPath" ONCLICK="SetFormatPath();"></P></td>
+<td><P><INPUT TYPE="button" VALUE="SetFormatPathNegativeCommand" ONCLICK="SetFormatPathNegativeCommand();"></P></td></tr>
+
+<tr><td><P><INPUT TYPE="button" VALUE="sendformat1" ONCLICK="sendformat1();"></P></td>
+<td><P><INPUT TYPE="button" VALUE="sendformat2" ONCLICK="sendformat2();"></P></td></tr>
+
+<tr><td><P><INPUT TYPE="button" VALUE="sendformat3" ONCLICK="sendformat3();"></P></td>
+<td><P><INPUT TYPE="button" VALUE="sendformatNegativeCommand" ONCLICK="sendformatNegativeCommand();"></P></td></tr>
+
+<tr><td><P><INPUT TYPE="button" VALUE="sendformatwithextension" ONCLICK="sendformatwithextension();"></P></td>
+<td><P><INPUT TYPE="button" VALUE="sendformatwithwrongextension" ONCLICK="sendformatwithwrongextension();"></P></td></tr>
+
+<tr><td><P><INPUT TYPE="button" VALUE="SetTemplatePath" ONCLICK="SetTemplatePath();"></P></td>
+<td><P><INPUT TYPE="button" VALUE="SetTemplatePathNegativeCommand" ONCLICK="SetTemplatePathNegativeCommand();"></P></td></tr>
+
+<tr><td><P><INPUT TYPE="button" VALUE="senddatawithTemplate1" ONCLICK="senddatawithTemplate1();"></P></td>
+<td><P><INPUT TYPE="button" VALUE="senddatawithTemplate2" ONCLICK="senddatawithTemplate2();"></P></td></tr>
+
+<tr><td><P><INPUT TYPE="button" VALUE="senddatawithTemplate3" ONCLICK="senddatawithTemplate3();"></P></td>
+<td><P><INPUT TYPE="button" VALUE="senddatawithTemplateNegativeCommand" ONCLICK="senddatawithTemplateNegativeCommand();"></P></td></tr>
+
+<tr><td><P><INPUT TYPE="button" VALUE="senddatawithoutTemplate" ONCLICK="senddatawithoutTemplate();"></P></td></tr>
+
+<tr><td><P><INPUT TYPE="button" VALUE="sendstringwithlabel" ONCLICK="sendstringwithlabel();"></P></td>
+<td><P><INPUT TYPE="button" VALUE="sendstring" ONCLICK="sendstring();"></P></td></tr>
+
+<tr><td><P><INPUT TYPE="button" VALUE="sendstringNegativeCommand" ONCLICK="sendstringNegativeCommand();"></P></td>
+<td><P><INPUT TYPE="button" VALUE="sendstringwithHexcommand" ONCLICK="sendstringwithHexcommand();"></P></td></tr>
+
+<tr><td><P><INPUT TYPE="button" VALUE="setPrintIDPath" ONCLICK="setPrintIDPath();"></P></td>
+<td><P><INPUT TYPE="button" VALUE="setPrintIDPathNegativeCommand" ONCLICK="setPrintIDPathNegativeCommand();"></P></td></tr>
+
+<tr><td><P><INPUT TYPE="button" VALUE="PrintID" ONCLICK="PrintID();"></P></td>
+<td><P><INPUT TYPE="button" VALUE="PrintIDNegativeCommand" ONCLICK="PrintIDNegativeCommand();"></P></td></tr>
+
+<tr><td><P><INPUT TYPE="button" VALUE="openPort" ONCLICK="openPort();"></P></td>
+<td><P><INPUT TYPE="button" VALUE="openPortNegativeCommand" ONCLICK="openPortNegativeCommand();"></P></td></tr>
+
+<tr><td><P><INPUT TYPE="button" VALUE="closePort" ONCLICK="closePort();"></P></td>
+<td><P><INPUT TYPE="button" VALUE="closePortNegativeCommand" ONCLICK="closePortNegativeCommand();"></P></td></tr>
+
+<tr><td><P><INPUT TYPE="button" VALUE="GetVersion" ONCLICK="GetVersion();"></P></td>
+<td><P><INPUT TYPE="button" VALUE="GetVersionNegativeCommand" ONCLICK="GetVersionNegativeCommand();"></P></td></tr>
+
+<tr><td><P><INPUT TYPE="button" VALUE="GetLastMessage" ONCLICK="GetLastMessage();"></P></td>
+<td><P><INPUT TYPE="button" VALUE="GetLastMessageNegativeCommand" ONCLICK="GetLastMessageNegativeCommand();"></P></td></tr>
+
+<tr><td><P><INPUT TYPE="button" VALUE="BTPowerOn" ONCLICK="BTPowerOn();"></P></td>
+<td><P><INPUT TYPE="button" VALUE="BTPowerOnNegativeCommand" ONCLICK="BTPowerOnNegativeCommand();"></P></td></tr>
+
+<tr><td><P><INPUT TYPE="button" VALUE="BTPoweroff" ONCLICK="BTPoweroff();"></P></td>
+<td><P><INPUT TYPE="button" VALUE="BTPoweroffNegativeCommand" ONCLICK="BTPoweroffNegativeCommand();"></P></td></tr>
+
+<tr><td><P><INPUT TYPE="button" VALUE="ProgressbarOn" ONCLICK="ProgressbarOn();"></P></td>
+<td><P><INPUT TYPE="button" VALUE="ProgressbarOnNegativeCommand" ONCLICK="ProgressbarOnNegativeCommand();"></P></td></tr>
+
+<tr><td><P><INPUT TYPE="button" VALUE="ProgressbarOff" ONCLICK="ProgressbarOff();"></P></td>
+<td><P><INPUT TYPE="button" VALUE="ProgressbarOffNegativeCommand" ONCLICK="ProgressbarOffNegativeCommand();"></P></td></tr>
+
+<tr><td><P><INPUT TYPE="button" VALUE="SerialPowerOn" ONCLICK="SerialPowerOn();"></P></td>
+<td><P><INPUT TYPE="button" VALUE="SerialPowerOnNegativeCommand" ONCLICK="SerialPowerOnNegativeCommand();"></P></td></tr>
+
+<tr><td><P><INPUT TYPE="button" VALUE="SerialPoweroff" ONCLICK="SerialPoweroff();"></P></td>
+<td><P><INPUT TYPE="button" VALUE="SerialPoweroffNegativeCommand" ONCLICK="SerialPoweroffNegativeCommand();"></P></td></tr>
+
+
+</table>
+<P><INPUT TYPE="button" VALUE="showResult" ONCLICK="showResult();"></P>
+<P><INPUT TYPE="button" VALUE="Test 3" ONCLICK="location.href='./3.html'"></P>
+<P><INPUT TYPE="button" VALUE="Back" ONCLICK="location.href='./APD.html'"></P>
+
+
+</body>
+</html>
+
+<SCRIPT LANGAUGE="JavaScript">
+var message="";
+var printerID ="";
+var myapd = new ActiveXObject("PocketBrowser.NarrowBand");
+
+function GetLastMessageMethod()
+{
+    LastMessage.innerHTML=myapd.PSGetLastMessage();
+}
+
+function embeddedCommandInformatFile()
+{
+var filename="\\My Documents\\setprinterandstring.txt"; 
+myDiv.innerHTML="embeddedCommandInformatFile:"+myapd.PSExternalEx(256, filename);
+myPath.innerHTML="\\My Documents\\setprinterandstring.txt";
+
+}
+
+function getprintermac()
+{
+var index = myBTAddress.selectedIndex;
+printerID = myBTAddress.options[index].value;
+myDiv.innerHTML="BTaddress:"+printerID;
+}
+
+function SetPrinterID()
+{
+	myDiv.innerHTML="SetPrinterID:"+myapd.PSExternalEx(261, printerID);
+}
+
+function SetPrinterIDNegative()
+{
+	myDiv.innerHTML="SetPrinterID:"+myapd.PSExternalEx(-261, printerID);
+}
+
+function GetPrinterID()
+{
+	myDiv.innerHTML="GetPrinterID:"+myapd.PSExternalEx(262, "");
+}
+function GetPrinterIDNegativeCommand()
+{
+	myDiv.innerHTML="GetPrinterIDNegativeCommand:"+myapd.PSExternalEx(-262, "A");
+}
+
+
+function SetFormatPath()
+{
+var myFormatPath="\\My Documents\\APD\\Formats";
+myDiv.innerHTML="SetFormatPath to:"+myFormatPath+"-"+myapd.PSExternalEx(268, myFormatPath);
+myPath.innerHTML=myFormatPath;
+}
+
+function SetFormatPathNegativeCommand()
+{
+var myFormatPath="\\My Documents\\APD\\Formats";
+myDiv.innerHTML="SetFormatPathNegativeCommand:"+myapd.PSExternalEx(-268,myFormatPath);
+myPath.innerHTML=myFormatPath;
+
+}
+
+function SetTemplatePath()
+{
+var myTemplatePath="\\My Documents\\APD\\Template";
+myDiv.innerHTML="SetTemplatePath to"+myTemplatePath+"-"+myapd.PSExternalEx(267, myTemplatePath);
+myPath.innerHTML=myTemplatePath;
+
+}
+
+function SetTemplatePathNegativeCommand()
+{
+var myTemplatePath="\\My Documents\\APD\\Template";
+myDiv.innerHTML="SetTemplatePath:"+myapd.PSExternalEx(-267, myTemplatePath);
+myPath.innerHTML=myTemplatePath;
+
+}
+
+function setPrintIDPath()
+{
+var myIDPath="\\My Documents\\APD\\ID_Label";
+myDiv.innerHTML="setPrintIDPath to"+myIDPath+"-"+myapd.PSExternalEx(269, myIDPath);
+myPath.innerHTML=myIDPath;
+}
+
+function setPrintIDPathNegativeCommand()
+{
+var myIDPath="\\My Documents\\APD\\ID_Label";
+myDiv.innerHTML="setPrintIDPath:"+myapd.PSExternalEx(-269, myIDPath);
+myPath.innerHTML=myIDPath;
+}
+
+function sendformat1()
+{
+myDiv.innerHTML="SendFormat1:"+myapd.PSExternalEx(256, "Format1");
+}
+
+function sendformat2()
+{
+myDiv.innerHTML="SendFormat2:"+myapd.PSExternalEx(256, "Format2");
+}
+
+function sendformat3()
+{
+myDiv.innerHTML="SendFormat3:"+myapd.PSExternalEx(256, "Format3");
+}
+
+function sendformatNegativeCommand()
+{
+myDiv.innerHTML="sendformatNegativeCommand:"+myapd.PSExternalEx(-256, "Format1");
+}
+
+function sendformatwithextension()
+{
+myDiv.innerHTML="sendformatwithextension:"+myapd.PSExternalEx(256, "Format1.C53");
+}
+
+function sendformatwithwrongextension()
+{
+myDiv.innerHTML="sendformatwithwrongextension:"+myapd.PSExternalEx(256, "Format1.D53");
+}
+
+
+function senddatawithTemplate1()
+{
+	myDiv.innerHTML="senddatawithTemplate1:"+myapd.PSExternalEx(257, "\r\nR1\r\n£1.49\r\nSilvikrin\r\nSoft and Gentle\r\n100ml\r\n66897678\r\n");
+}
+
+function senddatawithTemplate2()
+{
+   
+	myDiv.innerHTML="senddatawithTemplate2:"+myapd.PSExternalEx(257, "\r\nR2\r\n£1.49\r\nSilvikrin\r\nSoft and Gentle\r\n100ml\r\n66897678\r\n");
+}
+
+function senddatawithTemplate3()
+{
+   
+	myDiv.innerHTML="senddatawithTemplate3:"+myapd.PSExternalEx(257, "\r\nR3\r\n£1.49\r\nSilvikrin\r\nSoft and Gentle\r\n100ml\r\n66897678\r\n");
+}
+function senddatawithTemplateNegativeCommand()
+{
+   
+	myDiv.innerHTML="senddatawithTemplateNegativeCommand:"+myapd.PSExternalEx(-257, "\r\nR1\r\n£1.49\r\nSilvikrin\r\nSoft and Gentle\r\n100ml\r\n66897678\r\n");
+}
+
+
+function senddatawithoutTemplate()
+{
+ 	myDiv.innerHTML="senddatawithoutTemplate:"+myapd.PSExternalEx(257, "\r\n£1.49\r\nSilvikrin\r\nSoft and Gentle\r\n100ml\r\n66897678\r\n");
+}
+
+
+function PrintID()
+{
+myDiv.innerHTML="PrintID:"+myapd.PSExternalEx(264, "ID.C");
+}
+
+function PrintIDNegativeCommand()
+{
+myDiv.innerHTML="PrintIDNegativeCommand:"+myapd.PSExternalEx(-264, "ID.C");
+}
+
+function sendstringwithlabel()
+{
+	var code = '1234567890';
+	var sLabel = '! 0 200 200 350 1\n'
+	     + 'JOURNAL\n'
+	     + 'SPEED 3\n'
+	     + 'PW 400\n'
+	     + 'B 128 1 1 80 20 80 ' + code + '\n'
+	     + 'T 5 3 20 196 £2.00 off\n'
+	     + 'BOX 5 5 350 295 1\n'
+	     + 'PRINT\n';
+	
+	myDiv.innerHTML="sendstringwithlabel:"+myapd.PSExternalEx(266, sLabel);
+         
+
+}
+function openPort()
+{
+myDiv.innerHTML="openPort:"+myapd.PSExternalEx(270, "");
+}
+
+function openPortNegativeCommand()
+{
+myDiv.innerHTML="openPortNegativeCommand:"+myapd.PSExternalEx(-270, "");
+}
+
+
+function closePort()
+{
+myDiv.innerHTML="closePort:"+myapd.PSExternalEx(271, "");
+}
+
+function closePortNegativeCommand()
+{
+myDiv.innerHTML="closePortNegativeCommand:"+myapd.PSExternalEx(-271, "");
+}
+
+function SerialPoweron()
+{
+myDiv.innerHTML="SerialPoweron:"+myapd.PSExternalEx(272, "");
+}
+
+function SerialPoweronNegativeCommand()
+{
+myDiv.innerHTML="SerialPoweronNegativeCommand:"+myapd.PSExternalEx(-272, "");
+}
+
+function SerialPoweroff()
+{
+myDiv.innerHTML="SerialPoweroff:"+myapd.PSExternalEx(273, "");
+}
+
+function SerialPoweroffNegativeCommand()
+{
+myDiv.innerHTML="SerialPoweroffNegativeCommand:"+myapd.PSExternalEx(-273, "");
+}
+
+function GetVersion()
+{
+   myDiv.innerHTML="GetVersion:"+myapd.PSExternalEx(260, '');
+}
+
+function GetVersionNegativeCommand()
+{
+   myDiv.innerHTML="GetVersionNegativeCommand:"+myapd.PSExternalEx(-260, '');
+}
+
+
+function GetLastMessage()
+{
+   myDiv.innerHTML="GetLastMessage:"+myapd.PSExternalEx(263, '');
+}
+
+function GetLastMessageNegativeCommand()
+{
+   myDiv.innerHTML="GetLastMessageNegativeCommand:"+myapd.PSExternalEx(-263, '');
+}
+
+function BTPoweroff()
+{
+   
+   myDiv.innerHTML="BTPoweroff:"+myapd.PSExternalEx(277, '');
+}
+
+function BTPoweroffNegativeCommand()
+{
+   
+   myDiv.innerHTML="BTPoweroffNegativeCommand:"+myapd.PSExternalEx(-277, '');
+}
+
+function BTPowerOn()
+{
+   
+   myDiv.innerHTML="BTPowerOn:"+myapd.PSExternalEx(276, '');
+}
+
+function BTPowerOnNegativeCommand()
+{
+   
+   myDiv.innerHTML="BTPowerOnNegativeCommand:"+myapd.PSExternalEx(-276, '');
+}
+
+function ProgressbarOn()
+{
+   
+   myDiv.innerHTML="ProgressbarOn275:"+myapd.PSExternalEx(275, '');
+}
+
+function ProgressbarOnNegativeCommand()
+{
+   
+   myDiv.innerHTML="ProgressbarOnNegativeCommand:"+myapd.PSExternalEx(-275, '');
+}
+
+function ProgressbarOff()
+{
+  
+   myDiv.innerHTML="ProgressbarOff274:"+myapd.PSExternalEx(274, '');
+}
+
+function ProgressbarOffNegativeCommand()
+{
+  
+   myDiv.innerHTML="ProgressbarOffNegativeCommand:"+myapd.PSExternalEx(-274, '');
+}
+
+function sendstring()
+{
+   
+  myDiv.innerHTML="sendstring:"+myapd.PSExternalEx(266, 'MOTOROLA SOLUTIONS INDIA PVT LIMITED\r\nRMZ Ecospace,Block3B\r\nSarjapur Outer Ring Road\r\nBangalore');
+
+}
+function sendstringNegativeCommand()
+{
+   
+   myDiv.innerHTML="sendstringNegativeCommand:"+myapd.PSExternalEx(-266, 'MOTOROLA SOLUTIONS INDIA PVT LIMITED\r\nRMZ Ecospace,Block3B\r\nSarjapur Outer Ring Road\r\nBangalore');
+
+}
+
+function sendstringwithHexcommand()
+{
+   
+   myDiv.innerHTML="sendstringwithHexcommand:"+myapd.PSExternalEx('010A', 'HelloWorld');
+
+}
+
+
+
+function showResult()
+{
+myDiv.innerHTML=message;
+}
+
+</SCRIPT>

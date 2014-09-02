@@ -1,0 +1,87 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+<META HTTP-Equiv="MinimizeButton" Content="Top:10; Left:10; Visibility:Visible">
+
+
+
+
+</head>
+<body>
+<P>AutoLoadMode Test</P>
+<!--<embed id="embed4" type="application/x-wtg-legacy-airbeam" width="1" height="1"> </embed>-->
+
+<P><INPUT TYPE="button" VALUE="AutoLoadMode 0" ONCLICK="doSync0();">
+<P><INPUT TYPE="button" VALUE="AutoLoadMode 1" ONCLICK="doSync1();">
+<P><INPUT TYPE="button" VALUE="AutoLoadMode 2" ONCLICK="doSync2();">
+<P><INPUT TYPE="button" VALUE="AutoLoadMode 3" ONCLICK="doSync3();">
+<P><INPUT TYPE="button" VALUE="DeletePackage" ONCLICK="doSync4();">
+<P><INPUT TYPE="button" VALUE="Boot" ONCLICK="doTest();">
+
+<div id="myDiv">Message</div>
+<P><INPUT TYPE="button" VALUE="Back" ONCLICK="location.href='../AirBEAM.html'"></P>
+
+
+
+</body>
+</html>
+
+<script>
+ 
+
+   function doSync0()
+   {
+     
+      myDiv.innerHTML = "AutoLoad mode = 0";
+      airbeam.AutoLoadMode =0;
+      var ret = airbeam.AddPackage("key35");
+      
+      setTimeout('airbeam.Run()', 100);
+      myDiv.innerHTML = "Return value: "+ret;
+   }
+   function doSync1()
+   {
+     
+
+      airbeam.AutoLoadMode =1;
+      airbeam.AddPackage("key35");
+      setTimeout('airbeam.Run()', 100);
+
+   }
+   function doSync2()
+   {
+     
+      myDiv.innerHTML = "AutoLoadmode = 2";
+      airbeam.AutoLoadMode =2;
+      airbeam.AddPackage("key35");
+      setTimeout('airbeam.Run()', 100);
+
+   }
+   function doSync3()
+   {
+     
+
+      airbeam.AutoLoadMode =3;
+      airbeam.AddPackage("key35");
+      setTimeout('airbeam.Run()', 100);
+
+   }
+   function doSync4()
+   {
+      myDiv.innerHTML = "Delete";
+      airbeam.DeletePackage = "key35";
+      setTimeout('airbeam.Run()', 100);
+   }
+   
+   function doTest()
+  {
+    myDiv.innerHTML = "Rebooting";
+	reboot.bootType="Warm";
+  }
+</script>
+
+ 
+
+
+

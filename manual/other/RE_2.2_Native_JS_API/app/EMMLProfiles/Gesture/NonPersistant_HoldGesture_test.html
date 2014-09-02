@@ -1,0 +1,42 @@
+<html>
+
+<META HTTP-Equiv="EMMLProfile" Content="apply:Hold">
+
+<script>
+    var Generic = new ActiveXObject("PocketBrowser.Generic");
+    function doQuit() {
+
+        Generic.InvokeMETAFunction('application', 'quit');
+    }
+
+
+    function doApplyProfile(profile) {
+      
+        Generic.InvokeMETAFunction('EMMLProfile', 'Apply:' + profile);
+    }
+
+    function onGesture(id, count)
+     {
+         if (id == "Scan3") 
+         {
+             message.innerHTML = "Non Persistant Hold gesture is detected and captured";
+         }
+     }
+
+    
+     
+</script>
+
+<body>
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+<h4>Non Persistant Hold test script</h4>
+<h4>Tap Hold and check it.</h4>
+<div id="message"></div><br /><br />
+    <a href="javascript:doApplyProfile('Hold');">Apply Named Profile</a>
+    <br>
+  
+<br><br>
+    <a href="javascript:doQuit();">Quit PB</a>
+
+</body>
+</html>

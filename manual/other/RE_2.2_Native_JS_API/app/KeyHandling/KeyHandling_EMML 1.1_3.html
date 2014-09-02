@@ -1,0 +1,50 @@
+﻿<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+    <title>KeyValue:All; Dispatch:True; KeyEvent:url('javascript:MyKeyEvent('%s');')</title>
+
+<META HTTP-Equiv="KeyCapture" Content="KeyValue:All; Dispatch:True; KeyEvent:url('javascript:MyKeyEvent(%json);')">
+
+<script language=javascript>
+function MyKeyEvent(myjsonobject)
+{
+//alert("Key Pressed :"+key);
+DivKey.innerHTML="KeyEvent Fired.Key Pressed :- "+myjsonobject.keyValue;
+}
+
+</script>
+</head>
+<body>
+<form id="frmKeykandler" action="">
+<br><br><br><br>
+KeyHandling EMML 1.1 script 3
+<br>
+
+KeyValue:All; Dispatch:True; KeyEvent:url('javascript:MyKeyEvent(%json);')
+<DIV ID="DivKey">Keyvalue will appear here</DIV>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<table>
+    <tr>
+        <td><a href="main"></a></td>
+    </tr>
+    <tr>
+        <Textarea id="txtInput" cols="15" rows="2"></Textarea>
+     </tr>
+         <tr>
+        <Textarea id="TexInput2" cols="15" rows="2"></Textarea>
+    </tr>
+    
+</table>
+        
+      <P><INPUT TYPE="button" VALUE="Back" ONCLICK="location.href='KeyHandling_Index.html'"></P>  
+
+</form>
+</body>
+</html>

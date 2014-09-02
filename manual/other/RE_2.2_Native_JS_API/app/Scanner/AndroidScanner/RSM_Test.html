@@ -1,0 +1,1049 @@
+<HTML>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+<script language=javascript>
+  var selected_scanner = "";
+
+    function SetdisplayBtAddressBarcodeOnEnable()
+    {
+       scanner.displayBtAddressBarcodeOnEnable='true';
+       mymsg.innerHTML="settrue";
+    } 
+  
+    function SetenableTimeout()
+    {
+       scanner.enableTimeout='15';
+       mymsg.innerHTML="settimeout";
+    } 
+  
+   function enablemethod()
+    {
+       scanner.enable();
+       mymsg.innerHTML="enable";
+    }
+    
+    function disablemethod()
+    {
+     scanner.disable();
+       mymsg.innerHTML="disable";
+
+    }
+    
+    function enabletest()
+   {
+     var temp = "enabled:" + selected_scanner.toString();
+     scanner.setEMML(temp);
+     mymsg.innerHTML=temp;
+
+   }
+
+   function disabletest()
+    {
+     scanner.setEMML('disable');
+       mymsg.innerHTML="disabled";
+
+    }
+    
+    function enablecodabar()
+   {
+     scanner.allDecoders ='disabled';
+     scanner.codabar='enabled';
+     scanner.codabarMaxLength='12';
+     scanner.codabarMinLength='1';
+     mymsg.innerHTML="codabar";
+   }
+   
+   function starttest()
+   {
+     scanner.start();
+       mymsg.innerHTML="start";
+
+   }
+
+   function stoptest()
+    {
+     scanner.stop();
+      mymsg.innerHTML="stop";
+    }
+    
+    function Autoenter()
+    {
+     scanner.autoEnter='enabled';
+       mymsg.innerHTML="autoenterenabled";
+
+   }
+       function Autotab()
+    {
+     scanner.autoTab='enabled';
+       mymsg.innerHTML="autotabenabled";
+
+   }
+       function Autodisabled()
+    {
+     scanner.autoEnter='disabled';
+     canner.autoTab='disabled';
+       mymsg.innerHTML="autoenterenabled";
+
+   }
+   
+       function AllDecoderenabled()
+    {
+     scanner.allDecoders='enabled';
+       mymsg.innerHTML="AllDecoderenabled";
+
+   }
+       function AllDecoderdisabled()
+    {
+     scanner.allDecoders='disabled';
+       mymsg.innerHTML="AllDecoderdisabled";
+
+   }
+    
+    
+      
+  function onDecodeEventJSON(jsonObject)
+    {
+	var html = "<b>Decoded Data:</b><br>";
+	html = html + "<br><i>Data:</i> " + jsonObject.data;
+	html = html + "<br><i>Source:</i> " + jsonObject.source;
+	html = html + "<br><i>Type:</i> " + jsonObject.type;
+	html = html + "<br><i>Time:</i> " + jsonObject.time;
+	html = html + "<br><i>Length:</i> " + jsonObject.length;
+	html = html + "<br><i>Event:</i> " + jsonObject.event;
+    scanData.innerHTML = html;
+   }
+  
+  
+    
+    function Quit()
+    {
+	application.quit();
+    }
+
+    function setEnumScannerTimer() 
+    {
+
+        setTimeout("onScannerEnable()", 1000);
+    }
+    
+    function onScannerEnable() 
+    {
+       
+      scanner.enumScannerEvent = 'EnumScanners(%json)';
+      scanner.enumerate();
+        
+    }
+
+    function attachdecodeevent() 
+    {
+       
+      scanner.decodeEvent = 'onDecodeEventJSON(%json)';
+       
+    }
+    
+   
+    function EnumScanners(jsonObject) 
+    {
+    	var html = "<b>Device Name: Friendly Name</b><br>";
+        for (i = 0; i < jsonObject.scannerArray.length; i++) 
+        {
+           
+            this.document.frm.myscanner.options[i + 1].text = jsonObject.scannerArray[i].deviceName + jsonObject.scannerArray[i].friendlyName;
+            this.document.frm.myscanner.options[i + 1].value = jsonObject.scannerArray[i].deviceName;
+            
+            html += '' + jsonObject.scannerArray[i].deviceName + ': ' 
+	        + jsonObject.scannerArray[i].friendlyName + '<br>';
+        }
+     html += "";
+	Scanners.innerHTML=html;
+    }
+
+
+    function selectScanner()
+     {
+        
+        var w = document.frm.myscanner.selectedIndex;
+        selected_scanner = document.frm.myscanner.options[w].value;
+
+        if (selected_scanner != "") 
+        {
+
+           scanner.disable();
+        }
+       
+    }
+    
+    function btStatusEvent() 
+    {
+    scanner.BluetoothStatusEvent = 'btStatusEventJSON(%json)';
+    alert('btStatusEvent');
+    }
+    
+    function btStatusEventJSON(jsonObject)
+	{
+		message.innerHTML = "Bluetooth Message " + jsonObject.status;
+		alert('btStatusEventJSON');
+	}
+	
+    function btDisconnect() 
+    {
+     rsm.bluetoothDisconnect(); 
+     message.innerHTML = "btdisconnectcalled";  
+    }	
+    
+    function btUnpair() 
+    {
+     rsm.bluetoothUnpair(); 
+     message.innerHTML = "btunpaircalled";  
+    }
+        
+        
+        
+    function onRSMAttributes(jsonObject)
+  {
+	var spanID;
+	var spanElement;
+	for(i=0; i < jsonObject.attributeArray.length; i++)
+	{
+		spanID = "Span" + (i+1);
+		spanElement = document.getElementById(spanID);
+		spanElement.innerText = jsonObject.attributeArray[i];
+	}
+  }
+
+    function GetRSMValues()
+    {
+ 
+	rsm.markForRetrievalModelNumber();	//  Array Index 0
+	rsm.markForRetrievalSerialNumber();	
+	rsm.markForRetrievalDateOfManufacture();
+	rsm.markForRetrievalDateOfService();		
+	rsm.markForRetrievalBluetoothAddress();	
+	rsm.markForRetrievalFirmwareVersion();
+	rsm.markForRetrievalDeviceClass();
+	rsm.markForRetrievalBatteryStatus();
+	rsm.markForRetrievalBatteryCapacity();
+	rsm.markForRetrievalBatteryId();
+	rsm.markForRetrievalBluetoothAuthentication();	
+	rsm.markForRetrievalBluetoothEncryption();
+	rsm.markForRetrievalBluetoothPinCode();
+	rsm.markForRetrievalBluetoothPinCodeType();
+	rsm.markForRetrievalBluetoothReconnectAttempts();
+	rsm.markForRetrievalBluetoothBeepOnReconnectAttempt();
+	rsm.markForRetrievalBluetoothHidAutoReconnect();
+	rsm.markForRetrievalBluetoothFriendlyName();
+	rsm.markForRetrievalBluetoothInquiryMode();
+	rsm.markForRetrievalBluetoothAutoReconnect();
+	rsm.markForRetrievalForceSavePairingBarcode();
+	rsm.markForRetrievalLowBatteryIndication();
+	rsm.markForRetrievalLowBatteryIndicationCycle();
+	rsm.markForRetrievalScanLineWidth();
+	rsm.markForRetrievalGoodScansDelay();
+	rsm.markForRetrievalDecodeFeedback();
+	rsm.markForRetrievalIgnoreCode128Usps();
+	rsm.markForRetrievalScanTriggerWakeup();
+	rsm.markForRetrievalMems();
+	rsm.markForRetrievalProximityEnable();
+	rsm.markForRetrievalProximityContinuous();
+	rsm.markForRetrievalProximityDistance();
+	rsm.markForRetrievalPagingEnable();
+	rsm.markForRetrievalPagingBeepSequence();
+	
+	
+	rsm.rsmGetEvent = 'onRSMAttributes(%json)';
+
+    }
+    
+ function selectAuthentication()
+{
+    alert('selectAuthentication');
+	var sltAuthentication = frm.idAuthentication.selectedIndex;
+	alert('selectAuthentication1');
+	var selectedAuthentication=frm.idAuthentication.options[sltAuthentication].value;
+	alert('value' + selectedAuthentication);
+	alert('selectAuthentication2');
+	switch(selectedAuthentication)
+	{
+		case 'True':
+			rsm.bluetoothAuthentication = 'True';
+			break;
+
+		case 'False':
+			rsm.bluetoothAuthentication = 'False';
+			break;
+		case 'Hello':
+
+			rsm.bluetoothAuthentication = 'Hello';
+			break;
+		
+		case 'Null':
+
+			rsm.bluetoothAuthentication = '';
+			break;
+	}
+}
+
+    function selectEncryption()
+{
+	var sltEncryption=frm.rbEncryption.selectedIndex;
+	var selectedEncryption = frm.rbEncryption.options[sltEncryption].value;
+	switch(selectedEncryption)
+	{
+		case 'True':
+			rsm.bluetoothEncryption = 'True';
+			break;
+		case 'False':
+			rsm.bluetoothEncryption = 'False';
+			alert('false');
+			break;
+		case 'Hello':
+			rsm.bluetoothEncryption = 'Hello';
+			break;
+		
+		case 'Null':
+			rsm.bluetoothEncryption = '';
+			break;
+	}
+}
+
+function setPinCode()
+{
+	var VPinCode=frm.rbPinCode.value;
+	//var PinCodevalue="Pincode:"+VPinCode;
+	rsm.bluetoothPinCode = VPinCode;
+}
+
+    function selectPinCodeType()
+{
+	var sltPinCodeType=frm.rbPinCodeType.selectedIndex;
+	var selectedPinCodeType = frm.rbPinCodeType.options[sltPinCodeType].value;
+	switch(selectedPinCodeType)
+	{
+		case 'PromptUser':
+			rsm.bluetoothPinCodeType = 'PromptUser';
+			break;
+
+		case 'UseStored':
+			rsm.bluetoothPinCodeType = 'UseStored';
+			break;
+		case 'Hello':
+			rsm.bluetoothPinCodeType = 'Hello';
+			break;
+		
+		case 'Null':
+			rsm.bluetoothPinCodeType = '';
+			break;
+	}
+}
+ 
+function setReconnectAttempts()
+{
+	var VReconnectAttempts=frm.ReconnectAttempts.value;
+	rsm.bluetoothReconnectAttempts = VReconnectAttempts;
+}
+
+    function BeepOnReconnectAttempt()
+{
+	var sltBeepOnReconnectAttempt=frm.rbBeepOnReconnectAttempt.selectedIndex;
+	var selectedBeepOnReconnectAttempt = frm.rbBeepOnReconnectAttempt.options[sltBeepOnReconnectAttempt].value;
+	switch(selectedBeepOnReconnectAttempt)
+	{
+		case 'True':
+			rsm.bluetoothBeepOnReconnectAttempt = 'True';
+			break;
+
+		case 'False':
+			rsm.bluetoothBeepOnReconnectAttempt = 'False';
+			break;
+		case 'Hello':
+			rsm.bluetoothBeepOnReconnectAttempt = 'Hello';
+			break;
+		
+		case 'Null':
+			rsm.bluetoothBeepOnReconnectAttempt = '';
+			break;
+	}
+}   
+function selectHidAutoReconnect()
+{
+	var sltHidAutoReconnect=frm.rbHidAutoReconnect.selectedIndex;
+	var selectedHidAutoReconnect = frm.rbHidAutoReconnect.options[sltHidAutoReconnect].value;
+	switch(selectedHidAutoReconnect)
+	{
+		case 'NeverReconnect':
+			rsm.bluetoothHidAutoReconnect = 'NeverReconnect';
+			break;
+
+		case 'ReconnectOnData':
+			rsm.bluetoothHidAutoReconnect = 'ReconnectOnData';
+			break;
+			
+		case 'ReconnectImmediately':
+			rsm.bluetoothHidAutoReconnect = 'ReconnectImmediately';
+			break;
+			
+		case 'Hello':
+			rsm.bluetoothHidAutoReconnect = 'Hello';
+			break;
+		
+		case 'Null':
+			rsm.bluetoothHidAutoReconnect = '';
+			break;
+	}
+}   
+
+
+function setFriendlyName()
+{
+	var VFriendlyName=frm.FriendlyName.value;
+	rsm.bluetoothFriendlyName = VFriendlyName;
+}
+
+    function selectInquiryMode()
+{
+	var sltInquiryMode=frm.rbInquiryMode.selectedIndex;
+	var selectedInquiryMode = frm.rbInquiryMode.options[sltInquiryMode].value;
+	switch(selectedInquiryMode)
+	{
+		case 'General':
+			rsm.bluetoothInquiryMode = 'General';
+			break;
+
+		case 'Limited':
+			rsm.bluetoothInquiryMode = 'Limited';
+			break;
+			
+		case 'Hello':
+			rsm.bluetoothInquiryMode = 'Hello';
+			break;
+		
+		case 'Null':
+			rsm.bluetoothInquiryMode = '';
+			break;
+	}
+}  
+
+
+    function selectAutoReconnect()
+{
+	var sltAutoReconnect=frm.rbAutoReconnect.selectedIndex;
+	var selectedAutoReconnect = frm.rbAutoReconnect.options[sltAutoReconnect].value;
+	switch(selectedAutoReconnect)
+	{
+		case 'None':
+			rsm.bluetoothAutoReconnect = 'None';
+			break;
+
+		case 'OnPower':
+			rsm.bluetoothAutoReconnect = 'OnPower';
+			break;
+			
+		case 'OnOutofRange':
+			rsm.bluetoothAutoReconnect = 'OnOutofRange';
+			break;
+	 	case 'OnPowerOutofRange':
+			rsm.bluetoothAutoReconnect = 'OnPowerOutofRange';
+			break;
+		
+		case 'Null':
+			rsm.bluetoothAutoReconnect = '';
+			break;
+	}
+} 
+
+
+    function selectforceSavePairingBarcode()
+{
+	var sltforceSavePairingBarcode=frm.rbforceSavePairingBarcode.selectedIndex;
+	var selectedforceSavePairingBarcode = frm.rbforceSavePairingBarcode.options[sltforceSavePairingBarcode].value;
+	switch(selectedforceSavePairingBarcode)
+	{
+		case 'Enabled':
+			rsm.forceSavePairingBarcode = 'Enabled';
+			break;
+
+		case 'Disabled':
+			rsm.forceSavePairingBarcode = 'Disabled';
+			break;
+			
+		case 'Hello':
+			rsm.forceSavePairingBarcode = 'Hello';
+			break;
+		
+		case 'Null':
+			rsm.forceSavePairingBarcode = '';
+			break;
+	}
+} 
+
+    function selectlowBatteryIndication()
+{
+	var sltlowBatteryIndication=frm.rblowBatteryIndication.selectedIndex;
+	var selectedlowBatteryIndication = frm.rblowBatteryIndication.options[sltlowBatteryIndication].value;
+	switch(selectedlowBatteryIndication)
+	{
+		case 'Enabled':
+			rsm.lowBatteryIndication = 'Enabled';
+			break;
+
+		case 'Disabled':
+			rsm.lowBatteryIndication = 'Disabled';
+			break;
+			
+		case 'Hello':
+			rsm.lowBatteryIndication = 'Hello';
+			break;
+		
+		case 'Null':
+			rsm.lowBatteryIndication = '';
+			break;
+	}
+}
+
+function setlowBatteryIndicationCycle()
+{
+	var VlowBatteryIndicationCycle=frm.rblowBatteryIndicationCycle.value;
+	rsm.lowBatteryIndicationCycle = VlowBatteryIndicationCycle;
+}
+
+    function selectscanLineWidth()
+{
+	var sltscanLineWidth=frm.rbscanLineWidth.selectedIndex;
+	var selectedscanLineWidth = frm.rbscanLineWidth.options[sltscanLineWidth].value;
+	switch(selectedscanLineWidth)
+	{
+		case 'Wide':
+			rsm.scanLineWidth = 'Wide';
+			break;
+
+		case 'Narrow':
+			rsm.scanLineWidth = 'Narrow';
+			break;
+			
+		case 'Hello':
+			rsm.scanLineWidth = 'Hello';
+			break;
+		
+		case 'Null':
+			rsm.scanLineWidth = '';
+			break;
+	}
+}
+
+function setgoodScansDelay()
+{
+	var VgoodScansDelay=frm.rbgoodScansDelay.value;
+	rsm.goodScansDelay = VgoodScansDelay;
+}
+
+    function selectdecodeFeedback()
+{
+	var sltdecodeFeedback=frm.rbdecodeFeedback.selectedIndex;
+	var selecteddecodeFeedback = frm.rbdecodeFeedback.options[sltdecodeFeedback].value;
+	switch(selecteddecodeFeedback)
+	{
+		case 'Enabled':
+			rsm.decodeFeedback = 'Enabled';
+			break;
+
+		case 'Disabled':
+			rsm.decodeFeedback = 'Disabled';
+			break;
+			
+		case 'Hello':
+			rsm.decodeFeedback = 'Hello';
+			break;
+		
+		case 'Null':
+			rsm.decodeFeedback = '';
+			break;
+	}
+}
+
+    function selectignoreCode128Usps()
+{
+	var sltignoreCode128Usps=frm.rbignoreCode128Usps.selectedIndex;
+	var selectedignoreCode128Usps = frm.rbignoreCode128Usps.options[sltignoreCode128Usps].value;
+	switch(selectedignoreCode128Usps)
+	{
+		case 'Enabled':
+			rsm.ignoreCode128Usps = 'Enabled';
+			break;
+
+		case 'Disabled':
+			rsm.ignoreCode128Usps = 'Disabled';
+			break;
+			
+		case 'Hello':
+			rsm.ignoreCode128Usps = 'Hello';
+			break;
+		
+		case 'Null':
+			rsm.ignoreCode128Usps = '';
+			break;
+	}
+}
+
+    function selectscanTriggerWakeup()
+{
+	var sltscanTriggerWakeup=frm.rbscanTriggerWakeup.selectedIndex;
+	var selectedscanTriggerWakeup = frm.rbscanTriggerWakeup.options[sltscanTriggerWakeup].value;
+	switch(selectedscanTriggerWakeup)
+	{
+		case 'Enabled':
+			rsm.scanTriggerWakeup = 'Enabled';
+			break;
+
+		case 'Disabled':
+			rsm.scanTriggerWakeup = 'Disabled';
+			break;
+			
+		case 'Hello':
+			rsm.scanTriggerWakeup = 'Hello';
+			break;
+		
+		case 'Null':
+			rsm.scanTriggerWakeup = '';
+			break;
+	}
+}
+
+    function selectmems()
+{
+	var sltmems=frm.rbmems.selectedIndex;
+	var selectedmems = frm.rbmems.options[sltmems].value;
+	switch(selectedmems)
+	{
+		case 'Enabled':
+			rsm.mems = 'Enabled';
+			break;
+
+		case 'Disabled':
+			rsm.mems = 'Disabled';
+			break;
+			
+		case 'Hello':
+			rsm.mems = 'Hello';
+			break;
+		
+		case 'Null':
+			rsm.mems = '';
+			break;
+	}
+}
+
+    function selectproximityEnable()
+{
+	var sltproximityEnable=frm.rbproximityEnable.selectedIndex;
+	var selectedproximityEnable = frm.rbproximityEnable.options[sltproximityEnable].value;
+	switch(selectedproximityEnable)
+	{
+		case 'Enabled':
+			rsm.proximityEnable = 'Enabled';
+			break;
+
+		case 'Disabled':
+			rsm.proximityEnable = 'Disabled';
+			break;
+			
+		case 'Hello':
+			rsm.proximityEnable = 'Hello';
+			break;
+		
+		case 'Null':
+			rsm.proximityEnable = '';
+			break;
+	}
+}
+
+    function selectproximityContinuous()
+{
+	var sltproximityContinuous=frm.rbproximityContinuous.selectedIndex;
+	var selectedproximityContinuous = frm.rbproximityContinuous.options[sltproximityContinuous].value;
+	switch(selectedproximityContinuous)
+	{
+		case 'Enabled':
+			rsm.proximityContinuous = 'Enabled';
+			break;
+
+		case 'Disabled':
+			rsm.proximityContinuous = 'Disabled';
+			break;
+			
+		case 'Hello':
+			rsm.proximityContinuous = 'Hello';
+			break;
+		
+		case 'Null':
+			rsm.proximityContinuous = '';
+			break;
+	}
+}
+
+    function selectproximityDistance()
+{
+	var sltproximityDistance=frm.rbproximityDistance.selectedIndex;
+	var selectedproximityDistance = frm.rbproximityDistance.options[sltproximityDistance].value;
+	switch(selectedproximityDistance)
+	{
+		case 'Short':
+			rsm.proximityDistance = 'Short';
+			break;
+
+		case 'Medium':
+			rsm.proximityDistance = 'Medium';
+			break;
+		case 'Long':
+			rsm.proximityDistance = 'Long';
+			break;
+			
+		case 'Hello':
+			rsm.proximityDistance = 'Hello';
+			break;
+		
+		case 'Null':
+			rsm.proximityDistance = '';
+			break;
+	}
+}
+
+    function selectpagingEnable()
+{
+	var sltpagingEnable=frm.rbpagingEnable.selectedIndex;
+	var selectedpagingEnable = frm.rbpagingEnable.options[sltpagingEnable].value;
+	switch(selectedpagingEnable)
+	{
+		case 'Enabled':
+			rsm.pagingEnable = 'Enabled';
+			break;
+
+		case 'Disabled':
+			rsm.pagingEnable = 'Disabled';
+			break;
+			
+		case 'Hello':
+			rsm.pagingEnable = 'Hello';
+			break;
+		
+		case 'Null':
+			rsm.pagingEnable = '';
+			break;
+	}
+}
+
+function setpagingBeepSequence()
+{
+	var VpagingBeepSequence=frm.rbpagingBeepSequence.value;
+	rsm.pagingBeepSequence = VpagingBeepSequence;
+}
+
+    function selectpagingActivate()
+{
+	var sltpagingActivate=frm.rbpagingActivate.selectedIndex;
+	var selectedpagingActivate = frm.rbpagingActivate.options[sltpagingActivate].value;
+	switch(selectedpagingActivate)
+	{
+		case 'Start':
+			rsm.pagingActivate = 'Start';
+			break;
+
+		case 'Stop':
+			rsm.pagingActivate = 'Stop';
+			break;
+			
+		case 'Hello':
+			rsm.pagingActivate = 'Hello';
+			break;
+		
+		case 'Null':
+			rsm.pagingActivate = '';
+			break;
+	}
+}    
+    
+    
+</script>
+</HEAD>
+
+<body onload="setEnumScannerTimer();">
+<br /><br />
+<div  id="Scanners">Enumerate Scanners</div><br />
+<div  id="scanData">scan data</div><br />
+<DIV ID="mymsg">Selected Scanner: </DIV>
+<br /><br />
+<DIV ID="message">message </DIV>
+<br />
+<form name="frm" id="frm" action="">
+<table>
+<select name="myscanner" id="myscanner" onChange="selectScanner();">
+<OPTION value="" >Select Scanner</OPTION> 
+<OPTION value="" ></OPTION> 
+<OPTION value="" ></OPTION> 
+<OPTION value="SCN5" ></OPTION> 
+<OPTION value="SCN5" ></OPTION> 
+</select><br/>
+<INPUT TYPE="button" VALUE="Enable selected Scanner" ONCLICK="enabletest();"><br/>
+<INPUT TYPE="button" VALUE="Disabled" ONCLICK="disabletest();">
+<br/><hr/>
+Decoded data:</b><TEXTAREA NAME="datafield" id="datafield" COLS=10 ROWS=2></TEXTAREA>
+Decoded data:</b><TEXTAREA NAME="datafield" id="TEXTAREA1" COLS=10 ROWS=2></TEXTAREA><br/>
+<INPUT TYPE="button" VALUE="Attach_DecodeEvent" ONCLICK="attachdecodeevent();">
+<br/><hr/>
+<INPUT TYPE="button" VALUE="SetdisplayBtAddressBarcodeOnEnable" ONCLICK="SetdisplayBtAddressBarcodeOnEnable();">
+<INPUT TYPE="button" VALUE="SetPairTimeout" ONCLICK="SetenableTimeout();">
+<br/><hr/>
+
+<INPUT TYPE="button" VALUE="Start" ONCLICK="starttest();">
+<INPUT TYPE="button" VALUE="stop" ONCLICK="stoptest();"><br/>
+
+<INPUT TYPE="button" VALUE="Autoenter" ONCLICK="Autoenter();">
+<INPUT TYPE="button" VALUE="Autotab" ONCLICK="Autotab();"><br/>
+<INPUT TYPE="button" VALUE="Autodisabled" ONCLICK="Autodisabled();">
+<br/><hr/>
+<INPUT TYPE="button" VALUE="AllDecoderenabled" ONCLICK="AllDecoderenabled();">
+<INPUT TYPE="button" VALUE="AllDecoderdisabled" ONCLICK="AllDecoderdisabled();"></br/>
+<INPUT TYPE="button" VALUE="enablecodabar" ONCLICK="enablecodabar();">
+<br/><hr/>
+<INPUT TYPE="button" VALUE="attachbtStatusEvent" ONCLICK="btStatusEvent();">
+<INPUT TYPE="button" VALUE="btDisconnect" ONCLICK="btDisconnect();">
+<INPUT TYPE="button" VALUE="btUnpair" ONCLICK="btUnpair();">
+<br/>
+<hr/>
+Select BT Authentication	<select name="rbAuthentication" id="idAuthentication" onChange="selectAuthentication();">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="True">True</option>
+<option value="False">False</option>
+<option value="Hello">Invalid</option>
+<option value="Null">Null</option>
+</select>
+
+<hr>
+Select BT Encryption	<select name="rbEncryption" id="rbEncryption" onChange="selectEncryption();">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="True">True</option>
+<option value="False">False</option>
+<option value="Hello">Invalid</option>
+<option value="Null">Null</option>
+</select>
+
+<hr>
+<tr>
+ BT PinCode<Textarea id="rbPinCode" cols="10" rows="1"onchange="setPinCode();"></Textarea></tr><br>
+ 
+Select BT PinCodeType	<select name="rbPinCodeType" id="rbPinCodeType" onChange="selectPinCodeType();">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="PromptUser">PromptUser</option>
+<option value="UseStored">UseStored</option>
+<option value="Hello">Invalid</option>
+<option value="Null">Null</option>
+</select>
+
+
+<hr>
+<tr>
+ BT ReconnectAttempts<Textarea id="ReconnectAttempts" cols="10" rows="1"onchange="setReconnectAttempts();"></Textarea></tr><br>
+ 
+Select BT BeepOnReconnectAttempt <select name="rbBeepOnReconnectAttempt" id="rbBeepOnReconnectAttempt" onChange="BeepOnReconnectAttempt();">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="True">True</option>
+<option value="False">False</option>
+<option value="Hello">Invalid</option>
+<option value="Null">Null</option>
+</select>   
+<hr>
+
+<tr>
+Select BT HidAutoReconnect	<select name="rbHidAutoReconnect" id="rbHidAutoReconnect" onChange="selectHidAutoReconnect();">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="NeverReconnect">NeverReconnect</option>
+<option value="ReconnectOnData">ReconnectOnData</option>
+<option value="ReconnectImmediately">ReconnectImmediately</option>
+<option value="Hello">Invalid</option>
+<option value="Null">Null</option>
+</select>
+
+<hr>
+<tr>
+ BT FriendlyName<Textarea id="FriendlyName" cols="10" rows="1"onchange="setFriendlyName();"></Textarea></tr><br>
+ <tr>
+Select BT InquiryMode	<select name="rbInquiryMode" id="rbInquiryMode" onChange="selectInquiryMode();">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="General">General</option>
+<option value="Limited">Limited</option>
+<option value="Hello">Invalid</option>
+<option value="Null">Null</option>
+</select>
+
+<hr>
+<tr>
+Select BT AutoReconnect	<select name="rbAutoReconnect" id="rbAutoReconnect" onChange="selectAutoReconnect();">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="None">None</option>
+<option value="OnPower">OnPower</option>
+<option value="OnOutofRange">OnOutofRange</option>
+<option value="OnPowerOutofRange">OnPowerOutofRange</option>
+<option value="Null">Null</option>
+</select>
+
+<hr>
+Select BT forceSavePairingBarcode	<select name="rbforceSavePairingBarcode" id="rbforceSavePairingBarcode" onChange="selectforceSavePairingBarcode();">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="Enabled">Enabled</option>
+<option value="Disabled">Disabled</option>
+<option value="Hello">Invalid</option>
+<option value="Null">Null</option>
+</select>
+
+<hr>
+Select BT lowBatteryIndication	<select name="rblowBatteryIndication" id="rblowBatteryIndication" onChange="selectlowBatteryIndication();">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="Enabled">Enabled</option>
+<option value="Disabled">Disabled</option>
+<option value="Hello">Invalid</option>
+<option value="Null">Null</option>
+</select>
+<tr>
+ BT lowBatteryIndicationCycle<Textarea id="rblowBatteryIndicationCycle" cols="10" rows="1"onchange="setlowBatteryIndicationCycle();"></Textarea></tr><br>
+<tr>
+
+<hr>
+Select BT scanLineWidth	<select name="rbscanLineWidth" id="rbscanLineWidth" onChange="selectscanLineWidth();">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="Wide">Wide</option>
+<option value="Narrow">Narrow</option>
+<option value="Hello">Invalid</option>
+<option value="Null">Null</option>
+</select>
+<tr>
+ BT goodScansDelay<Textarea id="rbgoodScansDelay" cols="10" rows="1"onchange="setgoodScansDelay();"></Textarea></tr><br>
+<tr>
+
+<hr>
+Select BT decodeFeedback <select name="rbdecodeFeedback" id="rbdecodeFeedback" onChange="selectdecodeFeedback();">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="Enabled">Enabled</option>
+<option value="Disabled">Disabled</option>
+<option value="Hello">Invalid</option>
+<option value="Null">Null</option>
+</select>
+
+<hr>
+Select BT ignoreCode128Usps <select name="rbignoreCode128Usps" id="rbignoreCode128Usps" onChange="selectignoreCode128Usps();">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="Enabled">Enabled</option>
+<option value="Disabled">Disabled</option>
+<option value="Hello">Invalid</option>
+<option value="Null">Null</option>
+</select>
+
+<hr>
+Select BT scanTriggerWakeup <select name="rbscanTriggerWakeup" id="rbscanTriggerWakeup" onChange="selectscanTriggerWakeup();">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="Enabled">Enabled</option>
+<option value="Disabled">Disabled</option>
+<option value="Hello">Invalid</option>
+<option value="Null">Null</option>
+</select>
+
+<hr>
+Select BT mems <select name="rbmems" id="rbmems" onChange="selectmems();">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="Enabled">Enabled</option>
+<option value="Disabled">Disabled</option>
+<option value="Hello">Invalid</option>
+<option value="Null">Null</option>
+</select>
+
+<hr>
+Select BT proximityEnable <select name="rbproximityEnable" id="rbproximityEnable" onChange="selectproximityEnable();">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="Enabled">Enabled</option>
+<option value="Disabled">Disabled</option>
+<option value="Hello">Invalid</option>
+<option value="Null">Null</option>
+</select>
+
+<hr>
+Select BT proximityContinuous <select name="rbproximityContinuous" id="rbproximityContinuous" onChange="selectproximityContinuous();">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="Enabled">Enabled</option>
+<option value="Disabled">Disabled</option>
+<option value="Hello">Invalid</option>
+<option value="Null">Null</option>
+</select>
+
+<hr>
+Select BT proximityDistance <select name="rbproximityDistance" id="rbproximityDistance" onChange="selectproximityDistance();">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="Short">Short</option>
+<option value="Medium">Medium</option>
+<option value="Long">Long</option>
+<option value="Hello">Invalid</option>
+<option value="Null">Null</option>
+</select>
+
+<hr>
+Select BT pagingEnable <select name="rbpagingEnable" id="rbpagingEnable" onChange="selectpagingEnable();">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="Enabled">Enabled</option>
+<option value="Disabled">Disabled</option>
+<option value="Hello">Invalid</option>
+<option value="Null">Null</option>
+</select>
+<tr>
+ BT pagingBeepSequence<Textarea id="rbpagingBeepSequence " cols="10" rows="1"onchange="setpagingBeepSequence();"></Textarea></tr><br>
+<tr>
+<hr>
+Select BT pagingActivate <select name="rbpagingActivate" id="rbpagingActivate" onChange="selectpagingActivate();">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="Start">Start</option>
+<option value="Stop">Stop</option>
+<option value="Hello">Invalid</option>
+<option value="Null">Null</option>
+</select>
+
+<tr><td><INPUT TYPE="button" VALUE="Back" ONCLICK="location.href='./Scanner.html'">
+<INPUT TYPE="button" VALUE="Quit" ONCLICK="Quit();">
+<INPUT TYPE="button" VALUE="presentation" ONCLICK="pres();"></td></tr>
+
+<br><br><a href="javascript:GetRSMValues()">Get RSM Values</a><br>
+		Model Number: <span id=Span1></span><br>
+		Serial Number: <span id=Span2></span><br>
+		Date of Manufac: <span id=Span3></span><br>
+		Date of Service: <span id=Span4></span><br>
+		BT Address: <span id=Span5></span><br>
+		firmwareVersion: <span id=Span6></span><br>
+		deviceClass: <span id=Span7></span><br>
+		batteryStatus : <span id=Span8></span><br>
+		batteryCapacity: <span id=Span9></span><br>
+		batteryID: <span id=Span10></span><br>
+		BT Authentication: <span id=Span11></span><br>
+		BT Encryption: <span id=Span12></span><br>
+		BT PINcode: <span id=Span13></span><br>
+		BT PinCodeType: <span id=Span14></span><br>
+		BT ReconnectAttempts: <span id=Span15></span><br>
+		BT BeepOnReconnectAttempt: <span id=Span16></span><br>
+		BT HidAutoReconnect: <span id=Span17></span><br>
+		BT Friendly Name: <span id=Span18></span><br>
+		BT InquiryMode: <span id=Span19></span><br>
+		BT AutoReconnect: <span id=Span20></span><br>
+		forceSavePairingBarcode: <span id=Span21></span><br>
+		lowBatteryIndication: <span id=Span22></span><br>
+		lowBatteryIndicationCycle: <span id=Span23></span><br>
+		scanLineWidth: <span id=Span24></span><br>
+		goodScansDelay: <span id=Span25></span><br>
+		decodeFeedback: <span id=Span26></span><br>
+		ignoreCode128Usps: <span id=Span27></span><br>
+		scanTriggerWakeup: <span id=Span28></span><br>
+		mems: <span id=Span29></span><br>
+		Proximity Enable: <span id=Span30></span><br>
+		proximityContinuous: <span id=Span31></span><br>
+		proximityDistance: <span id=Span32></span><br>
+		pagingEnable: <span id=Span33></span><br>
+		pagingBeepSequence: <span id=Span34></span><br>
+</table>
+</form>
+
+</body>
+</HTML>

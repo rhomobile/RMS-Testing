@@ -1,0 +1,48 @@
+<HTML>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+<META HTTP-Equiv="Scanner" Content="DecodeEvent:url('Javascript:ScanFunc(%json);')">
+<META HTTP-Equiv="Scanner" Content="BluetoothStatusEvent:url('Javascript:BTFunc(%json);')">
+<META HTTP-Equiv="Scanner" Content="EnumScannerEvent:url('Javascript:EnumScanners(%json);')">
+</HEAD>
+
+<BODY onLoad="setEnumScannerTimer();">
+<DIV ID="message"></DIV>
+</BODY>
+</HTML>
+
+<SCRIPT LANGUAGE="JavaScript">
+function ScanFunc(jsonObject) {message.innerHTML = jsonObject.data;}
+
+function BTFunc(jsonObject) {message.innerHTML = jsonObject.status;}
+
+function EnumScanners(jsonObject)
+{
+	var scannerInfo = "Scanners On Device: " + jsonObject.scannerArray.length + "<BR>ID  --  Name<BR>" 
+	for (i=0; i < jsonObject.scannerArray.length; i++)
+	{
+		//alert("Scanner");
+		scannerInfo = scannerInfo + jsonObject.scannerArray[i].deviceName + ' -- '
+		+ jsonObject.scannerArray[i].friendlyName + '<BR>';
+		//  See if this is the Bluetooth Scanner
+		if (jsonObject.scannerArray[i].friendlyName.indexOf("Bluetooth") >= 0)
+		{
+			//alert("This is the Bluetooth Scanner, Enable it");
+			scanner.enabled = jsonObject.scannerArray[i].deviceName;
+		}
+	}
+	message.innerHTML = scannerInfo;
+}
+
+//  Wait for the DOM to fully load before we enumerate the scanners
+function setEnumScannerTimer()
+{
+    setTimeout("onScannerEnable()", 3000);
+}
+function onScannerEnable()
+{
+	scanner.enumerate();
+}
+</SCRIPT>
+

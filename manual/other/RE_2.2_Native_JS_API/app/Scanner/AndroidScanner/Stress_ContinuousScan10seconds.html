@@ -1,0 +1,132 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+  <META HTTP-Equiv="scanner" Content="DecodeEvent:url('javascript:doScan(%json);')">
+  <META HTTP-Equiv="Scanner" Content="EnumScannerEvent:url('Javascript:EnumScanners(%json);')">
+  <script type="text/javascript">
+  var Generic = new ActiveXObject("PocketBrowser.Generic");
+  var iCount = 0;
+  var selected_scanner = "";
+  
+   function starttest()
+   {
+       var temp = "enabled:" + selected_scanner;
+	   //var temp = "enabled:" + 'SCN2';
+       message.innerHTML=temp;
+       
+       Generic.InvokeMETAFunction('scanner', temp);
+       Generic.InvokeMETAFunction('Scanner', 'illuminationMode:alwaysOn');
+       scanner.scanTimeout='30000';
+       Generic.InvokeMETAFunction('scanner', 'start');
+       
+   
+   }
+   
+    function EnumScanners(jsonObject) 
+    {
+	  //alert("hi");
+	   for (i = 0; i < jsonObject.scannerArray.length; i++) 
+        {
+           
+            this.document.ODAXForm.myscanner.options[i + 1].text = jsonObject.scannerArray[i].friendlyName;
+            this.document.ODAXForm.myscanner.options[i + 1].value = jsonObject.scannerArray[i].deviceName;
+        }
+	
+	
+    	
+    }
+
+   function stoptest()
+    {
+     Generic.InvokeMETAFunction('Scanner', 'disabled');
+     Generic.InvokeMETAFunction('Scanner', 'stop');
+    }
+
+    function doScan1(data, source, type, time, length)
+     {
+         iCount++;
+         NumberCount.innerHTML = iCount;
+         ODAXForm.datafield.value = data;
+         setTimeout("specifyTimeout()",10000);
+                  
+     }
+	 
+	 function doScan(jsonObject)
+        {
+         iCount++;
+         NumberCount.innerHTML = iCount;
+         ODAXForm.datafield.value = jsonObject.data;
+         setTimeout("specifyTimeout()",10000);
+		 
+        }
+    function specifyTimeout()
+    {
+      Generic.InvokeMETAFunction('Scanner', 'illuminationMode:alwaysOn');
+      Generic.InvokeMETAFunction('scanner', 'start');
+      
+    
+    }
+    function Quit()
+    {
+	Generic.InvokeMETAFunction("Application", "Quit");
+    }
+
+    function setEnumScannerTimer() 
+    {
+        setTimeout("onScannerEnable()", 3000);
+    }
+    function onScannerEnable() 
+    {
+        Generic.InvokeMETAFunction('Scanner', 'Enumerate');
+    }
+
+    function EnumScanners1(scannerArray) {
+       // alert("Scanner array");
+        for (i = 0; i < scannerArray.length; i++) 
+        {
+           
+            this.document.ODAXForm.myscanner.options[i + 1].text = scannerArray[i][0] + scannerArray[i][1];
+            this.document.ODAXForm.myscanner.options[i + 1].value = scannerArray[i][0];
+        }
+
+    }
+
+
+    function selectScanner()
+     {
+        
+        var w = document.ODAXForm.myscanner.selectedIndex;
+        selected_scanner = document.ODAXForm.myscanner.options[w].value;
+        if (selected_scanner != "") 
+        {
+
+            Generic.InvokeMETAFunction('Scanner', 'disabled');
+        }
+       
+    }
+    
+    
+ </script>
+</head>
+<body onload="setEnumScannerTimer();">
+<hr />1D Scanner continuous scanning Stress Test
+<div id="message">message</div><br />
+<div id="NumberCount"><b>Number of Counts</b></div> 
+<form name="ODAXForm" id="ODAXForm" action="">
+<H3>SelectScanner...... <select name="myscanner" id="myscanner" onChange="selectScanner();">
+<OPTION value="" >Select Scanner</OPTION> 
+<OPTION value="" ></OPTION> 
+<OPTION value="" ></OPTION> 
+<OPTION value="" ></OPTION> 
+</select></H3>
+<P><INPUT TYPE="button" VALUE="Start" ONCLICK="starttest();">
+<INPUT TYPE="button" VALUE="stop" ONCLICK="stoptest();"></P>
+<br /><br /><b>Decoded data:</b><TEXTAREA NAME="datafield" id="datafield" COLS=20 ROWS=2></TEXTAREA></td>
+<p></p><P><INPUT TYPE="button" VALUE="Back" ONCLICK="location.href='./Scanner.html'">
+<INPUT TYPE="button" VALUE="Quit" ONCLICK="Quit();"></P>
+</form>
+
+</body>
+</html>

@@ -1,0 +1,50 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+    <title>DeviceToFTPdestFullyQualifiedURLport20</title>
+   
+    <!--<META HTTP-Equiv="FileTransfer" content="TransferEvent:url('Javascript:MyTransferEvent('%s');')"> -->
+	<META HTTP-Equiv="FileTransfer" content="TransferEvent:url('Javascript:MyJSONTransferEvent(%json)')"> 
+    <META HTTP-Equiv="FileTransfer" content="Source:url('file://\Application\FileCollections\myfile.txt')"> 
+    <META HTTP-Equiv="FileTransfer" content="Destination:url('ftp://ftpadmin:ftpadmin@10.233.85.82:20/Received/UIDPWDINURLport2500.txt')"> 
+    <META HTTP-Equiv="FileTransfer" content="CreateFolders:True"> 
+    <META HTTP-Equiv="FileTransfer" content="OverWrite:True"> 
+    <META HTTP-Equiv="FileTransfer" content="Transfer"> 
+    
+
+
+    
+<script language=javascript>
+
+function MyTransferEvent(Msg)
+{
+document.getElementById('FileDiv').innerHTML = "TransferResult= "+Msg;
+}
+
+function MyJSONTransferEvent(myjsonobject)
+{
+document.getElementById('FileDiv').innerHTML ="JSON TransferResult= " + myjsonobject.transferResult;
+}
+
+
+
+
+</script>
+</head>
+
+<body>
+
+<P><INPUT TYPE="button" VALUE="Back" ONCLICK="location.href='FileManagement_Index.html'"></P>
+<form id="frmFileManagement" action="" onload="SetdeafultSettings();">
+
+
+<br><br><br>
+DeviceToFTPdestFullyQualifiedURLEMML1.0port20
+<br><br>
+
+<div id="FileDiv">TransferEvent:-</div>
+
+</form>
+</body>
+</html>

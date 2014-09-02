@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+        
+        <META HTTP-Equiv="push-detected" Content="url('Javascript:doLocate(\'%s\');')">
+        <META HTTP-Equiv="EMMLProfile" Content="source:url('http://157.235.07.203/EMML_Profiles/Push/Push.emmp'); import:myPush;">
+<META HTTP-Equiv="EMMLProfile" Content="apply:myPush.Push_Locate;">
+
+ <script>
+    //var Generic = new ActiveXObject("PocketBrowser.Generic");
+	var bNotify = false;
+	/******************************************************************************
+	 *  This function is triggered when the device is pushed to by the client
+	 *  pc.  It identifies the action to do based on the first querystring value.
+	 * ***************************************************************************/ 
+	   	
+	function doLocate(func){
+		
+		if(func=='locate')
+		{
+			locatediv.innerHTML = '<center><pre>Someone is trying to locate this device<br><br><input type="button" value="CANCEL" onclick="bNotify=false;locatediv.innerHTML=\'\';"></center></pre>';
+   		    bNotify = true;
+   	}
+   	else
+   	{
+   		locatediv.innerHTML = '';
+   		bNotify = false;
+   	}
+  }
+  
+  
+ function doTest()
+  {
+  Generic.InvokeMETAFunction('push', 'start');
+}
+
+function Quit() {
+    objGeneric.InvokeMETAFunction("Application", "Quit");
+}
+
+function clearProfile() {
+    Generic.InvokeMETAFunction('EMMLProfile', 'clear');
+}
+ 
+ </script>  
+</head>
+<body>
+<h1>Named Push EMML Profile Test</h1>
+<h2>Push profile is imported and applied. this should <B>not be</B> persist across pages after clear profiles.</h2>
+<h3>Click on Push button.</h3>
+<h1>Push Static Meta tag Test</h1>
+<DIV align=left style='font-size:8.0pt' id="locatediv"></div></p>
+<input type="button" id="Push" value="Push" onclick="doTest();" />
+<p><input type=button value="Clear Imported Profile" onclick="clearProfile();"></p>
+<P><INPUT TYPE="button" VALUE="Quit" ONCLICK="Quit();"></P>
+
+<h3>Browse to another page to check for EMML profile persistance.</h3>
+<h4><a href="Persistant_Push_Test.html">Click here to go to another page.</a></h4>
+<hr />
+<a href="../EMMLProfilesIndex.html">Back to EMML Profile Index</a>
+</body>
+</html>

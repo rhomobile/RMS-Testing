@@ -1,0 +1,50 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+<META HTTP-Equiv="quitbutton" Content="visibility:visible">
+<META HTTP-Equiv="quitbutton" Content="Left:10">
+<META HTTP-Equiv="quitbutton" Content="Top:10">
+
+
+
+
+<META HTTP-Equiv="imager" Content="left:30;top:90;height:100;width:200;aim:on;lamp:on;sound:\windows\alarm2.wav;
+Protocol:Http;http://10.233.85.82:80/NEON/ReceivedFiles/Upload.aspx;imagerevent:url('Javascript:onCaptured('%s');');enabled">
+
+
+
+</head>
+<p>Send the Image to HTTP</p>
+<BR><BR><BR><BR><BR><BR><BR>
+<P><INPUT TYPE="button" VALUE="Capture" ONCLICK="doCapture();"></P>
+<P><INPUT TYPE="button" VALUE="Disable" ONCLICK="doDisable();"></P>
+<P><INPUT TYPE="button" VALUE="Back" ONCLICK="location.href='./EMML1.1.html'"></P>
+
+</body>
+</html>
+
+
+<SCRIPT>
+var objGeneric = new ActiveXObject("PocketBrowser.Generic");
+	
+function doCapture()
+{
+	//objGeneric.InvokeMETAFunction('imager', 'capture');
+	imager.capture();
+	
+}
+
+function doDisable()
+{
+	objGeneric.InvokeMETAFunction('imager', 'disabled');
+}
+
+function onCaptured(data)
+{
+	alert(data);
+}
+
+</SCRIPT>
+
+

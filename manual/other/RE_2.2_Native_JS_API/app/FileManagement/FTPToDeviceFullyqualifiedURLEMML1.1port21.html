@@ -1,0 +1,38 @@
+﻿<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+    <title>FTPToDeviceFullyqualifiedURL.html</title>
+   
+    <!--<META HTTP-Equiv="FileTransfer" content="TransferEvent:url('Javascript:MyTransferEvent('%s');');Source:url('ftp://ftpadmin:ftpadmin@10.233.85.82:21/FileCollections/myfile.txt');Destination:url('file://\Temp\MyFTPFolder\UIDPSWDinURL.txt');CreateFolders:True;OverWrite:True;Transfer">--> 
+	<META HTTP-Equiv="FileTransfer" content="TransferEvent:url('Javascript:MyJSONTransferEvent(%json)');Source:url('ftp://ftpadmin:ftpadmin@10.233.85.82:21/FileCollections/myfile.txt');Destination:url('file://\Temp\MyFTPFolder\UIDPSWDinURL.txt');CreateFolders:True;OverWrite:True;Transfer"> 
+    
+    
+<script language=javascript>
+
+function MyTransferEvent(Msg)
+{
+document.getElementById('FileDiv').innerHTML = "TransferResult= "+Msg;
+}
+
+function MyJSONTransferEvent(myjsonobject)
+{
+document.getElementById('FileDiv').innerHTML ="JSON TransferResult= " + myjsonobject.transferResult;
+}
+
+
+
+
+</script>
+</head>
+
+<body>
+
+<br /><br /><br /><br />
+FTPToDeviceFullyqualifiedURL in EMML1.1 port-21
+<form id="frmFileManagement">
+<div id="FileDiv">TransferEvent:-</div>
+<P><INPUT TYPE="button" VALUE="Back" ONCLICK="location.href='FileManagement_Index.html'"></P>
+</form>
+</body>
+</html>

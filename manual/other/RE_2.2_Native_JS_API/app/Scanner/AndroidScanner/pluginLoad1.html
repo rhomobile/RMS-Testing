@@ -1,0 +1,158 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+  <script type="text/javascript">
+  var iCount = 0;
+  
+   function starttest()
+   {
+       setTimeout("onScannerEnable()", 10000);
+       message.innerHTML="enabling the scanner";
+   
+   }
+
+   function Quit()
+    {
+	generic.InvokeMETAFunction("Application", "Quit");
+    }
+
+   
+    function onScannerEnable() 
+    {
+        
+        generic.InvokeMETAFunction('Scanner', 'enabled:SCN1');
+        message.innerHTML="disabling the scanner";
+        setTimeout("onScannerDisable()", 10000);
+        
+    }
+    
+    function onScannerDisable()
+    {
+     generic.InvokeMETAFunction('Scanner', 'disabled');
+     setTimeout("onCreatingGesture()", 10000);
+     message.innerHTML="Creating the gesture";
+    }
+    
+    function onCreatingGesture()
+    {
+    
+    generic.InvokeMETAFunction("gesture", "type:linear;preset:left-right;id:LinearGesture1;diagnostics:TRUE;start-x:50;start-y:200;end-x:200;end-y:200;tolerance:30;sensitivity:60;skew:30;deviation:50;region-width:40;create");
+   
+    setTimeout("onDeletingGesture()", 10000);
+    message.innerHTML="Deleting the gesture";
+    }
+
+    function onDeletingGesture()
+    {
+    
+     generic.InvokeMETAFunction("gesture", "id:LinearGesture1;delete");
+     setTimeout("onVisibleSignal()", 10000);
+     message.innerHTML="making visible signal";
+     
+    }
+    
+    function onVisibleSignal()
+    {
+     generic.InvokeMETAFunction("Signal", "Visibility:Visible");
+     setTimeout("onHideSignal()", 10000);
+     message.innerHTML="hiding signal";
+    
+    
+    }
+    
+    function onHideSignal()
+    {
+     generic.InvokeMETAFunction("Signal", "Visibility:hidden");
+     setTimeout("onVisibleBattery()", 10000);
+     message.innerHTML="making visible Battery";
+    
+    
+    }
+    
+    function onVisibleBattery()
+    {
+     generic.InvokeMETAFunction("Battery", "Visibility:Visible");
+     setTimeout("onHideBattery()", 10000);
+     message.innerHTML="Hiding Battery";
+    
+    
+    }
+    
+    
+     function onHideBattery()
+    {
+     generic.InvokeMETAFunction("Battery", "Visibility:hidden");
+     setTimeout("onVisibleSignature()", 10000);
+     message.innerHTML="making visible Signature";
+    
+    
+    }
+    
+    function onVisibleSignature()
+    {
+     generic.InvokeMETAFunction("SignatureCapture", "Visibility:Visible");
+     setTimeout("onHideSignature()", 10000);
+     message.innerHTML="Hiding Signature";
+    }
+    
+    
+    function onHideSignature()
+    {
+     generic.InvokeMETAFunction("SignatureCapture", "Visibility:hidden");
+     setTimeout("onFileTransfer()", 10000);
+     message.innerHTML="doing file transfer";
+    }
+    
+    
+    function onFileTransfer()
+    {
+     generic.InvokeMETAFunction("FileTransfer", "TransferEvent:url('Javascript:MyTransferEvent('%s');');Source:url('ftp://ftpadmin:ftpadmin@10.233.85.82/FileCollections/myfile.txt');Destination:url('file://\Temp\MyFTPFolder\UIDPSWDinURL.txt');CreateFolders:True;OverWrite:True;Transfer");
+     setTimeout("startPushServer()", 10000);
+     message.innerHTML="starting device server";
+    }
+    
+    function startPushServer()
+    {
+     generic.InvokeMETAFunction("Push", "Port:8080;start");
+     setTimeout("stopPushServer()", 10000);
+     message.innerHTML="stoping device server";
+    }
+    
+    function stopPushServer()
+    {
+    generic.InvokeMETAFunction("Push", "stop");
+    setTimeout("onScannerEnable()", 10000);
+    message.innerHTML="Enabling the scanner again";
+    iCount++;
+    NumberCount.innerHTML="Number of loops:"+iCount;
+    
+    }
+    
+
+     function MyTransferEvent(Msg)
+     {
+        result.innerHTML="Result:"+Msg;
+     }
+     
+     
+ 
+    
+    
+    
+ </script>
+</head>
+<body>
+<hr />1D Scanner continuous scanning Stress Test
+<div id="message">message</div><br />
+<div id="result">event result</div><br />
+<div id="NumberCount"><b>Number of Counts</b></div> 
+<form name="ODAXForm" id="ODAXForm" action="">
+<P><INPUT TYPE="button" VALUE="Start" ONCLICK="starttest();">
+<p></p><P><INPUT TYPE="button" VALUE="Back" ONCLICK="location.href='./Scanner.html'">
+<INPUT TYPE="button" VALUE="Quit" ONCLICK="Quit();"></P>
+</form>
+
+</body>
+</html>

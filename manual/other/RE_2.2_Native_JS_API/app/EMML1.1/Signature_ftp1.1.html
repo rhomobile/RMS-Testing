@@ -1,0 +1,51 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+
+
+<META HTTP-Equiv="SignatureCapture"Content="left:110;top:90;height:100;bgcolor:#FF0000;width:200;border:visible;Pencolor:#0000FF;Penwidth:2;visibility:visible;Username:ftpadmin;Password:ftpadmin; SignatureSaveEvent:url('Javascript:onCaptured('%s');');destination:url('ftp://10.233.85.82/Received/sigInFTP.bmp')">
+
+</head>
+<p>Send the bmp to ftp</p>
+<BR><BR><BR><BR>
+<div id="message">Message</div>
+<BR><BR>
+<P><INPUT TYPE="button" VALUE="Capture" ONCLICK="doCapture();"></P>
+<P><INPUT TYPE="button" VALUE="Clear" ONCLICK="doClear();"></P>
+<P><INPUT TYPE="button" VALUE="Quit" ONCLICK="Quit();"></P>
+
+<BR>
+<A HREF="./EMML1.1.html">Back</A>
+</body>
+</html>
+
+
+<SCRIPT>
+var objGeneric = new ActiveXObject("PocketBrowser.Generic");
+	
+function doCapture()
+{
+	objGeneric.InvokeMETAFunction('SignatureCapture', 'capture');
+}
+
+function doClear()
+{
+	//objGeneric.InvokeMETAFunction('SignatureCapture', 'clear');
+	signatureCapture.clear();
+}
+
+function onCaptured(data)
+{
+	//alert(data);
+	message.innerHTML=data;
+}
+
+function Quit()
+{
+	objGeneric.InvokeMETAFunction("Application", "Quit"); 
+}
+
+</SCRIPT>
+
+

@@ -1,0 +1,116 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+
+<title>Memory TestScript</title>
+
+
+<script type="text/javascript">
+	  
+  function callgetMemoryStats()
+	{
+	memory.getMemoryStats(); 
+    Message.innerHTML="getMemoryStats called:";
+	}	
+  
+  
+  function setmemoryEvent()
+{
+	var SelectedValue = frm.memoryEventdropdown.selectedIndex;
+	var selectEvent = frm.memoryEventdropdown.options[SelectedValue].value;
+    Message.innerHTML="Sensor Event is:"+selectEvent;
+	switch(selectEvent)
+	{
+		case 'JSCRIPT':
+
+			memory.memoryEvent="memoryEventjsFunction('%s','%s');";
+			break;
+
+		case 'JSON':
+
+			memory.memoryEvent="memoryEventjsonFunction(%json);";
+			break;
+			
+	   case 'DETACH':
+	   
+            memory.memoryEvent="url('')";
+			break;
+			
+	  case 'URL':
+
+			memory.memoryEvent="url('http://10.233.85.82/Neon/Navigate.html')";
+			break;
+
+		case 'EMPTY':
+
+			memory.memoryEvent="";
+			break;
+	}
+}
+  
+	function memoryEventjsonFunction(jsonObject)
+	{
+		var theOutput = "<BR><BR><B>memoryEvent  </B>" + "<BR>";        
+        theOutput = theOutput + "totalMemory(KB): "+jsonObject.totalMemory + "<BR>";        
+        theOutput = theOutput + "availMemory(KB): " + jsonObject.availMemory  + "<BR>";
+        outputDiv.innerHTML = theOutput;
+	}
+	
+	function memoryEventjsFunction(totalMemory,availMemory)
+	{
+		var theOutput = "<BR><BR><B>memoryEvent  </B>" + "<BR>";
+        theOutput = theOutput + "totalMemory(KB): "+totalMemory + "<BR>";        
+        theOutput = theOutput + "availMemory(KB): " + availMemory  + "<BR>";
+        outputDiv.innerHTML = theOutput;
+	}
+		  
+    
+function setlowMemThreshold()
+{
+	var lowMemThresholdValue = frm.txtlowMemThreshold.value;
+	var IValue = "lowMemThreshold:"+lowMemThresholdValue;
+	Message.innerHTML="value is:"+IValue;
+	memory.lowMemThreshold=lowMemThresholdValue;	
+}  
+
+  
+    
+ </script>
+</head>
+<body>
+<form id="frm" action="">
+<br /><br /><br />
+<b>Memory with JSOBJECT</b><br /><br />
+<div id="Message">Message</div>
+<div id="outputDiv">Memory output goes here</div>
+<br/>
+<hr>
+<INPUT align="center" type="button" value="getMemoryStats" onclick="callgetMemoryStats();"><br/>
+<hr>
+
+memoryEvent:
+<select name="memoryEventdropdown" id="Select3">
+<option SELECTED VALUE="">Select</OPTION>
+<option value="JSCRIPT">JSCRIPT</option>
+<option value="JSON">JSON</option>
+<option value="DETACH">DETACH</option>
+<option value="URL">URL</option>
+<option value="EMPTY">EMPTY</option>
+</select>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<input type="button" onclick="setmemoryEvent();" value="SetMemoryEvent">
+<br /><br />
+<hr/>
+
+lowMemThreshold:<Textarea id="txtlowMemThreshold"cols="10" rows="1">20</Textarea>
+&nbsp;&nbsp;&nbsp;&nbsp;
+<input type=button onclick="setlowMemThreshold();" value="SetlowMemThreshold">
+
+<hr/>
+
+</table>
+</form>
+
+</body>
+</html>

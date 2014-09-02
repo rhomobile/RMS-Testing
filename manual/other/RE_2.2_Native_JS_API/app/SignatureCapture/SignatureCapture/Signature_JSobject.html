@@ -1,0 +1,492 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+<META HTTP-Equiv="MinimizeButton" Content="Visibility:Visible;left:100;top:0">
+<script language=javascript>
+var selectedVisibility=""; //Selected Visibility.
+var selectedBorder=""; //Selected Aim in the list.
+
+
+function Quit() 
+{
+   generic.InvokeMETAFunction("Application", "Quit");
+
+}
+function selectVisibility()
+{
+	var sltVisibility=frm.sigVisibility.selectedIndex;
+	selectedVisibility = frm.sigVisibility.options[sltVisibility].value;
+	switch(selectedVisibility)
+	{
+		case 'Visible':
+            
+			//generic.InvokeMETAFunction('SignatureCapture', 'Visibility:Visible');
+                  signatureCapture.visibility = 'visible';
+
+			break;
+
+		case 'Hidden':
+
+			//generic.InvokeMETAFunction('SignatureCapture', 'Visibility:Hidden');
+                  signatureCapture.visibility = 'hidden';
+			break;
+
+		
+		case 'Address':
+
+			//generic.InvokeMETAFunction('SignatureCapture', 'Visibility:Address');
+                   signatureCapture.visibility = 'address';
+			break;
+			
+					
+		case 'Null':
+
+			//generic.InvokeMETAFunction('SignatureCapture', 'Visibility:Address');
+                   signatureCapture.visibility = '';
+			break;
+	}
+}
+
+
+function clearSignature()
+{
+	//generic.InvokeMETAFunction('SignatureCapture', 'Clear');
+     signatureCapture.clear(); 
+
+
+
+}
+
+function setSigLocalName()
+{
+var LocalSigName=frm.textLocalName.value;
+signatureCapture.name=LocalSigName;
+//generic.InvokeMETAFunction('SignatureCapture', 'name:'+LocalSigName);
+}
+
+function captureLocalSignature()
+{
+     signatureCapture.capture(); 
+	//generic.InvokeMETAFunction('SignatureCapture', 'Capture');
+}
+
+function setLeftPosition()
+{
+	var leftpst=frm.leftPosition.value;
+	var leftpstvalue=""+leftpst;
+	//generic.InvokeMETAFunction('SignatureCapture',leftpstvalue);
+            signatureCapture.left =leftpstvalue ; 
+
+}
+
+function setTopPosition()
+{
+	var toppst=frm.topPosition.value;
+	var toppstvalue=""+toppst;
+	//generic.InvokeMETAFunction('SignatureCapture',toppstvalue);
+      signatureCapture.top = toppstvalue;
+}
+
+function setheight()
+{
+	var ht=frm.viewerHeight.value;
+	var setheightvalue=""+ht;
+	//generic.InvokeMETAFunction('SignatureCapture',setheightvalue);
+      signatureCapture.height = setheightvalue;
+}
+
+function setwidth()
+{
+	var wd=frm.viewerWidth.value;
+	var setwidthvalue=""+wd;
+	//generic.InvokeMETAFunction('SignatureCapture',setwidthvalue);
+      signatureCapture.width = setwidthvalue;
+}
+
+function peninkwidth()
+{
+	var penwd=frm.inkwidth.value;
+	var penwdvalue=""+penwd;
+	//generic.InvokeMETAFunction('SignatureCapture',penwdvalue);
+      signatureCapture.penWidth = penwdvalue;
+}
+
+function peninkcolor()
+{
+	var pcolor=frm.inkcolor.value;
+	var pencolorvalue=""+pcolor;
+	//generic.InvokeMETAFunction('SignatureCapture',pencolorvalue);
+      signatureCapture.penColor = pencolorvalue;
+}
+
+function bgroundcolor()
+{
+	var backgcolor=frm.backgroundColor.value;
+	var backgcolorvalue=""+backgcolor;
+	//generic.InvokeMETAFunction('SignatureCapture',backgcolorvalue);
+      signatureCapture.bgColor = backgcolorvalue;
+}
+
+function selectBorder()
+{
+	var sltBorder=frm.sigBorder.selectedIndex;
+	selectedBorder = frm.sigBorder.options[sltBorder].value;
+	switch(selectedBorder)
+	{
+		case 'On':
+			//generic.InvokeMETAFunction('SignatureCapture', 'Border:Visible');
+                   signatureCapture.border = 'Visible';
+			break;
+
+		case 'Off':
+			//generic.InvokeMETAFunction('SignatureCapture', 'Border:Hidden');
+                  signatureCapture.border = 'Hidden';
+			break;
+		
+		case 'Test':
+			//generic.InvokeMETAFunction('SignatureCapture', 'Border:Address');
+                  signatureCapture.border = 'Address';
+			break;
+	}
+}
+
+function sigCapture()
+{
+message.innerHTML="Response will appear here..";
+
+var UName = frm.txtUserName.value;
+signatureCapture.username = UName;
+//generic.InvokeMETAFunction('SignatureCapture', 'username:'+UName);
+
+var UPass = frm.txtPassword.value;
+signatureCapture.password = UPass;
+//generic.InvokeMETAFunction('SignatureCapture', 'password:'+UPass);
+
+var sigName=frm.txtName.value;
+if(sigName!="")
+{
+signatureCapture.name = sigName;
+}
+//generic.InvokeMETAFunction('SignatureCapture', 'name:'+sigName);
+
+
+var Destination = frm.txtDestination.value;
+var dest = "url('"+Destination+"')";
+signatureCapture.destination=dest;
+//generic.InvokeMETAFunction('SignatureCapture', 'destination:'+dest);    
+
+  	for (var i=0; i < frm.group1.length; i++)
+   	{   
+      		if (frm.group1[i].checked)
+      		{
+      			var type = frm.group1[i].value;
+      		}
+   	}	
+   	
+	if(type=="javascript")
+	{
+		signatureCapture.signatureSaveEvent="onCaptured('%s')";
+	    //generic.InvokeMETAFunction("SignatureCapture", "signatureSaveEvent:onCaptured('%s')"); 
+	}
+    else if(type=="HTML")
+	{
+	    signatureCapture.signatureSaveEvent="url('http://10.233.85.82/Navigate.html?Resposnse=%s');";
+	}
+	else if(type=="JSON")
+	{
+	signatureCapture.signatureSaveEvent="onCapturedjson(%json)";
+	}
+	else if(type=="Empty")
+	{
+	signatureCapture.signatureSaveEvent="";
+	}
+	else if(type=="URLEmpty")
+	{
+	signatureCapture.signatureSaveEvent="url('')";
+	}
+
+	
+	signatureCapture.capture(); 
+
+}
+
+function onCaptured(response)
+{
+	message.innerHTML = "Javascript response ="+response;
+}
+function onCapturedjson(jsondata)
+{
+	message.innerHTML = "JSON response: " +jsondata.transferResult;
+}
+
+
+function doVisible()
+{
+//generic.InvokeMETAFunction('SignatureCapture', 'Visibility:visible');
+ signatureCapture.visibility = 'Visible';
+
+
+}
+
+function doHidden()
+{
+//generic.InvokeMETAFunction('SignatureCapture', 'Visibility:Hidden');
+ signatureCapture.visibility = 'Hidden';
+}
+
+function doDestination()
+{
+    var w = frm.SelectDestination.selectedIndex;
+    DestValue = frm.SelectDestination.options[w].value;
+    if(DestValue=="HTTP")
+    {
+    frm.txtDestination.value="http://10.233.85.82/NEON/ReceivedFiles/Upload.aspx";
+    }
+    else if(DestValue=="QUALIFIEDHTTP")
+    {
+    frm.txtDestination.value="http://10.233.85.82:80/NEON/ReceivedFiles/Upload.aspx";
+    frm.txtUserName.value="";
+    frm.txtPassword.value="";
+    }
+    else if(DestValue=="FTP")
+    {
+    frm.txtDestination.value="ftp://10.233.85.82/Received/sigInFTP.bmp";
+    frm.txtUserName.value="ftpadmin";
+    frm.txtPassword.value="ftpadmin";
+    
+    }
+    else if(DestValue=="QUALIFIEDFTP")
+    {
+    frm.txtDestination.value="ftp://ftpadmin:ftpadmin@10.233.85.82/Received/siginQFTP.bmp";
+    frm.txtUserName.value="";
+    frm.txtPassword.value="";
+    
+    }
+    else if(DestValue=="FILE1")
+    {
+    frm.txtDestination.value="file://\\Temp\\CapturedSigTemp.bmp";
+    frm.txtUserName.value="";
+    frm.txtPassword.value="";
+    }
+    else if(DestValue=="FILE2")
+    {
+     frm.txtDestination.value="file://\\Application\\Airbeam\\CapturedSigAPPAir.bmp";
+     frm.txtUserName.value="";
+     frm.txtPassword.value="";
+    }
+    else if(DestValue=="RELATIVEHTTPDOWN")
+    {
+     frm.txtDestination.value="../ReceivedFiles/Upload.aspx";
+     frm.txtUserName.value="uploadtest";
+     frm.txtPassword.value="letmein";
+     
+//  url('./down/Upload.aspx')
+//	url('../Upload.aspx')
+//	url('./Upload.aspx')
+    
+    }
+    else if(DestValue=="RELATIVEHTTPUP")
+    {
+     frm.txtDestination.value="../ReceivedFiles/Upload.aspx";
+     frm.txtUserName.value="uploadtest";
+     frm.txtPassword.value="letmein";
+    }
+    else if(DestValue=="RELATIVEHTTPCURRENT")
+    {
+     frm.txtDestination.value="../ReceivedFiles/./Upload.aspx";
+     frm.txtUserName.value="uploadtest";
+     frm.txtPassword.value="letmein";
+    }
+    else if(DestValue=="INVALIDFILE")
+    {
+     frm.txtDestination.value="file://\\And\\data\\sigAndroidData.bmp";
+     frm.txtUserName.value="";
+    frm.txtPassword.value="";
+    }
+    else if(DestValue=="INVALIDHTTP")
+    {
+    frm.txtDestination.value="http://tand";
+    frm.txtUserName.value="uploadtest";
+    frm.txtPassword.value="letmein";
+    }
+    else if(DestValue=="EMPTYHTTP")
+    {
+    frm.txtDestination.value="http://";
+    frm.txtUserName.value="uploadtest";
+    frm.txtPassword.value="letmein";
+    }
+    else if(DestValue=="INVALIDFTP")
+    {
+    frm.txtDestination.value="ftp://tandv";
+    frm.txtUserName.value="tandv";
+    frm.txtPassword.value="H0neymoon";
+    }
+    else if(DestValue=="EMPTYFTP")
+    {
+    frm.txtDestination.value="ftp://";
+    frm.txtUserName.value="tandv";
+    frm.txtPassword.value="H0neymoon";
+    }
+}
+
+</script>
+</head>
+<body>
+<BR>
+<b>Signature Capture using JSObject</b>
+<form id="frm" action="">
+<BR><BR><BR><BR><BR><BR><BR>
+<div id="message">Message</div>
+<BR><BR><BR><BR><BR><BR><BR><BR><BR>
+
+Select Visibility	<select name="sigVisibility" id="sigVisibility" onChange="selectVisibility();">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="Visible">Visible</option>
+<option value="Hidden">Hidden</option>
+<option value="Address">Address</option>
+<option value="Null">Null</option>
+</select>
+
+Select Border	<select name="sigBorder" id="sigBorder" onChange="selectBorder();">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="On">On</option>
+<option value="Off">Off</option>
+<option value="Test">Test</option>
+</select>
+<BR><BR>
+<P><INPUT TYPE="button" VALUE="Hidden" ONCLICK="doHidden();">
+<INPUT TYPE="button" VALUE="visible" ONCLICK="doVisible();"></P>
+<p><input type=button id="clear" onclick="clearSignature();" value="Clear">
+<input type=button id="capture" onclick="captureLocalSignature();" value="CaptureLocal"></P>
+<BR><BR>
+
+
+<table>
+ <tr>
+      <td>Left Position:</td><td><Textarea id="leftPosition" cols="10" rows="1">20</Textarea>
+	<input type=button onclick="Javascript:setLeftPosition();" value="Left">
+</td></tr>
+	
+<tr>
+      <td>Top Position:</td><td><Textarea id="topPosition" cols="10" rows="1">20</Textarea>
+	<input type=button onclick="Javascript:setTopPosition();" value="Top">
+</td></tr>
+ <tr>
+      <td>Height:</td><td><Textarea id="viewerHeight" cols="10" rows="1">30</Textarea>
+	<input type=button onclick="Javascript:setheight();" value="Height">
+</td> </tr>
+ <tr>
+      <td>Width:</td><td><Textarea id="viewerWidth" cols="10" rows="1">130</Textarea>
+	<input type=button onclick="Javascript:setwidth();" value="Width">
+</td></tr>
+ <tr>
+      <td>Pen Width:</td><td><Textarea id="inkwidth" cols="10" rows="1">3</Textarea>
+	<input type=button onclick="Javascript:peninkwidth();" value="PenInk">
+</td></tr>
+ <tr>
+      <td>Pen Color:</td><td><Textarea id="inkcolor" cols="10" rows="1">#EE00EE</Textarea>
+	<input type=button onclick="Javascript:peninkcolor();" value="PenColor">
+</td></tr>
+ <tr>
+      <td>BG Color:</td><td><Textarea id="backgroundColor" cols="10" rows="1">#7FFF00</Textarea>
+	<input type=button onclick="Javascript:bgroundcolor();" value="BGColor">
+</td></tr>
+<tr>
+    <td>Name:</td><td><Textarea id="textLocalName" cols="10" rows="1">sigLocal</Textarea>
+	<input type=button onclick="Javascript:setSigLocalName();" value="set Name">
+</td></tr>
+
+
+</table>
+
+<hr>
+<table>
+<tr>
+Select DestinationType:<select name="SelectDestination" id="SelectDestination" onchange="doDestination();">
+<OPTION VALUE="">Select Destination type</OPTION>
+<option value="HTTP">HTTP</option>
+<option value="QUALIFIEDHTTP">QUALIFIED HTTP</option>
+<option value="FTP">FTP</option>
+<option value="QUALIFIEDFTP">QUALIFIED FTP</option>
+<option value="FILE1">FILE1</option>
+<option value="FILE2">FILE2</option>
+<option value="RELATIVEHTTPDOWN">RelativePathDown</option>
+<option value="RELATIVEHTTPUP">RelativePathUp</option>
+<option value="RELATIVEHTTPCURRENT">RelativePathCurrent</option>
+<option value="RELATIVEHTTPDOWN">RelativePathDown</option>
+<option value="RELATIVEHTTPUP">RelativePathUp</option>
+<option value="RELATIVEHTTPCURRENT">RelativePathCurrent</option>
+<option value="INVALIDFILE">INVALIDFILE</option>
+<option value="INVALIDHTTP">INVALIDHTTP</option>
+<option value="EMPTYHTTP">EMPTYHTTP</option>
+<option value="INVALIDFTP">INVALIDFTP</option>
+<option value="EMPTYFTP">EMPTYFTP</option>
+</select>
+</tr>
+	
+	<!--url('ftp://10.233.85.82:21/Sig.bmp')-->
+	<!--	url('http://10.233.85.82:80/NEON/SignatureCapture/Upload.aspx')-->
+	<!--   url('file://\Application\Sig.bmp')-->
+	<!--   url('./down/Upload.aspx')-->
+	<!--   url('../Upload.aspx')-->
+	<!--   url('./Upload.aspx')-->
+	
+	<!--url("ftp://ftp.tandv.wtgdev.net/image.bmp")-->
+         <!--url("http://tandv.wtgdev.net/FileManagement/SecuredHTTP/upload.php")-->
+
+        <!--url('ftp://ftpadmin:ftpadmin@10.233.85.82:21/Sig.bmp')http://10.233.85.82/NEON/ReceivedFiles/Upload.aspx";-->
+        <!--url('ftp://ftpadmin:ftpadmin@10.233.85.82:21/Sig.bmp')-->
+
+	
+
+   
+	<!--url('http://10.233.85.82:80/PB3.X/Signature Capture/Sig.bmp')-->
+	<!--url('http://157.235.207.158:80/PB3.X/Signature Capture/Upload.aspx')-->
+	<!--url('ftp://ftpadmin:ftpadmin@157.235.207.158:21/Sig.bmp')-->
+	<!--url('ftp://157.235.207.158:21/Sig.bmp')-->
+<!--	url('ftp://ftpadmin:ftpadmin@157.235.207.158:21/Sig.bmp')-->
+<!--url('http://157.235.207.79:80/PB3.X/Signature Capture/Upload.aspx')-->
+
+<tr>
+	<td>Destination</td><td><Textarea id="txtDestination"cols="21" rows="1"></Textarea></td>
+	</tr>
+<tr>
+	<td>UserName</td><td><Textarea id="txtUserName"cols="10" rows="1">ftpadmin</Textarea></td>
+	</tr>
+<tr>
+	<td>Password</td><td><Textarea id="txtPassword"cols="10" rows="1">ftpadmin</Textarea></td>
+	</tr>
+
+<tr>
+	<td>Name</td><td><Textarea id="txtName"cols="21" rows="1">Sig</Textarea></td>
+	</tr>
+
+
+</table>
+
+<input type="radio" name="group1" value="javascript">Navigate to javascript function
+<br>
+<input type="radio" name="group1" value="HTML">Navigate to HTML Page
+<br>
+<input type="radio" name="group1" value="JSON">JSON event
+<br>
+<input type="radio" name="group1" value="Empty">EmptyEvent
+<br>
+<input type="radio" name="group1" value="URLEmpty">Detach
+<br>
+
+
+<br>
+
+    <input type=button onclick="Javascript:sigCapture();" value="AttachandCapture">
+<hr>
+
+<BR>
+<A HREF="SignatureCapture_Index.html">Back</A><br />
+<P><INPUT TYPE="button" VALUE="Quit" ONCLICK="Quit();"></P>
+
+</form>
+</body>
+</html>
+

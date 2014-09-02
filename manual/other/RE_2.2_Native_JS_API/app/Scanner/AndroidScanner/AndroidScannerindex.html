@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<HTML>
+
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+<META HTTP-Equiv="MinimizeButton" Content="Visibility:Visible;top:80">
+<META HTTP-Equiv="keystate" Content="Visibility:Visible">
+
+</HEAD>
+
+
+<BODY BGCOLOR="#FFFFEA" TEXT="#0000A0" LINK="#FF0000" VLINK="#808080" ALINK="#008040">
+<H2>Rho Scanner</H2>
+<input type=button value="Quit" onclick="quitPB();" />
+<!--<input type=button value="New Window" onclick="openindex();" />-->
+<P><A HREF="Automation.html">Automated Decoder Test</A></P>
+<P><A HREF="Stress.html">Stress</A></P>
+<P><A HREF="scanner.htm">ScannerParam_Generic</A></P>
+<P><A HREF="SacnnerParamJS.html">ScannerParam_Jsobject</A></P>
+<P><A HREF="BasicSanityJsobject.html">Scanner Jsobject Sanity</A></P>
+<P><A HREF="BasicSanity.html">Scanner Generic Sanity</A></P>
+<P><A HREF="ScannerPersistant.html">ScannerPersistenceTest</A></P>
+<P><A HREF="BasicSanityjson.html">ScannerActivexSanityjsonEvent</A></P>
+<P><A HREF="BasicSanitySetEMML.html">ScannerSetEMMLSanity</A></P>
+<P><A HREF="Signature_Decoder_JS.html">Signature_Decoder_JS</A></P>
+<P><A HREF="Signature_Decoder_EMML1.1.htm">Signature_Decoder_EMML1.1</A></P>
+<P><A HREF="RSM_Test.html">RSM Test</A></P>
+<br/><hr/>
+<P><A HREF="BasicSanityJsobject_NewParam.html">Scanner_NewParam</A></P>
+<P><A HREF="TSDscanner_JSObject.html">TSD scanner_JSObject</A></P>
+<P><A HREF="OldIndex.html">Old Index</A></P>
+
+<!--<P><A HREF="Signature_Decoder_EMML1.1.htm">Signature_Decoder_EMML1.1</A></P>
+<P><A HREF="BasicSanityjson.html">ScannerActivexSanityjsonEvent</A></P>
+<P><A HREF="Scanner_BT.html">Scanner BT</A></P>
+<P><A HREF="Stress_2DContinuousToggle.html">ScannerContinuosStartStop</A></P>
+<P><A HREF="Signature_Decoder_JS.html">Signature_Decoder_JS</A></P>
+<P><A HREF="IssueTest1.html">Important Test</A></P>-->
+<P><INPUT TYPE="button" VALUE="Back" ONCLICK="location.href='../../INDEX.HTML'"></P>
+<BR>
+<input type=button value="enumerate" onclick="doenumerate();" />
+</BODY>
+</HTML>
+<SCRIPT>
+var generic = new ActiveXObject("PocketBrowser.Generic");
+
+function EnumScanners(scannerArray) {
+     //alert("hi 1 ");
+        for (i = 0; i < scannerArray.length; i++) 
+        {
+           
+            alert("hi");
+        }
+
+    }
+    function doenumerate()
+    {
+    //alert("enumerate");
+    generic.InvokeMETAFunction('Scanner', 'enumerate');
+    }
+
+   function quitPB()
+   {
+     generic.InvokeMETAFunction('Application', 'Quit');
+   }
+   
+   function goBack()
+   {
+      document.location = 'history:back';
+   }
+ 
+   function goBack1()
+   {
+      window.location = 'history:back';
+   }
+ 
+
+  
+</SCRIPT>

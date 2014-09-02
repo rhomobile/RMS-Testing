@@ -1,0 +1,43 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+</head>
+<body>
+ <input type=button onclick="batteryVisible();" value="Visible">
+
+
+<div id="bat">Battery readings should appear here</div>
+<BR><BR>
+<P><INPUT TYPE="button" VALUE="Back" ONCLICK="location.href='../index.html'"></P>
+</body>
+</html>
+<SCRIPT LANGUAGE="JavaScript">
+try
+{
+var generic = new ActiveXObject("PocketBrowser.generic");
+}
+catch(err)
+{
+var GenericPlugin = document.createElement('embed'); 
+GenericPlugin.setAttribute('id',"embed1"); 
+GenericPlugin.setAttribute('type',"application/x-wtg-legacy-generic"); 
+GenericPlugin.setAttribute('hidden',"true"); 
+
+// Attach the plugin embed tags to the body 
+var theBody = document.getElementsByTagName('body')[0]; 
+theBody.appendChild(GenericPlugin); 
+
+
+}
+function batteryVisible()
+        {
+               generic.InvokeMETAFunction('Battery', 'visibility:visible');
+               generic.InvokeMETAFunction("Battery", "BatteryEvent:url('Javascript:OnBattery(%json);')");
+        }
+function OnBattery(json)
+	{
+		bat.innerHTML = "AC: " + json.ACLineStatus + "\<BR>main:" + json.BatteryLifePercent + "\<BR>backup: " + json.BackupBatteryLifePercent;
+		return;
+	}
+</SCRIPT>

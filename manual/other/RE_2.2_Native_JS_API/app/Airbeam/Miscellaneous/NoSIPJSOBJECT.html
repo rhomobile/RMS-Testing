@@ -1,0 +1,35 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+<META HTTP-Equiv="MinimizeButton" Content="Top:10; Left:10; Visibility:Visible">
+ </head>
+<body>
+<br /><br /><br />
+<div id="myDiv">Message</div>
+<P>JSObject</P>
+<P><INPUT TYPE="button" VALUE="noSIP=True" ONCLICK="doSync();">
+<P><INPUT TYPE="button" VALUE="noSIP=False" ONCLICK="doSync1();">
+<P><INPUT TYPE="button" VALUE="Back" ONCLICK="location.href='../AirBEAM.html'"></P>
+
+<script language="javascript">
+
+   var retVal="";
+   function doSync()
+   {
+     
+      nosip.ShowSIP(true);
+   }
+   
+    function doSync1()
+   {
+     
+      nosip.ShowSIP(false);
+   }
+</script>
+</body>
+</html>
+
+
+
+

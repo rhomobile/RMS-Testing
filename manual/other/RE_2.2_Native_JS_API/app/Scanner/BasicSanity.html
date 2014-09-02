@@ -1,0 +1,148 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+<script type="text/javascript">
+  var Generic = new ActiveXObject("PocketBrowser.Generic");
+  var selected_scanner = "";
+
+
+  function MyScanEvent(data, source, type, time, length, theEvent) {
+  message.innerHTML = "Barcode decoded";
+       
+//alert(theEvent);
+  message.innerHTML = "Barcode decoded";
+     if (theEvent == 'BTScanAssociationBarcode') {
+         scanningAssociationBarcode = true;
+         //Minimise PocketBrowser and Show the Association barcode for the user to scan
+        // Generic.InvokeMETAFunction('Application', 'minimize');
+//Generic.LaunchProcessNonBlocking('\\Windows\\Display_BD_Address.exe', '');
+ message.innerHTML = "BTScanAssociationBarcode";
+   }
+     else if (theEvent == 'BluetoothConnected') {
+  //Check to see if we are scanning the association barcode, if we are then return user control to PocketBrowser
+          if (scanningAssociationBarcode) {
+              //  The Association barcode is currently shown
+              scanningAssociationBarcode = false;
+              Generic.InvokeMETAFunction('Application', 'restore');
+          }
+          message.innerHTML = "Bluetooth Scanner Connected";
+      }
+      else if (theEvent == 'BluetoothDisconnected') {
+          message.innerHTML = "Bluetooth Disconnected, Please Reconnect";
+      }
+      else if (theEvent == 'Decode') {
+     
+     ODAXForm.datafield.value = data;
+          
+     }
+  }
+
+
+   function starttest()
+   {
+       
+       var temp = "enabled:" + selected_scanner.toString();
+       Generic.InvokeMETAFunction('scanner', temp);
+       Generic.InvokeMETAFunction('scanner', 'enabled;start');
+
+   }
+
+   function stoptest()
+    {
+     Generic.InvokeMETAFunction('Scanner', 'disabled');
+     Generic.InvokeMETAFunction('Scanner', 'stop');
+    }
+
+    
+    
+    function Quit()
+    {
+	Generic.InvokeMETAFunction("Application", "Quit");
+    }
+
+    function setEnumScannerTimer() 
+    {
+
+        setTimeout("onScannerEnable()", 1000);
+    }
+    function onScannerEnable() 
+    {
+       
+        Generic.InvokeMETAFunction("Scanner", "DecodeEvent:url('Javascript:MyScanEvent('%s', '%s', '%s', '%s', '%s', '%s');')");
+        Generic.InvokeMETAFunction("Scanner", "enumScannerEvent:url('Javascript:EnumScanners(%s);')");
+        Generic.InvokeMETAFunction('Scanner', 'enumerate');
+        
+    }
+
+    function EnumScanners(scannerArray) {
+    
+        for (i = 0; i < scannerArray.length; i++) 
+        {
+           
+            this.document.ODAXForm.myscanner.options[i + 1].text = scannerArray[i][0] + scannerArray[i][1];
+            this.document.ODAXForm.myscanner.options[i + 1].value = scannerArray[i][0];
+            myAmit.innerHTML+="myscanner"+scannerArray[i][0];
+        }
+
+    }
+
+
+    function selectScanner()
+     {
+        
+        var w = document.ODAXForm.myscanner.selectedIndex;
+        selected_scanner = document.ODAXForm.myscanner.options[w].value;
+
+        if (selected_scanner != "") 
+        {
+
+            Generic.InvokeMETAFunction('Scanner', 'disabled');
+        }
+       
+    }
+    function pres()
+    {
+          //Generic.InvokeMETAFunction('Scanner', 'adaptiveScanning:true');
+          //Generic.InvokeMETAFunction('Scanner', 'aimType:timedrelease');
+       
+        Generic.InvokeMETAFunction('Scanner', 'aimType:presentation');
+        Generic.InvokeMETAFunction('Scanner', 'enabled');
+       Generic.InvokeMETAFunction('scanner', 'start');
+    }
+    function softstop()
+    {
+        Generic.InvokeMETAFunction('Scanner', 'stop');
+    }
+    
+    
+ </script>
+</head>
+<body onload="setEnumScannerTimer();">
+<DIV ID="myAmit">Selected Scanner: </DIV>
+<br /><br />
+<DIV ID="message">message </DIV>
+<form name="ODAXForm" id="ODAXForm" action="">
+<table>
+<tr>
+<td>
+<select name="myscanner" id="myscanner" onChange="selectScanner();">
+<OPTION value="" >Select Scanner</OPTION> 
+<OPTION value="" ></OPTION> 
+<OPTION value="" ></OPTION> 
+<OPTION value="SCN5" ></OPTION> 
+<OPTION value="SCN5" ></OPTION> 
+</select></td></tr>
+<tr><td><P><INPUT TYPE="button" VALUE="Start" ONCLICK="starttest();">
+<INPUT TYPE="button" VALUE="stop" ONCLICK="stoptest();"></td></tr>
+<tr><td><INPUT TYPE="button" VALUE="Back" ONCLICK="location.href='./Scanner.html'">
+<INPUT TYPE="button" VALUE="Quit" ONCLICK="Quit();"></td></tr>
+<tr><td>Decoded data:</b><TEXTAREA NAME="datafield" id="datafield" COLS=20 ROWS=2></TEXTAREA></td></tr>
+<INPUT TYPE="button" VALUE="presentation" ONCLICK="pres();"></td></tr>
+<INPUT TYPE="button" VALUE="SoftStop" ONCLICK="softstop();"></td></tr>
+</table>
+</form>
+
+</body>
+</html>

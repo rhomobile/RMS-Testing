@@ -1,0 +1,66 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+
+</head>
+<body>
+<DIV ID="divTimer">Time is...</DIV><br /><br />
+<h4>Named DeviceApps EMML Test Script</h4>
+<a href="javascript:doApplyProfile('myProfile.Timer1');">Apply Timer Profile</a><br />
+<a href="javascript:doApplyProfile('myProfile.Alarm1');">Apply Alarm Profile</a><br />
+<a href="javascript:doApplyProfile('myProfile.Application1');">Apply Application Profile</a><br />
+<a href="javascript:doApplyProfile('myProfile.Backlight1');">Apply Backlight Profile</a><br />
+<a href="javascript:doApplyProfile('myProfile.Device1');">Apply Device Profile</a><br />
+<a href="javascript:doApplyProfile('myProfile.Hourglass1');">Apply Hourglass1 Profile</a><br />
+<a href="javascript:doApplyProfile('myProfile.Keylight1');">Apply Keylight1 Profile</a><br />
+<a href="javascript:doApplyProfile('myProfile.Reboot1');">Apply Reboot1 Profile</a><br />
+<a href="javascript:doApplyProfile('myProfile.ScreenOrientation1');">Apply ScreenOrientation1 Profile</a><br />
+<a href="javascript:doApplyProfile('myProfile.SIP1');">Apply SIP1 Profile</a><br />
+<a href="javascript:doApplyProfile('myProfile.Stylus1');">Apply Stylus1 Profile</a><br />
+<a href="javascript:doApplyProfile('myProfile.TextSize');">Apply TextSize Profile</a><br />
+<br><br><br>
+<input type=button value="Clear Profile" onclick="clearProfile();">
+<input type=button value="Clear Alarm" onclick="clearAlarm();">
+<h4>Browse to another page to check for EMML profile persistance.</h3>
+<h4><a href="Persistant_Timer_Profile.html">Click here to go to another page.</a></h4>
+<hr />
+<a href="../EMMLProfilesIndex.html">Back to EMML Profile Index</a>
+<br /><P><INPUT TYPE="button" VALUE="Quit" ONCLICK="Quit();"></P>
+
+
+</body>
+</html>
+
+
+<SCRIPT LANGUAGE="JavaScript">
+    var Generic = new ActiveXObject("PocketBrowser.Generic");
+
+    function doTimer(time) {
+        divTimer.innerHTML = 'Time: ' + time;
+    }
+
+    function clearAlarm() {
+        Generic.InvokeMETAFunction('Alarm', 'clear');
+
+    }
+
+    function doApplyProfile(profile) {
+
+        Generic.InvokeMETAFunction('EMMLProfile', 'Apply:' + profile);
+
+    }
+
+    //    function starttimer() 
+    //    {
+    //        Generic.InvokeMETAFunction('Timer', 'Start');
+    //    }
+
+    function clearProfile() {
+        Generic.InvokeMETAFunction('EMMLProfile', 'clear:myProfile');
+    }
+
+    function Quit() {
+        Generic.InvokeMETAFunction("Application", "Quit");
+    }
+</SCRIPT>

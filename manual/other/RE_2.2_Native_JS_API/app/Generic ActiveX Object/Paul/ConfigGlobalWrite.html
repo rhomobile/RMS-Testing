@@ -1,0 +1,170 @@
+<HTML>
+  <head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+  <TITLE>Config Test Page</TITLE>
+  
+  <SCRIPT>
+  
+  var outputStr="";
+  var gen = new ActiveXObject("PocketBrowser.Generic");
+  
+  var DebugButtons="";
+  var CompatibilityModeEnabled="";
+  var LogProtocol="";
+  var LogPort="";
+  var LogURI="";
+  var LogError="";
+  var LogWarning="";
+  var LogInfo="";
+  var LogUser="";
+  var LogMaxSize="";
+  var RegExFile="";
+  var PluginFile="";
+  var FullScreen="";
+  var EnableFunctionKey_F1="";
+  var NavTimeout="";  
+  var NonExistent="";  
+  
+  
+  function Save()
+  {
+    //save the config settings
+    DebugButtons              = GetSetting("DEBUGBUTTONSENABLED");
+    CompatibilityModeEnabled  = GetSetting("COMPATIBILITYMODEENABLED");
+    LogProtocol               = GetSetting("LOGPROTOCOL");
+    LogPort                   = GetSetting("LOGPORT");
+    LogURI                    = GetSetting("LOGURI");
+    LogError                  = GetSetting("LOGERROR");
+    LogWarning                = GetSetting("LOGWARNING");
+    LogInfo                   = GetSetting("LOGINFO");
+    LogUser                   = GetSetting("LOGUSER");
+    LogMaxSize                = GetSetting("LOGMAXSIZE");
+    RegExFile                 = GetSetting("REGEXFILE");
+    PluginFile                = GetSetting("PLUGINFILE");
+    FullScreen                = GetSetting("FULLSCREEN");
+    EnableFunctionKey_F1      = GetSetting("ENABLEFUNCTIONKEY_F1");
+    NavTimeout                = GetSetting("NAVTIMEOUT");  
+    //NonExistent               = GetSetting("NONEXISTENT");
+  }
+  
+  function Write()
+  {
+    Save();//save the old setting
+    gen.WriteConfigSetting("DEBUGBUTTONSENABLED","1");
+    gen.WriteConfigSetting("COMPATIBILITYMODEENABLED","1");
+    gen.WriteConfigSetting("LOGPROTOCOL","HTTP");
+    gen.WriteConfigSetting("LOGPORT","100");
+    gen.WriteConfigSetting("LOGURI","File://\\Program Files\\PocketBrowser\\Log2.txt");
+    gen.WriteConfigSetting("LOGERROR","0");
+    gen.WriteConfigSetting("LOGWARNING","0");
+    gen.WriteConfigSetting("LOGINFO","0");
+    gen.WriteConfigSetting("LOGUSER","0");
+    gen.WriteConfigSetting("LOGMAXSIZE","5");
+    gen.WriteConfigSetting("REGEXFILE","File://\\Program Files\\PocketBrowser\\Config\\RegEx2.xml");
+    gen.WriteConfigSetting("PLUGINFILE","File://\\Program Files\\PocketBrowser\\Config\\Plugin2.xml");
+    gen.WriteConfigSetting("FULLSCREEN","0");
+    gen.WriteConfigSetting("ENABLEFUNCTIONKEY_F1","1");
+    gen.WriteConfigSetting("NAVTIMEOUT","1000");
+    Run();
+  }
+  
+  function Restore()
+  {
+    //restore the old settings  
+    gen.WriteConfigSetting("DEBUGBUTTONSENABLED",DebugButtons);
+    gen.WriteConfigSetting("COMPATIBILITYMODEENABLED",CompatibilityModeEnabled);
+    gen.WriteConfigSetting("LOGPROTOCOL",LogProtocol);
+    gen.WriteConfigSetting("LOGPORT",LogPort);
+    gen.WriteConfigSetting("LOGURI",LogURI);
+    gen.WriteConfigSetting("LOGERROR",LogError);
+    gen.WriteConfigSetting("LOGWARNING",LogWarning);
+    gen.WriteConfigSetting("LOGINFO",LogInfo);
+    gen.WriteConfigSetting("LOGUSER",LogUser);
+    gen.WriteConfigSetting("LOGMAXSIZE",LogMaxSize);
+    gen.WriteConfigSetting("REGEXFILE",RegExFile);
+    gen.WriteConfigSetting("PLUGINFILE",PluginFile);
+    gen.WriteConfigSetting("FULLSCREEN",FullScreen);
+    gen.WriteConfigSetting("ENABLEFUNCTIONKEY_F1",FullScreen);
+    gen.WriteConfigSetting("NAVTIMEOUT",NavTimeout);
+   
+    
+    Run(); 
+  }
+  function GetSetting(setting)
+  {
+    var Ret = gen.ReadConfigSetting(setting);
+    eval("var arrRet = "+Ret);
+    if(arrRet.length){
+      return arrRet[0];
+    }
+    return "undefined";
+  }
+  
+  
+  function AddConSetting(setting)
+  {
+    
+    
+    var Ret = gen.ReadConfigSetting(setting);
+    
+    eval("var arrRet = "+Ret);
+    
+    var loop; 
+    if(arrRet.length){
+      outputStr +="<TR bgcolor='999999'><TD colspan='2'>"+setting+"</TD></TR>";
+      for(loop = 0;loop < arrRet.length;loop++)
+      {
+        if(arrRet[loop].length){
+          outputStr +="<TR><TD colspan='2'>"+arrRet[loop]+"</TD></TR>";
+        }
+        else{
+          outputStr +="<TR><TD colspan='2'>\"\"</TD></TR>";
+        }
+      }
+    }
+    
+    
+  }
+  
+  
+  
+  function Run()
+  {
+    display.innerHTML = "...";
+    outputStr ="<table style='font-size:10px'><TR><TD colspan='2' align='center'>Global Configuration Settings</TD></TR>";
+    AddConSetting("DEBUGBUTTONSENABLED");
+    AddConSetting("COMPATIBILITYMODEENABLED");
+    AddConSetting("LOGPROTOCOL");
+    AddConSetting("LOGPORT");
+    AddConSetting("LOGURI");
+    AddConSetting("LOGERROR");
+    AddConSetting("LOGWARNING");
+    AddConSetting("LOGINFO");
+    AddConSetting("LOGUSER");
+    AddConSetting("LOGMAXSIZE");
+    AddConSetting("REGEXFILE");
+    AddConSetting("PLUGINFILE");
+    AddConSetting("FULLSCREEN");
+    AddConSetting("ENABLEFUNCTIONKEY_F1");
+    AddConSetting("NAVTIMEOUT");
+    
+    outputStr +="</table>";
+    display.innerHTML = outputStr;
+  
+  }
+  
+  
+  </SCRIPT>
+  </HEAD>
+    
+  <BODY BGCOLOR="#FFFFEA" TEXT="#0000A0" LINK="#FF0000" VLINK="#808080" ALINK="#008040" onLoad="Javascript:Run()">
+  <Div id="display">...</Div><BR>
+  <INPUT align="center" type="button" value="Write" onclick="Javascript:Write();"><BR><BR>
+  <INPUT align="center" type="button" value="Restore" onclick="Javascript:Restore();"><BR><BR>
+  <A HREF="../Generic ActiveX Object.html">Back to Main Menu</A><BR>
+  <BR><BR><BR>
+  
+  <P>Last Revision : 19 March 2010 <BR>Paul Henderson</P>
+  </BODY>
+</HTML>

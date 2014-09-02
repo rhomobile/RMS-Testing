@@ -1,0 +1,351 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+    <title>NEON KeyCapture Test</title>
+<META HTTP-Equiv="KeyState" content="visibility:visible">
+
+</head>
+<body>
+
+<H2>KeyHandling Using JSObjects and setEMML</H2>
+All metatags in JSObjects and KeyEvent and triggerEvent set to HTTP URL in setEMML
+
+<form id="frmKeykandler" action="">
+<meta name="mobileoptimized" content="0" />
+<br>
+<P><INPUT TYPE="button" VALUE="Back" ONCLICK="location.href='KeyHandling_Index.html'"></P>
+<br>
+Key Handling with JS Objects
+<div id="KeyEventDiv">KeyEvent:-</div>
+<table border=1 width=100%>
+   
+     <tr>
+        <Textarea id="txtInput" cols="15" rows="2"></Textarea>
+     </tr>
+     <tr>
+        <Textarea id="TexInput2" cols="15" rows="2"></Textarea>
+    </tr>
+    <tr>
+        Telephone Field<input type = "tel" id="TexInput3" cols="15" />
+    </tr>
+	<tr>
+        Telephone Field 1<input type = "tel" id="TexInput3" cols="15" />
+    </tr>
+     <tr>
+        Numeric Field<input type = "number" id="TexInput4" cols="15" />
+    </tr>
+</table>
+
+<br>
+
+Key Captured:<td><Textarea id="txtkeyCaptured"cols="10" rows="1"></Textarea></td>
+<hr>
+
+
+
+<select name="mydropdown5" id="mydropdown5">
+<option value="JavaScript">JavaScript</option>
+<option value="HTML">HTML</option>
+<option value="JSON">JSON</option>
+<option value="DETACHTRIGGEREVENT">DETACHTRIGGEREVENT</option>
+<option value="EMPTYTRIGGEREVENT">EMPTYTRIGGEREVENT</option>
+
+
+
+</select>
+
+
+
+
+<table>
+
+<tr>
+<td><a name="Attach key with Dispatch"></a></td>
+</tr>
+
+<tr>
+<td>Key to register:</td>
+<td><Textarea id="txtRegisterKey"cols="10" rows="1">all</Textarea></td>
+</tr>
+<tr>
+<td>Select Dispatchvalue</td>
+<td><select name="mydropdown" id="SelectDispatchValue">
+<option value="True">True</option>
+<option value="False">False</option>
+<option value="Test">Test</option>
+<option value="">EmptyString</option>
+</select>
+</td>
+</tr>
+
+<tr>
+    <td><input type="button" id="cmdSubmitKeyDispatch" onclick="RegisterKeyEventwithdispatch();" value="Register"/></td>
+</tr>
+<tr>
+    <td><input type="button" id="Button4" onclick="UnRegisterKeyEventwithdispatch();" value="Unegister"/></td>
+</tr>
+<tr>
+    <td><input type="button" id="Button5" onclick="EmptyKeyEvent();" value="Empty Keyevent"/></td>
+    <td><input type="button" id="Button6" onclick="EmptykeyCapture();" value="Empty KeyCapture tag"/></td>
+</tr>
+</table>
+
+<hr>
+
+<table>
+<tr>
+<td><a name="Attach key with Remap"></a></td>
+</tr>
+<tr>
+<td>Key to register:</td><td><Textarea id="txtRegisterKeyRemap"cols="10" rows="1">0x31</Textarea></td>
+</tr>
+<tr>
+<td>Remap this key to:</td><td><Textarea id="txtRemapValue"cols="10" rows="1">0x09</Textarea></td>
+</tr>
+<tr>
+    <td><input type="button" id="cmdRegisterKeywithRemap" onclick="RegisterKeywithRemap();" value="Register"/></td>
+</tr>
+</table>
+
+<hr>
+
+<table>
+<tr>
+<td><a name="Home and Acceleratekey"></a></td>
+</tr>
+<tr>
+<td>Enter the Homekey Hex value:- </td><td><Textarea id="txtHomekey"cols="10" rows="1">0x34</Textarea></td>
+</tr>
+
+<tr>
+    <td><input type="button" id="Button1" onclick="SetHomekey();" value="Set Homekey"/></td>
+	<td><input type="button" id="HomekeyDisable" onclick="disable_Homekey();" value="HomekeyDisable"/></td>
+</tr>
+
+</table>
+<hr>
+
+<table>
+<tr>
+<td><select name="mydropdown1" id="SelectAccelerateKey">
+<option value="All">All</option>
+<option value="None">None</option>
+<option value="Norm">Norm</option>
+<option value="Off">Off</option>
+<option value="Test">Test</option>
+<option value="">Empty</option>
+</select>
+</td>
+</tr>
+<tr>
+    <td><input type="button" id="Button2" onclick="SetAcceleratekey();" value="Set Acceleratekey"/></td>
+
+</tr>
+</table>
+
+<hr>
+
+
+ <input type="button" id="Button3" onclick="AttachTriggerEvent();" value="Attach TriggerEvent"/>
+ <tr>
+        <Textarea id="Textarea1" cols="15" rows="2"></Textarea>
+  </tr>
+
+</form>
+</body>
+</html>
+
+<script language=javascript>
+
+var SelectedItem="";
+var generic1 = new ActiveXObject("PocketBrowser.generic");
+
+
+var count=0;
+
+
+function SetHomekey()
+{
+var HomekeyValue=frmKeykandler.txtHomekey.value;
+keyCapture.homeKeyValue=HomekeyValue;
+}
+
+function disable_Homekey()
+{
+//var HomekeyValue=frmKeykandler.txtHomekey.value;
+alert("Hi");
+keyCapture.homeKeyValue='Disabled';
+
+}
+
+
+
+
+function SetAcceleratekey()
+{
+var SelectedIndex=frmKeykandler.mydropdown1.selectedIndex;
+var AccelerateKeyValue=frmKeykandler.mydropdown1.options[SelectedIndex].value;
+keyCapture.accelerateKey=AccelerateKeyValue;
+}
+ 
+
+function GetSelectedRadioButton()
+{
+for (var i=0; i < frmKeykandler.group1.length; i++)
+   {   
+      if (frmKeykandler.group1[i].checked)
+      {
+      SelectedItem = frmKeykandler.group1[i].value;
+
+      }
+   }
+}
+
+function RegisterKeyEventwithdispatch()
+{
+    
+    var HexValue= frmKeykandler.txtRegisterKey.value;
+    var SelectedIndex=frmKeykandler.mydropdown.selectedIndex;
+    var temp = "";
+    var DispatchValue="";
+
+    if (frmKeykandler.mydropdown.options[SelectedIndex].value != "EmptyString") 
+    {
+        DispatchValue = frmKeykandler.mydropdown.options[SelectedIndex].value;
+    }
+   
+   SelectedItem=frmKeykandler.mydropdown5.value;
+   if(HexValue=="")
+   {
+   temp="KeyEvent:url('');";
+   }
+   else     
+   {  
+        if(SelectedItem=="JavaScript")
+        {
+            temp = "KeyValue:"+HexValue+";Dispatch:"+DispatchValue+";KeyEvent:url('javascript:MyKeyEvent('%s');')";
+        }
+        else if(SelectedItem=="HTML")
+        {
+            temp = "KeyValue:"+HexValue+";Dispatch:"+DispatchValue+";KeyEvent:url('http://10.233.85.82/NEON/Navigate.html?Key=%s')";
+        }
+         else if(SelectedItem=="JSON")
+        {
+            temp = "KeyValue:"+HexValue+";Dispatch:"+DispatchValue+";KeyEvent:url('javascript:MyJsonKeyEvent(%json);')";
+        }
+   }
+
+    alert("temp"+temp);
+    keyCapture.setEMML(temp);
+
+   
+}
+
+function UnRegisterKeyEventwithdispatch()
+{
+    var HexValue= frmKeykandler.txtRegisterKey.value;
+    var SelectedIndex=frmKeykandler.mydropdown.selectedIndex;
+    var temp = "";
+    var DispatchValue="";
+    keyCapture.keyValue=HexValue;
+    keyCapture.keyEvent='';
+   
+}
+
+function EmptyKeyEvent()
+{
+   var temp = "KeyEvent:";
+   alert("temp"+temp);
+   keyCapture.setEMML(temp);
+}
+
+function EmptykeyCapture()
+{
+     keyCapture.setEMML("");
+}
+
+function RegisterKeywithRemap()
+{
+var HexValue= frmKeykandler.txtRegisterKeyRemap.value;
+var RemapValue= frmKeykandler.txtRemapValue.value;
+keyCapture.keyValue=HexValue;
+keyCapture.remap=RemapValue;
+}
+
+
+
+
+
+
+
+function AttachTriggerEvent()
+{
+var temp="";
+SelectedItem=frmKeykandler.mydropdown5.value;
+if(SelectedItem=="JavaScript")
+{
+keyCapture.triggerEvent="MyTriggerEvent('%s');";
+}
+
+else if(SelectedItem=="HTML")
+{
+temp="TriggerEvent:url('http://10.233.85.82/NEON/Navigate.html?triggerFlag=%s')";
+keyCapture.setEMML(temp);
+}
+
+else if(SelectedItem=="JSON")
+{
+keyCapture.triggerEvent="MyJsonTriggerEvent(%json);";
+}
+else if(SelectedItem=="DETACHTRIGGEREVENT")
+{
+keyCapture.triggerEvent="";
+}
+else if(SelectedItem=="EMPTYTRIGGEREVENT")
+{
+temp="TriggerEvent:";
+keyCapture.setEMML(temp);
+}
+
+
+}
+
+
+
+
+
+
+function MyKeyEvent(key)
+{
+KeyEventDiv.innerHTML="KeyEvent fired for "+count +"th time. KeyValue:-"+key;
+frmKeykandler.txtkeyCaptured.value=key;
+count++;
+}
+
+function MyJsonKeyEvent(myjsonobject)
+{
+count++;
+KeyEventDiv.innerHTML="JSON-KeyEvent fired for "+count +"th time. KeyValue:-"+myjsonobject.keyValue;
+frmKeykandler.txtkeyCaptured.value=myjsonobject.keyValue;
+
+}
+
+function MyJsonTriggerEvent(myjsonobject)
+{
+count++;
+KeyEventDiv.innerHTML="JSON-TriggerEvent fired for "+count +"th time. triggerFlag:-"+myjsonobject.triggerFlag;
+frmKeykandler.txtkeyCaptured.value=myjsonobject.triggerFlag;
+
+}
+
+
+function MyTriggerEvent(TriggerFlag)
+{
+
+KeyEventDiv.innerHTML="TriggerEvent fired for "+count +"th time.TriggerFlag:-"+TriggerFlag;
+frmKeykandler.txtkeyCaptured.value=TriggerFlag;
+count++;
+}
+
+</script>

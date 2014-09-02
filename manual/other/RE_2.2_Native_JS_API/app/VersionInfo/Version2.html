@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+<!--<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="expires" content="0">-->
+<TITLE>Application Tests</TITLE>
+  <script type="text/javascript">
+  var generic = new ActiveXObject("PocketBrowser.Generic");
+	  
+function fnVer(productVersion, hotFixes, componentVersions)
+	{
+		var theOutput = "<B>Product Version:</b> " + productVersion + "<P>";
+		theOutput = theOutput + "<b>Hot Fixes:</b><P>";
+		for (var i=0; i<hotFixes.length; i = i + 1)
+		{
+			theOutput = theOutput + "  Hot Fix: " + hotFixes[i] + "<BR>";
+		}
+		theOutput = theOutput + "<P>";
+		theOutput = theOutput + "<b>Installed Components:</b><P>";
+		for (var j=0; j<componentVersions.length; j = j + 1)
+		{
+			theOutput = theOutput + "  Component: " + componentVersions[j][0] + ': ' + componentVersions[j][1] + "<BR>";
+		}
+		outputDiv.innerHTML = theOutput;
+	}
+	
+	
+	function fnVerJSON(jsonObject)
+	{
+
+		var theOutput = "<B>Product Version:</b> " + jsonObject.productVersion + "<P>";
+		theOutput = theOutput + "<b>Hot Fixes:</b><P>";
+		for (var i=0; i<jsonObject.hotFixes.length; i = i + 1)
+		{
+			theOutput = theOutput + "  Hot Fix: " + jsonObject.hotFixes[i] + "<BR>";
+		}
+		theOutput = theOutput + "<P>";
+		theOutput = theOutput + "<b>Installed Components:</b><P>";
+		for (var j=0; j<jsonObject.componentVersions.length; j = j + 1)
+		{
+			theOutput = theOutput + "  Module: " + jsonObject.componentVersions[j].module + ', Version: ' + jsonObject.componentVersions[j].version + "<BR>";
+		}
+		outputDiv.innerHTML = theOutput;
+	}
+  
+  function callmethod()
+  {
+  alert("1");
+  generic.InvokeMETAFunction("Application", "GetVersion");
+  }
+  </script>
+</head>
+<H1>Version persistant Test</H1>
+<P>
+<div id="outputDiv">Version info Test</div>
+<form  name="myForm" id="myForm" action="" >
+<P>
+
+<!--  <select id="vevent" onChange="doSelect();">
+            <OPTION>Select Version Event</OPTION>
+            <OPTION value="jsarray">jsarray</OPTION>               
+            <OPTION value="json">json</OPTION>
+            <OPTION value="emptyurl">emptyurl</OPTION>
+            <OPTION value="emptyevent">emptyevent</OPTION>
+            <OPTION value="invalidjson1">invalidjson1</OPTION> 
+            <OPTION value="invalidjson2">invalidjson2</OPTION> 
+  </select>-->
+  <br><br>
+  <INPUT align="center" type="button" value="Getversion" onclick="callmethod();"><br><br>
+<!--<A HREF="SignatureCapture.html">Back</A><br />-->
+<A HREF="Version1.html">Go to previous page</A><br />
+</html>
+

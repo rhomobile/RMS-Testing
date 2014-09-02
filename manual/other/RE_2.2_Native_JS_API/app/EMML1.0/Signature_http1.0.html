@@ -1,0 +1,65 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+
+<meta http-equiv="SignatureCapture" content="Visibility:Visible">
+<meta http-equiv="SignatureCapture" content="Border:Visible">
+<meta http-equiv="SignatureCapture" content="Left:30">
+<meta http-equiv="SignatureCapture" content="Top:60">
+<meta http-equiv="SignatureCapture" content="Width:200">
+<meta http-equiv="SignatureCapture" content="Height:60">
+<meta http-equiv="SignatureCapture" content="Penwidth:2">
+<meta http-equiv="SignatureCapture" content="Pencolor:#0000FF">
+<meta http-equiv="SignatureCapture" content="BGColor:#FFFF00">
+<meta http-equiv="SignatureCapture" content="destination:url('HTTP://10.233.85.82:80/PB/Signature Capture/upload.aspx')">
+
+<meta http-equiv="SignatureCapture" content="Name:Signature">
+<META HTTP-Equiv="SignatureCapture" Content="TransferEvent:url('Javascript:onCaptured('%s');')">
+
+
+
+</head>
+<p>Send the bmp to http</p>
+<BR><BR><BR><BR>
+<P><INPUT TYPE="button" VALUE="Capture" ONCLICK="doCapture();"></P>
+<P><INPUT TYPE="button" VALUE="Clear" ONCLICK="doClear();"></P>
+<P><INPUT TYPE="button" VALUE="Hidden" ONCLICK="dohidden();"></P>
+<P><INPUT TYPE="button" VALUE="Quit" ONCLICK="Quit();"></P>
+<br>
+<A HREF="./EMML1.0.html">Back</A>
+</body>
+</html>
+
+
+<SCRIPT>
+var objGeneric = new ActiveXObject("PocketBrowser.Generic");
+	
+function doCapture()
+{
+	objGeneric.InvokeMETAFunction('SignatureCapture', 'capture');
+}
+
+function doClear()
+{
+	objGeneric.InvokeMETAFunction('SignatureCapture', 'clear');
+}
+
+function onCaptured(data)
+{
+	alert(data);
+}
+
+function Quit()
+{
+	objGeneric.InvokeMETAFunction("Application", "Quit"); 
+}
+
+function dohidden()
+{
+	objGeneric.InvokeMETAFunction('SignatureCapture', 'Visibility:Hidden');
+}
+
+</SCRIPT>
+
+

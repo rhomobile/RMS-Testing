@@ -1,0 +1,63 @@
+<HTML>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+<META HTTP-Equiv="SignatureCapture" Content="BGColor:#FFFF00">
+<META HTTP-Equiv="SignatureCapture" Content="Width:100">
+<META HTTP-Equiv="SignatureCapture" Content="height:100">
+<META HTTP-Equiv="SignatureCapture" Content="top:60">
+<META HTTP-Equiv="SignatureCapture" Content="left:40">
+<META HTTP-Equiv="SignatureCapture" Content="Visibility:Visible">
+<META HTTP-Equiv="SignatureCapture" Content="PenColor:#FF00FF">
+<META HTTP-Equiv="SignatureCapture" Content="PenWidth:0">
+<!--<META HTTP-Equiv="SignatureCapture" Content="VectorEvent:url('Javascript:onVectors(%s);')">-->
+  
+
+  
+</HEAD>
+ <BODY>
+  <DIV id="vectorOut">Vectors Will Appear Here  A:</div>
+  <BR><BR><BR><BR><BR> <BR><BR><BR><BR>
+  <BR><BR><BR><BR><BR> <BR><BR><BR><BR><BR>
+  <P><INPUT TYPE="button" VALUE="ApplyEvent" ONCLICK="Javascript:ApplyEvent();"></P>
+ <P><INPUT TYPE="button" VALUE="Back" ONCLICK="location.href='SignatureCapture.html'"></P>
+ </BODY>  
+ </HTML>
+ <script type="text/javascript">
+try
+{
+var generic = new ActiveXObject("PocketBrowser.Generic");
+}
+catch(err)
+{
+var GenericPlugin = document.createElement('embed'); 
+GenericPlugin.setAttribute('id',"embed1"); 
+GenericPlugin.setAttribute('type',"application/x-wtg-legacy-generic"); 
+GenericPlugin.setAttribute('hidden',"true"); 
+
+// Attach the plugin embed tags to the body 
+var theBody = document.getElementsByTagName('body')[0]; 
+theBody.appendChild(GenericPlugin); 
+}
+function onVectors(data)
+{
+  var VectorAsHTML = "<TABLE><TR><TH>X</TH><TH>Y</TH><TH>X</TH><TH>Y</TH><TH>X</TH><TH>Y</TH></TR>";
+  for (var i=0; i<data.length; i = i + 6)
+  {
+    VectorAsHTML = VectorAsHTML + "<TR>"
+    VectorAsHTML = VectorAsHTML + "<TD>" + data[i] + "</TD><TD>" + data[i+1] + "</TD>";
+    VectorAsHTML = VectorAsHTML + "<TD>" + data[i+2] + "</TD><TD>" + data[i+3] + "</TD>";
+    VectorAsHTML = VectorAsHTML + "<TD>" + data[i+4] + "</TD><TD>" + data[i+5] + "</TD>";
+    VectorAsHTML = VectorAsHTML + "</TR>"
+  }
+  VectorAsHTML + "</TABLE>"
+  vectorOut.innerHTML = VectorAsHTML;
+}
+
+function ApplyEvent()
+{
+    //generic.InvokeMETAFunction("SignatureCapture", "SignatureSaveEvent:");
+    generic.InvokeMETAFunction("SignatureCapture", "VectorEvent:url('Javascript:onVectors(%s);')");
+  
+}
+</script>

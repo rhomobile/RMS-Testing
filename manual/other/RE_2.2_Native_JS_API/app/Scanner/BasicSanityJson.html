@@ -1,0 +1,140 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+ <!-- <META HTTP-Equiv="scanner" Content="DecodeEvent:url('http://10.233.85.82/pb3.x/EMMLProfiles/EMMLProfilesIndex.html')">-->
+<!--  <META HTTP-Equiv="scanner" Content="DecodeEvent:url('javascript:MyScanEvent('%s', '%s', %s, '%s', %s);')">-->
+  
+<!-- <META HTTP-Equiv="Scanner" Content="EnumScannerEvent:url('Javascript:EnumScanners(%s);')">-->
+ 
+  
+</head>
+<body onload="setEnumScannerTimer();">
+User Message A:<DIV ID="message"></DIV>
+<form name="ODAXForm" id="ODAXForm" action="">
+<table>
+<tr>
+<td>
+<select name="myscanner" id="myscanner" onChange="selectScanner();">
+<OPTION value="" >Select Scanner</OPTION> 
+<OPTION value="" ></OPTION> 
+<OPTION value="" ></OPTION> 
+<OPTION value="SCN5" ></OPTION> 
+<OPTION value="SCN5" ></OPTION> 
+</select></td></tr>
+<tr><td><P><INPUT TYPE="button" VALUE="Start" ONCLICK="starttest();">
+<INPUT TYPE="button" VALUE="stop" ONCLICK="stoptest();"></td></tr>
+<tr><td><INPUT TYPE="button" VALUE="Back" ONCLICK="location.href='./Scanner.html'">
+<INPUT TYPE="button" VALUE="Quit" ONCLICK="Quit();"></td></tr>
+<tr><td><P><INPUT TYPE="button" VALUE="Matrix2Of5" ONCLICK="matrix();">
+<tr><td>Decoded data:<br /><br /><br />
+
+</b><TEXTAREA NAME="datafield" id="datafield" COLS=100 ROWS=5></TEXTAREA></td></tr>
+
+</table>
+</form>
+<div id = "bat"></div>
+<P><INPUT TYPE="button" VALUE="Back" ONCLICK="location.href='../index.html'"></P>
+</body>
+</html>
+<script type="text/javascript">
+ try
+{
+var generic = new ActiveXObject("PocketBrowser.generic");
+}
+catch(err)
+{
+var GenericPlugin = document.createElement('embed'); 
+GenericPlugin.setAttribute('id',"embed1"); 
+GenericPlugin.setAttribute('type',"application/x-wtg-legacy-generic"); 
+GenericPlugin.setAttribute('hidden',"true"); 
+
+// Attach the plugin embed tags to the body 
+var theBody = document.getElementsByTagName('body')[0]; 
+theBody.appendChild(GenericPlugin); 
+
+
+}
+//  var iCount = 0;
+  var selected_scanner = "";
+
+
+  function MyScanEvent(json) {
+
+     ODAXForm.datafield.value = json.data + ":" + json.source + ":" + json.type + ":" + json.time + "\t" + json.length;
+          
+      
+  }
+  
+   function starttest()
+   {
+       
+       var temp = "enabled:" + selected_scanner;
+       generic.InvokeMETAFunction('scanner', temp);
+       //generic.InvokeMETAFunction('scanner','all_decoders:disabled');
+       generic.InvokeMETAFunction('scanner','all_decoders:enabled');
+       generic.invokeMETAFunction('scanner', 'start');
+
+   }
+
+   function stoptest()
+    {
+     generic.InvokeMETAFunction('Scanner', 'disabled');
+     generic.InvokeMETAFunction('Scanner', 'stop');
+    }
+
+    
+    
+    function Quit()
+    {
+	generic.InvokeMETAFunction("Application", "Quit");
+    }
+
+    function setEnumScannerTimer() 
+    {
+
+        setTimeout("onScannerEnable()", 3000);
+    }
+    function onScannerEnable() {
+        //generic.InvokeMETAFunction('Scanner', "DecodeEvent:url('http://10.233.85.82/pb3.x/Scanner/ScannerNavigate.html')");
+        generic.InvokeMETAFunction("Scanner", "DecodeEvent:url('javascript:MyScanEvent(%json);')");
+        generic.InvokeMETAFunction("Scanner", "EnumScannerEvent:url('Javascript:EnumScanners(%s);')");
+        generic.InvokeMETAFunction('Scanner', 'Enumerate');
+
+    }
+
+    function EnumScanners(scannerArray) {
+        var scannerList = "";
+        for (i = 0; i < scannerArray.length; i++) 
+        {
+             scannerList += scannerArray[i]+"\t";
+            //this.document.ODAXForm.myscanner.options[i + 1].text = scannerArray[i][0] + scannerArray[i][1];
+            //this.document.ODAXForm.myscanner.options[i + 1].value = scannerArray[i][0];
+        }
+        bat.innerHTML = "Enumeration"+scannerList;
+
+    }
+
+
+    function selectScanner()
+     {
+        
+        var w = document.ODAXForm.myscanner.selectedIndex;
+        selected_scanner = document.ODAXForm.myscanner.options[w].value;
+        if (selected_scanner != "") 
+        {
+
+            generic.InvokeMETAFunction('Scanner', 'disabled');
+        }
+       
+    }
+    function matrix()
+    {
+       generic.InvokeMETAFunction('Scanner', 'matrix2of5minLength:0');
+       generic.InvokeMETAFunction('Scanner', 'matrix2of5maxLength:0');
+       generic.InvokeMETAFunction('Scanner', 'matrix2of5:enabled');
+    }
+    
+    
+ </script>

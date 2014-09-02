@@ -1,0 +1,84 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+<script language=javascript>
+    var mGen = new ActiveXObject("PocketBrowser.Generic");
+    //var mGen = new ActiveXObject("PocketBrowser.generic");
+
+    function myvectorevent(data)
+    {
+	    var VectorAsHTML = "<TABLE><TR><TH>X</TH><TH>Y</TH><TH>X</TH><TH>Y</TH><TH>X</TH><TH>Y</TH></TR>";
+        for (var i=0; i<data.length; i = i + 6)
+        {
+            VectorAsHTML = VectorAsHTML + "<TR>"
+            VectorAsHTML = VectorAsHTML + "<TD>" + data[i] + "</TD><TD>" + data[i+1] + "</TD>";
+            VectorAsHTML = VectorAsHTML + "<TD>" + data[i+2] + "</TD><TD>" + data[i+3] + "</TD>";
+            VectorAsHTML = VectorAsHTML + "<TD>" + data[i+4] + "</TD><TD>" + data[i+5] + "</TD>";
+            VectorAsHTML = VectorAsHTML + "</TR>"
+        }
+        VectorAsHTML + "</TABLE>"
+        message.innerHTML = VectorAsHTML;
+    }
+
+    function doApplyProfile(profile) 
+    {
+        message2.innerHTML = "Applying Profile" + profile;
+        mGen.InvokeMETAFunction("EMMLProfile", "Apply:" + profile);
+        message2.innerHTML = "Profile Applied " + profile;
+    }
+
+    function clearProfile() 
+    {
+        message2.innerHTML = "Clearing Profile";
+        mGen.InvokeMETAFunction("EMMLProfile", "clear:mySigCap");
+        message2.innerHTML = "Profile Cleared";
+    }
+
+    function importProfile() 
+    {
+        message2.innerHTML = "Importing Profile";
+        mGen.InvokeMETAFunction("EMMLProfile", "name:mySigCap;importProfile:url('http://10.233.85.82/Neon/EMMLProfilesNew/SigCap/EMMP/SigCap.emmp');");
+        message2.innerHTML = "Profile Imported";
+    }
+
+function Quit()
+{
+    mGen.InvokeMETAFunction("Application", "Quit");
+}
+</SCRIPT>
+</head>
+<body>
+<P><BR></P>
+<h4>Named Signature Capture EMML Profile - Valid GenericActiveX</h4>
+<div id="message2" style="background-color:Black; font-family:@Batang; color:Red">message2</div>
+<div Id="Div1">Vector readings should appear here</div><br />
+<div id="message">message</div>
+<BR><BR><BR>
+<input type=button value="Import profile" onclick="importProfile();">
+<br />
+<a href="javascript:doApplyProfile('mySigCap.SigCap_Valid');">Apply SigCap_Valid Profile</a>
+<br>
+<a href="javascript:doApplyProfile('mySigCap.SigCap_Hidden');">Apply SigCap Hidden Profile</a>
+<br>
+<a href="javascript:doApplyProfile('mySigCap.SigCap_Visible');">Apply SigCap Visible Profile</a>
+<br>
+<a href="javascript:doApplyProfile('mySigCap.SigCap_RedBGColor');">Apply SigCap_RedBGColor Profile</a>
+<br>
+<a href="javascript:doApplyProfile('mySigCap.SigCap_GreenBGColor');">Apply SigCap_GreenBGColor Profile</a>
+<br>
+
+<input type=button value="Clear Profile" onclick="clearProfile();">
+<hr />
+
+
+<h4>Browse to another page to check for EMML profile persistance.</h3>
+<h4><a href="Persistant_SigCap_Test.html">Click here to go to another page.</a></h4>
+<hr />
+
+<a href="../EMMLProfilesIndex.html">Back to EMML Profile Index</a>
+<br /><P><INPUT TYPE="button" VALUE="Quit" ONCLICK="Quit();"></P>
+
+
+</body>
+</html>

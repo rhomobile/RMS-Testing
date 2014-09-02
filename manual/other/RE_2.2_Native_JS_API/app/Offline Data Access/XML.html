@@ -1,0 +1,444 @@
+<HTML>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+    	<META HTTP-Equiv="minimizeButton" Content="visibility:visible;top:100">	
+	<META HTTP-Equiv="FileTransfer" Content="Destination:url('file://\application\test.xml')">
+	<META HTTP-Equiv="FileTransfer" Content="CreateFolders:True">
+	<META HTTP-Equiv="FileTransfer" Content="OverWrite:True">
+	<META HTTP-Equiv="FileTransfer" Content="Source:url('http://10.233.85.82/NEON/Offline Data Access/test.xml')">
+     <meta name="mobileoptimized" content="0" /> 
+	<META HTTP-Equiv="FileTransfer" Content="TransferEvent:url('Javascript:doXfer('%s');')">  
+         
+		<TITLE>Ce ODAX Test Page</TITLE>
+		
+<!--<script language="javascript" src="FloatLayer.js"></script>-->
+		
+
+	</HEAD>
+	<!--<BODY onload="onStart();" onresize="alignFloatLayers()" onscroll="alignFloatLayers()">-->
+	<body>
+		<H2><FONT COLOR="#0000ff">ODAX Test Page</FONT></H2>
+		<H3><FONT COLOR="#000099">Using a XML File</FONT></H2>
+		<DIV id="result" style="color:Red; font-size:large;">Result:</div>
+		<!--<div id="floatlayer" style="width:50%;background:#d0d0ff;border:solid black 1px;padding:5px">Hello</div>-->
+		
+		<INPUT type="button" value="Get Test File" onclick="getFile();"><br>
+		<INPUT type="button" value="Check File Exists" onclick="DoFileExists();">
+		<FORM NAME="ODAXForm">
+			<h3>
+				Delete File</h3>
+			<Table border="1">
+				<tr>
+					<td colspan="2">
+						<font size="2">File Name:</font>
+					</td>
+					<td>
+						<input type="text" size="17" name="FileName" value="\application\test.xml">
+					</td>
+				</tr>
+				<tr>
+					<td align="center" colspan="4">
+						<INPUT TYPE="BUTTON" VALUE="Delete File" OnClick="DoDeleteFile();">
+					</td>
+				</tr>
+			</Table>
+			<h3>
+				Copy/Move File</h3>
+			<table border="1">
+				<!--<tr>
+					<td colspan="4">
+						<input type="radio" value="Copy File" name="MoveCopy" onclick="SetCopyMove(1)" /><font size="2">
+							Copy File </font>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="4">
+						<input type="radio" value="Move File" name="MoveCopy" onclick="SetCopyMove(0)" /><font size="2">
+							Move File </font>
+					</td>
+				</tr>-->
+				
+				<tr>
+					<td colspan="4">
+					<input type=button value="Set Copy File" onclick="SetCopyMove(1)" />
+					</td>
+				</tr>
+				<tr>
+					<td colspan="4">
+						<input type=button value="Set Move File" onclick="SetCopyMove(0)" />
+					</td>
+				</tr>
+					<tr>
+					<td>
+						<font size="2">Source File Name</font>
+					</td>
+					<td>
+						<input type="text" size="17" name="SRCFileName" value="\application\test.xml">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<font size="2">Destination File Name</font>
+					</td>
+					<td>
+						<input type="text" size="17" name="DSTFileName" value="\application\test.xml">
+					</td>
+				</tr>
+				<tr>
+					<td align="center" colspan="4">
+						<INPUT TYPE="BUTTON" VALUE="Take Action" OnClick="DoCopyFile();">
+					</td>
+				</tr>
+			
+
+			</table>
+			<h3>Query</h3>
+			<table border="1">
+				<tr>
+					<td>
+						<INPUT TYPE="BUTTON" VALUE="Record Count" OnClick="DoSelect();">
+					</td>
+					<td>
+						<input type="text" name="RecordCount">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<input type="button" value="Get Column" onclick="GetColumnData();">
+					</td>
+					<td>
+						<input type="text" name="ColumnData">
+					</td>
+				</tr>
+				<tr>
+					<td colspan="4" align="center">
+						<input type="button" value="Move Next" onclick="DoNavigateRecordSet(1);">
+					</td>
+				</tr>
+				<tr>
+					<td colspan="4" align="center">
+						<input type="button" value="Move Previous" onclick="DoNavigateRecordSet(2);">
+					</td>
+				</tr>
+				<tr>
+					<td colspan="4" align="center">
+						<input type="button" value="Move First" onclick="DoNavigateRecordSet(3);">
+					</td>
+				</tr>
+				<tr>
+					<td colspan="4" align="center">
+						<input type="button" value="Move Las" onclick="DoNavigateRecordSet(4);">
+					</td>
+				</tr>
+				<tr>
+					<td colspan="4" align="center">
+						<input type="button" value="Clear Result" onclick="DoNavigateRecordSet(5);">
+					</td>
+				</tr>
+			</table>
+			<h3>Insert</h3>
+			<table border="1">
+				<tr>
+					<td>Value 1</td>
+					<td>Value 2</td>
+					<td>Value 3</td>
+				</tr>
+				<tr>
+					<td>
+						<input type="text" name="Field1Value" ID="Text1">
+					</td>
+					<td>
+						<input type="text" name="Field2Value" ID="Text2">
+					</td>
+					<td>
+						<input type="text" name="Field3Value" ID="Text3">
+					</td>
+				</tr>
+				<tr>
+					<td colspan="4" align=center>
+						<input type="button" value="Insert record" onclick="DoInsert();">
+					</td>
+				</tr>
+			</table>
+			<h3>Update</h3>
+			<table border=1>
+				<tr>
+					<td>New Value</td>
+					<td>Condition Value</td>
+				</tr>
+				<tr>
+					<td>
+						<input type="text" name="UpdateFieldVal">
+					</td>
+					<td>
+						<input type="text" name="UpdateConditionVal">
+					</td>
+				</tr>
+				<tr>
+					<td colspan=4 align=center>
+						<input type=button value="Update Record" onclick="DoUpdate();">
+					</td>
+				</tr>
+			</table>
+			<h3>Delete</h3>
+			<table border=1>
+				<tr>
+					<td>
+						Enter Value to Delete
+					</td>
+				</tr>
+				<tr>
+					<td colspan=4>
+						<input type="text" name="DeleteFieldVal">
+					</td>
+				</tr>
+				<tr>
+					<td colspan=4 align=center>
+						<input type=button value="Delete Record" onclick="DoDelete();" >
+					</td>
+				</tr>
+			</table>
+			<h3>Get Last Error</h3>
+			<table border=1>
+				<tr>
+					<td colspan=4 align=center>
+							<input type=button value="Get Last Error" onclick="DoGetLastError();">
+					</td>
+				</tr>
+			</table>			
+		</FORM>
+		 <P><INPUT TYPE="button" VALUE="Back" ONCLICK="location.href='./Offline Data Access.html'"></P>
+		 <P>Last Revision : 18 Jan 2007 <BR>James Morley-Smith</P>
+		
+	</BODY>
+</HTML>
+
+
+
+<SCRIPT LANGUAGE="JAVASCRIPT">
+
+//    var ax = new ActiveXObject("CeODAX.ODAX");
+//    var gen = new ActiveXObject("PocketBrowser.Generic");
+    var IsCopy = new Boolean(false);
+    var IsMove = new Boolean(false);
+    
+    
+    
+    
+//    
+//        var odax = new ActiveXObject("CeODAX.ODAX")
+//        var generic = new ActiveXObject("PocketBrowser.Generic");
+   
+
+   
+    
+
+    function DoFileExists() {
+        //Check File Exist 
+
+        if (odax.FileExists(ODAXForm.FileName.value))
+            //alert(ODAXForm.FileName.value + " - File Exists");
+            result.innerHTML= ODAXForm.FileName.value + " - File Exists";
+        else
+            //alert(ODAXForm.FileName.value + " - File not Found");
+            result.innerHTML=ODAXForm.FileName.value + " - File not Found";
+
+    }
+
+    function DoDeleteFile() {
+        //Check File Exist 
+        if (odax.FileExists(ODAXForm.FileName.value)) {
+            if (ODAXForm.FileName.value.length < 1) {
+                //alert("Please Enter File Name");
+                result.innerHTML="Please Enter File Name";
+            }
+            else {
+                odax.Delete(ODAXForm.FileName.value);
+                //alert(ODAXForm.FileName.value + "\n Deleted");
+                result.innerHTML=ODAXForm.FileName.value + "\n Deleted";
+            }
+        }
+        else {
+            //alert("File Does Not Exist!!");
+            result.innerHTML="File Does Not Exist!!";
+        }
+    }
+
+    function DoCopyFile() {
+        if (ODAXForm.SRCFileName.value.length < 1 || ODAXForm.DSTFileName.value.length < 1) {
+            //alert("Please Enter Valid values for Source and Destination File Names");
+            result.innerHTML="Please Enter Valid values for Source and Destination File Names";
+        }
+        else {
+            if (IsCopy == true && odax.FileExists(ODAXForm.SRCFileName.value)) {
+                odax.Copy(ODAXForm.SRCFileName.value, ODAXForm.DSTFileName.value);
+            }
+            else {
+                odax.Move(ODAXForm.SRCFileName.value, ODAXForm.DSTFileName.value);
+            }
+        }
+    }
+    function SetCopyMove(value) {
+        if (value == 1) {
+            IsCopy = true;
+            IsMove = false;
+        }
+        else {
+            IsMove = true;
+            IsCopy = false;
+        }
+    }
+    function DoSelect() {
+        var n = odax.Select('SELECT * FROM \'\\application\\test.xml\';', ',', false);
+        ODAXForm.RecordCount.value = n;
+    }
+
+    function GetColumnData() {
+        var n = odax.Select('SELECT * FROM \'\\application\\test.xml\';', ',', false);
+        var colval = odax.Get("field1");
+        ODAXForm.ColumnData.value = colval;
+    }
+
+    function DoNavigateRecordSet(command) {
+        switch (command) {
+            case 1:
+                {
+                    if (0 != odax.MoveNext()) {
+                        //alert("Cannot Move to Next Record!!");
+                        result.innerHTML="Cannot Move to Next Record!!";
+                    }
+                    else {
+                        //result.innerHTML = "Cannot Move to Next Record!!";
+                        var colval = odax.Get("field1");
+                        ODAXForm.ColumnData.value = colval;
+                    }
+                    break;
+                }
+            case 2:
+                {
+                    if (0 != odax.MovePrev()) {
+                        //alert("Cannot Move to Previous Record!!");
+                        result.innerHTML="Cannot Move to Previous Record!!";
+                    }
+                    else {
+                        var colval = odax.Get("field1");
+                        ODAXForm.ColumnData.value = colval;
+                    }
+                    break;
+                }
+
+            case 3:
+                {
+                    if (0 != odax.MoveFirst()) {
+                        //alert("Cannot Move to First Record!!");
+                        result.innerHTML="Cannot Move to First Record!!";
+                    }
+                    else {
+                        var colval = odax.Get("field1");
+                        ODAXForm.ColumnData.value = colval;
+                    }
+                    break;
+                }
+            case 4:
+                {
+                    if (0 != odax.MoveLast()) {
+                        //alert("Cannot Move to Last Record!!");
+                        result.innerHTML= "Cannot Move to Last Record!!";
+                    }
+                    else {
+                        var colval = odax.Get("field1");
+                        ODAXForm.ColumnData.value = colval;
+                    }
+                    break;
+                }
+            case 5:
+                {
+                    odax.Clear();
+                }
+        }
+    }
+    function DoInsert() {
+        var FieldValue1 = ODAXForm.Field1Value.value;
+        var FieldValue2 = ODAXForm.Field2Value.value;
+        var FieldValue3 = ODAXForm.Field3Value.value;
+
+        if (FieldValue1.length < 1 || FieldValue2.length < 1 || FieldValue3.length < 1) {
+            //alert("Please enter a valid value for all three fields");
+            result.innerHTML= "Please enter a valid value for all three fields";
+        }
+        else {
+            var QueryString = 'INSERT INTO \'\\application\\test.xml\' (field1,field2,field3) VALUES (';
+            QueryString += '\'' + FieldValue1 + '\',';
+            QueryString += '\'' + FieldValue2 + '\',';
+            QueryString += '\'' + FieldValue3 + '\');';
+            //alert(QueryString);
+            var count = odax.Execute(QueryString, 0, ',', false);
+            //alert(count + " Record(s) Inserted");
+            result.innerHTML= count + " Record(s) Inserted";
+        }
+    }
+
+    function DoUpdate() {
+        if (ODAXForm.UpdateFieldVal.value.length < 1) {
+            //alert("Please Enter Valid Value");
+            result.innerHTML= "Please Enter Valid Value";
+        }
+        else {
+            var QueryString = 'UPDATE \'\\application\\test.xml\' SET field1=';
+            QueryString += '\'' + ODAXForm.UpdateFieldVal.value + '\'';
+            QueryString += ' WHERE field1=\'';
+            QueryString += ODAXForm.UpdateConditionVal.value + "\';"
+            //alert(QueryString);
+            var count = odax.Execute(QueryString, 0, ',', false);
+            //alert(count + " Record(s) Updated");
+            result.innerHTML= count + " Record(s) Updated";
+        }
+    }
+
+    function DoDelete() {
+        if (ODAXForm.DeleteFieldVal.value.length < 1) {
+            //alert("Please Enter Valid Value");
+            result.innerHTML= "Please Enter Valid Value";
+        }
+        else {
+            var QueryString = 'DELETE FROM \'\\application\\test.xml\' WHERE field1=';
+            QueryString += '\'' + ODAXForm.DeleteFieldVal.value + '\';'; // Having the Semicolan in the statement 
+            //	is VERY Important, because if you omit it
+            // the object goes into a never ending loop
+            //alert(QueryString);
+            var count = odax.Execute(QueryString, 0, ',', false); // Need to use the Delimeter even if it is not used.
+            //alert(count + " Record(s) Deleted");
+            result.innerHTML= count + " Record(s) Deleted";
+            var a = odax.MoveFirst();
+            //alert(a);
+            result.innerHTML= a;
+        }
+    }
+
+    function DoGetLastError() {
+        var count = odax.Select('SELECT * FROM \'\\application\\test.xml\';', ',', false);
+        odax.Clear();
+        if (0 != odax.MoveLast())//Error
+        {
+            var strErrorMsg = odax.GetLastErrorString();
+            //alert(strErrorMsg);
+            result.innerHTML= strErrorMsg;
+        }
+
+
+    }
+    function getFile() {
+//          generic.InvokeMETAFunction("FileTransfer", "Destination:url('file://\temp\test.csv')");
+//          generic.InvokeMETAFunction("FileTransfer", "CreateFolders:True");
+//          generic.InvokeMETAFunction("FileTransfer", "OverWrite:True");
+//          generic.InvokeMETAFunction("FileTransfer", "Source:url('http://10.233.85.82/NEON/Offline Data Access/test.xml')");
+//          generic.InvokeMETAFunction("FileTransfer", "TransferEvent:url('Javascript:doXfer('%s');')");
+          generic.InvokeMETAFunction("FileTransfer", "Transfer");
+    }
+    
+    function doXfer(response) {
+        //alert('File transfer Complete: ' + response);
+        result.innerHTML= "File transfer Complete: " + response;
+    }    
+		</SCRIPT>

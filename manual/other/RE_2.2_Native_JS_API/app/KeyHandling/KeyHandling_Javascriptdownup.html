@@ -1,0 +1,110 @@
+>html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+
+	<script language="JavaScript">
+
+	var controlledstateornot= false;
+	var prevcontrolledstateornot= false;
+	document.onkeyup= checkKeycode
+    
+	function checkKeycode(e) {
+	
+
+	var keycode;
+	if (window.event) 
+	keycode = window.event.keyCode;
+	else if (e)
+	keycode = e.which;
+
+	if(keycode==17)
+	{
+	controlledstateornot=false;
+	}
+	
+	document.getElementById('mycontrolstate').innerHTML = controlledstateornot;
+
+	if(prevcontrolledstateornot==true)
+	{
+	if(keycode==65)
+	{
+	document.getElementById('keycombination').innerHTML = "CTRL+A preessed up";
+	}
+	if(keycode==66)
+	{
+	document.getElementById('keycombination').innerHTML = "CTRL+B preessed up";
+	}
+	if(keycode==49)
+	{
+	document.getElementById('keycombination').innerHTML = "CTRL+1 preessed up";
+	}
+	
+	}
+	
+	
+	prevcontrolledstateornot = controlledstateornot;
+	}
+	
+	
+	document.onkeydown= checkKeycodedown
+
+	function checkKeycodedown(e) {
+	
+
+	var keycode;
+	if (window.event) 
+	keycode = window.event.keyCode;
+	else if (e)
+	keycode = e.which;
+	
+	if(keycode==17)
+	{
+	controlledstateornot=true;
+	}
+	
+	document.getElementById('mycontrolstate').innerHTML = controlledstateornot;
+	
+	
+	if(prevcontrolledstateornot==true)
+	{
+	
+	if(keycode==65)
+	{
+	document.getElementById('keycombination').innerHTML = "CTRL+A preessed down";
+	}
+		
+	if(keycode==66)
+	{
+	document.getElementById('keycombination').innerHTML = "CTRL+B preessed down";
+	}
+	if(keycode==49)
+	{
+	document.getElementById('keycombination').innerHTML = "CTRL+1 preessed down";
+	}
+	
+	}
+	
+	prevcontrolledstateornot = controlledstateornot;
+
+	}
+	
+	</script>
+
+</head>
+
+<body >
+
+<br><br><br>
+
+<b1>Keycheck</b1><br>
+
+
+		controlstate <nbsp><b id='mycontrolstate'>None</b>
+		<br>
+		key combi <nbsp><b id='keycombination'>None</b>
+
+		
+</body>
+	
+</html>

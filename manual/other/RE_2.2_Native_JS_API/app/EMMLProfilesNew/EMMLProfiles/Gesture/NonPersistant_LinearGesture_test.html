@@ -1,0 +1,45 @@
+<html>
+
+<META HTTP-Equiv="EMMLProfile" Content="apply:Linear">
+<META HTTP-Equiv="scanner" Content="DecodeEvent:url('javascript:doScan('%s', '%s', '%s', '%s', '%s');')">
+<script>
+    var myObject = new ActiveXObject("PocketBrowser.Generic");
+    function doQuit() {
+
+        myObject.InvokeMETAFunction('application', 'quit');
+    }
+
+
+    function doApplyProfile(profile) {
+      
+        myObject.InvokeMETAFunction('EMMLProfile', 'Apply:' + profile);
+    }
+
+    function onGesture(id, count)
+     {
+         if (id == "Scan1") 
+         {
+           
+             myObject.InvokeMETAFunction("Scanner", "all_decoders:disabled;Code11:enabled;enabled;start");
+         }
+
+     }
+
+     function doScan(data, source, type, time, length) 
+     {
+         message.innerHTML = "Decoded data is :" + data + "\nSource: " + source + "\nType: " + type + "\nTime: " + time + "Length: " + length;
+     }
+</script>
+
+<body>
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+<h4>Non Persistant linear test script</h4>
+<h4>only code 11 is enabled</h4>
+    <a href="javascript:doApplyProfile('Linear');">Apply Named Profile</a>
+    <br>
+  
+<br><br>
+    <a href="javascript:doQuit();">Quit PB</a>
+ <div id="message"></div>
+</body>
+</html>

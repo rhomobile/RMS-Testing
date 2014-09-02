@@ -1,0 +1,372 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+  <META HTTP-Equiv="MinimizeButton" Content="Visibility:Visible;left:0;top:100">
+
+ 
+
+<script language="javascript">
+
+  function playFile()
+   {
+   var path=frm.myText.value;
+   generic.PlayWave(path, 1);
+
+   }
+
+
+function setserverSNTP()
+{
+    alert('SNTP');
+	var ssntp=frm.serversntp.value;
+	var ssntpvalue="ServerIP:"+ssntp;
+	Message.innerHTML=ssntpvalue;
+	generic.InvokeMETAFunction('SNTP',ssntpvalue);
+
+}
+
+function selectstylus()
+{
+	var sltstylus=frm.stylustag.selectedIndex;
+	var selectedstylus = frm.stylustag.options[sltstylus].value;
+	switch(selectedstylus)
+	{
+		case 'Enabled':
+            Message.innerHTML='Enabled';
+			generic.InvokeMETAFunction('Stylus', 'Enabled');
+			break;
+
+		case 'Disabled':
+            Message.innerHTML='Disabled';
+			generic.InvokeMETAFunction('Stylus', 'Disabled');
+			break;	
+			
+	   case 'Enable':
+            Message.innerHTML='Enable';
+			generic.InvokeMETAFunction('Stylus', 'Enable');
+			break;
+
+	   case 'Disable':
+            Message.innerHTML='Disable';
+			generic.InvokeMETAFunction('Stylus', 'Disable');
+			break;		
+
+	   case 'Null':
+            Message.innerHTML='Null';
+			generic.InvokeMETAFunction('Stylus', '');
+			break;
+	}
+}
+
+function doTest()
+{
+	generic.InvokeMETAFunction('Stylus', 'Enabled');
+}
+
+//function doTest1() 
+//{
+//   generic.InvokeMETAFunction('timer', "Interval:5000;Timeout:url('http://10.233.85.82/PB3.x/index.html');Start");
+//}
+
+function selecttextsize()
+{
+	var slttextsize=frm.textsizetag.selectedIndex;
+	var selectedtextsize = frm.textsizetag.options[slttextsize].value;
+	switch(selectedtextsize)
+	{
+		case 'Largest':
+
+			generic.InvokeMETAFunction('TextSize', 'Largest');
+			break;
+
+		case 'Larger':
+
+			generic.InvokeMETAFunction('TextSize', 'Larger');
+			break;	
+
+		case 'Invalid':
+
+			generic.InvokeMETAFunction('TextSize', 'Small');
+			break;	
+
+		case 'Null':
+
+			generic.InvokeMETAFunction('TextSize', '');
+			break;
+
+		case 'Smaller':
+
+			generic.InvokeMETAFunction('TextSize', 'Smaller');
+			break;
+
+		case 'Smallest':
+
+			generic.InvokeMETAFunction('TextSize', 'Smallest');
+			break;
+
+		case 'Medium':
+
+			generic.InvokeMETAFunction('TextSize', 'Medium');
+			break;
+	}
+}
+
+function setdevVolume()
+{
+	var devvolume=frm.volume.value;
+	var devvolumevalue="SetVolume:"+devvolume;
+	alert(devvolumevalue);
+	generic.InvokeMETAFunction('Volume',devvolumevalue);
+}
+
+
+
+function selectSIPMode()
+{
+	var sltSIP=frm.sipMode.selectedIndex;
+	var selectedValue = frm.sipMode.options[sltSIP].value;
+	
+	switch(selectedValue)
+	{
+		case 'Manual':
+            Message.innerHTML="Manual";
+			generic.InvokeMETAFunction('SIPbutton', 'Visibility:Visible');
+			generic.InvokeMETAFunction('SIP', 'Manual');
+			break;
+
+		case 'Automatic':
+            Message.innerHTML="Automatic";
+			generic.InvokeMETAFunction('SIP', 'Automatic');
+			break;
+		
+	}
+}
+
+function setLeftPosition()
+{
+	var leftpst=frm.leftPosition.value;
+	var leftpstvalue="Left:"+leftpst;
+	Message.innerHTML=leftpstvalue;
+	generic.InvokeMETAFunction('SIP',leftpstvalue);
+}
+
+function setTopPosition()
+{
+	var toppst=frm.topPosition.value;
+	var toppstvalue="Top:"+toppst;
+	Message.innerHTML=toppstvalue;
+	generic.InvokeMETAFunction('SIP',toppstvalue);
+}
+
+function setzoomText()
+{
+var zoomtxtval=frm.zoomText.value;
+var zoomtxtparam="text:"+zoomtxtval;
+Message.innerHTML=zoomtxtparam;
+generic.InvokeMETAFunction('zoom',zoomtxtparam);
+}
+
+function setzoomPage()
+{
+var zoompageval=frm.zoomPage.value;
+var zoompageparam="page:"+zoompageval;
+Message.innerHTML=zoompageparam;
+generic.InvokeMETAFunction('zoom',zoompageparam);
+}
+
+function settimerEvent()
+{
+    var SelectedValue = frm.timereventdropdown.selectedIndex;
+	var selectEvent = frm.timereventdropdown.options[SelectedValue].value;
+    mytimer.innerHTML="Event is:"+selectEvent;
+	switch(selectEvent)
+	{
+		case 'JSCRIPT':
+            mytimer.innerHTML="JSCRIPT";
+			generic.InvokeMetaFunction("Timer", "timeout:url('javascript:mytimeoutjs('%s');')");
+			break;
+
+		case 'JSON':
+		    mytimer.innerHTML="JSON";
+            generic.InvokeMetaFunction("Timer", "timeout:url('javascript:mytimeoutjson(%json);')");
+			break;
+			
+	    case 'DETACH':
+	        mytimer.innerHTML="DETACH";
+           generic.InvokeMetaFunction("Timer", "timeout:url('')");
+			break;
+			
+	    case 'URL':
+	        mytimer.innerHTML="URL";
+			generic.InvokeMetaFunction("Timer", "timeout:url('http://10.233.85.82/Neon/DeviceApplication/device3pageNavigation.html')");
+			break;
+
+		case 'EMPTY':
+             mytimer.innerHTML="EMPTY";
+			generic.InvokeMetaFunction("Timer", "timeout:");
+			break;
+			
+		case 'FileInvalidURL':
+		      mytimer.innerHTML="FileInvalidURL";
+		      generic.InvokeMetaFunction("Timer", "timeout:url('file://\')");
+			   break;
+			   
+		case 'HttpInvalidURL':
+		      mytimer.innerHTML="HttpInvalidURL";
+		      generic.InvokeMetaFunction("Timer", "timeout:url('http://acbx')");
+			  break;
+		}
+
+}
+
+function mytimeoutjs(time)
+{
+alert("Current time using javascript is:"+time);
+divTimer.innerHTML="Current time is using javascript is:"+time;
+}
+
+function mytimeoutjson(jsonObject)
+{
+alert("Current time using json is:"+jsonObject.time);
+divTimer.innerHTML="Current time using json is:"+jsonObject.time;
+}
+
+function startTimer()
+{    
+	generic.InvokeMETAFunction('Timer','Start');	
+	mytimer.innerHTML="start";
+}
+
+function stopTimer()
+{
+	generic.InvokeMETAFunction('Timer','Stop');	
+	mytimer.innerHTML="Stop";
+}
+
+function doTimer(time)
+{
+	divTimer.innerHTML = 'Time: ' + time;
+}
+
+function settimerInterval()
+{
+var interv=frm.txtinterval.value;
+var intervalparam="Interval:"+interv;
+mytimer.innerHTML=intervalparam;
+generic.InvokeMETAFunction('Timer',intervalparam);
+
+}
+</script>
+
+
+</head>
+<body>
+<form id="frm" action="">
+<br /><br /><br />
+<b>Using generic Approach</b>
+<div id="Message"></div>
+<hr />
+SIP<br>
+Select Mode	<select name="sipMode" id="sipMode" onchange="selectSIPMode();">
+<option SELECTED VALUE="">Select</option>
+<option value="Manual">Manual</option>
+<option value="Automatic">Automatic</option>
+</select><br />
+
+      Left Position	<textarea id="leftPosition" cols="10" rows="1"></textarea>
+	</tr>
+	<input type=button onclick="setLeftPosition();" value="Left"><br />
+
+
+      Top Position	<textarea id="topPosition" cols="10" rows="1"></textarea>
+	 </tr>
+	 <input type=button onclick="setTopPosition();" value="Top"><br />
+<hr><br />
+
+<hr>
+SNTP<br>
+<tr>
+      ServerIP	<Textarea id="serversntp" cols="15" rows="1">10.233.85.82</Textarea></tr>
+	<input type=button onclick="setserverSNTP();" value="SNTP"><br>
+<hr><br>
+
+<hr>
+Stylus<br>
+Select Stylus	<select name="stylustag" id="stylustag" onChange="selectstylus();">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="Enabled">Enabled</option>
+<option value="Disabled">Disabled</option>
+<option value="Enable">Enable</option>
+<option value="Disable">Disable</option>
+<option value="Null">Null</option>
+</select>
+<hr><br>
+
+<hr>
+TextSize<br>
+Select TextSize	<select name="textsizetag" id="textsizetag" onChange="selecttextsize();">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="Largest">Largest</option>
+<option value="Larger">Larger</option>
+<option value="Invalid">Invalid</option>
+<option value="Null">Null</option>
+<option value="Smaller">Smaller</option>
+<option value="Smallest">Smallest</option>
+<option value="Medium">Medium</option>
+</select>
+<hr />
+<img src="../Resource/Infinity.jpeg"><br />
+<b>Zoom Decoder</b><br />
+	text:<textarea id="zoomText" cols="10" rows="1"></textarea>
+
+	<input type="button" onclick="setzoomText();" value="SetText"><br />
+
+
+   page:	<textarea id="zoomPage" cols="10" rows="1"></textarea>
+
+	 <input type="button" onclick="setzoomPage();" value="SetPage"><br />
+<hr />
+Timer Tag Test:<br>
+Apply timer event:<select name="timereventdropdown" id="Select">
+<option SELECTED value="">Select</option>
+<option value="JSCRIPT">JSCRIPT</option>
+<option value="JSON">JSON</option>
+<option value="DETACH">DETACH</option>
+<option value="EMPTY">EMPTY</option>
+<option value="URL">URL</option>
+<option value="FileInvalidURL">FileInvalidURL</option>
+<option value="HttpInvalidURL">HttpInvalidURL</option>
+</select>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<input type="button" onclick="settimerEvent();" value="SetTimerEvent">
+<br /><br />
+
+	Interval	<Textarea id="txtinterval"cols="5" rows="1">5000</Textarea>
+	<input type="button" onclick="settimerInterval();" value="SetTimerInterval"><br />
+
+<br>
+
+<br>
+<input type="button" value="Start" onClick="startTimer();">
+<input type="button" value="Stop" onClick="stopTimer();">
+<div id="mytimer">message</div><br />
+<DIV ID="divTimer">Waiting...</DIV>
+<hr><br>
+
+Volume Value:<Textarea id="volume" cols="7" rows="1">0xFFFF</Textarea>
+<input type="button" onclick="setdevVolume();" value="volume"><br>
+<p><textarea id="myText" name="myText">\Application\Alarm5.wav</textarea>
+<INPUT TYPE="button" VALUE="PlayWave" ONCLICK="playFile();"></p>
+<hr>
+
+<br><br>
+<A HREF="../DA_Generic_index.html">Back</A>
+<A HREF="./device3pageNavigation.html">go To another page</A>
+
+<META HTTP-EQUIV="OnKey0x0d" content="javascript:doTest();">
+<!--<META HTTP-EQUIV="OnKey0x31" content="javascript:doTest1();">-->
+
+</form>
+</body>
+</html>

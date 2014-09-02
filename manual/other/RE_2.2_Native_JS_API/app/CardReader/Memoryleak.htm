@@ -1,0 +1,54 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+<META HTTP-EQUIV="Timer" CONTENT="Interval:28800000;Timeout:url('Javascript:doTimer('%s');');Start">
+<script>
+
+
+    var Generic = new ActiveXObject("PocketBrowser.Generic");
+    var oc = 0;
+    var cc = 0;
+
+    function dostart() {
+    
+        setTimeout("onNormal()", 3000);
+    }
+
+    function onNormal() {
+        oc = oc + 1;
+        Generic.InvokeMETAFunction("cardreader", "ModuleName:MSR55;readevent:url('javascript:MyReadEvent('%s', '%s');')");
+        opencount.innerHTML = "Open count:" + oc;
+        //alert("2");
+        setTimeout("onRight()", 10000);
+    }
+
+    function onRight() {
+        cc = cc + 1;
+        Generic.InvokeMETAFunction("cardreader", "close");
+        closecount.innerHTML = "Close count:" + cc;
+        //alert("3");
+        setTimeout("onNormal()", 10000);
+    }
+    function doTimer(time) {
+        Generic.InvokeMETAFunction("Application", "Quit");
+    }
+
+    function MyReadEvent(data, mode) 
+    {
+       Div1.innerHTML = data;
+    }
+    
+
+</script>
+
+</head>
+
+<BODY onload="dostart();">
+<br><br><br><br><br>CardReader Memory Leak<br />
+<div id="opencount"><b>Number of Counts open</b></div> <br /><br />
+<div id="closecount"><b>Number of Counts close</b></div><br /><br />
+<div id="Div1"><b>Data</b></div><br /><br />
+
+</BODY>
+</HTML>

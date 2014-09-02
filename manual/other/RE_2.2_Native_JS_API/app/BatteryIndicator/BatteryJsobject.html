@@ -1,0 +1,367 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+
+<title>Battery TestScript</title>
+<script type="text/javascript">
+  
+    var a = 0;
+	var b = 0;
+	var c = 0;
+	  
+  function callgetSmartBatteryStatus()
+	{
+	battery.getSmartBatteryStatus(); 
+    Message.innerHTML="getSmartBatteryStatus called:";
+	}	
+	
+	
+	function callgetBatteryStatus()
+	{
+	
+	battery.getBatteryStatus(); 
+    Message.innerHTML="getBatteryStatus called:";
+	outputDiv.innerHTML ="";
+	}
+	
+  
+  
+  function setbatteryEvent()
+{
+	var SelectedValue = frm.batteryEventdropdown.selectedIndex;
+	var selectEvent = frm.batteryEventdropdown.options[SelectedValue].value;
+    Message.innerHTML="Battery Event is:"+selectEvent;
+	switch(selectEvent)
+	{
+		case 'JSCRIPT':
+			
+			battery.batteryEvent="getsettingsjsFunction('%s','%s','%s','%s','%s','%s');";
+			break;
+
+		case 'JSON':
+
+			battery.batteryEvent="getsettingsjsonFunction(%json);";
+			break;
+			
+	   case 'DETACH':
+	   
+            battery.batteryEvent="url('')";
+			break;
+			
+	  case 'URL':
+
+			battery.batteryEvent="url('http://10.233.85.82/Neon/Navigate.html')";
+			break;
+
+		case 'EMPTY':
+
+			battery.batteryEvent="";
+			break;
+	}
+}
+  
+	function getsettingsjsonFunction(jsonObject)
+	{
+		a = a + 1;
+		var theOutput = "<BR><BR><B>batteryEvent </B>" + "<BR>";       
+        theOutput = theOutput + "acLineStatus: "+jsonObject.acLineStatus + "<BR>";        
+        theOutput = theOutput + "batteryLifePercent: " + jsonObject.batteryLifePercent  + "<BR>";
+        theOutput = theOutput + "backupBatteryLifePercent: " + jsonObject.backupBatteryLifePercent  + "<BR>";
+        theOutput = theOutput + "eventSource: " + jsonObject.eventSource  + "<BR>";
+		theOutput = theOutput + "batteryLifeKnown: " + jsonObject.batteryLifeKnown  + "<BR>";
+		theOutput = theOutput + "backupBatteryLifeKnown: " + jsonObject.backupBatteryLifeKnown  + "<BR>";
+        theOutput = theOutput + "Count: " + a  + "<BR>";
+        outputDiv.innerHTML = theOutput;
+		//alert("Hello jndksdkldkjkl kjksdafkfkdfjkf djkjdkldjfkjdskfjdkjj dklfjdljsfsjKJSVNSJFGJRIFVFDKFSDF DSKFDJKJFDLKJDF GHSJH");
+        //alert(jsonObject.batteryLifePercent);
+		
+	}
+	
+	function getsettingsjsFunction(acLineStatus,batteryLifePercent,backupBatteryLifePercent,eventSource,batteryLifeKnown,backupBatteryLifeKnown)
+	{
+		
+		b = b + 1;
+		var theOutput = "<BR><BR><B>batteryEvent  </B>" + "<BR>";
+        theOutput = theOutput + "acLineStatus: "+acLineStatus + "<BR>";        
+        theOutput = theOutput + "batteryLifePercent: " + batteryLifePercent  + "<BR>";
+        theOutput = theOutput + "backupBatteryLifePercent: " + backupBatteryLifePercent  + "<BR>";
+        theOutput = theOutput + "eventSource: " + eventSource  + "<BR>";	
+		theOutput = theOutput + "batteryLifeKnown: " + batteryLifeKnown  + "<BR>";	
+		theOutput = theOutput + "backupBatteryLifeKnown: " + backupBatteryLifeKnown  + "<BR>";			
+        theOutput = theOutput + "Count: " + b  + "<BR>";
+        outputDiv.innerHTML = theOutput;
+	}
+	
+	
+	 function setsmartbatteryEvent()
+{
+	var SelectedValue = frm.smartBatteryEventdropdown.selectedIndex;
+	var selectEvent = frm.smartBatteryEventdropdown.options[SelectedValue].value;
+    Message.innerHTML="SmartBattery Event is:"+selectEvent;
+	switch(selectEvent)
+	{
+		case 'JSCRIPT':
+
+			battery.smartBatteryEvent="smartBatteryjsFunction('%s','%s','%s','%s','%s','%s');";
+			break;
+
+		case 'JSON':
+
+			battery.smartBatteryEvent="smartBatteryjsonFunction(%json);";
+			alert(selectEvent);
+			break;
+			
+	   case 'DETACH':
+	   
+            battery.smartBatteryEvent="url('')";
+			break;
+			
+	   case 'URL':
+
+			battery.smartBatteryEvent="url('http://10.233.85.82/Neon/Navigate.html')";
+			break;
+
+		case 'EMPTY':
+
+			battery.smartBatteryEvent="";
+			break;
+	}
+}
+
+	function smartBatteryjsonFunction(jsonObject)
+	{
+		c = c + 1;
+		var theOutput = "<BR><BR><B>smartBatteryEvent  </B>" + "<BR>";        
+        theOutput = theOutput + "serialNumber: "+jsonObject.serialNumber + "<BR>";        
+        theOutput = theOutput + "partNumber: " + jsonObject.partNumber  + "<BR>";
+        theOutput = theOutput + "batteryChargeCycles: " + jsonObject.batteryChargeCycles  + "<BR>";
+        theOutput = theOutput + "ratedCapacity: "+jsonObject.ratedCapacity + "<BR>";        
+        theOutput = theOutput + "manufactureDate: " + jsonObject.manufactureDate  + "<BR>";
+        theOutput = theOutput + "stateOfHealth: " + jsonObject.stateOfHealth  + "<BR>";		
+        theOutput = theOutput + "Count: " + c  + "<BR>";
+        outputDiv1.innerHTML = theOutput;
+	}
+	
+  function smartBatteryjsFunction(serialNumber,partNumber,batteryChargeCycles,ratedCapacity,manufactureDate,stateOfHealth)
+	{
+		c = c + 1;
+		var theOutput = "<BR><BR><B>smartBatteryEvent  </B>" + "<BR>";        
+        theOutput = theOutput + "serialNumber: "+ serialNumber + "<BR>";        
+        theOutput = theOutput + "partNumber: " + partNumber  + "<BR>";
+        theOutput = theOutput + "batteryChargeCycles: " + batteryChargeCycles  + "<BR>";
+        theOutput = theOutput + "ratedCapacity: "+ ratedCapacity + "<BR>";        
+        theOutput = theOutput + "manufactureDate: " + manufactureDate  + "<BR>";
+        theOutput = theOutput + "stateOfHealth: " + stateOfHealth  + "<BR>";		
+        theOutput = theOutput + "Count: " + c  + "<BR>";
+        outputDiv1.innerHTML = theOutput;
+	}
+	
+  
+   function setvisibility()
+{
+	var SelectedValue = frm.visibilitydropdown.selectedIndex;
+	var selectvisibility = frm.visibilitydropdown.options[SelectedValue].value;
+    Message.innerHTML="value is:"+selectvisibility;
+	switch(selectvisibility)
+	{
+		case 'visible':
+			battery.visibility = 'visible';
+			break;
+
+		case 'hidden':
+			battery.visibility = 'hidden';
+			break;
+			
+	   case 'Invalid':
+            battery.visibility = 'Invalid';
+			break;
+			
+		case 'Null':
+			battery.visibility = '';
+			break;
+	}
+}
+ 
+    
+function setleft()
+{
+	var leftValue = frm.txtleft.value;
+	var IValue = "left:"+leftValue;
+	Message.innerHTML="value is:"+IValue;
+	battery.left=leftValue;	
+}  
+
+    
+function settop()
+{
+	var topValue = frm.txttop.value;
+	var IValue = "top:"+topValue;
+	Message.innerHTML="value is:"+IValue;
+	battery.top=topValue;	
+} 
+
+   function setlayout()
+{
+	var SelectedValue = frm.layoutdropdown.selectedIndex;
+	var selectlayout = frm.layoutdropdown.options[SelectedValue].value;
+    Message.innerHTML="value is:"+selectlayout;
+	switch(selectlayout)
+	{
+		case 'Left':
+			battery.layout = 'Left';
+			break;
+
+		case 'Right':
+			battery.layout = 'Right';
+			break;
+			
+	   case 'Up':
+            battery.layout = 'Up';
+			break;
+			
+		case 'Down':
+			battery.layout = 'Down';
+			break;
+	}
+}
+
+function setcolor()
+{
+	var colorValue = frm.txtcolor.value;
+	var IValue = "color:"+colorValue;
+	Message.innerHTML="value is:"+IValue;
+	battery.color=colorValue;	
+} 
+
+function setsampleInterval()
+{
+	var sampleIntervalValue = frm.txtsampleInterval.value;
+	var IValue = "sampleInterval:"+sampleIntervalValue;
+	Message.innerHTML="value is:"+IValue;
+	battery.sampleInterval=sampleIntervalValue;	
+}
+
+   function setSystemNotifications()
+{
+	var SelectedValue = frm.setSystemNotificationsdropdown.selectedIndex;
+	var selectsetSystemNotifications = frm.setSystemNotificationsdropdown.options[SelectedValue].value;
+    Message.innerHTML="value is:"+selectsetSystemNotifications;
+	switch(selectsetSystemNotifications)
+	{
+		case 'Enabled':
+			battery.setSystemNotifications = 'Enabled';
+			break;
+
+		case 'Disabled':
+			battery.setSystemNotifications = 'Disabled';
+			break;
+			
+	   case 'Invalid':
+            battery.setSystemNotifications = 'Invalid';
+			break;
+			
+		case 'Null':
+			battery.setSystemNotifications = '';
+			break;
+	}
+}
+  
+    
+ </script>
+</head>
+<body>
+<form id="frm" action="">
+<br /><br /><br />
+<b>Battery with JSOBJECT</b><br /><br />
+<div id="Message">Message</div>
+<div id="outputDiv1">SmartBattery output goes here</div>
+<div id="outputDiv">Battery output goes here</div>
+<br/>
+<hr>
+BatteryEvent:
+<select name="batteryEventdropdown" id="Select3">
+<option SELECTED VALUE="">Select</OPTION>
+<option value="JSCRIPT">JSCRIPT</option>
+<option value="JSON">JSON</option>
+<option value="DETACH">DETACH</option>
+<option value="URL">URL</option>
+<option value="EMPTY">EMPTY</option>
+</select>
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" onclick="setbatteryEvent();" value="SetBatteryEvent">
+<br /><br />
+<hr/>
+sampleInterval:<Textarea id="txtsampleInterval"cols="10" rows="1">3000</Textarea>
+<br />
+&nbsp;&nbsp;&nbsp;<input type=button onclick="setsampleInterval();" value="SetsampleInterval">
+&nbsp;&nbsp;&nbsp;<INPUT align="center" type="button" value="getBatteryStatus" onclick="callgetBatteryStatus();"><br/>
+<hr/>
+smartBatteryEvent:
+<select name="smartBatteryEventdropdown" id="Select3">
+<option SELECTED VALUE="">Select</OPTION>
+<option value="JSCRIPT">JSCRIPT</option>
+<option value="JSON">JSON</option>
+<option value="DETACH">DETACH</option>
+<option value="URL">URL</option>
+<option value="EMPTY">EMPTY</option>
+</select>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<br /><input type="button" onclick="setsmartbatteryEvent();" value="SetSmartBatteryEvent">
+<INPUT align="center" type="button" value="getSmartBatteryStatus" onclick="callgetSmartBatteryStatus();"><br/>
+<br />
+<hr/>
+
+visibility:<select name="visibilitydropdown" id="IDall">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="visible">visible</option>
+<option value="hidden">hidden</option>
+<option value="Invalid">Invalid</option>
+<option value="Null">Null</option>
+</select>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<input type=button onclick="setvisibility();" value="SetVisibility">
+
+<br /><br />
+left:<Textarea id="txtleft"cols="10" rows="1">20</Textarea>
+&nbsp;&nbsp;&nbsp;&nbsp;
+<input type=button onclick="setleft();" value="Setleft">
+
+<br /><br />
+top:<Textarea id="txttop"cols="10" rows="1">20</Textarea>
+&nbsp;&nbsp;&nbsp;&nbsp;
+<input type=button onclick="settop();" value="Settop">
+<hr />
+
+layout:<select name="layoutdropdown" id="IDall">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="Left">Left</option>
+<option value="Right">Right</option>
+<option value="Up">Up</option>
+<option value="Down">Down</option>
+</select>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<input type=button onclick="setlayout();" value="SetLayout">
+
+<br /><br />
+color:<Textarea id="txtcolor"cols="10" rows="1">#FFF000</Textarea>
+&nbsp;&nbsp;&nbsp;&nbsp;
+<input type=button onclick="setcolor();" value="SetColor">
+<hr/>
+
+setSystemNotifications:<select name="setSystemNotificationsdropdown" id="IDall">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="Enabled">Enabled</option>
+<option value="Disabled">Disabled</option>
+<option value="Invalid">Invalid</option>
+<option value="Null">Null</option>
+</select>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<input type=button onclick="setSystemNotifications();" value="setSystemNotifications">
+<hr/>
+<P><INPUT TYPE="button" VALUE="Back" ONCLICK="location.href='battIndex.html'"></P>
+</table>
+</form>
+
+</body>
+</html>

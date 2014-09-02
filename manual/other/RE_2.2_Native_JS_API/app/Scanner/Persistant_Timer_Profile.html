@@ -1,0 +1,138 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+<!--<META HTTP-Equiv="EMMLProfile" Content="name:myProfile;import:url('http://www.tandv.wtgdev.net//Network//Volume//DeviceApps.emmp');">-->
+<!--<META HTTP-Equiv="EMMLProfile" Content="apply:myProfile.Battery" />
+
+<META HTTP-EQUIV="OnKey0x0d" content="javascript:doTest();">
+</head>-->
+<body>
+<br /><br />
+<DIV ID="divTimer">Time is...</DIV><br /><br />
+<DIV ID="message">Transfer status</DIV><br /><br />
+<h4>Named DeviceApps EMML Profile Script</h4>
+<a href="javascript:doImportNamedProfile();">Import named Profile</a><br /><br />
+<a href="javascript:doImportunNamedProfile();">Import unnamed Profile</a>
+<hr />
+<a href="javascript:doApplyProfile('myProfile.AutoScreen');">ScreenAuto</a><br />
+<a href="javascript:doApplyProfile('myProfile.SignatureCapture');">SigCapture</a><br />
+<a href="javascript:doApplyProfile('myProfile.Battery');">Battery visible</a><br />
+<a href="javascript:doApplyProfile('myProfile.Timer1');">Apply Timer Profile</a><br />
+<a href="javascript:doApplyProfile('myProfile.Alarm1');">Apply Alarm Profile</a><br />
+<a href="javascript:doApplyProfile('myProfile.Application1');">Apply Application Profile</a><br />
+<a href="javascript:doApplyProfile('myProfile.Backlight1');">Apply Backlight Profile</a><br />
+<a href="javascript:doApplyProfile('myProfile.Device1');">Apply Device Profile</a><br />
+<a href="javascript:doApplyProfile('myProfile.Hourglass1');">Apply Hourglass1 Profile</a><br />
+<a href="javascript:doApplyProfile('myProfile.Keylight1');">Apply Keylight1 Profile</a><br />
+<a href="javascript:doApplyProfile('myProfile.Reboot1');">Apply Reboot1 Profile</a><br />
+<a href="javascript:doApplyProfile('myProfile.ScreenOrientation1');">Apply ScreenOrientation1 Profile</a><br />
+<a href="javascript:doApplyProfile('myProfile.SIP1');">Apply SIP1 Profile</a><br />
+<a href="javascript:doApplyProfile('myProfile.Stylus1');">Apply Named Stylus1 Profile</a><br />
+<a href="javascript:doApplyProfile('myProfile.TextSizeL');">Apply Named Largest TextSize Profile</a><br />
+<a href="javascript:doApplyProfile('myProfile.TextSizeS');">Apply Named Smallest TextSize Profile</a><br />
+<a href="javascript:doApplyProfile('myProfile.VolumeMax');">Apply Named Maximum volume Profile</a><br />
+<a href="javascript:doApplyProfile('myProfile.VolumeMin');">Apply Named Minimum volume Profile</a><br />
+
+<hr />
+<a href="javascript:doApplyProfile('Stylus1');">Apply unNamed Stylus1 Profile</a><br />
+<a href="javascript:doApplyProfile('TextSizeL');">Apply unNamed Largest TextSize Profile</a><br />
+<a href="javascript:doApplyProfile('TextSizeS');">Apply unNamed Smallest TextSize Profile</a><br />
+<a href="javascript:doApplyProfile('VolumeMax');">Apply unNamed Maximum volume Profile</a><br />
+<a href="javascript:doApplyProfile('VolumeMin');">Apply unNamed Minimum volume Profile</a><br />
+
+<br><br><br>
+<Textarea id="name" name = "name">myBMP</Textarea>
+<input type=button value="Clear Profile" onclick="clearProfile();">
+<input type=button value="SignatureEvent" onclick="Sig();">
+<input type=button value="Clear Alarm" onclick="clearAlarm();">
+<h4>Browse to another page to check for EMML profile persistance.</h3>
+<h4><a href="Persistant_Timer_Test.html">Click here to go to another page.</a></h4>
+<hr />
+<a href="../EMMLProfilesIndex.html">Back to EMML Profile Index</a>
+<br /><P><INPUT TYPE="button" VALUE="Quit" ONCLICK="Quit();"></P>
+
+
+</body>
+</html>
+
+
+<SCRIPT LANGUAGE="JavaScript">
+try
+{
+var generic = new ActiveXObject("PocketBrowser.Generic");
+}
+catch(err)
+{
+var GenericPlugin = document.createElement('embed'); 
+GenericPlugin.setAttribute('id',"embed1"); 
+GenericPlugin.setAttribute('type',"application/x-wtg-legacy-generic"); 
+GenericPlugin.setAttribute('hidden',"true"); 
+
+// Attach the plugin embed tags to the body 
+var theBody = document.getElementsByTagName('body')[0]; 
+theBody.appendChild(GenericPlugin); 
+
+
+}
+function Sig()
+{
+  message.innerHTML = "Hello";
+  generic.InvokeMETAFunction('SignatureCapture', 'capture');
+}
+function onCaptured(data)
+{
+    message.innerHTML = "Inside event";
+	message.innerHTML = "Data: " + data;
+}
+function doImportNamedProfile()
+{
+ generic.InvokeMETAFunction('EMMLProfile', "name:myProfile;import:url('http://10.233.85.82/NEON/Scanner/DeviceApps.emmp');");
+
+}
+
+function doImportunNamedProfile()
+{
+generic.InvokeMETAFunction('EMMLProfile', "import:url('http://10.233.85.82//NEON//DeviceApps.emmp');");
+
+}
+
+    function doTimer(time)
+     {
+        divTimer.innerHTML = 'Time: ' + time;
+     }
+
+     function clearAlarm() 
+     {
+         generic.InvokeMETAFunction('Alarm', 'clear');
+
+     }
+
+    function doApplyProfile(profile) 
+    {
+
+        generic.InvokeMETAFunction('EMMLProfile', 'Apply:'+profile);
+
+    }
+
+//    function starttimer() 
+//    {
+//        generic.InvokeMETAFunction('Timer', 'Start');
+//    }
+
+    function clearProfile() 
+    {
+        //alert("clear");
+        generic.InvokeMETAFunction('EMMLProfile', 'clear:myProfile');
+    }
+
+function doTest()
+{
+	generic.InvokeMETAFunction('Stylus', 'Enabled');
+}
+
+function Quit()
+{
+	generic.InvokeMETAFunction("Application", "Quit");
+}
+</SCRIPT>

@@ -1,0 +1,197 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+<META HTTP-Equiv="quitbutton" Content="Top:10; Left:10; Visibility:Visible">
+<META HTTP-Equiv="minimizebutton" Content="Visibility:Visible">
+
+</head>
+<body>
+
+<br /><br /><br />
+<input type="button" value="Quit" onclick="quitNeon();" />
+<br /><br /><div id="myDiv">Result</div><br />
+<div id="LastMessage">LastMessage</div>
+<P>Test APD Embedded Commands</P>
+
+<select name="myBTAddress" id="myBTAddress" size=1" onchange="getprintermac();">
+<OPTION value="Select option" >Select option</OPTION>
+<OPTION value="BC53:1|00037A032772" >BTZebra</OPTION>  
+<OPTION value="WC53:6101|192168006010" >WirelessZebra</OPTION> 
+<OPTION value="WC53:6101|192.168.006.056" >Wireless-oneil</OPTION> 
+</select><br />
+
+<table border="0" cellpadding="0">
+<tr>
+<th></th>
+<th></th>
+</tr>
+<tr><td><P><INPUT TYPE="button" VALUE="GetLastMessageMethod" ONCLICK="GetLastMessageMethod();"></P></td>
+<td><P><INPUT TYPE="button" VALUE="SetPrinterID" ONCLICK="SetPrinterID();"></P></td></tr>
+
+
+<tr><td><P><INPUT TYPE="button" VALUE="sendformat1" ONCLICK="sendformat1();"></P></td>
+<td><P><INPUT TYPE="button" VALUE="sendformat2" ONCLICK="sendformat2();"></P></td></tr>
+
+
+<tr><td><P><INPUT TYPE="button" VALUE="senddatawithoutTemplate" ONCLICK="senddatawithoutTemplate();"></P></td>
+<td><P><INPUT TYPE="button" VALUE="senddatawithTemplate1" ONCLICK="senddatawithTemplate1();"></P></td></tr>
+
+<tr><td><P><INPUT TYPE="button" VALUE="senddatawithTemplate2" ONCLICK="senddatawithTemplate2();"></P></td>
+<td><P><INPUT TYPE="button" VALUE="senddatawithTemplate3" ONCLICK="senddatawithTemplate3();"></P></td></tr>
+
+
+<tr><td><P><INPUT TYPE="button" VALUE="sendstringwithlabel" ONCLICK="sendstringwithlabel();"></P></td>
+<td><P><INPUT TYPE="button" VALUE="sendstring" ONCLICK="sendstring();"></P></td></tr>
+
+
+<tr><td><P><INPUT TYPE="button" VALUE="openPort" ONCLICK="openPort();"></P></td>
+<td><P><INPUT TYPE="button" VALUE="closePort" ONCLICK="closePort();"></P></td></tr>
+
+
+<tr><td><P><INPUT TYPE="button" VALUE="BTPowerOn" ONCLICK="BTPowerOn();"></P></td>
+<td><P><INPUT TYPE="button" VALUE="BTPoweroff" ONCLICK="BTPoweroff();"></P></td></tr>
+
+
+<tr><td><P><INPUT TYPE="button" VALUE="ProgressbarOn" ONCLICK="ProgressbarOn();"></P></td>
+<td><P><INPUT TYPE="button" VALUE="ProgressbarOff" ONCLICK="ProgressbarOff();"></P></td></tr>
+
+
+</table>
+
+</body>
+</html>
+<SCRIPT LANGAUGE="JavaScript">
+var message="";
+var printerID ="";
+
+var myapd = new ActiveXObject("PocketBrowser.NarrowBand");
+var mygeneric = new ActiveXObject("PocketBrowser.Generic");
+
+function quitNeon()
+   {
+     mygeneric.InvokeMETAFunction('Application', 'Quit');
+   }
+
+
+function GetLastMessageMethod()
+{
+    LastMessage.innerHTML=myapd.PSGetLastMessage();
+}
+
+function getprintermac()
+{
+var index = myBTAddress.selectedIndex;
+printerID = myBTAddress.options[index].value;
+myDiv.innerHTML="BTaddress:"+printerID;
+}
+
+function SetPrinterID()
+{
+	myDiv.innerHTML="SetPrinterID:"+myapd.PSExternalEx(266, "$$[CMD:0105,"+printerID+"]$$");
+}
+
+function openPort()
+{
+myDiv.innerHTML="openPort:"+myapd.PSExternalEx(266, "$$[CMD:010E]$$");
+}
+
+function closePort()
+{
+myDiv.innerHTML="closePort:"+myapd.PSExternalEx(266, "$$[CMD:010F]$$");
+}
+
+
+function BTPoweroff()
+{
+     myDiv.innerHTML="BTPoweroff:"+myapd.PSExternalEx(266, "$$[CMD:0115]$$");
+}
+
+function BTPowerOn()
+{
+     myDiv.innerHTML="BTPowerOn:"+myapd.PSExternalEx(266, "$$[CMD:0114]$$");
+}
+
+function ProgressbarOn()
+{
+     myDiv.innerHTML="ProgressbarOn:"+myapd.PSExternalEx(266, "$$[CMD:0113]$$");
+}
+
+function ProgressbarOff()
+{
+ 
+   myDiv.innerHTML="ProgressbarOff:"+myapd.PSExternalEx(266, "$$[CMD:0112]$$");
+}
+
+
+function sendformat1()
+{
+ myDiv.innerHTML="SendFormat1:"+myapd.PSExternalEx(266, "$$[CMD:0100,Format1]$$");
+}
+
+function sendformat2()
+{
+ myDiv.innerHTML="SendFormat2:"+myapd.PSExternalEx(266, "$$[CMD:0100,Format2]$$");
+}
+
+function sendformat3()
+{
+ myDiv.innerHTML="SendFormat3:"+myapd.PSExternalEx(266, "$$[CMD:0100,Format3]$$");
+}
+
+function senddatawithTemplate1()
+{
+   myDiv.innerHTML="senddatawithTemplate1:"+myapd.PSExternalEx(266, "$$[CMD:0101,1]$$\r\nR1\r\n£1.49\r\nSilvikrin\r\nSoft and Gentle\r\n100ml\r\n66897678\r\n");
+	
+}
+
+function senddatawithTemplate2()
+{
+	  myDiv.innerHTML="senddatawithTemplate2:"+myapd.PSExternalEx(266, "$$[CMD:0101,1]$$\r\nR2\r\n£1.49\r\nSilvikrin\r\nSoft and Gentle\r\n100ml\r\n66897678\r\n");
+}
+
+function senddatawithTemplate3()
+{
+	 myDiv.innerHTML="senddatawithTemplate3:"+myapd.PSExternalEx(266, "$$[CMD:0101,1]$$\r\nR3\r\n£1.49\r\nSilvikrin\r\nSoft and Gentle\r\n100ml\r\n66897678\r\n");
+}
+
+function senddatawithoutTemplate()
+{
+ 	myDiv.innerHTML="senddatawithoutTemplate:"+myapd.PSExternalEx(266, "$$[CMD:0101,1]$$\r\n£1.49\r\nSilvikrin\r\nSoft and Gentle\r\n100ml\r\n66897678\r\n");
+ 
+}
+
+function sendstring()
+{
+   
+  myDiv.innerHTML="sendstring:"+myapd.PSExternal("266", 'MOTOROLA SOLUTIONS INDIA PVT LIMITED\r\nRMZ Ecospace,Block3B\r\nSarjapur Outer Ring Road\r\nBangalore');
+
+}
+
+function sendstringwithlabel()
+{
+	var code = '1234567890';
+	var sLabel = '! 0 200 200 350 1\n'
+	     + 'JOURNAL\n'
+	     + 'SPEED 3\n'
+	     + 'PW 400\n'
+	     + 'B 128 1 1 80 20 80 ' + code + '\n'
+	     + 'T 5 3 20 196 £2.00 off\n'
+	     + 'BOX 5 5 350 295 1\n'
+	     + 'PRINT\n';
+	
+	myDiv.innerHTML="sendstringwithlabel:"+myapd.PSExternalEx(266, sLabel);
+         
+
+}
+
+function showResult()
+{
+
+myDiv.innerHTML=message;
+}
+
+</SCRIPT>
+
+
+

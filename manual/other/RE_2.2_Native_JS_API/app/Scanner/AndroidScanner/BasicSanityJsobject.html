@@ -1,0 +1,235 @@
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+
+<script type="text/javascript">
+  var selected_scanner = "";
+
+   function enablemethod()
+    {
+       scanner.enable();
+       myAmit.innerHTML="enable";
+    }
+    
+    function disablemethod()
+    {
+     scanner.disable();
+       myAmit.innerHTML="disable";
+
+    }
+    
+    function enabletest()
+   {
+     var temp = "enabled:" + selected_scanner.toString();
+     scanner.setEMML(temp);
+     myAmit.innerHTML=temp;
+
+   }
+
+   function disabletest()
+    {
+     scanner.setEMML('disable');
+       myAmit.innerHTML="disabled";
+
+    }
+	
+ 	function enablegs1dataBar()
+    {
+       scanner.allDecoders ='disabled';
+	   scanner.gs1dataBar='enabled';
+	   //scanner.gs1dataBarExpanded ='enabled';
+	   //scanner.gs1dataBarLimited ='enabled';
+       myAmit.innerHTML="gs1dataBar enable";
+    }
+	
+	function disablegs1dataBar()
+    {
+       scanner.allDecoders ='enabled';
+	   scanner.gs1dataBar='disabled';
+	   //scanner.gs1dataBarExpanded ='disabled';
+	   //scanner.gs1dataBarLimited ='disabled';	   
+       myAmit.innerHTML="gs1dataBar disabled";
+	   alert("allDecoders disabled");
+    } 
+    
+    function enablecodabar()
+   {
+     scanner.allDecoders ='disabled';
+     scanner.codabar='enabled';
+     scanner.codabarMaxLength='12';
+     scanner.codabarMinLength='1';
+     myAmit.innerHTML="codabar";
+   }
+   
+   function starttest()
+   {
+     scanner.start();
+       myAmit.innerHTML="start";
+
+   }
+
+   function stoptest()
+    {
+     scanner.stop();
+      myAmit.innerHTML="stop";
+    }
+    
+    function Autoenter()
+    {
+     scanner.autoEnter='enabled';
+       myAmit.innerHTML="autoenterenabled";
+
+   }
+       function Autotab()
+    {
+     scanner.autoTab='enabled';
+       myAmit.innerHTML="autotabenabled";
+
+   }
+       function Autodisabled()
+    {
+     scanner.autoEnter='disabled';
+     scanner.autoTab='disabled';
+       myAmit.innerHTML="autoenter/tab disabled";
+
+   }
+   
+       function AllDecoderenabled()
+    {
+     scanner.allDecoders='enabled';
+       myAmit.innerHTML="AllDecoderenabled";
+
+   }
+       function AllDecoderdisabled()
+    {
+     scanner.allDecoders='disabled';
+       myAmit.innerHTML="AllDecoderdisabled";
+
+   }
+    
+    
+      
+  function onDecodeEventJSON(jsonObject)
+    {
+	var html = "<b>Decoded Data:</b><br>";
+	html = html + "<br><i>Data:</i> " + jsonObject.data;
+	html = html + "<br><i>Source:</i> " + jsonObject.source;
+	html = html + "<br><i>Type:</i> " + jsonObject.type;
+	html = html + "<br><i>Time:</i> " + jsonObject.time;
+	html = html + "<br><i>Length:</i> " + jsonObject.length;
+	html = html + "<br><i>Event:</i> " + jsonObject.event;
+    scanData.innerHTML = html;
+   }
+  
+  
+    
+    function Quit()
+    {
+	application.quit();
+    }
+
+    function setEnumScannerTimer() 
+    {
+
+        setTimeout("onScannerEnable()", 1000);
+    }
+    
+    function onScannerEnable() 
+    {
+       
+      scanner.enumScannerEvent = 'EnumScanners(%json)';
+      scanner.enumerate();
+        
+    }
+
+    function attachdecodeevent() 
+    {
+       
+      scanner.decodeEvent = 'onDecodeEventJSON(%json)';
+       
+    }
+    
+   
+    function EnumScanners(jsonObject) 
+    {
+    	var html = "<b>Device Name: Friendly Name</b><br>";
+        for (i = 0; i < jsonObject.scannerArray.length; i++) 
+        {
+           
+            this.document.ODAXForm.myscanner.options[i + 1].text = jsonObject.scannerArray[i].deviceName + jsonObject.scannerArray[i].friendlyName;
+            this.document.ODAXForm.myscanner.options[i + 1].value = jsonObject.scannerArray[i].deviceName;
+            
+            html += '' + jsonObject.scannerArray[i].deviceName + ': ' 
+	        + jsonObject.scannerArray[i].friendlyName + '<br>';
+        }
+     html += "";
+	enumScanners.innerHTML=html;
+    }
+
+
+    function selectScanner()
+     {
+        
+        var w = document.ODAXForm.myscanner.selectedIndex;
+        selected_scanner = document.ODAXForm.myscanner.options[w].value;
+
+        if (selected_scanner != "") 
+        {
+
+           scanner.disable();
+        }
+       
+    }
+    function pres()
+    {
+       
+         mygeneric.InvokeMETAFunction('Scanner', 'aimType:presentation');
+    }
+    
+    
+    
+ </script>
+</head>
+<body onload="setEnumScannerTimer();">
+<br /><br />
+<div  id="enumScanners">Enumerate Scanners</div><br />
+<div  id="scanData">scan data</div><br />
+<DIV ID="myAmit">Selected Scanner: </DIV>
+<br /><br />
+<DIV ID="message">message </DIV>
+<form name="ODAXForm" id="ODAXForm" action="">
+<table>
+<tr>
+<td>
+<select name="myscanner" id="myscanner" onChange="selectScanner();">
+<OPTION value="" >Select Scanner</OPTION> 
+<OPTION value="" ></OPTION> 
+<OPTION value="" ></OPTION> 
+<OPTION value="SCN5" ></OPTION> 
+<OPTION value="SCN5" ></OPTION> 
+</select></td></tr>
+<tr><td>Decoded data:</b><TEXTAREA NAME="datafield" id="datafield" COLS=20 ROWS=2></TEXTAREA></td></tr>
+<tr><td>Decoded data:</b><TEXTAREA NAME="datafield" id="TEXTAREA1" COLS=20 ROWS=2></TEXTAREA></td></tr>
+<tr><td><P><INPUT TYPE="button" VALUE="Attach_DecodeEvent" ONCLICK="attachdecodeevent();">
+<tr><td><P><INPUT TYPE="button" VALUE="EnabledSelectedScanner" ONCLICK="enabletest();">
+<INPUT TYPE="button" VALUE="Disabled" ONCLICK="disabletest();"></td></tr>
+<tr><td><P><INPUT TYPE="button" VALUE="Start" ONCLICK="starttest();">
+<INPUT TYPE="button" VALUE="stop" ONCLICK="stoptest();"></td></tr>
+<tr><td><P><INPUT TYPE="button" VALUE="enabledefault" ONCLICK="enablemethod();">
+<INPUT TYPE="button" VALUE="disabledefault" ONCLICK="disablemethod();"></td></tr>
+<tr><td><P><INPUT TYPE="button" VALUE="Autoenter" ONCLICK="Autoenter();">
+<INPUT TYPE="button" VALUE="Autotab" ONCLICK="Autotab();"></td></tr>
+<tr><td><P><INPUT TYPE="button" VALUE="Autodisabled" ONCLICK="Autodisabled();">
+<tr><td><P><INPUT TYPE="button" VALUE="AllDecoderenabled" ONCLICK="AllDecoderenabled();">
+<INPUT TYPE="button" VALUE="AllDecoderdisabled" ONCLICK="AllDecoderdisabled();"></td></tr>
+<INPUT TYPE="button" VALUE="enablecodabar" ONCLICK="enablecodabar();"></td></tr>
+<INPUT TYPE="button" VALUE="enablegs1dataBar" ONCLICK="enablegs1dataBar();"></td></tr>
+<INPUT TYPE="button" VALUE="disablegs1dataBar" ONCLICK="disablegs1dataBar();"></td></tr>
+<tr><td><INPUT TYPE="button" VALUE="Back" ONCLICK="location.href='./Scanner.html'">
+<INPUT TYPE="button" VALUE="Quit" ONCLICK="Quit();">
+<INPUT TYPE="button" VALUE="presentation" ONCLICK="pres();"></td></tr>
+</table>
+</form>
+
+</body>
+</html>

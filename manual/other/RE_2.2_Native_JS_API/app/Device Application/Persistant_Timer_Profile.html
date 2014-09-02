@@ -1,0 +1,74 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+</head>
+<body>
+<h4>Named DeviceApps EMML Profile Script</h4><br />
+<DIV ID="outputSpan1">Waiting.....</DIV><br /><br />
+<DIV ID="Count">count</DIV><br /><br />
+
+<a href="javascript:doApplyProfile('myProfile.Alarm1');">Apply Alarm Profile</a><br /><br />
+<a href="javascript:doApplyProfile('myProfile.Alarm2');">Apply Alarm clear Profile</a><br />
+<br><br><br>
+<input type=button value="Import Profile" onclick="importProfile();">
+<input type=button value="Clear Profile" onclick="clearProfile();">
+<input type=button value="Clear Alarm" onclick="clearAlarm();">
+<h4>Browse to another page to check for EMML profile persistance.</h3>
+<h4><a href="Persistant_Timer_Test.html">Click here to go to another page.</a></h4>
+<hr />
+<a href="DeviceApplication.html">Back to Alarm index</a>
+<br /><P><INPUT TYPE="button" VALUE="Quit" ONCLICK="Quit();"></P>
+
+
+</body>
+</html>
+
+
+<SCRIPT LANGUAGE="JavaScript">
+    var generic = new ActiveXObject("PocketBrowser.generic");
+    var count=0;
+
+     function clearAlarm() 
+     {
+         generic.InvokeMETAFunction('Alarm', 'clear');
+
+     }
+
+    function doApplyProfile(profile) 
+    {
+
+        generic.InvokeMETAFunction('EMMLProfile', 'Apply:'+profile);
+	outputSpan1.innerHTML = "Apply profile";
+
+
+    }
+
+
+   function importProfile() 
+    {
+	     generic.InvokeMETAFunction("EMMLProfile", "name:myProfile;import:url('http://10.233.85.82/pb3.x/Alarm/DeviceApps.emmp');");
+		outputSpan1.innerHTML = "Profile imported";
+
+
+    }
+
+
+    function clearProfile() 
+    {
+        //alert("clear");
+        generic.InvokeMETAFunction('EMMLProfile', 'clear:myProfile');
+    }
+
+    function doAlarm()
+     {
+        
+        count++;
+        outputSpan1.innerHTML = 'Alarm Triggered';
+        Count.innerHTML = "Count = "+count;
+     }
+function Quit()
+{
+	generic.InvokeMETAFunction("Application", "Quit");
+}
+</SCRIPT>

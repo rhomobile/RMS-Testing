@@ -1,0 +1,47 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+ <META HTTP-Equiv="BottomCommandArea" Content="Visibility:Visible;Image:url('FILE://\Application\Resource\Ferrari.bmp')">
+ <META HTTP-Equiv="TopCommandArea" Content="Visibility:Visible;Image:url('FILE://\Application\Resource\Ferrari.bmp')">
+ <META HTTP-EQUIV="Timer" CONTENT="Interval:28800000;Timeout:url('Javascript:doTimer('%s');');Start">
+<script>
+
+
+ var Generic = new ActiveXObject("PocketBrowser.Generic");
+
+ function dostart() 
+      {
+          
+          setTimeout("onNormal()", 3000);
+      }
+
+      function onNormal() {
+        
+        Generic.InvokeMETAFunction("ScreenOrientation","Normal");
+        setTimeout("onRight()", 5000);
+      }
+      
+      function onRight()
+      {
+      Generic.InvokeMETAFunction("ScreenOrientation","RightHanded");
+      setTimeout("onNormal()", 5000);
+  }
+  function doTimer(time)
+   {
+       Generic.InvokeMETAFunction("Application", "Quit");
+   }
+
+
+</script>
+
+</head>
+
+<BODY onload="dostart();">
+<br><br><br><br><br>ScreenOrientation Tag A<br>
+<P><BR><INPUT TYPE="button" VALUE="Back" ONCLICK="location.href='./Device Application.html'"></P>
+
+
+
+</BODY>
+</HTML>

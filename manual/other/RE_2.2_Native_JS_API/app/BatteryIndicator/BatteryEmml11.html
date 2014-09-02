@@ -1,0 +1,44 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+<META HTTP-Equiv="Battery" Content="Left:50;Top:50;Layout:Left;color:#FF0000;visibility:visible;batteryEvent:url('Javascript:getsettingsjsFunction('%s','%s','%s','%s','%s','%s');');getBatteryStatus;smartBatteryEvent:url('Javascript:smartBatteryjsonFunction(%json);');getSmartBatteryStatus;setSystemNotifications:Enabled;sampleInterval:10000;getBatteryStatus">
+</head>
+<body>
+<br>
+<h2>Battery EMML1.1 Test with BatteryEvent and Smart Battery Event</h2>
+<br>
+<div id="outputDiv">Battery readings should appear here</div>
+<BR>
+<div id="smartbat">Smart Battery readings should appear here</div>
+<BR>
+<A HREF="battIndex.html">Back</A>
+</body>
+</html>
+<SCRIPT LANGUAGE="JavaScript">
+function smartBatteryjsonFunction(jsonObject)
+	{
+		var theOutput = "<BR><BR><B>smartBatteryEvent  </B>" + "<BR>";        
+        theOutput = theOutput + "serialNumber: "+jsonObject.serialNumber + "<BR>";        
+        theOutput = theOutput + "partNumber: " + jsonObject.partNumber  + "<BR>";
+        theOutput = theOutput + "batteryChargeCycles: " + jsonObject.batteryChargeCycles  + "<BR>";
+        theOutput = theOutput + "ratedCapacity: "+jsonObject.ratedCapacity + "<BR>";        
+        theOutput = theOutput + "manufactureDate: " + jsonObject.manufactureDate  + "<BR>";
+        theOutput = theOutput + "stateOfHealth: " + jsonObject.stateOfHealth  + "<BR>";		
+        smartbat.innerHTML = theOutput;
+	}
+	
+	
+	function getsettingsjsFunction(acLineStatus,batteryLifePercent,backupBatteryLifePercent,eventSource,batteryLifeKnown,backupBatteryLifeKnown)
+	{
+		
+		var theOutput = "<BR><BR><B>batteryEvent  </B>" + "<BR>";
+        theOutput = theOutput + "acLineStatus: "+acLineStatus + "<BR>";        
+        theOutput = theOutput + "batteryLifePercent: " + batteryLifePercent  + "<BR>";
+        theOutput = theOutput + "backupBatteryLifePercent: " + backupBatteryLifePercent  + "<BR>";
+        theOutput = theOutput + "eventSource: " + eventSource  + "<BR>";	
+		theOutput = theOutput + "batteryLifeKnown: " + batteryLifeKnown  + "<BR>";	
+		theOutput = theOutput + "backupBatteryLifeKnown: " + backupBatteryLifeKnown  + "<BR>";			
+        outputDiv.innerHTML = theOutput;
+	}
+</SCRIPT>

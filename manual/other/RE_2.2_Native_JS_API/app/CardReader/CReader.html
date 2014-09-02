@@ -1,0 +1,55 @@
+<HTML>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+<TITLE>Device Application Test Index Page</TITLE>
+<META HTTP-Equiv="ZoomTextButton" Content="Visibility:Visible">
+<META HTTP-Equiv="quitbutton" Content="visibility:visible">
+<META HTTP-Equiv="quitbutton" Content="Left:10">
+<META HTTP-Equiv="quitbutton" Content="Top:10">
+
+<script language="javascript" type="text/javascript">
+
+function MyReadEvent(data,mode)
+{	
+ Message.innerHTML="Message:"+"Readevent fired"+data+mode;
+}
+</script>
+
+
+
+</HEAD>
+
+
+<BODY BGCOLOR="#FFFFEA" TEXT="#0000A0" LINK="#FF0000" VLINK="#808080" ALINK="#008040">
+<H2>PocketBrowser Test Site</H2>
+<div id="Message">Message</div><br />
+<table width="100">
+
+
+<tr>
+<td><A HREF="./CardReader.new.html">CardReader ActiveX </A></td>
+</tr>
+<tr>
+<td><A HREF="./CardReader.html">CardReader JSObjects </A></td>
+</tr>
+<tr>
+<td><A HREF="./staticCardReaderEMML1_0.htm">CardReader1.0</A></td>
+</tr>
+<tr>
+<td><A HREF="./staticCardReaderEmml 1.1.htm">CardReader 1.1 </A></td>
+</tr>
+
+
+<tr>
+<td><A HREF="./Memoryleak.htm">CardReaderMemoryLeak </A></td>
+</tr>
+
+
+
+
+</head>
+<body>
+<P><INPUT TYPE="button" VALUE="Back" ONCLICK="location.href='../index.html'"></P>
+</body>
+</html>

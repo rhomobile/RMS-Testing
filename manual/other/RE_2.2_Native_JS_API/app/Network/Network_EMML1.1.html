@@ -1,0 +1,208 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+    <title> Network Test</title>
+<!--    <META HTTP-Equiv="MinimizeButton" content="Visibility:Visible;Left:70">-->
+
+<META HTTP-Equiv="network" Content="host:10.233.85.82;port:80;networkPollInterval:2000;networkEvent:url('Javascript:onNetworkPoll('%s');');Start">
+  <script language="javascript">
+   var count =0;
+    
+  
+    function NetworkEventPeriodic() {
+        //generic.InvokeMETAFunction('Network', "networkevent:url('javascript:onNetworkPoll('%s');')");
+        //generic.InvokeMETAFunction('Network',"start");
+        count=0;
+        cat.innerHTML = "Count = "+count;
+        network.networkEvent = "onNetworkPoll('%s')";
+        
+    }
+
+    function onNetworkPoll(conn) 
+    {
+       count++;
+       cat.innerHTML = "Count = "+count;
+       bat.innerHTML +=conn;
+    
+    }
+  
+    function PeriodickCheckJSON()
+    {
+        //generic.InvokeMETAFunction('Network', "networkevent:url('javascript:onNetworkPollJSON(%json);')");
+        //generic.InvokeMETAFunction('Network',"start");
+        count=0;
+        cat.innerHTML = "Count = "+count;
+        network.networkEvent = "onNetworkPollJSON(%json)";
+       
+    }
+    
+    
+    function onNetworkPollJSON(json)
+    {
+       count++;
+       cat.innerHTML = "Count = "+count;
+       bat.innerHTML = "Connection status using json event: "+json.connectionInformation;
+      
+    }
+
+    function StopNetworkcheckRunning() {
+        //generic.InvokeMETAFunction('Network',"stop");
+        bat.innerHTML = "stopped polling";
+        count=0;
+        cat.innerHTML = "Count = "+count;
+        network.stop(); 
+    }
+    
+    function startNetworkPoll()
+    {
+     bat.innerHTML = "started polling";
+    network.start(); 
+    
+    }
+
+
+    function PeriodicEventURL(){
+        //generic.InvokeMETAFunction("Network", "networkevent:url('http://tandv.wtgdev.net/NavigateUrl.html?Connection=%s')");
+        //generic.InvokeMETAFunction('Network',"start");
+         network.networkEvent = "url('http://10.233.85.82/Neon/Index.html?Connection=%s')";
+    }
+
+   
+    function SetIP() {
+       // generic.InvokeMETAFunction('Network', "host:url('')"); 
+       var HostIP = myIP.value;
+       Message.innerHTML=HostIP;
+       network.host = HostIP;
+    }
+    function SetPort()
+    {
+        //generic.InvokeMETAFunction('Network', "port:1080"); 
+        var HostPort=myPort.value;
+        Message.innerHTML=HostPort;
+        network.port =HostPort;
+    }
+
+   
+    function SetNetworkCheckTimeout()
+    {
+       var NTPIT=myNPTI.value;
+       Message.innerHTML = "Network Poll Interval"+NTPIT;
+        //generic.InvokeMETAFunction('Network', "NetworkPollInterval:60000");
+        network.networkPollInterval = NTPIT;
+    }
+  function SetConnectionTimeout()
+    {
+       var ConnTO=myCTO.value;
+       Message.innerHTML = "Connection check timeout"+ConnTO;
+        //generic.InvokeMETAFunction('Network', "ConnectionTimeout:60000");
+        network.connectionTimeout = ConnTO;
+    }
+
+    
+    function connectWAN()
+    {
+      bat.innerHTML ="Connect WAN";
+      var destination = dest.value;
+      network.connectWan = "" + destination;
+
+    }
+    function disconnectWAN()
+    {
+    bat.innerHTML = "Disconnect";
+      network.disconnectWan();
+    }
+    function networkWAN()
+    {
+       bat.innerHTML = "WAN status";
+       network.wanStatusEvent = "WANStatus('%s','%s','%s','%s','%s')";
+       return;
+    }
+    function networkWANJSON()
+    {
+        bat.innerHTML = "WAN status JSON";
+       network.wanStatusEvent = "WANStatusJSON(%json)";
+       return;
+    }
+    function WANStatus(phoneSignalStrength, networkOperator, connectionTypeAvailable, connectionTypeConnected, connectionManagerMessage)
+    {
+      bat.innerHTML = "WAN status event fired";
+      bat.innerHTML = "phoneSignalStrength = "+phoneSignalStrength+"<br>"+"networkOperator = "+networkOperator+"<br>"+"connectionTypeAvailable = "+connectionTypeAvailable+"<br>"+"connectionTypeConnected = "+connectionTypeConnected+"<br>"+"connectionManagerMessage = "+connectionManagerMessage;
+    }
+    function WANStatusJSON(json)
+    {
+      bat.innerHTML = "WAN status JSON event fired";
+      bat.innerHTML = "phoneSignalStrength = "+json.phoneSignalStrength+"<br>"+"networkOperator = "+json.networkOperator+"<br>"+"connectionTypeAvailable = "+json.connectionTypeAvailable+"<br>"+"connectionTypeConnected = "+json.connectionTypeConnected+"<br>"+"connectionManagerMessage = "+json.connectionManagerMessage;
+    }
+    
+</script>  
+
+
+</head>
+<body>
+<br><br>
+<div id="bat">Network readings should appear here </div><br />
+<div id="cat">Count</div><br />
+<div id="Message">Message</div>
+
+<BR><BR>
+
+<input type="button" onclick="NetworkEventPeriodic();" value="NetworkEventPeriodic">
+
+&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+
+<input type=button onclick="PeriodickCheckJSON();" value="PeriodickCheckJSON">
+
+&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+<input type="button" onclick="startNetworkPoll();" value="StartPoll" />&nbsp&nbsp&nbsp&nbsp
+<input type="button" onclick="StopNetworkcheckRunning();" value="StopNetworkcheckRunning" />
+
+&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+<br /><br />
+
+<input type="button" onclick="PeriodicEventURL();" value="PeriodicEventURL">
+<br /><br />
+&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+Conn Timeout:&nbsp&nbsp&nbsp&nbsp<textarea id="myCTO" rows="1">60000</textarea>
+&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+<input type="button" onclick="SetConnectionTimeout();" value="ConnectionTimeout">
+<br />
+Network Poll Timeout:<textarea id="myNPTI" rows="1">60000</textarea>
+&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+<input type="button" onclick="SetNetworkCheckTimeout();" value="NetworkCheckTimeout">
+
+<BR><BR>
+IP/URL:&nbsp&nbsp&nbsp     <textarea id="myIP">10.233.85.82</textarea>
+&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+<input type="button" onclick="SetIP();" value="SetIP" />
+<br />
+Port:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp       <textarea id="myPort" rows="1">80</textarea>
+&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+<input type="button" onclick="SetPort();" value="SetPort" />
+<br />
+
+
+
+<br /><br /><br />
+Destination:<Textarea id="dest" cols="40" rows="1"></Textarea>
+<br />
+
+<input type="button" onclick="connectWAN();" value="connectWAN">
+&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+
+
+<input type="button" onclick="disconnectWAN();" value="disconnectWAN">
+&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+
+<input type="button" onclick="networkWAN();" value="networkWAN">
+&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+
+<input type="button" onclick="networkWANJSON();" value="networkWANJSON">
+&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+<br/><br/><br/><br/><br/><br/><br/><br/>
+
+<A HREF="..index.html">Back</A>
+</body>
+</html>
+
+

@@ -1,0 +1,291 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+<META HTTP-Equiv="MinimizeButton" Content="top:100;Visibility:Visible">
+
+</head>
+<body>
+<BR>
+<b>Audio Capture using JSObject</b>
+<form id="frm" action="">
+<BR><BR>
+<A HREF="VideoCapture_Index.html">Back</A><br />
+<div id="message">Message</div>
+<BR><BR>
+<P><INPUT TYPE="button" VALUE="start" ONCLICK="doStart();">
+<INPUT TYPE="button" VALUE="stop" ONCLICK="doStop();"></P>
+<p><input type=button id="cancel" onclick="doCancel();" value="Cancel">
+<BR><BR>
+<table>
+    <tr>
+    <td>Duration:</td><td><Textarea id="textDuration" cols="10" rows="1">10000</Textarea>
+	<input type=button onclick="Javascript:setAudioDuration();" value="setDuration"></td>
+    <td>Name:</td><td><Textarea id="textLocalName" cols="15" rows="3">myLocalVideo</Textarea>
+	<input type=button onclick="Javascript:setAudioLocalName();" value="setVideoFileName">
+</td></tr>
+</table>
+<hr>
+<table>
+<tr>
+Select DestinationType:<select name="SelectDestination" id="SelectDestination" onchange="doDestination();">
+<OPTION VALUE="">Select Destination type</OPTION>
+<option value="HTTP">HTTP</option>
+<option value="QUALIFIEDHTTP">QUALIFIED HTTP</option>
+<option value="FTP">FTP</option>
+<option value="QUALIFIEDFTP">QUALIFIED FTP</option>
+<option value="FILE1">FILE1</option>
+<option value="FILE2">FILE2</option>
+<option value="INVALIDFILE">INVALIDFILE</option>
+<option value="INVALIDHTTP">INVALIDHTTP</option>
+<option value="EMPTYHTTP">EMPTYHTTP</option>
+<option value="INVALIDFTP">INVALIDFTP</option>
+<option value="EMPTYFTP">EMPTYFTP</option>
+</select>
+</tr>
+	
+<tr>
+	<td>Destination</td><td><Textarea id="txtDestination"cols="21" rows="1"></Textarea></td>
+	</tr>
+<tr>
+	<td>UserName</td><td><Textarea id="txtUserName"cols="10" rows="1">ftpadmin</Textarea></td>
+	</tr>
+<tr>
+	<td>Password</td><td><Textarea id="txtPassword"cols="10" rows="1">ftpadmin</Textarea></td>
+	</tr>
+
+</table>
+
+<input type="radio" name="group1" value="javascript">Navigate to javascript function
+<br>
+<input type="radio" name="group1" value="HTML">Navigate to HTML Page
+<br>
+<input type="radio" name="group1" value="JSON">JSON event
+<br>
+<input type="radio" name="group1" value="Empty">EmptyEvent
+<br>
+<input type="radio" name="group1" value="URLEmpty">Detach
+<br>
+
+
+<br>
+
+    <input type=button onclick="Javascript:dovideoCapture();" value="Apply">
+<hr>
+
+<BR>
+<P><INPUT TYPE="button" VALUE="Quit" ONCLICK="Quit();"></P>
+
+</form>
+</body>
+</html>
+<script language="javascript">
+var selectedVisibility=""; //Selected Visibility.
+var selectedBorder=""; //Selected Aim in the list.
+
+function setAudioLocalName()
+{
+
+var myLocalAudioName=frm.textLocalName.value;
+//videoCapture.name=myLocalAudioName;
+videoCapture.setEMML("name:"+myLocalAudioName);
+message.innerHTML="setNameto"+myLocalAudioName;
+}
+
+function setAudioDuration()
+{
+//alert("inside setAudioDuration");
+var durationVal=frm.textDuration.value;
+videoCapture.setEMML("duration:"+durationVal);
+//alert("Value"+durationVal);
+//videoCapture.duration=durationVal;
+message.innerHTML="setDurationto"+durationVal;
+}
+
+function dovideoCapture()
+{
+//alert("inside videoCapture method");
+message.innerHTML="Response will appear here..";
+
+var UName = frm.txtUserName.value;
+//videoCapture.username = UName;
+videoCapture.setEMML("username:"+UName);
+var UPass = frm.txtPassword.value;
+videoCapture.setEMML("password:"+UPass);
+//videoCapture.password = UPass;
+
+
+var Destination = frm.txtDestination.value;
+var dest = "url('"+Destination+"')";
+//videoCapture.destination=dest;
+videoCapture.setEMML("destination:"+dest);
+
+  	for (var i=0; i < frm.group1.length; i++)
+   	{   
+      		if (frm.group1[i].checked)
+      		{
+      			var type = frm.group1[i].value;
+      		}
+   	}	
+   	
+	if(type=="javascript")
+	{
+		//videoCapture.videoSaveEvent="onCaptured('%s')";
+		videoCapture.setEMML("videoSaveEvent:url('JavaScript:onCaptured('%s');')");
+	}
+    else if(type=="HTML")
+	{
+	    //videoCapture.videoSaveEvent="url('http://10.233.85.82/Navigate.html?Resposnse=%s');";
+		videoCapture.setEMML("videoSaveEvent:url('http://10.233.85.82/Neon/Navigate.html')");
+	}
+	else if(type=="JSON")
+	{
+	//videoCapture.videoSaveEvent="onCapturedjson(%json)";
+	videoCapture.setEMML("videoSaveEvent:url('JavaScript:onCapturedjson(%json);')");
+       
+	}
+	else if(type=="Empty")
+	{
+	//videoCapture.videoSaveEvent="";
+	videoCapture.setEMML("videoSaveEvent:");
+	}
+	else if(type=="URLEmpty")
+	{
+	//videoCapture.videoSaveEvent="url('')";
+	videoCapture.setEMML("videoSaveEvent:url('')");
+	}
+
+}
+
+function onCaptured(response)
+{
+	message.innerHTML = "Javascript response ="+response;
+}
+
+function onCapturedjson(jsondata)
+{
+	message.innerHTML = "JSON response: " +jsondata.transferResult;
+}
+
+
+function doStart()
+{
+//alert("satrt");
+message.innerHTML="start";
+//videoCapture.start();
+videoCapture.setEMML("start");
+}
+
+function doStop()
+{
+//alert("stop");
+message.innerHTML="stop";
+//videoCapture.stop();
+videoCapture.setEMML("stop");
+}
+
+function doCancel()
+{
+//alert("cancel");
+message.innerHTML="cancel";
+//videoCapture.cancel();
+videoCapture.setEMML("cancel");
+}
+
+function doDestination()
+{
+    var w = frm.SelectDestination.selectedIndex;
+    DestValue = frm.SelectDestination.options[w].value;
+    if(DestValue=="HTTP")
+    {
+    frm.txtDestination.value="http://10.233.85.82/NEON/ReceivedFiles/Upload.aspx";
+    }
+    else if(DestValue=="QUALIFIEDHTTP")
+    {
+    frm.txtDestination.value="http://10.233.85.82:80/NEON/ReceivedFiles/Upload.aspx";
+    frm.txtUserName.value="";
+    frm.txtPassword.value="";
+    }
+    else if(DestValue=="FTP")
+    {
+    frm.txtDestination.value="ftp://10.233.85.82/Received/audioFileInFTP.wav";
+    frm.txtUserName.value="ftpadmin";
+    frm.txtPassword.value="ftpadmin";
+    
+    }
+    else if(DestValue=="QUALIFIEDFTP")
+    {
+    frm.txtDestination.value="ftp://ftpadmin:ftpadmin@10.233.85.82/Received/audioinQFTP.wav";
+    frm.txtUserName.value="";
+    frm.txtPassword.value="";
+    
+    }
+    else if(DestValue=="FILE1")
+    {
+    frm.txtDestination.value="file://\\Temp\\CapturedaudioTemp.wav";
+    frm.txtUserName.value="";
+    frm.txtPassword.value="";
+    }
+    else if(DestValue=="FILE2")
+    {
+     frm.txtDestination.value="file://\\Application\\Airbeam\\CapturedaudioAPPAir.wav";
+     frm.txtUserName.value="";
+     frm.txtPassword.value="";
+    }
+    else if(DestValue=="RELATIVEHTTPDOWN")
+    {
+     frm.txtDestination.value="../ReceivedFiles/Upload.aspx";
+     frm.txtUserName.value="uploadtest";
+     frm.txtPassword.value="letmein";
+     
+//  url('./down/Upload.aspx')
+//	url('../Upload.aspx')
+//	url('./Upload.aspx')
+    
+    }
+    else if(DestValue=="RELATIVEHTTPUP")
+    {
+     frm.txtDestination.value="../ReceivedFiles/Upload.aspx";
+     frm.txtUserName.value="uploadtest";
+     frm.txtPassword.value="letmein";
+    }
+    else if(DestValue=="RELATIVEHTTPCURRENT")
+    {
+     frm.txtDestination.value="../ReceivedFiles/./Upload.aspx";
+     frm.txtUserName.value="uploadtest";
+     frm.txtPassword.value="letmein";
+    }
+    else if(DestValue=="INVALIDFILE")
+    {
+     frm.txtDestination.value="file://\\And\\data\\audioAndroidData.wav";
+     frm.txtUserName.value="";
+    frm.txtPassword.value="";
+    }
+    else if(DestValue=="INVALIDHTTP")
+    {
+    frm.txtDestination.value="http://tand";
+    frm.txtUserName.value="uploadtest";
+    frm.txtPassword.value="letmein";
+    }
+    else if(DestValue=="EMPTYHTTP")
+    {
+    frm.txtDestination.value="http://";
+    frm.txtUserName.value="uploadtest";
+    frm.txtPassword.value="letmein";
+    }
+    else if(DestValue=="INVALIDFTP")
+    {
+    frm.txtDestination.value="ftp://tandv";
+    frm.txtUserName.value="tandv";
+    frm.txtPassword.value="H0neymoon";
+    }
+    else if(DestValue=="EMPTYFTP")
+    {
+    frm.txtDestination.value="ftp://";
+    frm.txtUserName.value="tandv";
+    frm.txtPassword.value="H0neymoon";
+    }
+}
+
+</script>
+

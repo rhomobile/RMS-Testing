@@ -1,0 +1,123 @@
+
+
+
+<HTML>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+<TITLE>NarrowBand Test 1</TITLE>
+<META HTTP-Equiv="ALL_DECODERS" Content="Enabled">
+
+<META HTTP-Equiv="Scanner" Content="Enabled">
+<META HTTP-Equiv="scannernavigate" Content="Javascript:doScan('%s', '%s', '%s', '%s', '%s');">
+<META HTTP-Equiv="quitbutton" Content="show">
+<META HTTP-Equiv="quitbutton" Content="x=0">
+<META HTTP-Equiv="quitbutton" Content="y=0">
+</HEAD>
+
+
+<BODY OnLoad="OnLoad()" BGCOLOR="#FFFFEA" TEXT="#0000A0" LINK="#FF0000" VLINK="#808080" ALINK="#008040">
+<OBJECT ID="NarrowBand" CLASSID="CLSID:AE3B4850-4811-4E3C-A4BB-FEDE80068E28" width="1" height="1"></OBJECT>
+
+
+
+
+
+<H2>NarrowBand Test 1</H2>
+<P>Data is sent to printer.</P>
+<table border=0>
+	<tr>
+		<td colspan=2>
+			<input type=text name="PrinterID">
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<INPUT TYPE="button" VALUE="SetPrinter" ONCLICK="SetUpPrinter();">		
+		</td>
+		<td>
+			<INPUT TYPE="button" VALUE="PrintData" ONCLICK="PrintData();">		
+		</td>
+	</tr>
+</table>
+
+</BODY>
+</HTML>
+
+<SCRIPT LANGAUGE="JavaScript">
+
+var Generic = new ActiveXObject("SymbolBrowser.Generic");
+
+//var printerID = 'BC52:1|00037A3180D4';
+//var printerID = 'BC52:1|00037A32263E';
+var printerID;
+
+function OnLoad()
+{
+
+}
+
+function doScan(data, source, type, time, length)
+{
+	PrinterID.value = '00037A32263E';
+	printerID = 'BC52:1|'+ '00037A32263E'; //B - Bluetooth  C52 - Zeebra QL220 Printer :1 - Channel 1
+								 // Pleae refer Cpr576f.pdf in the APD Release for Printer IDs
+}
+
+
+function SetUpPrinter()
+{
+	Generic.ShowHourglass();
+	PrinterID.value = '00037A32263E';
+	printerID = 'BC52:1|'+ '00037A32263E';
+			
+	NarrowBand.PSExternalEx(261, printerID);// set printer
+	NarrowBand.PSExternalEx(270, "");  // open port after doing set printer
+	NarrowBand.PSExternalEx(271, "");  // close port after doing open port
+
+  
+	Generic.HideHourglass();
+
+}
+
+
+
+function PrintData()
+{
+
+	var code = '1234567890';
+	var sLabel = '! 0 200 200 350 1\n'
+	     + 'JOURNAL\n'
+	     + 'SPEED 3\n'
+	     + 'PW 400\n'
+	     + 'B 128 1 1 80 20 80 ' + code + '\n'
+	     + 'T 5 3 20 196 £2.00 off\n'
+	     + 'T 7 0 20 166 ' + code + '\n'
+	     + 'BOX 5 5 350 295 1\n'
+	     + 'PRINT\n';
+	//NarrowBand.PSExternal(260, '');
+//NarrowBand.PSExternalEx(274, "");
+	//NarrowBand.PSExternalEx(266, sLabel);
+//NarrowBand.PSExternalEx(275, "");
+	//NarrowBand.PSExternalEx(266, sLabel);
+//NarrowBand.PSExternal(277, "")
+	//NarrowBand.PSExternalEx(257, 'Hello World');
+//NarrowBand.PSExternal(276, "")
+	//NarrowBand.PSExternalEx(256, '\\Temp\\Test.txt');
+	//NarrowBand.PSExternalEx(256, 'Test.txt');
+	//myArray = NarrowBand.PSExternal(262, "");
+	//var myArray = new Array(NarrowBand.PSExternal(262, ""));
+	//alert(myArray[0]);
+
+//NarrowBand.PSExternalEx(268, '\\Temp');
+//NarrowBand.PSExternalEx(256, 'Test.txt');
+
+
+
+
+
+      		//alert(NarrowBand.PSGetLastMessage());
+   	
+
+}
+</SCRIPT>

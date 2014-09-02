@@ -1,0 +1,160 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+<META HTTP-Equiv="quitbutton" Content="Top:10; Left:10; Visibility:Visible">
+
+
+</head>
+<body>
+<br /><br /><br /><br /><div id="myDiv">Result</div>
+<P>PSExternalEx Method</P>
+<select name="myBTAddress" id="myBTAddress" size=1" onchange="getprinterid();">
+<OPTION value="Select option" >Select option</OPTION>
+<OPTION value="BC53:1|00037A032772" >ZebraWithPIN</OPTION> 
+<OPTION value="BC64:1|00037A31A5B8" >ZebraWithoutPIN</OPTION> 
+<OPTION value="BN21:1|0017AC01822E" >Oneilwithoutpin</OPTION> 
+<OPTION value="BC53:1|00:03:7A:03:27:72" >ZebraWithPINcolon</OPTION> 
+<OPTION value="BC53:1|00:03:7A:31:A5:B8" >ZebraWithoutPINcolon</OPTION> 
+<OPTION value="BN21:1|00:17:AC:01:82:2E" >Oneilwithoutpincolon</OPTION> 
+<OPTION value="BC53|00:03:7A:03:27:72" >ZebraWithPINcolonwP</OPTION> 
+<OPTION value="BC53|00037A31A5B8" >ZebraWithoutPINcolonwP</OPTION> 
+</select><br />
+<P><INPUT TYPE="button" VALUE="PowerOn" ONCLICK="PowerOn();">
+<P><INPUT TYPE="button" VALUE="Poweroff" ONCLICK="Poweroff();">
+<P><INPUT TYPE="button" VALUE="ProgressbarOn" ONCLICK="ProgressbarOn();">
+<P><INPUT TYPE="button" VALUE="ProgressbarOff" ONCLICK="ProgressbarOff();">
+<P><INPUT TYPE="button" VALUE="sendstring" ONCLICK="sendstring();">
+<P><INPUT TYPE="button" VALUE="SetFormatTemplatePath" ONCLICK="SetFormatTemplatePath();">
+<P><INPUT TYPE="button" VALUE="sendformat" ONCLICK="sendformat();">
+<P><INPUT TYPE="button" VALUE="senddatawithTemplate" ONCLICK="senddatawithTemplate();">
+<P><INPUT TYPE="button" VALUE="senddatawithoutTemplate" ONCLICK="senddatawithoutTemplate();">
+<P><INPUT TYPE="button" VALUE="sendstringwithlabel" ONCLICK="sendstringwithlabel();">
+<P><INPUT TYPE="button" VALUE="showResult" ONCLICK="showResult();">
+<P><INPUT TYPE="button" VALUE="Test 2" ONCLICK="location.href='./2.html'"></P>
+<P><INPUT TYPE="button" VALUE="Back" ONCLICK="location.href='./APD.html'"></P>
+
+
+</body>
+</html>
+
+<SCRIPT LANGAUGE="JavaScript">
+var apd = new ActiveXObject("PocketBrowser.NarrowBand");
+var message="";
+var printerID ="";
+
+function getprinterid()
+{
+var index = myBTAddress.selectedIndex;
+printerID = myBTAddress.options[index].value;
+message+="BTaddress:"+printerID;
+}
+
+function SetFormatTemplatePath()
+{
+
+message+="Format:"+apd.PSExternalEx(266, "$$[CMD:010C,//data//com.motorolasolutions.neon//APD//Formats]$$");
+message+="Teplate:"+apd.PSExternalEx(266, "$$[CMD:010B,//data//com.motorolasolutions.neon//APD//Template]$$");
+}
+
+
+function Poweroff()
+{
+   
+	apd.PSExternalEx(261, printerID);
+
+	message+="powerOff:"+apd.PSExternalEx(277, '');
+	
+
+}
+
+function PowerOn()
+{
+   
+	apd.PSExternalEx(261, printerID);
+
+	message+="powerOn:"+apd.PSExternalEx(276, '');
+	
+
+}
+
+function ProgressbarOn()
+{
+   
+	apd.PSExternalEx(261, printerID);
+
+	message+="ProgressbarOn:"+apd.PSExternalEx(275, '');
+	
+
+}
+
+function ProgressbarOff()
+{
+   
+	apd.PSExternalEx(261, printerID);
+
+	message+="ProgressbarOff:"+apd.PSExternalEx(274, '');
+	
+
+}
+function sendstring()
+{
+   
+	apd.PSExternalEx(261, printerID);
+	
+	message+="Sendstring:"+apd.PSExternalEx(-266, 'HelloWorld');
+
+}
+
+function sendformat()
+{
+    
+	apd.PSExternalEx(261, printerID);
+	
+
+    message+="SendFormat:"+apd.PSExternalEx(256, "Format2");
+
+}
+
+function senddatawithTemplate()
+{
+   
+	apd.PSExternalEx(261, printerID);
+	
+   message+="SendDatawithtemplate:"+apd.PSExternalEx(266, "$$[CMD:0101,1]$$\r\nR1\r\n£1.49\r\nSilvikrin\r\nSoft and Gentle\r\n100ml\r\n66897678\r\n");
+}
+
+function senddatawithoutTemplate()
+{
+   
+	apd.PSExternalEx(261, printerID);
+    message+="SendDatawith0uttemplate:"+apd.PSExternalEx(266, "$$[CMD:0101,1]$$\r\n£1.49\r\nSilvikrin\r\nSoftandGentle\r\n100ml\r\n66897678\r\n");
+}
+
+
+function sendstringwithlabel()
+{
+    
+	apd.PSExternalEx(261, printerID);
+	var code = '1234567890';
+	var sLabel = '! 0 200 200 350 1\n'
+	     + 'JOURNAL\n'
+	     + 'SPEED 3\n'
+	     + 'PW 400\n'
+	     + 'B 128 1 1 80 20 80 ' + code + '\n'
+	     + 'T 5 3 20 196 £2.00 off\n'
+	     + 'BOX 5 5 350 295 1\n'
+	     + 'PRINT\n';
+	
+	message+="sendstringwithlabel:"+apd.PSExternalEx(266, sLabel);
+         
+
+}
+
+function showResult()
+{
+
+myDiv.innerHTML=message;
+}
+
+</SCRIPT>

@@ -1,0 +1,37 @@
+<html><head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>RhoElements CardReader data Test</title>
+<META HTTP-Equiv="CardReader" Content="ReadEvent:url('javascript:doTransaction('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s');')">
+<script language="javascript" type="text/javascript">
+    function doTransaction(data,mode,encryption,rawData,track1,track2,track3,track1Status,track2Status,track3Status,track1Encrypted,track2Encrypted,track3Encrypted,track1EncryptedStatus,track2EncryptedStatus,track3EncryptedStatus,ksn)
+    {		
+        switch(mode) {
+        case 'CR':						
+            htmlData.innerHTML = "Encryption = " + encryption + "<br>" 
+				+ "Total data = " + data + "<br>"		
+				+ "Raw data = " + rawData + "<br>"					
+				+ "Unencrypted track1 data = " + track1 + "<br>"
+				+ "Unencrypted track2 data = " + track2 + "<br>"
+				+ "Unencrypted track3 data = " + track3 + "<br>"	
+				+ "Unencrypted track1 Status = " + track1Status + "<br>"
+				+ "Unencrypted track2 Status = " + track2Status + "<br>"
+				+ "Unencrypted track3 Status = " + track3Status + "<br>"	
+				+ "Encrypted track1 data = " + track1Encrypted + "<br>"
+				+ "Encrypted track2 data = " + track2Encrypted + "<br>"
+				+ "Encrypted track3 data = " + track3Encrypted + "<br>"	
+				+ "Encrypted track1 Status = " + track1EncryptedStatus + "<br>"
+				+ "Encrypted track2 Status = " + track2EncryptedStatus + "<br>"
+				+ "Encrypted track3 Status = " + track3EncryptedStatus + "<br>"					
+				+ "KSN number = " + ksn;			
+            break;        
+        }		
+    }	
+</script>
+</head>
+<body>
+<br><br><br><br><br>
+<DIV id="htmlData">The card data will appear here</div>
+</body>
+</html>

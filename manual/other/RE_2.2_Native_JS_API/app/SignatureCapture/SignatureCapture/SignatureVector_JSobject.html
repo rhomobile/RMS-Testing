@@ -1,0 +1,111 @@
+<HTML>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+<META HTTP-Equiv="SignatureCapture" Content="BGColor:#FFFF00">
+<META HTTP-Equiv="SignatureCapture" Content="Width:150">
+<META HTTP-Equiv="SignatureCapture" Content="height:150">
+<META HTTP-Equiv="SignatureCapture" Content="top:60">
+<META HTTP-Equiv="SignatureCapture" Content="left:40">
+<META HTTP-Equiv="SignatureCapture" Content="Visibility:Visible">
+<META HTTP-Equiv="SignatureCapture" Content="PenColor:#FF00FF">
+<META HTTP-Equiv="SignatureCapture" Content="PenWidth:0">
+<!--<META HTTP-Equiv="SignatureCapture" Content="VectorEvent:url('Javascript:onVectors(%s);')">-->
+</HEAD>
+<BODY>
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<DIV id="vectorOut">Vectors Will Appear Here:</div>
+  <BR><BR><BR><BR><BR><BR><BR><BR><BR> <BR><BR><BR><BR><BR> 
+Vector Event:
+<select name="veceventdropdown" id="veceventdropdown">
+<option SELECTED VALUE="">Select</OPTION>
+<option value="JSCRIPT">JSCRIPT</option>
+<option value="JSON">JSON</option>
+<option value="DETACH">DETACH</option>
+<option value="URL">URL</option>
+<option value="EMPTY">EMPTY</option>
+</select>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<input type="button" onclick="setvectorevent();" value="SetVectorEvent">
+<br /><br />
+ <P><INPUT TYPE="button" VALUE="Back" ONCLICK="location.href='SignatureCapture_Index.html'"></P>
+  </BODY>  
+  </HTML>
+  
+<script type="text/javascript">
+
+function onVectors(data)
+{
+  var VectorAsHTML = "<TABLE><TR><TH>X</TH><TH>Y</TH><TH>X</TH><TH>Y</TH><TH>X</TH><TH>Y</TH></TR>";
+  for (var i=0; i<data.length; i = i + 6)
+  {
+    VectorAsHTML = VectorAsHTML + "<TR>"
+    VectorAsHTML = VectorAsHTML + "<TD>" + data[i] + "</TD><TD>" + data[i+1] + "</TD>";
+    VectorAsHTML = VectorAsHTML + "<TD>" + data[i+2] + "</TD><TD>" + data[i+3] + "</TD>";
+    VectorAsHTML = VectorAsHTML + "<TD>" + data[i+4] + "</TD><TD>" + data[i+5] + "</TD>";
+    VectorAsHTML = VectorAsHTML + "</TR>"
+  }
+  VectorAsHTML + "</TABLE>"
+  vectorOut.innerHTML = VectorAsHTML;
+}
+
+function onVectorsjson(jsondata)
+{
+  var VectorAsHTML = "<TABLE><TR><TH>X</TH><TH>Y</TH><TH>X</TH><TH>Y</TH><TH>X</TH><TH>Y</TH></TR>";
+  for (var i=0; i<jsondata.vectorArray.length; i = i + 6)
+  {
+    VectorAsHTML = VectorAsHTML + "<TR>"
+    VectorAsHTML = VectorAsHTML + "<TD>" + jsondata.vectorArray[i]+ "</TD><TD>" + jsondata.vectorArray[i+1] + "</TD>";
+    VectorAsHTML = VectorAsHTML + "<TD>" + jsondata.vectorArray[i+2] + "</TD><TD>" + jsondata.vectorArray[i+3]+ "</TD>";
+    VectorAsHTML = VectorAsHTML + "<TD>" + jsondata.vectorArray[i+4]+ "</TD><TD>" + jsondata.vectorArray[i+5]+ "</TD>";
+    VectorAsHTML = VectorAsHTML + "</TR>"
+  }
+  VectorAsHTML + "</TABLE>"
+  vectorOut.innerHTML = VectorAsHTML;
+}
+
+function setvectorevent()
+{
+    var SelectedValue = veceventdropdown.selectedIndex;
+	var selectEvent = veceventdropdown.options[SelectedValue].value;
+	switch(selectEvent)
+	{
+		case 'JSCRIPT':
+                 vectorOut.innerHTML="Appling Jscript event";
+                //generic.InvokeMETAFunction("SignatureCapture", "vectorEvent:url('Javascript:onVectors(%s);')");
+			    signatureCapture.vectorEvent = 'onVectors(%s)'; 
+			break;
+
+		case 'JSON':
+            vectorOut.innerHTML="Appling JSON event";
+			// generic.InvokeMETAFunction("SignatureCapture", "vectorEvent:url('Javascript:onVectorsjson(%json);')");
+            signatureCapture.vectorEvent = 'onVectorsjson(%json)'; 
+			break;
+			
+	   case 'DETACH':
+	         vectorOut.innerHTML="Appling Detach event";
+            //generic.InvokeMETAFunction('SignatureCapture', "vectorEvent:url('')");
+            signatureCapture.vectorEvent = "url('')";
+			break;
+			
+	  case 'URL':
+	  
+	        vectorOut.innerHTML="Appling url event";
+			//generic.InvokeMETAFunction("SignatureCapture", "vectorEvent:url('http://10.233.85.82/Neon/Navigate.html')");
+            signatureCapture.vectorEvent = "url('http://10.233.85.82/Neon/Navigate.html')";
+			
+			break;
+
+		case 'EMPTY':
+
+			vectorOut.innerHTML="Appling empty event";
+			// generic.InvokeMETAFunction("SignatureCapture", "vectorEvent:");
+            signatureCapture.vectorEvent = "";
+			break;
+			
+	}
+
+
+}
+
+</script>

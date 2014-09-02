@@ -1,0 +1,83 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+
+	<script language="JavaScript">
+	
+	var prevkeycode;
+	
+    document.onkeydown = checkKeycode
+    
+	function checkKeycode(e) {
+	var keycode;
+	if (window.event) 
+	keycode = window.event.keyCode;
+	else if (e)
+	keycode = e.which;
+	//document.getElementById('key').innerHTML = keycode;
+
+	
+	
+	if(prevkeycode==17)
+	{
+	if(keycode==65)
+	{
+	document.getElementById('keycombination').innerHTML = "CTRL+A preessed";
+	}
+	else if(keycode==67)
+	{
+	document.getElementById('keycombination').innerHTML = "CTRL+C preessed";
+	}
+	else if(keycode==86)
+	{
+	document.getElementById('keycombination').innerHTML = "CTRL+V preessed";
+	}
+	
+	if(keycode==66)
+	{
+	document.getElementById('keycombination').innerHTML = "CTRL+B preessed";
+	}
+	if(keycode==68)
+	{
+	document.getElementById('keycombination').innerHTML = "CTRL+D preessed";
+	}
+	if(keycode==69)
+	{
+	document.getElementById('keycombination').innerHTML = "CTRL+E preessed";
+	}
+	if(keycode==88)
+	{
+	document.getElementById('keycombination').innerHTML = "CTRL+X preessed";
+	}
+	if(keycode==79)
+	{
+	document.getElementById('keycombination').innerHTML = "CTRL+O preessed";
+	}
+	if(keycode==80)
+	{
+	document.getElementById('keycombination').innerHTML = "CTRL+P preessed";
+	}
+	
+	}
+	prevkeycode = keycode;
+	
+	}
+
+	</script>
+
+</head>
+
+<body >
+
+<br><br><br>
+
+<b1>Keycheck</b1><br>
+
+<!-- Key pressed:<nbsp><b id='key'>None</b> -->
+
+on Key pressed<nbsp><b id='keycombination'>None</b>
+		
+</body>
+	
+</html>

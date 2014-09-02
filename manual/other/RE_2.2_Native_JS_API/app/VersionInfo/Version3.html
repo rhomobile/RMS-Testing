@@ -1,0 +1,148 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+<!--<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="expires" content="0">-->
+<TITLE>Application Tests</TITLE>
+  </head>
+<body>
+<script type="text/javascript">
+  
+	function fnVer(productVersion, hotFixes, componentVersions)
+	{
+		var theOutput = "<B>Product Version:</b> " + productVersion + "<P>";
+		theOutput = theOutput + "<b>Hot Fixes:</b><P>";
+		alert(hotFixes.length);
+		for (var i=0; i<hotFixes.length; i = i + 1)
+		{
+		   	 
+                   theOutput = theOutput + "  Hot Fix: " + hotFixes[i]+"No of Hotfix"+hotFixes.length+ "<BR>";
+                   alert(theOutput);
+		}
+		theOutput = theOutput + "<P>";
+		theOutput = theOutput + "<b>Installed Components:</b><P>";
+		alert(componentVersions.length);
+		for (var j=0; j<componentVersions.length; j = j + 1)
+		{
+			theOutput = theOutput + "  Component: " + componentVersions[j][0] + ': ' + componentVersions[j][1] + "<BR>";
+		}
+		outputDiv.innerHTML = theOutput;
+	}
+		  
+	function getVer()  
+	{
+		generic.InvokeMETAFunction("Application", "VersionEvent:url('javascript:fnVer('%s', %s, %s);'); GetVersion");
+	}
+	
+	
+	function fnVerJSON(jsonObject)
+	{
+		var theOutput = "<B>Product Version:</b> " + jsonObject.productVersion + "<P>";
+		theOutput = theOutput + "<b>Hot Fixes:</b><P>";
+		for (var i=0; i<jsonObject.hotFixes.length; i = i + 1)
+		{
+			theOutput = theOutput + "  Hot Fix: " + jsonObject.hotFixes[i] + "<BR>";
+		}
+		theOutput = theOutput + "<P>";
+		theOutput = theOutput + "<b>Installed Components:</b><P>";
+		for (var j=0; j<jsonObject.componentVersions.length; j = j + 1)
+		{
+			theOutput = theOutput + "  Module: " + jsonObject.componentVersions[j].module + ', Version: ' + jsonObject.componentVersions[j].version + "<BR>";
+		}
+		outputDiv.innerHTML = theOutput;
+	}
+	
+	function getVerJSON()  
+	{
+		generic.InvokeMETAFunction("Application", "versionEvent:url('javascript:fnVerJSON(%json);')");
+		generic.InvokeMETAFunction("Application", "GetVersion");
+	}
+	
+	
+ 
+ 
+ function doSelect()
+ {
+        outputDiv.innerHTML="";
+        //var w = document.myForm.vevent.selectedIndex;
+        //alert(w);  
+        //var val= document.myForm.vevent.options[w].value;
+        //alert(val);
+       for (var i=0; i < myForm.group1.length; i++)
+   	{   
+      		if (myForm.group1[i].checked)
+      		{
+      		    
+      			var val= myForm.group1[i].value;
+      			
+      		}
+   	}	
+        if(val=="jsarray")
+        {
+                  generic.InvokeMETAFunction("Application", "versionEvent:url('javascript:fnVer('%s', %s, %s);')");
+        }
+        else if(val=="json")
+        {
+                generic.InvokeMETAFunction("Application", "versionEvent:url('javascript:fnVerJSON(%json);')");
+        }
+        else if(val=="emptyurl")
+        {
+	        generic.InvokeMETAFunction("Application", "VersionEvent:url('')");
+        }
+        else if(val=="emptyevent")
+        {
+	        generic.InvokeMETAFunction("Application", "VersionEvent:");
+        }
+        else if(val=="URL")
+        {
+	        generic.InvokeMETAFunction("Application", "VersionEvent:url('http://10.233.85.82/Neon/DeviceApplication/pageNavigation.html')");
+	        //application.versionEvent="url('http://10.233.85.82/Neon/DeviceApplication/pageNavigation.html')";
+        }
+        else if(val=="invalidjson1")
+        {
+	        generic.InvokeMETAFunction("Application", "VersionEvent:url('javascript:fnVerJSON(%jsoa);')");
+        }
+        else if(val=="invalidjson2")
+        {
+	        generic.InvokeMETAFunction("Application", "VersionEvent:url('javascript:fnVerJSON(%asoa);')");
+        }
+        
+        
+  }
+  
+  function callmethod()
+  {
+  //alert("1");
+  generic.InvokeMETAFunction("Application", "GetVersion");
+  }
+  </script>
+
+<H1>Version Tests</H1>
+<P>
+<div id="outputDiv">Version info Test using generic without activex</div>
+<form  name="myForm" id="myForm" action="" >
+<P><br><br><br><br><br><br><br><br>
+  <INPUT align="center" type="button" value="Retrieve Version using JS array" onclick="getVer();"><br>
+  <INPUT align="center" type="button" value="Retrieve Version using JSON" onclick="getVerJSON();"><br>
+  <INPUT align="center" type="button" value="Manual Test using JS array" onclick="fnVer('1.2.3', new Array('1','2'), new Array(new Array('hello','Amit'),new Array('greetings','joydeep ')));"><br>
+  <INPUT align="center" type="button" value="Manual Test using JSON" onclick="fnVerJSON({'ProductVersion':'1.2.3','HotFixes':['7','4','2'],'ComponentVersions':[{'Module':'Timer','Version':'1.0.6.1'},{'Module':'Scanner','Version':'1.0.6.5'}]});"><br><br>
+
+Select Version Event <br>
+<input type="radio" name="group1" value="jsarray">jsarray
+<input type="radio" name="group1" value="json">json
+<input type="radio" name="group1" value="URL">URL
+<input type="radio" name="group1" value="emptyurl">emptyurl
+<input type="radio" name="group1" value="emptyevent">emptyevent
+<input type="radio" name="group1" value="invalidjson1">invalidjson1
+<input type="radio" name="group1" value="invalidjson2">invalidjson2
+<br>
+<input type="button" onclick="doSelect();" value="Apply">
+<BR><BR>  <INPUT align="center" type="button" value="Getversion" onclick="callmethod();"><br><br>
+<!--<A HREF="SignatureCapture.html">Back</A><br />-->
+<A HREF="Version2.html">Go to another page</A><br /><br />
+<A HREF="VersionIndex.html">Go to Version index Main Page</A><br />
+</body>
+</html>
+

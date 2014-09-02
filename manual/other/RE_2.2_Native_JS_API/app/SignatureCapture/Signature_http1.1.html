@@ -1,0 +1,71 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+
+<META HTTP-Equiv="SignatureCapture"Content="left:30;top:50;height:200;bgcolor:#FFFF00;width:200;border:hidden;Pencolor:#0000FF;Penwidth:2;visibility:visible;Name:Signature;SignatureSaveEvent:url('Javascript:onCaptured('%s');');destination:url('http://10.233.85.82:80/NEON/SignatureCapture/Upload.aspx')">
+
+</head>
+<body>
+<BR><BR><BR><BR><BR>
+<div id="message">MessageA</div>
+<BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR>
+<P><INPUT TYPE="button" VALUE="Capture" ONCLICK="doCapture();"></P>
+<P><INPUT TYPE="button" VALUE="Clear" ONCLICK="doClear();"></P>
+<P><INPUT TYPE="button" VALUE="Hidden" ONCLICK="dohidden();"></P>
+<P><INPUT TYPE="button" VALUE="Quit" ONCLICK="Quit();"></P>
+
+<BR>
+<A HREF="SignatureCapture.html">Back</A>
+</body>
+</html>
+
+
+<SCRIPT>
+try
+{
+var generic = new ActiveXObject("PocketBrowser.Generic");
+}
+catch(err)
+{
+var GenericPlugin = document.createElement('embed'); 
+GenericPlugin.setAttribute('id',"embed1"); 
+GenericPlugin.setAttribute('type',"application/x-wtg-legacy-generic"); 
+GenericPlugin.setAttribute('hidden',"true"); 
+
+// Attach the plugin embed tags to the body 
+var theBody = document.getElementsByTagName('body')[0]; 
+theBody.appendChild(GenericPlugin); 
+
+
+}
+	
+function doCapture()
+{
+	generic.InvokeMETAFunction('SignatureCapture', 'capture');
+}
+
+function doClear()
+{
+	generic.InvokeMETAFunction('SignatureCapture', 'clear');
+}
+
+function onCaptured(data)
+{
+	alert(data);
+	message.innerHTML = "Data123: " + data;
+}
+
+function Quit()
+{
+	generic.InvokeMETAFunction("Application", "Quit"); 
+}
+
+function dohidden()
+{
+	generic.InvokeMETAFunction('SignatureCapture', 'Visibility:Hidden');
+}
+
+</SCRIPT>
+
+

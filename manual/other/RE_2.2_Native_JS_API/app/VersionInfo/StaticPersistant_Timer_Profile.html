@@ -1,0 +1,129 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+<META HTTP-Equiv="EMMLProfile" Content="name:myProfile;import:url('http://tandv.wtgdev.net/Alarm/DeviceApps.emmp');">
+</head>
+<body>
+<h4> Static import EMML Profile Script</h4><br />
+<DIV ID="outputSpan1">Waiting.....</DIV><br /><br />
+<DIV ID="Count">Count</DIV><br /><br />
+
+<a href="javascript:doApplyProfile('myProfile.Alarm1');">Apply Alarm registered Profile</a>
+&nbsp&nbsp&nbsp&nbsp&nbsp<a href="javascript:doApplyProfile('myProfile.Alarm2');">Apply Alarm clear Profile</a><br /><br />
+<a href="javascript:doApplyProfile('myProfile.AlarmEmptyInterval');">Apply AlarmEmptyInterval Profile</a>
+&nbsp&nbsp&nbsp&nbsp&nbsp<a href="javascript:doApplyProfile('myProfile.AlarmEmptyRepeat');">Apply AlarmEmptyRepeat Profile</a><br /><br />
+<a href="javascript:doApplyProfile('myProfile.AlarmEmptyURL');">Apply AlarmEmptyURL Profile</a>
+&nbsp&nbsp&nbsp&nbsp&nbsp<a href="javascript:doApplyProfile('myProfile.AlarmEmptyEvent');">Apply AlarmEmptyEvent Profile</a><br /><br />
+<a href="javascript:doApplyProfileEmpty('myProfile.Alarm1');">Apply with empty value</a>
+
+<br><br><br>
+<!--<input type=button value="Import Named Profile" onclick="importProfile();">-->
+<input type=button value="Import Empty named Profile" onclick="importProfile2();"><br /><br />
+<input type=button value="Import Empty import Profile" onclick="importProfile3();">&nbsp&nbsp&nbsp&nbsp&nbsp
+<input type=button value="Clear Profile" onclick="clearProfile();">
+<input type=button value="Clear with empty value" onclick="clearProfile1();">
+<h4>Browse to another page to check for EMML profile persistance.</h4>
+<h4><a href="Persistant_Timer_Test.html">Click here to go to another page.</a></h4>
+<hr />
+<a href="DeviceApplication.html">Back to Alarm index</a>
+<br /><P><INPUT TYPE="button" VALUE="Quit" ONCLICK="Quit();"></P>
+
+
+</body>
+</html>
+
+
+<SCRIPT LANGUAGE="JavaScript">
+   // var generic = new ActiveXObject("PocketBrowser.generic");
+      var count=0;
+
+     function clearAlarm() 
+     {
+         generic.InvokeMETAFunction('Alarm', 'clear');
+
+     }
+
+    function doApplyProfile(profile) 
+    {
+
+        generic.InvokeMETAFunction('EMMLProfile', 'Apply:'+profile);
+	    outputSpan1.innerHTML = "Apply profile";
+
+
+    }
+    
+    function doApplyProfileEmpty(profile)
+    {
+       generic.InvokeMETAFunction('EMMLProfile', 'Apply:');
+	    outputSpan1.innerHTML = "Apply with empty param";
+    
+    }
+
+
+//   function importProfile() 
+//    {
+//	        generic.InvokeMETAFunction("EMMLProfile", "name:myProfile;import:url('http://tandv.wtgdev.net/Alarm/DeviceApps.emmp');");
+
+
+//		     outputSpan1.innerHTML = "Named Profile imported";
+
+
+//    }
+    
+    
+    
+    function importProfile2() 
+    {
+	        generic.InvokeMETAFunction("EMMLProfile", "name:;import:url('http://tandv.wtgdev.net/Alarm/DeviceApps.emmp');");
+
+
+		outputSpan1.innerHTML = "Empty Named Profile imported";
+
+
+    }
+    
+    
+    function importProfile3() 
+    {
+	        generic.InvokeMETAFunction("EMMLProfile", "import:url('http://tandv.wtgdev.net/Alarm/DeviceApps.emmp');");
+
+
+		outputSpan1.innerHTML = "Empty Import Profile imported";
+
+
+    }
+    
+    
+
+
+    function clearProfile() 
+    {
+        //alert("clear");
+        generic.InvokeMETAFunction('EMMLProfile', 'clear:myProfile');
+	    outputSpan1.innerHTML = "Profile cleared";
+
+    }
+    
+    
+    function clearProfile1() 
+    {
+        //alert("clear");
+        generic.InvokeMETAFunction('EMMLProfile', 'clear:myProfile');
+	    outputSpan1.innerHTML = "cleared with empty param";
+
+    }
+
+    function doAlarm()
+     {
+        
+        count++;
+        outputSpan1.innerHTML = 'Alarm Triggered';
+        Count.innerHTML = "Count = "+count;
+     }
+
+	function Quit()
+	{
+	generic.InvokeMETAFunction("Application", "Quit");
+	}
+</SCRIPT>

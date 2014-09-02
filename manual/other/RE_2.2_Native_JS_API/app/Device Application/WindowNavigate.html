@@ -1,0 +1,51 @@
+<html>   
+  <head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+      
+    <meta http-equiv="quitbutton" content="visibility: visible;"  />   
+  </head>   
+  
+  <body>
+  <h1>Window navigate</h1>
+  <input type="button" value="Minimize" onClick="Javascript:Minimize()"> <br>
+  <a HREF="Index.html">Back</a><br>
+  </body>
+  <script>
+  //var gen;
+   var gen = new ActiveXObject("PocketBrowser.Generic");
+  function Minimize()
+  {
+             
+             fireWindowNavigateEvent();
+             gen.invokeMETAFunction("Application","Minimize");
+  }
+ 
+  
+  function onWindowNavigate(state)
+  {
+        
+        alert(state);
+        
+        return;
+  }
+  function fireWindowNavigateEvent()
+  {
+        log("Entering fireWindowNavigateEvent() Using Motorola Suggested Code");
+        gen.invokeMETAFunction('Application', "ApplicationEvent:url('Javascript:onWindowNavigate('%s')')");
+       
+        log("Exiting fireWindowNavigateEvent()");
+  }
+  
+  function log(logMsg)
+  {
+       gen.Log(logMsg, 3);
+        
+  }
+    
+  
+  </script>
+</html>
+
+
+
+

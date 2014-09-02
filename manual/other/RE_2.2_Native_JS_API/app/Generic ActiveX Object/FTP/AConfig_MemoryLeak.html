@@ -1,0 +1,74 @@
+<HTML>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+<!--<BODY onload="OnTimer();">-->
+<META HTTP-Equiv="quitbutton" Content="visibility:visible">
+
+</HEAD>
+
+<BODY>
+<SCRIPT LANGUAGE="JavaScript">
+ var iCount = 0;
+try
+{
+var generic = new ActiveXObject("PocketBrowser.generic");
+}
+catch(err)
+{
+var genericPlugin = document.createElement('embed'); 
+genericPlugin.setAttribute('id',"embed1"); 
+genericPlugin.setAttribute('type',"application/x-wtg-legacy-generic"); 
+genericPlugin.setAttribute('hidden',"true"); 
+
+// Attach the plugin embed tags to the body 
+var theBody = document.getElementsByTagName('body')[0]; 
+theBody.appendChild(genericPlugin); 
+
+
+}
+    function OnTimer() 
+    {
+
+        iCount++;
+        if (iCount <= 50000) {
+            var strData = generic.WriteConfigSetting("STARTPAGE", "http://10.233.85.82/pb3.x/index.html","Menu");
+            var Ret = generic.ReadConfigSetting("STARTPAGE", "Menu");
+            
+        eval("var arrRet = "+Ret);
+//        for(var loop=0;loop < arrRet.length;loop++)
+//        {
+//          reg.innerHTML=arrRet[0];	
+//         }
+
+    	if(arrRet.length)
+        {
+           reg.innerHTML=arrRet[0];	
+      		
+    	}	
+//    	return "undefined";
+            
+            //reg.innerHTML = Ret;
+            nos.innerHTML = iCount;
+            captureLoop();
+
+        }
+    }
+
+    function captureLoop() {
+        //OnTimer(); 
+        setTimeout("OnTimer()", 5000);
+
+    }
+</SCRIPT>
+<br /><br /><br />
+<b>Set and Get Config Memory Leak using Timer 5</b>
+
+<DIV ID="reg">Get Registry</DIV>
+<div id="nos">X Value</div>
+<P><INPUT TYPE="button" VALUE="StartTest" ONCLICK="OnTimer();"></P>
+<P><INPUT TYPE="button" VALUE="Back" ONCLICK="location.href='./generic ActiveX Object.html'"></P>
+
+</BODY>
+</HTML>
+

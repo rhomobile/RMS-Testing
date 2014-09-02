@@ -1,0 +1,431 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+    <title>PB Generic ActiveX Object Test</title>
+<!--<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="expires" content="0">-->
+
+
+
+</head>
+<body>
+<script language=javascript>
+try
+{
+var generic = new ActiveXObject("PocketBrowser.Generic");
+}
+catch(err)
+{
+var GenericPlugin = document.createElement('embed'); 
+GenericPlugin.setAttribute('id',"embed1"); 
+GenericPlugin.setAttribute('type',"application/x-wtg-legacy-generic"); 
+GenericPlugin.setAttribute('hidden',"true"); 
+
+// Attach the plugin embed tags to the body 
+var theBody = document.getElementsByTagName('body')[0]; 
+theBody.appendChild(GenericPlugin); 
+
+
+}
+var strConnection = "My Connection";
+var strUsername = "";
+var strPassword = "";
+var strDomain = "";
+var validexitCode = "";
+
+function doConnect() {
+	Status.innerHTML = 'Connecting to ' + strConnection + ' ...';
+	generic.RasConnect(strConnection, strUsername, strPassword, strDomain);
+	var vStatus = generic.ConnectionStatus(strConnection);
+	if (vStatus == 8192)
+		Status.innerHTML = 'Connected.';
+	else if (vStatus == 8193)
+		Status.innerHTML = 'Connect failed.  Please disconnect.';
+	else
+		Status.innerHTML = "Connect error " + vStatus;
+	//Generic.RasDisconnect(strConnection)
+}
+
+function doDisconnect() {
+	Status.innerHTML = 'Disconnecting from ' + strConnection + ' ...';
+	generic.RasDisconnect(strConnection)
+	//Generic.RasConnect(strConnection, strUsername, strPassword, strDomain);
+	var vStatus = generic.ConnectionStatus(strConnection);
+	if (vStatus == -1)
+		Status.innerHTML = 'Disconnected.';
+	else
+		Status.innerHTML = "Disconnect error " + vStatus;
+}
+
+function doStatus() {
+	
+	var vStatus = generic.ConnectionStatus("My Connection");
+	if (vStatus == -1)
+		Status2.innerHTML = 'Status - Not connected (' + vStatus + ')';
+	else if (vStatus == 8192)
+		Status2.innerHTML = 'Status - Connected (' + vStatus + ')';
+	else if (vStatus == 8193)
+		Status2.innerHTML = 'Status - Disconnected (' + vStatus + ')';
+	else
+		Status2.innerHTML = 'Status - Error (' + vStatus + ')';
+}
+
+
+function imageName()
+{
+	var filePath=frm.txtimageName.value;
+	myDiv1.innerHTML='Return code was: ' + generic.LaunchProcessNonBlocking(filePath, '');
+	
+}
+
+function iName()
+{
+	var fPath=frm.txtiName.value;
+	myDiv1.innerHTML='Return code was: ' + generic.LaunchProcess(fPath, '');
+	//alert('Return code was: ' + generic.LaunchProcess(fPath, ''));
+}
+
+function imageName123()
+{
+	var filePath1=frm.txtimageName1.value;
+		validexitCode = generic.LaunchProcessNonBlocking(filePath1, '');
+	//alert('Return code was: ' + generic.LaunchProcessNonBlocking(filePath, ''));
+}
+
+function exitCode()
+{
+	for (var i=0; i < frm.group1.length; i++)
+   	{   
+      		if (frm.group1[i].checked)
+      		{
+      		    
+      			var sValue = frm.group1[i].value;
+      			
+      		}
+   	}	
+	
+	switch(sValue)
+	{
+		case 'Valid':
+		     myDiv1.innerHTML='Return code was: ' + generic.GetProcessExitCode(validexitCode);
+			
+			break;
+
+		case 'Invalid':
+		    var ivalidexitCode="AAAA"
+		    myDiv1.innerHTML='Return code was: ' + generic.GetProcessExitCode(ivalidexitCode);
+			break;
+
+		case 'Null':
+		    myDiv1.innerHTML='Return code was: ' + generic.GetProcessExitCode();
+			break;
+	}
+}
+
+function cProcess()
+{
+	for (var i=0; i < frm.group1.length; i++)
+   	{   
+      		if (frm.group1[i].checked)
+      		{
+      		    
+      			var selectedValue = frm.group1[i].value;
+      			
+      		}
+   	}	
+	switch(selectedValue)
+	{
+		case 'Valid':
+			//var validCode = generic.LaunchProcessNonBlocking('\\application\\RegEdit.exe', '');
+			//alert('Hello');
+			generic.CloseProcess(validexitCode);
+			//alert('Return code was: ' + generic.GetProcessExitCode(validCode));
+			break;
+
+		case 'Invalid':
+			//var invalidCode = generic.LaunchProcessNonBlocking('\\application\\RegEdit.exe', '');
+			var ivalidcode="AAAA";
+			generic.CloseProcess(ivalidcode);
+			//alert('Return code was: ' + generic.GetProcessExitCode(invalidCode));
+			break;
+
+		case 'Null':
+			//var nullCode = generic.LaunchProcessNonBlocking('\\application\\RegEdit.exe', '');
+			generic.CloseProcess();
+			//alert('Return code was: ' + generic.GetProcessExitCode(nullCode));
+			break;
+	}
+}
+
+function waitPros()
+{
+		var pPath = frm.txtprocessPath.value;
+		var ptimeout = frm.txttimeout.value;
+		var hProcess = generic.LaunchProcessNonBlocking(pPath, '');
+   		var bRetVal = generic.WaitProcess(hProcess, ptimeout);
+   		myDiv1.innerHTML="return vale:"+bRetVal;
+		//alert(bRetVal);
+
+}
+
+function hourGlass()
+{
+	for (var i=0; i < frm.group1.length; i++)
+   	{   
+      		if (frm.group1[i].checked)
+      		{
+      		    
+      			var glassValue = frm.group1[i].value;
+      			
+      		}
+   	}	
+	switch(glassValue)
+	{
+		case 'Show':
+			generic.ShowHourglass();
+			break;
+
+		case 'Hide':	
+			generic.HideHourglass();
+			break;
+
+	}
+}
+
+function invoke()
+{
+	for (var i=0; i < frm.group1.length; i++)
+   	{   
+      		if (frm.group1[i].checked)
+      		{
+      		    
+      			var invokeValue = frm.group1[i].value;
+      			
+      		}
+   	}	
+	switch(invokeValue)
+	{
+		case 'Method':
+			generic.InvokeMETAFunction('imager', 'Enabled');
+			break;
+
+		case 'Property':
+			generic.InvokeMETAFunction('Signal', 'Visibility:Visible');
+			break;
+
+		case 'M Property':
+			generic.InvokeMETAFunction('Battery', 'Left:50; Top:50; color:#FF0000; visibility:visible');
+			break;
+
+		case 'M Invoke':
+			generic.InvokeMETAFunction('Signal', 'visibility:visible');
+			generic.InvokeMETAFunction('Signal', 'Top:150');
+			generic.InvokeMETAFunction('Signal', 'Left:150');
+			break;	
+			
+		case 'Invalid':
+			generic.InvokeMETAFunction('Signal', '');
+			break;
+			
+		case 'Hide':
+			generic.InvokeMETAFunction('imager', 'Disabled');
+			break;
+
+	}
+}
+
+function playfile()
+{
+	var pathfile = frm.txtwavfile.value;
+	generic.PlayWave(pathfile, 16);
+}
+
+function play()
+{
+
+	var pWav = frm.txtwavPath.value;
+
+	for (var i=0; i < frm.group1.length; i++)
+   	{   
+      		if (frm.group1[i].checked)
+      		{
+      		    
+      			var playValue = frm.group1[i].value;
+      			
+      		}
+   	}	
+	switch(playValue)
+	{
+		case 'Zero':
+			var RetVal =generic.PlayWave(pWav, 0);
+			myDiv2.innerHTML="Zero flag result is "+RetVal;
+			break;
+
+		case 'One':
+			var RetVal =generic.PlayWave(pWav, 1);
+			myDiv2.innerHTML="one flag result is "+RetVal;
+			break;
+
+		case 'Two':
+			var RetVal =generic.PlayWave(pWav, 2);
+			myDiv2.innerHTML="two flag result is "+RetVal;
+			break;
+
+		case 'Four':
+			var RetVal =generic.PlayWave(pWav, 4);
+			myDiv2.innerHTML="four flag result is "+RetVal;
+			break;
+		case 'Eight':
+			var RetVal =generic.PlayWave(pWav, 8);
+			myDiv2.innerHTML="Eight flag result is "+RetVal;
+			
+			break;
+
+		case 'Ten':
+			var RetVal =generic.PlayWave(pWav, 16);
+			myDiv2.innerHTML="ten flag result is "+RetVal;
+			break;
+			
+	    case 'Null':
+			var RetVal =generic.PlayWave(pWav);
+			myDiv2.innerHTML="empty flag result is "+RetVal;
+			break;
+			
+		case 'Invalid':
+			var RetVal =generic.PlayWave(pWav,20 );
+			myDiv2.innerHTML="twenty invalid flag result is "+RetVal;
+			break;
+
+
+	}
+}
+
+function uuidmethod()
+{
+    myDiv2.innerHTML=generic.UUID();
+	//alert(generic.UUID);
+}
+
+function OEMInfomethod()
+{
+    myDiv2.innerHTML=generic.OEMInfo();
+	//alert(generic.OEMInfo);
+}
+
+</script>
+<BR><BR><BR>
+<div id="myDiv1">Message</div>
+
+<form id="frm" action="">
+<hr>
+<!-- id="playfile" -->
+LaunchProcessNonBlocking:</td><td><Textarea id="txtimageName"cols="28" rows="1">\Application\MemoryCheck.exe</Textarea><BR>
+<input type=button onclick="imageName();" value="NonBlocking">
+<BR><BR>
+
+
+LaunchProcess:	</td><td><Textarea id="txtiName"cols="28" rows="1">\Application\MemoryCheck.exe</Textarea><BR>
+<input type=button onclick="iName();" value="Blocking">
+<BR>
+<hr>
+<BR>
+Close & Exit Process:	</td><td><Textarea id="txtimageName1"cols="28" rows="1">\Application\MemoryCheck.exe</Textarea><BR>
+<input type=button onclick="imageName123();" value="Close & Exit">
+<br><br>
+GetProcessExitCode:	
+<input type="radio" name="group1" value="Valid">Valid
+<input type="radio" name="group1" value="Invalid">Invalid
+<input type="radio" name="group1" value="Null">Null
+<br>
+<input type="button" onclick="exitCode();" value="GetProcessExitCode method">
+<BR><BR>
+
+CloseProcess:
+<input type="radio" name="group1" value="Valid">Valid
+<input type="radio" name="group1" value="Invalid">Invalid
+<input type="radio" name="group1" value="Null">Null
+<br>
+<input type="button" onclick="cProcess();" value="close process method">
+<BR>
+<hr>
+<BR>
+<hr>
+<!-- id="waitPros" -->
+ProcessPath:	</td><td><Textarea id="txtprocessPath"cols="21" rows="1">\Application\MemoryCheck.exe</Textarea><BR>
+Timeout:	</td><td><Textarea id="txttimeout"cols="3" rows="1"></Textarea><br>
+<input type=button  onclick="Javascript:waitPros();" value="WaitProcess">
+<BR>
+<hr>
+<BR>
+<div id="myDiv2">Message</div>
+
+
+HourGlass:	
+<input type="radio" name="group1" value="Show">Show
+<input type="radio" name="group1" value="Hide">Hide
+<input type="radio" name="group1" value="Null">Null
+<br>
+<input type="button" onclick="hourGlass();" value="Hour glass method">
+<BR>
+<BR>
+
+InvokeMetaTag:	
+<input type="radio" name="group1" value="Method">Method
+<input type="radio" name="group1" value="Property">Property
+<input type="radio" name="group1" value="M Property">M Property
+<input type="radio" name="group1" value="M Invoke">M Invoke
+<input type="radio" name="group1" value="Invalid">Invalid
+<input type="radio" name="group1" value="Hide">HideImager
+<br>
+<input type="button" onclick="invoke();" value="invokeMethod">
+
+
+<BR><BR>
+
+<!-- id="playfile" -->
+<!--WaveFile:	</td><td><Textarea id="txtwavfile"cols="21" rows="1">\Windows\alarm5.wav</Textarea>-->
+<input type=text name="txtwavfile" id="txtwavfile" value="\Windows\alarm5.wav" />
+<INPUT type=button onclick="Javascript:playfile();" value="PlayWav">
+<BR><BR>
+
+WaveFilePath:	</td><td><Textarea id="txtwavPath"cols="21" rows="1">\Windows\alarm5.wav</Textarea><BR>
+PlayWave:	
+<input type="radio" name="group1" value="Zero">Zero
+<input type="radio" name="group1" value="One">One
+<input type="radio" name="group1" value="Two">Two
+<input type="radio" name="group1" value="Four">Four
+<input type="radio" name="group1" value="Eight">Eight
+<input type="radio" name="group1" value="Ten">Ten
+<input type="radio" name="group1" value="Null">Empty
+<input type="radio" name="group1" value="Invalid">Invalid
+<br>
+<input type="button" onclick="play();" value="PlayWave">
+<BR><BR>
+
+<!-- id="uuidmethod" -->
+<input type="button" onclick="Javascript:uuidmethod();" value="UUID">
+<BR><BR>
+
+<!-- id="OEMInfomethod" -->
+<input type="button" onclick="Javascript:OEMInfomethod();" value="OEMInfo">
+<BR><BR>
+
+<div id="Status">Press connect to begin</div>
+<p><input type="button" value="&nbsp;&nbsp;Connect&nbsp;&nbsp;" onclick="doConnect();"></p>
+<p><input type="button" value="Disconnect" onclick="doDisconnect();"></p>
+<p><input type="button" value="&nbsp;&nbsp;&nbsp;Status&nbsp;&nbsp;&nbsp;" onclick="doStatus();"></P>
+<div id="Status2"> </div>
+<BR>
+
+<META HTTP-Equiv="quitbutton" Content="visibility:Visible">
+<META HTTP-Equiv="backbutton" Content="visibility:Visible">
+<META HTTP-Equiv="Reloadbutton" Content="visibility:Visible">
+<META HTTP-Equiv="Minimizebutton" Content="visibility:Hidden">
+<A HREF="./Generic ActiveX Object.html">Back</A>
+
+</form>
+</body>
+</html>
+
+

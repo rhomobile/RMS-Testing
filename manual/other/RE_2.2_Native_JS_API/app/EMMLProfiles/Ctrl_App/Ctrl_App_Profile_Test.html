@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+    <title>Untitled Page</title>
+<script language="javascript" type="text/javascript">
+function getFromSearch() {
+    var x = 0
+    mySearch = location.search.substr(1).split("&")
+    //for (x=0;x<=mySearch.length;x++) {
+    //eval("document.forms.myNewForm."+mySearch[x])
+    //document.myDiv.InnerHTML = mySearch[0];
+    document.frm22.data.value = mySearch[0];
+        //alert(mySearch[x]);
+    //}
+    
+}
+</script>
+</head>
+<body onload="getFromSearch();">
+<div id="myDiv"></div>
+<form name="frm22" id="frm22">
+<input type=text id="data" />
+</form>
+</body>
+</html>

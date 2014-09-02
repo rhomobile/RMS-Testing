@@ -1,0 +1,69 @@
+<html>
+<br><br>
+<P><INPUT TYPE="button" VALUE="starthttpvd" ONCLICK="onStarthttpvd();">
+<INPUT TYPE="button" VALUE="starthttpad" ONCLICK="onStarthttpad();"><br><br>
+<INPUT TYPE="button" VALUE="startlocalvd" ONCLICK="onStartlocalvd();">
+<INPUT TYPE="button" VALUE="startlocalad" ONCLICK="onStartlocalad();"><br><br>
+<INPUT TYPE="button" VALUE="setvdTempfilename" ONCLICK="onStartlocalvdTemp();">
+<INPUT TYPE="button" VALUE="setadTempfilename" ONCLICK="onStartlocaladTemp();"><br><br>
+<INPUT TYPE="button" VALUE="Typevd" ONCLICK="onTypevd();">
+<INPUT TYPE="button" VALUE="Typead" ONCLICK="onTypead();"><br><br>
+<INPUT TYPE="button" VALUE="start" ONCLICK="onStart();">
+<INPUT TYPE="button" VALUE="stop" ONCLICK="onStop();"><br><br>
+</P>
+
+</html>
+
+<script language="javascript">
+   function onStarthttpvd()
+   {
+	  mediaPlayer.filename = "url('http://10.233.85.82:80/NEON/ReceivedFiles/video/video.mp4');"
+	  mediaPlayer.type = 'video';
+      mediaPlayer.start();
+   }
+    function onStarthttpad()
+   {
+	  mediaPlayer.filename = "url('http://10.233.85.82:80/NEON/ReceivedFiles/audio/audio1.wav');"
+	  mediaPlayer.type = 'audio';
+      mediaPlayer.start();
+   }
+    function onStartlocalvd()
+   {
+	  mediaPlayer.filename = "url('file://\\Application\\video.mp4');"
+	  mediaPlayer.type = 'video';
+      mediaPlayer.start();
+   }
+    function onStartlocalad()
+   {
+	  mediaPlayer.filename = "url('file://\\Application\\audio1.wav');"
+	  mediaPlayer.type = 'audio';
+      mediaPlayer.start();
+   }
+       function onStartlocalvdTemp()
+   {
+	  mediaPlayer.filename = "url('file://\\Temp\\video.mp4');"
+   }
+    function onStartlocaladTemp()
+   {
+	  mediaPlayer.filename = "url('file://\\Temp\\audio1.wav');"
+   }
+   function onStop()
+   {
+      mediaPlayer.stop();
+   }
+      function onStart()
+   {
+      mediaPlayer.start();
+   }
+      function onTypevd()
+   {
+      mediaPlayer.type = 'video';
+   }
+      function onTypead()
+   {
+     mediaPlayer.type = 'audio';
+   }
+   
+</script>
+
+ 

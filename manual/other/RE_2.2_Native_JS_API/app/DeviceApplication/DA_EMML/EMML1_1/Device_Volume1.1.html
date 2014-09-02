@@ -1,0 +1,31 @@
+<HTML>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+<meta http-equiv="Volume" content="SetVolume:0x0000">
+<META HTTP-EQUIV="OnKey0x0d" content="javascript:doTest();">
+ <SCRIPT>
+ var Objgeneric = new ActiveXObject("PocketBrowser.Generic"); 
+   function doTest()
+   {
+   Objgeneric.InvokeMETAFunction("volume","setVolume:0xFFFF");
+      //volume.setVolume ='0xFFFF' ; 
+   }
+   
+   function playFile()
+   {
+   var path=myText.value;
+   alert(path);
+   Objgeneric.PlayWave(path, 1);
+
+   }
+</SCRIPT>
+
+<BODY>
+   <br /><br />   <br /><br />
+<p>Volume with 0.Press enter to make it Max again</p>
+<br><A HREF="./EMML1_1_index.html">Back</A>
+<textarea id="myText" name="myText">\Application\Alarm5.wav</textarea><br />
+<P><BR><INPUT TYPE="button" VALUE="PlayWave" ONCLICK="playFile();"></P>
+</BODY>
+</HTML>

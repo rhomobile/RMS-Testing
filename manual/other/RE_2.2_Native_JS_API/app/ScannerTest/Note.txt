@@ -1,0 +1,1 @@
+Copy this Scanner.xml file in application folder of device.

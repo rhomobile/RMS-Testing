@@ -1,0 +1,97 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+<META HTTP-Equiv="quitbutton" Content="Top:10; Left:10; Visibility:Visible">
+
+</head>
+<body>
+<br /><br />
+<div id="myDiv">Message</div>
+<P>Decimal 268 Set Format Path</P>
+<P><INPUT TYPE="button" VALUE="Set format path to Apps embed" ONCLICK="OnTest1();">
+<P><INPUT TYPE="button" VALUE="Set format path to My Documents embed" ONCLICK="OnTest2();">
+<P><INPUT TYPE="button" VALUE="Set format path to Apps" ONCLICK="OnTest3();">
+<P><INPUT TYPE="button" VALUE="Set format path to My Documents" ONCLICK="OnTest4();">
+<P><INPUT TYPE="button" VALUE="Set format path to Trial one" ONCLICK="OnTest5();">
+<P><INPUT TYPE="button" VALUE="Test 14" ONCLICK="location.href='./14.html'"></P>
+<P><INPUT TYPE="button" VALUE="Back" ONCLICK="location.href='./APD.html'"></P>
+
+</body>
+</html>
+
+<SCRIPT LANGAUGE="JavaScript">
+
+var apd = new ActiveXObject("PocketBrowser.NarrowBand");
+
+
+function OnTest1()
+{
+	
+	//var printerID = '0000C53';  //Cameo2=0000C22, QL320=0000C53, QL220=0000C54, Encore3=0000C33 '0000C22';
+	//var printerID = 'BC53:1|'+ '00037A0C9B41';
+	var printerID="BC53:1|00037A032772";
+	apd.PSExternal(261, printerID);
+	apd.PSExternal(266, "$$[CMD:010D,\\Application\\APD\\Formats]$$");
+    myDiv.innerHTML="Set format path as My Documents";
+    myDiv.innerHTML=apd.PSExternalEx(256, "Format1");
+}
+function OnTest2()
+{
+	
+	//var printerID = '0000C53';  //Cameo2=0000C22, QL320=0000C53, QL220=0000C54, Encore3=0000C33 '0000C22';
+	//var printerID = 'BC53:1|'+ '00037A0C9B41';
+	var printerID="BC53:1|00037A032772";
+	apd.PSExternal(261, printerID);
+	apd.PSExternal(266, "$$[CMD:010D,\\My Documents\\APD\\Formats]$$");
+    myDiv.innerHTML="Set format path as My Documents";
+    myDiv.innerHTML=apd.PSExternalEx(256, "Format1");
+   
+}
+
+
+ function OnTest3()
+{
+	
+	//var printerID = '0000C53';  //Cameo2=0000C22, QL320=0000C53, QL220=0000C54, Encore3=0000C33 '0000C22';
+	//var printerID = 'BC53:1|'+ '00037A0C9B41';
+	var printerID="BC53:1|00037A032772";
+	var myFormatPath="\\Application\\APD\\Formats";
+	apd.PSExternal(261, printerID);
+    myDiv.innerHTML="Set format path as Application"+apd.PSExternalEx(268, myFormatPath);
+    myDiv.innerHTML=apd.PSExternalEx(256, "Format1");
+    
+ }
+
+ function OnTest4()
+{
+	
+	//var printerID = '0000C53';  //Cameo2=0000C22, QL320=0000C53, QL220=0000C54, Encore3=0000C33 '0000C22';
+	//var printerID = 'BC53:1|'+ '00037A0C9B41';
+	var printerID="BC53:1|00037A032772";
+	var myFormatPath="\\My Documents\\APD\\Formats";
+	apd.PSExternal(261, printerID);
+    myDiv.innerHTML="Set format path as My Documents"+apd.PSExternalEx(268, myFormatPath);
+    myDiv.innerHTML=apd.PSExternalEx(256, "Format1");
+    
+ }
+ 
+ function OnTest5()
+{
+	
+	//var printerID = '0000C53';  //Cameo2=0000C22, QL320=0000C53, QL220=0000C54, Encore3=0000C33 '0000C22';
+	//var printerID = 'BC53:1|'+ '00037A0C9B41';
+	var printerID="BC53:1|00037A032772";
+	//var myFormatPath="File://\\My Documents\\APD\\Formats"; //not working
+	var myFormatPath="\My Documents\APD\Formats"; //not working
+	apd.PSExternal(261, printerID);
+    myDiv.innerHTML="Set format path as My Documents"+apd.PSExternalEx(268, myFormatPath);
+    myDiv.innerHTML=apd.PSExternalEx(256, "Format1");
+    
+ }
+ 
+
+ 
+</SCRIPT>
+
+

@@ -1,0 +1,64 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+
+<META HTTP-Equiv="EMMLProfile" Content="name:mySignature;import:url('Signature.emmp');">
+<META HTTP-Equiv="EMMLProfile" Content="apply:mySignature.Signatureftp;">
+<!--<META HTTP-Equiv="SignatureCapture" content="Username:ftpadmin;Password:ftpadmin; destination:url('ftp://10.233.85.82:21/Sig5.bmp')">
+<META HTTP-Equiv="SignatureCapture" content="SignatureSaveEvent:url('Javascript:onCaptured('%s');')">-->
+
+<!--<META HTTP-Equiv="SignatureCapture"Content="left:30;top:90;height:100;bgcolor:#FFFF00;idth:200;border:visible;Pencolor:#0000FF;Penwidth:2;visibility:visible;Username:ftpadmin;Password:ftpadmin; SignatureSaveEvent:url('Javascript:onCaptured('%s');');destination:url('ftp://10.233.85.82:21/Sig6.bmp')">-->
+
+<SCRIPT language="javascript">
+    var objGeneric = new ActiveXObject("PocketBrowser.Generic");
+
+    function doCapture() {
+        //alert("Capture");
+        objGeneric.InvokeMETAFunction('SignatureCapture', 'capture');
+    }
+
+    function doClear() {
+      
+        objGeneric.InvokeMETAFunction('SignatureCapture', 'clear');
+    }
+
+    function onCaptured(data) 
+    {
+        alert(data);
+    }
+
+    function Quit() {
+        objGeneric.InvokeMETAFunction("Application", "Quit");
+    }
+
+    function clearProfile() 
+    {
+        objGeneric.InvokeMETAFunction('EMMLProfile', 'clear:mySignature');
+    }
+
+
+</SCRIPT>
+</head>
+<body>
+<h4>Named Signature EMML Profile Test</h4>
+<h4>Signature_FTP is Enabled and this should <B>be</B> persist across pages within the same instance of Pocket Browser 3.0.</h4>
+<h4>Click on Capture button to capture signature.</h4>
+<p>Send the bmp to ftp</p>
+<BR><BR><BR><BR>
+<P><INPUT TYPE="button" VALUE="Capture" ONCLICK="doCapture();"></P>
+<P><INPUT TYPE="button" VALUE="ClearCapureArea" ONCLICK="doClear();"></P>
+<p><input type=button value="Clear Imported Profile" onclick="clearProfile();"></p>
+<P><INPUT TYPE="button" VALUE="Quit" ONCLICK="Quit();"></P>
+<BR>
+<h3>Browse to another page to check for EMML profile persistance.</h3>
+<h4><a href="Persistant_Signature_Test.html">Click here to go to another page.</a></h4>
+<hr />
+<a href="../EMMLProfilesIndex.html">Back to EMML Profile Index</a>
+</body>
+</html>
+
+
+
+
+

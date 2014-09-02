@@ -1,0 +1,135 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+    <title>PB Generic Registry Test</title>
+
+<meta name="mobileoptimized" content="0" />
+</head>
+<script language=javascript>
+
+var objGeneric = new ActiveXObject("PocketBrowser.Generic");
+
+function Quit()
+{
+    objGeneric.InvokeMETAFunction("Application", "Quit"); 
+}
+
+
+function setConfig()
+{
+	var configsetting = frm.txtSetting.value;
+	//alert(configsetting);
+
+	var configValue = frm.txtValue.value;
+	//alert(configValue);
+	
+	var configAppName = frm.txtAppName.value;
+	//alert(configAppName);
+	
+	//objGeneric.WriteConfigSetting(configsetting, configValue, configAppName);
+
+	var strData = objGeneric.WriteConfigSetting(configsetting, configValue,configAppName);
+	alert(strData);
+}
+
+function getConfig()
+{
+	var configsetting = frm.txtSetting.value;
+	
+	var configAppName = frm.txtAppName.value;
+	
+	//var Ret = objGeneric.ReadConfigSetting(configsetting, configAppName);
+	var Ret = objGeneric.ReadConfigSetting(configsetting,configAppName);	
+	eval("var arrRet = "+Ret);
+   	if(arrRet.length)
+	alert(arrRet.length);
+	{
+    		alert(arrRet[0]);
+   	}
+
+
+}
+
+function setUserConfig()
+{
+	var configUsersetting = frm.txtUserSetting.value;
+	//alert(configUsersetting);
+
+	var configUserValue = frm.txtUserValue.value;
+	//alert(configUserValue);
+	
+	
+	
+	var strData1 = objGeneric.WriteUserSetting(configUsersetting, configUserValue);
+	//alert(strData1);
+}
+
+function getUserConfig()
+{
+	var configUsersetting = frm.txtUserSetting.value;
+	//alert(configUsersetting);
+	
+	var Ret1 = objGeneric.ReadUserSetting(configUsersetting);	
+	alert(Ret1);
+
+}
+
+
+</script>
+
+<body>
+
+<form id="frm" action="">
+<INPUT align="center" type="button" value="Quit" onclick="Quit();">
+
+<hr>
+<table>
+<tr>
+	<td>Setting</td><td><Textarea id="txtSetting"cols="21" rows="1">SCROLLBARSENABLED</Textarea></td>
+	</tr>
+<tr>
+	<td>Value</td><td><Textarea id="txtValue"cols="21" rows="1">0</Textarea></td>
+	</tr>
+<tr>
+	<td>AppName</td><td><Textarea id="txtAppName"cols="21" rows="1">Menu</Textarea></td>
+	</tr>
+
+
+
+</table>
+
+<br>
+<!-- id="setReg" -->
+    	<input type=button onclick="Javascript:setConfig();" value="Set Config">
+<!-- id="getReg" -->
+	<input type=button onclick="Javascript:getConfig();" value="Get Config">
+<hr>
+
+<BR>
+
+<hr>
+<table>
+<tr>
+	<td>Setting</td><td><Textarea id="txtUserSetting"cols="21" rows="1">BgColor</Textarea></td>
+	</tr>
+<tr>
+	<td>Value</td><td><Textarea id="txtUserValue"cols="21" rows="1">red</Textarea></td>
+	</tr>
+</table>
+<br>
+<!-- id="setReg" -->
+    	<input type=button onclick="Javascript:setUserConfig();" value="Set User">
+<!-- id="getReg" -->
+	<input type=button onclick="Javascript:getUserConfig();" value="Get User">
+
+<hr>
+<A HREF="./Generic ActiveX Object.html">Back</A>
+
+<META HTTP-Equiv="quitbutton" Content="visibility:visible">
+<META HTTP-Equiv="quitbutton" Content="Left:10">
+<META HTTP-Equiv="quitbutton" Content="Top:10">
+
+</form>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+  
+  <script type="text/javascript">
+  //var generic = new ActiveXObject("PocketBrowser.generic");
+
+  function starttest() 
+   {
+      
+         generic.InvokeMETAFunction('scanner', 'start');
+         //setTimeout("stoptest()", 1000);
+         
+        
+  }
+  
+  function stoptest()
+  {
+     generic.InvokeMETAFunction('scanner', 'stop');
+     setTimeout("starttest()", 1000);
+  
+  }
+
+  function setEnumScannerTimer()
+   {
+      setTimeout("onScannerEnable()", 3000);
+     
+  }
+  function onScannerEnable() 
+  {
+      generic.InvokeMETAFunction('scanner', 'disabled');
+      generic.InvokeMETAFunction('scanner', 'enabled:SCN2');
+      generic.InvokeMETAFunction("scanner", "DecodeEvent:url('http://10.233.85.82/NEON/Scanner/AndroidScanner/Stress_1DContinuousToggle.html')");
+      starttest();
+      
+  }
+    
+    function Quit()
+    {
+	generic.InvokeMETAFunction("Application", "Quit");
+    }
+    
+ </script>
+</head>
+<body onload="setEnumScannerTimer();">
+ 2D Scanner continuous Enable/Disable Stress Test 
+<br /><br /><div id="nos">X Value</div>
+<P><INPUT TYPE="button" VALUE="Back" ONCLICK="location.href='./Scanner.html'">&nbsp;&nbsp;&nbsp;
+<INPUT TYPE="button" VALUE="Quit" ONCLICK="Quit();"></P>
+
+
+
+</body>
+</html>

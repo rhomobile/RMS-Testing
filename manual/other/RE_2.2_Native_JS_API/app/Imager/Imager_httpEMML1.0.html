@@ -1,0 +1,60 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+
+
+<META HTTP-Equiv="imager" Content="left:120">
+<META HTTP-Equiv="imager" Content="top:30">
+<META HTTP-Equiv="imager" Content="height:70">
+<META HTTP-Equiv="imager" Content="width:100">
+<META HTTP-Equiv="imager" Content="Destination:url('http://10.233.85.82/NEON/ReceivedFiles/Upload.aspx')">
+<META HTTP-Equiv="imager" Content="imagerevent:url('javascript:myevent('%s');');">
+<META HTTP-Equiv="imager" Content="enable">
+
+
+
+
+<SCRIPT language="javascript">
+var generic = new ActiveXObject("PocketBrowser.Generic");
+	
+function doCapture()
+{
+	generic.InvokeMETAFunction('imager', 'capture');
+}
+
+function doDisable()
+{
+	generic.InvokeMETAFunction('imager', 'disable');
+}
+ function myevent(response) {
+        myResponse.innerHTML="response:- "+response;
+
+    }
+</SCRIPT>
+
+
+
+</head>
+<body>
+
+<p>Send the Image to HTTP through EMML1.0 tags</p>
+
+left:120
+top:30
+height:70
+width:100
+Destination:url('http://10.233.85.82/NEON/ReceivedFiles/Upload.aspx')
+imagerevent:url('javascript:myevent('%s');');
+enable
+<BR><BR><BR><BR><BR><BR><BR>
+<P><INPUT TYPE="button" VALUE="Capture" ONCLICK="doCapture();"></P>
+<P><INPUT TYPE="button" VALUE="Disable" ONCLICK="doDisable();"></P>
+<P><INPUT TYPE="button" VALUE="Back" ONCLICK="location.href='Imager_Index.html'"></P>
+<div id="myResponse">EventResponse:</div><BR>
+</body>
+</html>
+
+
+
+

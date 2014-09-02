@@ -1,0 +1,62 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+<META HTTP-Equiv="EMMLProfile" Content="source:url('../../../EMMLProfiles/Indicators/Indicators.emmp'); import:myIndicators;">
+<META HTTP-Equiv="EMMLProfile" Content="apply:myIndicators.Battery;">
+<META HTTP-Equiv="EMMLProfile" Content="apply:myIndicators.Signal;">
+
+<META HTTP-Equiv="battery" Content="BatteryEvent:uri(Javascript:OnBattery('%s','%s','%s')">
+<META HTTP-Equiv="signal" Content="signalevent:uri(Javascript:OnSignal('%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s')">
+
+
+
+
+</head>
+<body>
+<P><BR></P>
+<h1>Named Indicators EMML Profile Test</h1>
+<h2>Named Indicators profile is imported and applied. this should <B>not be</B> persist across pages after clear profiles.</h2>
+
+
+<div id="bat">Battery readings should appear here</div><br /><br />
+<div ID="sig">Signal details should appear here</div><br /><br /><br /><br />
+
+
+<input type=button value="Clear Imported Profile" onclick="clearProfile();">
+<h3>Browse to another page to check for EMML profile persistance.</h3>
+<h4><a href="Persistant_Indicators_Test.html">Click here to go to another page.</a></h4>
+<hr />
+<a href="../EMMLProfilesIndex.html">Back to EMML Profile Index</a>
+
+
+</body>
+</html>
+
+
+<SCRIPT LANGUAGE="JavaScript">
+function OnBattery(AC, main, backup)
+	{
+		bat.innerHTML = "AC: " + AC + "\<BR>main:" + main + "\<BR>backup: " + backup;
+		return;
+}
+
+function OnSignal(signal, ESSID, MAC, AdapterName, DHCPServer, DHCPStatic, Gateway, IPAddress, RSSI, SubnetMask, Wins) {
+    sig.innerHTML = "Signal: " + signal
+								+ "<BR>ESSID:" + ESSID
+								+ "<BR>MAC: " + MAC
+								+ "<BR>AdapterName: " + AdapterName
+								+ "<BR>DHCPServer: " + DHCPServer
+								+ "<BR>DHCPStatic: " + DHCPStatic
+								+ "<BR>Gateway: " + Gateway
+								+ "<BR>IPAddress: " + IPAddress
+								+ "<BR>RSSI: " + RSSI
+								+ "<BR>SubnetMask: " + SubnetMask
+								+ "<BR>Wins: " + Wins
+    return;
+}
+
+function clearProfile() {
+    Generic.InvokeMETAFunction('EMMLProfile', 'clear');
+}
+</SCRIPT>

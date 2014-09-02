@@ -1,0 +1,28 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+<script type="text/javascript">
+var myWindow;
+function openWin()
+{
+myWindow=window.open('','','width=200,height=100');
+myWindow.document.write("<p>This is 'myWindow'</p>");
+myWindow.focus();
+}
+
+function blurWin()
+{
+myWindow.blur();
+}
+
+</script>
+</head>
+<body>
+
+<input type="button" value="Open window" onclick="openWin()" />
+<input type="button" value="Blur window" onclick="blurWin()" />
+
+
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+<!--<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="expires" content="0">-->
+
+<meta http-equiv="Application" content="VersionEvent:url('javascript:fnVerJSON(%json);');" />
+<TITLE>Application Tests</TITLE>
+</head>
+<body>
+<script type="text/javascript">
+var generic = new ActiveXObject("PocketBrowser.Generic");
+  
+	
+   function fnVerJSON(jsonObject)
+	{
+
+		var theOutput = "<B>Product Version:</b> " + jsonObject.productVersion + "<P>";
+		theOutput = theOutput + "<b>Hot Fixes:</b><P>";
+		for (var i=0; i<jsonObject.hotFixes.length; i = i + 1)
+		{
+			theOutput = theOutput + "  Hot Fix: " + jsonObject.hotFixes[i] + "<BR>";
+		}
+		theOutput = theOutput + "<P>";
+		theOutput = theOutput + "<b>Installed Components:</b><P>";
+		for (var j=0; j<jsonObject.componentVersions.length; j = j + 1)
+		{
+			theOutput = theOutput + "  Module: " + jsonObject.componentVersions[j].module + ', Version: ' + jsonObject.componentVersions[j].version + "<BR>";
+		}
+		outputDiv.innerHTML = theOutput;
+	}
+	
+  function callmethod()
+  {
+  generic.InvokeMETAFunction("Application", "GetVersion");
+
+  }
+	
+  </script>
+
+<H1>Version Tests</H1>
+Static Version info Test using  json
+<div id="outputDiv"></div>
+<form  name="myForm" id="myForm" action="" >
+<P><br><br><br><br><br><br><br><br>
+<INPUT align="center" type="button" value="Getversion" onclick="callmethod();"><br><br>
+<A HREF="VersionIndex.html">Go to Version index Main Page</A><br />
+</body>
+</html>
+

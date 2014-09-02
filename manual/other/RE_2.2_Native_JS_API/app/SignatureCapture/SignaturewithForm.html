@@ -1,0 +1,57 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+<!--<META HTTP-Equiv="SignatureCapture"Content="left:10;top:10;height:20;width:20;visibility:visible">-->
+<script language="javascript">
+function selectVisibility()
+{
+	var sltVisibility=frm.sigVisibility.selectedIndex;
+	selectedVisibility = frm.sigVisibility.options[sltVisibility].value;
+	switch(selectedVisibility)
+	{
+		case 'Visible':
+           
+			generic.InvokeMETAFunction('SignatureCapture', 'left:10;top:10;height:20;width:20;BGColor:#FF0000;Visibility:Visible');
+			break;
+
+		case 'Hidden':
+
+			generic.InvokeMETAFunction('SignatureCapture', 'Visibility:Hidden');
+			break;
+
+		
+		case 'Address':
+
+			generic.InvokeMETAFunction('SignatureCapture', 'Visibility:Address');
+			break;
+	}
+}
+function doHidden()
+{
+generic.InvokeMETAFunction('SignatureCapture', 'Visibility:Hidden');
+
+}
+
+</script>
+</head>
+<body>
+<form id="frm" action="">
+<br /><br /><br />
+Select Visibility  <select name="sigVisibility" id="sigVisibility" onChange="selectVisibility();">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="Visible">Visible</option>
+<option value="Hidden">Hidden</option>
+<option value="Address">Address</option>
+</select><br /><br />
+<Textarea id="topPosition" cols="10" rows="1">20</Textarea><br /><br />
+<P><INPUT TYPE="button" VALUE="Hidden" ONCLICK="doHidden();"></P>
+<P><INPUT TYPE="button" VALUE="Back" ONCLICK="location.href='SignatureCapture.html'"></P>
+</body>
+</form>
+</html>
+
+
+
+
+

@@ -1,0 +1,24 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+<title>clear Interval</title>
+</head>
+<body>
+
+<input type="text" id="clock" />
+<script type="text/javascript">
+var int=self.setInterval("clock()",1000);
+function clock()
+{
+var d=new Date();
+var t=d.toLocaleTimeString();
+document.getElementById("clock").value=t;
+}
+</script>
+
+<button onclick="int=window.clearInterval(int)">Stop</button>
+
+</body>
+</html>
+

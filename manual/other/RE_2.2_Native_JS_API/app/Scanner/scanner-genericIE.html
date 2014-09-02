@@ -1,0 +1,1014 @@
+<HTML>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="expires" content="0">
+<meta http-equiv="Scanner" content="All_Decoders:Enabled;Enabled">
+<meta http-equiv="Scanner" content="DecodeEvent:url('Javascript:onDecodeEventJSON('%s', '%s', '%s', '%s', '%s', '%s');')">
+<!--<meta http-equiv="Scanner" content="EnumSupportedDecodersEvent:url('Javascript:onSupportedDecoders(%json);')">
+<meta http-equiv="Scanner" content="BluetoothStatusEvent:url('Javascript:onBluetoothEvent(%json);')">-->
+
+<TITLE>Scanner Tests</TITLE>
+<style>
+	a {text-decoration:none}
+</style>
+</HEAD>
+
+<BODY>
+  <script type="text/javascript">
+var generic1 = new ActiveXObject("PocketBrowser.Generic");
+	function toggleDiv(theDiv)
+	{
+		theDiv.style.display = theDiv.style.display=='block' ? 'none' : 'block';
+	}
+  
+	function enumerateScannersViaJSON()
+	{
+		//scanner.enumScannerEvent = 'onScannersViaJSON(%json);';
+		//scanner.enumerate();
+    }
+	
+	function enumerateSupportedDecoders()
+	{
+//		scanner.enumerateDecoders();
+		//scanner.setEMML("EnumerateSupportedDecoders");
+	}
+	
+  function onScannersViaJSON(jsonObject)
+  {
+	
+//	 var html = "<b>Device Name: Friendly Name</b><br>";
+//	 for(i=0; i<jsonObject.scannerArray.length; i++)	
+//     {
+//       html += '' + jsonObject.scannerArray[i].deviceName + ': ' 
+//	        + jsonObject.scannerArray[i].friendlyName + '<br>';
+//     }
+//     html += "";
+//	enumScanners.innerHTML=html;
+  }
+  
+  function onDecodeEventJSON(data, source, type, time, length, theEvent)
+  {
+	var html = "<b>Decoded Data:</b><br>";
+	html = html + "<br><i>Data:</i> " +data;
+	html = html + "<br><i>Source:</i> " +source;
+	html = html + "<br><i>Type:</i> " +type;
+	html = html + "<br><i>Time:</i> " +time;
+	html = html + "<br><i>Length:</i> " +length;
+	html = html + "<br><i>Event:</i> " +theEvent;
+    scanData.innerHTML = html;
+  }
+  
+  function onRSMEventJSON(jsonObject)
+  {
+//  	var attribute=document.getElementById("attlist");
+//	var selectedAttribute = attribute.options[attribute.selectedIndex].text;
+
+//	att.innerText = selectedAttribute;
+
+//    var html = "<B>RSM Values:</B> ";
+//	for (i=0; i<jsonObject.attributeArray.length; i++)
+//	{
+//	  html += '' + jsonObject.attributeArray[i] + ', '
+//	}
+//	rsmMsg.innerHTML = html;
+  }
+  
+  function scannerInit()
+  {
+	//  This function will only work via setEMML as it is not 
+	//  exposed in the help file
+	//scanner.setEMML("Init");
+  }
+  
+  function scannerDeinit()
+  {
+	//scanner.setEMML("Deinit");  
+  }
+  
+  function enableScanner()
+  {
+	//msg.innerHTML = "Enabling Default Scanner";
+	//scanner.enable();
+  }
+  
+	function enableSpecificScanner()
+	{
+		//msg.innerHTML = "Enabling Scanner: " + theForm.scannerSelect.options[theForm.scannerSelect.selectedIndex].value;
+		//scanner.enabled = theForm.scannerSelect.options[theForm.scannerSelect.selectedIndex].value;
+	}
+	
+	function enableSpecifiedScanner(theScanner)
+	{
+		//msg.innerHTML = "Enabling Specified Scanner: " + theScanner;
+		//scanner.enabled = theScanner;
+		generic1.InvokeMETAFunction("Scanner","enabled:"+theScanner);
+	}
+	
+	
+  
+	function disableScanner()
+	{
+		msg.innerHTML = "Disabling Scanner";
+		//scanner.disable();
+		generic1.InvokeMETAFunction("Scanner","disable");
+	}
+  
+	function setScannerConfig(config, theValue)
+	{
+		if (theValue != 'unspecified')
+		{
+			msg.innerHTML = "Setting " + config + " to " + theValue;
+			//scanner.setEMML("" + config + ":" + theValue);
+			generic1.InvokeMETAFunction("Scanner","" + config + ":" + theValue);
+		}
+	}
+	
+	function setDecoder(decoder, checked)
+	{
+		if (checked)
+		{
+			msg.innerHTML = "Setting " + decoder + " to Enabled";
+			//scanner.setEMML("" + decoder + ":" + "enabled");
+			generic1.InvokeMETAFunction("Scanner","" + decoder + ":" + "enabled");
+		}
+		else
+		{
+			msg.innerHTML = "Setting " + decoder + " to Disabled";			
+			//scanner.setEMML("" + decoder + ":" + "disabled");
+			generic1.InvokeMETAFunction("Scanner","" + decoder + ":" + "disabled");
+		}
+	}
+	
+	function setScanStart(checkbox, checked)
+	{
+		if (checked)
+		{
+			msg.innerHTML = "Starting Scanner";
+			//scanner.start();
+		}
+		else
+		{
+			msg.innerHTML = "Stopping Scanner";
+			//scanner.stop();
+		}
+	}
+	
+	function setDecoderProperty(decoder, checked)
+	{
+		msg.innerHTML = "Setting " + decoder + " Property to " + checked;
+		//scanner.setEMML("" + decoder + ":" + checked);
+		generic1.InvokeMETAFunction("Scanner","" + decoder + ":" + checked);
+	}
+	
+	function setDecodeEvent(bDecodeEvent)
+	{
+	
+        //generic.InvokeMETAFunction("Scanner", "EnumScannerEvent:url('Javascript:EnumScanners(%s);')");
+        //generic.InvokeMETAFunction('Scanner', 'Enumerate');
+		if (bDecodeEvent)
+		{
+			msg.innerHTML = "Setting Decode Event";
+			//scanner.decodeEvent = 'onDecodeEventJSON(%json)';
+			//generic1.InvokeMETAFunction("Scanner", "DecodeEvent:url('javascript:MyScanEvent('%s', '%s', '%s', '%s', '%s', '%s');')");
+		}
+		else
+		{
+			msg.innerHTML = "Clearing Decode Event";
+			//scanner.setEMML("DecodeEvent:url('')");
+		}
+	}
+
+	function setDecoderLengthProperty(decoder, length)
+	{
+		msg.innerHTML = "Setting " + decoder + " Length to " + length;
+		//scanner.setEMML("" + decoder + ":" + length);
+		generic1.InvokeMETAFunction("Scanner","" + decoder + ":" + length);
+	}
+	
+	function setDecoderOtherProperty(decoder, theValue)
+	{
+		if (theValue != 'unspecified')
+		{
+			msg.innerHTML = "Setting " + decoder + " to " + theValue;
+			//scanner.setEMML("" + decoder + ":" + theValue);
+			generic1.InvokeMETAFunction("Scanner","" + decoder + ":" + theValue);
+		}
+	}
+	
+	function setRSMEvent(bRSMEvent)
+	{
+		if (bRSMEvent)
+		{
+		
+		}
+			//rsm.rsmGetEvent = 'onRSMEventJSON(%json)';
+		else
+		{
+		
+		}
+			//rsm.setEMML("RSMGetEvent:url('')");
+	}
+	
+	function setEnumSupportedDecodersEvent(bEnumDecodersEvent)
+	{
+		if (bEnumDecodersEvent)
+		{
+			//scanner.setEMML("EnumSupportedDecodersEvent:url('JavaScript:onSupportedDecoders(%json);')");
+			//generic1.InvokeMETAFunction("Scanner","EnumSupportedDecodersEvent:url('onSupportedDecoders(%json);')");
+			//scanner.enumSupportedDecodersEvent = 'onSupportedDecoders(%json)';
+		}
+		else
+		{
+		
+		}
+			//generic1.InvokeMETAFunction("Scanner","EnumSupportedDecodersEvent:url('')");
+	}
+	
+	function onSupportedDecoders(jsonObject)
+	{
+		var html = "<b>Supported Decoders:</b><br>";
+		for(i=0; i<jsonObject.supportedDecoders.length; i++)	
+		{
+			html += '' + jsonObject.supportedDecoders[i];
+			if (i < jsonObject.supportedDecoders.length - 1)
+				html += ', ';
+		}
+		html += "";
+		enumScannerDecoders.innerHTML=html;
+	}
+	
+	function setBluetoothStatusEvent(bBluetoothStatus)
+	{
+		if (bBluetoothStatus)
+		{
+			//scanner.setEMML("bluetoothStatusEvent:url('onBluetoothEvent(%json);')");
+			generic1.InvokeMETAFunction("Scanner","bluetoothStatusEvent:url('JavaScript:onBluetoothEvent(%json);')");
+			//scanner.bluetoothStatusEvent = 'onBluetoothEvent(%json)';
+		}
+		else
+			generic1.InvokeMETAFunction("bluetoothStatusEvent:url('')");
+	}
+	
+	function onBluetoothEvent(jsonObject)
+	{
+		msg.innerHTML = "Bluetooth Message " + jsonObject.status;
+	}
+	
+  
+  //  RSM Functions
+  
+function ClearValueField()
+{
+	//  alert(attValue.text);
+	var attributeValue = document.getElementById("attValue");
+	if (attributeValue.value == 'Set to Value...')
+	{
+		attributeValue.value = '';
+	}
+}
+
+function RSMGetEvent(attributeArray)
+{
+	var attribute=document.getElementById("attlist");
+	var selectedAttribute = attribute.options[attribute.selectedIndex].text;
+
+	att.innerText = selectedAttribute;
+	
+	var spanID;
+	var spanElement;
+	for(i=0; i < attributeArray.length; i++)
+	{
+		//  Should only be one value in the Array as onGet will only ever call RSMGetParam once before calling RSMGetNavigate
+		val.innerHTML = val.innerHTML + attributeArray[i] + "<BR>";
+	}
+}
+
+function onGet()
+{
+//	var attribute=document.getElementById("attlist");
+//	var selectedAttribute = attribute.options[attribute.selectedIndex].text;
+//	
+//	if (selectedAttribute == "ScanLineWidth")
+//		rsm.markForRetrievalScanLineWidth();
+//	else if (selectedAttribute == "DecodeFeedback")
+//		rsm.markForRetrievalDecodeFeedback();
+//	else if (selectedAttribute == "ModelNumber")
+//		rsm.markForRetrievalModelNumber();
+//	else if (selectedAttribute == "SerialNumber")
+//		rsm.markForRetrievalSerialNumber();
+//	else if (selectedAttribute == "DateOfManufacture")
+//		rsm.markForRetrievalDateOfManufacture();
+//	else if (selectedAttribute == "DateOfService")
+//		rsm.markForRetrievalDateOfService();
+//	else if (selectedAttribute == "BluetoothAddress")
+//		rsm.markForRetrievalBluetoothAddress();
+//	else if (selectedAttribute == "BluetoothAuthentication")
+//		rsm.markForRetrievalBluetoothAuthentication();
+//	else if (selectedAttribute == "BluetoothEncryption")
+//		rsm.markForRetrievalBluetoothEncryption();
+//    else if (selectedAttribute == "BluetoothPINCode")
+//        rsm.markForRetrievalBluetoothPINcode();
+//	else if (selectedAttribute == "BluetoothReconnectAttempts")
+//		rsm.markForRetrievalBluetoothReconnectAttempts();
+//	else if (selectedAttribute == "BluetoothBeepOnReconnectAttempt")
+//		rsm.markForRetrievalBluetoothBeepOnReconnectAttempt();
+//	else if (selectedAttribute == "BluetoothHidAutoReconnect")
+//		rsm.markForRetrievalBluetoothHIDAutoReconnect();
+//    else if (selectedAttribute == "BluetoothFriendlyName")
+//        rsm.markForRetrievalBluetoothFriendlyName();
+//	else if (selectedAttribute == "BluetoothPINCodeType")
+//		rsm.markForRetrievalBluetoothPINCodeType();
+//	else if (selectedAttribute == "BluetoothInquiryMode")
+//		rsm.markForRetrievalBluetoothInquiryMode();
+//	else if (selectedAttribute == "Mems")
+//		rsm.markForRetrievalMems();
+//	else if (selectedAttribute == "ProximityEnable")
+//		rsm.markForRetrievalProximityEnable();
+//	else if (selectedAttribute == "ProximityDistance")
+//		rsm.markForRetrievalProximityDistance();
+//	else if (selectedAttribute == "PagingEnable")
+//		rsm.markForRetrievalPagingEnable();
+//	else if (selectedAttribute == "PagingBeepSequence")
+//		rsm.markForRetrievalPagingBeepSequence();
+//	else if (selectedAttribute == "LowBatteryIndication")
+//		rsm.markForRetrievalLowBatteryIndication();
+//	else if (selectedAttribute == "ScanTriggerWakeup")
+//		rsm.markForRetrievalScanTriggerWakeup();
+//	else if (selectedAttribute == "BluetoothAutoReconnect")
+//		rsm.markForRetrievalBluetoothAutoReconnect();
+//	else if (selectedAttribute == "LowBatteryIndicationCycle")
+//		rsm.markForRetrievalLowBatteryIndicationCycle();
+//	else if (selectedAttribute == "PagingActivate")	//  Reading a Write Only Attribute as an error check
+//		rsm.markForRetrievalPagingActivate();
+//	else if (selectedAttribute == "IgnoreCode128USPS")
+//		rsm.markForRetrievalIgnoreCode128USPS();
+//	else if (selectedAttribute == "ProximityContinuous")
+//		rsm.markForRetrievalProximityContinuous();
+//	else if (selectedAttribute == "GoodScansDelay")
+//		rsm.markForRetrievalGoodScansDelay();
+//	else if (selectedAttribute == "ForceSavePairingBarcode")
+//		rsm.markForRetrievalForceSavePairingBarcode();
+//	else if (selectedAttribute == "FirmwareVersion")
+//		rsm.markForRetrievalFirmwareVersion();
+//	else if (selectedAttribute == "DeviceClass")
+//		rsm.markForRetrievalDeviceClass();
+//	else if (selectedAttribute == "BatteryStatus")
+//		rsm.markForRetrievalBatteryStatus();
+//	else if (selectedAttribute == "BatteryCapacity")
+//		rsm.markForRetrievalBatteryCapacity();
+//	else if (selectedAttribute == "BatteryID")
+//		rsm.markForRetrievalBatteryId();
+
+//	setRSMEvent(true);
+//}
+
+//function onSet()
+//{
+//	var attribute=document.getElementById("attlist");
+//	var selectedAttribute = attribute.options[attribute.selectedIndex].text;
+//	var attributeValue = document.getElementById("attValue");
+
+//	if (selectedAttribute == "ScanLineWidth")
+//		rsm.scanLineWidth = attributeValue.value;	
+//    else if (selectedAttribute == "DecodeFeedback")
+//		rsm.decodeFeedback = attributeValue.value;
+//	else if (selectedAttribute == "BluetoothAuthentication")
+//		rsm.bluetoothAuthentication = attributeValue.value;
+//    else if (selectedAttribute == "BluetoothPINCode")
+//        rsm.bluetoothPincode = attributeValue.value;
+//	else if (selectedAttribute == "BluetoothEncryption")
+//		rsm.bluetoothEncryption = attributeValue.value;
+//	else if (selectedAttribute == "BluetoothReconnectAttempts")
+//		rsm.bluetoothReconnectAttempts = attributeValue.value;
+//	else if (selectedAttribute == "BluetoothBeepOnReconnectAttempt")
+//		rsm.bluetoothBeepOnReconnectAttempt = attributeValue.value;
+//	else if (selectedAttribute == "BluetoothHidAutoReconnect")
+//		rsm.bluetoothHidAutoReconnect = attributeValue.value;
+//    else if (selectedAttribute == "BluetoothFriendlyName")
+//        rsm.bluetoothFriendlyName = attributeValue.value;
+//	else if (selectedAttribute == "BluetoothPINCodeType")
+//		rsm.bluetoothPinCodeType = attributeValue.value;
+//	else if (selectedAttribute == "BluetoothInquiryMode")
+//		rsm.bluetoothInquiryMode = attributeValue.value;
+//	else if (selectedAttribute == "Mems")
+//		rsm.mems = attributeValue.value;
+//	else if (selectedAttribute == "ProximityEnable")
+//		rsm.proximityEnable = attributeValue.value;
+//	else if (selectedAttribute == "ProximityDistance")
+//		rsm.proximityDistance = attributeValue.value;
+//	else if (selectedAttribute == "PagingEnable")
+//		rsm.pagingEnable = attributeValue.value;
+//	else if (selectedAttribute == "PagingBeepSequence")
+//		rsm.pagingBeepSequence = attributeValue.value;
+//	else if (selectedAttribute == "LowBatteryIndication")
+//		rsm.lowBatteryIndication = attributeValue.value;
+//	else if (selectedAttribute == "ScanTriggerWakeup")
+//		rsm.scanTriggerWakeup = attributeValue.value;
+//	else if (selectedAttribute == "BluetoothAutoReconnect")
+//		rsm.bluetoothAutoReconnect = attributeValue.value;
+//	else if (selectedAttribute == "LowBatteryIndicationCycle")
+//		rsm.lowBatteryIndicationCycle = attributeValue.value;
+//	else if (selectedAttribute == "PagingActivate")
+//		rsm.pagingActivate = attributeValue.value;
+//	else if (selectedAttribute == "BTDisconnect")
+//		rsm.bluetoothDisconnect();
+//	else if (selectedAttribute == "BTUnpair")
+//		rsm.bluetoothUnpair();
+//	else if (selectedAttribute == "IgnoreCode128USPS")
+//		rsm.ignoreCode128Usps = attributeValue.value;
+//	else if (selectedAttribute == "ProximityContinuous")
+//		rsm.proximityContinuous = attributeValue.value;
+//	else if (selectedAttribute == "GoodScansDelay")
+//		rsm.goodScansDelay = attributeValue.value;
+//	else if (selectedAttribute == "ForceSavePairingBarcode")
+//		rsm.forceSavePairingBarcode = attributeValue.value;
+
+//	onGet();
+  }
+  
+function onSuggestValues()
+{
+//	var attribute=document.getElementById("attlist");
+//	var selectedAttribute = attribute.options[attribute.selectedIndex].text;
+
+//	if (selectedAttribute == "ScanLineWidth")		
+//		legal.innerText = "Wide; Narrow";
+//	else if (selectedAttribute == "DecodeFeedback")
+//		legal.innerText = "Enabled; Disabled";
+//	else if (selectedAttribute == "ModelNumber")
+//		legal.innerText = "Read Only";
+//	else if (selectedAttribute == "SerialNumber")
+//		legal.innerText = "Read Only";
+//	else if (selectedAttribute == "DateOfManufacture")
+//		legal.innerText = "Read Only";
+//	else if (selectedAttribute == "DateOfService")
+//		legal.innerText = "Read Only";
+//	else if (selectedAttribute == "BluetoothAddress")
+//		legal.innerText = "Read Only";
+//	else if (selectedAttribute == "BluetoothAuthentication")
+//		legal.innerText = "True; False";
+//    else if (selectedAttribute == "BluetoothPINCode")
+//        legal.innerText = "String, Max 5 Characters";
+//	else if (selectedAttribute == "BluetoothEncryption")
+//		legal.innerText = "True; False";
+//	else if (selectedAttribute == "BluetoothReconnectAttempts")
+//		legal.innerText = "Number (Seconds, Multiple of 5) [30-60]";
+//	else if (selectedAttribute == "BluetoothBeepOnReconnectAttempt")
+//		legal.innerText = "True; False";
+//	else if (selectedAttribute == "BluetoothHidAutoReconnect")
+//		legal.innerText = "NeverReconnect; ReconnectOnData; ReconnectImmediately";
+//    else if (selectedAttribute == "BluetoothFriendlyName")
+//        legal.innerText = "String, Max 23 Characters";
+//	else if (selectedAttribute == "BluetoothPINCodeType")
+//		legal.innerText = "PromptUser; UseStored";
+//	else if (selectedAttribute == "BluetoothInquiryMode")
+//		legal.innerText = "General; Limited";
+//	else if (selectedAttribute == "Mems")
+//		legal.innerText = "Enabled; Disabled";
+//	else if (selectedAttribute == "ProximityEnable")
+//		legal.innerText = "Enabled; Disabled";
+//	else if (selectedAttribute == "ProximityDistance")
+//		legal.innerText = "Short; Medium; Long";
+//	else if (selectedAttribute == "PagingEnable")
+//		legal.innerText = "Enabled; Disabled";
+//	else if (selectedAttribute == "PagingBeepSequence")
+//		legal.innerText = "Number in the Range 0 to 15";
+//	else if (selectedAttribute == "LowBatteryIndication")
+//		legal.innerText = "Number (Seconds)";
+//	else if (selectedAttribute == "ScanTriggerWakeup")
+//		legal.innerText = "Enabled; Disabled";
+//	else if (selectedAttribute == "BluetoothAutoReconnect")
+//		legal.innerText = "None; OnPower; OnOutOfRange; OnPowerOutOfRange";
+//	else if (selectedAttribute == "LowBatteryIndicationCycle")
+//		legal.innerText = "Number (Seconds: 10, 20, 30, 40, 50)";
+//	else if (selectedAttribute == "PagingActivate")
+//		legal.innerText = "Start; Stop";
+//	else if (selectedAttribute == "BTDisconnect")
+//		legal.innerText = "<none>";
+//	else if (selectedAttribute == "BTUnpair")
+//		legal.innerText = "<none>";
+//	else if (selectedAttribute == "IgnoreCode128USPS")
+//		legal.innerText = "Enabled; Disabled";
+//	else if (selectedAttribute == "ProximityContinuous")
+//		legal.innerText = "Enabled; Disabled";
+//	else if (selectedAttribute == "GoodScansDelay")
+//		legal.innerText = "Number (msec, multiples of 100) [0-15000]";
+//	else if (selectedAttribute == "ForceSavePairingBarcode")
+//		legal.innerText = "True / False";
+//	else if (selectedAttribute == "FirmwareVersion")
+//		legal.innerText = "Read Only";	
+//	else if (selectedAttribute == "DeviceClass")
+//		legal.innerText = "Read Only";	
+//	else if (selectedAttribute == "BatteryStatus")
+//		legal.innerText = "Read Only";	
+//	else if (selectedAttribute == "BatteryCapacity")
+//		legal.innerText = "Read Only";	
+//	else if (selectedAttribute == "BatteryID")
+//		legal.innerText = "Read Only";	
+  }
+
+  
+function getAllRSM()
+{
+    //Invoke to receive all the attributes 
+	var attribute=document.getElementById("attlist");
+	//var selectedAttribute = attribute.options[attribute.selectedIndex].text;
+	for(i=0; i < attribute.options.length; i++)
+	{
+		selectedAttribute = attribute.options[i].text;
+		//alert('' + selectedAttribute);
+		//rsm.setEMML('' + selectedAttribute);
+	}
+}
+  
+  </script>
+
+<BR>
+<H1>Scanner Tests</H1>
+<P>
+<textarea rows="3" cols="20"></textarea>
+<textarea rows="3" cols="15"></textarea>
+<textarea rows="3" cols="15"></textarea><br>
+	<div id="scanData">Scanned Data goes Here</div>
+	<div id="enumScanners">EnumScanners goes Here</div>
+	<div id="enumScannerDecoders">Supported Decoders go Here</div>
+	<div id="msg">Messages Go Here</div>
+  <BR>
+  <form id='theForm'>
+  <b><a href="javascript:toggleDiv(scannerControlDiv);">Scanner Control:</a></b><P>
+  <div id="scannerControlDiv" style="display:block">
+  <INPUT align="center" type="button" value="Enumerate Scanners" onclick="enumerateScannersViaJSON();">
+  <br>
+  <INPUT align="center" type="button" value="Enable Default Scanner" onclick="enableScanner();">
+  <INPUT align="center" type="button" value="Enable SCN1" onclick="enableSpecifiedScanner('SCN1');">
+  <INPUT align="center" type="button" value="Enable SCN2" onclick="enableSpecifiedScanner('SCN2');">
+  <INPUT align="center" type="button" value="Enable SCN3" onclick="enableSpecifiedScanner('SCN3');">
+  <INPUT align="center" type="button" value="Enable SCN4" onclick="enableSpecifiedScanner('SCN4');">
+  <INPUT align="center" type="button" value="Init" onclick="scannerInit();">
+  <INPUT align="center" type="button" value="Deinit" onclick="scannerDeinit();">
+  <!--INPUT align="center" type="button" value="Enable Specific Scanner" onclick="enableSpecificScanner();">
+	<select name="scannerSelect">
+		<option value="SCN1" selected>SCN1</option>
+		<option value="SCN2">SCN2</option>
+		<option value="SCN3">SCN3</option>
+	</select-->
+	<br>
+  <INPUT align="center" type="button" value="Disable Scanner" onclick="disableScanner();"> <INPUT align="center" type="button" value="Enumerate Supported Decoders" onclick="enumerateSupportedDecoders()"><br>
+  	<input type="checkbox" name="cb_autoEnter" onclick="setDecoder('autoEnter', theForm.cb_autoEnter.checked);"> autoEnter</input>
+	<input type="checkbox" name="cb_autoTab" onclick="setDecoder('autoTab', theForm.cb_autoTab.checked);"> autoTab</input>
+	<input type="checkbox" name="cb_softScan" onclick="setScanStart('softScan', theForm.cb_softScan.checked);"> Start / Stop Scan</input>
+	<br>
+	<table>
+	<tr><td>
+	rasterMode:
+	</td><td>
+	<input type="radio" name="rasterMode" onclick="setScannerConfig('rasterMode', 'unspecified');" checked> unspecified</input>
+	<input type="radio" name="rasterMode" onclick="setScannerConfig('rasterMode', 'none');"> none</input>
+	<input type="radio" name="rasterMode" onclick="setScannerConfig('rasterMode', 'openAlways');"> openAlways</input>
+	<input type="radio" name="rasterMode" onclick="setScannerConfig('rasterMode', 'smart');"> smart</input>
+	<input type="radio" name="rasterMode" onclick="setScannerConfig('rasterMode', 'cyclone');"> cyclone</input>
+	</td></tr><tr><td>
+	aimType:
+	</td><td>
+	<input type="radio" name="aimType" onclick="setScannerConfig('aimType', 'unspecified');" checked> unspecified</input>
+	<input type="radio" name="aimType" onclick="setScannerConfig('aimType', 'trigger');"> trigger</input>
+	<input type="radio" name="aimType" onclick="setScannerConfig('aimType', 'timed_Hold');"> timedHold</input>
+	<input type="radio" name="aimType" onclick="setScannerConfig('aimType', 'timed_Release');"> timedRelease</input>
+	<input type="radio" name="aimType" onclick="setScannerConfig('aimType', 'presentation');"> presentation</input>
+	<input type="radio" name="aimType" onclick="setScannerConfig('aimType', 'pressAndRelease');"> <font color='blue'>pressAndRelease</font></input>
+	<input type="radio" name="aimType" onclick="setScannerConfig('aimType', 'continuousRead');"> <font color='blue'>continuousRead</font></input>
+	</td></tr><tr><td>
+	<font color="blue">aimMode:</font>
+	</td><td>
+	<input type="radio" name="aimMode" onclick="setScannerConfig('aimMode', 'unspecified');" checked> unspecified</input>
+	<input type="radio" name="aimMode" onclick="setScannerConfig('aimMode', 'none');"> <font color='blue'>none</input>
+	<input type="radio" name="aimMode" onclick="setScannerConfig('aimMode', 'dot');"> <font color='blue'>dot</input>
+	<input type="radio" name="aimMode" onclick="setScannerConfig('aimMode', 'slab');"> <font color='blue'>slab</input>
+	<input type="radio" name="aimMode" onclick="setScannerConfig('aimMode', 'reticle');"> <font color='blue'>reticle</input>
+	</td></tr><tr><td>
+	<font color="blue">linearSecurityLevel:</font>
+	</td><td>
+	<input type="radio" name="linearSecurityLevel" onclick="setScannerConfig('linearSecurityLevel', 'unspecified');" checked> unspecified</input>
+	<input type="radio" name="linearSecurityLevel" onclick="setScannerConfig('linearSecurityLevel', 'redundancyAndLength');"> <font color='blue'>redundancyAndLength</input>
+	<input type="radio" name="linearSecurityLevel" onclick="setScannerConfig('linearSecurityLevel', 'shortOrCodabar');"> <font color='blue'>shortOrCodabar</input>
+	<input type="radio" name="linearSecurityLevel" onclick="setScannerConfig('linearSecurityLevel', 'longAndShort');"> <font color='blue'>longAndShort</input>
+	<input type="radio" name="linearSecurityLevel" onclick="setScannerConfig('linearSecurityLevel', 'allTwice');"> <font color='blue'>allTwice</input>
+	<input type="radio" name="linearSecurityLevel" onclick="setScannerConfig('linearSecurityLevel', 'allThrice');"> <font color='blue'>allThrice</input>
+	</td></tr><tr><td>
+	<font color="blue">dbpMode:</font>
+	</td><td>
+	<input type="radio" name="dbpMode" onclick="setScannerConfig('dbpMode', 'unspecified');" checked> unspecified</input>
+	<input type="radio" name="dbpMode" onclick="setScannerConfig('dbpMode', 'normal');"> <font color='blue'>normal</input>
+	<input type="radio" name="dbpMode" onclick="setScannerConfig('dbpMode', 'composite');"> <font color='blue'>composite</input>
+	</td></tr><tr><td>
+	<font color="blue">focusMode:</font>
+	</td><td>
+	<input type="radio" name="focusMode" onclick="setScannerConfig('focusMode', 'unspecified');" checked> unspecified</input>
+	<input type="radio" name="focusMode" onclick="setScannerConfig('focusMode', 'fixed');"> <font color='blue'>fixed</input>
+	<input type="radio" name="focusMode" onclick="setScannerConfig('focusMode', 'auto');"> <font color='blue'>auto</input>
+	</td></tr><tr><td>
+	<font color="blue">picklistMode:</font>
+	</td><td>
+	<input type="radio" name="picklistMode" onclick="setScannerConfig('picklistMode', 'unspecified');" checked> unspecified</input>
+	<input type="radio" name="picklistMode" onclick="setScannerConfig('picklistMode', 'disabled');"> <font color='blue'>disabled</input>
+	<input type="radio" name="picklistMode" onclick="setScannerConfig('picklistMode', 'hardwareReticle');"> <font color='blue'>hardwareReticle</input>
+	<input type="radio" name="picklistMode" onclick="setScannerConfig('picklistMode', 'softwareReticle');"> <font color='blue'>softwareReticle</input>
+	</td></tr><tr><td>
+	<font color="blue">illuminationMode:</font>
+	</td><td>
+	<input type="radio" name="illuminationMode" onclick="setScannerConfig('illuminationMode', 'unspecified');" checked> unspecified</input>
+	<input type="radio" name="illuminationMode" onclick="setScannerConfig('illuminationMode', 'auto');"> <font color='blue'>auto</input>
+	<input type="radio" name="illuminationMode" onclick="setScannerConfig('illuminationMode', 'alwaysOn');"> <font color='blue'>alwaysOn</input>
+	<input type="radio" name="illuminationMode" onclick="setScannerConfig('illuminationMode', 'alwaysOff');"> <font color='blue'>alwaysOff</input>
+	</td></tr><tr><td>
+	<font color="blue">viewfinderMode:</font>
+	</td><td>
+	<input type="radio" name="viewfinderMode" onclick="setScannerConfig('viewfinderMode', 'unspecified');" checked> unspecified</input>
+	<input type="radio" name="viewfinderMode" onclick="setScannerConfig('viewfinderMode', 'enabled');"> <font color='blue'>enabled</input>
+	<input type="radio" name="viewfinderMode" onclick="setScannerConfig('viewfinderMode', 'disabled');"> <font color='blue'>disabled</input>
+	<input type="radio" name="viewfinderMode" onclick="setScannerConfig('viewfinderMode', 'staticReticle');"> <font color='blue'>staticReticle</input>
+	<input type="radio" name="viewfinderMode" onclick="setScannerConfig('viewfinderMode', 'dynamicReticle');"> <font color='blue'>dynamicReticle</input>
+	</td></tr><tr><td>
+	<font color="blue">viewfinderFeedback:</font>
+	</td><td>
+	<input type="radio" name="viewfinderFeedback" onclick="setScannerConfig('viewfinderFeedback', 'unspecified');" checked> unspecified</input>
+	<input type="radio" name="viewfinderFeedback" onclick="setScannerConfig('viewfinderFeedback', 'enabled');"> <font color='blue'>enabled</input>
+	<input type="radio" name="viewfinderFeedback" onclick="setScannerConfig('viewfinderFeedback', 'disabled');"> <font color='blue'>disabled</input>
+	<input type="radio" name="viewfinderFeedback" onclick="setScannerConfig('viewfinderFeedback', 'reticle');"> <font color='blue'>reticle</input>
+	</td></tr><tr><td>
+	<font color="blue">inverse1DMode:</font>
+	</td><td>
+	<input type="radio" name="inverse1DMode" onclick="setScannerConfig('inverse1DMode', 'unspecified');" checked> unspecified</input>
+	<input type="radio" name="inverse1DMode" onclick="setScannerConfig('inverse1DMode', 'enabled');"> <font color='blue'>enabled</input>
+	<input type="radio" name="inverse1DMode" onclick="setScannerConfig('inverse1DMode', 'disabled');"> <font color='blue'>disabled</input>
+	<input type="radio" name="inverse1DMode" onclick="setScannerConfig('inverse1DMode', 'auto');"> <font color='blue'>auto</input>
+	</td></tr>
+	</table>
+	<input type="number" min=0 max=10000 size=4 name="num_timedAimDuration" value=0 onclick="setScannerConfig('timedAimDuration', theForm.num_timedAimDuration.value);"> <font color='blue'>timedAimDuration</font></input><br>
+	<input type="number" min=0 max=10000 size=4 name="num_connectionIdleTimeout" value=0 onclick="setScannerConfig('connectionIdleTimeout', theForm.num_connectionIdleTimeout.value);"> <font color='blue'>connectionIdleTimeout</font></input><br>
+	<input type="checkbox" name="cb_disconnectBTOnDisable" onclick="setScannerConfig('disconnectBTOnDisable', theForm.cb_disconnectBTOnDisable.checked);"> <font color="blue">disconnectBTOnDisable</font></input><br>
+	<input type="checkbox" name="cb_displayBTAddressBarcodeOnEnable" onclick="setScannerConfig('displayBTAddressBarcodeOnEnable', theForm.cb_displayBTAddressBarcodeOnEnable.checked);"> <font color="blue">displayBTAddressBarcodeOnEnable</font></input><br>
+	<input type="checkbox" name="cb_narrowbeam" onclick="setScannerConfig('narrowbeam', theForm.cb_narrowbeam.checked);"> <font color="blue">narrowbeam</font></input><br>
+	<input type="number" min=0 max=10000 size=4 name="num_scanTimeout" value=0 onclick="setScannerConfig('scanTimeout', theForm.num_scanTimeout.value);"> <font color='blue'>scanTimeout</font></input><br>
+	<input type="checkbox" name="cb_klasseEins" onclick="setDecoder('klasseEins', theForm.cb_klasseEins.checked);"> <font color="blue">klasseEins</font></input><br>
+	<input type="checkbox" name="cb_bidirectionalRedundancy" onclick="setDecoder('bidirectionalRedundancy', theForm.cb_bidirectionalRedundancy.checked);"> <font color="blue">bidirectionalRedundancy</font></input><br>
+	<input type="number" min=0 max=100 size=3 name="num_rasterHeight" value=0 onclick="setScannerConfig('rasterHeight', theForm.num_rasterHeight.value);"> <font color='blue'>rasterHeight</font></input><br>
+	<input type="number" min=100 max=1000 size=4 name="num_sameSymbolTimeout" value=0 onclick="setScannerConfig('sameSymbolTimeout', theForm.num_sameSymbolTimeout.value);"> <font color='blue'>sameSymbolTimeout</font></input><br>
+	<input type="number" min=0 max=1000 size=4 name="num_differentSymbolTimeout" value=0 onclick="setScannerConfig('differentSymbolTimeout', theForm.num_differentSymbolTimeout.value);"> <font color='blue'>differentSymbolTimeout</font></input><br>
+	<input type="checkbox" name="cb_poorQuality1DMode" onclick="setScannerConfig('poorQuality1DMode', theForm.cb_poorQuality1DMode.checked);"> <font color="blue">poorQuality1DMode</font></input><br>
+	<input type="checkbox" name="cb_dpmMode" onclick="setDecoder('dpmMode', theForm.cb_dpmMode.checked);"> <font color="blue">dpmMode</font></input><br>
+	<input type="number" min=0 max=1000 size=4 name="num_viewfinderX" onclick="setScannerConfig('viewfinderX', theForm.num_viewfinderX.value);"> <font color='blue'>viewfinderX</font></input><br>
+	<input type="number" min=0 max=1000 size=4 name="num_viewfinderY" onclick="setScannerConfig('viewfinderY', theForm.num_viewfinderY.value);"> <font color='blue'>viewfinderY</font></input><br>
+	<input type="number" min=100 max=1000 size=4 name="num_viewfinderWidth" onclick="setScannerConfig('viewfinderWidth', theForm.num_viewfinderWidth.value);"> <font color='blue'>viewfinderWidth</font></input><br>
+	<input type="number" min=100 max=1000 size=4 name="num_viewfinderHeight" onclick="setScannerConfig('viewfinderHeight', theForm.num_viewfinderHeight.value);"> <font color='blue'>viewfinderHeight</font></input><br>
+	<input type="number" min=500 max=5000 size=4 name="num_viewfinderFeedbackTime" onclick="setScannerConfig('viewfinderFeedbackTime', theForm.num_viewfinderFeedbackTime.value);"> <font color='blue'>viewfinderFeedbackTime</font></input><br>
+	
+	
+	</div>
+	
+	<P>
+	<b><a href="javascript:toggleDiv(eventsDiv)">Events:</a></b><br>
+	<div id="eventsDiv" style="display:block">
+	<input type="checkbox" name="cb_decodeEvent" onclick="setDecodeEvent(theForm.cb_decodeEvent.checked);" checked>Javascript DecodeEvent</input><br>
+	<input type="checkbox" name="cb_rsmEvent" onclick="setRSMEvent(theForm.cb_rsmEvent.checked);">Javascript RSMGetEvent</input><br>	
+	<font color="blue"><input type="checkbox" name="cb_supportedDecodersEvent" onclick="setEnumSupportedDecodersEvent(theForm.cb_supportedDecodersEvent.checked);" checked>Javascript enumSupportedDecodersEvent</input></font><br>	
+	<font color="blue"><input type="checkbox" name="cb_btEvent" onclick="setBTStatusEvent(theForm.cb_btEvent.checked);" checked>Javascript BluetoothStatusEvent</input></font><br>	
+	<P>
+	</div>
+	<P>
+	
+	<b><a href="javascript:toggleDiv(decodersDiv)">Decoders (Enable / Disable):</a></b><br>
+	<div id="decodersDiv" style="display:none">
+	<table border=0>
+	<tr><td valign='top'>
+	<input type="checkbox" name="cb_all_Decoders" onclick="setDecoder('allDecoders', theForm.cb_all_Decoders.checked);" checked> All_Decoders</input><br>
+	<input type="checkbox" name="cb_auspostal" onclick="setDecoder('auspostal', theForm.cb_auspostal.checked);"> auspostal</input><br>
+	<input type="checkbox" name="cb_aztec" onclick="setDecoder('aztec', theForm.cb_aztec.checked);"> aztec</input><br>
+	<input type="checkbox" name="cb_canpostal" onclick="setDecoder('canpostal', theForm.cb_canpostal.checked);"> canpostal</input><br>
+	<input type="checkbox" name="cb_chinese_2of5" onclick="setDecoder('chinese2of5', theForm.cb_chinese_2of5.checked);"> chinese_2of5</input><br>
+	<input type="checkbox" name="cb_codabar" onclick="setDecoder('codabar', theForm.cb_codabar.checked);"> codabar</input><br>
+	<input type="checkbox" name="cb_code11" onclick="setDecoder('code11', theForm.cb_code11.checked);"> code11</input><br>
+	<input type="checkbox" name="cb_code128" onclick="setDecoder('code128', theForm.cb_code128.checked);"> code128</input><br>
+	<input type="checkbox" name="cb_code39" onclick="setDecoder('code39', theForm.cb_code39.checked);"> code39</input><br>
+	<input type="checkbox" name="cb_code93" onclick="setDecoder('code93', theForm.cb_code93.checked);"> code93</input><br>
+	<input type="checkbox" name="cb_compositeAB" onclick="setDecoder('compositeAB', theForm.cb_compositeAB.checked);"> compositeAB</input><br>
+	<input type="checkbox" name="cb_compositeC" onclick="setDecoder('compositeC', theForm.cb_compositeC.checked);"> compositeC</input><br>
+	<input type="checkbox" name="cb_d2Of5" onclick="setDecoder('d2Of5', theForm.cb_d2Of5.checked);"> d2Of5</input><br>
+	<input type="checkbox" name="cb_dataMatrix" onclick="setDecoder('dataMatrix', theForm.cb_dataMatrix.checked);"> dataMatrix</input><br>
+	</td><td valign='top'>
+	<input type="checkbox" name="cb_dutchPostal" onclick="setDecoder('dutchPostal', theForm.cb_dutchPostal.checked);"> dutchPostal</input><br>
+	<input type="checkbox" name="cb_ean13" onclick="setDecoder('ean13', theForm.cb_ean13.checked);"> ean13</input><br>
+	<input type="checkbox" name="cb_ean8" onclick="setDecoder('ean8', theForm.cb_ean8.checked);"> ean8</input><br>
+	<input type="checkbox" name="cb_i2of5" onclick="setDecoder('i2of5', theForm.cb_i2of5.checked);"> i2of5</input><br>
+	<input type="checkbox" name="cb_japPostal" onclick="setDecoder('japPostal', theForm.cb_japPostal.checked);"> japPostal</input><br>
+	<input type="checkbox" name="cb_korean_3Of5" onclick="setDecoder('korean3Of5', theForm.cb_korean_3Of5.checked);"> korean_3Of5</input><br>
+	<input type="checkbox" name="cb_macroMicroPDF" onclick="setDecoder('macroMicroPDF', theForm.cb_macroMicroPDF.checked);"> macroMicroPDF</input><br>
+	<input type="checkbox" name="cb_macroPDF" onclick="setDecoder('macroPDF', theForm.cb_macroPDF.checked);"> macroPDF</input><br>
+	<input type="checkbox" name="cb_maxiCode" onclick="setDecoder('maxiCode', theForm.cb_maxiCode.checked);"> maxiCode</input><br>
+	<input type="checkbox" name="cb_microPDF" onclick="setDecoder('microPDF', theForm.cb_microPDF.checked);"> microPDF</input><br>
+	<input type="checkbox" name="cb_microQR" onclick="setDecoder('microQR', theForm.cb_microQR.checked);"> microQR</input><br>
+	<input type="checkbox" name="cb_msi" onclick="setDecoder('msi', theForm.cb_msi.checked);"> msi</input><br>
+	<input type="checkbox" name="cb_pdf417" onclick="setDecoder('pdf417', theForm.cb_pdf417.checked);"> pdf417</input><br>
+	<input type="checkbox" name="cb_qrCode" onclick="setDecoder('qrCode', theForm.cb_qrCode.checked);"> qrCode</input><br>
+	</td><td valign='top'>
+	<input type="checkbox" name="cb_rss14" onclick="setDecoder('rss14', theForm.cb_rss14.checked);"> rss14</input><br>
+	<input type="checkbox" name="cb_rssExp" onclick="setDecoder('rssExp', theForm.cb_rssExp.checked);"> rssExp</input><br>
+	<input type="checkbox" name="cb_rssLim" onclick="setDecoder('rssLim', theForm.cb_rssLim.checked);"> rssLim</input><br>
+	<input type="checkbox" name="cb_signature" onclick="setDecoder('signature', theForm.cb_signature.checked);"> signature</input><br>
+	<input type="checkbox" name="cb_tlc39" onclick="setDecoder('tlc39', theForm.cb_tlc39.checked);"> tlc39</input><br>
+	<input type="checkbox" name="cb_trioptic39" onclick="setDecoder('trioptic39', theForm.cb_trioptic39.checked);"> trioptic39</input><br>
+	<input type="checkbox" name="cb_ukPostal" onclick="setDecoder('ukPostal', theForm.cb_ukPostal.checked);"> ukPostal</input><br>
+	<input type="checkbox" name="cb_upca" onclick="setDecoder('upca', theForm.cb_upca.checked);"> upca</input><br>
+	<input type="checkbox" name="cb_upce0" onclick="setDecoder('upce0', theForm.cb_upce0.checked);"> upce0</input><br>
+	<input type="checkbox" name="cb_upce1" onclick="setDecoder('upce1', theForm.cb_upce1.checked);"> upce1</input><br>
+	<input type="checkbox" name="cb_us4State" onclick="setDecoder('us4State', theForm.cb_us4State.checked);"> us4State</input><br>
+	<input type="checkbox" name="cb_usPlanet" onclick="setDecoder('usPlanet', theForm.cb_usPlanet.checked);"> usPlanet</input><br>
+	<input type="checkbox" name="cb_usPOSTNet" onclick="setDecoder('usPOSTNet', theForm.cb_usPOSTNet.checked);"> usPOSTNet</input><br>
+	<input type="checkbox" name="cb_webcode" onclick="setDecoder('webcode', theForm.cb_webcode.checked);"> webcode</input><br>
+	</td></tr></table>
+	</div>
+	<P>
+	<b><a href="javascript:toggleDiv(decoderPropertiesDiv)">Decoder Properties (True / False):</a></b><br>
+	<div id="decoderPropertiesDiv" style="display:none">
+	<table border=0>
+	<tr><td valign='top'>
+	<input type="checkbox" name="cb_codabarCLSIEditing" onclick="setDecoderProperty('codabarCLSIEditing', theForm.cb_codabarCLSIEditing.checked);"> codabarCLSIEditing</input><br>
+	<input type="checkbox" name="cb_codabarNotisEditing" onclick="setDecoderProperty('codabarNotisEditing', theForm.cb_codabarNotisEditing.checked);"> codabarNotisEditing</input><br>
+	<input type="checkbox" name="cb_codabarRedundancy" onclick="setDecoderProperty('codabarRedundancy', theForm.cb_codabarRedundancy.checked);"> codabarRedundancy</input><br>
+	<input type="checkbox" name="cb_code11Redundancy" onclick="setDecoderProperty('code11Redundancy', theForm.cb_code11Redundancy.checked);"> code11Redundancy</input><br>
+	<input type="checkbox" name="cb_code11ReportCheckDigit" onclick="setDecoderProperty('code11ReportCheckDigit', theForm.cb_code11ReportCheckDigit.checked);"> code11ReportCheckDigit</input><br>
+	<input type="checkbox" name="cb_code128EAN128" onclick="setDecoderProperty('code128EAN128', theForm.cb_code128EAN128.checked);"> code128EAN128</input><br>
+	<input type="checkbox" name="cb_code128IsBT128" onclick="setDecoderProperty('code128isbt128', theForm.cb_code128IsBT128.checked);"> code128IsBT128</input><br>
+	<input type="checkbox" name="cb_code128Other128" onclick="setDecoderProperty('code128Other128', theForm.cb_code128Other128.checked);"> code128Other128</input><br>
+	<input type="checkbox" name="cb_code128Redundancy" onclick="setDecoderProperty('code128Redundancy', theForm.cb_code128Redundancy.checked);"> code128Redundancy</input><br>
+	<input type="checkbox" name="cb_code39Code32Prefix" onclick="setDecoderProperty('code39Code32Prefix', theForm.cb_code39Code32Prefix.checked);"> code39Code32Prefix</input><br>
+	<input type="checkbox" name="cb_code39Concatenation" onclick="setDecoderProperty('code39Concatenation', theForm.cb_code39Concatenation.checked);"> code39Concatenation</input><br>
+	<input type="checkbox" name="cb_code39ConvertToCode32" onclick="setDecoderProperty('code39ConvertToCode32', theForm.cb_code39ConvertToCode32.checked);"> code39ConvertToCode32</input><br>
+	<input type="checkbox" name="cb_code39FullASCII" onclick="setDecoderProperty('code39FullASCII', theForm.cb_code39FullASCII.checked);"> code39FullASCII</input><br>
+	<input type="checkbox" name="cb_code39Redundancy" onclick="setDecoderProperty('code39Redundancy', theForm.cb_code39Redundancy.checked);"> code39Redundancy</input><br>
+	<input type="checkbox" name="cb_code39ReportCheckDigit" onclick="setDecoderProperty('code39ReportCheckDigit', theForm.cb_code39ReportCheckDigit.checked);"> code39ReportCheckDigit</input><br>
+	<input type="checkbox" name="cb_code39VerifyCheckDigit" onclick="setDecoderProperty('code39VerifyCheckDigit', theForm.cb_code39VerifyCheckDigit.checked);"> code39VerifyCheckDigit</input><br>
+	<input type="checkbox" name="cb_code93Redundancy" onclick="setDecoderProperty('code93Redundancy', theForm.cb_code93Redundancy.checked);"> code93Redundancy</input><br>
+	<input type="checkbox" name="cb_d2Of5Redundancy" onclick="setDecoderProperty('d2Of5Redundancy', theForm.cb_d2Of5Redundancy.checked);"> d2Of5Redundancy</input><br>
+	<input type="checkbox" name="cb_ean8ConvertToEAN13" onclick="setDecoderProperty('ean8ConvertToEAN13', theForm.cb_ean8ConvertToEAN13.checked);"> ean8ConvertToEAN13</input><br>
+	<input type="checkbox" name="cb_i2Of5ConvertToEAN13" onclick="setDecoderProperty('i2Of5ConvertToEAN13', theForm.cb_i2Of5ConvertToEAN13.checked);"> i2Of5ConvertToEAN13</input><br>
+	<input type="checkbox" name="cb_i2Of5Redundancy" onclick="setDecoderProperty('i2Of5Redundancy', theForm.cb_i2Of5Redundancy.checked);"> i2Of5Redundancy</input><br>
+	<input type="checkbox" name="cb_i2Of5ReportCheckDigit" onclick="setDecoderProperty('i2Of5ReportCheckDigit', theForm.cb_i2Of5ReportCheckDigit.checked);"> i2Of5ReportCheckDigit</input><br>
+	<input type="checkbox" name="cb_msiRedundancy" onclick="setDecoderProperty('msiRedundancy', theForm.cb_msiRedundancy.checked);"> msiRedundancy</input><br>
+	<input type="checkbox" name="cb_msiReportCheckDigit" onclick="setDecoderProperty('msiReportCheckDigit', theForm.cb_msiReportCheckDigit.checked);"> msiReportCheckDigit</input><br>
+	<input type="checkbox" name="cb_trioptic39Redundancy" onclick="setDecoderProperty('trioptic39Redundancy', theForm.cb_trioptic39Redundancy.checked);"> trioptic39Redundancy</input><br>
+	</td><td valign='top'>
+	<input type="checkbox" name="cb_upc_EANBookland" onclick="setDecoderProperty('upc_EANBookland', theForm.cb_upc_EANBookland.checked);"> upc_EANBookland</input><br>
+	<input type="checkbox" name="cb_upc_EANCoupon" onclick="setDecoderProperty('upc_EANCoupon', theForm.cb_upc_EANCoupon.checked);"> upc_EANCoupon</input><br>
+	<input type="checkbox" name="cb_upc_EANLinearDecode" onclick="setDecoderProperty('upc_EANLinearDecode', theForm.cb_upc_EANLinearDecode.checked);"> upc_EANLinearDecode</input><br>
+	<input type="checkbox" name="cb_upc_EANRandomWeightCheckDigit" onclick="setDecoderProperty('upc_EANRandomWeightCheckDigit', theForm.cb_upc_EANRandomWeightCheckDigit.checked);"> upc_EANRandomWeightCheckDigit</input><br>
+	<input type="checkbox" name="cb_upc_EANSupplemental2" onclick="setDecoderProperty('upc_EANSupplemental2', theForm.cb_upc_EANSupplemental2.checked);"> upc_EANSupplemental2</input><br>
+	<input type="checkbox" name="cb_upc_EANSupplemental5" onclick="setDecoderProperty('upc_EANSupplemental5', theForm.cb_upc_EANSupplemental5.checked);"> upc_EANSupplemental5</input><br>
+	<input type="checkbox" name="cb_upcaReportCheckDigit" onclick="setDecoderProperty('upcaReportCheckDigit', theForm.cb_upcaReportCheckDigit.checked);"> upcaReportCheckDigit</input><br>
+	<input type="checkbox" name="cb_upce0ConvertToUPCA" onclick="setDecoderProperty('upce0ConvertToUPCA', theForm.cb_upce0ConvertToUPCA.checked);"> upce0ConvertToUPCA</input><br>
+	<input type="checkbox" name="cb_upce0ReportCheckDigit" onclick="setDecoderProperty('upce0ReportCheckDigit', theForm.cb_upce0ReportCheckDigit.checked);"> upce0ReportCheckDigit</input><br>
+	<input type="checkbox" name="cb_upce1ConvertToUPCA" onclick="setDecoderProperty('upce1ConvertToUPCA', theForm.cb_upce1ConvertToUPCA.checked);"> upce1ConvertToUPCA</input><br>
+	<input type="checkbox" name="cb_upce1ReportCheckDigit" onclick="setDecoderProperty('upce1ReportCheckDigit', theForm.cb_upce1ReportCheckDigit.checked);"> upce1ReportCheckDigit</input><br>
+	<input type="checkbox" name="cb_code128CheckISBTTable" onclick="setDecoderProperty('code128CheckISBTTable', theForm.cb_code128CheckISBTTable.checked);"> <font color="blue">code128CheckISBTTable</font></input><br>
+	<input type="checkbox" name="cb_compositeABUseUPCPreambleCheckDigitRules" onclick="setDecoderProperty('compositeABUseUPCPreambleCheckDigitRules', theForm.cb_compositeABUseUPCPreambleCheckDigitRules.checked);"> <font color="blue">compositeABUseUPCPreambleCheckDigitRules</font></input><br>
+	<input type="checkbox" name="cb_korean3Of5Redundancy" onclick="setDecoderProperty('korean3Of5Redundancy', theForm.cb_korean3Of5Redundancy.checked);"> <font color="blue">korean3Of5Redundancy</font></input><br>
+	<input type="checkbox" name="cb_macroMicroPDFReportAppendInfo" onclick="setDecoderProperty('macroMicroPDFReportAppendInfo', theForm.cb_macroMicroPDFReportAppendInfo.checked);"> <font color="blue">macroMicroPDFReportAppendInfo</font></input><br>
+	<input type="checkbox" name="cb_macroMicroPDFBufferLabels" onclick="setDecoderProperty('macroMicroPDFBufferLabels', theForm.cb_macroMicroPDFBufferLabels.checked);"> <font color="blue">macroMicroPDFBufferLabels</font></input><br>
+	<input type="checkbox" name="cb_macroMicroPDFExclusive" onclick="setDecoderProperty('macroMicroPDFExclusive', theForm.cb_macroMicroPDFExclusive.checked);"> <font color="blue">macroMicroPDFExclusive</font></input><br>
+	<input type="checkbox" name="cb_macroPDFBufferLabels" onclick="setDecoderProperty('macroPDFBufferLabels', theForm.cb_macroPDFBufferLabels.checked);"> <font color="blue">macroPDFBufferLabels</font></input><br>
+	<input type="checkbox" name="cb_macroPDFExclusive" onclick="setDecoderProperty('macroPDFExclusive', theForm.cb_macroPDFExclusive.checked);"> <font color="blue">macroPDFExclusive</font></input><br>
+	<input type="checkbox" name="cb_macroPDFConvertToPDF417" onclick="setDecoderProperty('macroPDFConvertToPDF417', theForm.cb_macroPDFConvertToPDF417.checked);"> <font color="blue">macroPDFConvertToPDF417</font></input><br>
+	<input type="checkbox" name="cb_upc_EANConvertRSSToUPCEAN" onclick="setDecoderProperty('upc_EANConvertRSSToUPCEAN', theForm.cb_upc_EANConvertRSSToUPCEAN.checked);"> <font color="blue">upc_EANConvertRSSToUPCEAN</font></input><br>
+	<input type="checkbox" name="cb_webcodeDecodeGTSubtype" onclick="setDecoderProperty('webcodeDecodeGTSubtype', theForm.cb_webcodeDecodeGTSubtype.checked);"> <font color="blue">webcodeDecodeGTSubtype</font></input><br>
+	<input type="checkbox" name="cb_macroMicroPdfConvertToMicroPdf" onclick="setDecoderProperty('macroMicroPdfConvertToMicroPdf', theForm.cb_macroMicroPdfConvertToMicroPdf.checked);"> <font color="blue">macroMicroPdfConvertToMicroPdf</font></input><br>
+
+	</td></tr></table>
+	</div>
+	<P>
+	<b><a href="javascript:toggleDiv(decoderPropertiesLength);">Decoder Properties (Numerical Settings)</a></b><br>
+	<div id="decoderPropertiesLength" style="display:none">
+	<table border=0>
+	<tr><td>
+	<input type="number" min=0 max=55 size=2 name="num_codabarMaxLength" onclick="setDecoderLengthProperty('codabarMaxLength', theForm.num_codabarMaxLength.value);"> codabarMaxLength</input><br>
+	</td><td>
+	<input type="number" min=0 max=55 size=2 name="num_codabarMinLength" onclick="setDecoderLengthProperty('codabarMinLength', theForm.num_codabarMinLength.value);"> codabarMinLength</input><br>
+	</td></tr>
+	<tr><td>
+	<input type="number" min=0 max=55 size=2 name="num_code128MaxLength" onclick="setDecoderLengthProperty('code128MaxLength', theForm.num_code128MaxLength.value);"> code128MaxLength</input><br>
+	</td><td>
+	<input type="number" min=0 max=55 size=2 name="num_code128MinLength" onclick="setDecoderLengthProperty('code128MinLength', theForm.num_code128MinLength.value);"> code128MinLength</input><br>
+	</td></tr>
+	<tr><td>
+	<input type="number" min=0 max=55 size=2 name="num_code39MaxLength" onclick="setDecoderLengthProperty('code39MaxLength', theForm.num_code39MaxLength.value);"> code39MaxLength</input><br>
+	</td><td>
+	<input type="number" min=0 max=55 size=2 name="num_code39MinLength" onclick="setDecoderLengthProperty('code39MinLength', theForm.num_code39MinLength.value);"> code39MinLength</input><br>
+	</td></tr>
+	<tr><td>
+	<input type="number" min=0 max=55 size=2 name="num_code93MaxLength" onclick="setDecoderLengthProperty('code93MaxLength', theForm.num_code93MaxLength.value);"> code93MaxLength</input><br>
+	</td><td>
+	<input type="number" min=0 max=55 size=2 name="num_code93MinLength" onclick="setDecoderLengthProperty('code93MinLength', theForm.num_code93MinLength.value);"> code93MinLength</input><br>
+	</td></tr>
+	<tr><td>
+	<input type="number" min=0 max=55 size=2 name="num_d2Of5MaxLength" onclick="setDecoderLengthProperty('d2Of5MaxLength', theForm.num_d2Of5MaxLength.value);"> d2Of5MaxLength</input><br>
+	</td><td>
+	<input type="number" min=0 max=55 size=2 name="num_d2Of5MinLength" onclick="setDecoderLengthProperty('d2Of5MinLength', theForm.num_d2Of5MinLength.value);"> d2Of5MinLength</input><br>
+	</td></tr>
+	<tr><td>
+	<input type="number" min=0 max=55 size=2 name="num_i2Of5MaxLength" onclick="setDecoderLengthProperty('i2Of5MaxLength', theForm.num_i2Of5MaxLength.value);"> i2Of5MaxLength</input><br>
+	</td><td>
+	<input type="number" min=0 max=55 size=2 name="num_i2Of5MinLength" onclick="setDecoderLengthProperty('i2Of5MinLength', theForm.num_i2Of5MinLength.value);"> i2Of5MinLength</input><br>
+	</td></tr>
+	<tr><td>
+	<input type="number" min=0 max=55 size=2 name="num_korean3of5MaxLength" onclick="setDecoderLengthProperty('korean3of5MaxLength', theForm.num_korean3of5MaxLength.value);"> korean3of5MaxLength</input><br>
+	</td><td>
+	<input type="number" min=0 max=55 size=2 name="num_korean3of5MinLength" onclick="setDecoderLengthProperty('korean3of5MinLength', theForm.num_korean3of5MinLength.value);"> korean3of5MinLength</input><br>
+	</td></tr>
+	<tr><td>
+	<input type="number" min=0 max=55 size=2 name="num_msiMaxLength" onclick="setDecoderLengthProperty('msiMaxLength', theForm.num_msiMaxLength.value);"> msiMaxLength</input><br>
+	</td><td>
+	<input type="number" min=0 max=55 size=2 name="num_msiMinLength" onclick="setDecoderLengthProperty('msiMinLength', theForm.num_msiMinLength.value);"> msiMinLength</input><br>
+	</td></tr>
+	<tr><td>	
+	<input type="number" min=2 max=20 size=2 name="num_upc_EANRetryCount" onclick="setDecoderLengthProperty('upc_EANRetryCount', theForm.num_upc_EANRetryCount.value);"> upc_EANRetryCount</input><br>
+	</td><td>
+	<input type="number" min=0 max=100 size=3 name="num_signatureImageQuality" onclick="setDecoderLengthProperty('signatureImageQuality', theForm.num_signatureImageQuality.value);"> <font color='blue'>signatureImageQuality</font></input><br>
+	</td></tr>
+
+	<tr><td>	
+	<input type="number" min=100 max=1000 size=4 name="num_signatureImageWidth" onclick="setDecoderLengthProperty('signatureImageWidth', theForm.num_signatureImageWidth.value);"> <font color='blue'>signatureImageWidth</font></input><br>
+	</td><td>
+	<input type="number" min=100 max=1000 size=4 name="num_signatureImageHeight" onclick="setDecoderLengthProperty('signatureImageHeight', theForm.num_signatureImageHeight.value);"> <font color='blue'>signatureImageHeight</font></input><br>
+	</td></tr>
+	<tr><td>	
+	<input type="number" min=0 max=100 size=3 name="num_signatureImageSize" onclick="setDecoderLengthProperty('signatureImageSize', theForm.num_signatureImageSize.value);"> <font color='blue'>signatureImageSize</font></input><br>
+	</td><td>
+	<input type="number" min=0 max=3 size=2 name="num_upc_EANSecurityLevel" onclick="setDecoderLengthProperty('upc_EANSecurityLevel', theForm.num_upc_EANSecurityLevel.value);"> <font color='blue'>upc_EANSecurityLevel</font></input><br>
+	</td></tr>
+	</table>
+	</div>
+	
+	
+	<P>
+	<b><a href="javascript:toggleDiv(decoderPropertiesOther);">Decoder Properties (Other Settings)</a></b><br>
+	<div id="decoderPropertiesOther" style="display:none">
+	<table>
+	<tr><td>
+	code11CheckDigitCount
+	</td><td>
+	<input type="radio" name="code11CheckDigitCount" onclick="setDecoderOtherProperty('code11CheckDigitCount', 'unspecified');" checked> unspecified</input>
+	<input type="radio" name="code11CheckDigitCount" onclick="setDecoderOtherProperty('code11CheckDigitCount', 'none');"> none</input>
+	<input type="radio" name="code11CheckDigitCount" onclick="setDecoderOtherProperty('code11CheckDigitCount', 'one');"> one</input>
+	<input type="radio" name="code11CheckDigitCount" onclick="setDecoderOtherProperty('code11CheckDigitCount', 'two');"> two</input>
+	</td></tr><tr><td>
+	i2Of5VerifyCheckDigit 
+	</td><td>
+	<input type="radio" name="i2Of5VerifyCheckDigit" onclick="setDecoderOtherProperty('i2Of5VerifyCheckDigit', 'unspecified');" checked> unspecified</input>
+	<input type="radio" name="i2Of5VerifyCheckDigit" onclick="setDecoderOtherProperty('i2Of5VerifyCheckDigit', 'none');"> none</input>
+	<input type="radio" name="i2Of5VerifyCheckDigit" onclick="setDecoderOtherProperty('i2Of5VerifyCheckDigit', 'uss');"> uss</input>
+	<input type="radio" name="i2Of5VerifyCheckDigit" onclick="setDecoderOtherProperty('i2Of5VerifyCheckDigit', 'opcc');"> opcc</input>
+	</td></tr><tr><td>
+	msiCheckDigits
+	</td><td>
+	<input type="radio" name="msiCheckDigits" onclick="setDecoderOtherProperty('msiCheckDigits', 'unspecified');" checked> unspecified</input>
+	<input type="radio" name="msiCheckDigits" onclick="setDecoderOtherProperty('msiCheckDigits', 'one');"> one</input>
+	<input type="radio" name="msiCheckDigits" onclick="setDecoderOtherProperty('msiCheckDigits', 'two');"> two</input>
+	</td></tr><tr><td>
+	msiCheckDigitScheme 
+	</td><td>
+	<input type="radio" name="msiCheckDigitScheme" onclick="setDecoderOtherProperty('msiCheckDigitScheme', 'unspecified');" checked> unspecified</input>
+	<input type="radio" name="msiCheckDigitScheme" onclick="setDecoderOtherProperty('msiCheckDigitScheme', 'mod11');"> mod11</input>
+	<input type="radio" name="msiCheckDigitScheme" onclick="setDecoderOtherProperty('msiCheckDigitScheme', 'mod10');"> mod10</input>
+	</td></tr><tr><td>
+	upc_EANSecurityLevel 
+	</td><td>
+	<input type="radio" name="upc_EANSecurityLevel" onclick="setDecoderOtherProperty('upc_EANSecurityLevel', 'unspecified');" checked> unspecified</input>
+	<input type="radio" name="upc_EANSecurityLevel" onclick="setDecoderOtherProperty('upc_EANSecurityLevel', 'none');"> none</input>
+	<input type="radio" name="upc_EANSecurityLevel" onclick="setDecoderOtherProperty('upc_EANSecurityLevel', 'ambiguous');"> ambiguous</input>
+	<input type="radio" name="upc_EANSecurityLevel" onclick="setDecoderOtherProperty('upc_EANSecurityLevel', 'all');"> all</input>
+	</td></tr><tr><td>
+	upc_EANSupplementalMode
+	</td><td>
+	<input type="radio" name="upc_EANSupplementalMode" onclick="setDecoderOtherProperty('upc_EANSupplementalMode', 'unspecified');" checked> unspecified</input>
+	<input type="radio" name="upc_EANSupplementalMode" onclick="setDecoderOtherProperty('upc_EANSupplementalMode', 'none');"> none</input>
+	<input type="radio" name="upc_EANSupplementalMode" onclick="setDecoderOtherProperty('upc_EANSupplementalMode', 'auto');"> auto</input>
+	<input type="radio" name="upc_EANSupplementalMode" onclick="setDecoderOtherProperty('upc_EANSupplementalMode', 'always');"> always</input>
+	<input type="radio" name="upc_EANSupplementalMode" onclick="setDecoderOtherProperty('upc_EANSupplementalMode', 'smart');"> <font color='blue'>smart</font></input>
+	<input type="radio" name="upc_EANSupplementalMode" onclick="setDecoderOtherProperty('upc_EANSupplementalMode', '378or379');"> <font color='blue'>378or379</font></input>
+	<input type="radio" name="upc_EANSupplementalMode" onclick="setDecoderOtherProperty('upc_EANSupplementalMode', '978or979');"> <font color='blue'>978or979</font></input>
+	<input type="radio" name="upc_EANSupplementalMode" onclick="setDecoderOtherProperty('upc_EANSupplementalMode', '977');"> <font color='blue'>977</font></input>
+	<input type="radio" name="upc_EANSupplementalMode" onclick="setDecoderOtherProperty('upc_EANSupplementalMode', '414or419or434or439');"> <font color='blue'>414or419or434or439</font></input>
+	</td></tr><tr><td>
+	upcaPreamble
+	</td><td>
+	<input type="radio" name="upcaPreamble" onclick="setDecoderOtherProperty('upcaPreamble', 'unspecified');" checked> unspecified</input>
+	<input type="radio" name="upcaPreamble" onclick="setDecoderOtherProperty('upcaPreamble', 'none');"> none</input>
+	<input type="radio" name="upcaPreamble" onclick="setDecoderOtherProperty('upcaPreamble', 'systemChar');"> systemChar</input>
+	<input type="radio" name="upcaPreamble" onclick="setDecoderOtherProperty('upcaPreamble', 'countryAndSystemChars');"> countryAndSystemChars</input>
+	</td></tr><tr><td>
+	upce0Preamble
+	</td><td>
+	<input type="radio" name="upce0Preamble" onclick="setDecoderOtherProperty('upce0Preamble', 'unspecified');" checked> unspecified</input>
+	<input type="radio" name="upce0Preamble" onclick="setDecoderOtherProperty('upce0Preamble', 'none');"> none</input>
+	<input type="radio" name="upce0Preamble" onclick="setDecoderOtherProperty('upce0Preamble', 'systemChar');"> systemChar</input>
+	<input type="radio" name="upce0Preamble" onclick="setDecoderOtherProperty('upce0Preamble', 'countryAndSystemChars');"> countryAndSystemChars</input>
+	</td></tr><tr><td>
+	upce1Preamble
+	</td><td>
+	<input type="radio" name="upce1Preamble" onclick="setDecoderOtherProperty('upce1Preamble', 'unspecified');" checked> unspecified</input>
+	<input type="radio" name="upce1Preamble" onclick="setDecoderOtherProperty('upce1Preamble', 'none');"> none</input>
+	<input type="radio" name="upce1Preamble" onclick="setDecoderOtherProperty('upce1Preamble', 'systemChar');"> systemChar</input>
+	<input type="radio" name="upce1Preamble" onclick="setDecoderOtherProperty('upce1Preamble', 'countryAndSystemChars');"> countryAndSystemChars</input>
+	</td></tr><tr><td>
+	<font color="blue">code128ISBT128ConcatMode</font>
+	</td><td>
+	<input type="radio" name="code128ISBT128ConcatMode" onclick="setDecoderOtherProperty('code128ISBT128ConcatMode', 'unspecified');" checked> unspecified</input>
+	<input type="radio" name="code128ISBT128ConcatMode" onclick="setDecoderOtherProperty('code128ISBT128ConcatMode', 'never');"> <font color='blue'>never</font></input>
+	<input type="radio" name="code128ISBT128ConcatMode" onclick="setDecoderOtherProperty('code128ISBT128ConcatMode', 'always');"> <font color='blue'>always</font></input>
+	<input type="radio" name="code128ISBT128ConcatMode" onclick="setDecoderOtherProperty('code128ISBT128ConcatMode', 'auto');"> <font color='blue'>auto</font></input>
+	</td></tr><tr><td>
+	<font color="blue">upcEANBooklandFormat</font>
+	</td><td>
+	<input type="radio" name="upc_EANBooklandFormat" onclick="setDecoderOtherProperty('upcEANBooklandFormat', 'unspecified');" checked> unspecified</input>
+	<input type="radio" name="upc_EANBooklandFormat" onclick="setDecoderOtherProperty('upcEANBooklandFormat', 'Isbn10');"> <font color='blue'>Isbn10</font></input>
+	<input type="radio" name="upc_EANBooklandFormat" onclick="setDecoderOtherProperty('upcEANBooklandFormat', 'Isbn13');"> <font color='blue'>Isbn13</font></input>
+	</td></tr><tr><td>
+	<font color="blue">compositeAbUccLinkMode</font>
+	</td><td>
+	<input type="radio" name="compositeAbUccLinkMode" onclick="setDecoderOtherProperty('compositeAbUccLinkMode', 'unspecified');" checked> unspecified</input>
+	<input type="radio" name="compositeAbUccLinkMode" onclick="setDecoderOtherProperty('compositeAbUccLinkMode', 'never');"> <font color='blue'>never</font></input>
+	<input type="radio" name="compositeAbUccLinkMode" onclick="setDecoderOtherProperty('compositeAbUccLinkMode', 'always');"> <font color='blue'>always</font></input>
+	<input type="radio" name="compositeAbUccLinkMode" onclick="setDecoderOtherProperty('compositeAbUccLinkMode', 'auto');"> <font color='blue'>auto</font></input>
+	
+	</td></tr></table>
+
+	
+	</div>
+
+
+	<P>
+	<b><a href="javascript:toggleDiv(rsmDiv);">RSM Get / Set Tests:</a></b><br>
+	<div id="rsmDiv" style="display:block">
+	<select id="attlist" onchange="onSuggestValues();">
+	<option>ScanLineWidth</option>
+	<option>DecodeFeedback</option>
+	<option>ModelNumber</option>
+	<option>SerialNumber</option>
+	<option>DateOfManufacture</option>
+	<option>DateOfService</option>
+	<option>BluetoothAddress</option>
+	<option>BluetoothAuthentication</option>
+	<option>BluetoothEncryption</option>
+    <option>BluetoothPINCode</option>
+	<option>BluetoothReconnectAttempts</option>
+	<option>BluetoothBeepOnReconnectAttempt</option>
+	<option>BluetoothHidAutoReconnect</option>
+    <option>BluetoothFriendlyName</option>
+	<option>BluetoothPINCodeType</option>
+	<option>BluetoothInquiryMode</option>
+	<option>Mems</option>
+	<option>ProximityEnable</option>
+	<option>ProximityDistance</option>
+	<option>PagingEnable</option>
+	<option>PagingBeepSequence</option>
+	<option>LowBatteryIndication</option>
+	<option>ScanTriggerWakeup</option>
+	<option>BluetoothAutoReconnect</option>
+	<option>LowBatteryIndicationCycle</option>
+	<option>PagingActivate</option>
+	<option>BTDisconnect</option>
+	<option>BTUnpair</option>
+	<option>IgnoreCode128USPS</option>
+	<option>ProximityContinuous</option>
+	<option>GoodScansDelay</option>
+	<option>ForceSavePairingBarcode</option>
+	<option>FirmwareVersion</option>
+	<option>DeviceClass</option>
+	<option>BatteryStatus</option>
+	<option>BatteryCapacity</option>
+	<option>BatteryID</option>
+	</select>
+
+
+<INPUT TYPE="button" VALUE="Get Specified Parameter" ONCLICK="onGet();"><INPUT TYPE="button" VALUE="Mark all RSM Parameters for retrieval" ONCLICK="getAllRSM();"><BR>
+<INPUT TYPE="text" size="27" value="Set to Value..." id="attValue" ONFOCUS="ClearValueField();">
+<INPUT TYPE="button" VALUE="Set RSM Parameter" ONCLICK="onSet();"><P>
+<b>Legal Values:</b> <span id=legal>Wide; Narrow</span><br>
+<b>Attribute:</b> <span id=att></span><br>
+<div id=rsmMsg></div><br>
+
+</div>
+
+
+
+</form>
+<P>	
+
+<a href="javascript:location.reload();">Refresh the page</a> | <a href="http://www.jrq768.wtgdev.net">Main JRQ768 Page</a>
+<br>This page has been modified to work either with ActiveX or with an inherent 'Generic' object.
+
+
+
+  </BODY>
+</HTML>

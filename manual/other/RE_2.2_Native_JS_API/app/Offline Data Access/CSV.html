@@ -1,0 +1,365 @@
+<HTML>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+	<META HTTP-Equiv="minimizeButton" Content="visibility:visible;top:100">	
+	<META HTTP-Equiv="FileTransfer" Content="Destination:url('file://\application\test.csv')">
+	<META HTTP-Equiv="FileTransfer" Content="CreateFolders:True">
+	<META HTTP-Equiv="FileTransfer" Content="OverWrite:True">
+	<!--<META HTTP-Equiv="FileTransfer" Content="Source:url('file://\temp\test.csv')">-->
+	<META HTTP-Equiv="FileTransfer" Content="Source:url('http://10.233.85.82/NEON/Offline Data Access/test.csv')">
+    <META HTTP-Equiv="FileTransfer" Content="TransferEvent:url('Javascript:doXfer('%s');')">  
+
+		
+	<TITLE>Ce ODAX Test Page</TITLE>
+</HEAD>
+<BODY>
+		<H2><FONT COLOR="#0000ff">ODAX Test Page</FONT></H2>
+		<H3><FONT COLOR="#000099">Using a CSV File</FONT></H2>
+
+		<DIV id="result" style="color:Red; font-size:large;">Result:</div>
+
+
+		
+
+		<INPUT type="button" value="Get Test File" onclick="getFile();">
+		
+<DIV id="Queryresult" style="color:Red; font-size:large;"></div>
+<FORM NAME="ODAXForm">
+			<h3>Query</h3>
+			<table border="1">
+				<tr>
+					<td>
+						<INPUT TYPE="BUTTON" VALUE="Record Count" OnClick="DoSelect();">
+					</td>
+					<td>
+						<input type="text" name="RecordCount">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<input type="button" value="Get Column" onclick="GetColumnData();">
+					</td>
+					<td>
+						<input type="text" name="ColumnData">
+					</td>
+				</tr>
+				<tr>
+					<td colspan="4" align="center">
+						<input type="button" value="Move Next" onclick="DoNavigateRecordSet(1);">
+					</td>
+				</tr>
+				<tr>
+					<td colspan="4" align="center">
+						<input type="button" value="Move Previous" onclick="DoNavigateRecordSet(2);">
+					</td>
+				</tr>
+				<tr>
+					<td colspan="4" align="center">
+						<input type="button" value="Move First" onclick="DoNavigateRecordSet(3);">
+					</td>
+				</tr>
+				<tr>
+					<td colspan="4" align="center">
+						<input type="button" value="Move Last" onclick="DoNavigateRecordSet(4);">
+					</td>
+				</tr>
+				<tr>
+					<td colspan="4" align="center">
+						<input type="button" value="Clear Result Set" onclick="DoNavigateRecordSet(5);">
+					</td>
+				</tr>
+			</table>
+			
+
+
+<DIV id="Insertresult" style="color:Red; font-size:large;"></div>
+
+<h3>Insert</h3>
+			<table border="1">
+				<tr>
+					<td>
+						Value 1
+					</td>
+					<td>
+						Value 2
+					</td>
+					<td>
+						Value 3
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<input type="text" name="Field1Value" ID="Text1">
+					</td>
+					<td>
+						<input type="text" name="Field2Value" ID="Text2">
+					</td>
+					<td>
+						<input type="text" name="Field3Value" ID="Text3">
+					</td>
+				</tr>
+				<tr>
+					<td colspan="4" align=center>
+						<input type="button" value="Insert record" onclick="DoInsert();">
+					</td>
+				</tr>
+			</table>
+
+
+<DIV id="Updateresult" style="color:Red; font-size:large;"></div>
+
+			<h3>Update</h3>
+			<table border=1>
+				<tr>
+					<td>
+						New Value
+					</td>
+					<td>
+						Condition Value
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<input type="text" name="UpdateFieldVal">
+					</td>
+					<td>
+						<input type="text" name="UpdateConditionVal">
+					</td>
+				</tr>
+				<tr>
+					<td colspan=4 align=center>
+						<input type=button value="Update Record" onclick="DoUpdate();">
+					</td>
+				</tr>
+			</table>
+
+
+<DIV id="Deleteresult" style="color:Red; font-size:large;"></div>
+			<h3>Delete</h3>
+			<table border=1>
+				<tr>
+					<td>
+						Enter Value to Delete
+					</td>
+				</tr>
+				<tr>
+					<td colspan=4>
+						<input type="text" name="DeleteFieldVal">
+					</td>
+				</tr>
+				<tr>
+					<td colspan=4 align=center>
+						<input type=button value="Delete Record" onclick="DoDelete();" >
+					</td>
+				</tr>
+			</table>
+		</FORM>
+		
+		 <P><INPUT TYPE="button" VALUE="Back" ONCLICK="location.href='./Offline Data Access.html'"></P>
+		 	
+	</BODY>
+</HTML>
+
+<SCRIPT LANGUAGE="JAVASCRIPT">
+
+//var odax = new ActiveXObject("CeODAX.ODAX");
+//var generic = new ActiveXObject("PocketBrowser.Generic");
+try
+{
+var odax = new ActiveXObject("CeODAX.ODAX");
+}
+catch(err)
+{
+var ODAXPlugin = document.createElement('embed'); 
+ODAXPlugin.setAttribute('id',"embed1"); 
+ODAXPlugin.setAttribute('type',"application/x-wtg-legacy-odax"); 
+ODAXPlugin.setAttribute('hidden',"true"); 
+
+// Attach the plugin embed tags to the body 
+var theBody = document.getElementsByTagName('body')[0]; 
+theBody.appendChild(ODAXPlugin); 
+}
+
+try
+{
+var generic = new ActiveXObject("PocketBrowser.Generic");
+}
+catch(err)
+{
+var GenericPlugin = document.createElement('embed'); 
+GenericPlugin.setAttribute('id',"embed2"); 
+GenericPlugin.setAttribute('type',"application/x-wtg-legacy-generic"); 
+GenericPlugin.setAttribute('hidden',"true"); 
+
+// Attach the plugin embed tags to the body 
+var theBody = document.getElementsByTagName('body')[0]; 
+theBody.appendChild(GenericPlugin); 
+}
+
+
+
+function DoSelect()
+{
+    //    var n = odax.Select('SELECT * FROM \'\\application\\test.csv\' WHERE field1=\'red1\';', ',', true);
+    var n = odax.Select('SELECT * FROM \'\\application\\test.csv\';', ',', true);
+    ODAXForm.RecordCount.value=n;
+}
+
+function GetColumnData()
+{
+	var n = odax.Select('SELECT * FROM \'\\application\\test.csv\';', ',', true);
+	var colval = odax.Get("field1");
+	
+	ODAXForm.ColumnData.value= colval;
+	if (colval.length < 1) {
+	    var strErrorMsg = odax.GetLastErrorString();
+	    //alert(strErrorMsg);
+	    Queryresult.innerHTML = strErrorMsg;
+	}	
+}
+
+
+
+
+function DoNavigateRecordSet(command)
+{
+	switch(command)
+	{
+	    case 1:
+	        {
+	            if (0 != odax.MoveNext()) {
+	                //alert("Cannot Move to Next Record!!");
+	                Queryresult.innerHTML = "Cannot Move to Next Record!!";
+	            }
+	            else {
+	                var colval = odax.Get("field1");
+	                ODAXForm.ColumnData.value = colval;
+	            }
+	            break;
+	        }
+case 2:
+    {
+        if (0 != odax.MovePrev()) {
+            //alert("Cannot Move to Previous Record!!");
+            Queryresult.innerHTML = "Cannot Move to Previous Record!!";
+        }
+        else {
+            var colval = odax.Get("field1");
+            ODAXForm.ColumnData.value = colval;
+        }
+        break;
+    }
+
+case 3:
+    {
+        if (0 != odax.MoveFirst()) {
+            //alert("Cannot Move to First Record!!");
+            Queryresult.innerHTML = "Cannot Move to First Record!!";
+        }
+        else {
+            var colval = odax.Get("field1");
+            ODAXForm.ColumnData.value = colval;
+        }
+        break;
+    }
+case 4:
+    {
+        if (0 != odax.MoveLast()) {
+            //alert("Cannot Move to Last Record!!");
+            Queryresult.innerHTML = "Cannot Move to Last Record!!";
+        }
+        else {
+            var colval = odax.Get("field1");
+            ODAXForm.ColumnData.value = colval;
+        }
+        break;
+    }
+		case 5:
+		{
+			odax.Clear();
+		}
+	}
+}
+function DoInsert()
+{
+	var FieldValue1 = ODAXForm.Field1Value.value;
+	var FieldValue2 = ODAXForm.Field2Value.value;
+	var FieldValue3 = ODAXForm.Field3Value.value;
+	
+	if(FieldValue1.length < 1 || FieldValue2.length < 1 || FieldValue3.length < 1)
+	{
+	    //alert("Please enter a valid value for all three fields");
+	    Insertresult.innerHTML = "Please enter a valid value for all three fields";
+	}
+	else
+	{
+		var QueryString = 'INSERT INTO \'\\application\\test.csv\' (field1,field2,field3) VALUES (';
+		QueryString += '\''+FieldValue1+'\',';
+		QueryString += '\''+FieldValue2+'\',';
+		QueryString += '\''+FieldValue3+'\');';
+		//alert(QueryString);
+		var count = odax.Execute(QueryString,1,',',true);		// 1 - Denotes CSV File
+															// true - Denotes first row has column names
+		//alert(count + " Record(s) Inserted");
+		Insertresult.innerHTML = count + " Record(s) Inserted";
+	}
+}
+
+function DoUpdate()
+{
+	if(ODAXForm.UpdateFieldVal.value.length < 1  )
+	{
+	    //alert("Please Enter Valid Value");
+	    Updateresult.innerHTML = "Please Enter Valid Value";
+	}
+	else
+	{
+		var QueryString = 'UPDATE \'\\application\\test.csv\' SET field1=';
+		QueryString += '\''+ODAXForm.UpdateFieldVal.value+'\'';
+		QueryString += ' WHERE field1=\'';
+		QueryString += ODAXForm.UpdateConditionVal.value+"\';"
+		//alert(QueryString);
+		var count = odax.Execute(QueryString,1,',',true);
+		//alert(count+" Record(s) Updated");
+		Updateresult.innerHTML = count + " Record(s) Updated";
+	}	
+}
+
+function DoDelete()
+{
+	if(ODAXForm.DeleteFieldVal.value.length < 1  )
+	{
+	    //alert("Please Enter Valid Value");
+	    Deleteresult.innerHTML = "Please Enter Valid Value";
+	}
+	else
+	{
+		var QueryString = 'DELETE FROM \'\\application\\test.csv\' WHERE field1=';
+		QueryString += '\''+ODAXForm.DeleteFieldVal.value+'\';'; // Having the Semicolan in the statement 
+																 //	is VERY Important, because if you omit it
+																 // the object goes into a never ending loop
+		//alert(QueryString);
+		var count = odax.Execute(QueryString,1,',',true); // Need to use the Delimeter even if it is not used.
+		//alert(count + " Record(s) Deleted");
+		Deleteresult.innerHTML = count + " Record(s) Deleted";
+	}	
+}
+ function getFile()
+    {
+//          generic.InvokeMETAFunction("FileTransfer", "Destination:url('file://\temp\test.csv')");
+//          generic.InvokeMETAFunction("FileTransfer", "CreateFolders:True");
+//          generic.InvokeMETAFunction("FileTransfer", "OverWrite:True");
+//          generic.InvokeMETAFunction("FileTransfer", "Source:url('http://10.233.85.82/NEON/Offline Data Access/test.csv')");
+//          generic.InvokeMETAFunction("FileTransfer", "TransferEvent:url('Javascript:doXfer('%s');')");
+          generic.InvokeMETAFunction("FileTransfer", "Transfer");
+     
+          
+     }
+    function doXfer(response)
+    {
+        //alert('File transfer Complete: ' + response);
+    	result.innerHTML=	"File transfer Complete: " + response;
+    }
+    
+		</SCRIPT>

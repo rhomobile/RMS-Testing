@@ -1,0 +1,42 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+<META HTTP-Equiv="quitbutton" Content="visibility:visible">
+<META HTTP-Equiv="quitbutton" Content="Left:10">
+<META HTTP-Equiv="quitbutton" Content="Top:10">
+
+<META HTTP-Equiv="battery" Content="visibility:visible">
+<META HTTP-Equiv="battery" Content="Left:50">
+<META HTTP-Equiv="battery" Content="Top:50">
+<META HTTP-Equiv="battery" Content="IconPosition:Bottom;Iconposition:right">
+<META HTTP-Equiv="battery" Content="color:#FF0000">   
+
+<META HTTP-Equiv="battery" Content="BatteryEvent:uri(Javascript:OnBattery('%s','%s','%s');)">
+
+
+
+
+</head>
+<body>
+<P><BR></P>
+<P><BR></P>
+<H1>BatteryNavigate</H1>
+<div id="bat">Battery readings should appear here</div>
+
+
+<BR><BR>
+<A HREF="./EMML1.0.html">Back</A>
+
+
+</body>
+</html>
+
+
+<SCRIPT LANGUAGE="JavaScript">
+function OnBattery(AC, main, backup)
+	{
+	bat.innerHTML = "AC: " + AC + "\<BR>main:" + main + "\<BR>backup: " + backup;
+	return;
+	}
+</SCRIPT>

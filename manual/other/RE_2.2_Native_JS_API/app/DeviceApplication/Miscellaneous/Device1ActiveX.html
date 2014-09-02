@@ -1,0 +1,334 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+<title>Device Application Test</title>
+<META HTTP-Equiv="sipbutton" Content="visibility:visible">
+<script language="javascript">
+ var gen = new ActiveXObject("PocketBrowser.Generic"); 
+var theOutput="<b>Application State is:</b> ";
+function setApps()
+{
+	var SelectedValue = frm.appdropdown.selectedIndex;
+	var selectBacklight = frm.appdropdown.options[SelectedValue].value;
+    Message.innerHTML="value is:"+selectBacklight;
+	switch(selectBacklight)
+	{
+		case 'quit':
+
+			gen.InvokeMETAFunction('application', 'quit');
+			break;
+
+		case 'minimize':
+
+			gen.InvokeMETAFunction('application', 'minimize');
+			break;
+			
+	   case 'restore':
+            gen.InvokeMETAFunction('application', 'minimize');
+			gen.InvokeMETAFunction('application', 'restore');
+			break;
+			
+		case 'EMPTY':
+
+			gen.InvokeMETAFunction('application', '');
+			break;
+			
+		case 'MandQ':
+
+			gen.InvokeMETAFunction('application', 'minimize');
+			gen.InvokeMETAFunction('application', 'quit');
+			break;
+
+
+	}
+}
+
+function setAppsevent()
+{
+	var SelectedValue = frm.appeventdropdown.selectedIndex;
+	var selectEvent = frm.appeventdropdown.options[SelectedValue].value;
+    Message.innerHTML="Event is:"+selectEvent;
+	switch(selectEvent)
+	{
+		case 'JSCRIPT':
+
+			gen.InvokeMETAFunction('application', "applicationEvent:url('JavaScript:doStatejsFunction('%s');')");
+			break;
+
+		case 'JSON':
+
+			gen.InvokeMETAFunction('application', "applicationEvent:url('JavaScript:doStatejsonFunction(%json);')");
+			break;
+			
+	   case 'DETACH':
+	   
+            gen.InvokeMETAFunction('application', "applicationEvent:url('')");
+			break;
+			
+	  case 'URL':
+
+			gen.InvokeMETAFunction('application', "applicationEvent:url('http://10.233.85.82/Neon/DeviceApplication/pageNavigation.html')");
+			break;
+
+		case 'EMPTY':
+
+			gen.InvokeMETAFunction('application', 'applicationEvent:');
+			break;
+			
+		
+
+	}
+}
+
+function doStatejsFunction(applicationState)
+{
+theOutput += applicationState;
+Message.innerHTML=theOutput;
+}
+
+function doStatejsonFunction(jsonObject)
+{
+theOutput+=jsonObject.applicationState;
+Message.innerHTML=theOutput;
+}
+
+function setBacklight()
+{
+	var SelectedValue = frm.backdropdown.selectedIndex;
+	var selectBacklight = frm.backdropdown.options[SelectedValue].value;	
+    Message.innerHTML="value is:"+selectBacklight;
+	switch(selectBacklight)
+	{
+		case 'ON':
+
+			gen.InvokeMETAFunction('backlight', 'ON');
+			break;
+
+		case 'OFF':
+
+			gen.InvokeMETAFunction('backlight', 'Off');
+			break;
+			
+	   case 'OLDON':
+
+			gen.InvokeMETAFunction('backlight-On',"Intensity:2" );
+			break;
+			
+	   case 'getBacklightSettings':
+
+			gen.InvokeMETAFunction("backlight", "getBacklightSettings");
+			break;
+			
+	    case 'OLDOFF':
+
+			gen.InvokeMETAFunction('backlight-Off', "Intensity:5");
+			break;
+			
+	   case 'EMPTY1':
+
+			gen.InvokeMETAFunction('backlight-On', "");
+			break;
+		case 'EMPTY':
+
+			gen.InvokeMETAFunction('backlight',"" );
+			break;
+
+
+	}
+}
+
+function setbacklightevent()
+{
+	var SelectedValue = frm.backlighteventdropdown.selectedIndex;
+	var selectEvent = frm.backlighteventdropdown.options[SelectedValue].value;
+    Message.innerHTML="Backlight Event is:"+selectEvent;
+	switch(selectEvent)
+	{
+		case 'JSCRIPT':
+
+			gen.InvokeMETAFunction('backlight', "backlightSettingsEvent:url('JavaScript:getsettingsjsFunction('%s',%s,'%s');')");
+			break;
+
+		case 'JSON':
+
+			gen.InvokeMETAFunction('backlight', "backlightSettingsEvent:url('JavaScript:getsettingsjsonFunction(%json);')");
+			break;
+			
+	   case 'DETACH':
+	   
+            gen.InvokeMETAFunction('backlight', "backlightSettingsEvent:url('')");
+			break;
+			
+	  case 'URL':
+
+			gen.InvokeMETAFunction('backlight', "backlightSettingsEvent:url('http://10.233.85.82/Neon/DeviceApplication/pageNavigation.html')");
+			break;
+
+		case 'EMPTY':
+
+			gen.InvokeMETAFunction('backlight', 'backlightSettingsEvent:');
+			break;
+			
+		
+
+	}
+}
+
+function getsettingsjsonFunction(jsonObject)
+  {
+              var theOutput = "<B>Backlight State:</B>" + jsonObject.state + "<P>";
+              theOutput = theOutput + "<B>Backlight Intensity:</b> " + jsonObject.intensity + "<P>";
+              theOutput = theOutput + "<b>Backlight Intensity Range:</b><P>";
+              for (var i=0; i<jsonObject.intensityRange.length; i = i + 1)
+              {
+                      theOutput = theOutput + jsonObject.intensityRange[i] + "<BR>";
+              }
+              theOutput = theOutput + "<P>";
+              Message.innerHTML=theOutput;
+    }
+    
+    
+ function getsettingsjsFunction(intensity,intensityRange,state)
+  {
+              var theOutput = "<B>Backlight State:</B>" + state + "<P>";
+              theOutput = theOutput + "<B>Backlight Intensity:</b> " + intensity + "<P>";
+              theOutput = theOutput + "<b>Backlight Intensity Range:</b><P>";
+              for (var i=0; i<intensityRange.length; i = i + 1)
+              {
+                      theOutput = theOutput + intensityRange[i] + "<BR>";
+              }
+              theOutput = theOutput + "<P>";
+              Message.innerHTML=theOutput;
+    }
+
+
+
+function setIntensity()
+{
+	var IntensityValue = frm.txtIntensity.value;
+	var IValue = "Intensity:"+IntensityValue;
+	Message.innerHTML="value is:"+IValue;
+	gen.InvokeMETAFunction('backlight', IValue);
+	
+}
+
+
+
+
+
+function selectDevice()
+{
+	var sltdev=frm.devdropdown.selectedIndex;
+	var selecteddev = frm.devdropdown.options[sltdev].value;
+	Message.innerHTML="SelectedDevice:"+selecteddev;
+	switch(selecteddev)
+	{
+		case 'Suspend':
+
+			gen.InvokeMETAFunction('Device', 'Suspend');
+			break;
+
+		case 'Calibrate':
+
+			gen.InvokeMETAFunction('Device', 'Calibrate');
+			break;
+		
+		case 'Null':
+
+			gen.InvokeMETAFunction('Device', '');
+			break;
+
+		case 'SandC':
+
+			gen.InvokeMETAFunction('Device', 'Suspend');
+			gen.InvokeMETAFunction('Device', 'Calibrate');
+			break;
+	}
+}
+
+</script>
+
+
+</head>
+<body>
+<form id="frm" action="">
+<br /><br /><br />
+<b>Using ActiveXApproach</b>
+<div id="Message">Message</div>
+<hr>
+Application Event:
+<select name="appeventdropdown" id="Select2">
+<option SELECTED VALUE="">Select</OPTION>
+<option value="JSCRIPT">JSCRIPT</option>
+<option value="JSON">JSON</option>
+<option value="DETACH">DETACH</option>
+<option value="URL">URL</option>
+<option value="EMPTY">EMPTY</option>
+</select>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<input type="button" onclick="setAppsevent();" value="SetEvent">
+<br /><br />
+Method:<select name="appdropdown" id="Select1">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="quit">quit</option>
+<option value="minimize">minimize</option>
+<option value="restore">restore</option>
+<option value="MandQ">MandQ</option>
+<option value="EMPTY">EMPTY</option>
+
+
+</select>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<input type=button onclick="setApps();" value="Set">
+
+<hr>
+BacklightEvent:
+<select name="backlighteventdropdown" id="Select3">
+<option SELECTED VALUE="">Select</OPTION>
+<option value="JSCRIPT">JSCRIPT</option>
+<option value="JSON">JSON</option>
+<option value="DETACH">DETACH</option>
+<option value="URL">URL</option>
+<option value="EMPTY">EMPTY</option>
+</select>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<input type="button" onclick="setbacklightevent();" value="SetEvent">
+<br /><br />
+Method:<select name="backdropdown" id="backdropdown">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="ON">ON</option>
+<option value="OFF">OFF</option>
+<option value="OLDON">OLDON</option>
+<option value="getBacklightSettings">getBacklightSettings</option>
+<option value="OLDOFF">OLDOFF</option>
+<option value="EMPTY">EMPTY</option>
+<option value="EMPTY1">EMPTY1</option>
+
+</select>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<input type=button onclick="setBacklight();" value="SetBacklight">
+<br><br>
+
+Intensity:<Textarea id="txtIntensity"cols="10" rows="1">2</Textarea>
+&nbsp;&nbsp;&nbsp;&nbsp;
+<input type=button onclick="setIntensity();" value="SetIntensity">
+
+<hr>
+Device
+<select name="devdropdown" id="devdropdown" onChange="selectDevice();">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="Suspend">Suspend</option>
+<option value="Calibrate">Calibrate</option>
+<option value="Null">Null</option>
+<option value="SandC">SandC</option>
+</select>
+<hr>
+<br>
+
+<br><br>
+<A HREF="./Device Application.html">Back</A>
+
+</form>
+</body>
+</html>

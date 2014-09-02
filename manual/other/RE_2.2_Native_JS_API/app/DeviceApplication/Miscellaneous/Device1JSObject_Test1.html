@@ -1,0 +1,1537 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+<title>Device Application Test</title>
+<META HTTP-Equiv="sipbutton" Content="visibility:visible">
+<script language="javascript">
+var selectedVisibility="";
+var count=0;
+var theOutput="<b>Application State is:</b> ";
+var NTFY_UNKNOWN	= -1;
+var notType = new Array('LED', 'BEEPER', 'PAGER');
+var NTFY_INDEX = 0;
+var NTFY_TYPE = 1;
+var NTFY_NAME = 2;
+var selectedValue="";
+var eventScript="";
+var count = 0;
+var now = new Date();
+
+function setApps()
+{
+	var SelectedValue = frm.appdropdown.selectedIndex;
+	var selectBacklight = frm.appdropdown.options[SelectedValue].value;
+    Message.innerHTML="value is:"+selectBacklight;
+	switch(selectBacklight)
+	{
+		case 'quit':
+
+			application.quit();
+			break;
+
+		case 'minimize':
+
+			application.minimize();
+			break;
+			
+	   case 'restore':
+            application.minimize();
+            alert("Restore");
+            application.restore();
+			break;
+			
+		case 'MandQ':
+
+			application.minimize();
+            application.quit();
+			break;
+
+
+	}
+}
+
+function setAppsevent()
+{
+	var SelectedValue = frm.appeventdropdown.selectedIndex;
+	var selectEvent = frm.appeventdropdown.options[SelectedValue].value;
+    Message.innerHTML="Event is:"+selectEvent;
+	switch(selectEvent)
+	{
+		case 'JSCRIPT':
+
+			//generic.InvokeMETAFunction('application', "applicationEvent:url('JavaScript:doStatejsFunction('%s');')");
+			application.applicationEvent= "url('javascript:alert('Event triggered');')";
+			//application.applicationEvent= "url('javascript:doStatejsFunction('%s');')";
+			//application.applicationEvent= "doStatejsFunction('%s');";
+			break;
+
+		case 'JSON':
+
+			//generic.InvokeMETAFunction('application', "applicationEvent:url('JavaScript:doStatejsonFunction(%json);')");
+			application.applicationEvent= "doStatejsonFunction(%json);";
+			break;
+			
+	   case 'DETACH':
+	   
+            //generic.InvokeMETAFunction('application', "applicationEvent:url('')");
+            application.applicationEvent="url('')";
+			break;
+			
+	  case 'URL':
+
+			//generic.InvokeMETAFunction('application', "applicationEvent:url('http://10.233.85.82/Neon/DeviceApplication/pageNavigation.html')");
+			application.applicationEvent="url('http://10.233.85.82/Neon/DeviceApplication/pageNavigation.html')";
+			break;
+
+		case 'EMPTY':
+
+			//generic.InvokeMETAFunction('application', 'applicationEvent:');
+			application.applicationEvent="";
+			break;
+			
+		
+
+	}
+}
+
+function doStatejsFunction(applicationState)
+{
+theOutput += applicationState;
+Message.innerHTML=theOutput;
+}
+
+function doStatejsonFunction(jsonObject)
+{
+theOutput+=jsonObject.applicationState;
+Message.innerHTML=theOutput;
+}
+
+
+
+function setBacklight()
+{
+	var SelectedValue = frm.backdropdown.selectedIndex;
+	var selectBacklight = frm.backdropdown.options[SelectedValue].value;	
+    Message.innerHTML="value is:"+selectBacklight;
+	switch(selectBacklight)
+	{
+		case 'ON':
+
+			//generic.InvokeMETAFunction('backlight', 'ON');
+			backlight.on();
+			break;
+
+		case 'OFF':
+
+			backlight.off();
+			break;
+			
+	  
+			
+	   case 'getBacklightSettings':
+	   
+			backlight.getBacklightSettings();
+			break;
+			
+	   
+
+
+	}
+}
+
+function setbacklightevent()
+{
+	var SelectedValue = frm.backlighteventdropdown.selectedIndex;
+	var selectEvent = frm.backlighteventdropdown.options[SelectedValue].value;
+    Message.innerHTML="Backlight Event is:"+selectEvent;
+	switch(selectEvent)
+	{
+		case 'JSCRIPT':
+
+			//generic.InvokeMETAFunction('backlight', "backlightSettingsEvent:url('JavaScript:getsettingsjsFunction('%s',%s,'%s');')");
+			backlight.backlightSettingsEvent="getsettingsjsFunction('%s',%s,'%s');";
+			break;
+
+		case 'JSON':
+
+			//generic.InvokeMETAFunction('backlight', "backlightSettingsEvent:url('JavaScript:getsettingsjsonFunction(%json);')");
+			backlight.backlightSettingsEvent="getsettingsjsonFunction(%json);";
+			break;
+			
+	   case 'DETACH':
+	   
+            //generic.InvokeMETAFunction('backlight', "backlightSettingsEvent:url('')");
+            backlight.backlightSettingsEvent="url('')";
+			break;
+			
+	  case 'URL':
+
+			//generic.InvokeMETAFunction('backlight', "backlightSettingsEvent:url('http://10.233.85.82/Neon/DeviceApplication/pageNavigation.html')");
+			 backlight.backlightSettingsEvent="url('http://10.233.85.82/Neon/DeviceApplication/pageNavigation.html')";
+			break;
+
+		case 'EMPTY':
+
+			//generic.InvokeMETAFunction('backlight', 'backlightSettingsEvent:');
+			backlight.backlightSettingsEvent="";
+			break;
+			
+		
+
+	}
+}
+
+function getsettingsjsonFunction(jsonObject)
+  {
+              var theOutput = "<B>Backlight State:</B>" + jsonObject.state + "<P>";
+              theOutput = theOutput + "<B>Backlight Intensity:</b> " + jsonObject.intensity + "<P>";
+              theOutput = theOutput + "<b>Backlight Intensity Range:</b><P>";
+              for (var i=0; i<jsonObject.intensityRange.length; i = i + 1)
+              {
+                      theOutput = theOutput + jsonObject.intensityRange[i] + "<BR>";
+              }
+              theOutput = theOutput + "<P>";
+              Message.innerHTML=theOutput;
+    }
+    
+    
+ function getsettingsjsFunction(intensity,intensityRange,state)
+  {
+              var theOutput = "<B>Backlight State:</B>" + state + "<P>";
+              theOutput = theOutput + "<B>Backlight Intensity:</b> " + intensity + "<P>";
+              theOutput = theOutput + "<b>Backlight Intensity Range:</b><P>";
+              for (var i=0; i<intensityRange.length; i = i + 1)
+              {
+                      theOutput = theOutput + intensityRange[i] + "<BR>";
+              }
+              theOutput = theOutput + "<P>";
+              Message.innerHTML=theOutput;
+    }
+
+
+
+function setIntensity()
+{
+	var IntensityValue = frm.txtIntensity.value;
+	var IValue = "Intensity:"+IntensityValue;
+	Message.innerHTML="value is:"+IValue;
+	backlight.intensity=IntensityValue;
+	
+}
+
+
+
+function selectDevice()
+{
+	var sltdev=frm.devdropdown.selectedIndex;
+	var selecteddev = frm.devdropdown.options[sltdev].value;
+	Message.innerHTML="SelectedDevice:"+selecteddev;
+	switch(selecteddev)
+	{
+            case 'Suspend':
+
+		    device.suspend(); 
+			break;
+
+		case 'Calibrate':
+
+		device.calibrate(); 
+		break;
+		
+
+		case 'SandC':
+
+			device.suspend(); 
+			device.calibrate(); 
+			break;
+		case 'Wake':
+            //alert("1");
+            
+            //setTimeout("dowake()", 3000);
+            //dosuspend();
+	        //setTimeout("dowake()", 3000);
+	        
+			device.suspend();
+			setTimeout("device.wake()", 3000);
+			break;	
+	}
+}
+
+//function dosuspend()
+//{
+//alert("hi1");
+//device.suspend();
+//alert("bye1");
+//}
+
+//function dowake()
+//{
+//alert("hi");
+//device.wake();
+//alert("bye");
+//}
+function selectVisibility()
+{
+	var sltVisibility=frm.hgVisibility.selectedIndex;
+	selectedVisibility = frm.hgVisibility.options[sltVisibility].value;
+	switch(selectedVisibility)
+	{
+		case 'Visible':
+		    hourglass.visibility ="Visible";
+			break;
+
+		case 'Hidden':
+            hourglass.visibility ="Hidden";
+			break;
+
+		
+		case 'Address':
+            hourglass.visibility ="Address";
+			break;
+	}
+}
+
+function setLeftPosition()
+{
+	var leftpst=frm.leftPosition.value;
+	var leftpstvalue="Left:"+leftpst;
+	Message.innerHTML=""+leftpstvalue;
+	hourglass.left=leftpst;
+}
+
+function setTopPosition()
+{
+	var toppst=frm.topPosition.value;
+	var toppstvalue="Top:"+toppst;
+	Message.innerHTML=""+toppstvalue;
+	hourglass.top=toppst;
+
+}
+
+
+
+function selectReboot()
+{
+	var sltreboot=frm.rbboot.selectedIndex;
+	var selectedReboot = frm.rbboot.options[sltreboot].value;
+	switch(selectedReboot)
+	{
+		case 'Warm':
+            Message.innerHTML="Warm";
+            reboot.bootType="Warm";
+			break;
+
+		case 'Cold':
+            Message.innerHTML="Cold";
+			reboot.bootType="Cold";
+			break;
+		case 'ColdCAD':
+            Message.innerHTML="ColdCAD";
+            //alert("ColdCAD");
+			reboot.bootType="ColdCAD";
+			break;
+		case 'Null':
+		    Message.innerHTML="Null";
+            reboot.bootType="Null";
+			break;
+	}
+}
+
+
+
+function SetpoweronEvent()
+{
+	var SelectedValue1 = frm.OnPower.selectedIndex;
+	var selectPower = frm.OnPower.options[SelectedValue1].value;
+
+	switch(selectPower)
+	{
+	    case 'JSAlert':
+	        Message.innerHTML="JSAlert";
+	        powerOn.powerOnEvent= "alert('Powered Up');";
+
+			break;
+
+		case 'FileURL':
+		    Message.innerHTML="FileURL";
+		    powerOn.powerOnEvent="url('FILE://\\Application\\device2localpageNavigation.html')";
+			break;
+			
+		case 'HttpURL':
+            Message.innerHTML="HttpURL";
+            powerOn.powerOnEvent="url('http://10.233.85.82/Neon/index.html')";
+			break;
+			
+		case 'DETACH':
+	        Message.innerHTML="DETACH";
+           powerOn.powerOnEvent="";
+			break;
+
+		case 'EMPTY':
+             Message.innerHTML="EMPTY";
+			 powerOn.powerOnEvent="url('')";
+			break;
+			
+		case 'FileInvalidURL':
+		      Message.innerHTML="FileInvalidURL";
+		      powerOn.powerOnEvent="url('file://\aa')";
+		     
+			   break;
+			   
+		case 'HttpInvalidURL':
+		      Message.innerHTML="HttpInvalidURL";
+		       powerOn.powerOnEvent="url('http://acbx')";
+			  break;
+
+	}
+	
+}
+
+function dokeylight()
+{
+    var SelectedValue = frm.keydropdown.selectedIndex;
+	var selectKeylight = frm.keydropdown.options[SelectedValue].value;
+	switch(selectKeylight)
+	{
+		case 'On':
+            Message.innerHTML="On";
+			keylight.on();
+			break;
+
+		case 'Off':
+            Message.innerHTML="Off";
+			keylight.off();
+			break;
+			
+
+	}
+
+}
+
+function setKeylight()
+{
+	var IntensityValue = frm.txtIntensity.value;
+	var IValue = "Intensity:"+IntensityValue;
+	Message.innerHTML=""+IValue;
+    keylight.intensity =IntensityValue;
+	
+	
+}
+
+
+function selectSO() 
+{
+	var sltSO=frm.sOrientation.selectedIndex;
+	var selectedSO = frm.sOrientation.options[sltSO].value;
+	switch(selectedSO)
+	{
+		case 'RightHanded':
+            Message.innerHTML="RightHanded";
+			screenOrientation.rightHanded(); 
+			break;
+
+		case 'LeftHanded':
+			Message.innerHTML="LeftHanded";
+			screenOrientation.leftHanded(); 
+			break;
+
+		
+		case 'UpsideDown':
+            Message.innerHTML="UpsideDown";
+			screenOrientation.upsideDown(); 
+			break;
+
+		case 'Normal':
+            Message.innerHTML="Normal";
+			screenOrientation.normal(); 
+			break;
+
+		
+	}
+}
+
+function SetOrientationEvent() 
+{
+    var SelectedValue = frm.orienteventdropdown.selectedIndex;
+	var selectEvent = frm.orienteventdropdown.options[SelectedValue].value;
+    Message.innerHTML="Event is:"+selectEvent;
+	switch(selectEvent)
+	{
+		case 'JSCRIPT':
+            Message.innerHTML="JSCRIPT";
+            screenOrientation.screenOrientationEvent="myOrientjs('%s')";
+			break;
+
+		case 'JSON':
+		    Message.innerHTML="JSON";
+		    screenOrientation.screenOrientationEvent="myOrientjson(%json)";
+			break;
+			
+	    case 'DETACH':
+	        Message.innerHTML="DETACH";
+           screenOrientation.screenOrientationEvent="";
+			break;
+			
+	    case 'URL':
+	        Message.innerHTML="URL";
+	        screenOrientation.screenOrientationEvent="url('http://10.233.85.82/Neon/DeviceApplication/device2pageNavigation.html')";
+			break;
+
+		case 'EMPTY':
+             Message.innerHTML="EMPTY";
+			screenOrientation.screenOrientationEvent="url('')";
+			break;
+			
+		case 'FileInvalidURL':
+		      Message.innerHTML="FileInvalidURL";
+		      screenOrientation.screenOrientationEvent="url('file://\')";
+			   break;
+			   
+		case 'HttpInvalidURL':
+		      Message.innerHTML="HttpInvalidURL";
+		      screenOrientation.screenOrientationEvent="url('http://acbx')";
+			  break;
+		}
+}
+
+function myOrientjs(orientation)
+{
+//alert("Current Screen orientation using javascript is:"+orientation);
+count=count+1;
+myevent.innerHTML="Current Screen orientation using javascript is:"+orientation+"Count:-"+count;
+}
+
+function myOrientjson(jsonObject)
+{
+//alert("Current Screen orientation using json is:"+jsonObject.orientation);
+myevent.innerHTML="Current Screen orientation using json is:"+jsonObject.orientation;
+}
+
+function setautoRotate()
+{
+myevent.innerHTML="Hello";
+var autorotatevalue= frm.autoRotate.value;
+var autorotateparam="autoRotate:"+autorotatevalue;
+Message.innerHTML=""+autorotateparam;
+screenOrientation.autoRotate =autorotatevalue;
+}
+  function playFile()
+   {
+   var path=frm.myText.value;
+   generic.PlayWave(path, 1);
+
+   }
+
+function setserverSNTP()
+{
+    //alert('SNTP');
+	var ssntp=frm.serversntp.value;
+	var ssntpvalue="ServerIP:"+ssntp;
+	Message.innerHTML=ssntpvalue;
+	sntp.serverIp=ssntp;
+
+}
+
+function selectstylus()
+{
+	var sltstylus=frm.stylustag.selectedIndex;
+	var selectedstylus = frm.stylustag.options[sltstylus].value;
+	switch(selectedstylus)
+	{
+		case 'Enabled':
+            Message.innerHTML='Enabled';
+			stylus.enabled(); 
+			break;
+
+		case 'Disabled':
+            Message.innerHTML='Disabled';
+			stylus.disabled(); 
+			break;	
+			
+	   case 'Enable':
+            Message.innerHTML='Enable';
+		    stylus.enable(); 
+			break;
+
+	   case 'Disable':
+            Message.innerHTML='Disable';
+			stylus.disable(); 
+			break;		
+
+	}
+}
+
+function doTest()
+{
+	generic.InvokeMETAFunction('Stylus', 'Enabled');
+}
+
+//function doTest1() 
+//{
+//   generic.InvokeMETAFunction('timer', "Interval:5000;Timeout:url('http://10.233.85.82/PB3.x/index.html');Start");
+//}
+
+function selecttextsize()
+{
+	var slttextsize=frm.textsizetag.selectedIndex;
+	var selectedtextsize = frm.textsizetag.options[slttextsize].value;
+	switch(selectedtextsize)
+	{
+		case 'Largest':
+
+			generic.InvokeMETAFunction('TextSize', 'Largest');
+			break;
+
+		case 'Larger':
+
+			generic.InvokeMETAFunction('TextSize', 'Larger');
+			break;	
+
+		case 'Invalid':
+
+			generic.InvokeMETAFunction('TextSize', 'Small');
+			break;	
+
+		case 'Null':
+
+			generic.InvokeMETAFunction('TextSize', '');
+			break;
+
+		case 'Smaller':
+
+			generic.InvokeMETAFunction('TextSize', 'Smaller');
+			break;
+
+		case 'Smallest':
+
+			generic.InvokeMETAFunction('TextSize', 'Smallest');
+			break;
+
+		case 'Medium':
+
+			generic.InvokeMETAFunction('TextSize', 'Medium');
+			break;
+	}
+}
+
+function setdevVolume()
+{
+	var devvolume=frm.volume.value;
+	var devvolumevalue="SetVolume:"+devvolume;
+	//alert(devvolumevalue);
+	volume.setVolume=devvolume;
+}
+
+
+
+function selectSIPMode()
+{
+	var sltSIP=frm.sipMode.selectedIndex;
+	var selectedValue = frm.sipMode.options[sltSIP].value;
+	
+	switch(selectedValue)
+	{
+		case 'Manual':
+            Message.innerHTML="Manual";
+			generic.InvokeMETAFunction('SIPbutton', 'Visibility:Visible');
+			sip.manual(); 
+			break;
+
+		case 'Automatic':
+            Message.innerHTML="Automatic";
+			sip.automatic(); 
+			break;
+		
+	}
+}
+
+function setLeftPosition()
+{
+	var leftpst=frm.leftPosition.value;
+	var leftpstvalue="Left:"+leftpst;
+	Message.innerHTML=leftpstvalue;
+	sip.left =leftpst; 
+}
+
+function setTopPosition()
+{
+	var toppst=frm.topPosition.value;
+	var toppstvalue="Top:"+toppst;
+	Message.innerHTML=toppstvalue;
+    sip.top =toppst; 
+}
+
+function setzoomText()
+{
+var zoomtxtval=frm.zoomText.value;
+var zoomtxtparam="text:"+zoomtxtval;
+Message.innerHTML=zoomtxtparam;
+zoom.text=zoomtxtval;
+}
+
+function setzoomPage()
+{
+var zoompageval=frm.zoomPage.value;
+var zoompageparam="page:"+zoompageval;
+Message.innerHTML=zoompageparam;
+zoom.page=zoompageval;
+}
+
+function settimerEvent()
+{
+    var SelectedValue = frm.timereventdropdown.selectedIndex;
+	var selectEvent = frm.timereventdropdown.options[SelectedValue].value;
+    mytimer.innerHTML="Event is:"+selectEvent;
+	switch(selectEvent)
+	{
+		case 'JSCRIPT':
+            mytimer.innerHTML="JSCRIPT";
+            timer.timeout="mytimeoutjs('%s');";
+			break;
+
+		case 'JSON':
+		    mytimer.innerHTML="JSON";
+		    timer.timeout="mytimeoutjson(%json);";
+			break;
+			
+	    case 'DETACH':
+	        mytimer.innerHTML="DETACH";
+            timer.timeout="";
+			break;
+			
+	    case 'URL':
+	        mytimer.innerHTML="URL";
+	         timer.timeout="url('http://10.233.85.82/Neon/DeviceApplication/device3pageNavigation.html')";
+			break;
+
+		case 'EMPTY':
+             mytimer.innerHTML="EMPTY";
+			 timer.timeout="url('')";
+			break;
+			
+		case 'FileInvalidURL':
+		      mytimer.innerHTML="FileInvalidURL";
+		       timer.timeout="url('file://\')";
+			   break;
+			   
+		case 'HttpInvalidURL':
+		      mytimer.innerHTML="HttpInvalidURL";
+		      timer.timeout="url('http://acbx')";
+			  break;
+		}
+
+}
+
+function mytimeoutjs(time)
+{
+//alert("Current time using javascript is:"+time);
+divTimer.innerHTML="Current time is using javascript is:"+time;
+}
+
+function mytimeoutjson(jsonObject)
+{
+//alert("Current time using json is:"+jsonObject.time);
+divTimer.innerHTML="Current time using json is:"+jsonObject.time;
+}
+
+function startTimer()
+{    
+	timer.start(); 	
+	mytimer.innerHTML="start";
+}
+
+function stopTimer()
+{
+	timer.stop(); 
+	mytimer.innerHTML="Stop";
+}
+
+function doTimer(time)
+{
+	divTimer.innerHTML = 'Time: ' + time;
+}
+
+function settimerInterval()
+{
+var interv=frm.txtinterval.value;
+var intervalparam="Interval:"+interv;
+mytimer.innerHTML=intervalparam;
+timer.interval=interv;
+}
+function SetNotifyEvent() 
+{
+    var SelectedValue = frm.noteventdropdown.selectedIndex;
+	var selectEvent = frm.noteventdropdown.options[SelectedValue].value;
+    Message.innerHTML="Event is:"+selectEvent;
+    htmDiv.innerHTML="";
+	switch(selectEvent)
+	{
+		case 'JSCRIPT':
+
+			notification.enumNotificationsEvent = "setupNtfyArr(%s);";
+			break;
+
+		case 'JSON':
+		    notification.enumNotificationsEvent = "setupNtfyArrjson(%json);";
+			break;
+			
+	    case 'DETACH':
+	        alert("DETACH");
+            notification.enumNotificationsEvent ="";
+			break;
+			
+	    case 'URL':
+	        notification.enumNotificationsEvent ="url('http://10.233.85.82/Neon/DeviceApplication/NotifypageNavigation.html')";
+			break;
+
+		case 'EMPTY':
+            alert("EMPTY");
+			notification.enumNotificationsEvent ="url('');"
+			break;
+			
+		case 'FileInvalidURL':
+		      notification.enumNotificationsEvent ="url('file://\')";
+			   break;
+			   
+		case 'HttpInvalidURL':
+		      notification.enumNotificationsEvent ="url('http://acbx')";
+			  break;
+		}
+}
+
+function Enumerateobjects()
+{
+  notification.enumerate();
+}
+
+
+
+function setupNtfyArr(ntArray) 
+{
+  var html = "<table border=1>";
+	for(i=0; i<ntArray.length; i++)	{
+			html+='<tr><td><input type=button value="Invoke" onclick="doNot(' + ntArray[i][NTFY_INDEX] + ', ' 
+				+ ntArray[i][NTFY_TYPE] + ');"></td><td>' 
+				+ ntArray[i][NTFY_NAME] + '</td><td>'
+				+ ((ntArray[i][NTFY_TYPE]==NTFY_UNKNOWN)?'UNKNOWN':notType[ntArray[i][NTFY_TYPE]]) + '</td></tr>';
+	}
+	html+="</table>";
+	htmDiv.innerHTML=html;
+  
+}
+
+function setupNtfyArrjson(jsonObject) 
+{
+  var html = "<table border=1>";
+	for(i=0; i<jsonObject.notificationsArray.length; i++)	{
+			html+='<tr><td><input type=button value="Invoke" onclick="doNot(' + jsonObject.notificationsArray[i].notificationIndex + ', ' 
+				+ jsonObject.notificationsArray[i].notificationType + ');"></td><td>' 
+				+ jsonObject.notificationsArray[i].notificationName + '</td><td>'
+				+ ((jsonObject.notificationsArray[i].notificationType==NTFY_UNKNOWN)?'UNKNOWN':notType[jsonObject.notificationsArray[i].notificationType]) + '</td></tr>';
+		
+	}
+	html+="</table>";
+	htmDiv.innerHTML=html;
+  
+}
+
+
+
+function doNot(index, type)
+{
+	if(type == 0)	//on duration, off duration, repeat count
+	{
+		//alert(type);	
+	
+			var LEDDur = frm.txtLEDOnDuration.value;
+			var LEDDurValue = "SetLEDOnDuration:"+LEDDur;
+			//alert(LEDDurValue);	
+			notification.setLEDOnDuration = LEDDur;
+		
+		
+			var LEDOffDur = frm.txtLEDOffDuration.value;
+			var LEDOffDurValue = "SetLEDOffDuration:"+LEDOffDur;
+			//alert(LEDOffDurValue);
+			notification.setLEDOffDuration = LEDOffDur;
+		
+		
+			var LEDCycle = frm.txtLEDNumberOfCycles.value;
+			var LEDCycleValue = "SetLEDNumberOfCycles:"+LEDCycle;
+			//alert(LEDCycleValue);	
+			notification.setLEDNumberOfCycles = LEDCycle;
+						
+		
+	}
+	if(type == 1) //frequency, volume, duration
+	{	
+	    //alert(type);	
+		
+			var BEEPFre = frm.txtBeeperFrequency.value;
+			var BEEPFreValue = "SetBeeperFrequency:"+BEEPFre;
+			//alert(BEEPFreValue);       
+			notification.setBeeperFrequency = BEEPFre;
+		
+	
+			var BEEPVol = frm.txtBeeperVolume.value;
+			var BEEPVolValue = "SetBeeperVolume:"+BEEPVol;
+			alert(BEEPVol);   
+			notification.setBeeperVolume = BEEPVol;
+		
+	
+			var BeepDur = frm.txtBeeperDuration.value;
+			var BeepDurValue = "SetBeeperDuration:"+BeepDur;
+			//alert(BeepDurValue);   
+			notification.setBeeperDuration = BeepDur;
+		
+		
+	}	
+	if(type == 2) //on duration
+	{
+			var VIBDur = frm.txtVibrateDuration.value;
+			var VIBDurValue = "SetVibrateDuration:"+VIBDur;
+			//alert(VIBDurValue);    
+			notification.setVibrateDuration = VIBDur;
+		
+	}
+		
+	var SelectedValue = frm.statedropdown.selectedIndex;
+	var selectedState = frm.statedropdown.options[SelectedValue].value;
+	switch(selectedState)
+	{
+		case 'On':
+            //alert(selectedState);
+            notification.stateOn = index;
+			//generic.InvokeMetaFunction("Notification", "StateOn:" + index);
+			break;
+
+		case 'Off':
+            //alert(selectedState);
+            notification.stateOff = index;
+			//generic.InvokeMetaFunction("Notification", "StateOff:" + index);
+			break;
+		
+		case 'Cycle':
+            //alert(selectedState);
+            notification.stateCycle = index;
+			//generic.InvokeMetaFunction("Notification", "StateCycle:" + index);
+			break;
+	}
+
+			
+}
+
+//function drop()
+//{
+//    	var SelectedValue = frm.statedropdown.selectedIndex;
+//	var selectedState = frm.statedropdown.options[SelectedValue].value;
+//	switch(selectedState)
+//	{
+//		case 'On':
+//            alert(selectedState);
+//			generic.InvokeMetaFunction("Notification", "StateOn:" + index);
+//			break;
+
+//		case 'Off':
+//            alert(selectedState);
+//			generic.InvokeMetaFunction("Notification", "StateOff:" + index);
+//			break;
+//		
+//		case 'Cycle':
+//            alert(selectedState);
+//			generic.InvokeMetaFunction("Notification", "StateCycle:" + index);
+//			break;
+//	}
+//}
+
+//function setStateOn()
+//{
+//	var OnState = frm.stateOnnn.value;
+//	var OnStateValue = "StateOn:"+OnState;
+//	objGeneric.InvokeMETAFunction('Notification', OnStateValue);
+//}
+
+//function setStateOff()
+//{
+//	var OffState = frm.StateOfff.value;
+//	var OffStateValue = "StateOff:"+OffState;
+//	objGeneric.InvokeMETAFunction('Notification', OffStateValue);
+//}
+
+//function setStateCycle()
+//{
+//	var CycleState = frm.StateCycleee.value;
+//	var CycleStateValue = "StateOff:"+CycleState;
+//	objGeneric.InvokeMETAFunction('Notification', CycleStateValue);
+//}
+function doTime()
+{
+	now = new Date();
+	timeSpan.innerHTML = now;
+	setTimeout('doTime();', 30000)
+}
+
+function doSet(val) 
+{
+    var w = frm.cboyear.selectedIndex;
+    var year = frm.cboyear.options[w].value;
+    
+    w = frm.cbomonth.selectedIndex;
+    var month = frm.cbomonth.options[w].value;
+
+    w = frm.cboday.selectedIndex;
+    var day = frm.cboday.options[w].value;
+
+    w = frm.cbohour.selectedIndex;
+    var hour = frm.cbohour.options[w].value;
+
+    w = frm.cbomin.selectedIndex;
+    var min = frm.cbomin.options[w].value;
+    
+    
+
+    if(val==1)
+    var sTime = year+'-'+month+'-'+day+'t'+hour+'-'+min+'-00-00-00'; 
+    if(val==2)
+    var sTime = year+'-'+month+'-'+day+'t'+hour+'-'+min+'-00-05-30'; 
+    alert(sTime);
+    
+	//generic.InvokeMETAFunction('Alarm', 'Time:'+sTime);
+	alarm.time=sTime;
+	
+    var sltevent=frm.eventdropdown.selectedIndex;
+	var selectedevent = frm.eventdropdown.options[sltevent].value;
+	
+	switch(selectedevent)
+	{
+		case 'Javascript':
+		
+			alarm.alarmTriggered='doAlarm();';
+			message.innerHTML="Javascript";
+			break;
+
+		case 'URL':
+			alarm.alarmTriggered="url('http://10.233.85.82/Neon/DeviceApplication/alarmNavigation.html');";
+			message.innerHTML="URL";
+			break;
+
+		case 'DetachEVENT':
+			alarm.alarmTriggered="url('');";
+			message.innerHTML="DetachEVENT";
+			break;
+
+		case 'EMPTYEVENT':
+			alarm.alarmTriggered="";
+			message.innerHTML="EMPTYEVENT";
+			break;
+
+		case 'INVALIDURL':
+			alarm.alarmTriggered="url('http://10.233.85.82/Neon/DeviceApplication/alarmNavigation123.html');";
+			message.innerHTML="INVALIDURL";
+			break;
+
+
+		}
+
+        alarm.set();
+}
+
+
+function doAlarm()
+{
+        
+        count++;
+        outputSpan1.innerHTML = 'Alarm Triggered';
+        Count.innerHTML = "Count = "+count;
+}
+
+function setInterval()
+{
+
+
+	var IntervalValue = frm.txtInterval1.value;
+	var interv = "Interval:"+IntervalValue;
+	alarm.interval=IntervalValue;
+    message.innerHTML="alarm.interval="+IntervalValue;
+
+	if(frm.txtInterval2.value.length != 0)
+	{
+		var IntervalVal = frm.txtInterval2.value;
+		var inter = "Interval:"+IntervalVal;
+		alarm.interval=IntervalVal;
+		message.innerHTML="alarm.interval="+IntervalVal;
+	}
+	
+
+
+		
+}
+
+function setEvent()
+{
+	var sltevent=frm.eventdropdown.selectedIndex;
+	var selectedevent = frm.eventdropdown.options[sltevent].value;
+	switch(selectedevent)
+	{
+		case 'Javascript':
+		
+			alarm.alarmTriggered='doAlarm();';
+			message.innerHTML="Javascript";
+			break;
+
+		case 'URL':
+			alarm.alarmTriggered="url('http://10.233.85.82/Neon/DeviceApplication/alarmNavigation.html');";
+			message.innerHTML="URL";
+			break;
+
+		case 'DetachEVENT':
+			alarm.alarmTriggered="url('');";
+			message.innerHTML="DetachEVENT";
+			break;
+
+		case 'EMPTYEVENT':
+			alarm.alarmTriggered="";
+			message.innerHTML="EMPTYEVENT";
+			break;
+
+		case 'INVALIDURL':
+			alarm.alarmTriggered="url('http://10.233.85.82/Neon/DeviceApplication/alarmNavigation123.html');";
+			message.innerHTML="INVALIDURL";
+			break;
+
+
+		}
+
+}
+function setRepeat()
+{
+var RepeatValue = frm.txtRepeat.value;
+var Repe = "Repeat:"+RepeatValue;
+alarm.repeat=RepeatValue;
+message.innerHTML="alarm.repeat="+Repe;
+
+}
+
+function clearAlarm()
+{
+    alarm.clear();
+    message.innerHTML="clear";
+}
+
+function SetAlarm()
+{
+alarm.set();
+message.innerHTML="Alarm set";
+}
+</script>
+
+
+</head>
+<body onLoad="doTime();">
+<form id="frm" action="">
+<br /><br /><br /><br />
+<b>Using JSOBJECT Approach</b><br /><br />
+<div id="Message">Message</div>
+<hr>
+<br />
+<b>Alarm with JSOBJECT</b>
+<div id="timeSpan">Current Time...</div>
+<select id="cboyear">
+<script>
+	for(i=2000; i<=2012; i++)
+		document.write('<option value="' + i + '">' + i + '</option>');
+</script>
+</select>
+<select id="cbomonth">
+<script>
+	for(i=1; i<=12; i++)
+		document.write('<option value="' + (i<10?('0'+i):(i)) + '">' + (i<10?('0'+i):(i)) + '</option>');
+</script>
+</select>
+<select id="cboday">
+<script>
+	for(i=1; i<=31; i++)
+		document.write('<option value="' + (i<10?('0'+i):(i)) + '">' + (i<10?('0'+i):(i)) + '</option>');
+</script>
+</select>
+<select id="cbohour">
+<script>
+	for(i=0; i<=23; i++)
+		document.write('<option value="' + (i<10?('0'+i):(i)) + '">' + (i<10?('0'+i):(i)) + '</option>');
+</script>
+</select>
+<select id="cbomin">
+<script>
+	for(i=0; i<=59; i++)
+		document.write('<option value="' + (i<10?('0'+i):(i)) + '">' + (i<10?('0'+i):(i)) + '</option>');
+</script>
+</select>
+
+<input type=button onclick="doSet(1);" value="SetAlarmwith00-00-00">
+<input type=button onclick="doSet(2);" value="SetAlarmwith00-04-30">
+<hr />
+<table>
+<tr>
+     <td><label>Interval 1</label>
+	 <textarea id="txtInterval1"cols="10" rows="1">00-00-30</textarea></td>
+	</tr>
+
+<tr>
+    <td><label>Interval 2</label>
+	<textarea id="txtInterval2"cols="10" rows="1"></textarea>
+	<input type="button" onclick="setInterval();" value="Set Interval" /> </td>
+	</tr>
+
+<tr>
+    <td>
+    <label>Repeat</label> 
+	<textarea id="txtRepeat"cols="10" rows="1">True</textarea>
+	<input type="button" onclick="setRepeat();" value="setRepeat" />
+	</td>
+	</tr>
+
+
+<tr><td>Alarm Event  
+<select name="eventdropdown" id="eventdropdown">
+<option SELECTED VALUE="">Select</OPTION>
+<option value="Javascript">Javascript</option>
+<option value="URL">URL</option>
+<option value="DetachEVENT">DetachEVENT</option>
+<option value="EMPTYEVENT">EMPTYEVENT</option>
+<option value="INVALIDURL">INVALIDURL</option>
+</select>
+<input type="button" onclick="setEvent();" value="setEvent" /></td>
+</tr>
+
+
+<tr><td><input type="button" onclick="clearAlarm();" value="Clear">
+<input type="button" onclick="SetAlarm();" value="SetAlarm">
+</td></tr>
+</table><br>
+<div id="outputSpan1">Waiting...</div>
+<br>
+<div id="Count">Count=</div>
+<br>
+Application Event:
+<select name="appeventdropdown" id="Select2">
+<option SELECTED VALUE="">Select</OPTION>
+<option value="JSCRIPT">JSCRIPT</option>
+<option value="JSON">JSON</option>
+<option value="DETACH">DETACH</option>
+<option value="URL">URL</option>
+<option value="EMPTY">EMPTY</option>
+</select>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<input type="button" onclick="setAppsevent();" value="SetEvent">
+<br /><br />
+Method:<select name="appdropdown" id="Select1">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="quit">quit</option>
+<option value="minimize">minimize</option>
+<option value="restore">restore</option>
+<option value="MandQ">MandQ</option>
+<option value="EMPTY">EMPTY</option>
+</select>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<input type=button onclick="setApps();" value="Set">
+
+<hr>
+BacklightEvent:
+<select name="backlighteventdropdown" id="Select3">
+<option SELECTED VALUE="">Select</OPTION>
+<option value="JSCRIPT">JSCRIPT</option>
+<option value="JSON">JSON</option>
+<option value="DETACH">DETACH</option>
+<option value="URL">URL</option>
+<option value="EMPTY">EMPTY</option>
+</select>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<input type="button" onclick="setbacklightevent();" value="SetEvent">
+<br /><br />
+Method:<select name="backdropdown" id="backdropdown">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="ON">ON</option>
+<option value="OFF">OFF</option>
+<option value="getBacklightSettings">getBacklightSettings</option>
+</select>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<input type=button onclick="setBacklight();" value="SetBacklight">
+<br><br>
+
+Intensity:<Textarea id="txtIntensity"cols="10" rows="1">2</Textarea>
+&nbsp;&nbsp;&nbsp;&nbsp;
+<input type=button onclick="setIntensity();" value="SetIntensity">
+
+<hr>
+Device
+<select name="devdropdown" id="devdropdown" onChange="selectDevice();">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="Suspend">Suspend</option>
+<option value="Calibrate">Calibrate</option>
+<option value="SandC">SandC</option>
+<option value="Wake">Wake</option>
+</select>
+<hr>
+<br>
+HourGlass<br>
+Select Visibility	<select name="hgVisibility" id="hgVisibility" onChange="selectVisibility();">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="Visible">Visible</option>
+<option value="Hidden">Hidden</option>
+<option value="Address">Address</option>
+</select><br>
+<tr>
+      Left Position	<Textarea id="leftPosition" cols="10" rows="1"onchange="setLeftPosition();"></Textarea>
+	</tr><br>
+<tr>
+
+      Top Position	<Textarea id="topPosition" cols="10" rows="1" onchange="setTopPosition();"></Textarea>
+	 </tr>
+
+<hr><br>
+
+<hr>
+Keylight
+<select name="keydropdown" id="keydropdown">
+<option SELECTED VALUE="">Select</option>
+<option value="On">On</option>
+<option value="Off">Off</option>
+</select>
+&nbsp;&nbsp;&nbsp;&nbsp;
+<input type="button" onclick="dokeylight();" value="Setkeylight">
+<br />
+	Intensity<textarea id="txtIntensity"cols="10" rows="1">3</textarea>
+	&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="button" onclick="Javascript:setKeylight();" value="Keylight">
+<hr>
+<br>
+
+
+<hr>
+PowerOn<br>
+Select PowerOn	<select name="OnPower" id="OnPower">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="FileURL">FileURL</option>
+<option value="FileInvalidURL">FileInvalidURL</option>
+<option value="JSAlert">JSAlert</option>
+<option value="DETACH">DETACH</option>
+<option value="EMPTY">EMPTY</option>
+<option value="HttpURL">HttpURL</option>
+<option value="HttpInvalidURL">HttpInvalidURL</option>
+</select>
+&nbsp;&nbsp;&nbsp;&nbsp;
+<input type="button" onclick="SetpoweronEvent();" value="SetpoweronEvent">
+<hr>
+<br>
+
+<hr>
+Reboot<br>
+Select Reboot	<select name="rbboot" id="rbboot" onChange="selectReboot();">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="Warm">Warm</option>
+<option value="Cold">Cold</option>
+<option value="ColdCAD">ColdCAD</option>
+<option value="Null">Null</option>
+</select>
+<hr>
+<br>
+
+<hr>
+Orientation Event:<br />
+<select name="orienteventdropdown" id="Select">
+<option SELECTED value="">Select</option>
+<option value="JSCRIPT">JSCRIPT</option>
+<option value="JSON">JSON</option>
+<option value="DETACH">DETACH</option>
+<option value="EMPTY">EMPTY</option>
+<option value="URL">URL</option>
+<option value="FileInvalidURL">FileInvalidURL</option>
+<option value="HttpInvalidURL">HttpInvalidURL</option>
+</select>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<input type="button" onclick="SetOrientationEvent();" value="SetOrientationEvent">
+<br /><br />
+ScreenOrientation Method<select name="sOrientation" id="sOrientation" onChange="selectSO();">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="RightHanded">RightHanded</option>
+<option value="LeftHanded">LeftHanded</option>
+<option value="UpsideDown">UpsideDown</option>
+<option value="Normal">Normal</option>
+</select>
+<br /><br />
+autoRotate:&nbsp;<textarea id="autoRotate" name="autoRotate" cols="10" rows="1">Enabled</textarea>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<input type="button" onclick="setautoRotate();" value="setautoRotate">
+<hr>
+<br>
+SIP<br>
+Select Mode	<select name="sipMode" id="sipMode" onchange="selectSIPMode();">
+<option SELECTED VALUE="">Select</option>
+<option value="Manual">Manual</option>
+<option value="Automatic">Automatic</option>
+</select><br />
+
+      Left Position	<textarea id="leftPosition" cols="10" rows="1"></textarea>
+	</tr>
+	<input type=button onclick="setLeftPosition();" value="Left"><br />
+
+
+      Top Position	<textarea id="topPosition" cols="10" rows="1"></textarea>
+	 </tr>
+	 <input type=button onclick="setTopPosition();" value="Top"><br />
+<hr><br />
+
+<hr>
+SNTP<br>
+<tr>
+      ServerIP	<Textarea id="serversntp" cols="15" rows="1">10.233.85.82</Textarea></tr>
+	<input type=button onclick="setserverSNTP();" value="SNTP"><br>
+<hr><br>
+
+<hr>
+Stylus<br>
+Select Stylus	<select name="stylustag" id="stylustag" onChange="selectstylus();">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="Enabled">Enabled</option>
+<option value="Disabled">Disabled</option>
+<option value="Enable">Enable</option>
+<option value="Disable">Disable</option>
+<option value="Null">Null</option>
+</select>
+<hr><br>
+
+<hr>
+TextSize<br>
+Select TextSize	<select name="textsizetag" id="textsizetag" onChange="selecttextsize();">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="Largest">Largest</option>
+<option value="Larger">Larger</option>
+<option value="Invalid">Invalid</option>
+<option value="Null">Null</option>
+<option value="Smaller">Smaller</option>
+<option value="Smallest">Smallest</option>
+<option value="Medium">Medium</option>
+</select>
+<hr />
+<img src="../Resource/BMW.bmp" /><br />
+<b>Zoom Decoder</b><br />
+	text:<textarea id="zoomText" cols="10" rows="1"></textarea>
+
+	<input type="button" onclick="setzoomText();" value="SetText"><br />
+
+
+   page:	<textarea id="zoomPage" cols="10" rows="1"></textarea>
+
+	 <input type="button" onclick="setzoomPage();" value="SetPage"><br />
+<hr />
+Timer Tag Test:<br>
+Apply timer event:<select name="timereventdropdown" id="Select">
+<option SELECTED value="">Select</option>
+<option value="JSCRIPT">JSCRIPT</option>
+<option value="JSON">JSON</option>
+<option value="DETACH">DETACH</option>
+<option value="EMPTY">EMPTY</option>
+<option value="URL">URL</option>
+<option value="FileInvalidURL">FileInvalidURL</option>
+<option value="HttpInvalidURL">HttpInvalidURL</option>
+</select>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<input type="button" onclick="settimerEvent();" value="SetTimerEvent">
+<br /><br />
+
+	Interval	<Textarea id="txtinterval"cols="5" rows="1">5000</Textarea>
+	<input type="button" onclick="settimerInterval();" value="SetTimerInterval"><br />
+
+<br>
+
+<br>
+<input type="button" value="Start" onClick="startTimer();">
+<input type="button" value="Stop" onClick="stopTimer();">
+<div id="mytimer">message</div><br />
+<DIV ID="divTimer">Waiting...</DIV>
+<hr><br>
+
+<hr>
+Volume Value:<Textarea id="volume" cols="7" rows="1">0xFFFF</Textarea>
+<input type="button" onclick="setdevVolume();" value="volume"><br>
+<p><textarea id="myText" name="myText">\Application\Alarm5.wav</textarea>
+<INPUT TYPE="button" VALUE="PlayWave" ONCLICK="playFile();"></p>
+<hr>
+
+<br><br>
+
+<META HTTP-EQUIV="OnKey0x0d" content="javascript:doTest();">
+<!--<META HTTP-EQUIV="OnKey0x31" content="javascript:doTest1();">-->
+<br>
+Select Notification Event:<br /><select name="noteventdropdown" id="Select">
+<option SELECTED value="">Select</option>
+<option value="JSCRIPT">JSCRIPT</option>
+<option value="JSON">JSON</option>
+<option value="DETACH">DETACH</option>
+<option value="EMPTY">EMPTY</option>
+<option value="URL">URL</option>
+<option value="FileInvalidURL">FileInvalidURL</option>
+<option value="HttpInvalidURL">HttpInvalidURL</option>
+</select>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<input type="button" onclick="SetNotifyEvent();" value="SetNotifyEvent">
+<br /><br />
+<input type="button" onclick="Enumerateobjects();" value="Enumerate">
+<hr />
+<div id="htmDiv">NotifyObjects will be populated here...</div>
+<hr />
+LED<br>
+<tr>
+	SetLEDOnDuration	<Textarea id="txtLEDOnDuration"cols="5" rows="1">2000</Textarea>
+	</tr><br>
+<tr>
+	SetLEDOffDuration	<Textarea id="txtLEDOffDuration"cols="5" rows="1">1000</Textarea>
+	</tr><br>
+<tr>
+	SetLEDNumberOfCycles	<Textarea id="txtLEDNumberOfCycles"cols="5" rows="1">5</Textarea>
+	</tr><br>
+
+<hr><br>
+
+<hr>
+Beeper<br>
+<tr>
+	SetBeeperFrequency	<Textarea id="txtBeeperFrequency"cols="5" rows="1">3500</Textarea>
+	</tr><br>
+<tr>
+	SetBeeperVolume		<Textarea id="txtBeeperVolume"cols="5" rows="1">3</Textarea>
+	</tr><br>
+<tr>
+	SetBeeperDuration	<Textarea id="txtBeeperDuration"cols="5" rows="1">4000</Textarea>
+	</tr><br>
+
+<hr><br>
+
+<hr>
+Vibrator<br>
+<tr>
+	SetVibrateDuration	<Textarea id="txtVibrateDuration"cols="5" rows="1">5000</Textarea>
+	</tr><br>
+<hr><br>
+
+<hr>
+State<br>
+State Value	<select name="statedropdown" id="statedropdown">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="On">On</option>
+<option value="Off">Off</option>
+<option value="Cycle">Cycle</option>
+</select>
+<hr>
+<br>
+
+<br><br>
+<A HREF="./Device Application.html">Back</A><br />
+<A HREF="./device3pageNavigation.html">go To another page</A>
+
+</form>
+<br />
+
+<br />
+</body>
+</html>

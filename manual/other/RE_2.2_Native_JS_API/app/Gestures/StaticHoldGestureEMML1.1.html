@@ -1,0 +1,40 @@
+﻿<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+
+
+
+<META HTTP-Equiv="gesture" Content="type:Hold;id:HoldGesture1;diagnostics:TRUE;center-x:100;center-y:200;radius:120;delay:2000;interval:1000;create;">
+<META HTTP-Equiv="gesture" Content="type:Hold;id:HoldGesture2;diagnostics:TRUE;center-x:200;center-y:200;radius:120;delay:2000;interval:1000;create;">
+<META HTTP-Equiv="gesture-detected" Content="url('Javascript:onGestureJSON(%json);')">
+
+
+
+<script language=javascript>
+
+var ncount=1;
+//function GestureEvent(id,ncount)
+//{
+//mydiv.innerHTML="Gesture Detected for"+count+"th time.id:-"+id+" Count="+ncount;
+//count++;
+//}
+
+function onGestureJSON(myjsonobject)
+{
+mydiv.innerHTML="Gesture Detected for"+ncount+"th time.id:-"+myjsonobject.id+" Count="+myjsonobject.count;
+ncount++;
+}
+
+</script>
+</head>
+<body>
+Hold Gesture EMML 1.1
+<br>All Metatags are implemented
+<form id="frmLinearGestures" >
+<br><br><br><br><br>
+<div id="mydiv">Gesture Detection:-</div>
+</form>
+<P><INPUT TYPE="button" VALUE="Back" ONCLICK="location.href='Gesture_Index.html'"></P>
+</body>
+</html>

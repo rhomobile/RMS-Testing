@@ -1,0 +1,101 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+<title></title>
+<script language="javascript">
+
+
+    function OnBattery(AC, main, backup) 
+    {
+        bat.innerHTML = "AC: " + AC + "\<BR>main:" + main + "\<BR>backup: " + backup;
+        return;
+    }
+
+    function OnSignal(signal, ESSID, MAC, AdapterName, DHCPServer, DHCPStatic, Gateway, IPAddress, RSSI, SubnetMask, Wins) 
+    {
+        sig.innerHTML = "Signal: " + signal
+								+ "<BR>ESSID:" + ESSID
+								+ "<BR>MAC: " + MAC
+								+ "<BR>AdapterName: " + AdapterName
+								+ "<BR>DHCPServer: " + DHCPServer
+								+ "<BR>DHCPStatic: " + DHCPStatic
+								+ "<BR>Gateway: " + Gateway
+								+ "<BR>IPAddress: " + IPAddress
+								+ "<BR>RSSI: " + RSSI
+								+ "<BR>SubnetMask: " + SubnetMask
+								+ "<BR>Wins: " + Wins
+        return;
+    }
+
+    function doApplyProfile(profile) 
+    {
+      
+        emmlProfile.apply = profile;
+    }
+
+    function clearProfile() 
+    {
+    
+        emmlProfile.clear = "myIndicators";
+    }
+
+    function importProfileP() 
+    {
+    
+        
+        emmlProfile.name = "myIndicators";
+        emmlProfile.importProfile = "url('http://10.233.85.82/NEON/EMMLProfilesNew/Indicators/EMMP/Indicators.emmp');";
+}
+
+function importProfileLocal()
+{
+        
+        emmlProfile.name = "myIndicators";
+        emmlProfile.importProfile = "url('file://Application/Indicators.emmp');";
+}
+
+function importProfileinvalid()
+{
+
+emmlProfile.name = "myIndicators";
+emmlProfile.importProfile = "url('http://10.233.85.82/EMMLProfilesNe/Indicators/EMMP/Indicators.emmp');";
+
+}
+
+</script>
+</head>
+  
+
+<body>
+<P><BR></P>
+<h4>Named Indicators EMML Profile Script - New generic InvokeMETAFunction - AT01160 + AT01137</h4>
+
+<a href="javascript:doApplyProfile('myIndicators.Battery');">Apply ShowBattery Profile</a>
+<br />
+<a href="javascript:doApplyProfile('myIndicators.Signal');">Apply  ShowSignal Profile</a>
+<br />
+<a href="javascript:doApplyProfile('myIndicators.BatteryHide');">Apply Hide Battery Profile</a>
+<br />
+<a href="javascript:doApplyProfile('myIndicators.SignalHide');">Apply Hide Signal Profile</a>
+
+<div id="bat">Battery readings should appear here</div><br /><br /><br />
+<div id="sig">Signal details should appear here</div><br /><br /><br /><br />
+
+
+<input type="button" value="Import profile new" onclick="importProfileP();" /><br />
+<input type="button" value="Import profile Locally" onclick="importProfileLocal();" />
+<input type="button" value="Import inavlid path profile" onclick="importProfileinvalid();" />
+<input type="button" value="Clear Profile" onclick="clearProfile();" />
+<h4>Browse to another page to check for EMML profile persistance.</h4>
+<h4><a href="Persistant_Indicators_Test.html">Click here to go to another page.</a></h4>
+<hr />
+<a href="EMMLProfilesIndex.html">Back to EMML Profile Index</a>
+<br />
+
+</body>
+</html>
+
+
+
+    

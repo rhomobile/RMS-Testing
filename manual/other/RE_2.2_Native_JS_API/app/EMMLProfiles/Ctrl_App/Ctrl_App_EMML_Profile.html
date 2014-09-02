@@ -1,0 +1,118 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+    <title>Control & Apperance EMML Profiles Test Page</title>
+<!--<META HTTP-Equiv="EMMLProfile" Content="name:myProfile;import:url('CtrlApp.emmp');">-->
+
+<script language=javascript>
+var Generic = new ActiveXObject("PocketBrowser.Generic");
+var selValue = 0;
+
+function applyProfile()
+{
+    checkPersis();
+    if(selValue <= 0)
+    {
+        alert("Please select Valid Profile Persistance/Non Persistance option");
+        return;
+    }
+    else
+    {
+        var w = document.frmCtrl.myctrl.selectedIndex;
+        var selected_Profile = document.frmCtrl.myctrl.options[w].value;
+//        Generic.InvokeMETAFunction("EMMLProfile", "clear:myProfile");
+//        alert("Applying Selected Profile!: " + selected_Profile);
+        var myVal = "apply:myProfile." + selected_Profile;
+//        alert(myVal);
+        if(selValue == "1")
+        {
+            Generic.InvokeMETAFunction("EMMLProfile", "name:myProfile;import:url('CtrlApp.emmp');");
+            var Result = Generic.InvokeMETAFunction("EMMLProfile", myVal);
+            alert("Result for invoke meta function Persistant" + Result);
+        }
+        else
+        {
+            Generic.InvokeMETAFunction("EMMLProfile", "import:url('CtrlApp.emmp');");
+            var result1 = Generic.InvokeMETAFunction("EMMLProfile", "apply:" + selected_Profile);
+//            alert("Result for invoke meta function NonPersistant" + result1);
+        }
+    }
+}
+
+function checkPersis()
+{
+    for (i=0;i<document.frmCtrl.chkPersis.length;i++) 
+    { 
+          if (document.frmCtrl.chkPersis[i].checked) 
+          { 
+                 selValue = document.frmCtrl.chkPersis[i].value; 
+          } 
+    }
+    if(selValue == "1")
+    {
+        var x = document.getElementById("myDiv");
+        x.style.display = "";
+        //alert("h1");
+        //document.myDiv.visible = true;
+    } 
+    else
+    {
+        var x = document.getElementById("myDiv");
+        x.style.display = "";
+        //alert("h2");
+        //document.myDiv.visible = false;
+    }
+}
+
+function appendURL()
+{
+    var w = document.frmCtrl.myctrl.selectedIndex;
+    var selected_Profile = document.frmCtrl.myctrl.options[w].value;
+    var URL = "Ctrl_App_Profile_Test.html?CtrlObj="+selected_Profile + "&";
+    alert(URL);
+    //window.location.pathname = URL;
+    self.location.href = URL;
+    //window
+}
+</script>
+
+</head>
+<body>
+<h4>Control & Appearance EMML Profile Test</h4>
+<form name="frmCtrl" id="frmCtrl">
+<table border=1>
+<tr><td>Profile Persistance</td><td><input type="radio" name="chkPersis" id="chkPersis" value="1" checked onclick="checkPersis();"/></td></tr>
+<tr><td>Profile Non-Persistance</td><td><input type="radio" name="chkPersis" id="chkPersis"  value="2" onclick="checkPersis();"/></td></tr>
+<tr>
+<td colspan=2>
+<H4>Select EMML Profile to Apply: </H4>
+<select name="myctrl" id="myctrl" onChange="applyProfile();">
+    <option value="AddressBar1">AddressBar</option>
+    <option value="BackButton1">BackButton</option>
+    <option value="KeyState1">KeyState</option>
+    <option value="MinimizeButton1">MinimizeButton</option>
+    <option value="QuitButton1">QuitButton</option>
+    <option value="ReloadButton1">ReloadButton</option>
+    <option value="PageZoomIn1">PageZoomIn</option>
+    <option value="PageZoomOut1">PageZoomOut</option>
+    <option value="ZoomTx1">ZoomTx</option>
+    <option value="StopButton1">StopButton</option>
+    <option value="SIPButton1">SIPButton</option>
+    <option value="GoButton1">GoButton</option>
+    <option value="BottomCommandArea1">BottomCommandArea</option>
+</select>
+</td>
+</tr>
+
+</table>
+</form>
+<div id="myDiv"  display="">
+<hr />
+<h4><a href="javascript:appendURL();">Click here to go to another page.</a></h4>
+</div>
+<hr />
+<a href="../EMMLProfilesIndex.html">Back to EMML Profile Index</a>
+</body>
+</html>

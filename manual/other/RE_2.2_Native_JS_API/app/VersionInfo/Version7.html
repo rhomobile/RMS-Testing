@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+<meta http-equiv="Application" content="VersionEvent:url('javascript:fnVer('%s', %s, %s);')" />
+<title>Version Info</title>
+<script type="text/javascript">
+var objgeneric = new ActiveXObject("PocketBrowser.Generic");
+	  
+	  
+	function fnVer(productVersion, hotFixes, componentVersions)
+	{
+		var theOutput = "<B>Product Version:</b> " + productVersion + "<P>";
+		theOutput = theOutput + "<b>Hot Fixes:</b><P>";
+		for (var i=0; i<hotFixes.length; i = i + 1)
+		{
+		   	 
+                   theOutput = theOutput + "  Hot Fix: " + hotFixes[i]+"Amit"+hotFixes.length+ "<BR>";
+		}
+		theOutput = theOutput + "<P>";
+		theOutput = theOutput + "<b>Installed Components:</b><P>";
+		for (var j=0; j<componentVersions.length; j = j + 1)
+		{
+			theOutput = theOutput + "  Component: " + componentVersions[j][0] + ': ' + componentVersions[j][1] + "<BR>";
+		}
+		outputDiv.innerHTML = theOutput;
+	}
+		  
+function callmethod()
+  {
+  objgeneric .InvokeMETAFunction("Application", "GetVersion");
+  }
+	
+ </script>
+
+</head>
+<body>
+<h1>version Test</h1>
+Static Version info Test using JS array
+<div id="outputDiv"></div><br />
+<input type="button" value="Getversion" onclick="callmethod();" /><br /><br />
+</body>
+</html>
+

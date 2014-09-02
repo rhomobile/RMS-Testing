@@ -1,0 +1,35 @@
+﻿<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+    <title>PB 3.0 File Management Test static EMML 1.1</title>
+   
+<META HTTP-Equiv="FileTransfer" content="TransferEvent:url('Javascript:MyTransferEvent('%s');');Source:url('http://10.233.85.82/NEON/FileCollections/myfile.txt');Destination:url('file://\Temp\MyHTTPfolder\filefromHTTP.txt');Username:uploadtest;Password:letmein;CreateFolders:True;OverWrite:True;Transfer"> 
+    
+    
+<style type="text/css">
+body {scrollbar-base-color:blue;}
+</style>
+
+<script language=javascript>
+
+
+function MyTransferEvent(Msg)
+{
+//alert("TransferMessage"+Msg);
+myResponse.innerHTML="TransferMessage"+Msg;
+}
+</script>
+</head>
+
+<body>
+<BR><BR><BR><BR><BR><BR><BR>
+<form id="frmFileManagement" action="" onload="SetdeafultSettings();">
+<div id="myResponse">Result FTP to device:</div><BR>
+</body>
+</html>
+
+
+</form>
+</body>
+</html>

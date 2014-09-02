@@ -1,0 +1,829 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+
+<title>RawSensor TestScript</title>
+
+<META HTTP-Equiv="RawSensors" Content="all:Enabled">
+<META HTTP-Equiv="RawSensors" Content="sensorEvent:url('Javascript:getsettingsjsFunction('%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s');')">
+<META HTTP-Equiv="RawSensors" Content="getSensorData">
+
+<script type="text/javascript">
+  
+  function callgetSensorData()
+{
+	RawSensors.getSensorData(); 
+    Message.innerHTML="getSensorData called:";
+}
+  
+  
+  function setsensorEvent()
+{
+	var SelectedValue = frm.sensoreventdropdown.selectedIndex;
+	var selectEvent = frm.sensoreventdropdown.options[SelectedValue].value;
+    Message.innerHTML="Sensor Event is:"+selectEvent;
+	switch(selectEvent)
+	{
+		case 'JSCRIPT':
+
+			RawSensors.sensorEvent="getsettingsjsFunction('%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s');";
+			break;
+
+		case 'JSON':
+
+			RawSensors.sensorEvent="getsettingsjsonFunction(%json);";
+			break;
+			
+	   case 'DETACH':
+	   
+            RawSensors.sensorEvent="url('')";
+			break;
+			
+	  case 'URL':
+
+			RawSensors.sensorEvent="url('http://10.233.85.82/Neon/Navigate.html')";
+			break;
+
+		case 'EMPTY':
+
+			RawSensors.sensorEvent="";
+			break;
+	}
+}
+  
+	function getsettingsjsonFunction(jsonObject)
+	{
+		var theOutput = "<BR><BR><B>Accelerometer  </B>";        
+        theOutput = theOutput + "X: " + jsonObject.accelerometerX + ", Y: " + jsonObject.accelerometerY + ", Z: " + jsonObject.accelerometerZ + "<BR>";
+        theOutput = theOutput + "<B>DeviceOrientation  </B>";        
+        theOutput = theOutput + "X: " + jsonObject.deviceOrientation  + "<BR>";
+        theOutput = theOutput + "<B>Tilt  </B>";
+        theOutput = theOutput + "X: " + jsonObject.tiltangleX  + ", Y: " + jsonObject.tiltangleY  + ", Z: " + jsonObject.tiltangleZ  + "<BR>";
+        theOutput = theOutput + "<B>Motion  </B>";
+        theOutput = theOutput + "X: " + jsonObject.motion  + "<BR>";
+        theOutput = theOutput + "<B>Ecompass  </B>";
+        theOutput = theOutput + "X: " + jsonObject.ecompass  + "<BR>";
+        theOutput = theOutput + "<B>Magnetometer  </B>";
+        theOutput = theOutput + "X: " + jsonObject.magnetometerX  + ", Y: " + jsonObject.magnetometerY  + ", Z: " + jsonObject.magnetometerZ  + "<BR>";
+        theOutput = theOutput + "<B>Gyroscope  </B>";
+        theOutput = theOutput + "X: " + jsonObject.gyroscopeX  + ", Y: " + jsonObject.gyroscopeY  + ", Z: " + jsonObject.gyroscopeZ  + "<BR>";
+        theOutput = theOutput + "<B>AmbientLight  </B>";
+        theOutput = theOutput + "X: " + jsonObject.ambientLight  + "<BR>";
+        theOutput = theOutput + "<B>Proximity  </B>";
+        theOutput = theOutput + "X: " + jsonObject.proximity  + "<BR>";
+        theOutput = theOutput + "<B>Proximitylongrange  </B>";
+        theOutput = theOutput + "X: " + jsonObject.proximitylongrange  + "<BR>";
+        theOutput = theOutput + "<B>Pressure  </B>";
+        theOutput = theOutput + "X: " + jsonObject.pressure  + "<BR>";
+        theOutput = theOutput + "<B>Temperature  </B>";
+        theOutput = theOutput + "X: " + jsonObject.temperature  + "<BR>";
+        theOutput = theOutput + "<B>Humidity  </B>";
+        theOutput = theOutput + "X: " + jsonObject.humidity  + "<BR>";
+        theOutput = theOutput + "<B>Gravity  </B>";
+        theOutput = theOutput + "X: " + jsonObject.gravityX  + ", Y: " + jsonObject.gravityY  + ", Z: " + jsonObject.gravityZ  + "<BR>";
+        theOutput = theOutput + "<B>Linear Acceleration  </B>";
+        theOutput = theOutput + "X: " + jsonObject.linearAccelerationX  + ", Y: " + jsonObject.linearAccelerationY  + ", Z: " + jsonObject.linearAccelerationZ  + "<BR>";
+        theOutput = theOutput + "<B>Rotation  </B>";
+        theOutput = theOutput + "X: " + jsonObject.rotationX  + ", Y: " + jsonObject.rotationY  + ", Z: " + jsonObject.rotationZ  + "<BR>";
+        theOutput = theOutput + "<B>Orientation  </B>";
+        theOutput = theOutput + "X: " + jsonObject.orientationX  + ", Y: " + jsonObject.orientationY  + ", Z: " + jsonObject.orientationZ  + "<BR>";
+        outputDiv.innerHTML = "JSON"+theOutput;
+}
+
+	function getsettingsjsFunction(a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,a1,b1,c1,d1,e1,f1,g1)
+	{
+		var theOutput = "<BR><BR><B>Accelerometer  </B>";        
+        theOutput = theOutput + "X: " + a + ", Y: " + b + ", Z: " + c + "<BR>";
+		theOutput = theOutput + "<B>DeviceOrientation  </B>";  
+		theOutput = theOutput + "X: " + d  + "<BR>";
+        theOutput = theOutput + "<B>Tilt  </B>";
+        theOutput = theOutput + "X: " + e  + ", Y: " + f  + ", Z: " + g  + "<BR>";
+        theOutput = theOutput + "<B>Motion  </B>";
+        theOutput = theOutput + "X: " + h  + "<BR>";
+        theOutput = theOutput + "<B>Ecompass  </B>";
+        theOutput = theOutput + "X: " + i  + "<BR>";
+        theOutput = theOutput + "<B>Magnetometer  </B>";
+        theOutput = theOutput + "X: " + j  + ", Y: " + k  + ", Z: " + l  + "<BR>";
+        theOutput = theOutput + "<B>Gyroscope  </B>";
+        theOutput = theOutput + "X: " + m  + ", Y: " + n + ", Z: " + o  + "<BR>";
+        theOutput = theOutput + "<B>AmbientLight  </B>";
+        theOutput = theOutput + "X: " + p  + "<BR>";
+        theOutput = theOutput + "<B>Proximity  </B>";
+        theOutput = theOutput + "X: " + q  + "<BR>";
+        theOutput = theOutput + "<B>Proximitylongrange  </B>";
+        theOutput = theOutput + "X: " + r  + "<BR>";
+        theOutput = theOutput + "<B>Pressure  </B>";
+        theOutput = theOutput + "X: " + s  + "<BR>";
+        theOutput = theOutput + "<B>Temperature  </B>";
+        theOutput = theOutput + "X: " + t  + "<BR>";
+        theOutput = theOutput + "<B>Humidity  </B>";
+        theOutput = theOutput + "X: " + u  + "<BR>";
+        theOutput = theOutput + "<B>Gravity  </B>";
+        theOutput = theOutput + "X: " + v  + ", Y: " + w  + ", Z: " + x  + "<BR>";
+        theOutput = theOutput + "<B>Linear Acceleration  </B>";
+        theOutput = theOutput + "X: " + y  + ", Y: " + z + ", Z: " + a1  + "<BR>";
+        theOutput = theOutput + "<B>Rotation  </B>";
+        theOutput = theOutput + "X: " + b1  + ", Y: " + c1  + ", Z: " + d1  + "<BR>";
+        theOutput = theOutput + "<B>Orientation  </B>";
+        theOutput = theOutput + "X: " + e1 + ", Y: " + f1  + ", Z: " + g1 + "<BR>";
+		outputDiv.innerHTML = "JSObject"+theOutput;
+	}
+  
+   function setall()
+{
+	var SelectedValue = frm.alldropdown.selectedIndex;
+	var selectall = frm.alldropdown.options[SelectedValue].value;
+    Message.innerHTML="value is:"+selectall;
+	switch(selectall)
+	{
+		case 'Enabled':
+			RawSensors.all = 'Enabled';
+			break;
+
+		case 'Disabled':
+			RawSensors.all = 'Disabled';
+			break;
+			
+	   case 'Invalid':
+            RawSensors.all = 'Invalid';
+			break;
+			
+		case 'Null':
+			RawSensors.all = '';
+			break;
+	}
+}
+    
+ 
+  function setaccelerometer()
+{
+	var SelectedValue = frm.accelerometerdropdown.selectedIndex;
+	var selectaccelerometer = frm.accelerometerdropdown.options[SelectedValue].value;
+    Message.innerHTML="value is:"+selectaccelerometer;
+	switch(selectaccelerometer)
+	{
+		case 'Enabled':
+			RawSensors.accelerometer = 'Enabled';
+			break;
+
+		case 'Disabled':
+			RawSensors.accelerometer = 'Disabled';
+			break;
+			
+	   case 'Invalid':
+            RawSensors.accelerometer = 'Invalid';
+			break;
+			
+		case 'Null':
+			RawSensors.accelerometer = '';
+			break;
+	}
+}
+  
+    function setdeviceOrientation()
+{
+	var SelectedValue = frm.deviceOrientationdropdown.selectedIndex;
+	var selectdeviceOrientation = frm.deviceOrientationdropdown.options[SelectedValue].value;
+    Message.innerHTML="value is:"+selectdeviceOrientation;
+	switch(selectdeviceOrientation)
+	{
+		case 'Enabled':
+			RawSensors.deviceOrientation = 'Enabled';
+			break;
+
+		case 'Disabled':
+			RawSensors.deviceOrientation = 'Disabled';
+			break;
+			
+	   case 'Invalid':
+            RawSensors.deviceOrientation = 'Invalid';
+			break;
+			
+		case 'Null':
+			RawSensors.adeviceOrientation = '';
+			break;
+	}
+}
+  
+    function settiltangle()
+{
+	var SelectedValue = frm.tiltangledropdown.selectedIndex;
+	var selecttiltangle = frm.tiltangledropdown.options[SelectedValue].value;
+    Message.innerHTML="value is:"+selecttiltangle;
+	switch(selecttiltangle)
+	{
+		case 'Enabled':
+			RawSensors.tiltangle = 'Enabled';
+			break;
+
+		case 'Disabled':
+			RawSensors.tiltangle = 'Disabled';
+			break;
+			
+	   case 'Invalid':
+            RawSensors.tiltangle = 'Invalid';
+			break;
+			
+		case 'Null':
+			RawSensors.tiltangle = '';
+			break;
+	}
+}
+
+
+    function setmotion()
+{
+	var SelectedValue = frm.motiondropdown.selectedIndex;
+	var selectmotion = frm.motiondropdown.options[SelectedValue].value;
+    Message.innerHTML="value is:"+selectmotion;
+	switch(selectmotion)
+	{
+		case 'Enabled':
+			RawSensors.motion = 'Enabled';
+			break;
+
+		case 'Disabled':
+			RawSensors.motion = 'Disabled';
+			break;
+			
+	   case 'Invalid':
+            RawSensors.motion = 'Invalid';
+			break;
+			
+		case 'Null':
+			RawSensors.motion = '';
+			break;
+	}
+}  
+
+    function setecompass()
+{
+	var SelectedValue = frm.ecompassdropdown.selectedIndex;
+	var selectecompass = frm.ecompassdropdown.options[SelectedValue].value;
+    Message.innerHTML="value is:"+selectecompass;
+	switch(selectecompass)
+	{
+		case 'Enabled':
+			RawSensors.ecompass = 'Enabled';
+			break;
+
+		case 'Disabled':
+			RawSensors.ecompass = 'Disabled';
+			break;
+			
+	   case 'Invalid':
+            RawSensors.ecompass = 'Invalid';
+			break;
+			
+		case 'Null':
+			RawSensors.ecompass = '';
+			break;
+	}
+}    
+  
+    function setmagnetometer()
+{
+	var SelectedValue = frm.magnetometerdropdown.selectedIndex;
+	var selectmagnetometer = frm.magnetometerdropdown.options[SelectedValue].value;
+    Message.innerHTML="value is:"+selectmagnetometer;
+	switch(selectmagnetometer)
+	{
+		case 'Enabled':
+			RawSensors.magnetometer = 'Enabled';
+			break;
+
+		case 'Disabled':
+			RawSensors.magnetometer = 'Disabled';
+			break;
+			
+	   case 'Invalid':
+            RawSensors.magnetometer = 'Invalid';
+			break;
+			
+		case 'Null':
+			RawSensors.magnetometer = '';
+			break;
+	}
+}
+  
+    function setgyroscope()
+{
+	var SelectedValue = frm.gyroscopedropdown.selectedIndex;
+	var selectgyroscope = frm.gyroscopedropdown.options[SelectedValue].value;
+    Message.innerHTML="value is:"+selectgyroscope;
+	switch(selectgyroscope)
+	{
+		case 'Enabled':
+			RawSensors.gyroscope = 'Enabled';
+			break;
+
+		case 'Disabled':
+			RawSensors.gyroscope = 'Disabled';
+			break;
+			
+	   case 'Invalid':
+            RawSensors.gyroscope = 'Invalid';
+			break;
+			
+		case 'Null':
+			RawSensors.gyroscope = '';
+			break;
+	}
+} 
+  
+    function setambientlight()
+{
+	var SelectedValue = frm.ambientlightdropdown.selectedIndex;
+	var selectambientlight = frm.ambientlightdropdown.options[SelectedValue].value;
+    Message.innerHTML="value is:"+selectambientlight;
+	switch(selectambientlight)
+	{
+		case 'Enabled':
+			RawSensors.ambientlight = 'Enabled';
+			break;
+
+		case 'Disabled':
+			RawSensors.ambientlight = 'Disabled';
+			break;
+			
+	   case 'Invalid':
+            RawSensors.ambientlight = 'Invalid';
+			break;
+			
+		case 'Null':
+			RawSensors.ambientlight = '';
+			break;
+	}
+}    
+  
+    function setproximity()
+{
+	var SelectedValue = frm.proximitydropdown.selectedIndex;
+	var selectproximity = frm.proximitydropdown.options[SelectedValue].value;
+    Message.innerHTML="value is:"+selectproximity;
+	switch(selectproximity)
+	{
+		case 'Enabled':
+			RawSensors.proximity = 'Enabled';
+			break;
+
+		case 'Disabled':
+			RawSensors.proximity = 'Disabled';
+			break;
+			
+	   case 'Invalid':
+            RawSensors.proximity = 'Invalid';
+			break;
+			
+		case 'Null':
+			RawSensors.proximity = '';
+			break;
+	}
+}  
+  
+    function setproximitylongrange()
+{
+	var SelectedValue = frm.proximitylongrangedropdown.selectedIndex;
+	var selectproximitylongrange = frm.proximitylongrangedropdown.options[SelectedValue].value;
+    Message.innerHTML="value is:"+selectproximitylongrange;
+	switch(selectproximitylongrange)
+	{
+		case 'Enabled':
+			RawSensors.proximitylongrange = 'Enabled';
+			break;
+
+		case 'Disabled':
+			RawSensors.proximitylongrange = 'Disabled';
+			break;
+			
+	   case 'Invalid':
+            RawSensors.proximitylongrange = 'Invalid';
+			break;
+			
+		case 'Null':
+			RawSensors.proximitylongrange = '';
+			break;
+	}
+}
+  
+    function setpressure()
+{
+	var SelectedValue = frm.pressuredropdown.selectedIndex;
+	var selectpressure = frm.pressuredropdown.options[SelectedValue].value;
+    Message.innerHTML="value is:"+selectpressure;
+	switch(selectpressure)
+	{
+		case 'Enabled':
+			RawSensors.pressure = 'Enabled';
+			break;
+
+		case 'Disabled':
+			RawSensors.pressure = 'Disabled';
+			break;
+			
+	   case 'Invalid':
+            RawSensors.pressure = 'Invalid';
+			break;
+			
+		case 'Null':
+			RawSensors.pressure = '';
+			break;
+	}
+} 
+  
+    function settemperature()
+{
+	var SelectedValue = frm.temperaturedropdown.selectedIndex;
+	var selecttemperature = frm.temperaturedropdown.options[SelectedValue].value;
+    Message.innerHTML="value is:"+selecttemperature;
+	switch(selecttemperature)
+	{
+		case 'Enabled':
+			RawSensors.temperature = 'Enabled';
+			break;
+
+		case 'Disabled':
+			RawSensors.temperature = 'Disabled';
+			break;
+			
+	   case 'Invalid':
+            RawSensors.temperature = 'Invalid';
+			break;
+			
+		case 'Null':
+			RawSensors.temperature = '';
+			break;
+	}
+} 
+
+  
+    function sethumidity()
+{
+	var SelectedValue = frm.humiditydropdown.selectedIndex;
+	var selecthumidity = frm.humiditydropdown.options[SelectedValue].value;
+    Message.innerHTML="value is:"+selecthumidity;
+	switch(selecthumidity)
+	{
+		case 'Enabled':
+			RawSensors.humidity = 'Enabled';
+			break;
+
+		case 'Disabled':
+			RawSensors.humidity = 'Disabled';
+			break;
+			
+	   case 'Invalid':
+            RawSensors.humidity = 'Invalid';
+			break;
+			
+		case 'Null':
+			RawSensors.humidity = '';
+			break;
+	}
+} 
+
+    function setgravity()
+{
+	var SelectedValue = frm.gravitydropdown.selectedIndex;
+	var selectgravity = frm.gravitydropdown.options[SelectedValue].value;
+    Message.innerHTML="value is:"+selectgravity;
+	switch(selectgravity)
+	{
+		case 'Enabled':
+			RawSensors.gravity = 'Enabled';
+			break;
+
+		case 'Disabled':
+			RawSensors.gravity = 'Disabled';
+			break;
+			
+	   case 'Invalid':
+            RawSensors.gravity = 'Invalid';
+			break;
+			
+		case 'Null':
+			RawSensors.gravity = '';
+			break;
+	}
+}  
+
+    function setlinearAcceleration()
+{
+	var SelectedValue = frm.linearAccelerationdropdown.selectedIndex;
+	var selectlinearAcceleration = frm.linearAccelerationdropdown.options[SelectedValue].value;
+    Message.innerHTML="value is:"+selectlinearAcceleration;
+	switch(selectlinearAcceleration)
+	{
+		case 'Enabled':
+			RawSensors.linearAcceleration = 'Enabled';
+			break;
+
+		case 'Disabled':
+			RawSensors.linearAcceleration = 'Disabled';
+			break;
+			
+	   case 'Invalid':
+            RawSensors.linearAcceleration = 'Invalid';
+			break;
+			
+		case 'Null':
+			RawSensors.linearAcceleration = '';
+			break;
+	}
+}  
+
+    function setrotation()
+{
+	var SelectedValue = frm.rotationdropdown.selectedIndex;
+	var selectrotation = frm.rotationdropdown.options[SelectedValue].value;
+    Message.innerHTML="value is:"+selectrotation;
+	switch(selectrotation)
+	{
+		case 'Enabled':
+			RawSensors.rotation = 'Enabled';
+			break;
+
+		case 'Disabled':
+			RawSensors.rotation = 'Disabled';
+			break;
+			
+	   case 'Invalid':
+            RawSensors.rotation = 'Invalid';
+			break;
+			
+		case 'Null':
+			RawSensors.rotation = '';
+			break;
+	}
+} 
+
+    function setorientation()
+{
+	var SelectedValue = frm.orientationdropdown.selectedIndex;
+	var selectorientation = frm.orientationdropdown.options[SelectedValue].value;
+    Message.innerHTML="value is:"+selectorientation;
+	switch(selectorientation)
+	{
+		case 'Enabled':
+			RawSensors.orientation = 'Enabled';
+			break;
+
+		case 'Disabled':
+			RawSensors.orientation = 'Disabled';
+			break;
+			
+	   case 'Invalid':
+            RawSensors.orientation = 'Invalid';
+			break;
+			
+		case 'Null':
+			RawSensors.orientation = '';
+			break;
+	}
+} 
+    
+function setminimumInterval()
+{
+	var minimumIntervalValue = frm.txtminimumInterval.value;
+	var IValue = "Intensity:"+minimumIntervalValue;
+	Message.innerHTML="value is:"+IValue;
+	RawSensors.minimumInterval=minimumIntervalValue;	
+}  
+  
+    
+ </script>
+</head>
+<body>
+<form id="frm" action="">
+<br /><br /><br />
+<b>RawSensor with JSOBJECT</b><br /><br />
+<div id="Message">Message</div>
+<div id="outputDiv">Sensor output goes here</div>
+<br/>
+<hr>
+<INPUT align="center" type="button" value="Retrieve Sensor Data" onclick="callgetSensorData();"><br/>
+<hr>
+
+RawSensorEvent:
+<select name="sensoreventdropdown" id="Select3">
+<option SELECTED VALUE="">Select</OPTION>
+<option value="JSCRIPT">JSCRIPT</option>
+<option value="JSON">JSON</option>
+<option value="DETACH">DETACH</option>
+<option value="URL">URL</option>
+<option value="EMPTY">EMPTY</option>
+</select>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<input type="button" onclick="setsensorEvent();" value="SetSensorEvent">
+<br /><br />
+<hr/>
+
+all sensor:<select name="alldropdown" id="IDall">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="Enabled">Enabled</option>
+<option value="Disabled">Disabled</option>
+<option value="Invalid">Invalid</option>
+<option value="Null">Null</option>
+</select>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<input type=button onclick="setall();" value="SetAllSensor">
+
+<br /><br />
+accelerometer:<select name="accelerometerdropdown" id="IDaccelerometer">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="Enabled">Enabled</option>
+<option value="Disabled">Disabled</option>
+<option value="Invalid">Invalid</option>
+<option value="Null">Null</option>
+</select>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<input type=button onclick="setaccelerometer();" value="SetAccelerometer">
+
+<br /><br />
+deviceOrientation:<select name="deviceOrientationdropdown" id="IDdeviceOrientation">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="Enabled">Enabled</option>
+<option value="Disabled">Disabled</option>
+<option value="Invalid">Invalid</option>
+<option value="Null">Null</option>
+</select>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<input type=button onclick="setdeviceOrientation();" value="setDeviceOrientation">
+
+<br /><br />
+tiltangle:<select name="tiltangledropdown" id="IDtiltangle">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="Enabled">Enabled</option>
+<option value="Disabled">Disabled</option>
+<option value="Invalid">Invalid</option>
+<option value="Null">Null</option>
+</select>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<input type=button onclick="settiltangle();" value="setTiltAngle">
+
+<br /><br />
+motion:<select name="motiondropdown" id="IDmotion">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="Enabled">Enabled</option>
+<option value="Disabled">Disabled</option>
+<option value="Invalid">Invalid</option>
+<option value="Null">Null</option>
+</select>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<input type=button onclick="setmotion();" value="setMotion">
+
+<br /><br />
+ecompass:<select name="ecompassdropdown" id="IDecompass">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="Enabled">Enabled</option>
+<option value="Disabled">Disabled</option>
+<option value="Invalid">Invalid</option>
+<option value="Null">Null</option>
+</select>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<input type=button onclick="setecompass();" value="setEcompass">
+
+<br /><br />
+magnetometer:<select name="magnetometerdropdown" id="IDmagnetometer">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="Enabled">Enabled</option>
+<option value="Disabled">Disabled</option>
+<option value="Invalid">Invalid</option>
+<option value="Null">Null</option>
+</select>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<input type=button onclick="setmagnetometer();" value="setMagnetometer">
+
+<br /><br />
+gyroscope:<select name="gyroscopedropdown" id="IDgyroscope">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="Enabled">Enabled</option>
+<option value="Disabled">Disabled</option>
+<option value="Invalid">Invalid</option>
+<option value="Null">Null</option>
+</select>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<input type=button onclick="setgyroscope();" value="setGyroscope">
+
+<br /><br />
+ambientlight:<select name="ambientlightdropdown" id="IDambientlight">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="Enabled">Enabled</option>
+<option value="Disabled">Disabled</option>
+<option value="Invalid">Invalid</option>
+<option value="Null">Null</option>
+</select>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<input type=button onclick="setambientlight();" value="setAmbientlight">
+
+<br /><br />
+proximity:<select name="proximitydropdown" id="IDproximity">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="Enabled">Enabled</option>
+<option value="Disabled">Disabled</option>
+<option value="Invalid">Invalid</option>
+<option value="Null">Null</option>
+</select>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<input type=button onclick="setproximity();" value="setProximity">
+
+<br /><br />
+proximitylongrange:<select name="proximitylongrangedropdown" id="IDproximitylongrange">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="Enabled">Enabled</option>
+<option value="Disabled">Disabled</option>
+<option value="Invalid">Invalid</option>
+<option value="Null">Null</option>
+</select>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<input type=button onclick="setproximitylongrange();" value="setProximitylongrange">
+
+<br /><br />
+pressure:<select name="pressuredropdown" id="IDpressure">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="Enabled">Enabled</option>
+<option value="Disabled">Disabled</option>
+<option value="Invalid">Invalid</option>
+<option value="Null">Null</option>
+</select>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<input type=button onclick="setpressure();" value="setPressure">
+
+<br /><br />
+temperature:<select name="temperaturedropdown" id="IDtemperature">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="Enabled">Enabled</option>
+<option value="Disabled">Disabled</option>
+<option value="Invalid">Invalid</option>
+<option value="Null">Null</option>
+</select>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<input type=button onclick="settemperature();" value="setTemperature">	
+
+<br /><br />
+humidity:<select name="humiditydropdown" id="IDhumidity">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="Enabled">Enabled</option>
+<option value="Disabled">Disabled</option>
+<option value="Invalid">Invalid</option>
+<option value="Null">Null</option>
+</select>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<input type=button onclick="sethumidity();" value="setHumidity">	
+
+<br /><br />
+gravity:<select name="gravitydropdown" id="IDgravity">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="Enabled">Enabled</option>
+<option value="Disabled">Disabled</option>
+<option value="Invalid">Invalid</option>
+<option value="Null">Null</option>
+</select>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<input type=button onclick="setgravity();" value="setGravity">	
+
+<br /><br />
+linearAcceleration:<select name="linearAccelerationdropdown" id="IDlinearAcceleration">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="Enabled">Enabled</option>
+<option value="Disabled">Disabled</option>
+<option value="Invalid">Invalid</option>
+<option value="Null">Null</option>
+</select>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<input type=button onclick="setlinearAcceleration();" value="setLinearAcceleration">	
+
+<br /><br />
+rotation:<select name="rotationdropdown" id="IDrotation">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="Enabled">Enabled</option>
+<option value="Disabled">Disabled</option>
+<option value="Invalid">Invalid</option>
+<option value="Null">Null</option>
+</select>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<input type=button onclick="setrotation();" value="setRotation">
+
+<br /><br />
+orientation:<select name="orientationdropdown" id="IDorientation">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="Enabled">Enabled</option>
+<option value="Disabled">Disabled</option>
+<option value="Invalid">Invalid</option>
+<option value="Null">Null</option>
+</select>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<input type=button onclick="setorientation();" value="setOrientation">
+<hr />
+
+minimumInterval:<Textarea id="txtminimumInterval"cols="10" rows="1">2000</Textarea>
+&nbsp;&nbsp;&nbsp;&nbsp;
+<input type=button onclick="setminimumInterval();" value="SetMinimumInterval">
+<hr />
+
+</table>
+</form>
+
+</body>
+</html>

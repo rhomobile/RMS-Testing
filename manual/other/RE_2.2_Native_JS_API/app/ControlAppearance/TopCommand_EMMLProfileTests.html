@@ -1,0 +1,126 @@
+﻿<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+<!--<META HTTP-Equiv="EMMLProfile" Content="name:myIndicators;import:url('http://10.233.85.82/pb3.x/neon//EMMLProfiles/Indicators/Indicators.emmp');">
+--><!--<META HTTP-Equiv="EMMLProfile" Content="name:myIndicators;import:url('file://\Indicators.emmp');">
+<META HTTP-Equiv="EMMLProfile" Content="apply:myIndicators;">-->
+
+</head>
+<body>
+<P><BR></P>
+<h4>TopCommandArea EMML Profile Tests</h4>
+
+<table border=1>
+<tr>
+<td><input id="Back" type="button" value="Back" onclick="location.href='ControlAppearance.html'"></td>
+<td><INPUT TYPE="button" VALUE="Quit" ONCLICK="Quit();"></td>
+</tr>
+<tr>
+<td><input type=button value="Import profile" onclick="importProfile();"></td>
+<td><input type=button value="New Import profile" onclick="importProfile1();"></td>
+<td><input type=button value="Clear Profile" onclick="clearProfile();"></td>
+</tr>
+
+</table>
+<table border=1>
+
+<tr>
+<td>
+<a href="javascript:doApplyProfile('myTopCommand.TopPositiveDefault');">Apply TopPositiveDefault Profile</a>
+</td>
+</tr>
+<tr>
+<td>
+<a href="javascript:doApplyProfile('myTopCommand.TopVisibilityNULL');">Apply  TopVisibilityNULL Profile</a>
+</td>
+</tr>
+<tr>
+<td><a href="javascript:doApplyProfile('myTopCommand.TopVisibilityINVALID');">Apply TopVisibilityINVALID Profile</a>
+</td>
+</tr>
+<tr>
+<td>
+<a href="javascript:doApplyProfile('myTopCommand.TopPositiveColor');">Apply TopPositiveColor Profile</a>
+</td>
+</tr>
+<tr>
+<td>
+<a href="javascript:doApplyProfile('myTopCommand.TopColorNULL');">Apply TopColorNULL Profile</a>
+</td>
+</tr>
+<tr>
+<td>
+<a href="javascript:doApplyProfile('myTopCommand.TopPositiveImageHttp');">Apply TopPositiveImageHttp Profile</a>
+</td>
+</tr>
+<tr>
+<td>
+<a href="javascript:doApplyProfile('myTopCommand.TopPositiveImageFTP');">Apply TopPositiveImageFTP Profile</a>
+</td>
+</tr>
+<tr>
+<td>
+<a href="javascript:doApplyProfile('myTopCommand.TopPositiveImageURLNULL');">Apply TopPositiveImageURLNULL Profile</a>
+</td>
+</tr>
+<tr>
+<td>
+<a href="javascript:doApplyProfile('myTopCommand.TopPositiveImageNULL');">Apply TopPositiveImageNULL Profile</a>
+</td>
+</tr>
+<tr>
+<td>
+<a href="javascript:doApplyProfile('myTopCommand.TopPositiveHeightNegative');">Apply TopPositiveHeightNegative Profile</a>
+</td>
+</tr>
+<tr>
+<td>
+<a href="javascript:doApplyProfile('myTopCommand.TopPositiveHeightNULL');">Apply TopPositiveHeightNULL Profile</a>
+</td>
+</tr>
+<tr>
+<td>
+<a href="javascript:doApplyProfile('myTopCommand.TopHide');">Apply TopHide Profile</a>
+</td>
+</tr>
+
+</table>
+
+</body>
+</html>
+
+
+<SCRIPT LANGUAGE="JavaScript">
+    //var Generic = new ActiveXObject("PocketBrowser.Generic");
+
+    
+
+    function doApplyProfile(profile) {
+        generic.InvokeMETAFunction('EMMLProfile', 'Apply:' + profile);
+        //alert(p);
+        //generic.InvokeMETAFunction('EMMLProfile', 'Apply:' + );
+    }
+
+    function clearProfile() {
+        generic.InvokeMETAFunction('EMMLProfile', 'clear:myTopCommand');
+    }
+
+    function importProfile() {
+        generic.InvokeMETAFunction("EMMLProfile", "name:myTopCommand;import:url('http://10.233.85.82/ControlAppearance/TopCommand.emmp');");
+        //var x = generic.InvokeMETAFunction("EMMLProfile", "name:myIndicators;import:url('file://\Indicators.emmp');");
+        //alert(x);
+    }
+
+   function importProfile1() {
+        generic.InvokeMETAFunction("EMMLProfile", "name:myTopCommand;importProfile:url('http://10.233.85.82/ControlAppearance/TopCommand.emmp');");
+        //var x = generic.InvokeMETAFunction("EMMLProfile", "name:myIndicators;import:url('file://\Indicators.emmp');");
+        //alert(x);
+    }
+
+
+
+    function Quit() {
+        generic.InvokeMETAFunction("Application", "Quit");
+    }
+</SCRIPT>

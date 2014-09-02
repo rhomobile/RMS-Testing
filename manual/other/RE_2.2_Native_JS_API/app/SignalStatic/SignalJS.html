@@ -1,0 +1,200 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+    <title>PB Signal Test</title>
+<META HTTP-Equiv="MinimizeButton" Content="Visibility:Visible;left:50">
+
+<script language=javascript>
+    //var myobjgeneric = new ActiveXObject("PocketBrowser.generic");
+    var a = 0;
+
+    function signalVisible() {
+        //    alert('Hello');
+        //generic.InvokeMETAFunction('Signal', 'visibility:visible');
+        signal.visibility = 'visible'; 
+    }
+
+    function signalHidden() {
+         //generic.InvokeMETAFunction('Signal', 'visibility:Hidden');
+         signal.visibility = 'hidden';
+    }
+
+    function signalAddress() {
+        //generic.InvokeMETAFunction('Signal', 'visibility:Address');
+        signal.visibility = 'address';
+    }
+
+    function setLeftPosition() {
+        var leftpst = frm.leftPosition.value;
+        var temp = "Left:" + leftpst;
+        //alert("temp" + temp);
+       // generic.InvokeMETAFunction('Signal', temp);
+       signal.left = leftpst;
+    }
+
+    function setTopPosition() {
+        var toppst = frm.topPosition.value;
+        var temp1 = "Top:" + toppst;
+       // generic.InvokeMETAFunction('Signal', temp1);
+       signal.top = toppst;
+    }
+
+    function setcolor() {
+        var clr = frm.colorRGB.value;
+        var temp2 = "Color:" + clr;
+       // generic.InvokeMETAFunction('Signal', temp2);
+        signal.color = clr;
+    }
+
+    function eventURL() {
+        //generic.InvokeMETAFunction('Signal', 'visibility:visible');
+        //generic.InvokeMETAFunction("Signal", "signalevent:url('http://10.233.85.82/PB3.x/NavigateTest.html')");
+        signal.visibility = 'visible'; 
+        signal.signalEvent = "url('http://10.233.85.82/PB3.x/NavigateTest.html')";
+        //myobjgeneric.InvokeMETAFunction("Signal","signalevent:");
+    }
+
+    function eventStatus() {
+        //generic.InvokeMETAFunction('Signal', 'visibility:visible');
+        //generic.InvokeMETAFunction("Signal", "signalevent:url('Javascript:OnSignal('%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s');')");
+        //myobjgeneric.InvokeMETAFunction("Signal","signalevent:");
+         signal.visibility = 'visible'; 
+        // signal.signalEvent = "OnSignal('%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s')";
+        signal.signalEvent = "OnSignal(%json)";
+        //signal.signalEvent = "";
+    }
+
+   // function OnSignal(signal, ESSID, MAC, AdapterName, DHCPServer, DHCPStatic, Gateway, IPAddress, RSSI, SubnetMask, Wins) {
+      function OnSignal(json) {
+        a = a + 1;
+        sig.innerHTML = "Signal: " + json.signalStrength
+								+ "<BR>ESSID:" + json.essid
+								+ "<BR>MAC: " + json.macAddress
+								+ "<BR>AdapterName: " + json.adapterName
+								+ "<BR>DHCPServer: " + json.dhcpServer
+								+ "<BR>DHCPStatic: " + json.dhcpStatic
+								+ "<BR>Gateway: " + json.gateway
+								+ "<BR>IPAddress: " + json.ipAddress
+								+ "<BR>RSSI: " + json.rssi
+								+ "<BR>SubnetMask: " + json.subnetMask
+								+ "<BR>Wins: " + json.wins
+								+ "<BR>Count: " + a
+        return;
+    }
+
+    function IconPositionGraphPosition() {
+        var selectedPosition = "";
+        var SlectedIndex = frm.mydropdown.selectedIndex;
+        selectedPosition = frm.mydropdown.options[SlectedIndex].value;
+        switch (selectedPosition) {
+            case 'Left_Top':
+
+                //generic.InvokeMETAFunction('Signal', 'Left:50; Top:50; layout:Left;color:#00C000; visibility:visible');
+                signal.layout = 'left';
+                break;
+
+            case 'Top_Right':
+
+               //generic.InvokeMETAFunction('Signal', 'Left:200; Top:200; Iconposition:Top; GraphPosition:Right; color:#00C000; visibility:visible');
+               signal.layout = 'up';
+                break;
+
+            case 'Right_Top':
+
+                //generic.InvokeMETAFunction('Signal', 'Left:130; Top:130; Iconposition:Right; GraphPosition:Top; color:#00C000; visibility:visible');
+                signal.layout = 'right';
+                break;
+
+            case 'Bottom_Right':
+
+                //generic.InvokeMETAFunction('Signal', 'Left:30; Top:30; Iconposition:Bottom; GraphPosition:Right; color:#00C000; visibility:visible');
+                signal.layout = 'down';
+                break;
+            case 'Invalid':
+
+                //generic.InvokeMETAFunction('Signal', 'Left:30; Top:30; Iconposition:Bottom; GraphPosition:Right; color:#00C000; visibility:visible');
+                signal.layout = 'AABB';
+                break;
+            case 'Blank':
+
+                //generic.InvokeMETAFunction('Signal', 'Left:30; Top:30; Iconposition:Bottom; GraphPosition:Right; color:#00C000; visibility:visible');
+                signal.layout = '';
+                break;
+
+            
+
+        }
+    }
+
+    function eventASP() {
+        //generic.InvokeMETAFunction('Signal', 'visibility:visible');
+       // generic.InvokeMETAFunction("Signal", "signalevent:url('http://10.233.85.82/pb3.x/indicators/signal.asp?Signalpercentage=%s&ESSID=%s&MacAdd=%s&Adapter=%s&DHCPServ=%s&Mode=%s&Gateway=%s&IPAddress=%s&RSSI=%s&Subnet=%s&Wins=%s')");
+        signal.visibility = 'visible'; 
+        signal.signalEvent = "url('http://10.233.85.82/pb3.x/indicators/signal.asp?Signalpercentage=%s&ESSID=%s&MacAdd=%s&Adapter=%s&DHCPServ=%s&Mode=%s&Gateway=%s&IPAddress=%s&RSSI=%s&Subnet=%s&Wins=%s')";
+    }
+
+</Script>
+
+</head>
+<body>
+
+
+<form id="frm" action="">
+<BR><BR>
+<DIV ID="sig">Signal details should appear here</DIV>
+<BR><BR>
+
+<input type=button onclick="signalVisible();" value="Visible">
+
+
+<input type=button onclick="signalHidden();" value="Hidden">
+
+<BR><BR>
+
+<input type=button id="Address" onclick="signalAddress();" value="Address">
+
+<BR><BR>
+
+<input type=button id="EventASP" onclick="eventASP();" value="EventASP">
+
+<BR><BR>
+
+<input type=button id="EventStatus" onclick="eventStatus();" value="EventStatus">
+
+<BR><BR>
+
+<input type=button id="EventURL" onclick="eventURL();" value="EventURL">
+
+<BR><BR>
+
+<select name="mydropdown" id="mydropdown" onChange="IconPositionGraphPosition();">
+<option value="Left_Top">Left</option>
+<option value="Top_Right">Up</option>
+<option value="Right_Top">Right</option>
+<option value="Bottom_Right">Down</option>
+<option value="Invalid">Invalid</option>
+<option value="Blank">Blank</option>
+
+</select>
+<BR><BR>
+<table border=1 width=100%>
+ <tr>
+      <td>Left Position:</td><td><Textarea id="leftPosition" cols="10" rows="1"></Textarea> <INPUT type=button onclick="Javascript:setLeftPosition();" value="Left"></td>
+    </tr>
+ <tr>
+      <td>Top Position:</td><td><Textarea id="topPosition" cols="10" rows="1"></Textarea> <INPUT type=button onclick="Javascript:setTopPosition();" value="Top"></td>
+    </tr>
+ <tr>
+      <td>Color:</td><td><Textarea id="colorRGB" cols="10" rows="1"></Textarea> <INPUT type=button onclick="Javascript:setcolor();" value="Color"></td>
+    </tr>
+
+</table>
+
+<BR>
+<A HREF="./SignalStaticIndex.html">Back</A>
+
+
+</form>
+</body>
+</html>

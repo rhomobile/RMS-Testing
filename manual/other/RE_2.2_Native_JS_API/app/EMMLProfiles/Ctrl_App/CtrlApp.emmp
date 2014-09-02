@@ -1,0 +1,146 @@
+.AddressBar1{
+    addressbar-left:12;
+    addressbar-top:50;
+    addressbar-width:200;
+    addressbar-visibility:visible;
+}
+
+.BackButton1{
+  backbutton-top:30;
+  backbutton-left:;
+  backbutton-height:;
+  backbutton-width:30;
+  backbutton-visibility:; 
+}
+
+.KeyState1{
+  KeyState-top:;
+  KeyState-right:;
+  KeyState-left:50;
+  KeyState-height:50;
+  KeyState-width:30;
+  KeyState-visibility:visible; 
+}
+
+.MinimizeButton1{
+  minimizebutton-top:;
+  minimizebutton-left:;
+  minimizebutton-height:;
+  minimizebutton-width:;
+  minimizebutton-visibility:visible;
+}
+
+.QuitButton1{
+  quitbutton-top:40;
+  quitbutton-left:60;
+  quitbutton-height:30;
+  quitbutton-width:30;
+  quitbutton-imageup:url('');
+  quitbutton-imagedown:url('http://157.235.207.203/pb3.x/Resource/.bmp');
+  quitbutton-visibility:;
+}
+
+.ReloadButton1{
+  reloadbutton-top:;
+  reloadbutton-left:50;
+  reloadbutton-height:50;
+  reloadbutton-width:;
+  reloadbutton-visibility:visible; 
+}
+
+.PageZoomIn1{
+  ZoomInPageButton-top:30;
+  ZoomInPageButton-left:;
+  ZoomInPageButton-height:;
+  ZoomInPageButton-width:;
+  ZoomInPageButton-visibility:visible; 
+}
+
+.PageZoomOut1{
+  ZoomOutPageButton-top:30;
+  ZoomOutPageButton-left:;
+  ZoomOutPageButton-height:50;
+  ZoomOutPageButton-width:30;
+  ZoomOutPageButton-visibility:jhsdf;
+}
+
+.ZoomTx1{
+  ZoomTextButton-top:30;
+  ZoomTextButton-left:dfn;
+  ZoomTextButton-height:50;
+  ZoomTextButton-width:30;
+  ZoomTextButton-visibility:;
+}
+
+.TopCommandArea1{
+  topcommandarea-height:100;
+  topcommandarea-color:;
+  topcommandarea-image:;
+  topcommandarea-visibility:visible;
+  
+}
+
+.StopButton1{
+  Stopbutton-top:30;
+  Stopbutton-left:;
+  Stopbutton-height:50;
+  Stopbutton-width:;
+  Stopbutton-visibility:visible;
+}
+
+.SIPButton1{
+  SIPbutton-top:30;
+  SIPbutton-left:;
+  SIPbutton-height:0;
+  SIPbutton-width:30;
+  SIPbutton-visibility:visib-=-=le; 
+}
+
+.SIP1{ 
+  SIPbutton-top:80;
+  SIPbutton-left:50;
+  SIPbutton-height:50;
+  SIPbutton-width:50;
+  SIPbutton-visibility:visible;
+}
+
+.GoButton1{
+  gobutton-top:30;
+  gobutton-left:5-=0;
+  gobutton-height:50;
+  gobutton-width:30;
+  gobutton-visibility:visible; 
+}
+
+.BottomCommandArea1{
+  bottomcommandarea-height:0;
+  bottomcommandarea-color:#;
+  bottomcommandarea-visibility:visible; 
+}
+
+
+.AddressBarHide{
+    addressbar-left:30;
+    addressbar-top:50;
+    addressbar-width:200;
+    addressbar-visibility:hidden;
+}
+
+
+.TopCommandAreaHide{
+  topcommandarea-height:;
+  topcommandarea-color:;
+  topcommandarea-visibility:Hidden;
+}
+
+
+.QuitButtonHide{
+  quitbutton-top:60;
+  quitbutton-left:80;
+  quitbutton-height:30;
+  quitbutton-width:30;
+  quitbutton-imageup:url('http://157.235.207.203/pb3.x/Resource/Infinity.jpeg');
+  quitbutton-imagedown:url();
+  quitbutton-visibility:Hidden;
+  
+}

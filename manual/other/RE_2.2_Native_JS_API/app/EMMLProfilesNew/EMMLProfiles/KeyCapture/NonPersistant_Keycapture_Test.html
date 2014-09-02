@@ -1,0 +1,52 @@
+﻿<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+    <title>PB 3.0 static KeyCapture Test-AccelerateKey:All</title>
+   <META HTTP-Equiv="EMMLProfile" Content="apply:KeyAll;">
+
+<script language=javascript>
+
+    function Quit() {
+        objGeneric.InvokeMETAFunction("Application", "Quit");
+    }
+
+
+    function MyKeyEvent(key) {
+
+        message.innerHTML = "Key captured" + key;
+        frmKeykandler.TexInput2.value = key;
+
+    }
+
+</script>
+</head>
+<body>
+<h4>UnNamed KeyCapture EMML Test Scipt</h4>
+<h4>UnNamed KeyCapture profile is  applied only. KeyCapture should <B>be</B> worked on this page.</h4>
+<div id="message"></div><br /><br />
+
+<form id="frmKeykandler" action="">
+
+
+<table>Aceeleratekey-all
+    <tr>
+        <td><a href="main"></a></td>
+    </tr>
+    <tr>
+        <Textarea id="txtInput" cols="15" rows="2"></Textarea>
+     </tr>
+         <tr>
+        <Textarea id="TexInput2" cols="15" rows="2"></Textarea>
+    </tr>
+  
+</table>
+</form>
+<INPUT TYPE="button" VALUE="Quit" ONCLICK="Quit();"></P>
+<h3>Browse to another page to check for EMML profile persistance.</h3>
+<h4><a href="NonPersistant_Keycapture_Profile.html">Click here to go to another page.</a></h4>
+<hr />
+<a href="../EMMLProfilesIndex.html">Back to EMML Profile Index</a>
+
+</body>
+</html>

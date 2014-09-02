@@ -1,0 +1,197 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+    <title>WavFile with gen</title>
+<script language=javascript>
+ var gen = new ActiveXObject("PocketBrowser.Generic"); 
+
+function invoke()
+{
+	var invokeIndex=frm.invokedropdown.selectedIndex;
+	var invokeValue = frm.invokedropdown.options[invokeIndex].value;
+	switch(invokeValue)
+	{
+		case 'Method':
+			gen.InvokeMETAFunction('Scanner', 'Enabled');
+			break;
+
+		case 'Property':
+			gen.InvokeMETAFunction('Signal', 'Visibility:Visible');
+			break;
+
+		case 'M Property':
+			gen.InvokeMETAFunction('Battery', 'Left:50; Top:50; color:#FF0000; visibility:visible');
+			break;
+
+		case 'M Invoke':
+			gen.InvokeMETAFunction('Signal', 'visibility:visible');
+			gen.InvokeMETAFunction('Signal', 'Top:150');
+			gen.InvokeMETAFunction('Signal', 'Left:150');
+			break;	
+			
+		case 'Invalid':
+			gen.InvokeMETAFunction('Imager', '');
+			break;
+
+	}
+}
+
+//function playfile()
+//{
+//	var pathfile = frm.txtwavfile.value;
+//	gen.PlayWave(pathfile, 16);
+//}
+
+function setwavFilePath()
+{
+var filepathindex=frm.myWAVPath.selectedIndex;
+var filepathvalue=frm.myWAVPath.options[filepathindex].value;
+frm.txtwavPath.value=filepathvalue;
+
+
+}
+
+function play()
+{
+
+	var pWav = frm.txtwavPath.value;
+    Div1.innerHTML=pWav;
+    
+	for (var i=0; i < frm.group1.length; i++)
+   	{   
+      		if (frm.group1[i].checked)
+      		{
+      		    
+      			var playValue = frm.group1[i].value;
+      			
+      		}
+   	}	
+	switch(playValue)
+	{
+		case 'Zero':
+			var RetVal =gen.PlayWave(pWav, 0);
+			myDiv2.innerHTML="Zero flag result is "+RetVal;
+			break;
+
+		case 'One':
+			var RetVal =gen.PlayWave(pWav, 1);
+			myDiv2.innerHTML="one flag result is "+RetVal;
+			break;
+
+		case 'Two':
+			var RetVal =gen.PlayWave(pWav, 2);
+			myDiv2.innerHTML="two flag result is "+RetVal;
+			break;
+
+		case 'Four':
+			var RetVal =gen.PlayWave(pWav, 4);
+			myDiv2.innerHTML="four flag result is "+RetVal;
+			break;
+			
+		case 'Eight':
+			var RetVal =gen.PlayWave(pWav, "8");
+			myDiv2.innerHTML="Eight flag result is "+RetVal;
+			
+			break;
+
+		case 'Ten':
+			var RetVal =gen.PlayWave(pWav, 16);
+			myDiv2.innerHTML="ten flag result is "+RetVal;
+			break;
+			
+	    case 'Null':
+			var RetVal =gen.PlayWave(null,"1");
+			myDiv2.innerHTML="empty flag result is "+RetVal;
+			break;
+			
+		case 'Invalid':
+			var RetVal =gen.PlayWave(pWav,20 );
+			myDiv2.innerHTML="twenty invalid flag result is "+RetVal;
+			break;
+			
+
+
+	}
+}
+
+function uuidmethod()
+{
+    myDiv2.innerHTML="uuid is "+gen.UUID;
+	//frm.Textarea1.value=gen.UUID;
+}
+
+function OEMInfomethod()
+{
+    myDiv2.innerHTML="OEM info "+gen.OEMInfo;
+	//frm.Textarea1.value=gen.OEMInfo;
+}
+
+</script>
+
+
+
+</head>
+<body>
+<BR><BR>
+<b>ActiveX Approach</b>
+<div id="Div1">FilePath</div>
+<div id="myDiv2">Message</div>
+<form id="frm">
+<!--<input type="text" name="txtwavfile" id="txtwavfile" value="\Windows\alarm5.wav" />
+<input type="button" onclick="Javascript:playfile();" value="PlayWav" />
+<hr />-->
+
+WaveFilePath:<Textarea id="txtwavPath"cols="50" rows="1">\Application\alarm5.wav</Textarea>
+<br />
+Wav file path :
+<select name="myWAVPath" id="myWAVPath" onchange="setwavFilePath();">
+<option value="file://Application/alarm5.wav">1</option>
+<option value="file:///Application/alarm5.wav">2</option>
+<option value="file://\Application\alarm5.wav">3</option>
+<option value="file://\\Application\\alarm5.wav">4</option>
+<option value="Application/alarm5.wav">5</option>
+<option value="/Application/alarm5.wav">6</option>
+<option value="\Application\alarm5.wav">7</option>
+<option value="Application\alarm5.wav">8</option>
+<option value="\\Application\\alarm5.wav">9</option>
+<option value="file://mnt/sdcard/Application/alarm5.wav">10</option>
+<option value="file:///mnt/sdcard/Application/alarm5.wav">11</option>
+</select>
+<br />
+PlayWave:	
+<input type="radio" name="group1" value="Zero">Zero
+<input type="radio" name="group1" value="One">One
+<input type="radio" name="group1" value="Two">Two
+<input type="radio" name="group1" value="Four">Four
+<input type="radio" name="group1" value="Eight">Eight
+<input type="radio" name="group1" value="Ten">Ten
+<input type="radio" name="group1" value="Null">Empty
+<input type="radio" name="group1" value="Invalid">Invalid
+<br>
+<input type="button" onclick="play();" value="PlayWave">
+<br /><br />
+<hr />
+InvokeMetaTag:	<select name="invokedropdown" id="invokedropdown" onChange="invoke();">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="Method">Method</option>
+<option value="Property">Property</option>
+<option value="M Property">M Property</option>
+<option value="M Invoke">M Invoke</option>
+<option value="Invalid">Invalid</option>
+</select>
+<br />
+<!-- id="uuidmethod" -->
+<input type="button" onclick="Javascript:uuidmethod();" value="UUID">
+
+<!-- id="OEMInfomethod" -->
+<input type="button" onclick="Javascript:OEMInfomethod();" value="OEMInfo">
+<BR><BR>
+
+<A HREF="./gen ActiveX Object.html">Back</A>
+
+</form>
+</body>
+</html>
+
+

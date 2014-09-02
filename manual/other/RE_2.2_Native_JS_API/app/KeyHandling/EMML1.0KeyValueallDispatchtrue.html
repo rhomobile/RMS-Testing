@@ -1,0 +1,46 @@
+﻿<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+    <title>NEON static KeyCapture Test-KeyValue:all Dispatch true EMML1.1</title>
+
+<META HTTP-Equiv="KeyCapture" Content="KeyValue:all; Dispatch:true; KeyEvent:url('javascript:MyKeyEvent(%json);')">
+
+<script language=javascript>
+function MyKeyEvent(myjsonobject)
+{
+//alert("Key Pressed :- "+key);
+DivKey.innerHTML="Key Pressed :- "+myjsonobject.keyValue;
+}
+
+</script>
+</head>
+<body>
+<form id="frmKeykandler" action="">
+<br><br><br><br>
+<DIV ID="DivKey">Keyvalue will appear here</DIV>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<table>KeyValue:all Dispatch true yes
+    <tr>
+        <td><a href="main"></a></td>
+    </tr>
+    <tr>
+        <Textarea id="txtInput" cols="15" rows="2"></Textarea>
+     </tr>
+         <tr>
+        <Textarea id="TexInput2" cols="15" rows="2"></Textarea>
+    </tr>
+    
+</table>
+        
+     <P><INPUT TYPE="button" VALUE="Back" ONCLICK="location.href='KeyHandling_Index.html'"></P>   
+
+</form>
+</body>
+</html>

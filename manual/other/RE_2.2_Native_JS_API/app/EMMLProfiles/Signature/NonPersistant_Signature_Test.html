@@ -1,0 +1,53 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+
+<META HTTP-Equiv="EMMLProfile" Content="apply:Signatue_ftp;">
+<!--<META HTTP-Equiv="SignatureCapture"Content="left:30;top:90;height:100;bgcolor:#FFFF00;idth:200;border:visible;Pencolor:#0000FF;Penwidth:2;visibility:visible;Username:ftpadmin;Password:ftpadmin; TransferEvent:url('Javascript:onCaptured('%s');');destination:url('ftp://10.233.85.82:21/Signature.bmp')"> -->
+
+</head>
+<body>
+<h1>UnNamed Signature EMML Profile Test</h1>
+<h2>Signature EMML profile has been Applied on this page but should not take place.</h2>
+<h3>Click on Capture button to capture signature.</h3>
+<p>Send the bmp to ftp</p>
+<BR><BR><BR><BR>
+<P><INPUT TYPE="button" VALUE="Capture" ONCLICK="doCapture();"></P>
+<P><INPUT TYPE="button" VALUE="Clear" ONCLICK="doClear();"></P>
+<P><INPUT TYPE="button" VALUE="Quit" ONCLICK="Quit();"></P>
+<BR>
+<h3>Browse to another page to check for EMML profile persistance.</h3>
+<h4><a href=NonPersistant_Signature_Profile.html>Click here to go to back.</a></h4>
+<hr />
+<a href="../EMMLProfilesIndex.html">Back to EMML Profile Index</a>
+</body>
+</html>
+
+
+<SCRIPT>
+var objGeneric = new ActiveXObject("PocketBrowser.Generic");
+	
+function doCapture()
+{
+	objGeneric.InvokeMETAFunction('SignatureCapture', 'capture');
+}
+
+function doClear()
+{
+	objGeneric.InvokeMETAFunction('SignatureCapture', 'clear');
+}
+
+function onCaptured(data)
+{
+	alert(data);
+}
+
+function Quit()
+{
+	objGeneric.InvokeMETAFunction("Application", "Quit"); 
+}
+
+</SCRIPT>
+
+

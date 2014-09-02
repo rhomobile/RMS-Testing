@@ -1,0 +1,82 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+<!--<META HTTP-Equiv="SignatureCapture" Content="visibility:visible">-->
+
+</head>
+<script language=javascript>
+function clearSignature()
+{
+	generic.InvokeMETAFunction('SignatureCapture', 'Clear');
+}
+
+function captureSignature()
+{
+	generic.InvokeMETAFunction('SignatureCapture', 'Name:SymbolPB');
+	generic.InvokeMETAFunction('SignatureCapture', 'Capture');
+}
+
+
+function onCaptured(data)
+{
+	
+	message.innerHTML = "Data: " + data;
+}
+
+
+
+function doVisible()
+{
+generic.InvokeMETAFunction('SignatureCapture', 'Visibility:visible');
+
+}
+
+function doHidden()
+{
+generic.InvokeMETAFunction('SignatureCapture', 'Visibility:Hidden');
+
+}
+
+function onVectors(data)
+{
+  var VectorAsHTML = "<TABLE><TR><TH>X</TH><TH>Y</TH><TH>X</TH><TH>Y</TH><TH>X</TH><TH>Y</TH></TR>";
+  for (var i=0; i<data.length; i = i + 6)
+  {
+    VectorAsHTML = VectorAsHTML + "<TR>"
+    VectorAsHTML = VectorAsHTML + "<TD>" + data[i] + "</TD><TD>" + data[i+1] + "</TD>";
+    VectorAsHTML = VectorAsHTML + "<TD>" + data[i+2] + "</TD><TD>" + data[i+3] + "</TD>";
+    VectorAsHTML = VectorAsHTML + "<TD>" + data[i+4] + "</TD><TD>" + data[i+5] + "</TD>";
+    VectorAsHTML = VectorAsHTML + "</TR>"
+  }
+  VectorAsHTML + "</TABLE>"
+  vectorOut.innerHTML = VectorAsHTML;
+}
+
+</script>
+
+<body>
+<p> Persistant Test Page</p>
+<div id="message">Message</div>
+<BR><BR>
+<DIV id="vectorOut">Vectors Will Appear Here:</div>
+<form id="frm" action="">
+
+<BR><BR><BR><BR><BR><BR><BR><BR>
+
+
+
+<INPUT TYPE="button" VALUE="Hidden" ONCLICK="doHidden();">
+<INPUT TYPE="button" VALUE="visible" ONCLICK="doVisible();">
+<br />
+<input type=button id="clear" onclick="clearSignature();" value="Clear">
+<input type=button id="capture" onclick="captureSignature();" value="CaptureLocal">
+<BR><BR>
+
+<A HREF="SignatureCapture.html">Back</A><br />
+<A HREF="SignaturePersist.html">Go to previous page</A><br />
+
+
+</form>
+</body>
+</html>

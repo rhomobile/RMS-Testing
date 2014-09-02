@@ -1,0 +1,73 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+</head>
+<body>
+<br><br><br><br><br>
+
+<p>APD</p><br />
+<BR><BR>
+<div id="nos">Result</div><br />
+
+<Textarea id="txtPRT"cols="22" rows="2">This string has to be printed</Textarea>
+<br>
+<P><INPUT TYPE="button" VALUE="setptrid" ONCLICK="setptrid();"></P><br 
+<P><INPUT TYPE="button" VALUE="openport" ONCLICK="openport();"></P><br 
+<P><INPUT TYPE="button" VALUE="sendstring" ONCLICK="sendstring();"></P><br />
+<P><INPUT TYPE="button" VALUE="closeport" ONCLICK="closeport();"></P><br />
+<P><INPUT TYPE="button" VALUE="print multiple times" ONCLICK="testopenclose();"></P><br />
+</body>
+
+
+
+</html>
+
+
+<SCRIPT type="text/javascript">
+
+	
+	function testopenclose() 
+	{ 
+
+	apd.PSExternal(266, "$$[CMD:0101,1]$$\r\n1\r\nHello\r\n12345\r\n12345\r\n"); 
+	apd.PSExternal(266, "$$[CMD:0101,1]$$\r\n1\r\nHello\r\n12345\r\n12345\r\n"); 
+	apd.PSExternal(266, "$$[CMD:0101,1]$$\r\n1\r\nHello\r\n12345\r\n12345\r\n");
+	apd.PSExternal(266, "$$[CMD:0101,1]$$\r\n1\r\nHello\r\n12345\r\n12345\r\n");
+	apd.PSExternal(266, "$$[CMD:0101,1]$$\r\n1\r\nHello\r\n12345\r\n12345\r\n");
+	apd.PSExternal(266, "$$[CMD:0101,1]$$\r\n1\r\nHello\r\n12345\r\n12345\r\n");
+	apd.PSExternal(266, "$$[CMD:0101,1]$$\r\n1\r\nHello\r\n12345\r\n12345\r\n");
+	apd.PSExternal(266, "$$[CMD:0101,1]$$\r\n1\r\nHello\r\n12345\r\n12345\r\n");
+	apd.PSExternal(266, "$$[CMD:0101,1]$$\r\n1\r\nHello\r\n12345\r\n12345\r\n");
+	apd.PSExternal(266, "$$[CMD:0101,1]$$\r\n1\r\nHello\r\n12345\r\n12345\r\n");
+	} 
+	
+	function setptrid()
+	{
+	//var printerID="BC53:1|00:03:7A:31:9F:59";
+	var printerID="BC53:1|00:03:7A:68:0F:6F";
+	
+	apd.PSExternal(261, printerID);
+	}
+	
+	function openport()
+	{
+	apd.PSExternal(270, "");
+	}
+	
+	function sendstring()
+	{
+	apd.PSExternal(266, txtPRT.value);
+	}
+	
+	
+	function closeport()
+	{
+	apd.PSExternal(271, "");
+	}
+	
+	
+
+</SCRIPT>
+
+

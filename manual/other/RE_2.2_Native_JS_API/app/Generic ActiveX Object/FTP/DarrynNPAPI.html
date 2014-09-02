@@ -1,0 +1,338 @@
+ 
+<HTML> 
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+ 
+<TITLE>NPAPI Legacy ActiveX tet page</TITLE> 
+</HEAD> 
+<BODY id="bodyId"> 
+<BR><BR> 
+<center> 
+<h1>Legacy ActiveX Test Page</h1> 
+</center> 
+ 
+This page tests NPAPI for the legacy ActiveX.
+ 
+<br><br> 
+ 
+<center> 
+ 
+<script> 
+var ProcessHandle;
+var HKEY_LOCAL_MACHINE = 2;
+var REG_SZ = 1;
+var REG_BINARY = 3;
+var REG_DWORD = 4;
+var REG_MULTI_SZ = 7;
+function bar(arg)
+{
+  document.getElementById("divReturnValue").innerHTML += "<p>" + "function bar(" + arg + ") called!" + "</p>";
+ 
+  return 4;
+}
+ 
+function testGenericInvokeMETAFunction()
+{
+	generic.InvokeMETAFunction("scanner","enabled");
+	divReturnValue.innerHTML = "Scanner is Enabled";
+}
+ 
+function testGenericLog()
+{
+	//  Test Log() and SPBLog() for backwards compatibility
+	var bRetVal = generic.Log("Here is some Log Data", 1);
+	bRetVal = bRetVal && generic.SPBLog("Here is some Log Data via Legacy", 2);
+	divReturnValue.innerHTML = "Success? " + bRetVal;
+}
+ 
+function testGenericOEMInfo()
+{
+	divReturnValue.innerHTML = generic.OEMInfo();
+}
+ 
+function testGenericPlayWave()
+{
+	divReturnValue.innerHTML = generic.PlayWave('\\windows\\alarm2.wav', 1);
+//	divReturnValue.innerHTML = generic.PlayWave(null, 1);
+}
+ 
+function testGenericUUID()
+{
+	divReturnValue.innerHTML = generic.UUID();
+}
+ 
+function testGenericCloseProcess()
+{
+	divReturnValue.innerHTML = "Closing Process with Handle [" + ProcessHandle + "]";
+	generic.CloseProcess(ProcessHandle);
+	
+}
+ 
+function testGenericGetProcessExitCode()
+{
+	divReturnValue.innerHTML = "Getting Process Exit code for Handle [" + ProcessHandle + "]" + generic.GetProcessExitCode(ProcessHandle);
+}
+ 
+function testGenericLaunchProcess()
+{
+	divReturnValue.innerHTML = "Launching Clock Process, Return code: " + generic.LaunchProcess('\\Windows\\clock.exe','');
+}
+ 
+function testGenericLaunchProcessNonBlocking()
+{
+	ProcessHandle = generic.LaunchProcessNonBlocking('\\Windows\\clock.exe','');
+	divReturnValue.innerHTML = "Launched Clock Process Non Blocking, it gave Handle [" + ProcessHandle + "]";
+}
+ 
+function testGenericWaitProcess()
+{
+	divReturnValue.innerHTML = "Waiting for 5 seconds on Process handle " + ProcessHandle;
+	var bProcessTerminated = generic.WaitProcess(ProcessHandle, 5);
+	divReturnValue.innerHTML=bProcessTerminated;
+	if (bProcessTerminated)
+		divReturnValue.innerHTML = "Process Terminated";
+	else if(bProcessTerminated)
+		divReturnValue.innerHTML = "Process Timed Out";
+	
+}
+ 
+function testGenericGetRegistrySetting()
+{
+	var strData = generic.GetRegistrySetting(2,  "Software\\Motorola\\SauravSettings",  "hardware");
+	var binData = generic.GetRegistrySetting(HKEY_LOCAL_MACHINE,  "Software\\Motorola\\MySettings",  "ABinary");
+	var dwordData = generic.GetRegistrySetting(HKEY_LOCAL_MACHINE,  "Software\\Motorola\\MySettings",  "ADWORD");
+	var multiszData = generic.GetRegistrySetting(HKEY_LOCAL_MACHINE,  "Software\\Motorola\\MySettings",  "AMultiSZ");
+	divReturnValue.innerHTML = "Read Registry Settings : [" + strData + "] [" + binData + "] [" + dwordData + "] [" + multiszData + "]";
+}
+ 
+function testGenericSetRegistrySetting()
+{
+	generic.SetRegistrySetting(2, 1, "Software\\Motorola\\SauravSettings", "hardware", "A String Value hardware");
+	generic.SetRegistrySetting(HKEY_LOCAL_MACHINE, REG_BINARY, "Software\\Motorola\\MySettings", "ABinary", "11001001");
+	generic.SetRegistrySetting(HKEY_LOCAL_MACHINE, REG_DWORD, "Software\\Motorola\\MySettings", "ADWORD", "22123");
+	generic.SetRegistrySetting(HKEY_LOCAL_MACHINE, REG_MULTI_SZ, "Software\\Motorola\\MySettings", "AMultiSZ", "Dear\\nUser");
+	divReturnValue.innerHTML = "Registry Key Set";
+}
+ 
+function testGenericReadConfigSetting()
+{
+	var gloSetting = generic.ReadConfigSetting("FULLSCREEN", "GLOBAL");	
+	var gloSetting2 = generic.ReadConfigSetting("FULLSCREEN");	
+	var appSetting = generic.ReadConfigSetting("BATTERYREFRESH", "Menu");	
+	divReturnValue.innerHTML = "Global: " + gloSetting + "Global2: " + gloSetting2 + " App: " + appSetting;
+}
+ 
+function testGenericWriteConfigSetting()
+{
+	var bRetVal = generic.WriteConfigSetting("FULLSCREEN", "0", "GLOBAL");	
+	generic.WriteConfigSetting("LOGERROR", "0");	
+	generic.WriteConfigSetting("BATTERYREFRESH", "7000", "Menu");
+	divReturnValue.innerHTML = "Writing Configuration Setting: " + bRetVal + ".  Check your config.xml to see if it changed";
+}
+ 
+function testGenericReadUserSetting()
+{	
+	var retVal = generic.ReadUserSetting("BgColor");
+	divReturnValue.innerHTML = "Read Value is: " + retVal;
+}
+ 
+function testGenericWriteUserSetting()
+{
+	var retVal = generic.WriteUserSetting("BgColor", "red");
+	divReturnValue.innerHTML = "Write User Setting Success? " + retVal;
+}
+ 
+function testGenericShowHourglass()
+{
+	generic.ShowHourglass();
+	divReturnValue.innerHTML = "Showing Hourglass";
+}
+ 
+function testGenericHideHourglass()
+{
+	generic.HideHourglass();
+	divReturnValue.innerHTML = "Hiding Hourglass";
+}
+ 
+function testAPDPSExternal()
+{
+	apd.PSExternal(261, '2350C');	//  Help file example
+	divReturnValue.innerHTML = "PSExternal Called";
+}
+ 
+function testAPDPSExternalEx()
+{
+	var iResult = apd.PSExternalEx(257, '2350C');  //  Help file example
+	divReturnValue.innerHTML = "PSExternalEx Called with Result: " + iResult;
+}
+ 
+function testAPDPSGetLastMessage()
+{
+	divReturnValue.innerHTML = "Last message: " + apd.PSGetLastMessage();
+}
+ 
+function testAirBeam1()
+{
+	var retVal = airbeam.AddPackage("myPackage");
+	setTimeout('airbeam.Run();', 100);
+	divReturnValue.innerHTML = "Add Package and run setTimeout, package add success? " + retVal;
+}
+ 
+function testAirBeam2()
+{
+	airbeam.AutoLoadMode = 1;
+	airbeam.AutoReboot = false;
+	airbeam.RAMManagement = true;
+	airbeam.TestMode = true;
+	var retVal = airbeam.AddPackage("myPackage");
+	var retVal2 = airbeam.Run();
+	divReturnValue.innerHTML = "Set AutoLoadMode to 1, AutoReboot false, RAM Management true, TestMode True and run blocking.  package add success? " + retVal + " run success? " + retVal2;
+}
+ 
+function testAirBeam3()
+{
+	airbeam.AutoLoadMode = 3;
+	airbeam.AutoReboot = true;
+	airbeam.RAMManagement = false;
+	airbeam.TestMode = false;
+	var retVal = airbeam.AddPackage("myPackage");
+	var retVal2 = airbeam.Run();
+	divReturnValue.innerHTML = "Set AutoLoadMode to 3, AutoReboot true, RAM Management false, TestMode false and run blocking.  package add success? " + retVal + " run success? " + retVal2;
+}
+ 
+function testAirBeam4()
+{
+	airbeam.UploadPackage = 'myPackage';
+	setTimeout('airbeam.Run();', 100);
+	divReturnValue.innerHTML = "Specifying UploadPackage = myPackage and setTimeout run";
+}
+ 
+function testAirBeam5()
+{
+	airbeam.DeletePackage = "myPackage";
+	setTimeout('airbeam.Run();', 100);
+	divReturnValue.innerHTML = "Deleting myPackage and setTimeout run";
+}
+ 
+function testAirBeam6()
+{
+	var returnString = "AirBeam Property Values:<br>";
+	returnString = returnString + "Auto Load Mode: " + airbeam.AutoLoadMode + "<br>";
+	returnString = returnString + "Auto Reboot   : " + airbeam.AutoReboot + "<br>";
+	returnString = returnString + "RAM Management: " + airbeam.RAMManagement + "<br>";
+	returnString = returnString + "Test Mode     : " + airbeam.TestMode + "<br>";
+	returnString = returnString + "Upload Package: " + airbeam.UploadPackage + "<br>";
+	returnString = returnString + "Delete Package: " + airbeam.DeletePackage + "";
+	divReturnValue.innerHTML = returnString;
+}
+ 
+function testNoSIPShowSIP(bShowSIP)
+{
+	nosip.ShowSIP(bShowSIP);
+	if (bShowSIP)
+		divReturnValue.innerHTML = "The SIP should be Shown";
+	else
+		divReturnValue.innerHTML = "The SIP should be Hidden";
+}
+ 
+</script> 
+ 
+<!-- embed id="embed1" type="application/mozilla-npruntime-scriptable-plugin" width="600" height="40"> </embed --> 
+<!-- embed id="embed1" type="application/x-wtg-legacy-generic" width="1" height="1"> </embed>
+<embed id="embed2" type="application/x-wtg-legacy-odax" width="1" height="1"> </embed>
+<embed id="embed3" type="application/x-wtg-legacy-nosip" width="1" height="1"> </embed>
+<embed id="embed4" type="application/x-wtg-legacy-airbeam" width="1" height="1"> </embed>
+<embed id="embed5" type="application/x-wtg-legacy-apd" width="1" height="1"> </embed -->
+ 
+<embed id="embed1" type="application/x-wtg-legacy-generic" hidden=true> </embed> 
+<embed id="embed2" type="application/x-wtg-legacy-odax" hidden=true> </embed> 
+<embed id="embed3" type="application/x-wtg-legacy-nosip" hidden=true> </embed>
+<embed id="embed4" type="application/x-wtg-legacy-airbeam" hidden=true> </embed>
+<embed id="embed5" type="application/x-wtg-legacy-apd" hidden=true> </embed>
+ 
+<div id="divReturnValue">Test Output</div>
+ 
+<a href="javascript:location.reload();">Refresh the page</a> | <a href="http://www.jrq768.wtgdev.net">Main JRQ768 Page</a>
+<br> 
+<A HREF="./Generic ActiveX Object.html">Back</A>
+</center> 
+ 
+<!--  Miscellaneous -->
+<input type=button value="generic.InvokeMETAFunction" onclick='testGenericInvokeMETAFunction()'> 
+<input type=button value="generic.Log" onclick='testGenericLog()'> 
+<input type=button value="generic.OEMInfo" onclick='testGenericOEMInfo()'> 
+<input type=button value="generic.PlayWave" onclick='testGenericPlayWave()'> 
+<input type=button value="generic.UUID" onclick='testGenericUUID()'> 
+ 
+<!--  Process  -->
+<input type=button value="generic.CloseProcess" onclick='testGenericCloseProcess()'> 
+<input type=button value="generic.GetProcessExitCode" onclick='testGenericGetProcessExitCode()'> 
+<input type=button value="generic.LaunchProcess" onclick='testGenericLaunchProcess()'> 
+<input type=button value="generic.LaunchProcessNonBlocking" onclick='testGenericLaunchProcessNonBlocking()'> 
+<input type=button value="generic.WaitProcess" onclick='testGenericWaitProcess()'> 
+ 
+<!--  Configuration  -->
+<input type=button value="generic.GetRegistrySetting" onclick='testGenericGetRegistrySetting()'> 
+<input type=button value="generic.SetRegistrySetting" onclick='testGenericSetRegistrySetting()'> 
+<input type=button value="generic.ReadConfigSetting" onclick='testGenericReadConfigSetting()'> 
+<input type=button value="generic.WriteConfigSetting" onclick='testGenericWriteConfigSetting()'> 
+<input type=button value="generic.ReadUserSetting" onclick='testGenericReadUserSetting()'> 
+<input type=button value="generic.WriteUserSetting" onclick='testGenericWriteUserSetting()'> 
+ 
+<!-- Hourglass -->
+<input type=button value="generic.ShowHourglass" onclick='testGenericShowHourglass()'> 
+<input type=button value="generic.HideHourglass" onclick='testGenericHideHourglass()'> 
+ 
+<!--  APD  -->
+<input type=button value="APD.PSExternal" onclick='testAPDPSExternal()'> 
+<input type=button value="APD.PSExternalEx" onclick='testAPDPSExternalEx()'> 
+<input type=button value="APD.PSGetLastMessage" onclick='testAPDPSGetLastMessage()'> 
+ 
+<!--  AirBeam  -->
+<input type=button value="AirBeam Test 1" onclick='testAirBeam1()'> 
+<input type=button value="AirBeam Test 2" onclick='testAirBeam2()'> 
+<input type=button value="AirBeam Test 3" onclick='testAirBeam3()'> 
+<input type=button value="AirBeam Test 4" onclick='testAirBeam4()'> 
+<input type=button value="AirBeam Test 5" onclick='testAirBeam5()'> 
+<input type=button value="AirBeam Test 6" onclick='testAirBeam6()'> 
+ 
+<!--  No SIP  -->
+<input type=button value="NoSIP.ShowSIP(true)" onclick='testNoSIPShowSIP(true)'>
+<input type=button value="NoSIP.ShowSIP(false)" onclick='testNoSIPShowSIP(false)'>
+ 
+ 
+<input type=button value="odax.Clear" onclick='odax.Clear()'> 
+ 
+ 
+<!--  Ekioh Legacy Tests  -->
+ 
+<!--div id="result"><br>results go here:</div> 
+ 
+<br> 
+<script> 
+var embed2 = document.getElementById('embed2');
+embed2.addEventListener(
+  "samplePluginEvent",
+  function() {
+      document.getElementById("result").innerHTML += "<p>" + "received samplePluginEvent" + "</p>";
+  },
+  false);
+</script --> 
+ 
+ 
+<!-- 
+<form name="formname"> 
+<input type=button value="Call pluginobj.foo()" onclick='alert(pluginobj.foo())'> 
+<input type=button value="alert(pluginobj.bar)" onclick='alert(pluginobj.bar)'> 
+<input type=button value="alert(pluginobj('foo'))" onclick='alert(pluginobj("foo"))'> 
+<input type=button value="pluginobj.event()" onclick='pluginobj.event()'> 
+<br> 
+<input type=button value="alert(embed1.bar)" onclick='alert(embed1.bar)'> 
+<input type=button value="alert(embed1.foo())" onclick='alert(embed1.foo())'> 
+<input type=button value="alert(embed1())" onclick='alert(embed1())'> 
+<input type=button value="embed1.bar='foo'" onclick='embed1.bar="foo"'> 
+</form> 
+-->
+ 
+</BODY> 
+</HTML> 

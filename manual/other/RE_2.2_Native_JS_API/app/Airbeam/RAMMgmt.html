@@ -1,0 +1,52 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+<META HTTP-Equiv="quitbutton" Content="Top:10; Left:10; Visibility:Visible">
+
+</head>
+<body>
+
+<P>RAMManagement</P>
+<P>Delete the package before executing the test case</P>
+<P><INPUT TYPE="button" VALUE="RAMManagement True" ONCLICK="doSync();">
+<P><INPUT TYPE="button" VALUE="RAMManagement False" ONCLICK="doTest();">
+<div id="myDiv">Message</div>
+<P><INPUT TYPE="button" VALUE="Back" ONCLICK="location.href='../AirBEAM.html'"></P>
+</body>
+</html>
+
+<script>
+
+
+   function doSync()
+   {
+      airbeam.RAMManagement = true;
+      airbeam.AddPackage("key35");
+      setTimeout('airbeam.Run()', 100);
+   }
+
+   function doTest()
+   {
+      myDiv.innerHTML = "RAMMgt = false";
+
+      airbeam.RAMManagement = false;
+      airbeam.AddPackage("key35");
+      setTimeout('airbeam.Run()', 100);
+   }
+   function doTest1()
+   {
+     var res = airbeam.Run();
+     myDiv.innerHTML = "Res="+res;
+   }
+</script>
+
+ 
+
+
+
+
+ 
+
+
+

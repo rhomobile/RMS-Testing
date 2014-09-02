@@ -1,0 +1,40 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+
+
+<META HTTP-Equiv="signal" Content="color:#0000FF">
+<META HTTP-Equiv="signal" Content="color:#0000GG">
+
+
+
+<SCRIPT LANGUAGE="JavaScript">
+function OnSignal(signal, ESSID, MAC, AdapterName, DHCPServer, DHCPStatic, Gateway, IPAddress, RSSI, SubnetMask, Wins)
+	{
+		sig.innerHTML = "Signal: " + signal 
+								+ "<BR>ESSID:" + ESSID 
+								+ "<BR>MAC: " + MAC								
+								+ "<BR>AdapterName: " + AdapterName
+								+ "<BR>DHCPServer: " + DHCPServer
+								+ "<BR>DHCPStatic: " +  DHCPStatic
+								+ "<BR>Gateway: " + Gateway
+								+ "<BR>IPAddress: " + IPAddress
+								+ "<BR>RSSI: " + RSSI
+								+ "<BR>SubnetMask: " + SubnetMask
+								+ "<BR>Wins: " + Wins
+		return;
+	}
+</SCRIPT>
+
+</head>
+<body>
+<BR><BR>
+<H2>SignalEvent</H2>
+<BR>
+<DIV ID="sig">Signal details should appear here</DIV>
+<BR>
+<A HREF="./SignalStaticIndex.html">Back</A>
+
+</body>
+</html>

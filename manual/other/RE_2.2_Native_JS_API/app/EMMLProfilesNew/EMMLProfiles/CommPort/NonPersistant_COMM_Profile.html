@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+<!-- <META HTTP-Equiv="comm" Content="port:'com1:';baudrate:9600;databits:8;stopbits:1;parity:'no parity';handshake:none;time:250;commevent:url('JavaScript:ProcessData(\"%s\")')">
+-->
+<META HTTP-Equiv="EMMLProfile" Content="import:url('../../../EMMLProfiles/CommPort/comm.emmp');">
+<META HTTP-Equiv="EMMLProfile" Content="apply:CommPort;">
+
+<SCRIPT TYPE="text/javascript">
+ var Generic = new ActiveXObject("PocketBrowser.Generic");
+ 
+function ProcessData(data)
+{
+	alert("Received data: "+data);
+}
+
+function doTest(PW)
+{
+     if(PW=="Read")
+     {
+        alert("Read");
+        Generic.InvokeMETAFunction("comm", "commevent:url('JavaScript:ProcessData('%s');')");
+     }
+     else if(PW=="open")
+     {
+        alert("open");
+        Generic.InvokeMETAFunction("comm", "open");
+     
+     }
+      else if(PW=="close")
+     {
+        Generic.InvokeMETAFunction("comm", "close");
+     }
+ }
+
+</SCRIPT>
+</head>
+<body>
+<h1>UnNamed CommunicationPort EMML Profile Scrip</h1>
+<div id="Div1"></div>
+<h3>Browse to another page to check for EMML profile persistance.</h3>
+<h4><a href="NonPersistant_COMM_Profile_Test.html">Click here to go to another page.</a></h4>
+<div id="message"></div>
+<table>
+<tr>    
+    <td><input id="Button1" type="button" value="Read" onclick="doTest('Read');"/></td>
+
+</TR>    
+<tr>    
+ 
+    <td><input id="Button4" type="button" value="close" onclick="doTest('close');"/></td>
+</TR> 
+</table>
+<hr />
+<a href="../EMMLProfilesIndex.html">Back to EMML Profile Index</a>
+</body>
+</html>

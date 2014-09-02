@@ -1,0 +1,104 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+
+<title>Wake TestScript</title>
+
+
+<script type="text/javascript">
+
+  
+   function setwakeLock()
+{
+	var SelectedValue = frm.wakeLockdropdown.selectedIndex;
+	var selectwakeLock = frm.wakeLockdropdown.options[SelectedValue].value;
+    Message.innerHTML="value is:"+selectwakeLock;
+	switch(selectwakeLock)
+	{
+		case 'Enabled':
+			wake.wakeLock = 'Enabled';
+			alert(selectwakeLock);
+			break;
+
+		case 'Disabled':
+			wake.wakeLock = 'Disabled';
+			alert(selectwakeLock);
+			break;
+			
+	   case 'Invalid':
+            wake.wakeLock = 'Invalid';
+			break;
+			
+		case 'Null':
+			wake.wakeLock = '';
+			break;
+	}
+}
+    
+ 
+  function setwifiLock()
+{
+	var SelectedValue = frm.wifiLockdropdown.selectedIndex;
+	var selectwifiLock = frm.wifiLockdropdown.options[SelectedValue].value;
+    Message.innerHTML="value is:"+selectwifiLock;
+	switch(selectwifiLock)
+	{
+		case 'Enabled':
+			wake.wifiLock = 'Enabled';
+			alert(selectwifiLock);
+			break;
+
+		case 'Disabled':
+			wake.wifiLock = 'Disabled';
+			alert(selectwifiLock);
+			break;
+			
+	   case 'Invalid':
+            wake.wifiLock = 'Invalid';
+			break;
+			
+		case 'Null':
+			wake.wifiLock = '';
+			break;
+	}
+}
+  
+    
+ </script>
+</head>
+<body>
+<form id="frm" action="">
+<br /><br /><br />
+<b>Wake with JSOBJECT</b><br /><br />
+<div id="Message">Message</div>
+<br/>
+<hr>
+
+wakeLock:<select name="wakeLockdropdown" id="IDwakeLock">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="Enabled">Enabled</option>
+<option value="Disabled">Disabled</option>
+<option value="Invalid">Invalid</option>
+<option value="Null">Null</option>
+</select>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<input type=button onclick="setwakeLock();" value="SetWakeLock">
+
+<br /><br />
+wifiLock:<select name="wifiLockdropdown" id="IDwifiLock">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="Enabled">Enabled</option>
+<option value="Disabled">Disabled</option>
+<option value="Invalid">Invalid</option>
+<option value="Null">Null</option>
+</select>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<input type=button onclick="setwifiLock();" value="SetWifiLock">
+<hr />
+
+</table>
+</form>
+
+</body>
+</html>

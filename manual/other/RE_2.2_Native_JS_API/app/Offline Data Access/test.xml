@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<data field1="field1" field2="field2" field3="field3">
+   <record field1="yellow1" field2="green1" field3="blue1"/>
+   <record field1="red2" field2="green2" field3="blue2"/>
+   <record field1="red3" field2="green3" field3="blue3"/>
+</data>

@@ -1,0 +1,13 @@
+.Alarm1
+{
+Alarm-Interval:00-00-40;
+Alarm-Repeat:True;
+Alarm-AlarmTriggered:url('javascript:doAlarm();');
+Alarm-Set;
+}
+
+.Alarm2
+{
+Alarm-Clear;
+}
+

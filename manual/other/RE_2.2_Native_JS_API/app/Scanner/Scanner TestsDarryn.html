@@ -1,0 +1,1674 @@
+From: <Saved by Windows Internet Explorer 8>
+Subject: Scanner Tests
+Date: Wed, 31 Aug 2011 18:42:14 +0530
+MIME-Version: 1.0
+Content-Type: text/html;
+	charset="Windows-1252"
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://www.jrq768.wtgdev.net/scanner/scanner.htm
+X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2900.6109
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+<TITLE>Scanner Tests</TITLE>
+<META content=3D"text/html; charset=3Dwindows-1252" =
+http-equiv=3DContent-Type>
+<META content=3Dno-cache http-equiv=3DPragma>
+<META content=3D0 http-equiv=3Dexpires>
+<META content=3DAll_Decoders:Enabled;Enabled http-equiv=3DScanner>
+<META =
+content=3D"DecodeEvent:url('Javascript:onDecodeEventJSON(%json);')"=20
+http-equiv=3DScanner>
+<META=20
+content=3D"EnumSupportedDecodersEvent:url('Javascript:onSupportedDecoders=
+(%json);')"=20
+http-equiv=3DScanner>
+<META =
+content=3D"BluetoothStatusEvent:url('Javascript:onBluetoothEvent(%json);'=
+)"=20
+http-equiv=3DScanner>
+<STYLE>A {
+	TEXT-DECORATION: none
+}
+</STYLE>
+
+<META name=3DGENERATOR content=3D"MSHTML 8.00.6001.19120"></HEAD>
+<BODY>
+<SCRIPT type=3Dtext/javascript>
+
+	function toggleDiv(theDiv)
+	{
+		theDiv.style.display =3D theDiv.style.display=3D=3D'block' ? 'none' : =
+'block';
+	}
+ =20
+	function enumerateScannersViaJSON()
+	{
+		scanner.enumScannerEvent =3D 'onScannersViaJSON(%json);';
+		scanner.enumerate();
+    }
+=09
+	function enumerateSupportedDecoders()
+	{
+//		scanner.enumerateDecoders();
+		scanner.setEMML("EnumerateSupportedDecoders");
+	}
+=09
+  function onScannersViaJSON(jsonObject)
+  {
+=09
+	 var html =3D "<b>Device Name: Friendly Name</b><br>";
+	 for(i=3D0; i<jsonObject.scannerArray.length; i++)=09
+     {
+       html +=3D '' + jsonObject.scannerArray[i].deviceName + ': '=20
+	        + jsonObject.scannerArray[i].friendlyName + '<br>';
+     }
+     html +=3D "";
+	enumScanners.innerHTML=3Dhtml;
+  }
+ =20
+  function onDecodeEventJSON(jsonObject)
+  {
+	var html =3D "<b>Decoded Data:</b><br>";
+	html =3D html + "<br><i>Data:</i> " + jsonObject.data;
+	html =3D html + "<br><i>Source:</i> " + jsonObject.source;
+	html =3D html + "<br><i>Type:</i> " + jsonObject.type;
+	html =3D html + "<br><i>Time:</i> " + jsonObject.time;
+	html =3D html + "<br><i>Length:</i> " + jsonObject.length;
+	html =3D html + "<br><i>Event:</i> " + jsonObject.event;
+    scanData.innerHTML =3D html;
+  }
+ =20
+  function onRSMEventJSON(jsonObject)
+  {
+  	var attribute=3Ddocument.getElementById("attlist");
+	var selectedAttribute =3D =
+attribute.options[attribute.selectedIndex].text;
+
+	att.innerText =3D selectedAttribute;
+
+    var html =3D "<B>RSM Values:</B> ";
+	for (i=3D0; i<jsonObject.attributeArray.length; i++)
+	{
+	  html +=3D '' + jsonObject.attributeArray[i] + ', '
+	}
+	rsmMsg.innerHTML =3D html;
+  }
+ =20
+  function scannerInit()
+  {
+	//  This function will only work via setEMML as it is not=20
+	//  exposed in the help file
+	scanner.setEMML("Init");
+  }
+ =20
+  function scannerDeinit()
+  {
+	scanner.setEMML("Deinit"); =20
+  }
+ =20
+  function enableScanner()
+  {
+	msg.innerHTML =3D "Enabling Default Scanner";
+	scanner.enable();
+  }
+ =20
+	function enableSpecificScanner()
+	{
+		msg.innerHTML =3D "Enabling Scanner: " + =
+theForm.scannerSelect.options[theForm.scannerSelect.selectedIndex].value;=
+
+		scanner.enabled =3D =
+theForm.scannerSelect.options[theForm.scannerSelect.selectedIndex].value;=
+
+	}
+=09
+	function enableSpecifiedScanner(theScanner)
+	{
+		msg.innerHTML =3D "Enabling Specified Scanner: " + theScanner;
+		scanner.enabled =3D theScanner;
+	}
+=09
+=09
+ =20
+	function disableScanner()
+	{
+		msg.innerHTML =3D "Disabling Scanner";
+		scanner.disable();
+	}
+ =20
+	function setScannerConfig(config, theValue)
+	{
+		if (theValue !=3D 'unspecified')
+		{
+			msg.innerHTML =3D "Setting " + config + " to " + theValue;
+			scanner.setEMML("" + config + ":" + theValue);
+		}
+	}
+=09
+	function setDecoder(decoder, checked)
+	{
+		if (checked)
+		{
+			msg.innerHTML =3D "Setting " + decoder + " to Enabled";
+			scanner.setEMML("" + decoder + ":" + "enabled");
+		}
+		else
+		{
+			msg.innerHTML =3D "Setting " + decoder + " to Disabled";		=09
+			scanner.setEMML("" + decoder + ":" + "disabled");
+		}
+	}
+=09
+	function setScanStart(checkbox, checked)
+	{
+		if (checked)
+		{
+			msg.innerHTML =3D "Starting Scanner";
+			scanner.start();
+		}
+		else
+		{
+			msg.innerHTML =3D "Stopping Scanner";
+			scanner.stop();
+		}
+	}
+=09
+	function setDecoderProperty(decoder, checked)
+	{
+		msg.innerHTML =3D "Setting " + decoder + " Property to " + checked;
+		scanner.setEMML("" + decoder + ":" + checked);
+	}
+=09
+	function setDecodeEvent(bDecodeEvent)
+	{
+		if (bDecodeEvent)
+		{
+			msg.innerHTML =3D "Setting Decode Event";
+			scanner.decodeEvent =3D 'onDecodeEventJSON(%json)';
+		}
+		else
+		{
+			msg.innerHTML =3D "Clearing Decode Event";
+			scanner.setEMML("DecodeEvent:url('')");
+		}
+	}
+
+	function setDecoderLengthProperty(decoder, length)
+	{
+		msg.innerHTML =3D "Setting " + decoder + " Length to " + length;
+		scanner.setEMML("" + decoder + ":" + length);
+	}
+=09
+	function setDecoderOtherProperty(decoder, theValue)
+	{
+		if (theValue !=3D 'unspecified')
+		{
+			msg.innerHTML =3D "Setting " + decoder + " to " + theValue;
+			scanner.setEMML("" + decoder + ":" + theValue);
+		}
+	}
+=09
+	function setRSMEvent(bRSMEvent)
+	{
+		if (bRSMEvent)
+			rsm.rsmGetEvent =3D 'onRSMEventJSON(%json)';
+		else
+			rsm.setEMML("RSMGetEvent:url('')");
+	}
+=09
+	function setEnumSupportedDecodersEvent(bEnumDecodersEvent)
+	{
+		if (bEnumDecodersEvent)
+		{
+			=
+scanner.setEMML("EnumSupportedDecodersEvent:url('onSupportedDecoders(%jso=
+n);')");
+			//scanner.enumSupportedDecodersEvent =3D =
+'onSupportedDecoders(%json)';
+		}
+		else
+			scanner.setEMML("EnumSupportedDecodersEvent:url('')");
+	}
+=09
+	function onSupportedDecoders(jsonObject)
+	{
+		var html =3D "<b>Supported Decoders:</b><br>";
+		for(i=3D0; i<jsonObject.supportedDecoders.length; i++)=09
+		{
+			html +=3D '' + jsonObject.supportedDecoders[i];
+			if (i < jsonObject.supportedDecoders.length - 1)
+				html +=3D ', ';
+		}
+		html +=3D "";
+		enumScannerDecoders.innerHTML=3Dhtml;
+	}
+=09
+	function setBluetoothStatusEvent(bBluetoothStatus)
+	{
+		if (bBluetoothStatus)
+		{
+			=
+scanner.setEMML("bluetoothStatusEvent:url('onBluetoothEvent(%json);')");
+			//scanner.bluetoothStatusEvent =3D 'onBluetoothEvent(%json)';
+		}
+		else
+			scanner.setEMML("bluetoothStatusEvent:url('')");
+	}
+=09
+	function onBluetoothEvent(jsonObject)
+	{
+		msg.innerHTML =3D "Bluetooth Message " + jsonObject.status;
+	}
+=09
+ =20
+  //  RSM Functions
+ =20
+function ClearValueField()
+{
+	//  alert(attValue.text);
+	var attributeValue =3D document.getElementById("attValue");
+	if (attributeValue.value =3D=3D 'Set to Value...')
+	{
+		attributeValue.value =3D '';
+	}
+}
+
+function RSMGetEvent(attributeArray)
+{
+	var attribute=3Ddocument.getElementById("attlist");
+	var selectedAttribute =3D =
+attribute.options[attribute.selectedIndex].text;
+
+	att.innerText =3D selectedAttribute;
+=09
+	var spanID;
+	var spanElement;
+	for(i=3D0; i < attributeArray.length; i++)
+	{
+		//  Should only be one value in the Array as onGet will only ever call =
+RSMGetParam once before calling RSMGetNavigate
+		val.innerHTML =3D val.innerHTML + attributeArray[i] + "<BR>";
+	}
+}
+
+function onGet()
+{
+	var attribute=3Ddocument.getElementById("attlist");
+	var selectedAttribute =3D =
+attribute.options[attribute.selectedIndex].text;
+	if (selectedAttribute =3D=3D "ScanLineWidth")
+		rsm.markForRetrievalScanLineWidth();
+	else if (selectedAttribute =3D=3D "DecodeFeedback")
+		rsm.markForRetrievalDecodeFeedback();
+	else if (selectedAttribute =3D=3D "ModelNumber")
+		rsm.markForRetrievalModelNumber();
+	else if (selectedAttribute =3D=3D "SerialNumber")
+		rsm.markForRetrievalSerialNumber();
+	else if (selectedAttribute =3D=3D "DateOfManufacture")
+		rsm.markForRetrievalDateOfManufacture();
+	else if (selectedAttribute =3D=3D "DateOfService")
+		rsm.markForRetrievalDateOfService();
+	else if (selectedAttribute =3D=3D "BluetoothAddress")
+		rsm.markForRetrievalBluetoothAddress();
+	else if (selectedAttribute =3D=3D "BluetoothAuthentication")
+		rsm.markForRetrievalBluetoothAuthentication();
+	else if (selectedAttribute =3D=3D "BluetoothEncryption")
+		rsm.markForRetrievalBluetoothEncryption();
+    else if (selectedAttribute =3D=3D "BluetoothPINCode")
+		rsm.markForRetrievalBluetoothPinCode();
+	else if (selectedAttribute =3D=3D "BluetoothReconnectAttempts")
+		rsm.markForRetrievalBluetoothReconnectAttempts();
+	else if (selectedAttribute =3D=3D "BluetoothBeepOnReconnectAttempt")
+		rsm.markForRetrievalBluetoothBeepOnReconnectAttempt();
+	else if (selectedAttribute =3D=3D "BluetoothHidAutoReconnect")
+		rsm.markForRetrievalBluetoothHIDAutoReconnect();
+    else if (selectedAttribute =3D=3D "BluetoothFriendlyName")
+        rsm.markForRetrievalBluetoothFriendlyName();
+	else if (selectedAttribute =3D=3D "BluetoothPINCodeType")
+		rsm.markForRetrievalBluetoothPINCodeType();
+	else if (selectedAttribute =3D=3D "BluetoothInquiryMode")
+		rsm.markForRetrievalBluetoothInquiryMode();
+	else if (selectedAttribute =3D=3D "Mems")
+		rsm.markForRetrievalMems();
+	else if (selectedAttribute =3D=3D "ProximityEnable")
+		rsm.markForRetrievalProximityEnable();
+	else if (selectedAttribute =3D=3D "ProximityDistance")
+		rsm.markForRetrievalProximityDistance();
+	else if (selectedAttribute =3D=3D "PagingEnable")
+		rsm.markForRetrievalPagingEnable();
+	else if (selectedAttribute =3D=3D "PagingBeepSequence")
+		rsm.markForRetrievalPagingBeepSequence();
+	else if (selectedAttribute =3D=3D "LowBatteryIndication")
+		rsm.markForRetrievalLowBatteryIndication();
+	else if (selectedAttribute =3D=3D "ScanTriggerWakeup")
+		rsm.markForRetrievalScanTriggerWakeup();
+	else if (selectedAttribute =3D=3D "BluetoothAutoReconnect")
+		rsm.markForRetrievalBluetoothAutoReconnect();
+	else if (selectedAttribute =3D=3D "LowBatteryIndicationCycle")
+		rsm.markForRetrievalLowBatteryIndicationCycle();
+	else if (selectedAttribute =3D=3D "PagingActivate")	//  Reading a Write =
+Only Attribute as an error check
+		rsm.markForRetrievalPagingActivate();
+	else if (selectedAttribute =3D=3D "IgnoreCode128USPS")
+		rsm.markForRetrievalIgnoreCode128USPS();
+	else if (selectedAttribute =3D=3D "ProximityContinuous")
+		rsm.markForRetrievalProximityContinuous();
+	else if (selectedAttribute =3D=3D "GoodScansDelay")
+		rsm.markForRetrievalGoodScansDelay();
+	else if (selectedAttribute =3D=3D "ForceSavePairingBarcode")
+		rsm.markForRetrievalForceSavePairingBarcode();
+	else if (selectedAttribute =3D=3D "FirmwareVersion")
+		rsm.markForRetrievalFirmwareVersion();
+	else if (selectedAttribute =3D=3D "DeviceClass")
+		rsm.markForRetrievalDeviceClass();
+	else if (selectedAttribute =3D=3D "BatteryStatus")
+		rsm.markForRetrievalBatteryStatus();
+	else if (selectedAttribute =3D=3D "BatteryCapacity")
+		rsm.markForRetrievalBatteryCapacity();
+	else if (selectedAttribute =3D=3D "BatteryID")
+		rsm.markForRetrievalBatteryId();
+	setRSMEvent(true);
+}
+
+function onSet()
+{
+	var attribute=3Ddocument.getElementById("attlist");
+	var selectedAttribute =3D =
+attribute.options[attribute.selectedIndex].text;
+	var attributeValue =3D document.getElementById("attValue");
+
+	if (selectedAttribute =3D=3D "ScanLineWidth")
+		rsm.scanLineWidth =3D attributeValue.value;=09
+    else if (selectedAttribute =3D=3D "DecodeFeedback")
+		rsm.decodeFeedback =3D attributeValue.value;
+	else if (selectedAttribute =3D=3D "BluetoothAuthentication")
+		rsm.bluetoothAuthentication =3D attributeValue.value;
+    else if (selectedAttribute =3D=3D "BluetoothPINCode")
+        rsm.bluetoothPinCode =3D attributeValue.value;
+	else if (selectedAttribute =3D=3D "BluetoothEncryption")
+		rsm.bluetoothEncryption =3D attributeValue.value;
+	else if (selectedAttribute =3D=3D "BluetoothReconnectAttempts")
+		rsm.bluetoothReconnectAttempts =3D attributeValue.value;
+	else if (selectedAttribute =3D=3D "BluetoothBeepOnReconnectAttempt")
+		rsm.bluetoothBeepOnReconnectAttempt =3D attributeValue.value;
+	else if (selectedAttribute =3D=3D "BluetoothHidAutoReconnect")
+		rsm.bluetoothHidAutoReconnect =3D attributeValue.value;
+    else if (selectedAttribute =3D=3D "BluetoothFriendlyName")
+        rsm.bluetoothFriendlyName =3D attributeValue.value;
+	else if (selectedAttribute =3D=3D "BluetoothPINCodeType")
+		rsm.bluetoothPinCodeType =3D attributeValue.value;
+	else if (selectedAttribute =3D=3D "BluetoothInquiryMode")
+		rsm.bluetoothInquiryMode =3D attributeValue.value;
+	else if (selectedAttribute =3D=3D "Mems")
+		rsm.mems =3D attributeValue.value;
+	else if (selectedAttribute =3D=3D "ProximityEnable")
+		rsm.proximityEnable =3D attributeValue.value;
+	else if (selectedAttribute =3D=3D "ProximityDistance")
+		rsm.proximityDistance =3D attributeValue.value;
+	else if (selectedAttribute =3D=3D "PagingEnable")
+		rsm.pagingEnable =3D attributeValue.value;
+	else if (selectedAttribute =3D=3D "PagingBeepSequence")
+		rsm.pagingBeepSequence =3D attributeValue.value;
+	else if (selectedAttribute =3D=3D "LowBatteryIndication")
+		rsm.lowBatteryIndication =3D attributeValue.value;
+	else if (selectedAttribute =3D=3D "ScanTriggerWakeup")
+		rsm.scanTriggerWakeup =3D attributeValue.value;
+	else if (selectedAttribute =3D=3D "BluetoothAutoReconnect")
+		rsm.bluetoothAutoReconnect =3D attributeValue.value;
+	else if (selectedAttribute =3D=3D "LowBatteryIndicationCycle")
+		rsm.lowBatteryIndicationCycle =3D attributeValue.value;
+	else if (selectedAttribute =3D=3D "PagingActivate")
+		rsm.pagingActivate =3D attributeValue.value;
+	else if (selectedAttribute =3D=3D "BTDisconnect")
+		rsm.bluetoothDisconnect();
+	else if (selectedAttribute =3D=3D "BTUnpair")
+		rsm.bluetoothUnpair();
+	else if (selectedAttribute =3D=3D "IgnoreCode128USPS")
+		rsm.ignoreCode128Usps =3D attributeValue.value;
+	else if (selectedAttribute =3D=3D "ProximityContinuous")
+		rsm.proximityContinuous =3D attributeValue.value;
+	else if (selectedAttribute =3D=3D "GoodScansDelay")
+		rsm.goodScansDelay =3D attributeValue.value;
+	else if (selectedAttribute =3D=3D "ForceSavePairingBarcode")
+		rsm.forceSavePairingBarcode =3D attributeValue.value;
+
+	onGet();
+  }
+ =20
+function onSuggestValues()
+{
+	var attribute=3Ddocument.getElementById("attlist");
+	var selectedAttribute =3D =
+attribute.options[attribute.selectedIndex].text;
+
+	if (selectedAttribute =3D=3D "ScanLineWidth")	=09
+		legal.innerText =3D "Wide; Narrow";
+	else if (selectedAttribute =3D=3D "DecodeFeedback")
+		legal.innerText =3D "Enabled; Disabled";
+	else if (selectedAttribute =3D=3D "ModelNumber")
+		legal.innerText =3D "Read Only";
+	else if (selectedAttribute =3D=3D "SerialNumber")
+		legal.innerText =3D "Read Only";
+	else if (selectedAttribute =3D=3D "DateOfManufacture")
+		legal.innerText =3D "Read Only";
+	else if (selectedAttribute =3D=3D "DateOfService")
+		legal.innerText =3D "Read Only";
+	else if (selectedAttribute =3D=3D "BluetoothAddress")
+		legal.innerText =3D "Read Only";
+	else if (selectedAttribute =3D=3D "BluetoothAuthentication")
+		legal.innerText =3D "True; False";
+    else if (selectedAttribute =3D=3D "BluetoothPINCode")
+        legal.innerText =3D "String, Max 5 Characters";
+	else if (selectedAttribute =3D=3D "BluetoothEncryption")
+		legal.innerText =3D "True; False";
+	else if (selectedAttribute =3D=3D "BluetoothReconnectAttempts")
+		legal.innerText =3D "Number (Seconds, Multiple of 5) [30-60]";
+	else if (selectedAttribute =3D=3D "BluetoothBeepOnReconnectAttempt")
+		legal.innerText =3D "True; False";
+	else if (selectedAttribute =3D=3D "BluetoothHidAutoReconnect")
+		legal.innerText =3D "NeverReconnect; ReconnectOnData; =
+ReconnectImmediately";
+    else if (selectedAttribute =3D=3D "BluetoothFriendlyName")
+        legal.innerText =3D "String, Max 23 Characters";
+	else if (selectedAttribute =3D=3D "BluetoothPINCodeType")
+		legal.innerText =3D "PromptUser; UseStored";
+	else if (selectedAttribute =3D=3D "BluetoothInquiryMode")
+		legal.innerText =3D "General; Limited";
+	else if (selectedAttribute =3D=3D "Mems")
+		legal.innerText =3D "Enabled; Disabled";
+	else if (selectedAttribute =3D=3D "ProximityEnable")
+		legal.innerText =3D "Enabled; Disabled";
+	else if (selectedAttribute =3D=3D "ProximityDistance")
+		legal.innerText =3D "Short; Medium; Long";
+	else if (selectedAttribute =3D=3D "PagingEnable")
+		legal.innerText =3D "Enabled; Disabled";
+	else if (selectedAttribute =3D=3D "PagingBeepSequence")
+		legal.innerText =3D "Number in the Range 0 to 15";
+	else if (selectedAttribute =3D=3D "LowBatteryIndication")
+		legal.innerText =3D "Number (Seconds)";
+	else if (selectedAttribute =3D=3D "ScanTriggerWakeup")
+		legal.innerText =3D "Enabled; Disabled";
+	else if (selectedAttribute =3D=3D "BluetoothAutoReconnect")
+		legal.innerText =3D "None; OnPower; OnOutOfRange; OnPowerOutOfRange";
+	else if (selectedAttribute =3D=3D "LowBatteryIndicationCycle")
+		legal.innerText =3D "Number (Seconds: 10, 20, 30, 40, 50)";
+	else if (selectedAttribute =3D=3D "PagingActivate")
+		legal.innerText =3D "Start; Stop";
+	else if (selectedAttribute =3D=3D "BTDisconnect")
+		legal.innerText =3D "<none>";
+	else if (selectedAttribute =3D=3D "BTUnpair")
+		legal.innerText =3D "<none>";
+	else if (selectedAttribute =3D=3D "IgnoreCode128USPS")
+		legal.innerText =3D "Enabled; Disabled";
+	else if (selectedAttribute =3D=3D "ProximityContinuous")
+		legal.innerText =3D "Enabled; Disabled";
+	else if (selectedAttribute =3D=3D "GoodScansDelay")
+		legal.innerText =3D "Number (msec, multiples of 100) [0-15000]";
+	else if (selectedAttribute =3D=3D "ForceSavePairingBarcode")
+		legal.innerText =3D "True / False";
+	else if (selectedAttribute =3D=3D "FirmwareVersion")
+		legal.innerText =3D "Read Only";=09
+	else if (selectedAttribute =3D=3D "DeviceClass")
+		legal.innerText =3D "Read Only";=09
+	else if (selectedAttribute =3D=3D "BatteryStatus")
+		legal.innerText =3D "Read Only";=09
+	else if (selectedAttribute =3D=3D "BatteryCapacity")
+		legal.innerText =3D "Read Only";=09
+	else if (selectedAttribute =3D=3D "BatteryID")
+		legal.innerText =3D "Read Only";=09
+  }
+
+ =20
+function getAllRSM()
+{
+    //Invoke to receive all the attributes=20
+	var attribute=3Ddocument.getElementById("attlist");
+	//var selectedAttribute =3D =
+attribute.options[attribute.selectedIndex].text;
+	for(i=3D0; i < attribute.options.length; i++)
+	{
+		selectedAttribute =3D attribute.options[i].text;
+		//alert('' + selectedAttribute);
+		rsm.setEMML('' + selectedAttribute);
+	}
+}
+ =20
+  </SCRIPT>
+<BR>
+<H1>Scanner Tests</H1>
+<P><TEXTAREA rows=3D3></TEXTAREA> <TEXTAREA rows=3D3 =
+cols=3D15></TEXTAREA> <TEXTAREA rows=3D3 cols=3D15></TEXTAREA><BR>
+<DIV id=3DscanData>Scanned Data goes Here</DIV>
+<DIV id=3DenumScanners>EnumScanners goes Here</DIV>
+<DIV id=3DenumScannerDecoders>Supported Decoders go Here</DIV>
+<DIV id=3Dmsg>Messages Go Here</DIV><BR>
+<FORM id=3DtheForm><B><A =
+href=3D"javascript:toggleDiv(scannerControlDiv);">Scanner=20
+Control:</A></B>
+<P>
+<DIV style=3D"DISPLAY: block" id=3DscannerControlDiv><INPUT =
+onclick=3DenumerateScannersViaJSON(); value=3D"Enumerate Scanners" =
+align=3Dcenter type=3Dbutton>=20
+<BR><INPUT onclick=3DenableScanner(); value=3D"Enable Default Scanner" =
+align=3Dcenter type=3Dbutton>=20
+<INPUT onclick=3D"enableSpecifiedScanner('SCN1');" value=3D"Enable SCN1" =
+align=3Dcenter type=3Dbutton>=20
+<INPUT onclick=3D"enableSpecifiedScanner('SCN2');" value=3D"Enable SCN2" =
+align=3Dcenter type=3Dbutton>=20
+<INPUT onclick=3D"enableSpecifiedScanner('SCN3');" value=3D"Enable SCN3" =
+align=3Dcenter type=3Dbutton>=20
+<INPUT onclick=3D"enableSpecifiedScanner('SCN4');" value=3D"Enable SCN4" =
+align=3Dcenter type=3Dbutton>=20
+<INPUT onclick=3DscannerInit(); value=3DInit align=3Dcenter =
+type=3Dbutton> <INPUT onclick=3DscannerDeinit(); value=3DDeinit =
+align=3Dcenter type=3Dbutton> <!--INPUT align=3D"center" type=3D"button" =
+value=3D"Enable Specific Scanner" onclick=3D"enableSpecificScanner();">
+	<select name=3D"scannerSelect">
+		<option value=3D"SCN1" selected>SCN1</option>
+		<option value=3D"SCN2">SCN2</option>
+		<option value=3D"SCN3">SCN3</option>
+	</select--><BR><INPUT onclick=3DdisableScanner(); value=3D"Disable =
+Scanner" align=3Dcenter type=3Dbutton>=20
+<INPUT onclick=3DenumerateSupportedDecoders() value=3D"Enumerate =
+Supported Decoders" align=3Dcenter type=3Dbutton><BR><INPUT=20
+onclick=3D"setDecoder('autoEnter', theForm.cb_autoEnter.checked);" =
+type=3Dcheckbox=20
+name=3Dcb_autoEnter> autoEnter</INPUT> <INPUT=20
+onclick=3D"setDecoder('autoTab', theForm.cb_autoTab.checked);" =
+type=3Dcheckbox=20
+name=3Dcb_autoTab> autoTab</INPUT> <INPUT=20
+onclick=3D"setScanStart('softScan', theForm.cb_softScan.checked);" =
+type=3Dcheckbox=20
+name=3Dcb_softScan> Start / Stop Scan</INPUT> <BR>
+<TABLE>
+  <TBODY>
+  <TR>
+    <TD>rasterMode: </TD>
+    <TD><INPUT onclick=3D"setScannerConfig('rasterMode', =
+'unspecified');"=20
+      CHECKED type=3Dradio name=3DrasterMode> unspecified</INPUT> <INPUT =
+
+      onclick=3D"setScannerConfig('rasterMode', 'none');" type=3Dradio=20
+      name=3DrasterMode> none</INPUT> <INPUT=20
+      onclick=3D"setScannerConfig('rasterMode', 'openAlways');" =
+type=3Dradio=20
+      name=3DrasterMode> openAlways</INPUT> <INPUT=20
+      onclick=3D"setScannerConfig('rasterMode', 'smart');" type=3Dradio=20
+      name=3DrasterMode> smart</INPUT> <INPUT=20
+      onclick=3D"setScannerConfig('rasterMode', 'cyclone');" =
+type=3Dradio=20
+      name=3DrasterMode> cyclone</INPUT> </TD></TR>
+  <TR>
+    <TD>aimType: </TD>
+    <TD><INPUT onclick=3D"setScannerConfig('aimType', 'unspecified');" =
+CHECKED=20
+      type=3Dradio name=3DaimType> unspecified</INPUT> <INPUT=20
+      onclick=3D"setScannerConfig('aimType', 'trigger');" type=3Dradio =
+name=3DaimType>=20
+      trigger</INPUT> <INPUT onclick=3D"setScannerConfig('aimType', =
+'timedHold');"=20
+      type=3Dradio name=3DaimType> timedHold</INPUT> <INPUT=20
+      onclick=3D"setScannerConfig('aimType', 'timedRelease');" =
+type=3Dradio=20
+      name=3DaimType> timedRelease</INPUT> <INPUT=20
+      onclick=3D"setScannerConfig('aimType', 'presentation');" =
+type=3Dradio=20
+      name=3DaimType> presentation</INPUT> <INPUT=20
+      onclick=3D"setScannerConfig('aimType', 'pressAndRelease');" =
+type=3Dradio=20
+      name=3DaimType> <FONT color=3Dblue>pressAndRelease</FONT></INPUT> =
+<INPUT=20
+      onclick=3D"setScannerConfig('aimType', 'continuousRead');" =
+type=3Dradio=20
+      name=3DaimType> <FONT color=3Dblue>continuousRead</FONT></INPUT> =
+</TD></TR>
+  <TR>
+    <TD><FONT color=3Dblue>aimMode:</FONT> </TD>
+    <TD><INPUT onclick=3D"setScannerConfig('aimMode', 'unspecified');" =
+CHECKED=20
+      type=3Dradio name=3DaimMode> unspecified</INPUT> <INPUT=20
+      onclick=3D"setScannerConfig('aimMode', 'none');" type=3Dradio =
+name=3DaimMode>=20
+      <FONT color=3Dblue>none</INPUT> <INPUT=20
+      onclick=3D"setScannerConfig('aimMode', 'dot');" type=3Dradio =
+name=3DaimMode>=20
+      <FONT color=3Dblue>dot</INPUT> <INPUT=20
+      onclick=3D"setScannerConfig('aimMode', 'slab');" type=3Dradio =
+name=3DaimMode>=20
+      <FONT color=3Dblue>slab</INPUT> <INPUT=20
+      onclick=3D"setScannerConfig('aimMode', 'reticle');" type=3Dradio =
+name=3DaimMode>=20
+      <FONT color=3Dblue>reticle</INPUT> =
+</FONT></FONT></FONT></FONT></TD></TR>
+  <TR>
+    <TD><FONT color=3Dblue>linearSecurityLevel:</FONT> </TD>
+    <TD><INPUT=20
+      onclick=3D"setScannerConfig('linearSecurityLevel', =
+'unspecified');" CHECKED=20
+      type=3Dradio name=3DlinearSecurityLevel> unspecified</INPUT> =
+<INPUT=20
+      onclick=3D"setScannerConfig('linearSecurityLevel', =
+'redundancyAndLength');"=20
+      type=3Dradio name=3DlinearSecurityLevel> <FONT=20
+      color=3Dblue>redundancyAndLength</INPUT> <INPUT=20
+      onclick=3D"setScannerConfig('linearSecurityLevel', =
+'shortOrCodabar');"=20
+      type=3Dradio name=3DlinearSecurityLevel> <FONT=20
+      color=3Dblue>shortOrCodabar</INPUT> <INPUT=20
+      onclick=3D"setScannerConfig('linearSecurityLevel', =
+'longAndShort');"=20
+      type=3Dradio name=3DlinearSecurityLevel> <FONT =
+color=3Dblue>longAndShort</INPUT>=20
+      <INPUT onclick=3D"setScannerConfig('linearSecurityLevel', =
+'allTwice');"=20
+      type=3Dradio name=3DlinearSecurityLevel> <FONT =
+color=3Dblue>allTwice</INPUT>=20
+      <INPUT onclick=3D"setScannerConfig('linearSecurityLevel', =
+'allThrice');"=20
+      type=3Dradio name=3DlinearSecurityLevel> <FONT =
+color=3Dblue>allThrice</INPUT>=20
+      </FONT></FONT></FONT></FONT></FONT></TD></TR>
+  <TR>
+    <TD><FONT color=3Dblue>dbpMode:</FONT> </TD>
+    <TD><INPUT onclick=3D"setScannerConfig('dbpMode', 'unspecified');" =
+CHECKED=20
+      type=3Dradio name=3DdbpMode> unspecified</INPUT> <INPUT=20
+      onclick=3D"setScannerConfig('dbpMode', 'normal');" type=3Dradio =
+name=3DdbpMode>=20
+      <FONT color=3Dblue>normal</INPUT> <INPUT=20
+      onclick=3D"setScannerConfig('dbpMode', 'composite');" type=3Dradio =
+
+      name=3DdbpMode> <FONT color=3Dblue>composite</INPUT> =
+</FONT></FONT></TD></TR>
+  <TR>
+    <TD><FONT color=3Dblue>focusMode:</FONT> </TD>
+    <TD><INPUT onclick=3D"setScannerConfig('focusMode', 'unspecified');" =
+CHECKED=20
+      type=3Dradio name=3DfocusMode> unspecified</INPUT> <INPUT=20
+      onclick=3D"setScannerConfig('focusMode', 'fixed');" type=3Dradio=20
+      name=3DfocusMode> <FONT color=3Dblue>fixed</INPUT> <INPUT=20
+      onclick=3D"setScannerConfig('focusMode', 'auto');" type=3Dradio=20
+      name=3DfocusMode> <FONT color=3Dblue>auto</INPUT> =
+</FONT></FONT></TD></TR>
+  <TR>
+    <TD><FONT color=3Dblue>picklistMode:</FONT> </TD>
+    <TD><INPUT onclick=3D"setScannerConfig('picklistMode', =
+'unspecified');"=20
+      CHECKED type=3Dradio name=3DpicklistMode> unspecified</INPUT> =
+<INPUT=20
+      onclick=3D"setScannerConfig('picklistMode', 'disabled');" =
+type=3Dradio=20
+      name=3DpicklistMode> <FONT color=3Dblue>disabled</INPUT> <INPUT=20
+      onclick=3D"setScannerConfig('picklistMode', 'hardwareReticle');" =
+type=3Dradio=20
+      name=3DpicklistMode> <FONT color=3Dblue>hardwareReticle</INPUT> =
+<INPUT=20
+      onclick=3D"setScannerConfig('picklistMode', 'softwareReticle');" =
+type=3Dradio=20
+      name=3DpicklistMode> <FONT color=3Dblue>softwareReticle</INPUT>=20
+      </FONT></FONT></FONT></TD></TR>
+  <TR>
+    <TD><FONT color=3Dblue>illuminationMode:</FONT> </TD>
+    <TD><INPUT onclick=3D"setScannerConfig('illuminationMode', =
+'unspecified');"=20
+      CHECKED type=3Dradio name=3DilluminationMode> unspecified</INPUT> =
+<INPUT=20
+      onclick=3D"setScannerConfig('illuminationMode', 'auto');" =
+type=3Dradio=20
+      name=3DilluminationMode> <FONT color=3Dblue>auto</INPUT> <INPUT=20
+      onclick=3D"setScannerConfig('illuminationMode', 'alwaysOn');" =
+type=3Dradio=20
+      name=3DilluminationMode> <FONT color=3Dblue>alwaysOn</INPUT> =
+<INPUT=20
+      onclick=3D"setScannerConfig('illuminationMode', 'alwaysOff');" =
+type=3Dradio=20
+      name=3DilluminationMode> <FONT color=3Dblue>alwaysOff</INPUT>=20
+      </FONT></FONT></FONT></TD></TR>
+  <TR>
+    <TD><FONT color=3Dblue>viewfinderMode:</FONT> </TD>
+    <TD><INPUT onclick=3D"setScannerConfig('viewfinderMode', =
+'unspecified');"=20
+      CHECKED type=3Dradio name=3DviewfinderMode> unspecified</INPUT> =
+<INPUT=20
+      onclick=3D"setScannerConfig('viewfinderMode', 'enabled');" =
+type=3Dradio=20
+      name=3DviewfinderMode> <FONT color=3Dblue>enabled</INPUT> <INPUT=20
+      onclick=3D"setScannerConfig('viewfinderMode', 'disabled');" =
+type=3Dradio=20
+      name=3DviewfinderMode> <FONT color=3Dblue>disabled</INPUT> <INPUT=20
+      onclick=3D"setScannerConfig('viewfinderMode', 'staticReticle');" =
+type=3Dradio=20
+      name=3DviewfinderMode> <FONT color=3Dblue>staticReticle</INPUT> =
+<INPUT=20
+      onclick=3D"setScannerConfig('viewfinderMode', 'dynamicReticle');" =
+type=3Dradio=20
+      name=3DviewfinderMode> <FONT color=3Dblue>dynamicReticle</INPUT>=20
+      </FONT></FONT></FONT></FONT></TD></TR>
+  <TR>
+    <TD><FONT color=3Dblue>viewfinderFeedback:</FONT> </TD>
+    <TD><INPUT=20
+      onclick=3D"setScannerConfig('viewfinderFeedback', 'unspecified');" =
+CHECKED=20
+      type=3Dradio name=3DviewfinderFeedback> unspecified</INPUT> <INPUT =
+
+      onclick=3D"setScannerConfig('viewfinderFeedback', 'enabled');" =
+type=3Dradio=20
+      name=3DviewfinderFeedback> <FONT color=3Dblue>enabled</INPUT> =
+<INPUT=20
+      onclick=3D"setScannerConfig('viewfinderFeedback', 'disabled');" =
+type=3Dradio=20
+      name=3DviewfinderFeedback> <FONT color=3Dblue>disabled</INPUT> =
+<INPUT=20
+      onclick=3D"setScannerConfig('viewfinderFeedback', 'reticle');" =
+type=3Dradio=20
+      name=3DviewfinderFeedback> <FONT color=3Dblue>reticle</INPUT>=20
+      </FONT></FONT></FONT></TD></TR>
+  <TR>
+    <TD><FONT color=3Dblue>inverse1DMode:</FONT> </TD>
+    <TD><INPUT onclick=3D"setScannerConfig('inverse1DMode', =
+'unspecified');"=20
+      CHECKED type=3Dradio name=3Dinverse1DMode> unspecified</INPUT> =
+<INPUT=20
+      onclick=3D"setScannerConfig('inverse1DMode', 'enabled');" =
+type=3Dradio=20
+      name=3Dinverse1DMode> <FONT color=3Dblue>enabled</INPUT> <INPUT=20
+      onclick=3D"setScannerConfig('inverse1DMode', 'disabled');" =
+type=3Dradio=20
+      name=3Dinverse1DMode> <FONT color=3Dblue>disabled</INPUT> <INPUT=20
+      onclick=3D"setScannerConfig('inverse1DMode', 'auto');" =
+type=3Dradio=20
+      name=3Dinverse1DMode> <FONT color=3Dblue>auto</INPUT>=20
+  </FONT></FONT></FONT></TD></TR></TBODY></TABLE><INPUT=20
+onclick=3D"setScannerConfig('timedAimDuration', =
+theForm.num_timedAimDuration.value);"=20
+value=3D0 size=3D4 type=3Dnumber name=3Dnum_timedAimDuration =
+max=3D"10000" min=3D"0"> <FONT=20
+color=3Dblue>timedAimDuration</FONT></INPUT><BR><INPUT=20
+onclick=3D"setScannerConfig('connectionIdleTimeout', =
+theForm.num_connectionIdleTimeout.value);"=20
+value=3D0 size=3D4 type=3Dnumber name=3Dnum_connectionIdleTimeout =
+max=3D"10000" min=3D"0">=20
+<FONT color=3Dblue>connectionIdleTimeout</FONT></INPUT><BR><INPUT=20
+onclick=3D"setScannerConfig('disconnectBTOnDisable', =
+theForm.cb_disconnectBTOnDisable.checked);"=20
+type=3Dcheckbox name=3Dcb_disconnectBTOnDisable> <FONT=20
+color=3Dblue>disconnectBTOnDisable</FONT></INPUT><BR><INPUT=20
+onclick=3D"setScannerConfig('displayBTAddressBarcodeOnEnable', =
+theForm.cb_displayBTAddressBarcodeOnEnable.checked);"=20
+type=3Dcheckbox name=3Dcb_displayBTAddressBarcodeOnEnable> <FONT=20
+color=3Dblue>displayBTAddressBarcodeOnEnable</FONT></INPUT><BR><INPUT=20
+onclick=3D"setScannerConfig('narrowbeam', =
+theForm.cb_narrowbeam.checked);"=20
+type=3Dcheckbox name=3Dcb_narrowbeam> <FONT=20
+color=3Dblue>narrowbeam</FONT></INPUT><BR><INPUT=20
+onclick=3D"setScannerConfig('scanTimeout', =
+theForm.num_scanTimeout.value);"=20
+value=3D0 size=3D4 type=3Dnumber name=3Dnum_scanTimeout max=3D"10000" =
+min=3D"0"> <FONT=20
+color=3Dblue>scanTimeout</FONT></INPUT><BR><INPUT=20
+onclick=3D"setScannerConfig('klasseEins', =
+theForm.cb_klasseEins.checked);"=20
+type=3Dcheckbox name=3Dcb_klasseEins> <FONT=20
+color=3Dblue>klasseEins</FONT></INPUT><BR><INPUT=20
+onclick=3D"setScannerConfig('bidirectionalRedundancy', =
+theForm.cb_bidirectionalRedundancy.checked);"=20
+type=3Dcheckbox name=3Dcb_bidirectionalRedundancy> <FONT=20
+color=3Dblue>bidirectionalRedundancy</FONT></INPUT><BR><INPUT=20
+onclick=3D"setScannerConfig('rasterHeight', =
+theForm.num_rasterHeight.value);"=20
+value=3D0 size=3D3 type=3Dnumber name=3Dnum_rasterHeight max=3D"100" =
+min=3D"0"> <FONT=20
+color=3Dblue>rasterHeight</FONT></INPUT><BR><INPUT=20
+onclick=3D"setScannerConfig('sameSymbolTimeout', =
+theForm.num_sameSymbolTimeout.value);"=20
+value=3D0 size=3D4 type=3Dnumber name=3Dnum_sameSymbolTimeout =
+max=3D"1000" min=3D"100">=20
+<FONT color=3Dblue>sameSymbolTimeout</FONT></INPUT><BR><INPUT=20
+onclick=3D"setScannerConfig('differentSymbolTimeout', =
+theForm.num_differentSymbolTimeout.value);"=20
+value=3D0 size=3D4 type=3Dnumber name=3Dnum_differentSymbolTimeout =
+max=3D"1000" min=3D"0">=20
+<FONT color=3Dblue>differentSymbolTimeout</FONT></INPUT><BR><INPUT=20
+onclick=3D"setScannerConfig('poorQuality1DMode', =
+theForm.cb_poorQuality1DMode.checked);"=20
+type=3Dcheckbox name=3Dcb_poorQuality1DMode> <FONT=20
+color=3Dblue>poorQuality1DMode</FONT></INPUT><BR><INPUT=20
+onclick=3D"setScannerConfig('dpmMode', theForm.cb_dpmMode.checked);" =
+type=3Dcheckbox=20
+name=3Dcb_dpmMode> <FONT color=3Dblue>dpmMode</FONT></INPUT><BR><INPUT=20
+onclick=3D"setScannerConfig('viewfinderX', =
+theForm.num_viewfinderX.value);" size=3D4=20
+type=3Dnumber name=3Dnum_viewfinderX max=3D"1000" min=3D"0"> <FONT=20
+color=3Dblue>viewfinderX</FONT></INPUT><BR><INPUT=20
+onclick=3D"setScannerConfig('viewfinderY', =
+theForm.num_viewfinderY.value);" size=3D4=20
+type=3Dnumber name=3Dnum_viewfinderY max=3D"1000" min=3D"0"> <FONT=20
+color=3Dblue>viewfinderY</FONT></INPUT><BR><INPUT=20
+onclick=3D"setScannerConfig('viewfinderWidth', =
+theForm.num_viewfinderWidth.value);"=20
+size=3D4 type=3Dnumber name=3Dnum_viewfinderWidth max=3D"1000" =
+min=3D"100"> <FONT=20
+color=3Dblue>viewfinderWidth</FONT></INPUT><BR><INPUT=20
+onclick=3D"setScannerConfig('viewfinderHeight', =
+theForm.num_viewfinderHeight.value);"=20
+size=3D4 type=3Dnumber name=3Dnum_viewfinderHeight max=3D"1000" =
+min=3D"100"> <FONT=20
+color=3Dblue>viewfinderHeight</FONT></INPUT><BR><INPUT=20
+onclick=3D"setScannerConfig('viewfinderFeedbackTime', =
+theForm.num_viewfinderFeedbackTime.value);"=20
+size=3D4 type=3Dnumber name=3Dnum_viewfinderFeedbackTime max=3D"5000" =
+min=3D"500"> <FONT=20
+color=3Dblue>viewfinderFeedbackTime</FONT></INPUT><BR><INPUT=20
+onclick=3D"setScannerConfig('adaptiveScanning', =
+theForm.cb_adaptiveScanning.checked);"=20
+type=3Dcheckbox name=3Dcb_adaptiveScanning> <FONT=20
+color=3Dblue>adaptiveScanning</FONT></INPUT><BR></DIV>
+<P><B><A href=3D"javascript:toggleDiv(eventsDiv)">Events:</A></B><BR>
+<DIV style=3D"DISPLAY: block" id=3DeventsDiv><INPUT=20
+onclick=3DsetDecodeEvent(theForm.cb_decodeEvent.checked); CHECKED =
+type=3Dcheckbox=20
+name=3Dcb_decodeEvent>Javascript DecodeEvent</INPUT><BR><INPUT=20
+onclick=3DsetRSMEvent(theForm.cb_rsmEvent.checked); type=3Dcheckbox=20
+name=3Dcb_rsmEvent>Javascript RSMGetEvent</INPUT><BR><FONT =
+color=3Dblue><INPUT=20
+onclick=3DsetEnumSupportedDecodersEvent(theForm.cb_supportedDecodersEvent=
+.checked);=20
+CHECKED type=3Dcheckbox name=3Dcb_supportedDecodersEvent>Javascript=20
+enumSupportedDecodersEvent</INPUT></FONT><BR><FONT color=3Dblue><INPUT=20
+onclick=3DsetBTStatusEvent(theForm.cb_btEvent.checked); CHECKED =
+type=3Dcheckbox=20
+name=3Dcb_btEvent>Javascript BluetoothStatusEvent</INPUT></FONT><BR>
+<P></P></DIV>
+<P><B><A href=3D"javascript:toggleDiv(decodersDiv)">Decoders (Enable /=20
+Disable):</A></B><BR>
+<DIV style=3D"DISPLAY: none" id=3DdecodersDiv>
+<TABLE border=3D0>
+  <TBODY>
+  <TR>
+    <TD vAlign=3Dtop><INPUT=20
+      onclick=3D"setDecoder('allDecoders', =
+theForm.cb_all_Decoders.checked);"=20
+      CHECKED type=3Dcheckbox name=3Dcb_all_Decoders> =
+All_Decoders</INPUT><BR><INPUT=20
+      onclick=3D"setDecoder('auspostal', theForm.cb_auspostal.checked);" =
+
+      type=3Dcheckbox name=3Dcb_auspostal> auspostal</INPUT><BR><INPUT=20
+      onclick=3D"setDecoder('aztec', theForm.cb_aztec.checked);" =
+type=3Dcheckbox=20
+      name=3Dcb_aztec> aztec</INPUT><BR><INPUT=20
+      onclick=3D"setDecoder('canpostal', theForm.cb_canpostal.checked);" =
+
+      type=3Dcheckbox name=3Dcb_canpostal> canpostal</INPUT><BR><INPUT=20
+      onclick=3D"setDecoder('chinese2of5', =
+theForm.cb_chinese_2of5.checked);"=20
+      type=3Dcheckbox name=3Dcb_chinese_2of5> =
+chinese2of5</INPUT><BR><INPUT=20
+      onclick=3D"setDecoder('codabar', theForm.cb_codabar.checked);" =
+type=3Dcheckbox=20
+      name=3Dcb_codabar> codabar</INPUT><BR><INPUT=20
+      onclick=3D"setDecoder('code11', theForm.cb_code11.checked);" =
+type=3Dcheckbox=20
+      name=3Dcb_code11> code11</INPUT><BR><INPUT=20
+      onclick=3D"setDecoder('code128', theForm.cb_code128.checked);" =
+type=3Dcheckbox=20
+      name=3Dcb_code128> code128</INPUT><BR><INPUT=20
+      onclick=3D"setDecoder('code39', theForm.cb_code39.checked);" =
+type=3Dcheckbox=20
+      name=3Dcb_code39> code39</INPUT><BR><INPUT=20
+      onclick=3D"setDecoder('code93', theForm.cb_code93.checked);" =
+type=3Dcheckbox=20
+      name=3Dcb_code93> code93</INPUT><BR><INPUT=20
+      onclick=3D"setDecoder('compositeAB', =
+theForm.cb_compositeAB.checked);"=20
+      type=3Dcheckbox name=3Dcb_compositeAB> =
+compositeAB</INPUT><BR><INPUT=20
+      onclick=3D"setDecoder('compositeC', =
+theForm.cb_compositeC.checked);"=20
+      type=3Dcheckbox name=3Dcb_compositeC> compositeC</INPUT><BR><INPUT =
+
+      onclick=3D"setDecoder('d2Of5', theForm.cb_d2Of5.checked);" =
+type=3Dcheckbox=20
+      name=3Dcb_d2Of5> d2Of5</INPUT><BR><INPUT=20
+      onclick=3D"setDecoder('dataMatrix', =
+theForm.cb_dataMatrix.checked);"=20
+      type=3Dcheckbox name=3Dcb_dataMatrix> dataMatrix</INPUT><BR><INPUT =
+
+      onclick=3D"setDecoder('dutchPostal', =
+theForm.cb_dutchPostal.checked);"=20
+      type=3Dcheckbox name=3Dcb_dutchPostal> =
+dutchPostal</INPUT><BR></TD>
+    <TD vAlign=3Dtop><INPUT=20
+      onclick=3D"setDecoder('ean13', theForm.cb_ean13.checked);" =
+type=3Dcheckbox=20
+      name=3Dcb_ean13> ean13</INPUT><BR><INPUT=20
+      onclick=3D"setDecoder('ean8', theForm.cb_ean8.checked);" =
+type=3Dcheckbox=20
+      name=3Dcb_ean8> ean8</INPUT><BR><INPUT=20
+      onclick=3D"setDecoder('i2of5', theForm.cb_i2of5.checked);" =
+type=3Dcheckbox=20
+      name=3Dcb_i2of5> i2of5</INPUT><BR><INPUT=20
+      onclick=3D"setDecoder('japPostal', theForm.cb_japPostal.checked);" =
+
+      type=3Dcheckbox name=3Dcb_japPostal> japPostal</INPUT><BR><INPUT=20
+      onclick=3D"setDecoder('korean3Of5', =
+theForm.cb_korean_3Of5.checked);"=20
+      type=3Dcheckbox name=3Dcb_korean_3Of5> =
+korean_3Of5</INPUT><BR><INPUT=20
+      onclick=3D"setDecoder('macroMicroPDF', =
+theForm.cb_macroMicroPDF.checked);"=20
+      type=3Dcheckbox name=3Dcb_macroMicroPDF> =
+macroMicroPDF</INPUT><BR><INPUT=20
+      onclick=3D"setDecoder('macroPDF', theForm.cb_macroPDF.checked);"=20
+      type=3Dcheckbox name=3Dcb_macroPDF> macroPDF</INPUT><BR><INPUT=20
+      onclick=3D"setDecoder('maxiCode', theForm.cb_maxiCode.checked);"=20
+      type=3Dcheckbox name=3Dcb_maxiCode> maxiCode</INPUT><BR><INPUT=20
+      onclick=3D"setDecoder('microPDF', theForm.cb_microPDF.checked);"=20
+      type=3Dcheckbox name=3Dcb_microPDF> microPDF</INPUT><BR><INPUT=20
+      onclick=3D"setDecoder('microQR', theForm.cb_microQR.checked);" =
+type=3Dcheckbox=20
+      name=3Dcb_microQR> microQR</INPUT><BR><INPUT=20
+      onclick=3D"setDecoder('msi', theForm.cb_msi.checked);" =
+type=3Dcheckbox=20
+      name=3Dcb_msi> msi</INPUT><BR><INPUT=20
+      onclick=3D"setDecoder('pdf417', theForm.cb_pdf417.checked);" =
+type=3Dcheckbox=20
+      name=3Dcb_pdf417> pdf417</INPUT><BR><INPUT=20
+      onclick=3D"setDecoder('qrCode', theForm.cb_qrCode.checked);" =
+type=3Dcheckbox=20
+      name=3Dcb_qrCode> qrCode</INPUT><BR><INPUT=20
+      onclick=3D"setDecoder('rss14', theForm.cb_rss14.checked);" =
+type=3Dcheckbox=20
+      name=3Dcb_rss14> rss14</INPUT><BR><INPUT=20
+      onclick=3D"setDecoder('rssExp', theForm.cb_rssExp.checked);" =
+type=3Dcheckbox=20
+      name=3Dcb_rssExp> rssExp</INPUT><BR></TD>
+    <TD vAlign=3Dtop><INPUT=20
+      onclick=3D"setDecoder('rssLim', theForm.cb_rssLim.checked);" =
+type=3Dcheckbox=20
+      name=3Dcb_rssLim> rssLim</INPUT><BR><INPUT=20
+      onclick=3D"setDecoder('signature', theForm.cb_signature.checked);" =
+
+      type=3Dcheckbox name=3Dcb_signature> signature</INPUT><BR><INPUT=20
+      onclick=3D"setDecoder('tlc39', theForm.cb_tlc39.checked);" =
+type=3Dcheckbox=20
+      name=3Dcb_tlc39> tlc39</INPUT><BR><INPUT=20
+      onclick=3D"setDecoder('trioptic39', =
+theForm.cb_trioptic39.checked);"=20
+      type=3Dcheckbox name=3Dcb_trioptic39> trioptic39</INPUT><BR><INPUT =
+
+      onclick=3D"setDecoder('ukPostal', theForm.cb_ukPostal.checked);"=20
+      type=3Dcheckbox name=3Dcb_ukPostal> ukPostal</INPUT><BR><INPUT=20
+      onclick=3D"setDecoder('upca', theForm.cb_upca.checked);" =
+type=3Dcheckbox=20
+      name=3Dcb_upca> upca</INPUT><BR><INPUT=20
+      onclick=3D"setDecoder('upce0', theForm.cb_upce0.checked);" =
+type=3Dcheckbox=20
+      name=3Dcb_upce0> upce0</INPUT><BR><INPUT=20
+      onclick=3D"setDecoder('upce1', theForm.cb_upce1.checked);" =
+type=3Dcheckbox=20
+      name=3Dcb_upce1> upce1</INPUT><BR><INPUT=20
+      onclick=3D"setDecoder('us4State', theForm.cb_us4State.checked);"=20
+      type=3Dcheckbox name=3Dcb_us4State> us4State</INPUT><BR><INPUT=20
+      onclick=3D"setDecoder('usPlanet', theForm.cb_usPlanet.checked);"=20
+      type=3Dcheckbox name=3Dcb_usPlanet> usPlanet</INPUT><BR><INPUT=20
+      onclick=3D"setDecoder('usPOSTNet', theForm.cb_usPOSTNet.checked);" =
+
+      type=3Dcheckbox name=3Dcb_usPOSTNet> usPOSTNet</INPUT><BR><INPUT=20
+      onclick=3D"setDecoder('webcode', theForm.cb_webcode.checked);" =
+type=3Dcheckbox=20
+      name=3Dcb_webcode> webcode</INPUT><BR><FONT color=3Dblue><INPUT=20
+      onclick=3D"setDecoder('matrix2of5', =
+theForm.cb_matrix2of5.checked);"=20
+      type=3Dcheckbox name=3Dcb_matrix2of5>=20
+  matrix2of5</INPUT></FONT><BR></TD></TR></TBODY></TABLE></DIV>
+<P><B><A href=3D"javascript:toggleDiv(decoderPropertiesDiv)">Decoder =
+Properties=20
+(True / False):</A></B><BR>
+<DIV style=3D"DISPLAY: none" id=3DdecoderPropertiesDiv>
+<TABLE border=3D0>
+  <TBODY>
+  <TR>
+    <TD vAlign=3Dtop><INPUT=20
+      onclick=3D"setDecoderProperty('codabarCLSIEditing', =
+theForm.cb_codabarCLSIEditing.checked);"=20
+      type=3Dcheckbox name=3Dcb_codabarCLSIEditing>=20
+      codabarCLSIEditing</INPUT><BR><INPUT=20
+      onclick=3D"setDecoderProperty('codabarNotisEditing', =
+theForm.cb_codabarNotisEditing.checked);"=20
+      type=3Dcheckbox name=3Dcb_codabarNotisEditing>=20
+      codabarNotisEditing</INPUT><BR><INPUT=20
+      onclick=3D"setDecoderProperty('codabarRedundancy', =
+theForm.cb_codabarRedundancy.checked);"=20
+      type=3Dcheckbox name=3Dcb_codabarRedundancy>=20
+      codabarRedundancy</INPUT><BR><INPUT=20
+      onclick=3D"setDecoderProperty('code11Redundancy', =
+theForm.cb_code11Redundancy.checked);"=20
+      type=3Dcheckbox name=3Dcb_code11Redundancy> =
+code11Redundancy</INPUT><BR><INPUT=20
+      onclick=3D"setDecoderProperty('code11ReportCheckDigit', =
+theForm.cb_code11ReportCheckDigit.checked);"=20
+      type=3Dcheckbox name=3Dcb_code11ReportCheckDigit>=20
+      code11ReportCheckDigit</INPUT><BR><INPUT=20
+      onclick=3D"setDecoderProperty('code128EAN128', =
+theForm.cb_code128EAN128.checked);"=20
+      type=3Dcheckbox name=3Dcb_code128EAN128> =
+code128EAN128</INPUT><BR><INPUT=20
+      onclick=3D"setDecoderProperty('code128IsBT128', =
+theForm.cb_code128IsBT128.checked);"=20
+      type=3Dcheckbox name=3Dcb_code128IsBT128> =
+code128IsBT128</INPUT><BR><INPUT=20
+      onclick=3D"setDecoderProperty('code128Other128', =
+theForm.cb_code128Other128.checked);"=20
+      type=3Dcheckbox name=3Dcb_code128Other128> =
+code128Other128</INPUT><BR><INPUT=20
+      onclick=3D"setDecoderProperty('code128Redundancy', =
+theForm.cb_code128Redundancy.checked);"=20
+      type=3Dcheckbox name=3Dcb_code128Redundancy>=20
+      code128Redundancy</INPUT><BR><INPUT=20
+      onclick=3D"setDecoderProperty('code39Code32Prefix', =
+theForm.cb_code39Code32Prefix.checked);"=20
+      type=3Dcheckbox name=3Dcb_code39Code32Prefix>=20
+      code39Code32Prefix</INPUT><BR><INPUT=20
+      onclick=3D"setDecoderProperty('code39Concatenation', =
+theForm.cb_code39Concatenation.checked);"=20
+      type=3Dcheckbox name=3Dcb_code39Concatenation>=20
+      code39Concatenation</INPUT><BR><INPUT=20
+      onclick=3D"setDecoderProperty('code39ConvertToCode32', =
+theForm.cb_code39ConvertToCode32.checked);"=20
+      type=3Dcheckbox name=3Dcb_code39ConvertToCode32>=20
+      code39ConvertToCode32</INPUT><BR><INPUT=20
+      onclick=3D"setDecoderProperty('code39FullASCII', =
+theForm.cb_code39FullASCII.checked);"=20
+      type=3Dcheckbox name=3Dcb_code39FullASCII> =
+code39FullASCII</INPUT><BR><INPUT=20
+      onclick=3D"setDecoderProperty('code39Redundancy', =
+theForm.cb_code39Redundancy.checked);"=20
+      type=3Dcheckbox name=3Dcb_code39Redundancy> =
+code39Redundancy</INPUT><BR><INPUT=20
+      onclick=3D"setDecoderProperty('code39ReportCheckDigit', =
+theForm.cb_code39ReportCheckDigit.checked);"=20
+      type=3Dcheckbox name=3Dcb_code39ReportCheckDigit>=20
+      code39ReportCheckDigit</INPUT><BR><INPUT=20
+      onclick=3D"setDecoderProperty('code39VerifyCheckDigit', =
+theForm.cb_code39VerifyCheckDigit.checked);"=20
+      type=3Dcheckbox name=3Dcb_code39VerifyCheckDigit>=20
+      code39VerifyCheckDigit</INPUT><BR><INPUT=20
+      onclick=3D"setDecoderProperty('code93Redundancy', =
+theForm.cb_code93Redundancy.checked);"=20
+      type=3Dcheckbox name=3Dcb_code93Redundancy> =
+code93Redundancy</INPUT><BR><INPUT=20
+      onclick=3D"setDecoderProperty('d2Of5Redundancy', =
+theForm.cb_d2Of5Redundancy.checked);"=20
+      type=3Dcheckbox name=3Dcb_d2Of5Redundancy> =
+d2Of5Redundancy</INPUT><BR><INPUT=20
+      onclick=3D"setDecoderProperty('ean8ConvertToEAN13', =
+theForm.cb_ean8ConvertToEAN13.checked);"=20
+      type=3Dcheckbox name=3Dcb_ean8ConvertToEAN13>=20
+      ean8ConvertToEAN13</INPUT><BR><INPUT=20
+      onclick=3D"setDecoderProperty('i2Of5ConvertToEAN13', =
+theForm.cb_i2Of5ConvertToEAN13.checked);"=20
+      type=3Dcheckbox name=3Dcb_i2Of5ConvertToEAN13>=20
+      i2Of5ConvertToEAN13</INPUT><BR><INPUT=20
+      onclick=3D"setDecoderProperty('i2Of5Redundancy', =
+theForm.cb_i2Of5Redundancy.checked);"=20
+      type=3Dcheckbox name=3Dcb_i2Of5Redundancy> =
+i2Of5Redundancy</INPUT><BR><INPUT=20
+      onclick=3D"setDecoderProperty('i2Of5ReportCheckDigit', =
+theForm.cb_i2Of5ReportCheckDigit.checked);"=20
+      type=3Dcheckbox name=3Dcb_i2Of5ReportCheckDigit>=20
+      i2Of5ReportCheckDigit</INPUT><BR><INPUT=20
+      onclick=3D"setDecoderProperty('msiRedundancy', =
+theForm.cb_msiRedundancy.checked);"=20
+      type=3Dcheckbox name=3Dcb_msiRedundancy> =
+msiRedundancy</INPUT><BR><INPUT=20
+      onclick=3D"setDecoderProperty('msiReportCheckDigit', =
+theForm.cb_msiReportCheckDigit.checked);"=20
+      type=3Dcheckbox name=3Dcb_msiReportCheckDigit>=20
+      msiReportCheckDigit</INPUT><BR><INPUT=20
+      onclick=3D"setDecoderProperty('trioptic39Redundancy', =
+theForm.cb_trioptic39Redundancy.checked);"=20
+      type=3Dcheckbox name=3Dcb_trioptic39Redundancy>=20
+      trioptic39Redundancy</INPUT><BR></TD>
+    <TD vAlign=3Dtop><INPUT=20
+      onclick=3D"setDecoderProperty('upc_EANBookland', =
+theForm.cb_upc_EANBookland.checked);"=20
+      type=3Dcheckbox name=3Dcb_upc_EANBookland> =
+upc_EANBookland</INPUT><BR><INPUT=20
+      onclick=3D"setDecoderProperty('upc_EANCoupon', =
+theForm.cb_upc_EANCoupon.checked);"=20
+      type=3Dcheckbox name=3Dcb_upc_EANCoupon> =
+upc_EANCoupon</INPUT><BR><INPUT=20
+      onclick=3D"setDecoderProperty('upc_EANLinearDecode', =
+theForm.cb_upc_EANLinearDecode.checked);"=20
+      type=3Dcheckbox name=3Dcb_upc_EANLinearDecode>=20
+      upc_EANLinearDecode</INPUT><BR><INPUT=20
+      onclick=3D"setDecoderProperty('upc_EANRandomWeightCheckDigit', =
+theForm.cb_upc_EANRandomWeightCheckDigit.checked);"=20
+      type=3Dcheckbox name=3Dcb_upc_EANRandomWeightCheckDigit>=20
+      upc_EANRandomWeightCheckDigit</INPUT><BR><INPUT=20
+      onclick=3D"setDecoderProperty('upc_EANSupplemental2', =
+theForm.cb_upc_EANSupplemental2.checked);"=20
+      type=3Dcheckbox name=3Dcb_upc_EANSupplemental2>=20
+      upc_EANSupplemental2</INPUT><BR><INPUT=20
+      onclick=3D"setDecoderProperty('upc_EANSupplemental5', =
+theForm.cb_upc_EANSupplemental5.checked);"=20
+      type=3Dcheckbox name=3Dcb_upc_EANSupplemental5>=20
+      upc_EANSupplemental5</INPUT><BR><INPUT=20
+      onclick=3D"setDecoderProperty('upcaReportCheckDigit', =
+theForm.cb_upcaReportCheckDigit.checked);"=20
+      type=3Dcheckbox name=3Dcb_upcaReportCheckDigit>=20
+      upcaReportCheckDigit</INPUT><BR><INPUT=20
+      onclick=3D"setDecoderProperty('upce0ConvertToUPCA', =
+theForm.cb_upce0ConvertToUPCA.checked);"=20
+      type=3Dcheckbox name=3Dcb_upce0ConvertToUPCA>=20
+      upce0ConvertToUPCA</INPUT><BR><INPUT=20
+      onclick=3D"setDecoderProperty('upce0ReportCheckDigit', =
+theForm.cb_upce0ReportCheckDigit.checked);"=20
+      type=3Dcheckbox name=3Dcb_upce0ReportCheckDigit>=20
+      upce0ReportCheckDigit</INPUT><BR><INPUT=20
+      onclick=3D"setDecoderProperty('upce1ConvertToUPCA', =
+theForm.cb_upce1ConvertToUPCA.checked);"=20
+      type=3Dcheckbox name=3Dcb_upce1ConvertToUPCA>=20
+      upce1ConvertToUPCA</INPUT><BR><INPUT=20
+      onclick=3D"setDecoderProperty('upce1ReportCheckDigit', =
+theForm.cb_upce1ReportCheckDigit.checked);"=20
+      type=3Dcheckbox name=3Dcb_upce1ReportCheckDigit>=20
+      upce1ReportCheckDigit</INPUT><BR><INPUT=20
+      onclick=3D"setDecoderProperty('code128CheckISBTTable', =
+theForm.cb_code128CheckISBTTable.checked);"=20
+      type=3Dcheckbox name=3Dcb_code128CheckISBTTable> <FONT=20
+      color=3Dblue>code128CheckISBTTable</FONT></INPUT><BR><INPUT=20
+      =
+onclick=3D"setDecoderProperty('compositeABUseUPCPreambleCheckDigitRules',=
+ theForm.cb_compositeABUseUPCPreambleCheckDigitRules.checked);"=20
+      type=3Dcheckbox =
+name=3Dcb_compositeABUseUPCPreambleCheckDigitRules> <FONT=20
+      =
+color=3Dblue>compositeABUseUPCPreambleCheckDigitRules</FONT></INPUT><BR><=
+INPUT=20
+      onclick=3D"setDecoderProperty('korean3Of5Redundancy', =
+theForm.cb_korean3Of5Redundancy.checked);"=20
+      type=3Dcheckbox name=3Dcb_korean3Of5Redundancy> <FONT=20
+      color=3Dblue>korean3Of5Redundancy</FONT></INPUT><BR><INPUT=20
+      onclick=3D"setDecoderProperty('macroMicroPDFReportAppendInfo', =
+theForm.cb_macroMicroPDFReportAppendInfo.checked);"=20
+      type=3Dcheckbox name=3Dcb_macroMicroPDFReportAppendInfo> <FONT=20
+      =
+color=3Dblue>macroMicroPDFReportAppendInfo</FONT></INPUT><BR><INPUT=20
+      onclick=3D"setDecoderProperty('macroMicroPDFBufferLabels', =
+theForm.cb_macroMicroPDFBufferLabels.checked);"=20
+      type=3Dcheckbox name=3Dcb_macroMicroPDFBufferLabels> <FONT=20
+      color=3Dblue>macroMicroPDFBufferLabels</FONT></INPUT><BR><INPUT=20
+      onclick=3D"setDecoderProperty('macroMicroPDFExclusive', =
+theForm.cb_macroMicroPDFExclusive.checked);"=20
+      type=3Dcheckbox name=3Dcb_macroMicroPDFExclusive> <FONT=20
+      color=3Dblue>macroMicroPDFExclusive</FONT></INPUT><BR><INPUT=20
+      onclick=3D"setDecoderProperty('macroPDFBufferLabels', =
+theForm.cb_macroPDFBufferLabels.checked);"=20
+      type=3Dcheckbox name=3Dcb_macroPDFBufferLabels> <FONT=20
+      color=3Dblue>macroPDFBufferLabels</FONT></INPUT><BR><INPUT=20
+      onclick=3D"setDecoderProperty('macroPDFExclusive', =
+theForm.cb_macroPDFExclusive.checked);"=20
+      type=3Dcheckbox name=3Dcb_macroPDFExclusive> <FONT=20
+      color=3Dblue>macroPDFExclusive</FONT></INPUT><BR><INPUT=20
+      onclick=3D"setDecoderProperty('macroPDFConvertToPDF417', =
+theForm.cb_macroPDFConvertToPDF417.checked);"=20
+      type=3Dcheckbox name=3Dcb_macroPDFConvertToPDF417> <FONT=20
+      color=3Dblue>macroPDFConvertToPDF417</FONT></INPUT><BR><INPUT=20
+      onclick=3D"setDecoderProperty('upc_EANConvertRSSToUPCEAN', =
+theForm.cb_upc_EANConvertRSSToUPCEAN.checked);"=20
+      type=3Dcheckbox name=3Dcb_upc_EANConvertRSSToUPCEAN> <FONT=20
+      color=3Dblue>upc_EANConvertRSSToUPCEAN</FONT></INPUT><BR><INPUT=20
+      onclick=3D"setDecoderProperty('webcodeDecodeGTSubtype', =
+theForm.cb_webcodeDecodeGTSubtype.checked);"=20
+      type=3Dcheckbox name=3Dcb_webcodeDecodeGTSubtype> <FONT=20
+      color=3Dblue>webcodeDecodeGTSubtype</FONT></INPUT><BR><INPUT=20
+      onclick=3D"setDecoderProperty('macroMicroPdfConvertToMicroPdf', =
+theForm.cb_macroMicroPdfConvertToMicroPdf.checked);"=20
+      type=3Dcheckbox name=3Dcb_macroMicroPdfConvertToMicroPdf> <FONT=20
+      =
+color=3Dblue>macroMicroPdfConvertToMicroPdf</FONT></INPUT><BR><INPUT=20
+      onclick=3D"setDecoderProperty('matrix2of5reportCheckDigit', =
+theForm.cb_matrix2of5reportCheckDigit.checked);"=20
+      type=3Dcheckbox name=3Dcb_matrix2of5reportCheckDigit> <FONT=20
+      color=3Dblue>matrix2of5reportCheckDigit</FONT></INPUT><BR><INPUT=20
+      onclick=3D"setDecoderProperty('matrix2of5verifyCheckDigit', =
+theForm.cb_matrix2of5verifyCheckDigit.checked);"=20
+      type=3Dcheckbox name=3Dcb_matrix2of5verifyCheckDigit> <FONT=20
+      =
+color=3Dblue>matrix2of5verifyCheckDigit</FONT></INPUT><BR></TD></TR></TBO=
+DY></TABLE></DIV>
+<P><B><A href=3D"javascript:toggleDiv(decoderPropertiesLength);">Decoder =
+
+Properties (Numerical Settings)</A></B><BR>
+<DIV style=3D"DISPLAY: none" id=3DdecoderPropertiesLength>
+<TABLE border=3D0>
+  <TBODY>
+  <TR>
+    <TD><INPUT=20
+      onclick=3D"setDecoderLengthProperty('codabarMaxLength', =
+theForm.num_codabarMaxLength.value);"=20
+      size=3D2 type=3Dnumber name=3Dnum_codabarMaxLength max=3D"55" =
+min=3D"0">=20
+      codabarMaxLength</INPUT><BR></TD>
+    <TD><INPUT=20
+      onclick=3D"setDecoderLengthProperty('codabarMinLength', =
+theForm.num_codabarMinLength.value);"=20
+      size=3D2 type=3Dnumber name=3Dnum_codabarMinLength max=3D"55" =
+min=3D"0">=20
+      codabarMinLength</INPUT><BR></TD></TR>
+  <TR>
+    <TD><INPUT=20
+      onclick=3D"setDecoderLengthProperty('code128MaxLength', =
+theForm.num_code128MaxLength.value);"=20
+      size=3D2 type=3Dnumber name=3Dnum_code128MaxLength max=3D"55" =
+min=3D"0">=20
+      code128MaxLength</INPUT><BR></TD>
+    <TD><INPUT=20
+      onclick=3D"setDecoderLengthProperty('code128MinLength', =
+theForm.num_code128MinLength.value);"=20
+      size=3D2 type=3Dnumber name=3Dnum_code128MinLength max=3D"55" =
+min=3D"0">=20
+      code128MinLength</INPUT><BR></TD></TR>
+  <TR>
+    <TD><INPUT=20
+      onclick=3D"setDecoderLengthProperty('code39MaxLength', =
+theForm.num_code39MaxLength.value);"=20
+      size=3D2 type=3Dnumber name=3Dnum_code39MaxLength max=3D"55" =
+min=3D"0">=20
+      code39MaxLength</INPUT><BR></TD>
+    <TD><INPUT=20
+      onclick=3D"setDecoderLengthProperty('code39MinLength', =
+theForm.num_code39MinLength.value);"=20
+      size=3D2 type=3Dnumber name=3Dnum_code39MinLength max=3D"55" =
+min=3D"0">=20
+      code39MinLength</INPUT><BR></TD></TR>
+  <TR>
+    <TD><INPUT=20
+      onclick=3D"setDecoderLengthProperty('code93MaxLength', =
+theForm.num_code93MaxLength.value);"=20
+      size=3D2 type=3Dnumber name=3Dnum_code93MaxLength max=3D"55" =
+min=3D"0">=20
+      code93MaxLength</INPUT><BR></TD>
+    <TD><INPUT=20
+      onclick=3D"setDecoderLengthProperty('code93MinLength', =
+theForm.num_code93MinLength.value);"=20
+      size=3D2 type=3Dnumber name=3Dnum_code93MinLength max=3D"55" =
+min=3D"0">=20
+      code93MinLength</INPUT><BR></TD></TR>
+  <TR>
+    <TD><INPUT=20
+      onclick=3D"setDecoderLengthProperty('d2Of5MaxLength', =
+theForm.num_d2Of5MaxLength.value);"=20
+      size=3D2 type=3Dnumber name=3Dnum_d2Of5MaxLength max=3D"55" =
+min=3D"0">=20
+      d2Of5MaxLength</INPUT><BR></TD>
+    <TD><INPUT=20
+      onclick=3D"setDecoderLengthProperty('d2Of5MinLength', =
+theForm.num_d2Of5MinLength.value);"=20
+      size=3D2 type=3Dnumber name=3Dnum_d2Of5MinLength max=3D"55" =
+min=3D"0">=20
+      d2Of5MinLength</INPUT><BR></TD></TR>
+  <TR>
+    <TD><INPUT=20
+      onclick=3D"setDecoderLengthProperty('i2Of5MaxLength', =
+theForm.num_i2Of5MaxLength.value);"=20
+      size=3D2 type=3Dnumber name=3Dnum_i2Of5MaxLength max=3D"55" =
+min=3D"0">=20
+      i2Of5MaxLength</INPUT><BR></TD>
+    <TD><INPUT=20
+      onclick=3D"setDecoderLengthProperty('i2Of5MinLength', =
+theForm.num_i2Of5MinLength.value);"=20
+      size=3D2 type=3Dnumber name=3Dnum_i2Of5MinLength max=3D"55" =
+min=3D"0">=20
+      i2Of5MinLength</INPUT><BR></TD></TR>
+  <TR>
+    <TD><INPUT=20
+      onclick=3D"setDecoderLengthProperty('korean3of5MaxLength', =
+theForm.num_korean3of5MaxLength.value);"=20
+      size=3D2 type=3Dnumber name=3Dnum_korean3of5MaxLength max=3D"55" =
+min=3D"0">=20
+      korean3of5MaxLength</INPUT><BR></TD>
+    <TD><INPUT=20
+      onclick=3D"setDecoderLengthProperty('korean3of5MinLength', =
+theForm.num_korean3of5MinLength.value);"=20
+      size=3D2 type=3Dnumber name=3Dnum_korean3of5MinLength max=3D"55" =
+min=3D"0">=20
+      korean3of5MinLength</INPUT><BR></TD></TR>
+  <TR>
+    <TD><INPUT=20
+      onclick=3D"setDecoderLengthProperty('msiMaxLength', =
+theForm.num_msiMaxLength.value);"=20
+      size=3D2 type=3Dnumber name=3Dnum_msiMaxLength max=3D"55" =
+min=3D"0">=20
+      msiMaxLength</INPUT><BR></TD>
+    <TD><INPUT=20
+      onclick=3D"setDecoderLengthProperty('msiMinLength', =
+theForm.num_msiMinLength.value);"=20
+      size=3D2 type=3Dnumber name=3Dnum_msiMinLength max=3D"55" =
+min=3D"0">=20
+      msiMinLength</INPUT><BR></TD></TR>
+  <TR>
+    <TD><INPUT=20
+      onclick=3D"setDecoderLengthProperty('matrix2of5MaxLength', =
+theForm.num_matrix2of5MaxLength.value);"=20
+      size=3D2 type=3Dnumber name=3Dnum_matrix2of5MaxLength max=3D"55" =
+min=3D"0"> <FONT=20
+      color=3Dblue>matrix2of5MaxLength</FONT></INPUT><BR></TD>
+    <TD><INPUT=20
+      onclick=3D"setDecoderLengthProperty('matrix2of5MinLength', =
+theForm.num_matrix2of5MinLength.value);"=20
+      size=3D2 type=3Dnumber name=3Dnum_matrix2of5MinLength max=3D"55" =
+min=3D"0"> <FONT=20
+      color=3Dblue>matrix2of5MinLength</FONT></INPUT><BR></TD></TR>
+  <TR>
+    <TD><INPUT=20
+      onclick=3D"setDecoderLengthProperty('upc_EANRetryCount', =
+theForm.num_upc_EANRetryCount.value);"=20
+      size=3D2 type=3Dnumber name=3Dnum_upc_EANRetryCount max=3D"20" =
+min=3D"2">=20
+      upc_EANRetryCount</INPUT><BR></TD>
+    <TD><INPUT=20
+      onclick=3D"setDecoderLengthProperty('signatureImageQuality', =
+theForm.num_signatureImageQuality.value);"=20
+      size=3D3 type=3Dnumber name=3Dnum_signatureImageQuality =
+max=3D"100" min=3D"0"> <FONT=20
+      color=3Dblue>signatureImageQuality</FONT></INPUT><BR></TD></TR>
+  <TR>
+    <TD><INPUT=20
+      onclick=3D"setDecoderLengthProperty('signatureImageWidth', =
+theForm.num_signatureImageWidth.value);"=20
+      size=3D4 type=3Dnumber name=3Dnum_signatureImageWidth max=3D"1000" =
+min=3D"100">=20
+      <FONT color=3Dblue>signatureImageWidth</FONT></INPUT><BR></TD>
+    <TD><INPUT=20
+      onclick=3D"setDecoderLengthProperty('signatureImageHeight', =
+theForm.num_signatureImageHeight.value);"=20
+      size=3D4 type=3Dnumber name=3Dnum_signatureImageHeight =
+max=3D"1000" min=3D"100">=20
+      <FONT =
+color=3Dblue>signatureImageHeight</FONT></INPUT><BR></TD></TR>
+  <TR>
+    <TD><INPUT=20
+      onclick=3D"setDecoderLengthProperty('signatureImageSize', =
+theForm.num_signatureImageSize.value);"=20
+      size=3D3 type=3Dnumber name=3Dnum_signatureImageSize max=3D"100" =
+min=3D"0"> <FONT=20
+      color=3Dblue>signatureImageSize</FONT></INPUT><BR></TD>
+    <TD><INPUT=20
+      onclick=3D"setDecoderLengthProperty('upc_EANSecurityLevel', =
+theForm.num_upc_EANSecurityLevel.value);"=20
+      size=3D2 type=3Dnumber name=3Dnum_upc_EANSecurityLevel max=3D"3" =
+min=3D"0"> <FONT=20
+      =
+color=3Dblue>upc_EANSecurityLevel</FONT></INPUT><BR></TD></TR></TBODY></T=
+ABLE></DIV>
+<P><B><A href=3D"javascript:toggleDiv(decoderPropertiesOther);">Decoder =
+Properties=20
+(Other Settings)</A></B><BR>
+<DIV style=3D"DISPLAY: none" id=3DdecoderPropertiesOther>
+<TABLE>
+  <TBODY>
+  <TR>
+    <TD>code11CheckDigitCount </TD>
+    <TD><INPUT=20
+      onclick=3D"setDecoderOtherProperty('code11CheckDigitCount', =
+'unspecified');"=20
+      CHECKED type=3Dradio name=3Dcode11CheckDigitCount> =
+unspecified</INPUT> <INPUT=20
+      onclick=3D"setDecoderOtherProperty('code11CheckDigitCount', =
+'none');"=20
+      type=3Dradio name=3Dcode11CheckDigitCount> none</INPUT> <INPUT=20
+      onclick=3D"setDecoderOtherProperty('code11CheckDigitCount', =
+'one');"=20
+      type=3Dradio name=3Dcode11CheckDigitCount> one</INPUT> <INPUT=20
+      onclick=3D"setDecoderOtherProperty('code11CheckDigitCount', =
+'two');"=20
+      type=3Dradio name=3Dcode11CheckDigitCount> two</INPUT> </TD></TR>
+  <TR>
+    <TD>i2Of5VerifyCheckDigit </TD>
+    <TD><INPUT=20
+      onclick=3D"setDecoderOtherProperty('i2Of5VerifyCheckDigit', =
+'unspecified');"=20
+      CHECKED type=3Dradio name=3Di2Of5VerifyCheckDigit> =
+unspecified</INPUT> <INPUT=20
+      onclick=3D"setDecoderOtherProperty('i2Of5VerifyCheckDigit', =
+'none');"=20
+      type=3Dradio name=3Di2Of5VerifyCheckDigit> none</INPUT> <INPUT=20
+      onclick=3D"setDecoderOtherProperty('i2Of5VerifyCheckDigit', =
+'uss');"=20
+      type=3Dradio name=3Di2Of5VerifyCheckDigit> uss</INPUT> <INPUT=20
+      onclick=3D"setDecoderOtherProperty('i2Of5VerifyCheckDigit', =
+'opcc');"=20
+      type=3Dradio name=3Di2Of5VerifyCheckDigit> opcc</INPUT> </TD></TR>
+  <TR>
+    <TD>msiCheckDigits </TD>
+    <TD><INPUT=20
+      onclick=3D"setDecoderOtherProperty('msiCheckDigits', =
+'unspecified');"=20
+      CHECKED type=3Dradio name=3DmsiCheckDigits> unspecified</INPUT> =
+<INPUT=20
+      onclick=3D"setDecoderOtherProperty('msiCheckDigits', 'one');" =
+type=3Dradio=20
+      name=3DmsiCheckDigits> one</INPUT> <INPUT=20
+      onclick=3D"setDecoderOtherProperty('msiCheckDigits', 'two');" =
+type=3Dradio=20
+      name=3DmsiCheckDigits> two</INPUT> </TD></TR>
+  <TR>
+    <TD>msiCheckDigitScheme </TD>
+    <TD><INPUT=20
+      onclick=3D"setDecoderOtherProperty('msiCheckDigitScheme', =
+'unspecified');"=20
+      CHECKED type=3Dradio name=3DmsiCheckDigitScheme> =
+unspecified</INPUT> <INPUT=20
+      onclick=3D"setDecoderOtherProperty('msiCheckDigitScheme', =
+'mod11');"=20
+      type=3Dradio name=3DmsiCheckDigitScheme> mod11</INPUT> <INPUT=20
+      onclick=3D"setDecoderOtherProperty('msiCheckDigitScheme', =
+'mod10');"=20
+      type=3Dradio name=3DmsiCheckDigitScheme> mod10</INPUT> </TD></TR>
+  <TR>
+    <TD>upc_EANSecurityLevel </TD>
+    <TD><INPUT=20
+      onclick=3D"setDecoderOtherProperty('upc_EANSecurityLevel', =
+'unspecified');"=20
+      CHECKED type=3Dradio name=3Dupc_EANSecurityLevel> =
+unspecified</INPUT> <INPUT=20
+      onclick=3D"setDecoderOtherProperty('upc_EANSecurityLevel', =
+'none');"=20
+      type=3Dradio name=3Dupc_EANSecurityLevel> none</INPUT> <INPUT=20
+      onclick=3D"setDecoderOtherProperty('upc_EANSecurityLevel', =
+'ambiguous');"=20
+      type=3Dradio name=3Dupc_EANSecurityLevel> ambiguous</INPUT> <INPUT =
+
+      onclick=3D"setDecoderOtherProperty('upc_EANSecurityLevel', =
+'all');"=20
+      type=3Dradio name=3Dupc_EANSecurityLevel> all</INPUT> </TD></TR>
+  <TR>
+    <TD>upc_EANSupplementalMode </TD>
+    <TD><INPUT=20
+      onclick=3D"setDecoderOtherProperty('upc_EANSupplementalMode', =
+'unspecified');"=20
+      CHECKED type=3Dradio name=3Dupc_EANSupplementalMode> =
+unspecified</INPUT>=20
+      <INPUT=20
+      onclick=3D"setDecoderOtherProperty('upc_EANSupplementalMode', =
+'none');"=20
+      type=3Dradio name=3Dupc_EANSupplementalMode> none</INPUT> <INPUT=20
+      onclick=3D"setDecoderOtherProperty('upc_EANSupplementalMode', =
+'auto');"=20
+      type=3Dradio name=3Dupc_EANSupplementalMode> auto</INPUT> <INPUT=20
+      onclick=3D"setDecoderOtherProperty('upc_EANSupplementalMode', =
+'always');"=20
+      type=3Dradio name=3Dupc_EANSupplementalMode> always</INPUT> <INPUT =
+
+      onclick=3D"setDecoderOtherProperty('upc_EANSupplementalMode', =
+'smart');"=20
+      type=3Dradio name=3Dupc_EANSupplementalMode> <FONT=20
+      color=3Dblue>smart</FONT></INPUT> <INPUT=20
+      onclick=3D"setDecoderOtherProperty('upc_EANSupplementalMode', =
+'378or379');"=20
+      type=3Dradio name=3Dupc_EANSupplementalMode> <FONT=20
+      color=3Dblue>378or379</FONT></INPUT> <INPUT=20
+      onclick=3D"setDecoderOtherProperty('upc_EANSupplementalMode', =
+'978or979');"=20
+      type=3Dradio name=3Dupc_EANSupplementalMode> <FONT=20
+      color=3Dblue>978or979</FONT></INPUT> <INPUT=20
+      onclick=3D"setDecoderOtherProperty('upc_EANSupplementalMode', =
+'977');"=20
+      type=3Dradio name=3Dupc_EANSupplementalMode> <FONT=20
+      color=3Dblue>977</FONT></INPUT> <INPUT=20
+      onclick=3D"setDecoderOtherProperty('upc_EANSupplementalMode', =
+'414or419or434or439');"=20
+      type=3Dradio name=3Dupc_EANSupplementalMode> <FONT=20
+      color=3Dblue>414or419or434or439</FONT></INPUT> </TD></TR>
+  <TR>
+    <TD>upcaPreamble </TD>
+    <TD><INPUT=20
+      onclick=3D"setDecoderOtherProperty('upcaPreamble', =
+'unspecified');" CHECKED=20
+      type=3Dradio name=3DupcaPreamble> unspecified</INPUT> <INPUT=20
+      onclick=3D"setDecoderOtherProperty('upcaPreamble', 'none');" =
+type=3Dradio=20
+      name=3DupcaPreamble> none</INPUT> <INPUT=20
+      onclick=3D"setDecoderOtherProperty('upcaPreamble', 'systemChar');" =
+
+      type=3Dradio name=3DupcaPreamble> systemChar</INPUT> <INPUT=20
+      onclick=3D"setDecoderOtherProperty('upcaPreamble', =
+'countryAndSystemChars');"=20
+      type=3Dradio name=3DupcaPreamble> countryAndSystemChars</INPUT> =
+</TD></TR>
+  <TR>
+    <TD>upce0Preamble </TD>
+    <TD><INPUT=20
+      onclick=3D"setDecoderOtherProperty('upce0Preamble', =
+'unspecified');" CHECKED=20
+      type=3Dradio name=3Dupce0Preamble> unspecified</INPUT> <INPUT=20
+      onclick=3D"setDecoderOtherProperty('upce0Preamble', 'none');" =
+type=3Dradio=20
+      name=3Dupce0Preamble> none</INPUT> <INPUT=20
+      onclick=3D"setDecoderOtherProperty('upce0Preamble', =
+'systemChar');"=20
+      type=3Dradio name=3Dupce0Preamble> systemChar</INPUT> <INPUT=20
+      onclick=3D"setDecoderOtherProperty('upce0Preamble', =
+'countryAndSystemChars');"=20
+      type=3Dradio name=3Dupce0Preamble> countryAndSystemChars</INPUT> =
+</TD></TR>
+  <TR>
+    <TD>upce1Preamble </TD>
+    <TD><INPUT=20
+      onclick=3D"setDecoderOtherProperty('upce1Preamble', =
+'unspecified');" CHECKED=20
+      type=3Dradio name=3Dupce1Preamble> unspecified</INPUT> <INPUT=20
+      onclick=3D"setDecoderOtherProperty('upce1Preamble', 'none');" =
+type=3Dradio=20
+      name=3Dupce1Preamble> none</INPUT> <INPUT=20
+      onclick=3D"setDecoderOtherProperty('upce1Preamble', =
+'systemChar');"=20
+      type=3Dradio name=3Dupce1Preamble> systemChar</INPUT> <INPUT=20
+      onclick=3D"setDecoderOtherProperty('upce1Preamble', =
+'countryAndSystemChars');"=20
+      type=3Dradio name=3Dupce1Preamble> countryAndSystemChars</INPUT> =
+</TD></TR>
+  <TR>
+    <TD><FONT color=3Dblue>code128ISBT128ConcatMode</FONT> </TD>
+    <TD><INPUT=20
+      onclick=3D"setDecoderOtherProperty('code128ISBT128ConcatMode', =
+'unspecified');"=20
+      CHECKED type=3Dradio name=3Dcode128ISBT128ConcatMode> =
+unspecified</INPUT>=20
+      <INPUT=20
+      onclick=3D"setDecoderOtherProperty('code128ISBT128ConcatMode', =
+'never');"=20
+      type=3Dradio name=3Dcode128ISBT128ConcatMode> <FONT=20
+      color=3Dblue>never</FONT></INPUT> <INPUT=20
+      onclick=3D"setDecoderOtherProperty('code128ISBT128ConcatMode', =
+'always');"=20
+      type=3Dradio name=3Dcode128ISBT128ConcatMode> <FONT=20
+      color=3Dblue>always</FONT></INPUT> <INPUT=20
+      onclick=3D"setDecoderOtherProperty('code128ISBT128ConcatMode', =
+'auto');"=20
+      type=3Dradio name=3Dcode128ISBT128ConcatMode> <FONT=20
+      color=3Dblue>auto</FONT></INPUT> </TD></TR>
+  <TR>
+    <TD><FONT color=3Dblue>upcEANBooklandFormat</FONT> </TD>
+    <TD><INPUT=20
+      onclick=3D"setDecoderOtherProperty('upcEANBooklandFormat', =
+'unspecified');"=20
+      CHECKED type=3Dradio name=3Dupc_EANBooklandFormat> =
+unspecified</INPUT> <INPUT=20
+      onclick=3D"setDecoderOtherProperty('upcEANBooklandFormat', =
+'Isbn10');"=20
+      type=3Dradio name=3Dupc_EANBooklandFormat> <FONT=20
+      color=3Dblue>Isbn10</FONT></INPUT> <INPUT=20
+      onclick=3D"setDecoderOtherProperty('upcEANBooklandFormat', =
+'Isbn13');"=20
+      type=3Dradio name=3Dupc_EANBooklandFormat> <FONT=20
+      color=3Dblue>Isbn13</FONT></INPUT> </TD></TR>
+  <TR>
+    <TD><FONT color=3Dblue>compositeAbUccLinkMode</FONT> </TD>
+    <TD><INPUT=20
+      onclick=3D"setDecoderOtherProperty('compositeAbUccLinkMode', =
+'unspecified');"=20
+      CHECKED type=3Dradio name=3DcompositeAbUccLinkMode> =
+unspecified</INPUT> <INPUT=20
+      onclick=3D"setDecoderOtherProperty('compositeAbUccLinkMode', =
+'never');"=20
+      type=3Dradio name=3DcompositeAbUccLinkMode> <FONT=20
+      color=3Dblue>never</FONT></INPUT> <INPUT=20
+      onclick=3D"setDecoderOtherProperty('compositeAbUccLinkMode', =
+'always');"=20
+      type=3Dradio name=3DcompositeAbUccLinkMode> <FONT=20
+      color=3Dblue>always</FONT></INPUT> <INPUT=20
+      onclick=3D"setDecoderOtherProperty('compositeAbUccLinkMode', =
+'auto');"=20
+      type=3Dradio name=3DcompositeAbUccLinkMode> <FONT=20
+      color=3Dblue>auto</FONT></INPUT> </TD></TR></TBODY></TABLE></DIV>
+<P><B><A href=3D"javascript:toggleDiv(rsmDiv);">RSM Get / Set =
+Tests:</A></B><BR>
+<DIV style=3D"DISPLAY: block" id=3DrsmDiv><SELECT id=3Dattlist=20
+onchange=3DonSuggestValues();> <OPTION selected>PagingActivate</OPTION>=20
+  <OPTION>PagingEnable</OPTION> <OPTION>PagingBeepSequence</OPTION>=20
+  <OPTION>ScanLineWidth</OPTION> <OPTION>DecodeFeedback</OPTION>=20
+  <OPTION>ModelNumber</OPTION> <OPTION>SerialNumber</OPTION>=20
+  <OPTION>DateOfManufacture</OPTION> <OPTION>DateOfService</OPTION>=20
+  <OPTION>BluetoothAddress</OPTION> =
+<OPTION>BluetoothAuthentication</OPTION>=20
+  <OPTION>BluetoothEncryption</OPTION> <OPTION>BluetoothPINCode</OPTION> =
+
+  <OPTION>BluetoothReconnectAttempts</OPTION>=20
+  <OPTION>BluetoothBeepOnReconnectAttempt</OPTION>=20
+  <OPTION>BluetoothHidAutoReconnect</OPTION>=20
+  <OPTION>BluetoothFriendlyName</OPTION> =
+<OPTION>BluetoothPINCodeType</OPTION>=20
+  <OPTION>BluetoothInquiryMode</OPTION> <OPTION>Mems</OPTION>=20
+  <OPTION>ProximityEnable</OPTION> <OPTION>ProximityDistance</OPTION>=20
+  <OPTION>LowBatteryIndication</OPTION> =
+<OPTION>ScanTriggerWakeup</OPTION>=20
+  <OPTION>BluetoothAutoReconnect</OPTION>=20
+  <OPTION>LowBatteryIndicationCycle</OPTION> =
+<OPTION>BTDisconnect</OPTION>=20
+  <OPTION>BTUnpair</OPTION> <OPTION>IgnoreCode128USPS</OPTION>=20
+  <OPTION>ProximityContinuous</OPTION> <OPTION>GoodScansDelay</OPTION>=20
+  <OPTION>ForceSavePairingBarcode</OPTION> =
+<OPTION>FirmwareVersion</OPTION>=20
+  <OPTION>DeviceClass</OPTION> <OPTION>BatteryStatus</OPTION>=20
+  <OPTION>BatteryCapacity</OPTION> <OPTION>BatteryID</OPTION></SELECT> =
+<INPUT onclick=3DonGet(); value=3D"Get Specified Parameter" =
+type=3Dbutton><INPUT onclick=3DgetAllRSM(); value=3D"Mark all RSM =
+Parameters for retrieval" type=3Dbutton><BR><INPUT=20
+id=3DattValue onfocus=3DClearValueField(); value=3D"Set to Value..." =
+size=3D27> <INPUT onclick=3DonSet(); value=3D"Set RSM Parameter" =
+type=3Dbutton>
+<P><B>Legal Values:</B> <SPAN id=3Dlegal>Wide; =
+Narrow</SPAN><BR><B>Attribute:</B>=20
+<SPAN id=3Datt></SPAN><BR>
+<DIV id=3DrsmMsg></DIV><BR></DIV></FORM>
+<P><A href=3D"javascript:location.reload();">Refresh the page</A> | <A=20
+href=3D"http://www.jrq768.wtgdev.net/">Main JRQ768 Page</A> <BR>This =
+page has been=20
+modified to work either with ActiveX or with an inherent 'Generic' =
+object.=20
+</P></BODY></HTML>

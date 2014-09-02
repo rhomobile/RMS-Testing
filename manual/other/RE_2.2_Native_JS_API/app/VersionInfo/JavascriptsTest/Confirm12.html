@@ -1,0 +1,34 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+<title>Confirm box test</title>
+<style type="text/css">
+body {
+text-align:center;
+}
+</style>
+<script type="text/javascript">
+function test() {
+	var ret = confirm("Are you sure?");
+	if (ret == 1) {
+		document.getElementById("answer").innerHTML = "OK";
+	}
+	else {
+		document.getElementById("answer").innerHTML = "Cancel";
+	}
+}
+function useragent() {
+	document.getElementById("ua").innerHTML = navigator.userAgent;
+}
+</script>
+</head>
+<body onload="useragent();">
+<h2><a href="#" onclick="test();">Click here to confirm</a></h2>
+<div id="answer">A confirmation dialog should appear.</div>
+<p>&nbsp;</p>
+<p><a href="#" onclick="alert('Something works!');">alert</a></p>
+<p>&nbsp;</p>
+<div id="ua"></div>
+</body>
+</html>

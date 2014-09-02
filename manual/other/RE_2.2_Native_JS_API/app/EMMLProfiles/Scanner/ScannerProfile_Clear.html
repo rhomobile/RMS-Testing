@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+<!--<META HTTP-Equiv="EMMLProfile" Content="name:myScanner;import:url('scanner.emmp');">
+<META HTTP-Equiv="EMMLProfile" Content="apply:myScanner.OnlyEAN8Enabled;">-->
+<META HTTP-Equiv="scanner" Content="DecodeEvent:url('javascript:doScan('%s', '%s', %s, '%s', '%s');')">
+
+<script language="javascript">
+
+var Generic = new ActiveXObject("PocketBrowser.Generic");
+
+  function doScan(data, source, type, time, length)
+   {
+   message.innerHTML="Decoded data is :"+data + "\nSource: " + source + "\nType: " + type + "\nTime: " + time + "Length: " + length;
+   }
+   
+   function doTest()
+   {
+       Generic.InvokeMETAFunction('Scanner','enabled;start');
+   }
+   
+   function stopScan()
+   {
+   Generic.InvokeMETAFunction('Scanner','disabled;stop');
+   }
+   
+   function clearProfile()
+   {
+       Generic.InvokeMETAFunction('EMMLProfile', 'clear:myScanner');
+   }
+   
+   function doImportProfile()
+   {
+    Generic.InvokeMETAFunction('EMMLProfile', "name:myScanner;import:url('scanner.emmp');");
+   }
+
+function doApplyProfile(profile)
+    {
+       
+       alert('Apply:'+profile);
+       Generic.InvokeMETAFunction('EMMLProfile', 'Apply:'+profile);
+   }
+
+</script>     
+</head>
+<body>
+<h3>Named Barcode EMML Profile <b>Clear</b> Test</h3>
+<h3>Only EAN8 Decoder is Enabled and this should persist across pages within the same instance of Pocket Browser 3.0.</h3>
+<h3>Scan to check if you are able to decode EAN8 barcode.</h3>
+<div id="message"></div>
+<INPUT TYPE="button" VALUE="Start Scan" ONCLICK="doTest();">
+<INPUT TYPE="button" VALUE="Stop Scan" ONCLICK="stopScan();">
+<br />
+    <a href="Javascript:doImportProfile();">Import Profile</a><br />
+    <a href="Javascript:doApplyProfile('myScanner.AllBarcodesDisabled');">All decoders disabled</a><br />
+    <a href="Javascript:doApplyProfile('myScanner.AllBarcodesEnabled');">All decoders enabled</a><br />
+    <a href="Javascript:doApplyProfile('myScanner.OnlyEAN8Enabled');">Apply EAN8 decoders enabled</a><br />
+  <br>
+<h3>Browse to another page to check for EMML profile persistance.</h3>
+<h4><a href="PersistantScanner_Test.html">Click here to go to another page.</a></h4>
+<input type=button value="Clear Imported Profile" onclick="clearProfile();">
+<h3>After clearing the Profile you should not be able to scan the specified barcode.</h3>
+<hr />
+<a href="../EMMLProfilesIndex.html">Back to EMML Profile Index</a>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+<TITLE>Application Tests</TITLE>
+<script type="text/javascript">
+var Generic = new ActiveXObject("PocketBrowser.Generic");
+function callmethod()
+{
+
+Generic.InvokeMETAFunction('SignatureCapture', 'Visibility:Visible');
+Generic.InvokeMETAFunction('Scanner', 'enabled:SCN1;start');
+Generic.InvokeMETAFunction('battery', 'Visibility:Visible');
+
+}	  
+
+function callJSOmethod()
+{
+
+battery.visibility = 'visible'; 
+signatureCapture.visibility ='Visible';
+
+}	
+	
+</script>
+</head>
+<body>
+<H1>Version Tests</H1>
+<P>
+<div id="outputDiv">Message</div>
+
+
+
+
+
+<INPUT align="center" type="button" value="GenericActiveX" onclick="callmethod();"><br><br>
+
+<INPUT align="center" type="button" value="JSobject" onclick="callJSOmethod();"><br><br>
+
+<A HREF="VersionIndex.html">Go to Version index Main Page</A><br />
+</body>
+</html>
+
+
+

@@ -1,0 +1,62 @@
+.Linear{
+    gesture-type:linear;
+    gesture-id:Scan1;
+    gesture-diagnostics:true;
+    gesture-sensitivity:80;
+    gesture-start-x:50;
+    gesture-start-y:50;
+    gesture-end-x:100;
+    gesture-end-y:100;
+    gesture:create;
+    gesture-detected:url('Javascript:onGesture('%s','%s');');
+    
+    
+}
+
+.MSR{
+    cardreader:open;
+    cardreader-modulename:MSR7000;
+    cardreader-readevent:url('javascript:MyReadEvent('%s', '%s');');
+}
+
+.DCR{
+    cardreader:open;
+    cardreader-pinEntry:ON;
+    cardreader-modulename:MSR7000;
+    cardreader-pintimeout:0x2710;
+    cardreader-readevent:url('javascript:MyReadEvent('%s', '%s');');
+}
+
+.AddressBarHide{
+    addressbar-left:30;
+    addressbar-top:50;
+    addressbar-width:200;
+    addressbar-visibility:hidden;
+}
+
+.AddressBar1{
+    addressbar-left:30;
+    addressbar-top:50;
+    addressbar-width:200;
+    addressbar-visibility:visible;
+}
+
+.Battery{
+    battery-Left:50;
+    battery-Top:50;
+    battery-IconPosition:Top;
+    battery-Iconposition:right;
+    battery-color:#FF0000;
+    battery-visibility:visible;
+    
+ }
+ 
+   .BatteryHide{
+    battery-Left:50;
+    battery-Top:50;
+    battery-IconPosition:Top;
+    battery-Iconposition:right;
+    battery-color:#FF0000;
+    battery-visibility:hidden;
+    
+ }

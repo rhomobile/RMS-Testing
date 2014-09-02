@@ -1,0 +1,59 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+<title>HTML5 geolocation</title>
+<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0" />
+<meta http-equiv="ScreenOrientation" content="autorotate:disabled">
+
+<script>
+var watchId;
+
+function startLocationWatch()
+{
+	watchId = navigator.geolocation.watchPosition(scrollMap, handleError, {highAccuracy:false});
+}
+
+function scrollMap(p) 
+{
+	var map='http://maps.googleapis.com/maps/api/staticmap?zoom=9&size=400x200&sensor=true&center='+p.coords.latitude+','+p.coords.longitude;
+	document.getElementById("geoMap").src=map;
+	document.getElementById("geolocationData").innerHTML='Latitude: ' + p.coords.latitude + '<br>' + 'Longitude: ' + p.coords.longitude + '<br>' + 'Accuracy: ' + p.coords.accuracy + '<br>';
+}
+
+function handleError(error)
+{
+	alert(error);
+}
+
+function stopLocationWatch()
+{
+	navigator.geolocation.clearWatch(watchId);
+	document.getElementById("geolocationData").innerHTML='Stopped';
+}
+
+function getCurrentPosition()
+{
+	 navigator.geolocation.getCurrentPosition(scrollMap);
+}
+
+
+</script>
+<style type="text/css">
+
+</style>
+</head>
+<body>
+	<br><br>
+	<h1 align="center"> RhoElements HTML5 Geolocation example </h1>
+	<br><br><br><br><br><br>
+	<p align="center"><img id="geoMap" src="http://maps.googleapis.com/maps/api/staticmap?center=0,0&zoom=0&size=400x200&sensor=false" alt="Equator" /></p>
+	<br>
+	<div id="geolocationData">Stopped</div>
+	<br>
+	<button onclick="startLocationWatch()">Start Geolocation watch</button>
+	<button onclick="stopLocationWatch()">Stop Geolocation watch</button><br>
+	<button onclick="getCurrentPosition()">Get Current Position</button><br>
+	<a href="http://maps.google.com">Google Maps</a>
+</body>
+</html>

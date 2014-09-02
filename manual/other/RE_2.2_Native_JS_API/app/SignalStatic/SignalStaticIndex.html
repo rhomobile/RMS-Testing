@@ -1,0 +1,143 @@
+<HTML>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+<TITLE>Signal Test Index Page</TITLE>
+
+
+<script>
+    var a = 0;
+    function OnBattery(AC, main, backup) 
+    {
+        a = a + 1;
+
+        bat.innerHTML = "AC: " + AC + "\<BR>main:" + main + "\<BR>backup: " + backup + "\<BR>Count: " + a;
+        return;
+    }
+
+
+    function OnSignal(signal, ESSID, MAC, AdapterName, DHCPServer, DHCPStatic, Gateway, IPAddress, RSSI, SubnetMask, Wins) {
+        a = a + 1;
+        sig.innerHTML = "Signal: " + signal
+								+ "<BR>ESSID:" + ESSID
+								+ "<BR>MAC: " + MAC
+								+ "<BR>AdapterName: " + AdapterName
+								+ "<BR>DHCPServer: " + DHCPServer
+								+ "<BR>DHCPStatic: " + DHCPStatic
+								+ "<BR>Gateway: " + Gateway
+								+ "<BR>IPAddress: " + IPAddress
+								+ "<BR>RSSI: " + RSSI
+								+ "<BR>SubnetMask: " + SubnetMask
+								+ "<BR>Wins: " + Wins
+								+ "<BR>Count: " + a
+        return;
+    }
+</script>
+</HEAD>
+
+<BODY BGCOLOR="#FFFFEA" TEXT="#0000A0" LINK="#FF0000" VLINK="#808080" ALINK="#008040">
+<H2>Signal Indicator Test Site</H2>
+
+<table width="100">
+<tr>
+<td><A HREF="./SignalJS.html">SignalApplcationJS</A></td>
+</tr>
+<tr>
+<td><A HREF="./Signal.html">SignalApplcation</A></td>
+</tr>
+<tr>
+<td><A HREF="./SignalActiveX.html">SignalApplcationActiveX</A></td>
+</tr>
+<tr>
+<td><A HREF="./Signal_Static1.1.html">EMML1.1</A></td>
+</tr>
+<!--<tr>
+<td><A HREF="./Signal_default.html">Default</A></td>
+</tr>
+<tr>
+<td><A HREF="./Signal_visibiltyvisible.html">visibilty=visible</A></td>
+</tr>
+<tr>
+<td><A HREF="./Signal_left50.html">left=50</A></td>
+</tr>
+<tr>
+<td><A HREF="./Signal_top100.html">top=100</A></td>
+</tr>
+
+<tr>
+<td><A HREF="./Signal_PositionNULL.html">left,top=nUll</A></td>
+</tr>
+<tr>
+<td><A HREF="./Signal_Positioninvalid.html">left=-60,top=bb</A></td>
+</tr>
+
+
+<tr>
+<td><A HREF="./Signal_RGBvalid.html">RGB=Blue</A></td>
+</tr>
+
+<tr>
+<td><A HREF="./Signal_RGBNULL.html">RGB=NULL</A></td>
+</tr>
+<tr>
+<td><A HREF="./Signal_RGBInvalid.html">RGB=Invalid</A></td>
+</tr>
+
+
+<tr>
+<td><A HREF="./Signal_visibiltyhidden.html">visibilty=hidden</A></td>
+</tr>
+<tr>
+<td><A HREF="./Signal_visibiltyinvalid.html">Visibilty Invalid</A></td>
+</tr>
+<tr>
+<td><A HREF="./Signal_visibiltyNULL.html">Visibilty empty(NULL) value</A></td>
+</tr>
+
+
+
+
+
+
+
+<tr>
+<td><A HREF="./Signal_bottomRight.html">Icon=bottom,graph=right</A></td>
+</tr>
+<tr>
+<td><A HREF="./Signal_bottomLeft.html">Icon=bottom,graph=left</A></td>
+</tr>
+
+<tr>
+<td><A HREF="./Signal_topRight.html">Icon=top,graph=right</A></td>
+</tr>
+<tr>
+<td><A HREF="./Signal_topLeft.html">Icon=top,graph=left</A></td>
+</tr>
+
+<tr>
+<td><A HREF="./Signal_rightTop.html">Icon=right,graph=top</A></td>
+</tr>
+<tr>
+<td><A HREF="./Signal_rightBottom.html">Icon=right,graph=bottom</A></td>
+</tr>
+
+<tr>
+<td><A HREF="./Signal_leftTop.html">Icon=left,graph=top</A></td>
+</tr>
+<tr>
+<td><A HREF="./Signal_leftBottom.html">Icon=left,graph=bottom</A></td>
+</tr>
+
+<tr>
+<td><A HREF="./Signal_leftLeft.html">Invalid Icon=left,graph=left</A></td>
+</tr>
+
+<tr>
+<td><A HREF="../Index.html">Back</A></td>
+</tr>-->
+<BR><BR>
+
+<P><INPUT TYPE="button" VALUE="Back" ONCLICK="location.href='../INDEX.HTML'"></P>
+</table>
+</body>
+</HTML>

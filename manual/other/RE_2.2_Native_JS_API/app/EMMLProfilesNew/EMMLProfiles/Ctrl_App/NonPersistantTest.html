@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+    <title>A Control & Apperance EMML Profiles Test Page</title>
+   <!-- <META HTTP-Equiv="EMMLProfile" Content="source:url('../../../EMMLProfiles/Ctrl_App/CtrlApp.emmp'); import:Myprofile;">
+    <META HTTP-Equiv="EMMLProfile" Content="apply:Myprofile.SIP;">-->
+    
+    <!--
+  <META HTTP-Equiv="EMMLProfile" Content="Apply:AddressBar1;">
+  <META HTTP-Equiv="EMMLProfile" Content="Apply:BottomCommandArea1;">-->
+  <script language=javascript type="text/javascript">
+    var Generic = new ActiveXObject("PocketBrowser.Generic");
+    function Quit() 
+    {
+        Generic.InvokeMETAFunction("Application", "Quit");
+    }
+
+    function doApplyProfile(profile) 
+    {
+        
+        Generic.InvokeMETAFunction('EMMLProfile', 'Apply:' + profile);
+    }
+   
+</script>
+
+</head>
+<body>
+<h4>A AControl & Appearance EMML Profile Test</h1>
+<P><INPUT TYPE="button" VALUE="Quit" ONCLICK="Quit();"></P>
+<a href="javascript:doApplyProfile('AddressBar1');"> AddressBar Visible</a>
+    <br>
+    <a href="javascript:doApplyProfile('AddressBarHide');">Address bar hidden</a>
+  <br>
+<hr />
+<br>
+ <a href="NonPersistantProfile.html">Go to Back Profile page</a>
+  <br>
+<a href="../EMMLProfilesIndex.html">Back to EMML Profile Index</a>
+</body>
+</html>

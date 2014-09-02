@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<HTML>
+
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+<META HTTP-Equiv="BackButton" Content="Visibility:Visible;top:80">
+
+</HEAD>
+
+
+<BODY BGCOLOR="#FFFFEA" TEXT="#0000A0" LINK="#FF0000" VLINK="#808080" ALINK="#008040">
+<H2>Raw Sensor</H2>
+<input type=button value="Quit" onclick="quitPB();" />
+<input type=button value="Back" onclick="goBack();" />
+<P><A HREF="SensorJsobject.html">RawSensorJSObject</A></P>
+<P><A HREF="SensorActiveX.html">RawSensorActiveX</A></P>
+<P><A HREF="SensorGeneric.html">RawSensorGeneric</A></P>
+<P><A HREF="SensorSetEMML.html">RawSensorSetEMML</A></P>
+<P><A HREF="SensorAllEMML1.1.html">SensorAllEMML1.1</A></P>
+<P><A HREF="SensorAllEMML1.0.html">SensorAllEMML1.0</A></P>
+<P><A HREF="SensorAccelerometerEMML1.1.html">SensorAccelerometerEMML1.1</A></P>
+<P><A HREF="SensorAccelerometerEMML1.0.html">SensorAccelerometerEMML1.0</A></P>
+</BODY>
+</HTML>
+<SCRIPT>
+   function quitPB()
+   {
+     generic.InvokeMETAFunction('Application', 'Quit');
+   }
+   
+   function goBack()
+   {
+      document.location = 'history:back';
+   }
+  
+</SCRIPT>

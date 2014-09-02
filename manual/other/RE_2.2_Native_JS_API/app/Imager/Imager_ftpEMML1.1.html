@@ -1,0 +1,49 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+
+<!--<META HTTP-Equiv="imager" Content="left:170;top:20;height:80;width:80;aim:on;lamp:on;Destination:url('ftp://10.233.85.82/Received/imageInFTPEMML1.bmp');Username:ftpadmin;Password:ftpadmin;imagerEvent:url('javascript:myevent('%s');');enabled:cam1">-->
+<META HTTP-Equiv="imager" Content="left:170;top:20;height:100;width:100;aim:on;lamp:on;Destination:url('ftp://10.233.85.82/Received/imageInFTPEMML.bmp');Username:ftpadmin;Password:ftpadmin;imagerevent:url('javascript:myevent('%s');');enable">
+
+
+<SCRIPT>
+    //var generic = new ActiveXObject("PocketBrowser.Generic");
+
+    function doCapture() {
+       generic.InvokeMETAFunction('imager', 'capture');
+    }
+
+    function doDisable() {
+       generic.InvokeMETAFunction('imager', 'disabled');
+    }
+
+
+    function myevent(response) {
+        myResponse.innerHTML="response"+response;
+
+    }
+</SCRIPT>
+
+
+</head>
+<body>
+
+
+<p>Send the Image to FTP Using EMML1.1 Metatags</p>
+
+Tags:-left:170;top:20;height:80;width:80;aim:on;lamp:on;Destination:url('ftp://10.233.85.82/Received/imageInFTPEMML.bmp');Username:ftpadmin;Password:ftpadmin;imagerevent:url('javascript:myevent('%s');');enable
+<BR><BR><BR><BR><BR><BR><BR>
+<P><INPUT TYPE="button" VALUE="Capture" ONCLICK="doCapture();"></P>
+<P><INPUT TYPE="button" VALUE="Disable" ONCLICK="doDisable();"></P>
+<P><INPUT TYPE="button" VALUE="Back" ONCLICK="location.href='Imager_Index.html'"></P>
+
+
+<div id="myResponse">Result:</div><BR>
+</body>
+</html>
+
+
+
+
+

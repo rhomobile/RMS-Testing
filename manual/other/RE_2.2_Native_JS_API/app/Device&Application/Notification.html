@@ -1,0 +1,79 @@
+<HTML>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="expires" content="0">
+<TITLE>Device / Application Tests</TITLE>
+  <script type="text/javascript">
+  
+  var ntfyArr = new Array();
+  var notType = new Array('LED', 'BEEPER', 'PAGER');
+   var NTFY_INDEX = 0;
+   var NTFY_TYPE = 1;
+   var NTFY_NAME = 2;
+
+
+ 
+  function getNotificationsViaJSON()
+    {
+        var generic = new ActiveXObject("PocketBrowser.Generic");
+        generic.InvokeMETAFunction("Notification", "EnumNotificationsEvent:url('Javascript:onNotificationsViaJSON(%json);');enumerate");
+      //  generic.InvokeMETAFunction("Notification", "EnumNotificationsEvent:url('http://10.233.85.82/PB3.x/NavigateTest.html')");
+        //generic.InvokeMETAFunction("Notification", Enumerate);
+    }
+    
+//    function getNotificationsarray()
+//    {
+//        //var generic = new ActiveXObject("PocketBrowser.Generic");
+//        generic.InvokeMETAFunction("Notification", "EnumNotificationsEvent:url('Javascript:onNotificationsarray(%s);'); Enumerate");
+//    }
+//    
+//    
+//    function onNotificationsarray(notArr)
+//  {
+//	 ntfyArr = notArr;
+//	 var html = "";
+
+//	 for(i=0; i<ntfyArr.length; i++)	
+//     {
+//       html += '' + ntfyArr[i][NTFY_INDEX] + ', ' 
+//	        + notType[ntfyArr[i][NTFY_TYPE]] + '' 
+//	        + ntfyArr[i][NTFY_NAME] + '';
+//     }
+//	 
+//     html += "";
+
+//  
+//	enumNotifications.innerHTML=html;
+//  }
+	
+  function onNotificationsViaJSON(jsonObject)
+  {
+	 var html = "";
+ 
+	 for(i=0; i<jsonObject.notificationsArray.length; i++)	
+     {
+       html += '' + jsonObject.notificationsArray[i].notificationIndex + ', ' 
+	        + notType[jsonObject.notificationsArray[i].notificationType] + ', ' 
+	        + jsonObject.notificationsArray[i].notificationName + '<P>';
+     }
+	 
+     html += "";
+  
+	enumNotifications.innerHTML=html;
+  }
+  
+  
+  </script>
+</HEAD>
+ 
+<H1>Notification Tests</H1>
+<P>
+  <div id="enumNotifications">Notifications go Here</div>
+  <BR><BR><BR>
+  <INPUT align="center" type="button" value="Get Notifications Via JSON" onclick="getNotificationsViaJSON();">  
+  <br /><br /><INPUT align="center" type="button" value="Get Notifications via enumevent" onclick="getNotificationsarray();">
+ 
+  </BODY>
+</HTML>

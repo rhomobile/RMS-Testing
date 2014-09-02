@@ -1,0 +1,47 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+<META HTTP-Equiv="MinimizeButton" Content="top:100;Visibility:Visible">
+</head>
+<body>
+<BR><BR>
+<A HREF="AudioCapture_Index.html">Back</A><br />
+<BR><BR>
+<b>Audio capture Stress</b><br>
+<b>Press start button to contnuous capture</b>
+<form id="frm" action="">
+<BR><BR>
+<div id="message">Message</div>
+<div id="mycount">Count</div>
+<BR><BR>
+<P><INPUT TYPE="button" VALUE="start" ONCLICK="doStart();"></P>
+<br>
+<INPUT TYPE="button" VALUE="stop" ONCLICK="doStop();"
+</form>
+</body>
+</html>
+<script language="javascript">
+var count=0;
+function doStop()
+{
+message.innerHTML="stop";
+audioCapture.stop();
+}
+
+function doStart()
+{
+//alert("satrt");
+message.innerHTML="start";
+audioCapture.start();
+captureLoop();
+}
+
+function captureLoop()
+{
+    count++;
+    mycount.innerHTML="Number of Count: "+count;
+	setTimeout("doStart()", 23000);
+}
+</script>
+

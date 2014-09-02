@@ -1,0 +1,54 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+
+<META HTTP-Equiv="imager" Content="left:10;top:20;height:100;width:100">
+
+
+<SCRIPT LANGUAGE="JavaScript">
+
+var count=0;
+
+function VisibiltyStress()
+{
+sig.innerHTML="before visible";
+mycount.innerHTML="Count:"+count;
+if(count%2==0)
+{
+generic.InvokeMETAFunction('Imager', 'Enable');
+}
+else
+{
+generic.InvokeMETAFunction('Imager', 'Enable');
+}
+sig.innerHTML="Visible";
+setTimeout("VisibiltyStressHidden()",10000);
+}
+
+function VisibiltyStressHidden()
+{
+count++;
+sig.innerHTML="before Hidden";
+generic.InvokeMETAFunction('Imager', 'Disabled');
+sig.innerHTML="Hidden";
+setTimeout("VisibiltyStress()",10000);
+
+}
+
+
+</SCRIPT>
+
+</head>
+<body>
+<div id="sig">Visibility Stress-Continuous enable and disable the Imager</div><br />
+<div id="mycount">count:</div>
+<br><br><br><br>
+<input type="button" onclick="VisibiltyStress();" value="Start Stress">
+
+
+
+<BR><BR>
+<A HREF="Imager_Index.html">Back</A>
+</body>
+</html>

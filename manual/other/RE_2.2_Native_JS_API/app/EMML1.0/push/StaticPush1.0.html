@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+        <META HTTP-Equiv="push" Content="port:8080">
+        <META HTTP-Equiv="push" Content="passkey:123456">
+        <META HTTP-Equiv="push" Content="path:\push">
+        <META HTTP-Equiv="push" Content="response:\Respo1.html">
+        <META HTTP-Equiv="push" Content="start">
+        <META HTTP-Equiv="push-detected" Content="url('Javascript:doLocate('%s');')">
+ <script>
+     var bNotify = false;
+	/******************************************************************************
+	 *  This function is triggered when the device is pushed to by the client
+	 *  pc.  It identifies the action to do based on the first querystring value.
+	 * ***************************************************************************/ 
+	   	
+	function doLocate(func){
+		
+		if(func=='locate')
+		{
+			locatediv.innerHTML = '<center><pre>Someone is trying to locate this device<br><br><input type="button" value="CANCEL" onclick="bNotify=false;locatediv.innerHTML=\'\';"></center></pre>';
+   		    bNotify = true;
+   	}
+   	else
+   	{
+   		locatediv.innerHTML = '';
+   		bNotify = false;
+   	}
+  }
+  
+ </script>  
+</head>
+<body>
+<h1>Push Static Meta tag Test port:8080;passkey:123456;response:\Respo1.html;start</h1>
+<DIV align=left style='font-size:8.0pt' id="locatediv"></div></p>
+<input type="button" id="start" value="stop" onclick="Generic.InvokeMETAFunction('push', 'stop');" />
+</body>
+</html>

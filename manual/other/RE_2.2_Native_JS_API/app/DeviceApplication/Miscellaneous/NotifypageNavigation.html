@@ -1,0 +1,300 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+<!--<META HTTP-Equiv="Notification" content="EnumNotificationsEvent:url('javascript:setupNtfyArr(%s);')">
+<META HTTP-Equiv="Notification" content="EnumNotificationsEvent:url('http://157.235.207.158/pb3.x/index.html')">-->
+<title>Neon NotificationDevice Application Test</title>
+</head>
+<script language=javascript>
+
+//var myobjGeneric = new ActiveXObject("PocketBrowser.Generic");
+var NTFY_UNKNOWN	= -1;
+var notType = new Array('LED', 'BEEPER', 'PAGER');
+var NTFY_INDEX = 0;
+var NTFY_TYPE = 1;
+var NTFY_NAME = 2;
+
+function SetNotifyEvent() 
+{
+    var SelectedValue = frm.noteventdropdown.selectedIndex;
+	var selectEvent = frm.noteventdropdown.options[SelectedValue].value;
+    Message.innerHTML="Event is:"+selectEvent;
+    htmDiv.innerHTML="";
+	switch(selectEvent)
+	{
+		case 'JSCRIPT':
+
+			generic.InvokeMetaFunction("Notification", "EnumNotificationsEvent:url('javascript:setupNtfyArr(%s);')");
+			break;
+
+		case 'JSON':
+            generic.InvokeMetaFunction("Notification", "EnumNotificationsEvent:url('javascript:setupNtfyArrjson(%json);')");
+			//generic.InvokeMETAFunction('application', "applicationEvent:url('JavaScript:doStatejsonFunction(%json);')");
+			break;
+			
+	    case 'DETACH':
+	        alert("DETACH");
+            generic.InvokeMetaFunction("Notification", "EnumNotificationsEvent:url('')");
+			break;
+			
+	    case 'URL':
+			generic.InvokeMetaFunction("Notification", "EnumNotificationsEvent:url('http://10.233.85.82/Neon/DeviceApplication/NotifypageNavigation.html')");
+			break;
+
+		case 'EMPTY':
+            alert("EMPTY");
+			generic.InvokeMetaFunction("Notification", "EnumNotificationsEvent:");
+			break;
+			
+		case 'FileInvalidURL':
+		      generic.InvokeMetaFunction("Notification", "EnumNotificationsEvent:url('file://\')");
+			   break;
+			   
+		case 'HttpInvalidURL':
+		      generic.InvokeMetaFunction("Notification", "EnumNotificationsEvent:url('http://acbx')");
+			  break;
+		}
+}
+
+function Enumerateobjects()
+{
+  generic.InvokeMetaFunction("Notification", "Enumerate");
+}
+
+
+
+function setupNtfyArr(ntArray) 
+{
+  var html = "<table border=1>";
+	for(i=0; i<ntArray.length; i++)	{
+			html+='<tr><td><input type=button value="Invoke" onclick="doNot(' + ntArray[i][NTFY_INDEX] + ', ' 
+				+ ntArray[i][NTFY_TYPE] + ');"></td><td>' 
+				+ ntArray[i][NTFY_NAME] + '</td><td>'
+				+ ((ntArray[i][NTFY_TYPE]==NTFY_UNKNOWN)?'UNKNOWN':notType[ntArray[i][NTFY_TYPE]]) + '</td></tr>';
+	}
+	html+="</table>";
+	htmDiv.innerHTML=html;
+  
+}
+
+function setupNtfyArrjson(jsonObject) 
+{
+  var html = "<table border=1>";
+	for(i=0; i<jsonObject.notificationsArray.length; i++)	{
+			html+='<tr><td><input type=button value="Invoke" onclick="doNot(' + jsonObject.notificationsArray[i].notificationIndex + ', ' 
+				+ jsonObject.notificationsArray[i].notificationType + ');"></td><td>' 
+				+ jsonObject.notificationsArray[i].notificationName + '</td><td>'
+				+ ((jsonObject.notificationsArray[i].notificationType==NTFY_UNKNOWN)?'UNKNOWN':notType[jsonObject.notificationsArray[i].notificationType]) + '</td></tr>';
+		
+	}
+	html+="</table>";
+	htmDiv.innerHTML=html;
+  
+}
+
+
+
+function doNot(index, type)
+{
+	if(type == 0)	//on duration, off duration, repeat count
+	{
+		//alert(type);	
+	
+			var LEDDur = frm.txtLEDOnDuration.value;
+			var LEDDurValue = "SetLEDOnDuration:"+LEDDur;
+			alert(LEDDurValue);	
+			generic.InvokeMETAFunction('Notification', LEDDurValue);
+		
+		
+			var LEDOffDur = frm.txtLEDOffDuration.value;
+			var LEDOffDurValue = "SetLEDOffDuration:"+LEDOffDur;
+			alert(LEDOffDurValue);
+			generic.InvokeMETAFunction('Notification', LEDOffDurValue);
+		
+		
+			var LEDCycle = frm.txtLEDNumberOfCycles.value;
+			var LEDCycleValue = "SetLEDNumberOfCycles:"+LEDCycle;
+			alert(LEDCycleValue);	
+			generic.InvokeMETAFunction('Notification', LEDCycleValue);
+						
+		
+	}
+	if(type == 1) //frequency, volume, duration
+	{	
+	    //alert(type);	
+		
+			var BEEPFre = frm.txtBeeperFrequency.value;
+			var BEEPFreValue = "SetBeeperFrequency:"+BEEPFre;
+			//alert(BEEPFreValue);       
+			generic.InvokeMETAFunction('Notification', BEEPFreValue);
+		
+	
+			var BEEPVol = frm.txtBeeperVolume.value;
+			var BEEPVolValue = "SetBeeperVolume:"+BEEPVol;
+			//alert(BEEPVolValue);   
+			generic.InvokeMETAFunction('Notification', BEEPVolValue);
+		
+	
+			var BeepDur = frm.txtBeeperDuration.value;
+			var BeepDurValue = "SetBeeperDuration:"+BeepDur;
+			//alert(BeepDurValue);   
+			generic.InvokeMETAFunction('Notification', BeepDurValue);
+		
+		
+	}	
+	if(type == 2) //on duration
+	{
+			var VIBDur = frm.txtVibrateDuration.value;
+			var VIBDurValue = "SetVibrateDuration:"+VIBDur;
+			//alert(VIBDurValue);    
+			generic.InvokeMETAFunction('Notification', VIBDurValue);
+		
+	}
+		
+	var SelectedValue = frm.statedropdown.selectedIndex;
+	var selectedState = frm.statedropdown.options[SelectedValue].value;
+	switch(selectedState)
+	{
+		case 'On':
+            //alert(selectedState);
+			generic.InvokeMetaFunction("Notification", "StateOn:" + index);
+			break;
+
+		case 'Off':
+            //alert(selectedState);
+			generic.InvokeMetaFunction("Notification", "StateOff:" + index);
+			break;
+		
+		case 'Cycle':
+            //alert(selectedState);
+			generic.InvokeMetaFunction("Notification", "StateCycle:" + index);
+			break;
+	}
+
+			
+}
+
+function drop()
+{
+    	var SelectedValue = frm.statedropdown.selectedIndex;
+	var selectedState = frm.statedropdown.options[SelectedValue].value;
+	switch(selectedState)
+	{
+		case 'On':
+            alert(selectedState);
+			generic.InvokeMetaFunction("Notification", "StateOn:" + index);
+			break;
+
+		case 'Off':
+            alert(selectedState);
+			generic.InvokeMetaFunction("Notification", "StateOff:" + index);
+			break;
+		
+		case 'Cycle':
+            alert(selectedState);
+			generic.InvokeMetaFunction("Notification", "StateCycle:" + index);
+			break;
+	}
+}
+
+function setStateOn()
+{
+	var OnState = frm.stateOnnn.value;
+	var OnStateValue = "StateOn:"+OnState;
+	objGeneric.InvokeMETAFunction('Notification', OnStateValue);
+}
+
+function setStateOff()
+{
+	var OffState = frm.StateOfff.value;
+	var OffStateValue = "StateOff:"+OffState;
+	objGeneric.InvokeMETAFunction('Notification', OffStateValue);
+}
+
+function setStateCycle()
+{
+	var CycleState = frm.StateCycleee.value;
+	var CycleStateValue = "StateOff:"+CycleState;
+	objGeneric.InvokeMETAFunction('Notification', CycleStateValue);
+}
+
+</script>
+
+
+<body>
+<form id="frm" action="">
+<br /><br /><br /><br />
+<b>Notification Page navigation</b>
+<br /><br />
+<div id="Message">Message</div>
+<br />
+Select Notification Event:<br /><select name="noteventdropdown" id="Select">
+<option SELECTED value="">Select</option>
+<option value="JSCRIPT">JSCRIPT</option>
+<option value="JSON">JSON</option>
+<option value="DETACH">DETACH</option>
+<option value="EMPTY">EMPTY</option>
+<option value="URL">URL</option>
+<option value="FileInvalidURL">FileInvalidURL</option>
+<option value="HttpInvalidURL">HttpInvalidURL</option>
+</select>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<input type="button" onclick="SetNotifyEvent();" value="SetNotifyEvent">
+<br /><br />
+<input type="button" onclick="Enumerateobjects();" value="Enumerate">
+<hr />
+<div id="htmDiv">NotifyObjects will be populated here...</div>
+<hr />
+LED<br>
+<tr>
+	SetLEDOnDuration	<Textarea id="txtLEDOnDuration"cols="5" rows="1">2000</Textarea>
+	</tr><br>
+<tr>
+	SetLEDOffDuration	<Textarea id="txtLEDOffDuration"cols="5" rows="1">1000</Textarea>
+	</tr><br>
+<tr>
+	SetLEDNumberOfCycles	<Textarea id="txtLEDNumberOfCycles"cols="5" rows="1">5</Textarea>
+	</tr><br>
+
+<hr><br>
+
+<hr>
+Beeper<br>
+<tr>
+	SetBeeperFrequency	<Textarea id="txtBeeperFrequency"cols="5" rows="1">3500</Textarea>
+	</tr><br>
+<tr>
+	SetBeeperVolume		<Textarea id="txtBeeperVolume"cols="5" rows="1">3</Textarea>
+	</tr><br>
+<tr>
+	SetBeeperDuration	<Textarea id="txtBeeperDuration"cols="5" rows="1">4000</Textarea>
+	</tr><br>
+
+<hr><br>
+
+<hr>
+Beeper<br>
+<tr>
+	SetVibrateDuration	<Textarea id="txtVibrateDuration"cols="5" rows="1">5000</Textarea>
+	</tr><br>
+<hr><br>
+
+<hr>
+State<br>
+State Value	<select name="statedropdown" id="statedropdown">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="On">On</option>
+<option value="Off">Off</option>
+<option value="Cycle">Cycle</option>
+</select>
+<hr>
+
+<br>
+<A HREF="./Device Application.html">Back</A>
+
+<META HTTP-EQUIV="OnKey0x0d" content="javascript:doTest();">
+
+</form>
+</body>
+</html>

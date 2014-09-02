@@ -1,0 +1,720 @@
+Number of params: 138
+Symbologies
+	Param name: UPCE0 id: decoder_upce0
+	Type: class java.lang.Boolean
+	Default value: true
+	Description: 
+
+	Decoder params for UPCE0
+		Param name: Report Check Digit - UPCE0 id: decoder_upce0_report_check_digit
+		Type: class java.lang.Boolean
+		Default value: false
+		Description: 
+
+		Param name: Preamble - UPCE0 id: decoder_upce0_preamble
+		Type: class java.lang.Integer
+		Default value: 0
+		Description: 
+		Supported values are [Preamble None, Preamble Sys Char, Preamble Country And Sys Char]
+
+		Param name: Convert UPCE0 To UPCA id: decoder_upce0_convert_to_upca
+		Type: class java.lang.Boolean
+		Default value: false
+		Description: Enable conversion from UPCE0 to UPCA bar code. If this flag is set, the bar code is converted to UPCA, and UPCA parameters are used
+
+	Param name: UPCE1 id: decoder_upce1
+	Type: class java.lang.Boolean
+	Default value: false
+	Description: 
+
+	Decoder params for UPCE1
+		Param name: Report Check Digit - UPCE1 id: decoder_upce1_report_check_digit
+		Type: class java.lang.Boolean
+		Default value: false
+		Description: 
+
+		Param name: Preamble - UPCE1 id: decoder_upce1_preamble
+		Type: class java.lang.Integer
+		Default value: 0
+		Description: 
+		Supported values are [Preamble None, Preamble Sys Char, Preamble Country And Sys Char]
+
+		Param name: Convert UPCE1 To UPCA id: decoder_upce1_convert_to_upca
+		Type: class java.lang.Boolean
+		Default value: false
+		Description: 
+
+	Param name: UPCA id: decoder_upca
+	Type: class java.lang.Boolean
+	Default value: true
+	Description: 
+
+	Decoder params for UPCA
+		Param name: Report Check Digit - UPCA id: decoder_upca_report_check_digit
+		Type: class java.lang.Boolean
+		Default value: false
+		Description: 
+
+		Param name: Preamble - UPCA id: decoder_upca_preamble
+		Type: class java.lang.Integer
+		Default value: 0
+		Description: 
+		Supported values are [Preamble None, Preamble Sys Char, Preamble Country And Sys Char]
+
+	Param name: MSI id: decoder_msi
+	Type: class java.lang.Boolean
+	Default value: false
+	Description: 
+
+	Decoder params for MSI
+		Param name: MSI Length1 id: decoder_msi_length1
+		Type: class java.lang.Integer
+		Default value: 4
+		Description: 
+
+		Param name: Decoder MSI Length2 id: decoder_msi_length2
+		Type: class java.lang.Integer
+		Default value: 55
+		Description: 
+
+		Param name: Redundancy - MSI id: decoder_msi_redundancy
+		Type: class java.lang.Boolean
+		Default value: true
+		Description: 
+
+		Param name: Check Digit - MSI id: decoder_msi_check_digit
+		Type: class java.lang.Integer
+		Default value: 0
+		Description: 
+		Supported values are [One Check Digit, Two Check Digit]
+
+		Param name: Check Digit Scheme - MSI id: decoder_msi_check_digit_scheme
+		Type: class java.lang.Integer
+		Default value: 0
+		Description: 
+		Supported values are [Mod-11-10, Mod-10-10]
+
+		Param name: Decoder MSI Report Check Digit id: decoder_msi_report_check_digit
+		Type: class java.lang.Boolean
+		Default value: false
+		Description: 
+
+	Param name: EAN8 id: decoder_ean8
+	Type: class java.lang.Boolean
+	Default value: true
+	Description: 
+
+	Decoder params for EAN8
+		Param name: Convert EAN8 To EAN13 id: decoder_ean8_convert_to_ean13
+		Type: class java.lang.Boolean
+		Default value: false
+		Description: 
+
+	Param name: EAN13 id: decoder_ean13
+	Type: class java.lang.Boolean
+	Default value: true
+	Description: 
+
+	Param name: Codabar id: decoder_codabar
+	Type: class java.lang.Boolean
+	Default value: true
+	Description: 
+
+	Decoder params for Codabar
+		Param name: Codabar Length1 id: decoder_codabar_length1
+		Type: class java.lang.Integer
+		Default value: 6
+		Description: 
+
+		Param name: Codabar Length2 id: decoder_codabar_length2
+		Type: class java.lang.Integer
+		Default value: 55
+		Description: 
+
+		Param name: Codabar Redundancy id: decoder_codabar_redundancy
+		Type: class java.lang.Boolean
+		Default value: true
+		Description: 
+
+		Param name: Codabar Clsi Editing id: decoder_codabar_clsi_editing
+		Type: class java.lang.Boolean
+		Default value: false
+		Description: 
+
+		Param name: Codabar Notis Editing id: decoder_codabar_notis_editing
+		Type: class java.lang.Boolean
+		Default value: false
+		Description: 
+
+	Param name: Code39 id: decoder_code39
+	Type: class java.lang.Boolean
+	Default value: true
+	Description: 
+
+	Decoder params for Code39
+		Param name: Code39 Length1 id: decoder_code39_length1
+		Type: class java.lang.Integer
+		Default value: 0
+		Description: 
+
+		Param name: Code39 Length2 id: decoder_code39_length2
+		Type: class java.lang.Integer
+		Default value: 55
+		Description: 
+
+		Param name: Verify Check Digit - Code39 id: decoder_code39_verify_check_digit
+		Type: class java.lang.Boolean
+		Default value: false
+		Description: 
+
+		Param name: Report Check Digit - Code39 id: decoder_code39_report_check_digit
+		Type: class java.lang.Boolean
+		Default value: false
+		Description: 
+
+		Param name: Full Ascii - Code39 id: decoder_code39_full_ascii
+		Type: class java.lang.Boolean
+		Default value: false
+		Description: 
+
+		Param name: Redundancy - Code39 id: decoder_code39_redundancy
+		Type: class java.lang.Boolean
+		Default value: false
+		Description: 
+
+		Param name: Convert Code39 To Code32 id: decoder_code39_convert_to_code32
+		Type: class java.lang.Boolean
+		Default value: false
+		Description: 
+
+		Param name: Report Code32 Prefix id: decoder_code39_report_code32_prefix
+		Type: class java.lang.Boolean
+		Default value: false
+		Description: 
+
+		Param name: Security Level - Code39 id: decoder_code39_security_level
+		Type: class java.lang.Integer
+		Default value: 1
+		Description: 
+		Supported values are [Security Level 0, Security Level 1, Security Level 2, Security Level 3]
+
+	Param name: D2of5 id: decoder_d2of5
+	Type: class java.lang.Boolean
+	Default value: false
+	Description: 
+
+	Decoder params for D2of5
+		Param name: D2of5 Length1 id: decoder_d2of5_length1
+		Type: class java.lang.Integer
+		Default value: 0
+		Description: 
+
+		Param name: D2of5 Length2 id: decoder_d2of5_length2
+		Type: class java.lang.Integer
+		Default value: 14
+		Description: 
+
+		Param name: Redundancy - D2of5 id: decoder_d2of5_redundancy
+		Type: class java.lang.Boolean
+		Default value: true
+		Description: 
+
+	Param name: I2of5 id: decoder_i2of5
+	Type: class java.lang.Boolean
+	Default value: false
+	Description: 
+
+	Decoder params for I2of5
+		Param name: I2of5 Length1 id: decoder_i2of5_length1
+		Type: class java.lang.Integer
+		Default value: 14
+		Description: 
+
+		Param name: I2of5 Length2 id: decoder_i2of5_length2
+		Type: class java.lang.Integer
+		Default value: 10
+		Description: 
+
+		Param name: I2of5 Redundancy id: decoder_i2of5_redundancy
+		Type: class java.lang.Boolean
+		Default value: true
+		Description: 
+
+		Param name: I2of5 Check Digit id: decoder_i2of5_check_digit
+		Type: class java.lang.Integer
+		Default value: 0
+		Description: 
+		Supported values are [No Check Digit, USS Check Digit, OPCC Check Digit]
+
+		Param name: I2of5 Report Check Digit id: decoder_i2of5_report_check_digit
+		Type: class java.lang.Boolean
+		Default value: false
+		Description: 
+
+		Param name: Decoder I2of5 Convert To EAN13 id: decoder_i2of5_convert_to_ean13
+		Type: class java.lang.Boolean
+		Default value: false
+		Description: 
+
+	Param name: Code11 id: decoder_code11
+	Type: class java.lang.Boolean
+	Default value: false
+	Description: 
+
+	Decoder params for Code11
+		Param name: Code11 Length1 id: decoder_code11_length1
+		Type: class java.lang.Integer
+		Default value: 4
+		Description: 
+
+		Param name: Code11 Length2 id: decoder_code11_length2
+		Type: class java.lang.Integer
+		Default value: 55
+		Description: 
+
+		Param name: Redundancy - Code11 id: decoder_code11_redundancy
+		Type: class java.lang.Boolean
+		Default value: true
+		Description: 
+
+		Param name: Verify Check Digit - Code11 id: decoder_code11_verify_check_digit
+		Type: class java.lang.Integer
+		Default value: 1
+		Description: 
+		Supported values are [No Check Digit, 1 Check Digit, 2 Check Digits]
+
+		Param name: Report Check Digit - Code11 id: decoder_code11_report_check_digit
+		Type: class java.lang.Boolean
+		Default value: false
+		Description: 
+
+	Param name: Code93 id: decoder_code93
+	Type: class java.lang.Boolean
+	Default value: false
+	Description: 
+
+	Decoder params for Code93
+		Param name: Code93 Length1 id: decoder_code93_length1
+		Type: class java.lang.Integer
+		Default value: 0
+		Description: 
+
+		Param name: Code93 Length2 id: decoder_code93_length2
+		Type: class java.lang.Integer
+		Default value: 55
+		Description: 
+
+		Param name: Code93 Redundancy id: decoder_code93_redundancy
+		Type: class java.lang.Boolean
+		Default value: false
+		Description: 
+
+	Param name: Code128 id: decoder_code128
+	Type: class java.lang.Boolean
+	Default value: true
+	Description: 
+
+	Decoder params for Code128
+		Param name: Code128 Length1 id: decoder_code128_length1
+		Type: class java.lang.Integer
+		Default value: 0
+		Description: 
+
+		Param name: Code128 Length2 id: decoder_code128_length2
+		Type: class java.lang.Integer
+		Default value: 55
+		Description: 
+
+		Param name: Redundancy - Code128 id: decoder_code128_redundancy
+		Type: class java.lang.Boolean
+		Default value: false
+		Description: 
+
+		Param name: Enable EAN128 id: decoder_code128_enable_ean128
+		Type: class java.lang.Boolean
+		Default value: true
+		Description: 
+
+		Param name: Enable ISBT128 id: decoder_code128_enable_isbt128
+		Type: class java.lang.Boolean
+		Default value: true
+		Description: 
+
+		Param name: Enable Code128 Subtypes id: decoder_code128_enable_subtypes
+		Type: class java.lang.Boolean
+		Default value: true
+		Description: Enable other sub types besides EAN 128 and ISBT 128
+
+		Param name: ISBT128 Concat Mode id: decoder_code128_isbt128_concat_mode
+		Type: class java.lang.Integer
+		Default value: 0
+		Description: 
+		Supported values are [Concat Mode Never, Concat Mode Always, Concat Mode Auto]
+
+		Param name: Check ISBT Table id: decoder_code128_check_isbt_table
+		Type: class java.lang.Boolean
+		Default value: false
+		Description:  Check ISBT table
+
+		Param name: Security Level - Code128 id: decoder_code128_security_level
+		Type: class java.lang.Integer
+		Default value: 1
+		Description: 
+		Supported values are [Security Level 0, Security Level 1, Security Level 2, Security Level 3]
+
+	Param name: PDF417 id: decoder_pdf417
+	Type: class java.lang.Boolean
+	Default value: true
+	Description: 
+
+	Param name: Trioptic39 id: decoder_trioptic39
+	Type: class java.lang.Boolean
+	Default value: false
+	Description: 
+
+	Decoder params for Trioptic39
+		Param name: Redundancy - Trioptic39 id: decoder_trioptic39_redundancy
+		Type: class java.lang.Boolean
+		Default value: true
+		Description: 
+
+	Param name: MicroPDF id: decoder_micropdf
+	Type: class java.lang.Boolean
+	Default value: true
+	Description: 
+
+	Decoder params for MicroPDF
+		Param name: Code128 Emulation - MicroPDF id: decoder_micropdf_code128_emulation
+		Type: class java.lang.Boolean
+		Default value: false
+		Description: 
+
+	Param name: MacroPDF id: decoder_macropdf
+	Type: class java.lang.Boolean
+	Default value: true
+	Description: 
+
+	Param name: Maxicode id: decoder_maxicode
+	Type: class java.lang.Boolean
+	Default value: true
+	Description: 
+
+	Param name: Datamatrix id: decoder_datamatrix
+	Type: class java.lang.Boolean
+	Default value: true
+	Description: 
+
+	Param name: QRCode id: decoder_qrcode
+	Type: class java.lang.Boolean
+	Default value: true
+	Description: 
+
+	Param name: MacromicroPDF id: decoder_macromicropdf
+	Type: class java.lang.Boolean
+	Default value: true
+	Description: 
+
+	Param name: RSS14 id: decoder_rss14
+	Type: class java.lang.Boolean
+	Default value: false
+	Description: 
+
+	Param name: RSS Limited id: decoder_rss_lim
+	Type: class java.lang.Boolean
+	Default value: false
+	Description: 
+
+	Param name: RSS Exp id: decoder_rss_exp
+	Type: class java.lang.Boolean
+	Default value: false
+	Description: 
+
+	Param name: Decoder Signature id: decoder_signature
+	Type: class java.lang.Boolean
+	Default value: false
+	Description: 
+
+	Param name: Webcode id: decoder_webcode
+	Type: class java.lang.Boolean
+	Default value: false
+	Description: 
+
+	Decoder params for Webcode
+		Param name: Webcode Subtype id: decoder_webcode_subtype
+		Type: class java.lang.Boolean
+		Default value: true
+		Description: GT Webcode sub type enabled
+
+	Param name: Composite AB id: decoder_composite_ab
+	Type: class java.lang.Boolean
+	Default value: true
+	Description: 
+
+	Decoder params for Composite AB
+		Param name: Composite AB UCC Link Mode id: decoder_composite_ab_ucc_link_mode
+		Type: class java.lang.Integer
+		Default value: 2
+		Description: 
+		Supported values are [Link Flag Ignored, Always Linked, Auto Discriminate]
+
+		Param name: Composite AB MultiPacket Mode id: decoder_composite_ab_multipacket_mode
+		Type: class java.lang.Integer
+		Default value: 0
+		Description: 
+		Supported values are [Multi Part Single Packet, Multi Independent Reads]
+
+		Param name: Use UPC Preamble Check Digit for Composite AB id: decoder_composite_ab_use_upc_preamble_check_digit 
+		Type: class java.lang.Boolean
+		Default value: false
+		Description: 
+
+	Param name: Composite C id: decoder_composite_c
+	Type: class java.lang.Boolean
+	Default value: true
+	Description: 
+
+	Decoder params for Composite C
+		Param name: MultiPacket Mode - Composite C id: decoder_composite_c_multipacket_mode
+		Type: class java.lang.Integer
+		Default value: 0
+		Description: 
+		Supported values are [Multi Part Single Packet, Multi Independent Reads]
+
+	Param name: TLC39 id: decoder_tlc39
+	Type: class java.lang.Boolean
+	Default value: true
+	Description: 
+
+	Param name: USPostnet id: decoder_uspostnet
+	Type: class java.lang.Boolean
+	Default value: false
+	Description: 
+
+	Decoder params for USPostnet
+		Param name: Decoder USPostnet Report Check Digit id: decoder_uspostnet_report_check_digit
+		Type: class java.lang.Boolean
+		Default value: false
+		Description: Report Check Digit
+
+	Param name: USPlanet id: decoder_usplanet
+	Type: class java.lang.Boolean
+	Default value: false
+	Description: 
+
+	Decoder params for USPlanet
+		Param name: Report Check Digit - USPlanet id: decoder_usplanet_report_check_digit
+		Type: class java.lang.Boolean
+		Default value: false
+		Description: Report Check Digit
+
+	Param name: UK Postal id: decoder_uk_postal
+	Type: class java.lang.Boolean
+	Default value: false
+	Description: 
+
+	Decoder params for UK Postal
+		Param name: Report Check Digit - UK Postal id: decoder_uk_postal_report_check_digit
+		Type: class java.lang.Boolean
+		Default value: false
+		Description: Report Check Digit
+
+	Param name: Japanese Postal id: decoder_japanese_postal
+	Type: class java.lang.Boolean
+	Default value: false
+	Description: 
+
+	Param name: Australian Postal id: decoder_australian_postal
+	Type: class java.lang.Boolean
+	Default value: false
+	Description: 
+
+	Param name: Canadian Postal id: decoder_canadian_postal
+	Type: class java.lang.Boolean
+	Default value: false
+	Description: 
+
+	Param name: Dutch Postal id: decoder_dutch_postal
+	Type: class java.lang.Boolean
+	Default value: false
+	Description: 
+
+	Param name: Chinese 2of5 id: decoder_chinese_2of5
+	Type: class java.lang.Boolean
+	Default value: false
+	Description: 
+
+	Param name: Aztec id: decoder_aztec
+	Type: class java.lang.Boolean
+	Default value: true
+	Description: 
+
+	Param name: MicroQR id: decoder_microqr
+	Type: class java.lang.Boolean
+	Default value: false
+	Description: 
+
+	Param name: Korean 3of5 id: decoder_korean_3of5
+	Type: class java.lang.Boolean
+	Default value: false
+	Description: 
+
+	Decoder params for Korean 3of5
+		Param name: Korean 3of5 Length1 id: decoder_korean_3of5_length1
+		Type: class java.lang.Integer
+		Default value: 1
+		Description: 
+
+		Param name: Korean 3of5 Length2 id: decoder_korean_3of5_length2
+		Type: class java.lang.Integer
+		Default value: 55
+		Description: 
+
+		Param name: Redundancy - Korean 3of5 id: decoder_korean_3of5_redundancy
+		Type: class java.lang.Boolean
+		Default value: true
+		Description: 
+
+	Param name: US4state id: decoder_us4state
+	Type: class java.lang.Boolean
+	Default value: false
+	Description: 
+
+	Param name: US4state FICS id: decoder_us4state_fics
+	Type: class java.lang.Boolean
+	Default value: false
+	Description: 
+
+	Param name: Matrix 2of5 id: decoder_matrix_2of5
+	Type: class java.lang.Boolean
+	Default value: false
+	Description: 
+
+	Decoder params for Matrix 2of5
+		Param name: Decoder Matrix 2of5 Length1 id: decoder_matrix_2of5_length1
+		Type: class java.lang.Integer
+		Default value: 0
+		Description: 
+
+		Param name: Matrix 2of5 Length2 id: decoder_matrix_2of5_length2
+		Type: class java.lang.Integer
+		Default value: 0
+		Description: 
+
+		Param name: Verify Check Digit - M2of5 id: decoder_matrix_2of5_verify_check_digit
+		Type: class java.lang.Boolean
+		Default value: true
+		Description: Check Digit Verification
+
+		Param name: Report Check Digit - M2of5 id: decoder_matrix_2of5_report_check_digit
+		Type: class java.lang.Boolean
+		Default value: true
+		Description: Report Check Digit
+
+UPC EAN Params
+	Param name: Security Level - UPC EAN id: upc_ean_security_level
+	Type: class java.lang.Integer
+	Default value: 0
+	Description: Security level for UPC EAN
+	Supported values are [Level 0, Level 1, Level 2, Level 3]
+
+	Param name: Supplemental2 - UPC EAN id: upc_ean_supplemental2
+	Type: class java.lang.Boolean
+	Default value: true
+	Description: Enable length 2 supplementals
+
+	Param name: UPC EAN Supplemental5 id: upc_ean_supplemental5
+	Type: class java.lang.Boolean
+	Default value: true
+	Description: Enable length 5 supplementals
+
+	Param name: Supplemental Mode - UPC EAN id: upc_ean_supplemental_mode
+	Type: class java.lang.Integer
+	Default value: 0
+	Description: Set how supplementals should be handled
+	Supported values are [No Supplementals, Supplemental Always, Supplemental Auto, Supplemental Smart, Supplemental 378-379, Supplemental 978-979, Supplemental 414-419-434-439, Supplemental 977]
+
+	Param name: Retry Count - UPC EAN id: upc_ean_retry_count
+	Type: class java.lang.Integer
+	Default value: 10
+	Description: Retry count for auto-discriminating for supplementals. Possible values are 2 to 20 inclusive
+	Supported value range 2 20 1
+
+	Param name: Random Check Digit - UPC EAN id: upc_ean_random_weight_check_digit
+	Type: class java.lang.Boolean
+	Default value: false
+	Description: Enable random weight check digit verification
+
+	Param name: Linear Decode - UPC EAN id: upc_ean_linear_decode
+	Type: class java.lang.Boolean
+	Default value: true
+	Description: 
+
+	Param name: Bookland - UPC EAN id: upc_ean_bookland
+	Type: class java.lang.Boolean
+	Default value: false
+	Description: 
+
+	Param name: UPC EAN Coupon id: upc_ean_coupon
+	Type: class java.lang.Boolean
+	Default value: false
+	Description: 
+
+	Param name: UPC EAN Bookland Format id: upc_ean_bookland_format
+	Type: class java.lang.Integer
+	Default value: 0
+	Description: 
+	Supported values are [Format ISBN-10, Format ISBN-13]
+
+	Param name: UPC EAN RSS To UPC EAN id: upc_ean_rss_to_upc_ean
+	Type: class java.lang.Boolean
+	Default value: false
+	Description: 
+
+Reader Params
+	Param name: Beam Timer id: beam_timer
+	Type: class java.lang.Integer
+	Default value: 15000
+	Description: Time for which scanning session lasts before timing out
+	Supported value range 0 60000 100
+
+	Param name: Linear Security Level id: linear_security_level
+	Type: class java.lang.Integer
+	Default value: 2
+	Description: Set decoder aggressiveness for 1D barcodes
+	Supported values are [Security Redundancy And Length, Security Short Or Codabar, Security All Twice, Security Long And Short, Security All Thrice]
+
+	Param name: Picklist id: picklist
+	Type: class java.lang.Integer
+	Default value: 0
+	Description: Picklist mode
+	Supported values are [Disabled, Centered]
+
+	Param name: Viewfinder Mode id: viewfinder_mode
+	Type: class java.lang.Integer
+	Default value: 2
+	Description: Describes whether a viewfinder should be displayed and if a reticle drawn to aid with scanning
+	Supported values are [Viewfinder Disabled, Viewfinder Enabled, Static Reticle]
+
+	Param name: Viewfinder Feedback Mode id: viewfinder_feedback_mode
+	Type: class java.lang.Integer
+	Default value: 0
+	Description: This parameter allows selection of the different feedback parameters on a successful decode
+	Supported values are [Viewfinder Feedback Disabled, Viewfinder Feedback Enabled]
+
+	Param name: Viewfinder Feedback Time id: viewfinder_feedback_time
+	Type: class java.lang.Integer
+	Default value: 500
+	Description: This parameter allows selection of the different feedback parameters on a successful decode
+	Supported value range 0 60000 100
+
+Scan Params
+	Param name: Code Id Type id: code_id_type
+	Type: class java.lang.Integer
+	Default value: 0
+	Description: null
+	Supported values are [Code Id Type None, Code Id Type Aim, Code Id Type Symbol]
+
+	Param name: Decode Audio Feedback id: decode_audio_feedback_uri
+	Default value: null
+	Description: null
+

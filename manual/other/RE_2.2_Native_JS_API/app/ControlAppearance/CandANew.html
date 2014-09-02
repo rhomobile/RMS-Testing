@@ -1,0 +1,377 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+
+</head>
+<body>
+<div id="Message">Param</div>
+<form name="controlForm" id="controlForm" action="" >
+<input id="Back" type="button" value="Back" onclick="location.href='Control & Appearance.html'">
+<br /><!--Select &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<select name="myChoice" id="myChoice" size=1">
+<OPTION value="Select option" >Select option</OPTION>
+<OPTION value="addressbar" >addressbar</OPTION> 
+<OPTION value="backbutton" >backbutton</OPTION> 
+<OPTION value="bottomcommandarea">bottomcommandarea</OPTION> 
+<OPTION value="ForwardButton">ForwardButton</OPTION> 
+<OPTION value="gobutton">gobutton</OPTION> 
+<OPTION value="HomeButton">HomeButton</OPTION> 
+<OPTION value="keystate">keystate</OPTION> 
+<OPTION value="minimizebutton">minimizebutton</OPTION>
+<OPTION value="quitbutton">quitbutton</OPTION> 
+<OPTION value="reloadbutton">reloadbutton</OPTION> 
+<OPTION value="SIPbutton">SIPbutton</OPTION> 
+<OPTION value="Stopbutton">Stopbutton</OPTION> 
+<OPTION value="ZoomTextButton">ZoomTextButton</OPTION> 
+<OPTION value="topcommandarea">topcommandarea</OPTION>
+
+</select>-->
+Select:
+<br />
+<input type="radio" name="group1" value="addressbar" checked="checked" />addressbar
+<input type="radio" name="group1" value="backbutton" />backbutton
+<input type="radio" name="group1" value="bottomcommandarea" />bottomcommandarea
+<input type="radio" name="group1" value="ForwardButton" />ForwardButton
+<input type="radio" name="group1" value="gobutton" />gobutton
+<input type="radio" name="group1" value="HomeButton" />HomeButton
+<input type="radio" name="group1" value="keystate" />keystate
+<input type="radio" name="group1" value="minimizebutton" />minimizebutton<br />
+<input type="radio" name="group1" value="quitbutton"  />quitbutton
+<input type="radio" name="group1" value="reloadbutton"  />reloadbutton
+<input type="radio" name="group1" value="SIPbutton"  />SIPbutton
+<input type="radio" name="group1" value="Stopbutton" />Stopbutton
+<input type="radio" name="group1" value="ZoomTextButton" />ZoomTextButton
+<input type="radio" name="group1" value="topcommandarea" />topcommandarea
+<br />
+<!--<input type="button" id="selectChoice" value="Apply" onclick="selectChoice();" />-->
+<br /><P><INPUT TYPE="button" VALUE="Apply" ONCLICK="selectChoice();"></P>
+<hr />
+<table width="1%">
+<tr>
+<td>Left&nbsp;&nbsp;<input id="left" type="text" size=15 value="30"/></td>
+</tr>
+
+<tr>
+<td>Top&nbsp;&nbsp;<input id="top" type="text" size=15 value="40"/></td>
+</tr>
+
+<tr>
+<td>Width&nbsp;&nbsp; <input id="width" type="text" size=15 value="60"/></td>
+</tr>
+
+<tr>
+<td>Visibility<br />
+<input type="radio" name="group2" id="visibility" value="visible" checked="checked" />visible
+<input type="radio" name="group2" id="visibility" value="hidden" />hidden
+<input type="radio" name="group2" id="visibility" value="invalid" />invalid
+</td>
+</tr>
+
+
+
+<tr>
+<td> Height&nbsp;&nbsp;<input id="height" type="text" size=15 value="60"/></td>
+</tr>
+
+<tr>
+<td>Imageup Mode:<br />
+<input type="radio" name="group3" id="imageupch" value="http" checked="http" />http
+<input type="radio" name="group3" id="imageupch" value="ftp" />ftp
+<input type="radio" name="group3" id="imageupch" value="local" />local
+</select>
+</td>
+</tr>
+
+<tr>
+<td> 
+ImageName&nbsp;<input type="text" name="upimage" id="upimage" size="20" value="Ferrari.bmp"/>
+</td>
+</tr>
+
+
+<tr>
+<td>Imagedown Mode:<br />
+<input type="radio" name="group4" id="imagedownch" value="http" checked="http" />http
+<input type="radio" name="group4" id="imagedownch" value="ftp" />ftp
+<input type="radio" name="group4" id="imagedownch" value="local" />local
+
+</td>
+</tr>
+
+<tr>
+<td> 
+ImageName&nbsp;<input type="text" name="imagedown" id="imagedown" size="20" value="BMW.bmp"/> 
+</td>
+</tr>
+
+
+
+<tr>
+<td>Color&nbsp;&nbsp; <input id="color" type="text" size=15 /> </td>
+</tr>
+</table>
+<br />
+<hr />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id="submit" type="button" value="submit" onclick="getvalue();" />
+</form>
+</body>
+</html>
+<script type="text/javascript">
+var selected_Item="";
+var selected_Vchoice ="";
+var selected_IUpchoice="";
+var selected_IDownchoice="";
+
+var generic = new ActiveXObject("PocketBrowser.Generic");
+
+//catch(err)
+//{
+//var GenericPlugin = document.createElement('embed'); 
+//GenericPlugin.setAttribute('id',"embed1"); 
+//GenericPlugin.setAttribute('type',"application/x-wtg-legacy-generic"); 
+//GenericPlugin.setAttribute('hidden',"true"); 
+
+//// Attach the plugin embed tags to the body 
+//var theBody = document.getElementsByTagName('body')[0]; 
+//theBody.appendChild(GenericPlugin); 
+//}
+
+function selectChoice()
+{
+
+for (var i=0; i < document.controlForm.group1.length; i++)
+   	{   
+     	if (document.controlForm.group1[i].checked)
+      		{
+      		    
+      		selected_Item= document.controlForm.group1[i].value;
+      			
+      	}
+   	}	
+ 
+ alert("selected_Item"+selected_Item);
+generic.InvokeMETAFunction('SIPbutton', 'visibility:visible');
+generic.InvokeMETAFunction('ReloadButton', 'visibility:visible');
+
+if(selected_Item == "addressbar" || selected_Item == "keystate")
+{
+
+document.getElementById('left').style.visibility = "visible";
+
+document.getElementById('top').style.visibility = "visible";
+document.getElementById('width').style.visibility = "visible";
+
+document.getElementById('visibility').style.visibility = "visible";
+
+if (selected_Item == "addressbar") 
+{
+    document.getElementById('height').style.visibility = "hidden"; 
+      // For addrtess bar
+}
+else
+ {
+    document.getElementById('height').style.visibility = "visible";   // For key state
+}   
+document.getElementById('imageupch').style.visibility = "hidden";
+document.getElementById('upimage').style.visibility = "hidden";
+document.getElementById('imagedownch').style.visibility = "hidden";
+document.getElementById('imagedown').style.visibility = "hidden";
+document.getElementById('color').style.visibility = "hidden";
+}
+else if(selected_Item == "bottomcommandarea" || selected_Item == "topcommandarea")
+{
+document.getElementById('left').style.visibility = "hidden";
+document.getElementById('top').style.visibility = "hidden";
+document.getElementById('width').style.visibility = "hidden";
+document.getElementById('visibility').style.visibility = "visible";
+document.getElementById('height').style.visibility = "visible";
+document.getElementById('upimage').style.visibility = "visible";
+document.getElementById('imageupch').style.visibility = "visible";
+document.getElementById('imagedown').style.visibility = "hidden";
+document.getElementById('imagedownch').style.visibility = "hidden";
+document.getElementById('color').style.visibility = "visible";
+}
+else
+{
+document.getElementById('left').style.visibility = "visible";
+document.getElementById('top').style.visibility = "visible";
+document.getElementById('width').style.visibility = "visible";
+document.getElementById('visibility').style.visibility = "visible";
+document.getElementById('height').style.visibility = "visible";
+document.getElementById('imageupch').style.visibility = "visible";
+document.getElementById('upimage').style.visibility = "visible";
+document.getElementById('imagedownch').style.visibility = "visible";
+document.getElementById('imagedown').style.visibility = "visible";
+document.getElementById('color').style.visibility = "hidden";
+
+}
+
+}
+
+
+function getvalue()
+{
+for (var i=0; i < controlForm.group2.length; i++)
+   	{   
+     	if (controlForm.group2[i].checked)
+      		{
+      		    
+      		selected_Vchoice= controlForm.group2[i].value;
+      			
+      	}
+   	}	
+selectimageupChoice();
+selectimagedownChoice();
+var params="";
+var a =  document.controlForm.left.value;
+var b =  document.controlForm.top.value;
+var c =  document.controlForm.width.value;
+var d =  selected_Vchoice;                                                      //document.controlForm.visibility.value;
+var e = document.controlForm.height.value;
+
+//image up and  down
+var pqr = document.controlForm.upimage.value;
+var xyz = document.controlForm.imagedown.value;
+var f = "url('"+selected_IUpchoice+pqr+"')";
+var g = "url('"+selected_IDownchoice+xyz+"')";
+//image up and  down
+var h = document.controlForm.color.value;
+
+
+var lft= trimAll(a);
+var tp= trimAll(b);
+var wth= trimAll(c);
+var vis= trimAll(d);
+var hght= trimAll(e);
+var imup= trimAll(f);
+var imdn= trimAll(g);
+var col = trimAll(h);
+
+
+
+
+if(vis!="")
+params="visibility:"+vis; 
+if(lft!="")
+params+=";left:"+lft;                          
+if(tp!="")
+params+=";top:"+tp;
+if(wth!="")
+params+=";width:"+wth;
+if(hght!="")
+params+=";height:"+hght;
+if(imup!="")
+{
+if(selected_Item=="bottomcommandarea" || selected_Item=="topcommandarea")
+params+=";image:"+imup;
+else
+params+=";imageup:"+imup;
+}
+if(imdn!="")
+{
+if(selected_Item=="bottomcommandarea" || selected_Item=="topcommandarea")
+params+=";image:"+imdn;
+else
+params+=";imagedown:"+imdn;
+}
+if(col!="")
+    params += ";color:" + col;
+
+Message.innerHTML=""+selected_Item+""+params;
+
+var output = generic.InvokeMETAFunction(selected_Item, params);
+reset();
+
+}
+
+function trimAll(sString) 
+ { 
+   while (sString.substring(0,1) == ' ') 
+    { 
+    sString = sString.substring(1, sString.length); 
+    } 
+   while (sString.substring(sString.length-1, sString.length) == ' ') 
+    { 
+    sString = sString.substring(0,sString.length-1); 
+    } 
+    return sString; 
+ } 
+ 
+ 
+ function reset()
+ {
+
+ document.controlForm.color.value="";
+ selected_Vchoice="";
+ selected_IUpchoice="";
+ selected_IDownchoice = "";
+ }
+ 
+
+ 
+  function selectimageupChoice()
+  {
+   for (var i=0; i < controlForm.group3.length; i++)
+   	{   
+     	if (controlForm.group3[i].checked)
+      		{
+      		    
+      		value= controlForm.group3[i].value;
+      			
+      	}
+   	}	
+   if(value=="http")
+   selected_IUpchoice="http://10.233.85.82/pb3.x/Resource/";
+   else if(value=="ftp")
+   selected_IUpchoice="ftp://ftpadmin:ftpadmin@10.233.85.82/Resource/";
+   else if(value=="local")
+   selected_IUpchoice="file://\\Application\\Resource\\";
+  }
+ 
+  function selectimagedownChoice()
+  {
+  for (var i=0; i < controlForm.group4.length; i++)
+   	{   
+     	if (controlForm.group4[i].checked)
+      		{
+      		    
+      		value= controlForm.group4[i].value;
+      			
+      	}
+   }	
+  if(value=="http")
+   selected_IDownchoice = "http://10.233.85.82/pb3.x/Resource/";
+   else if(value=="ftp")
+   selected_IDownchoice = "ftp://ftpadmin:ftpadmin@10.233.85.82/Resource/";
+   else if(value=="local")
+   selected_IDownchoice = "file://\\Application\\Resource\\";
+  }
+
+  function hideComponent()
+  {
+//      if (selected_Item != "gobutton")
+//       {
+//          generic.InvokeMETAFunction('addressbar', 'visibility:hidden');
+//      }
+
+//      if (selected_Item != "ForwardButton") {
+//          generic.InvokeMETAFunction('backbutton', 'visibility:hidden');
+//      }
+
+//  generic.InvokeMETAFunction('bottomcommandarea', 'visibility:hidden');
+//  generic.InvokeMETAFunction('ForwardButton', 'visibility:hidden');
+// generic.InvokeMETAFunction('gobutton', 'visibility:hidden');
+// generic.InvokeMETAFunction('HomeButton', 'visibility:hidden');
+// generic.InvokeMETAFunction('KeyState', 'visibility:hidden');
+// generic.InvokeMETAFunction('minimizebutton', 'visibility:hidden');
+// generic.InvokeMETAFunction('reloadbutton', 'visibility:hidden');
+////generic.InvokeMETAFunction('SIPbutton', 'visibility:hidden');
+// generic.InvokeMETAFunction('Stopbutton', 'visibility:hidden');
+// generic.InvokeMETAFunction('ZoomTextButton', 'visibility:hidden');
+// generic.InvokeMETAFunction('topcommandarea', 'visibility:hidden');
+// generic.InvokeMETAFunction('quitbutton', 'visibility:hidden');
+}
+ 
+
+</script>

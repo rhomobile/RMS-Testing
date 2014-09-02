@@ -1,0 +1,41 @@
+<HTML>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+<meta http-equiv="Pragma" content="no-cache">
+<!--<meta http-equiv="expires" content="0">-->
+
+<!--<META HTTP-Equiv="Notification" content="stateOn:0">-->
+<TITLE>Device / Application Tests</TITLE>
+  <script type="text/javascript">
+ 
+ 
+  
+  function setBeeper()
+  {
+
+    bat.innerHTML ="Starting";
+	//var index = 0;
+	generic.InvokeMetaFunction("Notification", "StateOn:0");
+	//bat.innerHTML ="StateOn:" + index;
+	
+	
+  }
+  
+  
+  
+  </script>
+</HEAD>
+ <body
+<H1>Notification Tests asd</H1>
+<P>
+  <div id="enumNotifications">Notifications go Here</div>
+  <div id ="bat">Result</div>
+  <br /><br />
+  
+<INPUT TYPE="button" VALUE="Beeper" ONCLICK="setBeeper();">
+
+<br>
+
+  </body>
+</HTML>

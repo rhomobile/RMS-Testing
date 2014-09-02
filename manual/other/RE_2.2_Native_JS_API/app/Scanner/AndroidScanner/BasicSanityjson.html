@@ -1,0 +1,186 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+<META HTTP-Equiv="scanner" Content="allDecoders:enabled">
+
+<script type="text/javascript">
+  var mygeneric = new ActiveXObject("PocketBrowser.Generic");
+  var selected_scanner = "";
+
+   function enablemethod()
+    {
+       mygeneric.InvokeMETAFunction('Scanner', 'enable');
+       myAmit.innerHTML="enable";
+    }
+    
+    function disablemethod()
+    {
+     mygeneric.InvokeMETAFunction('Scanner', 'disable');
+       myAmit.innerHTML="disable";
+
+    }
+    
+    function enabletest()
+   {
+     var temp = "enabled:" + selected_scanner.toString();
+     mygeneric.InvokeMETAFunction('scanner', temp);
+     myAmit.innerHTML=temp;
+
+   }
+
+   function disabletest()
+    {
+     mygeneric.InvokeMETAFunction('Scanner', 'disabled');
+       myAmit.innerHTML="disabled";
+
+    }
+
+   
+   function starttest()
+   {
+     mygeneric.InvokeMETAFunction('scanner', "start");
+       myAmit.innerHTML="start";
+
+   }
+
+   function stoptest()
+    {
+     mygeneric.InvokeMETAFunction('Scanner', 'stop');
+      myAmit.innerHTML="stop";
+    }
+
+//    function enumerateScannersViaJSON()
+//	{
+//		mygeneric.InvokeMETAFunction("Scanner", "enumScannerEvent:url('Javascript:onScannersViaJSON(%json);')");
+//		mygeneric.InvokeMETAFunction("Scanner", "enumerate");
+//		
+//    }
+//    
+//    function onScannersViaJSON(jsonObject)
+//  {
+//	 var html = "<b>Device Name: Friendly Name</b><br>";
+//	 for(i=0; i<jsonObject.scannerArray.length; i++)	
+//     {
+//       html += '' + jsonObject.scannerArray[i].deviceName + ': ' 
+//	        + jsonObject.scannerArray[i].friendlyName + '<br>';
+//     }
+//     html += "";
+//	enumScanners.innerHTML=html;
+//  }
+  
+  function onDecodeEventJSON(jsonObject)
+    {
+	var html = "<b>Decoded Data:</b><br>";
+	html = html + "<br><i>Data:</i> " + jsonObject.data;
+	html = html + "<br><i>Source:</i> " + jsonObject.source;
+	html = html + "<br><i>Type:</i> " + jsonObject.type;
+	html = html + "<br><i>Time:</i> " + jsonObject.time;
+	html = html + "<br><i>Length:</i> " + jsonObject.length;
+	html = html + "<br><i>Event:</i> " + jsonObject.event;
+    scanData.innerHTML = html;
+   }
+  
+  
+    
+    function Quit()
+    {
+	mygeneric.InvokeMETAFunction("Application", "Quit");
+    }
+
+    function setEnumScannerTimer() 
+    {
+
+        setTimeout("onScannerEnable()", 1000);
+    }
+    function onScannerEnable() 
+    {
+       
+      mygeneric.InvokeMETAFunction("Scanner","decodeEvent:url('Javascript:onDecodeEventJSON(%json);')");
+      mygeneric.InvokeMETAFunction("Scanner", "enumScannerEvent:url('Javascript:EnumScanners(%json);')");
+      mygeneric.InvokeMETAFunction('Scanner', 'enumerate');
+        
+    }
+
+
+    
+    function EnumScanners(jsonObject) 
+    {
+    	var html = "<b>Device Name: Friendly Name</b><br>";
+        for (i = 0; i < jsonObject.scannerArray.length; i++) 
+        {
+           
+            this.document.ODAXForm.myscanner.options[i + 1].text = jsonObject.scannerArray[i].deviceName + jsonObject.scannerArray[i].friendlyName;
+            this.document.ODAXForm.myscanner.options[i + 1].value = jsonObject.scannerArray[i].deviceName;
+            
+            html += '' + jsonObject.scannerArray[i].deviceName + ': ' 
+	        + jsonObject.scannerArray[i].friendlyName + '<br>';
+            //myAmit.innerHTML+="myscanner"+scannerArray[i][0];
+        }
+     html += "";
+	enumScanners.innerHTML=html;
+    }
+
+
+    function selectScanner()
+     {
+        
+        var w = document.ODAXForm.myscanner.selectedIndex;
+        selected_scanner = document.ODAXForm.myscanner.options[w].value;
+
+        if (selected_scanner != "") 
+        {
+
+            mygeneric.InvokeMETAFunction('Scanner', 'disabled');
+        }
+       
+    }
+    function pres()
+    {
+          //mygeneric.InvokeMETAFunction('Scanner', 'adaptiveScanning:true');
+          //mygeneric.InvokeMETAFunction('Scanner', 'aimType:timedrelease');
+       
+         mygeneric.InvokeMETAFunction('Scanner', 'aimType:presentation');
+        //mygeneric.InvokeMETAFunction('Scanner', 'enabled');
+//       mygeneric.InvokeMETAFunction('scanner', 'start');
+    }
+    
+    
+    
+ </script>
+</head>
+<body onload="setEnumScannerTimer();">
+<br /><br />
+<div  id="enumScanners">Enumerate Scanners</div><br />
+<div  id="scanData">scan data</div><br />
+<DIV ID="myAmit">Selected Scanner: </DIV>
+<br /><br />
+<DIV ID="message">message </DIV>
+<form name="ODAXForm" id="ODAXForm" action="">
+<table>
+<tr>
+<td>
+<!--<INPUT align="center" type="button" value="Enumerate Scanners" onclick="enumerateScannersViaJSON();"><br />-->
+<select name="myscanner" id="myscanner" onChange="selectScanner();">
+<OPTION value="" >Select Scanner</OPTION> 
+<OPTION value="" ></OPTION> 
+<OPTION value="" ></OPTION> 
+<OPTION value="SCN5" ></OPTION> 
+<OPTION value="SCN5" ></OPTION> 
+</select></td></tr>
+<tr><td>Decoded data:</b><TEXTAREA NAME="datafield" id="datafield" COLS=20 ROWS=2></TEXTAREA></td></tr>
+<tr><td><P><INPUT TYPE="button" VALUE="Enabled" ONCLICK="enabletest();">
+<INPUT TYPE="button" VALUE="Disabled" ONCLICK="disabletest();"></td></tr>
+<tr><td><P><INPUT TYPE="button" VALUE="Start" ONCLICK="starttest();">
+<INPUT TYPE="button" VALUE="stop" ONCLICK="stoptest();"></td></tr>
+<tr><td><P><INPUT TYPE="button" VALUE="enabledefault" ONCLICK="enablemethod();">
+<INPUT TYPE="button" VALUE="disabledefault" ONCLICK="disablemethod();"></td></tr>
+<tr><td><INPUT TYPE="button" VALUE="Back" ONCLICK="location.href='./Scanner.html'">
+<INPUT TYPE="button" VALUE="Quit" ONCLICK="Quit();">
+<INPUT TYPE="button" VALUE="presentation" ONCLICK="pres();"></td></tr>
+</table>
+</form>
+
+</body>
+</html>

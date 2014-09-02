@@ -1,0 +1,59 @@
+<HTML>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+
+<SCRIPT LANGUAGE="JavaScript">
+ var iCount = 0;
+ try
+{
+var generic = new ActiveXObject("PocketBrowser.generic");
+}
+catch(err)
+{
+var genericPlugin = document.createElement('embed'); 
+genericPlugin.setAttribute('id',"embed1"); 
+genericPlugin.setAttribute('type',"application/x-wtg-legacy-generic"); 
+genericPlugin.setAttribute('hidden',"true"); 
+
+// Attach the plugin embed tags to the body 
+var theBody = document.getElementsByTagName('body')[0]; 
+theBody.appendChild(genericPlugin); 
+
+
+}
+    function OnTimer() 
+    {
+
+        iCount++;
+        if (iCount <= 50000) {
+            generic.SetRegistrySetting(2, 1, "Software\\Name", "Software", "Helloworld");
+
+
+            strData = generic.GetRegistrySetting(2, "Software\\Name", "Software");
+            reg.innerHTML = strData;
+            nos.innerHTML = iCount;
+            captureLoop();
+
+        }
+    }
+
+    function captureLoop() {
+        setTimeout("OnTimer()", 5000);
+
+    }
+</SCRIPT>
+
+</HEAD>
+
+<BODY onload="OnTimer();">
+
+<H2>Set and Get Registry Memory Leak using Timer</H2>
+
+<DIV ID="reg">Get Registry</DIV>
+<div id="nos">X Value</div>
+<P><INPUT TYPE="button" VALUE="Back" ONCLICK="location.href='./generic ActiveX Object.html'"></P>
+
+</BODY>
+</HTML>
+

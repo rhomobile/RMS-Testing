@@ -1,0 +1,121 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+
+</head>
+<body>
+<SCRIPT language="javascript">
+
+var validexitCode = "";
+
+function dolog()
+{
+    
+    var rValue3 = generic.Log('This is high priority log my dear3', 3);
+    Div3.innerHTML="PHigh  "+rValue3;
+    var rValue2 = generic.Log('This is medium priority log my dear2', 2);
+    Div2.innerHTML="PMedium  "+rValue2;
+    var rValue1 = generic.Log('This is low priority log my dear1', 1);
+    Div1.innerHTML="Plow  "+rValue1;
+    var rValue0 = generic.Log('This is invalid priority log my dear',"0");
+    Div4.innerHTML="PInvalid  "+rValue0;
+	
+    
+ }
+ 
+ function selectItem()
+{
+
+	var SIndex= exitdropdown.selectedIndex;
+	var sValue = exitdropdown.options[SIndex].value;
+	switch(sValue)
+	{
+		case 'Valid':
+			//alert('You selected Valid');
+			alert('You selected Valid \n You selected Valid \n You selected Valid \n You selected Valid \n You selected Valid \n You selected Valid \n You selected Valid \n You selected Valid \n You selected Valid \n You selected Valid \n You selected Valid \n You selected Valid \n You selected Valid \n You selected Valid \n You selected Valid \n You selected Valid \n You selected Valid \n You selected Valid \n You selected Valid \n You selected Valid \n You selected Valid \n You selected Valid \n You selected Valid \n You selected Valid \n You selected Valid \n You selected Valid \n You selected Valid \n You selected Valid \n You selected Valid \n You selected Valid \n You selected Valid \n ');
+			break;
+
+		case 'Invalid':
+			alert('You selected InValid');
+			break;
+
+	
+	}
+	
+	}
+
+
+ 
+ function launchNonBlock()
+{
+	var filePath1=txtimageName1.value;
+	validexitCode = generic.LaunchProcessNonBlocking(filePath1, '');
+}
+ 
+ function getUUID()
+ {
+ var myUUID = generic.UUID();
+alert(myUUID);
+ 
+ }
+ 
+ function getOEM()
+ {
+ var myoem = generic.OEMInfo();
+ alert(myoem);
+ 
+ }
+ 
+ function getUUIDP()
+ {
+ //var myUUIDP = generic.UUID;
+Textarea1.value=generic.UUID;
+ 
+ }
+ 
+ function getOEMP()
+ {
+ //var myoemP = generic.OEMInfo;
+Textarea1.value=generic.OEMInfo;
+ 
+ }
+
+
+
+</SCRIPT>
+<BR><BR>
+<p>Generic Log Test and UUID</p>
+<BR><BR>
+<div id="Div1">Plow</div>
+<div id="Div2">PMedium</div>
+<div id="Div3">PHigh</div>
+<div id="Div4">PInvalid</div>
+<br />
+<Textarea id="Textarea1"cols="21" rows="4">retrieve value in text area</Textarea><br />
+<P><INPUT TYPE="button" VALUE="User log entry" ONCLICK="dolog();"></P>
+Close & Exit Process:
+<Textarea id="txtimageName1" cols="28" rows="1">\Application\MemoryCheck.exe</Textarea><br />
+
+<input type="button" onclick="launchNonBlock();" value="launchNonBlock"><br />
+GetProcessExitCode:	<select name="exitdropdown" id="exitdropdown" onChange="selectItem();">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="Valid">Valid</option>
+<option value="Invalid">Invalid</option>
+<option value="Null">Null</option>
+</select>
+
+
+<p><input type="button" value="UUIDProperty" onclick="getUUIDP();" /></p>
+<p><input type="button" value="OEMProperty" onclick="getOEMP();" /></p>
+<br />
+<A href="./Generic ActiveX Object.html">Back</A>
+
+
+</body>
+</html>
+
+
+
+
+

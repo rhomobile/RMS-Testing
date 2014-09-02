@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+ 
+   <script>
+ function doTest()
+{
+myDiv.innerHTML="applying";
+generic.InvokeMETAFunction("AddressBar","visibility:visible;left:60;top:0;width:50");
+generic.InvokeMETAFunction("BackButton","visibility:visible;imageup:url('file:///Android/data/Resource/BMW.bmp')");
+generic.InvokeMETAFunction("ForwardButton","visibility:visible;imageup:url('file:///Android/data/Resource/BMW.bmp');");
+generic.InvokeMETAFunction("GoButton","visibility:Visible;top:50;Left:150;height:50;width:60;imageup:url('file:///Android/data/Resource/BMW.bmp');");
+generic.InvokeMETAFunction("stopbutton","visibility:visible;top:150;left:150;height:50;width:50;imageup:url('file:///Android/data/Resource/BMW.bmp');imagedown:url('file:///Android/data/Resource/BMW.bmp');");
+generic.InvokeMETAFunction("Quitbutton","visibility:visible;top:250;left:150;height:50;width:50;imageup:url('file:///Android/data/Resource/BMW.bmp');imagedown:url('file:///Android/data/Resource/BMW.bmp');");
+generic.InvokeMETAFunction("Reloadbutton","visibility:visible;top:350;left:150;height:50;width:50;imageup:url('file:///Android/data/Resource/BMW.bmp');imagedown:url('file:///Android/data/Resource/BMW.bmp');");
+generic.InvokeMETAFunction("Homebutton","visibility:visible;top:410;left:150;height:50;width:50;imageup:url('file:///Android/data/Resource/BMW.bmp');imagedown:url('file:///Android/data/Resource/BMW.bmp');");
+generic.InvokeMETAFunction("BottomCommandArea","visibility:visible;height:30;image:url('file:///Android/data/Resource/BMW.bmp');");
+generic.InvokeMETAFunction("TopCommandArea","visibility:visible;height:30;image:url('file:///Android/data/Resource/BMW.bmp');");
+myDiv.innerHTML="applied";
+}
+
+ </script>
+</head>
+<body >
+Local BMP Images 
+<div id="myDiv">message</div>
+<P><INPUT TYPE="button" VALUE="Visible" ONCLICK="doTest();"></P><br />
+
+<P><INPUT TYPE="button" VALUE="Back" ONCLICK="location.href='./C&A.html'"></P>
+</body>
+</html>

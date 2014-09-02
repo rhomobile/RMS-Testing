@@ -1,0 +1,57 @@
+<HTML>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="expires" content="0">
+<META HTTP-Equiv="Notification" content="EnumNotificationsEvent:url('Javascript:onNotificationsViaJSON(%json);'); Enumerate">
+
+
+  <script type="text/javascript">
+  
+  var ntfyArr = new Array();
+  var notType = new Array('LED', 'BEEPER', 'PAGER');
+   var NTFY_INDEX = 0;
+   var NTFY_TYPE = 1;
+   var NTFY_NAME = 2;
+
+
+ 
+  function getNotificationsViaJSON()
+    {
+        //var generic = new ActiveXObject("PocketBrowser.Generic");
+        generic.InvokeMETAFunction("Notification", "EnumNotificationsEvent:url('Javascript:onNotificationsViaJSON(%json);'); Enumerate");
+    }
+    
+  
+    
+  
+	
+  function onNotificationsViaJSON(jsonObject)
+  {
+	 var html = "";
+ 
+	 for(i=0; i<jsonObject.notificationsArray.length; i++)	
+     {
+       html += '' + jsonObject.notificationsArray[i].notificationIndex + ', ' 
+	        + notType[jsonObject.notificationsArray[i].notificationType] + ', ' 
+	        + jsonObject.notificationsArray[i].notificationName + '<P>';
+     }
+	 
+     html += "";
+  
+	enumNotifications.innerHTML=html;
+  }
+  
+  
+  </script>
+</HEAD>
+ <body>
+<H1>Notification Tests</H1>
+<P>
+  <div id="enumNotifications">Notifications go Here</div>
+  <BR><BR><BR>
+ 
+ 
+  </body>
+</HTML>

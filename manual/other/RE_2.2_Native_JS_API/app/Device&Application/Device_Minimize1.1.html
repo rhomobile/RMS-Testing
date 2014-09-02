@@ -1,0 +1,239 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+
+
+
+
+
+</HEAD>
+
+
+
+<BODY>
+
+<P><BR><INPUT TYPE="button" VALUE="Back" ONCLICK="location.href='./INDEX.html'"></P>
+Minimize and Restote Test Case<br>
+<br>
+<input type=button onclick="setInterval();" value="Interval">
+
+<input type=button onclick="clearAlarm();" value="Clear"><br><br>
+<div id="nos">X Value</div>
+<br>
+<input id="Text1" type="text" />
+<input type=button onclick="MinRes();" value="M&R">
+<input type=button onclick="Sus();" value="Suspend">
+<input type=button onclick="Cali();" value="Calibrate">
+<input type=button onclick="Cold();" value="Cold">
+<input type=button onclick="Warm();" value="Warm">
+<input type=button onclick="Right();" value="Right">
+<input type=button onclick="Left();" value="Left">
+<input type=button onclick="UpDown();" value="UpDown">
+<input type=button onclick="Normal();" value="Normal">
+<input type=button onclick="URLEv();" value="URLEvt">
+<input type=button onclick="sipManual();" value="SIP Manual">
+<input type=button onclick="sipAuto();" value="SIP Auto">
+<input type=button onclick="sipPos();" value="SIP Pos">
+<input type=button onclick="Java();" value="JavaScript">
+<input type=button onclick="JSONScreen();" value="JSONScreen">
+<input type=button onclick="Auto();" value="Auto">
+<input type=button onclick="setVolume();" value="Volume">
+<input type=button onclick="setText();" value="TextSize">
+<input type=button onclick="Stylus();" value="stylus">
+<input type=button onclick="Keylight();" value="keylight">
+<input type=button onclick="Hourglass();" value="hourglass">
+<input type=button onclick="Backlight();" value="backlight">
+<input type=button onclick="timer();" value="timer">
+<input type=button onclick="timerstop();" value="timerstop">
+<input type=button onclick="historyBack();" value="history">
+<input type=button onclick="notifyObj();" value="notify">
+</BODY>
+</HTML>
+<script>
+
+try
+{
+var generic = new ActiveXObject("PocketBrowser.Generic");
+}
+catch(err)
+{
+var GenericPlugin = document.createElement('embed'); 
+GenericPlugin.setAttribute('id',"embed1"); 
+GenericPlugin.setAttribute('type',"application/x-wtg-legacy-generic"); 
+GenericPlugin.setAttribute('hidden',"true"); 
+
+// Attach the plugin embed tags to the body 
+var theBody = document.getElementsByTagName('body')[0]; 
+theBody.appendChild(GenericPlugin); 
+
+
+}
+var iCount = 0;
+//function MinRes()
+//{
+//	iCount++;
+//	if(iCount <= 50000)
+//	{
+//		generic.InvokeMETAFunction('Application', 'Minimize');
+//		setTimeout("restore()",3000);
+//		nos.innerHTML = iCount;
+//		captureLoop();
+//	}
+//}
+
+function restore()
+{
+    generic.InvokeMETAFunction('Application', 'Restore');
+}
+//function captureLoop()
+//{
+//	setTimeout("MinRes()", 5000);
+//	
+//}
+function MinRes()
+{
+  generic.InvokeMETAFunction('Application', 'Quit');
+}
+function setInterval()
+{
+	alert("Hello");
+	generic.InvokeMETAFunction("Alarm", "Repeat:true");
+	
+	generic.InvokeMETAFunction("Alarm", "Interval:00-00-30");
+	//generic.InvokeMETAFunction("Alarm","AlarmTriggered:url('javascript:alert('Alarm Triggered');')");
+	generic.InvokeMETAFunction("Alarm","AlarmTriggered:url('http://157.235.207.158/pb3.x/index.html')");
+	generic.InvokeMETAFunction('Alarm', 'Set');
+}
+function clearAlarm()
+{
+    generic.InvokeMETAFunction('Alarm', 'Clear');
+}
+function Sus()
+{
+  generic.InvokeMETAFunction('Device', 'Suspend');
+}
+function Cali()
+{
+  generic.InvokeMETAFunction('Device', 'Calibrate');
+}
+function Warm()
+{
+  generic.InvokeMETAFunction('Reboot', 'Warm');
+}
+function Cold()
+{
+  generic.InvokeMETAFunction('Reboot', 'Cold');
+}
+function Right()
+{
+  generic.InvokeMETAFunction('ScreenOrientation', 'RightHanded');
+}
+function Left()
+{
+  generic.InvokeMETAFunction('ScreenOrientation', 'LeftHanded');
+}
+function UpDown()
+{
+  generic.InvokeMETAFunction('ScreenOrientation', 'UpsideDown');
+}
+function Normal()
+{
+  generic.InvokeMETAFunction('ScreenOrientation', 'Normal');
+}
+function URLEv()
+{
+  alert("Url");
+  generic.InvokeMETAFunction("ScreenOrientation", "ScreenOrientationEvent:url('http://10.233.85.82/pb3.x/index.html')");
+  generic.InvokeMETAFunction('ScreenOrientation', 'Normal');
+  
+}
+function Java()
+{
+   generic.InvokeMETAFunction("ScreenOrientation", "ScreenOrientationEvent:url('javascript:alert('Orientation Changed');')");
+   generic.InvokeMETAFunction('ScreenOrientation', 'Normal');
+}
+function JSONScreen()
+{
+   generic.InvokeMETAFunction("ScreenOrientation", "ScreenOrientationEvent:url('Javascript:OnChange(%json);')");
+   generic.InvokeMETAFunction('ScreenOrientation', 'Normal');
+}
+function OnChange(json)
+{
+   alert(""+json.orientation);
+}
+function Auto()
+{
+  generic.InvokeMETAFunction('ScreenOrientation', 'autoRotate:');
+}
+function sipManual()
+{
+  generic.InvokeMETAFunction('SIPbutton', 'Visibility:Visible');
+  generic.InvokeMETAFunction('SIP', 'Manual');
+}
+function sipAuto()
+{
+  generic.InvokeMETAFunction('SIPbutton', 'Visibility:Visible');
+  generic.InvokeMETAFunction('SIP', 'Auto');
+}
+function sipPos()
+{
+  alert("Sippos");
+  generic.InvokeMETAFunction('SIP','Left:0;Top:500');
+}
+function setVolume()
+{
+alert("Vol");
+  generic.InvokeMETAFunction('Volume',"SetVolume:0xFFFF");
+}
+function setText()
+{
+  generic.InvokeMETAFunction('TextSize', 'Medium');
+}
+function Stylus()
+{
+  generic.InvokeMETAFunction('Stylus', 'Enabled');
+}
+function Keylight()
+{
+  generic.InvokeMETAFunction('Keylight-On', 'intensity:2');
+}
+function Hourglass()
+{
+   generic.InvokeMETAFunction('Hourglass', 'Visibility:visible');
+}
+function Backlight()
+{
+  //generic.InvokeMETAFunction('backlight-On', 'intensity:1');
+   generic.InvokeMETAFunction('backlight', 'off');
+}
+function timer()
+{
+//alert("timer");
+  generic.InvokeMETAFunction('Timer','Interval:60000');
+  generic.InvokeMETAFunction("Timer","Timeout:url('javascript:doTimer(%json);')");
+  //generic.InvokeMETAFunction("Timer", "Timeout:url('http://10.233.85.82/pb3.x/index.html')");
+  generic.InvokeMETAFunction('Timer','Start');
+}
+function doTimer(jsonObj)
+{
+  nos.innerHTML = "Time ="+jsonObj.time;
+  //alert("timer expired");
+}
+function timerstop()
+{
+  generic.InvokeMETAFunction('Timer','Stop');
+}
+function historyBack()
+{
+  generic.InvokeMETAFunction('history:back');
+}
+function notifyObj()
+{
+  alert("notify1");
+  generic.InvokeMetaFunction("Notification", "setLEDOnDuration:1000");
+  generic.InvokeMetaFunction("Notification", "setLEDOffDuration:500");
+  generic.InvokeMetaFunction("Notification", "setLEDNumberOfCycles:5");
+  generic.InvokeMetaFunction("Notification", "StateCycle:0");
+}
+</script>

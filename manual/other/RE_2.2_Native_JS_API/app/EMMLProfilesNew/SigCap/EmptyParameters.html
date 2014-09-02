@@ -1,0 +1,74 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+
+<SCRIPT LANGUAGE="JavaScript">
+    //var Generic = new ActiveXObject("PocketBrowser.Generic");
+
+    function myvectorevent(data)
+    {
+	    var VectorAsHTML = "<TABLE><TR><TH>X</TH><TH>Y</TH><TH>X</TH><TH>Y</TH><TH>X</TH><TH>Y</TH></TR>";
+        for (var i=0; i<data.length; i = i + 6)
+        {
+            VectorAsHTML = VectorAsHTML + "<TR>"
+            VectorAsHTML = VectorAsHTML + "<TD>" + data[i] + "</TD><TD>" + data[i+1] + "</TD>";
+            VectorAsHTML = VectorAsHTML + "<TD>" + data[i+2] + "</TD><TD>" + data[i+3] + "</TD>";
+            VectorAsHTML = VectorAsHTML + "<TD>" + data[i+4] + "</TD><TD>" + data[i+5] + "</TD>";
+            VectorAsHTML = VectorAsHTML + "</TR>"
+        }
+        VectorAsHTML + "</TABLE>"
+        message.innerHTML = VectorAsHTML;
+    }
+
+    function doApplyProfile(profile) 
+    {
+        message2.innerHTML = "Applying Profile";
+        generic.InvokeMETAFunction('EMMLProfile', 'Apply:' + profile);
+        message2.innerHTML = "Profile Applied";
+        //alert(p);
+        //generic.InvokeMETAFunction('EMMLProfile', 'Apply:' + );
+    }
+
+    function clearProfile() 
+    {
+        message2.innerHTML = "Clearing Profile";
+        generic.InvokeMETAFunction('EMMLProfile', 'clear:mySigCap');
+        message2.innerHTML = "Profile Cleared";
+    }
+
+    function importProfile() 
+    {
+        message2.innerHTML = "Importing Profile";
+        generic.InvokeMETAFunction("EMMLProfile", "name:mySigCap;import:url('http://10.233.85.82/Neon/EMMLProfilesNew/SigCap/EMMP/SigCap.emmp');");
+        message2.innerHTML = "Profile Imported";
+        
+        alert("done");
+    }
+
+function Quit()
+{
+    Generic.InvokeMETAFunction("Application", "Quit");
+}
+</SCRIPT>
+</head>
+<body>
+<P><BR></P>
+<h4>Named Signature Capture EMML Profile - Empty Parameters</h4>
+<div id="message2" style="background-color:Black; font-family:@Batang; color:Red">message2</div>
+<div Id="bat">Vector readings should appear here</div><br /><br /><br />
+<div id="message">message</div>
+<BR><BR><BR>
+<input type=button value="Import profile" onclick="importProfile();">
+<br />
+<a href="javascript:doApplyProfile('mySigCap.SigCap_EmptyParameters');">Apply SigCap_EmptyParameters Profile</a>
+<br>
+<input type=button value="Clear Profile" onclick="clearProfile();">
+<hr />
+<a href="../EMMLProfilesIndex.html">Back to EMML Profile Index</a>
+<br /><P><INPUT TYPE="button" VALUE="Quit" ONCLICK="Quit();"></P>
+
+
+</body>
+</html>
+

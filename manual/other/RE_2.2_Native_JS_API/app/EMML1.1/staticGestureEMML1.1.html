@@ -1,0 +1,38 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+
+
+
+<META HTTP-Equiv="gesture" Content="type:linear;id:LinearGesture1;preset:left-right;diagnostics:TRUE;start-x:50;
+start-y:50;end-x:210;end-y:50;tolerance:30;sensitivity:60;skew:30;deviation:50;region-width:40;create;
+
+type:Circle;id:CircularGesture1;preset:happy;diagnostics:TRUE;center-x:250;center-y:250;radius:40;start:0;end:180;
+tolerance:70;sensitivity:20;create;
+
+type:Hold;id:HoldGesture1;preset:center;diagnostics:TRUE;center-x:150;center-y:150;radius:40;delay:2000;interval:1000;create;
+" />
+
+<META HTTP-Equiv="gesture-detected" Content="url('Javascript:GestureEvent('%s','%s');')">
+
+    <title>PB 3.0 Linear Gesture static EMML 1.1</title>
+
+<script language=javascript>
+
+
+var count=1;
+function GestureEvent(id,holdcount)
+{
+mydiv.innerHTML="Gesture Detected for"+count+"th time.id:-"+id+"   Count="+holdcount;
+count++;
+}
+
+</script>
+</head>
+<body>
+<form id="frmLinearGestures" >
+<div id="mydiv">Gesture Detection:-</div>
+</form>
+</body>
+</html>

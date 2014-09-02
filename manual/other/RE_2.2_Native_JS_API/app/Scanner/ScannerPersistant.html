@@ -1,0 +1,163 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+<META HTTP-Equiv="quitbutton" Content="visibility:visible">
+<META HTTP-Equiv="quitbutton" Content="Left:10">
+<META HTTP-Equiv="quitbutton" Content="Top:10">
+
+</head>
+<body>
+<p>Scanner Persistant Test</p>
+<!--<input id="datafield" type="text" value="" /><br /><br />-->
+Decoded data:<Textarea id="datafield"cols="20" rows="6"></Textarea>
+Saurav:<input id="Text1" type="text" value="" /><br /><br />
+<INPUT TYPE="button" VALUE="Alldecodersdisabled" ONCLICK="doAllDisable();"><br /><br />
+<INPUT TYPE="button" VALUE="Alldecodersenabled" ONCLICK="doAllEnable();"><br /><br />
+<INPUT TYPE="button" VALUE="Code11 Enable" ONCLICK="doEnable('CODE11');"><br /><br />
+<INPUT TYPE="button" VALUE="Code11 Disable" ONCLICK="doDisable('CODE11');"><br /><br />
+<INPUT TYPE="button" VALUE="Scanner Disable" ONCLICK="doDisableScanner();"><br /><br />
+<INPUT TYPE="button" VALUE="Scanner enable" ONCLICK="doenableScanner();"><br /><br />
+
+<form name="ODAXForm" id="ODAXForm" action="">
+<table>
+<tr>
+<td>
+<select id="MyDecodeEvent" onChange="DoSetEvent();">
+<OPTION value="" >Select Event</OPTION> 
+
+<OPTION value="HTML" >HTML</OPTION> 
+<OPTION value="JS" >JSCRIPT</OPTION> 
+<OPTION value="EMPTY" >EMPTY</OPTION> 
+</select></td></tr>
+</table></form>
+<br />
+<div id = "bat">
+</div>
+<P><INPUT TYPE="button" VALUE="Back" ONCLICK="location.href='../index.html'"></P>
+</body>
+</html>
+<SCRIPT type="text/javascript">
+     try
+{
+var generic = new ActiveXObject("PocketBrowser.generic");
+}
+catch(err)
+{
+var genericPlugin = document.createElement('embed'); 
+genericPlugin.setAttribute('id',"embed1"); 
+genericPlugin.setAttribute('type',"application/x-wtg-legacy-generic"); 
+genericPlugin.setAttribute('hidden',"true"); 
+
+// Attach the plugin embed tags to the body 
+var theBody = document.getElementsByTagName('body')[0]; 
+theBody.appendChild(genericPlugin); 
+
+
+}
+    var selected_event = "";
+
+
+    function doScan(data, source, type, time, length,evt) 
+    {
+        datafield.value = data + ":" + source + ":" + type + ":" + time + ":" + length+"Event = "+evt;
+        
+    }
+
+    function doDisableScanner() {
+
+
+        generic.InvokeMETAFunction('scanner', 'disabled');
+    }
+
+
+
+    function doenableScanner()  {
+
+
+        generic.InvokeMETAFunction('scanner', 'enabled:SCN1');
+      
+    }
+
+
+    function doAllDisable() {
+        generic.InvokeMETAFunction('scanner', 'all_decoders:disabled');
+        //generic.InvokeMETAFunction('scanner', 'all_decoders:disabled;Code128:enabled;code128ean128:true;enabled;start');
+        //generic.InvokeMETAFunction('scanner', 'all_decoders:disabled;Code39:enabled;Code39ConvertToCode32:true;enabled;start');
+        // generic.InvokeMETAFunction('scanner', 'all_decoders:disabled;Codabar:enabled;Codabarnotisediting:false;CodabarCLSiEditing:true;enabled:SCN1;start');
+
+    }
+
+    function doAllEnable() {
+        generic.InvokeMETAFunction('scanner', 'all_decoders:enabled');
+        //generic.InvokeMETAFunction('scanner', 'all_decoders:disabled;Code128:enabled;code128ean128:false;enabled;start');
+        //generic.InvokeMETAFunction('scanner', 'all_decoders:disabled;Code39:enabled;Code39ConvertToCode32:false;enabled;start');
+        //generic.InvokeMETAFunction('scanner', 'all_decoders:disabled;Codabar:enabled;Codabarnotisediting:false;CodabarCLSiEditing:false;enabled:SCN1;start');
+
+    }
+
+    function doEnable(decoder) 
+    {
+        if (decoder == 'CODE11') {
+
+            generic.InvokeMETAFunction('scanner', 'all_decoders:disabled;Code11:enabled');
+        }
+        else {
+            //alert("Problem");
+        }
+
+    }
+
+    function doDisable(decoder) {
+        if (decoder == 'CODE11') {
+            generic.InvokeMETAFunction('scanner', 'all_decoders:enabled;Code11:disabled');
+            //generic.InvokeMETAFunction('scanner', 'all_decoders:disabled;Codabar:enabled;CodabarCLSiEditing:false;Codabarnotisediting:false;enabled:SCN1;start');
+        }
+        else 
+        {
+            //alert("Problem");
+        }
+
+    }
+
+
+    function DoSetEvent()
+     {
+        
+         var w = ODAXForm.MyDecodeEvent.selectedIndex;
+        
+         selected_event = ODAXForm.MyDecodeEvent.options[w].value;
+         
+         if(selected_event=="HTML") 
+         {
+           
+            generic.InvokeMETAFunction('Scanner', "DecodeEvent:url('http://10.233.85.82/pb3.x/Scanner/ScannerNavigate.html')");
+          
+         }
+         else if(selected_event=="JS")
+         {
+           
+           generic.InvokeMETAFunction("Scanner", "DecodeEvent:url('javascript:doScan('%s', '%s', '%s', '%s','%s','%s');')");
+           
+         }
+         else if (selected_event == "EMPTY")
+         {
+         
+          generic.InvokeMETAFunction("Scanner", "DecodeEvent:");
+          generic.InvokeMETAFunction("Scanner", "DecodeEvent:url('')");
+          generic.InvokeMETAFunction("Scanner", "EnumScannerEvent:url('')");
+          generic.InvokeMETAFunction("Scanner", "EnumScannerEvent:");
+          generic.InvokeMETAFunction("Scanner", "EnumScannerEvent:url('Javascript:EnumScanners(%s);')");
+           
+         }
+         
+      }   
+      
+</SCRIPT>
+
+
+
+
+

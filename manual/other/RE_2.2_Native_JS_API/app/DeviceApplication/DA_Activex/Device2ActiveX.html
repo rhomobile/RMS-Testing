@@ -1,0 +1,372 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+    <title>Neon Device Application Test</title>
+<script language="javascript">
+var objGeneric = new ActiveXObject("PocketBrowser.Generic"); 
+
+var selectedVisibility="";
+function selectVisibility()
+{
+	var sltVisibility=frm.hgVisibility.selectedIndex;
+	selectedVisibility = frm.hgVisibility.options[sltVisibility].value;
+	switch(selectedVisibility)
+	{
+		case 'Visible':
+			objGeneric.InvokeMETAFunction('Hourglass', 'Visibility:Visible');
+			break;
+
+		case 'Hidden':
+
+			objGeneric.InvokeMETAFunction('Hourglass', 'Visibility:Hidden');
+			break;
+
+		
+		case 'Address':
+
+			objGeneric.InvokeMETAFunction('Hourglass', 'Visibility:Address');
+			break;
+	}
+}
+
+function setLeftPosition()
+{
+	var leftpst=frm.leftPosition.value;
+	var leftpstvalue="Left:"+leftpst;
+	Message.innerHTML=""+leftpstvalue;
+	objGeneric.InvokeMETAFunction('Hourglass',leftpstvalue);
+}
+
+function setTopPosition()
+{
+	var toppst=frm.topPosition.value;
+	var toppstvalue="Top:"+toppst;
+	Message.innerHTML=""+toppstvalue;
+	objGeneric.InvokeMETAFunction('Hourglass',toppstvalue);
+}
+
+
+
+function selectReboot()
+{
+	var sltreboot=frm.rbboot.selectedIndex;
+	var selectedReboot = frm.rbboot.options[sltreboot].value;
+	switch(selectedReboot)
+	{
+		case 'Warm':
+            Message.innerHTML="Warm";
+			objGeneric.InvokeMETAFunction('Reboot', 'Warm');
+			break;
+
+		case 'Cold':
+            Message.innerHTML="Cold";
+			objGeneric.InvokeMETAFunction('Reboot', 'Cold');
+			break;
+		case 'ColdCAD':
+            Message.innerHTML="ColdCAD";
+            alert("ColdCAD");
+			objGeneric.InvokeMETAFunction('Reboot', 'ColdCAD');
+			break;
+		case 'Null':
+		    Message.innerHTML="Null";
+            objGeneric.InvokeMETAFunction('Reboot', '');
+			break;
+	}
+}
+
+
+
+function SetpoweronEvent()
+{
+	var SelectedValue1 = frm.OnPower.selectedIndex;
+	var selectPower = frm.OnPower.options[SelectedValue1].value;
+
+	switch(selectPower)
+	{
+	    case 'JSAlert':
+	        Message.innerHTML="JSAlert";
+	        objGeneric.InvokeMETAFunction("PowerOn", "PowerOnEvent:url('javascript:alert('Powered Up');')");
+		  
+			break;
+
+		case 'FileURL':
+		    Message.innerHTML="FileURL";
+            objGeneric.InvokeMETAFunction("PowerOn", "PowerOnEvent:url('FILE://\\Application\\device2localpageNavigation.html')");
+			break;
+			
+		case 'HttpURL':
+            Message.innerHTML="HttpURL";
+            objGeneric.InvokeMETAFunction("PowerOn", "PowerOnEvent:url('http://10.233.85.82/Neon/index.html')");
+			break;
+			
+		case 'DETACH':
+	        Message.innerHTML="DETACH";
+           objGeneric.InvokeMetaFunction("PowerOn", "PowerOnEvent:url('')");
+			break;
+
+		case 'EMPTY':
+             Message.innerHTML="EMPTY";
+			objGeneric.InvokeMetaFunction("PowerOn", "PowerOnEvent:");
+			break;
+			
+		case 'FileInvalidURL':
+		      Message.innerHTML="FileInvalidURL";
+		      objGeneric.InvokeMetaFunction("PowerOn", "PowerOnEvent:url('file://\aa')");
+			   break;
+			   
+		case 'HttpInvalidURL':
+		      Message.innerHTML="HttpInvalidURL";
+		      objGeneric.InvokeMetaFunction("PowerOn", "PowerOnEvent:url('http://acbx')");
+			  break;
+
+	}
+	
+}
+
+function dokeylight()
+{
+    var SelectedValue = frm.keydropdown.selectedIndex;
+	var selectKeylight = frm.keydropdown.options[SelectedValue].value;
+	switch(selectKeylight)
+	{
+		case 'On':
+            Message.innerHTML="On";
+			objGeneric.InvokeMETAFunction('Keylight', 'On');
+			break;
+
+		case 'Off':
+            Message.innerHTML="Off";
+			objGeneric.InvokeMETAFunction('Keylight', 'Off');
+			break;
+			
+		case 'OldOn':
+            Message.innerHTML="On";
+			objGeneric.InvokeMETAFunction('Keylight-on', 'Intensity:0');
+			break;
+
+		case 'OldOff':
+            Message.innerHTML="Off";
+			objGeneric.InvokeMETAFunction('Keylight-off', 'Intensity:4');
+			break;
+
+	}
+
+}
+
+function setKeylight()
+{
+	var IntensityValue = frm.txtIntensity.value;
+	var IValue = "Intensity:"+IntensityValue;
+	Message.innerHTML=""+IValue;
+    objGeneric.InvokeMETAFunction('Keylight', IValue);
+	
+	
+}
+
+
+function selectSO() 
+{
+	var sltSO=frm.sOrientation.selectedIndex;
+	var selectedSO = frm.sOrientation.options[sltSO].value;
+	switch(selectedSO)
+	{
+		case 'RightHanded':
+            Message.innerHTML="RightHanded";
+			objGeneric.InvokeMETAFunction('ScreenOrientation', 'RightHanded');
+			break;
+
+		case 'LeftHanded':
+			Message.innerHTML="LeftHanded";
+			objGeneric.InvokeMETAFunction('ScreenOrientation', 'LeftHanded');
+			break;
+
+		
+		case 'UpsideDown':
+            Message.innerHTML="UpsideDown";
+			objGeneric.InvokeMETAFunction('ScreenOrientation', 'UpsideDown');
+			break;
+
+		case 'Normal':
+            Message.innerHTML="Normal";
+			objGeneric.InvokeMETAFunction('ScreenOrientation', 'Normal');
+			break;
+
+		
+	}
+}
+
+function SetOrientationEvent() 
+{
+    var SelectedValue = frm.orienteventdropdown.selectedIndex;
+	var selectEvent = frm.orienteventdropdown.options[SelectedValue].value;
+    Message.innerHTML="Event is:"+selectEvent;
+	switch(selectEvent)
+	{
+		case 'JSCRIPT':
+            Message.innerHTML="JSCRIPT";
+			objGeneric.InvokeMetaFunction("ScreenOrientation", "ScreenOrientationEvent:url('javascript:myOrientjs('%s');')");
+			break;
+
+		case 'JSON':
+		    Message.innerHTML="JSON";
+            objGeneric.InvokeMetaFunction("ScreenOrientation", "ScreenOrientationEvent:url('javascript:myOrientjson(%json);')");
+			break;
+			
+	    case 'DETACH':
+	        Message.innerHTML="DETACH";
+            objGeneric.InvokeMetaFunction("ScreenOrientation", "ScreenOrientationEvent:url('')");
+			break;
+			
+	    case 'URL':
+	        Message.innerHTML="URL";
+			objGeneric.InvokeMetaFunction("ScreenOrientation", "ScreenOrientationEvent:url('http://10.233.85.82/Neon/DeviceApplication/device2pageNavigation.html')");
+			break;
+
+		case 'EMPTY':
+             Message.innerHTML="EMPTY";
+			objGeneric.InvokeMetaFunction("ScreenOrientation", "ScreenOrientationEvent:");
+			break;
+			
+		case 'FileInvalidURL':
+		      Message.innerHTML="FileInvalidURL";
+		      objGeneric.InvokeMetaFunction("ScreenOrientation", "ScreenOrientationEvent:url('file://\')");
+			   break;
+			   
+		case 'HttpInvalidURL':
+		      Message.innerHTML="HttpInvalidURL";
+		      objGeneric.InvokeMetaFunction("ScreenOrientation", "ScreenOrientationEvent:url('http://acbx')");
+			  break;
+		}
+}
+
+function myOrientjs(orientation)
+{
+//alert("Current Screen orientation using javascript is:"+orientation);
+myevent.innerHTML="Current Screen orientation using javascript is:"+orientation;
+}
+
+function myOrientjson(jsonObject)
+{
+//alert("Current Screen orientation using json is:"+jsonObject.orientation);
+myevent.innerHTML="Current Screen orientation using json is:"+jsonObject.orientation;
+}
+
+function setautoRotate()
+{
+var autorotatevalue= frm.autoRotate.value;
+var autorotateparam="autoRotate:"+autorotatevalue;
+Message.innerHTML=""+autorotateparam;
+objGeneric.InvokeMETAFunction('ScreenOrientation', autorotateparam);
+}
+
+</script>
+
+
+
+</head>
+<body>
+<form id="frm" action="">
+<br /><br />
+using Generic Approach
+<br />
+<div id="Message">Message</div><br />
+<div id="myevent">eventnotification</div>
+<hr>
+HourGlass<br>
+Select Visibility	<select name="hgVisibility" id="hgVisibility" onChange="selectVisibility();">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="Visible">Visible</option>
+<option value="Hidden">Hidden</option>
+<option value="Address">Address</option>
+</select><br>
+<tr>
+      Left Position	<Textarea id="leftPosition" cols="10" rows="1"onchange="setLeftPosition();"></Textarea>
+	</tr><br>
+<tr>
+
+      Top Position	<Textarea id="topPosition" cols="10" rows="1" onchange="setTopPosition();"></Textarea>
+	 </tr>
+
+<hr><br>
+
+<hr>
+Keylight
+<select name="keydropdown" id="keydropdown">
+<option SELECTED VALUE="">Select</option>
+<option value="On">On</option>
+<option value="Off">Off</option>
+</select>
+&nbsp;&nbsp;&nbsp;&nbsp;
+<input type="button" onclick="dokeylight();" value="Setkeylight">
+<br />
+	Intensity<textarea id="txtIntensity"cols="10" rows="1">3</textarea>
+	&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="button" onclick="Javascript:setKeylight();" value="Keylight">
+<hr>
+<br>
+
+
+<hr>
+PowerOn<br>
+Select PowerOn	<select name="OnPower" id="OnPower">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="FileURL">FileURL</option>
+<option value="FileInvalidURL">FileInvalidURL</option>
+<option value="JSAlert">JSAlert</option>
+<option value="DETACH">DETACH</option>
+<option value="EMPTY">EMPTY</option>
+<option value="HttpURL">HttpURL</option>
+<option value="HttpInvalidURL">HttpInvalidURL</option>
+</select>
+&nbsp;&nbsp;&nbsp;&nbsp;
+<input type="button" onclick="SetpoweronEvent();" value="SetpoweronEvent">
+<hr>
+<br>
+
+<hr>
+Reboot<br>
+Select Reboot	<select name="rbboot" id="rbboot" onChange="selectReboot();">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="Warm">Warm</option>
+<option value="Cold">Cold</option>
+<option value="ColdCAD">ColdCAD</option>
+<option value="Null">Null</option>
+</select>
+<hr>
+<br>
+
+<hr>
+Orientation Event:<br />
+<select name="orienteventdropdown" id="Select">
+<option SELECTED value="">Select</option>
+<option value="JSCRIPT">JSCRIPT</option>
+<option value="JSON">JSON</option>
+<option value="DETACH">DETACH</option>
+<option value="EMPTY">EMPTY</option>
+<option value="URL">URL</option>
+<option value="FileInvalidURL">FileInvalidURL</option>
+<option value="HttpInvalidURL">HttpInvalidURL</option>
+</select>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<input type="button" onclick="SetOrientationEvent();" value="SetOrientationEvent">
+<br /><br />
+ScreenOrientation Method<select name="sOrientation" id="sOrientation" onChange="selectSO();">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="RightHanded">RightHanded</option>
+<option value="LeftHanded">LeftHanded</option>
+<option value="UpsideDown">UpsideDown</option>
+<option value="Normal">Normal</option>
+</select>
+<br /><br />
+autoRotate:&nbsp;<textarea id="autoRotate" name="autoRotate" cols="10" rows="1">Enabled</textarea>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<input type="button" onclick="setautoRotate();" value="setautoRotate">
+<hr>
+<br />
+
+<A HREF="../DA_ActiveX_index.html">Back</A>
+
+</form>
+</body>
+</html>

@@ -1,0 +1,102 @@
+<HTML>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+<META HTTP-Equiv="SignatureCapture" Content="BGColor:#FFFF00">
+<META HTTP-Equiv="SignatureCapture" Content="Width:100">
+<META HTTP-Equiv="SignatureCapture" Content="height:100">
+<META HTTP-Equiv="SignatureCapture" Content="top:60">
+<META HTTP-Equiv="SignatureCapture" Content="left:40">
+<META HTTP-Equiv="SignatureCapture" Content="Visibility:Visible">
+<META HTTP-Equiv="SignatureCapture" Content="PenColor:#FF00FF">
+<META HTTP-Equiv="SignatureCapture" Content="PenWidth:0">
+<!--<META HTTP-Equiv="SignatureCapture" Content="VectorEvent:url('Javascript:onVectors(%s);')">-->
+  </HEAD>
+  <BODY>
+  <BR><BR><BR><BR>
+  <BR><BR><BR><BR><BR>
+  <DIV id="vectorOut">Vectors Will Appear Here:</div>
+   <BR><BR><BR><BR><BR><BR><BR><BR><BR> <BR><BR><BR><BR><BR> 
+ <P><INPUT TYPE="button" VALUE="ApplyVectEvent" ONCLICK="Javascript:ApplyEvent();"></P><br />
+  <P><INPUT TYPE="button" VALUE="ApplyVectEventusingJson" ONCLICK="Javascript:ApplyEventjson();"></P><br />
+   <P><INPUT TYPE="button" VALUE="ApplyVectEventHTML" ONCLICK="Javascript:ApplyEventHTML();"></P><br />
+ <P><INPUT TYPE="button" VALUE="Back" ONCLICK="location.href='SignatureCapture.html'"></P>
+  <P><INPUT TYPE="button" VALUE="Go to another page" ONCLICK="location.href='SignatureNavigate.html'"></P>
+  </BODY>  
+  </HTML>
+  
+<script type="text/javascript">
+try
+{
+var generic = new ActiveXObject("PocketBrowser.Generic");
+}
+catch(err)
+{
+var GenericPlugin = document.createElement('embed'); 
+GenericPlugin.setAttribute('id',"embed1"); 
+GenericPlugin.setAttribute('type',"application/x-wtg-legacy-generic"); 
+GenericPlugin.setAttribute('hidden',"true"); 
+
+// Attach the plugin embed tags to the body 
+var theBody = document.getElementsByTagName('body')[0]; 
+theBody.appendChild(GenericPlugin); 
+}
+function onVectors(data)
+{
+  var VectorAsHTML = "<TABLE><TR><TH>X</TH><TH>Y</TH><TH>X</TH><TH>Y</TH><TH>X</TH><TH>Y</TH></TR>";
+  for (var i=0; i<data.length; i = i + 6)
+  {
+    VectorAsHTML = VectorAsHTML + "<TR>"
+    VectorAsHTML = VectorAsHTML + "<TD>" + data[i] + "</TD><TD>" + data[i+1] + "</TD>";
+    VectorAsHTML = VectorAsHTML + "<TD>" + data[i+2] + "</TD><TD>" + data[i+3] + "</TD>";
+    VectorAsHTML = VectorAsHTML + "<TD>" + data[i+4] + "</TD><TD>" + data[i+5] + "</TD>";
+    VectorAsHTML = VectorAsHTML + "</TR>"
+  }
+  VectorAsHTML + "</TABLE>"
+  vectorOut.innerHTML = "JS"+VectorAsHTML;
+}
+
+function onVectorsjson(jsondata)
+{
+  var VectorAsHTML = "<TABLE><TR><TH>X</TH><TH>Y</TH><TH>X</TH><TH>Y</TH><TH>X</TH><TH>Y</TH></TR>";
+  for (var i=0; i<jsondata.vectorArray.length; i = i + 6)
+  {
+    VectorAsHTML = VectorAsHTML + "<TR>"
+    VectorAsHTML = VectorAsHTML + "<TD>" + jsondata.vectorArray[i]+ "</TD><TD>" + jsondata.vectorArray[i+1] + "</TD>";
+    VectorAsHTML = VectorAsHTML + "<TD>" + jsondata.vectorArray[i+2] + "</TD><TD>" + jsondata.vectorArray[i+3]+ "</TD>";
+    VectorAsHTML = VectorAsHTML + "<TD>" + jsondata.vectorArray[i+4]+ "</TD><TD>" + jsondata.vectorArray[i+5]+ "</TD>";
+    VectorAsHTML = VectorAsHTML + "</TR>"
+  }
+  VectorAsHTML + "</TABLE>"
+  vectorOut.innerHTML = "Json"+VectorAsHTML;
+}
+
+function ApplyEvent()
+{
+     vectorOut.innerHTML="Appling JS";
+    //generic.InvokeMETAFunction("SignatureCapture", "SignatureSaveEvent:url()");
+    // generic.InvokeMETAFunction("SignatureCapture", "VectorEvent:url('Javascript:onVectors(%s);')");
+     signatureCapture.vectorEvent = 'onVectorsjson(%json)'; 
+     //generic.InvokeMETAFunction("SignatureCapture", "VectorEvent:");
+  
+}
+
+function ApplyEventHTML()
+{
+     vectorOut.innerHTML="Appling JS HTML";
+    //generic.InvokeMETAFunction("SignatureCapture", "SignatureSaveEvent:url()");
+     //generic.InvokeMETAFunction("SignatureCapture", "VectorEvent:url('http://10.233.85.82/NEON/SignatureCapture/SignatureNavigate.html')");
+      signatureCapture.vectorEvent = "url('http://tandv.wtgdev.net/Navigate.html')";
+     //generic.InvokeMETAFunction("SignatureCapture", "VectorEvent:");
+  
+}
+
+function ApplyEventjson()
+{
+    vectorOut.innerHTML="Appling Json";
+    //generic.InvokeMETAFunction("SignatureCapture", "SignatureSaveEvent:url()");
+     generic.InvokeMETAFunction("SignatureCapture", "VectorEvent:url('Javascript:onVectorsjson(%json);')");
+     //generic.InvokeMETAFunction("SignatureCapture", "VectorEvent:");
+  
+}
+</script>

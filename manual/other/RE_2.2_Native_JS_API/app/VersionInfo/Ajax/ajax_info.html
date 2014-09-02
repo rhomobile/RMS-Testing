@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+    
+</head>
+<body>
+<table width="20%">
+<tr>
+<td><TEXTAREA NAME="datafield" id="datafield" COLS=20 ROWS=3>First Ajax Application and Got it done Successfully.</TEXTAREA></td>
+</tr>
+</table>
+<P>BottomCommandArea:-<INPUT TYPE="button" VALUE="Visible" ONCLICK="generic.InvokeMETAFunction('bottomcommandarea', 'visibility:visible')"></P>
+<br />
+<P>BottomCommandArea:-<INPUT TYPE="button" VALUE="Hidden" ONCLICK="generic.InvokeMETAFunction('bottomcommandarea', 'visibility:Hidden')"></P>
+
+</body>
+</html>
+ <script>
+ try
+{
+var generic = new ActiveXObject("PocketBrowser.Generic");
+}
+catch(err)
+{
+var GenericPlugin = document.createElement('embed'); 
+GenericPlugin.setAttribute('id',"embed1"); 
+GenericPlugin.setAttribute('type',"application/x-wtg-legacy-generic"); 
+GenericPlugin.setAttribute('hidden',"true"); 
+
+// Attach the plugin embed tags to the body 
+var theBody = document.getElementsByTagName('body')[0]; 
+theBody.appendChild(GenericPlugin); 
+}	
+  
+ </script>
+
+

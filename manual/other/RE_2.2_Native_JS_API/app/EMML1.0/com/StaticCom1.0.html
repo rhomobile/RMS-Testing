@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+ <META HTTP-Equiv="comm" content="port:'com1:'"
+ <META HTTP-Equiv="comm" content="baudrate:9600"
+ <META HTTP-Equiv="comm" content="databits:8"
+ <META HTTP-Equiv="comm" content="stopbits:1"
+ <META HTTP-Equiv="comm" content="parity:'no parity'"
+ <META HTTP-Equiv="comm" content="handshake:none"
+ <META HTTP-Equiv="comm" content="open"
+ <META HTTP-Equiv="comm" content="writestring:'data is going to be written on commumnication port'"
+ <META HTTP-Equiv="comm" content="close"
+ <META HTTP-Equiv="comm" Content="port:'com1:'">
+ <META HTTP-Equiv="comm" Content="baudrate:9600">
+ <META HTTP-Equiv="comm" Content="databits:8">
+ <META HTTP-Equiv="comm" Content="stopbits:1">
+ <META HTTP-Equiv="comm" Content="parity:'no parity'">
+ <META HTTP-Equiv="comm" Content="handshake:none">
+ <META HTTP-Equiv="comm" Content="time:250">
+ <META HTTP-Equiv="comm" Content="commevent:url('JavaScript:ProcessData(\"%s\")')">
+
+
+<SCRIPT TYPE="text/javascript">
+
+function ProcessData(data)
+{
+	message.innerHTML="Received data: "+data';
+}
+
+</SCRIPT>
+</head>
+<body>
+<h1>Static com test1.0 for reading.</h1>
+<div id="message"></div>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+
+<META HTTP-Equiv="Alarm-Set" Content="Interval:00-00-30;Repeat:True; AlarmTriggered:url('javascript:alert('Big Bang');')">
+
+</HEAD>
+
+<body onLoad="doTime();">
+Alarm Tag123456<br>
+<script>
+function doTime()
+{
+	now = new Date();
+	timeSpan.innerHTML = now;
+	setTimeout('doTime();', 5000)
+}
+
+
+</script>
+
+
+<div id="timeSpan">Current Time...</div>
+<P><BR><INPUT TYPE="button" VALUE="Back" ONCLICK="location.href='./Device Application.html'"></P>
+
+
+
+</BODY>
+</HTML>

@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+     <META HTTP-Equiv="scanner" Content="all_decoders:disabled">
+     <META HTTP-Equiv="scanner" Content="CodabarMinLength:0">
+     <META HTTP-Equiv="scanner" Content="Codabarmaxlength:55">
+     <META HTTP-Equiv="scanner" Content="Codabar:enabled">
+     <META HTTP-Equiv="scanner" Content="DecodeEvent:url('javascript:doScan('%s', '%s', '%s', '%s', '%s');')">
+     <META HTTP-Equiv="scanner" Content="enabled">
+     <META HTTP-Equiv="scanner" Content="start">
+     
+<script>
+  var Generic = new ActiveXObject("PocketBrowser.Generic");
+  
+  function doScan(data, source, type, time, length)
+   {
+   datafield.value=data;
+   }
+   
+  
+</script>     
+</head>
+<body>
+<h1>Scanner Static 1.0 META Tag Test</h1>
+<h2>Codabar enabled(Min 0and Max 55length)</h2>
+<div id="message"></div>
+Decoded data:<input id="datafield" type="text" value="" /><br /><p></p>
+<input id="Button1" type="button" value="Back" onclick="Generic.InvokeMETAFunction('scanner', 'disabled;stop');location.href='./scanner.html'" />
+</body>
+</html>
+

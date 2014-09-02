@@ -1,0 +1,81 @@
+<!--Telemetry Index-->
+
+<HTML>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+
+
+<META HTTP-Equiv="Telemetry" Content="TelemetryDataEvent:url('JavaScript:Nav('%s', '%s', '%s', '%s');)'"> 
+<META HTTP-Equiv="EMMLProfile" Content="apply:myTelemetry.Telemetry;">
+
+
+
+<!--<META HTTP-Equiv="Telemetry" Content="Enable:RoadSpeed;Enable:EngineRPM;Enable:TotalDistance;Enable:EngineLoad;Enable:ABSControlStatus">
+<META HTTP-Equiv="Telemetry" Content="Enable:ThrottlePosition;Enable:ServiceBrakeSwitch;Enable:IgnitionStatus;Enable:ParkingBrakeSwitch;Enable:CruiseControlSwitch">
+<META HTTP-Equiv="Telemetry" Content="Enable:BrakesSwitch;Enable:ClutchStatus;Enable:CruiseControlSetSpeed;Enable:AcceleratorPedalPos;Enable:EngineOilPressure">
+<META HTTP-Equiv="Telemetry" Content="Enable:BoostPressure;Enable:EngineCoolantTemperature;Enable:EngineRetarderStatus;Enable:ATC_ASR_Status;Enable:TransmissionRangeSelected">
+<META HTTP-Equiv="Telemetry" Content="Enable:TransmissionRangeAttained;Enable:BatteryVoltage;Enable:EngineOilTemperature;Enable:TransmissionOilTemperature;Enable:FuelRate">
+<META HTTP-Equiv="Telemetry" Content="Enable:InstantaneousFuelEconomy;Enable:AverageFuelEconomy;Enable:TransmitterDiagnosticTable;Enable:TransmitterDiagnosticCode">
+<META HTTP-Equiv="Telemetry" Content="Enable:VehicleIDNumber;Enable:VehicleGlobalPosition">-->
+
+
+<!--<META HTTP-Equiv="Telemetry" Content="QueryFrequency:10000">-->
+<!--<META HTTP-Equiv="Telemetry" Content="Invoke">-->
+
+
+<TITLE>Telemetry Test Index Page</TITLE>
+</HEAD>
+
+<BODY BGCOLOR="#FFFFEA" TEXT="#0000A0" LINK="#FF0000" VLINK="#808080" ALINK="#008040">
+<P>Please ensure the simulator is running on the device.</P>
+<h1>Named Telemetry EMML Profile Test</h1>
+<h2>Telemetry profile is applied only and it should work properly</h2>
+<h3>Click on Invoke button to capture telemetric data.</h3>
+
+Speed		: <span id=roadSpeedSpan></span><br>
+RPM		: <span id=engineRPMSpan></span><br>
+Distance	: <span id=totalDistanceSpan></span><br>
+Load		: <span id=engineLoadSpan></span><br>
+ABS		: <span id=absControlStatusSpan></span><br>
+
+<P><INPUT TYPE="button" VALUE="Invoke" ONCLICK="doInvoke();"></P>
+<P><INPUT TYPE="button" VALUE="Quit" ONCLICK="Quit();"></P>
+
+
+<h3>Browse to another page to check for EMML profile persistance.</h3>
+<h4><a href="Persistant_Telemetry_Profile.html">Click here to go to another page.</a></h4>
+<hr />
+<a href="../EMMLProfilesIndex.html">Back to EMML Profile Index</a>
+
+</BODY>
+</HTML>
+
+<SCRIPT TYPE="TEXT/JAVASCRIPT">
+    var Generic = new ActiveXObject("PocketBrowser.Generic");
+
+    function Nav(filter, data, units, time) {
+        if (filter == "RoadSpeed")
+            roadSpeedSpan.innerText = data + " " + units + " at " + time;
+        else if (filter == "EngineRPM")
+            engineRPMSpan.innerText = data + " " + units + " at " + time;
+        else if (filter == "TotalDistance")
+            totalDistanceSpan.innerText = data + " " + units + " at " + time;
+        else if (filter == "EngineLoad")
+            engineLoadSpan.innerText = data + " " + units + " at " + time;
+        else if (filter == "ABSControlStatus")
+            absControlStatusSpan.innerText = data + " " + units + " at " + time;
+
+    }
+
+    function Quit() {
+        objGeneric.InvokeMETAFunction("Application", "Quit");
+    }
+
+
+    function doInvoke() {
+        objGeneric.InvokeMETAFunction("Telemetry", "Invoke");
+    }
+
+
+</SCRIPT>

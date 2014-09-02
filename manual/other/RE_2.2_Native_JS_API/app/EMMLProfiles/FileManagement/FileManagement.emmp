@@ -1,0 +1,21 @@
+.sendFile{
+    FileTransfer-TransferEvent:url('Javascript:MyTransferEvent('%s');');
+    FileTransfer-Username:ftpadmin;
+    FileTransfer-Password:ftpadmin;
+    FileTransfer-CreateFolders:True;
+    FileTransfer-OverWrite:True;           
+    FileTransfer-Source:url('file://\Application\FileCollections\myfile.txt');
+    FileTransfer-Destination:url('ftp://192.168.6.18/EMMLFiletestFtp.txt');
+  }
+
+
+
+.receiveFile{
+    FileTransfer-TransferEvent:url('Javascript:MyTransferEvent('%s');');
+    FileTransfer-Username:ftpadmin;
+    FileTransfer-Password:ftpadmin;
+    FileTransfer-CreateFolders:True;
+    FileTransfer-OverWrite:True;           
+    FileTransfer-Source:url('ftp://192.168.6.18/FileCollections/myfile.txt');
+    FileTransfer-Destination:url('file://\Temp\myfolder\EMMLFiletestDev.txt');
+}

@@ -1,0 +1,59 @@
+<!--Push navigate sample (PC)-->
+
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+<script>
+   
+   	//var to store the id for the thread
+    var cancelMem = null;
+  
+    /******************************************************************************
+		 *  This function is triggered the device has sent its response.  We will use 
+		 *  this to cancel the timeout.
+		 ****************************************************************************/   	
+    function pushEvent()
+    {
+			clearTimeout(cancelMem);
+			cancelMem = null;
+   	}
+   
+		/******************************************************************************
+		*  This function instructs the device to sound the beeper or cancel the beeper
+		****************************************************************************/   	
+		function doPush(func) {
+			var ip = document.getElementById('ipadd').value;
+			var VPath = document.getElementById('path').value;
+			var portno = document.getElementById('portno').value;
+			var passkey = document.getElementById('passkey').value;
+			alert('Push Address:\n\nhttp://' + ip + ':' + portno + '/' + VPath + '?val=' + func + '&passkey=' + passkey);
+			document.getElementById('iDevice').src = 'http://'+ip+':' + portno + '/'+VPath+'?val='+func+'&passkey=' + passkey;
+			cancelMem = setTimeout(cancelPush, 10000);
+			
+		}
+		
+		/******************************************************************************
+		*  This function is called if the device does not respond within 10 seconds
+		****************************************************************************/   	
+		function cancelPush()
+		{
+			document.getElementById('iDevice').src = 'blank.html';
+			cancelMem = null;
+			alert('Push Timed Out');
+		}
+   
+</script>
+</head>
+	<body>
+		IP: <input type="text" id="ipadd" value="157.235."><br>
+		Path:   <input type="text" id="path" value="Application"><br>    
+		PassKey: <input type="text" id="passkey" value=""><br>
+		Port: <input type="text" id="portno" value="8080">
+		
+		<br>
+		<input type="button" onclick="Javascript:doPush('locate')" value="Locate">&nbsp;<input type="button" onclick="Javascript:doPush('stop')" value="Cancel"><br>
+		
+		<iframe id="iDevice" name="iDevice" FRAMEBORDER=0 SCROLLING="yes" height="1000" width="1000" onload="pushEvent();" ></iframe>
+	</body>
+</html>

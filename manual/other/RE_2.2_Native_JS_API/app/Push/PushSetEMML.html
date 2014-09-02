@@ -1,0 +1,233 @@
+<HTML>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+<META HTTP-Equiv="quitbutton" Content="visibility:visible">
+<META HTTP-Equiv="backbutton" Content="Visibility:Visible">
+<META HTTP-Equiv="SIPbutton" Content="Visibility:Visible">
+<META HTTP-Equiv="signalnavigate" content="Javascript:checkSignal('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')">
+
+<TITLE>PushNavigate Tag Test </TITLE>
+<script type="text/jscript">
+    
+function setpushEvent()
+{
+    var SelectedValue = frm.pusheventdropdown.selectedIndex;
+	var selectEvent = frm.pusheventdropdown.options[SelectedValue].value;
+    alert("Event is:"+selectEvent);
+	switch(selectEvent)
+	{
+		case 'JSCRIPT':
+            myevent.innerHTML="JSCRIPT";
+			//generic.InvokeMETAFunction("push", "Detected:url('Javascript:doLocatejs('%s');')");
+			push.setEMML("Detected:url('JavaScript:getsettingsjsFunction('%s');')");
+			break;
+
+		case 'JSON':
+		    myevent.innerHTML="JSON";
+		    //generic.InvokeMETAFunction("push", "Detected:url('Javascript:doLocatejson(%json);')");
+			push.setEMML("Detected:url('Javascript:doLocatejson(%json);')");
+			break;
+			
+	    case 'DETACH':
+	        myevent.innerHTML="DETACH";
+            //generic.InvokeMETAFunction("push", "Detected:url('')");
+			push.setEMML("Detected:url('')");
+			break;
+			
+	    case 'URL':
+	        myevent.innerHTML="URL";
+	        //generic.InvokeMETAFunction("push", "Detected:url('http://10.233.85.82/Neon/Push/PushSActiveXPageNavigation.html')");
+			push.setEMML("Detected:url('http://10.233.85.82/Neon/Push/PushSActiveXPageNavigation.html')");
+			break;
+
+		case 'EMPTY':
+             myevent.innerHTML="EMPTY";
+			//generic.InvokeMETAFunction("push", "Detected:");
+			push.setEMML("Detected:");
+			break;
+			
+		case 'FileInvalidURL':
+		      myevent.innerHTML="FileInvalidURL";
+		      //generic.InvokeMETAFunction("push", "Detected:url('file://\')");
+			  push.setEMML("Detected:url('file://\')");
+			   break;
+			   
+		case 'HttpInvalidURL':
+		      myevent.innerHTML="HttpInvalidURL";
+		      //generic.InvokeMETAFunction("push", "Detected:url('http://\')");
+			  push.setEMML("Detected:url('http://\')");
+			  break;
+		}
+
+}
+
+    
+
+    function doTestEnable() {
+        
+        //generic.InvokeMETAFunction('push', 'unattended:enabled');
+		push.setEMML("unattended:enabled");
+    }
+
+
+    function doTestDisable() {
+        alert("Disabled");
+        //generic.InvokeMETAFunction('push', 'unattended:disabled');
+		push.setEMML("unattended:disabled");
+    }
+    function doTest(sw) {
+        alert(sw);
+        
+        if (sw == 'Start')
+            //generic.InvokeMETAFunction('push', 'start');
+			push.setEMML("start");
+        else if (sw == 'Stop')
+            //generic.InvokeMETAFunction('push', 'stop');
+			push.setEMML("stop");
+        else if (sw == 'PassKey On')
+        {
+         alert("Passkey text field value" + frm.passkey.value);
+         //generic.InvokeMETAFunction('push', 'passkey:' + frm.passkey.value);
+		 push.setEMML("passkey:" + frm.passkey.value);
+         }
+        else if (sw == 'PassKey Off')
+            //generic.InvokeMETAFunction('push', 'passkey:');
+			push.setEMML("passkey:");
+        else if (sw == 'Path') {
+            alert("Path text field value" + frm.Path.value);
+            //generic.InvokeMETAFunction('push', 'path:' + frm.Path.value);
+			push.setEMML("path:" + frm.Path.value);
+        }
+        else if (sw == 'Response') {
+            alert("Responce text field value" + frm.Response.value);
+            //generic.InvokeMETAFunction('push', 'response:'+frm.Response.value);
+			push.setEMML("response:" +frm.Response.value);
+        }
+
+        else if (sw == 'No Action')
+            //generic.InvokeMETAFunction('push-detected', '');
+			push.setEMML("Detected:");
+        else if (sw == 'Reset Action')
+            //generic.InvokeMETAFunction("push-detected", "url('Javascript:doLocate(\'%s\');')");
+			push.setEMML("Detected:url('Javascript:doLocate(\'%s\');')");
+    }
+
+   function setPort()
+   {
+   var portval=frm.portTextarea.value;
+   var portparam="port:"+portval;
+   myevent.innerHTML=portparam;
+   generic.InvokeMETAFunction('push',portparam);
+   push.setEMML(portparam);
+   }
+
+    var bNotify = false;
+    /******************************************************************************
+    *  This function is triggered when the device is pushed to by the client
+    *  pc.  It identifies the action to do based on the first querystring value.
+    * ***************************************************************************/
+    function doLocatejs(func) {
+
+        if (func == 'locate') {
+            alert("javascript");
+            locatediv.innerHTML = '<center><pre>Someone is trying to locate this device<br><br><input type="button" value="CANCEL" onclick="bNotify=false;locatediv.innerHTML=\'\';"></center></pre>';
+            bNotify = true;
+        }
+        else {
+            locatediv.innerHTML = '';
+            bNotify = false;
+        }
+
+
+    }
+    
+     function doLocatejson(jsonObject) 
+     {  
+        if (jsonObject.value == "locate") 
+        {
+            alert("json2");
+            locatediv.innerHTML = '<center><pre>Someone is trying to locate this device<br><br><input type="button" value="CANCEL" onclick="bNotify=false;locatediv.innerHTML=\'\';"></center></pre>';
+            bNotify = true;
+        }
+        else {
+            locatediv.innerHTML = '';
+            bNotify = false;
+        }
+
+
+    }
+
+    //this funciton performs the notification
+
+    function running() {
+        if (bNotify) 
+        {
+             //generic.PlayWave('\\windows\\alarm5.wav', 1);
+			 push.setEMML("\\windows\\alarm5.wav" , 1);
+            //generic.InvokeMETAFunction('invokenotification', '2, 4000, 1, 500');
+            //generic.InvokeMETAFunction('invokenotification', '0, 200, 100, 1');
+        }
+        tmr = setTimeout('running()', 2000);
+
+    }
+    running();
+
+
+    /******************************************************************************
+    *  This function simply outputs the ip information just so we don't have to
+    *  look it up!
+    * ***************************************************************************/
+    function checkSignal(signal, essid, mac, adapt, dhcpsvr, dhcpstatic, gateway, ipadd) {
+        if (signal == '%s')
+            radiosig.innerHTML = "<pre>Not connected to network</pre>";
+        else
+            radiosig.innerHTML = "<pre>Signal: " + signal + "% ESSID: " + essid + " IP Address: " + ipadd + "</pre>";
+
+    }	
+
+</script>
+</HEAD>
+
+
+<BODY BGCOLOR="#FFFFEA" TEXT="#0000A0" LINK="#FF0000" VLINK="#808080" ALINK="#008040" >
+<form id="frm">
+<br /><br /><br />
+<P>ActiveX Object </P>
+<div id="message">Message</div>
+<br />
+
+Apply Push event:<select name="pusheventdropdown" id="Select">
+<option SELECTED value="">Select</option>
+<option value="JSCRIPT">JSCRIPT</option>
+<option value="JSON">JSON</option>
+<option value="DETACH">DETACH</option>
+<option value="EMPTY">EMPTY</option>
+<option value="URL">URL</option>
+<option value="FileInvalidURL">FileInvalidURL</option>
+<option value="HttpInvalidURL">HttpInvalidURL</option>
+</select>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<input type="button" onclick="setpushEvent();" value="setpushEvent">
+<br />
+<div id="myevent"></div>
+<br />
+
+<P><INPUT TYPE="button" VALUE="Start" ONCLICK="doTest(this.value);">&nbsp;<INPUT TYPE="button" VALUE="Stop" ONCLICK="doTest(this.value);"></P>
+Port: <textarea id="portTextarea" cols="10" rows="1">8080</textarea>
+<P><INPUT TYPE="button" VALUE="Set Port" ONCLICK="setPort();"></P>
+<P><INPUT TYPE="button" VALUE="PassKey On" ONCLICK="doTest(this.value);">&nbsp;<INPUT TYPE="button" VALUE="PassKey Off" ONCLICK="doTest(this.value);"></P>
+<P>PassKey = <INPUT TYPE="text" VALUE="123456" id="passkey"></P><br />
+<P>Path:   = <INPUT TYPE="text" VALUE="/push" id="Path" onchange="doTest('Path');"></P><br />
+<P>Response = <INPUT TYPE="text" VALUE="/Response.html" id="Response" onchange="doTest('Response');"></P>
+<P><BR>Unattended:<br /><INPUT TYPE="button" VALUE="Enabled" ONCLICK="doTestEnable();">&nbsp;&nbsp;
+<INPUT TYPE="button" VALUE="Disabled" ONCLICK="doTestDisable();"></P>
+
+<P><INPUT TYPE="button" VALUE="No Action" ONCLICK="doTest(this.value);">&nbsp;
+<INPUT TYPE="button" VALUE="Reset Action" ONCLICK="doTest(this.value);"></P>
+<p><DIV align=left style='font-size:8.0pt' id="radiosig"></div>
+<DIV align=left style='font-size:8.0pt' id="locatediv"></div></p>
+</form>
+</BODY>
+</HTML>
+

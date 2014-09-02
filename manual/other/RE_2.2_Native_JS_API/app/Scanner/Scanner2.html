@@ -1,0 +1,173 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0038)http://ncvt73.wtgdev.net/Scanner2.html -->
+<HTML><head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+<META content="text/html; charset=windows-1252" http-equiv=Content-Type>
+<META content=Visibility:visible http-equiv=QuitButton>
+<META content=Enabled http-equiv=Scanner>
+<META content="DecodeEvent:url('Javascript:doScan('%1')')" http-equiv=Scanner>
+<SCRIPT>
+		function startScanner()
+		{
+			generic.InvokeMETAFunction("Scanner", "Start");
+		}
+		
+		function doScan(data)
+		{
+			document.getElementById("datafield").innerHTML = data;
+		}
+		
+		function delay2o5(emdk)
+		{
+			setTimeout("twoO5(" + emdk + ")", 5000);
+			startScanner();
+			countdown(5);
+		}
+		
+		function delay128(emdk)
+		{
+			setTimeout("one28(" + emdk +")", 5000);
+			startScanner();
+			countdown(5);
+		}
+		
+		function delay39(emdk)
+		{
+			setTimeout("thirty9(" + emdk + ")", 5000);
+			startScanner();
+			countdown(5);
+		}
+
+		function countdown(sec)
+		{
+			if(sec == 0)
+			{
+				document.getElementById("countdown").className = "green";
+				document.getElementById("countdown").innerHTML = "Go!";
+			}
+			else
+			{
+				document.getElementById("countdown").className = "red";
+				document.getElementById("countdown").innerHTML = sec;
+				setTimeout("countdown(" + (sec -1) + ")", 1000);
+			}
+		}
+		
+		function twoO5(emdk)
+		{
+			if(emdk)
+			{
+				generic.InvokeMETAFunction("Scanner", "decoder_i2of5:true");
+			}
+			else
+			{
+				generic.InvokeMETAFunction("Scanner", "i20f5:enabled");
+			}
+		}
+		
+		function one28(emdk)
+		{
+			if(emdk)
+			{
+				generic.InvokeMETAFunction("Scanner", "decoder_code128:true");
+			}
+			else
+			{
+				generic.InvokeMETAFunction("Scanner", "code128:disabled");
+			}
+		}
+		
+		function thirty9(emdk)
+		{
+			if(emdk)
+			{
+				generic.InvokeMETAFunction("Scanner", "decoder_code39:true");
+			}
+			else
+			{
+				generic.InvokeMETAFunction("Scanner", "code39:enabled");
+			}
+		}
+		
+		function reset()
+		{
+			generic.InvokeMETAFunction("Scanner", "code39:disabled");
+			generic.InvokeMETAFunction("Scanner", "decoder_code39:false");
+			generic.InvokeMETAFunction("Scanner", "code128:disabled");
+			generic.InvokeMETAFunction("Scanner", "decoder_code128:false");
+			generic.InvokeMETAFunction("Scanner", "i2of5:disabled");
+			generic.InvokeMETAFunction("Scanner", "decoder_i2of5:false");
+			generic.InvokeMETAFunction("Scanner", "picklist:0");
+			document.getElementById("datafield").innerHTML = "Data Goes Here";
+		}
+		
+		function enableDecoderNEON(decoder)
+		{
+			generic.InvokeMETAFunction("Scanner", decoder + ":enabled");
+		}
+		
+		function enableDecoderEMDK(decoder)
+		{
+			generic.InvokeMETAFunction("Scanner", decoder + ":true");
+		}
+		
+		function stop()
+		{
+			generic.InvokeMETAFunction("Scanner", "Stop");
+		}
+		
+		function enablePicklistEMDK()
+		{
+			generic.InvokeMETAFunction("Scanner", "picklist:2");
+		}
+		
+		function enablePicklistNEON()
+		{
+			generic.InvokeMETAFunction("Scanner", "picklistmode:softwareReticle");
+		}
+	</SCRIPT>
+
+<STYLE type=text/css>.red {
+	COLOR: red
+}
+.green {
+	COLOR: green
+}
+</STYLE>
+
+<META name=GENERATOR content="MSHTML 8.00.6001.19088"></HEAD>
+<BODY>
+<TABLE>
+  <TBODY>
+  <TR>
+    <TD>
+      <H1>Scanner Test
+      <H1></H1></H1></TD>
+    <TD><BUTTON onclick=startScanner()>Start</BUTTON><BUTTON 
+      onclick=reset()>Reset</BUTTON><BUTTON onclick=stop()>Stop</BUTTON></TD></TR>
+  <TR>
+    <TD><BUTTON onclick=delay128(false)>Start Delay Code128 - Neon</BUTTON></TD>
+    <TD><BUTTON onclick=delay128(true)>Start Delay Code128 - 
+  EMDK</BUTTON></TD></TR>
+  <TR>
+    <TD><BUTTON onclick=delay39(false)>Start Delay Code39 - Neon</BUTTON></TD>
+    <TD><BUTTON onclick=delay39(true)>Start Delay Code39 - EMDK</BUTTON></TD></TR>
+  <TR>
+    <TD><BUTTON onclick="enableDecoderNEON('code128')">Enable Code128 - 
+      Neon</BUTTON></TD>
+    <TD><BUTTON onclick="enableDecoderEMDK('decoder_code128')">Enable Code128 
+      - EMDK</BUTTON></TD></TR>
+  <TR>
+    <TD><BUTTON onclick="enableDecoderNEON('code39')">Enable Code39 - 
+      Neon</BUTTON></TD>
+    <TD><BUTTON onclick="enableDecoderEMDK('decoder_code39')">Enable Code39 - 
+      EMDK</BUTTON></TD></TR>
+  <TR>
+    <TD><BUTTON onclick=enablePicklistNEON()>Enable Picklist - 
+Neon</BUTTON></TD>
+    <TD><BUTTON onclick=enablePicklistEMDK()>Enable Picklist - 
+  EMDK</BUTTON></TD></TR></TBODY></TABLE>
+<H2 id=datafield>Data Goes Here</H2>
+<H1>
+<DIV id=countdown class=green>Go!</DIV></H1></BODY></HTML>

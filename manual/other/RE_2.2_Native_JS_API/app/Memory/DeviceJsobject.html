@@ -1,0 +1,76 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+
+<title>Device TestScript</title>
+
+
+<script type="text/javascript">
+	  
+  
+   function setmethods()
+{
+	var SelectedValue = frm.methodsdropdown.selectedIndex;
+	var selectmethods = frm.methodsdropdown.options[SelectedValue].value;
+    Message.innerHTML="value is:"+selectmethods;
+	switch(selectmethods)
+	{
+		case 'suspend':
+			device.suspend();
+			break;
+
+		case 'wake':
+			device.wake();
+			break;
+			
+	   case 'calibrate':
+            device.calibrate();
+			break;
+			
+	   case 'powerOff':
+            device.powerOff();
+			break;
+			
+		case 'SandC':
+			device.suspend();
+            device.calibrate();			
+			break;
+			
+		case 'SandW':
+			device.suspend();
+            device.wake();			
+			break;
+	}
+}
+ 
+    
+
+    
+ </script>
+</head>
+<body>
+<form id="frm" action="">
+<br /><br /><br />
+<b>Device with JSOBJECT</b><br /><br />
+<div id="Message">Message</div>
+<br/><br/>
+Setvisibility:<select name="methodsdropdown" id="IDmethods">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="Suspend">Suspend</option>
+<option value="Calibrate">Calibrate</option>
+<option value="wake">wake</option>
+<option value="powerOff">powerOff</option>
+<option value="SandC">SandC</option>
+<option value="SandW">SandW</option>
+</select>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<input type=button onclick="setmethods();" value="SetMethods">
+
+<hr/>
+
+</table>
+</form>
+
+</body>
+</html>

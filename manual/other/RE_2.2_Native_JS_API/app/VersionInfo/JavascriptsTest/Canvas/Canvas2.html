@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<p>The image:</p>
+<img src="HTML5_Connectivity_32.png" id="myImage" width="32" height="32" />
+<p>The Canvas:</p>
+<canvas id="myCanvas" width="300" height="150" style="border:1px solid #d3d3d3;">
+your browser does not support the canvas tag </canvas>
+
+<script type="text/javascript">
+var canvas=document.getElementById("myCanvas");
+var ctx=canvas.getContext("2d");
+var img=document.getElementById("myImage")
+var pat=ctx.createPattern(img,"repeat");
+ctx.rect(0,0,150,100);
+ctx.fillStyle=pat;
+ctx.fill();
+</script>
+
+</body>
+</html>
+
+

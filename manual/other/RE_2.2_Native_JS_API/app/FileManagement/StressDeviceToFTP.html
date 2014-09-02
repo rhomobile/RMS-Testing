@@ -1,0 +1,101 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+<META HTTP-Equiv="FileTransfer" content="TransferEvent:url('Javascript:MyJSONTransferEvent(%json)');Source:url('file://\Application\FileCollections\myfile.txt');Destination:url('ftp://10.233.85.82/Received/mystressfilefromdevice.txt');Username:ftpadmin;Password:ftpadmin;transfer">
+</head>
+<body>
+<br><br><br><br><br><br>
+<div id="myResponse">FileTransferResult:</div><br />
+<p>Device to FTP Stress 1</p>
+<BR><BR><BR><BR>
+<div id="nos">Scccess Count</div><br />
+<div id="failureCount">Failure Count</div><br />
+<div id="totalCount">Total Count</div><br />
+<textarea id="resultText" name="resultText" cols="50" rows="5"></textarea>
+<P><INPUT TYPE="button" VALUE="TransferDeviceToFTP" ONCLICK="doCapture();"></P>
+
+<P><INPUT TYPE="button" VALUE="Back" ONCLICK="location.href='FileManagement_Index.html'"></P>
+
+</body>
+</html>
+
+<SCRIPT type="text/javascript">
+var iCount = 0;
+var jCount = 0;
+var fCount = 0;
+var tCount=0;
+
+	
+function doCapture()
+{
+
+	 iCount++;
+
+	  if(iCount <= 50000)
+		{
+			generic.InvokeMETAFunction("FileTransfer", "TransferEvent:url('Javascript:MyJSONTransferEvent(%json)');Source:url('file://\\Application\\FileCollections\\myfile.txt');Destination:url('ftp://10.233.85.82/Received/mystressfilefromdevice.txt');Username:ftpadmin;Password:ftpadmin;transfer");
+			//generic.InvokeMETAFunction('FileTransfer', 'Transfer');
+			//nos.innerHTML = iCount;
+			captureLoop();	
+			
+		}
+		
+		
+}
+
+
+
+function captureLoop()
+{
+	setTimeout("doCapture()", 30000);
+}
+
+
+function MyJSONTransferEvent(myjsonobject)
+{
+//document.getElementById('FileDiv').innerHTML ="JSON TransferResult= " + myjsonobject.transferResult;
+       if(myjsonobject.transferResult=="OK: File Sent")
+        {
+        
+        jCount++;
+        nos.innerHTML="successCount:"+jCount;
+    
+        }
+        else
+        {
+        fCount++;
+        failureCount.innerHTML="failureCount:"+fCount;
+        resultText.value+=myjsonobject.transferResult+"\r\t"
+        
+        }
+        tCount++;
+        totalCount.innerHTML = "TotalCount:"+tCount;        
+        myResponse.innerHTML="response"+myjsonobject.transferResult;
+}
+
+function MyTransferEvent(response) 
+{
+  
+	
+	    if(response=="OK: File Sent")
+        {
+        
+        jCount++;
+        nos.innerHTML="successCount:"+jCount;
+    
+        }
+        else
+        {
+        fCount++;
+        failureCount.innerHTML="failureCount:"+fCount;
+        resultText.value+=response+"\r\t"
+        
+        }
+        tCount++;
+        totalCount.innerHTML = "TotalCount:"+tCount;        
+        myResponse.innerHTML="response"+response;
+ }
+
+
+</SCRIPT>

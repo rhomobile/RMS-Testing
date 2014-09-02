@@ -1,0 +1,39 @@
+﻿<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+    <title>DeviceToHTTPFullyQualifiedURLport80</title>
+   
+   <!-- <META HTTP-Equiv="FileTransfer" content="TransferEvent:url('Javascript:MyTransferEvent('%s');');Source:url('file://\Application\FileCollections\myfile.txt');Destination:url('http://10.233.85.82:80/NEON/ReceivedFiles/Upload.aspx');CreateFolders:True;OverWrite:True;Transfer"> -->
+ 
+ <META HTTP-Equiv="FileTransfer" content="TransferEvent:url('Javascript:MyJSONTransferEvent(%json)');Source:url('file://\Application\FileCollections\myfile.txt');Destination:url('http://10.233.85.82:80/NEON/ReceivedFiles/Upload.aspx');CreateFolders:True;OverWrite:True;Transfer"> 
+<script language=javascript>
+
+function MyTransferEvent(Msg)
+{
+document.getElementById('FileDiv').innerHTML = Msg;
+}
+
+function MyJSONTransferEvent(myjsonobject)
+{
+document.getElementById('FileDiv').innerHTML ="JSON TransferResult= " + myjsonobject.transferResult;
+}
+
+
+
+</script>
+</head>
+
+<body>
+
+<form id="frmFileManagement" action="" onload="SetdeafultSettings();">
+<P><INPUT TYPE="button" VALUE="Back" ONCLICK="location.href='FileManagement_Index.html'"></P>
+<br /><br />
+DeviceToHTTP-FullyQualifiedURL-EMML1.1-port80
+<br /><br />
+
+<div id="FileDiv">TransferEvent:-</div>
+
+</form>
+</body>
+</html>

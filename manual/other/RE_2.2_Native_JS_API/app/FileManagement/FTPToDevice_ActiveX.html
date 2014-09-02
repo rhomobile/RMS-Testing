@@ -1,0 +1,234 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+    <title>NEON File Management Test</title>
+<!--<meta http-equiv="FileTransfer" content="TransferEvent: url('javascript: MyTransferEvent('%s');')"/>-->
+</head>
+
+<body>
+
+<form id="frmFileManagement" action="">
+<br /><br /><br />
+FileTransfer Using activeXobject
+<div id="FileDiv">TransferEvent:-</div>
+<select name="mydropdown5" id="mydropdown5">
+<option value="JAVASCRIPT">JAVASCRIPT</option>
+<option value="HTML">HTML</option>
+<option value="JSON">JSON</option>
+<option value="DETACHEVENT">DETACHEVENT</option>
+<option value="EMPTYEVENT">EMPTYEVENT</option>
+</select>
+<br>
+<input type="button" onclick="AttachEvent();" value="AttachEvent"/>
+<br>
+<input type="button" onclick="SetNULL();" value="SetNULL"/>
+
+<hr>
+<table>
+<tr>
+<td><a name="FileManagement Settings"></a></td>
+</tr>
+<tr>
+<td>Source</td>
+</tr>
+<tr>
+<td><Textarea id="txtSource"cols="22" rows="2">ftp://10.233.85.82/FileCollections/myfile.txt</Textarea></td>
+</tr>
+
+<tr>
+<td>Destination</td>
+</tr>
+<tr>
+<td><Textarea id="txtDestination"cols="22" rows="2" >file://\Temp\myfolderfromFTP\mynewfilefromftp.txt</Textarea>
+</td>
+</tr>
+
+<tr>
+<td>UserName</td>
+</tr>
+<tr>
+<td><Textarea id="txtUserName"cols="20" rows="1">ftpadmin</Textarea></td>
+</tr>
+<tr>
+<td>Password</td>
+</tr>
+<tr>
+<td><Textarea id="txtPassword"cols="20" rows="1">ftpadmin</Textarea></td>
+</tr>
+<tr>
+<td>Select CreateFolder value</td>
+</tr>
+<tr>
+<td><select name="mydropdown1" id="Select1">
+<option value="Default">Default</option>
+<option value="True">True</option>
+<option value="False">False</option>
+<option value="">EMPTYSTRING</option>
+<option value="Test">Test</option>
+<option value="aaaa">aaaa</option>
+<option value="NULL">NULL</option>
+</select>
+</td>
+</tr>
+
+<tr>
+<td>Select OverWrite value</td>
+</tr>
+<tr>
+<td><select name="mydropdown2" id="Select2">
+<option value="Default">Default</option>
+<option value="True">True</option>
+<option value="false">false</option>
+<option value="">EMPTYSTRING</option>
+<option value="Test">Test</option>
+<option value="aaaa">aaaa</option>
+<option value="NULL">NULL</option>
+</select>
+</td>
+</tr>
+
+</table>
+<hr>
+
+<table>
+<tr>
+    <td><input type="button" onclick="Transfer();" value="Transfer"/></td>
+    <td><Textarea id="txtShowResult"cols="10" rows="1"></Textarea></td>
+</tr>
+</table>
+
+
+</form>
+
+<P><INPUT TYPE="button" VALUE="Back" ONCLICK="location.href='FileManagement_Index.html'"></P>
+
+
+</body>
+</html>
+
+<script language="javascript">
+
+var objgeneric = new ActiveXObject("PocketBrowser.Generic");
+var SelectedItem="";
+var StressCount=0;
+
+
+function MyTransferEvent(Msg)
+{
+//FileDiv.innerHTML="TransferEvent fired for "+StressCount+"th time.TransferMessage:-"+Msg;
+//StressCount++;
+document.getElementById('FileDiv').innerHTML ="TransferResult= " + Msg;
+}
+function MyJSONTransferEvent(myjsonobject)
+{
+document.getElementById('FileDiv').innerHTML ="JSON TransferResult= " + myjsonobject.transferResult;
+}
+function SetNULL()
+{
+    //var source=frmFileManagement.txtSource.value;
+    //var Destination=frmFileManagement.txtDestination.value;
+    frmFileManagement.txtUserName.value="NULL";
+    frmFileManagement.txtPassword.value="NULL";
+    frmFileManagement.mydropdown1.selectedIndex=4;
+    frmFileManagement.mydropdown2.selectedIndex=4;
+}
+function AttachEvent()
+{
+    SelectedItem=frmFileManagement.mydropdown5.value;
+    if(SelectedItem=="HTML")
+    {
+        objgeneric.InvokeMETAFunction("FileTransfer", "TransferEvent:url('http://10.233.85.82/Navigate.html?FileTransferReturncode=%s')");
+    
+    }
+    else if(SelectedItem=="JSON")
+    {
+        objgeneric.InvokeMETAFunction("FileTransfer","TransferEvent:url('Javascript:MyJSONTransferEvent(%json);')");
+    }
+    else if(SelectedItem=="JAVASCRIPT")
+    {
+    objgeneric.InvokeMETAFunction("FileTransfer","TransferEvent:url('Javascript:MyTransferEvent('%s');')");
+    }
+    else if(SelectedItem=="DETACHEVENT")
+    {
+      objgeneric.InvokeMETAFunction("FileTransfer","TransferEvent:url('')");
+    }
+    else if(SelectedItem=="EMPTYEVENT")
+    {
+    //alert("empty");
+      objgeneric.InvokeMETAFunction("FileTransfer","TransferEvent:");
+    }
+ document.getElementById('FileDiv').innerHTML =SelectedItem + " Attached";   
+}
+function Transfer()
+{
+    
+    var source=frmFileManagement.txtSource.value;
+    var Destination=frmFileManagement.txtDestination.value;
+    var UserName=frmFileManagement.txtUserName.value;
+    var Password=frmFileManagement.txtPassword.value;
+    var SelectedIndex=frmFileManagement.mydropdown1.selectedIndex;
+    var CreateFolderValue=frmFileManagement.mydropdown1.options[SelectedIndex].value;
+    var SelectedIndex1=frmFileManagement.mydropdown2.selectedIndex;
+    var Overwrite=frmFileManagement.mydropdown2.options[SelectedIndex1].value;
+
+
+
+
+
+
+
+    if(UserName!="NULL")
+    {
+        objgeneric.InvokeMETAFunction("FileTransfer","Username:"+UserName);
+    }
+    if(Password!="NULL")
+    {
+        objgeneric.InvokeMETAFunction("FileTransfer","Password:"+Password);
+    }
+    if(source!="NULL")
+    {
+        if(source=="EMPTY")
+        {
+        objgeneric.InvokeMETAFunction("FileTransfer","Source:");
+        }
+        else
+        {
+        objgeneric.InvokeMETAFunction("FileTransfer","Source:url('"+source+"')");
+        }
+    }
+
+    if(Destination!="NULL")
+    {
+        if(Destination=="EMPTY")
+        {
+        objgeneric.InvokeMETAFunction("FileTransfer","Destination:");
+        }
+        else
+        {
+        objgeneric.InvokeMETAFunction("FileTransfer","Destination:url('"+Destination+"')");
+        }
+    }
+
+ 
+    if(CreateFolderValue!="NULL")
+    {
+        objgeneric.InvokeMETAFunction("FileTransfer","CreateFolders:"+CreateFolderValue);
+    }
+    
+    if(Overwrite!="NULL")
+    {
+        var abc = "OverWrite:"+Overwrite;
+        //alert(Overwrite);
+        objgeneric.InvokeMETAFunction("FileTransfer","OverWrite:"+Overwrite);
+    }
+    
+    
+
+objgeneric.InvokeMETAFunction("FileTransfer","Transfer");
+
+var str = "Transfer Called";
+document.getElementById('FileDiv').innerHTML = str;
+}
+
+</script>

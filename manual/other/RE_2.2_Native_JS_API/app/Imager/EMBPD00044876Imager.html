@@ -1,0 +1,81 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+
+<META HTTP-Equiv="imager" Content="left:140;top:20;height:50;width:50;aim:on;lamp:on;
+Destination:url('ftp://10.233.85.82/Received/imageInFTPStress.bmp');username:ftpadmin;password:ftpadmin;imagerevent:url('javascript:myjsonevent(%json)');enabled:IMG1">
+
+
+</head>
+<body>
+<br><br><br><br><br><br>
+<P><INPUT TYPE="button" VALUE="Capture" ONCLICK="doCapture();"></P>
+<P><INPUT TYPE="button" VALUE="Disable" ONCLICK="doDisable();"></P>
+<P><INPUT TYPE="button" VALUE="Back" ONCLICK="location.href='./ImageIndex.html'"></P>
+<div id="myResponse">EventResponse:</div><BR>
+<p>Image Capture Memory Leak FTP Testing</p>
+<BR><BR><BR><BR><BR><BR><BR>
+<div id="nos">TotalCount</div>
+<div id="sCount">SuccessCount</div>
+</body>
+</html>
+
+
+<SCRIPT type="text/javascript">
+var generic = new ActiveXObject("PocketBrowser.Generic");
+	
+var iCount = 0;
+var jCount=0;
+	
+function doCapture()
+{
+
+		iCount++;
+
+	  if(iCount <= 50000)
+		{
+		    generic.InvokeMETAFunction("imager", "left:140;top:20;height:50;width:50;aim:on;lamp:on;Destination:url('ftp://10.233.85.82//Received//imageInFTPStress.bmp');username:ftpadmin;password:ftpadmin");
+			generic.InvokeMETAFunction('imager', 'capture');
+			nos.innerHTML = "TotalCount:-"+iCount;
+			//myResponse.innerHTML="Capture Called";
+			captureLoop();	
+			
+		}
+		
+}
+
+function doDisable()
+{
+	generic.InvokeMETAFunction('imager', 'disable');
+}
+
+function captureLoop()
+{
+	setTimeout("doCapture()", 30000);
+	
+}
+
+function myevent(response) {
+
+        if(response=="OK: File Sent")
+        {
+        jCount++;
+        }
+        myResponse.innerHTML="response:-"+response+" count:-"+jCount;
+
+    }
+
+function myjsonevent(jsonObject)
+{
+if(response=="OK: File Sent")
+        {
+        jCount++;
+		sCount.innerHTML="Success Count:"+jCount;
+        }
+        myResponse.innerHTML="response:-"+jsonObject.transferResult+" count:-"+jCount;
+}
+
+</SCRIPT>
+
+

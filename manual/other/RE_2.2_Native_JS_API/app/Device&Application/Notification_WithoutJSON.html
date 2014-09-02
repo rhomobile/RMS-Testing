@@ -1,0 +1,153 @@
+<HTML>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+<meta http-equiv="Pragma" content="no-cache">
+<!--<meta http-equiv="expires" content="0">-->
+<META HTTP-Equiv="Notification" content="EnumNotificationsEvent:url('Javascript:onNotificationsarray(%s);'); Enumerate">
+<!--<META HTTP-Equiv="Notification" content="stateOn:0">-->
+<TITLE>Device / Application Tests</TITLE>
+  <script type="text/javascript">
+ try
+{
+var generic = new ActiveXObject("PocketBrowser.generic");
+}
+catch(err)
+{
+var GenericPlugin = document.createElement('embed'); 
+GenericPlugin.setAttribute('id',"embed1"); 
+GenericPlugin.setAttribute('type',"application/x-wtg-legacy-generic"); 
+GenericPlugin.setAttribute('hidden',"true"); 
+
+//// Attach the plugin embed tags to the body 
+var theBody = document.getElementsByTagName('body')[0]; 
+theBody.appendChild(GenericPlugin); 
+
+
+}
+  
+  var ntfyArr = new Array();
+  var notType = new Array('LED', 'BEEPER', 'PAGER');
+   var NTFY_INDEX = 0;
+   var NTFY_TYPE = 1;
+   var NTFY_NAME = 2;
+
+ 
+    
+  function onNotificationsarray(notArr)
+  {
+	 ntfyArr = notArr;
+	 var html = "";
+
+	 for(i=0; i<ntfyArr.length; i++)	
+     {
+       html += '' + ntfyArr[i][NTFY_INDEX] + ', ' 
+	        + notType[ntfyArr[i][NTFY_TYPE]] + '' 
+	        + ntfyArr[i][NTFY_NAME] + '';
+     }
+	 
+     html += "";
+
+  
+	enumNotifications.innerHTML=html;
+  }
+  
+  function setBeeper()
+  {
+//            var BEEPFre = frm.txtBeeperFrequency.value;
+//			var BEEPFreValue = "SetBeeperFrequency:"+BEEPFre;
+//			//alert(BEEPFreValue);       
+//			generic.InvokeMETAFunction('Notification', BEEPFreValue);
+//		
+//		
+//		
+//			var BEEPVol = frm.txtBeeperVolume.value;
+//			var BEEPVolValue = "SetBeeperVolume:"+BEEPVol;
+//			//alert(BEEPVolValue);   
+//			generic.InvokeMETAFunction('Notification', BEEPVolValue);
+//		
+//	
+//		
+//			var BeepDur = frm.txtBeeperDuration.value;
+//			var BeepDurValue = "SetBeeperDuration:"+BeepDur;
+//			//alert(BeepDurValue);   
+//			generic.InvokeMETAFunction('Notification', BeepDurValue);
+		
+  
+//    var SelectedValue = frm.statedropdown.selectedIndex;
+//	var selectedState = frm.statedropdown.options[SelectedValue].value;
+    bat.innerHTML ="Starting";
+	var index = 0;
+	generic.InvokeMetaFunction("Notification", "StateOn:0");
+	bat.innerHTML ="StateOn:" + index;
+	//generic.InvokeMetaFunction("Notification", "StateOn:" + index);
+			
+//	 bat.innerHTML ="result"+selectedState;
+//	switch("On")
+//	{
+//	  
+//	   
+//		case 'On':
+//            
+//			generic.InvokeMetaFunction("Notification", "StateOn:" + index);
+//			bat.innerHTML ="StateOn:" + index;
+//			break;
+
+//		case 'Off':
+//            
+//			generic.InvokeMetaFunction("Notification", "StateOff:" + index);
+//			break;
+//		
+//		case 'Cycle':
+//            
+//			generic.InvokeMetaFunction("Notification", "StateCycle:" + index);
+//			break;
+//	}
+	
+  }
+  
+  
+  
+  </script>
+</HEAD>
+ <body
+<H1>Notification Tests asd</H1>
+<P>
+  <div id="enumNotifications">Notifications go Here</div>
+  <div id ="bat">Result</div>
+  <br /><br />
+  <form id="frm" action="">
+  Beeper<br>
+<tr>
+	SetBeeperFrequency	<Textarea id="txtBeeperFrequency"cols="5" rows="1">5000</Textarea>
+	</tr><br>
+<tr>
+	SetBeeperVolume		<Textarea id="txtBeeperVolume"cols="5" rows="1">3</Textarea>
+	</tr><br>
+<tr>
+	SetBeeperDuration	<Textarea id="txtBeeperDuration"cols="5" rows="1">4000</Textarea>
+	</tr><br>
+
+<hr><br>
+
+<hr>
+Vibrator<br>
+<tr>
+	SetVibrateDuration	<Textarea id="txtVibrateDuration"cols="5" rows="1">5000</Textarea>
+	</tr><br>
+<hr><br>
+<hr>
+State<br>
+State Value	<select name="statedropdown" id="statedropdown">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="On">On</option>
+<option value="Off">Off</option>
+<option value="Cycle">Cycle</option>
+</select>
+<hr>
+<INPUT TYPE="button" VALUE="Beeper" ONCLICK="setBeeper();">
+
+<br>
+ </form>
+  </body>
+</HTML>

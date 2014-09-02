@@ -1,0 +1,408 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+<!--<META HTTP-Equiv="SignatureCapture"Content="left:10;top:60;width:200;height:200;BGColor:#FF0000;visibility:visible">-->
+<META HTTP-Equiv="MinimizeButton" Content="Visibility:Visible;left:100;top:0">
+
+</head>
+
+
+<body>
+<BR><BR><BR><BR><BR>
+<form id="frm" action="">
+<BR><BR><BR><BR><BR>
+<div id="message">Message</div>
+<BR><BR><BR><BR><BR><BR><BR><BR><BR>
+
+Select Visibility	<select name="sigVisibility" id="sigVisibility" onChange="selectVisibility();">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="Visible">Visible</option>
+<option value="Hidden">Hidden</option>
+<option value="Address">Address</option>
+</select>
+
+Select Border	<select name="sigBorder" id="sigBorder" onChange="selectBorder();">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="On">On</option>
+<option value="Off">Off</option>
+<option value="Test">Test</option>
+</select>
+<BR><BR>
+<P><INPUT TYPE="button" VALUE="Hidden" ONCLICK="doHidden();"></P>
+<P><INPUT TYPE="button" VALUE="visible" ONCLICK="doVisible();"></P>
+<input type=button id="clear" onclick="clearSignature();" value="Clear">
+<input type=button id="capture" onclick="captureSignature();" value="CaptureLocal">
+<input type=button onclick="Javascript:imgcapture();" value="Capture">
+<BR><BR>
+
+
+<table>
+ <tr>
+      <td>Left Position:</td><td><Textarea id="leftPosition" cols="10" rows="1">20</Textarea>
+	<input type=button onclick="Javascript:setLeftPosition();" value="Left">
+</td></tr>
+	
+<tr>
+      <td>Top Position:</td><td><Textarea id="topPosition" cols="10" rows="1">20</Textarea>
+	<input type=button onclick="Javascript:setTopPosition();" value="Top">
+</td></tr>
+ <tr>
+      <td>Height:</td><td><Textarea id="viewerHeight" cols="10" rows="1">30</Textarea>
+	<input type=button onclick="Javascript:setheight();" value="Height">
+</td> </tr>
+ <tr>
+      <td>Width:</td><td><Textarea id="viewerWidth" cols="10" rows="1">130</Textarea>
+	<input type=button onclick="Javascript:setwidth();" value="Width">
+</td></tr>
+ <tr>
+      <td>Pen Width:</td><td><Textarea id="inkwidth" cols="10" rows="1">3</Textarea>
+	<input type=button onclick="Javascript:peninkwidth();" value="PenInk">
+</td></tr>
+ <tr>
+      <td>Pen Color:</td><td><Textarea id="inkcolor" cols="10" rows="1">#EE00EE</Textarea>
+	<input type=button onclick="Javascript:peninkcolor();" value="PenColor">
+</td></tr>
+ <tr>
+      <td>BG Color:</td><td><Textarea id="backgroundColor" cols="10" rows="1">#7FFF00</Textarea>
+	<input type=button onclick="Javascript:bgroundcolor();" value="BGColor">
+</td></tr>
+
+</table>
+
+<hr>
+<table>
+<tr>
+	<td>Destination</td><td><Textarea id="txtDestination"cols="38" rows="1">url('../Upload.aspx')</Textarea></td>
+	</tr>
+	
+	<!--url('ftp://10.233.85.82:21/Sig.bmp')-->
+	<!--	url('http://10.233.85.82:80/NEON/SignatureCapture/Upload.aspx')-->
+	<!--   url('file://\Application\Sig.bmp')-->
+	
+	<!--   url('./down/Upload.aspx')-->
+	<!--   url('../Upload.aspx')-->
+	<!--   url('./Upload.aspx')-->
+	
+	<!--url("ftp://ftp.tandv.wtgdev.net/image.bmp")-->
+         <!--url("http://tandv.wtgdev.net/FileManagement/SecuredHTTP/upload.php")-->
+
+        <!--url('ftp://ftpadmin:ftpadmin@10.233.85.82:21/Sig.bmp')http://10.233.85.82/NEON/ReceivedFiles/Upload.aspx";-->
+        <!--url('ftp://ftpadmin:ftpadmin@10.233.85.82:21/Sig.bmp')-->
+
+	
+
+   
+	<!--url('http://10.233.85.82:80/PB3.X/Signature Capture/Sig.bmp')-->
+	<!--url('http://157.235.207.158:80/PB3.X/Signature Capture/Upload.aspx')-->
+	<!--url('ftp://ftpadmin:ftpadmin@157.235.207.158:21/Sig.bmp')-->
+	<!--url('ftp://157.235.207.158:21/Sig.bmp')-->
+<!--	url('ftp://ftpadmin:ftpadmin@157.235.207.158:21/Sig.bmp')-->
+<!--url('http://157.235.207.79:80/PB3.X/Signature Capture/Upload.aspx')-->
+<tr>
+	<td>UserName</td><td><Textarea id="txtUserName"cols="10" rows="1">ftpadmin</Textarea></td>
+	</tr>
+<tr>
+	<td>Password</td><td><Textarea id="txtPassword"cols="10" rows="1">ftpadmin</Textarea></td>
+	</tr>
+
+<tr>
+	<td>Name</td><td><Textarea id="txtName"cols="21" rows="1">Sig</Textarea></td>
+	</tr>
+
+
+</table>
+
+<input type="radio" name="group1" value="javascript" checked="checked">Navigate to javascript function
+<br>
+<input type="radio" name="group1" value="HTML" >Navigate to HTML Page
+<br>
+<input type="radio" name="group1" value="VectorArray">Navigate to Vector Array function
+
+
+<br>
+
+    <input type=button onclick="Javascript:imgcapture();" value="Capture">
+<hr>
+
+<BR>
+<A HREF="SignatureCapture.html">Back</A><br />
+<A HREF="SignatureNavigate.html">check Persistancy</A><br />
+
+<P><INPUT TYPE="button" VALUE="Quit" ONCLICK="Quit();"></P>
+
+</form>
+</body>
+</html>
+<script language=javascript>
+//try
+//{
+//var generic = new ActiveXObject("PocketBrowser.Generic");
+//}
+//catch(err)
+//{
+//var GenericPlugin = document.createElement('embed'); 
+//GenericPlugin.setAttribute('id',"embed1"); 
+//GenericPlugin.setAttribute('type',"application/x-wtg-legacy-generic"); 
+//GenericPlugin.setAttribute('hidden',"true"); 
+
+//// Attach the plugin embed tags to the body 
+//var theBody = document.getElementsByTagName('body')[0]; 
+//theBody.appendChild(GenericPlugin); 
+//}
+
+var selectedVisibility=""; //Selected Visibility.
+
+var selectedBorder=""; //Selected Aim in the list.
+var eventScript="";
+
+function Quit() 
+{
+   //generic.InvokeMETAFunction("Application", "Quit");
+
+}
+function selectVisibility()
+{
+	var sltVisibility=frm.sigVisibility.selectedIndex;
+	selectedVisibility = frm.sigVisibility.options[sltVisibility].value;
+	switch(selectedVisibility)
+	{
+		case 'Visible':
+            
+			//generic.InvokeMETAFunction('SignatureCapture', 'Visibility:Visible');
+                  signatureCapture.visibility = 'visible';
+
+			break;
+
+		case 'Hidden':
+
+			//generic.InvokeMETAFunction('SignatureCapture', 'Visibility:Hidden');
+                  signatureCapture.visibility = 'hidden';
+			break;
+
+		
+		case 'Address':
+
+			//generic.InvokeMETAFunction('SignatureCapture', 'Visibility:Address');
+                   signatureCapture.visibility = 'address';
+			break;
+	}
+}
+
+
+function clearSignature()
+{
+	//generic.InvokeMETAFunction('SignatureCapture', 'Clear');
+        signatureCapture.clear(); 
+
+
+
+}
+
+function captureSignature()
+{
+	  generic.InvokeMETAFunction('SignatureCapture', 'Name:abcd');
+	//generic.InvokeMETAFunction('SignatureCapture', 'Capture');
+        signatureCapture.capture(); 
+
+}
+
+function setLeftPosition()
+{
+	var leftpst=frm.leftPosition.value;
+	var leftpstvalue=""+leftpst;
+	//generic.InvokeMETAFunction('SignatureCapture',leftpstvalue);
+            signatureCapture.left =leftpstvalue ; 
+
+}
+
+function setTopPosition()
+{
+	var toppst=frm.topPosition.value;
+	var toppstvalue=""+toppst;
+	//generic.InvokeMETAFunction('SignatureCapture',toppstvalue);
+      signatureCapture.top = toppstvalue;
+}
+
+function setheight()
+{
+	var ht=frm.viewerHeight.value;
+	var setheightvalue=""+ht;
+	//generic.InvokeMETAFunction('SignatureCapture',setheightvalue);
+      signatureCapture.height = setheightvalue;
+}
+
+function setwidth()
+{
+	var wd=frm.viewerWidth.value;
+	var setwidthvalue=""+wd;
+	//generic.InvokeMETAFunction('SignatureCapture',setwidthvalue);
+      signatureCapture.width = setwidthvalue;
+}
+
+function peninkwidth()
+{
+	var penwd=frm.inkwidth.value;
+	var penwdvalue=""+penwd;
+	//generic.InvokeMETAFunction('SignatureCapture',penwdvalue);
+      signatureCapture.penWidth = penwdvalue;
+}
+
+function peninkcolor()
+{
+	var pcolor=frm.inkcolor.value;
+	var pencolorvalue=""+pcolor;
+	//generic.InvokeMETAFunction('SignatureCapture',pencolorvalue);
+      signatureCapture.penColor = pencolorvalue;
+}
+
+function bgroundcolor()
+{
+	var backgcolor=frm.backgroundColor.value;
+	var backgcolorvalue=""+backgcolor;
+	//generic.InvokeMETAFunction('SignatureCapture',backgcolorvalue);
+      signatureCapture.bgColor = backgcolorvalue;
+}
+
+function selectBorder()
+{
+	var sltBorder=frm.sigBorder.selectedIndex;
+	selectedBorder = frm.sigBorder.options[sltBorder].value;
+	switch(selectedBorder)
+	{
+		case 'On':
+			//generic.InvokeMETAFunction('SignatureCapture', 'Border:Visible');
+                   signatureCapture.border = 'Visible';
+			break;
+
+		case 'Off':
+			//generic.InvokeMETAFunction('SignatureCapture', 'Border:Hidden');
+                  signatureCapture.border = 'Hidden';
+			break;
+		
+		case 'Test':
+			//generic.InvokeMETAFunction('SignatureCapture', 'Border:Address');
+                  signatureCapture.border = 'Address';
+			break;
+	}
+}
+
+function imgcapture()
+{
+
+	var DestinationValue = frm.txtDestination.value;
+	var dest = ""+DestinationValue;
+	//generic.InvokeMETAFunction('SignatureCapture', dest);
+    signatureCapture.destination = dest;
+	if(frm.txtUserName.value.length != 0)
+	{
+	    //alert("1");
+		var UserName = frm.txtUserName.value;
+		var uname = ""+UserName;
+		//generic.InvokeMETAFunction('SignatureCapture', uname);
+            signatureCapture.username = uname;
+	}
+	if(frm.txtPassword.value.length != 0)
+	{
+	//alert("2");
+	var Password = frm.txtPassword.value;
+	var pword = ""+Password;
+	//generic.InvokeMETAFunction('SignatureCapture', pword);
+      signatureCapture.password = pword;
+
+	}
+	
+	//var sigName = frm.txtName.value;
+	//var signaturename = "Name:"+sigName;
+	//generic.InvokeMETAFunction('SignatureCapture', signaturename);
+	
+	
+
+	for (var i=0; i < frm.group1.length; i++)
+   	{   
+      		if (frm.group1[i].checked)
+      		{
+      			var type = frm.group1[i].value;
+      		}
+   	}	
+	
+
+	if(type=="javascript")	
+	{
+		//generic.InvokeMETAFunction("SignatureCapture", "SignatureSaveEvent:url('javascript:onCaptured('%s');')");
+            
+		//alert("hi");
+                //generic.InvokeMETAFunction("SignatureCapture", "SignatureSaveEvent:url('javascript:onCapturedjson(%json);')");
+
+		//generic.InvokeMETAFunction("SignatureCapture", "SignatureSaveEvent:");
+
+            signatureCapture.signatureSaveEvent = "onCaptured('%s')";
+
+	}
+
+	else if(type=="HTML")
+	{
+	    //generic.InvokeMETAFunction("SignatureCapture", "SignatureSaveEvent:url('http://tandv.wtgdev.net/Navigate.html')");
+            //generic.InvokeMETAFunction("SignatureCapture", "SignatureSaveEvent:url('')");
+          // signatureCapture.signatureSaveEvent = "url('http://tandv.wtgdev.net/Navigate.html')";
+          signatureCapture.signatureSaveEvent = "url('http://tandv.wtgdev.net/Navigate.html')";
+
+	}
+
+	else if(type=="VectorArray")
+	{
+		//generic.InvokeMETAFunction("SignatureCapture", "VectorEvent:url('javascript:myvectorevent(%s);')");
+               // generic.InvokeMETAFunction("SignatureCapture", "VectorEvent:url('')");
+              //  generic.InvokeMETAFunction("SignatureCapture", "VectorEvent:url('http://tandv.wtgdev.net/Navigate.html')");
+
+
+	}
+	
+	//generic.InvokeMETAFunction('SignatureCapture', 'capture');
+	signatureCapture.capture(); 
+
+}
+
+
+
+function onCaptured(data)
+{
+	message.innerHTML = "Data: " + data;
+}
+function onCapturedjson(jsondata)
+{
+	message.innerHTML = "JSONData: " +jsondata.transferResult;
+}
+
+function myvectorevent(data)
+{
+	var VectorAsHTML = "<TABLE><TR><TH>X</TH><TH>Y</TH><TH>X</TH><TH>Y</TH><TH>X</TH><TH>Y</TH></TR>";
+  for (var i=0; i<data.length; i = i + 6)
+  {
+    VectorAsHTML = VectorAsHTML + "<TR>"
+    VectorAsHTML = VectorAsHTML + "<TD>" + data[i] + "</TD><TD>" + data[i+1] + "</TD>";
+    VectorAsHTML = VectorAsHTML + "<TD>" + data[i+2] + "</TD><TD>" + data[i+3] + "</TD>";
+    VectorAsHTML = VectorAsHTML + "<TD>" + data[i+4] + "</TD><TD>" + data[i+5] + "</TD>";
+    VectorAsHTML = VectorAsHTML + "</TR>"
+  }
+  VectorAsHTML + "</TABLE>"
+  message.innerHTML = VectorAsHTML;
+}
+
+function doVisible()
+{
+//generic.InvokeMETAFunction('SignatureCapture', 'Visibility:visible');
+ signatureCapture.visibility = 'Visible';
+
+
+}
+
+function doHidden()
+{
+//generic.InvokeMETAFunction('SignatureCapture', 'Visibility:Hidden');
+ signatureCapture.visibility = 'Hidden';
+
+
+}
+
+</script>

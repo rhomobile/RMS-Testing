@@ -1,0 +1,54 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+<META HTTP-Equiv="quitbutton" Content="visibility:visible">
+<META HTTP-Equiv="quitbutton" Content="Left:10">
+<META HTTP-Equiv="quitbutton" Content="Top:10">
+
+
+
+
+
+
+</head>
+<body>
+<H1>Generic Memory Leak Testing</H1>
+<P><INPUT TYPE="button" VALUE="Start" ONCLICK="doStart();"></P>
+<div id="nos">X Value</div>
+
+<BR><BR>
+
+<A HREF="./Indicators.html">Back</A>
+
+
+</body>
+</html>
+
+
+<SCRIPT LANGUAGE="JavaScript">
+
+//var objGeneric = new ActiveXObject("PocketBrowser.Generic");
+
+function doStart()
+{
+	for (var x = 1; x <= 50000; x++)
+   	{
+		//var hProcess = objGeneric.LaunchProcessNonBlocking('\\application\\RegEdit.exe', '');
+   		//objGeneric.CloseProcess(hProcess);
+		wait(5000);
+        nos.innerHTML = x;
+   	}
+}
+
+function wait(msecs)
+{
+	var start = new Date().getTime();
+	var cur = start
+	while(cur - start < msecs)
+	{
+		cur = new Date().getTime();
+	}
+}
+
+</SCRIPT>

@@ -1,0 +1,87 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+<SCRIPT LANGUAGE="JavaScript">
+    var Generic = new ActiveXObject("PocketBrowser.Generic");
+
+    var interval;
+    var count=0;
+    function dostart() {
+        importProfile();
+   }
+
+
+    function OnBattery(AC, main, backup) {
+        bat.innerHTML = "AC: " + AC + "\<BR>main:" + main + "\<BR>backup: " + backup;
+        return;
+    }
+
+    function OnSignal(signal, ESSID, MAC, AdapterName, DHCPServer, DHCPStatic, Gateway, IPAddress, RSSI, SubnetMask, Wins) {
+        sig.innerHTML = "Signal: " + signal
+								+ "<BR>ESSID:" + ESSID
+								+ "<BR>MAC: " + MAC
+								+ "<BR>AdapterName: " + AdapterName
+								+ "<BR>DHCPServer: " + DHCPServer
+								+ "<BR>DHCPStatic: " + DHCPStatic
+								+ "<BR>Gateway: " + Gateway
+								+ "<BR>IPAddress: " + IPAddress
+								+ "<BR>RSSI: " + RSSI
+								+ "<BR>SubnetMask: " + SubnetMask
+								+ "<BR>Wins: " + Wins
+        return;
+    }
+
+    function applyBatteryProfile() {
+        Generic.InvokeMETAFunction('EMMLProfile', 'Apply:myIndicators.Battery');
+        setTimeout("applySignalProfile()", 1000);
+    }
+
+    function applySignalProfile() {
+        Generic.InvokeMETAFunction('EMMLProfile', 'Apply:myIndicators.Signal');
+        setTimeout("applyHideProfile()", 1000);
+    }
+
+    function applyHideProfile() {
+        Generic.InvokeMETAFunction('EMMLProfile', 'Apply:myIndicators.BatteryHide');
+        Generic.InvokeMETAFunction('EMMLProfile', 'Apply:myIndicators.SignalHide');
+        setTimeout("clearProfile()", 1000);
+    }
+
+
+    function clearProfile() {
+        Generic.InvokeMETAFunction('EMMLProfile', 'clear:myIndicators');
+        setTimeout("importProfile()", 1000);
+    }
+
+
+    function importProfile() {
+	count++;
+        mycount.innerHTML = "No of count:"+count;
+        Generic.InvokeMETAFunction("EMMLProfile", "name:myIndicators;import:url('http://10.233.85.82/Neon/EMMLProfilesNew/Indicators/EMMP/Indicators.emmp');");
+	setTimeout("applyBatteryProfile()", 1000);
+    }
+
+    function Quit() {
+        Generic.InvokeMETAFunction("Application", "Quit");
+    }
+</SCRIPT>
+</head>
+<body>
+
+<h4>EMML Profiles Stress Test.</h4>
+<br>
+<a href="javascript:dostart();">Start Stress Test.</a>
+<br />
+<br />
+<br />
+<div Id="mycount">No of count:</div><br /><br /><br />
+<br />
+<div Id="bat">Battery readings should appear here</div><br /><br /><br />
+<div ID="sig">Signal details should appear here</div><br /><br /><br /><br />
+<a href="../EMMLProfilesIndex.html">Back to EMML Profile Index</a>
+<br /><P><INPUT TYPE="button" VALUE="Quit" ONCLICK="Quit();"></P>
+
+</body>
+</html>
+

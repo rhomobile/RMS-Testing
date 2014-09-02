@@ -1,0 +1,194 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+    <title>Circle Gesture Settings</title>
+
+<META HTTP-Equiv="SIPbutton" Content="visibility:visible">
+
+</head>
+<body>
+<form id="frmCircleGestures" action="CircleGesture_ActiveX.asp" method="post" >
+<h2>Circle Gesture using ActiveX objects</h2>
+
+<table>
+    <tr>
+        <td><a href="main"></a></td>
+    </tr>
+    
+    <tr>
+    <td>
+    Preset   :- 
+    </td>
+    <td>
+<select name="cmdPreset" id="cmdPreset">
+<option value="NULL">NULL</option>
+<option value="happy">happy</option>
+<option value="sad">sad</option>
+<option value="Test">Invalid String("TEST")</option>
+<option value="">Empty String</option>
+</select>
+</td>
+</tr>
+<tr>
+<td>
+Diagonstics:- 
+</td>
+<td>
+<select name="cmdDiagonstics" id="cmdDiagonstics">
+<option value="TRUE">TRUE</option>
+<option value="FALSE">FALSE</option>
+<option value="TEST">Invalid String("TEST")</option>
+<option value="NULL">NULL</option>
+<option value="">Empty String</option>
+</select>
+
+</td>
+</tr>
+
+<tr>
+<td>
+Input ID:- 
+</td>
+<td>
+<input type=text name="txtCircleID" id="txtCircleID" value="MyCircularGesture" />
+</td>
+</tr>       
+    
+<tr>
+<td>
+<select name="mydropdown1" id="mydropdown1">
+<option value="JavaScript">JavaScript</option>
+<option value="HTML">HTML</option>
+<option value="JSON">JSON</option>
+</select>
+</td>
+</tr>
+
+</table>
+
+
+
+<table>
+
+
+<tr>
+<td>
+center-x:-
+</td>
+<td>
+<!--<input type=text name="txtcenterx" id="txtcenterx" value="280" />-->
+<input type=text name="txtcenterx" id="Text1" value="150" />
+</td>
+</tr>  
+ 
+<tr>
+<td>
+center-y:-
+</td>
+<td>
+<!--<input type=text name="txtcentery" id="txtcentery" value="280" />-->
+<input type=text name="txtcentery" id="Text2" value="150" />
+</td>
+</tr>   
+
+<tr>
+<td>
+radius:-
+</td>
+<td>
+<!--<input type=text name="txtradius" id="txtradius" value="120" />-->
+<input type=text name="txtradius" id="Text3" value="150" />
+</td>
+</tr>  
+
+
+<tr>
+<td>
+start:-
+</td>
+<td>
+<input type=text name="txtstart" id="txtstart" value="0" />
+</td>
+</tr>  
+
+<tr>
+<td>
+end:-
+</td>
+<td>
+<input type=text name="txtend" id="txtend" value="180" />
+</td>
+</tr>  
+
+
+<tr>
+<td>
+tolerance:- 
+</td>
+<td>
+<input type=text name="txttolerance" id="txttolerance" value="70" />
+</td>
+</tr>  
+
+  
+<tr>
+<td>
+sensitivity:- 
+</td>
+<td>
+<input type=text name="txtsensitivity" id="txtsensitivity" value="80" />
+</td>
+</tr>  
+
+<tr>
+<td>Type:- 
+</td>
+<td>
+<input type=text name="txtType" id="txtType" value="Circle" />
+</td>
+</tr> 
+
+
+<tr>
+<td>Number Of Gestures:- 
+</td>
+<td>
+<input type=text name="txtNumber" id="txtNumber" value="1" />
+</td>
+</tr> 
+
+
+
+<tr>
+<td>
+<input type="button" onclick="setNull();" value="setNull">
+</td>
+</tr>
+
+
+  
+</table>
+<hr>
+<input type=submit><br />
+<P><INPUT TYPE="button" VALUE="Back" ONCLICK="location.href='Gesture_Index.html'"></P>
+
+
+</form>
+</body>
+</html>
+
+<script>
+function setNull()
+{
+frmCircleGestures.txtCircleID.value="NULL";
+frmCircleGestures.txtcenterx.value="NULL";
+frmCircleGestures.txtcentery.value="NULL";
+frmCircleGestures.txtradius.value="NULL";
+frmCircleGestures.txtstart.value="NULL";
+frmCircleGestures.txtend.value="NULL";
+frmCircleGestures.txttolerance.value="NULL";
+frmCircleGestures.txtsensitivity.value="NULL";
+
+}
+</script>

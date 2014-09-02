@@ -1,0 +1,180 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+    <title> Network Test</title>
+    <META HTTP-Equiv="MinimizeButton" content="Visibility:Visible;Left:70">
+    
+
+
+</head>
+<body>
+
+
+<br><br><br>
+<div id="bat">Network readings should appear here </div>
+<div id="cat"> </div>
+
+<BR><BR>
+
+<input type=button onclick="NetworkEventPeriodic();" value="NetworkEventPeriodic">
+
+<BR><BR>
+
+<input type=button onclick="StopNetworkcheckRunning();" value="StopNetworkcheckRunning">
+
+<BR><BR>
+
+<input type=button onclick="PeriodicEventURL();" value="PeriodicEventURL">
+
+<BR><BR>
+
+<input type=button onclick="SetConnectionTimeout();" value="ConnectionTimeout">
+
+<BR><BR>
+
+<input type=button onclick="SetIP();" value="SetIP">
+<BR><BR>
+
+<input type=button onclick="SetPort();" value="SetPort">
+<BR><BR>
+
+Destination:	</td><td><Textarea id="dest"cols="10" rows="1"></Textarea><br>
+
+<input type=button onclick="SetNetworkCheckTimeout();" value="NetworkCheckTimeout">
+<BR><BR>
+
+<input type=button onclick="PeriodickCheckJSON();" value="PeriodickCheckJSON">
+<BR><BR>
+<BR><BR>
+
+<input type=button onclick="connectWAN();" value="connectWAN">
+<BR><BR>
+
+
+<input type=button onclick="disconnectWAN();" value="disconnectWAN">
+<BR><BR>
+<BR><BR>
+
+<input type=button onclick="networkWAN();" value="networkWAN">
+<BR><BR>
+<BR><BR>
+
+<input type=button onclick="networkWANJSON();" value="networkWANJSON">
+<BR><BR>
+
+<A HREF="./emmlNetwork.html">Back</A>
+</body>
+</html>
+<script language="javascript">
+var count =0;
+    
+  
+    function NetworkEventPeriodic() {
+        //generic.InvokeMETAFunction('Network', "networkevent:url('javascript:onNetworkPoll('%s');')");
+        //generic.InvokeMETAFunction('Network',"start");
+        network.networkEvent = "onNetworkPoll('%s')";
+        network.start(); 
+    }
+
+  
+
+    function StopNetworkcheckRunning() {
+        //generic.InvokeMETAFunction('Network',"stop");
+        network.stop(); 
+    }
+ 
+
+
+    function onNetworkPoll(conn) {
+       count++;
+       cat.innerHTML = "Count = "+count;
+       bat.innerHTML = "Connection status: "+conn;
+      // return;
+    }
+
+   
+
+    
+
+    function PeriodicEventURL(){
+        //generic.InvokeMETAFunction("Network", "networkevent:url('http://tandv.wtgdev.net/NavigateUrl.html?Connection=%s')");
+        //generic.InvokeMETAFunction('Network',"start");
+         network.networkEvent = "url('http://tandv.wtgdev.net/NavigateUrl.html?Connection=%s')";
+         network.start(); 
+    }
+
+   
+    function SetIP() {
+       // generic.InvokeMETAFunction('Network', "host:url('')"); 
+       network.host = '10.233.85.82'; 
+    }
+    function SetPort()
+    {
+        //generic.InvokeMETAFunction('Network', "port:1080"); 
+        network.port = '80';
+    }
+
+   
+    function SetNetworkCheckTimeout()
+    {
+        bat.innerHTML = "Network check timeout";
+        //generic.InvokeMETAFunction('Network', "NetworkPollInterval:60000");
+        network.networkPollInterval = '60000';
+    }
+  function SetConnectionTimeout()
+    {
+        //bat.innerHTML = "Connection timeout";
+        //generic.InvokeMETAFunction('Network', "ConnectionTimeout:60000");
+        network.connectionTimeout = '60000';
+    }
+
+    function PeriodickCheckJSON()
+    {
+        //generic.InvokeMETAFunction('Network', "networkevent:url('javascript:onNetworkPollJSON(%json);')");
+        //generic.InvokeMETAFunction('Network',"start");
+        network.networkEvent = "onNetworkPollJSON(%json)";
+        network.start(); 
+    }
+    function onNetworkPollJSON(json)
+    {
+       bat.innerHTML = "Connection status: "+json.connectionInformation;
+       return;
+    }
+    function connectWAN()
+    {
+      bat.innerHTML ="Connect WAN";
+      var destination = dest.value;
+      network.connectWan = "" + destination;
+
+    }
+    function disconnectWAN()
+    {
+    bat.innerHTML = "Disconnect";
+      network.disconnectWan();
+    }
+    function networkWAN()
+    {
+       bat.innerHTML = "WAN status";
+       network.wanStatusEvent = "WANStatus('%s','%s','%s','%s','%s')";
+       return;
+    }
+    function networkWANJSON()
+    {
+        bat.innerHTML = "WAN status JSON";
+       network.wanStatusEvent = "WANStatusJSON(%json)";
+       return;
+    }
+    function WANStatus(phoneSignalStrength, networkOperator, connectionTypeAvailable, connectionTypeConnected, connectionManagerMessage)
+    {
+      bat.innerHTML = "WAN status event fired";
+      bat.innerHTML = "phoneSignalStrength = "+phoneSignalStrength+"<br>"+"networkOperator = "+networkOperator+"<br>"+"connectionTypeAvailable = "+connectionTypeAvailable+"<br>"+"connectionTypeConnected = "+connectionTypeConnected+"<br>"+"connectionManagerMessage = "+connectionManagerMessage;
+    }
+    function WANStatusJSON(json)
+    {
+      bat.innerHTML = "WAN status JSON event fired";
+      bat.innerHTML = "phoneSignalStrength = "+json.phoneSignalStrength+"<br>"+"networkOperator = "+json.networkOperator+"<br>"+"connectionTypeAvailable = "+json.connectionTypeAvailable+"<br>"+"connectionTypeConnected = "+json.connectionTypeConnected+"<br>"+"connectionManagerMessage = "+json.connectionManagerMessage;
+    }
+    
+</script>
+

@@ -1,0 +1,737 @@
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+
+<meta http-equiv="Scanner" content="BluetoothStatusEvent:url('Javascript:onBluetoothEvent(%json);')">
+
+<script type="text/javascript">
+  var selected_scanner = "";
+  
+  
+     function setEnumEvent()
+{
+	var SelectedValue = frm.EnumEventdropdown.selectedIndex;
+	var selectEvent = frm.EnumEventdropdown.options[SelectedValue].value;
+    Message.innerHTML="Decode Event is:"+selectEvent;
+	switch(selectEvent)
+	{
+		case 'JSCRIPT':
+
+			scanner.enumScannerEvent="EnumScanners('%s','%s','%s','%s','%s','%s');";
+			break;
+
+		case 'JSON':
+
+			scanner.enumScannerEvent = 'EnumScanners(%json)';
+			break;
+			
+	   case 'DETACH':
+	   
+            scanner.enumScannerEvent="url('')";
+			break;
+			
+	  case 'URL':
+
+			scanner.enumScannerEvent="url('http://10.233.85.82/Neon/Navigate.html')";
+			break;
+
+		case 'EMPTY':
+
+			scanner.enumScannerEvent="";
+			break;
+	}
+} 
+
+	function setEnumScanner() 
+    {
+		scanner.enumerate();
+    }
+	
+	function starttest()
+	{
+     scanner.start();
+     Info.innerHTML="start";
+
+	}
+
+    function stoptest()
+    {
+     scanner.stop();
+      Info.innerHTML="stop";
+    }
+  
+    function setDecodeEvent()
+{
+	var SelectedValue = frm.DecodeEventdropdown.selectedIndex;
+	var selectEvent = frm.DecodeEventdropdown.options[SelectedValue].value;
+    Message.innerHTML="Decode Event is:"+selectEvent;
+	switch(selectEvent)
+	{
+		case 'JSCRIPT':
+
+			scanner.decodeEvent="onDecodeEventJS('%s','%s','%s','%s','%s','%s');";
+			break;
+
+		case 'JSON':
+
+			scanner.decodeEvent = 'onDecodeEventJSON(%json)';
+			break;
+			
+	   case 'DETACH':
+	   
+            scanner.decodeEvent="url('')";
+			break;
+			
+	  case 'URL':
+
+			scanner.decodeEvent="url('http://10.233.85.82/Neon/Navigate.html')";
+			break;
+
+		case 'EMPTY':
+
+			scanner.decodeEvent="";
+			break;
+	}
+} 
+  
+
+   function setautoEnterMode()
+   {
+	var SelectedValue = frm.autoEnterdropdown.selectedIndex;
+	var selectautoEnter = frm.autoEnterdropdown.options[SelectedValue].value;
+    Message.innerHTML="value is:"+selectautoEnter;
+	switch(selectautoEnter)
+	{
+		case 'enabled':
+			scanner.autoEnter = 'enabled';
+			break;
+
+		case 'disabled':
+			scanner.autoEnter = 'disabled';
+			break;
+
+	}
+    }  
+	
+	function setautoTabMode()
+   {
+	var SelectedValue = frm.autoTabdropdown.selectedIndex;
+	var selectautoTab = frm.autoTabdropdown.options[SelectedValue].value;
+    Message.innerHTML="value is:"+selectautoTab;
+	switch(selectautoTab)
+	{
+		case 'enabled':
+			scanner.autoTab = 'enabled';
+			break;
+
+		case 'disabled':
+			scanner.autoTab = 'disabled';
+			break;
+
+	}
+    }
+  
+   function setPicklistMode()
+   {
+	var SelectedValue = frm.Picklistdropdown.selectedIndex;
+	var selectPicklist = frm.Picklistdropdown.options[SelectedValue].value;
+    Message.innerHTML="value is:"+selectPicklist;
+	switch(selectPicklist)
+	{
+		case 'disabled':
+			scanner.picklistMode = 'disabled';
+			break;
+
+		case 'softwareReticle':
+			scanner.picklistMode = 'softwareReticle';
+			break;
+			
+	   case 'hardwareReticle':
+            scanner.picklistMode = 'hardwareReticle';
+			break;
+	}
+    }
+	
+  
+   function setViewFinderMode()
+   {
+	var SelectedValue = frm.ViewFinderdropdown.selectedIndex;
+	var selectViewFinder = frm.ViewFinderdropdown.options[SelectedValue].value;
+    Message.innerHTML="value is:"+selectViewFinder;
+	switch(selectViewFinder)
+	{
+		case 'enabled':
+			scanner.viewfinderMode = 'enabled';
+			break;
+
+		case 'disabled':
+			scanner.viewfinderMode = 'disabled';
+			break;
+			
+	    case 'staticReticle':
+            scanner.viewfinderMode = 'staticReticle';
+			break;
+			
+		case 'dynamicReticle':
+            scanner.viewfinderMode = 'dynamicReticle';
+			break;
+	}
+    }
+		
+	function setviewfinderXvalue()
+    {
+	var viewfinderXValue = frm.txtviewfinderX.value;
+	var IValue = "VF X:"+viewfinderXValue;
+	Message.innerHTML="value is:"+IValue;
+	scanner.viewfinderX=viewfinderXValue;	
+    } 
+	
+    function setviewfinderYvalue()
+    {
+	var viewfinderYValue = frm.txtviewfinderY.value;
+	var IValue = "VF Y:"+viewfinderYValue;
+	Message.innerHTML="value is:"+IValue;
+	scanner.viewfinderY=viewfinderYValue;	
+    } 
+	
+	function setviewfinderWidthvalue()
+    {
+	var viewfinderYValue = frm.txtviewfinderWidth.value;
+	var IValue = "VF Width:"+viewfinderWidthValue;
+	Message.innerHTML="value is:"+IValue;
+	scanner.viewfinderWidth=viewfinderWidthValue;	
+    } 
+	
+    function setviewfinderHeightvalue()
+    {
+	var viewfinderYValue = frm.txtviewfinderHeight.value;
+	var IValue = "VF Height:"+viewfinderHeightValue;
+	Message.innerHTML="value is:"+IValue;
+	scanner.viewfinderHeight=viewfinderHeightValue;	
+    } 
+	
+	function setscanTimeoutvalue()
+    {
+	var scanTimeoutValue = frm.txtscanTimeout.value;
+	var IValue = "ScanTimeout:"+scanTimeoutValue;
+	Message.innerHTML="value is:"+IValue;
+	scanner.scanTimeout=scanTimeoutValue;	
+    } 	
+		
+	function setdisplayBtAddress()
+   {
+	var SelectedValue = frm.displayBtAddressdropdown.selectedIndex;
+	var selectdisplayBtAddress = frm.displayBtAddressdropdown.options[SelectedValue].value;
+    Message.innerHTML="value is:"+selectdisplayBtAddress;
+	switch(selectdisplayBtAddress)
+	{
+		case 'true':
+			scanner.displayBtAddressBarcodeOnEnable="true";
+			break;
+
+		case 'false':
+			scanner.displayBtAddressBarcodeOnEnable="false";
+			break;			
+	}
+    }
+	
+    function setenableTimeoutvalue()
+    {
+	var enableTimeoutValue = frm.txtenableTimeout.value;
+	var IValue = "enableTimeout:"+enableTimeoutValue;
+	Message.innerHTML="value is:"+IValue;
+	scanner.enableTimeout=enableTimeoutValue;	
+    } 
+	
+	function SetbluetoothStatusEvent()
+    {
+       //scanner.decodeEvent = 'onDecodeEventJSON(%json)';
+	   scanner.bluetoothStatusEvent = 'onBluetoothEvent(%json)';
+       Info.innerHTML="BT StatusEvent Attached";
+    }
+  	
+	function onBluetoothEvent(jsonObject)
+	{
+		Info.innerHTML = "Bluetooth Message " + jsonObject.status;
+	}
+	
+	function setbarcodeDataFormat()
+   {
+	var SelectedValue = frm.barcodeDataFormatdropdown.selectedIndex;
+	var selectbarcodeDataFormat = frm.barcodeDataFormatdropdown.options[SelectedValue].value;
+    Message.innerHTML="value is:"+selectbarcodeDataFormat;
+	switch(selectbarcodeDataFormat)
+	{
+		case 'text':
+			scanner.barcodeDataFormat = "text";
+			break;
+
+		case 'binary':
+			scanner.barcodeDataFormat = "binary";
+			break;			
+	}
+    }
+	
+    function setdataBufferSizevalue()
+    {
+	var dataBufferSizeValue = frm.txtdataBufferSize.value;
+	var IValue = "dataBufferSize:"+dataBufferSizeValue;
+	Message.innerHTML="value is:"+IValue;
+	scanner.dataBufferSize=dataBufferSizeValue;	
+    } 	
+	
+
+   function enablemethod()
+    {
+       scanner.enable();
+       Info.innerHTML="enable";
+    }
+    
+    function disablemethod()
+    {
+     scanner.disable();
+       Info.innerHTML="disable";
+
+    }
+    
+    function enabletest()
+   {
+     var temp = "enabled:" + selected_scanner.toString();
+     scanner.setEMML(temp);
+     Info.innerHTML=temp;
+
+   }
+
+   function disabletest()
+    {
+     scanner.setEMML('disable');
+       Info.innerHTML="disabled";
+
+    }
+    
+    function enablecodabar()
+   {
+     scanner.allDecoders ='disabled';
+     scanner.codabar='enabled';
+     Info.innerHTML="Only codabar Enabled";
+   }
+   
+   function disablecodabar()
+   {
+     scanner.allDecoders ='enabled';
+     scanner.codabar='disabled';
+     Info.innerHTML="Only codabar disabled";
+   }
+   
+    function setcodabarMaxLength()
+    {
+	var codabarMaxLengthValue = frm.txtcodabarMaxLength.value;
+	var IValue = "codabarMaxLength:"+codabarMaxLengthValue;
+	Message.innerHTML="value is:"+IValue;
+	scanner.codabarMaxLength=codabarMaxLengthValue;	
+    } 
+	
+    function setcodabarMinLength()
+    {
+	var codabarMinLengthValue = frm.txtcodabarMinLength.value;
+	var IValue = "codabarMinLength:"+codabarMinLengthValue;
+	Message.innerHTML="value is:"+IValue;
+	scanner.codabarMinLength=codabarMinLengthValue;	
+    } 	
+	
+    function enablecode11()
+   {
+     scanner.allDecoders ='disabled';
+     scanner.code11='enabled';
+     Info.innerHTML="Only code11 Enabled";
+   }
+   
+   function disablecode11()
+   {
+     scanner.allDecoders ='enabled';
+     scanner.code11='disabled';
+     Info.innerHTML="Only code11 disabled";
+   }   
+   
+   function enablesignature()
+   {
+     scanner.allDecoders ='disabled';
+     scanner.signature='enabled';
+     Info.innerHTML="Only signature Enabled";
+   }
+   
+   function disablesignature()
+   {
+     scanner.allDecoders ='enabled';
+     scanner.signature='disabled';
+     Info.innerHTML="Only signature disabled";
+   }  
+   
+    function setsignatureImageQuality()
+    {
+	var signatureImageQualityValue = frm.txtsignatureImageQuality.value;
+	var IValue = "signatureImageQuality:"+signatureImageQualityValue;
+	Message.innerHTML="value is:"+IValue;
+	scanner.signatureImageQuality=signatureImageQualityValue;
+    }    
+	
+    function setsignatureImageWidth()
+    {
+	var signatureImageWidthValue = frm.txtsignatureImageWidth.value;
+	var IValue = "signatureImageWidth:"+signatureImageWidthValue;
+	Message.innerHTML="value is:"+IValue;
+	scanner.signatureImageWidth=signatureImageWidthValue;
+    } 	
+	
+	function setsignatureImageHeight()
+    {
+	var signatureImageHeightValue = frm.txtsignatureImageHeight.value;
+	var IValue = "signatureImageHeight:"+signatureImageHeightValue;
+	Message.innerHTML="value is:"+IValue;
+	scanner.signatureImageHeight=signatureImageHeightValue;
+    } 	
+	
+   function EnableSCN1()
+    {
+     scanner.enabled = "SCN1";
+       Info.innerHTML="EnabledSCN1";
+
+    }
+
+   function EnableSCN2()
+    {
+     scanner.enabled = "SCN2";
+      Info.innerHTML="EnabledSCN2";
+    }
+	
+	function EnableSCN3()
+    {
+     scanner.enabled = "SCN3";
+      Info.innerHTML="EnabledSCN2";
+    }
+    
+    function AllDecoderenabled()
+    {
+     scanner.allDecoders='enabled';
+       Info.innerHTML="AllDecoderenabled";
+
+    }
+    function AllDecoderdisabled()
+    {
+     scanner.allDecoders='disabled';
+       Info.innerHTML="AllDecoderdisabled";
+
+    }
+    
+      
+  function onDecodeEventJSON(jsonObject)
+    {
+	var html = "<b>Decoded Data:</b><br>";
+	html = html + "<br><i>Data:</i> " + jsonObject.data;
+	html = html + "<br><i>Source:</i> " + jsonObject.source;
+	html = html + "<br><i>Type:</i> " + jsonObject.type;
+	html = html + "<br><i>Time:</i> " + jsonObject.time;
+	html = html + "<br><i>Length:</i> " + jsonObject.length;
+	html = html + "<br><i>Event:</i> " + jsonObject.event;
+    scanData.innerHTML = html;
+   }
+   
+   function onDecodeEventJS(data, source, type, time, length, event)
+    {
+	var html = "<b>Decoded Data:</b><br>";
+	html = html + "<br><i>Data:</i> " + data;
+	html = html + "<br><i>Source:</i> " + source;
+	html = html + "<br><i>Type:</i> " + type;
+	html = html + "<br><i>Time:</i> " + time;
+	html = html + "<br><i>Length:</i> " + length;
+	html = html + "<br><i>Event:</i> " + event;
+    scanData.innerHTML = html;
+   }
+   
+   
+    function EnumScanners(jsonObject) 
+    {
+    	var html = "<b>Device Name: Friendly Name</b><br>";
+        for (i = 0; i < jsonObject.scannerArray.length; i++) 
+        {
+           
+            this.document.ScanForm.myscanner.options[i + 1].text = jsonObject.scannerArray[i].deviceName + jsonObject.scannerArray[i].friendlyName;
+            this.document.ScanForm.myscanner.options[i + 1].value = jsonObject.scannerArray[i].deviceName;
+            
+            html += '' + jsonObject.scannerArray[i].deviceName + ': ' 
+	        + jsonObject.scannerArray[i].friendlyName + '<br>';
+        }
+     html += "";
+	enumScanners.innerHTML=html;
+    }
+
+
+    function selectScanner()
+     {
+        
+        var w = document.ScanForm.myscanner.selectedIndex;
+        selected_scanner = document.ScanForm.myscanner.options[w].value;
+
+        if (selected_scanner != "") 
+        {
+
+           scanner.disable();
+        }
+       
+    }    
+  
+   
+    function Quit()
+    {
+	application.quit();
+    }
+
+    function pres()
+    {
+       
+         mygeneric.InvokeMETAFunction('Scanner', 'aimType:presentation');
+    }
+    
+    
+    
+ </script>
+</head>
+<!-- <body onload="setEnumScannerTimer();"> -->
+<body>
+<br/>
+<div  id="enumScanners">Enumerated Scanners</div><br />
+<div  id="scanData">scan data</div><br/>
+<DIV ID="Info">Selected Scanner: </DIV>
+<br/>
+<DIV ID="message">message </DIV>
+<form name="ScanForm" id="ScanForm" action="">
+<table>
+<hr/><hr/>
+EnumEvent:<br>
+<select name="EnumEventdropdown" id="IDDecodeEvent">
+<option SELECTED VALUE="">Select</OPTION>
+<!-- <option value="JSCRIPT">JSCRIPT</option> -->
+<option value="JSON">JSON</option>
+<option value="DETACH">DETACH</option>
+<option value="URL">URL</option>
+<option value="EMPTY">EMPTY</option>
+</select>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<input type="button" onclick="setEnumEvent();" value="SetEnumEvent">
+<br />
+<input type="button" onclick="setEnumScanner();" value="Enumerate Scanner">
+<hr/>
+
+SelectScanner:<br>
+<select name="myscanner" id="myscanner" onChange="selectScanner();">
+<OPTION value="" >Select Scanner</OPTION> 
+<OPTION value="" ></OPTION> 
+<OPTION value="" ></OPTION> 
+<OPTION value="SCN5" ></OPTION> 
+</select>
+<br/>
+<input type="button" onclick="enabletest();" value="Enabled">
+<input type="button" onclick="disabletest();" value="Disabled">
+<hr/>
+
+<input type="button" onclick="starttest();" value="Scanner Start">
+<input type="button" onclick="stoptest();" value="Scanner Stop">
+<hr/>
+
+Decoded data:</b><TEXTAREA NAME="datafield1" id="TEXTAREA2" COLS=15 ROWS=2></TEXTAREA>
+Decoded data:</b><TEXTAREA NAME="datafield2" id="TEXTAREA1" COLS=15 ROWS=2></TEXTAREA>
+<br /><hr/>
+
+DecodeEvent:<br>
+<select name="DecodeEventdropdown" id="IDDecodeEvent">
+<option SELECTED VALUE="">Select</OPTION>
+<option value="JSCRIPT">JSCRIPT</option>
+<option value="JSON">JSON</option>
+<option value="DETACH">DETACH</option>
+<option value="URL">URL</option>
+<option value="EMPTY">EMPTY</option>
+</select>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<input type="button" onclick="setDecodeEvent();" value="SetDecodeEvent">
+<br />
+<hr/>
+
+autoEnter:<br>
+<select name="autoEnterdropdown" id="IDautoEnter">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="enabled">enabled</option>
+<option value="disabled">disabled</option>
+</select>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<input type=button onclick="setautoEnterMode();" value="setautoEnter">
+<br />
+
+autoTab:<br>
+<select name="autoTabdropdown" id="IDautoEnter">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="enabled">enabled</option>
+<option value="disabled">disabled</option>
+</select>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<input type=button onclick="setautoTabMode();" value="setautoTab">
+<br />
+<hr/>
+
+
+PicklistMode:<br>
+<select name="Picklistdropdown" id="IDPicklist">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="disabled">disabled</option>
+<option value="softwareReticle">softwareReticle</option>
+<option value="hardwareReticle">hardwareReticle</option>
+</select>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<input type=button onclick="setPicklistMode();" value="setPicklist">
+<br />
+<hr/>
+
+ViewFinderMode:<br>
+<select name="ViewFinderdropdown" id="IDViewFinder">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="enabled">enabled</option>
+<option value="disabled">disabled</option>
+<option value="staticReticle">staticReticle</option>
+<option value="dynamicReticle">dynamicReticle</option>
+</select>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<input type=button onclick="setViewFinderMode();" value="setViewFinder">
+<br />
+<hr/>
+
+VF Co-ordinates:<br>
+<Textarea id="txtviewfinderX"cols="10" rows="1">200</Textarea>
+&nbsp;&nbsp;&nbsp;&nbsp;
+<input type=button onclick="setviewfinderXvalue();" value="SetviewfinderX">
+<br/>
+<Textarea id="txtviewfinderY"cols="10" rows="1">200</Textarea>
+&nbsp;&nbsp;&nbsp;&nbsp;
+<input type=button onclick="setviewfinderYvalue();" value="SetviewfinderY">
+<br/>
+<Textarea id="txtviewfinderWidth"cols="10" rows="1">300</Textarea>
+&nbsp;&nbsp;&nbsp;&nbsp;
+<input type=button onclick="setviewfinderWidthvalue();" value="SetviewfinderWidth">
+<br/>
+<Textarea id="txtviewfinderHeight"cols="10" rows="1">300</Textarea>
+&nbsp;&nbsp;&nbsp;&nbsp;
+<input type=button onclick="setviewfinderHeightvalue();" value="SetviewfinderHeight">
+<hr />
+
+ScanTimeout:<br>
+<Textarea id="txtscanTimeout"cols="10" rows="1">9000</Textarea>
+&nbsp;&nbsp;&nbsp;&nbsp;
+<input type=button onclick="setscanTimeoutvalue();" value="SetscanTimeout">
+<hr/>
+
+<B>For BT Scanner:</B></br>
+<input type=button onclick="SetbluetoothStatusEvent();" value="SetBTStatusEvent">
+<INPUT TYPE="button" VALUE="EnableSCN3" ONCLICK="EnableSCN3();">
+<br/>
+
+displayBtAddressBarcodeOnEnable:<br>
+<select name="displayBtAddressdropdown" id="IDdisplayBtAddress">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="true">true</option>
+<option value="false">false</option>
+</select>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<input type=button onclick="setdisplayBtAddress();" value="setdisplayBtAddressBarcodeOnEnable">
+<br/>
+
+enableTimeout:<br>
+<Textarea id="txtenableTimeout"cols="10" rows="1">15</Textarea>
+&nbsp;&nbsp;&nbsp;&nbsp;
+<input type=button onclick="setenableTimeoutvalue();" value="SetenableTimeout">
+</br><hr/>
+
+barcodeDataFormat:<br>
+<select name="barcodeDataFormatdropdown" id="IDbarcodeDataFormat">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="text">text</option>
+<option value="binary">binary</option>
+</select>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<input type=button onclick="setbarcodeDataFormat();" value="setbarcodeDataFormat">
+<br/>
+
+dataBufferSize:<br>
+<Textarea id="txtdataBufferSize"cols="10" rows="1">90</Textarea>
+&nbsp;&nbsp;&nbsp;&nbsp;
+<input type=button onclick="setdataBufferSizevalue();" value="SetdataBufferSize">
+</br><hr/>
+
+
+
+<hr/><hr/>
+<B>Decoders:</B></br>
+<INPUT TYPE="button" VALUE="EnableSCN1" ONCLICK="EnableSCN1();">
+<INPUT TYPE="button" VALUE="EnableSCN2" ONCLICK="EnableSCN2();">
+<br/>
+<INPUT TYPE="button" VALUE="EnableDefaultScanner" ONCLICK="enablemethod();">
+<INPUT TYPE="button" VALUE="DisableScanner" ONCLICK="disablemethod();">
+<br/><hr/>
+
+<INPUT TYPE="button" VALUE="AllDecoderenabled" ONCLICK="AllDecoderenabled();">
+<INPUT TYPE="button" VALUE="AllDecoderdisabled" ONCLICK="AllDecoderdisabled();">
+<br/>
+<hr/>
+
+
+<B>Codabar:</B><br/>
+<INPUT TYPE="button" VALUE="Enablecodabar" ONCLICK="enablecodabar();">
+<INPUT TYPE="button" VALUE="Disablecodabar" ONCLICK="disablecodabar();">
+<br/>
+
+codabarMaxLength:<br>
+<Textarea id="txtcodabarMaxLength"cols="10" rows="1">12</Textarea>
+&nbsp;&nbsp;&nbsp;&nbsp;
+<input type=button onclick="setcodabarMaxLength();" value="SetcodabarMaxLength">
+<br/>
+codabarMinLength:<br>
+<Textarea id="txtcodabarMinLength"cols="10" rows="1">1</Textarea>
+&nbsp;&nbsp;&nbsp;&nbsp;
+<input type=button onclick="setcodabarMinLength();" value="SetcodabarMinLength">
+<hr/>
+
+<B>Code11:</B><br/>
+<INPUT TYPE="button" VALUE="Enablecode11" ONCLICK="enablecode11();">
+<INPUT TYPE="button" VALUE="Disablecode11" ONCLICK="disablecode11();">
+<br/><hr/>
+
+<B>Signature:</B><br/>
+<INPUT TYPE="button" VALUE="Enablesignature" ONCLICK="enablesignature();">
+<INPUT TYPE="button" VALUE="Disablesignature" ONCLICK="disablesignature();">
+<br/>
+
+signatureImageQuality:<br>
+<Textarea id="txtsignatureImageQuality"cols="10" rows="1">90</Textarea>
+&nbsp;&nbsp;&nbsp;&nbsp;
+<input type=button onclick="setsignatureImageQuality();" value="SetsignatureImageQuality">
+<br/>
+
+signatureImageWidth:<br>
+<Textarea id="txtsignatureImageWidth"cols="10" rows="1">200</Textarea>
+&nbsp;&nbsp;&nbsp;&nbsp;
+<input type=button onclick="setsignatureImageWidth();" value="SetsignatureImageWidth">
+<br/>
+
+signatureImageHeight:<br>
+<Textarea id="txtsignatureImageHeight"cols="10" rows="1">200</Textarea>
+&nbsp;&nbsp;&nbsp;&nbsp;
+<input type=button onclick="setsignatureImageHeight();" value="SetsignatureImageHeight">
+<hr/>
+
+
+<hr/><hr/>
+<tr><td><INPUT TYPE="button" VALUE="Back" ONCLICK="location.href='./Scanner.html'">
+<INPUT TYPE="button" VALUE="Quit" ONCLICK="Quit();">
+<INPUT TYPE="button" VALUE="presentation" ONCLICK="pres();"></td></tr>
+</table>
+</form>
+
+</body>
+</html>

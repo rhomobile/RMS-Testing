@@ -1,0 +1,158 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+
+<title>RawSensor TestScript</title>
+
+
+<script type="text/javascript">
+  
+  function callgetSensorData()
+{
+	lightsensor.getSensorData(); 
+	alert("getSensorData");
+    Message.innerHTML="getSensorData called:";
+}
+  
+  
+  function setsensorEvent()
+{
+	var SelectedValue = frm.sensoreventdropdown.selectedIndex;
+	var selectEvent = frm.sensoreventdropdown.options[SelectedValue].value;
+    Message.innerHTML="Sensor Event is:"+selectEvent;
+	switch(selectEvent)
+	{
+		case 'JSCRIPT':
+
+			lightsensor.LightSensorEvent="getsettingsjsFunction('%s');";
+			alert("JSCRIPT");
+			break;
+
+		case 'JSON':
+
+			lightsensor.LightSensorEvent="getsettingsjsonFunction(%json);";
+			alert("JSON");
+			break;
+			
+	   case 'DETACH':
+	   
+            lightsensor.LightSensorEvent="url('')";
+			break;
+			
+	  case 'URL':
+
+			lightsensor.LightSensorEvent="url('http://10.233.85.82/Neon/Navigate.html')";
+			alert("URL");
+			break;
+
+		case 'EMPTY':
+
+			lightsensor.LightSensorEvent="";
+			break;
+	}
+}
+  
+	function getsettingsjsonFunction(jsonObject)
+	{
+		alert("Event Josnfired");
+		var theOutput = "<BR><BR><B>LightSensorValue  </B>";        
+        theOutput = theOutput + "LightSensorValue: " + jsonObject.LightSensorValue + "<BR>";
+        outputDiv.innerHTML = "JSON"+theOutput;
+}
+
+	function getsettingsjsFunction(a)
+	{
+		alert("Event JSfired");
+		var theOutput = "<BR><BR><B>LightSensorValue  </B>";        
+        theOutput = theOutput + "LightSensorValue: " + a + "<BR>";
+		outputDiv.innerHTML = "JSObject"+theOutput;
+	}
+  
+   function setstatus()
+{
+	var SelectedValue = frm.statusdropdown.selectedIndex;
+	var selectstatus = frm.statusdropdown.options[SelectedValue].value;
+    Message.innerHTML="value is:"+selectstatus;
+	switch(selectstatus)
+	{
+		case 'Enabled':
+			lightsensor.status = 'Enabled';
+			alert("Enabled");
+			break;
+
+		case 'Disabled':
+			lightsensor.status = 'disabled';
+			break;
+			
+	   case 'Invalid':
+            lightsensor.status = 'Invalid';
+			break;
+			
+		case 'Null':
+			lightsensor.status = '';
+			break;
+	}
+}
+    
+ 
+
+    
+function setminimumInterval()
+{
+	var minimumIntervalValue = frm.txtminimumInterval.value;
+	var IValue = "minimumIntervalValue:"+minimumIntervalValue;
+	Message.innerHTML="value is:"+IValue;
+	lightsensor.minimumInterval=minimumIntervalValue;	
+}  
+  
+    
+ </script>
+</head>
+<body>
+<form id="frm" action="">
+<br /><br /><br />
+<b>LightSensor with JSOBJECT</b><br /><br />
+<div id="Message">Message</div>
+<div id="outputDiv">Sensor output goes here</div>
+<br/>
+<hr>
+<INPUT align="center" type="button" value="Retrieve Sensor Data" onclick="callgetSensorData();"><br/>
+<hr>
+
+LightSensorEvent:
+<select name="sensoreventdropdown" id="Select3">
+<option SELECTED VALUE="">Select</OPTION>
+<option value="JSCRIPT">JSCRIPT</option>
+<option value="JSON">JSON</option>
+<option value="DETACH">DETACH</option>
+<option value="URL">URL</option>
+<option value="EMPTY">EMPTY</option>
+</select>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<input type="button" onclick="setsensorEvent();" value="SetSensorEvent">
+<br /><br />
+<hr/>
+
+sensor status:<select name="statusdropdown" id="IDstatus">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="Enabled">Enabled</option>
+<option value="Disabled">Disabled</option>
+<option value="Invalid">Invalid</option>
+<option value="Null">Null</option>
+</select>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<input type=button onclick="setstatus();" value="SetStatus">
+
+<hr />
+
+minimumInterval:<Textarea id="txtminimumInterval"cols="10" rows="1">2000</Textarea>
+&nbsp;&nbsp;&nbsp;&nbsp;
+<input type=button onclick="setminimumInterval();" value="SetMinimumInterval">
+<hr />
+
+</table>
+</form>
+
+</body>
+</html>

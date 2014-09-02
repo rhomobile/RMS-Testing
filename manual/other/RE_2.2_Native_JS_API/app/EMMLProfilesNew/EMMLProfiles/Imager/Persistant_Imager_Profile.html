@@ -1,0 +1,62 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+<META HTTP-Equiv="quitbutton" Content="visibility:visible">
+<META HTTP-Equiv="quitbutton" Content="Left:10">
+<META HTTP-Equiv="quitbutton" Content="Top:10">
+<META HTTP-Equiv="EMMLProfile" Content="name:myImager;import:url('../../../EMMLProfiles/Imager/Imager.emmp');">
+
+<script type="text/javascript">
+var objGeneric = new ActiveXObject("PocketBrowser.Generic");
+	
+    function doCapture()
+    {
+	    objGeneric.InvokeMETAFunction('imager', 'capture');
+    }
+
+    function doDisable()
+    {
+	    objGeneric.InvokeMETAFunction('imager', 'disabled');
+    }
+    function myevent(response)
+    {	
+	    alert(response);
+	}
+
+	function doApplyProfile(profile) 
+	{
+
+	    objGeneric.InvokeMETAFunction('EMMLProfile', 'Apply:' + profile);
+	}
+
+	function clearProfile() 
+	{
+	    objGeneric.InvokeMETAFunction('EMMLProfile', 'clear:myImager');
+	}
+</script>
+
+</head>
+<body>
+<h1>Named Imager EMML Profile script</h1>
+<a href="javascript:doApplyProfile('myImager.Imagecaptureftp');">Apply FTPImager Profile</a>
+    <br>
+<a href="javascript:doApplyProfile('myImager.Imagecapturehttp');">Apply HTTPImager Profile</a>
+<BR><BR>
+<P><INPUT TYPE="button" VALUE="Capture" ONCLICK="doCapture();"></P>
+<P><INPUT TYPE="button" VALUE="DisableImager" ONCLICK="doDisable();"></P>
+<p><input type=button value="Clear Imported Profile" onclick="clearProfile();"></p>
+
+<h3>Browse to another page to check for EMML profile persistance.</h3>
+<h4><a href="Persistant_Imager_Test.html">Click here to go to another page.</a></h4>
+<hr />
+<a href="../EMMLProfilesIndex.html">Back to EMML Profile Index</a>
+
+
+</body>
+</html>
+
+
+
+
+

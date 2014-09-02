@@ -1,0 +1,103 @@
+<HTML>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="expires" content="0">
+<TITLE>Application Tests</TITLE>
+</HEAD>
+<BODY>
+  <script type="text/javascript">
+ 
+	//  *******************************************************************************************
+	//  Code to make it compatible on IE / WebKit
+	try
+	{
+		//var testme = new ActiveXObject("PocketBrowser.Generic");
+		var generic = new ActiveXObject("PocketBrowser.Generic");
+	}
+	catch(err)
+	{
+		//  We'll just use the generic exported by NPAPI 
+		var GenericPlugin = document.createElement('embed');
+		GenericPlugin.setAttribute('id',"embed1");
+		GenericPlugin.setAttribute('type',"application/x-wtg-legacy-generic");
+		GenericPlugin.setAttribute('hidden',true);	
+ 
+		//  Attach the plugin embed tags to the body
+		var theBody = document.getElementsByTagName('body')[0];
+		theBody.appendChild(GenericPlugin);
+	}
+	//  End Code to make it compabitible on IE / WebKit
+	//  *********************************************************************************************
+ 
+	  
+	function fnVer(productVersion, hotFixes, componentVersions)
+	{
+		var theOutput = "<B>Product Version:</b> " + productVersion + "<P>";
+		theOutput = theOutput + "<b>Hot Fixes:</b><P>";
+		for (var i=0; i<hotFixes.length; i = i + 1)
+		{
+			theOutput = theOutput + "  Hot Fix: " + hotFixes[i] + "<BR>";
+		}
+		theOutput = theOutput + "<P>";
+		theOutput = theOutput + "<b>Installed Components:</b><P>";
+		for (var j=0; j<componentVersions.length; j = j + 1)
+		{
+			theOutput = theOutput + "  Component: " + componentVersions[j][0] + ': ' + componentVersions[j][1] + "<BR>";
+		}
+		outputDiv.innerHTML = theOutput;
+	}
+		  
+	function getVer()  
+	{
+		generic.InvokeMETAFunction("Application", "VersionEvent:url('javascript:fnVer('%s', %s, %s);'); GetVersion");
+	}
+	
+	//  JSON JSON JSON JSON JSON JSON JSON JSON JSON JSON JSON JSON
+	
+	function fnVerJSON(jsonObject)
+	{
+		var theOutput = "<B>Product Version:</b> " + jsonObject.ProductVersion + "<P>";
+		theOutput = theOutput + "<b>Hot Fixes:</b><P>";
+		for (var i=0; i<jsonObject.HotFixes.length; i = i + 1)
+		{
+			theOutput = theOutput + "  Hot Fix: " + jsonObject.HotFixes[i] + "<BR>";
+		}
+		theOutput = theOutput + "<P>";
+		theOutput = theOutput + "<b>Installed Components:</b><P>";
+		for (var j=0; j<jsonObject.ComponentVersions.length; j = j + 1)
+		{
+			theOutput = theOutput + "  Module: " + jsonObject.ComponentVersions[j].Module + ', Version: ' + jsonObject.ComponentVersions[j].Version + "<BR>";
+		}
+		outputDiv.innerHTML = theOutput;
+	}
+	
+	function getVerJSON()  
+	{
+		generic.InvokeMETAFunction("Application", "VersionEvent:url('javascript:fnVerJSON(%json);'); GetVersion");
+	}
+ 
+  
+  </script>
+</HEAD>
+ 
+<H1>Version Tests</H1>
+<P>
+<div id="outputDiv">Version Goes Here</div>
+<P>
+  <INPUT align="center" type="button" value="Retrieve Version (JS Array)" onclick="getVer();"><br>
+  <INPUT align="center" type="button" value="Retrieve Version (JSON)" onclick="getVerJSON();"><br>
+<br>  
+  <INPUT align="center" type="button" value="Manual Test (JS Array)" onclick="fnVer('1.2.3', new Array('1','2'), new Array(new Array('hello','darryn'),new Array('greetings','darryns friend')));"><br>
+  <INPUT align="center" type="button" value="Manual Test (JSON)" onclick="fnVerJSON({'ProductVersion':'1.2.3','HotFixes':['7','4','2'],'ComponentVersions':[{'Module':'Timer','Version':'1.0.6.1'},{'Module':'Scanner','Version':'1.0.6.5'}]});"><br>
+ 
+	<P>
+	<a href="javascript:location.reload();">Refresh the page</a> | <a href="http://www.jrq768.wtgdev.net">Main JRQ768 Page</a>
+<br>This page has been modified to work either with ActiveX or with an inherent 'Generic' object.
+ 
+ 
+ 
+ 
+ 
+</HTML>

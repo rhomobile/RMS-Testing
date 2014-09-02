@@ -1,0 +1,70 @@
+<HTML>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="expires" content="0">
+<meta http-equiv="Imager" content="left:5;top:100;height:200;width:400">
+<!--<meta http-equiv="Imager" content="imagerCaptureEvent:url('javascript:onImageCapture(%json)');">-->
+<TITLE>Image Capture Tests</TITLE>
+</HEAD>
+<BODY>
+  <script type="text/javascript">
+  
+  //var myobject = new ActiveXObject("PocketBrowser.Generic");
+
+  function captureevent()
+	{
+		//myobject.InvokeMETAFunction("Imager", "imagerCaptureEvent:url('Javascript:onImageCapture(%json);');");
+	}
+  function enableIMG1()
+	{	
+		//myobject.InvokeMETAFunction("Imager", "enabled:IMG1");
+		imager.setEMML("enabled:IMG1");
+	}
+	
+  function enableIMG2()
+	{
+		//myobject.InvokeMETAFunction("Imager", "enabled:IMG2");
+		imager.setEMML("enabled:IMG2");
+	}
+
+  function captureImage()
+    {
+        //myobject.InvokeMETAFunction("Imager", "imagerEvent:url('Javascript:onImageSavedJSON(%json);');");
+		imager.setEMML("imagerEvent:url('Javascript:onImageSavedJSON(%json);');");
+        //myobject.InvokeMETAFunction("Imager", "username:ftpadmin;password:ftpadmin;Name:Sig;Destination:url('ftp://10.233.85.82/Received/uploadedImage.jpg');");
+		imager.setEMML("username:ftpadmin;password:ftpadmin;Name:Sig;Destination:url('ftp://10.233.85.82/Received/uploadedImage.jpg');");
+        //myobject.InvokeMETAFunction("Imager", "Capture");
+		imager.setEMML("Capture");
+    }
+	
+  function onImageSavedJSON(jsonObject)
+  {
+	 var html = "<b>Signature Capture Result: </b><br>[" + jsonObject.transferResult + "]";
+	ImageSaveResult.innerHTML=html;
+  }
+  
+	function onImageCapture(jsonObject)
+	{
+		signatureImage.src = jsonObject.imageData;
+	}
+     
+  </script>
+
+
+<H1>Image Capture Tests</H1>
+<P>
+<br><br><br><br><br><br><br><br><br><br><br><br>
+	<div id="ImageSaveResult">Image Save Result goes here</div>
+	<img src="" id="signatureImage"></img>
+  <BR>
+  <INPUT align="center" type="button" value="Capture BMP & Upload" onclick="captureImage();">
+  <INPUT align="center" type="button" value="AttachCaptureEvent" onclick="captureevent();">
+  <INPUT align="center" type="button" value="enableImg1" onclick="enableIMG1();">
+  <INPUT align="center" type="button" value="enableImg2" onclick="enableIMG2();">
+	<P>
+	<a href="javascript:location.reload();">Refresh the page</a>
+
+  </BODY>
+</HTML>

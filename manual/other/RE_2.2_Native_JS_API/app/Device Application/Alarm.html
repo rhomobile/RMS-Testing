@@ -1,0 +1,246 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+<title>PB Device Application Test</title>
+<META HTTP-Equiv="sipbutton" Content="visibility:visible">
+<script language=javascript>
+var generic = new ActiveXObject("PocketBrowser.Generic");
+
+var selectedValue="";
+var eventScript="";
+var count = 0;
+var now = new Date();
+
+
+function doTime()
+{
+	now = new Date();
+	timeSpan.innerHTML = now;
+	setTimeout('doTime();', 30000)
+}
+
+function doSet() 
+{
+
+
+    var w = frm.cboyear.selectedIndex;
+    var year = frm.cboyear.options[w].value;
+    
+    w = frm.cbomonth.selectedIndex;
+    var month = frm.cbomonth.options[w].value;
+
+    w = frm.cboday.selectedIndex;
+    var day = frm.cboday.options[w].value;
+
+    w = frm.cbohour.selectedIndex;
+    var hour = frm.cbohour.options[w].value;
+
+    w = frm.cbomin.selectedIndex;
+    var min = frm.cbomin.options[w].value;
+
+    var sTime = year+'-'+month+'-'+day+'t'+hour+'-'+min+'-00-04-30'; 
+    //alert(sTime);
+    
+	generic.InvokeMETAFunction('Alarm', 'Time:'+sTime);
+	
+	
+        var sltevent=frm.eventdropdown.selectedIndex;
+	var selectedevent = frm.eventdropdown.options[sltevent].value;
+	switch(selectedevent)
+	{
+		case 'Javascript':
+
+			generic.InvokeMETAFunction("Alarm","AlarmTriggered:url('javascript:doAlarm();')");
+			break;
+
+		case 'URL':
+			generic.InvokeMETAFunction("Alarm","AlarmTriggered:url('http://10.233.85.82/pb3.x/APD/APD.html')");
+			break;
+
+		case 'EMPTYURL':
+			generic.InvokeMETAFunction("Alarm","AlarmTriggered:url('')");
+			break;
+
+		case 'EMPTYEVENT':
+			generic.InvokeMETAFunction("Alarm","AlarmTriggered:");
+			break;
+
+		case 'INVALIDURL':
+			generic.InvokeMETAFunction("Alarm","AlarmTriggered:url('http://10.233.85.82/pb3.x/APD/APD12.html')");
+			break;
+
+	}
+
+        generic.InvokeMETAFunction('Alarm', 'Set');
+}
+
+
+function doAlarm()
+{
+        
+        count++;
+        outputSpan1.innerHTML = 'Alarm Triggered';
+        Count.innerHTML = "Count = "+count;
+}
+
+function setInterval()
+{
+	var RepeatValue = frm.txtRepeat.value;
+	var Repe = "Repeat:"+RepeatValue;
+
+	generic.InvokeMETAFunction('Alarm', Repe);
+
+	var IntervalValue = frm.txtInterval1.value;
+	var interv = "Interval:"+IntervalValue;
+	generic.InvokeMETAFunction('Alarm', interv);
+
+	if(frm.txtInterval2.value.length != 0)
+	{
+		var IntervalVal = frm.txtInterval2.value;
+		var inter = "Interval:"+IntervalVal;
+		//alert(inter);
+		generic.InvokeMETAFunction('Alarm', inter);
+	}
+		
+	var sltevent=frm.eventdropdown.selectedIndex;
+	var selectedevent = frm.eventdropdown.options[sltevent].value;
+	switch(selectedevent)
+	{
+		case 'Javascript':
+
+			generic.InvokeMETAFunction("Alarm","AlarmTriggered:url('javascript:doAlarm();')");
+			break;
+
+		case 'URL':
+			generic.InvokeMETAFunction("Alarm","AlarmTriggered:url('http://10.233.85.82/pb3.x/APD/APD.html')");
+			break;
+
+		case 'EMPTYURL':
+			generic.InvokeMETAFunction("Alarm","AlarmTriggered:url('')");
+			break;
+
+		case 'EMPTYEVENT':
+			generic.InvokeMETAFunction("Alarm","AlarmTriggered:");
+			break;
+
+		case 'INVALIDURL':
+			generic.InvokeMETAFunction("Alarm","AlarmTriggered:url('http://10.233.85.82/pb3.x/APD/APD12.html')");
+			break;
+
+
+		}
+	generic.InvokeMETAFunction('Alarm', 'Set');
+	
+}
+
+function setRepeat()
+{
+var RepeatValue = frm.txtRepeat.value;
+var Repe = "Repeat:"+RepeatValue;
+alert(RepeatValue);
+
+generic.InvokeMETAFunction('Alarm', Repe);
+
+}
+
+function clearAlarm()
+{
+    
+    generic.InvokeMETAFunction('Alarm', 'Clear');
+}
+
+</script>
+
+
+</head>
+<body onLoad="doTime();">
+
+<form id="frm" action="">
+<div id="timeSpan">Current Time...</div>
+<select id="cboyear">
+<script>
+	for(i=2000; i<=2012; i++)
+		document.write('<option value="' + i + '">' + i + '</option>');
+</script>
+</select>
+<select id="cbomonth">
+<script>
+	for(i=1; i<=12; i++)
+		document.write('<option value="' + (i<10?('0'+i):(i)) + '">' + (i<10?('0'+i):(i)) + '</option>');
+</script>
+</select>
+<select id="cboday">
+<script>
+	for(i=1; i<=31; i++)
+		document.write('<option value="' + (i<10?('0'+i):(i)) + '">' + (i<10?('0'+i):(i)) + '</option>');
+</script>
+</select>
+<select id="cbohour">
+<script>
+	for(i=0; i<=23; i++)
+		document.write('<option value="' + (i<10?('0'+i):(i)) + '">' + (i<10?('0'+i):(i)) + '</option>');
+</script>
+</select>
+<select id="cbomin">
+<script>
+	for(i=0; i<=59; i++)
+		document.write('<option value="' + (i<10?('0'+i):(i)) + '">' + (i<10?('0'+i):(i)) + '</option>');
+</script>
+</select>
+
+<input type=button onclick="doSet();" value="Alarm">
+<br>
+<div id="outputSpan1">Waiting...</div>
+<br>
+<div id="Count">Count=</div>
+
+<div></div>
+
+
+<hr>
+Alarm MetaTag
+
+<tr>
+	Interval 1	<td><Textarea id="txtInterval1"cols="10" rows="1">00-00-30</Textarea></td>
+	</tr><br>
+
+<tr>
+	Interval 2	<td><Textarea id="txtInterval2"cols="10" rows="1"></Textarea></td>
+	</tr><br>
+
+<tr>
+	Repeat<td>	<Textarea id="txtRepeat"cols="10" rows="1">True</Textarea></td>
+	</tr><br>
+<!--
+<input type="radio" name="group1" value="javascript">Navigate to javascript function
+<input type="radio" name="group1" value="HTML">Navigate to HTML Page
+-->
+Alarm Event
+<select name="eventdropdown" id="eventdropdown">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="Javascript">Javascript</option>
+<option value="URL">URL</option>
+<option value="EMPTYURL">EMPTYURL</option>
+<option value="EMPTYEVENT">EMPTYEVENT</option>
+<option value="INVALIDURL">INVALIDURL</option>
+
+</select>
+<br>
+
+<input type=button onclick="setInterval();" value="Interval">
+
+<input type=button onclick="clearAlarm();" value="Clear">
+
+<input type=button onclick="setRepeat();" value="setRepeat">
+
+<br><br>
+<hr>
+<br>
+
+<br><br>
+<A HREF="../WANIndx.html">Back</A>
+
+</form>
+</body>
+</html>

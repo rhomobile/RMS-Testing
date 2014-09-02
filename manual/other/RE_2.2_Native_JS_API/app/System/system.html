@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+    
+	<script type="text/javascript">	    
+		function getStartParamValue(){
+			var x = Rho.System.getStartParams();
+			alert(x);
+		}
+		function runApplication(){
+			Rho.System.runApplication('rhomobile RhoElements/RhoElements.exe','ParamsAreSet');
+		}
+	</script>
+</head>
+<body>
+	<h3>Rho.System</h3>
+	<div>
+		<a href="javascript:void(0)" onclick="runApplication();">call runApplication()</a>
+	</div>
+	<div>
+		<a href="javascript:void(0)" onclick="getStartParamValue();">call getStartParamValue()</a>
+    </div>	
+</body>
+</html>

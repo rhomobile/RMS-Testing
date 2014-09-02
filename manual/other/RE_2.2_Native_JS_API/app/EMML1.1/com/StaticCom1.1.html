@@ -1,0 +1,23 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+<META HTTP-Equiv="BackButton" Content="Visibility:Visible">
+<META HTTP-Equiv="comm" Content="port:COM1;baudrate:9600;databits:8;stopbits:1;handshake:none;open;commevent:url('JavaScript:DisplayData('%s');');" />
+
+<SCRIPT TYPE="text/javascript">
+
+    function DisplayData(data) 
+    {
+        //message.innerHTML="Received data: "+data;
+        alert("Received data: " + data);
+    }
+
+</SCRIPT>
+</head>
+<body>
+<h1>Static com test 1.1 for reading.</h1>
+<div id="message"></div>
+</body>
+</html>

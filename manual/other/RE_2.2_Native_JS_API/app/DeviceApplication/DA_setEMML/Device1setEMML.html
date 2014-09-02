@@ -1,0 +1,358 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+<title>Device Application Test</title>
+<META HTTP-Equiv="sipbutton" Content="visibility:visible">
+<script language="javascript">
+var theOutput="<b>Application State is:</b> ";
+function setApps()
+{
+	var SelectedValue = frm.appdropdown.selectedIndex;
+	var selectBacklight = frm.appdropdown.options[SelectedValue].value;
+    Message.innerHTML="value is:"+selectBacklight;
+	switch(selectBacklight)
+	{
+		case 'quit':
+
+			//generic.InvokeMETAFunction('application', 'quit');
+			application.setEMML("quit");
+			break;
+
+		case 'minimize':
+
+			//generic.InvokeMETAFunction('application', 'minimize');
+			application.setEMML('minimize');
+			break;
+			
+	   case 'restore':
+            //generic.InvokeMETAFunction('application', 'minimize');
+			//generic.InvokeMETAFunction('application', 'restore');
+			application.setEMML('minimize;restore');
+			break;
+			
+		case 'EMPTY':
+
+			//generic.InvokeMETAFunction('application', '');
+			application.setEMML('');
+			break;
+			
+		case 'MandQ':
+
+			//generic.InvokeMETAFunction('application', 'minimize');
+			//generic.InvokeMETAFunction('application', 'quit');
+			application.setEMML('minimize;quit');
+			break;
+
+
+	}
+}
+
+function setAppsevent()
+{
+	var SelectedValue = frm.appeventdropdown.selectedIndex;
+	var selectEvent = frm.appeventdropdown.options[SelectedValue].value;
+    Message.innerHTML="Event is:"+selectEvent;
+	switch(selectEvent)
+	{
+		case 'JSCRIPT':
+
+			//generic.InvokeMETAFunction('application', "applicationEvent:url('JavaScript:doStatejsFunction('%s');')");
+			application.setEMML("applicationEvent:url('JavaScript:doStatejsFunction('%s');')");
+			break;
+
+		case 'JSON':
+
+			//generic.InvokeMETAFunction('application', "applicationEvent:url('JavaScript:doStatejsonFunction(%json);')");
+			application.setEMML("applicationEvent:url('JavaScript:doStatejsonFunction(%json);')");
+			break;
+			
+	   case 'DETACH':
+	   
+            //generic.InvokeMETAFunction('application', "applicationEvent:url('')");
+            application.setEMML("applicationEvent:url('')");
+			break;
+			
+	  case 'URL':
+
+			//generic.InvokeMETAFunction('application', "applicationEvent:url('http://10.233.85.82/Neon/DeviceApplication/pageNavigation.html')");
+			application.setEMML("applicationEvent:url('http://10.233.85.82/Neon/DeviceApplication/pageNavigation.html')");
+			break;
+
+		case 'EMPTY':
+
+			//generic.InvokeMETAFunction('application', 'applicationEvent:');
+			application.setEMML("applicationEvent:");
+			break;
+			
+		
+
+	}
+}
+
+function doStatejsFunction(applicationState)
+{
+theOutput += applicationState;
+Message.innerHTML=theOutput;
+}
+
+function doStatejsonFunction(jsonObject)
+{
+theOutput+=jsonObject.applicationState;
+Message.innerHTML=theOutput;
+}
+
+
+function setBacklight()
+{
+	var SelectedValue = frm.backdropdown.selectedIndex;
+	var selectBacklight = frm.backdropdown.options[SelectedValue].value;	
+    Message.innerHTML="value is:"+selectBacklight;
+	switch(selectBacklight)
+	{
+		case 'ON':
+
+			//generic.InvokeMETAFunction('backlight', 'ON');
+			backlight.setEMML('ON');
+			break;
+
+		case 'OFF':
+
+			//generic.InvokeMETAFunction('backlight', 'Off');
+			backlight.setEMML('Off');
+			break;
+			
+	   case 'OLDON':
+
+			//generic.InvokeMETAFunction('backlight-On',"Intensity:2" );
+			backlight.setEMML("Intensity:2;ON");
+			break;
+			
+	   case 'getBacklightSettings':
+
+			//generic.InvokeMETAFunction("backlight", "Intensity:5;On");
+			backlight.setEMML("getBacklightSettings");
+			break;
+			
+	    case 'OLDOFF':
+
+			//generic.InvokeMETAFunction('backlight-Off', "Intensity:5");
+			backlight.setEMML("Intensity:5;off");
+			break;
+			
+	   case 'EMPTY1':
+
+			//generic.InvokeMETAFunction('backlight-On', "");
+			backlight.setEMML("aaa");
+			break;
+		case 'EMPTY':
+
+			//generic.InvokeMETAFunction('backlight',"" );
+			backlight.setEMML("");
+			break;
+
+	}
+}
+
+function setbacklightevent()
+{
+	var SelectedValue = frm.backlighteventdropdown.selectedIndex;
+	var selectEvent = frm.backlighteventdropdown.options[SelectedValue].value;
+    Message.innerHTML="Backlight Event is:"+selectEvent;
+	switch(selectEvent)
+	{
+		case 'JSCRIPT':
+
+			//generic.InvokeMETAFunction('backlight', "backlightSettingsEvent:url('JavaScript:getsettingsjsFunction('%s',%s,'%s');')");
+			backlight.setEMML("backlightSettingsEvent:url('JavaScript:getsettingsjsFunction('%s',%s,'%s');')");
+			break;
+
+		case 'JSON':
+
+			//generic.InvokeMETAFunction('backlight', "backlightSettingsEvent:url('JavaScript:getsettingsjsonFunction(%json);')");
+			backlight.setEMML("backlightSettingsEvent:url('JavaScript:getsettingsjsonFunction(%json);')");
+			break;
+			
+	   case 'DETACH':
+	   
+            //generic.InvokeMETAFunction('backlight', "backlightSettingsEvent:url('')");
+            backlight.setEMML("backlightSettingsEvent:url('')");
+			break;
+			
+	  case 'URL':
+
+			//generic.InvokeMETAFunction('backlight', "backlightSettingsEvent:url('http://10.233.85.82/Neon/DeviceApplication/pageNavigation.html')");
+			backlight.setEMML("backlightSettingsEvent:url('http://10.233.85.82/Neon/DeviceApplication/pageNavigation.html')");
+			break;
+
+		case 'EMPTY':
+
+			//generic.InvokeMETAFunction('backlight', 'backlightSettingsEvent:');
+			backlight.setEMML("backlightSettingsEvent:");
+			break;
+			
+		
+
+	}
+}
+
+function getsettingsjsonFunction(jsonObject)
+  {
+              var theOutput = "<B>Backlight State:</B>" + jsonObject.state + "<P>";
+              theOutput = theOutput + "<B>Backlight Intensity:</b> " + jsonObject.intensity + "<P>";
+              theOutput = theOutput + "<b>Backlight Intensity Range:</b><P>";
+              for (var i=0; i<jsonObject.intensityRange.length; i = i + 1)
+              {
+                      theOutput = theOutput + jsonObject.intensityRange[i] + "<BR>";
+              }
+              theOutput = theOutput + "<P>";
+              Message.innerHTML=theOutput;
+    }
+    
+    
+ function getsettingsjsFunction(intensity,intensityRange,state)
+  {
+              var theOutput = "<B>Backlight State:</B>" + state + "<P>";
+              theOutput = theOutput + "<B>Backlight Intensity:</b> " + intensity + "<P>";
+              theOutput = theOutput + "<b>Backlight Intensity Range:</b><P>";
+              for (var i=0; i<intensityRange.length; i = i + 1)
+              {
+                      theOutput = theOutput + intensityRange[i] + "<BR>";
+              }
+              theOutput = theOutput + "<P>";
+              Message.innerHTML=theOutput;
+    }
+
+
+
+function setIntensity()
+{
+	var IntensityValue = frm.txtIntensity.value;
+	var IValue = "Intensity:"+IntensityValue;
+	Message.innerHTML="value is:"+IValue;
+	backlight.setEMML(IValue);
+
+}
+
+
+
+
+function selectDevice()
+{
+	var sltdev=frm.devdropdown.selectedIndex;
+	var selecteddev = frm.devdropdown.options[sltdev].value;
+	Message.innerHTML="SelectedDevice:"+selecteddev;
+	switch(selecteddev)
+	{
+		case 'Suspend':
+
+			//generic.InvokeMETAFunction('Device', 'Suspend');
+			device.setEMML("Suspend");
+			break;
+
+		case 'Calibrate':
+
+			//generic.InvokeMETAFunction('Device', 'Calibrate');
+			device.setEMML("Calibrate");
+			break;
+		
+		case 'Null':
+
+			//generic.InvokeMETAFunction('Device', '');
+			device.setEMML("");
+			break;
+
+		case 'SandC':
+
+			//generic.InvokeMETAFunction('Device', 'Suspend');
+			//generic.InvokeMETAFunction('Device', 'Calibrate');
+			device.setEMML("Suspend;Calibrate");
+			break;
+	}
+}
+
+</script>
+
+
+</head>
+<body>
+<form id="frm" action="">
+<br /><br /><br />
+<b>Using SetEMML Approach</b>
+<div id="Message">Message</div>
+<hr>
+Application Event:
+<select name="appeventdropdown" id="Select2">
+<option SELECTED VALUE="">Select</OPTION>
+<option value="JSCRIPT">JSCRIPT</option>
+<option value="JSON">JSON</option>
+<option value="DETACH">DETACH</option>
+<option value="URL">URL</option>
+<option value="EMPTY">EMPTY</option>
+</select>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<input type="button" onclick="setAppsevent();" value="SetEvent">
+<br /><br />
+Method:<select name="appdropdown" id="Select1">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="quit">quit</option>
+<option value="minimize">minimize</option>
+<option value="restore">restore</option>
+<option value="MandQ">MandQ</option>
+<option value="EMPTY">EMPTY</option>
+
+
+</select>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<input type=button onclick="setApps();" value="Set">
+
+<hr>
+BacklightEvent:
+<select name="backlighteventdropdown" id="Select3">
+<option SELECTED VALUE="">Select</OPTION>
+<option value="JSCRIPT">JSCRIPT</option>
+<option value="JSON">JSON</option>
+<option value="DETACH">DETACH</option>
+<option value="URL">URL</option>
+<option value="EMPTY">EMPTY</option>
+</select>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<input type="button" onclick="setbacklightevent();" value="SetEvent">
+<br /><br />
+Method:<select name="backdropdown" id="backdropdown">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="ON">ON</option>
+<option value="OFF">OFF</option>
+<option value="OLDON">OLDON</option>
+<option value="getBacklightSettings">getBacklightSettings</option>
+<option value="OLDOFF">OLDOFF</option>
+<option value="EMPTY">EMPTY</option>
+<option value="EMPTY1">EMPTY1</option>
+
+</select>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<input type=button onclick="setBacklight();" value="SetBacklight">
+<br><br>
+
+Intensity:<Textarea id="txtIntensity"cols="10" rows="1">2</Textarea>
+&nbsp;&nbsp;&nbsp;&nbsp;
+<input type=button onclick="setIntensity();" value="SetIntensity">
+
+<hr>
+Device
+<select name="devdropdown" id="devdropdown" onChange="selectDevice();">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="Suspend">Suspend</option>
+<option value="Calibrate">Calibrate</option>
+<option value="Null">Null</option>
+<option value="SandC">SandC</option>
+</select>
+<hr>
+<br>
+
+<br><br>
+<A HREF="../DA_setEMML_index.html">Back</A>
+
+</form>
+</body>
+</html>

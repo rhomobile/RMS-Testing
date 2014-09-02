@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<data field1="TestID" field2="ExpectedRes" field3="Params" field4="ActualRes" field5="Result">
+  <record TestID="VT056-0017" ExpectedRes="100864216736" Params="scanner@all_decoders:enabled;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0022" ExpectedRes="Barcode should not scan" Params="scanner@all_decoders:disabled;disabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0023" ExpectedRes="100864216736" Params="scanner@all_decoders:enabled;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0024" ExpectedRes="100864216736" Params="scanner@all_decoders:enabled;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0025" ExpectedRes="Barcode should not scan" Params="scanner@all_decoders:disabled;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0026" ExpectedRes="Barcode should not scan" Params="scanner@all_decoders:disabled;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0027" ExpectedRes="Barcode should not scan" Params="scanner@all_decoders:disabled;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0028" ExpectedRes="" Params="scanner@all_decoders:disabled;upca:enabled;autoenter:Enabled;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0029" ExpectedRes="" Params="scanner@all_decoders:disabled;upca:enabled;autoenter:disabled;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0030" ExpectedRes="" Params="scanner@all_decoders:disabled;upca:enabled;autotab:Enabled;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0031" ExpectedRes="" Params="scanner@all_decoders:disabled;upca:enabled;autotab:disabled;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0032" ExpectedRes="100864216736" Params="scanner@all_decoders:disabled;upca:enabled;rastermode:none;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0033" ExpectedRes="100864216736" Params="scanner@all_decoders:disabled;upca:enabled;rastermode:open_always;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0034" ExpectedRes="100864216736" Params="scanner@all_decoders:disabled;upca:enabled;rastermode:smart;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0035" ExpectedRes="100864216736" Params="scanner@all_decoders:disabled;upca:enabled;rastermode:cyclone;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0036" ExpectedRes="100864216736" Params="scanner@all_decoders:disabled;upca:enabled;aimtype:trigger;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0037" ExpectedRes="100864216736" Params="scanner@all_decoders:disabled;upca:enabled;aimtype:timed_hold;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0038" ExpectedRes="100864216736" Params="scanner@all_decoders:disabled;upca:enabled;aimtype:timed_release;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0039" ExpectedRes="100864216736" Params="scanner@all_decoders:disabled;upca:enabled;aimtype:continuous_trigger;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0040" ExpectedRes="100864216736" Params="scanner@all_decoders:disabled;upca:enabled;aimtype:presentation;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0041" ExpectedRes="Barcode should not scan" Params="scanner@all_decoders:disabled;upca:enabled;foo;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0046" ExpectedRes="100864216736" Params="scanner@all_decoders:enabled;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0047" ExpectedRes="Barcode should not scan" Params="scanner@all_decoders:disabled;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0048" ExpectedRes="11,01234567,63 59 52 57" Params="scanner@all_decoders:disabled;auspostal:enabled;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0049" ExpectedRes="Barcode should not scan" Params="scanner@all_decoders:disabled;auspostal:disabled;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0050" ExpectedRes="" Params="scanner@all_decoders:disabled;canpostal:enabled;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0051" ExpectedRes="Barcode should not scan" Params="scanner@all_decoders:disabled;canpostal:disabled;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0052" ExpectedRes="a12345678901234567890122b" Params="scanner@all_decoders:disabled;Codabar:enabled;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0053" ExpectedRes="Barcode should not scan" Params="scanner@all_decoders:disabled;Codabar:disabled;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0054" ExpectedRes="0 1234 56789 0123" Params="scanner@all_decoders:disabled;Codabar:enabled;CodabarCLSiEditing:true;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0055" ExpectedRes="a01234567890123b" Params="scanner@all_decoders:disabled;Codabar:enabled;CodabarCLSiEditing:false;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0056" ExpectedRes="a12345678901234567890122b" Params="scanner@all_decoders:disabled;Codabar:enabled;Codabarmaxlength:0;Codabarminlength:0;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0057" ExpectedRes="Barcode should not scan" Params="scanner@all_decoders:disabled;Codabar:enabled;Codabarmaxlength:12;Codabarminlength:0;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0058" ExpectedRes="a123456-b" Params="scanner@all_decoders:disabled;Codabar:enabled;Codabarminlength:0;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0059" ExpectedRes="Barcode should not scan" Params="scanner@all_decoders:disabled;Codabar:enabled;Codabarminlength:10;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0060" ExpectedRes="1234567890123:" Params="scanner@all_decoders:disabled;Codabar:enabled;Codabarnotisediting:true;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0061" ExpectedRes="a1234567890123:b" Params="scanner@all_decoders:disabled;Codabar:enabled;Codabarnotisediting:false;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0062" ExpectedRes="a50105090$b" Params="scanner@all_decoders:disabled;Codabar:enabled;Codabarredundancy:true;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0063" ExpectedRes="a50105090$b" Params="scanner@all_decoders:disabled;Codabar:enabled;Codabarredundancy:false;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0064" ExpectedRes="50105090" Params="scanner@all_decoders:disabled;Code11:enabled;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0065" ExpectedRes="Barcode should not scan" Params="scanner@all_decoders:disabled;Code11:disabled;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0066" ExpectedRes="12345678901" Params="scanner@all_decoders:disabled;Code11:enabled;Code11CheckDigitCount:none;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0067" ExpectedRes="1234567890" Params="scanner@all_decoders:disabled;Code11:enabled;Code11CheckDigitCount:one;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0068" ExpectedRes="1234567890" Params="scanner@all_decoders:disabled;Code11:enabled;Code11CheckDigitCount:two;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0069" ExpectedRes="1234567890" Params="scanner@all_decoders:disabled;Code11:enabled;Code11Redundancy:true;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0070" ExpectedRes="1234567890" Params="scanner@all_decoders:disabled;Code11:enabled;Code11Redundancy:false;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0071" ExpectedRes="12345678901" Params="scanner@all_decoders:disabled;Code11:enabled;Code11ReportCheckDigit:true;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0072" ExpectedRes="1234567890" Params="scanner@all_decoders:disabled;Code11:enabled;Code11ReportCheckDigit:false;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0073" ExpectedRes="50105090" Params="scanner@all_decoders:disabled;Code128:enabled;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0074" ExpectedRes="Barcode should not scan" Params="scanner@all_decoders:disabled;Code128:disabled;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0075" ExpectedRes="50105090" Params="scanner@all_decoders:disabled;Code128:enabled;code128ean128:true;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0076" ExpectedRes="Barcode should not scan" Params="scanner@all_decoders:disabled;Code128:enabled;code128ean128:false;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0077" ExpectedRes="=G1517006000014" Params="scanner@all_decoders:disabled;Code128:enabled;code128isbt128:true;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0078" ExpectedRes="Barcode should not scan" Params="scanner@all_decoders:disabled;Code128:enabled;code128isbt128:false;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0079" ExpectedRes="1234567890123456789012" Params="scanner@all_decoders:disabled;Code128:enabled;Code128maxlength:0;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0080" ExpectedRes="Barcode should not scan" Params="scanner@all_decoders:disabled;Code128:enabled;Code128maxlength:20;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0081" ExpectedRes="12345" Params="scanner@all_decoders:disabled;Code128:enabled;Code128MinLength:0;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0082" ExpectedRes="Barcode should not scan" Params="scanner@all_decoders:disabled;Code128:enabled;Code128MinLength:10;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0083" ExpectedRes="1234567890" Params="scanner@all_decoders:disabled;Code128:enabled;code128other128:true;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0084" ExpectedRes="Barcode should not scan" Params="scanner@all_decoders:disabled;Code128:enabled;code128other128:false;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0085" ExpectedRes="50105090" Params="scanner@all_decoders:disabled;Code128:enabled;Code128Redundancy:true;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0086" ExpectedRes="50105090" Params="scanner@all_decoders:disabled;Code128:enabled;Code128Redundancy:false;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0087" ExpectedRes="50105090K" Params="scanner@all_decoders:disabled;Code39:enabled;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0088" ExpectedRes="Barcode should not scan" Params="scanner@all_decoders:disabled;Code39:disabled;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0089" ExpectedRes="A012354650" Params="scanner@all_decoders:disabled;Code39:enabled;Code39code32prefix:true;Code39ConvertToCode32:true;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0090" ExpectedRes="012354650" Params="scanner@all_decoders:disabled;Code39:enabled;Code39code32prefix:false;Code39ConvertToCode32:true;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0091" ExpectedRes="12354650" Params="scanner@all_decoders:disabled;Code39:enabled;Code39ConvertToCode32:true;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0092" ExpectedRes="OCT12U" Params="scanner@all_decoders:disabled;Code39:enabled;Code39ConvertToCode32:false;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0093" ExpectedRes="$ %/" Params="scanner@all_decoders:disabled;Code39:enabled;Code39fullascii:true;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0094" ExpectedRes="/D /E/O" Params="scanner@all_decoders:disabled;Code39:enabled;Code39fullascii:false;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0095" ExpectedRes="123456789012345H" Params="scanner@all_decoders:disabled;Code39:enabled;Code39maxlength:0;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0096" ExpectedRes="Barcode should not scan" Params="scanner@all_decoders:disabled;Code39:enabled;Code39maxlength:14;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0097" ExpectedRes="123456L" Params="scanner@all_decoders:disabled;Code39:enabled;Code39MinLength:0;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0098" ExpectedRes="Barcode should not scan" Params="scanner@all_decoders:disabled;Code39:enabled;Code39MinLength:10;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0099" ExpectedRes="50105090K" Params="scanner@all_decoders:disabled;Code39:enabled;Code39Redundancy:true;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0100" ExpectedRes="50105090K" Params="scanner@all_decoders:disabled;Code39:enabled;Code39Redundancy:false;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0101" ExpectedRes="50105090K" Params="scanner@all_decoders:disabled;Code39:enabled;Code39ReportCheckDigit:true;Code39VerifyCheckDigit:true;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0102" ExpectedRes="50105090" Params="scanner@all_decoders:disabled;Code39:enabled;Code39ReportCheckDigit:false;Code39VerifyCheckDigit:true;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0103" ExpectedRes="50105090" Params="scanner@all_decoders:disabled;Code39:enabled;Code39VerifyCheckDigit:true;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0104" ExpectedRes="50105090K" Params="scanner@all_decoders:disabled;Code39:enabled;Code39VerifyCheckDigit:false;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0105" ExpectedRes="50105090" Params="scanner@all_decoders:disabled;Code93:enabled;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0106" ExpectedRes="Barcode should not scan" Params="scanner@all_decoders:disabled;Code93:disabled;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0107" ExpectedRes="1234567890123456789012" Params="scanner@all_decoders:disabled;Code93:enabled;Code93maxlength:0;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0108" ExpectedRes="Barcode should not scan" Params="scanner@all_decoders:disabled;Code93:enabled;Code93maxlength:20;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0109" ExpectedRes="12345" Params="scanner@all_decoders:disabled;Code93:enabled;Code93MinLength:0;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0110" ExpectedRes="Barcode should not scan" Params="scanner@all_decoders:disabled;Code93:enabled;Code93MinLength:10;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0111" ExpectedRes="50105090" Params="scanner@all_decoders:disabled;Code93:enabled;Code93Redundancy:true;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0112" ExpectedRes="50105090" Params="scanner@all_decoders:disabled;Code93:enabled;Code93Redundancy:false;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0113" ExpectedRes="010064141499721012345678914" Params="scanner@all_decoders:disabled;Composit_ab:enabled;upca:enabled;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0114" ExpectedRes="Barcode should not scan" Params="scanner@all_decoders:disabled;Composit_ab:disabled;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0115" ExpectedRes="0191234567890121310100035510ABC123 90" Params="scanner@all_decoders:disabled;Composit_c:enabled;MacroPDF:enabled;Code128:enabled;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0116" ExpectedRes="Barcode should not scan" Params="scanner@all_decoders:disabled;Composit_c:disabled;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0117" ExpectedRes="501050900" Params="scanner@all_decoders:disabled;d2of5:enabled;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0118" ExpectedRes="Barcode should not scan" Params="scanner@all_decoders:disabled;d2of5:disabled;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0119" ExpectedRes="Barcode should not scan" Params="scanner@all_decoders:disabled;d2of5:enabled;d2of5maxlength:20;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0120" ExpectedRes="1234565" Params="scanner@all_decoders:disabled;d2of5:enabled;d2of5Redundancy:true;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0121" ExpectedRes="1234565" Params="scanner@all_decoders:disabled;d2of5:enabled;d2of5Redundancy:false;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0122" ExpectedRes="Barcode should not scan" Params="scanner@all_decoders:disabled;d2of5:enabled;d2of5MinLength:10;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0123" ExpectedRes="12345678" Params="scanner@all_decoders:disabled;DataMatrix:enabled;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0124" ExpectedRes="Barcode should not scan" Params="scanner@all_decoders:disabled;DataMatrix:disabled;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0125" ExpectedRes="1230AA156XHUIS" Params="scanner@all_decoders:disabled;DutchPostal:enabled;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0126" ExpectedRes="Barcode should not scan" Params="scanner@all_decoders:disabled;DutchPostal:disabled;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0127" ExpectedRes="9780201546101" Params="scanner@all_decoders:disabled;ean13:enabled;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0128" ExpectedRes="Barcode should not scan" Params="scanner@all_decoders:disabled;ean13:disabled;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0129" ExpectedRes="50105090" Params="scanner@all_decoders:disabled;ean8:enabled;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0130" ExpectedRes="Barcode should not scan" Params="scanner@all_decoders:disabled;ean8:disabled;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0131" ExpectedRes="0000050105090" Params="scanner@all_decoders:disabled;ean8:enabled;ean8ConvertToEAN13:true;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0132" ExpectedRes="50105090" Params="scanner@all_decoders:disabled;ean8:enabled;ean8ConvertToEAN13:false;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0133" ExpectedRes="0501050900" Params="scanner@all_decoders:disabled;i2of5:enabled;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0134" ExpectedRes="Barcode should not scan" Params="scanner@all_decoders:disabled;i2of5:disabled;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0135" ExpectedRes="5000328748054" Params="scanner@all_decoders:disabled;i2of5:enabled;i2of5ConvertToEAN13:true;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0136" ExpectedRes="05000328748054" Params="scanner@all_decoders:disabled;i2of5:enabled;i2of5ConvertToEAN13:false;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0137" ExpectedRes="0123456789012343" Params="scanner@all_decoders:disabled;i2of5:enabled;i2of5maxlength:0;i2of5MinLength:0;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0138" ExpectedRes="Barcode should not scan" Params="scanner@all_decoders:disabled;i2of5:enabled;i2of5maxlength:13;i2of5MinLength:0;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0139" ExpectedRes="1234567895" Params="scanner@all_decoders:disabled;i2of5:enabled;i2of5MinLength:0;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0140" ExpectedRes="Barcode should not scan" Params="scanner@all_decoders:disabled;i2of5:enabled;i2of5MinLength:12;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0141" ExpectedRes="0501050900" Params="scanner@all_decoders:disabled;i2of5:enabled;i2of5Redundancy:true;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0142" ExpectedRes="0501050900" Params="scanner@all_decoders:disabled;i2of5:enabled;i2of5Redundancy:false;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0143" ExpectedRes="01234566" Params="scanner@all_decoders:disabled;i2of5:enabled;i2of5ReportCheckDigit:true;i2of5VerifyCheckDigit:OPCC;i2of5MinLength:0;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0144" ExpectedRes="0123456" Params="scanner@all_decoders:disabled;i2of5:enabled;i2of5ReportCheckDigit:false;i2of5VerifyCheckDigit:OPCC;i2of5MinLength:0;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0145" ExpectedRes="50105095" Params="scanner@all_decoders:disabled;i2of5:enabled;i2of5VerifyCheckDigit:none;i2of5MinLength:0;i2of5maxlength:0;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0146" ExpectedRes="4642154" Params="scanner@all_decoders:disabled;i2of5:enabled;i2of5VerifyCheckDigit:USS;i2of5MinLength:0;i2of5maxlength:0;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0147" ExpectedRes="0123456" Params="scanner@all_decoders:disabled;i2of5:enabled;i2of5VerifyCheckDigit:OPCC;i2of5MinLength:0;i2of5maxlength:0;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0148" ExpectedRes="1698790135" Params="scanner@all_decoders:disabled;JapPostal:enabled;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0149" ExpectedRes="Barcode should not scan" Params="scanner@all_decoders:disabled;JapPostal:disabled;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0150" ExpectedRes="THE GETTYSBURG ADDRESS:\nFour score and seven years ago our fathers brought forth on this\ncontinent a new nation, conc" Params="scanner@all_decoders:disabled;MacroMicroPDF:enabled;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0151" ExpectedRes="Barcode should not scan" Params="scanner@all_decoders:disabled;MacroMicroPDF:disabled;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0153" ExpectedRes="Barcode should not scan" Params="scanner@all_decoders:disabled;MacroPDF:disabled;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0155" ExpectedRes="Barcode should not scan" Params="scanner@all_decoders:disabled;MaxiCode:disabled;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0156" ExpectedRes="Symbol PocketBrowser" Params="scanner@all_decoders:disabled;MicroPDF:enabled;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0157" ExpectedRes="Barcode should not scan" Params="scanner@all_decoders:disabled;MicroPDF:disabled;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0158" ExpectedRes="50105090" Params="scanner@all_decoders:disabled;msi:enabled;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0159" ExpectedRes="Barcode should not scan" Params="scanner@all_decoders:disabled;msi:disabled;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0160" ExpectedRes="2020597" Params="scanner@all_decoders:disabled;msi:enabled;msicheckdigits:true;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0161" ExpectedRes="118822765" Params="scanner@all_decoders:disabled;msi:enabled;msicheckdigits:false;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0162" ExpectedRes="1188227658" Params="scanner@all_decoders:disabled;msi:enabled;msiCheckDigitScheme:mod_11_10;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0163" ExpectedRes="413121666" Params="scanner@all_decoders:disabled;msi:enabled;msiCheckDigitScheme:mod_10_10;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0164" ExpectedRes="1234567890123456789012" Params="scanner@all_decoders:disabled;msi:enabled;msimaxlength:0;msiMinLength:0;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0165" ExpectedRes="Barcode should not scan" Params="scanner@all_decoders:disabled;msi:enabled;msimaxlength:13;msiMinLength:0;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0166" ExpectedRes="50105090" Params="scanner@all_decoders:disabled;msi:enabled;msiMinLength:0;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0167" ExpectedRes="Barcode should not scan" Params="scanner@all_decoders:disabled;msi:enabled;msiMinLength:10;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0168" ExpectedRes="50105090" Params="scanner@all_decoders:disabled;msi:enabled;msiRedundancy:true;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0169" ExpectedRes="50105090" Params="scanner@all_decoders:disabled;msi:enabled;msiRedundancy:false;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0170" ExpectedRes="501050900" Params="scanner@all_decoders:disabled;msi:enabled;msiReportCheckDigit:true;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0171" ExpectedRes="50105090" Params="scanner@all_decoders:disabled;msi:enabled;msiReportCheckDigit:false;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0172" ExpectedRes="ABCDEFGHIJK" Params="scanner@all_decoders:disabled;PDF417:enabled;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0173" ExpectedRes="Barcode should not scan" Params="scanner@all_decoders:disabled;PDF417:disabled;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0174" ExpectedRes="0123456789abcdefghijklmnop" Params="scanner@all_decoders:disabled;Qrcode:enabled;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0175" ExpectedRes="Barcode should not scan" Params="scanner@all_decoders:disabled;Qrcode:disabled;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0176" ExpectedRes="0120012345678909" Params="scanner@all_decoders:disabled;rss14:enabled;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0177" ExpectedRes="Barcode should not scan" Params="scanner@all_decoders:disabled;rss14:disabled;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0178" ExpectedRes="0198898765432106320201234515991231" Params="scanner@all_decoders:disabled;rssexp:enabled;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0179" ExpectedRes="Barcode should not scan" Params="scanner@all_decoders:disabled;rssexp:disabled;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0180" ExpectedRes="0115012345678907" Params="scanner@all_decoders:disabled;rsslim:enabled;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0181" ExpectedRes="Barcode should not scan" Params="scanner@all_decoders:disabled;rsslim:disabled;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0182" ExpectedRes="" Params="scanner@all_decoders:disabled;Signature:enabled;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0183" ExpectedRes="Barcode should not scan" Params="scanner@all_decoders:disabled;Signature:disabled;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0184" ExpectedRes="[)> 06 6P123456 SABCD12345678901234  " Params="scanner@all_decoders:disabled;tlc39:enabled;Code39:enabled;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0185" ExpectedRes="Barcode should not scan" Params="scanner@all_decoders:disabled;tlc39:disabled;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0186" ExpectedRes="Y10345" Params="scanner@all_decoders:disabled;Trioptic39:enabled;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0187" ExpectedRes="Barcode should not scan" Params="scanner@all_decoders:disabled;Trioptic39:disabled;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0188" ExpectedRes="Y10345" Params="scanner@all_decoders:disabled;Trioptic39:enabled;trioptic39Redundancy:true;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0189" ExpectedRes="Y10345" Params="scanner@all_decoders:disabled;Trioptic39:enabled;trioptic39Redundancy:false;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0190" ExpectedRes="N211QT" Params="scanner@all_decoders:disabled;UKPostal:enabled;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0191" ExpectedRes="Barcode should not scan" Params="scanner@all_decoders:disabled;UKPostal:disabled;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0192" ExpectedRes="0201608375" Params="scanner@all_decoders:disabled;ean13:enabled;upc_eanbookland:true;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0193" ExpectedRes="9780201608373" Params="scanner@all_decoders:disabled;ean13:enabled;upc_eanbookland:false;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0194" ExpectedRes="5446000005538100093619" Params="scanner@all_decoders:disabled;upca:enabled;Code128:enabled;upc_eancoupon:true;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0195" ExpectedRes="544600000553" Params="scanner@all_decoders:disabled;upca:enabled;Code128:enabled;upc_eancoupon:false;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0196" ExpectedRes="037812345678" Params="scanner@all_decoders:disabled;upca:enabled;upc_eanlineardecode:true;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0197" ExpectedRes="037812345678" Params="scanner@all_decoders:disabled;upca:enabled;upc_eanlineardecode:false;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0198" ExpectedRes="037812345678" Params="scanner@all_decoders:disabled;upca:enabled;upc_eanrandomweightcheckdigit:true;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0199" ExpectedRes="037812345678" Params="scanner@all_decoders:disabled;upca:enabled;upc_eanrandomweightcheckdigit:false;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0200" ExpectedRes="09781234567212" Params="scanner@all_decoders:disabled;upca:enabled;upc_eansupplementalmode:auto;upc_eanretrycount:2;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0201" ExpectedRes="09781234567212" Params="scanner@all_decoders:disabled;upca:enabled;upc_eansupplementalmode:auto;upc_eanretrycount:5;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0202" ExpectedRes="09781234567212" Params="scanner@all_decoders:disabled;upca:enabled;upc_eansupplementalmode:auto;upc_eanretrycount:8;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0203" ExpectedRes="09781234567212" Params="scanner@all_decoders:disabled;upca:enabled;upc_eansupplementalmode:always;upc_eansecuritylevel:none;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0204" ExpectedRes="09781234567212" Params="scanner@all_decoders:disabled;upca:enabled;upc_eansupplementalmode:always;upc_eansecuritylevel:ambiguous;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0205" ExpectedRes="09781234567212" Params="scanner@all_decoders:disabled;upca:enabled;upc_eansupplementalmode:always;upc_eansecuritylevel:all;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0206" ExpectedRes="09781234567212" Params="scanner@all_decoders:disabled;upca:enabled;upc_eansupplementalmode:always;upc_eansupplemental2:true;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0207" ExpectedRes="Barcode should not scan" Params="scanner@all_decoders:disabled;upca:enabled;upc_eansupplementalmode:always;upc_eansupplemental2:false;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0208" ExpectedRes="09781234567212345" Params="scanner@all_decoders:disabled;upca:enabled;upc_eansupplementalmode:always;upc_eansupplemental5:true;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0209" ExpectedRes="Barcode should not scan" Params="scanner@all_decoders:disabled;upca:enabled;upc_eansupplementalmode:always;upc_eansupplemental5:false;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0210" ExpectedRes="097812345672" Params="scanner@all_decoders:disabled;upca:enabled;upc_eansupplementalmode:none;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0211" ExpectedRes="09781234567212" Params="scanner@all_decoders:disabled;upca:enabled;upc_eansupplementalmode:always;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0212" ExpectedRes="09781234567212" Params="scanner@all_decoders:disabled;upca:enabled;upc_eansupplementalmode:auto;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0213" ExpectedRes="100864216736" Params="scanner@all_decoders:disabled;upca:enabled;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0214" ExpectedRes="Barcode should not scan" Params="scanner@all_decoders:disabled;upca:disabled;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0215" ExpectedRes="00864216736" Params="scanner@all_decoders:disabled;upca:enabled;upcapreamble:NONE;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0216" ExpectedRes="100864216736" Params="scanner@all_decoders:disabled;upca:enabled;upcapreamble:SYSTEM_CHAR;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0217" ExpectedRes="0100864216736" Params="scanner@all_decoders:disabled;upca:enabled;upcapreamble:COUNTRY_AND_SYSTEM_CHARS;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0218" ExpectedRes="100864216736" Params="scanner@all_decoders:disabled;upca:enabled;upcaReportCheckDigit:true;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0219" ExpectedRes="10086421673" Params="scanner@all_decoders:disabled;upca:enabled;upcaReportCheckDigit:false;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0220" ExpectedRes="173559" Params="scanner@all_decoders:disabled;upce0:enabled;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0221" ExpectedRes="Barcode should not scan" Params="scanner@all_decoders:disabled;upce0:disabled;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0222" ExpectedRes="017355000098" Params="scanner@all_decoders:disabled;upce0:enabled;upce0ConvertToupca:true;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0223" ExpectedRes="173559" Params="scanner@all_decoders:disabled;upce0:enabled;upce0ConvertToupca:false;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0224" ExpectedRes="173559" Params="scanner@all_decoders:disabled;upce0:enabled;upce0preamble:NONE;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0225" ExpectedRes="0173559" Params="scanner@all_decoders:disabled;upce0:enabled;upce0preamble:SYSTEM_CHAR;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0226" ExpectedRes="00173559" Params="scanner@all_decoders:disabled;upce0:enabled;upce0preamble:COUNTRY_AND_SYSTEM_CHARS;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0227" ExpectedRes="1735598" Params="scanner@all_decoders:disabled;upce0:enabled;upce0ReportCheckDigit:true;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0228" ExpectedRes="173559" Params="scanner@all_decoders:disabled;upce0:enabled;upce0ReportCheckDigit:false;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0229" ExpectedRes="234567" Params="scanner@all_decoders:disabled;upce1:enabled;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0230" ExpectedRes="Barcode should not scan" Params="scanner@all_decoders:disabled;upce1:disabled;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0231" ExpectedRes="123456000070" Params="scanner@all_decoders:disabled;upce1:enabled;upce1ConvertToupca:true;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0232" ExpectedRes="234567" Params="scanner@all_decoders:disabled;upce1:enabled;upce1ConvertToupca:false;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0233" ExpectedRes="234567" Params="scanner@all_decoders:disabled;upce1:enabled;upce1preamble:NONE;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0234" ExpectedRes="1234567" Params="scanner@all_decoders:disabled;upce1:enabled;upce1preamble:SYSTEM_CHAR;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0235" ExpectedRes="01234567" Params="scanner@all_decoders:disabled;upce1:enabled;upce1preamble:COUNTRY_AND_SYSTEM_CHARS;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0236" ExpectedRes="2345670" Params="scanner@all_decoders:disabled;upce1:enabled;upce1ReportCheckDigit:true;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0237" ExpectedRes="234567" Params="scanner@all_decoders:disabled;upce1:enabled;upce1ReportCheckDigit:false;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0238" ExpectedRes="041235" Params="scanner@all_decoders:disabled;usplanet:enabled;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0239" ExpectedRes="Barcode should not scan" Params="scanner@all_decoders:disabled;usplanet:disabled;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0240" ExpectedRes="11784" Params="scanner@all_decoders:disabled;uspostnet:enabled;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0241" ExpectedRes="Barcode should not scan" Params="scanner@all_decoders:disabled;uspostnet:disabled;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0242" ExpectedRes="1234" Params="scanner@all_decoders:disabled;Webcode:enabled;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0243" ExpectedRes="Barcode should not scan" Params="scanner@all_decoders:disabled;Webcode:disabled;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0244" ExpectedRes="http://elevateprinting.com" Params="scanner@all_decoders:disabled;aztec:enabled;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0245" ExpectedRes="Barcode should not scan" Params="scanner@all_decoders:disabled;aztec:disabled;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0246" ExpectedRes="45454545454" Params="scanner@all_decoders:disabled;chinese_2of5:enabled;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0247" ExpectedRes="Barcode should not scan" Params="scanner@all_decoders:disabled;chinese_2of5:disabled;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0248" ExpectedRes="131000" Params="scanner@all_decoders:disabled;korean3of5:enabled;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0249" ExpectedRes="Barcode should not scan" Params="scanner@all_decoders:disabled;korean3of5:disabled;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0250" ExpectedRes="Example" Params="scanner@all_decoders:disabled;microqr:enabled;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0251" ExpectedRes="Barcode should not scan" Params="scanner@all_decoders:disabled;microqr:disabled;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0252" ExpectedRes="9476543210012345678998690955102" Params="scanner@all_decoders:disabled;us4state:enabled;enabled;start" ActualRes="" Result=""/>
+  <record TestID="VT056-0253" ExpectedRes="Barcode should not scan" Params="scanner@all_decoders:disabled;us4state:disabled;enabled;start" ActualRes="" Result=""/>
+</data>

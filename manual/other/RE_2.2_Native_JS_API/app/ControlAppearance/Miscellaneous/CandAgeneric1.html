@@ -1,0 +1,441 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+<script type="text/javascript">
+
+
+var selected_Module="";
+var selected_imageupmode="";
+var selected_imagedownmode="";
+
+function getmodulename()
+{
+var index = document.controlForm.myChoice.selectedIndex;
+selected_Module = document.controlForm.myChoice.options[index].value;
+myDiv.innerHTML=""+selected_Module;
+}
+function setright()
+{
+var rightvalue=document.controlForm.right.value;
+var rightparam="right:"+rightvalue;
+generic.InvokeMETAFunction(selected_Module, rightparam);
+myDiv.innerHTML=selected_Module+rightparam;
+}
+
+function setleft()
+{
+var leftvalue = document.controlForm.left.value;
+var leftparam="left:"+leftvalue;
+generic.InvokeMETAFunction(selected_Module, leftparam);
+myDiv.innerHTML=selected_Module+leftparam;
+}
+
+function settop()
+{
+var topvalue = document.controlForm.top.value;
+var topparam="top:"+topvalue;
+generic.InvokeMETAFunction(selected_Module, topparam);
+myDiv.innerHTML=selected_Module+topparam;
+}
+
+function setheight()
+{
+var heightvalue = document.controlForm.height.value;
+var heightparam="height:"+heightvalue;
+generic.InvokeMETAFunction(selected_Module, heightparam);
+myDiv.innerHTML=selected_Module+heightparam;
+}
+
+function setwidth()
+{
+var widthvalue = document.controlForm.width.value;
+var widthparam="width:"+widthvalue;
+generic.InvokeMETAFunction(selected_Module, widthparam);
+myDiv.innerHTML=selected_Module+widthparam;
+}
+
+function setvisibility()
+{
+var index = document.controlForm.visibility.selectedIndex;
+var visibilityvalue = document.controlForm.visibility.options[index].value;
+var visibilityparam="visibility:"+visibilityvalue;
+generic.InvokeMETAFunction(selected_Module, visibilityparam);
+myDiv.innerHTML=selected_Module+visibilityparam;
+}
+
+
+
+ function getimageupChoice()
+  {
+   var index = document.controlForm.imageupch.selectedIndex;
+   var value= document.controlForm.imageupch.options[index].value;
+   
+   if(value=="http")
+   selected_imageupmode="http://10.233.85.82/Resource/";
+   else if(value=="httpinvalid1")
+   selected_imageupmode="http://";
+   else if(value=="httpinvalid2")
+   selected_imageupmode="http://10.233.85.82";
+ 
+   
+   else if(value=="ftp")
+   selected_imageupmode="ftp://ftpadmin:ftpadmin@10.233.85.82/Resource/";
+   else if(value=="ftpinvalid1")
+   selected_imageupmode="ftp://";
+   else if(value=="ftpinvalid2")
+   selected_imageupmode="ftp://ftpadmin:ftpadmin@10.233.85.82";
+   
+   else if(value=="local")
+   selected_imageupmode="file://\\Android\\data\\Resource\\";
+   else if(value=="localinvalid1")
+   selected_imageupmode="file://";
+   else if(value=="localinvalid2")
+   selected_imageupmode="file://\\Android";
+   else if(value=="localinvalid3")
+   selected_imagedownmode="file:\\//Android//data//Resource//";
+
+
+   
+   myDiv.innerHTML=selected_Module+selected_imageupmode;
+  }
+  
+  
+ 
+  function getimagedownChoice()
+  {
+   var index = document.controlForm.imagedownch.selectedIndex;
+   var value= document.controlForm.imagedownch.options[index].value;
+ 
+   if(value=="http")
+   selected_imagedownmode="http://10.233.85.82/Resource/";
+   else if(value=="httpinvalid1")
+   selected_imagedownmode="http://";
+   else if(value=="httpinvalid2")
+   selected_imagedownmode="http://10.233.85.82";
+ 
+   
+   else if(value=="ftp")
+   selected_imagedownmode="ftp://ftpadmin:ftpadmin@10.233.85.82/Resource/";
+   else if(value=="ftpinvalid1")
+   selected_imagedownmode="ftp://";
+   else if(value=="ftpinvalid2")
+   selected_imageupmode="ftp://ftpadmin:ftpadmin@10.233.85.82";
+   
+   else if(value=="local")
+   selected_imagedownmode="file://\\Android\\data\\Resource\\";
+   else if(value=="localinvalid1")
+   selected_imagedownmode="file://";
+   else if(value=="localinvalid2")
+   selected_imagedownmode="file://\\Android";
+   else if(value=="localinvalid3")
+   selected_imagedownmode="file://Android//data//Resource//";
+
+   
+   myDiv.innerHTML=selected_Module+selected_imagedownmode;
+   
+   
+  }
+
+
+function setimageup()
+{
+getimageupChoice();
+var index = document.controlForm.imageupname.selectedIndex;
+var imageupvalue = document.controlForm.imageupname.options[index].value;
+if(imageupvalue=="emptyimage")
+{
+var imageupparam="imageup:url('"+selected_imageupmode+"')";
+}
+else if(imageupvalue=="emptyurl")
+{
+var imageupparam="imageup:url('')";
+}
+else if(imageupvalue=="emptyevent")
+{
+var imageupparam="imageup:";
+}
+else
+{
+var imageupparam="imageup:url('"+selected_imageupmode+imageupvalue+"')";
+}
+generic.InvokeMETAFunction(selected_Module, imageupparam);
+myDiv.innerHTML=selected_Module+imageupparam;
+
+}
+
+
+function setimagedown()
+{
+getimagedownChoice();
+var index = document.controlForm.imagedownname.selectedIndex;
+var imagedownvalue = document.controlForm.imagedownname.options[index].value;
+if(imagedownvalue=="emptyimage")
+{
+var imagedownparam="imagedown:url('"+selected_imagedownmode+"')";
+}
+else if(imagedownvalue=="emptyurl")
+{
+var imagedownparam="imagedown:url('')";
+}
+else if(imagedownvalue=="emptyevent")
+{
+var imagedownparam="imagedown:";
+}
+else
+{
+var imagedownparam="imagedown:url('"+selected_imagedownmode+imagedownvalue+"')";
+}
+generic.InvokeMETAFunction(selected_Module, imagedownparam);
+myDiv.innerHTML=selected_Module+imagedownparam;
+
+}
+
+
+//function setcolor()
+//{
+//var colorvalue = document.controlForm.color.value;
+//var colorparam="color:"+colorvalue;
+////generic.InvokeMETAFunction(selected_Module, colorparam);
+//myDiv.innerHTML=selected_Module+colorparam;
+//}
+
+
+
+
+
+
+ function setnull()
+ {
+ document.controlForm.right.value="";
+ document.controlForm.left.value="";
+ document.controlForm.top.value="";
+ document.controlForm.height.value="";
+ document.controlForm.width.value="";
+ document.controlForm.visibility.selectedIndex = 3;
+ document.controlForm.imageupname.selectedIndex = 0;
+ document.controlForm.imagedownname.selectedIndex = 0;
+ 
+ }
+ 
+ function setNegative()
+ {
+ document.controlForm.right.value="-100";
+ document.controlForm.left.value="-100";
+ document.controlForm.top.value="-100";
+ document.controlForm.height.value="-100";
+ document.controlForm.width.value="-100";
+ document.controlForm.visibility.selectedIndex = 3;
+ document.controlForm.imageupname.selectedIndex = 0;
+ document.controlForm.imagedownname.selectedIndex = 0;
+ 
+ }
+ 
+ function setZero()
+ {
+ document.controlForm.right.value="0";
+ document.controlForm.left.value="0";
+ document.controlForm.top.value="0";
+ document.controlForm.height.value="0";
+ document.controlForm.width.value="0";
+ document.controlForm.visibility.selectedIndex = 3;
+ document.controlForm.imageupname.selectedIndex = 0;
+ document.controlForm.imagedownname.selectedIndex = 0;
+ 
+ }
+ 
+ 
+ function setInvalid()
+ {
+ document.controlForm.right.value="a#ae";
+ document.controlForm.left.value="a#ae";
+ document.controlForm.top.value="a#ae";
+ document.controlForm.height.value="a#ae";
+ document.controlForm.width.value="##$$";
+ document.controlForm.visibility.selectedIndex = 3;
+ document.controlForm.imageupname.selectedIndex = 0;
+ document.controlForm.imagedownname.selectedIndex = 0;
+ 
+ }
+ 
+
+ 
+ function trimAll(sString) 
+ { 
+   while (sString.substring(0,1) == ' ') 
+    { 
+    sString = sString.substring(1, sString.length); 
+    } 
+   while (sString.substring(sString.length-1, sString.length) == ' ') 
+    { 
+    sString = sString.substring(0,sString.length-1); 
+    } 
+    return sString; 
+ } 
+ 
+ 
+
+  
+ 
+
+</script>
+</head>
+<body>
+<br /><br />
+<div id="myDiv">value</div>
+<form name="controlForm" id="controlForm" action="" >
+<input id="Back" type="button" value="Back" onclick="location.href='ControlAppearance.html'">
+<br /><br /><br />Select &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<select name="myChoice" id="myChoice" size=1" onchange="getmodulename();">
+<OPTION value="Select option" >Select option</OPTION>
+<OPTION value="addressbar" >addressbar</OPTION> 
+<OPTION value="BackButton" >backbutton</OPTION> 
+<OPTION value="ForwardButton">ForwardButton</OPTION> 
+<OPTION value="gobutton">gobutton</OPTION> 
+<OPTION value="HomeButton">HomeButton</OPTION> 
+<OPTION value="KeyState">KeyState</OPTION> 
+<OPTION value="MinimizeButton">minimizebutton</OPTION>
+<OPTION value="QuitButton">quitbutton</OPTION> 
+<OPTION value="ReloadButton">reloadbutton</OPTION> 
+<OPTION value="SIPButton">SIPbutton</OPTION> 
+<OPTION value="StopButton">Stopbutton</OPTION> 
+<OPTION value="ZoomTextButton">ZoomTextButton</OPTION> 
+</select>
+<br />
+<hr />
+<table>
+<tr>
+<td>Right&nbsp;&nbsp;&nbsp;&nbsp;<input id="right" type="text" size=15 value="40"/></td>
+<td><input type="button" id="rightbutton" value="right" onclick="setright();"></td>
+</tr>
+
+<tr>
+<td>Left&nbsp;&nbsp;&nbsp;&nbsp;<input id="left" type="text" size=15 value="40"/></td>
+<td><input type="button" id="leftbutton" value="left" onclick="setleft();"></td>
+</tr>
+
+<tr>
+<td>Top&nbsp;&nbsp;<input id="top" type="text" size=15 value="100"/></td>
+<td><input type="button" id="topbutton" value="top" onclick="settop();"</td>
+</tr>
+
+<tr>
+<td> Height&nbsp;&nbsp;<input id="height" type="text" size=15 value="100"/></td>
+<td><input type="button" id="heightbutton" value="height" onclick="setheight();"</td>
+</tr>
+
+<tr>
+<td>Width&nbsp;&nbsp; <input id="width" type="text" size=15 value="100"/></td>
+<td><input type="button" id="widthbutton" value="width" onclick="setwidth();"</td>
+</tr>
+
+<tr>
+<td>Visibility&nbsp;&nbsp; <select name="visibile" id="visibility"> 
+<OPTION value="visible" >visible</OPTION> 
+<OPTION value="hidden" >hidden</OPTION> 
+<OPTION value="aaaa" >invalid</OPTION> 
+<OPTION value="" >empty</OPTION> 
+<OPTION value="Select option" >Select</OPTION>
+</select>
+</td>
+<td><input type="button" id="visibilitybutton" value="Set visibility" onclick="setvisibility();"</td>
+</tr>
+
+
+
+
+
+<tr>
+<td>Imageup Mode:&nbsp;<select name="imageupch" id="imageupch" size=1"> 
+<OPTION value="http" >http</OPTION> 
+<OPTION value="httpinvalid1" >httpinvalid1</OPTION> 
+<OPTION value="httpinvalid2" >httpinvalid2</OPTION> 
+<OPTION value="ftp" >ftp</OPTION> 
+<OPTION value="ftpinvalid1" >ftpinvalid1</OPTION> 
+<OPTION value="ftpinvalid2" >ftpinvalid2</OPTION>
+<OPTION value="local" >local</OPTION> 
+<OPTION value="localinvalid1" >localinvalid1</OPTION> 
+<OPTION value="localinvalid2" >localinvalid2</OPTION> 
+<OPTION value="localinvalid3" >localinvalid3</OPTION>
+<OPTION value="Select option" >Select</OPTION>
+</select>
+</td>
+</tr>
+
+<tr>
+<td>ImageupName:&nbsp;<select name="imageupname" id="imageupname" size=1"> 
+<OPTION value="emptyimage" >emptyimage</OPTION> 
+<OPTION value="emptyurl" >emptyurl</OPTION> 
+<OPTION value="emptyevent" >emptyevent</OPTION> 
+<OPTION value="BMW.bmp" >BMW.bmp</OPTION> 
+<OPTION value="Sym.bmp" >Sym.bmp</OPTION> 
+<OPTION value="Ferrari.JPG" >Ferrari.JPG</OPTION> 
+<OPTION value="Infinity.jpeg" >Infinity.jpeg</OPTION> 
+<OPTION value="Symbol.gif" >Symbol.gif</OPTION> 
+<OPTION value="Porsche.gif" >Porsche.gif</OPTION> 
+<OPTION value="Symbol.dfg" >invalid(.dfg)</OPTION>
+</select>
+</td>
+<td><input type="button" id="imageupbutton" value="SetImageUp" onclick="setimageup();"</td>
+</tr>
+
+
+<tr>
+<td>Imagedown Mode:&nbsp;<select name="imagedownch" id="imagedownch" size=1"> 
+<OPTION value="http" >http</OPTION> 
+<OPTION value="httpinvalid1" >httpinvalid1</OPTION> 
+<OPTION value="httpinvalid2" >httpinvalid2</OPTION> 
+<OPTION value="ftp" >ftp</OPTION> 
+<OPTION value="ftpinvalid1" >ftpinvalid1</OPTION> 
+<OPTION value="ftpinvalid2" >ftpinvalid2</OPTION>
+<OPTION value="local" >local</OPTION> 
+<OPTION value="localinvalid1" >localinvalid1</OPTION> 
+<OPTION value="localinvalid2" >localinvalid2</OPTION> 
+<OPTION value="localinvalid3" >localinvalid3</OPTION>
+<OPTION value="Select option" >Select</OPTION>
+</select>
+</td>
+</tr>
+
+<tr>
+<td>ImagedownName:&nbsp;<select name="imagedownname" id="imagedownname" size=1"> 
+<OPTION value="emptyimage" >emptyimage</OPTION> 
+<OPTION value="emptyurl" >emptyurl</OPTION>
+<OPTION value="emptyevent" >emptyevent</OPTION>
+<OPTION value="BMW.bmp" >BMW.bmp</OPTION> 
+<OPTION value="Sym.bmp" >Sym.bmp</OPTION> 
+<OPTION value="Ferrari.JPG" >Ferrari.JPG</OPTION> 
+<OPTION value="Infinity.jpeg" >Infinity.jpeg</OPTION> 
+<OPTION value="Symbol.gif" >Symbol.gif</OPTION> 
+<OPTION value="Porsche.gif" >Porsche.gif</OPTION> 
+<OPTION value="Symbol.dfg" >invalid(.dfg)</OPTION> 
+</select>
+</td>
+<td><input type="button" id="imagedownbutton" value="SetImageDown" onclick="setimagedown();"</td>
+</tr>
+
+
+
+<!--<tr>
+<td>Color&nbsp;&nbsp; <input id="color" type="text" value="#FFFFFF"  size=15 /> </td>
+<td><input type="button" id="colorbutton" value="Color" onclick="setcolor();"</td>
+</tr>-->
+</table>
+<br />
+<hr />
+&nbsp;&nbsp;
+<!--<input id="submit" type="button" value="submit" onclick="setallparams();" />-->
+&nbsp;&nbsp;&nbsp;
+<input type="reset" value="Reset!" />
+&nbsp;&nbsp;&nbsp;
+<input type="button" value="setNull" onclick="setnull();" /> 
+&nbsp;&nbsp;&nbsp;
+<input type="button" value="setNegative" onclick="setNegative();" /> 
+&nbsp;&nbsp;&nbsp;
+<input type="button" value="setZero" onclick="setZero();" /> 
+&nbsp;&nbsp;&nbsp;
+<input type="button" value="setInvalid" onclick="setInvalid();" /> 
+</form>
+</body>
+</html>

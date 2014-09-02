@@ -1,0 +1,356 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+<title>PB Device Application Test</title>
+<META HTTP-Equiv="sipbutton" Content="visibility:visible">
+
+
+
+</head>
+<body onLoad="doTime();">
+
+<form id="frm" action="">
+<div id="timeSpan">Current Time...</div>
+<select id="cboyear">
+<script>
+	for(i=2000; i<=2012; i++)
+		document.write('<option value="' + i + '">' + i + '</option>');
+</script>
+</select>
+<select id="cbomonth">
+<script>
+	for(i=1; i<=12; i++)
+		document.write('<option value="' + (i<10?('0'+i):(i)) + '">' + (i<10?('0'+i):(i)) + '</option>');
+</script>
+</select>
+<select id="cboday">
+<script>
+	for(i=1; i<=31; i++)
+		document.write('<option value="' + (i<10?('0'+i):(i)) + '">' + (i<10?('0'+i):(i)) + '</option>');
+</script>
+</select>
+<select id="cbohour">
+<script>
+	for(i=0; i<=23; i++)
+		document.write('<option value="' + (i<10?('0'+i):(i)) + '">' + (i<10?('0'+i):(i)) + '</option>');
+</script>
+</select>
+<select id="cbomin">
+<script>
+	for(i=0; i<=59; i++)
+		document.write('<option value="' + (i<10?('0'+i):(i)) + '">' + (i<10?('0'+i):(i)) + '</option>');
+</script>
+</select>
+
+<input type=button onclick="doSet();" value="Alarm">
+<br>
+<div id="outputSpan1">Waiting...</div>
+<div></div>
+
+
+<hr>
+Alarm MetaTag
+
+<tr>
+	Interval 1	<td><Textarea id="txtInterval1"cols="10" rows="1">00-00-30</Textarea></td>
+	</tr><br>
+
+<tr>
+	Interval 2	<td><Textarea id="txtInterval2"cols="10" rows="1"></Textarea></td>
+	</tr><br>
+
+<tr>
+	Repeat<td>	<Textarea id="txtRepeat"cols="10" rows="1">True</Textarea></td>
+	</tr><br>
+<!--
+<input type="radio" name="group1" value="javascript">Navigate to javascript function
+<input type="radio" name="group1" value="HTML">Navigate to HTML Page
+-->
+Alarm Event
+<select name="eventdropdown" id="eventdropdown">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="Javascript">Javascript</option>
+<option value="URL">URL</option>
+</select>
+<br>
+
+<input type=button onclick="setInterval();" value="Interval">
+
+<input type=button onclick="clearAlarm();" value="Clear"><br><br>
+<hr>
+<br>
+
+<hr>
+Application
+<select name="appdropdown" id="appdropdown" onChange="selectApplication();">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="Quit">Quit</option>
+<option value="Minimize">Minimize</option>
+<option value="Restore">Restore</option>
+<option value="Null">Null</option>
+<option value="MandQ">MandQ</option>
+</select>
+<hr>
+<br>
+
+<hr>
+Backlight
+<select name="backdropdown" id="backdropdown">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="On">On</option>
+<option value="Off">Off</option>
+</select>
+<tr>
+	Intensity	<td><Textarea id="txtIntensity"cols="10" rows="1">2</Textarea></td>
+	</tr><br>
+<input type=button onclick="setBacklight();" value="Backlight">
+<hr>
+<br>
+
+<hr>
+Application
+<select name="devdropdown" id="devdropdown" onChange="selectDevice();">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="Suspend">Suspend</option>
+<option value="Calibrate">Calibrate</option>
+<option value="Null">Null</option>
+<option value="SandC">SandC</option>
+</select>
+<hr>
+<br>
+
+<br><br>
+<A HREF="./Device Application.html">Back</A>
+
+</form>
+</body>
+</html>
+<script language=javascript>
+try
+{
+var generic = new ActiveXObject("PocketBrowser.generic");
+}
+catch(err)
+{
+var GenericPlugin = document.createElement('embed'); 
+GenericPlugin.setAttribute('id',"embed1"); 
+GenericPlugin.setAttribute('type',"application/x-wtg-legacy-generic"); 
+GenericPlugin.setAttribute('hidden',"true"); 
+
+// Attach the plugin embed tags to the body 
+var theBody = document.getElementsByTagName('body')[0]; 
+theBody.appendChild(GenericPlugin); 
+
+
+}
+var selectedValue="";
+var eventScript="";
+var now = new Date();
+//document.frm.cboyear.selectedIndex = (now.getYear()-1980);
+//document.frm.cbomonth.selectedIndex = (now.getMonth());
+//document.frm.cboday.selectedIndex = (now.getDate()-1);
+//document.frm.cbohour.selectedIndex = (now.getHours());
+//document.frm.cbomin.selectedIndex = (now.getMinutes());
+
+function doTime()
+{
+	now = new Date();
+	timeSpan.innerHTML = now;
+	setTimeout('doTime();', 30000)
+}
+
+function doSet() 
+{
+
+
+    var w = document.frm.cboyear.selectedIndex;
+    var year = document.frm.cboyear.options[w].value;
+    
+    w = document.frm.cbomonth.selectedIndex;
+    var month = document.frm.cbomonth.options[w].value;
+
+    w = document.frm.cboday.selectedIndex;
+    var day = document.frm.cboday.options[w].value;
+
+    w = document.frm.cbohour.selectedIndex;
+    var hour = document.frm.cbohour.options[w].value;
+
+    w = document.frm.cbomin.selectedIndex;
+    var min = document.frm.cbomin.options[w].value;
+
+    var sTime = year+'-'+month+'-'+day+'t'+hour+'-'+min+'-00-00-00'; 
+    //var sTime = (cboyear.value + '-' + cbomonth.value + '-' + cboday.value + 't' + cbohour.value + ':' + cbomin.value + ':00-05-00');
+    alert(sTime);
+	
+	//generic.InvokeMETAFunction('Alarm', 'Repeat:False');
+	generic.InvokeMETAFunction('Alarm', 'Time:'+sTime);
+	
+	
+    generic.InvokeMETAFunction("Alarm", "AlarmTriggered:url('javascript:alert('Alarm Triggered');')");
+	generic.InvokeMETAFunction('Alarm', 'Set');
+}
+
+
+function doAlarm()
+{
+	outputSpan1.innerHTML = 'Alarm Triggered';
+}
+
+function setInterval()
+{
+	var RepeatValue = frm.txtRepeat.value;
+	var Repe = "Repeat:"+RepeatValue;
+	alert(Repe);
+	generic.InvokeMETAFunction('Alarm', Repe);
+
+	var IntervalValue = frm.txtInterval1.value;
+	var interv = "Interval:"+IntervalValue;
+	generic.InvokeMETAFunction('Alarm', interv);
+
+	if(frm.txtInterval2.value.length != 0)
+	{
+		var IntervalVal = frm.txtInterval2.value;
+		var inter = "Interval:"+IntervalVal;
+		alert(inter);
+		generic.InvokeMETAFunction('Alarm', inter);
+	}
+		
+	/*for (var i=0; i < frm.group1.length; i++)
+   	{   
+      		if (frm.group1[i].checked)
+      		{
+      			var type = frm.group1[i].value;
+      		}
+   	}
+	if(type=="javascript")
+	{
+	    
+		generic.InvokeMETAFunction("Alarm","AlarmTriggered:url('javascript:alert('Alarm Triggered');')");
+	}
+	else if(type=="HTML")
+	{
+		generic.InvokeMETAFunction("Alarm","AlarmTriggered:url('http://www.ask.com')");
+	}*/
+	var sltevent=frm.eventdropdown.selectedIndex;
+	var selectedevent = frm.eventdropdown.options[sltevent].value;
+	switch(selectedevent)
+	{
+		case 'Javascript':
+
+			generic.InvokeMETAFunction("Alarm","AlarmTriggered:url('javascript:alert('Alarm Triggered');')");
+			break;
+
+		case 'URL':
+			generic.InvokeMETAFunction("Alarm","AlarmTriggered:url('http://157.235.207.158/pb3.x/index.html')");
+			break;
+	}
+	generic.InvokeMETAFunction('Alarm', 'Set');
+	
+}
+
+function clearAlarm()
+{
+    generic.InvokeMETAFunction('Alarm', 'Clear');
+}
+
+
+
+var generic = new ActiveXObject("PocketBrowser.Generic");
+
+function selectDevice()
+{
+	var sltdev=frm.devdropdown.selectedIndex;
+	var selecteddev = frm.devdropdown.options[sltdev].value;
+	alert(selecteddev);
+	switch(selecteddev)
+	{
+		case 'Suspend':
+
+			generic.InvokeMETAFunction('Device', 'Suspend');
+			break;
+
+		case 'Calibrate':
+
+			generic.InvokeMETAFunction('Device', 'Calibrate');
+			break;
+		
+		case 'Null':
+
+			generic.InvokeMETAFunction('Device', '');
+			break;
+
+		case 'SandC':
+
+			generic.InvokeMETAFunction('Device', 'Suspend');
+			generic.InvokeMETAFunction('Device', 'Calibrate');
+			break;
+	}
+}
+
+function restore()
+{
+    generic.InvokeMETAFunction('Application', 'Restore');
+}
+
+function selectApplication()
+{
+	var sltApp=frm.appdropdown.selectedIndex;
+	var selectedApp = frm.appdropdown.options[sltApp].value;
+	switch(selectedApp)
+	{
+		case 'Quit':
+
+			generic.InvokeMETAFunction('Application', 'Quit');
+			break;
+
+		case 'Minimize':
+
+			generic.InvokeMETAFunction('Application', 'Minimize');
+			break;
+		
+		case 'Restore':
+	
+			generic.InvokeMETAFunction('Application', 'Minimize');
+			//generic.InvokeMETAFunction('Application', 'Restore');
+			setTimeout("restore()",3000);
+			break;
+
+		case 'Null':
+
+			generic.InvokeMETAFunction('Application', '');
+			break;
+
+		case 'MandQ':
+
+			generic.InvokeMETAFunction('Application', 'Minimize');
+			generic.InvokeMETAFunction('Application', 'Quit');
+			break;
+	}
+}
+
+function setBacklight()
+{
+	var SelectedValue = frm.backdropdown.selectedIndex;
+	var selectBacklight = frm.backdropdown.options[SelectedValue].value;	
+
+	var IntensityValue = frm.txtIntensity.value;
+	var IValue = "Intensity:"+IntensityValue;
+	alert(IValue);
+	switch(selectBacklight)
+	{
+		case 'On':
+
+			//mygeneric.InvokeMETAFunction('backlight', 'On');
+			generic.InvokeMETAFunction('backlight-On', IValue);
+			break;
+
+		case 'Off':
+
+			generic.InvokeMETAFunction('backlight', 'Off');
+			break;
+
+	}
+}
+
+</script>

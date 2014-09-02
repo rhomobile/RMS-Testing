@@ -1,0 +1,141 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+    <title> Network Test</title>
+    <META HTTP-Equiv="MinimizeButton" content="Visibility:Visible;Left:0">
+ 
+
+
+
+
+</head>
+<body>
+
+
+<br><br><br>
+<div id="bat">Network readings should appear here </div>
+<div id="cat"> </div>
+
+<BR><BR>
+
+<input type=button onclick="NetworkEventPeriodic();" value="NetworkEventPeriodic">
+
+<BR><BR>
+
+<input type=button onclick="StopNetworkcheckRunning();" value="StopNetworkcheckRunning">
+
+<BR><BR>
+
+<input type=button onclick="PeriodicEventURL();" value="PeriodicEventURL">
+
+<BR><BR>
+
+<input type=button onclick="SetConnectionTimeout();" value="ConnectionTimeout">
+
+<BR><BR>
+
+<input type=button onclick="SetIP();" value="SetIP">
+<BR><BR>
+
+<input type=button onclick="SetPort();" value="SetPort">
+<BR><BR>
+
+
+
+<input type=button onclick="SetNetworkCheckTimeout();" value="NetworkCheckTimeout">
+<BR><BR>
+
+<input type=button onclick="PeriodickCheckJSON();" value="PeriodickCheckJSON">
+<BR><BR>
+
+
+
+<A HREF="./emmlNetwork.html">Back</A>
+</body>
+</html>
+<script language=javascript>
+    
+    //var myobjGeneric = new ActiveXObject("PocketBrowser.Generic");
+     var count = 0;
+//     try
+//{
+//var generic = new ActiveXObject("PocketBrowser.generic");
+//}
+//catch(err)
+//{
+//var GenericPlugin = document.createElement('embed'); 
+//GenericPlugin.setAttribute('id',"embed1"); 
+//GenericPlugin.setAttribute('type',"application/x-wtg-legacy-generic"); 
+//GenericPlugin.setAttribute('hidden',"true"); 
+
+//// Attach the plugin embed tags to the body 
+//var theBody = document.getElementsByTagName('body')[0]; 
+//theBody.appendChild(GenericPlugin); 
+
+
+//}
+
+    function NetworkEventPeriodic() {
+        generic.InvokeMETAFunction('Network', "networkevent:url('javascript:onNetworkPoll('%s');')");
+        generic.InvokeMETAFunction('Network',"start");
+    }
+
+  
+
+    function StopNetworkcheckRunning() {
+        generic.InvokeMETAFunction('Network',"stop");
+    }
+ 
+
+
+    function onNetworkPoll(conn) {
+       count++;
+       cat.innerHTML = "Count = "+count;
+       bat.innerHTML = "Connection status: "+conn;
+       return;
+    }
+
+   
+
+    
+
+    function PeriodicEventURL(){
+        generic.InvokeMETAFunction("Network", "networkevent:url('http://tandv.wtgdev.net/NavigateUrl.html?Connection=%s')");
+        generic.InvokeMETAFunction('Network',"start");
+    }
+
+   
+    function SetIP() {
+        generic.InvokeMETAFunction('Network', "host:10.233.85.82"); 
+    }
+    function SetPort()
+    {
+        generic.InvokeMETAFunction('Network', "port:80"); 
+    }
+
+   
+    function SetNetworkCheckTimeout()
+    {
+        bat.innerHTML = "Network check timeout";
+        generic.InvokeMETAFunction('Network', "NetworkPollInterval:60000");
+    }
+  function SetConnectionTimeout()
+    {
+        bat.innerHTML = "Connection timeout";
+        generic.InvokeMETAFunction('Network', "ConnectionTimeout:60000");
+    }
+
+    function PeriodickCheckJSON()
+    {
+        generic.InvokeMETAFunction('Network', "networkevent:url('javascript:onNetworkPollJSON(%json);')");
+        generic.InvokeMETAFunction('Network',"start");
+    }
+    function onNetworkPollJSON(json)
+    {
+       bat.innerHTML = "Connection status: "+json.connectionInformation;
+       return;
+    }
+    
+</script>
+

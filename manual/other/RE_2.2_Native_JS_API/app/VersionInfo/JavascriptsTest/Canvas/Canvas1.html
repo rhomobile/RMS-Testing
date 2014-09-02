@@ -1,0 +1,65 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+<META HTTP-Equiv="AddressBar" content="Visibility:hidden">
+<title>HTML5 Canvas</title>
+<script type="text/javascript" src="test.js">
+
+</script>
+</head>
+<body>
+<br /><br />HTML5 Canvas<br />
+<input type="image" id="myImage" src="HTML5_Connectivity_32.png" />
+<input type="button" id="button5" value="GetContextofCanvas" onclick="getContext()" />
+<input type="button" id="button1" value="Create Rectangle" onclick="createRectArea()" />
+<input type="button" id="button9" value="Create another Rectangle" onclick="createAnotherRectArea()" />
+<input type="button" id="button10" value="Create clip" onclick="clipWithText()" />
+
+<input type="button" id="button8" value="Create Circle" onclick="createCircle()" />
+<input type="button" id="button2" value="Create Linear Gradient" onclick="createLinearGrad()" />
+<input type="button" id="button3" value="Create Radial Gradient" onclick="createRadialGrad()" />
+<input type="button" id="button4" value="Create Patterns" onclick="createPattern()" />  
+<input type="button" id="button6" value="Clear Canvas" onclick="clearCanvas()" /> 
+<input type="button" id="button7" value="Create Cursor" onclick="buildSpinner({ x : 50, y : 50, size : 20, degrees : 30 });" /> 
+
+
+<br />
+Line CAP:<select name="myLine" id="myLine" onchange="selectLineIndex();">
+<option value="">CreateLine</option>
+<option value="round">round</option>
+<option value="butt">butt</option>
+<option value="square">square</option>
+</select><br />
+
+Line Join:<select name="myLineJoin" id="myLineJoin" onchange="selectLineJoinIndex();">
+<option value="">LineJoin</option>
+<option value="miter">miter</option>
+<option value="bevel">bevel</option>
+<option value="round">round</option>
+</select><br />
+
+<div id="myMiterLimit"></div><br />
+
+ShawdowColor:<textarea id="shawdowColorText" name="shawdowColorText">#000000</textarea><br />
+
+ShawdowStyle:<select name="shawdowStyle" id="shawdowStyle" onchange="selectshawdowStyle();">
+<option value="">Select ShawdowStyle</option>
+<option value="Blur">Blur</option>
+<option value="OffsetX">OffsetX</option>
+<option value="OffsetY">OffsetY</option>
+</select><br />
+
+<div id="myShawdowStyle"></div><br />
+
+CreateCurve:<select name="curveType" id="curveType" onchange="selectCurveType();">
+<option value="">Select curveType</option>
+<option value="bezier">bezier</option>
+<option value="quadratic">quadratic</option>
+<option value="arcTo">arcTo</option>
+</select><br />
+
+<canvas id="myCanvas" width="300" height="300" style="border:1px solid #d3d3d3;"></canvas>
+</body>
+</html>
+

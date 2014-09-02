@@ -1,0 +1,220 @@
+﻿<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+    <title>Linear Gesture Settings</title>
+<meta name="mobileoptimized" content="0" />
+<META HTTP-Equiv="SIPbutton" Content="visibility:visible">
+<META HTTP-Equiv="quitbutton" Content="Visibility:Visible">
+<META HTTP-Equiv="ReloadButton" Content="Visibility:Visible">
+</head>
+<body>
+<form id="frmLinearGestures" action="LinearGesture_Generic.asp" method="GET">
+
+<h2>LinearGesture Using generic(Keyword)</h2>
+<br>
+For Scanning set gesture ID to "Scan" For showing battery "Battery" and for showing Signal "Signal" 
+<table>
+    <tr>
+        <td><a href="main"></a></td>
+    </tr>
+    
+    <tr>
+    <td>
+    Preset   :- 
+    </td>
+    <td>
+<select name="dropdownLinearPreset" id="dropdownLinearPreset">
+<option value="NULL">NULL</option>
+<option value="left-right">left-right</option>
+<option value="right-left">right-left</option>
+<option value="top-bottom">top-bottom</option>
+<option value="bottom-top">bottom-top</option>
+<option value="Test">Invalid String("Test")</option>
+<option value="">Empty String</option>
+
+</select>
+</td>
+</tr>
+<tr>
+<td>
+Diagonstics:- 
+</td>
+<td>
+<select name="dropdownDiagonstics" id="dropdownDiagonstics">
+<option value="TRUE">TRUE</option>
+<option value="FALSE">FALSE</option>
+<option value="NULL">NULL</option>
+<option value="TEST">Invalid string("Test")</option>
+<option value="">EMPTY STRING</option>
+</select>
+
+</td>
+</tr>
+
+<tr>
+<td>
+Input ID:- 
+</td>
+<td>
+<input type=text name="txtLinearID" id="txtLinearID" value="myLinearGest" />
+</td>
+</tr>          
+<tr>
+<td>
+<select name="mydropdown1" id="mydropdown1">
+<option value="JavaScript">JavaScript</option>
+<option value="HTML">HTML</option>
+<option value="JSON">JSON</option>
+<option value="DETACHEVENT">DETACHEVENT</option>
+<option value="EMPTYEVENT">EMPTYEVENT</option>
+</select>
+</td>
+</tr>
+</table>
+
+
+
+
+<table>
+
+
+<tr>
+<td>
+start-x:-
+</td>
+<td>
+<input type=text name="txtstartx" id="Text1" value="10" />
+</td>
+</tr>  
+ 
+<tr>
+<td>
+start-y:-
+</td>
+<td>
+<input type=text name="txtstarty" id="Text2" value="300" />
+</td>
+</tr>   
+
+<tr>
+<td>
+end-x:-
+</td>
+<td>
+<input type=text name="txtendx" id="Text3" value="300" />
+</td>
+</tr>  
+
+<tr>
+<td>
+end-y:-
+</td>
+<td>
+<input type=text name="txtendy" id="Text4" value="300" />
+</td>
+</tr>  
+
+
+
+<tr>
+<td>
+tolerance:- 
+</td>
+<td>
+<input type=text name="txttolerance" id="txttolerance" value="200" />
+</td>
+</tr>  
+
+
+<tr>
+<td>
+skew:- 
+</td>
+<td>
+<input type=text name="txtskew" id="txtskew" value="25" />
+</td>
+</tr>
+  
+<tr>
+<td>
+deviation:- 
+</td>
+<td>
+<input type=text name="txtdeviation" id="txtdeviation" value="40" />
+</td>
+</tr>
+  
+  
+<tr>
+<td>
+region-width:- 
+</td>
+<td>
+<input type=text name="txtregionwidth" id="txtregionwidth" value="20" />
+</td>
+</tr> 
+
+
+<tr>
+<td>
+sensitivity:- 
+</td>
+<td>
+<input type=text name="txtsensitivity" id="txtsensitivity" value="60" />
+</td>
+</tr>  
+
+<tr>
+<td>Type:- 
+</td>
+<td>
+<input type=text name="txtType" id="txtType" readonly value="Linear" />
+</td>
+</tr> 
+
+
+
+<tr>
+<td>Number Of Gestures:- 
+</td>
+<td>
+<input type=text name="txtNumber" id="txtNumber" value="1" />
+</td>
+</tr> 
+
+<tr>
+<td>
+<input type="button" onclick="setNull();" value="setNull">
+</td>
+</tr>
+
+
+  
+</table>
+<hr>
+<input type=submit><br />
+<P><INPUT TYPE="button" VALUE="Back" ONCLICK="location.href='Gesture_Index.html'"></P>
+
+</form>
+</body>
+</html>
+
+<script>
+function setNull()
+{
+frmLinearGestures.txtLinearID.value="NULL";
+frmLinearGestures.Text1.value="NULL";
+frmLinearGestures.Text2.value="NULL";
+frmLinearGestures.Text3.value="NULL";
+frmLinearGestures.Text4.value="NULL";
+frmLinearGestures.txttolerance.value="NULL";
+frmLinearGestures.txtskew.value="NULL";
+frmLinearGestures.txtdeviation.value="NULL";
+frmLinearGestures.txtregionwidth.value="NULL";
+frmLinearGestures.txtsensitivity.value="NULL";
+
+}
+</script>
+
+

@@ -1,0 +1,37 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+<META HTTP-Equiv="MinimizeButton" Content="Top:10; Left:10; Visibility:Visible">
+ 
+</head>
+<body>
+<!--<embed id="embed4" type="application/x-wtg-legacy-nosip" width="1" height="1"> </embed>-->
+<br /><br /><br />
+<div id="myDiv">Message</div>
+<P>ACtiveX</P>
+<P><INPUT TYPE="button" VALUE="noSIP=True" ONCLICK="doSync();">
+<P><INPUT TYPE="button" VALUE="noSIP=False" ONCLICK="doSync1();">
+<P><INPUT TYPE="button" VALUE="Back" ONCLICK="location.href='../AirBEAM.html'"></P>
+
+<script language="javascript">
+var myObj = new ActiveXObject("NoSIP.NSEdit");
+   var retVal="";
+   function doSync()
+   {
+     
+      myObj.ShowSIP(true);
+   }
+   
+    function doSync1()
+   {
+     
+      myObj.ShowSIP(false);
+   }
+</script>
+</body>
+</html>
+
+
+
+

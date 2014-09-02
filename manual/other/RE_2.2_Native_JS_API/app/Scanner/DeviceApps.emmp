@@ -1,0 +1,113 @@
+.Alarm1
+{
+Alarm-Interval:00-00-40;
+Alarm-Repeat:True;
+Alarm-AlarmTriggered:url('javascript:alert('Alarm Triggered');');
+Alarm-Set;
+}
+
+.Timer1
+{
+Timer-Interval:5000;
+Timer-Timeout:url('javascript:doTimer('%s');');
+Timer-Start;
+}
+
+.Application1
+{
+Application-Minimize;
+}
+
+.Backlight1
+{
+Backlight-ON;
+Backlight-20;
+}
+
+.Device1
+{
+Device-Calibrate;
+}
+
+.Hourglass1
+{
+Hourglass-left:50;
+Hourglass-top:50; 
+Hourglass-visibility:visible;
+}
+
+.Keylight1
+{
+Keylight-off;
+}
+
+.Reboot1
+{
+Reboot-BootType:Warm;
+}
+
+.ScreenOrientation1
+{
+ScreenOrientation-UpsideDown;
+}
+
+.SIP1
+{
+SIP-Left:40;
+SIP-Top:40;
+}
+
+.Stylus1
+{
+Stylus-disabled;
+}
+
+.TextSizeL
+{
+TextSize-Largest;
+}
+
+.TextSizeS
+{
+TextSize-Medium;
+}
+
+.VolumeMax
+{
+Volume-SetVolume:0xffff;
+}
+
+.VolumeMin
+{
+Volume-SetVolume:0x0000;
+}
+
+.Battery
+{
+Battery-Visibility:visible;
+Battery-Left:50;
+Battery-IconPosition:Top;
+
+}
+.Application
+{
+Application-Quit;
+}
+.SignatureCapture
+{
+ SignatureCapture-top:50;
+ SignatureCapture-width:100;
+ SignatureCapture-height:250;
+ SignatureCapture-border:visible;
+ SignatureCapture-visibility:visible;
+ SignatureCapture-Username:uploadtest;
+ SignatureCapture-Password:letmein;
+ SignatureCapture-SignatureSaveEvent:url('Javascript:onCaptured('%s');');
+ SignatureCapture-Destination:url('file://\application\\sigme.bmp')
+ 
+}
+.AutoScreen
+{
+ ScreenOrientation-autorotate:;
+ 
+}

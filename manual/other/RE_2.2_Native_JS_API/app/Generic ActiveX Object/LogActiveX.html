@@ -1,0 +1,80 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+
+</head>
+<body>
+<SCRIPT language="javascript">
+var mygeneric = new ActiveXObject("PocketBrowser.generic");
+function dolog()
+{
+    
+    var rValue3 = mygeneric.Log('This is high priority log my dear3', 3);
+    Div3.innerHTML="PHigh  "+rValue3;
+    var rValue2 = mygeneric.Log('This is medium priority log my dear2', 2);
+    Div2.innerHTML="PMedium  "+rValue2;
+    var rValue1 = mygeneric.Log('This is low priority log my dear1', "1");
+    Div1.innerHTML="Plow  "+rValue1;
+    var rValue0 = mygeneric.Log('This is invalid priority log my dear0', "0");
+    Div4.innerHTML="PInvalid  "+rValue0;
+	
+    
+ }
+ 
+ function getUUID()
+ {
+ var myUUID = mygeneric.UUID();
+alert(myUUID);
+ 
+ }
+ 
+ function getOEM()
+ {
+ var myoem = mygeneric.OEMInfo();
+ alert(myoem);
+ 
+ }
+ 
+ function getUUIDP()
+ {
+ //var myUUIDP = mygeneric.UUID;
+Textarea1.value=mygeneric.UUID;
+ 
+ }
+ 
+ function getOEMP()
+ {
+ //var myoemP = mygeneric.OEMInfo;
+Textarea1.value=mygeneric.OEMInfo;
+ 
+ }
+
+
+
+</SCRIPT>
+<BR><BR>
+<p>Generic Log Test and UUID</p>
+<BR><BR>
+<div id="Div1">Plow</div>
+<div id="Div2">PMedium</div>
+<div id="Div3">PHigh</div>
+<div id="Div4">PInvalid</div>
+<br />
+<Textarea id="Textarea1"cols="21" rows="4">retrieve value in text area</Textarea><br />
+<P><INPUT TYPE="button" VALUE="User log entry" ONCLICK="dolog();"></P>
+<p><input type="button" value="UUIDMethod" onclick="getUUID();" /></p>
+<p><input type="button" value="OEMMethod" onclick="getOEM();" /></p>
+<p><input type="button" value="UUIDProperty" onclick="getUUIDP();" /></p>
+<p><input type="button" value="OEMProperty" onclick="getOEMP();" /></p>
+<br />
+<A href="./Generic ActiveX Object.html">Back</A>
+
+
+</body>
+</html>
+
+
+
+
+

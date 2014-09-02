@@ -1,0 +1,342 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+    <title>NEON KeyCapture Test</title>
+<META HTTP-Equiv="KeyState" content="visibility:visible">
+
+</head>
+<body>
+<H2>KeyHandling Using ActiveX objects</H2>
+<form id="frmKeykandler" action="" onload="AABB();">
+<meta name="mobileoptimized" content="0" />
+<br>
+    <P><INPUT TYPE="button" VALUE="Back" ONCLICK="location.href='KeyHandling_Index.html'"></P>
+<br>
+<div id="KeyEventDiv">KeyEvent:-</div>
+<table border=1 width=100%>
+   
+     <tr>
+        <Textarea id="txtInput" cols="15" rows="2"></Textarea>
+     </tr>
+     <tr>
+        <Textarea id="TexInput2" cols="15" rows="2"></Textarea>
+    </tr>
+    
+     
+</table>
+
+<br>
+
+Key Captured:<td><Textarea id="txtkeyCaptured"cols="10" rows="1"></Textarea></td>
+<hr>
+
+
+KeyEvent:- 
+<select name="mydropdown5" id="mydropdown5">
+<option value="JavaScript">JavaScript</option>
+<option value="HTML">HTML</option>
+<option value="JSON">JSON</option>
+<option value="DETACHTRIGGEREVENT">DETACHTRIGGEREVENT</option>
+<option value="EMPTYTRIGGEREVENT">EMPTYTRIGGEREVENT</option>
+
+
+
+</select>
+
+
+
+
+<table>
+
+<tr>
+<td><a name="Attach key with Dispatch"></a></td>
+</tr>
+
+<tr>
+<td>Key to register:</td>
+<td><Textarea id="txtRegisterKey"cols="10" rows="1">all</Textarea></td>
+</tr>
+<tr>
+<td>Select Dispatchvalue</td>
+<td><select name="mydropdown" id="SelectDispatchValue">
+<option value="True">True</option>
+<option value="False">False</option>
+<option value="Test">Test</option>
+<option value="">EmptyString</option>
+</select>
+</td>
+</tr>
+
+<tr>
+    <td><input type="button" id="cmdSubmitKeyDispatch" onclick="RegisterKeyEventwithdispatch();" value="Register"/></td>
+</tr>
+<tr>
+    <td><input type="button" id="Button4" onclick="UnRegisterKeyEventwithdispatch();" value="Unegister"/></td>
+</tr>
+<tr>
+    <td><input type="button" id="Button5" onclick="EmptyKeyEvent();" value="Empty Keyevent"/></td>
+    <td><input type="button" id="Button6" onclick="EmptykeyCapture();" value="Empty KeyCapture tag"/></td>
+</tr>
+</table>
+
+<hr>
+
+<table>
+<tr>
+<td><a name="Attach key with Remap"></a></td>
+</tr>
+<tr>
+<td>Key to register:</td><td><Textarea id="txtRegisterKeyRemap"cols="10" rows="1">0x31</Textarea></td>
+</tr>
+<tr>
+<td>Remap this key to:</td><td><Textarea id="txtRemapValue"cols="10" rows="1">0x09</Textarea></td>
+</tr>
+<tr>
+    <td><input type="button" id="cmdRegisterKeywithRemap" onclick="RegisterKeywithRemap();" value="Register"/></td>
+</tr>
+</table>
+
+<hr>
+
+<table>
+<tr>
+<td><a name="Home and Acceleratekey"></a></td>
+</tr>
+<tr>
+<td>Enter the Homekey Hex value:- </td><td><Textarea id="txtHomekey"cols="10" rows="1">0x0D</Textarea></td>
+</tr>
+
+<tr>
+    <td><input type="button" id="Button1" onclick="SetHomekey();" value="Set Homekey"/></td>
+</tr>
+
+</table>
+<hr>
+
+<table>
+<tr>
+<td><select name="mydropdown1" id="SelectAccelerateKey">
+<option value="All">All</option>
+<option value="None">None</option>
+<option value="Norm">Norm</option>
+<option value="Off">Off</option>
+<option value="Test">Test</option>
+<option value="">Empty</option>
+</select>
+</td>
+</tr>
+<tr>
+    <td><input type="button" id="Button2" onclick="SetAcceleratekey();" value="Set Acceleratekey"/></td>
+
+</tr>
+</table>
+
+<hr>
+
+
+ <input type="button" id="Button3" onclick="AttachTriggerEvent();" value="Attach TriggerEvent"/>
+ <tr>
+        <Textarea id="Textarea1" cols="15" rows="2"></Textarea>
+  </tr>
+
+</form>
+</body>
+</html>
+
+<script language=javascript>
+
+var SelectedItem="";
+
+var objgeneric = new ActiveXObject("PocketBrowser.Generic");
+var count=0;
+
+
+function SetHomekey()
+{
+var HomekeyValue=frmKeykandler.txtHomekey.value;
+var temp = "HomeKeyValue:"+HomekeyValue;
+alert(temp);
+objgeneric.InvokeMETAFunction("KeyCapture",temp);
+}
+
+
+
+
+
+function SetAcceleratekey()
+{
+
+var SelectedIndex=frmKeykandler.mydropdown1.selectedIndex;
+var AccelerateKeyValue=frmKeykandler.mydropdown1.options[SelectedIndex].value;
+var temp = "AccelerateKey:"+AccelerateKeyValue;
+alert(temp);
+objgeneric.InvokeMETAFunction("KeyCapture",temp);
+}
+ 
+
+function GetSelectedRadioButton()
+{
+for (var i=0; i < frmKeykandler.group1.length; i++)
+   {   
+      if (frmKeykandler.group1[i].checked)
+      {
+      SelectedItem = frmKeykandler.group1[i].value;
+
+      }
+   }
+}
+
+function RegisterKeyEventwithdispatch()
+{
+    
+    var HexValue= frmKeykandler.txtRegisterKey.value;
+    var SelectedIndex=frmKeykandler.mydropdown.selectedIndex;
+    var temp = "";
+    var DispatchValue="";
+
+    if (frmKeykandler.mydropdown.options[SelectedIndex].value != "EmptyString") 
+    {
+        DispatchValue = frmKeykandler.mydropdown.options[SelectedIndex].value;
+    }
+   
+   SelectedItem=frmKeykandler.mydropdown5.value;
+   if(HexValue=="")
+   {
+   temp="KeyEvent:url('');";
+   alert("if");
+   }
+   else     
+   {  
+    alert("else");       
+        if(SelectedItem=="JavaScript")
+        {
+            temp = "KeyValue:"+HexValue+";Dispatch:"+DispatchValue+";KeyEvent:url('javascript:MyKeyEvent('%s');')";
+        }
+        else if(SelectedItem=="HTML")
+        {
+            temp = "KeyValue:"+HexValue+";Dispatch:"+DispatchValue+";KeyEvent:url('http://10.233.85.82/NEON/Navigate.html?Key=%s')";
+        }
+         else if(SelectedItem=="JSON")
+        {
+            temp = "KeyValue:"+HexValue+";Dispatch:"+DispatchValue+";KeyEvent:url('javascript:MyJsonKeyEvent(%json);')";
+        }
+   }
+
+  alert("temp"+temp);
+
+  var Ret = objgeneric.InvokeMETAFunction("KeyCapture", temp);
+}
+
+function UnRegisterKeyEventwithdispatch()
+{
+    var HexValue= frmKeykandler.txtRegisterKey.value;
+    var SelectedIndex=frmKeykandler.mydropdown.selectedIndex;
+    var temp = "";
+    var DispatchValue="";
+   
+    temp = "KeyValue:"+HexValue+";KeyEvent:url('')";
+   alert("temp"+temp);
+   objgeneric.InvokeMETAFunction("KeyCapture",temp);
+   
+   
+}
+
+function EmptyKeyEvent()
+{
+   var temp = "KeyEvent:";
+   alert("temp"+temp);
+   objgeneric.InvokeMETAFunction("KeyCapture",temp);
+}
+
+function EmptykeyCapture()
+{
+  objgeneric.InvokeMETAFunction("KeyCapture","");
+}
+
+function RegisterKeywithRemap()
+{
+var HexValue= frmKeykandler.txtRegisterKeyRemap.value;
+var RemapValue= frmKeykandler.txtRemapValue.value;
+var temp = "KeyValue:"+HexValue+";Remap:"+RemapValue;
+alert(temp);
+objgeneric.InvokeMETAFunction("KeyCapture",temp);
+}
+
+
+
+
+
+
+
+function AttachTriggerEvent()
+{
+var temp="";
+SelectedItem=frmKeykandler.mydropdown5.value;
+if(SelectedItem=="JavaScript")
+{
+temp="TriggerEvent:url('javascript:MyTriggerEvent('%s');')";
+}
+
+else if(SelectedItem=="HTML")
+{
+temp="TriggerEvent:url('http://10.233.85.82/NEON/Navigate.html?triggerFlag=%s')";
+}
+
+else if(SelectedItem=="JSON")
+{
+temp="TriggerEvent:url('javascript:MyJsonTriggerEvent(%json);')";
+}
+else if(SelectedItem=="DETACHTRIGGEREVENT")
+{
+temp="TriggerEvent:url('');";
+}
+else if(SelectedItem=="EMPTYTRIGGEREVENT")
+{
+temp="TriggerEvent:";
+}
+
+alert(temp);
+objgeneric.InvokeMETAFunction("KeyCapture",temp);
+
+}
+
+
+
+
+
+
+function MyKeyEvent(key)
+{
+KeyEventDiv.innerHTML="KeyEvent fired for "+count +"th time. KeyValue:-"+key;
+frmKeykandler.txtkeyCaptured.value=key;
+count++;
+}
+
+function MyJsonKeyEvent(myjsonobject)
+{
+count++;
+KeyEventDiv.innerHTML="JSON-KeyEvent fired for "+count +"th time. KeyValue:-"+myjsonobject.keyValue;
+frmKeykandler.txtkeyCaptured.value=myjsonobject.keyValue;
+}
+
+function MyJsonTriggerEvent(myjsonobject)
+{
+count++;
+KeyEventDiv.innerHTML="JSON-TriggerEvent fired for "+count +"th time. triggerFlag:-"+myjsonobject.triggerFlag;
+frmKeykandler.txtkeyCaptured.value=myjsonobject.triggerFlag;
+
+}
+
+
+function MyTriggerEvent(TriggerFlag)
+{
+
+KeyEventDiv.innerHTML="TriggerEvent fired for "+count +"th time.TriggerFlag:-"+TriggerFlag;
+frmKeykandler.txtkeyCaptured.value=TriggerFlag;
+count++;
+}
+
+
+
+</script>

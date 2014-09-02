@@ -1,0 +1,155 @@
+<HTML>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+<!-- <meta http-equiv="SignatureCapture" content="Visibility:Visible;left:5;top:100;height:100;width:100;penwidth:4"> -->
+<!-- <meta http-equiv="SignatureCapture" content="SignatureCaptureEvent:url('javascript:onSignatureCapture(%json)');"> -->
+<TITLE>Signature Capture Tests</TITLE>
+</HEAD>
+<BODY>
+  <script type="text/javascript">
+  
+  function captureevent()
+  {
+  //signatureCapture.signatureCaptureEvent='onSignatureCapture(%json)';
+  signatureCapture.setEMML("signatureCaptureEvent:url('Javascript:onSignatureCapture(%json);');");
+  }
+  
+  function captureSignature()
+    {
+        //generic.InvokeMETAFunction("SignatureCapture", "SignatureSaveEvent:url('Javascript:onSignatureSavedJSON(%json);');");
+        //generic.InvokeMETAFunction("SignatureCapture", "username:ftpadmin;password:ftpadmin;Name:Sig;Destination:url('ftp://10.233.85.82/Received/uploadedSignature.jpg');");
+		//signatureCapture.SignatureCaptureEvent='onSignatureCapture(%json)';
+		//signatureCapture.signatureSaveEvent='onSignatureSavedJSON(%json)';
+		signatureCapture.setEMML("SignatureSaveEvent:url('Javascript:onSignatureSavedJSON(%json);');");
+		//signatureCapture.destination='ftp://ftpadmin:ftpadmin@10.233.85.82/Received/uploadedSignature.jpg';
+		signatureCapture.setEMML("username:ftpadmin;password:ftpadmin;Name:Sig;Destination:url('ftp://10.233.85.82/Received/uploadedSignature.jpg');");
+		<!--  End Upload Configuration -->
+        //generic.InvokeMETAFunction("SignatureCapture", "Capture");
+		signatureCapture.capture();
+    }
+	
+  function onSignatureSavedJSON(jsonObject)
+  {
+	 var html = "<b>Signature Capture Result: </b><br>[" + jsonObject.transferResult + "]";
+	signatureSaveResult.innerHTML=html;
+  }
+  
+	function onSignatureCapture(jsonObject)
+	{
+		signatureImage.src = jsonObject.imageData;
+	}
+  
+  function startVectors()
+  {
+	//generic.InvokeMETAFunction("SignatureCapture", "VectorEvent:url('javascript:onVectorsJSON(%json);');");
+	//signatureCapture.VectorEvent='onVectorsJSON(%json)';
+	signatureCapture.setEMML("VectorEvent:url('javascript:onVectorsJSON(%json);');");
+  }
+  
+  function onVectorsJSON(jsonObject)
+  {
+ 	var VectorAsHTML = "<TABLE><TR><TH>X</TH><TH>Y</TH><TH>X</TH><TH>Y</TH><TH>X</TH><TH>Y</TH></TR>";
+	for (var i=0; i<jsonObject.vectorArray.length; i = i + 6)
+	{
+		VectorAsHTML = VectorAsHTML + "<TR>"
+		if (jsonObject.vectorArray[i] != undefined)
+			VectorAsHTML = VectorAsHTML + "<TD>" + jsonObject.vectorArray[i] + "</TD><TD>" + jsonObject.vectorArray[i+1] + "</TD>";
+		if (jsonObject.vectorArray[i+2] != undefined)
+			VectorAsHTML = VectorAsHTML + "<TD>" + jsonObject.vectorArray[i+2] + "</TD><TD>" + jsonObject.vectorArray[i+3] + "</TD>";
+		if (jsonObject.vectorArray[i+4] != undefined)
+			VectorAsHTML = VectorAsHTML + "<TD>" + jsonObject.vectorArray[i+4] + "</TD><TD>" + jsonObject.vectorArray[i+5] + "</TD>";
+		VectorAsHTML = VectorAsHTML + "</TR>"
+	}
+	VectorAsHTML + "</TABLE>"
+	vectorOut.innerHTML = VectorAsHTML;
+ 
+  }
+  
+	function showSigCap(bShow)
+	{
+		if (bShow)
+			//generic.InvokeMETAFunction("SignatureCapture", "Visibility:Visible;Border:Hidden");
+			//signatureCapture.visibility='Visible';
+			signatureCapture.setEMML("Visibility:Visible");
+		else
+			//generic.InvokeMETAFunction("SignatureCapture", "Visibility:Hidden;Border:Hidden");
+			//signatureCapture.visibility='Hidden';
+			signatureCapture.setEMML("Visibility:Hidden");
+	}
+    function clearSignature()
+{
+	//generic.InvokeMETAFunction('SignatureCapture', 'Clear');
+     //signatureCapture.clear(); 
+	 signatureCapture.setEMML("clear");
+}
+
+function selectVisibility()
+{
+	var sltVisibility=frm.sigVisibility.selectedIndex;
+	selectedVisibility = frm.sigVisibility.options[sltVisibility].value;
+	switch(selectedVisibility)
+	{
+		case 'Visible':
+            
+			//generic.InvokeMETAFunction('SignatureCapture', 'Visibility:Visible');
+                  //signatureCapture.visibility = 'visible';
+				  signatureCapture.setEMML("Visibility:Visible");
+
+			break;
+
+		case 'Hidden':
+
+			//generic.InvokeMETAFunction('SignatureCapture', 'Visibility:Hidden');
+                  //signatureCapture.visibility = 'hidden';
+				  signatureCapture.setEMML("Visibility:Hidden");
+			break;
+
+		
+		case 'Address':
+
+			//generic.InvokeMETAFunction('SignatureCapture', 'Visibility:Address');
+                   //signatureCapture.visibility = 'address';
+				   signatureCapture.setEMML("Visibility:Address");
+			break;
+			
+		case 'Null':
+
+			//generic.InvokeMETAFunction('SignatureCapture', 'Visibility:Address');
+                   //signatureCapture.visibility = '';
+				   signatureCapture.setEMML("Visibility:");
+			break;
+	}
+}
+  </script>
+
+
+<H1>Signature Capture Tests</H1>
+<P>
+<br><br><br><br><br><br><br><br><br><br><br><br>
+	<DIV id="vectorOut">Vectors Will Appear Here:</div>
+	<br>
+	<div id="signatureSaveResult">Signature Save Result goes here</div>
+	<img src="" id="signatureImage"></img>
+  <BR>
+  <form id="frm" action="">
+  Select Visibility	<select name="sigVisibility" id="sigVisibility" onChange="selectVisibility();">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="Visible">Visible</option>
+<option value="Hidden">Hidden</option>
+<option value="Address">Address</option>
+<option value="Null">Null</option>
+</select>
+  <BR>
+  <INPUT align="center" type="button" value="AttachEvent" onclick="captureevent();">
+  <INPUT align="center" type="button" value="Capture BMP & Upload" onclick="captureSignature();">
+  <INPUT align="center" type="button" value="Capture Vectors" onclick="startVectors();">
+  <INPUT align="center" type="button" value="Hide Window" onclick="showSigCap(false);">
+  <INPUT align="center" type="button" value="Show Window" onclick="showSigCap(true);">
+  <br><br>
+  <input type=button id="clear" onclick="clearSignature();" value="Clear">
+	<P>
+	<a href="javascript:location.reload();">Refresh the page</a>
+</form>
+  </BODY>
+</HTML>

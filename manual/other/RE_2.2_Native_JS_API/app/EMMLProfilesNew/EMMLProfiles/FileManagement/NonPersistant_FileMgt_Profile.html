@@ -1,0 +1,55 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+    <title>PB 3.0 File Management Test static EMML 1.1</title>
+   
+<META HTTP-Equiv="EMMLProfile" Content="import:url('../../../EMMLProfiles/FileManagement/FileManagement.emmp');">
+
+
+    
+<script language=javascript>
+  var Generic = new ActiveXObject("PocketBrowser.Generic");
+  function TransferFile() 
+   {
+    Generic.InvokeMETAFunction('FileTransfer', 'Transfer');
+   }
+
+function Quit()
+{
+    Generic.InvokeMETAFunction("Application", "Quit");
+}
+
+function MyTransferEvent(Msg) 
+{
+    alert("Transfer Message" + Msg);
+}
+
+function doApplyProfile(profile)
+ {
+
+    Generic.InvokeMETAFunction('EMMLProfile', 'Apply:' + profile);
+}
+
+</script>
+</head>
+
+<body>
+<form id="frmFileManagement" action="" >
+
+<tr><td><h4>UnNamed File transfer(send) Non Persistant EMML Profile script</h4>
+<h4>Click on start button to transfer data.</h4>
+<a href="javascript:doApplyProfile('sendFile');">Apply Send Profile</a>
+    <br>
+<a href="javascript:doApplyProfile('receiveFile');">Apply Receive Profile</a>
+  <br>  <br>  <br>
+<input type=button value="TransferFile" onclick="TransferFile();"><br />
+<P><INPUT TYPE="button" VALUE="Quit" ONCLICK="Quit();"></P>
+</form>
+<h4>Browse to another page to check for EMML profile persistance.</h4>
+<h4><a href="NonPersistant_FileMgt_Test.html">Click here to go to another page.</a></h4>
+<hr />
+<a href="../EMMLProfilesIndex.html">Back to EMML Profile Index</a>
+
+</body>
+</html>

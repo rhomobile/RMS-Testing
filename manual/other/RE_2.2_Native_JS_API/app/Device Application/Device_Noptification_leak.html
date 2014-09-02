@@ -1,0 +1,42 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+
+<script>
+
+
+ var Generic = new ActiveXObject("PocketBrowser.Generic");
+
+ function dostart() 
+      {
+          
+          setTimeout("onNormal()", 3000);
+      }
+
+      function onNormal() 
+      {
+
+          Generic.InvokeMetaFunction("Notification", "SetLEDOnDuration:1000");
+          Generic.InvokeMetaFunction("Notification", "SetLEDOffDuration:1000");
+          Generic.InvokeMetaFunction("Notification", "SetLEDNumberOfCycles:20000");
+      
+          Generic.InvokeMetaFunction("Notification", "StateCycle:" + 0);
+
+      }
+      
+   
+
+
+</script>
+
+</head>
+
+<BODY onload="dostart();">
+<br><br><br><br><br>Minimize and Restore memory leak<br>
+<P><BR><INPUT TYPE="button" VALUE="Back" ONCLICK="location.href='./Device Application.html'"></P>
+
+
+
+</BODY>
+</HTML>

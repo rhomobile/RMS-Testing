@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+  
+  <script type="text/javascript">
+  var Generic = new ActiveXObject("PocketBrowser.Generic");
+
+  function starttest() 
+   {
+       
+        Generic.InvokeMETAFunction("scanner", "DecodeEvent:url('http://157.235.207.79/pb3.x/Scanner/Stress_1DContinuousToggle.html')");
+         Generic.InvokeMETAFunction('scanner', 'disabled');   
+         Generic.InvokeMETAFunction('scanner', 'enabled:SCN2;start');
+        
+  }
+
+  function setEnumScannerTimer()
+   {
+      setTimeout("onScannerEnable()", 3000);
+  }
+  function onScannerEnable() 
+  {
+      starttest();
+      
+  }
+    
+    function Quit()
+    {
+	Generic.InvokeMETAFunction("Application", "Quit");
+    }
+    
+ </script>
+</head>
+<body onload="setEnumScannerTimer();">
+ 2D Scanner continuous Enable/Disable Stress Test 
+<br /><br /><div id="nos">X Value</div>
+<P><INPUT TYPE="button" VALUE="Back" ONCLICK="location.href='./Scanner.html'">&nbsp;&nbsp;&nbsp;
+<INPUT TYPE="button" VALUE="Quit" ONCLICK="Quit();"></P>
+
+
+
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+<META HTTP-Equiv="EMMLProfile" Content="name:myScanner;import:url('../../../EMMLProfiles/Scanner/scanner.emmp');">
+<!--<META HTTP-Equiv="EMMLProfile" Content="import:url('../../../EMMLProfiles/Scanner/scanner.emmp');">-->
+<META HTTP-Equiv="scanner" Content="DecodeEvent:url('javascript:doScan('%s', '%s', %s, '%s', '%s');')">
+<!--<META HTTP-Equiv="EMMLProfile" Content="Apply:myScanner.OnlyCode128Enabled;">-->
+<!--<META HTTP-Equiv="EMMLProfile" Content="name:myScanner;import:url('file://\program files\pocketbrowser\html\scanner.emmp');">
+<META HTTP-Equiv="EMMLProfile" Content="Apply:myScanner.AllBarcodesDisabled">-->
+
+<script type="text/javascript">
+
+    var objgeneric = new ActiveXObject("PocketBrowser.Generic");
+
+    function doScan(data, source, type, time, length) {
+        message.innerHTML = "Decoded data is :" + data + "\nSource: " + source + "\nType: " + type + "\nTime: " + time + "Length: " + length;
+    }
+
+    function doTest() {
+        objgeneric.InvokeMETAFunction('scanner', 'enabled;start');
+    }
+
+    function stopScan() {
+        objgeneric.InvokeMETAFunction('scanner', 'disabled;stop');
+    }
+
+    function doApplyProfile(profile) {
+alert('Apply:myScanner.'+profile);
+        objgeneric.InvokeMETAFunction('EMMLProfile', 'Apply:myScanner.'+profile);
+    }
+
+      function clearProfile() {
+        alert("clear");
+        objgeneric.InvokeMETAFunction('EMMLProfile', 'clear:myScanner');
+    }
+//function doImportProfile()
+   //{
+    //objgeneric.InvokeMETAFunction('EMMLProfile', "import:url('../../../EMMLProfiles/Scanner/scanner.emmp');");
+   //}
+   
+</script>     
+</head>
+<body>
+<h4>Barcode EMML Non Persistant Scanner Profile </h4>
+<h4>All barcodes are disabled </h4>
+<h5>Scan to check </h5>
+<h5>Decode Data:<div id="message"></div></h5><br /><br />
+<!-- <INPUT TYPE="button" VALUE="Start Scan" ONCLICK="doTest();">
+<INPUT TYPE="button" VALUE="Stop Scan" ONCLICK="stopScan();"> -->
+<br><br /><br />
+    <!-- <a href="Javascript:doImportProfile();">Import Profile</a><br /> -->
+    <a href="Javascript:doApplyProfile('AllBarcodesDisabled');">Apply All decoders disabled</a><br />
+    <a href="Javascript:doApplyProfile('AllBarcodesEnabled');">Apply All decoders enabled</a><br />
+	<a href="Javascript:clearProfile();">Clear Profile</a><br />
+  <br>
+<h3>Browse to another page to check for EMML profile persistance.</h3>
+<h4><a href="NonPersistantScanner_Test.html">Click here to go to another page.</a></h4>
+<hr />
+<a href="../EMMLProfilesIndex.html">Back to EMML Profile Index</a>
+</body>
+</html>

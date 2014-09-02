@@ -1,0 +1,27 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+<META HTTP-Equiv="Alarm" Content="Interval:00-00-35;Repeat:True;AlarmTriggered:url('javascript:doAlarm();');set;clear">
+<script>
+var generic = new ActiveXObject("PocketBrowser.Generic");
+var count=0;
+   function doAlarm()
+   {
+        
+        count++;
+        outputSpan1.innerHTML = 'Alarm Triggered';
+        Count.innerHTML = "Count = "+count;
+   }
+</script>
+</head>
+<BODY BGCOLOR="#FFFFEA" TEXT="#0000A0" LINK="#FF0000" VLINK="#808080" ALINK="#008040">
+Alarm Tag EMML 1.1 using clear (No alarm should be triggred)<br><br />
+<div id="outputSpan1">Waiting......</div>
+<br />
+<div id="Count">Count</div>
+<P><BR><INPUT TYPE="button" VALUE="Clear Alarm" ONCLICK="generic.InvokeMETAFunction('Alarm','clear');"></P>
+<br><A HREF="./EMML1_1_index.html">Back</A>
+
+</BODY>
+</HTML>

@@ -1,0 +1,54 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+<META HTTP-Equiv="MinimizeButton" Content="top:100;Visibility:Visible">
+</head>
+<body>
+<BR><BR>
+<b>Video capture Stress without setting any destination</b>
+<A HREF="VideoCapture_Index.html">Back</A><br />
+<form id="frm" action="">
+<BR><BR>
+<div id="message">Message</div>
+<BR><BR>
+<P><INPUT TYPE="button" VALUE="start" ONCLICK="doStart();"></P>
+<!-- <INPUT TYPE="button" VALUE="stop" ONCLICK="doStop();">
+<p><input type="button" id="cancel" onclick="doCancel();" value="Cancel">
+<BR><BR>-->
+</form>
+</body>
+</html>
+<script language="javascript">
+var selectedVisibility=""; //Selected Visibility.
+var selectedBorder=""; //Selected Aim in the list.
+/*
+function doStop()
+{
+//alert("stop");
+message.innerHTML="stop";
+videoCapture.stop();
+}
+
+function doCancel()
+{
+//alert("cancel");
+message.innerHTML="cancel";
+videoCapture.cancel();
+}*/
+function doStart()
+{
+//alert("satrt");
+message.innerHTML="start";
+videoCapture.start();
+captureLoop();
+}
+
+function captureLoop()
+{
+	//setTimeout("dovideoCapture()", 10000);
+	setTimeout("doStart()", 8000);
+	//videoCapture.start();
+}
+</script>
+

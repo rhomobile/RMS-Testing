@@ -1,0 +1,75 @@
+<HTML>
+  <head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+  <TITLE>Config Test Page</TITLE>
+  
+  <SCRIPT>
+  
+  var outputStr="";
+  var gen = new ActiveXObject("PocketBrowser.Generic");
+  
+  function AddConSetting(setting)
+  {
+    
+    
+    var Ret = gen.ReadConfigSetting(setting);
+    
+    eval("var arrRet = "+Ret);
+    
+    var loop; 
+    if(arrRet.length){
+      outputStr +="<TR bgcolor='999999'><TD colspan='2'>"+setting+"</TD></TR>";
+      for(loop = 0;loop < arrRet.length;loop++)
+      {
+        if(arrRet[loop].length){
+          outputStr +="<TR><TD colspan='2'>"+arrRet[loop]+"</TD></TR>";
+        }
+        else{
+          outputStr +="<TR><TD colspan='2'>\"\"</TD></TR>";
+        }
+      }
+    }
+    
+    
+  }
+  
+  
+  
+  function Run()
+  {
+    display.innerHTML = "...";
+    outputStr ="<table style='font-size:10px'><TR><TD colspan='2' align='center'>Global Configuration Settings</TD></TR>";
+    AddConSetting("DEBUGBUTTONSENABLED");
+    AddConSetting("COMPATIBILITYMODEENABLED");
+    AddConSetting("LOGPROTOCOL");
+    AddConSetting("LOGPORT");
+    AddConSetting("LOGURI");
+    AddConSetting("LOGERROR");
+    AddConSetting("LOGWARNING");
+    AddConSetting("LOGINFO");
+    AddConSetting("LOGUSER");
+    AddConSetting("LOGMAXSIZE");
+    AddConSetting("REGEXFILE");
+    AddConSetting("PLUGINFILE");
+    AddConSetting("FULLSCREEN");
+    AddConSetting("ENABLEFUNCTIONKEY_F1");
+    AddConSetting("NAVTIMEOUT");
+    
+    outputStr +="</table>";
+    display.innerHTML = outputStr;
+  
+  }
+  
+  
+  </SCRIPT>
+  </HEAD>
+    
+  <BODY BGCOLOR="#FFFFEA" TEXT="#0000A0" LINK="#FF0000" VLINK="#808080" ALINK="#008040" onLoad="Javascript:Run()">
+  <Div id="display">...</Div>
+  <A HREF="../Generic ActiveX Object.html">Back to Main Menu</A><BR>
+  <BR><BR><BR>
+  
+  <P>Last Revision : 19 March 2010 <BR>Paul Henderson</P>
+  </BODY>
+</HTML>

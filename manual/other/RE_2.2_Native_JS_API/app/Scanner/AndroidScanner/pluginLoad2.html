@@ -1,0 +1,261 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+  <script type="text/javascript">
+  var iCount = 0;
+  
+   function starttest()
+   {
+       setTimeout("onScannerEnable()", 10000);
+       
+   
+   }
+
+   function Quit()
+    {
+	generic.InvokeMETAFunction("Application", "Quit");
+    }
+
+   
+    function onScannerEnable() 
+    {
+        message.innerHTML="enabling the scanner";
+        generic.InvokeMETAFunction('Scanner', 'enabled:SCN1;start')
+        setTimeout("onScannerDisable()", 10000);
+        
+    }
+    
+    function onScannerDisable()
+    {
+     message.innerHTML="disabling the scanner";
+     generic.InvokeMETAFunction('Scanner', 'disabled');
+     setTimeout("onCreatingGesture()", 10000);
+     
+    }
+    
+    function onCreatingGesture()
+    {
+    message.innerHTML="Creating the gesture";
+    generic.InvokeMETAFunction("gesture", "type:linear;preset:left-right;id:LinearGesture1;diagnostics:TRUE;start-x:50;start-y:200;end-x:200;end-y:200;tolerance:30;sensitivity:60;skew:30;deviation:50;region-width:40;create");
+   
+    setTimeout("onDeletingGesture()", 10000);
+
+    }
+
+    function onDeletingGesture()
+    {
+     message.innerHTML="Deleting the gesture";
+     generic.InvokeMETAFunction("gesture", "id:LinearGesture1;delete");
+     setTimeout("onFileTransferFromFTP()", 10000);
+     
+     
+     
+    }
+    
+//    function onVisibleSignal()
+//    {
+//     generic.InvokeMETAFunction("Signal", "Visibility:Visible");
+//     setTimeout("onHideSignal()", 10000);
+//     message.innerHTML="hiding signal";
+//    
+//    
+//    }
+//    
+//    function onHideSignal()
+//    {
+//     generic.InvokeMETAFunction("Signal", "Visibility:hidden");
+//     setTimeout("onVisibleBattery()", 10000);
+//     message.innerHTML="making visible Battery";
+//    
+//    
+//    }
+//    
+//    function onVisibleBattery()
+//    {
+//     generic.InvokeMETAFunction("Battery", "Visibility:Visible");
+//     setTimeout("onHideBattery()", 10000);
+//     message.innerHTML="Hiding Battery";
+//    
+//    
+//    }
+//    
+//    
+//     function onHideBattery()
+//    {
+//     generic.InvokeMETAFunction("Battery", "Visibility:hidden");
+//     setTimeout("onVisibleSignature()", 10000);
+//     message.innerHTML="making visible Signature";
+//    
+//    
+//    }
+    
+//    function onVisibleSignature()
+//    {
+//     generic.InvokeMETAFunction("SignatureCapture", "Visibility:Visible");
+//     setTimeout("onHideSignature()", 10000);
+//     message.innerHTML="Hiding Signature";
+//    }
+//    
+//    
+//    function onHideSignature()
+//    {
+//     generic.InvokeMETAFunction("SignatureCapture", "Visibility:hidden");
+//     setTimeout("onFileTransfer()", 10000);
+//     message.innerHTML="Hiding signature";
+//    }
+    
+    
+    function onFileTransferFromFTP()
+    {
+     message.innerHTML="doing file transfer from ftp to device";
+     generic.InvokeMETAFunction("FileTransfer", "TransferEvent:url('Javascript:MyTransferEvent('%s');');Source:url('ftp://ftpadmin:ftpadmin@10.233.85.82/FileCollections/1m.txt');Destination:url('file://\Temp\MyFTPFolder\UIDPSWDinURL.txt');CreateFolders:True;OverWrite:True;Transfer");
+     setTimeout("onFileTransferToHTTP()", 10000);
+
+    }
+    
+    function onFileTransferToHTTP()
+    {
+     message.innerHTML="doing file transfer from device to http";
+     fileTransfer.setEMML("Source:url('file://\Application\FileCollections\myfile.txt');Destination:url('http://10.233.85.82/NEON/ReceivedFiles/Upload.aspx');Transfer"); 
+     setTimeout("onControlVisible()", 10000);
+    }
+    
+    function onControlVisible()
+    {
+     message.innerHTML="showing controls";
+     addressBar.visibility = 'visible'; 
+     backButton.visibility = 'visible'; 
+     bottomCommandArea.visibility = 'visible'; 
+     forwardButton.visibility = 'visible'; 
+     goButton.visibility = 'visible'; 
+     homeButton.visibility = 'visible'; 
+     minimizeButton.visibility = 'visible'; 
+     quitButton.visibility = 'visible'; 
+     reloadButton.visibility = 'visible'; 
+     sipButton.visibility = 'visible'; 
+     stopButton.visibility = 'visible'; 
+     topCommandArea.visibility = 'visible'; 
+     zoomTextButton.visibility = 'visible'; 
+     setTimeout("onControlHidden()", 10000);
+    
+    
+    }
+    
+    function onControlHidden()
+    {
+     message.innerHTML="Hiding controls";
+     addressBar.visibility = 'hidden'; 
+     backButton.visibility = 'hidden'; 
+     bottomCommandArea.visibility = 'hidden'; 
+     forwardButton.visibility = 'hidden'; 
+     goButton.visibility = 'hidden'; 
+     homeButton.visibility = 'hidden'; 
+     minimizeButton.visibility = 'hidden'; 
+     quitButton.visibility = 'hidden'; 
+     reloadButton.visibility = 'hidden'; 
+     sipButton.visibility = 'hidden'; 
+     stopButton.visibility = 'hidden'; 
+     topCommandArea.visibility = 'hidden'; 
+     zoomTextButton.visibility = 'hidden'; 
+     setTimeout("onHourglassVisible()", 10000);
+    
+    
+    }
+
+    function onHourglassVisible()
+    {
+    message.innerHTML="showing Hourglass";
+    hourglass.visibility = 'visible';
+    hourglass.left = '20'; 
+    hourglass.top = '100'; 
+    setTimeout("onHourglassHidden()", 10000);
+    
+    }
+
+    function onHourglassHidden()
+    {
+    
+    message.innerHTML="hidden Hourglass";
+    hourglass.visibility = 'hidden'; 
+    setTimeout("onSIP()", 10000);
+    
+    }
+    
+    function onSIP()
+    {
+    
+    message.innerHTML="setting sip params";
+    sipButton.visibility = 'visible'; 
+    sip.setEMML("left:100;top:300;automatic"); 
+    setTimeout("onStylusDisable()", 10000);
+    
+    }
+    
+    function onStylusDisable()
+    {
+    message.innerHTML="disabling stulus";
+    stylus.disable(); 
+    setTimeout("onStylusEnable()", 10000);
+   
+   
+    }
+    
+    function onStylusEnable()
+    {
+    message.innerHTML="enabling stulus";
+    stylus.enable(); 
+    setTimeout("onDevice()", 10000);
+    }
+    
+    function onDevice()
+    {
+    message.innerHTML="Device tag settings";
+    //device.suspend(); 
+    setTimeout("onZoom1()", 1000);
+    }
+    
+    function onZoom1()
+    {
+    message.innerHTML="Zoom tag settings 1";
+    zoom.text = '4'; 
+    zoom.page = '2'; 
+    setTimeout("onZoom2()", 10000);
+    }
+    
+    function onZoom2()
+    {
+    message.innerHTML="Zoom tag settings 2";
+    zoom.text = '2'; 
+    zoom.page = '1'; 
+    iCount++;
+    NumberCount.innerHTML="Number of loops:"+iCount;
+    setTimeout("onScannerEnable()", 10000);
+    }
+    
+     function MyTransferEvent(Msg)
+     {
+        result.innerHTML="Result:"+Msg;
+     }
+     
+     
+ 
+    
+    
+    
+ </script>
+</head>
+<body>
+<hr />1D Scanner continuous scanning Stress Test
+<div id="message">message</div><br />
+<div id="result">event result</div><br />
+<div id="NumberCount"><b>Number of Counts</b></div> 
+<form name="ODAXForm" id="ODAXForm" action="">
+<P><INPUT TYPE="button" VALUE="Start" ONCLICK="starttest();">
+<p></p><P><INPUT TYPE="button" VALUE="Back" ONCLICK="location.href='./Scanner.html'">
+<INPUT TYPE="button" VALUE="Quit" ONCLICK="Quit();"></P>
+</form>
+
+</body>
+</html>

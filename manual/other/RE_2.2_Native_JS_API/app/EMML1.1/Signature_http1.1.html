@@ -1,0 +1,52 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+
+<META HTTP-Equiv="SignatureCapture"Content="left:30;top:90;height:100;bgcolor:#FFFF00;   width:200;border:visible;Pencolor:#0000FF;Penwidth:2;visibility:visible;Name:Signature; TransferEvent:url('Javascript:onCaptured('%s');');destination:url('HTTP://10.233.85.82:80/PB3.x/Signature Capture/upload.aspx')">
+
+</head>
+<p>Send the bmp to http</p>
+<BR><BR><BR><BR>
+<P><INPUT TYPE="button" VALUE="Capture" ONCLICK="doCapture();"></P>
+<P><INPUT TYPE="button" VALUE="Clear" ONCLICK="doClear();"></P>
+<P><INPUT TYPE="button" VALUE="Hidden" ONCLICK="dohidden();"></P>
+<P><INPUT TYPE="button" VALUE="Quit" ONCLICK="Quit();"></P>
+
+<BR>
+<A HREF="./EMML1.1.html">Back</A>
+</body>
+</html>
+
+
+<SCRIPT>
+var objGeneric = new ActiveXObject("PocketBrowser.Generic");
+	
+function doCapture()
+{
+	objGeneric.InvokeMETAFunction('SignatureCapture', 'capture');
+}
+
+function doClear()
+{
+	objGeneric.InvokeMETAFunction('SignatureCapture', 'clear');
+}
+
+function onCaptured(data)
+{
+	alert(data);
+}
+
+function Quit()
+{
+	objGeneric.InvokeMETAFunction("Application", "Quit"); 
+}
+
+function dohidden()
+{
+	objGeneric.InvokeMETAFunction('SignatureCapture', 'Visibility:Hidden');
+}
+
+</SCRIPT>
+
+

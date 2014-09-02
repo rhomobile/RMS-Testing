@@ -1,0 +1,136 @@
+<!DOCTYPE html>  
+<html>  
+  <head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+  
+	<title>Geolocation test</title>
+    <script>
+	var watchId;
+	function requestLocationData(argsNumber)
+	{
+		if(!navigator.geolocation)
+		{
+			alert('Browser doesnt support Geolocation');
+		}
+		else
+		{
+			if(argsNumber=="1")
+			navigator.geolocation.getCurrentPosition(success);
+			else if(argsNumber=="2")
+			navigator.geolocation.getCurrentPosition(success,error);
+			else if(argsNumber=="3")
+			{
+			var HighAccuracyIndex=HighAccuracyList.selectedIndex;
+            HighAccuracyListValue=HighAccuracyList.options[HighAccuracyIndex].value;
+            var maxAgeValue=MaxAgeText.value;
+			var timeOutValue=TimeOutText.value;
+			var positionParams="{";
+			if(HighAccuracyIndex!="NULL")
+			{
+			 positionParams+="enableHighAccuracy:"+HighAccuracyListValue; 
+			}
+			if(maxAgeValue!="")
+			{
+			if(HighAccuracyIndex!="NULL")
+			positionParams+=", maximumAge:"+maxAgeValue;
+			else
+			positionParams+="maximumAge:"+maxAgeValue;
+			}
+			if(timeOutValue!="")
+			{
+			if(HighAccuracyIndex=="NULL" && maxAgeValue=="")
+			positionParams+="timeout:"+timeOutValue;
+			else
+			positionParams+=", timeout:"+timeOutValue;
+			}
+			positionParams+="}";
+			
+			navigator.geolocation.getCurrentPosition(success,error,positionParams);
+			
+			}
+		}
+	}
+	
+	function requestWatchPosition()
+	{
+		if(!navigator.geolocation)
+		{
+			alert('Browser doesnt support Geolocation');
+		}
+		else
+		{
+		    var timeoutVal = 360 * 1000 * 1000;
+			watchId = navigator.geolocation.watchPosition(success, error,{ enableHighAccuracy: false, timeout: timeoutVal, maximumAge: 0 });
+		}
+	}
+	
+	function clearWatch()
+	{
+		if(!navigator.geolocation)
+		{
+			alert('Browser doesnt support Geolocation');
+		}
+		else
+		{
+			navigator.geolocation.clearWatch(watchId);
+		}
+	}
+	
+	function success(position)
+	{
+		
+	
+	   var d = new Date(position.timestamp);
+       //document.write(d.toLocaleString());
+       
+       document.getElementById('GpsData').innerHTML =  'latitude: ' + position.coords.latitude +
+													    '<br> longitude: ' + position.coords.longitude + 
+														'<br> altitude: ' + position.coords.altitude + 
+														'<br> accuracy: ' + position.coords.accuracy +
+														'<br> altitudeAccuracy: ' + position.coords.altitudeAccuracy +
+														'<br> heading: ' + position.coords.heading +
+														'<br> speed: ' + position.coords.speed +
+														'<br> timestamp: ' + d.toLocaleString();
+	}
+	
+	function error(error)
+	{
+		switch(error.code) 
+			{
+				case error.TIMEOUT:
+					GpsError.innerHTML="TIMEOUT";
+					break;
+				case error.POSITION_UNAVAILABLE:
+					GpsError.innerHTML="Position unavailable";
+					break;
+				case error.PERMISSION_DENIED:
+					GpsError.innerHTML="Permission denied";
+					break;
+				case error.UNKNOWN_ERROR:
+					GpsError.innerHTML="Unknown Error";
+					break;
+			}
+	}
+    </script>  
+  </head>  
+  <body>  
+   <br></br>
+Accuracy:<select name="HighAccuracyList" id="HighAccuracyList">
+<option value="NULL">NULL</option>
+<option value="True">True</option>
+<option value="False">False</option>
+</select>
+Maximum Age[ms] :<input type="text" id="MaxAgeText" name="MaxAgeText" />
+TimeOut[ms] :<input type="text" id="TimeOutText" name="TimeOutText" />
+
+   <p><input type="button" value="getCurrentPosition with 1 args" onclick="javascript:requestLocationData(1)">
+      <input type="button" value="getCurrentPosition with 2 args" onclick="javascript:requestLocationData(2)">
+      <input type="button" value="getCurrentPosition with position options" onclick="javascript:requestLocationData(3)">
+   <br /><p><input type="button" value="watchPosition with 1 args" onclick="javascript:requestWatchPosition(1)">
+   <input type="button" value="watchPosition with 2 args" onclick="javascript:requestWatchPosition(2)">
+   <input type="button" value="watchPosition with position options" onclick="javascript:requestWatchPosition(3)">
+   <br /><p><input type="button" value="clearWatch" onclick="javascript:clearWatch()"></p>
+   <div id="GpsData">GPS DATA</div><br />
+   <div id="GpsError"></div>
+  </body>  
+</html>  

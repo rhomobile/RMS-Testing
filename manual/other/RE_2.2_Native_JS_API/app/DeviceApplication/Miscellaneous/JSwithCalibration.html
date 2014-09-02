@@ -1,0 +1,58 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+<title>Alarm Device Application Test</title>
+<META HTTP-Equiv="sipbutton" Content="visibility:visible">
+<META HTTP-Equiv="reloadbutton" Content="visibility:visible">
+<script language="javascript">
+var selectedValue="";
+var eventScript="";
+var count = 0;
+
+
+function SetAlarm()
+{
+generic.InvokeMETAFunction("Alarm","AlarmTriggered:url('javascript:alert('alarm triggered');')");
+generic.InvokeMETAFunction('Alarm', 'interval:00-00-30');
+generic.InvokeMETAFunction('Alarm', 'Set');
+}
+
+function SetTimer()
+{
+generic.InvokeMetaFunction("Timer", "timeout:url('javascript:alert('Timer Triggered');')");
+generic.InvokeMETAFunction('Timer','interval:5000');
+generic.InvokeMETAFunction('Timer','Start');	
+}
+
+function doCalibrate()
+{
+device.calibrate(); 
+}
+
+</script>
+
+
+</head>
+<body onLoad="doTime();">
+<br /><br /><br />
+<b>Alarm with Generic</b>
+<form id="frm" action="">
+<input type="button" onclick="SetAlarm();" value="SetAlarm"><br />
+
+<input type="button" onclick="SetTimer();" value="SetTimer"><br />
+
+<input type="button" onclick="doCalibrate();" value="Calibrate"><br />
+
+
+</form>
+<br />
+<div id="outputSpan1">Waiting...</div>
+<br>
+<div id="Count">Count=</div>
+<br />
+<div id="message">message</div>
+<br />
+<A HREF="Device Application.html">Back</A>
+</body>
+</html>

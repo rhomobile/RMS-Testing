@@ -1,0 +1,51 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+<META HTTP-Equiv="quitbutton" Content="Top:10; Left:10; Visibility:Visible">
+
+
+
+</head>
+<body>
+<P>RAMManagement</P>
+<P>Delete the package before executing the test case</P>
+<P><INPUT TYPE="button" VALUE="RAMManagement True" ONCLICK="doSync();">
+<P><INPUT TYPE="button" VALUE="RAMManagement False" ONCLICK="doTest();">
+<P><INPUT TYPE="button" VALUE="Six" ONCLICK="location.href='./6.html'"></P>
+<P><INPUT TYPE="button" VALUE="Back" ONCLICK="location.href='./AirBEAM.html'"></P>
+<P><BR>Last Revision : 22 Oct 2008 <BR>by Raj</P>
+
+</body>
+</html>
+
+<script>
+var ab = new ActiveXObject("PocketBrowser.AirBEAMSmart");
+
+   function doSync()
+   {
+
+
+      ab.RAMManagement = true;
+      ab.AddPackage("license_yes");
+      setTimeout('ab.Run()', 100);
+   }
+
+   function doTest()
+   {
+
+      ab.RAMManagement = false;
+      ab.AddPackage("license_yes");
+      setTimeout('ab.Run()', 100);
+   }
+</script>
+
+ 
+
+
+
+
+ 
+
+
+

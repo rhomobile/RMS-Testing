@@ -1,0 +1,20 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+<META HTTP-Equiv="battery" Content="Left:100;Top:90;IconPosition:Left;GraphPosition:Bottom;smartBatteryEvent:url('Javascript:SmartBattery1(%json);');color:FF0000;visibility:visible;getSmartBatteryStatus">
+</head>
+<br>
+<br>
+<div id="bat">Battery readings should appear here</div>
+<BR><BR>
+<A HREF="../battIndex.html">Back</A>
+
+</html>
+<SCRIPT LANGUAGE="JavaScript">
+function SmartBattery1(json)
+	{
+		bat.innerHTML = "SN: " + json.serialNumber + "\<BR>PN:" + json.partNumber+ "\<BR>BC: " +json.batteryChargeCycles + "\<BR>RC: " + json.ratedCapacity + "\<BR>MA:" + json.manufactureDate + "\<BR>SH: " + json.stateOfHealth;
+		return;
+	}
+</SCRIPT>

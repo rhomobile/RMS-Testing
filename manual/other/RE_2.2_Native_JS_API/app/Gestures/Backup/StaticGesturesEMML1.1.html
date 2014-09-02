@@ -1,0 +1,83 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+<META HTTP-Equiv="gesture" Content="type:linear;preset:left-right;id:LinearGesture1;diagnostics:TRUE;start-x:50;
+start-y:200;end-x:200;end-y:200;tolerance:30;sensitivity:60;skew:30;deviation:50;region-width:40;create;" />
+
+<META HTTP-Equiv="gesture" Content="type:Hold;id:HoldGesture1;preset:center;diagnostics:TRUE;center-x:100;center-y:150;radius:50;delay:2000;interval:1000;create;">
+
+<META HTTP-Equiv="gesture" Content="type:Circle;preset:sad;id:CircularGesture1;diagnostics:TRUE;center-x:100;center-y:150;radius:80;start:0;end:180;
+tolerance:50;sensitivity:40;create;">
+
+<META HTTP-Equiv="gesture-detected" Content="url('Javascript:GestureEvent('%s','%s');')">
+
+
+
+
+<script language=javascript>
+
+var count=1;
+function GestureEvent(id,ncount)
+{
+mydiv.innerHTML="Gesture Detected for"+count+"th time.id:-"+id+" Count="+ncount;
+count++;
+}
+
+
+function DeleteGesture()
+{ 
+generic.InvokeMETAFunction("gesture","delete");
+} 
+
+function DelLinGes()
+{ 
+generic.InvokeMETAFunction("gesture","id:LinearGesture1;delete");
+} 
+
+function DelCircGes()
+{ 
+generic.InvokeMETAFunction("gesture","id:CircularGesture1;delete");
+} 
+
+function DelHoldGes()
+{ 
+generic.InvokeMETAFunction("gesture","id:HoldGesture1;delete");
+} 
+
+function DelGesInvalidID()
+{ 
+generic.InvokeMETAFunction("gesture","id:AAAAA;delete");
+} 
+
+function DelGesNULLID()
+{ 
+generic.InvokeMETAFunction("gesture","id:;delete");
+} 
+
+</script>
+</head>
+<body>
+<br><br><br><br>
+All Gestures static EMML 1.1
+<br>All Metatags are implemented
+
+<form id="frmLinearGestures" >
+<div id="mydiv">Gesture Detection:-</div>
+</form>
+<table border=1>
+<tr>
+<td><input type="button" onclick="DeleteGesture();" value="Delete"/></td><td><input type="button" onclick="DelLinGes();" value="Delete Linear"/></td>
+</tr>
+<tr>
+<td><input type="button" onclick="DelCircGes();" value="Delete Circle"/></td><td><input type="button" onclick="DelHoldGes();" value="Delete Hold"/></td>
+</tr>
+<tr>
+<td><input type="button" onclick="DelGesInvalidID();" value="Invalid ID"/></td><td><input type="button" onclick="DelGesNULLID();" value="NULL ID"/></td>
+</tr>
+</table>
+<P><INPUT TYPE="button" VALUE="Back" ONCLICK="location.href='Gesture_Index.html'"></P>
+
+
+</body>
+</html>

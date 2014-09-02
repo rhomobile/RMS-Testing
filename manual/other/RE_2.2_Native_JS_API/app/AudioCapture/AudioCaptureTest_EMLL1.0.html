@@ -1,0 +1,50 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+    <title>AudioCapture Test static EMML 1.0</title>
+ <META HTTP-Equiv="audioCapture" content="duration:10000">
+ <META HTTP-Equiv="audioCapture" content="name:myLocalAudio"> 
+ <META HTTP-Equiv="audioCapture" content="destination:url('ftp://10.233.85.82/Received/audioFileInFTP.wav')">
+ <META HTTP-Equiv="audioCapture" content="username:ftpadmin">
+ <META HTTP-Equiv="audioCapture" content="password:ftpadmin">
+ <META HTTP-Equiv="audioCapture" content="audioSaveEvent:url('Javascript:onCaptured('%s');')">
+ <META HTTP-Equiv="audioCapture" content="start">
+
+<script language=javascript> 
+ function onCaptured(response)
+{
+	htmDiv.innerHTML = "Javascript response ="+response;
+}
+
+function doToggle(a){
+var e=document.getElementById(a);
+if(!e)return true;
+if(e.style.display=="none"){
+e.style.display="block"
+}
+else{
+e.style.display="none"
+}
+return true;
+}
+        
+</script>
+</head>
+
+<body>
+<h1>AudioCapture Test static EMML 1.0</h1>
+<a href="#" onclick="return doToggle('para1')" value="Toggle">Details</a>
+<p id="para1" style="display: none">
+ duration:10000,name:myLocalAudio,destination:url('ftp://10.233.85.82/Received/audioFileInFTP.wav')
+ username:ftpadmin,password:ftpadmin,audioSaveEvent:url('Javascript:onCaptured('%s');'),start
+</p>
+<A HREF="AudioCapture_Index.html">Back</A><br />
+<div id="htmDiv">event will fire here...</div>
+</body>
+</html>
+
+
+
+
+

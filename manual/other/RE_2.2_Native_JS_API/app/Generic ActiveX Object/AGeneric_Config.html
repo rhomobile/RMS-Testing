@@ -1,0 +1,137 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+    <title>PB Generic Registry Test</title>
+
+<META HTTP-Equiv="sipbutton" Content="visibility:visible">
+<META HTTP-Equiv="sip" Content="automatic">
+
+<script language=javascript>
+
+function Quit()
+{
+    generic.InvokeMETAFunction("Application", "Quit"); 
+}
+function setConfig()
+{
+	var configsetting = frm.txtSetting.value;
+
+
+	var configValue = frm.txtValue.value;
+
+
+	var configAppName = frm.txtAppName.value;
+	if (configAppName!= "")
+	 var strData = generic.WriteConfigSetting(configsetting, configValue, configAppName);
+	else
+	var strData = generic.WriteConfigSetting(configsetting, configValue);
+
+	//var strData = generic.WriteConfigSetting(configsetting, configValue);
+    myDiv.innerHTML=strData;	
+	//alert(strData);
+}
+
+function getConfig()
+{
+    var loop=0;
+	var configsetting = frm.txtSetting.value;
+	
+	var configAppName = frm.txtAppName.value;
+	if(configAppName!="")
+	var Ret = generic.ReadConfigSetting(configsetting, configAppName);
+	else
+	var Ret = generic.ReadConfigSetting(configsetting);
+	alert(Ret);
+    eval("var arrRet = "+Ret);
+	//alert(arrRet.length);
+	for(;loop < arrRet.length;loop++)
+	{
+      myDiv.innerHTML+=arrRet[loop];	
+    }
+
+}
+
+function setUserConfig()
+{
+	var configUsersetting = frm.txtUserSetting.value;
+	var configUserValue = frm.txtUserValue.value;
+	
+	var strData1 = generic.WriteUserSetting(configUsersetting, configUserValue);
+	myDiv.innerHTML=strData1;
+	//alert(strData1);
+}
+
+function getUserConfig()
+{
+	var configUsersetting = frm.txtUserSetting.value;
+	//alert(configUsersetting);
+	
+	var Ret1 = generic.ReadUserSetting(configUsersetting);
+	myDiv.innerHTML=Ret1;	
+
+
+}
+
+
+</script>
+</head>
+
+<body>
+<br /><br /><br /><br /><br />
+AA
+<form id="frm" action="">
+<br /><br /><br />
+<INPUT align="center" type="button" value="Quit" onclick="Quit();"><br /><br />
+<div id="myDiv">Value:</div>
+
+<hr>
+<table>
+<tr>
+	<td>Setting</td><td><Textarea id="txtSetting"cols="21" rows="1">SCROLLTECHNIQUE</Textarea></td>
+	</tr>
+<tr>
+	<td>Value</td><td><Textarea id="txtValue"cols="21" rows="1">None</Textarea></td>
+	</tr>
+<tr>
+	<td>AppName</td><td><Textarea id="txtAppName"cols="21" rows="1">Menu</Textarea></td>
+	</tr>
+
+
+
+</table>
+
+<br>
+<!-- id="setReg" -->
+    	<input type=button onclick="Javascript:setConfig();" value="Set Config">
+<!-- id="getReg" -->
+	<input type=button onclick="Javascript:getConfig();" value="Get Config">
+<hr>
+
+<BR>
+
+<hr>
+<table>
+<tr>
+	<td>Setting</td><td><Textarea id="txtUserSetting"cols="21" rows="1">BgColor</Textarea></td>
+	</tr>
+<tr>
+	<td>Value</td><td><Textarea id="txtUserValue"cols="21" rows="1">red</Textarea></td>
+	</tr>
+</table>
+<br>
+<!-- id="setReg" -->
+    	<input type=button onclick="Javascript:setUserConfig();" value="Set User">
+<!-- id="getReg" -->
+	<input type=button onclick="Javascript:getUserConfig();" value="Get User">
+
+<hr>
+<A HREF="./Generic ActiveX Object.html">Back</A>
+
+<META HTTP-Equiv="quitbutton" Content="visibility:visible">
+<META HTTP-Equiv="quitbutton" Content="Left:10">
+<META HTTP-Equiv="quitbutton" Content="Top:10">
+
+</form>
+</body>
+</html>

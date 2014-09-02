@@ -1,0 +1,51 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+
+<script>
+
+var objGeneric = new ActiveXObject("PocketBrowser.Generic");
+var iCount = 0;
+function MinRes()
+{
+	iCount++;
+	if(iCount <= 50000)
+	{
+		objGeneric.InvokeMETAFunction('Application', 'Minimize');
+		setTimeout("restore()",3000);
+		nos.innerHTML = iCount;
+		captureLoop();
+	}
+}
+
+function restore()
+{
+    objGeneric.InvokeMETAFunction('Application', 'Restore');
+}
+function captureLoop()
+{
+	setTimeout("MinRes()", 5000);
+	
+}
+
+</script>
+
+
+
+</HEAD>
+
+
+
+<BODY>
+
+<P><BR><INPUT TYPE="button" VALUE="Back" ONCLICK="location.href='./Device Application.html'"></P>
+Minimize and Restote Test Case<br>
+<br>
+<div id="nos">X Value</div>
+<br>
+<input type=button onclick="MinRes();" value="M&R">
+
+
+</BODY>
+</HTML>

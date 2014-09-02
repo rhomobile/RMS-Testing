@@ -1,0 +1,54 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+<META HTTP-Equiv="MinimizeButton" Content="Top:10; Left:10; Visibility:Visible">
+</head>
+<body>
+<P>TestMode and UploadPackage</P>
+<P>Delete the package before executing the test case</P>
+<P><INPUT TYPE="button" VALUE="UploadPackage" ONCLICK="doSync();">
+<P><INPUT TYPE="button" VALUE="TestMode_True" ONCLICK="doTest_True();">
+<P><INPUT TYPE="button" VALUE="TestMode_False" ONCLICK="doTest_False();">
+<P><INPUT TYPE="button" VALUE="Back" ONCLICK="location.href='../AirBEAM.html'"></P>
+<div id="myDiv">Message</div>
+</body>
+</html>
+
+<script>
+      
+
+   function doSync()
+   {
+      airbeam.UploadPackage = 'key35';
+      setTimeout('airbeam.Run();', 100);
+   }
+
+
+   function doTest_True()
+   {
+      myDiv.innerHTML = "Test mode = True";
+      airbeam.TestMode = true;
+      airbeam.AddPackage("key35");
+      setTimeout('airbeam.Run();', 100);
+
+   }
+   
+   function doTest_False()
+   {
+      airbeam.TestMode = false;
+      airbeam.AddPackage("key35");
+      setTimeout('airbeam.Run();', 100);
+
+   }
+</script>
+
+ 
+
+
+
+
+ 
+
+
+

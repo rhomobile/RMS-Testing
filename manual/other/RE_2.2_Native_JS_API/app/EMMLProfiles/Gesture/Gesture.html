@@ -1,0 +1,134 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+    <title> Gesture Settings</title>
+
+  
+<script language="javascript" type="text/javascript">
+
+    var Generic = new ActiveXObject("PocketBrowser.Generic");
+    var selValue = 0;
+    var selected_Option = "";
+
+    function selectoption() {
+        selValue = document.frmCtrl.myoption.selectedIndex;
+        selected_Option = document.frmCtrl.myoption.options[selValue].value;
+        alert(selValue + "" + selected_Option);
+    }
+
+   
+  function applyProfile() {
+       
+        if (selValue <= 0) {
+            alert("Please select Valid Profile Persistance/Non Persistance option");
+            return;
+        }
+        else {
+            var w = document.frmCtrl.myctrl.selectedIndex;
+            var selected_Profile = document.frmCtrl.myctrl.options[w].value;
+//            alert("Clearing Current Profile!");
+//            Generic.InvokeMETAFunction("EMMLProfile", "clear");
+           alert("Applying Selected Profile!: " + selected_Profile);
+            if (selected_Option == "Persistanse") {
+                alert("Apply persistance");
+                Generic.InvokeMETAFunction("EMMLProfile", "name:myProfile;import:url('gesture.emmp');");
+                Generic.InvokeMETAFunction("EMMLProfile", "apply:myProfile." + selected_Profile);
+            }
+            else {
+                alert("Apply Nonpersistance");
+                Generic.InvokeMETAFunction("EMMLProfile", "import:url('gesture.emmp');");
+                Generic.InvokeMETAFunction("EMMLProfile", "apply:" + selected_Profile);
+            }
+        }
+    }
+
+    function onGesture(id, count) 
+    {
+        
+        if (id == "Scan1") 
+        {
+            message.innerHTML = "Linear gesture is detected and captured";
+        }
+        else if (id == "Scan2") 
+        {
+
+            message.innerHTML = "Circular gesture is detected and captured"; 
+        }
+        else if (id == "Scan3") 
+        {
+            message.innerHTML = "Hold gesture is detected and captured";
+        }
+        
+    }
+
+
+    function clearProfile() {
+       
+        Generic.InvokeMETAFunction("EMMLProfile", "clear:myProfile");
+    }
+
+//    function DoTest() 
+//    {
+//     if(selected_Profile=="Linear")
+//     
+//   }
+
+//    function OnSubmitForm() {
+//        var w = document.frmCtrl.myctrl.selectedIndex;
+//        var selected_Profile = document.frmCtrl.myctrl.options[w].value;
+//        if (selected_Profile == "Linear") 
+//        {
+//            document.frmCtrl.action = "GestureProcess_Linear.html";
+//        }
+//        else if (selected_Profile == "Circular") {
+//        document.frmCtrl.action = "GestureProcess_Circular.html";
+//        }
+//        else if (selected_Profile == "Hold") {
+//        document.frmCtrl.action = "GestureProcess_Hold.html";
+//        }
+//        else if (selected_Profile == "") {
+//        alert("Select any valid option");
+//        }
+//        return true;
+//    }
+
+
+</script>
+
+</head>
+<body>
+<form name="frmCtrl" id="frmCtrl"  onsubmit="return OnSubmitForm();" method="post" >
+<table border=1 id="gesturetable">
+<tr><td><select name="myoption" id="myoption" onChange="selectoption();">
+    <option value="">Select Option</option>
+    <option value="Persistanse">Persistanse</option>
+    <option value="NonPersistanse">Non Persistanse</option>
+  
+</select></td></tr><br />
+<tr>
+<td colspan=2>
+<H4>Select EMML Profile to Apply: </H4>
+<select name="myctrl" id="myctrl" onChange="applyProfile();">
+    <option value="">Select Option</option>
+    <option value="Linear">Linear</option>
+    <option value="Circular">Circular</option>
+    <option value="Hold">Hold</option>
+</select>
+</td>
+</tr>
+<tr><td><input type=button value="Clear Imported Profile" onclick="clearProfile();"></td></tr>
+</table>
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+<div id="message"></div><br /><br /><br />
+<A HREF="Persistant_LinearGesture_test.html">Persistant Linear Gesture Test</A><br />
+<A HREF="NonPersistant_LinearGesture_test.html">Non Persistant Linear Gesture Test</A><br />
+<A HREF="Persistant_CircularGesture_test.html">Persistant Circular Gesture Test</A><br />
+<A HREF="NonPersistant_CircularGesture_test.html">Non Persistant Circular Gesture Test</A><br />
+<A HREF="Persistant_HoldGesture_test.html">Persistant Hold Gesture Test</A><br />
+<A HREF="NonPersistant_HoldGesture_test.html">Non Persistant Hold Gesture Test</A><br />
+
+</form>
+
+</body>
+</html>

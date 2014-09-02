@@ -1,0 +1,63 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+<META HTTP-Equiv="quitbutton" Content="Top:10; Left:10; Visibility:Visible">
+
+
+</head>
+<body>
+<br /><br />
+<div id="myDiv">Message</div>
+<P>PSExternal Method</P>
+<P><INPUT TYPE="button" VALUE="PSExternal" ONCLICK="OnTest();">
+<P><INPUT TYPE="button" VALUE="Test 2" ONCLICK="location.href='./2.html'"></P>
+<P><INPUT TYPE="button" VALUE="Back" ONCLICK="location.href='./APD.html'"></P>
+
+
+</body>
+</html>
+
+<SCRIPT LANGAUGE="JavaScript">
+try
+{
+var apd = new ActiveXObject("PocketBrowser.NarrowBand");
+}
+catch(err)
+{
+var APDPlugin = document.createElement('embed'); 
+APDPlugin.setAttribute('id',"embed1"); 
+APDPlugin.setAttribute('type',"application/x-wtg-legacy-apd"); 
+APDPlugin.setAttribute('hidden',"true"); 
+
+// Attach the plugin embed tags to the body 
+var theBody = document.getElementsByTagName('body')[0]; 
+theBody.appendChild(APDPlugin); 
+
+}
+
+function OnTest()
+{
+    //var printerID = '0000C53';  //Cameo2=0000C22, QL320=0000C53, QL220=0000C54, Encore3=0000C33 '0000C22';
+    //var printerID = 'BC53:1|' + '00037A032772';
+    var printerID = '0000C';
+	
+	apd.PSExternal("261", printerID);
+	var code = '1234567890';
+	var sLabel = '! 0 200 200 350 1\n'
+	     + 'JOURNAL\n'
+	     + 'SPEED 3\n'
+	     + 'PW 400\n'
+	     + 'B 128 1 1 80 20 80 ' + code + '\n'
+	     + 'T 5 3 20 196 £2.00 off\n'
+	     + 'T 7 0 20 166 ' + code + '\n'
+	     + 'BOX 5 5 350 295 1\n'
+	     + 'PRINT\n';
+	//apd.PSExternal(266, 'Hello World');
+	myDiv.innerHTML=""+apd.PSExternal(266, sLabel);
+	
+	
+}
+</SCRIPT>
+
+

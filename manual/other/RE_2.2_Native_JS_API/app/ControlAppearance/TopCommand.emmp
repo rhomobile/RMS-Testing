@@ -1,0 +1,65 @@
+
+.TopHide{
+    TopCommandArea-visibility:hidden;
+ }
+
+.TopPositiveDefault{
+    TopCommandArea-visibility:visible;
+ }
+ 
+ .TopVisibilityNULL{
+    TopCommandArea-visibility:;
+ }
+ 
+  .TopVisibilityINVALID{
+    TopCommandArea-visibility:ASASASA;
+ }
+ 
+.TopPositiveColor{
+    TopCommandArea-height:200;
+    TopCommandArea-color:#9370db;
+    TopCommandArea-visibility:visible;
+ }
+ 
+ .TopColorNULL{
+    TopCommandArea-height:200;
+    TopCommandArea-color:;
+    TopCommandArea-visibility:visible;
+ }
+ 
+ .TopPositiveImageHttp{
+    TopCommandArea-height:200;
+    TopCommandArea-image:url('http://tandv.wtgdev.net/Resource/BMW.bmp');
+    TopCommandArea-visibility:visible;
+ }
+ 
+ .TopPositiveImageFTP{
+    TopCommandArea-height:200;
+    TopCommandArea-image:url('ftp://tandv:H0neymoon@tandv.wtgdev.net/Resource/BMW.bmp');
+    TopCommandArea-visibility:visible;
+ }
+ 
+  .TopPositiveImageURLNULL{
+    TopCommandArea-height:200;
+    TopCommandArea-image:url('');
+    TopCommandArea-visibility:visible;
+ }
+ 
+ .TopPositiveImageNULL{
+    TopCommandArea-height:200;
+    TopCommandArea-image:;
+    TopCommandArea-visibility:visible;
+ }
+ 
+ .TopPositiveHeightNegative{
+    TopCommandArea-height:-10;
+    TopCommandArea-color:#9370db;
+    TopCommandArea-visibility:visible;
+ }
+ 
+ .TopPositiveHeightNULL{
+    TopCommandArea-height:;
+    TopCommandArea-color:#9370db;
+    TopCommandArea-visibility:visible;
+ }
+ 

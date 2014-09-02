@@ -1,0 +1,44 @@
+<HTML>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+<!--<BODY onload="OnTimer();">-->
+<META HTTP-Equiv="quitbutton" Content="visibility:visible">
+
+</HEAD>
+
+<BODY>
+<SCRIPT LANGUAGE="JavaScript">
+ var iCount = 0;
+var mygeneric = new ActiveXObject("PocketBrowser.Generic");
+
+    function OnTimer() 
+    {
+
+        iCount++;
+        if (iCount <= 50000) 
+        {
+            var rValue3 = mygeneric.Log('This is high priority log my dear\r\n'+iCount, 3);
+            nos.innerHTML = iCount;
+            captureLoop();
+
+        }
+    }
+
+    function captureLoop() {
+        OnTimer(); 
+        setTimeout("OnTimer()", 2000);
+
+    }
+</SCRIPT>
+<br /><br /><br />
+<b>Log Memory Leak using Timer 5</b>
+
+<DIV ID="reg">Get Registry</DIV>
+<div id="nos">X Value</div>
+<P><INPUT TYPE="button" VALUE="StartTest" ONCLICK="OnTimer();"></P>
+<P><INPUT TYPE="button" VALUE="Back" ONCLICK="location.href='./mygeneric ActiveX Object.html'"></P>
+
+</BODY>
+</HTML>
+

@@ -1,0 +1,164 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+
+
+</head>
+<body>
+<h4>Unnamed EMML Profile Script for version info</h4><br />
+<DIV ID="outputDiv">Version Info will be displayed hare</DIV><br /><br />
+
+
+<a href="javascript:doApplyProfile('Version1');">Apply javascript version Profile</a><br />
+<a href="javascript:doApplyProfile('Version2');">Apply Json version Profile</a><br />
+<a href="javascript:doApplyProfile('Version3');">Apply javascript version Profile with empty version event</a><br />
+<a href="javascript:doApplyProfile('Version4');">Apply javascript version Profile with empty url event</a><br />
+
+<br><br><br>
+<input type=button value="Import UnNamed Profile" onclick="importProfile();">&nbsp&nbsp&nbsp&nbsp&nbsp
+<input type=button value="Import Empty named Profile" onclick="importProfile2();"><br /><br />
+<input type=button value="Import Empty import Profile" onclick="importProfile3();">&nbsp&nbsp&nbsp&nbsp&nbsp
+<input type=button value="Clear Profile" onclick="clearProfile();">
+
+<h4>Browse to another page to check for EMML profile persistance.</h4>
+<h4><a href="Persistant_Version_Test.html">Click here to go to another page.</a></h4>
+<hr />
+<a href="VersionIndex.html">Back to Version index</a>
+<br /><P><INPUT TYPE="button" VALUE="Quit" ONCLICK="Quit();"></P>
+
+
+</body>
+</html>
+
+
+<SCRIPT LANGUAGE="JavaScript">
+ try
+{
+var generic = new ActiveXObject("PocketBrowser.Generic");
+}
+catch(err)
+{
+var GenericPlugin = document.createElement('embed'); 
+GenericPlugin.setAttribute('id',"embed1"); 
+GenericPlugin.setAttribute('type',"application/x-wtg-legacy-generic"); 
+GenericPlugin.setAttribute('hidden',"true"); 
+
+// Attach the plugin embed tags to the body 
+var theBody = document.getElementsByTagName('body')[0]; 
+theBody.appendChild(GenericPlugin); 
+
+
+}	  
+ 
+
+    function importProfile() 
+    {
+	        generic.InvokeMETAFunction("EMMLProfile", "import:url('http://10.233.85.82/NEON/VersionInfo/myVersion.emmp');");
+
+
+		     outputDiv.innerHTML = "Named Profile imported";
+    }
+    
+    
+    function importProfile2() 
+    {
+	       generic.InvokeMETAFunction("EMMLProfile", "name:;import:url('http://10.233.85.82/NEON/VersionInfo/myVersion.emmp');");
+    		outputDiv.innerHTML = "Empty Named Profile imported";
+
+
+    }
+    
+    
+    function importProfile3() 
+    {
+	     generic.InvokeMETAFunction("EMMLProfile", "import:");
+        outputDiv.innerHTML = "Empty Import Profile imported";
+
+
+    }
+
+    function doApplyProfile(profile) 
+    {
+
+        generic.InvokeMETAFunction('EMMLProfile', 'Apply:'+profile);
+	    outputDiv.innerHTML = "Apply profile";
+
+
+    }
+    
+    function doApplyProfileEmpty(profile)
+    {
+       generic.InvokeMETAFunction('EMMLProfile', 'Apply:');
+	    outputDiv.innerHTML = "Apply with empty param";
+    
+    }
+
+
+   
+    
+    
+    
+    
+    
+    
+
+
+    function clearProfile() 
+    {
+       
+        generic.InvokeMETAFunction('EMMLProfile', 'clear:myProfile');
+	    outputDiv.innerHTML = "Profile cleared";
+
+    }
+    
+    
+    
+   
+	function Quit()
+	{
+	generic.InvokeMETAFunction("Application", "Quit");
+	}
+	
+	
+
+	function fnVer(productVersion, hotFixes, componentVersions)
+	{
+		var theOutput = "<B>Product Version:</b> " + productVersion + "<P>";
+		theOutput = theOutput + "<b>Hot Fixes:</b><P>";
+		for (var i=0; i<hotFixes.length; i = i + 1)
+		{
+		   	 
+                   theOutput = theOutput + "  Hot Fix: " + hotFixes[i]+"No of Hotfix"+hotFixes.length+ "<BR>";
+		}
+		theOutput = theOutput + "<P>";
+		theOutput = theOutput + "<b>Installed Components:</b><P>";
+		for (var j=0; j<componentVersions.length; j = j + 1)
+		{
+			theOutput = theOutput + "  Component: " + componentVersions[j][0] + ': ' + componentVersions[j][1] + "<BR>";
+		}
+		outputDiv.innerHTML = theOutput;
+	}
+		  
+	
+	
+	
+	function fnVerJSON(jsonObject)
+	{
+		var theOutput = "<B>Product Version:</b> " + jsonObject.ProductVersion + "<P>";
+		theOutput = theOutput + "<b>Hot Fixes:</b><P>";
+		for (var i=0; i<jsonObject.HotFixes.length; i = i + 1)
+		{
+			theOutput = theOutput + "  Hot Fix: " + jsonObject.HotFixes[i] + "<BR>";
+		}
+		theOutput = theOutput + "<P>";
+		theOutput = theOutput + "<b>Installed Components:</b><P>";
+		for (var j=0; j<jsonObject.ComponentVersions.length; j = j + 1)
+		{
+			theOutput = theOutput + "  Module: " + jsonObject.ComponentVersions[j].Module + ', Version: ' + jsonObject.ComponentVersions[j].Version + "<BR>";
+		}
+		outputDiv.innerHTML = theOutput;
+	}
+	
+	
+</SCRIPT>

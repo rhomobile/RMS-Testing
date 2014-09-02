@@ -1,0 +1,36 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+<META HTTP-EQUIV="backlight" content="Intensity:4;backlightSettingsEvent:url('javascript:fnBacklightJSON(%json);');getBacklightSettings">
+<script language="javascript">
+
+function fnBacklightJSON(jsonObject)
+        {
+              var theOutput = "<B>Backlight State:</B>" + jsonObject.state + "<P>";
+              theOutput = theOutput + "<B>Backlight Intensity:</b> " + jsonObject.intensity + "<P>";
+              theOutput = theOutput + "<b>Backlight Intensity Range:</b><P>";
+              for (var i=0; i<jsonObject.intensityRange.length; i = i + 1)
+              {
+                      theOutput = theOutput + jsonObject.intensityRange[i] + "<BR>";
+              }
+              theOutput = theOutput + "<P>";
+              outputDiv.innerHTML = theOutput;
+              
+        }
+
+</script>
+</head>
+
+<BODY BGCOLOR="#FFFFEA" TEXT="#0000A0" LINK="#FF0000" VLINK="#808080" ALINK="#008040">
+<br /><br /><br /><br /><br />
+<p>Backlight with Intensity 4 and getbacklightLevels method</p>
+<div id="outputDiv">Backlight settings go here</div>
+
+
+<br><A HREF="./EMML1_1_index.html">Back</A>
+
+
+
+</BODY>
+</HTML>

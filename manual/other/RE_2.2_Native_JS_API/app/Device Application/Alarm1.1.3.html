@@ -1,0 +1,27 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+<META HTTP-Equiv="Alarm" Content="Interval:;Repeat:;AlarmTriggered:;set">
+<script>
+var generic = new ActiveXObject("PocketBrowser.Generic");
+var count=0;
+   function doAlarm()
+   {
+        
+        count++;
+        outputSpan1.innerHTML = 'Alarm Triggered';
+        Count.innerHTML = "Count = "+count;
+   }
+</script>
+</head>
+<BODY BGCOLOR="#FFFFEA" TEXT="#0000A0" LINK="#FF0000" VLINK="#808080" ALINK="#008040">
+Alarm Tag EMML 1.1  (interval ,repeat ,Alarmtriggered are empty)<br>
+<div id="outputSpan1">Waiting......</div>
+<br />
+<div id="Count">Count</div>
+<P><BR><INPUT TYPE="button" VALUE="Back" ONCLICK="generic.InvokeMETAFunction('Alarm','clear');location.href='../WANIndx.html'"></P>
+<P><BR><INPUT TYPE="button" VALUE="Back" ONCLICK="generic.InvokeMETAFunction('Alarm','clear');location.href='Device Application.html'"></P>
+
+</BODY>
+</HTML>

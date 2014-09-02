@@ -1,0 +1,308 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+    <title>PB Device Application Test</title>
+<meta name="mobileoptimized" content="0" />
+
+
+<form id="frm" action="">
+
+<hr>
+HourGlass<br>
+Select Visibility	<select name="hgVisibility" id="hgVisibility" onChange="selectVisibility();">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="Visible">Visible</option>
+<option value="Hidden">Hidden</option>
+<option value="Address">Address</option>
+</select><br>
+<tr>
+      Left Position	<Textarea id="leftPosition" cols="10" rows="1"onchange="setLeftPosition();"></Textarea>
+	</tr><br>
+<tr>
+
+      Top Position	<Textarea id="topPosition" cols="10" rows="1" onchange="setTopPosition();"></Textarea>
+	 </tr>
+
+<hr><br>
+
+<hr>
+Keylight
+<select name="keydropdown" id="keydropdown">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="On">On</option>
+<option value="Off">Off</option>
+</select>
+<tr>
+	Intensity	<td><Textarea id="txtIntensity"cols="10" rows="1"></Textarea></td>
+	</tr><br>
+    <input type=button onclick="Javascript:setKeylight();" value="Keylight">
+<hr>
+<br>
+
+<hr>
+PowerOn<br>
+<input type="checkbox" name="purl" value="purl1">PowerOnEvent URL
+<input type="checkbox" name="pscript" value="pscript1">PowerOnEvent JavaScript
+<input type="checkbox" name="url" value="url1">URL
+<br>
+    <input type="button" onclick="Javascript:power();" value="PowerOn">
+<hr>
+<br>
+
+<hr>
+PowerOn<br>
+Select PowerOn	<select name="OnPower" id="OnPower" onChange="SelectPower();">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="purl">purl</option>
+<option value="pscript">pscript</option>
+<option value="url">url</option>
+</select>
+<hr>
+<br>
+
+<hr>
+Reboot<br>
+Select Reboot	<select name="rbboot" id="rbboot" onChange="selectReboot();">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="Warm">Warm</option>
+<option value="Cold">Cold</option>
+<option value="ColdBoot">ColdBoot</option>
+<option value="Null">Null</option>
+</select>
+<hr>
+<br>
+
+<hr>
+ScreenOrientation<br>
+Select ScreenOrientation	<select name="sOrientation" id="sOrientation" onChange="selectSO();">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="RightHanded">RightHanded</option>
+<option value="LeftHanded">LeftHanded</option>
+<option value="UpsideDown">UpsideDown</option>
+<option value="Normal">Normal</option>
+<option value="URL">URL</option>
+<option value="JavaScript">JavaScript</option>
+</select>
+<hr>
+<br>
+
+<br><br>
+<A HREF="./INDEX.html">Back</A>
+
+<META HTTP-Equiv="Keylight" content="Off">
+
+</form>
+</body>
+</html>
+<script language=javascript>
+
+
+
+
+ try
+{
+var generic = new ActiveXObject("PocketBrowser.generic");
+}
+catch(err)
+{
+var GenericPlugin = document.createElement('embed'); 
+GenericPlugin.setAttribute('id',"embed1"); 
+GenericPlugin.setAttribute('type',"application/x-wtg-legacy-generic"); 
+GenericPlugin.setAttribute('hidden',"true"); 
+
+// Attach the plugin embed tags to the body 
+var theBody = document.getElementsByTagName('body')[0]; 
+theBody.appendChild(GenericPlugin); 
+
+
+}
+
+var selectedVisibility="";
+
+
+function selectVisibility()
+{
+	var sltVisibility=frm.hgVisibility.selectedIndex;
+	selectedVisibility = frm.hgVisibility.options[sltVisibility].value;
+	switch(selectedVisibility)
+	{
+		case 'Visible':
+			objGeneric.InvokeMETAFunction('Hourglass', 'Visibility:Visible');
+			break;
+
+		case 'Hidden':
+
+			objGeneric.InvokeMETAFunction('Hourglass', 'Visibility:Hidden');
+			break;
+
+		
+		case 'Address':
+
+			objGeneric.InvokeMETAFunction('Hourglass', 'Visibility:Address');
+			break;
+	}
+}
+
+function setLeftPosition()
+{
+	var leftpst=frm.leftPosition.value;
+	var leftpstvalue="Left:"+leftpst;
+	objGeneric.InvokeMETAFunction('Hourglass',leftpstvalue);
+}
+
+function setTopPosition()
+{
+	var toppst=frm.topPosition.value;
+	var toppstvalue="Top:"+toppst;
+	objGeneric.InvokeMETAFunction('Hourglass',toppstvalue);
+}
+
+
+
+
+
+function selectSO()
+{
+	var sltSO=frm.sOrientation.selectedIndex;
+	var selectedSO = frm.sOrientation.options[sltSO].value;
+	switch(selectedSO)
+	{
+		case 'RightHanded':
+
+			myobjGeneric.InvokeMETAFunction('ScreenOrientation', 'RightHanded');
+			break;
+
+		case 'LeftHanded':
+			alert('Left');
+			myobjGeneric.InvokeMETAFunction('ScreenOrientation', 'LeftHanded');
+			break;
+
+		
+		case 'UpsideDown':
+
+			myobjGeneric.InvokeMETAFunction('ScreenOrientation', 'UpsideDown');
+			break;
+
+		case 'Normal':
+
+			myobjGeneric.InvokeMETAFunction('ScreenOrientation', 'Normal');
+			break;
+
+		case 'URL':
+			
+            
+			myobjGeneric.InvokeMETAFunction("ScreenOrientation", "ScreenOrientationEvent:url('http://10.233.85.82/pb3.x/index.html')");
+			myobjGeneric.InvokeMETAFunction('ScreenOrientation', 'Normal');
+//			myobjGeneric.InvokeMETAFunction('ScreenOrientation', 'RightHanded');
+		break;
+
+		case 'JavaScript':
+			//myobjGeneric.InvokeMETAFunction("ScreenOrientation", "ScreenOrientationEvent:");
+		    myobjGeneric.InvokeMETAFunction("ScreenOrientation", "ScreenOrientationEvent:url('javascript:alert('Orientation Changed');')");
+			myobjGeneric.InvokeMETAFunction('ScreenOrientation', 'Normal');
+			break;
+	}
+}
+
+function selectReboot()
+{
+	var sltreboot=frm.rbboot.selectedIndex;
+	var selectedReboot = frm.rbboot.options[sltreboot].value;
+	switch(selectedReboot)
+	{
+		case 'Warm':
+
+			myobjGeneric.InvokeMETAFunction('Reboot', 'Warm');
+			break;
+
+		case 'Cold':
+
+			myobjGeneric.InvokeMETAFunction('Reboot', 'Cold');
+			break;
+		case 'ColdBoot':
+
+			myobjGeneric.InvokeMETAFunction('Reboot', 'ColdCAD');
+			break;
+		
+		case 'Null':
+
+			myobjGeneric.InvokeMETAFunction('Reboot', '');
+			break;
+	}
+}
+
+function power() 
+{
+   
+	if(frm.purl.checked == true)		
+	{
+		alert('purl');
+	    myobjGeneric.InvokeMETAFunction("PowerOn", "PowerOnEvent:url('FILE://\\Application\\PB3.x\\index.html')");
+	}
+	if(frm.pscript.checked == true)
+	{
+		//alert('pscript');
+		myobjGeneric.InvokeMETAFunction("PowerOn", "PowerOnEvent:url('javascript:alert('Powered Up');')");
+		//myobjGeneric.InvokeMETAFunction("PowerOn", "PowerOnEvent:");
+		
+	}
+	if(frm.url.checked == true)
+	{
+	    myobjGeneric.InvokeMETAFunction("PowerOn", "url('FILE://\\Application\\PB3.x\\index.html')");
+	}
+}
+
+function SelectPower()
+{
+	var SelectedValue1 = frm.OnPower.selectedIndex;
+	var selectPower = frm.OnPower.options[SelectedValue1].value;
+
+	switch(selectPower)
+	{
+	    case 'purl':
+	       
+		    myobjGeneric.InvokeMETAFunction("PowerOn", "PowerOnEvent:url('FILE://\\Application\\pb3.x\\index.html')");
+			break;
+
+		case 'pscript':
+
+			myobjGeneric.InvokeMETAFunction("PowerOn", "PowerOnEvent:url('javascript:alert('Powered Up');')");
+			break;
+			
+		case 'url':
+
+		    myobjGeneric.InvokeMETAFunction("PowerOn", "PowerOnEvent:");
+			break;
+
+	}
+	
+}
+
+function setKeylight()
+{
+	var SelectedValue = frm.keydropdown.selectedIndex;
+	var selectKeylight = frm.keydropdown.options[SelectedValue].value;
+
+	var IntensityValue = frm.txtIntensity.value;
+	var IValue = "Intensity:"+IntensityValue;
+
+	switch(selectKeylight)
+	{
+		case 'On':
+
+			myobjGeneric.InvokeMETAFunction('Keylight-On', IValue);
+			break;
+
+		case 'Off':
+
+			myobjGeneric.InvokeMETAFunction('Keylight', 'Off');
+			break;
+
+	}
+	
+}
+
+</script>
+
+

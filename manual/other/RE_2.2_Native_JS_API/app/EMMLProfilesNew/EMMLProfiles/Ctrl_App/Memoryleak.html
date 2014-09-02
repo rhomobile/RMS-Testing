@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+    <title>A Control & Apperance EMML Profiles Test Page</title>
+
+  <script language="javascript" type="text/javascript">
+    var Generic = new ActiveXObject("PocketBrowser.Generic");
+
+    var oc = 0;
+    var cc = 0;
+    function dostart() {
+
+        setTimeout("doApplyProfile()", 3000);
+    }
+
+
+    function doApplyProfile() {
+       oc = oc + 1;
+       //Generic.InvokeMETAFunction("EMMLProfile", "name:test;import:url('../../../EMMLProfiles/Ctrl_App/CtrlApp.emmp');");
+       Generic.InvokeMETAFunction("EMMLProfile", "name:test;import:url('file://\\Application\\CtrlApp.emmp');");
+
+      Generic.InvokeMETAFunction("EMMLProfile", "Apply:test.TopCommandArea1");
+      opencount.innerHTML = "Open count:" + oc;
+      setTimeout("doClear()", 10000);
+    }
+
+  function doClear()
+   {
+       cc = cc + 1;
+       Generic.InvokeMETAFunction("EMMLProfile", "Apply:test.TopCommandAreaHide");
+       Generic.InvokeMETAFunction("EMMLProfile", "clear:test");
+       closecount.innerHTML = "Close count:" + cc;
+       setTimeout("doApplyProfile()", 10000);
+
+  }
+   
+</script>
+
+</head>
+<BODY onload="dostart();">
+<br><br><br><br><br>EMML Memory Leak<br />
+<div id="opencount"><b>Number of Counts Apply</b></div> <br /><br />
+<div id="closecount"><b>Number of Counts Clear</b></div><br /><br />
+
+
+</BODY>
+</html>

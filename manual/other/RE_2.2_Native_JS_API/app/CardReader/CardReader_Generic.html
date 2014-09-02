@@ -1,0 +1,461 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+    <title>NEON CardReader Test</title>
+<META HTTP-Equiv="ZoomTextButton" Content="Visibility:Visible">
+<META HTTP-Equiv="KeyCapture" Content="Acceleratekey:all">
+<meta name="mobileoptimized" content="0" />
+ </head>
+<body>
+<br /><br /><br />
+<div id="Message">Message</div>
+<br /><br />
+<form id="frmCardReader" action="">
+CardReader using generic(Keyword)
+<hr>
+
+
+Module:<br />
+<input type="radio" name="group1" value="MSR7000" />MSR7000
+<input type="radio" name="group1" value="DCR7000" />DCR7000
+<input type="radio" name="group1" value="MSR9500" />MSR9500
+<input type="radio" name="group1" value="MSR9000" />MSR9000
+<input type="radio" name="group1" value="MSR55" />MSR55
+<input type="radio" name="group1" value="MSR3000" />MSR3000
+<input type="radio" name="group1" value="" />EMPTY
+<input type="radio" name="group1" value="DEFAULT" checked="checked"/>DEFAULT
+
+
+
+<hr />
+
+Event:<br />
+<input type="radio" name="group2" value="JavaScript" checked="checked" />JavaScript
+<input type="radio" name="group2" value="JSON" />JSON
+<input type="radio" name="group2" value="HTML" />HTML
+<input type="radio" name="group2" value="DETACHEVENT" />DETACHEVENT
+<input type="radio" name="group2" value="EMPTYEVENT" />EMPTYEVENT
+<hr />
+
+
+<table border=1 width=100%>
+    <tr>
+
+        <td><a href="main"></a></td>
+    </tr>
+    <tr>
+        <td>Card Data:</td><td><Textarea id="txtCardData" cols="30" rows="7"></Textarea></td>
+    </tr>
+    <tr>
+        <td>Track1 Data:</td><td><Textarea id="txtTrack1Data" cols="30" rows="1"></Textarea></td>
+
+    </tr>
+    <tr>
+        <td>Track2 Data:</td><td><Textarea id="txtTrack2Data" cols="30" rows="1"></Textarea></td>
+    </tr>
+    <tr>
+        <td>Track3 Data:</td><td><Textarea id="txtTrack3Data" cols="30" rows="1"></Textarea></td>
+    </tr>
+</table>
+
+
+<table>
+
+    <tr>
+        <td>PinTimeOut:</td>
+        <td><textarea id="txt1" cols="10" rows="1">DEFAULT</textarea></td>
+    </tr>
+    <tr>
+        <td>PAN:</td><td><textarea id="Textarea1" cols="20" rows="1">1111222233334444</textarea></td>
+    </tr>
+
+</table>
+
+
+<table>
+
+<tr>
+<td><a name="settings"></a></td>
+</tr>
+
+<tr>
+    <td><input type="button" id="Button2" onclick="SetPANData();" value="SetPANData"/></td>
+
+    <td><input type="button" id="cmdOpen" onclick="OpenMSR();" value="Open MSR"/></td>
+
+    <td><input type="button" id="Button1" onclick="attachRead();" value="Attach ReadEvent"/></td>
+</tr>
+
+
+
+
+<tr>
+<td>
+
+<br />
+AutoEnter:
+<input type="radio" name="group3" value="DEFAULT" checked="checked" />DEFAULT
+<input type="radio" name="group3" value="disabled" />Disabled
+<input type="radio" name="group3" value="enabled" />Enabled
+<input type="radio" name="group3" value="INVALIDSTRING" />INVALIDSTRING
+<input type="radio" name="group3" value="" />EMPTYSTRING
+</td>
+</tr>
+<tr>
+<td>AutoTab
+
+<input type="radio" name="group4" value="DEFAULT" checked="checked" />DEFAULT
+<input type="radio" name="group4" value="disabled" />Disabled
+<input type="radio" name="group4" value="enabled" />Enabled
+<input type="radio" name="group4" value="INVALIDSTRING" />INVALIDSTRING
+<input type="radio" name="group4" value="" />EMPTYSTRING
+</td>
+</tr>
+<tr>
+<td>PinEnt
+
+<input type="radio" name="group5" value="DEFAULT" checked="checked" />DEFAULT
+<input type="radio" name="group5" value="Off" />Off
+<input type="radio" name="group5" value="On" />On
+<input type="radio" name="group5" value="INVALIDSTRING" />INVALIDSTRING
+<input type="radio" name="group5" value="" />EMPTYSTRING
+</td>
+</tr>
+<tr>
+<td><br /><input type="button" id="Button2" ONCLICK="CloseMSR();" value="Close"/></td>
+</tr>
+</table>
+
+</form>
+<P><INPUT TYPE="button" VALUE="Back" ONCLICK="location.href='CardReader_Index.html'"></P>
+</body>
+</html>
+
+<script language=javascript type="text/javascript">
+
+
+
+var SelectedItem="";
+var SelectedMSR="";
+
+function attachRead()
+{   
+    SelectAppropriateMSR();
+    SetAutoEnter();
+    SetAutoTab();
+    SetPinEntry();
+    SetPinTimeout();
+    
+    for (var i=0; i < frmCardReader.group2.length; i++)
+   	{   
+     	if (frmCardReader.group2[i].checked)
+      		{
+      		    
+      		SelectedItem= frmCardReader.group2[i].value;
+      			
+      	}
+   	}	
+  
+    
+    var temp;
+
+    if (SelectedItem == "HTML") {
+        temp = "readevent:url('http://10.233.85.82/NEON/Navigate.html?Data=%s&MODE=%s')";
+
+    }
+    else if (SelectedItem == "JavaScript") {
+        temp = "readevent:url('javascript:MyReadEvent('%s', '%s');')";
+    }
+    else if(SelectedItem == "DETACHEVENT")
+    {
+        temp = "readevent:url('')";
+    }
+    else if(SelectedItem == "EMPTYEVENT")
+    {
+        temp = "readevent:";
+    }
+    else if(SelectedItem == "JSON")
+    {
+        temp = "readevent:url('javascript:MyReadEventjson(%json);')";
+    }
+    Message.innerHTML="Message:"+temp;
+
+    generic.InvokeMETAFunction("cardreader",temp);
+ 
+ 
+}
+
+
+function MyReadEvent(data,mode)
+{	
+Message.innerHTML="Data:- "+data+"Mode:- "+mode;
+
+    switch(mode)
+    {
+	
+	case 'CR':
+		frmCardReader.txtCardData.value =data;
+		ProcessCardData(data);
+		break;
+	case 'ENCDATA':
+		frmCardReader.txtCardData.value ="Encrypted data:- "+data;
+		break;
+	case 'MESSAGE':
+		frmCardReader.txtCardData.value ="Error:- "+data;
+		break;
+	case 'PAN':
+		frmCardReader.txtCardData.value ="PAN:- "+data;
+		if(SelectedMSR == "DCR7000")
+		{
+		    Message.innerHTML="Message:"+"Please turn the unit over and enter the PIN";
+		}
+		break;		
+    }					
+}
+
+function MyReadEventjson(jsonObject)
+{	
+Message.innerHTML="Message:using json"+jsonObject.data+jsonObject.mode;
+ alert("Data:- "+jsonObject.data+"Mode:- "+jsonObject.mode);
+
+    switch(jsonObject.Mode)
+    {
+	
+	case 'CR':
+	   
+		frmCardReader.txtCardData.value =jsonObject.Data;
+		ProcessCardData(jsonObject.Data);
+		break;
+	case 'ENCDATA':
+		frmCardReader.txtCardData.value ="Encrypted data:- "+jsonObject.Data;
+		break;
+	case 'MESSAGE':
+		frmCardReader.txtCardData.value ="Error:- "+jsonObject.Data;
+		break;
+	case 'PAN':
+		frmCardReader.txtCardData.value ="PAN:- "+jsonObject.Data;
+		if(SelectedMSR == "DCR7000")
+		{
+		    Message.innerHTML="Message:"+"Please turn the unit over and enter the PIN";
+		   
+		}
+		break;		
+    }					
+}
+
+
+function ProcessCardData(data)
+{
+    var carddata=data;
+    var Track1Data,Track2Data,Track3Data;
+    Track1Data="NULL";
+    Track2Data="NULL";
+    Track3Data="NULL";
+    
+    var position1 = carddata.indexOf('%');
+    var position2 = carddata.indexOf('?');
+    var carddatalength = carddata.length;
+    if((position1==-1)||(position2==-1))
+    {
+        Track1Data="NULL";
+    }
+    else
+    {
+        Track1Data = carddata.substring(position1,position2);
+        carddata=carddata.substring(position2+1,carddatalength);
+        carddatalength=carddata.length;
+    }
+
+    position1=carddata.indexOf(';');
+    position2=carddata.indexOf('?');
+
+    if((position1==-1)||(position2==-1))
+    {
+        Track2Data="NULL";
+    }
+    else
+    {
+        Track2Data = carddata.substring(position1,position2);
+        carddata=carddata.substring(position2+1,carddatalength);
+        carddatalength=carddata.length;
+    }
+
+    if(SelectedMSR=="MSR9001")
+    {
+        position1=carddata.indexOf('+');
+    }
+    else
+    {
+        position1=carddata.indexOf(';');
+    }
+    position2=carddata.indexOf('?');
+
+    if((position1==-1)||(position2==-1))
+    {
+        Track3Data="NULL";
+    }
+    else
+    {
+        Track3Data = carddata.substring(position1,position2);
+    }
+
+
+    frmCardReader.txtTrack1Data.value=Track1Data;
+    frmCardReader.txtTrack2Data.value=Track2Data;
+    frmCardReader.txtTrack3Data.value=Track3Data;
+}
+
+
+function OpenMSR()
+{
+    SelectAppropriateMSR();
+    SetAutoEnter();
+    SetAutoTab();
+    SetPinEntry();
+    SetPinTimeout();
+
+    var bRetVal = generic.InvokeMETAFunction("cardreader","open");
+
+}
+
+function CloseMSR()
+{
+   var bRetVal = generic.InvokeMETAFunction("cardreader","close");
+    alert("Closed");
+}
+
+function ClearTextboxes()
+{  
+    frmCardReader.txtCardData.value  ="";
+    frmCardReader.txtTrack1Data.value="";
+    frmCardReader.txtTrack2Data.value="";
+    frmCardReader.txtTrack3Data.value="";
+}
+
+
+
+function SelectAppropriateMSR()
+{
+    
+    for (var i=0; i < frmCardReader.group1.length; i++)
+   	{   
+     	if (frmCardReader.group1[i].checked)
+      		{
+      		    
+      		SelectedMSR= frmCardReader.group1[i].value;
+      			
+      	}
+   	}	
+    alert("SelectedMSR:- "+SelectedMSR);
+    if(SelectedMSR != "DEFAULT")
+    {
+    ModuleNameCommand = "moduleName:" + SelectedMSR;
+	alert("Joydeep"+ModuleNameCommand);
+    generic.InvokeMETAFunction("cardReader",ModuleNameCommand);
+    }
+    Message.innerHTML="Message:"+ModuleNameCommand;
+}
+
+function SetAutoEnter()
+{
+     
+    var AutoEnterValue="";
+    for (var i=0; i < frmCardReader.group3.length; i++)
+   	{   
+     	if (frmCardReader.group3[i].checked)
+      		{
+      		    
+      		AutoEnterValue= frmCardReader.group3[i].value;
+      			
+      	}
+   	}	
+
+
+    if(AutoEnterValue!="DEFAULT")
+    {
+    generic.InvokeMETAFunction("cardreader","autoenter:"+AutoEnterValue);
+    }
+    
+
+}
+
+
+function SetAutoTab()
+{
+    var AutoTabValue="";
+    for (var i=0; i < frmCardReader.group4.length; i++)
+   	{   
+     	if (frmCardReader.group4[i].checked)
+      		{
+      		    
+      		AutoTabValue= frmCardReader.group4[i].value;
+      			
+      	}
+   	}	
+   
+    if(AutoTabValue!="DEFAULT")
+    {
+    generic.InvokeMETAFunction("cardreader","autotab:"+AutoTabValue);
+    }
+
+
+}
+
+function SetPinEntry()
+{
+
+ var PinEntryValue="";
+ 
+ for (var i=0; i < frmCardReader.group5.length; i++)
+   	{   
+     	if (frmCardReader.group5[i].checked)
+      		{
+      		    
+      		PinEntryValue= frmCardReader.group5[i].value;
+      			
+      	}
+   	}	
+   	
+    if(PinEntryValue!="DEFAULT")
+    {
+    generic.InvokeMETAFunction("cardreader","pinEntry:"+PinEntryValue);
+    }
+   	
+   	
+}
+
+
+
+
+function SetPinTimeout()
+{
+    var PinTimeout="";
+    var temp="";
+    PinTimeout=frmCardReader.txt1.value;
+    
+    if(PinTimeout!="DEFAULT")
+    {
+    temp="pintimeout:"+PinTimeout;
+    generic.InvokeMETAFunction("cardreader",temp);
+    }
+}
+
+
+
+function SetPANData()
+{
+    var PANData="";
+    var temp="";
+    PANData=frmCardReader.Textarea1.value;
+    
+    
+    if(PANData!="DEFAULT")
+    {
+    temp="pandata:"+PANData;
+    Message.innerHTML="Message:"+temp;
+    generic.InvokeMETAFunction("cardreader",temp);
+    }
+}
+
+</script>

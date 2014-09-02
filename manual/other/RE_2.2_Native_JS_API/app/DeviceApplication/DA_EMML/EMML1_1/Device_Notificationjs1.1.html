@@ -1,0 +1,40 @@
+<HTML>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+<META HTTP-Equiv="Notification" content="EnumNotificationsEvent:url('javascript:setupNtfyArr(%s)');enumerate">
+</HEAD>
+<script>
+   var ntfyArr = new Array();
+   var notType = new Array('LED', 'BEEPER', 'PAGER');
+   var NTFY_INDEX = 0;
+   var NTFY_TYPE = 1;
+   var NTFY_NAME = 2;
+
+   function setupNtfyArr(notArr)
+   {
+     ntfyArr = notArr;
+	 var html = "";
+
+	 for(i=0; i<ntfyArr.length; i++)
+     {
+       html += '' + ntfyArr[i][NTFY_INDEX] + ', '
+	        + notType[ntfyArr[i][NTFY_TYPE]] + ''
+	        + ntfyArr[i][NTFY_NAME] + '';
+     }
+
+     html += "";
+     htmDiv.innerHTML = html;
+   }
+
+   
+</script>
+   <BODY>
+   <br /><br />
+      <div id="htmDiv">Object will be populateed hare....</div>
+      <br /><br /><br /><br /><br />
+<p>Notification Event only</p>
+<br><A HREF="./EMML1_1_index.html">Back</A>
+   </BODY>
+</HTML>
+

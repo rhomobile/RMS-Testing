@@ -1,0 +1,137 @@
+<HTML>
+  <head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+  <TITLE>Config Test Page</TITLE>
+  
+  <SCRIPT>
+  
+  var outputStr="";
+  var gen = new ActiveXObject("PocketBrowser.Generic");
+  
+  var ScrollBars="";
+    
+  
+  
+  function Save()
+  {
+    //save the config settings
+    ScrollBars              = GetSetting("SCROLLBARSENABLED","Menu");
+   
+  }
+  
+  function Write()
+  {
+    Save();//save the old setting
+    gen.WriteConfigSetting("SCROLLBARSENABLED","0","Menu");
+    Run();
+  }
+  
+  function Restore()
+  {
+    //restore the old settings  
+    gen.WriteConfigSetting("SCROLLBARSENABLED",ScrollBars,"Menu");
+       
+    Run(); 
+  }
+  function GetSetting(setting,app)
+  {
+    var Ret = gen.ReadConfigSetting(setting,app);
+    eval("var arrRet = "+Ret);
+    if(arrRet.length){
+      return arrRet[0];
+    }
+    return "undefined";
+  }
+  
+  
+  function AddAppConSetting(setting,appName)
+  {
+    
+    var Ret = gen.ReadConfigSetting(setting,appName);
+    
+    eval("var arrRet = "+Ret);
+    //eval(st);
+    //alert(st)
+    //alert(Ret);
+    var loop; 
+    if(arrRet.length){
+      outputStr +="<TR bgcolor='999999'><TD colspan='2'>"+setting+"</TD></TR>";
+      for(loop = 0;loop < arrRet.length;loop++)
+      {
+        if(arrRet[loop].length){
+          outputStr +="<TR><TD colspan='2'>"+arrRet[loop]+"</TD></TR>";
+        }
+        else{
+          outputStr +="<TR><TD colspan='2'>\"\"</TD></TR>";
+        }
+      }
+    }
+    
+    
+  }
+  
+  
+  
+  function Run()
+  {
+    display.innerHTML = "<i>Getting Settings...</i>";
+    outputStr ="<table style='font-size:10px'><TR><TD colspan='2' align='center'>App Configuration Settings</TD></TR>";
+    
+    AddAppConSetting("STARTPAGE","Menu");
+    
+    AddAppConSetting("PRELOAD","Menu");
+    
+    AddAppConSetting("SCROLLBARSENABLED","Menu");
+    
+    AddAppConSetting("FITTOSCREENENABLED","Menu");
+    AddAppConSetting("CLEARTYPEENABLED","Menu");
+    AddAppConSetting("JAVASCRIPTENABLED","Menu");
+    AddAppConSetting("RESIZEONSIP","Menu");
+    
+    AddAppConSetting("DECODEVOLUME","Menu");
+    AddAppConSetting("DECODEFREQUENCY","Menu");
+    AddAppConSetting("INVALIDDECODEFREQUENCY","Menu");
+    AddAppConSetting("DECODEDURATION","Menu");
+    AddAppConSetting("DECODEVOLUME","Menu");
+    AddAppConSetting("DECODEFREQUENCY","Menu");
+    
+    AddAppConSetting("INVALIDDECODEFREQUENCY","Menu");
+    AddAppConSetting("DECODEDURATION","Menu");
+    AddAppConSetting("SCANDECODEWAV","Menu");
+    AddAppConSetting("SCANINVALIDWAV","Menu");
+    AddAppConSetting("IMAGERCAPTUREWAV","Menu");
+    AddAppConSetting("SIGNALREFRESH","Menu");
+    AddAppConSetting("BATTERYREFRESH","Menu");
+    
+    AddAppConSetting("HOURGLASSENABLED","Menu");
+    AddAppConSetting("HOURGLASSLEFT","Menu");
+    AddAppConSetting("HOURGLASSTOP","Menu");
+    
+    AddAppConSetting("BADLINKURI","Menu");
+    AddAppConSetting("ENABLECTRLKEY_O","Menu");
+    AddAppConSetting("ENABLECTRLKEY_P","Menu");
+    
+    AddAppConSetting("DEFAULTMETATAG","Menu");
+    
+    outputStr +="</table>";
+    //alert(outputStr);
+    display.innerHTML = outputStr;
+  
+  }
+  
+  
+  
+  </SCRIPT>
+  </HEAD>
+    
+  <BODY BGCOLOR="#FFFFEA" TEXT="#0000A0" LINK="#FF0000" VLINK="#808080" ALINK="#008040" onLoad="Javascript:Run()">
+  <Div id="display">...</Div><BR>
+  <INPUT align="center" type="button" value="Write" onclick="Javascript:Write();"><BR><BR>
+  <INPUT align="center" type="button" value="Restore" onclick="Javascript:Restore();"><BR><BR>
+  <A HREF="../Generic ActiveX Object.html">Back to Main Menu</A><BR>
+  <BR><BR><BR>
+  
+  <P>Last Revision : 19 March 2010 <BR>Paul Henderson</P>
+  </BODY>
+</HTML>

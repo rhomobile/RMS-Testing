@@ -1,0 +1,76 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+
+
+<script language="javascript">
+
+
+function doTime()
+{
+    timeSpan.innerHTML="";
+	var now = new Date();
+	timeSpan.innerHTML = now;
+	//setTimeout('doTime();', 30000)
+}
+
+function setserverSNTP()
+{
+    alert('SNTP');
+	var ssntp=frm.serversntp.value;
+	var ssntpvalue="ServerIP:"+ssntp;
+	Message.innerHTML=ssntpvalue;
+	generic.InvokeMETAFunction('SNTP',ssntpvalue);
+
+}
+
+function setzoomText()
+{
+var zoomtxtval=frm.zoomText.value;
+var zoomtxtparam="text:"+zoomtxtval;
+zoom.text=zoomtxtval;
+}
+
+</script>
+
+
+</head>
+<body>
+<form id="frm" action="">
+<br /><br /><br />
+<b>Using generic Approach</b>
+<div id="Message">Message</div><br />
+<div id="timeSpan">Current time..</div><br />
+<hr />
+Select<select id="cboyear">
+<script>
+	for(i=2000; i<=2012; i++)
+		document.write('<option value="' + i + '">' + i + '</option>');
+</script>
+</select>
+<hr />
+<b>Zoom Decoder</b><br />
+	text:<textarea id="zoomText" cols="10" rows="1"></textarea>
+
+	<input type="button" onclick="setzoomText();" value="SetText"><br />
+
+
+   page:	<textarea id="zoomPage" cols="10" rows="1"></textarea>
+
+	 <input type="button" onclick="setzoomPage();" value="SetPage"><br />
+<hr />
+ServerIP	<Textarea id="serversntp" cols="15" rows="1">10.233.85.82</Textarea>
+<input type=button onclick="setserverSNTP();" value="SNTP"><br><br>
+<input type=button onclick="doTime();" value="Get Time"><br>
+<hr><br>
+
+<A HREF="./Device Application.html">Back</A><br />
+<A HREF="./device3pageNavigation.html">go To another page</A>
+
+<META HTTP-EQUIV="OnKey0x0d" content="javascript:doTest();">
+<!--<META HTTP-EQUIV="OnKey0x31" content="javascript:doTest1();">-->
+
+</form>
+</body>
+</html>

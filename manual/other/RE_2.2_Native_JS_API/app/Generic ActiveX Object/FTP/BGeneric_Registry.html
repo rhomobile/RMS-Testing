@@ -1,0 +1,116 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+    <title>PB Generic Registry Test</title>
+<META HTTP-Equiv="minimizebutton" Content="visibility:visible">
+
+</head>
+
+
+<body>
+<script language=javascript>
+
+try
+{
+var generic = new ActiveXObject("PocketBrowser.Generic");
+}
+catch(err)
+{
+var GenericPlugin = document.createElement('embed'); 
+GenericPlugin.setAttribute('id',"embed1"); 
+GenericPlugin.setAttribute('type',"application/x-wtg-legacy-generic"); 
+GenericPlugin.setAttribute('hidden',"true"); 
+
+// Attach the plugin embed tags to the body 
+var theBody = document.getElementsByTagName('body')[0]; 
+theBody.appendChild(GenericPlugin); 
+}
+
+var selectedVisibility=""; //Selected Visibility.
+
+function Quit()
+{
+   
+    generic.InvokeMETAFunction("Application", "Quit"); 
+}
+
+
+function setRegistry()
+{
+	var hiveValue = parseInt(frm.txtHive.value);
+    
+	var typeValue = parseInt(frm.txtType.value);
+	
+	var keyValue = frm.txtKey.value;
+	
+	var settingValue = frm.txtSetting.value;
+	
+	var dataValue = frm.txtData.value;
+
+	generic.SetRegistrySetting(hiveValue, typeValue, keyValue, settingValue, dataValue);
+	myDiv.innerHTML="set";
+	
+}
+
+function getRegistry()
+{
+	var hiveValue = parseInt(frm.txtHive.value);
+	
+	var keyValue = frm.txtKey.value;
+	
+	var settingValue = frm.txtSetting.value;
+	
+
+	
+	var strData = generic.GetRegistrySetting(hiveValue, keyValue, settingValue);
+	myDiv.innerHTML=strData;
+	
+
+}
+
+
+</script>
+<br /><br /><br />
+<form id="frm" action="">
+<div id="myDiv">Data</div>
+<INPUT align="center" type="button" value="Quit" onclick="Quit();">
+
+<hr>
+<table>
+<tr>
+	<td>Hive</td><td><Textarea id="txtHive"cols="21" rows="1">2</Textarea></td>
+	</tr>
+<tr>
+	<td>Type</td><td><Textarea id="txtType"cols="21" rows="1">1</Textarea></td>
+	</tr>
+<tr>
+	<td>Key</td><td><Textarea id="txtKey"cols="21" rows="1">Software\\Motorola\\MySettings</Textarea></td>
+	</tr>
+<tr>
+	<td>Setting</td><td><Textarea id="txtSetting"cols="21" rows="1">Software</Textarea></td>
+	</tr>
+<tr>
+	<td>Data</td><td><Textarea id="txtData"cols="21" rows="1">Hello</Textarea></td>
+	</tr>
+
+
+</table>
+
+<br>
+<!-- id="setReg" -->
+    	<input type=button onclick="Javascript:setRegistry();" value="Set Registry">
+<!-- id="getReg" -->
+	<input type=button onclick="Javascript:getRegistry();" value="Get Registry">
+<hr>
+
+<BR>
+<A HREF="./Generic ActiveX Object.html">Back</A>
+
+<META HTTP-Equiv="quitbutton" Content="visibility:visible">
+<META HTTP-Equiv="quitbutton" Content="Left:10">
+<META HTTP-Equiv="quitbutton" Content="Top:10">
+
+</form>
+</body>
+</html>

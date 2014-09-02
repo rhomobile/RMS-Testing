@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+<!-- <META HTTP-Equiv="comm" Content="port:'com1:';baudrate:9600;databits:8;stopbits:1;parity:'no parity';handshake:none;time:250;commevent:url('JavaScript:ProcessData(\"%s\")')">
+-->
+<META HTTP-Equiv="EMMLProfile" Content="source:url('http://10.233.85.82/EMML_Profiles/CommPort/comm.emmp'); import;">
+<META HTTP-Equiv="EMMLProfile" Content="apply">
+
+<SCRIPT TYPE="text/javascript">
+
+function ProcessData(data)
+{
+	message.innerHTML="Received data: "+data';
+}
+
+function doTest(PW)
+{
+     if(PW=="Read")
+     {
+        Generic.InvokeMETAFunction("comm", "commevent:url('JavaScript:DisplayData(\"%s\")'");
+     }
+     else if(PW=="open")
+     {
+        Generic.InvokeMETAFunction("comm", "open");
+     
+     }
+     else if(PW=="close")
+     {
+        Generic.InvokeMETAFunction("comm", "close");
+     }
+     else if(PW=="Write")
+     {
+        var wbytes =this.writebytes.value;
+        var wstring =this.writestring.value;
+        var wfile =this.writefile.value;
+        var valbytes= trimAll(wbytes); 
+        var valstring= trimAll(wstring);
+        var valfile= trimAll(wfile);
+        
+        if(valbytes!="")
+            Generic.InvokeMETAFunction("comm","writebytes:"+valbytes);
+        if(valstring!="")
+            Generic.InvokeMETAFunction("comm","writestring:"+valstring);
+        if(valfile!="")
+            Generic.InvokeMETAFunction("comm","writefile:"+valfile);
+     }
+ 
+ }
+ 
+ function clearProfile()
+   {
+   Generic.InvokeMETAFunction('EMMLProfile','clear');
+   }
+
+</SCRIPT>
+</head>
+<body>
+<h1>CommunicationPort EMML Profile Clear Test</h1>
+<div id="Div1"></div>
+<div id="message"></div>
+<table>
+<tr>    
+    <td><input id="Button1" type="button" value="Read" onclick="doTest("Read");"/></td>
+    <td><input id="Button2" type="button" value="Write" onclick="doTest("Write");"/></td>
+</TR>    
+<tr>    
+    <td><input id="Button3" type="button" value="open" onclick="doTest("open");"/></td>
+    <td><input id="Button4" type="button" value="close" onclick="doTest("close");"/></td>
+</TR> 
+</table>
+<hr />
+<input type=button value="Clear Imported Profile" onclick="clearProfile();">
+<h3>After clearing the Profile you should not be able to get COMM Port data.</h3>
+<hr />
+<hr />
+<a href="../EMMLProfilesIndex.html">Back to EMML Profile Index</a>
+</body>
+</html>

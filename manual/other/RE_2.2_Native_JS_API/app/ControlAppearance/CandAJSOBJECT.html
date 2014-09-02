@@ -1,0 +1,941 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+<script type="text/javascript">
+var selected_Module="";
+var selected_imageupmode="";
+var selected_imagedownmode="";
+
+function getmodulename()
+{
+var index = document.controlForm.myChoice.selectedIndex;
+selected_Module = document.controlForm.myChoice.options[index].value;
+myDiv.innerHTML=""+selected_Module;
+}
+function setright()
+{
+var rightvalue=document.controlForm.right.value;
+var rightparam="right:"+rightvalue;
+
+if(selected_Module=="keyState")
+{
+keyState.right = rightvalue; 
+myDiv.innerHTML="keyState.right="+rightvalue;
+}
+
+}
+
+function setleft()
+{
+var leftvalue = document.controlForm.left.value;
+var leftparam="left:"+leftvalue;
+
+if(selected_Module=="addressBar")
+{
+addressBar.left = leftvalue; 
+myDiv.innerHTML="addressBar.left="+leftvalue;
+}
+if(selected_Module=="backButton")
+{
+backButton.left = leftvalue; 
+myDiv.innerHTML="backButton.left="+leftvalue;
+}
+if(selected_Module=="bottomCommandArea")
+{
+bottomCommandArea.left = leftvalue; 
+myDiv.innerHTML="bottomCommandArea.left="+leftvalue;
+}
+if(selected_Module=="forwardButton")
+{
+forwardButton.left = leftvalue; 
+myDiv.innerHTML="forwardButton.left="+leftvalue;
+}
+if(selected_Module=="goButton")
+{
+goButton.left = leftvalue; 
+myDiv.innerHTML="goButton.left="+leftvalue;
+}
+if(selected_Module=="homeButton")
+{
+homeButton.left = leftvalue; 
+myDiv.innerHTML="homeButton.left="+leftvalue;
+}
+if(selected_Module=="keyState")
+{
+keyState.left = leftvalue; 
+myDiv.innerHTML="keyState.left="+leftvalue;
+}
+if(selected_Module=="minimizeButton")
+{
+minimizeButton.left = leftvalue; 
+myDiv.innerHTML="minimizeButton.left="+leftvalue;
+}
+if(selected_Module=="quitButton")
+{
+quitButton.left = leftvalue; 
+myDiv.innerHTML="quitButton.left="+leftvalue;
+}
+if(selected_Module=="reloadButton")
+{
+reloadButton.left = leftvalue; 
+myDiv.innerHTML="reloadButton.left="+leftvalue;
+}
+if(selected_Module=="sipButton")
+{
+sipButton.left = leftvalue; 
+myDiv.innerHTML="sipButton.left="+leftvalue;
+}
+if(selected_Module=="stopButton")
+{
+stopButton.left = leftvalue; 
+myDiv.innerHTML="stopButton.left="+leftvalue;
+}
+if(selected_Module=="topCommandArea")
+{
+topCommandArea.left = leftvalue; 
+myDiv.innerHTML="topCommandArea.left="+leftvalue;
+}
+if(selected_Module=="zoomTextButton")
+{
+zoomTextButton.left = leftvalue; 
+myDiv.innerHTML="zoomTextButton.left="+leftvalue;
+}
+
+
+
+}
+
+
+function settop()
+{
+var topvalue = document.controlForm.top.value;
+var topparam="top:"+topvalue;
+
+if(selected_Module=="addressBar")
+{
+addressBar.top = topvalue; 
+myDiv.innerHTML="addressBar.top="+topvalue;
+}
+if(selected_Module=="backButton")
+{
+backButton.top = topvalue; 
+myDiv.innerHTML="backButton.top="+topvalue;
+}
+if(selected_Module=="bottomCommandArea")
+{
+bottomCommandArea.top = topvalue; 
+myDiv.innerHTML="bottomCommandArea.top="+topvalue;
+}
+if(selected_Module=="forwardButton")
+{
+forwardButton.top = topvalue; 
+myDiv.innerHTML="forwardButton.top="+topvalue;
+}
+if(selected_Module=="goButton")
+{
+goButton.top = topvalue; 
+myDiv.innerHTML="goButton.top="+topvalue;
+}
+if(selected_Module=="homeButton")
+{
+homeButton.top = topvalue; 
+myDiv.innerHTML="homeButton.top="+topvalue;
+}
+if(selected_Module=="keyState")
+{
+keyState.top = topvalue; 
+myDiv.innerHTML="keyState.top="+topvalue;
+}
+if(selected_Module=="minimizeButton")
+{
+minimizeButton.top = topvalue; 
+myDiv.innerHTML="minimizeButton.top="+topvalue;
+}
+if(selected_Module=="quitButton")
+{
+quitButton.top = topvalue; 
+myDiv.innerHTML="quitButton.top="+topvalue;
+}
+if(selected_Module=="reloadButton")
+{
+reloadButton.top = topvalue; 
+myDiv.innerHTML="reloadButton.top="+topvalue;
+}
+if(selected_Module=="sipButton")
+{
+sipButton.top = topvalue; 
+myDiv.innerHTML="sipButton.top="+topvalue;
+}
+if(selected_Module=="stopButton")
+{
+stopButton.top = topvalue; 
+myDiv.innerHTML="stopButton.top="+topvalue;
+}
+if(selected_Module=="topCommandArea")
+{
+topCommandArea.top = topvalue; 
+myDiv.innerHTML="topCommandArea.top="+topvalue;
+}
+if(selected_Module=="zoomTextButton")
+{
+zoomTextButton.top = topvalue; 
+myDiv.innerHTML="zoomTextButton.top="+topvalue;
+}
+
+}
+
+function setheight()
+{
+var heightvalue = document.controlForm.height.value;
+var heightparam="height:"+heightvalue;
+if(selected_Module=="addressBar")
+{
+addressBar.height = heightvalue; 
+myDiv.innerHTML="addressBar.height="+heightvalue;
+}
+if(selected_Module=="backButton")
+{
+backButton.height = heightvalue; 
+myDiv.innerHTML="backButton.height="+heightvalue;
+}
+if(selected_Module=="bottomCommandArea")
+{
+bottomCommandArea.height = heightvalue; 
+myDiv.innerHTML="bottomCommandArea.height="+heightvalue;
+}
+if(selected_Module=="forwardButton")
+{
+forwardButton.height = heightvalue; 
+myDiv.innerHTML="forwardButton.height="+heightvalue;
+}
+if(selected_Module=="goButton")
+{
+goButton.height = heightvalue; 
+myDiv.innerHTML="goButton.height="+heightvalue;
+}
+if(selected_Module=="homeButton")
+{
+homeButton.height = heightvalue; 
+myDiv.innerHTML="homeButton.height="+heightvalue;
+}
+if(selected_Module=="keyState")
+{
+keyState.height = heightvalue; 
+myDiv.innerHTML="keyState.height="+heightvalue;
+}
+if(selected_Module=="minimizeButton")
+{
+minimizeButton.height = heightvalue; 
+myDiv.innerHTML="minimizeButton.height="+heightvalue;
+}
+if(selected_Module=="quitButton")
+{
+quitButton.height = heightvalue; 
+myDiv.innerHTML="quitButton.height="+heightvalue;
+}
+if(selected_Module=="reloadButton")
+{
+reloadButton.height = heightvalue; 
+myDiv.innerHTML="reloadButton.height="+heightvalue;
+}
+if(selected_Module=="sipButton")
+{
+sipButton.height = heightvalue; 
+myDiv.innerHTML="sipButton.height="+heightvalue;
+}
+if(selected_Module=="stopButton")
+{
+stopButton.height = heightvalue; 
+myDiv.innerHTML="stopButton.height="+heightvalue;
+}
+if(selected_Module=="topCommandArea")
+{
+topCommandArea.height = heightvalue; 
+myDiv.innerHTML="topCommandArea.height="+heightvalue;
+}
+if(selected_Module=="zoomTextButton")
+{
+zoomTextButton.height = heightvalue; 
+myDiv.innerHTML="zoomTextButton.height="+heightvalue;
+}
+
+
+
+}
+
+function setwidth()
+{
+var widthvalue = document.controlForm.width.value;
+var widthparam="width:"+widthvalue;
+if(selected_Module=="addressBar")
+{
+addressBar.width = widthvalue; 
+myDiv.innerHTML="addressBar.width="+widthvalue;
+}
+if(selected_Module=="backButton")
+{
+backButton.width = widthvalue; 
+myDiv.innerHTML="backButton.width="+widthvalue;
+}
+if(selected_Module=="bottomCommandArea")
+{
+bottomCommandArea.width = widthvalue; 
+myDiv.innerHTML="bottomCommandArea.width="+widthvalue;
+}
+if(selected_Module=="forwardButton")
+{
+forwardButton.width = widthvalue; 
+myDiv.innerHTML="forwardButton.width="+widthvalue;
+}
+if(selected_Module=="goButton")
+{
+goButton.width = widthvalue; 
+myDiv.innerHTML="goButton.width="+widthvalue;
+}
+if(selected_Module=="homeButton")
+{
+homeButton.width = widthvalue; 
+myDiv.innerHTML="homeButton.width="+widthvalue;
+}
+if(selected_Module=="keyState")
+{
+keyState.width = widthvalue; 
+myDiv.innerHTML="keyState.width="+widthvalue;
+}
+if(selected_Module=="minimizeButton")
+{
+minimizeButton.width = widthvalue; 
+myDiv.innerHTML="minimizeButton.width="+widthvalue;
+}
+if(selected_Module=="quitButton")
+{
+quitButton.width = widthvalue; 
+myDiv.innerHTML="quitButton.width="+widthvalue;
+}
+if(selected_Module=="reloadButton")
+{
+reloadButton.width = widthvalue; 
+myDiv.innerHTML="reloadButton.width="+widthvalue;
+}
+if(selected_Module=="sipButton")
+{
+sipButton.width = widthvalue; 
+myDiv.innerHTML="sipButton.width="+widthvalue;
+}
+if(selected_Module=="stopButton")
+{
+stopButton.width = widthvalue; 
+myDiv.innerHTML="stopButton.width="+widthvalue;
+}
+if(selected_Module=="topCommandArea")
+{
+topCommandArea.width = widthvalue; 
+myDiv.innerHTML="topCommandArea.width="+widthvalue;
+}
+if(selected_Module=="zoomTextButton")
+{
+zoomTextButton.width = widthvalue; 
+myDiv.innerHTML="zoomTextButton.width="+widthvalue;
+}
+
+}
+
+
+
+
+function setvisibility()
+{
+var index = document.controlForm.visibility.selectedIndex;
+var visibilityvalue = document.controlForm.visibility.options[index].value;
+var visibilityparam="visibility:"+visibilityvalue;
+
+if(selected_Module=="addressBar")
+{
+addressBar.visibility = visibilityvalue; 
+myDiv.innerHTML="addressBar.visibility="+visibilityvalue;
+}
+if(selected_Module=="backButton")
+{
+backButton.visibility = visibilityvalue; 
+myDiv.innerHTML="backButton.visibility="+visibilityvalue;
+}
+if(selected_Module=="bottomCommandArea")
+{
+bottomCommandArea.visibility = visibilityvalue; 
+myDiv.innerHTML="bottomCommandArea.visibility="+visibilityvalue;
+}
+if(selected_Module=="forwardButton")
+{
+forwardButton.visibility = visibilityvalue; 
+myDiv.innerHTML="forwardButton.visibility="+visibilityvalue;
+}
+if(selected_Module=="goButton")
+{
+goButton.visibility = visibilityvalue; 
+myDiv.innerHTML="goButton.visibility="+visibilityvalue;
+}
+if(selected_Module=="homeButton")
+{
+homeButton.visibility = visibilityvalue; 
+myDiv.innerHTML="homeButton.visibility="+visibilityvalue;
+}
+if(selected_Module=="keyState")
+{
+keyState.visibility = visibilityvalue; 
+myDiv.innerHTML="keyState.visibility="+visibilityvalue;
+}
+if(selected_Module=="minimizeButton")
+{
+minimizeButton.visibility = visibilityvalue; 
+myDiv.innerHTML="minimizeButton.visibility="+visibilityvalue;
+}
+if(selected_Module=="quitButton")
+{
+quitButton.visibility = visibilityvalue; 
+myDiv.innerHTML="quitButton.visibility="+visibilityvalue;
+}
+if(selected_Module=="reloadButton")
+{
+reloadButton.visibility = visibilityvalue; 
+myDiv.innerHTML="reloadButton.visibility="+visibilityvalue;
+}
+if(selected_Module=="sipButton")
+{
+sipButton.visibility = visibilityvalue; 
+myDiv.innerHTML="sipButton.visibility="+visibilityvalue;
+}
+if(selected_Module=="stopButton")
+{
+stopButton.visibility = visibilityvalue; 
+myDiv.innerHTML="stopButton.visibility="+visibilityvalue;
+}
+if(selected_Module=="topCommandArea")
+{
+topCommandArea.visibility = visibilityvalue; 
+myDiv.innerHTML="topCommandArea.visibility="+visibilityvalue;
+}
+if(selected_Module=="zoomTextButton")
+{
+zoomTextButton.visibility = visibilityvalue; 
+myDiv.innerHTML="zoomTextButton.visibility="+visibilityvalue;
+}
+
+
+}
+
+ function getimageupChoice()
+  {
+   var index = document.controlForm.imageupch.selectedIndex;
+   var value= document.controlForm.imageupch.options[index].value;
+   
+   if(value=="http")
+   selected_imageupmode="http://10.233.85.82/Resource/";
+   else if(value=="httpinvalid1")
+   selected_imageupmode="http://";
+   else if(value=="httpinvalid2")
+   selected_imageupmode="http://10.233.85.82";
+ 
+   
+   else if(value=="ftp")
+   selected_imageupmode="ftp://ftpadmin:ftpadmin@10.233.85.82/Resource/";
+   else if(value=="ftpinvalid1")
+   selected_imageupmode="ftp://";
+   else if(value=="ftpinvalid2")
+   selected_imageupmode="ftp://ftpadmin:ftpadmin@10.233.85.82";
+   
+   else if(value=="local")
+   selected_imageupmode="file://\\Application\\Resource\\";
+   else if(value=="localinvalid1")
+   selected_imageupmode="file://";
+   else if(value=="localinvalid2")
+   selected_imageupmode="file://\\Android";
+   else if(value=="localinvalid3")
+   selected_imageupmode="file:\\//Android//data//Resource//";
+
+
+   
+   myDiv.innerHTML=selected_Module+selected_imageupmode;
+  }
+  
+  
+ 
+  function getimagedownChoice()
+  {
+   var index = document.controlForm.imagedownch.selectedIndex;
+   var value= document.controlForm.imagedownch.options[index].value;
+ 
+   if(value=="http")
+   selected_imagedownmode="http://10.233.85.82/Resource/";
+   else if(value=="httpinvalid1")
+   selected_imagedownmode="http://";
+   else if(value=="httpinvalid2")
+   selected_imagedownmode="http://10.233.85.82";
+ 
+   
+   else if(value=="ftp")
+   selected_imagedownmode="ftp://ftpadmin:ftpadmin@10.233.85.82/Resource/";
+   else if(value=="ftpinvalid1")
+   selected_imagedownmode="ftp://";
+   else if(value=="ftpinvalid2")
+   selected_imageupmode="ftp://ftpadmin:ftpadmin@10.233.85.82";
+   
+   else if(value=="local")
+   selected_imagedownmode="file://\\Application\\Resource\\";
+   else if(value=="localinvalid1")
+   selected_imagedownmode="file://";
+   else if(value=="localinvalid2")
+   selected_imagedownmode="file://\\Android";
+   else if(value=="localinvalid3")
+   selected_imagedownmode="file://Android//data//Resource//";
+
+   
+   myDiv.innerHTML=selected_Module+selected_imagedownmode;
+   
+   
+  }
+
+
+function setimageup()
+{
+getimageupChoice();
+var index = document.controlForm.imageupname.selectedIndex;
+var imageupvalue = document.controlForm.imageupname.options[index].value;
+if(imageupvalue=="emptyimage")
+{
+var imageupparam="url('"+selected_imageupmode+"')";
+}
+else if(imageupvalue=="emptyurl")
+{
+var imageupparam="url('')";
+}
+else if(imageupvalue=="emptyevent")
+{
+var imageupparam="";
+}
+else
+{
+var imageupparam="url('"+selected_imageupmode+imageupvalue+"')";
+}
+
+
+if(selected_Module=="backButton")
+{
+backButton.imageUp = imageupparam; 
+myDiv.innerHTML="backButton.imageUp="+imageupparam;
+}
+if(selected_Module=="bottomCommandArea")
+{
+bottomCommandArea.image = imageupparam; 
+myDiv.innerHTML="bottomCommandArea.image="+imageupparam;
+}
+if(selected_Module=="forwardButton")
+{
+forwardButton.imageUp = imageupparam; 
+myDiv.innerHTML="forwardButton.imageUp="+imageupparam;
+}
+if(selected_Module=="goButton")
+{
+goButton.imageUp = imageupparam; 
+myDiv.innerHTML="goButton.imageUp="+imageupparam;
+}
+if(selected_Module=="homeButton")
+{
+homeButton.imageUp = imageupparam; 
+myDiv.innerHTML="homeButton.imageUp="+imageupparam;
+}
+
+if(selected_Module=="minimizeButton")
+{
+minimizeButton.imageUp = imageupparam; 
+myDiv.innerHTML="minimizeButton.imageUp="+imageupparam;
+}
+if(selected_Module=="quitButton")
+{
+quitButton.imageUp = imageupparam; 
+myDiv.innerHTML="quitButton.imageUp="+imageupparam;
+}
+if(selected_Module=="reloadButton")
+{
+reloadButton.imageUp = imageupparam; 
+myDiv.innerHTML="reloadButton.imageUp="+imageupparam;
+}
+if(selected_Module=="sipButton")
+{
+sipButton.imageUp = imageupparam; 
+myDiv.innerHTML="sipButton.imageUp="+imageupparam;
+}
+if(selected_Module=="stopButton")
+{
+stopButton.imageUp = imageupparam; 
+myDiv.innerHTML="stopButton.imageUp="+imageupparam;
+}
+if(selected_Module=="topCommandArea")
+{
+topCommandArea.image = imageupparam; 
+myDiv.innerHTML="topCommandArea.image="+imageupparam;
+}
+if(selected_Module=="zoomTextButton")
+{
+zoomTextButton.imageUp = imageupparam; 
+myDiv.innerHTML="zoomTextButton.imageUp="+imageupparam;
+}
+
+//generic.InvokeMETAFunction(selected_Module, imageupparam);
+//myDiv.innerHTML=selected_Module+imageupparam;
+
+}
+
+
+function setimagedown()
+{
+getimagedownChoice();
+var index = document.controlForm.imagedownname.selectedIndex;
+var imagedownvalue = document.controlForm.imagedownname.options[index].value;
+if(imagedownvalue=="emptyimage")
+{
+var imagedownparam="url('"+selected_imagedownmode+"')";
+}
+else if(imagedownvalue=="emptyurl")
+{
+var imagedownparam="url('')";
+}
+else if(imagedownvalue=="emptyevent")
+{
+var imagedownparam="";
+}
+else
+{
+var imagedownparam="url('"+selected_imagedownmode+imagedownvalue+"')";
+}
+
+if(selected_Module=="backButton")
+{
+backButton.imageDown = imagedownparam; 
+myDiv.innerHTML="backButton.imageDown="+imagedownparam;
+}
+if(selected_Module=="bottomCommandArea")
+{
+bottomCommandArea.image = imagedownparam; 
+myDiv.innerHTML="bottomCommandArea.image="+imagedownparam;
+}
+if(selected_Module=="forwardButton")
+{
+forwardButton.imageDown = imagedownparam; 
+myDiv.innerHTML="forwardButton.imageDown="+imagedownparam;
+}
+if(selected_Module=="goButton")
+{
+goButton.imageDown = imagedownparam; 
+myDiv.innerHTML="goButton.imageDown="+imagedownparam;
+}
+if(selected_Module=="homeButton")
+{
+homeButton.imageDown = imagedownparam; 
+myDiv.innerHTML="homeButton.imageDown="+imagedownparam;
+}
+
+if(selected_Module=="minimizeButton")
+{
+minimizeButton.imageDown = imagedownparam; 
+myDiv.innerHTML="minimizeButton.imageDown="+imagedownparam;
+}
+if(selected_Module=="quitButton")
+{
+quitButton.imageDown = imagedownparam; 
+myDiv.innerHTML="quitButton.imageDown="+imagedownparam;
+}
+if(selected_Module=="reloadButton")
+{
+reloadButton.imageDown = imagedownparam; 
+myDiv.innerHTML="reloadButton.imageDown="+imagedownparam;
+}
+if(selected_Module=="sipButton")
+{
+sipButton.imageDown = imagedownparam; 
+myDiv.innerHTML="sipButton.imageDown="+imagedownparam;
+}
+if(selected_Module=="stopButton")
+{
+stopButton.imageDown = imagedownparam; 
+myDiv.innerHTML="stopButton.imageDown="+imagedownparam;
+}
+if(selected_Module=="topCommandArea")
+{
+topCommandArea.image = imagedownparam; 
+myDiv.innerHTML="topCommandArea.image="+imagedownparam;
+}
+if(selected_Module=="zoomTextButton")
+{
+zoomTextButton.imageDown = imagedownparam; 
+myDiv.innerHTML="zoomTextButton.imageDown="+imagedownparam;
+}
+
+
+}
+
+
+function setcolor()
+{
+var colorvalue = document.controlForm.color.value;
+var colorparam="color:"+colorvalue;
+
+
+if(selected_Module=="bottomCommandArea")
+{
+bottomCommandArea.color = colorvalue; 
+myDiv.innerHTML="bottomCommandArea.color="+colorvalue;
+}
+
+if(selected_Module=="topCommandArea")
+{
+topCommandArea.color = colorvalue; 
+myDiv.innerHTML="topCommandArea.color="+colorvalue;
+}
+
+}
+
+
+
+
+
+
+ function setnull()
+ {
+ document.controlForm.right.value="";
+ document.controlForm.left.value="";
+ document.controlForm.top.value="";
+ document.controlForm.height.value="";
+ document.controlForm.width.value="";
+ document.controlForm.visibility.selectedIndex = 3;
+ document.controlForm.imageupname.selectedIndex = 0;
+ document.controlForm.imagedownname.selectedIndex = 0;  
+ document.controlForm.color.value="";
+ }
+ 
+ function setNegative()
+ {
+ document.controlForm.right.value="-100";
+ document.controlForm.left.value="-100";
+ document.controlForm.top.value="-100";
+ document.controlForm.height.value="-100";
+ document.controlForm.width.value="-100";
+ document.controlForm.visibility.selectedIndex = 3;
+ document.controlForm.imageupname.selectedIndex = 0;
+ document.controlForm.imagedownname.selectedIndex = 0;
+ document.controlForm.color.value="-500";
+ 
+ }
+ 
+ function setZero()
+ {
+ document.controlForm.right.value="0";
+ document.controlForm.left.value="0";
+ document.controlForm.top.value="0";
+ document.controlForm.height.value="0";
+ document.controlForm.width.value="0";
+ document.controlForm.visibility.selectedIndex = 3;
+ document.controlForm.imageupname.selectedIndex = 0;
+ document.controlForm.imagedownname.selectedIndex = 0;
+  document.controlForm.color.value="0";
+ 
+ }
+ 
+ 
+ function setInvalid()
+ {
+ document.controlForm.right.value="a#ae";
+ document.controlForm.left.value="a#ae";
+ document.controlForm.top.value="a#ae";
+ document.controlForm.height.value="a#ae";
+ document.controlForm.width.value="##$$";
+ document.controlForm.visibility.selectedIndex = 3;
+ document.controlForm.imageupname.selectedIndex = 0;
+ document.controlForm.imagedownname.selectedIndex = 0;
+ document.controlForm.color.value="abcd";
+ 
+ }
+ 
+
+ 
+ function trimAll(sString) 
+ { 
+   while (sString.substring(0,1) == ' ') 
+    { 
+    sString = sString.substring(1, sString.length); 
+    } 
+   while (sString.substring(sString.length-1, sString.length) == ' ') 
+    { 
+    sString = sString.substring(0,sString.length-1); 
+    } 
+    return sString; 
+ } 
+ 
+ 
+
+  
+ 
+
+</script>
+</head>
+<body>
+<br /><br />
+<div id="myDiv">value</div>
+<form name="controlForm" id="controlForm" action="" >
+<input id="Back" type="button" value="Back" onclick="location.href='ControlAppearance.html'">
+<br /><br /><br />Select &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<select name="myChoice" id="myChoice" size=1" onchange="getmodulename();">
+<OPTION value="Select option" >Select option</OPTION>
+<OPTION value="addressBar" >addressBar</OPTION> 
+<OPTION value="backButton" >backButton</OPTION> 
+<OPTION value="forwardButton">forwardButton</OPTION> 
+<OPTION value="goButton">goButton</OPTION> 
+<OPTION value="homeButton">homeButton</OPTION> 
+<OPTION value="keyState">keyState</OPTION> 
+<OPTION value="minimizeButton">minimizeButton</OPTION>
+<OPTION value="quitButton">quitButton</OPTION> 
+<OPTION value="reloadButton">reloadButton</OPTION> 
+<OPTION value="sipButton">sipButton</OPTION> 
+<OPTION value="stopButton">stopButton</OPTION> 
+<OPTION value="zoomTextButton">zoomTextButton</OPTION> 
+<OPTION value="bottomCommandArea">bottomCommandArea</OPTION> 
+<OPTION value="topCommandArea">topCommandArea</OPTION> 
+</select>
+<br />
+<hr />
+<table>
+<tr>
+<td>Right&nbsp;&nbsp;&nbsp;&nbsp;<input id="right" type="text" size=15 value="40"/></td>
+<td><input type="button" id="rightbutton" value="right" onclick="setright();"></td>
+</tr>
+
+<tr>
+<td>Left&nbsp;&nbsp;&nbsp;&nbsp;<input id="left" type="text" size=15 value="40"/></td>
+<td><input type="button" id="leftbutton" value="left" onclick="setleft();"></td>
+</tr>
+
+<tr>
+<td>Top&nbsp;&nbsp;<input id="top" type="text" size=15 value="100"/></td>
+<td><input type="button" id="topbutton" value="top" onclick="settop();"</td>
+</tr>
+
+<tr>
+<td> Height&nbsp;&nbsp;<input id="height" type="text" size=15 value="100"/></td>
+<td><input type="button" id="heightbutton" value="height" onclick="setheight();"</td>
+</tr>
+
+<tr>
+<td>Width&nbsp;&nbsp; <input id="width" type="text" size=15 value="100"/></td>
+<td><input type="button" id="widthbutton" value="width" onclick="setwidth();"</td>
+</tr>
+
+<tr>
+<td>Visibility&nbsp;&nbsp; <select name="visibile" id="visibility"> 
+<OPTION value="visible" >visible</OPTION> 
+<OPTION value="hidden" >hidden</OPTION> 
+<OPTION value="aaaa" >invalid</OPTION> 
+<OPTION value="" >empty</OPTION> 
+<OPTION value="Select option" >Select</OPTION>
+</select>
+</td>
+<td><input type="button" id="visibilitybutton" value="Set visibility" onclick="setvisibility();"</td>
+</tr>
+
+
+
+
+
+<tr>
+<td>Imageup Mode:&nbsp;<select name="imageupch" id="imageupch" size=1"> 
+<OPTION value="http" >http</OPTION> 
+<OPTION value="httpinvalid1" >httpinvalid1</OPTION> 
+<OPTION value="httpinvalid2" >httpinvalid2</OPTION> 
+<OPTION value="ftp" >ftp</OPTION> 
+<OPTION value="ftpinvalid1" >ftpinvalid1</OPTION> 
+<OPTION value="ftpinvalid2" >ftpinvalid2</OPTION>
+<OPTION value="local" >local</OPTION> 
+<OPTION value="localinvalid1" >localinvalid1</OPTION> 
+<OPTION value="localinvalid2" >localinvalid2</OPTION> 
+<OPTION value="localinvalid3" >localinvalid3</OPTION>
+<OPTION value="Select option" >Select</OPTION>
+</select>
+</td>
+</tr>
+
+<tr>
+<td>ImageupName:&nbsp;<select name="imageupname" id="imageupname" size=1"> 
+<OPTION value="emptyimage" >emptyimage</OPTION> 
+<OPTION value="emptyurl" >emptyurl</OPTION> 
+<OPTION value="emptyevent" >emptyevent</OPTION> 
+<OPTION value="BMW.bmp" >BMW.bmp</OPTION> 
+<OPTION value="Sym.bmp" >Sym.bmp</OPTION> 
+<OPTION value="Ferrari.JPG" >Ferrari.JPG</OPTION> 
+<OPTION value="Infinity.jpeg" >Infinity.jpeg</OPTION> 
+<OPTION value="Symbol.gif" >Symbol.gif</OPTION> 
+<OPTION value="Porsche.gif" >Porsche.gif</OPTION> 
+<OPTION value="Symbol.dfg" >invalid(.dfg)</OPTION>
+</select>
+</td>
+<td><input type="button" id="imageupbutton" value="SetImageUp" onclick="setimageup();"</td>
+</tr>
+
+
+<tr>
+<td>Imagedown Mode:&nbsp;<select name="imagedownch" id="imagedownch" size=1"> 
+<OPTION value="http" >http</OPTION> 
+<OPTION value="httpinvalid1" >httpinvalid1</OPTION> 
+<OPTION value="httpinvalid2" >httpinvalid2</OPTION> 
+<OPTION value="ftp" >ftp</OPTION> 
+<OPTION value="ftpinvalid1" >ftpinvalid1</OPTION> 
+<OPTION value="ftpinvalid2" >ftpinvalid2</OPTION>
+<OPTION value="local" >local</OPTION> 
+<OPTION value="localinvalid1" >localinvalid1</OPTION> 
+<OPTION value="localinvalid2" >localinvalid2</OPTION> 
+<OPTION value="localinvalid3" >localinvalid3</OPTION>
+<OPTION value="Select option" >Select</OPTION>
+</select>
+</td>
+</tr>
+
+<tr>
+<td>ImagedownName:&nbsp;<select name="imagedownname" id="imagedownname" size=1"> 
+<OPTION value="emptyimage" >emptyimage</OPTION> 
+<OPTION value="emptyurl" >emptyurl</OPTION>
+<OPTION value="emptyevent" >emptyevent</OPTION>
+<OPTION value="BMW.bmp" >BMW.bmp</OPTION> 
+<OPTION value="Sym.bmp" >Sym.bmp</OPTION> 
+<OPTION value="Ferrari.JPG" >Ferrari.JPG</OPTION> 
+<OPTION value="Infinity.jpeg" >Infinity.jpeg</OPTION> 
+<OPTION value="Symbol.gif" >Symbol.gif</OPTION> 
+<OPTION value="Porsche.gif" >Porsche.gif</OPTION> 
+<OPTION value="Symbol.dfg" >invalid(.dfg)</OPTION> 
+</select>
+</td>
+<td><input type="button" id="imagedownbutton" value="SetImageDown" onclick="setimagedown();"</td>
+</tr>
+
+
+
+<tr>
+<td>Color&nbsp;&nbsp; <input id="color" type="text" value="#FF0000"  size=15 /> </td>
+<td><input type="button" id="colorbutton" value="Color" onclick="setcolor();"</td>
+</tr>
+</table>
+<br />
+<hr />
+&nbsp;&nbsp;
+<!--<input id="submit" type="button" value="submit" onclick="setallparams();" />-->
+&nbsp;&nbsp;&nbsp;
+<input type="reset" value="Reset!" />
+&nbsp;&nbsp;&nbsp;
+<input type="button" value="setNull" onclick="setnull();" /> 
+&nbsp;&nbsp;&nbsp;
+<input type="button" value="setNegative" onclick="setNegative();" /> 
+&nbsp;&nbsp;&nbsp;
+<input type="button" value="setZero" onclick="setZero();" /> 
+&nbsp;&nbsp;&nbsp;
+<input type="button" value="setInvalid" onclick="setInvalid();" /> 
+</form>
+</body>
+</html>

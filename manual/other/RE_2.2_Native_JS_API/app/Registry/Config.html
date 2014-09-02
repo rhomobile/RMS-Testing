@@ -1,0 +1,79 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+    <title>PB Generic Registry Test</title>
+</head>
+<script language=javascript>
+
+var objGeneric = new ActiveXObject("PocketBrowser.Generic");
+var selectedVisibility=""; //Selected Visibility.
+
+function Quit()
+{
+    //alert('Quitting...');
+    objGeneric.InvokeMETAFunction("Application", "Quit"); 
+}
+
+
+function setConfig()
+{
+	var writeValue = frm.txtWrite.value;
+	alert(writeValue);
+	var settingValue = frm.txtValue.value;
+	alert(settingValue);
+
+	objGeneric.InvokeMETAFunction('config', 'write:'+writeValue);
+	objGeneric.InvokeMETAFunction('config', 'value:'+settingValue);
+	
+}
+
+function delConfig()
+{
+
+	var deleteValue = frm.txtDelete.value;
+	alert(deleteValue);
+	
+	objGeneric.InvokeMETAFunction('config', 'delete:'+deleteValue);
+
+
+}
+
+
+</script>
+
+<body>
+
+<form id="frm" action="">
+<INPUT align="center" type="button" value="Quit" onclick="Quit();">
+
+<hr>
+
+<tr>
+	<td>Write</td><td><Textarea id="txtWrite"cols="21" rows="1">PocketBrowser</Textarea></td>
+	</tr>
+<br><br>
+<tr>
+	<td>Value</td><td><Textarea id="txtValue"cols="21" rows="1">Hello</Textarea></td>
+	</tr>
+<br><br>
+<tr>
+	<td>Delete</td><td><Textarea id="txtDelete"cols="21" rows="1">PocketBrowser</Textarea></td>
+	</tr>
+<br><br>
+<!-- id="setReg" -->
+    	<input type=button onclick="Javascript:setConfig();" value="Set Config">
+<!-- id="getReg" -->
+	<input type=button onclick="Javascript:delConfig();" value="Del Config">
+<hr>
+
+<BR>
+<A HREF="./RegistryIndex.html">Back</A>
+
+<META HTTP-Equiv="quitbutton" Content="visibility:visible">
+<META HTTP-Equiv="quitbutton" Content="Left:10">
+<META HTTP-Equiv="quitbutton" Content="Top:10">
+
+</form>
+</body>
+</html>

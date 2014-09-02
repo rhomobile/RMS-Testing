@@ -1,0 +1,71 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+
+
+<META HTTP-Equiv="imager" Content="left:350;top:90;height:300;width:400;aim:on;
+Destination:url('http://10.233.85.82/NEON/ReceivedFiles/Upload.aspx');username:uploadtest;password:letmein;enabled:IMG1;imagerevent:url('javascript:myevent('%s');')">
+
+
+</head>
+<body>
+<br><br><br><br>
+<div id="myResponse">EventResponse:</div><BR>
+<p>Stress-Capture the image and send to HTTP-Memory leak</p>
+<BR><BR><BR><BR><BR><BR><BR>
+<div id="nos">X Value</div>
+<P><INPUT TYPE="button" VALUE="Capture" ONCLICK="doCapture();"></P>
+<P><INPUT TYPE="button" VALUE="Disable" ONCLICK="doDisable();"></P>
+<P><INPUT TYPE="button" VALUE="Back" ONCLICK="location.href='Imager_Index.html'"></P>
+
+</body>
+</html>
+
+
+<SCRIPT type="text/javascript">
+//var generic = new ActiveXObject("PocketBrowser.Generic");
+	
+var iCount = 0;
+var jCount=0;
+	
+function doCapture()
+{
+
+		iCount++;
+
+	  if(iCount <= 50000)
+		{
+		    generic.InvokeMETAFunction("imager", "Destination:url('http://10.233.85.82/NEON/ReceivedFiles/Upload.aspx')");
+			
+			generic.InvokeMETAFunction('imager', 'capture');
+			captureLoop();	
+			
+		}
+		
+}
+
+function doDisable()
+{
+	generic.InvokeMETAFunction('imager', 'disabled');
+}
+
+function captureLoop()
+{
+	setTimeout("doCapture()", 30000);
+	
+}
+
+function myevent(response) 
+{
+if(response=="Received")
+{
+jCount++;
+}
+myResponse.innerHTML="SuccessCount= "+jCount+"   response:- "+response;
+nos.innerHTML = iCount;
+ }
+
+</SCRIPT>
+
+

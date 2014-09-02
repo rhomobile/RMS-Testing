@@ -1,0 +1,73 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+
+</head>
+<body>
+<P><BR></P>
+<h4>UnNamed Indicators EMML Test Script only</h4>
+<a href="javascript:doApplyProfile('Battery');">Apply ShowBattery Profile</a>
+<br>
+<a href="javascript:doApplyProfile('Signal');">Apply  ShowSignal Profile</a>
+<br>
+<a href="javascript:doApplyProfile('BatteryHide');">Apply Hide Battery Profile</a>
+<br>
+<a href="javascript:doApplyProfile('SignalHide');">Apply Hide Signal Profile</a>
+<br>
+
+
+
+<div Id="bat">Battery readings should appear here</div><br /><br /><br />
+<div ID="sig">Signal details should appear here</div><br /><br /><br /><br />
+
+<h4>Browse to another page to check for EMML profile persistance.</h3>
+<h4><a href="NonPersistant_Indicators_Profile.html">Click here to go to another page.</a></h4>
+<hr />
+<a href="EMMLProfilesIndex.html">Back to EMML Profile Index</a>
+<br /><P><INPUT TYPE="button" VALUE="Quit" ONCLICK="Quit();"></P>
+
+
+</body>
+</html>
+
+
+<SCRIPT LANGUAGE="JavaScript">
+    var Generic = new ActiveXObject("PocketBrowser.Generic");
+
+    function OnBattery(AC, main, backup) 
+    {
+        
+        bat.innerHTML = "AC: " + AC + "\<BR>main:" + main + "\<BR>backup: " + backup;
+        return;
+    }
+
+    function OnSignal(signal, ESSID, MAC, AdapterName, DHCPServer, DHCPStatic, Gateway, IPAddress, RSSI, SubnetMask, Wins) 
+    {
+        sig.innerHTML = "Signal: " + signal
+								+ "<BR>ESSID:" + ESSID
+								+ "<BR>MAC: " + MAC
+								+ "<BR>AdapterName: " + AdapterName
+								+ "<BR>DHCPServer: " + DHCPServer
+								+ "<BR>DHCPStatic: " + DHCPStatic
+								+ "<BR>Gateway: " + Gateway
+								+ "<BR>IPAddress: " + IPAddress
+								+ "<BR>RSSI: " + RSSI
+								+ "<BR>SubnetMask: " + SubnetMask
+								+ "<BR>Wins: " + Wins
+        return;
+    }
+
+    function doApplyProfile(profile) 
+    {
+
+        Generic.InvokeMETAFunction('EMMLProfile', 'Apply:' + profile);
+    }
+
+    
+
+function Quit()
+{
+    Generic.InvokeMETAFunction("Application", "Quit");
+}
+</SCRIPT>

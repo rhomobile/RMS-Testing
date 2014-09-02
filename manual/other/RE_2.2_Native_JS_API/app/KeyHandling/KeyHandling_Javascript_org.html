@@ -1,0 +1,75 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+
+	<script language="JavaScript">
+	var tempcount=0;    
+	var tempcount1=0;
+	var prevkeycode;
+	var prevevent;
+	
+	
+	document.onkeyup= checkKeycodeup
+    function checkKeycodeup(e) {
+	
+	tempcount++;
+	var keycode;
+	if (window.event) 
+	keycode = window.event.keyCode;
+	else if (e)
+	keycode = e.which;
+	//document.getElementById('myCount').innerHTML = tempcount;
+	
+	var temp =document.getElementById('myCount').innerHTML;
+	document.getElementById('myCount').innerHTML = temp+"<br>Keyup"+keycode;
+	//document.getElementById('key').innerHTML = keycode+"Keyup";
+	
+	//document.getElementById('myCount').innerHTML = "<br>Keyup"+keycode;
+	//return;
+	}
+	
+	
+	document.onkeydown= checkKeycodedown
+	function checkKeycodedown(e) {
+	
+	tempcount1++;
+	var keycode;
+	if (window.event) 
+	keycode = window.event.keyCode;
+	else if (e)
+	keycode = e.which;
+	//document.getElementById('myCount').innerHTML = tempcount1;
+	var temp =document.getElementById('myCount').innerHTML;
+	document.getElementById('myCount').innerHTML = temp+"<br>Keydown"+keycode;
+	//document.getElementById('key').innerHTML = keycode+"keydown";
+	
+	
+	}
+	
+	
+	
+	function Cleardiv()
+	{
+	document.getElementById('myCount').innerHTML = "";
+	}
+
+	</script>
+
+</head>
+
+<body >
+
+<br><br><br>
+<input type="button" id="Button1" onclick="Cleardiv();" value="Cleardiv"/>
+<b1>Keycheck</b1><br>
+
+Key pressed:<nbsp><b id='key'>None</b>
+		<br>
+		Count <nbsp><b id='myCount'>None</b>
+		
+		<br>
+		
+</body>
+	
+</html>

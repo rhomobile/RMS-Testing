@@ -1,0 +1,42 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+<META HTTP-Equiv="Notification" content="EnumNotificationsEvent:url('http://157.235.207.158/PB3.X/index.html')">
+
+
+    <title>PB Device Application Test</title>
+</head>
+
+
+
+<body>
+
+<script language=javascript>
+
+var myobjGeneric = new ActiveXObject("PocketBrowser.Generic");
+
+function onListNotifications()
+{
+	myobjGeneric.InvokeMetaFunction("Notification", "Enumerate");
+}
+
+</script>
+
+<form id="frm" action="">
+
+<div id="htmDiv">
+	  <INPUT TYPE="button" VALUE="List Notification Objects" ONCLICK="onListNotifications();">
+</div>
+
+<hr>
+
+
+<br>
+<A HREF="./Device Application.html">Back</A>
+
+<META HTTP-EQUIV="OnKey0x0d" content="javascript:doTest();">
+
+</form>
+</body>
+</html>

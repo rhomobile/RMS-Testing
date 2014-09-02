@@ -1,0 +1,215 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+    <title>CardReader Test static EMML 1.1</title>
+    <!--<META HTTP-Equiv="cardreader" Content="open;pinEntry:ON;pintimeout:0x2710;autoenter:enabled;autotab:enabled;readevent:uri(javascript:MyReadEvent('%s', '%s');)">-->
+    <META HTTP-Equiv="CardReader" Content="ReadEvent:url('javascript:MyReadEvent('%s', '%s');')">
+	
+	
+<script language=javascript>
+//pinEntry:ON;pintimeout:10000;
+var generic = new ActiveXObject("PocketBrowser.Generic");
+var SelectedMSR="";
+function SelectAppropriateMSR()
+{
+var SlectedIndex=frmCardReader.mydropdown.selectedIndex;
+SelectedMSR = frmCardReader.mydropdown.options[SlectedIndex].value;
+alert("SelectedMSR"+SelectedMSR);
+generic.InvokeMETAFunction("cardreader","moduleName:"+SelectedMSR);
+
+
+}
+
+function ProcessCardData(data)
+{
+var carddata=data;
+var Track1Data,Track2Data,Track3Data;
+var position1 = carddata.indexOf('%');
+var position2 = carddata.indexOf('?');
+var carddatalength = carddata.length;
+if((position1==-1)||(position2==-1))
+{
+Track1Data="NULL";
+}
+else
+{
+Track1Data = carddata.substring(position1,position2);
+carddata=carddata.substring(position2+1,carddatalength);
+carddatalength=carddata.length;
+}
+
+
+position1=carddata.indexOf(';');
+position2=carddata.indexOf('?');
+
+if((position1==-1)||(position2==-1))
+{
+Track2Data="NULL";
+
+}
+else
+{
+Track2Data = carddata.substring(position1,position2);
+carddata=carddata.substring(position2+1,carddatalength);
+carddatalength=carddata.length;
+}
+if(SelectedMSR=="DCR7000")
+{
+position1=carddata.indexOf('%');
+}
+else if(SelectedMSR=="MSR9001")
+{
+position1=carddata.indexOf('+');
+}
+else
+{
+position1=carddata.indexOf(';');
+}
+position2=carddata.indexOf('?');
+
+if((position1==-1)||(position2==-1))
+{
+Track3Data="NULL";
+
+}
+else
+{
+Track3Data = carddata.substring(position1,position2);
+}
+
+
+frmCardReader.txtTrack1Data.value=Track1Data;
+frmCardReader.txtTrack2Data.value=Track2Data;
+frmCardReader.txtTrack3Data.value=Track3Data;
+
+
+}
+
+
+
+
+
+
+function MyReadEvent(data,mode)
+{
+	switch(mode)
+	{
+					case 'CR':
+						frmCardReader.txtCardData.value = "Card Data:- "+data;
+						ProcessCardData(data);
+						if(SelectedMSR == "DCR7000")
+						{
+						frmCardReader.txtCardData.value = "Please turn the unit over and enter the PIN";
+						}
+						break;
+					case 'ENCDATA':
+						frmCardReader.txtCardData.value ="Encrypted data:- "+data;
+						break;
+					case 'MESSAGE':
+						frmCardReader.txtCardData.value ="Error:- "+data;
+						break;
+					case 'PAN':
+						frmCardReader.txtCardData.value ="PAN:- "+data;
+						
+						break;
+							
+    }					
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function ClearTextboxes()
+{
+frmCardReader.txtCardData="";
+frmCardReader.txtTrack1Data="";
+frmCardReader.txtTrack2Data="";
+frmCardReader.txtTrack3Data="";
+}
+
+
+
+</script>
+</head>
+<body>
+
+<form id="frmCardReader" action="">
+<br /><br /><br /><br /><br /><br /><br />
+pinEntry:ON;pintimeout:10000;readevent
+<br>
+Swipe A Card
+<br>
+PIN is only applicable for DCR.For other MSRs Card data will be returned.
+<br>
+<select name="mydropdown" id="mydropdown" onChange="SelectAppropriateMSR();">
+<option value="MSR7000">MSR7000</option>
+<option value="DCR7000">DCR7000</option>
+<option value="MSR9500">MSR9500</option>
+<option value="MSR9000">MSR9000</option>
+<option value="MSR9001">MSR9001</option>
+<option value="MSR55">MSR55</option>
+<option value="MSR3000">MSR3000</option>
+
+    </select>
+
+<!--<table border=1 width=100%>
+    <tr>
+        <td>Card Data:</td><td><input type=textarea id="txtCardData" cols="20" rows="5" /></td>
+    </tr>
+    <tr>
+        <td>Track1 Data:</td>
+        <td><input type=textarea id="txtTrack1Data" cols="20" rows="3" /></td>
+    </tr>
+     <tr>
+        <td>Track2 Data:</td>
+        <td><input type=textarea id="txtTrack2Data" cols="20" rows="3" /></td>
+    </tr>
+     <tr>
+        <td>Track2 Data:</td>
+        <td><input type=textarea id="txtTrack3Data" cols="20" rows="3" /></td>
+    </tr>
+    
+    
+    
+</table>-->
+
+<table border=1 width=100%>
+    <tr>
+
+        <td><a href="main"></a></td>
+    </tr>
+    <tr>
+        <td>Card Data:</td><td><Textarea id="txtCardData" cols="30" rows="7"></Textarea></td>
+    </tr>
+    <tr>
+        <td>Track1 Data:</td><td><Textarea id="txtTrack1Data" cols="30" rows="1"></Textarea></td>
+
+    </tr>
+    <tr>
+        <td>Track2 Data:</td><td><Textarea id="txtTrack2Data" cols="30" rows="1"></Textarea></td>
+    </tr>
+    <tr>
+        <td>Track3 Data:</td><td><Textarea id="txtTrack3Data" cols="30" rows="1"></Textarea></td>
+    </tr>
+</table>
+<hr>
+<input type=button id="BtnClearTextboxes" value="Clear" onclick"ClearTextboxes();" />
+<P><INPUT TYPE="button" VALUE="Back" ONCLICK="location.href='CardReader_Index.html'"></P>
+</form>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html manifest="manifest.mf">
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+    <!-- NEON -->	
+    <META HTTP-Equiv="zoom" content="text:2;page:1.5">
+    
+	<title>Test page</title>	
+
+    <script type="text/javascript" src="js/test.js"></script>
+</head>
+
+<body>
+    <script type="text/javascript">
+	//  NEON QUIT. This code is compatible with both WebKit and IE Engines
+	function Quit()
+	{
+        try 
+        {
+            var objGeneric = new ActiveXObject("PocketBrowser.Generic");
+            objGeneric.InvokeMETAFunction("Application", "Quit");
+        }
+        catch(err) {
+            alert(err.message);            
+        } 
+	}
+    </script>
+
+	<div id="login_view">
+		<div class="title">
+            Test page
+        </div>
+		<div class="form">
+		<br />
+		<button onClick="testMsg('Hello!!')"> Say something! </button>
+		<br />
+		</div>
+		<div style="margin:10px;"><a class="quitlbl" href="Javascript:Quit();">-- Return to OS! --</a></div>
+	</div>
+
+</body>
+</html>

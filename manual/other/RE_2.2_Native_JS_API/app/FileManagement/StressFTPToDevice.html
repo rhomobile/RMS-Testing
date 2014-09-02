@@ -1,0 +1,106 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+
+
+<META HTTP-Equiv="FileTransfer" content="TransferEvent:url('Javascript:MyTransferEvent('%s');')">
+
+
+
+</head>
+<body>
+<br><br><br><br><br>
+<div id="myResponse">FileTransferResult:</div><BR>
+<p>FTP to device Stress</p><br />
+<BR><BR><BR><BR><BR><BR><BR>
+<div id="nos">Scccess Count</div><br />
+<div id="failureCount">Failure Count</div><br />
+<div id="totalCount">Total Count</div><br />
+<P><INPUT TYPE="button" VALUE="SetParams and Transfer" ONCLICK="setandTansfer();"></P><br />
+<P><INPUT TYPE="button" VALUE="Transfer" ONCLICK="doTransfer();"></P>
+
+<P><INPUT TYPE="button" VALUE="Back" ONCLICK="location.href='FileManagement_Index.html'"></P>
+
+</body>
+</html>
+
+
+<SCRIPT type="text/javascript">
+
+	
+var iCount = 0;
+var jCount = 0;
+var fCount = 0;
+var tCount=0;
+	
+function doTransfer()
+{
+
+		iCount++;
+
+	  if(iCount <= 50000)
+		{
+		    generic.InvokeMETAFunction('FileTransfer', "TransferEvent:url('Javascript:MyTransferEvent('%s');')");
+			generic.InvokeMETAFunction('FileTransfer', "Transfer");
+	        captureLoop1();	
+			
+		}
+		
+}	
+	
+	
+function setandTansfer()
+{
+
+		iCount++;
+
+	  if(iCount <= 50000)
+		{
+			generic.InvokeMETAFunction("FileTransfer", "Source:url('ftp://10.233.85.82/FileCollections/4m.txt');Destination:url('file://\Temp\myFTPfolder\mystressfilefromFTP.txt');Username:ftpadmin;Password:ftpadmin;CreateFolders:True;OverWrite:True");
+			generic.InvokeMETAFunction('FileTransfer', 'Transfer');
+		
+			captureLoop();	
+			
+		}
+		
+}
+
+
+
+function captureLoop()
+{
+	setTimeout("setandTansfer()", 30000);
+}
+
+
+function captureLoop1()
+{
+	setTimeout("doTransfer()", 30000);
+}
+
+function MyTransferEvent(response) 
+{
+  
+	
+	    if(response=="OK: File Received")
+        {
+        
+        jCount++;
+        nos.innerHTML="successCount:"+jCount;
+    
+        }
+        else
+        {
+        fCount++;
+        failureCount.innerHTML="failureCount:"+fCount;
+        
+        }
+        tCount++;
+        totalCount.innerHTML = "TotalCount:"+tCount;        
+        myResponse.innerHTML="response"+response;
+ }
+
+</SCRIPT>
+
+

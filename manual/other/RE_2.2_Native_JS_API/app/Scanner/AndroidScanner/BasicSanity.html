@@ -1,0 +1,212 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+<script type="text/javascript">
+  var selected_scanner = "";
+
+
+  function MyScanEvent(data, source, type, time, length, theEvent) {
+  message.innerHTML = "Barcode decoded";
+       
+  //alert("Scan Done");
+  message.innerHTML = "Barcode decoded";
+     if (theEvent == 'BTScanAssociationBarcode') {
+         scanningAssociationBarcode = true;
+ message.innerHTML = "BTScanAssociationBarcode";
+   }
+     else if (theEvent == 'BluetoothConnected') 
+     {
+          message.innerHTML = "Bluetooth Scanner Connected";
+      }
+      else if (theEvent == 'BluetoothDisconnected') {
+          message.innerHTML = "Bluetooth Disconnected, Please Reconnect";
+      }
+      else if (theEvent == 'Decode') 
+      {
+     
+       ODAXForm.datafield.value = "data:"+data+" source"+source+" type"+type+" Time"+time+" length"+length+" theEvent"+theEvent;
+        myAmit.innerHTML = "data:"+data+" source"+source+" type"+type+" Time"+time+" length"+length+" theEvent"+theEvent;
+     }
+  }
+
+   function enablemethod()
+   
+    {
+        
+        generic.InvokeMETAFunction('Scanner', 'enable');
+    }
+    
+    function disablemethod()
+    {
+        
+        generic.InvokeMETAFunction('Scanner', 'disable');
+
+    }
+    
+    function enabletest()
+   {
+     var temp = "enabled:" + selected_scanner.toString();
+     generic.InvokeMETAFunction('scanner', temp);
+     //scanner.enable();
+     myAmit.innerHTML="enabled";
+
+   }
+
+   function disabletest()
+    {
+     generic.InvokeMETAFunction('scanner', 'disable'); 
+     //scanner.disable();
+       myAmit.innerHTML="disabled";
+
+    }
+
+   
+   function starttest()
+   {
+     generic.InvokeMETAFunction('scanner', "start");
+     //scanner.start();
+       myAmit.innerHTML="start";
+
+   }
+
+   function stoptest()
+    {
+     generic.InvokeMETAFunction('Scanner', 'stop');
+     //scanner.stop();
+      myAmit.innerHTML="stop";
+    }
+
+    
+    
+    function Quit()
+    {
+	generic.InvokeMETAFunction("Application", "Quit");
+    }
+
+    function setEnumScannerTimer() 
+    {
+
+        setTimeout("onScannerEnable()", 1000);
+    }
+    function onScannerEnable() 
+    {
+       
+         generic.InvokeMETAFunction("Scanner", "DecodeEvent:url('Javascript:MyScanEvent('%s', '%s', '%s', '%s', '%s', '%s');')");
+        //generic.InvokeMETAFunction("Scanner", 'DecodeEvent:url("Javascript:MyScanEvent("%s", "%s", "%s", "%s", "%s", "%s");")');
+        //scanner.DecodeEvent = 'url("Javascript:MyScanEvent("%s", "%s", "%s", "%s", "%s", "%s");")';
+        //generic.InvokeMETAFunction("Scanner", 'enumScannerEvent:url("Javascript:EnumScanners(%s);")');
+        
+        generic.InvokeMETAFunction("Scanner", "enumScannerEvent:url('Javascript:EnumScanners(%s);')");
+        generic.InvokeMETAFunction('Scanner', 'enumerate');
+        //scanner.enumerate();
+        myAmit.innerHTML="new";
+        
+    }
+
+    function EnumScanners(scannerArray) {
+    
+        for (i = 0; i < scannerArray.length; i++) 
+        {
+           
+            this.document.ODAXForm.myscanner.options[i + 1].text = scannerArray[i][0] + scannerArray[i][1];
+            this.document.ODAXForm.myscanner.options[i + 1].value = scannerArray[i][0];
+            //myAmit.innerHTML+="myscanner"+scannerArray[i][0];
+        }
+
+    }
+
+
+    function selectScanner()
+     {
+        
+        var w = document.ODAXForm.myscanner.selectedIndex;
+        selected_scanner = document.ODAXForm.myscanner.options[w].value;
+
+        if (selected_scanner != "") 
+        {
+
+            generic.InvokeMETAFunction('Scanner', 'disabled');
+        }
+       
+    }
+    function pres()
+    {
+          //generic.InvokeMETAFunction('Scanner', 'adaptiveScanning:true');
+          //generic.InvokeMETAFunction('Scanner', 'aimType:timedrelease');
+       
+         //generic.InvokeMETAFunction('Scanner', 'aimType:presentation');
+        //generic.InvokeMETAFunction('Scanner', 'enabled');
+//       generic.InvokeMETAFunction('scanner', 'start');
+    }
+    
+    function EnableALLmethod()
+    {
+    ///alert("allDecoders enabled");
+    scanner.allDecoders ='enabled';
+    
+    }
+    
+    function DisableALLmethod()
+    {
+     //alert("allDecoders disabled");
+    scanner.allDecoders ='disabled';
+    
+    }
+    
+    function setPresenationMode()
+    {
+    
+    scanner.aimType='presentation';
+    myAmit.innerHTML="presentation";
+    }
+    
+    function setTriggerMode()
+    {
+    
+    scanner.aimType='trigger';
+    myAmit.innerHTML="trigger";
+    }
+    
+    
+    
+    
+ </script>
+</head>
+<body onload="setEnumScannerTimer();">
+<br /><br />
+<DIV ID="myAmit">Selected Scanner: </DIV>
+<br /><br />
+<DIV ID="message">message </DIV>
+<form name="ODAXForm" id="ODAXForm" action="">
+<table>
+<tr>
+<td>
+<select name="myscanner" id="myscanner" onChange="selectScanner();">
+<OPTION value="" >Select Scanner</OPTION> 
+<OPTION value="" ></OPTION> 
+<OPTION value="" ></OPTION> 
+<OPTION value="SCN5" ></OPTION> 
+<OPTION value="SCN5" ></OPTION> 
+</select></td></tr>
+<tr><td>Decoded data:</b><TEXTAREA NAME="datafield" id="datafield" COLS=20 ROWS=5></TEXTAREA></td></tr>
+<!-- <tr><td>Decoded data:</b><TEXTAREA NAME="datafield1" id="datafield1" COLS=20 ROWS=5></TEXTAREA></td></tr> -->
+<tr><td><P><INPUT TYPE="button" VALUE="Enabled" ONCLICK="enabletest();">
+<INPUT TYPE="button" VALUE="Disabled" ONCLICK="disabletest();"></td></tr>
+<tr><td><P><INPUT TYPE="button" VALUE="Start" ONCLICK="starttest();">
+<INPUT TYPE="button" VALUE="stop" ONCLICK="stoptest();"></td></tr>
+<tr><td><P><INPUT TYPE="button" VALUE="enablemethod" ONCLICK="enablemethod();">
+<INPUT TYPE="button" VALUE="disablemethod" ONCLICK="disablemethod();"></td></tr>
+<INPUT TYPE="button" VALUE="EnableALL" ONCLICK="EnableALLmethod();"></td></tr>
+<INPUT TYPE="button" VALUE="DiableALL" ONCLICK="DisableALLmethod();"></td></tr>
+<!--<br /><INPUT TYPE="button" VALUE="Presentation" ONCLICK="setPresenationMode();"></td></tr>
+<INPUT TYPE="button" VALUE="Trigger" ONCLICK="setTriggerMode();"></td></tr>-->
+<tr><td><INPUT TYPE="button" VALUE="Back" ONCLICK="location.href='./AndroidScannerindex.html'">
+<INPUT TYPE="button" VALUE="Quit" ONCLICK="Quit();">
+<INPUT TYPE="button" VALUE="presentation" ONCLICK="pres();"></td></tr>
+</table>
+</form>
+
+</body>
+</html>

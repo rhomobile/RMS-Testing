@@ -1,0 +1,93 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+
+<!--<META HTTP-Equiv="imager" Content="left:10;top:20;height:150;width:150;lamp:on;
+Destination:url('ftp://10.233.85.82/Received/imageInFTPStress.bmp');username:ftpadmin;password:ftpadmin;imagerevent:url('javascript:myevent('%s');');enabled:IMG1"> -->
+<META HTTP-Equiv="imager" Content="left:10;top:20;height:150;width:150;aim:on;lamp:on;
+Destination:url('ftp://10.233.85.82/Received/imageInFTPStress.bmp');username:ftpadmin;password:ftpadmin;imagerEvent:url('javascript:myjsonevent(%json)');enabled:CAM1"> 
+
+</head>
+<body>
+<br><br><br><br><br><br><br><br><br><br>
+<P><INPUT TYPE="button" VALUE="StartCapture" ONCLICK="doCapture();"></P>
+<P><INPUT TYPE="button" VALUE="Disable" ONCLICK="doDisable();"></P>
+<P><INPUT TYPE="button" VALUE="Capture" ONCLICK="captureImage();"></P>
+<P><INPUT TYPE="button" VALUE="Back" ONCLICK="location.href='Imager_Index.html'"></P>
+<div id="myResponse">EventResponse:</div><BR>
+<p>Stress-Capture the image and send to FTP-Memory leak</p>
+<BR>
+<div id="nos">TotalCount</div>
+<div id="sCount">SuccessCount</div>
+</body>
+</html>
+
+
+<SCRIPT type="text/javascript">
+//var generic = new ActiveXObject("PocketBrowser.Generic");
+	
+var iCount = 0;
+var jCount=0;
+	
+function doCapture()
+{
+
+		iCount++;
+
+	  if(iCount <= 3500)
+		{
+		    //imager.imagerEvent='myjsonevent(%json)';
+		    generic.InvokeMETAFunction("imager","Destination:url('ftp://10.233.85.82//Received//imageInFTPStress.bmp');username:ftpadmin;password:ftpadmin");
+			generic.InvokeMETAFunction('imager', 'capture');
+			nos.innerHTML = "Totalcount :- "+iCount;
+			//myResponse.innerHTML="Capture Called";
+			captureLoop();	
+			
+		}
+		
+}
+
+function captureImage()
+{
+//alert("1");
+generic.InvokeMETAFunction('imager', 'capture');
+}
+
+function doDisable()
+{
+	generic.InvokeMETAFunction('imager', 'disable');
+}
+
+function captureLoop()
+{
+        
+	setTimeout("doCapture()", 30000);
+	
+}
+
+function myevent(response) {
+
+        if(response=="OK: File Sent")
+        {
+        jCount++;
+        }
+        myResponse.innerHTML="response:-"+response+" count:-"+jCount;
+
+    }
+	
+function myjsonevent(jsonObject)
+{
+//alert("1");
+        if(jsonObject.transferResult=="OK: File Sent")
+        {
+        jCount++;
+		sCount.innerHTML="Success Count:"+jCount;
+        }
+        myResponse.innerHTML="response:-"+jsonObject.transferResult+" count:-"+jCount;
+}
+
+
+</SCRIPT>
+
+

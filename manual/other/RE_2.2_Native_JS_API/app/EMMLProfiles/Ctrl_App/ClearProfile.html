@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+    <title>A Control & Apperance EMML Profiles Test Page</title>
+
+  <META HTTP-Equiv="EMMLProfile" Content="name:test;import:url('CtrlApp.emmp');">
+ 
+  <script language=javascript type="text/javascript">
+    var Generic = new ActiveXObject("PocketBrowser.Generic");
+    function Quit() 
+    {
+        Generic.InvokeMETAFunction("Application", "Quit");
+    }
+
+    function doClear() {
+
+        Generic.InvokeMETAFunction("EMMLProfile", "clear:test");
+
+    }
+
+    function doApplyProfile(profile) 
+    {
+        
+        Generic.InvokeMETAFunction('EMMLProfile', 'Apply:' + profile);
+    }
+   
+</script>
+
+</head>
+<body>
+<h4>Address bar Control & Appearance EMML Profile Test</h1>
+<P><INPUT TYPE="button" VALUE="Quit" ONCLICK="Quit();"></P><br />
+ <a href="javascript:doClear();">Do clear Profile</a>
+    <br>
+ <a href="javascript:doApplyProfile('test.AddressBar1');"> AddressBar Visible</a>
+    <br>
+    <a href="javascript:doApplyProfile('test.AddressBarHide');">Address bar hidden</a>
+  <br>
+  <a href="javascript:doApplyProfile('test.TopCommandArea1');">TopCommandArea Visible</a>
+<br>
+  <a href="javascript:doApplyProfile('test.TopCommandAreaHide');">TopCommandArea hidden</a>
+  <br>
+  <a href="javascript:doApplyProfile('test.QuitButton1');">Quit Button Visible</a>
+  <br>
+  <a href="javascript:doApplyProfile('test.QuitButtonHide');">QuitButton hidden</a><br>
+   
+<hr />
+<br>
+ <a href="PersistantTest.html">Go to another persistant test page</a>
+  <br>
+<a href="../EMMLProfilesIndex.html">Back to EMML Profile Index</a>
+</body>
+</html>

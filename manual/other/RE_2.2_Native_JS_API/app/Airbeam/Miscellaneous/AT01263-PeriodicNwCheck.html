@@ -1,0 +1,26 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+<!--<META HTTP-Equiv="Network" Content="networkevent:url('Javascript:OnNetwork('%s');')">-->
+<meta http-equiv="Network" content="networkEvent:url('Javascript:onNetworkEvent(%json);');Start">
+
+<META HTTP-Equiv="Network" Content="host:10.233.85.43">
+<META HTTP-Equiv="Network" Content="start">
+
+</head>
+<br>
+<br>
+<div id="bat">Network connection status should appear here</div>
+<BR><BR>
+<A HREF="http://www.google.com">Back</A>
+
+</html>
+<SCRIPT LANGUAGE="JavaScript">
+function onNetworkEvent(conn)
+	{
+                
+		bat.innerHTML = "Connection status= "+conn.connectionInformation;
+		return;
+	}
+</SCRIPT>

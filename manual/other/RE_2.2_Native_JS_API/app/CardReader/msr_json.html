@@ -1,0 +1,37 @@
+<html><head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>RhoElements CardReader data Test</title>
+<META HTTP-Equiv="CardReader" Content="ReadEvent:url('javascript:doTransaction(%json);')">
+<script language="javascript" type="text/javascript">
+    function doTransaction(j)
+    {		
+        switch(j.mode) {
+        case 'CR':						
+            htmlData.innerHTML = "Encryption = " + j.encryption + "<br>" 
+				+ "Total data = " + j.data + "<br>"		
+				+ "Raw data = " + j.rawData + "<br>"					
+				+ "Unencrypted track1 data = " + j.track1 + "<br>"
+				+ "Unencrypted track2 data = " + j.track2 + "<br>"
+				+ "Unencrypted track3 data = " + j.track3 + "<br>"	
+				+ "Unencrypted track1 Status = " + j.track1Status + "<br>"
+				+ "Unencrypted track2 Status = " + j.track2Status + "<br>"
+				+ "Unencrypted track3 Status = " + j.track3Status + "<br>"	
+				+ "Encrypted track1 data = " + j.track1Encrypted + "<br>"
+				+ "Encrypted track2 data = " + j.track2Encrypted + "<br>"
+				+ "Encrypted track3 data = " + j.track3Encrypted + "<br>"	
+				+ "Encrypted track1 Status = " + j.track1EncryptedStatus + "<br>"
+				+ "Encrypted track2 Status = " + j.track2EncryptedStatus + "<br>"
+				+ "Encrypted track3 Status = " + j.track3EncryptedStatus + "<br>"					
+				+ "KSN number = " + j.ksn;			
+            break;        
+        }		
+    }	
+</script>
+</head>
+<body>
+<br><br><br><br><br>
+<DIV id="htmlData">The card data will appear here</div>
+</body>
+</html>

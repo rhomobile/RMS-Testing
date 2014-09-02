@@ -1,0 +1,110 @@
+<HTML>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+<!-- <meta http-equiv="Scanner" content="DecodeEvent:url('Javascript:onDecodeEventJSON(%json);')"> -->
+<TITLE>Signature Decoder Capture Tests</TITLE>
+</HEAD>
+<BODY>
+  <script type="text/javascript">
+
+    function AttachEvent()
+    {
+		scanner.decodeEvent = 'onDecodeEventJSON(%json)';
+    } 
+
+    function enableSignature()
+    {
+        //generic.InvokeMETAFunction("Scanner", "allDecoders:disabled");
+		//generic.InvokeMETAFunction("Scanner", "signature:enabled");
+		//scanner.allDecoders='disabled';
+		scanner.signature='enabled';
+    }
+	
+	function disableSignature()
+    {
+        generic.InvokeMETAFunction("Scanner", "allDecoders:enabled");
+		//generic.InvokeMETAFunction("Scanner", "signature:disabled");
+		scanner.signature='disabled';
+    }
+	
+	function SetSignatureParam()
+    {
+        //generic.InvokeMETAFunction("Scanner", "signatureImageHeight:200");
+		//generic.InvokeMETAFunction("Scanner", "signatureImageWidth:500");
+		//generic.InvokeMETAFunction("Scanner", "signatureImageQuality:100");
+		scanner.signatureImageHeight ='100';
+		scanner.signatureImageWidth ='400';
+		scanner.signatureImageQuality ='90';
+    }
+
+	function enableSCN1()
+	{
+		generic.InvokeMETAFunction("Scanner", "enabled:SCN1");
+	}
+	
+	function enableSCN2()
+	{
+		generic.InvokeMETAFunction("Scanner", "enabled:SCN2");
+	}
+	
+	function enablebinary()
+	{
+		//generic.InvokeMETAFunction("Scanner", "barcodeDataFormat:binary");
+		scanner.barcodeDataFormat='binary';
+	}
+	
+	function enableText()
+	{
+		//generic.InvokeMETAFunction("Scanner", "barcodeDataFormat:text");
+		scanner.barcodeDataFormat='text';
+	}
+	
+	function SetdataBufferSize()
+	{
+		//generic.InvokeMETAFunction("Scanner", "dataBufferSize:5000");
+		scanner.dataBufferSize='20000';
+	}
+	
+	
+   function onDecodeEventJSON(jsonObject)
+   {
+	//var html = "<b>Decoded Data:</b><br>";
+	//html = html + "<br><i>Data:</i> (See Image)";
+	signatureBarcode.src = jsonObject.data;
+	}
+	
+	function Quit()
+    {
+		generic.InvokeMETAFunction("Application", "Quit");
+    }
+     
+  </script>
+
+
+<H1>Image Capture Tests</H1>
+<P>
+<br><br><br><br><br><br><br><br><br><br><br><br>
+	<div id="Image SaveResult">Image Save Result goes here</div>
+	<img src="" id="signatureBarcode"></img>
+  <BR>
+  
+  <INPUT align="center" type="button" value="enableSCN1" onclick="enableSCN1();">
+  <INPUT align="center" type="button" value="enableSCN2" onclick="enableSCN2();">
+  <INPUT align="center" type="button" value="AttachEvent" onclick="AttachEvent();"> 
+  <BR>
+  <INPUT align="center" type="button" value="enableSigDecoder" onclick="enableSignature();">
+  <INPUT align="center" type="button" value="disableSigDecoder" onclick="disableSignature();">
+  <INPUT align="center" type="button" value="SetSigParam" onclick="SetSignatureParam();"> 
+  <BR> 
+  <INPUT align="center" type="button" value="enablebinary" onclick="enablebinary();">
+  <INPUT align="center" type="button" value="enableText" onclick="enableText();">
+  <INPUT align="center" type="button" value="SetdataBufferSize" onclick="SetdataBufferSize();
+  <BR>
+  <INPUT align="center" type="button" value="Quit" onclick="Quit();">
+  <BR>  
+	<P>
+	<a href="javascript:location.reload();">Refresh the page</a>
+
+  </BODY>
+</HTML>

@@ -1,0 +1,38 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+<META HTTP-Equiv="MinimizeButton" Content="Top:10; Left:10; Visibility:Visible">
+</head>
+<body>
+<P>AutoReboot</P>
+<P><INPUT TYPE="button" VALUE="AutoReboot_True" ONCLICK="doSync_true();">
+<P><INPUT TYPE="button" VALUE="AutoReboot_False" ONCLICK="doSync_false();">
+<P><INPUT TYPE="button" VALUE="Back" ONCLICK="location.href='../AirBEAM.html'"></P>
+
+
+</body>
+</html>
+
+<script>
+
+   function doSync_true()
+   {
+      
+      airbeam.AutoReboot = true;
+      airbeam.AddPackage("key35");
+      setTimeout('airbeam.Run()', 100);
+   }
+   function doSync_false()
+   {
+
+      airbeam.AutoReboot = false;
+      airbeam.AddPackage("key35");
+      setTimeout('airbeam.Run()', 100);
+   }
+</script>
+
+ 
+
+
+

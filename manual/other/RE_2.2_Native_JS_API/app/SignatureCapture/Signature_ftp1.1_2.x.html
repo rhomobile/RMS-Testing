@@ -1,0 +1,87 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+
+<!--<META HTTP-Equiv="quitbutton" Content="show">
+<META HTTP-Equiv="quitbutton" Content="x=10">
+<META HTTP-Equiv="quitbutton" Content="y=10">-->
+
+
+
+  <META HTTP-Equiv="signaturecapture" Content="w=200">
+  <META HTTP-Equiv="signaturecapture" Content="h=50">
+  <META HTTP-Equiv="signaturecapture" Content="x=10">
+  <META HTTP-Equiv="signaturecapture" Content="y=100">
+  <META HTTP-Equiv="signaturecapture" Content="penwidth=1">
+  <META HTTP-Equiv="signaturecapture" Content="name=Signature">
+  <META HTTP-Equiv="signaturecapture" Content="pencolor=00,00,00">
+  <META HTTP-Equiv="signaturecapture" Content="bgcolor=ff,00,00">
+  <META HTTP-Equiv="signaturecapture" Content="ftp:21">
+  <META HTTP-Equiv="signaturecapture" Content="url=10.233.85.82/Signature.bmp">
+  <META HTTP-Equiv="signaturecapture" Content="user=ftpadmin">
+  <META HTTP-Equiv="signaturecapture" Content="pass=ftpadmin">
+  <META HTTP-Equiv="signaturecapture" Content="enabled">
+  <META HTTP-Equiv="SignatureNavigate" Content="onCaptured('%s');">
+
+
+
+
+
+</head>
+<BODY BGCOLOR="#FFFFEA" TEXT="#0000A0" LINK="#FF0000" VLINK="#808080" ALINK="#008040">
+<p>Capture<p>
+<BR><BR><BR><BR><BR><BR>
+<div id="message">MessageA</div><BR><BR><BR>
+<P><INPUT type="button" value="Clear" onclick="clearC();"><P>
+<P><INPUT type="button" value="Capture" onclick="doCapture();"><P>
+
+<P><INPUT TYPE="button" VALUE="Back" ONCLICK="location.href='SignatureCapture.html'"></P>
+
+
+
+</body>
+</html>
+
+
+  <SCRIPT language=javascript>
+
+   try
+{
+var generic = new ActiveXObject("PocketBrowser.Generic");
+}
+catch(err)
+{
+var GenericPlugin = document.createElement('embed'); 
+GenericPlugin.setAttribute('id',"embed1"); 
+GenericPlugin.setAttribute('type',"application/x-wtg-legacy-generic"); 
+GenericPlugin.setAttribute('hidden',"true"); 
+
+// Attach the plugin embed tags to the body 
+var theBody = document.getElementsByTagName('body')[0]; 
+theBody.appendChild(GenericPlugin); 
+
+
+}
+
+   function clearC() 
+   {
+      
+       generic.InvokeMETAFunction("SignatureCapture", "clear");
+      
+    }
+
+    function doCapture()
+    {
+
+           //alert("capture");
+           generic.InvokeMETAFunction("SignatureCapture", "capture");
+          
+    }
+
+function onCaptured(data)
+{
+	message.innerHTML = "Data123: " + data;
+}
+
+
+  </SCRIPT>
