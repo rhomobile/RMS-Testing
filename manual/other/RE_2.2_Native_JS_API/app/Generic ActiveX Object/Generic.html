@@ -3,12 +3,12 @@
 <script type="text/javascript" src="/public/api/rhoapi-modules.js"></script>
 <script type="text/javascript" src="/public/re1/elements.js"></script>
 
-    <title>PB Generic ActiveX Object Test</title>
+    <title>PB generic ActiveX Object Test</title>
 
 <meta name="mobileoptimized" content="0" />
 <script language=javascript>
 
-//var Generic = new ActiveXObject("PocketBrowser.Generic");
+//var generic = new ActiveXObject("PocketBrowser.generic");
 var strConnection = "My Connection";
 var strUsername = "";
 var strPassword = "";
@@ -17,22 +17,22 @@ var validexitCode = "";
 
 function doConnect() {
 	Status.innerHTML = 'Connecting to ' + strConnection + ' ...';
-	Generic.RasConnect(strConnection, strUsername, strPassword, strDomain);
-	var vStatus = Generic.ConnectionStatus(strConnection);
+	generic.RasConnect(strConnection, strUsername, strPassword, strDomain);
+	var vStatus = generic.ConnectionStatus(strConnection);
 	if (vStatus == 8192)
 		Status.innerHTML = 'Connected.';
 	else if (vStatus == 8193)
 		Status.innerHTML = 'Connect failed.  Please disconnect.';
 	else
 		Status.innerHTML = "Connect error " + vStatus;
-	//Generic.RasDisconnect(strConnection)
+	//generic.RasDisconnect(strConnection)
 }
 
 function doDisconnect() {
 	Status.innerHTML = 'Disconnecting from ' + strConnection + ' ...';
-	Generic.RasDisconnect(strConnection)
-	//Generic.RasConnect(strConnection, strUsername, strPassword, strDomain);
-	var vStatus = Generic.ConnectionStatus(strConnection);
+	generic.RasDisconnect(strConnection)
+	//generic.RasConnect(strConnection, strUsername, strPassword, strDomain);
+	var vStatus = generic.ConnectionStatus(strConnection);
 	if (vStatus == -1)
 		Status.innerHTML = 'Disconnected.';
 	else
@@ -41,7 +41,7 @@ function doDisconnect() {
 
 function doStatus() {
 	
-	var vStatus = Generic.ConnectionStatus("My Connection");
+	var vStatus = generic.ConnectionStatus("My Connection");
 	if (vStatus == -1)
 		Status2.innerHTML = 'Status - Not connected (' + vStatus + ')';
 	else if (vStatus == 8192)
@@ -55,19 +55,19 @@ function doStatus() {
 function imageName123()
 {
 	var filePath1=frm.txtimageName1.value;
-	validexitCode = Generic.LaunchProcessNonBlocking(filePath1, '');
+	validexitCode = generic.LaunchProcessNonBlocking(filePath1, '');
 }
 function imageName()
 {
 	var filePath=frm.txtimageName.value;
-	var x = Generic.LaunchProcessNonBlocking(filePath, '');
+	var x = generic.LaunchProcessNonBlocking(filePath, '');
 	alert('Return code of non blocking call was: ' +x);
 }
 
 function iName()
 {
 	var fPath=frm.txtiName.value;
-	var result=Generic.LaunchProcess(fPath, '');
+	var result=generic.LaunchProcess(fPath, '');
 	alert('Return code of blocking call was: ' + result);
 }
 
@@ -78,15 +78,15 @@ function exitCode()
 	switch(sValue)
 	{
 		case 'Valid':
-			alert('Return code of exit process was: ' + Generic.GetProcessExitCode(validexitCode));
+			alert('Return code of exit process was: ' + generic.GetProcessExitCode(validexitCode));
 			break;
 
 		case 'Invalid':
-			alert('Return code of exit process was:' + Generic.GetProcessExitCode(ivalidexitCode));
+			alert('Return code of exit process was:' + generic.GetProcessExitCode(ivalidexitCode));
 			break;
 
 		case 'Null':
-			alert('Return code of exit process was:' + Generic.GetProcessExitCode());
+			alert('Return code of exit process was:' + generic.GetProcessExitCode());
 			break;
 	}
 }
@@ -98,16 +98,16 @@ function cProcess()
 	switch(selectedValue)
 	{
 		case 'Valid':
-			Generic.CloseProcess(validexitCode);
+			generic.CloseProcess(validexitCode);
 			break;
 
 		case 'Invalid':
-			Generic.CloseProcess(ivalidcode);
+			generic.CloseProcess(ivalidcode);
 
 			break;
 
 		case 'Null':
-            Generic.CloseProcess();
+            generic.CloseProcess();
 
 			break;
 	}
@@ -117,8 +117,8 @@ function waitPros()
 {
 		var pPath = frm.txtprocessPath.value;
 		var ptimeout = frm.txttimeout.value;
-		var hProcess =Generic.LaunchProcessNonBlocking(pPath, '');
-   		var bRetVal = Generic.WaitProcess(hProcess, ptimeout);
+		var hProcess =generic.LaunchProcessNonBlocking(pPath, '');
+   		var bRetVal = generic.WaitProcess(hProcess, ptimeout);
 		alert("wait process return value is-"+bRetVal);
 
 }
@@ -130,11 +130,11 @@ function hourGlass()
 	switch(glassValue)
 	{
 		case 'Show':
-			Generic.ShowHourglass();
+			generic.ShowHourglass();
 			break;
 
 		case 'Hide':	
-			Generic.HideHourglass();
+			generic.HideHourglass();
 			break;
 
 	}
@@ -147,25 +147,25 @@ function invoke()
 	switch(invokeValue)
 	{
 		case 'Method':
-			Generic.InvokeMETAFunction('Scanner', 'Enabled');
+			generic.InvokeMETAFunction('Scanner', 'Enabled');
 			break;
 
 		case 'Property':
-			Generic.InvokeMETAFunction('Signal', 'Visibility:Visible');
+			generic.InvokeMETAFunction('Signal', 'Visibility:Visible');
 			break;
 
 		case 'M Property':
-			Generic.InvokeMETAFunction('Battery', 'Left:50; Top:50; color:#FF0000; visibility:visible');
+			generic.InvokeMETAFunction('Battery', 'Left:50; Top:50; color:#FF0000; visibility:visible');
 			break;
 
 		case 'M Invoke':
-			Generic.InvokeMETAFunction('Signal', 'visibility:visible');
-			Generic.InvokeMETAFunction('Signal', 'Top:150');
-			Generic.InvokeMETAFunction('Signal', 'Left:150');
+			generic.InvokeMETAFunction('Signal', 'visibility:visible');
+			generic.InvokeMETAFunction('Signal', 'Top:150');
+			generic.InvokeMETAFunction('Signal', 'Left:150');
 			break;	
 			
 		case 'Invalid':
-			Generic.InvokeMETAFunction('Imager', '');
+			generic.InvokeMETAFunction('Imager', '');
 			break;
 
 	}
@@ -178,13 +178,13 @@ function playfile()
 	if(Rho.RhoFile.exists(path))
 	{
 		alert(path+"File exists");
-		Generic.PlayWave(path, 0);
+		generic.PlayWave(path, 1);
 	}
 	else
 	{
 		alert("File doesnt exist");
 	}
-	//Generic.PlayWave(pathfile, 0);
+	//generic.PlayWave(pathfile, 0);
 }
 
 function play()
@@ -198,38 +198,38 @@ function play()
 	switch(playValue)
 	{
 		case 'Zero':
-			Generic.PlayWave(pWav, 0);
+			generic.PlayWave(pWav, 0);
 			break;
 
 		case 'One':
-			Generic.PlayWave(pWav, 1);
+			generic.PlayWave(pWav, 1);
 			break;
 
 		case 'Two':
-			Generic.PlayWave(pWav, 2);
+			generic.PlayWave(pWav, 2);
 			break;
 
 		case 'Four':
-			Generic.PlayWave(pWav, 4);
+			generic.PlayWave(pWav, 4);
 			break;
 		case 'Eight':
 		
-			Generic.PlayWave(pWav, 8);
+			generic.PlayWave(pWav, 8);
 			//alert('Hello');
 			break;
 
 		case 'Ten':
-			Generic.PlayWave(pWav, 16);
+			generic.PlayWave(pWav, 16);
 			//alert('HelloWorld');
 			break;
 			
 		case 'Eightwithone':
-			Generic.PlayWave(pWav, 9);
+			generic.PlayWave(pWav, 9);
 			//alert('HelloWorld');
 			break;
 			
 		case 'Eightwithtwo':
-			Generic.PlayWave(pWav, 10);
+			generic.PlayWave(pWav, 10);
 			//alert('HelloWorld');
 			break;		
 
@@ -239,20 +239,20 @@ function play()
 
 function uuidmethod()
 {
-	alert(Generic.UUID);
+	alert(generic.UUID);
 	//alert("generic: " + generic.UUID);
 }
 
 function OEMInfomethod()
 {
-	alert(Generic.OEMInfo);
+	alert(generic.OEMInfo);
 	//alert("oeminfo: " + generic.OEMInfo);
 }
 
 function doQuit()
 {
 
-Generic.invokeMetaFunction("Application","quit");
+generic.invokeMetaFunction("Application","quit");
 }
 
 </script>
@@ -356,7 +356,7 @@ PlayWave:	<select name="playdropdown" id="playdropdown" onChange="play();">
 <div id="Status2"> </div>
 <BR>
 
-<A HREF="./Generic ActiveX Object.html">Back</A>
+<A HREF="./generic ActiveX Object.html">Back</A>
 
 
 </form>
