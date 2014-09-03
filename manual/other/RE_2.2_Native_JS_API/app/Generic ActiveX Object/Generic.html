@@ -1,5 +1,6 @@
 <html>
 <head>
+<script type="text/javascript" src="/public/api/rhoapi-modules.js"></script>
 <script type="text/javascript" src="/public/re1/elements.js"></script>
 
     <title>PB Generic ActiveX Object Test</title>
@@ -7,7 +8,7 @@
 <meta name="mobileoptimized" content="0" />
 <script language=javascript>
 
-var objGeneric = new ActiveXObject("PocketBrowser.Generic");
+//var Generic = new ActiveXObject("PocketBrowser.Generic");
 var strConnection = "My Connection";
 var strUsername = "";
 var strPassword = "";
@@ -16,8 +17,8 @@ var validexitCode = "";
 
 function doConnect() {
 	Status.innerHTML = 'Connecting to ' + strConnection + ' ...';
-	objGeneric.RasConnect(strConnection, strUsername, strPassword, strDomain);
-	var vStatus = objGeneric.ConnectionStatus(strConnection);
+	Generic.RasConnect(strConnection, strUsername, strPassword, strDomain);
+	var vStatus = Generic.ConnectionStatus(strConnection);
 	if (vStatus == 8192)
 		Status.innerHTML = 'Connected.';
 	else if (vStatus == 8193)
@@ -29,9 +30,9 @@ function doConnect() {
 
 function doDisconnect() {
 	Status.innerHTML = 'Disconnecting from ' + strConnection + ' ...';
-	objGeneric.RasDisconnect(strConnection)
+	Generic.RasDisconnect(strConnection)
 	//Generic.RasConnect(strConnection, strUsername, strPassword, strDomain);
-	var vStatus = objGeneric.ConnectionStatus(strConnection);
+	var vStatus = Generic.ConnectionStatus(strConnection);
 	if (vStatus == -1)
 		Status.innerHTML = 'Disconnected.';
 	else
@@ -40,7 +41,7 @@ function doDisconnect() {
 
 function doStatus() {
 	
-	var vStatus = objGeneric.ConnectionStatus("My Connection");
+	var vStatus = Generic.ConnectionStatus("My Connection");
 	if (vStatus == -1)
 		Status2.innerHTML = 'Status - Not connected (' + vStatus + ')';
 	else if (vStatus == 8192)
@@ -54,19 +55,19 @@ function doStatus() {
 function imageName123()
 {
 	var filePath1=frm.txtimageName1.value;
-	validexitCode = objGeneric.LaunchProcessNonBlocking(filePath1, '');
+	validexitCode = Generic.LaunchProcessNonBlocking(filePath1, '');
 }
 function imageName()
 {
 	var filePath=frm.txtimageName.value;
-	var x = objGeneric.LaunchProcessNonBlocking(filePath, '');
+	var x = Generic.LaunchProcessNonBlocking(filePath, '');
 	alert('Return code of non blocking call was: ' +x);
 }
 
 function iName()
 {
 	var fPath=frm.txtiName.value;
-	var result=objGeneric.LaunchProcess(fPath, '');
+	var result=Generic.LaunchProcess(fPath, '');
 	alert('Return code of blocking call was: ' + result);
 }
 
@@ -77,15 +78,15 @@ function exitCode()
 	switch(sValue)
 	{
 		case 'Valid':
-			alert('Return code of exit process was: ' + objGeneric.GetProcessExitCode(validexitCode));
+			alert('Return code of exit process was: ' + Generic.GetProcessExitCode(validexitCode));
 			break;
 
 		case 'Invalid':
-			alert('Return code of exit process was:' + objGeneric.GetProcessExitCode(ivalidexitCode));
+			alert('Return code of exit process was:' + Generic.GetProcessExitCode(ivalidexitCode));
 			break;
 
 		case 'Null':
-			alert('Return code of exit process was:' + objGeneric.GetProcessExitCode());
+			alert('Return code of exit process was:' + Generic.GetProcessExitCode());
 			break;
 	}
 }
@@ -97,16 +98,16 @@ function cProcess()
 	switch(selectedValue)
 	{
 		case 'Valid':
-			objGeneric.CloseProcess(validexitCode);
+			Generic.CloseProcess(validexitCode);
 			break;
 
 		case 'Invalid':
-			objGeneric.CloseProcess(ivalidcode);
+			Generic.CloseProcess(ivalidcode);
 
 			break;
 
 		case 'Null':
-            objGeneric.CloseProcess();
+            Generic.CloseProcess();
 
 			break;
 	}
@@ -116,8 +117,8 @@ function waitPros()
 {
 		var pPath = frm.txtprocessPath.value;
 		var ptimeout = frm.txttimeout.value;
-		var hProcess =objGeneric.LaunchProcessNonBlocking(pPath, '');
-   		var bRetVal = objGeneric.WaitProcess(hProcess, ptimeout);
+		var hProcess =Generic.LaunchProcessNonBlocking(pPath, '');
+   		var bRetVal = Generic.WaitProcess(hProcess, ptimeout);
 		alert("wait process return value is-"+bRetVal);
 
 }
@@ -129,11 +130,11 @@ function hourGlass()
 	switch(glassValue)
 	{
 		case 'Show':
-			objGeneric.ShowHourglass();
+			Generic.ShowHourglass();
 			break;
 
 		case 'Hide':	
-			objGeneric.HideHourglass();
+			Generic.HideHourglass();
 			break;
 
 	}
@@ -146,25 +147,25 @@ function invoke()
 	switch(invokeValue)
 	{
 		case 'Method':
-			objGeneric.InvokeMETAFunction('Scanner', 'Enabled');
+			Generic.InvokeMETAFunction('Scanner', 'Enabled');
 			break;
 
 		case 'Property':
-			objGeneric.InvokeMETAFunction('Signal', 'Visibility:Visible');
+			Generic.InvokeMETAFunction('Signal', 'Visibility:Visible');
 			break;
 
 		case 'M Property':
-			objGeneric.InvokeMETAFunction('Battery', 'Left:50; Top:50; color:#FF0000; visibility:visible');
+			Generic.InvokeMETAFunction('Battery', 'Left:50; Top:50; color:#FF0000; visibility:visible');
 			break;
 
 		case 'M Invoke':
-			objGeneric.InvokeMETAFunction('Signal', 'visibility:visible');
-			objGeneric.InvokeMETAFunction('Signal', 'Top:150');
-			objGeneric.InvokeMETAFunction('Signal', 'Left:150');
+			Generic.InvokeMETAFunction('Signal', 'visibility:visible');
+			Generic.InvokeMETAFunction('Signal', 'Top:150');
+			Generic.InvokeMETAFunction('Signal', 'Left:150');
 			break;	
 			
 		case 'Invalid':
-			objGeneric.InvokeMETAFunction('Imager', '');
+			Generic.InvokeMETAFunction('Imager', '');
 			break;
 
 	}
@@ -172,8 +173,18 @@ function invoke()
 
 function playfile()
 {
-	var pathfile = frm.txtwavfile.value;
-	objGeneric.PlayWave(pathfile, 16);
+	//var pathfile = frm.txtwavfile.value;
+	var path = Rho.RhoFile.join(Rho.Application.publicFolder, 'Alarm5.wav');
+	if(Rho.RhoFile.exists(path))
+	{
+		alert(path+"File exists");
+		Generic.PlayWave(path, 0);
+	}
+	else
+	{
+		alert("File doesnt exist");
+	}
+	//Generic.PlayWave(pathfile, 0);
 }
 
 function play()
@@ -187,38 +198,38 @@ function play()
 	switch(playValue)
 	{
 		case 'Zero':
-			objGeneric.PlayWave(pWav, 0);
+			Generic.PlayWave(pWav, 0);
 			break;
 
 		case 'One':
-			objGeneric.PlayWave(pWav, 1);
+			Generic.PlayWave(pWav, 1);
 			break;
 
 		case 'Two':
-			objGeneric.PlayWave(pWav, 2);
+			Generic.PlayWave(pWav, 2);
 			break;
 
 		case 'Four':
-			objGeneric.PlayWave(pWav, 4);
+			Generic.PlayWave(pWav, 4);
 			break;
 		case 'Eight':
 		
-			objGeneric.PlayWave(pWav, 8);
+			Generic.PlayWave(pWav, 8);
 			//alert('Hello');
 			break;
 
 		case 'Ten':
-			objGeneric.PlayWave(pWav, 16);
+			Generic.PlayWave(pWav, 16);
 			//alert('HelloWorld');
 			break;
 			
 		case 'Eightwithone':
-			objGeneric.PlayWave(pWav, 9);
+			Generic.PlayWave(pWav, 9);
 			//alert('HelloWorld');
 			break;
 			
 		case 'Eightwithtwo':
-			objGeneric.PlayWave(pWav, 10);
+			Generic.PlayWave(pWav, 10);
 			//alert('HelloWorld');
 			break;		
 
@@ -228,20 +239,20 @@ function play()
 
 function uuidmethod()
 {
-	alert(objGeneric.UUID);
+	alert(Generic.UUID);
 	//alert("generic: " + generic.UUID);
 }
 
 function OEMInfomethod()
 {
-	alert(objGeneric.OEMInfo);
+	alert(Generic.OEMInfo);
 	//alert("oeminfo: " + generic.OEMInfo);
 }
 
 function doQuit()
 {
 
-objGeneric.invokeMetaFunction("Application","quit");
+Generic.invokeMetaFunction("Application","quit");
 }
 
 </script>
@@ -311,7 +322,7 @@ InvokeMetaTag:	<select name="invokedropdown" id="invokedropdown" onChange="invok
 
 <!-- id="playfile" -->
 <!--WaveFile:	</td><td><Textarea id="txtwavfile"cols="21" rows="1">\Windows\alarm5.wav</Textarea>-->
-<input type=text name="txtwavfile" id="txtwavfile" value="\Windows\alarm5.wav" />
+<input type=text name="txtwavfile" id="txtwavfile" value="/internal/Alarm5.wav" />
 <INPUT type=button onclick="Javascript:playfile();" value="PlayWav">
 <p><input type="button" onclick="doQuit()" value="Quit" /></p>
 <BR><BR>
