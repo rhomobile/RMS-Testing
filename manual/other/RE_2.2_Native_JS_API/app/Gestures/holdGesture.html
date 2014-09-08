@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html>
+<head><script type="text/javascript" src="/public/re1/elements.js"></script>
+	<title>PB and RE2.2 Semi Auto Frame Work : Hold gesture</title>
+	<!--<link rel="stylesheet" type="text/css" href="css/main.css">-->
+	<style type="text/css">
+		.block{
+			background:#aabbcc;
+			border: 1px solid darkblue;
+		    margin: 5px;
+		    font-size: 11px;
+		    font-family: Monaco, "Lucida Console", monospace;
+		    line-height: 14px;
+		    color: #333333;
+		}
+		.title{
+			padding: 3px;
+		    font-size: 11px;
+		    font-family: Monaco, "Lucida Console", monospace;
+		    font-weight: bolder;
+		    background-color: steelblue;
+		    color: white;
+		}
+		.body{
+			background:#ddeeff;
+		}
+		.runners{
+			border: 1px solid darkblue;
+		    margin: 5px;
+		    font-family: Monaco, "Lucida Console", monospace;
+		    line-height: 14px;
+			padding: 3px;
+		    font-size: 12px;
+		    font-weight: bolder;
+		    background-color: #aabbcc;
+		    color: white;
+		}
+		.heading{
+			font-weight: bold;
+		}
+		.pass{
+			background:green;
+		}
+		.fail{
+			background:red;
+		}
+	</style>
+	<!--<script type="text/javascript" src="js/testCases.js"></script>-->
+	<script type="text/javascript">
+		var genericObj = new ActiveXObject("PocketBrowser.Generic");
+		var EventCounter = 1;
+		var myPage = "";
+		var backToTest = function(){
+					genericObj.InvokeMETAFunction("gesture", "Delete");
+					document.getElementById('mainBlock').innerHTML = myPage;
+				}
+		// callback function
+		function onGesture(id,count){
+			document.getElementById("actualResult").innerHTML = "Gesture detected for "+EventCounter+"th time.<br>Gesture ID: " + id + ", Count: " + count;
+		    EventCounter++;
+		    if(id=="Scan"){
+		      genericObj.InvokeMETAFunction("Scanner","enabled;start");
+		    }
+		    if(id=="Signal"){
+		      genericObj.InvokeMETAFunction("Signal","visibility:visible");
+		    }
+		    if(id=="Battery"){
+		    	genericObj.InvokeMETAFunction("battery","visibility:visible");
+		    }
+		}
+		(function(){
+		var pbTest = function(){
+		var pbTestObj = {};
+		pbTestObj.testCases = [
+		{
+			"VTID":"VT056 - 0438",
+			"RegLevel":"R1",
+			"Description":"Gesture Gesture Type=Hold",
+			"PreCondition":["Create a Gesture of Type='Hold', ID='My Hold Gesture' of Centre(150,150) and Radius 100", " Set the Diagonstic value to true", " Set preset toCenter", " Set Delay to 3000", " Set Interval to 1000", "Create the Gesture"],
+			"Steps":["Press and hold the Stylus inside the Gesture Circle and keep on pressing.", "Call and javascipt function on detection of gesture and show the ID and the count of the gesture inside the function."],
+			"ExpectedOutcome":["Hold  Gesture should be detected.After every 4 seconds it should be detected again and the count should go up by one every time.Proper ID should be returned inside the event."],
+			"testToPerform":function(){
+				myPage = document.getElementById('mainBlock').innerHTML;
+		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
+			    genericObj.InvokeMETAFunction("gesture", "ID:holdGesture;type:hold;Center-X:150;Center-Y:150;Radius:100;Diagnostics:true;Preset:center;Delay:3000;Interval:1000;Create");
+			    genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056 - 0340",
+			"RegLevel":"R3",
+			"Description":"Gesture - Gesture Type=Hold",
+			"PreCondition":[],
+			"Steps":["Create a Gesture of Type=Hold,ID='My Hold Gesture'  and with default Diagonstic value(false)", "Press and hold the Stylus inside the Gesture Circle."],
+			"ExpectedOutcome":["Hold  Gesture should be detected", "Proper ID should be returned inside the event", "The count of detection should be displayed near the center of the circle", "It should be increasing with time when Stlus is pressed and held inside the circle. "],
+			"testToPerform":function(){
+				myPage = document.getElementById('mainBlock').innerHTML;
+		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
+			    genericObj.InvokeMETAFunction("gesture", "ID:holdGesture;type:hold;Diagnostics:false;Create");
+        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056 - 0352",
+			"RegLevel":"R3",
+			"Description":"Gesture - Gesture Type=Hold, Preset Value=Default",
+			"PreCondition":[],
+			"Steps":["Create a Gesture of Type=Hold", "Explicitly Set the Diagonstic value to false.", "Press and hold the stylus on the screen."],
+			"ExpectedOutcome":["Hold  Gesture should be detected and ID should be displayed as Hold-Center."],
+			"testToPerform":function(){
+				myPage = document.getElementById('mainBlock').innerHTML;
+		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
+			    genericObj.InvokeMETAFunction("gesture", "ID:holdGesture;type:hold;Diagnostics:false;Create");
+        genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056 - 0353",
+			"RegLevel":"R3",
+			"Description":"Gesture - Gesture Type=Hold, Preset Value=Center",
+			"PreCondition":[],
+			"Steps":["Set the Preset value to Center for a Hold Gesture.", "Create a Gesture of Type=Hold", "Explicitly Set the Diagonstic value to true.", "Press and hold the stylus on the screen."],
+			"ExpectedOutcome":["Hold  Gesture should be detected and ID should be displayed as Hold-Center."],
+			"testToPerform":function(){
+				myPage = document.getElementById('mainBlock').innerHTML;
+		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
+			    genericObj.InvokeMETAFunction("gesture", "ID:holdGesture;type:hold;Preset:center;Diagnostics:false;Create");
+        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056 - 0421",
+			"RegLevel":"R3",
+			"Description":"Gesture - Gesture Type=Hold, Center-x=Default, Center-y=Default, radius=Default",
+			"PreCondition":[],
+			"Steps":["Do not mention any value of Center-x and Center-Yfor Hold Gesture.", "Create the Gesture", "Explicitly Set the Diagonstic value to true.", "Press and hold the stylus inside the Gesture circle."],
+			"ExpectedOutcome":["Hold gesture should be detected", "Default value of the Center-X and Center-Y should be the center of the screen., Radius value should be 25% of screen width or height, whichever is smaller."],
+			"testToPerform":function(){
+				myPage = document.getElementById('mainBlock').innerHTML;
+		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
+			    genericObj.InvokeMETAFunction("gesture", "ID:holdGesture;type:hold;Diagnostics:true;Create");
+        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056 - 0422",
+			"RegLevel":"R3",
+			"Description":"Gesture - Gesture Type=Hold, Center-x=100, Center-y=100, radius=Default",
+			"PreCondition":[],
+			"Steps":["Set the value of Center-x and Center-Y to (100,100) for Hold Gesture.", "Create the Gesture", "Explicitly Set the Diagonstic value to true.", "Press and hold the stylus inside the Gesture circle."],
+			"ExpectedOutcome":["Hold gesture should be created at the specified location", "Hold gesture should be detected."],
+			"testToPerform":function(){
+				myPage = document.getElementById('mainBlock').innerHTML;
+		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
+			    genericObj.InvokeMETAFunction("gesture", "ID:holdGesture;type:hold;Center-X:100;Center-Y:100;Diagnostics:true;Create");
+        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056 - 0423",
+			"RegLevel":"R3",
+			"Description":"Gesture - Gesture Type=Hold, Center-x=2000(outside the screen), Center-y=2000(outside the screen), radius=2500",
+			"PreCondition":[],
+			"Steps":["Set the value of Center-x and Center-Y to (2000,2000),radius=2100 for Hold Gesture.", "Create the Gesture", "Explicitly Set the Diagonstic value to true.", "Press and hold the stylus inside the Gesture circle."],
+			"ExpectedOutcome":["Hold gesture should be created at the specified location", "Hold gesture should be detected.", "(Hold gesture area visibility depends on device coordinates , please do adjust  device coordinates incase of invisibility.)"],
+			"testToPerform":function(){
+				myPage = document.getElementById('mainBlock').innerHTML;
+		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
+			    genericObj.InvokeMETAFunction("gesture", "ID:holdGesture;type:hold;Center-X:2000;Center-Y:2000;Radius:2500;Diagnostics:true;Create");
+        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056 - 0424",
+			"RegLevel":"R3",
+			"Description":"Gesture - Gesture Type=Hold, Center-x=-100(invalid coordinates), Center-y=-100((invalid coordinates), radius=400",
+			"PreCondition":[],
+			"Steps":["Set the value of Center-x and Center-Y to (-100,-100),radius=400 for Hold Gesture.", "Create the Gesture", "Explicitly Set the Diagonstic value to true.", "Press and hold the stylus inside the Gesture circle."],
+			"ExpectedOutcome":["Hold gesture should be created at the specified location", "Hold gesture should be detected.", "(Hold gesture area visibility depends on device coordinates , please do adjust  device coordinates incase of invisibility.)"],
+			"testToPerform":function(){
+				myPage = document.getElementById('mainBlock').innerHTML;
+		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
+			    genericObj.InvokeMETAFunction("gesture", "ID:holdGesture;type:hold;Center-X:-100;Center-Y:-100;Radius:400;Diagnostics:true;Create");
+        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056 - 0425",
+			"RegLevel":"R3",
+			"Description":"Gesture - Gesture Type=Hold, Center-x=150, Center-y=150, radius=50",
+			"PreCondition":[],
+			"Steps":["Set the value of Center-x and Center-Y to (150,150) and radius=50  for Hold Gesture.", "Create the Gesture", "Explicitly Set the Diagonstic value to true.", "Press and hold the stylus inside the Gesture circle."],
+			"ExpectedOutcome":["Hold gesture should be created at the specified location of specified radius", "Hold gesture should be detected."],
+			"testToPerform":function(){
+				myPage = document.getElementById('mainBlock').innerHTML;
+		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
+			    genericObj.InvokeMETAFunction("gesture", "ID:holdGesture;type:hold;Center-X:150;Center-Y:150;Radius:50;Diagnostics:true;Create");
+        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056 - 0426",
+			"RegLevel":"R3",
+			"Description":"Gesture - Gesture Type=Hold, Center-x=0, Center-y=0, radius=60",
+			"PreCondition":[],
+			"Steps":["Set the value of Center-x and Center-Y to (150,150) and radius=50  for Hold Gesture.", "Create the Gesture", "Explicitly Set the Diagonstic value to true.", "Press and hold the stylus inside the Gesture circle."],
+			"ExpectedOutcome":["Hold gesture should be created at the specified location of specified radius", "Hold gesture should be detected."],
+			"testToPerform":function(){
+				myPage = document.getElementById('mainBlock').innerHTML;
+		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
+			    genericObj.InvokeMETAFunction("gesture", "ID:holdGesture;type:hold;Center-X:0;Center-Y:0;Radius:60;Diagnostics:true;Create");
+        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056 - 0427",
+			"RegLevel":"R3",
+			"Description":"Gesture - Gesture Type=Hold, Center-x=Default, Center-y=Default, radius=2000(out of the screen)",
+			"PreCondition":[],
+			"Steps":["Set the value of  radius=2000 for Hold Gesture.", "Create the Gesture", "Explicitly Set the Diagonstic value to true.", "Press and hold the stylus inside the Gesture circle."],
+			"ExpectedOutcome":["Hold gesture should be detected at anywhere on device screen."],
+			"testToPerform":function(){
+				myPage = document.getElementById('mainBlock').innerHTML;
+		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
+			    genericObj.InvokeMETAFunction("gesture", "ID:holdGesture;type:hold;Radius:2000;Diagnostics:true;Create");
+        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056 - 0428",
+			"RegLevel":"R3",
+			"Description":"Gesture - Gesture Type=Hold, Delay=Default",
+			"PreCondition":[],
+			"Steps":["Do not mention any value of Delay for Hold Gesture.", "Create the Gesture", "Explicitly Set the Diagonstic value to true.", "Press and hold the stylus inside the Gesture circle for at least 1 seconds.", " Press the stylus on the gesture area and remove it before 1 seconds"],
+			"ExpectedOutcome":["Hold gesture should be detected stylus is pressed and held for at least 1 seconds., If it is removed before 1 second it should not be detected", "Default value of the Delay should be 1 second."],
+			"testToPerform":function(){
+				myPage = document.getElementById('mainBlock').innerHTML;
+		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
+			    genericObj.InvokeMETAFunction("gesture", "ID:holdGesture;type:hold;Diagnostics:true;Create");
+        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056 - 0429",
+			"RegLevel":"R3",
+			"Description":"Gesture - Gesture Type=Hold, Delay=5000",
+			"PreCondition":[],
+			"Steps":["Set Delay=5000 for Hold Gesture.", "Create the Gesture", "Explicitly Set the Diagonstic value to true.", "Press and hold the stylus inside the Gesture circle for at least 5 seconds.", " Press the stylus on the gesture area and remove it before 5 seconds."],
+			"ExpectedOutcome":["Hold gesture should be detected stylus is pressed and held for at least 5 seconds., If it is removed before 5 second it should not be detected."],
+			"testToPerform":function(){
+				myPage = document.getElementById('mainBlock').innerHTML;
+		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
+			    genericObj.InvokeMETAFunction("gesture", "ID:holdGesture;type:hold;Delay:5000;Diagnostics:true;Create");
+        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056 - 0430",
+			"RegLevel":"R3",
+			"Description":"Gesture - Gesture Type=Hold, Delay=1",
+			"PreCondition":[],
+			"Steps":["Set Delay=1 for Hold Gesture.", "Create the Gesture", "Explicitly Set the Diagonstic value to true.", "Press and hold the stylus inside the Gesture circle for at least 1 mili second.", " Press the stylus on the gesture area and remove it before 1 mili second."],
+			"ExpectedOutcome":["Hold gesture should be detected stylus is pressed and held for at least1 mili second., If it is removed before 1 mili second. it should not be detected."],
+			"testToPerform":function(){
+				myPage = document.getElementById('mainBlock').innerHTML;
+		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
+			    genericObj.InvokeMETAFunction("gesture", "ID:holdGesture;type:hold;Delay:1;Diagnostics:true;Create");
+        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056 - 0431",
+			"RegLevel":"R3",
+			"Description":"Gesture - Gesture Type=Hold, Delay=0(Invalid)",
+			"PreCondition":[],
+			"Steps":["Set Delay=0 for Hold Gesture.", "Create the Gesture", "Explicitly Set the Diagonstic value to true.", "Press and hold the stylus inside the Gesture circle for at least 0 mili second.", " Press the stylus on the gesture area and remove it before 0 mili second."],
+			"ExpectedOutcome":["Hold gesture should be detected as soon as stylus is tapped  inside gesture area."],
+			"testToPerform":function(){
+				myPage = document.getElementById('mainBlock').innerHTML;
+		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
+			    genericObj.InvokeMETAFunction("gesture", "ID:holdGesture;type:hold;Delay:0;Diagnostics:true;Create");
+        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056 - 0432",
+			"RegLevel":"R3",
+			"Description":"Gesture - Gesture Type=Hold, Interval=Default",
+			"PreCondition":[],
+			"Steps":["Do not mention any value of Interval for Hold Gesture.", "Create the Gesture", "Explicitly Set the Diagonstic value to true.", "Press and hold the stylus inside the Gesture circle for at least 5 seconds."],
+			"ExpectedOutcome":["Hold gesture should be detected once.There should not any further detection.Detectioncount should be 1", "Default value of the Interval  should be 0."],
+			"testToPerform":function(){
+				myPage = document.getElementById('mainBlock').innerHTML;
+		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
+			    genericObj.InvokeMETAFunction("gesture", "ID:holdGesture;type:hold;Diagnostics:true;Create");
+        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056 - 0433",
+			"RegLevel":"R3",
+			"Description":"Gesture - Gesture Type=Hold, Delay=1000, Interval=2000",
+			"PreCondition":[],
+			"Steps":["Set Delay=1000, Interval=2000 for Hold Gesture.", "Create the Gesture", "Explicitly Set the Diagonstic value to true.", "Press and hold the stylus inside the Gesture circle for at least 10 seconds."],
+			"ExpectedOutcome":["Hold gesture should be detected 4 times.", "After 1 second,4 seconds,7 seconds and 10 seconds", "Detectioncount should be 4."],
+			"testToPerform":function(){
+				myPage = document.getElementById('mainBlock').innerHTML;
+		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
+			    genericObj.InvokeMETAFunction("gesture", "ID:holdGesture;type:hold;Interval:1000;Diagnostics:true;Create");
+        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056 - 0434",
+			"RegLevel":"R3",
+			"Description":"Gesture - Gesture Type=Hold, Interval=0",
+			"PreCondition":[],
+			"Steps":["Set Interval=0 for Hold Gesture.", "Create the Gesture", "Explicitly Set the Diagonstic value to true.", "Press and hold the stylus inside the Gesture circle for at least 5 seconds."],
+			"ExpectedOutcome":["Hold gesture should be detected once.There should not any further detection.Detectioncount should be 1."],
+			"testToPerform":function(){
+				myPage = document.getElementById('mainBlock').innerHTML;
+		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
+			    genericObj.InvokeMETAFunction("gesture", "ID:holdGesture;type:hold;Interval:0;Diagnostics:true;Create");
+        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056 - 0435",
+			"RegLevel":"R3",
+			"Description":"Gesture - Gesture Type=Hold, Interval=-1",
+			"PreCondition":[],
+			"Steps":["Set Interval=-1 for Hold Gesture.", "Create the Gesture", "Explicitly Set the Diagonstic value to true.", "Press and hold the stylus inside the Gesture circle for at least 5 seconds."],
+			"ExpectedOutcome":["Hold gesture should be detected once.There should not any further detection.Detectioncount should be 1", "( 0 is nearest allowed value for interval  value of  -1)"],
+			"testToPerform":function(){
+				myPage = document.getElementById('mainBlock').innerHTML;
+		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
+			    genericObj.InvokeMETAFunction("gesture", "ID:holdGesture;type:hold;Interval:-1;Diagnostics:true;Create");
+        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056 - 1329",
+			"RegLevel":"R3",
+			"Description":"Gesture - Gesture Type=Hold, Checking count after Gesture detection",
+			"PreCondition":[],
+			"Steps":["Create a  Hold Gesture.", "Press and Hold the stylus inside the gesture area", "After sometime remove the stylus"],
+			"ExpectedOutcome":["Hold gesture should be dtected successfully", "Count should be returned as 0 when stylus is removed."],
+			"testToPerform":function(){
+				myPage = document.getElementById('mainBlock').innerHTML;
+		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
+			    genericObj.InvokeMETAFunction("gesture", "ID:holdGesture;type:hold;Diagnostics:true;Create");
+        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+			},
+			"FinalResult":""
+		},/*{
+			"VTID":"VT056 - 1330",
+			"RegLevel":"R3",
+			"Description":"Gesture - URL detection for Hold Gesture",
+			"PreCondition":[],
+			"Steps":["Attach the gesture detect event and Specify any http page to navigate.", "Create a hold gesture with interval 3000 and delay 2000", "Keep the stylus inside the gesture area and keep on pressing.Do not remove the stylus."],
+			"ExpectedOutcome":["Page should navigate to specified URL page", "PB should not crash."],
+			"testToPerform":function(){
+				myPage = document.getElementById('mainBlock').innerHTML;
+		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
+			    main.displayResult("This is test 2");
+			},
+			"FinalResult":""
+		},*/{
+			"VTID":"VT056 - 0442",
+			"RegLevel":"R3",
+			"Description":"Gesture - Scanarios",
+			"PreCondition":[],
+			"Steps":["Create two linaear gestures of same start and end points.", "The value of each and every property should be same for two gestures. ", "Draw a line inside th tolerance area."],
+			"ExpectedOutcome":["Both the linear gestures should be detected and their ID should be different. "],
+			"testToPerform":function(){
+				myPage = document.getElementById('mainBlock').innerHTML;
+		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
+			    genericObj.InvokeMETAFunction("gesture", "ID:LinearGesture1;type:linear;startX:0;startY:0;endX:2000;endY:2000;Diagnostics:true;Create");
+		        genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+				var genericObj2 = new ActiveXObject("PocketBrowser.Generic");
+				genericObj2.InvokeMETAFunction("gesture", "ID:Lineargesture2;type:linear;startX:0;startY:0;endX:2000;endY:2000;Diagnostics:true;Create");
+		        genericObj2.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056 - 0443",
+			"RegLevel":"R3",
+			"Description":"Gesture - Scanarios",
+			"PreCondition":[],
+			"Steps":["Create a  linear gesture (80,100) and (250,100)", "Create another  linear gesture (100,80) and (250,800)", "Draw a line similar to first gesture line  inside th tolerance area.", "Draw a line similar to second gesture line  inside th tolerance area."],
+			"ExpectedOutcome":["Both the linear gestures should be detected and their ID should be different.", "First gesture should be detected first.Both of the gesture should be identifiable by their IDs create by default."],
+			"testToPerform":function(){
+				myPage = document.getElementById('mainBlock').innerHTML;
+		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
+			    genericObj.InvokeMETAFunction("gesture", "ID:LinearGesture1;type:linear;startX:80;startY:100;endX:250;endY:100;Diagnostics:true;Create");
+		        genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+				var genericObj2 = new ActiveXObject("PocketBrowser.Generic");
+				genericObj2.InvokeMETAFunction("gesture", "ID:Lineargesture2;type:linear;startX:100;startY:80;endX:250;endY:800;Diagnostics:true;Create");
+		        genericObj2.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+			},
+			"FinalResult":""
+		},/*{
+			"VTID":"VT056 - 0446",
+			"RegLevel":"R3",
+			"Description":"Gesture - Scanarios",
+			"PreCondition":[],
+			"Steps":["Create a 1 linear,1 circular,1Hold gesture.", "On linear gesture detection scan a barcode.", "On Circular gesture detection show th signals and battery.", "On Hold Gesture detection play the beeper.", " On Tilt gesture detection suspend the device.", "On Shake gesture detection resume the device."],
+			"ExpectedOutcome":["All gestures should be detected and should perfrom the mentioned action."],
+			"testToPerform":function(){
+				myPage = document.getElementById('mainBlock').innerHTML;
+		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
+			    main.displayResult("This is test 2");
+			},
+			"FinalResult":""
+		},*/{
+			"VTID":"VT056 - 0447",
+			"RegLevel":"R3",
+			"Description":"Gesture - Tag Persistance",
+			"PreCondition":[],
+			"Steps":["Create a linear gesture.", "Draw a line similar to this in this page.", "Navigate to some other page", "Again try to draw a similar line in that page"],
+			"ExpectedOutcome":["Gesture should not be detected in the second page.<br/>In the first page it should be detected."],
+			"testToPerform":function(){
+				myPage = document.getElementById('mainBlock').innerHTML;
+		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
+			    genericObj.InvokeMETAFunction("gesture", "ID:LinearGesture;type:linear;startX:80;startY:100;endX:250;endY:100;Diagnostics:true;Create");
+        		genericObj.InvokeMETAFunction("gesture-detected","url('//10.233.85.82/27server/RMS-Testing/EB_jasmine/app/Gesture/gesturenav.html')");
+			},
+			"FinalResult":""
+		},/*{
+			"VTID":"VT056 - 0448",
+			"RegLevel":"R3",
+			"Description":"Linear Gesture - Memory Leak Test",
+			"PreCondition":[],
+			"Steps":["Check the available memory.", "Create 20  linear gestures in a page.", "Draw a line similar to them in this page.", "Navigate to some other page", " Check the memory again", "Quit PB"],
+			"ExpectedOutcome":["Gestures should be detected on first page.  - All gestures should be terminated when we will navigate to another page", "There should not be any memory leaks", "PB should quit with out any error"],
+			"testToPerform":function(){
+				myPage = document.getElementById('mainBlock').innerHTML;
+		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
+			    main.displayResult("Memory Leak Test case.");
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056 - 0449",
+			"RegLevel":"R3",
+			"Description":"Circular Gesture - Memory Leak Test",
+			"PreCondition":[],
+			"Steps":["Check the available memory.", "Create 20  Circular gestures in a page.", "Draw a line similar to them in this page.", "Navigate to some other page", " Check the memory again", "Quit PB"],
+			"ExpectedOutcome":["Gestures should be detected on first page.  - All gestures should be terminated when we will navigate to another page", "There should not be any memory leaks", "PB should quit with out any error"],
+			"testToPerform":function(){
+				myPage = document.getElementById('mainBlock').innerHTML;
+		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
+			    main.displayResult("Memory Leak Test case.");
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056 - 0450",
+			"RegLevel":"R3",
+			"Description":"Hold  Gesture - Memory Leak Test",
+			"PreCondition":[],
+			"Steps":["Check the available memory.", "Create 20 Hold  gestures in a page.", "Press and hold the stylus.", "Navigate to some other page", " Check the memory again", "Quit PB"],
+			"ExpectedOutcome":["Gestures should be detected on first page.", "All gestures should be terminated when we will navigate to another page", "There should not be any memory leaks", "PB should quit with out any error"],
+			"testToPerform":function(){
+				myPage = document.getElementById('mainBlock').innerHTML;
+		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
+			    main.displayResult("Memory Leak Test case.");
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056 - 1331",
+			"RegLevel":"R3",
+			"Description":"Hold  Gesture - Memory Leak Test",
+			"PreCondition":[],
+			"Steps":["Check the available memory.", "Create 1 linear,1 circular and 1 hold gesture in the page.", "Draw all the 3 gestures overnight through Mouse Recorder appliactio.", "Check the memory again", " Quit PB"],
+			"ExpectedOutcome":["All the Gestures should be detected successfully", "There should not be any memory leaks", "PB should quit with out any error"],
+			"testToPerform":function(){
+				myPage = document.getElementById('mainBlock').innerHTML;
+		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
+			    main.displayResult("Memory Leak Test case.");
+			},
+			"FinalResult":""
+		},*/{
+			"VTID":"VT056 - 0454",
+			"RegLevel":"R3",
+			"Description":"Gesture - Gesture with quit functionality",
+			"PreCondition":[],
+			"Steps":["Create a Gesture of Type=Linear,ID='My linear Gesture' and with default Diagonstic value(true)", "Draw a line on the screen approximately similar to the gesture line.", "Quit PB."],
+			"ExpectedOutcome":["SPB should exit without any error."],
+			"testToPerform":function(){
+				myPage = document.getElementById('mainBlock').innerHTML;
+		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
+			    genericObj.InvokeMETAFunction("gesture", "ID:LinearGesture1;type:linear;Diagnostics:true;Create");
+        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+			},
+			"FinalResult":""
+		}/*,{
+			"VTID":"VT056 - 1332",
+			"RegLevel":"R3",
+			"Description":"Gesture - Gesture Metatags with Empty Patameter",
+			"PreCondition":[],
+			"Steps":["Launch PocketBrowser from Start Menu.", "Set null(Empty) values for the CardReader Gesture using InvokeMETAFunction.", "Set null(Empty) values for the Gesture event (like Detected )using InvokeMETAFunction."],
+			"ExpectedOutcome":["PB should not crash when any of the Gesture parameters with null values are set through InvokeMetaFunction", "PB should not crash when any of the Gesture Events with null values are set through InvokeMetaFunction.", "No Error should be occurred."],
+			"testToPerform":function(){
+				myPage = document.getElementById('mainBlock').innerHTML;
+		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
+			    main.displayResult("This is test 2");
+			},
+			"FinalResult":""
+		}*/];
+		pbTestObj.afterEach = function(){
+			myPage = "";
+		};
+		return pbTestObj;
+	}
+	window.pbTest = pbTest();
+})();
+(function(){
+	var main = function(){
+		var mainObj = {};
+		var r1List = [];
+		var r2List = [];
+		var r3List = [];
+		var testArray = [];
+		var index = 0;
+		var count = 0;
+		var choice = "";
+		var passCount = 0;
+		var failCount = 0;
+		var noRunCount = 0;
+		mainObj.init = function(){
+			for(key in pbTest.testCases){
+				if(pbTest.testCases[key].RegLevel == "R1"){
+					r1List.push(pbTest.testCases[key]);
+				}else if(pbTest.testCases[key].RegLevel == "R2"){
+					r2List.push(pbTest.testCases[key]);
+				}else if(pbTest.testCases[key].RegLevel == "R3"){
+					r3List.push(pbTest.testCases[key]);
+				}
+			}
+		};
+		mainObj.loadArrayList = function(data, eleId){
+			var retData = "";
+			if(eleId == "preCondition"){
+				retData = "<br><span class='heading'>PreConditions:</span>";
+			}else if(eleId == "steps"){
+				retData = "<br><span class='heading'>Steps:</span>";
+			}if(data.length>0){
+				retData += "<ul>";
+		        for (var i=0; i<data.length;i++){
+		            retData = retData + "<li>"+data[i]+"</li>"
+		        }
+		        retData = retData + "</ul>";
+		    }
+			
+		    document.getElementById(eleId).innerHTML = retData;
+		}
+		mainObj.onPageLoad = function(){
+			this.onRegLevelChange();
+		};
+		mainObj.loadTest = function(){
+			var vtElement = "";
+            var selectElement = "<select id='vtSelect' onchange='main.onVTIDChange()'></select>";
+            document.getElementById('vtsection').innerHTML = selectElement;
+            var selectList = document.getElementById('vtSelect');
+			for(key in testArray){
+				var option = document.createElement("OPTION");
+				option.text = testArray[key].VTID;
+				option.value = key;
+				selectList.add(option);
+			}
+			this.loadSingleTest(index);
+		};
+		mainObj.displayFinalResult = function(){
+			retHTMLData = "<table><tr><td class='title'>" + choice +" Test summay :</td></tr><tr><td class='block'><ul>";
+			for(key in testArray){
+				if(testArray[key].FinalResult=="Pass"){
+					passCount++;
+					retHTMLData = retHTMLData + "<li style='color:green'>" + testArray[key].Description + "</li>";	
+				}else if(testArray[key].FinalResult=="Fail"){
+					failCount++;
+					retHTMLData = retHTMLData + "<li style='color:red'>" + testArray[key].Description + "</li>";
+				}else{
+					noRunCount++;
+					retHTMLData = retHTMLData + "<li style='color:red;background:yellow'>" + testArray[key].Description + "</li>";
+				}
+			}
+			resultSummary = "<table class='block'><tr><td colspan=2 class='title'>Summary for "+choice+" cases</td></tr><tr><td>Pass</td><td style='color:green;font-weight:bold'>"+passCount+"</td></tr><tr><td>Fail</td><td style='color:red;font-weight:bold'>"+failCount+"</td></tr><tr><td>NoRun</td><td style='color:blue;font-weight:bold'>"+noRunCount+"</td></tr><tr style='color:black;font-weight:bold'><td>Total</td><td>"+parseInt(passCount+failCount+noRunCount)+"</td></tr></table>";
+			retHTMLData = retHTMLData + "</ul></td></tr></table><br><a href='../index.html'>Home</a>";
+			retHTMLData = resultSummary + retHTMLData;
+			document.getElementById('mainBlock').innerHTML = retHTMLData;
+		};
+		mainObj.loadSingleTest = function(index){
+			document.getElementById('vtid').innerHTML = testArray[index].VTID;
+			document.getElementById('desc').innerHTML = testArray[index].Description;
+			this.loadArrayList(testArray[index].PreCondition, "preCondition");
+			this.loadArrayList(testArray[index].Steps, "steps");
+			this.loadArrayList(testArray[index].ExpectedOutcome, "expected");
+			document.getElementById('actualResult').innerHTML = "";
+			var selectElement = document.getElementById('vtSelect');
+			selectElement.value = index;
+		};
+		mainObj.runThisTest = function(){
+			testArray[index].testToPerform();
+		};
+		mainObj.passThisTest = function(){
+			testArray[index].FinalResult = "Pass";
+            pbTest.afterEach();
+			this.nextTest();
+		};
+		mainObj.failThisTest = function(){
+			testArray[index].FinalResult = "Fail";
+            pbTest.afterEach();
+			this.nextTest();
+		}
+		mainObj.nextTest = function(){
+			if(index<(count-1)){
+				index++;
+				this.loadSingleTest(index);
+			}else{
+				this.displayFinalResult();
+			}
+		};
+		mainObj.prevTest = function(){
+			if(index>0){
+				index--;
+				this.loadSingleTest(index);
+			}else{
+				alert("No previous test cases to run");
+			}
+		};
+		mainObj.onVTIDChange = function(){
+			myVtIdChoice = document.getElementById("vtSelect").value;
+			index = myVtIdChoice;
+			this.loadSingleTest(myVtIdChoice);
+		};
+		mainObj.onRegLevelChange = function(){
+			var myChoice = document.getElementById("regLevel").value;
+			choice = myChoice;
+			document.getElementById('vtsection').innerHTML = "";
+
+			if(myChoice=="All"){
+				testArray = pbTest.testCases;
+				count = testArray.length;
+			}else if(myChoice=="R1"){
+				testArray=r1List;
+				count = testArray.length;
+			}else if(myChoice=="R2"){
+				testArray=r2List;
+				count = testArray.length;
+			}else if(myChoice=="R3"){
+				testArray=r3List;
+				count = testArray.length;
+			}
+			index = 0;
+			passCount = 0;
+			failCount = 0;
+			noRunCount = 0;
+			if(count>0){
+				this.loadTest();
+			}else{
+				document.getElementById("regLevel").value = "All";
+				this.onRegLevelChange();
+				alert("No Tests for the level selected");
+			}
+		};
+		mainObj.displayResult = function(res){
+			document.getElementById('actualResult').innerHTML = res;
+		};
+		return mainObj;
+	}
+	window.main = main();
+})();
+	</script>
+	<!--<script type="text/javascript" src="js/myMain.js"></script>-->
+	<script type="text/javascript">
+		main.init();
+	</script>
+</head>
+<body class="body" onload="main.onPageLoad()">
+<h3 class='title'>Semi Auto test for PB and RE2.2 : Hold Gesture</h3>
+<div id="mainBlock" class="mainBlock">
+	<div>
+		<span class="heading">Select Regression Level :</span>
+	    <select name="regLevel" id="regLevel" onchange="main.onRegLevelChange()">
+	        <OPTION value="All" >All</OPTION>
+	        <OPTION value="R1" >R1</OPTION>
+	        <OPTION value="R2" >R2</OPTION>
+	        <OPTION value="R3" >R3</OPTION>
+	    </select> 
+	</div>
+    <div>
+    	<span class="heading">Select Test Case to Run :</span>
+    	<div id='vtsection'>
+    	</div>
+    	
+    </div>
+    <div class="runners">
+    	<input type=button value="Previous" onclick="main.prevTest();" />
+		<input type=button value="Next" onclick="main.nextTest()" />
+		<input type="button" onclick="main.runThisTest()" value="Run Test"/>
+    </div>
+	<br>
+	<div class="block">
+	<span class="heading">VTID:</span>
+    <div id="vtid"></div><br>
+    <span class="heading">Test description:</span>
+    <div id="desc"></div>
+    <div id="preCondition"></div>
+    <div id="steps"></div>
+    <span class="heading">Expected result:</span>
+    <div id="expected"></div><br>
+    <input type="button" onclick="main.runThisTest()" value="Run Test"/>
+    <br><br>
+    <span class="heading">Actual result:</span>
+    <br>
+    <div id="actualResult"></div><br>
+    <input type="button" class="pass" onclick="main.passThisTest()" value="Pass"/>
+    <input type="button" class="fail" onclick="main.failThisTest()" value="Fail"/>
+    </div>
+	<br>
+	<div class="runners">
+		<input type=button value="Previous" onclick="main.prevTest();" />
+		<input type=button value="Next" onclick="main.nextTest()" />
+	</div>
+	</div>
+</body>
+</html>

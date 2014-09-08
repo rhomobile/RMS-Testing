@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html>
+<head><script type="text/javascript" src="/public/re1/elements.js"></script>
+	<title>PB and RE2.2 Semi Auto Frame Work : Circular gesture</title>
+	<!--<link rel="stylesheet" type="text/css" href="css/main.css">-->
+	<style type="text/css">
+		.block{
+			background:#aabbcc;
+			border: 1px solid darkblue;
+		    margin: 5px;
+		    font-size: 11px;
+		    font-family: Monaco, "Lucida Console", monospace;
+		    line-height: 14px;
+		    color: #333333;
+		}
+		.title{
+			padding: 3px;
+		    font-size: 11px;
+		    font-family: Monaco, "Lucida Console", monospace;
+		    font-weight: bolder;
+		    background-color: steelblue;
+		    color: white;
+		}
+		.body{
+			background:#ddeeff;
+		}
+		.runners{
+			border: 1px solid darkblue;
+		    margin: 5px;
+		    font-family: Monaco, "Lucida Console", monospace;
+		    line-height: 14px;
+			padding: 3px;
+		    font-size: 12px;
+		    font-weight: bolder;
+		    background-color: #aabbcc;
+		    color: white;
+		}
+		.heading{
+			font-weight: bold;
+		}
+		.pass{
+			background:green;
+		}
+		.fail{
+			background:red;
+		}
+	</style>
+	<!--<script type="text/javascript" src="js/testCases.js"></script>-->
+	<script type="text/javascript">
+		var genericObj = new ActiveXObject("PocketBrowser.Generic");
+		var EventCounter = 1;
+		var myPage = "";
+		var backToTest = function(){
+					genericObj.InvokeMETAFunction("gesture", "Delete");
+					document.getElementById('mainBlock').innerHTML = myPage;
+				}
+		// callback function
+		function onGesture(id,count){
+			document.getElementById("actualResult").innerHTML = "Gesture detected for "+EventCounter+"th time.<br>Gesture ID: " + id + ", Count: " + count;
+		    EventCounter++;
+		    if(id=="Scan"){
+		      genericObj.InvokeMETAFunction("Scanner","enabled;start");
+		    }
+		    if(id=="Signal"){
+		      genericObj.InvokeMETAFunction("Signal","visibility:visible");
+		    }
+		    if(id=="Battery"){
+		    	genericObj.InvokeMETAFunction("battery","visibility:visible");
+		    }
+		}
+		(function(){
+		var pbTest = function(){
+		var pbTestObj = {};
+		pbTestObj.testCases = [
+		{
+			"VTID":"VT056 - 0437",
+			"RegLevel":"R1",
+			"Description":"Gesture Gesture Type=Circular",
+			"PreCondition":["Create a Gesture of Type=Circular,ID='My Circular Gesture' of Centre(150,150) and Radius 100", " Set the Diagonstic value to true", " Set preset to Happy", " Set Start to 90 and end to 360", " Set Tolerance to 20", " Set Sensitivity to 80", " Create a Gesture"],
+			"Steps":[" Draw a Circular line on the screen approximately similar to the gesture line", " Call and javascipt function on detection of gesture and show the ID of the gesture inside the function."],
+			"ExpectedOutcome":[""],
+			"testToPerform":function(){
+				myPage = document.getElementById('mainBlock').innerHTML;
+		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
+			    genericObj.InvokeMETAFunction("gesture", "ID:cicularGesture;type:circle;Center-X:150;Center-Y:150;Radius:100;Diagnostics:true;Preset:happy;Start:90;End:360;tolerance:20;sensitivity:80;Create");
+        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056 - 0339",
+			"RegLevel":"R3",
+			"Description":"Gesture - Gesture Type=Circular",
+			"PreCondition":["Create a Gesture of Type=Circular,ID='My Circular Gesture'  and with default Diagonstic value(false)"],
+			"Steps":["Draw a Circular line on the screen approximately similar to the gesture line."],
+			"ExpectedOutcome":["Circular Gesture should be detected.", "Proper ID should be returned inside the event."],
+			"testToPerform":function(){
+				myPage = document.getElementById('mainBlock').innerHTML;
+		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
+			    genericObj.InvokeMETAFunction("gesture", "ID:cicularGesture;type:circle;Diagnostics:false;Create");
+        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056 - 0349",
+			"RegLevel":"R3",
+			"Description":"Gesture - Gesture Type=Circular, Preset Value=Default",
+			"PreCondition":["Create a Gesture of Type=Circular", "Explicitly Set the Diagonstic value to false."],
+			"Steps":["Draw a line(anticockwise) on the screen approximately similar to the gesture circular line."],
+			"ExpectedOutcome":["Circular  Gesture should be detected and ID should be displayed asCircular-Happy."],
+			"testToPerform":function(){
+				myPage = document.getElementById('mainBlock').innerHTML;
+		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
+			    genericObj.InvokeMETAFunction("gesture", "ID:cicularGesture;type:circle;Diagnostics:true;Create");
+        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056 - 0350",
+			"RegLevel":"R3",
+			"Description":"Gesture - Gesture Type=Circular, Preset Value=Sad",
+			"PreCondition":[],
+			"Steps":["Set the preset value to Sad for a linear gesture. ", "Create the Gesture of Type=Circular", "Explicitly Set the Diagonstic value to true.", "Draw(Clockwise) a line on the screen approximately similar to the Circular gesture line."],
+			"ExpectedOutcome":["Circular  Gesture should be detected and ID should be displayed as Circular-Sad."],
+			"testToPerform":function(){
+				myPage = document.getElementById('mainBlock').innerHTML;
+		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
+			    genericObj.InvokeMETAFunction("gesture", "ID:cicularGesture;type:circle;Preset:sad;Diagnostics:true;Create");
+        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056 - 0351",
+			"RegLevel":"R3",
+			"Description":"Gesture - Gesture Type=Circular, Preset Value=Happy",
+			"PreCondition":[],
+			"Steps":["Set the preset value to Happy for a linear gesture. ", "Create the Gesture of Type=Circular", "Explicitly Set the Diagonstic value to true.", "Draw a line(anticlockwise) on the screen approximately similar to the Circular gesture line."],
+			"ExpectedOutcome":["Circular  Gesture should be detected and ID should be displayed as Circular-Happy."],
+			"testToPerform":function(){
+				myPage = document.getElementById('mainBlock').innerHTML;
+		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
+			    genericObj.InvokeMETAFunction("gesture", "ID:cicularGesture;type:circle;Preset:happy;Diagnostics:true;Create");
+        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056 - 0394",
+			"RegLevel":"R3",
+			"Description":"Gesture - Gesture Type=Circular, Center-x=Default, Center-y=Default, radius=Default",
+			"PreCondition":["Do not mention any value of Center-x and Center-Yfor Circular Gesture.", "Create the Gesture", "Explicitly Set the Diagonstic value to true."],
+			"Steps":["Draw a curvilinear line on the screen approximately similar to the gesture circle."],
+			"ExpectedOutcome":["Circular gesture should be detected.", "Default value of the Center-X and Center-Y should be the center of the screen., Radius value should be 33% of screen width or height, whichever is smaller."],
+			"testToPerform":function(){
+				myPage = document.getElementById('mainBlock').innerHTML;
+		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
+			    genericObj.InvokeMETAFunction("gesture", "ID:cicularGesture;type:circle;Diagnostics:true;Create");
+        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056 - 0395",
+			"RegLevel":"R3",
+			"Description":"Gesture - Gesture Type=Circular, Center-x=100, Center-y=100, radius=Default",
+			"PreCondition":["Set the value of Center-x and Center-Y to (100,100) for Circular Gesture.", "Create the Gesture", "Explicitly Set the Diagonstic value to true."],
+			"Steps":["Draw a curvilinear line on the screen approximately similar to the gesture circle."],
+			"ExpectedOutcome":["Circular gesture should be created at the specified location.", "Circular gesture should be detected."],
+			"testToPerform":function(){
+				myPage = document.getElementById('mainBlock').innerHTML;
+		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
+			    genericObj.InvokeMETAFunction("gesture", "ID:cicularGesture;type:circle;Center-X:100;Center-Y:100;Diagnostics:true;Create");
+        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056 - 0396",
+			"RegLevel":"R3",
+			"Description":"Gesture - Gesture Type=Circular, Center-x=1000(outside the screen), Center-y=1000(outside the screen), Radius=1200",
+			"PreCondition":["Set the value of Center-x and Center-Y to (1000,1000),Radius=1200 for Circular Gesture.", "Set tolerance to 40 ,Start- 0 and End - 360.Set sensitivity to 0."],
+			"Steps":["Explicitly Set the Diagonstic value to true. Create the Gesture", "Draw a curvilinear line on the screen approximately similar to the gesture circle."],
+			"ExpectedOutcome":["Circular gesture area will be created and detected.", "(Circular gesture area visibility will  depend upon device co-ordinatees, adjust these coordinates in case if gesture area is not visible)"],
+			"testToPerform":function(){
+				myPage = document.getElementById('mainBlock').innerHTML;
+		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
+			    genericObj.InvokeMETAFunction("gesture", "ID:cicularGesture;type:circle;Center-X:1000;Center-Y:1000;Radius:1200;tolerance:40;Start:0;End:360;sensitivity:0;Diagnostics:true;Create");
+        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056 - 0397",
+			"RegLevel":"R3",
+			"Description":"Gesture - Gesture Type=Circular, Center-x=-100(invalid coordinates), Center-y=-100((invalid coordinates), radius=500",
+			"PreCondition":["Set the value of Center-x and Center-Y to (-100,-100),radius=500 for Circular Gesture.", "Set Sensitivity value to 0 and Create the Gesture.", "Explicitly Set the Diagonstic value to true."],
+			"Steps":["Draw a curvilinear line on the screen approximately similar to the gesture circle."],
+			"ExpectedOutcome":["Circular gesture should be created at the specified location.", "Circular gesture should be detected."],
+			"testToPerform":function(){
+				myPage = document.getElementById('mainBlock').innerHTML;
+		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
+			    genericObj.InvokeMETAFunction("gesture", "ID:cicularGesture;type:circle;Center-X:-100;Center-Y:-100;Radius:500;sensitivity:0;Diagnostics:true;Create");
+        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056 - 0398",
+			"RegLevel":"R3",
+			"Description":"Gesture - Gesture Type=Circular, Center-x=150, Center-y=150, radius=50",
+			"PreCondition":["Set the value of Center-x and Center-Y to (150,150) and radius=50  for Circular Gesture.", "Create the Gesture", "Explicitly Set the Diagonstic value to true."],
+			"Steps":["Draw a curvilinear line on the screen approximately similar to the gesture circle."],
+			"ExpectedOutcome":["Circular gesture should be created at the specified location of specified radius.", "Circular gesture should be detected."],
+			"testToPerform":function(){
+				myPage = document.getElementById('mainBlock').innerHTML;
+		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
+			    genericObj.InvokeMETAFunction("gesture", "ID:cicularGesture;type:circle;Center-X:150;Center-Y:150;Radius:50;Diagnostics:true;Create");
+        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056 - 1328",
+			"RegLevel":"R3",
+			"Description":"Gesture - Gesture Type=Circular, Radius=0(Any invalid value)",
+			"PreCondition":[],
+			"Steps":["Attach the gesture-detect event.", "Set the type to circle and diagonstics to true.", "Set the radius to 0 or string value or any negative value.", "Create the circular gesture."],
+			"ExpectedOutcome":["No errors should be occurred .", "Circular gesture should  be detected."],
+			"testToPerform":function(){
+				myPage = document.getElementById('mainBlock').innerHTML;
+		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
+			    genericObj.InvokeMETAFunction("gesture", "ID:cicularGesture;type:circle;Radius:0;Diagnostics:true;Create");
+        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056 - 0399",
+			"RegLevel":"R3",
+			"Description":"Gesture - Gesture Type=Circular, Center-x=0, Center-y=0, radius=60, start=0, end=90",
+			"PreCondition":["Set the value of Center-x and Center-Y to (150,150) and radius=50,start=0,end=90  for Circular Gesture.", "Create the Gesture", "Explicitly Set the Diagonstic value to true."],
+			"Steps":["Draw a curvilinear line on the screen approximately similar to the gesture circle."],
+			"ExpectedOutcome":["Circular gesture should be created at the specified location of specified radius.", "Circular gesture should be detected."],
+			"testToPerform":function(){
+				myPage = document.getElementById('mainBlock').innerHTML;
+		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
+			    genericObj.InvokeMETAFunction("gesture", "ID:cicularGesture;type:circle;Center-X:0;Center-Y:0;Radius:60;Start:0;End:90;Diagnostics:true;Create");
+        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056 - 0401",
+			"RegLevel":"R3",
+			"Description":"Gesture - Gesture Type=Circular, start=Default, end=Default",
+			"PreCondition":["Do not mention any value for start and end for Circular Gesture.", "Create the Gesture", "Explicitly Set the Diagonstic value to true."],
+			"Steps":["Draw a curvilinear line on the screen approximately similar to the gesture circle."],
+			"ExpectedOutcome":["Circular gesture should be created at the specified location of specified radius.", "Circular gesture should be detected.", "Default vale of Start should be 0 and end should be 180."],
+			"testToPerform":function(){
+				myPage = document.getElementById('mainBlock').innerHTML;
+		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
+			    genericObj.InvokeMETAFunction("gesture", "ID:cicularGesture;type:circle;Diagnostics:true;Create");
+        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056 - 0402",
+			"RegLevel":"R3",
+			"Description":"Gesture - Gesture Type=Circular, start=90, end=270",
+			"PreCondition":["Set the value of start=90,end=270  for Circular Gesture.", "Create the Gesture", "Explicitly Set the Diagonstic value to true."],
+			"Steps":["Draw a curvilinear line on the screen approximately similar to the gesture circle."],
+			"ExpectedOutcome":["Circular gesture should be created at the specified location of specified radius", "Circular gesture should be detected."],
+			"testToPerform":function(){
+				myPage = document.getElementById('mainBlock').innerHTML;
+		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
+			    genericObj.InvokeMETAFunction("gesture", "ID:cicularGesture;type:circle;Start:90;End:270;Diagnostics:true;Create");
+        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056 - 0403",
+			"RegLevel":"R3",
+			"Description":"Gesture - Gesture Type=Circular, start=90, end=450",
+			"PreCondition":["Set the value of start=90,end=450  for Circular Gesture.", "Create the Gesture", "Explicitly Set the Diagonstic value to true."],
+			"Steps":["Draw a curvilinear line on the screen approximately similar to the gesture circle."],
+			"ExpectedOutcome":["Circular gesture should be created at the specified location of specified radius.", "Circular gesture should be detected."],
+			"testToPerform":function(){
+				myPage = document.getElementById('mainBlock').innerHTML;
+		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
+			    genericObj.InvokeMETAFunction("gesture", "ID:cicularGesture;type:circle;Start:90;End:450;Diagnostics:true;Create");
+        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056 - 0404",
+			"RegLevel":"R3",
+			"Description":"Gesture - Gesture Type=Circular, Preset=Sad, start=0, end=180",
+			"PreCondition":["Set the value of start=0,end=180  for Circular Gesture.", "Create the Gesture", "Explicitly Set the Diagonstic value to true."],
+			"Steps":["Draw a curvilinear line on the screen approximately similar to the gesture circle."],
+			"ExpectedOutcome":["Circular gesture should be created at the specified location of specified radius.", "Circular gesture should be detected when circle is made anti clockwise.", "Setting the prest value should not have any effect."],
+			"testToPerform":function(){
+				myPage = document.getElementById('mainBlock').innerHTML;
+		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
+			    genericObj.InvokeMETAFunction("gesture", "ID:cicularGesture;type:circle;Preset:sad;Start:0;End:180;Diagnostics:true;Create");
+        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056 - 0405",
+			"RegLevel":"R3",
+			"Description":"Gesture - Gesture Type=Circular, Preset=Sad, start=360, end=0",
+			"PreCondition":["Set the value of Preset=Sad,start=360,end=0  for Circular Gesture.", "Create the Gesture", "Explicitly Set the Diagonstic value to true."],
+			"Steps":["Draw a curvilinear line on the screen approximately similar to the gesture circle."],
+			"ExpectedOutcome":["Circular gesture should be created at the specified location of specified radius", "Circular gesture should be detected."],
+			"testToPerform":function(){
+				myPage = document.getElementById('mainBlock').innerHTML;
+		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
+			    genericObj.InvokeMETAFunction("gesture", "ID:cicularGesture;type:circle;Preset:sad;Start:360;End:0;Diagnostics:true;Create");
+        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056 - 0406",
+			"RegLevel":"R3",
+			"Description":"Gesture - Gesture Type=Circular, start=0, end=720",
+			"PreCondition":["Set the value of start=90,end=270  for Circular Gesture.", "Create the Gesture", "Explicitly Set the Diagonstic value to true."],
+			"Steps":["Draw a curvilinear line on the screen approximately similar to the gesture circle."],
+			"ExpectedOutcome":["Circular gesture should be created at the specified location of specified radius", "Circular gesture should be detected."],
+			"testToPerform":function(){
+				myPage = document.getElementById('mainBlock').innerHTML;
+		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
+			    genericObj.InvokeMETAFunction("gesture", "ID:cicularGesture;type:circle;Start:0;End:720;Diagnostics:true;Create");
+        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056 - 0407",
+			"RegLevel":"R3",
+			"Description":"Gesture - Gesture Type=Circular, start=-30(Invalid), end=-60(Invalid)",
+			"PreCondition":["Set the value of start=-30,end=-60  for Circular Gesture.", "Create the Gesture", "Explicitly Set the Diagonstic value to true."],
+			"Steps":["Draw a curvilinear line on the screen approximately similar to the gesture circle."],
+			"ExpectedOutcome":["Circular gesture should be created at the specified location of specified radius.( only one circle of circular gesture is created)  - Circular gesture should be detected."],
+			"testToPerform":function(){
+				myPage = document.getElementById('mainBlock').innerHTML;
+		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
+			    genericObj.InvokeMETAFunction("gesture", "ID:cicularGesture;type:circle;Start:-30;End:-60;Diagnostics:true;Create");
+        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056 - 0410",
+			"RegLevel":"R3",
+			"Description":"Gesture - Gesture Type=Circular, Tolerance=Default",
+			"PreCondition":["Do not set the value for tolerance for Circular Gesture.", "Create the Gesture", "Explicitly Set the Diagonstic value to true."],
+			"Steps":["Draw a curvilinear line on the screen approximately similar to the gesture circle such that it passes through the tolerance region which is the collection of small circles.."],
+			"ExpectedOutcome":["Circular gesture should be created at the specified location of specified radius", "Circular gesture should be detected when the line is drawn in tolerance region", "If any part of the circular line goes outside the tolerance region gesture should not be detected", "Default value of the Tolerance should be 16% of screen width."],
+			"testToPerform":function(){
+				myPage = document.getElementById('mainBlock').innerHTML;
+		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
+			    genericObj.InvokeMETAFunction("gesture", "ID:cicularGesture;type:circle;Diagnostics:true;Create");
+        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056 - 0411",
+			"RegLevel":"R3",
+			"Description":"Gesture - Gesture Type=Circular, Tolerance=20",
+			"PreCondition":["Set tolerance=20 for Circular Gesture.", "Create the Gesture", "Explicitly Set the Diagonstic value to true."],
+			"Steps":["Draw a curvilinear line on the screen approximately similar to the gesture circle such that it passes through the tolerance region which is the collection of small circles."],
+			"ExpectedOutcome":["Circular gesture should be created at the specified location of specified radius", "Circular gesture should be detected when the line is drawn in tolerance region", "If any part of the circular line goes outside the tolerance region gesture should not be detected", "Default value of the Tolerance should be 16% of screen width."],
+			"testToPerform":function(){
+				myPage = document.getElementById('mainBlock').innerHTML;
+		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
+			    genericObj.InvokeMETAFunction("gesture", "ID:cicularGesture;type:circle;tolerance:20;Diagnostics:true;Create");
+        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056 - 0412",
+			"RegLevel":"R3",
+			"Description":"Gesture - Gesture Type=Circular, Tolerance=2000(outside screen)",
+			"PreCondition":["Set tolerance=2000 for Circular Gesture.", "Create the Gesture", "Explicitly Set the Diagonstic value to true."],
+			"Steps":["Draw a curvilinear line on the screen approximately similar to the gesture circle such that it passes through the tolerance region which is the collection of small circles.."],
+			"ExpectedOutcome":["Circular gesture should be created at the specified location of specified radius", "Circular gesture should be detected by tapping any where.when the line is drawn in tolerance region. "],
+			"testToPerform":function(){
+				myPage = document.getElementById('mainBlock').innerHTML;
+		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
+			    genericObj.InvokeMETAFunction("gesture", "ID:cicularGesture;type:circle;tolerance:2000;Diagnostics:true;Create");
+        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056 - 0413",
+			"RegLevel":"R3",
+			"Description":"Gesture - Gesture Type=Circular, Tolerance=5",
+			"PreCondition":["Set tolerance=5 for Circular Gesture.", "Create the Gesture", "Explicitly Set the Diagonstic value to true."],
+			"Steps":["Draw a curvilinear line on the screen approximately similar to the gesture circle such that it passes through the tolerance region which is the collection of small circles."],
+			"ExpectedOutcome":["Circular gesture should be created at the specified location of specified radius", "Circular gesture should be detected when the line is drawn in tolerance region", "If any part of the circular line goes outside the tolerance region gesture should not be detected", "Default value of the Tolerance should be 16% of screen width."],
+			"testToPerform":function(){
+				myPage = document.getElementById('mainBlock').innerHTML;
+		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
+			    genericObj.InvokeMETAFunction("gesture", "ID:cicularGesture;type:circle;tolerance:5;Diagnostics:true;Create");
+        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056 - 0414",
+			"RegLevel":"R3",
+			"Description":"Gesture - Gesture Type=Circular, Tolerance=0(Invalid)",
+			"PreCondition":[],
+			"Steps":["Set tolerance=0 for Circular Gesture.", "Create the Gesture", "Explicitly Set the Diagonstic value to true.", "Draw a curvilinear line on the screen approximately similar to the gesture circle such that it passes through the tolerance region which is the collection of small circles.."],
+			"ExpectedOutcome":["?"],
+			"testToPerform":function(){
+				myPage = document.getElementById('mainBlock').innerHTML;
+		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
+			    genericObj.InvokeMETAFunction("gesture", "ID:cicularGesture;type:circle;tolerance:0;Diagnostics:true;Create");
+        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056 - 0415",
+			"RegLevel":"R3",
+			"Description":"Gesture - Gesture Type=Circular, Senstivity=Default",
+			"PreCondition":["Do not set the value for Senstivity for Circular Gesture.", "Create the Gesture", "Explicitly Set the Diagonstic value to true."],
+			"Steps":["Draw a curvilinear line on the screen approximately similar to the gesture circle such that it passes through at least 50% of the small circles.", "Draw a curvilinear line on the screen approximately similar to the gesture circle such that it does not pass through at least 50% of the small circles."],
+			"ExpectedOutcome":["Circular gesture should be detected when the line is drawn such that,it passes through at least 50% of the small circles", "Circular gesture should not be detected when the line is drawn such that, it does not pass through at least 50% of the small circles", ", Default value of the Senstivity should be 50."],
+			"testToPerform":function(){
+				myPage = document.getElementById('mainBlock').innerHTML;
+		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
+			    genericObj.InvokeMETAFunction("gesture", "ID:cicularGesture;type:circle;Diagnostics:true;Create");
+        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056 - 0416",
+			"RegLevel":"R3",
+			"Description":"Gesture - Gesture Type=Circular, Senstivity=80",
+			"PreCondition":[],
+			"Steps":["Set Senstivity=80 for Circular Gesture.", "Create the Gesture", "Explicitly Set the Diagonstic value to true.", "Draw a curvilinear line on the screen approximately similar to the gesture circle such that it passes through at least 80% of the small circles.", "Draw a curvilinear line on the screen approximately similar to the gesture circle such that it does not pass through at least 80% of the small circles."],
+			"ExpectedOutcome":["Circular gesture should be detected when the line is drawn such that,it passes through at least 80% of the small circles", "Circular gesture should not be detected when the line is drawn such that, it does not pass through at least 80% of the small circles."],
+			"testToPerform":function(){
+				myPage = document.getElementById('mainBlock').innerHTML;
+		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
+			    genericObj.InvokeMETAFunction("gesture", "ID:cicularGesture;type:circle;sensitivity:80;Diagnostics:true;Create");
+        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056 - 0417",
+			"RegLevel":"R3",
+			"Description":"Gesture - Gesture Type=Circular, Senstivity=100",
+			"PreCondition":["Set Senstivity=100 for Circular Gesture.", "Create the Gesture", "Explicitly Set the Diagonstic value to true."],
+			"Steps":["Draw a curvilinear line on the screen approximately similar to the gesture circle such that it passes through at least 100% of the small circles.", "Draw a curvilinear line on the screen approximately similar to the gesture circle such that it does not pass through at least 100% of the small circles."],
+			"ExpectedOutcome":["Circular gesture should be detected when the line is drawn such that,it passes through at least 100% of the small circles", "Circular gesture should not be detected when the line is drawn such that, it does not pass through at least 100% of the small circles."],
+			"testToPerform":function(){
+				myPage = document.getElementById('mainBlock').innerHTML;
+		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
+			    genericObj.InvokeMETAFunction("gesture", "ID:cicularGesture;type:circle;sensitivity:100;Diagnostics:true;Create");
+        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056 - 0418",
+			"RegLevel":"R3",
+			"Description":"Gesture - Gesture Type=Circular, Senstivity=0",
+			"PreCondition":["Set Senstivity=0 for Circular Gesture.", "Create the Gesture", "Explicitly Set the Diagonstic value to true."],
+			"Steps":["Draw a curvilinear line on the screen approximately similar to the gesture circle such that it passes through at least 0% of the small circles.", "Draw a curvilinear line on the screen approximately similar to the gesture circle such that it does not pass through at least 0% of the small circles."],
+			"ExpectedOutcome":["Circular gesture should be detected when the line is drawn such that,it passes through at least 0% of the small circles", "Circular gesture should not be detected when the line is drawn such that, it does not pass through at least 0% of the small circles."],
+			"testToPerform":function(){
+				myPage = document.getElementById('mainBlock').innerHTML;
+		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
+			    genericObj.InvokeMETAFunction("gesture", "ID:cicularGesture;type:circle;sensitivity:0;Diagnostics:true;Create");
+        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056 - 0419",
+			"RegLevel":"R3",
+			"Description":"Gesture - Gesture Type=Circular, Senstivity=101",
+			"PreCondition":["Set Senstivity=101 for Circular Gesture.", "Create the Gesture", "Explicitly Set the Diagonstic value to true."],
+			"Steps":["Draw a curvilinear line on the screen approximately similar to the gesture circle such that it passes through at least 101% of the small circles.", "Draw a curvilinear line on the screen approximately similar to the gesture circle such that it does not pass through at least 101% of the small circles."],
+			"ExpectedOutcome":["Circular gesture should be detected when the line is drawn such that,it passes through at least 100% of the small circles", "Circular gesture should not be detected when the line is drawn such that, it does not pass through at least 100% of the small circles", "( 100 is nearest allowed value for sensitivity value of  101)"],
+			"testToPerform":function(){
+				myPage = document.getElementById('mainBlock').innerHTML;
+		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
+			    genericObj.InvokeMETAFunction("gesture", "ID:cicularGesture;type:circle;sensitivity:101;Diagnostics:true;Create");
+        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056 - 0420",
+			"RegLevel":"R3",
+			"Description":"Gesture - Gesture Type=Circular, Senstivity=-1",
+			"PreCondition":["Set Senstivity=-1 for Circular Gesture.", "Create the Gesture", "Explicitly Set the Diagonstic value to true."],
+			"Steps":["Draw a curvilinear line on the screen approximately similar to the gesture circle such that it passes through at least 101% of the small circles.", "Draw a curvilinear line on the screen approximately similar to the gesture circle such that it does not pass through at least 101% of the small circles."],
+			"ExpectedOutcome":["Circular gesture should be detected when a line (even single dot) is drawn on screen", "( 0 is nearest allowed value for sensitivity value of  -1)"],
+			"testToPerform":function(){
+				myPage = document.getElementById('mainBlock').innerHTML;
+		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
+			    genericObj.InvokeMETAFunction("gesture", "ID:cicularGesture;type:circle;sensitivity:-1;Diagnostics:true;Create");
+        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+			},
+			"FinalResult":""
+		}
+		];
+		pbTestObj.afterEach = function(){
+			myPage = "";
+		};
+		return pbTestObj;
+	}
+	window.pbTest = pbTest();
+})();
+(function(){
+	var main = function(){
+		var mainObj = {};
+		var r1List = [];
+		var r2List = [];
+		var r3List = [];
+		var testArray = [];
+		var index = 0;
+		var count = 0;
+		var choice = "";
+		var passCount = 0;
+		var failCount = 0;
+		var noRunCount = 0;
+		mainObj.init = function(){
+			for(key in pbTest.testCases){
+				if(pbTest.testCases[key].RegLevel == "R1"){
+					r1List.push(pbTest.testCases[key]);
+				}else if(pbTest.testCases[key].RegLevel == "R2"){
+					r2List.push(pbTest.testCases[key]);
+				}else if(pbTest.testCases[key].RegLevel == "R3"){
+					r3List.push(pbTest.testCases[key]);
+				}
+			}
+		};
+		mainObj.loadArrayList = function(data, eleId){
+			var retData = "";
+			if(eleId == "preCondition"){
+				retData = "<br><span class='heading'>PreConditions:</span>";
+			}else if(eleId == "steps"){
+				retData = "<br><span class='heading'>Steps:</span>";
+			}if(data.length>0){
+				retData += "<ul>";
+		        for (var i=0; i<data.length;i++){
+		            retData = retData + "<li>"+data[i]+"</li>"
+		        }
+		        retData = retData + "</ul>";
+		    }
+			
+		    document.getElementById(eleId).innerHTML = retData;
+		}
+		mainObj.onPageLoad = function(){
+			this.onRegLevelChange();
+		};
+		mainObj.loadTest = function(){
+			var vtElement = "";
+            var selectElement = "<select id='vtSelect' onchange='main.onVTIDChange()'></select>";
+            document.getElementById('vtsection').innerHTML = selectElement;
+            var selectList = document.getElementById('vtSelect');
+			for(key in testArray){
+				var option = document.createElement("OPTION");
+				option.text = testArray[key].VTID;
+				option.value = key;
+				selectList.add(option);
+			}
+			this.loadSingleTest(index);
+		};
+		mainObj.displayFinalResult = function(){
+			retHTMLData = "<table><tr><td class='title'>" + choice +" Test summay :</td></tr><tr><td class='block'><ul>";
+			for(key in testArray){
+				if(testArray[key].FinalResult=="Pass"){
+					passCount++;
+					retHTMLData = retHTMLData + "<li style='color:green'>" + testArray[key].Description + "</li>";	
+				}else if(testArray[key].FinalResult=="Fail"){
+					failCount++;
+					retHTMLData = retHTMLData + "<li style='color:red'>" + testArray[key].Description + "</li>";
+				}else{
+					noRunCount++;
+					retHTMLData = retHTMLData + "<li style='color:red;background:yellow'>" + testArray[key].Description + "</li>";
+				}
+			}
+			resultSummary = "<table class='block'><tr><td colspan=2 class='title'>Summary for "+choice+" cases</td></tr><tr><td>Pass</td><td style='color:green;font-weight:bold'>"+passCount+"</td></tr><tr><td>Fail</td><td style='color:red;font-weight:bold'>"+failCount+"</td></tr><tr><td>NoRun</td><td style='color:blue;font-weight:bold'>"+noRunCount+"</td></tr><tr style='color:black;font-weight:bold'><td>Total</td><td>"+parseInt(passCount+failCount+noRunCount)+"</td></tr></table>";
+			retHTMLData = retHTMLData + "</ul></td></tr></table><br><a href='../index.html'>Home</a>";
+			retHTMLData = resultSummary + retHTMLData;
+			document.getElementById('mainBlock').innerHTML = retHTMLData;
+		};
+		mainObj.loadSingleTest = function(index){
+			document.getElementById('vtid').innerHTML = testArray[index].VTID;
+			document.getElementById('desc').innerHTML = testArray[index].Description;
+			this.loadArrayList(testArray[index].PreCondition, "preCondition");
+			this.loadArrayList(testArray[index].Steps, "steps");
+			this.loadArrayList(testArray[index].ExpectedOutcome, "expected");
+			document.getElementById('actualResult').innerHTML = "";
+			var selectElement = document.getElementById('vtSelect');
+			selectElement.value = index;
+		};
+		mainObj.runThisTest = function(){
+			testArray[index].testToPerform();
+		};
+		mainObj.passThisTest = function(){
+			testArray[index].FinalResult = "Pass";
+            pbTest.afterEach();
+			this.nextTest();
+		};
+		mainObj.failThisTest = function(){
+			testArray[index].FinalResult = "Fail";
+            pbTest.afterEach();
+			this.nextTest();
+		}
+		mainObj.nextTest = function(){
+			if(index<(count-1)){
+				index++;
+				this.loadSingleTest(index);
+			}else{
+				this.displayFinalResult();
+			}
+		};
+		mainObj.prevTest = function(){
+			if(index>0){
+				index--;
+				this.loadSingleTest(index);
+			}else{
+				alert("No previous test cases to run");
+			}
+		};
+		mainObj.onVTIDChange = function(){
+			myVtIdChoice = document.getElementById("vtSelect").value;
+			index = myVtIdChoice;
+			this.loadSingleTest(myVtIdChoice);
+		};
+		mainObj.onRegLevelChange = function(){
+			var myChoice = document.getElementById("regLevel").value;
+			choice = myChoice;
+			document.getElementById('vtsection').innerHTML = "";
+
+			if(myChoice=="All"){
+				testArray = pbTest.testCases;
+				count = testArray.length;
+			}else if(myChoice=="R1"){
+				testArray=r1List;
+				count = testArray.length;
+			}else if(myChoice=="R2"){
+				testArray=r2List;
+				count = testArray.length;
+			}else if(myChoice=="R3"){
+				testArray=r3List;
+				count = testArray.length;
+			}
+			index = 0;
+			passCount = 0;
+			failCount = 0;
+			noRunCount = 0;
+			if(count>0){
+				this.loadTest();
+			}else{
+				document.getElementById("regLevel").value = "All";
+				this.onRegLevelChange();
+				alert("No Tests for the level selected");
+			}
+		};
+		mainObj.displayResult = function(res){
+			document.getElementById('actualResult').innerHTML = res;
+		};
+		return mainObj;
+	}
+	window.main = main();
+})();
+	</script>
+	<!--<script type="text/javascript" src="js/myMain.js"></script>-->
+	<script type="text/javascript">
+		main.init();
+	</script>
+</head>
+<body class="body" onload="main.onPageLoad()">
+<h3 class='title'>Semi Auto test for PB and RE2.2 : Circular Gesture</h3>
+<div id="mainBlock" class="mainBlock">
+	<div>
+		<span class="heading">Select Regression Level :</span>
+	    <select name="regLevel" id="regLevel" onchange="main.onRegLevelChange()">
+	        <OPTION value="All" >All</OPTION>
+	        <OPTION value="R1" >R1</OPTION>
+	        <OPTION value="R2" >R2</OPTION>
+	        <OPTION value="R3" >R3</OPTION>
+	    </select> 
+	</div>
+    <div>
+    	<span class="heading">Select Test Case to Run :</span>
+    	<div id='vtsection'>
+    	</div>
+    	
+    </div>
+    <div class="runners">
+    	<input type=button value="Previous" onclick="main.prevTest();" />
+		<input type=button value="Next" onclick="main.nextTest()" />
+		<input type="button" onclick="main.runThisTest()" value="Run Test"/>
+    </div>
+	<br>
+	<div class="block">
+	<span class="heading">VTID:</span>
+    <div id="vtid"></div><br>
+    <span class="heading">Test description:</span>
+    <div id="desc"></div>
+    <div id="preCondition"></div>
+    <div id="steps"></div>
+    <span class="heading">Expected result:</span>
+    <div id="expected"></div><br>
+    <input type="button" onclick="main.runThisTest()" value="Run Test"/>
+    <br><br>
+    <span class="heading">Actual result:</span>
+    <br>
+    <div id="actualResult"></div><br>
+    <input type="button" class="pass" onclick="main.passThisTest()" value="Pass"/>
+    <input type="button" class="fail" onclick="main.failThisTest()" value="Fail"/>
+    </div>
+	<br>
+	<div class="runners">
+		<input type=button value="Previous" onclick="main.prevTest();" />
+		<input type=button value="Next" onclick="main.nextTest()" />
+	</div>
+	</div>
+</body>
+</html>

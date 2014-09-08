@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html>
+<head><script type="text/javascript" src="/public/re1/elements.js"></script>
+	<title>PB and RE2.2 Semi Auto Frame Work : Linear Gesture</title>
+	<!--<link rel="stylesheet" type="text/css" href="css/main.css">-->
+	<style type="text/css">
+		.block{
+			background:#aabbcc;
+			border: 1px solid darkblue;
+		    margin: 5px;
+		    font-size: 11px;
+		    font-family: Monaco, "Lucida Console", monospace;
+		    line-height: 14px;
+		    color: #333333;
+		}
+		.title{
+			padding: 3px;
+		    font-size: 11px;
+		    font-family: Monaco, "Lucida Console", monospace;
+		    font-weight: bolder;
+		    background-color: steelblue;
+		    color: white;
+		}
+		.body{
+			background:#ddeeff;
+		}
+		.runners{
+			border: 1px solid darkblue;
+		    margin: 5px;
+		    font-family: Monaco, "Lucida Console", monospace;
+		    line-height: 14px;
+			padding: 3px;
+		    font-size: 12px;
+		    font-weight: bolder;
+		    background-color: #aabbcc;
+		    color: white;
+		}
+		.heading{
+			font-weight: bold;
+		}
+		.pass{
+			background:green;
+		}
+		.fail{
+			background:red;
+		}
+	</style>
+	<!--<script type="text/javascript" src="js/testCases.js"></script>-->
+	<script type="text/javascript" src="http://10.233.85.82/src/elements.js"></script>
+	<script type="text/javascript">
+	
+    var EventCounter = 1;
+    var genericObj = new ActiveXObject("PocketBrowser.Generic");
+	var myPage = "";
+	var backToTest = function(){
+				genericObj.InvokeMETAFunction("gesture", "Delete");
+				document.getElementById('mainBlock').innerHTML = myPage;
+			};
+    function onGesture(id,count){
+            document.getElementById("actualResult").innerHTML = "Gesture detected for "+EventCounter+"th time.<br>Gesture ID: " + id + ", Count: " + count;
+            EventCounter++;
+            if(id=="Scan"){
+		      genericObj.InvokeMETAFunction("Scanner","enabled;start");
+		    }
+		    if(id=="Signal"){
+		      genericObj.InvokeMETAFunction("Signal","visibility:visible");
+		    }
+		    if(id=="Battery"){
+		    	genericObj.InvokeMETAFunction("battery","visibility:visible");
+		    }
+         }
+		(function(){
+		var pbTest = function(){
+		var pbTestObj = {};
+		pbTestObj.testCases = [
+		{
+		    "VTID":"VT056 - 0436",
+            "RegLevel":"R1",
+		    "Description":"Gesture - Gesture Type=linear",
+		    "PreCondition":[],
+		    "Steps":["Create a Gesture of Type=Linear,ID='My linear Gesture' and with default Diagonstic value(false)", "Draw a line on the screen approximately similar to the gesture line.", " Call an URL on detection of gesture."],
+		    "ExpectedOutcome":["Linear Gesture should be detected.", "Proper ID should be returned inside the event.", "After gesture detection the http site mentioned in gesture-Detected event will be opened."],
+		    "testToPerform":function(){
+				myPage = document.getElementById('mainBlock').innerHTML;
+		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
+		        genericObj.InvokeMETAFunction("gesture", "ID:linearGesture;type:linear;startX:100;startY:300;endX:100;endY:100;Preset:left-right;Tolerance=20;Region-width:30;sensitivity:80;skew:20;deviation:50;Diagnostics:true;Create");
+        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+		    },
+		    "FinalResult":""
+		},{
+		    "VTID":"VT056 - 0341",
+            "RegLevel":"R1",
+		    "Description":"Gesture - Gesture Type='Test'(Invalid)",
+		    "PreCondition":[],
+		    "Steps":["Create a Linear Gesture.", "Try to create  a Gesture of Invalid Type='Test', ID='My Invalid Gesture'  and with default Diagonstic value(false)", " Draw a line on the screen approximately similar to the gesture line."],
+		    "ExpectedOutcome":["The invalid gesture type should not create any problem.", "Any further gesture operation should be succeeded.", "Linear  Gesture should be detected."],
+		    "testToPerform":function(){
+				myPage = document.getElementById('mainBlock').innerHTML;
+		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
+		        genericObj.InvokeMETAFunction("gesture", "ID:linearGesture;type:Test;Diagnostics:false;Create");
+        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+		    },
+		    "FinalResult":""
+		},{
+		    "VTID":"VT056 - 0342",
+            "RegLevel":"R1",
+		    "Description":"Gesture - ID='ABCD1234!@#$%^&*()QQ'",
+		    "PreCondition":[],
+		    "Steps":["Create a Gesture of Type=Linear,ID='ABCD1234!@#$%^&*()QQ',which contains alphanumeric and special characters and 20 characters long.", "Draw a line on the screen approximately similar to the gesture line."],
+		    "ExpectedOutcome":["Linear Gesture should be detected."],
+		    "testToPerform":function(){
+				myPage = document.getElementById('mainBlock').innerHTML;
+		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
+		        genericObj.InvokeMETAFunction("gesture", "ID:ABCD1234!@#$%^&*()QQ;type:Linear;Diagnostics:true");
+        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+		    },
+		    "FinalResult":""
+		},{
+		    "VTID":"VT056 - 0343",
+            "RegLevel":"R1",
+		    "Description":"Gesture - ID=(empty string)",
+		    "PreCondition":[],
+		    "Steps":["Create a Gesture of Type=Linear,ID='(Empty string)'.", "Draw a line on the screen approximately similar to the gesture line."],
+		    "ExpectedOutcome":["Linear Gesture should be detected with empty ID also."],
+			"testToPerform":function(){
+				myPage = document.getElementById('mainBlock').innerHTML;
+		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
+                //alert("test");
+			    genericObj.InvokeMETAFunction("gesture", "ID:'';type:Linear;Diagnostics:true;Create");
+        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+			},
+			"FinalResult":""
+		},{
+		    "VTID":"VT056 - 0344",
+            "RegLevel":"R1",
+		    "Description":"Gesture - Gesture Type=linear - Preset value='default'",
+		    "PreCondition":[],
+		    "Steps":["Create a Gesture of Type=Linear", "Explicitly Set the Diagonstic value to false.", "Draw a line on the screen approximately similar to the gesture line."],
+		    "ExpectedOutcome":["Linear Gesture should be detected and ID should be displayed as linear-left-right."],
+			"testToPerform":function(){
+				myPage = document.getElementById('mainBlock').innerHTML;
+		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
+			    genericObj.InvokeMETAFunction("gesture", "ID:linearGesture;type:Linear;Diagnostics:false;Create");
+        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+			},
+			"FinalResult":""
+		},{
+		    "VTID":"VT056 - 0345",
+            "RegLevel":"R1",
+		    "Description":"Gesture - Gesture Type=linear - Preset Value='right-left'",
+		    "PreCondition":[],
+		    "Steps":["Set the preset value to right-left for a linear gesture.", "Create the Gesture of Type=Linear", "Explicitly Set the Diagonstic value to true.", "Draw a line on the screen approximately similar to the gesture line."],
+		    "ExpectedOutcome":["Linear Gesture should be detected and ID should be displayed as linear-right-left."],
+			"testToPerform":function(){
+				myPage = document.getElementById('mainBlock').innerHTML;
+		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
+			    genericObj.InvokeMETAFunction("gesture", "type:Linear;Preset:right-left;Diagnostics:true;Create");
+        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+			},
+			"FinalResult":""
+		},{
+		    "VTID":"VT056 - 0346",
+            "RegLevel":"R1",
+		    "Description":"Gesture - Gesture Type=linear - Preset Value='left-right'",
+		    "PreCondition":[],
+		    "Steps":["Set the preset value to left-right for a linear gesture. ", "Create the Gesture of Type=Linear", "Explicitly Set the Diagonstic value to true.", " Draw a line on the screen approximately similar to the gesture line."],
+		    "ExpectedOutcome":["Linear Gesture should be detected and ID should be displayed as linear-left-right."],
+			"testToPerform":function(){
+				myPage = document.getElementById('mainBlock').innerHTML;
+		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
+			    genericObj.InvokeMETAFunction("gesture", "type:Linear;Preset:left-right;Diagnostics:true;Create");
+        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+			},
+			"FinalResult":""
+		},{
+		    "VTID":"VT056 - 0347",
+            "RegLevel":"R1",
+		    "Description":"Gesture - Gesture Type=linear - Preset Value='top-bottom'",
+		    "PreCondition":[],
+		    "Steps":["Set the preset value to top-bottom for a linear gesture. ", "Create the Gesture of Type=Linear", "Explicitly Set the Diagonstic value to true.", " Draw a line on the screen approximately similar to the gesture line."],
+		    "ExpectedOutcome":["Linear Gesture should be detected and ID should be displayed as linear-top-bottom."],
+			"testToPerform":function(){
+				myPage = document.getElementById('mainBlock').innerHTML;
+		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
+			    genericObj.InvokeMETAFunction("gesture", "type:Linear;Preset:top-bottom;Diagnostics:true;Create");
+                genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+			},
+			"FinalResult":""
+		},{
+		    "VTID":"VT056 - 0348",
+            "RegLevel":"R1",
+		    "Description":"Gesture - Gesture Type=linear - Preset Value='bottom-top'",
+		    "PreCondition":[],
+		    "Steps":["Set the preset value to bottom-top for a linear gesture. ", "Create the Gesture of Type=Linear", "Explicitly Set the Diagonstic value to true.", " Draw a line on the screen approximately similar to the gesture line."],
+		    "ExpectedOutcome":["Linear Gesture should be detected and ID should be displayed as linear-bottom-top."],
+			"testToPerform":function(){
+				myPage = document.getElementById('mainBlock').innerHTML;
+		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
+			    genericObj.InvokeMETAFunction("gesture", "type:Linear;Preset:bottom-top;Diagnostics:true;Create");
+        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+			},
+			"FinalResult":""
+		},{
+		    "VTID":"VT056 - 0354",
+            "RegLevel":"R1",
+		    "Description":"Gesture - Gesture Type=Linear,start-x :- Default,start-y :- Default,end- x :- Default,end-y :-Default",
+		    "PreCondition":[],
+		    "Steps":["Do not mention any coordinates for Start and end point for Linear Gesture.", "Create the Gesture", " Explicitly Set the Diagonstic value to true.", " Draw a line on the screen approximately similar to the gesture line."],
+		    "ExpectedOutcome":["linear gesture should be detected.", "Gesture line coordinates should be", "Start x=10% of screen width", "Start-Y= 50% of screen height", "End-X=90% of screen width", "End-Y= 50% of screen height."],
+			"testToPerform":function(){
+				myPage = document.getElementById('mainBlock').innerHTML;
+		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
+			    genericObj.InvokeMETAFunction("gesture", "type:linear;Diagnostics:true;Create");
+        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+			},
+			"FinalResult":""
+		},{
+		    "VTID":"VT056 - 0355",
+            "RegLevel":"R1",
+		    "Description":"Gesture - Gesture Type=Linear,start-x :0,start-y : 0,end- x :250,end-y :250",
+		    "PreCondition":[],
+		    "Steps":["Set the start-x and start-y to (0,0) and end-X and end-Y(250,250) for Linear Gesture.", "Create the Gesture", " Explicitly Set the Diagonstic value to true.", "Draw a line on the screen approximately similar to the gesture line."],
+		    "ExpectedOutcome":["linear gesture should be detected."],
+			"testToPerform":function(){
+				myPage = document.getElementById('mainBlock').innerHTML;
+		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
+			    genericObj.InvokeMETAFunction("gesture", "type:linear;startX:0;startY:0;endX:250;endY:250;Diagnostics:true;Create");
+		        genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+			},
+			"FinalResult":""
+		},{
+		    "VTID":"VT056 - 0356",
+            "RegLevel":"R1",
+		    "Description":"Gesture - Gesture Type=Linear,start-x :80,start-y : 80,end- x : 250,end-y :250",
+		    "PreCondition":[],
+		    "Steps":["Set the start-x and start-y to (80,80) and end-X and end-Y(250,250) for Linear Gesture.", "Create the Gesture", " Explicitly Set the Diagonstic value to true.", " Draw a line on the screen approximately similar to the gesture line."],
+		    "ExpectedOutcome":["linear gesture should be detected."],
+			"testToPerform":function(){
+				myPage = document.getElementById('mainBlock').innerHTML;
+		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
+			    genericObj.InvokeMETAFunction("gesture", "type:linear;startX:80;startY:80;endX:250;endY:250;Diagnostics:true;Create");
+        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+			},
+			"FinalResult":""
+		},{
+		    "VTID":"VT056 - 0358",
+            "RegLevel":"R1",
+		    "Description":"Gesture - Gesture Type=Linear,start-x :200,start-y :200,end- x :0,end-y :0",
+		    "PreCondition":[],
+		    "Steps":["Set the start-x and start-y to (200,200) and end-X and end-Y(0,0) for Linear Gesture.", "Create the Gesture", " Explicitly Set the Diagonstic value to true.", " Draw a line on the screen approximately similar to the gesture line."],
+		    "ExpectedOutcome":["linear gesture should be detected."],
+			"testToPerform":function(){
+				myPage = document.getElementById('mainBlock').innerHTML;
+		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
+			    genericObj.InvokeMETAFunction("gesture", "type:linear;startX:200;startY:200;endX:0;endY:0;Diagnostics:true;Create");
+        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+			},
+			"FinalResult":""
+		},{
+		    "VTID":"VT056 - 0360",
+            "RegLevel":"R1",
+		    "Description":"Gesture - Gesture Type=Linear - end- x : -20  ,end-y :- -20",
+		    "PreCondition":[],
+		    "Steps":["Set the end-x and end-y to (-20,-20)  for Linear Gesture.", "Create the Gesture", " Explicitly Set the Diagonstic value to true.", " Draw a line on the screen approximately similar to the gesture line."],
+		    "ExpectedOutcome":["End point should be (0,0) i.e. Nearest allowed value.", "linear gesture should be detected."],
+			"testToPerform":function(){
+				myPage = document.getElementById('mainBlock').innerHTML;
+		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
+			    genericObj.InvokeMETAFunction("gesture", "type:linear;endX:-20;endY:-20;Diagnostics:true;Create");
+        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+			},
+			"FinalResult":""
+		},{
+		    "VTID":"VT056 - 0361",
+            "RegLevel":"R1",
+		    "Description":"Gesture - Gesture Type=Linear,start-x : 0,start-y : 0,End-x : 2000,End-y : 2000",
+		    "PreCondition":[],
+		    "Steps":["Set the start-x and start-y to (0,0) and End-x and End-y to (2000,2000)  for Linear Gesture.", "Set sensitivity 1 and Create the Gesture", " Explicitly Set the Diagonstic value to true.", " Draw a line on the screen approximately similar to the gesture line."],
+		    "ExpectedOutcome":["Linear gesture should  be detected."],
+			"testToPerform":function(){
+				myPage = document.getElementById('mainBlock').innerHTML;
+		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
+			    genericObj.InvokeMETAFunction("gesture", "type:linear;startX:0;startY:0;endX:2000;endY:2000;sensitivity:1;Diagnostics:true;Create");
+        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+			},
+			"FinalResult":""
+		},{
+		    "VTID":"VT056 - 0363",
+            "RegLevel":"R1",
+		    "Description":"Gesture - Gesture Type=Linear,Preset=Right-Left,start-x :- 80,start-y :- 80,end- x :- 250,end-y :-80",
+		    "PreCondition":[],
+		    "Steps":["Set the Linear preset to right-left.", "Set the start-x and start-y to (80,80) and end-X and end-Y(250,80) for Linear Gesture.", " Create the Gesture", " Explicitly Set the Diagonstic value to true.", "Draw a line on the screen approximately similar to the gesture line."],
+		    "ExpectedOutcome":["If user draws a line from left ro right direction gesture should be detected", "Preset value should not take any effect.as Start and End coordinates are set after setting the preset values."],
+			"testToPerform":function(){
+				myPage = document.getElementById('mainBlock').innerHTML;
+		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
+			    genericObj.InvokeMETAFunction("gesture", "type:linear;Preset:right-left;startX:80;startY:80;endX:250;endY:80;Preset:right-left;Diagnostics:true;Create");
+        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+			},
+			"FinalResult":""
+		},{
+		    "VTID":"VT056 - 0365",
+            "RegLevel":"R1",
+		    "Description":"Gesture - Gesture Type=Linear,Tolerance=Default",
+		    "PreCondition":[],
+		    "Steps":["Do not mention any value of tolerance for Linear Gesture.", "Create the Gesture", " Explicitly Set the Diagonstic value to true.", " Draw a line on the screen approximately similar to the gesture line Inside the Active Gesture Area(Rectangle).", "Draw a line on the screen approximately similar to the gesture line outside the Active Gesture Area(Rectangle)."],
+		    "ExpectedOutcome":["linear gesture should be detected when line is drawn inside the rectangle and should not be detected when it is drawn outside ot partly outside.", "If any part of the line fall outside the active gesture area gesture should not be detected.", "Default Tolerance should be 25% of screen height."],
+			"testToPerform":function(){
+				myPage = document.getElementById('mainBlock').innerHTML;
+		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
+			    genericObj.InvokeMETAFunction("gesture", "type:linear;Diagnostics:true;Create");
+        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+			},
+			"FinalResult":""
+		},{
+		    "VTID":"VT056 - 0366",
+            "RegLevel":"R1",
+		    "Description":"Gesture - Gesture Type=Linear,Tolerance=50",
+		    "PreCondition":[],
+		    "Steps":["Set the  tolerance to 50 for Linear Gesture.", "Create the Gesture", " Explicitly Set the Diagonstic value to true.", " Draw a line on the screen approximately similar to the gesture line Inside the Active Gesture Area(Rectangle).", "Draw a line on the screen approximately similar to the gesture line outside the Active Gesture Area(Rectangle)."],
+		    "ExpectedOutcome":["the height of the rectangle should be changed when tolerance value is changed.", "linear gesture should be detected when line is drawn inside the rectangle and should not be detected when it is drawn outside ot partly outside.", "If any part of the line fall outside the active gesture area gesture should not be detected."],
+			"testToPerform":function(){
+				myPage = document.getElementById('mainBlock').innerHTML;
+		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
+			    genericObj.InvokeMETAFunction("gesture", "type:linear;tolerance:50;Diagnostics:true;Create");
+        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+			},
+			"FinalResult":""
+		},{
+		    "VTID":"VT056 - 0367",
+            "RegLevel":"R1",
+		    "Description":"Gesture - Gesture Type=Linear,Tolerance=1",
+		    "PreCondition":[],
+		    "Steps":["Set the  tolerance to 1 for Linear Gesture.", "Create the Gesture", " Explicitly Set the Diagonstic value to true.", " Draw a line on the screen approximately similar to the gesture line Inside the Active Gesture Area(Rectangle).", "Draw a line on the screen approximately similar to the gesture line outside the Active Gesture Area(Rectangle)."],
+		    "ExpectedOutcome":["the height of the rectangle should be very less", "linear gesture should be detected when line is drawn inside the rectangle and should not be detected when it is drawn outside ot partly outside.", "If any part of the line fall outside the active gesture area gesture should not be detected"],
+			"testToPerform":function(){
+				myPage = document.getElementById('mainBlock').innerHTML;
+		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
+			    genericObj.InvokeMETAFunction("gesture", "type:linear;tolerance:1;Diagnostics:true;Create");
+        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+			},
+			"FinalResult":""
+		},{
+		    "VTID":"VT056 - 0368",
+            "RegLevel":"R1",
+		    "Description":"Gesture - Gesture Type=Linear,Tolerance=2000(outside the screen)",
+		    "PreCondition":[],
+		    "Steps":["Set the  tolerance to 2000 for Linear Gesture.", "Create the Gesture", " Explicitly Set the Diagonstic value to true.", " Draw a line on the screen approximately similar to the gesture line Inside the Active Gesture Area(Rectangle).", "Draw a line on the screen approximately similar to the gesture line outside the Active Gesture Area(Rectangle)."],
+		    "ExpectedOutcome":["Linear gesture should be detected when line is drawn inside the rectangle."],
+			"testToPerform":function(){
+				myPage = document.getElementById('mainBlock').innerHTML;
+		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
+			    genericObj.InvokeMETAFunction("gesture", "type:linear;tolerance:2000;Diagnostics:true;Create");
+        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+			},
+			"FinalResult":""
+		},{
+		    "VTID":"VT056 - 0370",
+            "RegLevel":"R1",
+		    "Description":"Gesture - Gesture Type=Linear,Skew=Default",
+		    "PreCondition":[],
+		    "Steps":["Do not mention any value of Skew for Linear Gesture.", "Create the Gesture", " Explicitly Set the Diagonstic value to true.", " Draw a line on the screen approximately similar to the gesture line Inside the Active Gesture Area(Rectangle) making an angle more than 20 degree with the gesture line.", "Draw a line on the screen approximately similar to the gesture line Inside the Active Gesture Area(Rectangle) making an angle less  than 20 degree with the gesture line."],
+		    "ExpectedOutcome":["linear gesture should be detected when line is drawn inside the rectangle making an angle less  than 20 degree with the gesture line and should not be detected when it is drawn making an angle more  than 20 degree. ", "Default Skew should be 20 degree."],
+			"testToPerform":function(){
+				myPage = document.getElementById('mainBlock').innerHTML;
+		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
+			    genericObj.InvokeMETAFunction("gesture", "type:linear;Diagnostics:true;Create");
+        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+			},
+			"FinalResult":""
+		},{
+		    "VTID":"VT056 - 0371",
+            "RegLevel":"R1",
+		    "Description":"Gesture - Gesture Type=Linear,Skew=45 degree",
+		    "PreCondition":[],
+		    "Steps":["Set the Skew value to 45 for a linear gesture.", "Create the Gesture", " Explicitly Set the Diagonstic value to true.", " Draw a line on the screen approximately similar to the gesture line Inside the Active Gesture Area(Rectangle) making an angle more than 45 degree with the gesture line.", "Draw a line on the screen approximately similar to the gesture line Inside the Active Gesture Area(Rectangle) making an angle less  than 45 degree with the gesture line."],
+		    "ExpectedOutcome":["linear gesture should be detected when line is drawn inside the rectangle making an angle less  than 45 degree with the gesture line.", " Should not be detected when it is drawn making an angle more  than 45 degree. ,"],
+			"testToPerform":function(){
+				myPage = document.getElementById('mainBlock').innerHTML;
+		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
+			    genericObj.InvokeMETAFunction("gesture", "type:linear;skew:45;Diagnostics:true;Create");
+        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+			},
+			"FinalResult":""
+		},{
+		    "VTID":"VT056 - 0372",
+            "RegLevel":"R1",
+		    "Description":"Gesture - Gesture Type=Linear,Skew=0 degree",
+		    "PreCondition":[],
+		    "Steps":["Set the Skew value to 0 for a linear gesture.", "Create the Gesture", " Explicitly Set the Diagonstic value to true.", " Draw a line on the screen approximately similar to the gesture line Inside the Active Gesture Area(Rectangle) making an angle more than 0 degree with the gesture line.", "Draw a line on the screen approximately similar to the gesture line Inside the Active Gesture Area(Rectangle) making an angle less  than 0 degree with the gesture line."],
+		    "ExpectedOutcome":["linear gesture should be detected when line is drawn inside the rectangle making an angle less  than 0 degree with the gesture line and should not be detected when it is drawn making an angle more  than 0  degree. <br/>"],
+			"testToPerform":function(){
+				myPage = document.getElementById('mainBlock').innerHTML;
+		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
+			    genericObj.InvokeMETAFunction("gesture", "type:linear;skew:0;Diagnostics:true;Create");
+        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+			},
+			"FinalResult":""
+		},{
+		    "VTID":"VT056 - 0373",
+            "RegLevel":"R1",
+		    "Description":"Gesture - Gesture Type=Linear,Skew=90 degree",
+		    "PreCondition":[],
+		    "Steps":["Set the Skew value to 90 for a linear gesture.", "Create the Gesture", " Explicitly Set the Diagonstic value to true.", " Draw a line on the screen approximately similar to the gesture line Inside the Active Gesture Area(Rectangle) making an angle more than 90 degree with the gesture line.", "Draw a line on the screen approximately similar to the gesture line Inside the Active Gesture Area(Rectangle) making an angle less  than 90 degree with the gesture line."],
+		    "ExpectedOutcome":["linear gesture should be detected when line is drawn inside the rectangle making an angle less  than 90 degree with the gesture line and should not be detected when it is drawn making an angle more  than 90 degree. ,"],
+			"testToPerform":function(){
+				myPage = document.getElementById('mainBlock').innerHTML;
+		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
+			    genericObj.InvokeMETAFunction("gesture", "type:linear;skew:90;Diagnostics:true;Create");
+        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+			},
+			"FinalResult":""
+		},{
+		    "VTID":"VT056 - 0374",
+            "RegLevel":"R1",
+		    "Description":"Gesture - Gesture Type=Linear - Skew= -1 degree",
+		    "PreCondition":[],
+		    "Steps":["Set the Skew value to -1 for a linear gesture.", "Create the Gesture", " Explicitly Set the Diagonstic value to true.", " Draw a line on the screen approximately similar to the gesture line Inside the Active Gesture Area(Rectangle) making an angle more than -1 degree with the gesture line.", "Draw a line on the screen approximately similar to the gesture line Inside the Active Gesture Area(Rectangle) making an angle less  than -1 degree with the gesture line."],
+		    "ExpectedOutcome":["linear gesture should be detected when line is drawn inside the rectangle making an angle less  than 0 degree with the gesture line and should not be detected when it is drawn making an angle more  than 0 degree. ", "(0 is nearest allowed value for skew value -1)."],
+			"testToPerform":function(){
+				myPage = document.getElementById('mainBlock').innerHTML;
+		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
+			    genericObj.InvokeMETAFunction("gesture", "type:linear;skew:-1;Diagnostics:true;Create");
+        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+			},
+			"FinalResult":""
+		},{
+		    "VTID":"VT056 - 0375",
+            "RegLevel":"R1",
+		    "Description":"Gesture - Gesture Type=Linear,Skew= 91 degree",
+		    "PreCondition":[],
+		    "Steps":["Set the Skew value to 91 for a linear gesture.", "Create the Gesture", " Explicitly Set the Diagonstic value to true.", " Draw a line on the screen approximately similar to the gesture line Inside the Active Gesture Area(Rectangle) making an angle more than 91 degree with the gesture line.", "Draw a line on the screen approximately similar to the gesture line Inside the Active Gesture Area(Rectangle) making an angle less  than 91 degree with the gesture line."],
+		    "ExpectedOutcome":["linear gesture should be detected when line is drawn inside the rectangle making an angle less  than 90 degree with the gesture line and should not be detected when it is drawn making an angle more  than 90 degree. ", "( 90 is nearest allowed value for skew value 91)."],
+			"testToPerform":function(){
+				myPage = document.getElementById('mainBlock').innerHTML;
+		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
+			    genericObj.InvokeMETAFunction("gesture", "type:linear;skew:91;Diagnostics:true;Create");
+        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+			},
+			"FinalResult":""
+		},{
+		    "VTID":"VT056 - 0376",
+            "RegLevel":"R1",
+		    "Description":"Gesture - Gesture Type=Linear,Deviation=Default",
+		    "PreCondition":[],
+		    "Steps":["Do not mention any value of deviation for Linear Gesture.", "Create the Gesture", " Explicitly Set the Diagonstic value to true.", " Draw a line on the screen approximately similar to the gesture line Inside the Active Gesture Area(Rectangle) which will be straight.", "Draw a line on the screen approximately similar to the gesture line Inside the Active Gesture Area(Rectangle) which will be curvilinear,and deviating from straight line."],
+		    "ExpectedOutcome":["linear gesture should be detected  when deviation is less and should not be detected when deviation is more and line more curvilinear.", "Default value of the deviation should be 20."],
+			"testToPerform":function(){
+				myPage = document.getElementById('mainBlock').innerHTML;
+		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
+			    genericObj.InvokeMETAFunction("gesture", "type:linear;Diagnostics:true;Create");
+        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+			},
+			"FinalResult":""
+		},{
+		    "VTID":"VT056 - 0377",
+            "RegLevel":"R1",
+		    "Description":"Gesture - Gesture Type=Linear,Deviation=50",
+		    "PreCondition":[],
+		    "Steps":["Set the deviation value to 50 for a Linear Gesture.", "Create the Gesture", " Explicitly Set the Diagonstic value to true.", " Draw a line on the screen approximately similar to the gesture line Inside the Active Gesture Area(Rectangle) which will be straight.", "Draw a line on the screen approximately similar to the gesture line Inside the Active Gesture Area(Rectangle) which will be curvilinear,and deviating from straight line."],
+		    "ExpectedOutcome":["linear gesture should be detected  when deviation is less and should not be detected when deviation is more and line more curvilinear."],
+			"testToPerform":function(){
+				myPage = document.getElementById('mainBlock').innerHTML;
+		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
+			    genericObj.InvokeMETAFunction("gesture", "type:linear;deviation:50;Diagnostics:true;Create");
+        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056 - 0378",
+            "RegLevel":"R1",
+			"Description":"Gesture - Gesture Type=Linear,Deviation=0",
+			"PreCondition":[],
+			"Steps":["Set the deviation value to 0 for a Linear Gesture.", "Create the Gesture", " Explicitly Set the Diagonstic value to true.", " Draw a line on the screen approximately similar to the gesture line Inside the Active Gesture Area(Rectangle) which will be straight.", "Draw a line on the screen approximately similar to the gesture line Inside the Active Gesture Area(Rectangle) which will be curvilinear,and deviating from straight line."],
+			"ExpectedOutcome":["linear gesture should be detected  when deviation is less and should not be detected when deviation is more and line more curvilinear."],
+			"testToPerform":function(){
+				myPage = document.getElementById('mainBlock').innerHTML;
+		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
+			    genericObj.InvokeMETAFunction("gesture", "type:linear;deviation:0;Diagnostics:true;Create");
+        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056 - 0379",
+            "RegLevel":"R1",
+			"Description":"Gesture - Gesture Type=Linear,Deviation=100",
+			"PreCondition":[],
+			"Steps":["Set the deviation value to 0 for a Linear Gesture.", "Create the Gesture", " Explicitly Set the Diagonstic value to true.", " Draw a line on the screen approximately similar to the gesture line Inside the Active Gesture Area(Rectangle) which will be straight.", "Draw a line on the screen approximately similar to the gesture line Inside the Active Gesture Area(Rectangle) which will be curvilinear,and deviating from straight line."],
+			"ExpectedOutcome":["linear gesture should be detected  when deviation is less and should not be detected when deviation is more and line more curvilinear."],
+			"testToPerform":function(){
+				myPage = document.getElementById('mainBlock').innerHTML;
+		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
+			    genericObj.InvokeMETAFunction("gesture", "type:linear;deviation:100;Diagnostics:true;Create");
+        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056 - 0380",
+            "RegLevel":"R1",
+			"Description":"Gesture - Gesture Type=Linear,Deviation=-1",
+			"PreCondition":[],
+			"Steps":["Set the deviation value to -1 for a Linear Gesture.", "Set Sensitivity value to 0 ", " Explicitly Set the Diagonstic value to true and Create the Gesture.", " Draw a line on the screen approximately similar to the gesture line Inside the Active Gesture Area(Rectangle) which will be straight.", "Draw a line on the screen approximately similar to the gesture line Inside the Active Gesture Area(Rectangle) which will be curvilinear,and deviating from straight line."],
+			"ExpectedOutcome":["linear gesture should be detected  when deviation is quite 0 and should not be detected when deviation is slightly more than 0.", "( 0 is nearest allowed value for deviation value of  -1)"],
+			"testToPerform":function(){
+				myPage = document.getElementById('mainBlock').innerHTML;
+		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
+			    genericObj.InvokeMETAFunction("gesture", "type:linear;deviation:-1;sensitivity:0;Diagnostics:true;Create");
+        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056 - 0382",
+            "RegLevel":"R1",
+			"Description":"Gesture - Gesture Type=Linear,Region Width=Default",
+			"PreCondition":[],
+			"Steps":["Do not mention any value of RegionWidth for Linear Gesture.", "Create the Gesture", " Explicitly Set the Diagonstic value to true.", ".Draw a line on the screen approximately similar to the gesture line Inside the Active Gesture Area(Rectangle) "],
+			"ExpectedOutcome":["Linear Gesture should be detected.", "Default value of the Region width should be 10% of screen width.", "Active Gesture area(Rectangle) should be divided into a number of ovelapping rectangles of width= region width"],
+			"testToPerform":function(){
+				myPage = document.getElementById('mainBlock').innerHTML;
+		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
+			    genericObj.InvokeMETAFunction("gesture", "type:linear;Diagnostics:true;Create");
+        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056 - 0383",
+            "RegLevel":"R1",
+			"Description":"Gesture - Gesture Type=Linear,Region Width=50",
+			"PreCondition":[],
+			"Steps":["Set the RegionWidth to 50 for Linear Gesture.", "Create the Gesture", " Explicitly Set the Diagonstic value to true.", " Draw a line on the screen approximately similar to the gesture line Inside the Active Gesture Area(Rectangle) "],
+			"ExpectedOutcome":["Linear Gesture should be detected.", "Active Gesture area(Rectangle) should be divided into a number of ovelapping rectangles of width= region width"],
+			"testToPerform":function(){
+				myPage = document.getElementById('mainBlock').innerHTML;
+		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
+			    genericObj.InvokeMETAFunction("gesture", "type:linear;Region-width:50;Diagnostics:true;Create");
+        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056 - 0385",
+            "RegLevel":"R1",
+			"Description":"Gesture - Gesture Type=Linear,Region Width=5",
+			"PreCondition":[],
+			"Steps":["Set the RegionWidth to 5 for Linear Gesture.", "Create the Gesture", " Explicitly Set the Diagonstic value to true.", " Draw a line on the screen approximately similar to the gesture line Inside the Active Gesture Area(Rectangle) "],
+			"ExpectedOutcome":["Linear Gesture should be detected.", "Active Gesture area(Rectangle) should be divided into a number of ovelapping rectangles of width= region width"],
+			"testToPerform":function(){
+				myPage = document.getElementById('mainBlock').innerHTML;
+		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
+			    genericObj.InvokeMETAFunction("gesture", "type:linear;Region-width:5;Diagnostics:true;Create");
+        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056 - 0388",
+            "RegLevel":"R1",
+			"Description":"Gesture - Gesture Type=Linear,Sensitivity=Default",
+			"PreCondition":[],
+			"Steps":["Do not mention any value of Sensitivity for Linear Gesture.", "Create the Gesture", " Explicitly Set the Diagonstic value to true.", " Draw a line on the screen approximately similar to the gesture line Inside the Active Gesture Area(Rectangle) such that the line passes through at least more than 50% of the small rectangles.", "Draw a line on the screen approximately similar to the gesture line Inside the Active Gesture Area(Rectangle) such that the line passes through less than 50% of the small rectangles."],
+			"ExpectedOutcome":["linear gesture should be detected when line line passes through at least more than 50% of the small rectangles and should not be detected when it passes through less than 50% of the small rectangles.", "Default sensitivity should be 50."],
+			"testToPerform":function(){
+				myPage = document.getElementById('mainBlock').innerHTML;
+		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
+			    genericObj.InvokeMETAFunction("gesture", "type:linear;sensitivity:0;Diagnostics:true;Create");
+        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056 - 0389",
+            "RegLevel":"R1",
+			"Description":"Gesture - Gesture Type=Linear,Regionwidth=40,Sensitivity=80",
+			"PreCondition":[],
+			"Steps":["Set RegionWidth=40 and Sensitivity=80 for Linear Gesture.", "Create the Gesture", " Explicitly Set the Diagonstic value to true.", " Draw a line on the screen approximately similar to the gesture line Inside the Active Gesture Area(Rectangle) such that the line passes through at least more than 50% of the small rectangles.", "Draw a line on the screen approximately similar to the gesture line Inside the Active Gesture Area(Rectangle) such that the line passes through less than 50% of the small rectangles."],
+			"ExpectedOutcome":["linear gesture should be detected when line line passes through at least more than 80% of the small rectangles and should not be detected when it passes through less than 80% of the small rectangles."],
+			"testToPerform":function(){
+				myPage = document.getElementById('mainBlock').innerHTML;
+		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
+			    genericObj.InvokeMETAFunction("gesture", "type:linear;Region-width:40;sensitivity:80;Diagnostics:true;Create");
+        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056 - 0390",
+            "RegLevel":"R1",
+			"Description":"Gesture - Gesture Type=Linear,Regionwidth=40,Sensitivity=100",
+			"PreCondition":[],
+			"Steps":["Set RegionWidth=40 and Sensitivity=100 for Linear Gesture.", "Create the Gesture", " Explicitly Set the Diagonstic value to true.", " Draw a line on the screen approximately similar to the gesture line Inside the Active Gesture Area(Rectangle) such that the line passes through at least more than 50% of the small rectangles.", "Draw a line on the screen approximately similar to the gesture line Inside the Active Gesture Area(Rectangle) such that the line passes through less than 50% of the small rectangles."],
+			"ExpectedOutcome":["linear gesture should be detected when line line passes through at least more than 0% of the small rectangles and should not be detected when it passes through less than 100% of the small rectangles."],
+			"testToPerform":function(){
+				myPage = document.getElementById('mainBlock').innerHTML;
+		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
+			    genericObj.InvokeMETAFunction("gesture", "type:linear;Region-width:40;sensitivity:100;Diagnostics:true;Create");
+        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056 - 0391",
+            "RegLevel":"R1",
+			"Description":"Gesture - Gesture Type=Linear,Regionwidth=40,Sensitivity=0",
+			"PreCondition":[],
+			"Steps":["Set RegionWidth=40 and Sensitivity=0 for Linear Gesture.", "Create the Gesture", " Explicitly Set the Diagonstic value to true.", " Draw a line on the screen approximately similar to the gesture line Inside the Active Gesture Area(Rectangle) such that the line passes through at least more than 50% of the small rectangles.", "Draw a line on the screen approximately similar to the gesture line Inside the Active Gesture Area(Rectangle) such that the line passes through less than 50% of the small rectangles."],
+			"ExpectedOutcome":["linear gesture should be detected by drawing dot on screen as sensitivity is 0."],
+			"testToPerform":function(){
+				myPage = document.getElementById('mainBlock').innerHTML;
+		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
+			    genericObj.InvokeMETAFunction("gesture", "type:linear;Region-width:40;sensitivity:0;Diagnostics:true;Create");
+        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056 - 0392",
+            "RegLevel":"R1",
+			"Description":"Gesture - Gesture Type=Linear,Regionwidth=40,Sensitivity=101",
+			"PreCondition":[],
+			"Steps":["Set RegionWidth=40 and Sensitivity=101 for Linear Gesture.", "Create the Gesture", " Explicitly Set the Diagonstic value to true.", " Draw a line on the screen approximately similar to the gesture line Inside the Active Gesture Area(Rectangle) such that the line passes through at least more than 50% of the small rectangles.", "Draw a line on the screen approximately similar to the gesture line Inside the Active Gesture Area(Rectangle) such that the line passes through less than 50% of the small rectangles."],
+			"ExpectedOutcome":["linear gesture should be detected when line line passes through at least more than 100% of the small rectangles and should not be detected when it passes through less than 100% of the small rectangles.", "( 100 is nearest allowed value for sensitivity value of 101),"],
+			"testToPerform":function(){
+				myPage = document.getElementById('mainBlock').innerHTML;
+		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
+			    genericObj.InvokeMETAFunction("gesture", "type:linear;Region-width:40;sensitivity:101;Diagnostics:true;Create");
+        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056 - 0393",
+            "RegLevel":"R1",
+			"Description":"Gesture - Gesture Type=Linear,Regionwidth=40,Sensitivity= -1",
+			"PreCondition":[],
+			"Steps":["Set RegionWidth=40 and Sensitivity= -1 for Linear Gesture.", "Create the Gesture", " Explicitly Set the Diagonstic value to true.", " Draw a line on the screen approximately similar to the gesture line Inside the Active Gesture Area(Rectangle) such that the line passes through at least more than 50% of the small rectangles.", "Draw a line on the screen approximately similar to the gesture line Inside the Active Gesture Area(Rectangle) such that the line passes through less than 50% of the small rectangles."],
+			"ExpectedOutcome":["linear gesture should be detected by drawing dot on screen as sensitivity is 0.", "( 0 is nearest allowed value for sensitivity value of -1)."],
+			"testToPerform":function(){
+				myPage = document.getElementById('mainBlock').innerHTML;
+		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
+			    genericObj.InvokeMETAFunction("gesture", "type:linear;Region-width:40;sensitivity:-1;Diagnostics:true;Create");
+        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+			},
+			"FinalResult":""
+		}];
+		pbTestObj.afterEach = function(){
+			myPage = "";
+		}
+		return pbTestObj;
+	}
+	window.pbTest = pbTest();
+})();
+(function(){
+	var main = function(){
+		var mainObj = {};
+		var r1List = [];
+		var r2List = [];
+		var r3List = [];
+		var testArray = [];
+		var index = 0;
+		var count = 0;
+		var choice = "";
+		var passCount = 0;
+		var failCount = 0;
+		var noRunCount = 0;
+		mainObj.init = function(){
+			for(key in pbTest.testCases){
+				if(pbTest.testCases[key].RegLevel == "R1"){
+					r1List.push(pbTest.testCases[key]);
+				}else if(pbTest.testCases[key].RegLevel == "R2"){
+					r2List.push(pbTest.testCases[key]);
+				}else if(pbTest.testCases[key].RegLevel == "R3"){
+					r3List.push(pbTest.testCases[key]);
+				}
+			}
+		};
+		mainObj.loadArrayList = function(data, eleId){
+			var retData = "";
+			if(eleId == "preCondition"){
+				retData = "<br><span class='heading'>PreConditions:</span>";
+			}else if(eleId == "steps"){
+				retData = "<br><span class='heading'>Steps:</span>";
+			}if(data.length>0){
+				retData += "<ul>";
+		        for (var i=0; i<data.length;i++){
+		            retData = retData + "<li>"+data[i]+"</li>"
+		        }
+		        retData = retData + "</ul>";
+		    }
+			
+		    document.getElementById(eleId).innerHTML = retData;
+		}
+		mainObj.onPageLoad = function(){
+			this.onRegLevelChange();
+		};
+		mainObj.loadTest = function(){
+			var vtElement = "";
+            var selectElement = "<select id='vtSelect' onchange='main.onVTIDChange()'></select>";
+            document.getElementById('vtsection').innerHTML = selectElement;
+            var selectList = document.getElementById('vtSelect');
+			for(key in testArray){
+				var option = document.createElement("OPTION");
+				option.text = testArray[key].VTID;
+				option.value = key;
+				selectList.add(option);
+			}
+			this.loadSingleTest(index);
+		};
+		mainObj.displayFinalResult = function(){
+			retHTMLData = "<table><tr><td class='title'>" + choice +" Test summay :</td></tr><tr><td class='block'><ul>";
+			for(key in testArray){
+				if(testArray[key].FinalResult=="Pass"){
+					passCount++;
+					retHTMLData = retHTMLData + "<li style='color:green'>" + testArray[key].Description + "</li>";	
+				}else if(testArray[key].FinalResult=="Fail"){
+					failCount++;
+					retHTMLData = retHTMLData + "<li style='color:red'>" + testArray[key].Description + "</li>";
+				}else{
+					noRunCount++;
+					retHTMLData = retHTMLData + "<li style='color:red;background:yellow'>" + testArray[key].Description + "</li>";
+				}
+			}
+			resultSummary = "<table class='block'><tr><td colspan=2 class='title'>Summary for "+choice+" cases</td></tr><tr><td>Pass</td><td style='color:green;font-weight:bold'>"+passCount+"</td></tr><tr><td>Fail</td><td style='color:red;font-weight:bold'>"+failCount+"</td></tr><tr><td>NoRun</td><td style='color:blue;font-weight:bold'>"+noRunCount+"</td></tr><tr style='color:black;font-weight:bold'><td>Total</td><td>"+parseInt(passCount+failCount+noRunCount)+"</td></tr></table>";
+			retHTMLData = retHTMLData + "</ul></td></tr></table><br><a href='../index.html'>Home</a>";
+			retHTMLData = resultSummary + retHTMLData;
+			document.getElementById('mainBlock').innerHTML = retHTMLData;
+		};
+		mainObj.loadSingleTest = function(index){
+			document.getElementById('vtid').innerHTML = testArray[index].VTID;
+			document.getElementById('desc').innerHTML = testArray[index].Description;
+			this.loadArrayList(testArray[index].PreCondition, "preCondition");
+			this.loadArrayList(testArray[index].Steps, "steps");
+			this.loadArrayList(testArray[index].ExpectedOutcome, "expected");
+			document.getElementById('actualResult').innerHTML = "";
+			var selectElement = document.getElementById('vtSelect');
+			selectElement.value = index;
+		};
+		mainObj.runThisTest = function(){
+			testArray[index].testToPerform();
+		};
+		mainObj.passThisTest = function(){
+			testArray[index].FinalResult = "Pass";
+            pbTest.afterEach();
+			this.nextTest();
+		};
+		mainObj.failThisTest = function(){
+			testArray[index].FinalResult = "Fail";
+            pbTest.afterEach();
+			this.nextTest();
+		}
+		mainObj.nextTest = function(){
+			if(index<(count-1)){
+				index++;
+				this.loadSingleTest(index);
+			}else{
+				this.displayFinalResult();
+			}
+		};
+		mainObj.prevTest = function(){
+			if(index>0){
+				index--;
+				this.loadSingleTest(index);
+			}else{
+				alert("No previous test cases to run");
+			}
+		};
+		mainObj.onVTIDChange = function(){
+			myVtIdChoice = document.getElementById("vtSelect").value;
+			index = myVtIdChoice;
+			this.loadSingleTest(myVtIdChoice);
+		};
+		mainObj.onRegLevelChange = function(){
+			var myChoice = document.getElementById("regLevel").value;
+			choice = myChoice;
+			document.getElementById('vtsection').innerHTML = "";
+
+			if(myChoice=="All"){
+				testArray = pbTest.testCases;
+				count = testArray.length;
+			}else if(myChoice=="R1"){
+				testArray=r1List;
+				count = testArray.length;
+			}else if(myChoice=="R2"){
+				testArray=r2List;
+				count = testArray.length;
+			}else if(myChoice=="R3"){
+				testArray=r3List;
+				count = testArray.length;
+			}
+			index = 0;
+			passCount = 0;
+			failCount = 0;
+			noRunCount = 0;
+			if(count>0){
+				this.loadTest();
+			}else{
+				document.getElementById("regLevel").value = "All";
+				this.onRegLevelChange();
+				alert("No Tests for the level selected");
+			}
+		};
+		mainObj.displayResult = function(res){
+			document.getElementById('actualResult').innerHTML = res;
+		};
+		return mainObj;
+	}
+	window.main = main();
+})();
+	</script>
+	<!--<script type="text/javascript" src="js/myMain.js"></script>-->
+	<script type="text/javascript">
+		main.init();
+	</script>
+</head>
+<body class="body" onload="main.onPageLoad()">
+<h3 class='title'>Semi Auto test for PB and RE2.2 : Linear Gesture</h3>
+<div id="mainBlock" class="mainBlock">
+	<div>
+		<span class="heading">Select Regression Level :</span>
+	    <select name="regLevel" id="regLevel" onchange="main.onRegLevelChange()">
+	        <OPTION value="All" >All</OPTION>
+	        <OPTION value="R1" >R1</OPTION>
+	        <OPTION value="R2" >R2</OPTION>
+	        <OPTION value="R3" >R3</OPTION>
+	    </select> 
+	</div>
+    <div>
+    	<span class="heading">Select Test Case to Run :</span>
+    	<div id='vtsection'>
+    	</div>
+    	
+    </div>
+    <div class="runners">
+    	<input type=button value="Previous" onclick="main.prevTest();" />
+		<input type=button value="Next" onclick="main.nextTest()" />
+		<input type="button" onclick="main.runThisTest()" value="Run Test"/>
+    </div>
+	<br>
+	<div class="block">
+	<span class="heading">VTID:</span>
+    <div id="vtid"></div><br>
+    <span class="heading">Test description:</span>
+    <div id="desc"></div>
+    <div id="preCondition"></div>
+    <div id="steps"></div>
+    <span class="heading">Expected result:</span>
+    <div id="expected"></div><br>
+    <input type="button" onclick="main.runThisTest()" value="Run Test"/>
+    <br><br>
+    <span class="heading">Actual result:</span>
+    <br>
+    <div id="actualResult"></div><br>
+    <input type="button" class="pass" onclick="main.passThisTest()" value="Pass"/>
+    <input type="button" class="fail" onclick="main.failThisTest()" value="Fail"/>
+    </div>
+	<br>
+	<div class="runners">
+		<input type=button value="Previous" onclick="main.prevTest();" />
+		<input type=button value="Next" onclick="main.nextTest()" />
+	</div>
+	</div>
+</body>
+</html>
