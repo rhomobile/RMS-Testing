@@ -6,7 +6,7 @@
 <meta name="mobileoptimized" content="0" />
 <script language=javascript>
 
-var generic = new ActiveXObject("PocketBrowser.Generic");
+var objGeneric = new ActiveXObject("PocketBrowser.Generic");
 var selected_Imager=""; //For Reading Selected Scanner by list.
 var selectedLamp=""; //Selected Lamp in the list.
 var selectedAim=""; //Selected Aim in the list.
@@ -105,7 +105,7 @@ imager.enabled=selected_Imager;
 
 function enablemyImager()
 {
-	generic.InvokeMETAFunction('imager','enabled');
+	objGeneric.InvokeMETAFunction('imager','enabled');
 }
 
 function enablemyImager1()
@@ -115,7 +115,7 @@ function enablemyImager1()
 
 function disableImager()
 {
-	generic.InvokeMETAFunction('imager', 'disabled');
+	objGeneric.InvokeMETAFunction('imager', 'disabled');
 }
 
 function disableImager1()

@@ -725,7 +725,7 @@
         
 
 
-        var Generic = new ActiveXObject("PocketBrowser.Generic");
+        var objGeneric = new ActiveXObject("PocketBrowser.Generic");
         
 //        var objParams = document.getElementById("Div1");
         
@@ -734,7 +734,7 @@
         
         function quitPB()
          {
-            //generic.InvokeMETAFunction("Application", "Quit");
+            //objGeneric.InvokeMETAFunction("Application", "Quit");
             application.quit();
          }
         
@@ -751,19 +751,19 @@
             //passF(data);
             var objRes = document.getElementById("msg");
             var expectedData = myParameters[iCount][1];
-            Generic.Log('\r\n*****Actual Scanned Data: '+ jsonObject.data+'*****\r\n', 1);
+            //objGeneric.Log('\r\n*****Actual Scanned Data: '+ jsonObject.data+'*****\r\n', 1);
             if(jsonObject.data == expectedData)
             {
                 objRes.innerHTML = "PASS";
-                Generic.Log('\r\n*****Test Case Result: PASS*****\r\n' ,1);
+                //objGeneric.Log('\r\n*****Test Case Result: PASS*****\r\n' ,1);
                 passT();
             }
             else
             {
                 objRes.innerHTML = "FAIL:Move Next To Continue";
-                Generic.Log('\r\n*****Test Case Result: FAIL*****\r\n' ,1);
+                //objGeneric.Log('\r\n*****Test Case Result: FAIL*****\r\n' ,1);
             }
-            Generic.Log('\r\n%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\r\n', 1);
+            //objGeneric.Log('\r\n%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\r\n', 1);
         }
         
         function passF(data)
@@ -803,9 +803,9 @@
             
             var objExpect = document.getElementById("Div2");
             objExpect.innerHTML = myParameters[iCount][1];
-            Generic.Log('\r\n%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\r\n', 1);
-            Generic.Log('\r\n*****Test Case Count Number: '+ iCount + '*****\r\n',1);
-            Generic.Log('\r\n*****Expected Data: '+ myParameters[iCount][1]+ '*****\r\n' ,1);
+            //objGeneric.Log('\r\n%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\r\n', 1);
+            //objGeneric.Log('\r\n*****Test Case Count Number: '+ iCount + '*****\r\n',1);
+            //objGeneric.Log('\r\n*****Expected Data: '+ myParameters[iCount][1]+ '*****\r\n' ,1);
             
             var objDecoded = document.getElementById("Div3");
             objDecoded.innerHTML = "";
@@ -816,14 +816,14 @@
             var objTestCase = document.getElementById("TestCase");
             objTestCase.innerHTML = iCount;
                         
-            Generic.InvokeMETAFunction('scanner', 'disable');
+            objGeneric.InvokeMETAFunction('scanner', 'disable');
             //build scanner zparameters data
             //ScanParams = "'" + myParameters[iCount] + ";'";
             ScanParams = "" + myParameters[iCount][0] + "";
             //alert(ScanParams);
             objParams.innerHTML = ScanParams;
-            Generic.Log('\r\n*****Parameters Passed: '+ ScanParams + '*****\r\n',1);
-            Generic.InvokeMETAFunction('scanner', ScanParams);
+            //objGeneric.Log('\r\n*****Parameters Passed: '+ ScanParams + '*****\r\n',1);
+            objGeneric.InvokeMETAFunction('scanner', ScanParams);
         }
         
         
@@ -843,21 +843,21 @@
             
             var objTestCase = document.getElementById("TestCase");
             objTestCase.innerHTML = iCount;
-            Generic.Log('\r\n%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\r\n', 1);
-            Generic.Log('\r\n*****Test Case Count Number: '+ iCount + '*****\r\n' ,1);
+            //objGeneric.Log('\r\n%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\r\n', 1);
+            //objGeneric.Log('\r\n*****Test Case Count Number: '+ iCount + '*****\r\n' ,1);
             
             var objExpect = document.getElementById("Div2");
             objExpect.innerHTML = myParameters[iCount][1];
-            Generic.Log('\r\n*****Expected Result: '+ myParameters[iCount][1] + '*****\r\n' ,1);
+            //objGeneric.Log('\r\n*****Expected Result: '+ myParameters[iCount][1] + '*****\r\n' ,1);
             
-            Generic.InvokeMETAFunction('scanner', 'disable');
+            objGeneric.InvokeMETAFunction('scanner', 'disable');
             
             //build scanner parameters data
             //ScanParams = "'" + myParameters[iCount] + ";'";
             ScanParams = "" + myParameters[iCount][0] + "";
             objParams.innerHTML = ScanParams;
-            Generic.Log('\r\n*****Parameters Passed: '+ ScanParams + '*****\r\n',1);
-            Generic.InvokeMETAFunction('scanner', ScanParams);
+            //objGeneric.Log('\r\n*****Parameters Passed: '+ ScanParams + '*****\r\n',1);
+            objGeneric.InvokeMETAFunction('scanner', ScanParams);
         }
         
         function runTC()
@@ -875,21 +875,21 @@
             
             var objTestCase = document.getElementById("TestCase");
             objTestCase.innerHTML = iCount;
-            Generic.Log('\r\n%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\r\n', 1);
-            Generic.Log('\r\n*****Test Case Count Number: '+ iCount + '*****\r\n' ,1);
+            //objGeneric.Log('\r\n%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\r\n', 1);
+            //objGeneric.Log('\r\n*****Test Case Count Number: '+ iCount + '*****\r\n' ,1);
             
             var objExpect = document.getElementById("Div2");
             objExpect.innerHTML = myParameters[iCount][1];
-            Generic.Log('\r\n*****Expected Result: '+ myParameters[iCount][1] + '*****\r\n' ,1);
+            ////objGeneric.Log('\r\n*****Expected Result: '+ myParameters[iCount][1] + '*****\r\n' ,1);
             
-            Generic.InvokeMETAFunction('scanner', 'disable');
+            objGeneric.InvokeMETAFunction('scanner', 'disable');
             
             //build scanner parameters data
             //ScanParams = "'" + myParameters[iCount] + ";'";
             ScanParams = "" + myParameters[iCount][0];
             objParams.innerHTML = ScanParams;
-            Generic.Log('\r\n*****Parameters Passed: '+ ScanParams + '*****\r\n',1);
-            Generic.InvokeMETAFunction('scanner', ScanParams);
+            ////objGeneric.Log('\r\n*****Parameters Passed: '+ ScanParams + '*****\r\n',1);
+            objGeneric.InvokeMETAFunction('scanner', ScanParams);
         }
         
         function movePrev()
@@ -912,18 +912,18 @@
             var objResult = document.getElementById("msg");
             objResult.innerHTML = "";
             
-            Generic.InvokeMETAFunction('scanner', 'disable');
+            objGeneric.InvokeMETAFunction('scanner', 'disable');
             
             //build scanner parameters data
             //ScanParams = "'" + myParameters[iCount] + ";'";
             ScanParams = "" + myParameters[iCount][0] + "";
             objParams.innerHTML = ScanParams;
-            Generic.InvokeMETAFunction('scanner', ScanParams);
+            objGeneric.InvokeMETAFunction('scanner', ScanParams);
         }
         
         function startScanner()
         {
-           Generic.InvokeMETAFunction('scanner', 'start');
+           objGeneric.InvokeMETAFunction('scanner', 'start');
         }
    
     </script>

@@ -100,7 +100,7 @@ var selectedBorder=""; //Selected Aim in the list.
 function setAudioLocalName()
 {
 var myLocalAudioName=frm.textLocalName.value;
-gen.InvokeMETAFunction('audioCapture', name:myLocalAudioName);
+gen.InvokeMETAFunction('audioCapture', 'name:'+myLocalAudioName);
 message.innerHTML="setNameto"+myLocalAudioName;
 }
 
