@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<br/><input type="button" value="Quit" onclick="quitPB();" />
+	<input type="button" value="Back"  onclick="location.href='./index.html'" />
+	<title>PB and RE2.2 Semi Auto Frame Work :</title>
+	<meta HTTP-Equiv="imager" Content="imagerEnumEvent:url('Javascript:Enumimagers(%s);')">
+	<META HTTP-Equiv="Imager" Content="Imagerevent:url('JavaScript:fnJSCallbackHandler('%1');')">
+	<!-- <meta HTTP-Equiv="imager" Content="imagerevent:url('Javascript:alert('%s');')"> -->
+	<!--<link rel="stylesheet" type="text/css" href="css/main.css">-->
+	<style type="text/css">
+		.block{
+			background:#aabbcc;
+			border: 1px solid darkblue;
+		    margin: 5px;
+		    font-size: 11px;
+		    font-family: Monaco, "Lucida Console", monospace;
+		    line-height: 14px;
+		    color: #333333;
+		}
+		.title{
+			padding: 3px;
+		    font-size: 11px;
+		    font-family: Monaco, "Lucida Console", monospace;
+		    font-weight: bolder;
+		    background-color: steelblue;
+		    color: white;
+		}
+		.body{
+			background:#ddeeff;
+		}
+		.runners{
+			border: 1px solid darkblue;
+		    margin: 5px;
+		    font-family: Monaco, "Lucida Console", monospace;
+		    line-height: 14px;
+			padding: 3px;
+		    font-size: 12px;
+		    font-weight: bolder;
+		    background-color: #aabbcc;
+		    color: white;
+		}
+		.heading{
+			font-weight: bold;
+		}
+		.pass{
+			background:green;
+		}
+		.fail{
+			background:red;
+		}
+	</style>
+	<script type="text/javascript" src="http://10.233.85.82/src/elements.js"></script>
+	<!--<script type="text/javascript" src="js/testCases.js"></script>-->
+	<script type="text/javascript">
+		var genericObj = "";
+		function quitPB(){
+			genericObj = new ActiveXObject("PocketBrowser.Generic");
+			genericObj.InvokeMETAFunction("Application", "Quit");
+		}
+		var selected_imager = "";
+		var imagerInfo = "";
+		var enable_selectedImager = "";
+		function setEnumImagerTimer(){
+		    setTimeout("imagerEnum()", 3000);
+		}
+		function imagerEnum(){
+			genericObj = new ActiveXObject("PocketBrowser.Generic");
+			genericObj.InvokeMETAFunction('imager', "Enumerate");
+		}
+		function Enumimagers(imagerArray){
+			var imagerInfo = "";
+			for (i=0; i < imagerArray.length; i++){
+		       	document.getElementById('imagerdropdown').options[i + 1].text = imagerArray[i][0]+imagerArray[i][1];
+			   	document.getElementById('imagerdropdown').options[i + 1].value = imagerArray[i][0];
+			   	imagerInfo = imagerInfo + imagerArray[i][0] + ' -- ' + imagerArray[i][1] + '<BR>';
+			}
+			document.getElementById('actualResult').innerHTML = imagerInfo;
+		}
+		function selectImager(){
+		    var w = document.getElementById('imagerdropdown').selectedIndex;
+		    selected_imager = document.getElementById('imagerdropdown').options[w].value;
+		    document.getElementById('selectedImager').innerHTML = document.getElementById('imagerdropdown').options[w].name;
+		}
+		function enableImager(){
+			enable_selectedImager="Enabled:"+ selected_imager;
+		    genericObj.InvokeMETAFunction('imager', enable_selectedImager);
+		}
+		function disableImager(){
+			genericObj.InvokeMETAFunction('imager', 'Disabled');
+		}
+		(function(){
+		var pbTest = function(){
+		var pbTestObj = {};
+		pbTestObj.testCases = [
+		{
+		    "VTID":"VT056 - 1146",
+            "RegLevel":"R1",
+		    "Description":"Imager",
+		    "PreCondition":[],
+		    "Steps":["Enable the imager device","Test the functionality of Imager with content='Left:30' and 'Top:170'","Test the functionality of Imager with content='Height:40' and 'Width:60'","Test the functionality of Imager with content='lamp:on'","Test the functionality of Imager with content='aim:on'","Test the functionality of Imager with content='Protocol:ftp'","Test the functionality of Imager with content='username' and 'password'","Test the functionality of Imager with content='DestinationURL:[Value]'","Capture the image"],
+		    "ExpectedOutcome":["The image should be captured and copied to the specified url using ftp protocol"],
+		    "testToPerform":function(){
+		    	enableImager();
+		    	setTimeout(function(){
+		    		genericObj.InvokeMETAFunction("imager", "Left:30;Top:170;Height:40;Width:60;lamp:on;aim:on;Protocol:ftp;username:ftpadmin;password:ftpadmin;DestinationURL:'ftp://10.233.85.82/myimage.bmp';Capture");
+		        	setTimeout(function(){
+		        		disableImager();
+		        	}, 5000);
+				}, 3000);
+		    },
+		    "FinalResult":""
+		},{
+		    "VTID":"VT056-1122",
+            "RegLevel":"R3",
+		    "Description":"Enumerate",
+		    "PreCondition":[],
+		    "Steps":["Test Imager functionlaity with content ='Enumerate'","Test imagerEnumevent functionality with content='ImagerArray'"],
+		    "ExpectedOutcome":["Enumerate should return a list of imagers present on the device via imagerEnumevent. imagerEnumevent tag will be actioned immediately."],
+		    "testToPerform":function(){
+		    	genericObj.InvokeMETAFunction("imager", "Enumerate");
+		    },
+		    "FinalResult":""
+		},{
+		    "VTID":"VT056-1123",
+            "RegLevel":"R3",
+		    "Description":"Enable:[Value]",
+		    "PreCondition":[],
+		    "Steps":["Enumerate the list of available imagers in the device"," Enable the imager available in the device with valid ID"," Capture the image and send to ftp server or http location"],
+		    "ExpectedOutcome":["Enumerate should return a list of imagers present on the device.","Imager should be enabled","Image should be captured from PB and should be sent to either ftp or http location"],
+		    "testToPerform":function(){
+		    	genericObj.InvokeMETAFunction("imager", "Enable:"+selected_imager);
+		    },
+		    "FinalResult":""
+		},{
+		    "VTID":"VT056-1124",
+            "RegLevel":"R3",
+		    "Description":"Enable:[Value]",
+		    "PreCondition":[],
+		    "Steps":["Enumerate the list of available imagers in the device"," Enable the camera available in the device with valid ID"," Capture the image and send to ftp server or http location"],
+		    "ExpectedOutcome":["Enumerate should return a list of imagers present on the device.","camera should be enabled","Image should be captured from PB and should be sent to either ftp or http location"],
+		    "testToPerform":function(){
+		    	genericObj.InvokeMETAFunction("imager", "Enable:"+selected_imager);
+		    },
+		    "FinalResult":""
+		},{
+		    "VTID":"VT056-1125",
+            "RegLevel":"R3",
+		    "Description":"Enable:[Invalid Value]",
+		    "PreCondition":[],
+		    "Steps":["Enumerate the list of available imagers in the device","Pass invalid ID to Enabled method and check the PB behaviour"],
+		    "ExpectedOutcome":["Enumerate should return a list of imagers present on the device.","PB should not behave abnormally when invalid ID is passed to Enabled method"],
+		    "testToPerform":function(){
+		    	genericObj.InvokeMETAFunction("imager", "Enable:invalid");
+		    },
+		    "FinalResult":""
+		},{
+		    "VTID":"VT056-1126",
+            "RegLevel":"R3",
+		    "Description":"Enable the imager device",
+		    "PreCondition":[],
+		    "Steps":["Test the functionality of Imager with content='enabled'"],
+		    "ExpectedOutcome":["The default imager device should be enabled and shows the viewer window"],
+		    "testToPerform":function(){
+		    	genericObj.InvokeMETAFunction("imager", "Enabled");
+		    },
+		    "FinalResult":""
+		},{
+		    "VTID":"VT056-1127",
+            "RegLevel":"R3",
+		    "Description":"Disable the imager device",
+		    "PreCondition":[],
+		    "Steps":["Test the functionality of Imager with content='Disabled'"],
+		    "ExpectedOutcome":["The default imager device should be disabled"],
+		    "testToPerform":function(){
+		    	genericObj.InvokeMETAFunction("imager", "Disabled");
+		    },
+		    "FinalResult":""
+		},{
+		    "VTID":"VT056-1128",
+            "RegLevel":"R3",
+		    "Description":"Horizontal and Vertical Position of Viewer",
+		    "PreCondition":[],
+		    "Steps":["Enable the imager device","Test the functionality of Imager with content='Left:30' and 'Top:170'"],
+		    "ExpectedOutcome":["The viewer should be displayed withrespect to the set position"],
+		    "testToPerform":function(){
+		    	enableImager();
+		    	setTimeout(function(){
+		    		genericObj.InvokeMETAFunction("imager", "Left:30;Top:170");
+		        	setTimeout(function(){
+		        		disableImager();
+		        	}, 5000);
+				}, 3000);
+		    },
+		    "FinalResult":""
+		},{
+		    "VTID":"VT056-1129",
+            "RegLevel":"R3",
+		    "Description":"The viewer should be displayed withrespect to the set position",
+		    "PreCondition":[],
+		    "Steps":[" Enable the imager device"," Test the functionality of Imager with content='Left:-10' and 'Top:400'"],
+		    "ExpectedOutcome":["The viewer should be displayed withrespect to the set position"],
+		    "testToPerform":function(){
+		    	enableImager();
+		    	setTimeout(function(){
+		    		genericObj.InvokeMETAFunction("imager", "Left:-10;Top:400");
+		        	setTimeout(function(){
+		        		disableImager();
+		        	}, 5000);
+				}, 3000);
+		    },
+		    "FinalResult":""
+		},{
+		    "VTID":"VT056-1130",
+            "RegLevel":"R3",
+		    "Description":"Height and Width",
+		    "PreCondition":[],
+		    "Steps":["Enable the imager device","Test the functionality of Imager with content='Height:40' and 'Width:60'"],
+		    "ExpectedOutcome":["The viewer should be displayed withrespect to the set Height and Width"],
+		    "testToPerform":function(){
+		    	enableImager();
+		    	setTimeout(function(){
+		    		genericObj.InvokeMETAFunction("imager", "Height:40;Width:60");
+		        	setTimeout(function(){
+		        		disableImager();
+		        	}, 5000);
+				}, 3000);
+		    },
+		    "FinalResult":""
+		},{
+		    "VTID":"VT056-1131",
+            "RegLevel":"R3",
+		    "Description":"Height and Width",
+		    "PreCondition":[],
+		    "Steps":["Enable the imager device","Test the functionality of Imager with content='Height:-30' and 'Width:500'"],
+		    "ExpectedOutcome":["The viewer should be displayed withrespect to the set Height and Width"],
+		    "testToPerform":function(){
+				enableImager();
+		    	setTimeout(function(){
+		    		genericObj.InvokeMETAFunction("imager", "Height:-10;Width:500");
+		        	setTimeout(function(){
+		        		disableImager();
+		        	}, 5000);
+				}, 3000);
+		    },
+		    "FinalResult":""
+		},{
+		    "VTID":"VT056-1132",
+            "RegLevel":"R3",
+		    "Description":"Lamp on",
+		    "PreCondition":[],
+		    "Steps":["Enable the imager device","Test the functionality of Imager with content='lamp:on'","Capture the image"],
+		    "ExpectedOutcome":["Imager Lamp should be switched on","The Image should be captured successfully"],
+		    "testToPerform":function(){
+		    	enableImager();
+		    	setTimeout(function(){
+		    		genericObj.InvokeMETAFunction("imager", "Lamp:on;Capture");
+		        	setTimeout(function(){
+		        		disableImager();
+		        	}, 5000);
+				}, 3000);
+		    },
+		    "FinalResult":""
+		},{
+		    "VTID":"VT056-1133",
+            "RegLevel":"R3",
+		    "Description":"Lamp off",
+		    "PreCondition":[],
+		    "Steps":["Enable the imager device","Test the functionality of Imager with content='lamp:off'"," Capture the image"],
+		    "ExpectedOutcome":["Imager Lamp should be switched off","The Image should be captured successfully"],
+		    "testToPerform":function(){
+		    	enableImager();
+		    	setTimeout(function(){
+		    		genericObj.InvokeMETAFunction("imager", "Lamp:off;Capture");
+		        	setTimeout(function(){
+		        		disableImager();
+		        	}, 5000);
+				}, 3000);
+		    },
+		    "FinalResult":""
+		},{
+		    "VTID":"VT056-1134",
+            "RegLevel":"R3",
+		    "Description":"Lamp test",
+		    "PreCondition":[],
+		    "Steps":["Enable the imager device","Test the functionality of Imager with content='lamp:test'","Capture the image"],
+		    "ExpectedOutcome":["Imager Lamp should be switched off","The Image should be captured successfully"],
+		    "testToPerform":function(){
+		    	enableImager();
+		    	setTimeout(function(){
+		    		genericObj.InvokeMETAFunction("imager", "Lamp:test;Capture");
+		        	setTimeout(function(){
+		        		disableImager();
+		        	}, 5000);
+				}, 3000);
+		    },
+		    "FinalResult":""
+		},{
+		    "VTID":"VT056-1135",
+            "RegLevel":"R3",
+		    "Description":"Aim on",
+		    "PreCondition":[],
+		    "Steps":["Enable the imager device","Test the functionality of Imager with content='aim:on'","Capture the image"],
+		    "ExpectedOutcome":["Imager Aim should be switched on","The Image should be captured successfully"],
+		    "testToPerform":function(){
+		    	enableImager();
+		    	setTimeout(function(){
+		    		genericObj.InvokeMETAFunction("imager", "Aim:on;Capture");
+		        	setTimeout(function(){
+		        		disableImager();
+		        	}, 5000);
+				}, 3000);
+		    },
+		    "FinalResult":""
+		},{
+		    "VTID":"VT056-1136",
+            "RegLevel":"R3",
+		    "Description":"Aim off",
+		    "PreCondition":[],
+		    "Steps":["Enable the imager device","Test the functionality of Imager with content='aim:off'","Capture the image"],
+		    "ExpectedOutcome":["Imager Aim should be switched off","The Image should be captured successfully"],
+		    "testToPerform":function(){
+		    	enableImager();
+		    	setTimeout(function(){
+		    		genericObj.InvokeMETAFunction("imager", "Aim:off;Capture");
+		        	setTimeout(function(){
+		        		disableImager();
+		        	}, 5000);
+				}, 3000);
+		    },
+		    "FinalResult":""
+		},{
+		    "VTID":"VT056-1137",
+            "RegLevel":"R3",
+		    "Description":"Aim test",
+		    "PreCondition":[],
+		    "Steps":["Enable the imager device","Test the functionality of Imager with content='aim:test'","Capture the image"],
+		    "ExpectedOutcome":["Imager Aim should be switched off","The Image should be captured successfully"],
+		    "testToPerform":function(){
+		    	enableImager();
+		    	setTimeout(function(){
+		    		genericObj.InvokeMETAFunction("imager", "Aim:test;Capture");
+		        	setTimeout(function(){
+		        		disableImager();
+		        	}, 5000);
+				}, 3000);
+		    },
+		    "FinalResult":""
+		},{
+		    "VTID":"VT056-1138",
+            "RegLevel":"R3",
+		    "Description":"DestinationURL(http)",
+		    "PreCondition":[],
+		    "Steps":[" Enable the imager device","Test the functionality of Imager with content='Protocol:http'"," Test the functionality of Imager with content=DestinationURL:[Value]"," Capture the image"],
+		    "ExpectedOutcome":["The image should be captured and copied to the specified url using http protocol"],
+		    "testToPerform":function(){
+		    	enableImager();
+		    	setTimeout(function(){
+		    		genericObj.InvokeMETAFunction("imager", "Left:30;Top:170;Height:40;Width:60;Protocol:http;DestinationURL:'http://10.233.85.82/27server/myimage.bmp';Capture");
+		        	setTimeout(function(){
+		        		disableImager();
+		        	}, 5000);
+				}, 3000);
+		    },
+		    "FinalResult":""
+		},{
+		    "VTID":"VT056-1139",
+            "RegLevel":"R3",
+		    "Description":"DestinationURL(ftp)",
+		    "PreCondition":[],
+		    "Steps":["Enable the imager device","Test the functionality of Imager with content='Protocol:ftp'","Test the functionality of Imager with content='username' and 'password'","Test the functionality of Imager with content='DestinationURL:[Value]'","Capture the image"],
+		    "ExpectedOutcome":["The image should be captured and copied to the specified url using ftp protocol"],
+		    "testToPerform":function(){
+		    	enableImager();
+		    	setTimeout(function(){
+		    		genericObj.InvokeMETAFunction("imager", "Left:30;Top:170;Height:40;Width:60;Protocol:ftp;username:ftpadmin;password:ftpadmin;DestinationURL:'ftp://10.233.85.82/27server/Files/myimage.bmp';Capture");
+		        	setTimeout(function(){
+		        		disableImager();
+		        	}, 5000);
+				}, 3000);
+		    },
+		    "FinalResult":""
+		},{
+		    "VTID":"VT056-1140",
+            "RegLevel":"R3",
+		    "Description":"Wrong username and password",
+		    "PreCondition":[],
+		    "Steps":["Enable the imager device","Test the functionality of Imager with content='Protocol:ftp'","Test the functionality of Imager with content='username' and 'password'","Test the functionality of Imager with content='DestinationURL:[Value]'","Capture the image"],
+		    "ExpectedOutcome":["The image should not be captured and copied to the specified url using ftp protocol"],
+		    "testToPerform":function(){
+		    	enableImager();
+		    	setTimeout(function(){
+		    		genericObj.InvokeMETAFunction("imager", "Left:30;Top:170;Height:40;Width:60;lamp:on;aim:on;Protocol:ftp;username:username;password:password;DestinationURL:'ftp://10.233.85.82/27server/Files/myimage.bmp';Capture");
+		        	setTimeout(function(){
+		        		disableImager();
+		        	}, 5000);
+				}, 3000);
+		    },
+		    "FinalResult":""
+		},{
+		    "VTID":"VT056-1141",
+            "RegLevel":"R3",
+		    "Description":"Wav file name",
+		    "PreCondition":[],
+		    "Steps":["Enable the imager device","Capture the image","Test the functionality of Imager with content='sound:[Value]'"],
+		    "ExpectedOutcome":["When the image is captured the respective wav file should be played"],
+		    "testToPerform":function(){
+		    	enableImager();
+		    	setTimeout(function(){
+		    		genericObj.InvokeMETAFunction("imager", "Left:30;Top:170;Height:40;Width:60;sound:/windows/alarm2.wav;Capture");
+		        	setTimeout(function(){
+		        		disableImager();
+		        	}, 5000);
+				}, 3000);
+		    },
+		    "FinalResult":""
+		},{
+		    "VTID":"VT056-1142",
+            "RegLevel":"R3",
+		    "Description":"Imagerevent",
+		    "PreCondition":[],
+		    "Steps":["Enable the imager device","Test the functionality of Imager with content='Protocol:http'"," Test the functionality of Imager with content=DestinationURL:[Value]","Capture the image","Test the functionality of the Imager with content='imagerevent:javascript'"],
+		    "ExpectedOutcome":["The reply from the webserver should be observed i.e. javascript should be called"],
+		    "testToPerform":function(){
+		    	enableImager();
+		    	setTimeout(function(){
+		    		genericObj.InvokeMETAFunction("imager", "Left:30;Top:170;Height:40;Width:60;Protocol:http;DestinationURL:'http://10.233.85.82/NEON/ReceivedFiles/myimage.bmp';Capture");
+		        	setTimeout(function(){
+		        		disableImager();
+		        	}, 5000);
+				}, 3000);
+		    },
+		    "FinalResult":""
+		},{
+		    "VTID":"VT056-1143",
+            "RegLevel":"R3",
+		    "Description":"Imagerevent",
+		    "PreCondition":[],
+		    "Steps":["Enable the imager device","Test the functionality of Imager with content='Protocol:http'"," Test the functionality of Imager with content=DestinationURL:[Value]","Capture the image","Test the functionality of the Imager with content='imagerevent:url'"],
+		    "ExpectedOutcome":["The reply from the webserver should be observed i.e. javascript should be called"],
+		    "testToPerform":function(){
+		    	enableImager();
+		    	setTimeout(function(){
+		    		genericObj.InvokeMETAFunction("imager", "Left:30;Top:170;Height:40;Width:60;Protocol:http;DestinationURL:'http://10.233.85.82/27server/myimage.bmp';Capture");
+		    		genericObj.InvokeMETAFunction("imager", "imagerevent:url('Javascript:alert('%s');')");
+		        	setTimeout(function(){
+		        		disableImager();
+		        	}, 5000);
+				}, 3000);
+		    },
+		    "FinalResult":""
+		},{
+		    "VTID":"VT056-1144",
+            "RegLevel":"R3",
+		    "Description":"Enable the imager device and Exit",
+		    "PreCondition":[],
+		    "Steps":["Test the functionality of Imager with content='enabled'"," Test the functionality of Imager with content='Left:30' and 'Top:170'","Capture the image","Quit the PB"],
+		    "ExpectedOutcome":["The default imager device should be enabled and shows the viewer window","Capture method should capture the image","On Quit no error should be thrown in the device"],
+		    "testToPerform":function(){
+		    	enableImager();
+		    	setTimeout(function(){
+		    		genericObj.InvokeMETAFunction("imager", "Left:30;Top:170;Height:40;Width:60;Capture");
+		        	setTimeout(function(){
+		        		genericObj.InvokeMETAFunction("Application", "Quit");
+		        	}, 5000);
+				}, 3000);
+		    },
+		    "FinalResult":""
+		},{
+		    "VTID":"VT056-1148",
+            "RegLevel":"R3",
+		    "Description":"Camera Imager and SignatureCapture",
+		    "PreCondition":[],
+		    "Steps":[" Enumerate the list of available imagers in the device","Enable the Camera available in the device with valid ID","Enumerate the list of available scanner in the device","Test visibility SignatureCapture functionality with Content='Visible'","Draw a line in the rectangular capture area","Test Capture SignatureCapture functionality with Content='Capture'"],
+		    "ExpectedOutcome":["Enumerate should return a list of imagers present on the device","Camera should be enabled","Image should be captured from PB and should be sent to either ftp or http location","The drawn line should be captured and stored in the device with Signature as name of the bitmap"],
+		    "testToPerform":function(){
+		    	enableImager();
+		    	setTimeout(function(){
+		    		genericObj.InvokeMETAFunction("SignatureCapture", "Visibility:Visible");
+				}, 3000);
+		    },
+		    "FinalResult":""
+		},{
+		    "VTID":"VT056-1391",
+            "RegLevel":"R2",
+		    "Description":"Invalid destination",
+		    "PreCondition":[],
+		    "Steps":["Enable the imager device","Test the functionality of Imager with content='Protocol:http'","Test the functionality of Imager with content=DestinationURL:[InvalidValue]","Capture the image"],
+		    "ExpectedOutcome":["PB should not crash when any of the destination is invalid"],
+		    "testToPerform":function(){
+		    	enableImager();
+		    	setTimeout(function(){
+		    		genericObj.InvokeMETAFunction("imager", "Left:30;Top:170;Height:40;Width:60;Protocol:http;DestinationURL:'http://10.230.0/myimage.bmp';Capture");
+		    		genericObj.InvokeMETAFunction("imager", "imagerevent:url('Javascript:alert('%s');')");
+		        	setTimeout(function(){
+		        		disableImager();
+		        	}, 5000);
+				}, 3000);
+		    },
+		    "FinalResult":""
+		},
+		// {
+		//     "VTID":"VT056-1392",
+  //           "RegLevel":"R3",
+		//     "Description":"Imager Metatag with Empty Parameter",
+		//     "PreCondition":[],
+		//     "Steps":["Launch PocketBrowser from Start Menu.","Set null(Empty) values for the Imager parameters using InvokeMETAFunction."," Set null(Empty) values for the Imagerevent (like imagerEnumevent, imagerevent) using InvokeMETAFunction."],
+		//     "ExpectedOutcome":["PB should not crash when any of the Imager parameters with null values are set through InvokeMetaFunction.","PB should not crash when any of the Imager Events with null values are set through InvokeMetaFunction.","No Error should be occurred."],
+		//     "testToPerform":function(){
+		//     	//genericObj.InvokeMETAFunction("imager", "");
+		//     },
+		//     "FinalResult":""
+		// },
+		{
+		    "VTID":"VT056-1393",
+            "RegLevel":"R3",
+		    "Description":"ImageCapture Persistence",
+		    "PreCondition":[],
+		    "Steps":["Test visibility ImageCapture functionality with Content='enabled'","Set Width, Height, Left, Top, Lamp and Aim","Capture an image and navigate to different page by pressing back button"],
+		    "ExpectedOutcome":["The viewer should be cleared during page navigation","Other parameters should persist across page loads."],
+		    "testToPerform":function(){
+		    	enableImager();
+		    	setTimeout(function(){
+		    		genericObj.InvokeMETAFunction("imager", "Left:30;Top:170;Height:40;Width:60;lamp:on;aim:on;Capture");
+				}, 3000);
+		    },
+		    "FinalResult":""
+		},{
+		    "VTID":"VT056-1394",
+            "RegLevel":"R2",
+		    "Description":"Imager Tag Persistance test",
+		    "PreCondition":[],
+		    "Steps":["Enable the imager device"," Set Imager functionality with Protocol to http and Destination to URL:[value]","Attach the imagerevent to navigate to another page."," Capture the image by calling capture method","Check persistancy of imager tag on second page."],
+		    "ExpectedOutcome":["PB should take to the configured URL on successful tranfer of image to the http location","The image viewer should not be persist on another navigated page.","But settings should persist as mentioned in help file."],
+		    "testToPerform":function(){
+		    	enableImager();
+		    	setTimeout(function(){
+		    		genericObj.InvokeMETAFunction("imager", "Left:30;Top:170;Height:40;Width:60;lamp:on;aim:on;Protocol:https;DestinationURL:'http://10.233.85.82/NEON/ReceivedFiles/myimage.bmp';Capture");
+		    		genericObj.InvokeMETAFunction("imager", "imagerevent:url('Javascript:alert('%s');')");
+				}, 3000);
+		    },
+		    "FinalResult":""
+		}];
+		pbTestObj.afterEach = function(){
+			fnJSCallbackHandler("");
+		}
+		return pbTestObj;
+	}
+	window.pbTest = pbTest();
+})();
+(function(){
+	var main = function(){
+		var mainObj = {};
+		var r1List = [];
+		var r2List = [];
+		var r3List = [];
+		var testArray = [];
+		var index = 0;
+		var count = 0;
+		var choice = "";
+		var passCount = 0;
+		var failCount = 0;
+		var noRunCount = 0;
+		mainObj.init = function(){
+			for(key in pbTest.testCases){
+				if(pbTest.testCases[key].RegLevel == "R1"){
+					r1List.push(pbTest.testCases[key]);
+				}else if(pbTest.testCases[key].RegLevel == "R2"){
+					r2List.push(pbTest.testCases[key]);
+				}else if(pbTest.testCases[key].RegLevel == "R3"){
+					r3List.push(pbTest.testCases[key]);
+				}
+			}
+		};
+		mainObj.loadArrayList = function(data, eleId){
+			var retData = "";
+			if(eleId == "preCondition"){
+				retData = "<br><span class='heading'>PreConditions:</span>";
+			}else if(eleId == "steps"){
+				retData = "<br><span class='heading'>Steps:</span>";
+			}if(data.length>0){
+				retData += "<ul>";
+		        for (var i=0; i<data.length;i++){
+		            retData = retData + "<li>"+data[i]+"</li>"
+		        }
+		        retData = retData + "</ul>";
+		    }
+			
+		    document.getElementById(eleId).innerHTML = retData;
+		}
+		mainObj.onPageLoad = function(){
+			this.onRegLevelChange();
+			setEnumImagerTimer();
+		};
+		mainObj.loadTest = function(){
+			var vtElement = "";
+            var selectElement = "<select id='vtSelect' onchange='main.onVTIDChange()'></select>";
+            document.getElementById('vtsection').innerHTML = selectElement;
+            var selectList = document.getElementById('vtSelect');
+			for(key in testArray){
+				var option = document.createElement("OPTION");
+				option.text = testArray[key].VTID;
+				option.value = key;
+				selectList.add(option);
+			}
+			this.loadSingleTest(index);
+		};
+		mainObj.displayFinalResult = function(){
+			retHTMLData = "<table><tr><td class='title'>" + choice +" Test summay :</td></tr><tr><td class='block'><ul>";
+			for(key in testArray){
+				if(testArray[key].FinalResult=="Pass"){
+					passCount++;
+					retHTMLData = retHTMLData + "<li style='color:green'>" + testArray[key].Description + "</li>";	
+				}else if(testArray[key].FinalResult=="Fail"){
+					failCount++;
+					retHTMLData = retHTMLData + "<li style='color:red'>" + testArray[key].Description + "</li>";
+				}else{
+					noRunCount++;
+					retHTMLData = retHTMLData + "<li style='color:red;background:yellow'>" + testArray[key].Description + "</li>";
+				}
+			}
+			resultSummary = "<table class='block'><tr><td colspan=2 class='title'>Summary for "+choice+" cases</td></tr><tr><td>Pass</td><td style='color:green;font-weight:bold'>"+passCount+"</td></tr><tr><td>Fail</td><td style='color:red;font-weight:bold'>"+failCount+"</td></tr><tr><td>NoRun</td><td style='color:blue;font-weight:bold'>"+noRunCount+"</td></tr><tr style='color:black;font-weight:bold'><td>Total</td><td>"+parseInt(passCount+failCount+noRunCount)+"</td></tr></table>";
+			retHTMLData = retHTMLData + "</ul></td></tr></table><br><a href='index.html'>Home</a>";
+			retHTMLData = resultSummary + retHTMLData;
+			document.getElementById('mainBlock').innerHTML = retHTMLData;
+		};
+		mainObj.loadSingleTest = function(index){
+			document.getElementById('vtid').innerHTML = testArray[index].VTID;
+			document.getElementById('desc').innerHTML = testArray[index].Description;
+			this.loadArrayList(testArray[index].PreCondition, "preCondition");
+			this.loadArrayList(testArray[index].Steps, "steps");
+			this.loadArrayList(testArray[index].ExpectedOutcome, "expected");
+			document.getElementById('actualResult').innerHTML = "";
+			var selectElement = document.getElementById('vtSelect');
+			selectElement.value = index;
+		};
+		mainObj.runThisTest = function(){
+			testArray[index].testToPerform();
+		};
+		mainObj.passThisTest = function(){
+			testArray[index].FinalResult = "Pass";
+            pbTest.afterEach();
+			this.nextTest();
+		};
+		mainObj.failThisTest = function(){
+			testArray[index].FinalResult = "Fail";
+            pbTest.afterEach();
+			this.nextTest();
+		}
+		mainObj.nextTest = function(){
+			if(index<(count-1)){
+				index++;
+				this.loadSingleTest(index);
+			}else{
+				this.displayFinalResult();
+			}
+		};
+		mainObj.prevTest = function(){
+			if(index>0){
+				index--;
+				this.loadSingleTest(index);
+			}else{
+				alert("No previous test cases to run");
+			}
+		};
+		mainObj.onVTIDChange = function(){
+			myVtIdChoice = document.getElementById("vtSelect").value;
+			index = myVtIdChoice;
+			this.loadSingleTest(myVtIdChoice);
+		};
+		mainObj.onRegLevelChange = function(){
+			var myChoice = document.getElementById("regLevel").value;
+			choice = myChoice;
+			document.getElementById('vtsection').innerHTML = "";
+
+			if(myChoice=="All"){
+				testArray = pbTest.testCases;
+				count = testArray.length;
+			}else if(myChoice=="R1"){
+				testArray=r1List;
+				count = testArray.length;
+			}else if(myChoice=="R2"){
+				testArray=r2List;
+				count = testArray.length;
+			}else if(myChoice=="R3"){
+				testArray=r3List;
+				count = testArray.length;
+			}
+			index = 0;
+			passCount = 0;
+			failCount = 0;
+			noRunCount = 0;
+			if(count>0){
+				this.loadTest();
+			}else{
+				document.getElementById("regLevel").value = "All";
+				this.onRegLevelChange();
+				alert("No Tests for the level selected");
+			}
+		};
+		mainObj.displayResult = function(res){
+			document.getElementById('actualResult').innerHTML = res;
+		};
+		return mainObj;
+	}
+	window.main = main();
+})();
+	</script>
+	<!--<script type="text/javascript" src="js/myMain.js"></script>-->
+	<script type="text/javascript">
+		main.init();
+		var fnJSCallbackHandler = function(data){
+			document.getElementById('actualResult').innerHTML = "imager event:" + data;
+		}
+	</script>
+</head>
+<body class="body" onload="main.onPageLoad()">
+<h3 class='title'>Semi Auto test for PB and RE2.2 : </h3>
+<div id="mainBlock" class="mainBlock">
+	<div>
+		<span class="heading">
+			Select the Imager: &nbsp;&nbsp;<select name="imagerdropdown" id="imagerdropdown" onchange="selectImager()">
+				<option value="" selected>--Select Imager--</option>
+				<option value=""></option>
+				<option value=""></option>
+			</select>
+		</span>
+		<p id='selectedImager'></p>
+	</div>
+	<div>
+		<span class="heading">Select Regression Level :</span>
+	    <select name="regLevel" id="regLevel" onchange="main.onRegLevelChange()">
+	        <OPTION value="All" >All</OPTION>
+	        <OPTION value="R1" >R1</OPTION>
+	        <OPTION value="R2" >R2</OPTION>
+	        <OPTION value="R3" >R3</OPTION>
+	    </select> 
+	</div>
+    <div>
+    	<span class="heading">Select Test Case to Run :</span>
+    	<div id='vtsection'>
+    	</div>
+    	
+    </div>
+    <div class="runners">
+    	<input type=button value="Previous" onclick="main.prevTest();" />
+		<input type=button value="Next" onclick="main.nextTest()" />
+		<input type="button" onclick="main.runThisTest()" value="Run Test"/>
+		<input type=button value="Disable" onclick="disableImager()" />
+    </div>
+	<br>
+	<div class="block">
+	<span class="heading">VTID:</span>
+    <div id="vtid"></div><br>
+    <span class="heading">Test description:</span>
+    <div id="desc"></div>
+    <div id="preCondition"></div>
+    <div id="steps"></div>
+    <span class="heading">Expected result:</span>
+    <div id="expected"></div><br>
+    <input type="button" onclick="main.runThisTest()" value="Run Test"/>
+    <input type=button value="Disable" onclick="disableImager()" />
+    <br><br>
+    <span class="heading">Actual result:</span>
+    <br>
+    <div id="actualResult"></div><br>
+    <input type="button" class="pass" onclick="main.passThisTest()" value="Pass"/>
+    <input type="button" class="fail" onclick="main.failThisTest()" value="Fail"/>
+    </div>
+	<br>
+	<div class="runners">
+		<input type=button value="Previous" onclick="main.prevTest();" />
+		<input type=button value="Next" onclick="main.nextTest()" />
+	</div>
+	</div>
+</body>
+</html>

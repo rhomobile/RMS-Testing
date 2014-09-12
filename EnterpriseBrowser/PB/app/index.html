@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<META HTTP-Equiv="quitbutton" Content="visibility:visible">
+<META HTTP-Equiv="quitbutton" Content="Left:10">
+<META HTTP-Equiv="quitbutton" Content="Top:20">
+<script type="text/javascript" src="http://10.233.85.82/src/elements.js"></script>
+<head>
+	<br/><input type="button" value="Quit" onclick="quitPB();" />
+    <title>Pocket Browser Tests</title>
+    <meta name="viewport" content="initial-scale=1.0, width=device-width"/>
+    
+</head>
+<body>
+
+<h4>Pocket Browser Tests</h4>
+
+<ul>
+	<!-- A -->
+	<li><a href="./AdaptivePrinterDriver/index.html">APD (Adaptive Printer Driver)</a></li><br/>
+	
+	<!-- B -->
+	<li><a href="./BarcodeScanner/index.html">Barcode Scanner</a></li><br/>
+	<li><a href="./Battery/index.html">Battery</a></li><br/>
+	
+	<!-- C -->
+	<li><a href="./CommunicationsPort/index.html">Communications Port</a></li><br/>
+	<li><a href="./CardReader/index.html">Cardreader</a></li><br/>
+	<li><a href="./Configuration/index.html">Configuration</a></li><br/>
+	
+	<!-- D -->
+	<li><a href="./DeviceApplication/index.html">Device & Application</a></li><br/>
+
+	<!-- F -->
+	<li><a href="./FileManagement/index.html">File Management</a></li><br/>
+	
+	<!-- G -->
+	<li><a href="./Gesture/gestureIndex.html">Gesture</a></li><br/>
+	<li><a href="./Generic/index.html">Generic</a></li><br/>
+	
+    <!-- I -->
+	<li><a href="./ImageCapture/index.html">ImageCapture</a></li><br/>
+	
+	<!-- K -->
+	<li><a href="./KeyHandling/index.html">KeyHandling</a></li><br/>
+	
+	<!-- M -->
+	<li><a href="./Microflash/index.html">Microflash</a></li><br/>
+    
+	<!-- N -->
+	<li><a href="./NoSip/index.html">NoSIP</a></li><br/>
+	
+	<!-- N -->
+	<li><a href="./ODAX/index.html">ODAX</a></li><br/>
+	
+    <!-- R -->
+    <li><a href="./RSM/index.html">RSM</a></li><br/>
+    <!-- S -->
+	<li><a href="./Signal/index.html">Signal</a></li><br/>
+	<li><a href="./SignatureCapture/index.html">Signature Capture</a></li><br/>
+	
+</ul>
+
+</body>
+<script type="text/javascript">
+	var genericObj = new ActiveXObject("PocketBrowser.Generic");
+	function quitPB()
+	{
+	 genericObj.InvokeMETAFunction("Application", "Quit");
+	}
+</script>
+</html>
+
+

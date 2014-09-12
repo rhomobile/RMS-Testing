@@ -1,0 +1,49 @@
+<html>
+<head>
+    <title>Navigation Check</title>
+<META HTTP-Equiv="SIPbutton" Content="visibility:visible">
+
+<script language="javascript" type="text/javascript">
+var genericObj = new ActiveXObject("PocketBrowser.Generic");
+function onGesture(id,count)
+ {
+      document.getElementById("actual").innerHTML = "Gesture detected for "+EventCounter+"th time.<br>Gesture ID: " + id + ", Count: " + count;
+      EventCounter++;
+      
+      if(id=="Scan")
+      {
+      genericObj.InvokeMETAFunction("Scanner","enabled;start");
+      }
+      if(id=="Signal")
+      {
+      genericObj.InvokeMETAFunction("Signal","visibility:visible");
+      }
+      if(id=="Battery")
+      {
+      genericObj.InvokeMETAFunction("battery","visibility:visible");
+      }
+ }
+ 
+ function back()
+ {
+   genericObj.InvokeMETAFunction("gesture", "Delete");
+   window.location= " ./holdGesture.html";
+   }
+
+function runthis(){
+  genericObj.InvokeMETAFunction("gesture", "ID:LinearGesture;type:linear;startX:80;startY:100;endX:250;endY:100;Diagnostics:true;Create");
+   genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+}
+</script>
+
+
+</head>
+<body>
+<form id="frmHoldGestures" action="GestureProcess_Hold.asp" method="post" >
+<h2>Suucessfully navigated to gesture page</h2>
+<P> <a href = "//10.233.85.82/27server/RMS-Testing/EB_jasmine/app/index.html"> go to index page </a></P>
+<P><BR><INPUT TYPE="button" VALUE="Run this" ONCLICK="runthis();"></P>
+<P><BR><INPUT TYPE="button" VALUE="Back" ONCLICK="back();"></P>
+</form>
+</body>
+</html>

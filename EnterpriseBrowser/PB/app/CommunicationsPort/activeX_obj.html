@@ -1,0 +1,1195 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<br/><input type="button" value="Quit" onclick="quitPB();" />
+	<input type="button" value="Back"  onclick="location.href='./index.html'" />
+	<input type="button" value="Close" onclick="close();" />
+	<title>PB and RE2.2 Semi Auto Frame Work :</title>
+	<!--<link rel="stylesheet" type="text/css" href="css/main.css">-->
+	<style type="text/css">
+		.block{
+			background:#aabbcc;
+			border: 1px solid darkblue;
+		    margin: 5px;
+		    font-size: 11px;
+		    font-family: Monaco, "Lucida Console", monospace;
+		    line-height: 14px;
+		    color: #333333;
+		}
+		.title{
+			padding: 3px;
+		    font-size: 11px;
+		    font-family: Monaco, "Lucida Console", monospace;
+		    font-weight: bolder;
+		    background-color: steelblue;
+		    color: white;
+		}
+		.body{
+			background:#ddeeff;
+		}
+		.runners{
+			border: 1px solid darkblue;
+		    margin: 5px;
+		    font-family: Monaco, "Lucida Console", monospace;
+		    line-height: 14px;
+			padding: 3px;
+		    font-size: 12px;
+		    font-weight: bolder;
+		    background-color: #aabbcc;
+		    color: white;
+		}
+		.heading{
+			font-weight: bold;
+		}
+		.pass{
+			background:green;
+		}
+		.fail{
+			background:red;
+		}
+	</style>
+	<!--<script type="text/javascript" src="js/testCases.js"></script>-->
+	<script type="text/javascript" src="http://10.233.85.82/src/elements.js"></script>
+	<script type="text/javascript" >
+		var genericObj = new ActiveXObject("PocketBrowser.Generic");
+		function quitPB(){
+			genericObj.InvokeMETAFunction("Application", "Quit");
+		}
+		function close(){
+			genericObj.InvokeMETAFunction("Comm", "Close");
+		}
+		(function(){
+		var pbTest = function(){
+		var pbTestObj = {};
+		pbTestObj.testCases = [
+		{
+			"VTID":"VT056-1316",
+			"RegLevel":"R1",
+			"Description":"Communications Port<br/>Comm with chars to 500.",
+			"PreCondition":["Test Comm functionality with contents, 'port:com1','baudrate:19200','databits:8','stopbits:1','parity:no parity','handshake:none','chars:10','commevent:url(\'JavaScript:ProcessData(\"%s\")\')'.","Open HyperTerminal with default setting in the desktop and change the port to com1, baudrate 19200, databits to 8, stopbits to 1, parity to no parity, handshake to none"],
+			"Steps":[" Enter 500 characters in the console."],
+			"ExpectedOutcome":["The data that has been read from the communications port should be sent to the current PocketBrowser application, via the URI specified by the commevent parameter, after the specified number of characters has been recieved."],
+			"testToPerform":function(){
+				genericObj.InvokeMETAFunction("Comm", "BaudRate:19200;port:com1;databits:8;stopbits:1;parity:no parity;handshake:none;chars:10;commevent:url('JavaScript:mainObj.displayResult(\"%s\")')");
+				genericObj.InvokeMETAFunction('Comm', 'Open');
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056-1328",
+			"RegLevel":"R1",
+			"Description":"Communications Port<br/>WriteString with long data.",
+			"PreCondition":["Set valid parameters for these methods Port, Baudrate, Databits, Stopbits, Parity, Handshake"],
+			"Steps":["Pass long string to writestring parameter and check whether string is written to the communications port."],
+			"ExpectedOutcome":["The string should successfully written to the Port which is opened."],
+			"testToPerform":function(){
+				genericObj.InvokeMETAFunction("Comm", "BaudRate:19200;port:com1;databits:8;stopbits:1;parity:Even;handshake:HW;chars:10;commevent:url('JavaScript:main.displayResult(\"%s\")')");
+				genericObj.InvokeMETAFunction('Comm', 'Open');
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056-1338",
+			"RegLevel":"R1",
+			"Description":"Communications Port<br/>Autoenter with enable.",
+			"PreCondition":["Set valid parameters for these methods Port, Baudrate, Databits, Stopbits, Parity, Handshake","Enable to autoenter property and keep no URL specified for commevent.","Open HyperTerminal with default setting in the desktop and change the port to com1, baudrate 19200, databits to 8, stopbits to 1, parity to no parity, handshake to none"],
+			"Steps":["Enter some data through key strokes."],
+			"ExpectedOutcome":["received data is being received as keystrokes and each block received will have a CR (Carriage Return) character appended to it."],
+			"testToPerform":function(){
+				genericObj.InvokeMETAFunction("Comm", "BaudRate:19200;port:com1;databits:8;stopbits:1;parity:Even;handshake:HW;chars:10");
+				genericObj.InvokeMETAFunction('Comm', 'Open');
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056-1276",
+			"RegLevel":"R3",
+			"Description":"Comm with Open",
+			"PreCondition":[],
+			"Steps":["1. Test Comm functionality with content='Open'",
+			"2. Test Comm functionality with content=commevent:url('JavaScript:ProcessData('%s')')",
+			"3. Open HyperTerminal with default setting in the desktop",
+            "4. Press enter after entering some data in the console"],
+			"ExpectedOutcome":["The data that has been read from the communications port should be sent to the current PocketBrowser application, via the URI specified by the commevent parameter, after the specified number of characters has been recieved.","The communication port should open with default settings i.e. baudrate:9600,databits:8,stopbits:1,parity:no parity,handshake:none and port:com1"],
+			"testToPerform":function(){
+				genericObj.InvokeMETAFunction("Comm", "commevent:url('JavaScript:main.displayResult(\"%s\")')");
+				genericObj.InvokeMETAFunction('Comm', 'Open');
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056-1277",
+			"RegLevel":"R3",
+			"Description":"Comm with baudrate 110",
+			"PreCondition":[],
+			"Steps":["1. Test Comm functionality with content='baudrate:110'",
+			         "2. Test Comm functionality with content=commevent:url('JavaScript:ProcessData('%s')')",
+			         "3. Open HyperTerminal with default setting in the desktop and change the baudrate to 110",
+			         "4. Press enter after entering some data in the console"],
+			"ExpectedOutcome":["The data that has been read from the communications port should be sent to the current PocketBrowser application, via the URI specified by the commevent parameter, after the specified number of characters has been recieved.","The communication port should open with specified baud rate and previous settings i.e. databits:8,stopbits:1,parity:no parity,handshake:none and port:com1"],
+			"testToPerform":function(){
+				genericObj.InvokeMETAFunction("Comm", "BaudRate:110;commevent:url('JavaScript:main.displayResult(\"%s\")')");
+				genericObj.InvokeMETAFunction('Comm', 'Open');
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056-1278",
+			"RegLevel":"R3",
+			"Description":"Comm with baudrate 300",
+			"PreCondition":[],
+			"Steps":["1. Test Comm functionality with content='baudrate:300'",
+			         "2. Test Comm functionality with content=commevent:url('JavaScript:ProcessData('%s')')",
+			         "3. Open HyperTerminal with default setting in the desktop and change the baudrate to 300",
+			         "4. Press enter after entering some data in the console"],
+			"ExpectedOutcome":["The data that has been read from the communications port should be sent to the current PocketBrowser application, via the URI specified by the commevent parameter, after the specified number of characters has been recieved.","The communication port should open with default settings i.e. databits:8,stopbits:1,parity:no parity,handshake:none and port:com1"],
+			"testToPerform":function(){
+				genericObj.InvokeMETAFunction("Comm", "BaudRate:300;commevent:url('JavaScript:main.displayResult(\"%s\")')");
+				genericObj.InvokeMETAFunction('Comm', 'Open');
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056-1279",
+			"RegLevel":"R3",
+			"Description":"Comm with baudrate 600",
+			"PreCondition":[],
+			"Steps":["1. Test Comm functionality with content='baudrate:600'",
+			         "2. Test Comm functionality with content=commevent:url('JavaScript:ProcessData('%s')')",
+			         "3. Open HyperTerminal with default setting in the desktop and change the baudrate to 600",
+			         "4. Press enter after entering some data in the console"],
+			"ExpectedOutcome":["The data that has been read from the communications port should be sent to the current PocketBrowser application, via the URI specified by the commevent parameter, after the specified number of characters has been recieved.","The communication port should open with specified baud rate and previous settings i.e. databits:8,stopbits:1,parity:no parity,handshake:none and port:com1"],
+			"testToPerform":function(){
+				genericObj.InvokeMETAFunction("Comm", "BaudRate:600;commevent:url('JavaScript:main.displayResult(\"%s\")')");
+				genericObj.InvokeMETAFunction('Comm', 'Open');
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056-1280",
+			"RegLevel":"R3",
+			"Description":"Comm with baudrate 1200",
+			"PreCondition":[],
+			"Steps":["1. Test Comm functionality with content='baudrate:1200'",
+			         "2. Test Comm functionality with content=commevent:url('JavaScript:ProcessData('%s')')",
+			         "3. Open HyperTerminal with default setting in the desktop and change the baudrate to 1200",
+			         "4. Press enter after entering some data in the console"],
+			"ExpectedOutcome":["The data that has been read from the communications port should be sent to the current PocketBrowser application, via the URI specified by the commevent parameter, after the specified number of characters has been recieved.","The communication port should open with specified baud rate and previous settings i.e. databits:8,stopbits:1,parity:no parity,handshake:none and port:com1"],
+			"testToPerform":function(){
+				genericObj.InvokeMETAFunction("Comm", "BaudRate:1200;commevent:url('JavaScript:main.displayResult(\"%s\")')");
+				genericObj.InvokeMETAFunction('Comm', 'Open');
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056-1281",
+			"RegLevel":"R3",
+			"Description":"Comm with baudrate 2400",
+			"PreCondition":[],
+			"Steps":["1. Test Comm functionality with content='baudrate:2400'",
+			         "2. Test Comm functionality with content=commevent:url('JavaScript:ProcessData('%s')')",
+			         "3. Open HyperTerminal with default setting in the desktop and change the baudrate to 2400",
+			         "4. Press enter after entering some data in the console"],
+			"ExpectedOutcome":["The data that has been read from the communications port should be sent to the current PocketBrowser application, via the URI specified by the commevent parameter, after the specified number of characters has been recieved.","The communication port should open with specified baud rate and previous settings i.e. databits:8,stopbits:1,parity:no parity,handshake:none and port:com1"],
+			"testToPerform":function(){
+				genericObj.InvokeMETAFunction("Comm", "BaudRate:2400;commevent:url('JavaScript:main.displayResult(\"%s\")')");
+				genericObj.InvokeMETAFunction('Comm', 'Open');
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056-1282",
+			"RegLevel":"R3",
+			"Description":"Comm with baudrate 4800",
+			"PreCondition":[],
+			"Steps":["1. Test Comm functionality with content='baudrate:4800'",
+			         "2. Test Comm functionality with content=commevent:url('JavaScript:ProcessData('%s')')",
+			         "3. Open HyperTerminal with default setting in the desktop and change the baudrate to 4800",
+			         "4. Press enter after entering some data in the console"],
+			"ExpectedOutcome":["The data that has been read from the communications port should be sent to the current PocketBrowser application, via the URI specified by the commevent parameter, after the specified number of characters has been recieved.","The communication port should open with specified baud rate and previous settings i.e. databits:8,stopbits:1,parity:no parity,handshake:none and port:com1"],
+			"testToPerform":function(){
+				genericObj.InvokeMETAFunction("Comm", "BaudRate:4800;commevent:url('JavaScript:main.displayResult(\"%s\")')");
+				genericObj.InvokeMETAFunction('Comm', 'Open');
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056-1283",
+			"RegLevel":"R3",
+			"Description":"Comm with baudrate 9600",
+			"PreCondition":[],
+			"Steps":["1. Test Comm functionality with content='baudrate:9600'",
+			         "2. Test Comm functionality with content=commevent:url('JavaScript:ProcessData('%s')')",
+			         "3. Open HyperTerminal with default setting in the desktop and change the baudrate to 9600",
+			         "4. Press enter after entering some data in the console"],
+			"ExpectedOutcome":["The data that has been read from the communications port should be sent to the current PocketBrowser application, via the URI specified by the commevent parameter, after the specified number of characters has been recieved.","The communication port should open with specified baud rate and previous settings i.e. databits:8,stopbits:1,parity:no parity,handshake:none and port:com1"],
+			"testToPerform":function(){
+				genericObj.InvokeMETAFunction("Comm", "BaudRate:9600;commevent:url('JavaScript:main.displayResult(\"%s\")')");
+				genericObj.InvokeMETAFunction('Comm', 'Open');
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056-1284",
+			"RegLevel":"R3",
+			"Description":"Comm with baudrate 14400",
+			"PreCondition":[],
+			"Steps":["1. Test Comm functionality with content='baudrate:14400'",
+			         "2. Test Comm functionality with content=commevent:url('JavaScript:ProcessData('%s')')",
+			         "3. Open HyperTerminal with default setting in the desktop and change the baudrate to 14400",
+			         "4. Press enter after entering some data in the console"],
+			"ExpectedOutcome":["The data that has been read from the communications port should be sent to the current PocketBrowser application, via the URI specified by the commevent parameter, after the specified number of characters has been recieved.","The communication port should open with specified baud rate and previous settings i.e. databits:8,stopbits:1,parity:no parity,handshake:none and port:com1"],
+			"testToPerform":function(){
+				genericObj.InvokeMETAFunction("Comm", "BaudRate:14400;commevent:url('JavaScript:main.displayResult(\"%s\")')");
+				genericObj.InvokeMETAFunction('Comm', 'Open');
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056-1285",
+			"RegLevel":"R3",
+			"Description":"Comm with baudrate 19200",
+			"PreCondition":[],
+			"Steps":["1. Test Comm functionality with content='baudrate:19200'",
+			         "2. Test Comm functionality with content=commevent:url('JavaScript:ProcessData('%s')')",
+			         "3. Open HyperTerminal with default setting in the desktop and change the baudrate to 19200",
+			         "4. Press enter after entering some data in the console"],
+			"ExpectedOutcome":["The data that has been read from the communications port should be sent to the current PocketBrowser application, via the URI specified by the commevent parameter, after the specified number of characters has been recieved.","The communication port should open with specified baud rate and previous settings i.e. databits:8,stopbits:1,parity:no parity,handshake:none and port:com1"],
+			"testToPerform":function(){
+				genericObj.InvokeMETAFunction("Comm", "BaudRate:19200;commevent:url('JavaScript:main.displayResult(\"%s\")')");
+				genericObj.InvokeMETAFunction('Comm', 'Open');
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056-1286",
+			"RegLevel":"R3",
+			"Description":"Comm with baudrate 38400",
+			"PreCondition":[],
+			"Steps":["1. Test Comm functionality with content='baudrate:38400'",
+			         "2. Test Comm functionality with content=commevent:url('JavaScript:ProcessData('%s')')",
+			         "3. Open HyperTerminal with default setting in the desktop and change the baudrate to 38400",
+			         "4. Press enter after entering some data in the console"],
+			"ExpectedOutcome":["The data that has been read from the communications port should be sent to the current PocketBrowser application, via the URI specified by the commevent parameter, after the specified number of characters has been recieved.","The communication port should open with specified baud rate and previous settings i.e. databits:8,stopbits:1,parity:no parity,handshake:none and port:com1"],
+			"testToPerform":function(){
+				genericObj.InvokeMETAFunction("Comm", "BaudRate:38400;commevent:url('JavaScript:main.displayResult(\"%s\")')");
+				genericObj.InvokeMETAFunction('Comm', 'Open');
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056-1287",
+			"RegLevel":"R3",
+			"Description":"Comm with baudrate 56000",
+			"PreCondition":[],
+			"Steps":["1. Test Comm functionality with content='baudrate:56000'",
+			         "2. Test Comm functionality with content=commevent:url('JavaScript:ProcessData('%s')')",
+			         "3. Open HyperTerminal with default setting in the desktop and change the baudrate to 56000",
+			         "4. Press enter after entering some data in the console"],
+			"ExpectedOutcome":["The data that has been read from the communications port should be sent to the current PocketBrowser application, via the URI specified by the commevent parameter, after the specified number of characters has been recieved.","The communication port should open with specified baud rate and previous settings i.e. databits:8,stopbits:1,parity:no parity,handshake:none and port:com1"],
+			"testToPerform":function(){
+				genericObj.InvokeMETAFunction("Comm", "BaudRate:56000;commevent:url('JavaScript:main.displayResult(\"%s\")')");
+				genericObj.InvokeMETAFunction('Comm', 'Open');
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056-1288",
+			"RegLevel":"R3",
+			"Description":"Comm with baudrate 57600",
+			"PreCondition":[],
+			"Steps":["1. Test Comm functionality with content='baudrate:57600'",
+			         "2. Test Comm functionality with content=commevent:url('JavaScript:ProcessData('%s')')",
+			         "3. Open HyperTerminal with default setting in the desktop and change the baudrate to 57600",
+			         "4. Press enter after entering some data in the console"],
+			"ExpectedOutcome":["The data that has been read from the communications port should be sent to the current PocketBrowser application, via the URI specified by the commevent parameter, after the specified number of characters has been recieved.","The communication port should open with specified baud rate and previous settings i.e. databits:8,stopbits:1,parity:no parity,handshake:none and port:com1"],
+			"testToPerform":function(){
+				genericObj.InvokeMETAFunction("Comm", "BaudRate:57600;commevent:url('JavaScript:main.displayResult(\"%s\")')");
+				genericObj.InvokeMETAFunction('Comm', 'Open');
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056-1289",
+			"RegLevel":"R3",
+			"Description":"Comm with baudrate 115200",
+			"PreCondition":[],
+			"Steps":["1. Test Comm functionality with content='baudrate:115200'",
+			         "2. Test Comm functionality with content=commevent:url('JavaScript:ProcessData('%s')')",
+			         "3. Open HyperTerminal with default setting in the desktop and change the baudrate to 115200",
+			         "4. Press enter after entering some data in the console"],
+			"ExpectedOutcome":["The data that has been read from the communications port should be sent to the current PocketBrowser application, via the URI specified by the commevent parameter, after the specified number of characters has been recieved.","The communication port should open with specified baud rate and previous settings i.e. databits:8,stopbits:1,parity:no parity,handshake:none and port:com1"],
+			"testToPerform":function(){
+				genericObj.InvokeMETAFunction("Comm", "BaudRate:115200;commevent:url('JavaScript:main.displayResult(\"%s\")')");
+				genericObj.InvokeMETAFunction('Comm', 'Open');
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056-1293",
+			"RegLevel":"R3",
+			"Description":"Comm with databits 5",
+			"PreCondition":[],
+			"Steps":["1. Test Comm functionality with content='databits:5'",
+			         "2. Test Comm functionality with content=commevent:url('JavaScript:ProcessData(\"%s\")')",
+			         "3. Open HyperTerminal with default setting in the desktop and change the databits to 5",
+			         "4. Press enter after entering some data in the console"],
+			"ExpectedOutcome":["The data that has been read from the communications port should be sent to the current PocketBrowser application, via the URI specified by the commevent parameter, after the specified number of characters has been recieved.","The communication port should open with default settings i.e. baudrate:9600,stopbits:1,parity:no parity,handshake:none and port:com1"],
+			"testToPerform":function(){
+				genericObj.InvokeMETAFunction("Comm", "databits:5;commevent:url('JavaScript:main.displayResult(\"%s\")')");
+				genericObj.InvokeMETAFunction('Comm', 'Open');
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056-1294",
+			"RegLevel":"R3",
+			"Description":"Comm with databits 6",
+			"PreCondition":[],
+			"Steps":["1. Test Comm functionality with content='databits:6'",
+			         "2. Test Comm functionality with content=commevent:url('JavaScript:ProcessData(\"%s\")')",
+			         "3. Open HyperTerminal with default setting in the desktop and change the databits to 6",
+			         "4. Press enter after entering some data in the console"],
+			"ExpectedOutcome":["The data that has been read from the communications port should be sent to the current PocketBrowser application, via the URI specified by the commevent parameter, after the specified number of characters has been recieved.","The communication port should open with default settings i.e. baudrate:9600,stopbits:1,parity:no parity,handshake:none and port:com1"],
+			"testToPerform":function(){
+				genericObj.InvokeMETAFunction("Comm", "databits:6;commevent:url('JavaScript:main.displayResult(\"%s\")')");
+				genericObj.InvokeMETAFunction('Comm', 'Open');
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056-1295",
+			"RegLevel":"R3",
+			"Description":"Comm with databits 7",
+			"PreCondition":[],
+			"Steps":["1. Test Comm functionality with content='databits:5'",
+			         "2. Test Comm functionality with content=commevent:url('JavaScript:ProcessData(\"%s\")')",
+			         "3. Open HyperTerminal with default setting in the desktop and change the databits to 7",
+			         "4. Press enter after entering some data in the console"],
+			"ExpectedOutcome":["The data that has been read from the communications port should be sent to the current PocketBrowser application, via the URI specified by the commevent parameter, after the specified number of characters has been recieved.","The communication port should open with default settings i.e. baudrate:9600,stopbits:1,parity:no parity,handshake:none and port:com1"],
+			"testToPerform":function(){
+				genericObj.InvokeMETAFunction("Comm", "databits:7;commevent:url('JavaScript:main.displayResult(\"%s\")')");
+				genericObj.InvokeMETAFunction('Comm', 'Open');
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056-1296",
+			"RegLevel":"R3",
+			"Description":"Comm with databits 8",
+			"PreCondition":[],
+			"Steps":["1. Test Comm functionality with content='databits:5'",
+			         "2. Test Comm functionality with content=commevent:url('JavaScript:ProcessData(\"%s\")')",
+			         "3. Open HyperTerminal with default setting in the desktop and change the databits to 8",
+			         "4. Press enter after entering some data in the console"],
+			"ExpectedOutcome":["The data that has been read from the communications port should be sent to the current PocketBrowser application, via the URI specified by the commevent parameter, after the specified number of characters has been recieved.","The communication port should open with default settings i.e. baudrate:9600,stopbits:1,parity:no parity,handshake:none and port:com1"],
+			"testToPerform":function(){
+				genericObj.InvokeMETAFunction("Comm", "databits:8;commevent:url('JavaScript:main.displayResult(\"%s\")')");
+				genericObj.InvokeMETAFunction('Comm', 'Open');
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056-1297",
+			"RegLevel":"R3",
+			"Description":"Comm with databits 9",
+			"PreCondition":[],
+			"Steps":["1. Test Comm functionality with content='databits:5'",
+			         "2. Test Comm functionality with content=commevent:url('JavaScript:ProcessData(\"%s\")')",
+			         "3. Open HyperTerminal with default setting in the desktop and change the databits to 9",
+			         "4. Press enter after entering some data in the console"],
+			"ExpectedOutcome":["The data that has been read from the communications port should be sent to the current PocketBrowser application, via the URI specified by the commevent parameter, after the specified number of characters has been recieved.","The communication port should open with default settings i.e. baudrate:9600,stopbits:1,parity:no parity,handshake:none and port:com1"],
+			"testToPerform":function(){
+				genericObj.InvokeMETAFunction("Comm", "databits:9;commevent:url('JavaScript:main.displayResult(\"%s\")')");
+				genericObj.InvokeMETAFunction('Comm', 'Open');
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056-1298",
+			"RegLevel":"R3",
+			"Description":"Comm with databits 1",
+			"PreCondition":[],
+			"Steps":["1. Test Comm functionality with content='databits:1'",
+			         "2. Test Comm functionality with content=commevent:url('JavaScript:ProcessData(\"%s\")')",
+			         "3. Open HyperTerminal with default setting in the desktop and change the databits to 8",
+			         "4. Press enter after entering some data in the console"],
+			"ExpectedOutcome":["The data that has been read from the communications port should be sent to the current PocketBrowser application, via the URI specified by the commevent parameter, after the specified number of characters has been recieved.","The communication port should open with default settings i.e. baudrate:9600,databits:8,stopbits:1,parity:no parity,handshake:none and port:com1"],
+			"testToPerform":function(){
+				genericObj.InvokeMETAFunction("Comm", "databits:1;commevent:url('JavaScript:main.displayResult(\"%s\")')");
+				genericObj.InvokeMETAFunction('Comm', 'Open');
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056-1299",
+			"RegLevel":"R3",
+			"Description":"Comm with stopbits 1",
+			"PreCondition":[],
+			"Steps":["1. Test Comm functionality with content='stopbits:1'",
+			         "2. Test Comm functionality with content=commevent:url('JavaScript:ProcessData(\"%s\")')",
+			         "3. Open HyperTerminal with default setting in the desktop and change the stopbits to 1",
+			         "4. Press enter after entering some data in the console"],
+			"ExpectedOutcome":["The data that has been read from the communications port should be sent to the current PocketBrowser application, via the URI specified by the commevent parameter, after the specified number of characters has been recieved.","The communication port should open with default settings i.e. baudrate:9600,databits:8,parity:no parity,handshake:none and port:com1"],
+			"testToPerform":function(){
+				genericObj.InvokeMETAFunction("Comm", "stopbits:1;commevent:url('JavaScript:main.displayResult(\"%s\")')");
+				genericObj.InvokeMETAFunction('Comm', 'Open');
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056-1300",
+			"RegLevel":"R3",
+			"Description":"Comm with stopbits 1.5",
+			"PreCondition":[],
+			"Steps":["1. Test Comm functionality with content='stopbits:1.5'",
+			         "2. Test Comm functionality with content=commevent:url('JavaScript:ProcessData(\"%s\")')",
+			         "3. Open HyperTerminal with default setting in the desktop and change the stopbits to 1.5",
+			         "4. Press enter after entering some data in the console"],
+			"ExpectedOutcome":["The data that has been read from the communications port should be sent to the current PocketBrowser application, via the URI specified by the commevent parameter, after the specified number of characters has been recieved.","The communication port should open with default settings i.e. baudrate:9600,databits:8,parity:no parity,handshake:none and port:com1"],
+			"testToPerform":function(){
+				genericObj.InvokeMETAFunction("Comm", "stopbits:1.5;commevent:url('JavaScript:main.displayResult(\"%s\")')");
+				genericObj.InvokeMETAFunction('Comm', 'Open');
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056-1301",
+			"RegLevel":"R3",
+			"Description":"Comm with stopbits 2",
+			"PreCondition":[],
+			"Steps":["1. Test Comm functionality with content='stopbits:2'",
+			         "2. Test Comm functionality with content=commevent:url('JavaScript:ProcessData(\"%s\")')",
+			         "3. Open HyperTerminal with default setting in the desktop and change the stopbits to 2",
+			         "4. Press enter after entering some data in the console"],
+			"ExpectedOutcome":["The data that has been read from the communications port should be sent to the current PocketBrowser application, via the URI specified by the commevent parameter, after the specified number of characters has been recieved.","The communication port should open with default settings i.e. baudrate:9600,databits:8,parity:no parity,handshake:none and port:com1"],
+			"testToPerform":function(){
+				genericObj.InvokeMETAFunction("Comm", "stopbits:2;commevent:url('JavaScript:main.displayResult(\"%s\")')");
+				genericObj.InvokeMETAFunction('Comm', 'Open');
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056-1302",
+			"RegLevel":"R3",
+			"Description":"Comm with stopbits 3",
+			"PreCondition":[],
+			"Steps":["1. Test Comm functionality with content='stopbits:2'",
+			         "2. Test Comm functionality with content=commevent:url('JavaScript:ProcessData(\"%s\")')",
+			         "3. Open HyperTerminal with default setting in the desktop and change the stopbits to 1",
+			         "4. Press enter after entering some data in the console"],
+			"ExpectedOutcome":["The data that has been read from the communications port should be sent to the current PocketBrowser application, via the URI specified by the commevent parameter, after the specified number of characters has been recieved.","The communication port should open with default settings i.e. baudrate:9600,databits:8,parity:no parity,handshake:none and port:com1"],
+			"testToPerform":function(){
+				genericObj.InvokeMETAFunction("Comm", "stopbits:3;commevent:url('JavaScript:main.displayResult(\"%s\")')");
+				genericObj.InvokeMETAFunction('Comm', 'Open');
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056-1303",
+			"RegLevel":"R3",
+			"Description":"Comm with parity even",
+			"PreCondition":[],
+			"Steps":["1. Test Comm functionality with content='parity:even'",
+			         "2. Test Comm functionality with content=commevent:url('JavaScript:ProcessData(\"%s\")')",
+			         "3. Open HyperTerminal with default setting in the desktop and change the parity to even",
+			         "4. Press enter after entering some data in the console"],
+			"ExpectedOutcome":["The data that has been read from the communications port should be sent to the current PocketBrowser application, via the URI specified by the commevent parameter, after the specified number of characters has been recieved.","The communication port should open with default settings i.e. baudrate:9600,databits:8,stopbits:1,handshake:none and port:com1"],
+			"testToPerform":function(){
+				genericObj.InvokeMETAFunction("Comm", "parity:Even;commevent:url('JavaScript:main.displayResult(\"%s\")')");
+				genericObj.InvokeMETAFunction('Comm', 'Open');
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056-1304",
+			"RegLevel":"R3",
+			"Description":"Comm with parity odd",
+			"PreCondition":[],
+			"Steps":["1. Test Comm functionality with content='parity:odd'",
+			         "2. Test Comm functionality with content=commevent:url('JavaScript:ProcessData(\"%s\")')",
+			         "3. Open HyperTerminal with default setting in the desktop and change the parity to odd",
+			         "4. Press enter after entering some data in the console"],
+			"ExpectedOutcome":["The data that has been read from the communications port should be sent to the current PocketBrowser application, via the URI specified by the commevent parameter, after the specified number of characters has been recieved.","The communication port should open with default settings i.e. baudrate:9600,databits:8,stopbits:1,handshake:none and port:com1"],
+			"testToPerform":function(){
+				genericObj.InvokeMETAFunction("Comm", "parity:Odd;commevent:url('JavaScript:main.displayResult(\"%s\")')");
+				genericObj.InvokeMETAFunction('Comm', 'Open');
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056-1305",
+			"RegLevel":"R3",
+			"Description":"Comm with parity mark",
+			"PreCondition":[],
+			"Steps":["1. Test Comm functionality with content='parity:mark'",
+			         "2. Test Comm functionality with content=commevent:url('JavaScript:ProcessData(\"%s\")')",
+			         "3. Open HyperTerminal with default setting in the desktop and change the parity to mark",
+			         "4. Press enter after entering some data in the console"],
+			"ExpectedOutcome":["The data that has been read from the communications port should be sent to the current PocketBrowser application, via the URI specified by the commevent parameter, after the specified number of characters has been recieved.","The communication port should open with default settings i.e. baudrate:9600,databits:8,stopbits:1,handshake:none and port:com1"],
+			"testToPerform":function(){
+				genericObj.InvokeMETAFunction("Comm", "parity:Mark;commevent:url('JavaScript:main.displayResult(\"%s\")')");
+				genericObj.InvokeMETAFunction('Comm', 'Open');
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056-1306",
+			"RegLevel":"R3",
+			"Description":"Comm with parity space",
+			"PreCondition":[],
+			"Steps":["1. Test Comm functionality with content='parity:space'",
+			         "2. Test Comm functionality with content=commevent:url('JavaScript:ProcessData(\"%s\")')",
+			         "3. Open HyperTerminal with default setting in the desktop and change the parity to space",
+			         "4. Press enter after entering some data in the console"],
+			"ExpectedOutcome":["The data that has been read from the communications port should be sent to the current PocketBrowser application, via the URI specified by the commevent parameter, after the specified number of characters has been recieved.","The communication port should open with default settings i.e. baudrate:9600,databits:8,stopbits:1,handshake:none and port:com1"],
+			"testToPerform":function(){
+				genericObj.InvokeMETAFunction("Comm", "parity:Space;commevent:url('JavaScript:main.displayResult(\"%s\")')");
+				genericObj.InvokeMETAFunction('Comm', 'Open');
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056-1307",
+			"RegLevel":"R3",
+			"Description":"Comm with parity no parity",
+			"PreCondition":[],
+			"Steps":["1. Test Comm functionality with content='parity:no'",
+			         "2. Test Comm functionality with content=commevent:url('JavaScript:ProcessData(\"%s\")')",
+			         "3. Open HyperTerminal with default setting in the desktop and change the parity to no parity",
+			         "4. Press enter after entering some data in the console"],
+			"ExpectedOutcome":["The data that has been read from the communications port should be sent to the current PocketBrowser application, via the URI specified by the commevent parameter, after the specified number of characters has been recieved.","The communication port should open with default settings i.e. baudrate:9600,databits:8,stopbits:1,handshake:none and port:com1"],
+			"testToPerform":function(){
+				genericObj.InvokeMETAFunction("Comm", "parity:No Parity;commevent:url('JavaScript:main.displayResult(\"%s\")')");
+				genericObj.InvokeMETAFunction('Comm', 'Open');
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056-1308",
+			"RegLevel":"R3",
+			"Description":"Comm with parity parity",
+			"PreCondition":[],
+			"Steps":["1. Test Comm functionality with content='parity:even'",
+			         "2. Test Comm functionality with content=commevent:url('JavaScript:ProcessData(\"%s\")')",
+			         "3. Open HyperTerminal with default setting in the desktop and change the parity to no parity",
+			         "4. Press enter after entering some data in the console"],
+			"ExpectedOutcome":["The data that has been read from the communications port should be sent to the current PocketBrowser application, via the URI specified by the commevent parameter, after the specified number of characters has been recieved.","The communication port should open with default settings i.e. baudrate:9600,databits:8,stopbits:1,parity:no parity,handshake:none and port:com1"],
+			"testToPerform":function(){
+				genericObj.InvokeMETAFunction("Comm", "parity:Parity;commevent:url('JavaScript:main.displayResult(\"%s\")')");
+				genericObj.InvokeMETAFunction('Comm', 'Open');
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056-1309",
+			"RegLevel":"R3",
+			"Description":"Comm with handshake to hw",
+			"PreCondition":[],
+			"Steps":["1. Test Comm functionality with content='handshake:hw'",
+			         "2. Test Comm functionality with content=commevent:url('JavaScript:ProcessData(\"%s\")')",
+			         "3. Open HyperTerminal with default setting in the desktop and change the handshake to hw",
+			         "4. Press enter after entering some data in the console"],
+			"ExpectedOutcome":["The data that has been read from the communications port should be sent to the current PocketBrowser application, via the URI specified by the commevent parameter, after crlf has been recieved.","The communication port should open with default settings i.e. baudrate:9600,databits:8,stopbits:1,parity:no parity and port:com1"],
+			"testToPerform":function(){
+				genericObj.InvokeMETAFunction("Comm", "handshake:HW;commevent:url('JavaScript:main.displayResult(\"%s\")')");
+				genericObj.InvokeMETAFunction('Comm', 'Open');
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056-1310",
+			"RegLevel":"R3",
+			"Description":"Comm with handshake to sw",
+			"PreCondition":[],
+			"Steps":["1. Test Comm functionality with content='handshake:sw'",
+			         "2. Test Comm functionality with content=commevent:url('JavaScript:ProcessData(\"%s\")')",
+			         "3. Open HyperTerminal with default setting in the desktop and change the handshake to sw",
+			         "4. Press enter after entering some data in the console"],
+			"ExpectedOutcome":["The data that has been read from the communications port should be sent to the current PocketBrowser application, via the URI specified by the commevent parameter, after crlf has been recieved.","The communication port should open with default settings i.e. baudrate:9600,databits:8,stopbits:1,parity:no parity and port:com1"],
+			"testToPerform":function(){
+				genericObj.InvokeMETAFunction("Comm", "handshake:SW;commevent:url('JavaScript:main.displayResult(\"%s\")')");
+				genericObj.InvokeMETAFunction('Comm', 'Open');
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056-1311",
+			"RegLevel":"R3",
+			"Description":"Comm with handshake to none",
+			"PreCondition":[],
+			"Steps":["1. Test Comm functionality with content='handshake:none'",
+			         "2. Test Comm functionality with content=commevent:url('JavaScript:ProcessData(\"%s\")')",
+			         "3. Open HyperTerminal with default setting in the desktop and change the handshake to none",
+			         "4. Press enter after entering some data in the console"],
+			"ExpectedOutcome":["The data that has been read from the communications port should be sent to the current PocketBrowser application, via the URI specified by the commevent parameter, after crlf has been recieved.","The communication port should open with default settings i.e. baudrate:9600,databits:8,stopbits:1,parity:no parity and port:com1"],
+			"testToPerform":function(){
+				genericObj.InvokeMETAFunction("Comm", "handshake:none;commevent:url('JavaScript:main.displayResult(\"%s\")')");
+				genericObj.InvokeMETAFunction('Comm', 'Open');
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056-1312",
+			"RegLevel":"R3",
+			"Description":"Comm with handshake to hwsw",
+			"PreCondition":[],
+			"Steps":["1. Test Comm functionality with content='handshake:hwsw'",
+			         "2. Test Comm functionality with content=commevent:url('JavaScript:ProcessData(\"%s\")')",
+			         "3. Open HyperTerminal with default setting in the desktop and change the handshake to none",
+			         "4. Press enter after entering some data in the console"],
+			"ExpectedOutcome":["The data that has been read from the communications port should be sent to the current PocketBrowser application, via the URI specified by the commevent parameter, after crlf has been recieved.","The communication port should open with default settings i.e. baudrate:9600,databits:8,stopbits:1,parity:no parity,handshake:none and port:com1"],
+			"testToPerform":function(){
+				genericObj.InvokeMETAFunction("Comm", "handshake:HWSW;commevent:url('JavaScript:main.displayResult(\"%s\")')");
+				genericObj.InvokeMETAFunction('Comm', 'Open');
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056-1313",
+			"RegLevel":"R3",
+			"Description":"Comm with port to com1",
+			"PreCondition":[],
+			"Steps":["1. Test Comm functionality with content='port:com1'",
+			         "2. Test Comm functionality with content=commevent:url('JavaScript:ProcessData(\"%s\")')",
+			         "3. Open HyperTerminal with default setting in the desktop and change the port to com1",
+			         "4. Press enter after entering some data in the console"],
+			"ExpectedOutcome":["The data that has been read from the communications port should be sent to the current PocketBrowser application, via the URI specified by the commevent parameter, after crlf has been recieved.","The communication port should open with default settings i.e. baudrate:9600,databits:8,stopbits:1,parity:no parity and handshake:none"],
+			"testToPerform":function(){
+				genericObj.InvokeMETAFunction("Comm", "port:com1;commevent:url('JavaScript:main.displayResult(\"%s\")')");
+				genericObj.InvokeMETAFunction('Comm', 'Open');
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056-1314",
+			"RegLevel":"R3",
+			"Description":"Comm with port to comA",
+			"PreCondition":[],
+			"Steps":["1. Test Comm functionality with content='port:comA'",
+			         "2. Test Comm functionality with content=commevent:url('JavaScript:ProcessData(\"%s\")')",
+			         "3. Open HyperTerminal with default setting in the desktop and change the port to com1",
+			         "4. Press enter after entering some data in the console"],
+			"ExpectedOutcome":[" will result in an error log when an attempt is made to open the port"],
+			"testToPerform":function(){
+				genericObj.InvokeMETAFunction("Comm", "port:comA;commevent:url('JavaScript:main.displayResult(\"%s\")')");
+				genericObj.InvokeMETAFunction('Comm', 'Open');
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056-1315",
+			"RegLevel":"R3",
+			"Description":"Comm with chars to 10",
+			"PreCondition":[],
+			"Steps":["1. Test Comm functionality with content='port:com1'",
+			         "2. Test Comm functionality with content='baudrate:19200'",
+			         "3. Test Comm functionality with content='databits:8'",
+			         "4. Test Comm functionality with content='stopbits:1'",
+			         "5. Test Comm functionality with content='parity:no parity'",
+			         "6. Test Comm functionality with content='handshake:none'",
+			         "7. Test Comm functionality with content='chars:10'",
+			         "8. Test Comm functionality with content=commevent:url('JavaScript:ProcessData(\"%s\")')",
+			         "9. Open HyperTerminal with default setting in the desktop and change the port to com1, baudrate 19200, databits to 8, stopbits to 1, parity to no parity, handshake to none",
+			         "10. Enter 10 characters in the console"],
+			"ExpectedOutcome":[" The data that has been read from the communications port should be sent to the current PocketBrowser application, via the URI specified by the commevent parameter, after the specified number of characters has been recieved."],
+			"testToPerform":function(){
+				genericObj.InvokeMETAFunction("Comm", "BaudRate:19200;port:com1;databits:8;stopbits:1;parity:No Parity;handshake:none;chars:10;commevent:url('JavaScript:main.displayResult(\"%s\")')");
+				genericObj.InvokeMETAFunction('Comm', 'Open');
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056-1317",
+			"RegLevel":"R3",
+			"Description":"Comm with endchar",
+			"PreCondition":[],
+			"Steps":["1. Test Comm functionality with content='port:com1'",
+			         "2. Test Comm functionality with content='baudrate:19200'",
+			         "3. Test Comm functionality with content='databits:8'",
+			         "4. Test Comm functionality with content='stopbits:1'",
+			         "5. Test Comm functionality with content='parity:no parity'",
+			         "6. Test Comm functionality with content='handshake:none'",
+			         "7. Test Comm functionality with content='endchar:13'",
+			         "8. Test Comm functionality with content=commevent:url('JavaScript:ProcessData(\"%s\")')",
+			         "9. Open HyperTerminal with default setting in the desktop and change the port to com1, baudrate 19200, databits to 8, stopbits to 1, parity to no parity, handshake to none",
+			         "10. Enter some data in the console and finally enter #"],
+			"ExpectedOutcome":[" The data that has been read from the communications port should be sent to the current PocketBrowser application, via the URI specified by the commevent parameter, after the # character has been recieved."],
+			"testToPerform":function(){
+				genericObj.InvokeMETAFunction("Comm", "BaudRate:19200;port:com1;databits:8;stopbits:1;parity:No Parity;handshake:none;Endchar:13;commevent:url('JavaScript:main.displayResult(\"%s\")')");
+				genericObj.InvokeMETAFunction('Comm', 'Open');
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056-1318",
+			"RegLevel":"R3",
+			"Description":"Comm with time",
+			"PreCondition":[],
+			"Steps":["1. Test Comm functionality with content='port:com1'",
+			         "2. Test Comm functionality with content='baudrate:19200'",
+			         "3. Test Comm functionality with content='databits:8'",
+			         "4. Test Comm functionality with content='stopbits:1'",
+			         "5. Test Comm functionality with content='parity:no parity'",
+			         "6. Test Comm functionality with content='handshake:none'",
+			         "7. Test Comm functionality with content='time:5000'",
+			         "8. Test Comm functionality with content=commevent:url('JavaScript:ProcessData(\"%s\")')",
+			         "9. Open HyperTerminal with default setting in the desktop and change the port to com1, baudrate 19200, databits to 8, stopbits to 1, parity to no parity, handshake to none",
+			         "10. Enter some data in the console"],
+			"ExpectedOutcome":[" The data that has been read from the communications port should be sent to the current PocketBrowser application, via the URI specified by the commevent parameter, after the # character has been recieved."],
+			"testToPerform":function(){
+				genericObj.InvokeMETAFunction("Comm", "BaudRate:19200;port:com1;databits:8;stopbits:1;parity:No Parity;handshake:none;Time:5000;commevent:url('JavaScript:main.displayResult(\"%s\")')");
+				genericObj.InvokeMETAFunction('Comm', 'Open');
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056-1319",
+			"RegLevel":"R3",
+			"Description":"Comm with close",
+			"PreCondition":[],
+			"Steps":["1. Test Comm functionality with content='port:com1'",
+			         "2. Test Comm functionality with content='baudrate:19200'",
+			         "3. Test Comm functionality with content='databits:8'",
+			         "4. Test Comm functionality with content='stopbits:1'",
+			         "5. Test Comm functionality with content='parity:no parity'",
+			         "6. Test Comm functionality with content='handshake:none'",
+			         "7. Test Comm functionality with content='chars:10'",
+			         "8. Test Comm functionality with content=commevent:url('JavaScript:ProcessData(\"%s\")')",
+			         "9. Open HyperTerminal with default setting in the desktop and change the port to com1, baudrate 19200, databits to 8, stopbits to 1, parity to no parity, handshake to none",
+			         "10. Enter some data in the console"],
+			"ExpectedOutcome":[" The data that has been read from the communications port should be sent to the current PocketBrowser application, via the URI specified by the commevent parameter, after the specified number of characters has been recieved.","After closing the Port data that has been read from the communications port should not be sent to the current PocketBrowser application"],
+			"testToPerform":function(){
+				genericObj.InvokeMETAFunction("Comm", "BaudRate:19200;port:com1;databits:8;stopbits:1;parity:No Parity;handshake:none;chars:10;commevent:url('JavaScript:main.displayResult(\"%s\")')");
+				genericObj.InvokeMETAFunction('Comm', 'Open');
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056-1320",
+			"RegLevel":"R3",
+			"Description":"Comm with chars to 10",
+			"PreCondition":[],
+			"Steps":["1. Test Comm functionality with content='port:com1'",
+			         "2. Test Comm functionality with content='baudrate:19200'",
+			         "3. Test Comm functionality with content='databits:8'",
+			         "4. Test Comm functionality with content='stopbits:1'",
+			         "5. Test Comm functionality with content='parity:no parity'",
+			         "6. Test Comm functionality with content='handshake:none'",
+			         "7. Test Comm functionality with content='chars:10'",
+			         "8. Test Comm functionality with content='Open'",
+			         "9. Test Comm functionality with content='port:com3:'",
+			         "10. Test Comm functionality with content=commevent:url('JavaScript:ProcessData(\"%s\")')",
+			         "11. Open HyperTerminal with default setting in the desktop and change the port to com1, baudrate 19200, databits to 8, stopbits to 1, parity to no parity, handshake to none",
+			         "12. Enter 10 chars in the console"],
+			"ExpectedOutcome":[" The data that has been read from the communications port should be sent to the current PocketBrowser application, via the URI specified by the commevent parameter, after the specified number of characters has been recieved.","After closing the Port data that has been read from the communications port should not be sent to the current PocketBrowser application"],
+			"testToPerform":function(){
+				genericObj.InvokeMETAFunction("Comm", "BaudRate:19200;port:com1;databits:8;stopbits:1;parity:No Parity;handshake:none;chars:10;commevent:url('JavaScript:main.displayResult(\"%s\")')");
+				genericObj.InvokeMETAFunction('Comm', 'Open');
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056-1321",
+			"RegLevel":"R3",
+			"Description":"Comm with commevent",
+			"PreCondition":[],
+			"Steps":["1. Test Comm functionality with content='port:com1'",
+			         "2. Test Comm functionality with content='baudrate:19200'",
+			         "3. Test Comm functionality with content='databits:8'",
+			         "4. Test Comm functionality with content='stopbits:1'",
+			         "5. Test Comm functionality with content='parity:no parity'",
+			         "6. Test Comm functionality with content='handshake:none'",
+			         "7. Test Comm functionality with content='chars:10'",
+			         "8. Test Comm functionality with content=commevent:url('JavaScript:ProcessData(\"%s\")')",
+			         "9. Open HyperTerminal with default setting in the desktop and change the port to com1, baudrate 19200, databits to 8, stopbits to 1, parity to no parity, handshake to none",
+			         "10. Enter 10 characters in the console"],
+			"ExpectedOutcome":[" Once thedata has been read from the communications port PB should navigate to the url specified"],
+			"testToPerform":function(){
+				genericObj.InvokeMETAFunction("Comm", "BaudRate:19200;port:com1;databits:8;stopbits:1;parity:No Parity;handshake:none;chars:10;commevent:url('http://10.233.85.82/pb3.x/ComTest/commPortnav.html')");
+				genericObj.InvokeMETAFunction('Comm', 'Open');
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056-1322",
+			"RegLevel":"R3",
+			"Description":"WriteBytes with single byte",
+			"PreCondition":[],
+			"Steps":["1. Set valid parameters for these methods Port, Baudrate, Databits, Stopbits, Parity, Handshake","2. Pass single byte i.e hexidecimal digit to writebytes parameter and check whether data is written to the communications port."],
+			"ExpectedOutcome":[" The byte should successfully written to the Port which is opened"],
+			"testToPerform":function(){
+				genericObj.InvokeMETAFunction("Comm", "BaudRate:19200;port:com1;databits:8;stopbits:1;parity:No Parity;handshake:none;WriteBytes:%62;commevent:url('JavaScript:main.displayResult(\"%s\")')");
+				genericObj.InvokeMETAFunction('Comm', 'Open');
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056-1323",
+			"RegLevel":"R3",
+			"Description":"WriteBytes with multiple byte",
+			"PreCondition":[],
+			"Steps":["1. Set valid parameters for these methods Port, Baudrate, Databits, Stopbits, Parity, Handshake","2. Pass multiple bytes i.e 'WriteBytes:%62 %79 %74 %65 %20 %6d %65 %0a'  and check whether data is written to the communications port."],
+			"ExpectedOutcome":[" The byte should successfully written to the Port which is opened"],
+			"testToPerform":function(){
+				genericObj.InvokeMETAFunction("Comm", "BaudRate:19200;port:com1;databits:8;stopbits:1;parity:No Parity;handshake:none;WriteBytes:%62 %79 %74 %65 %20 %6d %65 %0a;commevent:url('JavaScript:main.displayResult(\"%s\")')");
+				genericObj.InvokeMETAFunction('Comm', 'Open');
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056-1324",
+			"RegLevel":"R3",
+			"Description":"WriteBytes with invalid data",
+			"PreCondition":[],
+			"Steps":["1. Set valid parameters for these methods Port, Baudrate, Databits, Stopbits, Parity, Handshake","2. Pass invalid data i.e. without specifing % to writebytes parameter and check whether data is not written to the communications port."],
+			"ExpectedOutcome":[" The bytes should not be written to the Port which is opened"],
+			"testToPerform":function(){
+				genericObj.InvokeMETAFunction("Comm", "BaudRate:19200;port:com1;databits:8;stopbits:1;parity:No Parity;handshake:none;WriteBytes:62;commevent:url('JavaScript:main.displayResult(\"%s\")')");
+				genericObj.InvokeMETAFunction('Comm', 'Open');
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056-1325",
+			"RegLevel":"R3",
+			"Description":"WriteBytes without Port opened",
+			"PreCondition":[],
+			"Steps":["1. Set valid parameters for these methods  Baudrate, Databits, Stopbits, Parity, Handshake","2. Pass multiple bytes i.e hexidecimal digit writebytes parameter and check whether data is not written to the communications port."],
+			"ExpectedOutcome":[" The bytes should be ignored because the Port is not opened"],
+			"testToPerform":function(){
+				genericObj.InvokeMETAFunction("Comm", "BaudRate:19200;databits:8;stopbits:1;parity:No Parity;handshake:none;WriteBytes:%62 %79 %74 %65 %20 %6d %65 %0a;commevent:url('JavaScript:main.displayResult(\"%s\")')");
+				
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056-1327",
+			"RegLevel":"R3",
+			"Description":"WriteString",
+			"PreCondition":[],
+			"Steps":["1. Set valid parameters for these methods Port, Baudrate, Databits, Stopbits, Parity, Handshake","2. Pass string to writestring parameter and check whether string is written to the communications port."],
+			"ExpectedOutcome":[" The string should successfully written to the Port which is opened"],
+			"testToPerform":function(){
+				genericObj.InvokeMETAFunction("Comm", "BaudRate:19200;port:com1;databits:8;stopbits:1;parity:No Parity;handshake:none;WriteString:HelloWorld;commevent:url('JavaScript:main.displayResult(\"%s\")')");
+				genericObj.InvokeMETAFunction('Comm', 'Open');
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056-1329",
+			"RegLevel":"R3",
+			"Description":"WriteString without Port opened",
+			"PreCondition":[],
+			"Steps":["1. Set valid parameters for these methods Port, Baudrate, Databits, Stopbits, Parity, Handshake","2. Pass  string to writestring parameter and check whether string is written to the communications port."],
+			"ExpectedOutcome":[" The string should be ignored because the Port is not opened"],
+			"testToPerform":function(){
+				genericObj.InvokeMETAFunction("Comm", "BaudRate:19200;databits:8;stopbits:1;parity:No Parity;handshake:none;WriteString:HelloWorld;commevent:url('JavaScript:main.displayResult(\"%s\")')");
+				
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056-1331",
+			"RegLevel":"R3",
+			"Description":"WriteFile",
+			"PreCondition":[],
+			"Steps":["1. Set valid parameters for these methods Port, Baudrate, Databits, Stopbits, Parity, Handshake","2. Pass FilePath to writefile parameter and check whether the content in the file is written to the communications port."],
+			"ExpectedOutcome":[" The content in the file should successfully written to the Port which is opened"],
+			"testToPerform":function(){
+				genericObj.InvokeMETAFunction("Comm", "BaudRate:19200;port:com1;WriteFile:\\Application\\abc.txt;databits:8;stopbits:1;parity:No Parity;handshake:none;commevent:url('JavaScript:main.displayResult(\"%s\")')");
+				genericObj.InvokeMETAFunction('Comm', 'Open');
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056-1332",
+			"RegLevel":"R3",
+			"Description":"WriteFile with large file",
+			"PreCondition":[],
+			"Steps":["1. Set valid parameters for these methods Port, Baudrate, Databits, Stopbits, Parity, Handshake","2. Pass FilePath of a large file(1MB) to writefile parameter and check whether the content in the file is written to the communications port."],
+			"ExpectedOutcome":[" The complete content in the file should successfully written to the Port which is opened"],
+			"testToPerform":function(){
+				genericObj.InvokeMETAFunction("Comm", "BaudRate:19200;port:com1;WriteFile:\\Application\\abc1.txt;databits:8;stopbits:1;parity:No Parity;handshake:none;commevent:url('JavaScript:main.displayResult(\"%s\")')");
+				genericObj.InvokeMETAFunction('Comm', 'Open');
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056-1333",
+			"RegLevel":"R3",
+			"Description":"WriteFile with empty File",
+			"PreCondition":[],
+			"Steps":["1. Set valid parameters for these methods Port, Baudrate, Databits, Stopbits, Parity, Handshake","2. Pass FilePath of a empty file to to writefile parameter and check whether the content in the file is written to the communications port."],
+			"ExpectedOutcome":[" The Communication Port should not be crashed or behave abnormally"],
+			"testToPerform":function(){
+				genericObj.InvokeMETAFunction("Comm", "BaudRate:19200;port:com1;WriteFile:\\Application\\abc2.txt;databits:8;stopbits:1;parity:No Parity;handshake:none;commevent:url('JavaScript:main.displayResult(\"%s\")')");
+				genericObj.InvokeMETAFunction('Comm', 'Open');
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056-1334",
+			"RegLevel":"R3",
+			"Description":"WriteFile twice",
+			"PreCondition":[],
+			"Steps":["1. Set valid parameters for these methods Port, Baudrate, Databits, Stopbits, Parity, Handshake","2. Pass two different FilePath to writefile parameter twice and check whether the content in the file is written to the communications port."],
+			"ExpectedOutcome":[" The content in the files should successfully written to the Port which is opened"],
+			"testToPerform":function(){
+				genericObj.InvokeMETAFunction("Comm", "BaudRate:19200;port:com1;WriteFile:\\Application\\abc.txt;WriteFile:\\Application\\abc2.txt;databits:8;stopbits:1;parity:No Parity;handshake:none;commevent:url('JavaScript:main.displayResult(\"%s\")')");
+				genericObj.InvokeMETAFunction('Comm', 'Open');
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056-1335",
+			"RegLevel":"R3",
+			"Description":"WriteFile without Port opened",
+			"PreCondition":[],
+			"Steps":["1. Set valid parameters for these methods  Baudrate, Databits, Stopbits, Parity, Handshake","2. Pass FilePath to writefile parameter and check whether the content in the file is written to the communications port."],
+			"ExpectedOutcome":[" The string should be ignored because the Port is not opened"],
+			"testToPerform":function(){
+				genericObj.InvokeMETAFunction("Comm", "BaudRate:19200;;WriteFile:\\Application\\abc.txt;databits:8;stopbits:1;parity:No Parity;handshake:none;commevent:url('JavaScript:main.displayResult(\"%s\")')");
+				
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056-1336",
+			"RegLevel":"R3",
+			"Description":"WriteFile with invalid path",
+			"PreCondition":[],
+			"Steps":["1. Set valid parameters for these methods Port, Baudrate, Databits, Stopbits, Parity, Handshake","2. Pass invalid FilePath to writefile parameter and check the behaviour of PocketBrowser"],
+			"ExpectedOutcome":["  an error will be logged in the PB logfile.  The JavaScript application is not notified if the path is invalid"],
+			"testToPerform":function(){
+				genericObj.InvokeMETAFunction("Comm", "BaudRate:19200;port:com1;WriteFile:\\Applica\\abc.txt;databits:8;stopbits:1;parity:No Parity;handshake:none;commevent:url('JavaScript:main.displayResult(\"%s\")')");
+				genericObj.InvokeMETAFunction('Comm', 'Open');
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056-1339",
+			"RegLevel":"R3",
+			"Description":"Autoenter with disable",
+			"PreCondition":[],
+			"Steps":["1. Set valid parameters for these methods Port, Baudrate, Databits, Stopbits, Parity, Handshake","2. Disable to autoenter property and keep no URL specified for commevent.","Open HyperTerminal with default setting in the desktop and change the port to com1, baudrate 19200, databits to 8, stopbits to 1, parity to no parity, handshake to none.","Enter some data through key strokes."],
+			"ExpectedOutcome":["  received data is being received as keystrokes and each block received will not  have a CR (Carriage Return) character appended to it."],
+			"testToPerform":function(){
+				genericObj.InvokeMETAFunction("Comm", "BaudRate:19200;port:com1;WriteFile:\\Application\\abc.txt;databits:8;stopbits:1;parity:No Parity;handshake:none;AutoEnter:Disabled;commevent:url('')");
+				genericObj.InvokeMETAFunction('Comm', 'Open');
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056-1340",
+			"RegLevel":"R2",
+			"Description":"AutoTab with enable",
+			"PreCondition":[],
+			"Steps":["1. Set valid parameters for these methods Port, Baudrate, Databits, Stopbits, Parity, Handshake","2. Enable to autotab property and keep no URL specified for commevent.","3. Open HyperTerminal with default setting in the desktop and change the port to com1, baudrate 19200, databits to 8, stopbits to 1, parity to no parity, handshake to none.","Note: Enter some data through key strokes."],
+			"ExpectedOutcome":[" received data is being received as keystrokes ,each block received will have a tab character appended to it."],
+			"testToPerform":function(){
+				genericObj.InvokeMETAFunction("Comm", "BaudRate:19200;port:com1;WriteFile:\\Application\\abc.txt;databits:8;stopbits:1;parity:No Parity;handshake:none;AutoTab:Enabled;commevent:url('')");
+				genericObj.InvokeMETAFunction('Comm', 'Open');
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056-1341",
+			"RegLevel":"R3",
+			"Description":"AutoTab with disable",
+			"PreCondition":[],
+			"Steps":["1. Set valid parameters for these methods Port, Baudrate, Databits, Stopbits, Parity, Handshake","2. Disable to autotab property and keep no URL specified for commevent.","Open HyperTerminal with default setting in the desktop and change the port to com1, baudrate 19200, databits to 8, stopbits to 1, parity to no parity, handshake to none.","Enter some data through key strokes."],
+			"ExpectedOutcome":[" received data is being received as keystrokes ,each block received will not have a tab character appended to it."],
+			"testToPerform":function(){
+				genericObj.InvokeMETAFunction("Comm", "BaudRate:19200;port:com1;WriteFile:\\Application\\abc.txt;databits:8;stopbits:1;parity:No Parity;handshake:none;AutoTab:Disabled;commevent:url('')");
+				genericObj.InvokeMETAFunction('Comm', 'Open');
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056-1342",
+			"RegLevel":"R3",
+			"Description":"Comm metatag with Empty Parameter",
+			"PreCondition":[],
+			"Steps":["1. Launch PocketBrowser from Start Menu.","2. Set empty values of port parameters using InvokeMETAFunction. i.e. Generic.InvokeMETAFunction('comm','Port:');","3. Set empty values of other Comm parameters."],
+			"ExpectedOutcome":["PB should not crash when any of the COM parameters with null values are set through InvokeMetaFunction.","No Error should be occurred."],
+			"testToPerform":function(){
+				genericObj.InvokeMETAFunction("Comm", "BaudRate:'';port:'';databits:'';stopbits:'';parity:'';handshake:'';chars:''");
+				genericObj.InvokeMETAFunction('Comm', 'Open');
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056-1343",
+			"RegLevel":"R2",
+			"Description":"Communications Port Tag Persistance test",
+			"PreCondition":[],
+			"Steps":["1. Test Comm functionality with content='baudrate:9600'",
+			         "2. Test Comm functionality with content=commevent:url('JavaScript:ProcessData(\"%s\")')",
+			         "3. Open the port 9600 and call read method. ",
+			         "4. Press enter after entering some data in the console.",
+			         "5. Go to another page and press enter after entering some data in the console at PC ( check persistancy of Comm event and com port."],
+			"ExpectedOutcome":["The data that has been read from the communications port should be sent to the current PocketBrowser application, via the URI specified by the commevent parameter, after the specified number of characters has been recieved.Data should not read from comm Port when navigate to another page as port will be closed and the CommEvent will be cleared"],
+			"testToPerform":function(){
+				genericObj.InvokeMETAFunction("Comm", "BaudRate:9600;port:com1;commevent:url('JavaScript:main.displayResult(\"%s\")')");
+				genericObj.InvokeMETAFunction('Comm', 'Open');
+			},
+			"FinalResult":""
+		}];
+		pbTestObj.afterEach = function(){
+			
+		}
+		return pbTestObj;
+	}
+	window.pbTest = pbTest();
+})();
+(function(){
+	var main = function(){
+		var mainObj = {};
+		var r1List = [];
+		var r2List = [];
+		var r3List = [];
+		var testArray = [];
+		var index = 0;
+		var count = 0;
+		var choice = "";
+		var passCount = 0;
+		var failCount = 0;
+		var noRunCount = 0;
+		mainObj.init = function(){
+			for(key in pbTest.testCases){
+				if(pbTest.testCases[key].RegLevel == "R1"){
+					r1List.push(pbTest.testCases[key]);
+				}else if(pbTest.testCases[key].RegLevel == "R2"){
+					r2List.push(pbTest.testCases[key]);
+				}else if(pbTest.testCases[key].RegLevel == "R3"){
+					r3List.push(pbTest.testCases[key]);
+				}
+			}
+		};
+		mainObj.loadArrayList = function(data, eleId){
+			var retData = "";
+			if(eleId == "preCondition"){
+				retData = "<br><span class='heading'>PreConditions:</span>";
+			}else if(eleId == "steps"){
+				retData = "<br><span class='heading'>Steps:</span>";
+			}if(data.length>0){
+				retData += "<ul>";
+		        for (var i=0; i<data.length;i++){
+		            retData = retData + "<li>"+data[i]+"</li>"
+		        }
+		        retData = retData + "</ul>";
+		    }
+			
+		    document.getElementById(eleId).innerHTML = retData;
+		}
+		mainObj.onPageLoad = function(){
+			this.onRegLevelChange();
+		};
+		mainObj.loadTest = function(){
+			var vtElement = "";
+            var selectElement = "<select id='vtSelect' onchange='main.onVTIDChange()'></select>";
+            document.getElementById('vtsection').innerHTML = selectElement;
+            var selectList = document.getElementById('vtSelect');
+			for(key in testArray){
+				var option = document.createElement("OPTION");
+				option.text = testArray[key].VTID;
+				option.value = key;
+				selectList.add(option);
+			}
+			this.loadSingleTest(index);
+		};
+		mainObj.displayFinalResult = function(){
+			retHTMLData = "<table><tr><td class='title'>" + choice +" Test summay :</td></tr><tr><td class='block'><ul>";
+			for(key in testArray){
+				if(testArray[key].FinalResult=="Pass"){
+					passCount++;
+					retHTMLData = retHTMLData + "<li style='color:green'>" + testArray[key].Description + "</li>";	
+				}else if(testArray[key].FinalResult=="Fail"){
+					failCount++;
+					retHTMLData = retHTMLData + "<li style='color:red'>" + testArray[key].Description + "</li>";
+				}else{
+					noRunCount++;
+					retHTMLData = retHTMLData + "<li style='color:red;background:yellow'>" + testArray[key].Description + "</li>";
+				}
+			}
+			resultSummary = "<table class='block'><tr><td colspan=2 class='title'>Summary for "+choice+" cases</td></tr><tr><td>Pass</td><td style='color:green;font-weight:bold'>"+passCount+"</td></tr><tr><td>Fail</td><td style='color:red;font-weight:bold'>"+failCount+"</td></tr><tr><td>NoRun</td><td style='color:blue;font-weight:bold'>"+noRunCount+"</td></tr><tr style='color:black;font-weight:bold'><td>Total</td><td>"+parseInt(passCount+failCount+noRunCount)+"</td></tr></table>";
+			retHTMLData = retHTMLData + "</ul></td></tr></table><br><a href='index.html'>Home</a>";
+			retHTMLData = resultSummary + retHTMLData;
+			document.getElementById('mainBlock').innerHTML = retHTMLData;
+		};
+		mainObj.loadSingleTest = function(index){
+			document.getElementById('vtid').innerHTML = testArray[index].VTID;
+			document.getElementById('desc').innerHTML = testArray[index].Description;
+			this.loadArrayList(testArray[index].PreCondition, "preCondition");
+			this.loadArrayList(testArray[index].Steps, "steps");
+			this.loadArrayList(testArray[index].ExpectedOutcome, "expected");
+			document.getElementById('actualResult').innerHTML = "";
+			var selectElement = document.getElementById('vtSelect');
+			selectElement.value = index;
+		};
+		mainObj.runThisTest = function(){
+			testArray[index].testToPerform();
+		};
+		mainObj.passThisTest = function(){
+			testArray[index].FinalResult = "Pass";
+            pbTest.afterEach();
+			this.nextTest();
+		};
+		mainObj.failThisTest = function(){
+			testArray[index].FinalResult = "Fail";
+            pbTest.afterEach();
+			this.nextTest();
+		}
+		mainObj.nextTest = function(){
+			if(index<(count-1)){
+				index++;
+				this.loadSingleTest(index);
+			}else{
+				this.displayFinalResult();
+			}
+		};
+		mainObj.prevTest = function(){
+			if(index>0){
+				index--;
+				this.loadSingleTest(index);
+			}else{
+				alert("No previous test cases to run");
+			}
+		};
+		mainObj.onVTIDChange = function(){
+			myVtIdChoice = document.getElementById("vtSelect").value;
+			index = myVtIdChoice;
+			this.loadSingleTest(myVtIdChoice);
+		};
+		mainObj.onRegLevelChange = function(){
+			var myChoice = document.getElementById("regLevel").value;
+			choice = myChoice;
+			document.getElementById('vtsection').innerHTML = "";
+
+			if(myChoice=="All"){
+				testArray = pbTest.testCases;
+				count = testArray.length;
+			}else if(myChoice=="R1"){
+				testArray=r1List;
+				count = testArray.length;
+			}else if(myChoice=="R2"){
+				testArray=r2List;
+				count = testArray.length;
+			}else if(myChoice=="R3"){
+				testArray=r3List;
+				count = testArray.length;
+			}
+			index = 0;
+			passCount = 0;
+			failCount = 0;
+			noRunCount = 0;
+			if(count>0){
+				this.loadTest();
+			}else{
+				document.getElementById("regLevel").value = "All";
+				this.onRegLevelChange();
+				alert("No Tests for the level selected");
+			}
+		};
+		mainObj.displayResult = function(res){
+			document.getElementById('actualResult').innerHTML = res;
+		};
+		return mainObj;
+	}
+	window.main = main();
+})();
+	</script>
+	<!--<script type="text/javascript" src="js/myMain.js"></script>-->
+	<script type="text/javascript">
+		main.init();
+	</script>
+</head>
+<body class="body" onload="main.onPageLoad()">
+<h3 class='title'>Semi Auto test for PB and RE2.2 : </h3>
+<div id="mainBlock" class="mainBlock">
+	<div>
+		<span class="heading">Select Regression Level :</span>
+	    <select name="regLevel" id="regLevel" onchange="main.onRegLevelChange()">
+	        <OPTION value="All" >All</OPTION>
+	        <OPTION value="R1" >R1</OPTION>
+	        <OPTION value="R2" >R2</OPTION>
+	        <OPTION value="R3" >R3</OPTION>
+	    </select> 
+	</div>
+    <div>
+    	<span class="heading">Select Test Case to Run :</span>
+    	<div id='vtsection'>
+    	</div>
+    	
+    </div>
+    <div class="runners">
+    	<input type=button value="Previous" onclick="main.prevTest();" />
+		<input type=button value="Next" onclick="main.nextTest()" />
+		<input type="button" onclick="main.runThisTest()" value="Run Test"/>
+    </div>
+	<br>
+	<div class="block">
+	<span class="heading">VTID:</span>
+    <div id="vtid"></div><br>
+    <span class="heading">Test description:</span>
+    <div id="desc"></div>
+    <div id="preCondition"></div>
+    <div id="steps"></div>
+    <span class="heading">Expected result:</span>
+    <div id="expected"></div><br>
+    <input type="button" onclick="main.runThisTest()" value="Run Test"/>
+    <br><br>
+    <span class="heading">Actual result:</span>
+    <br>
+    <div id="actualResult"></div><br>
+    <input type="button" class="pass" onclick="main.passThisTest()" value="Pass"/>
+    <input type="button" class="fail" onclick="main.failThisTest()" value="Fail"/>
+    </div>
+	<br>
+	<div class="runners">
+		<input type=button value="Previous" onclick="main.prevTest();" />
+		<input type=button value="Next" onclick="main.nextTest()" />
+	</div>
+	</div>
+</body>
+</html>
