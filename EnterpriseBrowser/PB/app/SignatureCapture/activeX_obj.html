@@ -344,8 +344,8 @@
 		    "ExpectedOutcome":["PB should not crash when any of the SignatureCapture parameters with null values are set through InvokeMetaFunction.","PB should not crash when any of the SignatureCapture Events with null values are set through InvokeMetaFunction.","No Error should be occurred."],
 		    "testToPerform":function(){
 				genericObj.InvokeMETAFunction("SignatureCapture", "Visibility:null; Destination:null; Username:null; Password:null");
-		genericObj.InvokeMETAFunction("SignatureCapture","VectorEvent:null");
-		genericObj.InvokeMETAFunction("SignatureCapture","SignatureSaveEvent:null");
+				genericObj.InvokeMETAFunction("SignatureCapture","VectorEvent:null");
+				genericObj.InvokeMETAFunction("SignatureCapture","SignatureSaveEvent:null");
 		    },
 		    "FinalResult":""
 		},{
@@ -356,8 +356,8 @@
 		    "Steps":["1. Test visibility SignatureCapture functionality with Content='Visible'","2. Set Destination, Username and Password parameters to valid value.","3. Attach SignatureSaveEvent to navigate to another page.","4. Call Capture method to capture recoreded data.","5. Check persistancy of SignatureCapture tag on another page."],
 		    "ExpectedOutcome":["PB should take to the Specifile URL on successful signature transfer.","The signature box and Save / Vector events should be cleared during page navigation but other parameters such as position and color should persist across page loads."],
 		    "testToPerform":function(){
-				genericObj.InvokeMETAFunction("SignatureCapture", "Visibility:Visible; Destination:url('ftp://10.233.85.82/Received/sigInFTP.bmp'); Username:ftpadmin; Password:ftpadmin");
-	    gen.InvokeMETAFunction("SignatureCapture", "signatureSaveEvent:url('http://10.233.85.82/Navigate.html?Resposnse=%s');");
+				genericObj.InvokeMETAFunction("SignatureCapture", "Visibility:Visible; BGColor:#0000FF; Destination:url('ftp://10.233.85.82/Received/sigInFTP.bmp'); Username:ftpadmin; Password:ftpadmin");
+	    		genericObj.InvokeMETAFunction("SignatureCapture", "signatureSaveEvent:url('http://10.233.85.82:9098/app/SignatureCapture/SignatureNavigate.html?Resposnse=%s');");
 		    },
 		    "FinalResult":""
 		}];
