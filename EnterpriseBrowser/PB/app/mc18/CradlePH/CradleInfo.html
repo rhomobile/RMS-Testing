@@ -1,0 +1,35 @@
+
+<html>
+  <head>
+  <meta HTTP-Equiv="SmartCradle" Content="CradleInfoEvent:url('Javascript:OnCradleInfoEvent('%s','%s','%s','%s','%s','%s','%s','%s');')">
+  <meta HTTP-Equiv="SmartCradle" Content="GetCradleInfo">
+  <title>Cradle Info Test</title>
+  <SCRIPT>
+ 
+  //var objGeneric = new ActiveXObject("PocketBrowser.Generic");
+  function OnLoad()
+  {
+    
+      document.getElementById("display").innerHTML= "pending...";
+    
+  
+  }  
+  function OnCradleInfoEvent(mHardwareId,mPartNumber,mSerialNumber,mMFGDate,mDriverVersion,mCAPIVersion,mFirmwareVersion,mChargeState)
+  {	
+      var temp="HardwareId: "+mHardwareId+"<br>PartNumber: "+mPartNumber+"<br>SerialNumber: "+mSerialNumber+"<br>MFGDate: "+mMFGDate+"<br>mDriverVersion: "+mDriverVersion+"<br>CAPIVersion: "+mCAPIVersion+"<br>FirmwareVersion: "+mFirmwareVersion+"<br>ChargeState: "+mChargeState;
+      document.getElementById("display").innerHTML=temp;	
+    
+  }
+  
+  
+    
+  </SCRIPT>
+  <head>
+  <body onLoad="Javascript:OnLoad()">
+    <i>Onload the page sets the info event, then calls "GetCradleInfo" to display data<i/><br><br>
+    <div id="display"></div>
+    
+    <br><a HREF="CradleIndex.html">Index</a>
+   
+  </body>
+</html>
