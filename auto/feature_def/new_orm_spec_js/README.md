@@ -15,7 +15,7 @@ How to run ORM js specs
   otherwise set 'use_new_orm = 1' to execute specs with New ORM code
 
 * In addition, if you select to run specs with Old ORM, then edit
-  public/app/specRunner.html file and enable script tag for rhoapi-modules-ORM.js file
+  public/app/specRunner.html file and enable script tag for rhoapi-modules-ORM.js, rhoapi-modules-ORMHelper.js, rhoapi-modules-Ruby-RunTime.js files
 
 * Run from auto/feature_def/new_orm_spec_js directory one of the following platform specific command
 
