@@ -34,6 +34,26 @@
                 </PARAMS>
                 <RETURN type="STRING"/>
             </METHOD>
+
+            <METHOD name="testApi">
+                <PARAMS>
+                    <PARAM name="arrHashStr" type="ARRAYOFHASHES" apiStyle="complex">
+                        <DESC>The path to the specified zip.</DESC>
+                    </PARAM>
+                    <PARAM name="hashHashStr" type="HASHOFHASHES" apiStyle="complex">
+                        <DESC>List of file paths to be zipped.</DESC>
+                    </PARAM>
+                    <PARAM name="hashArrStr" type="{:[]}" apiStyle="complex">
+                        <DESC>List of file paths to be zipped.</DESC>
+                    </PARAM>
+                    <PARAM name="arrArrStr" type="[[]]" apiStyle="complex">
+                        <DESC>List of file paths to be zipped.</DESC>
+                    </PARAM>
+                </PARAMS>
+                <RETURN type="STRING">
+                    <DESC>Returns JSON result</DESC>
+                </RETURN>
+            </METHOD>
         </METHODS>
         <VER_INTRODUCED>4.0.0</VER_INTRODUCED>
         <PLATFORM>
