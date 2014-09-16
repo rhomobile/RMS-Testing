@@ -35,7 +35,7 @@
                 <RETURN type="STRING"/>
             </METHOD>
 
-            <METHOD name="testApi">
+<!--             <METHOD name="testApi">
                 <PARAMS>
                     <PARAM name="arrHashStr" type="ARRAYOFHASHES" apiStyle="nested">
                         <DESC>The path to the specified zip.</DESC>
@@ -53,7 +53,7 @@
                 <RETURN type="STRING">
                     <DESC>Returns JSON result</DESC>
                 </RETURN>
-            </METHOD>
+            </METHOD> -->
         </METHODS>
         <VER_INTRODUCED>4.0.0</VER_INTRODUCED>
         <PLATFORM>

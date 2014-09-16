@@ -45,27 +45,27 @@ describe("<generator API specs>", function() {
                 expect(Rho.NativeBridgeTest.testString(str2)).toEqual(str2);
             });
 
-            it("Running testAPI function", function() {
-                var arrHashStr = [
-                    {'a':'b'},
-                    {'b':'c'},
-                    {'sdfsdf':'sdfsdfsdfsdf'}
-                ];
-                var hashHashStr = {
-                    'a' : {'a':'b'},
-                    'b' : {'b':'c'}
-                };
-                var hashArrStr = {
-                    'a' : ['a','b'],
-                    'b' : ['b','c']
-                }
-                var arrArrStr = [
-                    ['a','b'],
-                    ['b','c']
-                ];
-                res = Rho.NativeBridgeTest.testApi(arrHashStr, hashHashStr, hashArrStr, arrArrStr);
-                Rho.Log.warning("====== "+res,'test')
-            });
+            // it("Running testAPI function", function() {
+            //     var arrHashStr = [
+            //         {'a':'b'},
+            //         {'b':'c'},
+            //         {'sdfsdf':'sdfsdfsdfsdf'}
+            //     ];
+            //     var hashHashStr = {
+            //         'a' : {'a':'b'},
+            //         'b' : {'b':'c'}
+            //     };
+            //     var hashArrStr = {
+            //         'a' : ['a','b'],
+            //         'b' : ['b','c']
+            //     }
+            //     var arrArrStr = [
+            //         ['a','b'],
+            //         ['b','c']
+            //     ];
+            //     res = Rho.NativeBridgeTest.testApi(arrHashStr, hashHashStr, hashArrStr, arrArrStr);
+            //     Rho.Log.warning("====== "+res,'test')
+            // });
         });
         describe("Edge test case", function() {
             it("passing integer", function() {
