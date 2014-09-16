@@ -37,16 +37,16 @@
 
             <METHOD name="testApi">
                 <PARAMS>
-                    <PARAM name="arrHashStr" type="ARRAYOFHASHES" apiStyle="complex">
+                    <PARAM name="arrHashStr" type="ARRAYOFHASHES" apiStyle="nested">
                         <DESC>The path to the specified zip.</DESC>
                     </PARAM>
-                    <PARAM name="hashHashStr" type="HASHOFHASHES" apiStyle="complex">
+                    <PARAM name="hashHashStr" type="HASHOFHASHES" apiStyle="nested">
                         <DESC>List of file paths to be zipped.</DESC>
                     </PARAM>
-                    <PARAM name="hashArrStr" type="{:[]}" apiStyle="complex">
+                    <PARAM name="hashArrStr" type="{STRING:[STRING]}" apiStyle="nested">
                         <DESC>List of file paths to be zipped.</DESC>
                     </PARAM>
-                    <PARAM name="arrArrStr" type="[[]]" apiStyle="complex">
+                    <PARAM name="arrArrStr" type="[[STRING]]" apiStyle="nested">
                         <DESC>List of file paths to be zipped.</DESC>
                     </PARAM>
                 </PARAMS>
