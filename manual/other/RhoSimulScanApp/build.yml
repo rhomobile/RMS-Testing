@@ -9,8 +9,6 @@ bbver: '6.0'
 applog: rholog.txt
 android:
   version: 4.2.2
-  capabilities:
-  - motoroladev
 extensions:
   - simulscan
 debug: 1
