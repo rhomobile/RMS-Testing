@@ -1,0 +1,1202 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<input type="button" value="Back"  onclick="location.href='./index.html'" />
+	<title>PB and RE2.2 Semi Auto Frame Work : RSM</title>
+	<META HTTP-Equiv="scanner" Content="DecodeEvent:url('javascript:doScan('%6', '%s', %3, '%2');')">
+  	<META HTTP-Equiv="Scanner" Content="EnumScannerEvent:url('Javascript:EnumScanners(%s);')">
+	<!--<link rel="stylesheet" type="text/css" href="css/main.css">-->
+	<style type="text/css">
+		.block{
+			background:#aabbcc;
+			border: 1px solid darkblue;
+		    margin: 5px;
+		    font-size: 11px;
+		    font-family: Monaco, "Lucida Console", monospace;
+		    line-height: 14px;
+		    color: #333333;
+		}
+		.title{
+			padding: 3px;
+		    font-size: 11px;
+		    font-family: Monaco, "Lucida Console", monospace;
+		    font-weight: bolder;
+		    background-color: steelblue;
+		    color: white;
+		}
+		.body{
+			background:#ddeeff;
+		}
+		.runners{
+			border: 1px solid darkblue;
+		    margin: 5px;
+		    font-family: Monaco, "Lucida Console", monospace;
+		    line-height: 14px;
+			padding: 3px;
+		    font-size: 12px;
+		    font-weight: bolder;
+		    background-color: #aabbcc;
+		    color: white;
+		}
+		.heading{
+			font-weight: bold;
+		}
+		.pass{
+			background:green;
+		}
+		.fail{
+			background:red;
+		}
+	</style>
+	<!--<script type="text/javascript" src="js/testCases.js"></script>-->
+	<script type="text/javascript">
+		//var Generic = new ActiveXObject("PocketBrowser.Generic");
+		var selected_scanner="";
+		var selected_scannername="";
+		var attributes= new Array();
+		var count=0;      
+		function reset(){
+		    count=0;
+		}
+		function Get(attr){
+		    attributes = attr;
+		    for (var a = 0; a < attr.length; a++){
+				generic.InvokeMETAFunction('RSM', attr[a]);
+			}
+			generic.InvokeMETAFunction("RSM", "Rsmgetevent:url('JavaScript:WriteOnTextBoxes(%s, attributes);')");
+		}
+		function setGetAttributes(attrAssociateValue, attr){
+		    attributes = attr;  
+		    for (var a = 0; a < attrAssociateValue.length; a++){
+				generic.InvokeMETAFunction('RSM', attrAssociateValue[a]);
+			}  
+			Get(attributes);      
+		}
+		function WriteOnTextBoxes(attributeArray, attr){
+			actualResult = document.getElementById('actualResult');
+			actualResult.innerHTML = "Array Length: "+attr.length+" <br />";
+		    for (var a = 0; a < attributeArray.length; a++){
+				 actualResult.innerHTML += "<b>"+attr[a]+"</b>  :  "+attributeArray[a]+" <br />";
+			}
+		}
+		function setEnumScannerTimer(){
+		    setTimeout("onScannerEnable()", 3000);
+		}
+		function onScannerEnable(){
+			generic.InvokeMETAFunction('Scanner', 'Enumerate');
+		}
+		function EnumScanners(scannerArray){
+			for (i=0; i < scannerArray.length; i++){
+		       	document.getElementById('myscanner').options[i + 1].text = scannerArray[i][0]+scannerArray[i][1];
+			   	document.getElementById('myscanner').options[i + 1].value = scannerArray[i][0];
+			}
+		}
+		function doScan(data, source, type, time){
+		    document.getElementById('ScanData').value=data;
+		}
+		function selectScanner(){
+		    var w = document.getElementById('myscanner').selectedIndex;
+		    selected_scanner = document.getElementById('myscanner').options[w].value;
+		    selected_scannername=document.getElementById('myscanner').options[w].text;
+		    var abcd="enabled:"+ selected_scanner;
+		    generic.InvokeMETAFunction('Scanner',abcd);
+		}
+		function DisconnetBT(){
+		    generic.InvokeMETAFunction("RSM","BTDisconnect");
+		    alert("Disconnected");
+		}
+		function UnpairBT(){
+		    generic.InvokeMETAFunction("RSM","BTUnpair");
+		    alert("Unpaired");
+		}
+		function StopPaging(){
+		    generic.InvokeMETAFunction("RSM","PagingActivate:Stop");
+		    alert("Paging Stopped");
+		}
+		function StartPaging(){
+		    generic.InvokeMETAFunction("RSM","PagingActivate:Start");
+		    alert("Paging activated");
+		}
+		(function(){
+		var pbTest = function(){
+		var pbTestObj = {};
+		pbTestObj.testCases = [
+		{
+			"VTID":"VT056-0259",
+			"RegLevel":"R1",
+			"Description":"Scanner - Retrieve all RSM attributes from Attribute array.",
+			"PreCondition":[],
+			"Steps":["Test Scanner META Tag functionlaity with content ='Enumerate", "Connect RSM device to the mobile unit.Test Scanner META Tag functionlaity with content='Enabled:SCN[i]'( ID of Bluetooth Scanner). ", "Register all RSM attributes using RSM META Tag.", "Invoke RsmGetEvent to retrieve all RSM attributes from AttributeArray."],
+			"ExpectedOutcome":["EnumScanners array should return a list of scanners present on the device via EnumScannerEvent and Bluetooth Scanner should be enabled", "All RSM attributes are retrieved from AttributeArray. Check each attribute value whether it is correct or not?"],
+			"testToPerform":function(){
+			    attr = ['ModelNumber', 'SerialNumber', 'BluetoothAddress', 'DateOfManufacture', 'DateOfService', 'FirmwareVersion', 'DeviceClass', 'BatteryStatus', 'BatteryCapacity', 'BatteryID', 'BluetoothFriendlyName', 'Mems', 'ProximityEnable', 'ProximityDistance', 'ProximityContinuous', 'BluetoothAutoReconnect', 'BluetoothBeepOnReconnectAttempt', 'PagingEnable', 'PagingBeepSequence', 'BluetoothInquiryMode', 'DecodeFeedback', 'IgnoreCode128USPS', 'GoodScansDelay', 'BluetoothAuthentication', 'BluetoothPINcode', 'BluetoothPINCodeType', 'BluetoothEncryption', 'ScanLineWidth', 'ScanTriggerWakeup', 'BluetoothHIDAutoReconnect', 'LowBatteryIndication', 'LowBatteryIndicationCycle', 'BluetoothReconnectAttempts'];
+				Get(attr);
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056-0260",
+			"RegLevel":"R2",
+			"Description":"Scanner - Configure all RSM attributes.",
+			"PreCondition":[],
+			"Steps":["Connect RSM device to the mobile unit", "Configure All Attributes( Writable) using RSM META Tag.", "Register all RSM attributes using RSM META Tag functionality.", "Invoke RsmGetEvent to retrieve all RSM attributes from AttributeArray."],
+			"ExpectedOutcome":["RSM META Tag should configure RSM attributes and Retrives ScanLineWidth:Wide, Mems:Enabled, ProximityEnable:Enabled, ProximityContinuous:Enabled, PagingEnable:Enabled, ProximityDistance:Medium values when configured a remote scanner either tethered to the device or connected via Bluetooth."],
+			"testToPerform":function(){
+			    attrAssociateValue = [ 'ScanLineWidth:Wide', 'Mems:Enabled', 'ProximityEnable:Enabled', 'ProximityContinuous:Enabled', 'PagingEnable:Enabled', 'ProximityDistance:Medium'];
+				attr = ['ScanLineWidth', 'Mems', 'ProximityEnable', 'ProximityContinuous', 'PagingEnable', 'ProximityDistance'];
+				setGetAttributes(attrAssociateValue, attr);
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056-0266",
+			"RegLevel":"R3",
+			"Description":"Scanner - Get and Set RSM BluetoothAuthentication",
+			"PreCondition":[],
+			"Steps":["Connect RSM device to the mobile unit", "Test RSM META Tag functionality with content='BluetoothAuthentication' to register this attribute.", "Invoke RsmGetEvent to retrieve BluetoothAuthentication attribue value from 'AttributeArray'", "Disconnect the RSM device and scan the BTAddress barcode", "Test RSM META Tag functionality with content='BluetoothAuthentication:True' to configure attribute", "Test RSM META Tag functionality with content='BluetoothPINcode:00000' to configure attribute", "Test RSM META Tag functionality  with content='BluetoothAuthentication'", "Invoke RsmGetEvent  to retrieve BluetoothAuthentication attribute  from AttributeArray"],
+			"ExpectedOutcome":["RSM META Tag should retrieve BluetoothAuthentication when RsmGetEvent is called relating to a remote scanner connected to the device or connected via Bluetooth", "RSM META Tag should set BluetoothAuthentication to True and the mobile device should prompt the user to enter the PINCode. Once the PINCode is entered the RSM device should connect to the mobile device"],
+			"testToPerform":function(){
+			    main.displayResult("This is test 2");
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056-0267",
+			"RegLevel":"R3",
+			"Description":"Scanner - Set and Get RSM BluetoothAuthentication",
+			"PreCondition":[],
+			"Steps":["Disconnect the RSM device and scan the BTAddress barcode", "Test RSM META Tag functionality with content='BluetoothAuthentication:False'", "Test  RSM META Tag functionality with content='BluetoothAuthentication' to register this attribute.", "Invoke RsmGetEvent  to retrieve BluetoothAuthentication attribute from AttributeArray."],
+			"ExpectedOutcome":["RSM META Tag should set BluetoothAuthentication to False and also should be connected to the mobile device", "RSM META Tag should retrieve BluetoothAuthentication False from attribute array when RSMGetEvent is invoked"],
+			"testToPerform":function(){
+			    main.displayResult("This is test 2");
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056-0268",
+			"RegLevel":"R3",
+			"Description":"Scanner - Get and Set RSM BluetoothEncryption",
+			"PreCondition":[],
+			"Steps":["Connect RSM device to the mobile unit", "Test RSM META Tag functionality with content 'BluetoothEncryption'  to register this attribute.", " Invoke RsmGetEvent  to retrieve BluetoothEncryption attribute from AttributeArray", "Test RSM META Tag functionality with content='BluetoothEncryption:True' to configure attribute.", " Test RSM META Tag functionality with content 'BluetoothEncryption'  to register this attribute.", " Invoke RsmGetEvent  to retrieve BluetoothEncryption attribute value from AttributeArray", " Scan any barcode"],
+			"ExpectedOutcome":["RSM META Tag should retrieve BluetoothEncryption attribute value  when RSMGetEvent is called relating to a remote scanner connected to the device or connected via Bluetooth", "RSM META Tag should set BluetoothEncryption to True when configured a remote scanner either tethered to the device or connected via Bluetooth", "The barcode should be scanned"],
+			"testToPerform":function(){
+			    attrAssociateValue = ['BluetoothEncryption:True'];
+				attr = ['BluetoothEncryption'];
+				Get(attr);
+				setGetAttributes(attrAssociateValue, attr);
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056-0269",
+			"RegLevel":"R3",
+			"Description":"Scanner - Set and Get RSM BluetoothEncryption",
+			"PreCondition":[],
+			"Steps":["Connect RSM device to the mobile unit", "Test RSM META Tag functionality with content='BluetoothEncryption:False' to configure this attribute as False.", "Test RSMGetParam functionality with BluetoothEncryption to register this attribute.", "Invoke RsmGetEvent  to retrieve BluetoothEncryption attribute value from AttributeArray.", "Scan any barcode"],
+			"ExpectedOutcome":["RSM META Tag should configure  BluetoothEncryption to False when configured a remote scanner either tethered to the device or connected via Bluetooth", "The barcode should be scanned"],
+			"testToPerform":function(){
+			    attrAssociateValue = ['BluetoothEncryption:False'];
+				attr = ['BluetoothEncryption'];
+				Get(attr);
+				setGetAttributes(attrAssociateValue, attr);
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056-0271",
+			"RegLevel":"R3",
+			"Description":"Scanner - Get and Set RSM BluetoothReconnectAttempts",
+			"PreCondition":[],
+			"Steps":["Connect RSM device to the mobile unit", "Test RSM META Tag functionality with content='BluetoothReconnectAttempts'  to register this attribute.", "Invoke RsmGetEvent to retrieve BluetoothReconnectAttempts attribute value from AttributeArray.", "Test RSM META Tag functionality with content='BluetoothReconnectAttempts:40' to configure attribute value to 40 seconds.", "Test RSM META Tag functionality with content='BluetoothReconnectAttempts'", "Invoke RsmGetEvent to retrieve BluetoothReconnectAttempts attribute value from AttributeArray.", "Take the RSM device out of Range from the mobile device for 40 seconds and get it back after 40 seconds."],
+			"ExpectedOutcome":["RSM META Tag should retrieve BluetoothReconnectAttempts when RSMGetEvent is invoked relating to a remote scanner connected to the device or connected via Bluetooth", "RSM META Tag should set BluetoothReconnectAttempts to 40 when configured a remote scanner either tethered to the device or connected via Bluetooth", "The RSM device should not get reconnected to the mobile device after 40 seconds."],
+			"testToPerform":function(){
+			    attrAssociateValue = ['BluetoothReconnectAttempts:40'];
+				attr = ['BluetoothReconnectAttempts'];
+				Get(attr);
+				setGetAttributes(attrAssociateValue, attr);
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056-0272",
+			"RegLevel":"R3",
+			"Description":"Scanner - Get and Set RSM BluetoothReconnectAttempts",
+			"PreCondition":[],
+			"Steps":["Connect RSM device to the mobile unit", "Test RSM META Tag functionality with content='BluetoothReconnectAttempts'  to register this attribute.", "Invoke RsmGetEvent to retrieve BluetoothReconnectAttempts attribute value from AttributeArray.", "Test RSM META Tag functionality with content='BluetoothReconnectAttempts:60' to configure attribute value to 60 seconds.", "Configure BluetoothAutoReconnect attributes to OnOutofRange if it is configured to another one.Now register BluetoothReconnectAttempts attribute.", "Invoke RsmGetEvent to retrieve BluetoothReconnectAttempts attribute value from AttributeArray.", "Take the RSM device out of Range from the mobile device  and get it back before 60 seconds."],
+			"ExpectedOutcome":["RSM META Tag should retrieve BluetoothReconnectAttempts when RSMGetEvent is invoked relating to a remote scanner connected to the device or connected via Bluetooth", "RSM META Tag should set BluetoothReconnectAttempts to 60 when configured a remote scanner either tethered to the device or connected via Bluetooth", "The RSM device should  get reconnected to the mobile device if get back before 60 seconds."],
+			"testToPerform":function(){
+			    attrAssociateValue = ['BluetoothReconnectAttempts:60'];
+				attr = ['BluetoothReconnectAttempts'];
+				Get(attr);
+				setGetAttributes(attrAssociateValue, attr); 
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056-0273",
+			"RegLevel":"R3",
+			"Description":"Scanner - Get and Set RSM BluetoothBeepOnReconnectAttempt",
+			"PreCondition":[],
+			"Steps":["Connect RSM device to the mobile unit", "Test RSM META Tag functionality with content='BluetoothBeepOnReconnectAttempt'  to register this attribute.", "Invoke RsmGetEvent to retrieve BluetoothBeepOnReconnectAttempt attribute value from AttributeArray.", "Test RSM META Tag functionality with content='BluetoothBeepOnReconnectAttempt:True' to configure attribute value as True. ", "Test RSM META Tag functionality with content='BluetoothBeepOnReconnectAttempt'", "Invoke RsmGetEvent to retrieve BluetoothBeepOnReconnectAttempt attribute value from AttributeArray."],
+			"ExpectedOutcome":["RSM META Tag should retrieve BluetoothBeepOnReconnectAttempt when RSMGetEvent is Invoked  relating to a remote scanner connected to the device or connected via Bluetooth", "RSM META Tag should set BluetoothBeepOnReconnectAttempt to True when configured a remote scanner either tethered to the device or connected via Bluetooth."],
+			"testToPerform":function(){
+			    attrAssociateValue = ['BluetoothBeepOnReconnectAttempt:True'];
+				attr = ['BluetoothBeepOnReconnectAttempt'];
+				Get(attr);
+				setGetAttributes(attrAssociateValue, attr);
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056-0274",
+			"RegLevel":"R3",
+			"Description":"Scanner - Get and Set RSM BluetoothBeepOnReconnectAttempt",
+			"PreCondition":[],
+			"Steps":["Connect RSM device to the mobile unit", "Test RSM META Tag functionality with content='BluetoothBeepOnReconnectAttempt:True' to configure attribute value.", "Test RSM META Tag functionality with content='BluetoothReconnectAttempts:50'  to configure attribute value as 50 seconds.", "Take the RSM device out of Range from the mobile device ."],
+			"ExpectedOutcome":["The RSM device should start emiting 5 beeps every 5 seconds during the reconnection process when the RSM device is out of range. i.e. 10 beeps "],
+			"testToPerform":function(){
+			    attrAssociateValue = ['BluetoothBeepOnReconnectAttempt:True', 'BluetoothReconnectAttempts:50'];
+				attr = ['BluetoothBeepOnReconnectAttempt'];
+				Get(attr);
+				setGetAttributes(attrAssociateValue, attr);
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056-0275",
+			"RegLevel":"R3",
+			"Description":"Scanner - Set and Get RSM BluetoothBeepOnReconnectAttempt",
+			"PreCondition":[],
+			"Steps":["Connect RSM device to the mobile unit", "Test RSM META Tag functionality with content='BluetoothBeepOnReconnectAttempt:False' to configure attribute value as False.", "Test RSM META Tag functionality with content='BluetoothBeepOnReconnectAttempt' to register attribute.", "Invoke RsmGetEvent to retrieve BluetoothBeepOnReconnectAttempt attribute value from AttributeArray."],
+			"ExpectedOutcome":["RSM META Tag should set BluetoothBeepOnReconnectAttempt to False when configured a remote scanner either tethered to the device or connected via Bluetooth."],
+			"testToPerform":function(){
+			    attrAssociateValue = ['BluetoothBeepOnReconnectAttempt:False'];
+				attr = ['BluetoothBeepOnReconnectAttempt'];
+				Get(attr);
+				setGetAttributes(attrAssociateValue, attr);
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056-0276",
+			"RegLevel":"R3",
+			"Description":"Scanner - Get and Set RSM BluetoothBeepOnReconnectAttempt",
+			"PreCondition":[],
+			"Steps":["Connect RSM device to the mobile unit", "Test RSM META Tag functionality with content='BluetoothBeepOnReconnectAttempt:False' to configure attribute value", "Test RSM META Tag functionality with content='BluetoothReconnectAttempts:30' to configure attribute value.", "Take the RSM device out of Range from the mobile device for 20 seconds and get it back"],
+			"ExpectedOutcome":["The RSM device should not start emiting 5 beeps every 5 seconds during the reconnection process when the RSM device is out of range"],
+			"testToPerform":function(){
+			    attrAssociateValue = ['BluetoothBeepOnReconnectAttempt:False', 'BluetoothReconnectAttempts:30'];
+				attr = ['BluetoothBeepOnReconnectAttempt'];
+				Get(attr);
+				setGetAttributes(attrAssociateValue, attr);
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056-0277",
+			"RegLevel":"R3",
+			"Description":"Scanner - Get and Set RSM BluetoothHIDAutoReconnect",
+			"PreCondition":[],
+			"Steps":["Connect RSM device to the mobile unit", "Test RSM META Tag functionality with content='BluetoothHIDAutoReconnect:NeverReconnect' to configure it.", "Test RSM META Tag functionality with content='BluetoothHIDAutoReconnect' to register attribute.", "Invoke RsmGetEvent to retrieve BluetoothHIDAutoReconnect attribute value from AttributeArray."],
+			"ExpectedOutcome":["RSM META Tag should configure BluetoothHIDAutoReconnect to NeverReconnect when configured a remote scanner either tethered to the device or connected via Bluetooth", "RSM META Tag should retrieve BluetoothHIDAutoReconnect when RSMGetEvent is invoked relating to a remote scanner connected to the device or connected via Bluetooth"],
+			"testToPerform":function(){
+			    attrAssociateValue = ['BluetoothHIDAutoReconnect:NeverReconnect'];
+				attr = ['BluetoothHIDAutoReconnect'];
+				Get(attr);
+				setGetAttributes(attrAssociateValue, attr);
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056-0278",
+			"RegLevel":"R3",
+			"Description":"Scanner - Get and Set RSM BluetoothHIDAutoReconnect",
+			"PreCondition":[],
+			"Steps":["Connect RSM device to the mobile unit", "Test RSM META Tag functionality with content='BluetoothHIDAutoReconnect:ReconnectOnData' to configure it.", "Test RSM META Tag functionality with content='BluetoothHIDAutoReconnect' to register attribute.", "Invoke RsmGetEvent to retrieve BluetoothHIDAutoReconnect attribute value from AttributeArray."],
+			"ExpectedOutcome":["RSM META Tag should configure BluetoothHIDAutoReconnect to ReconnectOnData when configured a remote scanner either tethered to the device or connected via Bluetooth", "RSM META Tag should retrieve BluetoothHIDAutoReconnect when RSMGetEvent is invoked relating to a remote scanner connected to the device or connected via Bluetooth"],
+			"testToPerform":function(){
+			    attrAssociateValue = ['BluetoothHIDAutoReconnect:ReconnectOnData'];
+				attr = ['BluetoothHIDAutoReconnect'];
+				Get(attr);
+				setGetAttributes(attrAssociateValue, attr);
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056-0279",
+			"RegLevel":"R3",
+			"Description":"Scanner - Get and Set RSM BluetoothHIDAutoReconnect",
+			"PreCondition":[],
+			"Steps":["Connect RSM device to the mobile unit", "Test RSM META Tag functionality with content='BluetoothHIDAutoReconnect:ReconnectImmediately' to configure it.", "Test RSM META Tag functionality with content='BluetoothHIDAutoReconnect' to register attribute.", "Invoke RsmGetEvent to retrieve BluetoothHIDAutoReconnect attribute value from AttributeArray."],
+			"ExpectedOutcome":["RSM META Tag should configure BluetoothHIDAutoReconnect to ReconnectImmediately when configured a remote scanner either tethered to the device or connected via Bluetooth", "RSM META Tag should retrieve BluetoothHIDAutoReconnect when RSMGetEvent is invoked relating to a remote scanner connected to the device or connected via Bluetooth"],
+			"testToPerform":function(){
+			    attrAssociateValue = ['BluetoothHIDAutoReconnect:ReconnectImmediately'];
+				attr = ['BluetoothHIDAutoReconnect'];
+				Get(attr);
+				setGetAttributes(attrAssociateValue, attr);
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056-0281",
+			"RegLevel":"R3",
+			"Description":"Scanner - Set RSM BluetoothFriendlyName",
+			"PreCondition":[],
+			"Steps":["Connect RSM device to the mobile unit", "Test RSM META Tag functionality with content='BluetoothFriendlyName:abcd' to configure this attribute.", "Test RSM META Tag functionality with content='BluetoothFriendlyName' to register this attribute.", "Invoke RsmGetEvent to retrieve ModelNumber from AttributeArray"],
+			"ExpectedOutcome":["RSM META Tag should configure BluetoothFriendlyName to abcd and should retrieve new name (abcd) when RSMGetEvent is Invoked relating to a remote scanner connected to the device or connected via Bluetooth", "In BT Explorer also device should be displayed with new friendly name when we search through BT Explorer"],
+			"testToPerform":function(){
+			    attrAssociateValue = ['BluetoothFriendlyName:abcd'];
+				attr = ['BluetoothFriendlyName'];
+				Get(attr);
+				setGetAttributes(attrAssociateValue, attr);
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056-0282",
+			"RegLevel":"R3",
+			"Description":"Scanner - Get and Set RSM BluetoothPINCodeType",
+			"PreCondition":[],
+			"Steps":["Connect RSM device to the mobile unit", "Test RSM META Tag functionality with content='BluetoothPINCodeType' to register this attribute.", " Invoke RsmGetEvent to retrieve BluetoothPINCodeType attribute value from AttributeArray.", "Test RSM META Tag functionality with content='BluetoothPINCodeType:PromptUser' to Configure this attribute.", "Invoke RsmGetEvent to retrieve BluetoothPINCodeType attribute value from AttributeArray."],
+			"ExpectedOutcome":["RSM META Tag should retrieve BluetoothPINCodeType when RSMGetEvent is Invoked relating to a remote scanner connected to the device or connected via Bluetooth", "RSM META Tag should Configure  BluetoothPINCodeType to PromptUser when configured a remote scanner either tethered to the device or connected via Bluetooth."],
+			"testToPerform":function(){
+			    attrAssociateValue = ['BluetoothPINCodeType:PromptUser'];
+		        attr = ['BluetoothPINCodeType'];
+		        Get(attr);
+		        setGetAttributes(attrAssociateValue, attr);
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056-0283",
+			"RegLevel":"R3",
+			"Description":"Scanner - Set and Get RSM BluetoothPINCodeType",
+			"PreCondition":[],
+			"Steps":["Connect RSM device to the mobile unit", "Test RSM META Tag functionality with content='BluetoothPINCodeType:UseStored' to Configure this attribute.", "Test RSM META Tag functionality with content='BluetoothPINCodeType' to register this attribute.", "Invoke RsmGetEvent to retrieve BluetoothPINCodeType attribute value from AttributeArray."],
+			"ExpectedOutcome":["RSM META Tag should set BluetoothPINCodeType to UseStored when configured a remote scanner either tethered to the device or connected via Bluetooth."],
+			"testToPerform":function(){
+			    attrAssociateValue = ['BluetoothPINCodeType:UseStored'];
+		        attr = ['BluetoothPINCodeType'];
+		        Get(attr);
+		        setGetAttributes(attrAssociateValue, attr);
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056-0284",
+			"RegLevel":"R3",
+			"Description":"Scanner - Set RSM BluetoothPINCodeType",
+			"PreCondition":[],
+			"Steps":["Disconnect the RSM device and scan the BTAddress barcode", "Test RSM META Tag functionality with content='BluetoothAuthentication:True'", "Test RSM META Tag functionality with content='BluetoothPINcode:00000'", "Test RSM META Tag functionality with content='BluetoothPINCodeType:PromptUser", "Disconnect device and connect again by scanning BTAddress barcode and check whether PINCode box pops up"],
+			"ExpectedOutcome":["Mobile device should prompt PINCode message box to enter the PINCode. Once the PIN is entered the RSM device should get connected", "PINCode box should pop up"],
+			"testToPerform":function(){
+			    attrAssociateValue = ['BluetoothAuthentication:True', 'BluetoothPINCodeType:PromptUser', 'BluetoothPINcode:00000'];
+		        setGetAttributes(attrAssociateValue, attr); 
+		        DisconnetBT();
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056-0285",
+			"RegLevel":"R3",
+			"Description":"Scanner - Set RSM BluetoothPINCodeType",
+			"PreCondition":[],
+			"Steps":["Disconnect the RSM device and scan the BTAddress barcode", "Test RSM META Tag functionality with content='BluetoothAuthentication:True'", "Test RSM META Tag functionality with content='BluetoothPINcode:00000", "Test RSM META Tag functionality with content='BluetoothPINCodeType:UseStored'", "Note - Store the registry key in the mobile device which is holding the Bluetooth PINCode"],
+			"ExpectedOutcome":["Mobile device should not prompt PINCode message box to enter the PINCode and RSM device should get connected without entering the PINCode"],
+			"testToPerform":function(){
+			    attrAssociateValue = ['BluetoothAuthentication:True', 'BluetoothPINCodeType:UseStored', 'BluetoothPINcode:00000'];
+		        setGetAttributes(attrAssociateValue, attr); 
+		        DisconnetBT();
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056-0286",
+			"RegLevel":"R3",
+			"Description":"Scanner - Get and Set RSM BluetoothInquiryMode",
+			"PreCondition":[],
+			"Steps":["Connect RSM device to the mobile unit", "Test RSM META Tag functionality with content='BluetoothInquiryMode' to register this attribute.", "Invoke RsmGetEvent to retrieve BluetoothInquiryMode attribute value from AttributeArray.", "Test RSM META Tag functionality with content='BluetoothInquiryMode:General' to Configure this attribute.", "Invoke RsmGetEvent to retrieve BluetoothInquiryMode attribute value from AttributeArray.", "Go the BTExplorer in the mobile device and try to discover  RSM device manually"],
+			"ExpectedOutcome":["RSM  META Tag should retrieve BluetoothInquiryMode when RSMGetEvent is invoked relating to a remote scanner connected to the device or connected via Bluetooth", "RSM META Tag should set BluetoothInquiryMode to General when configured a remote scanner either tethered to the device or connected via Bluetooth", "RSM device should be discoverable from BTExplorer"],
+			"testToPerform":function(){
+			    attrAssociateValue = ['BluetoothInquiryMode:General'];
+		        attr = ['BluetoothInquiryMode'];
+		        Get(attr);
+		        setGetAttributes(attrAssociateValue, attr);
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056-0287",
+			"RegLevel":"R3",
+			"Description":"Scanner - Set and Get RSM BluetoothInquiryMode",
+			"PreCondition":[],
+			"Steps":["Connect RSM device to the mobile unit", "Test RSM META Tag functionality with content='BluetoothInquiryMode:Limited' to Configure this attribute.", "Test RSM META Tag functionality with content='BluetoothInquiryMode' to register this attribute.", "Invoke RsmGetEvent to retrieve BluetoothInquiryMode attribute value from AttributeArray.", "Go the BTExplorer in the mobile device and try to discover  RSM device manually"],
+			"ExpectedOutcome":["RSM META Tag should set BluetoothInquiryMode to Limited when configured a remote scanner either tethered to the device or connected via Bluetooth", "RSM device should not be discoverable from BTExplorer"],
+			"testToPerform":function(){
+			    attrAssociateValue = ['BluetoothInquiryMode:Limited'];
+		        attr = ['BluetoothInquiryMode'];
+		        Get(attr);
+		        setGetAttributes(attrAssociateValue, attr);
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056-0288",
+			"RegLevel":"R3",
+			"Description":"Scanner - Get and Set RSM IgnoreCode128USPS",
+			"PreCondition":[],
+			"Steps":["Connect RSM device to the mobile unit", "Test RSM META Tag functionality with content='IgnoreCode128USPS' to register this attribute.", "Invoke RsmGetEvent to retrieve IgnoreCode128USPS attribute value from AttributeArray.", "Test RSM META Tag functionality with content='IgnoreCode128USPS:Enabled'  to Configure this attribute.", "Invoke RsmGetEvent to retrieve IgnoreCode128USPS attribute value from AttributeArray.", "Scan code128 barcode which start with 420 or 421"],
+			"ExpectedOutcome":["RSM META Tag should retrieve IgnoreCode128USPS when RSMGetEvent is called relating to a remote scanner connected to the device or connected via Bluetooth", "RSM META Tag should Configure IgnoreCode128USPS to Enabled when configured a remote scanner either tethered to the device or connected via Bluetooth", "Should not scan Code128 starting with 420, 421"],
+			"testToPerform":function(){
+			    attrAssociateValue = ['IgnoreCode128USPS:Enabled'];
+		        attr = ['IgnoreCode128USPS'];
+		        Get(attr);
+		        setGetAttributes(attrAssociateValue, attr);
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056-0289",
+			"RegLevel":"R3",
+			"Description":"Scanner - Set and Get RSM IgnoreCode128USPS",
+			"PreCondition":[],
+			"Steps":["Connect RSM device to the mobile unit", "Test RSM META Tag functionality with content='IgnoreCode128USPS:Disabled'  to Configure this attribute.", "Test RSM META Tag functionality with content='IgnoreCode128USPS' to register this attribute.", "Invoke RsmGetEvent to retrieve IgnoreCode128USPS attribute value from AttributeArray.", "Scan code128 barcode which start with 420 or 421"],
+			"ExpectedOutcome":["RSM META Tag should configure IgnoreCode128USPS to Disabled when configured a remote scanner either tethered to the device or connected via Bluetooth", "Should scan Code128 starting with 420, 421"],
+			"testToPerform":function(){
+			    attrAssociateValue = ['IgnoreCode128USPS:Disabled'];
+		        attr = ['IgnoreCode128USPS'];
+		        Get(attr);
+		        setGetAttributes(attrAssociateValue, attr);
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056-0290",
+			"RegLevel":"R3",
+			"Description":"Scanner - Get and Set RSM Mems",
+			"PreCondition":[],
+			"Steps":["Connect RSM device to the mobile unit", "Test RSM META Tag functionality with content='Mems' to register this attribute.", "Invoke RsmGetEvent to retrieve Mems attribute value from AttributeArray.", "Test RSMSetParam functionality with content='Mems:Enabled'  to Configure this attribute.", "Invoke RsmGetEvent to retrieve Mems attribute value from AttributeArray.", "Shake the RSM device"],
+			"ExpectedOutcome":["RSM META Tag should retrieve Mems when RSMGetEvent is called relating to a remote scanner connected to the device or connected via Bluetooth", "RSM META Tag should Configure Mems to Enabled when configured a remote scanner either tethered to the device or connected via Bluetooth", "Once the RSM device is shaked laser beam should get started"],
+			"testToPerform":function(){
+			    attrAssociateValue = ['Mems:Enabled'];
+		        attr = ['Mems'];
+		        Get(attr);
+		        setGetAttributes(attrAssociateValue, attr);
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056-0291",
+			"RegLevel":"R3",
+			"Description":"Scanner - Set and Get RSM Mems",
+			"PreCondition":[],
+			"Steps":["Connect RSM device to the mobile unit", "Test RSMSetParam functionality with content='Mems:Disabled'  to Configure this attribute.", "Test RSM META Tag functionality with content='Mems' to register this attribute.", "Invoke RsmGetEvent to retrieve Mems attribute value from AttributeArray.", "Shake the RSM device"],
+			"ExpectedOutcome":["RSM META Tag should Configure Mems to Disabled when configured a remote scanner either tethered to the device or connected via Bluetooth", "Once the RSM device is shaked laser beam should not get started"],
+			"testToPerform":function(){
+			    attrAssociateValue = ['Mems:Disabled'];
+		        attr = ['Mems'];
+		        Get(attr);
+		        setGetAttributes(attrAssociateValue, attr);
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056-0292",
+			"RegLevel":"R3",
+			"Description":"Scanner - Get and Set RSM ProximityEnable",
+			"PreCondition":[],
+			"Steps":["Connect RSM device to the mobile unit", "Test RSM META Tag functionality with content='ProximityEnable'", " Invoke RsmGetEvent to retrieve ProximityEnable attribute value from AttributeArray.", "Test RSM META Tag functionality with content='ProximityEnable:Enabled'  to Configure this attribute.", " Invoke RsmGetEvent to retrieve ProximityEnable attribute value from AttributeArray."],
+			"ExpectedOutcome":["RSM META Tag should retrieve ProximityEnable when RSMGetEvent is called relating to a remote scanner connected to the device or connected via Bluetooth", "RSM META Tag should Configure ProximityEnable to Enabled when configured a remote scanner either tethered to the device or connected via Bluetooth."],
+			"testToPerform":function(){
+			    attrAssociateValue = ['ProximityEnable:Enabled'];
+		        attr = ['ProximityEnable'];
+		        Get(attr);
+		        setGetAttributes(attrAssociateValue, attr);
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056-0293",
+			"RegLevel":"R3",
+			"Description":"Scanner - Set and Get RSM ProximityEnable",
+			"PreCondition":[],
+			"Steps":["Connect RSM device to the mobile unit", "Test  RSM META Tag functionality with content='ProximityEnable:Disabled", "Test  RSM META Tag functionality with content='ProximityEnable", "Invoke RsmGetEvent to retrieve ProximityEnable attribute value from AttributeArray."],
+			"ExpectedOutcome":["RSM META Tag should set ProximityEnable to Disabled when configured a remote scanner either tethered to the device or connected via Bluetooth."],
+			"testToPerform":function(){
+			    attrAssociateValue = ['ProximityEnable:Disabled'];
+		        attr = ['ProximityEnable'];
+		        Get(attr);
+		        setGetAttributes(attrAssociateValue, attr);
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056-0294",
+			"RegLevel":"R3",
+			"Description":"Scanner -  Set and Get RSM ProximityDistance",
+			"PreCondition":[],
+			"Steps":["Connect RSM device to the mobile unit", "Test RSM META Tag functionality with content='ProximityEnable:Enabled' to Configure this attribute.", "Test RSM META Tag functionality with content='ProximityDistance:Short' to Configure this attribute.", "Test RSM META Tag functionality with content='ProximityDistance' to register this attribute.", "Invoke RsmGetEvent to retrieve ProximityDistance and ProximityEnable attribute value from AttributeArray.", "Keep the RS507 and fix the barcode in some place.Do not move anyone of them.( to check this functionality ProximityContinuous attribute also should br enabled)"],
+			"ExpectedOutcome":["RSM META Tag should Configure ProximityDistance to Short when configured a remote scanner either tethered to the device or connected via Bluetooth", "RSM META Tag should retrieve ProximityDistance when RSMGetEvent is invoked relating to a remote scanner connected to the device or connected via Bluetooth", "Laser beam should come when it comes in short range proximity of Barcode. Barcode should be scanned"],
+			"testToPerform":function(){
+			    attrAssociateValue = ['ProximityEnable:Enabled', 'ProximityDistance:Short'];
+		        attr = ['ProximityEnable', 'ProximityDistance'];
+		        Get(attr);
+		        setGetAttributes(attrAssociateValue, attr);
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056-0295",
+			"RegLevel":"R3",
+			"Description":"Scanner - Set and Get RSM ProximityDistance",
+			"PreCondition":[],
+			"Steps":["Connect RSM device to the mobile unit", "Test RSM META Tag functionality with content='ProximityEnable:Enabled' to Configure this attribute.", "Test RSM META Tag functionality with content='ProximityDistance:Medium' to Configure this attribute.", "Test RSM META Tag functionality with content='ProximityDistance' to register this attribute.", "Invoke RsmGetEvent to retrieve ProximityDistance and ProximityEnable attribute value from AttributeArray.", " Keep the RS507 and fix the barcode in some place.Do not move anyone of them.( to check this functionality ProximityContinuous attribute also should br enabled)"],
+			"ExpectedOutcome":["RSM META Tag should set ProximityDistance to Medium when configured a remote scanner either tethered to the device or connected via Bluetooth", "Laser beam should come when it comes in medium range proximity of Barcode. Barcode should be scanned"],
+			"testToPerform":function(){
+			    attrAssociateValue = ['ProximityEnable:Enabled', 'ProximityDistance:Medium'];
+		        attr = ['ProximityEnable', 'ProximityDistance'];
+		        Get(attr);
+		        setGetAttributes(attrAssociateValue, attr);
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056-0296",
+			"RegLevel":"R3",
+			"Description":"Scanner - Set and Get RSM ProximityDistance",
+			"PreCondition":[],
+			"Steps":["Connect RSM device to the mobile unit", "Test RSM META Tag functionality with content='ProximityEnable:Enabled' to Configure this attribute.", "Test RSM META Tag functionality with content='ProximityDistance:Long' to Configure this attribute.", "Test RSM META Tag functionality with content='ProximityDistance' to register this attribute.", "Invoke RsmGetEvent to retrieve ProximityDistance and ProximityEnable attribute value from AttributeArray.", " Keep the RS507 and fix the barcode in some place.Do not move anyone of them.( to check this functionality ProximityContinuous attribute also should br enabled)"],
+			"ExpectedOutcome":["RSM META Tag should set ProximityDistance to Long when configured a remote scanner either tethered to the device or connected via Bluetooth", "Laser beam should come when it comes in long range proximity of Barcode. Barcode should be scanned"],
+			"testToPerform":function(){
+			    attrAssociateValue = ['ProximityEnable:Enabled', 'ProximityDistance:Long'];
+		        attr = ['ProximityEnable', 'ProximityDistance'];
+		        Get(attr);
+		        setGetAttributes(attrAssociateValue, attr);
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056-0297",
+			"RegLevel":"R3",
+			"Description":"Scanner -  Set and Get  Proximity Enable:Disabled",
+			"PreCondition":[],
+			"Steps":["Connect RSM device to the mobile unit", "Test RSM META Tag functionality with content='ProximityEnable:Disabled' to configure attribute value as disabled.", "Test RSM META Tag functionality with content='ProximityDistance:Long' to configure attribute value", "Test RSM META Tag functionality with content='ProximityDistance", "Invoke RsmGetEvent to retrieve ProximityDistance and ProximityEnable attribute value from AttributeArray.", " Keep the RS507 and fix the barcode in some place.Do not move anyone of them.( to check this functionality ProximityContinuous attribute also should br enabled)"],
+			"ExpectedOutcome":["RSM META Tag should set ProximityDistance to Long when configured a remote scanner either tethered to the device or connected via Bluetooth", "Laser beam should not het emitted from device as ProximityEnable attribute is Disabled"],
+			"testToPerform":function(){
+			    attrAssociateValue = ['ProximityEnable:Disabled', 'ProximityDistance:Long'];
+		        attr = ['ProximityEnable', 'ProximityDistance'];
+		        Get(attr);
+		        setGetAttributes(attrAssociateValue, attr);
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056-0298",
+			"RegLevel":"R3",
+			"Description":"Scanner - Get and Set RSM PagingEnable",
+			"PreCondition":[],
+			"Steps":["Connect RSM device to the mobile unit", "Test RSM META Tag functionality with content='PagingEnable' to register it.", " Invoke RsmGetEvent to retrieve PagingEnable attribute value from AttributeArray.", "Test RSM META Tag functionality with content='PagingEnable:Enabled' to Configre it.", "Invoke RsmGetEvent to retrieve PagingEnable attribute value from AttributeArray.", "Test RSM META Tag functionality with content='PagingActivate:Start' to Configre it."],
+			"ExpectedOutcome":["RSM META Tag should retrieve PagingEnable when RSMGetEvent is called relating to a remote scanner connected to the device or connected via Bluetooth", "RSM META Tag should set PagingEnable to Enabled when configured a remote scanner either tethered to the device or connected via Bluetooth", "Beep sequence will get started once paging is enabled"],
+			"testToPerform":function(){
+			    attrAssociateValue = ['PagingEnable:Enabled'];
+		        attr = ['PagingEnable'];
+		        Get(attr);
+		        setGetAttributes(attrAssociateValue, attr); 
+		        StartPaging(); 
+		        setTimeout(StopPaging(), 10000);
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056-0299",
+			"RegLevel":"R3",
+			"Description":"Scanner - Set RSM PagingActivate:stop",
+			"PreCondition":[],
+			"Steps":["Connect RSM device to the mobile unit", "Test RSM META Tag functionality with content='PagingEnable:Enabled' to configure it.", "Test RSM META Tag functionality with content='PagingActivate:Start' to configure it.", "Test RSM META Tag functionality with content='PagingActivate:Stop' to configure it."],
+			"ExpectedOutcome":["Beep sequence will get stoped once paging is disabled"],
+			"testToPerform":function(){
+			    attrAssociateValue = ['PagingEnable:Enabled'];
+		        attr = ['PagingEnable'];
+		        Get(attr);
+		        setGetAttributes(attrAssociateValue, attr); 
+		        StartPaging(); 
+		        setTimeout(StopPaging(), 10000);
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056-0300",
+			"RegLevel":"R3",
+			"Description":"Scanner - Get and Set RSM PagingEnable",
+			"PreCondition":[],
+			"Steps":["Connect RSM device to the mobile unit", "Test RSM META Tag functionality with content='PagingEnable:Disabled' to configure it.", "Test RSM META Tag functionality with content='PagingEnable' to register it.", "Invoke RsmGetEvent to retrieve PagingEnable attribute value from AttributeArray.", "Test RSM META Tag functionality with content='PagingActivate:Start' to configure it."],
+			"ExpectedOutcome":["RSM META Tag should set PagingEnable to Disabled when configured a remote scanner either tethered to the device or connected via Bluetooth", "Beep sequence will not get started, once paging is disabled"],
+			"testToPerform":function(){
+			    attrAssociateValue = ['PagingEnable:Disabled'];
+		        attr = ['PagingEnable'];
+		        Get(attr);
+		        setGetAttributes(attrAssociateValue, attr); 
+		        StartPaging();
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056-0301",
+			"RegLevel":"R3",
+			"Description":"Scanner - Get and Set RSM PagingBeepSequence",
+			"PreCondition":[],
+			"Steps":["Connect RSM device to the mobile unit", "Test RSM META Tag functionality with content='PagingBeepSequence' to register it.", "Invoke RsmGetEvent to retrieve PagingBeepSequence attribute value from AttributeArray.", "Test RSM META Tag functionality with content='PagingBeepSequence:8' to configure PagingBeepSequencePattern.", "Test RSM META Tag functionality with content='PagingBeepSequence'", "Invoke RsmGetEvent again  to retrieve PagingBeepSequence attribute value from AttributeArray."],
+			"ExpectedOutcome":["RSM META Tag should retrieve PagingBeepSequence when RSMGetEvent is called relating to a remote scanner connected to the device or connected via Bluetooth", "RSMSetParam META Tag should configure PagingBeepSequence to 8 when configured a remote scanner either tethered to the device or connected via Bluetooth."],
+			"testToPerform":function(){
+			    attrAssociateValue = ['PagingBeepSequence:8'];
+		        attr = ['PagingBeepSequence'];
+		        Get(attr);
+		        setGetAttributes(attrAssociateValue, attr); 
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056-0302",
+			"RegLevel":"R3",
+			"Description":"Scanner - Get and Set RSM LowBatteryIndication",
+			"PreCondition":[],
+			"Steps":["Connect RSM device to the mobile unit", "Test RSM META Tag functionality with content='LowBatteryIndication'", "Invoke RsmGetEvent again  to retrieve LowBatteryIndication attribute value from AttributeArray.", "Test RSM META Tag functionality with content='LowBatteryIndication:Enabled' to configure it.", "Invoke RsmGetEvent again to retrieve newly configured LowBatteryIndication attribute value from AttributeArray."],
+			"ExpectedOutcome":["RSM META Tag should retrieve LowBatteryIndication when RSMGetEvent is called relating to a remote scanner connected to the device or connected via Bluetooth", "RSMSetParam META Tag should Configure LowBatteryIndication to Enabled when configured a remote scanner either tethered to the device or connected via Bluetooth."],
+			"testToPerform":function(){
+			    attrAssociateValue = ['LowBatteryIndication:Enabled'];
+		        attr = ['LowBatteryIndication'];
+		        Get(attr);
+		        setGetAttributes(attrAssociateValue, attr); 
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056-0303",
+			"RegLevel":"R3",
+			"Description":"Scanner - Set and Get RSM LowBatteryIndication",
+			"PreCondition":[],
+			"Steps":["Connect RSM device to the mobile unit", "Test RSM META Tag functionality with content='LowBatteryIndication:Disabled' to configure for disabled.", "Test RSM META Tag functionality with content='LowBatteryIndication' to register it.", "Invoke RsmGetEvent again to retrieve newly configured LowBatteryIndication attribute value from AttributeArray."],
+			"ExpectedOutcome":["RSM META Tag should set LowBatteryIndication to Disabled when configured a remote scanner either tethered to the device or connected via Bluetooth."],
+			"testToPerform":function(){
+			    attrAssociateValue = ['LowBatteryIndication:Disabled'];
+		        attr = ['LowBatteryIndication'];
+		        Get(attr);
+		        setGetAttributes(attrAssociateValue, attr);
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056-0304",
+			"RegLevel":"R3",
+			"Description":"Scanner - Get and Set RSM ScanTriggerWakeup",
+			"PreCondition":[],
+			"Steps":["Connect RSM device to the mobile unit", "Test RSM META Tag functionality with content='ScanTriggerWakeup' to register it.", "Invoke RsmGetEvent to retrieve ScanTriggerWakeup attribute value from AttributeArray.", "Test RSM META Tag functionality with content='ScanTriggerWakeup:Enabled' to configure for enable it.", "Invoke RsmGetEvent again to retrieve newly configured ScanTriggerWakeup attribute value from AttributeArray.", "Scan any barcode"],
+			"ExpectedOutcome":["RSM META Tag should retrieve ScanTriggerWakeup when RSMGetEvent is called relating to a remote scanner connected to the device or connected via Bluetooth", "RSMSetParam META Tag should configure  ScanTriggerWakeup to Enabled when configured a remote scanner either tethered to the device or connected via Bluetooth", "Barcode should be scanned even when battery power is low(Scan trigger serves as device wakeup source from low power)"],
+			"testToPerform":function(){
+			    attrAssociateValue = ['ScanTriggerWakeup:Enabled'];
+		        attr = ['ScanTriggerWakeup'];
+		        Get(attr);
+		        setGetAttributes(attrAssociateValue, attr);
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056-0305",
+			"RegLevel":"R3",
+			"Description":"Scanner - Set and Get RSM ScanTriggerWakeup",
+			"PreCondition":[],
+			"Steps":["Connect RSM device to the mobile unit", "Test RSM META Tag functionality with content='ScanTriggerWakeup:Disabled'", "Test RSM META Tag functionality with content='ScanTriggerWakeup", "Invoke RsmGetEvent to retrieve ScanTriggerWakeup attribute value from AttributeArray.", "Scan any barcode"],
+			"ExpectedOutcome":["RSM META Tag should set ScanTriggerWakeup to Disabled when configured a remote scanner either tethered to the device or connected via Bluetooth", "Barcode should not be scanned if the battery power is low(Scan trigger does not serves as device wakeup source from low power)"],
+			"testToPerform":function(){
+			    attrAssociateValue = ['ScanTriggerWakeup:Disabled'];
+		        attr = ['ScanTriggerWakeup'];
+		        Get(attr);
+		        setGetAttributes(attrAssociateValue, attr);
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056-0306",
+			"RegLevel":"R3",
+			"Description":"Scanner - Get and Set RSM BluetoothAutoReconnect",
+			"PreCondition":[],
+			"Steps":["Connect RSM device to the mobile unit", "Test RSM META Tag functionality with content='BluetoothAutoReconnect", "Invoke RsmGetEvent to retrieve BluetoothAutoReconnect attribute value from AttributeArray.", "Test RSM META Tag functionality with content='BluetoothAutoReconnect:None' to configure it.", " Invoke RsmGetEvent to retrieve newly configured  BluetoothAutoReconnect attribute value from AttributeArray.", "Take the RSM device out of range from the mobile device and get it back within  time for reconnection specified."],
+			"ExpectedOutcome":["RSM META Tag should retrieve BluetoothAutoReconnect when RSMGetEvent is called relating to a remote scanner connected to the device or connected via Bluetooth", "RSM META Tag should set BluetoothAutoReconnect to None when configured a remote scanner either tethered to the device or connected via Bluetooth", "RSM device should not get reconnected with the mobile device"],
+			"testToPerform":function(){
+			    attrAssociateValue = ['BluetoothAutoReconnect:None'];
+		        attr = ['BluetoothAutoReconnect'];
+		        Get(attr);
+		        setGetAttributes(attrAssociateValue, attr);  
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056-0307",
+			"RegLevel":"R3",
+			"Description":"Scanner - Set and Get RSM BluetoothAutoReconnect",
+			"PreCondition":[],
+			"Steps":["Connect RSM device to the mobile unit", "Test RSM META Tag functionality with content='BluetoothAutoReconnect:OnPower", "Test RSM META Tag functionality with content='BluetoothAutoReconnect' to register it.", "Invoke RsmGetEvent to retrieve newly configured BluetoothAutoReconnect attribute value from AttributeArray.", "Remove the battery from the RSM device and put it back"],
+			"ExpectedOutcome":["RSM META Tag should set BluetoothAutoReconnect to OnPower when configured a remote scanner either tethered to the device or connected via Bluetooth", "Once the battery is inserted the RSM device should get connected with the mobile device"],
+			"testToPerform":function(){
+			    attrAssociateValue = ['BluetoothAutoReconnect:OnPower'];
+		        attr = ['BluetoothAutoReconnect'];
+		        Get(attr);
+		        setGetAttributes(attrAssociateValue, attr);  
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056-0308",
+			"RegLevel":"R3",
+			"Description":"Scanner - Set and Get RSM BluetoothAutoReconnect",
+			"PreCondition":[],
+			"Steps":["Connect RSM device to the mobile unit", "Test RSM META Tag functionality with content='BluetoothAutoReconnect:OnOutofRange", "Test RSM META Tag functionality with content='BluetoothAutoReconnect' to register it.", "Invoke RsmGetEvent to retrieve newly configured BluetoothAutoReconnect attribute value from AttributeArray.", "Take the RSM device out of range from the mobile device and get it back within time for reconnection specified."],
+			"ExpectedOutcome":["RSM META Tag should set BluetoothAutoReconnect to OnOutofRange when configured a remote scanner either tethered to the device or connected via Bluetooth", "RSM device should get reconnected with the mobile device when the RSM device is back to the range"],
+			"testToPerform":function(){
+			    attrAssociateValue = ['BluetoothAutoReconnect:OnOutofRange'];
+		        attr = ['BluetoothAutoReconnect'];
+		        Get(attr);
+		        setGetAttributes(attrAssociateValue, attr);
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056-0309",
+			"RegLevel":"R3",
+			"Description":"Scanner - Set and Get RSM BluetoothAutoReconnect",
+			"PreCondition":[],
+			"Steps":["Connect RSM device to the mobile unit", "Test RSM META Tag functionality with content='BluetoothAutoReconnect:OnPowerOutofRange", "Test RSM META Tag functionality with content='BluetoothAutoReconnect' to register it.", "Invoke RsmGetEvent to retrieve newly configured BluetoothAutoReconnect attribute value from AttributeArray.", "Remove the battery from the RSM device and put it back or take the RSM device out of range from the mobile device and get it back"],
+			"ExpectedOutcome":["RSM META Tag should set BluetoothAutoReconnect to OnPowerOutofRange when configured a remote scanner either tethered to the device or connected via Bluetooth", "RSM device should get connected with the mobile device"],
+			"testToPerform":function(){
+			    attrAssociateValue = ['BluetoothAutoReconnect:OnPowerOutofRange'];
+		        attr = ['BluetoothAutoReconnect'];
+		        Get(attr);
+		        setGetAttributes(attrAssociateValue, attr);  
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056-0310",
+			"RegLevel":"R3",
+			"Description":"Scanner - Get and Set RSM LowBatteryIndicationCycle",
+			"PreCondition":[],
+			"Steps":["Connect RSM device to the mobile unit", "Test RSM META Tag functionality with content='LowBatteryIndicationCycle' to register attribute.", " Invoke RsmGetEvent to retrieve LowBatteryIndicationCycle attribute value from AttributeArray", "Test RSM META Tag functionality with content='LowBatteryIndication:Enabled' to configure attribute value.", "Test RSM META Tag functionality with content='LowBatteryIndicationCycle:30' to configure attribute value for 30 seconds", "Invoke RsmGetEvent to retrieve newly configured LowBatteryIndicationCycle attribute value from AttributeArray", "Check the RSM device when battery is low"],
+			"ExpectedOutcome":["RSM META Tag should retrieve LowBatteryIndicationCycle when RSMGetEvent is called relating to a remote scanner connected to the device or connected via Bluetooth", "RSM META Tag should Configure LowBatteryIndicationCycle to 30 when configured a remote scanner either tethered to the device or connected via Bluetooth", "Battery indication cycle beep will occur for 30 seconds"],
+			"testToPerform":function(){
+			    attrAssociateValue = ['LowBatteryIndication:Enabled', 'LowBatteryIndicationCycle:30'];
+		        attr = ['LowBatteryIndicationCycle', 'LowBatteryIndication'];
+		        Get(attr);
+		        setGetAttributes(attrAssociateValue, attr); 
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056-0311",
+			"RegLevel":"R3",
+			"Description":"Scanner - Get and Set RSM ProximityContinuous",
+			"PreCondition":[],
+			"Steps":["Connect RSM device to the mobile unit", "Test RSM META Tag functionality with content='ProximityContinuous'  to register attribute.", "Invoke RsmGetEvent to retrieve ProximityContinuous attribute value from AttributeArray.", "Test RSM META Tag functionality with content='ProximityContinuous:Enabled' to configure attribute value.", "Invoke RsmGetEvent to retrieve ProximityContinuous attribute value from AttributeArray.<br/>"],
+			"ExpectedOutcome":["RSM META Tag should retrieve ProximityContinuous when RSMGetEvent is called relating to a remote scanner connected to the device or connected via Bluetooth", "RSM META Tag should set ProximityContinuous to Enabled when configured a remote scanner either tethered to the device or connected via Bluetooth."],
+			"testToPerform":function(){
+			    attrAssociateValue = ['ProximityContinuous:Enabled'];
+		        attr = ['ProximityContinuous'];
+		        Get(attr);
+		        setGetAttributes(attrAssociateValue, attr);
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056-0312",
+			"RegLevel":"R3",
+			"Description":"Scanner - Get and Set RSM ProximityContinuous",
+			"PreCondition":[],
+			"Steps":["Connect RSM device to the mobile unit", "Test RSM META Tag functionality with content='ProximityContinuous:Disabled'  to configure attribute value.", "Test RSM META Tag functionality with content='ProximityContinuous", "Invoke RsmGetEvent to retrieve ProximityContinuous attribute value from AttributeArray."],
+			"ExpectedOutcome":["RSM META Tag should set ProximityContinuous to Disabled when configured a remote scanner either tethered to the device or connected via Bluetooth."],
+			"testToPerform":function(){
+			    attrAssociateValue = ['ProximityContinuous:Disabled'];
+		        attr = ['ProximityContinuous'];
+		        Get(attr);
+		        setGetAttributes(attrAssociateValue, attr);
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056-0313",
+			"RegLevel":"R3",
+			"Description":"Scanner - Get and Set RSM GoodScansDelay",
+			"PreCondition":[],
+			"Steps":["Connect RSM device to the mobile unit", "Test RSM META Tag functionality with content='GoodScansDelay' to register it.", "Invoke RsmGetEvent to retrieve GoodScansDelay attribute value from AttributeArray", "Test RSM META Tag functionality with content='GoodScansDelay:5000", "Invoke RsmGetEvent to retrieve GoodScansDelay attribute value from AttributeArray", "Configure ProximityContinuous and ProximityEnable attribute as Enabled and keep barcode in proximity of RS507 device. <br/>"],
+			"ExpectedOutcome":["RSM META Tag should retrieve GoodScansDelay when RSMGetEvent is called relating to a remote scanner connected to the device or connected via Bluetooth", "RSM META Tag should set GoodScansDelay to 5000 second when configured a remote scanner either tethered to the device or connected via Bluetooth", "Delay between good scans in proximity continuous mode should be 5 seconds."],
+			"testToPerform":function(){
+			    attrAssociateValue = ['GoodScansDelay:5000'];
+		        attr = ['GoodScansDelay'];
+		        Get(attr);
+		        setGetAttributes(attrAssociateValue, attr);
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056-0314",
+			"RegLevel":"R3",
+			"Description":"Scanner - Get and Set RSM ScanLineWidth",
+			"PreCondition":[],
+			"Steps":["Connect RSM device to the mobile unit", "Test RSM META Tag functionality with content='ScanLineWidth' to register it.", " Invoke RsmGetEvent to retrieve ScanLineWidth attribute value from AttributeArray", " Test RSM META Tag functionality with content='ScanLineWidth:Wide", " Invoke RsmGetEvent to retrieve ScanLineWidth attribute value from AttributeArray<br/>6.. Scan any barcode"],
+			"ExpectedOutcome":["RSM META Tag should retrieve ScanLineWidth when RSMGetEvent is called relating to a remote scanner connected to the device or connected via Bluetooth", "RSM META Tag should Configure ScanLineWidth to Wide when configured a remote scanner either tethered to the device or connected via Bluetooth", "The laser beam from RSM device should be wide i.e. Pick list mode is enabled.and barcode should be scanned successfully"],
+			"testToPerform":function(){
+			    attrAssociateValue = ['ScanLineWidth:Wide'];
+		        attr = ['ScanLineWidth'];
+		        Get(attr);
+		        setGetAttributes(attrAssociateValue, attr);
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056-0315",
+			"RegLevel":"R3",
+			"Description":"Scanner - Get and Set RSM ScanLineWidth",
+			"PreCondition":[],
+			"Steps":["Connect RSM device to the mobile unit", "Test RSM META Tag functionality with content='ScanLineWidth:Narrow'", "Test RSM META Tag functionality with content='ScanLineWidth", "Invoke RsmGetEvent to retrieve ScanLineWidth attribute value from AttributeArray", "Scan any barcode"],
+			"ExpectedOutcome":["RSM META Tag should set ScanLineWidth to Narrow when configured a remote scanner either tethered to the device or connected via Bluetooth", "The laser beam from RSM device should be narrow i.e.Pick list mode is Disabled and barcode should be scanned successfully"],
+			"testToPerform":function(){
+			    attrAssociateValue = ['ScanLineWidth:Narrow'];
+		        attr = ['ScanLineWidth'];
+		        Get(attr);
+		        setGetAttributes(attrAssociateValue, attr);
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056-0316",
+			"RegLevel":"R3",
+			"Description":"Scanner - Get and Set RSM DecodeFeedback",
+			"PreCondition":[],
+			"Steps":["Connect RSM device to the mobile unit", "Test RSM META Tag functionality with content='DecodeFeedback' to register attribute.", "Invoke RsmGetEvent to retrieve DecodeFeedback attribute value from AttributeArray", "Test RSM META Tag functionality with content='DecodeFeedback:Enabled'  to Configure attribute.", "Invoke RsmGetEvent to retrieve DecodeFeedback attribute value from AttributeArray", "Scan any barcode"],
+			"ExpectedOutcome":["RSM META Tag should retrieve DecodeFeedback when RSMGetEvent is Invoked relating to a remote scanner connected to the device or connected via Bluetooth", "RSM META Tag should Configure DecodeFeedback to Enabled when configured a remote scanner either tethered to the device or connected via Bluetooth", "The remote scanner beeps and illuminates its green LED on a successful decode."],
+			"testToPerform":function(){
+			    attrAssociateValue = ['DecodeFeedback:Enabled'];
+		        attr = ['DecodeFeedback'];
+		        Get(attr);
+		        setGetAttributes(attrAssociateValue, attr);
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056-0317",
+			"RegLevel":"R3",
+			"Description":"Scanner - Get and Set RSM DecodeFeedback",
+			"PreCondition":[],
+			"Steps":["Connect RSM device to the mobile unit", "Test RSM META Tag functionality with content='DecodeFeedback:Disabled'", "Test RSM META Tag functionality with content='DecodeFeedback", "Invoke RsmGetEvent to retrieve DecodeFeedback attribute value from AttributeArray.", "Scan any barcode."],
+			"ExpectedOutcome":["RSMSetParam META Tag should set DecodeFeedback to Disabled when configured a remote scanner either tethered to the device or connected via Bluetooth", "The remote scanner does not beeps and illuminates its green LED on a successful decode."],
+			"testToPerform":function(){
+			    attrAssociateValue = ['DecodeFeedback:Disabled'];
+		        attr = ['DecodeFeedback'];
+		        Get(attr);
+		        setGetAttributes(attrAssociateValue, attr);
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056-0318",
+			"RegLevel":"R3",
+			"Description":"Scanner - Set RSM BTDisconnect",
+			"PreCondition":[],
+			"Steps":["Connect RSM device to the mobile unit", "Test RSM META Tag functionality with content='BTDisconnect"],
+			"ExpectedOutcome":["RSM META Tag Commands scanner to disconnect from its connected device"],
+			"testToPerform":function(){
+			    DisconnetBT();
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056-0319",
+			"RegLevel":"R3",
+			"Description":"Scanner - Set RSM BTUnpair",
+			"PreCondition":[],
+			"Steps":["Connect RSM device to the mobile unit", "Test RSM META Tag functionality with content='BTUnpair' "],
+			"ExpectedOutcome":["RSM META Tag Command scanner to unpair from its paired device"],
+			"testToPerform":function(){
+			    UnpairBT();
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056-0326",
+			"RegLevel":"R3",
+			"Description":"Scanner - Get RSM BatteryStatus",
+			"PreCondition":[],
+			"Steps":["Connect RSM device to the mobile unit", "Test RSM META Tag functionality with content=BatteryStatus"/*, "Invoke RsmGetEvent functionaity with content='http://157.235.207.79/pb3.x/index.html'*/],
+			"ExpectedOutcome":["Should reach the URL specified when RSMGetEvent is Invoked relating to a remote scanner connected to the device or connected via Bluetooth"],
+			"testToPerform":function(){
+				attr = ['BatteryStatus'];
+			    Get(attr);
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056-0331",
+			"RegLevel":"R3",
+			"Description":"Scanner - Get RSM BatteryStatus when Disconnected.",
+			"PreCondition":[],
+			"Steps":["Disconnect RSM device to the mobile unit", "Test RSM META Tag functionality with content='BatteryStatus'", "Invoke RsmGetEvent to retrieve BatteryStatus attribute value from AttributeArray."],
+			"ExpectedOutcome":["RSMGetEvent should not do anything relating to a remote scanner ."],
+			"testToPerform":function(){
+			    DisconnetBT();
+		        attr = ['BatteryStatus'];
+		        Get(attr);
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056-0332",
+			"RegLevel":"R3",
+			"Description":"Scanner - Get RSM BluetoothAddress",
+			"PreCondition":[],
+			"Steps":["Connect RSM device to the mobile unit", "Test RSM META Tag functionality with content='BluetoothAddress:FF:FF:FF:FF:FF:FF' to configure( which is invalid)", "Test RSM META Tag  functionality with content='BluetoothAddress' to register it.", " Invoke RsmGetEvent to retrieve BluetoothAddress attribute value from AttributeArray."],
+			"ExpectedOutcome":["RSM META Tag should not set BluetoothAddress to FF:FF:FF:FF:FF:FF when configured a remote scanner as BluetoothAddress is not writable property", "RSMGetEvent should get the factory default BluetoothAddress relating to a remote scanner connected to the device or connected via Bluetooth. "],
+			"testToPerform":function(){
+			    attrAssociateValue = ['BluetoothAddress:FF:FF:FF:FF:FF:FF'];
+		        attr = ['BluetoothAddress'];
+		        Get(attr);
+		        setGetAttributes(attrAssociateValue, attr);
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056-0333",
+			"RegLevel":"R3",
+			"Description":"Scanner - Get RSM BluetoothAutoReconnect",
+			"PreCondition":[],
+			"Steps":["Connect RSM device to the mobile unit", "Test RSM META Tag functionality with content='BluetoothAutoReconnect:OnMemory' to configure( which is invalid)", "Test RSM META Tag functionality with content='BluetoothAutoReconnect' to register it.", "Invoke RsmGetEvent to retrieve BluetoothAutoReconnect attribute value from AttributeArray."],
+			"ExpectedOutcome":["RSM META Tag should not set BluetoothAutoReconnect to OnMemory when configured a remote scanner either tethered to the device or connected via Bluetooth", "RSMGetEvent should get the default BluetoothAutoReconnect relating to a remote scanner connected to the device or connected via Bluetooth"],
+			"testToPerform":function(){
+			    attrAssociateValue = ['BluetoothAutoReconnect:OnMemory'];
+		        attr = ['BluetoothAutoReconnect'];
+		        Get(attr);
+		        setGetAttributes(attrAssociateValue, attr);
+			},
+			"FinalResult":""
+		}/*,{
+			"VTID":"VT056-1323",
+			"RegLevel":"R3",
+			"Description":"Scanner - RSM Metatag with Empty parameter",
+			"PreCondition":"",
+			"Steps":["Launch PocketBrowser from Start Menu.", "Set null(Empty) values for some RSM parameters using InvokeMETAFunction.", "Set null(Empty) values for the RSM  events(Rsmgetevent) using InvokeMETAFunction"],
+			"ExpectedOutcome":["PB should not crash when any of the RSM parameters with null values are set through InvokeMetaFunction", "PB should not crash when any of the RSM Event with null values are set through InvokeMetaFunction. No Error should be occurred."],
+			"testToPerform":function(){
+			    main.displayResult("<a href='MetaEmptyParam.html'>Meta tag with empty parameter.</a>");
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056-1324",
+			"RegLevel":"R3",
+			"Description":"RSM - RSM Tag Persistance test",
+			"PreCondition":[],
+			"Steps":["Connect RSM device to the mobile unit", "Set some RSM attributes like BluetoothReconnectAttempts to 40 seconds, Mems to enabled etc.", "Attach RSMgetevent to navigate to another page.", "Check persistancy of configured RSM attribue on another page by calling RSMgetevent."],
+			"ExpectedOutcome":["PB should navigate to another page", "Configured parameters on first page should be persistent on another page"],
+			"testToPerform":function(){
+			    location.href = nextPage.html;
+			},
+			"FinalResult":""
+		},{
+		"VTID":"VT056-1325",
+		"RegLevel":"R2",
+		"Description":"RSM - RSM Events (BTScanAssociation)",
+		"PreCondition":[],
+		"Steps":["Don\"t connect BT scanner to device.", "Attach DecodeEvent to get the message from BT scanner.", "Enable the BTScanner[SCN[i]] using scanner meta tag.", "Scan the AssociationBarcode to connect to device."],
+		"ExpectedOutcome":["BTScanAssociationBarcode event should be fired and Display_BD_Address.exe should be launched on device by minimizing PB", "BT scanner should be connect to device after scan of AssociationBarcode", "BluetoothConnected event should be fired as soon as BTscanner is connected to device."],
+		"testToPerform":function(){
+			    main.displayResult("<a href='BTEnable.html'>BTScanAssociation</a>");
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056-1326",
+			"RegLevel":"R2",
+			"Description":"RSM - RSM Events(BluetoothDisconnected)",
+			"PreCondition":[],
+			"Steps":["Attach DecodeEvent to get the message from BT scanner.", "Connect BTscanner to device by scanning the AssociationBarcode.", "Disconnect Scanner either by going out of rage or pulling out the battery."],
+			"ExpectedOutcome":["BTScanner should be connect to device after sacn of AssociationBarcode", "BluetoothDisconnected event should be fired."],
+			"testToPerform":function(){
+			    main.displayResult("<a href='BTEnable.html'>BluetoothDisconnected</a>");
+			},
+			"FinalResult":""
+		},{
+			"VTID":"VT056-1327",
+			"RegLevel":"R1",
+			"Description":"RSM - RSM Event (decode)",
+			"PreCondition":[],
+			"Steps":["Attach DecodeEvent to get the message from BT scanner.", "Connect BTscanner to device by scanning the AssociationBarcode.", "Set  All_Decoders meta tag to Enabled and Sacn the barcode."],
+			"ExpectedOutcome":["BTScanner should be connect to device after sacn of AssociationBarcode", "Decode event should be fired and All barcode should be scan successfully."],
+			"testToPerform":function(){
+			    main.displayResult("<a href='BTEnable.html'>RSM Event Decode</a>");
+			},
+			"FinalResult":""
+		}*/];
+		pbTestObj.afterEach = function(){
+		};
+		return pbTestObj;
+	}
+	window.pbTest = pbTest();
+})();
+(function(){
+	var main = function(){
+		var mainObj = {};
+		var r1List = [];
+		var r2List = [];
+		var r3List = [];
+		var testArray = [];
+		var index = 0;
+		var count = 0;
+		var choice = "";
+		var passCount = 0;
+		var failCount = 0;
+		var noRunCount = 0;
+		mainObj.init = function(){
+			for(key in pbTest.testCases){
+				if(pbTest.testCases[key].RegLevel == "R1"){
+					r1List.push(pbTest.testCases[key]);
+				}else if(pbTest.testCases[key].RegLevel == "R2"){
+					r2List.push(pbTest.testCases[key]);
+				}else if(pbTest.testCases[key].RegLevel == "R3"){
+					r3List.push(pbTest.testCases[key]);
+				}
+			}
+		};
+		mainObj.loadArrayList = function(data, eleId){
+			var retData = "";
+			if(eleId == "preCondition"){
+				retData = "<br><span class='heading'>PreConditions:</span>";
+			}else if(eleId == "steps"){
+				retData = "<br><span class='heading'>Steps:</span>";
+			}if(data.length>0){
+				retData += "<ul>";
+		        for (var i=0; i<data.length;i++){
+		            retData = retData + "<li>"+data[i]+"</li>"
+		        }
+		        retData = retData + "</ul>";
+		    }
+			
+		    document.getElementById(eleId).innerHTML = retData;
+		}
+		mainObj.onPageLoad = function(){
+			setEnumScannerTimer();
+			this.onRegLevelChange();
+		};
+		mainObj.loadTest = function(){
+			var vtElement = "";
+            var selectElement = "<select id='vtSelect' onchange='main.onVTIDChange()'></select>";
+            document.getElementById('vtsection').innerHTML = selectElement;
+            var selectList = document.getElementById('vtSelect');
+			for(key in testArray){
+				var option = document.createElement("OPTION");
+				option.text = testArray[key].VTID;
+				option.value = key;
+				selectList.add(option);
+			}
+			this.loadSingleTest(index);
+		};
+		mainObj.displayFinalResult = function(){
+			retHTMLData = "<table><tr><td class='title'>" + choice +" Test summay :</td></tr><tr><td class='block'><ul>";
+			for(key in testArray){
+				if(testArray[key].FinalResult=="Pass"){
+					passCount++;
+					retHTMLData = retHTMLData + "<li style='color:green'>" + testArray[key].Description + "</li>";	
+				}else if(testArray[key].FinalResult=="Fail"){
+					failCount++;
+					retHTMLData = retHTMLData + "<li style='color:red'>" + testArray[key].Description + "</li>";
+				}else{
+					noRunCount++;
+					retHTMLData = retHTMLData + "<li style='color:red;background:yellow'>" + testArray[key].Description + "</li>";
+				}
+			}
+			resultSummary = "<table class='block'><tr><td colspan=2 class='title'>Summary for "+choice+" cases</td></tr><tr><td>Pass</td><td style='color:green;font-weight:bold'>"+passCount+"</td></tr><tr><td>Fail</td><td style='color:red;font-weight:bold'>"+failCount+"</td></tr><tr><td>NoRun</td><td style='color:blue;font-weight:bold'>"+noRunCount+"</td></tr><tr style='color:black;font-weight:bold'><td>Total</td><td>"+parseInt(passCount+failCount+noRunCount)+"</td></tr></table>";
+			retHTMLData = retHTMLData + "</ul></td></tr></table><br><a href='index.html'>Home</a>";
+			retHTMLData = resultSummary + retHTMLData;
+			document.getElementById('mainBlock').innerHTML = retHTMLData;
+		};
+		mainObj.loadSingleTest = function(index){
+			document.getElementById('vtid').innerHTML = testArray[index].VTID;
+			document.getElementById('desc').innerHTML = testArray[index].Description;
+			this.loadArrayList(testArray[index].PreCondition, "preCondition");
+			this.loadArrayList(testArray[index].Steps, "steps");
+			this.loadArrayList(testArray[index].ExpectedOutcome, "expected");
+			document.getElementById('actualResult').innerHTML = "";
+			var selectElement = document.getElementById('vtSelect');
+			selectElement.value = index;
+		};
+		mainObj.runThisTest = function(){
+			testArray[index].testToPerform();
+		};
+		mainObj.passThisTest = function(){
+			testArray[index].FinalResult = "Pass";
+            pbTest.afterEach();
+			this.nextTest();
+		};
+		mainObj.failThisTest = function(){
+			testArray[index].FinalResult = "Fail";
+            pbTest.afterEach();
+			this.nextTest();
+		}
+		mainObj.nextTest = function(){
+			if(index<(count-1)){
+				index++;
+				this.loadSingleTest(index);
+			}else{
+				this.displayFinalResult();
+			}
+		};
+		mainObj.prevTest = function(){
+			if(index>0){
+				index--;
+				this.loadSingleTest(index);
+			}else{
+				alert("No previous test cases to run");
+			}
+		};
+		mainObj.onVTIDChange = function(){
+			myVtIdChoice = document.getElementById("vtSelect").value;
+			index = myVtIdChoice;
+			this.loadSingleTest(myVtIdChoice);
+		};
+		mainObj.onRegLevelChange = function(){
+			var myChoice = document.getElementById("regLevel").value;
+			choice = myChoice;
+			document.getElementById('vtsection').innerHTML = "";
+
+			if(myChoice=="All"){
+				testArray = pbTest.testCases;
+				count = testArray.length;
+			}else if(myChoice=="R1"){
+				testArray=r1List;
+				count = testArray.length;
+			}else if(myChoice=="R2"){
+				testArray=r2List;
+				count = testArray.length;
+			}else if(myChoice=="R3"){
+				testArray=r3List;
+				count = testArray.length;
+			}
+			index = 0;
+			passCount = 0;
+			failCount = 0;
+			noRunCount = 0;
+			if(count>0){
+				this.loadTest();
+			}else{
+				document.getElementById("regLevel").value = "All";
+				this.onRegLevelChange();
+				alert("No Tests for the level selected");
+			}
+		};
+		mainObj.displayResult = function(res){
+			document.getElementById('actualResult').innerHTML = res;
+		};
+		return mainObj;
+	}
+	window.main = main();
+})();
+	</script>
+	<!--<script type="text/javascript" src="js/myMain.js"></script>-->
+	<script type="text/javascript">
+		main.init();
+	</script>
+</head>
+<body class="body" onload="main.onPageLoad()">
+<h3 class='title'>Semi Auto test for PB and RE2.2 : Circular Gesture</h3>
+<div id="mainBlock" class="mainBlock">
+	<div>
+		<span class="heading">Select Regression Level :</span>
+	    <select name="regLevel" id="regLevel" onchange="main.onRegLevelChange()">
+	        <OPTION value="All" >All</OPTION>
+	        <OPTION value="R1" >R1</OPTION>
+	        <OPTION value="R2" >R2</OPTION>
+	        <OPTION value="R3" >R3</OPTION>
+	    </select> 
+	</div>
+    <div>
+    	<span class="heading">Select Test Case to Run :</span>
+    	<div id='vtsection'>
+    	</div>
+    	
+    </div>
+    <div class="runners">
+    	<input type=button value="Previous" onclick="main.prevTest();" />
+		<input type=button value="Next" onclick="main.nextTest()" />
+		<input type="button" onclick="main.runThisTest()" value="Run Test"/>
+    </div><br>
+    <span class='heading'>SelectScanner</span>
+	<select name="myscanner" id="myscanner"  onChange="selectScanner(); hide();">
+		<OPTION value="Selectsacnner" >Selectscanner</OPTION> 
+		<OPTION value="1" ></OPTION> 
+		<OPTION value="2"></OPTION> 
+		<OPTION value="3"></OPTION> 
+	</select>
+	<br>
+	<div class="block">
+	<span class="heading">VTID:</span>
+    <div id="vtid"></div><br>
+    <span class="heading">Test description:</span>
+    <div id="desc"></div>
+    <div id="preCondition"></div>
+    <div id="steps"></div>
+    <span class="heading">Expected result:</span>
+    <div id="expected"></div><br>
+    <input type="button" onclick="main.runThisTest()" value="Run Test"/>
+    <br>
+    <span class="heading">Actual result:</span>
+    <br>
+    <div id="actualResult"></div><br><br>
+    <input id="ScanData" style="width: 184px" type="text" value=""/><br/>
+    <input type="button" class="pass" onclick="main.passThisTest()" value="Pass"/>
+    <input type="button" class="fail" onclick="main.failThisTest()" value="Fail"/>
+    </div>
+	<br>
+	<div class="runners">
+		<input type=button value="Previous" onclick="main.prevTest();" />
+		<input type=button value="Next" onclick="main.nextTest()" />
+	</div>
+	</div>
+</body>
+</html>

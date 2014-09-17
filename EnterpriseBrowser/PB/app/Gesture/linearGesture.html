@@ -65,7 +65,7 @@
             document.getElementById("actualResult").innerHTML = "Gesture detected for "+EventCounter+"th time.<br>Gesture ID: " + id + ", Count: " + count;
             EventCounter++;
             if(id=="Scan"){
-		      genericObj.InvokeMETAFunction("Scanner","enabled;start");
+		      genericObj.InvokeMETAFunction("Scanner","enabled:start");
 		    }
 		    if(id=="Signal"){
 		      genericObj.InvokeMETAFunction("Signal","visibility:visible");

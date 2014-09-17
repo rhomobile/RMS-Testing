@@ -88,7 +88,7 @@
 			"Steps":["1. Test Alarm functionality with the content =Interval:00:00:45","2. Enble the repeat alarm with Content=Repeat:true","3. Test the Alarm functionality with content=Set"],
 			"ExpectedOutcome":["After every 45 seconds the message waiting will change to alarm triggered, then 5 seconds later the message will change back to waiting."," For every 45 Seconds the alarm will repeat "],
 			"testToPerform":function(){
-				genericObj.InvokeMETAFunction("Alarm", "Interval:00-00-30;Repeat:True;Set");
+				genericObj.InvokeMETAFunction("Alarm", "Interval:00-00-45;Repeat:True;Set");
 				genericObj.InvokeMETAFunction("Alarm", "AlarmTriggered:url('javascript:doAlarm();')");
 			},
 			"FinalResult":""
@@ -177,7 +177,7 @@
 			"Steps":["1. Test with the content set the interval 30 Seconds Content='Interval:00:00:30'","2. Test the Alarm functionality with content='Set'","3. Open the URL using the alarm function tag with content = 'http://157.235.207.79/PB/INDEX.html'"],
 			"ExpectedOutcome":["When the Alarm is triggered URL should be opened"],
 			"testToPerform":function(){
-				genericObj.InvokeMETAFunction("Alarm", "Interval:00-00-30;Set;AlarmTriggered:url( 'http://10.233.85.82/PB3.X/Device Application/devicenav.html')");
+				genericObj.InvokeMETAFunction("Alarm", "Interval:00-00-30;Set;AlarmTriggered:url( 'http://10.233.85.82:9098/app/DeviceApplication/devicenav.html')");
 			},
 			"FinalResult":""
 		},{
@@ -561,7 +561,7 @@
 			"Steps":["1. Test the PowerOn functionality with content='PowerOnEvent:url'","2. Suspend and Resume the device"],
 			"ExpectedOutcome":["PowerOnEvent should be invoked whenever the device is resumed from suspend mode"],
 			"testToPerform":function(){
-				genericObj.InvokeMETAFunction("PowerOn", "PowerOnEvent:url('http://10.233.85.82/PB3.X/Device Application/devicenav.html')");
+				genericObj.InvokeMETAFunction("PowerOn", "PowerOnEvent:url('http://10.233.85.82:9098/app/DeviceApplication/devicenav.html')");
 			},
 			"FinalResult":""
 		},{
@@ -591,7 +591,7 @@
 			"Steps":["1. Test the PowerOn functionality with content='url'","2. Suspend and Resume the device"],
 			"ExpectedOutcome":["PowerOnEvent should not be invoked whenever the device is resumed from suspend mode"],
 			"testToPerform":function(){
-				genericObj.InvokeMETAFunction("PowerOn", "PowerOnEvent:url('http://10.233.85.82/PB3.X/Device Application/devicenav.html')");
+				genericObj.InvokeMETAFunction("PowerOn", "PowerOnEvent:url('http://10.233.85.82:9098/app/DeviceApplication/devicenav.html')");
 			},
 			"FinalResult":""
 		},{
@@ -713,7 +713,7 @@
 			"ExpectedOutcome":["Screen will be set as RightHanded position and immediately ScreenOrientationEvent should be triggered and navigate to the url"],
 			"testToPerform":function(){
 				genericObj.InvokeMETAFunction('ScreenOrientation', 'RightHanded');
-		        genericObj.InvokeMetaFunction("ScreenOrientation", "ScreenOrientationEvent:url('http://10.233.85.82/PB3.X/Device Application/devicenav.html')");
+		        genericObj.InvokeMetaFunction("ScreenOrientation", "ScreenOrientationEvent:url('http://10.233.85.82:9098/app/DeviceApplication/devicenav.html')");
 			},
 			"FinalResult":""
 		},{
@@ -729,7 +729,8 @@
 			"ExpectedOutcome":["Screen will be set as Normal position and immediately ScreenOrientationEvent should be triggered and navigate to the url"],
 			"testToPerform":function(){
 				genericObj.InvokeMETAFunction('ScreenOrientation', 'Normal');
-		        genericObj.InvokeMetaFunction("ScreenOrientation", "ScreenOrientationEvent:url('javascript:main.displayResult('%s');')");
+		        genericObj.InvokeMetaFunction("ScreenOrientation", "ScreenOrientationEvent:url('javascript:main.displayResult('%s')')");
+		        genericObj.InvokeMetaFunction("ScreenOrientation", "ScreenOrientationEvent:url('http://10.233.85.82:9098/app/DeviceApplication/devicenav.html')");
 			},
 			"FinalResult":""
 		},{
@@ -1002,7 +1003,7 @@
 			"testToPerform":function(){
 				genericObj.InvokeMETAFunction("Timer", "Interval:5000");
 				genericObj.InvokeMETAFunction("Timer", "Start");
-				genericObj.InvokeMETAFunction("Timer", "timeout:url('http://10.233.85.82/PB3.X/Device Application/devicenav.html')");
+				genericObj.InvokeMETAFunction("Timer", "timeout:url('http://10.233.85.82:9098/app/DeviceApplication/devicenav.html')");
 			},
 			"FinalResult":""
 		},{
@@ -1130,7 +1131,7 @@
 			"ExpectedOutcome":["Enumerate should triggers an EnumNotificationsEvent and navigate to the specified url"],
 			"testToPerform":function(){
 				genericObj.InvokeMETAFunction('Notification', 'Enumerate');
-				genericObj.InvokeMETAFunction("Notification", "EnumNotificationsEvent:url('http://10.233.85.82/PB3.X/Device Application/devicenav.html')");
+				genericObj.InvokeMETAFunction("Notification", "EnumNotificationsEvent:url('http://10.233.85.82:9098/app/DeviceApplication/devicenav.html')");
 			},
 			"FinalResult":""
 		},{
@@ -1336,7 +1337,7 @@
 			"Steps":["Use History:Back to navigate to the previously visited address"],
 			"ExpectedOutcome":["PocketBrowser should navigate to the previously visited address once History:Back is called"],
 			"testToPerform":function(){
-				window.location ='http://10.233.85.82/PB3.X/Device Application/devicenav.html';
+				window.location ='http://10.233.85.82:9098/app/DeviceApplication/devicenav.html';
 				
 			},
 			"FinalResult":""
@@ -1359,7 +1360,7 @@
 			"Steps":["1. Test the PowerOn functionality with content=PowerOnEvent:url","2. Navigate to previous page using back button","3. Suspend and Resume the device"],
 			"ExpectedOutcome":["PowerOnEvent should not be invoked whenever the device is resumed from suspend mode because this tag is page specific"],
 			"testToPerform":function(){
-				genericObj.InvokeMETAFunction("PowerOn", "PowerOnEvent:url('http://10.233.85.82/PB3.X/Device Application/devicenav.html')");
+				genericObj.InvokeMETAFunction("PowerOn", "PowerOnEvent:url('http://10.233.85.82:9098/app/DeviceApplication/devicenav.html')");
 			},
 			"FinalResult":""
 		},{

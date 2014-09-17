@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html>
-<META HTTP-Equiv="quitbutton" Content="visibility:visible">
-<META HTTP-Equiv="quitbutton" Content="Left:10">
-<META HTTP-Equiv="quitbutton" Content="Top:20">
+<META HTTP-Equiv="quitbutton" Content="Top:10; Left:10; Visibility:Visible">
+<META HTTP-Equiv="minimizebutton" Content="Visibility:Visible;Top:30">
+<META HTTP-Equiv="reloadbutton" Content="Visibility:Visible">
+<META HTTP-Equiv="SIPButton" Content="Visibility:Visible">
 <script type="text/javascript" src="http://10.233.85.82/src/elements.js"></script>
 <head>
 	<br/><input type="button" value="Quit" onclick="quitPB();" />
+	<input type="button" value="All Index"  onclick="location.href='http://10.233.85.82/neon/All_index.html'" />
     <title>Pocket Browser Tests</title>
     <meta name="viewport" content="initial-scale=1.0, width=device-width"/>
     <style type="text/css">
@@ -41,6 +43,7 @@
 		<li><a href="./CommunicationsPort/index.html">Communications Port</a></li>
 		<li><a href="./CardReader/index.html">Cardreader</a></li>
 		<li><a href="./Configuration/index.html">Configuration</a></li>
+		<li><a href="./ControlAppearance/index.html">Control & Appearance</a></li>
 		
 		<!-- D -->
 		<li><a href="./DeviceApplication/index.html">Device & Application</a></li>
@@ -66,9 +69,13 @@
 		
 		<!-- N -->
 		<li><a href="./ODAX/index.html">ODAX</a></li>
+
+		<!-- P -->
+		<li><a href="./Push/index.html">Push</a></li>
 		
 	    <!-- R -->
 	    <li><a href="./RSM/index.html">RSM</a></li>
+	    
 	    <!-- S -->
 		<li><a href="./Signal/index.html">Signal</a></li>
 		<li><a href="./SignatureCapture/index.html">Signature Capture</a></li>
@@ -77,10 +84,9 @@
 	<p style='padding:6px;font-size:20px;background-color:steelblue;'>&nbsp;</p>
 </body>
 <script type="text/javascript">
-	var genericObj = new ActiveXObject("PocketBrowser.Generic");
 	function quitPB()
 	{
-	 genericObj.InvokeMETAFunction("Application", "Quit");
+	 generic.InvokeMETAFunction("Application", "Quit");
 	}
 </script>
 </html>

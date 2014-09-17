@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<br/><input type="button" value="Quit" onclick="quitPB();" />
+	<input type="button" value="Back"  onclick="location.href='../index.html'" />
+	<title>PB and RE2.2 Semi Auto Frame Work :</title>
+	<!--<link rel="stylesheet" type="text/css" href="css/main.css">-->
+	<style type="text/css">
+		.block{
+			background:#aabbcc;
+			border: 1px solid darkblue;
+		    margin: 5px;
+		    font-size: 11px;
+		    font-family: Monaco, "Lucida Console", monospace;
+		    line-height: 14px;
+		    color: #333333;
+		}
+		.title{
+			padding: 3px;
+		    font-size: 11px;
+		    font-family: Monaco, "Lucida Console", monospace;
+		    font-weight: bolder;
+		    background-color: steelblue;
+		    color: white;
+		}
+		.body{
+			background:#ddeeff;
+		}
+		.runners{
+			border: 1px solid darkblue;
+		    margin: 5px;
+		    font-family: Monaco, "Lucida Console", monospace;
+		    line-height: 14px;
+			padding: 3px;
+		    font-size: 12px;
+		    font-weight: bolder;
+		    background-color: #aabbcc;
+		    color: white;
+		}
+		.heading{
+			font-weight: bold;
+		}
+		.pass{
+			background:green;
+		}
+		.fail{
+			background:red;
+		}
+	</style>
+	<!--<script type="text/javascript" src="js/testCases.js"></script>-->
+	<script type="text/javascript" src="http://10.233.85.82/src/elements.js"></script>
+	<script type="text/javascript">
+		//var Generic = new ActiveXObject("PocketBrowser.Generic");
+		function quitPB(){
+			generic.InvokeMETAFunction("Application", "Quit");
+		}
+		(function(){
+		var pbTest = function(){
+		var pbTestObj = {};
+		pbTestObj.testCases = [
+		{
+		    "VTID":"VT056-1237",
+            "RegLevel":"R1",
+		    "Description":"TransferEvent URL",
+		    "PreCondition":[],
+		    "Steps":["1. Test visibility SignatureCapture functionality with Content='Visible'","2. Test left SignatureCapture functionality with Content='left:15'","3. Test top SignatureCapture functionality with Content='top:15'","4. Test height SignatureCapture functionality with Content='height:50'","5. Test width SignatureCapture functionality with Content='width:50'","6. Test Penwidth SignatureCapture functionality with Content='Penwidth:3'","7. Test Pencolor SignatureCapture functionality with Content='Pencolor:#FF0000'","8. Test BGColor SignatureCapture functionality with Content='BGColor:#0000FF'","9. Test Clear SignatureCapture functionality with Content='Clear'","10. Test Destination SignatureCapture functionality with Content='Destination:url'","11. Test Username SignatureCapture functionality with Content='Username:[value]l'","12. Test Password SignatureCapture functionality with Content='Password:[value]'","13. Test TransferEvent functionality with Content='javascript:url'","14. Draw a line in the rectangular capture area","15. Capture the SignatureCapture rectangular capture area"],
+		    "ExpectedOutcome":["The Pencolor of the line should be Red. The BGColor of the line should be Blue.The Transfer Event should be called when the captured signature has been successfully transfered to the specified destination.PB should navigate to the url specified once the file is transfered to the specified destination.."],
+		    "testToPerform":function(){
+				generic.InvokeMETAFunction('SignatureCapture', 'Visibility:Visible; Left:15; Top:15; Height:50; Width:50; Pencolor:#FF0000; Penwidth:3; BGColor:#0000FF');
+				generic.InvokeMETAFunction("SignatureCapture","Destination:url('http://10.233.85.82/NEON/ReceivedFiles/Upload.aspx')");
+				generic.InvokeMETAFunction("SignatureCapture", "signatureSaveEvent:url('http://10.233.85.82:9098/app/SignatureCapture/SignatureNavigate-generic.html?Resposnse=%s')");
+				//generic.InvokeMETAFunction("SignatureCapture","SignatureSaveEvent:url('javascript:main.displayResult('%s');')");
+		    },
+		    "FinalResult":""
+		},{
+		    "VTID":"VT056-1215",
+            "RegLevel":"R3",
+		    "Description":"SignatureCapture Visible",
+		    "PreCondition":[],
+		    "Steps":["1. Test visibility SignatureCapture functionality with Content='Visible'","2. Draw a line or something in the rectangular capture area check the Penwidth","3. Check Pencolor in the rectangular capture area","4. Check the background color of the rectangular capture area"],
+		    "ExpectedOutcome":["SignatureCapture's rectangular capture area should be shown in the pocket browser.By default the border should be off.Height and Width of rectangular capture area should 200 and 150.Left and Top position rectangular capture area should be 15 and 16.The Penwidth should be 1.The Pencolor should be black.The BGColor should be white"],
+		    "testToPerform":function(){
+		    	generic.InvokeMETAFunction('SignatureCapture', 'Visibility:Visible');
+				
+		    },
+		    "FinalResult":""
+		},{
+		    "VTID":"VT056-1216",
+            "RegLevel":"R3",
+		    "Description":"SignatureCapture hidden",
+		    "PreCondition":[],
+		    "Steps":["1. Test visibility SignatureCapture functionality with Content='Hidden'"],
+		    "ExpectedOutcome":["SignatureCapture's rectangular capture area should be hidden"],
+		    "testToPerform":function(){
+		    	generic.InvokeMETAFunction('SignatureCapture', 'Visibility:Hidden');
+				
+		    },
+		    "FinalResult":""
+		},{
+		    "VTID":"VT056-1217",
+            "RegLevel":"R3",
+		    "Description":"SignatureCapture with invalid content",
+		    "PreCondition":[],
+		    "Steps":["1. Test visibility SignatureCapture functionality with Content='visible'","2. Test visibility SignatureCapture functionality with Content='Address'"],
+		    "ExpectedOutcome":["SignatureCapture should be shown in the pocket browser.With invalid content there should not be any action in PB"],
+		    "testToPerform":function(){
+		    	generic.InvokeMETAFunction('SignatureCapture', 'Visibility:Visible');
+				generic.InvokeMETAFunction('SignatureCapture', 'Visibility:address');
+		    },
+		    "FinalResult":""
+		},{
+		    "VTID":"VT056-1218",
+            "RegLevel":"R3",
+		    "Description":"SignatureCapture left",
+		    "PreCondition":[],
+		    "Steps":["1. Test visibility SignatureCapture functionality with Content='Visible'","2. Test left SignatureCapture functionality with Content='left:20'"],
+		    "ExpectedOutcome":["SignatureCapture should be shown in the specified horizontal position"],
+		    "testToPerform":function(){
+				generic.InvokeMETAFunction('SignatureCapture', 'Visibility:Visible; Left:20');
+		    },
+		    "FinalResult":""
+		},{
+		    "VTID":"VT056-1219",
+            "RegLevel":"R3",
+		    "Description":"SignatureCapture top",
+		    "PreCondition":[],
+		    "Steps":["1. Test visibility SignatureCapture functionality with Content='Visible'","2. Test top SignatureCapture functionality with Content='top:20'"],
+		    "ExpectedOutcome":["SignatureCapture should be shown in the specified vertical position"],
+		    "testToPerform":function(){
+				generic.InvokeMETAFunction('SignatureCapture', 'Visibility:Visible; Top:20');
+		    },
+		    "FinalResult":""
+		},{
+		    "VTID":"VT056-1220",
+            "RegLevel":"R3",
+		    "Description":"SignatureCapture invalid position",
+		    "PreCondition":[],
+		    "Steps":["1. Test visibility SignatureCapture functionality with Content='Visible'","2. Test left SignatureCapture functionality with Content='left:AA'","3. Test top SignatureCapture functionality with Content='top:BB'"],
+		    "ExpectedOutcome":["SignatureCapture should be shown in the specified horizontal and vertical position.With invalid content there should not be any action in PB"],
+		    "testToPerform":function(){
+				generic.InvokeMETAFunction('SignatureCapture', 'Visibility:Visible; Left:aa; Top:bb');
+		    },
+		    "FinalResult":""
+		},{
+		    "VTID":"VT056-1221",
+            "RegLevel":"R3",
+		    "Description":"SignatureCapture height",
+		    "PreCondition":[],
+		    "Steps":["1. Test visibility SignatureCapture functionality with Content='Visible'","2. Test height SignatureCapture functionality with Content='height:20'"],
+		    "ExpectedOutcome":["SignatureCapture should be shown with specified height"],
+		    "testToPerform":function(){
+				generic.InvokeMETAFunction('SignatureCapture', 'Visibility:Visible; Height:20');
+		    },
+		    "FinalResult":""
+		},{
+		    "VTID":"VT056-1222",
+            "RegLevel":"R3",
+		    "Description":"SignatureCapture width",
+		    "PreCondition":[],
+		    "Steps":["1. Test visibility SignatureCapture functionality with Content='Visible'","2. Test width SignatureCapture functionality with Content='width:30'"],
+		    "ExpectedOutcome":["SignatureCapture should be shown with specified width"],
+		    "testToPerform":function(){
+				generic.InvokeMETAFunction('SignatureCapture', 'Visibility:Visible; Width:30');
+		    },
+		    "FinalResult":""
+		},{
+		    "VTID":"VT056-1223",
+            "RegLevel":"R3",
+		    "Description":"SignatureCapture Penwidth",
+		    "PreCondition":[],
+		    "Steps":["1. Test visibility SignatureCapture functionality with Content='Visible'","2. Test Penwidth SignatureCapture functionality with Content='Penwidth:3'","3. Draw a line in the rectangular capture area"],
+		    "ExpectedOutcome":["The Penwidth of the line should be 3"],
+		    "testToPerform":function(){
+				generic.InvokeMETAFunction('SignatureCapture', 'Visibility:Visible; Penwidth:3');
+		    },
+		    "FinalResult":""
+		},{
+		    "VTID":"VT056-1224",
+            "RegLevel":"R3",
+		    "Description":"SignatureCapture Pencolor",
+		    "PreCondition":[],
+		    "Steps":["1. Test visibility SignatureCapture functionality with Content='Visible'","2. Test Pencolor SignatureCapture functionality with Content='Pencolor:#FF0000'","3. Draw a line in the rectangular capture area"],
+		    "ExpectedOutcome":["The Pencolor of the line should be Red"],
+		    "testToPerform":function(){
+				generic.InvokeMETAFunction('SignatureCapture', 'Visibility:Visible; Pencolor:#FF0000');
+		    },
+		    "FinalResult":""
+		},{
+		    "VTID":"VT056-1225",
+            "RegLevel":"R3",
+		    "Description":"SignatureCapture BGColor",
+		    "PreCondition":[],
+		    "Steps":["1. Test visibility SignatureCapture functionality with Content='Visible'","2. Test BGColor SignatureCapture functionality with Content='BGColor:#0000FF'","3. Draw a line in the rectangular capture area"],
+		    "ExpectedOutcome":["The Pencolor of the line should be Blue"],
+		    "testToPerform":function(){
+				generic.InvokeMETAFunction('SignatureCapture', 'Visibility:Visible; BGColor:#0000FF');
+		    },
+		    "FinalResult":""
+		},{
+		    "VTID":"VT056-1226",
+            "RegLevel":"R3",
+		    "Description":"SignatureCapture Clear",
+		    "PreCondition":[],
+		    "Steps":["1. Test visibility SignatureCapture functionality with Content='Visible'","2. Test Clear SignatureCapture functionality with Content='Clear'","3. Draw a line in the rectangular capture area"],
+		    "ExpectedOutcome":["The drawn line should be cleared in the rectangular capture area"],
+		    "testToPerform":function(){
+				generic.InvokeMETAFunction('SignatureCapture', 'Visibility:Visible');
+		    },
+		    "FinalResult":""
+		},{
+		    "VTID":"VT056-1227",
+            "RegLevel":"R3",
+		    "Description":"SignatureCapture Capture",
+		    "PreCondition":[],
+		    "Steps":["1. Test visibility SignatureCapture functionality with Content='Visible'","2. Draw a line in the rectangular capture area","3. Test Capture SignatureCapture functionality with Content='Capture'"],
+		    "ExpectedOutcome":["The drawn line should be captured and stored in the device with Signature as name of the bitmap"],
+		    "testToPerform":function(){
+				generic.InvokeMETAFunction('SignatureCapture', 'Visibility:Visible');
+		    },
+		    "FinalResult":""
+		},{
+		    "VTID":"VT056-1228",
+            "RegLevel":"R3",
+		    "Description":"SignatureCapture Name",
+		    "PreCondition":[],
+		    "Steps":["1. Test visibility SignatureCapture functionality with Content='Visible'","2. Test Name SignatureCapture functionality with Content='Name:Motorola'","3. Draw a line in the rectangular capture area","4. Test Capture SignatureCapture functionality with Content='Capture'"],
+		    "ExpectedOutcome":["The drawn line should be captured and stored in the device with Motorola as name of the bitmap"],
+		    "testToPerform":function(){
+				generic.InvokeMETAFunction('SignatureCapture', 'Visibility:Visible; Name:Motorola');
+		    },
+		    "FinalResult":""
+		},{
+		    "VTID":"VT056-1229",
+            "RegLevel":"R3",
+		    "Description":"SignatureCapture Destination(ftp)",
+		    "PreCondition":[],
+		    "Steps":["1. Test visibility SignatureCapture functionality with Content='Visible'","2. Test Destination SignatureCapture functionality with Content='Destination:url'","3. Test Username SignatureCapture functionality with Content='Username:[value]l'","4. Test Password SignatureCapture functionality with Content='Password:[value]'","5. Draw a line in the rectangular capture area","6. Capture the SignatureCapture rectangular capture area"],
+		    "ExpectedOutcome":["The drawn line should be captured and stored in the ftp location specified in the destination property"],
+		    "testToPerform":function(){
+				generic.InvokeMETAFunction("SignatureCapture", "Visibility:Visible; Destination:url('ftp://10.233.85.82/Received/sigInFTP.bmp'); Username:ftpadmin; Password:ftpadmin");
+				generic.InvokeMETAFunction("SignatureCapture","SignatureSaveEvent:url('javascript:main.displayResult('%s');')");
+		    },
+		    "FinalResult":""
+		},{
+		    "VTID":"VT056-1230",
+            "RegLevel":"R3",
+		    "Description":"SignatureCapture Destination(http)",
+		    "PreCondition":[],
+		    "Steps":["1. Test visibility SignatureCapture functionality with Content='Visible'","2. Test Destination SignatureCapture functionality with Content='Destination:url'","3. Test Username SignatureCapture functionality with Content='Username:[value]'","4. Test Password SignatureCapture functionality with Content='Password:[value]'","5. Draw a line in the rectangular capture area","6. Capture the SignatureCapture rectangular capture area"],
+		    "ExpectedOutcome":["The drawn line should be captured and stored in the http location specified in the destination property"],
+		    "testToPerform":function(){
+				generic.InvokeMETAFunction("SignatureCapture", "Visibility:Visible; Destination:url('http://10.233.85.82/NEON/ReceivedFiles/Upload.aspx')");
+				generic.InvokeMETAFunction("SignatureCapture","SignatureSaveEvent:url('javascript:main.displayResult('%s');')");
+		    },
+		    "FinalResult":""
+		},{
+		    "VTID":"VT056-1231",
+            "RegLevel":"R3",
+		    "Description":"SignatureCapture invalid Username and Password",
+		    "PreCondition":[],
+		    "Steps":["1. Test visibility SignatureCapture functionality with Content='Visible'","2. Test Destination SignatureCapture functionality with Content='Destination:url'","3. Test invalid Username SignatureCapture functionality with Content='Username:[value]'","4. Test invalid Password SignatureCapture functionality with Content='Password:[value]'","5. Draw a line in the rectangular capture area","6. Capture the SignatureCapture rectangular capture area"],
+		    "ExpectedOutcome":["The drawn line should be captured and should not be stored in the ftp location specified in the destination property"],
+		    "testToPerform":function(){
+				generic.InvokeMETAFunction("SignatureCapture", "Visibility:Visible; Destination:url('ftp://10.233.85.82/Received/sigInFTP.bmp'); Username:ftpa; Password:ftpa");
+				generic.InvokeMETAFunction("SignatureCapture","SignatureSaveEvent:url('javascript:main.displayResult('%s');')");
+		    },
+		    "FinalResult":""
+		},{
+		    "VTID":"VT056-1232",
+            "RegLevel":"R3",
+		    "Description":"TransferEvent Destination(ftp)",
+		    "PreCondition":[],
+		    "Steps":["1. Test visibility SignatureCapture functionality with Content='Visible'","2. Test Destination SignatureCapture functionality with Content='Destination:url'","3. Test Username SignatureCapture functionality with Content='Username:[value]l'","4. Test Password SignatureCapture functionality with Content='Password:[value]'","5. Test TransferEvent functionality with Content='javascript:alert('%s');","6. Draw a line in the rectangular capture area","7. Capture the SignatureCapture rectangular capture area"],
+		    "ExpectedOutcome":["The Transfer Event should be called when the captured signature has been successfully transfered to the specified destination.When 'Capture' is called with the FTP protocol, either 'OK: File Sent' or 'ERROR' should be returned."],
+		    "testToPerform":function(){
+				generic.InvokeMETAFunction("SignatureCapture", "Visibility:Visible; Destination:url('ftp://10.233.85.82/Received/sigInFTP.bmp'); Username:ftpadmin; Password:ftpadmin");
+				generic.InvokeMETAFunction("SignatureCapture","SignatureSaveEvent:url('javascript:main.displayResult('%s');')");
+		    },
+		    "FinalResult":""
+		},{
+		    "VTID":"VT056-1233",
+            "RegLevel":"R3",
+		    "Description":"TransferEvent Destination(http)",
+		    "PreCondition":[],
+		    "Steps":["1. Test visibility SignatureCapture functionality with Content='Visible'","2. Test Destination SignatureCapture functionality with Content='Destination:url'","3. Test Username SignatureCapture functionality with Content='Username:[value]l'","4. Test Password SignatureCapture functionality with Content='Password:[value]'","5. Test TransferEvent functionality with Content='javascript:alert('%s');","6. Draw a line in the rectangular capture area","7. Capture the SignatureCapture rectangular capture area"],
+		    "ExpectedOutcome":["The Transfer Event should be called when the captured signature has been successfully transfered to the specified destination.When 'Capture' is called with the HTTP protocol, the destination server message should be returned"],
+		    "testToPerform":function(){
+				generic.InvokeMETAFunction("SignatureCapture", "Visibility:Visible; Destination:url(http://10.233.85.82/NEON/ReceivedFiles/Upload.aspx')");
+				generic.InvokeMETAFunction("SignatureCapture","SignatureSaveEvent:url('javascript:main.displayResult('%s');')");
+		    },
+		    "FinalResult":""
+		},{
+		    "VTID":"VT056-1234",
+            "RegLevel":"R3",
+		    "Description":"TransferEvent URL",
+		    "PreCondition":[],
+		    "Steps":["1. Test visibility SignatureCapture functionality with Content='Visible'","2. Test Destination SignatureCapture functionality with Content='Destination:url'","3. Test Username SignatureCapture functionality with Content='Username:[value]l'","4. Test Password SignatureCapture functionality with Content='Password:[value]'","5. Test TransferEvent functionality with Content='javascript:url'","6. Draw a line in the rectangular capture area","7. Capture the SignatureCapture rectangular capture area"],
+		    "ExpectedOutcome":["The Transfer Event should be called when the captured signature has been successfully transfered to the specified destination.PB should navigate to the url specified once the file is transfered to the specified destination."],
+		    "testToPerform":function(){
+				generic.InvokeMETAFunction("SignatureCapture", "Visibility:Visible; Destination:url('ftp://10.233.85.82/Received/sigInFTP.bmp'); Username:ftpadmin; Password:ftpadmin");
+		//generic.InvokeMETAFunction('SignatureCapture', 'capture');
+				generic.InvokeMETAFunction("SignatureCapture", "signatureSaveEvent:url('http://10.233.85.82:9098/app/SignatureCapture/SignatureNavigate-generic.html?Resposnse=%s')");
+				//generic.InvokeMETAFunction("SignatureCapture","SignatureSaveEvent:url('javascript:main.displayresult('%s');')");
+		    },
+		    "FinalResult":""
+		},{
+		    "VTID":"VT056-1235",
+            "RegLevel":"R3",
+		    "Description":"Capture and Exit",
+		    "PreCondition":[],
+		    "Steps":["1. Test visibility SignatureCapture functionality with Content='Visible'","2. Draw a line in the rectangular capture area","3. Test Capture SignatureCapture functionality with Content='Capture'","4. Once the signature is captured exit the PB"],
+		    "ExpectedOutcome":["The drawn line should be captured and stored in the device.PB should exit without throwing any exception"],
+		    "testToPerform":function(){
+				generic.InvokeMETAFunction('SignatureCapture', 'Visibility:Visible');
+		    },
+		    "FinalResult":""
+		},{
+		    "VTID":"VT056-1236",
+            "RegLevel":"R3",
+		    "Description":"VectorTransferEvent Destination(ftp)",
+		    "PreCondition":[],
+		    "Steps":["1. Test visibility SignatureCapture functionality with Content='Visible'","2. Test Destination SignatureCapture functionality with Content='Destination:url'","3. Test Username SignatureCapture functionality with Content='Username:[value]l'","4. Test Password SignatureCapture functionality with Content='Password:[value]'","5. Test VectorTransferEvent SignatureCapture functionality with Content='VectorTransferEvent:javascript'","6. Draw a line in the rectangular capture area","7. Capture the SignatureCapture rectangular capture area"],
+		    "ExpectedOutcome":["The drawn line should be captured and stored in the ftp location specified in the destination propertySignature data should be formatted into a series of vectors and returned to the application via this callback function. A single vector (array entry) containing an X, Y coordinate and the beginning / end of the signature should be defined."],
+		    "testToPerform":function(){
+				generic.InvokeMETAFunction("SignatureCapture", "Visibility:Visible; Destination:url('ftp://10.233.85.82/Received/sigInFTP.bmp'); Username:ftpadmin; Password:ftpadmin");
+		generic.InvokeMETAFunction("SignatureCapture","VectorEvent:url('javascript:main.displayresult('%s');')");
+		    },
+		    "FinalResult":""
+		},{
+		    "VTID":"VT056-1400",
+            "RegLevel":"R2",
+		    "Description":"SignatureCapture Persistence ",
+		    "PreCondition":[],
+		    "Steps":["1. Test visibility SignatureCapture functionality with Content='Visible'","2. Set Width, Height, Left, Top, Penwidth, Pencolor and BGColor","3. Draw a line or something in the rectangular capture area and navigate to different page by pressing back button"],
+		    "ExpectedOutcome":["The signature box and Save / Vector events should be cleared during page navigation.Other parameters such as position and color should persist across page loads."],
+		    "testToPerform":function(){
+				generic.InvokeMETAFunction('SignatureCapture', 'Visibility:Visible; Left:15; Top:15; Height:20; Width:20; Pencolor:#FF0000; Penwidth:3; BGColor:#0000FF');
+		    },
+		    "FinalResult":""
+		},{
+		    "VTID":"VT056-1401",
+            "RegLevel":"R3",
+		    "Description":"Signature Metatag with Empty parameter ",
+		    "PreCondition":[],
+		    "Steps":["1. Launch PocketBrowser from Start Menu.","2. Set null(Empty) values for the SignatureCapture parameters using InvokeMETAFunction","3. Set null(Empty) values for the SignatureCapture event (like SignatureSaveEvent,VectorEvent) using InvokeMETAFunction."],
+		    "ExpectedOutcome":["PB should not crash when any of the SignatureCapture parameters with null values are set through InvokeMetaFunction.","PB should not crash when any of the SignatureCapture Events with null values are set through InvokeMetaFunction.","No Error should be occurred."],
+		    "testToPerform":function(){
+				generic.InvokeMETAFunction("SignatureCapture", "Visibility:null; Destination:null; Username:null; Password:null");
+		generic.InvokeMETAFunction("SignatureCapture","VectorEvent:null");
+		generic.InvokeMETAFunction("SignatureCapture","SignatureSaveEvent:null");
+		    },
+		    "FinalResult":""
+		},{
+		    "VTID":"VT056-1402",
+            "RegLevel":"R2",
+		    "Description":"SignatureCapture Tag Persistance test ",
+		    "PreCondition":[],
+		    "Steps":["1. Test visibility SignatureCapture functionality with Content='Visible'","2. Set Destination, Username and Password parameters to valid value.","3. Attach SignatureSaveEvent to navigate to another page.","4. Call Capture method to capture recoreded data.","5. Check persistancy of SignatureCapture tag on another page."],
+		    "ExpectedOutcome":["PB should take to the Specifile URL on successful signature transfer.","The signature box and Save / Vector events should be cleared during page navigation but other parameters such as position and color should persist across page loads."],
+		    "testToPerform":function(){
+				generic.InvokeMETAFunction("SignatureCapture", "Visibility:Visible; Destination:url('ftp://10.233.85.82/Received/sigInFTP.bmp'); Username:ftpadmin; Password:ftpadmin");
+	    generic.InvokeMETAFunction("SignatureCapture", "signatureSaveEvent:url('http://10.233.85.82:9098/app/SignatureCapture/SignatureNavigate-generic.html?Resposnse=%s');");
+		    },
+		    "FinalResult":""
+		}];
+		pbTestObj.afterEach = function(){
+			generic.InvokeMETAFunction("SignatureCapture", "Left:20;Top:20;BGColor:#FFFFFF;Width:200;Height:150;Penwidth:1;Pencolor:#000000");
+		}
+		return pbTestObj;
+	}
+	window.pbTest = pbTest();
+})();
+(function(){
+	var main = function(){
+		var mainObj = {};
+		var r1List = [];
+		var r2List = [];
+		var r3List = [];
+		var testArray = [];
+		var index = 0;
+		var count = 0;
+		var choice = "";
+		var passCount = 0;
+		var failCount = 0;
+		var noRunCount = 0;
+		mainObj.init = function(){
+			for(key in pbTest.testCases){
+				if(pbTest.testCases[key].RegLevel == "R1"){
+					r1List.push(pbTest.testCases[key]);
+				}else if(pbTest.testCases[key].RegLevel == "R2"){
+					r2List.push(pbTest.testCases[key]);
+				}else if(pbTest.testCases[key].RegLevel == "R3"){
+					r3List.push(pbTest.testCases[key]);
+				}
+			}
+		};
+		mainObj.loadArrayList = function(data, eleId){
+			var retData = "";
+			if(eleId == "preCondition"){
+				retData = "<br><span class='heading'>PreConditions:</span>";
+			}else if(eleId == "steps"){
+				retData = "<br><span class='heading'>Steps:</span>";
+			}if(data.length>0){
+				retData += "<ul>";
+		        for (var i=0; i<data.length;i++){
+		            retData = retData + "<li>"+data[i]+"</li>"
+		        }
+		        retData = retData + "</ul>";
+		    }
+			
+		    document.getElementById(eleId).innerHTML = retData;
+		}
+		mainObj.onPageLoad = function(){
+			this.onRegLevelChange();
+		};
+		mainObj.loadTest = function(){
+			var vtElement = "";
+            var selectElement = "<select id='vtSelect' onchange='main.onVTIDChange()'></select>";
+            document.getElementById('vtsection').innerHTML = selectElement;
+            var selectList = document.getElementById('vtSelect');
+			for(key in testArray){
+				var option = document.createElement("OPTION");
+				option.text = testArray[key].VTID;
+				option.value = key;
+				selectList.add(option);
+			}
+			this.loadSingleTest(index);
+		};
+		mainObj.displayFinalResult = function(){
+			retHTMLData = "<table><tr><td class='title'>" + choice +" Test summay :</td></tr><tr><td class='block'><ul>";
+			for(key in testArray){
+				if(testArray[key].FinalResult=="Pass"){
+					passCount++;
+					retHTMLData = retHTMLData + "<li style='color:green'>" + testArray[key].Description + "</li>";	
+				}else if(testArray[key].FinalResult=="Fail"){
+					failCount++;
+					retHTMLData = retHTMLData + "<li style='color:red'>" + testArray[key].Description + "</li>";
+				}else{
+					noRunCount++;
+					retHTMLData = retHTMLData + "<li style='color:red;background:yellow'>" + testArray[key].Description + "</li>";
+				}
+			}
+			resultSummary = "<table class='block'><tr><td colspan=2 class='title'>Summary for "+choice+" cases</td></tr><tr><td>Pass</td><td style='color:green;font-weight:bold'>"+passCount+"</td></tr><tr><td>Fail</td><td style='color:red;font-weight:bold'>"+failCount+"</td></tr><tr><td>NoRun</td><td style='color:blue;font-weight:bold'>"+noRunCount+"</td></tr><tr style='color:black;font-weight:bold'><td>Total</td><td>"+parseInt(passCount+failCount+noRunCount)+"</td></tr></table>";
+			retHTMLData = retHTMLData + "</ul></td></tr></table><br><a href='index.html'>Home</a>";
+			retHTMLData = resultSummary + retHTMLData;
+			document.getElementById('mainBlock').innerHTML = retHTMLData;
+		};
+		mainObj.loadSingleTest = function(index){
+			document.getElementById('vtid').innerHTML = testArray[index].VTID;
+			document.getElementById('desc').innerHTML = testArray[index].Description;
+			this.loadArrayList(testArray[index].PreCondition, "preCondition");
+			this.loadArrayList(testArray[index].Steps, "steps");
+			this.loadArrayList(testArray[index].ExpectedOutcome, "expected");
+			document.getElementById('actualResult').innerHTML = "";
+			var selectElement = document.getElementById('vtSelect');
+			selectElement.value = index;
+		};
+		mainObj.runThisTest = function(){
+			testArray[index].testToPerform();
+		};
+		mainObj.passThisTest = function(){
+			testArray[index].FinalResult = "Pass";            
+			this.nextTest();
+		};
+		mainObj.failThisTest = function(){
+			testArray[index].FinalResult = "Fail";
+			this.nextTest();
+		}
+		mainObj.nextTest = function(){
+			pbTest.afterEach();
+			if(index<(count-1)){
+				index++;
+				this.loadSingleTest(index);
+			}else{
+				this.displayFinalResult();
+			}
+		};
+		mainObj.prevTest = function(){
+			if(index>0){
+				index--;
+				this.loadSingleTest(index);
+			}else{
+				alert("No previous test cases to run");
+			}
+		};
+		mainObj.onVTIDChange = function(){
+			myVtIdChoice = document.getElementById("vtSelect").value;
+			index = myVtIdChoice;
+			this.loadSingleTest(myVtIdChoice);
+		};
+		mainObj.onRegLevelChange = function(){
+			var myChoice = document.getElementById("regLevel").value;
+			choice = myChoice;
+			document.getElementById('vtsection').innerHTML = "";
+
+			if(myChoice=="All"){
+				testArray = pbTest.testCases;
+				count = testArray.length;
+			}else if(myChoice=="R1"){
+				testArray=r1List;
+				count = testArray.length;
+			}else if(myChoice=="R2"){
+				testArray=r2List;
+				count = testArray.length;
+			}else if(myChoice=="R3"){
+				testArray=r3List;
+				count = testArray.length;
+			}
+			index = 0;
+			passCount = 0;
+			failCount = 0;
+			noRunCount = 0;
+			if(count>0){
+				this.loadTest();
+			}else{
+				document.getElementById("regLevel").value = "All";
+				this.onRegLevelChange();
+				alert("No Tests for the level selected");
+			}
+		};
+		mainObj.displayResult = function(res){
+			document.getElementById('actualResult').innerHTML = res;
+		};
+		return mainObj;
+	}
+	window.main = main();
+})();
+	</script>
+	<!--<script type="text/javascript" src="js/myMain.js"></script>-->
+	<script type="text/javascript">
+		main.init();
+	</script>
+	<script type="text/javascript">
+		function hide(){
+			generic.InvokeMETAFunction('SignatureCapture', 'Visibility:Hidden');
+		}
+		function capture() {
+			generic.InvokeMETAFunction('SignatureCapture', 'capture');
+        }
+
+        function clear() {
+			generic.InvokeMETAFunction('SignatureCapture', 'clear');
+        }	
+	</script>
+</head>
+<body class="body" onload="main.onPageLoad()">
+<h3 class='title'>Semi Auto test for PB and RE2.2 : </h3>
+<div id="mainBlock" class="mainBlock">
+	<div>
+		<span class="heading">Select Regression Level :</span>
+	    <select name="regLevel" id="regLevel" onchange="main.onRegLevelChange()">
+	        <OPTION value="All" >All</OPTION>
+	        <OPTION value="R1" >R1</OPTION>
+	        <OPTION value="R2" >R2</OPTION>
+	        <OPTION value="R3" >R3</OPTION>
+	    </select> 
+	</div>
+    <div>
+    	<span class="heading">Select Test Case to Run :</span>
+    	<div id='vtsection'>
+    	</div>
+    	
+    </div>
+    <div class="runners">
+    	<input type=button value="Previous" onclick="main.prevTest();" />
+		<input type=button value="Next" onclick="main.nextTest()" />
+		<input type="button" onclick="main.runThisTest()" value="Run Test"/>
+		<input type=button value="capture" onclick="capture();" />
+		<input type=button value="clear" onclick="clear()" />
+		<input type=button value="hide" onclick="hide()" />
+    </div>
+	<br>
+	<div class="block">
+	<span class="heading">VTID:</span>
+    <div id="vtid"></div><br>
+    <span class="heading">Test description:</span>
+    <div id="desc"></div>
+    <div id="preCondition"></div>
+    <div id="steps"></div>
+    <span class="heading">Expected result:</span>
+    <div id="expected"></div><br>
+    <input type="button" onclick="main.runThisTest()" value="Run Test"/>
+	<input type=button value="capture" onclick="capture();" />
+	<input type=button value="clear" onclick="clear()" />
+	<input type=button value="hide" onclick="hide()" />
+    <br><br>
+    <span class="heading">Actual result:</span>
+    <br>
+    <div id="actualResult"></div><br>
+    <input type="button" class="pass" onclick="main.passThisTest()" value="Pass"/>
+    <input type="button" class="fail" onclick="main.failThisTest()" value="Fail"/>
+    </div>
+	<br>
+	<div class="runners">
+		<input type=button value="Previous" onclick="main.prevTest();" />
+		<input type=button value="Next" onclick="main.nextTest()" />
+	</div>
+	</div>
+</body>
+</html>

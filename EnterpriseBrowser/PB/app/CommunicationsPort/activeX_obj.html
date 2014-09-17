@@ -762,7 +762,7 @@
 			         "10. Enter 10 characters in the console"],
 			"ExpectedOutcome":[" Once thedata has been read from the communications port PB should navigate to the url specified"],
 			"testToPerform":function(){
-				genericObj.InvokeMETAFunction("Comm", "BaudRate:19200;port:com1;databits:8;stopbits:1;parity:No Parity;handshake:none;chars:10;commevent:url('http://10.233.85.82/pb3.x/ComTest/commPortnav.html')");
+				genericObj.InvokeMETAFunction("Comm", "BaudRate:19200;port:com1;databits:8;stopbits:1;parity:No Parity;handshake:none;chars:10;commevent:url('http://10.233.85.82:9098/app/CommunicationsPort/commPortnav.html')");
 				genericObj.InvokeMETAFunction('Comm', 'Open');
 			},
 			"FinalResult":""

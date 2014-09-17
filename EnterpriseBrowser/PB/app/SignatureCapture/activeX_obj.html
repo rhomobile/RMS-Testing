@@ -68,7 +68,8 @@
 		    "testToPerform":function(){
 				genericObj.InvokeMETAFunction('SignatureCapture', 'Visibility:Visible; Left:15; Top:15; Height:50; Width:50; Pencolor:#FF0000; Penwidth:3; BGColor:#0000FF');
 				genericObj.InvokeMETAFunction("SignatureCapture","Destination:url('http://10.233.85.82/NEON/ReceivedFiles/Upload.aspx')");
-				genericObj.InvokeMETAFunction("SignatureCapture","SignatureSaveEvent:url('javascript:main.displayResult('%s');')");
+				genericObj.InvokeMETAFunction("SignatureCapture", "signatureSaveEvent:url('http://10.233.85.82:9098/app/SignatureCapture/SignatureNavigate.html?Resposnse=%s');");
+				//genericObj.InvokeMETAFunction("SignatureCapture","SignatureSaveEvent:url('javascript:main.displayResult('%s');')");
 		    },
 		    "FinalResult":""
 		},{
@@ -297,8 +298,8 @@
 		    "ExpectedOutcome":["The Transfer Event should be called when the captured signature has been successfully transfered to the specified destination.PB should navigate to the url specified once the file is transfered to the specified destination."],
 		    "testToPerform":function(){
 				genericObj.InvokeMETAFunction("SignatureCapture", "Visibility:Visible; Destination:url('ftp://10.233.85.82/Received/sigInFTP.bmp'); Username:ftpadmin; Password:ftpadmin");
-		//genericObj.InvokeMETAFunction('SignatureCapture', 'capture');
-				genericObj.InvokeMETAFunction("SignatureCapture","SignatureSaveEvent:url('javascript:main.displayresult('%s');')");
+				genericObj.InvokeMETAFunction("SignatureCapture", "signatureSaveEvent:url('http://10.233.85.82:9098/app/SignatureCapture/SignatureNavigate.html?Resposnse=%s')");
+				//genericObj.InvokeMETAFunction("SignatureCapture","SignatureSaveEvent:url('javascript:main.displayresult('%s');')");
 		    },
 		    "FinalResult":""
 		},{

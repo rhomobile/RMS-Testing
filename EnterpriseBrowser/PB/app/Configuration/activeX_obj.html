@@ -2,6 +2,7 @@
 <html>
 <head>
 	<br/><input type="button" value="Quit" onclick="quitPB();" />
+	<input type="button" value="RegEdit" onclick="openRegEdit();" />
 	<input type="button" value="Back"  onclick="location.href='./index.html'" />
 	<title>PB and RE2.2 Semi Auto Frame Work :</title>
 	<!--<link rel="stylesheet" type="text/css" href="css/main.css">-->
@@ -51,6 +52,9 @@
 	<script type="text/javascript" src="http://10.233.85.82/src/elements.js"></script>
 	<script type="text/javascript">
 		var objGeneric = new ActiveXObject("PocketBrowser.Generic");
+		function openRegEdit(){
+			objGeneric.LaunchProcessNonBlocking('\\Application\\RegEdit.exe', '');
+		}
 		function quitPB(){
 			objGeneric.InvokeMETAFunction("Application", "Quit");
 		}
@@ -66,7 +70,7 @@
 		    "Steps":["Test registry functionality with content='hive:HKLM'","Test registry functionality with content='key:Software'","Test registry functionality with content='setting:PocketBrowser'","Test registry functionality with content='type:DWORD'5. Test registry functionality with content='persistent:true'","Test registry functionality with content=value:12345."],
 		    "ExpectedOutcome":["A DWORD registry PocketBrowser should be created in HKLM/Software with value 12345.reg file should also be created in the \Application folder on the device."],
 		    "testToPerform":function(){
-				objGeneric.InvokeMETAFunction('registry','hive:HKLM;key:Software;setting:PocketBrowser;type:DWORD;persistent:true;value:6789');
+				objGeneric.InvokeMETAFunction('registry','hive:HKLM;key:Software;setting:PocketBrowser;type:DWORD;persistent:true;value:12345');
 		    },
 		    "FinalResult":""
 		},{
@@ -75,7 +79,7 @@
 		    "Description":"Delete HKLM Value without Persistent",
 		    "PreCondition":[],
 		    "Steps":["Test registry functionality with content='hive:HKLM'","Test registry functionality with content='key:Software'","Test registry functionality with content='setting:PocketBrowser'","Test registry functionality with content='persistent:false'","Test registry functionality with content='Delete'."],
-		    "ExpectedOutcome":["This module delete the registry in HKLM/Software with setting SymbolBrowser."],
+		    "ExpectedOutcome":["This module delete the registry in HKLM/Software with setting PocketBrowser."],
 		    "testToPerform":function(){
 				objGeneric.InvokeMETAFunction('registry','hive:HKLM;key:Software;setting:PocketBrowser;persistent:false;delete');
 		    },
