@@ -116,7 +116,7 @@
 		    "testToPerform":function(){
 				myPage = document.getElementById('mainBlock').innerHTML;
 		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
-		        generic.InvokeMETAFunction("gesture", "ID:ABCD1234!@#$%^&*()QQ;type:Linear;Diagnostics:true");
+		        generic.InvokeMETAFunction("gesture", "ID:ABCD1234!@#$%^&*()QQ;type:Linear;Diagnostics:true;Create");
         		generic.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
 		    },
 		    "FinalResult":""
@@ -642,6 +642,7 @@
 		}];
 		pbTestObj.afterEach = function(){
 			myPage = "";
+			EventCounter = 1;
 		}
 		return pbTestObj;
 	}
@@ -737,15 +738,14 @@
 		};
 		mainObj.passThisTest = function(){
 			testArray[index].FinalResult = "Pass";
-            pbTest.afterEach();
 			this.nextTest();
 		};
 		mainObj.failThisTest = function(){
 			testArray[index].FinalResult = "Fail";
-            pbTest.afterEach();
 			this.nextTest();
 		}
 		mainObj.nextTest = function(){
+			pbTest.afterEach();
 			if(index<(count-1)){
 				index++;
 				this.loadSingleTest(index);
@@ -754,6 +754,7 @@
 			}
 		};
 		mainObj.prevTest = function(){
+			pbTest.afterEach();
 			if(index>0){
 				index--;
 				this.loadSingleTest(index);
