@@ -1,6 +1,6 @@
 describe "Rhom::RhomObject" do
-  @use_new_orm = begin Rho::RHO.use_new_orm rescue false end
-  puts "Rhom specs: use_new_orm: #{@use_new_orm}"
+  @use_new_orm = begin Rho::RHO.use_new_orm rescue true end
+  puts "Rhom::RhomObject specs: use_new_orm: #{@use_new_orm}"
 
   # Returns intersection of vars
   # TODO: New ORM in find does not return :source_id
