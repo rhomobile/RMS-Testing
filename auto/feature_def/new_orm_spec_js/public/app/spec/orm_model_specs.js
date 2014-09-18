@@ -97,14 +97,14 @@ describe("Model Object", function() {
     expect(object.has('absent_key')).toBe(false);
   });
 
-  it('VT302-0200 | creates object in database', function() {
+  it('should create object in database', function() {
     var before = model.count();
     model.create({'key': 'value'});
     var after = model.count();
     expect(after).toBe(before + 1);
   });
 
-  it('VT302-0234 | saves object to database', function() {
+  it('should save object to database', function() {
     model.deleteAll();
     var object = model.create({'key': 'value'});
 
@@ -123,7 +123,7 @@ describe("Model Object", function() {
     }
   });
 
-  it('VT302-0254 | updates object attributes in database', function() {
+  it('updates object attributes in database', function() {
     model.deleteAll();
     var object = model.create({'key': 'value', 'original_key': 'original value'});
 
@@ -140,7 +140,7 @@ describe("Model Object", function() {
     };
   });
 
-  it('VT302-0210 | destroys object in database', function() {
+  it('destroys object in database', function() {
     model.deleteAll();
     var object1 = model.create({'key1': 'value1'});
     var object2 = model.create({'key2': 'value2'});
@@ -154,19 +154,19 @@ describe("Model Object", function() {
     expect(specHelpers.allVars(found[0])).toEqual(specHelpers.allVars(object2));
   });
 
-  it('VT302-0201 | does not create empty object in database', function() {
+  it('does not create empty object in database', function() {
     var before = model.count();
     model.create();
     expect(model.count()).toBe(before);
   });
 
-  it('VT302-0256 | does not create object with the only empty property in database', function() {
+  it('does not create object with the only empty property in database', function() {
     var before = model.count();
     model.create({'': 'value'});
     expect(model.count()).toBe(before);
   });
 
-  it('VT302-0204 | deletes all objects in database', function() {
+  it('deletes all objects in database', function() {
     model.create({'key': 'value'});
     expect(model.count()).toBeGreaterThan(0);
     model.deleteAll();
@@ -174,7 +174,7 @@ describe("Model Object", function() {
   });
 
   // ==========================================================
-  it('VT302-0211 | delete object in sync database', function() {
+  it('delete object in sync database', function() {
     var Modelsync = specHelpers.addModel("Item", modelDefs3);
     Modelsync.create({'name': 'tests'});
 
@@ -197,7 +197,7 @@ describe("Model Object", function() {
     expect(cv[0].update_type).toEqual("delete");
   });
 
-  it('VT302-0211 | update object in sync database', function() {
+  it('update object in sync database', function() {
     var Modelsync = specHelpers.addModel("Item", modelDefs3);
     Modelsync.create({'name': 'tests'});
 
@@ -219,7 +219,7 @@ describe("Model Object", function() {
     expect(cv[0].update_type).toEqual("update");
   });
 
-  it('VT302-0257 | deletes all objects of specific model in database', function() {
+  it('deletes all objects of specific model in database', function() {
     var model1 = specHelpers.addModel("Product", modelDef);
     var model2 = specHelpers.addModel("Item", modelDef2);
 
@@ -237,7 +237,7 @@ describe("Model Object", function() {
     expect(model2.count()).toBe(0);
   });
 
-  it('VT302-0217 | reads object from database', function() {
+  it('reads object from database', function() {
     model.deleteAll();
     model.create({'key': 'value'});
     var found = model.find('all');
@@ -252,7 +252,7 @@ describe("Model Object", function() {
     expect(res).toBe(true);
   });
 
-  it('VT302-0258 | does not write empty property to database', function() {
+  it('does not write empty property to database', function() {
     model.deleteAll();
     model.create({'key': 'value', '': 'empty'});
     var found = model.find('all');
@@ -273,7 +273,7 @@ describe("Model Object", function() {
     expect(after1).toBe(before1 + 2);
   });
 
-  it('VT302-0259 | counts objects in database using find', function() {
+  it('counts objects in database using find', function() {
     var model2 = specHelpers.addModel("Item", modelDef2);
     var before1 = model.find('count');
 
@@ -286,7 +286,7 @@ describe("Model Object", function() {
     expect(after1).toBe(before1 + 2);
   });
 
-  it('VT302-0260 | counts objects in database using find with condition', function() {
+  it('counts objects in database using find with condition', function() {
     var model2 = specHelpers.addModel("Item", modelDef2);
     var before1 = model.find('count', {conditions: {'key': 'value to find'}});
 
@@ -301,7 +301,7 @@ describe("Model Object", function() {
     expect(after1).toBe(before1 + 2);
   });
 
-  it('VT302-0261 | finds all objects in database', function() {
+  it('finds all objects in database', function() {
     var model2 = specHelpers.addModel("Item", modelDef2);
 
     model.create({'key1': 'value1'});
@@ -316,7 +316,7 @@ describe("Model Object", function() {
     expect(specHelpers.cleanVars(found[1 - i])).toEqual({'key3': 'value3'});
   });
 
-  it('VT302-0218 | finds all objects with one condition', function() {
+  it('finds all objects with one condition', function() {
     model.create({'key': 'value1'});
     var objects = [model.create({'key': 'value2'}), model.create({'key': 'value2'})];
 
@@ -334,7 +334,7 @@ describe("Model Object", function() {
     };
   });
 
-  it('VT302-0262 | finds all objects with conditions', function() {
+  it('finds all objects with conditions', function() {
     model.deleteAll();
 
     model.create({'key1': 'value2'});
@@ -371,7 +371,7 @@ describe("Model Object", function() {
     };
   });
 
-  it('VT302-0227 | should finds first object in database', function() {
+  it('should finds first object in database', function() {
     model.deleteAll();
     var originals = [model.create({'key1': 'value1'}), model.create({'key3': 'value3'})];
     var found = model.find('first');
@@ -399,14 +399,14 @@ describe("Model Object", function() {
     expect(res[1].get("industry")).toBeUndefined();
   });
 
-  it("VT302-0263 | should find first",function() {
+  it("should find first",function() {
     model.create({"name":"Mobio"});
     model.create({"name":"Mobio2"});
     var res = model.find("first");
     expect(res.get("name")).toEqual("Mobio");
   });
 
-  it("VT302-0252 | should update record",function(){
+  it("should update record",function(){
     var record = model.create({"name":"Zoolo","industry":"Tech"});
     record.updateAttributes({"name":"Zoolo2"});
     var res = model.find("first",{conditions:{"name":"Zoolo2"}});
@@ -419,7 +419,7 @@ describe("Model Object", function() {
     expect(res.get("name")).toEqual("Zoolo");
   });
 
-  it("VT302-0212 | should delete record",function(){
+  it("should delete record",function(){
     model.deleteAll();
     var record = model.create({"name":"Zoolo","industry":"Tech"});
     var res = model.find("first",{conditions:{"name":"Zoolo"}});
@@ -430,7 +430,7 @@ describe("Model Object", function() {
     expect(res).toEqual(0);
   });
 
-  it("VT302-0232 | should make record",function(){
+  it("should make record",function(){
     var record = model.make({"name":"Zoolo","industry":"Tech"});
     var res = model.count();
     record.save();
@@ -506,7 +506,7 @@ describe("Fixed Schema Models", function() {
 
   });
 
-  it("VT302-0263 | should verify created fixed schema modal",function(){
+  it("should verify created fixed schema modal",function(){
     model.create({name:"testfixed"});
     var obj = model.find("first");
     expect(obj.get("name")).toEqual("testfixed");
@@ -516,7 +516,7 @@ describe("Fixed Schema Models", function() {
     expect(dboutput[0].name).toEqual("testfixed");
   });
 
-  it("VT302-0264 | should create sync model in db",function(){
+  it("should create sync model in db",function(){
     model2.create({"name":"testname"});
     var dbUser = Rho.ORMHelper.dbConnection("user");
     var res = dbUser.executeSql("select * from CHANGED_VALUES");
@@ -551,7 +551,7 @@ describe("Fixed Schema Models", function() {
     dbUser.executeSql("DROP TABLE Blob");
   });
 
-  it("VT302-0253 | should update fixedSchema",function(){
+  it("should update fixedSchema",function(){
     model.create({name:"testfixed"});
     var obj = model.find("first");
     expect(obj.get("name")).toEqual("testfixed");
@@ -565,7 +565,7 @@ describe("Fixed Schema Models", function() {
     expect(obj2.get("name")).toEqual("testfixed2");
   });
 
-  it("VT302-0255 | should update fixedSchema with multiple fields",function(){
+  it("should update fixedSchema with multiple fields",function(){
     model.create({name:"testfixed",brand:4});
     var obj = model.find("first");
     expect(obj.get("name")).toEqual("testfixed");
@@ -581,7 +581,7 @@ describe("Fixed Schema Models", function() {
   });
 
   // FIXME:
-  it("VT302-0213 | should delete fixedSchema",function(){
+  it("should delete fixedSchema",function(){
     model.create({name:"testfixed"});
     var obj = model.find("first");
     expect(obj.get("name")).toEqual("testfixed");
@@ -603,7 +603,7 @@ describe("Fixed Schema Models", function() {
   });
 
   // FIXME:
-  it("VT302-0214 | should delete fixedSchema sync model",function(){
+  it("should delete fixedSchema sync model",function(){
     model2.create({name:"testfixed"});
     var obj = model2.find("first");
     expect(obj.get("name")).toEqual("testfixed");
@@ -628,7 +628,7 @@ describe("Fixed Schema Models", function() {
     expect(dbchanged).toEqual([]);
   });
 
-  it('VT302-0215 | destroys fixedSchema item after CHANGED_VALUES deleted', function() {
+  it('destroys fixedSchema item after CHANGED_VALUES deleted', function() {
     model2.create({name:"testfixed"});
     var obj = model2.find("first");
     expect(obj.get("name")).toEqual("testfixed");
@@ -649,7 +649,7 @@ describe("Fixed Schema Models", function() {
     expect(cv[0].update_type).toEqual("delete");
   });
 
-   it('VT302-0216 | updates fixedSchema item after CHANGED_VALUES updated', function() {
+   it('updates fixedSchema item after CHANGED_VALUES updated', function() {
     model2.create({name:"testfixed"});
     var obj = model2.find("first");
     expect(obj.get("name")).toEqual("testfixed");
@@ -670,7 +670,7 @@ describe("Fixed Schema Models", function() {
     expect(cv[0].update_type).toEqual("update");
   });
 
-  it("VT302-0233 | should make object fixedSchema",function(){
+  it("should make object fixedSchema",function(){
     var mobj= model.make({name:"testmake"});
     var obj = model.find("all");
     expect(obj).toEqual([]);
@@ -749,7 +749,7 @@ if (useNewOrm) {
 
 if (useNewOrm) {
   // The following examples are n/a in Old ORM specs for fixed schema
-  it("VT302-0222 | Call find with all and order by any column_name and orderdir as empty string",function() {
+  it("Call find with all and order by any column_name and orderdir as empty string",function() {
     model.create({"name":"Mobio"});
     model.create({"name":"Zoolo"});
     model.create({"name":"Foolo"});
@@ -759,7 +759,7 @@ if (useNewOrm) {
     expect(res[0].get("name")).toEqual("Foolo");
   });
 
-  it("VT302-0265 | Call find with first and with order any column name of integer type. For e.g find('all',{conditions:{},order:'name'})",function() {
+  it("Call find with first and with order any column name of integer type. For e.g find('all',{conditions:{},order:'name'})",function() {
 
       model.create({"brand":656});
       model.create({"brand":2});
@@ -769,7 +769,7 @@ if (useNewOrm) {
       //expect(res.count()).toEqual(1);
   });
 
-  it("VT302-0266 | Call find with first and order by any column_name and orderdir as empty string",function() {
+  it("Call find with first and order by any column_name and orderdir as empty string",function() {
       model.create({"name":"Mobio"});
       model.create({"name":"Zoolo"});
       model.create({"name":"Foolo"});
@@ -931,7 +931,7 @@ describe("Property Bag Models", function() {
     reset();
   });
 
-  it('VT302-0202 | Call create passing a empty hash({})',function(){
+  it('Call create passing a empty hash({})',function(){
     productModel = Rho.ORM.getModel('Product');
     var before = productModel.count();
     productModel.create({});
@@ -939,7 +939,7 @@ describe("Property Bag Models", function() {
     expect(after).toBe(before);
   });
 
-  it('VT302-0209 | Call deleteAll with model Object passing undefined,undefined in arguments',function(){
+  it('Call deleteAll with model Object passing undefined,undefined in arguments',function(){
     model.create({name:"testfixed1"});
     model.create({name:"testfixed2"});
     model.create({name:"testfixed3",brand:4});
@@ -952,7 +952,7 @@ describe("Property Bag Models", function() {
     expect(total).toEqual(0);
   });
 
-  it('VT302-0216 | Call find without passing any argument to it',function(){
+  it('Call find without passing any argument to it',function(){
     for (var i=0;i<=100;i++){
         var nameValue = "testfixed"+i;
         model.create({name: nameValue});
@@ -961,7 +961,7 @@ describe("Property Bag Models", function() {
     expect(obj.length).toEqual(101);
   });
 
-  it('VT302-0218 | finds all objects with one condition for e.g model.find("all", {conditions: {"key": "value2"}})',function(){
+  it('finds all objects with one condition for e.g model.find("all", {conditions: {"key": "value2"}})',function(){
     itemTypes = ['Electronics','Softwares','Cameras','Books'];
     for (var i=0;i<=50;i++){
         var nameValue = "Item "+i;
@@ -986,7 +986,7 @@ describe("Property Bag Models", function() {
     expect(obj.length).toBeGreaterThan(0);
   });
 
-  it("VT302-0224 | Call find with all and select two columns",function() {
+  it("Call find with all and select two columns",function() {
     model.deleteAll();
     expect(model.count()).toEqual(0);
 
@@ -1007,7 +1007,7 @@ describe("Property Bag Models", function() {
     expect(res[1].get("industry")).toBeUndefined();
   });
 
-  it("VT302-0225 | Call find with all and select empty Array",function() {
+  it("Call find with all and select empty Array",function() {
       model.deleteAll();
       var res;
       expect(model.count()).toEqual(0);
@@ -1040,7 +1040,7 @@ describe("Property Bag Models", function() {
       };
   });
 
-  it('VT302-0228 | finds first objects with one condition for e.g model.find("first", {conditions: {"key": "value2"}})',function(){
+  it('finds first objects with one condition for e.g model.find("first", {conditions: {"key": "value2"}})',function(){
     itemTypes = ['Electronics','Softwares','Cameras','Books']
     for (var i=0;i<=100;i++){
         var nameValue = "Item "+i;
@@ -1065,7 +1065,7 @@ describe("Property Bag Models", function() {
     expect(obj.get("name")).toEqual("Item 1");
   });
 
-  it("VT302-0268 | Call find with first and select two columns",function() {
+  it("Call find with first and select two columns",function() {
     model.deleteAll();
     var res;
     expect(model.count()).toEqual(0);
@@ -1087,7 +1087,7 @@ describe("Property Bag Models", function() {
   });
 
   // FIXME: Not Supported (conditions)
-  xit("VT302-0226 | Call find with all , conditions empty hash and select empty String",function() {
+  xit("Call find with all , conditions empty hash and select empty String",function() {
       model.deleteAll();
       var res;
       expect(model.count()).toEqual(0);
@@ -1105,7 +1105,7 @@ describe("Property Bag Models", function() {
   });
 
   // FIXME: Not Supported (conditions)
-  xit("VT302-0269 | Call find with first and select with empty",function() {
+  xit("Call find with first and select with empty",function() {
     model.deleteAll();
     var res;
     model.create({"industry":"Technology","name":"Moto","Address":"USA"});
@@ -1121,7 +1121,7 @@ describe("Property Bag Models", function() {
   });
 
   // FIXME: Not Supported (conditions)
-  xit("VT302-0270 | Call find with first and other parameter as empty",function() {
+  xit("Call find with first and other parameter as empty",function() {
     model.deleteAll();
     var res;
     expect(model.count()).toEqual(0);
@@ -1138,7 +1138,7 @@ describe("Property Bag Models", function() {
     expect(res.get("name")).toEqual("Moto");
   });
 
-  it('VT302-0259 | find count ',function(){
+  it('should find count ',function(){
     itemTypes = ['Electronics','Softwares','Cameras','Books']
     for (var i=0;i<=100;i++){
       var nameValue = "Item "+i;
@@ -1149,7 +1149,7 @@ describe("Property Bag Models", function() {
     expect(obj).toEqual(101);
   });
 
-  it('VT302-0260 | find count objects with one condition for e.g model.find("count", {conditions: {"key": "value2"}})',function(){
+  it('should find count objects with one condition for e.g model.find("count", {conditions: {"key": "value2"}})',function(){
     itemTypes = ['Electronics','Softwares']
     for (var i=0;i<=100;i++){
         var nameValue = "Item "+i;
@@ -1160,14 +1160,14 @@ describe("Property Bag Models", function() {
     expect(obj).toEqual(1);
   });
 
-  it("VT302-0250 | Call updateAttributes without passing any arguments",function(){
+  it("Call updateAttributes without passing any arguments",function(){
     var record = model.create({"name":"Zoolo","industry":"Tech"});
     record.updateAttributes();
     var res = model.find("first",{conditions:{"name":"Zoolo"}});
     expect(res.get("name")).toEqual("Zoolo");
   });
 
-  it("VT302-0251 | Call updateAttributes by passing empty array",function(){
+  it("Call updateAttributes by passing empty array",function(){
     var record = model.create({});
     record.updateAttributes();
     var res = model.find("first",{conditions:{"name":"Zoolo"}});
