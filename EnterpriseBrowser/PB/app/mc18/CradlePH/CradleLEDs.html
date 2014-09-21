@@ -33,7 +33,7 @@
   
       html += "";
       document.getElementById("display").innerHTML = html;
-      RunLED();
+      setInterval(function(){RunLED()},1000);
   }
   function RunLED()
   {
@@ -46,8 +46,7 @@
         Generic.InvokeMetaFunction("Notification", "StateOff:3");
         mode="off";
       }
-      setTimeout(RunLED,100);
-      
+      document.getElementById("display").innerHTML = mode;
      
   }
   /*
