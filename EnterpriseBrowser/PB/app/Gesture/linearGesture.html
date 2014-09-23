@@ -97,12 +97,12 @@
             "RegLevel":"R3",
 		    "Description":"Gesture - Gesture Type='Test'(Invalid)",
 		    "PreCondition":[],
-		    "Steps":["Create a Linear Gesture.", "Try to create  a Gesture of Invalid Type='Test', ID='My Invalid Gesture'  and with default Diagonstic value(false)", " Draw a line on the screen approximately similar to the gesture line."],
+		    "Steps":["Create a Linear Gesture.", "Try to create  a Gesture of Invalid Type='Test', ID='My Invalid Gesture'  and with Diagonstic value true", " Draw a line on the screen approximately similar to the gesture line."],
 		    "ExpectedOutcome":["The invalid gesture type should not create any problem.", "Any further gesture operation should be succeeded.", "Linear  Gesture should be detected."],
 		    "testToPerform":function(){
 				myPage = document.getElementById('mainBlock').innerHTML;
 		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
-		        genericObj.InvokeMETAFunction("gesture", "ID:linearGesture;type:Test;Diagnostics:false;Create");
+		        genericObj.InvokeMETAFunction("gesture", "ID:linearGesture;type:Test;Diagnostics:true;Create");
         		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
 		    },
 		    "FinalResult":""
@@ -732,6 +732,7 @@
 			document.getElementById('actualResult').innerHTML = "";
 			var selectElement = document.getElementById('vtSelect');
 			selectElement.value = index;
+			pbTest.afterEach();
 		};
 		mainObj.runThisTest = function(){
 			testArray[index].testToPerform();

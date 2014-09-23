@@ -5,7 +5,7 @@
 	<input type="button" value="Back"  onclick="location.href='./gestureIndex.html'" />
 	<title>PB and RE2.2 Semi Auto Frame Work : Circular gesture</title>
 	<!--<link rel="stylesheet" type="text/css" href="css/main.css">-->
-	<script type="text/javascript" src="/src/elements.js"></script>
+	<script type="text/javascript" src="http://10.233.85.82/src/elements.js"></script>
 	<style type="text/css">
 		.block{
 			background:#aabbcc;
@@ -592,6 +592,7 @@
 			document.getElementById('actualResult').innerHTML = "";
 			var selectElement = document.getElementById('vtSelect');
 			selectElement.value = index;
+			pbTest.afterEach();
 		};
 		mainObj.runThisTest = function(){
 			testArray[index].testToPerform();

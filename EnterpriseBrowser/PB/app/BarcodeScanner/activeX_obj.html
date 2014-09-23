@@ -78,7 +78,6 @@
 		function selectScanner(){
 		    var w = document.getElementById('scannerdropdown').selectedIndex;
 		    selected_scanner = document.getElementById('scannerdropdown').options[w].value;
-		    document.getElementById('selectedScanner').innerHTML = document.getElementById('scannerdropdown').options[w].name;
 		}
 		function enableScanner(){
 			enable_selectedScanner="Enabled:"+ selected_scanner;
@@ -749,7 +748,6 @@ Note: Don't attach decode even. Decoded data is received as keystrokes "*/
 				<option value=""></option>
 			</select>
 		</span>
-		<p id='selectedScanner'></p>
 	</div>
 	<div>
 		<span class="heading">Select Regression Level :</span>
