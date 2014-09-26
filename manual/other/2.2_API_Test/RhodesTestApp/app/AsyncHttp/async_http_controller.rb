@@ -15,7 +15,7 @@ class AsyncHttpController < Rho::RhoController
   #AsyncHTTP.get
   def asyncHttpCall1
     Rho::AsyncHttp.get(
-      :url => 'http://192.168.6.27/rhodes/AsyncHttp/asyncget.php?data1=test&data2=test2',
+      :url => 'http://10.233.85.82:9097/rhodes/AsyncHttp/asyncget.php?data1=test&data2=test2',
       :callback => (url_for :action => :httpget_callback),
       :callback_param => "" )
     render :action => :wait
@@ -24,7 +24,7 @@ class AsyncHttpController < Rho::RhoController
   #AsyncHTTP.get with authentication
   def asyncHttpCall2
     Rho::AsyncHttp.get(
-      :url => "http://192.168.6.27/rhodes/secure/asyncget.php?data1=test&data2=test2",
+      :url => "http://10.233.85.82:9097/rhodes/secure/asyncget.php?data1=test&data2=test2",
       :callback => (url_for :action => :httpget_callback),
       :authentication => {
         :type => :basic,
@@ -38,7 +38,7 @@ class AsyncHttpController < Rho::RhoController
   #AsyncHTTP.get with authentication (HTTP Site) with wrong udername and password
   def asyncHttpCall3
     Rho::AsyncHttp.get(
-      :url => "http://192.168.6.27/rhodes/secure/asyncget.php?data1=test&data2=test2",
+      :url => "http://10.233.85.82:9097/rhodes/secure/asyncget.php?data1=test&data2=test2",
       :callback => (url_for :action => :httpget_callback),
       :authentication => {
         :type => :basic,
@@ -53,7 +53,7 @@ class AsyncHttpController < Rho::RhoController
   def asyncHttpCall4
 
   result = Rho::AsyncHttp.get(
-    :url => "http://192.168.6.27/rhodes/AsyncHttp/asyncget.php?data1=test&data2=test2"
+    :url => "http://10.233.85.82:9097/rhodes/AsyncHttp/asyncget.php?data1=test&data2=test2"
   )
   @@get_result = result["body"]
   render :action => :index, :back => '/app'
@@ -62,7 +62,7 @@ class AsyncHttpController < Rho::RhoController
   #AsyncHTTP.post
   def asyncHttpCall5
     Rho::AsyncHttp.post(
-      :url => "http://192.168.6.27/rhodes/AsyncHttp/asyncpost.php",
+      :url => "http://10.233.85.82:9097/rhodes/AsyncHttp/asyncpost.php",
       :body => "data1=test&data2=test2",
       :callback => url_for(:action => :httpget_callback),
       :callback_param => "post=complete"
@@ -72,7 +72,7 @@ class AsyncHttpController < Rho::RhoController
   #AsyncHTTP.post with authentication (HTTP Site) with username and password
   def asyncHttpCall6
     Rho::AsyncHttp.post(
-          :url => "http://192.168.6.27/rhodes/secure/asyncpost.php",
+          :url => "http://10.233.85.82:9097/rhodes/secure/asyncpost.php",
           :body => "data1=test&data2=test2",
           :callback => url_for(:action => :httpget_callback),
           :authentication => {
@@ -88,7 +88,7 @@ class AsyncHttpController < Rho::RhoController
   #AsyncHTTP.post with authentication (HTTP Site) with wrong udername and password
   def asyncHttpCall7
     Rho::AsyncHttp.post(
-          :url => "http://192.168.6.27/rhodes/secure/asyncpost.php",
+          :url => "http://10.233.85.82:9097/rhodes/secure/asyncpost.php",
           :body => "data1=test&data2=test2",
           :callback => url_for(:action => :httpget_callback),
           :authentication => {
@@ -105,7 +105,7 @@ class AsyncHttpController < Rho::RhoController
   def asyncHttpCall8
 
   result = Rho::AsyncHttp.post(
-    :url => "http://192.168.6.27/rhodes/AsyncHttp/asyncget.php?data1=test&data2=test2"
+    :url => "http://10.233.85.82:9097/rhodes/AsyncHttp/asyncget.php?data1=test&data2=test2"
   )
   @@get_result = result["body"]
   render :action => :index, :back => '/app'
@@ -117,7 +117,7 @@ class AsyncHttpController < Rho::RhoController
   puts @@get_img_result
   # :filename     Full path to download file target.
   Rho::AsyncHttp.download_file(
-    :url => "http://192.168.6.27/rhodes/AsyncHttp/screen.jpg",
+    :url => "http://10.233.85.82:9097/rhodes/AsyncHttp/screen.jpg",
     :filename => @@get_img_result,
     :headers => {},
     :callback => url_for(:action => :httpdownload_callback)
@@ -130,7 +130,7 @@ class AsyncHttpController < Rho::RhoController
   puts @@get_img_result
   # :filename     Full path to download file target.
   Rho::AsyncHttp.download_file(
-    :url => "http://192.168.6.27/rhodes/secure/screen.jpg",
+    :url => "http://10.233.85.82:9097/rhodes/secure/screen.jpg",
     :filename => @@get_img_result,
     :headers => {},
     :authentication => {
@@ -148,7 +148,7 @@ class AsyncHttpController < Rho::RhoController
   puts @@get_img_result
   # :filename     Full path to download file target.
   Rho::AsyncHttp.download_file(
-    :url => "http://192.168.6.27/rhodes/secure/screen.jpg",
+    :url => "http://10.233.85.82:9097/rhodes/secure/screen.jpg",
     :filename => @@get_img_result,
     :headers => {},
     :authentication => {
@@ -166,7 +166,7 @@ class AsyncHttpController < Rho::RhoController
   puts @@get_img_result
   # :filename     Full path to download file target.
   Rho::AsyncHttp.download_file(
-    :url => "http://192.168.6.27/rhodes/AsyncHttp/screen.jpg",
+    :url => "http://10.233.85.82:9097/rhodes/AsyncHttp/screen.jpg",
     :filename => @@get_img_result
   )
   render :action => :index, :back => '/app'
@@ -214,7 +214,7 @@ class AsyncHttpController < Rho::RhoController
     # :filename     Full path to download file target.
     # :post         HTTP POST body to send with request.
     Rho::AsyncHttp.upload_file(
-      :url => "http://192.168.6.27/rhodes/secure/uploadfile",
+      :url => "http://10.233.85.82:9097/rhodes/secure/uploadfile",
       :filename => @@file_name,
       :body => "", #=> leave blank, AsyncHttp will fill in multipart body
       :headers => {"Content-Type"=>"text/plain"}, #=> used as body text content type
@@ -234,7 +234,7 @@ class AsyncHttpController < Rho::RhoController
     # :filename     Full path to download file target.
     # :post         HTTP POST body to send with request.
     Rho::AsyncHttp.upload_file(
-      :url => "http://192.168.6.27/rhodes/AsyncHttp/uploadfile",
+      :url => "http://10.233.85.82:9097/rhodes/AsyncHttp/uploadfile",
       :filename => @@file_name,
       :body => "", #=> leave blank, AsyncHttp will fill in multipart body
       :headers => {"Content-Type"=>"text/plain"} #=> used as body text content type
