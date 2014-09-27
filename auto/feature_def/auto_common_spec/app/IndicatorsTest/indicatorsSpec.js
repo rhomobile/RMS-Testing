@@ -1,4 +1,153 @@
 describe("Indicators", function() {
+
+	describe("MC18 Specific battery tests", function() {
+	
+		beforeEach(function() {
+		});
+
+		afterEach(function() {
+		});
+		
+		var deviceType = getDeviceType();
+		var isSupported = false;
+		isSupported = (deviceType.toLowerCase().indexOf("mc18") != -1);
+
+	
+		it ("is able to set and retrieve the tripDuration property (valid values)", function()
+		{
+			if (!isSupported)
+				return;
+
+			Rho.Battery.tripDuration = 15;
+			var readValue = Rho.Battery.tripDuration;
+			expect(readValue).toBe(15);
+			
+			Rho.Battery.tripDuration = 30;
+			var readValue = Rho.Battery.tripDuration;
+			expect(readValue).toBe(30);
+			
+			//  Value 0 should use the driver default of 45 minutes
+			Rho.Battery.tripDuration = 0;
+			var readValue = Rho.Battery.tripDuration;
+			expect(readValue).toBe(45);
+			
+		});
+		
+		it ("is able to set and retrieve the tripDuration property (invalid / unrealistic values)", function()
+		{
+			if (!isSupported)
+				return;
+
+			Rho.Battery.tripDuration = 15;
+			Rho.Battery.tripDuration = -1;
+			var readValue = Rho.Battery.tripDuration;
+			expect(readValue).toBe(15);
+			
+			Rho.Battery.tripDuration = 999999999;
+			var readValue = Rho.Battery.tripDuration;
+			expect(readValue).toBe(999999999);
+		});
+
+		it ("is able to set and retrieve the averageCurrentConsumption property (valid values)", function()
+		{
+			if (!isSupported)
+				return;
+
+			Rho.Battery.averageCurrentConsumption = 1500;
+			var readValue = Rho.Battery.averageCurrentConsumption;
+			expect(readValue).toBe(1500);
+			
+			Rho.Battery.averageCurrentConsumption = 1250;
+			var readValue = Rho.Battery.averageCurrentConsumption;
+			expect(readValue).toBe(1250);
+			
+			//  Value 0 should use the running average current consumption
+			Rho.Battery.averageCurrentConsumption = 0;
+			var readValue = Rho.Battery.averageCurrentConsumption;
+			expect(readValue).toBe(0);
+		});
+		
+		it ("is able to set and retrieve the averageCurrentConsumption property (invalid / unrealistic values)", function()
+		{
+			if (!isSupported)
+				return;
+
+			Rho.Battery.averageCurrentConsumption = 1500;
+			Rho.Battery.averageCurrentConsumption = -1;
+			var readValue = Rho.Battery.averageCurrentConsumption;
+			expect(readValue).toBe(1500);
+			
+			Rho.Battery.averageCurrentConsumption = 999999999;
+			var readValue = Rho.Battery.averageCurrentConsumption;
+			expect(readValue).toBe(999999999);
+		});		
+		
+		
+		it ("is able to retrieve Battery Diagnostics", function()
+		{
+			if (!isSupported)
+				return;
+				
+			var percentRegex = /^-?[0-9]{0,2}(\.[0-9]{1,2})?$|^-?(100)(\.[0]{1,2})?$/
+			var integerRegex = /^\d+$/
+
+			var retrievedProps = Rho.Battery.batteryDiagnostics();
+			console.log(JSON.stringify(retrievedProps));
+			
+			//  The state of health should be a percentage
+			expect(percentRegex.exec(retrievedProps.stateOfHealthPercent)).not.toBe(null);
+			
+			//  The battery capacity percent should be a percentage
+			expect(percentRegex.exec(retrievedProps.batteryCapacityPercent)).not.toBe(null);
+			
+			//  The battery Capacity Minutes should be a number >= 0
+			expect(integerRegex.exec(retrievedProps.batteryCapacityMinutes)).not.toBe(null);
+			
+			//  The battery expiration in months should be 'undefined' (Driver issue)
+			expect(retrievedProps.batteryExpirationInMonths).toBe("undefined");
+			
+			//  The previous Battery Replacement should be a number >= 0
+			expect(integerRegex.exec(retrievedProps.previousBatteryReplacement)).not.toBe(null);
+			
+			//  The time since last cold boot should be a number >= 0
+			expect(integerRegex.exec(retrievedProps.timeSinceLastColdBoot)).not.toBe(null);
+			
+			//  The required charge time should be a number >= 0
+			expect(integerRegex.exec(retrievedProps.requiredChargeTime)).not.toBe(null);
+			
+			//  The charging time should be a number >= 0
+			expect(integerRegex.exec(retrievedProps.chargingTime)).not.toBe(null);
+			
+		});		
+
+		it ("will report different Battery Diagnostics if the tripDuration and averageCurrentConsumption are changed", function()
+		{
+			if (!isSupported)
+				return;
+				
+			Rho.Battery.tripDuration = 15;
+			Rho.Battery.averageCurrentConsumption = 1500;
+			
+			var retrievedProps = Rho.Battery.batteryDiagnostics();
+			console.log(JSON.stringify(retrievedProps));
+			
+			var previousRequiredChargeTime = retrievedProps.requiredChargeTime;
+			var previousBatteryCapacityMinutes = retrievedProps.batteryCapacityMinutes;
+
+			Rho.Battery.tripDuration = 40;
+			Rho.Battery.averageCurrentConsumption = 2500;
+
+			var retrievedProps = Rho.Battery.batteryDiagnostics();
+			console.log(JSON.stringify(retrievedProps));
+
+			expect(previousRequiredChargeTime).not.toBe(retrievedProps.requiredChargeTime);
+			expect(previousBatteryCapacityMinutes).not.toBe(retrievedProps.batteryCapacityMinutes);
+			
+		});				
+		
+	});
+
+	
 	describe("Signal JS API", function()
 	{	
 		beforeEach(function() {
@@ -387,4 +536,6 @@ describe("Indicators", function() {
 		});
      }
 	});
+	
+	
 });
