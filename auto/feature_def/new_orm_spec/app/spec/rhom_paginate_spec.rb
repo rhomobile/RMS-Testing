@@ -105,10 +105,4 @@ describe "Rhom::Paginate" do
     @accts3.length.should == 0
   end
 
-  # New Orm: N/A
-  # it "should assign metadata" do
-  #   meta = {"foo" => "bar"}
-  #   getAccount.metadata = meta.to_json
-  #   getAccount.metadata.should == meta
-  # end
 end

@@ -26,11 +26,15 @@ describe "Rhom" do
     model.should_not be_nil
   end
 
+  # TODO: BAB
+  # create alias for get_model
+  # it 'should return model by name using alias name' do
+  #   model = Rhom::Rhom.get_model("Product")
+  #   model.should_not be_nil
+  # end
+
   it 'should list all properties for model' do
     model = Rhom::Rhom.getModel("Product")
-    puts "-- BAB ---"
-    puts model.inspect
-
     model.model_name.should ==  'Product'
     model.loaded.should == true
     model.sync_type.should == 'incremental'
@@ -38,8 +42,6 @@ describe "Rhom" do
     model.partition.should == 'user'
     model.fixed_schema.should == false
     model.freezed.should == false
-
-    puts "-- BAB ---"
   end
 
   it "Call haveLocalChanges without having any model" do

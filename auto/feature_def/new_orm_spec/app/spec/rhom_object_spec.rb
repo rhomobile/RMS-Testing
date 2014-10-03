@@ -51,7 +51,19 @@ describe "Rhom::RhomObject" do
     account.object.should == '3560c0a0-ef58-2f40-68a5-fffffffffffff'
   end
 
-  it "should retrieve an object of model`" do
+
+=begin
+  # TODO: BAB
+  # NewOrm: metadata not implemented!
+  it "should assign metadata" do
+    metadata = {"foo" => "bar"}
+    getAccount.metadata = metadata.to_json
+    getAccount.metadata.should == metadata
+  end
+=end
+
+
+  it "should retrieve an object of model" do
     results = getCase.find(:all)
     results.length.should == 1
 
