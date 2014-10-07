@@ -11,40 +11,47 @@ class SpecRunner < MSpecScript
     config[:files] << "spec/spec_helper"
 
     # 1.
-    config[:files] << [ "spec/rhom_model_spec", [{:schema_model=>true}, {:schema_model=>false}] ]
-    #  => Total: 20  Passed: 20  Failed: 0
-    #
-    #config[:files] << [ "spec/rhom_model_spec",
-    #   [ {:schema_model=>true, :sync_model=>true},  {:schema_model=>true, :sync_model=>false},
-    #     {:schema_model=>false, :sync_model=>true} , {:schema_model=>false, :sync_model=>false} ] ]
-    #  => Total: 40 Passed: 40 Failed: 0
+    # All pass
+    # config[:files] << [ "spec/rhom_model_spec", [{:schema_model=>true}, {:schema_model=>false}] ]
+
+    # All pass
+    config[:files] << [ "spec/rhom_model_spec",
+      [ {:schema_model=>true, :sync_model=>true},  {:schema_model=>true, :sync_model=>false},
+        {:schema_model=>false, :sync_model=>true} , {:schema_model=>false, :sync_model=>false} ] ]
 
     # 2.
+    # All pass
     config[:files] << [ "spec/rhom_object_spec", [{:schema_model=>true}, {:schema_model=>false}] ]
-    # => Total: 156  Passed: 122  Failed: 34
     #
+
     # 2.1 Testing for fixed schema
     #config[:files] << [ "spec/rhom_object_spec", [{:schema_model=>true}] ]
-    # => Total: 78  Passed: 77  Failed: 1
     # 2.2 Testing for property bag
     #config[:files] << [ "spec/rhom_object_spec", [{:schema_model=>false}] ]
-    # => Total: 78  Passed: 45  Failed: 33
     #
+    # TODO: BAB: 2 specs fails if :sync_model=>true !!!
+    # 2.3 Testing for fixed schema / property bag + sync_model
     # config[:files] << [ "spec/rhom_object_spec",
     #     [ {:schema_model=>true, :sync_model=>true},  {:schema_model=>true, :sync_model=>false},
     #       {:schema_model=>false, :sync_model=>true} , {:schema_model=>false, :sync_model=>false} ] ]
-    # => Total: 312 Passed: 244 Failed: 68
+    #
 
     # 3.
+    # All pass
     config[:files] << "spec/rhom_spec"
-    # Total: 10 Passed: 10 Failed: 0
 
     # 4.
-    # config[:files] << [ "spec/rhom_paginate_spec", , [{:schema_model=>true}, {:schema_model=>false}] ]
-    # Total: 20 Passed: 12 Failed: 8
-    #
+    # TODO: BAB: 4 specs fails for property bag !!!
+    # config[:files] << [ "spec/rhom_paginate_spec", [{:schema_model=>true}, {:schema_model=>false}] ]
+
     # 4.1 Fixed schema only cases
+    # All pass
     config[:files] << [ "spec/rhom_paginate_spec", [{:schema_model=>true}] ]
+
+
+    # 4.2 property bag only cases
+    # TODO: BAB: 4 specs fails for property bag !!!
+    # config[:files] << [ "spec/rhom_paginate_spec", [{:schema_model => false}] ]
 
   end
 

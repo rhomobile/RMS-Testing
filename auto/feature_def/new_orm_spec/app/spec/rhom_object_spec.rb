@@ -325,6 +325,9 @@ end
     end
   end
 
+  # TODO: BAB
+  # Spec fails if $spec_settings[:sync_model] == true
+  #
   it "should update a record with full mode" do
     records = getTestDB().select_from_table('changed_values','*', 'update_type' => 'update')
     records.length.should == 0
@@ -337,11 +340,14 @@ end
 
     if $spec_settings[:sync_model]
       records = getTestDB().select_from_table('changed_values','*', 'update_type' => 'update')
-      records.length.should == 1
+      records.length.should == 1 # TODO: fails if :sync_model is set
       records[0]['attrib'].should == 'created_by_name'
     end
   end
 
+  # TODO: BAB
+  # Spec fails if $spec_settings[:sync_model] == true
+  #
   it "should save a record with full mode" do
     records = getTestDB().select_from_table('changed_values','*', 'update_type' => 'update')
     records.length.should == 0
@@ -355,7 +361,7 @@ end
 
     if $spec_settings[:sync_model]
       records = getTestDB().select_from_table('changed_values','*', 'update_type' => 'update')
-      records.length.should == 1
+      records.length.should == 1 # TODO: fails if :sync_model is set
       records[0]['attrib'].should == 'created_by_name'
     end
   end
