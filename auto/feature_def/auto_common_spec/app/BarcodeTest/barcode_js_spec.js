@@ -388,6 +388,292 @@ if(barcodeNotSupportedDevices.indexOf(Rho.System.deviceName) == -1){
 				});
 			}
 
+
+				describe("Invalid Cases - Should not crash", function() {
+					
+					it("Enable invalid Scanner", function() {
+						var invalidBarcodeObj = enumObject;
+						invalidBarcodeObj.id = "scanner5";
+						runs(function() {
+							invalidBarcodeObj.enable();
+						});
+					});
+
+					it("call enable with invalid hash", function(){
+						var invalidBarcodeObj = enumObject;
+						invalidBarcodeObj.id = "scannerInvalid";
+						invalidBarcodeObj.name = "invalidhash";
+						invalidBarcodeObj.age = 22;
+						invalidBarcodeObj.height = 155;
+
+						runs(function() {
+							invalidBarcodeObj.enable();
+						});
+					});
+					it("set using Barcode.Propertyname for barcodeDataFormat as test (invalid value)", function(){
+						runs(function(){
+							var objProperty = {'allDecoders':true,'dataBufferSize':20000, 'barcodeDataFormat':'test'};
+							enumObject.enable(objProperty, scanCallback);
+						});
+						runs(function(){
+							enumObject.start();
+							setTimeout(function(){
+								enumObject.stop();
+							}, 3000)
+						});
+					});
+					it("set using Barcode.Propertyname for dataBufferSize as -1", function(){
+						runs(function(){
+							var objProperty = {'allDecoders':true,'dataBufferSize':-1, 'barcodeDataFormat':'binary'};
+							enumObject.enable(objProperty, scanCallback);
+						});
+						runs(function(){
+							enumObject.start();
+							setTimeout(function(){
+								enumObject.stop();
+							}, 3000)
+						});
+					});
+					it("set using Barcode.Propertyname for signatureImageHeight to -100 ", function(){
+						runs(function(){
+							var objProperty = {'allDecoders':false, 'signature':true, 'dataBufferSize':20000, 'barcodeDataFormat':'binary', 'signatureImageHeight':-100};
+							enumObject.enable(objProperty, scanCallback);
+						});
+						runs(function(){
+							enumObject.start();
+							setTimeout(function(){
+								enumObject.stop();
+							}, 3000)
+						});
+					});
+					it("set using Barcode.Propertyname for signatureImageWidth to  -100 ", function(){
+						runs(function(){
+							var objProperty = {'allDecoders':false, 'signature':true, 'dataBufferSize':20000, 'barcodeDataFormat':'binary', 'signatureImageWidth':-100};
+							enumObject.enable(objProperty, scanCallback);
+						});
+						runs(function(){
+							enumObject.start();
+							setTimeout(function(){
+								enumObject.stop();
+							}, 3000)
+						});
+					});
+					it("set using Barcode.Propertyname for signatureImageQuality to  -20 ", function(){
+						runs(function(){
+							var objProperty = {'allDecoders':false, 'signature':true, 'dataBufferSize':20000, 'barcodeDataFormat':'binary', 'signatureImageQuality':-20};
+							enumObject.enable(objProperty, scanCallback);
+						});
+						runs(function(){
+							enumObject.start();
+							setTimeout(function(){
+								enumObject.stop();
+							}, 3000)
+						});
+					});
+					// it("call getProperty() with callback as action URL and no property ", function(){
+					// });
+					it("call getProperty() with sync callback and no property ", function(){
+						runs(function(){
+							enumObject.enable();
+							enumObject.getProperty('',callbackgetproperty);
+						});
+						waitsFor(function(){
+							return callbackstatus;
+						});	
+						runs(function() {	
+							expect(callbackstatus).toEqual(true);
+						});	
+					});
+					it("call getProperty() with anonymous callback and no property ", function(){
+						runs(function(){
+							enumObject.enable();
+							enumObject.getProperty('',function(data){getpropertydata = data;callbackstatus = true;});
+						});
+						waitsFor(function(){
+							return callbackstatus;
+						});	
+						runs(function() {	
+							expect(callbackstatus).toEqual(true);
+						});	
+					});
+					// it("call getProperty() with callback as action URL and hash ", function(){
+					// });
+					it("call getProperty() with sync callback hash ", function(){
+						runs(function(){
+							enumObject.enable();
+							enumObject.getProperty(['allDecoders','picklistMode','code93'],callbackgetproperty);
+						});
+						waitsFor(function(){
+							return callbackstatus;
+						});	
+						runs(function() {	
+							expect(callbackstatus).toEqual(true);
+						});	
+					});
+					it("call getProperty() with anonymous callback and hash ", function(){
+						runs(function(){
+							enumObject.enable();
+							enumObject.getProperty(['allDecoders','picklistMode','code93'],function(data){getpropertydata = data;callbackstatus = true;});
+						});
+						waitsFor(function(){
+							return callbackstatus;
+						});	
+						runs(function() {	
+							expect(callbackstatus).toEqual(true);
+						});	
+					});
+					// it("call getProperties() with callback as action URL and no hash ", function(){
+					// });
+					it("call getProperties() with sync callback and no hash ", function(){
+						runs(function(){
+							enumObject.enable();
+							enumObject.getProperties([],callbackgetproperties);
+						});
+						waitsFor(function(){
+							return callbackstatus;
+						});	
+						runs(function() {	
+							expect(callbackstatus).toEqual(true);
+						});	
+					});
+					it("call getProperties() with anonymous callback and no hash ", function(){
+						runs(function(){
+							enumObject.enable();
+							enumObject.getProperties([],function(data){getpropertydata = data;callbackstatus = true;});
+						});
+						waitsFor(function(){
+							return callbackstatus;
+						});	
+						runs(function() {	
+							expect(callbackstatus).toEqual(true);
+						});	
+					});
+					it("call setproperty with viewfinderFeedbackTime to -5000 ", function(){
+						runs(function(){
+							var objProperty = {'allDecoders':true, 'viewfinderFeedback':'enabled', 'viewfinderFeedbackTime':-5000};
+							enumObject.enable(objProperty, scanCallback);
+						});
+						runs(function(){
+							enumObject.start();
+							setTimeout(function(){
+								enumObject.stop();
+							}, 3000)
+						});
+					});
+					// it("call setproperty with negative sameSymbolTimeout and differentSymbolTimeout ", function(){
+					// });
+					// it("sameSymbolTimeout and differentSymbolTimeout with aimtype trigger  ", function(){
+					// });
+					// it("call setproperty with enableTimeout as 0 second ", function(){
+					// });
+					it("call setproperty with barcodeDataFormat as test (invalid value) ", function(){
+						runs(function(){
+							var objProperty = {'allDecoders':true, 'barcodeDataFormat':'test', 'dataBufferSize':20000};
+							enumObject.enable(objProperty, scanCallback);
+						});
+						runs(function(){
+							enumObject.start();
+							setTimeout(function(){
+								enumObject.stop();
+							}, 3000)
+						});
+					});
+					it("call setproperty with barcodeDataFormat as empty data ", function(){
+						runs(function(){
+							var objProperty = {'allDecoders':true, 'barcodeDataFormat':null, 'dataBufferSize':20000};
+							enumObject.enable(objProperty, scanCallback);
+						});
+						runs(function(){
+							enumObject.start();
+							setTimeout(function(){
+								enumObject.stop();
+							}, 3000)
+						});
+					});
+					it("call setproperty with signatureImageHeight to -100 ", function(){
+						runs(function(){
+							var objProperty = {'allDecoders':false, 'signature':true, 'barcodeDataFormat':'binary','dataBufferSize':20000,'signatureImageHeight':-100};
+							enumObject.enable(objProperty, scanCallback);
+						});
+						runs(function(){
+							enumObject.start();
+							setTimeout(function(){
+								enumObject.stop();
+							}, 3000)
+						});
+					});
+					// it("call enable with VF coordinates to negative values ", function(){
+					// });
+					it("call enable with viewfinderFeedbackTime to -5000 ", function(){
+						runs(function(){
+							var objProperty = {'allDecoders':true, 'viewfinderFeedback':'enabled','viewfinderFeedbackTime':-5000};
+							enumObject.enable(objProperty, scanCallback);
+						});
+						runs(function(){
+							enumObject.start();
+							setTimeout(function(){
+								enumObject.stop();
+							}, 3000)
+						});
+					});
+					// it("call enable with negative sameSymbolTimeout and differentSymbolTimeout ", function(){
+					// });
+					// it("call enable with sameSymbolTimeout and differentSymbolTimeout with aimtype trigger  ", function(){
+					// });
+					// it("call enable with enableTimeout as 0 second ", function(){
+					// });
+					it("call enable with barcodeDataFormat as test (invalid value) ", function(){
+						runs(function(){
+							var objProperty = {'allDecoders':true, 'barcodeDataFormat':'test','dataBufferSize':20000};
+							enumObject.enable(objProperty, scanCallback);
+						});
+						runs(function(){
+							enumObject.start();
+							setTimeout(function(){
+								enumObject.stop();
+							}, 3000)
+						});
+					});
+					it("call enable with barcodeDataFormat as empty data ", function(){
+						runs(function(){
+							var objProperty = {'allDecoders':true, 'barcodeDataFormat':null,'dataBufferSize':20000};
+							enumObject.enable(objProperty, scanCallback);
+						});
+						runs(function(){
+							enumObject.start();
+							setTimeout(function(){
+								enumObject.stop();
+							}, 3000)
+						});
+					});
+					it("call enable with signatureImageHeight to -100 ", function(){
+						runs(function(){
+							var objProperty = {'allDecoders':false, 'signature':true, 'barcodeDataFormat':'binary','dataBufferSize':20000,'signatureImageHeight':-100};
+							enumObject.enable(objProperty, scanCallback);
+						});
+						runs(function(){
+							enumObject.start();
+							setTimeout(function(){
+								enumObject.stop();
+							}, 3000)
+						});
+					});
+					it("call enable with signatureImageQuality to  -20 ", function(){
+						runs(function(){
+							var objProperty = {'allDecoders':false, 'signature':true, 'barcodeDataFormat':'binary','dataBufferSize':20000,'signatureImageQuality':-20};
+							enumObject.enable(objProperty, scanCallback);
+						});
+						runs(function(){
+							enumObject.start();
+							setTimeout(function(){
+								enumObject.stop();
+							}, 3000)
+						});
+					});
+
+				});
+
+
 		})(enumData[j],arrSCN);
 
     }
