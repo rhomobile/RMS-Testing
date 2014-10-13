@@ -1,16 +1,16 @@
 describe "Rhom" do
-  @use_new_orm = begin Rho::RHO.use_new_orm rescue false end
+  @use_new_orm = begin Rho::RHO.use_new_orm rescue true end
   puts "Rhom specs: use_new_orm: #{@use_new_orm}"
 
   before(:each) do
     clean_db_data('user')
   end
 
-  it 'Check Rhom::Rhom exist or not | Should return an object' do
+  it 'Check Rhom::Rhom exist or not | should return an object' do
     Rhom::Rhom.should_not be_nil
   end
 
-  it "Should return client id" do
+  it "should return client id" do
     user_db = ::Rho::RHO.get_user_db
     user_db.execute_sql("DELETE FROM CLIENT_INFO")
     client_id = Rhom::Rhom.client_id
@@ -21,13 +21,36 @@ describe "Rhom" do
     client_id.should == "7"
   end
 
+  it 'should return model by name' do
+    model = Rhom::Rhom.getModel("Product")
+    model.should_not be_nil
+  end if @use_new_orm # TODO: BAB: getModel n/a in OldRom
+
+  # TODO: BAB
+  # create alias for get_model
+  # it 'should return model by name using alias name' do
+  #   model = Rhom::Rhom.get_model("Product")
+  #   model.should_not be_nil
+  # end
+
+  it 'should list all properties for model' do
+    model = Rhom::Rhom.getModel("Product")
+    model.model_name.should ==  'Product'
+    model.loaded.should == true
+    model.sync_type.should == 'incremental'
+    model.sync_priority.should == 1
+    model.partition.should == 'user'
+    model.fixed_schema.should == false
+    model.freezed.should == false
+  end if @use_new_orm  # TODO: BAB: getModel n/a in OldRom
+
   it "Call haveLocalChanges without having any model" do
     db = ::Rho::RHO.get_user_db
     db.execute_sql("DELETE FROM CHANGED_VALUES");
     Rhom::Rhom.have_local_changes.should be_false
   end
 
-  it "Should return true if a model objects have local changes for sync haveLocalChanges" do
+  it "should return true if a model objects have local changes for sync haveLocalChanges" do
     db = ::Rho::RHO.get_user_db
     Rhom::Rhom.have_local_changes.should be_false
     db.execute_sql("INSERT INTO CHANGED_VALUES (object) VALUES('meobj')")
@@ -39,7 +62,7 @@ describe "Rhom" do
     Rhom::Rhom.have_local_changes.should be_false
   end
 
-  it "Should raise an exception if database_full_reset_ex called incorrectly" do
+  it "should raise an exception if database_full_reset_ex called incorrectly" do
     begin
       exc = false
       Rhom::Rhom.database_full_reset_ex( :models => ['Product'], :reset_client_info => true )
@@ -49,7 +72,7 @@ describe "Rhom" do
     exc.should be_true
   end
 
-  it "Should support different parameters for database_full_reset_ex method" do
+  it "should support different parameters for database_full_reset_ex method" do
     Rhom::Rhom.database_full_reset_ex
     Rhom::Rhom.database_full_reset_ex( :reset_client_info => true )
     Rhom::Rhom.database_full_reset_ex( :reset_local_models => true )
@@ -57,7 +80,7 @@ describe "Rhom" do
   end
 
 
-  it "Should  delete all objects for given fixed schema models" do
+  it "should  delete all objects for given fixed schema models" do
     Product_s.create( { :brand => "Apple", :name => 'iPhone 5S', :price => "$199", :quantity => "10" } )
     Product_s.create( { :brand => "Samsung", :name => 'Galaxy S4', :price => "$99.99", :quantity => "20" } )
     Customer_s.create( { :city => 'SPB', :address => "Fontanka" } )
@@ -72,7 +95,7 @@ describe "Rhom" do
     Customer_s.find(:count).should == 0
   end
 
-  it "Should  delete all objects for a given fixed schema model" do
+  it "should  delete all objects for a given fixed schema model" do
     Product_s.create( { :brand => "Apple", :name => 'iPhone 5S', :price => "$199", :quantity => "10" } )
     Product_s.create( { :brand => "Samsung", :name => 'Galaxy S4', :price => "$99.99", :quantity => "20" } )
     Customer_s.create( { :city => 'SPB', :address => "Fontanka" } )
@@ -89,7 +112,7 @@ describe "Rhom" do
     Customer_s.find(:count).should > 0
   end
 
-  it "Should  delete all objects for given property bag models" do
+  it "should  delete all objects for given property bag models" do
     Product.create( { :brand => "Apple", :name => 'iPhone 5S', :price => "$199", :quantity => "10" } )
     Product.create( { :brand => "Samsung", :name => 'Galaxy S4', :price => "$99.99", :quantity => "20" } )
     Customer.create( { :city => 'SPB', :address => "Fontanka" } )
@@ -104,7 +127,7 @@ describe "Rhom" do
     Customer.find(:count).should == 0
   end
 
-  it "Should  delete all objects for a given property bag model" do
+  it "should  delete all objects for a given property bag model" do
     Product.create( { :brand => "Apple", :name => 'iPhone 5S', :price => "$199", :quantity => "10" } )
     Product.create( { :brand => "Samsung", :name => 'Galaxy S4', :price => "$99.99", :quantity => "20" } )
     Customer.create( { :city => 'SPB', :address => "Fontanka" } )
@@ -150,7 +173,7 @@ describe "Rhom" do
         row["update_type"].should == "update"
       end
     end
-  end
+  end if @use_new_orm  # TODO: BAB: is it broken in OdlORM
 
   it "should full update for property bag if model enable :full_update" do
     attrs = { :brand => "Samsung", :name => 'Galaxy S4', :price => "$99.99", :quantity => "20" }
@@ -181,6 +204,6 @@ describe "Rhom" do
         row["update_type"].should == "update"
       end
     end
-  end
+  end if @use_new_orm  # TODO: BAB: is it broken in OdlORM
 
 end

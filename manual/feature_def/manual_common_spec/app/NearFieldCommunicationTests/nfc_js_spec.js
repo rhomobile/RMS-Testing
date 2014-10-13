@@ -330,9 +330,10 @@ describe('Near Field Communication Tests', function () {
             runs(function () {
                 var tag = Rho.NFC.Tag.getTagById(tagID);
                 // if tag.isReadOnly == false
-                if(tag.isNdef == false) {tag.formatNDEF();}
-                var result = tag.exchangeData("testdata");
-                spec.addResult("Property \"receiveData\"", result.receiveData);
+                //if (tag.isNdef == false) { tag.formatNDEF(); }
+                tag.exchangeData("testdata");
+                var result = tag.exchangeData("");
+                spec.addResult("Property \"receiveData\"", result["receiveData"]);
                 spec.displayResults();
                 spec.waitForResponse();
             });

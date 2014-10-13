@@ -348,7 +348,7 @@
 		             "3. Press all of the keys of the terminal."],
 		    "ExpectedOutcome":["All key press should be captured except from coloured keys and the mentioned HTTP location should be opened."],
 		    "testToPerform":function(){
-				genericObj.InvokeMETAFunction("KeyCapture", "KeyValue:All;KeyEvent:url('http://10.233.85.82/PB3.X/Key Handling/keynav.html')");
+				genericObj.InvokeMETAFunction("KeyCapture", "KeyValue:All;KeyEvent:url('http://10.233.85.82:9098/app/KeyHandling/keynav.html')");
 		    },
 		    "FinalResult":""
 		 },{
@@ -374,7 +374,7 @@
 		             "3. Press some of the keys of the terminal."],
 		    "ExpectedOutcome":["Pressing any other key except enter key should not take any effect.","HTTP location should be opened when Enter key is pressed."],
 		    "testToPerform":function(){
-				genericObj.InvokeMETAFunction("KeyCapture", "KeyValue:0x0D;KeyEvent:url('http://10.233.85.82/PB3.X/Key Handling/keynav.html')");
+				genericObj.InvokeMETAFunction("KeyCapture", "KeyValue:0x0D;KeyEvent:url('http://10.233.85.82:9098/app/KeyHandling/keynav.html')");
 		    },
 		    "FinalResult":""
 		 },{
@@ -575,7 +575,7 @@
 
 		    "ExpectedOutcome":["on trigger press I should navigate to specified URL."],
 		    "testToPerform":function(){
-				genericObj.InvokeMETAFunction("KeyCapture", "KeyValue:All;KeyEvent:url('http://10.233.85.82/PB3.X/Key Handling/keynav.html')");
+				genericObj.InvokeMETAFunction("KeyCapture", "KeyValue:All;KeyEvent:url('http://10.233.85.82:9098/app/KeyHandling/keynav.html')");
 		    },
 		    "FinalResult":""
 		 },{
@@ -887,7 +887,7 @@
 	<div class="runners">
 		<input type=button value="Previous" onclick="main.prevTest();" />
 		<input type=button value="Next" onclick="main.nextTest()" />
-		<P><BR><INPUT TYPE="button" VALUE="Navigate to another page" ONCLICK="location.href='http://10.233.85.82/PB3.X/KeyHandling/keynav.html'"></P>
+		<P><BR><INPUT TYPE="button" VALUE="Navigate to another page" ONCLICK="location.href='./keynav.html'"></P>
 	</div>
 	</div>
 </body>

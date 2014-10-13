@@ -1,0 +1,49 @@
+<html>
+<head>
+    <title>Navigation Check</title>
+<META HTTP-Equiv="SIPbutton" Content="visibility:visible">
+
+<script language="javascript" type="text/javascript">
+//var Generic = new ActiveXObject("PocketBrowser.Generic");
+function onGesture(id,count)
+ {
+      document.getElementById("actual").innerHTML = "Gesture detected for "+EventCounter+"th time.<br>Gesture ID: " + id + ", Count: " + count;
+      EventCounter++;
+      
+      if(id=="Scan")
+      {
+      generic.InvokeMETAFunction("Scanner","enabled;start");
+      }
+      if(id=="Signal")
+      {
+      generic.InvokeMETAFunction("Signal","visibility:visible");
+      }
+      if(id=="Battery")
+      {
+      generic.InvokeMETAFunction("battery","visibility:visible");
+      }
+ }
+ 
+ function back()
+ {
+   generic.InvokeMETAFunction("gesture", "Delete");
+   window.location= " ./holdGesture.html";
+   }
+
+function runthis(){
+  generic.InvokeMETAFunction("gesture", "ID:LinearGesture;type:linear;startX:80;startY:100;endX:250;endY:100;Diagnostics:true;Create");
+   generic.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+}
+</script>
+
+
+</head>
+<body>
+<form id="frmHoldGestures" action="GestureProcess_Hold.asp" method="post" >
+<h2>Suucessfully navigated to gesture page</h2>
+
+<P><BR><INPUT TYPE="button" VALUE="Run this" ONCLICK="runthis();"></P>
+<P><BR><INPUT TYPE="button" VALUE="Back" ONCLICK="back();"></P>
+</form>
+</body>
+</html>

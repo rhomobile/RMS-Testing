@@ -1,6 +1,6 @@
 describe "RhomModel" do
-  @use_new_orm = begin Rho::RHO.use_new_orm rescue false end
-  puts "Rhom specs: use_new_orm: #{@use_new_orm}"
+  @use_new_orm = begin Rho::RHO.use_new_orm rescue true end
+  puts "RhomModel specs: use_new_orm: #{@use_new_orm}"
 
   before(:each) do
     clean_db_data
@@ -44,7 +44,7 @@ describe "RhomModel" do
     (@product.vars.size-2).should == attrs.size
   end
 
-  it 'VT302-0004 | should create model' do
+  it 'should create model' do
     vars = {"name"=>"Galaxy S", "brand"=>"Android"}
     @product1 = getProduct.create(vars)
     @product2 = getProduct.find(@product1.object)

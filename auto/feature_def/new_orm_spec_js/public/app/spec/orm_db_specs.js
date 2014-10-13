@@ -31,7 +31,7 @@ describe("ORM Db Reset Specs", function() {
     Rho.ORM.clear();
   });
 
-  it("VT302-0041 | Call databaseFullReset(true) should reset client info databaseFullReset tables",function(){
+  it("Call databaseFullReset(true) should reset client info databaseFullReset tables",function(){
     userDB.executeSql("INSERT INTO CLIENT_INFO (client_id) VALUES(7)");
     var client_id = userDB.executeSql("Select * from client_info");
     expect(client_id[0].client_id).toEqual("7");
@@ -85,7 +85,7 @@ describe("ORM Db Reset Specs", function() {
     expect(find_value_of_attrib(objects, 'name')).toEqual('test');
   });
 
-  it("VT302-0042 | Call databaseFullReset(false) should not reset client info databaseFullReset tables",function(){
+  it("Call databaseFullReset(false) should not reset client info databaseFullReset tables",function(){
     userDB.executeSql("INSERT INTO CLIENT_INFO (client_id) VALUES(7)");
     var client_id = userDB.executeSql("Select * from client_info");
     expect(client_id[0].client_id).toEqual("7");
@@ -141,7 +141,7 @@ describe("ORM Db Reset Specs", function() {
     expect(find_value_of_attrib(objects, 'brand')).toEqual('PUMA');
   });
 
-  it("VT302-0043 | should reset client info databaseFullReset tables of all partitions",function(){
+  it("should reset client info databaseFullReset tables of all partitions",function(){
     if (useNewOrm) {
       var Product_user_fixed = function(model){
         model.setModelProperty("name","string","");
@@ -238,7 +238,7 @@ describe("ORM Db Reset Specs", function() {
     expect(localDB.isTableExist("Product_local")).toBe(true);
   });
 
-  it("VT302-0044 | Call databaseFullReset(false,false) should not reset client info and local models ",function(){
+  it("Call databaseFullReset(false,false) should not reset client info and local models ",function(){
     userDB.executeSql("INSERT INTO CLIENT_INFO (client_id) VALUES(7)");
     var client_id = userDB.executeSql("Select * from client_info");
     expect(client_id[0].client_id).toEqual("7");
@@ -291,7 +291,7 @@ describe("ORM Db Reset Specs", function() {
     expect(find_value_of_attrib(objects, 'name')).toEqual('test');
   });
 
-  it("VT302-0045 | Call databaseFullReset(true,true) should reset client info and local models ",function(){
+  it("Call databaseFullReset(true,true) should reset client info and local models ",function(){
     userDB.executeSql("INSERT INTO CLIENT_INFO (client_id) VALUES(7)");
     var client_id = userDB.executeSql("Select * from client_info");
     expect(client_id[0].client_id).toEqual("7");
@@ -345,7 +345,7 @@ describe("ORM Db Reset Specs", function() {
     expect(objects).toEqual([]);
   });
 
-  it("VT302-0046 | should reset client info databaseFullReset tables",function(){
+  it("should reset client info databaseFullReset tables",function(){
     userDB.executeSql("INSERT INTO CLIENT_INFO (client_id) VALUES(7)");
 
     var client_id = userDB.executeSql("Select * from client_info");
@@ -356,7 +356,7 @@ describe("ORM Db Reset Specs", function() {
     expect(client_id).toEqual([]);
   });
 
-  it("VT302-0047 | should reset client info databaseFullReset tables with undefined params",function(){
+  it("should reset client info databaseFullReset tables with undefined params",function(){
     if (useNewOrm) {
       var Product = function(model){
         model.setModelProperty("name","string","");
@@ -386,7 +386,7 @@ describe("ORM Db Reset Specs", function() {
     expect(db_product).toEqual([]);
   });
 
-  it("VT302-0048 | should reset client info databaseFullReset tables with no params",function(){
+  it("should reset client info databaseFullReset tables with no params",function(){
     if (useNewOrm) {
       var Product = function(model){
         model.fixed_schema =true;
@@ -418,7 +418,7 @@ describe("ORM Db Reset Specs", function() {
     expect(db_product).toEqual([]);
   });
 
-  it("VT302-0050 | should reset object_values and not sources table if set databaseFullResetAndLogout",function(){
+  it("should reset object_values and not sources table if set databaseFullResetAndLogout",function(){
     if (useNewOrm) {
       var Product = function(model){
         model.setModelProperty("name","string","");
@@ -452,7 +452,7 @@ describe("ORM Db Reset Specs", function() {
     expect(objects).toEqual([]);
   });
 
-  it("VT302-0053 | should delete all records only from selected models fixedschema databaseFullResetEx",function(){
+  it("should delete all records only from selected models fixedschema databaseFullResetEx",function(){
     if (useNewOrm) {
       var Product = function(model){
         model.setModelProperty("name","string","");
@@ -487,7 +487,7 @@ describe("ORM Db Reset Specs", function() {
     expect(db_product).toEqual([]);
   });
 
-  it("VT302-0054 | should delete all records only from selected models propertyBag databaseFullResetEx",function(){
+  it("should delete all records only from selected models propertyBag databaseFullResetEx",function(){
     if (useNewOrm) {
       var Product = function(model){
         model.setModelProperty("name","string","");
@@ -519,7 +519,7 @@ describe("ORM Db Reset Specs", function() {
     expect(db_product).toEqual([]);
   });
 
-  it("VT302-0055 | should reset client_info table if set databaseFullResetEx",function(){
+  it("should reset client_info table if set databaseFullResetEx",function(){
     userDB.executeSql("INSERT INTO CLIENT_INFO (client_id) VALUES(7)");
 
     if (useNewOrm) {
@@ -559,7 +559,7 @@ describe("ORM Db Reset Specs", function() {
     expect(db_product2).toEqual([]);
   });
 
-  it("VT302-0056 | Call databaseFullResetEx with Model name as Hash and reset_client_info as false and reset_local_models to false",function(){
+  it("Call databaseFullResetEx with Model name as Hash and reset_client_info as false and reset_local_models to false",function(){
     userDB.executeSql("INSERT INTO CLIENT_INFO (client_id) VALUES(7)");
 
     if (useNewOrm) {
@@ -622,7 +622,7 @@ describe("ORM Db Reset Specs", function() {
     expect(find_attrib_with_value(db_product,'price','4')).toEqual("4");
   });
 
-  it("VT302-0057 | Call databaseFullResetEx with Model name as Hash and reset_client_info as false",function(){
+  it("Call databaseFullResetEx with Model name as Hash and reset_client_info as false",function(){
     userDB.executeSql("INSERT INTO CLIENT_INFO (client_id) VALUES(7)");
     if (useNewOrm) {
       var Product = function(model){
@@ -682,7 +682,7 @@ describe("ORM Db Reset Specs", function() {
     expect(find_attrib_with_value(db_product,'price','4')).toEqual("4");
   });
 
-  it("VT302-0058 | Call databaseFullResetEx with Model name as Hash and reset_client_info as false and reset_local_models to true",function(){
+  it("Call databaseFullResetEx with Model name as Hash and reset_client_info as false and reset_local_models to true",function(){
     userDB.executeSql("INSERT INTO CLIENT_INFO (client_id) VALUES(7)");
     if (useNewOrm) {
       var Product = function(model){
@@ -723,7 +723,7 @@ describe("ORM Db Reset Specs", function() {
     expect(db_product).toEqual([]);
   });
 
-  it("VT302-0060 | should do nothing if localdb and localdb flag set to false",function(){
+  it("should do nothing if localdb and localdb flag set to false",function(){
     if (useNewOrm) {
       var Product = function(model){
         model.setModelProperty("name","string","");
@@ -760,7 +760,7 @@ describe("ORM Db Reset Specs", function() {
     expect(find_attrib_with_value(db_product,'price','2')).toEqual("2");
   });
 
-  it("VT302-0062 | should reset client and local db if databaseFullclientResetAndLogout",function(){
+  it("should reset client and local db if databaseFullclientResetAndLogout",function(){
     userDB.executeSql("INSERT INTO CLIENT_INFO (client_id) VALUES(7)");
     if (useNewOrm) {
       var Product = function(model){
@@ -793,7 +793,7 @@ describe("ORM Db Reset Specs", function() {
     expect(client_info).toEqual([]);
   });
 
-  it("VT302-0063 | call databaseLocalReset without having any local model | Should not removed data from synced database",function(){
+  it("call databaseLocalReset without having any local model | Should not removed data from synced database",function(){
     userDB.executeSql("INSERT INTO CLIENT_INFO (client_id) VALUES(7)");
     if (useNewOrm) {
       var Product = function(model){
@@ -827,7 +827,7 @@ describe("ORM Db Reset Specs", function() {
     expect(res[0].name).toEqual('test');
   });
 
-  it("VT302-0065 | call databaseLocalReset with changes in local model | Should removed local model data",function(){
+  it("call databaseLocalReset with changes in local model | Should removed local model data",function(){
     userDB.executeSql("INSERT INTO CLIENT_INFO (client_id) VALUES(7)");
 
     if (useNewOrm) {
@@ -861,7 +861,7 @@ describe("ORM Db Reset Specs", function() {
     expect(clientId).toEqual("7");
   });
 
-  it("VT302-0066 | call databaseLocalReset with changes in both local and user model | Should removed local model data",function(){
+  it("call databaseLocalReset with changes in both local and user model | Should removed local model data",function(){
     userDB.executeSql("INSERT INTO CLIENT_INFO (client_id) VALUES(7)");
     if (useNewOrm) {
       var Product = function(model){
@@ -913,11 +913,11 @@ describe("ORM Db Reset Specs", function() {
     expect(find_attrib_with_value(objects_u,'name','test_u')).toEqual("test_u");
   });
 
-  it("VT302-0068b | Call haveLocalChanges without having any model",function(){
+  it("Call haveLocalChanges without having any model",function(){
     expect(Rho.ORM.haveLocalChanges()).toEqual(false);
   });
 
-  it("VT302-0068 | should return true if a model objects have local changes for sync haveLocalChanges",function(){
+  it("should return true if a model objects have local changes for sync haveLocalChanges",function(){
     expect(Rho.ORM.haveLocalChanges()).toEqual(false);
 
     userDB.executeSql("INSERT INTO CHANGED_VALUES (object) VALUES('meobj')");

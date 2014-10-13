@@ -46,7 +46,7 @@ describe "Rhom::Paginate" do
 
     3.times do |i|
       @accts = getAccount.paginate(:page => i)
-      @accts.length.should == 10
+      @accts.length.should == 10 # TODO: BAB => fails for property bag (returns 30)
       @accts[9].object.should == "#{get_expected[i][:object]}"
       @accts[9].name.should == get_expected[i][:name]
       @accts[9].address.should == get_expected[i][:address]
@@ -60,7 +60,7 @@ describe "Rhom::Paginate" do
   it "should support paginate with options" do
     @accts = getAccount.paginate(:page => 0, :per_page => 20)
 
-    @accts.length.should == 20
+    @accts.length.should == 20 # TODO: BAB => fails for property bag (returns 30)
     @accts[9].object.should == "#{get_expected[0][:object]}"
     @accts[9].name.should == get_expected[0][:name]
     @accts[9].address.should == get_expected[0][:address]
@@ -82,7 +82,7 @@ describe "Rhom::Paginate" do
 
   it "should support paginate with options, conditions and order" do
     @accts = getAccount.paginate(:page => 0, :per_page => 1, :conditions => {'name' => 'test'}, :order=> 'name')
-    @accts.length.should == 1
+    @accts.length.should == 1 # TODO: BAB => fails for property bag (returns 3)
 
     @accts = getAccount.paginate(:page => 1, :per_page => 1, :conditions => {'name' => 'test'}, :order=> 'name')
     @accts.length.should == 1
@@ -96,7 +96,7 @@ describe "Rhom::Paginate" do
 
   it "should support paginate with options and order" do
     @accts = getAccount.paginate(:per_page => 20, :order=> 'name')
-    @accts.length.should == 20
+    @accts.length.should == 20 # TODO: BAB => fails for property bag (returns 30)
 
     @accts2 = getAccount.paginate(:per_page => 20, :order=> 'name', :page => 1)
     @accts2.length.should == 10
@@ -105,10 +105,4 @@ describe "Rhom::Paginate" do
     @accts3.length.should == 0
   end
 
-  # New Orm: N/A
-  # it "should assign metadata" do
-  #   meta = {"foo" => "bar"}
-  #   getAccount.metadata = meta.to_json
-  #   getAccount.metadata.should == meta
-  # end
 end

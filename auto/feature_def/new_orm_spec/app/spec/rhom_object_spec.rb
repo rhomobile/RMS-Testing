@@ -1,6 +1,6 @@
 describe "Rhom::RhomObject" do
-  @use_new_orm = begin Rho::RHO.use_new_orm rescue false end
-  puts "Rhom specs: use_new_orm: #{@use_new_orm}"
+  @use_new_orm = begin Rho::RHO.use_new_orm rescue true end
+  puts "Rhom::RhomObject specs: use_new_orm: #{@use_new_orm}"
 
   # Returns intersection of vars
   # TODO: New ORM in find does not return :source_id
@@ -51,7 +51,19 @@ describe "Rhom::RhomObject" do
     account.object.should == '3560c0a0-ef58-2f40-68a5-fffffffffffff'
   end
 
-  it "should retrieve an object of model`" do
+
+=begin
+  # TODO: BAB
+  # NewOrm: metadata not implemented!
+  it "should assign metadata" do
+    metadata = {"foo" => "bar"}
+    getAccount.metadata = metadata.to_json
+    getAccount.metadata.should == metadata
+  end
+=end
+
+
+  it "should retrieve an object of model" do
     results = getCase.find(:all)
     results.length.should == 1
 
@@ -313,6 +325,9 @@ end
     end
   end
 
+  # TODO: BAB
+  # Spec fails if $spec_settings[:sync_model] == true
+  #
   it "should update a record with full mode" do
     records = getTestDB().select_from_table('changed_values','*', 'update_type' => 'update')
     records.length.should == 0
@@ -325,11 +340,14 @@ end
 
     if $spec_settings[:sync_model]
       records = getTestDB().select_from_table('changed_values','*', 'update_type' => 'update')
-      records.length.should == 1
+      records.length.should == 1 # TODO: fails if :sync_model is set
       records[0]['attrib'].should == 'created_by_name'
     end
   end
 
+  # TODO: BAB
+  # Spec fails if $spec_settings[:sync_model] == true
+  #
   it "should save a record with full mode" do
     records = getTestDB().select_from_table('changed_values','*', 'update_type' => 'update')
     records.length.should == 0
@@ -343,7 +361,7 @@ end
 
     if $spec_settings[:sync_model]
       records = getTestDB().select_from_table('changed_values','*', 'update_type' => 'update')
-      records.length.should == 1
+      records.length.should == 1 # TODO: fails if :sync_model is set
       records[0]['attrib'].should == 'created_by_name'
     end
   end

@@ -1,0 +1,59 @@
+<html>
+<head>
+<META HTTP-Equiv="SignatureCapture"Content="visibility:visible">-->
+<!--<META HTTP-Equiv="SignatureCapture" content="SignatureSaveEvent:url('Javascript:onCaptured('%s');')">-->
+<!--<META HTTP-Equiv="SignatureCapture" content="VectorEvent:url('javascript:myvectorevent(%s);')">-->
+
+</head>
+<p>Signature Navigate page , check persistancy on this page.</p>
+<p></p>&nbsp;
+<p></p>&nbsp;
+<p></p>&nbsp;
+<p></p>&nbsp;
+<p></p>&nbsp;
+<P><INPUT TYPE="button" VALUE="Capture" ONCLICK="Javascript:doCapture();"></P>
+<P><INPUT TYPE="button" VALUE="Clear" ONCLICK="Javascript:doClear();"></P>
+<P><INPUT TYPE="button" VALUE="Quit" ONCLICK="Javascript:Quit();"></P>
+
+<A HREF="./activeX_obj.html">Back</A>
+</body>
+<script type="text/javascript">
+	var objGeneric = new ActiveXObject("PocketBrowser.Generic");
+		
+	function doCapture()
+	{
+		objGeneric.InvokeMETAFunction('SignatureCapture', 'capture');
+	}
+
+	function doClear()
+	{
+		objGeneric.InvokeMETAFunction('SignatureCapture', 'clear');
+	}
+
+	function onCaptured(data)
+	{
+		alert(data);
+	}
+
+	function myvectorevent(VectorArray)
+	{
+		var spanID;
+		var spanElement;
+		var i;
+		for(i=0; i < VectorArray.length; i++)
+		{
+			spanID = "Span" + (i+1);
+			spanElement = document.getElementById(spanID);
+			spanElement.innerText = VectorArray[i];
+		}
+
+	}
+
+	function Quit()
+	{
+		objGeneric.InvokeMETAFunction("Application", "Quit"); 
+	}
+</script>
+</html>
+
+

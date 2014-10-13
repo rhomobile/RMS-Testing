@@ -5,7 +5,7 @@
 	<input type="button" value="Back"  onclick="location.href='./gestureIndex.html'" />
 	<title>PB and RE2.2 Semi Auto Frame Work : Hold gesture</title>
 	<!--<link rel="stylesheet" type="text/css" href="css/main.css">-->
-	<script type="text/javascript" src="elements.js"></script>
+	<script type="text/javascript" src="http://10.233.85.82/src/elements.js"></script>
 	<style type="text/css">
 		.block{
 			background:#aabbcc;
@@ -82,14 +82,14 @@
 			"VTID":"VT056 - 0438",
 			"RegLevel":"R1",
 			"Description":"Gesture Gesture Type=Hold",
-			"PreCondition":["Create a Gesture of Type='Hold', ID='My Hold Gesture' of Centre(150,150) and Radius 100", " Set the Diagonstic value to true", " Set preset toCenter", " Set Delay to 3000", " Set Interval to 1000", "Create the Gesture"],
+			"PreCondition":["Create a Gesture of Type='Hold', ID='My Hold Gesture' of Centre(150,150) and Radius 100", " Set the Diagonstic value to true", " Set preset to Center", " Set Delay to 3000", " Set Interval to 1000", "Create the Gesture"],
 			"Steps":["Press and hold the Stylus inside the Gesture Circle and keep on pressing.", "Call and javascipt function on detection of gesture and show the ID and the count of the gesture inside the function."],
 			"ExpectedOutcome":["Hold  Gesture should be detected.After every 4 seconds it should be detected again and the count should go up by one every time.Proper ID should be returned inside the event."],
 			"testToPerform":function(){
 				myPage = document.getElementById('mainBlock').innerHTML;
 		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
 			    genericObj.InvokeMETAFunction("gesture", "ID:holdGesture;type:hold;Center-X:150;Center-Y:150;Radius:100;Diagnostics:true;Preset:center;Delay:3000;Interval:1000;Create");
-			    genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+			    genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s')')");
 			},
 			"FinalResult":""
 		},{
@@ -103,7 +103,7 @@
 				myPage = document.getElementById('mainBlock').innerHTML;
 		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
 			    genericObj.InvokeMETAFunction("gesture", "ID:holdGesture;type:hold;Diagnostics:false;Create");
-        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s')')");
 			},
 			"FinalResult":""
 		},{
@@ -117,7 +117,7 @@
 				myPage = document.getElementById('mainBlock').innerHTML;
 		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
 			    genericObj.InvokeMETAFunction("gesture", "ID:holdGesture;type:hold;Diagnostics:false;Create");
-        genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+        genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s')')");
 			},
 			"FinalResult":""
 		},{
@@ -130,8 +130,8 @@
 			"testToPerform":function(){
 				myPage = document.getElementById('mainBlock').innerHTML;
 		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
-			    genericObj.InvokeMETAFunction("gesture", "ID:holdGesture;type:hold;Preset:center;Diagnostics:false;Create");
-        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+			    genericObj.InvokeMETAFunction("gesture", "ID:holdGesture;type:hold;Preset:center;Diagnostics:true;Create");
+        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s')')");
 			},
 			"FinalResult":""
 		},{
@@ -145,7 +145,7 @@
 				myPage = document.getElementById('mainBlock').innerHTML;
 		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
 			    genericObj.InvokeMETAFunction("gesture", "ID:holdGesture;type:hold;Diagnostics:true;Create");
-        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s')')");
 			},
 			"FinalResult":""
 		},{
@@ -159,7 +159,7 @@
 				myPage = document.getElementById('mainBlock').innerHTML;
 		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
 			    genericObj.InvokeMETAFunction("gesture", "ID:holdGesture;type:hold;Center-X:100;Center-Y:100;Diagnostics:true;Create");
-        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s')')");
 			},
 			"FinalResult":""
 		},{
@@ -173,7 +173,7 @@
 				myPage = document.getElementById('mainBlock').innerHTML;
 		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
 			    genericObj.InvokeMETAFunction("gesture", "ID:holdGesture;type:hold;Center-X:2000;Center-Y:2000;Radius:2500;Diagnostics:true;Create");
-        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s')')");
 			},
 			"FinalResult":""
 		},{
@@ -187,7 +187,7 @@
 				myPage = document.getElementById('mainBlock').innerHTML;
 		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
 			    genericObj.InvokeMETAFunction("gesture", "ID:holdGesture;type:hold;Center-X:-100;Center-Y:-100;Radius:400;Diagnostics:true;Create");
-        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s')')");
 			},
 			"FinalResult":""
 		},{
@@ -201,7 +201,7 @@
 				myPage = document.getElementById('mainBlock').innerHTML;
 		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
 			    genericObj.InvokeMETAFunction("gesture", "ID:holdGesture;type:hold;Center-X:150;Center-Y:150;Radius:50;Diagnostics:true;Create");
-        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s')')");
 			},
 			"FinalResult":""
 		},{
@@ -215,7 +215,7 @@
 				myPage = document.getElementById('mainBlock').innerHTML;
 		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
 			    genericObj.InvokeMETAFunction("gesture", "ID:holdGesture;type:hold;Center-X:0;Center-Y:0;Radius:60;Diagnostics:true;Create");
-        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s')')");
 			},
 			"FinalResult":""
 		},{
@@ -229,7 +229,7 @@
 				myPage = document.getElementById('mainBlock').innerHTML;
 		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
 			    genericObj.InvokeMETAFunction("gesture", "ID:holdGesture;type:hold;Radius:2000;Diagnostics:true;Create");
-        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s')')");
 			},
 			"FinalResult":""
 		},{
@@ -243,7 +243,7 @@
 				myPage = document.getElementById('mainBlock').innerHTML;
 		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
 			    genericObj.InvokeMETAFunction("gesture", "ID:holdGesture;type:hold;Diagnostics:true;Create");
-        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s')')");
 			},
 			"FinalResult":""
 		},{
@@ -257,7 +257,7 @@
 				myPage = document.getElementById('mainBlock').innerHTML;
 		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
 			    genericObj.InvokeMETAFunction("gesture", "ID:holdGesture;type:hold;Delay:5000;Diagnostics:true;Create");
-        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s')')");
 			},
 			"FinalResult":""
 		},{
@@ -271,7 +271,7 @@
 				myPage = document.getElementById('mainBlock').innerHTML;
 		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
 			    genericObj.InvokeMETAFunction("gesture", "ID:holdGesture;type:hold;Delay:1;Diagnostics:true;Create");
-        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s')')");
 			},
 			"FinalResult":""
 		},{
@@ -285,7 +285,7 @@
 				myPage = document.getElementById('mainBlock').innerHTML;
 		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
 			    genericObj.InvokeMETAFunction("gesture", "ID:holdGesture;type:hold;Delay:0;Diagnostics:true;Create");
-        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s')')");
 			},
 			"FinalResult":""
 		},{
@@ -299,7 +299,7 @@
 				myPage = document.getElementById('mainBlock').innerHTML;
 		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
 			    genericObj.InvokeMETAFunction("gesture", "ID:holdGesture;type:hold;Diagnostics:true;Create");
-        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s')')");
 			},
 			"FinalResult":""
 		},{
@@ -313,7 +313,7 @@
 				myPage = document.getElementById('mainBlock').innerHTML;
 		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
 			    genericObj.InvokeMETAFunction("gesture", "ID:holdGesture;type:hold;Interval:1000;Diagnostics:true;Create");
-        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s')')");
 			},
 			"FinalResult":""
 		},{
@@ -327,7 +327,7 @@
 				myPage = document.getElementById('mainBlock').innerHTML;
 		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
 			    genericObj.InvokeMETAFunction("gesture", "ID:holdGesture;type:hold;Interval:0;Diagnostics:true;Create");
-        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s')')");
 			},
 			"FinalResult":""
 		},{
@@ -341,7 +341,7 @@
 				myPage = document.getElementById('mainBlock').innerHTML;
 		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
 			    genericObj.InvokeMETAFunction("gesture", "ID:holdGesture;type:hold;Interval:-1;Diagnostics:true;Create");
-        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s')')");
 			},
 			"FinalResult":""
 		},{
@@ -355,7 +355,7 @@
 				myPage = document.getElementById('mainBlock').innerHTML;
 		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
 			    genericObj.InvokeMETAFunction("gesture", "ID:holdGesture;type:hold;Diagnostics:true;Create");
-        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s')')");
 			},
 			"FinalResult":""
 		},/*{
@@ -382,10 +382,10 @@
 				myPage = document.getElementById('mainBlock').innerHTML;
 		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
 			    genericObj.InvokeMETAFunction("gesture", "ID:LinearGesture1;type:linear;startX:0;startY:0;endX:2000;endY:2000;Diagnostics:true;Create");
-		        genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+		        genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s')')");
 				var genericObj2 = new ActiveXObject("PocketBrowser.Generic");
 				genericObj2.InvokeMETAFunction("gesture", "ID:Lineargesture2;type:linear;startX:0;startY:0;endX:2000;endY:2000;Diagnostics:true;Create");
-		        genericObj2.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+		        genericObj2.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s')')");
 			},
 			"FinalResult":""
 		},{
@@ -399,10 +399,10 @@
 				myPage = document.getElementById('mainBlock').innerHTML;
 		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
 			    genericObj.InvokeMETAFunction("gesture", "ID:LinearGesture1;type:linear;startX:80;startY:100;endX:250;endY:100;Diagnostics:true;Create");
-		        genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+		        genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s')')");
 				var genericObj2 = new ActiveXObject("PocketBrowser.Generic");
 				genericObj2.InvokeMETAFunction("gesture", "ID:Lineargesture2;type:linear;startX:100;startY:80;endX:250;endY:800;Diagnostics:true;Create");
-		        genericObj2.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+		        genericObj2.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s')')");
 			},
 			"FinalResult":""
 		},/*{
@@ -429,7 +429,7 @@
 				myPage = document.getElementById('mainBlock').innerHTML;
 		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
 			    genericObj.InvokeMETAFunction("gesture", "ID:LinearGesture;type:linear;startX:80;startY:100;endX:250;endY:100;Diagnostics:true;Create");
-        		genericObj.InvokeMETAFunction("gesture-detected","url('//10.233.85.82/27server/RMS-Testing/EB_jasmine/app/Gesture/gesturenav.html')");
+        		genericObj.InvokeMETAFunction("gesture-detected","url('http://10.233.85.82:9098/app/Gesture/gesturenav.html')");
 			},
 			"FinalResult":""
 		},/*{
@@ -495,7 +495,7 @@
 				myPage = document.getElementById('mainBlock').innerHTML;
 		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
 			    genericObj.InvokeMETAFunction("gesture", "ID:LinearGesture1;type:linear;Diagnostics:true;Create");
-        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
+        		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s')')");
 			},
 			"FinalResult":""
 		}/*,{
@@ -514,6 +514,7 @@
 		}*/];
 		pbTestObj.afterEach = function(){
 			myPage = "";
+			EventCounter = 1;
 		};
 		return pbTestObj;
 	}
@@ -603,21 +604,21 @@
 			document.getElementById('actualResult').innerHTML = "";
 			var selectElement = document.getElementById('vtSelect');
 			selectElement.value = index;
+			pbTest.afterEach();
 		};
 		mainObj.runThisTest = function(){
 			testArray[index].testToPerform();
 		};
 		mainObj.passThisTest = function(){
 			testArray[index].FinalResult = "Pass";
-            pbTest.afterEach();
 			this.nextTest();
 		};
 		mainObj.failThisTest = function(){
 			testArray[index].FinalResult = "Fail";
-            pbTest.afterEach();
 			this.nextTest();
 		}
 		mainObj.nextTest = function(){
+			pbTest.afterEach();
 			if(index<(count-1)){
 				index++;
 				this.loadSingleTest(index);
@@ -626,6 +627,7 @@
 			}
 		};
 		mainObj.prevTest = function(){
+			pbTest.afterEach();
 			if(index>0){
 				index--;
 				this.loadSingleTest(index);

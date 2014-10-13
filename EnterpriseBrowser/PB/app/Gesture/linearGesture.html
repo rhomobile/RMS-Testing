@@ -65,7 +65,7 @@
             document.getElementById("actualResult").innerHTML = "Gesture detected for "+EventCounter+"th time.<br>Gesture ID: " + id + ", Count: " + count;
             EventCounter++;
             if(id=="Scan"){
-		      genericObj.InvokeMETAFunction("Scanner","enabled;start");
+		      genericObj.InvokeMETAFunction("Scanner","enabled:start");
 		    }
 		    if(id=="Signal"){
 		      genericObj.InvokeMETAFunction("Signal","visibility:visible");
@@ -97,12 +97,12 @@
             "RegLevel":"R3",
 		    "Description":"Gesture - Gesture Type='Test'(Invalid)",
 		    "PreCondition":[],
-		    "Steps":["Create a Linear Gesture.", "Try to create  a Gesture of Invalid Type='Test', ID='My Invalid Gesture'  and with default Diagonstic value(false)", " Draw a line on the screen approximately similar to the gesture line."],
+		    "Steps":["Create a Linear Gesture.", "Try to create  a Gesture of Invalid Type='Test', ID='My Invalid Gesture'  and with Diagonstic value true", " Draw a line on the screen approximately similar to the gesture line."],
 		    "ExpectedOutcome":["The invalid gesture type should not create any problem.", "Any further gesture operation should be succeeded.", "Linear  Gesture should be detected."],
 		    "testToPerform":function(){
 				myPage = document.getElementById('mainBlock').innerHTML;
 		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
-		        genericObj.InvokeMETAFunction("gesture", "ID:linearGesture;type:Test;Diagnostics:false;Create");
+		        genericObj.InvokeMETAFunction("gesture", "ID:linearGesture;type:Test;Diagnostics:true;Create");
         		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
 		    },
 		    "FinalResult":""
@@ -116,7 +116,7 @@
 		    "testToPerform":function(){
 				myPage = document.getElementById('mainBlock').innerHTML;
 		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
-		        genericObj.InvokeMETAFunction("gesture", "ID:ABCD1234!@#$%^&*()QQ;type:Linear;Diagnostics:true");
+		        genericObj.InvokeMETAFunction("gesture", "ID:ABCD1234!@#$%^&*()QQ;type:Linear;Diagnostics:true;Create");
         		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
 		    },
 		    "FinalResult":""
@@ -642,6 +642,7 @@
 		}];
 		pbTestObj.afterEach = function(){
 			myPage = "";
+			EventCounter = 1;
 		}
 		return pbTestObj;
 	}
@@ -731,21 +732,21 @@
 			document.getElementById('actualResult').innerHTML = "";
 			var selectElement = document.getElementById('vtSelect');
 			selectElement.value = index;
+			pbTest.afterEach();
 		};
 		mainObj.runThisTest = function(){
 			testArray[index].testToPerform();
 		};
 		mainObj.passThisTest = function(){
 			testArray[index].FinalResult = "Pass";
-            pbTest.afterEach();
 			this.nextTest();
 		};
 		mainObj.failThisTest = function(){
 			testArray[index].FinalResult = "Fail";
-            pbTest.afterEach();
 			this.nextTest();
 		}
 		mainObj.nextTest = function(){
+			pbTest.afterEach();
 			if(index<(count-1)){
 				index++;
 				this.loadSingleTest(index);
@@ -754,6 +755,7 @@
 			}
 		};
 		mainObj.prevTest = function(){
+			pbTest.afterEach();
 			if(index>0){
 				index--;
 				this.loadSingleTest(index);

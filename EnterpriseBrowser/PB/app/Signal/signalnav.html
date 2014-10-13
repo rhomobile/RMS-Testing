@@ -1,25 +1,19 @@
 <html>
 <head>
     <title>Navigation Check</title>
-<META HTTP-Equiv="SIPbutton" Content="visibility:visible">
+	<META HTTP-Equiv="SIPbutton" Content="visibility:visible">
 
-<script language="javascript" type="text/javascript">
-var genericObj = new ActiveXObject("PocketBrowser.Generic");
+	<script language="javascript" type="text/javascript">
+		var genericObj = new ActiveXObject("PocketBrowser.Generic");
 
-
-function signalenable(){
- genericObj.InvokeMETAFunction("Signal","Visibility:Visible;signalevent:url('http://10.233.85.82/27server/RMS-Testing/EB_jasmine/app/Signal/batterynav.html")
-}
-</script>
-
-
+		function signalenable(){
+			genericObj.InvokeMETAFunction("Signal","Visibility:Visible;signalevent:url('http://10.233.85.82:9098/app/Signal/batterynav.html')");
+		}
+	</script>
 </head>
-<body>
-<form id="frmHoldGestures" action="GestureProcess_Hold.asp" method="post" >
-<h2>Suucessfully navigated to signal page</h2>
-<P> <a href = "//10.233.85.82/27server/RMS-Testing/EB_jasmine/app/index.html"> go to signal index page </a></P>
-<P><BR><INPUT TYPE="button" VALUE="Signalenable" ONCLICK="signalenable();"></P>
-<P><BR><INPUT TYPE="button" VALUE="Back" ONCLICK="location.href='./signal.html'"></P>
-</form>
+<body><br>
+	<h2>Suucessfully navigated to signal page</h2>
+	<P><INPUT TYPE="button" VALUE="Signal Enable" ONCLICK="signalenable();"></P>
+	<P><INPUT TYPE="button" VALUE="Back" ONCLICK="location.href='./activeX_obj.html'"></P>
 </body>
 </html>

@@ -1309,38 +1309,7 @@ describe("Log JS API", function () {
 
 				Rho.LogCapture.clear();
 
-				result = false;
-				$.ajax({
-					type: "post",
-					url: "/system/logger",
-					data: 'level=2&msg=test&cat=TST',
-					success: function(data) {
-						Rho.Log.info(data,"TST"); result = true;
-					},
-				 	dataType: 'json',
-            		headers: {'Accept': 'text/plain'}
-				})
-				.always(function() { callbackCalled = true });
 			} );
-
-			waitsFor( function() {
-					return callbackCalled;
-				},
-				"Callback never called",
-				waitTimeout
-			);
-
-			runs(function() {
-				expect(result).toEqual(true);
-				callbackCalled = false;
-
-				var log = Rho.LogCapture.read();
-
-				expect( log.count("Received request:") ).toEqual(0);
-				expect( log.count("only headers displayed") ).toEqual(0);
-
-				Rho.LogCapture.clear();
-			});
 
 			if (clientPlatform == Rho.System.PLATFORM_ANDROID || clientPlatform == Rho.System.PLATFORM_IOS )
 			{
@@ -1402,39 +1371,7 @@ describe("Log JS API", function () {
 
 				Rho.LogCapture.clear();
 
-				result = false;
-				$.ajax({
-					type: "post",
-					url: "/system/logger",
-					data: 'level=2&msg=test&cat=TST',
-					success: function(data) {
-						Rho.Log.info(data,"TST"); result = true;
-					},
-				 	dataType: 'json',
-            		headers: {'Accept': 'text/plain'},
-            		async: true
-				})
-				.always(function() { callbackCalled = true });
 			} );
-
-			waitsFor( function() {
-					return callbackCalled;
-				},
-				"Callback never called",
-				waitTimeout
-			);
-
-			runs(function() {
-				expect(result).toEqual(true);
-				callbackCalled = false;
-
-				var log = Rho.LogCapture.read();
-
-				expect( log.count("Received request:") ).toBeGreaterThan(0);
-				expect( log.count("only headers displayed") ).toBeGreaterThan(0);
-
-				Rho.LogCapture.clear();
-			});
 
 			
 			if (clientPlatform == Rho.System.PLATFORM_ANDROID || clientPlatform == Rho.System.PLATFORM_IOS )

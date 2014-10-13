@@ -6,6 +6,7 @@
 #include "common/RhoConf.h"
 #include "generated/cpp/NativeBridgeTestBase.h"
 #include "logging/RhoLog.h"
+#include "api_generator/StringifyHelper.h"
 
 namespace rho {
     
@@ -38,7 +39,56 @@ namespace rho {
         virtual void testString( const rho::String& val, rho::apiGenerator::CMethodResult& oResult) {
             // RAWLOGC_INFO("testString","NativeBridgeTest");
             oResult.set(val);
-        } 
+        }
+
+//        // testApi
+//        virtual void testApi( const rho::Vector<rho::Hashtable<rho::String, rho::String> > & arrHashStr,  const rho::Hashtable<rho::String, rho::Hashtable<rho::String, rho::String> > & hashHashStr,  const rho::Hashtable<rho::String, rho::Vector<rho::String> > & hashArrStr,  const rho::Vector<rho::Vector<rho::String> > & arrArrStr, rho::apiGenerator::CMethodResult& oResult) {
+//            RAWLOGC_INFO("testApi","System");
+//
+//            StringifyVector res;
+//
+//            // vector-hash
+//            //
+//            {
+//                StringifyVector outer;
+//                typedef rho::Vector<rho::Hashtable<rho::String, rho::String> >::const_iterator iter_type;
+//                for (iter_type iter = arrHashStr.begin(); iter != arrHashStr.end(); ++iter) {
+//                    StringifyHash inner;
+//                    inner.fromHash(*iter);
+//                    outer.push_back(inner);
+//                }
+//                res.push_back(outer);
+//            }
+//
+//            // hash-hash
+//            {
+//                StringifyHash outer;
+//                typedef rho::Hashtable<rho::String, rho::Hashtable<rho::String, rho::String> >::const_iterator iter_type;
+//                for (iter_type iter = hashHashStr.begin(); iter != hashHashStr.end(); ++iter) {
+//                    StringifyHash inner;
+//                    inner.fromHash(iter->second);
+//                    outer.set(iter->first,inner);
+//                }
+//                res.push_back(outer);
+//            }
+//
+//            // hash-vector
+//            {
+//                StringifyVector outer;
+//                typedef rho::Hashtable<rho::String, rho::Vector<rho::String> >::const_iterator iter_type;
+//                for (iter_type iter = hashArrStr.begin(); iter != hashArrStr.end(); ++iter) {
+//                    StringifyVector inner;
+//                    inner.fromVector(iter->second);
+//                    outer.push_back(inner);
+//                }
+//                res.push_back(outer);
+//            }
+//
+//            rho::String data;
+//            res.toString(data);
+//
+//            oResult.set(data);
+//        }
 
     };
     

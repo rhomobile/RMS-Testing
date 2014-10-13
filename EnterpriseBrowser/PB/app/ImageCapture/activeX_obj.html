@@ -75,12 +75,12 @@
 			   	document.getElementById('imagerdropdown').options[i + 1].value = imagerArray[i][0];
 			   	imagerInfo = imagerInfo + imagerArray[i][0] + ' -- ' + imagerArray[i][1] + '<BR>';
 			}
-			document.getElementById('actualResult').innerHTML = imagerInfo;
+			//document.getElementById('actualResult').innerHTML = imagerInfo;
 		}
 		function selectImager(){
 		    var w = document.getElementById('imagerdropdown').selectedIndex;
 		    selected_imager = document.getElementById('imagerdropdown').options[w].value;
-		    document.getElementById('selectedImager').innerHTML = document.getElementById('imagerdropdown').options[w].name;
+		    document.getElementById('selectedImager').innerHTML = document.getElementById('imagerdropdown').options[w].text;
 		}
 		function enableImager(){
 			enable_selectedImager="Enabled:"+ selected_imager;
@@ -99,7 +99,7 @@
 		    "Description":"Imager",
 		    "PreCondition":[],
 		    "Steps":["Enable the imager device","Test the functionality of Imager with content='Left:30' and 'Top:170'","Test the functionality of Imager with content='Height:40' and 'Width:60'","Test the functionality of Imager with content='lamp:on'","Test the functionality of Imager with content='aim:on'","Test the functionality of Imager with content='Protocol:ftp'","Test the functionality of Imager with content='username' and 'password'","Test the functionality of Imager with content='DestinationURL:[Value]'","Capture the image"],
-		    "ExpectedOutcome":["The image should be captured and copied to the specified url using ftp protocol"],
+		    "ExpectedOutcome":["The image should be captured and copied to the specified url using ftp protocol (ftp://10.233.85.82/myimage.bmp)"],
 		    "testToPerform":function(){
 		    	enableImager();
 		    	setTimeout(function(){
@@ -491,7 +491,7 @@
 		    	enableImager();
 		    	setTimeout(function(){
 		    		genericObj.InvokeMETAFunction("imager", "Left:30;Top:170;Height:40;Width:60;Protocol:http;DestinationURL:'http://10.230.0/myimage.bmp';Capture");
-		    		genericObj.InvokeMETAFunction("imager", "imagerevent:url('Javascript:alert('%s');')");
+		    		//genericObj.InvokeMETAFunction("imager", "imagerevent:url('Javascript:main.displayResult('%s');')");
 		        	setTimeout(function(){
 		        		disableImager();
 		        	}, 5000);

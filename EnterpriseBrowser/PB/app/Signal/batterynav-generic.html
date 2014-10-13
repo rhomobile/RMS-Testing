@@ -1,0 +1,24 @@
+<html>
+<head>
+    <title>Navigation Check</title>
+<META HTTP-Equiv="SIPbutton" Content="visibility:visible">
+
+<script language="javascript" type="text/javascript">
+//var genericObj = new ActiveXObject("PocketBrowser.Generic");
+
+function batteryenable(){
+ generic.InvokeMETAFunction("Signal","Visibility:Visible;signalevent:url('http://10.233.85.82:9098/app/Signal/signalnav-generic.html')");
+}
+</script>
+
+
+</head>
+<body>
+<form id="frmHoldGestures" action="GestureProcess_Hold.asp" method="post" >
+<h2>Successfully navigated to battery page</h2>
+
+<P><BR><INPUT TYPE="button" VALUE="Batteryenable" ONCLICK="batteryenable();"></P>
+<P><BR><INPUT TYPE="button" VALUE="Back" ONCLICK="location.href='./generic_obj.html'"></P>
+</form>
+</body>
+</html>
