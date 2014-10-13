@@ -400,24 +400,26 @@
 					
 			it("is able to successfully retrieve the hardwareId", function() 
 			{
-				//  ALSO TEST WE CAN'T SET IT!!!
 				var readValue = Rho.SmartCradle.hardwareId;
-				console.log("Read property Hardware ID: " + readValue);
-				expect(true).toBe(false);;
+				console.log("Read property Hardware ID: (" + readValue + ")");
+				expect(readValue.toString().length).toBe(1);
 			});
 
 			it("is able to successfully retrieve the partNumber", function() 
 			{
 				var readValue = Rho.SmartCradle.partNumber;
 				console.log("Read property Part Number: " + readValue);
-				expect(true).toBe(false);
+				var partNumberRegex = /CRD-MC18-.*/
+				var partNumberMatched = partNumberRegex.exec(readValue);
+				expect(partNumberMatched).not.toBe(null);
+				expect(readValue.length).toBe(18);
 			});
 
 			it("is able to successfully retrieve the serialNumber", function() 
 			{
 				var readValue = Rho.SmartCradle.serialNumber;
 				console.log("Read property Serial Number: " + readValue);
-				expect(true).toBe(false);
+				expect(readValue.length).toBe(15);
 			});
 
 			it("is able to successfully retrieve the mfgDate", function() 
@@ -425,7 +427,9 @@
 				//  mfgDate should be in the correct format
 				var readValue = Rho.SmartCradle.mfgDate;
 				console.log("Read property MFG Date (DD-MM-YY): " + readValue);
-				expect(true).toBe(false);
+				var mfgDateRegex = /[0-9]+-[0-9]+-[0-9]+/
+				var mfgDateMatched = mfgDateRegex.exec(readValue);
+				expect(mfgDateMatched).not.toBe(null);
 			});
 
 			it("is able to successfully retrieve the driverVersion", function() 
@@ -470,24 +474,26 @@
 					
 			it("is able to successfully retrieve the hardwareId", function() 
 			{
-				//  ALSO TEST WE CAN'T SET IT!!!
 				var readValue = Rho.SmartCradle.getProperty("hardwareId");
 				console.log("Read property Hardware ID: " + readValue);
-				expect(true).toBe(false);;
+				expect(readValue.length).toBe(1);
 			});
 
 			it("is able to successfully retrieve the partNumber", function() 
 			{
 				var readValue = Rho.SmartCradle.getProperty("partNumber");
 				console.log("Read property Part Number: " + readValue);
-				expect(true).toBe(false);;
+				var partNumberRegex = /CRD-MC18-.*/
+				var partNumberMatched = partNumberRegex.exec(readValue);
+				expect(partNumberMatched).not.toBe(null);
+				expect(readValue.length).toBe(18);
 			});
 
 			it("is able to successfully retrieve the serialNumber", function() 
 			{
 				var readValue = Rho.SmartCradle.getProperty("serialNumber");
 				console.log("Read property Serial Number: " + readValue);
-				expect(true).toBe(false);;
+				expect(readValue.length).toBe(15);
 			});
 
 			it("is able to successfully retrieve the mfgDate", function() 
@@ -495,7 +501,9 @@
 				//  mfgDate should be in the correct format
 				var readValue = Rho.SmartCradle.getProperty("mfgDate");
 				console.log("Read property MFG Date (DD-MM-YY): " + readValue);
-				expect(true).toBe(false);;
+				var mfgDateRegex = /[0-9]+-[0-9]+-[0-9]+/
+				var mfgDateMatched = mfgDateRegex.exec(readValue);
+				expect(mfgDateMatched).not.toBe(null);
 			});
 
 			it("is able to successfully retrieve the driverVersion", function() 
@@ -529,7 +537,7 @@
 			});
 
 		});
-			
+		
 
 		describe("Able to Set and Retrieve properties via the Set / Get Properties methods", function() {
 
@@ -561,6 +569,7 @@
 				expect(retrievedProps.wallId).toBe("3");
 				expect(retrievedProps.chargeState).toBe("slow");				
 			});
+			
 
 			it("is able to retrieve all properties using the GetAllProperties method", function() 
 			{
@@ -573,19 +582,25 @@
 				expect(retrievedProps.columnId).toBe("1");
 				expect(retrievedProps.wallId).toBe("1");
 				expect(retrievedProps.chargeState).toBe("fast");
-				//  TODO
-				expect(retrievedProps.hardwareId).toBe("TBD");
-				expect(retrievedProps.partNumber).toBe("TBD");
-				expect(retrievedProps.serialNumber).toBe("TBD");
-				expect(retrievedProps.mfgDate).toBe("TBD");
+				console.log("hardware id:" + retrievedProps.hardwareId);
+				expect(retrievedProps.hardwareId.length).toBe(1);
+				var partNumberRegex = /CRD-MC18-.*/
+				var partNumberMatched = partNumberRegex.exec(retrievedProps.partNumber);
+				expect(partNumberMatched).not.toBe(null);
+				expect(retrievedProps.partNumber.length).toBe(18);
+				expect(retrievedProps.serialNumber.length).toBe(15);
+
+				var mfgDateRegex = /[0-9]+-[0-9]+-[0-9]+/
+				var mfgDateMatched = mfgDateRegex.exec(retrievedProps.mfgDate);
+				expect(mfgDateMatched).not.toBe(null);
 				var driverVersionRegex = /[0-9]+\.[0-9]+/
-				var driverVersionMatched = regex.exec(retrievedProps.driverVersion);
+				var driverVersionMatched = driverVersionRegex.exec(retrievedProps.driverVersion);
 				expect(driverVersionMatched).not.toBe(null);
 				var cApiVersionRegex = /[0-9]+\.[0-9]+/
-				var cApiVersionMatched = regex.exec(retrievedProps.cApiVersion);
+				var cApiVersionMatched = cApiVersionRegex.exec(retrievedProps.cApiVersion);
 				expect(cApiVersionMatched).not.toBe(null);
 				var firmwareVersionRegex = /[0-9]+\.[0-9]+/
-				var firmwareVersionMatched = regex.exec(retrievedProps.firmwareVersion);
+				var firmwareVersionMatched = firmwareVersionRegex.exec(retrievedProps.firmwareVersion);
 				expect(firmwareVersionMatched).not.toBe(null);			
 			});
 

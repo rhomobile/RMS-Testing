@@ -1,6 +1,6 @@
 describe("Indicators", function() {
 
-	describe("MC18 Specific battery tests", function() {
+	describe("Battery Diagnostics (MC18 Specific)", function() {
 	
 		beforeEach(function() {
 		});
@@ -13,7 +13,7 @@ describe("Indicators", function() {
 		isSupported = (deviceType.toLowerCase().indexOf("mc18") != -1);
 
 	
-		it ("is able to set and retrieve the tripDuration property (valid values)", function()
+		it ("are able to set and retrieve the tripDuration property (valid values)", function()
 		{
 			if (!isSupported)
 				return;
@@ -33,7 +33,7 @@ describe("Indicators", function() {
 			
 		});
 		
-		it ("is able to set and retrieve the tripDuration property (invalid / unrealistic values)", function()
+		it ("are able to set and retrieve the tripDuration property (invalid / unrealistic values)", function()
 		{
 			if (!isSupported)
 				return;
@@ -48,7 +48,7 @@ describe("Indicators", function() {
 			expect(readValue).toBe(999999999);
 		});
 
-		it ("is able to set and retrieve the averageCurrentConsumption property (valid values)", function()
+		it ("are able to set and retrieve the averageCurrentConsumption property (valid values)", function()
 		{
 			if (!isSupported)
 				return;
@@ -67,7 +67,7 @@ describe("Indicators", function() {
 			expect(readValue).toBe(0);
 		});
 		
-		it ("is able to set and retrieve the averageCurrentConsumption property (invalid / unrealistic values)", function()
+		it ("are able to set and retrieve the averageCurrentConsumption property (invalid / unrealistic values)", function()
 		{
 			if (!isSupported)
 				return;
@@ -83,7 +83,7 @@ describe("Indicators", function() {
 		});		
 		
 		
-		it ("is able to retrieve Battery Diagnostics", function()
+		it ("are able to retrieve Battery Diagnostics", function()
 		{
 			if (!isSupported)
 				return;
@@ -134,7 +134,7 @@ describe("Indicators", function() {
 			var previousRequiredChargeTime = retrievedProps.requiredChargeTime;
 			var previousBatteryCapacityMinutes = retrievedProps.batteryCapacityMinutes;
 
-			Rho.Battery.tripDuration = 40;
+			Rho.Battery.tripDuration = parseInt(retrievedProps.batteryCapacityMinutes) + 15;
 			Rho.Battery.averageCurrentConsumption = 2500;
 
 			var retrievedProps = Rho.Battery.batteryDiagnostics();
