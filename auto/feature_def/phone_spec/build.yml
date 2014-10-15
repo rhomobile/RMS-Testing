@@ -5,7 +5,7 @@ bbver: 6.0
 #applog: rholog.txt
 version: 1.0.0
 vendor: rhomobile
-sdkversion: 3.4
+sdkversion: 5.2
 wmsdk: "Windows Mobile 6 Professional SDK (ARMV4I)"
 iphone: 
   sdk: iphonesimulator7.1
@@ -37,4 +37,4 @@ android:
   capabilities:
     - network_state
   extensions: [barcode, gmaps]
-  version: 2.3.3
+  version: 4.4.2
