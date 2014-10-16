@@ -391,7 +391,7 @@ if(barcodeNotSupportedDevices.indexOf(Rho.System.deviceName) == -1){
 
 				describe("Invalid Cases - Should not crash", function() {
 					
-					it("Enable invalid Scanner", function() {
+					it("VT282-1777 | Enable invalid Scanner", function() {
 						var invalidBarcodeObj = enumObject;
 						invalidBarcodeObj.id = "scanner5";
 						runs(function() {
@@ -399,7 +399,7 @@ if(barcodeNotSupportedDevices.indexOf(Rho.System.deviceName) == -1){
 						});
 					});
 
-					it("call enable with invalid hash", function(){
+					it("VT282-1926 | call enable with invalid hash", function(){
 						var invalidBarcodeObj = enumObject;
 						invalidBarcodeObj.id = "scannerInvalid";
 						invalidBarcodeObj.name = "invalidhash";
@@ -410,7 +410,7 @@ if(barcodeNotSupportedDevices.indexOf(Rho.System.deviceName) == -1){
 							invalidBarcodeObj.enable();
 						});
 					});
-					it("set using Barcode.Propertyname for barcodeDataFormat as test (invalid value)", function(){
+					it("VT282-1943 | set using Barcode.Propertyname for barcodeDataFormat as test (invalid value)", function(){
 						runs(function(){
 							var objProperty = {'allDecoders':true,'dataBufferSize':20000, 'barcodeDataFormat':'test'};
 							enumObject.enable(objProperty, scanCallback);
@@ -422,7 +422,7 @@ if(barcodeNotSupportedDevices.indexOf(Rho.System.deviceName) == -1){
 							}, 3000)
 						});
 					});
-					it("set using Barcode.Propertyname for dataBufferSize as -1", function(){
+					it("VT282-1948 | set using Barcode.Propertyname for dataBufferSize as -1", function(){
 						runs(function(){
 							var objProperty = {'allDecoders':true,'dataBufferSize':-1, 'barcodeDataFormat':'binary'};
 							enumObject.enable(objProperty, scanCallback);
@@ -434,7 +434,7 @@ if(barcodeNotSupportedDevices.indexOf(Rho.System.deviceName) == -1){
 							}, 3000)
 						});
 					});
-					it("set using Barcode.Propertyname for signatureImageHeight to -100 ", function(){
+					it("VT282-1954 | set using Barcode.Propertyname for signatureImageHeight to -100 ", function(){
 						runs(function(){
 							var objProperty = {'allDecoders':false, 'signature':true, 'dataBufferSize':20000, 'barcodeDataFormat':'binary', 'signatureImageHeight':-100};
 							enumObject.enable(objProperty, scanCallback);
@@ -446,7 +446,7 @@ if(barcodeNotSupportedDevices.indexOf(Rho.System.deviceName) == -1){
 							}, 3000)
 						});
 					});
-					it("set using Barcode.Propertyname for signatureImageWidth to  -100 ", function(){
+					it("VT282-1958 | set using Barcode.Propertyname for signatureImageWidth to  -100 ", function(){
 						runs(function(){
 							var objProperty = {'allDecoders':false, 'signature':true, 'dataBufferSize':20000, 'barcodeDataFormat':'binary', 'signatureImageWidth':-100};
 							enumObject.enable(objProperty, scanCallback);
@@ -458,7 +458,7 @@ if(barcodeNotSupportedDevices.indexOf(Rho.System.deviceName) == -1){
 							}, 3000)
 						});
 					});
-					it("set using Barcode.Propertyname for signatureImageQuality to  -20 ", function(){
+					it("VT282-1962 | set using Barcode.Propertyname for signatureImageQuality to  -20 ", function(){
 						runs(function(){
 							var objProperty = {'allDecoders':false, 'signature':true, 'dataBufferSize':20000, 'barcodeDataFormat':'binary', 'signatureImageQuality':-20};
 							enumObject.enable(objProperty, scanCallback);
@@ -472,7 +472,7 @@ if(barcodeNotSupportedDevices.indexOf(Rho.System.deviceName) == -1){
 					});
 					// it("call getProperty() with callback as action URL and no property ", function(){
 					// });
-					it("call getProperty() with sync callback and no property ", function(){
+					it("VT282-2007 | call getProperty() with sync callback and no property ", function(){
 						runs(function(){
 							enumObject.enable();
 							enumObject.getProperty('',callbackgetproperty);
@@ -484,7 +484,7 @@ if(barcodeNotSupportedDevices.indexOf(Rho.System.deviceName) == -1){
 							expect(callbackstatus).toEqual(true);
 						});	
 					});
-					it("call getProperty() with anonymous callback and no property ", function(){
+					it("VT282-2008 | call getProperty() with anonymous callback and no property ", function(){
 						runs(function(){
 							enumObject.enable();
 							enumObject.getProperty('',function(data){getpropertydata = data;callbackstatus = true;});
@@ -498,7 +498,7 @@ if(barcodeNotSupportedDevices.indexOf(Rho.System.deviceName) == -1){
 					});
 					// it("call getProperty() with callback as action URL and hash ", function(){
 					// });
-					it("call getProperty() with sync callback hash ", function(){
+					it("VT282-2010 | call getProperty() with sync callback hash ", function(){
 						runs(function(){
 							enumObject.enable();
 							enumObject.getProperty(['allDecoders','picklistMode','code93'],callbackgetproperty);
@@ -510,7 +510,7 @@ if(barcodeNotSupportedDevices.indexOf(Rho.System.deviceName) == -1){
 							expect(callbackstatus).toEqual(true);
 						});	
 					});
-					it("call getProperty() with anonymous callback and hash ", function(){
+					it("VT282-2011 | call getProperty() with anonymous callback and hash ", function(){
 						runs(function(){
 							enumObject.enable();
 							enumObject.getProperty(['allDecoders','picklistMode','code93'],function(data){getpropertydata = data;callbackstatus = true;});
@@ -524,7 +524,7 @@ if(barcodeNotSupportedDevices.indexOf(Rho.System.deviceName) == -1){
 					});
 					// it("call getProperties() with callback as action URL and no hash ", function(){
 					// });
-					it("call getProperties() with sync callback and no hash ", function(){
+					it("VT282-2013 | call getProperties() with sync callback and no hash ", function(){
 						runs(function(){
 							enumObject.enable();
 							enumObject.getProperties([],callbackgetproperties);
@@ -536,7 +536,7 @@ if(barcodeNotSupportedDevices.indexOf(Rho.System.deviceName) == -1){
 							expect(callbackstatus).toEqual(true);
 						});	
 					});
-					it("call getProperties() with anonymous callback and no hash ", function(){
+					it("VT282-2014 | call getProperties() with anonymous callback and no hash ", function(){
 						runs(function(){
 							enumObject.enable();
 							enumObject.getProperties([],function(data){getpropertydata = data;callbackstatus = true;});
@@ -548,7 +548,7 @@ if(barcodeNotSupportedDevices.indexOf(Rho.System.deviceName) == -1){
 							expect(callbackstatus).toEqual(true);
 						});	
 					});
-					it("call setproperty with viewfinderFeedbackTime to -5000 ", function(){
+					it("VT282-2068 | call setproperty with viewfinderFeedbackTime to -5000 ", function(){
 						runs(function(){
 							var objProperty = {'allDecoders':true, 'viewfinderFeedback':'enabled', 'viewfinderFeedbackTime':-5000};
 							enumObject.enable(objProperty, scanCallback);
@@ -566,7 +566,7 @@ if(barcodeNotSupportedDevices.indexOf(Rho.System.deviceName) == -1){
 					// });
 					// it("call setproperty with enableTimeout as 0 second ", function(){
 					// });
-					it("call setproperty with barcodeDataFormat as test (invalid value) ", function(){
+					it("VT282-2113 | call setproperty with barcodeDataFormat as test (invalid value) ", function(){
 						runs(function(){
 							var objProperty = {'allDecoders':true, 'barcodeDataFormat':'test', 'dataBufferSize':20000};
 							enumObject.enable(objProperty, scanCallback);
@@ -578,7 +578,7 @@ if(barcodeNotSupportedDevices.indexOf(Rho.System.deviceName) == -1){
 							}, 3000)
 						});
 					});
-					it("call setproperty with barcodeDataFormat as empty data ", function(){
+					it("VT282-2114 | call setproperty with barcodeDataFormat as empty data ", function(){
 						runs(function(){
 							var objProperty = {'allDecoders':true, 'barcodeDataFormat':null, 'dataBufferSize':20000};
 							enumObject.enable(objProperty, scanCallback);
@@ -590,7 +590,7 @@ if(barcodeNotSupportedDevices.indexOf(Rho.System.deviceName) == -1){
 							}, 3000)
 						});
 					});
-					it("call setproperty with signatureImageHeight to -100 ", function(){
+					it("VT282-2124 | call setproperty with signatureImageHeight to -100 ", function(){
 						runs(function(){
 							var objProperty = {'allDecoders':false, 'signature':true, 'barcodeDataFormat':'binary','dataBufferSize':20000,'signatureImageHeight':-100};
 							enumObject.enable(objProperty, scanCallback);
@@ -604,7 +604,7 @@ if(barcodeNotSupportedDevices.indexOf(Rho.System.deviceName) == -1){
 					});
 					// it("call enable with VF coordinates to negative values ", function(){
 					// });
-					it("call enable with viewfinderFeedbackTime to -5000 ", function(){
+					it("VT282-2216 | call enable with viewfinderFeedbackTime to -5000 ", function(){
 						runs(function(){
 							var objProperty = {'allDecoders':true, 'viewfinderFeedback':'enabled','viewfinderFeedbackTime':-5000};
 							enumObject.enable(objProperty, scanCallback);
@@ -622,7 +622,7 @@ if(barcodeNotSupportedDevices.indexOf(Rho.System.deviceName) == -1){
 					// });
 					// it("call enable with enableTimeout as 0 second ", function(){
 					// });
-					it("call enable with barcodeDataFormat as test (invalid value) ", function(){
+					it("VT282-2261 | call enable with barcodeDataFormat as test (invalid value) ", function(){
 						runs(function(){
 							var objProperty = {'allDecoders':true, 'barcodeDataFormat':'test','dataBufferSize':20000};
 							enumObject.enable(objProperty, scanCallback);
@@ -634,7 +634,7 @@ if(barcodeNotSupportedDevices.indexOf(Rho.System.deviceName) == -1){
 							}, 3000)
 						});
 					});
-					it("call enable with barcodeDataFormat as empty data ", function(){
+					it("VT282-2262 | call enable with barcodeDataFormat as empty data ", function(){
 						runs(function(){
 							var objProperty = {'allDecoders':true, 'barcodeDataFormat':null,'dataBufferSize':20000};
 							enumObject.enable(objProperty, scanCallback);
@@ -646,7 +646,7 @@ if(barcodeNotSupportedDevices.indexOf(Rho.System.deviceName) == -1){
 							}, 3000)
 						});
 					});
-					it("call enable with signatureImageHeight to -100 ", function(){
+					it("VT282-2272 | call enable with signatureImageHeight to -100 ", function(){
 						runs(function(){
 							var objProperty = {'allDecoders':false, 'signature':true, 'barcodeDataFormat':'binary','dataBufferSize':20000,'signatureImageHeight':-100};
 							enumObject.enable(objProperty, scanCallback);
@@ -658,7 +658,7 @@ if(barcodeNotSupportedDevices.indexOf(Rho.System.deviceName) == -1){
 							}, 3000)
 						});
 					});
-					it("call enable with signatureImageQuality to  -20 ", function(){
+					it("VT282-2280 | call enable with signatureImageQuality to  -20 ", function(){
 						runs(function(){
 							var objProperty = {'allDecoders':false, 'signature':true, 'barcodeDataFormat':'binary','dataBufferSize':20000,'signatureImageQuality':-20};
 							enumObject.enable(objProperty, scanCallback);
