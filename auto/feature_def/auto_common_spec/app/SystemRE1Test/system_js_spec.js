@@ -20,6 +20,9 @@ describe("System JS API", function () {
 
     describe("properties directly", function () {
 
+        /* not applicable to iOS 8.0 !
+           From iOS 8.0 application must request permission from User for access to applicationIconBadge
+           It can not be automatically passed !
         if (isApplePlatform()) {
             it("VT300-003 | should set applicationIconBadge to 1", function () {
                 Rho.System.applicationIconBadge = 1;
@@ -31,6 +34,7 @@ describe("System JS API", function () {
                 expect(Rho.System.applicationIconBadge).toEqual(0);
             });
         }
+        */
 
         if (isAnyWindowsFamilyPlatform()) {
             it("VT300-022 | call getProperty with httpProxyURI (RhoSimpulator support it only on Windows)| 'http://wwwgate0.mot.com:1080'", function () {
