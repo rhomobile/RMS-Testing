@@ -181,12 +181,16 @@ describe("System", function() {
 	        });
 	    }
 	
+                          /* not applicable to iOS 8.0 !
+                          From iOS 8.0 application must request permission from User for access to applicationIconBadge
+                          It can not be automatically passed !
 	    if (isApplePlatform()) {
 	        it("Test applicationIconBadge property", function () {
 	            Rho.System.applicationIconBadge = 1;
 	            expect(Rho.System.applicationIconBadge).toEqual(1);
 	        });
 	    }
+                          */
 	
 	    if (isAnyButWindowsFamilyPlatform()) {
 	        it("Test devicePushId property", function () {
@@ -258,10 +262,12 @@ describe("System", function() {
             expect(Rho.System.getProperty("platform")).toEqual(Rho.System.platform);
         });
 
+        /* not applicable to iOS 8.0 !
         it("Test set property", function () {
             expect(Rho.System.setProperty("applicationIconBadge", "5"));
             expect(Rho.System.getProperty("applicationIconBadge")).toEqual("5");
         });
+        */
 
         it("Test get properties ", function () {
             var actual = Rho.System.getProperties(["platform", "osVersion"]);
@@ -275,10 +281,12 @@ describe("System", function() {
             expect(actual["osVersion"]).isNotEmptyString();
         });
 
+        /* not applicable to iOS 8.0
         it("Test get properties ", function () {
             Rho.System.setProperties({applicationIconBadge: "5"});
             expect(Rho.System.applicationIconBadge).toEqual(5);
         });
+        */
 	});
 
     describe("FileSystem tests", function () {

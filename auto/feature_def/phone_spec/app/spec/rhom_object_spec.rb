@@ -1798,9 +1798,11 @@ end
     end
     
     it "should assign metadata" do
-      meta = {"foo" => "bar"}
-      getAccount.metadata = meta.to_json
-      getAccount.metadata.should == meta
+        meta = {"foo" => "bar"}
+        if getAccount && getAccount.respond_to?( :metadata ) and getAccount.metadata != nil
+          getAccount.metadata = meta.to_json
+          getAccount.metadata.should == meta
+        end
     end
 end
 

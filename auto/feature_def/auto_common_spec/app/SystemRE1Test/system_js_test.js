@@ -41,6 +41,9 @@
 
 var sys_setget_properties = [
 	
+    /* not applicable to iOS 8.0 !
+    From iOS 8.0 application must request permission from User for access to applicationIconBadge
+    It can not be automatically passed !
 	{
 		testName		:	"VT300-132 | call setproperties with applicationIconBadge as 1, call getproperties with  applicationIconBadge | 1",
 		propertyName	:	'applicationIconBadge',
@@ -55,6 +58,7 @@ var sys_setget_properties = [
 		expectedResult	:	"0",
 		osType			: 	["APPLE"]
 	},
+    */
 	{
 		testName		:	"VT300-150 | call setproperties with httpProxyURI, call  getproperties with httpProxyURI | Bibash",
 		propertyName	:	'httpProxyURI',
