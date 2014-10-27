@@ -1,0 +1,41 @@
+<HTML>
+<HEAD>
+<META HTTP-Equiv="Notification" content="EnumNotificationsEvent:url('javascript:setupNtfyArr(%s)');">
+</HEAD>
+<script>
+   var ntfyArr = new Array();
+   var notType = new Array('LED', 'BEEPER', 'PAGER');
+   var NTFY_INDEX = 0;
+   var NTFY_TYPE = 1;
+   var NTFY_NAME = 2;
+
+   function setupNtfyArr(notArr)
+   {
+     ntfyArr = notArr;
+	 var html = "<br><br><br>";
+
+	 for(i=0; i<ntfyArr.length; i++)	
+     {
+       html += '<br>' + ntfyArr[i][NTFY_INDEX] + ', ' 
+	        + notType[ntfyArr[i][NTFY_TYPE]] + '' 
+	        + ntfyArr[i][NTFY_NAME] + '';
+     }
+	 
+     html += "";
+     htmDiv.innerHTML = html;
+   }
+   
+   function onListNotifications()
+   {
+	  var Generic = new ActiveXObject("PocketBrowser.Generic");
+      Generic.InvokeMetaFunction("Notification", "Enumerate");
+   }
+</script>
+   <BODY>
+      <div id="htmDiv">
+	  <INPUT TYPE="button" VALUE="List Notification Objects" ONCLICK="onListNotifications();">
+      </div>
+   </BODY>
+</HTML>
+
+

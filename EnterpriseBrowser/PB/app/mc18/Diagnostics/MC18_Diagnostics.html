@@ -1,0 +1,88 @@
+
+<html>
+  <head>
+  <title>MC18 Diagnostic Tests</title>
+  <SCRIPT>
+  var gen = new ActiveXObject("PocketBrowser.Generic");
+  
+ 
+ 
+  //var objGeneric = new ActiveXObject("PocketBrowser.Generic");
+  function OnLoad()
+  {
+     //setup the callbacks
+     gen.InvokeMETAFunction("battery", "BatteryDiagnosticEvent:url('Javascript:onDiagnosticBatteryEvent('%s','%s','%s','%s','%s','%s','%s','%s');')");     
+     gen.InvokeMETAFunction("battery", "SmartBatteryEvent:url('Javascript:onSmartBatteryEvent('%s','%s','%s','%s','%s','%s');')");
+     gen.InvokeMETAFunction("battery", "BatteryEvent:url('Javascript:onBatteryEvent('%s','%s','%s');')");
+     document.getElementById("display").innerHTML= ".<br>.<br>.<br>.<br>.<br>.<br>.<br>.<br>"; 
+  }
+  
+  function doDiagnosticStatus()
+  {
+    //onDiagnosticBatteryEvent('100','75','250','12-29-2013','3','412','600','180');
+    //gen.InvokeMETAFunction("battery", "TripDuration:180");
+    //gen.InvokeMETAFunction("battery", "AverageCurrentConsumption:1500");
+    gen.InvokeMETAFunction("battery", "GetBatteryDiagnostics");
+  }
+  function doSmartBatteryStatus()
+  {
+    //onSmartBatteryEvent('1287987654444XX','1234part','20','100','12-29-2013','HEALTHY');
+    gen.InvokeMETAFunction("battery", "GetSmartBatteryStatus");
+  }
+  
+  //Event handlers
+  function onDiagnosticBatteryEvent(StateOfHealth,LifePercent,
+  MinutesRemaining,MonthsToExpire,DaysSinceBatteryReplacement,MinutesSinceColdBoot,RequiredChargeMins,LastChargeDuration)
+  {
+       var displayTxt = "Battery Health:"             + StateOfHealth+"%<br>"; 
+       displayTxt += "Battery Percentage Remaining:"  + LifePercent+"%<br>";
+       displayTxt += "Minutes Remaining:"             + MinutesRemaining+"<br>"; 
+       displayTxt += "Months to Expiration:"          + MonthsToExpire+"<br>"; 
+       displayTxt += "Days Since Battery Replacement:"+ DaysSinceBatteryReplacement+"<br>";
+       displayTxt += "Minutes Since ColdBoot:"        + MinutesSinceColdBoot+"<br>";
+       displayTxt += "Required Charge Mins:"          + RequiredChargeMins+"<br>";
+       displayTxt += "Last Charge Duration Minutes:"  + LastChargeDuration+"<br>";    
+       
+       
+       
+       document.getElementById("display").innerHTML= displayTxt; 
+  }        
+  function onSmartBatteryEvent(SerialNumber,PartNumber,BatteryChargeCycles,RatedCapacity,ManufactureDate,StateOfHealth)
+  {
+       var displayTxt = "Serial Number:"              + SerialNumber+"<br>"; 
+       displayTxt += "Part Number:"                   + PartNumber+"<br>";
+       displayTxt += "Charge Count:"                  + BatteryChargeCycles+"<br>"; 
+       displayTxt += "Rated Capacity:"                 + RatedCapacity+"MA<br>"; 
+       displayTxt += "Manufacture Date:"              + ManufactureDate+"<br>";
+       displayTxt += "StateOf Health: "                 + StateOfHealth+"<br><br><br>";
+       
+       
+       document.getElementById("display").innerHTML= displayTxt; 
+  }  
+  function onBatteryEvent(ac,lifePercent,backupPercent)
+  {
+       var displayTxt = "Battery Life: "+ lifePercent+"%<br>"; 
+       displayTxt += "Cradled: "+ ac+"<br>";
+       displayTxt += "backup Life: "+ backupPercent+"%<br/>";  
+       document.getElementById("battery").innerHTML= displayTxt;
+  }  
+    
+  </SCRIPT>
+  <head>
+  <body onLoad="Javascript:OnLoad()">
+    
+    <input type="button" value="Diagnostic Status"       onclick="Javascript:doDiagnosticStatus();"/><br><br><br>
+    <input type="button" value="Smart Battery Status"       onclick="Javascript:doSmartBatteryStatus();"/><br><br><br>
+    <div id="display"></div><b><br>Battery Events (every 5 seconds update)<br></b>
+    <div id="battery"></div>
+    <!--input type="button" value="RemainingMinutes" onclick="Javascript:onRemainCapacity();"/><br>
+    <input type="button" value="ManufactureDate"  onclick="Javascript:onManufactureDate();"/><br>
+    <input type="button" value="monthsToBatteryExpire" onclick="Javascript:monthsToBatteryExpire();"/><br>
+    <input type="button" value="calculateCradleTimeMins"       onclick="Javascript:calculateCradleTimeMins(30);"/><br>
+    <input type="button" value="timeElapsedSinceBattery"       onclick="Javascript:timeElapsedSinceBattery();"/><br>
+    <input type="button" value="bbb"       onclick="Javascript:bbbb();"/><br/-->
+    <br><a HREF="../Index.html">Index</a>
+    <i><p>Last Revision : 27th March 2014 <br>Paul Henderson - PTJK76</p></i>
+   
+  </body>
+</html>

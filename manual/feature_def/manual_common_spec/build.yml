@@ -53,8 +53,7 @@ wm:
     - mediaplayer
     - indicators
     - sensor
-paths:
-  extensions: 
+    - smartCradle
 
 #minify:
 #  js: false
