@@ -537,7 +537,7 @@ describe('Developer Experience - Build live update Functionality Test', function
         spec.addPrecondition("Install the  application on all subscribers (WM, CE, Android, IOS, Android Simulator, and IOS simulator)");
         spec.addPrecondition("Launch the aplication all subscribers.");
         spec.addStep("From project root folder run command rake dev:discovery.");
-        spec.addExpectation("Subscribers should not be discovered when it is distribution.");
+        spec.addExpectation("Distribution applications should not be discovered .");
         spec.addExpectation("It should discover only Relase/debug build.");
         spec.displayScenario();
         spec.waitForButtonPressing("Run test");
@@ -552,6 +552,19 @@ describe('Developer Experience - Build live update Functionality Test', function
         spec.addPrecondition("Launch the aplication all subscribers.");
         spec.addStep("From project root folder run command rake dev:discovery.");
         spec.addExpectation("Subscribers should not be discovered when it is built without development extension.");
+        spec.displayScenario();
+        spec.waitForButtonPressing("Run test");
+        spec.waitForResponse();
+    });
+    it("Checking discovery without network", function() {
+        var spec = new ManualSpec(jasmine, window.document);
+        spec.addGoal("Checking discovery without network");
+        spec.addPrecondition("Server should not be connected in any network");
+        spec.addPrecondition("In local computer build the application with \'development\' extension for all platforms.");
+        spec.addPrecondition("Install the  application on all subscribers (WM, CE, Android, IOS, Android Simulator, and IOS simulator)");
+        spec.addPrecondition("Launch the aplication all subscribers.");
+        spec.addStep("From project root folder run command rake dev:discovery.");
+        spec.addExpectation("There should not be any abnormal behavior. Proper error message should returned");
         spec.displayScenario();
         spec.waitForButtonPressing("Run test");
         spec.waitForResponse();
