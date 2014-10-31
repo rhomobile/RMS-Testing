@@ -165,6 +165,72 @@ describe("SmartCradle Manual Tests", function() {
 		
 	});		
 	
+	describe("Unlocking the Cradle with setting wallId rowId and columnId", function() {
+
+		beforeEach(function() {
+			document.getElementById("actResult").innerHTML = "init";
+			startTestTimer();
+		});
+
+		afterEach(function() {
+			stopTestTimer();
+			//  Tear it down
+		});
+
+		///////////////////////////////////////////////////////////////////////
+		//  Cradle Unlock Positive Tests
+		///////////////////////////////////////////////////////////////////////
+		it("is able to unlock the cradle for 15 seconds with setting wallId to 1 rowId to 2 and columnId to 3", function() {
+
+			runs(function()
+			{
+				setObjective("able to unlock the cradle for 15 seconds with LED illumination");
+				setInstruction("Observe whether or not the cradle is unlocked (try removing the device).  Observe the cradle LED state");
+				setExpected("Cradle should remain unlocked for 15 seconds and then re-engage.  LEDs should be illuminated");
+				Rho.SmartCradle.columnId = 3;
+				Rho.SmartCradle.wallId = 1;
+				Rho.SmartCradle.rowId = 2;
+				Rho.SmartCradle.unlock(1, 0, 15);
+			});
+
+			runs(function()
+			{		
+				waitsFor(function() {
+				return document.getElementById("actResult").innerHTML != "init";
+				}, "Timed out waiting for tester to respond", 300000);
+				runs(function() {
+				expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+				});	
+			});
+
+		});
+
+		it("is able to unlock the cradle for 10 seconds with setting wallId to 2 rowId to 1 and columnId to 4", function() {
+
+			runs(function()
+			{
+				setObjective("able to unlock the cradle for 10 seconds with LED illumination");
+				setInstruction("Observe whether or not the cradle is unlocked (try removing the device).  Observe the cradle LED state");
+				setExpected("Cradle should remain unlocked for 10 seconds and then re-engage.  LEDs should be illuminated");
+				Rho.SmartCradle.columnId = 4;
+				Rho.SmartCradle.wallId = 2;
+				Rho.SmartCradle.rowId = 1;
+				Rho.SmartCradle.unlock(1, 0, 10);
+			});
+
+			runs(function()
+			{		
+				waitsFor(function() {
+				return document.getElementById("actResult").innerHTML != "init";
+				}, "Timed out waiting for tester to respond", 300000);
+				runs(function() {
+				expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+				});	
+			});
+
+		});
+	});
+
 	
 	describe("Unlocking the Cradle with LED parameter values that are out of range", function() {
 
