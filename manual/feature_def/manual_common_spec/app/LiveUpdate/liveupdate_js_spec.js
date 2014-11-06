@@ -4,7 +4,7 @@ describe('Developer Experience - Build live update Functionality Test', function
         spec.addGoal("Checking rake dev:discovery command");
         spec.addPrecondition("Connect the devices to server network.");
         spec.addPrecondition("In local computer build the application with \'development\' extension for all platforms.");
-        spec.addPrecondition("Install the  application on all subscribers (WM, CE, Android, IOS and WP8, Android Simulator, WP8 simulator and IOS simulator)");
+        spec.addPrecondition("Install the  application on all subscribers (WM, CE, Android, IOS, Android Simulator and IOS simulator)");
         spec.addPrecondition("Launch the application in all subscribers.");
         spec.addStep("From project root folder run command rake dev:discovery.");
         spec.addExpectation("Web server should be started if not running");
@@ -18,7 +18,7 @@ describe('Developer Experience - Build live update Functionality Test', function
         spec.addGoal("Checking partial bundle update by changing html file");
         spec.addPrecondition("Connect the devices to server network and Register subscribers on server");
         spec.addPrecondition("In local computer build the application with \'development\' extension for all platforms.");
-        spec.addPrecondition("Install the  application on all subscribers (WM, CE, Android, IOS and WP8, Android Simulator, WP8 simulator and IOS simulator)");
+        spec.addPrecondition("Install the  application on all subscribers (WM, CE, Android, IOS, Android Simulator and IOS simulator)");
         spec.addPrecondition("Launch the application in all subscribers.");
         spec.addStep("Add <p id=\'pid\' onClick=\"alertTest()\">Modified HTML file onetime update</p> to html file in app and pubic folder.");
         spec.addStep("Call rake dev:update:partial");
@@ -29,13 +29,13 @@ describe('Developer Experience - Build live update Functionality Test', function
         spec.waitForButtonPressing("Run test");
         spec.waitForResponse();
     });
-    it("Should detect changed JS file, builds partial bundle update and sends notification on applying  update", function() {
+    it("Should detect changed JS file, builds partial bundle update and sends notification on applying  partial update", function() {
         var spec = new ManualSpec(jasmine, window.document);
         spec.addGoal("Checking partial bundle update by changing JS file");
         spec.addPrecondition("Connect the devices to server network and Register subscribers on server");
         spec.addPrecondition("Add refresh: on to dev-config.yml");
         spec.addPrecondition("In local computer build the application with \'development\' extension for all platforms.");
-        spec.addPrecondition("Install the  application on all subscribers (WM, CE, Android, IOS and WP8, Android Simulator, WP8 simulator and IOS simulator)");
+        spec.addPrecondition("Install the  application on all subscribers (WM, CE, Android, IOS, Android Simulator and IOS simulator)");
         spec.addPrecondition("Launch the application in all subscribers.");
         spec.addPrecondition("Stop all servers and start webserver rake dev:webserver:start");
         spec.addStep("Add alert function to JS file. <br/>function alertTest() { alert(\"Test alert for onetime update\")} in app and pubic folder");
@@ -48,13 +48,13 @@ describe('Developer Experience - Build live update Functionality Test', function
         spec.waitForButtonPressing("Run test");
         spec.waitForResponse();
     });
-    it("Should detect changed CSS file, builds partial bundle update and sends notification on applying update", function() {
+    it("Should detect changed CSS file, builds partial bundle update and sends notification on applying partial update", function() {
         var spec = new ManualSpec(jasmine, window.document);
         spec.addGoal("Checking partial bundle update by changing CSS file");
         spec.addPrecondition("Connect the devices to server network and Register subscribers on server");
         spec.addPrecondition("Add refresh: off to dev-config.yml");
         spec.addPrecondition("In local computer build the application with \'development\' extension for all platforms.");
-        spec.addPrecondition("Install the  application on all subscribers (WM, CE, Android, IOS and WP8, Android Simulator, WP8 simulator and IOS simulator)");
+        spec.addPrecondition("Install the  application on all subscribers (WM, CE, Android, IOS, Android Simulator and IOS simulator)");
         spec.addPrecondition("Launch the application in all subscribers.");
         spec.addStep("Add CSS styling to css file #pid {background-color:red} in app and pubic folder.");
         spec.addStep("Call rake dev:update:partial.");
@@ -66,12 +66,12 @@ describe('Developer Experience - Build live update Functionality Test', function
         spec.waitForButtonPressing("Run test");
         spec.waitForResponse();
     });
-    it("Should detect changed Ruby file, builds partial bundle update and sends notification on applying update", function() {
+    it("Should detect changed Ruby file, builds partial bundle update and sends notification on applying partial update", function() {
         var spec = new ManualSpec(jasmine, window.document);
         spec.addGoal("Checking partial bundle update by changing Ruby file");
         spec.addPrecondition("Connect the devices to server network and Register subscribers on server");
         spec.addPrecondition("In local computer build the application with \'development\' extension for all platforms.");
-        spec.addPrecondition("Install the  application on all subscribers (WM, CE, Android, IOS and WP8, Android Simulator, WP8 simulator and IOS simulator)");
+        spec.addPrecondition("Install the  application on all subscribers (WM, CE, Android, IOS, Android Simulator and IOS simulator)");
         spec.addPrecondition("Launch the application in all subscribers.");
         spec.addStep("Add below function to controller.rb in app folder<br/>def show_popup<br/>  Alert.show_popup \"Test alert for onetime update\";<br/>end");
         spec.addStep("Call rake dev:update:partial.");
@@ -83,12 +83,34 @@ describe('Developer Experience - Build live update Functionality Test', function
         spec.waitForButtonPressing("Run test");
         spec.waitForResponse();
     });
+
+    it("Should detect added new HTML, CSS, JS, image and Ruby files and sends notification on applying partial update", function() {
+        var spec = new ManualSpec(jasmine, window.document);
+        spec.addGoal("Checking partial bundle update on adding new HTML, CSS, JS and Ruby files to project.");
+        spec.addPrecondition("Connect the devices to server network and Register subscribers on server");
+        spec.addPrecondition("In local computer build the application with \'development\' extension for all platforms.");
+        spec.addPrecondition("Install the  application on all subscribers (WM, CE, Android, IOS, Android Simulator and IOS simulator)");
+        spec.addPrecondition("Launch the application in all subscribers.");
+        spec.addStep("Add an HTML file named auto_html.html file with <br/>Head tag containing<br/><link rel=\"stylesheet\" type=\"text/css\" href=\"auto_css.css\"><br/><script src=\"auto_js.js\"></script> <br/>and body containig <br/><p onclick=\'alertTest();\'> Adding new HTML file </p> in app and public folder");
+        spec.addStep("Add js file named auto_js.js in app and public folder.<br/>function alertTest() { alert(\"Added file auto update\")}");
+        spec.addStep("Add a css file named auto_css.css in app and public folder.<br/>body {background-color: grey;font-size: 30px}");
+        spec.addStep("Add below function to controller.rb in app folder. <br/>def show_popup<br/>Alert.show_popup \"Added file auto update\";<br/>end");
+        spec.addStep("Add image file.");
+        spec.addStep("Provide above added files link in application and load the added pages.");
+        spec.addStep("Call rake dev:update:partial.");
+        spec.addExpectation("Web server should be started if not running");
+        spec.addExpectation("Should detect added HTML, CSS, JS, image and Ruby files, builds partial bundle update and sends notification to subscriber.");
+        spec.addStep("Added HTML, CSS, JS image and Ruby files should be loaded.");
+        spec.displayScenario();
+        spec.waitForButtonPressing("Run test");
+        spec.waitForResponse();
+    });
     it("Should Auto update in all registered subscribers on Modifying HTML files", function() {
         var spec = new ManualSpec(jasmine, window.document);
         spec.addGoal("Checking auto partial bundle update by changing html file");
         spec.addPrecondition("Connect the devices to server network and Register subscribers on server");
         spec.addPrecondition("In local computer build the application with \'development\' extension for all platforms.");
-        spec.addPrecondition("Install the  application on all subscribers (WM, CE, Android, IOS and WP8, Android Simulator, WP8 simulator and IOS simulator)");
+        spec.addPrecondition("Install the  application on all subscribers (WM, CE, Android, IOS, Android Simulator and IOS simulator)");
         spec.addPrecondition("Launch the application in all subscribers.");
         spec.addPrecondition("To Apply auto update run command rake dev:update:auto");
         spec.addStep("Add paragraph tag <p id=\'pid\' onClick=\"alertTest()\"> Auto update HTML files </p> to html file in app and public folder.");
@@ -105,7 +127,7 @@ describe('Developer Experience - Build live update Functionality Test', function
         spec.addPrecondition("Connect the devices to server network and Register subscribers on server");
         spec.addPrecondition("Add refresh: off to dev-config.yml");
         spec.addPrecondition("In local computer build the application with \'development\' extension for all platforms.");
-        spec.addPrecondition("Install the  application on all subscribers (WM, CE, Android, IOS and WP8, Android Simulator, WP8 simulator and IOS simulator)");
+        spec.addPrecondition("Install the  application on all subscribers (WM, CE, Android, IOS, Android Simulator and IOS simulator)");
         spec.addPrecondition("Launch the application in all subscribers.");
         spec.addPrecondition("To Apply auto update run command rake dev:update:auto");
         spec.addStep("Add alert function to JS file. <br/>function alertTest() { alert(\"Test alert for auto update\")} in app and pubic folder");
@@ -124,7 +146,7 @@ describe('Developer Experience - Build live update Functionality Test', function
         spec.addPrecondition("Connect the devices to server network and Register subscribers on server");
         spec.addPrecondition("Add refresh: on to dev-config.yml");
         spec.addPrecondition("In local computer build the application with \'development\' extension for all platforms.");
-        spec.addPrecondition("Install the  application on all subscribers (WM, CE, Android, IOS and WP8, Android Simulator, WP8 simulator and IOS simulator)");
+        spec.addPrecondition("Install the  application on all subscribers (WM, CE, Android, IOS, Android Simulator and IOS simulator)");
         spec.addPrecondition("Launch the application in all subscribers.");
         spec.addPrecondition("To Apply auto update run command rake dev:update:auto");
         spec.addStep("Add CSS styling to css file #pid {background-color:green} in app and pubic folder.");
@@ -140,7 +162,7 @@ describe('Developer Experience - Build live update Functionality Test', function
         spec.addGoal("Checking auto partial bundle update by changing Ruby file");
         spec.addPrecondition("Connect the devices to server network and Register subscribers on server");
         spec.addPrecondition("In local computer build the application with \'development\' extension for all platforms.");
-        spec.addPrecondition("Install the  application on all subscribers (WM, CE, Android, IOS and WP8, Android Simulator, WP8 simulator and IOS simulator)");
+        spec.addPrecondition("Install the  application on all subscribers (WM, CE, Android, IOS, Android Simulator and IOS simulator)");
         spec.addPrecondition("Launch the application in all subscribers.");
         spec.addPrecondition("To Apply auto update run command rake dev:update:auto");
         spec.addStep("Add below function to controller.rb in app folder<br/>def show_popup<br/>  Alert.show_popup \"Test alert for Auto update\";<br/>end");
@@ -157,7 +179,7 @@ describe('Developer Experience - Build live update Functionality Test', function
         spec.addGoal("Checking auto partial bundle update on Adding new model to project");
         spec.addPrecondition("Connect the devices to server network and Register subscribers on server");
         spec.addPrecondition("In local computer build the application with \'development\' extension for all platforms.");
-        spec.addPrecondition("Install the  application on all subscribers (WM, CE, Android, IOS and WP8, Android Simulator, WP8 simulator and IOS simulator)");
+        spec.addPrecondition("Install the  application on all subscribers (WM, CE, Android, IOS, Android Simulator and IOS simulator)");
         spec.addPrecondition("Launch the application in all subscribers.");
         spec.addPrecondition("To Apply auto update run command rake dev:update:auto");
         spec.addStep("Add a model by using the command rhodes model newmodel test1 test2 test3.");
@@ -173,7 +195,7 @@ describe('Developer Experience - Build live update Functionality Test', function
         spec.addGoal("Checking auto partial bundle update on adding new HTML, CSS, JS and Ruby files to project.");
         spec.addPrecondition("Connect the devices to server network and Register subscribers on server");
         spec.addPrecondition("In local computer build the application with \'development\' extension for all platforms.");
-        spec.addPrecondition("Install the  application on all subscribers (WM, CE, Android, IOS and WP8, Android Simulator, WP8 simulator and IOS simulator)");
+        spec.addPrecondition("Install the  application on all subscribers (WM, CE, Android, IOS, Android Simulator and IOS simulator)");
         spec.addPrecondition("Launch the application in all subscribers.");
         spec.addPrecondition("To Apply auto update run command rake dev:update:auto");
         spec.addStep("Add an HTML file named auto_html.html file with <br/>Head tag containing<br/><link rel=\"stylesheet\" type=\"text/css\" href=\"auto_css.css\"><br/><script src=\"auto_js.js\"></script> <br/>and body containig <br/><p onclick=\'alertTest();\'> Adding new HTML file </p> in app and public folder");
@@ -194,7 +216,7 @@ describe('Developer Experience - Build live update Functionality Test', function
         spec.addGoal("Checking auto partial bundle update on Deleting HTML, JS, CSS files from project");
         spec.addPrecondition("Connect the devices to server network and Register subscribers on server");
         spec.addPrecondition("In local computer build the application with \'development\' extension for all platforms.");
-        spec.addPrecondition("Install the  application on all subscribers (WM, CE, Android, IOS and WP8, Android Simulator, WP8 simulator and IOS simulator)");
+        spec.addPrecondition("Install the  application on all subscribers (WM, CE, Android, IOS, Android Simulator and IOS simulator)");
         spec.addPrecondition("Launch the application in all subscribers.");
         spec.addPrecondition("To Apply auto update run command rake dev:update:auto");
         spec.addStep("Delete html file del_auto_html.html in app and public folder");
@@ -214,7 +236,7 @@ describe('Developer Experience - Build live update Functionality Test', function
         spec.addGoal("Checking Full bundle update on adding new HTML, CSS, JS and Ruby files to project.");
         spec.addPrecondition("Connect the devices to server network and Register subscribers on server");
         spec.addPrecondition("In local computer build the application with \'development\' extension for all platforms.");
-        spec.addPrecondition("Install the  application on all subscribers (WM, CE, Android, IOS and WP8, Android Simulator, WP8 simulator and IOS simulator)");
+        spec.addPrecondition("Install the  application on all subscribers (WM, CE, Android, IOS, Android Simulator and IOS simulator)");
         spec.addPrecondition("Launch the application in all subscribers. <br/>");
         spec.addStep("Add an HTML file named auto_html.html file with <br/>Head tag containing<br/><link rel=\"stylesheet\" type=\"text/css\" href=\"auto_css.css\"><br/><script src=\"auto_js.js\"></script> <br/>and body containig <br/><p onclick=\'alertTest();\'> Adding new HTML file full bundle update</p> in app and public folder");
         spec.addStep("Add js file named auto_js.js in app and public folder.<br/>function alertTest() { alert(\"Added file full bundle update\")}");
@@ -235,7 +257,7 @@ describe('Developer Experience - Build live update Functionality Test', function
         spec.addGoal("Checking AutoUpdate when device is switched off");
         spec.addPrecondition("Connect the devices to server network and Register subscribers on server");
         spec.addPrecondition("In local computer build the application with \'development\' extension for all platforms.");
-        spec.addPrecondition("Install the  application on all subscribers (WM, CE, Android, IOS and WP8, Android Simulator, WP8 simulator and IOS simulator)");
+        spec.addPrecondition("Install the  application on all subscribers (WM, CE, Android, IOS, Android Simulator and IOS simulator)");
         spec.addPrecondition("Launch the application in all subscribers.");
         spec.addPrecondition("To Apply auto update run command rake dev:update:auto");
         spec.addStep("Switch off the device.");
@@ -254,7 +276,7 @@ describe('Developer Experience - Build live update Functionality Test', function
         spec.addGoal("Checking AutoUpdate when application was terminated");
         spec.addPrecondition("Connect the devices to server network and Register subscribers on server");
         spec.addPrecondition("In local computer build the application with \'development\' extension for all platforms.");
-        spec.addPrecondition("Install the  application on all subscribers (WM, CE, Android, IOS and WP8, Android Simulator, WP8 simulator and IOS simulator)");
+        spec.addPrecondition("Install the  application on all subscribers (WM, CE, Android, IOS, Android Simulator and IOS simulator)");
         spec.addPrecondition("Launch the application in all subscribers.");
         spec.addPrecondition("To Apply auto update run command rake dev:update:auto ");
         spec.addStep("Terminate the application on the device.");
@@ -272,7 +294,7 @@ describe('Developer Experience - Build live update Functionality Test', function
         spec.addGoal("Full bundle update after application termiated and relaunched.");
         spec.addPrecondition("Connect the devices to server network and Register subscribers on server");
         spec.addPrecondition("In local computer build the application with \'development\' extension for all platforms.");
-        spec.addPrecondition("Install the  application on all subscribers (WM, CE, Android, IOS and WP8, Android Simulator, WP8 simulator and IOS simulator)");
+        spec.addPrecondition("Install the  application on all subscribers (WM, CE, Android, IOS, Android Simulator and IOS simulator)");
         spec.addPrecondition("Launch the application in all subscribers.");
         spec.addPrecondition("To Apply auto update run command rake dev:update:auto ");
         spec.addStep("Terminate the applications in all devices.");
@@ -294,7 +316,7 @@ describe('Developer Experience - Build live update Functionality Test', function
         spec.addGoal("Checking full bundle update once the network is available");
         spec.addPrecondition("Connect the devices to server network and Register subscribers on server");
         spec.addPrecondition("In local computer build the application with \'development\' extension for all platforms.");
-        spec.addPrecondition("Install the  application on all subscribers (WM, CE, Android, IOS and WP8, Android Simulator, WP8 simulator and IOS simulator)");
+        spec.addPrecondition("Install the  application on all subscribers (WM, CE, Android, IOS, Android Simulator and IOS simulator)");
         spec.addPrecondition("Launch the application in all subscribers. <br/>");
         spec.addStep("Disable network connection on the device.");
         spec.addStep("Add HTML, CSS, JS, erb and image files to project.");
@@ -313,7 +335,7 @@ describe('Developer Experience - Build live update Functionality Test', function
         spec.addGoal("Using External file watcher grunt to detect changes in HTML file");
         spec.addPrecondition("Connect the devices to server network and Register subscribers on server");
         spec.addPrecondition("In local computer build the application with \'development\' extension for all platforms.");
-        spec.addPrecondition("Install the  application on all subscribers (WM, CE, Android, IOS and WP8, Android Simulator, WP8 simulator and IOS simulator)");
+        spec.addPrecondition("Install the  application on all subscribers (WM, CE, Android, IOS, Android Simulator and IOS simulator)");
         spec.addPrecondition("Launch the application in all subscribers.<br/>");
         spec.addPrecondition("Run external file watcher grunt.");
         spec.addStep("Add paragraph tag <p id=\'pid\' onClick=\"alertTest()\">Using external file watcher grunt</p> to html file in app folder.");
@@ -330,7 +352,7 @@ describe('Developer Experience - Build live update Functionality Test', function
         spec.addGoal("Using External file watcher grunt to detect added JS file");
         spec.addPrecondition("Connect the devices to server network and Register subscribers on server");
         spec.addPrecondition("In local computer build the application with \'development\' extension for all platforms.");
-        spec.addPrecondition("Install the  application on all subscribers (WM, CE, Android, IOS and WP8, Android Simulator, WP8 simulator and IOS simulator)");
+        spec.addPrecondition("Install the  application on all subscribers (WM, CE, Android, IOS, Android Simulator and IOS simulator)");
         spec.addPrecondition("Launch the application in all subscribers.<br/>");
         spec.addPrecondition("Run external file watcher grunt.");
         spec.addStep("<br/>1.Add js file named auto_js.js with<br/>function alertTest() { alert(\"Test alert for auto update\")}");
@@ -347,7 +369,7 @@ describe('Developer Experience - Build live update Functionality Test', function
         spec.addGoal("Using External file watcher grunt to detect deleted JS file");
         spec.addPrecondition("Connect the devices to server network and Register subscribers on server");
         spec.addPrecondition("In local computer build the application with \'development\' extension for all platforms.");
-        spec.addPrecondition("Install the  application on all subscribers (WM, CE, Android, IOS and WP8, Android Simulator, WP8 simulator and IOS simulator)");
+        spec.addPrecondition("Install the  application on all subscribers (WM, CE, Android, IOS, Android Simulator and IOS simulator)");
         spec.addPrecondition("Launch the application in all subscribers.<br/>");
         spec.addPrecondition("Run external file watcher grunt.");
         spec.addStep("Delete js file named auto_js.js ");
@@ -364,7 +386,7 @@ describe('Developer Experience - Build live update Functionality Test', function
         spec.addGoal("Using External file watcher grunt to detect changes in CSS file");
         spec.addPrecondition("Connect the devices to server network and Register subscribers on server");
         spec.addPrecondition("In local computer build the application with \'development\' extension for all platforms.");
-        spec.addPrecondition("Install the  application on all subscribers (WM, CE, Android, IOS and WP8, Android Simulator, WP8 simulator and IOS simulator)");
+        spec.addPrecondition("Install the  application on all subscribers (WM, CE, Android, IOS, Android Simulator and IOS simulator)");
         spec.addPrecondition("Launch the application in all subscribers.<br/>");
         spec.addPrecondition("Run external file watcher grunt.");
         spec.addStep("Add css styling to css file #pid {background-color:red}");
@@ -381,7 +403,7 @@ describe('Developer Experience - Build live update Functionality Test', function
         spec.addGoal("Using External file watcher grunt to detect changes in Ruby file");
         spec.addPrecondition("Connect the devices to server network and Register subscribers on server");
         spec.addPrecondition("In local computer build the application with \'development\' extension for all platforms.");
-        spec.addPrecondition("Install the  application on all subscribers (WM, CE, Android, IOS and WP8, Android Simulator, WP8 simulator and IOS simulator)");
+        spec.addPrecondition("Install the  application on all subscribers (WM, CE, Android, IOS, Android Simulator and IOS simulator)");
         spec.addPrecondition("Launch the application in all subscribers.<br/>");
         spec.addPrecondition("Run external file watcher grunt. ");
         spec.addStep("Add below function to controller.rb def show_popup<br/> Alert.show_popup \"Test alert for onetime update\";<br/> end");
@@ -399,7 +421,7 @@ describe('Developer Experience - Build live update Functionality Test', function
         spec.addGoal("Using External file watcher grunt to detect changes in scss file and update in css file");
         spec.addPrecondition("Connect the devices to server network and Register subscribers on server");
         spec.addPrecondition("In local computer build the application with \'development\' extension for all platforms.");
-        spec.addPrecondition("Install the  application on all subscribers (WM, CE, Android, IOS and WP8, Android Simulator, WP8 simulator and IOS simulator)");
+        spec.addPrecondition("Install the  application on all subscribers (WM, CE, Android, IOS, Android Simulator and IOS simulator)");
         spec.addPrecondition("Launch the application in all subscribers.<br/>");
         spec.addPrecondition("Run external file watcher grunt. ");
         spec.addStep("Add a style.scss file.");
@@ -417,7 +439,7 @@ describe('Developer Experience - Build live update Functionality Test', function
         spec.addGoal("Checking update when registered manually on dev-config.yml");
         spec.addPrecondition("Connect the devices to server network.");
         spec.addPrecondition("In local computer build the application with \'development\' extension for all platforms.");
-        spec.addPrecondition("Install the  application on all subscribers (WM, CE, Android, IOS and WP8, Android Simulator, WP8 simulator and IOS simulator)");
+        spec.addPrecondition("Install the  application on all subscribers (WM, CE, Android, IOS, Android Simulator and IOS simulator)");
         spec.addPrecondition("Launch the application in all subscribers.");
         spec.addStep("Register the subscribers manually on the server by editing in dev-config.yml in the following format<br/>uri: 192.168.1.102:37579<br/>name: macbook-pro<br/>platform: APPLE<br/>application: ReloadBundleformat");
         spec.addStep("Run command rake dev:update:auto");
@@ -611,7 +633,7 @@ describe('Developer Experience - Build live update Functionality Test', function
         spec.addGoal("Checking webserver start and stop command");
         spec.addPrecondition("Connect the devices to server network and Register subscribers on server");
         spec.addPrecondition("In local computer build the application with \'development\' extension for all platforms.");
-        spec.addPrecondition("Install the  application on all subscribers (WM, CE, Android, IOS and WP8, Android Simulator, WP8 simulator and IOS simulator)");
+        spec.addPrecondition("Install the  application on all subscribers (WM, CE, Android, IOS, Android Simulator and IOS simulator)");
         spec.addPrecondition("Launch the application in all subscribers.");
         spec.addPrecondition("Stop all webservers.");
         spec.addStep("Add paragraph tag <p id=\'pid\' onClick=\"alertTest()\">Webserver test </p> to html file in app and public folder.");
@@ -632,7 +654,7 @@ describe('Developer Experience - Build live update Functionality Test', function
         spec.addGoal("Checking auto update on webserver restart");
         spec.addPrecondition("Connect the devices to server network and Register subscribers on server");
         spec.addPrecondition("In local computer build the application with \'development\' extension for all platforms.");
-        spec.addPrecondition("Install the  application on all subscribers (WM, CE, Android, IOS and WP8, Android Simulator, WP8 simulator and IOS simulator)");
+        spec.addPrecondition("Install the  application on all subscribers (WM, CE, Android, IOS, Android Simulator and IOS simulator)");
         spec.addPrecondition("Launch the application in all subscribers.");
         spec.addPrecondition("Stop all webservers.");
         spec.addStep("Call rake dev:update:auto");
@@ -653,7 +675,7 @@ describe('Developer Experience - Build live update Functionality Test', function
         spec.addGoal("Should not apply changes made in public/api folder");
         spec.addPrecondition("Connect the devices to server network and Register subscribers on server");
         spec.addPrecondition("In local computer build the application with \'development\' extension for all platforms.");
-        spec.addPrecondition("Install the  application on all subscribers (WM, CE, Android, IOS and WP8, Android Simulator, WP8 simulator and IOS simulator)");
+        spec.addPrecondition("Install the  application on all subscribers (WM, CE, Android, IOS, Android Simulator and IOS simulator)");
         spec.addPrecondition("Launch the application in all subscribers.");
         spec.addStep("Add HTML, CSS, JS files to public/api folder and provide link in home page");
         spec.addStep("Add alert function rho-api.js file in public/api folder");
@@ -671,7 +693,7 @@ describe('Developer Experience - Build live update Functionality Test', function
         spec.addGoal("Checking application update other than app and public folder");
         spec.addPrecondition("Connect the devices to server network and Register subscribers on server");
         spec.addPrecondition("In local computer build the application with \'development\' extension for all platforms.");
-        spec.addPrecondition("Install the  application on all subscribers (WM, CE, Android, IOS and WP8, Android Simulator, WP8 simulator and IOS simulator)");
+        spec.addPrecondition("Install the  application on all subscribers (WM, CE, Android, IOS, Android Simulator and IOS simulator)");
         spec.addPrecondition("Launch the application in all subscribers.");
         spec.addStep("Add HTML, CSS, JS files to root folder and provide link in home page");
         spec.addStep("Add one extension(audiocapture) in build.yml");
@@ -681,7 +703,7 @@ describe('Developer Experience - Build live update Functionality Test', function
         spec.addExpectation("Web server should be started if not running");
         spec.addExpectation("Should not apply changes made other than app and public folder");
         spec.addExpectation("Start page should not be changed");
-        spec.addExpectation("audiocapture should not work");
+        spec.addExpectation("audiocapture API should not work");
         spec.displayScenario();
         spec.waitForButtonPressing("Run test");
         spec.waitForResponse();
