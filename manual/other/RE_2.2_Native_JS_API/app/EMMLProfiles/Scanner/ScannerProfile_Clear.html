@@ -1,9 +1,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" >
 <head>
-<script type="text/javascript" src="/public/re1/elements.js"></script>
-
-<!--<META HTTP-Equiv="EMMLProfile" Content="name:myScanner;import:url('scanner.emmp');">
+  <script type="text/javascript" src="/public/re1/elements.js"></script>
+<!--<META HTTP-Equiv="EMMLProfile" Content="name:myScanner;import:url('http://10.233.85.82/pb3.x/EMMLProfiles/Scanner/scanner.emmp');">
 <META HTTP-Equiv="EMMLProfile" Content="apply:myScanner.OnlyEAN8Enabled;">-->
 <META HTTP-Equiv="scanner" Content="DecodeEvent:url('javascript:doScan('%s', '%s', %s, '%s', '%s');')">
 
@@ -33,7 +32,7 @@ var Generic = new ActiveXObject("PocketBrowser.Generic");
    
    function doImportProfile()
    {
-    Generic.InvokeMETAFunction('EMMLProfile', "name:myScanner;import:url('scanner.emmp');");
+    Generic.InvokeMETAFunction('EMMLProfile', "name:myScanner;import:url('http://10.233.85.82/pb3.x/EMMLProfiles/Scanner/scanner.emmp');");
    }
 
 function doApplyProfile(profile)

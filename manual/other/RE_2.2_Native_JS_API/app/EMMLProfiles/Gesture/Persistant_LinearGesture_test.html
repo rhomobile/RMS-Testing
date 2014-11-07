@@ -3,16 +3,16 @@
 <META HTTP-Equiv="EMMLProfile" Content="apply:myProfile.Linear">
 <META HTTP-Equiv="scanner" Content="DecodeEvent:url('javascript:doScan('%s', '%s', '%s', '%s', '%s');')">
 <script>
-    var Generic = new ActiveXObject("PocketBrowser.Generic");
+    var myObject = new ActiveXObject("PocketBrowser.Generic");
     function doQuit() {
 
-        Generic.InvokeMETAFunction('application', 'quit');
+        myObject.InvokeMETAFunction('application', 'quit');
     }
 
 
     function doApplyProfile(profile) {
       
-        Generic.InvokeMETAFunction('EMMLProfile', 'Apply:' + profile);
+        myObject.InvokeMETAFunction('EMMLProfile', 'Apply:' + profile);
     }
 
     function onGesture(id, count)
@@ -20,7 +20,7 @@
          if (id == "Scan1") 
          {
            
-             Generic.InvokeMETAFunction("Scanner", "all_decoders:disabled;Code128:enabled;enabled;start");
+             myObject.InvokeMETAFunction("Scanner", "all_decoders:disabled;Code128:enabled;enabled;start");
          }
 
      }

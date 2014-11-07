@@ -4,8 +4,8 @@
     FileTransfer-Password:ftpadmin;
     FileTransfer-CreateFolders:True;
     FileTransfer-OverWrite:True;           
-    FileTransfer-Source:url('file://\Application\FileCollections\myfile.txt');
-    FileTransfer-Destination:url('ftp://192.168.6.18/EMMLFiletestFtp.txt');
+    FileTransfer-Source:url('file://\Temp\myfolder\EMMLFiletestDev.txt');
+    FileTransfer-Destination:url('ftp://10.233.85.82/EMMLFiletestFtp.txt');
   }
 
 
@@ -16,6 +16,6 @@
     FileTransfer-Password:ftpadmin;
     FileTransfer-CreateFolders:True;
     FileTransfer-OverWrite:True;           
-    FileTransfer-Source:url('ftp://192.168.6.18/FileCollections/myfile.txt');
+    FileTransfer-Source:url('ftp://10.233.85.82/EMMLFiletestFtp.txt');
     FileTransfer-Destination:url('file://\Temp\myfolder\EMMLFiletestDev.txt');
 }

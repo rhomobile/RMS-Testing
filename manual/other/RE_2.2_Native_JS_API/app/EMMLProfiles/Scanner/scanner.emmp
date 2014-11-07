@@ -10,18 +10,18 @@
 }
 
 .AllBarcodesEnabled {
-	 scanner:disabled;
+	 //scanner:disabled;
 	 scanner-aimType:timedHold;
 	 scanner-viewfinderMode:enabled;
      scanner-all_decoders:enabled;
-     scanner:enabled;
+     //scanner:enabled;
    
 }
 
 .AllBarcodesDisabled {
 	 scanner:disabled;
      scanner-all_decoders:disabled;
-     scanner:enabled;
+     //scanner:enabled;
     
 }
 

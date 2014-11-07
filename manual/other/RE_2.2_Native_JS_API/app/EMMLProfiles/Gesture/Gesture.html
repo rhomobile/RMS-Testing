@@ -1,13 +1,12 @@
 <html>
 <head>
-<script type="text/javascript" src="/public/re1/elements.js"></script>
-
+  <script type="text/javascript" src="/public/re1/elements.js"></script><script type="text/javascript" src="/src/elements.js"></script>
     <title> Gesture Settings</title>
 
   
 <script language="javascript" type="text/javascript">
 
-    var Generic = new ActiveXObject("PocketBrowser.Generic");
+    var myObject = new ActiveXObject("PocketBrowser.Generic");
     var selValue = 0;
     var selected_Option = "";
 
@@ -28,17 +27,17 @@
             var w = document.frmCtrl.myctrl.selectedIndex;
             var selected_Profile = document.frmCtrl.myctrl.options[w].value;
 //            alert("Clearing Current Profile!");
-//            Generic.InvokeMETAFunction("EMMLProfile", "clear");
+//            myObject.InvokeMETAFunction("EMMLProfile", "clear");
            alert("Applying Selected Profile!: " + selected_Profile);
             if (selected_Option == "Persistanse") {
                 alert("Apply persistance");
-                Generic.InvokeMETAFunction("EMMLProfile", "name:myProfile;import:url('gesture.emmp');");
-                Generic.InvokeMETAFunction("EMMLProfile", "apply:myProfile." + selected_Profile);
+                myObject.InvokeMETAFunction("EMMLProfile", "name:myProfile;import:url('http://10.233.85.82/pb3.x/EMMLProfiles/Gesture/gesture.emmp');");
+                myObject.InvokeMETAFunction("EMMLProfile", "apply:myProfile." + selected_Profile);
             }
             else {
                 alert("Apply Nonpersistance");
-                Generic.InvokeMETAFunction("EMMLProfile", "import:url('gesture.emmp');");
-                Generic.InvokeMETAFunction("EMMLProfile", "apply:" + selected_Profile);
+                myObject.InvokeMETAFunction("EMMLProfile", "import:url('http://10.233.85.82/pb3.x/EMMLProfiles/Gesture/gesture.emmp');");
+                myObject.InvokeMETAFunction("EMMLProfile", "apply:" + selected_Profile);
             }
         }
     }
@@ -65,7 +64,7 @@
 
     function clearProfile() {
        
-        Generic.InvokeMETAFunction("EMMLProfile", "clear:myProfile");
+        myObject.InvokeMETAFunction("EMMLProfile", "clear:myProfile");
     }
 
 //    function DoTest() 
@@ -98,6 +97,7 @@
 
 </head>
 <body>
+<br><br>
 <form name="frmCtrl" id="frmCtrl"  onsubmit="return OnSubmitForm();" method="post" >
 <table border=1 id="gesturetable">
 <tr><td><select name="myoption" id="myoption" onChange="selectoption();">
