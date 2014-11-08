@@ -34,7 +34,7 @@ describe("<generator API specs>", function() {
                 expect(Rho.NativeBridgeTest.testString('"')).toEqual('"');
                 expect(Rho.NativeBridgeTest.testString('\\')).toEqual('\\');
                 expect(Rho.NativeBridgeTest.testString('/')).toEqual('/');
-                
+
                 var str = ""; var str2 = "";
                 for(var i=32; i < 128; i++) {
                     var chr = String.fromCharCode(i);
@@ -45,27 +45,34 @@ describe("<generator API specs>", function() {
                 expect(Rho.NativeBridgeTest.testString(str2)).toEqual(str2);
             });
 
-            // it("Running testAPI function", function() {
-            //     var arrHashStr = [
-            //         {'a':'b'},
-            //         {'b':'c'},
-            //         {'sdfsdf':'sdfsdfsdfsdf'}
-            //     ];
-            //     var hashHashStr = {
-            //         'a' : {'a':'b'},
-            //         'b' : {'b':'c'}
-            //     };
-            //     var hashArrStr = {
-            //         'a' : ['a','b'],
-            //         'b' : ['b','c']
-            //     }
-            //     var arrArrStr = [
-            //         ['a','b'],
-            //         ['b','c']
-            //     ];
-            //     res = Rho.NativeBridgeTest.testApi(arrHashStr, hashHashStr, hashArrStr, arrArrStr);
-            //     Rho.Log.warning("====== "+res,'test')
-            // });
+            it("Running testAPI function", function() {
+                var arrHashStr = [
+                    {'a':'b'},
+                    {'b':'c'},
+                    {'sdfsdf':'sdfsdfsdfsdf'}
+                ];
+                var hashHashStr = {
+                    'a' : {'a':'b'},
+                    'b' : {'b':'c'}
+                };
+                var hashArrStr = {
+                    'a' : ['a','b'],
+                    'b' : ['b','c']
+                }
+                var arrArrStr = [
+                    ['a','b'],
+                    ['b','c']
+                ];
+                res = Rho.NativeBridgeTest.testApi(arrHashStr, hashHashStr, hashArrStr, arrArrStr);
+                data = JSON.parse(res)
+
+                Rho.Log.warning(JSON.stringify(data, null, 2),'ABC')
+
+                expect(arrHashStr).toEqual(data[0]);
+                expect(hashHashStr).toEqual(data[1]);
+                expect(hashArrStr).toEqual(data[2]);
+                expect(arrArrStr).toEqual(data[3]);
+            });
         });
         describe("Edge test case", function() {
             it("passing integer", function() {
@@ -128,14 +135,14 @@ describe("<generator API specs>", function() {
                 Rho.GenPropBag.boolProp = true;
                 expect(Rho.GenPropBag.boolProp).toEqual(true);
             });
-    
+
             it("provides int default property", function() {
                 Rho.GenPropBag.intProp = 0;
                 expect(Rho.GenPropBag.intProp).toEqual(0);
                 Rho.GenPropBag.intProp = 15;
                 expect(Rho.GenPropBag.intProp).toEqual(15);
             });
-    
+
             it("provides float default property", function() {
                 Rho.GenPropBag.floatProp = 0.1;
                 expect(Rho.GenPropBag.floatProp).toEqual(0.1);
@@ -151,14 +158,14 @@ describe("<generator API specs>", function() {
                 Rho.GenPropBag.getDefault().boolProp = true;
                 expect(Rho.GenPropBag.getDefault().boolProp).toEqual(true);
             });
-    
+
             it("provides int property", function() {
                 Rho.GenPropBag.getDefault().intProp = 0;
                 expect(Rho.GenPropBag.getDefault().intProp).toEqual(0);
                 Rho.GenPropBag.getDefault().intProp = 15;
                 expect(Rho.GenPropBag.getDefault().intProp).toEqual(15);
             });
-    
+
             it("provides float property", function() {
                 Rho.GenPropBag.getDefault().floatProp = 0.1;
                 expect(Rho.GenPropBag.getDefault().floatProp).toEqual(0.1);
@@ -174,14 +181,14 @@ describe("<generator API specs>", function() {
                 Rho.GenPropBag.defaultInstance.boolProp = true;
                 expect(Rho.GenPropBag.defaultInstance.boolProp).toEqual(true);
             });
-    
+
             it("provides int property", function() {
                 Rho.GenPropBag.defaultInstance.intProp = 0;
                 expect(Rho.GenPropBag.defaultInstance.intProp).toEqual(0);
                 Rho.GenPropBag.defaultInstance.intProp = 15;
                 expect(Rho.GenPropBag.defaultInstance.intProp).toEqual(15);
             });
-    
+
             it("provides float property", function() {
                 Rho.GenPropBag.defaultInstance.floatProp = 0.1;
                 expect(Rho.GenPropBag.defaultInstance.floatProp).toEqual(0.1);
@@ -261,13 +268,13 @@ describe("<generator API specs>", function() {
             expect(objs[1].boolProp).toEqual(true);
         });
 
-        it("enumerates module instances with callback", function() 
+        it("enumerates module instances with callback", function()
         {
             var objs = null;
             Rho.GenPropBag.enumerate( function(v){ objs = v; } );
             waitsFor(function(){return null != objs}, 'Callback should be called', 2000);
 
-            runs(function() 
+            runs(function()
             {
                 expect(objs.length).toEqual(2);
                 expect(typeof objs[1].getId).toEqual('function');
@@ -330,7 +337,7 @@ describe("<generator API specs>", function() {
         beforeEach(function(){
             instances = Rho.GenPropBag.enumerate();
 
-            if (instances.length > 1) { 
+            if (instances.length > 1) {
                 instances[1].boolProp = true;
                 instances[1].intProp = 10;
                 instances[1].floatProp = -1.1;
