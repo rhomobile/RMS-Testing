@@ -72,7 +72,19 @@
 
             <METHOD name="testNull" hasCallback="mandatory" runInThread="ui">
                 <DESC>Should return null</DESC>
-                <CALLBACK type="String"/>
+                <CALLBACK type="STRING"/>
+            </METHOD>
+
+            <METHOD name="saveCallback" hasCallback="mandatory">
+                <DESC>Should save callback</DESC>
+                <CALLBACK type="STRING"/>
+            </METHOD>
+
+            <METHOD name="fireCallback" runInThread="ui">
+                <DESC>Should fire saved callback</DESC>
+                <PARAMS>
+                    <PARAM name="value" type="STRING"/>
+                </PARAMS>
             </METHOD>
         </METHODS>
 
