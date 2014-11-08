@@ -74,11 +74,23 @@ namespace rho {
 
             // hash-vector
             {
-                StringifyVector outer;
+                StringifyHash outer;
                 typedef rho::Hashtable<rho::String, rho::Vector<rho::String> >::const_iterator iter_type;
                 for (iter_type iter = hashArrStr.begin(); iter != hashArrStr.end(); ++iter) {
                     StringifyVector inner;
                     inner.fromVector(iter->second);
+                    outer.set(iter->first,inner);
+                }
+                res.push_back(outer);
+            }
+
+            // vector-vector
+            {
+                StringifyVector outer;
+                typedef rho::Vector< rho::Vector<rho::String> >::const_iterator iter_type;
+                for (iter_type iter = arrArrStr.begin(); iter != arrArrStr.end(); ++iter) {
+                    StringifyVector inner;
+                    inner.fromVector(*iter);
                     outer.push_back(inner);
                 }
                 res.push_back(outer);
