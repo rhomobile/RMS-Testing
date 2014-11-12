@@ -1,0 +1,7 @@
+ext/platform/android/generated/jni/GenCallbackTests.cpp
+ext/platform/android/generated/jni/gencallbacktests_ruby_wrap.cpp
+ext/platform/android/generated/jni/gencallbacktests_js_wrap.cpp
+ext/platform/android/jni/GenCallbackTests_impl.cpp
+ext/shared/generated/gencallbacktests_api_init.cpp
+ext/shared/generated/gencallbacktests_js_api.cpp
+ext/shared/generated/gencallbacktests_ruby_api.c

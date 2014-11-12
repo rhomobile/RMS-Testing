@@ -1,0 +1,9 @@
+ext/platform/android/generated/src/com/rho/gencallbacktests/GenCallbackTestsBase.java
+ext/platform/android/generated/src/com/rho/gencallbacktests/GenCallbackTestsFactorySingleton.java
+ext/platform/android/generated/src/com/rho/gencallbacktests/GenCallbackTestsSingletonBase.java
+ext/platform/android/generated/src/com/rho/gencallbacktests/IGenCallbackTests.java
+ext/platform/android/generated/src/com/rho/gencallbacktests/IGenCallbackTestsFactory.java
+ext/platform/android/generated/src/com/rho/gencallbacktests/IGenCallbackTestsSingleton.java
+ext/platform/android/src/com/rho/gencallbacktests/GenCallbackTests.java
+ext/platform/android/src/com/rho/gencallbacktests/GenCallbackTestsFactory.java
+ext/platform/android/src/com/rho/gencallbacktests/GenCallbackTestsSingleton.java
