@@ -1,16 +1,15 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" >
 <head>
-<script type="text/javascript" src="/public/re1/elements.js"></script>
-
-<!--<META HTTP-Equiv="EMMLProfile" Content="name:myScanner;import:url('scanner.emmp');apply:myScanner.AllBarcodesEnabled;">-->
+  <script type="text/javascript" src="/public/re1/elements.js"></script>
+<!--<META HTTP-Equiv="EMMLProfile" Content="name:myScanner;import:url('http://10.233.85.82/pb3.x/EMMLProfiles/Scanner/scanner.emmp');apply:myScanner.AllBarcodesEnabled;">-->
 <!--<META HTTP-Equiv="EMMLProfile" Content="apply:myScanner.AllBarcodesEnabled;">-->
 <META HTTP-Equiv="scanner" Content="DecodeEvent:url('javascript:doScan('%s', '%s', %s, '%s', '%s');')">
 
 
 <script type="text/javascript">
 
-  var Generic = new ActiveXObject("PocketBrowser.Generic");
+  var objgeneric = new ActiveXObject("PocketBrowser.Generic");
 
   function doScan(data, source, type, time, length)
    {
@@ -19,30 +18,30 @@
    
    function doTest()
    {
-       Generic.InvokeMETAFunction('Scanner','enabled');
+       objgeneric.InvokeMETAFunction('Scanner','enabled');
    }
 
    function clearProfile() 
    {
        alert('Clear:myScanner'); 
-       Generic.InvokeMETAFunction('EMMLProfile', 'clear:myScanner');
+       objgeneric.InvokeMETAFunction('EMMLProfile', 'clear:myScanner');
    }
    
    function stopScan()
    {
-   Generic.InvokeMETAFunction('scanner','disabled;stop');
+   objgeneric.InvokeMETAFunction('scanner','disabled;stop');
    }
 
    function doApplyProfile(profile)
     {
        
        alert('Apply:'+profile);
-       Generic.InvokeMETAFunction('EMMLProfile', 'Apply:'+profile);
+       objgeneric.InvokeMETAFunction('EMMLProfile', 'Apply:'+profile);
    }
    
    function doImportProfile()
    {
-    Generic.InvokeMETAFunction('EMMLProfile', "name:myScanner;import:url('scanner.emmp');");
+    objgeneric.InvokeMETAFunction('EMMLProfile', "name:myScanner;import:url('http://10.233.85.82/pb3.x/EMMLProfiles/Scanner/scanner.emmp');");
    }
 
 </script>     
@@ -52,8 +51,7 @@
 <h4>OAll Barcode is disabled and this should persist <br />across pages within the same instance of Pocket Browser 3.0.</h4>
 <h5>Scan to check if you are able to decode Code11 barcode.</h5>
 <h5>Decode Data:<div id="message"></div></h5><br /><br />
-<INPUT TYPE="button" VALUE="Start Scan" ONCLICK="doTest();">
-<INPUT TYPE="button" VALUE="Stop Scan" ONCLICK="stopScan();">
+
 <br>
 <input type=button value="Clear Profile" onclick="clearProfile();"><br /><br />
     <a href="Javascript:doImportProfile();">Import Profile</a><br />

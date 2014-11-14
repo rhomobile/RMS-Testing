@@ -10,7 +10,7 @@
     SignatureCapture-visibility:visible;
     SignatureCapture-Username:ftpadmin;
     SignatureCapture-Password:ftpadmin; 
-    SignatureCapture-destination:url('ftp://192.168.6.18:21/Sig5.bmp');
+    SignatureCapture-destination:url('ftp://10.233.85.82:21/Sig5.bmp');
     SignatureCapture-SignatureSaveEvent:url('Javascript:onCaptured('%s');');
     }
 

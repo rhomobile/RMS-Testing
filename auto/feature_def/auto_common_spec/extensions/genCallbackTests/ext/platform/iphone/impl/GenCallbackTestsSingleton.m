@@ -30,6 +30,8 @@
 
 @implementation GenCallbackTestsSingleton
 
+@synthesize callback;
+
 
 -(NSString*)getInitialDefaultID {
 
@@ -95,6 +97,14 @@
 
 -(void) testNull:(id<IMethodResult>)methodResult {
    [methodResult setResult:([NSNull null])];
+}
+
+-(void) saveCallback:(id<IMethodResult>)methodResult {
+    self.callback = methodResult;
+}
+
+-(void) fireCallback:(NSString*)value methodResult:(id<IMethodResult>)methodResult {
+    [callback setResult:value];
 }
 
 @end

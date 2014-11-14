@@ -1,10 +1,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" >
 <head>
-<script type="text/javascript" src="/public/re1/elements.js"></script>
-
+  <script type="text/javascript" src="/public/re1/elements.js"></script>
     <title>Control & Apperance EMML Profiles Test Page</title>
-<!--<META HTTP-Equiv="EMMLProfile" Content="name:myProfile;import:url('CtrlApp.emmp');">-->
+<!--<META HTTP-Equiv="EMMLProfile" Content="name:myProfile;import:url('http://10.233.85.82/pb3.x/EMMLProfiles/Ctrl_App/CtrlApp.emmp');">-->
 
 <script language=javascript>
 var Generic = new ActiveXObject("PocketBrowser.Generic");
@@ -28,13 +27,13 @@ function applyProfile()
 //        alert(myVal);
         if(selValue == "1")
         {
-            Generic.InvokeMETAFunction("EMMLProfile", "name:myProfile;import:url('CtrlApp.emmp');");
+            Generic.InvokeMETAFunction("EMMLProfile", "name:myProfile;import:url('http://10.233.85.82/pb3.x/EMMLProfiles/Ctrl_App/CtrlApp.emmp');");
             var Result = Generic.InvokeMETAFunction("EMMLProfile", myVal);
             alert("Result for invoke meta function Persistant" + Result);
         }
         else
         {
-            Generic.InvokeMETAFunction("EMMLProfile", "import:url('CtrlApp.emmp');");
+            Generic.InvokeMETAFunction("EMMLProfile", "import:url('http://10.233.85.82/pb3.x/EMMLProfiles/Ctrl_App/CtrlApp.emmp');");
             var result1 = Generic.InvokeMETAFunction("EMMLProfile", "apply:" + selected_Profile);
 //            alert("Result for invoke meta function NonPersistant" + result1);
         }

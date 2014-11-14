@@ -1,5 +1,5 @@
 # startup page for your application
-start_path = '/app/index.html'
+start_path = '/app/index_main.html'
 
 # path to the options page (in this case handled by javascript)
 options_path = '/app/Settings'
@@ -14,6 +14,7 @@ rhobundle_zip_pwd = nil
 # log level
 # 0-trace, 1-info(app level), 2-warnings, 3-errors
 # for production set to 3
+LogFilePath = '/mnt/sdcard/RETestApp.log'
 MinSeverity  = 1 
 
 # enable copy log messages to standard output, useful for debugging

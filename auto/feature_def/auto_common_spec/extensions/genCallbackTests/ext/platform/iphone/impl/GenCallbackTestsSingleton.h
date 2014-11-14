@@ -8,6 +8,8 @@
 
 -(NSString*)getInitialDefaultID;
 
+@property (retain) id<IMethodResult> callback;
+
 
 -(void) testString:(NSString*)value methodResult:(id<IMethodResult>)methodResult;
 -(void) testBool:(BOOL)value methodResult:(id<IMethodResult>)methodResult;
@@ -16,8 +18,8 @@
 -(void) testArray:(NSArray*)value methodResult:(id<IMethodResult>)methodResult;
 -(void) testHash:(NSDictionary*)value methodResult:(id<IMethodResult>)methodResult;
 -(void) testNull:(id<IMethodResult>)methodResult;
-
-
+-(void) saveCallback:(id<IMethodResult>)methodResult;
+-(void) fireCallback:(NSString*)value methodResult:(id<IMethodResult>)methodResult;
 
 
 @end

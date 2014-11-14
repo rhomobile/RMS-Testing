@@ -1,9 +1,11 @@
 entry: Init_GenCallbackTests_extension	
 javaentry: com.gencallbacktests.GenCallbackTests
 libraries: ["GenCallbackTests"]
+wp8:
+  csharp_impl: no
+  root_namespace: rho
 android:
-  source_list: ext/platform/android/ext_java.files
-
+  exttype: rakefile
 project_paths:
   wp8: ext/platform/wp8/GenCallbackTests.vcxproj
   wm: ext/platform/wm/GenCallbackTests.vcproj
