@@ -31,7 +31,7 @@ describe("<system module specs>", function () {
             };
 
             runs(function () {
-                Rho.GenCallbackTests.testString(reversestring,callbackFunction);
+                Rho.PlatformBridgeTest.testString(reversestring,callbackFunction);
             });
 
             waitsFor(
@@ -58,7 +58,7 @@ describe("<system module specs>", function () {
             };
 
             runs(function () {
-                Rho.GenCallbackTests.testBool(testValue,callbackFunction);
+                Rho.PlatformBridgeTest.testBool(testValue,callbackFunction);
             });
 
             waitsFor(
@@ -84,7 +84,7 @@ describe("<system module specs>", function () {
             };
 
             runs(function () {
-                Rho.GenCallbackTests.testInt(testValue,callbackFunction);
+                Rho.PlatformBridgeTest.testInt(testValue,callbackFunction);
             });
 
             waitsFor(
@@ -110,7 +110,7 @@ describe("<system module specs>", function () {
             };
 
             runs(function () {
-                Rho.GenCallbackTests.testFloat(testValue,callbackFunction);
+                Rho.PlatformBridgeTest.testFloat(testValue,callbackFunction);
             });
 
             waitsFor(
@@ -143,7 +143,7 @@ describe("<system module specs>", function () {
             };
 
             runs(function () {
-                Rho.GenCallbackTests.testArray(reversed,callbackFunction);
+                Rho.PlatformBridgeTest.testArray(reversed,callbackFunction);
             });
 
             waitsFor(
@@ -182,7 +182,7 @@ describe("<system module specs>", function () {
             };
 
             runs(function () {
-                Rho.GenCallbackTests.testHash(testhash,callbackFunction);
+                Rho.PlatformBridgeTest.testHash(testhash,callbackFunction);
             });
 
             waitsFor(
@@ -210,7 +210,7 @@ describe("<system module specs>", function () {
             };
 
             runs(function () {
-                Rho.GenCallbackTests.testNull(callbackFunction);
+                Rho.PlatformBridgeTest.testNull(callbackFunction);
             });
 
             waitsFor(
@@ -240,8 +240,8 @@ describe("<system module specs>", function () {
 
             runs(function () {
                 flag = false; value = null;
-                Rho.GenCallbackTests.saveCallback(callbackFunction);
-                Rho.GenCallbackTests.fireCallback(testString);
+                Rho.PlatformBridgeTest.saveCallback(callbackFunction);
+                Rho.PlatformBridgeTest.fireCallback(testString);
             });
 
             waitsFor(
@@ -258,7 +258,7 @@ describe("<system module specs>", function () {
 
             runs(function () {
                 flag = false; value = null;
-                Rho.GenCallbackTests.fireCallback(testString+"a");
+                Rho.PlatformBridgeTest.fireCallback(testString+"a");
             });
 
             waitsFor(
@@ -281,8 +281,8 @@ describe("<system module specs>", function () {
 
             runs(function () {
                 flag = false; value = null;
-                Rho.GenCallbackTests.saveCallback(null);
-                Rho.GenCallbackTests.fireCallback(testString+"a");
+                Rho.PlatformBridgeTest.saveCallback(null);
+                Rho.PlatformBridgeTest.fireCallback(testString+"a");
             });
 
             waits(200);
