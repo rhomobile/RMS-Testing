@@ -75,7 +75,7 @@ if (Rho.System.platform == Rho.System.PLATFORM_ANDROID) {
         srvPort = WEBSOCKET_PORT,
         srvURL = "ws://"+srvHost+":"+srvPort.toString();
 
-		xit("should raise exception if url is empty", function(){
+		it("should raise exception if url is empty", function(){
 			expect(function(){new WebSocket("")}).toThrow(new Error("WebSocket URL is empty."));
 		});
 		
@@ -114,7 +114,7 @@ if (Rho.System.platform == Rho.System.PLATFORM_ANDROID) {
 			runs( function() { ws2.close(); } );
 		});
 
-        it('should check readystate connection connecting AND should check readystate connection open and onopen callback should fire', function(){
+    it('should check readystate connection connecting AND should check readystate connection open and onopen callback should fire', function(){
 			var cbOnopenCalled = false;
 			var cbOnmessageCalled = false;
 			var cbOncloseCalled = false;
@@ -149,6 +149,16 @@ if (Rho.System.platform == Rho.System.PLATFORM_ANDROID) {
 				expect(cbOnerrorCalled).toBeFalsy();
 				ws3.close();
 			});
+      
+      waitsFor(function(){
+				return cbOncloseCalled;
+			},50000,"Waiting connection to be closed");
+      
+      runs(function(){
+				expect(cbOncloseCalled).toEqual(true);
+			});
+
+      
 		});
 		
 		it('should send message to websocket server', function(){
