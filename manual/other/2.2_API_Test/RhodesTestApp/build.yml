@@ -22,8 +22,10 @@ iphone:
   BundleIdentifier: "com.rhomobile.retestapp"
   BundleURLScheme: "retestapp"
   emulatortarget: "iphone"
-wp:
+wp8:
+  ajax_api_bridge: false
   productid: "dc201bf1-e2e9-012f-10dc-00216a8a58d0"
+  extensions: ["json", "digest", "digest-md5", "digest-sha1", "uri", "barcode"] # "digest-sha2", "openssl", "mediacapture",
 wm:
   extensions:
     - digest
@@ -42,7 +44,7 @@ symbian:
 android:
   extensions:
     - barcode
-#- rainbow
+    #- rainbow
     - nfc
     - digest
     - digest-md5
