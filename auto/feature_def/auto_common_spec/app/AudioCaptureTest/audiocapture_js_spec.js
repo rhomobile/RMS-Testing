@@ -869,7 +869,7 @@ describe('Rho.AudioCapture JS API', function () {
 			
 			waitsFor(function(){
 				return callbackStatus;
-			},"Waiting for audio capture to finished",25000);
+			},"Waiting for audio capture to finished",15000);
 			
 			runs(function(){
 				expect(callbackStatus).toBeTruthy();
