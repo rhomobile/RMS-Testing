@@ -156,6 +156,7 @@ if (Rho.System.platform == Rho.System.PLATFORM_ANDROID) {
       
       runs(function(){
 				expect(cbOncloseCalled).toEqual(true);
+        expect(cbOnerrorCalled).toBeFalsy();
 			});
 
       
