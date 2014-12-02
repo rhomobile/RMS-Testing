@@ -442,7 +442,7 @@ describe("Camera API Manual Tests", function(){
 			            spec.waitForButtonPressing("Run test");
 
 						runs(function(){
-							objCAM.showPreview({'fileName':'\\Application\\camImage', 'captureSound':'alarm5.wav'
+							objCAM.showPreview({'fileName':'\\Application\\camImage', 'captureSound':'alarm5.wav',
 								'compressionFormat':'png', 'outputFormat':'dataUri', 'flashMode':'on', 'aimMode':'on', 
 								'desiredHeight':720, 'desiredWidth':1080, 'previewLeft':80, 'previewTop':10, 'previewWidth':100, 'previewHeight':60
 							}, callbackFunc);
