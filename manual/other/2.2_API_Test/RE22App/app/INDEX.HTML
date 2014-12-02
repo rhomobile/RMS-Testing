@@ -1,0 +1,90 @@
+<HTML>
+
+<HEAD>
+<script type="text/javascript" src="/src/elements.js"></script>
+<!--<META HTTP-Equiv="MinimizeButton" Content="Visibility:Visible">
+<META HTTP-Equiv="keystate" Content="Visibility:Visible">
+<META HTTP-Equiv="quitbutton" Content="Visibility:Visible;left:50">
+<META HTTP-Equiv="backbutton" Content="Visibility:Visible;top:50">
+<META HTTP-Equiv="ReloadButton" Content="Visibility:Visible">
+<META HTTP-Equiv="SIPButton" Content="Visibility:Visible">
+<META HTTP-Equiv="ZoomTextButton" Content="Visibility:Visible">
+<META HTTP-Equiv="addressbar" Content="Visibility:hidden">-->
+</HEAD>
+
+
+<BODY BGCOLOR="#FFFFEA" TEXT="#0000A0" LINK="#FF0000" VLINK="#808080" ALINK="#008040">
+<H2>Rhoelements Test Site</H2>
+<input type="button" value="Quit" onclick="quitPB();" />
+<!--<P><A HREF="http://localhost:80/index.html">localhost80withfilename</A></P>
+<P><A HREF="http://localhost:80/">localhost80</A></P>
+<P><A HREF="http://localhost">localhostwithoutslash</A></P>
+<P><A HREF="http://localhost/">localhostwithslash</A></P>-->
+
+
+<P><A HREF="./ControlAppearance/ControlAppearance.html">ControlAppearance</A></P>
+<p><A href="./DeviceApplication/Device Application.html">DeviceApplication</A></p>
+<P><A HREF="./Generic/generic ActiveX Object.html">Generic</A></P>
+<P><A HREF="./Gesture/gestureIndex.html">Gestures</A></P>
+<P><A HREF="./Imager/Imager_Index.html">Image Capture</A></P>
+<P><A HREF="./Memory/MemoryJsobject.html">Memory_JS</A></P>
+<P><A HREF="./SystemTime/SystemTimeJsobject.html">SystemTime_JS</A></P>
+<P><A HREF="./VideoCapture/VideoCapture_Index.html">VideoCapture</A></P>
+
+<!--<P><A HREF="http://192.168.6.18/TSD/Index.html">TSD test</A></P>
+<P><A HREF="http://192.168.6.18/pb3.x/index.html">PB3.X site</A></P>
+<P><A HREF="./Default.aspx">HTTP Post Issue</A></P>
+<P><A HREF="./wa/Default.aspx">HTTP Post test</A></P>
+<P><A HREF="./Alert.html">Alert test</A></P>-->
+
+<input type=button onclick="Javascript:goBack();" value="NeonHistoryBack">
+<br>
+<input type=button onclick="Javascript:goBack1();" value="NeonHistoryBack using Window">
+<br>
+<input type=button onclick="Javascript:doAlert();" value="javascript alert">
+<br>
+<input type=button onclick="Javascript:doQuit();" value="javascript alert with quit">
+<br>
+<br>
+<input type=button onclick="Javascript:doaddressbar();" value="Show address bar">
+<br>
+
+</BODY>
+</HTML>
+
+<!--<script src="http://192.168.6.27:3636/target/target-script-min.js#anonymous"></script>-->
+
+<SCRIPT>
+var genericObj = new ActiveXObject("PocketBrowser.Generic");
+function doAlert()
+{
+ alert("Rhoelementsbetabuild Rhoelementsbetabuild Rhoelementsbetabuild Rhoelementsbetabuild Rhoelementsbetabuild Rhoelementsbetabuild Rhoelementsbetabuild Rhoelementsbetabuild Rhoelementsbetabuild Rhoelementsbetabuild Rhoelementsbetabuild Rhoelementsbetabuild Rhoelementsbetabuild Rhoelementsbetabuild Rhoelementsbetabuild Rhoelementsbetabuild Rhoelementsbetabuild Rhoelementsbetabuild Rhoelementsbetabuild Rhoelementsbetabuild Rhoelementsbetabuild Rhoelementsbetabuild Rhoelementsbetabuild Rhoelementsbetabuild Rhoelementsbetabuild Rhoelementsbetabuild Rhoelementsbetabuild Rhoelementsbetabuild Rhoelementsbetabuild Rhoelementsbetabuild Rhoelementsbetabuild Rhoelementsbetabuild Rhoelementsbetabuild Rhoelementsbetabuild Rhoelementsbetabuild Rhoelementsbetabuild Rhoelementsbetabuild Rhoelementsbetabuild Rhoelementsbetabuild Rhoelementsbetabuild Rhoelementsbetabuild Rhoelementsbetabuild Rhoelementsbetabuild Rhoelementsbetabuild Rhoelementsbetabuild  Rhoelementsbetabuild Rhoelementsbetabuild Rhoelementsbetabuild Rhoelementsbetabuild Rhoelementsbetabuild Rhoelementsbetabuild Rhoelementsbetabuild Rhoelementsbetabuild ");
+}
+function doQuit()
+{
+ alert("Hi");
+ genericObj.InvokeMETAFunction('Application', 'Quit');
+
+}
+
+function quitPB()
+{
+ genericObj.InvokeMETAFunction("Application", "Quit");
+}
+   function doaddressbar()
+   {
+    genericObj.InvokeMETAFunction('Addressbar', 'Visibility:visible');
+    genericObj.InvokeMETAFunction('gobutton', 'Visibility:visible');
+   }
+   
+   function goBack()
+   {
+      document.location = 'history:back';
+   }
+ 
+   function goBack1()
+   {
+      window.location = 'history:back';
+   }
+ 
+</SCRIPT>

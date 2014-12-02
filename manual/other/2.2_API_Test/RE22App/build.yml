@@ -1,0 +1,28 @@
+---
+sdkversion: 5.0.0
+name: RE22App
+version: '1.0'
+vendor: rhomobile
+build: debug
+applog: rholog.txt
+iphone:
+  configuration: Release
+  sdk: iphonesimulator8.0
+  provisionprofile: ''
+  codesignidentity: iPhone Developer
+  entitlements: ''
+  BundleIdentifier: com.rhomobile.re22app
+  BundleURLScheme: re22app
+  production:
+    ipa_itunesartwork_image: ./production/iTunesArtwork.png
+wp8:
+  productid: a24549b0-576d-0132-fa8b-606720a825c9
+android:
+  manifest_template: AndroidManifest.erb
+  version: 2.3.3
+  logcatFilter: APP:I StrictMode:I DEBUG:I *:E
+wm: ''
+extensions:
+- rhoconnect-client
+app_type: rhoelements
+capabilities: []

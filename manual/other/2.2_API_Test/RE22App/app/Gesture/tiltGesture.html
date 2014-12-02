@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html>
+<head><script type="text/javascript" src="/public/re1/elements.js"></script>
+	<title>PB and RE2.2 Semi Auto Frame Work : Shake gesture</title>
+	<!--<link rel="stylesheet" type="text/css" href="css/main.css">-->
+	<style type="text/css">
+		.block{
+			background:#aabbcc;
+			border: 1px solid darkblue;
+		    margin: 5px;
+		    font-size: 11px;
+		    font-family: Monaco, "Lucida Console", monospace;
+		    line-height: 14px;
+		    color: #333333;
+		}
+		.title{
+			padding: 3px;
+		    font-size: 11px;
+		    font-family: Monaco, "Lucida Console", monospace;
+		    font-weight: bolder;
+		    background-color: steelblue;
+		    color: white;
+		}
+		.body{
+			background:#ddeeff;
+		}
+		.runners{
+			border: 1px solid darkblue;
+		    margin: 5px;
+		    font-family: Monaco, "Lucida Console", monospace;
+		    line-height: 14px;
+			padding: 3px;
+		    font-size: 12px;
+		    font-weight: bolder;
+		    background-color: #aabbcc;
+		    color: white;
+		}
+		.heading{
+			font-weight: bold;
+		}
+		.pass{
+			background:green;
+		}
+		.fail{
+			background:red;
+		}
+	</style>
+	<!--<script type="text/javascript" src="js/testCases.js"></script>-->
+	<script type="text/javascript">
+		//var genericObj = new ActiveXObject("PocketBrowser.Generic");
+		var EventCounter = 1;
+		var myPage = "";
+
+		function onGestureJSON(jsonobject) {
+      		
+			document.getElementById("actualResult").innerHTML += "Gesture with json event detected for "+EventCounter+"th time.<br>Gesture ID: " + jsonobject.id + ", Count: " + jsonobject.count;
+			EventCounter++;
+      
+      		if(id=="Scan") {
+      			generic.InvokeMETAFunction("Scanner","enabled;start");
+      		}
+      		
+      		if(id=="Signal") {
+      			generic.InvokeMETAFunction("Signal","visibility:visible");
+      		}
+
+			if(id=="Battery")
+			{
+				generic.InvokeMETAFunction("battery","visibility:visible");
+      		}
+      	}
+
+		function onGesture(id,count) {
+			document.getElementById("actualResult").innerHTML += "Gesture detected for "+EventCounter+"th time.<br>Gesture ID: " + id + ", Count: " + count;
+		    EventCounter++;
+			if(id=="Scan") {
+				generic.InvokeMETAFunction("Scanner","enabled;start");
+			}
+
+			if(id=="Signal") {
+				generic.InvokeMETAFunction("Signal","visibility:visible");
+			}
+
+			if(id=="Battery") {
+				generic.InvokeMETAFunction("battery","visibility:visible");
+			}
+		}
+
+		function DeleteGesture() { 
+			gesture.delete();
+		} 
+
+		function performGesture(GType_value, GestureID_value, Preset_value, Diagonstics_value, TargetX_value, TargetY_value, TargetZ_value, TiltTolerance_value, Hysteresis_value, group1_value, Number_value) {
+
+			var Gesturetype = GType_value;
+			var GestureID = GestureID_value;
+			var Preset = Preset_value;
+			var Diagonstics = Diagonstics_value;
+			var VTargetX = TargetX_value;
+			var VTargetY = TargetY_value;
+			var VTargetZ = TargetZ_value;
+			var VTiltTolerance = TiltTolerance_value;
+			var VHysteresis = Hysteresis_value;
+			var SelectedItem = group1_value;
+			var NumberOfGestures = Number_value;
+			
+			if(Gesturetype!="NULL") {
+			    if(SelectedItem=="HTML") {
+			    	gesture.setEMML("detected:url('http://10.233.85.82/NEON/Navigate.html?ID=%s&COUNT=%s')");
+			    }
+			    else if(SelectedItem=="JSON") {
+			    	gesture.detected='onGestureJSON(%json);';
+				}
+				else if(SelectedItem=="DETACHEVENT") {
+					gesture.detected='';
+				}
+			    else {
+			       gesture.detected="onGesture('%s','%s');";
+			    }
+			    
+				//generic.InvokeMETAFunction("gesture","type:" + Gesturetype);
+				gesture.type=Gesturetype;
+			    if(GestureID!="NULL") {
+		           //generic.InvokeMETAFunction("gesture","id:"+GestureID);
+		            gesture.id=GestureID;
+		        }
+		        if(Preset!="NULL") {
+		           //generic.InvokeMETAFunction("gesture","preset:"+Preset);
+		            gesture.preset=Preset;
+		        }
+		        if(Diagonstics!="NULL") {
+		          // generic.InvokeMETAFunction("gesture","diagnostics:"+Diagonstics);
+		                gesture.diagnostics=Diagonstics;
+		        }
+		        if(VTargetX!="NULL") {
+		           //generic.InvokeMETAFunction("gesture","center-X:"+Centerx);
+		           gesture.TargetX=VTargetX;
+				   //alert(VTargetX);
+		        }
+		        if(VTargetY!="NULL") {
+		           //generic.InvokeMETAFunction("gesture","center-Y:"+Centery);
+		           gesture.TargetY=VTargetY;
+		        }
+		        if(VTargetZ!="NULL") {
+		           //generic.InvokeMETAFunction("gesture","radius:"+Radius);
+		            gesture.TargetZ=VTargetZ;
+		        }
+		        if(VTiltTolerance!="NULL") {
+		           //generic.InvokeMETAFunction("gesture","delay:"+Delay);
+		           gesture.TiltTolerance=VTiltTolerance;
+		        }
+		        
+		        if(VHysteresis!="NULL") {
+		          // generic.InvokeMETAFunction("gesture","interval:"+Interval);
+		            gesture.Hysteresis=VHysteresis;
+		        }
+
+
+			        //generic.InvokeMETAFunction("gesture", "create");
+			  	for(var i = 0; i<NumberOfGestures; i++) {
+		    		gesture.create();
+		    		document.getElementById("actualResult").innerHTML += i;
+			   	}
+
+
+				//generic.InvokeMETAFunction("gesture", "");
+			}
+		        
+		}
+
+		(function(){
+		var pbTest = function(){
+		var pbTestObj = {};
+		pbTestObj.testCases = [
+		{
+			"VTID":"VT187 - 2480",
+			"RegLevel":"R1",
+			"Description":"Tilt Gesture Default Preset",
+			"PreCondition":[],
+			"Steps":["1.Set the Gesture type to tilt", "2.Do not set any parameter value for tilt gesture and create the gesture", "3.Attach the detect event", "4.Put the device in faceup position"],
+			"ExpectedOutcome":["Gesture event should get fired.Gesture ID should be Tilt-faceup"],
+			"testToPerform":function(){
+				myPage = document.getElementById('mainBlock').innerHTML;
+				var Gesturetype = "tilt";
+				var GestureID = "id1";
+				var Preset = "NULL";
+				var Diagonstics = "NULL";
+				var VTargetX = "NULL";
+				var VTargetY = "NULL";
+				var VTargetZ = "NULL";
+				var VTiltTolerance = "NULL";
+				var VHysteresis = "NULL";
+				var SelectedItem = "JavaScript";
+				var NumberOfGestures = 1;
+		    	performGesture(Gesturetype, GestureID, Preset, Diagonstics, VTargetX, VTargetY, VTargetZ, VTiltTolerance, VHysteresis, SelectedItem, NumberOfGestures);
+			},
+			"FinalResult":""
+		},
+		{
+			"VTID":"VT187 - 2481",
+			"RegLevel":"R1",
+			"Description":"Tilt Gesture Preset=upright",
+			"PreCondition":[],
+			"Steps":["1.Set the Gesture type to tilt", "2.Do not set any other parameter value for tilt gesture", "3.Set the preset to upright and create the gesture ", "4.Attach the detect event", "4.Put the device in upright position"],
+			"ExpectedOutcome":["Gesture event should get fired.Gesture ID should be Tilt-upright"],
+			"testToPerform":function(){
+				myPage = document.getElementById('mainBlock').innerHTML;
+				var Gesturetype = "tilt";
+				var GestureID = "id1";
+				var Preset = "upright";
+				var Diagonstics = "NULL";
+				var VTargetX = "NULL";
+				var VTargetY = "NULL";
+				var VTargetZ = "NULL";
+				var VTiltTolerance = "NULL";
+				var VHysteresis = "NULL";
+				var SelectedItem = "JavaScript";
+				var NumberOfGestures = 1;
+		    	performGesture(Gesturetype, GestureID, Preset, Diagonstics, VTargetX, VTargetY, VTargetZ, VTiltTolerance, VHysteresis, SelectedItem, NumberOfGestures);
+			},
+			"FinalResult":""
+		},
+		{
+			"VTID":"VT187 - 2488",
+			"RegLevel":"R1",
+			"Description":"Tilt Gesture Target-X =0 Target-Y =0 Target-Z = 90",
+			"PreCondition":[],
+			"Steps":["1.Set the Gesture type to tilt and ID to Mytiltgesture", "2.Set Target-X =0, Target-Y =0, Target-Z = 90", "3.Attach the detect event", "4.Move the device in faceup position" ],
+			"ExpectedOutcome":["Gesture event should get fired when device is moved in faceup position.Event parameters value should be returned inside event", "Notes  :  Event will return ID and Count."],
+			"testToPerform":function(){
+				myPage = document.getElementById('mainBlock').innerHTML;
+				var Gesturetype = "tilt";
+				var GestureID = "Mytiltgesture";
+				var Preset = "faceup";
+				var Diagonstics = "NULL";
+				var VTargetX = 0;
+				var VTargetY = 0;
+				var VTargetZ = 90;
+				var VTiltTolerance = "NULL";
+				var VHysteresis = "NULL";
+				var SelectedItem = "JavaScript";
+				var NumberOfGestures = 1;
+		    	performGesture(Gesturetype, GestureID, Preset, Diagonstics, VTargetX, VTargetY, VTargetZ, VTiltTolerance, VHysteresis, SelectedItem, NumberOfGestures);
+			},
+			"FinalResult":""
+		},
+		{
+			"VTID":"VT187 - 2490",
+			"RegLevel":"R1",
+			"Description":"Tilt Gesture Target-X =0 Target-Y =90 Target-Z = 0",
+			"PreCondition":[],
+			"Steps":["1.Set the Gesture type to tilt and ID to Mytiltgesture", "2.Set", "Target-X =0", "Target-Y =90", "Target-Z =0", "3.Attach the detect event", "4.Move the device in upright  position"],
+			"ExpectedOutcome":["Gesture event should get fired when device is moved in upright position.Event parameters value should be returned inside event", "Notes  :  Event will return ID and Count."],
+			"testToPerform":function(){
+				myPage = document.getElementById('mainBlock').innerHTML;
+				var Gesturetype = "tilt";
+				var GestureID = "Mytiltgesture";
+				var Preset = "upright";
+				var Diagonstics = "NULL";
+				var VTargetX = 0;
+				var VTargetY = 90;
+				var VTargetZ = 0;
+				var VTiltTolerance = "NULL";
+				var VHysteresis = "NULL";
+				var SelectedItem = "JavaScript";
+				var NumberOfGestures = 1;
+		    	performGesture(Gesturetype, GestureID, Preset, Diagonstics, VTargetX, VTargetY, VTargetZ, VTiltTolerance, VHysteresis, SelectedItem, NumberOfGestures);
+			},
+			"FinalResult":""
+		},
+		{
+			"VTID":"VT187 - 2492",
+			"RegLevel":"R1",
+			"Description":"Tilt Gesture Target-X =90 Target-Y =0 Target-Z =0",
+			"PreCondition":[],
+			"Steps":["1.Set the Gesture type to tilt and ID to Mytiltgesture", "2.Set", "Target-X =90", "Target-Y = 0", "Target-Z =0", "3.Attach the detect event", "4.Put the device in turn-left position"],
+			"ExpectedOutcome":["Gesture event should get fired when device is moved in turn-left position. Event parameters value should be returned inside event", "Notes  :  Event will return ID and Count."],
+			"testToPerform":function(){
+				myPage = document.getElementById('mainBlock').innerHTML;
+				var Gesturetype = "tilt";
+				var GestureID = "Mytiltgesture";
+				var Preset = "turn-left";
+				var Diagonstics = "NULL";
+				var VTargetX = 90;
+				var VTargetY = 0;
+				var VTargetZ = 0;
+				var VTiltTolerance = "NULL";
+				var VHysteresis = "NULL";
+				var SelectedItem = "JavaScript";
+				var NumberOfGestures = 1;
+		    	performGesture(Gesturetype, GestureID, Preset, Diagonstics, VTargetX, VTargetY, VTargetZ, VTiltTolerance, VHysteresis, SelectedItem, NumberOfGestures);
+			},
+			"FinalResult":""
+		},
+		{
+			"VTID":"VT187 - 2501",
+			"RegLevel":"R1",
+			"Description":"Tilt Gesture Tolerance=30",
+			"PreCondition":[],
+			"Steps":["1.Set the Gesture type to tilt and ID to Mytiltgesture", "2.Set", "Target-X =0", "Target-Y =0", "Target-Z =90", "3.Set Tolerance = 30", "4.Attach the detect event", "5.Take the device in face up position very slowly."],
+			"ExpectedOutcome":["Gesture should be detected when the devices all tilt angles are less than 30 degrees. Value of the tolerance should be 30."],
+			"testToPerform":function(){
+				myPage = document.getElementById('mainBlock').innerHTML;
+				var Gesturetype = "tilt";
+				var GestureID = "Mytiltgesture";
+				var Preset = "faceup";
+				var Diagonstics = "NULL";
+				var VTargetX = 0;
+				var VTargetY = 0;
+				var VTargetZ = 90;
+				var VTiltTolerance = 30;
+				var VHysteresis = "NULL";
+				var SelectedItem = "JavaScript";
+				var NumberOfGestures = 1;
+		    	performGesture(Gesturetype, GestureID, Preset, Diagonstics, VTargetX, VTargetY, VTargetZ, VTiltTolerance, VHysteresis, SelectedItem, NumberOfGestures);
+			},
+			"FinalResult":""
+		},
+		{
+			"VTID":"VT187 - 2513",
+			"RegLevel":"R1",
+			"Description":"Tilt Gesture Hysteresis= 45 Orienetation change>Hysteresis",
+			"PreCondition":[],
+			"Steps":["  1.Set the Gesture type to tilt and ID to Mytiltgesture", "2.Set", "Target-X =0", "Target-Y =90", "Target-Z =0", "Hysteresis= 45", "3.Attach the detect event", "4.Take the device in upright position very slowly.", "5.Now change the device orientation slowly from protrait up and change the angle more than 45 degrees.", "6.Again come back to portratit up position slowly."],
+			"ExpectedOutcome":[" Gesture should be detected both the times Value of the Hysteresis should be set to 45.How far the device must move away from the target orientation before the gesture can be detected again"],
+			"testToPerform":function(){
+				myPage = document.getElementById('mainBlock').innerHTML;
+				var Gesturetype = "tilt";
+				var GestureID = "Mytiltgesture";
+				var Preset = "upright";
+				var Diagonstics = "NULL";
+				var VTargetX = 0;
+				var VTargetY = 90;
+				var VTargetZ = 0;
+				var VTiltTolerance = "NULL";
+				var VHysteresis = 45;
+				var SelectedItem = "JavaScript";
+				var NumberOfGestures = 1;
+		    	performGesture(Gesturetype, GestureID, Preset, Diagonstics, VTargetX, VTargetY, VTargetZ, VTiltTolerance, VHysteresis, SelectedItem, NumberOfGestures);
+			},
+			"FinalResult":""
+		},
+		{
+			"VTID":"VT187 - 2549",
+			"RegLevel":"R1",
+			"Description":"Delete Tilt  Gesture",
+			"PreCondition":[],
+			"Steps":["1. Create a Tilt  Gesture with digonstic true", "2. Perform Tilt gesture", "3. Delete the gesture", "4.Again Perform Tilt gesture"],
+			"ExpectedOutcome":["Gesture should be detected first time.Gesture should not be detected after deleting the gesture.."],
+			"testToPerform":function(){
+				myPage = document.getElementById('mainBlock').innerHTML;
+				var Gesturetype = "tilt";
+				var GestureID = "Mytiltgesture";
+				var Preset = "NULL";
+				var Diagonstics = true;
+				var VTargetX = "NULL";
+				var VTargetY = "NULL";
+				var VTargetZ = "NULL";
+				var VTiltTolerance = "NULL";
+				var VHysteresis = "NULL";
+				var SelectedItem = "JavaScript";
+				var NumberOfGestures = 1;
+		    	performGesture(Gesturetype, GestureID, Preset, Diagonstics, VTargetX, VTargetY, VTargetZ, VTiltTolerance, VHysteresis, SelectedItem, NumberOfGestures);
+			},
+			"FinalResult":""
+		}
+		];
+		pbTestObj.afterEach = function(){
+			myPage = "";
+			EventCounter = 1;
+			DeleteGesture();
+		};
+		return pbTestObj;
+	}
+	window.pbTest = pbTest();
+})();
+(function(){
+	var main = function(){
+		var mainObj = {};
+		var r1List = [];
+		var r2List = [];
+		var r3List = [];
+		var testArray = [];
+		var index = 0;
+		var count = 0;
+		var choice = "";
+		var passCount = 0;
+		var failCount = 0;
+		var noRunCount = 0;
+		mainObj.init = function(){
+			for(key in pbTest.testCases){
+				if(pbTest.testCases[key].RegLevel == "R1"){
+					r1List.push(pbTest.testCases[key]);
+				}else if(pbTest.testCases[key].RegLevel == "R2"){
+					r2List.push(pbTest.testCases[key]);
+				}else if(pbTest.testCases[key].RegLevel == "R3"){
+					r3List.push(pbTest.testCases[key]);
+				}
+			}
+		};
+		mainObj.loadArrayList = function(data, eleId){
+			var retData = "";
+			if(eleId == "preCondition"){
+				retData = "<br><span class='heading'>PreConditions:</span>";
+			}else if(eleId == "steps"){
+				retData = "<br><span class='heading'>Steps:</span>";
+			}if(data.length>0){
+				retData += "<ul>";
+		        for (var i=0; i<data.length;i++){
+		            retData = retData + "<li>"+data[i]+"</li>"
+		        }
+		        retData = retData + "</ul>";
+		    }
+			
+		    document.getElementById(eleId).innerHTML = retData;
+		}
+		mainObj.onPageLoad = function(){
+			this.onRegLevelChange();
+		};
+		mainObj.loadTest = function(){
+			var vtElement = "";
+            var selectElement = "<select id='vtSelect' onchange='main.onVTIDChange()'></select>";
+            document.getElementById('vtsection').innerHTML = selectElement;
+            var selectList = document.getElementById('vtSelect');
+			for(key in testArray){
+				var option = document.createElement("OPTION");
+				option.text = testArray[key].VTID;
+				option.value = key;
+				selectList.add(option);
+			}
+			this.loadSingleTest(index);
+		};
+		mainObj.displayFinalResult = function(){
+			retHTMLData = "<table><tr><td class='title'>" + choice +" Test summay :</td></tr><tr><td class='block'><ul>";
+			for(key in testArray){
+				if(testArray[key].FinalResult=="Pass"){
+					passCount++;
+					retHTMLData = retHTMLData + "<li style='color:green'>" + testArray[key].Description + "</li>";	
+				}else if(testArray[key].FinalResult=="Fail"){
+					failCount++;
+					retHTMLData = retHTMLData + "<li style='color:red'>" + testArray[key].Description + "</li>";
+				}else{
+					noRunCount++;
+					retHTMLData = retHTMLData + "<li style='color:red;background:yellow'>" + testArray[key].Description + "</li>";
+				}
+			}
+			resultSummary = "<table class='block'><tr><td colspan=2 class='title'>Summary for "+choice+" cases</td></tr><tr><td>Pass</td><td style='color:green;font-weight:bold'>"+passCount+"</td></tr><tr><td>Fail</td><td style='color:red;font-weight:bold'>"+failCount+"</td></tr><tr><td>NoRun</td><td style='color:blue;font-weight:bold'>"+noRunCount+"</td></tr><tr style='color:black;font-weight:bold'><td>Total</td><td>"+parseInt(passCount+failCount+noRunCount)+"</td></tr></table>";
+			retHTMLData = retHTMLData + "</ul></td></tr></table><br><a href='../index.html'>Home</a>";
+			retHTMLData = resultSummary + retHTMLData;
+			document.getElementById('mainBlock').innerHTML = retHTMLData;
+		};
+		mainObj.loadSingleTest = function(index){
+			document.getElementById('vtid').innerHTML = testArray[index].VTID;
+			document.getElementById('desc').innerHTML = testArray[index].Description;
+			this.loadArrayList(testArray[index].PreCondition, "preCondition");
+			this.loadArrayList(testArray[index].Steps, "steps");
+			this.loadArrayList(testArray[index].ExpectedOutcome, "expected");
+			document.getElementById('actualResult').innerHTML = "";
+			var selectElement = document.getElementById('vtSelect');
+			selectElement.value = index;
+		};
+		mainObj.runThisTest = function(){
+			testArray[index].testToPerform();
+		};
+		mainObj.passThisTest = function(){
+			testArray[index].FinalResult = "Pass";
+            this.nextTest();
+		};
+		mainObj.failThisTest = function(){
+			testArray[index].FinalResult = "Fail";
+            this.nextTest();
+		}
+		mainObj.nextTest = function(){
+			pbTest.afterEach();
+			if(index<(count-1)){
+				index++;
+				this.loadSingleTest(index);
+			}else{
+				this.displayFinalResult();
+			}
+		};
+		mainObj.prevTest = function(){
+			pbTest.afterEach();
+			if(index>0){
+				index--;
+				this.loadSingleTest(index);
+			}else{
+				alert("No previous test cases to run");
+			}
+		};
+		mainObj.onVTIDChange = function(){
+			myVtIdChoice = document.getElementById("vtSelect").value;
+			index = myVtIdChoice;
+			this.loadSingleTest(myVtIdChoice);
+		};
+		mainObj.onRegLevelChange = function(){
+			var myChoice = document.getElementById("regLevel").value;
+			choice = myChoice;
+			document.getElementById('vtsection').innerHTML = "";
+
+			if(myChoice=="All"){
+				testArray = pbTest.testCases;
+				count = testArray.length;
+			}else if(myChoice=="R1"){
+				testArray=r1List;
+				count = testArray.length;
+			}else if(myChoice=="R2"){
+				testArray=r2List;
+				count = testArray.length;
+			}else if(myChoice=="R3"){
+				testArray=r3List;
+				count = testArray.length;
+			}
+			index = 0;
+			passCount = 0;
+			failCount = 0;
+			noRunCount = 0;
+			if(count>0){
+				this.loadTest();
+			}else{
+				document.getElementById("regLevel").value = "All";
+				this.onRegLevelChange();
+				alert("No Tests for the level selected");
+			}
+		};
+		mainObj.displayResult = function(res){
+			document.getElementById('actualResult').innerHTML = res;
+		};
+		return mainObj;
+	}
+	window.main = main();
+})();
+	</script>
+	<!--<script type="text/javascript" src="js/myMain.js"></script>-->
+	<script type="text/javascript">
+		main.init();
+	</script>
+</head>
+<body class="body" onload="main.onPageLoad()">
+<h3 class='title'>Semi Auto test for PB and RE2.2 : Hold Gesture</h3>
+<div id="mainBlock" class="mainBlock">
+	<div>
+		<span class="heading">Select Regression Level :</span>
+	    <select name="regLevel" id="regLevel" onchange="main.onRegLevelChange()">
+	        <OPTION value="All" >All</OPTION>
+	        <OPTION value="R1" >R1</OPTION>
+	        <OPTION value="R2" >R2</OPTION>
+	        <OPTION value="R3" >R3</OPTION>
+	    </select> 
+	</div>
+    <div>
+    	<span class="heading">Select Test Case to Run :</span>
+    	<div id='vtsection'>
+    	</div>
+    	
+    </div>
+    <div class="runners">
+    	<input type=button value="Previous" onclick="main.prevTest();" />
+		<input type=button value="Next" onclick="main.nextTest()" />
+		<input type="button" onclick="main.runThisTest()" value="Run Test"/>
+    </div>
+	<br>
+	<div class="block">
+	<span class="heading">VTID:</span>
+    <div id="vtid"></div><br>
+    <span class="heading">Test description:</span>
+    <div id="desc"></div>
+    <div id="preCondition"></div>
+    <div id="steps"></div>
+    <span class="heading">Expected result:</span>
+    <div id="expected"></div><br>
+    <input type="button" onclick="main.runThisTest()" value="Run Test"/>
+    <br><br>
+    <span class="heading">Actual result:</span>
+    <br>
+    <div id="actualResult"></div><br>
+    <input type="button" class="pass" onclick="main.passThisTest()" value="Pass"/>
+    <input type="button" class="fail" onclick="main.failThisTest()" value="Fail"/>
+    </div>
+	<br>
+	<div class="runners">
+		<input type=button value="Previous" onclick="main.prevTest();" />
+		<input type=button value="Next" onclick="main.nextTest()" />
+	</div>
+	</div>
+</body>
+</html>

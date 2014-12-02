@@ -1,0 +1,352 @@
+<html>
+<head>
+<script type="text/javascript" src="/public/re1/elements.js"></script>
+    <title>PB Generic ActiveX Object Test</title>
+
+<meta name="mobileoptimized" content="0" />
+<script language=javascript>
+
+var objGeneric = new ActiveXObject("PocketBrowser.Generic");
+var strConnection = "My Connection";
+var strUsername = "";
+var strPassword = "";
+var strDomain = "";
+var validexitCode = "";
+
+function doConnect() {
+	Status.innerHTML = 'Connecting to ' + strConnection + ' ...';
+	objGeneric.RasConnect(strConnection, strUsername, strPassword, strDomain);
+	var vStatus = objGeneric.ConnectionStatus(strConnection);
+	if (vStatus == 8192)
+		Status.innerHTML = 'Connected.';
+	else if (vStatus == 8193)
+		Status.innerHTML = 'Connect failed.  Please disconnect.';
+	else
+		Status.innerHTML = "Connect error " + vStatus;
+	//Generic.RasDisconnect(strConnection)
+}
+
+function doDisconnect() {
+	Status.innerHTML = 'Disconnecting from ' + strConnection + ' ...';
+	objGeneric.RasDisconnect(strConnection)
+	//Generic.RasConnect(strConnection, strUsername, strPassword, strDomain);
+	var vStatus = objGeneric.ConnectionStatus(strConnection);
+	if (vStatus == -1)
+		Status.innerHTML = 'Disconnected.';
+	else
+		Status.innerHTML = "Disconnect error " + vStatus;
+}
+
+function doStatus() {
+	
+	var vStatus = objGeneric.ConnectionStatus("My Connection");
+	if (vStatus == -1)
+		Status2.innerHTML = 'Status - Not connected (' + vStatus + ')';
+	else if (vStatus == 8192)
+		Status2.innerHTML = 'Status - Connected (' + vStatus + ')';
+	else if (vStatus == 8193)
+		Status2.innerHTML = 'Status - Disconnected (' + vStatus + ')';
+	else
+		Status2.innerHTML = 'Status - Error (' + vStatus + ')';
+}
+
+function imageName123()
+{
+	var filePath1=frm.txtimageName1.value;
+	validexitCode = objGeneric.LaunchProcessNonBlocking(filePath1, '');
+}
+function imageName()
+{
+	var filePath=frm.txtimageName.value;
+	var x = objGeneric.LaunchProcessNonBlocking(filePath, '');
+	alert('Return code of non blocking call was: ' +x);
+}
+
+function iName()
+{
+	var fPath=frm.txtiName.value;
+	var result=objGeneric.LaunchProcess(fPath, '');
+	alert('Return code of blocking call was: ' + result);
+}
+
+function exitCode()
+{
+	var SIndex=frm.exitdropdown.selectedIndex;
+	var sValue = frm.exitdropdown.options[SIndex].value;
+	switch(sValue)
+	{
+		case 'Valid':
+			alert('Return code of exit process was: ' + objGeneric.GetProcessExitCode(validexitCode));
+			break;
+
+		case 'Invalid':
+			alert('Return code of exit process was:' + objGeneric.GetProcessExitCode(ivalidexitCode));
+			break;
+
+		case 'Null':
+			alert('Return code of exit process was:' + objGeneric.GetProcessExitCode());
+			break;
+	}
+}
+
+function cProcess()
+{
+	var SlectedIndex=frm.closedropdown.selectedIndex;
+	var selectedValue = frm.closedropdown.options[SlectedIndex].value;
+	switch(selectedValue)
+	{
+		case 'Valid':
+			objGeneric.CloseProcess(validexitCode);
+			break;
+
+		case 'Invalid':
+			objGeneric.CloseProcess(ivalidcode);
+
+			break;
+
+		case 'Null':
+            objGeneric.CloseProcess();
+
+			break;
+	}
+}
+
+function waitPros()
+{
+		var pPath = frm.txtprocessPath.value;
+		var ptimeout = frm.txttimeout.value;
+		var hProcess =objGeneric.LaunchProcessNonBlocking(pPath, '');
+   		var bRetVal = objGeneric.WaitProcess(hProcess, ptimeout);
+		alert("wait process return value is-"+bRetVal);
+
+}
+
+function hourGlass()
+{
+	var glassIndex=frm.glassdropdown.selectedIndex;
+	var glassValue = frm.glassdropdown.options[glassIndex].value;
+	switch(glassValue)
+	{
+		case 'Show':
+			objGeneric.ShowHourglass();
+			break;
+
+		case 'Hide':	
+			objGeneric.HideHourglass();
+			break;
+
+	}
+}
+
+function invoke()
+{
+	var invokeIndex=frm.invokedropdown.selectedIndex;
+	var invokeValue = frm.invokedropdown.options[invokeIndex].value;
+	switch(invokeValue)
+	{
+		case 'Method':
+			objGeneric.InvokeMETAFunction('Scanner', 'Enabled');
+			break;
+
+		case 'Property':
+			objGeneric.InvokeMETAFunction('Signal', 'Visibility:Visible');
+			break;
+
+		case 'M Property':
+			objGeneric.InvokeMETAFunction('Battery', 'Left:50; Top:50; color:#FF0000; visibility:visible');
+			break;
+
+		case 'M Invoke':
+			objGeneric.InvokeMETAFunction('Signal', 'visibility:visible');
+			objGeneric.InvokeMETAFunction('Signal', 'Top:150');
+			objGeneric.InvokeMETAFunction('Signal', 'Left:150');
+			break;	
+			
+		case 'Invalid':
+			objGeneric.InvokeMETAFunction('Imager', '');
+			break;
+
+	}
+}
+
+function playfile()
+{
+	var pathfile = frm.txtwavfile.value;
+	objGeneric.PlayWave(pathfile, 16);
+}
+
+function play()
+{
+
+	var pWav="";
+	pWav = frm.txtwavPath.value;
+
+	var playIndex=frm.playdropdown.selectedIndex;
+	var playValue = frm.playdropdown.options[playIndex].value;
+	switch(playValue)
+	{
+		case 'Zero':
+			objGeneric.PlayWave(pWav, 0);
+			break;
+
+		case 'One':
+			objGeneric.PlayWave(pWav, 1);
+			break;
+
+		case 'Two':
+			objGeneric.PlayWave(pWav, 2);
+			break;
+
+		case 'Four':
+			objGeneric.PlayWave(pWav, 4);
+			break;
+		case 'Eight':
+		
+			objGeneric.PlayWave(pWav, 8);
+			//alert('Hello');
+			break;
+
+		case 'Ten':
+			objGeneric.PlayWave(pWav, 16);
+			//alert('HelloWorld');
+			break;
+			
+		case 'Eightwithone':
+			objGeneric.PlayWave(pWav, 9);
+			//alert('HelloWorld');
+			break;
+			
+		case 'Eightwithtwo':
+			objGeneric.PlayWave(pWav, 10);
+			//alert('HelloWorld');
+			break;		
+
+
+	}
+}
+
+function uuidmethod()
+{
+	alert(objGeneric.UUID);
+	//alert("generic: " + generic.UUID);
+}
+
+function OEMInfomethod()
+{
+	alert(objGeneric.OEMInfo);
+	//alert("oeminfo: " + generic.OEMInfo);
+}
+
+function doQuit()
+{
+
+objGeneric.invokeMetaFunction("Application","quit");
+}
+
+</script>
+
+</head>
+<body>
+<form id="frm" action="">
+
+<hr>
+<!-- id="playfile" -->
+LaunchProcessNonBlocking:	</td><td><Textarea id="txtimageName"cols="28" rows="1">\Application\MemoryCheck.exe</Textarea>
+<input type=button onclick="imageName();" value="NonBlocking">
+<BR><BR>
+
+
+LaunchProcess:	</td><td><Textarea id="txtiName"cols="28" rows="1">\Application\MemoryCheck.exe</Textarea>
+<input type=button onclick="iName();" value="Blocking">
+<BR>
+<hr>
+<BR>
+Close & Exit Process:	</td><td><Textarea id="txtimageName1"cols="28" rows="1">\Application\MemoryCheck.exe</Textarea>
+<input type=button onclick="imageName123();" value="Close & Exit">
+<br>
+GetProcessExitCode:	<select name="exitdropdown" id="exitdropdown" onChange="exitCode();">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="Valid">Valid</option>
+<option value="Invalid">Invalid</option>
+<option value="Null">Null</option>
+</select>
+<BR><BR>
+
+CloseProcess:	<select name="closedropdown" id="closedropdown" onChange="cProcess();">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="Valid">Valid</option>
+<option value="Invalid">Invalid</option>
+<option value="Null">Null</option>
+</select>
+<BR>
+<hr>
+<BR>
+<hr>
+<!-- id="waitPros" -->
+ProcessPath:	</td><td><Textarea id="txtprocessPath"cols="21" rows="1">\Application\MemoryCheck.exe</Textarea>
+Timeout:	</td><td><Textarea id="txttimeout"cols="3" rows="1"></Textarea><br>
+<input type=button  onclick="Javascript:waitPros();" value="WaitProcess">
+<BR>
+<hr>
+<BR>
+
+<!--
+HourGlass:	<select name="glassdropdown" id="glassdropdown" onChange="hourGlass();">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="Show">Show</option>
+<option value="Hide">Hide</option>
+</select>
+<BR><BR>-->
+
+InvokeMetaTag:	<select name="invokedropdown" id="invokedropdown" onChange="invoke();">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="Method">Method</option>
+<option value="Property">Property</option>
+<option value="M Property">M Property</option>
+<option value="M Invoke">M Invoke</option>
+<option value="Invalid">Invalid</option>
+</select>
+<BR><BR>
+
+<!-- id="playfile" -->
+<!--WaveFile:	</td><td><Textarea id="txtwavfile"cols="21" rows="1">\Windows\alarm5.wav</Textarea>-->
+<input type=text name="txtwavfile" id="txtwavfile" value="\Windows\alarm5.wav" />
+<INPUT type=button onclick="Javascript:playfile();" value="PlayWav">
+<p><input type="button" onclick="doQuit()" value="Quit" /></p>
+<BR><BR>
+
+WaveFilePath:	</td><td><Textarea id="txtwavPath"cols="21" rows="1">\Windows\alarm5.wav</Textarea>
+PlayWave:	<select name="playdropdown" id="playdropdown" onChange="play();">
+<OPTION SELECTED VALUE="">Select</OPTION>
+<option value="Zero">Zero</option>
+<option value="One">One</option>
+<option value="Two">Two</option>
+<option value="Four">Four</option>
+<option value="Eight">Eight</option>
+<option value="Ten">Ten</option>
+<option value="Eightwithone">Eightwithone</option>
+<option value="Eightwithtwo">Eightwithtwo</option>
+</select>
+<BR><BR>
+
+<!-- id="uuidmethod" -->
+<input type="button" onclick="Javascript:uuidmethod();" value="UUID">
+<BR><BR>
+
+<!-- id="OEMInfomethod" -->
+<input type="button" onclick="Javascript:OEMInfomethod();" value="OEMInfo">
+<BR><BR>
+
+<div id="Status">Press connect to begin</div>
+<p><input type="button" value="&nbsp;&nbsp;Connect&nbsp;&nbsp;" onclick="doConnect();"></p>
+<p><input type="button" value="Disconnect" onclick="doDisconnect();"></p>
+<p><input type="button" value="&nbsp;&nbsp;&nbsp;Status&nbsp;&nbsp;&nbsp;" onclick="doStatus();"></P>
+<div id="Status2"> </div>
+<BR>
+
+<A HREF="./Generic ActiveX Object.html">Back</A>
+
+
+</form>
+</body>
+</html>
