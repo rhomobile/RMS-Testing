@@ -19,8 +19,8 @@ describe("Camera API Manual Tests", function(){
 		cbkResponseTimeout = true;
 	}
 
-	var getCallbackData = function(camArray){
-		camArray = camArray;
+	var getCallbackData = function(camArr){
+		camArray = camArr;
 		cbkResponseTimeout = true;
 	}
 
@@ -126,7 +126,7 @@ describe("Camera API Manual Tests", function(){
 			runs(function(){
 				var data = {};
 
-				if(isAndroid())
+				if(isAndroidPlatform())
 					data.compressionFormat = 'png';
 				else
 					data.compressionFormat = 'jpg';
@@ -313,7 +313,7 @@ describe("Camera API Manual Tests", function(){
 			},"waiting for callback data", 2000);
 
 			runs(function(){
-				spec.addResult(camArray.toString());
+				spec.addResult(JSON.stringify(camArray));
 				spec.displayResults();
                 spec.waitForResponse();
 			});		            
@@ -322,7 +322,7 @@ describe("Camera API Manual Tests", function(){
 
 	});
 
-	if (isAndroid()) {
+	if (isAndroidPlatform()) {
 		describe("getCameraByType method & showSupportedList property", function() {
 
 			it("Should call getCameraByType with Main and callback as function ", function(){
@@ -832,7 +832,7 @@ describe("Camera API Manual Tests", function(){
 					
 				});
 
-				if (isAndroid()) {	
+				if (isAndroidPlatform()) {	
 
 					it("Should call takePicture with flashMode FLASH_AUTO in dark area | " + camid + camtype , function(){
 						var spec = new ManualSpec(jasmine, window.document);
