@@ -39,7 +39,7 @@ describe("Camera API Manual Tests", function(){
         	spec.addGoal(jasmine.getEnv().currentSpec.description);
             spec.addStep("Press 'RunTest' button");
             spec.addStep("Choose the image");
-            spec.addStep("Check for the returned status & imagePath");
+            spec.addStep("Check for the returned status & image");
             spec.addExpectation('The returned status should be OK, image should be displayed through image URI, The returned image height and width should be same as the displayed image.');
             spec.displayScenario();
             spec.waitForButtonPressing("Run test");
@@ -112,7 +112,7 @@ describe("Camera API Manual Tests", function(){
 
 		});
 
-		it("Should call choosePicture with callback as anonymous function and check for returned imageFormat", function(){
+		it("Should call choosePicture with callback as anonymous function and check for returned compressionFormat", function(){
 			var spec = new ManualSpec(jasmine, window.document);
         	spec.addGoal(jasmine.getEnv().currentSpec.description);
             spec.addStep("Press 'RunTest' button");
@@ -127,9 +127,9 @@ describe("Camera API Manual Tests", function(){
 				var data = {};
 
 				if(isAndroid())
-					data.imageFormat = 'png';
+					data.compressionFormat = 'png';
 				else
-					data.imageFormat = 'jpg';
+					data.compressionFormat = 'jpg';
 
 
 				Rho.Camera.choosePicture(data, function(cbData){
@@ -212,7 +212,7 @@ describe("Camera API Manual Tests", function(){
 
 		});
 
-		it("Should call choosePicture with 'compressionFormat' property value as png", function(){
+		xit("Should call choosePicture with 'compressionFormat' property value as png", function(){
 			var spec = new ManualSpec(jasmine, window.document);
         	spec.addGoal(jasmine.getEnv().currentSpec.description);
             spec.addStep("Press 'RunTest' button");
@@ -443,10 +443,13 @@ describe("Camera API Manual Tests", function(){
 
 						runs(function(){
 							objCAM.showPreview({'fileName':'\\Application\\camImage', 'captureSound':'alarm5.wav'
-								'compressionFormat':'png', 'outputFormat':'imageUri', 'flashMode':'on', 'aimMode':'on', 
+								'compressionFormat':'png', 'outputFormat':'dataUri', 'flashMode':'on', 'aimMode':'on', 
 								'desiredHeight':720, 'desiredWidth':1080, 'previewLeft':80, 'previewTop':10, 'previewWidth':100, 'previewHeight':60
 							}, callbackFunc);
-							objCAM.capture();
+
+							waitsFor(function(){
+								objCAM.capture();
+							},"waiting 2secs for capture", 2000);
 						});
 
 						waitsFor(function(){
@@ -465,19 +468,22 @@ describe("Camera API Manual Tests", function(){
 					it("Should call showPreview with properties & capture - Set 2 |" + camid + camtype , function(){
 						var spec = new ManualSpec(jasmine, window.document);
 			        	spec.addGoal(jasmine.getEnv().currentSpec.description);
-			        	spec.addPrecondition("Call showPreview with propertyhash as fileName:camImage123, desiredHeight:360, desiredWidth:480, compressionFormat:jpg, outputFormat:imagePath, flashMode:off, previewLeft:80, previewTop:10, previewWidth:40, previewHeight:120, aimMode:off, captureSound:'' and callback.");
+			        	spec.addPrecondition("Call showPreview with propertyhash as fileName:camImage123, desiredHeight:360, desiredWidth:480, compressionFormat:jpg, outputFormat:image, flashMode:off, previewLeft:80, previewTop:10, previewWidth:40, previewHeight:120, aimMode:off, captureSound:'' and callback.");
 			            spec.addStep("Press 'RunTest' button");
 			            spec.addStep("Check for the returned callback status & property set");
-			            spec.addExpectation('The viewfinder with properties set should reflect. The returned status should be OK and captured imagePath should be displayed with all callback properties. Also flashMode should be OFF for color camera & aimMode OFF for imager camera. Should not be any sound played after capture.');
+			            spec.addExpectation('The viewfinder with properties set should reflect. The returned status should be OK and captured image should be displayed with all callback properties. Also flashMode should be OFF for color camera & aimMode OFF for imager camera. Should not be any sound played after capture.');
 			            spec.displayScenario();
 			            spec.waitForButtonPressing("Run test");
 
 						runs(function(){
-							objCAM.showPreview({'fileName':'camImage123', 'compressionFormat':'jpg', 'outputFormat':'imagePath', 
+							objCAM.showPreview({'fileName':'camImage123', 'compressionFormat':'jpg', 'outputFormat':'image', 
 								'flashMode':'off', 'aimMode':'off', 'captureSound':'', 'desiredHeight':360, 'desiredWidth':480,
 								'previewLeft':80, 'previewTop':10, 'previewWidth':40, 'previewHeight':120
 							}, callbackFunc);
-							objCAM.capture();
+
+							waitsFor(function(){
+								objCAM.capture();
+							},"waiting 2secs for capture", 2000);
 						});
 
 						waitsFor(function(){
@@ -797,7 +803,7 @@ describe("Camera API Manual Tests", function(){
 					});
 
 					runs(function(){
-						objCAM.flashMode.FLASH_AUTO
+						objCAM.flashMode.FLASH_OFF
 					});	
 				});
 
@@ -811,8 +817,7 @@ describe("Camera API Manual Tests", function(){
 		            spec.waitForButtonPressing("Run test");
 
 					runs(function(){
-						objCAM.flashMode.FLASH_OFF;
-						objCAM.takePicture({}, callbackFunc);
+						objCAM.takePicture({'flashMode':'off'}, callbackFunc);
 					});
 
 					waitsFor(function(){
@@ -824,10 +829,7 @@ describe("Camera API Manual Tests", function(){
 						spec.displayResults();
 		                spec.waitForResponse();
 					});
-
-					runs(function(){
-						objCAM.flashMode.FLASH_AUTO
-					});						
+					
 				});
 
 				if (isAndroid()) {	
@@ -993,7 +995,7 @@ describe("Camera API Manual Tests", function(){
 
 				};
 
-				it("Should call takePicture with outputFormat:imageUri  | " + camid + camtype , function(){
+				it("Should call takePicture with outputFormat:dataUri  | " + camid + camtype , function(){
 					var spec = new ManualSpec(jasmine, window.document);
 		        	spec.addGoal(jasmine.getEnv().currentSpec.description);
 		            spec.addStep("Press 'RunTest' button");
@@ -1003,7 +1005,7 @@ describe("Camera API Manual Tests", function(){
 		            spec.waitForButtonPressing("Run test");
 
 					runs(function(){
-						objCAM.takePicture({'outputFormat':'imageUri'}, callbackFunc);
+						objCAM.takePicture({'outputFormat':'dataUri'}, callbackFunc);
 					});
 
 					waitsFor(function(){
@@ -1100,7 +1102,7 @@ describe("Camera API Manual Tests", function(){
 		            spec.addStep("Press 'RunTest' button");
 		            spec.addStep("Capture any image.");
 		            spec.addStep("Check for the returned URI to the taken image stored on the device.");
-		            spec.addExpectation('The image should get stored at device default loaction and name of the image should be as set, cameraImage123. The callback data should have imagePath of the stored image.');
+		            spec.addExpectation('The image should get stored at device default loaction and name of the image should be as set, cameraImage123. The callback data should have image of the stored image.');
 		            spec.displayScenario();
 		            spec.waitForButtonPressing("Run test");
 
