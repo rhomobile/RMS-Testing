@@ -1,1620 +1,1316 @@
-describe("Camera Manual Test", function() {
-	
-	var ENABLE5K = 5000;
-	var ENABLE1K = 1000;
+describe("Camera API Manual Tests", function(){
+
 	var enumData = Rho.Camera.enumerate();
-	var enableFlag = false;
-	var decodeFlag = false;
-	var callbackststatus = false;
+	var callbackData = "";
+	var cbkResponseTimeout = false;
+	var camArray = null;
+	var imageUriData = null;
 	
-	if(Rho.System.platform == 'ANDROID')
-	{
-		ENABLE5K = 0; ENABLE1K = 0;
+	var callbackFunc = function(cbData){
+
+		callbackData = "status : " + cbData.status;
+		callbackData += "\nmessage : " + cbData.message;
+		callbackData += "\nimageHeight : " + cbData.imageHeight;
+		callbackData += "\nimageWidth : " + cbData.imageWidth;
+		callbackData += "\nimageFormat : " + cbData.imageFormat;
+		callbackData += "\nimageUri : " + cbData.imageUri;
+
+		imageUriData = cbData.imageUri;
+		cbkResponseTimeout = true;
 	}
 
-	var callbacktake = function (data){
-			callbackdata(data);
-			callbackststatus = true;
+	var getCallbackData = function(camArr){
+		camArray = camArr;
+		cbkResponseTimeout = true;
 	}
 
-	var callbacktakeuri = function (data){
-			callbackdatauri(data);
-			callbackststatus = true;
-	}
+	beforeEach(function(){
+		callbackData = "";
+		imageUriData = null;
+		document.getElementById('imageUri').src = '';
+		cbkResponseTimeout = false;
+	});
 
-	var callbacktakeraw = function (data){
-			callbackdataraw(JSON.stringify(data));
-	}
 
-   for (var j = 0;j<enumData.length;j++){
+	describe("Select picture using choosePicture method", function() {
 
-	   (function(objCAM){ 
+		it("should choosePicture with callback status OK", function(){
+			var spec = new ManualSpec(jasmine, window.document);
+        	spec.addGoal(jasmine.getEnv().currentSpec.description);
+            spec.addStep("Press 'RunTest' button");
+            spec.addStep("Choose the image");
+            spec.addStep("Check for the returned status & image");
+            spec.addExpectation('The returned status should be OK, image should be displayed through image URI, The returned image height and width should be same as the displayed image.');
+            spec.displayScenario();
+            spec.waitForButtonPressing("Run test");
+
+			runs(function(){
+				Rho.Camera.choosePicture({}, callbackFunc);
+			});
+
+			waitsFor(function(){
+				return cbkResponseTimeout;
+			},"waiting for callback data", 10000);
+
+			runs(function(){
+				spec.addResult(callbackData);
+				spec.displayResults();
+                spec.waitForResponse();
+			});
+
+		});
+
+		it("should choosePicture with callback status cancel", function(){
+			var spec = new ManualSpec(jasmine, window.document);
+        	spec.addGoal(jasmine.getEnv().currentSpec.description);
+            spec.addStep("Press 'RunTest' button");
+            spec.addStep("Cancel the choosing of image");
+            spec.addStep("Check for the returned status");
+            spec.addExpectation('The returned status should be cancel.');
+            spec.displayScenario();
+            spec.waitForButtonPressing("Run test");
+			
+			runs(function(){
+				Rho.Camera.choosePicture({}, callbackFunc);
+			});
+
+			waitsFor(function(){
+				return cbkResponseTimeout;
+			},"waiting for callback data", 10000);
+
+			runs(function(){
+				spec.addResult(callbackData);
+				spec.displayResults();
+                spec.waitForResponse();
+			});
+
+		});
+
+		it("should choosePicture with callback status error and error message", function(){
+			var spec = new ManualSpec(jasmine, window.document);
+        	spec.addGoal(jasmine.getEnv().currentSpec.description);
+            spec.addStep("Press 'RunTest' button");
+            spec.addStep("Choose some other file instead of image file");
+            spec.addStep("Check for the returned status and returned message");
+            spec.addExpectation('The returned status should be error and messge should containg the information on error.');
+            spec.displayScenario();
+            spec.waitForButtonPressing("Run test");
+
+			runs(function(){
+				Rho.Camera.choosePicture({}, callbackFunc);
+			});
+
+			waitsFor(function(){
+				return cbkResponseTimeout;
+			},"waiting for callback data", 10000);
+
+			runs(function(){
+				spec.addResult(callbackData);
+				spec.displayResults();
+                spec.waitForResponse();
+			});
+
+		});
+
+		it("Should call choosePicture with callback as anonymous function and check for returned compressionFormat", function(){
+			var spec = new ManualSpec(jasmine, window.document);
+        	spec.addGoal(jasmine.getEnv().currentSpec.description);
+            spec.addStep("Press 'RunTest' button");
+            spec.addStep("Choose the image");
+            spec.addStep("Save the image at device folders");
+            spec.addStep("Check for the returned imageFormat");
+            spec.addExpectation('The returned status should be OK and the returned image format should be same with the saved image format in device.');
+            spec.displayScenario();
+            spec.waitForButtonPressing("Run test");
+
+			runs(function(){
+				var data = {};
+
+				if(isAndroidPlatform())
+					data.compressionFormat = 'png';
+				else
+					data.compressionFormat = 'jpg';
+
+
+				Rho.Camera.choosePicture(data, function(cbData){
+
+					callbackData = "status : " + cbData.status;
+					callbackData += "\nmessage : " + cbData.message;
+					callbackData += "\nimageHeight : " + cbData.imageHeight;
+					callbackData += "\nimageWidth : " + cbData.imageWidth;
+					callbackData += "\nimageFormat : " + cbData.imageFormat;
+					callbackData += "\nimageUri : " + cbData.imageUri;
+
+					cbkResponseTimeout = true;
+
+				});
+			});
+
+			waitsFor(function(){
+				return cbkResponseTimeout;
+			},"waiting for callback data", 10000);
+
+			runs(function(){
+				spec.addResult(callbackData);
+				spec.displayResults();
+                spec.waitForResponse();
+			});
+
+		});
+
+
+		it("Should call choosePicture with property as colorModel, desiredHeight , desiredWidth and callback", function(){
+			var spec = new ManualSpec(jasmine, window.document);
+        	spec.addGoal(jasmine.getEnv().currentSpec.description);
+            spec.addStep("Press 'RunTest' button");
+            spec.addPrecondition("Call choosePicture with propertyhash as colorModel:greyscale, desiredHeight:640 , desiredWidth:480 and callback.");
+            spec.addStep("Choose the image.");
+            spec.addStep("Display the image on view and Check for the color and size of image");
+            spec.addExpectation('The displayed image should be in grey mode with desiredHeight as 640 and desiredWidth as480.');
+            spec.displayScenario();
+            spec.waitForButtonPressing("Run test");
+			
+			runs(function(){
+				Rho.Camera.choosePicture({'colorModel':'greyscale','desiredHeight':640,'desiredWidth':480}, callbackFunc);
+			});
+
+			waitsFor(function(){
+				return cbkResponseTimeout;
+			},"waiting for callback data", 10000);
+
+			runs(function(){
+				spec.addResult(callbackData);
+				spec.displayResults();
+                spec.waitForResponse();
+			});
+
+		});
+
+		it("Should call choosePicture with 'outputFormat' property value as datauri ", function(){
+			var spec = new ManualSpec(jasmine, window.document);
+        	spec.addGoal(jasmine.getEnv().currentSpec.description);
+            spec.addStep("Press 'RunTest' button");
+            spec.addStep("Choose the image.");
+            spec.addStep("Check the image on view");
+            spec.addExpectation('The chosen image should be returned as Data URI object.');
+            spec.displayScenario();
+            spec.waitForButtonPressing("Run test");
+
+			runs(function(){
+				Rho.Camera.choosePicture({'outputFormat':'dataUri'}, callbackFunc);
+			});
+
+			waitsFor(function(){
+				return cbkResponseTimeout;
+			},"waiting for callback data", 10000);
+
+			runs(function(){
+				spec.addResult(callbackData);
+				spec.displayResults();
+                spec.waitForResponse();
+			});
+
+		});
+
+		xit("Should call choosePicture with 'compressionFormat' property value as png", function(){
+			var spec = new ManualSpec(jasmine, window.document);
+        	spec.addGoal(jasmine.getEnv().currentSpec.description);
+            spec.addStep("Press 'RunTest' button");
+            spec.addStep("Choose the image.");
+            spec.addStep("Check for the returned status and returned message");
+            spec.addExpectation('The returned status should be OK and png image should be saved in Android & iOS but error in WM and messge should containg the information on error as png format is not supported.');
+            spec.displayScenario();
+            spec.waitForButtonPressing("Run test");
+
+			runs(function(){
+				Rho.Camera.choosePicture({'compressionFormat':'png'}, callbackFunc);
+			});
+
+			waitsFor(function(){
+				return cbkResponseTimeout;
+			},"waiting for callback data", 10000);
+
+			runs(function(){
+				spec.addResult(callbackData);
+				spec.displayResults();
+                spec.waitForResponse();
+			});
+
+		});
+
+		it("should choosePicture with callback and minimize", function(){
+			var spec = new ManualSpec(jasmine, window.document);
+        	spec.addGoal(jasmine.getEnv().currentSpec.description);
+            spec.addStep("Press 'RunTest' button");
+            spec.addStep("Minimize the Application without choosing the file");
+            spec.addStep("Check for the returned status and returned message");
+            spec.addExpectation('The returned status should be error and messge should containg the information on error.');
+            spec.displayScenario();
+            spec.waitForButtonPressing("Run test");
+			
+			runs(function(){
+				Rho.Camera.choosePicture({}, callbackFunc);
+			});
+
+			waitsFor(function(){
+				return cbkResponseTimeout;
+			},"waiting for callback data", 10000);
+
+			runs(function(){
+				spec.addResult(callbackData);
+				spec.displayResults();
+                spec.waitForResponse();
+			});
+
+		});
+
+		it("should choosePicture with callback and suspend the device", function(){
+			var spec = new ManualSpec(jasmine, window.document);
+        	spec.addGoal(jasmine.getEnv().currentSpec.description);
+            spec.addStep("Press 'RunTest' button");
+            spec.addStep("Suspend the device and resume without choosing the file");
+            spec.addStep("Check for the returned status and returned message");
+            spec.addExpectation('The returned status should be error and messge should containg the information on error.');
+            spec.displayScenario();
+            spec.waitForButtonPressing("Run test");
+
+			runs(function(){
+				Rho.Camera.choosePicture({}, callbackFunc);
+			});
+
+			waitsFor(function(){
+				return cbkResponseTimeout;
+			},"waiting for callback data", 10000);
+
+			runs(function(){
+				spec.addResult(callbackData);
+				spec.displayResults();
+                spec.waitForResponse();
+			});
+
+		});
+
+	});
+
+
+	describe("Enumerate Camera with callback ", function() {
+
+		it("Should enumerate with callback", function(){
+			var spec = new ManualSpec(jasmine, window.document);
+        	spec.addGoal(jasmine.getEnv().currentSpec.description);
+            spec.addStep("Press 'RunTest' button");
+            spec.addStep("Check for the returned object.");
+            spec.addExpectation('The returned object should contain the available cameras of device.');
+            spec.displayScenario();
+            spec.waitForButtonPressing("Run test");
+			
+			runs(function(){
+				Rho.Camera.enumerate(getCallbackData);
+			});
+
+			waitsFor(function(){
+				return cbkResponseTimeout;
+			},"waiting for callback data", 2000);
+
+			runs(function(){
+				spec.addResult(JSON.stringify(camArray));
+				spec.displayResults();
+                spec.waitForResponse();
+			});		            
+
+		});
+
+	});
+
+	if (isAndroidPlatform()) {
+		describe("getCameraByType method & showSupportedList property", function() {
+
+			it("Should call getCameraByType with Main and callback as function ", function(){
+				var spec = new ManualSpec(jasmine, window.document);
+	        	spec.addGoal(jasmine.getEnv().currentSpec.description);
+	            spec.addStep("Press 'RunTest' button");
+	            spec.addStep("If return value is main camera call takepicture using return value");
+	            spec.addExpectation('The return values should be main camera object and the main camera should open to take picture.');
+	            spec.displayScenario();
+	            spec.waitForButtonPressing("Run test");
+
+	            runs(function(){
+					Rho.Camera.getCameraByType({'cameraType':'Main'}, getCallbackData);
+				});
+
+				waitsFor(function(){
+					return cbkResponseTimeout;
+				},"waiting for callback data", 10000);
+
+				runs(function(){
+					cbkResponseTimeout = false;
+					if(getCallbackData == 'main'){
+						Rho.Camera.takepicture({},callbackFunc);
+					}
+				});
+
+				waitsFor(function(){
+					return cbkResponseTimeout;
+				},"waiting for callback data", 10000);
+
+				runs(function(){
+					spec.addResult(callbackData);
+					spec.displayResults();
+	                spec.waitForResponse();
+				});
+			});
+
+			it("Should call getCameraByType with front and without callback function ", function(){
+				var spec = new ManualSpec(jasmine, window.document);
+	        	spec.addGoal(jasmine.getEnv().currentSpec.description);
+	            spec.addStep("Press 'RunTest' button");
+	            spec.addStep("If return value is Front camera call takepicture using return value");
+	            spec.addExpectation('The return values should be main camera object and the main camera should open to take picture.');
+	            spec.displayScenario();
+	            spec.waitForButtonPressing("Run test");
+
+	            runs(function(){
+					Rho.Camera.getCameraByType({'cameraType':'Front'});
+				});
+
+				waitsFor(function(){
+					return cbkResponseTimeout;
+				},"waiting for callback data", 10000);
+
+				runs(function(){
+					cbkResponseTimeout = false;
+					if(getCallbackData == 'front'){
+						Rho.Camera.takepicture({},callbackFunc);
+					}
+				});
+
+				waitsFor(function(){
+					return cbkResponseTimeout;
+				},"waiting for callback data", 10000);
+
+				runs(function(){
+					spec.addResult(callbackData);
+					spec.displayResults();
+	                spec.waitForResponse();
+				});				
+
+			});
+
+			it("Should list supported resolution using showSupportedList " , function(){
+				var spec = new ManualSpec(jasmine, window.document);
+	        	spec.addGoal(jasmine.getEnv().currentSpec.description);
+	            spec.addStep("Press 'RunTest' button");
+	            spec.addStep("Check for the return value");
+	            spec.addExpectation('The return values should be an array of width and height which are supported by the device.');
+	            spec.displayScenario();
+	            spec.waitForButtonPressing("Run test");
+
+	            var supportedList = "";
+
+	            runs(function(){
+					supportedList = Rho.Camera.showSupportedList();
+					spec.addResult(supportedList.toString());
+					spec.displayResults();
+	                spec.waitForResponse();
+				});
+
+			});
+		});
+	
+	};
+
+
+	for (var j = 0; j<enumData.length; j++){
+
+		(function(objCAM){ 
 
 		   	var camid = objCAM.getProperty('ID');
 		   	var camtype = objCAM.getProperty('cameraType');
 
-			describe("Camera Test with "+ camid +": " + camtype , function() {
+		   	if(isWindowsMobilePlatform()){
 
-				beforeEach(function() {
-					enableFlag = false;
-					decodeFlag = false;
-					nulldata ='';
-					document.getElementById("actResult").innerHTML = "init";
-					callbackdata(nulldata);
-					callbackdatauri(nulldata);
-					callbackdataraw(nulldata);
-					callbackststatus = false;
+				describe("showPreview, Capture & hidePreview methods | " + camid + camtype , function() {
+
+					it("Should call showPreview with properties & capture - Set 1 |" + camid + camtype , function(){
+						var spec = new ManualSpec(jasmine, window.document);
+			        	spec.addGoal(jasmine.getEnv().currentSpec.description);
+			        	spec.addPrecondition("Call showPreview with propertyhash as fileName:\\Application\\camImage, desiredHeight:480, desiredWidth:640, compressionFormat:png, outputFormat:imageUri, flashMode:ON, previewLeft:80, previewTop:10, previewWidth:100, previewHeight:60, captureSound:'alarm5.wav', aimMode:on and callback.");
+			            spec.addStep("Press 'RunTest' button");
+			            spec.addStep("Check for the returned callback status & property set");
+			            spec.addExpectation('The viewfinder with properties set should reflect. The returned status should be OK and captured image should be displayed as imageUri with all callback properties and play a sound on capture. Also flashMode should be ON for color camera & aimMode ON for imager camera.');
+			            spec.displayScenario();
+			            spec.waitForButtonPressing("Run test");
+
+						runs(function(){
+							objCAM.showPreview({'fileName':'\\Application\\camImage', 'captureSound':'alarm5.wav',
+								'compressionFormat':'png', 'outputFormat':'dataUri', 'flashMode':'on', 'aimMode':'on', 
+								'desiredHeight':720, 'desiredWidth':1080, 'previewLeft':80, 'previewTop':10, 'previewWidth':100, 'previewHeight':60
+							}, callbackFunc);
+
+							waitsFor(function(){
+								objCAM.capture();
+							},"waiting 2secs for capture", 2000);
+						});
+
+						waitsFor(function(){
+							return cbkResponseTimeout;
+						},"waiting for callback data", 10000);
+
+						runs(function(){
+							spec.addResult(callbackData);
+							document.getElementById('imageUri').src = imageUriData;
+							spec.displayResults();
+			                spec.waitForResponse();
+						});
+
+					});
+
+					it("Should call showPreview with properties & capture - Set 2 |" + camid + camtype , function(){
+						var spec = new ManualSpec(jasmine, window.document);
+			        	spec.addGoal(jasmine.getEnv().currentSpec.description);
+			        	spec.addPrecondition("Call showPreview with propertyhash as fileName:camImage123, desiredHeight:360, desiredWidth:480, compressionFormat:jpg, outputFormat:image, flashMode:off, previewLeft:80, previewTop:10, previewWidth:40, previewHeight:120, aimMode:off, captureSound:'' and callback.");
+			            spec.addStep("Press 'RunTest' button");
+			            spec.addStep("Check for the returned callback status & property set");
+			            spec.addExpectation('The viewfinder with properties set should reflect. The returned status should be OK and captured image should be displayed with all callback properties. Also flashMode should be OFF for color camera & aimMode OFF for imager camera. Should not be any sound played after capture.');
+			            spec.displayScenario();
+			            spec.waitForButtonPressing("Run test");
+
+						runs(function(){
+							objCAM.showPreview({'fileName':'camImage123', 'compressionFormat':'jpg', 'outputFormat':'image', 
+								'flashMode':'off', 'aimMode':'off', 'captureSound':'', 'desiredHeight':360, 'desiredWidth':480,
+								'previewLeft':80, 'previewTop':10, 'previewWidth':40, 'previewHeight':120
+							}, callbackFunc);
+
+							waitsFor(function(){
+								objCAM.capture();
+							},"waiting 2secs for capture", 2000);
+						});
+
+						waitsFor(function(){
+							return cbkResponseTimeout;
+						},"waiting for callback data", 10000);
+
+						runs(function(){
+							spec.addResult(callbackData);
+							spec.displayResults();
+			                spec.waitForResponse();
+						});
+
+					});
+
+					it("Should rotate the screen rightHanded after call showPreview | " + camid + camtype , function(){
+						var spec = new ManualSpec(jasmine, window.document);
+			        	spec.addGoal(jasmine.getEnv().currentSpec.description);
+			            spec.addStep("Press 'RunTest' button");
+			            spec.addExpectation('The viewfinder should realign and there should not be any error.');
+			            spec.displayScenario();
+			            spec.waitForButtonPressing("Run test");
+
+						runs(function(){
+							objCAM.showPreview({}, callbackFunc);
+							Rho.ScreenOrientation.rightHanded();
+						});
+
+						waitsFor(function(){
+							return cbkResponseTimeout;
+						},"waiting for callback data", 10000);
+
+						runs(function(){
+							spec.addResult(callbackData);
+							spec.displayResults();
+			                spec.waitForResponse();
+						});
+
+						runs(function(){
+							Rho.ScreenOrientation.normal();
+						});
+
+					});
+
+					it("Should hide preview by using hidePreview | " + camid + camtype , function(){
+						var spec = new ManualSpec(jasmine, window.document);
+			        	spec.addGoal(jasmine.getEnv().currentSpec.description);
+			            spec.addStep("Press 'RunTest' button");
+			            spec.addExpectation('Viewfinder should get hidden.');
+			            spec.displayScenario();
+			            spec.waitForButtonPressing("Run test");
+
+			            runs(function(){
+							objCAM.showPreview({}, callbackFunc);
+						});
+
+						waitsFor(function(){
+							return cbkResponseTimeout;
+						},"waiting for callback data", 10000);
+
+						runs(function(){
+							objCAM.hidePreview();
+			                spec.waitForResponse();
+						});
+					});
+
+					it("Should call showPreview and minimize | " + camid + camtype , function(){
+						var spec = new ManualSpec(jasmine, window.document);
+			        	spec.addGoal(jasmine.getEnv().currentSpec.description);
+			            spec.addStep("Press 'RunTest' button");
+			            spec.addStep("Once the preview window appears, Minimize & restore the application");
+			            spec.addExpectation('Should display error with error message in callback.');
+			            spec.displayScenario();
+			            spec.waitForButtonPressing("Run test");
+
+			            runs(function(){
+							objCAM.showPreview({}, callbackFunc);
+						});
+
+						waitsFor(function(){
+							return cbkResponseTimeout;
+						},"waiting for callback data", 10000);
+
+						runs(function(){
+							spec.addResult(callbackData);
+							spec.displayResults();
+			                spec.waitForResponse();
+						});
+
+						runs(function(){
+							objCAM.hidePreview();
+						});
+					});
+
+					it("Should call showPreview and suspend | " + camid + camtype , function(){
+						var spec = new ManualSpec(jasmine, window.document);
+			        	spec.addGoal(jasmine.getEnv().currentSpec.description);
+			            spec.addStep("Press 'RunTest' button");
+			            spec.addStep("Once the preview window appears, Suspend & resume the device");
+			            spec.addExpectation('Should display error with error message in callback.');
+			            spec.displayScenario();
+			            spec.waitForButtonPressing("Run test");
+
+			            runs(function(){
+							objCAM.showPreview({}, callbackFunc);
+						});
+
+						waitsFor(function(){
+							return cbkResponseTimeout;
+						},"waiting for callback data", 10000);
+
+						runs(function(){
+							spec.addResult(callbackData);
+							spec.displayResults();
+			                spec.waitForResponse();
+						});
+
+						runs(function(){
+							objCAM.hidePreview();
+						});
+					});
+
+					it("Should call showPreview and quit the application | " + camid + camtype , function(){
+						var spec = new ManualSpec(jasmine, window.document);
+			        	spec.addGoal(jasmine.getEnv().currentSpec.description);
+			            spec.addStep("Press 'RunTest' button");
+			            spec.addStep("Once the preview window appears, Quit the application");
+			            spec.addExpectation('Should not crash the application or any other abnormal behaviour.');
+			            spec.displayScenario();
+			            spec.waitForButtonPressing("Run test");
+
+			            runs(function(){
+							objCAM.showPreview({}, callbackFunc);
+						});
+
+						waitsFor(function(){
+							return cbkResponseTimeout;
+						},"waiting for callback data", 10000);
+
+						runs(function(){
+							spec.addResult(callbackData);
+							spec.displayResults();
+			                spec.waitForResponse();
+						});
+					});
+
 				});
 
-				afterEach(function() {
-					//objCAM.clearAllProperties();
+			};
+
+
+			describe("takePicture method | " + camid + camtype , function() {
+
+				it("Should call takePicture and take image | " + camid + camtype , function(){
+					var spec = new ManualSpec(jasmine, window.document);
+		        	spec.addGoal(jasmine.getEnv().currentSpec.description);
+		            spec.addStep("Press 'RunTest' button");
+		            spec.addStep("Capture the image & Check for the returned status.");
+		            spec.addExpectation('The preview should be in Full Screen. Default parameters values should be returned.');
+		            spec.displayScenario();
+		            spec.waitForButtonPressing("Run test");
+
+		            runs(function(){
+						objCAM.takePicture({}, callbackFunc);
+					});
+
+					waitsFor(function(){
+						return cbkResponseTimeout;
+					},"waiting for callback data", 10000);
+
+					runs(function(){
+						spec.addResult(callbackData);
+						spec.displayResults();
+		                spec.waitForResponse();
+					});
+
 				});
 
-				it("VT285-018/019 | Call takePicture with callback as function and retruned status OK |" + camid + camtype , function() {
+				it("Should call takePicture and returned status cancel | " + camid + camtype , function(){
+					var spec = new ManualSpec(jasmine, window.document);
+		        	spec.addGoal(jasmine.getEnv().currentSpec.description);
+		            spec.addStep("Press 'RunTest' button");
+		            spec.addStep("Cancel the taking of image & Check for the returned status.");
+		            spec.addExpectation('The returned status should be cancel.');
+		            spec.displayScenario();
+		            spec.waitForButtonPressing("Run test");
 
-					runs(function()
-					{
-						setObjective("VT285-018/019 |Call takePicture with callback as function and retruned status OK|");
-						setInstruction("Take an image " + camid);
-						setExpected("The Front/Main camera or Imager should start to take picture and The retruned status should be OK and it should return tha saved image path");
-						objCAM.takePicture({},callbacktake);
+		            runs(function(){
+						objCAM.takePicture({}, callbackFunc);
 					});
 
-					waitsFor(function()
-					{
-						return callbackststatus;
-					}, '10sec wait for callback to fire', 10000);
+					waitsFor(function(){
+						return cbkResponseTimeout;
+					},"waiting for callback data", 10000);
 
-					runs(function()
-					{
-						waitsFor(function() {
-						return document.getElementById("actResult").innerHTML != "init";
-						}, "Timed out waiting for tester to respond", 300000);
-						runs(function() {
-						expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-						});
-					});
-				})
-
-				it("VT285-020 | Call takePicture with callback as function and retruned status cancel |" + camid + camtype , function() {
-
-					runs(function()
-					{
-						setObjective("VT285-020 |Call takePicture with callback as function and retruned status cancel|");
-						setInstruction("Cancel the taking of image " + camid);
-						setExpected("The Front/Main camera or Imager should start to take picture and The retruned status should be cancel");
-						objCAM.takePicture({},callbacktake);
+					runs(function(){
+						spec.addResult(callbackData);
+						spec.displayResults();
+		                spec.waitForResponse();
 					});
 
-					waitsFor(function()
-					{
-						return callbackststatus;
-					}, '10sec wait for callback to fire', 10000);
-
-					runs(function()
-					{
-						waitsFor(function() {
-						return document.getElementById("actResult").innerHTML != "init";
-						}, "Timed out waiting for tester to respond", 300000);
-						runs(function() {
-						expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-						});
-					});
-				})
-
-				it("VT285-021 | Call takePicture with callback as function and don't take any image |" + camid + camtype , function() {
-
-					runs(function()
-					{
-						setObjective("VT285-020 |Call takePicture with callback as function and retruned status cancel|");
-						setInstruction("Don't take any image and wait for camera to stop automatically " + camid);
-						setExpected("The Front/Main camera or Imager should start to take picture and The retruned status should be cancel");
-						objCAM.takePicture({},callbacktake);
-					});
-
-					waitsFor(function()
-					{
-						return callbackststatus;
-					}, '10sec wait for callback to fire', 10000);
-
-					runs(function()
-					{
-						waitsFor(function() {
-						return document.getElementById("actResult").innerHTML != "init";
-						}, "Timed out waiting for tester to respond", 300000);
-						runs(function() {
-						expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-						});
-					});
-				})
-
-				it("VT285-022 | Call takePicture with callback as function and minimize the application |" + camid + camtype , function() {
-
-					runs(function()
-					{
-						setObjective("VT285-020 |Call takePicture with callback as function and retruned status cancel|");
-						setInstruction("wait for camera viewfidner to comeup then Minimize the application and restore after 5 second" + camid);
-						setExpected("the camera should be in open state after restoring the application.");
-						objCAM.takePicture({},callbacktake);
-					});
-
-					waitsFor(function()
-					{
-						return callbackststatus;
-					}, '10sec wait for callback to fire', 20000);
-
-					runs(function()
-					{
-						waitsFor(function() {
-						return document.getElementById("actResult").innerHTML != "init";
-						}, "Timed out waiting for tester to respond", 300000);
-						runs(function() {
-						expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-						});
-					});
-				})
-
-				it("VT285-023 | Call takePicture with callback as function and suspend the device |" + camid + camtype , function() {
-
-					runs(function()
-					{
-						setObjective("VT285-023 |Call takePicture with callback as function and suspend the device|");
-						setInstruction("wait for camera viewfidner to comeup then suspend the device and resume it after 5 second" + camid);
-						setExpected("the camera should be in open state after restoring the device and application.");
-						objCAM.takePicture({},callbacktake);
-					});
-
-					waitsFor(function()
-					{
-						return callbackststatus;
-					}, '10sec wait for callback to fire', 20000);
-
-					runs(function()
-					{
-						waitsFor(function() {
-						return document.getElementById("actResult").innerHTML != "init";
-						}, "Timed out waiting for tester to respond", 300000);
-						runs(function() {
-						expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-						});
-					});
-				})
-
-				it("VT285-026 | Call takePicture with propertyhash outputFormat:dataUri and callback as anonymous function |" + camid + camtype , function() {
-
-					runs(function()
-					{
-						setObjective("VT285-026 |Call takePicture with propertyhash outputFormat:dataUri and callback as anonymous function|");
-						setInstruction("Take any image and wait for callback to fire" + camid);
-						setExpected("The retruned status should be OK and the image should be displayed on view of the application");
-						objCAM.takePicture({"outputFormat":"dataUri"},function(data){callbackdatauri(data);callbackststatus = true;});
-					});
-
-					waitsFor(function()
-					{
-						return callbackststatus;
-					}, '10sec wait for callback to fire', 10000);
-
-					runs(function()
-					{
-						waitsFor(function() {
-						return document.getElementById("actResult").innerHTML != "init";
-						}, "Timed out waiting for tester to respond", 300000);
-						runs(function() {
-						expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-						});
-					});
-				})
-
-				it("VT285-027 | Call takePicture with propertyhash outputFormat:image and check for all callback values |" + camid + camtype , function() {
-
-					runs(function()
-					{
-						setObjective("VT285-026 |Call takePicture with propertyhash outputFormat:image and check for all callback values|");
-						setInstruction("Take any image and wait for callback to fire" + camid);
-						setExpected("The retruned image height, width should be same as saved image, Imageformat should be jpg and file anme should be defaultname and it should saved at returned URI in device");
-						objCAM.takePicture({"outputFormat":"image"},callbacktake);
-					});
-
-					waitsFor(function()
-					{
-						return callbackststatus;
-					}, '10sec wait for callback to fire', 10000);
-
-					runs(function()
-					{
-						waitsFor(function() {
-						return document.getElementById("actResult").innerHTML != "init";
-						}, "Timed out waiting for tester to respond", 300000);
-						runs(function() {
-						expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-						});
-					});
-				})
-
-				it("VT285-028 | Call takePicture with propertyhash outputFormat:dataUri and check for all callback values  |" + camid + camtype , function() {
-
-					runs(function()
-					{
-						setObjective("VT285-028 |Call takePicture with propertyhash outputFormat:dataUri and callback as anonymous function|");
-						setInstruction("Take any image and wait for callback to fire" + camid);
-						setExpected("The retruned image height, width and imageFormat should be same as displyaed image");
-						objCAM.takePicture({"outputFormat":"dataUri"},callbacktakeuri);
-					});
-
-					waitsFor(function()
-					{
-						return callbackststatus;
-					}, '10sec wait for callback to fire', 10000);
-
-					runs(function()
-					{
-						waitsFor(function() {
-						return document.getElementById("actResult").innerHTML != "init";
-						}, "Timed out waiting for tester to respond", 300000);
-						runs(function() {
-						expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-						});
-					});
-				})
-
-				it("VT285-029 | Call takePicture with propertyhash as colorModel, desiredHeight, desiredWidth, outputFormat and callback|", function() {
-
-					runs(function()
-					{
-						setObjective("VT285-029 | Call choosePicture with property as colorModel,desiredHeight,desiredWidth and callback|");
-						setInstruction("take any image and Check for the color of image, and width/height");
-						setExpected("The displayed image should be in grey mode, retruned image height/width should be same as the displayed image, status should be Ok");
-						objCAM.takePicture({colorModel:'greyscale',desiredHeight:640,desiredWidth:480,outputFormat:'dataUri'},function(data){callbackdatauri(data);callbackststatus = true;});
-					});
-
-					waitsFor(function()
-					{
-						return callbackststatus;
-					}, '10sec wait for callback to fire', 10000);
-
-					runs(function()
-					{
-						waitsFor(function() {
-						return document.getElementById("actResult").innerHTML != "init";
-						}, "Timed out waiting for tester to respond", 300000);
-						runs(function() {
-						expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-						});
-					});
 				});
 
-				if(!isWindowsPhone8Platform())
-				{
-					it("VT285-030 | maxHeight and maxWidth of camera using the retruned object of enumerate|", function() {
+				it("Should call takePicture and minimize the application | " + camid + camtype , function(){
+					var spec = new ManualSpec(jasmine, window.document);
+		        	spec.addGoal(jasmine.getEnv().currentSpec.description);
+		            spec.addStep("Press 'RunTest' button");
+		            spec.addStep("Minimize the application once the fullscreen mode opens.");
+		            spec.addExpectation('Preview should not disappear. No abnormal behaviour should be observed.');
+		            spec.displayScenario();
+		            spec.waitForButtonPressing("Run test");
 
-						runs(function()
-						{
-							setObjective("VT285-030 | maxHeight and maxWidth of camera using the retruned object of enumerate|");
-							setInstruction("take any image and Check for the height and width");
-							setExpected("The retrurned image height/width should be same as the saved image, status should be Ok");
-							var Height = objCAM.maxHeight;
-							var Width = objCAM.maxWidth;
-							objCAM.takePicture({colorModel:'rgb',desiredHeight:Height,desiredWidth:Width,outputFormat:'image'},callbacktake);
-						});
-
-						waitsFor(function()
-						{
-							return callbackststatus;
-						}, '10sec wait for callback to fire', 10000);
-
-						runs(function()
-						{
-							waitsFor(function() {
-							return document.getElementById("actResult").innerHTML != "init";
-							}, "Timed out waiting for tester to respond", 300000);
-							runs(function() {
-							expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-							});
-						});
-					});
-				}
-
-				it("VT285-035 | Call takePicture with captureSound and callback|", function() {
-
-					var path = "";
-					runs(function()
-					{
-						setObjective("VT285-035 | Call takePicture with captureSound and callback|");
-						setInstruction("take any image and check for played wave file while capturing image");
-						setExpected("The wave file should be played while capturing the image");
-						if (isWindowsMobileOrAndroidPlatform()){path = 'file://application/alarm.wav';}
-						if (isApplePlatform()) { path = '';}
-						if (isWindowsPhone8Platform()) { path ='file://application/alarm.wav';}
-						
-						objCAM.takePicture({captureSound:path,outputFormat:'image'},callbacktake);
+		            runs(function(){
+						objCAM.takePicture({}, callbackFunc);
 					});
 
-					waitsFor(function()
-					{
-						return callbackststatus;
-					}, '10sec wait for callback to fire', 10000);
+					waitsFor(function(){
+						return cbkResponseTimeout;
+					},"waiting for callback data", 10000);
 
-					runs(function()
-					{
-						waitsFor(function() {
-						return document.getElementById("actResult").innerHTML != "init";
-						}, "Timed out waiting for tester to respond", 300000);
-						runs(function() {
-						expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-						});
+					runs(function(){
+						spec.addResult(callbackData);
+						spec.displayResults();
+		                spec.waitForResponse();
 					});
 				});
 
-				it("VT285-036/037 | Call takePicture with colorModel as rgb, compressionFormat as jpg and callback|", function() {
+				it("Should call takePicture and quit the application | " + camid + camtype , function(){
+					var spec = new ManualSpec(jasmine, window.document);
+		        	spec.addGoal(jasmine.getEnv().currentSpec.description);
+		            spec.addStep("Press 'RunTest' button");
+		            spec.addStep("Quit the appliation once the fullscreen mode opens.");
+		            spec.addExpectation('There should not be any odd behaviour observed.');
+		            spec.displayScenario();
+		            spec.waitForButtonPressing("Run test");
 
-					runs(function()
-					{
-						setObjective("VT285-036/037 | Call takePicture with colorModel as rgb, compressionFormat as jpg and callback|");
-						setInstruction("take any image and Check for format and colorModel");
-						setExpected("The saved image should be colored one and format should be jpg of that image, callback retrun fromat should be jpg too");
-						objCAM.takePicture({colorModel:'rgb',compressionFormat:'jpg',outputFormat:'image'},callbacktakeraw);
-					});
-
-					waitsFor(function()
-					{
-						return callbackststatus;
-					}, '10sec wait for callback to fire', 10000);
-
-					runs(function()
-					{
-						waitsFor(function() {
-						return document.getElementById("actResult").innerHTML != "init";
-						}, "Timed out waiting for tester to respond", 300000);
-						runs(function() {
-						expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-						});
+		            runs(function(){
+						objCAM.takePicture({}, callbackFunc);
 					});
 				});
 
-				if (!isWindowsMobileOrAndroidPlatform())
-				{
-					it("VT285-038 | Call takePicture with colorModel as rgb, compressionFormat as png and callback|", function() {
+				it("Should call takePicture and suspend the device | " + camid + camtype , function(){
+					var spec = new ManualSpec(jasmine, window.document);
+		        	spec.addGoal(jasmine.getEnv().currentSpec.description);
+		            spec.addStep("Press 'RunTest' button");
+		            spec.addStep("Minimize the application once the fullscreen mode opens.");
+		            spec.addExpectation('Preview should not disappear. No abnormal behaviour should be observed.');
+		            spec.displayScenario();
+		            spec.waitForButtonPressing("Run test");
 
-						runs(function()
-						{
-							setObjective("VT285-038 | Call takePicture with colorModel as rgb, compressionFormat as png and callback|");
-							setInstruction("take any image and Check for compressionFormat");
-							setExpected("The saved image should be colored one and format should be png, callback retrun fromat should be png too");
-							objCAM.takePicture({colorModel:'rgb',compressionFormat:'png',outputFormat:'image'},callbacktakeraw);
-						});
-
-						waitsFor(function()
-						{
-							return callbackststatus;
-						}, '10sec wait for callback to fire', 10000);
-
-						runs(function()
-						{
-							waitsFor(function() {
-							return document.getElementById("actResult").innerHTML != "init";
-							}, "Timed out waiting for tester to respond", 300000);
-							runs(function() {
-							expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-							});
-						});
-					});
-				}
-
-				if (isApplePlatform())
-				{
-					it("VT285-039 | Call takePicture with enableEditing as true and callback|", function() {
-
-						runs(function()
-						{
-							setObjective("VT285-039 | Call takePicture with enableEditing as true and callback|");
-							setInstruction("take any image and check for photo capture image customizing");
-							setExpected("It should Enable post photo capture image customizing");
-							objCAM.takePicture({enableEditing:true,outputFormat:'image'},callbacktakeraw);
-						});
-
-						waitsFor(function()
-						{
-							return callbackststatus;
-						}, '10sec wait for callback to fire', 10000);
-
-						runs(function()
-						{
-							waitsFor(function() {
-							return document.getElementById("actResult").innerHTML != "init";
-							}, "Timed out waiting for tester to respond", 300000);
-							runs(function() {
-							expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-							});
-						});
+		            runs(function(){
+						objCAM.takePicture({}, callbackFunc);
 					});
 
-					it("VT285-040 | Call takePicture with enableEditing as false and callback|", function() {
+					waitsFor(function(){
+						return cbkResponseTimeout;
+					},"waiting for callback data", 10000);
 
-						runs(function()
-						{
-							setObjective("VT285-039 | Call takePicture with enableEditing as false and callback|");
-							setInstruction("take any image and check for photo capture image customizing");
-							setExpected("It should not Enable post photo capture image customizing");
-							objCAM.takePicture({enableEditing:false,outputFormat:'image'},callbacktakeraw);
-						});
-
-						waitsFor(function()
-						{
-							return callbackststatus;
-						}, '10sec wait for callback to fire', 10000);
-
-						runs(function()
-						{
-							waitsFor(function() {
-							return document.getElementById("actResult").innerHTML != "init";
-							}, "Timed out waiting for tester to respond", 300000);
-							runs(function() {
-							expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-							});
-						});
-					});
-				}
-
-				it("VT285-042 | Call takePicture with fileName as path to the device folder with name and callback|", function() {
-
-					runs(function()
-					{
-						var path ='';
-						setObjective("VT285-042 | Call takePicture with fileName as path to the device folder with name and callback|");
-						setInstruction("take any image and Check for captured image to be saved at application folder of device");
-						setExpected("The Image should be saved at specified location with specified name with extension as jpg");
-
-						if (isWindowsMobileOrAndroidPlatform()){path = 'file://application/Image042';}
-						if (isApplePlatform()) { path = '';}
-						if (isWindowsPhone8Platform()) { path ='file://application/Image042';}
-						objCAM.compressionFormat = 'jpg';
-						objCAM.colorModel = 'grayscale';
-						objCAM.takePicture({fileName:path,outputFormat:'image'},callbacktakeraw);
-					});
-
-					waitsFor(function()
-					{
-						return callbackststatus;
-					}, '10sec wait for callback to fire', 10000);
-
-					runs(function()
-					{
-						waitsFor(function() {
-						return document.getElementById("actResult").innerHTML != "init";
-						}, "Timed out waiting for tester to respond", 300000);
-						runs(function() {
-						expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-						});
+					runs(function(){
+						spec.addResult(callbackData);
+						spec.displayResults();
+		                spec.waitForResponse();
 					});
 				});
 
-				it("VT285-043 | Call takePicture with fileName as path to the device folder without name and callback|", function() {
+				it("Should rotate the screen after screen rightHanded calling takePicture() method. | " + camid + camtype , function(){
+					var spec = new ManualSpec(jasmine, window.document);
+		        	spec.addGoal(jasmine.getEnv().currentSpec.description);
+		            spec.addStep("Press 'RunTest' button");
+		            spec.addStep("NOTE: ScreenOrientation will become normal once pass/fail is clicked");
+		            spec.addExpectation('The viewfinder should realign and there should not be any error.');
+		            spec.displayScenario();
+		            spec.waitForButtonPressing("Run test");
 
-					runs(function()
-					{
-						var path ='';
-						setObjective("VT285-043 | Call takePicture with fileName as path to the device folder without name and callback|");
-						setInstruction("take any image and Check for captured image to be saved at application folder of device");
-						setExpected("The Image should be saved at specified location with specified name with extension as jpg");
-
-						if (isWindowsMobileOrAndroidPlatform()){path = 'file://application/';}
-						if (isApplePlatform()) { path = '';}
-						if (isWindowsPhone8Platform()) { path ='file://application/';}
-						objCAM.compressionFormat = 'jpg';
-						objCAM.colorModel = 'rgb';
-						objCAM.takePicture({fileName:path,outputFormat:'image'},callbacktakeraw);
+					runs(function(){
+						objCAM.takePicture({}, callbackFunc);
+						Rho.ScreenOrientation.leftHanded();
 					});
 
-					waitsFor(function()
-					{
-						return callbackststatus;
-					}, '10sec wait for callback to fire', 10000);
+					waitsFor(function(){
+						return cbkResponseTimeout;
+					},"waiting for callback data", 10000);
 
-					runs(function()
-					{
-						waitsFor(function() {
-						return document.getElementById("actResult").innerHTML != "init";
-						}, "Timed out waiting for tester to respond", 300000);
-						runs(function() {
-						expect("pass").toEqual(document.getElementById("actResult").innerHTML);
+					runs(function(){
+						spec.addResult(callbackData);
+						spec.displayResults();
+		                spec.waitForResponse();
+					});
+
+					runs(function(){
+						Rho.ScreenOrientation.normal();
+					});
+
+				});
+
+				it("Should call takePicture with flashMode FLASH_ON | " + camid + camtype , function(){
+					var spec = new ManualSpec(jasmine, window.document);
+		        	spec.addGoal(jasmine.getEnv().currentSpec.description);
+		            spec.addStep("Press 'RunTest' button");
+		            spec.addStep("Capture any image in low illumination area");
+		            spec.addExpectation('Flash should be on while taking the image.');
+		            spec.displayScenario();
+		            spec.waitForButtonPressing("Run test");
+
+					runs(function(){
+						objCAM.flashMode.FLASH_ON;
+						objCAM.takePicture({}, callbackFunc);
+					});
+
+					waitsFor(function(){
+						return cbkResponseTimeout;
+					},"waiting for callback data", 10000);
+
+					runs(function(){
+						spec.addResult(callbackData);
+						spec.displayResults();
+		                spec.waitForResponse();
+					});
+
+					runs(function(){
+						objCAM.flashMode.FLASH_OFF
+					});	
+				});
+
+				it("Should call takePicture with flashMode FLASH_OFF | " + camid + camtype , function(){
+					var spec = new ManualSpec(jasmine, window.document);
+		        	spec.addGoal(jasmine.getEnv().currentSpec.description);
+		            spec.addStep("Press 'RunTest' button");
+		            spec.addStep("Capture any image in low illumination area");
+		            spec.addExpectation('Flash should be off while taking the image.');
+		            spec.displayScenario();
+		            spec.waitForButtonPressing("Run test");
+
+					runs(function(){
+						objCAM.takePicture({'flashMode':'off'}, callbackFunc);
+					});
+
+					waitsFor(function(){
+						return cbkResponseTimeout;
+					},"waiting for callback data", 10000);
+
+					runs(function(){
+						spec.addResult(callbackData);
+						spec.displayResults();
+		                spec.waitForResponse();
+					});
+					
+				});
+
+				if (isAndroidPlatform()) {	
+
+					it("Should call takePicture with flashMode FLASH_AUTO in dark area | " + camid + camtype , function(){
+						var spec = new ManualSpec(jasmine, window.document);
+			        	spec.addGoal(jasmine.getEnv().currentSpec.description);
+			            spec.addStep("Press 'RunTest' button");
+			            spec.addStep("Capture any image in low illumination area");
+			            spec.addExpectation('Flash should be on in low illumination area.');
+			            spec.displayScenario();
+			            spec.waitForButtonPressing("Run test");
+
+						runs(function(){
+							objCAM.flashMode.FLASH_AUTO;
+							objCAM.takePicture({}, callbackFunc);
 						});
+
+						waitsFor(function(){
+							return cbkResponseTimeout;
+						},"waiting for callback data", 10000);
+
+						runs(function(){
+							spec.addResult(callbackData);
+							spec.displayResults();
+			                spec.waitForResponse();
+						});					
+					});
+
+					it("Should call takePicture with flashMode FLASH_AUTO in bright area | " + camid + camtype , function(){
+						var spec = new ManualSpec(jasmine, window.document);
+			        	spec.addGoal(jasmine.getEnv().currentSpec.description);
+			            spec.addStep("Press 'RunTest' button");
+			            spec.addStep("Capture any image in bright area");
+			            spec.addExpectation('Flash should not be on in bright area.');
+			            spec.displayScenario();
+			            spec.waitForButtonPressing("Run test");
+
+						runs(function(){
+							objCAM.flashMode = "auto";
+							objCAM.takePicture({}, callbackFunc);
+						});
+
+						waitsFor(function(){
+							return cbkResponseTimeout;
+						},"waiting for callback data", 10000);
+
+						runs(function(){
+							spec.addResult(callbackData);
+							spec.displayResults();
+			                spec.waitForResponse();
+						});						
+					});
+
+					it("Should call takePicture with flashMode FLASH_RED_EYE | " + camid + camtype , function(){
+						var spec = new ManualSpec(jasmine, window.document);
+			        	spec.addGoal(jasmine.getEnv().currentSpec.description);
+			            spec.addStep("Press 'RunTest' button");
+			            spec.addStep("Capture any image in low illumination area");
+			            spec.addExpectation('Flash should be on while taking picture. The saved picture should not contain the redeye in it.');
+			            spec.displayScenario();
+			            spec.waitForButtonPressing("Run test");
+
+						runs(function(){
+							objCAM.takePicture({'flashMode':'redEye'}, callbackFunc);
+						});
+
+						waitsFor(function(){
+							return cbkResponseTimeout;
+						},"waiting for callback data", 10000);
+
+						runs(function(){
+							spec.addResult(callbackData);
+							spec.displayResults();
+			                spec.waitForResponse();
+						});
+
+						runs(function(){
+							objCAM.flashMode.FLASH_AUTO
+						});				
+					});
+
+					it("Should call takePicture with flashMode FLASH_TORCH | " + camid + camtype , function(){
+						var spec = new ManualSpec(jasmine, window.document);
+			        	spec.addGoal(jasmine.getEnv().currentSpec.description);
+			            spec.addStep("Press 'RunTest' button");
+			            spec.addStep("Capture any image in low illumination area");
+			            spec.addExpectation('Flash should be on while taking the image. The flash is turned on in torch mode.');
+			            spec.displayScenario();
+			            spec.waitForButtonPressing("Run test");
+
+						runs(function(){
+							objCAM.takePicture({'flashMode':'torch'}, callbackFunc);
+						});
+
+						waitsFor(function(){
+							return cbkResponseTimeout;
+						},"waiting for callback data", 10000);
+
+						runs(function(){
+							spec.addResult(callbackData);
+							spec.displayResults();
+			                spec.waitForResponse();
+						});
+
+						runs(function(){
+							objCAM.flashMode.FLASH_AUTO
+						});
+					});
+
+				};
+
+				if (isWindowsMobilePlatform()){
+
+					it("Should call takePicture with aimMode AIM_ON | " + camid + camtype , function(){
+						var spec = new ManualSpec(jasmine, window.document);
+			        	spec.addGoal(jasmine.getEnv().currentSpec.description);
+			            spec.addStep("Press 'RunTest' button");
+			            spec.addStep("Capture any image.");
+			            spec.addExpectation('Aiming should be ON. Reticle should be there. Image should be catured..');
+			            spec.displayScenario();
+			            spec.waitForButtonPressing("Run test");
+
+						runs(function(){
+							objCAM.takePicture({'aimMode':'on'}, callbackFunc);
+						});
+
+						waitsFor(function(){
+							return cbkResponseTimeout;
+						},"waiting for callback data", 10000);
+
+						runs(function(){
+							spec.addResult(callbackData);
+							spec.displayResults();
+			                spec.waitForResponse();
+						});
+					});
+
+					it("Should call takePicture with aimMode AIM_OFF | " + camid + camtype , function(){
+						var spec = new ManualSpec(jasmine, window.document);
+			        	spec.addGoal(jasmine.getEnv().currentSpec.description);
+			            spec.addStep("Press 'RunTest' button");
+			            spec.addStep("Capture any image.");
+			            spec.addExpectation('There should not be any aiming. Reticle should not be seen.');
+			            spec.displayScenario();
+			            spec.waitForButtonPressing("Run test");
+
+						runs(function(){
+							objCAM.aimMode.AIM_OFF;
+							objCAM.takePicture({}, callbackFunc);
+						});
+
+						waitsFor(function(){
+							return cbkResponseTimeout;
+						},"waiting for callback data", 10000);
+
+						runs(function(){
+							spec.addResult(callbackData);
+							spec.displayResults();
+			                spec.waitForResponse();
+						});					
+					});
+
+				};
+
+				it("Should call takePicture with outputFormat:dataUri  | " + camid + camtype , function(){
+					var spec = new ManualSpec(jasmine, window.document);
+		        	spec.addGoal(jasmine.getEnv().currentSpec.description);
+		            spec.addStep("Press 'RunTest' button");
+		            spec.addStep("Capture any image.");
+		            spec.addExpectation('Image should be displayed as imageUri.');
+		            spec.displayScenario();
+		            spec.waitForButtonPressing("Run test");
+
+					runs(function(){
+						objCAM.takePicture({'outputFormat':'dataUri'}, callbackFunc);
+					});
+
+					waitsFor(function(){
+						return cbkResponseTimeout;
+					},"waiting for callback data", 10000);
+
+					runs(function(){
+						spec.addResult(callbackData);
+						document.getElementById('imageUri').src = imageUriData;
+						spec.displayResults();
+		                spec.waitForResponse();
 					});
 				});
 
-				it("VT285-044 | Call takePicture with fileName as path to the device folder with name.exetension and callback|", function() {
+				it("Should call takePicture with desiredHeight 480 and desiredWidth 640 | " + camid + camtype , function(){
+					var spec = new ManualSpec(jasmine, window.document);
+		        	spec.addGoal(jasmine.getEnv().currentSpec.description);
+		            spec.addStep("Press 'RunTest' button");
+		            spec.addStep("Capture any image. Check for the returned image height and width value. Open the saved image and check for height and width.");
+		            spec.addExpectation('The returned image height and width should be same as the saved image which are 640 and 480');
+		            spec.displayScenario();
+		            spec.waitForButtonPressing("Run test");
 
-					runs(function()
-					{
-						var path ='';
-						setObjective("VT285-044 | Call takePicture with fileName as path to the device folder with name.exetension and callback|");
-						setInstruction("take any image and Check for captured image to be saved at application folder of device");
-						setExpected("The Image should be saved at specified location with specified name with extension as jpg");
-
-						if (isWindowsMobileOrAndroidPlatform()){path = 'file://application/Image044.png';}
-						if (isApplePlatform()) { path = '';}
-						if (isWindowsPhone8Platform()) { path ='file://application/Image044.png';}
-						objCAM.compressionFormat = 'jpg';
-						objCAM.colorModel = 'rgb';
-						objCAM.takePicture({fileName:path,outputFormat:'image'},callbacktakeraw);
+					runs(function(){
+						objCAM.takePicture({'desiredHeight':480,'desiredWidth':640}, callbackFunc);
 					});
 
-					waitsFor(function()
-					{
-						return callbackststatus;
-					}, '10sec wait for callback to fire', 10000);
+					waitsFor(function(){
+						return cbkResponseTimeout;
+					},"waiting for callback data", 10000);
 
-					runs(function()
-					{
-						waitsFor(function() {
-						return document.getElementById("actResult").innerHTML != "init";
-						}, "Timed out waiting for tester to respond", 300000);
-						runs(function() {
-						expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-						});
+					runs(function(){
+						spec.addResult(callbackData);
+						spec.displayResults();
+		                spec.waitForResponse();
+					});	
+				});
+
+				it("Should call takePicture with desiredHeight 0 and desiredWidth 0 | " + camid + camtype , function(){
+					var spec = new ManualSpec(jasmine, window.document);
+		        	spec.addGoal(jasmine.getEnv().currentSpec.description);
+		            spec.addStep("Press 'RunTest' button");
+		            spec.addStep("Capture any image. Check for the returned image height and width value. Open the saved image and check for height and width.");
+		            spec.addExpectation('The returned image height and width should default or previously set as 0x0 is not supported. No abnormal behaviour should be observed.');
+		            spec.displayScenario();
+		            spec.waitForButtonPressing("Run test");
+
+					runs(function(){
+						objCAM.takePicture({'desiredHeight':0,'desiredWidth':0}, callbackFunc);
+					});
+
+					waitsFor(function(){
+						return cbkResponseTimeout;
+					},"waiting for callback data", 10000);
+
+					runs(function(){
+						spec.addResult(callbackData);
+						spec.displayResults();
+		                spec.waitForResponse();
+					});						
+				});
+
+				it("Should call takePicture with desiredWidth & desiredHeight more than max supported and Capture | " + camid + camtype , function(){
+					var spec = new ManualSpec(jasmine, window.document);
+		        	spec.addGoal(jasmine.getEnv().currentSpec.description);
+		            spec.addStep("Press 'RunTest' button");
+		            spec.addStep("Capture any image.");
+		            spec.addExpectation('Image should be captured successfully with max supported by that device to the set which is supported.');
+		            spec.displayScenario();
+		            spec.waitForButtonPressing("Run test");
+
+					runs(function(){
+						objCAM.takePicture({'desiredHeight':7600,'desiredWidth':6400}, callbackFunc);
+					});
+
+					waitsFor(function(){
+						return cbkResponseTimeout;
+					},"waiting for callback data", 10000);
+
+					runs(function(){
+						spec.addResult(callbackData);
+						spec.displayResults();
+		                spec.waitForResponse();
+					});	
+					runs(function(){
+						objCAM.desiredHeight(480);
+						objCAM.desiredWidth(640);
 					});
 				});
 
-				it("VT285-045 | Call takePicture with fileName as path to the device folder with name, compressionFormat as png|", function() {
+				it("Should call takePicture with propertyhash outputFormat:image with fileName and using anonymous callback | " + camid + camtype , function(){
+					var spec = new ManualSpec(jasmine, window.document);
+		        	spec.addGoal(jasmine.getEnv().currentSpec.description);
+		            spec.addStep("Press 'RunTest' button");
+		            spec.addStep("Capture any image.");
+		            spec.addStep("Check for the returned URI to the taken image stored on the device.");
+		            spec.addExpectation('The image should get stored at device default loaction and name of the image should be as set, cameraImage123. The callback data should have image of the stored image.');
+		            spec.displayScenario();
+		            spec.waitForButtonPressing("Run test");
 
-					runs(function()
-					{
-						var path ='';
-						setObjective("VT285-045 | Call takePicture with fileName as path to the device folder with name, compressionFormat as png|");
-						setInstruction("take any image and Check for captured image to be saved at application folder of device");
-						setExpected("The Image should be saved at specified location with specified name with extension as png");
-
-						if (isWindowsMobileOrAndroidPlatform()){path = 'file://application/Image045';}
-						if (isApplePlatform()) { path = '';}
-						if (isWindowsPhone8Platform()) { path ='file://application/Image045';}
-						objCAM.compressionFormat = 'png';
-						objCAM.colorModel = 'rgb';
-						objCAM.takePicture({fileName:path,outputFormat:'image'},callbacktakeraw);
+					runs(function(){
+						objCAM.takePicture({'outputFormat':'image','fileName':'cameraImage123'}, callbackFunc);
 					});
 
-					waitsFor(function()
-					{
-						return callbackststatus;
-					}, '10sec wait for callback to fire', 10000);
+					waitsFor(function(){
+						return cbkResponseTimeout;
+					},"waiting for callback data", 10000);
 
-					runs(function()
-					{
-						waitsFor(function() {
-						return document.getElementById("actResult").innerHTML != "init";
-						}, "Timed out waiting for tester to respond", 300000);
-						runs(function() {
-						expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-						});
-					});
+					runs(function(){
+						spec.addResult(callbackData);
+						spec.displayResults();
+		                spec.waitForResponse();
+					});	
 				});
 
-				if (isWindowsMobileOrAndroidPlatform())
-				{
-					it("VT285-046 | Call takePicture with flashMode as on and callback|", function() {
+				if(isApplePlatform()){
+					it("Should call takePicture with enableEditing as false | " + camid + camtype , function(){
+						var spec = new ManualSpec(jasmine, window.document);
+			        	spec.addGoal(jasmine.getEnv().currentSpec.description);
+			            spec.addStep("Press 'RunTest' button");
+			            spec.addStep("Capture any image.");
+			            spec.addStep("check for photo capture image customizing.");
+			            spec.addExpectation('It should not Enable post photo capture image customizing.');
+			            spec.displayScenario();
+			            spec.waitForButtonPressing("Run test");
 
-						runs(function()
-						{
-							setObjective("VT285-046 | Call takePicture with flashMode as on and callback|");
-							setInstruction("take any image and check for flash while taking the picture");
-							setExpected("Falsh should be on while taking picture and will get off automatically after picture has taken");
-							objCAM.flashMode = 'on';
-							objCAM.takePicture({outputFormat:'dataUri'},callbacktakeuri);
+						runs(function(){
+							objCAM.takePicture({'enableEditing':false}, callbackFunc);
 						});
 
-						waitsFor(function()
-						{
-							return callbackststatus;
-						}, '10sec wait for callback to fire', 10000);
+						waitsFor(function(){
+							return cbkResponseTimeout;
+						},"waiting for callback data", 10000);
 
-						runs(function()
-						{
-							waitsFor(function() {
-							return document.getElementById("actResult").innerHTML != "init";
-							}, "Timed out waiting for tester to respond", 300000);
-							runs(function() {
-							expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-							});
-						});
+						runs(function(){
+							spec.addResult(callbackData);
+							spec.displayResults();
+			                spec.waitForResponse();
+						});						
 					});
 
-					it("VT285-047 | Call takePicture with flashMode as off and callback|", function() {
+					it("Should call takePicture with enableEditing as true | " + camid + camtype , function(){
+						var spec = new ManualSpec(jasmine, window.document);
+			        	spec.addGoal(jasmine.getEnv().currentSpec.description);
+			            spec.addStep("Press 'RunTest' button");
+			            spec.addStep("Capture any image.");
+			            spec.addStep("check for photo capture image customizing.");
+			            spec.addExpectation('It should Enable post photo capture image customizing by default.');
+			            spec.displayScenario();
+			            spec.waitForButtonPressing("Run test");
 
-						runs(function()
-						{
-							setObjective("VT285-046 | Call takePicture with flashMode as off and callback|");
-							setInstruction("take any image and check for flash while taking the picture");
-							setExpected("Falsh should be off while taking picture");
-							objCAM.flashMode = 'on';
-							objCAM.takePicture({flashMode:'off',outputFormat:'image'},callbacktakeraw);
+						runs(function(){
+							objCAM.takePicture({'enableEditing':true}, callbackFunc);
 						});
 
-						waitsFor(function()
-						{
-							return callbackststatus;
-						}, '10sec wait for callback to fire', 10000);
+						waitsFor(function(){
+							return cbkResponseTimeout;
+						},"waiting for callback data", 10000);
 
-						runs(function()
-						{
-							waitsFor(function() {
-							return document.getElementById("actResult").innerHTML != "init";
-							}, "Timed out waiting for tester to respond", 300000);
-							runs(function() {
-							expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-							});
-						});
+						runs(function(){
+							spec.addResult(callbackData);
+							spec.displayResults();
+			                spec.waitForResponse();
+						});						
+					});
+				};
+
+				it("Should call takePicture with previewHeight, previewLeft,previewTop, previewWidth  and callback | " + camid + camtype , function(){
+					var spec = new ManualSpec(jasmine, window.document);
+		        	spec.addGoal(jasmine.getEnv().currentSpec.description);
+		        	spec.addPrecondition("takePicture set with previewHeight as 120, previewLeft 200,previewTop as 60, previewWidth as 160");
+		            spec.addStep("Press 'RunTest' button");
+		            spec.addStep("Check for the viewfinder position.");
+		            spec.addExpectation('The viewfinder positions should be full screen and Image should be captured successfully.');
+		            spec.displayScenario();
+		            spec.waitForButtonPressing("Run test");
+
+					runs(function(){
+						objCAM.takePicture({'previewHeight':120,'previewWidth':160,'previewLeft':200,'previewTop':60}, callbackFunc);
 					});
 
-					it("VT285-048 | Call takePicture with flashMode as auto and callback|", function() {
+					waitsFor(function(){
+						return cbkResponseTimeout;
+					},"waiting for callback data", 10000);
 
-						runs(function()
-						{
-							setObjective("VT285-046 | Call takePicture with flashMode as auto and callback|");
-							setInstruction("take any image in dark or low light and check for flash while taking the picture");
-							setExpected("Falsh should be on while taking picture in low light or dark");
-							objCAM.takePicture({flashMode:'auto',outputFormat:'image'},callbacktakeraw);
-						});
-
-						waitsFor(function()
-						{
-							return callbackststatus;
-						}, '10sec wait for callback to fire', 10000);
-
-						runs(function()
-						{
-							waitsFor(function() {
-							return document.getElementById("actResult").innerHTML != "init";
-							}, "Timed out waiting for tester to respond", 300000);
-							runs(function() {
-							expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-							});
-						});
-					});
-				}
-
-				if (isAndroidPlatform())
-				{
-					it("VT285-050 | Call takePicture with flashMode as redEye and callback|", function() {
-
-						runs(function()
-						{
-							setObjective("VT285-050 | Call takePicture with flashMode as redEye and callback|");
-							setInstruction("take any image and check for flash while taking the picture, check for redeye in saved image");
-							setExpected("Falsh should be on while taking picture and The saved picture should not contain the redeye in it");
-							objCAM.takePicture({flashMode:'redEye',outputFormat:'image'},callbacktakeraw);
-						});
-
-						waitsFor(function()
-						{
-							return callbackststatus;
-						}, '10sec wait for callback to fire', 10000);
-
-						runs(function()
-						{
-							waitsFor(function() {
-							return document.getElementById("actResult").innerHTML != "init";
-							}, "Timed out waiting for tester to respond", 300000);
-							runs(function() {
-							expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-							});
-						});
-					});
-
-					it("VT285-051 | Call takePicture with flashMode as torch and callback|", function() {
-
-						runs(function()
-						{
-							setObjective("VT285-051 | Call takePicture with flashMode as redEye and callback|");
-							setInstruction("check for continoius flash to be on");
-							setExpected("Flash should be on in torch mode");
-							objCAM.takePicture({flashMode:'torch',outputFormat:'image'},callbacktakeraw);
-						});
-
-						waitsFor(function()
-						{
-							return callbackststatus;
-						}, '10sec wait for callback to fire', 10000);
-
-						runs(function()
-						{
-							waitsFor(function() {
-							return document.getElementById("actResult").innerHTML != "init";
-							}, "Timed out waiting for tester to respond", 300000);
-							runs(function() {
-							expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-							});
-						});
+					runs(function(){
+						spec.addResult(callbackData);
+						spec.displayResults();
+		                spec.waitForResponse();
 					});				
-				}
+				});
 
-				if (isWindowsMobilePlatform())
-				{
-					it("VT285-052 | Call takePicture with previewHeight, previewLeft,previewTop, previewWidth  and callback|", function() {
+				if (isAndroid() || isApplePlatform()) {
 
-						runs(function()
-						{
-							setObjective("VT285-052 | Call takePicture with previewHeight as 200, previewLeft 300,previewTop as 300, previewWidth as 200 and callback|");
-							setInstruction("check for the viewfinder position");
-							setExpected("The viewfinder positions should be as per the specified positions and Image should be captured successfully");
-							objCAM.takePicture({previewHeight:200,previewLeft:300,previewTop:300,previewWidth:200,outputFormat:'image'},callbacktakeraw);
+					it("Should call takePicture with colorModel as rgb | " + camid + camtype , function(){
+						var spec = new ManualSpec(jasmine, window.document);
+						spec.addGoal(jasmine.getEnv().currentSpec.description);
+					    spec.addStep("Press 'RunTest' button");
+					    spec.addStep("save the image and check for color.");
+					    spec.addExpectation('The saved image should be colored one.');
+					    spec.displayScenario();
+					    spec.waitForButtonPressing("Run test");
+
+						runs(function(){
+							objCAM.takePicture({'colorModel':'rgb'}, callbackFunc);
 						});
 
-						waitsFor(function()
-						{
-							return callbackststatus;
-						}, '10sec wait for callback to fire', 10000);
+						waitsFor(function(){
+							return cbkResponseTimeout;
+						},"waiting for callback data", 10000);
 
-						runs(function()
-						{
-							waitsFor(function() {
-							return document.getElementById("actResult").innerHTML != "init";
-							}, "Timed out waiting for tester to respond", 300000);
-							runs(function() {
-							expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-							});
-						});
-					});	
-
-					it("VT285-053/054 | Call takePicture with previewHeight, previewLeft,previewTop, previewWidth  and callback|", function() {
-
-						runs(function()
-						{
-							setObjective("VT285-053/054 | Call takePicture with previewHeight as 100, previewLeft 200,previewTop as 150, previewWidth as 100 and callback|");
-							setInstruction("check for the viewfinder position");
-							setExpected("viewfinder position should change with respect to previous test");
-							objCAM.takePicture({previewHeight:100,previewLeft:200,previewTop:150,previewWidth:100,outputFormat:'dataUri'},callbacktakeuri);
-						});
-
-						waitsFor(function()
-						{
-							return callbackststatus;
-						}, '10sec wait for callback to fire', 10000);
-
-						runs(function()
-						{
-							waitsFor(function() {
-							return document.getElementById("actResult").innerHTML != "init";
-							}, "Timed out waiting for tester to respond", 300000);
-							runs(function() {
-							expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-							});
-						});
-					});				
-				}
-
-				if (isAndroidOrApplePlatform())
-				{
-					it("VT285-058 | Call takePicture with saveToDeviceGallery as true and callback|", function() {
-
-						runs(function()
-						{
-							setObjective("VT285-058 | Call takePicture with saveToDeviceGallery as true and callback|");
-							setInstruction("take any image and check for location of image is saved");
-							setExpected("The Image should get saved at DeviceGallery and imageuri should retrun the path of device gallery");
-							objCAM.takePicture({outputFormat:'image',saveToDeviceGallery:true},callbacktakeraw);
-						});
-
-						waitsFor(function()
-						{
-							return callbackststatus;
-						}, '10sec wait for callback to fire', 10000);
-
-						runs(function()
-						{
-							waitsFor(function() {
-							return document.getElementById("actResult").innerHTML != "init";
-							}, "Timed out waiting for tester to respond", 300000);
-							runs(function() {
-							expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-							});
+						runs(function(){
+							spec.addResult(callbackData);
+							spec.displayResults();
+					        spec.waitForResponse();
 						});
 					});
 
-					it("VT285-059 | Call takePicture with saveToDeviceGallery as false and callback|", function() {
+					it("Should call takePicture with colorModel as greyscale | " + camid + camtype , function(){
+						var spec = new ManualSpec(jasmine, window.document);
+						spec.addGoal(jasmine.getEnv().currentSpec.description);
+					    spec.addStep("Press 'RunTest' button");
+					    spec.addStep("save the image and check for color.");
+					    spec.addExpectation('The image captured should be a grayscale (Black and White) image.');
+					    spec.displayScenario();
+					    spec.waitForButtonPressing("Run test");
 
-						runs(function()
-						{
-							setObjective("VT285-059 | Call takePicture with saveToDeviceGallery as false and callback|");
-							setInstruction("take any image and check for location of image is saved");
-							setExpected("The Image should not get saved at DeviceGallery and imageuri should not retrun the path of device gallery");
-							objCAM.takePicture({outputFormat:'image',saveToDeviceGallery:false},callbacktakeraw);
+						runs(function(){
+							objCAM.takePicture({'colorModel':'grayscale'}, callbackFunc);
 						});
 
-						waitsFor(function()
-						{
-							return callbackststatus;
-						}, '10sec wait for callback to fire', 10000);
+						waitsFor(function(){
+							return cbkResponseTimeout;
+						},"waiting for callback data", 10000);
 
-						runs(function()
-						{
-							waitsFor(function() {
-							return document.getElementById("actResult").innerHTML != "init";
-							}, "Timed out waiting for tester to respond", 300000);
-							runs(function() {
-							expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-							});
-						});
-					});		
+						runs(function(){
+							spec.addResult(callbackData);
+							spec.displayResults();
+					        spec.waitForResponse();
+						});	
 
-					it("VT285-060 | Call takePicture with saveToDeviceGallery as false, fileName and callback|", function() {
-
-						runs(function()
-						{
-							var path ='';
-							setObjective("VT285-060 | Call takePicture with saveToDeviceGallery as false, fileName and callback|");
-							setInstruction("take any image and check for location of image is saved");
-							setExpected("The Image should not get saved at DeviceGallery and imageuri should retrun the path of saved image at application folder");
-
-							if (isWindowsMobileOrAndroidPlatform()){path = 'file://application/Image060';}
-							if (isApplePlatform()) { path = '';}
-							if (isWindowsPhone8Platform()) { path ='file://application/Image060';}
-
-							objCAM.takePicture({outputFormat:'image',saveToDeviceGallery:false,fileName:path},callbacktakeraw);
-						});
-
-						waitsFor(function()
-						{
-							return callbackststatus;
-						}, '10sec wait for callback to fire', 10000);
-
-						runs(function()
-						{
-							waitsFor(function() {
-							return document.getElementById("actResult").innerHTML != "init";
-							}, "Timed out waiting for tester to respond", 300000);
-							runs(function() {
-							expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-							});
-						});
-					});	
-
-					it("VT285-061 | Call takePicture with saveToDeviceGallery as true, fileName and callback|", function() {
-
-						runs(function()
-						{
-							var path ='';
-							setObjective("VT285-061 | Call takePicture with saveToDeviceGallery as true, fileName and callback|");
-							setInstruction("take any image and check for location of image is saved");
-							setExpected("The Image should not get saved at DeviceGallery and imageuri should retrun the path of application folder");
-
-							if (isWindowsMobileOrAndroidPlatform()){path = 'file://application/Image060';}
-							if (isApplePlatform()) { path = '';}
-							if (isWindowsPhone8Platform()) { path ='file://application/Image060';}
-
-							objCAM.takePicture({outputFormat:'image',saveToDeviceGallery:true,fileName:path},callbacktakeraw);
-						});
-
-						waitsFor(function()
-						{
-							return callbackststatus;
-						}, '10sec wait for callback to fire', 10000);
-
-						runs(function()
-						{
-							waitsFor(function() {
-							return document.getElementById("actResult").innerHTML != "init";
-							}, "Timed out waiting for tester to respond", 300000);
-							runs(function() {
-							expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-							});
-						});
-					});	
-				}
-
-				if (isAndroidPlatform())
-				{
-					it("VT285-063 | supportedSizeList of camera using the retruned object of enumerate|", function() {
-
-						runs(function()
-						{
-							setObjective("VT285-063 | supportedSizeList of camera using the retruned object of enumerate|");
-							setInstruction("check for callback");
-							setExpected("The supported resolution should return");
-							var data = objCAM.supportedSizeList;
-							callbacktakeraw(data);
-						});
-
-						waitsFor(function()
-						{
-							return callbackststatus;
-						}, '10sec wait for callback to fire', 2000);
-
-						runs(function()
-						{
-							waitsFor(function() {
-							return document.getElementById("actResult").innerHTML != "init";
-							}, "Timed out waiting for tester to respond", 300000);
-							runs(function() {
-							expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-							});
-						});
+						runs(function(){
+							objCAM.colorModel.COLOR_MODEL_RGB;
+						});					
 					});
 
-					it("VT285-064 | Call takePicture with useSystemViewfinder as true and with callback|", function() {
+				};
 
-						runs(function()
-						{
-							setObjective("VT285-064 | Call takePicture with useSystemViewfinder as true and with callback|");
-							setInstruction("Check for the open viewfinder and take any image");
-							setExpected("System viewfinder should open to take the image and image should save successfully at device gallery");
-							objCAM.takePicture({outputFormat:'image',useSystemViewfinder:true},callbacktakeraw);
-						});
+				it("Should capture image by calling takePicture() method with compressionFormat jpg. | " + camid + camtype , function(){
+					var spec = new ManualSpec(jasmine, window.document);
+					spec.addGoal(jasmine.getEnv().currentSpec.description);
+				    spec.addStep("Press 'RunTest' button");
+				    spec.addStep("Check for the returned status.");
+				    spec.addExpectation('The image captured should be in .jpg and other Parameters should return default values.');
+				    spec.displayScenario();
+				    spec.waitForButtonPressing("Run test");
 
-						waitsFor(function()
-						{
-							return callbackststatus;
-						}, '10sec wait for callback to fire', 10000);
-
-						runs(function()
-						{
-							waitsFor(function() {
-							return document.getElementById("actResult").innerHTML != "init";
-							}, "Timed out waiting for tester to respond", 300000);
-							runs(function() {
-							expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-							});
-						});
+					runs(function(){
+						objCAM.takePicture({'compressionFormat':'jpg'}, callbackFunc);
 					});
 
-					it("VT285-065 | Call takePicture with useSystemViewfinder as false and with callback|", function() {
+					waitsFor(function(){
+						return cbkResponseTimeout;
+					},"waiting for callback data", 10000);
 
-						runs(function()
-						{
-							setObjective("VT285-065 | Call takePicture with useSystemViewfinder as false and with callback|");
-							setInstruction("Check for the open viewfinder and take any image");
-							setExpected("Rhodes viewfinder should open to take the image and image should save successfully at device gallery");
-							objCAM.takePicture({outputFormat:'image',useSystemViewfinder:false},callbacktakeraw);
-						});
+					runs(function(){
+						spec.addResult(callbackData);
+						spec.displayResults();
+				        spec.waitForResponse();
+					});
+				});
 
-						waitsFor(function()
-						{
-							return callbackststatus;
-						}, '10sec wait for callback to fire', 10000);
+				it("Should capture image by calling takePicture() method with compressionFormat png. | " + camid + camtype , function(){
+					var spec = new ManualSpec(jasmine, window.document);
+					spec.addGoal(jasmine.getEnv().currentSpec.description);
+				    spec.addStep("Press 'RunTest' button");
+				    spec.addStep("Check for the returned status.");
+				    spec.addExpectation('The image captured should be in .png But in WM & CE it will be jpg only as png is not supported');
+				    spec.displayScenario();
+				    spec.waitForButtonPressing("Run test");
 
-						runs(function()
-						{
-							waitsFor(function() {
-							return document.getElementById("actResult").innerHTML != "init";
-							}, "Timed out waiting for tester to respond", 300000);
-							runs(function() {
-							expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-							});
-						});
+					runs(function(){
+						objCAM.takePicture({'compressionFormat':'png'}, callbackFunc);
 					});
 
-					it("VT285-066 | Call takePicture with useSystemViewfinder as true, outputFormat as Datauri and with callback|", function() {
+					waitsFor(function(){
+						return cbkResponseTimeout;
+					},"waiting for callback data", 10000);
 
-						runs(function()
-						{
-							setObjective("VT285-066 | Call takePicture with useSystemViewfinder as true, outputFormat as Datauri and with callback|");
-							setInstruction("Check for the open viewfinder and take any image");
-							setExpected("System viewfinder should open to take the image and image should displayed successfully on application");
-							objCAM.takePicture({outputFormat:'dataUri',useSystemViewfinder:true},callbacktakeuri);
-						});
-
-						waitsFor(function()
-						{
-							return callbackststatus;
-						}, '10sec wait for callback to fire', 10000);
-
-						runs(function()
-						{
-							waitsFor(function() {
-							return document.getElementById("actResult").innerHTML != "init";
-							}, "Timed out waiting for tester to respond", 300000);
-							runs(function() {
-							expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-							});
-						});
+					runs(function(){
+						spec.addResult(callbackData);
+						spec.displayResults();
+				        spec.waitForResponse();
 					});
 
-					it("VT285-067 | Call takePicture with useSystemViewfinder as true, outputFormat as Datauri and with callback|", function() {
-
-						runs(function()
-						{
-							var path='';
-							setObjective("VT285-067 | Call takePicture with useSystemViewfinder as true, outputFormat as Datauri and with callback|");
-							setInstruction("Check for the open viewfinder and take any image");
-							setExpected("System viewfinder should open to take the image and image should displayed successfully on application");
-
-							if (isWindowsMobileOrAndroidPlatform()){path = 'file://application/Image067';}
-							if (isApplePlatform()) { path = '';}
-							if (isWindowsPhone8Platform()) { path ='file://application/Image067';}
-
-							objCAM.takePicture({outputFormat:'dataUri',useSystemViewfinder:true,saveToDeviceGallery:false,fileName:path},callbacktakeuri);
-						});
-
-						waitsFor(function()
-						{
-							return callbackststatus;
-						}, '10sec wait for callback to fire', 10000);
-
-						runs(function()
-						{
-							waitsFor(function() {
-							return document.getElementById("actResult").innerHTML != "init";
-							}, "Timed out waiting for tester to respond", 300000);
-							runs(function() {
-							expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-							});
-						});
+					runs(function(){
+						objCAM.colorModel.COMPRESSION_FORMAT_JPG;
 					});
+				});
 
-					it("VT285-068/069 | Call takePicture with useSystemViewfinder as true and other properties|", function() {
-
-						runs(function()
-						{
-							setObjective("VT285-068/069 | Call takePicture with useSystemViewfinder as true and other properties|");
-							setInstruction("Check for the open viewfinder and take any image");
-							setExpected("The Image should be of grey color and resolution should be 640 and 480");
-							objCAM.desiredHeight = 480;
-							objCAM.desiredHeight = 640;
-							objCAM.colorModel = 'greyscale';
-							objCAM.takePicture({outputFormat:'image',useSystemViewfinder:true},callbacktaketake);
-						});
-
-						waitsFor(function()
-						{
-							return callbackststatus;
-						}, '10sec wait for callback to fire', 10000);
-
-						runs(function()
-						{
-							waitsFor(function() {
-							return document.getElementById("actResult").innerHTML != "init";
-							}, "Timed out waiting for tester to respond", 300000);
-							runs(function() {
-							expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-							});
-						});
-					});
-
-					it("VT285-070 | Call takePicture with useSystemViewfinder as true, captureSound,flashMode and callback|", function() {
-
-						runs(function()
-						{
-							var path='';
-							setObjective("VT285-070 | Call takePicture with useSystemViewfinder as true, captureSound and callback|");
-							setInstruction("Check for the open viewfinder and take any image");
-							setExpected("it should be system viewfinder and the Image should be of rgb and resolution should be 1280x720 than prev, sound should play and flash should come");
-
-							if (isWindowsMobileOrAndroidPlatform()){path = 'file://application/alarm.wav';}
-							if (isApplePlatform()) { path = '';}
-							if (isWindowsPhone8Platform()) { path ='file://application/alarm.wav';}
-
-							objCAM.desiredHeight = 1280;
-							objCAM.desiredHeight = 720;
-							objCAM.colorModel = 'rgb';
-							objCAM.takePicture({outputFormat:'image',useSystemViewfinder:true,flashMode:'on',captureSound:path},callbacktaketake);
-						});
-
-						waitsFor(function()
-						{
-							return callbackststatus;
-						}, '10sec wait for callback to fire', 10000);
-
-						runs(function()
-						{
-							waitsFor(function() {
-							return document.getElementById("actResult").innerHTML != "init";
-							}, "Timed out waiting for tester to respond", 300000);
-							runs(function() {
-							expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-							});
-						});
-					});
-				}
-			});	
+			});
 
 		})(enumData[j]);
 
 	}
-});	
 
-
-describe("Camera Test for choosePicture()", function() {
-
-	var ENABLE5K = 5000;
-	var ENABLE1K = 1000;
-	var callbackststatus = false;
-
-	var callbackchoose = function (data){
-			callbackdata(data);
-			callbackststatus = true;
-	}
-
-	var callbackchooseuri = function (data){
-			callbackdatauri(data);
-			callbackststatus = true;
-	}
-
-	var callbackchooseraw = function (data){
-			callbackdataraw(JSON.stringify(data));
-			callbackststatus = true;
-	}
-
-	beforeEach(function() {
-		var nulldata ='';
-		document.getElementById("actResult").innerHTML = "init";
-		callbackdata(nulldata);
-		callbackdataraw(nulldata);
-		callbackdatauri(nulldata);
-		callbackststatus = false;
-	});
-
-	afterEach(function() {
-		//objCAM.clearAllProperties();
-	});
-
-	for (var j = 0;j<enumData.length;j++){
-
-		(function(objCAM){
-
-			Rho.Camera.setDefault(objCAM);
-
-			it("VT285-001/006/007 | Call choosePicture with callback as function and retruned status OK |", function() {
-
-				runs(function()
-				{
-					setObjective("VT285-001/006/007 |Call choosePicture with callback as function and retruned status OK|");
-					setInstruction("choose the image ");
-					setExpected("The retruned status should be OK and uri of the image should be returned");
-					Rho.Camera.choosePicture({},callbackchoose);
-				});
-
-				waitsFor(function()
-				{
-					return callbackststatus;
-				}, '10sec wait for callback to fire', 10000);
-
-				runs(function()
-				{
-					waitsFor(function() {
-					return document.getElementById("actResult").innerHTML != "init";
-					}, "Timed out waiting for tester to respond", 300000);
-					runs(function() {
-					expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-					});
-				});
-			});
-
-			it("VT285-002 | Call choosePicture with callback as function and retruned status cancel |" , function() {
-
-				runs(function()
-				{
-					setObjective("VT285-002 | Call choosePicture with callback as function and retruned status cancel |");
-					setInstruction("Cancel the choosing of image");
-					setExpected("The retruned status should be cancel");
-					Rho.Camera.choosePicture({},callbackchoose);
-					setTimeout(function() {
-						enableFlag = true;
-					}, ENABLE5K);
-				});
-
-				waitsFor(function()
-				{
-					return callbackststatus;
-				}, '10sec wait for callback to fire', 10000);
-
-				runs(function()
-				{
-					waitsFor(function() {
-					return document.getElementById("actResult").innerHTML != "init";
-					}, "Timed out waiting for tester to respond", 300000);
-					runs(function() {
-					expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-					});
-				});
-			});
-
-			it("VT285-003 | Call choosePicture with callback as function and retruned status error |", function() {
-
-				runs(function()
-				{
-					setObjective("VT285-003 | Call choosePicture with callback as function and retruned status error|");
-					setInstruction("Choose some other file instead of image file");
-					setExpected("The retruned status should be error and messge should containg the information on error");
-					Rho.Camera.choosePicture({},callbackchoose);
-				});
-
-				waitsFor(function()
-				{
-					return callbackststatus;
-				}, '10sec wait for callback to fire', 10000);
-
-				runs(function()
-				{
-					waitsFor(function() {
-					return document.getElementById("actResult").innerHTML != "init";
-					}, "Timed out waiting for tester to respond", 300000);
-					runs(function() {
-					expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-					});
-				});
-			});
-
-			it("VT285-005 | Call choosePicture with callback as anonymous function |", function() {
-
-				runs(function()
-				{
-					setObjective("VT285-003 | Call choosePicture with callback as anonymous function|");
-					setInstruction("choose the image and .Check for the retruned  URI of choosen image");
-					setExpected("uri of the choosen image should be returned in callback");
-					Rho.Camera.choosePicture({},function(data){callbackrawdata(JSON.stringify(data));callbackststatus = true;});
-				});
-
-				waitsFor(function()
-				{
-					return callbackststatus;
-				}, '10sec wait for callback to fire', 10000);
-
-				runs(function()
-				{
-					waitsFor(function() {
-					return document.getElementById("actResult").innerHTML != "init";
-					}, "Timed out waiting for tester to respond", 300000);
-					runs(function() {
-					expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-					});
-				});
-			});
-
-			it("VT285-006 | Call choosePicture with outputFormat:dataUri and check for all retrun data |", function() {
-
-				runs(function()
-				{
-					setObjective("VT285-006 | Call choosePicture with outputFormat:dataUri and callback function|");
-					setInstruction("choose the image and Check for all retrun data with datauri");
-					setExpected("The Image should be disaplayed in View of the application, retruned image height/width should be same as the displayed image, status should be Ok");
-					Rho.Camera.choosePicture({"outputFormat":'dataUri'},callbackchooseuri);
-				});
-
-				waitsFor(function()
-				{
-					return callbackststatus;
-				}, '10sec wait for callback to fire', 10000);
-
-				runs(function()
-				{
-					waitsFor(function() {
-					return document.getElementById("actResult").innerHTML != "init";
-					}, "Timed out waiting for tester to respond", 300000);
-					runs(function() {
-					expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-					});
-				});
-			});
-
-			it("VT285-007 | Call choosePicture with outputFormat:image and check for all retrun data|", function() {
-
-				runs(function()
-				{
-					setObjective("VT285-007 | Call choosePicture with outputFormat:image and check for all retrun data|");
-					setInstruction("choose the image and Check for all retrun data with saved image");
-					setExpected("The retruned image format should be same with the saved image format in device (default Jpg), retruned image height/width should be same as the displayed image, status should be Ok");
-					Rho.Camera.choosePicture({"outputFormat":'image'},callbackchooseraw);
-				});
-
-				waitsFor(function()
-				{
-					return callbackststatus;
-				}, '10sec wait for callback to fire', 10000);
-
-				runs(function()
-				{
-					waitsFor(function() {
-					return document.getElementById("actResult").innerHTML != "init";
-					}, "Timed out waiting for tester to respond", 300000);
-					runs(function() {
-					expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-					});
-				});
-			});
-
-			it("VT285-008 | Call choosePicture with property as colorModel:grayscale and callback|", function() {
-
-				runs(function()
-				{
-					setObjective("VT285-008 | Call choosePicture with outputFormat:image and check for all retrun data|");
-					setInstruction("choose the image and Check for the color of image");
-					setExpected("The displayed image should be in grey mode");
-					Rho.Camera.choosePicture({colorModel:'grayscale'},function(data){callbackdatauri(data);callbackststatus = true;});
-				});
-
-				waitsFor(function()
-				{
-					return callbackststatus;
-				}, '10sec wait for callback to fire', 10000);
-
-				runs(function()
-				{
-					waitsFor(function() {
-					return document.getElementById("actResult").innerHTML != "init";
-					}, "Timed out waiting for tester to respond", 300000);
-					runs(function() {
-					expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-					});
-				});
-			});
-
-			it("VT285-009 | Call choosePicture with property as colorModel,desiredHeight,desiredWidth and callback|", function() {
-
-				runs(function()
-				{
-					setObjective("VT285-009 | Call choosePicture with property as colorModel,desiredHeight,desiredWidth and callback|");
-					setInstruction("choose the image and Check for the color of image");
-					setExpected("The displayed image should be in rgb mode, retruned image height/width should be same as the displayed image, status should be Ok");
-					Rho.Camera.choosePicture({colorModel:'rgb',desiredHeight:640,desiredWidth:480},function(data){callbackdatauri(data);callbackststatus = true;});
-				});
-
-				waitsFor(function()
-				{
-					return callbackststatus;
-				}, '10sec wait for callback to fire', 10000);
-
-				runs(function()
-				{
-					waitsFor(function() {
-					return document.getElementById("actResult").innerHTML != "init";
-					}, "Timed out waiting for tester to respond", 300000);
-					runs(function() {
-					expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-					});
-				});
-			});
-
-			it("VT285-071 | Call getCameraByType with Main/back and callback as function|", function() {
-
-				runs(function()
-				{
-					setObjective("VT285-071 | Call getCameraByType with Main/back and callback as function|");
-					setInstruction("check for callback to fire");
-					setExpected("The return values should be main camera object and the main camera should open to take picture");
-					var cam = Rho.Camera.CameraType;
-					Rho.Camera.getCameraByType(cam,callbackchooseraw);
-				});
-
-				waitsFor(function()
-				{
-					return callbackststatus;
-				}, '10sec wait for callback to fire', 10000);
-
-				runs(function()
-				{
-					waitsFor(function() {
-					return document.getElementById("actResult").innerHTML != "init";
-					}, "Timed out waiting for tester to respond", 300000);
-					runs(function() {
-					expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-					});
-				});
-			});
-
-			it("VT285-073 | Call getCameraByType with main/ front and callback as anonymous function|", function() {
-
-				runs(function()
-				{
-					setObjective("VT285-073 | Call getCameraByType with main/ front and callback as anonymous function|");
-					setInstruction("check for callback to fire");
-					setExpected("The return values should be main camera object and the main camera should open to take picture");
-					var cam = Rho.Camera.CameraType;
-					Rho.Camera.getCameraByType(cam,function(data){callbackdataraw(data);callbackststatus = true;});
-				});
-
-				waitsFor(function()
-				{
-					return callbackststatus;
-				}, '10sec wait for callback to fire', 10000);
-
-				runs(function()
-				{
-					waitsFor(function() {
-					return document.getElementById("actResult").innerHTML != "init";
-					}, "Timed out waiting for tester to respond", 300000);
-					runs(function() {
-					expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-					});
-				});
-			});
-
-			it("VT285-074 | Call getCameraByType with main/ front and no callback (Synchronous Access)|", function() {
-
-				runs(function()
-				{
-					setObjective("VT285-074 | Call getCameraByType with main/ front and no callback (Synchronous Access)|");
-					setInstruction("check for callback to fire");
-					setExpected("The return values should be main camera object and the main camera should open to take picture");
-					var cam = Rho.Camera.CameraType;
-					var data = Rho.Camera.getCameraByType(cam);
-					callbackchooseraw(data);
-				});
-
-				waitsFor(function()
-				{
-					return callbackststatus;
-				}, '10sec wait for callback to fire', 10000);
-
-				runs(function()
-				{
-					waitsFor(function() {
-					return document.getElementById("actResult").innerHTML != "init";
-					}, "Timed out waiting for tester to respond", 300000);
-					runs(function() {
-					expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-					});
-				});
-			});
-
-			it("VT285-075| Call setDefault with front/Main camera |" + camid + camtype , function() {
-
-					runs(function()
-					{
-						setObjective("VT285-075 |Call setDefault with front/Main camera|");
-						setInstruction("Take an image " + camid);
-						setExpected("The Front/main camera should start to take picture as it has set to default object");
-						Rho.Camera.takePicture({},callbackchooseraw);
-					});
-
-					waitsFor(function()
-					{
-						return callbackststatus;
-					}, '10sec wait for callback to fire', 10000);
-
-					runs(function()
-					{
-						waitsFor(function() {
-						return document.getElementById("actResult").innerHTML != "init";
-						}, "Timed out waiting for tester to respond", 300000);
-						runs(function() {
-						expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-						});
-					});
-			})
-
-			if (isAndroidOrApplePlatform())
-			{
-				it("VT285-079| Call saveImageToDeviceGallery after takepicture |" + camid + camtype , function() {
-
-						runs(function()
-						{
-							var path= '';
-							setObjective("VT285-079 |Call saveImageToDeviceGallery after takepicture|");
-							setInstruction("Take an image " + camid);
-							setExpected("The Image should be saved at device gallery");
-							Rho.Camera.takePicture({saveToDeviceGallery:false},function(data){path = data.imageUri;callbackststatus = true;});
-							saveImageToDeviceGallery(path);
-						});
-
-						waitsFor(function()
-						{
-							return callbackststatus;
-						}, '10sec wait for callback to fire', 10000);
-
-						runs(function()
-						{
-							waitsFor(function() {
-							return document.getElementById("actResult").innerHTML != "init";
-							}, "Timed out waiting for tester to respond", 300000);
-							runs(function() {
-							expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-							});
-						});
-				})
-
-				it("VT285-080| Call saveImageToDeviceGallery after choosepicture |" + camid + camtype , function() {
-
-						runs(function()
-						{
-							var path= '';
-							setObjective("VT285-080 |Call saveImageToDeviceGallery after choosepicture|");
-							setInstruction("choose an image " + camid);
-							setExpected("The Image should be saved at device gallery");
-							Rho.Camera.choosePicture({saveToDeviceGallery:false},function(data){path = data.imageUri;callbackststatus = true;});
-							saveImageToDeviceGallery(path);
-						});
-
-						waitsFor(function()
-						{
-							return callbackststatus;
-						}, '10sec wait for callback to fire', 10000);
-
-						runs(function()
-						{
-							waitsFor(function() {
-							return document.getElementById("actResult").innerHTML != "init";
-							}, "Timed out waiting for tester to respond", 300000);
-							runs(function() {
-							expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-							});
-						});
-				})
-
-				it("VT285-081| Call saveImageToDeviceGallery with pathToImage |" + camid + camtype , function() {
-
-						runs(function()
-						{
-							var path= '';
-							setObjective("VT285-081 |Call saveImageToDeviceGallery with pathToImage|");
-							setInstruction("choose an image " + camid);
-							setExpected("The Image should be saved at device gallery");
-
-							if (isWindowsMobileOrAndroidPlatform()){path = 'file://application/Image067';}
-							if (isApplePlatform()) { path = '';}
-							if (isWindowsPhone8Platform()) { path ='file://application/Image067';}
-
-							saveImageToDeviceGallery(path);
-						});
-
-						waitsFor(function()
-						{
-							return callbackststatus;
-						}, '10sec wait for callback to fire', 10000);
-
-						runs(function()
-						{
-							waitsFor(function() {
-							return document.getElementById("actResult").innerHTML != "init";
-							}, "Timed out waiting for tester to respond", 300000);
-							runs(function() {
-							expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-							});
-						});
-				})
-			}
-
-			it("VT285-082| Call getAllProperties without any callback |" + camid + camtype , function() {
-
-					runs(function()
-					{
-						setObjective("VT285-082 |Call getAllProperties without any callback|");
-						setInstruction("check all the properties has retruened with deafult value or not " + camid);
-						setExpected("It should return all the properties of camera with it's default value");
-						var data = Rho.Camera.getAllProperties();
-						callbackchooseraw(data);
-					});
-
-					waitsFor(function()
-					{
-						return callbackststatus;
-					}, '10sec wait for callback to fire', 10000);
-
-					runs(function()
-					{
-						waitsFor(function() {
-						return document.getElementById("actResult").innerHTML != "init";
-						}, "Timed out waiting for tester to respond", 300000);
-						runs(function() {
-						expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-						});
-					});
-			})
-
-			it("VT285-083| Call getAllProperties with Anonymous callback |" + camid + camtype , function() {
-
-					runs(function()
-					{
-						setObjective("VT285-083 |Call getAllProperties with Anonymous callback|");
-						setInstruction("check all the properties has retruened with deafult value or not " + camid);
-						setExpected("It should return all the properties of camera with it's default value");
-						Rho.Camera.getSupportedProperties(function(data){callbackdataraw(data);callbackststatus = true;});
-					});
-
-					waitsFor(function()
-					{
-						return callbackststatus;
-					}, '10sec wait for callback to fire', 10000);
-
-					runs(function()
-					{
-						waitsFor(function() {
-						return document.getElementById("actResult").innerHTML != "init";
-						}, "Timed out waiting for tester to respond", 300000);
-						runs(function() {
-						expect("pass").toEqual(document.getElementById("actResult").innerHTML);
-						});
-					});
-			})
-
-		})(enumData[j]);
-
-	}
-});	
+	
+});

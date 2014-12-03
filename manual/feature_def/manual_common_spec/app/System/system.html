@@ -145,12 +145,13 @@
 
 <div class="method_tests android ios win32 wm">
     <div class="method_name">Rho.System.httpProxyURI</div>
-    <div class="method_desc">HTTP Proxy URI : Proxy should set successfully to your proxy server address (Configure it before start this test).
+    <div class="method_desc">HTTP Proxy URI : Proxy should set successfully to your proxy server address (Configure it before start this test - modify /app/System/system.html about line 150).
         (Rhosimulator supports it only for windows platform)
     </div>
     <div class="test_scenario">
         <div class="test_scenario_controls">
-            <button onclick="Rho.System.httpProxyURI='http://192.168.1.141:9090';">Set httpProxyURI</button><br/>
+            <button onclick="Rho.System.httpProxyURI='http://180.177.3.197:8088';">Set httpProxyURI (http://180.177.3.197:8088)</button><br/>
+            <button onclick="Rho.System.httpProxyURI='http://wwwgate0.mot.com:1080';">Set httpProxyURI (http://wwwgate0.mot.com:1080)</button><br/>
             <button onClick="alert((Rho.Network.get({url: 'http://www.google.com'})).body);">Call Rho.Network.get('http://www.google.com')</button><br/>
             <button onClick="Rho.System.httpProxyURI = '';">Set proxyHttpUri to empty string)</button><br/>
             <button onClick="Rho.System.httpProxyURI = null;">Set proxyHttpUri to null</button>
@@ -160,7 +161,7 @@
     <div class="test_scenario">
         <div class="test_scenario_controls">
             <div id="Rho_System_httpProxyURI">
-                <a href="javascript:void(0)" onclick="httpProxyURI;"> Get httpProxyURI : </a> <span
+                <a href="javascript:void(0)" onclick="gethttpProxyURI();"> Get httpProxyURI : </a> <span
                     class="result"> </span>
             </div>
             <span class="test_scenario_number">VT300-022<br/></span>
