@@ -351,7 +351,7 @@ describe("Camera API Manual Tests", function(){
 
 				waitsFor(function(){
 					return cbkResponseTimeout;
-				},"waiting for callback data", 10000);
+				},"waiting for callback data", 20000);
 
 				runs(function(){
 					spec.addResult(callbackData);
@@ -386,7 +386,7 @@ describe("Camera API Manual Tests", function(){
 
 				waitsFor(function(){
 					return cbkResponseTimeout;
-				},"waiting for callback data", 10000);
+				},"waiting for callback data", 20000);
 
 				runs(function(){
 					spec.addResult(callbackData);
@@ -436,7 +436,7 @@ describe("Camera API Manual Tests", function(){
 			        	spec.addGoal(jasmine.getEnv().currentSpec.description);
 			        	spec.addPrecondition("Call showPreview with propertyhash as fileName:\\Application\\camImage, desiredHeight:480, desiredWidth:640, compressionFormat:png, outputFormat:imageUri, flashMode:ON, previewLeft:80, previewTop:10, previewWidth:100, previewHeight:60, captureSound:'alarm5.wav', aimMode:on and callback.");
 			            spec.addStep("Press 'RunTest' button");
-			            spec.addStep("Check for the returned callback status & property set");
+			            spec.addStep("Capture will happen after Check for the returned callback status & property set");
 			            spec.addExpectation('The viewfinder with properties set should reflect. The returned status should be OK and captured image should be displayed as imageUri with all callback properties and play a sound on capture. Also flashMode should be ON for color camera & aimMode ON for imager camera.');
 			            spec.displayScenario();
 			            spec.waitForButtonPressing("Run test");
@@ -447,14 +447,14 @@ describe("Camera API Manual Tests", function(){
 								'desiredHeight':720, 'desiredWidth':1080, 'previewLeft':80, 'previewTop':10, 'previewWidth':100, 'previewHeight':60
 							});
 
-							waitsFor(function(){
+							setTimeout(function(){
 								objCAM.capture(callbackFunc);
-							},"waiting 4secs for capture", 4000);
+							},6000);
 						});
 
 						waitsFor(function(){
 							return cbkResponseTimeout;
-						},"waiting for callback data", 10000);
+						},"waiting for callback data", 12000);
 
 						runs(function(){
 							spec.addResult(callbackData);
@@ -481,14 +481,14 @@ describe("Camera API Manual Tests", function(){
 								'previewLeft':80, 'previewTop':10, 'previewWidth':40, 'previewHeight':120
 							});
 
-							waitsFor(function(){
+							setTimeout(function(){
 								objCAM.capture(callbackFunc);
-							},"waiting 4secs for capture", 4000);
+							},6000);
 						});
 
 						waitsFor(function(){
 							return cbkResponseTimeout;
-						},"waiting for callback data", 10000);
+						},"waiting for callback data", 12000);
 
 						runs(function(){
 							spec.addResult(callbackData);
@@ -510,15 +510,15 @@ describe("Camera API Manual Tests", function(){
 						runs(function(){
 							objCAM.showPreview();
 							
-							waitsFor(function(){
+							setTimeout(function(){
 								Rho.ScreenOrientation.rightHanded();
 								objCAM.capture(callbackFunc);
-							},"waiting 4secs for ScreenOrientation", 4000);
+							},6000);
 						});
 
 						waitsFor(function(){
 							return cbkResponseTimeout;
-						},"waiting for callback data", 10000);
+						},"waiting for callback data", 12000);
 
 						runs(function(){
 							spec.addResult(callbackData);
@@ -544,12 +544,11 @@ describe("Camera API Manual Tests", function(){
 							objCAM.showPreview();
 						});
 
-						waitsFor(function(){
-							return true;
-						},"waiting for callback data", 10000);
+						setTimeout(function(){
+							objCAM.hidePreview();
+						},6000);
 
 						runs(function(){
-							objCAM.hidePreview();
 			                spec.waitForResponse();
 						});
 					});
@@ -566,9 +565,9 @@ describe("Camera API Manual Tests", function(){
 			            runs(function(){
 							objCAM.showPreview();
 
-							waitsFor(function(){
+							setTimeout(function(){
 								Rho.Application.minimize();
-							},"waiting for minimize", 4000);
+							},6000);
 						});
 
 
@@ -753,14 +752,14 @@ describe("Camera API Manual Tests", function(){
 					runs(function(){
 						objCAM.takePicture({}, callbackFunc);
 
-						waitsFor(function(){
+						setTimeout(function(){
 							Rho.ScreenOrientation.leftHanded();
-						},"waiting 4secs for ScreenOrientation", 4000);
+						},4000);
 					});
 
 					waitsFor(function(){
 						return cbkResponseTimeout;
-					},"waiting for callback data", 10000);
+					},"waiting for callback data", 15000);
 
 					runs(function(){
 						spec.addResult(callbackData);
