@@ -445,11 +445,11 @@ describe("Camera API Manual Tests", function(){
 							objCAM.showPreview({'fileName':'\\Application\\camImage', 'captureSound':'alarm5.wav',
 								'compressionFormat':'png', 'outputFormat':'dataUri', 'flashMode':'on', 'aimMode':'on', 
 								'desiredHeight':720, 'desiredWidth':1080, 'previewLeft':80, 'previewTop':10, 'previewWidth':100, 'previewHeight':60
-							}, callbackFunc);
+							});
 
 							waitsFor(function(){
-								objCAM.capture();
-							},"waiting 2secs for capture", 2000);
+								objCAM.capture(callbackFunc);
+							},"waiting 4secs for capture", 4000);
 						});
 
 						waitsFor(function(){
@@ -479,11 +479,11 @@ describe("Camera API Manual Tests", function(){
 							objCAM.showPreview({'fileName':'camImage123', 'compressionFormat':'jpg', 'outputFormat':'image', 
 								'flashMode':'off', 'aimMode':'off', 'captureSound':'', 'desiredHeight':360, 'desiredWidth':480,
 								'previewLeft':80, 'previewTop':10, 'previewWidth':40, 'previewHeight':120
-							}, callbackFunc);
+							});
 
 							waitsFor(function(){
-								objCAM.capture();
-							},"waiting 2secs for capture", 2000);
+								objCAM.capture(callbackFunc);
+							},"waiting 4secs for capture", 4000);
 						});
 
 						waitsFor(function(){
@@ -502,13 +502,18 @@ describe("Camera API Manual Tests", function(){
 						var spec = new ManualSpec(jasmine, window.document);
 			        	spec.addGoal(jasmine.getEnv().currentSpec.description);
 			            spec.addStep("Press 'RunTest' button");
+			            spec.addStep("NOTE: If auto rotate supported, rotate the device in all directions");
 			            spec.addExpectation('The viewfinder should realign and there should not be any error.');
 			            spec.displayScenario();
 			            spec.waitForButtonPressing("Run test");
 
 						runs(function(){
-							objCAM.showPreview({}, callbackFunc);
-							Rho.ScreenOrientation.rightHanded();
+							objCAM.showPreview();
+							
+							waitsFor(function(){
+								Rho.ScreenOrientation.rightHanded();
+								objCAM.capture(callbackFunc);
+							},"waiting 4secs for ScreenOrientation", 4000);
 						});
 
 						waitsFor(function(){
@@ -536,11 +541,11 @@ describe("Camera API Manual Tests", function(){
 			            spec.waitForButtonPressing("Run test");
 
 			            runs(function(){
-							objCAM.showPreview({}, callbackFunc);
+							objCAM.showPreview();
 						});
 
 						waitsFor(function(){
-							return cbkResponseTimeout;
+							return true;
 						},"waiting for callback data", 10000);
 
 						runs(function(){
@@ -553,22 +558,21 @@ describe("Camera API Manual Tests", function(){
 						var spec = new ManualSpec(jasmine, window.document);
 			        	spec.addGoal(jasmine.getEnv().currentSpec.description);
 			            spec.addStep("Press 'RunTest' button");
-			            spec.addStep("Once the preview window appears, Minimize & restore the application");
+			            spec.addStep("Once the preview window appears, Minimize & restore the application (restore manually by clicking on the application)");
 			            spec.addExpectation('Should display error with error message in callback.');
 			            spec.displayScenario();
 			            spec.waitForButtonPressing("Run test");
 
 			            runs(function(){
-							objCAM.showPreview({}, callbackFunc);
+							objCAM.showPreview();
+
+							waitsFor(function(){
+								Rho.Application.minimize();
+							},"waiting for minimize", 4000);
 						});
 
-						waitsFor(function(){
-							return cbkResponseTimeout;
-						},"waiting for callback data", 10000);
 
 						runs(function(){
-							spec.addResult(callbackData);
-							spec.displayResults();
 			                spec.waitForResponse();
 						});
 
@@ -582,21 +586,15 @@ describe("Camera API Manual Tests", function(){
 			        	spec.addGoal(jasmine.getEnv().currentSpec.description);
 			            spec.addStep("Press 'RunTest' button");
 			            spec.addStep("Once the preview window appears, Suspend & resume the device");
-			            spec.addExpectation('Should display error with error message in callback.');
+			            spec.addExpectation('Preview should be there and application should not behave abnormally.');
 			            spec.displayScenario();
 			            spec.waitForButtonPressing("Run test");
 
 			            runs(function(){
-							objCAM.showPreview({}, callbackFunc);
+							objCAM.showPreview();
 						});
 
-						waitsFor(function(){
-							return cbkResponseTimeout;
-						},"waiting for callback data", 10000);
-
 						runs(function(){
-							spec.addResult(callbackData);
-							spec.displayResults();
 			                spec.waitForResponse();
 						});
 
@@ -615,16 +613,10 @@ describe("Camera API Manual Tests", function(){
 			            spec.waitForButtonPressing("Run test");
 
 			            runs(function(){
-							objCAM.showPreview({}, callbackFunc);
+							objCAM.showPreview();
 						});
 
-						waitsFor(function(){
-							return cbkResponseTimeout;
-						},"waiting for callback data", 10000);
-
 						runs(function(){
-							spec.addResult(callbackData);
-							spec.displayResults();
 			                spec.waitForResponse();
 						});
 					});
@@ -752,6 +744,7 @@ describe("Camera API Manual Tests", function(){
 					var spec = new ManualSpec(jasmine, window.document);
 		        	spec.addGoal(jasmine.getEnv().currentSpec.description);
 		            spec.addStep("Press 'RunTest' button");
+		            spec.addStep("NOTE: If auto rotate supported, rotate the device in all directions");
 		            spec.addStep("NOTE: ScreenOrientation will become normal once pass/fail is clicked");
 		            spec.addExpectation('The viewfinder should realign and there should not be any error.');
 		            spec.displayScenario();
@@ -759,7 +752,10 @@ describe("Camera API Manual Tests", function(){
 
 					runs(function(){
 						objCAM.takePicture({}, callbackFunc);
-						Rho.ScreenOrientation.leftHanded();
+
+						waitsFor(function(){
+							Rho.ScreenOrientation.leftHanded();
+						},"waiting 4secs for ScreenOrientation", 4000);
 					});
 
 					waitsFor(function(){
@@ -1198,7 +1194,7 @@ describe("Camera API Manual Tests", function(){
 					});				
 				});
 
-				if (isAndroid() || isApplePlatform()) {
+				if (isAndroidPlatform() || isApplePlatform()) {
 
 					it("Should call takePicture with colorModel as rgb | " + camid + camtype , function(){
 						var spec = new ManualSpec(jasmine, window.document);

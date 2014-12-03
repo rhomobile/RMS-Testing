@@ -475,7 +475,7 @@ var arr_camera_property = [
 	testName		:	"VT285-1033 | Set cameraType : front | front ",
 	propertyName	:	"cameraType",
 	cameraTypes		:	"All",
-	OSTypes			:	"ANDROID APPLE WINDOWS",
+	OSTypes			:	"ANDROID APPLE",
 	propertyValue	:	"front",
 	expectedResult	:	"front"
 },
@@ -483,7 +483,7 @@ var arr_camera_property = [
 	testName		:	"VT285-1033 | Set cameraType : back | back ",
 	propertyName	:	"cameraType",
 	cameraTypes		:	"All",
-	OSTypes			:	"ANDROID APPLE WINDOWS",
+	OSTypes			:	"ANDROID APPLE",
 	propertyValue	:	"back",
 	expectedResult	:	"back"
 },
@@ -491,7 +491,7 @@ var arr_camera_property = [
 	testName		:	"VT285-1033 | Set cameraType : imager | imager ",
 	propertyName	:	"cameraType",
 	cameraTypes		:	"All",
-	OSTypes			:	"ANDROID APPLE WINDOWS",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"imager",
 	expectedResult	:	"imager"
 },
@@ -499,7 +499,7 @@ var arr_camera_property = [
 	testName		:	"VT285-1033 | Set cameraType : color | color ",
 	propertyName	:	"cameraType",
 	cameraTypes		:	"All",
-	OSTypes			:	"ANDROID APPLE WINDOWS",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"color",
 	expectedResult	:	"color"
 },
@@ -507,7 +507,7 @@ var arr_camera_property = [
 	testName		:	"VT285-1033 | Set camera_type : front | front ",
 	propertyName	:	"camera_type",
 	cameraTypes		:	"All",
-	OSTypes			:	"ANDROID APPLE WINDOWS",
+	OSTypes			:	"ANDROID APPLE",
 	propertyValue	:	"front",
 	expectedResult	:	"front"
 },
@@ -515,7 +515,7 @@ var arr_camera_property = [
 	testName		:	"VT285-1033 | Set camera_type : back | back ",
 	propertyName	:	"camera_type",
 	cameraTypes		:	"All",
-	OSTypes			:	"ANDROID APPLE WINDOWS",
+	OSTypes			:	"ANDROID APPLE",
 	propertyValue	:	"back",
 	expectedResult	:	"back"
 },
@@ -523,7 +523,7 @@ var arr_camera_property = [
 	testName		:	"VT285-1033 | Set camera_type : imager | imager ",
 	propertyName	:	"camera_type",
 	cameraTypes		:	"All",
-	OSTypes			:	"ANDROID APPLE WINDOWS",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"imager",
 	expectedResult	:	"imager"
 },
@@ -531,26 +531,26 @@ var arr_camera_property = [
 	testName		:	"VT285-1033 | Set camera_type : color | color ",
 	propertyName	:	"camera_type",
 	cameraTypes		:	"All",
-	OSTypes			:	"ANDROID APPLE WINDOWS",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"color",
 	expectedResult	:	"color"
-},
-{
-	testName		:	"VT285-1033 | Set maxwidth : 640 | 640 ",
-	propertyName	:	"maxWidth",
-	cameraTypes		:	"All",
-	OSTypes			:	"Android Apple",
-	propertyValue	:	"640",
-	expectedResult	:	"640"
-},
-{
-	testName		:	"VT285-1033 | Set maxheight : 480 | 480 ",
-	propertyName	:	"maxHeight",
-	cameraTypes		:	"All",
-	OSTypes			:	"Android Apple",
-	propertyValue	:	"480",
-	expectedResult	:	"480"
 }
+//,{
+// 	testName		:	"VT285-1033 | Set maxwidth : 640 | 640 ",
+// 	propertyName	:	"maxWidth",
+// 	cameraTypes		:	"All",
+// 	OSTypes			:	"Android Apple",
+// 	propertyValue	:	"640",
+// 	expectedResult	:	"640"
+// },
+// {
+// 	testName		:	"VT285-1033 | Set maxheight : 480 | 480 ",
+// 	propertyName	:	"maxHeight",
+// 	cameraTypes		:	"All",
+// 	OSTypes			:	"Android Apple",
+// 	propertyValue	:	"480",
+// 	expectedResult	:	"480"
+// }
 ];
 
 var camCallback = function (data){

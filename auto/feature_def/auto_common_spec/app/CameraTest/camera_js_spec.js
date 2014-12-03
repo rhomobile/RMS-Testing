@@ -235,31 +235,30 @@ describe("Camera JS API Test", function() {
 					it("VT299-090 | check default values of all writeable property |", function() {
 
 						runs(function() {
-						    enumObject.takePicture(camCallback);
-
+						    
 						    if (isWindowsMobilePlatform())
 						    {
-							    expect(Rho.Signature.previewHeight).toBeGreaterThan(0);
-								expect(Rho.Signature.previewLeft).toBeGreaterThan(0);
-								expect(Rho.Signature.previewTop).toBeGreaterThan(0);
-								expect(Rho.Signature.previewWidth).toBeGreaterThan(0);
+							    expect(Rho.Camera.previewHeight).toBeGreaterThan(0);
+								expect(Rho.Camera.previewLeft).toBeGreaterThan(0);
+								expect(Rho.Camera.previewTop).toBeGreaterThan(0);
+								expect(Rho.Camera.previewWidth).toBeGreaterThan(0);
 						    }
 
 						    if (isApplePlatform() || isAndroidPlatform())
 						    {
-							    expect(Rho.Signature.saveToDeviceGallery).toEqual(true);
+							    expect(Rho.Camera.saveToDeviceGallery).toEqual(true);
 							    expect(enumObject.colorModel).toEqual('rgb');
 						    }
 
 						    if (isApplePlatform())
 						    {
-						    	expect(Rho.Signature.enableEditing).toEqual(true);
+						    	expect(Rho.Camera.enableEditing).toEqual(true);
 						    }
 
 						    if (isAndroidPlatform())
 						    {
-						    	expect(Rho.Signature.flashMode).toEqual('off');
-						    	expect(Rho.Signature.useSystemViewfinder).toEqual(false);
+						    	expect(Rho.Camera.flashMode).toEqual('off');
+						    	expect(Rho.Camera.useSystemViewfinder).toEqual(false);
 						    }
                             if (!isWindowsPhone8Platform())
 							{
@@ -267,16 +266,14 @@ describe("Camera JS API Test", function() {
                             } 							
 							expect(enumObject.desiredHeight).toBeGreaterThan(0);
 							expect(enumObject.desiredWidth).toBeGreaterThan(0);						
-							expect(Rho.Signature.outputFormat).toEqual('image');
+							expect(Rho.Camera.outputFormat).toEqual('image');
 							
-							Rho.Signature.hide();
 						});
 					});
 
 					it("VT299-091 | check values of all read only property |", function() {
 
-						runs(function() {
-						    enumObject.takePicture(camCallback);
+						runs(function() {						    
 						    var type = "back front";
 						    var resolution = enumObject.supportedSizeList
 
@@ -286,7 +283,7 @@ describe("Camera JS API Test", function() {
 							expect(resolution.width).toBeGreaterThan(0);					
 							expect(resolution.height).toBeGreaterThan(0);
 							
-							Rho.Signature.hide();
+							Rho.Camera.hide();
 						});
 					});
 
@@ -308,7 +305,7 @@ describe("Camera JS API Test", function() {
 						});								
 					});
 
-					it("VT285-1003 | Call takePicture with all string in hash|" + camtype, function() {
+					/*it("VT285-1003 | Call takePicture with all string in hash|" + camtype, function() {
 					   beforeEach(function() {
 					     getcallbackdata ='';
 					     callbackstatus = false;
@@ -328,7 +325,7 @@ describe("Camera JS API Test", function() {
 							expect(getcallbackdata).toContain('640');
 							expect(getcallbackdata).toContain('datauri');
 						});								
-					});
+					});*/
 
 					it("VT285-1004 | Call choosePicture with all string in hash|" + camtype, function() {
                         beforeEach(function() {
