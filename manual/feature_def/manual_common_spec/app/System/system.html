@@ -16,45 +16,36 @@
     <script type="text/javascript" src="/app/helpers/specHelpers.js"></script>
 
     <script type="text/javascript">
-
         $(document).ready(function () {
             // hide all tests
             $(".method_tests").hide();
-
             // below show testcase if applicable to current platform
             if (isApplePlatform()) {
                 $(".ios").show();
             }
             ;
-
             if (isWindowsDesktopPlatform()) {
                 $(".win32").show();
             }
             ;
-
             if (isAndroidPlatform()) {
                 $(".android").show();
             }
             ;
-
             if (isWindowsMobilePlatform()) {
                 $(".wm").show();
             }
             ;
-
             if (isWindowsPhone8Platform()) {
                 $(".wp8").show();
             }
             ;
-
             //First click for getting default value
             $(".getValue").click();
         });
-
         //This needs to be changed according to the Environment
         var downloadedFilePath = '';
         var httpServerUrl = "http://" + SERVER_HOST + ":" + SERVER_PORT.toString();
-
     </script>
 </head>
 <body>
@@ -366,20 +357,19 @@
 <div class="method_tests android ios win32 wm wp8">
     <div class="method_name">Rho.System.applicationInstall</div>
     <div class="method_desc">Application install<b><i>You must have  running webbrick server  before  starting  test application</i></b></div>
-    <div class="method_tests wm"><b>Application install for Windows WM:</b>
+   <div class="method_tests win32 wm"><b>Application install for Windows WM and win32:</b>
 
         <div class="test_scenario">
             <div class="test_scenario_controls">
                 <a href="javascript:void(0)"
                    onclick="var fname = download_filetolocal(httpServerUrl+'/TestAppWM6.5.cab', 'TestAppWM6.5.cab'); Rho.System.applicationInstall(fname);">WM: Install app from HTTP url</a><br/>
                 <a href="javascript:void(0)"
-                   onclick="var fname = download_filetolocal(httpServerUrl+'/TestAppCE.cab', 'TestAppCE.cab'); Rho.System.applicationInstall(fname);">CE: Install app from HTTP url</a>
-
+                   onclick="var fname = download_filetolocal(httpServerUrl+'/TestAppCE.cab', 'TestAppCE.cab'); Rho.System.applicationInstall(fname);">CE: Install app from HTTP url</a><br/>
+				<a href="javascript:void(0)"
+                   onclick="var fname = download_filetolocal(httpServerUrl+'/testApp.exe', 'testApp.exe'); Rho.System.applicationInstall(fname);">win32: Install app from HTTP url</a><br/>
             </div>
             <span class="test_scenario_number">VT300-063 <br/></span>
         </div>
-
-
     </div>
 
 
@@ -410,12 +400,16 @@
 <div class="method_tests android ios win32 wm wp8">
     <div class="method_name">Rho.System.isApplicationInstalled</div>
     <div class="method_desc">Is Application Installed</div>
-    <div class="method_tests wm">WM <br/>
+    <div class="method_tests win32 wm">WM and win32<br/>
 
         <div class="test_scenario">
             <div class="test_scenario_controls">
-                <a href="javascript:void(0)" onclick="callisApplicationInstalled('rhomobile testApp/testApp.exe');">Call
-                    isApplicationInstalled() with correct app name 'TestAppWM6.5'</a>
+                <a href="javascript:void(0)" onclick="callisApplicationInstalled('rhomobile testApp/TestAppWM6.5.cab');">WM: Call
+                    isApplicationInstalled() with correct app name 'TestAppWM6.5'</a><br/>
+				 <a href="javascript:void(0)" onclick="callisApplicationInstalled('rhomobile testApp/TestAppCE.cab');">CE: Call
+                    isApplicationInstalled() with correct app name 'TestAppCE'</a><br/>
+				<a href="javascript:void(0)" onclick="callisApplicationInstalled('rhomobile testApp/testApp.exe');">win32: Call
+                    isApplicationInstalled() with correct app name 'testApp'</a>
             </div>
             <span class="test_scenario_number">VT300-077 <br/></span>
         </div>
@@ -715,11 +709,13 @@
     <div class="method_name">Rho.System.applicationUninstall</div>
     <div class="method_desc"> Application Uninstall</div>
 
-    <div class="method_tests wm">
+    <div class="method_tests win32 wm">
         <div class="test_scenario">
             <div class="test_scenario_controls">
-                <a href="javascript:void(0)" onclick="Rho.System.applicationUninstall('rhomobile TestApp/TestApp.exe');"> call
-                    applicationUninstall with application name 'rhomobile testApp/testApp.exe'. Not supported on Win CE.</a>
+				<a href="javascript:void(0)" onclick="Rho.System.applicationUninstall('rhomobile testApp/TestAppWM6.5.cab');">WM: call
+                    applicationUninstall with application name 'rhomobile testApp/TestAppWM6.5.cab'. Not supported on Win CE.</a><br/>
+                <a href="javascript:void(0)" onclick="Rho.System.applicationUninstall('rhomobile testApp/testApp.exe');">win32: call
+                    applicationUninstall with application name 'rhomobile testApp/testApp.exe'</a>
             </div>
         </div>
     </div>
@@ -1157,4 +1153,3 @@
 
 </body>
 </html>
-

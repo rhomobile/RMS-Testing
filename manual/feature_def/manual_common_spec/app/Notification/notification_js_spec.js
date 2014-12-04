@@ -1489,7 +1489,7 @@ describe("Notification Manual FD Tests", function () {
                     expect(testResult).toEqual(true);
                 });
             });
-        it("VT307-008|Play File - Mp3 file with media type|", function () {
+        /*it("VT307-008|Play File - Mp3 file with media type|", function () {
 
             runs(function () {
                 dispTestCaseRunning(" MP3 file will be played  ");
@@ -1559,7 +1559,7 @@ describe("Notification Manual FD Tests", function () {
             runs(function () {
                 expect(testResult).toEqual(true);
             });
-        });
+        });*/
 
         it("VT307-013|Vibrate with duration 0 seconds |", function () {
 
@@ -1685,5 +1685,81 @@ describe("Notification Manual FD Tests", function () {
         });
 	  }
     }}
+	if(Rho.System.platform == "APPLE")
+	{
+		it("VT281-0862|Vibrate iOS device with fixed system vibration time because It could not be changed|", function () {
+            runs(function () {
+                dispTestCaseRunning(" Device will vibrate if applicable ");
+                dispExpectedResult("Device should vibrate with fixed system vibration time");
+                Rho.Notification.vibrate();
+            });
+            waitsFor(function () {
+                dispExpectedResult("Device should vibrate with fixed system vibration time")
+                return captured;
+            }, 'Tester should ve responded by now ', 30000);
 
+            runs(function () {
+                expect(testResult).toEqual(true);
+            });
+        });
+	}
+	if (Rho.System.platform == "WINDOWS_DESKTOP" || Rho.System.isRhoSimulator) {
+    } else
+	if (Rho.System.platform == "WINDOWS" || Rho.System.platform == "ANDROID" || Rho.System.platform == "APPLE")
+	{
+		it("VT307-008|Play File - Mp3 file with media type|", function () {
+
+            runs(function () {
+                dispTestCaseRunning(" MP3 file will be played  ");
+                dispExpectedResult("MP3 file should be played ");
+                Rho.Notification.playFile(Rho.RhoFile.join(Rho.Application.modelFolderPath('Notification'), 'media1.mp3'), '.mp3');
+            });
+
+            waitsFor(function () {
+                dispExpectedResult("MP3 file should be played ");
+                return captured;
+            }, 'Mp3 file should have been played by now ', 45000);
+
+            runs(function () {
+                expect(testResult).toEqual(true);
+            });
+        });
+
+        it("VT307-009|Play File - Mp3 file without media type|", function () {
+
+            runs(function () {
+                dispTestCaseRunning(" MP3 file will be played  ");
+                dispExpectedResult("MP3 file should be played ");
+                Rho.Notification.playFile(Rho.RhoFile.join(Rho.Application.modelFolderPath('Notification'), 'media1.mp3'));
+            });
+
+            waitsFor(function () {
+                dispExpectedResult("MP3 file should be played ");
+                return captured;
+            }, 'Mp3 file should have been played by now ', 30000);
+
+            runs(function () {
+                expect(testResult).toEqual(true);
+            });
+        });
+
+        it("VT307-010|Play File - Wav file with media type|", function () {
+
+            runs(function () {
+                dispTestCaseRunning(" wav file will be played  ");
+                dispExpectedResult("wav file should be played ");
+                Rho.Notification.playFile(Rho.RhoFile.join(Rho.Application.modelFolderPath('Notification'), 'media2.wav'), '.wav');
+            });
+
+            waitsFor(function () {
+                dispExpectedResult("Wav file should be played ");
+                return captured;
+            }, 'Wav file should have been played by now ', 30000);
+
+            runs(function () {
+                expect(testResult).toEqual(true);
+            });
+        });
+	}
+	
 });
