@@ -434,10 +434,10 @@ describe("Camera API Manual Tests", function(){
 					it("Should call showPreview with properties & capture - Set 1 |" + camid + camtype , function(){
 						var spec = new ManualSpec(jasmine, window.document);
 			        	spec.addGoal(jasmine.getEnv().currentSpec.description);
-			        	spec.addPrecondition("Call showPreview with propertyhash as fileName:\\Application\\camImage, desiredHeight:480, desiredWidth:640, compressionFormat:png, outputFormat:imageUri, flashMode:ON, previewLeft:80, previewTop:10, previewWidth:100, previewHeight:60, captureSound:'alarm5.wav', aimMode:on and callback.");
+			        	spec.addPrecondition("Call showPreview with propertyhash as fileName:\\Application\\camImage, desiredHeight:480, desiredWidth:640, compressionFormat:png, outputFormat:dataUri, flashMode:ON, previewLeft:80, previewTop:10, previewWidth:100, previewHeight:60, captureSound:'alarm5.wav', aimMode:on and callback.");
 			            spec.addStep("Press 'RunTest' button");
 			            spec.addStep("Capture will happen after Check for the returned callback status & property set");
-			            spec.addExpectation('The viewfinder with properties set should reflect. The returned status should be OK and captured image should be displayed as imageUri with all callback properties and play a sound on capture. Also flashMode should be ON for color camera & aimMode ON for imager camera.');
+			            spec.addExpectation('The viewfinder with properties set should reflect. The returned status should be OK and captured image should be displayed as dataUri with all callback properties and play a sound on capture. Also flashMode should be ON for color camera & aimMode ON for imager camera.');
 			            spec.displayScenario();
 			            spec.waitForButtonPressing("Run test");
 
@@ -995,7 +995,7 @@ describe("Camera API Manual Tests", function(){
 		        	spec.addGoal(jasmine.getEnv().currentSpec.description);
 		            spec.addStep("Press 'RunTest' button");
 		            spec.addStep("Capture any image.");
-		            spec.addExpectation('Image should be displayed as imageUri.');
+		            spec.addExpectation('Image should be displayed as dataUri.');
 		            spec.displayScenario();
 		            spec.waitForButtonPressing("Run test");
 

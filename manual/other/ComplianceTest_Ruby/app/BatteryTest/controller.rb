@@ -6,13 +6,13 @@ require 'helpers/browser_helper'
 class BatteryTestController < Rho::RhoController
 
 def status_callback
-    @result = ""
-	@result += '<br/>AcLineStatus: ' + @params['acLineStatus'].to_s
-    @result += '<br/>BatteryLifePercent: ' + @params['batteryLifePercent'].to_s
-    @result += '<br/>BackupBatteryLifePercent: ' + @params['backupBatteryLifePercent'].to_s
-    @result += '<br/>Trigger: ' + @params['trigger'].to_s
-    @result += '<br/>BatteryLifeKnown: ' + @params['batteryLifeKnown'].to_s
-    @result += '<br/>BackupBatteryLifeKnown: ' + @params['backupBatteryLifeKnown'].to_s
+  @result = ""
+  @result += '<br/>AcLineStatus: ' + @params['acLineStatus'].to_s
+  @result += '<br/>BatteryLifePercent: ' + @params['batteryLifePercent'].to_s
+  @result += '<br/>BackupBatteryLifePercent: ' + @params['backupBatteryLifePercent'].to_s
+  @result += '<br/>Trigger: ' + @params['trigger'].to_s
+  @result += '<br/>BatteryLifeKnown: ' + @params['batteryLifeKnown'].to_s
+  @result += '<br/>BackupBatteryLifeKnown: ' + @params['backupBatteryLifeKnown'].to_s
   Rho::WebView.executeJavascript("document.getElementById('actResult').innerHTML= '#{@result}'")
   Rho::WebView.executeJavascript("document.getElementById('actResult').style.display='block'")
 end
