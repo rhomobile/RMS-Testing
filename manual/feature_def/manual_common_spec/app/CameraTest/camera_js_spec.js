@@ -351,7 +351,7 @@ describe("Camera API Manual Tests", function(){
 
 				waitsFor(function(){
 					return cbkResponseTimeout;
-				},"waiting for callback data", 10000);
+				},"waiting for callback data", 20000);
 
 				runs(function(){
 					spec.addResult(callbackData);
@@ -386,7 +386,7 @@ describe("Camera API Manual Tests", function(){
 
 				waitsFor(function(){
 					return cbkResponseTimeout;
-				},"waiting for callback data", 10000);
+				},"waiting for callback data", 20000);
 
 				runs(function(){
 					spec.addResult(callbackData);
@@ -434,10 +434,10 @@ describe("Camera API Manual Tests", function(){
 					it("Should call showPreview with properties & capture - Set 1 |" + camid + camtype , function(){
 						var spec = new ManualSpec(jasmine, window.document);
 			        	spec.addGoal(jasmine.getEnv().currentSpec.description);
-			        	spec.addPrecondition("Call showPreview with propertyhash as fileName:\\Application\\camImage, desiredHeight:480, desiredWidth:640, compressionFormat:png, outputFormat:imageUri, flashMode:ON, previewLeft:80, previewTop:10, previewWidth:100, previewHeight:60, captureSound:'alarm5.wav', aimMode:on and callback.");
+			        	spec.addPrecondition("Call showPreview with propertyhash as fileName:\\Application\\camImage, desiredHeight:480, desiredWidth:640, compressionFormat:png, outputFormat:dataUri, flashMode:ON, previewLeft:80, previewTop:10, previewWidth:100, previewHeight:60, captureSound:'alarm5.wav', aimMode:on and callback.");
 			            spec.addStep("Press 'RunTest' button");
-			            spec.addStep("Check for the returned callback status & property set");
-			            spec.addExpectation('The viewfinder with properties set should reflect. The returned status should be OK and captured image should be displayed as imageUri with all callback properties and play a sound on capture. Also flashMode should be ON for color camera & aimMode ON for imager camera.');
+			            spec.addStep("Capture will happen after Check for the returned callback status & property set");
+			            spec.addExpectation('The viewfinder with properties set should reflect. The returned status should be OK and captured image should be displayed as dataUri with all callback properties and play a sound on capture. Also flashMode should be ON for color camera & aimMode ON for imager camera.');
 			            spec.displayScenario();
 			            spec.waitForButtonPressing("Run test");
 
@@ -445,16 +445,16 @@ describe("Camera API Manual Tests", function(){
 							objCAM.showPreview({'fileName':'\\Application\\camImage', 'captureSound':'alarm5.wav',
 								'compressionFormat':'png', 'outputFormat':'dataUri', 'flashMode':'on', 'aimMode':'on', 
 								'desiredHeight':720, 'desiredWidth':1080, 'previewLeft':80, 'previewTop':10, 'previewWidth':100, 'previewHeight':60
-							}, callbackFunc);
+							});
 
-							waitsFor(function(){
-								objCAM.capture();
-							},"waiting 2secs for capture", 2000);
+							setTimeout(function(){
+								objCAM.capture(callbackFunc);
+							},6000);
 						});
 
 						waitsFor(function(){
 							return cbkResponseTimeout;
-						},"waiting for callback data", 10000);
+						},"waiting for callback data", 12000);
 
 						runs(function(){
 							spec.addResult(callbackData);
@@ -479,16 +479,16 @@ describe("Camera API Manual Tests", function(){
 							objCAM.showPreview({'fileName':'camImage123', 'compressionFormat':'jpg', 'outputFormat':'image', 
 								'flashMode':'off', 'aimMode':'off', 'captureSound':'', 'desiredHeight':360, 'desiredWidth':480,
 								'previewLeft':80, 'previewTop':10, 'previewWidth':40, 'previewHeight':120
-							}, callbackFunc);
+							});
 
-							waitsFor(function(){
-								objCAM.capture();
-							},"waiting 2secs for capture", 2000);
+							setTimeout(function(){
+								objCAM.capture(callbackFunc);
+							},6000);
 						});
 
 						waitsFor(function(){
 							return cbkResponseTimeout;
-						},"waiting for callback data", 10000);
+						},"waiting for callback data", 12000);
 
 						runs(function(){
 							spec.addResult(callbackData);
@@ -502,18 +502,23 @@ describe("Camera API Manual Tests", function(){
 						var spec = new ManualSpec(jasmine, window.document);
 			        	spec.addGoal(jasmine.getEnv().currentSpec.description);
 			            spec.addStep("Press 'RunTest' button");
+			            spec.addStep("NOTE: If auto rotate supported, rotate the device in all directions");
 			            spec.addExpectation('The viewfinder should realign and there should not be any error.');
 			            spec.displayScenario();
 			            spec.waitForButtonPressing("Run test");
 
 						runs(function(){
-							objCAM.showPreview({}, callbackFunc);
-							Rho.ScreenOrientation.rightHanded();
+							objCAM.showPreview();
+							
+							setTimeout(function(){
+								Rho.ScreenOrientation.rightHanded();
+								objCAM.capture(callbackFunc);
+							},6000);
 						});
 
 						waitsFor(function(){
 							return cbkResponseTimeout;
-						},"waiting for callback data", 10000);
+						},"waiting for callback data", 12000);
 
 						runs(function(){
 							spec.addResult(callbackData);
@@ -536,15 +541,14 @@ describe("Camera API Manual Tests", function(){
 			            spec.waitForButtonPressing("Run test");
 
 			            runs(function(){
-							objCAM.showPreview({}, callbackFunc);
+							objCAM.showPreview();
 						});
 
-						waitsFor(function(){
-							return cbkResponseTimeout;
-						},"waiting for callback data", 10000);
+						setTimeout(function(){
+							objCAM.hidePreview();
+						},6000);
 
 						runs(function(){
-							objCAM.hidePreview();
 			                spec.waitForResponse();
 						});
 					});
@@ -553,22 +557,21 @@ describe("Camera API Manual Tests", function(){
 						var spec = new ManualSpec(jasmine, window.document);
 			        	spec.addGoal(jasmine.getEnv().currentSpec.description);
 			            spec.addStep("Press 'RunTest' button");
-			            spec.addStep("Once the preview window appears, Minimize & restore the application");
+			            spec.addStep("Once the preview window appears, Minimize & restore the application (restore manually by clicking on the application)");
 			            spec.addExpectation('Should display error with error message in callback.');
 			            spec.displayScenario();
 			            spec.waitForButtonPressing("Run test");
 
 			            runs(function(){
-							objCAM.showPreview({}, callbackFunc);
+							objCAM.showPreview();
+
+							setTimeout(function(){
+								Rho.Application.minimize();
+							},6000);
 						});
 
-						waitsFor(function(){
-							return cbkResponseTimeout;
-						},"waiting for callback data", 10000);
 
 						runs(function(){
-							spec.addResult(callbackData);
-							spec.displayResults();
 			                spec.waitForResponse();
 						});
 
@@ -582,21 +585,15 @@ describe("Camera API Manual Tests", function(){
 			        	spec.addGoal(jasmine.getEnv().currentSpec.description);
 			            spec.addStep("Press 'RunTest' button");
 			            spec.addStep("Once the preview window appears, Suspend & resume the device");
-			            spec.addExpectation('Should display error with error message in callback.');
+			            spec.addExpectation('Preview should be there and application should not behave abnormally.');
 			            spec.displayScenario();
 			            spec.waitForButtonPressing("Run test");
 
 			            runs(function(){
-							objCAM.showPreview({}, callbackFunc);
+							objCAM.showPreview();
 						});
 
-						waitsFor(function(){
-							return cbkResponseTimeout;
-						},"waiting for callback data", 10000);
-
 						runs(function(){
-							spec.addResult(callbackData);
-							spec.displayResults();
 			                spec.waitForResponse();
 						});
 
@@ -615,16 +612,10 @@ describe("Camera API Manual Tests", function(){
 			            spec.waitForButtonPressing("Run test");
 
 			            runs(function(){
-							objCAM.showPreview({}, callbackFunc);
+							objCAM.showPreview();
 						});
 
-						waitsFor(function(){
-							return cbkResponseTimeout;
-						},"waiting for callback data", 10000);
-
 						runs(function(){
-							spec.addResult(callbackData);
-							spec.displayResults();
 			                spec.waitForResponse();
 						});
 					});
@@ -752,6 +743,7 @@ describe("Camera API Manual Tests", function(){
 					var spec = new ManualSpec(jasmine, window.document);
 		        	spec.addGoal(jasmine.getEnv().currentSpec.description);
 		            spec.addStep("Press 'RunTest' button");
+		            spec.addStep("NOTE: If auto rotate supported, rotate the device in all directions");
 		            spec.addStep("NOTE: ScreenOrientation will become normal once pass/fail is clicked");
 		            spec.addExpectation('The viewfinder should realign and there should not be any error.');
 		            spec.displayScenario();
@@ -759,12 +751,15 @@ describe("Camera API Manual Tests", function(){
 
 					runs(function(){
 						objCAM.takePicture({}, callbackFunc);
-						Rho.ScreenOrientation.leftHanded();
+
+						setTimeout(function(){
+							Rho.ScreenOrientation.leftHanded();
+						},4000);
 					});
 
 					waitsFor(function(){
 						return cbkResponseTimeout;
-					},"waiting for callback data", 10000);
+					},"waiting for callback data", 15000);
 
 					runs(function(){
 						spec.addResult(callbackData);
@@ -1000,7 +995,7 @@ describe("Camera API Manual Tests", function(){
 		        	spec.addGoal(jasmine.getEnv().currentSpec.description);
 		            spec.addStep("Press 'RunTest' button");
 		            spec.addStep("Capture any image.");
-		            spec.addExpectation('Image should be displayed as imageUri.');
+		            spec.addExpectation('Image should be displayed as dataUri.');
 		            spec.displayScenario();
 		            spec.waitForButtonPressing("Run test");
 
@@ -1198,7 +1193,7 @@ describe("Camera API Manual Tests", function(){
 					});				
 				});
 
-				if (isAndroid() || isApplePlatform()) {
+				if (isAndroidPlatform() || isApplePlatform()) {
 
 					it("Should call takePicture with colorModel as rgb | " + camid + camtype , function(){
 						var spec = new ManualSpec(jasmine, window.document);

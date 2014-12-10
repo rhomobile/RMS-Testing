@@ -68,9 +68,9 @@ describe('Rho::AudioCapture Ruby API', function () {
 			Ruby.call('AudioCaptureTest','audio_capture_stop');
 			showSpeakMsg();
 
-			setTimeout(function(){
-				Ruby.call('AudioCaptureTest','audio_stop');
-			},2000);
+			// setTimeout(function(){
+			// 	Ruby.call('AudioCaptureTest','audio_stop');
+			// },2000);
 		});
 		
 		_result.waitForResponse();
@@ -86,9 +86,9 @@ describe('Rho::AudioCapture Ruby API', function () {
 			Ruby.call('AudioCaptureTest','audio_capture_cancel');
 			showSpeakMsg();
 
-			setTimeout(function(){
-				Ruby.call('AudioCaptureTest','audio_cancel');
-			},3000);
+			// setTimeout(function(){
+			// 	Ruby.call('AudioCaptureTest','audio_cancel');
+			// },3000);
 		});
 		
 		_result.waitForResponse();

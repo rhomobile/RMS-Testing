@@ -1130,17 +1130,13 @@ describe('Printer Zebra', function() {
         // stopSearch method tests
         describe('stopSearch method', function() {
             it("callback should not fire after calling stopSearch", function() {
-                var callresult = null;
-
-                function cbk(val) {
-                    callresult = val;
-                }
-
                 runs(function() {
                     // Let the printer be search first then use stop
-                    callresult = null;
                     searchObject = runSearch({}, 60000);
-                    Rho.PrinterZebra.stopSearch();
+
+                    setTimeout(function(){
+                        Rho.PrinterZebra.stopSearch();
+                    },4000);
                 });
 
                 waits(65000);

@@ -649,9 +649,11 @@ describe('Printing Generic', function() {
             it("callback should not fire after calling stopSearch", function () {
                 runs(function () {
                     // Let the printer be search first then use stop
-                    callresult = null;
                     searchObject = runSearch({}, 60000);
-                    callresult = Rho.Printer.stopSearch();
+
+                    setTimeout(function(){
+                        Rho.Printer.stopSearch();
+                    },4000);
                 });
 
                 waits(65000);
