@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Without Modules</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+	<META HTTP-Equiv="MinimizeButton" content="visibility:Visible;top:30 " >
+	<META HTTP-Equiv="quitbutton" Content="visibility:visible">
+	<META HTTP-Equiv="ReloadButton" Content="visibility:visible">
+	<script type="text/javascript">
+		var start = new Date().getTime();
+		var latency ="1";
+		function callApi(){
+			document.getElementById('res').innerHTML = EB.System.deviceName;
+		}
+	</script>
+	<script type="text/javascript" src="public/ebapi.js"></script>
+</head>
+<body onload="">
+<h3>Call api without loading the module.js file:</h3>
+<h3 id='res'></h3>
+<br/>
+<input type="button" onclick="callApi()" value="Call EB API" />
+</body>
+</html>

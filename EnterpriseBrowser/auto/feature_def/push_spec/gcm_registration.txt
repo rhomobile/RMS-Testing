@@ -1,0 +1,49 @@
+Services => Google Cloud Messaging for Android
+
+API Access =>
+
+Simple API Access
+
+Use API keys to identify your project when you do not need to access user data. Learn more
+Key for Android apps (with certificates)
+
+API key:
+AIzaSyBfBxYzYbpGWQctSKwE_fQCgO-C6YqfemI
+Android apps:
+Any app allowed
+Activated on:   Jun 11, 2013 4:20 PM
+Activated by:   alexb@rhomobile.com – you
+
+    Generate new key...
+    Edit allowed Android apps...
+    Delete key...
+
+Key for browser apps (with referers)
+API key:
+AIzaSyA5ICgjm5CJglcaHYGKeFVYmiI7NmyvOEw
+Referers:
+Any referer allowed
+Activated on:   Jun 11, 2013 3:52 PM
+Activated by:   alexb@rhomobile.com – you
+
+
+Overview =>
+
+Dashboard
+
+Project Summary Name  API Project
+Project Domain  rhomobile.com
+Project Number  1053248273607
+Project ID
+Register...
+Google+ Page
+Request connection
+Owners  alexb@rhomobile.com - you
+
+=================================
+
+:gcm_api_key: AIzaSyBfBxYzYbpGWQctSKwE_fQCgO-C6YqfemI
+
+android:
+  push:
+    sender: 1053248273607

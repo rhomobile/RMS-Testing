@@ -1,0 +1,2 @@
+/Users/alexb/workspace/RMS-Testing/auto/feature_def/new_orm_spec/project/iphone/build/rhorunner.build/Release-iphonesimulator/rhorunner.build/libCoreAPI.a
+/Users/alexb/workspace/RMS-Testing/auto/feature_def/new_orm_spec/project/iphone/build/rhorunner.build/Release-iphonesimulator/rhorunner.build/libRhoconnect-client.a

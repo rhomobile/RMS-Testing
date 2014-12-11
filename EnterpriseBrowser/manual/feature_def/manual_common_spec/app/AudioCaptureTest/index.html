@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>EB.WebView</title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=0.1, maximum-scale=10.0, user-scalable=yes"/>
+    <link type="text/css" rel="stylesheet" href="/public/css/manual_styles.css">
+    <script type="text/javascript" src="/public/jquery/jquery-1.6.4.min.js"></script>
+    <script type="text/javascript" src="/public/jquery/jquery.json-2.3.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="/public/api/ebapi-modules.js"></script>
+    <script type="text/javascript" charset="utf-8" src="helpers.js"></script>
+</head>
+<body>
+
+<div id="capturing_mp4" class="method_tests android">
+    <div class="method_name">EB.Audiocapture.start</div>
+    <div class="method_desc">Capturing mp4</div>
+
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <button onClick='startCapturingMp4()'>Start capturing mp4</button>
+            <br/>
+            <button onClick='stopCapturing()'>Stop capturing</button>
+            <br/>
+            <button onClick='playMp4()'>Play captured</button>
+        </div>
+    </div>
+</div>
+
+<div id="capturing_3gpp" class="method_tests android">
+    <div class="method_name">EB.Audiocapture.start</div>
+    <div class="method_desc">Capturing 3gpp</div>
+
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <button onClick='startCapturing3gpp()'>Start capturing 3gpp</button>
+            <br/>
+            <button onClick='stopCapturing()'>Stop capturing</button>
+            <br/>
+            <button onClick='play3gpp()'>Play captured</button>
+        </div>
+    </div>
+</div>
+
+<div id="cancel_capturing_mp4" class="method_tests android">
+    <div class="method_name">EB.Audiocapture.cancel</div>
+    <div class="method_desc">Cancel capturing mp4</div>
+
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <button onClick='deleteMp4(); startCapturingMp4()'>Start capturing</button>
+            <br/>
+            <button onClick='cancelCapturing()'>Cancel capturing</button>
+            <br/>
+            <button onClick='alert(isMp4Exists())'>Check existence of file</button>
+        </div>
+    </div>
+</div>
+
+<div id="cancel_capturing_3gpp" class="method_tests android">
+    <div class="method_name">EB.Audiocapture.cancel</div>
+    <div class="method_desc">Cancel capturing 3gpp</div>
+
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <button onClick='delete3gpp(); startCapturing3gpp()'>Start capturing</button>
+            <br/>
+            <button onClick='cancelCapturing()'>Cancel capturing</button>
+            <br/>
+            <button onClick='alert(is3gppExists())'>Check existence of file</button>
+        </div>
+    </div>
+</div>
+
+<div id="edge_case_start_to existence_filename" class="method_tests android">
+    <div class="method_name">EB.Audiocapture.start</div>
+    <div class="method_desc">Capturing to existance filename.
+        <ol>
+            <li>Press "Delete file" for delete mp4 file</li>
+            <li>Press "Start capturing" and record count from 1 to 5</li>
+            <li>Press "Stop capturing"</li>
+            <li>Play captured. You should hear count from 1 to 5</li>
+            <li>Press "Start capturing" and record count from 5 to 10</li>
+            <li>Press "Stop capturing"</li>
+            <li>Play captured. You should hear count from 5 to 10</li>
+        </ol>
+    </div>
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <button onClick='deleteMp4()'>Delete file</button>
+            <br/>
+            <button onClick='startCapturingMp4()'>Start capturing</button>
+            <br/>
+            <button onClick='stopCapturing()'>Stop capturing</button>
+            <br/>
+            <button onClick='playMp4()'>Play captured</button>
+        </div>
+    </div>
+</div>
+
+
+<h4 style="color:red">Edge cases</h4>
+
+<div id="edge_case_start_without_parameters" class="method_tests android">
+    <div class="method_name">EB.Audiocapture.start</div>
+    <div class="method_desc">Start without any parameters should raise exception</div>
+
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <button onClick='startCapturingWithoutParameters()'>Call start without parameters</button>
+        </div>
+    </div>
+</div>
+
+<div id="edge_case_start_without_filename" class="method_tests android">
+    <div class="method_name">EB.Audiocapture.start</div>
+    <div class="method_desc">Start without fileName should raise exception</div>
+
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <button onClick='startCapturingWithoutFileName()'>Call start without fileName</button>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>
