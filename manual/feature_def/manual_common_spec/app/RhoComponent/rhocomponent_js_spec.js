@@ -865,7 +865,8 @@ describe('Developer Experience - Rho Component Installer Functionality Test', fu
         spec.waitForResponse();
     });
 
-    it("Should build application using local containers for WM with app_type: rhoelements", function() {
+    //These tests are moved to auto  
+    /*it("Should build application using local containers for WM with app_type: rhoelements", function() {
         var spec = new ManualSpec(jasmine, window.document);
         spec.addGoal("Should build application using local containers for WM with app_type: rhoelements");
         spec.addPrecondition("Install Rhodes framework to enable rho command.");
@@ -1370,7 +1371,7 @@ describe('Developer Experience - Rho Component Installer Functionality Test', fu
         spec.displayScenario();
         spec.waitForButtonPressing("Run test");
         spec.waitForResponse();
-    });
+    });*/
 
     it("Should build the application using local containers and runs it on Android device by rho containers:run:android:device", function() {
         var spec = new ManualSpec(jasmine, window.document);
