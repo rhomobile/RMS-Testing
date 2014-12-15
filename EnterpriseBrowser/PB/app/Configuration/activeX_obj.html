@@ -101,7 +101,7 @@
 		    "Description":"HKLM without Persistent",
 		    "PreCondition":[],
 		    "Steps":["1. Test registry functionality with content='hive:HKLM'","2. Test registry functionality with content='key:Software'","3. Test registry functionality with content='setting:SymbolBrowser'","4. Test registry functionality with content='type:DWORD'","5. Test registry functionality with content='persistent:false'","6. Test registry functionality with content='value:12345'"],
-		    "ExpectedOutcome":["A DWORD registry PocketBrowser should be created in HKLM/Software with value 12345",".reg file should not be created in the \Application folder on the device"],
+		    "ExpectedOutcome":["A DWORD registry SymbolBrowser should be created in HKLM/Software with value 12345",".reg file should not be created in the \Application folder on the device"],
 		    "testToPerform":function(){
 				objGeneric.InvokeMETAFunction('registry','hive:HKLM;key:Software;setting:SymbolBrowser;type:DWORD;persistent:false;value:12345');
 		    },
@@ -142,7 +142,7 @@
 		},{
 		    "VTID":"VT056-0865",
             "RegLevel":"R3",
-		    "Description":"HKLM without Persistent",
+		    "Description":"HKCU without Persistent",
 		    "PreCondition":[],
 		    "Steps":["1. Test registry functionality with content='hive:HKCU'",
 "2. Test registry functionality with content='key:Software'",
@@ -206,7 +206,7 @@
 		},{
 		    "VTID":"VT056-0869",
             "RegLevel":"R3",
-		    "Description":"HKLM without Persistent",
+		    "Description":"HKCU without Persistent",
 		    "PreCondition":[],
 		    "Steps":[" Test registry functionality with content='hive:HKCR'",
 " Test registry functionality with content='key:Software'",
@@ -245,7 +245,7 @@
 " Test registry functionality with content='setting:EMS'",
 " Test registry functionality with content='persistent:false'",
 " Test registry functionality with content='value:Delete'"],
-		    "ExpectedOutcome":["This module delete the registry in HKLM/Software with setting EMS"],
+		    "ExpectedOutcome":["This module delete the registry in HKU/Software with setting EMS"],
 		    "testToPerform":function(){
 				objGeneric.InvokeMETAFunction('registry','hive:HKU;key:Software;setting:EMS;persistent:false;delete');
 		    },

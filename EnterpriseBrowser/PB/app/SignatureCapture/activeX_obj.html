@@ -64,10 +64,10 @@
 		    "Description":"TransferEvent URL",
 		    "PreCondition":[],
 		    "Steps":["1. Test visibility SignatureCapture functionality with Content='Visible'","2. Test left SignatureCapture functionality with Content='left:15'","3. Test top SignatureCapture functionality with Content='top:15'","4. Test height SignatureCapture functionality with Content='height:50'","5. Test width SignatureCapture functionality with Content='width:50'","6. Test Penwidth SignatureCapture functionality with Content='Penwidth:3'","7. Test Pencolor SignatureCapture functionality with Content='Pencolor:#FF0000'","8. Test BGColor SignatureCapture functionality with Content='BGColor:#0000FF'","9. Test Clear SignatureCapture functionality with Content='Clear'","10. Test Destination SignatureCapture functionality with Content='Destination:url'","11. Test Username SignatureCapture functionality with Content='Username:[value]l'","12. Test Password SignatureCapture functionality with Content='Password:[value]'","13. Test TransferEvent functionality with Content='javascript:url'","14. Draw a line in the rectangular capture area","15. Capture the SignatureCapture rectangular capture area"],
-		    "ExpectedOutcome":["The Pencolor of the line should be Red. The BGColor of the line should be Blue.The Transfer Event should be called when the captured signature has been successfully transfered to the specified destination.PB should navigate to the url specified once the file is transfered to the specified destination.."],
+		    "ExpectedOutcome":["The Pencolor of the line should be Red. The BGColor of the line should be Blue.The Transfer Event should be called when the captured signature has been successfully transfered to the specified destination(\\10.233.85.82\mcd\NEON\SignatureCapture\ReceivedFiles).PB should navigate to the url specified once the file is transfered to the specified destination.."],
 		    "testToPerform":function(){
 				genericObj.InvokeMETAFunction('SignatureCapture', 'Visibility:Visible; Left:15; Top:15; Height:50; Width:50; Pencolor:#FF0000; Penwidth:3; BGColor:#0000FF');
-				genericObj.InvokeMETAFunction("SignatureCapture","Destination:url('http://10.233.85.82/NEON/ReceivedFiles/Upload.aspx')");
+				genericObj.InvokeMETAFunction("SignatureCapture","Destination:url('http://10.233.85.82/NEON/SignatureCapture/ReceivedFiles/Upload.aspx')");
 				genericObj.InvokeMETAFunction("SignatureCapture", "signatureSaveEvent:url('http://10.233.85.82:9098/app/SignatureCapture/SignatureNavigate.html?Resposnse=%s');");
 				//genericObj.InvokeMETAFunction("SignatureCapture","SignatureSaveEvent:url('javascript:main.displayResult('%s');')");
 		    },
@@ -213,7 +213,7 @@
 		    "Description":"SignatureCapture Capture",
 		    "PreCondition":[],
 		    "Steps":["1. Test visibility SignatureCapture functionality with Content='Visible'","2. Draw a line in the rectangular capture area","3. Test Capture SignatureCapture functionality with Content='Capture'"],
-		    "ExpectedOutcome":["The drawn line should be captured and stored in the device with Signature as name of the bitmap"],
+		    "ExpectedOutcome":["The drawn line should be captured and stored in the device with Signature as name of the bitmap in the root folder (default loc)"],
 		    "testToPerform":function(){
 				genericObj.InvokeMETAFunction('SignatureCapture', 'Visibility:Visible');
 		    },
@@ -224,7 +224,7 @@
 		    "Description":"SignatureCapture Name",
 		    "PreCondition":[],
 		    "Steps":["1. Test visibility SignatureCapture functionality with Content='Visible'","2. Test Name SignatureCapture functionality with Content='Name:Motorola'","3. Draw a line in the rectangular capture area","4. Test Capture SignatureCapture functionality with Content='Capture'"],
-		    "ExpectedOutcome":["The drawn line should be captured and stored in the device with Motorola as name of the bitmap"],
+		    "ExpectedOutcome":["The drawn line should be captured and stored in the device root folder (default location) with Motorola as name of the bitmap"],
 		    "testToPerform":function(){
 				genericObj.InvokeMETAFunction('SignatureCapture', 'Visibility:Visible; Name:Motorola');
 		    },
@@ -285,7 +285,7 @@
 		    "Steps":["1. Test visibility SignatureCapture functionality with Content='Visible'","2. Test Destination SignatureCapture functionality with Content='Destination:url'","3. Test Username SignatureCapture functionality with Content='Username:[value]l'","4. Test Password SignatureCapture functionality with Content='Password:[value]'","5. Test TransferEvent functionality with Content='javascript:alert('%s');","6. Draw a line in the rectangular capture area","7. Capture the SignatureCapture rectangular capture area"],
 		    "ExpectedOutcome":["The Transfer Event should be called when the captured signature has been successfully transfered to the specified destination.When 'Capture' is called with the HTTP protocol, the destination server message should be returned"],
 		    "testToPerform":function(){
-				genericObj.InvokeMETAFunction("SignatureCapture", "Visibility:Visible; Destination:url(http://10.233.85.82/NEON/ReceivedFiles/Upload.aspx')");
+				genericObj.InvokeMETAFunction("SignatureCapture", "Visibility:Visible; Destination:url('http://10.233.85.82/NEON/ReceivedFiles/Upload.aspx')");
 				genericObj.InvokeMETAFunction("SignatureCapture","SignatureSaveEvent:url('javascript:main.displayResult('%s');')");
 		    },
 		    "FinalResult":""
@@ -363,7 +363,7 @@
 		    "FinalResult":""
 		}];
 		pbTestObj.afterEach = function(){
-			genericObj.InvokeMETAFunction("SignatureCapture", "Left:20;Top:20;BGColor:#FFFFFF;Width:200;Height:150;Penwidth:1;Pencolor:#000000");
+			genericObj.InvokeMETAFunction("SignatureCapture", "Left:20;Top:20;BGColor:#FFFFFF;Width:200;Height:150;Penwidth:1;Pencolor:#000000;Clear");
 		}
 		return pbTestObj;
 	}
@@ -475,6 +475,7 @@
 			}
 		};
 		mainObj.prevTest = function(){
+			pbTest.afterEach();
 			if(index>0){
 				index--;
 				this.loadSingleTest(index);
@@ -535,9 +536,9 @@
 		}
 		function capture() {
 			genericObj.InvokeMETAFunction('SignatureCapture', 'capture');
+			signatureSaveEvent:url("javascript:main.displayResult('%s')");
         }
-
-        function clear() {
+        function clearSig(){
 			genericObj.InvokeMETAFunction('SignatureCapture', 'clear');
         }	
 	</script>
@@ -565,8 +566,8 @@
 		<input type=button value="Next" onclick="main.nextTest()" />
 		<input type="button" onclick="main.runThisTest()" value="Run Test"/>
 		<input type=button value="capture" onclick="capture();" />
-		<input type=button value="clear" onclick="clear()" />
-		<input type=button value="hide" onclick="hide()" />
+		<input type=button value="clear" onclick="clearSig();" />
+		<input type=button value="hide" onclick="hide();" />
     </div>
 	<br>
 	<div class="block">
@@ -580,8 +581,8 @@
     <div id="expected"></div><br>
     <input type="button" onclick="main.runThisTest()" value="Run Test"/>
 	<input type=button value="capture" onclick="capture();" />
-	<input type=button value="clear" onclick="clear()" />
-	<input type=button value="hide" onclick="hide()" />
+	<input type=button value="clear" onclick="clearSig();" />
+	<input type=button value="hide" onclick="hide();" />
     <br><br>
     <span class="heading">Actual result:</span>
     <br>

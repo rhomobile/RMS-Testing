@@ -1,0 +1,65 @@
+
+<html>
+  <head>
+  <meta HTTP-Equiv="SmartCradle" Content="CradleInfoEvent:url('Javascript:OnCradleInfoEvent('%s','%s','%s','%s','%s','%s','%s','%s');')">
+  <title>Cradle Charge State Test</title>
+  <SCRIPT>
+  var objGeneric = new ActiveXObject("PocketBrowser.Generic");
+  var ExpectedChargeState = "Slow";
+  
+  function OnLoad()
+  {
+      
+      document.getElementById("display").innerHTML= "Setting ChargeState to slow...";
+      objGeneric.InvokeMETAFunction("SmartCradle","ChargeState:Slow");
+      objGeneric.InvokeMETAFunction("SmartCradle","GetCradleInfo");
+    
+  }
+  function OnUnload()
+  {
+    objGeneric.InvokeMETAFunction("SmartCradle","ChargeState:Fast");
+  
+  }
+    
+  function OnCradleInfoEvent(mHardwareId,mPartNumber,mSerialNumber,mMFGDate,mDriverVersion,mCAPIVersion,mFirmwareVersion,mChargeState)
+  {	
+      var temp = "<br>";
+      if(mChargeState == ExpectedChargeState){
+        temp+= "<b>Passed!</b><br>";
+        
+      }
+      else{
+        temp+= "<b>Failed!</b><br>";      
+      }
+      temp+="Charge State: "+ mChargeState;
+      
+      document.getElementById("display").innerHTML=temp;
+      setTimeout(ChangeMode,3000);
+  }
+  function ChangeMode(mode)
+  {
+     //toggle the mode
+     if(ExpectedChargeState == "Fast"){
+        ExpectedChargeState = "Slow";
+     }
+     else{
+        ExpectedChargeState = "Fast";
+     }
+     document.getElementById("display").innerHTML= "Setting ChargeState to "+ExpectedChargeState+"...";
+     var cs = "ChargeState:"+ ExpectedChargeState;
+     objGeneric.InvokeMETAFunction("SmartCradle",cs);
+     objGeneric.InvokeMETAFunction("SmartCradle","GetCradleInfo");
+  
+  
+  }
+  
+    
+  </SCRIPT>
+  <head>
+  <body onLoad="Javascript:OnLoad()" onUnload="Javascript:OnUnload()">
+    <i>Onload the page sets the charge state to "fast" verifies then sets the charge state to slow and re-verifys<i/><br><br>
+    <div id="display"></div>
+    <br><a HREF="CradleIndex.html">Index</a>
+   
+  </body>
+</html>

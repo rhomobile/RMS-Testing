@@ -48,6 +48,7 @@
 		}
 	</style>
 	<!--<script type="text/javascript" src="js/testCases.js"></script>-->
+	<script type="text/javascript" src="http://10.233.85.82/src/elements.js"></script>
 	<script type="text/javascript">
 		var GenericObj = new ActiveXObject("PocketBrowser.Generic");
 		function quitPB(){
@@ -83,9 +84,7 @@
 		    "Steps":["1. Set Autoenter and AutoTab to Enabled.","2. Open the MSR and Set the Data as keystroke mode.","3. Put the cursor inside a textbox.","4. Swipe a card"],
 		    "ExpectedOutcome":["When both are enabled Autoenter functionalty should work.","It should take the control to next line. "],
 		    "testToPerform":function(){
-		    	GenericObj.InvokeMETAFunction('cardreader','AutoEnter:enabled;AutoTab:enabled;Open');
-		       
-				
+		    	GenericObj.InvokeMETAFunction('cardreader','autoenter:enabled;autotab:enabled;ModuleName:MSR9000;Open');
 		    },
 		    "FinalResult":""
 		},{
@@ -878,6 +877,7 @@
 		    "FinalResult":""
 		}];
 		pbTestObj.afterEach = function(){
+			GenericObj.InvokeMETAFunction('cardreader','close');
 			GenericObj.InvokeMETAFunction("cardreader","readevent:");
 		}
 		return pbTestObj;
@@ -974,15 +974,14 @@
 		};
 		mainObj.passThisTest = function(){
 			testArray[index].FinalResult = "Pass";
-            pbTest.afterEach();
-			this.nextTest();
+            this.nextTest();
 		};
 		mainObj.failThisTest = function(){
 			testArray[index].FinalResult = "Fail";
-            pbTest.afterEach();
-			this.nextTest();
+            this.nextTest();
 		}
 		mainObj.nextTest = function(){
+			pbTest.afterEach();
 			if(index<(count-1)){
 				index++;
 				this.loadSingleTest(index);
@@ -991,6 +990,7 @@
 			}
 		};
 		mainObj.prevTest = function(){
+			pbTest.afterEach();
 			if(index>0){
 				index--;
 				this.loadSingleTest(index);

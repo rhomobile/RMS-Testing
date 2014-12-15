@@ -65,6 +65,7 @@
 
         var ftpsrc = "ftp://ftpadmin:ftpadmin@10.233.85.82/FileCollections/myfile.txt";
         var ftpdest ="file://\\Temp\\MyFTPfolder\\file1.txt";
+        var ftpdest_invalid ="file://\\Temp\\MyFTPfolder13243\\file1.txt";
 
         var ftpdest1 ="ftp://ftpadmin:ftpadmin@10.233.85.82:21/Received/myfilefrmdevice.txt";
         var ftpsrc1 = "file://\\Temp\\MyFTPfolder\\file1.txt";    
@@ -80,7 +81,7 @@
 			"RegLevel":"R1",
 			"Description":"HTTP Server to device",
 			"PreCondition":[],
-			"Steps":["Source is set to http://10.233.85.82/NEON/FileCollections/myfile1.txt", "Destination is set to file://\\Temp\\MyHTTPfolder\\filefromHTTP_test.txt", ],
+			"Steps":["Source is set to "+httpsrc, "Destination is set to file://\\Temp\\MyHTTPfolder\\filefromHTTP_test.txt", ],
 			"ExpectedOutcome":["File should be copied from HTTP location to Device folder successfully","Destination server message should be returned as Transfer Result in Transferevent."],
 			"testToPerform":function(){
 	            objgeneric.InvokeMETAFunction("FileTransfer", "Source:url('"+httpsrc+"'); destination:url('"+httpdest+"'); CreateFolders:True; OverWrite:True; TransferEvent:url('Javascript:main.displayResult('%s')'); Transfer");
@@ -93,7 +94,7 @@
             "RegLevel":"R1",
             "Description":"Device File System to HTTP Server",
             "PreCondition":[],
-            "Steps":["Destination is set to http://10.233.85.82/NEON/FileCollections/myfile1.txt", "Source is set to file://\\Temp\\MyHTTPfolder\\filefromHTTP_test.txt", ],
+            "Steps":["Destination is set to http://10.233.85.82/Neon/ReceivedFiles/filefromHTTP_test.txt", "Source is set to file://\\Temp\\MyHTTPfolder\\filefromHTTP_test.txt"],
             "ExpectedOutcome":["File should be copied from Device file system to HTTP location  successfully","Destination server message should be returned as Transfer Result in Transferevent."],
             "testToPerform":function(){
                 objgeneric.InvokeMETAFunction("FileTransfer", "Source:url('"+httpsrc1+"'); destination:url('"+httpdest1+"'); CreateFolders:True; OverWrite:True; TransferEvent:url('Javascript:main.displayResult('%s')'); Transfer");
@@ -106,7 +107,7 @@
             "RegLevel":"R1",
             "Description":"FTP Server to device",
             "PreCondition":[],
-            "Steps":["Set Source to any valid FTP address", "Set Destination to valid Device Folder","Attach the TransferEvent","Call Transfer method"],
+            "Steps":["Set Source to any valid FTP address", "Set Destination to valid Device Folder "+ftpdest,"Attach the TransferEvent","Call Transfer method"],
             "ExpectedOutcome":["File should be copied from HTTP location to Device folder successfully","Destination server message should be returned as Transfer Result in Transferevent."],
             "testToPerform":function(){
                 objgeneric.InvokeMETAFunction("FileTransfer", "Source:url('"+ftpsrc+"'); destination:url('"+ftpdest+"'); CreateFolders:True; OverWrite:True; TransferEvent:url('Javascript:main.displayResult('%s')'); Transfer"); 
@@ -119,7 +120,7 @@
             "RegLevel":"R1",
             "Description":"Device File System to FTP Server",
             "PreCondition":[],
-            "Steps":["Set Source to any valid FTP address", "Set Destination to valid Device Folder","Attach the TransferEvent","Call Transfer method"],
+            "Steps":["Set Source to any valid Device File System address. "+ftpdest1, " Set Destination to valid FTP address.","Attach the TransferEvent","Call Transfer method"],
             "ExpectedOutcome":["File should be copied from HTTP location to Device folder successfully","Destination server message should be returned as Transfer Result in Transferevent."],
             "testToPerform":function(){
                 objgeneric.InvokeMETAFunction("FileTransfer", "Source:url('"+ftpsrc1+"'); destination:url('"+ftpdest1+"'); CreateFolders:True; OverWrite:True; TransferEvent:url('Javascript:main.displayResult('%s')'); Transfer"); 
@@ -132,7 +133,7 @@
             "RegLevel":"R3",
             "Description":"Device File System to FTP Server",
             "PreCondition":[],
-            "Steps":["Set Source to any valid FTP address", "Set Destination to valid Device Folder","Attach the TransferEvent","Call Transfer method"],
+            "Steps":["Set Source to any valid Device File System address. "+ftpsrc1, "Set Destination to valid FTP address.","Attach the TransferEvent and configure it to any HTTP url.","Call Transfer method"],
             "ExpectedOutcome":["File should be copied from HTTP location to Device folder successfully","Destination server message should be returned as Transfer Result in Transferevent."],
             "testToPerform":function(){
                 objgeneric.InvokeMETAFunction("FileTransfer", "Source:url('"+ftpsrc1+"'); destination:url('"+ftpdest1+"'); CreateFolders:True; OverWrite:True; TransferEvent:url('"+trnsurl+"'); Transfer"); 
@@ -171,10 +172,10 @@
             "RegLevel":"R3",
             "Description":"FTP  Server to device CreateFolder Default value",
             "PreCondition":[],
-            "Steps":["Set Source to any valid FTP address", "Set Destination to a Device Folder","Delete the Destination folder before running the test","Select Run Test"],
+            "Steps":["Set Source to any valid FTP address", "Set Destination to a Device Folder","Delete the Destination folder before running the test "+ftpdest_invalid,"Select Run Test"],
             "ExpectedOutcome":["File should not be copied from FTP location to Device folder as the destination path does not exist and by default the value of createfolder is false.","'Error' should be returned as Transfer Result in Transferevent."],
             "testToPerform":function(){
-                objgeneric.InvokeMETAFunction("FileTransfer", "Source:url('"+ftpsrc+"'); destination:url('"+ftpdest+"'); CreateFolders:Default; OverWrite:True; TransferEvent:url('Javascript:main.displayResult('%s')'); Transfer"); 
+                objgeneric.InvokeMETAFunction("FileTransfer", "Source:url('"+ftpsrc+"'); destination:url('"+ftpdest_invalid+"'); CreateFolders:Default; OverWrite:True; TransferEvent:url('Javascript:main.displayResult('%s')'); Transfer"); 
                 },
             "FinalResult":""
             },
@@ -197,10 +198,10 @@
             "RegLevel":"R3",
             "Description":"FTP Server to device CreateFolder:false",
             "PreCondition":[],
-            "Steps":["Set Source to any valid FTP address", "Set Destination to a Device Folder","Delete the Destination folder before running the test","Select Run Test"],
+            "Steps":["Set Source to any valid FTP address", "Set Destination to a Device Folder","Delete the Destination folder before running the test "+ftpdest_invalid,"Select Run Test"],
             "ExpectedOutcome":["File should not be copied from FTP location to Device folder as the destination path does not exist and by default the value of createfolder is false.","'Error' should be returned as Transfer Result in Transferevent."],
             "testToPerform":function(){
-                objgeneric.InvokeMETAFunction("FileTransfer", "Source:url('"+ftpsrc+"'); destination:url('"+ftpdest+"'); CreateFolders:False; OverWrite:True; TransferEvent:url('Javascript:main.displayResult('%s')'); Transfer"); 
+                objgeneric.InvokeMETAFunction("FileTransfer", "Source:url('"+ftpsrc+"'); destination:url('"+ftpdest_invalid+"'); CreateFolders:False; OverWrite:True; TransferEvent:url('Javascript:main.displayResult('%s')'); Transfer"); 
                 },
             "FinalResult":""
             },
@@ -280,7 +281,7 @@
             "Steps":["Set Source to any invalid HTTP address which does not contain any file", "Set Destination to a Device Folder","Select Run Test"],
             "ExpectedOutcome":["File should not be copied from device to device location.","'SPB should not crash and appropriate error message should come in TransferEvent."],
             "testToPerform":function(){
-                var invalidsrc = "http://@10.233.85.82/FileCollections/file_not_available.txt";
+                var invalidsrc = "http://10.233.85.888/FileCollections/file_not_available.txt";
                 objgeneric.InvokeMETAFunction("FileTransfer", "Source:url('"+invalidsrc+"'); destination:url('"+httpdest+"'); CreateFolders:True; OverWrite:True; TransferEvent:url('Javascript:main.displayResult('%s')'); Transfer"); 
                 },
             "FinalResult":""
@@ -320,7 +321,7 @@
             "Description":"Filemangement with invalid File System destination",
             "PreCondition":[],
             "Steps":["Set Source to valid location", "Set the destinantion to invalid string containing only ftp://157.235.207.79", "Set the CreateFolder and overwrite to True", "Select Run Test"],
-            "ExpectedOutcome":["Another Temp folder should not create in device and PB should not Crash"],
+            "ExpectedOutcome":["File should not be copied in ftp server and PB should not Crash"],
             "testToPerform":function(){
                 var invaliddest2 = "ftp://10.233.85.82";
                 objgeneric.InvokeMETAFunction("FileTransfer", "Source:url('"+ftpdest1+"'); destination:url('"+invaliddest2+"'); CreateFolders:True; OverWrite:True; TransferEvent:url('Javascript:main.displayResult('%s')'); Transfer"); 
@@ -392,7 +393,7 @@
             "Steps":["Set Source to null", "Set Destination to null","Select Run Test"],
             "ExpectedOutcome":["PB should not crash when any of the FileTransfer parameters with null values are set through InvokeMetaFunction","No Error should be occurred."],
             "testToPerform":function(){
-                objgeneric.InvokeMETAFunction("FileTransfer", "Source:url(''); destination:url(''); TransferEvent:url(' '); Transfer"); 
+                objgeneric.InvokeMETAFunction("FileTransfer", "Source:url(''); destination:url(''); TransferEvent:url('Javascript:main.displayResult('%s')'); Transfer"); 
                 },
             "FinalResult":""
             },
