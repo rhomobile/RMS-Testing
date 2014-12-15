@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>On Load Test</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+	<META HTTP-Equiv="MinimizeButton" content="visibility:Visible;top:30 " >
+	<META HTTP-Equiv="quitbutton" Content="visibility:visible">
+	<META HTTP-Equiv="ReloadButton" Content="visibility:visible">
+	<script type="text/javascript">
+		function onLoad() {
+		 if(EB.Log.fileSize){
+		 	document.getElementById('res').innerHTML = "PASSED";
+		 }
+		}
+	</script>
+	<script type="text/javascript" src="/public/api/ebapi.js"></script>
+	<script type="text/javascript" src="/public/api/eb.log.js"></script>
+</head>
+<body onload="onLoad()">
+<h2>On Load Test:</h2>
+<h3>To test page onload event.</h3>
+<h3>Expected:</h3>
+<ol>
+	<li>Check for the "PASSED" below.</li>
+</ol>
+<h3 id="res"></h3>
+<br/>
+</body>
+</html>

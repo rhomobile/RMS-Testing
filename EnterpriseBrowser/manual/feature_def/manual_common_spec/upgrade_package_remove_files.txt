@@ -1,0 +1,1 @@
+app/BundleTest/pageremoved.erb

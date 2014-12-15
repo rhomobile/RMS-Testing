@@ -1,0 +1,93 @@
+<html>
+<head>
+	<title>Battery Stress Test</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+	<META HTTP-Equiv="MinimizeButton" content="visibility:Visible;top:30 " >
+	<META HTTP-Equiv="quitbutton" Content="visibility:visible">
+	<META HTTP-Equiv="ReloadButton" Content="visibility:visible">
+	
+    <script type="text/javascript" charset="utf-8" src="../../public/jquery/jquery-1.6.4.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../../public/jquery/jquery.json-2.3.min.js"></script>
+
+    <link type="image/png" rel="shortcut icon" href="../../public/jasmine/jasmine_favicon.png">
+    <link type="text/css" rel="stylesheet" href="../../public/jasmine/jasmine.css">
+    <script type="text/javascript" src="../../public/jasmine/jasmine.js"></script>
+    <script type="text/javascript" src="../../public/jasmine/jasmine-html.js"></script>
+    <script type="text/javascript" src="../../public/jasmine/jasmine.junit_reporter.js"></script>
+    <script type="text/javascript" src="../helpers/rhologReporter.js"></script>
+   	<script type="text/javascript" src="../../public/api/rhoapi-modules.js"></script>
+	<script type = "text/javascript">
+	    var batteryStatusCallback = function (args){
+		document.getElementById("tid").innerHTML = count1;
+	  	        coun1++;
+        var result = '';
+        result += '<br/>AcLineStatus: ' + JSON.stringify(args["acLineStatus"]);
+        result += '<br/>BatteryLifePercent: ' + JSON.stringify(args["batteryLifePercent"]);
+        result += '<br/>BackupBatteryLifePercent: ' + JSON.stringify(args["backupBatteryLifePercent"]);
+        result += '<br/>Trigger: ' + JSON.stringify(args["trigger"]);
+        result += '<br/>BatteryLifeKnown: ' + JSON.stringify(args["batteryLifeKnown"]);
+        result += '<br/>BackupBatteryLifeKnown: ' + JSON.stringify(args["backupBatteryLifeKnown"]);
+        document.getElementById("pid1").innerHTML = result;
+      } 
+
+      var smartBatteryStatusCallback = function (args){
+      var result = '';
+      result += '<br/>serialNumber: ' + JSON.stringify(args["serialNumber"]);
+      result += '<br/>partNumber: ' + JSON.stringify(args["partNumber"]);
+      result += '<br/>batteryChargeCycles: ' + JSON.stringify(args["batteryChargeCycles"]);
+      result += '<br/>ratedCapacity: ' + JSON.stringify(args["ratedCapacity"]);
+      result += '<br/>manufactureDate: ' + JSON.stringify(args["manufactureDate"]);
+      result += '<br/>stateOfHealth: ' + JSON.stringify(args["stateOfHealth"]);
+       document.getElementById("pid2").innerHTML = result;
+    } 
+      var count1 = 0;
+      var count2 = 0;
+	  function batterymethod(){
+	  	        
+
+	  	        Rho.Battery.showIcon({color:'#FF0000'});
+			    Rho.Battery.batteryStatus({refreshInterval:6000},batteryStatusCallback);
+	  }
+
+	   function smartbatterymethod(){
+	  	        
+                document.getElementById("tid").innerHTML = count2;
+                count2++;
+	  	        Rho.Battery.showIcon({color:'#FF0000'});
+	  	        Rho.Battery.smartBatteryStatus(smartBatteryStatusCallback);
+	  	        setTimeout("captureloop()",10000)
+	  	       
+	  	    }
+
+	  	function captureloop(){
+		smartbatterymethod();
+	    }   
+
+
+	
+     
+
+
+	</script>
+
+</head>
+<body >
+Battery stress Tests
+<br />
+<br />
+
+<button onclick = batterymethod();> Call batteryStatus method with callback </button>
+<button onclick = smartbatterymethod();> Call smartbatteryStatus method with callback </button>
+
+<br>
+<br>
+<div id="tid"></div>
+<div id="pid1"></div>
+<div id="pid2"></div>
+
+<button "location.href='./index.html'> Back </button>
+
+
+
+</body>
+</html>

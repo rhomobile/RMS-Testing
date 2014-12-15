@@ -1,0 +1,1049 @@
+<script type="text/javascript">
+var selected_Module="";
+
+function getmodulename()
+{
+//var index = document.controlForm.myChoice.selectedIndex;
+//selected_Module = document.controlForm.myChoice.options[index].value;
+selected_Module = document.controlForm.myChoice.value;
+myDiv.innerHTML=""+selected_Module;
+
+if(selected_Module=="VT293-0001")
+{
+   //Request the system to check every 6 seconds and call us back if there is a change in network connectivity
+   EB.Network.startStatusNotify(6000, status_notify_callback);
+}
+if(selected_Module=="VT293-0002")
+{
+	EB.Network.startStatusNotify(status_notify_callback);
+}
+if(selected_Module=="VT293-0003")
+{
+EB.Network.startStatusNotify(6000, function(params){
+      myDiv.innerHTML="Network status changed from"+params["prev_status"]+" to "+params["current_status"];
+   });
+}
+if(selected_Module=="VT293-0004")
+{
+
+}
+if(selected_Module=="VT293-0005")
+{
+EB.Network.startStatusNotify(6000, status_notify_callback);
+}
+if(selected_Module=="VT293-0006")
+{
+EB.Network.stopStatusNotify();
+}
+if(selected_Module=="VT293-0007")
+{
+connectwanProps = {
+        connectionDestination : "My ISP"
+      };
+EB.Network.connectWan(connectwanProps, connect_wan_notify_callback);
+}
+if(selected_Module=="VT293-0008")
+{
+connectwanProps = {
+        connectionDestination : "My ISP"
+      };
+EB.Network.connectWan(connectwanProps, connect_wan_notify_callback);
+}
+if(selected_Module=="VT293-0009")
+{
+
+}
+if(selected_Module=="VT293-0010")
+{
+connectwanProps = {
+        connectionDestination : "My ISP"
+      };
+EB.Network.connectWan(connectwanProps, function(params){
+//connect wan callback
+myDiv.innerHTML="phoneSignalStrength"+params["phoneSignalStrength"]+"<br>"+
+				"networkOperator"+params["networkOperator"]+"<br>"+
+				"connectionTypeAvailable"+params["connectionTypeAvailable"]+"<br>"+
+				"connectionTypeConnected"+params["connectionTypeConnected"]+"<br>"+
+				"connectionManagerMessage"+params["connectionManagerMessage"];
+});
+}
+if(selected_Module=="VT293-0011")
+{
+connectwanProps = {
+        connectionDestination : "My ISP"
+      };
+EB.Network.connectWan(connectwanProps, connect_wan_notify_callback);
+}
+if(selected_Module=="VT293-0012")
+{
+connectwanProps = {
+        connectionDestination : "My ISP"
+      };
+EB.Network.connectWan(connectwanProps, connect_wan_notify_callback);
+}
+if(selected_Module=="VT293-0013")
+{
+    getProps = {
+        url: "http://www.apache.org/licenses/LICENSE-2.0"
+      };
+   EB.Network.get(getProps, get_callback);
+}
+if(selected_Module=="VT293-0014")
+{
+      detectconnectionProps = {
+        host: "192.168.6.18",
+        port: 80
+      };
+  EB.Network.detectConnection(detectconnectionProps, detect_connection_notify_callback);
+}
+if(selected_Module=="VT293-0015")
+{
+
+}
+if(selected_Module=="VT293-0016")
+{
+      detectconnectionProps = {
+        host: "192.168.6.18",
+        port: 80
+      };
+  EB.Network.detectConnection(detectconnectionProps, function(params){
+if(params["connectionInformation"] == "Disconnected")
+	myDiv.innerHTML=""+params["failureMessage"];
+else
+	myDiv.innerHTML="Connected";
+ });
+}
+if(selected_Module=="VT293-0017")
+{
+      detectconnectionProps = {
+        host: "192.168.6.18",
+        port: 80
+      };
+  EB.Network.detectConnection(detectconnectionProps, detect_connection_notify_callback);
+}
+if(selected_Module=="VT293-0018")
+{
+      detectconnectionProps = {
+        host: "http://www.google.com",
+        port: 80,
+		pollInterval: 6000
+      };
+  EB.Network.detectConnection(detectconnectionProps, detect_connection_notify_callback);
+}
+if(selected_Module=="VT293-0019")
+{
+      detectconnectionProps = {
+        host: "http://www.google.com",
+        port: 80,
+		pollInterval: 6000
+      };
+  EB.Network.detectConnection(detectconnectionProps, detect_connection_notify_callback);
+}
+if(selected_Module=="VT293-0020")
+{
+      detectconnectionProps = {
+        host: "http://www.google.com",
+        port: 80,
+		pollInterval: 3000
+      };
+  EB.Network.detectConnection(detectconnectionProps, detect_connection_notify_callback);
+}
+if(selected_Module=="VT293-0021")
+{
+      detectconnectionProps = {
+        host: "http://www.google.com",
+        port: 80,
+		pollInterval: -6000
+      };
+  EB.Network.detectConnection(detectconnectionProps, detect_connection_notify_callback);
+}
+if(selected_Module=="VT293-0022")
+{
+      detectconnectionProps = {
+        host: "http://www.google.com",
+        port: 80,
+		detectionTimeout: 1000
+      };
+  EB.Network.detectConnection(detectconnectionProps, detect_connection_notify_callback);
+}
+if(selected_Module=="VT293-0023")
+{
+      detectconnectionProps = {
+        host: "http://www.google.com",
+        port: 80,
+		pollInterval: 6000,
+		detectionTimeout: 5000
+      };
+  EB.Network.detectConnection(detectconnectionProps, detect_connection_notify_callback);
+}
+if(selected_Module=="VT293-0024")
+{
+      detectconnectionProps = {
+        host: "192.168.6.18",
+        port: 80,
+		pollInterval: 6000,
+		detectionTimeout: 5000
+      };
+  EB.Network.detectConnection(detectconnectionProps, detect_connection_notify_callback);
+}
+if(selected_Module=="VT293-0025")
+{
+  detectconnectionProps = {
+        host: "http://www.google.com",
+        port: 80,
+		pollInterval: 6000,
+		detectionTimeout: 5000
+      };
+  EB.Network.detectConnection(detectconnectionProps, detect_connection_notify_callback);
+}
+if(selected_Module=="VT293-0026")
+{
+var cell_network = EB.Network.hasCellNetwork()
+myDiv.innerHTML=""+cell_network;
+alert("Cell network: "+cell_network);
+}
+if(selected_Module=="VT293-0027")
+{
+var cell_network = EB.Network.hasCellNetwork()
+myDiv.innerHTML=""+cell_network;
+alert("Cell network: "+cell_network);
+}
+if(selected_Module=="VT293-0028")
+{
+var cell_network = EB.Network.hasCellNetwork()
+myDiv.innerHTML=""+cell_network;
+alert("Cell network: "+cell_network);
+}
+if(selected_Module=="VT293-0029")
+{
+var network = EB.Network.hasNetwork()
+myDiv.innerHTML=""+network;
+alert("Network: "+network);
+}
+if(selected_Module=="VT293-0030")
+{
+var network = EB.Network.hasNetwork()
+myDiv.innerHTML=""+network;
+alert("Network: "+network);
+}
+if(selected_Module=="VT293-0031")
+{
+var network = EB.Network.hasNetwork()
+myDiv.innerHTML=""+network;
+alert("Network: "+network);
+}
+if(selected_Module=="VT293-0032")
+{
+var network = EB.Network.hasNetwork()
+myDiv.innerHTML=""+network;
+alert("Network: "+network);
+}
+if(selected_Module=="VT293-0033")
+{
+var wifi_network = EB.Network.hasWifiNetwork()
+myDiv.innerHTML=""+wifi_network;
+alert("Wi-Fi network: "+wifi_network);
+}
+if(selected_Module=="VT293-0034")
+{
+var wifi_network = EB.Network.hasWifiNetwork()
+myDiv.innerHTML=""+wifi_network;
+alert("Wi-Fi network: "+wifi_network);
+}
+if(selected_Module=="VT293-00335")
+{
+var network = EB.Network.hasNetwork()
+myDiv.innerHTML=""+network;
+alert("Network: "+network);
+}
+if(selected_Module=="VT293-0036")
+{
+var wifi_network = EB.Network.hasWifiNetwork()
+myDiv.innerHTML=""+wifi_network;
+alert("Wi-Fi network: "+wifi_network);
+}
+if(selected_Module=="VT293-0037")
+{
+var cell_network = EB.Network.hasCellNetwork()
+myDiv.innerHTML=""+cell_network;
+alert("Cell network: "+cell_network);
+}
+if(selected_Module=="VT293-0038")
+{
+    responsetimeoutProps = {
+        url: "http://www.apache.org/licenses/LICENSE-2.0"
+      };
+   EB.Network.get(responsetimeoutProps, get_callback);
+}
+if(selected_Module=="VT293-0039")
+{
+    responsetimeoutProps = {
+        url: "http://www.apache.org/licenses/LICENSE-2.0",
+		responseTimeout: 10
+      };
+   EB.Network.get(responsetimeoutProps, get_callback);
+}
+if(selected_Module=="VT293-0040")
+{
+    certificateProps = {
+        url: "https://192.168.6.27/rhodes/AsyncHttp/asyncpost.php",
+		body: "data1=test&data2=test2"
+	 };
+   EB.Network.post(certificateProps, post_callback);
+}
+if(selected_Module=="VT293-0041")
+{
+    certificateProps = {
+        url: "https://192.168.6.27/rhodes/AsyncHttp/asyncpost.php",
+		body: "data1=test&data2=test2",
+		verifyPeerCertificate: true
+	 };
+   EB.Network.post(certificateProps, post_callback);
+}
+if(selected_Module=="VT293-0042")
+{
+    certificateProps = {
+        url: "https://192.168.6.27/rhodes/AsyncHttp/asyncpost.php",
+		body: "data1=test&data2=test2",
+		verifyPeerCertificate: false
+	 };
+   EB.Network.post(certificateProps, post_callback);
+}
+
+if(selected_Module=="VT293-0043")
+{
+    postProps = {
+        url: "https://192.168.6.27/rhodes/AsyncHttp/asyncpost.php",
+		body: "data1=test&data2=test2",
+		verifyPeerCertificate: true
+	 };
+   EB.Network.post(postProps, post_callback);
+}
+if(selected_Module=="VT293-0044")
+{
+
+}
+if(selected_Module=="VT293-0045")
+{
+    postProps = {
+        url: "https://192.168.6.27/rhodes/AsyncHttp/asyncpost.php",
+		body: "data1=test&data2=test2",
+		verifyPeerCertificate: true
+	 };
+   EB.Network.post(postProps, function(params){
+// post callback		
+		myDiv.innerHTML="status"+params["status"]+"<br>"+
+						"headers"+params["headers"]+"<br>"+
+						"cookies"+params["cookies"]+"<br>"+
+						"http_error"+params["http_error"];
+		myDiv.innerHTML="<br>Get Result"+params["body"];
+});
+}
+if(selected_Module=="VT293-0046")
+{
+    getProps = {
+        url: "http://192.168.6.27/rhodes/AsyncHttp/asyncget.php?data1=test&data2=test2"
+      };
+   EB.Network.get(getProps, get_callback);
+}
+if(selected_Module=="VT293-0047")
+{
+
+}
+if(selected_Module=="VT293-0048")
+{
+    getProps = {
+        url: "http://192.168.6.27/rhodes/AsyncHttp/asyncget.php?data1=test&data2=test2"
+      };
+   EB.Network.get(getProps, function(params){
+// get callback		
+		myDiv.innerHTML="status"+params["status"]+"<br>"+
+						"headers"+params["headers"]+"<br>"+
+						"cookies"+params["cookies"]+"<br>"+
+						"http_error"+params["http_error"];
+		myDiv.innerHTML="<br>Get Result"+params["body"];
+});
+}
+if(selected_Module=="VT293-0049")
+{
+      downloadfileProps = {
+        url: "http://192.168.6.27/rhodes/AsyncHttp/screen.jpg",
+        filename: EB.Application.publicFolder+"/images/network.jpg"
+      };
+ EB.Network.downloadFile(downloadfileProps, download_file_callback);
+}
+if(selected_Module=="VT293-0050")
+{
+      downloadfileProps = {
+        url: "http://192.168.6.27/rhodes/AsyncHttp/screen.jpg",
+        filename: EB.Application.publicFolder+"/images/network.jpg"
+      };
+ EB.Network.downloadFile(downloadfileProps, download_file_callback);
+}
+if(selected_Module=="VT293-0051")
+{
+      downloadfileProps = {
+        url: "http://192.168.6.27/rhodes/AsyncHttp/screen.jpg",
+        filename: EB.Application.publicFolder+"/images/network.jpg",
+        overwriteFile: true
+      };
+ EB.Network.downloadFile(downloadfileProps, download_file_callback);
+}
+if(selected_Module=="VT293-0052")
+{
+      downloadfileProps = {
+        url: "http://192.168.6.27/rhodes/AsyncHttp/screen.jpg",
+        filename: EB.Application.publicFolder+"/images/network/network.jpg",
+        overwriteFile: true
+      };
+ EB.Network.downloadFile(downloadfileProps, download_file_callback);
+}
+if(selected_Module=="VT293-0053")
+{
+      downloadfileProps = {
+        url: "http://192.168.6.27/rhodes/AsyncHttp/screen.jpg",
+        filename: EB.Application.publicFolder+"/images/network/network.jpg",
+        overwriteFile: true,
+		createFolders: false
+      };
+ EB.Network.downloadFile(downloadfileProps, download_file_callback);
+}
+if(selected_Module=="VT293-0054")
+{
+      downloadfileProps = {
+        url: "http://192.168.6.27/rhodes/AsyncHttp/screen.jpg",
+        filename: EB.Application.publicFolder+"/images/network/network.jpg",
+        overwriteFile: true,
+		createFolders: true
+      };
+ EB.Network.downloadFile(downloadfileProps, download_file_callback);
+}
+if(selected_Module=="VT293-0055")
+{
+      downloadfileProps = {
+        url: "http://192.168.6.27/rhodes/AsyncHttp/screen.jpg",
+        filename: EB.Application.publicFolder+"/images/network/network.jpg",
+        overwriteFile: true,
+		createFolders: true
+      };
+ EB.Network.downloadFile(downloadfileProps, function(params){
+      if (params["status"] == "ok") {
+	    myDiv.innerHTML="Download Succeeded, path is /public/images/nadaf.jpg";		
+		myDiv.innerHTML="<br>status"+params["status"]+"<br>"+
+						"body"+params["body"]+"<br>"+
+						"headers"+params["headers"]+"<br>"+
+						"cookies"+params["cookies"]+"<br>"+
+						"http_error"+params["http_error"]+"<br>"+
+						"fileExists"+params["fileExists"];
+        //alert("Download Succeeded, path is /public/images/nadaf.jpg");
+      } else {
+	    myDiv.innerHTML="Download Failed";
+		myDiv.innerHTML="<br>status"+params["status"]+"<br>"+
+						"body"+params["body"]+"<br>"+
+						"headers"+params["headers"]+"<br>"+
+						"cookies"+params["cookies"]+"<br>"+
+						"http_error"+params["http_error"]+"<br>"+
+						"fileExists"+params["fileExists"];
+        //alert("Download Failed");
+      }
+});
+}
+if(selected_Module=="VT293-0056")
+{
+      downloadfileProps = {
+        url: "http://192.168.6.27/rhodes/AsyncHttp/screen.jpg",
+        filename: EB.Application.publicFolder+"/images/network/network.jpg",
+        overwriteFile: invalid,
+		createFolders: true
+      };
+ EB.Network.downloadFile(downloadfileProps, download_file_callback);
+}
+if(selected_Module=="VT293-0057")
+{
+      downloadfileProps = {
+        url: "http://192.168.6.27/rhodes/AsyncHttp/screen.jpg",
+        filename: EB.Application.publicFolder+"/images/network/network.jpg",
+        overwriteFile: "",
+		createFolders: true
+      };
+ EB.Network.downloadFile(downloadfileProps, download_file_callback);
+}
+if(selected_Module=="VT293-0058")
+{
+      downloadfileProps = {
+        url: "http://192.168.6.27/rhodes/AsyncHttp/screen.jpg",
+        filename: EB.Application.publicFolder+"/images/network/network.jpg",
+        overwriteFile: true,
+		createFolders: invalid
+      };
+ EB.Network.downloadFile(downloadfileProps, download_file_callback);
+}
+if(selected_Module=="VT293-0059")
+{
+      downloadfileProps = {
+        url: "http://192.168.6.27/rhodes/AsyncHttp/screen.jpg",
+        filename: EB.Application.publicFolder+"/images/network/network.jpg",
+        overwriteFile: true,
+		createFolders: ""
+      };
+ EB.Network.downloadFile(downloadfileProps, download_file_callback);
+}
+if(selected_Module=="VT293-0060")
+{
+      downloadfileProps = {
+        url: "http://192.168.6.27/rhodes/secure/screen.jpg",
+		authType: "basic",
+		authUser: "admin",
+		authPassword: "admin",
+        filename: EB.Application.publicFolder+"/images/network/network.jpg",
+        overwriteFile: true,
+		createFolders: true
+      };
+ EB.Network.downloadFile(downloadfileProps, download_file_callback);
+}
+if(selected_Module=="VT293-0061")
+{
+      downloadfileProps = {
+        url: "http://192.168.6.27/rhod/screen.jpg",
+		authType: "basic",
+		authUser: "admin",
+		authPassword: "admin",
+        filename: EB.Application.publicFolder+"/images/network/network.jpg",
+        overwriteFile: true,
+		createFolders: true
+      };
+ EB.Network.downloadFile(downloadfileProps, download_file_callback);
+}
+if(selected_Module=="VT293-0062")
+{
+      downloadfileProps = {
+        url: "",
+		authType: "basic",
+		authUser: "admin",
+		authPassword: "admin",
+        filename: EB.Application.publicFolder+"/images/network/network.jpg",
+        overwriteFile: true,
+		createFolders: true
+      };
+ EB.Network.downloadFile(downloadfileProps, download_file_callback);
+}
+if(selected_Module=="VT293-0063")
+{
+      downloadfileProps = {
+        url: "http://192.168.6.27/rhodes/secure/screen.jpg",
+		authType: "basic",
+		authUser: "admin",
+		authPassword: "admin",
+        filename: EB.Application.invalid+"/images/network/network.jpg",
+        overwriteFile: true,
+		createFolders: true
+      };
+ EB.Network.downloadFile(downloadfileProps, download_file_callback);
+}
+if(selected_Module=="VT293-0064")
+{
+      downloadfileProps = {
+        url: "http://192.168.6.27/rhodes/secure/screen.jpg",
+		authType: "basic",
+		authUser: "admin",
+		authPassword: "admin",
+        filename: "",
+        overwriteFile: true,
+		createFolders: true
+      };
+ EB.Network.downloadFile(downloadfileProps, download_file_callback);
+}
+if(selected_Module=="VT293-0065")
+{
+      downloadfileProps = {
+        url: "http://192.168.6.27/rhodes/secure/screen.jpg",
+		authType: "invalid",
+		authUser: "admin",
+		authPassword: "admin",
+        filename: EB.Application.publicFolder+"/images/network/network.jpg",
+        overwriteFile: true,
+		createFolders: true
+      };
+ EB.Network.downloadFile(downloadfileProps, download_file_callback);
+}
+if(selected_Module=="VT293-0066")
+{
+      downloadfileProps = {
+        url: "http://192.168.6.27/rhodes/secure/screen.jpg",
+		authType: "",
+		authUser: "admin",
+		authPassword: "admin",
+        filename: EB.Application.publicFolder+"/images/network/network.jpg",
+        overwriteFile: true,
+		createFolders: true
+      };
+ EB.Network.downloadFile(downloadfileProps, download_file_callback);
+}
+if(selected_Module=="VT293-0067")
+{
+      downloadfileProps = {
+        url: "http://192.168.6.27/rhodes/secure/screen.jpg",
+		authType: "basic",
+		authUser: "invalid",
+		authPassword: "admin",
+        filename: EB.Application.publicFolder+"/images/network/network.jpg",
+        overwriteFile: true,
+		createFolders: true
+      };
+ EB.Network.downloadFile(downloadfileProps, download_file_callback);
+}
+if(selected_Module=="VT293-0068")
+{
+      downloadfileProps = {
+        url: "http://192.168.6.27/rhodes/secure/screen.jpg",
+		authType: "basic",
+		authUser: "",
+		authPassword: "admin",
+        filename: EB.Application.publicFolder+"/images/network/network.jpg",
+        overwriteFile: true,
+		createFolders: true
+      };
+ EB.Network.downloadFile(downloadfileProps, download_file_callback);
+}
+if(selected_Module=="VT293-0069")
+{
+      downloadfileProps = {
+        url: "http://192.168.6.27/rhodes/secure/screen.jpg",
+		authType: "basic",
+		authUser: "admin",
+		authPassword: "invalid",
+        filename: EB.Application.publicFolder+"/images/network/network.jpg",
+        overwriteFile: true,
+		createFolders: true
+      };
+ EB.Network.downloadFile(downloadfileProps, download_file_callback);
+}
+if(selected_Module=="VT293-0070")
+{
+      downloadfileProps = {
+        url: "http://192.168.6.27/rhodes/secure/screen.jpg",
+		authType: "basic",
+		authUser: "admin",
+		authPassword: "",
+        filename: EB.Application.publicFolder+"/images/network/network.jpg",
+        overwriteFile: true,
+		createFolders: true
+      };
+ EB.Network.downloadFile(downloadfileProps, download_file_callback);
+}      
+if(selected_Module=="VT293-0071")
+{
+    uploadfileProps = {
+          url: "http://192.168.6.18/NEON/ReceivedFiles/Upload.aspx",
+          filename: EB.Application.publicFolder+"/images/backButton.png",
+          body: "uploading file",
+          fileContentType: "image/png"
+        };
+
+        EB.Network.uploadFile(uploadfileProps, upload_file_callback); 
+}
+if(selected_Module=="VT293-0072")
+{
+
+}
+if(selected_Module=="VT293-0073")
+{
+    uploadfileProps = {
+          url: "http://192.168.6.18/NEON/ReceivedFiles/Upload.aspx",
+          filename: EB.Application.publicFolder+"/images/backButton.png",
+          body: "uploading file",
+          fileContentType: "image/png"
+        };
+
+    EB.Network.uploadFile(uploadfileProps, function(params){
+  if (params["status"] == "ok") {
+	myDiv.innerHTML="Upload Succeeded, path is /public/images/nadaf.jpg";		
+	myDiv.innerHTML="<br>status"+params["status"]+"<br>"+
+					"body"+params["body"]+"<br>"+
+					"headers"+params["headers"]+"<br>"+
+					"cookies"+params["cookies"]+"<br>"+
+					"http_error"+params["http_error"]+"<br>"+
+					"fileExists"+params["fileExists"];
+	//alert("Upload Succeeded, path is /public/images/nadaf.jpg");
+  } else {
+	myDiv.innerHTML="Upload Failed";
+	myDiv.innerHTML="<br>status"+params["status"]+"<br>"+
+					"body"+params["body"]+"<br>"+
+					"headers"+params["headers"]+"<br>"+
+					"cookies"+params["cookies"]+"<br>"+
+					"http_error"+params["http_error"]+"<br>"+
+					"fileExists"+params["fileExists"];
+	//alert("Upload Failed");
+  }
+}); 
+}
+if(selected_Module=="VT293-0074")
+{
+    uploadfileProps = {
+          url: "http://192.168.6.18/NEON/secure/Upload.aspx",
+		  authType: "basic",
+		  authUser: "admin",
+		  authPassword: "Motorola@123",
+          filename: EB.Application.publicFolder+"/images/backButton.png",
+          body: "uploading file",
+          fileContentType: "image/png"
+        };
+        EB.Network.uploadFile(uploadfileProps, upload_file_callback); 
+}
+if(selected_Module=="VT293-0075")
+{
+       uploadfileProps = {
+		  url: "http://192.168.6.18/NEON/invalid/Upload.aspx",
+		  authType: "basic",
+		  authUser: "admin",
+		  authPassword: "Motorola@123",
+          filename: EB.Application.publicFolder+"/images/backButton.png",
+          body: "uploading file",
+          fileContentType: "image/png"
+        };
+        EB.Network.uploadFile(uploadfileProps, upload_file_callback); 
+}
+
+if(selected_Module=="VT293-0076")
+{
+		uploadfileProps = {
+          url: "",
+		  authType: "basic",
+		  authUser: "admin",
+		  authPassword: "Motorola@123",
+          filename: EB.Application.publicFolder+"/images/backButton.png",
+          body: "uploading file",
+          fileContentType: "image/png"
+        };
+        EB.Network.uploadFile(uploadfileProps, upload_file_callback); 
+}
+if(selected_Module=="VT293-0077")
+{
+    uploadfileProps = {
+          url: "http://192.168.6.18/NEON/secure/Upload.aspx",
+		  authType: "basic",
+		  authUser: "admin",
+		  authPassword: "Motorola@123",
+          filename: EB.Application.invalid+"/images/backButton.png",
+          body: "uploading file",
+          fileContentType: "image/png"
+        };
+
+        EB.Network.uploadFile(uploadfileProps, upload_file_callback); 
+}
+if(selected_Module=="VT293-0078")
+{
+    uploadfileProps = {
+          url: "http://192.168.6.18/NEON/secure/Upload.aspx",
+		  authType: "basic",
+		  authUser: "admin",
+		  authPassword: "Motorola@123",
+          filename: "",
+          body: "uploading file",
+          fileContentType: "image/png"
+        };
+        EB.Network.uploadFile(uploadfileProps, upload_file_callback); 
+}
+if(selected_Module=="VT293-0079")
+{
+    uploadfileProps = {
+          url: "http://192.168.6.18/NEON/secure/Upload.aspx",
+		  authType: "invalid",
+		  authUser: "admin",
+		  authPassword: "Motorola@123",
+          filename: EB.Application.publicFolder+"/images/backButton.png",
+          body: "uploading file",
+          fileContentType: "image/png"
+        };
+        EB.Network.uploadFile(uploadfileProps, upload_file_callback); 
+}
+if(selected_Module=="VT293-0080")
+{
+    uploadfileProps = {
+          url: "http://192.168.6.18/NEON/secure/Upload.aspx",
+		  authType: "",
+		  authUser: "admin",
+		  authPassword: "Motorola@123",
+          filename: EB.Application.publicFolder+"/images/backButton.png",
+          body: "uploading file",
+          fileContentType: "image/png"
+        };
+        EB.Network.uploadFile(uploadfileProps, upload_file_callback); 
+}
+if(selected_Module=="VT293-0081")
+{
+    uploadfileProps = {
+          url: "http://192.168.6.18/NEON/secure/Upload.aspx",
+		  authType: "basic",
+		  authUser: "invalid",
+		  authPassword: "Motorola@123",
+          filename: EB.Application.publicFolder+"/images/backButton.png",
+          body: "uploading file",
+          fileContentType: "image/png"
+        };
+        EB.Network.uploadFile(uploadfileProps, upload_file_callback); 
+}
+if(selected_Module=="VT293-0082")
+{
+    uploadfileProps = {
+          url: "http://192.168.6.18/NEON/secure/Upload.aspx",
+		  authType: "basic",
+		  authUser: "",
+		  authPassword: "Motorola@123",
+          filename: EB.Application.publicFolder+"/images/backButton.png",
+          body: "uploading file",
+          fileContentType: "image/png"
+        };
+        EB.Network.uploadFile(uploadfileProps, upload_file_callback); 
+}
+if(selected_Module=="VT293-0083")
+{
+    uploadfileProps = {
+          url: "http://192.168.6.18/NEON/secure/Upload.aspx",
+		  authType: "basic",
+		  authUser: "admin",
+		  authPassword: "invalid",
+          filename: EB.Application.publicFolder+"/images/backButton.png",
+          body: "uploading file",
+          fileContentType: "image/png"
+        };
+        EB.Network.uploadFile(uploadfileProps, upload_file_callback); 
+}
+if(selected_Module=="VT293-0084")
+{
+    uploadfileProps = {
+          url: "http://192.168.6.18/NEON/secure/Upload.aspx",
+		  authType: "basic",
+		  authUser: "admin",
+		  authPassword: "",
+          filename: EB.Application.publicFolder+"/images/backButton.png",
+          body: "uploading file",
+          fileContentType: "image/png"
+        };
+        EB.Network.uploadFile(uploadfileProps, upload_file_callback); 
+}
+
+} 
+
+function stop_status_notify() {
+  // Stop network status notifications
+  EB.Network.stopStatusNotify();
+}
+
+function disconnect_wan_status_notify() {
+// Stop wan status notifications
+EB.Network.disconnectWan();
+}
+
+function cancel_notify_callback() {
+// cancel method
+EB.Network.cancel(get_callback);
+myDiv.innerHTML="Request canceled";
+}
+	
+function set_default() {
+// Stop network status notifications
+EB.Network.responseTimeout = 30;
+EB.Network.pollinterval = ""
+EB.Network.url = ""
+EB.Network.verifyPeerCertificate = true
+EB.Network.overwriteFile = false
+EB.Network.createFolders = false
+}
+function get_callback(params) {
+// get callback		
+		myDiv.innerHTML="status"+params["status"]+"<br>"+
+						"headers"+params["headers"]+"<br>"+
+						"cookies"+params["cookies"]+"<br>"+
+						"http_error"+params["http_error"];
+		myDiv.innerHTML="<br>Get Result"+params["body"];
+}
+function post_callback(params) {
+// post callback		
+		myDiv.innerHTML="status"+params["status"]+"<br>"+
+						"headers"+params["headers"]+"<br>"+
+						"cookies"+params["cookies"]+"<br>"+
+						"http_error"+params["http_error"];
+		myDiv.innerHTML="<br>Get Result"+params["body"];
+}
+function connect_wan_notify_callback(params) {
+//connect wan callback
+myDiv.innerHTML="phoneSignalStrength"+params["phoneSignalStrength"]+"<br>"+
+				"networkOperator"+params["networkOperator"]+"<br>"+
+				"connectionTypeAvailable"+params["connectionTypeAvailable"]+"<br>"+
+				"connectionTypeConnected"+params["connectionTypeConnected"]+"<br>"+
+				"connectionManagerMessage"+params["connectionManagerMessage"];
+}
+function download_file_callback(params){
+alert("Download Test")
+      if (params["status"] == "ok") {
+	    myDiv.innerHTML="Download Succeeded, path is /public/images/nadaf.jpg";		
+		myDiv.innerHTML="<br>status"+params["status"]+"<br>"+
+						"body"+params["body"]+"<br>"+
+						"headers"+params["headers"]+"<br>"+
+						"cookies"+params["cookies"]+"<br>"+
+						"http_error"+params["http_error"]+"<br>"+
+						"fileExists"+params["fileExists"];
+        //alert("Download Succeeded, path is /public/images/nadaf.jpg");
+      } else {
+	    myDiv.innerHTML="Download Failed";
+		myDiv.innerHTML="<br>status"+params["status"]+"<br>"+
+						"body"+params["body"]+"<br>"+
+						"headers"+params["headers"]+"<br>"+
+						"cookies"+params["cookies"]+"<br>"+
+						"http_error"+params["http_error"]+"<br>"+
+						"fileExists"+params["fileExists"];
+        //alert("Download Failed");
+      }
+    }
+function upload_file_callback(params){
+alert("Upload Test")
+  if (params["status"] == "ok") {
+	myDiv.innerHTML="Upload Succeeded, path is /public/images/nadaf.jpg";		
+	myDiv.innerHTML="<br>status"+params["status"]+"<br>"+
+					"body"+params["body"]+"<br>"+
+					"headers"+params["headers"]+"<br>"+
+					"cookies"+params["cookies"]+"<br>"+
+					"http_error"+params["http_error"]+"<br>"+
+					"fileExists"+params["fileExists"];
+	//alert("Upload Succeeded, path is /public/images/nadaf.jpg");
+  } else {
+	myDiv.innerHTML="Upload Failed";
+	myDiv.innerHTML="<br>status"+params["status"]+"<br>"+
+					"body"+params["body"]+"<br>"+
+					"headers"+params["headers"]+"<br>"+
+					"cookies"+params["cookies"]+"<br>"+
+					"http_error"+params["http_error"]+"<br>"+
+					"fileExists"+params["fileExists"];
+	//alert("Upload Failed");
+  }
+}
+function status_notify_callback(params) {
+      myDiv.innerHTML="Network status changed from"+params["prev_status"]+" to "+params["current_status"];
+      //alert("Network status changed from "+params["prev_status"]+" to "+params["current_status"]);	 
+    }
+	
+function detect_connection_notify_callback(params) {
+if(params["connectionInformation"] == "Disconnected")
+	myDiv.innerHTML=""+params["failureMessage"];
+else
+	myDiv.innerHTML="Connected";
+ }
+ function stop_detecting_connection() {
+   EB.Network.stopDetectingConnection(detect_connection_notify_callback);
+   myDiv.innerHTML="Network Detection stopped";
+}
+ 
+	
+</script>
+
+
+<html>
+<head>
+<META HTTP-Equiv="quitbutton" Content="Top:10; Left:10; Visibility:Visible">
+<META HTTP-Equiv="minimizebutton" Content="Visibility:Visible">
+<META HTTP-Equiv="reloadbutton" Content="Visibility:Visible">
+</head>
+<body>
+<br /><br />
+<div id="myDiv">Network API Test</div>
+<form name="controlForm" id="controlForm" action="" >
+<!--<input id="Back" type="button" value="Back" onclick="location.href='ControlAppearance.html'">-->
+<br /><br /><br /><br /><br />Select Test To Run &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<select name="myChoice" id="myChoice">
+<OPTION value="Select option" >VT-ID</OPTION>
+<OPTION value="VT293-0001">VT293-0001</OPTION> 
+<OPTION value="VT293-0002">VT293-0002</OPTION> 
+<OPTION value="VT293-0003">VT293-0003</OPTION> 
+<OPTION value="VT293-0004">VT293-0004</OPTION> 
+<OPTION value="VT293-0005">VT293-0005</OPTION> 
+<OPTION value="VT293-0006">VT293-0006</OPTION> 
+<OPTION value="VT293-0007">VT293-0007</OPTION>
+<OPTION value="VT293-0008">VT293-0008</OPTION> 
+<OPTION value="VT293-0009">VT293-0009</OPTION> 
+<OPTION value="VT293-0010">VT293-0010</OPTION> 
+<OPTION value="VT293-0011">VT293-0011</OPTION> 
+<OPTION value="VT293-0012">VT293-0012</OPTION> 
+<OPTION value="VT293-0013">VT293-0013</OPTION> 
+<OPTION value="VT293-0014">VT293-0014</OPTION> 
+<OPTION value="VT293-0015">VT293-0015</OPTION> 
+<OPTION value="VT293-0016">VT293-0016</OPTION> 
+<OPTION value="VT293-0017">VT293-0017</OPTION> 
+<OPTION value="VT293-0018">VT293-0018</OPTION> 
+<OPTION value="VT293-0019">VT293-0019</OPTION> 
+<OPTION value="VT293-0020">VT293-0020</OPTION> 
+<OPTION value="VT293-0021">VT293-0021</OPTION>
+<OPTION value="VT293-0022">VT293-0022</OPTION> 
+<OPTION value="VT293-0023">VT293-0023</OPTION> 
+<OPTION value="VT293-0024">VT293-0024</OPTION> 
+<OPTION value="VT293-0025">VT293-0025</OPTION> 
+<OPTION value="VT293-0026">VT293-0026</OPTION> 
+<OPTION value="VT293-0027">VT293-0027</OPTION> 
+<OPTION value="VT293-0028">VT293-0028</OPTION> 
+<OPTION value="VT293-0029">VT293-0029</OPTION> 
+<OPTION value="VT293-0030">VT293-0030</OPTION> 
+<OPTION value="VT293-0031">VT293-0031</OPTION> 
+<OPTION value="VT293-0032">VT293-0032</OPTION> 
+<OPTION value="VT293-0033">VT293-0033</OPTION> 
+<OPTION value="VT293-0034">VT293-0034</OPTION> 
+<OPTION value="VT293-0035">VT293-0035</OPTION>
+<OPTION value="VT293-0036">VT293-0036</OPTION> 
+<OPTION value="VT293-0037">VT293-0037</OPTION> 
+<OPTION value="VT293-0038">VT293-0038</OPTION> 
+<OPTION value="VT293-0039">VT293-0039</OPTION> 
+<OPTION value="VT293-0040">VT293-0040</OPTION> 
+<OPTION value="VT293-0041">VT293-0041</OPTION> 
+<OPTION value="VT293-0042">VT293-0042</OPTION> 
+<OPTION value="VT293-0043">VT293-0043</OPTION> 
+<OPTION value="VT293-0044">VT293-0044</OPTION> 
+<OPTION value="VT293-0045">VT293-0045</OPTION> 
+<OPTION value="VT293-0046">VT293-0046</OPTION> 
+<OPTION value="VT293-0047">VT293-0047</OPTION> 
+<OPTION value="VT293-0048">VT293-0048</OPTION> 
+<OPTION value="VT293-0049">VT293-0049</OPTION>
+<OPTION value="VT293-0050">VT293-0050</OPTION> 
+<OPTION value="VT293-0051">VT293-0051</OPTION> 
+<OPTION value="VT293-0052">VT293-0052</OPTION> 
+<OPTION value="VT293-0053">VT293-0053</OPTION> 
+<OPTION value="VT293-0054">VT293-0054</OPTION> 
+<OPTION value="VT293-0055">VT293-0055</OPTION> 
+<OPTION value="VT293-0056">VT293-0056</OPTION> 
+<OPTION value="VT293-0057">VT293-0057</OPTION> 
+<OPTION value="VT293-0058">VT293-0058</OPTION> 
+<OPTION value="VT293-0059">VT293-0059</OPTION> 
+<OPTION value="VT293-0060">VT293-0060</OPTION> 
+<OPTION value="VT293-0061">VT293-0061</OPTION> 
+<OPTION value="VT293-0062">VT293-0062</OPTION> 
+<OPTION value="VT293-0063">VT293-0063</OPTION>
+<OPTION value="VT293-0064">VT293-0064</OPTION> 
+<OPTION value="VT293-0065">VT293-0065</OPTION> 
+<OPTION value="VT293-0066">VT293-0066</OPTION> 
+<OPTION value="VT293-0067">VT293-0067</OPTION> 
+<OPTION value="VT293-0068">VT293-0068</OPTION> 
+<OPTION value="VT293-0069">VT293-0069</OPTION> 
+<OPTION value="VT293-0070">VT293-0070</OPTION> 
+<OPTION value="VT293-0071">VT293-0071</OPTION> 
+<OPTION value="VT293-0072">VT293-0072</OPTION> 
+<OPTION value="VT293-0073">VT293-0073</OPTION> 
+<OPTION value="VT293-0074">VT293-0074</OPTION> 
+<OPTION value="VT293-0075">VT293-0075</OPTION> 
+<OPTION value="VT293-0076">VT293-0076</OPTION> 
+<OPTION value="VT293-0077">VT293-0077</OPTION>
+<OPTION value="VT293-0078">VT293-0078</OPTION> 
+<OPTION value="VT293-0079">VT293-0079</OPTION> 
+<OPTION value="VT293-0080">VT293-0080</OPTION> 
+<OPTION value="VT293-0081">VT293-0081</OPTION> 
+<OPTION value="VT293-0082">VT293-0082</OPTION> 
+<OPTION value="VT293-0083">VT293-0083</OPTION> 
+<OPTION value="VT293-0084">VT293-0084</OPTION> 
+</select>
+<P><input type="button" onclick="getmodulename();" value="Run This Test"/></P>
+<br /><br />
+<P><input type="button" onclick="set_default();" value="set_default"/>
+<input type="button" onclick="stop_status_notify();" value="stop_status_notify"/>
+<input type="button" onclick="disconnect_wan_status_notify();" value="disconnect_wan"/></P>
+<P><input type="button" onclick="cancel_notify_callback();" value="cancel"/>
+<input type="button" onclick="stop_detecting_connection();" value="stop_detecting_connection"/></P>
+</form>
+</body>
+</html>

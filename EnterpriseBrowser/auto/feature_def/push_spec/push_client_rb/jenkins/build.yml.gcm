@@ -1,0 +1,34 @@
+sdkversion: 4.0.0
+name: push_client_rb
+version: 1.0
+vendor: rhomobile
+build: debug
+bbver: 4.6
+applog: rholog.txt
+iphone:
+  configuration: Release
+  sdk: iphonesimulator5.0
+  provisionprofile:
+  codesignidentity:
+  entitlements:
+  BundleIdentifier: com.rhomobile.gcmpushclient
+  BundleURLScheme: gcmpushclient
+wp:
+  productid: '80b879d0-16fc-0130-39e9-3c0754090a18'
+symbian:
+  uid: '0xe77b6fc3'
+android:
+  version: 4.2.2
+  # version: 2.3.3
+  capabilities:
+  - push
+  push:
+    notifications: none
+    sender: 888725080924
+    # sender: 1053248273607
+extensions: ["json", "rhoconnect-client"]
+
+paths:
+  extensions:
+  - /Users/rhomobile/Jenkins/Home/workspace/rhoconnect-client/ext
+sdk: /Users/rhomobile/Jenkins/Home/workspace/rhodes
