@@ -6,7 +6,7 @@ describe('Developer Experience - Build live update Functionality Test', function
         spec.addPrecondition("In local computer build the application with \'development\' extension for all platforms.");
         spec.addPrecondition("Install the  application on all subscribers (WM, CE, Android, IOS, Android Simulator and IOS simulator)");
         spec.addPrecondition("Launch the application in all subscribers.");
-        spec.addStep("From the project root folder run command rho dev:discovery.");
+        spec.addStep("From the project root folder run command rake dev:discovery.");
         spec.addExpectation("Web server should be started if not running.");
         spec.addExpectation("In dev-config.yml it should register all the available subscribers with eg:devices:  uri: 192.168.1.102:37579  name: macbook-pro  platform: APPLE  application: ReloadBundleformat");
         spec.displayScenario();
@@ -21,7 +21,7 @@ describe('Developer Experience - Build live update Functionality Test', function
         spec.addPrecondition("In local computer build app1 and app2 with \'development\' extension for all platforms.");
         spec.addPrecondition("Install app1 and app2 application on all subscribers (WM, CE, Android, IOS, Android Simulator and IOS simulator).");
         spec.addPrecondition("Launch the app1 in some subscribers and app2 in other subscribers.");
-        spec.addStep("From app2 project root folder run command rho dev:discovery.");
+        spec.addStep("From app2 project root folder run command rake dev:discovery.");
         spec.addExpectation("Web server should be started if not running.");
         spec.addExpectation("Devices launched with App2 should be registered in dev_config.yml.");
         spec.displayScenario();
@@ -38,7 +38,7 @@ describe('Developer Experience - Build live update Functionality Test', function
         spec.addPrecondition("Launch the application in all subscribers.");
         spec.addPrecondition("Discover and register subscribers in dev-config.yml.");
         spec.addStep("Modify HTML file in app and pubic folder with code <p id=\'pid\' onClick=\'alertTest()\'>Modified HTML file onetime update</p>.");
-        spec.addStep("Call rho dev:update:partial");
+        spec.addStep("Call rake dev:update:partial");
         spec.addStep("Refresh the page.");
         spec.addExpectation("Web server should be started if not running");
         spec.addExpectation("Should detect changed html file, builds partial bundle update and sends notification to subscriber.");
@@ -57,9 +57,9 @@ describe('Developer Experience - Build live update Functionality Test', function
         spec.addPrecondition("Launch the application in all subscribers.");
         spec.addPrecondition("Discover and register subscribers in dev-config.yml.");
         spec.addPrecondition("Add refresh: true to dev-config.yml");
-        spec.addPrecondition("Stop all servers and start webserver rho dev:webserver:start");
+        spec.addPrecondition("Stop all servers and start webserver rake dev:webserver:start");
         spec.addStep("Modify JS file in app and pubic folder with code function alertTest() { alert(\'Test alert for onetime update\')} ");
-        spec.addStep("Call rho dev:update:partial.");
+        spec.addStep("Call rake dev:update:partial.");
         spec.addStep("Call the alertTest funtion.");
         spec.addExpectation("Web server should be started.");
         spec.addExpectation("Should detect changed JS file, builds partial bundle update and sends notification  to subscriber.");
@@ -79,7 +79,7 @@ describe('Developer Experience - Build live update Functionality Test', function
         spec.addPrecondition("Discover and register subscribers in dev-config.yml.");
         spec.addPrecondition("Add refresh: false to dev-config.yml");
         spec.addStep("Modify CSS file in app and public folder with code #pid {background-color:red}.");
-        spec.addStep("Call rho dev:update:partial.");
+        spec.addStep("Call rake dev:update:partial.");
         spec.addStep("Refresh the page.");
         spec.addExpectation("Web server should be started if not running");
         spec.addExpectation("Should detect changed CSS file, builds partial bundle update and sends notification to subscriber.");
@@ -99,7 +99,7 @@ describe('Developer Experience - Build live update Functionality Test', function
         spec.addPrecondition("Discover and register subscribers in dev-config.yml.");
         spec.addStep("Modify controller file in app folder with code def show_popup  Alert.show_popup \'Test alert for onetime update\'; end");
         spec.addStep("Add link to this function in erb file with code <%= link_to \'[show_popup]\', { :action => :show_popup }%> ");
-        spec.addStep("Call rho dev:update:partial.");
+        spec.addStep("Call rake dev:update:partial.");
         spec.addStep("Refresh the page.");
         spec.addStep("Call show_popup function.");
         spec.addExpectation("Web server should be started if not running");
@@ -120,7 +120,7 @@ describe('Developer Experience - Build live update Functionality Test', function
         spec.addPrecondition("Discover and register subscribers in dev-config.yml.");
         spec.addStep("To App and public folder Add new HTML, CSS, JS, image and Ruby files");
         spec.addStep("Add links to the newly added files.");
-        spec.addStep("Call rho dev:update:partial.");
+        spec.addStep("Call rake dev:update:partial.");
         spec.addExpectation("Web server should be started if not running");
         spec.addExpectation("Should detect added HTML, CSS, JS, image and Ruby files, builds partial bundle update and sends notification to subscriber.");
         spec.addExpectation("Added HTML, CSS, JS, image and Ruby files links should be working.");
@@ -137,12 +137,12 @@ describe('Developer Experience - Build live update Functionality Test', function
         spec.addPrecondition("Install the  application on all subscribers (WM, CE, Android, IOS, Android Simulator and IOS simulator)");
         spec.addPrecondition("Launch the application in all subscribers.");
         spec.addPrecondition("Discover and register subscribers in dev-config.yml.");
-        spec.addPrecondition("To Apply auto update run command rho dev:update:auto");
+        spec.addPrecondition("To Apply auto update run command rake dev:update:auto");
         spec.addStep("Modify HTML file in app and pubic folder with code <p id=\'pid\' onClick=\'alertTest()\'> Auto update HTML files </p>.");
         spec.addStep("Refresh the page.");
         spec.addExpectation("Web server should be started if not running");
         spec.addExpectation("The auto update command should launch file system monitoring process. ");
-        spec.addExpectation("On changing HTML file monitoring process should run rho dev:update:partial and apply changes to subscriber.");
+        spec.addExpectation("On changing HTML file monitoring process should run rake dev:update:partial and apply changes to subscriber.");
         spec.addExpectation("After refresh modified HTML content should be seen.");
         spec.displayScenario();
         spec.waitForButtonPressing("Run test");
@@ -158,12 +158,12 @@ describe('Developer Experience - Build live update Functionality Test', function
         spec.addPrecondition("Launch the application in all subscribers.");
         spec.addPrecondition("Discover and register subscribers in dev-config.yml.");
         spec.addPrecondition("Add refresh: false to dev-config.yml.");
-        spec.addPrecondition("To Apply auto update run command rho dev:update:auto");
+        spec.addPrecondition("To Apply auto update run command rake dev:update:auto");
         spec.addStep("Modify JS file in app and pubic folder with code function alertTest() { alert(\'Test alert for auto update\')}");
         spec.addStep("Call the alertTest funtion.");
         spec.addExpectation("Web server should be started if not running");
         spec.addExpectation("The auto update command should launch file system monitoring process.");
-        spec.addExpectation("On changing JS file monitoring process should run rho dev:update:partial and apply changes to subscriber.");
+        spec.addExpectation("On changing JS file monitoring process should run rake dev:update:partial and apply changes to subscriber.");
         spec.addExpectation("After refresh alert message should be displayed.");
         spec.displayScenario();
         spec.waitForButtonPressing("Run test");
@@ -179,11 +179,11 @@ describe('Developer Experience - Build live update Functionality Test', function
         spec.addPrecondition("Launch the application in all subscribers.");
         spec.addPrecondition("Discover and register subscribers in dev-config.yml.");
         spec.addPrecondition("Add refresh: true to dev-config.yml.");
-        spec.addPrecondition("To Apply auto update run command rho dev:update:auto");
+        spec.addPrecondition("To Apply auto update run command rake dev:update:auto");
         spec.addStep("Modify CSS file in app and public folder with code #pid {background-color:green}.");
         spec.addExpectation("Web server should be started if not running");
         spec.addExpectation("The auto update command should launch file system monitoring process. ");
-        spec.addExpectation("On changing CSS file monitoring process should run rho dev:update:partial and apply changes to subscriber.");
+        spec.addExpectation("On changing CSS file monitoring process should run rake dev:update:partial and apply changes to subscriber.");
         spec.addExpectation("Page should be refreshed automatically and background-color green should be applied to page.");
         spec.displayScenario();
         spec.waitForButtonPressing("Run test");
@@ -199,13 +199,13 @@ describe('Developer Experience - Build live update Functionality Test', function
         spec.addPrecondition("Launch the application in all subscribers.");
         spec.addPrecondition("Discover and register subscribers in dev-config.yml.");
         spec.addPrecondition("Add refresh: true to dev-config.yml.");
-        spec.addPrecondition("To Apply auto update run command rho dev:update:auto");
+        spec.addPrecondition("To Apply auto update run command rake dev:update:auto");
         spec.addStep("Modify controller file in app folder with code def show_popup  Alert.show_popup \'Test alert for Auto update\';end");
         spec.addStep("Add link to this function in erb file with code <%= link_to \'[show_popup]\', { :action => :show_popup }%> ");
         spec.addStep("Call show_popup function.");
         spec.addExpectation("Web server should be started if not running");
         spec.addExpectation("The auto update command should launch file system monitoring process. ");
-        spec.addExpectation("On changing Ruby file monitoring process should run rho dev:update:partial and apply changes to subscriber.");
+        spec.addExpectation("On changing Ruby file monitoring process should run rake dev:update:partial and apply changes to subscriber.");
         spec.addExpectation("Page should be refreshed automatically and popup should be displayed on calling show popup function.");
         spec.displayScenario();
         spec.waitForButtonPressing("Run test");
@@ -220,12 +220,12 @@ describe('Developer Experience - Build live update Functionality Test', function
         spec.addPrecondition("Install the  application on all subscribers (WM, CE, Android, IOS, Android Simulator and IOS simulator)");
         spec.addPrecondition("Launch the application in all subscribers.");
         spec.addPrecondition("Discover and register subscribers in dev-config.yml.");
-        spec.addPrecondition("To Apply auto update run command rho dev:update:auto");
+        spec.addPrecondition("To Apply auto update run command rake dev:update:auto");
         spec.addStep("In the app folder add a model by using the command rhodes model newmodel test1 test2 test3.");
         spec.addStep("Refresh the page and open the newmodel added to the application.");
         spec.addExpectation("Web server should be started if not running");
         spec.addExpectation("The auto update command should launch file system monitoring process. ");
-        spec.addExpectation("On adding newmodel monitoring process should run rho dev:update:partial and apply changes to subscriber.");
+        spec.addExpectation("On adding newmodel monitoring process should run rake dev:update:partial and apply changes to subscriber.");
         spec.addExpectation("New model should be loaded.");
         spec.displayScenario();
         spec.waitForButtonPressing("Run test");
@@ -240,13 +240,13 @@ describe('Developer Experience - Build live update Functionality Test', function
         spec.addPrecondition("Install the  application on all subscribers (WM, CE, Android, IOS, Android Simulator and IOS simulator)");
         spec.addPrecondition("Launch the application in all subscribers.");
         spec.addPrecondition("Discover and register subscribers in dev-config.yml.");
-        spec.addPrecondition("To Apply auto update run command rho dev:update:auto");
+        spec.addPrecondition("To Apply auto update run command rake dev:update:auto");
         spec.addStep("To App and public folder Add new HTML, CSS, JS, image and Ruby files");
         spec.addStep("Add links to the newly added files.");
         spec.addStep("Refresh the page.");
         spec.addExpectation("Web server should be started if not running");
         spec.addExpectation("The auto update command should launch file system monitoring process. ");
-        spec.addExpectation("On adding HTML, CSS, JS and Ruby files monitoring process should run rho dev:update:partial and apply changes to subscriber.");
+        spec.addExpectation("On adding HTML, CSS, JS and Ruby files monitoring process should run rake dev:update:partial and apply changes to subscriber.");
         spec.addExpectation("On refreshing added HTML, CSS, JS, image and Ruby files should be loaded.");
         spec.displayScenario();
         spec.waitForButtonPressing("Run test");
@@ -261,14 +261,33 @@ describe('Developer Experience - Build live update Functionality Test', function
         spec.addPrecondition("Install the  application on all subscribers (WM, CE, Android, IOS, Android Simulator and IOS simulator)");
         spec.addPrecondition("Launch the application in all subscribers.");
         spec.addPrecondition("Discover and register subscribers in dev-config.yml.");
-        spec.addPrecondition("To Apply auto update run command rho dev:update:auto");
+        spec.addPrecondition("To Apply auto update run command rake dev:update:auto");
         spec.addStep("Delete HTML, CSS, JS, image and Ruby files from app and public folder.");
         spec.addStep("Refresh the page.");
         spec.addStep("Check the links working or not.");
         spec.addExpectation("Web server should be started if not running");
         spec.addExpectation("The auto update command should launch file system monitoring process. ");
-        spec.addExpectation("On deleting HTML, CSS, JS and Ruby monitoring process should run rho dev:update:partial and apply changes to subscriber..");
+        spec.addExpectation("On deleting HTML, CSS, JS and Ruby monitoring process should run rake dev:update:partial and apply changes to subscriber..");
         spec.addExpectation("HTML, CSS, JS and Ruby files should be deleted in all devices, links to corresponding files should not work.");
+        spec.displayScenario();
+        spec.waitForButtonPressing("Run test");
+        spec.waitForResponse();
+    });
+
+    it("Full bundle update on modifying HTML, CSS, JS and Ruby files to project.", function() {
+        var spec = new ManualSpec(jasmine, window.document);
+        spec.addGoal("Full bundle update on modifying HTML, CSS, JS and Ruby files to project.");
+        spec.addPrecondition("Connect the devices to server network.");
+        spec.addPrecondition("In local computer build the application with \'development\' extension for all platforms.");
+        spec.addPrecondition("Install the  application on all subscribers (WM, CE, Android, IOS, Android Simulator and IOS simulator)");
+        spec.addPrecondition("Launch the application in all subscribers.");
+        spec.addPrecondition("Discover and register subscribers in dev-config.yml.");
+        spec.addStep("Modify HTML, CSS, JS and Ruby files.");
+        spec.addStep("Run command rake dev:update:full.");
+        spec.addStep("Refresh the page.");
+        spec.addExpectation("Web server should be started if not running");
+        spec.addExpectation("Should detect changed html, css, js and ruby file, builds full bundle update and sends notification to subscriber.");
+        spec.addExpectation("After refresh modified HTML, JS, CSS and Ruby files should be displayed.");
         spec.displayScenario();
         spec.waitForButtonPressing("Run test");
         spec.waitForResponse();
@@ -284,7 +303,7 @@ describe('Developer Experience - Build live update Functionality Test', function
         spec.addPrecondition("Discover and register subscribers in dev-config.yml.");
         spec.addStep("To App and public folder Add new HTML, CSS, JS, image and Ruby files");
         spec.addStep("Add links to the newly added files.");
-        spec.addStep("Run command rho dev:update:full.");
+        spec.addStep("Run command rake dev:update:full.");
         spec.addStep("Refresh the page.");
         spec.addExpectation("Web server should be started if not running");
         spec.addExpectation("Should bundle all the files located in app and public folder and should notify subscriber");
@@ -302,7 +321,7 @@ describe('Developer Experience - Build live update Functionality Test', function
         spec.addPrecondition("Install the  application on all subscribers (WM, CE, Android, IOS, Android Simulator and IOS simulator)");
         spec.addPrecondition("Launch the application in all subscribers.");
         spec.addPrecondition("Discover and register subscribers in dev-config.yml.");
-        spec.addPrecondition("To Apply auto update run command rho dev:update:auto");
+        spec.addPrecondition("To Apply auto update run command rake dev:update:auto");
         spec.addStep("Switch off the device.");
         spec.addStep("Modify HTML file in app and pubic folder with code <p id=\'pid\' onClick=\'alertTest()\'>Device is switched off.</p>.");
         spec.addStep("Modify js file in app and publid folder. function alertTest() { alert(\'Device is switched off\')}");
@@ -311,7 +330,7 @@ describe('Developer Experience - Build live update Functionality Test', function
         spec.addStep("Refresh the page.");
         spec.addExpectation("Web server should be started if not running");
         spec.addExpectation("The auto update command should launch file system monitoring process. ");
-        spec.addExpectation("On modifying files monitoring process should run rho dev:update:partial.");
+        spec.addExpectation("On modifying files monitoring process should run rake dev:update:partial.");
         spec.addExpectation("In Web-server terminal window should get error \'subcriber notify…failed\'. ");
         spec.addExpectation("After starting the application full bundle update should happen.");
         spec.addExpectation("Modified files should get reflected in the subscriber.");
@@ -328,7 +347,7 @@ describe('Developer Experience - Build live update Functionality Test', function
         spec.addPrecondition("Install the  application on all subscribers (WM, CE, Android, IOS, Android Simulator and IOS simulator)");
         spec.addPrecondition("Launch the application in all subscribers.");
         spec.addPrecondition("Discover and register subscribers in dev-config.yml.");
-        spec.addPrecondition("To Apply auto update run command rho dev:update:auto");
+        spec.addPrecondition("To Apply auto update run command rake dev:update:auto");
         spec.addStep("Terminate the application on the device.");
         spec.addStep("Modify HTML file in app and pubic folder with code <p id=\'pid\' onClick=\'alertTest()\'>Application terminated</p>.");
         spec.addStep("Modify controller file in app folder with code def show_popup  Alert.show_popup \'Application Terminated\'; end");
@@ -337,7 +356,7 @@ describe('Developer Experience - Build live update Functionality Test', function
         spec.addStep("Refresh the page.");
         spec.addExpectation("Web server should be started if not running");
         spec.addExpectation("The auto update command should launch file system monitoring process. ");
-        spec.addExpectation("On modifying files monitoring process should run rho dev:update:partial.");
+        spec.addExpectation("On modifying files monitoring process should run rake dev:update:partial.");
         spec.addExpectation("In Web-server terminal window should get error \'subcriber notify…failed\'. ");
         spec.addExpectation("After starting the application full bundle update should happen.");
         spec.addExpectation("Modified files should get reflected in the subscriber.");
@@ -356,11 +375,11 @@ describe('Developer Experience - Build live update Functionality Test', function
         spec.addPrecondition("Discover and register subscribers in dev-config.yml.");
         spec.addStep("Disable network connection on the device");
         spec.addStep("Add HTML, CSS, JS, erb and image files to project.");
-        spec.addStep("Run rho dev:update:partial");
+        spec.addStep("Run rake dev:update:partial");
         spec.addStep("After getting error message, Enable network on devices.");
-        spec.addStep("Run rho dev:update:partial.");
+        spec.addStep("Run rake dev:update:partial.");
         spec.addExpectation("Web server should be started if not running");
-        spec.addExpectation("On running run rho dev:update:partial when network is disabled Web-server terminal window should get error \'subcriber notify…failed\'. ");
+        spec.addExpectation("On running run rake dev:update:partial when network is disabled Web-server terminal window should get error \'subcriber notify…failed\'. ");
         spec.addExpectation("After regaining network full bundle update should happen.");
         spec.addExpectation("Added files should get reflected in the subscriber.");
         spec.displayScenario();
@@ -377,7 +396,7 @@ describe('Developer Experience - Build live update Functionality Test', function
         spec.addPrecondition("Launch the application in 2 subscribers.");
         spec.addPrecondition("Discover and register 2 subscribers in dev-config.yml.");
         spec.addPrecondition("Add refresh: true to dev-config.yml.");
-        spec.addPrecondition("To Apply auto update run command rho dev:update:auto");
+        spec.addPrecondition("To Apply auto update run command rake dev:update:auto");
         spec.addStep("Modify HTML file in app folder with code <p>First update 2 devices</p>.");
         spec.addStep("Now Discover and register 3rd subscriber in dev-config.yml.");
         spec.addStep("Launch application in 3rd subscriber.");
@@ -402,7 +421,7 @@ describe('Developer Experience - Build live update Functionality Test', function
         spec.addPrecondition("Run external file watcher grunt.");
         spec.addStep("Modify HTML file in app and pubic folder with code <p id=\'pid\' onClick=\'alertTest()\'>External file watcher grunt </p>.");
         spec.addStep("External watcher should create list of changed files in upgrade_package_add_files.txt");
-        spec.addStep("By using modified files list call command rho dev:update:build_and_notify.");
+        spec.addStep("By using modified files list call command rake dev:update:build_and_notify.");
         spec.addExpectation("Web server should be started if not running");
         spec.addExpectation("Build_and_notify command should build partial bundle from upgrade_package_add_files.txt files list.");
         spec.addExpectation("Should auto refresh and modified HTML page should be displayed.");
@@ -422,7 +441,7 @@ describe('Developer Experience - Build live update Functionality Test', function
         spec.addPrecondition("Run external file watcher grunt.");
         spec.addStep("Add new JS and CSS files to app and puble folder ");
         spec.addStep("External watcher should create list of added files in upgrade_package_add_files.txt ");
-        spec.addStep("By using added files list call command rho dev:update:build_and_notify.");
+        spec.addStep("By using added files list call command rake dev:update:build_and_notify.");
         spec.addExpectation("Web server should be started if not running ");
         spec.addExpectation("Build_and_notify command should build partial bundle from upgrade_package_add_files.txt files list. ");
         spec.addExpectation("JS and CSS files should be added to subscribers");
@@ -442,7 +461,7 @@ describe('Developer Experience - Build live update Functionality Test', function
         spec.addPrecondition("Run external file watcher grunt.");
         spec.addStep("Delete js file from app and puble folder ");
         spec.addStep("External watcher should create list of deleted files in upgrade_package_remove_files.txt.");
-        spec.addStep("By using deleted files list call command rho dev:update:build_and_notify.");
+        spec.addStep("By using deleted files list call command rake dev:update:build_and_notify.");
         spec.addExpectation("Web server should be started if not running ");
         spec.addExpectation("Build_and_notify command should build partial bundle from upgrade_package_remove_files.txt files list. ");
         spec.addExpectation("JS file should be removed in subscribers");
@@ -463,7 +482,7 @@ describe('Developer Experience - Build live update Functionality Test', function
         spec.addPrecondition("Run external file watcher grunt.");
         spec.addStep("Modify CSS file in app and pubic folder with code #pid {background-color:red}.");
         spec.addStep("External watcher should create list of changed files in upgrade_package_add_files.txt");
-        spec.addStep("By using modified files list call command rho dev:update:build_and_notify.");
+        spec.addStep("By using modified files list call command rake dev:update:build_and_notify.");
         spec.addExpectation("Web server should be started if not running");
         spec.addExpectation("Build_and_notify command should build partial bundle from upgrade_package_add_files.txt files list.");
         spec.addExpectation("Should auto refresh and backgroud-color should be Red.");
@@ -484,7 +503,7 @@ describe('Developer Experience - Build live update Functionality Test', function
         spec.addStep("Modify controller file in app folder with code def show_popup  Alert.show_popup \'External file watcher\'; end");
         spec.addStep("Add link to this function in erb file with code <%= link_to \'[show_popup]\', { :action => :show_popup }%>.");
         spec.addStep("External watcher should create list of changed files in upgrade_package_add_files.txt");
-        spec.addStep("By using modified files list call command rho dev:update:build_and_notify.");
+        spec.addStep("By using modified files list call command rake dev:update:build_and_notify.");
         spec.addStep("Refresh the page.");
         spec.addExpectation("Web server should be started if not running");
         spec.addExpectation("Build_and_notify command should build partial bundle from upgrade_package_add_files.txt files list.");
@@ -505,7 +524,7 @@ describe('Developer Experience - Build live update Functionality Test', function
         spec.addPrecondition("Run external file watcher grunt.");
         spec.addStep("Add a style.scss file.");
         spec.addStep("Add css styling to scss file #pid {background-color:brown}");
-        spec.addStep("Call rho dev:update:build_and_notify");
+        spec.addStep("Call rake dev:update:build_and_notify");
         spec.addExpectation("Web server should be started if not running");
         spec.addExpectation("External watcher should detect source code changes and should create list of changed files list in upgrade_package_add_files.txt");
         spec.addExpectation("Command should detect changed CSS files, builds partial bundle update and sends notification to subscribers once.");
@@ -514,20 +533,20 @@ describe('Developer Experience - Build live update Functionality Test', function
         spec.waitForResponse();
     });
 
-    it("Should return an error message on runing rho dev:update:build_and_notify and Modifying project files when device is switched off", function() {
+    it("Should return an error message on runing rake dev:update:build_and_notify and Modifying project files when device is switched off", function() {
         var spec = new ManualSpec(jasmine, window.document);
-        spec.addGoal("Should return an error message on runing rho dev:update:build_and_notify and Modifying project files when device is switched off");
+        spec.addGoal("Should return an error message on runing rake dev:update:build_and_notify and Modifying project files when device is switched off");
         spec.addPrecondition("Connect the devices to server network.");
         spec.addPrecondition("In local computer build the application with \'development\' extension for all platforms.");
         spec.addPrecondition("Install the  application on all subscribers (WM, CE, Android, IOS, Android Simulator and IOS simulator)");
         spec.addPrecondition("Launch the application in all subscribers.");
         spec.addPrecondition("Discover and register subscribers in dev-config.yml.");
-        spec.addPrecondition("To Apply auto update run command rho dev:update:auto");
+        spec.addPrecondition("To Apply auto update run command rake dev:update:auto");
         spec.addStep("Switch off the device.");
         spec.addStep("Modify HTML file in app and pubic folder with code <p>Device is switched off.</p>.");
         spec.addStep("Add css styling to css file #pid {background-color:#00ff00}");
         spec.addStep("External watcher should create list of changed files in upgrade_package_add_files.txt");
-        spec.addStep("By using modified files list call command rho dev:update:build_and_notify.");
+        spec.addStep("By using modified files list call command rake dev:update:build_and_notify.");
         spec.addStep("Turn on the device and start the application.");
         spec.addStep("Refresh the page.");
         spec.addExpectation("Web server should be started if not running");
@@ -548,12 +567,12 @@ describe('Developer Experience - Build live update Functionality Test', function
         spec.addPrecondition("Install the  application on all subscribers (WM, CE, Android, IOS, Android Simulator and IOS simulator)");
         spec.addPrecondition("Launch the application in all subscribers.");
         spec.addStep("Register the subscribers manually add uri: 192.168.1.102:37579 name: macbook-pro platform: APPLE application: ReloadBundleformat to dev-config.yml");
-        spec.addStep("To apply auto update run command rho dev:update:auto");
+        spec.addStep("To apply auto update run command rake dev:update:auto");
         spec.addStep("Modify HTML file in app and pubic folder with code <p>Register manually subscribers on server</p>.");
         spec.addStep("Refresh the page.");
         spec.addExpectation("Web server should be started if not running");
         spec.addExpectation("The auto update command should launch file system monitoring process. ");
-        spec.addExpectation("On changing HTML file monitoring process should run rho dev:update:partial and apply changes to subscriber.");
+        spec.addExpectation("On changing HTML file monitoring process should run rake dev:update:partial and apply changes to subscriber.");
         spec.addExpectation("After refresh modified HTML content should be seen.");
         spec.displayScenario();
         spec.waitForButtonPressing("Run test");
@@ -569,7 +588,7 @@ describe('Developer Experience - Build live update Functionality Test', function
         spec.addPrecondition("Launch the application in all subscribers.");
         spec.addPrecondition("Rhohub repository should be cloned to desktop.");
         spec.addPrecondition("Discover and register subscribers in dev-config.yml.");
-        spec.addPrecondition("To Apply auto update run command rho dev:update:auto");
+        spec.addPrecondition("To Apply auto update run command rake dev:update:auto");
         spec.addStep("Modify HTML file in app and public folder with code <p id=\'pid\' onClick=\'alertTest()\'>RhoHub with auto update..</p>.");
         spec.addStep("Modify js file with code function alertTest() { alert(\'Development on rhohub\')}");
         spec.addStep("Modify CSS file with code  #pid {backgroung-color:red}");
@@ -578,7 +597,7 @@ describe('Developer Experience - Build live update Functionality Test', function
         spec.addStep("Refresh the page. ");
         spec.addExpectation("Web server should be started if not running");
         spec.addExpectation("The auto update command should launch file system monitoring process. ");
-        spec.addExpectation("On changing HTML and Ruby file monitoring process should run rho dev:update:partial.");
+        spec.addExpectation("On changing HTML and Ruby file monitoring process should run rake dev:update:partial.");
         spec.addExpectation("On refreshing should display Modified HTML page.");
         spec.addExpectation("Should display popup on caling popup/alert function");
         spec.displayScenario();
@@ -594,7 +613,7 @@ describe('Developer Experience - Build live update Functionality Test', function
         spec.addPrecondition("Install the  application on all subscribers (WM, CE, Android, IOS, Android Simulator and IOS simulator)");
         spec.addPrecondition("Launch the application in all subscribers.");
         spec.addPrecondition("Discover and register subscribers in dev-config.yml.");
-        spec.addPrecondition("To Apply auto update run command rho dev:update:auto");
+        spec.addPrecondition("To Apply auto update run command rake dev:update:auto");
         spec.addStep("Modify HTML file in app and public folder with code <p id=\'pid\' onClick=\'alertTest()\'>Containers with auto update..</p>.");
         spec.addStep("Modify js file with code function alertTest() { alert(\'Development Containers\')}");
         spec.addStep("Modify CSS file with code  #pid {backgroung-color:red}");
@@ -603,7 +622,7 @@ describe('Developer Experience - Build live update Functionality Test', function
         spec.addStep("Refresh the page.");
         spec.addExpectation("Web server should be started if not running");
         spec.addExpectation("The auto update command should launch file system monitoring process. ");
-        spec.addExpectation("On changing HTML and Ruby file monitoring process should run rho dev:update:partial.");
+        spec.addExpectation("On changing HTML and Ruby file monitoring process should run rake dev:update:partial.");
         spec.addExpectation("On refreshing should display Modified HTML page.");
         spec.addExpectation("Should display popup on caling popup/alert function");
         spec.displayScenario();
@@ -619,7 +638,7 @@ describe('Developer Experience - Build live update Functionality Test', function
         spec.addPrecondition("Install the  application on all subscribers (WM, CE, Android, IOS, Android Simulator and IOS simulator)");
         spec.addPrecondition("Launch the application in all subscribers.");
         spec.addPrecondition("Discover and register subscribers in dev-config.yml.");
-        spec.addPrecondition("To Apply auto update run command rho dev:update:auto");
+        spec.addPrecondition("To Apply auto update run command rake dev:update:auto");
         spec.addStep("Modify HTML file in app and public folder with code <p id=\'pid\' onClick=\'alertTest()\'>Prebuilt Containers with auto update..</p>.");
         spec.addStep("Modify js file with code function alertTest() { alert(\'Development Prebuilt Containers\')}");
         spec.addStep("Modify CSS file with code  #pid {backgroung-color:red}");
@@ -628,7 +647,7 @@ describe('Developer Experience - Build live update Functionality Test', function
         spec.addStep("Refresh the page.");
         spec.addExpectation("Web server should be started if not running");
         spec.addExpectation("The auto update command should launch file system monitoring process. ");
-        spec.addExpectation("On changing HTML and Ruby file monitoring process should run rho dev:update:partial.");
+        spec.addExpectation("On changing HTML and Ruby file monitoring process should run rake dev:update:partial.");
         spec.addExpectation("On refreshing should display Modified HTML page.");
         spec.addExpectation("Should display popup on caling popup/alert function");
         spec.displayScenario();
@@ -643,7 +662,7 @@ describe('Developer Experience - Build live update Functionality Test', function
         spec.addPrecondition("In local computer build the application with \'development\' extension for all platforms.");
         spec.addPrecondition("Install the  application on all subscribers (WM, CE, Android, IOS, Android Simulator, and IOS simulator)");
         spec.addPrecondition("Launch the aplication all subscribers.");
-        spec.addStep("Run command rho dev:discovery.");
+        spec.addStep("Run command rake dev:discovery.");
         spec.addExpectation("Web server should be started if not running");
         spec.addExpectation("Timeout should happen when no devices connected to the server network");
         spec.addExpectation("In MAC discovery timeout should happen in 5 sec");
@@ -662,7 +681,7 @@ describe('Developer Experience - Build live update Functionality Test', function
         spec.addPrecondition("Launch the application in all subscribers.");
         spec.addPrecondition("Discover and register subscribers in dev-config.yml.");
         spec.addPrecondition("Add refresh: true to dev-config.yml.");
-        spec.addPrecondition("To Apply auto update run command rho dev:update:auto");
+        spec.addPrecondition("To Apply auto update run command rake dev:update:auto");
         spec.addStep("Add controller code Alert.show_popup \'More than 10 devices\';");
         spec.addExpectation("Web server should be started if not running");
         spec.addExpectation("Changed files should be applied to all connected devices at once in parallel.");
@@ -681,9 +700,9 @@ describe('Developer Experience - Build live update Functionality Test', function
         spec.addPrecondition("Launch the application in all subscribers.");
         spec.addPrecondition("Discover and register subscribers in dev-config.yml.");
         spec.addStep("Modify HTML file in app folder with code <p>first modification for performance check</p>.");
-        spec.addStep("Call rho dev:update:partial and Check time. ");
+        spec.addStep("Call rake dev:update:partial and Check time. ");
         spec.addStep("Modify HTML file in app folder with code <p>second modification for performance check</p>.");
-        spec.addStep("Call rho dev:update:full and Check time.");
+        spec.addStep("Call rake dev:update:full and Check time.");
         spec.addExpectation("Web server should be started if not running");
         spec.addExpectation("Partial bundle update should be faster than full bundle update");
         spec.displayScenario();
@@ -701,12 +720,12 @@ describe('Developer Experience - Build live update Functionality Test', function
         spec.addPrecondition("Discover and register subscribers in dev-config.yml.");
         spec.addPrecondition("Add refresh: true to dev-config.yml.");
         spec.addStep("Modify HTML file in app folder with code <p>First full bundle</p>.");
-        spec.addStep("Call rho dev:update:full and Check time.");
+        spec.addStep("Call rake dev:update:full and Check time.");
         spec.addStep("Call rho clean:platformname.");
         spec.addStep("Modify HTML file in app folder with code <p>Second full bundle</p>.");
-        spec.addStep("Call rho dev:update:full and Check time.");
+        spec.addStep("Call rake dev:update:full and Check time.");
         spec.addStep("Modify HTML file in app folder with code <p>Third full bundle</p>.");
-        spec.addStep("Call rho dev:update:full and Check time.");
+        spec.addStep("Call rake dev:update:full and Check time.");
         spec.addExpectation("Web server should be started if not running");
         spec.addExpectation("There should not be any time difference for full bundle update with and without clean.");
         spec.displayScenario();
@@ -721,7 +740,7 @@ describe('Developer Experience - Build live update Functionality Test', function
         spec.addPrecondition("In local computer build the distribution application with \'development\' extension for all platforms.");
         spec.addPrecondition("Install the  application on all subscribers (WM, CE, Android, IOS, Android Simulator, and IOS simulator)");
         spec.addPrecondition("Launch the aplication all subscribers.");
-        spec.addStep("From project root folder run command rho dev:discovery.");
+        spec.addStep("From project root folder run command rake dev:discovery.");
         spec.addExpectation("Web server should be started if not running");
         spec.addExpectation("Distribution applications should not be discovered .");
         spec.addExpectation("It should discover only Relase/debug build.");
@@ -737,7 +756,7 @@ describe('Developer Experience - Build live update Functionality Test', function
         spec.addPrecondition("In local computer build the application without \'development\' extension for all platforms.");
         spec.addPrecondition("Install the  application on all subscribers (WM, CE, Android, IOS, Android Simulator, and IOS simulator)");
         spec.addPrecondition("Launch the aplication all subscribers.");
-        spec.addStep("From project root folder run command rho dev:discovery.");
+        spec.addStep("From project root folder run command rake dev:discovery.");
         spec.addExpectation("Web server should be started if not running");
         spec.addExpectation("Subscribers without development extension should not be discovered");
         spec.displayScenario();
@@ -752,7 +771,7 @@ describe('Developer Experience - Build live update Functionality Test', function
         spec.addPrecondition("In local computer build the application with \'development\' extension for all platforms.");
         spec.addPrecondition("Install the  application on all subscribers (WM, CE, Android, IOS, Android Simulator, and IOS simulator)");
         spec.addPrecondition("Launch the aplication all subscribers.");
-        spec.addStep("From project root folder run command rho dev:discovery.");
+        spec.addStep("From project root folder run command rake dev:discovery.");
         spec.addExpectation("Web server should be started if not running");
         spec.addExpectation("There should not be any abnormal behavior. Shoud display proper error message");
         spec.displayScenario();
@@ -770,9 +789,9 @@ describe('Developer Experience - Build live update Functionality Test', function
         spec.addPrecondition("Discover and register subscribers in dev-config.yml.");
         spec.addPrecondition("Stop all webservers.");
         spec.addStep("Modify HTML file in app and pubic folder with code <p>Webserver Test</p>.");
-        spec.addStep("Start the webserver by rho dev:webserver:start");
-        spec.addStep("Call rho dev:update:partial");
-        spec.addStep("Stop the webserver by rho dev:webserver:stop");
+        spec.addStep("Start the webserver by rake dev:webserver:start");
+        spec.addStep("Call rake dev:update:partial");
+        spec.addStep("Stop the webserver by rake dev:webserver:stop");
         spec.addExpectation("Webserver should be started succesfully.");
         spec.addExpectation("On running update command changed HTML file should be applied to subscriber.");
         spec.addExpectation("It should not start one more server in background.");
@@ -791,11 +810,11 @@ describe('Developer Experience - Build live update Functionality Test', function
         spec.addPrecondition("Launch the application in all subscribers.");
         spec.addPrecondition("Discover and register subscribers in dev-config.yml.");
         spec.addPrecondition("Stop all webservers.");
-        spec.addStep("Run command rho dev:update:auto.");
+        spec.addStep("Run command rake dev:update:auto.");
         spec.addStep("Modify HTML file in app and pubic folder with code <p>Webserver restart</p>.");
-        spec.addStep("Stop the webserver by rho dev:webserver:stop");
+        spec.addStep("Stop the webserver by rake dev:webserver:stop");
         spec.addStep("Modify HTML file in app and pubic folder with code <p>Webserver stop</p>.");
-        spec.addStep("restart the webserver by rho dev:webserver:start");
+        spec.addStep("restart the webserver by rake dev:webserver:start");
         spec.addExpectation("Webserver should be started succesfully.");
         spec.addExpectation("Once the webserver is stopped any auto update should be failed");
         spec.addExpectation("Once the webserver is restarted changed html file should be applied automatically.");
@@ -814,7 +833,7 @@ describe('Developer Experience - Build live update Functionality Test', function
         spec.addPrecondition("Discover and register subscribers in dev-config.yml.");
         spec.addStep("Add HTML, CSS, JS files to public/api folder.");
         spec.addStep("Add code to /public/api/rho-api.js function alertTest() { alert(\'Test alert for onetime update\')} ");
-        spec.addStep("Run rho dev:update:partial");
+        spec.addStep("Run rake dev:update:partial");
         spec.addStep("Try to open the link and call alert function");
         spec.addExpectation("Web server should be started if not running");
         spec.addExpectation("Should not apply changes made in public/api folder");
@@ -835,7 +854,7 @@ describe('Developer Experience - Build live update Functionality Test', function
         spec.addStep("Add HTML, CSS, JS files to root folder.");
         spec.addStep("Add one extension(audiocapture) in build.yml");
         spec.addStep("Change start page in rhoconfig.txt");
-        spec.addStep("Run rho dev:update:partial.");
+        spec.addStep("Run rake dev:update:partial.");
         spec.addStep("Check the HTML links added working or not, Test audiocapture function.");
         spec.addExpectation("Web server should be started if not running");
         spec.addExpectation("Should not apply changes made other than app and public folder");
@@ -856,7 +875,7 @@ describe('Developer Experience - Build live update Functionality Test', function
         spec.addStep("Modify controller file in app folder with code def show_popup  Alert.show_popup \'Test alert for onetime update\'; end");
         spec.addStep("Add link to this function in erb file with code <%= link_to \'[show_popup]\', { :action => :show_popup }%>.");
         spec.addStep("Add break pont to alert function in controller file.");
-        spec.addStep("Run rho dev:update:partial.");
+        spec.addStep("Run rake dev:update:partial.");
         spec.addStep("Invoke alert function.");
         spec.addExpectation("Web server should be started if not running");
         spec.addExpectation("Should detect changed erb and controller file, builds partial bundle update and sends notification to subscriber.");
@@ -874,7 +893,7 @@ describe('Developer Experience - Build live update Functionality Test', function
         spec.addPrecondition("Install the  application on all subscribers (WM, CE, Android, IOS, Android Simulator, and IOS simulator)");
         spec.addPrecondition("Launch the aplication all subscribers.");
         spec.addPrecondition("Discover and register subscribers in dev-config.yml.");
-        spec.addPrecondition("To Apply auto update run command rho dev:update:auto");
+        spec.addPrecondition("To Apply auto update run command rake dev:update:auto");
         spec.addStep("Add more than 50 HTML, CSS or JS files to the project.");
         spec.addStep("Add 2 to 5 MB image files.");
         spec.addStep("Check the added files reflected in subscriber or not.");
@@ -886,4 +905,19 @@ describe('Developer Experience - Build live update Functionality Test', function
         spec.waitForResponse();
     });
 
+    it("Running live update commands without setting a token", function() {
+        var spec = new ManualSpec(jasmine, window.document);
+        spec.addGoal("Running live update commands without setting a token");
+        spec.addPrecondition("Connect devices to server network.");
+        spec.addPrecondition("In local computer build the application with \'development\' extension for all platforms.");
+        spec.addPrecondition("Install the  application on all subscribers (WM, CE, Android, IOS, Android Simulator, and IOS simulator)");
+        spec.addPrecondition("Launch the aplication all subscribers.");
+        spec.addPrecondition("Clear the token by rake token:clear");
+        spec.addStep("Run live update commands like rake dev:discovery, rake dev:update:partial, rake dev:update:full, rake dev:update:auto, rake dev:update:build_and_notify");
+        spec.addStep("Check whether asking for rhohub login");
+        spec.addExpectation("Should ask for rhohub login on running live update commands");
+        spec.displayScenario();
+        spec.waitForButtonPressing("Run test");
+        spec.waitForResponse();
+    });
 });
