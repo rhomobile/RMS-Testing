@@ -348,8 +348,8 @@ var arr_camera_property = [
 	propertyName	:	"fileName",
 	cameraTypes		:	"All",
 	OSTypes			:	"All",
-	propertyValue	:	"file://application/",
-	expectedResult	:	"file://application/"
+	propertyValue	:	"file://application/InvalidFolder",
+	expectedResult	:	"file://application/InvalidFolder"
 },
 {
 	testName		:	"VT285-1013 | Set fileName :with special charecter | camera@$123",
