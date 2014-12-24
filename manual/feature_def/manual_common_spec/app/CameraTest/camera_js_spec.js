@@ -431,20 +431,78 @@ describe("Camera API Manual Tests", function(){
 
 				describe("showPreview, Capture & hidePreview methods | " + camid + camtype , function() {
 
-					it("Should call showPreview with properties & capture - Set 1 |" + camid + camtype , function(){
+					it("Should call showPreview & capture with default properties |" + camid + camtype , function(){
 						var spec = new ManualSpec(jasmine, window.document);
 			        	spec.addGoal(jasmine.getEnv().currentSpec.description);
-			        	spec.addPrecondition("Call showPreview with propertyhash as fileName:\\Application\\camImage, desiredHeight:480, desiredWidth:640, compressionFormat:png, outputFormat:dataUri, flashMode:ON, previewLeft:80, previewTop:10, previewWidth:100, previewHeight:60, captureSound:'alarm5.wav', aimMode:on and callback.");
+			        	spec.addPrecondition("Call showPreview() without any properties.");
 			            spec.addStep("Press 'RunTest' button");
 			            spec.addStep("Capture will happen after Check for the returned callback status & property set");
-			            spec.addExpectation('The viewfinder with properties set should reflect. The returned status should be OK and captured image should be displayed as dataUri with all callback properties and play a sound on capture. Also flashMode should be ON for color camera & aimMode ON for imager camera.');
+			            spec.addExpectation('Preview window should be with default values, flash off, aim mode off, captured callback value with status OK, imageHeight & imageWidth with max supported by the device, path of the image saved would be default root of the device with image name as timestamp and imageFormat: jpg.');
 			            spec.displayScenario();
 			            spec.waitForButtonPressing("Run test");
 
 						runs(function(){
-							objCAM.showPreview({'fileName':'\\Application\\camImage', 'captureSound':'alarm5.wav',
-								'compressionFormat':'png', 'outputFormat':'dataUri', 'flashMode':'on', 'aimMode':'on', 
-								'desiredHeight':720, 'desiredWidth':1080, 'previewLeft':80, 'previewTop':10, 'previewWidth':100, 'previewHeight':60
+							objCAM.showPreview();
+
+							setTimeout(function(){
+								objCAM.capture(callbackFunc);
+							},6000);
+						});
+
+						waitsFor(function(){
+							return cbkResponseTimeout;
+						},"waiting for callback data", 12000);
+
+						runs(function(){
+							spec.addResult(callbackData);
+							spec.displayResults();
+			                spec.waitForResponse();
+						});
+
+					});
+
+					it("Should call showPreview with preview window values, compressionFormat & filename |" + camid + camtype , function(){
+						var spec = new ManualSpec(jasmine, window.document);
+			        	spec.addGoal(jasmine.getEnv().currentSpec.description);
+			        	spec.addPrecondition("Call showPreview() with properties previewLeft:10, previewTop:10, previewWidth:100, previewHeight:60, commpressionFormat:'jpg', fileName:'\\Application\\camImage', flashMode: off, aimMode:off.");
+			            spec.addStep("Press 'RunTest' button");
+			            spec.addStep("Capture will happen after Check for the returned callback status & property set");
+			            spec.addExpectation('Preview window should be as set(left:10, top:10, width:100 & height:60). Capture callback should return status OK with imagePath, imageFormat as jpg & the filename camImage.jpg.');
+			            spec.displayScenario();
+			            spec.waitForButtonPressing("Run test");
+
+						runs(function(){
+							objCAM.showPreview({'previewLeft':10, 'previewTop':10, 'previewWidth':100, 'previewHeight':60, 'commpressionFormat':'jpg', 'fileName':'\\Application\\camImage', 'flashMode': 'off', 'aimMode':'off'});
+
+							setTimeout(function(){
+								objCAM.capture(callbackFunc);
+							},6000);
+						});
+
+						waitsFor(function(){
+							return cbkResponseTimeout;
+						},"waiting for callback data", 12000);
+
+						runs(function(){
+							spec.addResult(callbackData);
+							spec.displayResults();
+			                spec.waitForResponse();
+						});
+
+					});
+
+					it("Should call showPreview with preview window values, ouputFomat:dataUri & captureSound |" + camid + camtype , function(){
+						var spec = new ManualSpec(jasmine, window.document);
+			        	spec.addGoal(jasmine.getEnv().currentSpec.description);
+			        	spec.addPrecondition("Call showPreview() with properties previewLeft:-10, previewTop:-10, previewWidth:40, previewHeight:80, outputFormat:dataUri, captureSound:'//Application//alarm2.wav'.");
+			            spec.addStep("Press 'RunTest' button");
+			            spec.addStep("Capture will happen after Check for the returned callback status & property set");
+			            spec.addExpectation('Preview window should be as set(left:-10, top:-10, width:40 & height:80). Should play a wav file after capture. The returned status should be OK and captured image should be displayed as dataUri. .');
+			            spec.displayScenario();
+			            spec.waitForButtonPressing("Run test");
+
+						runs(function(){
+							objCAM.showPreview({'previewLeft':-10, 'previewTop':-10, 'previewWidth':40, 'previewHeight':80, 'outputFormat':'dataUri', 'captureSound':'//Application//alarm2.wav'
 							});
 
 							setTimeout(function(){
@@ -465,20 +523,49 @@ describe("Camera API Manual Tests", function(){
 
 					});
 
-					it("Should call showPreview with properties & capture - Set 2 |" + camid + camtype , function(){
+					it("Should call showPreview with flash: on, aimmode:on (if imager), desiredHeight & desiredWidth set |" + camid + camtype , function(){
 						var spec = new ManualSpec(jasmine, window.document);
 			        	spec.addGoal(jasmine.getEnv().currentSpec.description);
-			        	spec.addPrecondition("Call showPreview with propertyhash as fileName:camImage123, desiredHeight:360, desiredWidth:480, compressionFormat:jpg, outputFormat:image, flashMode:off, previewLeft:80, previewTop:10, previewWidth:40, previewHeight:120, aimMode:off, captureSound:'' and callback.");
+			        	spec.addPrecondition("Call showPreview() with properties previewLeft:10, previewTop:10, previewWidth:100, previewHeight:60, desiredHeight:120, desiredWidth:240, outputFormat:image, flashMode:on, aimMode:on, captureSound:''.");
 			            spec.addStep("Press 'RunTest' button");
-			            spec.addStep("Check for the returned callback status & property set");
-			            spec.addExpectation('The viewfinder with properties set should reflect. The returned status should be OK and captured image should be displayed with all callback properties. Also flashMode should be OFF for color camera & aimMode OFF for imager camera. Should not be any sound played after capture.');
+			            spec.addStep("Capture will happen after Check for the returned callback status & property set");
+			            spec.addExpectation('Flash should be ON if available or aim ON in case of imager. The returned status should be OK, imagePath would be th efile saved path in the device, imageHeight: 120 & imageWidth: 240. After capture there should not be any wav file played.');
 			            spec.displayScenario();
 			            spec.waitForButtonPressing("Run test");
 
 						runs(function(){
-							objCAM.showPreview({'fileName':'camImage123', 'compressionFormat':'jpg', 'outputFormat':'image', 
-								'flashMode':'off', 'aimMode':'off', 'captureSound':'', 'desiredHeight':360, 'desiredWidth':480,
-								'previewLeft':80, 'previewTop':10, 'previewWidth':40, 'previewHeight':120
+							objCAM.showPreview({'previewLeft':10, 'previewTop':10, 'previewWidth':100, 'previewHeight':60, 'desiredHeight':120, 'desiredWidth':240, 'outputFormat':'image', 'flashMode':'on', 'aimMode':'on', 'captureSound':''
+							});
+
+							setTimeout(function(){
+								objCAM.capture(callbackFunc);
+							},6000);
+						});
+
+						waitsFor(function(){
+							return cbkResponseTimeout;
+						},"waiting for callback data", 12000);
+
+						runs(function(){
+							spec.addResult(callbackData);
+							spec.displayResults();
+			                spec.waitForResponse();
+						});
+
+					});
+
+					it("Should call showPreview with all properties set & capture |" + camid + camtype , function(){
+						var spec = new ManualSpec(jasmine, window.document);
+			        	spec.addGoal(jasmine.getEnv().currentSpec.description);
+			        	spec.addPrecondition("Call showPreview() with properties previewLeft:10, previewTop:10, previewWidth:100, previewHeight:60, fileName:camImage123, desiredHeight:360, desiredWidth:480, compressionFormat:png, outputFormat:image, flashMode:off, aimMode:off, previewLeft:40, previewTop:20, previewWidth:50, previewHeight:50, captureSound:'//Application//alarm2.wav'.");
+			            spec.addStep("Press 'RunTest' button");
+			            spec.addStep("Check for the returned callback status & property set");
+			            spec.addExpectation('The viewfinder with properties set should reflect. Both flashMode & aimMode is off. Should play a wav file after capture. The returned status should be OK and captured imagePath should be with the name camImage123.jpg, imageHeight: 360, imageWidth:480 & imageFormat: jpg.');
+			            spec.displayScenario();
+			            spec.waitForButtonPressing("Run test");
+
+						runs(function(){
+							objCAM.showPreview({'previewLeft':10, 'previewTop':10, 'previewWidth':100, 'previewHeight':60, 'fileName':'camImage123', 'desiredHeight':360, 'desiredWidth':480, 'compressionFormat':'png', 'outputFormat':'image', 'flashMode':'off', 'aimMode':'off', 'previewLeft':40, 'previewTop':20, 'previewWidth':50, 'previewHeight':50, 'captureSound':'//Application//alarm2.wav'
 							});
 
 							setTimeout(function(){
@@ -1306,6 +1393,66 @@ describe("Camera API Manual Tests", function(){
 		})(enumData[j]);
 
 	}
+
+
+	describe("Miscellaneous Tests | " , function() {
+
+		it("Should try to enable fullscreen after preview window |" , function(){
+			var spec = new ManualSpec(jasmine, window.document);
+        	spec.addGoal(jasmine.getEnv().currentSpec.description);
+        	spec.addPrecondition("Call showPreview() without any properties.");
+            spec.addStep("Press 'RunTest' button");
+            spec.addStep("Capture will happen after Check for the returned callback status & property set");
+            spec.addExpectation('1st enable preview window should remain and fullscreen window should not come up..');
+            spec.displayScenario();
+            spec.waitForButtonPressing("Run test");
+
+			runs(function(){
+				Rho.Camera.showPreview();
+
+				setTimeout(function(){
+					Rho.Camera.takepicture({}, callbackFunc);
+					spec.addResult("takePicture called in background");
+					spec.displayResults();
+				},6000);
+			});
+
+			runs(function(){
+                spec.waitForResponse();
+			});
+
+			runs(function(){
+                Rho.Camera.hidePreview();
+			});
+
+		});
+
+		it("Persistance test for showpreview & capture |" , function(){
+			var spec = new ManualSpec(jasmine, window.document);
+        	spec.addGoal(jasmine.getEnv().currentSpec.description);
+        	spec.addPrecondition(" Call showPreview() with properties previewLeft: 50, previewTop:50, previewHeight: 80, previewWidth: 40, fileName: '\\Application\\persistCapture', flashMode: on & aimMode: ON.");
+            spec.addStep("Press 'RunTest' button");
+            spec.addStep("Run test should open preview window and navigate to another page.");
+            spec.addStep("capture should be called in another page.")
+            spec.addExpectation('Preview window properties should persist and the capture call would enable flash for color camera (if avaiable) or aim will be ON in case of imager. Captured image should be persistCapture.jpg in Application folder.');
+            spec.displayScenario();
+            spec.waitForButtonPressing("Run test");
+
+			runs(function(){
+				Rho.Camera.showPreview({'previewLeft': 50, 'previewTop':50, 'previewHeight': 80, 'previewWidth': 40, 'fileName': '\\Application\\persistCapture', 'flashMode': 'on', 'aimMode': 'ON'});
+
+				setTimeout(function(){
+					window.location="./cameraPersistPage.html";
+				},6000);
+			});
+
+			runs(function(){
+                spec.waitForResponse();
+			});
+
+		});
+
+	});
 
 	
 });

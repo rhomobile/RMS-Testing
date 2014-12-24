@@ -1,0 +1,55 @@
+
+<html>
+  <head>
+  
+	<meta HTTP-Equiv="SmartCradle" Content="CradleMatrixEvent:url('Javascript:OnCradleMatrixEvent('%s','%s','%s');')">
+  
+  <title>Cradle Matrix Test</title>
+  <SCRIPT>
+  var objGeneric = new ActiveXObject("PocketBrowser.Generic");
+  //var objGeneric = new ActiveXObject("PocketBrowser.Generic");
+  function OnLoad()
+  {
+      
+      document.getElementById("display").innerHTML= "Setting RowId:1;ColumnId:2;WallId:3...";
+      objGeneric.InvokeMETAFunction("SmartCradle","RowId:1;ColumnId:2;WallId:3");
+      objGeneric.InvokeMETAFunction("SmartCradle","GetCradleMatrix");
+      
+    
+  
+  }  
+  function OnCradleMatrixEvent(CurrentRowId,CurrentColumnId,CurrentWallId)
+  {	
+     var temp;
+     if(CurrentRowId==1 && CurrentColumnId==2 && CurrentWallId==3){
+      temp =  "<b>Passed!</b><br>";
+      temp += "<br>CurrentRowId = "+CurrentRowId;
+      temp += "<br>CurrentColumnId = " + CurrentColumnId;
+      temp += "<br>CurrentWallId = " + CurrentWallId;
+      document.getElementById("display").innerHTML= temp;
+     }
+     else{
+      temp =  "<b>Failed!</b><br>";
+      temp += "<br>CurrentRowId = "+CurrentRowId;
+      temp += "<br>CurrentColumnId = " + CurrentColumnId;
+      temp += "<br>CurrentWallId = " + CurrentWallId;
+      document.getElementById("display").innerHTML= temp;
+     }
+  }
+  
+  function GetMatrix()
+  {
+       
+       objGeneric.InvokeMETAFunction("SmartCradle","GetCradleMatrix");//PB
+  }
+  
+    
+  </SCRIPT>
+  <head>
+  <body onLoad="Javascript:OnLoad()">
+    <i>Onload the page sets the row,column and wall IDs, and then calls the matrix event to verify data<i/><br><br>
+    <div id="display"></div>
+    <br><a HREF="CradleIndex.html">Index</a>
+   
+  </body>
+</html>

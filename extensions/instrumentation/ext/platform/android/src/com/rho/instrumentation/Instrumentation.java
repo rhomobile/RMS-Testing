@@ -344,9 +344,7 @@ public class Instrumentation extends InstrumentationBase implements IInstrumenta
 	}
 
 	@Override
-	public boolean onAuthRequired(IRhoExtManager extManager, String type,
-			String url, String realm, IRhoWebView ext, boolean res) {
-		// TODO Auto-generated method stub
+	public boolean onAuthRequest(IRhoExtManager extManager, IRhoExtension.IAuthRequest request, IRhoWebView ext, boolean res) {
 		return false;
 	}
 

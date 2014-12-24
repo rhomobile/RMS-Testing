@@ -50,31 +50,43 @@
 	<!--<script type="text/javascript" src="js/testCases.js"></script>-->
 	<script type="text/javascript" src="http://10.233.85.82/src/elements.js"></script>
 	<script type="text/javascript">
-	var genericObj = new ActiveXObject("PocketBrowser.Generic");
-	function quitPB(){
-		genericObj.InvokeMETAFunction("Application", "Quit");
-	}
-	var ntfyArr = new Array();
+		var count = 0;
+		var genericObj = new ActiveXObject("PocketBrowser.Generic");
+		function quitPB(){
+			genericObj.InvokeMETAFunction("Application", "Quit");
+		}
+		var path = '\\Application\\Alarm5.wav';
+		var ntfyArr = new Array();
         var notType = new Array('LED', 'BEEPER', 'PAGER');
         var NTFY_INDEX = 0;
         var NTFY_TYPE = 1;
         var NTFY_NAME = 2;
 
-        function setupNtfyArr(notArr)
-       {
-        ntfyArr = notArr;
-	    var html = "";
-
-	    for(i=0; i<ntfyArr.length; i++)	
-       {
-        html += '' + ntfyArr[i][NTFY_INDEX] + ', ' 
-	    + notType[ntfyArr[i][NTFY_TYPE]] + '' 
-	    + ntfyArr[i][NTFY_NAME] + '';
-       }
-	 
-        html += "";
-        main.displayResult(html);
-       }
+  		//function setupNtfyArr(ntArray) 
+		// {
+		//   var html = "<table border=1>";
+		// 	for(i=0; i<ntArray.length; i++)	{
+		// 			html+='<tr><td><input type=button value="Invoke" onclick="doNot(' + ntArray[i][NTFY_INDEX] + ', ' 
+		// 				+ ntArray[i][NTFY_TYPE] + ');"></td><td>' 
+		// 				+ ntArray[i][NTFY_NAME] + '</td><td>'
+		// 				+ ((ntArray[i][NTFY_TYPE]==NTFY_UNKNOWN)?'UNKNOWN':notType[ntArray[i][NTFY_TYPE]]) + '</td></tr>';
+		// 	}
+		// 	html+="</table>";
+		// 	main.displayResult(html);
+		// }
+		function setupNtfyArr(ntArray) 
+		{
+		  var html = "<table border=1>";
+			for(i=0; i<ntArray.length; i++)	{
+					html+='<tr><td><input type=button value="Invoke" onclick="alert(' + ntArray[i][NTFY_INDEX] + ', ' 
+						+ ntArray[i][NTFY_TYPE] + ');"></td><td>' 
+						+ ntArray[i][NTFY_NAME] + '</td><td>'
+						+ ((ntArray[i][NTFY_TYPE]==NTFY_UNKNOWN)?'UNKNOWN':notType[ntArray[i][NTFY_TYPE]]) + '</td></tr>';
+			}
+			html+="</table>";
+			main.displayResult(html);
+		}
+		
 		(function(){
 		var pbTest = function(){
 		var pbTestObj = {};
@@ -89,6 +101,7 @@
 			"ExpectedOutcome":["After every 45 seconds the message waiting will change to alarm triggered, then 5 seconds later the message will change back to waiting."," For every 45 Seconds the alarm will repeat "],
 			"testToPerform":function(){
 				genericObj.InvokeMETAFunction("Alarm", "Interval:00-00-45;Repeat:True;Set");
+				main.displayResult("alarm set.. wait to trigger");
 				genericObj.InvokeMETAFunction("Alarm", "AlarmTriggered:url('javascript:doAlarm();')");
 			},
 			"FinalResult":""
@@ -292,7 +305,7 @@
 		},{
 			"VTID":"VTID_888",
 			"RegLevel":"R2",
-			"Description":"Backlight with Off ",
+			"Description":"Backlight with On ",
 			/*"PreCondition":[
 			"Ensure condition number one",
 			"Ensure condition number two",
@@ -316,7 +329,7 @@
 			"Steps":["1. Test the Backlight functionality with content='On'","2. Test the Backlight functionality with content ='Intensity:AA'"],
 			"ExpectedOutcome":["No action taken in the device"],
 			"testToPerform":function(){
-				genericObj.InvokeMETAFunction("Backlight-On", "Intensity:aa");
+				genericObj.InvokeMETAFunction("Backlight-On", "Intensity:AA");
 			},
 			"FinalResult":""
 		},{
@@ -712,6 +725,7 @@
 			"Steps":[" 1. Test the ScreenOrientation functionality with content ='RightHanded'","2. Test the ScreenOrientationEvent functionality with content ='ScreenOrientationEvent:url'"],
 			"ExpectedOutcome":["Screen will be set as RightHanded position and immediately ScreenOrientationEvent should be triggered and navigate to the url"],
 			"testToPerform":function(){
+				//genericObj.InvokeMetaFunction("ScreenOrientation", "ScreenOrientationEvent:url('javascript:main.displayResult('%s');')");
 				genericObj.InvokeMETAFunction('ScreenOrientation', 'RightHanded');
 		        genericObj.InvokeMetaFunction("ScreenOrientation", "ScreenOrientationEvent:url('http://10.233.85.82:9098/app/DeviceApplication/devicenav.html')");
 			},
@@ -726,11 +740,12 @@
 			"Ensure condition number three"],*/
 			"PreCondition":[],
 			"Steps":["1. Test the ScreenOrientation functionality with content ='Normal'","2. Test the ScreenOrientationEvent functionality with content ='ScreenOrientationEvent:javascript'"],
-			"ExpectedOutcome":["Screen will be set as Normal position and immediately ScreenOrientationEvent should be triggered and navigate to the url"],
+			"ExpectedOutcome":["Screen will be set as Normal position and immediately ScreenOrientationEvent should be triggered and javascript callback should be fired"],
 			"testToPerform":function(){
-				genericObj.InvokeMETAFunction('ScreenOrientation', 'Normal');
-		        genericObj.InvokeMetaFunction("ScreenOrientation", "ScreenOrientationEvent:url('javascript:main.displayResult('%s')')");
-		        genericObj.InvokeMetaFunction("ScreenOrientation", "ScreenOrientationEvent:url('http://10.233.85.82:9098/app/DeviceApplication/devicenav.html')");
+				genericObj.InvokeMETAFunction("ScreenOrientation", "ScreenOrientationEvent:url('javascript:main.displayResult('%s');')");
+				genericObj.InvokeMETAFunction("ScreenOrientation", "RightHanded");
+				genericObj.InvokeMETAFunction("ScreenOrientation", "Normal");
+		        //genericObj.InvokeMetaFunction("ScreenOrientation", "ScreenOrientationEvent:url('http://10.233.85.82:9098/app/DeviceApplication/devicenav.html')");
 			},
 			"FinalResult":""
 		},{
@@ -1066,10 +1081,11 @@
 			"Ensure condition number two",
 			"Ensure condition number three"],*/
 			"PreCondition":[],
-			"Steps":["Test the Volume functionality with content ='SetVolume:0x0000'"],
+			"Steps":["Test the Volume functionality with content ='SetVolume:0x0000'","file play path - \\Application\\Alarm5.wav"],
 			"ExpectedOutcome":["The volume is set to off"],
 			"testToPerform":function(){
 				genericObj.InvokeMETAFunction('Volume', 'SetVolume:0x0000');
+				genericObj.PlayWave(path, 1);
 			},
 			"FinalResult":""
 		},{
@@ -1081,10 +1097,11 @@
 			"Ensure condition number two",
 			"Ensure condition number three"],*/
 			"PreCondition":[],
-			"Steps":["Test the Volume functionality with content ='SetVolume:0xFFFF'"],
+			"Steps":["Test the Volume functionality with content ='SetVolume:0xFFFF'","file play path - \\Application\\Alarm5.wav"],
 			"ExpectedOutcome":["The volume is set to Maximum"],
 			"testToPerform":function(){
 				genericObj.InvokeMETAFunction('Volume', 'SetVolume:0xFFFF');
+				genericObj.PlayWave(path, 1);
 			},
 			"FinalResult":""
 		},{
@@ -1096,10 +1113,11 @@
 			"Ensure condition number two",
 			"Ensure condition number three"],*/
 			"PreCondition":[],
-			"Steps":["Test the Volume functionality with content ='SetVolume:0x01'"],
+			"Steps":["Test the Volume functionality with content ='SetVolume:0x01'","file play path - \\Application\\Alarm5.wav"],
 			"ExpectedOutcome":["The volume is set to the specified value"],
 			"testToPerform":function(){
 				genericObj.InvokeMETAFunction('Volume', 'SetVolume:0x01');
+				genericObj.PlayWave(path, 1);
 			},
 			"FinalResult":""
 		},{
@@ -1115,7 +1133,7 @@
 			"ExpectedOutcome":["Enumerate should triggers an EnumNotificationsEvent containing the notification objects available on the current device"],
 			"testToPerform":function(){
 				genericObj.InvokeMETAFunction('Notification', 'Enumerate');
-				genericObj.InvokeMETAFunction("Notification", "EnumNotificationsEvent:url('javascript:main.setupNtfyArr(%s);')");
+				genericObj.InvokeMETAFunction("Notification", "EnumNotificationsEvent:url('javascript:setupNtfyArr(%s);')");
 			},
 			"FinalResult":""
 		},{
@@ -1349,7 +1367,7 @@
 			"Steps":["1. Test Alarm functionality with the content =Interval:00:00:45","2. Enble the repeat alarm with Content=Repeat:true","3. Start the Alarm with Content=javascript:alert(Alarm);","4. Navigate to previous page using back button"],
 			"ExpectedOutcome":["Every 45 seconds the alarm should be triggered irrespective of page"],
 			"testToPerform":function(){
-				genericObj.InvokeMETAFunction("Alarm", "Interval:00:00:45;Repeat:true;Set;AlarmTriggered:url(javascript:main.displayResult(Alarm Triggered);)");
+				genericObj.InvokeMETAFunction("Alarm", "Interval:00:00:45;Repeat:true;Set;AlarmTriggered:url('javascript:alert('Alarm Triggered');')");
 			},
 			"FinalResult":""
 		},{
@@ -1392,7 +1410,7 @@
 			"testToPerform":function(){
 				genericObj.InvokeMETAFunction("Timer", "Interval:7000");
 				genericObj.InvokeMETAFunction("Timer", "Start");
-				genericObj.InvokeMETAFunction("Timer", "timeout:url('javascript:main.displayResult('%s');')");
+				genericObj.InvokeMETAFunction("Timer", "timeout:url('javascript:alert('timeout triggered');')");
 			},
 			"FinalResult":""
 		},{
@@ -1572,8 +1590,12 @@
 			"FinalResult":""
 		}];
 		pbTestObj.afterEach = function(){
+			count = 0;
+			genericObj.InvokeMETAFunction("Alarm", "AlarmTriggered:url('javascript:')");
+			genericObj.InvokeMetaFunction("ScreenOrientation", "ScreenOrientationEvent:url('javascript:')')");
 			genericObj.InvokeMETAFunction('ScreenOrientation', 'Normal');
-			genericObj.InvokeMETAFunction('hourglass', 'Visibility:visible');
+			genericObj.InvokeMETAFunction('hourglass', 'Visibility:hidden');
+			genericObj.InvokeMETAFunction('TextSize','smallest');
 			
 		}
 		return pbTestObj;
@@ -1670,15 +1692,14 @@
 		};
 		mainObj.passThisTest = function(){
 			testArray[index].FinalResult = "Pass";
-            pbTest.afterEach();
-			this.nextTest();
+            this.nextTest();
 		};
 		mainObj.failThisTest = function(){
 			testArray[index].FinalResult = "Fail";
-            pbTest.afterEach();
-			this.nextTest();
+            this.nextTest();
 		}
 		mainObj.nextTest = function(){
+			pbTest.afterEach();
 			if(index<(count-1)){
 				index++;
 				this.loadSingleTest(index);
@@ -1687,6 +1708,7 @@
 			}
 		};
 		mainObj.prevTest = function(){
+			pbTest.afterEach();
 			if(index>0){
 				index--;
 				this.loadSingleTest(index);
@@ -1738,7 +1760,6 @@
 })();
 	</script>
 	<script type="text/javascript">
-		var count = 0;
 		function doAlarm(){
 			var resultDiv = document.getElementById("actualResult");
 			count++;

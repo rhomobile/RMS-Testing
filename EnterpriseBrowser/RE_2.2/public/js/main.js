@@ -82,6 +82,7 @@
 			document.getElementById('actualResult').innerHTML = "";
 			var selectElement = document.getElementById('vtSelect');
 			selectElement.value = index;
+			pbTest.afterEach();
 		};
 		mainObj.runThisTest = function(){
 			testArray[index].testToPerform();

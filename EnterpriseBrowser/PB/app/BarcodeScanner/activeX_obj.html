@@ -78,6 +78,7 @@
 		function selectScanner(){
 		    var w = document.getElementById('scannerdropdown').selectedIndex;
 		    selected_scanner = document.getElementById('scannerdropdown').options[w].value;
+		    //document.getElementById('selectedScanner').innerHTML = document.getElementById('scannerdropdown').options[w].name;
 		}
 		function enableScanner(){
 			enable_selectedScanner="Enabled:"+ selected_scanner;
@@ -85,6 +86,12 @@
 		}
 		function disableScanner(){
 			genericObj.InvokeMETAFunction('Scanner', 'Disabled');
+		}
+		function startScanner(){
+			genericObj.InvokeMETAFunction('Scanner', 'Start');
+		}
+		function stopScanner(){
+			genericObj.InvokeMETAFunction('Scanner', 'Stop');
 		}
 		(function(){
 		var pbTest = function(){
@@ -110,9 +117,9 @@
 		    "ExpectedOutcome":["EnumScanners array should return a list of scanners present on the device via EnumScannerEvent.","The scanner should be enabled and scanner beam should appear upon start.","The scanner beam should stop upon stop meta tag."],
 		    "testToPerform":function(){
 				enableScanner();
-				setTimeout(function(){
-					genericObj.InvokeMETAFunction("Scanner", "Start");
-				},3000)
+				// setTimeout(function(){
+				// 	genericObj.InvokeMETAFunction("Scanner", "Start");
+				// },3000)
 		    },
 		    "FinalResult":""
 		},{
@@ -122,7 +129,7 @@
 		    "PreConditTest": ["Test Scanner META Tag functionlaity with content ='Enumerate'","Test Scanner META Tag with Content='EnumScannerEvent:uri(Javascript:EnumScanners(%s);)'","Test Scanner META Tag functionlaity with content='Disabled:SCNID'( ID of Scanner).","Test Scanner META Tag functionlaity with content='Start'","Test Disabled/Start Scenario on all available scanners. ( to test RSM Scanner, Connect RSM device to the mobile unit first)."],
 		    "ExpectedOutcome":["EnumScanners array should return a list of scanners present on the device via EnumScannerEvent.","The scanner should beand disabled.","Scanner beam should not appear as scanner is disabled."],
 		    "testToPerform":function(){
-				genericObj.InvokeMETAFunction("Scanner", "Disbaled:"+selected_scanner);
+				genericObj.InvokeMETAFunction("Scanner", "Disabled");
 				genericObj.InvokeMETAFunction("Scanner", "Start");
 		    },
 		    "FinalResult":""
@@ -768,8 +775,6 @@ Note: Don't attach decode even. Decoded data is received as keystrokes "*/
     	<input type=button value="Previous" onclick="main.prevTest();" />
 		<input type=button value="Next" onclick="main.nextTest()" />
 		<input type="button" onclick="main.runThisTest()" value="Run Test"/>
-		<input type=button value="Enable" onclick="enableScanner()" />
-		<input type=button value="Disable" onclick="disableScanner()" />
     </div>
     <table border=1 width=100%>
 	    <tr>
@@ -791,6 +796,8 @@ Note: Don't attach decode even. Decoded data is received as keystrokes "*/
     <input type="button" onclick="main.runThisTest()" value="Run Test"/>
     <input type=button value="Enable" onclick="enableScanner()" />
     <input type=button value="Disable" onclick="disableScanner()" />
+    <input type=button value="Start" onclick="startScanner()" />
+	<input type=button value="Stop" onclick="stopScanner()" />
     <br><br>
     <span class="heading">Actual result:</span>
     <br>

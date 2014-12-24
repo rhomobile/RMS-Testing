@@ -91,7 +91,7 @@
 			"ExpectedOutcome":["The process should be launched and closed immediately"],
 			"testToPerform":function(){
 				var hProcess = objGeneric.LaunchProcessNonBlocking('\\Application\\MemoryCheck.exe', '');
-				objGeneric.CloseProcess(hProcess)				
+				objGeneric.CloseProcess(hProcess);
 			},
 			"FinalResult":""
 		},{
@@ -309,7 +309,7 @@
 			"VTID":"VT056-0761",
 	        "RegLevel":"R2",
 	        "Description":"Generic ActiveX Object - LaunchProcessNonBlocking",
-	        "PreCondition":["Note - Make sure RegEdit.exe is present in the Application folder of the mobile device under test"],
+	        "PreCondition":["Note - Make sure MemoryCheck.exe is present in the Application folder of the mobile device under test"],
 	        "Steps":["Test LaunchProcessNonBlocking functionality by passing strImageName and strCommandLine"],
 	        "ExpectedOutcome":["Generic ActiveX Object launches a new process that does not block execution."],
             "testToPerform":function(){

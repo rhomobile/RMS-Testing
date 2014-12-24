@@ -77,7 +77,8 @@
 		    "ExpectedOutcome":["The printer commands are sent via PSExternal Method, No Return Value is get."],
 		    "testToPerform":function(){
 		    	myapd.PSExternalEx(261, printerID);
-				main.displayResult("sendstring: " + myapd.PSExternal(266, 'MOTOROLA SOLUTIONS INDIA PVT LIMITED\r\nRMZ Ecospace,Block3B\r\nSarjapur Outer Ring Road\r\nBangalore'));
+		    	var data = "sendstring: " + myapd.PSExternal(266, "MOTOROLA SOLUTIONS INDIA PVT LIMITED\r\nRMZ Ecospace,Block3B\r\nSarjapur Outer Ring Road\r\nBangalore");
+				main.displayResult(data);
 		    },
 		    "FinalResult":""
 		},{
@@ -98,7 +99,8 @@
 					 + 'T 5 3 20 196 £2.00 off\n'
 					 + 'BOX 5 5 350 295 1\n'
 					 + 'PRINT\n';
-				main.displayResult("sendstringwithlabel: "+ myapd.PSExternal(266, sLabel));
+				var data = "sendstringwithlabel: "+ myapd.PSExternal(266, sLabel);
+				main.displayResult(data);
 		    },
 		    "FinalResult":""
 		},{
@@ -110,7 +112,7 @@
 		    "ExpectedOutcome":["The printer commands are sent via PSExternal Method, Return Value is get."],
 		    "testToPerform":function(){
 		    	myapd.PSExternalEx(261, printerID);
-				main.displayResult("sendstring: " + myapd.PSExternalEx(266, 'MOTOROLA SOLUTIONS INDIA PVT LIMITED\r\nRMZ Ecospace,Block3B\r\nSarjapur Outer Ring Road\r\nBangalore'));
+				main.displayResult("sendstring: " + myapd.PSExternalEx(266, "MOTOROLA SOLUTIONS INDIA PVT LIMITED\r\nRMZ Ecospace,Block3B\r\nSarjapur Outer Ring Road\r\nBangalore"));
 		    },
 		    "FinalResult":""
 		},{
@@ -549,9 +551,10 @@
 
 	<select name="myPrinterAddress" id="myPrinterAddress" size='1' onChange="getprintermac();">
 	<OPTION value="Select Option" >Select Option</OPTION>
-	<OPTION value="WC53:6101|10.233.83.230" >Wireless-ZebraQLn320</OPTION>
+	<OPTION value="WC53:6101|10.233.83.115" >Wireless-ZebraQLn320</OPTION>
 	<OPTION value="BC53|00:03:7A:0C:9B:41" >ZebraQL320BT</OPTION>
-	<OPTION value="BC53:1|00037A032772" >Zebra M220 Bluetooth</OPTION> 
+	<OPTION value="BC53:1|00037A6C5762" >Zebra M220 Bluetooth</OPTION>
+	<OPTION value="BC53:1|00037A032772" >Zebra M220 Bluetooth</OPTION>
 	<OPTION value="BC53:1|00037A319F59" >Zebra M220 Bluetooth 1</OPTION>
 	<OPTION value="BC53:1|0017AC15E2C9" >Oneil Bluetooth</OPTION>
 	<OPTION value="BC53:1|00037A032772" >ZebraWithPIN</OPTION> 

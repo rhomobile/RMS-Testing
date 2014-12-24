@@ -88,7 +88,7 @@
 		    "testToPerform":function(){
 				myPage = document.getElementById('mainBlock').innerHTML;
 		    	document.getElementById('mainBlock').innerHTML = "<div id='actualResult'>No Gesture found Yet.</div><br><input type='button' value='back' onclick='backToTest()' />";
-		        genericObj.InvokeMETAFunction("gesture", "ID:linearGesture;type:linear;startX:100;startY:300;endX:100;endY:100;Preset:left-right;Tolerance=20;Region-width:30;sensitivity:80;skew:20;deviation:50;Diagnostics:true;Create");
+		        genericObj.InvokeMETAFunction("gesture", "ID:linearGesture;type:linear;startX:100;startY:300;endX:100;endY:100;Preset:left-right;Tolerance=20;Region-width:30;sensitivity:80;skew:20;deviation:50;Diagnostics:false;Create");
         		genericObj.InvokeMETAFunction("gesture-detected","url('Javascript:onGesture('%s','%s');')");
 		    },
 		    "FinalResult":""

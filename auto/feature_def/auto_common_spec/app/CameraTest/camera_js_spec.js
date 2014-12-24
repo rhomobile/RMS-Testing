@@ -6,6 +6,8 @@ describe("Camera JS API Test", function() {
     var enumData = Rho.Camera.enumerate();
     var callbackstatus = false;
 	var getcallbackdata = '';
+	var capturedata = '';
+	var capturestatus = '';
 
     var callbackgetproperties = function (data){
 		getpropertiesdata = JSON.stringify(data);
@@ -15,6 +17,17 @@ describe("Camera JS API Test", function() {
 	var callbackgetproperty = function (data){
 		getpropertydata = data;
 		callbackstatus = true;
+	}
+
+	var captureCallback = function (data){
+		capturedata.status = data.status
+		capturedata.imageHeight = data.imageHeight
+		capturedata.imageWidth = data.imageWidth
+		capturedata.imageFormat = data.imageFormat
+		capturedata.message = data.message
+		capturedata.imageUri = data.imageUri
+
+		capturestatus = true;
 	}
 
     for (var j = 0;j<enumData.length;j++){
@@ -133,7 +146,7 @@ describe("Camera JS API Test", function() {
 					it("VT285-084 | call getProperties() with sync callback and hash |" + camtype, function() {
 
 						runs(function() {
-						    enumObject.setProperties({'compressionFormat':'png','desiredHeight':'640','outputFormat':'dataUri'});
+						    enumObject.setProperties({'compressionFormat':'png','desiredHeight':640,'outputFormat':'dataUri'});
 							enumObject.getProperties(['compressionFormat','desiredHeight','outputFormat'],callbackgetproperties);
 						});
 
@@ -151,7 +164,7 @@ describe("Camera JS API Test", function() {
 					it("VT285-085 | call getProperties() with anonymous callback and hash |" + camtype, function() {
 
 						runs(function() {    
-						    enumObject.setProperties({'compressionFormat':'jpg','desiredWidth':'480','outputFormat':'image'});
+						    enumObject.setProperties({'compressionFormat':'jpg','desiredWidth':480,'outputFormat':'image'});
 							enumObject.getProperties(['compressionFormat','desiredWidth','outputFormat'],function(data){getpropertiesdata = JSON.stringify(data);callbackstatus = true;});
 						});
 
@@ -169,7 +182,7 @@ describe("Camera JS API Test", function() {
 					it("VT285-086 | call getProperties() without callback |" + camtype, function() {
 
 						    //enumObject.clearAllProperties();
-						    enumObject.setProperties({'compressionFormat':'png','desiredHeight':'640','outputFormat':'dataUri'});
+						    enumObject.setProperties({'compressionFormat':'png','desiredHeight':640,'outputFormat':'dataUri'});
 							var data = enumObject.getProperties(['compressionFormat','desiredHeight','outputFormat']);
 							getpropertiesdata = JSON.stringify(data);
 							expect(getpropertiesdata).toContain('png');
@@ -290,7 +303,7 @@ describe("Camera JS API Test", function() {
 					it("VT285-1002 | Call getAllProperties with Anonymous callback |" + camtype, function() {
 
 						runs(function() {
-						    enumObject.setProperties({'compressionFormat':'jpg','desiredHeight':'640','outputFormat':'dataUri'});
+						    enumObject.setProperties({'compressionFormat':'jpg','desiredHeight':640,'outputFormat':'dataUri'});
 							enumObject.getAllProperties(function(data){getpropertydata = data;callbackstatus = true;});
 						});
 
@@ -305,7 +318,217 @@ describe("Camera JS API Test", function() {
 						});								
 					});
 
-					/*it("VT285-1003 | Call takePicture with all string in hash|" + camtype, function() {
+				});
+
+				describe("Call capture method with callback | "+ camtype +": "+ camname, function() {
+
+					beforeEach(function() {
+					    capturedata = '';
+					    capturestatus = false;
+					});
+
+					var data = [{"desiredHeight":360, "desiredWidth":480}, 
+					{"compressionFormat":"png"}, {"compressionFormat":"jpg"}, {"outputFormat":"image"}, {"outputFormat":"dataUri"}, 
+					{"colorModel":"grayscale"}, {"colorModel":"rgb"},
+					{"aimMode":"off"}, {"flashMode":"off"}];
+
+					for(i=0 ; i<data.length ; i++ ){
+
+						it("Call capture method with callback for | " + JSON.stringify(data[i]) , function() {
+ 
+							runs(function() {
+							    var props = '';
+						    	props = data[i];
+						    	enumObject.showPreview(props);
+
+						    	setTimeout(function(){
+						    		enumObject.capture(captureCallback);
+						    	},5000);
+							    
+							});
+
+							waitsFor(function(){
+								return capturestatus;
+							}, 10000);
+							
+							runs(function() {	
+								expect(capturedata.status).toEqual('ok');
+								expect(capturedata.message).toEqual('');
+
+								if data[i]['desiredHeight']
+									expect(capturedata.imageHeight).toEqual(data[i]['desiredHeight']);
+								else
+									expect(capturedata.imageHeight).toBeGreaterThan(0);
+
+								if data[i]['desiredWidth']
+									expect(capturedata.imageWidth).toEqual(data[i]['desiredWidth']);
+								else
+									expect(capturedata.imageWidth).toBeGreaterThan(0);
+
+								if (data[i]['outputFormat'] && data[i]['outputFormat'] =! 'dataUri'){
+									if (data[i]['compressionFormat'] == 'png' && !(isWindowsMobilePlatform())){
+										expect(capturedata.imageUri).toContain('.png');
+									else
+										expect(capturedata.imageUri).toContain('.jpg');
+									};
+								else
+									expect(capturedata.imageUri).not.toEqual('');
+								};
+							});		
+
+							enumObject.hidePreview();
+
+						});
+					};
+
+					var data = [{"desiredHeight":727, "desiredWidth":1099}, {"desiredHeight":'', "desiredWidth":''}, 
+					{"compressionFormat":""}, {"outputFormat":""}, {"colorModel":""}, {"captureSound":""},
+					{"previewTop":250, "previewWidth":250 ,"previewLeft":300, "previewHeight":200},
+					{"previewTop":-25, "previewWidth":-250 ,"previewLeft":-30, "previewHeight":-200},
+					{"previewTop":0, "previewWidth":0 ,"previewLeft":0, "previewHeight":0},
+					{"previewTop":10, "previewWidth":20 ,"previewLeft":-10, "previewHeight":-60},
+					{"aimMode":""}, {"flashMode":""}]
+
+					for(i=0 ; i<data.length ; i++ ){
+
+						it("Call capture method with callback for | " + JSON.stringify(data[i]) , function() {
+ 
+							runs(function() {
+							    var props = '';
+						    	props = data[i];
+						    	enumObject.showPreview(props);
+
+						    	setTimeout(function(){
+						    		enumObject.capture(captureCallback);
+						    	},5000);
+							    
+							});
+
+							waitsFor(function(){
+								return capturestatus;
+							}, 10000);
+							
+							runs(function() {	
+								expect(capturedata.status).toEqual('ok');
+								expect(capturedata.message).toEqual('');
+								expect(capturedata.imageHeight).toBeGreaterThan(0);
+								expect(capturedata.imageWidth).toBeGreaterThan(0);
+								expect(capturedata.imageUri).not.toEqual('');
+							});		
+
+							enumObject.hidePreview();
+
+						});
+					};
+
+					var datainval = [{"compressionFormat":"invalid"}, {"outputFormat":"invalid"},
+					{"colorModel":"invalid"}, {"captureSound":"file://application/alarm.waved"},
+					{"previewTop":'10', "previewWidth":'20' ,"previewLeft":'10', "previewHeight":'60'},
+					{"aimMode":"invalid"}, {"flashMode":"invalid"}]
+
+					for(i=0 ; i<datainval.length ; i++ ){
+
+						it("Call capture method with callback for invalid values | " + JSON.stringify(datainval[i]) , function() {
+ 
+							runs(function() {
+							    var props = '';
+						    	props = datainval[i];
+						    	enumObject.showPreview(props);
+
+						    	setTimeout(function(){
+						    		enumObject.capture(captureCallback);
+						    	},5000);
+							    
+							});
+
+							waitsFor(function(){
+								return capturestatus;
+							}, 10000);
+							
+							runs(function() {	
+								expect(capturedata.status).toEqual('error');
+								expect(capturedata.message).not.toEqual('');
+							});		
+
+							enumObject.hidePreview();
+
+						});
+
+
+					};
+
+					var modelfolder = Rho.Application.modelFolderPath("CameraTest");
+					var tempFolder = Rho.RhoFile.join(modelfolder, "tempFolder");
+
+					var fileList = ['cameraimage', 'camera@#$', '_123Image', '12_image', 'QWERTY'];
+					
+					for(i=0 ; i<fileList.length ; i++ ){
+
+						if (Rho.RhoFile.exists(tempFolder) == false)
+							Rho.RhoFile.makeDir(tempFolder);
+						var file = Rho.Application.join(tempFolder, fileList[i]);
+						if Rho.RhoFile.exists(file)
+							Rho.RhoFile.deleteFile(file);
+
+						it("Call capture method with fileName : " + file , function() {
+ 
+							runs(function() {
+							    var props = '';
+						    	props = data[i];
+						    	enumObject.showPreview({'fileName' : file});
+
+						    	setTimeout(function(){
+						    		enumObject.capture(captureCallback);
+						    	},5000);
+							    
+							});
+
+							waitsFor(function(){
+								return capturestatus;
+							}, 10000);
+							
+							runs(function() {	
+								expect(capturedata.status).toEqual('ok');
+								expect(capturedata.message).toEqual('');
+								expect(capturedata.imageHeight).toBeGreaterThan(0);
+								expect(capturedata.imageWidth).toBeGreaterThan(0);
+								expect(capturedata.imageUri).toContain(fileList[i]);
+							});
+
+							enumObject.hidePreview();
+
+						});
+					};
+
+
+						it("Call capture method with invalid fileName path : " + file , function() {
+ 
+							runs(function() {
+
+						    	enumObject.showPreview({"fileName" : "\\Programfiles\\invalidpath\\camimage"});
+
+						    	setTimeout(function(){
+						    		enumObject.capture(captureCallback);
+						    	},5000);
+							    
+							});
+
+							waitsFor(function(){
+								return capturestatus;
+							}, 10000);
+							
+							runs(function() {	
+								expect(capturedata.status).toEqual('error');
+								expect(capturedata.message).not.toEqual('');
+							});
+
+							enumObject.hidePreview();
+
+						});
+
+				});
+					
+				/*it("VT285-1003 | Call takePicture with all string in hash|" + camtype, function() {
 					   beforeEach(function() {
 					     getcallbackdata ='';
 					     callbackstatus = false;
@@ -327,7 +550,7 @@ describe("Camera JS API Test", function() {
 						});								
 					});*/
 
-					it("VT285-1004 | Call choosePicture with all string in hash|" + camtype, function() {
+					/*it("VT285-1004 | Call choosePicture with all string in hash|" + camtype, function() {
                         beforeEach(function() {
 					     getcallbackdata ='';
 					     callbackstatus = false;
@@ -367,10 +590,10 @@ describe("Camera JS API Test", function() {
 							expect(getcallbackdata).toContain('640');
 							expect(getcallbackdata).toContain('image');
 						});								
-					});
-			});
+					}); */
+			
 
-			describe("Camera property set using takePicture() for "+ camtype +": "+ camname, function() {
+			/* describe("Camera property set using takePicture() for "+ camtype +": "+ camname, function() {
 
 				var flag = false;
 
@@ -433,7 +656,7 @@ describe("Camera JS API Test", function() {
 					})(i);
 
 				}
-			});
+			});*/
 			
 			describe("Properties with constants ", function() {
             it("Should set flashMode to FLASH_ON using direct calling method", function() {
@@ -824,7 +1047,7 @@ describe("Camera JS API Test", function() {
 });
 
 
-describe("Camera choosePicture() JS API Test", function() {
+/*describe("Camera choosePicture() JS API Test", function() {
 	var	enableflag = false;
 	var	disableflag = false;
 	var getpropertiesdata ='';
@@ -923,7 +1146,7 @@ describe("Camera choosePicture() JS API Test", function() {
 
     }
 
-});
+});*/
 
 
 describe("Enumerate Camera ", function() {

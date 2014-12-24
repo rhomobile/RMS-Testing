@@ -2369,6 +2369,25 @@ describe('Developer Experience - Rho Component Installer Functionality Test', fu
         spec.waitForResponse();
     });
 
+    it("Full bundle update on modifying HTML, CSS, JS and Ruby files to project.", function() {
+        var spec = new ManualSpec(jasmine, window.document);
+        spec.addGoal("Full bundle update on modifying HTML, CSS, JS and Ruby files to project.");
+        spec.addPrecondition("Connect the devices to server network.");
+        spec.addPrecondition("In local computer build the application with \'development\' extension for all platforms.");
+        spec.addPrecondition("Install the  application on all subscribers (WM, CE, Android, IOS, Android Simulator and IOS simulator)");
+        spec.addPrecondition("Launch the application in all subscribers.");
+        spec.addPrecondition("Discover and register subscribers in dev-config.yml.");
+        spec.addStep("Modify HTML, CSS, JS and Ruby files.");
+        spec.addStep("Run command rho dev:update:full.");
+        spec.addStep("Refresh the page.");
+        spec.addExpectation("Web server should be started if not running");
+        spec.addExpectation("Should detect changed html, css, js and ruby file, builds full bundle update and sends notification to subscriber.");
+        spec.addExpectation("After refresh modified HTML, JS, CSS and Ruby files should be displayed.");
+        spec.displayScenario();
+        spec.waitForButtonPressing("Run test");
+        spec.waitForResponse();
+    });
+
     it("Full bundle update on adding new HTML, CSS, JS and Ruby files to project.", function() {
         var spec = new ManualSpec(jasmine, window.document);
         spec.addGoal("Full bundle update on adding new HTML, CSS, JS and Ruby files to project.");
@@ -2993,6 +3012,22 @@ describe('Developer Experience - Rho Component Installer Functionality Test', fu
         spec.addStep("Build the Rhoelements application by rho device:android:production_with_prebuild_binary,rho device:iphone:production_with_prebuild_binary,rho device:wm:production_with_prebuild_binary");
         spec.addExpectation("Packages related new version should be downloaded and installed.");
         spec.addExpectation("Build should be successfull.");
+        spec.displayScenario();
+        spec.waitForButtonPressing("Run test");
+        spec.waitForResponse();
+    });
+
+    it("Running live update commands without setting a token", function() {
+        var spec = new ManualSpec(jasmine, window.document);
+        spec.addGoal("Running live update commands without setting a token");
+        spec.addPrecondition("Connect devices to server network.");
+        spec.addPrecondition("In local computer build the application with \'development\' extension for all platforms.");
+        spec.addPrecondition("Install the  application on all subscribers (WM, CE, Android, IOS, Android Simulator, and IOS simulator)");
+        spec.addPrecondition("Launch the aplication all subscribers.");
+        spec.addPrecondition("Clear the token by rho token:clear");
+        spec.addStep("Run live update commands like rho dev:discovery, rho dev:update:partial, rho dev:update:full, rho dev:update:auto, rho dev:update:build_and_notify");
+        spec.addStep("Check whether asking for rhohub login");
+        spec.addExpectation("Should ask for rhohub login on running live update commands");
         spec.displayScenario();
         spec.waitForButtonPressing("Run test");
         spec.waitForResponse();

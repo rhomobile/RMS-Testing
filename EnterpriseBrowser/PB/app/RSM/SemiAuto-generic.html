@@ -3,7 +3,7 @@
 <head>
 	<input type="button" value="Back"  onclick="location.href='./index.html'" />
 	<title>PB and RE2.2 Semi Auto Frame Work : RSM</title>
-	<META HTTP-Equiv="scanner" Content="DecodeEvent:url('javascript:doScan('%6', '%s', %3, '%2');')">
+	<META HTTP-Equiv="scanner" Content="DecodeEvent:url('javascript:doScan('%s', '%s', %s, '%s', '%s','%s');')">
   	<META HTTP-Equiv="Scanner" Content="EnumScannerEvent:url('Javascript:EnumScanners(%s);')">
 	<!--<link rel="stylesheet" type="text/css" href="css/main.css">-->
 	<style type="text/css">
@@ -73,10 +73,9 @@
 			Get(attributes);      
 		}
 		function WriteOnTextBoxes(attributeArray, attr){
-			actualResult = document.getElementById('actualResult');
-			actualResult.innerHTML = "Array Length: "+attr.length+" <br />";
+			mydiv.innerHTML = "Array Length: "+attr.length+" <br />";
 		    for (var a = 0; a < attributeArray.length; a++){
-				 actualResult.innerHTML += "<b>"+attr[a]+"</b>  :  "+attributeArray[a]+" <br />";
+				 mydiv.innerHTML += "<b>"+attr[a]+"</b>  :  "+attributeArray[a]+" <br />";
 			}
 		}
 		function setEnumScannerTimer(){
@@ -91,7 +90,7 @@
 			   	document.getElementById('myscanner').options[i + 1].value = scannerArray[i][0];
 			}
 		}
-		function doScan(data, source, type, time){
+		function doScan(data, source, type, time, length){
 		    document.getElementById('ScanData').value=data;
 		}
 		function selectScanner(){
@@ -1185,9 +1184,10 @@
     <div id="expected"></div><br>
     <input type="button" onclick="main.runThisTest()" value="Run Test"/>
     <br>
+    <div id="mydiv"></div><br><br>
     <span class="heading">Actual result:</span>
     <br>
-    <div id="actualResult"></div><br><br>
+    <div id="actualResult"></div><br>
     <input id="ScanData" style="width: 184px" type="text" value=""/><br/>
     <input type="button" class="pass" onclick="main.passThisTest()" value="Pass"/>
     <input type="button" class="fail" onclick="main.failThisTest()" value="Fail"/>

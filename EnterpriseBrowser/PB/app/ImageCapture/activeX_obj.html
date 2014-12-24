@@ -4,8 +4,9 @@
 	<br/><input type="button" value="Quit" onclick="quitPB();" />
 	<input type="button" value="Back"  onclick="location.href='./index.html'" />
 	<title>PB and RE2.2 Semi Auto Frame Work :</title>
-	<meta HTTP-Equiv="imager" Content="imagerEnumEvent:url('Javascript:Enumimagers(%s);')">
-	<META HTTP-Equiv="Imager" Content="Imagerevent:url('JavaScript:fnJSCallbackHandler('%1');')">
+	<meta HTTP-Equiv="imager" Content="imagerEnumEvent:url('javascript:Enumimagers(%s)');">
+	<!-- <meta http-equiv="Imager" content="imagerevent:url('javascript:alert('%s');')"> -->
+	<META HTTP-Equiv="Imager" Content="imagerevent:url('javascript:fnJSCallbackHandler('%s')');">
 	<!-- <meta HTTP-Equiv="imager" Content="imagerevent:url('Javascript:alert('%s');')"> -->
 	<!--<link rel="stylesheet" type="text/css" href="css/main.css">-->
 	<style type="text/css">
@@ -75,7 +76,7 @@
 			   	document.getElementById('imagerdropdown').options[i + 1].value = imagerArray[i][0];
 			   	imagerInfo = imagerInfo + imagerArray[i][0] + ' -- ' + imagerArray[i][1] + '<BR>';
 			}
-			//document.getElementById('actualResult').innerHTML = imagerInfo;
+			document.getElementById('enumResult').innerHTML = imagerInfo;
 		}
 		function selectImager(){
 		    var w = document.getElementById('imagerdropdown').selectedIndex;
@@ -103,7 +104,11 @@
 		    "testToPerform":function(){
 		    	enableImager();
 		    	setTimeout(function(){
-		    		genericObj.InvokeMETAFunction("imager", "Left:30;Top:170;Height:40;Width:60;lamp:on;aim:on;Protocol:ftp;username:ftpadmin;password:ftpadmin;DestinationURL:'ftp://10.233.85.82/myimage.bmp';Capture");
+		    		genericObj.InvokeMETAFunction("imager", "Left:30;Top:170;Height:40;Width:60;lamp:on;aim:on");
+		    		genericObj.InvokeMETAFunction("imager", "Protocol:ftp");
+		    		genericObj.InvokeMETAFunction("imager", "username:ftpadmin;password:ftpadmin");
+		    		genericObj.InvokeMETAFunction("imager", "Destination:url('ftp://10.233.85.82/myimage.bmp')");
+		    		genericObj.InvokeMETAFunction("imager", "Capture");
 		        	setTimeout(function(){
 		        		disableImager();
 		        	}, 5000);
@@ -118,7 +123,8 @@
 		    "Steps":["Test Imager functionlaity with content ='Enumerate'","Test imagerEnumevent functionality with content='ImagerArray'"],
 		    "ExpectedOutcome":["Enumerate should return a list of imagers present on the device via imagerEnumevent. imagerEnumevent tag will be actioned immediately."],
 		    "testToPerform":function(){
-		    	genericObj.InvokeMETAFunction("imager", "Enumerate");
+		    	imagerEnum();
+		    	//genericObj.InvokeMETAFunction("imager", "Enumerate");
 		    },
 		    "FinalResult":""
 		},{
@@ -356,7 +362,7 @@
 		    "testToPerform":function(){
 		    	enableImager();
 		    	setTimeout(function(){
-		    		genericObj.InvokeMETAFunction("imager", "Left:30;Top:170;Height:40;Width:60;Protocol:http;DestinationURL:'http://10.233.85.82/27server/myimage.bmp';Capture");
+		    		genericObj.InvokeMETAFunction("imager", "Left:30;Top:170;Height:40;Width:60;Protocol:http;Destination:url('http://10.233.85.82/27server/myimage.bmp');Capture");
 		        	setTimeout(function(){
 		        		disableImager();
 		        	}, 5000);
@@ -373,7 +379,7 @@
 		    "testToPerform":function(){
 		    	enableImager();
 		    	setTimeout(function(){
-		    		genericObj.InvokeMETAFunction("imager", "Left:30;Top:170;Height:40;Width:60;Protocol:ftp;username:ftpadmin;password:ftpadmin;DestinationURL:'ftp://10.233.85.82/27server/Files/myimage.bmp';Capture");
+		    		genericObj.InvokeMETAFunction("imager", "Left:30;Top:170;Height:40;Width:60;Protocol:ftp;username:ftpadmin;password:ftpadmin;Destination:url('ftp://10.233.85.82//myimage.bmp');Capture");
 		        	setTimeout(function(){
 		        		disableImager();
 		        	}, 5000);
@@ -390,7 +396,7 @@
 		    "testToPerform":function(){
 		    	enableImager();
 		    	setTimeout(function(){
-		    		genericObj.InvokeMETAFunction("imager", "Left:30;Top:170;Height:40;Width:60;lamp:on;aim:on;Protocol:ftp;username:username;password:password;DestinationURL:'ftp://10.233.85.82/27server/Files/myimage.bmp';Capture");
+		    		genericObj.InvokeMETAFunction("imager", "Left:30;Top:170;Height:40;Width:60;lamp:on;aim:on;Protocol:ftp;username:username;password:password;Destination:url('ftp://10.233.85.82/myimage.bmp');Capture");
 		        	setTimeout(function(){
 		        		disableImager();
 		        	}, 5000);
@@ -424,7 +430,7 @@
 		    "testToPerform":function(){
 		    	enableImager();
 		    	setTimeout(function(){
-		    		genericObj.InvokeMETAFunction("imager", "Left:30;Top:170;Height:40;Width:60;Protocol:http;DestinationURL:'http://10.233.85.82/NEON/ReceivedFiles/myimage.bmp';Capture");
+		    		genericObj.InvokeMETAFunction("imager", "Left:30;Top:170;Height:40;Width:60;Protocol:http;Destination:url('http://10.233.85.82/NEON/ReceivedFiles/myimage.bmp');Capture");
 		        	setTimeout(function(){
 		        		disableImager();
 		        	}, 5000);
@@ -441,8 +447,7 @@
 		    "testToPerform":function(){
 		    	enableImager();
 		    	setTimeout(function(){
-		    		genericObj.InvokeMETAFunction("imager", "Left:30;Top:170;Height:40;Width:60;Protocol:http;DestinationURL:'http://10.233.85.82/27server/myimage.bmp';Capture");
-		    		genericObj.InvokeMETAFunction("imager", "imagerevent:url('Javascript:alert('%s');')");
+		    		genericObj.InvokeMETAFunction("imager", "Left:30;Top:170;Height:40;Width:60;Protocol:http;Destination:url('http://10.233.85.82/27server/myimage.bmp');Capture");
 		        	setTimeout(function(){
 		        		disableImager();
 		        	}, 5000);
@@ -490,7 +495,7 @@
 		    "testToPerform":function(){
 		    	enableImager();
 		    	setTimeout(function(){
-		    		genericObj.InvokeMETAFunction("imager", "Left:30;Top:170;Height:40;Width:60;Protocol:http;DestinationURL:'http://10.230.0/myimage.bmp';Capture");
+		    		genericObj.InvokeMETAFunction("imager", "Left:30;Top:170;Height:40;Width:60;Protocol:http;Destination:url('http://10.230.0/myimage.bmp');Capture");
 		    		//genericObj.InvokeMETAFunction("imager", "imagerevent:url('Javascript:main.displayResult('%s');')");
 		        	setTimeout(function(){
 		        		disableImager();
@@ -522,6 +527,7 @@
 		    	enableImager();
 		    	setTimeout(function(){
 		    		genericObj.InvokeMETAFunction("imager", "Left:30;Top:170;Height:40;Width:60;lamp:on;aim:on;Capture");
+		    		//genericObj.InvokeMETAFunction("imager", "imagerevent:url('javascript:fnJSCallbackHandler('%1');')");
 				}, 3000);
 		    },
 		    "FinalResult":""
@@ -535,8 +541,7 @@
 		    "testToPerform":function(){
 		    	enableImager();
 		    	setTimeout(function(){
-		    		genericObj.InvokeMETAFunction("imager", "Left:30;Top:170;Height:40;Width:60;lamp:on;aim:on;Protocol:https;DestinationURL:'http://10.233.85.82/NEON/ReceivedFiles/myimage.bmp';Capture");
-		    		genericObj.InvokeMETAFunction("imager", "imagerevent:url('Javascript:alert('%s');')");
+		    		genericObj.InvokeMETAFunction("imager", "Left:30;Top:170;Height:40;Width:60;lamp:on;aim:on;Protocol:https;Destination:url('http://10.233.85.82/NEON/ReceivedFiles/myimage.bmp');Capture");
 				}, 3000);
 		    },
 		    "FinalResult":""
@@ -710,7 +715,8 @@
 	<script type="text/javascript">
 		main.init();
 		var fnJSCallbackHandler = function(data){
-			document.getElementById('actualResult').innerHTML = "imager event:" + data;
+			document.getElementById('actualResult').innerHTML= "response: " + data;
+			//document.getElementById('actualResult').innerHTML = "imager event:" + data;
 		}
 	</script>
 </head>
@@ -761,6 +767,9 @@
     <input type="button" onclick="main.runThisTest()" value="Run Test"/>
     <input type=button value="Disable" onclick="disableImager()" />
     <br><br>
+    <span class="heading">Enumerated result:</span>
+    <br>
+    <div id="enumResult"></div><br>
     <span class="heading">Actual result:</span>
     <br>
     <div id="actualResult"></div><br>
