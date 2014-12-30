@@ -429,7 +429,7 @@ describe('Printer Zebra', function() {
 
                 runs(function() {
                     // check if search was ended before printer discovery
-                    if (searchParamaters['timeout'] && !searchParamaters['deviceAddress'] && $('#dev_conn_type').val() != Rho.PrinterZebra.CONNECTION_TYPE_BLUETOOTH) {
+                    if (searchParamaters['timeout'] && !searchParamaters['deviceAddress'] && $('#dev_conn_type').val() == Rho.PrinterZebra.CONNECTION_TYPE_TCP) {
                         expect(searchObject.finished).toEqual(false);
                     }
                 });
@@ -905,7 +905,7 @@ describe('Printer Zebra', function() {
             generategetproperty(property, type);
         }
 
-        if (thisprinter.getProperty("connectionType") != "CONNECTION_TYPE_BLUETOOTH") {
+        if (thisprinter.getProperty("connectionType") == "CONNECTION_TYPE_TCP") {
             it('Should return devicePort value as an integer', function() {
                 //TODO: Add Display code
                 expect(thisprinter.devicePort).isNumberGreaterThenZero();

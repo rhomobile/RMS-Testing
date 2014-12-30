@@ -972,7 +972,7 @@ describe('Printer Zebra', function() {
         // Note that thisprinter is defined only during test run, not inside describe
         it('Should return devicePort value as an integer', function() {
             runs(function() {
-                if (thisprinter.getProperty("connectionType") != "CONNECTION_TYPE_BLUETOOTH") {
+                if (thisprinter.getProperty("connectionType") == "CONNECTION_TYPE_TCP") {
                     expect(thisprinter.devicePort).isNumberGreaterThenZero();
                 }
             });
@@ -980,7 +980,7 @@ describe('Printer Zebra', function() {
 
         it('Should return devicePort value as an integer using get properties', function() {
             runs(function() {
-                if (thisprinter.getProperty("connectionType") != "CONNECTION_TYPE_BLUETOOTH") {
+                if (thisprinter.getProperty("connectionType") == "CONNECTION_TYPE_TCP") {
                     var data = thisprinter.getProperties(['devicePort']);
                     var val = parseInt(data.devicePort, 10);
                     expect(val).isNumberGreaterThenZero();
