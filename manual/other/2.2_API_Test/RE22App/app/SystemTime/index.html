@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<br/><input type="button" value="Quit" onclick="quitPB();" />
+	<input type="button" value="Back"  onclick="location.href='../index.html'" />
+
+	<title>PB and RE2.2 Semi Auto Frame Work : SystemTime</title>
+
+	<!-- Loading css styles -->
+	<link rel="stylesheet" type="text/css" href="/public/css/main.css">
+
+	<!-- Loading js scripts -->
+	<script type="text/javascript" src="/public/re1/elements.js"></script>
+	<script type="text/javascript" src="/public/js/main.js"></script>
+	<script type="text/javascript" src="/public/js/helper.js"></script>
+
+	<!-- Module related js scripts -->
+	<script type="text/javascript" src="./systemTime.js"></script>
+
+	<!-- Initiate the main js script -->
+	<script type="text/javascript"> main.init(); </script>
+</head>
+<body class="body" onload="main.onPageLoad()">
+<h3 class='title'>Semi Auto test for PB and RE2.2 : SystemTime</h3>
+<div id="mainBlock" class="mainBlock">
+	<div>
+		<span class="heading">Select Regression Level :</span>
+	    <select name="regLevel" id="regLevel" onchange="main.onRegLevelChange()">
+	        <OPTION value="All" >All</OPTION>
+	        <OPTION value="R1" >R1</OPTION>
+	        <OPTION value="R2" >R2</OPTION>
+	        <OPTION value="R3" >R3</OPTION>
+	    </select> 
+	</div>
+    <div>
+    	<span class="heading">Select Test Case to Run :</span>
+    	<div id='vtsection'>
+    	</div>
+    </div>
+    <div class="runners">
+    	<input type=button value="Previous" onclick="main.prevTest();" />
+		<input type=button value="Next" onclick="main.nextTest()" />
+		<input type="button" onclick="main.runThisTest()" value="Run Test"/>
+    </div>
+	<br>
+	<div class="block">
+	<span class="heading">VTID:</span>
+    <div id="vtid"></div><br>
+    <span class="heading">Test description:</span>
+    <div id="desc"></div>
+    <div id="preCondition"></div>
+    <div id="steps"></div>
+    <span class="heading">Expected result:</span>
+    <div id="expected"></div><br>
+    <input type="button" onclick="main.runThisTest()" value="Run Test"/>
+    <br><br>
+    <span class="heading">Actual result:</span>
+    <br>
+    <div id="actualResult"></div><br>
+    <input type="button" class="pass" onclick="main.passThisTest()" value="Pass"/>
+    <input type="button" class="fail" onclick="main.failThisTest()" value="Fail"/>
+    </div>
+	<br>
+	<div class="runners">
+		<input type=button value="Previous" onclick="main.prevTest();" />
+		<input type=button value="Next" onclick="main.nextTest()" />
+	</div>
+	</div>
+</body>
+</html>
