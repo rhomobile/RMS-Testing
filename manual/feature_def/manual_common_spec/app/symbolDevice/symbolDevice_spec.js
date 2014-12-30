@@ -15,7 +15,46 @@ describe('Symbol Device test cases : ', function(){
 	                spec.waitForResponse();
 				});
 			});
-			it("Should not trigger calibrate callback when caliberation done via settings", function(){
+			it("Should caliberate successfully with optional callback and press 'esc' ", function(){
+				var spec = new ManualSpec(jasmine, window.document);
+		    	spec.addGoal("Should support for the method \"caliberate()\", to trigger the caliberate screen.");
+		        spec.addStep("Press 'RunTest' button.");
+		        spec.addStep("Press 'esc' button from the device keypad.");
+		        spec.addExpectation('Test passed, only if calibration screen is brought foreground and by pressing esc button device doesnot behave abnormally.');
+		        spec.displayScenario();
+		        spec.waitForButtonPressing("Run test");
+		        runs(function(){
+		        	var calibrateCB = function(data){
+		        		spec.addResult("Status : ", data.status);
+		        		spec.addResult("Message : ", data.message);
+		        	}
+		        	Rho.Device.calibrate(calibrateCB);
+		        });
+		        runs(function(){
+	                spec.waitForResponse();
+				});
+			});
+			it("Should caliberate successfully with optional callback and press 'Ok' ", function(){
+				var spec = new ManualSpec(jasmine, window.document);
+		    	spec.addGoal("Should support for the method \"caliberate()\", to trigger the caliberate screen.");
+		        spec.addStep("Press 'RunTest' button.");
+		        spec.addStep("Do caliberation on the device.");
+		        spec.addStep("Press 'Ok' button from the device keypad.");
+		        spec.addExpectation('Test passed, only if calibration screen is brought foreground and by pressing Ok button device doesnot behave abnormally.');
+		        spec.displayScenario();
+		        spec.waitForButtonPressing("Run test");
+		        runs(function(){
+		        	var calibrateCB = function(data){
+		        		spec.addResult("Status : ", data.status);
+		        		spec.addResult("Message : ", data.message);
+		        	}
+		        	Rho.Device.calibrate(calibrateCB);
+		        });
+		        runs(function(){
+	                spec.waitForResponse();
+				});
+			});
+			it("Should not trigger caliberate callback when caliberation done via settings", function(){
 				var spec = new ManualSpec(jasmine, window.document);
 		    	spec.addGoal("Should not trigger calibrate callback when caliberation done via settings");
 		        spec.addStep("Launch the test application press run test button and put it in the background.");
@@ -155,6 +194,23 @@ describe('Symbol Device test cases : ', function(){
 					Rho.Device.idle(idleCB);
 					setTimeout(function(){
 						Rho.Device.wake(wakeCB);
+					},10000);
+				});
+				runs(function(){
+					spec.waitForResponse();
+				});
+			});
+			it("Should change device mode from suspend to wake by executing wake method.", function(){
+				var spec = new ManualSpec(jasmine, window.document);
+				spec.addGoal("Should change device mode from suspend to wake by executing wake method.");
+				spec.addStep("Press Run Test buton.");
+				spec.addExpectation("Observe that device goes suspend mode and after 10 sec bring back to wake mode.");
+				spec.displayScenario();
+				spec.waitForButtonPressing("Run test");
+				runs(function(){
+					Rho.Device.suspend();
+					setTimeout(function(){
+						Rho.Device.wake();
 					},10000);
 				});
 				runs(function(){
