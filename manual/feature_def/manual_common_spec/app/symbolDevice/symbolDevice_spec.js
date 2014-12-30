@@ -367,7 +367,7 @@ describe('Symbol Device test cases : ', function(){
 				spec.displayScenario();
 				spec.waitForButtonPressing("Run test");
 				runs(function(){
-					Rho.Device.reboot({"bootType":"Warm"});
+					Rho.Device.reboot("Warm");
 				});
 			});
 			it("Should reboot the device by executing reboot method with bootType cold.", function(){
@@ -378,7 +378,7 @@ describe('Symbol Device test cases : ', function(){
 				spec.displayScenario();
 				spec.waitForButtonPressing("Run test");
 				runs(function(){
-					Rho.Device.reboot({"bootType":"Cold"});
+					Rho.Device.reboot("Cold");
 				});
 			});
 			it("Should reboot the device by executing reboot method with bootType coldcad.", function(){
@@ -389,7 +389,7 @@ describe('Symbol Device test cases : ', function(){
 				spec.displayScenario();
 				spec.waitForButtonPressing("Run test");
 				runs(function(){
-					Rho.Device.reboot({"bootType":"ColdCad"});
+					Rho.Device.reboot("ColdCad");
 				});
 			});
 			it("Should reboot the device by executing reboot method with param bootType warm with optional callback.", function(){
@@ -404,7 +404,7 @@ describe('Symbol Device test cases : ', function(){
 						console.log("rebootCB : Triggered");
 						console.log("data : " + JSON.stringify(data));
 					}
-					Rho.Device.reboot({"bootType":"Warm"});
+					Rho.Device.reboot("Warm");
 				});
 			});
 			it("Should not behave abnormally by trying to execute reboot method when the device is in suspend mode", function(){
@@ -417,7 +417,7 @@ describe('Symbol Device test cases : ', function(){
 				runs(function(){
 					Rho.Device.suspend();
 					setTimeout(function(){
-						Rho.Device.reboot({"bootType":"Warm"});
+						Rho.Device.reboot("Warm");
 					},10000);
 				});
 			});
@@ -431,7 +431,7 @@ describe('Symbol Device test cases : ', function(){
 				runs(function(){
 					Rho.Device.idle();
 					setTimeout(function(){
-						Rho.Device.reboot({"bootType":"Warm"});
+						Rho.Device.reboot("Warm");
 					},10000);
 				});
 			});
