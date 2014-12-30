@@ -2,7 +2,7 @@ describe('Symbol Device test cases : ', function(){
 	describe('Non Power test cases : ', function(){
 		if(isAnyWindowsFamilyPlatform()){
 			it("Should calibrate successfully with out optional callback", function(){
-				var spec = new ManualSpec(jasmine, window.document);
+				var spec = new ManualSpec(jasmine, window.document); 
 		    	spec.addGoal("Should support for the method \"calibrate()\", to trigger the calibrate screen.");
 		        spec.addStep("Press 'RunTest' button");
 		        spec.addExpectation('Test passed, only if calibration screen is brought foreground by pressing Run Test button.');
@@ -310,6 +310,21 @@ describe('Symbol Device test cases : ', function(){
 				spec.waitForButtonPressing("Run test");
 				runs(function(){
 					Rho.Device.suspend();
+					setTimeout(function(){
+						Rho.Device.wake();
+					},10000);
+				});
+			});
+		}
+		if(isAndroidPlatform()){
+			it("Android : Should wake the device automatically from idle mode.", function(){
+				var spec = new ManualSpec(jasmine, window.document);
+				spec.addGoal("Should wake the device automatically from idle mode.");
+				spec.addStep("Press Run Test button");
+				spec.addExpectation("Observe that device wakes successfully.");
+				spec.displayScenario();
+				spec.waitForButtonPressing("Run test");
+				runs(function(){
 					setTimeout(function(){
 						Rho.Device.wake();
 					},10000);
