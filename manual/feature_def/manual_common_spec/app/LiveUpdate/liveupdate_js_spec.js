@@ -23,7 +23,7 @@ describe('Developer Experience - Build live update Functionality Test', function
         spec.addPrecondition("Launch the app1 in some subscribers and app2 in other subscribers.");
         spec.addStep("From app2 project root folder run command rake dev:discovery.");
         spec.addExpectation("Web server should be started if not running.");
-        spec.addExpectation("Devices launched with App2 should be registered in dev_config.yml.");
+        spec.addExpectation("Devices launched with App1 and App2 should be registered in dev_config.yml.");
         spec.displayScenario();
         spec.waitForButtonPressing("Run test");
         spec.waitForResponse();
@@ -409,9 +409,9 @@ describe('Developer Experience - Build live update Functionality Test', function
         spec.waitForResponse();
     });
 
-    it("Using External file watcher grunt to detect changes in HTML file", function() {
+    it("Using External file watcher grunt to detect changes in sass file and update in css file", function() {
         var spec = new ManualSpec(jasmine, window.document);
-        spec.addGoal("Using External file watcher grunt to detect changes in HTML file");
+        spec.addGoal("Using External file watcher grunt to detect changes in sass file and update in css file");
         spec.addPrecondition("Connect the devices to server network.");
         spec.addPrecondition("In local computer build the application with \'development\' extension for all platforms.");
         spec.addPrecondition("Install the  application on all subscribers (WM, CE, Android, IOS, Android Simulator and IOS simulator)");
@@ -419,12 +419,13 @@ describe('Developer Experience - Build live update Functionality Test', function
         spec.addPrecondition("Discover and register subscribers in dev-config.yml.");
         spec.addPrecondition("Add refresh: true to dev-config.yml");
         spec.addPrecondition("Run external file watcher grunt.");
-        spec.addStep("Modify HTML file in app and pubic folder with code <p id=\'pid\' onClick=\'alertTest()\'>External file watcher grunt </p>.");
-        spec.addStep("External watcher should create list of changed files in upgrade_package_add_files.txt");
-        spec.addStep("By using modified files list call command rake dev:update:build_and_notify.");
+        spec.addStep("Add a sass file.");
+        spec.addStep("Add styling to sass file body font: 100% $font-stack and update css file using grunt.");
+        spec.addStep("List the modified file.");
+        spec.addStep("Call rake dev:update:build_and_notify");
         spec.addExpectation("Web server should be started if not running");
-        spec.addExpectation("Build_and_notify command should build partial bundle from upgrade_package_add_files.txt files list.");
-        spec.addExpectation("Should auto refresh and modified HTML page should be displayed.");
+        spec.addExpectation("External watcher should detect source code changes and should create list of changed files list in upgrade_package_add_files.txt");
+        spec.addExpectation("Command should detect changed CSS files, builds partial bundle update and sends notification to subscribers once.");
         spec.displayScenario();
         spec.waitForButtonPressing("Run test");
         spec.waitForResponse();
@@ -911,7 +912,7 @@ describe('Developer Experience - Build live update Functionality Test', function
         spec.addPrecondition("Connect devices to server network.");
         spec.addPrecondition("In local computer build the application with \'development\' extension for all platforms.");
         spec.addPrecondition("Install the  application on all subscribers (WM, CE, Android, IOS, Android Simulator, and IOS simulator)");
-        spec.addPrecondition("Launch the aplication all subscribers.");
+        spec.addPrecondition("Launch the application all subscribers.");
         spec.addPrecondition("Clear the token by rake token:clear");
         spec.addStep("Run live update commands like rake dev:discovery, rake dev:update:partial, rake dev:update:full, rake dev:update:auto, rake dev:update:build_and_notify");
         spec.addStep("Check whether asking for rhohub login");
@@ -920,4 +921,82 @@ describe('Developer Experience - Build live update Functionality Test', function
         spec.waitForButtonPressing("Run test");
         spec.waitForResponse();
     });
+
+    it("Should apply changed file in app2, after discovering from app1", function() {
+        var spec = new ManualSpec(jasmine, window.document);
+        spec.addGoal("Should apply changed file in app2, after discovering from app1");
+        spec.addPrecondition("Connect the devices to server network.");
+        spec.addPrecondition("In local computer build app1 and app2 with \'development\' extension for all platforms.");
+        spec.addPrecondition("Install app1 and app2 application on all subscribers (WM, CE, Android, IOS, Android Simulator and IOS simulator).");
+        spec.addPrecondition("Launch the app1 in some subscribers and app2 in other subscribers.");
+        spec.addStep("From app1 project root folder run command rake dev:discovery.");
+        spec.addStep("Goto app2 project root folder.");
+        spec.addStep("Modify HTML file in app2 with code <p>Modify HTML file in app2</p>.");
+        spec.addStep("Call rake dev:update:partial from app2.");
+        spec.addStep("Refresh page in app2.");
+        spec.addExpectation("Web server should be started if not running.");
+        spec.addExpectation("Devices launched with App1 and App2 should be registered in dev_config.yml.");
+        spec.addExpectation("Should see modified HTML file in devices which is launched with app2.");
+        spec.displayScenario();
+        spec.waitForButtonPressing("Run test");
+        spec.waitForResponse();
+    });
+
+    it("Should apply changed file in any application after discovery from app1 and app2", function() {
+        var spec = new ManualSpec(jasmine, window.document);
+        spec.addGoal("Should apply changed file in any application after discovery from app1 and app2");
+        spec.addPrecondition("Connect the devices to server network.");
+        spec.addPrecondition("In local computer build app1 and app2 with \'development\' extension for all platforms.");
+        spec.addPrecondition("Install app1 and app2 application on all subscribers (WM, CE, Android, IOS, Android Simulator and IOS simulator).");
+        spec.addPrecondition("Launch the app1 in some subscribers and app2 in other subscribers.");
+        spec.addStep("From app1 project root folder run command rake dev:discovery.");
+        spec.addStep("Go to app2 project root folder.");
+        spec.addStep("From app2 project root folder run command rake dev:discovery.");
+        spec.addStep("Modify HTML file in app1 with code <p>Modify HTML file in app1</p>.");
+        spec.addStep("Call rake dev:update:partial from app1.");
+        spec.addStep("Refresh page in app1.");
+        spec.addExpectation("Web server should be started if not running.");
+        spec.addExpectation("Devices launched with App1 and App2 should be registered in dev_config.yml in app1 root folder.");
+        spec.addExpectation("Devices launched with App1 and App2 should be registered in dev_config.yml in app2 root folder.");
+        spec.addExpectation("Should see modified HTML file in devices which is launched with app1.");
+        spec.displayScenario();
+        spec.waitForButtonPressing("Run test");
+        spec.waitForResponse();
+    });
+
+    it("Add non existing file names to development folder", function() {
+        var spec = new ManualSpec(jasmine, window.document);
+        spec.addGoal("Add non existing file names to development folder");
+        spec.addPrecondition("Connect the devices to server network.");
+        spec.addPrecondition("In local computer build the application with \'development\' extension for all platforms.");
+        spec.addPrecondition("Install the  application on all subscribers (WM, CE, Android, IOS, Android Simulator and IOS simulator)");
+        spec.addPrecondition("Launch the application in all subscribers.");
+        spec.addPrecondition("Discover and register subscribers in dev-config.yml.");
+        spec.addStep("Add invalid file name to upgrade_package_add_files.txt, upgrade_package_remove_files.txt in development folder");
+        spec.addStep("Call rake dev:update:build_and_notify.");
+        spec.addExpectation("Web server should be started if not running");
+        spec.addExpectation("Build_and_notify command should throw proper error message. There should not be any abnormal behavior.");
+        spec.displayScenario();
+        spec.waitForButtonPressing("Run test");
+        spec.waitForResponse();
+    });
+
+    it("Add not modified or not deleted file names to development folder", function() {
+        var spec = new ManualSpec(jasmine, window.document);
+        spec.addGoal("Add not modified or not deleted file names to development folder");
+        spec.addPrecondition("Connect the devices to server network.");
+        spec.addPrecondition("In local computer build the application with \'development\' extension for all platforms.");
+        spec.addPrecondition("Install the  application on all subscribers (WM, CE, Android, IOS, Android Simulator and IOS simulator)");
+        spec.addPrecondition("Launch the application in all subscribers.");
+        spec.addPrecondition("Discover and register subscribers in dev-config.yml.");
+        spec.addStep("Add not modified or not deleted file names from app and public folder to upgrade_package_add_files.txt, upgrade_package_remove_files.txt in development folder");
+        spec.addStep("Call rake dev:update:build_and_notify.");
+        spec.addExpectation("Web server should be started if not running");
+        spec.addExpectation("Build_and_notify command should build partial bundle from upgrade_package_add_files.txt and upgrade_package_remove_files.txt files list.");
+        spec.addExpectation("Files listed in upgrade_package_remove_files.txt should be deleted in device.");
+        spec.displayScenario();
+        spec.waitForButtonPressing("Run test");
+        spec.waitForResponse();
+    });
+
 });
