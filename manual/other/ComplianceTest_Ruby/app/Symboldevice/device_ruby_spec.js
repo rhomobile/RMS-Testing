@@ -9,7 +9,7 @@ describe('Symbol Device test cases : ', function(){
 		        spec.displayScenario();
 		        spec.waitForButtonPressing("Run test");
 		        runs(function(){
-		        	Ruby.call('symboldevice','device_calibrate');
+		        	Ruby.call('Symboldevice','device_calibrate');
 		        	spec.waitForResponse();
 		        });
 			});
@@ -22,7 +22,7 @@ describe('Symbol Device test cases : ', function(){
 		        spec.displayScenario();
 		        spec.waitForButtonPressing("Run test");
 		        runs(function(){
-		        	Ruby.call('symboldevice','device_idle');
+		        	Ruby.call('Symboldevice','device_idle');
 	                spec.waitForResponse();
 				});
 			});
@@ -35,7 +35,7 @@ describe('Symbol Device test cases : ', function(){
 		    	spec.displayScenario();
 		    	spec.waitForButtonPressing("Run test");
 		    	runs(function(){
-		    		Ruby.call('symboldevice','device_idle?cb=yes');
+		    		Ruby.call('Symboldevice','device_idle?cb=yes');
 		    		spec.waitForResponse();
 		    	});
 			});
@@ -48,10 +48,10 @@ describe('Symbol Device test cases : ', function(){
 				spec.displayScenario();
 				spec.waitForButtonPressing("Run test");
 				runs(function(){
-					Ruby.call('symboldevice','device_idle?cb=yes');
+					Ruby.call('Symboldevice','device_idle?cb=yes');
 
 					setTimeout(function(){
-						Ruby.call('symboldevice','device_wake?cb=yes');
+						Ruby.call('Symboldevice','device_wake?cb=yes');
 					},10000);
 				});
 				runs(function(){
@@ -67,7 +67,7 @@ describe('Symbol Device test cases : ', function(){
 				spec.displayScenario();
 				spec.waitForButtonPressing("Run test");
 				runs(function(){
-					Ruby.call('symboldevice','device_suspend?cb=yes');
+					Ruby.call('Symboldevice','device_suspend?cb=yes');
 					spec.waitForResponse();
 				});
 			});
@@ -85,7 +85,7 @@ describe('Symbol Device test cases : ', function(){
 				spec.displayScenario();
 				spec.waitForButtonPressing("Run test");
 				runs(function(){
-					Ruby.call('symboldevice','device_poweroff');
+					Ruby.call('Symboldevice','device_poweroff');
 					spec.waitForResponse();
 				});
 			});
@@ -97,10 +97,8 @@ describe('Symbol Device test cases : ', function(){
 				spec.displayScenario();
 				spec.waitForButtonPressing("Run test");
 				runs(function(){
-					var powerOffCB = function(){
-						console.log("PowerOff : Triggered");
-					};
-					Rho.Device.powerOff();
+					Ruby.call('Symboldevice','device_poweroff?cb=yes');
+					spec.waitForResponse();
 				});
 			});
 			it("Should reboot the device by executing reboot method with bootType warm.", function(){
@@ -111,7 +109,7 @@ describe('Symbol Device test cases : ', function(){
 				spec.displayScenario();
 				spec.waitForButtonPressing("Run test");
 				runs(function(){
-					Ruby.call('symboldevice','device_reboot?type=Warm');
+					Ruby.call('Symboldevice','device_reboot?type=Warm');
 					spec.waitForResponse();
 				});
 			});
@@ -123,7 +121,7 @@ describe('Symbol Device test cases : ', function(){
 				spec.displayScenario();
 				spec.waitForButtonPressing("Run test");
 				runs(function(){
-					Ruby.call('symboldevice','device_reboot?type=Cold');
+					Ruby.call('Symboldevice','device_reboot?type=Cold');
 					spec.waitForResponse();
 				});
 			});
@@ -135,7 +133,7 @@ describe('Symbol Device test cases : ', function(){
 				spec.displayScenario();
 				spec.waitForButtonPressing("Run test");
 				runs(function(){
-					Ruby.call('symboldevice','device_reboot?type=ColdCad');
+					Ruby.call('Symboldevice','device_reboot?type=ColdCad');
 					spec.waitForResponse();
 				});
 			});

@@ -31,6 +31,13 @@ def suspend_callback
 	Rho::WebView.executeJavascript("spec.displayResults();")
 end
 
+def poweroff_callback
+	data = "PowerOffCb Status: " + @params['status'].to_s
+	data += "\n PowerOffCb Message: " + @params['message'].to_s
+	
+	Rho::WebView.executeJavascript("spec.addResult('#{data}')")
+	Rho::WebView.executeJavascript("spec.displayResults();")
+end
 
 ## symbolDevice Methods
 def device_calibrate
