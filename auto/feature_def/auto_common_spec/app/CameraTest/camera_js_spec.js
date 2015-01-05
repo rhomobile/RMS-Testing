@@ -355,23 +355,24 @@ describe("Camera JS API Test", function() {
 								expect(capturedata.status).toEqual('ok');
 								expect(capturedata.message).toEqual('');
 
-								if data[i]['desiredHeight']
+								if(data[i]['desiredHeight'])
 									expect(capturedata.imageHeight).toEqual(data[i]['desiredHeight']);
 								else
 									expect(capturedata.imageHeight).toBeGreaterThan(0);
 
-								if data[i]['desiredWidth']
+								if(data[i]['desiredWidth'])
 									expect(capturedata.imageWidth).toEqual(data[i]['desiredWidth']);
 								else
 									expect(capturedata.imageWidth).toBeGreaterThan(0);
 
-								if (data[i]['outputFormat'] && data[i]['outputFormat'] =! 'dataUri'){
-									if (data[i]['compressionFormat'] == 'png' && !(isWindowsMobilePlatform())){
-										expect(capturedata.imageUri).toContain('.png');
-									else
+								if ((data[i]['outputFormat']) && (data[i]['outputFormat'] =! 'dataUri')){
+									if ((data[i]['compressionFormat']) == 'png' && !(isWindowsMobilePlatform())){
+										expect(capturedata.imageUri).toContain('.png');}
+									else{
 										expect(capturedata.imageUri).toContain('.jpg');
 									};
-								else
+									}
+								else{
 									expect(capturedata.imageUri).not.toEqual('');
 								};
 							});		
@@ -467,8 +468,8 @@ describe("Camera JS API Test", function() {
 						if (Rho.RhoFile.exists(tempFolder) == false)
 							Rho.RhoFile.makeDir(tempFolder);
 						var file = Rho.Application.join(tempFolder, fileList[i]);
-						if Rho.RhoFile.exists(file)
-							Rho.RhoFile.deleteFile(file);
+						if(Rho.RhoFile.exists(file)){
+							Rho.RhoFile.deleteFile(file)};
 
 						it("Call capture method with fileName : " + file , function() {
  
