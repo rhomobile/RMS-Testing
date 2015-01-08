@@ -1,0 +1,78 @@
+<html>
+<head>
+	<title>Signal Stress Test</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+	<META HTTP-Equiv="MinimizeButton" content="visibility:Visible;top:30 " >
+	<META HTTP-Equiv="quitbutton" Content="visibility:visible">
+	<META HTTP-Equiv="ReloadButton" Content="visibility:visible">
+	
+    <script type="text/javascript" charset="utf-8" src="../../public/jquery/jquery-1.6.4.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../../public/jquery/jquery.json-2.3.min.js"></script>
+
+    <link type="image/png" rel="shortcut icon" href="../../public/jasmine/jasmine_favicon.png">
+    <link type="text/css" rel="stylesheet" href="../../public/jasmine/jasmine.css">
+    <script type="text/javascript" src="../../public/jasmine/jasmine.js"></script>
+    <script type="text/javascript" src="../../public/jasmine/jasmine-html.js"></script>
+    <script type="text/javascript" src="../../public/jasmine/jasmine.junit_reporter.js"></script>
+    <script type="text/javascript" src="../helpers/rhologReporter.js"></script>
+   	<script type="text/javascript" src="../../public/api/rhoapi-modules.js"></script>
+
+	<!-- include Helper files here... -->
+    <script type="text/javascript" src="../helpers/specHelpers.js"></script>
+	<script type = "text/javascript">
+	 var statusCallback = function (args){
+	   document.getElementById("tid").innerHTML = count;
+	   count++;
+      var result = '';
+      result += '<br/>signalStrength  :- ' + JSON.stringify(args["signalStrength"]);
+      result += '<br/>essid  :- ' + JSON.stringify(args["essid"]);
+      result += '<br/>macAddress  :- ' + JSON.stringify(args["macAddress"]);
+      result += '<br/>adapterName  :- ' + JSON.stringify(args["adapterName"]);
+      result += '<br/>dhcpServer  :- ' + JSON.stringify(args["dhcpServer"]);
+      result += '<br/>dhcpStatic  :- ' + JSON.stringify(args["dhcpStatic"]);
+      result += '<br/>gateway  :- ' + JSON.stringify(args["gateway"]);
+      result += '<br/>ipAddress  :- ' + JSON.stringify(args["ipAddress"]);
+      result += '<br/>rssi   :- ' + JSON.stringify(args["rssi"]);
+      result += '<br/>subnetMask   :- ' + JSON.stringify(args["subnetMask"]);
+      result += '<br/>wins   :- ' + JSON.stringify(args["wins"]);
+      
+      document.getElementById("pid").innerHTML = result;
+    }
+    var count = 0;
+	  function wlanmethod(){
+	  	        
+
+	  	        Rho.SignalIndicators.showIcon({left: 20,top: 40,layout:'left',color:'#FF0000'});
+	  	        Rho.SignalIndicators.refreshInterval = 60000;
+	  	        Rho.SignalIndicators.wlanStatus(statusCallback);
+	  	        
+	  	        
+	   
+	   }
+
+
+	 
+     
+
+
+	</script>
+
+</head>
+<body >
+Signal stress Tests
+<br />
+<br />
+
+<button onclick = wlanmethod();> Call wlanStatus method with callback </button>
+
+<br>
+<br>
+<div id="tid"></div>
+<div id="pid"></div>
+
+<div><a href="../stress_index.html">Back</a></div>
+
+
+
+</body>
+</html>

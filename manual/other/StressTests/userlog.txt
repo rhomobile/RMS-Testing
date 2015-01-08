@@ -1,0 +1,2 @@
+W 12/12/2014 12:03:03:687 00000ba8            VT290-400| TEST MESSAGE!
+E 12/12/2014 12:03:03:717 000016cc RhodesAppBase.cpp: 239| send_log failed : network error - -1; Body - 

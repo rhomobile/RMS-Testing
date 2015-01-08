@@ -1,0 +1,72 @@
+<!DOCTYPE html><html>
+<head>
+    <title>RhoElements Common API Tests</title>
+    <script charset='utf-8' src='../public/js/uriHelper.js' type='text/javascript'>
+	//Kindly don't change to one line.
+	</script>
+	<script charset='utf-8' src='../public/api/rhoapi-modules.js' type='text/javascript'>
+	//Kindly don't change to one line.
+	</script>
+    
+	<script type="text/javascript" id="runnerList">
+		var listOfRunners = (Rho.System.platform == Rho.System.PLATFORM_WP8) ? [
+			"LogTest/specRunner.html",
+			"DatabaseTest/specRunner.html",
+			"FileTest/specRunner.html",
+			"GeneratorTest/specRunner.html",
+			"NetworkTest/specRunner.html",
+			"OrmTest/specRunner.html",
+			"Final/specRunner.html"
+		] : ( (Rho.System.platform == Rho.System.PLATFORM_WINDOWS_DESKTOP) ? [
+			"LogTest/specRunner.html",
+			"DatabaseTest/specRunner.html",
+			"FileTest/specRunner.html",
+			"GeneratorTest/specRunner.html",
+			"NetworkTest/specRunner.html",
+			"OrmTest/specRunner.html",
+			"SystemRE1Test/specRunner.html",
+			"WebsocketTest/specRunner.html",
+			"Final/specRunner.html"
+		] : [
+			"BarcodeTest/specRunner.html",
+			"LogTest/specRunner.html",
+			"CardReaderTest/specRunner.html",
+			"DatabaseTest/specRunner.html",
+			"FileTest/specRunner.html",
+			"CallbackTest/specRunner.html",
+			"GeneratorTest/specRunner.html",
+			"KeyCaptureTest/specRunner.html",
+			"NetworkTest/specRunner.html",
+			"OrmTest/specRunner.html",
+			"ScreenOrientationTest/specRunner.html",
+			"SystemRE1Test/specRunner.html",
+			"SensorsTest/specRunner.html",
+			"WebsocketTest/specRunner.html",
+			"EventSourceTest/specRunner.html",
+			"Final/specRunner.html"
+
+			//"SignatureTest/specRunner.html", //Not released yet
+			//"ApplicationTest/specRunner.html", //Not ready, use manual
+			//"IndicatorsTest/specRunner.html", //Broken on WMCE
+			//"WebViewTest/specRunner.html" //Not Ready, use manual
+		]);
+		
+	</script>
+    <script type='text/javascript'>		
+		function loadEvent()
+		{
+		    Rho.Application.nativeMenu = [ {'label':'Exit', 'action': 'exit'} ];
+			setTimeout(function()
+			{
+               var url =  listOfRunners[0] + '?' + encodeURIComponent(JSON.stringify(listOfRunners.slice(1, listOfRunners.length)));
+				window.location.href = url;
+			},2000);
+		}
+		window.addEventListener('load', loadEvent);
+    </script>
+</head>
+<body>
+	<h1>RhoElements Common API Tests</h1>
+	<h2>About to load first test page...</h2>
+</body>
+</html>
