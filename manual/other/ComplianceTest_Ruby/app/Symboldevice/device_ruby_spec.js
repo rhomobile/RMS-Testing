@@ -71,8 +71,26 @@ describe('Symbol Device test cases : ', function(){
 					spec.waitForResponse();
 				});
 			});
-			
 		}
+		if(isAndroidPlatform()){
+				it("Should change device mode from idle to wake by executing wake method.", function(){
+					var spec = new ManualSpec(jasmine, window.document);
+					spec.addGoal("Should change device mode from idle to wake by executing wake method.");
+					spec.addStep("Press Run Test buton.");
+					spec.addStep("Put the android phone to idle mode, by pressing power button.");
+					spec.addExpectation("Observe that device screen backlight comes on and device gets unlocked by sliding the unlock button.");
+					spec.displayScenario();
+					spec.waitForButtonPressing("Run test");
+					runs(function(){
+						setTimeout(function(){
+							Ruby.call('Symboldevice','device_wake?cb=yes');
+						},10000);
+					});
+					runs(function(){
+						spec.waitForResponse();
+					});
+				});
+			}
 	});
 
 	describe("Power related test cases : ", function(){
