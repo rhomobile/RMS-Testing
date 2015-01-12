@@ -23,7 +23,7 @@ describe('Printing Generic', function() {
     var printers_array = [];
     var printers_errors = [];
     var discovery_finished = false;
-    var connect_type = Rho.Printer.CONNECTION_TYPE_TCP;
+    var connect_type = Rho.Printer.CONNECTION_TYPE_ANY;
     var stopsearch = '';
     var deviceaddressFlag = false;
     var CommandZPL = '^XA^FO50,50^ADN,36,20^FDGenericPrinting^FS^XZ';
@@ -157,7 +157,7 @@ describe('Printing Generic', function() {
                 if (valueSelected == '') {
                     $('#dev_addr').val('127.0.0.1');
                     $('#dev_port').val('6101');
-                    $('#dev_conn_type').val(Rho.Printer.CONNECTION_TYPE_TCP);
+                    $('#dev_conn_type').val(Rho.Printer.CONNECTION_TYPE_ANY);
                 } else {
                     var res = valueSelected.split('|');
                     $('#dev_conn_type').val(res[0]);
@@ -781,7 +781,7 @@ describe('Printing Generic', function() {
 
             it('Should return devicePort value as an integer', function () {
 				runs(function() {
-					if(thisprinter.getProperty("connectionType") != "CONNECTION_TYPE_BLUETOOTH") {
+					if(thisprinter.getProperty("connectionType") == "CONNECTION_TYPE_TCP") {
 						expect(thisprinter.devicePort).isNumberGreaterThenZero();
 					}
 				});
@@ -789,7 +789,7 @@ describe('Printing Generic', function() {
 
             it('Should return devicePort value as an integer using get properties', function () {
 				runs(function() {
-					if(thisprinter.getProperty("connectionType") != "CONNECTION_TYPE_BLUETOOTH") {
+					if(thisprinter.getProperty("connectionType") == "CONNECTION_TYPE_TCP") {
 						var data = thisprinter.getProperties(['devicePort']);    
 						expect(data).isNumberGreaterThenZero();
 					}

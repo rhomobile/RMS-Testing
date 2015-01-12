@@ -275,7 +275,7 @@ describe('Printing Generic', function() {
 
                 runs(function() {
                     // check if search was ended before printer discovery
-                    if (searchParamaters['timeout'] && !searchParamaters['deviceAddress'] && $('#dev_conn_type').val()!=Rho.Printer.CONNECTION_TYPE_BLUETOOTH) {
+                    if (searchParamaters['timeout'] && !searchParamaters['deviceAddress'] && $('#dev_conn_type').val()==Rho.Printer.CONNECTION_TYPE_TCP) {
                         expect(discovery_finished).toEqual(false);
                     }
                 });
@@ -782,7 +782,7 @@ describe('Printing Generic', function() {
 
             it('Should return devicePort value as an integer', function () {
 				runs(function() {
-					if(thisprinter.getProperty("connectionType") != "CONNECTION_TYPE_BLUETOOTH") {
+					if(thisprinter.getProperty("connectionType") == "CONNECTION_TYPE_TCP") {
 						expect(thisprinter.devicePort).isNumberGreaterThenZero();
 					}
 				});
@@ -790,7 +790,7 @@ describe('Printing Generic', function() {
 
             it('Should return devicePort value as an integer using get properties', function () {
 				runs(function() {
-					if(thisprinter.getProperty("connectionType") != "CONNECTION_TYPE_BLUETOOTH") {
+					if(thisprinter.getProperty("connectionType") == "CONNECTION_TYPE_TCP") {
 						var data = thisprinter.getProperties(['devicePort']);
 						var val = parseInt(data.devicePort, 10);
 						expect(val).isNumberGreaterThenZero();
