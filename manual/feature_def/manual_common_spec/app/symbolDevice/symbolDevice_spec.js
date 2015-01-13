@@ -317,17 +317,62 @@ describe('Symbol Device test cases : ', function(){
 			});
 		}
 		if(isAndroidPlatform()){
-			it("Android : Should wake the device automatically from idle mode.", function(){
+			it("Should wake the device automatically from idle mode.", function(){
 				var spec = new ManualSpec(jasmine, window.document);
 				spec.addGoal("Should wake the device automatically from idle mode.");
 				spec.addStep("Press Run Test button");
-				spec.addExpectation("Observe that device wakes successfully.");
+				spec.addStep("Put the phone to idle mode manually.");
+				spec.addExpectation("Observe that device wakes successfully automatically after 10sec.");
 				spec.displayScenario();
 				spec.waitForButtonPressing("Run test");
 				runs(function(){
 					setTimeout(function(){
 						Rho.Device.wake();
 					},10000);
+				});
+				runs(function(){
+					spec.waitForResponse();
+				});
+			});
+			it("Should not behave abnormally when wake method executed multiple times.", function(){
+				var spec = new ManualSpec(jasmine, window.document);
+				spec.addGoal("Should wake the device automatically from idle mode.");
+				spec.addStep("Press Run Test button");
+				spec.addStep("Put the phone to idle mode manually.");
+				spec.addExpectation("Observe that device wakes successfully automatically after 10sec.");
+				spec.displayScenario();
+				spec.waitForButtonPressing("Run test");
+				runs(function(){
+					setTimeout(function(){
+						Rho.Device.wake();
+						Rho.Device.wake();
+						Rho.Device.wake();
+					},10000);
+				});
+				runs(function(){
+					spec.waitForResponse();
+				});
+			});
+			it("Should wake the device from idle mode successfully when called with callback.", function(){
+				var spec = new ManualSpec(jasmine, window.document);
+				spec.addGoal("Should wake the device automatically from idle mode.");
+				spec.addStep("Press Run Test button");
+				spec.addStep("Put the phone to idle mode manually.");
+				spec.addExpectation("Observe that device wakes successfully automatically after 10sec.");
+				spec.displayScenario();
+				spec.waitForButtonPressing("Run test");
+				runs(function(){
+					var wakeCB = function(data){
+						console.log("wakeCB : Triggered");
+						spec.addResult('wakeCB status : ', data.status);
+						spec.addResult('wakeCB message : ', data.message);
+					};
+					setTimeout((function(wakeCB){
+						Rho.Device.wake(wakeCB);
+					})(wakeCB),10000);
+				});
+				runs(function(){
+					spec.waitForResponse();
 				});
 			});
 		}

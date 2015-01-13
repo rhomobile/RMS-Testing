@@ -48,10 +48,10 @@ android:
   capabilities:
   - native_browser
 wm:
-  webkit_outprocess: 1
+  #webkit_outprocess: 1
   #use_shared_runtime: yes
   #sdk: MC3000c50b (ARMV4I)
-  sdk: "Windows Mobile 6.5.3 Professional DTK (ARMV4I)"
+  #sdk: "Windows Mobile 6.5.3 Professional DTK (ARMV4I)"
   extensions: ["barcode", "screenorientation", "instrumentation", "cardreader", "indicators", "sensor", "audiocapture", "smartCradle"]
 #capabilities:
 #- non_motorola_device
