@@ -1,7 +1,6 @@
 # startup page for your application
 #start_path = 'file://%APP_PATH%/app/specRunner.html'
-#start_path = '/app/specRunner.html'
-start_path = 'http://www.google.co.uk'
+start_path = '/app/specRunner.html'
 
 # path to the options page (in this case handled by javascript)
 options_path = '/app/Settings'
