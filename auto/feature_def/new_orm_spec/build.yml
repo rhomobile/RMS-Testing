@@ -9,7 +9,7 @@ sdkversion: 4.1
 
 wmsdk: "Windows Mobile 6 Professional SDK (ARMV4I)"
 iphone:
-  sdk: iphonesimulator7.1
+  sdk: iphonesimulator8.1
   entitlements: ""
   codesignidentity: ""
   configuration: Release
