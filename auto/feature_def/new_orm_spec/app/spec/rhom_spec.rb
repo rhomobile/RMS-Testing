@@ -173,7 +173,7 @@ describe "Rhom" do
         row["update_type"].should == "update"
       end
     end
-  end if @use_new_orm  # TODO: BAB: is it broken in OdlORM
+  end if @use_new_orm  # TODO: BAB: it's broken in OdlORM
 
   it "should full update for property bag if model enable :full_update" do
     attrs = { :brand => "Samsung", :name => 'Galaxy S4', :price => "$99.99", :quantity => "20" }
@@ -204,6 +204,6 @@ describe "Rhom" do
         row["update_type"].should == "update"
       end
     end
-  end if @use_new_orm  # TODO: BAB: is it broken in OdlORM
+  end if @use_new_orm  # TODO: BAB: it's broken in OdlORM
 
 end

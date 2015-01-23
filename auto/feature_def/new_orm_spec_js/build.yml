@@ -9,12 +9,13 @@ sdkversion: 4.1
 
 iphone:
   configuration: Release
-  sdk: iphonesimulator7.1
+  sdk: iphonesimulator8.1
   provisionprofile:
   codesignidentity:
   entitlements:
 android:
-  version: 4.4.2
+  version: 2.3.3
+  # version: 4.4.2
 
 wp:
   productid: 'b5499381-42a8-0130-78de-3caec51bd50e'
