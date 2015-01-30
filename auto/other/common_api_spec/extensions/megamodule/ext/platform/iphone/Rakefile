@@ -58,11 +58,6 @@ namespace "build" do
 
     args = ['build', '-target', 'MegaModule', '-configuration', $configuration, '-sdk', $sdk, '-project', 'Megamodule.xcodeproj']
 
-    if simulator
-        args << '-arch'
-        args << 'i386'
-    end
-
     require   $rootdir + '/lib/build/jake.rb'
 
     puts Jake.run($xcodebuild,args)
