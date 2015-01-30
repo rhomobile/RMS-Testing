@@ -15,7 +15,7 @@ connection:
   proxy: "http://wwwgate0.mot.com:1080"
 iphone:
   configuration: "Release"
-  sdk: "iphonesimulator7.1"
+  sdk: "iphonesimulator8.1”
   provisionprofile: 
   codesignidentity: 
   entitlements: 

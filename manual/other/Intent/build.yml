@@ -7,7 +7,7 @@ bbver: "6.0"
 applog: "rholog.txt"
 iphone:
   configuration: "Release"
-  sdk: "iphonesimulator7.1"
+  sdk: "iphonesimulator8.1”
   provisionprofile: 
   codesignidentity: "iPhone Developer"
   entitlements: 
