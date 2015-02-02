@@ -206,13 +206,14 @@ describe("Camera API Manual Tests", function(){
 
 			runs(function(){
 				spec.addResult(callbackData);
+				document.getElementById('imageUri').src = imageUriData;
 				spec.displayResults();
                 spec.waitForResponse();
 			});
 
 		});
 
-		xit("Should call choosePicture with 'compressionFormat' property value as png", function(){
+		it("Should call choosePicture with 'compressionFormat' property value as png", function(){
 			var spec = new ManualSpec(jasmine, window.document);
         	spec.addGoal(jasmine.getEnv().currentSpec.description);
             spec.addStep("Press 'RunTest' button");
@@ -325,7 +326,7 @@ describe("Camera API Manual Tests", function(){
 	if (isAndroidPlatform()) {
 		describe("getCameraByType method & showSupportedList property", function() {
 
-			it("Should call getCameraByType with Main and callback as function ", function(){
+			it("Should call getCameraByType with back and callback as function ", function(){
 				var spec = new ManualSpec(jasmine, window.document);
 	        	spec.addGoal(jasmine.getEnv().currentSpec.description);
 	            spec.addStep("Press 'RunTest' button");
@@ -554,6 +555,38 @@ describe("Camera API Manual Tests", function(){
 
 					});
 
+					it("Should call showPreview & capture in landscape mode" + camid + camtype , function(){
+						var spec = new ManualSpec(jasmine, window.document);
+			        	spec.addGoal(jasmine.getEnv().currentSpec.description);
+			        	spec.addPrecondition("Call capture(callback) method holding device in landscape mode");
+			            spec.addStep("Press 'RunTest' button");
+			            spec.addStep("Check for the returned status");
+			            spec.addExpectation('The returned status should be OK, image should be displayed as dataUri in landscape mode.');
+			            spec.displayScenario();
+			            spec.waitForButtonPressing("Run test");
+
+						runs(function(){
+							objCAM.showPreview({'previewLeft':10, 'previewTop':10, 'previewWidth':100, 'previewHeight':60, 'desiredHeight':120, 'desiredWidth':240, 'outputFormat':'dataUri'
+							});
+
+							setTimeout(function(){
+								objCAM.capture(callbackFunc);
+							},6000);
+						});
+
+						waitsFor(function(){
+							return cbkResponseTimeout;
+						},"waiting for callback data", 12000);
+
+						runs(function(){
+							spec.addResult(callbackData);
+							document.getElementById('imageUri').src = imageUriData;
+							spec.displayResults();
+			                spec.waitForResponse();
+						});
+
+					});
+
 					it("Should call showPreview with all properties set & capture |" + camid + camtype , function(){
 						var spec = new ManualSpec(jasmine, window.document);
 			        	spec.addGoal(jasmine.getEnv().currentSpec.description);
@@ -764,7 +797,57 @@ describe("Camera API Manual Tests", function(){
 
 				});
 
+				it("Should call takePicture and invalid fileName path | " + camid + camtype , function(){
+					var spec = new ManualSpec(jasmine, window.document);
+		        	spec.addGoal(jasmine.getEnv().currentSpec.description);
+		            spec.addStep("Call takePicture({}, callback function) with fileName:'//InvalidPath//camimage'");
+		            spec.addStep("Press 'RunTest' button");
+		            spec.addStep("Check for the returned status");
+		            spec.addExpectation('The returned status should be error with message as wrong file path.');
+		            spec.displayScenario();
+		            spec.waitForButtonPressing("Run test");
+
+		            runs(function(){
+						objCAM.takePicture({'fileName':"//InvalidPath//camimage"}, callbackFunc);
+					});
+
+					waitsFor(function(){
+						return cbkResponseTimeout;
+					},"waiting for callback data", 10000);
+
+					runs(function(){
+						spec.addResult(callbackData);
+						spec.displayResults();
+		                spec.waitForResponse();
+					});
+
+				});				
+
 				it("Should call takePicture and minimize the application | " + camid + camtype , function(){
+					var spec = new ManualSpec(jasmine, window.document);
+		        	spec.addGoal(jasmine.getEnv().currentSpec.description);
+		            spec.addStep("Press 'RunTest' button");
+		            spec.addStep("Minimize the application once the fullscreen mode opens.");
+		            spec.addExpectation('Preview should not disappear. No abnormal behaviour should be observed.');
+		            spec.displayScenario();
+		            spec.waitForButtonPressing("Run test");
+
+		            runs(function(){
+						objCAM.takePicture({}, callbackFunc);
+					});
+
+					waitsFor(function(){
+						return cbkResponseTimeout;
+					},"waiting for callback data", 10000);
+
+					runs(function(){
+						spec.addResult(callbackData);
+						spec.displayResults();
+		                spec.waitForResponse();
+					});
+				});
+
+				it("Should call takePicture and suspend the device | " + camid + camtype , function(){
 					var spec = new ManualSpec(jasmine, window.document);
 		        	spec.addGoal(jasmine.getEnv().currentSpec.description);
 		            spec.addStep("Press 'RunTest' button");
@@ -802,30 +885,6 @@ describe("Camera API Manual Tests", function(){
 					});
 				});
 
-				it("Should call takePicture and suspend the device | " + camid + camtype , function(){
-					var spec = new ManualSpec(jasmine, window.document);
-		        	spec.addGoal(jasmine.getEnv().currentSpec.description);
-		            spec.addStep("Press 'RunTest' button");
-		            spec.addStep("Minimize the application once the fullscreen mode opens.");
-		            spec.addExpectation('Preview should not disappear. No abnormal behaviour should be observed.');
-		            spec.displayScenario();
-		            spec.waitForButtonPressing("Run test");
-
-		            runs(function(){
-						objCAM.takePicture({}, callbackFunc);
-					});
-
-					waitsFor(function(){
-						return cbkResponseTimeout;
-					},"waiting for callback data", 10000);
-
-					runs(function(){
-						spec.addResult(callbackData);
-						spec.displayResults();
-		                spec.waitForResponse();
-					});
-				});
-
 				it("Should rotate the screen after screen rightHanded calling takePicture() method. | " + camid + camtype , function(){
 					var spec = new ManualSpec(jasmine, window.document);
 		        	spec.addGoal(jasmine.getEnv().currentSpec.description);
@@ -840,7 +899,7 @@ describe("Camera API Manual Tests", function(){
 						objCAM.takePicture({}, callbackFunc);
 
 						setTimeout(function(){
-							Rho.ScreenOrientation.leftHanded();
+							Rho.ScreenOrientation.rightHanded();
 						},4000);
 					});
 
@@ -1387,6 +1446,60 @@ describe("Camera API Manual Tests", function(){
 						objCAM.colorModel.COMPRESSION_FORMAT_JPG;
 					});
 				});
+
+				it("Should capture image by calling takePicture() method in portrait mode. | " + camid + camtype , function(){
+					var spec = new ManualSpec(jasmine, window.document);
+					spec.addGoal(jasmine.getEnv().currentSpec.description);
+					spec.addStep("Call takePicture() method with imageFormat as dataUri keeping the device in portrait mode.");
+				    spec.addStep("Press 'RunTest' button");
+				    spec.addStep("Check for the returned status.");
+				    spec.addExpectation('The preview should be in Full Screen. The image captured should be deplayed as dataUri in the portrait mode.');
+				    spec.displayScenario();
+				    spec.waitForButtonPressing("Run test");
+
+					runs(function(){
+						objCAM.takePicture({}, callbackFunc);
+					});
+
+					waitsFor(function(){
+						return cbkResponseTimeout;
+					},"waiting for callback data", 10000);
+
+					runs(function(){
+						spec.addResult(callbackData);
+						document.getElementById('imageUri').src = imageUriData;
+						spec.displayResults();
+				        spec.waitForResponse();
+					});
+
+				});
+
+				it("Should capture image by calling takePicture() method in landscape mode. | " + camid + camtype , function(){
+					var spec = new ManualSpec(jasmine, window.document);
+					spec.addGoal(jasmine.getEnv().currentSpec.description);
+					spec.addStep("Call takePicture() method with imageFormat as dataUri keeping the device in landscape mode.");
+				    spec.addStep("Press 'RunTest' button");
+				    spec.addStep("Check for the returned status.");
+				    spec.addExpectation('The preview should be in Full Screen. The image captured should be deplayed as dataUri in the landscape mode.');
+				    spec.displayScenario();
+				    spec.waitForButtonPressing("Run test");
+
+					runs(function(){
+						objCAM.takePicture({}, callbackFunc);
+					});
+
+					waitsFor(function(){
+						return cbkResponseTimeout;
+					},"waiting for callback data", 10000);
+
+					runs(function(){
+						spec.addResult(callbackData);
+						document.getElementById('imageUri').src = imageUriData;
+						spec.displayResults();
+				        spec.waitForResponse();
+					});
+
+				});							
 
 			});
 
