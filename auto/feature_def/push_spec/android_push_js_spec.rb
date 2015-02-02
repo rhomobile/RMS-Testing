@@ -8,7 +8,7 @@ unless push_type == 'rhoconnect_push' || push_type == 'gcm'
   exit
 end
 TEST_PKGS = %w[ com.rhomobile.push_client_js ]
-TEST_PKGS << 'com.motsolutions.cto.services.ans' if push_type == "rhoconnect_push"
+#TEST_PKGS << 'com.symbol.rhoconnect.pushservice' if push_type == "rhoconnect_push"
 
 puts "Running Jasmine Push specs for #{(push_type == "rhoconnect_push") ?  'Rhoconnect Push' : 'Google Cloud Messaging'} Service"
 
@@ -172,11 +172,11 @@ device_list.each do |dev|
       end
     end
 
-    if push_type == "rhoconnect_push"
-      puts "Install rhoconnect push service ..."
-      push_service_apk = File.join($rhoelements_root,'libs','rhoconnect-push-service','rhoconnect-push-service.apk')
-      system("adb #{$deviceOpts} install -r #{push_service_apk}")
-    end
+    #if push_type == "rhoconnect_push"
+    #  puts "Install rhoconnect push service ..."
+    #  push_service_apk = File.join($rhoelements_root,'libs','rhoconnect-push-service','rhoconnect-push-service.apk')
+    #  system("adb #{$deviceOpts} install -r #{push_service_apk}")
+    #end
     puts "adb #{$deviceOpts} install -r #{Dir.pwd}/bin/target/android/push_client_js-debug.apk"
     system("adb #{$deviceOpts} install -r #{Dir.pwd}/bin/target/android/push_client_js-debug.apk")
     puts "\nStarting rhodes app on device ..."
