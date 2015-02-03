@@ -1228,7 +1228,7 @@ end
   end
 
   it "should find with sql multiple conditions" do
-    @acct = getAccount.find(:first, :conditions => [ "name = ? AND industry = ?", "Mobio India", "Technology" ], :select => ['name', 'industry'])
+    @acct = getAccount.find(:first, :conditions => [ "name = ? AND industry = ?", "'Mobio India'", "'Technology'" ], :select => ['name', 'industry'])
     @acct.name.should == "Mobio India"
     @acct.industry.should == "Technology"
   end
@@ -1247,7 +1247,7 @@ end
   end
 
   it "should support simple sql conditions" do
-    @accts = getAccount.find(:all, :conditions => ["name = ?", "Mobio India"], :select => ['name', 'industry'])
+    @accts = getAccount.find(:all, :conditions => ["name = ?", "'Mobio India'"], :select => ['name', 'industry'])
     @accts.length.should == 1
     @accts[0].name.should == "Mobio India"
     @accts[0].industry.should == "Technology"
@@ -1261,7 +1261,7 @@ end
   end
 
   it "should support sql conditions single filter" do
-    @accts = getAccount.find(:all, :conditions => ["name like ?", "Mob%"], :select => ['name', 'industry'])
+    @accts = getAccount.find(:all, :conditions => ["name like ?", "'Mob%'"], :select => ['name', 'industry'])
     @accts.length.should == 1
     @accts[0].name.should == "Mobio India"
     @accts[0].industry.should == "Technology"
@@ -1270,14 +1270,14 @@ end
   it "should support sql conditions single filter with order" do
     return if USE_HSQLDB
 
-    @accts = getAccount.find(:all, :conditions => ["name like ?", "Mob%"], :select => ['name', 'industry'], :order=>'name', :orderdir => 'DESC' )
+    @accts = getAccount.find(:all, :conditions => ["name like ?", "'Mob%'"], :select => ['name', 'industry'], :order=>'name', :orderdir => 'DESC' )
     @accts.length.should == 1
     @accts[0].name.should == "Mobio India"
     @accts[0].industry.should == "Technology"
   end
 
   it "should support sql conditions with multiple filters" do
-    @accts = getAccount.find(:all, :conditions => ["name like ? and industry like ?", "Mob%", "Tech%"], :select => ['name', 'industry'])
+    @accts = getAccount.find(:all, :conditions => ["name like ? and industry like ?", "'Mob%'", "'Tech%'"], :select => ['name', 'industry'])
     @accts.length.should == 1
     @accts[0].name.should == "Mobio India"
     @accts[0].industry.should == "Technology"
