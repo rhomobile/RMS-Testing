@@ -40,7 +40,7 @@ describe("Camera API Manual Tests", function(){
             spec.addStep("Press 'RunTest' button");
             spec.addStep("Choose the image");
             spec.addStep("Check for the returned status & image");
-            spec.addExpectation('The returned status should be OK, image should be displayed through image URI, The returned image height and width should be same as the displayed image.');
+            spec.addExpectation('The returned status should be OK and absoulte imagepath of the selected image. The returned image height and width should be same as the displayed image. Also image format should be as jpg in callback.');
             spec.displayScenario();
             spec.waitForButtonPressing("Run test");
 
@@ -86,53 +86,19 @@ describe("Camera API Manual Tests", function(){
 
 		});
 
-		it("should choosePicture with callback status error and error message", function(){
-			var spec = new ManualSpec(jasmine, window.document);
-        	spec.addGoal(jasmine.getEnv().currentSpec.description);
-            spec.addStep("Press 'RunTest' button");
-            spec.addStep("Choose some other file instead of image file");
-            spec.addStep("Check for the returned status and returned message");
-            spec.addExpectation('The returned status should be error and messge should containg the information on error.');
-            spec.displayScenario();
-            spec.waitForButtonPressing("Run test");
-
-			runs(function(){
-				Rho.Camera.choosePicture({}, callbackFunc);
-			});
-
-			waitsFor(function(){
-				return cbkResponseTimeout;
-			},"waiting for callback data", 10000);
-
-			runs(function(){
-				spec.addResult(callbackData);
-				spec.displayResults();
-                spec.waitForResponse();
-			});
-
-		});
-
-		it("Should call choosePicture with callback as anonymous function and check for returned compressionFormat", function(){
+		it("Should call choosePicture with outputFormat as image &  callback as anonymous function", function(){
 			var spec = new ManualSpec(jasmine, window.document);
         	spec.addGoal(jasmine.getEnv().currentSpec.description);
             spec.addStep("Press 'RunTest' button");
             spec.addStep("Choose the image");
-            spec.addStep("Save the image at device folders");
             spec.addStep("Check for the returned imageFormat");
-            spec.addExpectation('The returned status should be OK and the returned image format should be same with the saved image format in device.');
+            spec.addExpectation('The returned status should be OK and the path of the image should be mentioned in callback.');
             spec.displayScenario();
             spec.waitForButtonPressing("Run test");
 
 			runs(function(){
-				var data = {};
 
-				if(isAndroidPlatform())
-					data.compressionFormat = 'png';
-				else
-					data.compressionFormat = 'jpg';
-
-
-				Rho.Camera.choosePicture(data, function(cbData){
+				Rho.Camera.choosePicture({'outputFormat':'image'}, function(cbData){
 
 					callbackData = "status : " + cbData.status;
 					callbackData += "\nmessage : " + cbData.message;
@@ -166,7 +132,7 @@ describe("Camera API Manual Tests", function(){
             spec.addPrecondition("Call choosePicture with propertyhash as colorModel:greyscale, desiredHeight:640 , desiredWidth:480 and callback.");
             spec.addStep("Choose the image.");
             spec.addStep("Display the image on view and Check for the color and size of image");
-            spec.addExpectation('The displayed image should be in grey mode with desiredHeight as 640 and desiredWidth as480.');
+            spec.addExpectation('The displayed image will not have any affect of the properties set, should get a valid callback.');
             spec.displayScenario();
             spec.waitForButtonPressing("Run test");
 			
@@ -186,7 +152,7 @@ describe("Camera API Manual Tests", function(){
 
 		});
 
-		it("Should call choosePicture with 'outputFormat' property value as datauri ", function(){
+		it("Should call choosePicture with 'outputFormat' property value as dataUri ", function(){
 			var spec = new ManualSpec(jasmine, window.document);
         	spec.addGoal(jasmine.getEnv().currentSpec.description);
             spec.addStep("Press 'RunTest' button");
@@ -207,32 +173,6 @@ describe("Camera API Manual Tests", function(){
 			runs(function(){
 				spec.addResult(callbackData);
 				document.getElementById('imageUri').src = imageUriData;
-				spec.displayResults();
-                spec.waitForResponse();
-			});
-
-		});
-
-		it("Should call choosePicture with 'compressionFormat' property value as png", function(){
-			var spec = new ManualSpec(jasmine, window.document);
-        	spec.addGoal(jasmine.getEnv().currentSpec.description);
-            spec.addStep("Press 'RunTest' button");
-            spec.addStep("Choose the image.");
-            spec.addStep("Check for the returned status and returned message");
-            spec.addExpectation('The returned status should be OK and png image should be saved in Android & iOS but error in WM and messge should containg the information on error as png format is not supported.');
-            spec.displayScenario();
-            spec.waitForButtonPressing("Run test");
-
-			runs(function(){
-				Rho.Camera.choosePicture({'compressionFormat':'png'}, callbackFunc);
-			});
-
-			waitsFor(function(){
-				return cbkResponseTimeout;
-			},"waiting for callback data", 10000);
-
-			runs(function(){
-				spec.addResult(callbackData);
 				spec.displayResults();
                 spec.waitForResponse();
 			});
@@ -457,6 +397,7 @@ describe("Camera API Manual Tests", function(){
 						runs(function(){
 							spec.addResult(callbackData);
 							spec.displayResults();
+							objCAM.hidePreview();
 			                spec.waitForResponse();
 						});
 
@@ -487,6 +428,7 @@ describe("Camera API Manual Tests", function(){
 						runs(function(){
 							spec.addResult(callbackData);
 							spec.displayResults();
+							objCAM.hidePreview();
 			                spec.waitForResponse();
 						});
 
@@ -519,6 +461,7 @@ describe("Camera API Manual Tests", function(){
 							spec.addResult(callbackData);
 							document.getElementById('imageUri').src = imageUriData;
 							spec.displayResults();
+							objCAM.hidePreview();
 			                spec.waitForResponse();
 						});
 
@@ -550,6 +493,7 @@ describe("Camera API Manual Tests", function(){
 						runs(function(){
 							spec.addResult(callbackData);
 							spec.displayResults();
+							objCAM.hidePreview();
 			                spec.waitForResponse();
 						});
 
@@ -582,6 +526,7 @@ describe("Camera API Manual Tests", function(){
 							spec.addResult(callbackData);
 							document.getElementById('imageUri').src = imageUriData;
 							spec.displayResults();
+							objCAM.hidePreview();
 			                spec.waitForResponse();
 						});
 
@@ -613,6 +558,7 @@ describe("Camera API Manual Tests", function(){
 						runs(function(){
 							spec.addResult(callbackData);
 							spec.displayResults();
+							objCAM.hidePreview();
 			                spec.waitForResponse();
 						});
 
@@ -643,6 +589,7 @@ describe("Camera API Manual Tests", function(){
 						runs(function(){
 							spec.addResult(callbackData);
 							spec.displayResults();
+							objCAM.hidePreview();
 			                spec.waitForResponse();
 						});
 
@@ -662,11 +609,11 @@ describe("Camera API Manual Tests", function(){
 
 			            runs(function(){
 							objCAM.showPreview();
-						});
 
-						setTimeout(function(){
-							objCAM.hidePreview();
-						},6000);
+							setTimeout(function(){
+								objCAM.hidePreview();
+							},6000);
+						});
 
 						runs(function(){
 			                spec.waitForResponse();
