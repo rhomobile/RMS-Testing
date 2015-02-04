@@ -100,11 +100,8 @@ describe "RhomModel" do
 
     @product.destroy
 
-    if @use_new_orm
-      getProduct.find(product_id).should be_empty
-    else
-      getProduct.find(product_id).should be_nil
-    end
+    getProduct.find(product_id).should be_nil
+    
     (count - 1).should == getProduct.count
   end
 
