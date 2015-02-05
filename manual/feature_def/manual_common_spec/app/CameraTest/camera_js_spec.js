@@ -846,11 +846,11 @@ describe("Camera API Manual Tests", function(){
 					});
 				});
 
-				it("VT285-0029 | Should rotate the screen after screen rightHanded calling takePicture() method. | using " + camid + camtype , function(){
+				it("VT285-0029 | Should rotate the screen rightHanded after calling takePicture() method. | using " + camid + camtype , function(){
 					var spec = new ManualSpec(jasmine, window.document);
 		        	spec.addGoal(jasmine.getEnv().currentSpec.description);
 		            spec.addStep("Press 'RunTest' button");
-		            spec.addStep("NOTE: If auto rotate supported, rotate the device in all directions");
+		            spec.addStep("After 4secs of fullscreen takePicture, screen will rotate rightHanded(called internally in script), then click on capture");
 		            spec.addStep("NOTE: ScreenOrientation will become normal once pass/fail is clicked");
 		            spec.addExpectation('The viewfinder should realign and there should not be any error.');
 		            spec.displayScenario();
@@ -890,8 +890,7 @@ describe("Camera API Manual Tests", function(){
 		            spec.waitForButtonPressing("Run test");
 
 					runs(function(){
-						objCAM.flashMode.FLASH_ON;
-						objCAM.takePicture({}, callbackFunc);
+						objCAM.takePicture({'flashMode':Rho.Camera.FLASH_ON}, callbackFunc);
 					});
 
 					waitsFor(function(){
@@ -902,10 +901,6 @@ describe("Camera API Manual Tests", function(){
 						spec.addResult(callbackData);
 						spec.displayResults();
 		                spec.waitForResponse();
-					});
-
-					runs(function(){
-						objCAM.flashMode.FLASH_OFF
 					});	
 				});
 
@@ -919,7 +914,7 @@ describe("Camera API Manual Tests", function(){
 		            spec.waitForButtonPressing("Run test");
 
 					runs(function(){
-						objCAM.takePicture({'flashMode':'off'}, callbackFunc);
+						objCAM.takePicture({'flashMode':Rho.Camera.FLASH_OFF}, callbackFunc);
 					});
 
 					waitsFor(function(){
@@ -946,8 +941,7 @@ describe("Camera API Manual Tests", function(){
 			            spec.waitForButtonPressing("Run test");
 
 						runs(function(){
-							objCAM.flashMode.FLASH_AUTO;
-							objCAM.takePicture({}, callbackFunc);
+							objCAM.takePicture({'flashMode':Rho.Camera.FLASH_AUTO}, callbackFunc);
 						});
 
 						waitsFor(function(){
@@ -996,7 +990,7 @@ describe("Camera API Manual Tests", function(){
 			            spec.waitForButtonPressing("Run test");
 
 						runs(function(){
-							objCAM.takePicture({'flashMode':'redEye'}, callbackFunc);
+							objCAM.takePicture({'flashMode':Rho.Camera.FLASH_RED_EYE}, callbackFunc);
 						});
 
 						waitsFor(function(){
@@ -1024,7 +1018,7 @@ describe("Camera API Manual Tests", function(){
 			            spec.waitForButtonPressing("Run test");
 
 						runs(function(){
-							objCAM.takePicture({'flashMode':'torch'}, callbackFunc);
+							objCAM.takePicture({'flashMode':Rho.Camera.FLASH_RED_EYE}, callbackFunc);
 						});
 
 						waitsFor(function(){
@@ -1056,7 +1050,7 @@ describe("Camera API Manual Tests", function(){
 			            spec.waitForButtonPressing("Run test");
 
 						runs(function(){
-							objCAM.takePicture({'aimMode':'on'}, callbackFunc);
+							objCAM.takePicture({'aimMode':Rho.Camera.AIM_ON}, callbackFunc);
 						});
 
 						waitsFor(function(){
@@ -1080,8 +1074,7 @@ describe("Camera API Manual Tests", function(){
 			            spec.waitForButtonPressing("Run test");
 
 						runs(function(){
-							objCAM.aimMode.AIM_OFF;
-							objCAM.takePicture({}, callbackFunc);
+							objCAM.takePicture({'aimMode':Rho.Camera.AIM_OFF}, callbackFunc);
 						});
 
 						waitsFor(function(){
@@ -1419,7 +1412,7 @@ describe("Camera API Manual Tests", function(){
 				    spec.waitForButtonPressing("Run test");
 
 					runs(function(){
-						objCAM.takePicture({}, callbackFunc);
+						objCAM.takePicture({'outputFormat':'dataUri'}, callbackFunc);
 					});
 
 					waitsFor(function(){
@@ -1446,7 +1439,7 @@ describe("Camera API Manual Tests", function(){
 				    spec.waitForButtonPressing("Run test");
 
 					runs(function(){
-						objCAM.takePicture({}, callbackFunc);
+						objCAM.takePicture({'outputFormat':'dataUri'}, callbackFunc);
 					});
 
 					waitsFor(function(){
@@ -1471,7 +1464,7 @@ describe("Camera API Manual Tests", function(){
 
 	describe("Miscellaneous Tests | " , function() {
 
-		it("Should try to enable fullscreen after preview window |" , function(){
+		it("VT285-0052 | Should try to enable fullscreen after preview window |" , function(){
 			var spec = new ManualSpec(jasmine, window.document);
         	spec.addGoal(jasmine.getEnv().currentSpec.description);
         	spec.addPrecondition("Call showPreview() without any properties.");
@@ -1507,7 +1500,7 @@ describe("Camera API Manual Tests", function(){
 
 		});
 
-		it("Persistance test for showpreview & capture |" , function(){
+		it("VT285-0053 | Persistance test for showpreview & capture |" , function(){
 			var spec = new ManualSpec(jasmine, window.document);
         	spec.addGoal(jasmine.getEnv().currentSpec.description);
         	spec.addPrecondition(" Call showPreview() with properties previewLeft: 50, previewTop:50, previewHeight: 80, previewWidth: 40, fileName: '\\Application\\persistCapture', flashMode: on & aimMode: ON.");
@@ -1519,7 +1512,7 @@ describe("Camera API Manual Tests", function(){
             spec.waitForButtonPressing("Run test");
 
 			runs(function(){
-				Rho.Camera.showPreview({'previewLeft': 50, 'previewTop':50, 'previewHeight': 80, 'previewWidth': 40, 'fileName': '\\Application\\persistCapture', 'flashMode': 'on', 'aimMode': 'ON'});
+				Rho.Camera.showPreview({'previewLeft': 50, 'previewTop':50, 'previewHeight': 80, 'previewWidth': 40, 'fileName': '\\Application\\persistCapture', 'flashMode': 'on', 'aimMode': 'on'});
 
 				setTimeout(function(){
 					window.location="./cameraPersistPage.html";
