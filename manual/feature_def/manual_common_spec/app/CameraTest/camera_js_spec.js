@@ -5,6 +5,7 @@ describe("Camera API Manual Tests", function(){
 	var cbkResponseTimeout = false;
 	var camArray = "";
 	var imageUriData = null;
+	var camtype;
 	
 	var callbackFunc = function(cbData){
 
@@ -60,7 +61,7 @@ describe("Camera API Manual Tests", function(){
 			},"waiting for callback data", 20000);
 
 			runs(function(){
-				spec.addResult(callbackData);
+				spec.addResult("callbackdata: ", callbackData);
 				spec.displayResults();
                 spec.waitForResponse();
 			});
@@ -86,7 +87,7 @@ describe("Camera API Manual Tests", function(){
 			},"waiting for callback data", 20000);
 
 			runs(function(){
-				spec.addResult(callbackData);
+				spec.addResult("callbackdata: ", callbackData);
 				spec.displayResults();
                 spec.waitForResponse();
 			});
@@ -124,7 +125,7 @@ describe("Camera API Manual Tests", function(){
 			},"waiting for callback data", 20000);
 
 			runs(function(){
-				spec.addResult(callbackData);
+				spec.addResult("callbackdata: ", callbackData);
 				spec.displayResults();
                 spec.waitForResponse();
 			});
@@ -151,7 +152,7 @@ describe("Camera API Manual Tests", function(){
 			},"waiting for callback data", 20000);
 
 			runs(function(){
-				spec.addResult(callbackData);
+				spec.addResult("callbackdata: ", callbackData);
 				spec.displayResults();
                 spec.waitForResponse();
 			});
@@ -177,7 +178,7 @@ describe("Camera API Manual Tests", function(){
 			},"waiting for callback data", 20000);
 
 			runs(function(){
-				spec.addResult(callbackData);
+				spec.addResult("callbackdata: ", callbackData);
 				document.getElementById('imageUri').src = imageUriData;
 				spec.displayResults();
                 spec.waitForResponse();
@@ -204,7 +205,7 @@ describe("Camera API Manual Tests", function(){
 			},"waiting for callback data", 20000);
 
 			runs(function(){
-				spec.addResult(callbackData);
+				spec.addResult("callbackdata: ", callbackData);
 				spec.displayResults();
                 spec.waitForResponse();
 			});
@@ -230,7 +231,7 @@ describe("Camera API Manual Tests", function(){
 			},"waiting for callback data", 20000);
 
 			runs(function(){
-				spec.addResult(callbackData);
+				spec.addResult("callbackdata: ", callbackData);
 				spec.displayResults();
                 spec.waitForResponse();
 			});
@@ -260,7 +261,7 @@ describe("Camera API Manual Tests", function(){
 			},"waiting for callback data", 2000);
 
 			runs(function(){
-				spec.addResult(camArray);
+				spec.addResult("enumerated cameras: ", camArray);
 				spec.displayResults();
                 spec.waitForResponse();
 			});		            
@@ -269,81 +270,172 @@ describe("Camera API Manual Tests", function(){
 
 	});
 
-	if (isAndroidPlatform()) {
-		describe("getCameraByType method & showSupportedList property", function() {
+	
 
-			it("VT285-0009 | Should call getCameraByType with back and callback as function ", function(){
-				var spec = new ManualSpec(jasmine, window.document);
-	        	spec.addGoal(jasmine.getEnv().currentSpec.description);
-	            spec.addStep("Press 'RunTest' button");
-	            spec.addStep("If return value is main camera call takepicture using return value");
-	            spec.addExpectation('The return values should be main camera object and the main camera should open to take picture.');
-	            spec.displayScenario();
-	            spec.waitForButtonPressing("Run test");
+		describe("getCameraByType method", function() {
 
-	            runs(function(){
-					Rho.Camera.getCameraByType({'cameraType':'Main'}, getCallbackData);
+			if (isAndroidPlatform() || isApplePlatform()) {
+
+				it("VT285-0009 | Should call getCameraByType with back and callback as function ", function(){
+					var spec = new ManualSpec(jasmine, window.document);
+		        	spec.addGoal(jasmine.getEnv().currentSpec.description);
+		            spec.addStep("Press 'RunTest' button");
+		            spec.addStep("If return value is back camera call takepicture using return value");
+		            spec.addExpectation('The return values should be back camera object and the back camera should open to take picture.');
+		            spec.displayScenario();
+		            spec.waitForButtonPressing("Run test");
+
+		            var cameraTypeCb = function(camtype){
+						camtype = camtype;
+						cbkResponseTimeout = true;
+					});
+
+		            runs(function(){
+						Rho.Camera.getCameraByType({'cameraType':'back'}, cameraTypeCb);
+					});
+
+					waitsFor(function(){
+						return cbkResponseTimeout;
+					},"waiting for callback data", 10000);
+
+					runs(function(){
+						cbkResponseTimeout = false;
+						camtype.takepicture({}, callbackFunc);
+					});
+
+					waitsFor(function(){
+						return cbkResponseTimeout;
+					},"waiting for callback data", 20000);
+
+					runs(function(){
+						spec.addResult("callbackdata: ", callbackData);
+						spec.displayResults();
+		                spec.waitForResponse();
+					});
 				});
 
-				waitsFor(function(){
-					return cbkResponseTimeout;
-				},"waiting for callback data", 10000);
+				it("VT285-0010 | Should call getCameraByType with front and without callback function ", function(){
+					var spec = new ManualSpec(jasmine, window.document);
+		        	spec.addGoal(jasmine.getEnv().currentSpec.description);
+		            spec.addStep("Press 'RunTest' button");
+		            spec.addStep("If return value is Front camera call takepicture using return value");
+		            spec.addExpectation('The return values should be front camera object and the front camera should open to take picture.');
+		            spec.displayScenario();
+		            spec.waitForButtonPressing("Run test");
+		            camtype = null;
 
-				runs(function(){
-					cbkResponseTimeout = false;
-					if(getCallbackData == 'main'){
-						Rho.Camera.takepicture({},callbackFunc);
-					}
+		            runs(function(){
+						camtype = Rho.Camera.getCameraByType({'cameraType':'front'});
+					});
+
+					waitsFor(function(){
+						return cbkResponseTimeout;
+					},"waiting for callback data", 10000);
+
+					runs(function(){
+						cbkResponseTimeout = false;
+						camtype.takepicture({}, callbackFunc);
+					});
+
+					waitsFor(function(){
+						return cbkResponseTimeout;
+					},"waiting for callback data", 20000);
+
+					runs(function(){
+						spec.addResult("callbackdata: ", callbackData);
+						spec.displayResults();
+		                spec.waitForResponse();
+					});				
+
 				});
 
-				waitsFor(function(){
-					return cbkResponseTimeout;
-				},"waiting for callback data", 20000);
+			};
 
-				runs(function(){
-					spec.addResult(callbackData);
-					spec.displayResults();
-	                spec.waitForResponse();
+			if (isWindowsMobilePlatform()) {
+
+				it("VT285-0009 | Should call getCameraByType with color and callback as function ", function(){
+					var spec = new ManualSpec(jasmine, window.document);
+		        	spec.addGoal(jasmine.getEnv().currentSpec.description);
+		            spec.addStep("Press 'RunTest' button");
+		            spec.addStep("If return value is color camera call takepicture using return value");
+		            spec.addExpectation('The return values should be color camera object and the color camera should open to take picture.');
+		            spec.displayScenario();
+		            spec.waitForButtonPressing("Run test");
+
+		            var cameraTypeCb = function(camtype){
+						camtype = camtype;
+						cbkResponseTimeout = true;
+					});
+
+		            runs(function(){
+						Rho.Camera.getCameraByType({'cameraType':'color'}, cameraTypeCb);
+					});
+
+					waitsFor(function(){
+						return cbkResponseTimeout;
+					},"waiting for callback data", 10000);
+
+					runs(function(){
+						cbkResponseTimeout = false;
+						camtype.takepicture({}, callbackFunc);
+					});
+
+					waitsFor(function(){
+						return cbkResponseTimeout;
+					},"waiting for callback data", 20000);
+
+					runs(function(){
+						spec.addResult("callbackdata: ", callbackData);
+						spec.displayResults();
+		                spec.waitForResponse();
+					});
 				});
-			});
 
-			it("VT285-0010 | Should call getCameraByType with front and without callback function ", function(){
-				var spec = new ManualSpec(jasmine, window.document);
-	        	spec.addGoal(jasmine.getEnv().currentSpec.description);
-	            spec.addStep("Press 'RunTest' button");
-	            spec.addStep("If return value is Front camera call takepicture using return value");
-	            spec.addExpectation('The return values should be main camera object and the main camera should open to take picture.');
-	            spec.displayScenario();
-	            spec.waitForButtonPressing("Run test");
+				it("VT285-0010 | Should call getCameraByType with imager and without callback function ", function(){
+					var spec = new ManualSpec(jasmine, window.document);
+		        	spec.addGoal(jasmine.getEnv().currentSpec.description);
+		            spec.addStep("Press 'RunTest' button");
+		            spec.addStep("If return value is Front camera call takepicture using return value");
+		            spec.addExpectation('The return values should be imager camera object and the imager camera should open to take picture.');
+		            spec.displayScenario();
+		            spec.waitForButtonPressing("Run test");
+		            camtype = null;
 
-	            runs(function(){
-					Rho.Camera.getCameraByType({'cameraType':'Front'});
+		            runs(function(){
+						camtype = Rho.Camera.getCameraByType({'cameraType':'imager'});
+					});
+
+					waitsFor(function(){
+						return cbkResponseTimeout;
+					},"waiting for callback data", 10000);
+
+					runs(function(){
+						cbkResponseTimeout = false;
+						camtype.takepicture({}, callbackFunc);
+					});
+
+					waitsFor(function(){
+						return cbkResponseTimeout;
+					},"waiting for callback data", 20000);
+
+					runs(function(){
+						spec.addResult("callbackdata: ", callbackData);
+						spec.displayResults();
+		                spec.waitForResponse();
+					});				
+
 				});
 
-				waitsFor(function(){
-					return cbkResponseTimeout;
-				},"waiting for callback data", 10000);
+			};			
 
-				runs(function(){
-					cbkResponseTimeout = false;
-					if(getCallbackData == 'front'){
-						Rho.Camera.takepicture({},callbackFunc);
-					}
-				});
+		});
 
-				waitsFor(function(){
-					return cbkResponseTimeout;
-				},"waiting for callback data", 20000);
 
-				runs(function(){
-					spec.addResult(callbackData);
-					spec.displayResults();
-	                spec.waitForResponse();
-				});				
+	if (isAndroidPlatform() && isWindowsMobilePlatform()){
 
-			});
+		describe("supportedSizeList property", function() {
 
-			it("VT285-0011 | Should list supported resolution using showSupportedList " , function(){
+			it("VT285-0011 | Should list supported resolution using supportedSizeList " , function(){
 				var spec = new ManualSpec(jasmine, window.document);
 	        	spec.addGoal(jasmine.getEnv().currentSpec.description);
 	            spec.addStep("Press 'RunTest' button");
@@ -355,13 +447,14 @@ describe("Camera API Manual Tests", function(){
 	            var supportedList = "";
 
 	            runs(function(){
-					supportedList = Rho.Camera.showSupportedList();
-					spec.addResult(supportedList.toString());
+					supportedList = Rho.Camera.supportedSizeList();
+					spec.addResult("supportedList: ", JSON.stringify(supportedList));
 					spec.displayResults();
 	                spec.waitForResponse();
 				});
 
 			});
+
 		});
 	
 	};
@@ -401,7 +494,7 @@ describe("Camera API Manual Tests", function(){
 						},"waiting for callback data", 12000);
 
 						runs(function(){
-							spec.addResult(callbackData);
+							spec.addResult("callbackdata: ", callbackData);
 							spec.displayResults();
 							objCAM.hidePreview();
 			                spec.waitForResponse();
@@ -433,7 +526,7 @@ describe("Camera API Manual Tests", function(){
 						},"waiting for callback data", 12000);
 
 						runs(function(){
-							spec.addResult(callbackData);
+							spec.addResult("callbackdata: ", callbackData);
 							spec.displayResults();
 							objCAM.hidePreview();
 			                spec.waitForResponse();
@@ -466,7 +559,7 @@ describe("Camera API Manual Tests", function(){
 						},"waiting for callback data", 12000);
 
 						runs(function(){
-							spec.addResult(callbackData);
+							spec.addResult("callbackdata: ", callbackData);
 							document.getElementById('imageUri').src = imageUriData;
 							spec.displayResults();
 							objCAM.hidePreview();
@@ -500,7 +593,7 @@ describe("Camera API Manual Tests", function(){
 						},"waiting for callback data", 12000);
 
 						runs(function(){
-							spec.addResult(callbackData);
+							spec.addResult("callbackdata: ", callbackData);
 							spec.displayResults();
 							objCAM.hidePreview();
 			                spec.waitForResponse();
@@ -533,7 +626,7 @@ describe("Camera API Manual Tests", function(){
 						},"waiting for callback data", 12000);
 
 						runs(function(){
-							spec.addResult(callbackData);
+							spec.addResult("callbackdata: ", callbackData);
 							document.getElementById('imageUri').src = imageUriData;
 							spec.displayResults();
 							objCAM.hidePreview();
@@ -567,7 +660,7 @@ describe("Camera API Manual Tests", function(){
 						},"waiting for callback data", 12000);
 
 						runs(function(){
-							spec.addResult(callbackData);
+							spec.addResult("callbackdata: ", callbackData);
 							spec.displayResults();
 							objCAM.hidePreview();
 			                spec.waitForResponse();
@@ -601,7 +694,7 @@ describe("Camera API Manual Tests", function(){
 						},"waiting for callback data", 12000);
 
 						runs(function(){
-							spec.addResult(callbackData);
+							spec.addResult("callbackdata: ", callbackData);
 							spec.displayResults();
 							objCAM.hidePreview();
 			                spec.waitForResponse();
@@ -726,7 +819,7 @@ describe("Camera API Manual Tests", function(){
 					},"waiting for callback data", 10000);
 
 					runs(function(){
-						spec.addResult(callbackData);
+						spec.addResult("callbackdata: ", callbackData);
 						spec.displayResults();
 		                spec.waitForResponse();
 					});
@@ -751,7 +844,7 @@ describe("Camera API Manual Tests", function(){
 					},"waiting for callback data", 10000);
 
 					runs(function(){
-						spec.addResult(callbackData);
+						spec.addResult("callbackdata: ", callbackData);
 						spec.displayResults();
 		                spec.waitForResponse();
 					});
@@ -777,7 +870,7 @@ describe("Camera API Manual Tests", function(){
 					},"waiting for callback data", 10000);
 
 					runs(function(){
-						spec.addResult(callbackData);
+						spec.addResult("callbackdata: ", callbackData);
 						spec.displayResults();
 		                spec.waitForResponse();
 					});
@@ -802,7 +895,7 @@ describe("Camera API Manual Tests", function(){
 					},"waiting for callback data", 10000);
 
 					runs(function(){
-						spec.addResult(callbackData);
+						spec.addResult("callbackdata: ", callbackData);
 						spec.displayResults();
 		                spec.waitForResponse();
 					});
@@ -826,7 +919,7 @@ describe("Camera API Manual Tests", function(){
 					},"waiting for callback data", 10000);
 
 					runs(function(){
-						spec.addResult(callbackData);
+						spec.addResult("callbackdata: ", callbackData);
 						spec.displayResults();
 		                spec.waitForResponse();
 					});
@@ -869,7 +962,7 @@ describe("Camera API Manual Tests", function(){
 					},"waiting for callback data", 15000);
 
 					runs(function(){
-						spec.addResult(callbackData);
+						spec.addResult("callbackdata: ", callbackData);
 						spec.displayResults();
 		                spec.waitForResponse();
 					});
@@ -898,7 +991,7 @@ describe("Camera API Manual Tests", function(){
 					},"waiting for callback data", 10000);
 
 					runs(function(){
-						spec.addResult(callbackData);
+						spec.addResult("callbackdata: ", callbackData);
 						spec.displayResults();
 		                spec.waitForResponse();
 					});	
@@ -922,7 +1015,7 @@ describe("Camera API Manual Tests", function(){
 					},"waiting for callback data", 10000);
 
 					runs(function(){
-						spec.addResult(callbackData);
+						spec.addResult("callbackdata: ", callbackData);
 						spec.displayResults();
 		                spec.waitForResponse();
 					});
@@ -949,7 +1042,7 @@ describe("Camera API Manual Tests", function(){
 						},"waiting for callback data", 10000);
 
 						runs(function(){
-							spec.addResult(callbackData);
+							spec.addResult("callbackdata: ", callbackData);
 							spec.displayResults();
 			                spec.waitForResponse();
 						});					
@@ -974,7 +1067,7 @@ describe("Camera API Manual Tests", function(){
 						},"waiting for callback data", 10000);
 
 						runs(function(){
-							spec.addResult(callbackData);
+							spec.addResult("callbackdata: ", callbackData);
 							spec.displayResults();
 			                spec.waitForResponse();
 						});						
@@ -998,7 +1091,7 @@ describe("Camera API Manual Tests", function(){
 						},"waiting for callback data", 10000);
 
 						runs(function(){
-							spec.addResult(callbackData);
+							spec.addResult("callbackdata: ", callbackData);
 							spec.displayResults();
 			                spec.waitForResponse();
 						});
@@ -1026,7 +1119,7 @@ describe("Camera API Manual Tests", function(){
 						},"waiting for callback data", 10000);
 
 						runs(function(){
-							spec.addResult(callbackData);
+							spec.addResult("callbackdata: ", callbackData);
 							spec.displayResults();
 			                spec.waitForResponse();
 						});
@@ -1058,7 +1151,7 @@ describe("Camera API Manual Tests", function(){
 						},"waiting for callback data", 10000);
 
 						runs(function(){
-							spec.addResult(callbackData);
+							spec.addResult("callbackdata: ", callbackData);
 							spec.displayResults();
 			                spec.waitForResponse();
 						});
@@ -1082,7 +1175,7 @@ describe("Camera API Manual Tests", function(){
 						},"waiting for callback data", 10000);
 
 						runs(function(){
-							spec.addResult(callbackData);
+							spec.addResult("callbackdata: ", callbackData);
 							spec.displayResults();
 			                spec.waitForResponse();
 						});					
@@ -1108,7 +1201,7 @@ describe("Camera API Manual Tests", function(){
 					},"waiting for callback data", 10000);
 
 					runs(function(){
-						spec.addResult(callbackData);
+						spec.addResult("callbackdata: ", callbackData);
 						document.getElementById('imageUri').src = imageUriData;
 						spec.displayResults();
 		                spec.waitForResponse();
@@ -1133,7 +1226,7 @@ describe("Camera API Manual Tests", function(){
 					},"waiting for callback data", 10000);
 
 					runs(function(){
-						spec.addResult(callbackData);
+						spec.addResult("callbackdata: ", callbackData);
 						spec.displayResults();
 		                spec.waitForResponse();
 					});	
@@ -1157,7 +1250,7 @@ describe("Camera API Manual Tests", function(){
 					},"waiting for callback data", 10000);
 
 					runs(function(){
-						spec.addResult(callbackData);
+						spec.addResult("callbackdata: ", callbackData);
 						spec.displayResults();
 		                spec.waitForResponse();
 					});						
@@ -1181,7 +1274,7 @@ describe("Camera API Manual Tests", function(){
 					},"waiting for callback data", 10000);
 
 					runs(function(){
-						spec.addResult(callbackData);
+						spec.addResult("callbackdata: ", callbackData);
 						spec.displayResults();
 		                spec.waitForResponse();
 					});	
@@ -1210,7 +1303,7 @@ describe("Camera API Manual Tests", function(){
 					},"waiting for callback data", 10000);
 
 					runs(function(){
-						spec.addResult(callbackData);
+						spec.addResult("callbackdata: ", callbackData);
 						spec.displayResults();
 		                spec.waitForResponse();
 					});	
@@ -1236,7 +1329,7 @@ describe("Camera API Manual Tests", function(){
 						},"waiting for callback data", 10000);
 
 						runs(function(){
-							spec.addResult(callbackData);
+							spec.addResult("callbackdata: ", callbackData);
 							spec.displayResults();
 			                spec.waitForResponse();
 						});						
@@ -1261,7 +1354,7 @@ describe("Camera API Manual Tests", function(){
 						},"waiting for callback data", 10000);
 
 						runs(function(){
-							spec.addResult(callbackData);
+							spec.addResult("callbackdata: ", callbackData);
 							spec.displayResults();
 			                spec.waitForResponse();
 						});						
@@ -1287,7 +1380,7 @@ describe("Camera API Manual Tests", function(){
 					},"waiting for callback data", 10000);
 
 					runs(function(){
-						spec.addResult(callbackData);
+						spec.addResult("callbackdata: ", callbackData);
 						spec.displayResults();
 		                spec.waitForResponse();
 					});				
@@ -1313,7 +1406,7 @@ describe("Camera API Manual Tests", function(){
 						},"waiting for callback data", 10000);
 
 						runs(function(){
-							spec.addResult(callbackData);
+							spec.addResult("callbackdata: ", callbackData);
 							spec.displayResults();
 					        spec.waitForResponse();
 						});
@@ -1337,7 +1430,7 @@ describe("Camera API Manual Tests", function(){
 						},"waiting for callback data", 10000);
 
 						runs(function(){
-							spec.addResult(callbackData);
+							spec.addResult("callbackdata: ", callbackData);
 							spec.displayResults();
 					        spec.waitForResponse();
 						});	
@@ -1367,7 +1460,7 @@ describe("Camera API Manual Tests", function(){
 					},"waiting for callback data", 10000);
 
 					runs(function(){
-						spec.addResult(callbackData);
+						spec.addResult("callbackdata: ", callbackData);
 						spec.displayResults();
 				        spec.waitForResponse();
 					});
@@ -1391,7 +1484,7 @@ describe("Camera API Manual Tests", function(){
 					},"waiting for callback data", 10000);
 
 					runs(function(){
-						spec.addResult(callbackData);
+						spec.addResult("callbackdata: ", callbackData);
 						spec.displayResults();
 				        spec.waitForResponse();
 					});
@@ -1420,7 +1513,7 @@ describe("Camera API Manual Tests", function(){
 					},"waiting for callback data", 10000);
 
 					runs(function(){
-						spec.addResult(callbackData);
+						spec.addResult("callbackdata: ", callbackData);
 						document.getElementById('imageUri').src = imageUriData;
 						spec.displayResults();
 				        spec.waitForResponse();
@@ -1447,7 +1540,7 @@ describe("Camera API Manual Tests", function(){
 					},"waiting for callback data", 10000);
 
 					runs(function(){
-						spec.addResult(callbackData);
+						spec.addResult("callbackdata: ", callbackData);
 						document.getElementById('imageUri').src = imageUriData;
 						spec.displayResults();
 				        spec.waitForResponse();
@@ -1480,7 +1573,6 @@ describe("Camera API Manual Tests", function(){
 
 				setTimeout(function(){
 					Rho.Camera.takepicture({}, callbackFunc);
-					spec.addResult("takePicture called in background");
 				},6000);
 
 				setTimeout(function(){
@@ -1489,7 +1581,7 @@ describe("Camera API Manual Tests", function(){
 			});
 
 			runs(function(){
-				spec.addResult(callbackData);
+				spec.addResult("callbackdata: ", callbackData);
 				spec.displayResults();
                 spec.waitForResponse();
 			});
