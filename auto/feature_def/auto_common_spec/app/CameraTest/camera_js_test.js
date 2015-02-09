@@ -1,13 +1,5 @@
 var arr_camera_property = [
 {
-	testName		:	"VT285-1001 | Set  captureSound :localpath and wave file| application/alarm.wav",
-	propertyName	:	"captureSound",
-	cameraTypes		:	"All",
-	OSTypes			:	"WINDOWS",
-	propertyValue	:	"file://application/alarm.wav",
-	expectedResult	:	"application/alarm.wav"
-},
-{
 	testName		:	"VT285-1001 | Set  captureSound :localpath and wave file | application/alarm.wav",
 	propertyName	:	"captureSound",
 	cameraTypes		:	"All",
@@ -15,21 +7,13 @@ var arr_camera_property = [
 	propertyValue	:	"file://application/alarm.wav",
 	expectedResult	:	"file://application/alarm.wav"
 },
-/*{
+{
 	testName		:	"VT285-1001 | Set  captureSound :localpath and wave file | application/alarm.wav",
 	propertyName	:	"captureSound",
 	cameraTypes		:	"All",
 	OSTypes			:	"APPLE",
 	propertyValue	:	"file://application/alarm.wav",
 	expectedResult	:	"file://application/alarm.wav"
-},*/
-{
-	testName		:	"VT285-1002 | Set  captureSound :localpath and mp3 file | application/alarm.mp3",
-	propertyName	:	"captureSound",
-	cameraTypes		:	"All",
-	OSTypes			:	"ANDROID",
-	propertyValue	:	"file://application/alarm.mp3",
-	expectedResult	:	"application/alarm.mp3"
 },
 {
 	testName		:	"VT285-1002 | Set  captureSound :localpath and mp3 file | application/alarm.mp3",
@@ -39,14 +23,14 @@ var arr_camera_property = [
 	propertyValue	:	"file://application/alarm.mp3",
 	expectedResult	:	"file://application/alarm.mp3"
 },
-/*{
+{
 	testName		:	"VT285-1002 | Set  captureSound :localpath and mp3 file | application/alarm.mp3",
 	propertyName	:	"captureSound",
 	cameraTypes		:	"All",
 	OSTypes			:	"APPLE",
 	propertyValue	:	"file://application/alarm.mp3",
 	expectedResult	:	"file://application/alarm.mp3"
-},*/
+},
 {
 	testName		:	"VT285-1001 | Set  captureSound :invalid path",
 	propertyName	:	"captureSound",
@@ -341,7 +325,7 @@ var arr_camera_property = [
 	cameraTypes		:	"All",
 	OSTypes			:	"All",
 	propertyValue	:	"file://application/test",
-	expectedResult	:	"application/test"
+	expectedResult	:	"file://application/test"
 },
 {
 	testName		:	"VT285-1013 | Set fileName :invalid path | invalid path",
@@ -702,103 +686,7 @@ var arr_camera_property = [
 	OSTypes			:	"ANDROID",
 	propertyValue	:	"",
 	expectedResult	:	""
-},
-{
-	testName		:	"VT285-1033 | Set cameraType : front | front ",
-	propertyName	:	"cameraType",
-	cameraTypes		:	"All",
-	OSTypes			:	"ANDROID APPLE",
-	propertyValue	:	"front",
-	expectedResult	:	"front"
-},
-{
-	testName		:	"VT285-1033 | Set cameraType : back | back ",
-	propertyName	:	"cameraType",
-	cameraTypes		:	"All",
-	OSTypes			:	"ANDROID APPLE",
-	propertyValue	:	"back",
-	expectedResult	:	"back"
-},
-{
-	testName		:	"VT285-1033 | Set cameraType : imager | imager ",
-	propertyName	:	"cameraType",
-	cameraTypes		:	"All",
-	OSTypes			:	"WINDOWS",
-	propertyValue	:	"imager",
-	expectedResult	:	"imager"
-},
-{
-	testName		:	"VT285-1033 | Set cameraType : color | color ",
-	propertyName	:	"cameraType",
-	cameraTypes		:	"All",
-	OSTypes			:	"WINDOWS",
-	propertyValue	:	"color",
-	expectedResult	:	"color"
-},
-{
-	testName		:	"VT285-1033 | Set cameraType : invalid | invalid ",
-	propertyName	:	"cameraType",
-	cameraTypes		:	"All",
-	OSTypes			:	"ANDROID APPLE WINDOWS",
-	propertyValue	:	"abc",
-	expectedResult	:	"abc"
-},
-{
-	testName		:	"VT285-1033 | Set cameraType : empty | empty ",
-	propertyName	:	"cameraType",
-	cameraTypes		:	"All",
-	OSTypes			:	"ANDROID APPLE WINDOWS",
-	propertyValue	:	"",
-	expectedResult	:	""
-},
-{
-	testName		:	"VT285-1033 | Set camera_type : front | front ",
-	propertyName	:	"camera_type",
-	cameraTypes		:	"All",
-	OSTypes			:	"ANDROID APPLE",
-	propertyValue	:	"front",
-	expectedResult	:	"front"
-},
-{
-	testName		:	"VT285-1033 | Set camera_type : back | back ",
-	propertyName	:	"camera_type",
-	cameraTypes		:	"All",
-	OSTypes			:	"ANDROID APPLE",
-	propertyValue	:	"back",
-	expectedResult	:	"back"
-},
-{
-	testName		:	"VT285-1033 | Set camera_type : imager | imager ",
-	propertyName	:	"camera_type",
-	cameraTypes		:	"All",
-	OSTypes			:	"WINDOWS",
-	propertyValue	:	"imager",
-	expectedResult	:	"imager"
-},
-{
-	testName		:	"VT285-1033 | Set camera_type : color | color ",
-	propertyName	:	"camera_type",
-	cameraTypes		:	"All",
-	OSTypes			:	"WINDOWS",
-	propertyValue	:	"color",
-	expectedResult	:	"color"
 }
-//,{
-// 	testName		:	"VT285-1033 | Set maxwidth : 640 | 640 ",
-// 	propertyName	:	"maxWidth",
-// 	cameraTypes		:	"All",
-// 	OSTypes			:	"Android Apple",
-// 	propertyValue	:	"640",
-// 	expectedResult	:	"640"
-// },
-// {
-// 	testName		:	"VT285-1033 | Set maxheight : 480 | 480 ",
-// 	propertyName	:	"maxHeight",
-// 	cameraTypes		:	"All",
-// 	OSTypes			:	"Android Apple",
-// 	propertyValue	:	"480",
-// 	expectedResult	:	"480"
-// }
 ];
 
 var camCallback = function (data){
