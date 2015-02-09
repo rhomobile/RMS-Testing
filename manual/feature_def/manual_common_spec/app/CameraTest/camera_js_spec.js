@@ -288,7 +288,7 @@ describe("Camera API Manual Tests", function(){
 		            var cameraTypeCb = function(camtype){
 						camtype = camtype;
 						cbkResponseTimeout = true;
-					});
+					};
 
 		            runs(function(){
 						Rho.Camera.getCameraByType({'cameraType':'back'}, cameraTypeCb);
@@ -365,7 +365,7 @@ describe("Camera API Manual Tests", function(){
 		            var cameraTypeCb = function(camtype){
 						camtype = camtype;
 						cbkResponseTimeout = true;
-					});
+					};
 
 		            runs(function(){
 						Rho.Camera.getCameraByType({'cameraType':'color'}, cameraTypeCb);
@@ -431,7 +431,7 @@ describe("Camera API Manual Tests", function(){
 		});
 
 
-	if (isAndroidPlatform() && isWindowsMobilePlatform()){
+	if (isAndroidPlatform() || isWindowsMobilePlatform()){
 
 		describe("supportedSizeList property", function() {
 

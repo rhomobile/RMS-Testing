@@ -6,8 +6,6 @@ describe("Camera JS API Test", function() {
     var enumData = Rho.Camera.enumerate();
     var callbackstatus = false;
 	var getcallbackdata = '';
-	var capturedata = '';
-	var capturestatus = '';
 
     var callbackgetproperties = function (data){
 		getpropertiesdata = JSON.stringify(data);
@@ -17,17 +15,6 @@ describe("Camera JS API Test", function() {
 	var callbackgetproperty = function (data){
 		getpropertydata = data;
 		callbackstatus = true;
-	}
-
-	var captureCallback = function (data){
-		capturedata.status = data.status
-		capturedata.imageHeight = data.imageHeight
-		capturedata.imageWidth = data.imageWidth
-		capturedata.imageFormat = data.imageFormat
-		capturedata.message = data.message
-		capturedata.imageUri = data.imageUri
-
-		capturestatus = true;
 	}
 
     for (var j = 0;j<enumData.length;j++){
@@ -143,10 +130,13 @@ describe("Camera JS API Test", function() {
 					callbackstatus = false;
 				});
 
+				var defaultobj;
+
+
 				it("VT285-084 | call getProperties() with sync callback and hash |" + camtype, function() {
 
 					runs(function() {
-					    enumObject.setProperties({'compressionFormat':'png','desiredHeight':640,'outputFormat':'dataUri'});
+					    enumObject.setProperties({'compressionFormat':'png','desiredHeight':120,'outputFormat':'dataUri'});
 						enumObject.getProperties(['compressionFormat','desiredHeight','outputFormat'],callbackgetproperties);
 					});
 
@@ -154,9 +144,14 @@ describe("Camera JS API Test", function() {
 						return callbackstatus;
 					});
 
-					runs(function() {							
-						expect(getpropertiesdata).toContain('png');
-						expect(getpropertiesdata).toContain('640');
+					runs(function() {
+						if(isApplePlatform()){
+							expect(getpropertiesdata).toContain('png');	
+						}else{
+							expect(getpropertiesdata).toContain('jpg');
+						}
+						
+						expect(getpropertiesdata).toContain('120');
 						expect(getpropertiesdata).toContain('dataUri');	
 					});
 				});
@@ -173,7 +168,7 @@ describe("Camera JS API Test", function() {
 					});	
 
 					runs(function() {								
-						expect(getpropertiesdata).toContain('480');
+						//expect(getpropertiesdata).toContain('480');
 						expect(getpropertiesdata).toContain('jpg');
 						expect(getpropertiesdata).toContain('image');	
 					});							
@@ -186,7 +181,7 @@ describe("Camera JS API Test", function() {
 						var data = enumObject.getProperties(['compressionFormat','desiredHeight','outputFormat']);
 						getpropertiesdata = JSON.stringify(data);
 						expect(getpropertiesdata).toContain('png');
-						expect(getpropertiesdata).toContain('640');
+						//expect(getpropertiesdata).toContain('640');
 						expect(getpropertiesdata).toContain('dataUri');						
 				});
 
@@ -218,7 +213,11 @@ describe("Camera JS API Test", function() {
 					});	
 					
 					runs(function() {	
-						expect(getpropertydata).toEqual('png');
+						if(isApplePlatform()){
+							expect(getpropertydata).toEqual('png');
+						}else{
+							expect(getpropertydata).toEqual('jpg')
+						}
 					});								
 				});
 
@@ -233,15 +232,7 @@ describe("Camera JS API Test", function() {
 				it("VT285-077 | call getDefault |" + camtype, function() {
 
 					    Rho.Camera.setDefault(enumObject);
-					    var defaultobj = Rho.Camera.getDefault();
-						expect(camtype).toEqual(defaultobj.getProperty('ID'));
-				});
-
-				it("VT285-077A | call Default |" + camtype, function() {
-
-					    //Rho.Camera.setDefaultID( enumObject.getId());
-					   	//Rho.Camera.setDefault( enumObject );
-					    //var defaultobj = Rho.Camera.getDefault();
+					    defaultobj = Rho.Camera.getDefault();
 						expect(camtype).toEqual(defaultobj.getProperty('ID'));
 				});
 
@@ -251,52 +242,56 @@ describe("Camera JS API Test", function() {
 					    
 					    if (isWindowsMobilePlatform())
 					    {
-						    expect(Rho.Camera.previewHeight).toBeGreaterThan(0);
-							expect(Rho.Camera.previewLeft).toBeGreaterThan(0);
-							expect(Rho.Camera.previewTop).toBeGreaterThan(0);
-							expect(Rho.Camera.previewWidth).toBeGreaterThan(0);
+						    expect(defaultobj.previewHeight).toBeGreaterThan(0);
+							expect(defaultobj.previewLeft).toBeGreaterThan(0);
+							expect(defaultobj.previewTop).toBeGreaterThan(0);
+							expect(defaultobj.previewWidth).toBeGreaterThan(0);
 					    }
 
 					    if (isApplePlatform() || isAndroidPlatform())
 					    {
-						    expect(Rho.Camera.saveToDeviceGallery).toEqual(true);
-						    expect(enumObject.colorModel).toEqual('rgb');
+						    expect(defaultobj.saveToDeviceGallery).toEqual(true);
+						    expect(defaultobj.colorModel).toEqual('rgb');
 					    }
 
 					    if (isApplePlatform())
 					    {
-					    	expect(Rho.Camera.enableEditing).toEqual(true);
+					    	expect(defaultobj.enableEditing).toEqual(true);
 					    }
 
 					    if (isAndroidPlatform())
 					    {
-					    	expect(Rho.Camera.flashMode).toEqual('off');
-					    	expect(Rho.Camera.useSystemViewfinder).toEqual(false);
+					    	expect(defaultobj.flashMode).toEqual('off');
+					    	expect(defaultobj.useSystemViewfinder).toEqual(false);
 					    }
                         if (!isWindowsPhone8Platform())
 						{
-						expect(enumObject.compressionFormat).toEqual('jpg');
+						expect(defaultobj.compressionFormat).toEqual('jpg');
                         }
-						expect(enumObject.desiredHeight).toBeGreaterThan(0);
-						expect(enumObject.desiredWidth).toBeGreaterThan(0);
-						expect(Rho.Camera.outputFormat).toEqual('image');
+						expect(defaultobj.desiredHeight).toBeGreaterThan(0);
+						expect(defaultobj.desiredWidth).toBeGreaterThan(0);
+						expect(defaultobj.outputFormat).toEqual('image');
 						
 					});
 				});
 
 				it("VT299-091 | check values of all read only property |", function() {
 
-					runs(function() {						    
-					    var type = "back front";
-					    var resolution = enumObject.supportedSizeList
+					runs(function() {
+						if(isWindowsMobilePlatform()){
+							var type = "imager color";
+						}else{
+							var type = "back front";						
+						}				    
+					    
+					    var resolution = enumObject.supportedSizeList;
 
 						expect(type).toContain(enumObject.cameraType);						
 						expect(enumObject.maxHeight).toBeGreaterThan(0);
 						expect(enumObject.maxWidth).toBeGreaterThan(0);
-						expect(resolution.width).toBeGreaterThan(0);					
-						expect(resolution.height).toBeGreaterThan(0);
-						
-						Rho.Camera.hide();
+						expect(resolution.length).toBeGreaterThan(0);
+						expect(resolution[0].width).toBeGreaterThan(0);
+						expect(resolution[0].height).toBeGreaterThan(0);
 					});
 				});
 
@@ -304,7 +299,10 @@ describe("Camera JS API Test", function() {
 
 					runs(function() {
 					    enumObject.setProperties({'compressionFormat':'jpg','desiredHeight':640,'outputFormat':'dataUri'});
-						enumObject.getAllProperties(function(data){getpropertydata = data;callbackstatus = true;});
+						enumObject.getAllProperties(function(data){
+							getpropertydata = JSON.stringify(data);
+							callbackstatus = true;
+						});
 					});
 
 					waitsFor(function(){
@@ -313,128 +311,214 @@ describe("Camera JS API Test", function() {
 					
 					runs(function() {	
 						expect(getpropertydata).toContain('jpg');
-						expect(getpropertydata).toContain(640);
-						expect(getpropertydata).toContain('datauri');
+						//expect(getpropertydata).toContain(640);
+						expect(getpropertydata).toContain('dataUri');
 					});								
 				});
 
 			});
 
-			describe("Call capture method with callback | "+ camtype +": "+ camname, function() {
+			if(isWindowsMobilePlatform()){
 
-				beforeEach(function() {
-				    capturedata = '';
-				    capturestatus = false;
-				});
+				describe("Call capture method with callback | "+ camtype +": "+ camname, function() {
 
-				var data = [{"desiredHeight":360, "desiredWidth":480}, 
-				{"compressionFormat":"png"}, {"compressionFormat":"jpg"}, {"outputFormat":"image"}, {"outputFormat":"dataUri"}, 
-				{"colorModel":"grayscale"}, {"colorModel":"rgb"},
-				{"aimMode":"off"}, {"flashMode":"off"}];
+					var capturedata = {};
+					var capturestatus = false;
+					enumObject.previewTop = 20;
+					enumObject.previewLeft = 20;
+					enumObject.previewWidth = 100;
+					enumObject.previewHeight = 100;
 
-				for(i=0 ; i<data.length ; i++ ){
+					var captureCallback = function (data){
+						capturedata.status = data.status
+						capturedata.imageHeight = data.imageHeight
+						capturedata.imageWidth = data.imageWidth
+						capturedata.imageFormat = data.imageFormat
+						capturedata.message = data.message
+						capturedata.imageUri = data.imageUri
 
-					it("Call capture method with callback for | " + JSON.stringify(data[i]) , function() {
+						capturestatus = true;
+					}
 
-						runs(function() {
-						    var props = '';
-					    	props = data[i];
-					    	enumObject.showPreview(props);
+					beforeEach(function() {
+					    capturedata = {};
+					    capturestatus = false;
+					});
 
-					    	setTimeout(function(){
-					    		enumObject.capture(captureCallback);
-					    	},5000);
-						    
-						});
+					var data = [{"compressionFormat":"png"}, {"compressionFormat":"jpg"}, {"outputFormat":"image"}, {"outputFormat":"dataUri"}, 
+					{"colorModel":"grayscale"}, {"colorModel":"rgb"},
+					{"aimMode":"off"}, {"flashMode":"off"}];
 
-						waitsFor(function(){
-							return capturestatus;
-						}, 10000);
-						
-						runs(function() {	
-							expect(capturedata.status).toEqual('ok');
-							expect(capturedata.message).toEqual('');
+					for(i=0 ; i<data.length ; i++ ){
 
-							if(data[i]['desiredHeight'])
-								expect(capturedata.imageHeight).toEqual(data[i]['desiredHeight']);
-							else
+						it("Call capture method with callback for | " + JSON.stringify(data[i]) , function() {
+
+							runs(function() {
+							    var props = '';
+						    	props = data[i];
+						    	enumObject.showPreview(props);
+
+						    	setTimeout(function(){
+						    		enumObject.capture(captureCallback);
+						    	},5000);
+							    
+							});
+
+							waitsFor(function(){
+								return capturestatus;
+							}, 10000);
+							
+							runs(function() {	
+								expect(capturedata.status).toEqual('ok');
+								expect(capturedata.message).toEqual('');
 								expect(capturedata.imageHeight).toBeGreaterThan(0);
-
-							if(data[i]['desiredWidth'])
-								expect(capturedata.imageWidth).toEqual(data[i]['desiredWidth']);
-							else
 								expect(capturedata.imageWidth).toBeGreaterThan(0);
 
-							if ((data[i]['outputFormat']) && (data[i]['outputFormat'] =! 'dataUri')){
-								if ((data[i]['compressionFormat']) == 'png' && !(isWindowsMobilePlatform())){
-									expect(capturedata.imageUri).toContain('.png');}
-								else{
-									expect(capturedata.imageUri).toContain('.jpg');
+								if ((data[i]['outputFormat']) && (data[i]['outputFormat'] =! 'dataUri')){
+									if ((data[i]['compressionFormat']) == 'png' && (isApplePlatform())){
+										expect(capturedata.imageUri).toContain('.png');}
+									else{
+										expect(capturedata.imageUri).toContain('.jpg');
+									};
+								}else{
+									expect(capturedata.imageUri).not.toEqual('');
 								};
-								}
-							else{
+							});		
+
+							enumObject.hidePreview();
+
+						});
+					};
+
+					var data = [{"desiredHeight":727, "desiredWidth":1099}, {"desiredHeight":'', "desiredWidth":''}, 
+					{"compressionFormat":""}, {"outputFormat":""}, {"colorModel":""}, {"captureSound":""},
+					{"previewTop":250, "previewWidth":250 ,"previewLeft":300, "previewHeight":200},
+					{"previewTop":-25, "previewWidth":-250 ,"previewLeft":-30, "previewHeight":-200},
+					{"previewTop":0, "previewWidth":0 ,"previewLeft":0, "previewHeight":0},
+					{"previewTop":10, "previewWidth":20 ,"previewLeft":-10, "previewHeight":-60},
+					{"aimMode":""}, {"flashMode":""}]
+
+					for(i=0 ; i<data.length ; i++ ){
+
+						it("Call capture method with callback for | " + JSON.stringify(data[i]) , function() {
+
+							runs(function() {
+							    var props = '';
+						    	props = data[i];
+						    	enumObject.showPreview(props);
+
+						    	setTimeout(function(){
+						    		enumObject.capture(captureCallback);
+						    	},5000);
+							    
+							});
+
+							waitsFor(function(){
+								return capturestatus;
+							}, 10000);
+							
+							runs(function() {	
+								expect(capturedata.status).toEqual('ok');
+								expect(capturedata.message).toEqual('');
+								expect(capturedata.imageHeight).toBeGreaterThan(0);
+								expect(capturedata.imageWidth).toBeGreaterThan(0);
 								expect(capturedata.imageUri).not.toEqual('');
-							};
-						});		
+							});		
 
-						enumObject.hidePreview();
+							enumObject.hidePreview();
 
-					});
-				};
+						});
+					};
 
-				var data = [{"desiredHeight":727, "desiredWidth":1099}, {"desiredHeight":'', "desiredWidth":''}, 
-				{"compressionFormat":""}, {"outputFormat":""}, {"colorModel":""}, {"captureSound":""},
-				{"previewTop":250, "previewWidth":250 ,"previewLeft":300, "previewHeight":200},
-				{"previewTop":-25, "previewWidth":-250 ,"previewLeft":-30, "previewHeight":-200},
-				{"previewTop":0, "previewWidth":0 ,"previewLeft":0, "previewHeight":0},
-				{"previewTop":10, "previewWidth":20 ,"previewLeft":-10, "previewHeight":-60},
-				{"aimMode":""}, {"flashMode":""}]
+					var datainval = [{"compressionFormat":"invalid"}, {"outputFormat":"invalid"},
+					{"colorModel":"invalid"}, {"captureSound":"file://application/alarm.waved"},
+					{"previewTop":'10', "previewWidth":'20' ,"previewLeft":'10', "previewHeight":'60'},
+					{"aimMode":"invalid"}, {"flashMode":"invalid"}]
 
-				for(i=0 ; i<data.length ; i++ ){
+					for(i=0 ; i<datainval.length ; i++ ){
 
-					it("Call capture method with callback for | " + JSON.stringify(data[i]) , function() {
+						it("Call capture method with callback for invalid values | " + JSON.stringify(datainval[i]) , function() {
 
-						runs(function() {
-						    var props = '';
-					    	props = data[i];
-					    	enumObject.showPreview(props);
+							runs(function() {
+							    var props = '';
+						    	props = datainval[i];
+						    	enumObject.showPreview(props);
 
-					    	setTimeout(function(){
-					    		enumObject.capture(captureCallback);
-					    	},5000);
-						    
+						    	setTimeout(function(){
+						    		enumObject.capture(captureCallback);
+						    	},5000);
+							    
+							});
+
+							waitsFor(function(){
+								return capturestatus;
+							}, 10000);
+							
+							runs(function() {	
+								expect(capturedata.status).toEqual('ok');
+								expect(capturedata.message).toEqual('');
+								expect(capturedata.imageHeight).toBeGreaterThan(0);
+								expect(capturedata.imageWidth).toBeGreaterThan(0);
+								expect(capturedata.imageUri).not.toEqual('');
+								expect('jpg png').toContain(capturedata.imageFormat);
+							});
+
+							enumObject.hidePreview();
+
 						});
 
-						waitsFor(function(){
-							return capturestatus;
-						}, 10000);
-						
-						runs(function() {	
-							expect(capturedata.status).toEqual('ok');
-							expect(capturedata.message).toEqual('');
-							expect(capturedata.imageHeight).toBeGreaterThan(0);
-							expect(capturedata.imageWidth).toBeGreaterThan(0);
-							expect(capturedata.imageUri).not.toEqual('');
-						});		
 
-						enumObject.hidePreview();
+					};
 
-					});
-				};
+					var modelfolder = Rho.Application.modelFolderPath("CameraTest");
+					var tempFolder = Rho.RhoFile.join(modelfolder, "tempFolder");
 
-				var datainval = [{"compressionFormat":"invalid"}, {"outputFormat":"invalid"},
-				{"colorModel":"invalid"}, {"captureSound":"file://application/alarm.waved"},
-				{"previewTop":'10', "previewWidth":'20' ,"previewLeft":'10', "previewHeight":'60'},
-				{"aimMode":"invalid"}, {"flashMode":"invalid"}]
+					var fileList = ['cameraimage', 'camera@#$', '_123Image', '12_image', 'QWERTY'];
+					
+					for(i=0 ; i<fileList.length ; i++ ){
 
-				for(i=0 ; i<datainval.length ; i++ ){
+						if (Rho.RhoFile.exists(tempFolder) == false){
+							Rho.RhoFile.makeDir(tempFolder);}
 
-					it("Call capture method with callback for invalid values | " + JSON.stringify(datainval[i]) , function() {
+						var file = Rho.Application.join(tempFolder, fileList[i]);
+
+						if(Rho.RhoFile.exists(file)){
+							Rho.RhoFile.deleteFile(file);}
+
+						it("Call capture method with fileName : " + file , function() {
+
+							runs(function() {
+						    	enumObject.showPreview({'outputFormat' : 'image', 'fileName' : file});
+
+						    	setTimeout(function(){
+						    		enumObject.capture(captureCallback);
+						    	},5000);
+							    
+							});
+
+							waitsFor(function(){
+								return capturestatus;
+							}, 10000);
+							
+							runs(function() {	
+								expect(capturedata.status).toEqual('ok');
+								expect(capturedata.message).toEqual('');
+								expect(capturedata.imageHeight).toBeGreaterThan(0);
+								expect(capturedata.imageWidth).toBeGreaterThan(0);
+								expect(capturedata.imageUri).toContain(fileList[i]);
+							});
+
+							enumObject.hidePreview();
+
+						});
+					};
+
+
+					it("Call capture method with invalid fileName path : " + file , function() {
 
 						runs(function() {
-						    var props = '';
-					    	props = datainval[i];
-					    	enumObject.showPreview(props);
+
+					    	enumObject.showPreview({"fileName" : "\\Programfiles\\invalidpath\\camimage"});
 
 					    	setTimeout(function(){
 					    		enumObject.capture(captureCallback);
@@ -449,87 +533,16 @@ describe("Camera JS API Test", function() {
 						runs(function() {	
 							expect(capturedata.status).toEqual('error');
 							expect(capturedata.message).not.toEqual('');
-						});		
-
-						enumObject.hidePreview();
-
-					});
-
-
-				};
-
-				var modelfolder = Rho.Application.modelFolderPath("CameraTest");
-				var tempFolder = Rho.RhoFile.join(modelfolder, "tempFolder");
-
-				var fileList = ['cameraimage', 'camera@#$', '_123Image', '12_image', 'QWERTY'];
-				
-				for(i=0 ; i<fileList.length ; i++ ){
-
-					if (Rho.RhoFile.exists(tempFolder) == false)
-						Rho.RhoFile.makeDir(tempFolder);
-					var file = Rho.Application.join(tempFolder, fileList[i]);
-					if(Rho.RhoFile.exists(file)){
-						Rho.RhoFile.deleteFile(file)};
-
-					it("Call capture method with fileName : " + file , function() {
-
-						runs(function() {
-						    var props = '';
-					    	props = data[i];
-					    	enumObject.showPreview({'fileName' : file});
-
-					    	setTimeout(function(){
-					    		enumObject.capture(captureCallback);
-					    	},5000);
-						    
-						});
-
-						waitsFor(function(){
-							return capturestatus;
-						}, 10000);
-						
-						runs(function() {	
-							expect(capturedata.status).toEqual('ok');
-							expect(capturedata.message).toEqual('');
-							expect(capturedata.imageHeight).toBeGreaterThan(0);
-							expect(capturedata.imageWidth).toBeGreaterThan(0);
-							expect(capturedata.imageUri).toContain(fileList[i]);
 						});
 
 						enumObject.hidePreview();
 
 					});
-				};
-
-
-				it("Call capture method with invalid fileName path : " + file , function() {
-
-					runs(function() {
-
-				    	enumObject.showPreview({"fileName" : "\\Programfiles\\invalidpath\\camimage"});
-
-				    	setTimeout(function(){
-				    		enumObject.capture(captureCallback);
-				    	},5000);
-					    
-					});
-
-					waitsFor(function(){
-						return capturestatus;
-					}, 10000);
-					
-					runs(function() {	
-						expect(capturedata.status).toEqual('error');
-						expect(capturedata.message).not.toEqual('');
-					});
-
-					enumObject.hidePreview();
 
 				});
 
-			});
+			};
 
-			
 			describe("Properties with constants ", function() {
 
 				it("Should set flashMode to FLASH_ON using direct calling method", function() {
