@@ -25,211 +25,9 @@ describe("Camera JS API Test", function() {
 
 			var camname = enumObject.getProperty('cameraType');
 			var camtype = enumObject.getProperty('ID');
-
-
-			describe("Camera property using set/getProperty for "+ camtype +": "+ camname, function() {
-
-				for (var i=0;i<arrCamera.length;i++){
-
-					(function(idx){
-						it(arrCamera[idx]['testName'], function() {
-
-							    enumObject.setProperty(arrCamera[idx]['propertyName'],arrCamera[idx]['propertyValue']);
-								var data = enumObject.getProperty(arrCamera[idx]['propertyName']);
-								expect(data).toEqual(arrCamera[idx]['expectedResult']);
-						});
-
-					})(i);
-
-				}
-			});
-
-			describe("Camera property Using set/getProperties for "+ camtype +": "+ camname, function() {
-
-				for (var i=0;i<arrCamera.length;i++){
-
-					(function(idx){
-						it(arrCamera[idx]['testName'], function() {
-						
-							var propertyName = arrCamera[idx]['propertyName'];
-							var propertyValue = arrCamera[idx]['propertyValue'];
-
-							if (propertyValue == 'true')
-								var strProperty = '{"'+propertyName+'" :'+true+'}';
-							else if (propertyValue == 'false')
-								var strProperty = '{"'+propertyName+'" :'+false+'}';
-							else if (!isNaN(propertyValue)){
-								propertyValue = parseInt(propertyValue);
-								var strProperty = '{"'+propertyName+'" :'+propertyValue+'}';
-							}
-							else{
-								var strProperty = '{"'+propertyName+'" : "'+propertyValue+'"}'
-							}
-
-							var objProperty = JSON.parse(strProperty);
-						
-							enumObject.setProperties(objProperty);
-
-							var strGetProperty = '["'+arrCamera[idx]['propertyName']+'"]';
-							var objGetProperty = JSON.parse(strGetProperty);
-
-							var data = enumObject.getProperties(objGetProperty);
-
+		describe("Camera default check", function() {
 			
-							data = data[arrCamera[idx]['propertyName']];
-							expect(data).toEqual(arrCamera[idx]['expectedResult']);
-	
-						});
-					})(i);
-				}
-			});
-
-			describe("Camera property setting Directly for "+ camtype +": "+ camname, function() {
-
-				for (var i=0;i<arrCamera.length;i++){
-
-					(function(idx){
-						it(arrCamera[idx]['testName'], function() {
-							
-							var propertyName = arrCamera[idx]['propertyName'];
-							var propertyValue = arrCamera[idx]['propertyValue'];
-
-							try{
-								if (propertyValue == 'true')
-									eval(enumObject)[propertyName] = true;
-								else if (propertyValue == 'false')
-									eval(enumObject)[propertyName] = false;
-								else if (!isNaN(propertyValue)){
-									propertyValue = parseInt(propertyValue);
-									eval(enumObject)[propertyName] = propertyValue;	
-								}
-								else{
-									eval(enumObject)[propertyName] = propertyValue;
-								}
-
-								//var data = enumObject.getProperty(arrCamera[idx]['propertyName']);
-								var data = eval(enumObject)[propertyName];
-							}
-							catch(err){
-
-								var data = err.message;
-							}
-
-							expect(data).toEqual(arrCamera[idx]['expectedResult']);
-
-						});
-					})(i);
-				}
-			});
-
-			describe("getProperty and get properties with all combination for "+ camtype +": "+ camname, function() {
-
-				beforeEach(function() {
-					getpropertiesdata ='';
-					getpropertydata ='';
-					callbackstatus = false;
-				});
-
-				var defaultobj;
-
-
-				it("VT285-084 | call getProperties() with sync callback and hash |" + camtype, function() {
-
-					runs(function() {
-					    enumObject.setProperties({'compressionFormat':'png','desiredHeight':120,'outputFormat':'dataUri'});
-						enumObject.getProperties(['compressionFormat','desiredHeight','outputFormat'],callbackgetproperties);
-					});
-
-					waitsFor(function(){
-						return callbackstatus;
-					});
-
-					runs(function() {
-						if(isApplePlatform()){
-							expect(getpropertiesdata).toContain('png');	
-						}else{
-							expect(getpropertiesdata).toContain('jpg');
-						}
-						
-						expect(getpropertiesdata).toContain('120');
-						expect(getpropertiesdata).toContain('dataUri');	
-					});
-				});
-
-				it("VT285-085 | call getProperties() with anonymous callback and hash |" + camtype, function() {
-
-					runs(function() {    
-					    enumObject.setProperties({'compressionFormat':'jpg','desiredWidth':480,'outputFormat':'image'});
-						enumObject.getProperties(['compressionFormat','desiredWidth','outputFormat'],function(data){getpropertiesdata = JSON.stringify(data);callbackstatus = true;});
-					});
-
-					waitsFor(function(){
-						return callbackstatus;
-					});	
-
-					runs(function() {								
-						//expect(getpropertiesdata).toContain('480');
-						expect(getpropertiesdata).toContain('jpg');
-						expect(getpropertiesdata).toContain('image');	
-					});							
-				});
-
-				it("VT285-086 | call getProperties() without callback |" + camtype, function() {
-
-					    //enumObject.clearAllProperties();
-					    enumObject.setProperties({'compressionFormat':'png','desiredHeight':640,'outputFormat':'dataUri'});
-						var data = enumObject.getProperties(['compressionFormat','desiredHeight','outputFormat']);
-						getpropertiesdata = JSON.stringify(data);
-						expect(getpropertiesdata).toContain('png');
-						//expect(getpropertiesdata).toContain('640');
-						expect(getpropertiesdata).toContain('dataUri');						
-				});
-
-				it("VT285-087 | call getProperty() with sync callback and property |" + camtype, function() {
-
-					runs(function() {  									    
-					    enumObject.setProperty('compressionFormat','jpg');
-						enumObject.getProperty("compressionFormat",callbackgetproperty);
-					});
-
-					waitsFor(function(){
-						return callbackstatus;
-					});	
-					
-					runs(function() {	
-						expect(getpropertydata).toEqual('jpg');
-					});										
-				});
-
-				it("VT285-088 | call getProperty() with anonymous callback and property |" + camtype, function() {
-
-					runs(function() {
-					    enumObject.setProperty('compressionFormat','png');
-						enumObject.getProperty('compressionFormat',function(data){getpropertydata = data;callbackstatus = true;});
-					});
-
-					waitsFor(function(){
-						return callbackstatus;
-					});	
-					
-					runs(function() {	
-						if(isApplePlatform()){
-							expect(getpropertydata).toEqual('png');
-						}else{
-							expect(getpropertydata).toEqual('jpg')
-						}
-					});								
-				});
-
-				it("VT285-089 | call getProperty() without callback |" + camtype, function() {
-	    
-					    enumObject.setProperty('compressionFormat','jpg');
-						var data = enumObject.getProperty("compressionFormat");
-						getpropertydata = data;
-						expect(getpropertydata).toEqual('jpg');								
-				});
-
-				it("VT285-077 | call getDefault |" + camtype, function() {
+			it("VT285-077 | call getDefault |" + camtype, function() {
 
 					    Rho.Camera.setDefault(enumObject);
 					    defaultobj = Rho.Camera.getDefault();
@@ -294,6 +92,220 @@ describe("Camera JS API Test", function() {
 						expect(resolution[0].height).toBeGreaterThan(0);
 					});
 				});
+           });
+
+			describe("Camera property using set/getProperty for "+ camtype +": "+ camname, function() {
+
+				for (var i=0;i<arrCamera.length;i++){
+
+					(function(idx){
+						it(arrCamera[idx]['testName'], function() {
+
+							    enumObject.setProperty(arrCamera[idx]['propertyName'],arrCamera[idx]['propertyValue']);
+								var data = enumObject.getProperty(arrCamera[idx]['propertyName']);
+								expect(data).toEqual(arrCamera[idx]['expectedResult']);
+						});
+
+					})(i);
+
+				}
+			});
+
+			describe("Camera property Using set/getProperties for "+ camtype +": "+ camname, function() {
+
+				for (var i=0;i<arrCamera.length;i++){
+
+					(function(idx){
+						it(arrCamera[idx]['testName'], function() {
+						
+							var propertyName = arrCamera[idx]['propertyName'];
+							var propertyValue = arrCamera[idx]['propertyValue'];
+
+							if (propertyValue == 'true')
+								var strProperty = '{"'+propertyName+'" :'+true+'}';
+							else if (propertyValue == 'false')
+								var strProperty = '{"'+propertyName+'" :'+false+'}';
+							else if (!isNaN(propertyValue)){
+								propertyValue = parseInt(propertyValue);
+								var strProperty = '{"'+propertyName+'" :'+propertyValue+'}';
+							}
+							else{
+								var strProperty = '{"'+propertyName+'" : "'+propertyValue+'"}'
+							}
+
+							var objProperty = JSON.parse(strProperty);
+						
+							enumObject.setProperties(objProperty);
+
+							var strGetProperty = '["'+arrCamera[idx]['propertyName']+'"]';
+							var objGetProperty = JSON.parse(strGetProperty);
+
+							var data = enumObject.getProperties(objGetProperty);
+
+			
+							data = data[arrCamera[idx]['propertyName']];
+							//alert(data);
+							expect(data).toEqual(arrCamera[idx]['expectedResult']);
+	
+						});
+					})(i);
+				}
+			});
+
+			describe("Camera property setting Directly for "+ camtype +": "+ camname, function() {
+
+				for (var i=0;i<arrCamera.length;i++){
+
+					(function(idx){
+						it(arrCamera[idx]['testName'], function() {
+							
+							var propertyName = arrCamera[idx]['propertyName'];
+							var propertyValue = arrCamera[idx]['propertyValue'];
+							var result;
+
+							try{
+								if (propertyValue == 'true')
+									eval(enumObject)[propertyName] = true;
+								else if (propertyValue == 'false')
+									eval(enumObject)[propertyName] = false;
+								else if (!isNaN(propertyValue)){
+									propertyValue = parseInt(propertyValue);
+									eval(enumObject)[propertyName] = propertyValue;	
+									 result = parseInt(arrCamera[idx]['expectedResult']);
+								}
+								else{
+									eval(enumObject)[propertyName] = propertyValue;
+									result = arrCamera[idx]['expectedResult'];
+								}
+
+								//var data = enumObject.getProperty(arrCamera[idx]['propertyName']);
+								var data = eval(enumObject)[propertyName];
+							}
+							catch(err){
+
+								var data = err.message;
+							}
+							 
+
+							expect(data).toEqual(result);
+
+						});
+					})(i);
+				}
+			});
+
+			describe("getProperty and get properties with all combination for "+ camtype +": "+ camname, function() {
+
+				beforeEach(function() {
+					getpropertiesdata ='';
+					getpropertydata ='';
+					callbackstatus = false;
+				});
+
+				var defaultobj;
+
+
+				it("VT285-084 | call getProperties() with sync callback and hash |" + camtype, function() {
+
+					runs(function() {
+					    enumObject.setProperties({'compressionFormat':'png','desiredHeight':120,'outputFormat':'dataUri'});
+						enumObject.getProperties(['compressionFormat','desiredHeight','outputFormat'],callbackgetproperties);
+					});
+
+					waitsFor(function(){
+						return callbackstatus;
+					});
+
+					runs(function() {
+						if(isApplePlatform()){
+							expect(getpropertiesdata).toContain('png');	
+						}else{
+							expect(getpropertiesdata).toContain('jpg');
+						}
+						
+						expect(getpropertiesdata).toContain('120');
+						expect(getpropertiesdata).toContain('dataUri');	
+					});
+				});
+
+				it("VT285-085 | call getProperties() with anonymous callback and hash |" + camtype, function() {
+
+					runs(function() {    
+					    enumObject.setProperties({'compressionFormat':'jpg','desiredWidth':480,'outputFormat':'image'});
+						enumObject.getProperties(['compressionFormat','desiredWidth','outputFormat'],function(data){getpropertiesdata = JSON.stringify(data);callbackstatus = true;});
+					});
+
+					waitsFor(function(){
+						return callbackstatus;
+					});	
+
+					runs(function() {								
+						//expect(getpropertiesdata).toContain('480');
+						expect(getpropertiesdata).toContain('jpg');
+						expect(getpropertiesdata).toContain('image');	
+					});							
+				});
+
+				it("VT285-086 | call getProperties() without callback |" + camtype, function() {
+
+					    //enumObject.clearAllProperties();
+					    enumObject.setProperties({'compressionFormat':'png','desiredHeight':640,'outputFormat':'dataUri'});
+						var data = enumObject.getProperties(['compressionFormat','desiredHeight','outputFormat']);
+						getpropertiesdata = JSON.stringify(data);
+						if(isApplePlatform()){
+							expect(getpropertiesdata).toContain('png');
+						}else{
+							expect(getpropertiesdata).toContain('jpg');
+						}
+						//expect(getpropertiesdata).toContain('640');
+						expect(getpropertiesdata).toContain('dataUri');						
+				});
+
+				it("VT285-087 | call getProperty() with sync callback and property |" + camtype, function() {
+
+					runs(function() {  									    
+					    enumObject.setProperty('compressionFormat','jpg');
+						enumObject.getProperty("compressionFormat",callbackgetproperty);
+					});
+
+					waitsFor(function(){
+						return callbackstatus;
+					});	
+					
+					runs(function() {	
+						expect(getpropertydata).toEqual('jpg');
+					});										
+				});
+
+				it("VT285-088 | call getProperty() with anonymous callback and property |" + camtype, function() {
+
+					runs(function() {
+					    enumObject.setProperty('compressionFormat','png');
+						enumObject.getProperty('compressionFormat',function(data){getpropertydata = data;callbackstatus = true;});
+					});
+
+					waitsFor(function(){
+						return callbackstatus;
+					});	
+					
+					runs(function() {	
+						if(isApplePlatform()){
+							expect(getpropertydata).toEqual('png');
+						}else{
+							expect(getpropertydata).toEqual('jpg')
+						}
+					});								
+				});
+
+				it("VT285-089 | call getProperty() without callback |" + camtype, function() {
+	    
+					    enumObject.setProperty('compressionFormat','jpg');
+						var data = enumObject.getProperty("compressionFormat");
+						getpropertydata = data;
+						expect(getpropertydata).toEqual('jpg');								
+				});
+
+				
 
 				it("VT285-1002 | Call getAllProperties with Anonymous callback |" + camtype, function() {
 
@@ -941,6 +953,110 @@ describe("Camera JS API Test", function() {
 				}
 
         	});	
+
+		})(enumData[j],arrCAM);
+
+    }
+
+});
+
+describe("Camera JS edge API Test", function() {
+	var	enableflag = false;
+	var	disableflag = false;
+	var getpropertiesdata ='';
+	var getpropertydata ='';
+    var enumData = Rho.Camera.enumerate();
+    var callbackstatus = false;
+	var getcallbackdata = '';
+
+    var callbackgetproperties = function (data){
+		getpropertiesdata = JSON.stringify(data);
+		callbackstatus = true;
+	}
+
+	var callbackgetproperty = function (data){
+		getpropertydata = data;
+		callbackstatus = true;
+	}
+
+    for (var j = 0;j<enumData.length;j++){
+
+		var arrCAM = getApplicableInvalidProperties(enumData[j]);
+
+		(function(enumObject,arrCamera){
+
+			var camname = enumObject.getProperty('cameraType');
+			var camtype = enumObject.getProperty('ID');
+
+
+			describe("Camera property using set/getProperty for "+ camtype +": "+ camname, function() {
+
+				for (var i=0;i<arrCamera.length;i++){
+
+					(function(idx){
+						it(arrCamera[idx]['testName'], function() {
+                                enumObject.setProperty(arrCamera[idx]['propertyName'],arrCamera[idx]['DefaultValue']);
+							    enumObject.setProperty(arrCamera[idx]['propertyName'],arrCamera[idx]['propertyValue']);
+								
+								var data = enumObject.getProperty(arrCamera[idx]['propertyName']);
+								//alert(data);
+								expect(data).toEqual(arrCamera[idx]['expectedResult']);
+						});
+
+					})(i);
+
+				}
+			});
+
+			describe("Camera property Using set/getProperties for "+ camtype +": "+ camname, function() {
+                
+				for (var i=0;i<arrCamera.length;i++){
+
+					(function(idx){
+						it(arrCamera[idx]['testName'], function() {
+						
+							var propertyName = arrCamera[idx]['propertyName'];
+							var propertyValue = arrCamera[idx]['DefaultValue'];
+							//alert(propertyValue);
+							 propertyValue = arrCamera[idx]['propertyValue'];
+							 //alert(propertyValue);
+                            if(propertyValue == ""){
+							    //alert("hi");
+								var strProperty = {propertyName :""};
+							}
+							else if (propertyValue == 'true')
+								var strProperty = '{"'+propertyName+'" :'+true+'}';
+							else if (propertyValue == 'false')
+								var strProperty = '{"'+propertyName+'" :'+false+'}';
+							else if (!isNaN(propertyValue)){
+								propertyValue = parseInt(propertyValue);
+								var strProperty = '{"'+propertyName+'" :'+propertyValue+'}';
+							}
+							else{
+								var strProperty = '{"'+propertyName+'" : "'+propertyValue+'"}';
+							}
+							//alert(strProperty);
+							var objProperty;
+							if(propertyValue != ""){
+							 objProperty = JSON.parse(strProperty);
+							}
+						
+							enumObject.setProperties(objProperty);
+
+							var strGetProperty = '["'+arrCamera[idx]['propertyName']+'"]';
+							var objGetProperty = JSON.parse(strGetProperty);
+
+							var data = enumObject.getProperties(objGetProperty);
+
+			
+							data = data[arrCamera[idx]['propertyName']];
+							//alert(data);
+							expect(data).toEqual(arrCamera[idx]['expectedResult']);
+	
+						});
+					})(i);
+				}
+			});
 
 		})(enumData[j],arrCAM);
 

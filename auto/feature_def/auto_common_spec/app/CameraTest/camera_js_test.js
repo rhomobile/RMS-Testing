@@ -32,38 +32,6 @@ var arr_camera_property = [
 	expectedResult	:	"file://application/alarm.mp3"
 },
 {
-	testName		:	"VT285-1001 | Set  captureSound :invalid path",
-	propertyName	:	"captureSound",
-	cameraTypes		:	"All",
-	OSTypes			:	"WINDOWS",
-	propertyValue	:	"file://application/inval",
-	expectedResult	:	"file://application/inval"
-},
-{
-	testName		:	"VT285-1001 | Set  captureSound :empty",
-	propertyName	:	"captureSound",
-	cameraTypes		:	"All",
-	OSTypes			:	"WINDOWS",
-	propertyValue	:	"",
-	expectedResult	:	""
-},
-{
-	testName		:	"VT285-1002 | Set  captureSound :invalid path ",
-	propertyName	:	"captureSound",
-	cameraTypes		:	"All",
-	OSTypes			:	"ANDROID",
-	propertyValue	:	"file://application/inval",
-	expectedResult	:	"file://application/inval"
-},
-{
-	testName		:	"VT285-1002 | Set  captureSound :empty ",
-	propertyName	:	"captureSound",
-	cameraTypes		:	"All",
-	OSTypes			:	"ANDROID",
-	propertyValue	:	"",
-	expectedResult	:	""
-},
-{
 	testName		:	"VT285-1003 | Set colorModel :grayscale | grayscale",
 	propertyName	:	"colorModel",
 	cameraTypes		:	"All",
@@ -96,26 +64,10 @@ var arr_camera_property = [
 	expectedResult	:	"rgb"
 },
 {
-	testName		:	"VT285-1003 | Set colorModel :invalid",
-	propertyName	:	"colorModel",
-	cameraTypes		:	"All",
-	OSTypes			:	"ANDROID APPLE",
-	propertyValue	:	"inval",
-	expectedResult	:	"inval"
-},
-{
-	testName		:	"VT285-1004 | Set colorModel :empty",
-	propertyName	:	"colorModel",
-	cameraTypes		:	"All",
-	OSTypes			:	"ANDROID APPLE",
-	propertyValue	:	"",
-	expectedResult	:	""
-},
-{
 	testName		:	"VT285-1005 | Set compressionFormat :png | png",
 	propertyName	:	"compressionFormat",
 	cameraTypes		:	"All",
-	OSTypes			:	"Android Apple Windows",
+	OSTypes			:	"Apple",
 	propertyValue	:	"png",
 	expectedResult	:	"png"
 },
@@ -123,25 +75,9 @@ var arr_camera_property = [
 	testName		:	"VT285-1006 | Set compressionFormat :jpg | jpg",
 	propertyName	:	"compressionFormat",
 	cameraTypes		:	"All",
-	OSTypes			:	"Android Apple Windows",
+	OSTypes			:	"All",
 	propertyValue	:	"jpg",
 	expectedResult	:	"jpg"
-},
-{
-	testName		:	"VT285-1005 | Set compressionFormat :invalid",
-	propertyName	:	"compressionFormat",
-	cameraTypes		:	"All",
-	OSTypes			:	"Android Apple Windows",
-	propertyValue	:	"inval",
-	expectedResult	:	"inval"
-},
-{
-	testName		:	"VT285-1006 | Set compressionFormat :empty",
-	propertyName	:	"compressionFormat",
-	cameraTypes		:	"All",
-	OSTypes			:	"Android Apple Windows",
-	propertyValue	:	"",
-	expectedResult	:	""
 },
 {
 	testName		:	"VT285-1005 | Set format :png | png",
@@ -256,22 +192,6 @@ var arr_camera_property = [
 	expectedResult	:	"-480"
 },
 {
-	testName		:	"VT285-1008 | Set desiredHeight :empty value | empty value",
-	propertyName	:	"desiredHeight",
-	cameraTypes		:	"All",
-	OSTypes			:	"All",
-	propertyValue	:	"",
-	expectedResult	:	""
-},
-{
-	testName		:	"VT285-1010 | Set desiredWidth :empty value| empty value",
-	propertyName	:	"desiredWidth",
-	cameraTypes		:	"All",
-	OSTypes			:	"All",
-	propertyValue	:	"",
-	expectedResult	:	""
-},
-{
 	testName		:	"VT285-1011 | Set enableEditing :false | false",
 	propertyName	:	"enableEditing",
 	cameraTypes		:	"All",
@@ -304,22 +224,6 @@ var arr_camera_property = [
 	expectedResult	:	"true"
 },
 {
-	testName		:	"VT285-1011 | Set enableEditing : invalid",
-	propertyName	:	"enableEditing",
-	cameraTypes		:	"All",
-	OSTypes			:	"APPLE",
-	propertyValue	:	"inval",
-	expectedResult	:	"inval"
-},
-{
-	testName		:	"VT285-1012 | Set enableEditing :empty",
-	propertyName	:	"enableEditing",
-	cameraTypes		:	"All",
-	OSTypes			:	"APPLE",
-	propertyValue	:	"",
-	expectedResult	:	""
-},
-{
 	testName		:	"VT285-1013 | Set fileName :localpath | application/test",
 	propertyName	:	"fileName",
 	cameraTypes		:	"All",
@@ -328,28 +232,12 @@ var arr_camera_property = [
 	expectedResult	:	"file://application/test"
 },
 {
-	testName		:	"VT285-1013 | Set fileName :invalid path | invalid path",
-	propertyName	:	"fileName",
-	cameraTypes		:	"All",
-	OSTypes			:	"All",
-	propertyValue	:	"file://application/InvalidFolder",
-	expectedResult	:	"file://application/InvalidFolder"
-},
-{
 	testName		:	"VT285-1013 | Set fileName :with special charecter | camera@$123",
 	propertyName	:	"fileName",
 	cameraTypes		:	"All",
 	OSTypes			:	"All",
 	propertyValue	:	"camera@$123",
 	expectedResult	:	"camera@$123"
-},
-{
-	testName		:	"VT285-1013 | Set fileName :empty path | empty path",
-	propertyName	:	"fileName",
-	cameraTypes		:	"All",
-	OSTypes			:	"All",
-	propertyValue	:	"",
-	expectedResult	:	""
 },
 /*{
 	testName		:	"VT285-1013 | Set fileName :localpath | application/test",
@@ -416,14 +304,6 @@ var arr_camera_property = [
 	expectedResult	:	"off"
 },
 {
-	testName		:	"VT285-1014 | Set AimMode :invalid  | invalid",
-	propertyName	:	"AimMode",
-	cameraTypes		:	"All",
-	OSTypes			:	"WINDOWS",
-	propertyValue	:	"onn",
-	expectedResult	:	"onn"
-},
-{
 	testName		:	"VT285-1016 | Set flashMode :auto | auto",
 	propertyName	:	"flashMode",
 	cameraTypes		:	"All",
@@ -464,22 +344,6 @@ var arr_camera_property = [
 	expectedResult	:	"redEye"
 },
 {
-	testName		:	"VT285-1014 | Set flashMode :invalid value | invalid value",
-	propertyName	:	"flashMode",
-	cameraTypes		:	"All",
-	OSTypes			:	"All",
-	propertyValue	:	"onn",
-	expectedResult	:	"onn"
-},
-{
-	testName		:	"VT285-1014 | Set flashMode :empty value | empty value",
-	propertyName	:	"flashMode",
-	cameraTypes		:	"All",
-	OSTypes			:	"All",
-	propertyValue	:	"",
-	expectedResult	:	""
-},
-{
 	testName		:	"VT285-1018 | Set flash_mode :torch | torch",
 	propertyName	:	"flash_mode",
 	cameraTypes		:	"All",
@@ -502,14 +366,6 @@ var arr_camera_property = [
 	OSTypes			:	"All",
 	propertyValue	:	"image",
 	expectedResult	:	"image"
-},
-{
-	testName		:	"VT285-1019 | Set outputFormat :invalid| invalid",
-	propertyName	:	"outputFormat",
-	cameraTypes		:	"All",
-	OSTypes			:	"All",
-	propertyValue	:	"inval",
-	expectedResult	:	"inval"
 },
 {
 	testName		:	"VT285-1021 | Set previewHeight :0 | 0",
@@ -670,20 +526,205 @@ var arr_camera_property = [
 	OSTypes			:	"ANDROID",
 	propertyValue	:	"false",
 	expectedResult	:	"false"
+}
+];
+
+var arr_camera_property_inval = [
+{
+	testName		:	"VT285-1001 | Set  captureSound :empty",
+	propertyName	:	"captureSound",
+	cameraTypes		:	"All",
+	OSTypes			:	"WINDOWS",
+	DefaultValue    :   "file://application/alarm2.wav",
+	propertyValue	:	"",
+	expectedResult	:	""
+},
+{
+	testName		:	"VT285-1001 | Set  captureSound :invalid path",
+	propertyName	:	"captureSound",
+	cameraTypes		:	"All",
+	OSTypes			:	"WINDOWS",
+	DefaultValue    :   "file://application/alarm1.wav",
+	propertyValue	:	"file://application/inval",
+	expectedResult	:	"file://application/inval"
+},
+{
+	testName		:	"VT285-1002 | Set  captureSound :invalid path ",
+	propertyName	:	"captureSound",
+	cameraTypes		:	"All",
+	OSTypes			:	"ANDROID",
+	DefaultValue    :   "file://application/alarm.mp3",
+	propertyValue	:	"file://application/inval",
+	expectedResult	:	"file://application/inval"
+},
+{
+	testName		:	"VT285-1002 | Set  captureSound :empty ",
+	propertyName	:	"captureSound",
+	cameraTypes		:	"All",
+	OSTypes			:	"ANDROID",
+	DefaultValue    :   "file://application/alarm.mp3",
+	propertyValue	:	"",
+	expectedResult	:	""
+},
+{
+	testName		:	"VT285-1003 | Set colorModel :invalid",
+	propertyName	:	"colorModel",
+	cameraTypes		:	"All",
+	OSTypes			:	"ANDROID APPLE",
+	DefaultValue    :   "rgb",
+	propertyValue	:	"inval",
+	expectedResult	:	"rgb"
+},
+{
+	testName		:	"VT285-1004 | Set colorModel :empty",
+	propertyName	:	"colorModel",
+	cameraTypes		:	"All",
+	OSTypes			:	"ANDROID APPLE",
+	DefaultValue    :   "rgb",
+	propertyValue	:	"",
+	expectedResult	:	"rgb"
+},
+{
+	testName		:	"VT285-1005 | Set compressionFormat :invalid",
+	propertyName	:	"compressionFormat",
+	cameraTypes		:	"All",
+	OSTypes			:	"All",
+	DefaultValue    :   "jpg",
+	propertyValue	:	"inval",
+	expectedResult	:	"jpg"
+},
+{
+	testName		:	"VT285-1006 | Set compressionFormat :empty",
+	propertyName	:	"compressionFormat",
+	cameraTypes		:	"All",
+	OSTypes			:	"All",
+	DefaultValue    :   "jpg",
+	propertyValue	:	"",
+	expectedResult	:	"jpg"
+},
+{
+	testName		:	"VT285-1008 | Set desiredHeight :empty value | empty value",
+	propertyName	:	"desiredHeight",
+	cameraTypes		:	"All",
+	OSTypes			:	"All",
+	DefaultValue    :   "250",
+	propertyValue	:	"",
+	expectedResult	:	"250"
+},
+{
+	testName		:	"VT285-1010 | Set desiredWidth :empty value| empty value",
+	propertyName	:	"desiredWidth",
+	cameraTypes		:	"All",
+	OSTypes			:	"All",
+	DefaultValue    :   "250",
+	propertyValue	:	"",
+	expectedResult	:	"250"
+},
+{
+	testName		:	"VT285-1011 | Set enableEditing : invalid",
+	propertyName	:	"enableEditing",
+	cameraTypes		:	"All",
+	OSTypes			:	"APPLE",
+	DefaultValue    :   "true",
+	propertyValue	:	"inval",
+	expectedResult	:	"true"
+},
+{
+	testName		:	"VT285-1012 | Set enableEditing :empty",
+	propertyName	:	"enableEditing",
+	cameraTypes		:	"All",
+	OSTypes			:	"APPLE",
+	DefaultValue    :   "true",
+	propertyValue	:	"",
+	expectedResult	:	"true"
+},
+{
+	testName		:	"VT285-1014 | Set AimMode :invalid  | invalid",
+	propertyName	:	"AimMode",
+	cameraTypes		:	"All",
+	OSTypes			:	"WINDOWS",
+	DefaultValue    :   "off",
+	propertyValue	:	"onn",
+	expectedResult	:	"off"
+},
+{
+	testName		:	"VT285-1014 | Set AimMode :empty  | empty",
+	propertyName	:	"AimMode",
+	cameraTypes		:	"All",
+	OSTypes			:	"WINDOWS",
+	DefaultValue    :   "off",
+	propertyValue	:	"",
+	expectedResult	:	"off"
+},
+{
+	testName		:	"VT285-1014 | Set flashMode :invalid value | invalid value",
+	propertyName	:	"flashMode",
+	cameraTypes		:	"All",
+	OSTypes			:	"All",
+	DefaultValue    :   "off",
+	propertyValue	:	"onn",
+	expectedResult	:	"off"
+},
+{
+	testName		:	"VT285-1014 | Set flashMode :empty value | empty value",
+	propertyName	:	"flashMode",
+	cameraTypes		:	"All",
+	OSTypes			:	"All",
+	DefaultValue    :   "off",
+	propertyValue	:	"",
+	expectedResult	:	"off"
+},
+{
+	testName		:	"VT285-1019 | Set outputFormat :invalid| invalid",
+	propertyName	:	"outputFormat",
+	cameraTypes		:	"All",
+	OSTypes			:	"All",
+	DefaultValue    :   "image",
+	propertyValue	:	"inval",
+	expectedResult	:	"image"
+},
+{
+	testName		:	"VT285-1019 | Set outputFormat :empty| empty",
+	propertyName	:	"outputFormat",
+	cameraTypes		:	"All",
+	OSTypes			:	"All",
+	DefaultValue    :   "image",
+	propertyValue	:	"",
+	expectedResult	:	"image"
 },
 {
 	testName		:	"VT285-1031 | Set useSystemViewfinder :invalid | invalid",
 	propertyName	:	"useSystemViewfinder",
 	cameraTypes		:	"All",
 	OSTypes			:	"ANDROID",
+	DefaultValue    :   "false",
 	propertyValue	:	"abc",
-	expectedResult	:	"abc"
+	expectedResult	:	"false"
 },
 {
 	testName		:	"VT285-1032 | Set useSystemViewfinder :empty | empty",
 	propertyName	:	"useSystemViewfinder",
 	cameraTypes		:	"All",
 	OSTypes			:	"ANDROID",
+	DefaultValue    :   "false",
+	propertyValue	:	"",
+	expectedResult	:	"false"
+},
+{
+	testName		:	"VT285-1013 | Set fileName :invalid path | invalid path",
+	propertyName	:	"fileName",
+	cameraTypes		:	"All",
+	OSTypes			:	"All",
+	DefaultValue    :   "file://application/alarm.wav",
+	propertyValue	:	"file://application/InvalidFolder",
+	expectedResult	:	"file://application/InvalidFolder"
+},
+{
+	testName		:	"VT285-1013 | Set fileName :empty path | empty path",
+	propertyName	:	"fileName",
+	cameraTypes		:	"All",
+	OSTypes			:	"All",
+	DefaultValue    :   "file://application/alarm.wav",
 	propertyValue	:	"",
 	expectedResult	:	""
 }
@@ -697,7 +738,7 @@ var camCallback = function (data){
 var getApplicableProperties = function (objCamType){
 	
 	var deviceCameraType = objCamType.getProperty('cameraType');
-	var finalCAMObj = [];
+	var finalCAMObj1 = [];
 
 	for (var i = 0; i < arr_camera_property.length ; i++){
 
@@ -706,12 +747,32 @@ var getApplicableProperties = function (objCamType){
 
 			if(camType == "All")
 			{ 
-				finalCAMObj.push(arr_camera_property[i]);
+				finalCAMObj1.push(arr_camera_property[i]);
 			}
 		}
 	}
 
-	return finalCAMObj;
+	return finalCAMObj1;
+}
+
+var getApplicableInvalidProperties = function (objCamType){
+	
+	var deviceCameraType = objCamType.getProperty('cameraType');
+	var finalCAMObj2 = [];
+
+	for (var i = 0; i < arr_camera_property_inval.length ; i++){
+
+		if((arr_camera_property_inval[i]['OSTypes'] == 'All') || (arr_camera_property_inval[i]['OSTypes'].indexOf(Rho.System.platform) != -1)){
+			var camType = arr_camera_property_inval[i]['cameraTypes']
+
+			if(camType == "All")
+			{ 
+				finalCAMObj2.push(arr_camera_property_inval[i]);
+			}
+		}
+	}
+
+	return finalCAMObj2;
 }
 
 var ENABLE_TIMEOUT_VALUE = (Rho.System.platform == "ANDROID" ? 2000 : 2000);
