@@ -25,13 +25,13 @@ describe("Camera JS API Test", function() {
 
 			var camname = enumObject.getProperty('cameraType');
 			var camtype = enumObject.getProperty('ID');
-		describe("Camera default check", function() {
+		
+			describe("Camera default check", function() {
 			
-			it("VT285-077 | call getDefault |" + camtype, function() {
-
-					    Rho.Camera.setDefault(enumObject);
-					    defaultobj = Rho.Camera.getDefault();
-						expect(camtype).toEqual(defaultobj.getProperty('ID'));
+				it("VT285-077 | call getDefault |" + camtype, function() {
+				    Rho.Camera.setDefault(enumObject);
+				    defaultobj = Rho.Camera.getDefault();
+					expect(camtype).toEqual(defaultobj.getProperty('ID'));
 				});
 
 				it("VT299-090 | check default values of all writeable property |", function() {
@@ -395,9 +395,8 @@ describe("Camera JS API Test", function() {
 								}else{
 									expect(capturedata.imageUri).not.toEqual('');
 								};
-							});		
-
-							enumObject.hidePreview();
+								enumObject.hidePreview();
+							});
 
 						});
 					};
@@ -435,9 +434,8 @@ describe("Camera JS API Test", function() {
 								expect(capturedata.imageHeight).toBeGreaterThan(0);
 								expect(capturedata.imageWidth).toBeGreaterThan(0);
 								expect(capturedata.imageUri).not.toEqual('');
-							});		
-
-							enumObject.hidePreview();
+								enumObject.hidePreview();
+							});
 
 						});
 					};
@@ -473,9 +471,8 @@ describe("Camera JS API Test", function() {
 								expect(capturedata.imageWidth).toBeGreaterThan(0);
 								expect(capturedata.imageUri).not.toEqual('');
 								expect('jpg png').toContain(capturedata.imageFormat);
+								enumObject.hidePreview();
 							});
-
-							enumObject.hidePreview();
 
 						});
 
@@ -490,12 +487,15 @@ describe("Camera JS API Test", function() {
 					for(i=0 ; i<fileList.length ; i++ ){
 
 						if (Rho.RhoFile.exists(tempFolder) == false){
-							Rho.RhoFile.makeDir(tempFolder);}
+							Rho.RhoFile.makeDir(tempFolder);
+						}
 
-						var file = Rho.Application.join(tempFolder, fileList[i]);
+						var file = Rho.RhoFile.join(tempFolder, fileList[i]);
+						var camefile = fileList[i];
 
-						if(Rho.RhoFile.exists(file)){
-							Rho.RhoFile.deleteFile(file);}
+						if(Rho.RhoFile.exists(file) == true){
+							Rho.RhoFile.deleteFile(file);
+						}
 
 						it("Call capture method with fileName : " + file , function() {
 
@@ -505,7 +505,6 @@ describe("Camera JS API Test", function() {
 						    	setTimeout(function(){
 						    		enumObject.capture(captureCallback);
 						    	},5000);
-							    
 							});
 
 							waitsFor(function(){
@@ -517,10 +516,9 @@ describe("Camera JS API Test", function() {
 								expect(capturedata.message).toEqual('');
 								expect(capturedata.imageHeight).toBeGreaterThan(0);
 								expect(capturedata.imageWidth).toBeGreaterThan(0);
-								expect(capturedata.imageUri).toContain(fileList[i]);
+								expect(capturedata.imageUri).toContain(camefile);
+								enumObject.hidePreview();
 							});
-
-							enumObject.hidePreview();
 
 						});
 					};
@@ -545,9 +543,8 @@ describe("Camera JS API Test", function() {
 						runs(function() {	
 							expect(capturedata.status).toEqual('error');
 							expect(capturedata.message).not.toEqual('');
+							enumObject.hidePreview();
 						});
-
-						enumObject.hidePreview();
 
 					});
 
