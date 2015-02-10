@@ -6,7 +6,7 @@ build: "debug"
 applog: "rholog.txt"
 iphone:
   configuration: "Release"
-  sdk: "iphonesimulator8.1”
+  sdk: iphonesimulator8.1
   provisionprofile: 
   codesignidentity: "iPhone Developer"
   entitlements: 
