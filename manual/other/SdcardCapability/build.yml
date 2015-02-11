@@ -8,7 +8,7 @@ rhohub:
   url: "https://appstaging.rhohub.com/api/v1/"
 iphone:
   configuration: "Release"
-  sdk: "iphonesimulator7.1"
+  sdk: "iphonesimulator8.1”
   provisionprofile: 
   codesignidentity: "iPhone Developer"
   entitlements: 

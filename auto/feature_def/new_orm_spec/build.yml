@@ -9,7 +9,7 @@ sdkversion: 4.1
 
 wmsdk: "Windows Mobile 6 Professional SDK (ARMV4I)"
 iphone:
-  sdk: iphonesimulator7.1
+  sdk: iphonesimulator8.1
   entitlements: ""
   codesignidentity: ""
   configuration: Release
@@ -18,8 +18,8 @@ wp:
   productid: 'fd55c4d0-51fa-012e-7844-6caec51bd50e'
 
 android:
-  version: 4.4.2
-  # version: 4.4.2
+  version: 2.3.3
+#  version: 4.4.2
 
 extensions:
 - mspec
