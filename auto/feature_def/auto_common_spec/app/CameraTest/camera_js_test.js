@@ -5,7 +5,7 @@ var arr_camera_property = [
 	cameraTypes		:	"All",
 	OSTypes			:	"WINDOWS",
 	propertyValue	:	"file://application/alarm.wav",
-	expectedResult	:	"file://application/alarm.wav"
+	expectedResult	:	"\file://application/alarm.wav"
 },
 {
 	testName		:	"VT285-1001 | Set  captureSound :localpath and wave file | application/alarm.wav",
@@ -13,7 +13,7 @@ var arr_camera_property = [
 	cameraTypes		:	"All",
 	OSTypes			:	"APPLE",
 	propertyValue	:	"file://application/alarm.wav",
-	expectedResult	:	"file://application/alarm.wav"
+	expectedResult	:	"\file://application/alarm.wav"
 },
 {
 	testName		:	"VT285-1002 | Set  captureSound :localpath and mp3 file | application/alarm.mp3",
@@ -21,7 +21,7 @@ var arr_camera_property = [
 	cameraTypes		:	"All",
 	OSTypes			:	"ANDROID",
 	propertyValue	:	"file://application/alarm.mp3",
-	expectedResult	:	"file://application/alarm.mp3"
+	expectedResult	:	"\file://application/alarm.mp3"
 },
 {
 	testName		:	"VT285-1002 | Set  captureSound :localpath and mp3 file | application/alarm.mp3",
@@ -29,7 +29,7 @@ var arr_camera_property = [
 	cameraTypes		:	"All",
 	OSTypes			:	"APPLE",
 	propertyValue	:	"file://application/alarm.mp3",
-	expectedResult	:	"file://application/alarm.mp3"
+	expectedResult	:	"\file://application/alarm.mp3"
 },
 {
 	testName		:	"VT285-1003 | Set colorModel :grayscale | grayscale",
@@ -229,7 +229,7 @@ var arr_camera_property = [
 	cameraTypes		:	"All",
 	OSTypes			:	"All",
 	propertyValue	:	"file://application/test",
-	expectedResult	:	"file://application/test"
+	expectedResult	:	"\file://application/test"
 },
 {
 	testName		:	"VT285-1013 | Set fileName :with special charecter | camera@$123",
@@ -237,7 +237,7 @@ var arr_camera_property = [
 	cameraTypes		:	"All",
 	OSTypes			:	"All",
 	propertyValue	:	"camera@$123",
-	expectedResult	:	"camera@$123"
+	expectedResult	:	"\camera@$123"
 },
 /*{
 	testName		:	"VT285-1013 | Set fileName :localpath | application/test",
@@ -717,7 +717,7 @@ var arr_camera_property_inval = [
 	OSTypes			:	"All",
 	DefaultValue    :   "file://application/alarm.wav",
 	propertyValue	:	"file://application/InvalidFolder",
-	expectedResult	:	"file://application/InvalidFolder"
+	expectedResult	:	"\file://application/InvalidFolder"
 },
 {
 	testName		:	"VT285-1013 | Set fileName :empty path | empty path",
