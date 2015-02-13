@@ -49,4 +49,5 @@ wm:
 #capabilities:
 #- non_motorola_device
 
-extensions: ["genPropBag", "logCapture"]
+# Removed these temporarily... they seem to be part of the auto_common_spec project (the Rho extensions are in that app)... they should be part of RMS-Testing like the instrumentation extension.
+#extensions: ["genPropBag", "logCapture"]
