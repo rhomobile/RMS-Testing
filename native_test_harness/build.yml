@@ -30,11 +30,14 @@ iphone:
   extensions: ["nativeBridgeTest", "barcode", "genCallbackTests", "appEvents", "indicators", "sensor", "screenorientation", "audiocapture"]
 wp:
   productid: 'b6479381-42a8-0130-78de-3caec51bd50e'
+  sdk: ../../rhodes
+  # WP8 uses specific branch therefore build from source
 symbian:
   uid: '0xe1a1ef92'
 android:
   version: 4.2.2
-  extensions: ["Printing", "Printing_Zebra", "nativeBridgeTest", "barcode", "screenorientation", "instrumentation", "cardreader", "indicators", "sensor", "websocket", "eventsource", "audiocapture", 'screenorientation']  
+  # Removed nativeBridgeTest and instrumentation from Android owing to build errors
+  extensions: ["Printing", "Printing_Zebra", "barcode", "screenorientation", "cardreader", "indicators", "sensor", "websocket", "eventsource", "audiocapture", 'screenorientation']  
   capabilities:
   - native_browser
 wm:
@@ -46,4 +49,4 @@ wm:
 #capabilities:
 #- non_motorola_device
 
-extensions: ["genPropBag", "logCapture", "instrumentation"]
+extensions: ["genPropBag", "logCapture"]
