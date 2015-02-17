@@ -147,14 +147,14 @@ describe("Camera API Manual Tests", function(){
 			var spec = new ManualSpec(jasmine, window.document);
         	spec.addGoal(jasmine.getEnv().currentSpec.description);
             spec.addStep("Press 'RunTest' button");
-            spec.addPrecondition("Call choosePicture with propertyhash as colorModel:greyscale, desiredHeight:640 , desiredWidth:480 and callback.");
+            spec.addPrecondition("Call choosePicture with propertyhash as colorModel:grayscale, desiredHeight:640 , desiredWidth:480 and callback.");
             spec.addStep("Choose the image.");
             spec.addExpectation('The selected image will not have any affect of the properties set, should return callback data.');
             spec.displayScenario();
             spec.waitForButtonPressing("Run test");
 			
 			runs(function(){
-				Rho.Camera.choosePicture({'colorModel':'greyscale','desiredHeight':640,'desiredWidth':480}, callbackFunc);
+				Rho.Camera.choosePicture({'colorModel':'grayscale','desiredHeight':640,'desiredWidth':480}, callbackFunc);
 			});
 
 			waitsFor(function(){
@@ -169,7 +169,7 @@ describe("Camera API Manual Tests", function(){
 
 		});
 
-		it("VT285-0005 | Should call choosePicture with 'outputFormat' property value as dataUri ", function(){
+		it("VT285-0005 | Should call choosePicture with 'outputFormat' property value as dataUri", function(){
 			var spec = new ManualSpec(jasmine, window.document);
         	spec.addGoal(jasmine.getEnv().currentSpec.description);
             spec.addStep("Press 'RunTest' button");
@@ -252,36 +252,6 @@ describe("Camera API Manual Tests", function(){
 	});
 
 
-	describe("Enumerate Camera with callback ", function() {
-
-		it("VT285-0008 | Should enumerate with callback", function(){
-			var spec = new ManualSpec(jasmine, window.document);
-        	spec.addGoal(jasmine.getEnv().currentSpec.description);
-            spec.addStep("Press 'RunTest' button");
-            spec.addStep("Check for the returned object.");
-            spec.addExpectation('The returned object should contain the available cameras of device.');
-            spec.displayScenario();
-            spec.waitForButtonPressing("Run test");
-			
-			runs(function(){
-				Rho.Camera.enumerate(getCallbackData);
-			});
-
-			waitsFor(function(){
-				return cbkResponseTimeout;
-			},"waiting for callback data", 2000);
-
-			runs(function(){
-				spec.addResult("enumerated cameras: ", camArray);
-				spec.displayResults();
-                spec.waitForResponse();
-			});		            
-
-		});
-
-	});
-
-
 	if(isAndroidPlatform() || isApplePlatform()){
 
 		describe("copyImageToDeviceGallery method | " , function() {
@@ -307,7 +277,7 @@ describe("Camera API Manual Tests", function(){
 				var spec = new ManualSpec(jasmine, window.document);
 				spec.addGoal(jasmine.getEnv().currentSpec.description);
 				spec.addStep("Press 'RunTest' button");
-			    spec.addExpectation('Application should not behave abnormally');
+			    spec.addExpectation('Application should not crash or behave abnormally');
 			    spec.displayScenario();
 			    spec.waitForButtonPressing("Run test");
 
@@ -351,7 +321,37 @@ describe("Camera API Manual Tests", function(){
 
 		});
 
-	}	
+	}
+
+
+	describe("Enumerate Camera with callback ", function() {
+
+		it("VT285-0008 | Should enumerate with callback", function(){
+			var spec = new ManualSpec(jasmine, window.document);
+        	spec.addGoal(jasmine.getEnv().currentSpec.description);
+            spec.addStep("Press 'RunTest' button");
+            spec.addStep("Check for the returned object.");
+            spec.addExpectation('The returned object should contain the available cameras of device.');
+            spec.displayScenario();
+            spec.waitForButtonPressing("Run test");
+			
+			runs(function(){
+				Rho.Camera.enumerate(getCallbackData);
+			});
+
+			waitsFor(function(){
+				return cbkResponseTimeout;
+			},"waiting for callback data", 2000);
+
+			runs(function(){
+				spec.addResult("enumerated cameras: ", camArray);
+				spec.displayResults();
+                spec.waitForResponse();
+			});		            
+
+		});
+
+	});
 
 
 	describe("getCameraByType method", function() {
@@ -435,7 +435,7 @@ describe("Camera API Manual Tests", function(){
 
 		if (isWindowsMobilePlatform()) {
 
-			it("VT285-0009 | Should call getCameraByType with color and callback as function ", function(){
+			it("VT285-0009 | Should call getCameraByType with color and callback as function", function(){
 				var spec = new ManualSpec(jasmine, window.document);
 	        	spec.addGoal(jasmine.getEnv().currentSpec.description);
 	            spec.addStep("Press 'RunTest' button");
@@ -1497,7 +1497,7 @@ describe("Camera API Manual Tests", function(){
 						});
 					});
 
-					it("VT285-0047 | Should call takePicture with colorModel as greyscale | using " + camid + camtype , function(){
+					it("VT285-0047 | Should call takePicture with colorModel as grayscale | using " + camid + camtype , function(){
 						var spec = new ManualSpec(jasmine, window.document);
 						spec.addGoal(jasmine.getEnv().currentSpec.description);
 					    spec.addStep("Press 'RunTest' button");
