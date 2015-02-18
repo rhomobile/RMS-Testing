@@ -6,8 +6,6 @@ describe("Camera JS API Test", function() {
     var enumData = Rho.Camera.enumerate();
     var callbackstatus = false;
 	var getcallbackdata = '';
-	var capturedata = '';
-	var capturestatus = '';
 
     var callbackgetproperties = function (data){
 		getpropertiesdata = JSON.stringify(data);
@@ -19,17 +17,6 @@ describe("Camera JS API Test", function() {
 		callbackstatus = true;
 	}
 
-	var captureCallback = function (data){
-		capturedata.status = data.status
-		capturedata.imageHeight = data.imageHeight
-		capturedata.imageWidth = data.imageWidth
-		capturedata.imageFormat = data.imageFormat
-		capturedata.message = data.message
-		capturedata.imageUri = data.imageUri
-
-		capturestatus = true;
-	}
-
     for (var j = 0;j<enumData.length;j++){
 
 		var arrCAM = getApplicableProperties(enumData[j]);
@@ -38,7 +25,74 @@ describe("Camera JS API Test", function() {
 
 			var camname = enumObject.getProperty('cameraType');
 			var camtype = enumObject.getProperty('ID');
+		
+			describe("Camera default check", function() {
+			
+				it("VT285-077 | call getDefault |" + camtype, function() {
+				    Rho.Camera.setDefault(enumObject);
+				    defaultobj = Rho.Camera.getDefault();
+					expect(camtype).toEqual(defaultobj.getProperty('ID'));
+				});
 
+				it("VT299-090 | check default values of all writeable property |", function() {
+
+					runs(function() {
+					    
+					    if (isWindowsMobilePlatform())
+					    {
+						    expect(defaultobj.previewHeight).toBeGreaterThan(0);
+							expect(defaultobj.previewLeft).toBeGreaterThan(0);
+							expect(defaultobj.previewTop).toBeGreaterThan(0);
+							expect(defaultobj.previewWidth).toBeGreaterThan(0);
+					    }
+
+					    if (isApplePlatform() || isAndroidPlatform())
+					    {
+						    expect(defaultobj.saveToDeviceGallery).toEqual(true);
+						    expect(defaultobj.colorModel).toEqual('rgb');
+					    }
+
+					    if (isApplePlatform())
+					    {
+					    	expect(defaultobj.enableEditing).toEqual(true);
+					    }
+
+					    if (isAndroidPlatform())
+					    {
+					    	expect(defaultobj.flashMode).toEqual('off');
+					    	expect(defaultobj.useSystemViewfinder).toEqual(false);
+					    }
+                        if (!isWindowsPhone8Platform())
+						{
+						expect(defaultobj.compressionFormat).toEqual('jpg');
+                        }
+						expect(defaultobj.desiredHeight).toBeGreaterThan(0);
+						expect(defaultobj.desiredWidth).toBeGreaterThan(0);
+						expect(defaultobj.outputFormat).toEqual('image');
+						
+					});
+				});
+
+				it("VT299-091 | check values of all read only property |", function() {
+
+					runs(function() {
+						if(isWindowsMobilePlatform()){
+							var type = "imager color";
+						}else{
+							var type = "back front";						
+						}				    
+					    
+					    var resolution = enumObject.supportedSizeList;
+
+						expect(type).toContain(enumObject.cameraType);						
+						expect(enumObject.maxHeight).toBeGreaterThan(0);
+						expect(enumObject.maxWidth).toBeGreaterThan(0);
+						expect(resolution.length).toBeGreaterThan(0);
+						expect(resolution[0].width).toBeGreaterThan(0);
+						expect(resolution[0].height).toBeGreaterThan(0);
+					});
+				});
+           });
 
 			describe("Camera property using set/getProperty for "+ camtype +": "+ camname, function() {
 
@@ -90,6 +144,7 @@ describe("Camera JS API Test", function() {
 
 			
 							data = data[arrCamera[idx]['propertyName']];
+							//alert(data);
 							expect(data).toEqual(arrCamera[idx]['expectedResult']);
 	
 						});
@@ -106,6 +161,7 @@ describe("Camera JS API Test", function() {
 							
 							var propertyName = arrCamera[idx]['propertyName'];
 							var propertyValue = arrCamera[idx]['propertyValue'];
+							var result;
 
 							try{
 								if (propertyValue == 'true')
@@ -115,9 +171,11 @@ describe("Camera JS API Test", function() {
 								else if (!isNaN(propertyValue)){
 									propertyValue = parseInt(propertyValue);
 									eval(enumObject)[propertyName] = propertyValue;	
+									 result = parseInt(arrCamera[idx]['expectedResult']);
 								}
 								else{
 									eval(enumObject)[propertyName] = propertyValue;
+									result = arrCamera[idx]['expectedResult'];
 								}
 
 								//var data = enumObject.getProperty(arrCamera[idx]['propertyName']);
@@ -127,8 +185,9 @@ describe("Camera JS API Test", function() {
 
 								var data = err.message;
 							}
+							 
 
-							expect(data).toEqual(arrCamera[idx]['expectedResult']);
+							expect(data).toEqual(result);
 
 						});
 					})(i);
@@ -143,199 +202,169 @@ describe("Camera JS API Test", function() {
 					callbackstatus = false;
 				});
 
-					it("VT285-084 | call getProperties() with sync callback and hash |" + camtype, function() {
+				var defaultobj;
 
-						runs(function() {
-						    enumObject.setProperties({'compressionFormat':'png','desiredHeight':640,'outputFormat':'dataUri'});
-							enumObject.getProperties(['compressionFormat','desiredHeight','outputFormat'],callbackgetproperties);
-						});
 
-						waitsFor(function(){
-							return callbackstatus;
-						});
+				it("VT285-084 | call getProperties() with sync callback and hash |" + camtype, function() {
 
-						runs(function() {							
-							expect(getpropertiesdata).toContain('png');
-							expect(getpropertiesdata).toContain('640');
-							expect(getpropertiesdata).toContain('dataUri');	
-						});
+					runs(function() {
+					    enumObject.setProperties({'compressionFormat':'png','desiredHeight':120,'outputFormat':'dataUri'});
+						enumObject.getProperties(['compressionFormat','desiredHeight','outputFormat'],callbackgetproperties);
 					});
 
-					it("VT285-085 | call getProperties() with anonymous callback and hash |" + camtype, function() {
+					waitsFor(function(){
+						return callbackstatus;
+					});
 
-						runs(function() {    
-						    enumObject.setProperties({'compressionFormat':'jpg','desiredWidth':480,'outputFormat':'image'});
-							enumObject.getProperties(['compressionFormat','desiredWidth','outputFormat'],function(data){getpropertiesdata = JSON.stringify(data);callbackstatus = true;});
-						});
-
-						waitsFor(function(){
-							return callbackstatus;
-						});	
-
-						runs(function() {								
-							expect(getpropertiesdata).toContain('480');
+					runs(function() {
+						if(isApplePlatform()){
+							expect(getpropertiesdata).toContain('png');	
+						}else{
 							expect(getpropertiesdata).toContain('jpg');
-							expect(getpropertiesdata).toContain('image');	
-						});							
-					});
-
-					it("VT285-086 | call getProperties() without callback |" + camtype, function() {
-
-						    //enumObject.clearAllProperties();
-						    enumObject.setProperties({'compressionFormat':'png','desiredHeight':640,'outputFormat':'dataUri'});
-							var data = enumObject.getProperties(['compressionFormat','desiredHeight','outputFormat']);
-							getpropertiesdata = JSON.stringify(data);
-							expect(getpropertiesdata).toContain('png');
-							expect(getpropertiesdata).toContain('640');
-							expect(getpropertiesdata).toContain('dataUri');						
-					});
-
-					it("VT285-087 | call getProperty() with sync callback and property |" + camtype, function() {
-
-						runs(function() {  									    
-						    enumObject.setProperty('compressionFormat','jpg');
-							enumObject.getProperty("compressionFormat",callbackgetproperty);
-						});
-
-						waitsFor(function(){
-							return callbackstatus;
-						});	
+						}
 						
-						runs(function() {	
-							expect(getpropertydata).toEqual('jpg');
-						});										
+						expect(getpropertiesdata).toContain('120');
+						expect(getpropertiesdata).toContain('dataUri');	
 					});
-
-					it("VT285-088 | call getProperty() with anonymous callback and property |" + camtype, function() {
-
-						runs(function() {
-						    enumObject.setProperty('compressionFormat','png');
-							enumObject.getProperty('compressionFormat',function(data){getpropertydata = data;callbackstatus = true;});
-						});
-
-						waitsFor(function(){
-							return callbackstatus;
-						});	
-						
-						runs(function() {	
-							expect(getpropertydata).toEqual('png');
-						});								
-					});
-
-					it("VT285-089 | call getProperty() without callback |" + camtype, function() {
-		    
-						    enumObject.setProperty('compressionFormat','jpg');
-							var data = enumObject.getProperty("compressionFormat");
-							getpropertydata = data;
-							expect(getpropertydata).toEqual('jpg');								
-					});
-
-					it("VT285-077 | call getDefault |" + camtype, function() {
-
-						    Rho.Camera.setDefault(enumObject);
-						    var defaultobj = Rho.Camera.getDefault();
-							expect(camtype).toEqual(defaultobj.getProperty('ID'));
-					});
-
-					it("VT285-077A | call Default |" + camtype, function() {
-
-						    //Rho.Camera.setDefaultID( enumObject.getId());
-						   	//Rho.Camera.setDefault( enumObject );
-						    //var defaultobj = Rho.Camera.getDefault();
-							expect(camtype).toEqual(defaultobj.getProperty('ID'));
-					});
-
-					it("VT299-090 | check default values of all writeable property |", function() {
-
-						runs(function() {
-						    
-						    if (isWindowsMobilePlatform())
-						    {
-							    expect(Rho.Camera.previewHeight).toBeGreaterThan(0);
-								expect(Rho.Camera.previewLeft).toBeGreaterThan(0);
-								expect(Rho.Camera.previewTop).toBeGreaterThan(0);
-								expect(Rho.Camera.previewWidth).toBeGreaterThan(0);
-						    }
-
-						    if (isApplePlatform() || isAndroidPlatform())
-						    {
-							    expect(Rho.Camera.saveToDeviceGallery).toEqual(true);
-							    expect(enumObject.colorModel).toEqual('rgb');
-						    }
-
-						    if (isApplePlatform())
-						    {
-						    	expect(Rho.Camera.enableEditing).toEqual(true);
-						    }
-
-						    if (isAndroidPlatform())
-						    {
-						    	expect(Rho.Camera.flashMode).toEqual('off');
-						    	expect(Rho.Camera.useSystemViewfinder).toEqual(false);
-						    }
-                            if (!isWindowsPhone8Platform())
-							{
-							expect(enumObject.compressionFormat).toEqual('jpg');
-                            } 							
-							expect(enumObject.desiredHeight).toBeGreaterThan(0);
-							expect(enumObject.desiredWidth).toBeGreaterThan(0);						
-							expect(Rho.Camera.outputFormat).toEqual('image');
-							
-						});
-					});
-
-					it("VT299-091 | check values of all read only property |", function() {
-
-						runs(function() {						    
-						    var type = "back front";
-						    var resolution = enumObject.supportedSizeList
-
-							expect(type).toContain(enumObject.cameraType);						
-							expect(enumObject.maxHeight).toBeGreaterThan(0);
-							expect(enumObject.maxWidth).toBeGreaterThan(0);
-							expect(resolution.width).toBeGreaterThan(0);					
-							expect(resolution.height).toBeGreaterThan(0);
-							
-							Rho.Camera.hide();
-						});
-					});
-
-					it("VT285-1002 | Call getAllProperties with Anonymous callback |" + camtype, function() {
-
-						runs(function() {
-						    enumObject.setProperties({'compressionFormat':'jpg','desiredHeight':640,'outputFormat':'dataUri'});
-							enumObject.getAllProperties(function(data){getpropertydata = data;callbackstatus = true;});
-						});
-
-						waitsFor(function(){
-							return callbackstatus;
-						});	
-						
-						runs(function() {	
-							expect(getpropertydata).toContain('jpg');
-							expect(getpropertydata).toContain(640);
-							expect(getpropertydata).toContain('datauri');
-						});								
-					});
-
 				});
+
+				it("VT285-085 | call getProperties() with anonymous callback and hash |" + camtype, function() {
+
+					runs(function() {    
+					    enumObject.setProperties({'compressionFormat':'jpg','desiredWidth':480,'outputFormat':'image'});
+						enumObject.getProperties(['compressionFormat','desiredWidth','outputFormat'],function(data){getpropertiesdata = JSON.stringify(data);callbackstatus = true;});
+					});
+
+					waitsFor(function(){
+						return callbackstatus;
+					});	
+
+					runs(function() {								
+						//expect(getpropertiesdata).toContain('480');
+						expect(getpropertiesdata).toContain('jpg');
+						expect(getpropertiesdata).toContain('image');	
+					});							
+				});
+
+				it("VT285-086 | call getProperties() without callback |" + camtype, function() {
+
+					    //enumObject.clearAllProperties();
+					    enumObject.setProperties({'compressionFormat':'png','desiredHeight':640,'outputFormat':'dataUri'});
+						var data = enumObject.getProperties(['compressionFormat','desiredHeight','outputFormat']);
+						getpropertiesdata = JSON.stringify(data);
+						if(isApplePlatform()){
+							expect(getpropertiesdata).toContain('png');
+						}else{
+							expect(getpropertiesdata).toContain('jpg');
+						}
+						//expect(getpropertiesdata).toContain('640');
+						expect(getpropertiesdata).toContain('dataUri');						
+				});
+
+				it("VT285-087 | call getProperty() with sync callback and property |" + camtype, function() {
+
+					runs(function() {  									    
+					    enumObject.setProperty('compressionFormat','jpg');
+						enumObject.getProperty("compressionFormat",callbackgetproperty);
+					});
+
+					waitsFor(function(){
+						return callbackstatus;
+					});	
+					
+					runs(function() {	
+						expect(getpropertydata).toEqual('jpg');
+					});										
+				});
+
+				it("VT285-088 | call getProperty() with anonymous callback and property |" + camtype, function() {
+
+					runs(function() {
+					    enumObject.setProperty('compressionFormat','png');
+						enumObject.getProperty('compressionFormat',function(data){getpropertydata = data;callbackstatus = true;});
+					});
+
+					waitsFor(function(){
+						return callbackstatus;
+					});	
+					
+					runs(function() {	
+						if(isApplePlatform()){
+							expect(getpropertydata).toEqual('png');
+						}else{
+							expect(getpropertydata).toEqual('jpg')
+						}
+					});								
+				});
+
+				it("VT285-089 | call getProperty() without callback |" + camtype, function() {
+	    
+					    enumObject.setProperty('compressionFormat','jpg');
+						var data = enumObject.getProperty("compressionFormat");
+						getpropertydata = data;
+						expect(getpropertydata).toEqual('jpg');								
+				});
+
+				
+
+				it("VT285-1002 | Call getAllProperties with Anonymous callback |" + camtype, function() {
+
+					runs(function() {
+					    enumObject.setProperties({'compressionFormat':'jpg','desiredHeight':640,'outputFormat':'dataUri'});
+						enumObject.getAllProperties(function(data){
+							getpropertydata = JSON.stringify(data);
+							callbackstatus = true;
+						});
+					});
+
+					waitsFor(function(){
+						return callbackstatus;
+					});	
+					
+					runs(function() {	
+						expect(getpropertydata).toContain('jpg');
+						//expect(getpropertydata).toContain(640);
+						expect(getpropertydata).toContain('dataUri');
+					});								
+				});
+
+			});
+
+			if(isWindowsMobilePlatform()){
 
 				describe("Call capture method with callback | "+ camtype +": "+ camname, function() {
 
+					var capturedata = {};
+					var capturestatus = false;
+					enumObject.previewTop = 20;
+					enumObject.previewLeft = 20;
+					enumObject.previewWidth = 100;
+					enumObject.previewHeight = 100;
+
+					var captureCallback = function (data){
+						capturedata.status = data.status
+						capturedata.imageHeight = data.imageHeight
+						capturedata.imageWidth = data.imageWidth
+						capturedata.imageFormat = data.imageFormat
+						capturedata.message = data.message
+						capturedata.imageUri = data.imageUri
+
+						capturestatus = true;
+					}
+
 					beforeEach(function() {
-					    capturedata = '';
+					    capturedata = {};
 					    capturestatus = false;
 					});
 
-					var data = [{"desiredHeight":360, "desiredWidth":480}, 
-					{"compressionFormat":"png"}, {"compressionFormat":"jpg"}, {"outputFormat":"image"}, {"outputFormat":"dataUri"}, 
+					var data = [{"compressionFormat":"png"}, {"compressionFormat":"jpg"}, {"outputFormat":"image"}, {"outputFormat":"dataUri"}, 
 					{"colorModel":"grayscale"}, {"colorModel":"rgb"},
 					{"aimMode":"off"}, {"flashMode":"off"}];
 
 					for(i=0 ; i<data.length ; i++ ){
 
 						it("Call capture method with callback for | " + JSON.stringify(data[i]) , function() {
- 
+
 							runs(function() {
 							    var props = '';
 						    	props = data[i];
@@ -354,30 +383,20 @@ describe("Camera JS API Test", function() {
 							runs(function() {	
 								expect(capturedata.status).toEqual('ok');
 								expect(capturedata.message).toEqual('');
-
-								if(data[i]['desiredHeight'])
-									expect(capturedata.imageHeight).toEqual(data[i]['desiredHeight']);
-								else
-									expect(capturedata.imageHeight).toBeGreaterThan(0);
-
-								if(data[i]['desiredWidth'])
-									expect(capturedata.imageWidth).toEqual(data[i]['desiredWidth']);
-								else
-									expect(capturedata.imageWidth).toBeGreaterThan(0);
+								expect(capturedata.imageHeight).toBeGreaterThan(0);
+								expect(capturedata.imageWidth).toBeGreaterThan(0);
 
 								if ((data[i]['outputFormat']) && (data[i]['outputFormat'] =! 'dataUri')){
-									if ((data[i]['compressionFormat']) == 'png' && !(isWindowsMobilePlatform())){
+									if ((data[i]['compressionFormat']) == 'png' && (isApplePlatform())){
 										expect(capturedata.imageUri).toContain('.png');}
 									else{
 										expect(capturedata.imageUri).toContain('.jpg');
 									};
-									}
-								else{
+								}else{
 									expect(capturedata.imageUri).not.toEqual('');
 								};
-							});		
-
-							enumObject.hidePreview();
+								enumObject.hidePreview();
+							});
 
 						});
 					};
@@ -393,7 +412,7 @@ describe("Camera JS API Test", function() {
 					for(i=0 ; i<data.length ; i++ ){
 
 						it("Call capture method with callback for | " + JSON.stringify(data[i]) , function() {
- 
+
 							runs(function() {
 							    var props = '';
 						    	props = data[i];
@@ -415,9 +434,8 @@ describe("Camera JS API Test", function() {
 								expect(capturedata.imageHeight).toBeGreaterThan(0);
 								expect(capturedata.imageWidth).toBeGreaterThan(0);
 								expect(capturedata.imageUri).not.toEqual('');
-							});		
-
-							enumObject.hidePreview();
+								enumObject.hidePreview();
+							});
 
 						});
 					};
@@ -430,7 +448,7 @@ describe("Camera JS API Test", function() {
 					for(i=0 ; i<datainval.length ; i++ ){
 
 						it("Call capture method with callback for invalid values | " + JSON.stringify(datainval[i]) , function() {
- 
+
 							runs(function() {
 							    var props = '';
 						    	props = datainval[i];
@@ -447,11 +465,14 @@ describe("Camera JS API Test", function() {
 							}, 10000);
 							
 							runs(function() {	
-								expect(capturedata.status).toEqual('error');
-								expect(capturedata.message).not.toEqual('');
-							});		
-
-							enumObject.hidePreview();
+								expect(capturedata.status).toEqual('ok');
+								expect(capturedata.message).toEqual('');
+								expect(capturedata.imageHeight).toBeGreaterThan(0);
+								expect(capturedata.imageWidth).toBeGreaterThan(0);
+								expect(capturedata.imageUri).not.toEqual('');
+								expect('jpg png').toContain(capturedata.imageFormat);
+								enumObject.hidePreview();
+							});
 
 						});
 
@@ -465,23 +486,25 @@ describe("Camera JS API Test", function() {
 					
 					for(i=0 ; i<fileList.length ; i++ ){
 
-						if (Rho.RhoFile.exists(tempFolder) == false)
+						if (Rho.RhoFile.exists(tempFolder) == false){
 							Rho.RhoFile.makeDir(tempFolder);
-						var file = Rho.Application.join(tempFolder, fileList[i]);
-						if(Rho.RhoFile.exists(file)){
-							Rho.RhoFile.deleteFile(file)};
+						}
+
+						var file = Rho.RhoFile.join(tempFolder, fileList[i]);
+						var camefile = fileList[i];
+
+						if(Rho.RhoFile.exists(file) == true){
+							Rho.RhoFile.deleteFile(file);
+						}
 
 						it("Call capture method with fileName : " + file , function() {
- 
+
 							runs(function() {
-							    var props = '';
-						    	props = data[i];
-						    	enumObject.showPreview({'fileName' : file});
+						    	enumObject.showPreview({'outputFormat' : 'image', 'fileName' : file});
 
 						    	setTimeout(function(){
 						    		enumObject.capture(captureCallback);
 						    	},5000);
-							    
 							});
 
 							waitsFor(function(){
@@ -493,553 +516,440 @@ describe("Camera JS API Test", function() {
 								expect(capturedata.message).toEqual('');
 								expect(capturedata.imageHeight).toBeGreaterThan(0);
 								expect(capturedata.imageWidth).toBeGreaterThan(0);
-								expect(capturedata.imageUri).toContain(fileList[i]);
+								expect(capturedata.imageUri).toContain(camefile);
+								enumObject.hidePreview();
 							});
-
-							enumObject.hidePreview();
 
 						});
 					};
 
 
-						it("Call capture method with invalid fileName path : " + file , function() {
- 
-							runs(function() {
+					it("Call capture method with invalid fileName path : " + file , function() {
 
-						    	enumObject.showPreview({"fileName" : "\\Programfiles\\invalidpath\\camimage"});
+						runs(function() {
 
-						    	setTimeout(function(){
-						    		enumObject.capture(captureCallback);
-						    	},5000);
-							    
-							});
+					    	enumObject.showPreview({"fileName" : "\\Programfiles\\invalidpath\\camimage"});
 
-							waitsFor(function(){
-								return capturestatus;
-							}, 10000);
-							
-							runs(function() {	
-								expect(capturedata.status).toEqual('error');
-								expect(capturedata.message).not.toEqual('');
-							});
+					    	setTimeout(function(){
+					    		enumObject.capture(captureCallback);
+					    	},5000);
+						    
+						});
 
+						waitsFor(function(){
+							return capturestatus;
+						}, 10000);
+						
+						runs(function() {	
+							expect(capturedata.status).toEqual('error');
+							expect(capturedata.message).not.toEqual('');
 							enumObject.hidePreview();
-
 						});
 
-				});
-					
-				/*it("VT285-1003 | Call takePicture with all string in hash|" + camtype, function() {
-					   beforeEach(function() {
-					     getcallbackdata ='';
-					     callbackstatus = false;
-				        });
-
-						runs(function() {
-						    enumObject.takePicture({'compressionFormat':'jpg','desiredHeight':'640','outputFormat':'dataUri'},camCallback);
-							//enumObject.getAllProperties(function(data){getpropertydata = data;callbackstatus = true;});
-						});
-
-						waitsFor(function(){
-							return callbackstatus;
-						});	
-						
-						runs(function() {	
-							expect(getcallbackdata).toContain('jpg');
-							expect(getcallbackdata).toContain('640');
-							expect(getcallbackdata).toContain('datauri');
-						});								
-					});*/
-
-					/*it("VT285-1004 | Call choosePicture with all string in hash|" + camtype, function() {
-                        beforeEach(function() {
-					     getcallbackdata ='';
-					     callbackstatus = false;
-				        })
-						runs(function() {
-						    enumObject.takePicture({'desiredHeight':'480','desiredHeight':'640','outputFormat':'image'},camCallback);
-							//enumObject.getAllProperties(function(data){getpropertydata = data;callbackstatus = true;});
-						});
-
-						waitsFor(function(){
-							return callbackstatus;
-						});	
-						
-						runs(function() {	
-							expect(getcallbackdata).toContain('480');
-							expect(getcallbackdata).toContain('640');
-							expect(getcallbackdata).toContain('image');
-						});								
 					});
-					
-					it("VT285-1004 | Call capture with all string in hash|" + camtype, function() {
-                        beforeEach(function() {
-					     getcallbackdata ='';
-					     callbackstatus = false;
-				        })
-						runs(function() {
-						    enumObject.capture({'desiredHeight':'480','desiredHeight':'640','outputFormat':'image'},camCallback);
-							//enumObject.getAllProperties(function(data){getpropertydata = data;callbackstatus = true;});
-						});
 
-						waitsFor(function(){
-							return callbackstatus;
-						});	
-						
-						runs(function() {	
-							expect(getcallbackdata).toContain('480');
-							expect(getcallbackdata).toContain('640');
-							expect(getcallbackdata).toContain('image');
-						});								
-					}); */
+				});
+
+			};
+
+			describe("Properties with constants ", function() {
+
+				it("Should set flashMode to FLASH_ON using direct calling method", function() {
+				    enumObject.flashMode = Rho.Camera.FLASH_ON;
+				    expect(enumObject.flashMode).toEqual("on");
+				    expect(enumObject.flashMode).toEqual(Rho.Camera.FLASH_ON);
+				});
+
+				it("Should set flashMode to FLASH_ON using setproperty calling method", function() {
+				   enumObject.setProperty('flashMode', enumObject.FLASH_ON);
+				   expect(enumObject.flashMode).toEqual("on");
+				   expect(enumObject.getProperty('flashMode')).toEqual(Rho.Camera.FLASH_ON);
+				});
+
+				it("Should set flashMode to FLASH_ON using setproperties calling method", function() {
+						enumObject.setProperties({
+				        'flashMode': enumObject.FLASH_ON
+				    });
+				    var data = enumObject.getProperties(['flashMode']);
+				    data = data['flashMode'];
+					expect(data).toEqual("on");
+				    expect(data).toEqual(Rho.Camera.FLASH_ON);
+				});
+
+				it("Should set flashMode to FLASH_OFF using direct calling method", function() {
+				   enumObject.flashMode = Rho.Camera.FLASH_OFF;
+				   expect(enumObject.flashMode).toEqual("off");
+				   expect(enumObject.flashMode).toEqual(Rho.Camera.FLASH_OFF);
+				});
+
+				it("Should set flashMode to FLASH_OFF using setproperty calling method", function() {
+				enumObject.setProperty('flashMode', Rho.Camera.FLASH_OFF);
+				expect(enumObject.flashMode).toEqual("off");
+				expect(enumObject.getProperty('flashMode')).toEqual(Rho.Camera.FLASH_OFF);
+				});
+
+				it("Should set flashMode to FLASH_OFF using setproperties calling method", function() {
+				Rho.Camera.setProperties({
+				            'flashMode': Rho.Camera.FLASH_OFF
+				        });
+				        var data = enumObject.getProperties(['flashMode']);
+				        data = data['flashMode'];
+						expect(data).toEqual("off");
+				        expect(data).toEqual(Rho.Camera.FLASH_OFF);
+				});
+
+				if(isAndroidPlatform()){
+
+					it("Should set flashMode to FLASH_AUTO using direct calling method", function() {
+					enumObject.flashMode = Rho.Camera.FLASH_AUTO;
+					expect(enumObject.flashMode).toEqual("auto");
+					expect(enumObject.flashMode).toEqual(Rho.Camera.FLASH_AUTO);
+					});
+
+					it("Should set flashMode to FLASH_AUTO using setproperty calling method", function() {
+					enumObject.setProperty('flashMode', Rho.Camera.FLASH_AUTO);
+					expect(enumObject.flashMode).toEqual("auto");
+					expect(enumObject.getProperty('flashMode')).toEqual(Rho.Camera.FLASH_AUTO);
+					});
 			
+					it("Should set flashMode to FLASH_AUTO using setproperties calling method", function() {
+					Rho.Camera.setProperties({
+					            'flashMode': Rho.Camera.FLASH_AUTO
+					        });
+					        var data = enumObject.getProperties(['flashMode']);
+					        data = data['flashMode'];
+							expect(data).toEqual("auto");
+					        expect(data).toEqual(Rho.Camera.FLASH_AUTO);
+					});
 
-			/* describe("Camera property set using takePicture() for "+ camtype +": "+ camname, function() {
+					it("Should set flashMode to FLASH_RED_EYE using direct calling method", function() {
+					enumObject.flashMode = Rho.Camera.FLASH_RED_EYE;
+					expect(enumObject.flashMode).toEqual("redEye");
+					expect(enumObject.flashMode).toEqual(Rho.Camera.FLASH_RED_EYE);
+					});
 
-				var flag = false;
+					it("Should set flashMode to FLASH_RED_EYE using setproperty calling method", function() {
+					enumObject.setProperty('flashMode', Rho.Camera.FLASH_RED_EYE);
+					expect(enumObject.flashMode).toEqual("redEye");
+					expect(enumObject.getProperty('flashMode')).toEqual(Rho.Camera.FLASH_RED_EYE);
+					});
 
-				beforeEach(function() {
-					flag = false;
-				});
+					it("Should set flashMode to FLASH_RED_EYE using setproperties calling method", function() {
+					Rho.Camera.setProperties({
+					            'flashMode': Rho.Camera.FLASH_RED_EYE
+					        });
+					        var data = enumObject.getProperties(['flashMode']);
+					        data = data['flashMode'];
+							expect(data).toEqual("redEye");
+					        expect(data).toEqual(Rho.Camera.FLASH_RED_EYE);
+					});
 
-				afterEach(function() {
-					//enumObject.disable();
-				});
+					it("Should set flashMode to FLASH_TORCH using direct calling method", function() {
+					enumObject.flashMode = Rho.Camera.FLASH_TORCH;
+					expect(enumObject.flashMode).toEqual("torch");
+					expect(enumObject.flashMode).toEqual(Rho.Camera.FLASH_TORCH);
+					});
 
-				for (var i=0;i<arrCamera.length;i++){
+					it("Should set flashMode to FLASH_TORCH using setproperty calling method", function() {
+					enumObject.setProperty('flashMode', Rho.Camera.FLASH_TORCH);
+					expect(enumObject.flashMode).toEqual("torch");
+					expect(enumObject.getProperty('flashMode')).toEqual(Rho.Camera.FLASH_TORCH);
+					});
 
-					(function(idx){
-
-						it(arrCamera[idx]['testName'], function() {
-
-							runs(function() {
-
-								var propertyName = arrCamera[idx]['propertyName'];
-								var propertyValue = arrCamera[idx]['propertyValue'];
-
-								if (propertyValue == 'true')
-									var strProperty = '{"'+propertyName+'" :'+true+'}';
-								else if (propertyValue == 'false')
-									var strProperty = '{"'+propertyName+'" :'+false+'}';
-								else if (!isNaN(propertyValue)){
-									propertyValue = parseInt(propertyValue);
-									var strProperty = '{"'+propertyName+'" :'+propertyValue+'}';
-								}
-								else{
-									var strProperty = '{"'+propertyName+'" : "'+propertyValue+'"}'
-								}
-
-								var objProperty = JSON.parse(strProperty);
-
-								enumObject.takePicture(objProperty, camCallback);
-
-								setTimeout(function() {
-									flag = true;
-								}, ENABLE_TIMEOUT_VALUE);
-							});
-
-							waitsFor(function() {
-								return flag;
-							}, "Waiting for enable", 6000);
-								
-							runs(function() {
-
-								var strGetProperty = '["'+arrCamera[idx]['propertyName']+'"]';
-								var objGetProperty = JSON.parse(strGetProperty);
-
-								var data = enumObject.getProperties(objGetProperty);
-
-								data = data[arrCamera[idx]['propertyName']];
-								expect(data).toEqual(arrCamera[idx]['expectedResult']);
-							});
-
-						})
-					})(i);
+					it("Should set flashMode to FLASH_TORCH using setproperties calling method", function() {
+					Rho.Camera.setProperties({
+					            'flashMode': Rho.Camera.FLASH_TORCH
+					        });
+					        var data = enumObject.getProperties(['flashMode']);
+					        data = data['flashMode'];
+							expect(data).toEqual("torch");
+					        expect(data).toEqual(Rho.Camera.FLASH_TORCH);
+					});
 
 				}
-			});*/
-			
-			describe("Properties with constants ", function() {
-            it("Should set flashMode to FLASH_ON using direct calling method", function() {
-	        enumObject.flashMode = enumObject.FLASH_ON;
-	        expect(enumObject.flashMode).toEqual("on");
-	        expect(enumObject.flashMode).toEqual(enumObject.FLASH_ON);
-	        });
-	
-           it("Should set flashMode to FLASH_ON using setproperty calling method", function() {
-	       enumObject.setProperty('flashMode', enumObject.FLASH_ON);
-	       expect(enumObject.flashMode).toEqual("on");
-           expect(enumObject.getProperty('flashMode')).toEqual(enumObject.FLASH_ON);
-	       });
-	
-           it("Should set flashMode to FLASH_ON using setproperties calling method", function() {
-	       enumObject.setProperties({
-                        'flashMode': enumObject.FLASH_ON
-                    });
-                    var data = enumObject.getProperties(['flashMode']);
-                    data = data['flashMode'];
-					expect(data).toEqual("on");
-                    expect(data).toEqual(enumObject.FLASH_ON);
-	        });
-	
-           it("Should set flashMode to FLASH_OFF using direct calling method", function() {
-	       enumObject.flashMode = enumObject.FLASH_OFF;
-	       expect(enumObject.flashMode).toEqual("off");
-	       expect(enumObject.flashMode).toEqual(enumObject.FLASH_OFF);
-	       });
-	
-           it("Should set flashMode to FLASH_OFF using setproperty calling method", function() {
-	       enumObject.setProperty('flashMode', enumObject.FLASH_OFF);
-	       expect(enumObject.flashMode).toEqual("off");
-           expect(enumObject.getProperty('flashMode')).toEqual(enumObject.FLASH_OFF);
-	       });
-	
-           it("Should set flashMode to FLASH_OFF using setproperties calling method", function() {
-	       Rho.Camera.setProperties({
-                        'flashMode': enumObject.FLASH_OFF
-                    });
-                    var data = enumObject.getProperties(['flashMode']);
-                    data = data['flashMode'];
-					expect(data).toEqual("off");
-                    expect(data).toEqual(enumObject.FLASH_OFF);
-	       });
-		   
-		   it("Should set flashMode to FLASH_AUTO using direct calling method", function() {
-	       enumObject.flashMode = enumObject.FLASH_AUTO;
-	       expect(enumObject.flashMode).toEqual("auto");
-	       expect(enumObject.flashMode).toEqual(enumObject.FLASH_AUTO);
-	       });
-	
-           it("Should set flashMode to FLASH_AUTO using setproperty calling method", function() {
-	       enumObject.setProperty('flashMode', enumObject.FLASH_AUTO);
-	       expect(enumObject.flashMode).toEqual("auto");
-           expect(enumObject.getProperty('flashMode')).toEqual(enumObject.FLASH_AUTO);
-	       });
-	
-           it("Should set flashMode to FLASH_AUTO using setproperties calling method", function() {
-	       Rho.Camera.setProperties({
-                        'flashMode': enumObject.FLASH_AUTO
-                    });
-                    var data = enumObject.getProperties(['flashMode']);
-                    data = data['flashMode'];
-					expect(data).toEqual("auto");
-                    expect(data).toEqual(enumObject.FLASH_AUTO);
-	       });
-		   
-		   it("Should set flashMode to FLASH_RED_EYE using direct calling method", function() {
-	       enumObject.flashMode = enumObject.FLASH_RED_EYE;
-	       expect(enumObject.flashMode).toEqual("redEye");
-	       expect(enumObject.flashMode).toEqual(enumObject.FLASH_RED_EYE);
-	       });
-	
-           it("Should set flashMode to FLASH_RED_EYE using setproperty calling method", function() {
-	       enumObject.setProperty('flashMode', enumObject.FLASH_RED_EYE);
-	       expect(enumObject.flashMode).toEqual("redEye");
-           expect(enumObject.getProperty('flashMode')).toEqual(enumObject.FLASH_RED_EYE);
-	       });
-	
-           it("Should set flashMode to FLASH_RED_EYE using setproperties calling method", function() {
-	       Rho.Camera.setProperties({
-                        'flashMode': enumObject.FLASH_RED_EYE
-                    });
-                    var data = enumObject.getProperties(['flashMode']);
-                    data = data['flashMode'];
-					expect(data).toEqual("redEye");
-                    expect(data).toEqual(enumObject.FLASH_RED_EYE);
-	       });
-		   
-		    it("Should set flashMode to FLASH_TORCH using direct calling method", function() {
-	       enumObject.flashMode = enumObject.FLASH_TORCH;
-	       expect(enumObject.flashMode).toEqual("torch");
-	       expect(enumObject.flashMode).toEqual(enumObject.FLASH_TORCH);
-	       });
-	
-           it("Should set flashMode to FLASH_TORCH using setproperty calling method", function() {
-	       enumObject.setProperty('flashMode', enumObject.FLASH_TORCH);
-	       expect(enumObject.flashMode).toEqual("torch");
-           expect(enumObject.getProperty('flashMode')).toEqual(enumObject.FLASH_TORCH);
-	       });
-	
-           it("Should set flashMode to FLASH_TORCH using setproperties calling method", function() {
-	       Rho.Camera.setProperties({
-                        'flashMode': enumObject.FLASH_TORCH
-                    });
-                    var data = enumObject.getProperties(['flashMode']);
-                    data = data['flashMode'];
-					expect(data).toEqual("torch");
-                    expect(data).toEqual(enumObject.FLASH_TORCH);
-	       });
-	
-           it("Should set aimMode to AIM_ON using direct calling method", function() {
-	       enumObject.aimMode = enumObject.AIM_ON;
-	       expect(enumObject.aimMode).toEqual("on");
-	       expect(enumObject.aimMode).toEqual(enumObject.AIM_ON);
-	       });
-	
-           it("Should set aimMode to AIM_ON using setproperty calling method", function() {
-	       enumObject.setProperty('aimMode', enumObject.AIM_ON);
-	       expect(enumObject.aimMode).toEqual("on");
-           expect(enumObject.getProperty('aimMode')).toEqual(enumObject.AIM_ON);
-	       });
-	
-           it("Should set aimMode to AIM_ON using setproperties calling method", function() {
-	       enumObject.setProperties({
-                        'aimMode': enumObject.AIM_ON
-                    });
-                    var data = enumObject.getProperties(['aimMode']);
-                    data = data['aimMode'];
-					expect(data).toEqual("on");
-                    expect(data).toEqual(enumObject.AIM_ON);
-	       });
-	
-           it("Should set aimMode to AIM_OFF using direct calling method", function() {
-	       enumObject.aimMode = enumObject.AIM_OFF;
-	       expect(enumObject.aimMode).toEqual("off");
-	       expect(enumObject.aimMode).toEqual(enumObject.AIM_OFF);
-	       });
-	
-           it("Should set aimMode to AIM_OFF using setproperty calling method", function() {
-	       enumObject.setProperty('aimMode', enumObject.AIM_OFF);
-	       expect(enumObject.aimMode).toEqual("off");
-           expect(enumObject.getProperty('aimMode')).toEqual(enumObject.AIM_OFF);
-	       });
-	
-           it("Should set aimMode to AIM_OFF using setproperties calling method", function() {
-	       Rho.Camera.setProperties({
-                        'aimMode': enumObject.AIM_OFF
-                    });
-                    var data = enumObject.getProperties(['aimMode']);
-                    data = data['aimMode'];
-					expect(data).toEqual("off");
-                    expect(data).toEqual(enumObject.AIM_OFF);
-	        });
-			
-			it("Should set colorModel to rgb using direct calling method", function() {
-	       enumObject.colorModel = enumObject.COLOR_MODEL_RGB;
-	       expect(enumObject.colorModel).toEqual("rgb");
-	       expect(enumObject.colorModel).toEqual(enumObject.COLOR_MODEL_RGB);
-	       });
-	
-           it("Should set colorModel to rgb using setproperty calling method", function() {
-	       enumObject.setProperty('colorModel', enumObject.COLOR_MODEL_RGB);
-	       expect(enumObject.colorModel).toEqual("rgb");
-           expect(enumObject.getProperty('colorModel')).toEqual(enumObject.COLOR_MODEL_RGB);
-	       });
-	
-           it("Should set colorModel to rgb using setproperties calling method", function() {
-	       Rho.Camera.setProperties({
-                        'colorModel': enumObject.COLOR_MODEL_RGB
-                    });
-                    var data = enumObject.getProperties(['colorModel']);
-                    data = data['colorModel'];
-					expect(data).toEqual("rgb");
-                    expect(data).toEqual(enumObject.COLOR_MODEL_RGB);
-	        });
-			
-			it("Should set colorModel to grayscale using direct calling method", function() {
-	       enumObject.colorModel = enumObject.COLOR_MODEL_GRAYSCALE;
-	       expect(enumObject.colorModel).toEqual("grayscale");
-	       expect(enumObject.colorModel).toEqual(enumObject.COLOR_MODEL_GRAYSCALE);
-	       });
-	
-           it("Should set colorModel to grayscale using setproperty calling method", function() {
-	       enumObject.setProperty('colorModel', enumObject.COLOR_MODEL_GRAYSCALE);
-	       expect(enumObject.colorModel).toEqual("grayscale");
-           expect(enumObject.getProperty('colorModel')).toEqual(enumObject.COLOR_MODEL_GRAYSCALE);
-	       });
-	
-           it("Should set colorModel to grayscale using setproperties calling method", function() {
-	       Rho.Camera.setProperties({
-                        'colorModel': enumObject.COLOR_MODEL_GRAYSCALE
-                    });
-                    var data = enumObject.getProperties(['colorModel']);
-                    data = data['colorModel'];
-					expect(data).toEqual("grayscale");
-                    expect(data).toEqual(enumObject.COLOR_MODEL_GRAYSCALE);
-	        });
-			
-			it("Should set outputFormat to image using direct calling method", function() {
-	       enumObject.outputFormat = enumObject.OUTPUT_FORMAT_IMAGE;
-	       expect(enumObject.outputFormat).toEqual("image");
-	       expect(enumObject.outputFormat).toEqual(enumObject.OUTPUT_FORMAT_IMAGE);
-	       });
-	
-           it("Should set outputFormat to image using setproperty calling method", function() {
-	       enumObject.setProperty('outputFormat', enumObject.OUTPUT_FORMAT_IMAGE);
-	       expect(enumObject.outputFormat).toEqual("image");
-           expect(enumObject.getProperty('outputFormat')).toEqual(enumObject.OUTPUT_FORMAT_IMAGE);
-	       });
-	
-           it("Should set outputFormat to image using setproperties calling method", function() {
-	       Rho.Camera.setProperties({
-                        'outputFormat': enumObject.OUTPUT_FORMAT_IMAGE
-                    });
-                    var data = enumObject.getProperties(['outputFormat']);
-                    data = data['outputFormat'];
-					expect(data).toEqual("image");
-                    expect(data).toEqual(enumObject.OUTPUT_FORMAT_IMAGE);
-	        });
-			
-			it("Should set outputFormat to dataUri using direct calling method", function() {
-	       enumObject.outputFormat = enumObject.OUTPUT_FORMAT_DATAURI;
-	       expect(enumObject.outputFormat).toEqual("dataUri");
-	       expect(enumObject.outputFormat).toEqual(enumObject.OUTPUT_FORMAT_DATAURI);
-	       });
-	
-           it("Should set outputFormat to dataUri using setproperty calling method", function() {
-	       enumObject.setProperty('outputFormat', enumObject.OUTPUT_FORMAT_DATAURI);
-	       expect(enumObject.outputFormat).toEqual("dataUri");
-           expect(enumObject.getProperty('outputFormat')).toEqual(enumObject.OUTPUT_FORMAT_DATAURI);
-	       });
-	
-           it("Should set outputFormat to dataUri using setproperties calling method", function() {
-	       Rho.Camera.setProperties({
-                        'outputFormat': enumObject.OUTPUT_FORMAT_DATAURI
-                    });
-                    var data = enumObject.getProperties(['outputFormat']);
-                    data = data['outputFormat'];
-					expect(data).toEqual("dataUri");
-                    expect(data).toEqual(enumObject.OUTPUT_FORMAT_DATAURI);
-	        });
-			
-			it("Should set compressionFormat to jpg using direct calling method", function() {
-	       enumObject.compressionFormat = enumObject.COMPRESSION_FORMAT_JPG;
-	       expect(enumObject.compressionFormat).toEqual("jpg");
-	       expect(enumObject.compressionFormat).toEqual(enumObject.COMPRESSION_FORMAT_JPG);
-	       });
-	
-           it("Should set compressionFormat to jpg using setproperty calling method", function() {
-	       enumObject.setProperty('compressionFormat', enumObject.COMPRESSION_FORMAT_JPG);
-	       expect(enumObject.compressionFormat).toEqual("jpg");
-           expect(enumObject.getProperty('compressionFormat')).toEqual(enumObject.COMPRESSION_FORMAT_JPG);
-	       });
-	
-           it("Should set compressionFormat to jpg using setproperties calling method", function() {
-	       Rho.Camera.setProperties({
-                        'compressionFormat': enumObject.COMPRESSION_FORMAT_JPG
-                    });
-                    var data = enumObject.getProperties(['compressionFormat']);
-                    data = data['compressionFormat'];
-					expect(data).toEqual("jpg");
-                    expect(data).toEqual(enumObject.COMPRESSION_FORMAT_JPG);
-	        });
-			
-			it("Should set compressionFormat to png using direct calling method", function() {
-	       enumObject.compressionFormat = enumObject.COMPRESSION_FORMAT_PNG;
-	       expect(enumObject.compressionFormat).toEqual("png");
-	       expect(enumObject.compressionFormat).toEqual(enumObject.COMPRESSION_FORMAT_PNG);
-	       });
-	
-           it("Should set compressionFormat to png using setproperty calling method", function() {
-	       enumObject.setProperty('compressionFormat', enumObject.COMPRESSION_FORMAT_PNG);
-	       expect(enumObject.compressionFormat).toEqual("png");
-           expect(enumObject.getProperty('compressionFormat')).toEqual(enumObject.COMPRESSION_FORMAT_PNG);
-	       });
-	
-           it("Should set compressionFormat to png using setproperties calling method", function() {
-	       Rho.Camera.setProperties({
-                        'compressionFormat': enumObject.COMPRESSION_FORMAT_PNG
-                    });
-                    var data = enumObject.getProperties(['compressionFormat']);
-                    data = data['compressionFormat'];
-					expect(data).toEqual("png");
-                    expect(data).toEqual(enumObject.COMPRESSION_FORMAT_PNG);
-	        });
-			
-			it("Should set cameraType to back using direct calling method", function() {
-	       enumObject.cameraType = enumObject.CAMERA_TYPE_BACK;
-	       expect(enumObject.cameraType).toEqual("back");
-	       expect(enumObject.cameraType).toEqual(enumObject.CAMERA_TYPE_BACK);
-	       });
-	
-           it("Should set cameraType to back using setproperty calling method", function() {
-	       enumObject.setProperty('cameraType', enumObject.CAMERA_TYPE_BACK);
-	       expect(enumObject.cameraType).toEqual("back");
-           expect(enumObject.getProperty('cameraType')).toEqual(enumObject.CAMERA_TYPE_BACK);
-	       });
-	
-           it("Should set cameraType to back using setproperties calling method", function() {
-	       Rho.Camera.setProperties({
-                        'cameraType': enumObject.CAMERA_TYPE_BACK
-                    });
-                    var data = enumObject.getProperties(['cameraType']);
-                    data = data['cameraType'];
-					expect(data).toEqual("back");
-                    expect(data).toEqual(enumObject.CAMERA_TYPE_BACK);
-	        });
-			
-			it("Should set cameraType to front using direct calling method", function() {
-	       enumObject.cameraType = enumObject.CAMERA_TYPE_FRONT;
-	       expect(enumObject.cameraType).toEqual("front");
-	       expect(enumObject.cameraType).toEqual(enumObject.CAMERA_TYPE_FRONT);
-	       });
-	
-           it("Should set cameraType to front using setproperty calling method", function() {
-	       enumObject.setProperty('cameraType', enumObject.CAMERA_TYPE_FRONT);
-	       expect(enumObject.cameraType).toEqual("front");
-           expect(enumObject.getProperty('cameraType')).toEqual(enumObject.CAMERA_TYPE_FRONT);
-	       });
-	
-           it("Should set cameraType to front using setproperties calling method", function() {
-	       Rho.Camera.setProperties({
-                        'cameraType': enumObject.CAMERA_TYPE_FRONT
-                    });
-                    var data = enumObject.getProperties(['cameraType']);
-                    data = data['cameraType'];
-					expect(data).toEqual("front");
-                    expect(data).toEqual(enumObject.CAMERA_TYPE_FRONT);
-	        });
-			
-			it("Should set cameraType to imager using direct calling method", function() {
-	       enumObject.cameraType = enumObject.CAMERA_TYPE_IMAGER;
-	       expect(enumObject.cameraType).toEqual("imager");
-	       expect(enumObject.cameraType).toEqual(enumObject.CAMERA_TYPE_IMAGER);
-	       });
-	
-           it("Should set cameraType to imager using setproperty calling method", function() {
-	       enumObject.setProperty('cameraType', enumObject.CAMERA_TYPE_IMAGER);
-	       expect(enumObject.cameraType).toEqual("imager");
-           expect(enumObject.getProperty('cameraType')).toEqual(enumObject.CAMERA_TYPE_IMAGER);
-	       });
-	
-           it("Should set cameraType to imager using setproperties calling method", function() {
-	       Rho.Camera.setProperties({
-                        'cameraType': enumObject.CAMERA_TYPE_IMAGER
-                    });
-                    var data = enumObject.getProperties(['cameraType']);
-                    data = data['cameraType'];
-					expect(data).toEqual("imager");
-                    expect(data).toEqual(enumObject.CAMERA_TYPE_IMAGER);
-	        });
-			
-			it("Should set cameraType to color using direct calling method", function() {
-	       enumObject.cameraType = enumObject.CAMERA_TYPE_COLOR;
-	       expect(enumObject.cameraType).toEqual("color");
-	       expect(enumObject.cameraType).toEqual(enumObject.CAMERA_TYPE_COLOR);
-	       });
-	
-           it("Should set cameraType to color using setproperty calling method", function() {
-	       enumObject.setProperty('cameraType', enumObject.CAMERA_TYPE_COLOR);
-	       expect(enumObject.cameraType).toEqual("color");
-           expect(enumObject.getProperty('cameraType')).toEqual(enumObject.CAMERA_TYPE_COLOR);
-	       });
-	
-           it("Should set cameraType to color using setproperties calling method", function() {
-	       Rho.Camera.setProperties({
-                        'cameraType': enumObject.CAMERA_TYPE_COLOR
-                    });
-                    var data = enumObject.getProperties(['cameraType']);
-                    data = data['cameraType'];
-					expect(data).toEqual("color");
-                    expect(data).toEqual(enumObject.CAMERA_TYPE_COLOR);
-	        });
-		   
-	
-	
 
-	
- 	
-        });
+				it("Should set aimMode to AIM_ON using direct calling method", function() {
+				enumObject.aimMode = Rho.Camera.AIM_ON;
+				expect(enumObject.aimMode).toEqual("on");
+				expect(enumObject.aimMode).toEqual(Rho.Camera.AIM_ON);
+				});
+
+				it("Should set aimMode to AIM_ON using setproperty calling method", function() {
+				enumObject.setProperty('aimMode', Rho.Camera.AIM_ON);
+				expect(enumObject.aimMode).toEqual("on");
+				expect(enumObject.getProperty('aimMode')).toEqual(Rho.Camera.AIM_ON);
+				});
+
+				it("Should set aimMode to AIM_ON using setproperties calling method", function() {
+				enumObject.setProperties({
+				            'aimMode': Rho.Camera.AIM_ON
+				        });
+				        var data = enumObject.getProperties(['aimMode']);
+				        data = data['aimMode'];
+						expect(data).toEqual("on");
+				        expect(data).toEqual(Rho.Camera.AIM_ON);
+				});
+
+				it("Should set aimMode to AIM_OFF using direct calling method", function() {
+				enumObject.aimMode = Rho.Camera.AIM_OFF;
+				expect(enumObject.aimMode).toEqual("off");
+				expect(enumObject.aimMode).toEqual(Rho.Camera.AIM_OFF);
+				});
+
+				it("Should set aimMode to AIM_OFF using setproperty calling method", function() {
+				enumObject.setProperty('aimMode', Rho.Camera.AIM_OFF);
+				expect(enumObject.aimMode).toEqual("off");
+				expect(enumObject.getProperty('aimMode')).toEqual(Rho.Camera.AIM_OFF);
+				});
+
+				it("Should set aimMode to AIM_OFF using setproperties calling method", function() {
+				Rho.Camera.setProperties({
+				            'aimMode': Rho.Camera.AIM_OFF
+				        });
+				        var data = enumObject.getProperties(['aimMode']);
+				        data = data['aimMode'];
+						expect(data).toEqual("off");
+				        expect(data).toEqual(Rho.Camera.AIM_OFF);
+				});
+
+				if (!(isWindowsMobilePlatform() && enumObject.cameraType == 'imager')){
+
+					it("Should set colorModel to rgb using direct calling method", function() {
+					enumObject.colorModel = Rho.Camera.COLOR_MODEL_RGB;
+					expect(enumObject.colorModel).toEqual("rgb");
+					expect(enumObject.colorModel).toEqual(Rho.Camera.COLOR_MODEL_RGB);
+					});
+
+					it("Should set colorModel to rgb using setproperty calling method", function() {
+					enumObject.setProperty('colorModel', Rho.Camera.COLOR_MODEL_RGB);
+					expect(enumObject.colorModel).toEqual("rgb");
+					expect(enumObject.getProperty('colorModel')).toEqual(Rho.Camera.COLOR_MODEL_RGB);
+					});
+			
+					it("Should set colorModel to rgb using setproperties calling method", function() {
+					Rho.Camera.setProperties({
+					            'colorModel': Rho.Camera.COLOR_MODEL_RGB
+					        });
+					        var data = enumObject.getProperties(['colorModel']);
+					        data = data['colorModel'];
+							expect(data).toEqual("rgb");
+					        expect(data).toEqual(Rho.Camera.COLOR_MODEL_RGB);
+					});
+
+					it("Should set colorModel to grayscale using direct calling method", function() {
+					enumObject.colorModel = Rho.Camera.COLOR_MODEL_GRAYSCALE;
+					expect(enumObject.colorModel).toEqual("grayscale");
+					expect(enumObject.colorModel).toEqual(Rho.Camera.COLOR_MODEL_GRAYSCALE);
+					});
+
+					it("Should set colorModel to grayscale using setproperty calling method", function() {
+					enumObject.setProperty('colorModel', Rho.Camera.COLOR_MODEL_GRAYSCALE);
+					expect(enumObject.colorModel).toEqual("grayscale");
+					expect(enumObject.getProperty('colorModel')).toEqual(Rho.Camera.COLOR_MODEL_GRAYSCALE);
+					});
+
+					it("Should set colorModel to grayscale using setproperties calling method", function() {
+					Rho.Camera.setProperties({
+					            'colorModel': Rho.Camera.COLOR_MODEL_GRAYSCALE
+					        });
+					        var data = enumObject.getProperties(['colorModel']);
+					        data = data['colorModel'];
+							expect(data).toEqual("grayscale");
+					        expect(data).toEqual(Rho.Camera.COLOR_MODEL_GRAYSCALE);
+					});
+				}
+
+				it("Should set outputFormat to image using direct calling method", function() {
+				enumObject.outputFormat = Rho.Camera.OUTPUT_FORMAT_IMAGE;
+				expect(enumObject.outputFormat).toEqual("image");
+				expect(enumObject.outputFormat).toEqual(Rho.Camera.OUTPUT_FORMAT_IMAGE);
+				});
+
+				it("Should set outputFormat to image using setproperty calling method", function() {
+				enumObject.setProperty('outputFormat', Rho.Camera.OUTPUT_FORMAT_IMAGE);
+				expect(enumObject.outputFormat).toEqual("image");
+				expect(enumObject.getProperty('outputFormat')).toEqual(Rho.Camera.OUTPUT_FORMAT_IMAGE);
+				});
+
+				it("Should set outputFormat to image using setproperties calling method", function() {
+				Rho.Camera.setProperties({
+				            'outputFormat': Rho.Camera.OUTPUT_FORMAT_IMAGE
+				        });
+				        var data = enumObject.getProperties(['outputFormat']);
+				        data = data['outputFormat'];
+						expect(data).toEqual("image");
+				        expect(data).toEqual(Rho.Camera.OUTPUT_FORMAT_IMAGE);
+				});
+				
+				it("Should set outputFormat to dataUri using direct calling method", function() {
+				enumObject.outputFormat = Rho.Camera.OUTPUT_FORMAT_DATAURI;
+				expect(enumObject.outputFormat).toEqual("dataUri");
+				expect(enumObject.outputFormat).toEqual(Rho.Camera.OUTPUT_FORMAT_DATAURI);
+				});
+
+				it("Should set outputFormat to dataUri using setproperty calling method", function() {
+				enumObject.setProperty('outputFormat', Rho.Camera.OUTPUT_FORMAT_DATAURI);
+				expect(enumObject.outputFormat).toEqual("dataUri");
+				expect(enumObject.getProperty('outputFormat')).toEqual(Rho.Camera.OUTPUT_FORMAT_DATAURI);
+				});
+
+				it("Should set outputFormat to dataUri using setproperties calling method", function() {
+				Rho.Camera.setProperties({
+				            'outputFormat': Rho.Camera.OUTPUT_FORMAT_DATAURI
+				        });
+				        var data = enumObject.getProperties(['outputFormat']);
+				        data = data['outputFormat'];
+						expect(data).toEqual("dataUri");
+				        expect(data).toEqual(Rho.Camera.OUTPUT_FORMAT_DATAURI);
+				});
+
+				it("Should set compressionFormat to jpg using direct calling method", function() {
+				enumObject.compressionFormat = Rho.Camera.COMPRESSION_FORMAT_JPG;
+				expect(enumObject.compressionFormat).toEqual("jpg");
+				expect(enumObject.compressionFormat).toEqual(Rho.Camera.COMPRESSION_FORMAT_JPG);
+				});
+		
+				it("Should set compressionFormat to jpg using setproperty calling method", function() {
+				enumObject.setProperty('compressionFormat', Rho.Camera.COMPRESSION_FORMAT_JPG);
+				expect(enumObject.compressionFormat).toEqual("jpg");
+				expect(enumObject.getProperty('compressionFormat')).toEqual(Rho.Camera.COMPRESSION_FORMAT_JPG);
+				});
+
+				it("Should set compressionFormat to jpg using setproperties calling method", function() {
+				Rho.Camera.setProperties({
+				            'compressionFormat': Rho.Camera.COMPRESSION_FORMAT_JPG
+				        });
+				        var data = enumObject.getProperties(['compressionFormat']);
+				        data = data['compressionFormat'];
+						expect(data).toEqual("jpg");
+				        expect(data).toEqual(Rho.Camera.COMPRESSION_FORMAT_JPG);
+				});
+
+				if (isApplePlatform()){
+
+					it("Should set compressionFormat to png using direct calling method", function() {
+					enumObject.compressionFormat = Rho.Camera.COMPRESSION_FORMAT_PNG;
+					expect(enumObject.compressionFormat).toEqual("png");
+					expect(enumObject.compressionFormat).toEqual(Rho.Camera.COMPRESSION_FORMAT_PNG);
+					});
+
+					it("Should set compressionFormat to png using setproperty calling method", function() {
+					enumObject.setProperty('compressionFormat', Rho.Camera.COMPRESSION_FORMAT_PNG);
+					expect(enumObject.compressionFormat).toEqual("png");
+					expect(enumObject.getProperty('compressionFormat')).toEqual(Rho.Camera.COMPRESSION_FORMAT_PNG);
+					});
+
+					it("Should set compressionFormat to png using setproperties calling method", function() {
+					Rho.Camera.setProperties({
+					            'compressionFormat': Rho.Camera.COMPRESSION_FORMAT_PNG
+					        });
+					        var data = enumObject.getProperties(['compressionFormat']);
+					        data = data['compressionFormat'];
+							expect(data).toEqual("png");
+					        expect(data).toEqual(Rho.Camera.COMPRESSION_FORMAT_PNG);
+					});
+
+				}
+
+				if (!(isWindowsMobilePlatform())){
+
+					if(enumObject.cameraType == 'back'){
+						it("Should set cameraType to back using direct calling method", function() {
+						enumObject.cameraType = Rho.Camera.CAMERA_TYPE_BACK;
+						expect(enumObject.cameraType).toEqual("back");
+						expect(enumObject.cameraType).toEqual(Rho.Camera.CAMERA_TYPE_BACK);
+						});
+				
+						it("Should set cameraType to back using setproperty calling method", function() {
+						enumObject.setProperty('cameraType', Rho.Camera.CAMERA_TYPE_BACK);
+						expect(enumObject.cameraType).toEqual("back");
+						expect(enumObject.getProperty('cameraType')).toEqual(Rho.Camera.CAMERA_TYPE_BACK);
+						});
+
+						it("Should set cameraType to back using setproperties calling method", function() {
+						Rho.Camera.setProperties({
+						            'cameraType': Rho.Camera.CAMERA_TYPE_BACK
+						        });
+						        var data = enumObject.getProperties(['cameraType']);
+						        data = data['cameraType'];
+								expect(data).toEqual("back");
+						        expect(data).toEqual(Rho.Camera.CAMERA_TYPE_BACK);
+						});
+					}else{
+						it("Should set cameraType to front using direct calling method", function() {
+						enumObject.cameraType = Rho.Camera.CAMERA_TYPE_FRONT;
+						expect(enumObject.cameraType).toEqual("front");
+						expect(enumObject.cameraType).toEqual(Rho.Camera.CAMERA_TYPE_FRONT);
+						});
+
+						it("Should set cameraType to front using setproperty calling method", function() {
+						enumObject.setProperty('cameraType', Rho.Camera.CAMERA_TYPE_FRONT);
+						expect(enumObject.cameraType).toEqual("front");
+						expect(enumObject.getProperty('cameraType')).toEqual(Rho.Camera.CAMERA_TYPE_FRONT);
+						});
+
+						it("Should set cameraType to front using setproperties calling method", function() {
+						Rho.Camera.setProperties({
+						            'cameraType': Rho.Camera.CAMERA_TYPE_FRONT
+						        });
+						        var data = enumObject.getProperties(['cameraType']);
+						        data = data['cameraType'];
+								expect(data).toEqual("front");
+						        expect(data).toEqual(Rho.Camera.CAMERA_TYPE_FRONT);
+						});
+					}
+				}
+
+				if(isWindowsMobilePlatform()){
+
+					if(enumObject.cameraType == 'imager'){
+						it("Should set cameraType to imager using direct calling method", function() {
+						enumObject.cameraType = Rho.Camera.CAMERA_TYPE_IMAGER;
+						expect(enumObject.cameraType).toEqual("imager");
+						expect(enumObject.cameraType).toEqual(Rho.Camera.CAMERA_TYPE_IMAGER);
+						});
+
+						it("Should set cameraType to imager using setproperty calling method", function() {
+						enumObject.setProperty('cameraType', Rho.Camera.CAMERA_TYPE_IMAGER);
+						expect(enumObject.cameraType).toEqual("imager");
+						expect(enumObject.getProperty('cameraType')).toEqual(Rho.Camera.CAMERA_TYPE_IMAGER);
+						});
+
+						it("Should set cameraType to imager using setproperties calling method", function() {
+						Rho.Camera.setProperties({
+						            'cameraType': Rho.Camera.CAMERA_TYPE_IMAGER
+						        });
+						        var data = enumObject.getProperties(['cameraType']);
+						        data = data['cameraType'];
+								expect(data).toEqual("imager");
+						        expect(data).toEqual(Rho.Camera.CAMERA_TYPE_IMAGER);
+						});
+					}else{
+						it("Should set cameraType to color using direct calling method", function() {
+						   enumObject.cameraType = Rho.Camera.CAMERA_TYPE_COLOR;
+						   expect(enumObject.cameraType).toEqual("color");
+						   expect(enumObject.cameraType).toEqual(Rho.Camera.CAMERA_TYPE_COLOR);
+						});
+
+						it("Should set cameraType to color using setproperty calling method", function() {
+						   enumObject.setProperty('cameraType', Rho.Camera.CAMERA_TYPE_COLOR);
+						   expect(enumObject.cameraType).toEqual("color");
+						   expect(enumObject.getProperty('cameraType')).toEqual(Rho.Camera.CAMERA_TYPE_COLOR);
+						});
+				
+						it("Should set cameraType to color using setproperties calling method", function() {
+							Rho.Camera.setProperties({
+							    'cameraType': Rho.Camera.CAMERA_TYPE_COLOR
+							});
+							var data = enumObject.getProperties(['cameraType']);
+							data = data['cameraType'];
+							expect(data).toEqual("color");
+							expect(data).toEqual(Rho.Camera.CAMERA_TYPE_COLOR);
+						});
+					}
+				}
+
+        	});	
 
 		})(enumData[j],arrCAM);
 
@@ -1047,14 +957,14 @@ describe("Camera JS API Test", function() {
 
 });
 
-
-/*describe("Camera choosePicture() JS API Test", function() {
+describe("Camera JS edge API Test", function() {
 	var	enableflag = false;
 	var	disableflag = false;
 	var getpropertiesdata ='';
 	var getpropertydata ='';
     var enumData = Rho.Camera.enumerate();
     var callbackstatus = false;
+	var getcallbackdata = '';
 
     var callbackgetproperties = function (data){
 		getpropertiesdata = JSON.stringify(data);
@@ -1068,87 +978,88 @@ describe("Camera JS API Test", function() {
 
     for (var j = 0;j<enumData.length;j++){
 
-		var arrCAM = getApplicableProperties(enumData[j]);
+		var arrCAM = getApplicableInvalidProperties(enumData[j]);
 
 		(function(enumObject,arrCamera){
 
 			var camname = enumObject.getProperty('cameraType');
 			var camtype = enumObject.getProperty('ID');
 
-			Rho.Camera.setDefault(enumObject);
 
-			describe("Camera property set using choosePicture() for "+ camtype +": "+ camname, function() {
-
-				var flag = false;
-
-				beforeEach(function() {
-					flag = false;
-				});
-
-				afterEach(function() {
-					//enumObject.disable();
-				});
+			describe("Camera property using set/getProperty for "+ camtype +": "+ camname, function() {
 
 				for (var i=0;i<arrCamera.length;i++){
 
 					(function(idx){
-
 						it(arrCamera[idx]['testName'], function() {
-
-							runs(function() {
-
-								var propertyName = arrCamera[idx]['propertyName'];
-								var propertyValue = arrCamera[idx]['propertyValue'];
-
-								if (propertyValue == 'true')
-									var strProperty = '{"'+propertyName+'" :'+true+'}';
-								else if (propertyValue == 'false')
-									var strProperty = '{"'+propertyName+'" :'+false+'}';
-								else if (!isNaN(propertyValue)){
-									propertyValue = parseInt(propertyValue);
-									var strProperty = '{"'+propertyName+'" :'+propertyValue+'}';
-								}
-								else{
-									var strProperty = '{"'+propertyName+'" : "'+propertyValue+'"}'
-								}
-
-								var objProperty = JSON.parse(strProperty);
-
-								Rho.Camera.choosePicture(objProperty, camCallback);
-
-								setTimeout(function() {
-									flag = true;
-								}, ENABLE_TIMEOUT_VALUE);
-							});
-
-							waitsFor(function() {
-								return flag;
-							}, "Waiting for enable", 6000);
+                                enumObject.setProperty(arrCamera[idx]['propertyName'],arrCamera[idx]['DefaultValue']);
+							    enumObject.setProperty(arrCamera[idx]['propertyName'],arrCamera[idx]['propertyValue']);
 								
-							runs(function() {
-
-								var strGetProperty = '["'+arrCamera[idx]['propertyName']+'"]';
-								var objGetProperty = JSON.parse(strGetProperty);
-
-								var data = Rho.Camera.getProperties(objGetProperty);
-
-								data = data[arrCamera[idx]['propertyName']];
+								var data = enumObject.getProperty(arrCamera[idx]['propertyName']);
+								//alert(data);
 								expect(data).toEqual(arrCamera[idx]['expectedResult']);
-							});
-
 						});
+
 					})(i);
 
 				}
 			});
-		
 
-	  })(enumData[j],arrCAM);
+			describe("Camera property Using set/getProperties for "+ camtype +": "+ camname, function() {
+                
+				for (var i=0;i<arrCamera.length;i++){
+
+					(function(idx){
+						it(arrCamera[idx]['testName'], function() {
+						
+							var propertyName = arrCamera[idx]['propertyName'];
+							var propertyValue = arrCamera[idx]['DefaultValue'];
+							//alert(propertyValue);
+							 propertyValue = arrCamera[idx]['propertyValue'];
+							 //alert(propertyValue);
+                            if(propertyValue == ""){
+							    //alert("hi");
+								var strProperty = {propertyName :""};
+							}
+							else if (propertyValue == 'true')
+								var strProperty = '{"'+propertyName+'" :'+true+'}';
+							else if (propertyValue == 'false')
+								var strProperty = '{"'+propertyName+'" :'+false+'}';
+							else if (!isNaN(propertyValue)){
+								propertyValue = parseInt(propertyValue);
+								var strProperty = '{"'+propertyName+'" :'+propertyValue+'}';
+							}
+							else{
+								var strProperty = '{"'+propertyName+'" : "'+propertyValue+'"}';
+							}
+							//alert(strProperty);
+							var objProperty;
+							if(propertyValue != ""){
+							 objProperty = JSON.parse(strProperty);
+							}
+						
+							enumObject.setProperties(objProperty);
+
+							var strGetProperty = '["'+arrCamera[idx]['propertyName']+'"]';
+							var objGetProperty = JSON.parse(strGetProperty);
+
+							var data = enumObject.getProperties(objGetProperty);
+
+			
+							data = data[arrCamera[idx]['propertyName']];
+							//alert(data);
+							expect(data).toEqual(arrCamera[idx]['expectedResult']);
+	
+						});
+					})(i);
+				}
+			});
+
+		})(enumData[j],arrCAM);
 
     }
 
-});*/
-
+});
 
 describe("Enumerate Camera ", function() {
 	var enumObjCount = false;

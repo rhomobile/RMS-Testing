@@ -43,35 +43,6 @@ describe('API Generator specs', function() {
                     expect(Rho.NativeBridgeTest.testString(str)).toEqual(str);
                     expect(Rho.NativeBridgeTest.testString(str2)).toEqual(str2);
                 });
-
-                it('passing complex parameters to function', function() {
-                    var arrHashStr = [
-                        {'a': 'b'},
-                        {'b': 'c'},
-                        {'sdfsdf': 'sdfsdfsdfsdf'}
-                    ];
-                    var hashHashStr = {
-                        'a': {'a': 'b'},
-                        'b': {'b': 'c'}
-                    };
-                    var hashArrStr = {
-                        'a': ['a', 'b'],
-                        'b': ['b', 'c']
-                    };
-                    var arrArrStr = [
-                        ['a', 'b'],
-                        ['b', 'c']
-                    ];
-                    res = Rho.NativeBridgeTest.testApi(arrHashStr, hashHashStr, hashArrStr, arrArrStr);
-                    data = JSON.parse(res);
-
-                    Rho.Log.warning(JSON.stringify(data, null, 2), 'ABC');
-
-                    expect(arrHashStr).toEqual(data[0]);
-                    expect(hashHashStr).toEqual(data[1]);
-                    expect(hashArrStr).toEqual(data[2]);
-                    expect(arrArrStr).toEqual(data[3]);
-                });
             });
 
             describe('loopback functions, edge cases', function() {

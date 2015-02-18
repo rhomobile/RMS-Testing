@@ -6,9 +6,24 @@ describe('Developer Experience - Build live update Functionality Test', function
         spec.addPrecondition("In local computer build the application with \'development\' extension for all platforms.");
         spec.addPrecondition("Install the  application on all subscribers (WM, CE, Android, IOS, Android Simulator and IOS simulator)");
         spec.addPrecondition("Launch the application in all subscribers.");
-        spec.addStep("From the project root folder run command rake dev:discovery.");
+        spec.addStep("From the project root folder run command rake dev:network:discovery .");
         spec.addExpectation("Web server should be started if not running.");
         spec.addExpectation("In dev-config.yml it should register all the available subscribers with eg:devices:  uri: 192.168.1.102:37579  name: macbook-pro  platform: APPLE  application: ReloadBundleformat");
+        spec.displayScenario();
+        spec.waitForButtonPressing("Run test");
+        spec.waitForResponse();
+    });
+
+    it("Discovery with optional parameter subnet_mask", function() {
+        var spec = new ManualSpec(jasmine, window.document);
+        spec.addGoal("Discovery with optional parameter subnet_mask");
+        spec.addPrecondition("Connect some devices to 192.168.1 subnet mask and connect some other devices 192.168.2 subnet mask.");
+        spec.addPrecondition("In local computer build the application with \'development\' extension for all platforms.");
+        spec.addPrecondition("Install the  application on all subscribers (WM, CE, Android, IOS, Android Simulator and IOS simulator)");
+        spec.addPrecondition("Launch the application in all subscribers.");
+        spec.addStep("From the project root folder run command rake dev:network:discovery[\"192.168.1\"].");
+        spec.addExpectation("Web server should be started if not running.");
+        spec.addExpectation("In dev-config.yml it should register all available devices in 192.168.1 subnet mask.");
         spec.displayScenario();
         spec.waitForButtonPressing("Run test");
         spec.waitForResponse();
@@ -21,7 +36,7 @@ describe('Developer Experience - Build live update Functionality Test', function
         spec.addPrecondition("In local computer build app1 and app2 with \'development\' extension for all platforms.");
         spec.addPrecondition("Install app1 and app2 application on all subscribers (WM, CE, Android, IOS, Android Simulator and IOS simulator).");
         spec.addPrecondition("Launch the app1 in some subscribers and app2 in other subscribers.");
-        spec.addStep("From app2 project root folder run command rake dev:discovery.");
+        spec.addStep("From app2 project root folder run command rake dev:network:discovery .");
         spec.addExpectation("Web server should be started if not running.");
         spec.addExpectation("Devices launched with App1 and App2 should be registered in dev_config.yml.");
         spec.displayScenario();
@@ -41,7 +56,7 @@ describe('Developer Experience - Build live update Functionality Test', function
         spec.addStep("Call rake dev:update:partial");
         spec.addStep("Refresh the page.");
         spec.addExpectation("Web server should be started if not running");
-        spec.addExpectation("Should detect changed html file, builds partial bundle update and sends notification to subscriber.");
+        spec.addExpectation("Should detect changed HTML file, builds partial bundle update and sends notification to subscriber.");
         spec.addExpectation("After refresh modified HTML page should be displayed.");
         spec.displayScenario();
         spec.waitForButtonPressing("Run test");
@@ -60,7 +75,7 @@ describe('Developer Experience - Build live update Functionality Test', function
         spec.addPrecondition("Stop all servers and start webserver rake dev:webserver:start");
         spec.addStep("Modify JS file in app and pubic folder with code function alertTest() { alert(\'Test alert for onetime update\')} ");
         spec.addStep("Call rake dev:update:partial.");
-        spec.addStep("Call the alertTest funtion.");
+        spec.addStep("Call the alertTest function.");
         spec.addExpectation("Web server should be started.");
         spec.addExpectation("Should detect changed JS file, builds partial bundle update and sends notification  to subscriber.");
         spec.addExpectation("Automatic page refresh should happen and on calling alert function should display alert message.");
@@ -104,7 +119,7 @@ describe('Developer Experience - Build live update Functionality Test', function
         spec.addStep("Call show_popup function.");
         spec.addExpectation("Web server should be started if not running");
         spec.addExpectation("Should detect changed erb and controller file, builds partial bundle update and sends notification to subscriber.");
-        spec.addExpectation("Popup should be displayed on calling show popup function.");
+        spec.addExpectation("Popup should be displayed on calling show pop up function.");
         spec.displayScenario();
         spec.waitForButtonPressing("Run test");
         spec.waitForResponse();
@@ -160,7 +175,7 @@ describe('Developer Experience - Build live update Functionality Test', function
         spec.addPrecondition("Add refresh: false to dev-config.yml.");
         spec.addPrecondition("To Apply auto update run command rake dev:update:auto");
         spec.addStep("Modify JS file in app and pubic folder with code function alertTest() { alert(\'Test alert for auto update\')}");
-        spec.addStep("Call the alertTest funtion.");
+        spec.addStep("Call the alertTest function.");
         spec.addExpectation("Web server should be started if not running");
         spec.addExpectation("The auto update command should launch file system monitoring process.");
         spec.addExpectation("On changing JS file monitoring process should run rake dev:update:partial and apply changes to subscriber.");
@@ -206,7 +221,7 @@ describe('Developer Experience - Build live update Functionality Test', function
         spec.addExpectation("Web server should be started if not running");
         spec.addExpectation("The auto update command should launch file system monitoring process. ");
         spec.addExpectation("On changing Ruby file monitoring process should run rake dev:update:partial and apply changes to subscriber.");
-        spec.addExpectation("Page should be refreshed automatically and popup should be displayed on calling show popup function.");
+        spec.addExpectation("Page should be refreshed automatically and pop-up should be displayed on calling show pop-up function.");
         spec.displayScenario();
         spec.waitForButtonPressing("Run test");
         spec.waitForResponse();
@@ -324,7 +339,7 @@ describe('Developer Experience - Build live update Functionality Test', function
         spec.addPrecondition("To Apply auto update run command rake dev:update:auto");
         spec.addStep("Switch off the device.");
         spec.addStep("Modify HTML file in app and pubic folder with code <p id=\'pid\' onClick=\'alertTest()\'>Device is switched off.</p>.");
-        spec.addStep("Modify js file in app and publid folder. function alertTest() { alert(\'Device is switched off\')}");
+        spec.addStep("Modify js file in app and public folder. function alertTest() { alert(\'Device is switched off\')}");
         spec.addStep("Add css styling to css file #pid {background-color:#00ff00}");
         spec.addStep("Turn on the device and start the application.");
         spec.addStep("Refresh the page.");
@@ -508,7 +523,7 @@ describe('Developer Experience - Build live update Functionality Test', function
         spec.addStep("Refresh the page.");
         spec.addExpectation("Web server should be started if not running");
         spec.addExpectation("Build_and_notify command should build partial bundle from upgrade_package_add_files.txt files list.");
-        spec.addExpectation("Popup should be displayed on calling show popup function.");
+        spec.addExpectation("Pop-up should be displayed on calling show pop-up function.");
         spec.displayScenario();
         spec.waitForButtonPressing("Run test");
         spec.waitForResponse();
@@ -584,7 +599,7 @@ describe('Developer Experience - Build live update Functionality Test', function
         var spec = new ManualSpec(jasmine, window.document);
         spec.addGoal("Should update all subscribers on changing images, HTML, JS, CSS and ruby files when built from Rhohub.");
         spec.addPrecondition("Connect the devices to server network.");
-        spec.addPrecondition("Build the aplication with \'development\' extension in RhoHub for all platforms.");
+        spec.addPrecondition("Build the application with \'development\' extension in RhoHub for all platforms.");
         spec.addPrecondition("Install the  application on all subscribers (WM, CE, Android, IOS, Android Simulator and IOS simulator)");
         spec.addPrecondition("Launch the application in all subscribers.");
         spec.addPrecondition("Rhohub repository should be cloned to desktop.");
@@ -600,7 +615,7 @@ describe('Developer Experience - Build live update Functionality Test', function
         spec.addExpectation("The auto update command should launch file system monitoring process. ");
         spec.addExpectation("On changing HTML and Ruby file monitoring process should run rake dev:update:partial.");
         spec.addExpectation("On refreshing should display Modified HTML page.");
-        spec.addExpectation("Should display popup on caling popup/alert function");
+        spec.addExpectation("Should display popup on calling popup/alert function");
         spec.displayScenario();
         spec.waitForButtonPressing("Run test");
         spec.waitForResponse();
@@ -610,7 +625,7 @@ describe('Developer Experience - Build live update Functionality Test', function
         var spec = new ManualSpec(jasmine, window.document);
         spec.addGoal("Should update all subscribers on changing images, HTML, JS, CSS and ruby files when built from Containers.");
         spec.addPrecondition("Connect the devices to server network.");
-        spec.addPrecondition("Build the aplication with \'development\' extension using local Containers for all platforms.");
+        spec.addPrecondition("Build the application with \'development\' extension using local Containers for all platforms.");
         spec.addPrecondition("Install the  application on all subscribers (WM, CE, Android, IOS, Android Simulator and IOS simulator)");
         spec.addPrecondition("Launch the application in all subscribers.");
         spec.addPrecondition("Discover and register subscribers in dev-config.yml.");
@@ -625,7 +640,7 @@ describe('Developer Experience - Build live update Functionality Test', function
         spec.addExpectation("The auto update command should launch file system monitoring process. ");
         spec.addExpectation("On changing HTML and Ruby file monitoring process should run rake dev:update:partial.");
         spec.addExpectation("On refreshing should display Modified HTML page.");
-        spec.addExpectation("Should display popup on caling popup/alert function");
+        spec.addExpectation("Should display popup on calling popup/alert function");
         spec.displayScenario();
         spec.waitForButtonPressing("Run test");
         spec.waitForResponse();
@@ -635,7 +650,7 @@ describe('Developer Experience - Build live update Functionality Test', function
         var spec = new ManualSpec(jasmine, window.document);
         spec.addGoal("Should update all subscribers on changing images, HTML, JS, CSS and ruby files when built from prebuilt containers(Rhomobile / App Store / GitHub).");
         spec.addPrecondition("Connect the devices to server network.");
-        spec.addPrecondition("Build the aplication with \'development\' extension using Prebuilt Containers for all platforms.");
+        spec.addPrecondition("Build the application with \'development\' extension using Prebuilt Containers for all platforms.");
         spec.addPrecondition("Install the  application on all subscribers (WM, CE, Android, IOS, Android Simulator and IOS simulator)");
         spec.addPrecondition("Launch the application in all subscribers.");
         spec.addPrecondition("Discover and register subscribers in dev-config.yml.");
@@ -650,7 +665,7 @@ describe('Developer Experience - Build live update Functionality Test', function
         spec.addExpectation("The auto update command should launch file system monitoring process. ");
         spec.addExpectation("On changing HTML and Ruby file monitoring process should run rake dev:update:partial.");
         spec.addExpectation("On refreshing should display Modified HTML page.");
-        spec.addExpectation("Should display popup on caling popup/alert function");
+        spec.addExpectation("Should display popup on calling popup/alert function");
         spec.displayScenario();
         spec.waitForButtonPressing("Run test");
         spec.waitForResponse();
@@ -662,8 +677,8 @@ describe('Developer Experience - Build live update Functionality Test', function
         spec.addPrecondition("Dont connect any devices server network.");
         spec.addPrecondition("In local computer build the application with \'development\' extension for all platforms.");
         spec.addPrecondition("Install the  application on all subscribers (WM, CE, Android, IOS, Android Simulator, and IOS simulator)");
-        spec.addPrecondition("Launch the aplication all subscribers.");
-        spec.addStep("Run command rake dev:discovery.");
+        spec.addPrecondition("Launch the application all subscribers.");
+        spec.addStep("Run command rake dev:network:discovery .");
         spec.addExpectation("Web server should be started if not running");
         spec.addExpectation("Timeout should happen when no devices connected to the server network");
         spec.addExpectation("In MAC discovery timeout should happen in 5 sec");
@@ -717,7 +732,7 @@ describe('Developer Experience - Build live update Functionality Test', function
         spec.addPrecondition("Connect devices to server network.");
         spec.addPrecondition("In local computer build the application with \'development\' extension for all platforms.");
         spec.addPrecondition("Install the  application on all subscribers (WM, CE, Android, IOS, Android Simulator, and IOS simulator)");
-        spec.addPrecondition("Launch the aplication all subscribers.");
+        spec.addPrecondition("Launch the application all subscribers.");
         spec.addPrecondition("Discover and register subscribers in dev-config.yml.");
         spec.addPrecondition("Add refresh: true to dev-config.yml.");
         spec.addStep("Modify HTML file in app folder with code <p>First full bundle</p>.");
@@ -740,8 +755,8 @@ describe('Developer Experience - Build live update Functionality Test', function
         spec.addPrecondition("Connect devices to server network.");
         spec.addPrecondition("In local computer build the distribution application with \'development\' extension for all platforms.");
         spec.addPrecondition("Install the  application on all subscribers (WM, CE, Android, IOS, Android Simulator, and IOS simulator)");
-        spec.addPrecondition("Launch the aplication all subscribers.");
-        spec.addStep("From project root folder run command rake dev:discovery.");
+        spec.addPrecondition("Launch the application all subscribers.");
+        spec.addStep("From project root folder run command rake dev:network:discovery .");
         spec.addExpectation("Web server should be started if not running");
         spec.addExpectation("Distribution applications should not be discovered .");
         spec.addExpectation("It should discover only Relase/debug build.");
@@ -756,8 +771,8 @@ describe('Developer Experience - Build live update Functionality Test', function
         spec.addPrecondition("Connect the devices to server network.");
         spec.addPrecondition("In local computer build the application without \'development\' extension for all platforms.");
         spec.addPrecondition("Install the  application on all subscribers (WM, CE, Android, IOS, Android Simulator, and IOS simulator)");
-        spec.addPrecondition("Launch the aplication all subscribers.");
-        spec.addStep("From project root folder run command rake dev:discovery.");
+        spec.addPrecondition("Launch the application all subscribers.");
+        spec.addStep("From project root folder run command rake dev:network:discovery .");
         spec.addExpectation("Web server should be started if not running");
         spec.addExpectation("Subscribers without development extension should not be discovered");
         spec.displayScenario();
@@ -771,8 +786,8 @@ describe('Developer Experience - Build live update Functionality Test', function
         spec.addPrecondition("Server should not be connected in any network");
         spec.addPrecondition("In local computer build the application with \'development\' extension for all platforms.");
         spec.addPrecondition("Install the  application on all subscribers (WM, CE, Android, IOS, Android Simulator, and IOS simulator)");
-        spec.addPrecondition("Launch the aplication all subscribers.");
-        spec.addStep("From project root folder run command rake dev:discovery.");
+        spec.addPrecondition("Launch the application all subscribers.");
+        spec.addStep("From project root folder run command rake dev:network:discovery .");
         spec.addExpectation("Web server should be started if not running");
         spec.addExpectation("There should not be any abnormal behavior. Shoud display proper error message");
         spec.displayScenario();
@@ -866,16 +881,16 @@ describe('Developer Experience - Build live update Functionality Test', function
         spec.waitForResponse();
     });
 
-    it("Should hit breakpoints when built with debug configarations", function() {
+    it("Should hit breakpoints when built with debug configurations", function() {
         var spec = new ManualSpec(jasmine, window.document);
-        spec.addGoal("Should hit breakpoints when built with debug configarations");
+        spec.addGoal("Should hit breakpoints when built with debug configurations");
         spec.addPrecondition("Connect the devices to server network.");
-        spec.addPrecondition("In Rhostudio build using Debug configarations with \'development\' extension");
+        spec.addPrecondition("In Rhostudio build using Debug configurations with \'development\' extension");
         spec.addPrecondition("Application should be launched in subscribers.");
         spec.addPrecondition("Discover and register subscribers in dev-config.yml.");
         spec.addStep("Modify controller file in app folder with code def show_popup  Alert.show_popup \'Test alert for onetime update\'; end");
         spec.addStep("Add link to this function in erb file with code <%= link_to \'[show_popup]\', { :action => :show_popup }%>.");
-        spec.addStep("Add break pont to alert function in controller file.");
+        spec.addStep("Add break point to alert function in controller file.");
         spec.addStep("Run rake dev:update:partial.");
         spec.addStep("Invoke alert function.");
         spec.addExpectation("Web server should be started if not running");
@@ -892,7 +907,7 @@ describe('Developer Experience - Build live update Functionality Test', function
         spec.addPrecondition("Connect devices to server network.");
         spec.addPrecondition("In local computer build the application with \'development\' extension for all platforms.");
         spec.addPrecondition("Install the  application on all subscribers (WM, CE, Android, IOS, Android Simulator, and IOS simulator)");
-        spec.addPrecondition("Launch the aplication all subscribers.");
+        spec.addPrecondition("Launch the application all subscribers.");
         spec.addPrecondition("Discover and register subscribers in dev-config.yml.");
         spec.addPrecondition("To Apply auto update run command rake dev:update:auto");
         spec.addStep("Add more than 50 HTML, CSS or JS files to the project.");
@@ -900,7 +915,7 @@ describe('Developer Experience - Build live update Functionality Test', function
         spec.addStep("Check the added files reflected in subscriber or not.");
         spec.addExpectation("Web server should be started if not running");
         spec.addExpectation("Should detect added html, css, js and image files, builds partial bundle update and sends notification to subscriber.");
-        spec.addExpectation("All the added files should be reflectd in subscriber.");
+        spec.addExpectation("All the added files should be reflected in subscriber.");
         spec.displayScenario();
         spec.waitForButtonPressing("Run test");
         spec.waitForResponse();
@@ -914,7 +929,7 @@ describe('Developer Experience - Build live update Functionality Test', function
         spec.addPrecondition("Install the  application on all subscribers (WM, CE, Android, IOS, Android Simulator, and IOS simulator)");
         spec.addPrecondition("Launch the application all subscribers.");
         spec.addPrecondition("Clear the token by rake token:clear");
-        spec.addStep("Run live update commands like rake dev:discovery, rake dev:update:partial, rake dev:update:full, rake dev:update:auto, rake dev:update:build_and_notify");
+        spec.addStep("Run live update commands like rake dev:network:discovery , rake dev:update:partial, rake dev:update:full, rake dev:update:auto, rake dev:update:build_and_notify");
         spec.addStep("Check whether asking for rhohub login");
         spec.addExpectation("Should ask for rhohub login on running live update commands");
         spec.displayScenario();
@@ -929,7 +944,7 @@ describe('Developer Experience - Build live update Functionality Test', function
         spec.addPrecondition("In local computer build app1 and app2 with \'development\' extension for all platforms.");
         spec.addPrecondition("Install app1 and app2 application on all subscribers (WM, CE, Android, IOS, Android Simulator and IOS simulator).");
         spec.addPrecondition("Launch the app1 in some subscribers and app2 in other subscribers.");
-        spec.addStep("From app1 project root folder run command rake dev:discovery.");
+        spec.addStep("From app1 project root folder run command rake dev:network:discovery .");
         spec.addStep("Goto app2 project root folder.");
         spec.addStep("Modify HTML file in app2 with code <p>Modify HTML file in app2</p>.");
         spec.addStep("Call rake dev:update:partial from app2.");
@@ -949,9 +964,9 @@ describe('Developer Experience - Build live update Functionality Test', function
         spec.addPrecondition("In local computer build app1 and app2 with \'development\' extension for all platforms.");
         spec.addPrecondition("Install app1 and app2 application on all subscribers (WM, CE, Android, IOS, Android Simulator and IOS simulator).");
         spec.addPrecondition("Launch the app1 in some subscribers and app2 in other subscribers.");
-        spec.addStep("From app1 project root folder run command rake dev:discovery.");
+        spec.addStep("From app1 project root folder run command rake dev:network:discovery .");
         spec.addStep("Go to app2 project root folder.");
-        spec.addStep("From app2 project root folder run command rake dev:discovery.");
+        spec.addStep("From app2 project root folder run command rake dev:network:discovery .");
         spec.addStep("Modify HTML file in app1 with code <p>Modify HTML file in app1</p>.");
         spec.addStep("Call rake dev:update:partial from app1.");
         spec.addStep("Refresh page in app1.");
@@ -999,4 +1014,401 @@ describe('Developer Experience - Build live update Functionality Test', function
         spec.waitForResponse();
     });
 
+	it("Should discover devices connected to the subnet on double clicking the subnet in \'Live Update setting\' user interface.", function() {
+        var spec = new ManualSpec(jasmine, window.document);
+        spec.addGoal("Rhostudio Test: Should discover devices connected to the subnet on double clicking the subnet in \'Live Update setting\' user interface.");
+        spec.addPrecondition("Connect the devices to server network.");
+        spec.addPrecondition("In local computer build the application with \'development\' extension for all platforms.");
+        spec.addPrecondition("Install the  application on all subscribers (WM, CE, Android, IOS, Android Simulator and IOS simulator)");
+        spec.addPrecondition("Launch the application in all subscribers.");
+        spec.addStep("Start the Rhostudio.");
+        spec.addStep("Import the application to Rhostudio.");
+        spec.addStep("Open \'Live Update setting\' user interface.");
+        spec.addStep("Double click on the subnet address to discover.");
+        spec.addExpectation("Should start the discovery process.");
+        spec.addExpectation("Should discover devices connected to the subnet.");
+        spec.addExpectation("In \'Live Update setting\' user interface should display found devices, that should contain Device Name, URI, Application name, Device platform.");
+        spec.displayScenario();
+        spec.waitForButtonPressing("Run test");
+        spec.waitForResponse();
+    });
+
+    it("Should be able to modify subnet in \'Live Update setting\' user interface.", function() {
+        var spec = new ManualSpec(jasmine, window.document);
+        spec.addGoal("Rhostudio Test: Should be able to modify subnet in \'Live Update setting\' user interface.");
+        spec.addPrecondition("Connect the devices to server network.");
+        spec.addPrecondition("In local computer build the application with \'development\' extension for all platforms.");
+        spec.addPrecondition("Install the  application on all subscribers (WM, CE, Android, IOS, Android Simulator and IOS simulator)");
+        spec.addPrecondition("Launch the application in all subscribers.");
+        spec.addStep("Start the Rhostudio.");
+        spec.addStep("Import the application to Rhostudio.");
+        spec.addStep("Open \'Live Update setting\' user interface.");
+        spec.addStep("Modify the subnet address.");
+        spec.addStep("Double click on the subnet address to discover.");
+        spec.addExpectation("Should be able to modify subnet address.");
+        spec.addExpectation("Should start the discovery process.");
+        spec.addExpectation("Should discover devices connected to the subnet.");
+        spec.addExpectation("In \'Live Update setting\' user interface should display found devices, that should contain Device Name, URI, Application name, Device platform.");
+        spec.displayScenario();
+        spec.waitForButtonPressing("Run test");
+        spec.waitForResponse();
+    });
+
+    it("Should be able to add subnet in \'Live Update setting\' user interface.", function() {
+        var spec = new ManualSpec(jasmine, window.document);
+        spec.addGoal("Rhostudio Test: Should be able to add subnet in \'Live Update setting\' user interface.");
+        spec.addPrecondition("Connect the devices to server network.");
+        spec.addPrecondition("In local computer build the application with \'development\' extension for all platforms.");
+        spec.addPrecondition("Install the  application on all subscribers (WM, CE, Android, IOS, Android Simulator and IOS simulator)");
+        spec.addPrecondition("Launch the application in all subscribers.");
+        spec.addStep("Start the Rhostudio.");
+        spec.addStep("Import the application to Rhostudio.");
+        spec.addStep("Open \'Live Update setting\' user interface.");
+        spec.addStep("Add the subnet address.");
+        spec.addStep("Double click on the subnet address to discover.");
+        spec.addExpectation("Should be able to add subnet address.");
+        spec.addExpectation("Should start the discovery process.");
+        spec.addExpectation("Should discover devices connected to the subnet.");
+        spec.addExpectation("In \'Live Update setting\' user interface should display found devices, that should contain Device Name, URI, Application name, Device platform.");
+        spec.displayScenario();
+        spec.waitForButtonPressing("Run test");
+        spec.waitForResponse();
+    });
+
+    it("Multiple discovery by double clicking multiple subnet in \'Live Update setting\' user interface.", function() {
+        var spec = new ManualSpec(jasmine, window.document);
+        spec.addGoal("Rhostudio Test: Multiple discovery by double clicking multiple subnet in \'Live Update setting\' user interface.");
+        spec.addPrecondition("Connect the devices to server network.");
+        spec.addPrecondition("In local computer build the application with \'development\' extension for all platforms.");
+        spec.addPrecondition("Install the  application on all subscribers (WM, CE, Android, IOS, Android Simulator and IOS simulator)");
+        spec.addPrecondition("Launch the application in all subscribers.");
+        spec.addStep("Start the Rhostudio.");
+        spec.addStep("Import the application to Rhostudio.");
+        spec.addStep("Open \'Live Update setting\' user interface.");
+        spec.addStep("Add subnet address.");
+        spec.addStep("Double click on the 2 subnet addresses where devices are connected.");
+        spec.addStep("Double click on the subnet address where devices not connected.");
+        spec.addExpectation("Should start the discovery process.");
+        spec.addExpectation("Should discover devices connected to the 2 subnet address.");
+        spec.addExpectation("In \'Live Update setting\' user interface should display found devices, that should contain Device Name, URI, Application name, Device platform.");
+        spec.addExpectation("Device not found should display for subnet where devices not connected.");
+        spec.displayScenario();
+        spec.waitForButtonPressing("Run test");
+        spec.waitForResponse();
+    });
+
+    it("Should Auto update on enabling live update in registered subscribers on Modifying HTML files", function() {
+        var spec = new ManualSpec(jasmine, window.document);
+        spec.addGoal("Rhostudio Test: Should Auto update on enabling live update in registered subscribers on Modifying HTML files");
+        spec.addPrecondition("Connect the devices to server network.");
+        spec.addPrecondition("In local computer build the application with \'development\' extension for all platforms.");
+        spec.addPrecondition("Install the  application on all subscribers (WM, CE, Android, IOS, Android Simulator and IOS simulator)");
+        spec.addPrecondition("Launch the application in all subscribers.");
+        spec.addPrecondition("Open \'Live Update setting\' user interface.");
+        spec.addPrecondition("Discover devices by double clicking subnet.");
+        spec.addStep("Click on \'Enable live update\' to start the auto update process.");
+        spec.addStep("Modify HTML file in app and pubic folder with code <p id=\'pid\' onClick=\'alertTest()\'> Auto update HTML files </p>.");
+        spec.addStep("Refresh the page.");
+        spec.addExpectation("Live update auto process should be running.");
+        spec.addExpectation("After refresh modified HTML content should be seen.");
+        spec.displayScenario();
+        spec.waitForButtonPressing("Run test");
+        spec.waitForResponse();
+    });
+
+    it("Should Auto update on enabling live update in registered subscribers on Modifying JS files", function() {
+        var spec = new ManualSpec(jasmine, window.document);
+        spec.addGoal("Rhostudio Test: Should Auto update on enabling live update in registered subscribers on Modifying JS files");
+        spec.addPrecondition("Connect the devices to server network.");
+        spec.addPrecondition("In local computer build the application with \'development\' extension for all platforms.");
+        spec.addPrecondition("Install the  application on all subscribers (WM, CE, Android, IOS, Android Simulator and IOS simulator)");
+        spec.addPrecondition("Launch the application in all subscribers.");
+        spec.addPrecondition("Open \'Live Update setting\' user interface.");
+        spec.addPrecondition("Discover devices by double clicking subnet.");
+        spec.addPrecondition("Add refresh: false to dev-config.yml.");
+        spec.addStep("Click on \'Enable live update\' to start the auto update process.");
+        spec.addStep("Modify JS file in app and pubic folder with code function alertTest() { alert(\'Test alert for auto update\')}");
+        spec.addStep("Call the alertTest function.");
+        spec.addExpectation("Live update auto process should be running.");
+        spec.addExpectation("After refresh alert message should be displayed.");
+        spec.displayScenario();
+        spec.waitForButtonPressing("Run test");
+        spec.waitForResponse();
+    });
+
+    it("Should Auto update on enabling live update in registered subscribers on Modifying CSS files", function() {
+        var spec = new ManualSpec(jasmine, window.document);
+        spec.addGoal("Rhostudio Test: Should Auto update on enabling live update in registered subscribers on Modifying CSS files");
+        spec.addPrecondition("Connect the devices to server network.");
+        spec.addPrecondition("In local computer build the application with \'development\' extension for all platforms.");
+        spec.addPrecondition("Install the  application on all subscribers (WM, CE, Android, IOS, Android Simulator and IOS simulator)");
+        spec.addPrecondition("Launch the application in all subscribers.");
+        spec.addPrecondition("Open \'Live Update setting\' user interface.");
+        spec.addPrecondition("Discover devices by double clicking subnet.");
+        spec.addPrecondition("Add refresh: true to dev-config.yml.");
+        spec.addStep("Click on \'Enable live update\' to start the auto update process.");
+        spec.addStep("Modify CSS file in app and public folder with code #pid {background-color:green}.");
+        spec.addExpectation("Live update auto process should be running.");
+        spec.addExpectation("Page should be refreshed automatically and background-color green should be applied to page.");
+        spec.displayScenario();
+        spec.waitForButtonPressing("Run test");
+        spec.waitForResponse();
+    });
+
+    it("Should Auto update on enabling live update in registered subscribers on Modifying Ruby files", function() {
+        var spec = new ManualSpec(jasmine, window.document);
+        spec.addGoal("Rhostudio Test: Should Auto update on enabling live update in registered subscribers on Modifying Ruby files");
+        spec.addPrecondition("Connect the devices to server network.");
+        spec.addPrecondition("In local computer build the application with \'development\' extension for all platforms.");
+        spec.addPrecondition("Install the  application on all subscribers (WM, CE, Android, IOS, Android Simulator and IOS simulator)");
+        spec.addPrecondition("Launch the application in all subscribers.");
+        spec.addPrecondition("Open \'Live Update setting\' user interface.");
+        spec.addPrecondition("Discover devices by double clicking subnet.");
+        spec.addPrecondition("Add refresh: true to dev-config.yml.");
+        spec.addStep("Click on \'Enable live update\' to start the auto update process.");
+        spec.addStep("Modify controller file in app folder with code def show_popup  Alert.show_popup \'Test alert for Auto update\';end");
+        spec.addStep("Add link to this function in erb file with code <%= link_to \'[show_popup]\', { :action => :show_popup }%> ");
+        spec.addStep("Call show_popup function.");
+        spec.addExpectation("Live update auto process should be running.");
+        spec.addExpectation("Page should be refreshed automatically and popup should be displayed on calling show popup function.");
+        spec.displayScenario();
+        spec.waitForButtonPressing("Run test");
+        spec.waitForResponse();
+    });
+
+    it("Should Auto update on enabling live update in registered subscribers on Adding new model to project", function() {
+        var spec = new ManualSpec(jasmine, window.document);
+        spec.addGoal("Rhostudio Test: Should Auto update on enabling live update in registered subscribers on Adding new model to project");
+        spec.addPrecondition("Connect the devices to server network.");
+        spec.addPrecondition("In local computer build the application with \'development\' extension for all platforms.");
+        spec.addPrecondition("Install the  application on all subscribers (WM, CE, Android, IOS, Android Simulator and IOS simulator)");
+        spec.addPrecondition("Launch the application in all subscribers.");
+        spec.addPrecondition("Open \'Live Update setting\' user interface.");
+        spec.addPrecondition("Discover devices by double clicking subnet.");
+        spec.addStep("Click on \'Enable live update\' to start the auto update process.");
+        spec.addStep("In the app folder add a model by using the command rhodes model newmodel test1 test2 test3.");
+        spec.addStep("Refresh the page and open the newmodel added to the application.");
+        spec.addExpectation("Live update auto process should be running.");
+        spec.addExpectation("New model should be loaded.");
+        spec.displayScenario();
+        spec.waitForButtonPressing("Run test");
+        spec.waitForResponse();
+    });
+
+    it("Should Auto update on enabling live update in registered subscribers on adding new HTML, CSS, JS, image and Ruby files to project.", function() {
+        var spec = new ManualSpec(jasmine, window.document);
+        spec.addGoal("Rhostudio Test: Should Auto update on enabling live update in registered subscribers on adding new HTML, CSS, JS, image and Ruby files to project.");
+        spec.addPrecondition("Connect the devices to server network.");
+        spec.addPrecondition("In local computer build the application with \'development\' extension for all platforms.");
+        spec.addPrecondition("Install the  application on all subscribers (WM, CE, Android, IOS, Android Simulator and IOS simulator)");
+        spec.addPrecondition("Launch the application in all subscribers.");
+        spec.addPrecondition("Open \'Live Update setting\' user interface.");
+        spec.addPrecondition("Discover devices by double clicking subnet.");
+        spec.addStep("Click on \'Enable live update\' to start the auto update process.");
+        spec.addStep("To App and public folder Add new HTML, CSS, JS, image and Ruby files");
+        spec.addStep("Add links to the newly added files.");
+        spec.addStep("Refresh the page.");
+        spec.addExpectation("Live update auto process should be running.");
+        spec.addExpectation("On refreshing added HTML, CSS, JS, image and Ruby files should be loaded.");
+        spec.displayScenario();
+        spec.waitForButtonPressing("Run test");
+        spec.waitForResponse();
+    });
+
+    it("Should Auto update on enabling live update in registered subscribers on Deleting HTML, JS, CSS files from project", function() {
+        var spec = new ManualSpec(jasmine, window.document);
+        spec.addGoal("Rhostudio Test: Should Auto update on enabling live update in registered subscribers on Deleting HTML, JS, CSS files from project");
+        spec.addPrecondition("Connect the devices to server network.");
+        spec.addPrecondition("In local computer build the application with \'development\' extension for all platforms.");
+        spec.addPrecondition("Install the  application on all subscribers (WM, CE, Android, IOS, Android Simulator and IOS simulator)");
+        spec.addPrecondition("Launch the application in all subscribers.");
+        spec.addPrecondition("Open \'Live Update setting\' user interface.");
+        spec.addPrecondition("Discover devices by double clicking subnet.");
+        spec.addStep("Click on \'Enable live update\' to start the auto update process.");
+        spec.addStep("Delete HTML, CSS, JS, image and Ruby files from app and public folder.");
+        spec.addStep("Refresh the page.");
+        spec.addStep("Check the links working or not.");
+        spec.addExpectation("Live update auto process should be running.");
+        spec.addExpectation("HTML, CSS, JS and Ruby files should be deleted in all devices, links to corresponding files should not work.");
+        spec.displayScenario();
+        spec.waitForButtonPressing("Run test");
+        spec.waitForResponse();
+    });
+
+    it("Should return an error message on Modifying project files when device is switched off and start the application for full bundle update", function() {
+        var spec = new ManualSpec(jasmine, window.document);
+        spec.addGoal("Rhostudio Test: Should return an error message on Modifying project files when device is switched off and start the application for full bundle update");
+        spec.addPrecondition("Connect the devices to server network.");
+        spec.addPrecondition("In local computer build the application with \'development\' extension for all platforms.");
+        spec.addPrecondition("Install the  application on all subscribers (WM, CE, Android, IOS, Android Simulator and IOS simulator)");
+        spec.addPrecondition("Launch the application in all subscribers.");
+        spec.addPrecondition("Open \'Live Update setting\' user interface.");
+        spec.addPrecondition("Discover devices by double clicking subnet.");
+        spec.addPrecondition("Click on \'Enable live update\' to start the auto update process.");
+        spec.addStep("Switch off the device.");
+        spec.addStep("Modify HTML file in app and pubic folder with code <p id=\'pid\' onClick=\'alertTest()\'>Device is switched off.</p>.");
+        spec.addStep("Modify js file in app and publid folder. function alertTest() { alert(\'Device is switched off\')}");
+        spec.addStep("Add css styling to css file #pid {background-color:#00ff00}");
+        spec.addStep("Turn on the device and start the application.");
+        spec.addStep("Refresh the page.");
+        spec.addExpectation("Live update auto process should be running.");
+        spec.addExpectation("In terminal window should get error \'subscriber notify…failed\'. ");
+        spec.addExpectation("After starting the application full bundle update should happen.");
+        spec.addExpectation("Modified files should get reflected in the subscriber.");
+        spec.displayScenario();
+        spec.waitForButtonPressing("Run test");
+        spec.waitForResponse();
+    });
+
+    it("Should return an error message on modifying project files when application was terminated and start the application for full bundle update", function() {
+        var spec = new ManualSpec(jasmine, window.document);
+        spec.addGoal("Rhostudio Test: Should return an error message on modifying project files when application was terminated and start the application for full bundle update");
+        spec.addPrecondition("Connect the devices to server network.");
+        spec.addPrecondition("In local computer build the application with \'development\' extension for all platforms.");
+        spec.addPrecondition("Install the  application on all subscribers (WM, CE, Android, IOS, Android Simulator and IOS simulator)");
+        spec.addPrecondition("Launch the application in all subscribers.");
+        spec.addPrecondition("Open \'Live Update setting\' user interface.");
+        spec.addPrecondition("Discover devices by double clicking subnet.");
+        spec.addPrecondition("Click on \'Enable live update\' to start the auto update process.");
+        spec.addStep("Terminate the application on the device.");
+        spec.addStep("Modify HTML file in app and pubic folder with code <p id=\'pid\' onClick=\'alertTest()\'>Application terminated</p>.");
+        spec.addStep("Modify controller file in app folder with code def show_popup  Alert.show_popup \'Application Terminated\'; end");
+        spec.addStep("Add link to this function in erb file with code <%= link_to \'[show_popup]\', { :action => :show_popup }%>");
+        spec.addStep("Start the application.");
+        spec.addStep("Refresh the page.");
+        spec.addExpectation("Live update auto process should be running.");
+        spec.addExpectation("In terminal window should get error \'subscriber notify…failed\'. ");
+        spec.addExpectation("After starting the application full bundle update should happen.");
+        spec.addExpectation("Modified files should get reflected in the subscriber.");
+        spec.displayScenario();
+        spec.waitForButtonPressing("Run test");
+        spec.waitForResponse();
+    });
+
+    it("Adding files to project when network is not available and full bundle update once the network is available", function() {
+        var spec = new ManualSpec(jasmine, window.document);
+        spec.addGoal("Rhostudio Test: Adding files to project when network is not available and full bundle update once the network is available");
+        spec.addPrecondition("Connect the devices to server network.");
+        spec.addPrecondition("In local computer build the application with \'development\' extension for all platforms.");
+        spec.addPrecondition("Install the  application on all subscribers (WM, CE, Android, IOS, Android Simulator and IOS simulator)");
+        spec.addPrecondition("Launch the application in all subscribers.");
+        spec.addPrecondition("Open \'Live Update setting\' user interface.");
+        spec.addPrecondition("Discover devices by double clicking subnet.");
+        spec.addPrecondition("Add refresh: true to dev-config.yml.");
+        spec.addPrecondition("Click on \'Enable live update\' to start the auto update process.");
+        spec.addStep("Disable network connection on the device");
+        spec.addStep("Add HTML, CSS, JS, erb and image files to project.");
+        spec.addStep("Enable network on devices.");
+        spec.addExpectation("Live update auto process should be running.");
+        spec.addExpectation("when network is disabled Web-server terminal window should get error \'subscriber notify…failed\'. ");
+        spec.addExpectation("After regaining network full bundle update should happen.");
+        spec.addExpectation("Added files should get reflected in the subscriber.");
+        spec.displayScenario();
+        spec.waitForButtonPressing("Run test");
+        spec.waitForResponse();
+    });
+
+    it("Discovery timeout test", function() {
+        var spec = new ManualSpec(jasmine, window.document);
+        spec.addGoal("Rhostudio Test: Discovery timeout test");
+        spec.addPrecondition("Dont connect any devices server network.");
+        spec.addPrecondition("In local computer build the application with \'development\' extension for all platforms.");
+        spec.addPrecondition("Install the  application on all subscribers (WM, CE, Android, IOS, Android Simulator, and IOS simulator)");
+        spec.addPrecondition("Launch the application all subscribers.");
+        spec.addStep("Start the Rhostudio.");
+        spec.addStep("Import the application to Rhostudio.");
+        spec.addStep("Open \'Live Update setting\' user interface.");
+        spec.addStep("Double click on the subnet address to discover.");
+        spec.addExpectation("Should start the discovery process.");
+        spec.addExpectation("Should discover devices connected to the subnet.");
+        spec.addExpectation("Timeout should happen when no devices connected to the server network");
+        spec.addExpectation("In MAC discovery timeout should happen in 5 sec");
+        spec.addExpectation("In Windows discovery timeout should happen in 21 sec");
+        spec.displayScenario();
+        spec.waitForButtonPressing("Run test");
+        spec.waitForResponse();
+    });
+
+    it("Checking discovery without network", function() {
+        var spec = new ManualSpec(jasmine, window.document);
+        spec.addGoal("Rhostudio Test: Checking discovery without network");
+        spec.addPrecondition("Server should not be connected in any network");
+        spec.addPrecondition("In local computer build the application with \'development\' extension for all platforms.");
+        spec.addPrecondition("Install the  application on all subscribers (WM, CE, Android, IOS, Android Simulator, and IOS simulator)");
+        spec.addPrecondition("Launch the aplication all subscribers.");
+        spec.addStep("Start the Rhostudio.");
+        spec.addStep("Import the application to Rhostudio.");
+        spec.addStep("Open \'Live Update setting\' user interface.");
+        spec.addStep("Double click on the subnet address to discover.");
+        spec.addExpectation("Should start the discovery process.");
+        spec.addExpectation("Should discover devices connected to the subnet.");
+        spec.addExpectation("There should not be any abnormal behaviour. Should display proper error message");
+        spec.displayScenario();
+        spec.waitForButtonPressing("Run test");
+        spec.waitForResponse();
+    });
+
+    it("Stopping the auto update process", function() {
+        var spec = new ManualSpec(jasmine, window.document);
+        spec.addGoal("Rhostudio Test: Stopping the auto update process");
+        spec.addPrecondition("Connect the devices to server network.");
+        spec.addPrecondition("In local computer build the application with \'development\' extension for all platforms.");
+        spec.addPrecondition("Install the  application on all subscribers (WM, CE, Android, IOS, Android Simulator and IOS simulator)");
+        spec.addPrecondition("Launch the application in all subscribers.");
+        spec.addPrecondition("Open \'Live Update setting\' user interface.");
+        spec.addPrecondition("Discover devices by double clicking subnet.");
+        spec.addPrecondition("Click on \'Enable live update\' to start the auto update process.");
+        spec.addStep("Stop the auto update process by clicking stop red button.");
+        spec.addStep("Modify HTML file in app and pubic folder with code <p>auoto update processTest</p>.");
+        spec.addStep("Start the auto update process by Clicking on \'Enable live update\' button.");
+        spec.addExpectation("Auto update process should be stopped successfully.");
+        spec.addExpectation("On restarting live update process, modified files should be applied to the subscribers connected.<br/>");
+        spec.displayScenario();
+        spec.waitForButtonPressing("Run test");
+        spec.waitForResponse();
+    });
+
+    it("Should not apply changes made other than app and public folder", function() {
+        var spec = new ManualSpec(jasmine, window.document);
+        spec.addGoal("Rhostudio Test: Should not apply changes made other than app and public folder");
+        spec.addPrecondition("Connect the devices to server network.");
+        spec.addPrecondition("In local computer build the application with \'development\' extension for all platforms.");
+        spec.addPrecondition("Install the  application on all subscribers (WM, CE, Android, IOS, Android Simulator and IOS simulator)");
+        spec.addPrecondition("Launch the application in all subscribers.");
+        spec.addPrecondition("Open \'Live Update setting\' user interface.");
+        spec.addPrecondition("Discover devices by double clicking subnet.");
+        spec.addPrecondition("Click on \'Enable live update\' to start the auto update process.");
+        spec.addStep("Add HTML, CSS, JS files to root folder.");
+        spec.addStep("Add one extension(audiocapture) in build.yml");
+        spec.addStep("Change start page in rhoconfig.txt");
+        spec.addStep("Check the HTML links added working or not, Test audiocapture function.");
+        spec.addExpectation("Live update auto process should be running.");
+        spec.addExpectation("Should not apply changes made other than app and public folder");
+        spec.addExpectation("Start page should not be changed.");
+        spec.addExpectation("audiocapture API should not work");
+        spec.displayScenario();
+        spec.waitForButtonPressing("Run test");
+        spec.waitForResponse();
+    });
+
+    it("Should hit breakpoints when built with debug configurations", function() {
+        var spec = new ManualSpec(jasmine, window.document);
+        spec.addGoal("Rhostudio Test: Should hit breakpoints when built with debug configurations");
+        spec.addPrecondition("Connect the devices to server network.");
+        spec.addPrecondition("In Rhostudio build using Debug configurations with \'development\' extension");
+        spec.addPrecondition("Open \'Live Update setting\' user interface.");
+        spec.addPrecondition("Discover devices by double clicking subnet.");
+        spec.addPrecondition("Click on \'Enable live update\' to start the auto update process.");
+        spec.addStep("Modify controller file in app folder with code def show_popup  Alert.show_popup \'Test alert for update\'; end");
+        spec.addStep("Add link to this function in erb file with code <%= link_to \'[show_popup]\', { :action => :show_popup }%>.");
+        spec.addStep("Add break point to alert function in controller file.");
+        spec.addStep("Invoke alert function.");
+        spec.addExpectation("Live update auto process should be running.");
+        spec.addExpectation("Should detect changed erb and controller file, builds partial bundle update and sends notification to subscriber.");
+        spec.addExpectation("Should hit breakpoint when alert function is called.");
+        spec.displayScenario();
+        spec.waitForButtonPressing("Run test");
+        spec.waitForResponse();
+    });
+	
 });

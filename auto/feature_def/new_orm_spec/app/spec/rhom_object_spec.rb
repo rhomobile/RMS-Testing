@@ -2,6 +2,8 @@ describe "Rhom::RhomObject" do
   @use_new_orm = begin Rho::RHO.use_new_orm rescue true end
   puts "Rhom::RhomObject specs: use_new_orm: #{@use_new_orm}"
 
+  is_fixed_schema = getAccount.name == 'Account_s'
+
   # Returns intersection of vars
   # TODO: New ORM in find does not return :source_id
   def intersection_of_vars(vars1, vars2)
@@ -51,6 +53,11 @@ describe "Rhom::RhomObject" do
     account.object.should == '3560c0a0-ef58-2f40-68a5-fffffffffffff'
   end
 
+  it "should retrieve getCase models" do
+    results = getCase.find(:all)
+    results.length.should == 1
+    results[0].case_number.should == "58"
+  end
 
 =begin
   # TODO: BAB
@@ -62,6 +69,14 @@ describe "Rhom::RhomObject" do
   end
 =end
 
+  it "should respond to find_all" do
+    results = getAccount.find_all(:order => 'name', :orderdir => "DESC")
+    results.length.should == 2
+    results[0].name.should == "Mobio India"
+    results[0].industry.should == "Technology"
+    results[1].name.should == "Aeroprise"
+    results[1].industry.should == "Technology"
+  end
 
   it "should retrieve an object of model" do
     results = getCase.find(:all)
@@ -153,6 +168,47 @@ end
       records = getTestDB().select_from_table('changed_values','*', 'update_type' => 'update')
       records.length.should == 1
     end
+    
+  end
+  
+  it "should create records with no attribs in database" do
+    getTestDB().delete_all_from_table('object_values')
+    res = getTestDB().select_from_table('object_values',"*")
+    res.length.should == 0
+    vars = {"name"=>"foobarthree", "industry"=>"entertainment"}
+    account = getAccount.create(vars)
+    acct = getAccount.find(account.object)
+    acct.name.should == 'foobarthree'
+    acct.industry.should == 'entertainment'
+  end
+
+  it "should create a record" do
+    vars = {"name"=>"some new record", "industry"=>"electronics", "annual_revenue" => true}
+    @account1 = getAccount.create(vars)
+    @account2 = getAccount.find(@account1.object)
+    @account2.object.should =="#{@account1.object}"
+    @account2.name.should == vars['name']
+    @account2.industry.should == vars['industry']
+    @account2.annual_revenue.should == vars['annual_revenue'].to_s
+	
+  end
+
+  it "should create a record with apostrophe" do
+    vars = {"name"=>"some new record", "industry"=>"elec'tronics"}
+    @account1 = getAccount.create(vars)
+    @account2 = getAccount.find(@account1.object)
+    @account2.object.should =="#{@account1.object}"
+    @account2.name.should == vars['name']
+    @account2.industry.should == vars['industry']
+  end
+  
+  it "should create multiple records" do
+    vars = {"name"=>"some new record", "industry"=>"electronics"}
+    @account1 = getAccount.create(vars)
+    @account2 = getAccount.find(@account1.object)
+    @account2.object.should =="#{@account1.object}"
+    @account2.name.should == vars['name']
+    @account2.industry.should == vars['industry']
   end
 
   it "should create multiple records with unique ids" do
@@ -222,12 +278,22 @@ end
     end
   end
 
+  it "should destroy a record" do
+    count = getAccount.count
+    @account = getAccount.find(:first)
+    destroy_id = @account.object
+    @account.destroy
+    @account_nil = getAccount.find(destroy_id)
+    @account_nil.should be_nil
+    new_count = getAccount.count
+    (count - 1).should == new_count
+  end
+  
   it "should partially update a record" do
     new_attributes = {"name"=>"Mobio US"}
     @account  = getAccount.find("44e804f2-4933-4e20-271c-48fcecd9450d")
     @account.update_attributes(new_attributes)
     @new_acct = getAccount.find("44e804f2-4933-4e20-271c-48fcecd9450d")
-
     @new_acct.name.should == "Mobio US"
     @new_acct.industry.should == "Technology"
 
@@ -488,7 +554,7 @@ end
     @acct.update_attributes( :last_checked => update_time_field )
 
     @accts = nil
-    if getAccount.name == 'Account_s'
+    if is_fixed_schema
       @accts = getAccount.find(:all,
         :conditions => { {:name=>'last_checked', :op=>'>'}=>(Time.now-(10*60)).to_s } )
     else # property bag models do not support complex hash conditions
@@ -500,6 +566,17 @@ end
     @accts[0].object.should == '44e804f2-4933-4e20-271c-48fcecd9450d'
   end
 
+  it "should retrieve and modify one record" do
+    @acct = getAccount.find('44e804f2-4933-4e20-271c-48fcecd9450d')
+    
+    @acct.name.should == "Mobio India"
+    @acct.industry.should == "Technology"
+    
+    @acct.name = "Rhomobile US"
+    
+    @acct.name.should == "Rhomobile US"
+  end
+  
   it "should return an empty value for a non-existent attribute" do
     @acct = getAccount.find('44e804f2-4933-4e20-271c-48fcecd9450d')
     @acct.foobar.should be_nil
@@ -525,7 +602,7 @@ end
 
   it "should find with advanced OR conditions" do
     # advanced conditions only supported with fixed schema
-    if getAccount.name == 'Account_s'
+    if is_fixed_schema
 
       query = '%IND%'
       @accts = getAccount.find( :all,
@@ -542,7 +619,7 @@ end
 
   it "should find with advanced OR conditions with order" do
     # advanced conditions only supported with fixed schema
-    if getAccount.name == 'Account_s'
+    if is_fixed_schema
 
       query = '%IND%'
       @accts = getAccount.find( :all,
@@ -560,7 +637,7 @@ end
 
   it "should NOT find with advanced OR conditions" do
     # advanced conditions only supported with fixed schema
-    if getAccount.name == 'Account_s'
+    if is_fixed_schema
       query = '%IND33%'
       @accts = getAccount.find( :all,
         :conditions => {
@@ -574,7 +651,7 @@ end
 
   it "should find with advanced AND conditions" do
     # advanced conditions only supported with fixed schema
-    if getAccount.name == 'Account_s'
+    if is_fixed_schema
       query = '%IND%'
       query2 = '%chnolo%' #LIKE is case insensitive by default
       @accts = getAccount.find( :all,
@@ -593,7 +670,7 @@ end
 
   it "should find with advanced AND conditions with order" do
     # advanced conditions only supported with fixed schema
-    if getAccount.name == 'Account_s'
+    if is_fixed_schema
       query = '%IND%'
       query2 = '%chnolo%' #LIKE is case insensitive by default
       @accts = getAccount.find( :all,
@@ -613,7 +690,7 @@ end
 
   it "should NOT find with advanced AND conditions" do
     # advanced conditions only supported with fixed schema
-    if getAccount.name == 'Account_s'
+    if is_fixed_schema
       query = '%IND123%'
       query2 = '%chnolo%'     #LIKE is case insensitive by default
       @accts = getAccount.find( :all,
@@ -628,7 +705,7 @@ end
 
   it "should count with advanced AND conditions" do
     # advanced conditions only supported with fixed schema
-    if getAccount.name == 'Account_s'
+    if is_fixed_schema
       query = '%IND%'
       query2 = '%chnolo%'     #LIKE is case insensitive by default
       nCount = getAccount.find( :count,
@@ -643,7 +720,7 @@ end
 
   it "should count 0 with advanced AND conditions" do
     # advanced conditions only supported with fixed schema
-    if getAccount.name == 'Account_s'
+    if is_fixed_schema
       query = '%IND123%'
       query2 = '%chnolo%'     #LIKE is case insensitive by default
       nCount = getAccount.find( :count,
@@ -658,7 +735,7 @@ end
 
   it "should find with advanced AND conditions and non-string value" do
     # advanced conditions only supported with fixed schema
-    if getAccount.name == 'Account_s'
+    if is_fixed_schema
       res1 = getAccount.find(:all, {:select => ['name']})
       puts " we have this here : #{res1.inspect}"
 
@@ -675,7 +752,7 @@ end
 
   it "should search with LIKE" do
     # advanced conditions only supported with fixed schema
-    if getAccount.name == 'Account_s'
+    if is_fixed_schema
       query2 = '%CHNolo%'     #LIKE is case insensitive by default
       nCount = getAccount.find( :count,
          :conditions => {
@@ -688,7 +765,7 @@ end
 
   it "should search with 3 LIKE" do
     # advanced conditions only supported with fixed schema
-    if getAccount.name == 'Account_s'
+    if is_fixed_schema
       getAccount.create({:SurveyID=>"Survey1", :CallID => 'Call1', :SurveyResultID => 'SurveyResult1'})
       getAccount.create({:SurveyID=>"Survey2", :CallID => 'Call2', :SurveyResultID => 'SurveyResult2'})
       getAccount.create({:SurveyID=>"Survey3", :CallID => 'Call3', :SurveyResultID => 'SurveyResult3'})
@@ -706,7 +783,7 @@ end
 
   it "should search with IN array" do
     # advanced conditions only supported with fixed schema
-    if getAccount.name == 'Account_s'
+    if is_fixed_schema
       items = getAccount.find( :all,
          :conditions => {
           {:name=>'industry', :op=>'IN'} => ["Technology", "Technology2"] }
@@ -723,7 +800,7 @@ end
 
   it "should search with IN string" do
     # advanced conditions only supported with fixed schema
-    if getAccount.name == 'Account_s'
+    if is_fixed_schema
       items = getAccount.find( :all,
          :conditions => {
           {:name=>'industry', :op=>'IN'} => "\"Technology\", \"Technology2\"" }
@@ -740,7 +817,7 @@ end
 
   it "should search with NOT IN array" do
     # advanced conditions only supported with fixed schema
-    if getAccount.name == 'Account_s'
+    if is_fixed_schema
       items = getAccount.find( :all,
          :conditions => {
           {:name=>'industry', :op=>'NOT IN'} => ["Technology1", "Technology2"] }
@@ -757,7 +834,7 @@ end
 
   it "should search with NOT IN string" do
     # advanced conditions only supported with fixed schema
-    if getAccount.name == 'Account_s'
+    if is_fixed_schema
       items = getAccount.find( :all,
          :conditions => {
           {:name=>'industry', :op=>'NOT IN'} => "\"Technology1\", \"Technology2\"" }
@@ -774,7 +851,7 @@ end
 
   it "should find with group of advanced conditions" do
     # advanced conditions only supported with fixed schema
-    if getAccount.name == 'Account_s'
+    if is_fixed_schema
       query = '%IND%'
       cond1 = {
          :conditions => {
@@ -800,7 +877,7 @@ end
 
   it "should not find with group of advanced conditions" do
     # advanced conditions only supported with fixed schema
-    if getAccount.name == 'Account_s'
+    if is_fixed_schema
       query = '%IND%'
       cond1 = {
          :conditions => {
@@ -1073,7 +1150,7 @@ end
 
   it "should delete_all with advanced conditions" do
     # advanced conditions only supported with fixed schema
-    if getAccount.name == 'Account_s'
+    if is_fixed_schema
 
       vars = {"name"=>"Aeroprise", "website"=>"test.com"}
       account = getAccount.create(vars)
@@ -1113,7 +1190,7 @@ end
 
   it "should not find with advanced condition" do
     # advanced conditions only supported with fixed schema
-    if getAccount.name == 'Account_s'
+    if is_fixed_schema
 
       vars = {"name"=>"Aeroprise", "website"=>"testaa.com"}
       account = getAccount.create(vars)
@@ -1167,11 +1244,8 @@ end
 
     item.destroy
     item2 = getAccount.find(item.object)
-    if @use_new_orm
-      item2.should be_empty
-    else
-      item2.should be_nil
-    end
+
+    item2.should be_nil
     File.exists?(file_name).should == false
   end
 
@@ -1228,9 +1302,12 @@ end
   end
 
   it "should find with sql multiple conditions" do
-    @acct = getAccount.find(:first, :conditions => [ "name = ? AND industry = ?", "Mobio India", "Technology" ], :select => ['name', 'industry'])
-    @acct.name.should == "Mobio India"
-    @acct.industry.should == "Technology"
+    if is_fixed_schema
+      @acct = getAccount.find(:first, :conditions => [ "name = ? AND industry = ?", "'Mobio India'", "'Technology'" ], :select => ['name', 'industry'])
+      Rho::Log.warning(@acct.inspect,"TDDBG")
+      @acct.name.should == "Mobio India"
+      @acct.industry.should == "Technology"
+    end
   end
 
   it "should find count with sql multiple conditions" do
@@ -1247,10 +1324,12 @@ end
   end
 
   it "should support simple sql conditions" do
-    @accts = getAccount.find(:all, :conditions => ["name = ?", "Mobio India"], :select => ['name', 'industry'])
-    @accts.length.should == 1
-    @accts[0].name.should == "Mobio India"
-    @accts[0].industry.should == "Technology"
+    if is_fixed_schema
+      @accts = getAccount.find(:all, :conditions => ["name = ?", "'Mobio India'"], :select => ['name', 'industry'])
+      @accts.length.should == 1
+      @accts[0].name.should == "Mobio India"
+      @accts[0].industry.should == "Technology"
+    end
   end
 
   it "should support complex sql conditions arg" do
@@ -1261,26 +1340,32 @@ end
   end
 
   it "should support sql conditions single filter" do
-    @accts = getAccount.find(:all, :conditions => ["name like ?", "Mob%"], :select => ['name', 'industry'])
-    @accts.length.should == 1
-    @accts[0].name.should == "Mobio India"
-    @accts[0].industry.should == "Technology"
+    if is_fixed_schema
+      @accts = getAccount.find(:all, :conditions => ["name like ?", "'Mob%'"], :select => ['name', 'industry'])
+      @accts.length.should == 1
+      @accts[0].name.should == "Mobio India"
+      @accts[0].industry.should == "Technology"
+    end
   end
 
   it "should support sql conditions single filter with order" do
     return if USE_HSQLDB
 
-    @accts = getAccount.find(:all, :conditions => ["name like ?", "Mob%"], :select => ['name', 'industry'], :order=>'name', :orderdir => 'DESC' )
-    @accts.length.should == 1
-    @accts[0].name.should == "Mobio India"
-    @accts[0].industry.should == "Technology"
+    if is_fixed_schema
+      @accts = getAccount.find(:all, :conditions => ["name like ?", "'Mob%'"], :select => ['name', 'industry'], :order=>'name', :orderdir => 'DESC' )
+      @accts.length.should == 1
+      @accts[0].name.should == "Mobio India"
+      @accts[0].industry.should == "Technology"
+    end
   end
 
   it "should support sql conditions with multiple filters" do
-    @accts = getAccount.find(:all, :conditions => ["name like ? and industry like ?", "Mob%", "Tech%"], :select => ['name', 'industry'])
-    @accts.length.should == 1
-    @accts[0].name.should == "Mobio India"
-    @accts[0].industry.should == "Technology"
+    if is_fixed_schema
+      @accts = getAccount.find(:all, :conditions => ["name like ? and industry like ?", "'Mob%'", "'Tech%'"], :select => ['name', 'industry'])
+      @accts.length.should == 1
+      @accts[0].name.should == "Mobio India"
+      @accts[0].industry.should == "Technology"
+    end
   end
 
   it "should return records when order by is nil for some records" do
@@ -1317,7 +1402,7 @@ end
     getAccount.create('rating'=>14)
 
     # conditions like are not supported for PropertyBag
-    if getAccount.name == 'Account_s'
+    if is_fixed_schema
       size = 3
       @accts = getAccount.find(:all, :conditions => { {:func=> 'CAST', :name=>'rating as INTEGER', :op=>'<', :value => size } => size } )
       @accts.length.should == 2
@@ -1345,7 +1430,7 @@ if !defined?(RHO_WP7)
     getAccount.create('rating'=>13)
     getAccount.create('rating'=>14)
 
-    if getAccount.name == 'Account_s'
+    if is_fixed_schema
       size = 3
       @accts = getAccount.find(:all, :conditions => ["CAST(rating as INTEGER)< ?", "#{size}"], :select => ['rating'] )
       @accts.length.should == 2
@@ -1373,7 +1458,7 @@ end
     getAccount.create('rating'=>14)
 
     # conditions like are not supported for PropertyBag
-    if getAccount.name == 'Account_s'
+    if is_fixed_schema
     size = 3
       @accts = getAccount.find(:all,
           :conditions => {
@@ -1443,7 +1528,7 @@ end
 
   it "should find by object" do
     # conditions like are not supported for PropertyBag
-    if getAccount.name == 'Account_s'
+    if is_fixed_schema
       accts = getAccount.find(:all,:conditions=>
           {
               { :name => "object", :op =>"IN" } => ['44e804f2-4933-4e20-271c-48fcecd9450d','63cf13da-cff4-99e7-f946-48fcec93f1cc']
@@ -1462,7 +1547,7 @@ end
 
   it "should complex find by object" do
     # conditions like are not supported for PropertyBag
-    if getAccount.name == 'Account_s'
+    if is_fixed_schema
       accts = getAccount.find(:all,:conditions=> {
               { :name => "object", :op =>"IN" } => ['44e804f2-4933-4e20-271c-48fcecd9450d','63cf13da-cff4-99e7-f946-48fcec93f1cc'],
               { :name => "name" } => 'Mobio India'
@@ -1479,7 +1564,7 @@ end
     end
   end
 
-=begin
+#=end
 if !defined?(RHO_WP7)
   # FIXME:
   it "should not add property to freezed model" do
@@ -1521,6 +1606,10 @@ end
     if !$spec_settings[:schema_model]
       props = Rho::RhoConfig.sources()[getCase.to_s]
       props['freezed'] = true
+    
+        props['freezed'].should == true
+        #props['property'].should_not be_nil
+        #props['property']['description'].should_not be_nil
     end
 
     obj = getCase().new( :description => 'test')
@@ -1553,5 +1642,5 @@ end
       res4.description.should == "my_addr"
     end
   end
-=end
+#=end
 end # "Rhom::RhomObject"

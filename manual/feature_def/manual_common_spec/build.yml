@@ -12,8 +12,8 @@ capabilities:
 - vibrate
 iphone:
   ajax_api_bridge: false
+  sdk: "iphonesimulator8.1"
   configuration: "Release"
-  sdk: "iphonesimulator7.1"
   provisionprofile: 
   codesignidentity: 
   entitlements: 
