@@ -2,27 +2,27 @@
 <html>
 <head>
 	<br/><input type="button" value="Quit" onclick="quitPB();" />
-	<input type="button" value="Back"  onclick="location.href='../index.html'" />
+	<input type="button" value="Back"  onclick="location.href='./gestureIndex.html'" />
 
-	<title>PB and RE2.2 Semi Auto Frame Work : Device & Application</title>
+	<title>PB and RE2.2 Semi Auto Frame Work : Gesture</title>
 
 	<!-- Loading css styles -->
 	<link rel="stylesheet" type="text/css" href="/public/css/main.css">
 
 	<!-- Loading js scripts -->
-	<script type="text/javascript" src="/public/re1/elements.js"></script>
+	<script type="text/javascript" src="http://10.233.85.82/src/elements.js"></script>
 	<script type="text/javascript" src="/public/js/main.js"></script>
 	<script type="text/javascript" src="/public/js/helper.js"></script>
 
 	<!-- Module related js scripts -->
-	<script type="text/javascript" src="./deviceApplicationTest.js"></script>
-	<script type="text/javascript" src="./deviceApplication.js"></script>
+	<script type="text/javascript" src="./circulargesture.js"></script>
+	<script type="text/javascript" src="./gesturecb.js"></script>
 
 	<!-- Initiate the main js script -->
 	<script type="text/javascript"> main.init(); </script>
 </head>
 <body class="body" onload="main.onPageLoad()">
-<h3 class='title'>Semi Auto test for PB and RE2.2 : Device & Application</h3>
+<h3 class='title'>Semi Auto test for PB and RE2.2 : Gesture</h3>
 <div id="mainBlock" class="mainBlock">
 	<div>
 		<span class="heading">Select Regression Level :</span>
@@ -66,6 +66,6 @@
 		<input type=button value="Previous" onclick="main.prevTest();" />
 		<input type=button value="Next" onclick="main.nextTest()" />
 	</div>
-	</div>
+</div>
 </body>
 </html>

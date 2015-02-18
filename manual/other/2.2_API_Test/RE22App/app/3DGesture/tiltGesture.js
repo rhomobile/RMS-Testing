@@ -108,9 +108,10 @@ function performGesture(GType_value, GestureID_value, Preset_value, Diagonstics_
 
 
 	        //generic.InvokeMETAFunction("gesture", "create");
+	    gesture.create();
 	  	for(var i = 0; i<NumberOfGestures; i++) {
-    		gesture.create();
     		document.getElementById("actualResult").innerHTML += i;
+    		//DeleteGesture();
 	   	}
 
 
@@ -294,10 +295,10 @@ function performGesture(GType_value, GestureID_value, Preset_value, Diagonstics_
 		{
 			"VTID":"VT187 - 2549",
 			"RegLevel":"R1",
-			"Description":"Delete Tilt  Gesture",
+			"Description":"Delete Tilt  Gesture after 15 secs",
 			"PreCondition":[],
-			"Steps":["1. Create a Tilt  Gesture with digonstic true", "2. Perform Tilt gesture", "3. Delete the gesture", "4.Again Perform Tilt gesture"],
-			"ExpectedOutcome":["Gesture should be detected first time.Gesture should not be detected after deleting the gesture.."],
+			"Steps":["1. Create a Tilt  Gesture with digonstic true", "2. Perform Tilt gesture", "3. After 15 seconds try to perform tilt gesture."],
+			"ExpectedOutcome":["Gesture should be detected","Gesture should not be detected after 15 secs (since gesture is deleted.)"],
 			"testToPerform":function(){
 				myPage = document.getElementById('mainBlock').innerHTML;
 				var Gesturetype = "tilt";
@@ -312,6 +313,9 @@ function performGesture(GType_value, GestureID_value, Preset_value, Diagonstics_
 				var SelectedItem = "JavaScript";
 				var NumberOfGestures = 1;
 		    	performGesture(Gesturetype, GestureID, Preset, Diagonstics, VTargetX, VTargetY, VTargetZ, VTiltTolerance, VHysteresis, SelectedItem, NumberOfGestures);
+		    	setTimeout(function(){
+		    		gesture.delete();
+		    	},15000);
 			},
 			"FinalResult":""
 		}

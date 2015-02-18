@@ -29,7 +29,7 @@ function callBackFunc(param) {
 				"RegLevel":"R1",
 				"Description":"AddressBar with secure https site",
 				"PreCondition":[],
-				"Steps":["Set visibility parameter to visible of addressbar","Enter secure site link which satrts with https identifier","Press enter button"],
+				"Steps":["Set visibility parameter to visible of addressbar","Connect to open network WIFI(M-guest)","Enter any secure site link which starts with https identifier","Press enter button"],
 				"ExpectedOutcome":["Page sholuld navigate to secure https site successfully"],
 				"testToPerform":function(){
 					addressBar.visibility = 'visible';  
@@ -165,11 +165,14 @@ function callBackFunc(param) {
 				"Description":"ZoomTextButton functionality Test",
 				"PreCondition":[],
 				"Steps":["Set visibility param of ZoomTextButton with Content=Visible","Set visibility param of Addressbar with Content=Visible","Click on ZoomTextButton multiple times"],
-				"ExpectedOutcome":["When ZoomTextButton is clicked, the font size will change from smallest to largest."],
+				"ExpectedOutcome":["When ZoomTextButton is clicked, the font size will change from smallest to largest.", "(Test is designed like after 5 sec the zoomTextButton and Addressbar made hidden automatically)"],
 				"testToPerform":function(){
 					zoomTextButton.visibility = 'visible'; 
 					addressBar.visibility = 'visible'; 
-					
+					setTimeout(function(){
+						zoomTextButton.visibility = 'hidden'; 
+						addressBar.visibility = 'hidden'; 
+					},5000);
 					
 				},
 				"FinalResult":""
