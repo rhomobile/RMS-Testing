@@ -533,7 +533,7 @@ describe("Camera API Manual Tests", function(){
 				};
 
 	            runs(function(){
-					Rho.Camera.getCameraByType({'cameraType':'back'}, cameraTypeCb);
+					Rho.Camera.getCameraByType('back', cameraTypeCb);
 				});
 
 				waitsFor(function(){
@@ -567,7 +567,7 @@ describe("Camera API Manual Tests", function(){
 	            camtype = null;
 
 	            runs(function(){
-					camtype = Rho.Camera.getCameraByType({'cameraType':'front'});
+					camtype = Rho.Camera.getCameraByType({'front');
 				});
 
 				waitsFor(function(){
@@ -610,7 +610,7 @@ describe("Camera API Manual Tests", function(){
 				};
 
 	            runs(function(){
-					Rho.Camera.getCameraByType({'cameraType':'color'}, cameraTypeCb);
+					Rho.Camera.getCameraByType('color', cameraTypeCb);
 				});
 
 				waitsFor(function(){
@@ -644,7 +644,7 @@ describe("Camera API Manual Tests", function(){
 	            camtype = null;
 
 	            runs(function(){
-					camtype = Rho.Camera.getCameraByType({'cameraType':'imager'});
+					camtype = Rho.Camera.getCameraByType('imager');
 				});
 
 				waitsFor(function(){
@@ -1827,7 +1827,7 @@ describe("Camera API Manual Tests", function(){
 						spec.addGoal(jasmine.getEnv().currentSpec.description);
 						spec.addStep("Press 'RunTest' button");
 					    spec.addStep("Check for the returned status.");
-					    spec.addExpectation('..');
+					    spec.addExpectation('Uses the rhodes Camera to take a picture.');
 					    spec.displayScenario();
 					    spec.waitForButtonPressing("Run test");
 
@@ -1852,7 +1852,7 @@ describe("Camera API Manual Tests", function(){
 						spec.addGoal(jasmine.getEnv().currentSpec.description);
 						spec.addStep("Press 'RunTest' button");
 					    spec.addStep("Check for the returned status.");
-					    spec.addExpectation('..');
+					    spec.addExpectation("Uses the system Camera application to take a picture instead of rhodes\' camera");
 					    spec.displayScenario();
 					    spec.waitForButtonPressing("Run test");
 
