@@ -1,5 +1,12 @@
 describe("<system module specs>", function () {
 
+    console.log(isApplePlatform());
+    console.log(Rho.System.platform);
+
+    it("does nothing", function() {
+        expect(null).toBe(null);
+    });
+
     if (isApplePlatform()) {
         var alptabet = [
             'alpha', 'beta', 'gamma', 'delta',
