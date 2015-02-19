@@ -37,7 +37,7 @@ if(barcodeNotSupportedDevices.indexOf(Rho.System.deviceName) == -1){
 			//alert("scntype" + scntype + "scnname" + scnname);
 
 		    var RETICLE_TYPE = 'softwareReticle';
-			if(Rho.System.platform == "ANDROID" && scnname == "2D Imager")
+			if(Rho.System.platform == "ANDROID" && scnname.indexOf("Imager") >= 0)
 			{
 				RETICLE_TYPE = 'hardwareReticle';
 			}

@@ -44,7 +44,7 @@ symbian:
   uid: '0xe1a1ef92'
 android:
   version: 4.2.2
-  extensions: ["nativeBridgeTest", "barcode", "screenorientation", "instrumentation", "cardreader", "indicators", "sensor", "websocket", "eventsource", "audiocapture", 'screenorientation', "mediacapture"]
+  extensions: ["nativeBridgeTest", "emdk3-manager", "barcode", "screenorientation", "instrumentation", "cardreader", "indicators", "sensor", "websocket", "eventsource", "audiocapture", 'screenorientation', "mediacapture"]
   capabilities:
   - native_browser
 wm:
