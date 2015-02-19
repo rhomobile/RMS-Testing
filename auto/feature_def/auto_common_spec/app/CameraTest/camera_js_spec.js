@@ -342,12 +342,12 @@ describe("Camera JS API Test", function() {
 					enumObject.previewHeight = 100;
 
 					var captureCallback = function (data){
-						capturedata.status = data.status
-						capturedata.imageHeight = data.imageHeight
-						capturedata.imageWidth = data.imageWidth
-						capturedata.imageFormat = data.imageFormat
-						capturedata.message = data.message
-						capturedata.imageUri = data.imageUri
+						capturedata.status = data.status;
+						capturedata.imageHeight = data.imageHeight;
+						capturedata.imageWidth = data.imageWidth;
+						capturedata.imageFormat = data.imageFormat;
+						capturedata.message = data.message;
+						capturedata.imageUri = data.imageUri;
 
 						capturestatus = true;
 					}

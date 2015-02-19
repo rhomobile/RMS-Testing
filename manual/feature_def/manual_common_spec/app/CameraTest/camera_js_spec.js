@@ -526,9 +526,9 @@ describe("Camera API Manual Tests", function(){
 	            spec.addExpectation('The return values should be back camera object and the back camera should open to take picture.');
 	            spec.displayScenario();
 	            spec.waitForButtonPressing("Run test");
-
+	            var cameratype;
 	            var cameraTypeCb = function(camtyp){
-					camtype = camtyp;
+					cameratype = camtyp;
 					cbkResponseTimeout = true;
 				};
 
@@ -542,7 +542,7 @@ describe("Camera API Manual Tests", function(){
 
 				runs(function(){
 					cbkResponseTimeout = false;
-					camtype.takepicture({}, callbackFunc);
+					cameratype.takePicture({}, callbackFunc);
 				});
 
 				waitsFor(function(){
@@ -564,20 +564,15 @@ describe("Camera API Manual Tests", function(){
 	            spec.addExpectation('The return values should be front camera object and the front camera should open to take picture.');
 	            spec.displayScenario();
 	            spec.waitForButtonPressing("Run test");
-	            camtype = null;
+	            var cameratype;
 
 	            runs(function(){
-					camtype = Rho.Camera.getCameraByType('front');
+					cameratype = Rho.Camera.getCameraByType('front');
 				});
 
-				waitsFor(function(){
-					return cbkResponseTimeout;
-				},"waiting for callback data", 10000);
-
-				runs(function(){
-					cbkResponseTimeout = false;
-					camtype.takepicture({}, callbackFunc);
-				});
+				setTimeout(function(){
+					cameratype.takePicture({}, callbackFunc);
+				},5000);
 
 				waitsFor(function(){
 					return cbkResponseTimeout;
@@ -603,9 +598,10 @@ describe("Camera API Manual Tests", function(){
 	            spec.addExpectation('The return values should be color camera object and the color camera should open to take picture.');
 	            spec.displayScenario();
 	            spec.waitForButtonPressing("Run test");
+	            var cameratype;
 
 	            var cameraTypeCb = function(camtyp){
-					camtype = camtyp;
+					cameratype = camtyp;
 					cbkResponseTimeout = true;
 				};
 
@@ -619,7 +615,7 @@ describe("Camera API Manual Tests", function(){
 
 				runs(function(){
 					cbkResponseTimeout = false;
-					camtype.takepicture({}, callbackFunc);
+					cameratype.takePicture({}, callbackFunc);
 				});
 
 				waitsFor(function(){
@@ -637,24 +633,19 @@ describe("Camera API Manual Tests", function(){
 				var spec = new ManualSpec(jasmine, window.document);
 	        	spec.addGoal(jasmine.getEnv().currentSpec.description);
 	            spec.addStep("Press 'RunTest' button");
-	            spec.addStep("If return value is Front camera call takepicture using return value");
+	            spec.addStep("If return value is imager camera call takepicture using return value");
 	            spec.addExpectation('The return values should be imager camera object and the imager camera should open to take picture.');
 	            spec.displayScenario();
 	            spec.waitForButtonPressing("Run test");
-	            camtype = null;
+	            var cameratype;
 
 	            runs(function(){
-					camtype = Rho.Camera.getCameraByType('imager');
+					cameratype = Rho.Camera.getCameraByType('imager');
 				});
 
-				waitsFor(function(){
-					return cbkResponseTimeout;
-				},"waiting for callback data", 10000);
-
-				runs(function(){
-					cbkResponseTimeout = false;
-					camtype.takepicture({}, callbackFunc);
-				});
+				setTimeout(function(){
+					cameratype.takePicture({}, callbackFunc);
+				},5000);
 
 				waitsFor(function(){
 					return cbkResponseTimeout;
@@ -886,7 +877,7 @@ describe("Camera API Manual Tests", function(){
 			            spec.waitForButtonPressing("Run test");
 
 						runs(function(){
-							objCAM.showPreview({'previewLeft':10, 'previewTop':10, 'previewWidth':100, 'previewHeight':60, 'fileName':'camImage123', 'desiredHeight':360, 'desiredWidth':480, 'compressionFormat':'png', 'outputFormat':'image', 'flashMode':'off', 'aimMode':'off', 'previewLeft':40, 'previewTop':20, 'previewWidth':50, 'previewHeight':50, 'captureSound': sound});
+							objCAM.showPreview({'previewLeft':10, 'previewTop':10, 'previewWidth':100, 'previewHeight':60, 'fileName':'camImage123', 'desiredHeight':360, 'desiredWidth':480, 'compressionFormat':'png', 'outputFormat':'image', 'flashMode':'off', 'aimMode':'off', 'captureSound': sound});
 
 							setTimeout(function(){
 								objCAM.capture(callbackFunc);
@@ -1126,7 +1117,7 @@ describe("Camera API Manual Tests", function(){
 		            spec.waitForButtonPressing("Run test");
 
 		            runs(function(){
-						objCAM.takePicture({}, callbackFunc);
+						objCAM.takePicture({'fileName':''}, callbackFunc);
 					});
 
 					waitsFor(function(){
@@ -1144,13 +1135,13 @@ describe("Camera API Manual Tests", function(){
 					var spec = new ManualSpec(jasmine, window.document);
 		        	spec.addGoal(jasmine.getEnv().currentSpec.description);
 		            spec.addStep("Press 'RunTest' button");
-		            spec.addStep("Minimize the application once the fullscreen mode opens.");
+		            spec.addStep("Suspend the application once the fullscreen mode opens.");
 		            spec.addExpectation('Preview should not disappear. No abnormal behaviour should be observed.');
 		            spec.displayScenario();
 		            spec.waitForButtonPressing("Run test");
 
 		            runs(function(){
-						objCAM.takePicture({}, callbackFunc);
+						objCAM.takePicture({'fileName':''}, callbackFunc);
 					});
 
 					waitsFor(function(){
