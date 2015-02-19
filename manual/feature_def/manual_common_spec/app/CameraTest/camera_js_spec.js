@@ -567,7 +567,7 @@ describe("Camera API Manual Tests", function(){
 	            camtype = null;
 
 	            runs(function(){
-					camtype = Rho.Camera.getCameraByType({'front');
+					camtype = Rho.Camera.getCameraByType('front');
 				});
 
 				waitsFor(function(){
@@ -779,7 +779,7 @@ describe("Camera API Manual Tests", function(){
 					it("VT285-0024 | Should call showPreview with preview window values, ouputFomat:dataUri & captureSound | using " + camid + camtype , function(){
 						var spec = new ManualSpec(jasmine, window.document);
 			        	spec.addGoal(jasmine.getEnv().currentSpec.description);
-			        	spec.addPrecondition("Call showPreview() with properties previewLeft:-10, previewTop:-10, previewWidth:40, previewHeight:80, outputFormat:dataUri, captureSound:'\\Application\\Alarm5.wav'.");
+			        	spec.addPrecondition("Call showPreview() with properties previewLeft:-10, previewTop:-10, previewWidth:40, previewHeight:80, outputFormat:dataUri, captureSound: <audiofile given with teh app>.");
 			            spec.addStep("Press 'RunTest' button");
 			            spec.addStep("Note: Capture will be called automatically & hidePreview is called after the capture");
 			            spec.addStep("Capture will happen, then Check for the returned callback status & property set");
@@ -788,8 +788,7 @@ describe("Camera API Manual Tests", function(){
 			            spec.waitForButtonPressing("Run test");
 
 						runs(function(){
-							objCAM.showPreview({'previewLeft':-10, 'previewTop':-10, 'previewWidth':40, 'previewHeight':80, 'outputFormat':'dataUri', 'captureSound': sound
-							});
+							objCAM.showPreview({'previewLeft':-10, 'previewTop':-10, 'previewWidth':40, 'previewHeight':80, 'outputFormat':'dataUri', 'captureSound': sound});
 
 							setTimeout(function(){
 								objCAM.capture(callbackFunc);
@@ -822,8 +821,7 @@ describe("Camera API Manual Tests", function(){
 			            spec.waitForButtonPressing("Run test");
 
 						runs(function(){
-							objCAM.showPreview({'previewLeft':10, 'previewTop':10, 'previewWidth':100, 'previewHeight':60, 'desiredHeight':120, 'desiredWidth':240, 'outputFormat':'image', 'flashMode':'on', 'aimMode':'on', 'captureSound':''
-							});
+							objCAM.showPreview({'previewLeft':10, 'previewTop':10, 'previewWidth':100, 'previewHeight':60, 'desiredHeight':120, 'desiredWidth':240, 'outputFormat':'image', 'flashMode':'on', 'aimMode':'on', 'captureSound':''});
 
 							setTimeout(function(){
 								objCAM.capture(callbackFunc);
@@ -855,8 +853,7 @@ describe("Camera API Manual Tests", function(){
 			            spec.waitForButtonPressing("Run test");
 
 						runs(function(){
-							objCAM.showPreview({'previewLeft':10, 'previewTop':10, 'previewWidth':100, 'previewHeight':100, 'desiredHeight':120, 'desiredWidth':240, 'outputFormat':'dataUri'
-							});
+							objCAM.showPreview({'previewLeft':10, 'previewTop':10, 'previewWidth':100, 'previewHeight':100, 'desiredHeight':120, 'desiredWidth':240, 'outputFormat':'dataUri'});
 
 							setTimeout(function(){
 								objCAM.capture(callbackFunc);
@@ -889,8 +886,7 @@ describe("Camera API Manual Tests", function(){
 			            spec.waitForButtonPressing("Run test");
 
 						runs(function(){
-							objCAM.showPreview({'previewLeft':10, 'previewTop':10, 'previewWidth':100, 'previewHeight':60, 'fileName':'camImage123', 'desiredHeight':360, 'desiredWidth':480, 'compressionFormat':'png', 'outputFormat':'image', 'flashMode':'off', 'aimMode':'off', 'previewLeft':40, 'previewTop':20, 'previewWidth':50, 'previewHeight':50, 'captureSound': sound
-							});
+							objCAM.showPreview({'previewLeft':10, 'previewTop':10, 'previewWidth':100, 'previewHeight':60, 'fileName':'camImage123', 'desiredHeight':360, 'desiredWidth':480, 'compressionFormat':'png', 'outputFormat':'image', 'flashMode':'off', 'aimMode':'off', 'previewLeft':40, 'previewTop':20, 'previewWidth':50, 'previewHeight':50, 'captureSound': sound});
 
 							setTimeout(function(){
 								objCAM.capture(callbackFunc);
