@@ -50,6 +50,10 @@ function isAndroidOrApplePlatform() {
     return isAndroidPlatform() || isApplePlatform();
 }
 
+function isAndroidOrAppleOrWindowsPhone8Platform() {
+    return isAndroidPlatform() || isApplePlatform() || isWindowsPhone8Platform();
+}
+
 //Add user log to log file.
 var writeIntoLog = function (desc, data){
 		

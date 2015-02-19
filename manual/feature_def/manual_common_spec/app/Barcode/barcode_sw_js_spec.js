@@ -42,7 +42,7 @@ describe("Barcode Test", function() {
 		//objSCN.disable();
 	});
 
-	if (isAndroidOrApplePlatform())
+	if (isAndroidOrAppleOrWindowsPhone8Platform())
 	{
 		it("VT282-1778 | call setDefault with SCN and take |"+ scnid, function() {
 
