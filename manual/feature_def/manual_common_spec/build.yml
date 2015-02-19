@@ -23,6 +23,7 @@ iphone:
     - barcode
     - mediaplayer
     - screenorientation
+    - mediacapture
   BundleIdentifier: "com.rhomobile.manualcommonspec"
   BundleURLScheme: "manualcommonspec"
 wp:
