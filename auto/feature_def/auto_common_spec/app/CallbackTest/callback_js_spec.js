@@ -1,8 +1,5 @@
 describe("<system module specs>", function () {
 
-    console.log(isApplePlatform());
-    console.log(Rho.System.platform);
-
     it("does nothing", function() {
         expect(null).toBe(null);
     });
