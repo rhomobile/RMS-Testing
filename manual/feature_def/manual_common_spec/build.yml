@@ -23,8 +23,9 @@ iphone:
     - barcode
     - mediaplayer
     - screenorientation
-  BundleIdentifier: "manual_common_spec"
-  BundleURLScheme: "manual_common_spec"
+    - mediacapture
+  BundleIdentifier: "com.rhomobile.manualcommonspec"
+  BundleURLScheme: "manualcommonspec"
 wp:
   ajax_api_bridge: false
   productid: "fa586990-6e21-0130-bf9e-3c075409010c"
