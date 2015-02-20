@@ -343,8 +343,14 @@ public class Instrumentation extends InstrumentationBase implements IInstrumenta
 		return false;
 	}
 
+//	@Override
+//	public boolean onAuthRequest(IRhoExtManager extManager, IRhoExtension.IAuthRequest request, IRhoWebView ext, boolean res) {
+//		return false;
+//	}
+	
 	@Override
-	public boolean onAuthRequest(IRhoExtManager extManager, IRhoExtension.IAuthRequest request, IRhoWebView ext, boolean res) {
+	public boolean onAuthRequired(IRhoExtManager extManager, String s1, String s2, String s3, IRhoWebView ext, boolean res)
+	{
 		return false;
 	}
 
