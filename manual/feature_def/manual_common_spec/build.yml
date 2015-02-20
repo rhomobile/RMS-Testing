@@ -38,6 +38,7 @@ android:
   ajax_api_bridge: false
   version: "4.0.3"
   extensions:
+    - emdk3-manager
     - barcode
     - mediaplayer
 #  - ../../../../Motorola-Extensions/build/ci/extensions

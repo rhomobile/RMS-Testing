@@ -127,7 +127,8 @@ var arr_scanner_property = [
 	OSTypes			:	"WINDOWS",
 	propertyValue	:	"auto",
 	expectedResult	:	"auto",
-	notOnAndroidImager: true
+	notOnAndroidImager: true,
+	notInAndroidEMDK3: true
 },
 {
 	testName		:	"VT282-3017 | Set illuminationMode:alwaysOn | alwaysOn",
@@ -136,7 +137,8 @@ var arr_scanner_property = [
 	OSTypes			:	"All",
 	propertyValue	:	"alwaysOn",
 	expectedResult	:	"alwaysOn",
-	notOnAndroidImager: true
+	notOnAndroidImager: true,
+	notInAndroidEMDK3: true
 },
 {
 	testName		:	"VT282-3018 | Set illuminationMode:alwaysOff | alwaysOff",
@@ -145,7 +147,8 @@ var arr_scanner_property = [
 	OSTypes			:	"All",
 	propertyValue	:	"alwaysOff",
 	expectedResult	:	"alwaysOff",
-	notOnAndroidImager: true
+	notOnAndroidImager: true,
+	notInAndroidEMDK3: true
 },
 {
 	testName		:	"VT282-3019 | Set inverse1dMode:enabled| enabled",
@@ -225,7 +228,7 @@ var arr_scanner_property = [
 	scannerTypes	:	"Imager",
 	OSTypes			:	"WINDOWS",
 	propertyValue	:	"hardwareReticle",
-	expectedResult	:	"hardwareReticle"
+	expectedResult	:	"hardwareReticle" //TODO should work on Android EMDK3 as well
 },
 {
 	testName		:	"VT282-3029 | Set picklistMode:softwareReticle | softwareReticle",
@@ -234,7 +237,8 @@ var arr_scanner_property = [
 	OSTypes			:	"All",
 	propertyValue	:	"softwareReticle",
 	expectedResult	:	"softwareReticle",
-	notOnAndroidImager: true
+	notOnAndroidImager: true,
+	notInAndroidEMDK3: true
 },
 {
 	testName		:	"VT282-3030 | Set poorQuality1dMode:true | true",
@@ -267,7 +271,8 @@ var arr_scanner_property = [
 	OSTypes			:	"All",
 	propertyValue	:	"enabled",
 	expectedResult	:	"enabled",
-	notOnAndroidImager: true
+	notOnAndroidImager: true,
+	notInAndroidEMDK3: true
 },
 {
 	testName		:	"VT282-3034 | Set viewfinderMode:disabled | disabled",
@@ -285,7 +290,8 @@ var arr_scanner_property = [
 	OSTypes			:	"All",
 	propertyValue	:	"staticReticle",
 	expectedResult	:	"staticReticle",
-	notOnAndroidImager: true
+	notOnAndroidImager: true,
+	notInAndroidEMDK3: true
 },
 {
 	testName		:	"VT282-3036 | Set viewfinderMode:staticReticle | dynamicReticle",
@@ -683,7 +689,8 @@ var arr_scanner_property = [
 	scannerTypes	:	"All",
 	OSTypes			:	"ANDROID",
 	propertyValue	:	"file:///sdcard/alarm.wav",
-	expectedResult	:	"file:///sdcard/alarm.wav"
+	expectedResult	:	"file:///sdcard/alarm.wav",
+	notInAndroidEMDK3: true//TODO Is actually file:/sdcard/alarm.wav. This is still correct. Need to change test framework (to allow EMDK3 only tests).
 },
 {
 	testName		:	"VT282-3084 | Set  invalidDecodeSound :localpath | application/alarm5.wav",
@@ -987,7 +994,8 @@ var arr_scanner_property = [
 	scannerTypes	:	"All",
 	OSTypes			:	"All",
 	propertyValue	:	"none",
-	expectedResult	:	"none"
+	expectedResult	:	"none",
+	notInAndroidEMDK3: true
 },
 {
 	testName		:	"VT282-4024 | Set code11checkDigitCount:one | one",
@@ -995,7 +1003,8 @@ var arr_scanner_property = [
 	scannerTypes	:	"All",
 	OSTypes			:	"All",
 	propertyValue	:	"one",
-	expectedResult	:	"one"
+	expectedResult	:	"one",
+	notInAndroidEMDK3: true
 },
 {
 	testName		:	"VT282-4025 | Set code11checkDigitCount:two | two",
@@ -1003,7 +1012,8 @@ var arr_scanner_property = [
 	scannerTypes	:	"All",
 	OSTypes			:	"All",
 	propertyValue	:	"two",
-	expectedResult	:	"two"
+	expectedResult	:	"two",
+	notInAndroidEMDK3: true
 },
 {
 	testName		:	"VT282-4026 | Set code11maxLength:0  | 0",
@@ -1174,7 +1184,7 @@ var arr_scanner_property = [
 	expectedResult	:	"auto"
 },
 {
-	testName		:	"VT282-4047| Set code128maxLength:0  | 0",
+	testName		:	"VT282-4047 | Set code128maxLength:0  | 0",
 	propertyName	:	"code128maxLength",
 	scannerTypes	:	"All",
 	OSTypes			:	"All",
@@ -1294,7 +1304,7 @@ var arr_scanner_property = [
 	expectedResult	:	"true"
 },
 {
-	testName		:	"VT282-4062| Set code39 :false  | false",
+	testName		:	"VT282-4062 | Set code39 :false  | false",
 	propertyName	:	"code39",
 	scannerTypes	:	"All",
 	OSTypes			:	"All",
@@ -1350,7 +1360,7 @@ var arr_scanner_property = [
 	expectedResult	:	"false"
 },
 {
-	testName		:	"VT282-4069| Set code39maxLength:0  | 0",
+	testName		:	"VT282-4069 | Set code39maxLength:0  | 0",
 	propertyName	:	"code39maxLength",
 	scannerTypes	:	"All",
 	OSTypes			:	"All",
@@ -1654,7 +1664,7 @@ var arr_scanner_property = [
 	expectedResult	:	"0"
 },
 {
-	testName		:	"VT282-4106| Set d2of5maxLength:13 | 13",
+	testName		:	"VT282-4106 | Set d2of5maxLength:13 | 13",
 	propertyName	:	"d2of5maxLength",
 	scannerTypes	:	"All",
 	OSTypes			:	"All",
@@ -3327,7 +3337,13 @@ var getApplicableProperties = function (objScnType){
 
 		if((arr_scanner_property[i]['OSTypes'] == 'All') || (arr_scanner_property[i]['OSTypes'] == Rho.System.platform)){
 			var scnType = arr_scanner_property[i]['scannerTypes']
-			if(scnType == "All")
+			if ((deviceScannerType == "2D Imager" || Rho.System.oemInfo == "MC40") && isAndroid && arr_scanner_property[i]['notOnAndroidImager'] === true || //If it is the Android hardware Imager
+				(arr_scanner_property[i]['notOnAndroidJB'] === true && isJB) ||
+				(arr_scanner_property[i]['notInAndroidEMDK3'] === true && isKK))
+			{
+				//Dont add
+			}
+			else if(scnType == "All")
 			{ 
 				if(!arr_scanner_property[i]['deviceNotSupport']){
 					if(deviceScannerType.indexOf("Bluetooth") == -1){
@@ -3340,14 +3356,6 @@ var getApplicableProperties = function (objScnType){
 						}
 					}
 				}
-			}
-			else if ((deviceScannerType == "2D Imager" || Rho.System.oemInfo == "MC40") && isAndroid && arr_scanner_property[i]['notOnAndroidImager'] === true)//If it is the Android hardware Imager
-			{
-				//Dont add
-			}
-			else if (arr_scanner_property[i]['notOnAndroidJB'] === true && isJB)
-			{
-				//Dont add
 			}
 			else if (deviceScannerType.indexOf(scnType) != -1) //for Imager and Laser
 			{
@@ -3374,6 +3382,7 @@ var getApplicableProperties = function (objScnType){
 }
 
 var isAndroid = (Rho.System.platform == "ANDROID");
-var isJB = (isAndroid && Rho.System.osVersion.indexOf('4.') == 0);
+var isKK = (isAndroid && Rho.System.osVersion.indexOf('4.4') == 0);
+var isJB = (isAndroid && Rho.System.osVersion.indexOf('4.') == 0 && !isKK);
 
 var ENABLE_TIMEOUT_VALUE = (Rho.System.platform == "ANDROID" ? 10 : 8000);

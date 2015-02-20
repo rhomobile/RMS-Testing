@@ -1,5 +1,9 @@
 describe("<system module specs>", function () {
 
+    it("does nothing", function() {
+        expect(null).toBe(null);
+    });
+
     if (isApplePlatform()) {
         var alptabet = [
             'alpha', 'beta', 'gamma', 'delta',
