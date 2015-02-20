@@ -4,6 +4,7 @@ paths:
 
 # Please use relative pathes
 
+  - ../auto/feature_def/auto_common_spec/extensions
   - ../extensions
 #  - ../../../../Motorola-Extensions/lib/commonAPI
 #  - ../../../../rhoconnect-client/ext/
@@ -28,7 +29,7 @@ iphone:
   BundleIdentifier: com.rhomobile.nativetestharness
   BundleURLScheme: nativetestharness
   extensions: ["nativeBridgeTest", "barcode", "genCallbackTests", "appEvents", "indicators", "sensor", "screenorientation", "audiocapture"]
-wp:
+wp8:
   productid: 'b6479381-42a8-0130-78de-3caec51bd50e'
   sdk: ../../rhodes
   # WP8 uses specific branch therefore build from source
@@ -36,16 +37,29 @@ symbian:
   uid: '0xe1a1ef92'
 android:
   version: 4.2.2
-  # Removed nativeBridgeTest and instrumentation from Android owing to build errors
-  extensions: ["Printing", "Printing_Zebra", "barcode", "screenorientation", "cardreader", "indicators", "sensor", "websocket", "eventsource", "audiocapture", 'screenorientation']  
+  # "simulscan"
+  # "symbolDevice"
+  extensions: ["nativeBridgeTest", "instrumentation", "Printing", "Printing_Zebra", "barcode", "screenorientation", "cardreader", "indicators", "sensor", "websocket", "eventsource", "audiocapture", 'screenorientation', 'rhoconnect-client', "mediaPlayer", "json", "rhodes_translator", "digest", "digest-md5", "digest-sha1", "pdf-writer", "thread", "rhoconnect-push", "nfc", "openssl.so", "digest-sha2", "genPropBag", "logCapture"]  
   capabilities:
   - native_browser
+  - network_state
+  - sdcard
+  - calendar
+  - vibrate
+  - gps
+  - pim
+  - camera
+  - vibrate
+  - phone
+  - bluetooth
+  - calendar
 wm:
   #webkit_outprocess: 1
   #use_shared_runtime: yes
   #sdk: MC3000c50b (ARMV4I)
   #sdk: "Windows Mobile 6.5.3 Professional DTK (ARMV4I)"
-  extensions: ["instrumentation", "Printing", "Printing_Zebra", "audiocapture"]
+#  extensions: ["instrumentation", "Printing", "Printing_Zebra", "audiocapture"]
+  extensions: ["nativeBridgeTest", "instrumentation", "Printing", "Printing_Zebra", "barcode", "screenorientation", "cardreader", "indicators", "sensor", "audiocapture", 'screenorientation', 'rhoconnect-client', "mediaPlayer", "json", "rhodes_translator", "digest", "digest-md5", "digest-sha1", "pdf-writer", "thread", "rhoconnect-push", "nfc", "openssl.so", "digest-sha2", "genPropBag", "logCapture"]  
 #capabilities:
 #- non_motorola_device
 
