@@ -22,10 +22,11 @@ describe("Barcode Test", function() {
 	}
 
 	enumData = Rho.Barcode.enumerate();
+        objSCN = enumData[0];
 
-   for (var j = 0;j<enumData.length;j++){
+//   for (var j = 0;j<enumData.length;j++){
 
-   (function(objSCN){ 
+//   (function(objSCN){ 
 
    	var scnid = objSCN.getProperty('scannerType');
 
@@ -700,9 +701,9 @@ describe("Barcode Test", function() {
 			});
 		});
 
-	}
+//	}
 
-})(enumData[j]);
+//})(enumData[j]);
 
 }
 
