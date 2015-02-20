@@ -1,3 +1,6 @@
+#!/usr/bin/env ruby
+
+
 require 'webrick'
 require 'webrick/https'
 require 'socket'
