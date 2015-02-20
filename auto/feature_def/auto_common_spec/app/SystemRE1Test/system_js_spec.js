@@ -265,6 +265,90 @@ describe("System JS API", function () {
         }
     });
 
+    xdescribe("startTimer and stopTimer tests", function () {
+        var timercount = 0;
+        var timerCallback = function() {
+            timercount+= 1;
+        }
+        var counter1 = 0;
+        var counter2 = 0;
+        var counter3 = 0;
+        var param = '';
+        
+        var timerCallback1 = function() {
+            counter1+= 1;
+        }
+
+        var timerCallback2 = function() {
+            counter2+= 1;
+        }
+
+        var timerCallback3 = function() {
+            counter3+= 1;
+        }
+
+        var paramCallback = function(callbackparam) {
+            param = callbackparam;
+        }
+
+
+        beforeEach(function () {
+            
+        });
+
+        afterEach(function () {
+            
+        });
+
+        it("VTxxx-xxx | Start Timer with 5000 msec and then stop timer after second interval", function () {
+            Rho.System.startTimer(5000, timerCallback);
+            setTimeout(function(){
+                Rho.System.stopTimer(timerCallback);
+            },11000);
+            waits(60000);
+            expect(timercount).toEqual(2);
+
+        });
+
+        it("VTxxx-xxx | Start timer with callback param", function () {
+            Rho.System.startTimer(5000, paramCallback, "callback param");
+            setTimeout(function(){
+                Rho.System.stopTimer(paramCallback);
+            },10000);
+            waits(60000);
+            expect(param).toEqual("callback param");
+
+        });
+
+        it("VTxxx-xxx | Start multiple timers with different interval and then stop timer", function () {
+            Rho.System.startTimer(5000, timerCallback1);
+            Rho.System.startTimer(10000, timerCallback2);
+            Rho.System.startTimer(15000, timerCallback3);
+            setTimeout(function(){
+                Rho.System.stopTimer(timerCallback1);
+                Rho.System.stopTimer(timerCallback2);
+                Rho.System.stopTimer(timerCallback3);
+            },61000);
+            waits(120000);
+            expect(counter1).toEqual(12);
+            expect(counter2).toEqual(6);
+            expect(counter3).toEqual(4);
+
+        });
+
+        it("VTxxx-xxx | Start timer with 0 interval", function () {
+            Rho.System.startTimer(0, paramCallback, "test data");
+            setTimeout(function(){
+                Rho.System.stopTimer(paramCallback);
+            },5000);
+            waits(20000);
+            expect(param).toEqual("test data");
+
+        });
+
+
+
+    });
     describe("FileSystem", function () {
 
         var tempDirectory = Rho.RhoFile.join(Rho.Application.userFolder, 'tempDirectory');
