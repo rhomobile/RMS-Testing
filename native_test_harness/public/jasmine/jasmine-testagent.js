@@ -29,7 +29,11 @@ jasmine.TestagentReporter = function ()
     // Quit Rho/EB once the tests have finished running
     testagent.log ({severity: 'info', entry: 'Jasmine stopping'});
     testagent.outcome ({value: this.outcome});
-    Rho.Application.quit ();
+    
+    setTimeout (function ()
+    {
+      Rho.Application.quit ();
+    }, 10000);
   };
   
   this.reportSuiteResults = function (suite)
