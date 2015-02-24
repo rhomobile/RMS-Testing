@@ -9,15 +9,29 @@
     <script type="text/javascript" src="../helpers/specHelpers.js"></script>
 
 </head>
-<body>
+<body onload='LoadScript();'>
 <h3>Persistant Test Page for Camera Common API</h3>
 <p></p>
 <div id='data'></div><br>
-<button onclick='Rho.Camera.capture(captureCB);'>Capture</button>
+<button onclick='capturefunc();'>Capture</button>
 <p></p>
-<button onclick="Rho.Camera.hidePreview(); window.location='./specRunner.html';">Back</button>
+<button onclick="hidefunc();">Back</button>
 </body>
 <script type="text/javascript">
+	var pageResult;
+	var camObj;
+	function LoadScript(){	
+		pageResult = window.location.search.substring(1);
+	}
+	function capturefunc(){
+		camObj = Rho.Camera.getCameraByType(pageResult);
+		camObj.capture(captureCB);
+	}
+	function hidefunc(){
+		camObj = Rho.Camera.getCameraByType(pageResult);
+		camObj.hidePreview();
+		window.location='./specRunner.html';
+	}
 	var captureCB = function(data) {
 		document.getElementById('data').innerHTML = 'Capture Callback data : ' + JSON.stringify(data);
 	}

@@ -8,8 +8,8 @@ build: "release"
 bbver: 4.6
 applog: "rholog.txt"
 capabilities:
-- pim
-- vibrate
+  - pim
+  - vibrate
 iphone:
   ajax_api_bridge: false
   sdk: "iphonesimulator8.1"
@@ -26,10 +26,10 @@ iphone:
     - mediacapture
   BundleIdentifier: "com.rhomobile.manualcommonspec"
   BundleURLScheme: "manualcommonspec"
-wp:
+wp8:
   ajax_api_bridge: false
   productid: "fa586990-6e21-0130-bf9e-3c075409010c"
-#extensions: ["signature", "barcode", "mediaplayer", "sensor"]
+  extensions: ["signature", "barcode", "mediaplayer", "sensor", "mediacapture"]
 symbian:
   uid: "0xeeceaf9f"
 #sdk: "MC3000c50b (ARMV4I)"
@@ -41,9 +41,10 @@ android:
     - emdk3-manager
     - barcode
     - mediaplayer
+    - sensor
+    - mediacapture
 #  - ../../../../Motorola-Extensions/build/ci/extensions
 #  - ../../../../Motorola-Extensions/lib/commonAPI
-    - sensor
   manifest_template: AndroidManifest.erb
 #security_token: "123"
 wm:
@@ -56,6 +57,7 @@ wm:
     - indicators
     - sensor
     - smartCradle
+    - mediacapture
 
 #minify:
 #  js: false
