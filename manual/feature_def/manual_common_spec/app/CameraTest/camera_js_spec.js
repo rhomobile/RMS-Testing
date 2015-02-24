@@ -686,8 +686,8 @@ describe("Camera API Manual Tests", function(){
 			            spec.addExpectation('Flashmode:off');
 			            spec.addExpectation('Aimmode:off');
 			            spec.addExpectation('Callback - status : OK');
-			            spec.addExpectation('Callback - imageHeight : '+ objCAM.previewWidth);
-			            spec.addExpectation('Callback - imageWidth : ' + objCAM.previewHeight);
+			            spec.addExpectation('Callback - imageHeight : '+ objCAM.desiredHeight);
+			            spec.addExpectation('Callback - imageWidth : ' + objCAM.desiredWidth);
 			            spec.addExpectation('Image file name should be : timestamp');
 			            spec.addExpectation('ImageFormat should be : jpg.');
 			            spec.displayScenario();
@@ -1840,7 +1840,7 @@ describe("Camera API Manual Tests", function(){
 
 				});
 
-				if(!isWindowsPhone8Platform() || !isApplePlatform()){
+				if(isWindowsMobilePlatform() || isAndroidPlatform()){
 
 					it("VT285-0060 | Should capture image by calling takePicture() method with captureSound | using " + camid + camtype , function(){
 						var spec = new ManualSpec(jasmine, window.document);

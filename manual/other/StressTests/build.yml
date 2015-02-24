@@ -76,6 +76,7 @@ wm:
     - sensor
     - audiocapture
     - smartCradle
+    - mediacapture
 extensions:
   - genPropBag
   - logCapture

@@ -620,10 +620,10 @@ describe('Printer Zebra', function() {
         }, 
 		//{"timeout": 0}, - invalid as per doc
 		{
-            "timeout": 1
+            "timeout": 100
         },
         {
-            "timeout": 15000.5
+            "timeout": 5000
         }];
 
         // 20 sec is enought for connect
@@ -683,8 +683,7 @@ describe('Printer Zebra', function() {
 
         runs(function() {
             expect(callresult.status).toEqual(Rho.PrinterZebra.PRINTER_STATUS_SUCCESS);
-            expect(callresult.fileNames).toNotEqual(
-			);
+            expect(callresult.fileNames).toNotEqual(filelist);
         });
     }
 
@@ -735,7 +734,7 @@ describe('Printer Zebra', function() {
             doRetrieveFileNamesWithExtensions(['FMT', 'LBL', 'GRF', 'PRF', 'CFG', 'WML', 'BAT', 'CPF', 'TXT', 'PCX'], [], 'Anonymous');
         });
 
-        it('should not retrieveFileNamesWithExtensions return  empty list with callback', function() {
+        it('should not retrieveFileNamesWithExtensions return empty list with callback', function() {
             var callresult = null;
 
             function cbk(val) {
