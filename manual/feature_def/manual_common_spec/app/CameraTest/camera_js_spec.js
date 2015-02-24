@@ -672,12 +672,6 @@ describe("Camera API Manual Tests", function(){
 		   	if(isWindowsMobilePlatform()){
 				describe("showPreview, Capture & hidePreview methods | using " + camid + camtype , function() {
 					it("VT285-0022 | Should call showPreview & capture with default properties | using " + camid + camtype , function(){
-						var callbackFunc1 = function(cbData){
-							callbackData = cbData;
-							callbackTriggered = true;
-							imagestatus = cbData.status;
-							imageUriData = cbData.imageUri;
-						};
 						var spec = new ManualSpec(jasmine, window.document);
 			        	spec.addGoal(jasmine.getEnv().currentSpec.description);
 			        	spec.addPrecondition("Call showPreview() without any parameters.");
@@ -701,7 +695,7 @@ describe("Camera API Manual Tests", function(){
 						runs(function(){
 							objCAM.showPreview({});
 							setTimeout(function(){
-								objCAM.capture(callbackFunc1);
+								objCAM.capture(callbackFunc);
 							},10000);
 						});
 						waitsFor(function(){
@@ -727,7 +721,7 @@ describe("Camera API Manual Tests", function(){
 			            spec.addStep("Note: Capture will be called automatically & hidePreview is called after the capture");
 			            spec.addStep("Capture will happen, then check for the returned callback status & property set");
 			            spec.addExpectation('Preview window should be as set(left:10, top:10, width:100 & height:60)');
-			            spec.addExpectatio('Capture callback should return with status:');
+			            spec.addExpectation('Capture callback should return with status:');
 			            spec.addExpectation('Status:OK, imagePath, imageFormat:jpg & filename camImage.jpg.');
 			            spec.displayScenario();
 			            spec.waitForButtonPressing("Run test");
@@ -747,7 +741,7 @@ describe("Camera API Manual Tests", function(){
 						});
 						waitsFor(function(){
 							return callbackTriggered;
-						},"waiting for callback data", 2000);
+						},"waiting for callback data", 22000);
 						runs(function(){
 							spec.addResult("status : ", callbackData.status);
 							spec.addResult("message : ", callbackData.message);
@@ -782,11 +776,11 @@ describe("Camera API Manual Tests", function(){
 								'captureSound': sound});
 							setTimeout(function(){
 								objCAM.capture(callbackFunc);
-							},6000);
+							},10000);
 						});
 						waitsFor(function(){
 							return callbackTriggered;
-						},"waiting for callback data", 12000);
+						},"waiting for callback data", 22000);
 						runs(function(){
 							spec.addResult("status : ", callbackData.status);
 							spec.addResult("message : ", callbackData.message);
@@ -828,11 +822,11 @@ describe("Camera API Manual Tests", function(){
 								'captureSound':''});
 							setTimeout(function(){
 								objCAM.capture(callbackFunc);
-							},6000);
+							},10000);
 						});
 						waitsFor(function(){
 							return callbackTriggered;
-						},"waiting for callback data", 12000);
+						},"waiting for callback data", 22000);
 						runs(function(){
 							spec.addResult("status : ", callbackData.status);
 							spec.addResult("message : ", callbackData.message);
@@ -866,11 +860,11 @@ describe("Camera API Manual Tests", function(){
 								'outputFormat':'dataUri'});
 							setTimeout(function(){
 								objCAM.capture(callbackFunc);
-							},6000);
+							},10000);
 						});
 						waitsFor(function(){
 							return callbackTriggered;
-						},"waiting for callback data", 12000);
+						},"waiting for callback data", 22000);
 						runs(function(){
 							spec.addResult("status : ", callbackData.status);
 							spec.addResult("message : ", callbackData.message);
@@ -913,12 +907,12 @@ describe("Camera API Manual Tests", function(){
 
 							setTimeout(function(){
 								objCAM.capture(callbackFunc);
-							},6000);
+							},10000);
 						});
 
 						waitsFor(function(){
 							return callbackTriggered;
-						},"waiting for callback data", 12000);
+						},"waiting for callback data", 22000);
 
 						runs(function(){
 							spec.addResult("status : ", callbackData.status);
@@ -979,7 +973,7 @@ describe("Camera API Manual Tests", function(){
 							objCAM.showPreview();
 							setTimeout(function(){
 								objCAM.hidePreview();
-							},6000);
+							},10000);
 						});
 						runs(function(){
 			                spec.waitForResponse();
@@ -999,16 +993,25 @@ describe("Camera API Manual Tests", function(){
 								Rho.Application.minimize();
 								setTimeout(function(){
 									Rho.Application.restore();
-									// implement capture
 									setTimeout(function(){
 										objCAM.capture(callbackFunc);
 									},4000);
-								},3000);
+								},4000);
 							},6000);
 						});
+						waitsFor(function(){
+							return callbackTriggered;
+						},"waiting for callback data", 25000);
 						runs(function(){
-			                spec.waitForResponse();
+							spec.addResult("status : ", callbackData.status);
+							spec.addResult("message : ", callbackData.message);
+							spec.addResult("imageHeight : ", callbackData.imageHeight);
+							spec.addResult("imageWidth : ", callbackData.imageWidth);
+							spec.addResult("imageFormat : ", callbackData.imageFormat);
+							spec.addResult("imageUri : ", callbackData.imageUri);
+							spec.displayResults();							
 			                objCAM.hidePreview();
+			                spec.waitForResponse();
 						});
 					});
 
@@ -1481,7 +1484,7 @@ describe("Camera API Manual Tests", function(){
 		            spec.addStep("Press 'RunTest' button");
 		            spec.addStep("Capture any image.");
 		            if(!isApplePlatform()){
-		            	spec.addStep("supportedSizeList: "+ JSON.stringify(Rho.Camera.supportedSizeList()));
+		            	spec.addStep("supportedSizeList: "+ JSON.stringify(Rho.Camera.supportedSizeList));
 		            }
 		            spec.addStep("Check for the returned image height and width value. Open the saved image and check for height and width.");
 		            spec.addExpectation("The returned image height and width should be same as the saved image");
