@@ -8,6 +8,7 @@ describe('Rho.Config module', function() {
 
     });
     if(isWindowsPhone8Platform()) {
+
     	it("Should return default rhoconfig path", function() {
 	    	var defaultConfigPath = Rho.Config.configPath;
 	    	expect(defaultConfigPath).toEqual('./rhoconfig.txt'); //TODO: add correct default path
@@ -86,8 +87,139 @@ describe('Rho.Config module', function() {
 	    	expect(returnVal).toEqual(expectedVal);
 	    }); 
 
-
-
     }
-       	
+
+	describe("Get default using getPropertyString method", function () {
+
+	    for (var i = 0; i < config_get_property.length; i++) {
+	        (function (idx) {
+
+	            var record = config_get_property[i];
+	            var testName = record['testName'];
+	            var suitablePlatforms = record['osType'];
+	            var propertyName = record['propertyName'];
+	            var expectedValue = record['expectedStrResult'];
+
+	            if (isTestApplicable(suitablePlatforms)) {
+	                it(testName+"getPropertyString method", function () {
+	                   var actual = Rho.Config.getPropertyString(propertyName)
+	                   expect(actual).toEqual(expectedValue);
+	                });
+	            }
+	        })(i);
+	    }
+	});
+
+	describe("Get default using getPropertyInt method", function () {
+
+	    for (var i = 0; i < config_get_property.length; i++) {
+	        (function (idx) {
+
+	            var record = config_get_property[i];
+	            var testName = record['testName'];
+	            var suitablePlatforms = record['osType'];
+	            var propertyName = record['propertyName'];
+	            var expectedValue = record['expectedIntResult'];
+
+	            if (isTestApplicable(suitablePlatforms)) {
+	                it(testName+"getPropertyInt method", function () {
+	                   var actual = Rho.Config.getPropertyInt(propertyName)
+	                   expect(actual).toEqual(expectedValue);
+	                });
+	            }
+	        })(i);
+	    }
+	});
+
+	describe("Get default using getPropertyBool method", function () {
+
+	    for (var i = 0; i < config_get_property.length; i++) {
+	        (function (idx) {
+
+	            var record = config_get_property[i];
+	            var testName = record['testName'];
+	            var suitablePlatforms = record['osType'];
+	            var propertyName = record['propertyName'];
+	            var expectedValue = record['expectedBoolResult'];
+
+	            if (isTestApplicable(suitablePlatforms)) {
+	                it(testName+"getPropertyBool method", function () {
+	                   var actual = Rho.Config.getPropertyBool(propertyName)
+	                   expect(actual).toEqual(expectedValue);
+	                });
+	            }
+	        })(i);
+	    }
+	});	
+
+	describe("setPropertyString and getPropertyString method", function () {
+
+	    for (var i = 0; i < config_set_get_property.length; i++) {
+	        (function (idx) {
+
+	            var record = config_set_get_property[i];
+	            var testName = record['testName'];
+	            var suitablePlatforms = record['osType'];
+	            var propertyName = record['propertyName'];
+	            var propertyValue = record['propertyValue'];
+	            var expectedValue = record['expectedStrResult'];
+
+	            if (isTestApplicable(suitablePlatforms)) {
+	                it(testName+"setPropertyString and getPropertyString", function () {
+	                   Rho.Config.setPropertyString(propertyName, propertyValue, false)
+	                   var actual = Rho.Config.getPropertyString(propertyName)
+	                   expect(actual).toEqual(expectedValue);
+	                });
+	            }
+	        })(i);
+	    }
+	});
+
+	describe("setPropertyInt and getPropertyInt method", function () {
+
+	    for (var i = 0; i < config_set_get_property.length; i++) {
+	        (function (idx) {
+
+	            var record = config_set_get_property[i];
+	            var testName = record['testName'];
+	            var suitablePlatforms = record['osType'];
+	            var propertyName = record['propertyName'];
+	            var propertyValue = record['propertyValue'];
+	            var expectedValue = record['expectedIntResult'];
+
+	            if (isTestApplicable(suitablePlatforms)) {
+	                it(testName+"setPropertyInt and getPropertyInt", function () {
+	                   Rho.Config.setPropertyInt(propertyName, propertyValue, false)
+	                   var actual = Rho.Config.getPropertyInt(propertyName)
+	                   expect(actual).toEqual(expectedValue);
+	                });
+	            }
+	        })(i);
+	    }
+	});
+
+	describe("setPropertyBool and getPropertyBool method", function () {
+
+	    for (var i = 0; i < config_set_get_property.length; i++) {
+	        (function (idx) {
+
+	            var record = config_set_get_property[i];
+	            var testName = record['testName'];
+	            var suitablePlatforms = record['osType'];
+	            var propertyName = record['propertyName'];
+	            var propertyValue = record['propertyValue'];
+	            var expectedValue = record['expectedBoolResult'];
+
+	            if (isTestApplicable(suitablePlatforms)) {
+	                it(testName+"setPropertyBool and getPropertyBool", function () {
+	                   Rho.Config.setPropertyBool(propertyName, propertyValue, false)
+	                   var actual = Rho.Config.getPropertyBool(propertyName)
+	                   expect(actual).toEqual(expectedValue);
+	                });
+	            }
+	        })(i);
+	    }
+	});	
+
 });
+
