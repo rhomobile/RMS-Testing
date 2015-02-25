@@ -1,6 +1,7 @@
 .DS_Store
 */bin/
 */*/*/bin/
+*/*/*/*/bin/
 */*/*/*/*/*/*/*/generated/
 */*/*/*/*/*/*/generated/
 */*/*/*/*/generated/
