@@ -2196,7 +2196,7 @@ describe("Test spec for D180 payment device support", function(){
             	var data = Rho.MobilePayment.getLowBatteryThreshold();
             	expect(data.status).toEqual("error");
             	expect(data.errorName).toEqual("DEVICE_NOT_ENABLED");
-            	expect(data.lowBatteryThreshold).toEqual("");
+            	//expect(data.lowBatteryThreshold).toEqual("");
             });
 		});
 		it("Should set the threshold value for the low battery level using method setLowBatteryThreshold().", function(){
