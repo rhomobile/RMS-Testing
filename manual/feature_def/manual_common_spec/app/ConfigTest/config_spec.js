@@ -108,7 +108,7 @@ describe("Rho.Config module", function(){
         runs(function(){
             var firstVal = Rho.Config.getPropertyBool("use_bulk_model")
             spec.addResult("1. Initial use_bulk_model value: ", firstVal);
-            Rho.Config.setPropertyBool("use_bulk_model", 0, false);
+            Rho.Config.setPropertyBool("use_bulk_model", true, false);
             var secondVal = Rho.Config.getPropertyBool("use_bulk_model")
             spec.addResult("2. After setting new use_bulk_model value: ", secondVal);
             spec.displayResults();
@@ -131,7 +131,7 @@ describe("Rho.Config module", function(){
         runs(function(){
             var firstVal = Rho.Config.getPropertyBool("use_bulk_model")
             spec.addResult("1. Initial use_bulk_model value: ", firstVal);
-            Rho.Config.setPropertyBool("use_bulk_model", 0, true);
+            Rho.Config.setPropertyBool("use_bulk_model", true, true);
             var secondVal = Rho.Config.getPropertyBool("use_bulk_model")
             spec.addResult("2. After setting new use_bulk_model value: ", secondVal);
             spec.displayResults();
