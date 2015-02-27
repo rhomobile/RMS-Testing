@@ -11,21 +11,27 @@ describe('Rho.Config module', function() {
 
     	it("Should return default rhoconfig path", function() {
 	    	var defaultConfigPath = Rho.Config.configPath;
-	    	expect(defaultConfigPath).toEqual('./rhoconfig.txt'); //TODO: add correct default path
+	    	expect(defaultConfigPath).toEqual('rho/apps/rhoconfig.txt'); 
 	    });
 
 	    it("Should set rhoconfig to different path in device", function() {
-	    	Rho.Config.configPath = "/app/ConfigTest/rhoconfig.txt";
+	    	Rho.Config.configPath = "rho/apps/app/ConfigTest/rhoconfig.txt";
 	    	var newConfigPath = Rho.Config.configPath;
-	    	expect(newConfigPath).toEqual('/app/ConfigTest/rhoconfig.txt');
+	    	expect(newConfigPath).toEqual('rho/apps/app/ConfigTest/rhoconfig.txt');
+	    	var result = Rho.Config.getPropertyString("start_path")
+			expect(result).toEqual('/app/ConfigTest/specRunner.html');
+			
 	    });
-
+	    
+	    
 	    it("Should not set invalid rhoconfig path", function() {
-	    	Rho.Config.configPath = './rhoconfig.txt';
+	    	Rho.Config.configPath = 'rho/apps/rhoconfig.txt';
 	    	var defaultConfigPath = Rho.Config.configPath;
 	    	Rho.Config.configPath = "/app//Invalid!@#rhoconfig.txt";
 	    	var newConfigPath = Rho.Config.configPath;
 	    	expect(newConfigPath).toEqual(defaultConfigPath);
+	    	var result = Rho.Config.getPropertyString("start_path")
+	    	expect(result).toEqual("/app/index.html");
 	    });
 
 	    it("isPropertyExists method should return true if start_path property exists in rhoconfig file ", function() {
@@ -56,7 +62,7 @@ describe('Rho.Config module', function() {
 	    });
 
 	    it("loadFromFile method should load default rhoconfig file after setting to different rhoconfig path", function() {
-	    	Rho.Config.configPath = "/app/ConfigTest/rhoconfig.txt";
+	    	Rho.Config.configPath = "rho/apps/app/ConfigTest/rhoconfig.txt";
 	    	var returnStr = Rho.Config.getPropertyString('start_path');
 	    	var returnInt = Rho.Config.getPropertyString('MinSeverity');
 	    	Rho.Config.loadFromFile();
@@ -65,33 +71,50 @@ describe('Rho.Config module', function() {
 	    });
 
 	    it("Should return conflicts when rhoconfig file contains multiple logserver, MaxLogFileSize properties", function() {
-	    	Rho.Config.configPath = "/app/ConfigTest/rhoconfig.txt";
-	    	var returnVal = Rho.Config.getConflicts();
+	    	Rho.Config.configPath = "rho/apps/app/ConfigTest/rhoconfig.txt";
+	    	expect(Rho.Config.isPropertyExists("logserver")).toEqual(true);
+    		var returnVal = Rho.Config.getConflicts();
 	    	var expectedVal = {'logserver': ['http://rhologs.heroku.com','http://google.com','http://yahoo.com'], 'MaxLogFileSize': [5000000,1000000]};
 	    	expect(returnVal['logserver'][0]).toEqual(expectedVal['logserver'][0]);
 	    	expect(returnVal['logserver'][1]).toEqual(expectedVal['logserver'][1]);
 	    	expect(returnVal['logserver'][2]).toEqual(expectedVal['logserver'][2]);
 	    	expect(returnVal['MaxLogFileSize'][0]).toEqual(expectedVal['MaxLogFileSize'][0]);
 	    	expect(returnVal['MaxLogFileSize'][1]).toEqual(expectedVal['MaxLogFileSize'][1]);
+	    	
+	    	
 	    });
 
-	    it("removeProperty should remove ????? when multiple logserver property exists in rhoconfig", function() {
-	    	Rho.Config.configPath = "/app/ConfigTest/rhoconfig.txt";
-	    	Rho.Config.removeProperty("logserver", false);
-	    	//TODO: Need to add expected result 
+	    it("removeProperty should remove logserver property when multiple logserver property exists in rhoconfig", function() {
+	    	Rho.Config.configPath = "rho/apps/app/ConfigTest/rhoconfig.txt";
+	    	if(Rho.Config.isPropertyExists("logserver")) {
+	    		Rho.Config.removeProperty("logserver", false);
+		    	expect(Rho.Config.isPropertyExists("logserver")).toEqual(false);
+	    	}
+	    	else {
+	    		expect("Property doesnt exists please add logserver property").toEqual("doesnt exists");
+	    	}
+	    	
 	    }); 
 
 	    it("Should not return any conflicts when multiple properties are commented", function() {
 	    	Rho.Config.loadFromFile();
-	    	var expectedVal = {};
+	    	var expectedVal = null;
+	    	var returnVal = Rho.Config.getConflicts();
 	    	expect(returnVal).toEqual(expectedVal);
 	    }); 
+	    
+	    it("Should set rhoconfig to default path and checking the original start path", function() {
+	    	Rho.Config.configPath = "rho/apps/rhoconfig.txt";
+	    	var newConfigPath = Rho.Config.configPath;
+	    	var actual = Rho.Config.getPropertyString("start_path")
+	    	expect(newConfigPath).toEqual('rho/apps/rhoconfig.txt');
+	    	expect(actual).toEqual("/app/index.html");
+	    });
 
     }
 
 	describe("Get default using getPropertyString method", function () {
-
-	    for (var i = 0; i < config_get_property.length; i++) {
+		for (var i = 0; i < config_get_property.length; i++) {
 	        (function (idx) {
 
 	            var record = config_get_property[i];
@@ -102,8 +125,10 @@ describe('Rho.Config module', function() {
 
 	            if (isTestApplicable(suitablePlatforms)) {
 	                it(testName+"getPropertyString method", function () {
-	                   var actual = Rho.Config.getPropertyString(propertyName)
-	                   expect(actual).toEqual(expectedValue);
+	                	var newConfigPath = Rho.Config.configPath;
+	                	var actual = Rho.Config.getPropertyString(propertyName)
+						expect(newConfigPath).toEqual('rho/apps/rhoconfig.txt');
+	                	expect(actual).toEqual(expectedValue);
 	                });
 	            }
 	        })(i);
@@ -166,9 +191,17 @@ describe('Rho.Config module', function() {
 
 	            if (isTestApplicable(suitablePlatforms)) {
 	                it(testName+"setPropertyString and getPropertyString", function () {
-	                   Rho.Config.setPropertyString(propertyName, propertyValue, false)
-	                   var actual = Rho.Config.getPropertyString(propertyName)
-	                   expect(actual).toEqual(expectedValue);
+	                	var actual = '';
+	                	try{
+	                		Rho.Config.setPropertyString(propertyName, propertyValue, false)
+							actual = Rho.Config.getPropertyString(propertyName)
+	                	}
+	                	catch(err){
+	                		actual = err;
+	                	}	
+	                	
+	                	expect(actual).toEqual(expectedValue);
+	                	
 	                });
 	            }
 	        })(i);
@@ -189,9 +222,19 @@ describe('Rho.Config module', function() {
 
 	            if (isTestApplicable(suitablePlatforms)) {
 	                it(testName+"setPropertyInt and getPropertyInt", function () {
-	                   Rho.Config.setPropertyInt(propertyName, propertyValue, false)
-	                   var actual = Rho.Config.getPropertyInt(propertyName)
-	                   expect(actual).toEqual(expectedValue);
+	                   
+	                   var actual = '';
+	                   try{
+	                		Rho.Config.setPropertyInt(propertyName, propertyValue, false)
+							actual = Rho.Config.getPropertyInt(propertyName)
+	                	}
+	                	catch(err){
+	                		actual = err;
+	                	}	
+	                	
+	                	expect(actual).toEqual(expectedValue);
+	                	
+	                   
 	                });
 	            }
 	        })(i);
@@ -212,9 +255,16 @@ describe('Rho.Config module', function() {
 
 	            if (isTestApplicable(suitablePlatforms)) {
 	                it(testName+"setPropertyBool and getPropertyBool", function () {
-	                   Rho.Config.setPropertyBool(propertyName, propertyValue, false)
-	                   var actual = Rho.Config.getPropertyBool(propertyName)
-	                   expect(actual).toEqual(expectedValue);
+	                 	var actual = '';
+	                   try{
+	                		Rho.Config.setPropertyBool(propertyName, propertyValue, false)
+							actual = Rho.Config.getPropertyBool(propertyName)
+	                	}
+	                	catch(err){
+	                		actual = err;
+	                	}	
+	                	expect(actual).toEqual(expectedValue);
+	                   
 	                });
 	            }
 	        })(i);
