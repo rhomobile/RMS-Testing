@@ -211,9 +211,17 @@ var arr_camera_property = [
 	testName		:	"Set fileName :localpath | application/test",
 	propertyName	:	"fileName",
 	cameraTypes		:	"All",
-	OSTypes			:	"All",
+	OSTypes			:	"WINDOWS",
 	propertyValue	:	"file://application/test",
-	expectedResult	:	"\\file://application/test"
+	expectedResult	:	"file://application/test"
+},
+{
+	testName		:	"Set fileName :localpath | /mnt/sdcard/test",
+	propertyName	:	"fileName",
+	cameraTypes		:	"All",
+	OSTypes			:	"ANDROID",
+	propertyValue	:	"/mnt/sdcard/test",
+	expectedResult	:	"/mnt/sdcard/test"
 },
 {
 	testName		:	"Set fileName :with special charecter | camera@$123",
@@ -221,7 +229,7 @@ var arr_camera_property = [
 	cameraTypes		:	"All",
 	OSTypes			:	"All",
 	propertyValue	:	"camera@$123",
-	expectedResult	:	"\\camera@$123"
+	expectedResult	:	"camera@$123"
 },
 {
 	testName		:	"Set flashMode :on | on",
@@ -258,7 +266,7 @@ var arr_camera_property = [
 {
 	testName		:	"Set AimMode :on | on",
 	propertyName	:	"AimMode",
-	cameraTypes		:	"All",
+	cameraTypes		:	"imager",
 	OSTypes			:	"WINDOWS",
 	propertyValue	:	"on",
 	expectedResult	:	"on"
@@ -266,7 +274,7 @@ var arr_camera_property = [
 {
 	testName		:	"Set AimMode :off | off",
 	propertyName	:	"AimMode",
-	cameraTypes		:	"All",
+	cameraTypes		:	"imager",
 	OSTypes			:	"WINDOWS",
 	propertyValue	:	"off",
 	expectedResult	:	"off"
@@ -521,16 +529,16 @@ var arr_camera_property_inval = [
 	propertyName	:	"captureSound",
 	cameraTypes		:	"All",
 	OSTypes			:	"ANDROID",
-	DefaultValue    :   "file://application/alarm.mp3",
-	propertyValue	:	"file://application/inval",
-	expectedResult	:	"file://application/inval"
+	DefaultValue    :   "/mnt/sdcard/alarm.mp3",
+	propertyValue	:	"/file://application/inval",
+	expectedResult	:	"/mnt/sdcard/alarm.mp3"
 },
 {
 	testName		:	"Set  captureSound :empty ",
 	propertyName	:	"captureSound",
 	cameraTypes		:	"All",
 	OSTypes			:	"ANDROID",
-	DefaultValue    :   "file://application/alarm.mp3",
+	DefaultValue    :   "/mnt/sdcard/alarm.mp3",
 	propertyValue	:	"",
 	expectedResult	:	""
 },
@@ -609,7 +617,7 @@ var arr_camera_property_inval = [
 {
 	testName		:	"Set AimMode :invalid  | invalid",
 	propertyName	:	"AimMode",
-	cameraTypes		:	"All",
+	cameraTypes		:	"imager",
 	OSTypes			:	"WINDOWS",
 	DefaultValue    :   "off",
 	propertyValue	:	"onn",
@@ -618,7 +626,7 @@ var arr_camera_property_inval = [
 {
 	testName		:	"Set AimMode :empty  | empty",
 	propertyName	:	"AimMode",
-	cameraTypes		:	"All",
+	cameraTypes		:	"imager",
 	OSTypes			:	"WINDOWS",
 	DefaultValue    :   "off",
 	propertyValue	:	"",
@@ -683,16 +691,16 @@ var arr_camera_property_inval = [
 	propertyName	:	"fileName",
 	cameraTypes		:	"All",
 	OSTypes			:	"All",
-	DefaultValue    :   "file://application/alarm.wav",
-	propertyValue	:	"file://application/InvalidFolder",
-	expectedResult	:	"\\file://application/InvalidFolder"
+	DefaultValue    :   "camimage",
+	propertyValue	:	"/somedrive/somefolder/InvalidFolder",
+	expectedResult	:	"camimage"
 },
 {
 	testName		:	"Set fileName :empty path | empty path",
 	propertyName	:	"fileName",
 	cameraTypes		:	"All",
 	OSTypes			:	"All",
-	DefaultValue    :   "file://application/alarm.wav",
+	DefaultValue    :   "camimage",
 	propertyValue	:	"",
 	expectedResult	:	""
 }

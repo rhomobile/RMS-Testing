@@ -15,32 +15,28 @@ describe("Camera API Manual Tests", function(){
     	sound = Rho.RhoFile.join(camerapath, "/samplemedia/glassbreak.mp3");
     }
     var sampleimage = Rho.RhoFile.join(camerapath, "/samplemedia/zebratechnologies.jpg");
-	
 	var callbackFunc = function(cbData){
 		callbackData = cbData;
 		callbackTriggered = true;
 		imagestatus = cbData.status;
 		imageUriData = cbData.imageUri;
+		document.getElementById('imageUri').src = imageUriData;
 	};
-
 	var getCallbackData = function(camArr){
 		for (var i = 0; i < camArr.length; i++) {
-			camArray += (i+1).toString() + ") " + enumData[i].getProperty('ID') + ' ' + enumData[i].getProperty('cameraType') +  "; ";
+			camArray += (i+1).toString() + ") Camera Type: " + enumData[i].getProperty('cameraType') +  "; ";
 		};
 		callbackTriggered = true;
 	};
-
 	beforeEach(function(){
 		callbackData = "";
 		imageUriData = null;
 		callbackTriggered = false;
 		document.getElementById('imageUriDiv').innerHTML = '<img src="" id="imageUri"></img>';
 	});
-
 	afterEach(function(){
 		document.getElementById('imageUri').src = '<img src="" id="imageUri"></img>';
 	});
-
 
 	describe("Select picture using choosePicture method | Note: NA for CE platform", function() {
 
@@ -73,7 +69,6 @@ describe("Camera API Manual Tests", function(){
                 spec.waitForResponse();
 			});
 		});
-
 		it("VT285-0002 | should call choosePicture with callback status cancel", function(){
 			var spec = new ManualSpec(jasmine, window.document);
         	spec.addGoal(jasmine.getEnv().currentSpec.description);
@@ -100,7 +95,6 @@ describe("Camera API Manual Tests", function(){
                 spec.waitForResponse();
 			});
 		});
-
 		it("VT285-0003 | Should call choosePicture with outputFormat as image &  callback as anonymous function", function(){
 			var spec = new ManualSpec(jasmine, window.document);
         	spec.addGoal(jasmine.getEnv().currentSpec.description);
@@ -110,8 +104,12 @@ describe("Camera API Manual Tests", function(){
             spec.addExpectation('The returned status should be OK and the path of the image should be mentioned in callback.');
             spec.displayScenario();
             spec.waitForButtonPressing("Run test");
+        	var param = {
+				'outputFormat':'image',
+				'enableEditing' : false
+			};
 			runs(function(){
-				Rho.Camera.choosePicture({'outputFormat':'image'}, function(cbData){
+				Rho.Camera.choosePicture(param, function(cbData){
 					callbackData = cbData;
 					callbackTriggered = true;
 				});
@@ -130,7 +128,6 @@ describe("Camera API Manual Tests", function(){
                 spec.waitForResponse();
 			});
 		});
-
 		it("VT285-0004 | Should call choosePicture with 'outputFormat' property value as dataUri", function(){
 			var spec = new ManualSpec(jasmine, window.document);
         	spec.addGoal(jasmine.getEnv().currentSpec.description);
@@ -140,15 +137,15 @@ describe("Camera API Manual Tests", function(){
             spec.addExpectation('The chosen image should be returned as Data URI object.');
             spec.displayScenario();
             spec.waitForButtonPressing("Run test");
-
+            var param = {
+            	'outputFormat': Rho.Camera.OUTPUT_FORMAT_DATAURI
+        	};
 			runs(function(){
-				Rho.Camera.choosePicture({'outputFormat': Rho.Camera.OUTPUT_FORMAT_DATAURI}, callbackFunc);
+				Rho.Camera.choosePicture(param, callbackFunc);
 			});
-
 			waitsFor(function(){
 				return callbackTriggered;
 			},"waiting for callback data", callbackTimeout);
-
 			runs(function(){
 				spec.addResult("status : ", callbackData.status);
 				spec.addResult("message : ", callbackData.message);
@@ -156,14 +153,13 @@ describe("Camera API Manual Tests", function(){
 				spec.addResult("imageWidth : ", callbackData.imageWidth);
 				spec.addResult("imageFormat : ", callbackData.imageFormat);
 				spec.addResult("imageUri : ", callbackData.imageUri);
-				document.getElementById('imageUri').src = imageUriData;
 				spec.displayResults();
                 spec.waitForResponse();
 			});
-
 		});
 
 		if(isApplePlatform()){
+			
 			it("VT285-0005 | Should call choosePicture with property as colorModel: grayscale", function(){
 				var spec = new ManualSpec(jasmine, window.document);
 	        	spec.addGoal(jasmine.getEnv().currentSpec.description);
@@ -174,8 +170,13 @@ describe("Camera API Manual Tests", function(){
 	            spec.addExpectation('By selecting any of the image, should be displayed in grayscale with the test application.');
 	            spec.displayScenario();
 	            spec.waitForButtonPressing("Run test");
+	            var param = {
+	            	'colorModel': Rho.Camera.COLOR_MODEL_GRAYSCALE,
+	            	'outputFormat':'dataUri',
+	            	'enableEditing':false
+	            };
 				runs(function(){
-					Rho.Camera.choosePicture({'colorModel': Rho.Camera.COLOR_MODEL_GRAYSCALE, 'outputFormat':'dataUri'}, callbackFunc);
+					Rho.Camera.choosePicture(param, callbackFunc);
 				});
 				waitsFor(function(){
 					return callbackTriggered;
@@ -187,7 +188,6 @@ describe("Camera API Manual Tests", function(){
 					spec.addResult("imageWidth : ", callbackData.imageWidth);
 					spec.addResult("imageFormat : ", callbackData.imageFormat);
 					spec.addResult("imageUri : ", callbackData.imageUri);
-					document.getElementById('imageUri').src = imageUriData;
 					spec.displayResults();
 	                spec.waitForResponse();
 				});
@@ -202,8 +202,13 @@ describe("Camera API Manual Tests", function(){
 	            spec.addExpectation('By selecting any of the image, should be displayed in RGB (normal color scale) in the test application.');
 	            spec.displayScenario();
 	            spec.waitForButtonPressing("Run test");
+				var param = {
+	            	'colorModel': Rho.Camera.COLOR_MODEL_RGB, 
+	            	'outputFormat': Rho.Camera.OUTPUT_FORMAT_DATAURI, 
+	            	'enableEditing':false
+        		};	            
 				runs(function(){
-					Rho.Camera.choosePicture({'colorModel': Rho.Camera.COLOR_MODEL_RGB, 'outputFormat': Rho.Camera.OUTPUT_FORMAT_DATAURI}, callbackFunc);
+					Rho.Camera.choosePicture(param, callbackFunc);
 				});
 				waitsFor(function(){
 					return callbackTriggered;
@@ -216,12 +221,10 @@ describe("Camera API Manual Tests", function(){
 					spec.addResult("imageWidth : ", callbackData.imageWidth);
 					spec.addResult("imageFormat : ", callbackData.imageFormat);
 					spec.addResult("imageUri : ", callbackData.imageUri);
-					document.getElementById('imageUri').src = callbackData.imageUri;
 					spec.displayResults();
 	                spec.waitForResponse();
 				});
 			});
-
 			it("VT285-0007 | Should call choosePicture with property as desiredHeight and desiredWidth", function(){
 				var spec = new ManualSpec(jasmine, window.document);
 	        	spec.addGoal(jasmine.getEnv().currentSpec.description);
@@ -231,8 +234,14 @@ describe("Camera API Manual Tests", function(){
 	            spec.addExpectation('Should be saved with the resolution 640x480.');
 	            spec.displayScenario();
 	            spec.waitForButtonPressing("Run test");
+				var param = {
+					'desiredHeight':640,
+					'desiredWidth':480, 
+					'outputFormat': 'image',
+					'enableEditing': false
+				};	            
 				runs(function(){
-					Rho.Camera.choosePicture({'desiredHeight':640,'desiredWidth':480, 'outputFormat': 'image'}, callbackFunc);
+					Rho.Camera.choosePicture(param, callbackFunc);
 				});
 				waitsFor(function(){
 					return callbackTriggered;
@@ -249,7 +258,6 @@ describe("Camera API Manual Tests", function(){
 				});
 
 			});
-
 			it("VT285-0008 | Should call choosePicture with property as compressionFormat as jpg", function(){
 				var spec = new ManualSpec(jasmine, window.document);
 	        	spec.addGoal(jasmine.getEnv().currentSpec.description);
@@ -258,8 +266,13 @@ describe("Camera API Manual Tests", function(){
 	            spec.addExpectation('Only jpg images should be returned.');
 	            spec.displayScenario();
 	            spec.waitForButtonPressing("Run test");
+				var param = {
+					'compressionFormat':'jpg', 
+					'outputFormat': 'image',
+					'enableEditing':false
+				};          
 				runs(function(){
-					Rho.Camera.choosePicture({'compressionFormat':'jpg', 'outputFormat': 'image'}, callbackFunc);
+					Rho.Camera.choosePicture(param, callbackFunc);
 				});
 				waitsFor(function(){
 					return callbackTriggered;
@@ -274,9 +287,7 @@ describe("Camera API Manual Tests", function(){
 					spec.displayResults();
 	                spec.waitForResponse();
 				});
-
 			});
-
 			it("VT285-0009 | Should call choosePicture with property as compressionFormat as png", function(){
 				var spec = new ManualSpec(jasmine, window.document);
 	        	spec.addGoal(jasmine.getEnv().currentSpec.description);
@@ -286,15 +297,17 @@ describe("Camera API Manual Tests", function(){
 	            spec.addExpectation('Only png images should be returned.');
 	            spec.displayScenario();
 	            spec.waitForButtonPressing("Run test");
-				
+				var param = {
+					'compressionFormat':'png', 
+					'outputFormat': 'image',
+					'enableEditing':false
+				};				
 				runs(function(){
-					Rho.Camera.choosePicture({'compressionFormat':'png', 'outputFormat': 'image'}, callbackFunc);
+					Rho.Camera.choosePicture(param, callbackFunc);
 				});
-
 				waitsFor(function(){
 					return callbackTriggered;
 				},"waiting for callback data", callbackTimeout);
-
 				runs(function(){
 					spec.addResult("status : ", callbackData.status);
 					spec.addResult("message : ", callbackData.message);
@@ -305,9 +318,7 @@ describe("Camera API Manual Tests", function(){
 					spec.displayResults();
 	                spec.waitForResponse();
 				});
-
 			});
-
 			it("VT285-0010 | Should call choosePicture with property as enableEditing as false", function(){
 				var spec = new ManualSpec(jasmine, window.document);
 	        	spec.addGoal(jasmine.getEnv().currentSpec.description);
@@ -317,8 +328,11 @@ describe("Camera API Manual Tests", function(){
 	            spec.addExpectation('After selecting image should not be avaiable for editting.');
 	            spec.displayScenario();
 	            spec.waitForButtonPressing("Run test");
+				var param = {
+					'enableEditing':false
+				};				
 				runs(function(){
-					Rho.Camera.choosePicture({'enableEditing':false}, callbackFunc);
+					Rho.Camera.choosePicture(param, callbackFunc);
 				});
 				waitsFor(function(){
 					return callbackTriggered;
@@ -333,9 +347,7 @@ describe("Camera API Manual Tests", function(){
 					spec.displayResults();
 	                spec.waitForResponse();
 				});
-
 			});
-
 			it("VT285-0011 | Should call choosePicture with property as enableEditing as true", function(){
 				var spec = new ManualSpec(jasmine, window.document);
 	        	spec.addGoal(jasmine.getEnv().currentSpec.description);
@@ -345,9 +357,11 @@ describe("Camera API Manual Tests", function(){
 	            spec.addExpectation('After selecting image should be avaiable for editting.');
 	            spec.displayScenario();
 	            spec.waitForButtonPressing("Run test");
-				
+				var param = {
+					'enableEditing':true
+				};
 				runs(function(){
-					Rho.Camera.choosePicture({'enableEditing':true}, callbackFunc);
+					Rho.Camera.choosePicture(param, callbackFunc);
 				});
 
 				waitsFor(function(){
@@ -364,10 +378,8 @@ describe("Camera API Manual Tests", function(){
 					spec.displayResults();
 	                spec.waitForResponse();
 				});
-
 			});
-		}
-
+		};
 		it("VT285-0012 | should choosePicture with callback and suspend the device", function(){
 			var spec = new ManualSpec(jasmine, window.document);
         	spec.addGoal(jasmine.getEnv().currentSpec.description);
@@ -396,7 +408,6 @@ describe("Camera API Manual Tests", function(){
 		});
 	});
 
-
 	if(isAndroidPlatform() || isApplePlatform()){
 
 		describe("copyImageToDeviceGallery method | " , function() {
@@ -414,8 +425,7 @@ describe("Camera API Manual Tests", function(){
 					spec.waitForResponse();
 				});
 			});
-
-			it("VT285-0014 | Should copy image to device gallery from invalid path", function(){
+			it("VT285-0014 | Should try to copy image to device gallery from invalid path", function(){
 				var spec = new ManualSpec(jasmine, window.document);
 				spec.addGoal(jasmine.getEnv().currentSpec.description);
 				spec.addStep("Press 'RunTest' button");
@@ -427,7 +437,6 @@ describe("Camera API Manual Tests", function(){
 					spec.waitForResponse();
 				});
 			});
-
 			it("VT285-0015 | Should copyImageToDeviceGallery using choosePicture method (ie. gallery to gallery copy)", function(){
 				var spec = new ManualSpec(jasmine, window.document);
 	        	spec.addGoal(jasmine.getEnv().currentSpec.description);
@@ -448,22 +457,18 @@ describe("Camera API Manual Tests", function(){
 					}else{
 						alert('copyImageToDeviceGallery not run as image not choosen');
 					}
-					spec.addResult("status : ", callbackData.status);
+				/*	spec.addResult("status : ", callbackData.status);
 					spec.addResult("message : ", callbackData.message);
 					spec.addResult("imageHeight : ", callbackData.imageHeight);
 					spec.addResult("imageWidth : ", callbackData.imageWidth);
 					spec.addResult("imageFormat : ", callbackData.imageFormat);
 					spec.addResult("imageUri : ", callbackData.imageUri);
-					spec.displayResults();
+					spec.displayResults();*/
 	                spec.waitForResponse();
 				});
-
 			});
-
 		});
-
-	}
-
+	};
 
 	describe("Enumerate Camera with callback ", function() {
 
@@ -489,7 +494,6 @@ describe("Camera API Manual Tests", function(){
 		});
 	});
 
-
 	describe("getCameraByType method", function() {
 
 		if (!isWindowsMobilePlatform()) {
@@ -498,7 +502,7 @@ describe("Camera API Manual Tests", function(){
 				var spec = new ManualSpec(jasmine, window.document);
 	        	spec.addGoal(jasmine.getEnv().currentSpec.description);
 	            spec.addStep("Press 'RunTest' button");
-	            spec.addStep("If return value is back camera call takepicture using return value");
+	            spec.addStep("If return value is back camera call takePicture using return value");
 	            spec.addExpectation('The return values should be back camera object and the back camera should open to take picture.');
 	            spec.displayScenario();
 	            spec.waitForButtonPressing("Run test");
@@ -507,24 +511,19 @@ describe("Camera API Manual Tests", function(){
 					cameratype = camtyp;
 					callbackTriggered = true;
 				};
-
 	            runs(function(){
 					Rho.Camera.getCameraByType('back', cameraTypeCb);
 				});
-
 				waitsFor(function(){
 					return callbackTriggered;
 				},"waiting for callback data", 10000);
-
 				runs(function(){
 					callbackTriggered = false;
 					cameratype.takePicture({}, callbackFunc);
 				});
-
 				waitsFor(function(){
 					return callbackTriggered;
 				},"waiting for callback data", callbackTimeout);
-
 				runs(function(){
 					spec.addResult("status : ", callbackData.status);
 					spec.addResult("message : ", callbackData.message);
@@ -536,21 +535,18 @@ describe("Camera API Manual Tests", function(){
 	                spec.waitForResponse();
 				});
 			});
-
-			it("VT285-0018 | Should call getCameraByType with front and without callback function ", function(){
+			xit("VT285-0018 | Should call getCameraByType with back and without callback function ", function(){
 				var spec = new ManualSpec(jasmine, window.document);
 	        	spec.addGoal(jasmine.getEnv().currentSpec.description);
 	            spec.addStep("Press 'RunTest' button");
-	            spec.addStep("If return value is Front camera call takepicture using return value");
-	            spec.addExpectation('The return values should be front camera object and the front camera should open to take picture.');
+	            spec.addStep("If return value is back camera call takepicture using return value");
+	            spec.addExpectation('The return values should be back camera object and the back camera should open to take picture.');
 	            spec.displayScenario();
 	            spec.waitForButtonPressing("Run test");
 	            var cameratype;
-
 	            runs(function(){
-					cameratype = Rho.Camera.getCameraByType('front');
+					cameratype = Rho.Camera.getCameraByType('back');
 				});
-	            
 				setTimeout(function(){
 					cameratype.takePicture({}, callbackFunc);
 				},5000);
@@ -568,7 +564,72 @@ describe("Camera API Manual Tests", function(){
 	                spec.waitForResponse();
 				});
 			});
-
+			xit("VT285-0017 | Should call getCameraByType with front and callback as function ", function(){
+				var spec = new ManualSpec(jasmine, window.document);
+	        	spec.addGoal(jasmine.getEnv().currentSpec.description);
+	            spec.addStep("Press 'RunTest' button");
+	            spec.addStep("If return value is front camera call takepicture using return value");
+	            spec.addExpectation('The return values should be front camera object and the front camera should open to take picture.');
+	            spec.displayScenario();
+	            spec.waitForButtonPressing("Run test");
+	            var cameratype;
+	            var cameraTypeCb = function(camtyp){
+					cameratype = camtyp;
+					callbackTriggered = true;
+				};
+	            runs(function(){
+					Rho.Camera.getCameraByType('front', cameraTypeCb);
+				});
+				waitsFor(function(){
+					return callbackTriggered;
+				},"waiting for callback data", 10000);
+				runs(function(){
+					callbackTriggered = false;
+					cameratype.takePicture({}, callbackFunc);
+				});
+				waitsFor(function(){
+					return callbackTriggered;
+				},"waiting for callback data", callbackTimeout);
+				runs(function(){
+					spec.addResult("status : ", callbackData.status);
+					spec.addResult("message : ", callbackData.message);
+					spec.addResult("imageHeight : ", callbackData.imageHeight);
+					spec.addResult("imageWidth : ", callbackData.imageWidth);
+					spec.addResult("imageFormat : ", callbackData.imageFormat);
+					spec.addResult("imageUri : ", callbackData.imageUri);
+					spec.displayResults();
+	                spec.waitForResponse();
+				});
+			});
+			it("VT285-0018 | Should call getCameraByType with front and without callback function ", function(){
+				var spec = new ManualSpec(jasmine, window.document);
+	        	spec.addGoal(jasmine.getEnv().currentSpec.description);
+	            spec.addStep("Press 'RunTest' button");
+	            spec.addStep("If return value is Front camera call takepicture using return value");
+	            spec.addExpectation('The return values should be front camera object and the front camera should open to take picture.');
+	            spec.displayScenario();
+	            spec.waitForButtonPressing("Run test");
+	            var cameratype;
+	            runs(function(){
+					cameratype = Rho.Camera.getCameraByType('front');
+				});
+				setTimeout(function(){
+					cameratype.takePicture({}, callbackFunc);
+				},5000);
+				waitsFor(function(){
+					return callbackTriggered;
+				},"waiting for callback data", callbackTimeout);
+				runs(function(){
+					spec.addResult("status : ", callbackData.status);
+					spec.addResult("message : ", callbackData.message);
+					spec.addResult("imageHeight : ", callbackData.imageHeight);
+					spec.addResult("imageWidth : ", callbackData.imageWidth);
+					spec.addResult("imageFormat : ", callbackData.imageFormat);
+					spec.addResult("imageUri : ", callbackData.imageUri);
+					spec.displayResults();
+	                spec.waitForResponse();
+				});
+			});
 		};
 
 		if (isWindowsMobilePlatform()) {
@@ -609,7 +670,72 @@ describe("Camera API Manual Tests", function(){
 	                spec.waitForResponse();
 				});
 			});
-
+			xit("VT285-0020 | Should call getCameraByType with color and without callback function ", function(){
+				var spec = new ManualSpec(jasmine, window.document);
+	        	spec.addGoal(jasmine.getEnv().currentSpec.description);
+	            spec.addStep("Press 'RunTest' button");
+	            spec.addStep("If return value is color camera call takepicture using return value");
+	            spec.addExpectation('The return values should be color camera object and the color camera should open to take picture.');
+	            spec.displayScenario();
+	            spec.waitForButtonPressing("Run test");
+	            var cameratype;
+	            runs(function(){
+					cameratype = Rho.Camera.getCameraByType('color');
+				});
+				setTimeout(function(){
+					cameratype.takePicture({}, callbackFunc);
+				},5000);
+				waitsFor(function(){
+					return callbackTriggered;
+				},"waiting for callback data", callbackTimeout);
+				runs(function(){
+					spec.addResult("status : ", callbackData.status);
+					spec.addResult("message : ", callbackData.message);
+					spec.addResult("imageHeight : ", callbackData.imageHeight);
+					spec.addResult("imageWidth : ", callbackData.imageWidth);
+					spec.addResult("imageFormat : ", callbackData.imageFormat);
+					spec.addResult("imageUri : ", callbackData.imageUri);
+					spec.displayResults();
+	                spec.waitForResponse();
+				});
+			});
+			xit("VT285-0019 | Should call getCameraByType with imager and callback as function", function(){
+				var spec = new ManualSpec(jasmine, window.document);
+	        	spec.addGoal(jasmine.getEnv().currentSpec.description);
+	            spec.addStep("Press 'RunTest' button");
+	            spec.addStep("If return value is imager camera call takepicture using return value");
+	            spec.addExpectation('The return values should be imager camera object and the imager camera should open to take picture.');
+	            spec.displayScenario();
+	            spec.waitForButtonPressing("Run test");
+	            var cameratype;
+	            var cameraTypeCb = function(camtyp){
+					cameratype = camtyp;
+					callbackTriggered = true;
+				};
+	            runs(function(){
+					Rho.Camera.getCameraByType('imager', cameraTypeCb);
+				});
+				waitsFor(function(){
+					return callbackTriggered;
+				},"waiting for callback data", 10000);
+				runs(function(){
+					callbackTriggered = false;
+					cameratype.takePicture({}, callbackFunc);
+				});
+				waitsFor(function(){
+					return callbackTriggered;
+				},"waiting for callback data", callbackTimeout);
+				runs(function(){
+					spec.addResult("status : ", callbackData.status);
+					spec.addResult("message : ", callbackData.message);
+					spec.addResult("imageHeight : ", callbackData.imageHeight);
+					spec.addResult("imageWidth : ", callbackData.imageWidth);
+					spec.addResult("imageFormat : ", callbackData.imageFormat);
+					spec.addResult("imageUri : ", callbackData.imageUri);
+					spec.displayResults();
+	                spec.waitForResponse();
+				});
+			});
 			it("VT285-0020 | Should call getCameraByType with imager and without callback function ", function(){
 				var spec = new ManualSpec(jasmine, window.document);
 	        	spec.addGoal(jasmine.getEnv().currentSpec.description);
@@ -672,6 +798,8 @@ describe("Camera API Manual Tests", function(){
 		   	if(isWindowsMobilePlatform()){
 				describe("showPreview, Capture & hidePreview methods | using " + camid + camtype , function() {
 					it("VT285-0022 | Should call showPreview & capture with default properties | using " + camid + camtype , function(){
+						Rho.Camera.desiredHeight = 480;
+						Rho.Camera.desiredWidth = 640;
 						var spec = new ManualSpec(jasmine, window.document);
 			        	spec.addGoal(jasmine.getEnv().currentSpec.description);
 			        	spec.addPrecondition("Call showPreview() without any parameters.");
@@ -686,9 +814,9 @@ describe("Camera API Manual Tests", function(){
 			            spec.addExpectation('Flashmode:off');
 			            spec.addExpectation('Aimmode:off');
 			            spec.addExpectation('Callback - status : OK');
-			            spec.addExpectation('Callback - imageHeight : '+ objCAM.desiredHeight);
-			            spec.addExpectation('Callback - imageWidth : ' + objCAM.desiredWidth);
-			            spec.addExpectation('Image file name should be : timestamp');
+			            spec.addExpectation('Callback - imageHeight : '+ Rho.Camera.desiredHeight);
+			            spec.addExpectation('Callback - imageWidth : ' + Rho.Camera.desiredWidth);
+			            spec.addExpectation('Image file name should be : IMG_<timestamp>');
 			            spec.addExpectation('ImageFormat should be : jpg.');
 			            spec.displayScenario();
 			            spec.waitForButtonPressing("Run test");
@@ -725,16 +853,18 @@ describe("Camera API Manual Tests", function(){
 			            spec.addExpectation('Status:OK, imagePath, imageFormat:jpg & filename camImage.jpg.');
 			            spec.displayScenario();
 			            spec.waitForButtonPressing("Run test");
+						var param = {
+							'previewLeft':10,
+							'previewTop':10,
+							'previewWidth':100,
+							'previewHeight':60,
+							'commpressionFormat':'jpg',
+							'fileName':'\\Application\\camImage',
+							'flashMode': 'off',
+							'aimMode':'off'
+						};	            
 						runs(function(){
-							objCAM.showPreview({
-								'previewLeft':10,
-								'previewTop':10,
-								'previewWidth':100,
-								'previewHeight':60,
-								'commpressionFormat':'jpg',
-								'fileName':'\\Application\\camImage',
-								'flashMode': 'off',
-								'aimMode':'off'});
+							objCAM.showPreview(param);
 							setTimeout(function(){
 								objCAM.capture(callbackFunc);
 							},10000);
@@ -766,14 +896,16 @@ describe("Camera API Manual Tests", function(){
 			            spec.addExpectation('The returned status should be OK and captured image should be displayed as dataUri. .');
 			            spec.displayScenario();
 			            spec.waitForButtonPressing("Run test");
+			            var param = {
+							'previewLeft':-10,
+							'previewTop':-10,
+							'previewWidth':40,
+							'previewHeight':80,
+							'outputFormat':'dataUri',
+							'captureSound': sound
+						};
 						runs(function(){
-							objCAM.showPreview({
-								'previewLeft':-10,
-								'previewTop':-10,
-								'previewWidth':40,
-								'previewHeight':80,
-								'outputFormat':'dataUri',
-								'captureSound': sound});
+							objCAM.showPreview(param);
 							setTimeout(function(){
 								objCAM.capture(callbackFunc);
 							},10000);
@@ -788,7 +920,6 @@ describe("Camera API Manual Tests", function(){
 							spec.addResult("imageWidth : ", callbackData.imageWidth);
 							spec.addResult("imageFormat : ", callbackData.imageFormat);
 							spec.addResult("imageUri : ", callbackData.imageUri);
-							document.getElementById('imageUri').src = imageUriData;
 							spec.displayResults();
 							objCAM.hidePreview();
 			                spec.waitForResponse();
@@ -808,18 +939,20 @@ describe("Camera API Manual Tests", function(){
 			            spec.addExpectation('After capture there should not be any wav file played.');
 			            spec.displayScenario();
 			            spec.waitForButtonPressing("Run test");
+			            var param = {
+							'previewLeft':10,
+							'previewTop':10,
+							'previewWidth':100,
+							'previewHeight':60,
+							'desiredHeight':120,
+							'desiredWidth':240,
+							'outputFormat':'image',
+							'flashMode':'on',
+							'aimMode':'on',
+							'captureSound':''
+						};
 						runs(function(){
-							objCAM.showPreview({
-								'previewLeft':10,
-								'previewTop':10,
-								'previewWidth':100,
-								'previewHeight':60,
-								'desiredHeight':120,
-								'desiredWidth':240,
-								'outputFormat':'image',
-								'flashMode':'on',
-								'aimMode':'on',
-								'captureSound':''});
+							objCAM.showPreview(param);
 							setTimeout(function(){
 								objCAM.capture(callbackFunc);
 							},10000);
@@ -839,7 +972,6 @@ describe("Camera API Manual Tests", function(){
 			                spec.waitForResponse();
 						});
 					});
-
 					it("VT285-0026 | Should call showPreview & capture in landscape mode" + camid + camtype , function(){
 						var spec = new ManualSpec(jasmine, window.document);
 			        	spec.addGoal(jasmine.getEnv().currentSpec.description);
@@ -850,14 +982,17 @@ describe("Camera API Manual Tests", function(){
 			            spec.addExpectation('The returned status should be OK, image should be displayed as dataUri in landscape mode.');
 			            spec.displayScenario();
 			            spec.waitForButtonPressing("Run test");
+						var param = {
+							'previewLeft':10,
+							'previewTop':10,
+							'previewWidth':100,
+							'previewHeight':100,
+							'desiredHeight':120,
+							'desiredWidth':240,
+							'outputFormat':'dataUri'
+						};
 						runs(function(){
-							objCAM.showPreview({'previewLeft':10,
-								'previewTop':10,
-								'previewWidth':100,
-								'previewHeight':100,
-								'desiredHeight':120,
-								'desiredWidth':240,
-								'outputFormat':'dataUri'});
+							objCAM.showPreview(param);
 							setTimeout(function(){
 								objCAM.capture(callbackFunc);
 							},10000);
@@ -872,14 +1007,11 @@ describe("Camera API Manual Tests", function(){
 							spec.addResult("imageWidth : ", callbackData.imageWidth);
 							spec.addResult("imageFormat : ", callbackData.imageFormat);
 							spec.addResult("imageUri : ", callbackData.imageUri);
-							document.getElementById('imageUri').src = imageUriData;
 							spec.displayResults();
 							objCAM.hidePreview();
 			                spec.waitForResponse();
 						});
-
 					});
-
 					it("VT285-0027 | Should call showPreview with all properties set & capture | using " + camid + camtype , function(){
 						var spec = new ManualSpec(jasmine, window.document);
 			        	spec.addGoal(jasmine.getEnv().currentSpec.description);
@@ -890,30 +1022,29 @@ describe("Camera API Manual Tests", function(){
 			            spec.addExpectation('The viewfinder with properties set should reflect. Both flashMode & aimMode is off. Should play a wav file after capture. The returned status should be OK and captured imagePath should be with the name camImage123.jpg, imageHeight: 360, imageWidth:480 & imageFormat: jpg.');
 			            spec.displayScenario();
 			            spec.waitForButtonPressing("Run test");
-
+			            var param = {
+			            	'previewLeft':10,
+							'previewTop':10,
+							'previewWidth':100,
+							'previewHeight':60,
+							'fileName':'camImage123',
+							'desiredHeight':360,
+							'desiredWidth':480,
+							'compressionFormat':'png',
+							'outputFormat':'image',
+							'flashMode':'off',
+							'aimMode':'off',
+							'captureSound': sound
+						};
 						runs(function(){
-							objCAM.showPreview({'previewLeft':10,
-								'previewTop':10,
-								'previewWidth':100,
-								'previewHeight':60,
-								'fileName':'camImage123',
-								'desiredHeight':360,
-								'desiredWidth':480,
-								'compressionFormat':'png',
-								'outputFormat':'image',
-								'flashMode':'off',
-								'aimMode':'off',
-								'captureSound': sound});
-
+							objCAM.showPreview(param);
 							setTimeout(function(){
 								objCAM.capture(callbackFunc);
 							},10000);
 						});
-
 						waitsFor(function(){
 							return callbackTriggered;
 						},"waiting for callback data", 22000);
-
 						runs(function(){
 							spec.addResult("status : ", callbackData.status);
 							spec.addResult("message : ", callbackData.message);
@@ -925,9 +1056,7 @@ describe("Camera API Manual Tests", function(){
 							objCAM.hidePreview();
 			                spec.waitForResponse();
 						});
-
 					});
-
 					it("VT285-0028 | Should rotate the screen upsideDown after call showPreview | using " + camid + camtype , function(){
 						var spec = new ManualSpec(jasmine, window.document);
 			        	spec.addGoal(jasmine.getEnv().currentSpec.description);
@@ -936,9 +1065,14 @@ describe("Camera API Manual Tests", function(){
 			            spec.addExpectation('The viewfinder should realign and there should not be any error.');
 			            spec.displayScenario();
 			            spec.waitForButtonPressing("Run test");
-
+						var param = {
+							'previewLeft':10, 
+							'previewTop':10, 
+							'previewWidth':100, 
+							'previewHeight':60
+						};
 						runs(function(){
-							objCAM.showPreview({'previewLeft':10, 'previewTop':10, 'previewWidth':100, 'previewHeight':60});
+							objCAM.showPreview(param);
 							setTimeout(function(){
 								Rho.ScreenOrientation.upsideDown();
 								setTimeout(function(){
@@ -966,7 +1100,7 @@ describe("Camera API Manual Tests", function(){
 						var spec = new ManualSpec(jasmine, window.document);
 			        	spec.addGoal(jasmine.getEnv().currentSpec.description);
 			            spec.addStep("Press 'RunTest' button");
-			            spec.addExpectation('Viewfinder should get hidden.');
+			            spec.addExpectation('Viewfinder should get hidden around 10secs.');
 			            spec.displayScenario();
 			            spec.waitForButtonPressing("Run test");
 			            runs(function(){
@@ -1014,13 +1148,12 @@ describe("Camera API Manual Tests", function(){
 			                spec.waitForResponse();
 						});
 					});
-
 					it("VT285-0031 | Should call showPreview and suspend | using " + camid + camtype , function(){
 						var spec = new ManualSpec(jasmine, window.document);
 			        	spec.addGoal(jasmine.getEnv().currentSpec.description);
 			            spec.addStep("Press 'RunTest' button");
 			            spec.addStep("Once the preview window appears, Suspend & resume the device");
-			            spec.addStep("Capture will be called after 10secs.");
+			            spec.addStep("Capture will be called after 15secs.");
 			            spec.addExpectation('Preview should be there and application should not behave abnormally.');
 			            spec.displayScenario();
 			            spec.waitForButtonPressing("Run test");
@@ -1028,35 +1161,31 @@ describe("Camera API Manual Tests", function(){
 							objCAM.showPreview();
 							setTimeout(function(){
 								objCAM.capture(callbackFunc);
-								spec.waitForResponse();
-								objCAM.hidePreview();
-							},10000);
+							},15000);
 						});
+						waitsFor(function(){
+							return callbackTriggered;
+						},"waiting for callback data", 25000);
+						runs(function(){
+							spec.addResult("status : ", callbackData.status);
+							spec.addResult("message : ", callbackData.message);
+							spec.addResult("imageHeight : ", callbackData.imageHeight);
+							spec.addResult("imageWidth : ", callbackData.imageWidth);
+							spec.addResult("imageFormat : ", callbackData.imageFormat);
+							spec.addResult("imageUri : ", callbackData.imageUri);
+							spec.displayResults();							
+			                objCAM.hidePreview();
+			                spec.waitForResponse();
+						});						
 					});
-
-					it("VT285-0032 | Should call showPreview and quit the application | using " + camid + camtype , function(){
-						var spec = new ManualSpec(jasmine, window.document);
-			        	spec.addGoal(jasmine.getEnv().currentSpec.description);
-			            spec.addStep("Press 'RunTest' button");
-			            spec.addExpectation('Show preivew is shown to user and after 5 secs application should quit successfully.');
-			            spec.displayScenario();
-			            spec.waitForButtonPressing("Run test");
-			            runs(function(){
-							objCAM.showPreview();
-							setTimeout(function(){
-								Rho.Application.quit();
-							},5000);
-						});
-					});
-
 				});
-
 			};
-
 
 			describe("takePicture method | using " + camid + camtype , function() {
 
 				it("VT285-0033 | Should call takePicture | using " + camid + camtype , function(){
+					Rho.Camera.desiredHeight = 480;
+					Rho.Camera.desiredWidth = 640;
 					var spec = new ManualSpec(jasmine, window.document);
 		        	spec.addGoal(jasmine.getEnv().currentSpec.description);
 		            spec.addStep("Press 'RunTest' button");
@@ -1089,7 +1218,6 @@ describe("Camera API Manual Tests", function(){
 		                spec.waitForResponse();
 					});
 				});
-
 				it("VT285-0034 | Should call takePicture and returned status cancel | using " + camid + camtype , function(){
 					var spec = new ManualSpec(jasmine, window.document);
 		        	spec.addGoal(jasmine.getEnv().currentSpec.description);
@@ -1116,7 +1244,6 @@ describe("Camera API Manual Tests", function(){
 		                spec.waitForResponse();
 					});
 				});
-
 				it("VT285-0035 | Should call takePicture and invalid fileName path | using " + camid + camtype , function(){
 					var spec = new ManualSpec(jasmine, window.document);
 		        	spec.addGoal(jasmine.getEnv().currentSpec.description);
@@ -1126,8 +1253,11 @@ describe("Camera API Manual Tests", function(){
 		            spec.addExpectation('The returned status should be error with message as wrong file path.');
 		            spec.displayScenario();
 		            spec.waitForButtonPressing("Run test");
+		            var param = {
+		            	'fileName':"\\InvalidPath\\camimage"
+		        	};
 		            runs(function(){
-						objCAM.takePicture({'fileName':"\\InvalidPath\\camimage"}, callbackFunc);
+						objCAM.takePicture(param, callbackFunc);
 					});
 					waitsFor(function(){
 						return callbackTriggered;
@@ -1143,7 +1273,6 @@ describe("Camera API Manual Tests", function(){
 		                spec.waitForResponse();
 					});
 				});				
-
 				it("VT285-0036 | Should call takePicture and suspend the device | using " + camid + camtype , function(){
 					var spec = new ManualSpec(jasmine, window.document);
 		        	spec.addGoal(jasmine.getEnv().currentSpec.description);
@@ -1170,57 +1299,47 @@ describe("Camera API Manual Tests", function(){
 					});
 				});
 
-				it("VT285-0067 | Should call takePicture and quit the application | using " + camid + camtype , function(){
-					var spec = new ManualSpec(jasmine, window.document);
-		        	spec.addGoal(jasmine.getEnv().currentSpec.description);
-		            spec.addStep("Press 'RunTest' button");
-		            spec.addExpectation('Camera screen should be shown to the user and after 5 secs application should get quit without any crash.');
-		            spec.displayScenario();
-		            spec.waitForButtonPressing("Run test");
-		            runs(function(){
-						objCAM.takePicture({}, callbackFunc);
-						setTimeout(function(){
-							Rho.Application.quit();
-						}, 5000);
-					});
-				});
+				if(!isApplePlatform()){
+					it("VT285-0037 | Should rotate the screen rightHanded after calling takePicture() method. | using " + camid + camtype , function(){
+						var spec = new ManualSpec(jasmine, window.document);
+			        	spec.addGoal(jasmine.getEnv().currentSpec.description);
+			            spec.addStep("Press 'RunTest' button");
+			            spec.addStep("After 4secs of fullscreen takePicture, screen will rotate rightHanded(called internally in script), then click on capture");
+			            spec.addStep("NOTE: ScreenOrientation will become normal once pass/fail is clicked");
+			            spec.addExpectation('The viewfinder should realign and there should not be any error.');
+			            spec.displayScenario();
+			            spec.waitForButtonPressing("Run test");
+						runs(function(){
+							var data;
+							function cb (cdData) {
+								data = cdData;
+							}
+							objCAM.takePicture({}, callbackFunc);
+							setTimeout(function(){
+								Rho.ScreenOrientation.rightHanded();
+								Rho.ScreenOrientation.setScreenOrientationEvent(cb);
+							},4000);
+						});
+						waitsFor(function(){
+							return callbackTriggered;
+						},"waiting for callback data", 15000);
+						runs(function(){
+							spec.addResult("status : ", callbackData.status);
+							spec.addResult("message : ", callbackData.message);
+							spec.addResult("imageHeight : ", callbackData.imageHeight);
+							spec.addResult("imageWidth : ", callbackData.imageWidth);
+							spec.addResult("imageFormat : ", callbackData.imageFormat);
+							spec.addResult("imageUri : ", callbackData.imageUri);
+							spec.addResult("ScreenOrientation CB : ", data);
+							spec.displayResults();
+			                spec.waitForResponse();
+						});
+						runs(function(){
+							Rho.ScreenOrientation.normal();
+						});
 
-				//if(isWindowsMobilePlatform()){
-
-				it("VT285-0037 | Should rotate the screen rightHanded after calling takePicture() method. | using " + camid + camtype , function(){
-					var spec = new ManualSpec(jasmine, window.document);
-		        	spec.addGoal(jasmine.getEnv().currentSpec.description);
-		            spec.addStep("Press 'RunTest' button");
-		            spec.addStep("After 4secs of fullscreen takePicture, screen will rotate rightHanded(called internally in script), then click on capture");
-		            spec.addStep("NOTE: ScreenOrientation will become normal once pass/fail is clicked");
-		            spec.addExpectation('The viewfinder should realign and there should not be any error.');
-		            spec.displayScenario();
-		            spec.waitForButtonPressing("Run test");
-					runs(function(){
-						objCAM.takePicture({}, callbackFunc);
-						setTimeout(function(){
-							Rho.ScreenOrientation.rightHanded();
-						},4000);
 					});
-					waitsFor(function(){
-						return callbackTriggered;
-					},"waiting for callback data", 15000);
-					runs(function(){
-						spec.addResult("status : ", callbackData.status);
-						spec.addResult("message : ", callbackData.message);
-						spec.addResult("imageHeight : ", callbackData.imageHeight);
-						spec.addResult("imageWidth : ", callbackData.imageWidth);
-						spec.addResult("imageFormat : ", callbackData.imageFormat);
-						spec.addResult("imageUri : ", callbackData.imageUri);
-						spec.displayResults();
-		                spec.waitForResponse();
-					});
-					runs(function(){
-						Rho.ScreenOrientation.normal();
-					});
-
-				});
-				//}
+				};
 
 				it("VT285-0038 | Should call takePicture with flashMode FLASH_ON | using " + camid + camtype , function(){
 					var spec = new ManualSpec(jasmine, window.document);
@@ -1230,8 +1349,11 @@ describe("Camera API Manual Tests", function(){
 		            spec.addExpectation('Flash should be on while taking the image.');
 		            spec.displayScenario();
 		            spec.waitForButtonPressing("Run test");
+		            var param = {
+		            	'flashMode':Rho.Camera.FLASH_ON
+		            };
 					runs(function(){
-						objCAM.takePicture({'flashMode':Rho.Camera.FLASH_ON}, callbackFunc);
+						objCAM.takePicture(param, callbackFunc);
 					});
 					waitsFor(function(){
 						return callbackTriggered;
@@ -1247,7 +1369,6 @@ describe("Camera API Manual Tests", function(){
 		                spec.waitForResponse();
 					});	
 				});
-
 				it("VT285-0039 | Should call takePicture with flashMode FLASH_OFF | using " + camid + camtype , function(){
 					var spec = new ManualSpec(jasmine, window.document);
 		        	spec.addGoal(jasmine.getEnv().currentSpec.description);
@@ -1256,8 +1377,11 @@ describe("Camera API Manual Tests", function(){
 		            spec.addExpectation('Flash should be off while taking the image.');
 		            spec.displayScenario();
 		            spec.waitForButtonPressing("Run test");
+		            var param = {
+		            	'flashMode':Rho.Camera.FLASH_OFF
+		        	};
 					runs(function(){
-						objCAM.takePicture({'flashMode':Rho.Camera.FLASH_OFF}, callbackFunc);
+						objCAM.takePicture(param, callbackFunc);
 					});
 					waitsFor(function(){
 						return callbackTriggered;
@@ -1283,9 +1407,11 @@ describe("Camera API Manual Tests", function(){
 			            spec.addExpectation('Flash should be on in low illumination area.');
 			            spec.displayScenario();
 			            spec.waitForButtonPressing("Run test");
-
+						var param = {
+							'flashMode':Rho.Camera.FLASH_AUTO
+						};
 						runs(function(){
-							objCAM.takePicture({'flashMode':Rho.Camera.FLASH_AUTO}, callbackFunc);
+							objCAM.takePicture(param, callbackFunc);
 						});
 						waitsFor(function(){
 							return callbackTriggered;
@@ -1301,7 +1427,6 @@ describe("Camera API Manual Tests", function(){
 			                spec.waitForResponse();
 						});					
 					});
-
 					it("VT285-0041 | Should call takePicture with flashMode FLASH_AUTO in bright area | using " + camid + camtype , function(){
 						var spec = new ManualSpec(jasmine, window.document);
 			        	spec.addGoal(jasmine.getEnv().currentSpec.description);
@@ -1310,16 +1435,13 @@ describe("Camera API Manual Tests", function(){
 			            spec.addExpectation('Flash should not be ON in bright area.');
 			            spec.displayScenario();
 			            spec.waitForButtonPressing("Run test");
-
 						runs(function(){
 							Rho.Camera.flashMode = "auto";
 							objCAM.takePicture({}, callbackFunc);
 						});
-
 						waitsFor(function(){
 							return callbackTriggered;
 						},"waiting for callback data", 10000);
-
 						runs(function(){
 							spec.addResult("status : ", callbackData.status);
 							spec.addResult("message : ", callbackData.message);
@@ -1342,15 +1464,15 @@ describe("Camera API Manual Tests", function(){
 			            spec.addExpectation('Flash should be on while taking picture. The saved picture should not contain the redeye in it.');
 			            spec.displayScenario();
 			            spec.waitForButtonPressing("Run test");
-
+						var param = {
+							'flashMode':Rho.Camera.FLASH_RED_EYE
+						};
 						runs(function(){
-							objCAM.takePicture({'flashMode':Rho.Camera.FLASH_RED_EYE}, callbackFunc);
+							objCAM.takePicture(param, callbackFunc);
 						});
-
 						waitsFor(function(){
 							return callbackTriggered;
 						},"waiting for callback data", 10000);
-
 						runs(function(){
 							spec.addResult("status : ", callbackData.status);
 							spec.addResult("message : ", callbackData.message);
@@ -1374,8 +1496,11 @@ describe("Camera API Manual Tests", function(){
 			            spec.addExpectation('Flash should be on while taking the image. The flash is turned on in torch mode.');
 			            spec.displayScenario();
 			            spec.waitForButtonPressing("Run test");
+			            var param = {
+			            	'flashMode':Rho.Camera.FLASH_TORCH
+			        	};
 						runs(function(){
-							objCAM.takePicture({'flashMode':Rho.Camera.FLASH_TORCH}, callbackFunc);
+							objCAM.takePicture(param, callbackFunc);
 						});
 						waitsFor(function(){
 							return callbackTriggered;
@@ -1394,7 +1519,6 @@ describe("Camera API Manual Tests", function(){
 					});
 				};
 
-
 				if (isWindowsMobilePlatform()){
 
 					it("VT285-0044 | Should call takePicture with aimMode AIM_ON | using " + camid + camtype , function(){
@@ -1405,8 +1529,11 @@ describe("Camera API Manual Tests", function(){
 			            spec.addExpectation('Aiming should be ON. Reticle should be there. Image should be catured..');
 			            spec.displayScenario();
 			            spec.waitForButtonPressing("Run test");
+			            var param = {
+			            	'aimMode':Rho.Camera.AIM_ON
+			            };
 						runs(function(){
-							objCAM.takePicture({'aimMode':Rho.Camera.AIM_ON}, callbackFunc);
+							objCAM.takePicture(param, callbackFunc);
 						});
 						waitsFor(function(){
 							return callbackTriggered;
@@ -1422,7 +1549,6 @@ describe("Camera API Manual Tests", function(){
 			                spec.waitForResponse();
 						});
 					});
-
 					it("VT285-0045 | Should call takePicture with aimMode AIM_OFF | using " + camid + camtype , function(){
 						var spec = new ManualSpec(jasmine, window.document);
 			        	spec.addGoal(jasmine.getEnv().currentSpec.description);
@@ -1431,8 +1557,11 @@ describe("Camera API Manual Tests", function(){
 			            spec.addExpectation('There should not be any aiming. Reticle should not be seen.');
 			            spec.displayScenario();
 			            spec.waitForButtonPressing("Run test");
+			            var param = {
+			            	'aimMode':Rho.Camera.AIM_OFF
+			            };
 						runs(function(){
-							objCAM.takePicture({'aimMode':Rho.Camera.AIM_OFF}, callbackFunc);
+							objCAM.takePicture(param, callbackFunc);
 						});
 						waitsFor(function(){
 							return callbackTriggered;
@@ -1446,9 +1575,8 @@ describe("Camera API Manual Tests", function(){
 							spec.addResult("imageUri : ", callbackData.imageUri);
 							spec.displayResults();
 			                spec.waitForResponse();
-						});					
+						});
 					});
-
 				};
 
 				it("VT285-0046 | Should call takePicture with outputFormat:dataUri  | using " + camid + camtype , function(){
@@ -1459,8 +1587,11 @@ describe("Camera API Manual Tests", function(){
 		            spec.addExpectation('Image should be displayed as dataUri.');
 		            spec.displayScenario();
 		            spec.waitForButtonPressing("Run test");
+		            var param = {
+		            	'outputFormat':'dataUri'
+		            };
 					runs(function(){
-						objCAM.takePicture({'outputFormat':'dataUri'}, callbackFunc);
+						objCAM.takePicture(param, callbackFunc);
 					});
 					waitsFor(function(){
 						return callbackTriggered;
@@ -1472,12 +1603,10 @@ describe("Camera API Manual Tests", function(){
 						spec.addResult("imageWidth : ", callbackData.imageWidth);
 						spec.addResult("imageFormat : ", callbackData.imageFormat);
 						spec.addResult("imageUri : ", callbackData.imageUri);
-						document.getElementById('imageUri').src = imageUriData;
 						spec.displayResults();
 		                spec.waitForResponse();
 					});
 				});
-
 				it("VT285-0047 | Should call takePicture with desiredHeight 480 and desiredWidth 640 | using " + camid + camtype , function(){
 					var spec = new ManualSpec(jasmine, window.document);
 		        	spec.addGoal(jasmine.getEnv().currentSpec.description);
@@ -1492,8 +1621,12 @@ describe("Camera API Manual Tests", function(){
 		            spec.addExpectation("Or nearest supported resolution which is listed in steps");
 		            spec.displayScenario();
 		            spec.waitForButtonPressing("Run test");
+		            var param = {
+		            	'desiredHeight':480,
+		            	'desiredWidth':640
+		        	};
 					runs(function(){
-						objCAM.takePicture({'desiredHeight':480,'desiredWidth':640}, callbackFunc);
+						objCAM.takePicture(param, callbackFunc);
 					});
 					waitsFor(function(){
 						return callbackTriggered;
@@ -1509,7 +1642,6 @@ describe("Camera API Manual Tests", function(){
 		                spec.waitForResponse();
 					});	
 				});
-
 				it("VT285-0048 | Should call takePicture with desiredHeight 0 and desiredWidth 0 | using " + camid + camtype , function(){
 					var spec = new ManualSpec(jasmine, window.document);
 		        	spec.addGoal(jasmine.getEnv().currentSpec.description);
@@ -1518,8 +1650,12 @@ describe("Camera API Manual Tests", function(){
 		            spec.addExpectation('The returned image height and width should default or as previously set (bec 0x0 is not supported). No abnormal behaviour should be observed.');
 		            spec.displayScenario();
 		            spec.waitForButtonPressing("Run test");
+		            var param = {
+		            	'desiredHeight':0,
+		            	'desiredWidth':0
+		        	};
 					runs(function(){
-						objCAM.takePicture({'desiredHeight':0,'desiredWidth':0}, callbackFunc);
+						objCAM.takePicture(param, callbackFunc);
 					});
 					waitsFor(function(){
 						return callbackTriggered;
@@ -1535,7 +1671,6 @@ describe("Camera API Manual Tests", function(){
 		                spec.waitForResponse();
 					});						
 				});
-
 				it("VT285-0049 | Should call takePicture with desiredWidth & desiredHeight more than max supported and Capture | using " + camid + camtype , function(){
 					var spec = new ManualSpec(jasmine, window.document);
 		        	spec.addGoal(jasmine.getEnv().currentSpec.description);
@@ -1544,8 +1679,12 @@ describe("Camera API Manual Tests", function(){
 		            spec.addExpectation('Image should be captured successfully with max supported by that device.');
 		            spec.displayScenario();
 		            spec.waitForButtonPressing("Run test");
+		            var param = {
+		            	'desiredHeight':7600,
+		            	'desiredWidth':6400
+		            };
 					runs(function(){
-						objCAM.takePicture({'desiredHeight':7600,'desiredWidth':6400}, callbackFunc);
+						objCAM.takePicture(param, callbackFunc);
 					});
 					waitsFor(function(){
 						return callbackTriggered;
@@ -1561,7 +1700,6 @@ describe("Camera API Manual Tests", function(){
 		                spec.waitForResponse();
 					});	
 				});
-
 				it("VT285-0050 | Should call takePicture with propertyhash outputFormat:image with fileName and using anonymous callback | using " + camid + camtype , function(){
 					var spec = new ManualSpec(jasmine, window.document);
 		        	spec.addGoal(jasmine.getEnv().currentSpec.description);
@@ -1571,8 +1709,12 @@ describe("Camera API Manual Tests", function(){
 		            spec.addExpectation('The image should get stored at device default location and name of the image should be as set, cameraImage123. The callback data should have image of the stored image.');
 		            spec.displayScenario();
 		            spec.waitForButtonPressing("Run test");
+		            var param = {
+		            	'outputFormat':'image',
+		            	'fileName':'cameraImage123'
+		            };
 					runs(function(){
-						objCAM.takePicture({'outputFormat':'image','fileName':'cameraImage123'}, callbackFunc);
+						objCAM.takePicture(param, callbackFunc);
 					});
 					waitsFor(function(){
 						return callbackTriggered;
@@ -1599,8 +1741,11 @@ describe("Camera API Manual Tests", function(){
 			            spec.addExpectation('It should not Enable post photo capture image customizing.');
 			            spec.displayScenario();
 			            spec.waitForButtonPressing("Run test");
+			            var param = {
+			            	'enableEditing':false
+			            };
 						runs(function(){
-							objCAM.takePicture({'enableEditing':false}, callbackFunc);
+							objCAM.takePicture(param, callbackFunc);
 						});
 						waitsFor(function(){
 							return callbackTriggered;
@@ -1616,7 +1761,6 @@ describe("Camera API Manual Tests", function(){
 			                spec.waitForResponse();
 						});						
 					});
-
 					it("VT285-0052 | Should call takePicture with enableEditing as true | using " + camid + camtype , function(){
 						var spec = new ManualSpec(jasmine, window.document);
 			        	spec.addGoal(jasmine.getEnv().currentSpec.description);
@@ -1626,8 +1770,11 @@ describe("Camera API Manual Tests", function(){
 			            spec.addExpectation('It should enable post photo capture image customizing by default.');
 			            spec.displayScenario();
 			            spec.waitForButtonPressing("Run test");
+			            var param = {
+			            	'enableEditing':true
+			            };
 						runs(function(){
-							objCAM.takePicture({'enableEditing':true}, callbackFunc);
+							objCAM.takePicture(param, callbackFunc);
 						});
 						waitsFor(function(){
 							return callbackTriggered;
@@ -1654,8 +1801,14 @@ describe("Camera API Manual Tests", function(){
 		            spec.addExpectation('The viewfinder positions should be full screen and Image should be captured successfully.');
 		            spec.displayScenario();
 		            spec.waitForButtonPressing("Run test");
+		            var param = {
+		            	'previewHeight':120,
+		            	'previewWidth':160,
+		            	'previewLeft':200,
+		            	'previewTop':60
+		            };
 					runs(function(){
-						objCAM.takePicture({'previewHeight':120,'previewWidth':160,'previewLeft':200,'previewTop':60}, callbackFunc);
+						objCAM.takePicture(param, callbackFunc);
 					});
 					waitsFor(function(){
 						return callbackTriggered;
@@ -1682,8 +1835,11 @@ describe("Camera API Manual Tests", function(){
 					    spec.addExpectation('The camera screen & saved image should be in color mode.');
 					    spec.displayScenario();
 					    spec.waitForButtonPressing("Run test");
+					    var param = {
+					    	'colorModel':'rgb'
+					    };
 						runs(function(){
-							objCAM.takePicture({'colorModel':'rgb'}, callbackFunc);
+							objCAM.takePicture(param, callbackFunc);
 						});
 						waitsFor(function(){
 							return callbackTriggered;
@@ -1699,7 +1855,6 @@ describe("Camera API Manual Tests", function(){
 					        spec.waitForResponse();
 						});
 					});
-
 					it("VT285-0055 | Should call takePicture with colorModel as grayscale | using " + camid + camtype , function(){
 						var spec = new ManualSpec(jasmine, window.document);
 						spec.addGoal(jasmine.getEnv().currentSpec.description);
@@ -1708,8 +1863,11 @@ describe("Camera API Manual Tests", function(){
 					    spec.addExpectation('The camera screen & saved image should be in grayscale (Black and White).');
 					    spec.displayScenario();
 					    spec.waitForButtonPressing("Run test");
+					    var param = {
+					    	'colorModel':'grayscale'
+					    };
 						runs(function(){
-							objCAM.takePicture({'colorModel':'grayscale'}, callbackFunc);
+							objCAM.takePicture(param, callbackFunc);
 						});
 						waitsFor(function(){
 							return callbackTriggered;
@@ -1725,7 +1883,6 @@ describe("Camera API Manual Tests", function(){
 					        spec.waitForResponse();
 						});					
 					});
-
 				};
 
 				it("VT285-0056 | Should capture image by calling takePicture() method with compressionFormat jpg. | using " + camid + camtype , function(){
@@ -1736,8 +1893,11 @@ describe("Camera API Manual Tests", function(){
 				    spec.addExpectation('The imageFormat returned should be .jpg');
 				    spec.displayScenario();
 				    spec.waitForButtonPressing("Run test");
+				    var param = {
+				    	'compressionFormat':'jpg'
+				    };
 					runs(function(){
-						objCAM.takePicture({'compressionFormat':'jpg'}, callbackFunc);
+						objCAM.takePicture(param, callbackFunc);
 					});
 					waitsFor(function(){
 						return callbackTriggered;
@@ -1753,7 +1913,6 @@ describe("Camera API Manual Tests", function(){
 				        spec.waitForResponse();
 					});
 				});
-
 				it("VT285-0057 | Should capture image by calling takePicture() method with compressionFormat png. | using " + camid + camtype , function(){
 					var spec = new ManualSpec(jasmine, window.document);
 					spec.addGoal(jasmine.getEnv().currentSpec.description);
@@ -1762,8 +1921,11 @@ describe("Camera API Manual Tests", function(){
 				    spec.addExpectation('The imageFormat returned should be .png in iOS. Other platform supports only jpg');
 				    spec.displayScenario();
 				    spec.waitForButtonPressing("Run test");
+				    var param = {
+				    	'compressionFormat':'png'
+				    };
 					runs(function(){
-						objCAM.takePicture({'compressionFormat':'png'}, callbackFunc);
+						objCAM.takePicture(param, callbackFunc);
 					});
 					waitsFor(function(){
 						return callbackTriggered;
@@ -1779,7 +1941,6 @@ describe("Camera API Manual Tests", function(){
 				        spec.waitForResponse();
 					});
 				});
-
 				it("VT285-0058 | Should capture image by calling takePicture() method in portrait mode. | using " + camid + camtype , function(){
 					var spec = new ManualSpec(jasmine, window.document);
 					spec.addGoal(jasmine.getEnv().currentSpec.description);
@@ -1790,8 +1951,11 @@ describe("Camera API Manual Tests", function(){
 				    spec.addExpectation('The image captured should be displayed as dataUri in the portrait mode.');
 				    spec.displayScenario();
 				    spec.waitForButtonPressing("Run test");
+				    var param = {
+				    	'outputFormat':'dataUri'
+				    };
 					runs(function(){
-						objCAM.takePicture({'outputFormat':'dataUri'}, callbackFunc);
+						objCAM.takePicture(param, callbackFunc);
 					});
 					waitsFor(function(){
 						return callbackTriggered;
@@ -1803,13 +1967,10 @@ describe("Camera API Manual Tests", function(){
 						spec.addResult("imageWidth : ", callbackData.imageWidth);
 						spec.addResult("imageFormat : ", callbackData.imageFormat);
 						spec.addResult("imageUri : ", callbackData.imageUri);
-						document.getElementById('imageUri').src = imageUriData;
 						spec.displayResults();
 				        spec.waitForResponse();
 					});
-
 				});
-
 				it("VT285-0059 | Should capture image by calling takePicture() method in landscape mode. | using " + camid + camtype , function(){
 					var spec = new ManualSpec(jasmine, window.document);
 					spec.addGoal(jasmine.getEnv().currentSpec.description);
@@ -1820,8 +1981,11 @@ describe("Camera API Manual Tests", function(){
 				    spec.addExpectation('The image captured should be displayed as dataUri in the landscape mode.');
 				    spec.displayScenario();
 				    spec.waitForButtonPressing("Run test");
+				    var param = {
+				    	'outputFormat':'dataUri'
+				    };
 					runs(function(){
-						objCAM.takePicture({'outputFormat':'dataUri'}, callbackFunc);
+						objCAM.takePicture(param, callbackFunc);
 					});
 					waitsFor(function(){
 						return callbackTriggered;
@@ -1833,11 +1997,9 @@ describe("Camera API Manual Tests", function(){
 						spec.addResult("imageWidth : ", callbackData.imageWidth);
 						spec.addResult("imageFormat : ", callbackData.imageFormat);
 						spec.addResult("imageUri : ", callbackData.imageUri);
-						document.getElementById('imageUri').src = imageUriData;
 						spec.displayResults();
 				        spec.waitForResponse();
 					});
-
 				});
 
 				if(isWindowsMobilePlatform() || isAndroidPlatform()){
@@ -1850,8 +2012,12 @@ describe("Camera API Manual Tests", function(){
 					    spec.addExpectation('After successful capture, should play a mp3/wav file after capture.');
 					    spec.displayScenario();
 					    spec.waitForButtonPressing("Run test");
+					    var param = {
+					    	'outputFormat':'image', 
+					    	'captureSound' : sound
+					    };
 						runs(function(){
-							objCAM.takePicture({'outputFormat':'image', 'captureSound' : sound}, callbackFunc);
+							objCAM.takePicture(param, callbackFunc);
 						});
 						waitsFor(function(){
 							return callbackTriggered;
@@ -1866,12 +2032,10 @@ describe("Camera API Manual Tests", function(){
 							spec.displayResults();
 					        spec.waitForResponse();
 						});
-
 					});
 				};
 
 				if(isAndroidPlatform()){
-
 					it("VT285-0061 | Should capture image by calling takePicture() method with useSystemViewfinder false | using " + camid + camtype , function(){
 						var spec = new ManualSpec(jasmine, window.document);
 						spec.addGoal(jasmine.getEnv().currentSpec.description);
@@ -1880,8 +2044,13 @@ describe("Camera API Manual Tests", function(){
 					    spec.addExpectation('Uses the rhodes Camera to take a picture.');
 					    spec.displayScenario();
 					    spec.waitForButtonPressing("Run test");
+					    var param = {
+					    	'outputFormat':'image', 
+					    	'captureSound' : '', 
+					    	'useSystemViewfinder' : false
+					    };
 						runs(function(){
-							objCAM.takePicture({'outputFormat':'image', 'captureSound' : '', 'useSystemViewfinder' : false}, callbackFunc);
+							objCAM.takePicture(param, callbackFunc);
 						});
 						waitsFor(function(){
 							return callbackTriggered;
@@ -1897,7 +2066,6 @@ describe("Camera API Manual Tests", function(){
 					        spec.waitForResponse();
 						});
 					});
-
 					it("VT285-0062 | Should capture image by calling takePicture() method with useSystemViewfinder true | using " + camid + camtype , function(){
 						var spec = new ManualSpec(jasmine, window.document);
 						spec.addGoal(jasmine.getEnv().currentSpec.description);
@@ -1906,8 +2074,13 @@ describe("Camera API Manual Tests", function(){
 					    spec.addExpectation("Uses the system Camera application to take a picture instead of rhodes\' camera");
 					    spec.displayScenario();
 					    spec.waitForButtonPressing("Run test");
+					    var param = {
+					    	'outputFormat':'image', 
+					    	'captureSound' : '', 
+					    	'useSystemViewfinder' : true
+					    };
 						runs(function(){
-							objCAM.takePicture({'outputFormat':'image', 'captureSound' : '', 'useSystemViewfinder' : true}, callbackFunc);
+							objCAM.takePicture(param, callbackFunc);
 						});
 						waitsFor(function(){
 							return callbackTriggered;
@@ -1922,10 +2095,8 @@ describe("Camera API Manual Tests", function(){
 							spec.displayResults();
 					        spec.waitForResponse();
 						});
-
 					});
-
-				}
+				};
 
 				if(isAndroidPlatform() || isApplePlatform()){
 
@@ -1937,8 +2108,12 @@ describe("Camera API Manual Tests", function(){
 					    spec.addExpectation('Image captured should not be added to the device gallery');
 					    spec.displayScenario();
 					    spec.waitForButtonPressing("Run test");
+					    var param = {
+					    	'outputFormat':'image', 
+					    	'saveToDeviceGallery' : false
+					    };
 						runs(function(){
-							objCAM.takePicture({'outputFormat':'image', 'saveToDeviceGallery' : false}, callbackFunc);
+							objCAM.takePicture(param, callbackFunc);
 						});
 						waitsFor(function(){
 							return callbackTriggered;
@@ -1954,7 +2129,6 @@ describe("Camera API Manual Tests", function(){
 					        spec.waitForResponse();
 						});
 					});
-
 					it("VT285-0064 | Should capture image by calling takePicture() method with saveToDeviceGallery true | using " + camid + camtype , function(){
 						var spec = new ManualSpec(jasmine, window.document);
 						spec.addGoal(jasmine.getEnv().currentSpec.description);
@@ -1963,8 +2137,12 @@ describe("Camera API Manual Tests", function(){
 					    spec.addExpectation('Image captured should be added to the device gallery');
 					    spec.displayScenario();
 					    spec.waitForButtonPressing("Run test");
+					    var param = {
+					    	'outputFormat':'image', 
+					    	'saveToDeviceGallery' : true
+					    };
 						runs(function(){
-							objCAM.takePicture({'outputFormat':'image', 'saveToDeviceGallery' : true}, callbackFunc);
+							objCAM.takePicture(param, callbackFunc);
 						});
 						waitsFor(function(){
 							return callbackTriggered;
@@ -1980,15 +2158,27 @@ describe("Camera API Manual Tests", function(){
 					        spec.waitForResponse();
 						});
 					});
+				};
 
-				}
-
+				it("VT285-0067 | Should call takePicture and quit the application | using " + camid + camtype , function(){
+					var spec = new ManualSpec(jasmine, window.document);
+		        	spec.addGoal(jasmine.getEnv().currentSpec.description);
+		            spec.addStep("Press 'RunTest' button");
+		            spec.addExpectation('Camera screen should be shown to the user and after 5 secs application should get quit without any crash.');
+		            spec.displayScenario();
+		            spec.waitForButtonPressing("Run test");
+		            runs(function(){
+						objCAM.takePicture({}, callbackFunc);
+						setTimeout(function(){
+							Rho.Application.quit();
+						}, 5000);
+						spec.waitForResponse();
+					});
+				});
 			});
 
 			if(isWindowsMobilePlatform()){
-
 				describe("Miscellaneous Tests " , function() {
-
 					it("VT285-0065 | Should try to enable fullscreen after preview window | using "  + camid + camtype , function(){
 						var spec = new ManualSpec(jasmine, window.document);
 			        	spec.addGoal(jasmine.getEnv().currentSpec.description);
@@ -1997,31 +2187,37 @@ describe("Camera API Manual Tests", function(){
 			            spec.addStep("Capture will happen, then check for the returned callback status");
 			            spec.addExpectation('Preview window should remain and fullscreen window should not come up.');
 			            spec.addExpectation('Callback data for imageUri should have saved image name as \'showpreviewImage\'.');
-			            spec.addExpectation('NOTE: hidePreview will be called once pass/fail is clicked.');
 			            spec.displayScenario();
 			            spec.waitForButtonPressing("Run test");
+			            var response = false;
 						runs(function(){
 							objCAM.showPreview({'fileName':'showpreviewImage'});
 							setTimeout(function(){
 								objCAM.takePicture({'fileName':'takepictureImage'}, callbackFunc);
 							},6000);
 							setTimeout(function(){
-								objCAM.capture(callbackFunc);
-							},12000);
+								response = true;
+							},15000);							
 						});
+						waitsFor(function(){
+							return callbackTriggered || response;
+						},"waiting for callback data", 25000);
 						runs(function(){
-							spec.addResult("status : ", callbackData.status);
-							spec.addResult("message : ", callbackData.message);
-							spec.addResult("imageHeight : ", callbackData.imageHeight);
-							spec.addResult("imageWidth : ", callbackData.imageWidth);
-							spec.addResult("imageFormat : ", callbackData.imageFormat);
-							spec.addResult("imageUri : ", callbackData.imageUri);
+							objCAM.hidePreview();
+							if(callbackTriggered == true){
+								spec.addResult("status : ", callbackData.status);
+								spec.addResult("message : ", callbackData.message);
+								spec.addResult("imageHeight : ", callbackData.imageHeight);
+								spec.addResult("imageWidth : ", callbackData.imageWidth);
+								spec.addResult("imageFormat : ", callbackData.imageFormat);
+								spec.addResult("imageUri : ", callbackData.imageUri);
+							}else{
+								spec.addResult("takePicture method not triggered", "Hence test case is a pass !");
+							}
 							spec.displayResults();
 			                spec.waitForResponse();
-			                objCAM.hidePreview();
 						});
 					});
-
 					it("VT285-0066 | Persistance test for showpreview & capture | using "  + camid + camtype , function(){
 						var spec = new ManualSpec(jasmine, window.document);
 			        	spec.addGoal(jasmine.getEnv().currentSpec.description);
@@ -2032,28 +2228,40 @@ describe("Camera API Manual Tests", function(){
 			            spec.addExpectation('Preview window properties should persist and the capture call would enable flash for color camera (if available) or aim will be ON in case of imager. Captured image should be persistCapture.jpg in Application folder.');
 			            spec.displayScenario();
 			            spec.waitForButtonPressing("Run test");
-
+			            var param = {
+		            		'previewLeft': 50,
+							'previewTop':50,
+							'previewHeight': 80,
+							'previewWidth': 40,
+							'fileName': '\\Application\\persistCapture',
+							'flashMode': 'on',
+							'aimMode': 'on'
+						};
 						runs(function(){
-							objCAM.showPreview({'previewLeft': 50,
-								'previewTop':50,
-								'previewHeight': 80,
-								'previewWidth': 40,
-								'fileName': '\\Application\\persistCapture',
-								'flashMode': 'on',
-								'aimMode': 'on'});
+							objCAM.showPreview(param);
 							setTimeout(function(){
 								window.location.href="./cameraPersistPage.html?"+camtype;
 							},6000);
 							spec.waitForResponse();
 						});
-
 					});
-
+					it("VT285-0032 | Should call showPreview and quit the application | using " + camid + camtype , function(){
+						var spec = new ManualSpec(jasmine, window.document);
+			        	spec.addGoal(jasmine.getEnv().currentSpec.description);
+			            spec.addStep("Press 'RunTest' button");
+			            spec.addExpectation('Show preivew is shown to user and after 5 secs application should quit successfully.');
+			            spec.displayScenario();
+			            spec.waitForButtonPressing("Run test");
+			            runs(function(){
+							objCAM.showPreview();
+							setTimeout(function(){
+								Rho.Application.quit();
+							},5000);
+							spec.waitForResponse();
+						});
+					});
 				});
-			}
-
+			};
 		})(enumData[j]);
-
-	}
-
+	};
 });
