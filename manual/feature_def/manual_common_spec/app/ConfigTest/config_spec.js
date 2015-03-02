@@ -145,13 +145,20 @@ describe("Rho.Config module", function(){
         spec.addStep("Run the test which calls setPropertyString method with parameter Test123, 1234 and saveToFile as false.");
         spec.addStep("Call getPropertyString with Test123 param.");
         spec.addExpectation('Should not set invalid property name.');
-        spec.addExpectation('getPropertyString should not return any value.');
+        spec.addExpectation('getPropertyString should return proper error message.');
         spec.displayScenario();
         spec.waitForButtonPressing("Run test");
         runs(function(){
-            Rho.Config.setPropertyString("Test123", 1234, false);
-            var firstVal = Rho.Config.getPropertyString("Test123")
-            spec.addResult("Return value: ", firstVal);
+        	var firstVal;
+        	try {
+        		Rho.Config.setPropertyString("Test123", 1234, false);
+        		firstVal = Rho.Config.getPropertyString("Test123")
+        	}
+        	catch(err) {
+        		firstVal = err;
+        	}
+            
+            spec.addResult("getPropertyString Return value after setting to invalid: ", firstVal);
             spec.displayResults();
             spec.waitForResponse();
         });
@@ -167,9 +174,15 @@ describe("Rho.Config module", function(){
         spec.displayScenario();
         spec.waitForButtonPressing("Run test");
         runs(function(){
-            Rho.Config.setPropertyInt("Test234", "test", false);
-            var firstVal = Rho.Config.getPropertyString("Test234")
-            spec.addResult("Return value: ", firstVal);
+        	var firstVal;
+        	try {
+        		Rho.Config.setPropertyInt("Test234", "test", false);
+        		firstVal = Rho.Config.getPropertyInt("Test234")
+        	}
+        	catch(err) {
+        		firstVal = err;
+        	}
+        	spec.addResult("getPropertyInt Return value after setting to invalid: ", firstVal);
             spec.displayResults();
             spec.waitForResponse();
         });
@@ -185,9 +198,15 @@ describe("Rho.Config module", function(){
         spec.displayScenario();
         spec.waitForButtonPressing("Run test");
         runs(function(){
-            Rho.Config.setPropertyBool("Test123", 1234, false);
-            var firstVal = Rho.Config.getPropertyBool("Test123")
-            spec.addResult("Return value: ", firstVal);
+        	var firstVal;
+        	try {
+        		Rho.Config.setPropertyBool("Test123", 1234, false);
+                firstVal = Rho.Config.getPropertyBool("Test123")
+        	}
+        	catch(err) {
+        		firstVal = err;
+        	}
+            spec.addResult("getPropertyBool Return value after setting to invalid: ", firstVal);
             spec.displayResults();
             spec.waitForResponse();
         });
@@ -277,7 +296,7 @@ describe("Rho.Config module", function(){
     it("Checking the existance of the property after application restart when removed with saveToFile as false ", function(){
 		var spec = new ManualSpec(jasmine, window.document);
     	spec.addGoal("Checking the existance of the property after application restart when removed with saveToFile as false ");
-    	spec.addStep("rholog.txt should contain full_screen property");
+    	spec.addStep("rhoconfig.txt should contain full_screen property");
 		spec.addStep("Run the test which calls removeProperty method with full_screen property and saveToFile as false.");
 		spec.addStep("Check isPropertyExists second return value should be false");
 		spec.addStep("Restart the application.");
@@ -287,10 +306,10 @@ describe("Rho.Config module", function(){
         spec.waitForButtonPressing("Run test");
         runs(function(){
         	var firstVal = Rho.Config.isPropertyExists("full_screen");
-            spec.addResult("First value: ", firstVal);
+            spec.addResult("First value full_screen: ", firstVal);
             Rho.Config.removeProperty("full_screen", false);
             var secondVal = Rho.Config.isPropertyExists("full_screen");
-            spec.addResult("Second value: ", secondVal);
+            spec.addResult("Second value full_screen: ", secondVal);
 		    spec.displayResults();
 		    spec.waitForResponse();
         });
@@ -299,7 +318,7 @@ describe("Rho.Config module", function(){
 	it("Checking the existance of the property after application restart when removed with saveToFile as true ", function(){
 		var spec = new ManualSpec(jasmine, window.document);
     	spec.addGoal("Checking the existance of the property after application restart when removed with saveToFile as true ");
-    	spec.addStep("rholog.txt should contain full_screen property");
+    	spec.addStep("rhoconfig.txt should contain full_screen property");
 		spec.addStep("Run the test which calls removeProperty method with full_screen property and saveToFile as true.");
 		spec.addStep("Check isPropertyExists second return value should be false");
 		spec.addStep("Restart the application.");
@@ -309,10 +328,10 @@ describe("Rho.Config module", function(){
         spec.waitForButtonPressing("Run test");
         runs(function(){
         	var firstVal = Rho.Config.isPropertyExists("full_screen");
-            spec.addResult("First value: ", firstVal);
+            spec.addResult("First full_screen value: ", firstVal);
             Rho.Config.removeProperty("full_screen", true);
             var secondVal = Rho.Config.isPropertyExists("full_screen");
-            spec.addResult("Second value: ", secondVal);
+            spec.addResult("Second full_screen value: ", secondVal);
 		    spec.displayResults();
 		    spec.waitForResponse();
         });
