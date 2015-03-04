@@ -52,13 +52,13 @@ describe("Timer JS API Test", function() {
 	
 	it("VTXX-0001 | call isAlive  before 10 seconds |", function() {
 		runs(function(){
-			var one = Rho.Timer.create;
+			var one = Rho.Timer.create();
 			one.start(10000, one_callback);
 			setTimeout(function() {
-					expect(one.isAlive).toEqual(true);
+					expect(one.isAlive()).toEqual(true);
 				}, 7000);
 			});
-				waits(4000);
+				waits(11000);
 			runs(function(){
 			expect(onecallbackFired).toEqual(true);
 			});
