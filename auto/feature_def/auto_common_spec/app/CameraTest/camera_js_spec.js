@@ -62,12 +62,14 @@ describe("Camera JS API Test", function() {
 						};
 						expect(type).toContain(enumObject.cameraType);
 					    if(enumObject.cameraType != 'imager'){
-					    	var resolution = enumObject.supportedSizeList;
-							expect(enumObject.maxHeight).toBeGreaterThan(0);
+					    	expect(enumObject.maxHeight).toBeGreaterThan(0);
 							expect(enumObject.maxWidth).toBeGreaterThan(0);
-							expect(resolution.length).toBeGreaterThan(0);
-							expect(resolution[0].width).toBeGreaterThan(0);
-							expect(resolution[0].height).toBeGreaterThan(0);
+					    	if(!isApplePlatform()){
+						    	var resolution = enumObject.supportedSizeList;
+								expect(resolution.length).toBeGreaterThan(0);
+								expect(resolution[0].width).toBeGreaterThan(0);
+								expect(resolution[0].height).toBeGreaterThan(0);
+							};
 						};
 					});
 				});
