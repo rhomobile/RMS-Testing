@@ -83,7 +83,7 @@ var arr_camera_property = [
 	testName		:	"Set desiredHeight :2048 | 2048",
 	propertyName	:	"desiredHeight",
 	cameraTypes		:	"All",
-	OSTypes			:	"All",
+	OSTypes			:	"APPLE",
 	propertyValue	:	"2048",
 	expectedResult	:	"2048"
 },
@@ -91,7 +91,7 @@ var arr_camera_property = [
 	testName		:	"Set desiredHeight :640 | 640",
 	propertyName	:	"desiredHeight",
 	cameraTypes		:	"All",
-	OSTypes			:	"All",
+	OSTypes			:	"APPLE",
 	propertyValue	:	"640",
 	expectedResult	:	"640"
 },
@@ -99,7 +99,7 @@ var arr_camera_property = [
 	testName		:	"Set desired_height :2048 | 2048",
 	propertyName	:	"desired_height",
 	cameraTypes		:	"All",
-	OSTypes			:	"All",
+	OSTypes			:	"APPLE",
 	propertyValue	:	"2048",
 	expectedResult	:	"2048"
 },
@@ -107,7 +107,7 @@ var arr_camera_property = [
 	testName		:	"Set desired_height :640 | 640",
 	propertyName	:	"desired_height",
 	cameraTypes		:	"All",
-	OSTypes			:	"All",
+	OSTypes			:	"APPLE",
 	propertyValue	:	"640",
 	expectedResult	:	"640"
 },
@@ -115,7 +115,7 @@ var arr_camera_property = [
 	testName		:	"Set desiredWidth :1536 | 1536",
 	propertyName	:	"desiredWidth",
 	cameraTypes		:	"All",
-	OSTypes			:	"All",
+	OSTypes			:	"APPLE",
 	propertyValue	:	"1536",
 	expectedResult	:	"1536"
 },
@@ -123,7 +123,7 @@ var arr_camera_property = [
 	testName		:	"Set desiredWidth :480 | 480",
 	propertyName	:	"desiredWidth",
 	cameraTypes		:	"All",
-	OSTypes			:	"All",
+	OSTypes			:	"APPLE",
 	propertyValue	:	"480",
 	expectedResult	:	"480"
 },
@@ -131,7 +131,7 @@ var arr_camera_property = [
 	testName		:	"Set desired_width :1536 | 1536",
 	propertyName	:	"desired_width",
 	cameraTypes		:	"All",
-	OSTypes			:	"All",
+	OSTypes			:	"APPLE",
 	propertyValue	:	"1536",
 	expectedResult	:	"1536"
 },
@@ -139,7 +139,7 @@ var arr_camera_property = [
 	testName		:	"Set desired_width :480 | 480",
 	propertyName	:	"desired_width",
 	cameraTypes		:	"All",
-	OSTypes			:	"All",
+	OSTypes			:	"APPLE",
 	propertyValue	:	"480",
 	expectedResult	:	"480"
 },
