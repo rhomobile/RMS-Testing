@@ -181,7 +181,7 @@ var arr_camera_property = [
 	cameraTypes		:	"All",
 	OSTypes			:	"WINDOWS",
 	propertyValue	:	"file://application/test",
-	expectedResult	:	"file://application/test"
+	expectedResult	:	"\\file://application/test"
 },
 {
 	testName		:	"Set fileName :localpath | /mnt/sdcard/test",
@@ -195,7 +195,15 @@ var arr_camera_property = [
 	testName		:	"Set fileName :with special charecter | camera@$123",
 	propertyName	:	"fileName",
 	cameraTypes		:	"All",
-	OSTypes			:	"All",
+	OSTypes			:	"WINDOWS",
+	propertyValue	:	"camera@$123",
+	expectedResult	:	"\\camera@$123"
+},
+{
+	testName		:	"Set fileName :with special charecter | camera@$123",
+	propertyName	:	"fileName",
+	cameraTypes		:	"All",
+	OSTypes			:	"ANDROID APPLE WP8",
 	propertyValue	:	"camera@$123",
 	expectedResult	:	"camera@$123"
 },
