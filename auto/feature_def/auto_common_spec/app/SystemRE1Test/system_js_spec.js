@@ -274,6 +274,7 @@ describe("System JS API", function () {
             var counter1 = 0;
             var counter2 = 0;
             var counter3 = 0;
+            var counter4 = 0;
             var param = '';
             
             var timerCallback1 = function() {
@@ -286,6 +287,10 @@ describe("System JS API", function () {
 
             var timerCallback3 = function() {
                 counter3+= 1;
+            }
+            
+            var timerCallback4 = function() {
+                counter4+= 1;
             }
 
             var paramCallback = function(callbackparam) {
@@ -301,9 +306,9 @@ describe("System JS API", function () {
                 
             });
             
-            xit("VTxxx-xxx | Stop timer without start", function () {
-                
-
+            it("VTxxx-xxx | Stop timer without start, should behave abnormally", function () {
+            	Rho.System.stopTimer(timerCallback);
+            	expect(timercount).toEqual(0);
             });
 
             it("VTxxx-xxx | Start Timer with 5000 msec and then stop timer after second interval", function () {
@@ -316,8 +321,13 @@ describe("System JS API", function () {
 
             });
 
-            xit("VTxxx-xxx | Start Timer with 10000 msec and then stop timer before interval", function () {
-                
+            it("VTxxx-xxx | Start Timer with 10000 msec and then stop timer before interval", function () {
+            	Rho.System.startTimer(10000, timerCallback4);
+                setTimeout(function(){
+                    Rho.System.stopTimer(timerCallback4);
+                },5000);
+                waits(30000);
+                expect(counter4).toEqual(0);
 
             });
 
@@ -357,16 +367,31 @@ describe("System JS API", function () {
 
             });
 
-            xit("VTxxx-xxx | Start Timer With Null as interval", function () {
-                
+            it("VTxxx-xxx | Start Timer With Null as interval", function () {
+                try {
+                	Rho.System.startTimer(null);
+                }
+                catch(err){
+                	expect(err).toEqual("Wrong number of arguments: 1 instead of 3");
+                }
 
             });
-            xit("VTxxx-xxx | Start Timer Invalid Callback", function () {
-                
+            it("VTxxx-xxx | Start Timer Invalid Callback", function () {
+            	try {
+                	Rho.System.startTimer(1000, invalidCallback);
+                }
+                catch(err){
+                	expect(err).toContain("undefined");
+                }
 
             });
-            xit("VTxxx-xxx | Start Timer without parameter", function () {
-                
+            it("VTxxx-xxx | Start Timer without parameter", function () {
+            	try {
+                	Rho.System.startTimer();
+                }
+                catch(err){
+                	expect(err).toEqual("Wrong number of arguments: 0 instead of 3");
+                }
 
             });
 

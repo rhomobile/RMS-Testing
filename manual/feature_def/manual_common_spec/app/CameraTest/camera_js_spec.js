@@ -546,10 +546,11 @@ describe("Camera API Manual Tests", function(){
 	            var cameratype;
 	            runs(function(){
 					cameratype = Rho.Camera.getCameraByType('back');
-				});
-				setTimeout(function(){
 					cameratype.takePicture({}, callbackFunc);
-				},5000);
+				});
+/*				setTimeout(function(){
+					cameratype.takePicture({}, callbackFunc);
+				},5000);*/
 				waitsFor(function(){
 					return callbackTriggered;
 				},"waiting for callback data", callbackTimeout);
@@ -612,10 +613,11 @@ describe("Camera API Manual Tests", function(){
 	            var cameratype;
 	            runs(function(){
 					cameratype = Rho.Camera.getCameraByType('front');
-				});
-				setTimeout(function(){
 					cameratype.takePicture({}, callbackFunc);
-				},5000);
+				});
+/*				setTimeout(function(){
+					cameratype.takePicture({}, callbackFunc);
+				},5000);*/
 				waitsFor(function(){
 					return callbackTriggered;
 				},"waiting for callback data", callbackTimeout);
@@ -1310,14 +1312,9 @@ describe("Camera API Manual Tests", function(){
 			            spec.displayScenario();
 			            spec.waitForButtonPressing("Run test");
 						runs(function(){
-							var data;
-							function cb (cdData) {
-								data = cdData;
-							}
 							objCAM.takePicture({}, callbackFunc);
 							setTimeout(function(){
 								Rho.ScreenOrientation.rightHanded();
-								Rho.ScreenOrientation.setScreenOrientationEvent(cb);
 							},4000);
 						});
 						waitsFor(function(){
@@ -1330,14 +1327,12 @@ describe("Camera API Manual Tests", function(){
 							spec.addResult("imageWidth : ", callbackData.imageWidth);
 							spec.addResult("imageFormat : ", callbackData.imageFormat);
 							spec.addResult("imageUri : ", callbackData.imageUri);
-							spec.addResult("ScreenOrientation CB : ", data);
 							spec.displayResults();
 			                spec.waitForResponse();
 						});
 						runs(function(){
 							Rho.ScreenOrientation.normal();
 						});
-
 					});
 				};
 
@@ -1792,7 +1787,7 @@ describe("Camera API Manual Tests", function(){
 					});
 				};
 
-				it("VT285-0053 | Should call takePicture with previewHeight, previewLeft,previewTop, previewWidth  and callback | using " + camid + camtype , function(){
+				it("VT285-0053 | Should call takePicture with previewHeight, previewLeft, previewTop, previewWidth and callback | using " + camid + camtype , function(){
 					var spec = new ManualSpec(jasmine, window.document);
 		        	spec.addGoal(jasmine.getEnv().currentSpec.description);
 		        	spec.addPrecondition("takePicture set with previewHeight as 120, previewLeft 200,previewTop as 60, previewWidth as 160");

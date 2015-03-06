@@ -18,20 +18,19 @@ describe('Rho.Config module', function() {
 	    	Rho.Config.configPath = "rho/apps/app/ConfigTest/rhoconfig.txt";
 	    	var newConfigPath = Rho.Config.configPath;
 	    	expect(newConfigPath).toEqual('rho/apps/app/ConfigTest/rhoconfig.txt');
+	    	Rho.Config.loadFromFile();
 	    	var result = Rho.Config.getPropertyString("start_path")
 			expect(result).toEqual('/app/ConfigTest/specRunner.html');
 			
 	    });
 	    
 	    
-	    it("Should not set invalid rhoconfig path", function() {
+	    it("Should not behave abnormally on setting invalid rhoconfig path", function() {
 	    	Rho.Config.configPath = 'rho/apps/rhoconfig.txt';
 	    	var defaultConfigPath = Rho.Config.configPath;
 	    	Rho.Config.configPath = "/app//Invalid!@#rhoconfig.txt";
 	    	var newConfigPath = Rho.Config.configPath;
-	    	expect(newConfigPath).toEqual(defaultConfigPath);
-	    	var result = Rho.Config.getPropertyString("start_path")
-	    	expect(result).toEqual("/app/index.html");
+	    	expect(newConfigPath).toEqual("/app//Invalid!@#rhoconfig.txt");
 	    });
 
 	    it("isPropertyExists method should return true if start_path property exists in rhoconfig file ", function() {
@@ -62,16 +61,19 @@ describe('Rho.Config module', function() {
 	    });
 
 	    it("loadFromFile method should load default rhoconfig file after setting to different rhoconfig path", function() {
-	    	Rho.Config.configPath = "rho/apps/app/ConfigTest/rhoconfig.txt";
+	    	Rho.Config.configPath = 'rho/apps/rhoconfig.txt';
+	    	Rho.Config.loadFromFile();
 	    	var returnStr = Rho.Config.getPropertyString('start_path');
-	    	var returnInt = Rho.Config.getPropertyString('MinSeverity');
+	    	var returnInt = Rho.Config.getPropertyInt('MinSeverity');
+	    	Rho.Config.configPath = "rho/apps/app/ConfigTest/rhoconfig.txt";
 	    	Rho.Config.loadFromFile();
 	    	expect(Rho.Config.getPropertyString('start_path')).not.toEqual(returnStr);
-	    	expect(Rho.Config.getPropertyString('MinSeverity')).not.toEqual(returnInt);
+	    	expect(Rho.Config.getPropertyInt('MinSeverity')).not.toEqual(returnInt);
 	    });
 
 	    it("Should return conflicts when rhoconfig file contains multiple logserver, MaxLogFileSize properties", function() {
 	    	Rho.Config.configPath = "rho/apps/app/ConfigTest/rhoconfig.txt";
+	    	Rho.Config.loadFromFile();
 	    	expect(Rho.Config.isPropertyExists("logserver")).toEqual(true);
     		var returnVal = Rho.Config.getConflicts();
 	    	var expectedVal = {'logserver': ['http://rhologs.heroku.com','http://google.com','http://yahoo.com'], 'MaxLogFileSize': [5000000,1000000]};
@@ -86,6 +88,7 @@ describe('Rho.Config module', function() {
 
 	    it("removeProperty should remove logserver property when multiple logserver property exists in rhoconfig", function() {
 	    	Rho.Config.configPath = "rho/apps/app/ConfigTest/rhoconfig.txt";
+	    	Rho.Config.loadFromFile();
 	    	if(Rho.Config.isPropertyExists("logserver")) {
 	    		Rho.Config.removeProperty("logserver", false);
 		    	expect(Rho.Config.isPropertyExists("logserver")).toEqual(false);
@@ -97,6 +100,7 @@ describe('Rho.Config module', function() {
 	    }); 
 
 	    it("Should not return any conflicts when multiple properties are commented", function() {
+	    	Rho.Config.configPath = 'rho/apps/rhoconfig.txt';
 	    	Rho.Config.loadFromFile();
 	    	var expectedVal = null;
 	    	var returnVal = Rho.Config.getConflicts();
@@ -105,6 +109,7 @@ describe('Rho.Config module', function() {
 	    
 	    it("Should set rhoconfig to default path and checking the original start path", function() {
 	    	Rho.Config.configPath = "rho/apps/rhoconfig.txt";
+	    	Rho.Config.loadFromFile();
 	    	var newConfigPath = Rho.Config.configPath;
 	    	var actual = Rho.Config.getPropertyString("start_path")
 	    	expect(newConfigPath).toEqual('rho/apps/rhoconfig.txt');
@@ -125,6 +130,8 @@ describe('Rho.Config module', function() {
 
 	            if (isTestApplicable(suitablePlatforms)) {
 	                it(testName+"getPropertyString method", function () {
+	                	Rho.Config.configPath = "rho/apps/rhoconfig.txt";
+	        	    	Rho.Config.loadFromFile();
 	                	var newConfigPath = Rho.Config.configPath;
 	                	var actual = Rho.Config.getPropertyString(propertyName)
 						expect(newConfigPath).toEqual('rho/apps/rhoconfig.txt');

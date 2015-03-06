@@ -83,7 +83,7 @@ var arr_camera_property = [
 	testName		:	"Set desiredHeight :2048 | 2048",
 	propertyName	:	"desiredHeight",
 	cameraTypes		:	"All",
-	OSTypes			:	"All",
+	OSTypes			:	"APPLE",
 	propertyValue	:	"2048",
 	expectedResult	:	"2048"
 },
@@ -91,7 +91,7 @@ var arr_camera_property = [
 	testName		:	"Set desiredHeight :640 | 640",
 	propertyName	:	"desiredHeight",
 	cameraTypes		:	"All",
-	OSTypes			:	"All",
+	OSTypes			:	"APPLE",
 	propertyValue	:	"640",
 	expectedResult	:	"640"
 },
@@ -99,7 +99,7 @@ var arr_camera_property = [
 	testName		:	"Set desired_height :2048 | 2048",
 	propertyName	:	"desired_height",
 	cameraTypes		:	"All",
-	OSTypes			:	"All",
+	OSTypes			:	"APPLE",
 	propertyValue	:	"2048",
 	expectedResult	:	"2048"
 },
@@ -107,7 +107,7 @@ var arr_camera_property = [
 	testName		:	"Set desired_height :640 | 640",
 	propertyName	:	"desired_height",
 	cameraTypes		:	"All",
-	OSTypes			:	"All",
+	OSTypes			:	"APPLE",
 	propertyValue	:	"640",
 	expectedResult	:	"640"
 },
@@ -115,7 +115,7 @@ var arr_camera_property = [
 	testName		:	"Set desiredWidth :1536 | 1536",
 	propertyName	:	"desiredWidth",
 	cameraTypes		:	"All",
-	OSTypes			:	"All",
+	OSTypes			:	"APPLE",
 	propertyValue	:	"1536",
 	expectedResult	:	"1536"
 },
@@ -123,7 +123,7 @@ var arr_camera_property = [
 	testName		:	"Set desiredWidth :480 | 480",
 	propertyName	:	"desiredWidth",
 	cameraTypes		:	"All",
-	OSTypes			:	"All",
+	OSTypes			:	"APPLE",
 	propertyValue	:	"480",
 	expectedResult	:	"480"
 },
@@ -131,7 +131,7 @@ var arr_camera_property = [
 	testName		:	"Set desired_width :1536 | 1536",
 	propertyName	:	"desired_width",
 	cameraTypes		:	"All",
-	OSTypes			:	"All",
+	OSTypes			:	"APPLE",
 	propertyValue	:	"1536",
 	expectedResult	:	"1536"
 },
@@ -139,41 +139,9 @@ var arr_camera_property = [
 	testName		:	"Set desired_width :480 | 480",
 	propertyName	:	"desired_width",
 	cameraTypes		:	"All",
-	OSTypes			:	"All",
+	OSTypes			:	"APPLE",
 	propertyValue	:	"480",
 	expectedResult	:	"480"
-},
-{
-	testName		:	"Set desiredHeight :-2048 | -2048",
-	propertyName	:	"desiredHeight",
-	cameraTypes		:	"All",
-	OSTypes			:	"All",
-	propertyValue	:	"-2048",
-	expectedResult	:	"-2048"
-},
-{
-	testName		:	"Set desiredHeight :-640 | -640",
-	propertyName	:	"desiredHeight",
-	cameraTypes		:	"All",
-	OSTypes			:	"All",
-	propertyValue	:	"-640",
-	expectedResult	:	"-640"
-},
-{
-	testName		:	"Set desiredWidth :-1536 | -1536",
-	propertyName	:	"desiredWidth",
-	cameraTypes		:	"All",
-	OSTypes			:	"All",
-	propertyValue	:	"-1536",
-	expectedResult	:	"-1536"
-},
-{
-	testName		:	"Set desiredWidth :-480 | -480",
-	propertyName	:	"desiredWidth",
-	cameraTypes		:	"All",
-	OSTypes			:	"All",
-	propertyValue	:	"-480",
-	expectedResult	:	"-480"
 },
 {
 	testName		:	"Set enableEditing :false | false",
@@ -213,7 +181,7 @@ var arr_camera_property = [
 	cameraTypes		:	"All",
 	OSTypes			:	"WINDOWS",
 	propertyValue	:	"file://application/test",
-	expectedResult	:	"file://application/test"
+	expectedResult	:	"\\file://application/test"
 },
 {
 	testName		:	"Set fileName :localpath | /mnt/sdcard/test",
@@ -227,7 +195,15 @@ var arr_camera_property = [
 	testName		:	"Set fileName :with special charecter | camera@$123",
 	propertyName	:	"fileName",
 	cameraTypes		:	"All",
-	OSTypes			:	"All",
+	OSTypes			:	"WINDOWS",
+	propertyValue	:	"camera@$123",
+	expectedResult	:	"\\camera@$123"
+},
+{
+	testName		:	"Set fileName :with special charecter | camera@$123",
+	propertyName	:	"fileName",
+	cameraTypes		:	"All",
+	OSTypes			:	"ANDROID APPLE WP8",
 	propertyValue	:	"camera@$123",
 	expectedResult	:	"camera@$123"
 },
@@ -288,7 +264,7 @@ var arr_camera_property = [
 	expectedResult	:	"auto"
 },
 {
-	testName		:	"Set flashMode :redEye | redEye",
+	testName		:	"Set flashMode :redEye | redEye (applicable only if device supports)",
 	propertyName	:	"flashMode",
 	cameraTypes		:	"All",
 	OSTypes			:	"ANDROID WP8",
@@ -312,7 +288,7 @@ var arr_camera_property = [
 	expectedResult	:	"auto"
 },
 {
-	testName		:	"Set flash_mode :redEye | redEye",
+	testName		:	"Set flash_mode :redEye | redEye (applicable only if device supports)",
 	propertyName	:	"flash_mode",
 	cameraTypes		:	"All",
 	OSTypes			:	"ANDROID WP8",
@@ -583,18 +559,18 @@ var arr_camera_property_inval = [
 	propertyName	:	"desiredHeight",
 	cameraTypes		:	"All",
 	OSTypes			:	"All",
-	DefaultValue    :   "250",
+	DefaultValue    :   "360",
 	propertyValue	:	"",
-	expectedResult	:	"250"
+	expectedResult	:	"360"
 },
 {
 	testName		:	"Set desiredWidth :empty value| empty value",
 	propertyName	:	"desiredWidth",
 	cameraTypes		:	"All",
 	OSTypes			:	"All",
-	DefaultValue    :   "250",
+	DefaultValue    :   "480",
 	propertyValue	:	"",
-	expectedResult	:	"250"
+	expectedResult	:	"480"
 },
 {
 	testName		:	"Set enableEditing : invalid",
@@ -690,7 +666,7 @@ var arr_camera_property_inval = [
 	testName		:	"Set fileName :invalid path | invalid path",
 	propertyName	:	"fileName",
 	cameraTypes		:	"All",
-	OSTypes			:	"All",
+	OSTypes			:	"WINDOWS APPLE ANDROID",
 	DefaultValue    :   "camimage",
 	propertyValue	:	"/somedrive/somefolder/InvalidFolder",
 	expectedResult	:	"camimage"
@@ -699,7 +675,7 @@ var arr_camera_property_inval = [
 	testName		:	"Set fileName :empty path | empty path",
 	propertyName	:	"fileName",
 	cameraTypes		:	"All",
-	OSTypes			:	"All",
+	OSTypes			:	"WINDOWS APPLE ANDROID",
 	DefaultValue    :   "camimage",
 	propertyValue	:	"",
 	expectedResult	:	""
@@ -707,47 +683,37 @@ var arr_camera_property_inval = [
 ];
 
 var camCallback = function (data){
- getcallbackdata = data ;
- callbackstatus = true; 
+	getcallbackdata = data;
+	callbackstatus = true; 
 };
 
 var getApplicableProperties = function (objCamType){
-	
 	var deviceCameraType = objCamType.getProperty('cameraType');
 	var finalCAMObj1 = [];
-
 	for (var i = 0; i < arr_camera_property.length ; i++){
-
 		if((arr_camera_property[i]['OSTypes'] == 'All') || (arr_camera_property[i]['OSTypes'].indexOf(Rho.System.platform) != -1)){
 			var camType = arr_camera_property[i]['cameraTypes']
-
 			if(camType == "All")
 			{ 
 				finalCAMObj1.push(arr_camera_property[i]);
 			}
 		}
 	}
-
 	return finalCAMObj1;
 }
 
 var getApplicableInvalidProperties = function (objCamType){
-	
 	var deviceCameraType = objCamType.getProperty('cameraType');
 	var finalCAMObj2 = [];
-
 	for (var i = 0; i < arr_camera_property_inval.length ; i++){
-
 		if((arr_camera_property_inval[i]['OSTypes'] == 'All') || (arr_camera_property_inval[i]['OSTypes'].indexOf(Rho.System.platform) != -1)){
 			var camType = arr_camera_property_inval[i]['cameraTypes']
-
 			if(camType == "All")
 			{ 
 				finalCAMObj2.push(arr_camera_property_inval[i]);
 			}
 		}
 	}
-
 	return finalCAMObj2;
 }
 
