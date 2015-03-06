@@ -168,9 +168,9 @@ end
       records = getTestDB().select_from_table('changed_values','*', 'update_type' => 'update')
       records.length.should == 1
     end
-    
+
   end
-  
+
   it "should create records with no attribs in database" do
     getTestDB().delete_all_from_table('object_values')
     res = getTestDB().select_from_table('object_values',"*")
@@ -190,7 +190,7 @@ end
     @account2.name.should == vars['name']
     @account2.industry.should == vars['industry']
     @account2.annual_revenue.should == vars['annual_revenue'].to_s
-	
+
   end
 
   it "should create a record with apostrophe" do
@@ -201,7 +201,7 @@ end
     @account2.name.should == vars['name']
     @account2.industry.should == vars['industry']
   end
-  
+
   it "should create multiple records" do
     vars = {"name"=>"some new record", "industry"=>"electronics"}
     @account1 = getAccount.create(vars)
@@ -288,7 +288,7 @@ end
     new_count = getAccount.count
     (count - 1).should == new_count
   end
-  
+
   it "should partially update a record" do
     new_attributes = {"name"=>"Mobio US"}
     @account  = getAccount.find("44e804f2-4933-4e20-271c-48fcecd9450d")
@@ -568,15 +568,15 @@ end
 
   it "should retrieve and modify one record" do
     @acct = getAccount.find('44e804f2-4933-4e20-271c-48fcecd9450d')
-    
+
     @acct.name.should == "Mobio India"
     @acct.industry.should == "Technology"
-    
+
     @acct.name = "Rhomobile US"
-    
+
     @acct.name.should == "Rhomobile US"
   end
-  
+
   it "should return an empty value for a non-existent attribute" do
     @acct = getAccount.find('44e804f2-4933-4e20-271c-48fcecd9450d')
     @acct.foobar.should be_nil
@@ -1593,9 +1593,9 @@ if !defined?(RHO_WP7)
     }.should raise_error(ArgumentError)
 
     if $spec_settings[:schema_model]
-        lambda {
-            getCase().find_by_sql("INSERT INTO #{getCase.to_s()}(object,wrong_address) values ('1234', 'my_addr')")
-        }.should raise_error(ArgumentError)
+      lambda {
+        getCase().find_by_sql("INSERT INTO #{getCase.to_s()}(object,wrong_address) values ('1234', 'my_addr')")
+      }.should raise_error(RuntimeError, "table Case_s has no column named wrong_address")
     end
   end
 end
@@ -1606,7 +1606,7 @@ end
     if !$spec_settings[:schema_model]
       props = Rho::RhoConfig.sources()[getCase.to_s]
       props['freezed'] = true
-    
+
         props['freezed'].should == true
         #props['property'].should_not be_nil
         #props['property']['description'].should_not be_nil
