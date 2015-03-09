@@ -29,6 +29,4 @@ RhoLogSpec.txt
 **/app/local_server.js
 **/rholog-*.txt
 **/faillog.txt
-**/public/api/
 server_spec_reporter/logs
-
