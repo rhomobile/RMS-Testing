@@ -4,8 +4,8 @@ var arr_camera_property = [
 	propertyName	:	"captureSound",
 	cameraTypes		:	"All",
 	OSTypes			:	"WINDOWS",
-	propertyValue	:	"file://application/alarm.wav",
-	expectedResult	:	"file://application/alarm.wav"
+	propertyValue	:	"//application/alarm.wav",
+	expectedResult	:	"//application/alarm.wav"
 },
 {
 	testName		:	"Set  captureSound :localpath and mp3 file | application/alarm.mp3",
@@ -180,8 +180,8 @@ var arr_camera_property = [
 	propertyName	:	"fileName",
 	cameraTypes		:	"All",
 	OSTypes			:	"WINDOWS",
-	propertyValue	:	"file://application/test",
-	expectedResult	:	"\\file://application/test"
+	propertyValue	:	"//application/test",
+	expectedResult	:	"\\//application/test"
 },
 {
 	testName		:	"Set fileName :localpath | /mnt/sdcard/test",
@@ -487,27 +487,9 @@ var arr_camera_property_inval = [
 	propertyName	:	"captureSound",
 	cameraTypes		:	"All",
 	OSTypes			:	"WINDOWS",
-	DefaultValue    :   "file://application/alarm2.wav",
+	DefaultValue    :   "//application/alarm2.wav",
 	propertyValue	:	"",
 	expectedResult	:	""
-},
-{
-	testName		:	"Set  captureSound :invalid path",
-	propertyName	:	"captureSound",
-	cameraTypes		:	"All",
-	OSTypes			:	"WINDOWS",
-	DefaultValue    :   "file://application/alarm1.wav",
-	propertyValue	:	"file://application/inval",
-	expectedResult	:	"file://application/inval"
-},
-{
-	testName		:	"Set  captureSound :invalid path ",
-	propertyName	:	"captureSound",
-	cameraTypes		:	"All",
-	OSTypes			:	"ANDROID",
-	DefaultValue    :   "/mnt/sdcard/alarm.mp3",
-	propertyValue	:	"/file://application/inval",
-	expectedResult	:	"/mnt/sdcard/alarm.mp3"
 },
 {
 	testName		:	"Set  captureSound :empty ",
@@ -661,15 +643,6 @@ var arr_camera_property_inval = [
 	DefaultValue    :   "false",
 	propertyValue	:	"",
 	expectedResult	:	"false"
-},
-{
-	testName		:	"Set fileName :invalid path | invalid path",
-	propertyName	:	"fileName",
-	cameraTypes		:	"All",
-	OSTypes			:	"WINDOWS APPLE ANDROID",
-	DefaultValue    :   "camimage",
-	propertyValue	:	"/somedrive/somefolder/InvalidFolder",
-	expectedResult	:	"camimage"
 },
 {
 	testName		:	"Set fileName :empty path | empty path",
