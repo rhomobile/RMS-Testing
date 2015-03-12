@@ -371,7 +371,7 @@ describe("Camera API Manual Tests", function(){
 			            spec.displayScenario();
 			            spec.waitForButtonPressing("Run test");
 						runs(function(){
-							Ruby.call('Cameratest','take_picture?'+camtype+'&flashMode=redEye');
+							Ruby.call('Cameratest','take_picture?'+camtype+'&flashMode=redEye&outputFormat=dataUri');
 			                spec.waitForResponse();
 						});			
 					});
@@ -480,7 +480,7 @@ describe("Camera API Manual Tests", function(){
 		                spec.waitForResponse();
 					});	
 				});
-				it("VT285-0050 | Should call takePicture with propertyhash outputFormat:image with fileName and using anonymous callback | using " + camtype , function(){
+				it("VT285-0050 | Should call takePicture with propertyhash outputFormat:image with fileName | using " + camtype , function(){
 					var spec = new ManualSpec(jasmine, window.document);
 		        	spec.addGoal(jasmine.getEnv().currentSpec.description);
 		            spec.addStep("Press 'RunTest' button");

@@ -7,9 +7,9 @@ class CameratestController < Rho::RhoController
 
 $camera = nil
 camerapath = Rho::Application.modelFolderPath("Cameratest")
-sampleimage = Rho::RhoFile.join(camerapath, "/samplemedia/zebratechnologies.jpg")
-@soundwav = Rho::RhoFile.join(camerapath, "/samplemedia/cheering.wav")
-@soundmp3 = Rho::RhoFile.join(camerapath, "/samplemedia/glassbreak.mp3")
+@@sampleimage = Rho::RhoFile.join(camerapath, "/samplemedia/zebratechnologies.jpg")
+@@soundwav = Rho::RhoFile.join(camerapath, "/samplemedia/cheering.wav")
+@@soundmp3 = Rho::RhoFile.join(camerapath, "/samplemedia/glassbreak.mp3")
 
 def set_camera
 	camera_type = @params['camera_type']
@@ -88,17 +88,18 @@ def copyto_gallery
 			#Rho::Camera.copyImageToDeviceGallery('/programfiles/invalid.jpg')
 		end
 	else
-		Rho::Camera.copyImageToDeviceGallery(sampleimage)
+		Rho::Camera.copyImageToDeviceGallery(@@sampleimage)
 	end
 end
 
 def camera_enumerate
-	Rho::Camera.enumerate(url_for(:action => :get_callback))
-	
-	# @obj = Rho::Camera.enumerate()
-	# @obj.each do |camObj|
-	# 	Alert.show_popup(camObj.cameraType.to_s)
-	# end	
+	#Rho::Camera.enumerate(url_for(:action => :get_callback))
+	@callback_data = " "
+	@obj = Rho::Camera.enumerate()
+	@obj.each do |camObj|
+		@callback_data += camObj.cameraType.to_s + "; "
+	end
+	Rho::WebView.executeJavascript('document.getElementById("expected").innerHTML= "'+@callback_data+'";')
 end
 
 def get_camera_bytype
@@ -118,7 +119,7 @@ def show_preview_capture
 	@props['desiredHeight'] = @params['desiredHeight'].to_i if @params['desiredHeight']
 	@props['desiredWidth'] = @params['desiredWidth'].to_i if @params['desiredWidth']
 	if @params['captureSound']
-		@props['captureSound'] = @soundwav
+		@props['captureSound'] = @@soundwav
 	else
 		@props['captureSound'] = ''
 	end
@@ -258,12 +259,14 @@ def take_picture
 		elsif @params['enableEditing'] == 'false'
 			@props['enableEditing'] = false
 		end
+	# elsif (Rho::System.platform == 'APPLE')
+	# 	@props['enableEditing'] = false
 	end
 	if @params['captureSound']
 		if @params['captureSound'] == 'wm'
-			@props['captureSound'] = @soundwav
+			@props['captureSound'] = @@soundwav
 		else
-			@props['captureSound'] = @soundmp3
+			@props['captureSound'] = @@soundmp3
 		end
 	else
 		@props['captureSound'] = ''
@@ -302,7 +305,7 @@ end
 def take_picture_rotate
 	set_camera
 	$camera.takePicture(url_for(:action => :camera_callback))
-	sleep 10
+	#sleep 10
 	Rho::ScreenOrientation.rightHanded()
 end
 
