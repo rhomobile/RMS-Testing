@@ -6,7 +6,7 @@ require 'helpers/browser_helper'
 class CameratestController < Rho::RhoController
 
 $camera = nil
-camerapath = Rho::Application.modelFolderPath("CameraTest")
+camerapath = Rho::Application.modelFolderPath("Cameratest")
 sampleimage = Rho::RhoFile.join(camerapath, "/samplemedia/zebratechnologies.jpg")
 @soundwav = Rho::RhoFile.join(camerapath, "/samplemedia/cheering.wav")
 @soundmp3 = Rho::RhoFile.join(camerapath, "/samplemedia/glassbreak.mp3")
@@ -50,12 +50,10 @@ end
 
 def get_callback
 	@callback_data = " "
-	@params['result'].each do |enum|
-		@callback_data += enum.cameraType + "; "
+ 	#Alert.show_popup(@params['result'][0].cameraType.to_s)
+	@params['result'].each_with_index do |enum, index|
+		@callback_data += "cameraType- " + enum.cameraType.to_s + "; "
 	end
-	# for i in 0..(@params.size - 1)
-	# 	@cameralist += @params['result'][i].getProperty('cameraType')
-	# end
 	Rho::WebView.executeJavascript('document.getElementById("expected").innerHTML= "'+@callback_data+'";')
 end
 
@@ -311,7 +309,7 @@ end
 def take_picture_quit
 	set_camera
 	$camera.takePicture({}, url_for(:action => :camera_callback))
-	sleep 10
+	sleep 5
 	Rho::Application.quit()
 end
 
