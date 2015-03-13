@@ -1,12 +1,12 @@
 	var sys_get_property = [
 	
 	{
-		testName		:	"VT200-0688 | call getProperty with country | US",
+		testName		:	"VT200-0420 | call getProperty with country | US",
 		propertyName	:	"country",
 		osType			: 	["WINDOWS","ANDROID","APPLE","WP8","WINDOWS_DESKTOP"]
 	},
 	{
-		testName		:	"VT200-0687 | call getProperty with deviceName | MC75",
+		testName		:	"VT200-0507 | call getProperty with deviceName | MC75",
 		propertyName	:	"deviceName",
 		osType			: 	["WINDOWS","ANDROID","APPLE","WP8","WINDOWS_DESKTOP"]
 	}
@@ -129,12 +129,12 @@
 	var sys_get_properties = [
 	
 	{
-		testName		:	"VT200-0688 | call getproperties with country | ",
+		testName		:	"VT200-0508 | call getproperties with country | ",
 		propertyName	:	"country",
 		osType			: 	["WINDOWS","ANDROID","APPLE","WP8","WINDOWS_DESKTOP"]
 	},
 	{
-		testName		:	"VT200-0689 | call getproperties with deviceName | ",
+		testName		:	"VT200-0431 | call getproperties with deviceName | ",
 		propertyName	:	"deviceName",
 		osType			: 	["WINDOWS","ANDROID","APPLE","WP8","WINDOWS_DESKTOP"]
 	},
@@ -221,7 +221,7 @@
 	},
 	*/
 	{
-		testName		:	"VT200-0677 | call getproperties with platform | ",
+		testName		:	"VT200-0509 | call getproperties with platform | ",
 		propertyName	:	"platform",
 		osType			: 	["WINDOWS","ANDROID","APPLE","WP8","WINDOWS_DESKTOP"]
 	}

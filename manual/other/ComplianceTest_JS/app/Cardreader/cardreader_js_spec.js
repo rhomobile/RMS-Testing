@@ -50,11 +50,11 @@ describe("Card Reader Test", function() {
 	};
   
 	
-	it("VT200-0665 | MSR Card data All Tracks with sync callback |", function() {
+	it("VT200-0408 | MSR Card data All Tracks with sync callback |", function() {
 
 		runs(function()
 		{
-			dispTestCaseRunning("VT200-0665 - MSR Card data All Tracks with sync callback - before swiping card put the cursor inside the text box");
+			dispTestCaseRunning("VT200-0408 - MSR Card data All Tracks with sync callback - before swiping card put the cursor inside the text box");
 			dispExpectedResult("Please wait 11 seconds for the Card Reader to open");
 			Rho.CardReader.open();
 			setTimeout(function() {
@@ -94,11 +94,11 @@ describe("Card Reader Test", function() {
 
 	});
 
-	it("VT200-0666 | MSR Card data All Tracks |", function() {
+	it("VT200-0409 | MSR Card data All Tracks |", function() {
 
 		runs(function()
 		{
-			dispTestCaseRunning("VT200-0666 - MSR Card data All Tracks");
+			dispTestCaseRunning("VT200-0409 - MSR Card data All Tracks");
             dispExpectedResult("Please wait 11 seconds for the Card Reader to open");
 			//Rho.CardReader.open({},callbackCardReader);
 			Rho.CardReader.open(callbackCardReader);
@@ -139,145 +139,13 @@ describe("Card Reader Test", function() {
 
 	});
 
-	xit("VT286-0136 | MSR Close |", function() {
-		runs(function()
-		{
-			dispTestCaseRunning("VT286-0136 - MSR Close");
-			dispExpectedResult("Please wait 11 seconds for the Card Reader to open");
-			//Rho.CardReader.open({},callbackCardReader);
-			Rho.CardReader.open(callbackCardReader);
-			setTimeout(function() {
-				openFlag = true;
-			}, 11000);
-		});
-
-		waitsFor(function()
-		{
-			return openFlag;
-		}, '12sec wait to open the CardReader', 12000);
-
-		runs(function()
-		{
-			Rho.CardReader.close();
-			dispExpectedResult("Please swipe a card. Readevent should not fire because msr is closed");
-		});
-
-		waitsFor(function()
-		{
-			return captured;
-		}, 'user did not respond', 240000);
-
-		runs(function()
-		{
-			expect(testResult).toEqual(true);
-			Rho.CardReader.close();
-			setTimeout(function() {
-			closeFlag = true;
-			}, 5000);
-		});
-
-		waitsFor(function()
-		{
-		   return closeFlag;
-		},'5sec Wait to close the CardReader', 6000);
-
-	});
-
-    xit("VT286-0137 | Checking MSR Open |", function() {
-
-		runs(function()
-		{
-			dispTestCaseRunning("VT286-0137 - MSR Open");
-			dispExpectedResult("Please wait 11 seconds for the Card Reader to open");
-			Rho.CardReader.open();
-			setTimeout(function() {
-				openFlag = true;
-			}, 11000);
-		});
-
-		waitsFor(function()
-		{
-			return openFlag;
-		}, '12sec wait to open the CardReader', 12000);
-
-		runs(function()
-		{
-            dispExpectedResult("Please select the text box and swipe a card. Data should be returned as keystrokes inside the textbox");
-		});
-
-		waitsFor(function()
-		{
-			return captured;
-		}, 'user did not respond', 240000);
-
-		runs(function()
-		{
-			expect(testResult).toEqual(true);
-			Rho.CardReader.close();
-			setTimeout(function() {
-			closeFlag = true;
-			}, 5000);
-		});
-
-		waitsFor(function()
-		{
-		   return closeFlag;
-		},'5sec Wait to close the CardReader', 6000);
-
-	});	
-	
-	it("VT286-0xxx | AutoEnter true |", function() {
-
-		runs(function()
-		{
-			dispTestCaseRunning("VT286-0xxx - AutoEnter true");
-			dispExpectedResult("Please wait 11 seconds for the Card Reader to open");
-			Rho.CardReader.open();
-			setTimeout(function() {
-				openFlag = true;
-			}, 11000);
-		});
-
-		waitsFor(function()
-		{
-			return openFlag;
-		}, '12sec wait to open the CardReader', 12000);
-
-		runs(function()
-		{
-			Rho.CardReader.autoEnter=true;
-            dispExpectedResult("Please select the text area and swipe a card. Enter should  be appended to any data returned as keystrokes by the Card Reader");
-		});
-
-		waitsFor(function()
-		{
-			return captured;
-		}, 'user did not respond', 240000);
-
-		runs(function()
-		{
-			expect(testResult).toEqual(true);
-			Rho.CardReader.close();
-			setTimeout(function() {
-			closeFlag = true;
-			}, 5000);
-		});
-
-		waitsFor(function()
-		{
-		   return closeFlag;
-		},'5sec Wait to close the CardReader', 6000);
-
-	});
-
-
 	if(Rho.System.platform == 'WINDOWS')
 	{
-		it("VT200-0667 | pinEntry true DCR only|", function() {
+		it("VT200-0410 | pinEntry true DCR only", function() {
 	
 			runs(function()
 			{
-				dispTestCaseRunning("VT200-0667 - pinEntry true DCR only and swipe financial card only");
+				dispTestCaseRunning("VT200-0410 - pinEntry true DCR only and swipe financial card only");
 				dispExpectedResult("Please wait 11 seconds for the Card Reader to open");
 				//Rho.CardReader.open({},callbackCardReader);
 				Rho.CardReader.open(callbackCardReader);
@@ -321,11 +189,11 @@ describe("Card Reader Test", function() {
 
 	if(Rho.System.platform == 'ANDROID')
 	{
-		it("VT200-0668 |encryption encrypted with financial card|", function() {
+		it("VT200-0411 |encryption encrypted with financial card|", function() {
 	
 			runs(function()
 			{
-				dispTestCaseRunning("VT200-0668 |encryption encrypted with financial card");
+				dispTestCaseRunning("VT200-0411 |encryption encrypted with financial card");
 				//Rho.CardReader.open({},encrypted_callback);
 				Rho.CardReader.open(encrypted_callback);
 				setTimeout(function() {
@@ -355,4 +223,48 @@ describe("Card Reader Test", function() {
 	
 		});
 	}
+
+	it("VT286-0521 | AutoEnter true", function() {
+
+		runs(function()
+		{
+			dispTestCaseRunning("VT286-0521 - AutoEnter true");
+			dispExpectedResult("Please wait 11 seconds for the Card Reader to open");
+			Rho.CardReader.open();
+			setTimeout(function() {
+				openFlag = true;
+			}, 11000);
+		});
+
+		waitsFor(function()
+		{
+			return openFlag;
+		}, '12sec wait to open the CardReader', 12000);
+
+		runs(function()
+		{
+			Rho.CardReader.autoEnter=true;
+            dispExpectedResult("Please select the text area and swipe a card. Enter should  be appended to any data returned as keystrokes by the Card Reader");
+		});
+
+		waitsFor(function()
+		{
+			return captured;
+		}, 'user did not respond', 240000);
+
+		runs(function()
+		{
+			expect(testResult).toEqual(true);
+			Rho.CardReader.close();
+			setTimeout(function() {
+			closeFlag = true;
+			}, 5000);
+		});
+
+		waitsFor(function()
+		{
+		   return closeFlag;
+		},'5sec Wait to close the CardReader', 6000);
+
+	});
 });

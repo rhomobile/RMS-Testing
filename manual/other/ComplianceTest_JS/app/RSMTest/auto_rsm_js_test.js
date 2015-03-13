@@ -75,7 +75,7 @@ var rsm_get_property_unknown_return = [
 },
 */
 {
-	testName		:	"VT200-0675 | Get rsmBatteryId | ",
+	testName		:	"VT200-0418 | Get rsmBatteryId | ",
 	propertyName	:	"rsmBatteryId",
 	scannerTypes	:	"RSM Bluetooth",
 	OSTypes			:	"WINDOWS",

@@ -33,10 +33,10 @@ describe("Signal Manual FD  Tests", function () {
 
 if (isAnyButApplePlatform()) {
    
-    it("VT200-0703|Signal showIcon with all properties|", function () {
+    it("VT200-0445 | Signal showIcon with all properties|", function () {
 
         runs(function () {
-            dispTestCaseRunning("VT200-0703 - Watch the change in the properties  of signal icon");
+            dispTestCaseRunning("VT200-0445 - Watch the change in the properties  of signal icon");
             dispExpectedResult("Signalicon should be shown with layout left and red in color horizontal and vertical position at 20 and 40 ");
           Rho.SignalIndicators.showIcon({left: 20,top: 40,layout:'left',color:'#FF0000'});
 
@@ -52,10 +52,10 @@ if (isAnyButApplePlatform()) {
     });
 }
     
-    it("VT200-0704|WlanStatus with default callback |", function () {
+    it("VT200-0446 | WlanStatus with default callback |", function () {
 
         runs(function () {
-            dispTestCaseRunning("VT200-0704 - see whether all the return parameters are retrieved in callback and check whether event is fired for every 5 sec default");
+            dispTestCaseRunning("VT200-0446 - see whether all the return parameters are retrieved in callback and check whether event is fired for every 5 sec default");
             dispExpectedResult("All the retrun parameters with desired value should be returned and the event should be fired for every 5sec default ");
           Rho.SignalIndicators.wlanStatus(statusCallback);
         
