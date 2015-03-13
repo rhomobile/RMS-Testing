@@ -409,7 +409,7 @@ describe("Test spec for D180 payment device support", function(){
 		//Callback Paramaters (Hash): ```{"status":"error","errorName":"TIMED_OUT"}```  
 		it("VT377-011 - Should not read data from MagStripe card with readMode-Insert and callback triggered with status:error and errorName:TIMED_OUT", function(){
 			var spec = new ManualSpec(jasmine, window.document);
-			spec.addGoal("VT377-011 - Should return errorId:15 and description:TIMED_OUT with callback, when MagStrip card is inserted with SmartCard slot");
+			spec.addGoal("VT377-011 - Should return status:error and errorName:TIMED_OUT with callback, when MagStrip card is inserted with SmartCard slot");
 			spec.addPrecondition("Payment device is paired via bluetooth to the device.");
 			spec.addStep("Press 'RunTest' button");
 			spec.addStep("Insert a valid MagStripe card in to the smart card slot");
@@ -521,7 +521,7 @@ describe("Test spec for D180 payment device support", function(){
 		//Callback Paramaters (Hash): ```{"status":"error","errorName":"DEVICE_NOT_ENABLED"}```  
 		it("VT377-013 - Should trigger callback with status:error and errorName:DEVICE_NOT_ENABLED when trying to readCardData() before open() method.", function(){
 			var spec = new ManualSpec(jasmine, window.document);
-			spec.addGoal("VT377-013 - Should return errorId:8 and description:DEVICE_NOT_ENABLED with callback, when MagStripe card swiped with paymentDevice");
+			spec.addGoal("VT377-013 - Should return status:error and errorName:DEVICE_NOT_ENABLED with callback, when MagStripe card swiped with paymentDevice");
 			spec.addPrecondition("Payment device is paired via bluetooth to the device.");
 			spec.addStep("Press 'RunTest' button");
 			spec.addStep("Swipe a valid MagStripe with paymentDevice");
@@ -634,7 +634,7 @@ describe("Test spec for D180 payment device support", function(){
 		//Callback Paramaters (Hash): ```{"status":"error","errorName":"TIMED_OUT"}```  
 		it("VT377-015 - Should trigger callback with status:error and errorName:TIMED_OUT when MagStripe card is not swiped at all while method readCardData() is called", function(){
 			var spec = new ManualSpec(jasmine, window.document);
-			spec.addGoal("VT377-015 - Should return errorId:9 and description:TIMED_OUT with callback, when MagStripe card not swiped with paymentDevice");
+			spec.addGoal("VT377-015 - Should return status:error and errorName:TIMED_OUT with callback, when MagStripe card not swiped with paymentDevice");
 			spec.addPrecondition("Payment device is paired via bluetooth to the device.");
 			spec.addStep("Press 'RunTest' button");
 			spec.addStep("Do not swipe any valid MagStripe card with paymentDevice");
@@ -692,7 +692,7 @@ describe("Test spec for D180 payment device support", function(){
 			spec.addPrecondition("Payment device is paired via bluetooth to the device.");
 			spec.addStep("Press 'RunTest' button");
 			spec.addStep("Do not Insert any valid SmartCard with paymentDevice");
-			spec.addExpectation("Semi auto test to check the callback function triggered with errorId:9 and description:TIMED_OUT");
+			spec.addExpectation("Semi auto test to check the callback function triggered with status:error9 and errorName:TIMED_OUT");
 			spec.displayScenario();
             spec.waitForButtonPressing("Run test");
             var openCBTriggered = false;
@@ -747,7 +747,7 @@ describe("Test spec for D180 payment device support", function(){
 			spec.addPrecondition("Payment device is paired via bluetooth to the device.");
 			spec.addStep("Press 'RunTest' button");
 			spec.addStep("Do not touch any valid EMVContactless with paymentDevice");
-			spec.addExpectation("Semi auto test to check the callback function triggered with errorId:9 and description:TIMED_OUT");
+			spec.addExpectation("Semi auto test to check the callback function triggered with status:error9 and errorName:TIMED_OUT");
 			spec.displayScenario();
             spec.waitForButtonPressing("Run test");
             var openCBTriggered = false;
@@ -798,10 +798,10 @@ describe("Test spec for D180 payment device support", function(){
 		//Callback Paramaters (Hash): ```{"status":"error","errorName":"INVALID_VALUE"}```  
 		it("VT377-018 - Should trigger callback with status:error and errorName:INVALID_VALUE when invalid parameters passed with readCardData()", function(){
 			var spec = new ManualSpec(jasmine, window.document);
-			spec.addGoal("VT377-018 - Should return errorId:4 and description:INVALID_VALUE with callback, when no parameter is passed with readCardData()");
+			spec.addGoal("VT377-018 - Should return status:error and errorName:INVALID_VALUE with callback, when no parameter is passed with readCardData()");
 			spec.addPrecondition("Payment device is paired via bluetooth to the device.");
 			spec.addStep("Press 'RunTest' button");
-			spec.addExpectation("Semi auto test to check the callback function triggered with errorId:4 and description:INVALID_VALUE");
+			spec.addExpectation("Semi auto test to check the callback function triggered with status:error and errorName:INVALID_VALUE");
 			spec.displayScenario();
             spec.waitForButtonPressing("Run test");
             var openCBTriggered = false;
@@ -1257,7 +1257,7 @@ describe("Test spec for D180 payment device support", function(){
 			spec.addStep("Press 'RunTest' button");
 			spec.addStep("Observe that Menu list is prompted for user selection with  no Mesage Line.");
 			spec.addStep("Select myMenu2 menu from the list");
-			spec.addExpectation("Semi auto test case to check callback is triggered with status:success, choice:myMenu2,errorId:'' and description:'' send with callback function.");
+			spec.addExpectation("Semi auto test case to check callback is triggered with status:success, choice:myMenu2,status:error'' and errorName:'' send with callback function.");
 			spec.displayScenario();
             spec.waitForButtonPressing("Run test");
 			var openCBTriggered = false;
@@ -1491,7 +1491,7 @@ describe("Test spec for D180 payment device support", function(){
 		//Callback Parameters (Hash) : ```{"status":"error","errorName":"DEVICE_NOT_ENABLED"}```
 		it("VT377-030 - Should send proper error status with the callback when \"promptMenu()\" method called before opening the device.", function(){
 			var spec = new ManualSpec(jasmine, window.document);
-			spec.addGoal("VT377-030 - Should send errorId:18 description:ENER_KEY_PRESSED with the callback by pressing entery key with the device in promptMenu.");
+			spec.addGoal("VT377-030 - Should send status:error errorName:ENER_KEY_PRESSED with the callback by pressing entery key with the device in promptMenu.");
 			spec.addPrecondition("Ensure Payment device is not paired with bluetooth to the device.");
 			spec.addStep("Press 'RunTest' button");
 			spec.addExpectation("Press Cancel key instead of selecting any menu item from the list.");
