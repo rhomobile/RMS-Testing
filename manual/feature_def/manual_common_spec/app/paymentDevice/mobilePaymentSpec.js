@@ -2384,6 +2384,7 @@ describe("Test spec for D180 payment device support", function(){
 				return openCBTriggered;
 			}, "Waits for device to open", 10000);
 			runs(function(){
+				var getLowBatteryThreshold = Rho.MobilePayment.getLowBatteryThreshold();
 				var batLevelData = Rho.MobilePayment.getBatteryLevel();
 				var data = Rho.MobilePayment.setLowBatteryThreshold((batLevelData.batteryLevel) + 1, "battery Low");
 				setTimeout(function(){
@@ -2418,8 +2419,10 @@ describe("Test spec for D180 payment device support", function(){
 				return readCBTriggered;
 			}, "Waits for readCardData", 20000);
 			runs(function(){
+				data.Rho.MobilePayment.setLowBatteryThreshold(getLowBatteryThreshold, "battery Low");
 				expect(cbResult.status).toEqual("error");
 				expect(cbResult.errorName).toEqual("LOW_POWER_OPERATION_CANCELLED");
+
 			});
 		});
 
