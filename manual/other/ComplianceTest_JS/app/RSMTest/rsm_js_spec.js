@@ -79,11 +79,11 @@ describe("RSM Manual Test", function() {
 	})(enumData[i],arrReadSCN);
 	
 	describe("RSM Test with ", function() {
-		it("VT200-0673 | call commandRemoteScanner with Disconnect |" , function() {
+		it("VT200-0416 | call commandRemoteScanner with Disconnect |" , function() {
 
 			runs(function()
 			{
-				setObjective("VT200-0673 | call commandRemoteScanner with Disconnect |");
+				setObjective("VT200-0416 | call commandRemoteScanner with Disconnect |");
 				setInstruction("Check for RSM is connected or not with calling enable <br /> connectionIdleTimeout to 10000<br />scan a barcode<br />commandRemoteScanner with Disconnect(9 sec wait)<br />check for RSM is conncted or not with calling enable");
 				setExpected("Commands BT Scanner to disconnect from its connected device. It should ask for BT pairing while trying to re-enable");
 				enumData[i].connectionIdleTimeout = 10000;
@@ -126,11 +126,11 @@ describe("RSM Manual Test", function() {
 			});
 		});
 
-		it("VT200-0674 | call commandRemoteScanner with unpair |" , function() {
+		it("VT200-0417 | call commandRemoteScanner with unpair |" , function() {
 
 			runs(function()
 			{
-				setObjective("VT200-0674 | call commandRemoteScanner with unpair |");
+				setObjective("VT200-0417 | call commandRemoteScanner with unpair |");
 				setInstruction("Check for RSM is connected or not with calling enable <br /> connectionIdleTimeout to 10000<br />scan a barcode<br />commandRemoteScanner with unpair(9 sec wait)<br />check for RSM is conncted or not with calling enable");
 				setExpected("Commands BT Scanner to disconnect from its connected device. It should ask for BT pairing while trying to re-enable");
 				enumData[i].connectionIdleTimeout = 10000;

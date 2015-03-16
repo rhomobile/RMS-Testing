@@ -546,10 +546,11 @@ describe("Camera API Manual Tests", function(){
 	            var cameratype;
 	            runs(function(){
 					cameratype = Rho.Camera.getCameraByType('back');
-				});
-				setTimeout(function(){
 					cameratype.takePicture({}, callbackFunc);
-				},5000);
+				});
+/*				setTimeout(function(){
+					cameratype.takePicture({}, callbackFunc);
+				},5000);*/
 				waitsFor(function(){
 					return callbackTriggered;
 				},"waiting for callback data", callbackTimeout);
@@ -612,10 +613,11 @@ describe("Camera API Manual Tests", function(){
 	            var cameratype;
 	            runs(function(){
 					cameratype = Rho.Camera.getCameraByType('front');
-				});
-				setTimeout(function(){
 					cameratype.takePicture({}, callbackFunc);
-				},5000);
+				});
+/*				setTimeout(function(){
+					cameratype.takePicture({}, callbackFunc);
+				},5000);*/
 				waitsFor(function(){
 					return callbackTriggered;
 				},"waiting for callback data", callbackTimeout);

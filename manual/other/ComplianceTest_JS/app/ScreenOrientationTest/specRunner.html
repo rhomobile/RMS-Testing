@@ -10,12 +10,14 @@
     <script type="text/javascript" charset="utf-8" src="../../public/jquery/jquery-1.6.4.min.js"></script>
     <script type="text/javascript" charset="utf-8" src="../../public/jquery/jquery.json-2.3.min.js"></script>
 
-    <link type="image/png" rel="shortcut icon" href="../../public/jasmine/jasmine_favicon.png">
-    <link type="text/css" rel="stylesheet" href="../../public/jasmine/jasmine.css">
-    <script type="text/javascript" src="../../public/jasmine/jasmine.js"></script>
-    <script type="text/javascript" src="../../public/jasmine/jasmine-html.js"></script>
-    <script type="text/javascript" src="../../public/jasmine/jasmine.junit_reporter.js"></script>
-   	<script type="text/javascript" src="../../public/api/rhoapi-modules.js"></script>
+    <link type="image/png" rel="shortcut icon" href="/public/jasmine/jasmine_favicon.png">
+    <link type="text/css" rel="stylesheet" href="/public/jasmine/jasmine.css">
+    <script type="text/javascript" src="/public/jasmine/jasmine.js"></script>
+    <script type="text/javascript" src="/public/jasmine/jasmine-html.js"></script>
+    <script type="text/javascript" src="/public/jasmine/jasmine.junit_reporter.js"></script>
+    <script type="text/javascript" src="../helpers/rhologReporter.js"></script>
+   	<script type="text/javascript" src="/public/api/rhoapi-modules.js"></script>
+    <script type="text/javascript" src="../helpers/manualSpecLauncher.js"></script>
 
 	<style>
 	#detailsdiv {
@@ -24,11 +26,11 @@
     color: #8B0000;
     display: block;
     font-weight: bold;
-    left: 80px;
+    left: 30px;
     padding: 10px;
     position: fixed;
     text-align: center;
-    top: 100px;
+    top: 200px;
     width: 180px;
 	}
 	</style>
@@ -55,34 +57,36 @@
             return htmlReporter.specFilter(spec);
         };
 
-        var currentWindowOnload = window.onload;
-        window.onload = function() {
-          if (currentWindowOnload) {
-            currentWindowOnload();
-          }
+            var currentWindowOnload = window.onload;
+            window.onload = function () {
+                if (currentWindowOnload) {
+                    currentWindowOnload();
+                }
+                //
+                // jasmineEnv.execute();
+                var launcher = ManualSpecLauncher(jasmine, window.document);
+                if (window.location.href.indexOf('?') != -1){
+                    jasmineEnv.execute();
 
-          execJasmine();
-        };
+                }
 
-        function execJasmine() {
-          jasmineEnv.execute();
-        }
-
-    })();
-	</script>
+            };
+        })();
+    </script>
 
 </head>
 <body>
+<h1>ScreenOrientation Compliance JS Tests</h1>
 <br/><br/>
-<div id="detailsdiv"></div>
 <br/><br/>
 <div id="test">
 <ul id="myList">
 </ul>
+<div id="detailsdiv"></div>
 <ul id="myList2">
 </ul>
 </div>
-<br/><br/><br/><br/> 
+<br/>
 <span id="fooBar">&nbsp;</span>
 <span id='result'>
 <table>

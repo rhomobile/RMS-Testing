@@ -16,7 +16,8 @@
     <script type="text/javascript" src="../../public/jasmine/jasmine-html.js"></script>
     <script type="text/javascript" src="../../public/jasmine/jasmine.junit_reporter.js"></script>
     <script type="text/javascript" src="../helpers/rhologReporter.js"></script>
-   	<script type="text/javascript" src="../../public/api/rhoapi-modules.js"></script>
+   	<script type="text/javascript" src="/public/api/rhoapi-modules.js"></script>
+    <script type="text/javascript" src="../helpers/manualSpecLauncher.js"></script>
 
 	<style>
 	#detailsdiv {
@@ -57,25 +58,27 @@
             return htmlReporter.specFilter(spec);
         };
 
-        var currentWindowOnload = window.onload;
-        window.onload = function() {
-          if (currentWindowOnload) {
-            currentWindowOnload();
-          }
+            var currentWindowOnload = window.onload;
+            window.onload = function () {
+                if (currentWindowOnload) {
+                    currentWindowOnload();
+                }
+                //
+                // jasmineEnv.execute();
+                var launcher = ManualSpecLauncher(jasmine, window.document);
+                if (window.location.href.indexOf('?') != -1){
+                    jasmineEnv.execute();
 
-          execJasmine();
-        };
+                }
 
-        function execJasmine() {
-          jasmineEnv.execute();
-        }
-
-    })();
-	</script>
+            };
+        })();
+    </script>
 
 </head>
 <body>
-<br/><br/>
+<h1>KeyState Compliance JS Tests</h1>
+<br/>
 <div id="detailsdiv"></div>
 <br/><br/>
 <div id="test">
@@ -87,7 +90,7 @@
 <br/><br/><br/><br/>
 <span id="fooBar">&nbsp;</span>
 <span id='result'>
-<br/><br/><br/><br/>
+<br/><br/>
 <table>
     <tr>
         <td><button onclick="captureResult(true)">Pass</button></td>

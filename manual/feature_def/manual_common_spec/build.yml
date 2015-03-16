@@ -14,9 +14,6 @@ iphone:
   ajax_api_bridge: false
   sdk: "iphonesimulator8.1"
   configuration: "Release"
-  provisionprofile: 
-  codesignidentity: 
-  entitlements: 
 #extensions: ["sensor", "signature", "barcode", "mediaplayer", "mediacapture"]
   extensions:
     - sensor

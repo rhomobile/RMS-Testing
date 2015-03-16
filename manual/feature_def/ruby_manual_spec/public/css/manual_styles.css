@@ -1,0 +1,26 @@
+body {font-family:  Tahoma, Helvetica, Arial, sans-serif; font-size: smaller}
+
+
+.method_tests {border: 1px solid grey; margin-bottom: 10px; padding-bottom: 10px}
+.container  {border: 1px solid grey; margin-bottom: 10px; padding: 3px}
+.method_name {background-color: silver; font-weight: bold; padding: 5px}
+.method_desc {font-style: italic; font-size: smaller; padding: 5px}
+.test_scenario {margin-bottom: 10px; border-bottom: 1px solid}
+.test_scenario_controls {}
+.test_scenario_desc {}
+.test_scenario_number {margin-left: 10px; margin-right: 10px}
+.result {color: darkgreen}
+
+
+.test_case_container {border: 1px solid grey; margin-bottom: 10px; padding-bottom: 10px}
+.test_case_number {background-color: silver; font-weight: bold; padding: 2px}
+.test_case_method {background-color: #d3d3d3; font-weight: bold; padding: 2px}
+.test_case_method:before {content: 'Method: '}
+.test_case_description {background-color: #d3d3d3}
+/* .test_case_description:before {content: 'Description: '} */
+.test_case_requirements:before {content: 'Requirements: '}
+.test_case_procedure:before {content: 'Procedure: '}
+.test_case_result { border: 1px solid}
+.failed {background-color: red}
+.passed {background-color: lightgreen}
+.test_case_expected:before {content:"Expected:";text-decoration:underline; font-weight: bold;padding: 2px}

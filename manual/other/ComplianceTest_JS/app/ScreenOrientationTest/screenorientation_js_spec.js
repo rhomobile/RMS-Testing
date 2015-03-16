@@ -30,63 +30,73 @@ describe("Screen Orientation Test", function() {
 
 	}
 
-                      /*  I moved this test to first because on start we do not have defined callback, after test with defined callback we still have defined callback !   So only on begin stage we do not have defined callback ! */
-	it("VT200-0672 | Set autoRotate  without callback rotate the device manualy |", function() {
+/*  I moved this test to first because on start we do not have defined callback, after test with defined callback we still have defined callback !   So only on begin stage we do not have defined callback ! */
+		it("VT200-0415 | Set autoRotate  without callback rotate the device manualy |", function() {
 
-		runs(function()
-		{
-            dispCurrentProcess("VT200-0672 | Set autoRotate  without callback rotate the device manualy<br>Rotate the device in all direction manually");
+			runs(function()
+			{
+	            dispCurrentProcess("VT200-0415 | Set autoRotate  without callback rotate the device manualy");
+			});
+
+			waitsFor(function()
+			{
+				return captured;
+			}, 'The Screen Orientation should display', 20000);
+
+			runs(function()
+			{
+				expect(testResult).toEqual(true);
+			});
 		});
 
-		waitsFor(function()
-		{
-			return captured;
-		}, 'The Screen Orientation should display', 20000);
+		if (isAnyButApplePlatform()) {
+
+        it("VT200-0413 | Test Screen Orientation rightHanded with callback |", function() {
 
 		runs(function()
 		{
-			expect(testResult).toEqual(true);
-		});
-	});
-
-/*
-	it("VT281-0911| Set autoRotate as false and try to rotate the device screen manually in all direction |", function() {
-
-		runs(function()
-		{
-			dispCurrentProcess("VT281-0911| Set autoRotate as false and try to rotate the device screen manually in all direction<br>but its should not rotate in any direction");
+			//dispCurrentProcess("VT281-0905 | Test Screen Orientation rightHanded with callback |");
 			Rho.ScreenOrientation.setScreenOrientationEvent(screenorientation_callback);
-			Rho.ScreenOrientation.autoRotate = false;
+			Rho.ScreenOrientation.rightHanded();
 		});
 
 		waitsFor(function()
 		{
-			return captured;
-		}, 'The Screen Orientation should display', 20000);
-
-		runs(function()
-		{
-			expect(testResult).toEqual(true);
+			return ( (callbackFired == true) && (orientationType == "rightHanded") )
+		}, 'The Screen Orientation should display', 10000);
 		});
-	});
-*/
-	it("VT281-0xxx| Set autoRotate as true and rotate the device in all direction |", function() {
 
+        it("VT200-0414 | Test Screen Orientation normal with callback |", function() {
 		runs(function()
 		{
-		    dispCurrentProcess("VT281-0xxx| Set autoRotate as true and rotate the device in all direction<br>Rotate the device in all direction mannually");
+			//dispCurrentProcess("VT281-0908 | Test Screen Orientation normal with callback |");
 			Rho.ScreenOrientation.setScreenOrientationEvent(screenorientation_callback);
+			Rho.ScreenOrientation.normal();
 		});
 
 		waitsFor(function()
 		{
-			return captured;
-		}, 'The Screen Orientation should display', 20000);
-
-		runs(function()
-		{
-			expect(testResult).toEqual(true);
+			return ( (callbackFired == true) && (orientationType == "normal") )
+		}, 'The Screen Orientation should display', 10000);
 		});
-	});
+    }
+		it("VT200-0541| Set autoRotate as true and rotate the device in all direction |", function() {
+
+			runs(function()
+			{
+			    dispCurrentProcess("VT200-0541| Set autoRotate as true and rotate the device in all direction");
+				Rho.ScreenOrientation.setScreenOrientationEvent(screenorientation_callback);
+			});
+
+			waitsFor(function()
+			{
+				return captured;
+			}, 'The Screen Orientation should display', 20000);
+
+			runs(function()
+			{
+				expect(testResult).toEqual(true);
+			});
+		});
 
 });

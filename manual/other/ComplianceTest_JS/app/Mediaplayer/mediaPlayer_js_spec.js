@@ -8,9 +8,9 @@ describe("Media Player", function () {
 	});
 
 	// This test relies on the device having an audio file
-	it("VT200-0646-Play Audio(valid file local)", function () {
+	it("VT200-0389-Play Audio(valid file local)", function () {
 	
-		dispTestCaseRunning("VT200-0646-Play | Audio(valid file local");
+		dispTestCaseRunning("VT200-0389-Play | Audio(valid file local)");
 		dispExpectedResult("You should hear the music");
 		
 		//Common Method implemented to wait for tester to run the test.Code available in specHelper.js
@@ -36,33 +36,11 @@ describe("Media Player", function () {
 
 	});
 
-	xit("VTXXX-0005-Play Audio(mp3 file)", function () {
-
-		dispTestCaseRunning("VTXXX-0005 | Play Audio(mp3 file)");
-		dispExpectedResult("You should hear the music");
-		
-		//Common Method implemented to wait for tester to run the test.Code available in specHelper.js
-		_result.waitToRunTest();
-		
-		runs(function () {
-			var audiolocation = Rho.RhoFile.join(audioMediaPath, 'super_android_tune.mp3');
-
-			Rho.Mediaplayer.start(audiolocation);
-			setTimeout(function () {
-				Rho.Mediaplayer.stop();
-			}, 5000);
-		});
-		
-		//Common Method implemented to wait for tester to make it pass or fail.Code available in specHelper.js
-		_result.waitForResponse();
-
-	});
-
 	if (isAnyButApplePlatform()) {
 
-		it("VT200-0647-Play Audio(valid file local) and Stop", function () {
+		it("VT200-0390-Play Audio(valid file local) and Stop", function () {
 			
-			dispTestCaseRunning("VT200-0647 | Play Audio(valid file local) and Stop");
+			dispTestCaseRunning("VT200-0390 | Play Audio(valid file local) and Stop");
 			dispExpectedResult("Playing should stops after 3 seconds");
 		
 			//Common Method implemented to wait for tester to run the test.Code available in specHelper.js
@@ -93,9 +71,9 @@ describe("Media Player", function () {
 	 **	MediaPlayer Video Tests
 	 **/			
 	 
-	it("VT200-0648-Play Video(valid file local)", function () {
+	it("VT200-0391-Play Video(valid file local)", function () {
 
-		dispTestCaseRunning("VT200-0648 | Play Video(valid file local)");
+		dispTestCaseRunning("VT200-0391 | Play Video(valid file local)");
 		dispExpectedResult("You should see video");
 		
 		//Common Method implemented to wait for tester to run the test.Code available in specHelper.js
@@ -120,34 +98,11 @@ describe("Media Player", function () {
 		_result.waitForResponse();
 	});
 
-	xit("VTXXX-00019-Play Video(mp4 file)", function () {
-		
-		dispTestCaseRunning("VTXXX-00019 | Play Video(mp4 file)");
-		dispExpectedResult("You should see video");
-		
-		//Common Method implemented to wait for tester to run the test.Code available in specHelper.js
-		_result.waitToRunTest();
-		
-		runs(function () {
-			var platform = Rho.System.platform;
-			var Videolocation = Rho.RhoFile.join(videoMediaPath, "test.mp4");
-
-			Rho.Mediaplayer.startvideo(Videolocation);
-			setTimeout(function () {
-				Rho.Mediaplayer.stopvideo();
-			}, 5000);
-		});
-		
-		//Common Method implemented to wait for tester to make it pass or fail.Code available in specHelper.js
-		_result.waitForResponse();
-
-	});
-
 	if (isAnyButApplePlatform()) {
 
-		it("VT200-0649-Play Video(valid file local) and Stop", function () {
+		it("VT200-0392-Play Video(valid file local) and Stop", function () {
 			
-			dispTestCaseRunning("VT200-0649-Play Video(valid file local) and Stop");
+			dispTestCaseRunning("VT200-0392-Play Video(valid file local) and Stop");
 			dispExpectedResult("Playing should stop after 3 seconds");
 			
 			//Common Method implemented to wait for tester to run the test.Code available in specHelper.js
@@ -179,9 +134,9 @@ describe("Media Player", function () {
 
 	if (!isWindowsMobilePlatform() && isAnyButApplePlatform()) {
 
-		it("VT200-0650-Play Ringtone(valid file)", function () {
+		it("VT200-0393-Play Ringtone(valid file)", function () {
 		
-			dispTestCaseRunning("VT200-0650 | Play Ringtone(valid file)");
+			dispTestCaseRunning("VT200-0393 | Play Ringtone(valid file)");
 			dispExpectedResult("You should hear a ringtone");
 			
 			//Common Method implemented to wait for tester to run the test.Code available in specHelper.js
@@ -202,9 +157,9 @@ describe("Media Player", function () {
 
 		});
 		
-		it("VT200-XXXX- STOP Ringtone", function () {
+		it("VT200-0394-Stop Ringtone", function () {
 		
-			dispTestCaseRunning("VT200- | STOP Ringtone Applicable if ringtone currently playing");
+			dispTestCaseRunning("VT200-0394 | STOP Ringtone Applicable if ringtone currently playing");
 			dispExpectedResult("It should stop the currently playing ringtone");
 			
 			//Common Method implemented to wait for tester to run the test.Code available in specHelper.js
@@ -219,20 +174,5 @@ describe("Media Player", function () {
 
 		});
 
-		xit("VTXXX-00034-Play ringtone(Call Stop without Start)", function () {
-
-			dispTestCaseRunning("VTXXX-00034 | Play ringtone(Call Stop without Start)");
-			dispExpectedResult("App should not crashes");
-			
-			//Common Method implemented to wait for tester to run the test.Code available in specHelper.js
-			_result.waitToRunTest();
-			
-			runs(function () {
-				Rho.Mediaplayer.stopRingTone();	
-			});
-			
-			//Common Method implemented to wait for tester to make it pass or fail.Code available in specHelper.js
-			_result.waitForResponse();
-		});
 	}
 });

@@ -5,7 +5,6 @@ applog: RhoLogSpec.txt
 version: 1.1
 
 vendor: rhomobile
-sdkversion: 4.1
 
 iphone:
   configuration: Release
@@ -14,8 +13,7 @@ iphone:
   codesignidentity:
   entitlements:
 android:
-  version: 2.3.3
-  # version: 4.4.2
+  version: 4.4.2
 
 wp:
   productid: 'b5499381-42a8-0130-78de-3caec51bd50e'
