@@ -252,7 +252,7 @@ describe("Test spec for D180 payment device support", function(){
 					"messageTitle":"Message Title",		//Message Title
 					"message1":"This is message 1.",	//Message one
 					"message2":"This is message 2.",	//Message two
-					"readTimeOut":5000
+					"readTimeOut":15000
 				};
 				var readCB = function(data){
 					spec.addResult("Status : ", data.status);
@@ -409,11 +409,11 @@ describe("Test spec for D180 payment device support", function(){
 		//Callback Paramaters (Hash): ```{"status":"error","errorName":"TIMED_OUT"}```  
 		it("VT377-011 - Should not read data from MagStripe card with readMode-Insert and callback triggered with status:error and errorName:TIMED_OUT", function(){
 			var spec = new ManualSpec(jasmine, window.document);
-			spec.addGoal("VT377-011 - Should return status:error and errorName:TIMED_OUT with callback, when MagStrip card is inserted with SmartCard slot");
+			spec.addGoal("VT377-011 - Should return status:error and errorName:CARD_INSERTION_ERROR with callback, when MagStrip card is inserted with SmartCard slot");
 			spec.addPrecondition("Payment device is paired via bluetooth to the device.");
 			spec.addStep("Press 'RunTest' button");
 			spec.addStep("Insert a valid MagStripe card in to the smart card slot");
-			spec.addExpectation("Semi auto test to check the callback function triggered with status:error and errorName:TIMED_OUT");
+			spec.addExpectation("Semi auto test to check the callback function triggered with status:error and errorName:CARD_INSERTION_ERROR");
 			spec.displayScenario();
             spec.waitForButtonPressing("Run test");
 			var openCBTriggered = false;
@@ -454,7 +454,7 @@ describe("Test spec for D180 payment device support", function(){
 			},"wait for readcard timeout", 25000);
 			runs(function(){
 				expect(cbResult.status).toEqual("error");
-				expect(cbResult.errorName).toEqual("TIMED_OUT");
+				expect(cbResult.errorName).toEqual("CARD_INSERTION_ERROR");
 			});
 		});
 
@@ -2025,12 +2025,12 @@ describe("Test spec for D180 payment device support", function(){
 		//Callback : mandatory
 		it("VT377-040 - FalseOk-Should send proper error status with the callback when timedout without any user interaction with promptMessage", function(){
 			var spec = new ManualSpec(jasmine, window.document);
-			spec.addGoal("VT377-040 - Should send proper error status with the callback when timedout without any user interaction with promptMessage");
+			spec.addGoal("VT377-040 - Should send proper success status with the callback when timedout without any user interaction with promptMessage");
 			spec.addPrecondition("Payment device is paired with bluetooth to the device.");
 			spec.addPrecondition("Ensure payment device is opened.");
 			spec.addStep("Press 'RunTest' button.");
 			spec.addStep("Press Enter key from the device when prompt message is shown to the user with the device.");
-			spec.addExpectation("Semi auto test to check callback is triggered with status:error, errorName:OK_KEY_PRESSED");
+			spec.addExpectation("Semi auto test to check callback is triggered with status:success");
 			spec.displayScenario();
             spec.waitForButtonPressing("Run test");
 			var openCBTriggered = false;
@@ -2209,7 +2209,7 @@ describe("Test spec for D180 payment device support", function(){
 			spec.addGoal("VT377-044 - Should get the battery level of the payment device even if it is not opened");
 			spec.addPrecondition("Payment device is paired with bluetooth to the device.");
 			spec.addStep("Press 'RunTest' button.");
-			spec.addExpectation("Battery level of the payment device is retrieved successfully and VT377-000 be integer.");
+			spec.addExpectation("This is Semi-Auto test to check battery level of the payment device successfully and should be integer.");
 			spec.displayScenario();
             spec.waitForButtonPressing("Run test");
             var closeCBTriggered=false;
@@ -2278,7 +2278,6 @@ describe("Test spec for D180 payment device support", function(){
             	var data = Rho.MobilePayment.getLowBatteryThreshold();
             	expect(data.status).toEqual("error");
             	expect(data.errorName).toEqual("DEVICE_NOT_ENABLED");
-            	expect(data.lowBatteryThreshold).toEqual("");
             });
 		});
 		it("VT377-047 - Should set the threshold value for the low battery level using method setLowBatteryThreshold().", function(){
@@ -2367,6 +2366,7 @@ describe("Test spec for D180 payment device support", function(){
 			spec.addGoal("VT377-050 - Try to perfrom readCardData when the battery level is less than LowBatteryThreshold.");
 			spec.addPrecondition("Payment device is paired with bluetooth to the device.");
 			spec.addStep("Press 'RunTest' button.");
+			spec.addStep("Insert valid smart card when requested in the payment device.");
 			spec.addExpectation("This is semi-auto test to check, proper error message when battery is below threshold.");
 			spec.displayScenario();
             spec.waitForButtonPressing("Run test");
@@ -2386,9 +2386,12 @@ describe("Test spec for D180 payment device support", function(){
 			runs(function(){
 				var batLevelData = Rho.MobilePayment.getBatteryLevel();
 				var data = Rho.MobilePayment.setLowBatteryThreshold((batLevelData.batteryLevel) + 1, "battery Low");
-				if(data.status == "success"){
-					result = true;
-				}
+				setTimeout(function(){
+					if(data.status == "success"){
+						result = true;
+					}
+				}, 5000);
+				
 			});
 			waitsFor(function(){
 				return result;
@@ -2466,8 +2469,7 @@ describe("Test spec for D180 payment device support", function(){
 			}, "Waits for device to open", 10000);
         	runs(function(){
         		var data = Rho.MobilePayment.removeCard("Message1", "Message2");
-        		expect(data.status).toEqual("error");
-        		expect(data.errorName).toEqual("CARD_REMOVED");
+        		expect(data.status).toEqual("success");
         	});
 		});
 
@@ -2523,7 +2525,7 @@ describe("Test spec for D180 payment device support", function(){
 				return readCBTriggered;
 			},"wait for read card data", 25000);
 			runs(function(){
-				var data = Rho.MobilePayment.removeCard("Message1", "Message2");
+				var data = Rho.MobilePayment.removeCard("Card", "Removed");
         		expect(data.status).toEqual("success");
 			});
 		});
@@ -2951,7 +2953,7 @@ describe("Test spec for D180 payment device support", function(){
 				var openCB = function(){
 					openCBTriggered = true;
 				};
-				Rho.MobilePayment.open(paymentDevice, openCB);
+				Rho.MobilePayment.open(paymentDeviceName, openCB);
 			});
 			waitsFor(function(){
 				return openCBTriggered;
@@ -3009,7 +3011,7 @@ describe("Test spec for D180 payment device support", function(){
 				var openCB = function(){
 					openCBTriggered = true;
 				};
-				Rho.MobilePayment.open(paymentDevice, openCB);
+				Rho.MobilePayment.open(paymentDeviceName, openCB);
 			});
 			waitsFor(function(){
 				return openCBTriggered;
@@ -3050,7 +3052,7 @@ describe("Test spec for D180 payment device support", function(){
 				var openCB = function(){
 					openCBTriggered = true;
 				};
-				Rho.MobilePayment.open(paymentDevice, openCB);
+				Rho.MobilePayment.open(paymentDeviceName, openCB);
 			});
 			waitsFor(function(){
 				return openCBTriggered;
@@ -3098,7 +3100,7 @@ describe("Test spec for D180 payment device support", function(){
 				var openCB = function(){
 					openCBTriggered = true;
 				};
-				Rho.MobilePayment.open(paymentDevice, openCB);
+				Rho.MobilePayment.open(paymentDeviceName, openCB);
 			});
 			waitsFor(function(){
 				return openCBTriggered;
@@ -3122,6 +3124,7 @@ describe("Test spec for D180 payment device support", function(){
 			spec.addGoal("VT377-071 - Should support for setEmvTags method");
 			spec.addPrecondition("Payment device should be paired via bluetooth to the device.");
 			spec.addStep("Press 'Run test' button to start the test.");
+			spec.addStep("Please Insert valid smart card when requested in payment device");
 			spec.addExpectation("Observe that success status is retruned with the method.");
 			spec.displayScenario();
 			spec.waitForButtonPressing("Run test");
@@ -3167,6 +3170,7 @@ describe("Test spec for D180 payment device support", function(){
 			spec.addGoal("VT377-072 - Should support for authorizeCard method with merchantDecision:1, displayResult:true, displayAmount:true.");
 			spec.addPrecondition("Payment device is paired via bluetooth with the device.");
 			spec.addStep("Press 'Run test' button to start the test");
+			spec.addStep("Please Insert valid smart card when requested in payment device");
 			spec.addExpectation("Observe that success status is returned with the callback");
 			spec.displayScenario();
 			spec.waitForButtonPressing("Run test");
@@ -3224,6 +3228,7 @@ describe("Test spec for D180 payment device support", function(){
 			spec.addGoal("VT377-073 - Should support for authorizeCard method with merchantDecision:0, displayResult:true, displayAmount:true.");
 			spec.addPrecondition("Payment device is paired via bluetooth with the device.");
 			spec.addStep("Press 'Run test' button to start the test");
+			spec.addStep("Please Insert valid smart card when requested in payment device");
 			spec.addExpectation("Observe that success status is returned with the callback");
 			spec.displayScenario();
 			spec.waitForButtonPressing("Run test");
@@ -3281,6 +3286,7 @@ describe("Test spec for D180 payment device support", function(){
 			spec.addGoal("VT377-074 - Should support for authorizeCard method with merchantDecision:2, displayResult:true, displayAmount:true.");
 			spec.addPrecondition("Payment device is paired via bluetooth with the device.");
 			spec.addStep("Press 'Run test' button to start the test");
+			spec.addStep("Please Insert valid smart card when requested in payment device");
 			spec.addExpectation("Observe that success status is returned with the callback");
 			spec.displayScenario();
 			spec.waitForButtonPressing("Run test");
@@ -3388,7 +3394,7 @@ describe("Test spec for D180 payment device support", function(){
 				return authorizeCardCBTriggered;
 			}, "waiting for authorizeCard callback", 25000);
 			runs(function(){
-				spec.displayResult();
+				spec.displayResults();
 				spec.waitForResponse();
 			});
 		});
@@ -3415,7 +3421,7 @@ describe("Test spec for D180 payment device support", function(){
 				var openCB = function(){
 					openCBTriggered = true;
 				};
-				Rho.MobilePayment.open(paymentDevice, openCB);
+				Rho.MobilePayment.open(paymentDeviceName, openCB);
 			});
 			waitsFor(function(){
 				return openCBTriggered;
