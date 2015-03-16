@@ -2396,7 +2396,7 @@ describe("Test spec for D180 payment device support", function(){
 			});
 			waitsFor(function(){
 				return result;
-			}, "Wait for setting lowbattery threshold", 5000);
+			}, "Wait for setting lowbattery threshold", 15000);
 			runs(function(){
 				var params = {};
 				var readCBT = function(data){
