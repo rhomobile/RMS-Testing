@@ -1,0 +1,20 @@
+<html>
+<head>
+    <title>Navigation Check</title>
+<META HTTP-Equiv="SIPbutton" Content="visibility:visible">
+
+<script language="javascript" type="text/javascript">
+	function LoadScript(){	
+		var pageResult = window.location.search.substring(1);
+		document.getElementById('response').innerHTML = "Card data from page nav: " + pageResult;
+	}
+</script>
+
+</head>
+<body onload="LoadScript()">
+<h2>Sucessfully navigated from cardreader page</h2>
+
+<div id="response">Results should appear here</div>
+<P><BR><INPUT TYPE="button" VALUE="Back" onClick="location.href='./index.html'"></P>
+</body>
+</html>
