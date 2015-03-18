@@ -1,4 +1,12 @@
-sdk: "../../rhodes"
+#sdk: "../../rhodes"
+
+cloud:
+  server_url:
+    - "https://rmsstaging.rhomobile.com/api/v1"
+    - "https://rms.rhomobile.com/api/v1"
+
+
+
 sdkversion: 4.0.0
 name: TestApp
 version: 1.0
@@ -8,10 +16,7 @@ bbver: 6.0
 applog: rholog.txt
 iphone:
   configuration: Release
-  sdk: iphoneos7.1
-  provisionprofile: ''
-  codesignidentity: ''
-  entitlements:
+  sdk: iphoneos8.1
   BundleIdentifier: com.rhomobile.testapp
   BundleURLScheme: testapp
 wp:
@@ -27,8 +32,8 @@ android:
 
 #extensions: ["rhoconnect-client"]
 
-paths:
-  extensions:
-  - ../../Motorola-Extensions/build/ci/extensions
-  - ../../Motorola-Extensions/lib/commonAPI
-  - ../../rhoconnect-client/ext
+#paths:
+#  extensions:
+#  - ../../Motorola-Extensions/build/ci/extensions
+#  - ../../Motorola-Extensions/lib/commonAPI
+#  - ../../rhoconnect-client/ext
