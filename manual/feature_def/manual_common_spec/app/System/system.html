@@ -46,6 +46,7 @@
         //This needs to be changed according to the Environment
         var downloadedFilePath = '';
         var httpServerUrl = "http://" + SERVER_HOST + ":" + SERVER_PORT.toString();
+        var httpsServerUrl = "https://" + SECURE_HOST + ":" + SECURE_PORT.toString();
     </script>
 </head>
 <body>
@@ -390,7 +391,7 @@
         <div class="test_scenario">
             <div class="test_scenario_controls">
                 <a href="javascript:void(0)"
-                   onclick="Rho.System.applicationInstall('itms-services://?action=download-manifest&url=' + httpServerUrl + '/TestApp.plist');">Install app from HTTP url</a>
+                   onclick="Rho.System.applicationInstall('itms-services://?action=download-manifest&url=' + 'https://rhomobile-suite.s3.amazonaws.com/test_data/TestApp' + '/TestApp.plist');">Install app from HTTP url</a>
             </div>
             <span class="test_scenario_number">VT300-063 <br/></span>
         </div>

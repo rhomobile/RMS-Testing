@@ -1,6 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd"><plist version='1.0'>
 	<dict>
 		<key>items</key>
 		<array>
@@ -11,7 +10,7 @@
 						<key>kind</key>
 						<string>software-package</string>
 						<key>url</key>
-						<string>http://example.com/TestApp.ipa</string>
+						<string>https://rhomobile-suite.s3.amazonaws.com/test_data/TestApp/TestApp.ipa</string>
 					</dict>
 					<dict>
 						<key>kind</key>

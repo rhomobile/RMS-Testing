@@ -1,39 +1,32 @@
-#sdk: "../../rhodes"
-
-cloud:
-  server_url:
-    - "https://rmsstaging.rhomobile.com/api/v1"
-    - "https://rms.rhomobile.com/api/v1"
-
-
-
-sdkversion: 4.0.0
+#sdk: "/Users/MOHUS/.rvm/gems/ruby-1.9.3-p547/gems/rhodes-5.1.0.beta.10"
+sdkversion: 5.0.0
 name: TestApp
 version: 1.0
 vendor: rhomobile
 build: debug
-bbver: 6.0
 applog: rholog.txt
 iphone:
   configuration: Release
   sdk: iphoneos8.1
+  codesignidentity: iPhone Developer
   BundleIdentifier: com.rhomobile.testapp
   BundleURLScheme: testapp
-wp:
-  productid: 'e04a6f30-ba35-0130-2d39-0023241f0ea4'
+  production:
+    ipa_itunesartwork_image: "./production/iTunesArtwork.png"  
+wp8:
+  productid: '4ee48a00-b05f-0132-40eb-3c075408aa51'
+android:
+  manifest_template: 'AndroidManifest.erb'
+  version: 2.3.3
+  # Note: in order to simplify debugging only app messages and system channels with priority informative and higher, and any errors are enabled by default
+  logcatFilter: APP:I StrictMode:I DEBUG:I *:E
+
 wm:
   #sdk: "MC3000c50b (ARMV4I)"
-  sdk: "Windows Mobile 6.5.3 Professional DTK (ARMV4I)"
-#sdk: "Windows Mobile 6 Professional SDK (ARMV4I)"
-symbian:
-  uid: '0xedca4355'
-android:
-  version: 2.1
+  #sdk: "Windows Mobile 6.5.3 Professional DTK (ARMV4I)"
 
-#extensions: ["rhoconnect-client"]
+win32:
+  deployqt: 1
+  deploymsvc: 1
 
-#paths:
-#  extensions:
-#  - ../../Motorola-Extensions/build/ci/extensions
-#  - ../../Motorola-Extensions/lib/commonAPI
-#  - ../../rhoconnect-client/ext
+extensions: ["rhoconnect-client"]

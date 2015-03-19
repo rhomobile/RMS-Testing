@@ -1,6 +1,27 @@
 
 iOS specific:
-~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~
+
+Currently TestApp.ipa located on Amamzon server:
+https://rhomobile-suite.s3.amazonaws.com/test_data/TestApp/TestApp.ipa
+
+TestApp.ipa valid only until 5 March 2016 !!!
+Check you connection to amazon server before test (use default browser for it) !
+
+There are 2 reason for it :
+
+1. from iOS 7.1 only HTTPS location can be used for intallation plist files
+2. Configure our local secure server for trusted connection from device is too complicated 
+
+
+~~~~~~~~~~~~~~~~~
+
+
+
+
+
+
+Non-finished instruction for setup trusted connection to our local test server (just ignore it now) :
 
 1. you should install SSL sertificate to device and make it trusted :
 
