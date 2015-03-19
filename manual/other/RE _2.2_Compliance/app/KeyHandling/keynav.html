@@ -1,0 +1,32 @@
+<html>
+<head>
+    <title>Navigation Check</title>
+<META HTTP-Equiv="SIPbutton" Content="visibility:visible">
+
+<script language="javascript" type="text/javascript">
+    function MyKeyEvent1(key){
+        document.getElementById('response').innerHTML = "Response: " + key ;
+    }
+	function LoadScript(){	
+		var pageResult = window.location.search.substring(1);
+		document.getElementById('response').innerHTML = "Key event from page nav: " + pageResult;
+        keyCapture.keyEvent = "MyKeyEvent1('%s');";
+	}
+</script>
+
+</head>
+<body onload="LoadScript()">
+<h2>Sucessfully navigated to key handling page</h2>
+
+<table border=1 width=100%>
+     <tr>
+        <Textarea id="txtInput1" cols="15" rows="2"></Textarea>
+     </tr>
+     <tr>
+        <Textarea id="texInput2" cols="15" rows="2"></Textarea>
+    </tr>
+</table><br><br>
+<div id="response">Results should appear here</div>
+<P><BR><INPUT TYPE="button" VALUE="Back" onClick="location.href='./index.html'"></P>
+</body>
+</html>
