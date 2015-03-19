@@ -70,22 +70,7 @@ describe('Rho.Config module', function() {
 	    	expect(Rho.Config.getPropertyString('start_path')).not.toEqual(returnStr);
 	    	expect(Rho.Config.getPropertyInt('MinSeverity')).not.toEqual(returnInt);
 	    });
-
-	    it("Should return conflicts when rhoconfig file contains multiple logserver, MaxLogFileSize properties", function() {
-	    	Rho.Config.configPath = "rho/apps/app/ConfigTest/rhoconfig.txt";
-	    	Rho.Config.loadFromFile();
-	    	expect(Rho.Config.isPropertyExists("logserver")).toEqual(true);
-    		var returnVal = Rho.Config.getConflicts();
-	    	var expectedVal = {'logserver': ['http://rhologs.heroku.com','http://google.com','http://yahoo.com'], 'MaxLogFileSize': [5000000,1000000]};
-	    	expect(returnVal['logserver'][0]).toEqual(expectedVal['logserver'][0]);
-	    	expect(returnVal['logserver'][1]).toEqual(expectedVal['logserver'][1]);
-	    	expect(returnVal['logserver'][2]).toEqual(expectedVal['logserver'][2]);
-	    	expect(returnVal['MaxLogFileSize'][0]).toEqual(expectedVal['MaxLogFileSize'][0]);
-	    	expect(returnVal['MaxLogFileSize'][1]).toEqual(expectedVal['MaxLogFileSize'][1]);
-	    	
-	    	
-	    });
-
+	    
 	    it("removeProperty should remove logserver property when multiple logserver property exists in rhoconfig", function() {
 	    	Rho.Config.configPath = "rho/apps/app/ConfigTest/rhoconfig.txt";
 	    	Rho.Config.loadFromFile();
@@ -97,14 +82,6 @@ describe('Rho.Config module', function() {
 	    		expect("Property doesnt exists please add logserver property").toEqual("doesnt exists");
 	    	}
 	    	
-	    }); 
-
-	    it("Should not return any conflicts when multiple properties are commented", function() {
-	    	Rho.Config.configPath = 'rho/apps/rhoconfig.txt';
-	    	Rho.Config.loadFromFile();
-	    	var expectedVal = null;
-	    	var returnVal = Rho.Config.getConflicts();
-	    	expect(returnVal).toEqual(expectedVal);
 	    }); 
 	    
 	    it("Should set rhoconfig to default path and checking the original start path", function() {
@@ -139,6 +116,7 @@ describe('Rho.Config module', function() {
 	                });
 	            }
 	        })(i);
+
 	    }
 	});
 
@@ -277,6 +255,5 @@ describe('Rho.Config module', function() {
 	        })(i);
 	    }
 	});	
-
 });
 
