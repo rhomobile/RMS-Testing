@@ -234,15 +234,15 @@ describe("Camera API Manual Tests", function(){
 					var spec = new ManualSpec(jasmine, window.document);
 		        	spec.addGoal(jasmine.getEnv().currentSpec.description);
 		            spec.addStep("Press 'RunTest' button");
-		            spec.addStep("desiredHeight : " + Rho.Camera.desiredHeight);
-		            spec.addStep("desitedWidth : " + Rho.Camera.desiredWidth);
+		            /*spec.addStep("desiredHeight : " + Rho.Camera.desiredHeight);
+		            spec.addStep("desitedWidth : " + Rho.Camera.desiredWidth);*/
 		            spec.addStep("compressionFormat : " + Rho.Camera.compressionFormat);
 		            spec.addStep("Capture the image & Check for the returned status.");
 		            spec.addExpectation('The preview should be in Full Screen.');
 		            spec.addExpectation('Callback data :');
 		            spec.addExpectation('status:OK');
 		            spec.addExpectation('message: to be empty');
-		            spec.addExpectation('imageWidth & imageHeight (as seen with the steps)');
+		            spec.addExpectation('imageWidth & imageHeight depends on the default value of device');
 		            spec.addExpectation('imageFormat(as seen in the steps) & imageUri(absolute image path with timestamp) of the saved image');
 		            spec.displayScenario();
 		            spec.waitForButtonPressing("Run test");
@@ -560,7 +560,7 @@ describe("Camera API Manual Tests", function(){
 					    spec.displayScenario();
 					    spec.waitForButtonPressing("Run test");
 						runs(function(){
-							Ruby.call('Cameratest','take_picture?'+camtype+'&colorModel=rgb');
+							Ruby.call('Cameratest','take_picture?'+camtype+'&colorModel=rgb&outputFormat=dataUri');
 					        spec.waitForResponse();
 						});
 					});
@@ -573,7 +573,7 @@ describe("Camera API Manual Tests", function(){
 					    spec.displayScenario();
 					    spec.waitForButtonPressing("Run test");
 						runs(function(){
-							Ruby.call('Cameratest','take_picture?'+camtype+'&colorModel=grayscale');
+							Ruby.call('Cameratest','take_picture?'+camtype+'&colorModel=grayscale&outputFormat=dataUri');
 					        spec.waitForResponse();
 						});					
 					});
@@ -720,6 +720,9 @@ describe("Camera API Manual Tests", function(){
 		            spec.waitForButtonPressing("Run test");
 		            runs(function(){
 						Ruby.call('Cameratest','take_picture?'+camtype);
+						setTimeout(function(){
+							Rho.Application.quit();
+						},6000);
 						spec.waitForResponse();
 					});
 				});

@@ -309,11 +309,4 @@ def take_picture_rotate
 	Rho::ScreenOrientation.rightHanded()
 end
 
-def take_picture_quit
-	set_camera
-	$camera.takePicture({}, url_for(:action => :camera_callback))
-	sleep 5
-	Rho::Application.quit()
-end
-
 end
