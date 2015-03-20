@@ -1,0 +1,368 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 45;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		FA3E1F211779EFAA00F5E33A /* PlatformBridgeTest.h in Headers */ = {isa = PBXBuildFile; fileRef = FA3E1F1B1779EFAA00F5E33A /* PlatformBridgeTest.h */; };
+		FA3E1F221779EFAA00F5E33A /* PlatformBridgeTest.m in Sources */ = {isa = PBXBuildFile; fileRef = FA3E1F1C1779EFAA00F5E33A /* PlatformBridgeTest.m */; };
+		FA3E1F231779EFAA00F5E33A /* PlatformBridgeTestFactorySingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = FA3E1F1D1779EFAA00F5E33A /* PlatformBridgeTestFactorySingleton.m */; };
+		FA3E1F241779EFAA00F5E33A /* PlatformBridgeTestSetup.m in Sources */ = {isa = PBXBuildFile; fileRef = FA3E1F1E1779EFAA00F5E33A /* PlatformBridgeTestSetup.m */; };
+		FA3E1F251779EFAA00F5E33A /* PlatformBridgeTestSingleton.h in Headers */ = {isa = PBXBuildFile; fileRef = FA3E1F1F1779EFAA00F5E33A /* PlatformBridgeTestSingleton.h */; };
+		FA3E1F261779EFAA00F5E33A /* PlatformBridgeTestSingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = FA3E1F201779EFAA00F5E33A /* PlatformBridgeTestSingleton.m */; };
+		FA3E1F281779EFB100F5E33A /* IPlatformBridgeTest.h in Headers */ = {isa = PBXBuildFile; fileRef = FA3E1F271779EFB100F5E33A /* IPlatformBridgeTest.h */; };
+		FA3E1F2F1779EFBB00F5E33A /* PlatformBridgeTestBase.h in Headers */ = {isa = PBXBuildFile; fileRef = FA3E1F291779EFBB00F5E33A /* PlatformBridgeTestBase.h */; };
+		FA3E1F301779EFBB00F5E33A /* PlatformBridgeTestBase.m in Sources */ = {isa = PBXBuildFile; fileRef = FA3E1F2A1779EFBB00F5E33A /* PlatformBridgeTestBase.m */; };
+		FA3E1F311779EFBB00F5E33A /* PlatformBridgeTestFactoryBase.h in Headers */ = {isa = PBXBuildFile; fileRef = FA3E1F2B1779EFBB00F5E33A /* PlatformBridgeTestFactoryBase.h */; };
+		FA3E1F321779EFBB00F5E33A /* PlatformBridgeTestFactoryBase.m in Sources */ = {isa = PBXBuildFile; fileRef = FA3E1F2C1779EFBB00F5E33A /* PlatformBridgeTestFactoryBase.m */; };
+		FA3E1F331779EFBB00F5E33A /* PlatformBridgeTestSingletonBase.h in Headers */ = {isa = PBXBuildFile; fileRef = FA3E1F2D1779EFBB00F5E33A /* PlatformBridgeTestSingletonBase.h */; };
+		FA3E1F341779EFBB00F5E33A /* PlatformBridgeTestSingletonBase.m in Sources */ = {isa = PBXBuildFile; fileRef = FA3E1F2E1779EFBB00F5E33A /* PlatformBridgeTestSingletonBase.m */; };
+		FA3E1F361779EFC400F5E33A /* platformbridgetest_js_wrap.mm in Sources */ = {isa = PBXBuildFile; fileRef = FA3E1F351779EFC400F5E33A /* platformbridgetest_js_wrap.mm */; };
+		FA3E1F381779EFCB00F5E33A /* platformbridgetest_ruby_wrap.m in Sources */ = {isa = PBXBuildFile; fileRef = FA3E1F371779EFCB00F5E33A /* platformbridgetest_ruby_wrap.m */; };
+		FA3E1F3C1779EFD700F5E33A /* platformbridgetest_api_init.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FA3E1F391779EFD700F5E33A /* platformbridgetest_api_init.cpp */; };
+		FA3E1F3D1779EFD700F5E33A /* platformbridgetest_js_api.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FA3E1F3A1779EFD700F5E33A /* platformbridgetest_js_api.cpp */; };
+		FA3E1F3E1779EFD700F5E33A /* platformbridgetest_ruby_api.c in Sources */ = {isa = PBXBuildFile; fileRef = FA3E1F3B1779EFD700F5E33A /* platformbridgetest_ruby_api.c */; };
+		FAC155E7145855CF0016F3BD /* PlatformBridgeTest_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = FAD45FD51225FED600141873 /* PlatformBridgeTest_Prefix.pch */; };
+		FAC155EE145855CF0016F3BD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACBBE490F95108600F1A2B1 /* Foundation.framework */; };
+		FAC155EF145855CF0016F3BD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAD4602C12260A8500141873 /* UIKit.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		AACBBE490F95108600F1A2B1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		FA3E1F1B1779EFAA00F5E33A /* PlatformBridgeTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlatformBridgeTest.h; path = impl/PlatformBridgeTest.h; sourceTree = "<group>"; };
+		FA3E1F1C1779EFAA00F5E33A /* PlatformBridgeTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PlatformBridgeTest.m; path = impl/PlatformBridgeTest.m; sourceTree = "<group>"; };
+		FA3E1F1D1779EFAA00F5E33A /* PlatformBridgeTestFactorySingleton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PlatformBridgeTestFactorySingleton.m; path = impl/PlatformBridgeTestFactorySingleton.m; sourceTree = "<group>"; };
+		FA3E1F1E1779EFAA00F5E33A /* PlatformBridgeTestSetup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PlatformBridgeTestSetup.m; path = impl/PlatformBridgeTestSetup.m; sourceTree = "<group>"; };
+		FA3E1F1F1779EFAA00F5E33A /* PlatformBridgeTestSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlatformBridgeTestSingleton.h; path = impl/PlatformBridgeTestSingleton.h; sourceTree = "<group>"; };
+		FA3E1F201779EFAA00F5E33A /* PlatformBridgeTestSingleton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PlatformBridgeTestSingleton.m; path = impl/PlatformBridgeTestSingleton.m; sourceTree = "<group>"; };
+		FA3E1F271779EFB100F5E33A /* IPlatformBridgeTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IPlatformBridgeTest.h; path = generated/IPlatformBridgeTest.h; sourceTree = "<group>"; };
+		FA3E1F291779EFBB00F5E33A /* PlatformBridgeTestBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlatformBridgeTestBase.h; path = generated/base_impl/PlatformBridgeTestBase.h; sourceTree = "<group>"; };
+		FA3E1F2A1779EFBB00F5E33A /* PlatformBridgeTestBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PlatformBridgeTestBase.m; path = generated/base_impl/PlatformBridgeTestBase.m; sourceTree = "<group>"; };
+		FA3E1F2B1779EFBB00F5E33A /* PlatformBridgeTestFactoryBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlatformBridgeTestFactoryBase.h; path = generated/base_impl/PlatformBridgeTestFactoryBase.h; sourceTree = "<group>"; };
+		FA3E1F2C1779EFBB00F5E33A /* PlatformBridgeTestFactoryBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PlatformBridgeTestFactoryBase.m; path = generated/base_impl/PlatformBridgeTestFactoryBase.m; sourceTree = "<group>"; };
+		FA3E1F2D1779EFBB00F5E33A /* PlatformBridgeTestSingletonBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlatformBridgeTestSingletonBase.h; path = generated/base_impl/PlatformBridgeTestSingletonBase.h; sourceTree = "<group>"; };
+		FA3E1F2E1779EFBB00F5E33A /* PlatformBridgeTestSingletonBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PlatformBridgeTestSingletonBase.m; path = generated/base_impl/PlatformBridgeTestSingletonBase.m; sourceTree = "<group>"; };
+		FA3E1F351779EFC400F5E33A /* platformbridgetest_js_wrap.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = platformbridgetest_js_wrap.mm; path = generated/javascript/platformbridgetest_js_wrap.mm; sourceTree = "<group>"; };
+		FA3E1F371779EFCB00F5E33A /* platformbridgetest_ruby_wrap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = platformbridgetest_ruby_wrap.m; path = generated/ruby/platformbridgetest_ruby_wrap.m; sourceTree = "<group>"; };
+		FA3E1F391779EFD700F5E33A /* platformbridgetest_api_init.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = platformbridgetest_api_init.cpp; path = ../../shared/generated/platformbridgetest_api_init.cpp; sourceTree = "<group>"; };
+		FA3E1F3A1779EFD700F5E33A /* platformbridgetest_js_api.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = platformbridgetest_js_api.cpp; path = ../../shared/generated/platformbridgetest_js_api.cpp; sourceTree = "<group>"; };
+		FA3E1F3B1779EFD700F5E33A /* platformbridgetest_ruby_api.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = platformbridgetest_ruby_api.c; path = ../../shared/generated/platformbridgetest_ruby_api.c; sourceTree = "<group>"; };
+		FAC155F3145855CF0016F3BD /* libPlatformBridgeTest.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPlatformBridgeTest.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		FAD45FD51225FED600141873 /* PlatformBridgeTest_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlatformBridgeTest_Prefix.pch; sourceTree = "<group>"; };
+		FAD4602C12260A8500141873 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		FAC155ED145855CF0016F3BD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FAC155EE145855CF0016F3BD /* Foundation.framework in Frameworks */,
+				FAC155EF145855CF0016F3BD /* UIKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		034768DFFF38A50411DB9C8B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FAC155F3145855CF0016F3BD /* libPlatformBridgeTest.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0867D691FE84028FC02AAC07 /* PlatformBridgeTest */ = {
+			isa = PBXGroup;
+			children = (
+				08FB77AEFE84172EC02AAC07 /* Classes */,
+				32C88DFF0371C24200C91783 /* Other Sources */,
+				0867D69AFE84028FC02AAC07 /* Frameworks */,
+				034768DFFF38A50411DB9C8B /* Products */,
+			);
+			name = PlatformBridgeTest;
+			sourceTree = "<group>";
+		};
+		0867D69AFE84028FC02AAC07 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				AACBBE490F95108600F1A2B1 /* Foundation.framework */,
+				FAD4602C12260A8500141873 /* UIKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		08FB77AEFE84172EC02AAC07 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				FA3E1F161779EF7600F5E33A /* impl */,
+				FA3E1F151779EF6E00F5E33A /* generated */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		32C88DFF0371C24200C91783 /* Other Sources */ = {
+			isa = PBXGroup;
+			children = (
+				FAD45FD51225FED600141873 /* PlatformBridgeTest_Prefix.pch */,
+			);
+			name = "Other Sources";
+			sourceTree = "<group>";
+		};
+		FA3E1F151779EF6E00F5E33A /* generated */ = {
+			isa = PBXGroup;
+			children = (
+				FA3E1F1A1779EF9B00F5E33A /* api */,
+				FA3E1F191779EF9400F5E33A /* base_impl */,
+				FA3E1F181779EF8D00F5E33A /* wrappers */,
+				FA3E1F171779EF7D00F5E33A /* shared */,
+			);
+			name = generated;
+			sourceTree = "<group>";
+		};
+		FA3E1F161779EF7600F5E33A /* impl */ = {
+			isa = PBXGroup;
+			children = (
+				FA3E1F1B1779EFAA00F5E33A /* PlatformBridgeTest.h */,
+				FA3E1F1C1779EFAA00F5E33A /* PlatformBridgeTest.m */,
+				FA3E1F1D1779EFAA00F5E33A /* PlatformBridgeTestFactorySingleton.m */,
+				FA3E1F1E1779EFAA00F5E33A /* PlatformBridgeTestSetup.m */,
+				FA3E1F1F1779EFAA00F5E33A /* PlatformBridgeTestSingleton.h */,
+				FA3E1F201779EFAA00F5E33A /* PlatformBridgeTestSingleton.m */,
+			);
+			name = impl;
+			sourceTree = "<group>";
+		};
+		FA3E1F171779EF7D00F5E33A /* shared */ = {
+			isa = PBXGroup;
+			children = (
+				FA3E1F391779EFD700F5E33A /* platformbridgetest_api_init.cpp */,
+				FA3E1F3A1779EFD700F5E33A /* platformbridgetest_js_api.cpp */,
+				FA3E1F3B1779EFD700F5E33A /* platformbridgetest_ruby_api.c */,
+			);
+			name = shared;
+			sourceTree = "<group>";
+		};
+		FA3E1F181779EF8D00F5E33A /* wrappers */ = {
+			isa = PBXGroup;
+			children = (
+				FA3E1F371779EFCB00F5E33A /* platformbridgetest_ruby_wrap.m */,
+				FA3E1F351779EFC400F5E33A /* platformbridgetest_js_wrap.mm */,
+			);
+			name = wrappers;
+			sourceTree = "<group>";
+		};
+		FA3E1F191779EF9400F5E33A /* base_impl */ = {
+			isa = PBXGroup;
+			children = (
+				FA3E1F291779EFBB00F5E33A /* PlatformBridgeTestBase.h */,
+				FA3E1F2A1779EFBB00F5E33A /* PlatformBridgeTestBase.m */,
+				FA3E1F2B1779EFBB00F5E33A /* PlatformBridgeTestFactoryBase.h */,
+				FA3E1F2C1779EFBB00F5E33A /* PlatformBridgeTestFactoryBase.m */,
+				FA3E1F2D1779EFBB00F5E33A /* PlatformBridgeTestSingletonBase.h */,
+				FA3E1F2E1779EFBB00F5E33A /* PlatformBridgeTestSingletonBase.m */,
+			);
+			name = base_impl;
+			sourceTree = "<group>";
+		};
+		FA3E1F1A1779EF9B00F5E33A /* api */ = {
+			isa = PBXGroup;
+			children = (
+				FA3E1F271779EFB100F5E33A /* IPlatformBridgeTest.h */,
+			);
+			name = api;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		FAC155E6145855CF0016F3BD /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FAC155E7145855CF0016F3BD /* PlatformBridgeTest_Prefix.pch in Headers */,
+				FA3E1F211779EFAA00F5E33A /* PlatformBridgeTest.h in Headers */,
+				FA3E1F251779EFAA00F5E33A /* PlatformBridgeTestSingleton.h in Headers */,
+				FA3E1F281779EFB100F5E33A /* IPlatformBridgeTest.h in Headers */,
+				FA3E1F2F1779EFBB00F5E33A /* PlatformBridgeTestBase.h in Headers */,
+				FA3E1F311779EFBB00F5E33A /* PlatformBridgeTestFactoryBase.h in Headers */,
+				FA3E1F331779EFBB00F5E33A /* PlatformBridgeTestSingletonBase.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		FAC155E5145855CF0016F3BD /* PlatformBridgeTest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FAC155F0145855CF0016F3BD /* Build configuration list for PBXNativeTarget "PlatformBridgeTest" */;
+			buildPhases = (
+				FAC155E6145855CF0016F3BD /* Headers */,
+				FAC155E9145855CF0016F3BD /* Sources */,
+				FAC155ED145855CF0016F3BD /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PlatformBridgeTest;
+			productName = Barcode;
+			productReference = FAC155F3145855CF0016F3BD /* libPlatformBridgeTest.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		0867D690FE84028FC02AAC07 /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 1DEB922208733DC00010E9CD /* Build configuration list for PBXProject "PlatformBridgeTest" */;
+			compatibilityVersion = "Xcode 3.1";
+			developmentRegion = English;
+			hasScannedForEncodings = 1;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+			);
+			mainGroup = 0867D691FE84028FC02AAC07 /* PlatformBridgeTest */;
+			productRefGroup = 034768DFFF38A50411DB9C8B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				FAC155E5145855CF0016F3BD /* PlatformBridgeTest */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		FAC155E9145855CF0016F3BD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FA3E1F221779EFAA00F5E33A /* PlatformBridgeTest.m in Sources */,
+				FA3E1F231779EFAA00F5E33A /* PlatformBridgeTestFactorySingleton.m in Sources */,
+				FA3E1F241779EFAA00F5E33A /* PlatformBridgeTestSetup.m in Sources */,
+				FA3E1F261779EFAA00F5E33A /* PlatformBridgeTestSingleton.m in Sources */,
+				FA3E1F301779EFBB00F5E33A /* PlatformBridgeTestBase.m in Sources */,
+				FA3E1F321779EFBB00F5E33A /* PlatformBridgeTestFactoryBase.m in Sources */,
+				FA3E1F341779EFBB00F5E33A /* PlatformBridgeTestSingletonBase.m in Sources */,
+				FA3E1F361779EFC400F5E33A /* platformbridgetest_js_wrap.mm in Sources */,
+				FA3E1F381779EFCB00F5E33A /* platformbridgetest_ruby_wrap.m in Sources */,
+				FA3E1F3C1779EFD700F5E33A /* platformbridgetest_api_init.cpp in Sources */,
+				FA3E1F3D1779EFD700F5E33A /* platformbridgetest_js_api.cpp in Sources */,
+				FA3E1F3E1779EFD700F5E33A /* platformbridgetest_ruby_api.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		1DEB922308733DC00010E9CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(RHO_ROOT)/platform/shared/common",
+					"$(RHO_ROOT)/platform/shared/rubyext",
+					"$(RHO_ROOT)/platform/shared/ruby/include",
+					"$(RHO_ROOT)/platform/shared/ruby/iphone",
+					"$(RHO_ROOT)/platform/shared",
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
+				ONLY_ACTIVE_ARCH = NO;
+				PREBINDING = NO;
+				SDKROOT = iphonesimulator4.1;
+				STANDARD_C_PLUS_PLUS_LIBRARY_TYPE = static;
+			};
+			name = Debug;
+		};
+		1DEB922408733DC00010E9CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(RHO_ROOT)/platform/shared/common",
+					"$(RHO_ROOT)/platform/shared/rubyext",
+					"$(RHO_ROOT)/platform/shared/ruby/include",
+					"$(RHO_ROOT)/platform/shared/ruby/iphone",
+					"$(RHO_ROOT)/platform/shared",
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
+				ONLY_ACTIVE_ARCH = NO;
+				PREBINDING = NO;
+				SDKROOT = iphonesimulator4.1;
+				STANDARD_C_PLUS_PLUS_LIBRARY_TYPE = static;
+			};
+			name = Release;
+		};
+		FAC155F1145855CF0016F3BD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				DSTROOT = /tmp/PlatformBridgeTest.dst;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = PlatformBridgeTest_Prefix.pch;
+				INSTALL_PATH = /usr/local/lib;
+				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.5;
+				PRODUCT_NAME = PlatformBridgeTest;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		FAC155F2145855CF0016F3BD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				DSTROOT = /tmp/PlatformBridgeTest.dst;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = PlatformBridgeTest_Prefix.pch;
+				INSTALL_PATH = /usr/local/lib;
+				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.5;
+				PRODUCT_NAME = PlatformBridgeTest;
+				SDKROOT = iphoneos;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1DEB922208733DC00010E9CD /* Build configuration list for PBXProject "PlatformBridgeTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DEB922308733DC00010E9CD /* Debug */,
+				1DEB922408733DC00010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FAC155F0145855CF0016F3BD /* Build configuration list for PBXNativeTarget "PlatformBridgeTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FAC155F1145855CF0016F3BD /* Debug */,
+				FAC155F2145855CF0016F3BD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 0867D690FE84028FC02AAC07 /* Project object */;
+}
