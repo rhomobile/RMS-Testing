@@ -1,0 +1,21 @@
+#sdkversion: "4.0.0"
+name: "RhoConnectClientSpec_js"
+version: 1.0
+vendor: "rhomobile"
+build: "release"
+bbver: 4.6
+applog: "rholog.txt"
+iphone:
+  configuration: "Release"
+  sdk: "iphoneos8.2"
+  provisionprofile: 
+  codesignidentity: "iPhone Developer"
+  entitlements: 
+  BundleIdentifier: "com.rhomobile.rhoconnectclient"
+  BundleURLScheme: "rhoconnectclient"
+app_type: "rhoelements"
+extensions:
+  - json
+  - rhoconnect-client
+sdk: "/Users/rhotnv/.rvm/gems/ruby-2.0.0-p598@sp3/gems/rhodes-5.0.34"
+capabilities:

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>rhoconnect_spec_js</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>org.eclipse.dltk.core.scriptbuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
+			<name>rhogenwizard.builder.RhogenBuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>com.rhomobile.rhostudio.rhogenNature</nature>
+		<nature>org.eclipse.dltk.ruby.core.nature</nature>
+	</natures>
+	<linkedResources>
+		<link>
+			<name>framework</name>
+			<type>2</type>
+			<location>/Users/rhotnv/.rvm/gems/ruby-2.0.0-p598@sp3/gems/rhodes-5.0.34/lib/framework</location>
+		</link>
+	</linkedResources>
+</projectDescription>
