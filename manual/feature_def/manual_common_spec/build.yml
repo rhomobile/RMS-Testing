@@ -10,6 +10,7 @@ applog: "rholog.txt"
 capabilities:
   - pim
   - vibrate
+  - phone
 iphone:
   ajax_api_bridge: false
   sdk: "iphonesimulator8.1"
@@ -40,8 +41,6 @@ android:
     - mediaplayer
     - sensor
     - mediacapture
-#  - ../../../../Motorola-Extensions/build/ci/extensions
-#  - ../../../../Motorola-Extensions/lib/commonAPI
   manifest_template: AndroidManifest.erb
 #security_token: "123"
 wm:
