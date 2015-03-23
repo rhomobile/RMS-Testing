@@ -6,7 +6,8 @@ vendor: "rhomobile"
 build: "release"
 bbver: "4.6"
 applog: "rholog.txt"
-#capabilities:
+capabilities:
+  - phone
 #  - read_sdcard
 #  - write_sdcard
 rhohub:

@@ -24,7 +24,6 @@ wp8:
    - screenorientation
    - mediacapture
 android:
-  manifest_template: "AndroidManifest.erb"
   ajax_api_bridge: false
   version: "4.2.2"
   capabilities:

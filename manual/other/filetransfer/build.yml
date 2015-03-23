@@ -19,7 +19,6 @@ wp8:
   productid: '4fd3b670-6f04-0131-0449-388d123eda48'
 android:
   abis: [arm]
-  manifest_template: 'AndroidManifest.erb'
   version: 2.3.3
   rhoelements:
     config: config/Config.xml
