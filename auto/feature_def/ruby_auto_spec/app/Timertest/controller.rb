@@ -43,12 +43,36 @@ def timer_start_two
 	end
 end
 
+def timer_create_two
+	@@timerobj2 = Rho::Timer.create()
+end
+
 def timer_start_three
 	@@timerobj3 = Rho::Timer.create()
 	if @params['time']
 		@@timerobj3.start(@params['time'].to_i, url_for(:action => :timercb_three))
 	else
 		@@timerobj3.start(10000, url_for(:action => :timercb_three))
+	end
+end
+
+def timer_without_param
+	@@timerobj1 = Rho::Timer.create()
+	@@timerobj1.start()
+	
+end
+
+def timer_with_callback
+	@@timerobj1 = Rho::Timer.create()
+	@@timerobj1.start(url_for(:action => :timercb_one))
+end
+
+def timer_with_interval
+	@@timerobj1 = Rho::Timer.create()
+	if @params['time']
+		@@timerobj1.start(@params['time'].to_i)
+	else
+		@@timerobj1.start(10000, url_for(:action => :timercb_one))
 	end
 end
 
@@ -75,5 +99,24 @@ def timer_isalive_three
 		Rho::WebView.executeJavascript('document.getElementById("alivestatus3").innerHTML= "'+@alivestatus+'";')
 	end
 end
+
+def timer_stop_one
+	if @@timerobj1 != ''
+		@@timerobj1.stop()
+	end
+end
+
+def timer_stop_two
+	if @@timerobj2 != ''
+		@@timerobj2.stop()
+	end
+end
+
+def timer_stop_three
+	if @@timerobj3 != ''
+		@@timerobj3.stop()
+	end
+end
+
 
 end

@@ -20,15 +20,19 @@ def config_startpath
 		    Rho::WebView.executeJavascript('document.getElementById("result1").innerHTML = " 1. Initial start_path value: '+@oldvalue+'"')
 		    Rho::WebView.executeJavascript('document.getElementById("result2").innerHTML = " 2. After setting new start_path value: '+@newvalue+'"')
 		when 'int'
-	        @oldvalue = Rho::Config.getPropertyInt("MinSeverity")
+	        @oldvalue1 = Rho::Config.getPropertyInt("MinSeverity")
+			@oldvalue = @oldvalue1.to_s
 	        Rho::Config.setPropertyInt("MinSeverity", 0, @savefile);
-	        @newvalue = Rho::Config.getPropertyInt("MinSeverity")
+	        @newvalue1 = Rho::Config.getPropertyInt("MinSeverity")
+			@newvalue = @newvalue1.to_s
 		    Rho::WebView.executeJavascript('document.getElementById("result1").innerHTML = " 1. Initial MinSeverity value: '+@oldvalue+'"')
 		    Rho::WebView.executeJavascript('document.getElementById("result2").innerHTML = " 2. After setting new MinSeverity value: '+@newvalue+'"')      
 		when 'bool'
-		    @oldvalue = Rho::Config.getPropertyBool("use_bulk_model")
+		    @oldvalue1 = Rho::Config.getPropertyBool("use_bulk_model")
+			@oldvalue = @oldvalue1.to_s
 		    Rho::Config.setPropertyBool("use_bulk_model", true, @savefile)
-		    @newvalue = Rho::Config.getPropertyBool("use_bulk_model")
+		    @newvalue1 = Rho::Config.getPropertyBool("use_bulk_model")
+			@newvalue = @newvalue1.to_s
 		    Rho::WebView.executeJavascript('document.getElementById("result1").innerHTML = " 1. Initial use_bulk_model value: '+@oldvalue+'"')
 		    Rho::WebView.executeJavascript('document.getElementById("result2").innerHTML = " 2. After setting new use_bulk_model value: '+@newvalue+'"')
 		else
@@ -103,15 +107,19 @@ def config_ispropertyexists
 		else
 			@savefile = false
 		end
-		@firstvalue = Rho::Config.isPropertyExists("full_screen")
+		@firstvalue1 = Rho::Config.isPropertyExists("full_screen")
+		@firstvalue = @firstvalue1.to_s
 	    Rho::Config.removeProperty("full_screen", @savefile)
-	    @secondvalue = Rho::Config.isPropertyExists("full_screen")
+	    @secondvalue1 = Rho::Config.isPropertyExists("full_screen")
+		@secondvalue = @secondvalue1.to_s
 	    Rho::WebView.executeJavascript('document.getElementById("result1").innerHTML = " 1. First full_screen value: '+@firstvalue+'"')
 	    Rho::WebView.executeJavascript('document.getElementById("result2").innerHTML = " 2. Second full_screen value: '+@secondvalue+'"')  
 	else
-		@firstvalue = Rho::Config.isPropertyExists("start_path")
+		@firstvalue1 = Rho::Config.isPropertyExists("start_path")
+		@firstvalue = @firstvalue1.to_s
 	    Rho::Config.removeProperty("Invalid", true)
-	    @secondvalue = Rho::Config.isPropertyExists("start_path")
+	    @secondvalue1 = Rho::Config.isPropertyExists("start_path")
+		@secondvalue = @secondvalue1.to_s
 	    Rho::WebView.executeJavascript('document.getElementById("result1").innerHTML = " 1. First start_path value: '+@firstvalue+'"')
 	    Rho::WebView.executeJavascript('document.getElementById("result2").innerHTML = " 2. Second start_path value: '+@secondvalue+'"')	    
 	end
