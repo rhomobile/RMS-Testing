@@ -1,68 +1,24 @@
-<script type="text/javascript">
+<div data-role="page" data-url="<%= Rho::Application.startURI %>/">
 
-    function doAction(val) {
-        var url = "/app/System/" + val + "?rho_callback=1"
-        if (window.XMLHttpRequest) {
-            var xhr = new window.XMLHttpRequest();
-            xhr.open("GET", url, true);
-            xhr.send(null);
-        } else {
-            var xmlHttpReq = new ActiveXObject("Msxml2.XMLHTTP");
-            xmlHttpReq.open("GET", url, true);
-            xmlHttpReq.send();
-        }
-    }
-
-    function onIntentReceived( intent ) {
-        var o = ""
-        
-        for (var p in intent) {
-            o += p + ":" + intent[p] + "\n";
-        }
     
-        alert( "Intent:\n" + o );
-        
-        if ( intent[uri].length > 0 ) {
-            Rho.System.openUrl( intent[uri] );
-        }
-    }
+  <div data-role="header" data-position="inline">
+    <h1>TestApp</h1>
+    <% if Rho::RhoConnectClient.isLoggedIn %>
+    <a href="<%= url_for :controller => :Settings, :action => :do_sync %>" class="ui-btn-left" data-icon="refresh">
+      Sync
+    </a>
+    <a href="<%= url_for :controller => :Settings, :action => :logout %>" class="ui-btn-right" data-icon="star">
+	    Logout
+	  </a>
+    <% else %>
+        <a href="<%= url_for :controller => :Settings, :action => :login %>" class="ui-btn-right" data-icon="star">Login</a>
+    <% end %>
+  </div>
 
-</script>
+  <div data-role="content">
+    <ul data-role="listview">
+      <li><a href="#">Add link here...</a></li>
+    </ul>
+  </div>
 
-<div data-role="page" data-url="<%= Rho::RhoConfig.start_path %>/">
-	<div data-role="header" data-position="inline">
-		<h1>TestApp</h1>
-		<div data-role="content">
-			<ul data-role="listview">
-				<li>platform : <%=System.platform %> </li>
-				<li>deviceName : <%=System.deviceName %> </li>
-				<li>osVersion : <%=System.osVersion %> </li>
-
-				<li>isEmulator : <%=System.isEmulator %> </li>
-				<li>isRhoSimulator : <%=System.isRhoSimulator %> </li>
-				<li>isMotorolaDevice : <%= System.isMotorolaDevice %></li>
-			</ul>
-		</div>
-		
-	</div>
-
-</div>
-<div id="ruby_getStartParams">
-  <button onclick ="doAction('getStartParameters')">Ruby: Get start params: </button>
-</div>
-<div id="js_getStartParams">
-	<button onclick ='alert(JSON.stringify(Rho.System.getStartParams()));'>Javascript: Get start params</button>
-</div>
-
-<div id="ruby_getApplicationMessage">
-  <button onclick ="doAction('getApplicationMessage')">Ruby: Get Application Message: </button>
-</div>
-<div id="js_getApplicationMessage">
-	<button onclick ='alert(JSON.stringify(Rho.System.getApplicationMessage()));'>Javascript: Get Application Message</button>
-</div>
-<div id="js_startListenIntents">
-    <button onclick ="Rho.Intent.startListening(onIntentReceived);">Javascript: Start listen intents</button>
-</div>
-<div id="js_stopListenIntents">
-    <button onclick ="Rho.Intent.stopListening();">Javascript: Stop listen intents</button>
 </div>
