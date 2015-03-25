@@ -1139,189 +1139,190 @@ describe("RMS 4.0 File JS API", function () {
 	*/
 });
 
-
-
+/*
+// Separating ruby tests from js auto spec
 describe("RMS 4.1 : [SPB] Fix File reading errors in Ruby", function () {
-		var description;
-		var expectString = "Could not open file: '/programFiles/Test/rholog.txt'"
-		var expectString1 = "Could not read file: '/programFiles/Test/rholog.txt'"
-		var timeout = false;
-		
-		beforeEach(function(){
-			timeout = false;
-		});
-
-		it("VT288-087 :Raises exception while opening nonexistent file in OPEN_FOR_READ mode", function () {
-			runs(function()
-				{
-					Ruby.call('FileTest','read_nonexistfile');	
-					// Time to wait ajax to be happen
-					setTimeout(function() {
-						timeout = true;
-					}, 1000);
-				});
-
-				waitsFor(function(){
-					if(timeout == true){
-						return true;
-					}
-				}, 'Wait for 1 sec ajax call to happen', 2000);
-
-				runs(function(){
-					expect(Ruby.getReturnedValue()).toBe(expectString);
-				});
-				 
-	    });
-		
+	var description;
+	var expectString = "Could not open file: '/programFiles/Test/rholog.txt'"
+	var expectString1 = "Could not read file: '/programFiles/Test/rholog.txt'"
+	var timeout = false;
 	
-	    it("VT288-088 :Raises exception while opening nonexistent file in OPEN_FOR_READ_WRITE mode", function () {
-	    	runs(function()
-				{
-					Ruby.call('FileTest','readwrite_nonexistfile');
-					// Time to wait ajax to be happen
-					setTimeout(function() {
-						timeout = true;
-					}, 1000);
-				});
+	beforeEach(function(){
+		timeout = false;
+	});
 
-				waitsFor(function(){
-					if(timeout == true){
-						return true;
-					}
-				}, 'Wait for 1 sec ajax call to happen', 2000);
+	it("VT288-087 :Raises exception while opening nonexistent file in OPEN_FOR_READ mode", function () {
+		runs(function()
+			{
+				Ruby.call('FileTest','read_nonexistfile');	
+				// Time to wait ajax to be happen
+				setTimeout(function() {
+					timeout = true;
+				}, 1000);
+			});
 
-				runs(function(){
-					expect(Ruby.getReturnedValue()).toBe(expectString);
-				});
-				
-	    });
-	
-	    it("VT288-089 :Don't Raises exception while opening nonexistent file in OPEN_FOR_APPEND mode", function () {
-	    	runs(function()
-				{
-					Ruby.call('FileTest','append_nonexistfile');
-					// Time to wait ajax to be happen
-					setTimeout(function() {
-						timeout = true;
-					}, 1000);
-				});
+			waitsFor(function(){
+				if(timeout == true){
+					return true;
+				}
+			}, 'Wait for 1 sec ajax call to happen', 2000);
 
-				waitsFor(function(){
-					if(timeout == true){
-						return true;
-					}
-				}, 'Wait for 1 sec ajax call to happen', 2000);
-
-				runs(function(){
-					expect(Ruby.getReturnedValue()).toBe('');
-				});
-	    });
-
-	    it("VT288-090 :Don't Raises exception while opening non existent file in OPEN_FOR_WRITE mode", function () {
-	    	runs(function()
-				{
-					Ruby.call('FileTest','write_nonexistfile');
-					// Time to wait ajax to be happen
-					setTimeout(function() {
-						timeout = true;
-					}, 1000);
-				});
-
-				waitsFor(function(){
-					if(timeout == true){
-						return true;
-					}
-				}, 'Wait for 1 sec ajax call to happen', 2000);
-
-				runs(function(){
-					expect(Ruby.getReturnedValue()).toBe('');
-				});
-	    });
-	
-		it("VT288-091 :Raises exception when Read call with non existing file", function () {
-			
-			runs(function()
-				{
-					Ruby.call('FileTest','readcall_nonexistfile');
-					// Time to wait ajax to be happen
-					setTimeout(function() {
-						timeout = true;
-					}, 1000);
-				});
-
-				waitsFor(function(){
-					if(timeout == true){
-						return true;
-					}
-				}, 'Wait for 1 sec ajax call to happen', 2000);
-
-				runs(function(){
-					expect(Ruby.getReturnedValue()).toBe(expectString1);
-				});
-	    });
-		
-	
-	    it("VT288-092 :Doesn't raises exception while reading empty file", function () {
-	    	runs(function()
-				{
-					Ruby.call('FileTest','read_emptyfile');
-					// Time to wait ajax to be happen
-					setTimeout(function() {
-						timeout = true;
-					}, 1000);
-				});
-
-				waitsFor(function(){
-					if(timeout == true){
-						return true;
-					}
-				}, 'Wait for 1 sec ajax call to happen', 2000);
-
-				runs(function(){
-					expect(Ruby.getReturnedValue()).toBe('');
-				});
-	    });
-	   
-		it("VT288-093 :Doesn't raises exception while reading CR LF", function () {
-			runs(function()
-				{
-					Ruby.call('FileTest','readCRLF');
-					// Time to wait ajax to be happen
-					setTimeout(function() {
-						timeout = true;
-					}, 1000);
-				});
-
-				waitsFor(function(){
-					if(timeout == true){
-						return true;
-					}
-				}, 'Wait for 1 sec ajax call to happen', 2000);
-
-				runs(function(){
-					expect(Ruby.getReturnedValue()).toBe('');
-				});
-	    });
-	
-	    it("VT288-094 :Doesn't raises exception while loading file without double quote", function () {
-	    	runs(function()
-				{
-					Ruby.call('FileTest','loadfile_withoutdq');
-					// Time to wait ajax to be happen
-					setTimeout(function() {
-						timeout = true;
-					}, 1000);
-				});
-
-				waitsFor(function(){
-					if(timeout == true){
-						return true;
-					}
-				}, 'Wait for 1 sec ajax call to happen', 2000);
-
-				runs(function(){
-					expect(Ruby.getReturnedValue()).toBe('');
-				});
-	    });
-
+			runs(function(){
+				expect(Ruby.getReturnedValue()).toBe(expectString);
+			});
+			 
     });
+	
+
+    it("VT288-088 :Raises exception while opening nonexistent file in OPEN_FOR_READ_WRITE mode", function () {
+    	runs(function()
+			{
+				Ruby.call('FileTest','readwrite_nonexistfile');
+				// Time to wait ajax to be happen
+				setTimeout(function() {
+					timeout = true;
+				}, 1000);
+			});
+
+			waitsFor(function(){
+				if(timeout == true){
+					return true;
+				}
+			}, 'Wait for 1 sec ajax call to happen', 2000);
+
+			runs(function(){
+				expect(Ruby.getReturnedValue()).toBe(expectString);
+			});
+			
+    });
+
+    it("VT288-089 :Don't Raises exception while opening nonexistent file in OPEN_FOR_APPEND mode", function () {
+    	runs(function()
+			{
+				Ruby.call('FileTest','append_nonexistfile');
+				// Time to wait ajax to be happen
+				setTimeout(function() {
+					timeout = true;
+				}, 1000);
+			});
+
+			waitsFor(function(){
+				if(timeout == true){
+					return true;
+				}
+			}, 'Wait for 1 sec ajax call to happen', 2000);
+
+			runs(function(){
+				expect(Ruby.getReturnedValue()).toBe('');
+			});
+    });
+
+    it("VT288-090 :Don't Raises exception while opening non existent file in OPEN_FOR_WRITE mode", function () {
+    	runs(function()
+			{
+				Ruby.call('FileTest','write_nonexistfile');
+				// Time to wait ajax to be happen
+				setTimeout(function() {
+					timeout = true;
+				}, 1000);
+			});
+
+			waitsFor(function(){
+				if(timeout == true){
+					return true;
+				}
+			}, 'Wait for 1 sec ajax call to happen', 2000);
+
+			runs(function(){
+				expect(Ruby.getReturnedValue()).toBe('');
+			});
+    });
+
+	it("VT288-091 :Raises exception when Read call with non existing file", function () {
+		
+		runs(function()
+			{
+				Ruby.call('FileTest','readcall_nonexistfile');
+				// Time to wait ajax to be happen
+				setTimeout(function() {
+					timeout = true;
+				}, 1000);
+			});
+
+			waitsFor(function(){
+				if(timeout == true){
+					return true;
+				}
+			}, 'Wait for 1 sec ajax call to happen', 2000);
+
+			runs(function(){
+				expect(Ruby.getReturnedValue()).toBe(expectString1);
+			});
+    });
+	
+
+    it("VT288-092 :Doesn't raises exception while reading empty file", function () {
+    	runs(function()
+			{
+				Ruby.call('FileTest','read_emptyfile');
+				// Time to wait ajax to be happen
+				setTimeout(function() {
+					timeout = true;
+				}, 1000);
+			});
+
+			waitsFor(function(){
+				if(timeout == true){
+					return true;
+				}
+			}, 'Wait for 1 sec ajax call to happen', 2000);
+
+			runs(function(){
+				expect(Ruby.getReturnedValue()).toBe('');
+			});
+    });
+   
+	it("VT288-093 :Doesn't raises exception while reading CR LF", function () {
+		runs(function()
+			{
+				Ruby.call('FileTest','readCRLF');
+				// Time to wait ajax to be happen
+				setTimeout(function() {
+					timeout = true;
+				}, 1000);
+			});
+
+			waitsFor(function(){
+				if(timeout == true){
+					return true;
+				}
+			}, 'Wait for 1 sec ajax call to happen', 2000);
+
+			runs(function(){
+				expect(Ruby.getReturnedValue()).toBe('');
+			});
+    });
+
+    it("VT288-094 :Doesn't raises exception while loading file without double quote", function () {
+    	runs(function()
+			{
+				Ruby.call('FileTest','loadfile_withoutdq');
+				// Time to wait ajax to be happen
+				setTimeout(function() {
+					timeout = true;
+				}, 1000);
+			});
+
+			waitsFor(function(){
+				if(timeout == true){
+					return true;
+				}
+			}, 'Wait for 1 sec ajax call to happen', 2000);
+
+			runs(function(){
+				expect(Ruby.getReturnedValue()).toBe('');
+			});
+    });
+
+});
+*/

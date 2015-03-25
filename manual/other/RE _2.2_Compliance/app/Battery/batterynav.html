@@ -1,0 +1,22 @@
+<html>
+<head>
+    <title>Navigation Check</title>
+	<META HTTP-Equiv="SIPbutton" Content="visibility:visible">
+
+	<script language="javascript" type="text/javascript">
+		//var genericObj = new ActiveXObject("PocketBrowser.Generic");
+
+		function batteryenable(){
+		    battery.sampleInterval = 0;
+			battery.visibility = 'visible';
+			battery.batteryEvent = "url('http://10.233.85.82:9099/app/Battery/signalnav.html')";
+			battery.getBatteryStatus();
+		}
+	</script>
+</head>
+<body><br>
+	<h2>Successfully navigated to battery page</h2>
+	<P><INPUT TYPE="button" VALUE="Battery Enable" ONCLICK="batteryenable();"></P>
+	<P><INPUT TYPE="button" VALUE="Back" ONCLICK="location.href='index.html'"></P>
+</body>
+</html>

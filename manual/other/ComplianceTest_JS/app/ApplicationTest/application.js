@@ -56,41 +56,60 @@ function getTitle()
 { 
 	var data = Rho.Application.title;
 	$("#Rho_Application_title span.result").text(JSON.stringify(data));
-}
+};
 
 function setTitleNull(){
  Rho.Application.title ='';
-}
+};
 
 function menuCallback(){
     Rho.Log.info("menuCallback", "LOG_TEST");
-}
+};
 
 function menuTest() {
 Rho.Application.nativeMenu = [
-{ 'label':'Home', 'action': 'Home'},{'label':'separator', 'action': 'separator'},{'label':'Options', 'action': 'options'},{'label':'Log', 'action': 'log'},{'label':'Exit', 'action': 'exit'},{'label':'Refresh', 'action': 'refresh'}, {'label':'Callback', 'action': menuCallback}
- ];
-}
+    {'label':'Home', 'action': 'Home'},
+    {'label':'separator', 'action': 'separator'},
+    {'label':'Options', 'action': 'options'},
+    {'label':'Log', 'action': 'log'},
+    {'label':'Exit', 'action': 'exit'},
+    {'label':'Refresh', 'action': 'refresh'}, 
+    {'label':'Callback', 'action': 'menuCallback()'}
+  ];
+};
 
 function menuDefaultTest() {
-    Rho.Application.nativeMenu = Rho.Application.defaultNativeMenu
-}
+    
+  Rho.Application.nativeMenu = Rho.Application.defaultNativeMenu;
+};
  
 function menuReservedItem() {
-Rho.Application.nativeMenu = [
-{'label':'Options', 'action': 'Options'},{'label':'Exit', 'action': 'exit'},{'label':'Log', 'action': 'Log'},{'label':'Refresh', 'action': 'Refresh'},{ 'label':'Home', 'action': 'Home'},{'label':'Load a page', 'action': '/app/loading.html'}
- ];
+  Rho.Application.nativeMenu = [
+    {'label':'Options', 'action': 'Options'},
+    {'label':'Exit', 'action': 'exit'},
+    {'label':'Log', 'action': 'Log'},
+    {'label':'Refresh', 'action': 'Refresh'},
+    { 'label':'Home', 'action': 'Home'},
+    {'label':'Load a page', 'action': '/app/loading.html'}
+  ];
 } 
 
 function menuJavascriptCall() {
-Rho.Application.nativeMenu = [
-{'label':'Log', 'action': 'Log'},{'label':'fullscreen', 'action': 'fullscreen'},{'label':'Exit', 'action':'javascript:onQuit()'},{'label':'separator', 'action': 'separator '},{'label':'Refresh', 'action': 'Refresh'},{ 'label':'Home', 'action': 'Home'},{'label':'Load a page', 'action': '/app/loading.html'}
-];
-} 
+  Rho.Application.nativeMenu = [
+    {'label':'Log', 'action': 'Log'},
+    {'label':'fullscreen', 'action': 'fullscreen'},
+    {'label':'Exit', 'action':'javascript:onQuit()'},
+    {'label':'separator', 'action': 'separator '},
+    {'label':'Refresh', 'action': 'Refresh'},
+    {'label':'Home', 'action': 'Home'},
+    {'label':'Load a page', 'action': '/app/loading.html'}
+  ];
+}; 
+
 function onQuit()
 {
-Rho.Application.quit();
-}
+  Rho.Application.quit();
+};
 
 
 function getInvalidSecurityTokenStartPath(){

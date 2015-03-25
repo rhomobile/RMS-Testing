@@ -14,10 +14,10 @@ describe("Key State Test", function() {
 		/* ... Tear it down ... */
 	});
 
-	it("VT200-0669 | KeyState showStates with all properties |", function() {
+	it("VT200-0412 | KeyState showStates with all properties |", function() {
 		runs(function()
 		{
-            dispCurrentProcess("VT200-0669 | KeyState showStates with all properties<br>right:100,top:150,<br>Height:200,width:250 Press Shift, Alt, Control, <br>Function, Caps, Num lock and Orange key");
+            dispCurrentProcess("VT200-0412 | KeyState showStates with all properties<br>right:100,top:150,<br>Height:200,width:250 Press Shift, Alt, Control, <br>Function, Caps, Num lock and Orange key");
 			Rho.KeyState.showStates({'right':100,'top':150,'height':200,'width':250})
 			setTimeout(function() {
 				displayflag = true;
@@ -35,10 +35,10 @@ describe("Key State Test", function() {
 		});
 	});
 
-	it("VT281-0xxx | KeyState hideStates |", function() {
+	it("VT200-0523 | KeyState hideStates |", function() {
 		runs(function()
 		{
-            dispCurrentProcess("VT281-0xxx | KeyState hideStates<br>right:100,top:150,<br>Height:200,width:250 </br> Press Shift, Alt, Control, Function, Caps, Num lock and Orange key");
+            dispCurrentProcess("VT200-0523 | KeyState hideStates<br>right:100,top:150,<br>Height:200,width:250 </br> Press Shift, Alt, Control, Function, Caps, Num lock and Orange key");
 			Rho.KeyState.showStates({'right':100,'top':150,'height':200,'width':250});
 			Rho.KeyState.hideStates();
 			setTimeout(function() {

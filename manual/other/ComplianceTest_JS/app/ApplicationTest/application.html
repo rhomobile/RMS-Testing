@@ -54,10 +54,13 @@
 <fieldset>
 	<legend>Rho.Application</legend>
 	<ul> Minimize, Restore and Quit:
-	    <li><a href="javascript:void(0)" onclick ="minimize();">VT200-0617 Minimize the Application (Mac RhoSimulator, WP8 not support it)</a></li>
-	    <li><a href="javascript:void(0)" onclick ="restore();">VT200-0618 Restore the Application (Mac RhoSimulator, WP8 not support it)</a></li>
-        <li><a href="javascript:void(0)" onclick ="quit();">VT200-0619 Quit the Application</a></li>
-		<li><a href="javascript:void(0)" onclick ="minQuit();">Minimize and Quit the Application</a></li>
+	    <li><a href="javascript:void(0)" onclick ="minimize();">VT200-0361 Minimize the Application (Not supported for Android, Mac RhoSimulator, WP8)</a></li>
+	    <br>
+        <li><a href="javascript:void(0)" onclick ="restore();">VT200-00362 Restore the Application (Not supported for Android, Mac RhoSimulator, WP8)</a></li>
+        <br>
+        <li><a href="javascript:void(0)" onclick ="quit();">VT200-0363 Quit the Application</a></li>
+		<br>
+        <li><a href="javascript:void(0)" onclick ="minQuit();">VT200-0517 Minimize and Quit the Application</a></li>
 	</ul>
 </fieldset>
 
@@ -73,7 +76,7 @@
 
 <div id="title_test" >
     <div class="method_name">Rho.Application.Title</div>
-    <div class="method_desc">Define Window caption text. If missed - caption from page used. WM and Windows Desktop Only! Not supported on CE.</div>
+    <div class="method_desc">Define Window caption text. If missed - caption from page used. WM and Windows Desktop Only! Not supported on Android and CE devices.</div>
 
 
     <div class="test_scenario">
@@ -83,8 +86,8 @@
             <span class="result"></span>
         </div>
         <div class="test_scenario_desc">
-            <span class="test_scenario_number">VT***-**</span>
-            <span> Press button for get current window title</span>
+            <span class="test_scenario_number">VT200-0518</span>
+            <span> Press button for get current window title [NA for Android]</span>
         </div>
     </div>
 
@@ -93,8 +96,8 @@
             <button onClick='Rho.Application.title="My Title";'>title("My Title")</button>
         </div>
         <div class="test_scenario_desc">
-            <span class="test_scenario_number">VT200-0621</span>
-            <span> Press button for set title for window to string ""</span>
+            <span class="test_scenario_number">VT200-0364</span>
+            <span> Press button for set title for window to string [NA for Android]""</span>
         </div>
     </div>
 
@@ -103,8 +106,8 @@
             <button onClick='Rho.Application.title="";'>title("")</button>
         </div>
         <div class="test_scenario_desc">
-            <span class="test_scenario_number">VT***-**</span>
-            <span> Press button for set title for window to empty string</span>
+            <span class="test_scenario_number">VT200-0519</span>
+            <span> Press button for set title for window to empty string [NA for Android]</span>
         </div>
     </div>
 </div>
@@ -130,11 +133,13 @@
 
 <fieldset>
 	<legend>Rho.Application.Native Menu (Not applicable on iOS!)</legend>
-	<ul>VT200-0622 Redefine the NativMenu
-	    <li><a href="javascript:void(0)" onclick ="menuTest();">set Native menu to different actions</a></li>
-        <li><a href="javascript:void(0)" onclick ="menuDefaultTest();">set Default Native menu</a></li>
+	<ul>VT200-0365 Redefine the NativMenu
+	    <li><a href="javascript:void(0)" onclick ="menuTest();">Set Native menu to different actions</a></li><br>
+        <li><a href="javascript:void(0)" onclick ="menuDefaultTest();">Set Default Native menu</a></li>
+        <br>
 		<li><a href="javascript:void(0)" onclick ="menuReservedItem();">Add menu with action pointed to html page. Select Load a page menu item</a></li>
-		<li><a href="javascript:void(0)" onclick ="menuJavascriptCall();">Javascript method call for Exit </a></li>
+        <br>
+		<li><a href="javascript:void(0)" onclick ="onQuit();">Javascript method call for Exit </a></li>
 	</ul>
 </fieldset>
 

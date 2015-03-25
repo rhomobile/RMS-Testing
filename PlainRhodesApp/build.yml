@@ -16,7 +16,6 @@ iphone:
 wp8:
   productid: 31dc2a80-81c4-0131-d9f5-0024d76525bc
 android:
-  manifest_template: AndroidManifest.erb
   version: 2.3.3
 wm: ''
 extensions:

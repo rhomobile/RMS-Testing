@@ -1,0 +1,39 @@
+<html>
+<head>
+	<title>Camera Persist Page</title>
+	<script type="text/javascript" charset="utf-8" src="../../public/jquery/jquery-1.6.4.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../../public/jquery/jquery.json-2.3.min.js"></script>
+
+    <script type="text/javascript" src="../../public/api/rhoapi-modules.js"></script>
+
+    <script type="text/javascript" src="../helpers/specHelpers.js"></script>
+
+</head>
+<body onload='LoadScript();'>
+<h3>Persistant Test Page for Camera Common API</h3>
+<p></p>
+<div id='data'></div><br>
+<button onclick='capturefunc();'>Capture</button>
+<p></p>
+<button onclick="hidefunc();">Back</button>
+</body>
+<script type="text/javascript">
+	var pageResult;
+	var camObj;
+	function LoadScript(){	
+		pageResult = window.location.search.substring(1);
+	}
+	function capturefunc(){
+		camObj = Rho.Camera.getCameraByType(pageResult);
+		camObj.capture(captureCB);
+	}
+	function hidefunc(){
+		camObj = Rho.Camera.getCameraByType(pageResult);
+		camObj.hidePreview();
+		window.location='./specRunner.html';
+	}
+	var captureCB = function(data) {
+		document.getElementById('data').innerHTML = 'Capture Callback data : ' + JSON.stringify(data);
+	}
+</script>
+</html>

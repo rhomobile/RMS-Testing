@@ -1,7 +1,7 @@
 	var sys_setget_property = [
 	
 	{
-		testName		:	"VT300-107 / VT300-108 | set httpProxyURI , call getProperty with httpProxyURI | 'http://wwwgate0.mot.com:1080'",
+		testName		:	"VT200-0419 | set httpProxyURI , call getProperty with httpProxyURI | 'http://wwwgate0.mot.com:1080'",
 		propertyName	:	"httpProxyURI",
 		propertyValue	:	"http://wwwgate0.mot.com:1080",
 		expectedResult	:	"http://wwwgate0.mot.com:1080",
@@ -39,7 +39,7 @@
 
 	];
 
-var sys_setget_properties = [
+	var sys_setget_properties = [
 	
 	{
 		testName		:	"VT300-132 | call setproperties with applicationIconBadge as 1, call getproperties with  applicationIconBadge | 1",

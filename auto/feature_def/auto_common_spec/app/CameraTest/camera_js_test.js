@@ -4,8 +4,8 @@ var arr_camera_property = [
 	propertyName	:	"captureSound",
 	cameraTypes		:	"All",
 	OSTypes			:	"WINDOWS",
-	propertyValue	:	"file://application/alarm.wav",
-	expectedResult	:	"file://application/alarm.wav"
+	propertyValue	:	"//application/alarm.wav",
+	expectedResult	:	"//application/alarm.wav"
 },
 {
 	testName		:	"Set  captureSound :localpath and mp3 file | application/alarm.mp3",
@@ -83,7 +83,7 @@ var arr_camera_property = [
 	testName		:	"Set desiredHeight :2048 | 2048",
 	propertyName	:	"desiredHeight",
 	cameraTypes		:	"All",
-	OSTypes			:	"All",
+	OSTypes			:	"APPLE",
 	propertyValue	:	"2048",
 	expectedResult	:	"2048"
 },
@@ -91,7 +91,7 @@ var arr_camera_property = [
 	testName		:	"Set desiredHeight :640 | 640",
 	propertyName	:	"desiredHeight",
 	cameraTypes		:	"All",
-	OSTypes			:	"All",
+	OSTypes			:	"APPLE",
 	propertyValue	:	"640",
 	expectedResult	:	"640"
 },
@@ -99,7 +99,7 @@ var arr_camera_property = [
 	testName		:	"Set desired_height :2048 | 2048",
 	propertyName	:	"desired_height",
 	cameraTypes		:	"All",
-	OSTypes			:	"All",
+	OSTypes			:	"APPLE",
 	propertyValue	:	"2048",
 	expectedResult	:	"2048"
 },
@@ -107,7 +107,7 @@ var arr_camera_property = [
 	testName		:	"Set desired_height :640 | 640",
 	propertyName	:	"desired_height",
 	cameraTypes		:	"All",
-	OSTypes			:	"All",
+	OSTypes			:	"APPLE",
 	propertyValue	:	"640",
 	expectedResult	:	"640"
 },
@@ -115,7 +115,7 @@ var arr_camera_property = [
 	testName		:	"Set desiredWidth :1536 | 1536",
 	propertyName	:	"desiredWidth",
 	cameraTypes		:	"All",
-	OSTypes			:	"All",
+	OSTypes			:	"APPLE",
 	propertyValue	:	"1536",
 	expectedResult	:	"1536"
 },
@@ -123,7 +123,7 @@ var arr_camera_property = [
 	testName		:	"Set desiredWidth :480 | 480",
 	propertyName	:	"desiredWidth",
 	cameraTypes		:	"All",
-	OSTypes			:	"All",
+	OSTypes			:	"APPLE",
 	propertyValue	:	"480",
 	expectedResult	:	"480"
 },
@@ -131,7 +131,7 @@ var arr_camera_property = [
 	testName		:	"Set desired_width :1536 | 1536",
 	propertyName	:	"desired_width",
 	cameraTypes		:	"All",
-	OSTypes			:	"All",
+	OSTypes			:	"APPLE",
 	propertyValue	:	"1536",
 	expectedResult	:	"1536"
 },
@@ -139,7 +139,7 @@ var arr_camera_property = [
 	testName		:	"Set desired_width :480 | 480",
 	propertyName	:	"desired_width",
 	cameraTypes		:	"All",
-	OSTypes			:	"All",
+	OSTypes			:	"APPLE",
 	propertyValue	:	"480",
 	expectedResult	:	"480"
 },
@@ -180,8 +180,8 @@ var arr_camera_property = [
 	propertyName	:	"fileName",
 	cameraTypes		:	"All",
 	OSTypes			:	"WINDOWS",
-	propertyValue	:	"file://application/test",
-	expectedResult	:	"file://application/test"
+	propertyValue	:	"//application/test",
+	expectedResult	:	"\\//application/test"
 },
 {
 	testName		:	"Set fileName :localpath | /mnt/sdcard/test",
@@ -195,7 +195,15 @@ var arr_camera_property = [
 	testName		:	"Set fileName :with special charecter | camera@$123",
 	propertyName	:	"fileName",
 	cameraTypes		:	"All",
-	OSTypes			:	"All",
+	OSTypes			:	"WINDOWS",
+	propertyValue	:	"camera@$123",
+	expectedResult	:	"\\camera@$123"
+},
+{
+	testName		:	"Set fileName :with special charecter | camera@$123",
+	propertyName	:	"fileName",
+	cameraTypes		:	"All",
+	OSTypes			:	"ANDROID APPLE WP8",
 	propertyValue	:	"camera@$123",
 	expectedResult	:	"camera@$123"
 },
@@ -479,27 +487,9 @@ var arr_camera_property_inval = [
 	propertyName	:	"captureSound",
 	cameraTypes		:	"All",
 	OSTypes			:	"WINDOWS",
-	DefaultValue    :   "file://application/alarm2.wav",
+	DefaultValue    :   "//application/alarm2.wav",
 	propertyValue	:	"",
 	expectedResult	:	""
-},
-{
-	testName		:	"Set  captureSound :invalid path",
-	propertyName	:	"captureSound",
-	cameraTypes		:	"All",
-	OSTypes			:	"WINDOWS",
-	DefaultValue    :   "file://application/alarm1.wav",
-	propertyValue	:	"file://application/inval",
-	expectedResult	:	"file://application/inval"
-},
-{
-	testName		:	"Set  captureSound :invalid path ",
-	propertyName	:	"captureSound",
-	cameraTypes		:	"All",
-	OSTypes			:	"ANDROID",
-	DefaultValue    :   "/mnt/sdcard/alarm.mp3",
-	propertyValue	:	"/file://application/inval",
-	expectedResult	:	"/mnt/sdcard/alarm.mp3"
 },
 {
 	testName		:	"Set  captureSound :empty ",
@@ -653,15 +643,6 @@ var arr_camera_property_inval = [
 	DefaultValue    :   "false",
 	propertyValue	:	"",
 	expectedResult	:	"false"
-},
-{
-	testName		:	"Set fileName :invalid path | invalid path",
-	propertyName	:	"fileName",
-	cameraTypes		:	"All",
-	OSTypes			:	"WINDOWS APPLE ANDROID",
-	DefaultValue    :   "camimage",
-	propertyValue	:	"/somedrive/somefolder/InvalidFolder",
-	expectedResult	:	"camimage"
 },
 {
 	testName		:	"Set fileName :empty path | empty path",
