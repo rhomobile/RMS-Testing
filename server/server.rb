@@ -405,6 +405,16 @@ $local_server.mount_proc( '/chunked' ) do |req, res|
 
 end
 
+$local_server.mount_proc( '/get_non_utf_body' ) do |req,res|
+
+  res.body = File.open( './non-utf.data', 'rb' )
+#  res['content-type'] = 'text/utf-8'
+  res.content_type = 'application/octet-stream'
+  res.content_length = 256
+  res.status = 200
+
+end
+
 
 #Secure server mount points
 $secure_server.mount_proc '/test_methods' do |req,res|
