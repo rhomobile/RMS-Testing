@@ -147,7 +147,7 @@ describe("Test spec for D180 payment device support", function(){
         	},25000);
         	runs(function(){
 	        	isOpen = document.getElementById('result1').innerHTML;
-	            expect(isOpen).toEqual('true');
+	            expect(isOpen).toEqual('false');
             });
 		});
 
@@ -915,13 +915,13 @@ describe("Test spec for D180 payment device support", function(){
 				Ruby.call('Mobilepayment','mobpay_promptmenu_empty');
 			});
 			waitsFor(function(){
-        		return !!(document.getElementById('result1').innerHTML !== '');
+        		return !!(document.getElementById('result2').innerHTML !== '');
         	},25000);
         	runs(function () {
         		var status = document.getElementById('cbstatus').innerHTML;
-        		var result = document.getElementById('result1').innerHTML;
-	            expect(status).toEqual('success');
-	            expect(result).toEqual('myMenu2');
+        		var result = document.getElementById('result2').innerHTML;
+	            expect(status).toEqual('error');
+	            expect(result).toEqual('INVALID_VALUE');
             });
 		});
 
@@ -1284,6 +1284,9 @@ describe("Test spec for D180 payment device support", function(){
             	expect(cbstatus).toEqual("success");
 				Ruby.call('Mobilepayment','mobpay_prompt_msg?confirm=true');
 			});
+			waitsFor(function(){
+				return !!(document.getElementById('result2').innerHTML !== '');
+			},"waiting for open callback", 25000);
 			runs(function(){
         		var status = document.getElementById('cbstatus').innerHTML;
         		var result = document.getElementById('result2').innerHTML;
@@ -1319,6 +1322,9 @@ describe("Test spec for D180 payment device support", function(){
             	expect(cbstatus).toEqual("success");
 				Ruby.call('Mobilepayment','mobpay_prompt_msg?confirm=true');
 			});
+			waitsFor(function(){
+				return !!(document.getElementById('result2').innerHTML !== '');
+			},"waiting for open callback", 25000);			
 			runs(function(){
         		var status = document.getElementById('cbstatus').innerHTML;
         		var result = document.getElementById('result2').innerHTML;
@@ -1352,6 +1358,9 @@ describe("Test spec for D180 payment device support", function(){
             	expect(cbstatus).toEqual("success");
 				Ruby.call('Mobilepayment','mobpay_prompt_msg?confirm=true');
 			});
+			waitsFor(function(){
+				return !!(document.getElementById('result1').innerHTML !== '');
+			},"waiting for open callback", 25000);			
 			runs(function(){
         		var status = document.getElementById('cbstatus').innerHTML;
         		var result = document.getElementById('result1').innerHTML;
@@ -1371,7 +1380,7 @@ describe("Test spec for D180 payment device support", function(){
 			spec.addPrecondition("Ensure payment device is opened.");
 			spec.addStep("Press 'RunTest' button.");
 			spec.addStep("Press Enter key from the device when prompt message is shown to the user with the device.");
-			spec.addExpectation("Semi auto test to check callback is triggered with status:error, errorName:OK_KEY_PRESSED");
+			spec.addExpectation("Semi auto test to check callback is triggered with status:success");
 			spec.displayScenario();
             spec.waitForButtonPressing("Run test");
 			var cbstatus;
@@ -1385,7 +1394,11 @@ describe("Test spec for D180 payment device support", function(){
             	cbstatus = document.getElementById('open').innerHTML;
             	expect(cbstatus).toEqual("success");
 				Ruby.call('Mobilepayment','mobpay_prompt_msg');
+				document.getElementById('cbstatus').innerHTML = '';
 			});
+			waitsFor(function(){
+				return !!(document.getElementById('cbstatus').innerHTML !== '');
+			},"waiting for open callback", 25000);				
 			runs(function(){
         		var status = document.getElementById('cbstatus').innerHTML;
 	            expect(status).toEqual('success');
@@ -1418,11 +1431,12 @@ describe("Test spec for D180 payment device support", function(){
             	expect(cbstatus).toEqual("success");
 				Ruby.call('Mobilepayment','mobpay_prompt_msg');
 			});
+			waitsFor(function(){
+				return !!(document.getElementById('cbstatus').innerHTML !== '');
+			},"waiting for open callback", 25000);
 			runs(function(){
         		var status = document.getElementById('cbstatus').innerHTML;
-        		var result = document.getElementById('result1').innerHTML;
-	            expect(status).toEqual('error');
-	            expect(result).toEqual('CANCEL_KEY_PRESSED');
+	            expect(status).toEqual('success');
 	        });
 		});
 
@@ -1566,8 +1580,10 @@ describe("Test spec for D180 payment device support", function(){
             	cbstatus = document.getElementById('open').innerHTML;
             	expect(cbstatus).toEqual("success");
 				Ruby.call('Mobilepayment','mobpay_setbatterylevel');
-				spec.waitForResponse();
-			});            
+			});
+			waitsFor(function(){
+				return !!(document.getElementById('result1').innerHTML !== '');
+			},"waiting for open callback", 25000);			
 			runs(function(){
 				var status = document.getElementById('cbstatus').innerHTML;
         		var result = document.getElementById('result1').innerHTML;
@@ -1594,7 +1610,10 @@ describe("Test spec for D180 payment device support", function(){
             	cbstatus = document.getElementById('open').innerHTML;
             	expect(cbstatus).toEqual("success");
 				Ruby.call('Mobilepayment','mobpay_setlowbatterylevel');
-			});            
+			});
+			waitsFor(function(){
+				return !!(document.getElementById('result2').innerHTML !== '');
+			},"waiting for open callback", 25000);
 			runs(function(){
 				var status = document.getElementById('cbstatus').innerHTML;
         		var error = document.getElementById('result1').innerHTML;
@@ -1625,7 +1644,10 @@ describe("Test spec for D180 payment device support", function(){
             	cbstatus = document.getElementById('open').innerHTML;
             	expect(cbstatus).toEqual("success");
 				Ruby.call('Mobilepayment','mobpay_setlowbatterylevel_invalid');
-			});            
+			});      
+			waitsFor(function(){
+				return !!(document.getElementById('result2').innerHTML !== '');
+			},"waiting for open callback", 25000);			      
 			runs(function(){
 				var status = document.getElementById('cbstatus').innerHTML;
         		var error = document.getElementById('result1').innerHTML;
@@ -1662,8 +1684,8 @@ describe("Test spec for D180 payment device support", function(){
 			runs(function(){
 				var status = document.getElementById('cbstatus').innerHTML;
         		var result = document.getElementById('result1').innerHTML;
-	            expect(error).toEqual('error');
-	            expect(error).toEqual('LOW_POWER_OPERATION_CANCELLED');
+	            expect(status).toEqual('error');
+	            expect(result).toEqual('LOW_POWER_OPERATION_CANCELLED');
 			});
 		});
 
@@ -1697,7 +1719,7 @@ describe("Test spec for D180 payment device support", function(){
 			});
 		});
 
-		it("VT377-00052 - Should send proper error status, when tried to remove card when no card inserted", function(){
+		it("VT377-052 - Should send proper error status, when tried to remove card when no card inserted", function(){
 			var spec = new ManualSpec(jasmine, window.document);
 			spec.addGoal("VT377-052 - Should show message to remove smartCard from the payment Device.");
 			spec.addPrecondition("Payment device is paired with bluetooth to the device.");
