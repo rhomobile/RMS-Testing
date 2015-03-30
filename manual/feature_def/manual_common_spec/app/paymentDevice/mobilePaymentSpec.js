@@ -2938,9 +2938,11 @@ describe("Test spec for D180 payment device support", function(){
 			spec.addGoal("VT377-067 - Should support for the method completeOnlineEmv.");
 			spec.addPrecondition("Payment device is paired via bluetooth with the device");
 			spec.addStep("Press 'Run test' button to start the test");
+			spec.addStep("Insert valid smart card when requested in payment device.");
 			spec.addExpectation("Observe that success status is retured with the callback");
 			spec.displayScenario();
 			spec.waitForButtonPressing("Run test");
+			var authorizecardTriggered = false;
 			var readCardDataTriggered = false;
 			var openCBTriggered = false;
 			var completeOnlineEmvCBTriggered = false;

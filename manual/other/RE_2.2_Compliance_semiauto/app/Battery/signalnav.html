@@ -1,0 +1,20 @@
+s<html>
+<head>
+    <title>Navigation Check</title>
+	<META HTTP-Equiv="SIPbutton" Content="visibility:visible">
+
+	<script language="javascript" type="text/javascript">
+		//var genericObj = new ActiveXObject("PocketBrowser.Generic");
+
+		function signalenable(){
+			signal.visibility = 'visible';
+			signal.signalEvent = "url('http://10.233.85.82:9099/app/Battery/batterynav.html')";
+		}
+	</script>
+</head>
+<body><br>
+	<h2>Suucessfully navigated to signal page</h2>
+	<P><INPUT TYPE="button" VALUE="Signal Enable" ONCLICK="signalenable();"></P>
+	<P><INPUT TYPE="button" VALUE="Back" ONCLICK="location.href='index.html'"></P>
+</body>
+</html>

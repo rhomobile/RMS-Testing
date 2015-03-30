@@ -16,7 +16,6 @@ iphone:
 wp8:
   productid: '4ee48a00-b05f-0132-40eb-3c075408aa51'
 android:
-  manifest_template: 'AndroidManifest.erb'
   version: 2.3.3
   # Note: in order to simplify debugging only app messages and system channels with priority informative and higher, and any errors are enabled by default
   logcatFilter: APP:I StrictMode:I DEBUG:I *:E

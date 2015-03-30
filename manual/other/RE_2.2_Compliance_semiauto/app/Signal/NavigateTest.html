@@ -1,0 +1,48 @@
+<html>
+<head>
+    <title>Navigation Check</title>
+<META HTTP-Equiv="SIPbutton" Content="visibility:visible">
+
+<script language="javascript" type="text/javascript">
+
+function MyReadEvent(data,mode)
+{	
+alert("Readevent fired");
+alert(data+mode);
+	switch(mode)
+	{
+	
+					case 'CR':
+					    //alert("card data:-"+data);
+						frmCardReader.txtCardData.value =data;
+						ProcessCardData(data);
+
+						break;
+					case 'ENCDATA':
+						frmCardReader.txtCardData.value ="Encrypted data:- "+data;
+						break;
+					case 'MESSAGE':
+						frmCardReader.txtCardData.value ="Error:- "+data;
+						break;
+					case 'PAN':
+						frmCardReader.txtCardData.value ="PAN:- "+data;
+						if(SelectedMSR == "DCR7000")
+						{
+						alert("Please turn the unit over and enter the PIN");
+						}
+						break;
+							
+    }					
+
+}
+</script>
+
+
+</head>
+<body>
+<form id="frmHoldGestures" action="GestureProcess_Hold.asp" method="post" >
+<h2>Successfully navigated to this page</h2>
+<P><BR><INPUT TYPE="button" VALUE="Back" ONCLICK="location.href='index.html'"></P>
+</form>
+</body>
+</html>

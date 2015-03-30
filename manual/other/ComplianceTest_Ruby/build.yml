@@ -15,14 +15,14 @@ iphone:
 wp8:
   productid: "da37e740-9d27-0131-ad03-0023241f0ea9"
 android:
-  manifest_template: "AndroidManifest.erb"
   ajax_api_bridge: false
   version: "4.2.2"
   capabilities:
 wm:
   ajax_api_bridge: false
-#sdk: "MC3000c50b (ARMV4I)"
+  #sdk: "MC3000c50b (ARMV4I)"
   sdk: "Windows Mobile 6.5.3 Professional DTK (ARMV4I)"
+
 extensions:
  - barcode
 #- indicators
@@ -32,6 +32,7 @@ extensions:
 #- printing_zebra
 #- signature
 #- screenorientation
+
 app_type: "rhoelements"
 capabilities:
 

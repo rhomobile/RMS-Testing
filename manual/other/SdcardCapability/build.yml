@@ -17,7 +17,6 @@ iphone:
 wp8:
   productid: "93f72ad0-c941-0131-ad05-0023241f0ea9"
 android:
-  manifest_template: "AndroidManifest.erb"
   version: "4.2.2"
   ajax_api_bridge: false
 extensions:

@@ -10,6 +10,7 @@ applog: "rholog.txt"
 capabilities:
   - pim
   - vibrate
+  - phone
 
 iphone:
   ajax_api_bridge: false
@@ -46,7 +47,6 @@ android:
     - mediaplayer
     - sensor
     - mediacapture
-
 wm:
   #webkit_outprocess: 1
   ajax_api_bridge: false
