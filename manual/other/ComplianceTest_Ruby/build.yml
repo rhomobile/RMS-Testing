@@ -24,12 +24,30 @@ wm:
 #sdk: "MC3000c50b (ARMV4I)"
   sdk: "Windows Mobile 6.5.3 Professional DTK (ARMV4I)"
 extensions:
-- indicators
-- mediaplayer
-- audiocapture
-- printing
-- printing_zebra
-- signature
-- screenorientation
+ - barcode
+#- indicators
+#- mediaplayer
+#- audiocapture
+#- printing
+#- printing_zebra
+#- signature
+#- screenorientation
 app_type: "rhoelements"
 capabilities:
+
+#sdk: c:/work/rhodes
+
+#paths:
+#  extensions:
+#    - C:/work/Motorola-Extensions/extensions
+#    - C:/work/Motorola-Extensions/lib/commonAPI
+
+#minify:
+#  js: false
+#  css: false
+
+#cloud:
+#  server_url:
+#    - https://rhohub-test-cedar.herokuapp.com 
+#    - https://rmsstaging.rhomobile.com/api/v1
+#    - https://rms.rhomobile.com/api/v1
