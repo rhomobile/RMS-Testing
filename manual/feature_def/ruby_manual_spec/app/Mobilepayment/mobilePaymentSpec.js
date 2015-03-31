@@ -1394,7 +1394,6 @@ describe("Test spec for D180 payment device support", function(){
             	cbstatus = document.getElementById('open').innerHTML;
             	expect(cbstatus).toEqual("success");
 				Ruby.call('Mobilepayment','mobpay_prompt_msg');
-				document.getElementById('cbstatus').innerHTML = '';
 			});
 			waitsFor(function(){
 				return !!(document.getElementById('cbstatus').innerHTML !== '');
@@ -1500,7 +1499,7 @@ describe("Test spec for D180 payment device support", function(){
 			spec.addGoal("VT377-044 - Should get the battery level of the payment device even if it is not opened");
 			spec.addPrecondition("Payment device is paired with bluetooth to the device.");
 			spec.addStep("Press 'RunTest' button.");
-			spec.addExpectation("Battery level of the payment device is retrieved successfully and VT377-000 be integer.");
+			spec.addExpectation("This is Semi-Auto test to check battery level of the payment device successfully and should be give proper error message.");
 			spec.displayScenario();
             spec.waitForButtonPressing("Run test");
 			var cbstatus;
@@ -1514,8 +1513,16 @@ describe("Test spec for D180 payment device support", function(){
             	cbstatus = document.getElementById('open').innerHTML;
             	expect(cbstatus).toEqual("success");
 				Ruby.call('Mobilepayment','mobpay_batterylevel');
-				spec.waitForResponse();
 			});
+			waitsFor(function(){
+				return !!(document.getElementById('result1').innerHTML !== '');
+			},"waiting for open callback", 25000);			
+			runs(function(){
+        		var status = document.getElementById('cbstatus').innerHTML;
+        		var result = document.getElementById('result1').innerHTML;
+	            expect(status).toEqual('error');
+	            expect(result).toEqual('DEVICE_NOT_ENABLED');
+			});			
 		});
 		it("VT377-045 - Should get the threshold value of the low battery level using method getLowBatteryThreshold().", function(){
 			var spec = new ManualSpec(jasmine, window.document);
@@ -1558,8 +1565,16 @@ describe("Test spec for D180 payment device support", function(){
             	cbstatus = document.getElementById('open').innerHTML;
             	expect(cbstatus).toEqual("success");
 				Ruby.call('Mobilepayment','mobpay_lowbatterythreshold');
-				spec.waitForResponse();
 			});
+			waitsFor(function(){
+				return !!(document.getElementById('result1').innerHTML !== '');
+			},"waiting for open callback", 25000);			
+			runs(function(){
+        		var status = document.getElementById('cbstatus').innerHTML;
+        		var result = document.getElementById('result1').innerHTML;
+	            expect(status).toEqual('error');
+	            expect(result).toEqual('DEVICE_NOT_ENABLED');
+			});			
 		});
 		it("VT377-047 - Should set the threshold value for the low battery level using method setLowBatteryThreshold().", function(){
 			var spec = new ManualSpec(jasmine, window.document);
@@ -1612,7 +1627,7 @@ describe("Test spec for D180 payment device support", function(){
 				Ruby.call('Mobilepayment','mobpay_setlowbatterylevel');
 			});
 			waitsFor(function(){
-				return !!(document.getElementById('result2').innerHTML !== '');
+				return !!(document.getElementById('result1').innerHTML !== '');
 			},"waiting for open callback", 25000);
 			runs(function(){
 				var status = document.getElementById('cbstatus').innerHTML;
@@ -1676,12 +1691,13 @@ describe("Test spec for D180 payment device support", function(){
 			runs(function(){
             	cbstatus = document.getElementById('open').innerHTML;
             	expect(cbstatus).toEqual("success");
-				Ruby.call('Mobilepayment','mobpay_removecard');
+				Ruby.call('Mobilepayment','mobpay_getsetbatterylevel');
 			});
 			waitsFor(function(){
 				return !!(document.getElementById('result1').innerHTML !== '');
 			},"waiting for open callback", 25000);		
 			runs(function(){
+				Rho.MobilePayment.setLowBatteryThreshold(1, "battery Low");
 				var status = document.getElementById('cbstatus').innerHTML;
         		var result = document.getElementById('result1').innerHTML;
 	            expect(status).toEqual('error');
@@ -1745,9 +1761,7 @@ describe("Test spec for D180 payment device support", function(){
 			},"waiting for open callback", 25000);		
 			runs(function(){
 				var status = document.getElementById('cbstatus').innerHTML;
-				var result = document.getElementById('result1').innerHTML;
-	            expect(status).toEqual('error');
-	            expect(result).toEqual('CARD_REMOVED');
+				expect(status).toEqual('success');
 			});
 		});
 
@@ -1775,7 +1789,7 @@ describe("Test spec for D180 payment device support", function(){
 			waitsFor(function(){
 				return !!(document.getElementById('cbresult').innerHTML !== '');
 				document.getElementById('cbstatus').innerHTML = '';
-			},"waiting for open callback", 25000);
+			},"waiting for readCardData callback", 25000);
 			runs(function(){
 				Ruby.call('Mobilepayment','mobpay_removecard');
 			});			
@@ -1799,7 +1813,7 @@ describe("Test spec for D180 payment device support", function(){
             spec.waitForButtonPressing("Run test");
 			var cbstatus;
 			runs(function(){
-				Ruby.call('Mobilepayment','mobpay_open');
+				Ruby.call('Mobilepayment','mobpay_close');
 			});
 			waitsFor(function(){
 				return !!(document.getElementById('open').innerHTML !== '');
@@ -1862,7 +1876,7 @@ describe("Test spec for D180 payment device support", function(){
 				Ruby.call('Mobilepayment','mobpay_getdeviceinfo');
 			});
 			waitsFor(function(){
-				return !!(document.getElementById('cbstatus').innerHTML !== '');
+				return !!(document.getElementById('result1').innerHTML !== '');
 			},"waiting for open callback", 25000);
 			runs(function(){
 				var status = document.getElementById('cbstatus').innerHTML;
@@ -2138,7 +2152,7 @@ describe("Test spec for D180 payment device support", function(){
 			},"waiting for open callback", 25000);
 			runs(function(){
 				var error = document.getElementById('result2').innerHTML;
-	            expect(error).toEqual("No callback handler provided");
+	            expect(error).toEqual("Wrong number of arguments");
 			});
 		});
 		it("VT377-067 - Should support for the method completeOnlineEmv", function(){
@@ -2163,7 +2177,7 @@ describe("Test spec for D180 payment device support", function(){
 			});
 			waitsFor(function(){
 				return !!(document.getElementById('cbstatus').innerHTML !== '');
-			},"waiting for open callback", 25000);
+			},"waiting for readCardData callback", 25000);
 			runs(function(){
 				document.getElementById('open').innerHTML = '';
 				Ruby.call('Mobilepayment','mobpay_authcard');
@@ -2213,16 +2227,6 @@ describe("Test spec for D180 payment device support", function(){
 			spec.addExpectation("Observe that tlvstings for the passed tags are returned with the callback.");
 			spec.displayScenario();
 			spec.waitForButtonPressing("Run test");
-			var readCardDataTriggered = false;
-			var openCBTriggered = false;
-			var getEmvCBTriggered = false;
-			var cbResult;
-			var getEmvCB = function(data){
-				cbResult = data;
-				spec.addResult("Status : ", data.status);
-				spec.addResult("tlvStrings : ", JSON.stringify(data.tlvStrings));
-				getEmvCBTriggered = true;
-			};
 			var cbstatus;
 			runs(function(){
 				Ruby.call('Mobilepayment','mobpay_open');

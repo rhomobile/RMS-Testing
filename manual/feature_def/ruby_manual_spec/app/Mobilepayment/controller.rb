@@ -76,7 +76,6 @@ def prompt_pin_cb
 end
 
 def promptmenu_cb
-	Alert.show_popup(@params.to_json.to_s)
 	if @params['status']
 		status = @params['status']
 		Rho::WebView.executeJavascript('document.getElementById("cbstatus").innerHTML = "'+status+'"')
@@ -113,7 +112,6 @@ def promptmsg_cb
 end
 
 def promptaddinfo_cb
-	Alert.show_popup(@params.to_json.to_s)
 	if @params['status']
 		status = @params['status'] 
 		Rho::WebView.executeJavascript('document.getElementById("cbstatus").innerHTML = "'+status+'"')
@@ -144,13 +142,25 @@ def validate_cbdata
 	Rho::WebView.executeJavascript('document.getElementById("result1").innerHTML = "true"')
 end
 
+def auth_cbdata
+	@data = " "
+	@data += "Status - " + @params['status'].to_s if @params['status']
+	@data += "; tlvStrings - " + @params['tlvStrings'].to_json.to_s if @params['tlvStrings']
+	@data += "; keySerialNo - " + @params['keySerialNo'].to_s if @params['keySerialNo']
+	@data += "; pinBlock - " + @params['pinBlock'].to_s if @params['pinBlock']
+	Rho::WebView.executeJavascript('document.getElementById("open").innerHTML = "true"')
+	Rho::WebView.executeJavascript('document.getElementById("cbresult").innerHTML = "'+@data+'"')
+end
+
 def completeevm_cbdata
+	@data = " "
 	if @params['status']
+		@data += "Status - " + @params['status'].to_s
 		status = @params['status'] 
 		Rho::WebView.executeJavascript('document.getElementById("cbstatus").innerHTML = "'+status+'"')
 	end
-	data = @params.to_json.to_s
-	Rho::WebView.executeJavascript('document.getElementById("cbresult").innerHTML = "'+data+'"')
+	@data += "; tlvStrings - " + @params['tlvStrings'].to_json.to_s if @params['tlvStrings']
+	Rho::WebView.executeJavascript('document.getElementById("cbresult").innerHTML = "'+@data+'"')
 end
 
 def abort_cb
@@ -221,7 +231,6 @@ def mobpay_readcard
 end
 
 def mobpay_readcard_invalid
-	Alert.show_popup("insert and remove your smart card immediately.")
 	@props = {
 		"amount" => "invalidValue",
 		"otherAmount" => "invalidValue",
@@ -376,8 +385,12 @@ end
 
 def mobpay_batterylevel
 	@data = Rho::MobilePayment.getBatteryLevel()
+	status = @data['status'] if @data['status']
+	error = @data['errorName'] if @data['errorName']
+	Rho::WebView.executeJavascript('document.getElementById("cbstatus").innerHTML = "'+status+'"')
+	Rho::WebView.executeJavascript('document.getElementById("result1").innerHTML = "'+error+'"')	
 	@result = " "
-	@result += "batteryLevel - " + @data['batteryLevel'].to_s
+	@result += "batteryLevel - " + @data['batteryLevel'].to_s if @data['batteryLevel']
 	@result += "; Status - " + @data['status'] if @data['status']
 	@result += "; ErrorName - " + @data['errorName'] if @data['errorName']
 	Rho::WebView.executeJavascript('document.getElementById("cbresult").innerHTML = "'+@result+'"')
@@ -385,17 +398,19 @@ end
 
 def mobpay_lowbatterythreshold
 	@data = Rho::MobilePayment.getLowBatteryThreshold()
-	Alert.show_popup(@data.to_json.to_s)
+	status = @data['status'] if @data['status']
+	error = @data['errorName'] if @data['errorName']
+	Rho::WebView.executeJavascript('document.getElementById("cbstatus").innerHTML = "'+status+'"')
+	Rho::WebView.executeJavascript('document.getElementById("result1").innerHTML = "'+error+'"')	
 	@result = " "
-	@result += "lowBatteryThreshold - " + @data['lowBatteryThreshold'].to_s
-	@result += "; Success - " + @data['status'] if @data['status']
+	@result += "lowBatteryThreshold - " + @data['lowBatteryThreshold'].to_s if @data['lowBatteryThreshold']
+	@result += "; Status - " + @data['status'] if @data['status']
 	@result += "; errorName - " + @data['errorName'] if @data['errorName']
 	Rho::WebView.executeJavascript('document.getElementById("cbresult").innerHTML = "'+@result+'"')
 end
 
 def mobpay_setbatterylevel
 	@data = Rho::MobilePayment.setLowBatteryThreshold(1, "Battery Low")
-	Alert.show_popup(@data.to_json.to_s)
 	status = @data['status'] if @data['status']
 	@getdata = Rho::MobilePayment.getLowBatteryThreshold()
 	output = @getdata['lowBatteryThreshold'].to_s if @getdata['lowBatteryThreshold']
@@ -433,18 +448,25 @@ end
 
 def mobpay_getsetbatterylevel
 	@batlevel = Rho::MobilePayment.getBatteryLevel()
-	@data = Rho::MobilePayment.setLowBatteryThreshold((@batlevel['batteryLevel']) + 1, "battery Low")
+	@data = Rho::MobilePayment.setLowBatteryThreshold(@batlevel['batteryLevel'] + 1, "battery Low")
+	if @data['status']
+		status = @data['status']
+		Rho::WebView.executeJavascript('document.getElementById("cbstatus").innerHTML = "'+status+'"')
+	end
+	if @data['errorName']
+		error = @data['errorName']  
+		Rho::WebView.executeJavascript('document.getElementById("result1").innerHTML = "'+error+'"')	
+	end
 	if @data['status'] == 'success'
 		@props = {
-		"amount" => 200.00,
-		"otherAmount" => 10.00,
-		"readMode" => 1,
-		"messageTitle" => "Message title",
-		"message1" => "This is message 1.",	#Message one
-		"message2" => "This is message 2.",	#Message two
-		"readTimeOut" => 10000
+			"amount" => 200.00,
+			"otherAmount" => 10.00,
+			"readMode" => 1,
+			"messageTitle" => "Message title",
+			"message1" => "This is message 1.",	#Message one
+			"message2" => "This is message 2.",	#Message two
+			"readTimeOut" => 10000
 		}
-	
 		Rho::MobilePayment.readCardData(@props, url_for(:action => :card_cbdata))
 	end
 end
@@ -468,9 +490,12 @@ def mobpay_getdeviceinfo
 	end
 	Rho::WebView.executeJavascript('document.getElementById("cbstatus").innerHTML = "'+status+'"')
 	@result = " "
-
-	@result = @data.to_json.to_s
-	Alert.show_popup(@result)
+	@result += "Status - " + @data['status'].to_s if @data['status']
+	@result += "; Application Version - " + @data['applicationVersion'].to_s if @data['applicationVersion']
+	@result += "; Firmware Version - " + @data['firmwareVersion'].to_s if @data['firmwareVersion']
+	@result += "; Connection Type - " + @data['connectionType'].to_s if @data['connectionType'] 
+	@result += "; Device Type - " + @data['deviceType'].to_s if @data['deviceType']
+	@result += "; Friendly Name - " + @data['friendlyName'].to_s if @data['friendlyName']
 	Rho::WebView.executeJavascript('document.getElementById("cbresult").innerHTML = "'+@result+'"')
 end
 
@@ -490,17 +515,19 @@ def mobpay_createmac
 			@data = Rho::MobilePayment.createMac("0123456789ABCDEF")
 		end
 	end
-	status = @data['status']
-
-	Rho::WebView.executeJavascript('document.getElementById("cbstatus").innerHTML = "'+status+'"')
+	if @data['status']
+		status = @data['status'] 
+		Rho::WebView.executeJavascript('document.getElementById("cbstatus").innerHTML = "'+status+'"')
+	end
 	if @data['errorName']
 		error = @data['errorName']
 		Rho::WebView.executeJavascript('document.getElementById("result1").innerHTML = "'+error+'"')
 	end
 
-	@result = "Status - " + @data['status']
-	@result += "errorName - " + @data['errorName'] if @data['errorName']
-
+	@result = " "
+	@result += "Status - " + @data['status'] if @data['status']
+	@result += "; macBlock - " + @data['macBlock'].to_s if @data['macBlock']
+	@result += "; errorName - " + @data['errorName'] if @data['errorName']
 	Rho::WebView.executeJavascript('document.getElementById("cbresult").innerHTML = "'+@result+'"')	
 
 	if @params['val']
@@ -511,17 +538,19 @@ def mobpay_createmac
 			Rho::MobilePayment.validateMac(@mac, 0, "", "", "", "", "0123456789ABCDEF", url_for(:action => :validate_cbdata))
 		elsif @params['nocb']
 			begin
-				@mac = @data['macBlock']
 				Rho::MobilePayment.validateMac(@mac, 0, "", "", "message1", "message2", "0123456789ABCDEF")
 			rescue Exception => e
 				error = e.to_s
+				Alert.show_popup(error)
 				Rho::WebView.executeJavascript('document.getElementById("result2").innerHTML = "'+error+'"')
 			end
 		else
 			Rho::MobilePayment.validateMac(@mac, 0, "", "", "message1", "message2", "0123456789ABCDEF", url_for(:action => :validate_cbdata))
 		end
 	end
-	Rho::WebView.executeJavascript('document.getElementById("result2").innerHTML = "'+@mac+'"')
+	if !@params['nocb']
+		Rho::WebView.executeJavascript('document.getElementById("result2").innerHTML = "'+@mac+'"')
+	end
 end
 
 def mobpay_authcard
@@ -539,7 +568,7 @@ def mobpay_authcard
 			Rho::MobilePayment.authorizeCard(100.00, 10.00, 1, ["C2", "95", "9B"], true, false, false, false, 10000, url_for(:action => :auth_cbdata))
 		else
 			val = ["9F41","9F02","5F36","9F1B","9F1C","9F35","9F1A"]
-			Rho::MobilePayment.authorizeCard(15.0,2.0,0,val,true,false,true,true,10000, url_for(:action => :auth_cbdata))
+			Rho::MobilePayment.authorizeCard(15.0, 2.0,0, val, true, false, true, true, 10000, url_for(:action => :auth_cbdata))
 		end		
 	rescue Exception => e
 		error = e.to_s
