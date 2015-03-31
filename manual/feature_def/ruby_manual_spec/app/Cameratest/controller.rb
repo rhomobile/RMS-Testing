@@ -209,8 +209,6 @@ def show_preview_rotate
 	set_camera
 	$camera.showPreview({'previewHeight' => 60, 'previewWidth' => 100, 'previewLeft' => 10, 'previewTop' => 10})
 	sleep 10
-	Rho::ScreenOrientation.upsideDown()
-	sleep 5
 	$camera.capture(url_for(:action => :camera_callback))
 end
 
@@ -306,7 +304,36 @@ def take_picture_rotate
 	set_camera
 	$camera.takePicture(url_for(:action => :camera_callback))
 	#sleep 10
-	Rho::ScreenOrientation.rightHanded()
+	#Rho::ScreenOrientation.rightHanded()
+end
+
+def showpreview_misc
+	set_camera
+	$camera.showPreview({'fileName' => 'showpreviewImage'})
+end
+
+def takepic_misc
+	set_camera
+	$camera.takePicture({'fileName' => 'takepictureImage'}, url_for(:action => :camera_callback))
+end
+
+def hidepreview
+	set_camera
+	$camera.hidePreview()
+end
+
+def showpreview_persist
+	set_camera
+	@props = {
+		'previewLeft' => 50,
+		'previewTop' => 50,
+		'previewHeight' => 80,
+		'previewWidth' => 40,
+		'fileName' => '\\Application\\persistCapture',
+		'flashMode' => 'on',
+		'aimMode' => 'on'
+	};
+	$camera.showPreview(@props)
 end
 
 end

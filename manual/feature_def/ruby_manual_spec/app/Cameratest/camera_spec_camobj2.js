@@ -174,6 +174,9 @@ describe("Camera API Manual Tests", function(){
 			            spec.waitForButtonPressing("Run test");
 						runs(function(){
 							Ruby.call('Cameratest','show_preview_rotate?'+camtype);
+							setTimeout(function(){
+								Rho.ScreenOrientation.upsideDown();
+							},6000);							
 			                spec.waitForResponse();
 			                Rho.ScreenOrientation.normal();
 						});
@@ -299,6 +302,9 @@ describe("Camera API Manual Tests", function(){
 			            spec.waitForButtonPressing("Run test");
 						runs(function(){
 							Ruby.call('Cameratest','take_picture_rotate?'+camtype);
+							setTimeout(function(){
+								Rho.ScreenOrientation.rightHanded();
+							},6000);							
 			                spec.waitForResponse();
 							Rho.ScreenOrientation.normal();
 						});
@@ -722,7 +728,7 @@ describe("Camera API Manual Tests", function(){
 			});
 
 			if(isWindowsMobilePlatform()){
-				xdescribe("Miscellaneous Tests " , function() {
+				describe("Miscellaneous Tests " , function() {
 					it("VT285-0065 | Should try to enable fullscreen after preview window | using "  + camtype , function(){
 						var spec = new ManualSpec(jasmine, window.document);
 			        	spec.addGoal(jasmine.getEnv().currentSpec.description);
@@ -735,30 +741,23 @@ describe("Camera API Manual Tests", function(){
 			            spec.waitForButtonPressing("Run test");
 			            var response = false;
 						runs(function(){
-							objCAM.showPreview({'fileName':'showpreviewImage'});
+							Ruby.call('Cameratest','showpreview_misc?'+camtype);
 							setTimeout(function(){
-								objCAM.takePicture({'fileName':'takepictureImage'}, callbackFunc);
+								Ruby.call('Cameratest','takepic_misc?'+camtype);
 							},6000);
 							setTimeout(function(){
 								response = true;
 							},15000);							
 						});
 						waitsFor(function(){
-							return callbackTriggered || response;
+							return response || !!(document.getElementById('expected').innerHTML !== '');
 						},"waiting for callback data", 25000);
 						runs(function(){
-							objCAM.hidePreview();
-							if(callbackTriggered == true){
-								spec.addResult("status : ", callbackData.status);
-								spec.addResult("message : ", callbackData.message);
-								spec.addResult("imageHeight : ", callbackData.imageHeight);
-								spec.addResult("imageWidth : ", callbackData.imageWidth);
-								spec.addResult("imageFormat : ", callbackData.imageFormat);
-								spec.addResult("imageUri : ", callbackData.imageUri);
+							Ruby.call('Cameratest','hidepreview?'+camtype);
+							if(document.getElementById('expected').innerHTML == ''){
+								document.getElementById('expected').innerHTML = 'takePicture method not triggered", "Hence test case is a pass !';
 							}else{
-								spec.addResult("takePicture method not triggered", "Hence test case is a pass !");
 							}
-							spec.displayResults();
 			                spec.waitForResponse();
 						});
 					});
@@ -772,17 +771,8 @@ describe("Camera API Manual Tests", function(){
 			            spec.addExpectation('Preview window properties should persist and the capture call would enable flash for color camera (if available) or aim will be ON in case of imager. Captured image should be persistCapture.jpg in Application folder.');
 			            spec.displayScenario();
 			            spec.waitForButtonPressing("Run test");
-			            var param = {
-		            		'previewLeft': 50,
-							'previewTop':50,
-							'previewHeight': 80,
-							'previewWidth': 40,
-							'fileName': '\\Application\\persistCapture',
-							'flashMode': 'on',
-							'aimMode': 'on'
-						};
 						runs(function(){
-							objCAM.showPreview(param);
+							Ruby.call('Cameratest','showpreview_persist?'+camtype);
 							setTimeout(function(){
 								window.location.href="./cameraPersistPage.html?"+camtype;
 							},6000);
@@ -801,7 +791,7 @@ describe("Camera API Manual Tests", function(){
 							spec.waitForResponse();
 						});
 					});
-				});
+				});			
 			};
 		}else{
 			alert('front or imager camera not found');
