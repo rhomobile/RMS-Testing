@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Application Ruby Test</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+	<META HTTP-Equiv="MinimizeButton" content="visibility:Visible;top:30 " >
+	<META HTTP-Equiv="quitbutton" Content="visibility:visible">
+	<META HTTP-Equiv="ReloadButton" Content="visibility:visible">
+	
+    <script type="text/javascript" charset="utf-8" src="../../public/jquery/jquery-1.9.1.min.js"></script>
+
+    <link type="image/png" rel="shortcut icon" href="../../public/jasmine/jasmine_favicon.png">
+    <link type="text/css" rel="stylesheet" href="../../public/jasmine/jasmine.css">
+    <script type="text/javascript" src="../../public/jasmine/jasmine.js"></script>
+    <script type="text/javascript" src="../../public/jasmine/jasmine-html.js"></script>
+    <script type="text/javascript" src="../../public/jasmine/jasmine.junit_reporter.js"></script>
+    <script type="text/javascript" src="../helpers/rhologReporter.js"></script>
+    <script type="text/javascript" src="../../public/api/rhoapi-modules.js"></script>
+
+	<style>
+	#detailsdiv {
+    background: url("img/grid2.gif") repeat scroll 0 0 transparent;
+    border: 1px solid #DCDCDC;
+    color: #8B0000;
+    display: block;
+    font-weight: bold;
+    left: 170px;
+    padding: 10px;
+    position: fixed;
+    text-align: center;
+    top: 200px;
+    width: 530px;
+	}
+	</style>
+
+	<!-- include Helper files here... -->
+    <script type="text/javascript" src="../helpers/specHelpers.js"></script>
+
+
+	<!-- include spec files here... -->
+	<script type="text/javascript" src="application_ruby_spec.js"></script>
+
+	<script type="text/javascript">
+
+    (function () {
+        var jasmineEnv = jasmine.getEnv();
+        jasmineEnv.updateInterval = 1000;
+
+        var htmlReporter = new jasmine.HtmlReporter();
+        var junitReporter = new jasmine.JUnitXmlReporter();
+        junitReporter.useDotNotation = false
+        jasmineEnv.addReporter(htmlReporter);
+        jasmineEnv.addReporter(new jasmine.RhologReporter());
+        jasmineEnv.addReporter(new jasmine.JUnitXmlReporter('.\\', true, true));
+
+        jasmineEnv.specFilter = function (spec) {
+            return htmlReporter.specFilter(spec);
+        };
+
+        var currentWindowOnload = window.onload;
+        window.onload = function() {
+          if (currentWindowOnload) {
+            currentWindowOnload();
+          }
+
+          execJasmine();
+        };
+
+        function execJasmine() {
+          jasmineEnv.execute();
+        }
+
+    })();
+	</script>
+
+</head>
+<body>
+<script type="text/javascript">
+    $('#pass').hide();
+    $('#fail').hide();
+    $('#oldpass').hide();
+    $('#oldfail').hide();
+    $('#runtest').hide();
+</script>
+<div>
+  <textarea rows="2" cols="10" tabindex="1">
+  </textarea>&nbsp;&nbsp;&nbsp;
+  <textarea rows="2" cols="10" tabindex="2">
+  </textarea>
+</div>
+    <h1>Application Manual FD Tests</h1>
+    <br/>
+    <div id="preCondition"></div>
+    <br/>
+    <b>Test Running: </b><div id="instruction"></div>
+    <br/>
+    <b>Expected Result: </b><div id="expectedresult"></div>
+    <br/>
+    <div>
+        <ul id="verificationResult">
+        </ul>
+    </div>
+    <input type="button" value="Run Test" onclick="_result.runTest();" id="runtest"/>
+    <input type="button" value="Test Passed" onclick="_result.passed();" id="pass" />
+    <input type="button" value="Test Failed" onclick="_result.failed();" id="fail" />
+    <div id="actResult" style="display:none">init</div>
+</body>
+</html>
