@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Camera Ruby Test</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <META HTTP-Equiv="MinimizeButton" content="visibility:Visible;top:30 ">
+    <META HTTP-Equiv="quitbutton" Content="visibility:visible">
+    <META HTTP-Equiv="ReloadButton" Content="visibility:visible">
+
+    <script type="text/javascript" charset="utf-8" src="../../public/jquery/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../../public/jquery/jquery.json-2.3.min.js"></script>
+
+    <link type="text/css" rel="stylesheet" href="../../public/jasmine/jasmine-1.3.1/jasmine.css">
+    <script type="text/javascript" src="../../public/jasmine/jasmine-1.3.1/jasmine.js"></script>
+    <script type="text/javascript" src="../../public/jasmine/jasmine-1.3.1/jasmine-html.js"></script>
+    <script type="text/javascript" src="../../public/jasmine/jasmine.junit_reporter.js"></script>
+    <script type="text/javascript" src="../helpers/rhologReporter.js"></script>
+    <script type="text/javascript" src="../../public/api/rhoapi-modules.js"></script>
+
+    <!-- js scripts and css for manual jasmine -->
+    <script type="text/javascript" src="../../public/jasmine/jasmineManual/manualSpecLauncher.js"></script>
+    <script type="text/javascript" src="../../public/jasmine/jasmineManual/manualSpec.js"></script>
+    <link type="text/css" rel="stylesheet" href="../../public/jasmine/jasmineManual/manualSpec.css">
+
+    <!-- include Helper files here... -->
+    <script type="text/javascript" src="../helpers/specHelpers.js"></script>
+
+    <!-- include spec files here... -->
+    <script type="text/javascript" src="camera_spec_rubygen.js"></script>
+    <style type="text/css">
+        #notsupported{
+            color:red;
+            font-style:bold;
+        }
+    </style>
+    <script type="text/javascript">
+
+        (function () {
+            var jasmineEnv = jasmine.getEnv();
+            jasmineEnv.updateInterval = 1000;
+
+            var htmlReporter = new jasmine.HtmlReporter();
+            var junitReporter = new jasmine.JUnitXmlReporter();
+            junitReporter.useDotNotation = false
+            jasmineEnv.addReporter(htmlReporter);
+            jasmineEnv.addReporter(new jasmine.RhologReporter());
+            jasmineEnv.addReporter(new jasmine.JUnitXmlReporter('.\\', true, true));
+
+            jasmineEnv.specFilter = function (spec) {
+                return htmlReporter.specFilter(spec);
+            };
+
+            var currentWindowOnload = window.onload;
+            window.onload = function () {
+                if (currentWindowOnload) {
+                    currentWindowOnload();
+                }
+                var launcher = ManualSpecLauncher(jasmine, window.document);
+                if (window.location.href.indexOf('?') != -1) {
+                    jasmineEnv.execute();
+                }
+            };
+
+        })();
+    </script>
+
+</head>
+<body>
+    <div id="imageUriDiv">
+        <img src="" id="imageUri"></img>
+    </div><br>
+    <div id="notsupported"></div>
+    <div id="expected"></div>
+    <div id="image"></div>
+</body>
+</html>

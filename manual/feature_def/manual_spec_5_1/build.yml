@@ -1,0 +1,42 @@
+name: "manual_spec_5_1"
+version: 1.0
+vendor: "rhomobile"
+build: "release"
+applog: "rholog.txt"
+capabilities:
+  - pim
+  - vibrate
+  - phone
+app_type: "rhoelements"
+
+iphone:
+  ajax_api_bridge: false
+  sdk: "iphoneos8.2"
+  configuration: "Release"
+  provisionprofile: 
+  codesignidentity: "iPhone Developer"
+  entitlements: 
+  BundleIdentifier: "com.rhomobile.manualspec51"
+  BundleURLScheme: "manualspec51"
+  extensions:
+    - screenorientation
+    - mediacapture
+
+wp8:
+  ajax_api_bridge: false
+  productid: "fa586990-6e21-0130-bf9e-3c075409010c"
+  extensions:
+    - mediacapture
+
+android:
+  ajax_api_bridge: false
+  version: "4.2.2"
+  manifest_template: AndroidManifest.erb
+  extensions:
+    - screenorientation
+    - mediacapture
+wm:
+  ajax_api_bridge: false
+  extensions:
+    - screenorientation
+    - mediacapture
