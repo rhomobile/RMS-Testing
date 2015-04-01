@@ -12,13 +12,19 @@ var platformSupported = ["APPLE", "ANDROID"];
 			dispVerificationStatus(JSON.stringify(data));
 		}
 
+		var callbackenable = function (data){
+			dispVerificationStatus(JSON.stringify(data).replace(/[,]/g,'<br />'));
+		}
+
 		enumData = Rho.Barcode.enumerate();
 
 	   for (var j = 0;j<enumData.length;j++){
 
 	   (function(objSCN){ 
 
-	   	var scnid = objSCN.getProperty('scannerType');
+	   		var scnid = objSCN.getProperty('scannerType');
+	   		var scntype = objSCN.getProperty('scannerType');
+			var reticleType = (objSCN.friendlyName == "2D Imager" && isAndroid ? "hardwareReticle" : "softwareReticle");
 
 		beforeEach(function() {
 			enableFlag = false;
