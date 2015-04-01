@@ -122,7 +122,7 @@ var platformSupported = ["APPLE", "ANDROID"];
 			dispExpectedResult("all the supported properties should return in function callback");
 			_result.waitToRunTest();
 			runs(function() {
-				objSCN.enable();
+				objSCN.getSupportedProperties(function(data){dispVerificationStatus(JSON.stringify(data));});
 				setTimeout(function() {             
 					enableFlag = true;
 				}, ENABLE8K);
