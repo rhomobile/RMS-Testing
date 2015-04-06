@@ -18,6 +18,7 @@ function callBackFunc(param) {
 				"Steps":["Set visibility parameter to visible of addressbar","Connect to open network WIFI(M-guest)","Enter any secure site link which starts with https identifier","Press enter button"],
 				"ExpectedOutcome":["Page sholuld navigate to secure https site successfully"],
 				"testToPerform":function(){
+					addressBar.top = '100';
 					addressBar.visibility = 'visible';  
 
 				},

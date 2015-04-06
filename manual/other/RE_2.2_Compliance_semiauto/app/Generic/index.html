@@ -3,20 +3,26 @@
 <head>
 	<br/><input type="button" value="Quit" onclick="quitPB();" />
 	<input type="button" value="Back"  onclick="location.href='../index.html'" />
-
+	<input type="button" value="RegEdit" onclick="openRegEdit();" />
 	<title>PB and RE2.2 Semi Auto Frame Work : Module</title>
 
 	<!-- Loading css styles -->
 	<link rel="stylesheet" type="text/css" href="/public/css/main.css">
 
 	<!-- Loading js scripts -->
-	<script type="text/javascript" src="http://10.233.85.82/src/elements.js"></script>
+	<!--<script type="text/javascript" src="http://10.233.85.82/src/elements.js"></script>-->
+	<script type="text/javascript" src="/public/re1/elements.js"></script>
 	<script type="text/javascript" src="/public/js/main.js"></script>
 	<script type="text/javascript" src="/public/js/helper.js"></script>
-
+	<script type="text/javascript">
+		function openRegEdit(){
+			generic.LaunchProcessNonBlocking('\\Application\\RegEdit.exe', '');
+		}
+	</script>
 	<!-- Module related js scripts -->
 	<script type="text/javascript" src="./generictest.js"></script>
-
+	<script type="text/javascript" src="../helpers/specHelpers.js"></script>
+	<script type="text/javascript" charset="utf-8" src="/public/api/rhoapi-modules.js"></script>
 	<!-- Initiate the main js script -->
 	<script type="text/javascript"> main.init(); </script>
 </head>
