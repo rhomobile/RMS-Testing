@@ -11,6 +11,7 @@
 	        "ExpectedOutcome":['The Battery icon should be shown in the display','Once the GetSmartBatteryStatus method is called SmartBatteryEvent should get triggered and the event should return attributes about Serial Number, Part Number, Battery Charge Cycles, Rated Capacity, Manufacture Date and State of Health<br/>Note: State of Health should return any of the one from("Healthy", "Unhealthy" or "Unknown")','Date of the battery was manufactured should be expressed as MM/DD/YYYY.'],
 	        "testToPerform":function(){
 					battery.visibility = 'visible';
+					battery.top = 100;
 					battery.smartBatteryEvent = "SmartBattery('%s','%s','%s','%s','%s');";
 	                battery.getSmartBatteryStatus();
 			},
