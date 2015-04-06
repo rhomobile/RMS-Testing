@@ -200,7 +200,7 @@
         <div class="test_scenario">
             <div class="test_scenario_controls">
                 <a href="javascript:void(0)"
-                   onclick="var fname = itms-services://?action=download-manifest&url=' + httpServerUrl + '/TestApp.plist'; Ruby.call('System','app_install?file='+fname);">Install app from HTTP url</a>
+                   onclick="var fname = itms-services://?action=download-manifest&url=' + 'https://rhomobile-suite.s3.amazonaws.com/test_data/TestApp' + '/TestApp.plist'; Ruby.call('System','app_install?file='+fname);">Install app from HTTP url</a>
             </div>
             <span class="test_scenario_number">VT200-0679 <br/></span>
         </div>
