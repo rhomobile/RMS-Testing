@@ -109,7 +109,7 @@ function performGesture(Gtype, GID, Preset_value, Diagonstics_value, VThreshold_
 		pbTestObj.testCases = [
 		
 		{
-			"VTID":"VT366 - 2536",
+			"VTID":"VT366-0114",
 			"RegLevel":"R1",
 			"Description":"Shake Gesture Default Quiet Shaking time difference<Quiet",
 			"PreCondition":[],

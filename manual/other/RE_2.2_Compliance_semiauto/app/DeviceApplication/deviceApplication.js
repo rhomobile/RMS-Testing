@@ -3,6 +3,14 @@ var notificationEnumLength = 0;
 var notificationEnumObj = null;
 var temp = "";
 // VT187-1454 : callback for enumeration
+
+function doStatejsFunction(applicationState)
+{
+var theOutput = applicationState;
+main.displayResult(theOutput);
+
+}
+
 function doFunction(data){
 	var arrLen = data.notificationsArray.length;
 	notificationEnumObj = data.notificationsArray;

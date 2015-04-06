@@ -140,9 +140,10 @@ function onBluetoothEventjson(jsonObject)
 				"ExpectedOutcome":["Scanner will scan the barcode and will append an enter at the end of decoded data"],
 				"testToPerform":function(){
 					enableSpecifiedScanner('SCN1');
-					enableSpecifiedScanner('autoenter');
+					//enableSpecifiedScanner('autoenter');
+					scanner.autoEnter='enabled';
 					setDecoder('allDecoders');
-					scanner.decodeEvent = "onDecodeEventJS('%s', '%s', '%s', '%s', '%s', '%s');";
+					//scanner.decodeEvent = "onDecodeEventJS('%s', '%s', '%s', '%s', '%s', '%s');";
 					scanner.start();
 				},
 				"FinalResult":""
@@ -155,9 +156,11 @@ function onBluetoothEventjson(jsonObject)
 				"ExpectedOutcome":["Scanner will scan the barcode and will append a tab at the end of decoded data"],
 				"testToPerform":function(){
 					enableSpecifiedScanner('SCN1');
-					enableSpecifiedScanner('autotab');
+					//enableSpecifiedScanner('autotab');
+					scanner.autoEnter='disabled';
+					scanner.autoTab='enabled';
 					setDecoder('allDecoders');
-					scanner.decodeEvent = "onDecodeEventJS('%s', '%s', '%s', '%s', '%s', '%s');";
+					//scanner.decodeEvent = "onDecodeEventJS('%s', '%s', '%s', '%s', '%s', '%s');";
 					scanner.start();
 				},
 				"FinalResult":""

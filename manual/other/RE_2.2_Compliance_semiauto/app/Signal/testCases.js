@@ -50,6 +50,7 @@ function OnSignal(signal, ESSID, MAC, AdapterName, DHCPServer, DHCPStatic, Gatew
 				"ExpectedOutcome":["Wireless signal indicator icon should be visible on top right of device screen with default color of black.","signal indicator icon should be persistant on each page."],
 				"testToPerform":function(){
 					signal.visibility = 'visible';
+					signal.top = 100;
 				},
 				"FinalResult":""
 			},{

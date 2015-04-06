@@ -78,21 +78,21 @@ function hide(){
 					signatureCapture.visibility = 'visible';
 				},
 				"FinalResult":""
-			},/*{
+			},{
 				"VTID":"VT366-0257",
 				"RegLevel":"R1",
 				"Description":"signatureSaveEvent Destination(http)",
 				"PreCondition":[],
-				"Steps":["1. Make visible the SignatureCapture area.","2. Set Destination to ftp server url.","3. Set valid UserName and Password of ftp server","4. Attach signatureSaveEvent on page.","5. Draw a signature in the rectangular capture area","6. Call capture method."],
+				"Steps":["1. Make visible the SignatureCapture area.","2. Set Destination to Http server url.","3. Set valid UserName and Password of http server","4. Attach signatureSaveEvent on page.","5. Draw a signature in the rectangular capture area","6. Call capture method."],
 				"ExpectedOutcome":["SignatureSaveEvent should fire and should return value of transferResult [destination server message ]","signature should be captured and sent to the ftp server successfully."],
 				"testToPerform":function(){
 					signatureCapture.visibility = 'visible';
-					signatureCapture.destination = "url('http://10.233.85.82/Received/Chaithra1.bmp')";
+					signatureCapture.destination = "url('http://10.233.85.82/NEON/ReceivedFiles/upload.aspx')";
 					signatureCapture.signatureSaveEvent ="OnSignature('%s')";
 				
 				},
 				"FinalResult":""
-			},*/{
+			},{
 				"VTID":"VT366-0258",
 				"RegLevel":"R1",
 				"Description":"VectorTransferEvent",

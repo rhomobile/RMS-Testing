@@ -38,24 +38,8 @@
 				"Steps":["Attach ApplicationEvent on page", "Call Minimize method using application meta tag"],
 				"ExpectedOutcome":["Rhoelements apps should be minimized", "ApplicationEvent should get fire and applicationState value is being returned by event."],
 				"testToPerform":function(){
+					application.applicationEvent= "doStatejsFunction('%s');";
 					application.minimize();
-				},
-				"FinalResult":""	
-			},{
-				"VTID":"VT366-0118",
-				"RegLevel":"R1",
-				"Description":"Device & Application <br/> Backlight-Turn off the screen backlight",
-				"PreCondition":[],
-				"Steps":["Call off method using backlight META Tag.","Call on method using backlight META Tag"],
-				"ExpectedOutcome":["screen backlight.should turn off", "screen backlight should turn on."],
-				"testToPerform":function(){
-					backlight.off();
-					setTimeout(function(){
-								backlight.on();
-								alert("Backlight ON");
-							},10000);
-						
-									
 				},
 				"FinalResult":""	
 			},{
@@ -71,19 +55,6 @@
 						device.wake();	
 						alert("Device wakeup")				
 					},5000);
-				},
-				"FinalResult":""
-			},{
-				"VTID":"VT366-1442",
-				"RegLevel":"R1",
-				"Description":"Device & Application <br/> Keylight with On",
-				"PreCondition":[],
-				"Steps":["Call the on method of Keylight module","Navigate to other pages and check the keylight status"],
-				"ExpectedOutcome":["The Keylight should be switched On","The keylight should be remain On across the pages"],
-				"testToPerform":function(){
-					keylight.on(); 
-					
-					
 				},
 				"FinalResult":""
 			},{
@@ -271,6 +242,36 @@
 				"testToPerform":function(){
 					zoom.page = '2'; 
 				
+				},
+				"FinalResult":""
+			},{
+				"VTID":"VT366-0118",
+				"RegLevel":"R1",
+				"Description":"Device & Application <br/> Backlight-Turn off the screen backlight",
+				"PreCondition":[],
+				"Steps":["Call off method using backlight META Tag.","Call on method using backlight META Tag"],
+				"ExpectedOutcome":["screen backlight.should turn off", "screen backlight should turn on."],
+				"testToPerform":function(){
+					backlight.off();
+					setTimeout(function(){
+								backlight.on();
+								alert("Backlight ON");
+							},10000);
+						
+									
+				},
+				"FinalResult":""	
+			},{
+				"VTID":"VT366-1442",
+				"RegLevel":"R1",
+				"Description":"Device & Application <br/> Keylight with On",
+				"PreCondition":[],
+				"Steps":["Call the on method of Keylight module","Navigate to other pages and check the keylight status"],
+				"ExpectedOutcome":["The Keylight should be switched On","The keylight should be remain On across the pages"],
+				"testToPerform":function(){
+					keylight.on(); 
+					
+					
 				},
 				"FinalResult":""
 			}];
