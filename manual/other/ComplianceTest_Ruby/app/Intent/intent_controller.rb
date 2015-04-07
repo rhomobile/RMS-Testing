@@ -138,7 +138,7 @@ def intent_listen_send
 				params_constructor(Rho::Intent::BROADCAST,"","com.rhomobile.BROADCAST",["com.rhomobile.compliancetest_ruby"],"","","","",data)
 			when '392'
 				data = { 'myData' => 'This is broadcast data 3!' }
-				params_constructor(Rho::Intent::BROADCAST,"","","","manualcommonspec","","","",data)
+				params_constructor(Rho::Intent::BROADCAST,"","","","compliancetestruby","","","",data)
 			when '393'
 				data = { 'myData' => 'This is broadcast data 3!' }
 				params_constructor(Rho::Intent::BROADCAST,"","","","rhomobile compliancetest_ruby/compliancetest_ruby.exe","","","",data)
