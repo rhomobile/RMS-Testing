@@ -19,7 +19,7 @@ describe("Camera API Manual Tests", function(){
 	var selectedCam = '';
 	var sound = "";
 	var camtype;
-    var camerapath = Rho.Application.modelFolderPath("CameraTest");
+    var camerapath = Rho.Application.modelFolderPath("Cameratest");
     if(isWindowsMobilePlatform()){
     	sound = 'wm';
     }else{
