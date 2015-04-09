@@ -72,10 +72,16 @@ def choose_picture
 	end	
 	@props['imageFormat'] = @params['imageFormat'] if @params['imageFormat']
 	@props['colorModel'] = @params['colorModel'] if @params['colorModel']
-	@props['desiredHeight'] = @params['desiredHeight'] if @params['desiredHeight']
-	@props['desiredWidth'] = @params['desiredWidth'] if @params['desiredWidth']
+	@props['desiredHeight'] = @params['desiredHeight'].to_i if @params['desiredHeight']
+	@props['desiredWidth'] = @params['desiredWidth'].to_i if @params['desiredWidth']
 	@props['compressionFormat'] = @params['compressionFormat'] if @params['compressionFormat']
-	@props['enableEditing'] = @params['enableEditing'] if @params['enableEditing']
+	if @params['enableEditing']
+		if @params['enableEditing'] == 'true'
+			@props['enableEditing'] = true	
+		else
+			@props['enableEditing'] = false
+		end
+	end
 
 	Rho::Camera.choosePicture(@props, url_for(:action => :camera_callback))
 end
@@ -115,7 +121,6 @@ end
 def show_preview_capture
 	set_camera
 	@props = {}
-	@props['enableEditing'] = @params['enableEditing'] if @params['enableEditing']
 	@props['desiredHeight'] = @params['desiredHeight'].to_i if @params['desiredHeight']
 	@props['desiredWidth'] = @params['desiredWidth'].to_i if @params['desiredWidth']
 	if @params['captureSound']
@@ -194,7 +199,7 @@ end
 def show_hide_preview
 	set_camera
 	$camera.showPreview()
-	sleep 10
+	sleep 8
 	$camera.hidePreview()
 end
 

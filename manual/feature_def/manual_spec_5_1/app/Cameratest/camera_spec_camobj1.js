@@ -54,6 +54,9 @@ describe("Camera API Manual Tests", function(){
 		if(cam == 'back' || cam == 'color'){
 		   	if(isWindowsMobilePlatform()){
 				describe("showPreview, Capture & hidePreview methods | using " + camtype , function() {
+					afterEach(function(){
+						Ruby.call('Cameratest','hidepreview?'+camtype);
+					});					
 					it("VT285-0022 | Should call showPreview & capture with default properties | using " + camtype , function(){
 						Rho.Camera.desiredHeight = 480;
 						Rho.Camera.desiredWidth = 640;
@@ -443,25 +446,47 @@ describe("Camera API Manual Tests", function(){
 		                spec.waitForResponse();
 					});
 				});
-				it("VT285-0047 | Should call takePicture with desiredHeight 480 and desiredWidth 640 | using " + camtype , function(){
-					var spec = new ManualSpec(jasmine, window.document);
-		        	spec.addGoal(jasmine.getEnv().currentSpec.description);
-		            spec.addStep("Press 'RunTest' button");
-		            spec.addStep("Capture any image.");
-		            if(!isApplePlatform()){
-		            	spec.addStep("supportedSizeList: "+ JSON.stringify(Rho.Camera.supportedSizeList));
-		            }
-		            spec.addStep("Check for the returned image height and width value. Open the saved image and check for height and width.");
-		            spec.addExpectation("The returned image height and width should be same as the saved image");
-		            spec.addExpectation("And the returned value should be imageHeight: 480 and imageWidth: 640 (if supported by the device)");
-		            spec.addExpectation("Or nearest supported resolution which is listed in steps");
-		            spec.displayScenario();
-		            spec.waitForButtonPressing("Run test");
-					runs(function(){
-						Ruby.call('Cameratest','take_picture?'+camtype+'&desiredHeight=480&desiredWidth=640');
-		                spec.waitForResponse();
-					});	
-				});
+				if(isApplePlatform()){
+					it("VT285-0047 | Should call takePicture with desiredHeight 480 and desiredWidth 640 | using " + camtype , function(){
+						var spec = new ManualSpec(jasmine, window.document);
+			        	spec.addGoal(jasmine.getEnv().currentSpec.description);
+			            spec.addStep("Press 'RunTest' button");
+			            spec.addStep("Capture any image.");
+			            if(!isApplePlatform()){
+			            	spec.addStep("supportedSizeList: "+ JSON.stringify(Rho.Camera.supportedSizeList));
+			            }
+			            spec.addStep("Check for the returned image height and width value. Open the saved image and check for height and width.");
+			            spec.addExpectation("The returned image height and width should be same as the saved image");
+			            spec.addExpectation("And the returned value should be imageHeight: 480 and imageWidth: 640 (if supported by the device)");
+			            spec.addExpectation("Or nearest supported resolution which is listed in steps");
+			            spec.displayScenario();
+			            spec.waitForButtonPressing("Run test");
+						runs(function(){
+							Ruby.call('Cameratest','take_picture?'+camtype+'&desiredHeight=480&desiredWidth=640&enableEditing=false');
+			                spec.waitForResponse();
+						});	
+					});
+				}else{
+					it("VT285-0047 | Should call takePicture with desiredHeight 480 and desiredWidth 640 | using " + camtype , function(){
+						var spec = new ManualSpec(jasmine, window.document);
+			        	spec.addGoal(jasmine.getEnv().currentSpec.description);
+			            spec.addStep("Press 'RunTest' button");
+			            spec.addStep("Capture any image.");
+			            if(!isApplePlatform()){
+			            	spec.addStep("supportedSizeList: "+ JSON.stringify(Rho.Camera.supportedSizeList));
+			            }
+			            spec.addStep("Check for the returned image height and width value. Open the saved image and check for height and width.");
+			            spec.addExpectation("The returned image height and width should be same as the saved image");
+			            spec.addExpectation("And the returned value should be imageHeight: 480 and imageWidth: 640 (if supported by the device)");
+			            spec.addExpectation("Or nearest supported resolution which is listed in steps");
+			            spec.displayScenario();
+			            spec.waitForButtonPressing("Run test");
+						runs(function(){
+							Ruby.call('Cameratest','take_picture?'+camtype+'&desiredHeight=480&desiredWidth=640');
+			                spec.waitForResponse();
+						});	
+					});
+				}
 				it("VT285-0048 | Should call takePicture with desiredHeight 0 and desiredWidth 0 | using " + camtype , function(){
 					var spec = new ManualSpec(jasmine, window.document);
 		        	spec.addGoal(jasmine.getEnv().currentSpec.description);

@@ -1616,10 +1616,19 @@ describe("Camera API Manual Tests", function(){
 		            spec.addExpectation("Or nearest supported resolution which is listed in steps");
 		            spec.displayScenario();
 		            spec.waitForButtonPressing("Run test");
-		            var param = {
-		            	'desiredHeight':480,
-		            	'desiredWidth':640
-		        	};
+		            var param;
+		        	if(isApplePlatform()){
+			            param = {
+			            	'desiredHeight':480,
+			            	'desiredWidth':640,
+			            	'enableEditing':false
+			        	};
+		        	}else{
+			            param = {
+			            	'desiredHeight':480,
+			            	'desiredWidth':640
+			        	};
+		        	}
 					runs(function(){
 						objCAM.takePicture(param, callbackFunc);
 					});
