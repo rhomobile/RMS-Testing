@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Rho.Application</title>
+    <meta name="viewport" content="initial-scale=1.0, width=device-width"/>
+    <script src="/public/jquery/jquery-1.6.4.min.js" type="text/javascript"></script>
+    <script src="/public/jquery/jquery.json-2.3.min.js" type="text/javascript"></script>
+    <script type="text/javascript" charset="utf-8" src="/public/api/rhoapi-modules.js"></script>
+    <script type="text/javascript" src="/app/NativeToolbarTest/Toolbar.js"></script>
+    <script type="text/javascript" src="/public/js/helpers.js"></script>
+	
+	
+</head>
+<body>
+
+<h1>Rho.NativeToolbar</h1>
+
+<fieldset>
+	<legend>Rho.NativeToolbar</legend>
+	<ul> Create NativeToolbar:
+	   <li><a href="javascript:void(0)" onclick ="toolCreate();">VT283-101-Create Toolbar</a></li>
+	   <li><a href="javascript:void(0)" onclick ="toolIconLabelMask();">VT283-102-Create Toolbar with Icon, Separator and label</a></li>
+	   <li><a href="javascript:void(0)" onclick ="toolMask();">Click here to see Mask color- Red icon will not be visible (Only for WM)</a></li>
+	   <li><a href="javascript:void(0)" onclick ="toolColored();">VT283-103-Create Toolbar with Colored Icon for "back"</a></li>
+	   <li><a href="javascript:void(0)" onclick ="toolRemove();">VT283-109-Remove the created toolbar"</a></li>
+<!--
+       <li><a href="javascript:void(0)" onclick ="toolNoLabelIcon();">No icon and Label for Home button"</a></li>
+	   <li><a href="javascript:void(0)" onclick ="toolNoAction();">No Action defined for home button"</a></li>
+	   <li><a href="javascript:void(0)" onclick ="toolInvalidAction();">Invalid Action defined for home button"</a></li>
+	   <li><a href="javascript:void(0)" onclick ="toolLoadIndex();">Load Application test</a></li>
+-->
+	   <li><a href="javascript:void(0)" onclick ="toolTestActions1();">VT283-119-Toolbar to create 1-5 actions</a></li>
+	   <li><a href="javascript:void(0)" onclick ="toolTestActions2();">VT283-120-Toolbar to create 6-10 actions</a></li>
+	   <li><a href="javascript:void(0)" onclick ="toolTestActions3();">VT283-121-Toolbar to create 11-15 actions</a></li>
+	   <li><a href="javascript:void(0)" onclick ="toolTestActions4();">Toolbar to create 16-20 actions</a></li>
+	   <li><a href="javascript:void(0)" onclick ="toolTestActions5();">Toolbar to create 21-22 actions</a></li>
+	   <li><a href="javascript:void(0)" onclick ="toolIconWM();">Icons for toolbar on WM </a></li>
+	   <li><a href="javascript:void(0)" onclick ="toolIconOther();">Icons for toolbar on Android and Iphone </a></li>
+<!--
+	   <li><a href="javascript:void(0)" onclick ="toolAnime();">VT283-117Animated icons for toolbar on WM </a></li>
+	   <li><a href="javascript:void(0)" onclick ="toolAnimeOther();">VT283-118-Animated icons for toolbar on Android and Iphone </a></li>
+	   <li><a href="javascript:void(0)" onclick ="toolInvalidView();">Toolbar with Invalid ViewHeight </a></li>
+	   <li><a href="javascript:void(0)" onclick ="toolInvalidBkg();">Toolbar with Invalid Background colour </a></li>
+	   <li><a href="javascript:void(0)" onclick ="toolInvalidMAsk();">Toolbar with Invalid Mask colour </a></li>
+-->
+	   <li><a href="javascript:void(0)" onclick ="toolJavascript();">VT283-116-Toolbar with Javascript method for Quit button</a></li>
+<!--
+	   <li><a href="javascript:void(0)" onclick ="toolCallback();">Toolbar with callback for Loading the page</a></li>
+-->
+	   <li><a href="javascript:void(0)" onclick ="toolSeparatorWidth(20);">VT283-104-Run separator width test (20)</a></li>
+	   <li><a href="javascript:void(0)" onclick ="toolSeparatorWidth(40);">VT283-104-Run separator width test (40)</a></li>
+	   <li><a href="javascript:void(0)" onclick ="toolSeparatorWidth(10);">VT283-104-Run separator width test (10)</a></li>
+	   <li><a href="javascript:void(0)" onclick ="toolSeparatorWidth( 5);">VT283-104-Run separator width test ( 5)</a></li>
+<!--
+	   <li><a href="javascript:void(0)" onclick ="toolSeparatorWidth(-2);">Run separator width test (-2)</a></li>
+-->
+
+	   <li><a href="javascript:void(0)" onclick ="toolViewHeight(30);">View Height (30) - only WM & WIN32</a></li>
+	   <li><a href="javascript:void(0)" onclick ="toolViewHeight(40);">View Height (40) - only WM & WIN32</a></li>
+	   <li><a href="javascript:void(0)" onclick ="toolViewHeight(50);">View Height (50) - only WM & WIN32</a></li>
+	</ul>
+</fieldset>	
+
+</body>
+</html>
