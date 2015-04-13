@@ -11,17 +11,17 @@ class TimertestController < Rho::RhoController
 
 def timercb_one
 	@@callbackevent = 'true'
-	Rho::WebView.executeJavascript('document.getElementById("cbevent1").innerHTML= "'+@callbackevent+'";')
+	Rho::WebView.executeJavascript('document.getElementById("cbevent1").innerHTML= "'+@@callbackevent+'";')
 end
 
 def timercb_two
 	@@callbackevent = 'true'
-	Rho::WebView.executeJavascript('document.getElementById("cbevent2").innerHTML= "'+@callbackevent+'";')
+	Rho::WebView.executeJavascript('document.getElementById("cbevent2").innerHTML= "'+@@callbackevent+'";')
 end
 
 def timercb_three
 	@@callbackevent = 'true'
-	Rho::WebView.executeJavascript('document.getElementById("cbevent3").innerHTML= "'+@callbackevent+'";')
+	Rho::WebView.executeJavascript('document.getElementById("cbevent3").innerHTML= "'+@@callbackevent+'";')
 end
 
 

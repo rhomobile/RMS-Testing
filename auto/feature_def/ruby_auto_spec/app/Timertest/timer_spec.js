@@ -1,12 +1,12 @@
 describe("Timer JS API Test", function() {
 	
 	beforeEach(function() {
-		document.getElementById('cbevent1').innerHTML = '';
-		document.getElementById('cbevent2').innerHTML = '';
-		document.getElementById('cbevent3').innerHTML = '';
-		document.getElementById('alivestatus1').innerHTML = '';
-		document.getElementById('alivestatus2').innerHTML = '';
-		document.getElementById('alivestatus3').innerHTML = '';
+		document.getElementById('cbevent1').innerHTML = 'false';
+		document.getElementById('cbevent2').innerHTML = 'false';
+		document.getElementById('cbevent3').innerHTML = 'false';
+		document.getElementById('alivestatus1').innerHTML = 'false';
+		document.getElementById('alivestatus2').innerHTML = 'false';
+		document.getElementById('alivestatus3').innerHTML = 'false';
 	});
 
     afterEach(function () {
