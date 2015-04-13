@@ -69,7 +69,7 @@ end
 #callback method for capture datauri
 def callbackDatauri
 	status = @params['status']
-	image = @params['imageUri']
+	image = @params['imageUri'].gsub(/(?=\W)/, '\\')
 	Rho::WebView.executeJavascript('callbackStatus("'+status+'")')
 	Rho::WebView.executeJavascript('callbackDataURI("'+image+'")')
 	return
@@ -108,6 +108,8 @@ def signature_show_opt
 end
 
 def signature_set_allprops
+	fileName = Rho::RhoFile.join(Rho::Application.databaseBlobFolder, @params['vtid'])
+	Rho::Signature.fileName = fileName
 	Rho::Signature.bgColor = '#00FF00'
     Rho::Signature.penColor = '#FF800000'
     Rho::Signature.penWidth = 5

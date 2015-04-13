@@ -1,54 +1,55 @@
-sdkversion: "4.1.0"
+#sdkversion: "4.1.0"
 name: "compliancetest_ruby"
-version: "1.0"
+version: 1.0
 vendor: "rhomobile"
 build: "debug"
 applog: "rholog.txt"
+app_type: "rhoelements"
 iphone:
   configuration: "Release"
-  sdk: iphonesimulator8.1
+  sdk: iphoneos8.2
   provisionprofile: 
   codesignidentity: "iPhone Developer"
   entitlements: 
   BundleIdentifier: "com.rhomobile.compliancerubytest"
   BundleURLScheme: "compliancerubytest"
+  extensions:
+   - audiocapture
+   - barcode
+   - cardreader
+   - indicators
+   - mediaplayer
+   - printing
+   - printing_zebra
+   - screenorientation
+   - signature
+   - sensor
 wp8:
   productid: "da37e740-9d27-0131-ad03-0023241f0ea9"
 android:
   ajax_api_bridge: false
   version: "4.2.2"
-  capabilities:
+  extensions:
+   - audiocapture
+   - barcode
+   - cardreader
+   - indicators
+   - mediaplayer
+   - printing
+   - printing_zebra
+   - screenorientation
+   - signature
+   - sensor
 wm:
   ajax_api_bridge: false
-  #sdk: "MC3000c50b (ARMV4I)"
-  sdk: "Windows Mobile 6.5.3 Professional DTK (ARMV4I)"
-
-extensions:
- - barcode
-#- indicators
-#- mediaplayer
-#- audiocapture
-#- printing
-#- printing_zebra
-#- signature
-#- screenorientation
-
-app_type: "rhoelements"
-capabilities:
-
-#sdk: c:/work/rhodes
-
-#paths:
-#  extensions:
-#    - C:/work/Motorola-Extensions/extensions
-#    - C:/work/Motorola-Extensions/lib/commonAPI
-
-#minify:
-#  js: false
-#  css: false
-
-#cloud:
-#  server_url:
-#    - https://rhohub-test-cedar.herokuapp.com 
-#    - https://rmsstaging.rhomobile.com/api/v1
-#    - https://rms.rhomobile.com/api/v1
+  extensions:
+   - audiocapture
+   - barcode
+   - cardreader
+   - indicators
+   - mediaplayer
+   - printing
+   - printing_zebra
+   - screenorientation
+   - signature
+   - sensor

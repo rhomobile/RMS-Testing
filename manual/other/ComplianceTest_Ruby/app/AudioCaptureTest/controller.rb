@@ -50,7 +50,7 @@ def audio_capture_stop
   @file= Rho::RhoFile.join(@audio_capture_folder,"audiowithstop")
   Rho::AudioCapture.start({'fileName' => @file, 'maxDuration' => 10000}, url_for(:action => :audio_callback))
 
-  sleep 4
+  sleep 2
 
   Rho::AudioCapture.stop()
 end
@@ -63,7 +63,7 @@ def audio_capture_cancel
   @file= Rho::RhoFile.join(@audio_capture_folder,"audiowithcancel")
   Rho::AudioCapture.start({'fileName' => @file, 'maxDuration' => 10000}, url_for(:action => :audio_callback))
 
-  sleep 4
+  sleep 3
 
   Rho::AudioCapture.cancel()
 end

@@ -203,14 +203,14 @@ describe("Signature Manual Test", function () {
 
                 setTimeout(function() {
                     timeout = true;
-                }, 5000);
+                }, 9000);
             });
 
             waitsFor(function(){
                 if(timeout == true){
                     return true;
                 }
-            }, 'Wait for 1 sec ajax call to happen', 6000);
+            }, 'Wait for 1 sec ajax call to happen', 10000);
 
             runs(function () {
                 timeout = false;
@@ -262,7 +262,7 @@ describe("Signature Manual Test", function () {
             _result.waitToRunTest();
 
             runs(function () {
-                Ruby.call('SignatureTest','signature_fullscr_optImage?vtid=VT299-015&const='+CONST_JPG);
+                Ruby.call('SignatureTest','signature_fullscr_optImage?vtid=VT299-015&const=jpg');
   
                 setTimeout(function() {
                     timeout = true;
@@ -297,7 +297,7 @@ describe("Signature Manual Test", function () {
                 _result.waitToRunTest();
 
                 runs(function () {
-                    Ruby.call('SignatureTest','signature_fullscr_optUri?vtid=VT299-018&const='+CONST_JPG);
+                    Ruby.call('SignatureTest','signature_fullscr_optUri?vtid=VT299-018&const=jpg');
 
                     setTimeout(function() {
                         timeout = true;
@@ -318,7 +318,6 @@ describe("Signature Manual Test", function () {
             });
         }
 
-        //NOT Working
         it("VT299-019 | Call show with bgColor as #FFFF8C00 (ARGB), penColor as #00FF00(RGB), penWidth as 1, and callback |", function () {
 
             runs(function () {
@@ -331,7 +330,7 @@ describe("Signature Manual Test", function () {
             _result.waitToRunTest();
 
             runs(function () {
-                Ruby.call('SignatureTest','signature_show_opt?vtid=VT299-019&const='+CONST_JPG);
+                Ruby.call('SignatureTest','signature_show_opt?vtid=VT299-019&const=jpg');
 
                 setTimeout(function() {
                     timeout = true;

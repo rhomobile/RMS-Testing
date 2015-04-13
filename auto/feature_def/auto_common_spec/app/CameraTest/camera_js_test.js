@@ -536,7 +536,7 @@ var arr_camera_property_inval = [
 	propertyValue	:	"",
 	expectedResult	:	"jpg"
 },
-{
+/*{
 	testName		:	"Set desiredHeight :empty value | empty value",
 	propertyName	:	"desiredHeight",
 	cameraTypes		:	"All",
@@ -553,7 +553,7 @@ var arr_camera_property_inval = [
 	DefaultValue    :   "480",
 	propertyValue	:	"",
 	expectedResult	:	"480"
-},
+},*/
 {
 	testName		:	"Set enableEditing : invalid",
 	propertyName	:	"enableEditing",
@@ -643,15 +643,6 @@ var arr_camera_property_inval = [
 	DefaultValue    :   "false",
 	propertyValue	:	"",
 	expectedResult	:	"false"
-},
-{
-	testName		:	"Set fileName :empty path | empty path",
-	propertyName	:	"fileName",
-	cameraTypes		:	"All",
-	OSTypes			:	"WINDOWS APPLE ANDROID",
-	DefaultValue    :   "camimage",
-	propertyValue	:	"",
-	expectedResult	:	""
 }
 ];
 
