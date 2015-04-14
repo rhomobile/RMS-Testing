@@ -76,7 +76,7 @@ end
 def notify_showpopupcb
 	@props = {'message' => 'This is a pop up for callback', 
 		'buttons' => [{'id' => 'yes', 'title' => 'yes'}, 'No', 'Cancel'], 
-		'title' => 'MyTitle', 'icon': '/app/Notification/icon.png'}
+		'title' => 'MyTitle', 'icon' => '/app/Notification/icon.png'}
     Rho::Notification.showPopup(@props, url_for(:action => :notify_callback));
 end
 
