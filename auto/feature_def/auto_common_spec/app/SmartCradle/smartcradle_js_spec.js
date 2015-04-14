@@ -1,4 +1,4 @@
-	describe("Smart Cradle API", function() {
+describe("Smart Cradle API", function() {
 
 		beforeEach(function() 
 		{
@@ -479,7 +479,7 @@
 			
 		});			
 
-		
+		if(Rho.System.platform == "WINDOWS"){
 		describe("Read Only Properties of the Smart Cradle (Via Accessors)", function() {
 
 			beforeEach(function() 
@@ -570,8 +570,54 @@
 			});
 
 		});
+}
 
+if(Rho.System.platform == "ANDROID"){
+		describe("Read Only Properties of the Smart Cradle (Via Accessors)", function() {
 
+			beforeEach(function() 
+			{
+
+			});
+			
+			var deviceType = getDeviceType();
+			var isSupported = false;
+			isSupported = (deviceType.toLowerCase().indexOf("mc18") != -1);			
+					
+			it("is able to successfully retrieve the hardwareId", function() 
+			{
+				if (!isSupported) return;
+
+				var readValue = Rho.SmartCradle.hardwareId;
+				console.log("Read property Hardware ID: (" + readValue + ")");
+				expect(readValue.toString().length).toBe(1);
+			});
+
+			it("is able to successfully retrieve the partNumber", function() 
+			{
+				if (!isSupported) return;
+
+				var readValue = Rho.SmartCradle.partNumber;
+				console.log("Read property Part Number: " + readValue);
+				var partNumberRegex = /CRD-MC18-.*/
+				var partNumberMatched = partNumberRegex.exec(readValue);
+				expect(partNumberMatched).not.toBe(null);
+				expect(readValue.length).toBe(18);
+			});
+
+			it("is able to successfully retrieve the serialNumber", function() 
+			{
+				if (!isSupported) return;
+
+				var readValue = Rho.SmartCradle.serialNumber;
+				console.log("Read property Serial Number: " + readValue);
+				expect(readValue.length).toBe(15);
+			});
+
+			
+		});
+}
+if(Rho.System.platform == "WINDOWS"){
 		describe("Read Only Properties of the Smart Cradle (Via Get / Set Property)", function() {
 
 			beforeEach(function() 
@@ -663,7 +709,54 @@
 
 		});
 		
+}
 
+if(Rho.System.platform == "ANDROID"){
+		describe("Read Only Properties of the Smart Cradle (Via Get / Set Property)", function() {
+
+			beforeEach(function() 
+			{
+
+			});
+					
+			var deviceType = getDeviceType();
+			var isSupported = false;
+			isSupported = (deviceType.toLowerCase().indexOf("mc18") != -1);			
+
+			it("is able to successfully retrieve the hardwareId", function() 
+			{
+				if (!isSupported) return;
+
+				var readValue = Rho.SmartCradle.getProperty("hardwareId");
+				console.log("Read property Hardware ID: " + readValue);
+				expect(readValue.length).toBe(1);
+			});
+
+			it("is able to successfully retrieve the partNumber", function() 
+			{
+				if (!isSupported) return;
+
+				var readValue = Rho.SmartCradle.getProperty("partNumber");
+				console.log("Read property Part Number: " + readValue);
+				var partNumberRegex = /CRD-MC18-.*/
+				var partNumberMatched = partNumberRegex.exec(readValue);
+				expect(partNumberMatched).not.toBe(null);
+				expect(readValue.length).toBe(18);
+			});
+
+			it("is able to successfully retrieve the serialNumber", function() 
+			{
+				if (!isSupported) return;
+
+				var readValue = Rho.SmartCradle.getProperty("serialNumber");
+				console.log("Read property Serial Number: " + readValue);
+				expect(readValue.length).toBe(15);
+			});
+
+		});
+		
+}
+if(Rho.System.platform == "WINDOWS"){
 		describe("Able to Set and Retrieve properties via the Set / Get Properties methods", function() {
 
 			beforeEach(function() 
@@ -738,7 +831,73 @@
 			});
 
 		});
+	}
+	
+if(Rho.System.platform == "ANDROID"){
+		describe("Able to Set and Retrieve properties via the Set / Get Properties methods", function() {
+
+			beforeEach(function() 
+			{
+
+			});
+
+			var deviceType = getDeviceType();
+			var isSupported = false;
+			isSupported = (deviceType.toLowerCase().indexOf("mc18") != -1);			
+
+			it("is able to set all writable properties using the SetProperties method & retrieve using GetProperties", function() 
+			{
+				if (!isSupported) return;
+
+				var propsToSet = {"chargeState":"fast","rowId":1,"columnId":1,"wallId":1}
+				var propsToGet = ["chargeState","rowId","columnId","wallId"]
+				Rho.SmartCradle.setProperties(propsToSet);
+				var retrievedProps = Rho.SmartCradle.getProperties(propsToGet);
+				console.log(JSON.stringify(retrievedProps));
+				
+				expect(retrievedProps.rowId).toBe("1");
+				expect(retrievedProps.columnId).toBe("1");
+				expect(retrievedProps.wallId).toBe("1");
+				expect(retrievedProps.chargeState).toBe("fast");
+				
+				var propsToSet = {"chargeState":"slow","rowId":5,"columnId":4,"wallId":3}
+				var propsToGet = ["chargeState","rowId","columnId","wallId"]
+				Rho.SmartCradle.setProperties(propsToSet);
+				var retrievedProps = Rho.SmartCradle.getProperties(propsToGet);
+				
+				expect(retrievedProps.rowId).toBe("5");
+				expect(retrievedProps.columnId).toBe("4");
+				expect(retrievedProps.wallId).toBe("3");
+				expect(retrievedProps.chargeState).toBe("slow");				
+			});
+			
+
+			it("is able to retrieve all properties using the GetAllProperties method", function() 
+			{
+				if (!isSupported) return;
+
+				var propsToSet = {"chargeState":"fast","rowId":1,"columnId":1,"wallId":1}
+				Rho.SmartCradle.setProperties(propsToSet);
+				var retrievedProps = Rho.SmartCradle.getAllProperties();
+				console.log(JSON.stringify(retrievedProps));
+				
+				expect(retrievedProps.rowId).toBe("1");
+				expect(retrievedProps.columnId).toBe("1");
+				expect(retrievedProps.wallId).toBe("1");
+				expect(retrievedProps.chargeState).toBe("fast");
+				console.log("hardware id:" + retrievedProps.hardwareId);
+				expect(retrievedProps.hardwareId.length).toBe(1);
+				var partNumberRegex = /CRD-MC18-.*/
+				var partNumberMatched = partNumberRegex.exec(retrievedProps.partNumber);
+				expect(partNumberMatched).not.toBe(null);
+				expect(retrievedProps.partNumber.length).toBe(18);
+				expect(retrievedProps.serialNumber.length).toBe(15);
+					
+			});
+
+		});
+	}
 			
 		//  Note - Unlock can only be tested in a manual way
 				
-	});
+});
