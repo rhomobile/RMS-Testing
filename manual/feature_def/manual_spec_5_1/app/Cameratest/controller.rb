@@ -181,9 +181,9 @@ end
 def show_preview_minimize
 	set_camera
 	$camera.showPreview()
-	sleep 10
+	sleep 6
 	Rho::Application.minimize()
-	sleep 10
+	sleep 8
 	Rho::Application.restore()
 	sleep 10
 	$camera.capture(url_for(:action => :camera_callback))
@@ -206,7 +206,7 @@ end
 def show_preview_quit
 	set_camera
 	$camera.showPreview()
-	sleep 10
+	sleep 8
 	Rho::Application.quit()
 end
 
@@ -307,7 +307,7 @@ end
 
 def take_picture_rotate
 	set_camera
-	$camera.takePicture(url_for(:action => :camera_callback))
+	$camera.takePicture({}, url_for(:action => :camera_callback))
 	#sleep 10
 	#Rho::ScreenOrientation.rightHanded()
 end

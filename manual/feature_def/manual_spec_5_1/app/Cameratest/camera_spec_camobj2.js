@@ -53,6 +53,9 @@ describe("Camera API Manual Tests", function(){
 		if(cam == 'front' || cam == 'imager'){
 		   	if(isWindowsMobilePlatform()){
 				describe("showPreview, Capture & hidePreview methods | using " + camtype , function() {
+					afterEach(function(){
+						Ruby.call('Cameratest','hidepreview?'+camtype);
+					});					
 					it("VT285-0022 | Should call showPreview & capture with default properties | using " + camtype , function(){
 						Rho.Camera.desiredHeight = 480;
 						Rho.Camera.desiredWidth = 640;
@@ -174,6 +177,9 @@ describe("Camera API Manual Tests", function(){
 			            spec.waitForButtonPressing("Run test");
 						runs(function(){
 							Ruby.call('Cameratest','show_preview_rotate?'+camtype);
+							setTimeout(function(){
+								Rho.ScreenOrientation.upsideDown();
+							},3000);								
 			                spec.waitForResponse();
 			                Rho.ScreenOrientation.normal();
 						});
@@ -292,13 +298,16 @@ describe("Camera API Manual Tests", function(){
 						var spec = new ManualSpec(jasmine, window.document);
 			        	spec.addGoal(jasmine.getEnv().currentSpec.description);
 			            spec.addStep("Press 'RunTest' button");
-			            spec.addStep("After 4secs of fullscreen takePicture, screen will rotate rightHanded(called internally in script), then click on capture");
+			            spec.addStep("After 3secs of fullscreen takePicture, screen will rotate rightHanded(called internally in script), then click on capture");
 			            spec.addStep("NOTE: ScreenOrientation will become normal once pass/fail is clicked");
 			            spec.addExpectation('The viewfinder should realign and there should not be any error.');
 			            spec.displayScenario();
 			            spec.waitForButtonPressing("Run test");
 						runs(function(){
 							Ruby.call('Cameratest','take_picture_rotate?'+camtype);
+							setTimeout(function(){
+								Rho.ScreenOrientation.rightHanded();
+							},3000);
 			                spec.waitForResponse();
 							Rho.ScreenOrientation.normal();
 						});
