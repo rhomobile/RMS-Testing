@@ -36,18 +36,6 @@ describe("Timer JS API Test", function() {
 		//third.innerHTML="Third Timer callback fired";
 	    threecallbackFired = true;
 	}
-	
-
-	/* function startTestTimer()
-	{
-		time_val = 1;
-		time_handle = setInterval(function(){document.getElementById('testDuration').textContent = time_val;time_val = time_val + 1;}, 1000);
-	}
-
-	function stopTestTimer()
-	{
-		clearInterval(time_handle);
-	} */
 
 	
 	it("VTXX-0001 | call isAlive  before timeout seconds |", function() {
@@ -63,21 +51,6 @@ describe("Timer JS API Test", function() {
 			});
 	    
 	});
-	
-/*	it("VTXX-0002 | call isAlive  before 45 seconds |", function() {
-		runs(function(){
-			var one = Rho.Timer.create();
-			one.start(45000, one_callback);
-			setTimeout(function() {
-					expect(one.isAlive()).toEqual(true);
-				}, 30000);
-			});
-			waits(46000);
-			runs(function(){
-			expect(onecallbackFired).toEqual(true);
-			});
-	    
-	}); */
 	
 	it("VTXX-0003 | call isAlive after timeout seconds |", function() {
 			var one = Rho.Timer.create();
@@ -147,23 +120,7 @@ describe("Timer JS API Test", function() {
 			});	
 
 	});
-	
-/*	it("VTXX-0007 | call stop before 60 seconds |", function() {
-		runs(function(){
-			var one = Rho.Timer.create();
-			one.start(60000, one_callback);
-			setTimeout(function() {
-					one.stop();
-					expect(one.isAlive()).toEqual(false);
-				}, 45000);
-			});
-			waits(61000);
-			runs(function(){			
-			expect(onecallbackFired).toEqual(false);
-			});	
-
-	});*/
-	
+		
 	it("VTXX-0008 | call stop after timeout |", function() {
 			var one = Rho.Timer.create();
 			one.start(200, one_callback);
@@ -227,43 +184,19 @@ describe("Timer JS API Test", function() {
 	
 	it("VTXX-0011 | call isAlive without calling start |", function() {
 			var one = Rho.Timer.create();
-			var two = Rho.Timer.create();
-			var three = Rho.Timer.create();
-			one.start(200, one_callback);
-			three.start(250, three_callback);
-			setTimeout(function() {
-					expect(one.isAlive()).toEqual(true);	
-					expect(two.isAlive()).toEqual(false);
-					expect(three.isAlive()).toEqual(true);
-				}, 100);
-			waits(300);
-			runs(function(){	
-    			expect(onecallbackFired).toEqual(true);
-	    		expect(twocallbackFired).toEqual(false);
-		    	expect(threecallbackFired).toEqual(true);
-			});	
+    		expect(one.isAlive()).toEqual(false);	
 
 	});
 	
 	it("VTXX-0012 | call stop without calling start |", function() {
 			var one = Rho.Timer.create();
-			var two = Rho.Timer.create();
-			var three = Rho.Timer.create();
-			one.start(100, one_callback);
-			three.start(250, three_callback);
 			setTimeout(function() {
 					one.stop();
-					two.stop();
-					three.stop();
 					expect(one.isAlive()).toEqual(false);	
-					expect(two.isAlive()).toEqual(false);
-					expect(three.isAlive()).toEqual(false);
 				}, 150);
 			waits(300);
 			runs(function(){	
-    			expect(onecallbackFired).toEqual(true);
-	    		expect(twocallbackFired).toEqual(false);
-		    	expect(threecallbackFired).toEqual(false);
+    			expect(onecallbackFired).toEqual(false);
 			});	
 
 	});
@@ -281,18 +214,40 @@ describe("Timer JS API Test", function() {
 	});
 	
 	it("VTXX-0014 | call start with 0 ms |", function() {
-			var one = Rho.Timer.create();
-			expect(function() { one.start(0, one_callback); }).toThrow();
+		var one = Rho.Timer.create();
+		var res = null;
+		runs(function() {
+    		one.start(0, function(arg, err) {
+    		  res = err;
+		    });
+		});
+		
+		waitsFor(function() { return null != res; }, 'Callback should be called', 10000);
+		runs(function() {
+		    expect(res).not.toBeNull();
+		});
 	});
-	
+
 	it("VTXX-0015 | call start with -10000 ms |", function() {
-			var one = Rho.Timer.create();
-			expect(function() { one.start(-10000, one_callback); }).toThrow();
+		var one = Rho.Timer.create();
+		var res = null;
+		runs(function() {
+    		one.start(-1000, function(arg, err) {
+    		  res = err;
+		    });
+		});
+		
+		waitsFor(function() { return null != res; }, 'Callback should be called', 10000);
+		runs(function() {
+		    expect(res).not.toBeNull();
+		});
 	});
 	
 	it("VTXX-0016 | call start without param and callback |", function() {
 			var one = Rho.Timer.create();
-			expect(function() { one.start(); }).toThrow();
+			expect(function() {
+			    var res = one.start();
+			 }).toThrow();
 	});
 	
 	it("VTXX-0017 | call start only with callback |", function() {
@@ -304,4 +259,5 @@ describe("Timer JS API Test", function() {
 			var one = Rho.Timer.create();
 			expect(function() { one.start(10000); }).toThrow();
 	});
+
 });
