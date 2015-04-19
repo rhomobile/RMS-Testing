@@ -7,7 +7,7 @@ describe('Rho.Config module', function() {
     afterEach(function() {
 
     });
-    if(isWindowsPhone8Platform()) {
+    if(isWindowsPhone8Platform() || isApplePlatform()) {
 
     	it("Should return default rhoconfig path", function() {
 	    	var defaultConfigPath = Rho.Config.configPath;
