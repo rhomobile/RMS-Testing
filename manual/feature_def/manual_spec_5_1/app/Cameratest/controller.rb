@@ -253,7 +253,7 @@ def take_picture
 	end
 	if @params['fileName']
 		@props['fileName'] = @params['fileName']
-	else
+	elsif (Rho::System.platform != 'ANDROID')
 		@props['fileName'] = ''
 	end
 	if @params['enableEditing']
