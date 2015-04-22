@@ -129,22 +129,22 @@ def intent_listen_send
 			case @params['par']
 			when '5'
 				data = { 'message' => 'Message to service' }
-				params_constructor(Rho::Intent::START_SERVICE,"","","","com.rhomobile.compliancetest_ruby","com.rhomobile.rhodes.RhodesService","","",data)
+				params_constructor(Rho::Intent::START_SERVICE,"","","","com.rhomobile.compliancetestruby","com.rhomobile.rhodes.RhodesService","","",data)
 			when '11'
 				data = { 'reply' => 'This is my broadcast data!' }
 				params_constructor(Rho::Intent::BROADCAST,"","com.smap.targetapp.mySecondAction","","","","","",data)
 			when '391'
 				data = { 'myData' => 'This is broadcast data 3!' }
-				params_constructor(Rho::Intent::BROADCAST,"","com.rhomobile.BROADCAST",["com.rhomobile.compliancetest_ruby"],"","","","",data)
+				params_constructor(Rho::Intent::BROADCAST,"","com.rhomobile.BROADCAST",["com.rhomobile.compliancetestruby"],"","","","",data)
 			when '392'
 				data = { 'myData' => 'This is broadcast data 3!' }
-				params_constructor(Rho::Intent::BROADCAST,"","","","compliancetestruby","","","",data)
+				params_constructor(Rho::Intent::BROADCAST,"","","","compliancerubytest","","","",data)
 			when '393'
 				data = { 'myData' => 'This is broadcast data 3!' }
 				params_constructor(Rho::Intent::BROADCAST,"","","","rhomobile compliancetest_ruby/compliancetest_ruby.exe","","","",data)
 			when '461'
 				data = { 'myData' => 'This is broadcast data!'}
-				params_constructor(Rho::Intent::BROADCAST,"","com.rhomobile.BROADCAST","","com.rhomobile.compliancetest_ruby","","","",data)
+				params_constructor(Rho::Intent::BROADCAST,"","com.rhomobile.BROADCAST","","com.rhomobile.compliancetestruby","","","",data)
 			when '462'
 				data = { 'myData' => 'This is broadcast data!'}
 				params_constructor(Rho::Intent::BROADCAST,"","com.rhomobile.BROADCAST","","rhomobile compliancetest_ruby/compliancetest_ruby.exe","","","",data)
@@ -185,7 +185,7 @@ def intent_listen_stop
 		if @params['par']
 			case @params['par']
 			when '411'
-				params_constructor(Rho::Intent::BROADCAST,"","com.rhomobile.BROADCAST",["com.rhomobile.compliancetest_ruby"],"","","","",data)
+				params_constructor(Rho::Intent::BROADCAST,"","com.rhomobile.BROADCAST",["com.rhomobile.compliancetestruby"],"","","","",data)
 			when '412'
 				params_constructor(Rho::Intent::BROADCAST,"","","","compliancetest_ruby","","","",data)					
 			when '413'

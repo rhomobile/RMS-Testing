@@ -116,7 +116,7 @@ class WebviewController < Rho::RhoController
 	end
 
 	def webview_setcookie
-		Rho::WebView.setCookie(document.URL, "key_1=DevaStoredCookie1")
+		Rho::WebView.setCookie(@params['url'], "key_1=DevaStoredCookie1")
 	end
 
 

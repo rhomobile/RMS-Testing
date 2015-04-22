@@ -52,7 +52,7 @@ describe("Camera API Manual Tests", function(){
 	if(cam == 'back' || cam == 'color'){
 	   	if(isWindowsMobilePlatform()){
 			describe("showPreview, Capture & hidePreview methods | using " + camtype , function() {
-				it("VT285-0024 | Should call showPreview with preview window values, ouputFomat:dataUri & captureSound | using " + camtype , function(){
+				it("VT200-0586 | Should call showPreview with preview window values, ouputFomat:dataUri & captureSound | using " + camtype , function(){
 					var spec = new ManualSpec(jasmine, window.document);
 		        	spec.addGoal(jasmine.getEnv().currentSpec.description);
 		        	spec.addPrecondition("Call showPreview() with properties previewLeft:-10, previewTop:-10, previewWidth:40, previewHeight:80, outputFormat:dataUri, captureSound: <audiofile given with teh app>.");
@@ -69,7 +69,7 @@ describe("Camera API Manual Tests", function(){
 		                spec.waitForResponse();
 					});
 				});
-				it("VT285-0025 | Should call showPreview with flash: on, aimmode:on (if imager), desiredHeight & desiredWidth set | using " + camtype , function(){
+				it("VT200-0587 | Should call showPreview with flash: on, aimmode:on (if imager), desiredHeight & desiredWidth set | using " + camtype , function(){
 					var spec = new ManualSpec(jasmine, window.document);
 		        	spec.addGoal(jasmine.getEnv().currentSpec.description);
 		        	spec.addPrecondition("Call showPreview() with properties previewLeft:10, previewTop:10, previewWidth:100, previewHeight:60, desiredHeight:120, desiredWidth:240, outputFormat:image, flashMode:on, aimMode:on, captureSound:''.");
@@ -88,7 +88,7 @@ describe("Camera API Manual Tests", function(){
 		                spec.waitForResponse();
 					});
 				});
-				it("VT285-0029 | Should hide preview by using hidePreview | using " + camtype , function(){
+				it("VT200-0588 | Should hide preview by using hidePreview | using " + camtype , function(){
 					var spec = new ManualSpec(jasmine, window.document);
 		        	spec.addGoal(jasmine.getEnv().currentSpec.description);
 		            spec.addStep("Press 'RunTest' button");
@@ -105,7 +105,7 @@ describe("Camera API Manual Tests", function(){
 
 		describe("takePicture method | using " + camtype , function() {
 
-			it("VT285-0033 | Should call takePicture | using " + camtype , function(){
+			it("VT200-0589 | Should call takePicture | using " + camtype , function(){
 				Rho.Camera.desiredHeight = 480;
 				Rho.Camera.desiredWidth = 640;
 				var spec = new ManualSpec(jasmine, window.document);
@@ -128,7 +128,7 @@ describe("Camera API Manual Tests", function(){
 	                spec.waitForResponse();
 				});
 			});
-			it("VT285-0038 | Should call takePicture with flashMode FLASH_ON | using " + camtype , function(){
+			it("VT200-0590 | Should call takePicture with flashMode FLASH_ON | using " + camtype , function(){
 				var spec = new ManualSpec(jasmine, window.document);
 	        	spec.addGoal(jasmine.getEnv().currentSpec.description);
 	            spec.addStep("Press 'RunTest' button");
@@ -143,7 +143,7 @@ describe("Camera API Manual Tests", function(){
 			});
 
 			if (isWindowsMobilePlatform()){
-				it("VT285-0044 | Should call takePicture with aimMode AIM_ON | using " + camtype , function(){
+				it("VT200-0591 | Should call takePicture with aimMode AIM_ON | using " + camtype , function(){
 					var spec = new ManualSpec(jasmine, window.document);
 		        	spec.addGoal(jasmine.getEnv().currentSpec.description);
 		            spec.addStep("Press 'RunTest' button");
@@ -158,7 +158,7 @@ describe("Camera API Manual Tests", function(){
 				});
 			};
 
-			it("VT285-0046 | Should call takePicture with outputFormat:dataUri  | using " + camtype , function(){
+			it("VT200-0592 | Should call takePicture with outputFormat:dataUri  | using " + camtype , function(){
 				var spec = new ManualSpec(jasmine, window.document);
 	        	spec.addGoal(jasmine.getEnv().currentSpec.description);
 	            spec.addStep("Press 'RunTest' button");
@@ -171,7 +171,7 @@ describe("Camera API Manual Tests", function(){
 	                spec.waitForResponse();
 				});
 			});
-			it("VT285-0047 | Should call takePicture with desiredHeight 480 and desiredWidth 640 | using " + camtype , function(){
+			it("VT200-0593 | Should call takePicture with desiredHeight 480 and desiredWidth 640 | using " + camtype , function(){
 				var spec = new ManualSpec(jasmine, window.document);
 	        	spec.addGoal(jasmine.getEnv().currentSpec.description);
 	            spec.addStep("Press 'RunTest' button");
@@ -192,7 +192,7 @@ describe("Camera API Manual Tests", function(){
 			});
 
 			if(isApplePlatform()){
-				it("VT285-0051 | Should call takePicture with enableEditing as false | using " + camtype , function(){
+				it("VT200-0594 | Should call takePicture with enableEditing as false | using " + camtype , function(){
 					var spec = new ManualSpec(jasmine, window.document);
 		        	spec.addGoal(jasmine.getEnv().currentSpec.description);
 		            spec.addStep("Press 'RunTest' button");
@@ -209,7 +209,7 @@ describe("Camera API Manual Tests", function(){
 			};
 
 			if (isAndroidPlatform() || isApplePlatform()) {
-				it("VT285-0055 | Should call takePicture with colorModel as grayscale | using " + camtype , function(){
+				it("VT200-0595 | Should call takePicture with colorModel as grayscale | using " + camtype , function(){
 					var spec = new ManualSpec(jasmine, window.document);
 					spec.addGoal(jasmine.getEnv().currentSpec.description);
 				    spec.addStep("Press 'RunTest' button");
@@ -224,8 +224,22 @@ describe("Camera API Manual Tests", function(){
 				});
 			};
 
+			it("VT200-0596 | Should capture image by calling takePicture() method with compressionFormat png. | using " + camtype , function(){
+				var spec = new ManualSpec(jasmine, window.document);
+				spec.addGoal(jasmine.getEnv().currentSpec.description);
+			    spec.addStep("Press 'RunTest' button");
+			    spec.addStep("Capture the image");
+			    spec.addExpectation('The imageFormat returned should be .png in iOS. Other platform supports only jpg');
+			    spec.displayScenario();
+			    spec.waitForButtonPressing("Run test");
+				runs(function(){
+					Ruby.call('Cameratest','take_picture?'+camtype+'&compressionFormat=png');
+			        spec.waitForResponse();
+				});
+			});
+
 			if(isWindowsMobilePlatform() || isAndroidPlatform()){
-				it("VT285-0060 | Should capture image by calling takePicture() method with captureSound | using " + camtype , function(){
+				it("VT200-0597 | Should capture image by calling takePicture() method with captureSound | using " + camtype , function(){
 					var spec = new ManualSpec(jasmine, window.document);
 					spec.addGoal(jasmine.getEnv().currentSpec.description);
 					spec.addStep("Press 'RunTest' button");
@@ -241,7 +255,7 @@ describe("Camera API Manual Tests", function(){
 			};
 
 			if(isAndroidPlatform()){
-				it("VT285-0062 | Should capture image by calling takePicture() method with useSystemViewfinder true | using " + camtype , function(){
+				it("VT200-0598 | Should capture image by calling takePicture() method with useSystemViewfinder true | using " + camtype , function(){
 					var spec = new ManualSpec(jasmine, window.document);
 					spec.addGoal(jasmine.getEnv().currentSpec.description);
 					spec.addStep("Press 'RunTest' button");
@@ -257,7 +271,7 @@ describe("Camera API Manual Tests", function(){
 			};
 
 			if(isAndroidPlatform() || isApplePlatform()){
-				it("VT285-0064 | Should capture image by calling takePicture() method with saveToDeviceGallery true | using " + camtype , function(){
+				it("VT200-0599 | Should capture image by calling takePicture() method with saveToDeviceGallery true | using " + camtype , function(){
 					var spec = new ManualSpec(jasmine, window.document);
 					spec.addGoal(jasmine.getEnv().currentSpec.description);
 					spec.addStep("Press 'RunTest' button");

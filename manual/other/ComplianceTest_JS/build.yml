@@ -22,6 +22,18 @@ iphone:
   entitlements: 
   BundleIdentifier: "com.rhomobile.compliancetestjs"
   BundleURLScheme: "compliancetestjs"
+  extensions:
+   - rhoconnect-client
+   - audiocapture
+   - signature
+   - barcode
+   - indicators
+   - mediacapture
+   - mediaplayer
+   - screenorientation
+   - sensor
+   - printing
+   - printing_zebra
 wp:
   productid: "88e69430-071c-0131-3d46-606720a825c8"
 symbian:
@@ -29,18 +41,19 @@ symbian:
 android:
   version: "4.2.2"
   manifest_template: AndroidManifest.erb
-extensions:
-  - rhoconnect-client
-  - audiocapture
-  - signature
-  - barcode
-  - indicators
-  - cardreader
-  - mediaplayer
-  - screenorientation
-  - sensor
-  - printing
-  - printing_zebra
+  extensions:
+   - rhoconnect-client
+   - audiocapture
+   - signature
+   - barcode
+   - indicators
+   - cardreader
+   - mediacapture
+   - mediaplayer
+   - screenorientation
+   - sensor
+   - printing
+   - printing_zebra
 wm:
 #sdk: "Windows Mobile 6.5.3 Professional DTK (ARMV4I)"
  #sdk: "MC3000c50b (ARMV4I)"
@@ -50,6 +63,7 @@ wm:
     - barcode
     - indicators
     - cardreader
+    - mediacapture
     - mediaplayer
     - screenorientation
     - sensor
