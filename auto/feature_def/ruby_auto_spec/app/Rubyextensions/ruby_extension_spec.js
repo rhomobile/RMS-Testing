@@ -10,7 +10,7 @@ describe('Ruby Extension Tests', function () {
 	it('Should support ruby URI extension', function () {
 		var result = '';
 	   	runs(function(){
-	        Ruby.call('Wptest','uri_extension');
+	        Ruby.call('Rubyextensions','uri_extension');
 			setTimeout(function() {
 				timeout = true;
 			}, 500);
@@ -29,7 +29,7 @@ describe('Ruby Extension Tests', function () {
 	it('Should support ruby JSON extension', function () {
 		var result = '';
 	   	runs(function(){
-            Ruby.call('Wptest','json_extension');
+            Ruby.call('Rubyextensions','json_extension');
             setTimeout(function() {
 				timeout = true;
 			}, 500);
@@ -48,7 +48,7 @@ describe('Ruby Extension Tests', function () {
 	it('Should support ruby Digest/SHA1 extension', function () {
 		var result = '';
 	   	runs(function(){
-            Ruby.call('Wptest','digestsha1_extension');
+            Ruby.call('Rubyextensions','digestsha1_extension');
             setTimeout(function() {
 				timeout = true;
 			}, 500);
@@ -67,7 +67,7 @@ describe('Ruby Extension Tests', function () {
 	it('Should support ruby Digest/MD5 extension', function () {
 		var result = '';
 	   	runs(function(){
-            Ruby.call('Wptest','digestmd5_extension');
+            Ruby.call('Rubyextensions','digestmd5_extension');
             setTimeout(function() {
 				timeout = true;
 			}, 500);
