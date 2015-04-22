@@ -33,38 +33,38 @@
         
         clearAll();
         
-        if(selected_Module=="VT200-0658"){
-            setDescription("Network status notifications should be returned as connected when wlan profile is enabled and disconnected when wlan profile disabled and network status should be poll after every 6 seconds. Poll interval does not supported on WM/CE. Notification send when Wifi or Cell network appear/disappear, to check internet connectivity use detectConnection.");
+        if(selected_Module=="VT200-0401"){
+            setDescription("VT200-0401 [NA for CE] Network status notifications should be returned as connected when wlan profile is enabled and disconnected when wlan profile disabled and network status should be poll after every 6 seconds. Poll interval does not supported on WM/CE. Notification send when Wifi or Cell network appear/disappear, to check internet connectivity use detectConnection.");
             setExpected("Connected if have network, Disconnected otherwise. Update each 6 seconds.");
         }
                  
-        if(selected_Module=="VT200-0659"){
-            setDescription("It should Stop network status notifications ");
+        if(selected_Module=="VT200-0402"){
+            setDescription("VT200-0402 [NA for CE] It should Stop network status notifications ");
             setExpected("No network status notifications should be observed in the status field.");
         }       
         
-        if(selected_Module=="VT200-0660"){
-            setDescription("WM ONLY. Precondition: Connects RhoElements through a Wide Area Network. The connection destination must be first configured through the Connection Manager and the destination name provided to this method");
+        if(selected_Module=="VT200-0403"){
+            setDescription("VT200-0403 [WM ONLY] Precondition: Connects RhoElements through a Wide Area Network. The connection destination must be first configured through the Connection Manager and the destination name provided to this method");
             setExpected("this will fail because of callback is mandatory for connectWan method");
         }
         
-        if(selected_Module=="VT200-0661"){
-            setDescription("WM ONLY. Precondition: Connects RhoElements through a Wide Area Network. The connection destination must be first configured through the Connection Manager and the destination name provided to this method");
+        if(selected_Module=="VT200-0404"){
+            setDescription("VT200-0404 [WM ONLY]. Precondition: Connects RhoElements through a Wide Area Network. The connection destination must be first configured through the Connection Manager and the destination name provided to this method");
             setExpected("wanStatusEvent should fire and should populate the all associated parameters with valid values.");
         }
                   
-        if(selected_Module=="VT200-0662"){
-            setDescription("Connect device to the cell network. it should return boolean value 'true'.");
+        if(selected_Module=="VT200-0405"){
+            setDescription("VT200-0405 [NA for CE] Connect device to the cell network. it should return boolean value 'true'.");
             setExpected("true");
         }
                   
-        if(selected_Module=="VT200-0663"){
-            setDescription("calls hasNetwork() method");
+        if(selected_Module=="VT200-0406"){
+            setDescription("VT200-0406 [NA for CE] calls hasNetwork() method");
             setExpected("true if connected to any cell or wifi network, false otherwise");
         }
         
-        if(selected_Module=="VT200-0664"){
-            setDescription("calls hasWifiNetwork() method");
+        if(selected_Module=="VT200-0407"){
+            setDescription("VT200-0407 [NA for CE] calls hasWifiNetwork() method");
             setExpected("true if wifi is connected, false otherwise");
         }
         
@@ -103,31 +103,31 @@
         Ruby.call('NetworkTest','response_timeout?time='+to);
 
         
-        if(selected_Module=="VT200-0658") {
+        if(selected_Module=="VT200-0401") {
             Ruby.call('NetworkTest','start_status');
         }
 
-        if(selected_Module=="VT200-0659") {
+        if(selected_Module=="VT200-0402") {
             Ruby.call('NetworkTest','stop_status');
         }
             
-        if(selected_Module=="VT200-0660") {
+        if(selected_Module=="VT200-0403") {
             Ruby.call('NetworkTest','disconnect_wan?notify=yes');
         }
             
-        if(selected_Module=="VT200-0661") {
+        if(selected_Module=="VT200-0404") {
             Ruby.call('NetworkTest','disconnect_wan?call=yes');
         }
 
-        if(selected_Module=="VT200-0662") {
+        if(selected_Module=="VT200-0405") {
             Ruby.call('NetworkTest','cell_network');
         }
             
-        if(selected_Module=="VT200-0663") {
+        if(selected_Module=="VT200-0406") {
             Ruby.call('NetworkTest','has_network');
         }
 
-        if(selected_Module=="VT200-0664") {
+        if(selected_Module=="VT200-0407") {
             Ruby.call('NetworkTest','wifi_network');
         }
 
@@ -200,13 +200,13 @@
 Select Test To Run &nbsp;&nbsp;
 <select name="myChoice" id="myChoice" onchange="describe()" onselect="describe()">
 <OPTION value="Select option" >VT-ID</OPTION>
-<OPTION value="VT200-0658">VT200-0658</OPTION>
-<OPTION value="VT200-0659">VT200-0659</OPTION>
-<OPTION platform = "WINDOWS" value="VT200-0660">VT200-0660</OPTION>
-<OPTION platform = "WINDOWS" value="VT200-0661">VT200-0661</OPTION>
-<OPTION value="VT200-0662">VT200-0662</OPTION>
-<OPTION value="VT200-0663">VT200-0663</OPTION>
-<OPTION value="VT200-0664">VT200-0664</OPTION>
+<OPTION value="VT200-0401">VT200-0401</OPTION>
+<OPTION value="VT200-0402">VT200-0402</OPTION>
+<OPTION platform = "WINDOWS" value="VT200-0403">VT200-0403</OPTION>
+<OPTION platform = "WINDOWS" value="VT200-0404">VT200-0404</OPTION>
+<OPTION value="VT200-0405">VT200-0405</OPTION>
+<OPTION value="VT200-0406">VT200-0406</OPTION>
+<OPTION value="VT200-0407">VT200-0407</OPTION>
 
 </select>
     

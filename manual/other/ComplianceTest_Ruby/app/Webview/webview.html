@@ -376,7 +376,7 @@
 
     <div class="test_scenario">
         <div class="test_scenario_controls">
-            <button onClick="Ruby.call('Webview','webview_setcookie');">Set single cookie</button>
+            <button onClick="setcookie();">Set single cookie</button>
         </div>
         <div class="test_scenario_desc">
             <span class="test_scenario_number">VT200-0699</span>
@@ -407,6 +407,11 @@ var Ruby = {
     getReturnedValue: function(){
         return Ruby.data;
     }
+}
+
+function setcookie() {
+    var url = document.URL;
+    Ruby.call('Webview','webview_setcookie?url='+url);
 }
 </script>
 </html>

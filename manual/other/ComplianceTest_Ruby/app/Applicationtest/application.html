@@ -3,12 +3,10 @@
 <head>
     <title>Rho::Application</title>
     <meta name="viewport" content="initial-scale=1.0, width=device-width"/>
-
     <link type="text/css" rel="stylesheet" href="/public/css/manual_styles.css">
 
     <script src="/public/jquery/jquery-1.9.1.min.js" type="text/javascript"></script>
     <script type="text/javascript" charset="utf-8" src="../../public/api/rhoapi-modules.js"></script>
-   <!-- <script type="text/javascript" src="./application.js"></script> -->
     <script type="text/javascript" src="../../public/js/helpers.js"></script>
     <script type="text/javascript">
 
@@ -54,36 +52,58 @@
 <fieldset>
 	<legend>Rho::Application</legend>
 	<ul> Minimize, Restore and Quit:
-	    <li><a href="javascript:void(0)" onclick ="Ruby.call('Applicationtest','minimize');">VT200-0617 Minimize the Application (Mac RhoSimulator, WP8 not support it)</a></li>
-	    <li><a href="javascript:void(0)" onclick ="Ruby.call('Applicationtest','restore');">VT200-0618 Restore the Application (Mac RhoSimulator, WP8 not support it)</a></li>
-        <li><a href="javascript:void(0)" onclick ="Ruby.call('Applicationtest','quit');">VT200-0619 Quit the Application</a></li>
-		<li><a href="javascript:void(0)" onclick ="minQuit();">Minimize and Quit the Application</a></li>
+	    <li><a href="javascript:void(0)" onclick ="Ruby.call('Applicationtest','minimize');">VT200-0361 Minimize the Application (Mac RhoSimulator, WP8 not support it)</a></li>
+	    <li><a href="javascript:void(0)" onclick ="minRestore();">VT200-0362 Restore the Application (Mac RhoSimulator, WP8 not support it)</a></li>
+        <li><a href="javascript:void(0)" onclick ="Ruby.call('Applicationtest','quit');">VT200-0363 Quit the Application</a></li>
+		<li><a href="javascript:void(0)" onclick ="minQuit();">VT200-0517 Minimize and Quit the Application</a></li>
 	</ul>
 </fieldset>
 
 <div id="title_test" >
     <div class="method_name">Rho::Application.Title</div>
-    <div class="method_desc">Define Window caption text. If missed - caption from page used. WM and Windows Desktop Only! Not supported on CE.</div>
+    <div class="method_desc">Define Window caption text. If missed - caption from page used. WM and Windows Desktop Only! Not supported on Android and CE devices.</div>
 
     <div class="test_scenario">
         <div class="test_scenario_controls">
-            <button onClick="Ruby.call('Application','set_title');">title("My Title")</button>
+            <button class="getValue" onClick='setDomElementText("title_test", Rho.Application.title);'>get window title</button>
+            <br/>
+            <span class="result"></span>
         </div>
         <div class="test_scenario_desc">
-            <span class="test_scenario_number">VT200-0621</span>
-            <span> Press button for set title for window to string ""</span>
+            <span class="test_scenario_number">VT200-0518</span>
+            <span> Press button for get current window title [NA for Android]</span>
         </div>
     </div>
 
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <button onClick="Ruby.call('Applicationtest','set_title');">title("My Title")</button>
+        </div>
+        <div class="test_scenario_desc">
+            <span class="test_scenario_number">VT200-0364</span>
+            <span> Press button for set title for window to string [NA for Android]""</span>
+        </div>
+    </div>
+
+    <div class="test_scenario">
+        <div class="test_scenario_controls">
+            <button onClick="Ruby.call('Applicationtest','set_title?empty=yes');">title("")</button>
+        </div>
+        <div class="test_scenario_desc">
+            <span class="test_scenario_number">VT200-0519</span>
+            <span> Press button for set title for window to empty string [NA for Android]</span>
+        </div>
+    </div>
 </div>
+
 
 <fieldset>
 	<legend>Rho::Application.Native Menu (Not applicable on iOS!)</legend>
-	<ul>VT200-0622 Redefine the NativMenu
+	<ul>VT200-0365 Redefine the NativMenu
 	    <li><a href="javascript:void(0)" onclick ="Ruby.call('Applicationtest','menu_test');">set Native menu to different actions</a></li>
         <li><a href="javascript:void(0)" onclick ="Ruby.call('Applicationtest','menu_default');">set Default Native menu</a></li>
 		<li><a href="javascript:void(0)" onclick ="Ruby.call('Applicationtest','menu_reservedItem');">Add menu with action pointed to html page. Select Load a page menu item</a></li>
-		<li><a href="javascript:void(0)" onclick ="Ruby.call('Applicationtest','menu_jscall');">Javascript method call for Exit </a></li>
+		<!-- <li><a href="javascript:void(0)" onclick ="Ruby.call('Applicationtest','menu_jscall');">Javascript method call for Exit </a></li> -->
 	</ul>
 </fieldset>
 
@@ -95,6 +115,14 @@ function minQuit(){
 
     setTimeout(function(){
         Ruby.call('Applicationtest','quit');
+    },3000);
+}
+
+function minRestore(){
+    Ruby.call('Applicationtest','minimize');
+
+    setTimeout(function(){
+        Ruby.call('Applicationtest','restore');
     },3000);
 }
 

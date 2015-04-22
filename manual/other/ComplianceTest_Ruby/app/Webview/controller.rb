@@ -88,7 +88,11 @@ class WebviewController < Rho::RhoController
     end
 
     def webview_fullscreen
-    	Rho::WebView.fullScreen = @params['data']
+    	if @params['data'].to_s == 'true'
+    		Rho::WebView.fullScreen = true
+    	else
+    		Rho::WebView.fullScreen = false
+    	end
     end
 
 	def webview_zoompage
@@ -112,7 +116,7 @@ class WebviewController < Rho::RhoController
 	end
 
 	def webview_setcookie
-		Rho::WebView.setCookie(document.URL, "key_1=DevaStoredCookie1")
+		Rho::WebView.setCookie(@params['url'], "key_1=DevaStoredCookie1")
 	end
 
 

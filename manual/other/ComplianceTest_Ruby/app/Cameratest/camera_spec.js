@@ -24,7 +24,7 @@ describe("Camera API Manual Tests", function(){
 
 	describe("Select picture using choosePicture method | Note: NA for CE platform", function() {
 
-		it("VT285-0004 | Should call choosePicture with 'outputFormat' property value as dataUri", function(){
+		it("VT200-0576 | Should call choosePicture with 'outputFormat' property value as dataUri", function(){
 			var spec = new ManualSpec(jasmine, window.document);
         	spec.addGoal(jasmine.getEnv().currentSpec.description);
             spec.addStep("Press 'RunTest' button");
@@ -39,7 +39,7 @@ describe("Camera API Manual Tests", function(){
             });
 		});
 		if(isApplePlatform()){
-			it("VT285-0005 | Should call choosePicture with property as colorModel: grayscale", function(){
+			it("VT200-0577 | Should call choosePicture with property as colorModel: grayscale", function(){
 				var spec = new ManualSpec(jasmine, window.document);
 	        	spec.addGoal(jasmine.getEnv().currentSpec.description);
 	            spec.addStep("Press 'RunTest' button");
@@ -54,7 +54,7 @@ describe("Camera API Manual Tests", function(){
 	                spec.waitForResponse();
 	            });
 			});
-			it("VT285-0007 | Should call choosePicture with property as desiredHeight and desiredWidth", function(){
+			it("VT200-0578 | Should call choosePicture with property as desiredHeight and desiredWidth", function(){
 				var spec = new ManualSpec(jasmine, window.document);
 	        	spec.addGoal(jasmine.getEnv().currentSpec.description);
 	            spec.addStep("Press 'RunTest' button");
@@ -68,7 +68,7 @@ describe("Camera API Manual Tests", function(){
 	                spec.waitForResponse();
 	            });
 			});
-			it("VT285-0010 | Should call choosePicture with property as enableEditing as false", function(){
+			it("VT200-0579 | Should call choosePicture with property as enableEditing as false", function(){
 				var spec = new ManualSpec(jasmine, window.document);
 	        	spec.addGoal(jasmine.getEnv().currentSpec.description);
 	            spec.addStep("Press 'RunTest' button");
@@ -87,7 +87,7 @@ describe("Camera API Manual Tests", function(){
 
 	if(isAndroidPlatform() || isApplePlatform()){
 		describe("copyImageToDeviceGallery method | " , function() {
-			it("VT285-0013 | Should copy image to device gallery from the device", function(){
+			it("VT200-0580 | Should copy image to device gallery from the device", function(){
 				var spec = new ManualSpec(jasmine, window.document);
 				spec.addGoal(jasmine.getEnv().currentSpec.description);
 				spec.addStep("Press 'RunTest' button");
@@ -105,7 +105,7 @@ describe("Camera API Manual Tests", function(){
 
 
 	describe("Enumerate Camera with callback ", function() {
-		it("VT285-0016 | Should enumerate with callback", function(){
+		it("VT200-0581 | Should enumerate with callback", function(){
 			var spec = new ManualSpec(jasmine, window.document);
         	spec.addGoal(jasmine.getEnv().currentSpec.description);
             spec.addStep("Press 'RunTest' button");
@@ -123,7 +123,7 @@ describe("Camera API Manual Tests", function(){
 
 	describe("getCameraByType method", function() {
 		if (!isWindowsMobilePlatform()) {
-			it("VT285-0017 | Should call getCameraByType with back", function(){
+			it("VT200-0582 | Should call getCameraByType with back", function(){
 				var spec = new ManualSpec(jasmine, window.document);
 	        	spec.addGoal(jasmine.getEnv().currentSpec.description);
 	            spec.addStep("Press 'RunTest' button");
@@ -136,7 +136,7 @@ describe("Camera API Manual Tests", function(){
 	                spec.waitForResponse();
 				});
 			});
-			it("VT285-0018 | Should call getCameraByType with front", function(){
+			it("VT200-0583 | Should call getCameraByType with front", function(){
 				var spec = new ManualSpec(jasmine, window.document);
 	        	spec.addGoal(jasmine.getEnv().currentSpec.description);
 	            spec.addStep("Press 'RunTest' button");
@@ -152,7 +152,7 @@ describe("Camera API Manual Tests", function(){
 		};
 
 		if (isWindowsMobilePlatform()) {
-			it("VT285-0019 | Should call getCameraByType with color and callback as function", function(){
+			it("VT200-0584 | Should call getCameraByType with color and callback as function", function(){
 				var spec = new ManualSpec(jasmine, window.document);
 	        	spec.addGoal(jasmine.getEnv().currentSpec.description);
 	            spec.addStep("Press 'RunTest' button");
@@ -165,7 +165,7 @@ describe("Camera API Manual Tests", function(){
 	                spec.waitForResponse();
 				});
 			});
-			it("VT285-0020 | Should call getCameraByType with imager and without callback function ", function(){
+			it("VT200-0585 | Should call getCameraByType with imager and without callback function ", function(){
 				var spec = new ManualSpec(jasmine, window.document);
 	        	spec.addGoal(jasmine.getEnv().currentSpec.description);
 	            spec.addStep("Press 'RunTest' button");

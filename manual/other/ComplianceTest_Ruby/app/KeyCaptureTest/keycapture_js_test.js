@@ -3,7 +3,10 @@ function callbackdata(data)
 {
 	document.getElementById("clbkData").innerHTML = data;
 }
-
+function callbackdata2(data)
+{
+	document.getElementById("clbkData2").innerHTML = data;
+}
 var hardwareKeysTest = {};
 
 if (isAndroidPlatform())

@@ -72,10 +72,10 @@ describe("System Module JS Test Starts Here", function() {
 						
 						runs(function(){
 							var propertyName = sys_get_properties[idx]['propertyName'];
-							var strGetProperty = '["'+sys_get_properties[idx]['propertyName']+'"]';
-							var objGetProperty = JSON.parse(strGetProperty);
+							//var strGetProperty = '["'+sys_get_properties[idx]['propertyName']+'"]';
+							//var objGetProperty = JSON.parse(strGetProperty);
 
-							Ruby.call('System','get_property?prop='+objGetProperty);
+							Ruby.call('System','get_props?prop='+propertyName);
 						});
 
 						_result.waitForResponse();

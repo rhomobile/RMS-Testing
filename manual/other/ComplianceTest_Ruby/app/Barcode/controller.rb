@@ -138,20 +138,20 @@ class BarcodeController < Rho::RhoController
     options = {}
         
     if @params['picklist'] && @params['picklist'] == true && $scanner.friendlyName == "2D Imager"
-      options.picklistMode = 'hardwareReticle'
+      options['picklistMode'] = 'hardwareReticle'
     elsif @params['picklist']
-      options.picklistMode = 'softwareReticle'
+      options['picklistMode'] = 'softwareReticle'
     end
     
     if @params['allDecoders']
       if @params['allDecoders'] == 'yes'
-        options.allDecoders = true 
+        options['allDecoders'] = true 
       else 
-        options.allDecoders = false
+        options['allDecoders'] = false
       end
     end
-    options.code128 = @params['code128'] if @params['code128']
-    options.scanTimeout = @params['time'] if @params['time']
+    options['code128'] = @params['code128'] if @params['code128']
+    options['scanTimeout'] = @params['time'].to_i if @params['time']
     
     $scanner.enable(options)
     
@@ -162,20 +162,20 @@ class BarcodeController < Rho::RhoController
     options = {}
     
     if @params['picklist'] && @params['picklist'] == true && $scanner.friendlyName == "2D Imager"
-      options.picklistMode = 'hardwareReticle'
+      options['picklistMode'] = 'hardwareReticle'
     elsif @params['picklist']
-      options.picklistMode = 'softwareReticle'
+      options['picklistMode'] = 'softwareReticle'
     end
     
     if @params['allDecoders']
       if @params['allDecoders'] == 'yes'
-        options.allDecoders = true 
+        options['allDecoders'] = true 
       else 
-        options.allDecoders = false
+        options['allDecoders'] = false
       end
     end
-    options.code128 = @params['code128'] if @params['code128']
-    options.scanTimeout = @params['time'] if @params['time']
+    options['code128'] = @params['code128'] if @params['code128']
+    options['scanTimeout'] = @params['time'].to_i if @params['time']
       
     $scanner.enable(options, url_for(:action => :barcode_callback))
   end

@@ -124,7 +124,7 @@ describe("Camera API Manual Tests", function(){
 	            spec.displayScenario();
 	            spec.waitForButtonPressing("Run test");
 				runs(function(){
-					Ruby.call('Cameratest','choose_picture?desiredHeight='+640+'&desiredWidth='+480);
+					Ruby.call('Cameratest','choose_picture?desiredHeight=640&desiredWidth=480&enableEditing=false');
 	                spec.waitForResponse();
 	            });
 			});
@@ -165,7 +165,7 @@ describe("Camera API Manual Tests", function(){
 	            spec.displayScenario();
 	            spec.waitForButtonPressing("Run test");
 				runs(function(){
-					Ruby.call('Cameratest','choose_picture?enableEditing='+false);
+					Ruby.call('Cameratest','choose_picture?enableEditing=false');
 	                spec.waitForResponse();
 	            });
 			});
@@ -179,7 +179,7 @@ describe("Camera API Manual Tests", function(){
 	            spec.displayScenario();
 	            spec.waitForButtonPressing("Run test");
 				runs(function(){
-					Ruby.call('Cameratest','choose_picture?enableEditing='+true);
+					Ruby.call('Cameratest','choose_picture?enableEditing=true');
 	                spec.waitForResponse();
 	            });
 			});

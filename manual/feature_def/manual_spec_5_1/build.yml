@@ -19,6 +19,7 @@ iphone:
   BundleIdentifier: "com.rhomobile.manualspec51"
   BundleURLScheme: "manualspec51"
   extensions:
+    - mediaplayer
     - screenorientation
     - mediacapture
 
@@ -26,6 +27,7 @@ wp8:
   ajax_api_bridge: false
   productid: "fa586990-6e21-0130-bf9e-3c075409010c"
   extensions:
+    - mediaplayer
     - mediacapture
 
 android:
@@ -33,10 +35,12 @@ android:
   version: "4.2.2"
   manifest_template: AndroidManifest.erb
   extensions:
+    - mediaplayer
     - screenorientation
     - mediacapture
 wm:
   ajax_api_bridge: false
   extensions:
+    - mediaplayer
     - screenorientation
     - mediacapture
