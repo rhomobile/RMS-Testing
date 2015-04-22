@@ -9,7 +9,9 @@ describe('Symbol Device test cases : ', function(){
 		        spec.displayScenario();
 		        spec.waitForButtonPressing("Run test");
 		        runs(function(){
-		        	Ruby.call('Symboldevice','device_calibrate');
+		        	Rho.Device.calibrate();
+		        });
+		        runs(function(){
 	                spec.waitForResponse();
 				});
 			});
@@ -23,7 +25,13 @@ describe('Symbol Device test cases : ', function(){
 		        spec.displayScenario();
 		        spec.waitForButtonPressing("Run test");
 		        runs(function(){
-			        Ruby.call('Symboldevice','device_calibrate?cb=yes');
+		        	var calibrateCB = function(data){
+		        		spec.addResult("Status : ", data.status);
+		        		spec.addResult("Message : ", data.message);
+		        	}
+		        	Rho.Device.calibrate(calibrateCB);
+		        });
+		        runs(function(){
 	                spec.waitForResponse();
 				});
 			});
@@ -35,7 +43,7 @@ describe('Symbol Device test cases : ', function(){
 		        spec.displayScenario();
 		        spec.waitForButtonPressing("Run test");
 		        runs(function(){
-		        	Ruby.call('Symboldevice','device_idle');
+		        	Rho.Device.idle();
 	                spec.waitForResponse();
 				});
 			});
@@ -47,7 +55,14 @@ describe('Symbol Device test cases : ', function(){
 		    	spec.displayScenario();
 		    	spec.waitForButtonPressing("Run test");
 		    	runs(function(){
-					Ruby.call('Symboldevice','device_idle?cb=yes');
+		    		var idleCB = function(data){
+		    			spec.addResult('idleCB status : ', data.status);
+		    			spec.addResult('idleCB message : ', data.message);
+		    			console.log("idleCB : Triggered");
+		    		}
+		    		Rho.Device.idle(idleCB);
+		    	});
+		    	runs(function(){
 		    		spec.waitForResponse();
 		    	});
 			});
@@ -59,11 +74,23 @@ describe('Symbol Device test cases : ', function(){
 				spec.displayScenario();
 				spec.waitForButtonPressing("Run test");
 				runs(function(){
-					Ruby.call('Symboldevice','device_idle?cb=yes');
+					var idleCB = function(data){
+						console.log("idleCB : Triggered");
+						spec.addResult('idleCB status :', data.status);
+						spec.addResult('idleCB message :', data.message);
+					};
+					var wakeCB = function(data){
+						console.log("wakeCB : Triggered");
+						spec.addResult('wakeCB status : ', data.status);
+						spec.addResult('wakeCB message : ', data.message);
+					};
+					Rho.Device.idle(idleCB);
 					setTimeout(function(){
-						Ruby.call('Symboldevice','device_wake?cb=yes');
+						Rho.Device.wake(wakeCB);
 					},10000);
-					Ruby.call('Symboldevice','device_idle?cb=yes');
+					Rho.Device.idle(idleCB);
+				});
+				runs(function(){
 					spec.waitForResponse();
 				});
 			});
@@ -75,7 +102,13 @@ describe('Symbol Device test cases : ', function(){
 				spec.displayScenario();
 				spec.waitForButtonPressing("Run test");
 				runs(function(){
-					Ruby.call('Symboldevice','device_suspend?cb=yes');
+					var suspendCB = function(){
+						console.log("suspend : ", data.status);
+						console.log("Suspend : ", data.message);
+					};
+					Rho.Device.suspend(suspendCB);
+				});
+				runs(function(){
 					spec.waitForResponse();
 				});
 			});
@@ -91,7 +124,7 @@ describe('Symbol Device test cases : ', function(){
 				spec.displayScenario();
 				spec.waitForButtonPressing("Run test");
 				runs(function(){
-					Ruby.call('Symboldevice','device_poweroff');
+					Rho.Device.powerOff();
 				});
 			});
 			it("VT200-0607 | Should reboot the device by executing reboot method with bootType warm.", function(){
@@ -102,7 +135,7 @@ describe('Symbol Device test cases : ', function(){
 				spec.displayScenario();
 				spec.waitForButtonPressing("Run test");
 				runs(function(){
-					Ruby.call('Symboldevice','device_reboot?type=warm');
+					Rho.Device.reboot("Warm");
 				});
 			});
 			it("VT200-0608 | Should reboot the device by executing reboot method with bootType cold.", function(){
@@ -113,7 +146,7 @@ describe('Symbol Device test cases : ', function(){
 				spec.displayScenario();
 				spec.waitForButtonPressing("Run test");
 				runs(function(){
-					Ruby.call('Symboldevice','device_reboot?type=Cold');
+					Rho.Device.reboot("Cold");
 				});
 			});
 			it("VT200-0609 | Should reboot the device by executing reboot method with bootType coldcad.", function(){
@@ -124,7 +157,7 @@ describe('Symbol Device test cases : ', function(){
 				spec.displayScenario();
 				spec.waitForButtonPressing("Run test");
 				runs(function(){
-					Ruby.call('Symboldevice','device_reboot?type=ColdCad');
+					Rho.Device.reboot("ColdCad");
 				});
 			});
 		}
