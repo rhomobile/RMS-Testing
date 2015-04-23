@@ -13,10 +13,6 @@ describe("Barcode Test", function() {
 	}
 
 	var callbacktake = function (data){
-                        if (data['status'].valueOf() === "cancel") {
-                           return;
-                        }
-
 			enablecallbackdata(JSON.stringify(data));
 		}
 

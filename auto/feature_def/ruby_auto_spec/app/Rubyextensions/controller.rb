@@ -4,7 +4,7 @@ require 'uri'
 require 'helpers/application_helper'
 require 'helpers/browser_helper'
 
-class WptestController < Rho::RhoController
+class RubyextensionsController < Rho::RhoController
 
 def uri_extension
   begin
