@@ -14,7 +14,9 @@ def getApplicationBuildPath(platform)
 	elsif (platform == 'win32')
 		filePath = filePath + 'win32/' + fileName + '-setup.exe'
 	elsif (platform == 'ios')
-		filePath = filePath + 'iOS/'+ios_sdk+'/'+ios_configuration+'/'+ fileName + '.ipa'		
+		filePath = filePath + 'iOS/'+ios_sdk+'/'+ios_configuration+'/'+ fileName + '.ipa'
+	elsif (platform == 'wp8')
+		filePath = filePath + 'WP8/' + fileName + '.xap'
 	end
 
 	filePath
@@ -109,6 +111,24 @@ end
 def initiate_build_ios
 
 	Open3.popen2e('rake device:iphone:production') do |stdin, stdout_and_stderr, wait_thr|
+		begin
+	    while line = stdout_and_stderr.readline
+			$buffer << line
+	    end
+		rescue
+		end
+	end
+
+	File.open($log_file, 'w') {|f| 
+		f.write($buffer) 
+	}
+	puts "<div class='logfile'><a target='_blank' href='#{$log_file}'>Build.log</a></div>"
+
+end
+
+def initiate_build_wp8
+
+	Open3.popen2e('rake device:wp8:production') do |stdin, stdout_and_stderr, wait_thr|
 		begin
 	    while line = stdout_and_stderr.readline
 			$buffer << line
