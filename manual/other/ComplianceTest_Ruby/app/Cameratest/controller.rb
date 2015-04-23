@@ -72,10 +72,16 @@ def choose_picture
 	end	
 	@props['imageFormat'] = @params['imageFormat'] if @params['imageFormat']
 	@props['colorModel'] = @params['colorModel'] if @params['colorModel']
-	@props['desiredHeight'] = @params['desiredHeight'] if @params['desiredHeight']
-	@props['desiredWidth'] = @params['desiredWidth'] if @params['desiredWidth']
+	@props['desiredHeight'] = @params['desiredHeight'].to_i if @params['desiredHeight']
+	@props['desiredWidth'] = @params['desiredWidth'].to_i if @params['desiredWidth']
 	@props['compressionFormat'] = @params['compressionFormat'] if @params['compressionFormat']
-	@props['enableEditing'] = @params['enableEditing'] if @params['enableEditing']
+	if @params['enableEditing']
+		if @params['enableEditing'] == 'true'
+			@props['enableEditing'] = true	
+		else
+			@props['enableEditing'] = false
+		end
+	end
 
 	Rho::Camera.choosePicture(@props, url_for(:action => :camera_callback))
 end
@@ -115,7 +121,6 @@ end
 def show_preview_capture
 	set_camera
 	@props = {}
-	@props['enableEditing'] = @params['enableEditing'] if @params['enableEditing']
 	@props['desiredHeight'] = @params['desiredHeight'].to_i if @params['desiredHeight']
 	@props['desiredWidth'] = @params['desiredWidth'].to_i if @params['desiredWidth']
 	if @params['captureSound']
@@ -176,9 +181,9 @@ end
 def show_preview_minimize
 	set_camera
 	$camera.showPreview()
-	sleep 10
+	sleep 6
 	Rho::Application.minimize()
-	sleep 10
+	sleep 8
 	Rho::Application.restore()
 	sleep 10
 	$camera.capture(url_for(:action => :camera_callback))
@@ -194,14 +199,14 @@ end
 def show_hide_preview
 	set_camera
 	$camera.showPreview()
-	sleep 10
+	sleep 8
 	$camera.hidePreview()
 end
 
 def show_preview_quit
 	set_camera
 	$camera.showPreview()
-	sleep 10
+	sleep 8
 	Rho::Application.quit()
 end
 
@@ -209,8 +214,6 @@ def show_preview_rotate
 	set_camera
 	$camera.showPreview({'previewHeight' => 60, 'previewWidth' => 100, 'previewLeft' => 10, 'previewTop' => 10})
 	sleep 10
-	Rho::ScreenOrientation.upsideDown()
-	sleep 5
 	$camera.capture(url_for(:action => :camera_callback))
 end
 
@@ -250,7 +253,7 @@ def take_picture
 	end
 	if @params['fileName']
 		@props['fileName'] = @params['fileName']
-	else
+	elsif (Rho::System.platform != 'ANDROID')
 		@props['fileName'] = ''
 	end
 	if @params['enableEditing']
@@ -304,9 +307,38 @@ end
 
 def take_picture_rotate
 	set_camera
-	$camera.takePicture(url_for(:action => :camera_callback))
+	$camera.takePicture({}, url_for(:action => :camera_callback))
 	#sleep 10
-	Rho::ScreenOrientation.rightHanded()
+	#Rho::ScreenOrientation.rightHanded()
+end
+
+def showpreview_misc
+	set_camera
+	$camera.showPreview({'fileName' => 'showpreviewImage'})
+end
+
+def takepic_misc
+	set_camera
+	$camera.takePicture({'fileName' => 'takepictureImage'}, url_for(:action => :camera_callback))
+end
+
+def hidepreview
+	set_camera
+	$camera.hidePreview()
+end
+
+def showpreview_persist
+	set_camera
+	@props = {
+		'previewLeft' => 50,
+		'previewTop' => 50,
+		'previewHeight' => 80,
+		'previewWidth' => 40,
+		'fileName' => '\\Application\\persistCapture',
+		'flashMode' => 'on',
+		'aimMode' => 'on'
+	};
+	$camera.showPreview(@props)
 end
 
 end
