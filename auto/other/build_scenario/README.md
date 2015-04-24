@@ -18,6 +18,7 @@ Prerequisite
 			$ rspec --tag wmce --format h > output.html # To run WM/CE build scenario
 			$ rspec --tag android --format h > output.html # To run android build scenario
 			$ rspec --tag win32 --format h > output.html # To run win32 build scenario
+			$ rspec --tag wp8 --format h > output.html # To run wp8 build scenario
 			
 		To exclude one platform and run for other
 			$ rspec --tag ~@ios --format h > output.html # To run all spec except ios build scenario

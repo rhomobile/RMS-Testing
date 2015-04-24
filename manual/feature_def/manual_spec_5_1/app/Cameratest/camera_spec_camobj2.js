@@ -293,8 +293,9 @@ describe("Camera API Manual Tests", function(){
 					});
 				});
 
+				//After discussing on SR EMBPD00169387, decided as invalid usecase and removing the test case
 				if(!isApplePlatform()){
-					it("VT285-0037 | Should rotate the screen rightHanded after calling takePicture() method. | using " + camtype , function(){
+					xit("VT285-0037 | Should rotate the screen rightHanded after calling takePicture() method. | using " + camtype , function(){
 						var spec = new ManualSpec(jasmine, window.document);
 			        	spec.addGoal(jasmine.getEnv().currentSpec.description);
 			            spec.addStep("Press 'RunTest' button");

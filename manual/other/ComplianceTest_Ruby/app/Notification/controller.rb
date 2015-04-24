@@ -8,6 +8,7 @@ class NotificationController < Rho::RhoController
 def notify_callback
 	@callback_data = @params.to_json.to_s
 	Rho::WebView.executeJavascript('document.getElementById("actResult").innerHTML= "'+@callback_data+'";')
+	Rho::WebView.executeJavascript("document.getElementById('actResult').style.display='block'")
 end
 
 def notify_beep
