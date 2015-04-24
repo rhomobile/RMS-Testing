@@ -293,6 +293,51 @@ describe("Rho.Config module", function(){
         });
     });
 
+
+	it("Application should not behave abnormally on removing invalid property using removeProperty method ", function(){
+		var spec = new ManualSpec(jasmine, window.document);
+    	spec.addGoal("Application should not behave abnormally on removing invalid property using removeProperty method ");
+    	spec.addStep("Run the test which calls removeProperty method with invalid value.");
+		spec.addStep("Check any isPropertyExists return value.");
+        spec.addExpectation('Application should not behave abnormally on removing invalid property.No other property should be removed. Both start path should be same');
+        spec.displayScenario();
+        spec.waitForButtonPressing("Run test");
+        runs(function(){
+        	var firstVal = Rho.Config.isPropertyExists("start_path");
+            spec.addResult("1.start_path value: ", firstVal);
+            Rho.Config.removeProperty("Invalid", true);
+            var secondVal = Rho.Config.isPropertyExists("start_path");
+            spec.addResult("2.start_path value: ", secondVal);
+		    spec.displayResults();
+		    spec.waitForResponse();
+        });
+	});
+});
+
+
+describe("Rho.Config module, removeProperties specs", function(){
+
+    it("Initial step for removeProperties testing", function(){
+        var spec = new ManualSpec(jasmine, window.document);
+        spec.addGoal("Should set full_screen_user using setPropertyString method with saveToFile as true");
+        spec.addStep("Run the test which calls setPropertyString method with parameter , /app/ConfigTest/specRunner.html and saveToFile as true.");
+        spec.addStep("Call getPropertyString with start_path param.");
+        spec.addStep("Skip this spec if you finished it before.");
+        spec.addExpectation('Should set to new full_screen_user.');
+        spec.addExpectation('Should save full_screen_user on Application relaunch.');
+        spec.displayScenario();
+        spec.waitForButtonPressing("Run test");
+        runs(function(){
+            var firstVal = Rho.Config.getPropertyString("full_screen_user")
+            spec.addResult("1. Initial full_screen_user value: ", firstVal);
+            Rho.Config.setPropertyString("full_screen_user", "screen_value", true);
+            var secondVal = Rho.Config.getPropertyString("full_screen_user")
+            spec.addResult("2. After setting new full_screen_user value: ", secondVal);
+            spec.displayResults();
+            spec.waitForResponse();
+        });
+    });
+
     it("Checking the existance of the property after application restart when removed with saveToFile as false ", function(){
 		var spec = new ManualSpec(jasmine, window.document);
     	spec.addGoal("Checking the existance of the property after application restart when removed with saveToFile as false ");
@@ -305,10 +350,10 @@ describe("Rho.Config module", function(){
         spec.displayScenario();
         spec.waitForButtonPressing("Run test");
         runs(function(){
-        	var firstVal = Rho.Config.isPropertyExists("full_screen");
+            var firstVal = Rho.Config.isPropertyExists("full_screen_user");
             spec.addResult("First value full_screen: ", firstVal);
             Rho.Config.removeProperty("full_screen", false);
-            var secondVal = Rho.Config.isPropertyExists("full_screen");
+            var secondVal = Rho.Config.isPropertyExists("full_screen_user");
             spec.addResult("Second value full_screen: ", secondVal);
 		    spec.displayResults();
 		    spec.waitForResponse();
@@ -327,30 +372,11 @@ describe("Rho.Config module", function(){
         spec.displayScenario();
         spec.waitForButtonPressing("Run test");
         runs(function(){
-        	var firstVal = Rho.Config.isPropertyExists("full_screen");
-            spec.addResult("First full_screen value: ", firstVal);
-            Rho.Config.removeProperty("full_screen", true);
-            var secondVal = Rho.Config.isPropertyExists("full_screen");
-            spec.addResult("Second full_screen value: ", secondVal);
-		    spec.displayResults();
-		    spec.waitForResponse();
-        });
-	});
-
-	it("Application should not behave abnormally on removing invalid property using removeProperty method ", function(){
-		var spec = new ManualSpec(jasmine, window.document);
-    	spec.addGoal("Application should not behave abnormally on removing invalid property using removeProperty method ");
-    	spec.addStep("Run the test which calls removeProperty method with invalid value.");
-		spec.addStep("Check any isPropertyExists return value.");
-        spec.addExpectation('Application should not behave abnormally on removing invalid property.No other property should be removed. Both start path should be same');
-        spec.displayScenario();
-        spec.waitForButtonPressing("Run test");
-        runs(function(){
-        	var firstVal = Rho.Config.isPropertyExists("start_path");
-            spec.addResult("1.start_path value: ", firstVal);
-            Rho.Config.removeProperty("Invalid", true);
-            var secondVal = Rho.Config.isPropertyExists("start_path");
-            spec.addResult("2.start_path value: ", secondVal);
+            var firstVal = Rho.Config.isPropertyExists("full_screen_user");
+            spec.addResult("First full_screen_user value: ", firstVal);
+            Rho.Config.removeProperty("full_screen_user", true);
+            var secondVal = Rho.Config.isPropertyExists("full_screen_user");
+            spec.addResult("Second full_screen_user value: ", secondVal);
 		    spec.displayResults();
 		    spec.waitForResponse();
         });
