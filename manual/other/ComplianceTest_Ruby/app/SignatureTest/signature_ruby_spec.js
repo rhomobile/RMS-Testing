@@ -55,6 +55,7 @@ describe("Signature Manual Test", function () {
             callbackImgpath(nulldata);
             callbackDataURI(nulldata);
             callbackImg(nulldata);
+            document.getElementById('sigdiv').innerHTML = '<img src="" id="capturedImage">';
         });
 
         afterEach(function () {

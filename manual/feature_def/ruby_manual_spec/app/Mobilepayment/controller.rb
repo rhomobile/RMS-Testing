@@ -27,6 +27,7 @@ def mobpay_close_callback
 end
 
 def card_cbdata
+	Alert.show_popup(@params.to_json.to_s)
 	if @params['status']
 		status = @params['status']
 		Rho::WebView.executeJavascript('document.getElementById("cbstatus").innerHTML = "'+status+'"')
