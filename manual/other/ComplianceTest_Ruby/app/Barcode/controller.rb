@@ -89,6 +89,11 @@ class BarcodeController < Rho::RhoController
     end
   end
   
+  def barcode_take_timeout
+    set_scanner
+    $scanner.take({'scanTimeout' => 10000},url_for(:action => :barcode_callback))
+  end
+
   def barcode_take_disable
     set_scanner
     $scanner.take({'allDecoders' => false,'code128' => true,'scanTimeout' => 10000}, url_for(:action => :barcode_callback))

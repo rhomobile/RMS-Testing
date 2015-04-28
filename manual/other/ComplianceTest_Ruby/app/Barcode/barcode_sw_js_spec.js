@@ -139,7 +139,7 @@ describe("Barcode Test", function() {
 		_result.waitToRunTest();
 
 		runs(function() {
-			Ruby.call('Barcode','barcode_take'+getSelectedScannerType());
+			Ruby.call('Barcode','barcode_take_timeout'+getSelectedScannerType());
 			
 			setTimeout(function() {
 				enableFlag = true;

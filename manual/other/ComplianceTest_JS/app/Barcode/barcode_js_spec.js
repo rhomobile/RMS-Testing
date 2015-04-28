@@ -1,7 +1,70 @@
 var platformSupported = ["ANDROID", "WINDOWS"];
 
-	describe("Barcode Compliance JS Test", function() {
-		if(platformSupported.indexOf(Rho.System.platform)!= -1){
+describe("Enumerate Scanner ", function() {
+	var enumObjCount = false;
+	var enumCallback = function (enumobj){
+		enumobj.length>0 ? enumObjCount=true : enumObjCount=false
+	};
+
+	beforeEach(function() {
+		enumObjCount = false;
+	});
+
+	it("Enumerate Scanner callback as function", function() {		
+		runs(function() {
+			Rho.Barcode.enumerate(enumCallback);
+		});
+		waitsFor(function(){
+			return enumObjCount;
+		});
+		runs(function(){
+			expect(enumObjCount).toEqual(true);
+		});
+	});
+
+	it("Enumerate Scanner with anonymous function as callback", function() {		
+		runs(function() {
+			Rho.Barcode.enumerate(function(obj){
+				enumCallback(obj);
+			});
+		});
+		waitsFor(function(){
+			return enumObjCount;
+		});
+		runs(function(){
+			expect(enumObjCount).toEqual(true);
+		});
+ 	});
+
+	it("Enumerate Scanners without callback (Synchronous Access)", function() {
+		runs(function() {
+			var obj = Rho.Barcode.enumerate();
+			callBackfired = enumCallback(obj);
+			expect(enumObjCount).toEqual(true);
+		});
+ 	});
+
+	it("Enumerate barcode and list the avaiable barcode scanner", function() {
+		displayObjective("Enumerate barcode and list the avaiable barcode scanner");
+		dispTestSteps("Press Run Test");
+		dispExpectedResult("Should list avaiable barcode scanners");
+		_result.waitToRunTest();
+		runs(function() {
+			var obj = Rho.Barcode.enumerate();
+			var cbdata='';
+			for (var i = 0; i<obj.length; i++) {
+				cbdata = cbdata + (i+1).toString() + ') ' + obj[i].scannerType + '. <br />' ;
+			};
+			dispVerificationStatus("No. of Enumerated Objects - " + obj.length.toString() + ". <br />" +  cbdata);			
+		});
+		_result.waitForResponse();
+ 	}); 	
+ 	
+});
+
+
+describe("Barcode Compliance JS Test", function() {
+	if(platformSupported.indexOf(Rho.System.platform)!= -1){
 	
 		var ENABLE8K = 8000;
 		var ENABLE1K = 1000;
@@ -536,50 +599,4 @@ var platformSupported = ["ANDROID", "WINDOWS"];
 
 		});
 	}
-});	
-
-describe("Enumerate Scanner ", function() {
-	var enumObjCount = false;
-	var enumCallback = function (enumobj){
-		enumobj.length>0 ? enumObjCount=true : enumObjCount=false
-	};
-
-	beforeEach(function() {
-		enumObjCount = false;
-	});
-
-	it("Enumerate Scanner callback as function", function() {		
-		runs(function() {
-			Rho.Barcode.enumerate(enumCallback);
-		});
-		waitsFor(function(){
-			return enumObjCount;
-		});
-		runs(function(){
-			expect(enumObjCount).toEqual(true);
-		});
-	});
-
-	it("Enumerate Scanner with anonymous function as callback", function() {		
-		runs(function() {
-			Rho.Barcode.enumerate(function(obj){
-				enumCallback(obj);
-			});
-		});
-		waitsFor(function(){
-			return enumObjCount;
-		});
-		runs(function(){
-			expect(enumObjCount).toEqual(true);
-		});
- 	});
-
-	it("Enumerate Scanners without callback (Synchronous Access)", function() {
-		runs(function() {
-			var obj = Rho.Barcode.enumerate();
-			callBackfired = enumCallback(obj);
-			expect(enumObjCount).toEqual(true);
-		});
- 	});
- 	
 });
