@@ -264,7 +264,7 @@ function hideCombo() {
 
 $(window).load(
     function() {
-        var conn_types = [Rho.PrinterZebra.CONNECTION_TYPE_BLUETOOTH, Rho.PrinterZebra.CONNECTION_TYPE_ON_BOARD, Rho.PrinterZebra.CONNECTION_TYPE_TCP];
+        var conn_types = [Rho.PrinterZebra.CONNECTION_TYPE_BLUETOOTH, Rho.PrinterZebra.CONNECTION_TYPE_ON_BOARD, Rho.PrinterZebra.CONNECTION_TYPE_TCP, Rho.PrinterZebra.CONNECTION_TYPE_USB];
         for (var i = conn_types.length - 1; i >= 0; i--) {
 
             $('#dev_conn_type')

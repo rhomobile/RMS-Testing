@@ -64,14 +64,14 @@ describe("KeyCapture Test", function() {
 
 			runs(function(){
 				Ruby.call('KeyCaptureTest','capturekey?keystring='+hardwareKeysTest.testKey15.string+'&truth=yes&call=yes');
-				Ruby.call('KeyCaptureTest','capturekey2?keystring='+hardwareKeysTest.testKey11.string+'&call=yes');
+				Ruby.call('KeyCaptureTest','capturekey_method?keystring='+hardwareKeysTest.testKey11.string+'&call=yes');
 			});
 
 			_result.waitForResponse();
 
 			runs(function(){
 				Ruby.call('KeyCaptureTest','capturekey?keystring='+hardwareKeysTest.testKey15.string+'&truth=yes');
-				Ruby.call('KeyCaptureTest','capturekey2?keystring='+hardwareKeysTest.testKey11.string+'&truth=yes');
+				Ruby.call('KeyCaptureTest','capturekey_method?keystring='+hardwareKeysTest.testKey11.string+'&truth=yes');
 			});
 
 		});

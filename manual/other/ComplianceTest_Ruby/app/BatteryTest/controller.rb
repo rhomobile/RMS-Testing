@@ -7,6 +7,7 @@ class BatteryTestController < Rho::RhoController
 
 def status_callback
   @result = ""
+  @result += '<br/>Time Now: ' + Time.now.to_s
   @result += '<br/>AcLineStatus: ' + @params['acLineStatus'].to_s
   @result += '<br/>BatteryLifePercent: ' + @params['batteryLifePercent'].to_s
   @result += '<br/>BackupBatteryLifePercent: ' + @params['backupBatteryLifePercent'].to_s
