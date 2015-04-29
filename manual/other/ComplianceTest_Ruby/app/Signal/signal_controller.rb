@@ -7,8 +7,9 @@ class SignalController < Rho::RhoController
 
 
 def status_callback
-  #@result = @params.to_json
-  @result = ""
+  	#@result = @params.to_json
+	@result = ""
+	@result += '<br/>Time Now: ' + Time.now.to_s
 	@result += '<br/>signalStrength  :- ' + @params['signalStrength'].to_s
 	@result += '<br/>essid  :- ' + @params['essid'].to_s
 	@result += '<br/>macAddress  :- ' + @params['macAddress'].to_s
@@ -20,9 +21,9 @@ def status_callback
 	@result += '<br/>rssi   :- ' + @params['rssi'].to_s
 	@result += '<br/>subnetMask   :- ' + @params['subnetMask'].to_s
 	@result += '<br/>wins   :- ' + @params['wins'].to_s
-  #Rho::WebView.executeJavascript("document.getElementById('actResult').innerHTML=JSON.stringify(#{@result})")
-  Rho::WebView.executeJavascript("document.getElementById('actResult').innerHTML='#{@result}'")
-  Rho::WebView.executeJavascript("document.getElementById('actResult').style.display='block'")
+	#Rho::WebView.executeJavascript("document.getElementById('actResult').innerHTML=JSON.stringify(#{@result})")
+	Rho::WebView.executeJavascript("document.getElementById('actResult').innerHTML='#{@result}'")
+	Rho::WebView.executeJavascript("document.getElementById('actResult').style.display='block'")
 end
 
 def show_icon
