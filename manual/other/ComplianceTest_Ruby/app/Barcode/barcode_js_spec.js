@@ -41,7 +41,7 @@ describe("Barcode Manual Test", function() {
 	 
 	var getSelectedScannerType = function(){
 		scannerType = document.getElementById("scanner_type").value
-		return "?scanner_type="+ scannerType;
+		return "scanner_type="+ scannerType;
 	}
 		
 	beforeEach(function() {
@@ -83,7 +83,7 @@ describe("Barcode Manual Test", function() {
 				_result.waitToRunTest();
 				
 				runs(function() {
-					Ruby.call('Barcode','scanner_enable'+getSelectedScannerType());
+					Ruby.call('Barcode','scanner_enable?'+getSelectedScannerType());
 				
 					setTimeout(function(){
 						enableFlag = true;
@@ -105,7 +105,7 @@ describe("Barcode Manual Test", function() {
 				_result.waitToRunTest();
 				
 				runs(function() {
-					Ruby.call('Barcode','scanner_enable?allDecoders=yes'+getSelectedScannerType());
+					Ruby.call('Barcode','scanner_enable?allDecoders=yes&'+getSelectedScannerType());
 				
 					setTimeout(function(){
 						enableFlag = true;
@@ -150,7 +150,7 @@ describe("Barcode Manual Test", function() {
 				_result.waitToRunTest();
 	
 				runs(function() {
-					Ruby.call('Barcode','scanner_enable_withoutcb?allDecoders=no&code128=true'+getSelectedScannerType());
+					Ruby.call('Barcode','scanner_enable_withoutcb?allDecoders=no&code128=true&'+getSelectedScannerType());
 				
 					setTimeout(function(){
 						enableFlag = true;
@@ -164,7 +164,7 @@ describe("Barcode Manual Test", function() {
 				_result.waitForResponse();
 			
 				runs(function() {
-					Ruby.call('Barcode','scanner_enable?allDecoders=yes'+getSelectedScannerType());
+					Ruby.call('Barcode','scanner_enable?allDecoders=yes&'+getSelectedScannerType());
 				});
 			});
 	
@@ -177,7 +177,7 @@ describe("Barcode Manual Test", function() {
 				_result.waitToRunTest();
 				
 				runs(function() {
-					Ruby.call('Barcode','barcode_setdefault'+getSelectedScannerType());
+					Ruby.call('Barcode','barcode_setdefault?'+getSelectedScannerType());
 				
 					setTimeout(function(){
 						enableFlag = true;
@@ -208,7 +208,7 @@ describe("Barcode Manual Test", function() {
 				_result.waitToRunTest();
 				
 				runs(function(){
-					Ruby.call('Barcode','scanner_enable'+getSelectedScannerType());
+					Ruby.call('Barcode','scanner_enable?'+getSelectedScannerType());
 					
 					setTimeout(function() {
 						enableFlag = true;
@@ -221,7 +221,7 @@ describe("Barcode Manual Test", function() {
 
 				runs(function(){	
 					enableFlag = false;
-					Ruby.call('Barcode','barcode_start'+getSelectedScannerType());
+					Ruby.call('Barcode','barcode_start?'+getSelectedScannerType());
 					
 					setTimeout(function() {
 						enableFlag = true;
@@ -233,13 +233,13 @@ describe("Barcode Manual Test", function() {
 				}, '9sec Wait to Scan the Barcode', 9000);
 
 				runs(function(){
-					Ruby.call('Barcode','barcode_stop'+getSelectedScannerType());
+					Ruby.call('Barcode','barcode_stop?'+getSelectedScannerType());
 				});
 				
 				_result.waitForResponse();
 				
 				runs(function(){
-					Ruby.call('Barcode','barcode_disable'+getSelectedScannerType());
+					Ruby.call('Barcode','barcode_disable?'+getSelectedScannerType());
 				});
 			});
 
@@ -251,7 +251,7 @@ describe("Barcode Manual Test", function() {
 				_result.waitToRunTest();
 				
 				runs(function(){
-					Ruby.call('Barcode','scanner_enable?time=10000&picklist=true'+getSelectedScannerType());
+					Ruby.call('Barcode','scanner_enable?time=10000&picklist=true&'+getSelectedScannerType());
 					
 					setTimeout(function() {
 						enableFlag = true;
@@ -269,7 +269,7 @@ describe("Barcode Manual Test", function() {
 				_result.waitToRunTest();
 				
 				runs(function(){
-					Ruby.call('Barcode','barcode_take_disable'+getSelectedScannerType());
+					Ruby.call('Barcode','barcode_take_disable?'+getSelectedScannerType());
 					
 					setTimeout(function() {
 						enableFlag = true;
@@ -298,7 +298,7 @@ describe("Barcode Manual Test", function() {
 					_result.waitToRunTest();
 					
 					runs(function(){
-						Ruby.call('Barcode','scanner_enable_withoutcb'+getSelectedScannerType());
+						Ruby.call('Barcode','scanner_enable_withoutcb?'+getSelectedScannerType());
 						
 						setTimeout(function() {
 							enableFlag = true;
@@ -324,7 +324,7 @@ describe("Barcode Manual Test", function() {
 					_result.waitToRunTest();
 					
 					runs(function(){
-						Ruby.call('Barcode','scanner_enable'+getSelectedScannerType());
+						Ruby.call('Barcode','scanner_enable?'+getSelectedScannerType());
 						
 						setTimeout(function() {
 							enableFlag = true;
@@ -347,7 +347,7 @@ describe("Barcode Manual Test", function() {
 					_result.waitForResponse();
 					
 					runs(function() {
-						Ruby.call('Barcode','barcode_disable'+getSelectedScannerType());
+						Ruby.call('Barcode','barcode_disable?'+getSelectedScannerType());
 					});
 					
 				});
@@ -361,7 +361,7 @@ describe("Barcode Manual Test", function() {
 				_result.waitToRunTest();
 				
 				runs(function(){
-					Ruby.call('Barcode','scanner_enable_withoutcb'+getSelectedScannerType());
+					Ruby.call('Barcode','scanner_enable_withoutcb?'+getSelectedScannerType());
 					
 					setTimeout(function() {
 						enableFlag = true;
@@ -373,7 +373,7 @@ describe("Barcode Manual Test", function() {
 				}, '5sec wait to enable the Scanner', 5000);
 				
 				runs(function() {		
-					Ruby.call('Barcode','barcode_props_withoutcb'+getSelectedScannerType());
+					Ruby.call('Barcode','barcode_props_withoutcb?'+getSelectedScannerType());
 				});
 				
 				_result.waitForResponse();
@@ -387,7 +387,7 @@ describe("Barcode Manual Test", function() {
 				_result.waitToRunTest();
 				
 				runs(function(){
-					Ruby.call('Barcode','scanner_enable'+getSelectedScannerType());
+					Ruby.call('Barcode','scanner_enable?'+getSelectedScannerType());
 					
 					setTimeout(function() {
 						enableFlag = true;
@@ -399,13 +399,13 @@ describe("Barcode Manual Test", function() {
 				}, '9sec wait to enable the Scanner', 9000);
 				
 				runs(function() {		
-					Ruby.call('Barcode','barcode_supportedprops'+getSelectedScannerType());
+					Ruby.call('Barcode','barcode_supportedprops?'+getSelectedScannerType());
 				});
 				
 				_result.waitForResponse();
 				
 				runs(function() {
-					Ruby.call('Barcode','barcode_disable'+getSelectedScannerType());
+					Ruby.call('Barcode','barcode_disable?'+getSelectedScannerType());
 				});
 			});
 	});	
