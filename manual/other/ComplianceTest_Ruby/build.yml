@@ -1,5 +1,5 @@
 #sdkversion: "4.1.0"
-name: "compliancetest_ruby"
+name: "compliancetestruby"
 version: 1.0
 vendor: "rhomobile"
 build: "debug"
@@ -11,8 +11,8 @@ iphone:
   provisionprofile: 
   codesignidentity: "iPhone Developer"
   entitlements: 
-  BundleIdentifier: "com.rhomobile.compliancerubytest"
-  BundleURLScheme: "compliancerubytest"
+  BundleIdentifier: "com.rhomobile.compliancetestruby"
+  BundleURLScheme: "compliancetestruby"
   extensions:
    - audiocapture
    - barcode
