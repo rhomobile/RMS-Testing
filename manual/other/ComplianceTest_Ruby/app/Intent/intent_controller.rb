@@ -10,22 +10,21 @@ def params_constructor(intentType, permission, action, categories, appName, targ
 	@result = Hash.new
 	@result['intentType'] = intentType if intentType != ""
 	@result['permission'] = permission if permission != ""
-  @result['action'] = action if action != ""
-  @result['categories'] = categories if categories != "" 
-  @result['appName'] = appName if appName != ""
-  @result['targetClass'] = targetClass if targetClass != ""
-  @result['uri'] = uri if uri != ""
-  @result['mimeType'] = mimeType if mimeType != ""
-  @result['data'] = data if data != ""
-  return @result
+	@result['action'] = action if action != ""
+	@result['categories'] = categories if categories != "" 
+	@result['appName'] = appName if appName != ""
+	@result['targetClass'] = targetClass if targetClass != ""
+	@result['uri'] = uri if uri != ""
+	@result['mimeType'] = mimeType if mimeType != ""
+	@result['data'] = data if data != ""
+	return @result
 end
 
 # Callback Method
-def listen_callback # need to check
+def listen_callback
+	Alert.show_popup(@params.to_json.to_s)
 	if @params['data']
-
 		@cbdata = @params['data']
-
 		if (@cbdata['message'] && @cbdata['message'] == 'Message to service')
 	        Alert.show_popup("Test case passed!")
 	    elsif (@cbdata['reply'] && @cbdata['reply'] == 'Message to service')
@@ -41,7 +40,6 @@ def listen_callback # need to check
 	    else
 	        Alert.show_popup("Test case failed!")
 	    end
-
 	end
 end
 
@@ -138,16 +136,16 @@ def intent_listen_send
 				params_constructor(Rho::Intent::BROADCAST,"","com.rhomobile.BROADCAST",["com.rhomobile.compliancetestruby"],"","","","",data)
 			when '392'
 				data = { 'myData' => 'This is broadcast data 3!' }
-				params_constructor(Rho::Intent::BROADCAST,"","","","compliancerubytest","","","",data)
+				params_constructor(Rho::Intent::BROADCAST,"","","","compliancetestruby","","","",data)
 			when '393'
 				data = { 'myData' => 'This is broadcast data 3!' }
-				params_constructor(Rho::Intent::BROADCAST,"","","","rhomobile compliancetest_ruby/compliancetest_ruby.exe","","","",data)
+				params_constructor(Rho::Intent::BROADCAST,"","","","rhomobile compliancetest_ruby/compliancetestruby.exe","","","",data)
 			when '461'
 				data = { 'myData' => 'This is broadcast data!'}
 				params_constructor(Rho::Intent::BROADCAST,"","com.rhomobile.BROADCAST","","com.rhomobile.compliancetestruby","","","",data)
 			when '462'
 				data = { 'myData' => 'This is broadcast data!'}
-				params_constructor(Rho::Intent::BROADCAST,"","com.rhomobile.BROADCAST","","rhomobile compliancetest_ruby/compliancetest_ruby.exe","","","",data)
+				params_constructor(Rho::Intent::BROADCAST,"","com.rhomobile.BROADCAST","","rhomobile compliancetest_ruby/compliancetestruby.exe","","","",data)
 			else
 
 			end
@@ -187,13 +185,13 @@ def intent_listen_stop
 			when '411'
 				params_constructor(Rho::Intent::BROADCAST,"","com.rhomobile.BROADCAST",["com.rhomobile.compliancetestruby"],"","","","",data)
 			when '412'
-				params_constructor(Rho::Intent::BROADCAST,"","","","compliancetest_ruby","","","",data)					
+				params_constructor(Rho::Intent::BROADCAST,"","","","compliancetestruby","","","",data)					
 			when '413'
-				params_constructor(Rho::Intent::BROADCAST,"","","","rhomobile compliancetest_ruby/compliancetest_ruby.exe","","","",data)
+				params_constructor(Rho::Intent::BROADCAST,"","","","rhomobile compliancetest_ruby/compliancetestruby.exe","","","",data)
 			else
 			end
 		end
-		Rho::Intent.send(@result, url_for(:action => :listen_callback))
+		Rho::Intent.startListening(url_for(:action => :listen_callback))
 		Rho::Intent.stopListening()
         Rho::Intent.send(@result)
 	rescue => ex

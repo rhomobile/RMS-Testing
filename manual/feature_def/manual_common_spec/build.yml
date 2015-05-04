@@ -24,7 +24,6 @@ iphone:
     - barcode
     - mediaplayer
     - screenorientation
-    - mediacapture
   BundleIdentifier: "com.rhomobile.manualcommonspec"
   BundleURLScheme: "manualcommonspec"
 
@@ -46,7 +45,6 @@ android:
     - barcode
     - mediaplayer
     - sensor
-    - mediacapture
 wm:
   #webkit_outprocess: 1
   ajax_api_bridge: false
@@ -57,7 +55,6 @@ wm:
     - indicators
     - sensor
     - smartCradle
-    - mediacapture
 
 #paths:
 #  extensions:

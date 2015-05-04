@@ -691,7 +691,7 @@ describe "Testing build scenario" do
 
 		it "should build using ruby extensions for WP8" do
 
-			add_yml_setting('build.yml',{"wp8"=>{"extensions"=>["digest", "digest-sha1","digest-md5", "uri", "json"]})
+			add_yml_setting('build.yml',{"wp8"=>{"extensions"=>["digest", "digest-sha1","digest-md5", "uri", "json"]}})
 			delete_yml_setting('build.yml',"app_type")
 
 			initiate_build_wp8
