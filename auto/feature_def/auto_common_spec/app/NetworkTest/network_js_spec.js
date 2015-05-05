@@ -85,7 +85,7 @@ describe('Network JS API', function() {
         connectionInfo = args.connectionInformation;
         failureMsg = args.failureMessage;
         Rho.Log.info('detectConnectionCallback, count = ' + callbackCount.toString() + 'failureMsg: ' + failureMsg, 'net_spec' );
-    }
+    };
          
     beforeEach(function() {
         callbackCount = 0;
@@ -94,23 +94,21 @@ describe('Network JS API', function() {
     });
          
     afterEach(function() {
-        Rho.Network.stopDetectingConnection(null);
+        var netCB = function(){
+            console.log("Network callback");
+        };
+        Rho.Network.stopDetectingConnection(netCB);
     });
 
-
-    it('check available hosts', function() {
+    it('check available hosts', function(){
         var accepted_url = [];
         var total_servers = 0;
-
-        runs( function() {
+        runs(function(){
             if (HOSTS.length > 1) {
                 Rho.Log.info('More than 1 host','JSDB');
-
                 for (var i = 0; i < HOSTS.length; i++) {
                     Rho.Log.info('Checking ' + HOSTS[i],'JSDB');
-
                     total_servers += 1;
-
                     try_load_img(HOSTS[i], serverTestTimeout, function(ok,ip) {
                         Rho.Log.info('Callback from ' + ip + ' status ' + ok,'JSDB');
                         if (ok) {
@@ -120,15 +118,13 @@ describe('Network JS API', function() {
                     });
                 };
             }
-        } );
-
+        });
         waitsFor( function() {
                 return total_servers == 0;
             },
             'Callback never called',
             serverTestTimeout + 1000
         );
-
         runs( function() {
             if (HOSTS.length > 1) {
                 if (accepted_url.length > 0) {
@@ -196,7 +192,7 @@ describe('Network JS API', function() {
                 port: srvPort
             };
 
-            var data = Rho.Network.detectConnection(detectconnectionProps);
+            var data = Rho.Network.detectConnection(detectconnectionProps, detectConnectionCallback);
             expect(JSON.stringify(data)).toEqual("null");
 
         });
@@ -210,8 +206,9 @@ describe('Network JS API', function() {
                     port: srvPort
                 };
 
-                Rho.Network.detectConnection(detectconnectionProps, function (params) {
-                    detectConnectionCallback(params);
+                Rho.Network.detectConnection(detectconnectionProps, function(params){
+                    connectionInfo = params.connectionInformation;
+                    callbackCount = 1;
                 });
             });
 
@@ -223,9 +220,12 @@ describe('Network JS API', function() {
              );
 
             runs(function () {
+                var stopCB = function(){
+                    console.log("null");
+                }
                 expect(callbackCount).toEqual(1);
                 expect(connectionInfo).toEqual("Connected");
-                Rho.Network.stopDetectingConnection(null);
+                Rho.Network.stopDetectingConnection(stopCB);
             });
         });
 
