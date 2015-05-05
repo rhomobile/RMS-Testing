@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Choose Pic</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+	<META HTTP-Equiv="MinimizeButton" content="visibility:Visible;top:30 " >
+	<META HTTP-Equiv="quitbutton" Content="visibility:visible;left:10;top:30">
+
+	<script type="text/javascript" charset="utf-8" src="/public/jquery/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="/public/jquery/jquery.json-2.3.min.js"></script>
+
+	<script type="text/javascript" src="/public/api/rhoapi-modules.js"></script>
+	<script type="text/javascript" src="./rhocamera.js"></script>	
+	<style type="text/css">
+		table.picarea {
+		    border-collapse: separate;
+		    border-spacing: 10px;
+		}
+		img {
+			width:180px;
+    		height:240px;
+		}
+	</style>
+</head>
+<body>
+<table class='picarea' border="1">
+<tr>
+	<td><img src="" id='setimage'></img></td>
+</tr>
+</table>
+<p></p>
+<button onclick='choosepic();'>Choose pic</button>  -- Choose a pic from gallery.
+<p></p>
+<button onclick='selfie();'>Take a selfie !</button>  -- Take selfie if no image in the gallery.
+<br>
+<div id='status'></div>
+</body>
+</html>
