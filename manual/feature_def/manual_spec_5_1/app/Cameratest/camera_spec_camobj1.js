@@ -2,9 +2,9 @@ describe("Camera API Manual Tests", function(){
 	var enumData = Rho.Camera.enumerate();
 	var cam;
 	if(enumData.length == 2){
-		cam = enumData[0].getProperty('cameraType');
+		cam = enumData[0].cameraType;
 	}else{
-		cam = enumData[0].getProperty('cameraType');
+		cam = enumData[0].cameraType;
 		if(cam == 'front' || cam == 'imager'){
 			cam = '';
 		}
