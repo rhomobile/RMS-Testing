@@ -112,6 +112,7 @@ describe("Camera API Manual Tests", function(){
 				Rho.Camera.choosePicture(param, function(cbData){
 					callbackData = cbData;
 					callbackTriggered = true;
+					document.getElementById('imageUri').src = cbData.imageUri ;
 				});
 			});
 			waitsFor(function(){
@@ -437,7 +438,8 @@ describe("Camera API Manual Tests", function(){
 					spec.waitForResponse();
 				});
 			});
-			it("VT285-0015 | Should copyImageToDeviceGallery using choosePicture method (ie. gallery to gallery copy)", function(){
+			// removing as not a valid usecase
+			xit("VT285-0015 | Should copyImageToDeviceGallery using choosePicture method (ie. gallery to gallery copy)", function(){
 				var spec = new ManualSpec(jasmine, window.document);
 	        	spec.addGoal(jasmine.getEnv().currentSpec.description);
 	            spec.addStep("Press 'RunTest' button");

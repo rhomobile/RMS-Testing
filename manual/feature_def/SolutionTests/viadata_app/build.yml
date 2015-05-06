@@ -1,0 +1,31 @@
+---
+sdkversion: 5.0.0
+name: viadata_app
+version: '1.0'
+vendor: rhomobile
+build: debug
+applog: rholog.txt
+iphone:
+  configuration: Release
+  sdk: iphoneos8.2
+  provisionprofile: ''
+  codesignidentity: iPhone Developer
+  entitlements: ''
+  BundleIdentifier: com.rhomobile.viadataapp
+  BundleURLScheme: viadataapp
+  production:
+    ipa_itunesartwork_image: ./production/iTunesArtwork.png
+wp8:
+  productid: 77278030-cee9-0132-3e41-402cf47568b3
+android:
+  version: 2.3.3
+  logcatFilter: APP:I StrictMode:I DEBUG:I *:E
+wm: ''
+win32:
+  deployqt: '1'
+  deploymsvc: '1'
+extensions:
+- rhoconnect-client
+- barcode
+app_type: rhoelements
+capabilities: []
