@@ -31,12 +31,12 @@ bbver: 4.6
 applog: rholog.txt
 iphone:
   configuration: Release
-  sdk: iphonesimulator8.1
+  sdk: iphoneos8.3
   provisionprofile:
-  codesignidentity:
+  codesignidentity: "iPhone Developer"
   entitlements:
-  BundleIdentifier: com.rhomobile.apigeneratorspec
-  BundleURLScheme: apigeneratorspec
+  BundleIdentifier: com.rhomobile.autocommonspec
+  BundleURLScheme: autocommonspec
   extensions: ["nativeBridgeTest", "barcode", "platformBridgeTest", "appEvents", "indicators", "sensor", "screenorientation", "audiocapture", "mediacapture"]
 wp8:
   productid: 'b6479381-42a8-0130-78de-3caec51bd50e'

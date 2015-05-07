@@ -7,9 +7,9 @@ bbver: 4.6
 applog: rholog.txt
 iphone:
   configuration: Release
-  sdk: iphonesimulator8.1
+  sdk: iphoneos8.3
   provisionprofile:
-  codesignidentity:
+  codesignidentity: "iPhone Developer"
   entitlements:
   BundleIdentifier: com.rhomobile.rubyautospec
   BundleURLScheme: rubyautospec

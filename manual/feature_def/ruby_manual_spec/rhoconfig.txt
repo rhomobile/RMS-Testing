@@ -56,7 +56,7 @@ sync_poll_interval=0
 # open rhodes app in full screen mode
 # default 1 for Android up to Rhodes 2.2.5.
 # on all other platforms and on Android from Rhodes >2.2.5 default 0
-#full_screen = 1
+full_screen = 1
 
 # show top menu on Windows desktop in full screen mode (default is 0=don't show top menu)
 #w32_fullscreen_menu = 1

@@ -14,10 +14,10 @@ capabilities:
 
 iphone:
   ajax_api_bridge: false
-  sdk: "iphonesimulator8.1"
+  sdk: "iphoneos8.3"
   configuration: "Release"
   provisionprofile: 
-  codesignidentity: 
+  codesignidentity: "iPhone Developer"
   entitlements: 
   extensions:
     - sensor
