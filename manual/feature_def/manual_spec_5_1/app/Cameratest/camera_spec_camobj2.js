@@ -458,6 +458,7 @@ describe("Camera API Manual Tests", function(){
 			            spec.addExpectation("The returned image height and width should be same as the saved image");
 			            spec.addExpectation("And the returned value should be imageHeight: 480 and imageWidth: 640 (if supported by the device)");
 			            spec.addExpectation("Or nearest supported resolution which is listed in steps");
+			            spec.addExpectation("NOTE: As height(480) is lesser than width(640), capturing in landscape view gives correct result.");
 			            spec.displayScenario();
 			            spec.waitForButtonPressing("Run test");
 						runs(function(){

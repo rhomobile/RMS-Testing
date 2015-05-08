@@ -41,11 +41,12 @@ def preview_callback
 	@callback_data += ", imageWidth - " + @params['imageWidth'].to_s if(@params['imageWidth'])
 	@callback_data += ", imageFormat - " + @params['imageFormat'] if(@params['imageFormat'])
 	@data_uri = @params['imageUri'].gsub(/(?=\W)/, '\\') if @params['imageUri']
-	#$camera.hidePreview()
 
 	Rho::WebView.executeJavascript('document.getElementById("expected").innerHTML= "'+@callback_data+'";')
 	Rho::WebView.executeJavascript('document.getElementById("image").innerHTML= "imageUri - '+@data_uri+'";')
 	Rho::WebView.executeJavascript('document.getElementById("imageUri").src = "'+@data_uri+'";')
+	
+	$camera.hidePreview()  # calling hidePreview after callback data is displayed.
 end
 
 def get_callback
