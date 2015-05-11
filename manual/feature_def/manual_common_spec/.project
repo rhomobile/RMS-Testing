@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>ruby_auto_spec</name>
+	<name>manual_common_spec</name>
 	<comment></comment>
 	<projects>
 	</projects>
@@ -24,7 +24,7 @@
 		<link>
 			<name>framework</name>
 			<type>2</type>
-			<location>/Applications/RhoStudio/macosx.cocoa.x86_64/RhoStudio.app/Contents/MacOS/C::/RhoMobileSuite5.1.0.beta.10/ruby/lib/ruby/gems/1.9.1/gems/rhodes-5.1.0.beta.10/lib/framework</location>
+			<location>/Users/rhoelements/.rvm/gems/ruby-1.9.3-p551/gems/rhodes-5.0.38/lib/framework</location>
 		</link>
 	</linkedResources>
 </projectDescription>

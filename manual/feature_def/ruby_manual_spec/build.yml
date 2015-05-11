@@ -7,7 +7,7 @@ applog: "rholog.txt"
 app_type: "rhoelements"
 iphone:
   configuration: "Release"
-  sdk: iphonesimulator8.1
+  sdk: iphoneos8.3
   provisionprofile: 
   codesignidentity: "iPhone Developer"
   entitlements: 

@@ -53,7 +53,7 @@ describe("Enumerate Scanner ", function() {
 			var obj = Rho.Barcode.enumerate();
 			var cbdata='';
 			for (var i = 0; i<obj.length; i++) {
-				cbdata = cbdata + (i+1).toString() + ') ' + obj[i].scannerType + '. <br />' ;
+				cbdata = cbdata + (i+1).toString() + ') ' + obj[i].friendlyName + '. <br />' ;
 			};
 			dispVerificationStatus("No. of Enumerated Objects - " + obj.length.toString() + ". <br />" +  cbdata);			
 		});
@@ -589,7 +589,7 @@ describe("Barcode Compliance JS Test", function() {
 					dispTestSteps("Auto Test");
 					    Rho.Barcode.setDefault(objSCN);
 					    var defaultobj = Rho.Barcode.getDefault();
-						expect(scnid).toEqual(defaultobj.getProperty('scannerType'));
+						expect(scnid).toEqual(defaultobj.getProperty('ID'));
 				});
 			});	
 		})(enumData[j]);
