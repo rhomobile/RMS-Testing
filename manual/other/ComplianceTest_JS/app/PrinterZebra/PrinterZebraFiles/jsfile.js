@@ -1,1 +1,3 @@
-Test Page for printer.
+function sampleFunc () {
+	console.log('test page for printing');
+};

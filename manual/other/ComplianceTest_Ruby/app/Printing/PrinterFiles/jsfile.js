@@ -1,1 +1,1 @@
-Test Page for printer.
+console.log("Test Page for printer.");
