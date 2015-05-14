@@ -117,8 +117,8 @@
 		
 	  	for (var i = 0; i < scanners.length; i++) {
 	  		$('#scanner_type').append($('<option />', {
-	  	        value: scanners[i].scannerType,
-		        text : scanners[i].scannerType 
+	  	        value: scanners[i].friendlyName,
+		        text : scanners[i].friendlyName 
 		    }));
 	  	}
 	 })();

@@ -109,7 +109,7 @@ describe("Barcode Compliance JS Test", function() {
 				});
 
 			describe("Barcode Test with "+ scnid +": " + scntype , function() {
-				if (Rho.System.isMotorolaDevice == true) 
+				if (Rho.System.isSymbolDevice == true) 
 				{
 					it("VT200-0335 | Enable with callback as function |" + scnid + scntype , function() {
 						displayObjective("VT200-0335 |Enable with callback as function| " + scnid + scntype);
@@ -323,7 +323,7 @@ describe("Barcode Compliance JS Test", function() {
 						});
 					});
 
-				if (Rho.System.isMotorolaDevice == true) 
+				if (Rho.System.isSymbolDevice == true) 
 				{
 					it("VT200-0344 | autotenter true with setproperty |"+ scnid, function() {
 						displayObjective("VT200-0344 | autotenter true with setproperty | ");

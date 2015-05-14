@@ -9,12 +9,18 @@ class BarcodeController < Rho::RhoController
   
   # set scanner for tests 
   def set_scanner
-    scanner_type = @params['scanner_type']
     @obj = Rho::Barcode.enumerate
-    
-    @obj.each do |scannerObj|
-      $scanner = scannerObj if scannerObj.scannerType == scanner_type
-      #break
+
+    if @params['scanner_type']
+      @obj.each do |scannerObj|
+        $scanner = scannerObj if scannerObj.scannerType == @params['scanner_type']
+      end
+    end
+
+    if @params['scanner_name']
+      @obj.each do |scannerObj|
+        $scanner = scannerObj if scannerObj.friendlyName == @params['scanner_name']
+      end      
     end
   end
   
