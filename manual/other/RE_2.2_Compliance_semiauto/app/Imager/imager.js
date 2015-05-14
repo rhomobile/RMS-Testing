@@ -30,11 +30,11 @@ function selectImager(){
 				"VTID":"VT366-0090",
 				"RegLevel":"R1",
 				"Description":"lamp on and Aim on",
-				"PreCondition":[],
-				"Steps":["Enable the imager view finder on device","Set left to 200, top to 20, height to 100 and width to 100","Set the Lamp value to on","Set Aim value to On"],
+				"PreCondition":["Enable the imager view finder on device","Set the Lamp value to on","Set Aim value to On"],
+				"Steps":[],
 				"ExpectedOutcome":["Lamp should be on and illumination should go on.","Aiming should be on.","Reticle should be there","Image should be catured"],
 				"testToPerform":function(){
-					imager.left = 200;
+					imager.left = 20;
 					imager.top = 20;
 					imager.height = 100;
 					imager.width = 100;
@@ -42,50 +42,46 @@ function selectImager(){
 					imager.aim = 'on';
 					enableImager();
 					imager.capture();
-					setTimeout(function(){imager.disable();}, 3000);
-					
 				},
 				"FinalResult":""	
 			},{
 				"VTID":"VT366-0091",
 				"RegLevel":"R1",
 				"Description":"Imager Event with destination to ftp of JSON Object type ",
-				"PreCondition":[],
-				"Steps":["Enable the imager on device.","Set left to 200, top to 20, height to 100 and width to 100","Set the destination to FTP location with correct username or password.","Attach the imager event of JSON Object type.","Call Capture method"],
+				"PreCondition":["Enable the imager on device.","Set the destination to FTP location with correct username or password.","Attach the imager event of JSON Object type.","Call Capture method"],
+				"Steps":[],
 				"ExpectedOutcome":["imager event should fire and appropriate transferResult value should be returned by event.","Image should be captured and transferred to specified FTP location."],
 				"testToPerform":function(){
-					var Destination = "ftp://10.233.85.82/Received/imageInFTP.bmp";
-					enableImager();
-					imager.left = 200;
+					imager.left = 20;
 					imager.top = 20;
 					imager.height = 100;
 					imager.width = 100;
+					var Destination = "ftp://10.233.85.82/Received/imageInFTP.bmp";
+					enableImager();
 					imager.username = 'ftpadmin';
 					imager.password = 'ftpadmin';
 					imager.destination = "url('"+Destination+"')";
 					imager.imagerEvent = "myjsonevent(%json)";
 					imager.imagerCaptureEvent='onImageCapture(%json)';
 					imager.capture();
-					setTimeout(function(){imager.disable();}, 3000);
 				},
 				"FinalResult":""	
 			},{
 				"VTID":"VT366-0117",
 				"RegLevel":"R1",
 				"Description":"Imager(URI) | Display the captured Image after setting co-ordinates of viewfinder",
-				"PreCondition":[],
-				"Steps":["Enable the imager","Set left to 200, top to 20, height to 100 and width to 100 other than default values","Attach the ImageCaptureEvent.","Capture the Image","Display the captured Image (saved as Data URI object)"],
+				"PreCondition":["Enable the imager","Set left, top, height and width to other than default values","Attach the ImageCaptureEvent.","Capture the Image","Display the captured Image (saved as Data URI object)"],
+				"Steps":[],
 				"ExpectedOutcome":["The captured Image should dispalyed on page."],
 				"testToPerform":function(){
 					enableImager();
-					imager.left = 200;
+					imager.left = 20;
 					imager.top = 20;
 					imager.height = 100;
 					imager.width = 100;
 					imager.imagerEvent = "callbackFunc('%s')";
 					imager.imagerCaptureEvent='onImageCapture(%json)';
 					imager.capture();
-					setTimeout(function(){imager.disable();}, 3000);
 				},
 				"FinalResult":""	
 			}];
