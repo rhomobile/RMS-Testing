@@ -14,17 +14,16 @@ capabilities:
 
 iphone:
   ajax_api_bridge: false
-  sdk: "iphonesimulator8.1"
+  sdk: "iphoneos8.3"
   configuration: "Release"
   provisionprofile: 
-  codesignidentity: 
+  codesignidentity: "iPhone Developer"
   entitlements: 
   extensions:
     - sensor
     - barcode
     - mediaplayer
     - screenorientation
-    - mediacapture
   BundleIdentifier: "com.rhomobile.manualcommonspec"
   BundleURLScheme: "manualcommonspec"
 
@@ -46,7 +45,6 @@ android:
     - barcode
     - mediaplayer
     - sensor
-    - mediacapture
 wm:
   #webkit_outprocess: 1
   ajax_api_bridge: false
@@ -57,7 +55,6 @@ wm:
     - indicators
     - sensor
     - smartCradle
-    - mediacapture
 
 #paths:
 #  extensions:

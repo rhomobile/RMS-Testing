@@ -22,7 +22,7 @@ var platformSupported = ["APPLE", "ANDROID"];
 
 	   (function(objSCN){ 
 
-	   		var scnid = objSCN.getProperty('scannerType');
+	   		var scnid = objSCN.getProperty('ID');
 	   		var scntype = objSCN.getProperty('scannerType');
 			var reticleType = (objSCN.friendlyName == "2D Imager" && isAndroid ? "hardwareReticle" : "softwareReticle");
 
@@ -304,7 +304,7 @@ var platformSupported = ["APPLE", "ANDROID"];
 			dispTestSteps("Auto Test");
 			    Rho.Barcode.setDefault(objSCN);
 			    var defaultobj = Rho.Barcode.getDefault();
-				expect(scnid).toEqual(defaultobj.getProperty('scannerType'));
+				expect(scnid).toEqual(defaultobj.getProperty('ID'));
 		});
 	})(enumData[j]);
 	}

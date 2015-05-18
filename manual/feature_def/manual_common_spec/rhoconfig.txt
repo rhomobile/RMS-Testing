@@ -58,7 +58,7 @@ sync_poll_interval=0
 # open rhodes app in full screen mode
 # default 1 for Android up to Rhodes 2.2.5.
 # on all other platforms and on Android from Rhodes >2.2.5 default 0
-#full_screen = 1
+full_screen = 1
 
 # disable the Android page loading progress bar
 #disable_loading_indication = 0

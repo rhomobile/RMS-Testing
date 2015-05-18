@@ -32,7 +32,11 @@ describe("Media Player", function () {
 			_result.waitToRunTest();
 		
 			runs(function () {
-				Ruby.call('Mediaplayer','play_audio?case='+2);
+				if (isWindowsMobilePlatform()) {
+					Ruby.call('Mediaplayer','play_audio?case='+1);
+				} else{
+					Ruby.call('Mediaplayer','play_audio?case='+2);	
+				};
 				
 				setTimeout(function () {
 					Ruby.call('Mediaplayer','stop_audio');

@@ -24,7 +24,7 @@ describe("Camera API Manual Tests", function(){
 	};
 	var getCallbackData = function(camArr){
 		for (var i = 0; i < camArr.length; i++) {
-			camArray += (i+1).toString() + ") Camera Type: " + enumData[i].getProperty('cameraType') +  "; ";
+			camArray += (i+1).toString() + ") Camera Type: " + enumData[i].cameraType +  "; ";
 		};
 		callbackTriggered = true;
 	};

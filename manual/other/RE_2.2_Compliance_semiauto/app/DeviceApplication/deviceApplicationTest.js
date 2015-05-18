@@ -11,10 +11,10 @@
 						"Call Set method to set the alarm at the specified time interval and wait for 60 seconds"],
 				"ExpectedOutcome":["AlarmTriggered event should be fired two times at the interval of 30 seconds"],
 				"testToPerform":function(){
-					alarm.interval = "00-00-30";
-					alarm.repeat = "true";
+					alarm.interval = '00-00-30';
+					alarm.repeat = 'true';
+					alarm.alarmTriggered = 'doAlarm();'; 
 					alarm.set();
-					alarm.alarmTriggered = 'doAlarm()'; 
 					main.displayResult("wait for alarm trigger event..");
 				},
 				"FinalResult":""

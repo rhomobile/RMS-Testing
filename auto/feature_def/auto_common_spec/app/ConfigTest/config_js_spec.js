@@ -11,13 +11,13 @@ describe('Rho.Config module', function() {
 
     	it("Should return default rhoconfig path", function() {
 	    	var defaultConfigPath = Rho.Config.configPath;
-	    	expect(defaultConfigPath).toEqual('rho/apps/rhoconfig.txt'); 
+	    	expect(defaultConfigPath).toEqual(Rho.RhoFile.join(Rho.Application.appsBundleFolder, 'rhoconfig.txt')); 
 	    });
 
 	    it("Should set rhoconfig to different path in device", function() {
-	    	Rho.Config.configPath = "rho/apps/app/ConfigTest/rhoconfig.txt";
+	    	Rho.Config.configPath = Rho.RhoFile.join(Rho.Application.appsBundleFolder, 'app/ConfigTest/rhoconfig.txt');
 	    	var newConfigPath = Rho.Config.configPath;
-	    	expect(newConfigPath).toEqual('rho/apps/app/ConfigTest/rhoconfig.txt');
+	    	expect(newConfigPath).toEqual(Rho.RhoFile.join(Rho.Application.appsBundleFolder, 'app/ConfigTest/rhoconfig.txt'));
 	    	Rho.Config.loadFromFile();
 	    	var result = Rho.Config.getPropertyString("start_path")
 			expect(result).toEqual('/app/ConfigTest/specRunner.html');
@@ -26,7 +26,7 @@ describe('Rho.Config module', function() {
 	    
 	    
 	    it("Should not behave abnormally on setting invalid rhoconfig path", function() {
-	    	Rho.Config.configPath = 'rho/apps/rhoconfig.txt';
+	    	Rho.Config.configPath = Rho.RhoFile.join(Rho.Application.appsBundleFolder, 'rhoconfig.txt');
 	    	var defaultConfigPath = Rho.Config.configPath;
 	    	Rho.Config.configPath = "/app//Invalid!@#rhoconfig.txt";
 	    	var newConfigPath = Rho.Config.configPath;
@@ -61,18 +61,18 @@ describe('Rho.Config module', function() {
 	    });
 
 	    it("loadFromFile method should load default rhoconfig file after setting to different rhoconfig path", function() {
-	    	Rho.Config.configPath = 'rho/apps/rhoconfig.txt';
+	    	Rho.Config.configPath = Rho.RhoFile.join(Rho.Application.appsBundleFolder, 'rhoconfig.txt');
 	    	Rho.Config.loadFromFile();
 	    	var returnStr = Rho.Config.getPropertyString('start_path');
 	    	var returnInt = Rho.Config.getPropertyInt('MinSeverity');
-	    	Rho.Config.configPath = "rho/apps/app/ConfigTest/rhoconfig.txt";
+	    	Rho.Config.configPath = Rho.RhoFile.join(Rho.Application.appsBundleFolder, "app/ConfigTest/rhoconfig.txt");
 	    	Rho.Config.loadFromFile();
 	    	expect(Rho.Config.getPropertyString('start_path')).not.toEqual(returnStr);
 	    	expect(Rho.Config.getPropertyInt('MinSeverity')).not.toEqual(returnInt);
 	    });
 	    
 	    it("removeProperty should remove logserver property when multiple logserver property exists in rhoconfig", function() {
-	    	Rho.Config.configPath = "rho/apps/app/ConfigTest/rhoconfig.txt";
+	    	Rho.Config.configPath = Rho.RhoFile.join(Rho.Application.appsBundleFolder, "app/ConfigTest/rhoconfig.txt");
 	    	Rho.Config.loadFromFile();
 	    	if(Rho.Config.isPropertyExists("logserver")) {
 	    		Rho.Config.removeProperty("logserver", false);
@@ -85,11 +85,11 @@ describe('Rho.Config module', function() {
 	    }); 
 	    
 	    it("Should set rhoconfig to default path and checking the original start path", function() {
-	    	Rho.Config.configPath = "rho/apps/rhoconfig.txt";
+	    	Rho.Config.configPath = Rho.RhoFile.join(Rho.Application.appsBundleFolder, "rhoconfig.txt");
 	    	Rho.Config.loadFromFile();
 	    	var newConfigPath = Rho.Config.configPath;
 	    	var actual = Rho.Config.getPropertyString("start_path")
-	    	expect(newConfigPath).toEqual('rho/apps/rhoconfig.txt');
+	    	expect(newConfigPath).toEqual(Rho.RhoFile.join(Rho.Application.appsBundleFolder, "rhoconfig.txt"));
 	    	expect(actual).toEqual("/app/index.html");
 	    });
 
@@ -107,11 +107,11 @@ describe('Rho.Config module', function() {
 
 	            if (isTestApplicable(suitablePlatforms)) {
 	                it(testName+"getPropertyString method", function () {
-	                	Rho.Config.configPath = "rho/apps/rhoconfig.txt";
+	                	Rho.Config.configPath = Rho.RhoFile.join(Rho.Application.appsBundleFolder, "rhoconfig.txt");
 	        	    	Rho.Config.loadFromFile();
 	                	var newConfigPath = Rho.Config.configPath;
 	                	var actual = Rho.Config.getPropertyString(propertyName)
-						expect(newConfigPath).toEqual('rho/apps/rhoconfig.txt');
+						expect(newConfigPath).toEqual(Rho.RhoFile.join(Rho.Application.appsBundleFolder, "rhoconfig.txt"));
 	                	expect(actual).toEqual(expectedValue);
 	                });
 	            }

@@ -3,9 +3,9 @@ function callbackdata(data)
 {
 	document.getElementById("clbkData").innerHTML = data;
 }
-function callbackdata2(data)
+function callbackdatafunc(data)
 {
-	document.getElementById("clbkData2").innerHTML = data;
+	document.getElementById("clbkDatadiv").innerHTML = data;
 }
 var hardwareKeysTest = {};
 

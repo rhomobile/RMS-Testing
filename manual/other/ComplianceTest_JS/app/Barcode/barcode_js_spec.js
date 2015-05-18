@@ -53,7 +53,7 @@ describe("Enumerate Scanner ", function() {
 			var obj = Rho.Barcode.enumerate();
 			var cbdata='';
 			for (var i = 0; i<obj.length; i++) {
-				cbdata = cbdata + (i+1).toString() + ') ' + obj[i].scannerType + '. <br />' ;
+				cbdata = cbdata + (i+1).toString() + ') ' + obj[i].friendlyName + '. <br />' ;
 			};
 			dispVerificationStatus("No. of Enumerated Objects - " + obj.length.toString() + ". <br />" +  cbdata);			
 		});
@@ -109,7 +109,7 @@ describe("Barcode Compliance JS Test", function() {
 				});
 
 			describe("Barcode Test with "+ scnid +": " + scntype , function() {
-				if (Rho.System.isMotorolaDevice == true) 
+				if (Rho.System.isSymbolDevice == true) 
 				{
 					it("VT200-0335 | Enable with callback as function |" + scnid + scntype , function() {
 						displayObjective("VT200-0335 |Enable with callback as function| " + scnid + scntype);
@@ -323,7 +323,7 @@ describe("Barcode Compliance JS Test", function() {
 						});
 					});
 
-				if (Rho.System.isMotorolaDevice == true) 
+				if (Rho.System.isSymbolDevice == true) 
 				{
 					it("VT200-0344 | autotenter true with setproperty |"+ scnid, function() {
 						displayObjective("VT200-0344 | autotenter true with setproperty | ");
@@ -589,7 +589,7 @@ describe("Barcode Compliance JS Test", function() {
 					dispTestSteps("Auto Test");
 					    Rho.Barcode.setDefault(objSCN);
 					    var defaultobj = Rho.Barcode.getDefault();
-						expect(scnid).toEqual(defaultobj.getProperty('scannerType'));
+						expect(scnid).toEqual(defaultobj.getProperty('ID'));
 				});
 			});	
 		})(enumData[j]);

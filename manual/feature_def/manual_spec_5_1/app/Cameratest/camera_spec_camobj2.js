@@ -2,9 +2,9 @@ describe("Camera API Manual Tests", function(){
 	var enumData = Rho.Camera.enumerate();
 	var cam;
 	if(enumData.length == 2){
-		cam = enumData[1].getProperty('cameraType');
+		cam = enumData[1].cameraType;
 	}else{
-		cam = enumData[0].getProperty('cameraType');
+		cam = enumData[0].cameraType;
 	}
 	var imagestatus = '';
 	var callbackData;
@@ -458,6 +458,7 @@ describe("Camera API Manual Tests", function(){
 			            spec.addExpectation("The returned image height and width should be same as the saved image");
 			            spec.addExpectation("And the returned value should be imageHeight: 480 and imageWidth: 640 (if supported by the device)");
 			            spec.addExpectation("Or nearest supported resolution which is listed in steps");
+			            spec.addExpectation("NOTE: As height(480) is lesser than width(640), capturing in landscape view gives correct result.");
 			            spec.displayScenario();
 			            spec.waitForButtonPressing("Run test");
 						runs(function(){

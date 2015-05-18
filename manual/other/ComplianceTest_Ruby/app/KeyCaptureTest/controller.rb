@@ -10,8 +10,8 @@ def capturekey_callback
 	Rho::WebView.executeJavascript("callbackdata(#{@params['keyValue']});")
 end
 
-def capturekey_callback2
-	Rho::WebView.executeJavascript("callbackdata2(#{@params['keyValue']});")
+def capturekey_callback_method
+	Rho::WebView.executeJavascript("callbackdatafunc(#{@params['keyValue']});")
 end
 
 def trigger_callback
@@ -36,16 +36,16 @@ def capturekey
 	end
 end
 
-def capturekey2
+def capturekey_method
 	if @params['truth'] 
 		if @params['call']
-			Rho::KeyCapture.captureKey(true, @params['keystring'], url_for(:action => :capturekey_callback2))
+			Rho::KeyCapture.captureKey(true, @params['keystring'], url_for(:action => :capturekey_callback_method))
 		else
 			Rho::KeyCapture.captureKey(true, @params['keystring'])
 		end
 	else
 		if @params['call']
-			Rho::KeyCapture.captureKey(false, @params['keystring'], url_for(:action => :capturekey_callback2))
+			Rho::KeyCapture.captureKey(false, @params['keystring'], url_for(:action => :capturekey_callback_method))
 		else
 			Rho::KeyCapture.captureKey(false, @params['keystring'])
 		end
