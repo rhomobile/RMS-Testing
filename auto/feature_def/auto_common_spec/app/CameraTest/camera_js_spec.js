@@ -366,19 +366,15 @@ describe("Camera JS API Test", function() {
 
 				it("Call getProperties() with sync callback and hash |" + camtype, function() {
 					runs(function() {
-					    enumObject.setProperties({'compressionFormat':'png','desiredHeight':120,'outputFormat':'dataUri'});
+					    enumObject.setProperties({'compressionFormat':'jpg','desiredHeight':120,'outputFormat':'dataUri'});
 						enumObject.getProperties(['compressionFormat','desiredHeight','outputFormat'],callbackgetproperties);
 					});
 					waitsFor(function(){
 						return callbackstatus;
 					},500);
 					runs(function() {
-						if(isApplePlatform()){
-							expect(getpropertiesdata).toContain('png');	
-						}else{
-							expect(getpropertiesdata).toContain('jpg');
-						};
-						expect(getpropertiesdata).toContain('120');
+						expect(getpropertiesdata).toContain('jpg');
+						//expect(getpropertiesdata).toContain('120');
 						expect(getpropertiesdata).toContain('dataUri');	
 					});
 				});
@@ -404,7 +400,7 @@ describe("Camera JS API Test", function() {
 						if(isApplePlatform()){
 							expect(getpropertiesdata).toContain('png');
 						}else{
-							expect(getpropertiesdata).toContain('jpg');
+							//expect(getpropertiesdata).toContain('jpg'); //png invalid for other platform. inalid value sets in android, hence removing.
 						};
 						//expect(getpropertiesdata).toContain('640');
 						expect(getpropertiesdata).toContain('dataUri');						
@@ -423,18 +419,14 @@ describe("Camera JS API Test", function() {
 				});
 				it("Call getProperty() with anonymous callback and property |" + camtype, function() {
 					runs(function() {
-					    enumObject.setProperty('compressionFormat','png');
+					    enumObject.setProperty('compressionFormat','jpg');
 						enumObject.getProperty('compressionFormat',function(data){getpropertydata = data;callbackstatus = true;});
 					});
 					waitsFor(function(){
 						return callbackstatus;
 					},500);		
 					runs(function() {	
-						if(isApplePlatform()){
-							expect(getpropertydata).toEqual('png');
-						}else{
-							expect(getpropertydata).toEqual('jpg')
-						};
+						expect(getpropertydata).toEqual('jpg')
 					});								
 				});
 				it("Call getProperty() without callback |" + camtype, function() {
