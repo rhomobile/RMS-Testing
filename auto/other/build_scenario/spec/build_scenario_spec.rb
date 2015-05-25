@@ -62,7 +62,7 @@ describe "Testing build scenario" do
 
 		it "Build with all licensed extensions for WM/CE" do
 
-			add_yml_setting('build.yml',{"wm"=>{"extensions" =>["barcode","cardreader","indicators","nfc","rhoconnect-client","rhoconnect-push","signature"]}})
+			add_yml_setting('build.yml',{"wm"=>{"extensions" =>["barcode","cardreader","hardwarekeys","indicators","nfc","rhoconnect-client","rhoconnect-push","signature","smartCradle"]}})
 
 			initiate_build_wmce
 
@@ -84,7 +84,7 @@ describe "Testing build scenario" do
 		
 		it "Should build using capabilities for wm/ce" do
 
-			add_yml_setting('build.yml',{"capabilities"=>["camera","bluetooth","gps","sdcard","pim","calendar","vibrate","phone","native_browser","push","network_state"]})
+			add_yml_setting('build.yml',{"capabilities"=>["camera","bluetooth","gps","sdcard","pim","calendar","vibrate","phone","push","network_state"]})
 
 			initiate_build_wmce
 			
@@ -170,7 +170,7 @@ describe "Testing build scenario" do
 		it "Should build using old 2.2/native ruby extensions for wm/ce" do
 
 			add_yml_setting('build.yml',{"wm"=>{"extensions"=>["nfc","rawsensors","mspec", "openssl.so", "openssl", "hmac", "digest", "digest-sha1","digest-md5", 
-				"ezcrypto", "fileutils", "myext", "rexml", "set", "rhoxml", "thread", "timeout", "uri", "pdf-writer", "json", "net-http"]
+				"ezcrypto", "fileutils", "rexml", "set", "rhoxml", "thread", "timeout", "uri", "pdf-writer", "json", "net-http"]
 				}})
 
 			initiate_build_wmce
@@ -183,11 +183,11 @@ describe "Testing build scenario" do
 		it "should build with apptype rhoelements, all capabilities & extensions for WM/CE" do
 
 			add_yml_setting('build.yml',{"wm"=>{"extensions"=>["mspec", "openssl.so", "openssl", "hmac", "digest", "digest-sha1","digest-md5", 
-				"fileutils", "myext", "rexml", "set", "rhoxml", "thread", "timeout", "uri", "pdf-writer", "json", "net-http", 
-				"audiocapture","coreapi","mediaplayer","screenorientation","printing","printing_zebra","sensor", "barcode","cardreader",
-				"indicators","NFC","rhoconnect-client","rhoconnect-push","signature"]
+				"fileutils", "rexml", "set", "rhoxml", "thread", "timeout", "uri", "pdf-writer", "json", "net-http", 
+				"audiocapture","coreapi","hardwarekeys","mediaplayer","screenorientation","printing","printing_zebra","sensor", "barcode","cardreader",
+				"indicators","NFC","rhoconnect-client","rhoconnect-push","signature","smartCradle"]
 				}})
-			add_yml_setting('build.yml',{"capabilities"=>["camera","bluetooth","gps","sdcard","pim","calendar","vibrate","phone","native_browser","push","network_state"]})
+			add_yml_setting('build.yml',{"capabilities"=>["camera","bluetooth","gps","sdcard","pim","calendar","vibrate","phone","push","network_state"]})
 
 			initiate_build_wmce
 			
@@ -195,29 +195,7 @@ describe "Testing build scenario" do
 			delete_yml_setting('build.yml','capabilities')
 
 			expect(File.exist?(filePath)).to be true
-		end		
-
-		it "Should build using hardwarekeys extensions for wm/ce" do
-
-			add_yml_setting('build.yml',{"wm"=>{"extensions"=>["hardwarekeys"]}})
-
-			initiate_build_wmce
-			
-			delete_yml_setting('build.yml',"wm")
-
-			expect(File.exist?(filePath)).to be true
 		end
-
-		it "Should build using smartCradle extensions for wm/ce" do
-
-			add_yml_setting('build.yml',{"wm"=>{"extensions"=>["smartCradle"]}})
-
-			initiate_build_wmce
-			
-			delete_yml_setting('build.yml',"wm")
-
-			expect(File.exist?(filePath)).to be true
-		end	
 
 	end
 
@@ -282,7 +260,8 @@ describe "Testing build scenario" do
 
 		it "should build using capabilities for android" do
 
-			add_yml_setting('build.yml',{"capabilities"=>["camera","bluetooth","gps","sdcard","pim","calendar","vibrate","phone","native_browser","push","network_state"]})
+			add_yml_setting('build.yml',{"android"=>{"manifest_template" => "AndroidManifest.erb"}})
+			add_yml_setting('build.yml',{"capabilities"=>["camera","bluetooth","gps","sdcard","pim","calendar","vibrate","phone","push","network_state"]})
 			delete_yml_setting('build.yml',"app_type")
 
 			initiate_build_android
@@ -293,10 +272,11 @@ describe "Testing build scenario" do
 			expect(File.exist?(filePath)).to be true
 		end
 
+		# myext extension removed as not supported
 		it "should build using old 2.2/native ruby extensions for android" do
 
 			add_yml_setting('build.yml',{"android"=>{"extensions"=>["nfc","rawsensors","mspec", "openssl.so", "openssl", "hmac", "digest", "digest-sha1","digest-md5", 
-				"ezcrypto", "fileutils", "myext", "rexml", "set", "rhoxml", "thread", "timeout", "uri", "pdf-writer", "json", "net-http", "digest-sha2"], 
+				"ezcrypto", "fileutils", "rexml", "set", "rhoxml", "thread", "timeout", "uri", "pdf-writer", "json", "net-http", "digest-sha2"], 
 				"manifest_template" => "AndroidManifest.erb", "version" => "2.3.3"}})
 			delete_yml_setting('build.yml',"app_type")
 
@@ -311,11 +291,10 @@ describe "Testing build scenario" do
 		it "should build with apptype rhoelements, all capabilities & extensions for Android" do
 
 			add_yml_setting('build.yml',{"android"=>{"extensions"=>["mspec", "openssl.so", "openssl", "hmac", "digest", "digest-sha1","digest-md5", 
-				"fileutils", "myext", "rexml", "set", "rhoxml", "thread", "timeout", "uri", "pdf-writer", "json", "net-http", 
+				"fileutils", "rexml", "set", "rhoxml", "thread", "timeout", "uri", "pdf-writer", "json", "net-http", 
 				"audiocapture","coreapi","emdk3-manager","hardwarekeys","mediaplayer","screenorientation","simulscan","printing","printing_zebra","sensor", "barcode","cardreader",
-				"indicators","nfc","rhoconnect-client","rhoconnect-push","smartCradle","signature"]
-				}})
-			add_yml_setting('build.yml',{"capabilities"=>["camera","bluetooth","gps","sdcard","pim","calendar","vibrate","phone","native_browser","push","network_state"]})
+				"indicators","nfc","rhoconnect-client","rhoconnect-push","smartCradle","signature"]}, "manifest_template" => "AndroidManifest.erb"})
+			add_yml_setting('build.yml',{"capabilities"=>["camera","bluetooth","gps","sdcard","pim","calendar","vibrate","phone","push","network_state"]})
 
 			initiate_build_android
 			
@@ -436,12 +415,21 @@ describe "Testing build scenario" do
 
 		it "should build when abis: [arm, x86] is used for Android" do
 
-			add_yml_setting('build.yml',{"android"=>{"manifest_template" => "AndroidManifest.erb", "abis"=>[arm, x86]}})
+			add_yml_setting('build.yml',{"android"=>{"manifest_template" => "AndroidManifest.erb", "abis"=>['arm', 'x86']}})
 
 			initiate_build_android
 
 			expect(File.exist?(filePath)).to be true
 		end
+
+		it "should build when manifest_template is not used for Android" do
+
+			add_yml_setting('build.yml',{"android"=>{"version" => "4.2.2"}})
+
+			initiate_build_android
+
+			expect(File.exist?(filePath)).to be true
+		end		
 
 	end
 
@@ -478,9 +466,10 @@ describe "Testing build scenario" do
 
 		end
 
+		# removed rhoconnect-push & indicators as it is not supported by iOS
 		it "should build using all non-licensed extension when app type is not rhoelements for ios" do
 
-			add_yml_setting('build.yml',{"extensions"=>["barcode","hardwarekeys","indicators","rhoconnect-client","rhoconnect-push","signature"]})
+			add_yml_setting('build.yml',{"extensions"=>["barcode","hardwarekeys","rhoconnect-client","signature"]})
 			delete_yml_setting('build.yml','app_type')
 
 			initiate_build_ios
@@ -504,10 +493,11 @@ describe "Testing build scenario" do
 			expect(File.exist?(filePath)).to be true
 		end	
 
+		# removed 'myext'
 		it "should build using old 2.2 extensions for ios" do
 
-			add_yml_setting('build.yml',{"extensions"=>["nfc","rawsensors","mspec", "openssl.so", "openssl", "hmac", "digest", "digest-sha1","digest-md5", 
-				"ezcrypto", "fileutils", "myext", "rexml", "set", "rhoxml", "thread", "timeout", "uri", "pdf-writer", "json", "net-http", "digest-sha2"], 
+			add_yml_setting('build.yml',{"extensions"=>["rawsensors","mspec", "openssl.so", "openssl", "hmac", "digest", "digest-sha1","digest-md5", 
+				"ezcrypto", "fileutils", "rexml", "set", "rhoxml", "thread", "timeout", "uri", "pdf-writer", "json", "net-http", "digest-sha2"], 
 				})
 			delete_yml_setting('build.yml',"app_type")
 
@@ -521,7 +511,7 @@ describe "Testing build scenario" do
 
 		it "should build using capabilities for ios" do
 
-			add_yml_setting('build.yml',{"capabilities"=>["camera","bluetooth","gps","sdcard","pim","calendar","vibrate","phone","native_browser","push","network_state"]})
+			add_yml_setting('build.yml',{"capabilities"=>["camera","bluetooth","gps","sdcard","pim","calendar","vibrate","phone","push","network_state"]})
 			delete_yml_setting('build.yml',"app_type")
 
 			initiate_build_ios
@@ -535,11 +525,11 @@ describe "Testing build scenario" do
 		it "should build with apptype rhoelements, all capabilities & extensions for ios" do
 
 			add_yml_setting('build.yml',{"extensions"=>["mspec", "openssl.so", "openssl", "hmac", "digest", "digest-sha1","digest-md5", 
-				"fileutils", "myext", "rexml", "set", "rhoxml", "thread", "timeout", "uri", "pdf-writer", "json", "net-http", 
+				"fileutils", "rexml", "set", "rhoxml", "thread", "timeout", "uri", "pdf-writer", "json", "net-http", 
 				"audiocapture","coreapi","hardwarekeys","mediaplayer","screenorientation","printing","printing_zebra","sensor", "barcode",
-				"indicators","rhoconnect-client","rhoconnect-push","signature"]
+				"rhoconnect-client","signature"]
 				})
-			add_yml_setting('build.yml',{"capabilities"=>["camera","bluetooth","gps","sdcard","pim","calendar","vibrate","phone","native_browser","push","network_state"]})
+			add_yml_setting('build.yml',{"capabilities"=>["camera","bluetooth","gps","sdcard","pim","calendar","vibrate","phone","push","network_state"]})
 
 			initiate_build_ios
 			
@@ -634,6 +624,9 @@ describe "Testing build scenario" do
 		before(:each) do
 			#Rake::Task("rake clean:android").invoke
 			filePath = getApplicationBuildPath 'wp8'
+
+			add_yml_setting('build.yml',{"wp8"=>{"productid"=>"da37e740-9d27-0131-ad03-0023241f0ea9"}})
+			
 			Open3.pipeline("rake clean:wp8")
 	  	end
 
@@ -665,7 +658,7 @@ describe "Testing build scenario" do
 
 		it "should build using all non-licensed extension when app type is not rhoelements for WP8" do
 
-			add_yml_setting('build.yml',{"wp8"=>{"extensions"=>["barcode","rhoconnect-client","rhoconnect-push"]}})
+			add_yml_setting('build.yml',{"wp8"=>{"extensions"=>["barcode","rhoconnect-client"]}})
 			delete_yml_setting('build.yml','app_type')
 
 			initiate_build_wp8
@@ -704,7 +697,7 @@ describe "Testing build scenario" do
 
 		it "should build using capabilities for WP8" do
 
-			add_yml_setting('build.yml',{"capabilities"=>["camera","bluetooth","gps","sdcard","pim","calendar","vibrate","phone","native_browser","push","network_state"]})
+			add_yml_setting('build.yml',{"capabilities"=>["camera","bluetooth","gps","sdcard","pim","calendar","vibrate","phone","push","network_state"]})
 			delete_yml_setting('build.yml',"app_type")
 
 			initiate_build_wp8
@@ -717,8 +710,8 @@ describe "Testing build scenario" do
 
 		it "should build with apptype rhoelements, all capabilities & extensions for WP8" do
 
-			add_yml_setting('build.yml',{"wp8"=>{"extensions"=>["digest", "digest-sha1","digest-md5", "uri", "json", "coreapi","barcode", "rhoconnect-client","rhoconnect-push"]}})
-			add_yml_setting('build.yml',{"capabilities"=>["camera","bluetooth","gps","sdcard","pim","calendar","vibrate","phone","native_browser","push","network_state"]})
+			add_yml_setting('build.yml',{"wp8"=>{"extensions"=>["digest", "digest-sha1","digest-md5", "uri", "json", "coreapi","barcode", "rhoconnect-client"]}})
+			add_yml_setting('build.yml',{"capabilities"=>["camera","bluetooth","gps","sdcard","pim","calendar","vibrate","phone","push","network_state"]})
 
 			initiate_build_wp8
 			
@@ -809,21 +802,50 @@ describe "Testing build scenario" do
 
 	end
 
-	xdescribe "Win32 build scenario test", :win32 do
+	describe "Win32 build scenario test", :win32 do
 
+		# Qt is required in the system to build for win32 and hence also to run these tests.
 		before(:each) do
 			filePath = getApplicationBuildPath 'win32'
 			Open3.pipeline("rake clean:win32")
 	  	end
 
+	  	# Microsoft Visual Studio 2012 required in the system to run this test.
 	  	it "should build for win32 application" do
-	  		add_yml_setting('build.yml',{"win32"=>{"msvc"=>"2012"}})
+	  		add_yml_setting('build.yml',{"win32"=>{"msvc"=>2012}})
 			delete_yml_setting('build.yml','app_type')
 
 			initiate_build_win32
 
 			expect(File.exist?(filePath)).to be true
 	  	end
+
+	  	it "should build for win32 application" do
+	  		add_yml_setting('build.yml',{"win32"=>{"deployqt"=>0, "deploymsvc"=>0}})
+			delete_yml_setting('build.yml','app_type')
+
+			initiate_build_win32
+
+			expect(File.exist?(filePath)).to be true
+	  	end	 
+
+	  	it "should build for win32 application" do
+	  		add_yml_setting('build.yml',{"win32"=>{"deployqt"=>1}})
+			delete_yml_setting('build.yml','app_type')
+
+			initiate_build_win32
+
+			expect(File.exist?(filePath)).to be true
+	  	end
+
+	  	it "should build for win32 application" do
+	  		add_yml_setting('build.yml',{"win32"=>{"deploymsvc"=>1}})
+			delete_yml_setting('build.yml','app_type')
+
+			initiate_build_win32
+
+			expect(File.exist?(filePath)).to be true
+	  	end	 
 
 	end
 
