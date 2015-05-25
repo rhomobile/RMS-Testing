@@ -1,36 +1,19 @@
-#sdk: ../../../../rhodes
-paths:
-  extensions:
-    - ../../../extensions
-# Please use relative pathes
 sdkversion: "3.3.2"
-name: "auto_common_spec"
-#  - ../../../../Motorola-Extensions/lib/commonAPI
-#  - ../../../../rhoconnect-client/ext/
-app_type: "rhoelements"
+name: "stressapp"
 version: 1.0
-#  - C:/DevelopmentTools/rhomobile/rhodes/lib/extensions
-#  - C:/DevelopmentTools/rhomobile/Motorola-Extensions/extensions
-#  - C:/DevelopmentTools/rhomobile/Motorola-Extensions/lib/commonAPI
-#  - C:/DevelopmentTools/rhomobile/rhoconnect-client/ext
-#  - C:/DevelopmentTools/rhomobile/Motorola-Extensions/build/ci/extensions
-#  - C:/DevelopmentTools/rhomobile/Motorola-Extensions/build/ci/extensions
-#  - C:/Neon/git/Motorola-Extensions/build/ci/extensions
-#  - B:/git/Motorola-Extensions/build/ci/extensions
 vendor: "rhomobile"
-#  neon:
-#  - C:/Users/fpc843/workspace/fpc843_rhoelements_dev/NEON
 build: "release"
 bbver: 4.6
 applog: "rholog.txt"
+app_type: "rhoelements"
 iphone:
   configuration: "Release"
-  sdk: iphonesimulator8.1
+  sdk: iphoneos8.2
   provisionprofile: 
   codesignidentity: 
   entitlements: 
-  BundleIdentifier: "com.rhomobile.apigeneratorspec"
-  BundleURLScheme: "apigeneratorspec"
+  BundleIdentifier: "com.rhomobile.stressapp"
+  BundleURLScheme: "stressapp"
   extensions:
     - nativeBridgeTest
     - barcode
@@ -40,21 +23,16 @@ iphone:
     - sensor
     - screenorientation
     - audiocapture
+    - mediaplayer
 wp:
   productid: "b6479381-42a8-0130-78de-3caec51bd50e"
-symbian:
-  uid: "0xe1a1ef92"
 android:
   version: "4.2.2"
   extensions:
     - nativeBridgeTest
     - barcode
-#use_shared_runtime: yes
-#sdk: MC3000c50b (ARMV4I)
     - screenorientation
     - instrumentation
-#capabilities:
-#- non_motorola_device
     - cardreader
     - indicators
     - sensor
@@ -62,10 +40,10 @@ android:
     - eventsource
     - audiocapture
     - screenorientation
+    - mediaplayer
   capabilities:
     - native_browser
 wm:
-  webkit_outprocess: 1
   sdk: "Windows Mobile 6.5.3 Professional DTK (ARMV4I)"
   extensions:
     - barcode
@@ -77,6 +55,7 @@ wm:
     - audiocapture
     - smartCradle
     - mediacapture
+    - mediaplayer
 extensions:
   - genPropBag
   - logCapture
