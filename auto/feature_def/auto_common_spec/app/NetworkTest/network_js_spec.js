@@ -97,7 +97,7 @@ describe('Network JS API', function() {
         var netCB = function(){
             console.log("Network callback");
         };
-        Rho.Network.stopDetectingConnection(netCB);
+        //Rho.Network.stopDetectingConnection(netCB);
     });
 
     it('check available hosts', function(){
