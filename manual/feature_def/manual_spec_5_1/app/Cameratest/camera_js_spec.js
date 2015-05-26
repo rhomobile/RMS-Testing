@@ -1248,35 +1248,37 @@ describe("Camera API Manual Tests", function(){
 		                spec.waitForResponse();
 					});
 				});
-				it("VT285-0035 | Should call takePicture and invalid fileName path | using " + camid + camtype , function(){
-					var spec = new ManualSpec(jasmine, window.document);
-		        	spec.addGoal(jasmine.getEnv().currentSpec.description);
-		            spec.addStep("Call takePicture({}, callback function) with fileName:'\\InvalidPath\\camimage'");
-		            spec.addStep("Press 'RunTest' button");
-		            spec.addStep("Check for the returned status");
-		            spec.addExpectation('The returned status should be error with message as wrong file path.');
-		            spec.displayScenario();
-		            spec.waitForButtonPressing("Run test");
-		            var param = {
-		            	'fileName':"\\InvalidPath\\camimage"
-		        	};
-		            runs(function(){
-						objCAM.takePicture(param, callbackFunc);
+				if(!isWindowsPhone8Platform()){
+					it("VT285-0035 | Should call takePicture and invalid fileName path | using " + camid + camtype , function(){
+						var spec = new ManualSpec(jasmine, window.document);
+			        	spec.addGoal(jasmine.getEnv().currentSpec.description);
+			            spec.addStep("Call takePicture({}, callback function) with fileName:'\\InvalidPath\\camimage'");
+			            spec.addStep("Press 'RunTest' button");
+			            spec.addStep("Check for the returned status");
+			            spec.addExpectation('The returned status should be error with message as wrong file path.');
+			            spec.displayScenario();
+			            spec.waitForButtonPressing("Run test");
+			            var param = {
+			            	'fileName':"\\InvalidPath\\camimage"
+			        	};
+			            runs(function(){
+							objCAM.takePicture(param, callbackFunc);
+						});
+						waitsFor(function(){
+							return callbackTriggered;
+						},"waiting for callback data", 10000);
+						runs(function(){
+							spec.addResult("status : ", callbackData.status);
+							spec.addResult("message : ", callbackData.message);
+							spec.addResult("imageHeight : ", callbackData.imageHeight);
+							spec.addResult("imageWidth : ", callbackData.imageWidth);
+							spec.addResult("imageFormat : ", callbackData.imageFormat);
+							spec.addResult("imageUri : ", callbackData.imageUri);
+							spec.displayResults();
+			                spec.waitForResponse();
+						});
 					});
-					waitsFor(function(){
-						return callbackTriggered;
-					},"waiting for callback data", 10000);
-					runs(function(){
-						spec.addResult("status : ", callbackData.status);
-						spec.addResult("message : ", callbackData.message);
-						spec.addResult("imageHeight : ", callbackData.imageHeight);
-						spec.addResult("imageWidth : ", callbackData.imageWidth);
-						spec.addResult("imageFormat : ", callbackData.imageFormat);
-						spec.addResult("imageUri : ", callbackData.imageUri);
-						spec.displayResults();
-		                spec.waitForResponse();
-					});
-				});				
+				}
 				it("VT285-0036 | Should call takePicture and suspend the device | using " + camid + camtype , function(){
 					var spec = new ManualSpec(jasmine, window.document);
 		        	spec.addGoal(jasmine.getEnv().currentSpec.description);

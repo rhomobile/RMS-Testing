@@ -31,7 +31,7 @@ android:
    - mediaplayer
    - screenorientation
    - mediacapture
-   - mobile_payment
+   #- mobile_payment
 wm:
   ajax_api_bridge: false
   sdk: "Windows Mobile 6.5.3 Professional DTK (ARMV4I)"
