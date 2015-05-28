@@ -5,20 +5,21 @@ describe("Application Module Test Starts Here", function() {
         document.getElementById('verificationResult').innerHTML = "";
     });
 
+    if(isWindowsMobilePlatform()){
+        it("VT200-0613 | get BadLink Uri without setting it", function() {
+            dispTestCaseRunning("VT200-0613 | get BadLink Uri without setting it");
+            dispExpectedResult("Application should return the default badlink uri " );
+            
+            _result.waitToRunTest();
 
-    it("VT200-0613 | get BadLink Uri without setting it", function() {
-        dispTestCaseRunning("VT200-0613 | get BadLink Uri without setting it");
-        dispExpectedResult("Application should return the default badlink uri " );
-        
-        _result.waitToRunTest();
+            runs(function(){
+                Ruby.call('Applicationtest','badlink_uri');
+            });
 
-        runs(function(){
-            Ruby.call('Applicationtest','badlink_uri');
+            _result.waitForResponse();
+
         });
-
-        _result.waitForResponse();
-
-    });
+    }
 
     it("VT200-0614 | Security Token Not passed", function() {
 

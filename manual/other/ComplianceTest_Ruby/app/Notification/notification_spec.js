@@ -1,9 +1,7 @@
 describe("Notification Manual FD Tests", function () {
 	
     afterEach(function () {
-        /* ... Tear it down ... */
-		var resultDiv = document.getElementById('actResult');
-		resultDiv.innerHTML = "";
+		document.getElementById('actResult').innerHTML = '';
     });
 
 	if ((isWindowsMobilePlatform() || isAndroidPlatform()) && !Rho.System.isRhoSimulator) 

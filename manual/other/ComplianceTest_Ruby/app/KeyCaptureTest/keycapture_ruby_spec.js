@@ -1,5 +1,75 @@
 describe("KeyCapture Test", function() {
 
+
+	describe("homeKey Test", function() {
+
+		var keydata = '';
+
+		beforeEach(function() {
+			keydata ='';
+			callbackdata(keydata);
+		});
+
+		if (isWindowsMobilePlatform()){
+
+			it("VT200-0604 | set homeKeyValue to enter key |", function() {
+
+				displayObjective(jasmine.getEnv().currentSpec.description);
+				dispTestCaseRunning("press the Enter key and check for application navigate");
+				dispExpectedResult("Application should navigate to Homepage of application after Pressing the Enter Key");
+
+				_result.waitToRunTest();
+
+				runs(function(){
+					Ruby.call('KeyCaptureTest','homekey?val=13');
+				});
+
+				_result.waitForResponse();
+
+				runs(function(){	
+					Ruby.call('KeyCaptureTest','homekey?val=Disabled');
+				});
+
+			});
+
+			it("VT200-0605 | set homeKeyValue to Disabled |", function() {
+
+				displayObjective(jasmine.getEnv().currentSpec.description);
+				dispTestCaseRunning("press the Enter key and check for application navigate");
+				dispExpectedResult("Application should not navigate to Homepage of application after Pressing the Enter Key");
+
+				_result.waitToRunTest();
+
+				runs(function(){
+					Ruby.call('KeyCaptureTest','homekey?val=0x0D');
+					Ruby.call('KeyCaptureTest','homekey?val=Disabled');
+				});
+
+				_result.waitForResponse();
+			});
+
+			it("VT200-0606 | set homeKeyValue to 1 and then 2|", function() {
+
+				displayObjective(jasmine.getEnv().currentSpec.description);
+				dispTestCaseRunning("press 1 and 2 key and check for application navigate");
+				dispExpectedResult("Application should navigate to Homepage of application after Pressing the numeric key 1 and 2 ");
+
+				_result.waitToRunTest();
+
+				runs(function(){
+					Ruby.call('KeyCaptureTest','homekey?val=0x31');
+					Ruby.call('KeyCaptureTest','homekey?val=0x32');					
+				});
+
+				_result.waitForResponse();
+
+				runs(function(){
+					Ruby.call('KeyCaptureTest','homekey?val=Disabled');
+				});
+			});
+		}
+	});	
+
 	describe("captureKey, captureTrigger and remapKey Test", function() {
 	
 		var keydata = '';
@@ -7,6 +77,7 @@ describe("KeyCapture Test", function() {
 		beforeEach(function() {
 			keydata ='';
 			callbackdata(keydata);
+			callbackdatafunc(keydata);
 		});
 
 
@@ -95,7 +166,7 @@ describe("KeyCapture Test", function() {
 		//  CaptureTrigger and Remap Tests
 		///////////////////////////////////////////////////////////////////////
 
-		if (isWindowsMobileOrAndroidPlatform() && Rho.System.isMotorolaDevice == true) {
+		if (isWindowsMobileOrAndroidPlatform() && Rho.System.isSymbolDevice == true) {
 
 			it("VT200-0611 | call captureTrigger with callback as anonymous function |", function() {
 
@@ -138,75 +209,5 @@ describe("KeyCapture Test", function() {
 		}
 
 	});
-
-
-	describe("homeKey Test", function() {
-
-		var keydata = '';
-
-		beforeEach(function() {
-			keydata ='';
-			callbackdata(keydata);
-		});
-
-		if (isWindowsMobilePlatform()){
-
-			it("VT200-0604 | set homeKeyValue to enter key |", function() {
-
-				displayObjective(jasmine.getEnv().currentSpec.description);
-				dispTestCaseRunning("press the Enter key and check for application navigate");
-				dispExpectedResult("Application should navigate to Homepage of application after Pressing the Enter Key");
-
-				_result.waitToRunTest();
-
-				runs(function(){
-					Ruby.call('KeyCaptureTest','homekey?val=13');
-				});
-
-				_result.waitForResponse();
-
-				runs(function(){	
-					Ruby.call('KeyCaptureTest','homekey?val=Disabled');
-				});
-
-			});
-
-			it("VT200-0605 | set homeKeyValue to Disabled |", function() {
-
-				displayObjective(jasmine.getEnv().currentSpec.description);
-				dispTestCaseRunning("press the Enter key and check for application navigate");
-				dispExpectedResult("Application should not navigate to Homepage of application after Pressing the Enter Key");
-
-				_result.waitToRunTest();
-
-				runs(function(){
-					Ruby.call('KeyCaptureTest','homekey?val=0x0D');
-					Ruby.call('KeyCaptureTest','homekey?val=Disabled');
-				});
-
-				_result.waitForResponse();
-			});
-
-			it("VT200-0606 | set homeKeyValue to 1 and then 2|", function() {
-
-				displayObjective(jasmine.getEnv().currentSpec.description);
-				dispTestCaseRunning("press 1 and 2 key and check for application navigate");
-				dispExpectedResult("Application should navigate to Homepage of application after Pressing the numeric key 1 and 2 ");
-
-				_result.waitToRunTest();
-
-				runs(function(){
-					Ruby.call('KeyCaptureTest','homekey?val=0x31');
-					Ruby.call('KeyCaptureTest','homekey?val=0x32');					
-				});
-
-				_result.waitForResponse();
-
-				runs(function(){
-					Ruby.call('KeyCaptureTest','homekey?val=Disabled');
-				});
-			});
-		}
-	});	
 
 });

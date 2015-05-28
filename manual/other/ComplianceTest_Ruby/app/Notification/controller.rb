@@ -7,8 +7,7 @@ class NotificationController < Rho::RhoController
 
 def notify_callback
 	@callback_data = @params.to_json.to_s
-	Rho::WebView.executeJavascript('document.getElementById("actResult").innerHTML= "'+@callback_data+'";')
-	Rho::WebView.executeJavascript("document.getElementById('actResult').style.display='block'")
+	Rho::WebView.executeJavascript("document.getElementById('actResult').innerHTML= '#{@callback_data}'")
 end
 
 def notify_beep
@@ -78,7 +77,7 @@ def notify_showpopupcb
 	@props = {'message' => 'This is a pop up for callback', 
 		'buttons' => [{'id' => 'yes', 'title' => 'yes'}, 'No', 'Cancel'], 
 		'title' => 'MyTitle', 'icon' => '/app/Notification/icon.png'}
-    Rho::Notification.showPopup(@props, url_for(:action => :notify_callback));
+    Rho::Notification.showPopup(@props, url_for(:action => :notify_callback))
 end
 
 def notify_showpopupcb2
@@ -88,7 +87,7 @@ def notify_showpopupcb2
 		'icon' =>  "info",
 		'buttons' => [{'id' => 'accept', 'title' => 'yes'},{'id' => 'cancel', 'title' => 'no'}],
 		'types' => [Rho::Notification::TYPE_NOTIFICATION_DIALOG]}, url_for(:action => :notify_callback)
-	);
+	)
 end
 
 end

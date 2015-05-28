@@ -63,7 +63,6 @@ def callbackImage
 	Rho::WebView.executeJavascript('callbackStatus("'+status+'")')
 	Rho::WebView.executeJavascript('callbackImgpath("'+image+'")')
 	Rho::WebView.executeJavascript('callbackImg("'+image+'")')
-	return
 end
 
 #callback method for capture datauri
@@ -72,7 +71,6 @@ def callbackDatauri
 	image = @params['imageUri'].gsub(/(?=\W)/, '\\')
 	Rho::WebView.executeJavascript('callbackStatus("'+status+'")')
 	Rho::WebView.executeJavascript('callbackDataURI("'+image+'")')
-	return
 end
 
 
@@ -104,12 +102,14 @@ end
 
 def signature_show_opt
 	fileName = Rho::RhoFile.join(Rho::Application.databaseBlobFolder, @params['vtid'])
-	Rho::Signature.show({'bgColor' => '#FFFF8C00', 'penColor' => '#FF00FF00', 'penWidth' => 1, 'compressionFormat' => @params['const'], 'fileName' => fileName, 'outputFormat' => Rho::Signature::OUTPUT_FORMAT_IMAGE})
+	Rho::Signature.show({'bgColor' => '#FFFF8C00', 
+		'penColor' => '#FF00FF00', 'penWidth' => 1, 'compressionFormat' => @params['const'], 
+		'fileName' => fileName, 'outputFormat' => Rho::Signature::OUTPUT_FORMAT_IMAGE
+	})
 end
 
 def signature_set_allprops
-	fileName = Rho::RhoFile.join(Rho::Application.databaseBlobFolder, @params['vtid'])
-	Rho::Signature.fileName = fileName
+	Rho::Signature.outputFormat = 'dataUri'
 	Rho::Signature.bgColor = '#00FF00'
     Rho::Signature.penColor = '#FF800000'
     Rho::Signature.penWidth = 5
@@ -117,9 +117,7 @@ def signature_set_allprops
     Rho::Signature.top = 60
     Rho::Signature.height = 150
     Rho::Signature.width = 200
-    Rho::Signature.outputFormat = 'dataUri'
     Rho::Signature.border = true
-    Rho::Signature.show()
 end
 
 def signature_capture
@@ -132,13 +130,10 @@ end
 
 def signature_hide
 	Rho::Signature.hide()
-	return
 end
 
 def signature_clear
 	Rho::Signature.clear()
-	return
 end
-
 
 end
