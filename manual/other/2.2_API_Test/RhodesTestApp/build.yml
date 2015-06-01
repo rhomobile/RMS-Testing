@@ -15,9 +15,9 @@ applog: "rholog.txt"
 #  proxy: "http://wwwgate0.mot.com:1080"
 iphone:
   configuration: "Release"
-  sdk: iphonesimulator8.1
+  sdk: iphoneos8.3
   provisionprofile: 
-  codesignidentity: 
+  codesignidentity: "iPhone Developer"
   entitlements: 
   BundleIdentifier: "com.rhomobile.retestapp"
   BundleURLScheme: "retestapp"
