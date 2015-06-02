@@ -240,7 +240,7 @@
 				"Steps":["Set the page parameter value greater than 1.","Check the page with font size and image element."],
 				"ExpectedOutcome":["Page will be zoomed in.","All the content of page including image will be enlarged.."],
 				"testToPerform":function(){
-					zoom.page = '2'; 
+					zoom.page = '3.0'; 
 				
 				},
 				"FinalResult":""
