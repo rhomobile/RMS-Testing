@@ -307,7 +307,7 @@ describe('Printing Generic', function() {
 
         it('Search printer method with callback', function() {
             dispTestCaseRunning("search printer method ");
-            dispExpectedResult("should search and display printer id");
+            dispExpectedResult("should search and display printer id. Wait for sometime..");
             _result.waitToRunTest();
             runs(function() {
                
@@ -354,31 +354,6 @@ describe('Printing Generic', function() {
         });
 
     });
-
-
-    // printRawString method tests
-    describe('printRawString method', function() {
-
-        it('should print ZPL Command with callback', function() {
-            dispTestCaseRunning(" should print ZPL Command ");
-            dispExpectedResult("should print ZPL Command and return PRINT_STATUS_SUCCESS after printing");
-            //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
-            _result.waitToRunTest();
-            //doPrintTestLabel();
-            doPrintRawCommandCbk('zpl');
-        });
-
-        it('should print CPCL Command with callback', function() {
-            dispTestCaseRunning("should print CPCL Command ");
-            dispExpectedResult("should print CPCL Command and return PRINT_STATUS_SUCCESS after printing");
-            //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
-            _result.waitToRunTest();
-            //doPrintTestLabel();
-            doPrintRawCommandCbk('ccpl');
-        });
-
-    });
-
 
     // printImageFromFile method tests
     describe('printImageFromFile method', function() {
@@ -449,6 +424,28 @@ describe('Printing Generic', function() {
 
     });
 
+    // printRawString method tests
+    describe('printRawString method', function() {
+
+        it('should print ZPL Command with callback', function() {
+            dispTestCaseRunning(" should print ZPL Command ");
+            dispExpectedResult("should print ZPL Command and return PRINT_STATUS_SUCCESS after printing");
+            //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
+            _result.waitToRunTest();
+            //doPrintTestLabel();
+            doPrintRawCommandCbk('zpl');
+        });
+
+        it('should print CPCL Command with callback', function() {
+            dispTestCaseRunning("should print CPCL Command ");
+            dispExpectedResult("should print CPCL Command and return PRINT_STATUS_SUCCESS after printing");
+            //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
+            _result.waitToRunTest();
+            //doPrintTestLabel();
+            doPrintRawCommandCbk('ccpl');
+        });
+
+    });
 
     describe('connect and disconnect methods', function() {
 

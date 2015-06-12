@@ -11,6 +11,7 @@ describe("Card Reader Test", function() {
 		testResult = '';
 		captured = false;
 		closeFlag = false;
+		document.getElementById('cardresult').innerHTML = '';
 	});
 
 	it("VT200-0408 | MSR Card data All Tracks with sync callback |", function() {

@@ -23,24 +23,24 @@ end
 # Callback Method
 def listen_callback
 	Alert.show_popup(@params.to_json.to_s)
-	if @params['data']
-		@cbdata = @params['data']
-		if (@cbdata['message'] && @cbdata['message'] == 'Message to service')
-	        Alert.show_popup("Test case passed!")
-	    elsif (@cbdata['reply'] && @cbdata['reply'] == 'Message to service')
-	    	Alert.show_popup("Test case passed!")
-	    elsif (@cbdata['myData'] && @cbdata['myData'] == 'This is Test data !')
-	    	Alert.show_popup("Test case passed!")
-	    elsif (@cbdata['myData'] && @cbdata['myData'] == 'This is broadcast data 3!')
-	    	Alert.show_popup(@params.to_s)
-	    elsif (@cbdata['myData'] && @cbdata['myData'] == 'This is broadcast data 5!')
-	    	Alert.show_popup('Test Case failed if you see this alert message!')
-	    elsif (@cbdata['myData'] && @cbdata['myData'] == 'This is broadcast data!')
-	    	Alert.show_popup("Callback without arguments !")
-	    else
-	        Alert.show_popup("Test case failed!")
-	    end
-	end
+	# if @params['data']
+	# 	@cbdata = @params['data']
+	# 	if (@cbdata['message'] && @cbdata['message'] == 'Message to service')
+	#         Alert.show_popup("Test case passed!")
+	#     elsif (@cbdata['reply'] && @cbdata['reply'] == 'Message to service')
+	#     	Alert.show_popup("Test case passed!")
+	#     elsif (@cbdata['myData'] && @cbdata['myData'] == 'This is Test data !')
+	#     	Alert.show_popup("Test case passed!")
+	#     elsif (@cbdata['myData'] && @cbdata['myData'] == 'This is broadcast data 3!')
+	#     	Alert.show_popup(@params.to_s)
+	#     elsif (@cbdata['myData'] && @cbdata['myData'] == 'This is broadcast data 5!')
+	#     	Alert.show_popup('Test Case failed if you see this alert message!')
+	#     elsif (@cbdata['myData'] && @cbdata['myData'] == 'This is broadcast data!')
+	#     	Alert.show_popup("Callback without arguments !")
+	#     else
+	#         Alert.show_popup("Test case failed!")
+	#     end
+	# end
 end
 
 

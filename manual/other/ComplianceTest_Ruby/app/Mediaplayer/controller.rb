@@ -22,7 +22,7 @@ end
 # Methods call
 def play_audio
 	if @params['case'] == '1'
-		audio_location = Rho::RhoFile.join(@@audio_path, "badfeeling.wav")
+		audio_location = Rho::RhoFile.join(@@audio_path, "Austin_Powers_death.wav")
 	else
 		audio_location = Rho::RhoFile.join(@@audio_path, "super_android_tune.mp3")
 	end
@@ -30,12 +30,14 @@ def play_audio
 end
 
 def play_video
-	if @params['case'] == '1'
-		video_location = Rho::RhoFile.join(@@video_path, "AMR-NB.mp4")
-	else
-		video_location = Rho::RhoFile.join(@@video_path, "test.mp4")
+	if @params['file']
+		if @params['file'] == 'wm'
+			video_location = Rho::RhoFile.join(@@video_path, "video.wmv")
+		else
+			video_location = Rho::RhoFile.join(@@video_path, "video.mp4")
+		end
+		Rho::Mediaplayer.startvideo(video_location)
 	end
-	Rho::Mediaplayer.startvideo(video_location)
 end
 
 def play_ringtones

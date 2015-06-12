@@ -5,7 +5,9 @@ describe("System Module JS Test Starts Here", function() {
 		captured = false;
 		testResult = '';
 	});
-
+	afterEach(function(){
+		document.getElementById('actResult').innerHTML= '';
+	});
 	describe("System Module-Setting Directly Test Starts Here", function() {
 
 		it("VT200-0682 | call getAllProperties() | ", function() {

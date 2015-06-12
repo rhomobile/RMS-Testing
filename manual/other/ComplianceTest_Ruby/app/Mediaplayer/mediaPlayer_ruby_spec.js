@@ -7,16 +7,16 @@ describe("Media Player", function () {
 	it("VT200-0646-Play Audio(valid file local)", function () {
 	
 		dispTestCaseRunning("VT200-0646-Play | Audio(valid file local");
-		dispExpectedResult("You should hear the music");
+		dispExpectedResult("You should hear the audio");
 		
 		_result.waitToRunTest();
 
 		runs(function () {
-			Ruby.call('Mediaplayer','play_audio?case='+1);
-			
-			setTimeout(function () {
-				Ruby.call('Mediaplayer','stop_audio');
-			}, 5000);
+			if (isWindowsMobilePlatform()) {
+				Ruby.call('Mediaplayer','play_audio?case='+1);
+			}else{
+				Ruby.call('Mediaplayer','play_audio?case='+2);	
+			};
 		});
 		
 		_result.waitForResponse();
@@ -34,7 +34,7 @@ describe("Media Player", function () {
 			runs(function () {
 				if (isWindowsMobilePlatform()) {
 					Ruby.call('Mediaplayer','play_audio?case='+1);
-				} else{
+				}else{
 					Ruby.call('Mediaplayer','play_audio?case='+2);	
 				};
 				
@@ -50,16 +50,22 @@ describe("Media Player", function () {
 	/**
 	 **	MediaPlayer Video Tests
 	 **/			
-	 
+ 	var plat;
+	if (isWindowsMobilePlatform()){
+		plat = 'wm';
+	}else{
+		plat = 'other';
+	};
+
 	it("VT200-0648-Play Video(valid file local)", function () {
 
 		dispTestCaseRunning("VT200-0648 | Play Video(valid file local)");
 		dispExpectedResult("You should see video");
 		
 		_result.waitToRunTest();
-		
+
 		runs(function () {
-			Ruby.call('Mediaplayer','play_video?case='+1);
+			Ruby.call('Mediaplayer','play_video?file='+plat);
 
 			setTimeout(function () {
 				Ruby.call('Mediaplayer','stop_video');
@@ -80,7 +86,7 @@ describe("Media Player", function () {
 			_result.waitToRunTest();
 		
 			runs(function () {
-				Ruby.call('Mediaplayer','play_video?case='+2);
+				Ruby.call('Mediaplayer','play_video?file='+plat);
 
 				setTimeout(function () {
 					Ruby.call('Mediaplayer','stop_video');

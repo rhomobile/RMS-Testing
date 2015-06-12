@@ -23,16 +23,20 @@ describe("Notification Manual FD Tests", function () {
 			
 		});
 
-		it("VT200-0396 | Play File - Mp3 file with media type|", function () {
+		it("VT200-0396 | Play File - Mp3/Wav file with media type|", function () {
 		
 			dispTestCaseRunning(jasmine.getEnv().currentSpec.description);
-			dispExpectedResult("MP3 file should be played");
+			dispExpectedResult("MP3/Wav file should be played");
 	
 			//Common Method implemented to wait for tester to run the test.Code available in specHelper.js
 			_result.waitToRunTest();
 
 			runs(function () {
-				Ruby.call('Notification','notify_playfile');
+				if (isWindowsMobilePlatform()){
+					Ruby.call('Notification','notify_playfile?file=wav');
+				}else{
+					Ruby.call('Notification','notify_playfile');
+				}
 			});
 
 			//Common Method implemented to wait for tester to make it pass or fail.Code available in specHelper.js
@@ -62,7 +66,7 @@ describe("Notification Manual FD Tests", function () {
 	it("VT200-0399 | showStatus ", function () {
 	
 		dispTestCaseRunning(jasmine.getEnv().currentSpec.description);
-		dispExpectedResult("see if the status message is shown with title , message and hide button label click on hide button to see if the popup is closed");
+		dispExpectedResult("see if the status message is shown with title, message and hide button label click on hide button to see if the popup is closed. On WM/CE Close icon used to hide the status window.");
 
 		//Common Method implemented to wait for tester to run the test.Code available in specHelper.js
 		_result.waitToRunTest();
@@ -76,8 +80,9 @@ describe("Notification Manual FD Tests", function () {
 
     });
 
+	// This test case is for hide status/popup. In WM/CE only showstatus can be hidden using hidePopup.
     if (Rho.System.platform == "WINDOWS_DESKTOP" || Rho.System.platform == "WINDOWS" || Rho.System.isRhoSimulator) {
-        it("VT200-0400 | show popup- with buttons and callback |", function () {
+        it("VT200-0400 | showstatus & hidePopup |", function () {
 		
 			dispTestCaseRunning(jasmine.getEnv().currentSpec.description);
 			dispExpectedResult("Click on runtest then wait for the pop up and then after 10 sec hide pop up is called. <br/> see if the pop up is showing the message, then it hides automatically after 10sec");
@@ -87,6 +92,7 @@ describe("Notification Manual FD Tests", function () {
 
             runs(function () {
             	Ruby.call('Notification','notify_showstatus');
+
                 setTimeout(function () {
                     Ruby.call('Notification','notify_hide');
                 }, 10000);
@@ -99,7 +105,7 @@ describe("Notification Manual FD Tests", function () {
     } 
     else 
     {
-        it("VT200-0400 |show popup- with buttons and callback |", function () {
+        it("VT200-0400 | showPopup- with buttons & hidePopup |", function () {
 		
 			dispTestCaseRunning(jasmine.getEnv().currentSpec.description);
 			dispExpectedResult("Click on runtest then wait for the pop up and then after 10 sec hide pop up is called. <br/> see if the pop up is showing the message, then it hides automatically after 10sec");

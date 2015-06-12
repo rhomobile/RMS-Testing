@@ -101,18 +101,30 @@ class SystemController < Rho::RhoController
 
   def is_installed
     if @params['file']
-      isInstalled = Rho::System.isApplicationInstalled(@params['file'])
-      if (isInstalled)
-          Alert.show_popup(@params['file'] + " application is installed in the device")
+      if @params['file'] == 'wm'
+        @isInstalled = Rho::System.isApplicationInstalled('rhomobile TestApp/TestApp.exe')
+      elsif @params['file'] == 'android'
+        @isInstalled = Rho::System.isApplicationInstalled('com.rhomobile.testapp')
       else
-          Alert.show_popup(@params['file'] + " application is not installed in the device")
+        @isInstalled = Rho::System.isApplicationInstalled('testapp')
+      end
+      if (@isInstalled)
+          Alert.show_popup("testApp application is installed in the device")
+      else
+          Alert.show_popup("testApp application is not installed in the device")
       end
     end
   end
 
   def run_app
     if @params['file']
-      Rho::System.runApplication(@params['file'],'ParamsAreSet')
+      if @params['file'] == 'wm'
+        Rho::System.runApplication('rhomobile TestApp/TestApp.exe','ParamsAreSet')
+      elsif @params['file'] == 'android'
+        Rho::System.runApplication('com.rhomobile.testapp','ParamsAreSet')
+      else
+        Rho::System.runApplication('testapp','ParamsAreSet')
+      end
     end
   end
 

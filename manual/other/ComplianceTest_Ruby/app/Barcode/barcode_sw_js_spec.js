@@ -37,7 +37,6 @@ describe("Barcode Test", function() {
 		return "scanner_type="+ scannerType;
 	}
 	
-	
 	beforeEach(function() {
 		enableFlag = false;
 		decodeFlag = false;
@@ -45,9 +44,6 @@ describe("Barcode Test", function() {
 		decodedata ='';
 		document.getElementById("verificationResult").innerHTML = "";
 	});
-	
-   	
-	  
 	
 	it("Enumerate and display the available scanners in the device ", function() {
 		displayObjective(jasmine.getEnv().currentSpec.description);
@@ -57,15 +53,7 @@ describe("Barcode Test", function() {
 		
 		runs(function() {
 			Ruby.call('Barcode','enumerate_barcode_print');
-		
-			setTimeout(function(){
-				enableFlag = true;
-			}, 4000);
 		});
-		
-		waitsFor(function(){
-			return enableFlag;
-		}, '5sec wait to enumerate Scanner', 5000);
 		
 		_result.waitForResponse();
 	});	
@@ -119,15 +107,7 @@ describe("Barcode Test", function() {
 		
 		runs(function() {
 			Ruby.call('Barcode','barcode_take?'+getSelectedScannerType());
-			
-			setTimeout(function() {
-				enableFlag = true;
-			}, 4000);
 		});
-		
-		waitsFor(function(){
-			return enableFlag;
-		}, '5sec wait to enable the Scanner', 5000);
 		
 		_result.waitForResponse();
 	});
@@ -140,15 +120,7 @@ describe("Barcode Test", function() {
 
 		runs(function() {
 			Ruby.call('Barcode','barcode_take_timeout?'+getSelectedScannerType());
-			
-			setTimeout(function() {
-				enableFlag = true;
-			}, 4000);
 		});
-		
-		waitsFor(function(){
-			return enableFlag;
-		}, '5sec wait to enable the Scanner', 5000);
 		
 		_result.waitForResponse();
 
@@ -163,15 +135,7 @@ describe("Barcode Test", function() {
 		
 		runs(function() {
 			Ruby.call('Barcode','barcode_props?'+getSelectedScannerType());
-			
-			setTimeout(function() {
-				enableFlag = true;
-			}, 4000);
 		});
-		
-		waitsFor(function(){
-			return enableFlag;
-		}, '5sec wait to enable the Scanner', 5000);
 		
 		_result.waitForResponse();
 	});
@@ -185,15 +149,7 @@ describe("Barcode Test", function() {
 		
 		runs(function() {
 			Ruby.call('Barcode','barcode_props_withoutcb?'+getSelectedScannerType());
-			
-			setTimeout(function() {
-				enableFlag = true;
-			}, 4000);
 		});
-		
-		waitsFor(function(){
-			return enableFlag;
-		}, '5sec wait to enable the Scanner', 5000);
 		
 		_result.waitForResponse();
 	});
@@ -207,15 +163,7 @@ describe("Barcode Test", function() {
 		
 		runs(function() {
 			Ruby.call('Barcode','barcode_supportedprops?'+getSelectedScannerType());
-			
-			setTimeout(function() {
-				enableFlag = true;
-			}, 4000);
 		});
-		
-		waitsFor(function(){
-			return enableFlag;
-		}, '5sec wait to enable the Scanner', 5000);
 		
 		_result.waitForResponse();
 	});
@@ -228,15 +176,7 @@ describe("Barcode Test", function() {
 		
 		runs(function() {
 			Ruby.call('Barcode','barcode_scannertype_withoutcb?'+getSelectedScannerType());
-			
-			setTimeout(function() {
-				enableFlag = true;
-			}, 4000);
 		});
-		
-		waitsFor(function(){
-			return enableFlag;
-		}, '5sec wait to enable the Scanner', 5000);
 		
 		_result.waitForResponse();
 	});
@@ -250,15 +190,7 @@ describe("Barcode Test", function() {
 		
 		runs(function() {
 			Ruby.call('Barcode','barcode_scannertype?'+getSelectedScannerType());
-			
-			setTimeout(function() {
-				enableFlag = true;
-			}, 4000);
 		});
-		
-		waitsFor(function(){
-			return enableFlag;
-		}, '5sec wait to enable the Scanner', 5000);
 		
 		_result.waitForResponse();
 	});

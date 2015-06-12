@@ -3,6 +3,57 @@ require 'rho/rhotoolbar'
 
 class NativeToolbarTestController < Rho::RhoController
 
+  def tool_icon_masklabel
+    toolElements = [
+        {:label => 'back', :action => 'back'},
+        {:label => 'Home', :action => 'Home', :icon => '/public/images/bar/colored_btn.png', :coloredIcon => true},
+        {:action => "separator"},
+        {:label => 'refresh', :action => 'refresh', :icon => '/public/images/bar/refresh_btn.png', :coloredIcon => true},
+        {:label => 'Exit', :action => 'exit', :icon => '/public/images/bar/forward_btn.png', :coloredIcon => true}
+    ]
+    toolProperties = {'backgroundColor' => 0x00804F, 'maskColor' => 0xFF00, 'viewHeight' => 100}
+
+    Rho::NativeToolbar.create(toolElements, toolProperties);
+  end
+
+  def tool_colored
+    toolElements = [
+        {:label => 'back', :action => 'back', :icon => '/public/images/bar/back_btn_colored.png', :coloredIcon => true},
+        {:action => "separator"},
+        {:label => 'Home', :action => 'Home', :icon => '/public/images/bar/colored_btn.png', :coloredIcon => true},
+        {:label => 'Exit', :action => 'exit', :icon => '/public/images/bar/refresh_btn.png', :coloredIcon => true}
+    ]
+    toolProperties = {'backgroundColor' => 0x002F00, 'maskColor' => 0xFF0000, 'viewHeight' => 100}
+    Rho::NativeToolbar.create(toolElements, toolProperties)
+  end
+
+  def tool_remove
+    Rho::NativeToolbar.remove()
+  end
+
+  def tool_setaction
+    toolElements = [
+        {:label => 'Home', :action => 'Home'},
+        {:label => 'Exit', :action => 'exit'},
+        {:label => 'close', :action => 'close'},
+        {:label => 'Options', :action => 'options'},
+        {:label => 'refresh', :action => 'refresh'}
+    ]
+    toolProperties = {'backgroundColor' => 0xFF00, 'maskColor' => '', 'viewHeight' => 100};
+    Rho::NativeToolbar.create(toolElements, toolProperties)
+  end
+
+def tool_mask
+    toolElements = [
+        {:label => 'back', :action => 'back'},
+        {:label => 'Home', :action => 'Home'},
+        {:action => '/app/NativeToolbarTest/Page1.html', :label => "[BUTTON]", :icon => '/app/NativeToolbarTest/redi.png', :coloredIcon => true}
+    ]
+    toolProperties = {:backgroundColor => 0x00804F, :maskColor => 0xFF0000, :viewHeight => 100}
+    Rho::NativeToolbar.create(toolElements, toolProperties)
+end
+
+=begin
   def index
     render :back => '/public/app/index.html'
   end
@@ -181,6 +232,6 @@ def set_toolbar
   def switch5
     render :action => :switch5
   end
-
+=end
 
 end

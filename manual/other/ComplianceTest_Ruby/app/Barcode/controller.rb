@@ -10,7 +10,7 @@ class BarcodeController < Rho::RhoController
   # set scanner for tests 
   def set_scanner
     @obj = Rho::Barcode.enumerate
-
+    #Alert.show_popup(@params.to_json.to_s)
     if @params['scanner_type']
       @obj.each do |scannerObj|
         $scanner = scannerObj if scannerObj.scannerType == @params['scanner_type']
@@ -25,7 +25,6 @@ class BarcodeController < Rho::RhoController
   end
   
   # callback functions
-  
   def enum_callback
     if @params && @params.length>0
      @obj_count = true
@@ -74,6 +73,11 @@ class BarcodeController < Rho::RhoController
     Rho::WebView.executeJavascript("document.getElementById('verificationResult').style.display='block'")
   end
   
+  def barcode_prop_callback
+    @data = @params.to_json
+    Rho::WebView.executeJavascript("document.getElementById('verificationResult').innerHTML= JSON.stringify(#{@data})")
+    Rho::WebView.executeJavascript("document.getElementById('verificationResult').style.display='block'")
+  end
   
   # test methods
   
@@ -85,16 +89,28 @@ class BarcodeController < Rho::RhoController
     Rho::Barcode.enumerate(url_for(:action => :barcode_callback_print))
   end
 
-  
   def barcode_take
-    set_scanner
     if @params['default']
       Rho::Barcode.take({},url_for(:action => :barcode_callback))
     else
+      set_scanner
       $scanner.take({},url_for(:action => :barcode_callback))
     end
   end
   
+  def barcode_take_props
+    set_scanner
+    @props = {}
+    @props['scanTimeout'] = @params['time'] if @params['time']
+    if @params['picklist'] && @params['picklist'] == 'true' && $scanner['friendlyName'] == "2D Imager"
+      @props['picklistMode'] = 'hardwareReticle'
+    elsif @params['picklist']
+      @props['picklistMode'] = 'softwareReticle'
+    end    
+
+    $scanner.take(@props, url_for(:action => :barcode_callback))
+  end
+
   def barcode_take_timeout
     set_scanner
     $scanner.take({'scanTimeout' => 10000},url_for(:action => :barcode_callback))
@@ -120,7 +136,7 @@ class BarcodeController < Rho::RhoController
   
   def barcode_supportedprops
     set_scanner
-    $scanner.getSupportedProperties(url_for(:action => :barcode_callback))
+    $scanner.getSupportedProperties(url_for(:action => :barcode_prop_callback))
   end  
 
   def barcode_supportedprops_withoutcb
@@ -163,6 +179,7 @@ class BarcodeController < Rho::RhoController
     end
     options['code128'] = @params['code128'] if @params['code128']
     options['scanTimeout'] = @params['time'].to_i if @params['time']
+    options['autoenter'] = true if @params['autoenter']
     
     $scanner.enable(options)
     
@@ -172,6 +189,12 @@ class BarcodeController < Rho::RhoController
     set_scanner
     options = {}
     
+    if @params['android'] && @params['decode']
+      options['decodeSound'] = 'file:///sdcard/decode.wav'
+    elsif @params['decode']
+      options['decodeSound'] = 'file://Application/alarm5.wav'
+    end
+
     if @params['picklist'] && @params['picklist'] == true && $scanner.friendlyName == "2D Imager"
       options['picklistMode'] = 'hardwareReticle'
     elsif @params['picklist']
@@ -194,6 +217,7 @@ class BarcodeController < Rho::RhoController
   def scanner_disable
     set_scanner
     $scanner.disable()
+    $scanner['allDecoders'] = true
   end
   
   def barcode_start
@@ -225,8 +249,12 @@ class BarcodeController < Rho::RhoController
 
   def barcode_decode
     set_scanner
-    $scanner.decodeSound = @params['file']
+    $scanner['decodeSound'] = @params['file']
   end
 
+  def barcode_scannertype_get
+    set_scanner
+    $scanner.getProperty('scannerType', url_for(:action => :barcode_callback))  
+  end
 
 end

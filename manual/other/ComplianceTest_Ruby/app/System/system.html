@@ -173,7 +173,7 @@
         <div class="test_scenario">
             <div class="test_scenario_controls">
                 <a href="javascript:void(0)"
-                   onclick="var fname = download_filetolocal(httpServerUrl+'/TestAppWM6.5.cab', 'TestAppWM6.5.cab'); Rho.System.applicationInstall(fname);">WM: Install app from HTTP url</a><br/>
+                   onclick="var fname = download_filetolocal(httpServerUrl+'/TestAppWM6.5.cab', 'TestAppWM6.5.cab'); Ruby.call('System','app_install?file='+fname);">WM: Install app from HTTP url</a><br/>
                 <a href="javascript:void(0)"
                    onclick="var fname = download_filetolocal(httpServerUrl+'/TestAppCE.cab', 'TestAppCE.cab'); Ruby.call('System','app_install?file='+fname);">CE: Install app from HTTP url</a>
                    
@@ -215,7 +215,7 @@
 
         <div class="test_scenario">
             <div class="test_scenario_controls">
-                <a href="javascript:void(0)" onclick="var app = 'rhomobile testApp/testApp.exe'; Ruby.call('System','is_installed?file='+app);">Call
+                <a href="javascript:void(0)" onclick="Ruby.call('System','is_installed?file=wm');">Call
                     isApplicationInstalled() with correct app name 'TestAppWM6.5'</a>
             </div>
             <span class="test_scenario_number">VT200-0xxx <br/></span>
@@ -227,7 +227,7 @@
 
         <div class="test_scenario">
             <div class="test_scenario_controls">
-                <a href="javascript:void(0)" onclick="var app = 'com.rhomobile.testapp'; Ruby.call('System','is_installed?file='+app);">Call
+                <a href="javascript:void(0)" onclick="Ruby.call('System','is_installed?file=android');">Call
                     isApplicationInstalled() with correct app name 'testapp'</a>
             </div>
             <span class="test_scenario_number">VT200-0xxx <br/></span>
@@ -238,7 +238,7 @@
 
         <div class="test_scenario">
             <div class="test_scenario_controls">
-                <a href="javascript:void(0)" onclick="var app = 'testapp'; Ruby.call('System','is_installed?file='+app);">Call
+                <a href="javascript:void(0)" onclick="Ruby.call('System','is_installed?file=ios');">Call
                     isApplicationInstalled() with correct app name 'testapp'</a>
             </div>
             <span class="test_scenario_number">VT200-0xxx <br/></span>
@@ -254,7 +254,7 @@
     <div class="method_tests wm">
         <div class="test_scenario">
             <div class="test_scenario_controls">
-                <a href="javascript:void(0)" onclick="var app = rhomobile testApp/testApp.exe'; Ruby.call('System','run_app?file='+app);"> call
+                <a href="javascript:void(0)" onclick="Ruby.call('System','run_app?file=wm');"> call
                     runApplication with application name 'rhomobile testApp/testApp.exe'.</a>
             </div>
 			<span class="test_scenario_number">VT200-0680 <br/></span>
@@ -264,7 +264,7 @@
     <div class="method_tests ios">
         <div class="test_scenario">
             <div class="test_scenario_controls">
-                <a href="javascript:void(0)" onclick="var app = 'testApp'; Ruby.call('System','run_app?file='+app);"> call
+                <a href="javascript:void(0)" onclick="Ruby.call('System','run_app?file=ios');"> call
                     runApplication with application name 'testapp'.</a>
             </div>
 			<span class="test_scenario_number">VT200-0680 <br/></span>
@@ -274,7 +274,7 @@
     <div class="method_tests android">
         <div class="test_scenario">
             <div class="test_scenario_controls">
-                <a href="javascript:void(0)" onclick="var app = 'com.rhomobile.testapp'; Ruby.call('System','run_app?file='+app);"> call
+                <a href="javascript:void(0)" onclick="Ruby.call('System','run_app?file=android');"> call
                     runApplication with application name 'testapp'.</a>
             </div>
 			<span class="test_scenario_number">VT200-0680 <br/></span>

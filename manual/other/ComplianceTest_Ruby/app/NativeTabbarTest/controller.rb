@@ -2,6 +2,66 @@ require 'rho/rhocontroller'
 require 'rho/rhotabbar'
 
 class NativeTabbarTestController < Rho::RhoController
+
+def tabbar_create_switch
+  Rho::NativeTabbar.create([ 
+      {:label =>'MainPage', :action =>'/app/NativeTabbarTest/specRunner.html', :useCurrentViewForTab =>true},
+      {:label =>'Main Reload', :action =>'/app/NativeTabbarTest/specRunner.html', :reload =>true},
+      {:label =>'Page1', :action =>'/app/NativeTabbarTest/NativeTabBar_Page1.html'}, 
+      {:label =>'Page2', :action =>'/app/NativeTabbarTest/NativeTabBar_Page2.html', :perishable =>false}], 
+      {'hiddenTabs' => true, 'createOnInit' => true}
+  )
+  Rho::Application.nativeMenu = [
+      {:label => 'Home', :action => 'javascript:goHome()'},
+      {:label => 'Exit', :action => 'javascript:onExit0()'},
+      {:label => 'Quit', :action => 'javascript:onQuit0()'},
+      {:label => 'My Test', :action => 'javascript:page0Test()'}
+  ]
+  Rho::NativeTabbar.switchTab(1)
+end
+
+def tabbar_checkindex
+  Rho::NativeTabbar.create([ 
+      {:label =>'MainPage', :action =>'/app/NativeTabbarTest/specRunner.html', :useCurrentViewForTab =>true},
+      {:label =>'Main Reload', :action =>'/app/NativeTabbarTest/specRunner.html', :reload =>true},
+      {:label =>'Page1', :action =>'/app/NativeTabbarTest/NativeTabBar_Page1.html'}, 
+      {:label =>'Page2', :action =>'/app/NativeTabbarTest/NativeTabBar_Page2.html', :perishable =>false}], 
+      {'hiddenTabs' => true, 'createOnInit' => true}
+  )
+  Rho::Application.nativeMenu = [
+      {:label => 'Home', :action => 'javascript:goHome()'},
+      {:label => 'Exit', :action => 'javascript:onExit0()'},
+      {:label => 'Quit', :action => 'javascript:onQuit0()'},
+      {:label => 'My Test', :action => 'javascript:page0Test()'}
+  ]
+  Rho::NativeTabbar.switchTab(2)
+end
+
+def tabbar_currenttab
+  tab_index = Rho::NativeTabbar.currentTabIndex()
+  Rho::WebView.executeJavascript("document.getElementById('result').innerHTML= 'Current tab index is #{tab_index}'")
+end
+
+def tabbar_remove
+  Rho::NativeTabbar.remove()
+  Rho::NativeTabbar.create([ 
+      {:label =>'MainPage', :action =>'/app/NativeTabbarTest/specRunner.html',
+       :useCurrentViewForTab =>true, :icon => '/public/images/thumb.png', :reload => true}], 
+      {'verticalOrientation' => false, 'hiddenTabs' => false, 'createOnInit' => false, 'placeTabsBottom' => false}
+  )
+end
+
+def tabbar_bgcolor
+  Rho::NativeTabbar.create([
+    {:label =>'MainPage', :action =>'/app/NativeTabbarTest/specRunner.html', :useCurrentViewForTab =>true},
+    {:label =>'Page1', :action =>'/app/NativeTabbarTest/NativeTabBar_Page1.html',:backgroundColor =>0x7F7F7F }, 
+    {:label =>'Page2', :action => '/app/NativeTabbarTest/NativeTabBar_Page2.html',:backgroundColor => 0xFF0000} ,
+    {:label =>'Page3', :action => '/app/index.html', :icon => '/public/images/bar/colored_btn.png', :reload => false}], 
+    {'verticalOrientation' => false, 'hiddenTabs' =>  false, 'createOnInit'  =>  false, 'placeTabsBottom' => false}
+  )
+end
+  
+=begin
   @layout = 'NativeTabbarTest/layout'
 
   def index
@@ -225,5 +285,7 @@ class NativeTabbarTestController < Rho::RhoController
     $tabbar_active = false
     render :action => :index, :back => '/public/app/index.html'
   end
+=end
+
  
 end
