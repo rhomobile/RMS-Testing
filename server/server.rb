@@ -206,6 +206,12 @@ $local_server.mount_proc '/download_image' do |req,res|
     res.status = 200
 end
 
+$local_server.mount_proc '/download_file' do |req,res|
+    res.body = File.open( File.join( File.dirname(__FILE__),"test.txt" ), "rb" )
+    res["content-type"]="text/plain"
+    res.status = 200
+end
+
 $local_server.mount_proc '/download_image_auth' do |req,res|
     WEBrick::HTTPAuth.basic_auth(req, res, "My Realm") {|user, pass|
         user == 'admin' && pass == 'admin'
