@@ -36,6 +36,6 @@ function callback1995(data)
 
 function callback1996(data)
 {
-	var outputHtml = "AllDecoders: " + data.allDecoders + "<br/>Code39: " + data.code39 + "<br />Length of results: " + Object.keys(data).length;
+	var outputHtml = "AllDecoders: " + data.AllDecoders + "<br/>Code39: " + data.code39 + "<br />Length of results: " + Object.keys(data).length;
 	document.getElementById("clbkData").innerHTML = outputHtml;
 }
