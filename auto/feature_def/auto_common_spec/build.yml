@@ -1,26 +1,3 @@
-#sdk: ../../../../rhodes
-paths:
-  extensions:
-
-# Please use relative pathes
-
-  - ../../../extensions
-#  - ../../../../Motorola-Extensions/lib/commonAPI
-#  - ../../../../rhoconnect-client/ext/
-
-
-#  - C:/DevelopmentTools/rhomobile/rhodes/lib/extensions
-#  - C:/DevelopmentTools/rhomobile/Motorola-Extensions/extensions
-#  - C:/DevelopmentTools/rhomobile/Motorola-Extensions/lib/commonAPI
-#  - C:/DevelopmentTools/rhomobile/rhoconnect-client/ext
-#  - C:/DevelopmentTools/rhomobile/Motorola-Extensions/build/ci/extensions
-#  - C:/DevelopmentTools/rhomobile/Motorola-Extensions/build/ci/extensions
-#  - C:/Neon/git/Motorola-Extensions/build/ci/extensions
-#  - B:/git/Motorola-Extensions/build/ci/extensions
-
-#  neon:
-#  - C:/Users/fpc843/workspace/fpc843_rhoelements_dev/NEON
-
 sdkversion: 3.3.2
 name: auto_common_spec
 app_type: rhoelements
@@ -45,7 +22,7 @@ symbian:
   uid: '0xe1a1ef92'
 android:
   version: 4.2.2
-  extensions: ["nativeBridgeTest", "emdk3-manager", "barcode", "screenorientation", "instrumentation", "cardreader", "indicators", "sensor", "websocket", "eventsource", "audiocapture", 'screenorientation', "mediacapture"]
+  extensions: ["nativeBridgeTest", "emdk3-manager", "barcode", "screenorientation", "cardreader", "indicators", "sensor", "websocket", "eventsource", "audiocapture", 'screenorientation', "mediacapture"]
   capabilities:
   - native_browser
 wm:
@@ -53,7 +30,7 @@ wm:
   #use_shared_runtime: yes
   #sdk: MC3000c50b (ARMV4I)
   #sdk: "Windows Mobile 6.5.3 Professional DTK (ARMV4I)"
-  extensions: ["barcode", "screenorientation", "instrumentation", "cardreader", "indicators", "sensor", "audiocapture", "smartCradle", "mediacapture"]
+  extensions: ["barcode", "screenorientation", "cardreader", "indicators", "sensor", "audiocapture", "smartCradle", "mediacapture"]
 #capabilities:
 #- non_motorola_device
 
