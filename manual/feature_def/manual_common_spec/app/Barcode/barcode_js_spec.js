@@ -51,7 +51,7 @@ describe("Barcode Manual Test", function() {
 					runs(function()
 					{
 						objSCN.scanTimeout = 10000;
-						alert("Hello");
+						//alert("Hello");
 						setObjective("VT282-1784 | Start and stop scanner |");
 						setInstruction("Don't press hardware trigger" + scnid);
 						setExpected("Scanner beam or viewfinder should comeup automatically and will stop after 8 sec");
@@ -71,7 +71,7 @@ describe("Barcode Manual Test", function() {
 
 					runs(function()
 					{		
-						 alert("Starting....");
+						 //alert("Starting....");
 						objSCN.start();
 						setTimeout(function() {
 							decodeFlag = true;
@@ -1385,7 +1385,12 @@ describe("Barcode Manual Test", function() {
 					{		
 						//objSCN.alldecoders = "true";
 						//objSCN.code93 = "true";
-						objSCN.getAllProperties(callback1996);
+						if(isAndroidPlatform()){
+						objSCN.getAllProperties(callback1996A);
+					    }
+					    if(isWindowsMobilePlatform()){
+						objSCN.getAllProperties(callback1996WM);
+					    }
 						waitsFor(function() {
 						return document.getElementById("actResult").innerHTML != "init";
 						}, "Timed out waiting for tester to respond", 300000);
