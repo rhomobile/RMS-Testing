@@ -331,7 +331,8 @@ describe("Barcode Compliance JS Test", function() {
 						dispExpectedResult("Barcode data should come inside textbox with an enter at the end, no callback hash should return");
 						_result.waitToRunTest();
 						runs(function() {
-							objSCN.enable();
+						    objSCN.setProperty("autoenter","true");
+							
 							setTimeout(function() {
 								enableFlag = true;
 							}, ENABLE1K);
@@ -340,7 +341,7 @@ describe("Barcode Compliance JS Test", function() {
 							return enableFlag;
 						}, '2sec wait to enable the Scanner', 2000);
 						runs(function() {		
-							objSCN.setProperty("autoenter","true");
+							objSCN.enable();
 						});
 						_result.waitForResponse();
 					});
@@ -351,7 +352,13 @@ describe("Barcode Compliance JS Test", function() {
 						dispExpectedResult("wave file should play after barcode is decoded");
 						_result.waitToRunTest();
 						runs(function() {
-							objSCN.enable({},callbackenable);
+						    if(isAndroid) {
+								objSCN.decodeSound = 'file://sdcard/decode.wav';
+							}
+							else {
+								objSCN.decodeSound = 'file://Application/alarm5.wav';
+							}
+							
 							setTimeout(function() {
 								enableFlag = true;
 							}, ENABLE1K);
@@ -361,12 +368,7 @@ describe("Barcode Compliance JS Test", function() {
 						}, '2sec wait to enable the Scanner', 2000);
 
 						runs(function() {		
-							if(isAndroid) {
-								objSCN.decodeSound = 'file://sdcard/decode.wav';
-							}
-							else {
-								objSCN.decodeSound = 'file://Application/alarm5.wav';
-							}
+							objSCN.enable({},callbackenable);
 							_result.waitForResponse();
 							runs(function() {
 								objSCN.disable();
@@ -462,6 +464,15 @@ describe("Barcode Compliance JS Test", function() {
 					dispTestSteps("Don't scan and check for all the supported propertylist for scanner" + scnid);
 					dispExpectedResult("all the supported properties with their default value should return in callback");
 					_result.waitToRunTest();
+					objSCN.enable();
+						setTimeout(function() {
+							enableFlag = true;
+						}, ENABLE8K);
+					waitsFor(function()
+					{
+						return enableFlag;
+					}, '2sec wait to enable the Scanner', 2000);
+
 					runs(function(){
 						objSCN.getAllProperties(callbacktake);
 						setTimeout(function() {
@@ -479,6 +490,14 @@ describe("Barcode Compliance JS Test", function() {
 					dispTestSteps("Don't scan and check for all the supported propertylist for scanner" + scnid);
 					dispExpectedResult("all the properties with their default value should return with anonymous callback");
 					_result.waitToRunTest();
+					objSCN.enable();
+						setTimeout(function() {
+							enableFlag = true;
+						}, ENABLE8K);
+					waitsFor(function()
+					{
+						return enableFlag;
+					}, '2sec wait to enable the Scanner', 2000);
 					runs(function(){
 						objSCN.getAllProperties(function(data){dispVerificationStatus(JSON.stringify(data));});
 						setTimeout(function() {
@@ -521,7 +540,7 @@ describe("Barcode Compliance JS Test", function() {
 					});
 					waitsFor(function() {
 						return enableFlag;
-					}, '2sec wait to enable the Scanner', 9000);
+					}, '2sec wait to enable the Scanner', 2000);
 
 					runs(function() {		
 						objSCN.getSupportedProperties(callbackenable);							
@@ -537,6 +556,14 @@ describe("Barcode Compliance JS Test", function() {
 					dispTestSteps("check for retrurned value" + scnid);
 					dispExpectedResult("It should return the Scanner scannerType");
 					_result.waitToRunTest();
+					objSCN.enable();
+						setTimeout(function() {
+							enableFlag = true;
+						}, ENABLE8K);
+					waitsFor(function()
+					{
+						return enableFlag;
+					}, '2sec wait to enable the Scanner', 2000);
 					runs(function() {
 						var data = objSCN.getProperties(['scannerType']);
 						callbacktake(data);
@@ -555,6 +582,14 @@ describe("Barcode Compliance JS Test", function() {
 					dispTestSteps("check for retrurned value" + scnid);
 					dispExpectedResult("It should return the Scanner scannerType");
 					_result.waitToRunTest();
+					objSCN.enable();
+						setTimeout(function() {
+							enableFlag = true;
+						}, ENABLE8K);
+					waitsFor(function()
+					{
+						return enableFlag;
+					}, '2sec wait to enable the Scanner', 2000);
 					runs(function(){
 						objSCN.getProperties(['scannerType'],callbacktake);
 						setTimeout(function() {
@@ -572,6 +607,14 @@ describe("Barcode Compliance JS Test", function() {
 					dispTestSteps("check for retrurned value" + scnid);
 					dispExpectedResult("It should return the Scanner scannerType");
 					_result.waitToRunTest();
+					objSCN.enable();
+						setTimeout(function() {
+							enableFlag = true;
+						}, ENABLE8K);
+					waitsFor(function()
+					{
+						return enableFlag;
+					}, '2sec wait to enable the Scanner', 2000);
 					runs(function(){
 						objSCN.getProperty('scannerType',function(data){dispVerificationStatus(JSON.stringify(data));});
 						setTimeout(function() {

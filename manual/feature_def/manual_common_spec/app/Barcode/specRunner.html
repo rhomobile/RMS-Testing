@@ -36,7 +36,7 @@
 
 	<!-- include Helper files here... -->
     <script type="text/javascript" src="../helpers/specHelpers.js"></script>
-
+    <script type="text/javascript" src="../helpers/manualSpecLauncher.js"></script>
 	<!-- include spec files here... -->
 	<script type="text/javascript" src="barcode_js_spec.js"></script>
     <script type="text/javascript" src="barcode_js_test.js"></script>
@@ -62,6 +62,8 @@
           if (currentWindowOnload) {
             currentWindowOnload();
           }
+		  
+		  var launcher = ManualSpecLauncher(jasmine, window.document); 
 
           execJasmine();
         };
