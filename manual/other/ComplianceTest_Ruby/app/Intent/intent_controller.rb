@@ -104,7 +104,7 @@ def intent_send
 	            }
                 params_constructor(Rho::Intent::START_ACTIVITY,"","ACTION_SEND","","","","","text/plain",data)
             when '442'
-            	pdf = "content://com.rhomobile.ComplianceTest_Ruby/rhodata/apps/public/intent/rhodes.pdf"
+            	pdf = "content://com.rhomobile.compliancetestruby/rhodata/apps/public/intent/rhodes.pdf"
                 params_constructor(Rho::Intent::START_ACTIVITY,"","ACTION_VIEW","","","",pdf,"","")
             else
 
