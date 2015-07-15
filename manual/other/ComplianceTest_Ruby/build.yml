@@ -33,6 +33,7 @@ wp8:
 android:
   ajax_api_bridge: false
   version: "4.2.2"
+  manifest_template: AndroidManifest.erb
   extensions:
    - audiocapture
    - barcode
