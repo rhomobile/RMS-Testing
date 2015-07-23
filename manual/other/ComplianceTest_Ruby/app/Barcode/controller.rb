@@ -101,12 +101,12 @@ class BarcodeController < Rho::RhoController
   def barcode_take_props
     set_scanner
     @props = {}
-    @props['scanTimeout'] = @params['time'] if @params['time']
-    if @params['picklist'] && @params['picklist'] == 'true' && $scanner['friendlyName'] == "2D Imager"
+    @props['scanTimeout'] = @params['time'].to_i if @params['time']
+    if (@params['picklist'] && (@params['picklist'] == 'true') && ($scanner.friendlyName == "2D Imager"))
       @props['picklistMode'] = 'hardwareReticle'
     elsif @params['picklist']
       @props['picklistMode'] = 'softwareReticle'
-    end    
+    end
 
     $scanner.take(@props, url_for(:action => :barcode_callback))
   end
@@ -190,7 +190,7 @@ class BarcodeController < Rho::RhoController
     options = {}
     
     if @params['android'] && @params['decode']
-      options['decodeSound'] = 'file:///sdcard/decode.wav'
+      options['decodeSound'] = 'file:///sdcard/alarm5.wav'
     elsif @params['decode']
       options['decodeSound'] = 'file://Application/alarm5.wav'
     end

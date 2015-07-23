@@ -268,7 +268,7 @@ describe("Barcode Manual Test", function() {
 		it("VT200-0601 | set decodeSound to local wave file path |", function() {
 			displayObjective(jasmine.getEnv().currentSpec.description);
 			dispTestCaseRunning("By hardware trigger Scan code128 barcode check for the wave file to play(wave file should at application/sdcard folder)");
-			dispExpectedResult("wave file should play after barcode is decoded");
+			dispExpectedResult("alarm5.wav file should play after barcode is decoded");
 			
 			_result.waitToRunTest();
 			
