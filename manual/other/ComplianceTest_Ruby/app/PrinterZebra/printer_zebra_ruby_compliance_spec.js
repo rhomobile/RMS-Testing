@@ -167,7 +167,7 @@ describe('Printer Zebra', function() {
         displayflag = false;
         testResult = '';
         captured = false;
-
+        timeout = false;
     });
 
     afterEach(function() {});
@@ -262,14 +262,14 @@ describe('Printer Zebra', function() {
             
             setTimeout(function() {
                 timeout = true;
-            }, 5000);
+            }, 15000);
         });
 
          waitsFor(function(){
             if(timeout == true){
                 return true;
             }
-        }, 'Wait for 10msec ajax call to happen', 10000);
+        }, 'Wait for 10msec ajax call to happen', 18000);
 
         runs(function() {
             displayResult("Output: ", Ruby.getReturnedValue()+"<br/>");
@@ -338,7 +338,7 @@ describe('Printer Zebra', function() {
             dispExpectedResult("should search and display printer id. Wait for sometime..");
             _result.waitToRunTest();
             runs(function() {
-               
+
                 Ruby.call('PrinterZebra','rho_searchPrinters');
                 
                 setTimeout(function() {
@@ -351,7 +351,7 @@ describe('Printer Zebra', function() {
                 if(timeout == true){
                     return true;
                 }
-            }, 'Wait for 10msec ajax call to happen', 30000);
+            }, 'Wait for 10msec ajax call to happen', 25000);
 
             runs(function() {
                 displayResult("Output: ", Ruby.getReturnedValue()+"<br/>");

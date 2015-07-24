@@ -198,7 +198,7 @@ describe('Printing Generic', function() {
             
             setTimeout(function() {
                 timeout = true;
-            }, 5000);
+            }, 15000);
             
         });
 
@@ -206,7 +206,7 @@ describe('Printing Generic', function() {
             if(timeout == true){
                 return true;
             }
-        }, 'Wait for 10msec ajax call to happen', 10000);
+        }, 'Wait for 10msec ajax call to happen', 18000);
 
         runs(function() {
             displayResult("Output: ", Ruby.getReturnedValue()+"<br/>");
