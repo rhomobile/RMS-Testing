@@ -5,7 +5,7 @@ var config_get_property = [
 	expectedStrResult : "/app/index.html",
 	expectedIntResult : 0,
 	expectedBoolResult : false,
-	osType : ["WP8", "APPLE"]
+	osType : ["WP8", "APPLE", "ANDROID"]
 },
 {
 	testName : "Get default options_path property value using ",
@@ -13,7 +13,7 @@ var config_get_property = [
 	expectedStrResult : "/app/Settings",
 	expectedIntResult : 0,
 	expectedBoolResult : false,
-	osType : ["WP8", "APPLE"]
+	osType : ["WP8", "APPLE", "ANDROID"]
 },
 {
 	testName : "Get default rhobundle_zip_url property value using ",
@@ -21,7 +21,7 @@ var config_get_property = [
 	expectedStrResult : "",
 	expectedIntResult : 0,
 	expectedBoolResult : false,
-	osType : ["WP8", "APPLE"]
+	osType : ["WP8", "APPLE", "ANDROID"]
 }
 
 ];
@@ -34,7 +34,7 @@ var config_set_get_property = [
 	expectedStrResult : "/app/BarcodeTest/specRunner.html",
 	expectedIntResult : "Type error: argument 1 should be integer",
 	expectedBoolResult : "Type error: argument 1 should be boolean",
-	osType : ["WP8", "APPLE"]
+	osType : ["WP8", "APPLE", "ANDROID"]
 },
 {
 	testName : "Set and get options_path property value using ",
@@ -43,7 +43,7 @@ var config_set_get_property = [
 	expectedStrResult : "/app/ConfigTest",
 	expectedIntResult : "Type error: argument 1 should be integer",
 	expectedBoolResult : "Type error: argument 1 should be boolean",
-	osType : ["WP8", "APPLE"]
+	osType : ["WP8", "APPLE", "ANDROID"]
 },
 {
 	testName : "Get default rhobundle_zip_url property value using ",
@@ -52,7 +52,7 @@ var config_set_get_property = [
 	expectedStrResult : "https://s3.amazonaws.com/rhohub-test-builds/ce78f75e7fb147859014b37914e5f3b7.zip",
 	expectedIntResult : "Type error: argument 1 should be integer",
 	expectedBoolResult : "Type error: argument 1 should be boolean",
-	osType : ["WP8", "APPLE"]
+	osType : ["WP8", "APPLE", "ANDROID"]
 },
 {
 	testName : "Get default rhobundle_zip_pwd property value using ",
@@ -61,7 +61,7 @@ var config_set_get_property = [
 	expectedStrResult : "test",
 	expectedIntResult : "Type error: argument 1 should be integer",
 	expectedBoolResult : "Type error: argument 1 should be boolean",
-	osType : ["WP8", "APPLE"]
+	osType : ["WP8", "APPLE", "ANDROID"]
 },
 {
 	testName : "Get default MinSeverity property value using ",
@@ -70,7 +70,7 @@ var config_set_get_property = [
 	expectedStrResult : "Type error: argument 1 should be string",
 	expectedIntResult : 3,
 	expectedBoolResult : "Type error: argument 1 should be boolean",
-	osType : ["WP8", "APPLE"]
+	osType : ["WP8", "APPLE", "ANDROID"]
 },
 {
 	testName : "Get default LogToOutput property value using ",
@@ -79,7 +79,7 @@ var config_set_get_property = [
 	expectedStrResult : "Type error: argument 1 should be string",
 	expectedIntResult : 1,
 	expectedBoolResult : "Type error: argument 1 should be boolean",
-	osType : ["WP8", "APPLE"]
+	osType : ["WP8", "APPLE", "ANDROID"]
 },
 {
 	testName : "Get default ExcludeLogCategories property value using ",
@@ -88,7 +88,7 @@ var config_set_get_property = [
 	expectedStrResult : "Cat2",
 	expectedIntResult : "Type error: argument 1 should be integer",
 	expectedBoolResult : "Type error: argument 1 should be boolean",
-	osType : ["WP8", "APPLE"]
+	osType : ["WP8", "APPLE", "ANDROID"]
 },
 {
 	testName : "Get default MaxLogFileSize property value using ",
@@ -97,7 +97,7 @@ var config_set_get_property = [
 	expectedStrResult : "Type error: argument 1 should be string",
 	expectedIntResult : 40000,
 	expectedBoolResult : "Type error: argument 1 should be boolean",
-	osType : ["WP8", "APPLE"]
+	osType : ["WP8", "APPLE", "ANDROID"]
 },
 {
 	testName : "Get default LogFilePath property value using ",
@@ -106,7 +106,7 @@ var config_set_get_property = [
 	expectedStrResult : "/mnt/sdcard/myapp1.log",
 	expectedIntResult : "Type error: argument 1 should be integer",
 	expectedBoolResult : "Type error: argument 1 should be boolean",
-	osType : ["WP8", "APPLE"]
+	osType : ["WP8", "APPLE", "ANDROID"]
 },
 {
 	testName : "Get default LogMemPeriod property value using ",
@@ -115,7 +115,7 @@ var config_set_get_property = [
 	expectedStrResult : "Type error: argument 1 should be string",
 	expectedIntResult : 30000,
 	expectedBoolResult : "Type error: argument 1 should be boolean",
-	osType : ["WP8", "APPLE"]
+	osType : ["WP8", "APPLE", "ANDROID"]
 },
 {
 	testName : "Get default net_trace property value using ",
@@ -124,7 +124,7 @@ var config_set_get_property = [
 	expectedStrResult : "Type error: argument 1 should be string",
 	expectedIntResult : 1,
 	expectedBoolResult : "Type error: argument 1 should be boolean",
-	osType : ["WP8", "APPLE"]
+	osType : ["WP8", "APPLE", "ANDROID"]
 },
 {
 	testName : "Get default log_skip_post property value using ",
@@ -133,7 +133,7 @@ var config_set_get_property = [
 	expectedStrResult : "Type error: argument 1 should be string",
 	expectedIntResult : 1,
 	expectedBoolResult : "Type error: argument 1 should be boolean",
-	osType : ["WP8", "APPLE"]
+	osType : ["WP8", "APPLE", "ANDROID"]
 },
 {
 	testName : "Get default log_exclude_filter property value using ",
@@ -142,7 +142,7 @@ var config_set_get_property = [
 	expectedStrResult : "login, password",
 	expectedIntResult : "Type error: argument 1 should be integer",
 	expectedBoolResult : "Type error: argument 1 should be boolean",
-	osType : ["WP8", "APPLE"]
+	osType : ["WP8", "APPLE", "ANDROID"]
 },
 {
 	testName : "Get default net_timeout property value using ",
@@ -151,7 +151,7 @@ var config_set_get_property = [
 	expectedStrResult : "Type error: argument 1 should be string",
 	expectedIntResult : 60,
 	expectedBoolResult : "Type error: argument 1 should be boolean",
-	osType : ["WP8", "APPLE"]
+	osType : ["WP8", "APPLE", "ANDROID"]
 },
 {
 	testName : "Get default logserver property value using ",
@@ -160,7 +160,7 @@ var config_set_get_property = [
 	expectedStrResult : "http://rhologs.heroku.com",
 	expectedIntResult : "Type error: argument 1 should be integer",
 	expectedBoolResult : "Type error: argument 1 should be boolean",
-	osType : ["WP8", "APPLE"]
+	osType : ["WP8", "APPLE", "ANDROID"]
 },
 {
 	testName : "Get default logname property value using ",
@@ -169,7 +169,7 @@ var config_set_get_property = [
 	expectedStrResult : "helloworld",
 	expectedIntResult : "Type error: argument 1 should be integer",
 	expectedBoolResult : "Type error: argument 1 should be boolean",
-	osType : ["WP8", "APPLE"]
+	osType : ["WP8", "APPLE", "ANDROID"]
 },
 {
 	testName : "Get default syncserver property value using ",
@@ -178,7 +178,7 @@ var config_set_get_property = [
 	expectedStrResult : "http://localhost:9292/application",
 	expectedIntResult : "Type error: argument 1 should be integer",
 	expectedBoolResult : "Type error: argument 1 should be boolean",
-	osType : ["WP8", "APPLE"]
+	osType : ["WP8", "APPLE", "ANDROID"]
 },
 {
 	testName : "Get default full_screen property value using ",
@@ -187,7 +187,7 @@ var config_set_get_property = [
 	expectedStrResult : "Type error: argument 1 should be string",
 	expectedIntResult : 0,
 	expectedBoolResult : "Type error: argument 1 should be boolean",
-	osType : ["WP8", "APPLE"]
+	osType : ["WP8", "APPLE", "ANDROID"]
 },
 {
 	testName : "Get default enable_screen_zoom property value using ",
@@ -196,7 +196,7 @@ var config_set_get_property = [
 	expectedStrResult : "Type error: argument 1 should be string",
 	expectedIntResult : 1,
 	expectedBoolResult : "Type error: argument 1 should be boolean",
-	osType : ["WP8", "APPLE"]
+	osType : ["WP8", "APPLE", "ANDROID"]
 },
 {
 	testName : "Get default screen_width property value using ",
@@ -205,7 +205,7 @@ var config_set_get_property = [
 	expectedStrResult : "Type error: argument 1 should be string",
 	expectedIntResult : 600,
 	expectedBoolResult : "Type error: argument 1 should be boolean",
-	osType : ["WP8", "APPLE"]
+	osType : ["WP8", "APPLE", "ANDROID"]
 },
 {
 	testName : "Get default screen_height property value using ",
@@ -214,7 +214,7 @@ var config_set_get_property = [
 	expectedStrResult : "Type error: argument 1 should be string",
 	expectedIntResult : 400,
 	expectedBoolResult : "Type error: argument 1 should be boolean",
-	osType : ["WP8", "APPLE"]
+	osType : ["WP8", "APPLE", "ANDROID"]
 },
 {
 	testName : "Get default local_server_port property value using ",
@@ -223,7 +223,7 @@ var config_set_get_property = [
 	expectedStrResult : "Type error: argument 1 should be string",
 	expectedIntResult : 8080,
 	expectedBoolResult : "Type error: argument 1 should be boolean",
-	osType : ["WP8", "APPLE"]
+	osType : ["WP8", "APPLE", "ANDROID"]
 },
 {
 	testName : "Get default wm_show_statusbar property value using ",
@@ -232,7 +232,7 @@ var config_set_get_property = [
 	expectedStrResult : "Type error: argument 1 should be string",
 	expectedIntResult : 1,
 	expectedBoolResult : "Type error: argument 1 should be boolean",
-	osType : ["WP8", "APPLE"]
+	osType : ["WP8", "APPLE", "ANDROID"]
 },
 {
 	testName : "Get default disable_screen_rotation property value using ",
@@ -241,7 +241,7 @@ var config_set_get_property = [
 	expectedStrResult : "Type error: argument 1 should be string",
 	expectedIntResult : 1,
 	expectedBoolResult : "Type error: argument 1 should be boolean",
-	osType : ["WP8", "APPLE"]
+	osType : ["WP8", "APPLE", "ANDROID"]
 },
 {
 	testName : "Get default bb_disable_closebyback property value using ",
@@ -250,7 +250,7 @@ var config_set_get_property = [
 	expectedStrResult : "Type error: argument 1 should be string",
 	expectedIntResult : 0,
 	expectedBoolResult : "Type error: argument 1 should be boolean",
-	osType : ["WP8", "APPLE"]
+	osType : ["WP8", "APPLE", "ANDROID"]
 },
 {
 	testName : "Get default bb_loadimages_async property value using ",
@@ -259,7 +259,7 @@ var config_set_get_property = [
 	expectedStrResult : "Type error: argument 1 should be string",
 	expectedIntResult : 0,
 	expectedBoolResult : "Type error: argument 1 should be boolean",
-	osType : ["WP8", "APPLE"]
+	osType : ["WP8", "APPLE", "ANDROID"]
 },
 {
 	testName : "Get default bulksync_state property value using ",
@@ -268,7 +268,7 @@ var config_set_get_property = [
 	expectedStrResult : "Type error: argument 1 should be string",
 	expectedIntResult : 1,
 	expectedBoolResult : "Type error: argument 1 should be boolean",
-	osType : ["WP8", "APPLE"]
+	osType : ["WP8", "APPLE", "ANDROID"]
 },
 {
 	testName : "Get default jqtouch_mode property value using ",
@@ -277,7 +277,7 @@ var config_set_get_property = [
 	expectedStrResult : "Type error: argument 1 should be string",
 	expectedIntResult : 1,
 	expectedBoolResult : "Type error: argument 1 should be boolean",
-	osType : ["WP8", "APPLE"]
+	osType : ["WP8", "APPLE", "ANDROID"]
 },
 {
 	testName : "Get default splash_screen property value using ",
@@ -286,7 +286,7 @@ var config_set_get_property = [
 	expectedStrResult : "zoom",
 	expectedIntResult : "Type error: argument 1 should be integer",
 	expectedBoolResult : "Type error: argument 1 should be boolean",
-	osType : ["WP8", "APPLE"]
+	osType : ["WP8", "APPLE", "ANDROID"]
 },
 {
 	testName : "Get default use_bb_full_browser property value using ",
@@ -295,7 +295,7 @@ var config_set_get_property = [
 	expectedStrResult : "Type error: argument 1 should be string",
 	expectedIntResult : 1,
 	expectedBoolResult : "Type error: argument 1 should be boolean",
-	osType : ["WP8", "APPLE"]
+	osType : ["WP8", "APPLE", "ANDROID"]
 },
 {
 	testName : "Get default use_persistent_storage property value using ",
@@ -304,7 +304,7 @@ var config_set_get_property = [
 	expectedStrResult : "Type error: argument 1 should be string",
 	expectedIntResult : 1,
 	expectedBoolResult : "Type error: argument 1 should be boolean",
-	osType : ["WP8", "APPLE"]
+	osType : ["WP8", "APPLE", "ANDROID"]
 },
 {
 	testName : "Get default use_bulk_model property value using ",
@@ -313,7 +313,7 @@ var config_set_get_property = [
 	expectedStrResult : "Type error: argument 1 should be string",
 	expectedIntResult : "Type error: argument 1 should be integer",
 	expectedBoolResult : true,
-	osType : ["WP8", "APPLE"]
+	osType : ["WP8", "APPLE", "ANDROID"]
 },
 {
 	testName : "Get default no_ssl_verify_peer property value using ",
@@ -322,7 +322,7 @@ var config_set_get_property = [
 	expectedStrResult : "Type error: argument 1 should be string",
 	expectedIntResult : 1,
 	expectedBoolResult : "Type error: argument 1 should be boolean",
-	osType : ["WP8", "APPLE"]
+	osType : ["WP8", "APPLE", "ANDROID"]
 },
 {
 	testName : "Get default finish_sync_in_background property value using ",
@@ -331,7 +331,7 @@ var config_set_get_property = [
 	expectedStrResult : "Type error: argument 1 should be string",
 	expectedIntResult : 1,
 	expectedBoolResult : "Type error: argument 1 should be boolean",
-	osType : ["WP8", "APPLE"]
+	osType : ["WP8", "APPLE", "ANDROID"]
 },
 {
 	testName : "Get default enable_web_plugins property value using ",
@@ -340,7 +340,7 @@ var config_set_get_property = [
 	expectedStrResult : "Type error: argument 1 should be string",
 	expectedIntResult : 1,
 	expectedBoolResult : "Type error: argument 1 should be boolean",
-	osType : ["WP8", "APPLE"]
+	osType : ["WP8", "APPLE", "ANDROID"]
 },
 {
 	testName : "Get default send_log property value using ",
@@ -349,7 +349,7 @@ var config_set_get_property = [
 	expectedStrResult : "http://example.com/client_log?client_id=123&device_pin=345&log_name=mylog",
 	expectedIntResult : "Type error: argument 1 should be integer",
 	expectedBoolResult : "Type error: argument 1 should be boolean",
-	osType : ["WP8", "APPLE"]
+	osType : ["WP8", "APPLE", "ANDROID"]
 },
 {
 	testName : "Get default http_proxy_host property value using ",
@@ -358,7 +358,7 @@ var config_set_get_property = [
 	expectedStrResult : "server",
 	expectedIntResult : "Type error: argument 1 should be integer",
 	expectedBoolResult : "Type error: argument 1 should be boolean",
-	osType : ["WP8", "APPLE"]
+	osType : ["WP8", "APPLE", "ANDROID"]
 },
 {
 	testName : "Get default http_proxy_port property value using ",
@@ -367,7 +367,7 @@ var config_set_get_property = [
 	expectedStrResult : "Type error: argument 1 should be string",
 	expectedIntResult : 1080,
 	expectedBoolResult : "Type error: argument 1 should be boolean",
-	osType : ["WP8", "APPLE"]
+	osType : ["WP8", "APPLE", "ANDROID"]
 },
 {
 	testName : "Get default http_proxy_login property value using ",
@@ -376,7 +376,7 @@ var config_set_get_property = [
 	expectedStrResult : "user",
 	expectedIntResult : "Type error: argument 1 should be integer",
 	expectedBoolResult : "Type error: argument 1 should be boolean",
-	osType : ["WP8", "APPLE"]
+	osType : ["WP8", "APPLE", "ANDROID"]
 },
 {
 	testName : "Get default http_proxy_password property value using ",
@@ -385,7 +385,7 @@ var config_set_get_property = [
 	expectedStrResult : "password",
 	expectedIntResult : "Type error: argument 1 should be integer",
 	expectedBoolResult : "Type error: argument 1 should be boolean",
-	osType : ["WP8", "APPLE"]
+	osType : ["WP8", "APPLE", "ANDROID"]
 },
 {
 	testName : "Get default clientSSLCertificate property value using ",
@@ -394,7 +394,7 @@ var config_set_get_property = [
 	expectedStrResult : "certificate path",
 	expectedIntResult : "Type error: argument 1 should be integer",
 	expectedBoolResult : "Type error: argument 1 should be boolean",
-	osType : ["WP8", "APPLE"]
+	osType : ["WP8", "APPLE", "ANDROID"]
 },
 {
 	testName : "Get default clientSSLCertificatePassword property value using ",
@@ -403,7 +403,7 @@ var config_set_get_property = [
 	expectedStrResult : "password",
 	expectedIntResult : "Type error: argument 1 should be integer",
 	expectedBoolResult : "Type error: argument 1 should be boolean",
-	osType : ["WP8", "APPLE"]
+	osType : ["WP8", "APPLE", "ANDROID"]
 },
 {
 	testName : "Get default sync_poll_interval property value using ",
@@ -412,7 +412,7 @@ var config_set_get_property = [
 	expectedStrResult : "Type error: argument 1 should be string",
 	expectedIntResult : 1,
 	expectedBoolResult : "Type error: argument 1 should be boolean",
-	osType : ["WP8", "APPLE"]
+	osType : ["WP8", "APPLE", "ANDROID"]
 },
 {
 	testName : "Get default disable_loading_indication property value using ",
@@ -421,7 +421,7 @@ var config_set_get_property = [
 	expectedStrResult : "Type error: argument 1 should be string",
 	expectedIntResult : 1,
 	expectedBoolResult : "Type error: argument 1 should be boolean",
-	osType : ["WP8", "APPLE"]
+	osType : ["WP8", "APPLE", "ANDROID"]
 }
 
 ];

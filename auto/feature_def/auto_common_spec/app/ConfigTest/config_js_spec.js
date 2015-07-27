@@ -11,13 +11,13 @@ describe('Rho.Config module', function() {
 
     	it("Should return default rhoconfig path", function() {
 	    	var defaultConfigPath = Rho.Config.configPath;
-	    	expect(defaultConfigPath).toEqual(Rho.RhoFile.join(Rho.Application.appsBundleFolder, 'rhoconfig.txt')); 
+	    	expect(defaultConfigPath).toEqual('rho/apps/rhoconfig.txt'); 
 	    });
 
 	    it("Should set rhoconfig to different path in device", function() {
-	    	Rho.Config.configPath = Rho.RhoFile.join(Rho.Application.appsBundleFolder, 'app/ConfigTest/rhoconfig.txt');
+	    	Rho.Config.configPath = "rho/apps/app/ConfigTest/rhoconfig.txt";
 	    	var newConfigPath = Rho.Config.configPath;
-	    	expect(newConfigPath).toEqual(Rho.RhoFile.join(Rho.Application.appsBundleFolder, 'app/ConfigTest/rhoconfig.txt'));
+	    	expect(newConfigPath).toEqual('rho/apps/app/ConfigTest/rhoconfig.txt');
 	    	Rho.Config.loadFromFile();
 	    	var result = Rho.Config.getPropertyString("start_path")
 			expect(result).toEqual('/app/ConfigTest/specRunner.html');
@@ -26,7 +26,7 @@ describe('Rho.Config module', function() {
 	    
 	    
 	    it("Should not behave abnormally on setting invalid rhoconfig path", function() {
-	    	Rho.Config.configPath = Rho.RhoFile.join(Rho.Application.appsBundleFolder, 'rhoconfig.txt');
+	    	Rho.Config.configPath = 'rho/apps/rhoconfig.txt';
 	    	var defaultConfigPath = Rho.Config.configPath;
 	    	Rho.Config.configPath = "/app//Invalid!@#rhoconfig.txt";
 	    	var newConfigPath = Rho.Config.configPath;
@@ -61,18 +61,18 @@ describe('Rho.Config module', function() {
 	    });
 
 	    it("loadFromFile method should load default rhoconfig file after setting to different rhoconfig path", function() {
-	    	Rho.Config.configPath = Rho.RhoFile.join(Rho.Application.appsBundleFolder, 'rhoconfig.txt');
+	    	Rho.Config.configPath = 'rho/apps/rhoconfig.txt';
 	    	Rho.Config.loadFromFile();
 	    	var returnStr = Rho.Config.getPropertyString('start_path');
 	    	var returnInt = Rho.Config.getPropertyInt('MinSeverity');
-	    	Rho.Config.configPath = Rho.RhoFile.join(Rho.Application.appsBundleFolder, "app/ConfigTest/rhoconfig.txt");
+	    	Rho.Config.configPath = "rho/apps/app/ConfigTest/rhoconfig.txt";
 	    	Rho.Config.loadFromFile();
 	    	expect(Rho.Config.getPropertyString('start_path')).not.toEqual(returnStr);
 	    	expect(Rho.Config.getPropertyInt('MinSeverity')).not.toEqual(returnInt);
 	    });
 	    
 	    it("removeProperty should remove logserver property when multiple logserver property exists in rhoconfig", function() {
-	    	Rho.Config.configPath = Rho.RhoFile.join(Rho.Application.appsBundleFolder, "app/ConfigTest/rhoconfig.txt");
+	    	Rho.Config.configPath = "rho/apps/app/ConfigTest/rhoconfig.txt";
 	    	Rho.Config.loadFromFile();
 	    	if(Rho.Config.isPropertyExists("logserver")) {
 	    		Rho.Config.removeProperty("logserver", false);
@@ -85,15 +85,105 @@ describe('Rho.Config module', function() {
 	    }); 
 	    
 	    it("Should set rhoconfig to default path and checking the original start path", function() {
-	    	Rho.Config.configPath = Rho.RhoFile.join(Rho.Application.appsBundleFolder, "rhoconfig.txt");
+	    	Rho.Config.configPath = "rho/apps/rhoconfig.txt";
 	    	Rho.Config.loadFromFile();
 	    	var newConfigPath = Rho.Config.configPath;
 	    	var actual = Rho.Config.getPropertyString("start_path")
-	    	expect(newConfigPath).toEqual(Rho.RhoFile.join(Rho.Application.appsBundleFolder, "rhoconfig.txt"));
+	    	expect(newConfigPath).toEqual('rho/apps/rhoconfig.txt');
 	    	expect(actual).toEqual("/app/index.html");
 	    });
 
     }
+   
+	  if(isAndroidPlatform()) {
+
+    	it("Should return default rhoconfig path", function() {
+	    	var defaultConfigPath = Rho.Config.configPath;
+	    	expect(defaultConfigPath).toEqual('/data/data/com.rhomobile.auto_common_spec/rhodata/apps/rhoconfig.txt'); 
+	    });
+
+	    it("Should set rhoconfig to different path in device", function() {
+	    	Rho.Config.configPath = "/data/data/com.rhomobile.auto_common_spec/rhodata/apps/app/ConfigTest/rhoconfig.txt";
+	    	var newConfigPath = Rho.Config.configPath;
+	    	expect(newConfigPath).toEqual('/data/data/com.rhomobile.auto_common_spec/rhodata/apps/app/ConfigTest/rhoconfig.txt');
+	    	Rho.Config.loadFromFile();
+	    	var result = Rho.Config.getPropertyString("start_path")
+			expect(result).toEqual('/app/ConfigTest/specRunner.html');
+			
+	    });
+	    
+	    
+	    it("Should not behave abnormally on setting invalid rhoconfig path", function() {
+	    	Rho.Config.configPath = '/data/data/com.rhomobile.auto_common_spec/rhodata/apps/rhoconfig.txt';
+	    	var defaultConfigPath = Rho.Config.configPath;
+	    	Rho.Config.configPath = "/app//Invalid!@#rhoconfig.txt";
+	    	var newConfigPath = Rho.Config.configPath;
+	    	expect(newConfigPath).toEqual("/app//Invalid!@#rhoconfig.txt");
+	    });
+
+	    it("isPropertyExists method should return true if start_path property exists in rhoconfig file ", function() {
+	    	var returnVal = Rho.Config.isPropertyExists("start_path");
+	    	expect(returnVal).toEqual(true);
+	    });
+	     
+	    it("isPropertyExists method should return true if MinSeverity property exists in rhoconfig file", function() {
+	    	var returnVal = Rho.Config.isPropertyExists("MinSeverity");
+	    	expect(returnVal).toEqual(true);
+	    });
+
+	    //disable_loading_indication should be commented in rhoconfig.txt file
+	    it("isPropertyExists method should return false if disable_loading_indication property is commented in rhoconfig file", function() {
+	    	var returnVal = Rho.Config.isPropertyExists("disable_loading_indication");
+	    	expect(returnVal).toEqual(false);
+	    });
+
+	    it("isPropertyExists method should return false if full_screen property is removed from rhoconfig file using removeProperty method", function() {
+	    	Rho.Config.removeProperty("full_screen", false);
+	    	var returnVal = Rho.Config.isPropertyExists("full_screen");
+	    	expect(returnVal).toEqual(false);
+	    });
+	    
+	    it("isPropertyExists method should return false for invalid property", function() {
+	    	var returnVal = Rho.Config.isPropertyExists("invalid");
+	    	expect(returnVal).toEqual(false);
+	    });
+
+	    it("loadFromFile method should load default rhoconfig file after setting to different rhoconfig path", function() {
+	    	Rho.Config.configPath = '/data/data/com.rhomobile.auto_common_spec/rhodata/apps/rhoconfig.txt';
+	    	Rho.Config.loadFromFile();
+	    	var returnStr = Rho.Config.getPropertyString('start_path');
+	    	var returnInt = Rho.Config.getPropertyInt('MinSeverity');
+	    	Rho.Config.configPath = "/data/data/com.rhomobile.auto_common_spec/rhodata/apps/app/ConfigTest/rhoconfig.txt";
+	    	Rho.Config.loadFromFile();
+	    	expect(Rho.Config.getPropertyString('start_path')).not.toEqual(returnStr);
+	    	expect(Rho.Config.getPropertyInt('MinSeverity')).not.toEqual(returnInt);
+	    });
+	    
+	    it("removeProperty should remove logserver property when multiple logserver property exists in rhoconfig", function() {
+	    	Rho.Config.configPath = "/data/data/com.rhomobile.auto_common_spec/rhodata/apps/app/ConfigTest/rhoconfig.txt";
+	    	Rho.Config.loadFromFile();
+	    	if(Rho.Config.isPropertyExists("logserver")) {
+	    		Rho.Config.removeProperty("logserver", false);
+		    	expect(Rho.Config.isPropertyExists("logserver")).toEqual(false);
+	    	}
+	    	else {
+	    		expect("Property doesnt exists please add logserver property").toEqual("doesnt exists");
+	    	}
+	    	
+	    }); 
+	    
+	    it("Should set rhoconfig to default path and checking the original start path", function() {
+	    	Rho.Config.configPath = "/data/data/com.rhomobile.auto_common_spec/rhodata/apps/rhoconfig.txt";
+	    	Rho.Config.loadFromFile();
+	    	var newConfigPath = Rho.Config.configPath;
+	    	var actual = Rho.Config.getPropertyString("start_path")
+	    	expect(newConfigPath).toEqual('/data/data/com.rhomobile.auto_common_spec/rhodata/apps/rhoconfig.txt');
+	    	expect(actual).toEqual("/app/index.html");
+	    });
+
+    }
+   
+	   
 
 	describe("Get default using getPropertyString method", function () {
 		for (var i = 0; i < config_get_property.length; i++) {
@@ -107,11 +197,11 @@ describe('Rho.Config module', function() {
 
 	            if (isTestApplicable(suitablePlatforms)) {
 	                it(testName+"getPropertyString method", function () {
-	                	Rho.Config.configPath = Rho.RhoFile.join(Rho.Application.appsBundleFolder, "rhoconfig.txt");
+	                	Rho.Config.configPath = "/data/data/com.rhomobile.auto_common_spec/rhodata/apps/rhoconfig.txt";
 	        	    	Rho.Config.loadFromFile();
 	                	var newConfigPath = Rho.Config.configPath;
 	                	var actual = Rho.Config.getPropertyString(propertyName)
-						expect(newConfigPath).toEqual(Rho.RhoFile.join(Rho.Application.appsBundleFolder, "rhoconfig.txt"));
+						expect(newConfigPath).toEqual('/data/data/com.rhomobile.auto_common_spec/rhodata/apps/rhoconfig.txt');
 	                	expect(actual).toEqual(expectedValue);
 	                });
 	            }
