@@ -21,7 +21,7 @@ document.getElementById('actualResult').innerHTML ="TransferResult= " + Msg;
 						"Steps":["1. Set Source to any valid HTTP address.","2. Set Destination to valid Device Folder.","3. Attach the TransferEvent","4. Call Transfer method."],
 						"ExpectedOutcome":["File should be copied from HTTP location to Device folder successfully.","Destination server message should be returned as Transfer Result in Transferevent. "],
 						"testToPerform":function(){
-							fileTransfer.source = "url('http://10.233.85.82/FileCollections/myfile.txt')";
+							fileTransfer.source = "url('http://10.233.85.82/NEON/FileCollections/myfile1.txt')";
 							fileTransfer.destination = "url('file://\\Temp\\myfolderfromFTP\\filefromHTTP.txt')";
 							fileTransfer.createFolders = true;
 							fileTransfer.overWrite = true;
