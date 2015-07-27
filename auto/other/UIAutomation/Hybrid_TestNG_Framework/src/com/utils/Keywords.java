@@ -2484,82 +2484,6 @@ public class Keywords {
 	}
 	
 	/**
-	 * Counting signal callback 
-	 * @author Chaithra
-	 * @param getvalue
-	 * @param objName
-	 * @return
-	 */
-	public String signalCallbackcount(Hashtable<String,String> getvalue,String objname){
-		try{
-			log("Entered count function");		
-			WebElement temp1 = element(objname);
-			List<WebElement> list1 = temp1.findElements(By.tagName(("ul")));
-			Integer count1 = list1.size();
-			System.out.println(count1);
-			Thread.sleep(10000);
-			WebElement temp2 = element(objname);
-			List<WebElement> list2 = temp2.findElements(By.tagName(("ul")));
-			Integer count2 = list2.size();
-			System.out.println(count2);
-			if(count2 == count1 + 2){
-				log("callback firing every 5 seconds");
-				log("Exiting from count function");
-				return "Pass";
-			}
-			else{
-				log("callback not firing every 5 seconds");
-				log("Exiting from count function");
-				return "Fail";
-			}
-			
-		}
-		catch(Exception ex){
-			log("count of calback not found. reason :"+ex.getMessage());
-			log("Exiting from count function");
-			return "Fail";
-		}
-	}
-	
-	/**
-	 * To check if callback has stopped firing
-	 * @author Chaithra
-	 * @param getvalue
-	 * @param objname
-	 * @return
-	 */
-	public String checkstopwlanStatus(Hashtable<String,String> getvalue,String objname){
-		try{
-			log("Entered checkstopwlanStatus function");		
-			WebElement temp1 = element(objname);
-			List<WebElement> list1 = temp1.findElements(By.tagName(("ul")));
-			Integer count1 = list1.size();
-			System.out.println(count1);
-			Thread.sleep(5000);
-			WebElement temp2 = element(objname);
-			List<WebElement> list2 = temp2.findElements(By.tagName(("ul")));
-			Integer count2 = list2.size();
-			System.out.println(count2);
-			if(count2 == count1){
-				log("callback has stopped firing");
-				log("Exiting from checkstopwlanStatus function");
-				return "Pass";
-			}
-			else{
-				log("callback is still firing ");
-				log("Exiting from checkstopwlanStatus function");
-				return "Fail";
-			}
-			
-		}
-		catch(Exception ex){
-			log("unable to check id callback has stopped firing :"+ex.getMessage());
-			log("Exiting from checkstopwlanStatus function");
-			return "Fail";
-		}
-	}
-	
-	/**
 	 * Modified existing function little bit
 	 * To validate on any button exist in the given page. This function should be called for buttons with text only.
 	 * @author Rohini
@@ -3777,6 +3701,149 @@ public class Keywords {
 		}
 	}
 
+/**
+	 * To not contain some text
+	 * @author Chaithra
+	 * @param getvalue
+	 * @param objname
+	 * @return
+	 */
+public String validate_doesNotContain(Hashtable<String,String> getvalue,String objname){
+		try{
+			log("Entered validate_Result function");
+			String content = element("results_xpath").getText();			
+			if(content.contains(objname)){
+				log(objname+" Testcase Text found");				
+				log("Exiting from validate_Result function");
+				return "Fail";
+			}else{
+				log(objname+ " Testcase Text not found");
+				log("Exiting from validate_Result function");				
+				return "Pass";
+			}				
+									
+			
+		}catch(Exception ex){
+			log("function failed reason :"+ex.getMessage());
+			log("Exiting from validate_Result function");
+			return "Fail";
+		}
+		
+				
+	}
+
+
+/**
+	 * To validate Result
+	 * @author Chaithra M
+	 * @param getvalue
+	 * @param objname
+	 * @return
+	 */
+	public String validate_Page(Hashtable<String,String> getvalue,String objname){
+		try{
+			log("Entered validate_Page function");
+			String content = element("loadpage_xpath").getText();			
+			if(content.contains(objname)){
+				log(objname+" Testcase Text found");				
+				log("Exiting from validate_Page function");
+				return "Pass";
+			}else{
+				log(objname+ " Testcase Text not found");
+				log("Exiting from validate_Page function");				
+				return "Fail";
+			}				
+									
+			
+		}catch(Exception ex){
+			log("function failed reason :"+ex.getMessage());
+			log("Exiting from validate_Page function");
+			return "Fail";
+		}
+		
+				
+	}
+
+/**
+	 * Counting signal callback 
+	 * @author Chaithra
+	 * @param getvalue
+	 * @param objName
+	 * @return
+	 */
+	public String signalCallbackcount(Hashtable<String,String> getvalue,String objname){
+		try{
+			log("Entered count function");		
+			WebElement temp1 = element(objname);
+			List<WebElement> list1 = temp1.findElements(By.tagName(("ul")));
+			Integer count1 = list1.size();
+			System.out.println(count1);
+			wifi_Mode(getvalue, "OFF");
+			wifi_Mode(getvalue, "ON");
+			launch_App_Device(getvalue,"com.rhomobile.compliancetest_js/com.rhomobile.rhodes.RhodesActivity");
+			WebElement temp2 = element(objname);
+			List<WebElement> list2 = temp2.findElements(By.tagName(("ul")));
+			Integer count2 = list2.size();
+			System.out.println(count2);
+			if(count2 > count1){
+				log("callback firing");
+				log("Exiting from count function");
+				return "Pass";
+			}
+			else{
+				log("callback not firing");
+				log("Exiting from count function");
+				return "Fail";
+			}
+			
+		}
+		catch(Exception ex){
+			log("count of calback not found. reason :"+ex.getMessage());
+			log("Exiting from count function");
+			return "Fail";
+		}
+	}
+	
+	/**
+	 * To check if callback has stopped firing
+	 * @author Chaithra
+	 * @param getvalue
+	 * @param objname
+	 * @return
+	 */
+	public String checkstopwlanStatus(Hashtable<String,String> getvalue,String objname){
+		try{
+			log("Entered checkstopwlanStatus function");		
+			WebElement temp1 = element(objname);
+			List<WebElement> list1 = temp1.findElements(By.tagName(("ul")));
+			Integer count1 = list1.size();
+			System.out.println(count1);
+			wifi_Mode(getvalue, "OFF");
+			wifi_Mode(getvalue, "ON");
+			launch_App_Device(getvalue,"com.rhomobile.compliancetest_js/com.rhomobile.rhodes.RhodesActivity");
+			WebElement temp2 = element(objname);
+			List<WebElement> list2 = temp2.findElements(By.tagName(("ul")));
+			Integer count2 = list2.size();
+			System.out.println(count2);
+			if(count2 == count1){
+				log("callback has stopped firing");
+				log("Exiting from checkstopwlanStatus function");
+				return "Pass";
+			}
+			else{
+				log("callback is still firing ");
+				log("Exiting from checkstopwlanStatus function");
+				return "Fail";
+			}
+			
+		}
+		catch(Exception ex){
+			log("unable to check id callback has stopped firing :"+ex.getMessage());
+			log("Exiting from checkstopwlanStatus function");
+			return "Fail";
+		}
+	}
+	
 	
 	
 }
