@@ -1,0 +1,154 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="AppGallery">
+
+<!-- <test name="AGM Download">
+		<classes>
+			<class name="com.testcases.AGM_download" ></class> 			
+		</classes>
+	</test> -->
+	
+	<test name="SignalIndicator_JS">
+		<classes>
+			<class name="com.testcases.SignalIndicator_JS" ></class> 
+		</classes>
+	</test>
+	
+<!--	<test name="UI_AGM_JoinNow">
+		<classes>
+			<class name="com.testcases.UI_AGM_JoinNow" ></class> 
+		</classes>
+	</test>
+	
+	<test name="UI_AGM_Showcase_home">
+		<classes>
+				<class name="com.testcases.UI_AGM_Showcase_home" ></class>  
+		</classes>
+	</test>
+	
+	<test name="Login_Client">
+		<classes>
+			<class name="com.testcases.Login_Client" ></class> 
+		</classes>
+	</test>
+	
+	<test name="UI_AGM_ShowcaseCategories">
+		<classes>
+			<class name="com.testcases.UI_AGM_ShowcaseCategories" ></class> 
+		</classes>
+	</test>
+	
+	<test name="UI_AGM_Login">
+		<classes>
+			<class name="com.testcases.UI_AGM_Login" ></class>
+		</classes>
+	</test>
+	
+	<test name="UI_AGM_Galleries">
+		<classes>
+			<class name="com.testcases.UI_AGM_Galleries" ></class>
+		</classes>
+	</test>
+	
+	<test name="UI_AGM_Apps">
+		<classes>
+			<class name="com.testcases.UI_AGM_Apps" ></class> 
+		</classes>
+	</test>
+	
+	<test name="UI_AGM_AppDetails">
+		<classes>
+			<class name="com.testcases.UI_AGM_AppDetails" ></class>
+		</classes>
+	</test>
+	
+	<test name="UI_AGM_LoginError">
+		<classes>
+			<class name="com.testcases.UI_AGM_LoginError" ></class>
+		</classes>
+	</test>
+	
+	<test name="UI_AGM_ProfileDefault">
+		<classes>
+			<class name="com.testcases.UI_AGM_ProfileDefault" ></class>
+		</classes>
+	</test>
+	
+	<test name="UI_AGM_ForgotPassword">
+		<classes>
+			<class name="com.testcases.UI_AGM_ForgotPassword" ></class>	
+		</classes>
+	</test> 
+	
+	<test name="client_InviteGalleries">
+		<classes>
+			<class name="com.testcases.client_InviteGalleries" ></class> 
+		</classes>
+	</test> -->
+	
+<!-- 	<test name="E2ELogin">
+		<classes>
+			<class name="com.testcases.E2ELogin" ></class>
+		</classes>
+	</test>
+	
+	<test name="Home_Screen">
+		<classes>
+			<class name="com.testcases.Home_Screen" ></class> 
+		</classes>
+	</test>
+	
+	<test name="Applistcategory">
+		<classes>
+			<class name="com.testcases.Applistcategory" ></class>
+		</classes>
+	</test>
+	
+	<test name="Appshowcase">
+		<classes>
+			<class name="com.testcases.Appshowcase" ></class> 
+		</classes>
+	</test>
+	
+	<test name="E2E_ApplistCategory">
+		<classes>
+			<class name="com.testcases.E2E_ApplistCategory" ></class>
+		</classes>
+	</test>
+	
+	<test name="E2EAGM_download">
+		<classes>
+			<class name="com.testcases.E2EAGM_download" ></class>
+		</classes>
+	</test>
+	
+	<test name="Searchfunctionality">
+		<classes>
+			<class name="com.testcases.Searchfunctionality" ></class>
+		</classes>
+	</test>
+	
+	<test name="Signup_Client">
+		<classes>
+			<class name="com.testcases.Signup_Client" ></class>
+		</classes>
+	</test>
+	
+	<test name="E2EAppShowcase">
+		<classes>
+			<class name="com.testcases.E2EAppShowcase" ></class>
+		</classes>
+	</test>
+	
+	<test name="UI_SpecificGallery">
+		<classes>
+			<class name="com.testcases.UI_SpecificGallery" ></class>
+		</classes>
+	</test>
+	
+	<test name="UI_SpecificGallery_Dropdown">
+		<classes>
+			<class name="com.testcases.UI_SpecificGallery_Dropdown" ></class> 
+		</classes>
+	</test>  -->
+	
+</suite>

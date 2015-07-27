@@ -1,0 +1,1748 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+  <title>TestNG reports</title>
+
+    <link type="text/css" href="testng-reports.css" rel="stylesheet" />  
+    <script type="text/javascript" src="jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="testng-reports.js"></script>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type='text/javascript'>
+      google.load('visualization', '1', {packages:['table']});
+      google.setOnLoadCallback(drawTable);
+      var suiteTableInitFunctions = new Array();
+      var suiteTableData = new Array();
+    </script>
+    <!--
+      <script type="text/javascript" src="jquery-ui/js/jquery-ui-1.8.16.custom.min.js"></script>
+     -->
+  </head>
+
+  <body>
+    <div class="top-banner-root">
+      <span class="top-banner-title-font">Test results</span>
+      <br/>
+      <span class="top-banner-font-1">1 suite, 1 failed test</span>
+    </div> <!-- top-banner-root -->
+    <div class="navigator-root">
+      <div class="navigator-suite-header">
+        <span>All suites</span>
+        <a href="#" class="collapse-all-link" title="Collapse/expand all the suites">
+          <img class="collapse-all-icon" src="collapseall.gif">
+          </img> <!-- collapse-all-icon -->
+        </a> <!-- collapse-all-link -->
+      </div> <!-- navigator-suite-header -->
+      <div class="suite">
+        <div class="rounded-window">
+          <div class="suite-header light-rounded-window-top">
+            <a href="#" class="navigator-link" panel-name="suite-Default_suite">
+              <span class="suite-name border-failed">Default suite</span>
+            </a> <!-- navigator-link -->
+          </div> <!-- suite-header light-rounded-window-top -->
+          <div class="navigator-suite-content">
+            <div class="suite-section-title">
+              <span>Info</span>
+            </div> <!-- suite-section-title -->
+            <div class="suite-section-content">
+              <ul>
+                <li>
+                  <a href="#" class="navigator-link " panel-name="test-xml-Default_suite">
+                    <span>C:\Users\rdc486\AppData\Local\Temp\testng-eclipse-1411970732\testng-customsuite.xml</span>
+                  </a> <!-- navigator-link  -->
+                </li>
+                <li>
+                  <a href="#" class="navigator-link " panel-name="testlist-Default_suite">
+                    <span class="test-stats">1 test</span>
+                  </a> <!-- navigator-link  -->
+                </li>
+                <li>
+                  <a href="#" class="navigator-link " panel-name="group-Default_suite">
+                    <span>1 group</span>
+                  </a> <!-- navigator-link  -->
+                </li>
+                <li>
+                  <a href="#" class="navigator-link " panel-name="times-Default_suite">
+                    <span>Times</span>
+                  </a> <!-- navigator-link  -->
+                </li>
+                <li>
+                  <a href="#" class="navigator-link " panel-name="reporter-Default_suite">
+                    <span>Reporter output</span>
+                  </a> <!-- navigator-link  -->
+                </li>
+                <li>
+                  <a href="#" class="navigator-link " panel-name="ignored-methods-Default_suite">
+                    <span>Ignored methods</span>
+                  </a> <!-- navigator-link  -->
+                </li>
+                <li>
+                  <a href="#" class="navigator-link " panel-name="chronological-Default_suite">
+                    <span>Chronological view</span>
+                  </a> <!-- navigator-link  -->
+                </li>
+              </ul>
+            </div> <!-- suite-section-content -->
+            <div class="result-section">
+              <div class="suite-section-title">
+                <span>Results</span>
+              </div> <!-- suite-section-title -->
+              <div class="suite-section-content">
+                <ul>
+                  <li>
+                    <span class="method-stats">16 methods, 1 failed,  15 skipped,  </span>
+                  </li>
+                  <li>
+                    <span class="method-list-title failed">Failed methods</span>
+                    <span class="show-or-hide-methods failed">
+                      <a href="#" panel-name="suite-Default_suite" class="hide-methods failed suite-Default_suite"> (hide)</a> <!-- hide-methods failed suite-Default_suite -->
+                      <a href="#" panel-name="suite-Default_suite" class="show-methods failed suite-Default_suite"> (show)</a> <!-- show-methods failed suite-Default_suite -->
+                    </span>
+                    <div class="method-list-content failed suite-Default_suite">
+                      <span>
+                        <img width="3%" src="failed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Default_suite" title="com.testcases.System_JS" hash-for-method="AppGallery_test({Description=wait(3);
+validate1;
+link_Click(system_test_link);
+validate2;
+SelectTestToRun(VT200_0953...)">AppGallery_test({Description=wait(3);
+validate1;
+link_Click(system_test_link);
+validate2;
+SelectTestToRun(VT200_0953...)</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                    </div> <!-- method-list-content failed suite-Default_suite -->
+                  </li>
+                  <li>
+                    <span class="method-list-title skipped">Skipped methods</span>
+                    <span class="show-or-hide-methods skipped">
+                      <a href="#" panel-name="suite-Default_suite" class="hide-methods skipped suite-Default_suite"> (hide)</a> <!-- hide-methods skipped suite-Default_suite -->
+                      <a href="#" panel-name="suite-Default_suite" class="show-methods skipped suite-Default_suite"> (show)</a> <!-- show-methods skipped suite-Default_suite -->
+                    </span>
+                    <div class="method-list-content skipped suite-Default_suite">
+                      <span>
+                        <img width="3%" src="skipped.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Default_suite" title="com.testcases.System_JS" hash-for-method="AppGallery_test({Description=wait(3);
+validate1;
+link_Click(system_test_link);
+validate2;
+SelectTestToRun(VT200_0960...)">AppGallery_test({Description=wait(3);
+validate1;
+link_Click(system_test_link);
+validate2;
+SelectTestToRun(VT200_0960...)</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="skipped.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Default_suite" title="com.testcases.System_JS" hash-for-method="AppGallery_test({Description=wait(3);
+validate1;
+link_Click(system_test_link);
+validate2;
+SelectTestToRun(VT200_0958...)">AppGallery_test({Description=wait(3);
+validate1;
+link_Click(system_test_link);
+validate2;
+SelectTestToRun(VT200_0958...)</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="skipped.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Default_suite" title="com.testcases.System_JS" hash-for-method="AppGallery_test({Description=wait(3);
+validate1;
+link_Click(system_test_link);
+validate2;
+SelectTestToRun(VT200_0957...)">AppGallery_test({Description=wait(3);
+validate1;
+link_Click(system_test_link);
+validate2;
+SelectTestToRun(VT200_0957...)</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="skipped.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Default_suite" title="com.testcases.System_JS" hash-for-method="AppGallery_test({Description=wait(3);
+validate1;
+link_Click(system_test_link);
+validate2;
+SelectTestToRun(VT200_0959...)">AppGallery_test({Description=wait(3);
+validate1;
+link_Click(system_test_link);
+validate2;
+SelectTestToRun(VT200_0959...)</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="skipped.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Default_suite" title="com.testcases.System_JS" hash-for-method="AppGallery_test({Description=wait(3);
+validate1;
+link_Click(system_test_link);
+validate2;
+SelectTestToRun(VT200_0969...)">AppGallery_test({Description=wait(3);
+validate1;
+link_Click(system_test_link);
+validate2;
+SelectTestToRun(VT200_0969...)</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="skipped.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Default_suite" title="com.testcases.System_JS" hash-for-method="AppGallery_test({Description=wait(3);
+validate1;
+link_Click(system_test_link);
+validate2;
+SelectTestToRun(VT200_0965...)">AppGallery_test({Description=wait(3);
+validate1;
+link_Click(system_test_link);
+validate2;
+SelectTestToRun(VT200_0965...)</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="skipped.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Default_suite" title="com.testcases.System_JS" hash-for-method="AppGallery_test({Description=wait(3);
+validate1;
+link_Click(system_test_link);
+validate2;
+SelectTestToRun(VT200_0967...)">AppGallery_test({Description=wait(3);
+validate1;
+link_Click(system_test_link);
+validate2;
+SelectTestToRun(VT200_0967...)</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="skipped.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Default_suite" title="com.testcases.System_JS" hash-for-method="AppGallery_test({Description=wait(3);
+validate1;
+link_Click(system_test_link);
+validate2;
+SelectTestToRun(VT200_0952...)">AppGallery_test({Description=wait(3);
+validate1;
+link_Click(system_test_link);
+validate2;
+SelectTestToRun(VT200_0952...)</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="skipped.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Default_suite" title="com.testcases.System_JS" hash-for-method="AppGallery_test({Description=wait(3);
+validate1;
+link_Click(system_test_link);
+validate2;
+SelectTestToRun(VT200_0963...)">AppGallery_test({Description=wait(3);
+validate1;
+link_Click(system_test_link);
+validate2;
+SelectTestToRun(VT200_0963...)</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="skipped.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Default_suite" title="com.testcases.System_JS" hash-for-method="AppGallery_test({Description=wait(3);
+validate1;
+link_Click(system_test_link);
+validate2;
+SelectTestToRun(VT200_0951...)">AppGallery_test({Description=wait(3);
+validate1;
+link_Click(system_test_link);
+validate2;
+SelectTestToRun(VT200_0951...)</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="skipped.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Default_suite" title="com.testcases.System_JS" hash-for-method="AppGallery_test({Description=wait(3);
+validate1;
+link_Click(system_test_link);
+validate2;
+SelectTestToRun(VT200_0966...)">AppGallery_test({Description=wait(3);
+validate1;
+link_Click(system_test_link);
+validate2;
+SelectTestToRun(VT200_0966...)</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="skipped.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Default_suite" title="com.testcases.System_JS" hash-for-method="AppGallery_test({Description=wait(3);
+validate1;
+link_Click(system_test_link);
+validate2;
+SelectTestToRun(VT200_0962...)">AppGallery_test({Description=wait(3);
+validate1;
+link_Click(system_test_link);
+validate2;
+SelectTestToRun(VT200_0962...)</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="skipped.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Default_suite" title="com.testcases.System_JS" hash-for-method="AppGallery_test({Description=wait(3);
+validate1;
+link_Click(system_test_link);
+validate2;
+SelectTestToRun(VT200_0964...)">AppGallery_test({Description=wait(3);
+validate1;
+link_Click(system_test_link);
+validate2;
+SelectTestToRun(VT200_0964...)</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="skipped.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Default_suite" title="com.testcases.System_JS" hash-for-method="AppGallery_test({Description=wait(3);
+validate1;
+link_Click(system_test_link);
+validate2;
+SelectTestToRun(VT200_0968...)">AppGallery_test({Description=wait(3);
+validate1;
+link_Click(system_test_link);
+validate2;
+SelectTestToRun(VT200_0968...)</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="skipped.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Default_suite" title="com.testcases.System_JS" hash-for-method="AppGallery_test({Description=wait(3);
+validate1;
+link_Click(system_test_link);
+validate2;
+SelectTestToRun(VT200_0961...)">AppGallery_test({Description=wait(3);
+validate1;
+link_Click(system_test_link);
+validate2;
+SelectTestToRun(VT200_0961...)</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                    </div> <!-- method-list-content skipped suite-Default_suite -->
+                  </li>
+                </ul>
+              </div> <!-- suite-section-content -->
+            </div> <!-- result-section -->
+          </div> <!-- navigator-suite-content -->
+        </div> <!-- rounded-window -->
+      </div> <!-- suite -->
+    </div> <!-- navigator-root -->
+    <div class="wrapper">
+      <div class="main-panel-root">
+        <div panel-name="suite-Default_suite" class="panel Default_suite">
+          <div class="suite-Default_suite-class-failed">
+            <div class="main-panel-header rounded-window-top">
+              <img src="failed.png"/>
+              <span class="class-name">com.testcases.System_JS</span>
+            </div> <!-- main-panel-header rounded-window-top -->
+            <div class="main-panel-content rounded-window-bottom">
+              <div class="method">
+                <div class="method-content">
+                  <a name="AppGallery_test({Description=wait(3);
+validate1;
+link_Click(system_test_link);
+validate2;
+SelectTestToRun(VT200_0953...)">
+                  </a> <!-- AppGallery_test({Description=wait(3);
+validate1;
+link_Click(system_test_link);
+validate2;
+SelectTestToRun(VT200_0953...) -->
+                  <span class="method-name">AppGallery_test</span>
+                  <span class="parameters">({Description=wait(3);
+validate1;
+link_Click(system_test_link);
+validate2;
+SelectTestToRun(VT200_0953_string);
+ClickRunTest(runtest_top_xpath);
+validate3;
+ClickRunTest(runtest_bottom_xpath);
+validate4;, Automatable=A, Results=Fail, Subject=, Testcase ID=3.0, Expected Behaviour=validate1
+{
+validate_PageTitle=Compliance JS specs
+};
+validate2
+{
+validate_PageTitle=System JS Test
+};
+validate3
+{
+validate_Text_Exists=VT200-0953
+};
+validate4
+{
+validate_SystemProperties=getallproperties
+};, Prerequisites=, Steps=1.0, Testcase Objective=call getAllProperties(), Testcase Regression Level=1.0})</span>
+                  <div class="stack-trace">junit.framework.ComparisonFailure: null expected:&lt;[Pass]&gt; but was:&lt;[Fail]&gt;
+	at junit.framework.Assert.assertEquals(Assert.java:81)
+	at junit.framework.Assert.assertEquals(Assert.java:87)
+	at com.testcases.System_JS.AppGallery_test(System_JS.java:66)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:85)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:648)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:834)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1142)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:124)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:108)
+	at org.testng.TestRunner.privateRun(TestRunner.java:771)
+	at org.testng.TestRunner.run(TestRunner.java:621)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:357)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:352)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:310)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:259)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1176)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1101)
+	at org.testng.TestNG.run(TestNG.java:1009)
+	at org.testng.remote.RemoteTestNG.run(RemoteTestNG.java:111)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:204)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:175)
+
+</div> <!-- stack-trace -->
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+            </div> <!-- main-panel-content rounded-window-bottom -->
+          </div> <!-- suite-Default_suite-class-failed -->
+          <div class="suite-Default_suite-class-skipped">
+            <div class="main-panel-header rounded-window-top">
+              <img src="skipped.png"/>
+              <span class="class-name">com.testcases.System_JS</span>
+            </div> <!-- main-panel-header rounded-window-top -->
+            <div class="main-panel-content rounded-window-bottom">
+              <div class="method">
+                <div class="method-content">
+                  <a name="AppGallery_test({Description=wait(3);
+validate1;
+link_Click(system_test_link);
+validate2;
+SelectTestToRun(VT200_0960...)">
+                  </a> <!-- AppGallery_test({Description=wait(3);
+validate1;
+link_Click(system_test_link);
+validate2;
+SelectTestToRun(VT200_0960...) -->
+                  <span class="method-name">AppGallery_test</span>
+                  <span class="parameters">({Description=wait(3);
+validate1;
+link_Click(system_test_link);
+validate2;
+SelectTestToRun(VT200_0960_string);
+ClickRunTest(runtest_top_xpath);
+validate3;
+ClickRunTest(runtest_bottom_xpath);
+wait(2);
+ClickUIButtonText(OK);
+wait(5);
+SelectTestToRun(VT200_0958_string);
+ClickRunTest(runtest_top_xpath);
+validate4;
+ClickRunTest(runtest_bottom_xpath);
+wait(5);
+validate5;, Automatable=, Results=Pass, Subject=, Testcase ID=7.0, Expected Behaviour=validate1
+{
+validate_PageTitle=Compliance JS specs
+};
+validate2
+{
+validate_PageTitle=System JS Test
+};
+validate3
+{
+validate_Text_Exists=VT200-0960
+};
+validate4
+{
+validate_Text_Exists=VT200-0958
+};
+validate5
+{
+validate_Result=Application install status is:
+validate_Result=false, Prerequisites=, Steps=1.0, Testcase Objective=Call applicationUninstall with application name 'com.rhomobile.testapp', Testcase Regression Level=1.0})</span>
+                  <div class="stack-trace">org.testng.SkipException: Skipping the test as data set for automable as NA or Regression level not matching
+	at com.testcases.System_JS.AppGallery_test(System_JS.java:31)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:85)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:648)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:834)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1142)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:124)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:108)
+	at org.testng.TestRunner.privateRun(TestRunner.java:771)
+	at org.testng.TestRunner.run(TestRunner.java:621)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:357)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:352)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:310)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:259)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1176)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1101)
+	at org.testng.TestNG.run(TestNG.java:1009)
+	at org.testng.remote.RemoteTestNG.run(RemoteTestNG.java:111)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:204)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:175)
+
+</div> <!-- stack-trace -->
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="AppGallery_test({Description=wait(3);
+validate1;
+link_Click(system_test_link);
+validate2;
+SelectTestToRun(VT200_0958...)">
+                  </a> <!-- AppGallery_test({Description=wait(3);
+validate1;
+link_Click(system_test_link);
+validate2;
+SelectTestToRun(VT200_0958...) -->
+                  <span class="method-name">AppGallery_test</span>
+                  <span class="parameters">({Description=wait(3);
+validate1;
+link_Click(system_test_link);
+validate2;
+SelectTestToRun(VT200_0958_string);
+ClickRunTest(runtest_top_xpath);
+validate3;
+ClickRunTest(runtest_bottom_xpath);
+wait(5);
+validate4;, Automatable=, Results=Pass, Subject=, Testcase ID=5.0, Expected Behaviour=validate1
+{
+validate_PageTitle=Compliance JS specs
+};
+validate2
+{
+validate_PageTitle=System JS Test
+};
+validate3
+{
+validate_Text_Exists=VT200-0958
+};
+validate4
+{
+validate_Result=Application install status is:
+validate_Result=true
+};, Prerequisites=, Steps=1.0, Testcase Objective=Is TestApp.apk Application Installed Android, Testcase Regression Level=1.0})</span>
+                  <div class="stack-trace">org.testng.SkipException: Skipping the test as data set for automable as NA or Regression level not matching
+	at com.testcases.System_JS.AppGallery_test(System_JS.java:31)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:85)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:648)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:834)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1142)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:124)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:108)
+	at org.testng.TestRunner.privateRun(TestRunner.java:771)
+	at org.testng.TestRunner.run(TestRunner.java:621)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:357)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:352)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:310)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:259)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1176)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1101)
+	at org.testng.TestNG.run(TestNG.java:1009)
+	at org.testng.remote.RemoteTestNG.run(RemoteTestNG.java:111)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:204)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:175)
+
+</div> <!-- stack-trace -->
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="AppGallery_test({Description=wait(3);
+validate1;
+link_Click(system_test_link);
+validate2;
+SelectTestToRun(VT200_0957...)">
+                  </a> <!-- AppGallery_test({Description=wait(3);
+validate1;
+link_Click(system_test_link);
+validate2;
+SelectTestToRun(VT200_0957...) -->
+                  <span class="method-name">AppGallery_test</span>
+                  <span class="parameters">({Description=wait(3);
+validate1;
+link_Click(system_test_link);
+validate2;
+SelectTestToRun(VT200_0957_string);
+ClickRunTest(runtest_top_xpath);
+validate3;
+ClickRunTest(runtest_bottom_xpath);
+ClickUIButtonText(Install);
+ClickUIButtonText(Done);
+validate4;, Automatable=, Results=, Subject=, Testcase ID=4.0, Expected Behaviour=validate1
+{
+validate_PageTitle=Compliance JS specs
+};
+validate2
+{
+validate_PageTitle=System JS Test
+};
+validate3
+{
+validate_Text_Exists=VT200-0957 
+};
+validate4
+{
+validate_App_Exist_Device=com.rhomobile.testapp
+};, Prerequisites=, Steps=1.0, Testcase Objective=Application install for Android, Testcase Regression Level=1.0})</span>
+                  <div class="stack-trace">org.testng.SkipException: Skipping the test as data set for automable as NA or Regression level not matching
+	at com.testcases.System_JS.AppGallery_test(System_JS.java:31)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:85)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:648)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:834)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1142)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:124)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:108)
+	at org.testng.TestRunner.privateRun(TestRunner.java:771)
+	at org.testng.TestRunner.run(TestRunner.java:621)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:357)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:352)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:310)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:259)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1176)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1101)
+	at org.testng.TestNG.run(TestNG.java:1009)
+	at org.testng.remote.RemoteTestNG.run(RemoteTestNG.java:111)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:204)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:175)
+
+</div> <!-- stack-trace -->
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="AppGallery_test({Description=wait(3);
+validate1;
+link_Click(system_test_link);
+validate2;
+SelectTestToRun(VT200_0959...)">
+                  </a> <!-- AppGallery_test({Description=wait(3);
+validate1;
+link_Click(system_test_link);
+validate2;
+SelectTestToRun(VT200_0959...) -->
+                  <span class="method-name">AppGallery_test</span>
+                  <span class="parameters">({Description=wait(3);
+validate1;
+link_Click(system_test_link);
+validate2;
+SelectTestToRun(VT200_0959_string);
+ClickRunTest(runtest_top_xpath);
+validate3;
+ClickRunTest(runtest_bottom_xpath);
+validate4;
+press_Key(Back);, Automatable=, Results=Pass, Subject=, Testcase ID=6.0, Expected Behaviour=validate1
+{
+validate_PageTitle=Compliance JS specs
+};
+validate2
+{
+validate_PageTitle=System JS Test
+};
+validate3
+{
+validate_Text_Exists=VT200-0959
+};
+validate4
+{
+validate_App_Launched_Device=com.rhomobile.testapp
+};, Prerequisites=, Steps=1.0, Testcase Objective=Call runApplication with app name 'com.rhomobile.testapp, Testcase Regression Level=1.0})</span>
+                  <div class="stack-trace">org.testng.SkipException: Skipping the test as data set for automable as NA or Regression level not matching
+	at com.testcases.System_JS.AppGallery_test(System_JS.java:31)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:85)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:648)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:834)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1142)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:124)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:108)
+	at org.testng.TestRunner.privateRun(TestRunner.java:771)
+	at org.testng.TestRunner.run(TestRunner.java:621)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:357)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:352)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:310)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:259)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1176)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1101)
+	at org.testng.TestNG.run(TestNG.java:1009)
+	at org.testng.remote.RemoteTestNG.run(RemoteTestNG.java:111)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:204)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:175)
+
+</div> <!-- stack-trace -->
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="AppGallery_test({Description=wait(3);
+validate1;
+link_Click(system_test_link);
+validate2;
+SelectTestToRun(VT200_0969...)">
+                  </a> <!-- AppGallery_test({Description=wait(3);
+validate1;
+link_Click(system_test_link);
+validate2;
+SelectTestToRun(VT200_0969...) -->
+                  <span class="method-name">AppGallery_test</span>
+                  <span class="parameters">({Description=wait(3);
+validate1;
+link_Click(system_test_link);
+validate2;
+SelectTestToRun(VT200_0969_string);
+ClickRunTest(runtest_top_xpath);
+validate3;
+ClickRunTest(runtest_bottom_xpath);
+wait(15);
+TakeScreenshot(VT200-0969);
+validate4;, Automatable=, Results=, Subject=, Testcase ID=16.0, Expected Behaviour=validate1
+{
+validate_PageTitle=Compliance JS specs
+};
+validate2
+{
+validate_PageTitle=System JS Test
+};
+validate3
+{
+validate_Text_Exists=VT200-0969
+};
+validate4
+{
+validate_PageTitle=Google
+validate_Screenshot=VT200-0969
+};, Prerequisites=, Steps=1.0, Testcase Objective=Navigate to Google, Testcase Regression Level=1.0})</span>
+                  <div class="stack-trace">org.testng.SkipException: Skipping the test as data set for automable as NA or Regression level not matching
+	at com.testcases.System_JS.AppGallery_test(System_JS.java:31)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:85)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:648)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:834)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1142)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:124)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:108)
+	at org.testng.TestRunner.privateRun(TestRunner.java:771)
+	at org.testng.TestRunner.run(TestRunner.java:621)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:357)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:352)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:310)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:259)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1176)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1101)
+	at org.testng.TestNG.run(TestNG.java:1009)
+	at org.testng.remote.RemoteTestNG.run(RemoteTestNG.java:111)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:204)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:175)
+
+</div> <!-- stack-trace -->
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="AppGallery_test({Description=wait(3);
+validate1;
+link_Click(system_test_link);
+validate2;
+SelectTestToRun(VT200_0965...)">
+                  </a> <!-- AppGallery_test({Description=wait(3);
+validate1;
+link_Click(system_test_link);
+validate2;
+SelectTestToRun(VT200_0965...) -->
+                  <span class="method-name">AppGallery_test</span>
+                  <span class="parameters">({Description=wait(3);
+validate1;
+link_Click(system_test_link);
+validate2;
+SelectTestToRun(VT200_0965_string);
+ClickRunTest(runtest_top_xpath);
+validate3;
+ClickRunTest(runtest_bottom_xpath);
+validate4;, Automatable=, Results=Pass, Subject=, Testcase ID=12.0, Expected Behaviour=validate1
+{
+validate_PageTitle=Compliance JS specs
+};
+validate2
+{
+validate_PageTitle=System JS Test
+};
+validate3
+{
+validate_Text_Exists=VT200-0965
+};
+validate4
+{
+validate_SystemProperties=country
+};, Prerequisites=, Steps=1.0, Testcase Objective=call getproperties with country, Testcase Regression Level=1.0})</span>
+                  <div class="stack-trace">org.testng.SkipException: Skipping the test as data set for automable as NA or Regression level not matching
+	at com.testcases.System_JS.AppGallery_test(System_JS.java:31)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:85)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:648)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:834)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1142)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:124)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:108)
+	at org.testng.TestRunner.privateRun(TestRunner.java:771)
+	at org.testng.TestRunner.run(TestRunner.java:621)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:357)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:352)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:310)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:259)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1176)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1101)
+	at org.testng.TestNG.run(TestNG.java:1009)
+	at org.testng.remote.RemoteTestNG.run(RemoteTestNG.java:111)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:204)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:175)
+
+</div> <!-- stack-trace -->
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="AppGallery_test({Description=wait(3);
+validate1;
+link_Click(system_test_link);
+validate2;
+SelectTestToRun(VT200_0967...)">
+                  </a> <!-- AppGallery_test({Description=wait(3);
+validate1;
+link_Click(system_test_link);
+validate2;
+SelectTestToRun(VT200_0967...) -->
+                  <span class="method-name">AppGallery_test</span>
+                  <span class="parameters">({Description=wait(3);
+validate1;
+link_Click(system_test_link);
+validate2;
+SelectTestToRun(VT200_0967_string);
+ClickRunTest(runtest_top_xpath);
+validate3;
+ClickRunTest(runtest_bottom_xpath);
+validate4;, Automatable=, Results=Pass, Subject=, Testcase ID=14.0, Expected Behaviour=validate1
+{
+validate_PageTitle=Compliance JS specs
+};
+validate2
+{
+validate_PageTitle=System JS Test
+};
+validate3
+{
+validate_Text_Exists=VT200-0967
+};
+validate4
+{
+validate_SystemProperties=Platform
+};, Prerequisites=, Steps=1.0, Testcase Objective=call getproperties with platform, Testcase Regression Level=1.0})</span>
+                  <div class="stack-trace">org.testng.SkipException: Skipping the test as data set for automable as NA or Regression level not matching
+	at com.testcases.System_JS.AppGallery_test(System_JS.java:31)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:85)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:648)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:834)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1142)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:124)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:108)
+	at org.testng.TestRunner.privateRun(TestRunner.java:771)
+	at org.testng.TestRunner.run(TestRunner.java:621)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:357)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:352)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:310)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:259)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1176)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1101)
+	at org.testng.TestNG.run(TestNG.java:1009)
+	at org.testng.remote.RemoteTestNG.run(RemoteTestNG.java:111)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:204)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:175)
+
+</div> <!-- stack-trace -->
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="AppGallery_test({Description=wait(3);
+validate1;
+link_Click(system_test_link);
+validate2;
+SelectTestToRun(VT200_0952...)">
+                  </a> <!-- AppGallery_test({Description=wait(3);
+validate1;
+link_Click(system_test_link);
+validate2;
+SelectTestToRun(VT200_0952...) -->
+                  <span class="method-name">AppGallery_test</span>
+                  <span class="parameters">({Description=wait(3);
+validate1;
+link_Click(system_test_link);
+validate2;
+SelectTestToRun(VT200_0952_string);
+ClickRunTest(runtest_top_xpath);
+validate3;
+ClickRunTest(runtest_bottom_xpath);
+validate4;, Automatable=, Results=Pass, Subject=, Testcase ID=2.0, Expected Behaviour=validate1
+{
+validate_PageTitle=Compliance JS specs
+};
+validate2
+{
+validate_PageTitle=System JS Test
+};
+validate3
+{
+validate_Text_Exists=VT200-0952
+};
+validate4
+{
+validate_SystemProperties=deviceName
+};, Prerequisites=, Steps=1.0, Testcase Objective=call getProperty with deviceName, Testcase Regression Level=1.0})</span>
+                  <div class="stack-trace">org.testng.SkipException: Skipping the test as data set for automable as NA or Regression level not matching
+	at com.testcases.System_JS.AppGallery_test(System_JS.java:31)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:85)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:648)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:834)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1142)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:124)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:108)
+	at org.testng.TestRunner.privateRun(TestRunner.java:771)
+	at org.testng.TestRunner.run(TestRunner.java:621)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:357)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:352)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:310)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:259)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1176)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1101)
+	at org.testng.TestNG.run(TestNG.java:1009)
+	at org.testng.remote.RemoteTestNG.run(RemoteTestNG.java:111)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:204)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:175)
+
+</div> <!-- stack-trace -->
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="AppGallery_test({Description=wait(3);
+validate1;
+link_Click(system_test_link);
+validate2;
+SelectTestToRun(VT200_0963...)">
+                  </a> <!-- AppGallery_test({Description=wait(3);
+validate1;
+link_Click(system_test_link);
+validate2;
+SelectTestToRun(VT200_0963...) -->
+                  <span class="method-name">AppGallery_test</span>
+                  <span class="parameters">({Description=wait(3);
+validate1;
+link_Click(system_test_link);
+validate2;
+SelectTestToRun(VT200_0963_string);
+ClickRunTest(runtest_top_xpath);
+validate3;
+ClickRunTest(runtest_bottom_xpath);
+validate4;
+, Automatable=, Results=, Subject=, Testcase ID=10.0, Expected Behaviour=validate1
+{
+validate_PageTitle=Compliance JS specs
+};
+validate2
+{
+validate_PageTitle=System JS Test
+};
+validate3
+{
+validate_Text_Exists=VT200-0963
+};
+validate4
+{
+validate_Result=?
+};, Prerequisites=, Steps=1.0, Testcase Objective=call getStartParams() , Testcase Regression Level=1.0})</span>
+                  <div class="stack-trace">org.testng.SkipException: Skipping the test as data set for automable as NA or Regression level not matching
+	at com.testcases.System_JS.AppGallery_test(System_JS.java:31)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:85)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:648)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:834)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1142)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:124)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:108)
+	at org.testng.TestRunner.privateRun(TestRunner.java:771)
+	at org.testng.TestRunner.run(TestRunner.java:621)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:357)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:352)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:310)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:259)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1176)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1101)
+	at org.testng.TestNG.run(TestNG.java:1009)
+	at org.testng.remote.RemoteTestNG.run(RemoteTestNG.java:111)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:204)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:175)
+
+</div> <!-- stack-trace -->
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="AppGallery_test({Description=wait(3);
+validate1;
+link_Click(system_test_link);
+validate2;
+SelectTestToRun(VT200_0951...)">
+                  </a> <!-- AppGallery_test({Description=wait(3);
+validate1;
+link_Click(system_test_link);
+validate2;
+SelectTestToRun(VT200_0951...) -->
+                  <span class="method-name">AppGallery_test</span>
+                  <span class="parameters">({Description=wait(3);
+validate1;
+link_Click(system_test_link);
+validate2;
+SelectTestToRun(VT200_0951_string);
+ClickRunTest(runtest_top_xpath);
+validate3;
+ClickRunTest(runtest_bottom_xpath);
+validate4;, Automatable=, Results=Pass, Subject=System-JS, Testcase ID=1.0, Expected Behaviour=validate1
+{
+validate_PageTitle=Compliance JS specs
+};
+validate2
+{
+validate_PageTitle=System JS Test
+};
+validate3
+{
+validate_Text_Exists=VT200-0951
+};
+validate4
+{
+validate_SystemProperties=country
+};, Prerequisites=Connect Device with WIFI, Steps=1.0, Testcase Objective=call getProperty with country, Testcase Regression Level=1.0})</span>
+                  <div class="stack-trace">org.testng.SkipException: Skipping the test as data set for automable as NA or Regression level not matching
+	at com.testcases.System_JS.AppGallery_test(System_JS.java:31)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:85)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:648)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:834)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1142)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:124)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:108)
+	at org.testng.TestRunner.privateRun(TestRunner.java:771)
+	at org.testng.TestRunner.run(TestRunner.java:621)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:357)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:352)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:310)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:259)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1176)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1101)
+	at org.testng.TestNG.run(TestNG.java:1009)
+	at org.testng.remote.RemoteTestNG.run(RemoteTestNG.java:111)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:204)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:175)
+
+</div> <!-- stack-trace -->
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="AppGallery_test({Description=wait(3);
+validate1;
+link_Click(system_test_link);
+validate2;
+SelectTestToRun(VT200_0966...)">
+                  </a> <!-- AppGallery_test({Description=wait(3);
+validate1;
+link_Click(system_test_link);
+validate2;
+SelectTestToRun(VT200_0966...) -->
+                  <span class="method-name">AppGallery_test</span>
+                  <span class="parameters">({Description=wait(3);
+validate1;
+link_Click(system_test_link);
+validate2;
+SelectTestToRun(VT200_0966_string);
+ClickRunTest(runtest_top_xpath);
+validate3;
+ClickRunTest(runtest_bottom_xpath);
+validate4;, Automatable=, Results=Pass, Subject=, Testcase ID=13.0, Expected Behaviour=validate1
+{
+validate_PageTitle=Compliance JS specs
+};
+validate2
+{
+validate_PageTitle=System JS Test
+};
+validate3
+{
+validate_Text_Exists=VT200-0966
+};
+validate4
+{
+validate_SystemProperties=deviceName
+};, Prerequisites=, Steps=1.0, Testcase Objective=call getproperties with deviceName, Testcase Regression Level=1.0})</span>
+                  <div class="stack-trace">org.testng.SkipException: Skipping the test as data set for automable as NA or Regression level not matching
+	at com.testcases.System_JS.AppGallery_test(System_JS.java:31)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:85)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:648)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:834)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1142)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:124)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:108)
+	at org.testng.TestRunner.privateRun(TestRunner.java:771)
+	at org.testng.TestRunner.run(TestRunner.java:621)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:357)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:352)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:310)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:259)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1176)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1101)
+	at org.testng.TestNG.run(TestNG.java:1009)
+	at org.testng.remote.RemoteTestNG.run(RemoteTestNG.java:111)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:204)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:175)
+
+</div> <!-- stack-trace -->
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="AppGallery_test({Description=wait(3);
+validate1;
+link_Click(system_test_link);
+validate2;
+SelectTestToRun(VT200_0962...)">
+                  </a> <!-- AppGallery_test({Description=wait(3);
+validate1;
+link_Click(system_test_link);
+validate2;
+SelectTestToRun(VT200_0962...) -->
+                  <span class="method-name">AppGallery_test</span>
+                  <span class="parameters">({Description=wait(3);
+validate1;
+link_Click(system_test_link);
+validate2;
+SelectTestToRun(VT200_0962_string);
+ClickRunTest(runtest_top_xpath);
+validate3;
+ClickRunTest(runtest_bottom_xpath);
+validate4;, Automatable=, Results=Pass, Subject=, Testcase ID=9.0, Expected Behaviour=validate1
+{
+validate_PageTitle=Compliance JS specs
+};
+validate2
+{
+validate_PageTitle=System JS Test
+};
+validate3
+{
+validate_Text_Exists=VT200-0962
+};
+validate4
+{
+validate_Result=http://wwwgate0.mot.com:1080
+};, Prerequisites=, Steps=1.0, Testcase Objective=HTTP Proxy URI : Proxy should set successfully to http://wwwgate0.mot.com:1080, Testcase Regression Level=1.0})</span>
+                  <div class="stack-trace">org.testng.SkipException: Skipping the test as data set for automable as NA or Regression level not matching
+	at com.testcases.System_JS.AppGallery_test(System_JS.java:31)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:85)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:648)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:834)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1142)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:124)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:108)
+	at org.testng.TestRunner.privateRun(TestRunner.java:771)
+	at org.testng.TestRunner.run(TestRunner.java:621)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:357)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:352)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:310)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:259)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1176)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1101)
+	at org.testng.TestNG.run(TestNG.java:1009)
+	at org.testng.remote.RemoteTestNG.run(RemoteTestNG.java:111)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:204)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:175)
+
+</div> <!-- stack-trace -->
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="AppGallery_test({Description=wait(3);
+validate1;
+link_Click(system_test_link);
+validate2;
+SelectTestToRun(VT200_0964...)">
+                  </a> <!-- AppGallery_test({Description=wait(3);
+validate1;
+link_Click(system_test_link);
+validate2;
+SelectTestToRun(VT200_0964...) -->
+                  <span class="method-name">AppGallery_test</span>
+                  <span class="parameters">({Description=wait(3);
+validate1;
+link_Click(system_test_link);
+validate2;
+SelectTestToRun(VT200_0964_string);
+ClickRunTest(runtest_top_xpath);
+validate3;
+ClickRunTest(runtest_bottom_xpath);
+validate4;, Automatable=, Results=Pass, Subject=, Testcase ID=11.0, Expected Behaviour=validate1
+{
+validate_PageTitle=Compliance JS specs
+};
+validate2
+{
+validate_PageTitle=System JS Test
+};
+validate3
+{
+validate_Text_Exists=VT200-0964
+};
+validate4
+{
+validate_SystemProperties=getallproperties
+};, Prerequisites=, Steps=1.0, Testcase Objective=call getproperties with country,deviceName, devicePushId, freeServerPort and sync callback, Testcase Regression Level=1.0})</span>
+                  <div class="stack-trace">org.testng.SkipException: Skipping the test as data set for automable as NA or Regression level not matching
+	at com.testcases.System_JS.AppGallery_test(System_JS.java:31)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:85)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:648)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:834)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1142)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:124)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:108)
+	at org.testng.TestRunner.privateRun(TestRunner.java:771)
+	at org.testng.TestRunner.run(TestRunner.java:621)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:357)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:352)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:310)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:259)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1176)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1101)
+	at org.testng.TestNG.run(TestNG.java:1009)
+	at org.testng.remote.RemoteTestNG.run(RemoteTestNG.java:111)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:204)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:175)
+
+</div> <!-- stack-trace -->
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="AppGallery_test({Description=wait(3);
+validate1;
+link_Click(system_test_link);
+validate2;
+SelectTestToRun(VT200_0968...)">
+                  </a> <!-- AppGallery_test({Description=wait(3);
+validate1;
+link_Click(system_test_link);
+validate2;
+SelectTestToRun(VT200_0968...) -->
+                  <span class="method-name">AppGallery_test</span>
+                  <span class="parameters">({Description=wait(3);
+validate1;
+link_Click(system_test_link);
+validate2;
+SelectTestToRun(VT200_0968_string);
+ClickRunTest(runtest_top_xpath);
+validate3;
+ClickRunTest(runtest_bottom_xpath);
+validate4;, Automatable=, Results=Fail, Subject=, Testcase ID=15.0, Expected Behaviour=validate1
+{
+validate_PageTitle=Compliance JS specs
+};
+validate2
+{
+validate_PageTitle=System JS Test
+};
+validate3
+{
+validate_Text_Exists=VT200-0968
+};
+validate4
+{
+validate_SystemProperties=deviceName
+validate_SystemProperties=country
+validate_SystemProperties=devicePushId
+validate_SystemProperties=freeServerPort
+};, Prerequisites=, Steps=1.0, Testcase Objective=call getproperties with callback as async defined function, Testcase Regression Level=1.0})</span>
+                  <div class="stack-trace">org.testng.SkipException: Skipping the test as data set for automable as NA or Regression level not matching
+	at com.testcases.System_JS.AppGallery_test(System_JS.java:31)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:85)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:648)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:834)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1142)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:124)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:108)
+	at org.testng.TestRunner.privateRun(TestRunner.java:771)
+	at org.testng.TestRunner.run(TestRunner.java:621)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:357)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:352)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:310)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:259)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1176)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1101)
+	at org.testng.TestNG.run(TestNG.java:1009)
+	at org.testng.remote.RemoteTestNG.run(RemoteTestNG.java:111)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:204)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:175)
+
+</div> <!-- stack-trace -->
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="AppGallery_test({Description=wait(3);
+validate1;
+link_Click(system_test_link);
+validate2;
+SelectTestToRun(VT200_0961...)">
+                  </a> <!-- AppGallery_test({Description=wait(3);
+validate1;
+link_Click(system_test_link);
+validate2;
+SelectTestToRun(VT200_0961...) -->
+                  <span class="method-name">AppGallery_test</span>
+                  <span class="parameters">({Description=wait(3);
+validate1;
+link_Click(system_test_link);
+validate2;
+SelectTestToRun(VT200_0961_string);
+ClickRunTest(runtest_top_xpath);
+validate3;
+ClickRunTest(runtest_bottom_xpath);
+wait(10);
+validate4;
+TakeScreenshot(VT200-0961);
+validate5;
+press_Key(Back);, Automatable=, Results=, Subject=, Testcase ID=8.0, Expected Behaviour=validate1
+{
+validate_PageTitle=Compliance JS specs
+};
+validate2
+{
+validate_PageTitle=System JS Test
+};
+validate3
+{
+validate_Text_Exists=VT200-0961
+};
+validate4
+{
+validate_App_Launched_Device=com.android.browser
+};
+validate5
+{
+validate_Screenshot=VT200-0961
+};, Prerequisites=, Steps=1.0, Testcase Objective=call openUrl() with http://www.google.co.in, Testcase Regression Level=1.0})</span>
+                  <div class="stack-trace">org.testng.SkipException: Skipping the test as data set for automable as NA or Regression level not matching
+	at com.testcases.System_JS.AppGallery_test(System_JS.java:31)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:85)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:648)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:834)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1142)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:124)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:108)
+	at org.testng.TestRunner.privateRun(TestRunner.java:771)
+	at org.testng.TestRunner.run(TestRunner.java:621)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:357)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:352)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:310)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:259)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1176)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1101)
+	at org.testng.TestNG.run(TestNG.java:1009)
+	at org.testng.remote.RemoteTestNG.run(RemoteTestNG.java:111)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:204)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:175)
+
+</div> <!-- stack-trace -->
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+            </div> <!-- main-panel-content rounded-window-bottom -->
+          </div> <!-- suite-Default_suite-class-skipped -->
+        </div> <!-- panel Default_suite -->
+        <div panel-name="test-xml-Default_suite" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">C:\Users\rdc486\AppData\Local\Temp\testng-eclipse-1411970732\testng-customsuite.xml</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+            <pre>
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;!DOCTYPE suite SYSTEM &quot;http://testng.org/testng-1.0.dtd&quot;&gt;
+&lt;suite guice-stage=&quot;DEVELOPMENT&quot; name=&quot;Default suite&quot;&gt;
+  &lt;test verbose=&quot;2&quot; name=&quot;Default test&quot;&gt;
+    &lt;classes&gt;
+      &lt;class name=&quot;com.testcases.System_JS&quot;/&gt;
+    &lt;/classes&gt;
+  &lt;/test&gt; &lt;!-- Default test --&gt;
+&lt;/suite&gt; &lt;!-- Default suite --&gt;
+            </pre>
+          </div> <!-- main-panel-content rounded-window-bottom -->
+        </div> <!-- panel -->
+        <div panel-name="testlist-Default_suite" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">Tests for Default suite</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+            <ul>
+              <li>
+                <span class="test-name">Default test (1 class)</span>
+              </li>
+            </ul>
+          </div> <!-- main-panel-content rounded-window-bottom -->
+        </div> <!-- panel -->
+        <div panel-name="group-Default_suite" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">Groups for Default suite</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+            <div class="test-group">
+              <span class="test-group-name">System_JS</span>
+              <br/>
+              <div class="method-in-group">
+                <span class="method-in-group-name">AppGallery_test</span>
+                <br/>
+              </div> <!-- method-in-group -->
+            </div> <!-- test-group -->
+          </div> <!-- main-panel-content rounded-window-bottom -->
+        </div> <!-- panel -->
+        <div panel-name="times-Default_suite" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">Times for Default suite</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+            <div class="times-div">
+              <script type="text/javascript">
+suiteTableInitFunctions.push('tableData_Default_suite');
+function tableData_Default_suite() {
+var data = new google.visualization.DataTable();
+data.addColumn('number', 'Number');
+data.addColumn('string', 'Method');
+data.addColumn('string', 'Class');
+data.addColumn('number', 'Time (ms)');
+data.addRows(16);
+data.setCell(0, 0, 0)
+data.setCell(0, 1, 'AppGallery_test')
+data.setCell(0, 2, 'com.testcases.System_JS')
+data.setCell(0, 3, 149702);
+data.setCell(1, 0, 1)
+data.setCell(1, 1, 'AppGallery_test')
+data.setCell(1, 2, 'com.testcases.System_JS')
+data.setCell(1, 3, 6);
+data.setCell(2, 0, 2)
+data.setCell(2, 1, 'AppGallery_test')
+data.setCell(2, 2, 'com.testcases.System_JS')
+data.setCell(2, 3, 1);
+data.setCell(3, 0, 3)
+data.setCell(3, 1, 'AppGallery_test')
+data.setCell(3, 2, 'com.testcases.System_JS')
+data.setCell(3, 3, 1);
+data.setCell(4, 0, 4)
+data.setCell(4, 1, 'AppGallery_test')
+data.setCell(4, 2, 'com.testcases.System_JS')
+data.setCell(4, 3, 1);
+data.setCell(5, 0, 5)
+data.setCell(5, 1, 'AppGallery_test')
+data.setCell(5, 2, 'com.testcases.System_JS')
+data.setCell(5, 3, 1);
+data.setCell(6, 0, 6)
+data.setCell(6, 1, 'AppGallery_test')
+data.setCell(6, 2, 'com.testcases.System_JS')
+data.setCell(6, 3, 0);
+data.setCell(7, 0, 7)
+data.setCell(7, 1, 'AppGallery_test')
+data.setCell(7, 2, 'com.testcases.System_JS')
+data.setCell(7, 3, 0);
+data.setCell(8, 0, 8)
+data.setCell(8, 1, 'AppGallery_test')
+data.setCell(8, 2, 'com.testcases.System_JS')
+data.setCell(8, 3, 0);
+data.setCell(9, 0, 9)
+data.setCell(9, 1, 'AppGallery_test')
+data.setCell(9, 2, 'com.testcases.System_JS')
+data.setCell(9, 3, 0);
+data.setCell(10, 0, 10)
+data.setCell(10, 1, 'AppGallery_test')
+data.setCell(10, 2, 'com.testcases.System_JS')
+data.setCell(10, 3, 0);
+data.setCell(11, 0, 11)
+data.setCell(11, 1, 'AppGallery_test')
+data.setCell(11, 2, 'com.testcases.System_JS')
+data.setCell(11, 3, 0);
+data.setCell(12, 0, 12)
+data.setCell(12, 1, 'AppGallery_test')
+data.setCell(12, 2, 'com.testcases.System_JS')
+data.setCell(12, 3, 0);
+data.setCell(13, 0, 13)
+data.setCell(13, 1, 'AppGallery_test')
+data.setCell(13, 2, 'com.testcases.System_JS')
+data.setCell(13, 3, 0);
+data.setCell(14, 0, 14)
+data.setCell(14, 1, 'AppGallery_test')
+data.setCell(14, 2, 'com.testcases.System_JS')
+data.setCell(14, 3, 0);
+data.setCell(15, 0, 15)
+data.setCell(15, 1, 'AppGallery_test')
+data.setCell(15, 2, 'com.testcases.System_JS')
+data.setCell(15, 3, 0);
+window.suiteTableData['Default_suite']= { tableData: data, tableDiv: 'times-div-Default_suite'}
+return data;
+}
+              </script>
+              <span class="suite-total-time">Total running time: 2 minutes</span>
+              <div id="times-div-Default_suite">
+              </div> <!-- times-div-Default_suite -->
+            </div> <!-- times-div -->
+          </div> <!-- main-panel-content rounded-window-bottom -->
+        </div> <!-- panel -->
+        <div panel-name="reporter-Default_suite" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">Reporter output for Default suite</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+          </div> <!-- main-panel-content rounded-window-bottom -->
+        </div> <!-- panel -->
+        <div panel-name="ignored-methods-Default_suite" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">0 ignored methods</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+          </div> <!-- main-panel-content rounded-window-bottom -->
+        </div> <!-- panel -->
+        <div panel-name="chronological-Default_suite" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">Methods in chronological order</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+            <div class="chronological-class">
+              <div class="chronological-class-name">com.testcases.System_JS</div> <!-- chronological-class-name -->
+              <div class="test-method">
+                <span class="method-name">AppGallery_test({Description=wait(3);
+validate1;
+link_Click(system_test_link);
+validate2;
+SelectTestToRun(VT200_0951...)</span>
+                <span class="method-start">0 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">AppGallery_test({Description=wait(3);
+validate1;
+link_Click(system_test_link);
+validate2;
+SelectTestToRun(VT200_0952...)</span>
+                <span class="method-start">7 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <img src="failed.png">
+                </img>
+                <span class="method-name">AppGallery_test({Description=wait(3);
+validate1;
+link_Click(system_test_link);
+validate2;
+SelectTestToRun(VT200_0953...)</span>
+                <span class="method-start">7 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">AppGallery_test({Description=wait(3);
+validate1;
+link_Click(system_test_link);
+validate2;
+SelectTestToRun(VT200_0957...)</span>
+                <span class="method-start">149711 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">AppGallery_test({Description=wait(3);
+validate1;
+link_Click(system_test_link);
+validate2;
+SelectTestToRun(VT200_0958...)</span>
+                <span class="method-start">149712 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">AppGallery_test({Description=wait(3);
+validate1;
+link_Click(system_test_link);
+validate2;
+SelectTestToRun(VT200_0959...)</span>
+                <span class="method-start">149712 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">AppGallery_test({Description=wait(3);
+validate1;
+link_Click(system_test_link);
+validate2;
+SelectTestToRun(VT200_0960...)</span>
+                <span class="method-start">149713 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">AppGallery_test({Description=wait(3);
+validate1;
+link_Click(system_test_link);
+validate2;
+SelectTestToRun(VT200_0961...)</span>
+                <span class="method-start">149714 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">AppGallery_test({Description=wait(3);
+validate1;
+link_Click(system_test_link);
+validate2;
+SelectTestToRun(VT200_0962...)</span>
+                <span class="method-start">149714 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">AppGallery_test({Description=wait(3);
+validate1;
+link_Click(system_test_link);
+validate2;
+SelectTestToRun(VT200_0963...)</span>
+                <span class="method-start">149715 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">AppGallery_test({Description=wait(3);
+validate1;
+link_Click(system_test_link);
+validate2;
+SelectTestToRun(VT200_0964...)</span>
+                <span class="method-start">149715 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">AppGallery_test({Description=wait(3);
+validate1;
+link_Click(system_test_link);
+validate2;
+SelectTestToRun(VT200_0965...)</span>
+                <span class="method-start">149716 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">AppGallery_test({Description=wait(3);
+validate1;
+link_Click(system_test_link);
+validate2;
+SelectTestToRun(VT200_0966...)</span>
+                <span class="method-start">149717 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">AppGallery_test({Description=wait(3);
+validate1;
+link_Click(system_test_link);
+validate2;
+SelectTestToRun(VT200_0967...)</span>
+                <span class="method-start">149717 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">AppGallery_test({Description=wait(3);
+validate1;
+link_Click(system_test_link);
+validate2;
+SelectTestToRun(VT200_0968...)</span>
+                <span class="method-start">149717 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">AppGallery_test({Description=wait(3);
+validate1;
+link_Click(system_test_link);
+validate2;
+SelectTestToRun(VT200_0969...)</span>
+                <span class="method-start">149718 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-class after">
+                <span class="method-name">disable_Flightmode</span>
+                <span class="method-start">149719 ms</span>
+              </div> <!-- configuration-class after -->
+          </div> <!-- main-panel-content rounded-window-bottom -->
+        </div> <!-- panel -->
+      </div> <!-- main-panel-root -->
+    </div> <!-- wrapper -->
+  </body>
+</html>

@@ -1,0 +1,1142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="15" failed="1" total="16" passed="0">
+  <reporter-output>
+  </reporter-output>
+  <suite name="Default suite" duration-ms="191887" started-at="2015-07-26T11:48:42Z" finished-at="2015-07-26T11:51:53Z">
+    <groups>
+      <group name="System_JS">
+        <method signature="System_JS.AppGallery_test(java.util.Hashtable)[pri:0, instance:com.testcases.System_JS@3b6eb2ec]" name="AppGallery_test" class="com.testcases.System_JS"/>
+      </group> <!-- System_JS -->
+    </groups>
+    <test name="Default test" duration-ms="191887" started-at="2015-07-26T11:48:42Z" finished-at="2015-07-26T11:51:53Z">
+      <class name="com.testcases.System_JS">
+        <test-method status="SKIP" signature="AppGallery_test(java.util.Hashtable)[pri:0, instance:com.testcases.System_JS@3b6eb2ec]" name="AppGallery_test" duration-ms="6" started-at="2015-07-26T17:18:42Z" data-provider="getData" finished-at="2015-07-26T17:18:42Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[{Description=wait(3);
+validate1;
+link_Click(system_test_link);
+validate2;
+SelectTestToRun(VT200_0951_string);
+ClickRunTest(runtest_top_xpath);
+validate3;
+ClickRunTest(runtest_bottom_xpath);
+validate4;, Automatable=, Results=Pass, Subject=System-JS, Testcase ID=1.0, Expected Behaviour=validate1
+{
+validate_PageTitle=Compliance JS specs
+};
+validate2
+{
+validate_PageTitle=System JS Test
+};
+validate3
+{
+validate_Text_Exists=VT200-0951
+};
+validate4
+{
+validate_SystemProperties=country
+};, Prerequisites=Connect Device with WIFI, Steps=1.0, Testcase Objective=call getProperty with country, Testcase Regression Level=1.0}]]>
+              </value>
+            </param>
+          </params>
+          <exception class="org.testng.SkipException">
+            <message>
+              <![CDATA[Skipping the test as data set for automable as NA or Regression level not matching]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[org.testng.SkipException: Skipping the test as data set for automable as NA or Regression level not matching
+	at com.testcases.System_JS.AppGallery_test(System_JS.java:31)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:85)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:648)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:834)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1142)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:124)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:108)
+	at org.testng.TestRunner.privateRun(TestRunner.java:771)
+	at org.testng.TestRunner.run(TestRunner.java:621)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:357)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:352)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:310)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:259)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1176)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1101)
+	at org.testng.TestNG.run(TestNG.java:1009)
+	at org.testng.remote.RemoteTestNG.run(RemoteTestNG.java:111)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:204)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:175)
+]]>
+            </full-stacktrace>
+          </exception> <!-- org.testng.SkipException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- AppGallery_test -->
+        <test-method status="FAIL" signature="AppGallery_test(java.util.Hashtable)[pri:0, instance:com.testcases.System_JS@3b6eb2ec]" name="AppGallery_test" duration-ms="149702" started-at="2015-07-26T17:18:42Z" data-provider="getData" finished-at="2015-07-26T17:21:12Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[{Description=wait(3);
+validate1;
+link_Click(system_test_link);
+validate2;
+SelectTestToRun(VT200_0953_string);
+ClickRunTest(runtest_top_xpath);
+validate3;
+ClickRunTest(runtest_bottom_xpath);
+validate4;, Automatable=A, Results=Fail, Subject=, Testcase ID=3.0, Expected Behaviour=validate1
+{
+validate_PageTitle=Compliance JS specs
+};
+validate2
+{
+validate_PageTitle=System JS Test
+};
+validate3
+{
+validate_Text_Exists=VT200-0953
+};
+validate4
+{
+validate_SystemProperties=getallproperties
+};, Prerequisites=, Steps=1.0, Testcase Objective=call getAllProperties(), Testcase Regression Level=1.0}]]>
+              </value>
+            </param>
+          </params>
+          <exception class="junit.framework.ComparisonFailure">
+            <message>
+              <![CDATA[null expected:<[Pass]> but was:<[Fail]>]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[junit.framework.ComparisonFailure: null expected:<[Pass]> but was:<[Fail]>
+	at junit.framework.Assert.assertEquals(Assert.java:81)
+	at junit.framework.Assert.assertEquals(Assert.java:87)
+	at com.testcases.System_JS.AppGallery_test(System_JS.java:66)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:85)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:648)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:834)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1142)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:124)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:108)
+	at org.testng.TestRunner.privateRun(TestRunner.java:771)
+	at org.testng.TestRunner.run(TestRunner.java:621)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:357)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:352)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:310)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:259)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1176)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1101)
+	at org.testng.TestNG.run(TestNG.java:1009)
+	at org.testng.remote.RemoteTestNG.run(RemoteTestNG.java:111)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:204)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:175)
+]]>
+            </full-stacktrace>
+          </exception> <!-- junit.framework.ComparisonFailure -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- AppGallery_test -->
+        <test-method status="SKIP" signature="AppGallery_test(java.util.Hashtable)[pri:0, instance:com.testcases.System_JS@3b6eb2ec]" name="AppGallery_test" duration-ms="0" started-at="2015-07-26T17:18:42Z" data-provider="getData" finished-at="2015-07-26T17:18:42Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[{Description=wait(3);
+validate1;
+link_Click(system_test_link);
+validate2;
+SelectTestToRun(VT200_0952_string);
+ClickRunTest(runtest_top_xpath);
+validate3;
+ClickRunTest(runtest_bottom_xpath);
+validate4;, Automatable=, Results=Pass, Subject=, Testcase ID=2.0, Expected Behaviour=validate1
+{
+validate_PageTitle=Compliance JS specs
+};
+validate2
+{
+validate_PageTitle=System JS Test
+};
+validate3
+{
+validate_Text_Exists=VT200-0952
+};
+validate4
+{
+validate_SystemProperties=deviceName
+};, Prerequisites=, Steps=1.0, Testcase Objective=call getProperty with deviceName, Testcase Regression Level=1.0}]]>
+              </value>
+            </param>
+          </params>
+          <exception class="org.testng.SkipException">
+            <message>
+              <![CDATA[Skipping the test as data set for automable as NA or Regression level not matching]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[org.testng.SkipException: Skipping the test as data set for automable as NA or Regression level not matching
+	at com.testcases.System_JS.AppGallery_test(System_JS.java:31)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:85)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:648)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:834)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1142)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:124)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:108)
+	at org.testng.TestRunner.privateRun(TestRunner.java:771)
+	at org.testng.TestRunner.run(TestRunner.java:621)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:357)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:352)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:310)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:259)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1176)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1101)
+	at org.testng.TestNG.run(TestNG.java:1009)
+	at org.testng.remote.RemoteTestNG.run(RemoteTestNG.java:111)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:204)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:175)
+]]>
+            </full-stacktrace>
+          </exception> <!-- org.testng.SkipException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- AppGallery_test -->
+        <test-method status="SKIP" signature="AppGallery_test(java.util.Hashtable)[pri:0, instance:com.testcases.System_JS@3b6eb2ec]" name="AppGallery_test" duration-ms="0" started-at="2015-07-26T17:21:12Z" data-provider="getData" finished-at="2015-07-26T17:21:12Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[{Description=wait(3);
+validate1;
+link_Click(system_test_link);
+validate2;
+SelectTestToRun(VT200_0957_string);
+ClickRunTest(runtest_top_xpath);
+validate3;
+ClickRunTest(runtest_bottom_xpath);
+ClickUIButtonText(Install);
+ClickUIButtonText(Done);
+validate4;, Automatable=, Results=, Subject=, Testcase ID=4.0, Expected Behaviour=validate1
+{
+validate_PageTitle=Compliance JS specs
+};
+validate2
+{
+validate_PageTitle=System JS Test
+};
+validate3
+{
+validate_Text_Exists=VT200-0957 
+};
+validate4
+{
+validate_App_Exist_Device=com.rhomobile.testapp
+};, Prerequisites=, Steps=1.0, Testcase Objective=Application install for Android, Testcase Regression Level=1.0}]]>
+              </value>
+            </param>
+          </params>
+          <exception class="org.testng.SkipException">
+            <message>
+              <![CDATA[Skipping the test as data set for automable as NA or Regression level not matching]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[org.testng.SkipException: Skipping the test as data set for automable as NA or Regression level not matching
+	at com.testcases.System_JS.AppGallery_test(System_JS.java:31)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:85)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:648)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:834)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1142)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:124)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:108)
+	at org.testng.TestRunner.privateRun(TestRunner.java:771)
+	at org.testng.TestRunner.run(TestRunner.java:621)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:357)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:352)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:310)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:259)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1176)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1101)
+	at org.testng.TestNG.run(TestNG.java:1009)
+	at org.testng.remote.RemoteTestNG.run(RemoteTestNG.java:111)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:204)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:175)
+]]>
+            </full-stacktrace>
+          </exception> <!-- org.testng.SkipException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- AppGallery_test -->
+        <test-method status="SKIP" signature="AppGallery_test(java.util.Hashtable)[pri:0, instance:com.testcases.System_JS@3b6eb2ec]" name="AppGallery_test" duration-ms="0" started-at="2015-07-26T17:21:12Z" data-provider="getData" finished-at="2015-07-26T17:21:12Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[{Description=wait(3);
+validate1;
+link_Click(system_test_link);
+validate2;
+SelectTestToRun(VT200_0958_string);
+ClickRunTest(runtest_top_xpath);
+validate3;
+ClickRunTest(runtest_bottom_xpath);
+wait(5);
+validate4;, Automatable=, Results=Pass, Subject=, Testcase ID=5.0, Expected Behaviour=validate1
+{
+validate_PageTitle=Compliance JS specs
+};
+validate2
+{
+validate_PageTitle=System JS Test
+};
+validate3
+{
+validate_Text_Exists=VT200-0958
+};
+validate4
+{
+validate_Result=Application install status is:
+validate_Result=true
+};, Prerequisites=, Steps=1.0, Testcase Objective=Is TestApp.apk Application Installed Android, Testcase Regression Level=1.0}]]>
+              </value>
+            </param>
+          </params>
+          <exception class="org.testng.SkipException">
+            <message>
+              <![CDATA[Skipping the test as data set for automable as NA or Regression level not matching]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[org.testng.SkipException: Skipping the test as data set for automable as NA or Regression level not matching
+	at com.testcases.System_JS.AppGallery_test(System_JS.java:31)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:85)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:648)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:834)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1142)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:124)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:108)
+	at org.testng.TestRunner.privateRun(TestRunner.java:771)
+	at org.testng.TestRunner.run(TestRunner.java:621)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:357)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:352)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:310)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:259)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1176)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1101)
+	at org.testng.TestNG.run(TestNG.java:1009)
+	at org.testng.remote.RemoteTestNG.run(RemoteTestNG.java:111)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:204)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:175)
+]]>
+            </full-stacktrace>
+          </exception> <!-- org.testng.SkipException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- AppGallery_test -->
+        <test-method status="SKIP" signature="AppGallery_test(java.util.Hashtable)[pri:0, instance:com.testcases.System_JS@3b6eb2ec]" name="AppGallery_test" duration-ms="1" started-at="2015-07-26T17:21:12Z" data-provider="getData" finished-at="2015-07-26T17:21:12Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[{Description=wait(3);
+validate1;
+link_Click(system_test_link);
+validate2;
+SelectTestToRun(VT200_0959_string);
+ClickRunTest(runtest_top_xpath);
+validate3;
+ClickRunTest(runtest_bottom_xpath);
+validate4;
+press_Key(Back);, Automatable=, Results=Pass, Subject=, Testcase ID=6.0, Expected Behaviour=validate1
+{
+validate_PageTitle=Compliance JS specs
+};
+validate2
+{
+validate_PageTitle=System JS Test
+};
+validate3
+{
+validate_Text_Exists=VT200-0959
+};
+validate4
+{
+validate_App_Launched_Device=com.rhomobile.testapp
+};, Prerequisites=, Steps=1.0, Testcase Objective=Call runApplication with app name 'com.rhomobile.testapp, Testcase Regression Level=1.0}]]>
+              </value>
+            </param>
+          </params>
+          <exception class="org.testng.SkipException">
+            <message>
+              <![CDATA[Skipping the test as data set for automable as NA or Regression level not matching]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[org.testng.SkipException: Skipping the test as data set for automable as NA or Regression level not matching
+	at com.testcases.System_JS.AppGallery_test(System_JS.java:31)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:85)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:648)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:834)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1142)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:124)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:108)
+	at org.testng.TestRunner.privateRun(TestRunner.java:771)
+	at org.testng.TestRunner.run(TestRunner.java:621)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:357)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:352)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:310)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:259)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1176)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1101)
+	at org.testng.TestNG.run(TestNG.java:1009)
+	at org.testng.remote.RemoteTestNG.run(RemoteTestNG.java:111)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:204)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:175)
+]]>
+            </full-stacktrace>
+          </exception> <!-- org.testng.SkipException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- AppGallery_test -->
+        <test-method status="SKIP" signature="AppGallery_test(java.util.Hashtable)[pri:0, instance:com.testcases.System_JS@3b6eb2ec]" name="AppGallery_test" duration-ms="0" started-at="2015-07-26T17:21:12Z" data-provider="getData" finished-at="2015-07-26T17:21:12Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[{Description=wait(3);
+validate1;
+link_Click(system_test_link);
+validate2;
+SelectTestToRun(VT200_0960_string);
+ClickRunTest(runtest_top_xpath);
+validate3;
+ClickRunTest(runtest_bottom_xpath);
+wait(2);
+ClickUIButtonText(OK);
+wait(5);
+SelectTestToRun(VT200_0958_string);
+ClickRunTest(runtest_top_xpath);
+validate4;
+ClickRunTest(runtest_bottom_xpath);
+wait(5);
+validate5;, Automatable=, Results=Pass, Subject=, Testcase ID=7.0, Expected Behaviour=validate1
+{
+validate_PageTitle=Compliance JS specs
+};
+validate2
+{
+validate_PageTitle=System JS Test
+};
+validate3
+{
+validate_Text_Exists=VT200-0960
+};
+validate4
+{
+validate_Text_Exists=VT200-0958
+};
+validate5
+{
+validate_Result=Application install status is:
+validate_Result=false, Prerequisites=, Steps=1.0, Testcase Objective=Call applicationUninstall with application name 'com.rhomobile.testapp', Testcase Regression Level=1.0}]]>
+              </value>
+            </param>
+          </params>
+          <exception class="org.testng.SkipException">
+            <message>
+              <![CDATA[Skipping the test as data set for automable as NA or Regression level not matching]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[org.testng.SkipException: Skipping the test as data set for automable as NA or Regression level not matching
+	at com.testcases.System_JS.AppGallery_test(System_JS.java:31)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:85)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:648)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:834)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1142)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:124)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:108)
+	at org.testng.TestRunner.privateRun(TestRunner.java:771)
+	at org.testng.TestRunner.run(TestRunner.java:621)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:357)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:352)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:310)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:259)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1176)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1101)
+	at org.testng.TestNG.run(TestNG.java:1009)
+	at org.testng.remote.RemoteTestNG.run(RemoteTestNG.java:111)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:204)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:175)
+]]>
+            </full-stacktrace>
+          </exception> <!-- org.testng.SkipException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- AppGallery_test -->
+        <test-method status="SKIP" signature="AppGallery_test(java.util.Hashtable)[pri:0, instance:com.testcases.System_JS@3b6eb2ec]" name="AppGallery_test" duration-ms="1" started-at="2015-07-26T17:21:12Z" data-provider="getData" finished-at="2015-07-26T17:21:12Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[{Description=wait(3);
+validate1;
+link_Click(system_test_link);
+validate2;
+SelectTestToRun(VT200_0962_string);
+ClickRunTest(runtest_top_xpath);
+validate3;
+ClickRunTest(runtest_bottom_xpath);
+validate4;, Automatable=, Results=Pass, Subject=, Testcase ID=9.0, Expected Behaviour=validate1
+{
+validate_PageTitle=Compliance JS specs
+};
+validate2
+{
+validate_PageTitle=System JS Test
+};
+validate3
+{
+validate_Text_Exists=VT200-0962
+};
+validate4
+{
+validate_Result=http://wwwgate0.mot.com:1080
+};, Prerequisites=, Steps=1.0, Testcase Objective=HTTP Proxy URI : Proxy should set successfully to http://wwwgate0.mot.com:1080, Testcase Regression Level=1.0}]]>
+              </value>
+            </param>
+          </params>
+          <exception class="org.testng.SkipException">
+            <message>
+              <![CDATA[Skipping the test as data set for automable as NA or Regression level not matching]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[org.testng.SkipException: Skipping the test as data set for automable as NA or Regression level not matching
+	at com.testcases.System_JS.AppGallery_test(System_JS.java:31)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:85)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:648)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:834)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1142)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:124)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:108)
+	at org.testng.TestRunner.privateRun(TestRunner.java:771)
+	at org.testng.TestRunner.run(TestRunner.java:621)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:357)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:352)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:310)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:259)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1176)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1101)
+	at org.testng.TestNG.run(TestNG.java:1009)
+	at org.testng.remote.RemoteTestNG.run(RemoteTestNG.java:111)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:204)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:175)
+]]>
+            </full-stacktrace>
+          </exception> <!-- org.testng.SkipException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- AppGallery_test -->
+        <test-method status="SKIP" signature="AppGallery_test(java.util.Hashtable)[pri:0, instance:com.testcases.System_JS@3b6eb2ec]" name="AppGallery_test" duration-ms="0" started-at="2015-07-26T17:21:12Z" data-provider="getData" finished-at="2015-07-26T17:21:12Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[{Description=wait(3);
+validate1;
+link_Click(system_test_link);
+validate2;
+SelectTestToRun(VT200_0961_string);
+ClickRunTest(runtest_top_xpath);
+validate3;
+ClickRunTest(runtest_bottom_xpath);
+wait(10);
+validate4;
+TakeScreenshot(VT200-0961);
+validate5;
+press_Key(Back);, Automatable=, Results=, Subject=, Testcase ID=8.0, Expected Behaviour=validate1
+{
+validate_PageTitle=Compliance JS specs
+};
+validate2
+{
+validate_PageTitle=System JS Test
+};
+validate3
+{
+validate_Text_Exists=VT200-0961
+};
+validate4
+{
+validate_App_Launched_Device=com.android.browser
+};
+validate5
+{
+validate_Screenshot=VT200-0961
+};, Prerequisites=, Steps=1.0, Testcase Objective=call openUrl() with http://www.google.co.in, Testcase Regression Level=1.0}]]>
+              </value>
+            </param>
+          </params>
+          <exception class="org.testng.SkipException">
+            <message>
+              <![CDATA[Skipping the test as data set for automable as NA or Regression level not matching]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[org.testng.SkipException: Skipping the test as data set for automable as NA or Regression level not matching
+	at com.testcases.System_JS.AppGallery_test(System_JS.java:31)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:85)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:648)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:834)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1142)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:124)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:108)
+	at org.testng.TestRunner.privateRun(TestRunner.java:771)
+	at org.testng.TestRunner.run(TestRunner.java:621)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:357)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:352)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:310)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:259)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1176)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1101)
+	at org.testng.TestNG.run(TestNG.java:1009)
+	at org.testng.remote.RemoteTestNG.run(RemoteTestNG.java:111)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:204)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:175)
+]]>
+            </full-stacktrace>
+          </exception> <!-- org.testng.SkipException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- AppGallery_test -->
+        <test-method status="SKIP" signature="AppGallery_test(java.util.Hashtable)[pri:0, instance:com.testcases.System_JS@3b6eb2ec]" name="AppGallery_test" duration-ms="0" started-at="2015-07-26T17:21:12Z" data-provider="getData" finished-at="2015-07-26T17:21:12Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[{Description=wait(3);
+validate1;
+link_Click(system_test_link);
+validate2;
+SelectTestToRun(VT200_0963_string);
+ClickRunTest(runtest_top_xpath);
+validate3;
+ClickRunTest(runtest_bottom_xpath);
+validate4;
+, Automatable=, Results=, Subject=, Testcase ID=10.0, Expected Behaviour=validate1
+{
+validate_PageTitle=Compliance JS specs
+};
+validate2
+{
+validate_PageTitle=System JS Test
+};
+validate3
+{
+validate_Text_Exists=VT200-0963
+};
+validate4
+{
+validate_Result=?
+};, Prerequisites=, Steps=1.0, Testcase Objective=call getStartParams() , Testcase Regression Level=1.0}]]>
+              </value>
+            </param>
+          </params>
+          <exception class="org.testng.SkipException">
+            <message>
+              <![CDATA[Skipping the test as data set for automable as NA or Regression level not matching]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[org.testng.SkipException: Skipping the test as data set for automable as NA or Regression level not matching
+	at com.testcases.System_JS.AppGallery_test(System_JS.java:31)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:85)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:648)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:834)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1142)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:124)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:108)
+	at org.testng.TestRunner.privateRun(TestRunner.java:771)
+	at org.testng.TestRunner.run(TestRunner.java:621)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:357)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:352)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:310)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:259)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1176)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1101)
+	at org.testng.TestNG.run(TestNG.java:1009)
+	at org.testng.remote.RemoteTestNG.run(RemoteTestNG.java:111)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:204)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:175)
+]]>
+            </full-stacktrace>
+          </exception> <!-- org.testng.SkipException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- AppGallery_test -->
+        <test-method status="SKIP" signature="AppGallery_test(java.util.Hashtable)[pri:0, instance:com.testcases.System_JS@3b6eb2ec]" name="AppGallery_test" duration-ms="1" started-at="2015-07-26T17:21:12Z" data-provider="getData" finished-at="2015-07-26T17:21:12Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[{Description=wait(3);
+validate1;
+link_Click(system_test_link);
+validate2;
+SelectTestToRun(VT200_0964_string);
+ClickRunTest(runtest_top_xpath);
+validate3;
+ClickRunTest(runtest_bottom_xpath);
+validate4;, Automatable=, Results=Pass, Subject=, Testcase ID=11.0, Expected Behaviour=validate1
+{
+validate_PageTitle=Compliance JS specs
+};
+validate2
+{
+validate_PageTitle=System JS Test
+};
+validate3
+{
+validate_Text_Exists=VT200-0964
+};
+validate4
+{
+validate_SystemProperties=getallproperties
+};, Prerequisites=, Steps=1.0, Testcase Objective=call getproperties with country,deviceName, devicePushId, freeServerPort and sync callback, Testcase Regression Level=1.0}]]>
+              </value>
+            </param>
+          </params>
+          <exception class="org.testng.SkipException">
+            <message>
+              <![CDATA[Skipping the test as data set for automable as NA or Regression level not matching]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[org.testng.SkipException: Skipping the test as data set for automable as NA or Regression level not matching
+	at com.testcases.System_JS.AppGallery_test(System_JS.java:31)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:85)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:648)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:834)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1142)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:124)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:108)
+	at org.testng.TestRunner.privateRun(TestRunner.java:771)
+	at org.testng.TestRunner.run(TestRunner.java:621)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:357)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:352)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:310)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:259)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1176)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1101)
+	at org.testng.TestNG.run(TestNG.java:1009)
+	at org.testng.remote.RemoteTestNG.run(RemoteTestNG.java:111)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:204)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:175)
+]]>
+            </full-stacktrace>
+          </exception> <!-- org.testng.SkipException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- AppGallery_test -->
+        <test-method status="SKIP" signature="AppGallery_test(java.util.Hashtable)[pri:0, instance:com.testcases.System_JS@3b6eb2ec]" name="AppGallery_test" duration-ms="0" started-at="2015-07-26T17:21:12Z" data-provider="getData" finished-at="2015-07-26T17:21:12Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[{Description=wait(3);
+validate1;
+link_Click(system_test_link);
+validate2;
+SelectTestToRun(VT200_0965_string);
+ClickRunTest(runtest_top_xpath);
+validate3;
+ClickRunTest(runtest_bottom_xpath);
+validate4;, Automatable=, Results=Pass, Subject=, Testcase ID=12.0, Expected Behaviour=validate1
+{
+validate_PageTitle=Compliance JS specs
+};
+validate2
+{
+validate_PageTitle=System JS Test
+};
+validate3
+{
+validate_Text_Exists=VT200-0965
+};
+validate4
+{
+validate_SystemProperties=country
+};, Prerequisites=, Steps=1.0, Testcase Objective=call getproperties with country, Testcase Regression Level=1.0}]]>
+              </value>
+            </param>
+          </params>
+          <exception class="org.testng.SkipException">
+            <message>
+              <![CDATA[Skipping the test as data set for automable as NA or Regression level not matching]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[org.testng.SkipException: Skipping the test as data set for automable as NA or Regression level not matching
+	at com.testcases.System_JS.AppGallery_test(System_JS.java:31)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:85)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:648)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:834)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1142)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:124)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:108)
+	at org.testng.TestRunner.privateRun(TestRunner.java:771)
+	at org.testng.TestRunner.run(TestRunner.java:621)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:357)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:352)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:310)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:259)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1176)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1101)
+	at org.testng.TestNG.run(TestNG.java:1009)
+	at org.testng.remote.RemoteTestNG.run(RemoteTestNG.java:111)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:204)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:175)
+]]>
+            </full-stacktrace>
+          </exception> <!-- org.testng.SkipException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- AppGallery_test -->
+        <test-method status="SKIP" signature="AppGallery_test(java.util.Hashtable)[pri:0, instance:com.testcases.System_JS@3b6eb2ec]" name="AppGallery_test" duration-ms="0" started-at="2015-07-26T17:21:12Z" data-provider="getData" finished-at="2015-07-26T17:21:12Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[{Description=wait(3);
+validate1;
+link_Click(system_test_link);
+validate2;
+SelectTestToRun(VT200_0967_string);
+ClickRunTest(runtest_top_xpath);
+validate3;
+ClickRunTest(runtest_bottom_xpath);
+validate4;, Automatable=, Results=Pass, Subject=, Testcase ID=14.0, Expected Behaviour=validate1
+{
+validate_PageTitle=Compliance JS specs
+};
+validate2
+{
+validate_PageTitle=System JS Test
+};
+validate3
+{
+validate_Text_Exists=VT200-0967
+};
+validate4
+{
+validate_SystemProperties=Platform
+};, Prerequisites=, Steps=1.0, Testcase Objective=call getproperties with platform, Testcase Regression Level=1.0}]]>
+              </value>
+            </param>
+          </params>
+          <exception class="org.testng.SkipException">
+            <message>
+              <![CDATA[Skipping the test as data set for automable as NA or Regression level not matching]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[org.testng.SkipException: Skipping the test as data set for automable as NA or Regression level not matching
+	at com.testcases.System_JS.AppGallery_test(System_JS.java:31)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:85)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:648)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:834)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1142)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:124)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:108)
+	at org.testng.TestRunner.privateRun(TestRunner.java:771)
+	at org.testng.TestRunner.run(TestRunner.java:621)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:357)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:352)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:310)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:259)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1176)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1101)
+	at org.testng.TestNG.run(TestNG.java:1009)
+	at org.testng.remote.RemoteTestNG.run(RemoteTestNG.java:111)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:204)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:175)
+]]>
+            </full-stacktrace>
+          </exception> <!-- org.testng.SkipException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- AppGallery_test -->
+        <test-method status="SKIP" signature="AppGallery_test(java.util.Hashtable)[pri:0, instance:com.testcases.System_JS@3b6eb2ec]" name="AppGallery_test" duration-ms="0" started-at="2015-07-26T17:21:12Z" data-provider="getData" finished-at="2015-07-26T17:21:12Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[{Description=wait(3);
+validate1;
+link_Click(system_test_link);
+validate2;
+SelectTestToRun(VT200_0966_string);
+ClickRunTest(runtest_top_xpath);
+validate3;
+ClickRunTest(runtest_bottom_xpath);
+validate4;, Automatable=, Results=Pass, Subject=, Testcase ID=13.0, Expected Behaviour=validate1
+{
+validate_PageTitle=Compliance JS specs
+};
+validate2
+{
+validate_PageTitle=System JS Test
+};
+validate3
+{
+validate_Text_Exists=VT200-0966
+};
+validate4
+{
+validate_SystemProperties=deviceName
+};, Prerequisites=, Steps=1.0, Testcase Objective=call getproperties with deviceName, Testcase Regression Level=1.0}]]>
+              </value>
+            </param>
+          </params>
+          <exception class="org.testng.SkipException">
+            <message>
+              <![CDATA[Skipping the test as data set for automable as NA or Regression level not matching]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[org.testng.SkipException: Skipping the test as data set for automable as NA or Regression level not matching
+	at com.testcases.System_JS.AppGallery_test(System_JS.java:31)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:85)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:648)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:834)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1142)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:124)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:108)
+	at org.testng.TestRunner.privateRun(TestRunner.java:771)
+	at org.testng.TestRunner.run(TestRunner.java:621)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:357)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:352)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:310)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:259)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1176)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1101)
+	at org.testng.TestNG.run(TestNG.java:1009)
+	at org.testng.remote.RemoteTestNG.run(RemoteTestNG.java:111)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:204)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:175)
+]]>
+            </full-stacktrace>
+          </exception> <!-- org.testng.SkipException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- AppGallery_test -->
+        <test-method status="SKIP" signature="AppGallery_test(java.util.Hashtable)[pri:0, instance:com.testcases.System_JS@3b6eb2ec]" name="AppGallery_test" duration-ms="1" started-at="2015-07-26T17:21:12Z" data-provider="getData" finished-at="2015-07-26T17:21:12Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[{Description=wait(3);
+validate1;
+link_Click(system_test_link);
+validate2;
+SelectTestToRun(VT200_0968_string);
+ClickRunTest(runtest_top_xpath);
+validate3;
+ClickRunTest(runtest_bottom_xpath);
+validate4;, Automatable=, Results=Fail, Subject=, Testcase ID=15.0, Expected Behaviour=validate1
+{
+validate_PageTitle=Compliance JS specs
+};
+validate2
+{
+validate_PageTitle=System JS Test
+};
+validate3
+{
+validate_Text_Exists=VT200-0968
+};
+validate4
+{
+validate_SystemProperties=deviceName
+validate_SystemProperties=country
+validate_SystemProperties=devicePushId
+validate_SystemProperties=freeServerPort
+};, Prerequisites=, Steps=1.0, Testcase Objective=call getproperties with callback as async defined function, Testcase Regression Level=1.0}]]>
+              </value>
+            </param>
+          </params>
+          <exception class="org.testng.SkipException">
+            <message>
+              <![CDATA[Skipping the test as data set for automable as NA or Regression level not matching]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[org.testng.SkipException: Skipping the test as data set for automable as NA or Regression level not matching
+	at com.testcases.System_JS.AppGallery_test(System_JS.java:31)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:85)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:648)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:834)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1142)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:124)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:108)
+	at org.testng.TestRunner.privateRun(TestRunner.java:771)
+	at org.testng.TestRunner.run(TestRunner.java:621)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:357)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:352)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:310)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:259)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1176)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1101)
+	at org.testng.TestNG.run(TestNG.java:1009)
+	at org.testng.remote.RemoteTestNG.run(RemoteTestNG.java:111)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:204)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:175)
+]]>
+            </full-stacktrace>
+          </exception> <!-- org.testng.SkipException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- AppGallery_test -->
+        <test-method status="SKIP" signature="AppGallery_test(java.util.Hashtable)[pri:0, instance:com.testcases.System_JS@3b6eb2ec]" name="AppGallery_test" duration-ms="0" started-at="2015-07-26T17:21:12Z" data-provider="getData" finished-at="2015-07-26T17:21:12Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[{Description=wait(3);
+validate1;
+link_Click(system_test_link);
+validate2;
+SelectTestToRun(VT200_0969_string);
+ClickRunTest(runtest_top_xpath);
+validate3;
+ClickRunTest(runtest_bottom_xpath);
+wait(15);
+TakeScreenshot(VT200-0969);
+validate4;, Automatable=, Results=, Subject=, Testcase ID=16.0, Expected Behaviour=validate1
+{
+validate_PageTitle=Compliance JS specs
+};
+validate2
+{
+validate_PageTitle=System JS Test
+};
+validate3
+{
+validate_Text_Exists=VT200-0969
+};
+validate4
+{
+validate_PageTitle=Google
+validate_Screenshot=VT200-0969
+};, Prerequisites=, Steps=1.0, Testcase Objective=Navigate to Google, Testcase Regression Level=1.0}]]>
+              </value>
+            </param>
+          </params>
+          <exception class="org.testng.SkipException">
+            <message>
+              <![CDATA[Skipping the test as data set for automable as NA or Regression level not matching]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[org.testng.SkipException: Skipping the test as data set for automable as NA or Regression level not matching
+	at com.testcases.System_JS.AppGallery_test(System_JS.java:31)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:85)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:648)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:834)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1142)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:124)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:108)
+	at org.testng.TestRunner.privateRun(TestRunner.java:771)
+	at org.testng.TestRunner.run(TestRunner.java:621)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:357)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:352)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:310)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:259)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1176)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1101)
+	at org.testng.TestNG.run(TestNG.java:1009)
+	at org.testng.remote.RemoteTestNG.run(RemoteTestNG.java:111)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:204)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:175)
+]]>
+            </full-stacktrace>
+          </exception> <!-- org.testng.SkipException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- AppGallery_test -->
+        <test-method status="PASS" signature="disable_Flightmode()[pri:0, instance:com.testcases.System_JS@3b6eb2ec]" name="disable_Flightmode" is-config="true" duration-ms="41686" started-at="2015-07-26T17:21:12Z" finished-at="2015-07-26T17:21:53Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- disable_Flightmode -->
+      </class> <!-- com.testcases.System_JS -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>
