@@ -620,10 +620,10 @@ describe('Printer Zebra', function() {
         }, 
 		//{"timeout": 0}, - invalid as per doc
 		{
-            "timeout": 1
+            "timeout": 1000
         },
         {
-            "timeout": 15000.5
+            "timeout": 15000
         }];
 
         // 20 sec is enought for connect
