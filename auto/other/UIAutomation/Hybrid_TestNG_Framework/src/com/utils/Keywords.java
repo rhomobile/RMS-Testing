@@ -1281,6 +1281,42 @@ public class Keywords {
 
 	}
 	
+	/**
+	 * For Rhodes and RE22 APK
+	 * @author Vinod Shankar
+	 * @param autID
+	 * @param autName
+	 * @return
+	 * @throws Exception
+	 */
+	public SelendroidLauncher Init_Selendroid(String autName, String autID) throws Exception{
+		try{
+			log("Executing Init_Selendroid function");
+			SelendroidConfiguration config = new SelendroidConfiguration();
+			config.addSupportedApp(System.getProperty("user.dir")+ "\\src\\com\\input\\"+Config.getProperty(autName));
+			config.setSelendroidServerPort(8081);
+			SelendroidLauncher launch= new SelendroidLauncher(config);
+			launch.launchSelendroid();
+			SelendroidCapabilities capa = SelendroidCapabilities.device(Config.getProperty(autID));
+			//1512 5521650120
+			//143435225D0005
+			capa.setSerial(Config.getProperty("AUT_SerialNumber"));
+			mobdriv = new SelendroidDriver(capa);
+			mobdriv.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
+			mobdriv.switchTo().window("WEBVIEW");
+			//Thread.sleep(5000);
+			//String result=executeCommandLine("adb push "+ System.getProperty("user.dir")+ "\\src\\com\\input\\MAAF_MCD.jar"+" /data/local/tmp","32360");
+			//log("Result of Copying MCD_MAAF.jar is: "+result);
+			log("Exiting Init_Selendroid function");
+			
+			return launch;
+		}catch(Throwable t){
+			log("Failed to start selendroid : "+t.getMessage());
+			return null;
+		}
+
+	}
+	
 	public static void startAppiumServer() throws IOException, InterruptedException {
 	    Runtime runtime = Runtime.getRuntime();
 	    process = runtime.exec(APPIUMSERVERSTART);
@@ -2237,6 +2273,37 @@ public class Keywords {
 	}
 	
 	/**
+	 * To validate result for Async in Rhodes
+	 * @author Rohini
+	 * @param getvalue
+	 * @param objname
+	 * @return
+	 */
+	public String validate_AsyncResult_Exists(Hashtable<String,String> getvalue,String objname){
+		try{
+			log("Entered validate_AsyncResult_Exists function");		
+			String content = element("async_result_xpath").getText();			
+			if(content.contains(objname)){
+				log(objname+" Testcase Text found");				
+				log("Exiting from validate_AsyncResult_Exists function");
+				return "Pass";
+			}else{
+				log(objname+ " Testcase Text not found");
+				log("Exiting from validate_AsyncResult_Exists function");				
+				return "Fail";
+			}				
+									
+			
+		}catch(Exception ex){
+			log("Text not found -"+objname+" reason :"+ex.getMessage());
+			log("Exiting from validate_AsyncResult_Exists function");
+			return "Fail";
+		}
+		
+				
+	}
+	
+	/**
 	 * Comparing and 2 images Returns true if match found
 	 * Vinod Shankar
 	 * @param fileOne
@@ -2719,24 +2786,35 @@ public class Keywords {
 						if(scanner.hasNextDouble()) {
 							Double value_double = Double.valueOf(keyValue[1]);
 							if(keyValue[0].contains("ppiX")||keyValue[0].contains("ppi_x")) {
-								//TODO: Need to get device information
-								if(value_double > 160.0) {
-									result[i]="Pass";
-									log(keyValue[0]+" Value is "+value_double +" and Result is "+result[i]);
-								}
-								else {
-									result[i]="Fail";
-									log(keyValue[0]+" Value is "+value_double +" and Result is "+result[i]);
+								String density=executeCommandLine("adb shell wm density");
+								String[] wh = density.split(":");
+								wh[1] = wh[1].replace(" ", "");
+								if(isInteger(wh[1], 10)) {
+									int pixel = Integer.parseInt(wh[1]);
+									if(value_double > pixel/2) {
+										result[i]="Pass";
+										log(keyValue[0]+" Value is "+value_double +" and Result is "+result[i]);
+									}
+									else {
+										result[i]="Fail";
+										log(keyValue[0]+" Value is "+value_double +" and Result is "+result[i]);
+									}
 								}
 							}
 							else if(keyValue[0].contains("ppiY")||keyValue[0].contains("ppi_y")) {
-								if(value_double > 160.0) {
-									result[i]="Pass";
-									log(keyValue[0]+" Value is "+value_double +" and Result is "+result[i]);
-								}
-								else {
-									result[i]="Fail";
-									log(keyValue[0]+" Value is "+value_double +" and Result is "+result[i]);
+								String density=executeCommandLine("adb shell wm density");
+								String[] wh = density.split(":");
+								wh[1] = wh[1].replace(" ", "");
+								if(isInteger(wh[1], 10)) {
+									int pixel = Integer.parseInt(wh[1]);
+									if(value_double > pixel/2) {
+										result[i]="Pass";
+										log(keyValue[0]+" Value is "+value_double +" and Result is "+result[i]);
+									}
+									else {
+										result[i]="Fail";
+										log(keyValue[0]+" Value is "+value_double +" and Result is "+result[i]);
+									}
 								}
 							}
 						}
@@ -3701,14 +3779,14 @@ public class Keywords {
 		}
 	}
 
-/**
+	/**
 	 * To not contain some text
 	 * @author Chaithra
 	 * @param getvalue
 	 * @param objname
 	 * @return
 	 */
-public String validate_doesNotContain(Hashtable<String,String> getvalue,String objname){
+	public String validate_doesNotContain(Hashtable<String,String> getvalue,String objname){
 		try{
 			log("Entered validate_Result function");
 			String content = element("results_xpath").getText();			
@@ -3733,7 +3811,7 @@ public String validate_doesNotContain(Hashtable<String,String> getvalue,String o
 	}
 
 
-/**
+	/**
 	 * To validate Result
 	 * @author Chaithra M
 	 * @param getvalue
@@ -3764,7 +3842,7 @@ public String validate_doesNotContain(Hashtable<String,String> getvalue,String o
 				
 	}
 
-/**
+	/**
 	 * Counting signal callback 
 	 * @author Chaithra
 	 * @param getvalue
@@ -3844,7 +3922,37 @@ public String validate_doesNotContain(Hashtable<String,String> getvalue,String o
 		}
 	}
 	
-	
+		
+	/**
+	 * To validate on Image exists
+	 * @author Vinod Shankar
+	 * @param getvalue
+	 * @param objname
+	 * @return
+	 */
+	public String validate_Download_Image(Hashtable<String,String> getvalue,String objname){
+		try{
+			log("Entered validate_Download_Image function");		
+			String content = element("image_download_xpath").getAttribute("src");			
+			if(content.contains(objname)){
+				log(objname+" Testcase Text found");				
+				log("Exiting from validate_Download_Image function");
+				return "Pass";
+			}else{
+				log(objname+ " Testcase Text not found");
+				log("Exiting from validate_Download_Image function");				
+				return "Fail";
+			}				
+									
+			
+		}catch(Exception ex){
+			log("Text not found -"+objname+" reason :"+ex.getMessage());
+			log("Exiting from validate_Download_Image function");
+			return "Fail";
+		}
+		
+				
+	}
 	
 }
 
