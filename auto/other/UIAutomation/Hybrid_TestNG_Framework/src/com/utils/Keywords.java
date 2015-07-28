@@ -1250,13 +1250,13 @@ public class Keywords {
 	 * @return
 	 * @throws Exception
 	 */
-	public SelendroidLauncher Init_Selendroid(int cleardata_flag) throws Exception{
+	public SelendroidLauncher Init_Selendroid(int nocleardata_flag) throws Exception{
 		try{
 			log("Executing Init_Selendroid function");
 			SelendroidConfiguration config = new SelendroidConfiguration();
 			config.addSupportedApp(System.getProperty("user.dir")+ "\\src\\com\\input\\"+Config.getProperty("AUT_Name"));
 			config.setSelendroidServerPort(8081);
-			if(cleardata_flag == 1) {
+			if(nocleardata_flag == 1) {
 				config.setNoClearData(true);
 			}
 			SelendroidLauncher launch= new SelendroidLauncher(config);
