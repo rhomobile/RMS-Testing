@@ -70,24 +70,6 @@ public class RE22_Gesture {
 	}
 	
 
-	@AfterClass
-	public void disable_Flightmode() throws IOException, InterruptedException{
-		try{
-			log.debug("Executing disable_Flightmode after class function");
-		Keywords app=null;
-		app= Keywords.getInstance();			
-		String res=app.executeCommandLine("adb shell am start -a android.settings.AIRPLANE_MODE_SETTINGS","Starting: Intent { act=android.settings.AIRPLANE_MODE_SETTINGS }");
-		Thread.sleep(3000);
-		String res1=app.executeCommandLine("adb shell uiautomator runtest MAAF_MCD.jar -c com.motorola.maaf.MaaFw -e DISABLE_CHECKBOX Airplane_mode","Disabled Airplane mode Checkbox Sucess");
-		Thread.sleep(30000);
-		log.debug("result of airplane mode disable at the end"+res+" "+ res1);
-		}catch(Exception ex){
-			log.debug(ex.getMessage());
-		}
-		log.debug("Ending disable_Flightmode After class function");
-	}
-	
-	
 	
 	@DataProvider
 	public Object[][] getData(){

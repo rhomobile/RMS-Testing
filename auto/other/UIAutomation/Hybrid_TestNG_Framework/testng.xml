@@ -1,154 +1,78 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="AppGallery">
-
-<!-- <test name="AGM Download">
+<suite name="RhomobileTesting">
+	<test name="Application_JS">
 		<classes>
-			<class name="com.testcases.AGM_download" ></class> 			
+			<class name="com.testcases.Application_JS" ></class> 
 		</classes>
-	</test> -->
-	
+	</test>
+	<test name="BatteryIndicator_JS">
+		<classes>
+			<class name="com.testcases.BatteryIndicator_JS" ></class> 
+		</classes>
+	</test>
+	<test name="Config_JS">
+		<classes>
+			<class name="com.testcases.Config_JS" ></class> 
+		</classes>
+	</test>
+	<test name="Intent_JS">
+		<classes>
+			<class name="com.testcases.Intent_JS" ></class> 
+		</classes>
+	</test>
+	<test name="Keycapture_JS">
+		<classes>
+			<class name="com.testcases.Keycapture_JS" ></class> 
+		</classes>
+	</test>	
+	<test name="Network_JS">
+		<classes>
+			<class name="com.testcases.Network_JS" ></class> 
+		</classes>
+	</test>	
+	<test name="Notification_JS">
+		<classes>
+			<class name="com.testcases.Notification_JS" ></class> 
+		</classes>
+	</test>	
+	<test name="Rhodes_AsyncHTTP">
+		<classes>
+			<class name="com.testcases.Rhodes_AsyncHTTP" ></class> 
+		</classes>
+	</test>	
+	<test name="Rhodes_Hyperlinks">
+		<classes>
+			<class name="com.testcases.Rhodes_Hyperlinks" ></class> 
+		</classes>
+	</test>		
 	<test name="SignalIndicator_JS">
 		<classes>
 			<class name="com.testcases.SignalIndicator_JS" ></class> 
 		</classes>
-	</test>
-	
-<!--	<test name="UI_AGM_JoinNow">
+	</test>	
+	<test name="Signature_JS">
 		<classes>
-			<class name="com.testcases.UI_AGM_JoinNow" ></class> 
+			<class name="com.testcases.Signature_JS" ></class> 
 		</classes>
 	</test>
-	
-	<test name="UI_AGM_Showcase_home">
+	<test name="System_JS">
 		<classes>
-				<class name="com.testcases.UI_AGM_Showcase_home" ></class>  
+			<class name="com.testcases.System_JS" ></class> 
 		</classes>
-	</test>
-	
-	<test name="Login_Client">
+	</test>	
+	<test name="Tabbar_JS">
 		<classes>
-			<class name="com.testcases.Login_Client" ></class> 
+			<class name="com.testcases.Tabbar_JS" ></class> 
 		</classes>
-	</test>
-	
-	<test name="UI_AGM_ShowcaseCategories">
+	</test>	
+	<test name="Toolbar_JS">
 		<classes>
-			<class name="com.testcases.UI_AGM_ShowcaseCategories" ></class> 
+			<class name="com.testcases.Toolbar_JS" ></class> 
 		</classes>
-	</test>
-	
-	<test name="UI_AGM_Login">
+	</test>	
+	<test name="Webview_JS">
 		<classes>
-			<class name="com.testcases.UI_AGM_Login" ></class>
+			<class name="com.testcases.Webview_JS" ></class> 
 		</classes>
-	</test>
-	
-	<test name="UI_AGM_Galleries">
-		<classes>
-			<class name="com.testcases.UI_AGM_Galleries" ></class>
-		</classes>
-	</test>
-	
-	<test name="UI_AGM_Apps">
-		<classes>
-			<class name="com.testcases.UI_AGM_Apps" ></class> 
-		</classes>
-	</test>
-	
-	<test name="UI_AGM_AppDetails">
-		<classes>
-			<class name="com.testcases.UI_AGM_AppDetails" ></class>
-		</classes>
-	</test>
-	
-	<test name="UI_AGM_LoginError">
-		<classes>
-			<class name="com.testcases.UI_AGM_LoginError" ></class>
-		</classes>
-	</test>
-	
-	<test name="UI_AGM_ProfileDefault">
-		<classes>
-			<class name="com.testcases.UI_AGM_ProfileDefault" ></class>
-		</classes>
-	</test>
-	
-	<test name="UI_AGM_ForgotPassword">
-		<classes>
-			<class name="com.testcases.UI_AGM_ForgotPassword" ></class>	
-		</classes>
-	</test> 
-	
-	<test name="client_InviteGalleries">
-		<classes>
-			<class name="com.testcases.client_InviteGalleries" ></class> 
-		</classes>
-	</test> -->
-	
-<!-- 	<test name="E2ELogin">
-		<classes>
-			<class name="com.testcases.E2ELogin" ></class>
-		</classes>
-	</test>
-	
-	<test name="Home_Screen">
-		<classes>
-			<class name="com.testcases.Home_Screen" ></class> 
-		</classes>
-	</test>
-	
-	<test name="Applistcategory">
-		<classes>
-			<class name="com.testcases.Applistcategory" ></class>
-		</classes>
-	</test>
-	
-	<test name="Appshowcase">
-		<classes>
-			<class name="com.testcases.Appshowcase" ></class> 
-		</classes>
-	</test>
-	
-	<test name="E2E_ApplistCategory">
-		<classes>
-			<class name="com.testcases.E2E_ApplistCategory" ></class>
-		</classes>
-	</test>
-	
-	<test name="E2EAGM_download">
-		<classes>
-			<class name="com.testcases.E2EAGM_download" ></class>
-		</classes>
-	</test>
-	
-	<test name="Searchfunctionality">
-		<classes>
-			<class name="com.testcases.Searchfunctionality" ></class>
-		</classes>
-	</test>
-	
-	<test name="Signup_Client">
-		<classes>
-			<class name="com.testcases.Signup_Client" ></class>
-		</classes>
-	</test>
-	
-	<test name="E2EAppShowcase">
-		<classes>
-			<class name="com.testcases.E2EAppShowcase" ></class>
-		</classes>
-	</test>
-	
-	<test name="UI_SpecificGallery">
-		<classes>
-			<class name="com.testcases.UI_SpecificGallery" ></class>
-		</classes>
-	</test>
-	
-	<test name="UI_SpecificGallery_Dropdown">
-		<classes>
-			<class name="com.testcases.UI_SpecificGallery_Dropdown" ></class> 
-		</classes>
-	</test>  -->
-	
+	</test>		
 </suite>
