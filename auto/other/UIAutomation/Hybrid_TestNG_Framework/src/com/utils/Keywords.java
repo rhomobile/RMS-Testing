@@ -32,6 +32,7 @@ import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.OutputType;
@@ -4147,6 +4148,30 @@ public class Keywords {
 			return "Fail";
 		}
 	}
+	
+	/**
+	 * Type in Addressbar
+	 * @author Rohini
+	 * @param getvalue
+	 * @param objkey
+	 * @return
+	 */
+	public String TypeinAddressbar(Hashtable<String,String> getvalue,String objkey){
+		try{
+			log("Executing SendData function");		
+			String[] args=objkey.split(",");
+			element(args[0]).clear();
+		    element(args[0]).sendKeys(args[1]);	
+		    element(args[0]).sendKeys(Keys.ENTER);	
+
+		}catch(Exception ex){
+			reportError("Fail-"+ex.getMessage());
+			return null;
+		}
+		log("Exiting Senddata function");
+		return "pass";
+	}    
+
 	
 }
 
