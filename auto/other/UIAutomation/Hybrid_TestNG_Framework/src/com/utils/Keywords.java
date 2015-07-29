@@ -3986,9 +3986,7 @@ public class Keywords {
 			if(objname.equals("uuid")){
 				String uuidvalue = executeCommandLine("adb shell getprop persist.sys.uuid");
 				String content = element("result_xpath").getText();
-				System.out.println(uuidvalue);
-				System.out.println(content);
-			    if(content.toLowerCase().equals(uuidvalue.toLowerCase())){
+				if(content.toLowerCase().equals(uuidvalue.toLowerCase())){
 			    	log("Correct uuid");	
 			    	return "Pass";			
 				}
@@ -4000,8 +3998,6 @@ public class Keywords {
 			else if(objname.equals("oeminfo")){
 				String oeminfovalue = executeCommandLine("adb shell getprop ro.product.device");
 				String content = element("result_xpath").getText();
-				System.out.println(oeminfovalue);
-				System.out.println(content);
 				if(content.toLowerCase().equals(oeminfovalue.toLowerCase())){
 					log("Correct oeminfo");	
 					return "Pass";
