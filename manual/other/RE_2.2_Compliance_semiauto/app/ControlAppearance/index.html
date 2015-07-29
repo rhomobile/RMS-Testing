@@ -4,7 +4,7 @@
 	<br/><input type="button" value="Quit" onclick="quitPB();" />
 	<input type="button" value="Back"  onclick="location.href='../index.html'" />
 
-	<title>PB and RE2.2 Semi Auto Frame Work : Control & Appearance</title>
+	<title>Control & Appearance</title>
 
 	<!-- Loading css styles -->
 	<link rel="stylesheet" type="text/css" href="/public/css/main.css">
@@ -42,12 +42,12 @@
     <div class="runners">
     	<input type=button value="Previous" onclick="main.prevTest();" />
 		<input type=button value="Next" onclick="main.nextTest()" />
-		<input type="button" onclick="main.runThisTest()" value="Run Test"/>
+		<input type="button" onclick="main.runThisTest()" value="Run Test" class="toprun_button"/>
     </div>
 	<br>
 	<div class="block">
 	<span class="heading">VTID:</span>
-    <div id="vtid"></div><br>
+    <div id="vtid" class="goalsContainer"></div><br>
     <span class="heading">Test description:</span>
     <div id="desc"></div>
     <div id="preCondition"></div>
@@ -58,7 +58,7 @@
     <br><br>
     <span class="heading">Actual result:</span>
     <br>
-    <div id="actualResult"></div><br>
+    <div id="actualResult" class="resultsContainer"></div><br>
     <input type="button" class="pass" onclick="main.passThisTest()" value="Pass"/>
     <input type="button" class="fail" onclick="main.failThisTest()" value="Fail"/>
     </div>
