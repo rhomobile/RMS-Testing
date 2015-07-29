@@ -44,7 +44,7 @@
 		};
 		mainObj.loadTest = function(){
 			var vtElement = "";
-            var selectElement = "<select id='vtSelect' onchange='main.onVTIDChange()'></select>";
+            var selectElement = "<select id='vtSelect' class='speccontrol_class' onchange='main.onVTIDChange()'></select>";
             document.getElementById('vtsection').innerHTML = selectElement;
             var selectList = document.getElementById('vtSelect');
 			for(key in testArray){
