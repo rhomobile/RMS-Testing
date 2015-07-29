@@ -3945,6 +3945,209 @@ public class Keywords {
 				
 	}
 	
+	/**
+	 * To Enter New Contact
+	 * @author Chaithra
+	 * @param getvalue
+	 * @param objname
+	 * @return
+	 */
+	public String EnternewContact(Hashtable<String,String> getvalue,String objname){
+		try{
+			String xpathString = objname.substring(0,15);
+			String valueString = objname.substring(16,20);
+			System.out.println(xpathString);
+			System.out.println(valueString);
+			log("Entered EnternewContact function");		
+			element(xpathString).sendKeys(valueString);	
+			return "Pass";			
+									
+			}
+		catch(Exception ex){
+			log("Text not found -"+objname+" reason :"+ex.getMessage());
+			log("Exiting from EnternewContact function");
+			return "Fail";
+		}
+		
+				
+	}
+	
+	/**
+	 * To Check Generic Values
+	 * @author Chaithra
+	 * @param getvalue
+	 * @param objname
+	 * @return
+	 */
+	public String CheckGenericValues(Hashtable<String,String> getvalue,String objname){
+		try{
+			log("Entered Checkuuid function");
+			if(objname.equals("uuid")){
+				String uuidvalue = executeCommandLine("adb shell getprop persist.sys.uuid");
+				String content = element("result_xpath").getText();
+				System.out.println(uuidvalue);
+				System.out.println(content);
+			    if(content.toLowerCase().equals(uuidvalue.toLowerCase())){
+			    	log("Correct uuid");	
+			    	return "Pass";			
+				}
+			    else{
+			    	log("InCorrect uuid");
+			    	return "Fail";
+			    }
+			}
+			else if(objname.equals("oeminfo")){
+				String oeminfovalue = executeCommandLine("adb shell getprop ro.product.device");
+				String content = element("result_xpath").getText();
+				System.out.println(oeminfovalue);
+				System.out.println(content);
+				if(content.toLowerCase().equals(oeminfovalue.toLowerCase())){
+					log("Correct oeminfo");	
+					return "Pass";
+				}
+				else{
+					log("InCorrect oeminfo");
+					return "Fail";
+				 }
+			}
+			else{
+				log("wrong value");
+				return "Fail";
+			}
+		}
+		catch(Exception ex){
+			log("Text not found -"+objname+" reason :"+ex.getMessage());
+			log("Exiting from Checkuuid function");
+			return "Fail";
+		}
+		
+				
+	}
+	
+	/**
+	 * To validate Contact Page
+	 * @author Chaithra M
+	 * @param getvalue
+	 * @param objname
+	 * @return
+	 */
+	public String validate_ContactPage(Hashtable<String,String> getvalue,String objname){
+		try{
+			log("Entered validate_ContactPage function");
+			String content = element("contactsform_xpath").getText();			
+			if(content.contains(objname)){
+				log(objname+" Testcase Text found");				
+				log("Exiting from validate_ContactPage function");
+				return "Pass";
+			}else{
+				log(objname+ " Testcase Text not found");
+				log("Exiting from validate_ContactPage function");				
+				return "Fail";
+			}				
+									
+			
+		}catch(Exception ex){
+			log("function failed reason :"+ex.getMessage());
+			log("Exiting from validate_ContactPage function");
+			return "Fail";
+		}
+		
+				
+	}
+	/**
+	 * To validate Contact details
+	 * @author Chaithra M
+	 * @param getvalue
+	 * @param objname
+	 * @return
+	 */
+	public String validate_ContactDetails(Hashtable<String,String> getvalue,String objname){
+		try{
+			log("Entered validate_ContactDetails function");
+			String content = element("contactdetails_xpath").getText();			
+			if(content.contains(objname)){
+				log(objname+" Testcase Text found");				
+				log("Exiting from validate_ContactDetails function");
+				return "Pass";
+			}else{
+				log(objname+ " Testcase Text not found");
+				log("Exiting from validate_ContactDetails function");				
+				return "Fail";
+			}				
+									
+			
+		}catch(Exception ex){
+			log("function failed reason :"+ex.getMessage());
+			log("Exiting from validate_ContactDetails function");
+			return "Fail";
+		}
+		
+				
+	}
+	/**
+	 * To validate New Contact
+	 * @author Chaithra M
+	 * @param getvalue
+	 * @param objname
+	 * @return
+	 */
+	public String validate_NewContact(Hashtable<String,String> getvalue,String objname){
+		try{
+			log("Entered validate_NewContact function");
+			String content = element("contacts_id").getText();			
+			if(content.contains(objname)){
+				log(objname+" Testcase Text found");				
+				log("Exiting from validate_NewContact function");
+				return "Pass";
+			}else{
+				log(objname+ " Testcase Text not found");
+				log("Exiting from validate_NewContact function");				
+				return "Fail";
+			}				
+									
+			
+		}catch(Exception ex){
+			log("function failed reason :"+ex.getMessage());
+			log("Exiting from validate_NewContact function");
+			return "Fail";
+		}
+		
+				
+	}
+	
+	/**
+	 * Counting contacts created
+	 * @author Chaithra
+	 * @param getvalue
+	 * @param objName
+	 * @return
+	 */
+	public String Contactcount(Hashtable<String,String> getvalue,String objname){
+		try{
+			log("Entered Contactcount function");		
+			WebElement temp = element(objname);
+			List<WebElement> list = temp.findElements(By.tagName(("li")));
+			Integer count = list.size();
+			System.out.println(count);
+	        if(count == 11){
+				log("Contact count is correct");
+				log("Exiting from Contactcount function");
+				return "Pass";
+			}
+			else{
+				log("Contact count is wrong");
+				log("Exiting from Contactcount function");
+				return "Fail";
+			}
+			
+		}
+		catch(Exception ex){
+			log("count of contact not found. reason :"+ex.getMessage());
+			log("Exiting from Contactcount function");
+			return "Fail";
+		}
+	}
+	
 }
 
 
