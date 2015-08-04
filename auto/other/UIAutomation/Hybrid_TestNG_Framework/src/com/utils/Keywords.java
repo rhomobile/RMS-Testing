@@ -2333,6 +2333,29 @@ public class Keywords {
         return isTrue;
     }
 	
+	public String PercentCompare(String ref, String first, String diff) {
+
+		log("Started executeCommandLine function"); 
+		try {
+			ProcessBuilder pb = new ProcessBuilder("compare", "-metric", "PSNR", ref, first, diff);
+			//p.waitFor();
+			pb.redirectErrorStream(true);
+
+			Process p = pb.start();
+			BufferedReader br = new BufferedReader(new InputStreamReader(p.getInputStream()));
+			String line = null;
+			while((line=br.readLine())!=null){
+			   return line;
+			}
+			return "Fail";
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			reportError("error while executing executeCommandLine function,Command:   "+e.getMessage());
+			return "Fail";
+		}
+	}
+	
 	/**
 	 * Validating screenshot with reference image and showing the difference image
 	 * Vinod Shankar
@@ -2359,6 +2382,16 @@ public class Keywords {
 					return "Pass";
 				}else{
 					//String diffresult=
+					String tmp = PercentCompare(refimagefile, imagefile, diffimagefile);
+					Scanner scanner = new Scanner(tmp);
+					if(scanner.hasNextDouble()) {
+						Double value_double = Double.valueOf(tmp);
+						if(value_double>40.0) {
+							log("Partial Match found with reference image "+value_double);				
+							log("Exiting from validate_Screenshot function");
+							return "Pass";
+						}	
+					}
 					executeCommandLine("compare -channel red -metric PSNR "+refimagefile+" "+imagefile+" "+diffimagefile);
 					log("Match not found, Difference image is"+diffimagefile);
 					log("Exiting from validate_Screenshot function");				
