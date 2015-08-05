@@ -35,6 +35,22 @@
 			<class name="com.testcases.Notification_JS" ></class> 
 		</classes>
 	</test>	
+	<test name="RE22_ControlAppearance">
+		<classes>
+			<class name="com.testcases.RE22_ControlAppearance" ></class> 
+		</classes>
+	</test>
+	<test name="RE22_DeviceApplication">
+		<classes>
+			<class name="com.testcases.RE22_DeviceApplication" ></class> 
+		</classes>
+	</test>	
+	<test name="RE22_Generic">
+		<classes>
+			<class name="com.testcases.RE22_Generic" ></class> 
+		</classes>
+	</test>	
+	
 	<test name="Rhodes_AsyncHTTP">
 		<classes>
 			<class name="com.testcases.Rhodes_AsyncHTTP" ></class> 
@@ -44,7 +60,12 @@
 		<classes>
 			<class name="com.testcases.Rhodes_Hyperlinks" ></class> 
 		</classes>
-	</test>		
+	</test>	
+	<test name="Rhodes_Contacts">
+		<classes>
+			<class name="com.testcases.Rhodes_Contacts" ></class> 
+		</classes>
+	</test>	
 	<test name="SignalIndicator_JS">
 		<classes>
 			<class name="com.testcases.SignalIndicator_JS" ></class> 
@@ -69,10 +90,10 @@
 		<classes>
 			<class name="com.testcases.Toolbar_JS" ></class> 
 		</classes>
-	</test>	
+	</test>
 	<test name="Webview_JS">
 		<classes>
 			<class name="com.testcases.Webview_JS" ></class> 
 		</classes>
-	</test>		
+	</test>
 </suite>
