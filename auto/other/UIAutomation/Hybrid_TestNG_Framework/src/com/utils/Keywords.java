@@ -3138,6 +3138,16 @@ public class Keywords {
 								log(keyValue[0]+" Value is "+keyValue[1]+" and Result is "+result[i]);
 							}
 						}
+						else if(keyValue[0].contains("phoneId")||keyValue[0].contains("phone_id")) {
+							if(keyValue[1].toLowerCase().contains("12334562ssd")) {
+								result[i]="Pass";
+								log(keyValue[0]+" Value is "+keyValue[1]+" and Result is "+result[i]);
+							}
+							else {
+								result[i]="Fail";
+								log(keyValue[0]+" Value is "+keyValue[1]+" and Result is "+result[i]);
+							}
+						}
 						else if(keyValue[0].contains("uuid")) {
 							String uuid = executeCommandLine("adb shell getprop persist.sys.uuid");
 							if(keyValue[1].toLowerCase().contains(uuid.toLowerCase())) {
@@ -3216,7 +3226,7 @@ public class Keywords {
 					}else if(Sysproperty[i].toLowerCase().contains(objName.toLowerCase())&&objName.contains("devicePushId")){
 						String[] keyValue = Sysproperty[i].split(":");
 						keyValue[keyValue.length-1] = keyValue[keyValue.length-1].replace(" ", "");
-						if(keyValue[keyValue.length-1].contains(" ")){
+						if(!keyValue[keyValue.length-1].toLowerCase().contains("devicePushId".toLowerCase())){
 							log(objName+" is returned in property");
 							result = "Pass";
 						}
@@ -3240,6 +3250,16 @@ public class Keywords {
 						else {
 							log(objName+" is not returned in property");
 							result = "Fail";
+						}
+					}else if(objName.contains("webviewFramework")) {
+						String osversion = executeCommandLine("adb shell getprop ro.build.version.release");
+						if(Sysproperty[i].contains("WEBKIT/GOOGLE/"+osversion)) {
+							result="Pass";
+							log(objName+" Value is "+Sysproperty[i]+" and Result is "+result);
+						}
+						else {
+							result="Fail";
+							log(objName+" Value is "+Sysproperty[i]+" and Result is "+result);
 						}
 					}
 					
