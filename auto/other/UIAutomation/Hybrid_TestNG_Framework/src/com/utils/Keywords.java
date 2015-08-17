@@ -2120,9 +2120,9 @@ public class Keywords {
 		    try{         
 			    File screenshot = ((TakesScreenshot)mobdriv).getScreenshotAs(OutputType.FILE);
 			    BufferedImage  fullImg = ImageIO.read(screenshot);
-			    Dimension dim = mobdriv.manage().window().getSize();
+			    //Dimension dim = mobdriv.manage().window().getSize();
 			    BufferedImage eleScreenshot = null;
-			    if(DeviceName.contains("TC70") || DeviceName.contains("TC75")) {
+			   /* if(DeviceName.contains("TC70") || DeviceName.contains("TC75")) {
 			    	eleScreenshot= fullImg.getSubimage(0, 50, dim.width, dim.height+170);
 			    }
 			    else if(DeviceName.contains("MC40")) {
@@ -2130,7 +2130,17 @@ public class Keywords {
 			    }
 			    else {
 			    	eleScreenshot= fullImg.getSubimage(0, 50, dim.width, dim.height);
-			    }
+			    }*/
+			    int width = fullImg.getWidth();
+			    int height = fullImg.getHeight();
+			    String currentOrientation = (((Rotatable) mobdriv).getOrientation()).toString();
+				if(currentOrientation=="PORTRAIT"){
+					eleScreenshot = fullImg.getSubimage(0, 50, width, height-50);
+				}
+				else {
+					eleScreenshot = fullImg.getSubimage(0, 0, width-50, height);
+				}
+			    
 			    //BufferedImage eleScreenshot= fullImg.getSubimage(0, 146, 720, 1200);
 			    ImageIO.write(eleScreenshot, "png", screenshot);
 			    String outputDirName = System.getProperty("user.dir")+ "\\test-output\\"+DeviceName+"\\";
@@ -2156,15 +2166,24 @@ public class Keywords {
 		    try{         
 			    File screenshot = ((TakesScreenshot)mobdriv).getScreenshotAs(OutputType.FILE);
 			    BufferedImage  fullImg = ImageIO.read(screenshot);
-			    Dimension dim = mobdriv.manage().window().getSize();
+			    //Dimension dim = mobdriv.manage().window().getSize();
 			    BufferedImage eleScreenshot = null;
-			    String currentOrientation = (((Rotatable) mobdriv).getOrientation()).toString();
+			    /*String currentOrientation = (((Rotatable) mobdriv).getOrientation()).toString();
 				if(currentOrientation=="PORTRAIT"){
 					eleScreenshot= fullImg.getSubimage(0, 50, dim.width, dim.height-50);
 				}
 				else {
 					eleScreenshot= fullImg.getSubimage(0, 0, dim.height-100, dim.width);
+				}*/
+			    int width = fullImg.getWidth();
+			    int height = fullImg.getHeight();
+			    String currentOrientation = (((Rotatable) mobdriv).getOrientation()).toString();
+				if(currentOrientation=="PORTRAIT"){
+					eleScreenshot = fullImg.getSubimage(0, 50, width, height-50);
 				}
+				else {
+					eleScreenshot = fullImg.getSubimage(0, 0, width-50, height);
+				}			    
 			    ImageIO.write(eleScreenshot, "png", screenshot);
 			    String outputDirName =System.getProperty("user.dir")+ "\\test-output\\"+DeviceName+"\\";
 			    FileUtils.copyFile(screenshot, new File(outputDirName  + File.separator +screenshot_id+".png"));
