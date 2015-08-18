@@ -171,6 +171,7 @@ public class Keywords {
 							arg1=keyvalue[0].split("\\(")[1].replace(")","");
 							//calling the func if contains arguments
 							Step_Result=executeKeyword(func_name,getvalue,arg1);
+							
 						}
 						else{
 							func_name=keyvalue[0];
@@ -193,7 +194,13 @@ public class Keywords {
 								func_name=Teststep.split("\\(")[0];
 								arg1=Teststep.split("\\(")[1].replace(")","");
 								//calling the func if contains arguments
-								Step_Result=executeKeyword(func_name,getvalue,arg1);
+								//Step_Result=executeKeyword(func_name,getvalue,arg1);
+								if(func_name.contains("TakeScreenshot")||func_name.contains("TakeNativeScreenshot")) {
+									Step_Result=executeKeyword(func_name,getvalue,arg1,ModuleName);
+								}
+								else {
+									Step_Result=executeKeyword(func_name,getvalue,arg1);
+								}
 							}
 							else{
 								func_name=Teststep;
@@ -224,7 +231,12 @@ public class Keywords {
 										func_name=expect_func[0];
 										arg1=expect_func[1];
 										//Calling the execute function and capturing the result
-										Expected_Teststep_Result=executeKeyword(func_name,getvalue,arg1);
+										if(func_name.contains("validate_Screenshot")) {
+											Expected_Teststep_Result=executeKeyword(func_name,getvalue,arg1,ModuleName);
+										}
+										else {
+											Expected_Teststep_Result=executeKeyword(func_name,getvalue,arg1);
+										}
 										log("Result of "+ func_name+": "+Expected_Teststep_Result);
 										Expected_Result=Expected_Result+Expected_Teststep_Result;
 										//System.out.println("Validation Keywords are : "+ func_name);
@@ -318,6 +330,30 @@ public class Keywords {
 
 
 	}
+	
+	public String executeKeyword(String func_name,Hashtable<String,String>getvalue,String arg1, String ModuleName) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, IOException{
+		System.out.println("In execute keyword function");
+		log("In execute keyword function");     
+		String func_result=null;         
+
+		method = this.getClass().getMethods();
+		//going through the list of methods/functions in keywords file and matching with the respective keyword in test case
+		for(int i=0;i<method.length;i++){
+			if(func_name.equals(method[i].getName())){
+				log("Executing "+func_name+" function:");
+				System.out.println("Executing "+func_name+" function:");
+				func_result=(String)method[i].invoke(this,getvalue,arg1,ModuleName);
+				return func_result;              
+			} 
+
+		}
+
+		log("Function <"+func_name+ "> not found in the keyword class");
+		return "Fail";
+
+
+	}
+
 
 	public int getDescriptionRow(Xls_Reader excelReader,String description){
 
@@ -2115,7 +2151,7 @@ public class Keywords {
 	 * @param screenshot_id
 	 * @return
 	 */
-	public String TakeScreenshot(Hashtable<String,String> getvalue, String screenshot_id) {
+	public String TakeScreenshot(Hashtable<String,String> getvalue, String screenshot_id,String ModuleName) {
 		   	String DeviceName=executeCommandLine("adb shell getprop ro.product.model");
 		    try{         
 			    File screenshot = ((TakesScreenshot)mobdriv).getScreenshotAs(OutputType.FILE);
@@ -2143,7 +2179,7 @@ public class Keywords {
 			    
 			    //BufferedImage eleScreenshot= fullImg.getSubimage(0, 146, 720, 1200);
 			    ImageIO.write(eleScreenshot, "png", screenshot);
-			    String outputDirName = System.getProperty("user.dir")+ "\\test-output\\"+DeviceName+"\\";
+			    String outputDirName = System.getProperty("user.dir")+ "\\test-output\\"+DeviceName+"\\"+ModuleName+"\\";
 			    FileUtils.copyFile(screenshot, new File(outputDirName  + File.separator +screenshot_id+".png"));
 			    return("pass");
 		    }
@@ -2160,7 +2196,7 @@ public class Keywords {
 	 * @param screenshot_id
 	 * @return
 	 */
-	public String TakeNativeScreenshot(Hashtable<String,String> getvalue, String screenshot_id) {
+	public String TakeNativeScreenshot(Hashtable<String,String> getvalue, String screenshot_id,String ModuleName) {
 
 		   	String DeviceName=executeCommandLine("adb shell getprop ro.product.model");
 		    try{         
@@ -2185,7 +2221,7 @@ public class Keywords {
 					eleScreenshot = fullImg.getSubimage(0, 0, width-50, height);
 				}			    
 			    ImageIO.write(eleScreenshot, "png", screenshot);
-			    String outputDirName =System.getProperty("user.dir")+ "\\test-output\\"+DeviceName+"\\";
+			    String outputDirName =System.getProperty("user.dir")+ "\\test-output\\"+DeviceName+"\\"+ModuleName+"\\";
 			    FileUtils.copyFile(screenshot, new File(outputDirName  + File.separator +screenshot_id+".png"));
 			    return("pass");
 		    }
@@ -2382,12 +2418,12 @@ public class Keywords {
 	 * @param objname
 	 * @return
 	 */
-	public String validate_Screenshot(Hashtable<String,String> getvalue,String objname){
+	public String validate_Screenshot(Hashtable<String,String> getvalue,String objname,String ModuleName){
 		try{
 			log("Entered validate_Screenshot function");
 			String DeviceName=executeCommandLine("adb shell getprop ro.product.model");
-		    String imagefile =System.getProperty("user.dir")+ "\\test-output\\"+DeviceName+"\\"+objname+".png";
-		    String refimagefile = System.getProperty("user.dir")+ "\\test-output\\"+DeviceName+"\\Reference\\"+objname+".png";
+		    String imagefile =System.getProperty("user.dir")+ "\\test-output\\"+DeviceName+"\\"+ModuleName+"\\"+objname+".png";
+		    String refimagefile = System.getProperty("user.dir")+ "\\test-output\\"+DeviceName+"\\Reference\\"+ModuleName+"\\"+objname+".png";
 		    String diffimagefile = System.getProperty("user.dir")+ "\\test-output\\"+DeviceName+"\\Diff\\"+objname+"_diff.png";
 			//String diffresult=executeCommandLine("compare -channel red -metric PSNR E:\\TC75\\VT200_445.png E:\\TC75\\VT200_446.png E:\\TC75\\diff.png", "image diff");
 		    //String diffresult=executeCommandLine("compare -channel red -metric PSNR E:\\TC75\\VT200_445.png E:\\TC75\\VT200_446.png E:\\TC75\\diff.png", "image diff");
