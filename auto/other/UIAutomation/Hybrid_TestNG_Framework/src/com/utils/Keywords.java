@@ -1514,8 +1514,11 @@ public class Keywords {
 				return "Pass";
 			}else{
 				log("App not is installed");
-				String instal_result= install_App_Device(getvalue, "targetApp.apk");
-				return instal_result;
+				if(arg1.contains("com.smap.targetapp")) {
+					String instal_result= install_App_Device(getvalue, "targetApp.apk");
+					return instal_result;
+				}
+				return "Fail";
 			}
 
 
@@ -2171,7 +2174,10 @@ public class Keywords {
 			    int height = fullImg.getHeight();
 			    String currentOrientation = (((Rotatable) mobdriv).getOrientation()).toString();
 				if(currentOrientation=="PORTRAIT"){
-					eleScreenshot = fullImg.getSubimage(0, 50, width, height-50);
+					if(!screenshot_id.contains("VT366_0108"))
+						eleScreenshot = fullImg.getSubimage(0, 50, width, height-50);
+					else
+						eleScreenshot = fullImg.getSubimage(0, (height/2)+150, width, height-(height/2)-150);
 				}
 				else {
 					eleScreenshot = fullImg.getSubimage(0, 0, width-50, height);
@@ -2215,7 +2221,10 @@ public class Keywords {
 			    int height = fullImg.getHeight();
 			    String currentOrientation = (((Rotatable) mobdriv).getOrientation()).toString();
 				if(currentOrientation=="PORTRAIT"){
-					eleScreenshot = fullImg.getSubimage(0, 50, width, height-50);
+					if(!screenshot_id.contains("VT366_0108"))
+						eleScreenshot = fullImg.getSubimage(0, 50, width, height-50);
+					else
+						eleScreenshot = fullImg.getSubimage(0, (height/2)+150, width, height-(height/2)-150);
 				}
 				else {
 					eleScreenshot = fullImg.getSubimage(0, 0, width-50, height);
@@ -2740,9 +2749,9 @@ public class Keywords {
 	 */
 	public String ScrollPage(Hashtable<String,String> getvalue, String objname){
 		try{
-			log("Started Executing Rotate_Screen function");
+			log("Started Executing ScrollPage function");
 			WebElement pages = element(objname);
-			TouchActions flick = new TouchActions(mobdriv).flick(pages, -200, 0, 0);
+			TouchActions flick = new TouchActions(mobdriv).flick(pages, -10, 0, 0);
 			flick.perform();
 			return "pass";  
 		}
@@ -4276,7 +4285,31 @@ public class Keywords {
 		}
 		log("Exiting Senddata function");
 		return "pass";
+	} 
+	
+	public String ExecuteSMSValidation(Hashtable<String,String> getvalue){
+		try{
+			log("Executing ExecuteSMSValidation function");		
+			if(validate_App_Exist_Device(getvalue,"com.android.mms")=="Pass") {
+				String res= validate_App_Launched_Device(getvalue,"com.android.mms");
+				res= validate_CompareEditText(getvalue,"0,Test_case_passed_if_you_see_this_in_Message_body.");
+				press_Key(getvalue,"Back");
+				press_Key(getvalue,"Back");
+				ClickUIButtonText(getvalue,"OK");
+				return res;
+			}
+			else {
+				log("SMS App not present on device");
+				return "Pass";
+			}
+
+		}catch(Exception ex){
+			reportError("Fail-"+ex.getMessage());
+			return null;
+		}
+		
 	}    
+
 
 	
 }
