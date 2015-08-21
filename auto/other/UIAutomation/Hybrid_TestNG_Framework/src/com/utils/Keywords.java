@@ -3204,8 +3204,9 @@ public class Keywords {
 							}
 						}
 						else if(keyValue[0].contains("uuid")) {
-							String uuid = executeCommandLine("adb shell getprop ro.hardware.uuid");
-							if(keyValue[1].toLowerCase().contains(uuid.toLowerCase())) {
+							String uuidvalue1 = executeCommandLine("adb shell getprop ro.hardware.uuid");
+							String uuidvalue2 = executeCommandLine("adb shell getprop persist.sys.uuid");
+							if(keyValue[1].toLowerCase().contains(uuidvalue1.toLowerCase())||keyValue[1].toLowerCase().contains(uuidvalue2.toLowerCase())) {
 								result[i]="Pass";
 								log(keyValue[0]+" Value is "+keyValue[1]+" and Result is "+result[i]);
 							}
@@ -4092,9 +4093,10 @@ public class Keywords {
 		try{
 			log("Entered Checkuuid function");
 			if(objname.equals("uuid")){
-				String uuidvalue = executeCommandLine("adb shell getprop ro.hardware.uuid");
+				String uuidvalue1 = executeCommandLine("adb shell getprop ro.hardware.uuid");
+				String uuidvalue2 = executeCommandLine("adb shell getprop persist.sys.uuid");
 				String content = element("result_xpath").getText();
-				if(content.toLowerCase().equals(uuidvalue.toLowerCase())){
+				if(content.toLowerCase().equals(uuidvalue1.toLowerCase())||content.toLowerCase().equals(uuidvalue2.toLowerCase())){
 			    	log("Correct uuid");	
 			    	return "Pass";			
 				}
