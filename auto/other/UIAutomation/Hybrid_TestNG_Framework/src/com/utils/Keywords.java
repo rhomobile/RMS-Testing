@@ -2152,7 +2152,7 @@ public class Keywords {
 	 * @return
 	 */
 	public String TakeScreenshot(Hashtable<String,String> getvalue, String screenshot_id,String ModuleName) {
-		   	String DeviceName=executeCommandLine("adb shell getprop ro.product.model");
+		   	String DeviceName=executeCommandLine("adb shell getprop ro.product.name");
 		    try{         
 			    File screenshot = ((TakesScreenshot)mobdriv).getScreenshotAs(OutputType.FILE);
 			    BufferedImage  fullImg = ImageIO.read(screenshot);
@@ -2198,7 +2198,7 @@ public class Keywords {
 	 */
 	public String TakeNativeScreenshot(Hashtable<String,String> getvalue, String screenshot_id,String ModuleName) {
 
-		   	String DeviceName=executeCommandLine("adb shell getprop ro.product.model");
+		   	String DeviceName=executeCommandLine("adb shell getprop ro.product.name");
 		    try{         
 			    File screenshot = ((TakesScreenshot)mobdriv).getScreenshotAs(OutputType.FILE);
 			    BufferedImage  fullImg = ImageIO.read(screenshot);
@@ -2421,7 +2421,7 @@ public class Keywords {
 	public String validate_Screenshot(Hashtable<String,String> getvalue,String objname,String ModuleName){
 		try{
 			log("Entered validate_Screenshot function");
-			String DeviceName=executeCommandLine("adb shell getprop ro.product.model");
+			String DeviceName=executeCommandLine("adb shell getprop ro.product.name");
 		    String imagefile =System.getProperty("user.dir")+ "\\test-output\\"+DeviceName+"\\"+ModuleName+"\\"+objname+".png";
 		    String refimagefile = System.getProperty("user.dir")+ "\\test-output\\"+DeviceName+"\\Reference\\"+ModuleName+"\\"+objname+".png";
 		    String diffimagefile = System.getProperty("user.dir")+ "\\test-output\\"+DeviceName+"\\Diff\\"+objname+"_diff.png";
@@ -2910,7 +2910,7 @@ public class Keywords {
 							}
 						}
 						else if(keyValue[0].contains("deviceName")||keyValue[0].contains("device_name")) {
-							String DeviceName=executeCommandLine("adb shell getprop ro.product.model");
+							String DeviceName=executeCommandLine("adb shell getprop ro.product.name");
 							String Manufacturer=executeCommandLine("adb shell getprop ro.product.manufacturer");
 							if(keyValue[1].contains(DeviceName)&&keyValue[1].contains(Manufacturer)) {
 								result[i]="Pass";
@@ -3204,7 +3204,7 @@ public class Keywords {
 							}
 						}
 						else if(keyValue[0].contains("uuid")) {
-							String uuid = executeCommandLine("adb shell getprop persist.sys.uuid");
+							String uuid = executeCommandLine("adb shell getprop ro.hardware.uuid");
 							if(keyValue[1].toLowerCase().contains(uuid.toLowerCase())) {
 								result[i]="Pass";
 								log(keyValue[0]+" Value is "+keyValue[1]+" and Result is "+result[i]);
@@ -3258,7 +3258,7 @@ public class Keywords {
 						}
 					}
 					else if(Sysproperty[i].toLowerCase().contains(objName.toLowerCase())&&objName.contains("deviceName")){
-						String DeviceName=executeCommandLine("adb shell getprop ro.product.model");
+						String DeviceName=executeCommandLine("adb shell getprop ro.product.name");
 						String Manufacturer=executeCommandLine("adb shell getprop ro.product.manufacturer");
 						if(Sysproperty[i].contains(DeviceName)&&Sysproperty[i].contains(Manufacturer)){
 							log(objName+" is returned in property");
@@ -4092,7 +4092,7 @@ public class Keywords {
 		try{
 			log("Entered Checkuuid function");
 			if(objname.equals("uuid")){
-				String uuidvalue = executeCommandLine("adb shell getprop persist.sys.uuid");
+				String uuidvalue = executeCommandLine("adb shell getprop ro.hardware.uuid");
 				String content = element("result_xpath").getText();
 				if(content.toLowerCase().equals(uuidvalue.toLowerCase())){
 			    	log("Correct uuid");	
