@@ -23,7 +23,7 @@ public class Notification_JS {
 	public Logger log;
 	public String ModuleName=this.getClass().getName().split("\\.")[2];
 	@Test(dataProvider="getData",groups={"Notification_JS"})
-	public void AppGallery_test(Hashtable<String,String> data) throws Exception {
+	public void Rhomobile_test(Hashtable<String,String> data) throws Exception {
 		if(!(Constants.TESTCASE_RUNMODE.equalsIgnoreCase(data.get(Constants.Automatable_Col)) &&  Constants.REGRESSION_LEVEL >=Double.parseDouble(data.get(Constants.Regression_Col))))
 			throw new SkipException("Skipping the test as data set for automable as NA or Regression level not matching");
 		System.out.println("start of test method");

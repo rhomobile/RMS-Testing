@@ -2,14 +2,12 @@ package com.testcases;
 
 import io.selendroid.standalone.SelendroidLauncher;
 
-import java.io.IOException;
 import java.util.Hashtable;
 
 import junit.framework.Assert;
 
 import org.apache.log4j.Logger;
 import org.testng.SkipException;
-import org.testng.annotations.AfterClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -18,14 +16,14 @@ import com.utils.Keywords;
 import com.utils.TestUtil;
 import com.utils.Xls_Reader;
 
-public class RE22_Gesture {
+public class EB_Application_JS {
 
 
 
 	public Logger log;
 	public String ModuleName=this.getClass().getName().split("\\.")[2];
-	@Test(dataProvider="getData",groups={"RE22_Gesture"})
-	public void AppGallery_test(Hashtable<String,String> data) throws Exception {
+	@Test(dataProvider="getData",groups={"RE22_Generic"})
+	public void Rhomobile_test(Hashtable<String,String> data) throws Exception {
 		if(!(Constants.TESTCASE_RUNMODE.equalsIgnoreCase(data.get(Constants.Automatable_Col)) &&  Constants.REGRESSION_LEVEL >=Double.parseDouble(data.get(Constants.Regression_Col))))
 			throw new SkipException("Skipping the test as data set for automable as NA or Regression level not matching");
 		System.out.println("start of test method");
@@ -43,9 +41,9 @@ public class RE22_Gesture {
 		{	
 			app= Keywords.getInstance();				
 			app.setLogger(log);	
-			String AutName = "RE22_AUT_Name";
-			String AutId = "RE22_AUT_ID";
-			launch=app.Init_Selendroid(AutName, AutId);
+			String AutName = "EB_AUT_Name";
+			String AutId = "EB_AUT_ID";
+			launch=app.Init_Selendroid(AutName, AutId, 1);
 			//app.OpenBrowser();
 			res=app.start(data,ModuleName);
 			res1=app.reporterror;
@@ -69,7 +67,7 @@ public class RE22_Gesture {
 		log.debug("Ending Test Case ID"+data.get("Testcase ID"));	
 	}
 	
-
+	
 	
 	@DataProvider
 	public Object[][] getData(){

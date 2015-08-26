@@ -9,14 +9,17 @@ import io.selendroid.standalone.SelendroidLauncher;
 
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.List;
@@ -1344,6 +1347,38 @@ public class Keywords {
 		}
 
 	}
+	
+	public SelendroidLauncher Init_Selendroid(String autName, String autID, int nocleardata_flag) throws Exception{
+		try{
+			log("Executing Init_Selendroid function");
+			SelendroidConfiguration config = new SelendroidConfiguration();
+			config.addSupportedApp(System.getProperty("user.dir")+ "\\src\\com\\input\\"+Config.getProperty(autName));
+			config.setSelendroidServerPort(8081);
+			if(nocleardata_flag == 1) {
+				config.setNoClearData(true);
+			}
+			SelendroidLauncher launch= new SelendroidLauncher(config);
+			launch.launchSelendroid();
+			SelendroidCapabilities capa = SelendroidCapabilities.device(Config.getProperty(autID));
+			//1512 5521650120
+			//143435225D0005
+			capa.setSerial(Config.getProperty("AUT_SerialNumber"));
+			mobdriv = new SelendroidDriver(capa);
+			mobdriv.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
+			mobdriv.switchTo().window("WEBVIEW");
+			//Thread.sleep(5000);
+			//String result=executeCommandLine("adb push "+ System.getProperty("user.dir")+ "\\src\\com\\input\\MAAF_MCD.jar"+" /data/local/tmp","32360");
+			//log("Result of Copying MCD_MAAF.jar is: "+result);
+			log("Exiting Init_Selendroid function");
+			
+			return launch;
+		}catch(Throwable t){
+			log("Failed to start selendroid : "+t.getMessage());
+			return null;
+		}
+
+	}
+	
 	
 	public static void startAppiumServer() throws IOException, InterruptedException {
 	    Runtime runtime = Runtime.getRuntime();
@@ -3968,6 +4003,7 @@ public class Keywords {
 			System.out.println(count1);
 			wifi_Mode(getvalue, "OFF");
 			wifi_Mode(getvalue, "ON");
+			press_Key(getvalue, "Home");
 			launch_App_Device(getvalue,"com.rhomobile.compliancetest_js/com.rhomobile.rhodes.RhodesActivity");
 			WebElement temp2 = element(objname);
 			List<WebElement> list2 = temp2.findElements(By.tagName(("ul")));
@@ -4310,7 +4346,42 @@ public class Keywords {
 		
 	}    
 
+	public String SetStartPage(Hashtable<String,String> getvalue, String arg1){
+		try{
+			log("Executing SetStartPage function");	
+			String line = null;
+			List<String> lines = new ArrayList<String>();
+			String result=executeCommandLine("adb pull "+"/sdcard/Android/data/com.symbol.enterprisebrowser/Config.xml "+ System.getProperty("user.dir")+ "\\src\\com\\input\\Config.xml");
+			File f1 = new File(System.getProperty("user.dir")+ "\\src\\com\\input\\Config.xml");
+			FileReader fr = new FileReader(f1);
+			BufferedReader br = new BufferedReader(fr);
+			while ((line = br.readLine()) != null) {
+			    if (line.contains("StartPage")) {
+			    	line = line.replaceAll(".+", "        <StartPage value=\""+arg1+"\" name=\"Menu\"/>");
+			        System.out.println(line);
+			    }
+			    lines.add(line);
+			}
+			fr.close();
+			br.close();
+			
+			FileWriter fw = new FileWriter(f1);
+			BufferedWriter out = new BufferedWriter(fw);
+			for(String s : lines)
+			     out.write(s+"\n");
+			out.flush();
+			out.close();
+			result=executeCommandLine("adb push "+ System.getProperty("user.dir")+ "\\src\\com\\input\\Config.xml "+"/sdcard/Android/data/com.symbol.enterprisebrowser/Config.xml");
+			return "Pass";
 
+
+		}catch(Exception ex){
+			reportError("Fail-"+ex.getMessage());
+			return "Fail";
+		}
+		
+	}   
+	
 	
 }
 

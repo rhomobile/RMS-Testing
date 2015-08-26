@@ -1,2 +1,2 @@
-cd C:\work\WorkSpace_Selenium\Hybrid_TestNG_Framework
+cd E:\Git\RMS-Testing\auto\other\UIAutomation\Hybrid_TestNG_Framework
 ant clean compile run makexsltreports

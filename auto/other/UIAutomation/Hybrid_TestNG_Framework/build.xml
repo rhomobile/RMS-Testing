@@ -2,7 +2,7 @@
 <!DOCTYPE project [
 ]>
 
-<project name="AppGallery" default="usage" basedir=".">  
+<project name="Rhomobile" default="usage" basedir=".">  
 
 <!-- ========== Initialize Properties =================================== -->
     <property environment="env"/>
