@@ -2106,6 +2106,9 @@ public class Keywords {
 		try{
 			log("Executing link_click function");
 			Thread.sleep(1000);
+			WebElement pages = element(linkName);
+			TouchActions flick = new TouchActions(mobdriv).flick(pages, 0, -50, 0);
+			flick.perform();
 			Click(linkName);
 			return "pass";
 
@@ -2171,6 +2174,9 @@ public class Keywords {
 	public String ClickRunTest(Hashtable<String,String> getvalue,String buttonXpath){
 		try{
 			log("Click on Run Test");
+			WebElement pages = element(buttonXpath);
+			TouchActions flick = new TouchActions(mobdriv).flick(pages, 0, -50, 0);
+			flick.perform();
 			Click(buttonXpath);
 			return("pass");
 		}
@@ -3206,18 +3212,8 @@ public class Keywords {
 						}
 						else if(keyValue[0].contains("platform")) {
 							String platform = executeCommandLine("adb shell getprop ro.product.brand");
-							if(keyValue[1].toLowerCase().contains(platform.toLowerCase())) {
-								result[i]="Pass";
-								log(keyValue[0]+" Value is "+keyValue[1]+" and Result is "+result[i]);
-							}
-							else {
-								result[i]="Fail";
-								log(keyValue[0]+" Value is "+keyValue[1]+" and Result is "+result[i]);
-							}
-						}
-						else if(keyValue[0].contains("platform")) {
-							String platform = executeCommandLine("adb shell getprop ro.product.brand");
-							if(keyValue[1].toLowerCase().contains(platform.toLowerCase())) {
+							String platform1 = executeCommandLine("adb shell getprop net.bt.name");
+							if(keyValue[1].toLowerCase().contains(platform.toLowerCase())||keyValue[1].toLowerCase().contains(platform1.toLowerCase())) {
 								result[i]="Pass";
 								log(keyValue[0]+" Value is "+keyValue[1]+" and Result is "+result[i]);
 							}
@@ -3315,7 +3311,8 @@ public class Keywords {
 						}
 					}else if(Sysproperty[i].toLowerCase().contains(objName.toLowerCase())&&objName.contains("Platform")){
 						String PlatformName=executeCommandLine("adb shell getprop ro.product.brand");
-						if(Sysproperty[i].toLowerCase().contains(PlatformName.toLowerCase())){
+						String platform1 = executeCommandLine("adb shell getprop net.bt.name");
+						if(Sysproperty[i].toLowerCase().contains(PlatformName.toLowerCase())||Sysproperty[i].toLowerCase().contains(platform1.toLowerCase())){
 							log(objName+" is returned in property");
 							result = "Pass";
 						}
