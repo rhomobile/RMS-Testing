@@ -767,7 +767,7 @@ describe('Printing Generic', function() {
     describe("Getting properties of the connected printer", function() {
         
         var offIter = 0;
-        var formats = [['connectionType', 'string'],['deviceAddress', 'string'],['ID', 'string'], ['deviceName', 'string'], ['printerType', 'string'], ['isConnected', 'boolean']];
+        var formats = [['connectionType', 'string'],['deviceAddress', 'string'],['id', 'string'], ['deviceName', 'string'], ['printerType', 'string'], ['isConnected', 'boolean']];
         
         for (var i = 0; i < formats.length; i++) {
             var property = formats[i][0];
@@ -782,7 +782,7 @@ describe('Printing Generic', function() {
 
             it('Should return devicePort value as an integer', function () {
 				runs(function() {
-					if(thisprinter.getProperty("connectionType") != "CONNECTION_TYPE_BLUETOOTH") {
+					if(thisprinter.getProperty("connectionType") == "CONNECTION_TYPE_TCP") {
 						expect(thisprinter.devicePort).isNumberGreaterThenZero();
 					}
 				});
@@ -790,7 +790,7 @@ describe('Printing Generic', function() {
 
             it('Should return devicePort value as an integer using get properties', function () {
 				runs(function() {
-					if(thisprinter.getProperty("connectionType") != "CONNECTION_TYPE_BLUETOOTH") {
+					if(thisprinter.getProperty("connectionType") == "CONNECTION_TYPE_TCP") {
 						var data = thisprinter.getProperties(['devicePort']);
 						var val = parseInt(data.devicePort, 10);
 						expect(val).isNumberGreaterThenZero();

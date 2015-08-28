@@ -455,7 +455,28 @@ describe('Printing Generic', function() {
             }
         }
     });
-		
+
+    // display all properties of printer
+    describe('getAllProperties method', function() {
+
+        it( "Should get All printer properties using getAllProperties", function() {
+            dispTestCaseRunning("1. Should display all printer properties");
+            dispExpectedResult(jasmine.getEnv().currentSpec.description, ""/*callresult.toString()*/);
+            //Common Method implemented to wait for tester to run the test.Code available in specHelper.js
+            _result.waitToRunTest();
+            var allproperties = {};
+            runs(function() {
+                allproperties = thisprinter.getAllProperties();
+            });
+
+            runs(function() {
+                displayResult(jasmine.getEnv().currentSpec.description, JSON.stringify(allproperties));
+            });
+            _result.waitForResponse();
+        });
+       
+    });
+
 	describe('connect and disconnect methods', function() {
         var callresult = null;
 
