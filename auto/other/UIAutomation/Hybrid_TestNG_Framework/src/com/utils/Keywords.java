@@ -2474,7 +2474,7 @@ public class Keywords {
 			String DeviceName=executeCommandLine("adb shell getprop ro.product.name");
 		    String imagefile =System.getProperty("user.dir")+ "\\test-output\\"+DeviceName+"\\"+ModuleName+"\\"+objname+".png";
 		    String refimagefile = System.getProperty("user.dir")+ "\\test-output\\"+DeviceName+"\\Reference\\"+ModuleName+"\\"+objname+".png";
-		    String diffimagefile = System.getProperty("user.dir")+ "\\test-output\\"+DeviceName+"\\Diff\\"+objname+"_diff.png";
+		    String diffimagefile = System.getProperty("user.dir")+ "\\test-output\\"+DeviceName+"\\Difference\\"+ModuleName+"\\"+objname+".png";
 			//String diffresult=executeCommandLine("compare -channel red -metric PSNR E:\\TC75\\VT200_445.png E:\\TC75\\VT200_446.png E:\\TC75\\diff.png", "image diff");
 		    //String diffresult=executeCommandLine("compare -channel red -metric PSNR E:\\TC75\\VT200_445.png E:\\TC75\\VT200_446.png E:\\TC75\\diff.png", "image diff");
 		    File imgfile = new File(imagefile);
@@ -3091,7 +3091,8 @@ public class Keywords {
 						}
 						else if(keyValue[0].contains("hasTouchscreen")||keyValue[0].contains("has_touchscreen")) {
 							String touchscreen = executeCommandLine("adb shell getprop sys.touch.capacitive_key_state");
-							if(keyValue[1].contains("true")&&touchscreen.contains("true")) {
+							String touchscreen1 = executeCommandLine("adb shell getprop ro.system.hastouch_fw");
+							if(keyValue[1].contains("true")&&(touchscreen.contains("true")||touchscreen1.contains("true"))) {
 								result[i]="Pass";
 								log(keyValue[0]+" Value is "+keyValue[1]+" and Result is "+result[i]);
 							}
