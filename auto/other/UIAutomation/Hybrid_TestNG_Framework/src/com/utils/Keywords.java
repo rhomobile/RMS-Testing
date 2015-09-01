@@ -2461,6 +2461,25 @@ public class Keywords {
 		}
 	}
 	
+    public void CreateNewDir(String newdir) {
+    	File theDir = new File(newdir);
+
+    	// if the directory does not exist, create it
+    	if (!theDir.exists()) {
+    	    boolean result = false;
+
+    	    try{
+    	        theDir.mkdir();
+    	        result = true;
+    	    } 
+    	    catch(SecurityException se){
+    	        //handle it
+    	    	se.printStackTrace();
+    	   }  
+    	}
+    	
+    }
+	
 	/**
 	 * Validating screenshot with reference image and showing the difference image
 	 * Vinod Shankar
@@ -2474,7 +2493,7 @@ public class Keywords {
 			String DeviceName=executeCommandLine("adb shell getprop ro.product.name");
 		    String imagefile =System.getProperty("user.dir")+ "\\test-output\\"+DeviceName+"\\"+ModuleName+"\\"+objname+".png";
 		    String refimagefile = System.getProperty("user.dir")+ "\\test-output\\"+DeviceName+"\\Reference\\"+ModuleName+"\\"+objname+".png";
-		    String diffimagefile = System.getProperty("user.dir")+ "\\test-output\\"+DeviceName+"\\Difference\\"+ModuleName+"\\"+objname+".png";
+		    
 			//String diffresult=executeCommandLine("compare -channel red -metric PSNR E:\\TC75\\VT200_445.png E:\\TC75\\VT200_446.png E:\\TC75\\diff.png", "image diff");
 		    //String diffresult=executeCommandLine("compare -channel red -metric PSNR E:\\TC75\\VT200_445.png E:\\TC75\\VT200_446.png E:\\TC75\\diff.png", "image diff");
 		    File imgfile = new File(imagefile);
@@ -2487,6 +2506,9 @@ public class Keywords {
 					return "Pass";
 				}else{
 					//String diffresult=
+					CreateNewDir(System.getProperty("user.dir")+ "\\test-output\\"+DeviceName+"\\Difference");
+					CreateNewDir(System.getProperty("user.dir")+ "\\test-output\\"+DeviceName+"\\Difference\\"+ModuleName);
+					String diffimagefile = System.getProperty("user.dir")+ "\\test-output\\"+DeviceName+"\\Difference\\"+ModuleName+"\\"+objname+".png";
 					String tmp = PercentCompare(refimagefile, imagefile, diffimagefile);
 					Scanner scanner = new Scanner(tmp);
 					if(scanner.hasNextDouble()) {
@@ -2497,7 +2519,7 @@ public class Keywords {
 							return "Pass";
 						}	
 					}
-					executeCommandLine("compare -channel red -metric PSNR "+refimagefile+" "+imagefile+" "+diffimagefile);
+					executeCommandLine("compare -channel red -metric PSNR "+imagefile+" "+refimagefile+" "+diffimagefile);
 					log("Match not found, Difference image is"+diffimagefile);
 					log("Exiting from validate_Screenshot function");				
 					return "Fail";
@@ -2653,7 +2675,7 @@ public class Keywords {
 				return "Pass";
 			 }
 			else if(content.contains("signalStrength")){
-				String tem = content.substring(19,21);
+				String tem = content.substring(19,22);
 				Integer signalvalue = Integer.valueOf(tem);
 				if(signalvalue > 50){
 				log("signal value is correct");				
@@ -4311,11 +4333,10 @@ public class Keywords {
 			String[] args=objkey.split(",");
 			element(args[0]).clear();
 		    element(args[0]).sendKeys(args[1]);	
-		    element(args[0]).sendKeys(Keys.ENTER);	
-
+		
 		}catch(Exception ex){
 			reportError("Fail-"+ex.getMessage());
-			return null;
+			return "Fail";
 		}
 		log("Exiting Senddata function");
 		return "pass";
