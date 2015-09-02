@@ -4395,34 +4395,82 @@ public class Keywords {
 		}
 		
 	}    
-
-	public String SetStartPage(Hashtable<String,String> getvalue, String arg1){
+	
+	public String PullConfigxml(Hashtable<String,String> getvalue){
 		try{
-			log("Executing SetStartPage function");	
-			String line = null;
-			List<String> lines = new ArrayList<String>();
-			String result=executeCommandLine("adb pull "+"/sdcard/Android/data/com.symbol.enterprisebrowser/Config.xml "+ System.getProperty("user.dir")+ "\\src\\com\\input\\Config.xml");
-			File f1 = new File(System.getProperty("user.dir")+ "\\src\\com\\input\\Config.xml");
-			FileReader fr = new FileReader(f1);
-			BufferedReader br = new BufferedReader(fr);
-			while ((line = br.readLine()) != null) {
-			    if (line.contains("StartPage")) {
-			    	line = line.replaceAll(".+", "        <StartPage value=\""+arg1+"\" name=\"Menu\"/>");
-			        System.out.println(line);
-			    }
-			    lines.add(line);
-			}
-			fr.close();
-			br.close();
-			
-			FileWriter fw = new FileWriter(f1);
-			BufferedWriter out = new BufferedWriter(fw);
-			for(String s : lines)
-			     out.write(s+"\n");
-			out.flush();
-			out.close();
-			result=executeCommandLine("adb push "+ System.getProperty("user.dir")+ "\\src\\com\\input\\Config.xml "+"/sdcard/Android/data/com.symbol.enterprisebrowser/Config.xml");
+			executeCommandLine("adb pull "+"/sdcard/Android/data/com.symbol.enterprisebrowser/Config.xml "+ System.getProperty("user.dir")+ "\\src\\com\\input\\Config.xml");
 			return "Pass";
+		}catch(Exception ex){
+			reportError("Fail-"+ex.getMessage());
+			return "Fail";
+		}
+	}
+	
+	public String PushConfigxml(Hashtable<String,String> getvalue){
+		try{
+			executeCommandLine("adb push "+ System.getProperty("user.dir")+ "\\src\\com\\input\\Config.xml "+"/sdcard/Android/data/com.symbol.enterprisebrowser/Config.xml");
+			return "Pass";
+		}catch(Exception ex){
+			reportError("Fail-"+ex.getMessage());
+			return "Fail";
+		}
+	}
+
+	public String ChangeConfigxml(Hashtable<String,String> getvalue, String arg1){
+		try{
+			log("Executing ChangeConfigxml function");	
+			String line = null;
+			int webserver_flag = 0;
+			List<String> lines = new ArrayList<String>();
+			File f1 = new File(System.getProperty("user.dir")+ "\\src\\com\\input\\Config.xml");
+			if(f1.exists()) {
+				String argsplit [] = arg1.split(",");
+				String XmlNest = argsplit[0];
+	            String ConfigTagToAdd = argsplit[1];
+	            String arr [] = XmlNest.split("/");
+	            FileReader fr = new FileReader(f1);
+	            BufferedReader br = new BufferedReader(fr);
+	            int i = 0;
+	            int flag = 0;
+	            System.out.println(arr.length);
+	            while ((line = br.readLine()) != null) {
+	            	if (line.contains("<"+arr[i])) {
+	            		if(i< arr.length-1)
+	            			i++;
+	               	}
+	           		if(arr.length == i+1 && line.contains("<"+ConfigTagToAdd) ) {
+	           			for(int j = 0; j<arr.length;j++) {
+	           				argsplit[2] = argsplit[2].replace(argsplit[2], "  "+argsplit[2]);
+	           			}
+	           			line = line.replaceAll(".+", argsplit[2]);
+	           			flag =1;
+	           		}
+	           		else if(line.contains("</"+arr[i]) && arr.length == i+1 && flag ==0) {
+	           			for(int j = 0; j<arr.length;j++) {
+	           				argsplit[2] = argsplit[2].replace(argsplit[2], "  "+argsplit[2]);
+	           			}
+	           			arr[i] = arr[i].replace(arr[i], "</"+arr[i]+">");
+	           			for(int j = 0; j<arr.length-1;j++) {
+	           				arr[i] = arr[i].replace(arr[i], "  "+arr[i]);
+	           			}
+	           			line = line.replaceAll(".+", argsplit[2]+"\n"+arr[i]);
+	           		}
+	                lines.add(line);
+	            }
+	            fr.close();
+	            br.close();
+				FileWriter fw = new FileWriter(f1);
+				BufferedWriter out = new BufferedWriter(fw);
+				for(String s : lines)
+				     out.write(s+"\n");
+				out.flush();
+				out.close();
+				return "Pass";
+			}
+			else {
+				log("Config xml doesnt exists");	
+				return "Fail";
+			}
 
 
 		}catch(Exception ex){
