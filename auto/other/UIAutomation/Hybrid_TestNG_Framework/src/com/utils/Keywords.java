@@ -4043,16 +4043,18 @@ public class Keywords {
 	 */
 	public String signalCallbackcount(Hashtable<String,String> getvalue,String objname){
 		try{
-			log("Entered count function");		
-			WebElement temp1 = element(objname);
+			log("Entered count function");
+			String[] args = null;
+			args = objname.split(",");
+			WebElement temp1 = element(args[0]);
 			List<WebElement> list1 = temp1.findElements(By.tagName(("ul")));
 			Integer count1 = list1.size();
 			System.out.println(count1);
 			wifi_Mode(getvalue, "OFF");
 			wifi_Mode(getvalue, "ON");
 			press_Key(getvalue, "Home");
-			launch_App_Device(getvalue,"com.rhomobile.compliancetest_js/com.rhomobile.rhodes.RhodesActivity");
-			WebElement temp2 = element(objname);
+			launch_App_Device(getvalue,args[1]);
+			WebElement temp2 = element(args[0]);
 			List<WebElement> list2 = temp2.findElements(By.tagName(("ul")));
 			Integer count2 = list2.size();
 			System.out.println(count2);
@@ -4084,15 +4086,17 @@ public class Keywords {
 	 */
 	public String checkstopwlanStatus(Hashtable<String,String> getvalue,String objname){
 		try{
-			log("Entered checkstopwlanStatus function");		
-			WebElement temp1 = element(objname);
+			log("Entered checkstopwlanStatus function");	
+			String[] args = null;
+			args = objname.split(",");
+			WebElement temp1 = element(args[0]);
 			List<WebElement> list1 = temp1.findElements(By.tagName(("ul")));
 			Integer count1 = list1.size();
 			System.out.println(count1);
 			wifi_Mode(getvalue, "OFF");
 			wifi_Mode(getvalue, "ON");
-			launch_App_Device(getvalue,"com.rhomobile.compliancetest_js/com.rhomobile.rhodes.RhodesActivity");
-			WebElement temp2 = element(objname);
+			launch_App_Device(getvalue, args[1]);
+			WebElement temp2 = element(args[0]);
 			List<WebElement> list2 = temp2.findElements(By.tagName(("ul")));
 			Integer count2 = list2.size();
 			System.out.println(count2);
