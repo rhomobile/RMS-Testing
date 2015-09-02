@@ -32,6 +32,7 @@ PATH_SIGNATURE = "../../Motorola-Extensions/lib/commonAPI/signature/ext/signatur
 PATH_SIGNALINDICATORS = "../../Motorola-Extensions/lib/commonAPI/indicators/ext/signalindicators.xml"
 PATH_SYSTEM = "../../rhodes/lib/commonAPI/coreapi/ext/System.xml"
 PATH_WEBVIEW = "../../rhodes/lib/commonAPI/coreapi/ext/Webview.xml"
+PATH_SMARTCRADLE = "../../rhodes/lib/commonAPI/smartcradle/SmartCradle.xml"
 
 def module_xmltoymal (xmlpath, modulename)
 	begin

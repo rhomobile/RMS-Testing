@@ -55,6 +55,16 @@ namespace :generate do
 			exec cmd
 		end
 		
+		desc "Generates smartCradle Property SET/GET Test"
+		task :smartcradle do
+			Rake::Task['generate:xmltoymal:smartcradle'].execute
+			require File.dirname(__FILE__) + "/smartcradle/generate_smartcradle_spec.rb"
+			require File.dirname(__FILE__) + "/generate_spec.rb"
+			generate_js_smartcradle_spec
+			cmd = "js-beautify -f ./Smartcradle/#{$file_name} -o ./Smartcradle/#{$file_name}"
+			exec cmd
+		end
+		
 		desc "Generate Constant Tests"
 		task :rhoconstants do
 			Rake::Task['generate:xmltoymal:application'].execute
@@ -87,6 +97,7 @@ namespace :generate do
 			Rake::Task['generate:xmltoymal:signalindicators'].execute
 			Rake::Task['generate:xmltoymal:system'].execute
 			Rake::Task['generate:xmltoymal:webview'].execute
+			Rake::Task['generate:xmltoymal:smartcradle'].execute
 
 			require File.dirname(__FILE__) + "/rhoconstants/generate_rhoconstant_spec.rb"
 			File.open($path_to_spec, 'w') do |f|
@@ -122,6 +133,7 @@ namespace :generate do
 			generate_js_spec "SingalIndicators"
 			generate_js_spec "System"
 			generate_js_spec "Webview"
+			generate_js_spec "smartcradle"
 
 			#Generate IT for constant tests
 			generate_constant_it
@@ -300,6 +312,11 @@ namespace :generate do
 		#desc "Converts xml to ymal"
 		task :webview do
 			module_xmltoymal PATH_WEBVIEW, "Webview"
+		end
+		
+		#desc "Converts xml to ymal"
+		task :smartcradle do
+			module_xmltoymal PATH_SMARTCRADLE, "smartcradle"
 		end
 	end
 	
