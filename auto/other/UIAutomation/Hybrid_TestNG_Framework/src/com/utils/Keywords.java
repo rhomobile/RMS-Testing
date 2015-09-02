@@ -2819,7 +2819,28 @@ public class Keywords {
 			return "pass";  
 		}
 		catch(Exception ex){
-			log("Exiting from Rotate_Screen function"+ ex.getMessage());
+			log("Exiting from ScrollPage function"+ ex.getMessage());
+			return "Fail";
+		}
+	}
+	
+	/**
+	 * ScrollUp Page
+	 * @author Vinod Shankar 
+	 * @param getvalue
+	 * @param objname
+	 * @return
+	 */
+	public String ScrollUp_Page(Hashtable<String,String> getvalue, String objname){
+		try{
+			log("Started Executing ScrollPage function");
+			WebElement pages = element(objname);
+			TouchActions flick = new TouchActions(mobdriv).flick(pages, 0, -30, 0);
+			flick.perform();
+			return "pass";  
+		}
+		catch(Exception ex){
+			log("Exiting from ScrollUp_Page function"+ ex.getMessage());
 			return "Fail";
 		}
 	}
@@ -3346,14 +3367,20 @@ public class Keywords {
 					}else if(Sysproperty[i].toLowerCase().contains(objName.toLowerCase())&&objName.contains("devicePushId")){
 						String[] keyValue = Sysproperty[i].split(":");
 						keyValue[keyValue.length-1] = keyValue[keyValue.length-1].replace(" ", "");
-						if(!keyValue[keyValue.length-1].toLowerCase().contains("devicePushId".toLowerCase())){
-							log(objName+" is returned in property");
-							result = "Pass";
+						if(keyValue.length>1) {
+							if(!keyValue[keyValue.length-1].toLowerCase().contains("devicePushId".toLowerCase())){
+								log(objName+" is returned in property");
+								result = "Pass";
+							}
+							else {
+								log(objName+" is not returned in property");
+								result = "Fail";
+							}
 						}
 						else {
-							log(objName+" is not returned in property");
-							result = "Fail";
-						}
+							log(objName+" is not set in the device");
+							result = "Pass";
+							}
 					}else if(Sysproperty[i].toLowerCase().contains(objName.toLowerCase())&&objName.contains("freeServerPort")){
 						String[] keyValue = Sysproperty[i].split(":");
 						keyValue[keyValue.length-1] = keyValue[keyValue.length-1].replace(" ", "");
