@@ -3049,7 +3049,7 @@ public class Keywords {
 						}
 						else if(keyValue[0].contains("hasCalendar")||keyValue[0].contains("has_calendar")) {
 							//TODO How to test based on device settings
-							if(keyValue[1].contains("false")) {
+							if(keyValue[1].contains("true")) {
 								result[i]="Pass";
 								log(keyValue[0]+" Value is "+keyValue[1]+" and Result is "+result[i]);
 							}
@@ -3278,7 +3278,7 @@ public class Keywords {
 							}
 						}
 						else if(keyValue[0].contains("phoneId")||keyValue[0].contains("phone_id")) {
-							if(keyValue[1].toLowerCase().contains("12334562ssd")) {
+							if(keyValue[1].toLowerCase().contains("12334562ssd")||keyValue[1].length()>5) {
 								result[i]="Pass";
 								log(keyValue[0]+" Value is "+keyValue[1]+" and Result is "+result[i]);
 							}
