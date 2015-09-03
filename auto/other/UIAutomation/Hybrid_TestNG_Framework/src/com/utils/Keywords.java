@@ -4420,40 +4420,43 @@ public class Keywords {
 		try{
 			log("Executing ChangeConfigxml function");	
 			String line = null;
-			int webserver_flag = 0;
 			List<String> lines = new ArrayList<String>();
 			File f1 = new File(System.getProperty("user.dir")+ "\\src\\com\\input\\Config.xml");
 			if(f1.exists()) {
 				String argsplit [] = arg1.split(",");
 				String XmlNest = argsplit[0];
 	            String ConfigTagToAdd = argsplit[1];
-	            String arr [] = XmlNest.split("/");
+	            String XMLtagArrayList [] = XmlNest.split("/");
 	            FileReader fr = new FileReader(f1);
 	            BufferedReader br = new BufferedReader(fr);
 	            int i = 0;
 	            int flag = 0;
-	            System.out.println(arr.length);
+	            System.out.println(XMLtagArrayList.length);
 	            while ((line = br.readLine()) != null) {
-	            	if (line.contains("<"+arr[i])) {
-	            		if(i< arr.length-1)
+	            	if (line.contains("<"+XMLtagArrayList[i])) {
+	            		if(i< XMLtagArrayList.length-1)
 	            			i++;
 	               	}
-	           		if(arr.length == i+1 && line.contains("<"+ConfigTagToAdd) ) {
-	           			for(int j = 0; j<arr.length;j++) {
+	           		if(XMLtagArrayList.length == i+1 && line.contains("<"+ConfigTagToAdd) ) {
+	           			for(int j = 0; j<XMLtagArrayList.length;j++) {
 	           				argsplit[2] = argsplit[2].replace(argsplit[2], "  "+argsplit[2]);
 	           			}
-	           			line = line.replaceAll(".+", argsplit[2]);
-	           			flag =1;
+	           			if(!argsplit[2].contains(line))
+	           				line = line.replaceAll(".+", argsplit[2]);
+	           			flag = 1;
 	           		}
-	           		else if(line.contains("</"+arr[i]) && arr.length == i+1 && flag ==0) {
-	           			for(int j = 0; j<arr.length;j++) {
-	           				argsplit[2] = argsplit[2].replace(argsplit[2], "  "+argsplit[2]);
+	           		else if(line.contains("</"+XMLtagArrayList[i]) && XMLtagArrayList.length == i+1 && flag ==0) {
+	           			String space = null;
+	           			for(int j = 0; j<XMLtagArrayList.length;j++) {
+	           				space = "  ";
+	           				argsplit[2] = argsplit[2].replace(argsplit[2], space+argsplit[2]);
 	           			}
-	           			arr[i] = arr[i].replace(arr[i], "</"+arr[i]+">");
-	           			for(int j = 0; j<arr.length-1;j++) {
-	           				arr[i] = arr[i].replace(arr[i], "  "+arr[i]);
+	           			argsplit[2] = argsplit[2].replace("endl", "\n"+space);
+	           			XMLtagArrayList[i] = XMLtagArrayList[i].replace(XMLtagArrayList[i], "</"+XMLtagArrayList[i]+">");
+	           			for(int j = 0; j<XMLtagArrayList.length-1;j++) {
+	           				XMLtagArrayList[i] = XMLtagArrayList[i].replace(XMLtagArrayList[i], "  "+XMLtagArrayList[i]);
 	           			}
-	           			line = line.replaceAll(".+", argsplit[2]+"\n"+arr[i]);
+	           			line = line.replaceAll(".+", argsplit[2]+"\n"+XMLtagArrayList[i]);
 	           		}
 	                lines.add(line);
 	            }
