@@ -620,7 +620,7 @@ describe('Printer Zebra', function() {
         }, 
 		//{"timeout": 0}, - invalid as per doc
 		{
-            "timeout": 100
+            "timeout": 10000
         },
         {
             "timeout": 5000
@@ -645,13 +645,13 @@ describe('Printer Zebra', function() {
             generateConnectWithParams(connectParams[1], 'withcb', true);
             generateConnectWithParams(connectParams[1], 'anonymous', true);
         //}
-             generateConnectWithParams(connectParams[2], 'without', false);
-             generateConnectWithParams(connectParams[2], 'withcb', false);
-             generateConnectWithParams(connectParams[2], 'anonymous', false);
+             generateConnectWithParams(connectParams[2], 'without', true);
+             generateConnectWithParams(connectParams[2], 'withcb', true);
+             generateConnectWithParams(connectParams[2], 'anonymous', true);
 
-             generateConnectWithParams(connectParams[3], 'without', false);
-             generateConnectWithParams(connectParams[3], 'withcb', false);
-             generateConnectWithParams(connectParams[3], 'anonymous', false);
+             generateConnectWithParams(connectParams[3], 'without', true);
+             generateConnectWithParams(connectParams[3], 'withcb', true);
+             generateConnectWithParams(connectParams[3], 'anonymous', true);
 
              //generateConnectWithParams(connectParams[4], 'without', false);
              //generateConnectWithParams(connectParams[4], 'withcb', false);
