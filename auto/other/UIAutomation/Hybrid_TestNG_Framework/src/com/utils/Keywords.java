@@ -2215,10 +2215,12 @@ public class Keywords {
 			    int height = fullImg.getHeight();
 			    String currentOrientation = (((Rotatable) mobdriv).getOrientation()).toString();
 				if(currentOrientation=="PORTRAIT"){
-					if(!screenshot_id.contains("VT366_0108"))
-						eleScreenshot = fullImg.getSubimage(0, 50, width, height-50);
-					else
+					if(screenshot_id.contains("VT366_0108"))
 						eleScreenshot = fullImg.getSubimage(0, (height/2)+150, width, height-(height/2)-150);
+					else if(screenshot_id.contains("VT200_0985")||screenshot_id.contains("VT200_0986"))
+						eleScreenshot = fullImg.getSubimage(0, 50, width, 120);
+					else
+						eleScreenshot = fullImg.getSubimage(0, 50, width, height-50);
 				}
 				else {
 					eleScreenshot = fullImg.getSubimage(0, 0, width-50, height);
