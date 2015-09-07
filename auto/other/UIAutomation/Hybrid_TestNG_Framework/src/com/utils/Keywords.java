@@ -3958,11 +3958,22 @@ public class Keywords {
 	public String ZoomPage(Hashtable<String,String> getvalue,String arg1){
 		try{
 			log("Started Executing ZoomPage function");
-			WebElement pages = element(arg1);
-			TouchActions flick = new TouchActions(mobdriv).flick(pages, -100, 0, 0);
-			flick.perform();
+			
 			Dimension dim = mobdriv.manage().window().getSize();
-			mobdriv.getAdbConnection().tap(dim.width-100, dim.height+100);
+			if(validate_App_Launched_Device(getvalue, "com.symbol.enterprisebrowser")=="Pass") {
+				WebElement pages = element(arg1);
+				TouchActions flick = new TouchActions(mobdriv).flick(pages, -100, 0, 0);
+				flick.perform();
+				mobdriv.getAdbConnection().tap(dim.width-100, dim.height);
+				
+			}else {
+				WebElement pages = element(arg1);
+				TouchActions flick = new TouchActions(mobdriv).flick(pages, -100, 0, 0);
+				flick.perform();
+				mobdriv.getAdbConnection().tap(dim.width-100, dim.height+100);
+			}
+				
+			
 			return "Pass";
 		}
 		catch(Exception ex){
