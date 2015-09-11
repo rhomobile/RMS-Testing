@@ -25,6 +25,7 @@ import java.util.Hashtable;
 import java.util.List;
 import java.util.Properties;
 import java.util.Scanner;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import javax.imageio.ImageIO;
@@ -2197,21 +2198,11 @@ public class Keywords {
 	 */
 	public String TakeScreenshot(Hashtable<String,String> getvalue, String screenshot_id,String ModuleName) {
 		   	String DeviceName=executeCommandLine("adb shell getprop ro.product.name");
-		    try{         
+		    try{  
 			    File screenshot = ((TakesScreenshot)mobdriv).getScreenshotAs(OutputType.FILE);
 			    BufferedImage  fullImg = ImageIO.read(screenshot);
-			    //Dimension dim = mobdriv.manage().window().getSize();
 			    BufferedImage eleScreenshot = null;
-			   /* if(DeviceName.contains("TC70") || DeviceName.contains("TC75")) {
-			    	eleScreenshot= fullImg.getSubimage(0, 50, dim.width, dim.height+170);
-			    }
-			    else if(DeviceName.contains("MC40")) {
-			    	eleScreenshot= fullImg.getSubimage(0, 50, dim.width, dim.height+110);
-			    }
-			    else {
-			    	eleScreenshot= fullImg.getSubimage(0, 50, dim.width, dim.height);
-			    }*/
-			    int width = fullImg.getWidth();
+			   int width = fullImg.getWidth();
 			    int height = fullImg.getHeight();
 			    String currentOrientation = (((Rotatable) mobdriv).getOrientation()).toString();
 				if(currentOrientation=="PORTRAIT"){
@@ -2219,6 +2210,11 @@ public class Keywords {
 						eleScreenshot = fullImg.getSubimage(0, (height/2)+150, width, height-(height/2)-150);
 					else if(screenshot_id.contains("VT200_0985")||screenshot_id.contains("VT200_0986"))
 						eleScreenshot = fullImg.getSubimage(0, 50, width, 120);
+					else if(screenshot_id.equals("VT200_0596"))
+						if(validate_App_Launched_Device(getvalue, "com.symbol.enterprisebrowser")=="Pass")
+							eleScreenshot = fullImg.getSubimage(0, 50, width, 60);
+						else
+							eleScreenshot = fullImg.getSubimage(0, 50, width, 120);
 					else
 						eleScreenshot = fullImg.getSubimage(0, 50, width, height-50);
 				}
@@ -2226,7 +2222,6 @@ public class Keywords {
 					eleScreenshot = fullImg.getSubimage(0, 0, width-50, height);
 				}
 			    
-			    //BufferedImage eleScreenshot= fullImg.getSubimage(0, 146, 720, 1200);
 			    ImageIO.write(eleScreenshot, "png", screenshot);
 			    String outputDirName = System.getProperty("user.dir")+ "\\test-output\\"+DeviceName+"\\"+ModuleName+"\\";
 			    FileUtils.copyFile(screenshot, new File(outputDirName  + File.separator +screenshot_id+".png"));
@@ -2245,7 +2240,7 @@ public class Keywords {
 	 * @param screenshot_id
 	 * @return
 	 */
-	public String TakeNativeScreenshot(Hashtable<String,String> getvalue, String screenshot_id,String ModuleName) {
+	/*public String TakeNativeScreenshot(Hashtable<String,String> getvalue, String screenshot_id,String ModuleName) {
 
 		   	String DeviceName=executeCommandLine("adb shell getprop ro.product.name");
 		    try{         
@@ -2260,7 +2255,7 @@ public class Keywords {
 				else {
 					eleScreenshot= fullImg.getSubimage(0, 0, dim.height-100, dim.width);
 				}*/
-			    int width = fullImg.getWidth();
+			    /*int width = fullImg.getWidth();
 			    int height = fullImg.getHeight();
 			    String currentOrientation = (((Rotatable) mobdriv).getOrientation()).toString();
 				if(currentOrientation=="PORTRAIT"){
@@ -2282,7 +2277,7 @@ public class Keywords {
 			log("Exiting from Take Signature screenshot function");
 			return "fail";
 		}
-    }
+    }*/
 	
 	/**
 	 * WiFi turn off and on
@@ -3038,7 +3033,7 @@ public class Keywords {
 								log(keyValue[0]+" Value is "+keyValue[1]+" and Result is "+result[i]);
 							}
 						}
-						else if(keyValue[0].contains("devicePushId")||keyValue[0].contains("device_push_id")) {
+						else if(keyValue[0].contains("devicePushId")||keyValue[0].contains("device_push_id")||keyValue[0].contains("deviceId")) {
 							//TODO How to test based on device settings
 							if(keyValue[1].contains(" ")) {
 								result[i]="Pass";
@@ -3313,7 +3308,7 @@ public class Keywords {
 						}
 						else {
 							result[i]="Fail";
-							log(keyValue[0]+" Value is "+keyValue[1]+" Not compared");
+							log(keyValue[0]+" Value is "+keyValue[1]+" Not compared Fail");
 						}
 						
 					}

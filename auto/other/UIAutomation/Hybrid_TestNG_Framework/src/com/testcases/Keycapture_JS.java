@@ -2,6 +2,10 @@ package com.testcases;
 
 import io.selendroid.standalone.SelendroidLauncher;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Hashtable;
 
 import junit.framework.Assert;
@@ -56,7 +60,21 @@ public class Keycapture_JS {
 		if(res.equalsIgnoreCase("Pass") && res1.equalsIgnoreCase("Pass")){
 			actRes="Pass";				
 			excelReader.setCellData(Constants.Xls_Sheetname, Constants.TestResult_Col, row, "Pass");				
-			Assert.assertEquals("Pass", actRes);
+			//Assert.assertEquals("Pass", actRes);
+			try{
+				String verify, putData = null;
+	            File file = new File(System.getProperty("user.dir")+"\\src\\com\\logs\\"+ModuleName+"\\"+ModuleName+data.get(Constants.Testcase_ID_Col)+".log");
+	            FileReader fr = new FileReader(file);
+	            BufferedReader br = new BufferedReader(fr);
+	            while( (verify=br.readLine()) != null ){ 
+	            	verify = verify.substring(34);
+	            	putData = putData+"\n"+verify;
+	               }
+	            br.close();
+	           Assert.assertEquals(putData, "Pass", actRes);
+	        }catch(IOException e){
+	        	e.printStackTrace();
+	        }
 		}else{
 			actRes="Fail";
 			excelReader.setCellData(Constants.Xls_Sheetname, Constants.TestResult_Col, row, "Fail");	
