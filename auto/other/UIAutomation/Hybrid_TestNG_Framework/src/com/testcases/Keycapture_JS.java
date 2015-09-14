@@ -60,6 +60,10 @@ public class Keycapture_JS {
 		if(res.equalsIgnoreCase("Pass") && res1.equalsIgnoreCase("Pass")){
 			actRes="Pass";				
 			excelReader.setCellData(Constants.Xls_Sheetname, Constants.TestResult_Col, row, "Pass");				
+			Assert.assertEquals("Pass", actRes);
+		}else{
+			actRes="Fail";
+			excelReader.setCellData(Constants.Xls_Sheetname, Constants.TestResult_Col, row, "Fail");	
 			//Assert.assertEquals("Pass", actRes);
 			try{
 				String verify, putData = null;
@@ -75,10 +79,6 @@ public class Keycapture_JS {
 	        }catch(IOException e){
 	        	e.printStackTrace();
 	        }
-		}else{
-			actRes="Fail";
-			excelReader.setCellData(Constants.Xls_Sheetname, Constants.TestResult_Col, row, "Fail");	
-			Assert.assertEquals("Pass", actRes);
 		}
 		log.debug("Ending Test Case ID"+data.get("Testcase ID"));	
 	}

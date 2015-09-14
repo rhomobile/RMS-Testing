@@ -1737,9 +1737,31 @@ public class Keywords {
 			}
 			else
 			{
-				log("Given App is not in Foreground");
-				log("Exiting Validate_App_launched_Device function");
-				return "Fail";
+				result=executeCommandLine("adb shell uiautomator runtest MaaFw.jar -c com.symbol.maaf.MaaFw -e COMPARE_APP_PKG com.android.chrome","com.android.chrome Success");
+				if(!result.equals("Fail")&&arg1.contains("com.android.browser")){
+					log("Given App is in Foreground");
+					log("Exiting Validate_App_launched_Device function");
+					return "Pass";
+				}
+				else if(arg1.contains("com.android.email")){
+					result=executeCommandLine("adb shell uiautomator runtest MaaFw.jar -c com.symbol.maaf.MaaFw -e COMPARE_APP_PKG com.google.android.gm","com.google.android.gm Success");
+					if(!result.equals("Fail")) {
+						log("Given App is in Foreground");
+						log("Exiting Validate_App_launched_Device function");
+						return "Pass";
+					}
+					else {
+						log("Given App is not in Foreground");
+						log("Exiting Validate_App_launched_Device function");
+						return "Fail";
+					}
+				}
+				else {
+					log("Given App is not in Foreground");
+					log("Exiting Validate_App_launched_Device function");
+					return "Fail";
+				}
+				
 			}
 
 
@@ -1762,11 +1784,27 @@ public class Keywords {
 
 			log("Started Executing Launch_App_Device function");
 			String result=executeCommandLine("adb shell am start -n "+ arg1,"Error");
-			Thread.sleep(5000);
-			if(!result.equals("Fail")){                     
-				log("Failed to launch the App");
-				log("Exiting Launch_App_Device function");
-				return "Fail";
+			Thread.sleep(1000);
+			if(!result.equals("Fail")){
+				if(arg1.contains("com.android.browser")&&validate_App_Exist_Device(getvalue, "com.android.chrome") == "Pass") {
+					result=executeCommandLine("adb shell am start -n com.android.chrome/com.google.android.apps.chrome.Main bnds","Error");
+					Thread.sleep(1000);
+					if(!result.equals("Fail")){
+						log("Failed to launch the App");
+						log("Exiting Launch_App_Device function");
+						return "Fail";
+					}
+					else {
+						log("Successfully launched the App");
+						log("Exiting Launch_App_Device function");
+						return "Pass";
+					}
+				}
+				else {
+					log("Failed to launch the App");
+					log("Exiting Launch_App_Device function");
+					return "Fail";
+				}
 			}
 			else
 			{
@@ -2753,8 +2791,10 @@ public class Keywords {
 				log("unlocking screen");
 				result=executeCommandLine("adb shell uiautomator runtest MaaFw.jar -c com.symbol.maaf.MaaFw -e UNLOCK_DEVICE True", "Im in UNLOCKER");
 				Thread.sleep(1000);
-				if(result.contains("Im in UNLOCKER"))
+				if(result.contains("Im in UNLOCKER")){
+					result=executeCommandLine("adb shell input keyevent 82");
 					return "pass";
+				}
 				else
 					return "Fail";             
 			}else{
@@ -2906,7 +2946,7 @@ public class Keywords {
 							String[] widthheight = wh[1].split("x");
 							if(isInteger(widthheight[1], 10)) {
 								int height = Integer.parseInt(widthheight[1]);
-								if(value_int == height) {
+								if(value_int == height|| height>value_int) {
 									result[i]="Pass";
 									log(keyValue[0]+" Value is "+value_int +" and Result is "+result[i]);
 								}
@@ -3001,8 +3041,9 @@ public class Keywords {
 						}
 						else if(keyValue[0].contains("deviceName")||keyValue[0].contains("device_name")) {
 							String DeviceName=executeCommandLine("adb shell getprop ro.product.name");
+							String Product=executeCommandLine("adb shell getprop ro.build.product");
 							String Manufacturer=executeCommandLine("adb shell getprop ro.product.manufacturer");
-							if(keyValue[1].contains(DeviceName)&&keyValue[1].contains(Manufacturer)) {
+							if((keyValue[1].contains(DeviceName)||Sysproperty[i].contains(Product))&&keyValue[1].contains(Manufacturer)) {
 								result[i]="Pass";
 								log(keyValue[0]+" Value is "+keyValue[1] +" and Result is "+result[i]);
 							}
@@ -3137,6 +3178,10 @@ public class Keywords {
 								log(keyValue[0]+" Value is "+keyValue[1]+" and Result is "+result[i]);
 							}
 							else if(keyValue[1].contains("false")&&touchscreen.contains("false")) {
+								result[i]="Pass";
+								log(keyValue[0]+" Value is "+keyValue[1]+" and Result is "+result[i]);
+							}
+							else if(keyValue[1].contains("true")&&(touchscreen.contains(" ")||touchscreen1.contains(" "))) {
 								result[i]="Pass";
 								log(keyValue[0]+" Value is "+keyValue[1]+" and Result is "+result[i]);
 							}
@@ -3341,8 +3386,9 @@ public class Keywords {
 					}
 					else if(Sysproperty[i].toLowerCase().contains(objName.toLowerCase())&&objName.contains("deviceName")){
 						String DeviceName=executeCommandLine("adb shell getprop ro.product.name");
+						String Product=executeCommandLine("adb shell getprop ro.build.product");
 						String Manufacturer=executeCommandLine("adb shell getprop ro.product.manufacturer");
-						if(Sysproperty[i].contains(DeviceName)&&Sysproperty[i].contains(Manufacturer)){
+						if((Sysproperty[i].contains(DeviceName)||Sysproperty[i].contains(Product))&&Sysproperty[i].contains(Manufacturer)){
 							log(objName+" is returned in property");
 							result = "Pass";
 						}
@@ -3915,8 +3961,15 @@ public class Keywords {
 			String result=executeCommandLine("adb shell uiautomator runtest MaaFw.jar -c com.symbol.maaf.MaaFw -e COMPARE_EDITTXT_INSTANCE "+param[0]+":"+param[1],toCheck);
 			if(result.contains(toCheck)) 
 				return "pass";
-			else
-				return "fail";
+			else {
+				if(param[1].contains("155553132558335033")&&(validate_App_Exist_Device(getvalue, "com.android.dialer")== "Pass")) {
+					log("com.android.dialer doesnt exists");
+					return "Pass";
+				}
+				else
+					return "fail";
+			}
+				
 		}catch(Exception ex){
 			log("Text Not found. reason :"+ex.getMessage());
 			log("Exiting from validate_SmsTextBody function");
@@ -4205,8 +4258,15 @@ public class Keywords {
 			    	return "Pass";			
 				}
 			    else{
-			    	log("InCorrect uuid");
-			    	return "Fail";
+			    	if(content.length()>5&&uuidvalue1.contains(" ")&&uuidvalue2.contains(" ")) {
+			    		log("Correct uuid");	
+				    	return "Pass";
+			    	}
+			    	else {
+			    		log("InCorrect uuid");
+				    	return "Fail";
+			    	}
+			    	
 			    }
 			}
 			else if(objname.equals("oeminfo")){
@@ -4217,8 +4277,16 @@ public class Keywords {
 					return "Pass";
 				}
 				else{
-					log("InCorrect oeminfo");
-					return "Fail";
+					String productname = executeCommandLine("adb shell getprop ro.product.name");
+					if(content.toLowerCase().equals(productname.toLowerCase())){
+						log("Correct oeminfo");	
+						return "Pass";
+					}
+					else {
+						log("InCorrect oeminfo");
+						return "Fail";
+					}
+					
 				 }
 			}
 			else{
