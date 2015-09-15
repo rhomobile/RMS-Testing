@@ -104,5 +104,37 @@ describe "RhomModel" do
     
     (count - 1).should == getProduct.count
   end
+  it 'should return true if any changes added to that object' do
+    getCustomer.create({'name'=>'bhakta','age'=>'28'})
+    data = getCustomer.find(:all,:conditions => {'name' => 'bhakta'})
+    data[0].update_attributes({'age' => '34'})
+    getCustomer.hasChanges(data[0].object).should == true
+  end
+
+  it 'should throw argument error for freezed model on createInstance' do
+    lambda { 
+      obj = getFreezedProduct.create({'brand'=>'testbrand','name'=>'samsung','price'=>'50000','extra_property'=>'Test Error'}) 
+    }.should raise_error(ArgumentError)
+  end
+
+  it 'should throw argument error for freezed model on saveObject' do
+    lambda { 
+      obj = getFreezedProduct.new
+      obj.brand = 'testbrand'
+      obj.name = 'samsung'
+      obj.price = '50000'
+      obj.extra_property = 'test_error'
+      obj.save 
+    }.should raise_error(ArgumentError)
+  end
+
+  it 'should throw argument error for freezed model on updateObject' do
+    lambda { 
+      data = getFreezedProduct.create({'brand'=>'testbrand','name'=>'samsung','price'=>'50000'})
+      data.update_attributes({'extra_property'=>'Test Error'})
+    }.should raise_error(ArgumentError)
+  end
+
+  
 
 end

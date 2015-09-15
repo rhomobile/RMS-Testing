@@ -75,6 +75,11 @@ def getCase
   Case
 end
 
+def getFreezedProduct
+  return FreezedProductS if $spec_settings[:schema_model]
+  FreezedProduct
+end
+
 def getTestDB
   ::Rho::RHO.get_db_partitions['local']
 end
