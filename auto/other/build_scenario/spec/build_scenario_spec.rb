@@ -31,7 +31,7 @@ describe "Testing build scenario" do
 			# For wm/ce app_type: rhoelements is required
 			add_yml_setting('build.yml',{"app_type"=>"rhoelements"})
 
-			Open3.pipeline("rake clean:wm", "rake clean:wince")
+			Open3.pipeline("rake clean:wm")
 	  	end
 
 	  	it "Should build with app_type: rhoelements for WM/CE" do
@@ -88,7 +88,6 @@ describe "Testing build scenario" do
 
 			initiate_build_wmce
 			
-			delete_yml_setting('build.yml',"wm")
 			delete_yml_setting('build.yml','capabilities')
 
 			expect(File.exist?(filePath)).to be true
@@ -261,7 +260,7 @@ describe "Testing build scenario" do
 		it "should build using capabilities for android" do
 
 			add_yml_setting('build.yml',{"android"=>{"manifest_template" => "AndroidManifest.erb"}})
-			add_yml_setting('build.yml',{"capabilities"=>["camera","bluetooth","gps","sdcard","pim","calendar","vibrate","phone","push","network_state"]})
+			add_yml_setting('build.yml',{"capabilities"=>["camera","bluetooth","gps","sdcard","pim","calendar","vibrate","phone","network_state"]})
 			delete_yml_setting('build.yml',"app_type")
 
 			initiate_build_android
@@ -275,7 +274,7 @@ describe "Testing build scenario" do
 		# myext extension removed as not supported
 		it "should build using old 2.2/native ruby extensions for android" do
 
-			add_yml_setting('build.yml',{"android"=>{"extensions"=>["nfc","rawsensors","mspec", "openssl.so", "openssl", "hmac", "digest", "digest-sha1","digest-md5", 
+			add_yml_setting('build.yml',{"android"=>{"extensions"=>["nfc","mspec", "openssl.so", "openssl", "hmac", "digest", "digest-sha1","digest-md5", 
 				"ezcrypto", "fileutils", "rexml", "set", "rhoxml", "thread", "timeout", "uri", "pdf-writer", "json", "net-http", "digest-sha2"], 
 				"manifest_template" => "AndroidManifest.erb", "version" => "2.3.3"}})
 			delete_yml_setting('build.yml',"app_type")
@@ -658,7 +657,7 @@ describe "Testing build scenario" do
 
 		it "should build using all non-licensed extension when app type is not rhoelements for WP8" do
 
-			add_yml_setting('build.yml',{"wp8"=>{"extensions"=>["barcode","rhoconnect-client"]}})
+			add_yml_setting('build.yml',{"wp8"=>{"productid"=>"da37e740-9d27-0131-ad03-0023241f0ea9","extensions"=>["barcode","rhoconnect-client"]}})
 			delete_yml_setting('build.yml','app_type')
 
 			initiate_build_wp8
@@ -671,7 +670,7 @@ describe "Testing build scenario" do
 		
 		it "should build using all licensed extension when app type is not rhoelements for WP8" do
 
-			add_yml_setting('build.yml',{"wp8"=>{"extensions"=>["coreapi","mediacapture"]}})
+			add_yml_setting('build.yml',{"wp8"=>{"productid"=>"da37e740-9d27-0131-ad03-0023241f0ea9","extensions"=>["coreapi","mediacapture"]}})
 			delete_yml_setting('build.yml','app_type')
 
 			initiate_build_wp8
@@ -684,7 +683,7 @@ describe "Testing build scenario" do
 
 		it "should build using ruby extensions for WP8" do
 
-			add_yml_setting('build.yml',{"wp8"=>{"extensions"=>["digest", "digest-sha1","digest-md5", "uri", "json"]}})
+			add_yml_setting('build.yml',{"productid"=>"da37e740-9d27-0131-ad03-0023241f0ea9","wp8"=>{"extensions"=>["digest", "digest-sha1","digest-md5", "uri", "json"]}})
 			delete_yml_setting('build.yml',"app_type")
 
 			initiate_build_wp8
