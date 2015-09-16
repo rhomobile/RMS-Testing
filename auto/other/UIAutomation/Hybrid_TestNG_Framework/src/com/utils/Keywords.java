@@ -3181,7 +3181,7 @@ public class Keywords {
 								result[i]="Pass";
 								log(keyValue[0]+" Value is "+keyValue[1]+" and Result is "+result[i]);
 							}
-							else if(keyValue[1].contains("true")&&(touchscreen.contains(" ")||touchscreen1.contains(" "))) {
+							else if(keyValue[1].contains("true")&&(touchscreen.contains("")||touchscreen1.contains(""))) {
 								result[i]="Pass";
 								log(keyValue[0]+" Value is "+keyValue[1]+" and Result is "+result[i]);
 							}
@@ -3962,7 +3962,7 @@ public class Keywords {
 			if(result.contains(toCheck)) 
 				return "pass";
 			else {
-				if(param[1].contains("155553132558335033")&&(validate_App_Exist_Device(getvalue, "com.android.dialer")== "Pass")) {
+				if(arg1.contains("155553132558335033")&&(validate_App_Exist_Device(getvalue, "com.android.dialer")!= "Pass")) {
 					log("com.android.dialer doesnt exists");
 					return "Pass";
 				}
@@ -4258,7 +4258,7 @@ public class Keywords {
 			    	return "Pass";			
 				}
 			    else{
-			    	if(content.length()>5&&uuidvalue1.contains(" ")&&uuidvalue2.contains(" ")) {
+			    	if(content.length()>5&&uuidvalue1.contains("")&&uuidvalue2.contains("")) {
 			    		log("Correct uuid");	
 				    	return "Pass";
 			    	}
