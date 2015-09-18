@@ -135,6 +135,45 @@ describe "RhomModel" do
     }.should raise_error(ArgumentError)
   end
 
+  it 'should delete object by using deleteObjectsPropertyBagByCondArray when condition matches with one records' do
+    getCustomer.create({'name'=>'bhakta','age'=>'28'})
+    getCustomer.create({'name'=>'bhakta2','age'=>'28'})
+    data = getCustomer.find(:all,:conditions => {'name' => 'bhakta'})
+    getCustomer.deleteObjectsPropertyBagByCondArray("name = ?",['bhakta'],{},['name'])
+    getProduct.find(data[0].object).should be_nil
+  end
+
+  it 'should delete objects by using deleteObjectsPropertyBagByCondArray when condition matches with more than one records' do
+    getCustomer.create({'name'=>'bhakta','age'=>'28'})
+    getCustomer.create({'name'=>'bhakta2','age'=>'36'})
+    getCustomer.create({'name'=>'bhakta3','age'=>'34'})
+    getCustomer.create({'name'=>'bhakta4','age'=>'28'})
+    data = getCustomer.find(:all,:conditions => {'age' => '28'})
+    getCustomer.deleteObjectsPropertyBagByCondArray("age = ?",['28'],{},['age'])
+    getProduct.find(data[0].object).should be_nil
+    getProduct.find(data[1].object).should be_nil
+    getCustomer.count.should_not == 0
+  end
+
+  it 'should not delete any objects by using deleteObjectsPropertyBagByCondArray when condition does not matches with any of records' do
+    getCustomer.create({'name'=>'bhakta','age'=>'28'})
+    getCustomer.create({'name'=>'bhakta2','age'=>'36'})
+    getCustomer.create({'name'=>'bhakta3','age'=>'34'})
+    getCustomer.create({'name'=>'bhakta4','age'=>'28'})
+    initialCount = getCustomer.count
+    getCustomer.deleteObjectsPropertyBagByCondArray("age = ?",['60'],{},['age'])
+    getCustomer.count.should == initialCount
+  end
+
+  it 'should delete all if no condition passed' do
+    getCustomer.create({'name'=>'bhakta','age'=>'28'})
+    getCustomer.create({'name'=>'bhakta2','age'=>'36'})
+    getCustomer.create({'name'=>'bhakta3','age'=>'34'})
+    getCustomer.create({'name'=>'bhakta4','age'=>'28'})
+    getCustomer.deleteObjectsPropertyBagByCondArray("",[],{},[])
+    getCustomer.count.should == 0
+  end
+
   
 
 end
