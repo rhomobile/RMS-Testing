@@ -174,6 +174,15 @@ describe "RhomModel" do
     getCustomer.count.should == 0
   end
 
+  it 'should update object by using updateObject api' do
+    getCustomer.delete_all
+    getCustomer.create({'name'=>'bhakta','age'=>'28'})
+    data = getCustomer.findObjectsPropertyBagByCondHash(:all,{'name' => 'bhakta'},{},[])
+    new_name = "macworld"
+    getCustomer.updateObject(data[0]['object'], data[0], {'name'=>"#{new_name}"})
+    new_data = getCustomer.find(data[0]['object'])
+    new_data.name.should == new_name
+  end
   
 
 end
