@@ -4558,8 +4558,15 @@ public class Keywords {
 		}
 		
 	}   
-	
-	
+	public void TaponGetStartparams(Hashtable<String,String> getvalue){
+		String wmsize=executeCommandLine("adb shell wm size");
+		String[] wh = wmsize.split(":");
+		wh[1] = wh[1].replace(" ", "");
+		String[] widthheight = wh[1].split("x");
+		int height = (Integer.parseInt(widthheight[1])/2)-160;
+		int width = (Integer.parseInt(widthheight[0])/2)-150;
+		mobdriv.getAdbConnection().tap(width, height);
+	}
 }
 
 
